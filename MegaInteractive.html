@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puranic Cosmology Engine - V4 (Mahapata Edition)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #121212; color: #e0e0e0; margin: 0; display: flex; flex-direction: column; align-items: center; height: 100vh; overflow-x: hidden; }
+        #dashboard { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; background: #1a1a1a; width: 100%; padding: 15px 0; border-bottom: 2px solid #333; box-shadow: 0 4px 10px rgba(0,0,0,0.5); z-index: 10; }
+        .dash-item { text-align: center; min-width: 110px; }
+        .dash-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        .dash-value { font-size: 16px; font-weight: bold; color: #fff; margin-top: 5px; }
+        .highlight { color: #f39c12; text-shadow: 0 0 8px rgba(243, 156, 18, 0.4); }
+        .solar-warn { color: #e74c3c; animation: blink 1s infinite; text-shadow: 0 0 10px rgba(231, 76, 60, 0.8); }
+        .lunar-warn { color: #9b59b6; animation: blink 1s infinite; text-shadow: 0 0 10px rgba(155, 89, 182, 0.8); }
+        .pata-warn { color: #3498db; animation: blink 1s infinite; text-shadow: 0 0 10px rgba(52, 152, 219, 0.8); }
+        @keyframes blink { 50% { opacity: 0.5; } }
+        #canvas-container { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 20px; width: 100%; box-sizing: border-box; }
+        canvas { background: #050505; border-radius: 50%; box-shadow: 0 0 30px rgba(255,255,255,0.03); max-width: 100%; max-height: 60vh; aspect-ratio: 1/1; }
+        #toolbar { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; background: #1a1a1a; width: 100%; padding: 20px; border-top: 2px solid #333; box-sizing: border-box; z-index: 10; }
+        .control-group { background: #252525; padding: 15px; border-radius: 8px; flex: 1; min-width: 230px; max-width: 320px; border: 1px solid #333; }
+        .control-group h3 { margin: 0 0 10px 0; font-size: 14px; color: #3498db; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-row { display: flex; gap: 8px; margin-bottom: 10px; }
+        button { background: #2c3e50; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; flex: 1; transition: background 0.2s; }
+        button:hover { background: #34495e; }
+        #btn-toggle-play { background: #27ae60; }
+        #btn-toggle-play:hover { background: #2ecc71; }
+        .action-btn { background: #d35400; }
+        .action-btn:hover { background: #e67e22; }
+        .special-btn { background: #c0392b; }
+        .special-btn:hover { background: #e74c3c; }
+        .input-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; font-size: 13px; color: #ccc; }
+        input[type=number] { width: 50px; background: #111; color: white; border: 1px solid #555; padding: 5px; border-radius: 4px; text-align: center; }
+        .checkbox-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #ccc; cursor: pointer; margin-bottom: 5px;}
+        input[type=checkbox] { cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="dashboard">
+        <div class="dash-item"><div class="dash-label">Day Counter</div><div class="dash-value" id="val-day">0.00</div></div>
+        <div class="dash-item"><div class="dash-label">Nithya Tithi (Phase)</div><div class="dash-value highlight" id="val-tithi">Shukla Pratipada</div></div>
+        <div class="dash-item"><div class="dash-label">Nithya Yoga (Sum/13.3)</div><div class="dash-value highlight" id="val-yoga">Vishkumbha</div></div>
+        <div class="dash-item"><div class="dash-label">Mahapata (Declination)</div><div class="dash-value" id="val-mahapata">None</div></div>
+        <div class="dash-item"><div class="dash-label">Sun Ayana</div><div class="dash-value" id="val-ayana">Uttarayana</div></div>
+        <div class="dash-item"><div class="dash-label">Eclipse Status</div><div class="dash-value" id="val-eclipse">Clear</div></div>
+    </div>
+
+    <div id="canvas-container">
+        <canvas id="cosmoCanvas" width="800" height="800"></canvas>
+    </div>
+
+    <div id="toolbar">
+        <div class="control-group">
+            <h3>Playback & Time</h3>
+            <div class="btn-row">
+                <button id="btn-toggle-play">Start Auto-Play</button>
+            </div>
+            <div class="btn-row">
+                <button id="btn-step-back">- 1 Day</button>
+                <button id="btn-step-fwd">+ 1 Day</button>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <h3>Event Auto-Pause</h3>
+            <label class="checkbox-row"><input type="checkbox" id="chk-pause-yoga"> Pause on Nithya Yoga</label>
+            <label class="checkbox-row"><input type="checkbox" id="chk-pause-tithi"> Pause on Nithya Tithi</label>
+            <label class="checkbox-row"><input type="checkbox" id="chk-pause-mahapata" checked> Pause on Mahapata (Sum 180/360)</label>
+            <label class="checkbox-row"><input type="checkbox" id="chk-pause-eclipse" checked> Pause on Eclipse</label>
+            <div class="input-row" style="margin-top: 10px;">
+                <span>Pause Time (Secs):</span>
+                <input type="number" id="input-pause-sec" value="4" min="1" max="15">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <h3>Jump To Events</h3>
+            <div class="btn-row">
+                <button class="action-btn" id="btn-amavasya">Next Amavasya</button>
+                <button class="action-btn" id="btn-purnima">Next Purnima</button>
+            </div>
+            <div class="btn-row">
+                <button class="special-btn" id="btn-mahapata">Next Mahapata (Sum=180°)</button>
+                <button class="special-btn" id="btn-eclipse">Next Eclipse</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('cosmoCanvas');
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+        const cx = width / 2;
+        const cy = height / 2;
+
+        const yogaNames = ["Vishkumbha", "Priti", "Ayushman", "Saubhagya", "Shobhana", "Atiganda", "Sukarma", "Dhriti", "Shula", "Ganda", "Vriddhi", "Dhruva", "Vyaghata (13th)", "Harshana", "Vajra", "Siddhi", "Vyatipata (17th)", "Variyan", "Parigha", "Shiva", "Siddha", "Sadhya", "Shubha", "Shukla", "Brahma", "Indra", "Vaidhriti"];
+        const tithiNames = ["Pratipada", "Dvitiya", "Tritiya", "Chaturthi", "Panchami", "Shashthi", "Saptami", "Ashtami", "Navami", "Dashami", "Ekadashi", "Dvadashi", "Trayodashi", "Chaturdashi", "Purnima", "Pratipada", "Dvitiya", "Tritiya", "Chaturthi", "Panchami", "Shashthi", "Saptami", "Ashtami", "Navami", "Dashami", "Ekadashi", "Dvadashi", "Trayodashi", "Chaturdashi", "Amavasya"];
+        const rashiNames = ["Mesha", "Vrishabha", "Mithuna", "Karka", "Simha", "Kanya", "Tula", "Vrishchika", "Dhanus", "Makara", "Kumbha", "Meena"];
+        
+        let day = 0;
+        let isPlaying = false;
+        let isForcedPause = false;
+        let lastYogaIndex = 0;
+        let lastTithiIndex = 0;
+        let lastEclipseState = false;
+        let lastMahapataState = false;
+
+        const SUN_SPEED = 0.9856; 
+        const MOON_SPEED = 13.176; 
+        const RAHU_SPEED = -0.053; 
+        
+        const normalize = (deg) => (deg % 360 + 360) % 360;
+        const getRad = (deg) => deg * Math.PI / 180;
+        const getShortestDist = (a1, a2) => { let d = Math.abs(normalize(a1) - normalize(a2)); return d > 180 ? 360 - d : d; };
+
+        function drawCosmos() {
+            ctx.clearRect(0, 0, width, height);
+
+            let sunAngle = normalize(day * SUN_SPEED);
+            let moonAngle = normalize(day * MOON_SPEED);
+            let rahuAngle = normalize(180 + (day * RAHU_SPEED));
+            let ketuAngle = normalize(rahuAngle + 180);
+            
+            // --- NITHYA TITHI (Difference) ---
+            let tithiVal = normalize(moonAngle - sunAngle) / 12;
+            let tithiIndex = Math.floor(tithiVal);
+            let paksha = tithiIndex < 15 ? "Shukla" : "Krishna";
+            let tithiNameFull = `${paksha} ${tithiNames[tithiIndex]}`;
+
+            // --- NITHYA YOGA (Sum) ---
+            let sumAngle = normalize(sunAngle + moonAngle);
+            let yogaVal = sumAngle / 13.3333;
+            let yogaIndex = Math.floor(yogaVal);
+            let yogaNameFull = yogaNames[yogaIndex];
+
+            // --- MAHAPATAS (Kranti-Samya Alignments) ---
+            let isVyatipataPata = Math.abs(sumAngle - 180) < 3;
+            let isVaidhritiPata = sumAngle < 3 || sumAngle > 357;
+            let isAnyMahapata = isVyatipataPata || isVaidhritiPata;
+
+            let sunRadius = 225 - 75 * Math.cos(getRad(sunAngle)); 
+            let moonRadius = 225 - 75 * Math.cos(getRad(moonAngle));
+            let rahuRadius = 225;
+
+            let ayanaName = (sunAngle > 90 && sunAngle < 270) ? "Dakshinayana (South)" : "Uttarayana (North)";
+            
+            // --- TRUE ECLIPSE LOGIC ---
+            let sunNearNode = getShortestDist(sunAngle, rahuAngle) < 5 || getShortestDist(sunAngle, ketuAngle) < 5;
+            let moonNearSun = getShortestDist(moonAngle, sunAngle) < 5; 
+            let moonOppositeSun = getShortestDist(moonAngle, normalize(sunAngle + 180)) < 5; 
+
+            let isSolarEclipse = sunNearNode && moonNearSun;
+            let isLunarEclipse = sunNearNode && moonOppositeSun;
+            let isAnyEclipse = isSolarEclipse || isLunarEclipse;
+
+            // DRAW VITHIS
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([4, 6]);
+            for(let i=0; i<=9; i++) {
+                let r = 150 + (i * 16.66);
+                ctx.strokeStyle = (i==0 || i==9 || i==4 || i==5) ? "rgba(231, 76, 60, 0.8)" : "rgba(231, 76, 60, 0.2)";
+                ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
+            }
+            ctx.setLineDash([]);
+
+            // DRAW FIXED BASE
+            ctx.fillStyle = "#f1c40f"; ctx.beginPath(); ctx.arc(cx, cy, 15, 0, Math.PI*2); ctx.fill(); 
+            ctx.fillStyle = "#fff"; ctx.font = "12px Arial"; ctx.textAlign="center"; ctx.fillText("MERU", cx, cy + 4);
+            ctx.fillStyle = "#e74c3c"; ctx.beginPath(); ctx.arc(cx, cy + 45, 5, 0, Math.PI*2); ctx.fill();
+            ctx.fillText("Bharata", cx, cy + 60);
+
+            // DRAW KALACHAKRA
+            let skyRotation = normalize(-day * 360); 
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(getRad(skyRotation));
+            ctx.strokeStyle = "#222"; ctx.lineWidth = 40;
+            ctx.beginPath(); ctx.arc(0, 0, 360, 0, Math.PI*2); ctx.stroke();
+            ctx.fillStyle = "#aaa"; ctx.font = "14px Arial";
+            for(let i=0; i<12; i++) {
+                let a = getRad(i * 30 + 15);
+                ctx.fillText(rashiNames[i], 360 * Math.cos(a), 360 * Math.sin(a) + 5);
+            }
+            ctx.restore();
+
+            // DRAW FIXED CITIES
+            const cities = [
+                {name: "Devadhani (E)", ang: 0},
+                {name: "Samyamini (S)", ang: 90},
+                {name: "Nimlochani (W)", ang: 180},
+                {name: "Vibhavari (N)", ang: 270}
+            ];
+            cities.forEach(city => {
+                let a = getRad(city.ang);
+                let x = cx + 380 * Math.cos(a);
+                let y = cy + 380 * Math.sin(a);
+                
+                let diff = getShortestDist(sunAngle, city.ang);
+                let lightColor = "#444"; 
+                if(diff < 25) lightColor = "#f1c40f"; 
+                else if(diff > 65 && diff < 115) lightColor = "#e67e22"; 
+                
+                ctx.fillStyle = lightColor;
+                ctx.beginPath(); ctx.arc(x, y, 10, 0, Math.PI*2); ctx.fill();
+                ctx.fillStyle = "#fff";
+                ctx.fillText(city.name, x, (y > cy) ? y + 25 : y - 15);
+            });
+
+            // --- DRAW PLANETS ---
+            let sx = cx + sunRadius * Math.cos(getRad(-sunAngle));
+            let sy = cy + sunRadius * Math.sin(getRad(-sunAngle));
+            ctx.fillStyle = isSolarEclipse ? "#333" : "#f1c40f"; 
+            ctx.shadowColor = isSolarEclipse ? "#e74c3c" : "#f1c40f"; 
+            ctx.shadowBlur = isSolarEclipse ? 30 : 15;
+            ctx.beginPath(); ctx.arc(sx, sy, 14, 0, Math.PI*2); ctx.fill();
+            
+            let mx = cx + moonRadius * Math.cos(getRad(-moonAngle));
+            let my = cy + moonRadius * Math.sin(getRad(-moonAngle));
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = isLunarEclipse ? "#7f8c8d" : "#fff"; 
+            if (isLunarEclipse) { ctx.shadowColor = "#c0392b"; ctx.shadowBlur = 20; }
+            ctx.beginPath(); ctx.arc(mx, my, 9, 0, Math.PI*2); ctx.fill();
+            
+            let rx = cx + rahuRadius * Math.cos(getRad(-rahuAngle));
+            let ry = cy + rahuRadius * Math.sin(getRad(-rahuAngle));
+            ctx.fillStyle = "#2c3e50"; ctx.beginPath(); ctx.arc(rx, ry, 11, 0, Math.PI*2); ctx.fill();
+            ctx.strokeStyle = "#c0392b"; ctx.lineWidth = 2; ctx.stroke();
+
+            // UPDATE UI DASHBOARD
+            document.getElementById('val-day').innerText = day.toFixed(2);
+            document.getElementById('val-tithi').innerText = tithiNameFull;
+            document.getElementById('val-yoga').innerText = yogaNameFull;
+            document.getElementById('val-ayana').innerText = ayanaName;
+            
+            let mText = document.getElementById('val-mahapata');
+            if (isVyatipataPata) { mText.innerText = `VYATIPATA (Sum=${Math.round(sumAngle)}°)`; mText.className = "dash-value pata-warn"; }
+            else if (isVaidhritiPata) { mText.innerText = `VAIDHRITI (Sum=${Math.round(sumAngle)}°)`; mText.className = "dash-value pata-warn"; }
+            else { mText.innerText = "None"; mText.className = "dash-value"; }
+
+            let eText = document.getElementById('val-eclipse');
+            if (isSolarEclipse) { eText.innerText = "SOLAR ECLIPSE"; eText.className = "dash-value solar-warn"; }
+            else if (isLunarEclipse) { eText.innerText = "LUNAR ECLIPSE"; eText.className = "dash-value lunar-warn"; }
+            else { eText.innerText = "Clear"; eText.className = "dash-value"; }
+
+            // AUTO-PAUSE LOGIC
+            if (isPlaying && !isForcedPause) {
+                let shouldPause = false;
+                let pSec = parseInt(document.getElementById('input-pause-sec').value) * 1000;
+
+                if (tithiIndex !== lastTithiIndex && document.getElementById('chk-pause-tithi').checked) shouldPause = true;
+                if (yogaIndex !== lastYogaIndex && document.getElementById('chk-pause-yoga').checked) shouldPause = true;
+                if (isAnyMahapata && !lastMahapataState && document.getElementById('chk-pause-mahapata').checked) shouldPause = true;
+                if (isAnyEclipse && !lastEclipseState && document.getElementById('chk-pause-eclipse').checked) shouldPause = true;
+
+                lastTithiIndex = tithiIndex;
+                lastYogaIndex = yogaIndex;
+                lastMahapataState = isAnyMahapata;
+                lastEclipseState = isAnyEclipse;
+
+                if (shouldPause) {
+                    isForcedPause = true;
+                    setTimeout(() => { isForcedPause = false; }, pSec);
+                } else {
+                    day += 0.2; 
+                }
+            }
+            requestAnimationFrame(drawCosmos);
+        }
+
+        // CONTROL BINDINGS
+        document.getElementById('btn-toggle-play').onclick = (e) => {
+            isPlaying = !isPlaying;
+            e.target.innerText = isPlaying ? "Pause Auto-Play" : "Start Auto-Play";
+            e.target.style.background = isPlaying ? "#e74c3c" : "#27ae60";
+        };
+
+        document.getElementById('btn-step-fwd').onclick = () => { day += 1; };
+        document.getElementById('btn-step-back').onclick = () => { day -= 1; };
+
+        document.getElementById('btn-amavasya').onclick = () => {
+            while (true) { day += 0.2; let s = normalize(day*SUN_SPEED); let m = normalize(day*MOON_SPEED); if (getShortestDist(s, m) < 2) break; }
+        };
+        document.getElementById('btn-purnima').onclick = () => {
+            while (true) { day += 0.2; let s = normalize(day*SUN_SPEED); let m = normalize(day*MOON_SPEED); if (getShortestDist(m, normalize(s+180)) < 2) break; }
+        };
+        document.getElementById('btn-eclipse').onclick = () => {
+            while (true) { 
+                day += 0.2; 
+                let s = normalize(day*SUN_SPEED); let m = normalize(day*MOON_SPEED); let r = normalize(180+(day*RAHU_SPEED)); let k = normalize(r+180);
+                if ((getShortestDist(s, r) < 2 || getShortestDist(s, k) < 2) && (getShortestDist(m, s) < 2 || getShortestDist(m, normalize(s+180)) < 2)) break;
+            }
+        };
+        document.getElementById('btn-mahapata').onclick = () => {
+            while (true) { 
+                day += 0.2; 
+                let sum = normalize(normalize(day*SUN_SPEED) + normalize(day*MOON_SPEED));
+                if (Math.abs(sum - 180) < 2 || sum < 2 || sum > 358) break;
+            }
+        };
+
+        drawCosmos();
+    </script>
+</body>
+</html>

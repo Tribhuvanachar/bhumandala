@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Puranic 3D Engine V3: Mobile Responsive</title>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 0;
+            display: flex; 
+            flex-direction: row; /* Default for Desktop */
+            height: 100vh; 
+            width: 100vw;
+            overflow: hidden; 
+            background-color: #000; 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            color: white; 
+        }
+
+        /* 3D Canvas Area */
+        #canvas-container { 
+            flex: 1; 
+            position: relative; 
+            background: #05050a;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Sidebar UI */
+        #sidebar { 
+            width: 380px; 
+            background: #111; 
+            border-left: 2px solid #333; 
+            padding: 20px; 
+            box-sizing: border-box; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .panel { background: #1e1e1e; border: 1px solid #444; border-radius: 8px; padding: 15px; }
+        .title { color: #3498db; font-size: 16px; margin: 0 0 12px 0; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .data-row { display: flex; flex-direction: column; margin-bottom: 12px; font-size: 13px; }
+        .data-label { color: #aaa; margin-bottom: 3px; font-size: 11px; text-transform: uppercase; }
+        .data-value { font-weight: bold; color: #fff; font-size: 15px; }
+        .highlight { color: #f1c40f; text-shadow: 0 0 8px rgba(241, 196, 15, 0.4); }
+        .night { color: #3498db; }
+        
+        .control-group { margin-bottom: 15px; }
+        .control-group label { display: block; font-size: 12px; color: #aaa; margin-bottom: 8px; }
+        input[type=range] { width: 100%; cursor: pointer; }
+        
+        button { background: #27ae60; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; transition: 0.2s; width: 100%; text-transform: uppercase; letter-spacing: 1px; }
+        button:hover { background: #2ecc71; }
+        #cam-btn { background: #3498db; margin-top: 10px; }
+        #cam-btn:hover { background: #2980b9; }
+
+        .city-label { position: absolute; color: rgba(255,255,255,0.7); font-size: 12px; font-weight: bold; pointer-events: none; text-shadow: 1px 1px 2px black; transform: translate(-50%, -50%); transition: opacity 0.2s; }
+        #instruction { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); padding: 8px 15px; border-radius: 20px; font-size: 11px; color: #aaa; pointer-events: none; text-align: center; width: 80%; }
+
+        /* MOBILE RESPONSIVE LAYOUT */
+        @media (max-width: 768px) {
+            body { 
+                flex-direction: column; /* Stack top-to-bottom on phones */
+            }
+            #canvas-container {
+                flex: none;
+                height: 50vh; /* Top half of phone screen */
+                width: 100vw;
+            }
+            #sidebar {
+                flex: none;
+                height: 50vh; /* Bottom half of phone screen */
+                width: 100vw;
+                border-left: none;
+                border-top: 2px solid #333;
+                padding: 15px;
+            }
+            #instruction { bottom: 10px; font-size: 10px; }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+
+    <!-- 3D Scene Area -->
+    <div id="canvas-container">
+        <div id="label-east" class="city-label">Devadhani (East)</div>
+        <div id="label-south" class="city-label">Samyamini (South)</div>
+        <div id="label-west" class="city-label">Nimlochani (West)</div>
+        <div id="label-north" class="city-label">Vibhavari (North)</div>
+        <div id="instruction">Global View: Touch & drag to rotate. Pinch to zoom.</div>
+    </div>
+
+    <!-- UI Sidebar -->
+    <div id="sidebar">
+        <div class="panel">
+            <h2 class="title">Live Dashboard</h2>
+            <div class="data-row"><span class="data-label">Sun Location (Time):</span> <span class="data-value highlight" id="val-sun-pos">East (Devadhani)</span></div>
+            <div class="data-row"><span class="data-label">Vayu-Tanti Tension:</span> <span class="data-value" id="val-rope">Medium (Equinox)</span></div>
+            <div class="data-row"><span class="data-label">Ilavrita Observer (Base of Meru):</span> <span class="data-value highlight">Perpetual Mid-Noon (Sun above Meru)</span></div>
+            <div class="data-row"><span class="data-label">Bharata Observer (South Globe):</span> <span class="data-value" id="val-bharata-status">Calculating...</span></div>
+        </div>
+
+        <div class="panel">
+            <h2 class="title">Daily Rotation</h2>
+            <div class="control-group">
+                <label>Move Sun through 4 Cities</label>
+                <input type="range" id="slider-time" min="0" max="360" value="0">
+            </div>
+            <button id="btn-play">Auto-Play Time</button>
+        </div>
+
+        <div class="panel">
+            <h2 class="title">Ayanas (Lateral Shift)</h2>
+            <div class="control-group">
+                <label>Loosen Rope (South) ↔ Tighten Rope (North)</label>
+                <input type="range" id="slider-ayana" min="140" max="240" value="190">
+            </div>
+        </div>
+
+        <div class="panel" style="background: #1a252f; border-color: #2c3e50;">
+            <h2 class="title" style="color:#fff;">Camera Control</h2>
+            <p style="font-size: 11px; color:#aaa; margin:0 0 10px 0; line-height: 1.4;">Switching to Observer View places you on the surface of the Bharata Khanda globe. Watch the curved horizon block the sun to create night.</p>
+            <button id="cam-btn">Switch to Bharata Observer View</button>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('canvas-container');
+        const sliderTime = document.getElementById('slider-time');
+        const sliderAyana = document.getElementById('slider-ayana');
+        const txtSunPos = document.getElementById('val-sun-pos');
+        const txtRope = document.getElementById('val-rope');
+        const txtBharata = document.getElementById('val-bharata-status');
+        const instruction = document.getElementById('instruction');
+
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x05050a, 0.0015);
+        
+        const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 2000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Better mobile performance
+        container.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.maxPolarAngle = Math.PI / 2 + 0.1; 
+
+        // 1. Bhu-mandala (Flat Plane)
+        const planeGeo = new THREE.CircleGeometry(400, 64);
+        const planeMat = new THREE.MeshBasicMaterial({ color: 0x111115, wireframe: true, transparent: true, opacity: 0.4 });
+        const plane = new THREE.Mesh(planeGeo, planeMat);
+        plane.rotation.x = -Math.PI / 2;
+        scene.add(plane);
+
+        // 2. Mount Meru (Height 84 units)
+        const meruGeo = new THREE.CylinderGeometry(8, 15, 84, 16);
+        const meruMat = new THREE.MeshPhongMaterial({ color: 0xc0392b, flatShading: true });
+        const meru = new THREE.Mesh(meruGeo, meruMat);
+        meru.position.y = 42; 
+        scene.add(meru);
+
+        const peakRing = new THREE.LineLoop(new THREE.CircleGeometry(8, 32), new THREE.LineBasicMaterial({ color: 0xff0000 }));
+        peakRing.rotation.x = Math.PI / 2;
+        peakRing.position.y = 84;
+        scene.add(peakRing);
+
+        // 3. Dhruva-Loka
+        const dhruva = new THREE.Mesh(new THREE.SphereGeometry(4, 16, 16), new THREE.MeshBasicMaterial({ color: 0x3498db }));
+        dhruva.position.set(0, 250, 0);
+        scene.add(dhruva);
+        
+        // 4. The Sun (Height 100 units)
+        const sunGeo = new THREE.SphereGeometry(6, 32, 32);
+        const sunMat = new THREE.MeshBasicMaterial({ color: 0xf1c40f });
+        const sun = new THREE.Mesh(sunGeo, sunMat);
+        scene.add(sun);
+
+        const orbitRingMat = new THREE.LineBasicMaterial({ color: 0xf1c40f, transparent: true, opacity: 0.3 });
+        let orbitRing = new THREE.LineLoop(new THREE.CircleGeometry(190, 64), orbitRingMat);
+        orbitRing.rotation.x = Math.PI / 2;
+        orbitRing.position.y = 100;
+        scene.add(orbitRing);
+
+        const sunLight = new THREE.PointLight(0xf1c40f, 2, 500);
+        sun.add(sunLight);
+        scene.add(new THREE.AmbientLight(0x222222));
+
+        // 5. Vayu-Tanti (Rope)
+        const ropeMat = new THREE.LineBasicMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.8 });
+        const ropeGeo = new THREE.BufferGeometry();
+        const rope = new THREE.Line(ropeGeo, ropeMat);
+        scene.add(rope);
+
+        // 6. Bharata Khanda Globe
+        const globeRadius = 25;
+        const globeZ = 160; 
+        const globeGeo = new THREE.SphereGeometry(globeRadius, 32, 32);
+        const globeMat = new THREE.MeshPhongMaterial({ color: 0x27ae60, flatShading: true });
+        const bharataGlobe = new THREE.Mesh(globeGeo, globeMat);
+        bharataGlobe.position.set(0, globeRadius, globeZ);
+        scene.add(bharataGlobe);
+
+        const obsAngle = Math.PI / 4; 
+        const obsLocalY = globeRadius * Math.cos(obsAngle);
+        const obsLocalZ = globeRadius * Math.sin(obsAngle);
+        const obsPin = new THREE.Mesh(new THREE.SphereGeometry(1.5, 8, 8), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
+        obsPin.position.set(0, globeRadius + obsLocalY, globeZ + obsLocalZ);
+        scene.add(obsPin);
+
+        const ilaPin = new THREE.Mesh(new THREE.SphereGeometry(1.5, 8, 8), new THREE.MeshBasicMaterial({ color: 0xff0000 }));
+        ilaPin.position.set(17, 1, 0);
+        scene.add(ilaPin);
+
+        const sightMat = new THREE.LineBasicMaterial({ color: 0xf1c40f, linewidth: 2 });
+        const blockedMat = new THREE.LineBasicMaterial({ color: 0x333333 });
+        const ilaRay = new THREE.Line(new THREE.BufferGeometry(), sightMat);
+        scene.add(ilaRay);
+        const bharataRay = new THREE.Line(new THREE.BufferGeometry(), sightMat);
+        scene.add(bharataRay);
+
+        const cityRadius = 280;
+        const cities = [
+            { id: 'label-east', x: cityRadius, z: 0 },
+            { id: 'label-south', x: 0, z: cityRadius },
+            { id: 'label-west', x: -cityRadius, z: 0 },
+            { id: 'label-north', x: 0, z: -cityRadius }
+        ];
+
+        let isGlobalView = true;
+        let isPlaying = false;
+        const raycaster = new THREE.Raycaster();
+        
+        const globalCamPos = new THREE.Vector3(250, 150, 300);
+        camera.position.copy(globalCamPos);
+        controls.target.set(0, 40, 0);
+
+        function toScreenPosition(obj, camera, containerEl) {
+            const vector = new THREE.Vector3(obj.x, 0, obj.z);
+            vector.project(camera);
+            vector.x = Math.round((0.5 + vector.x / 2) * containerEl.clientWidth);
+            vector.y = Math.round((0.5 - vector.y / 2) * containerEl.clientHeight);
+            return vector;
+        }
+
+        function updateScene() {
+            let angleDeg = parseFloat(sliderTime.value);
+            let rad = angleDeg * Math.PI / 180;
+            let ayanaRadius = parseFloat(sliderAyana.value);
+
+            sun.position.x = ayanaRadius * Math.cos(rad);
+            sun.position.y = 100; 
+            sun.position.z = ayanaRadius * Math.sin(rad);
+
+            scene.remove(orbitRing);
+            orbitRing = new THREE.LineLoop(new THREE.CircleGeometry(ayanaRadius, 64), orbitRingMat);
+            orbitRing.rotation.x = Math.PI / 2;
+            orbitRing.position.y = 100;
+            scene.add(orbitRing);
+
+            ropeGeo.setFromPoints([dhruva.position, sun.position]);
+            ilaRay.geometry.setFromPoints([ilaPin.position, sun.position]);
+            bharataRay.geometry.setFromPoints([obsPin.position, sun.position]);
+
+            const dir = new THREE.Vector3().subVectors(sun.position, obsPin.position).normalize();
+            const offsetObs = obsPin.position.clone().add(dir.clone().multiplyScalar(2.0)); 
+            raycaster.set(offsetObs, dir);
+            
+            const intersects = raycaster.intersectObject(bharataGlobe);
+            let isNight = intersects.length > 0;
+
+            if(isNight) { bharataRay.material = blockedMat; } 
+            else { bharataRay.material = sightMat; }
+
+            let ropeLength = Math.round(dhruva.position.distanceTo(sun.position));
+            if (ayanaRadius < 160) txtRope.innerText = `Tight & Short (${ropeLength} Y) - Uttarayana`;
+            else if (ayanaRadius > 220) txtRope.innerText = `Loose & Long (${ropeLength} Y) - Dakshinayana`;
+            else txtRope.innerText = `Medium Tension (${ropeLength} Y) - Equinox`;
+
+            let sunPosText = "";
+            if (angleDeg < 45 || angleDeg >= 315) { sunPosText = "East (Devadhani)"; }
+            else if (angleDeg >= 45 && angleDeg < 135) { sunPosText = "South (Samyamini)"; }
+            else if (angleDeg >= 135 && angleDeg < 225) { sunPosText = "West (Nimlochani)"; }
+            else { sunPosText = "North (Vibhavari)"; }
+            txtSunPos.innerText = sunPosText;
+
+            if (isNight) {
+                txtBharata.innerText = "NIGHT (Blocked by local globe)";
+                txtBharata.className = "data-value night";
+            } else {
+                if (angleDeg > 350 || angleDeg < 10) txtBharata.innerText = "SUNRISE (Cresting Eastern Horizon)";
+                else if (angleDeg > 170 && angleDeg < 190) txtBharata.innerText = "SUNSET (Sinking West)";
+                else txtBharata.innerText = "DAYTIME (Direct Line of Sight)";
+                txtBharata.className = "data-value highlight";
+            }
+
+            if(isGlobalView) {
+                cities.forEach(city => {
+                    const el = document.getElementById(city.id);
+                    const pos = toScreenPosition(city, camera, container);
+                    if(pos.z < 1) { 
+                        el.style.left = pos.x + 'px';
+                        el.style.top = pos.y + 'px';
+                        el.style.opacity = 1;
+                    } else {
+                        el.style.opacity = 0;
+                    }
+                });
+            } else {
+                cities.forEach(city => document.getElementById(city.id).style.opacity = 0);
+            }
+        }
+
+        document.getElementById('btn-play').addEventListener('click', (e) => {
+            isPlaying = !isPlaying;
+            e.target.innerText = isPlaying ? "Pause Time" : "Auto-Play Time";
+            e.target.style.background = isPlaying ? "#e74c3c" : "#27ae60";
+        });
+
+        document.getElementById('cam-btn').addEventListener('click', (e) => {
+            isGlobalView = !isGlobalView;
+            if (isGlobalView) {
+                e.target.innerText = "Switch to Bharata Observer View";
+                camera.position.copy(globalCamPos);
+                controls.target.set(0, 40, 0);
+                controls.enabled = true;
+                instruction.style.opacity = 1;
+                scene.fog.density = 0.0015;
+            } else {
+                e.target.innerText = "Switch to Global View";
+                controls.enabled = false;
+                instruction.style.opacity = 0;
+                scene.fog.density = 0.0005; 
+            }
+        });
+
+        sliderTime.addEventListener('input', updateScene);
+        sliderAyana.addEventListener('input', updateScene);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (isPlaying) {
+                let current = parseFloat(sliderTime.value);
+                current += 0.5;
+                if (current >= 360) current = 0;
+                sliderTime.value = current;
+                updateScene();
+            }
+            if (!isGlobalView) {
+                camera.position.copy(obsPin.position);
+                const lookAtTarget = new THREE.Vector3(0, 80, 500); 
+                camera.lookAt(lookAtTarget);
+            } else {
+                controls.update();
+            }
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            updateScene();
+        });
+
+        // Add touch support logic for resize if keyboard pops up
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                updateScene();
+            }, 200);
+        });
+
+        updateScene();
+        animate();
+    </script>
+</body>
+</html>
