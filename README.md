@@ -1,0 +1,2 @@
+# Tribhuvanachar
+Panchanga
