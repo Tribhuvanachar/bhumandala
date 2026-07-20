@@ -1,2 +1,2 @@
-# Tribhuvanachar
-Panchanga
+# Bhugola
+
