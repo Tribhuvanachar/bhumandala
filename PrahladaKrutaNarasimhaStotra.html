@@ -3,161 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Narasimha Stotra Player</title>
+<title>Bhagavad Gita Player</title>
 <style>
+  :root {
+    --bg-color: #f7f3e8;
+    --panel-bg: #eaddc4;
+    --header-bg: #d4bc8b;
+    --text-primary: #3a2e24;
+    --text-highlight: #933423;
+    --btn-color: #b59b66;
+    --btn-hover: #9c8352;
+    --border-color: #c7b695;
+    --active-row: #f0e2c2;
+  }
+  
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f1ebd8; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color); 
+    color: var(--text-primary);
   }
+  
   .player-container {
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
-    background: #e1d2a9;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background: #fffdf9;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
   }
+  
   .header {
     text-align: center;
-    padding: 15px;
+    padding: 16px;
     font-size: 22px;
     font-weight: bold;
-    background: #d8c695;
-    border-bottom: 2px solid #c4b077;
+    background: var(--header-bg);
+    border-bottom: 2px solid var(--border-color);
+    color: #2b2116;
   }
+  
   .controls {
+    padding: 16px;
+    background: var(--panel-bg);
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    padding: 15px;
-    background: #e8deb8;
+    flex-direction: column;
+    gap: 12px;
   }
+  
   .control-row {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
     width: 100%;
+    flex-wrap: wrap;
   }
-  .btn {
-    background: #c4b077;
-    border: 1px solid #a8945a;
-    border-radius: 5px;
-    font-size: 24px;
-    padding: 5px 15px;
+  
+  .btn-master {
+    background: var(--btn-color);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
     cursor: pointer;
-    color: #333;
-  }
-  .btn:active {
-    background: #a8945a;
-  }
-  .status-box {
-    border: 1px solid #333;
-    padding: 6px 12px;
-    border-radius: 4px;
-    background: #fdfdfd;
-    font-weight: bold;
-    min-width: 60px;
-    text-align: center;
-  }
-  .input-box {
-    width: 50px;
-    padding: 4px;
-    border: 1px solid #999;
-    border-radius: 3px;
-    text-align: center;
-    font-size: 14px;
-  }
-  .ab-panel {
-    background: #dfd4b3;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
+    color: white;
     display: flex;
-    gap: 10px;
-    align-items: center;
     justify-content: center;
-    width: 100%;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: transform 0.1s, background 0.2s;
   }
-  .list-container {
+  .btn-master:active { transform: scale(0.95); background: var(--btn-hover); }
+  
+  .status-box {
     background: #fff;
-    max-height: 55vh;
-    overflow-y: auto;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 15px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
   }
+  
+  .settings-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    background: rgba(255,255,255,0.4);
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+  
+  .input-box {
+    width: 40px;
+    padding: 4px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+  }
+  
+  /* Slider Styles */
+  input[type=range] { width: 90px; cursor: pointer; }
+  
+  .list-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    background: #fff;
+  }
+  
   .list-item {
     display: flex;
     align-items: center;
-    padding: 12px 15px;
-    border-bottom: 1px solid #eee;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eaeaea;
+    transition: background 0.2s;
   }
-  .list-item:nth-child(even) {
-    background: #faf8f2;
+  
+  .list-item:nth-child(even) { background: #faf9f6; }
+  .list-item.active-row {
+    background-color: var(--active-row) !important;
+    border-left: 4px solid var(--text-highlight);
   }
-  .active-row {
-    background-color: #ffeebf !important;
-    border-left: 4px solid #a83232;
-  }
-  .index {
-    width: 35px;
-    font-weight: bold;
-    color: #444;
-  }
-  .play-icon {
-    font-size: 22px;
+  
+  .index { width: 30px; font-weight: bold; font-size: 14px; color: #666; }
+  
+  .play-icon-small {
+    font-size: 18px;
     margin-right: 15px;
     cursor: pointer;
-    color: #333;
+    color: var(--btn-color);
+    width: 24px;
+    text-align: center;
   }
+  
   .text {
     flex-grow: 1;
-    font-size: 18px;
-    color: #a83232; 
-    line-height: 1.4;
+    font-size: 16px;
+    color: var(--text-highlight); 
+    line-height: 1.5;
   }
-  .favorite-icon {
-    font-size: 20px;
-    cursor: pointer;
-    color: #ccc;
+  
+  .action-icons {
+    display: flex;
+    gap: 12px;
     margin-left: 10px;
   }
-  .is-favorite {
-    color: #ffbc00;
+  
+  .icon-btn {
+    cursor: pointer;
+    font-size: 18px;
+    color: #ccc;
+    transition: color 0.2s;
   }
+  
+  .icon-btn:hover { color: #888; }
+  .is-fav { color: #f5a623; }
+  .is-practice { color: #d0021b; }
+  .has-note { color: #4a90e2; }
+  
+  /* Marker Popup Menu */
+  .marker-menu {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    z-index: 100;
+    overflow: hidden;
+  }
+  .marker-menu.show { display: flex; }
+  .marker-menu div {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .marker-menu div:hover { background: #f0f0f0; }
+  
+  /* Modal for Notes */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none; justify-content: center; align-items: center;
+    z-index: 200;
+  }
+  .modal-content {
+    background: white; padding: 20px; border-radius: 12px;
+    width: 90%; max-width: 400px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .modal-content textarea {
+    width: 100%; height: 100px; margin: 10px 0; padding: 8px;
+    box-sizing: border-box; border-radius: 6px; border: 1px solid #ccc;
+    font-family: inherit; resize: none;
+  }
+  .modal-btns { text-align: right; }
+  .modal-btns button {
+    padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer;
+    margin-left: 10px; font-weight: bold;
+  }
+  .btn-save { background: var(--btn-color); color: white; }
+  .btn-cancel { background: #eee; color: #333; }
+
 </style>
 </head>
 <body>
 
 <div class="player-container">
-  <div class="header">॥ प्रह्लादकृत नृसिंह स्तोत्र ॥</div>
+  <div class="header">॥ श्रीमद्भगवद्गीता ॥</div>
   
   <div class="controls">
     <div class="control-row">
-      <button class="btn" id="playBtn" title="Play">▶</button>
-      <button class="btn" id="stopBtn" title="Stop">■</button>
+      <button class="btn-master" id="playBtn" title="Play/Pause">▶</button>
+      <button class="btn-master" id="stopBtn" title="Stop">■</button>
       <div class="status-box" id="counterDisplay">० / ४३</div>
     </div>
     
     <div class="control-row">
-      <div>
+      <div class="settings-group">
         <label>Repeat:</label>
         <input type="number" id="repeatInput" class="input-box" value="1" min="1">
       </div>
-      <div>
-        <label>Speed:</label>
-        <input type="number" id="speedInput" class="input-box" value="1.0" step="0.1" min="0.5" max="2.0">
-      </div>
-      <div>
-        <input type="checkbox" id="autoplayNext"> <label for="autoplayNext">Autoplay Next</label>
+      
+      <div class="settings-group">
+        <label>Speed: <span id="speedVal">1.0</span>x</label>
+        <input type="range" id="speedInput" min="0.5" max="2.0" step="0.1" value="1.0">
       </div>
     </div>
 
-    <!-- A-B Loop Panel -->
-    <div class="ab-panel">
-      <input type="checkbox" id="enableAB"> <label for="enableAB">A-B Loop</label>
-      <label>Start (s):</label> <input type="number" id="loopA" class="input-box" step="0.1">
-      <label>End (s):</label> <input type="number" id="loopB" class="input-box" step="0.1">
+    <div class="control-row" style="font-size: 13px; font-weight: bold;">
+      <label><input type="checkbox" id="autoplayNext" checked> Autoplay Next</label>
+      <label><input type="checkbox" id="playMarkedOnly"> Play Marked Only (★/🚩)</label>
+    </div>
+
+    <div class="control-row settings-group">
+      <label><input type="checkbox" id="enableAB"> A-B Loop</label>
+      <label>Start (s): <input type="number" id="loopA" class="input-box" step="0.1" value="0.00"></label>
+      <label>End (s): <input type="number" id="loopB" class="input-box" step="0.1" placeholder="End"></label>
     </div>
   </div>
 
@@ -166,26 +253,63 @@
   </div>
 </div>
 
+<!-- Context Menu for Markers -->
+<div class="marker-menu" id="markerMenu">
+  <div onclick="setMark('fav')">⭐ Mark as Favorite</div>
+  <div onclick="setMark('practice')">🚩 Needs Practice</div>
+  <div onclick="setMark('none')" style="color: #666;">❌ Clear Mark</div>
+</div>
+
+<!-- Modal for Notes -->
+<div class="modal-overlay" id="noteModal">
+  <div class="modal-content">
+    <h3 style="margin-top:0;">Personal Note (Shloka <span id="noteShlokaNum"></span>)</h3>
+    <textarea id="noteText" placeholder="Add pronunciation notes, grammar rules, or personal reflections here..."></textarea>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeNote()">Cancel</button>
+      <button class="btn-save" onclick="saveNote()">Save Note</button>
+    </div>
+  </div>
+</div>
+
 <script>
+  // --- CONFIGURATION ---
   const archiveBaseUrl = "https://archive.org/download/svg_3bu1_pns/";
-  const fileExtension = "%E2%80%8B.mp3";
+  const filePrefix = "NS"; // Change to "BG" when you upload Gita files
+  const fileExtension = ".mp3";
   const totalShlokas = 43; 
   
+  // Example Gita Texts 
+  const shlokaTexts = {
+    1: "धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।<br>मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय ॥",
+    2: "सञ्जय उवाच ।<br>दृष्ट्वा तु पाण्डवानीकं व्यूढं दुर्योधनस्तदा...",
+  };
+
+  // --- STATE VARIABLES ---
   let currentAudio = new Audio();
   let activeId = null;
   let isPlaying = false;
   let currentLoopCount = 0;
-  let targetRepeatCount = 1;
+  let attemptedSpaceFallback = false;
+  
+  // Data State
+  let marks = JSON.parse(localStorage.getItem('gitaMarks')) || {};
+  let notes = JSON.parse(localStorage.getItem('gitaNotes')) || {};
+  
+  // UI Elements
+  const playBtn = document.getElementById('playBtn');
+  const speedInput = document.getElementById('speedInput');
+  const speedVal = document.getElementById('speedVal');
+  const loopA = document.getElementById('loopA');
+  const loopB = document.getElementById('loopB');
+  const markerMenu = document.getElementById('markerMenu');
+  
+  let targetMarkId = null; 
 
-  const shlokaTexts = {
-    1: "ब्रह्मोवाच ।<br>त्वं नस्तपः परममात्थ यदात्मतन्त्रो...",
-    2: "श्रीशुक उवाच ।<br>इत्युक्त्वा तं तदा ब्रह्मा...",
-  };
-
+  // --- UI RENDERING ---
   function renderList() {
     const playlistEl = document.getElementById('playlist');
     playlistEl.innerHTML = '';
-    let favorites = JSON.parse(localStorage.getItem('narasimhaFavs')) || [];
 
     for(let i = 1; i <= totalShlokas; i++) {
       const row = document.createElement('div');
@@ -193,15 +317,35 @@
       row.id = `row-${i}`;
       
       const displayText = shlokaTexts[i] ? shlokaTexts[i] : `श्लोक ${i} (Add Text in Code)`;
-      const favClass = favorites.includes(i) ? 'favorite-icon is-favorite' : 'favorite-icon';
+      
+      // Determine marker visual state
+      let markClass = "icon-btn";
+      let markIcon = "☆";
+      if (marks[i] === 'fav') { markClass += " is-fav"; markIcon = "★"; }
+      else if (marks[i] === 'practice') { markClass += " is-practice"; markIcon = "🚩"; }
+
+      const noteClass = notes[i] ? "icon-btn has-note" : "icon-btn";
 
       row.innerHTML = `
         <div class="index">${i}</div>
-        <div class="play-icon" onclick="playShloka(${i})">🔊</div>
+        <div class="play-icon-small" id="icon-${i}" onclick="playShloka(${i})">▶</div>
         <div class="text">${displayText}</div>
-        <div class="${favClass}" id="fav-${i}" onclick="toggleFavorite(${i})">★</div>
+        <div class="action-icons">
+          <div class="${noteClass}" onclick="openNote(${i})" title="Personal Notes">📝</div>
+          <div class="${markClass}" id="mark-${i}" onclick="openMarkerMenu(event, ${i})" title="Mark Status">${markIcon}</div>
+        </div>
       `;
       playlistEl.appendChild(row);
+    }
+  }
+
+  // --- PLAYBACK LOGIC ---
+  function updatePlayUI() {
+    playBtn.innerHTML = isPlaying ? '⏸' : '▶';
+    // Reset all row icons
+    document.querySelectorAll('.play-icon-small').forEach(el => el.innerHTML = '▶');
+    if (activeId && isPlaying) {
+      document.getElementById(`icon-${activeId}`).innerHTML = '⏸';
     }
   }
 
@@ -209,98 +353,196 @@
     if (activeId === id && isPlaying) {
       currentAudio.pause();
       isPlaying = false;
+      updatePlayUI();
+      return;
+    }
+    if (activeId === id && !isPlaying) {
+      currentAudio.play();
+      isPlaying = true;
+      updatePlayUI();
       return;
     }
 
     activeId = id;
     currentLoopCount = 0;
-    targetRepeatCount = parseInt(document.getElementById('repeatInput').value) || 1;
+    attemptedSpaceFallback = false; // Reset fallback flag for new file
     
+    // UI Selection
     document.querySelectorAll('.list-item').forEach(el => el.classList.remove('active-row'));
     document.getElementById(`row-${id}`).classList.add('active-row');
+    document.getElementById(`row-${id}`).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     document.getElementById('counterDisplay').innerText = `${id} / ${totalShlokas}`;
     
-    // Ensure scroll brings active item into view
-    document.getElementById(`row-${id}`).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Load & Play
+    currentAudio.src = `${archiveBaseUrl}${filePrefix}${id}${fileExtension}`;
+    currentAudio.playbackRate = parseFloat(speedInput.value);
     
-    currentAudio.src = `${archiveBaseUrl}NS${id}${fileExtension}`;
-    currentAudio.playbackRate = parseFloat(document.getElementById('speedInput').value) || 1.0;
-    
-    currentAudio.play().catch(error => {
-      console.error("Audio playback failed:", error);
-    });
-    isPlaying = true;
+    // Default A-B reset
+    loopA.value = "0.00";
+    loopB.value = ""; 
+
+    currentAudio.play().then(() => {
+      isPlaying = true;
+      updatePlayUI();
+    }).catch(e => console.log("Audio load pending..."));
   }
 
-  currentAudio.onerror = function() {
-    alert("Error loading audio. If opening locally, your browser might be blocking it. Please test via GitHub.");
-  };
+  // --- AUDIO EVENT LISTENERS ---
+  
+  // 1. Dynamic Duration for A-B Loop
+  currentAudio.addEventListener('loadedmetadata', () => {
+    // Automatically set the end of the loop to the total audio duration
+    loopB.value = currentAudio.duration.toFixed(2);
+  });
 
-  // Global Controls
-  document.getElementById('playBtn').addEventListener('click', () => {
-    if (activeId && !isPlaying) {
-      currentAudio.play();
-      isPlaying = true;
-    } else if (!activeId) {
-      playShloka(1); 
+  // 2. Zero-Width Space Fallback Logic
+  currentAudio.addEventListener('error', () => {
+    if (!attemptedSpaceFallback && activeId) {
+      console.log("Standard URL failed. Attempting zero-width space fallback...");
+      attemptedSpaceFallback = true;
+      // Inject %E2%80%8B right before .mp3
+      currentAudio.src = `${archiveBaseUrl}${filePrefix}${activeId}%E2%80%8B${fileExtension}`;
+      currentAudio.play().then(() => {
+        isPlaying = true;
+        updatePlayUI();
+      }).catch(e => {
+        alert(`File ${filePrefix}${activeId} could not be loaded even with fallback.`);
+      });
     }
+  });
+
+  // 3. A-B Looping Check
+  currentAudio.addEventListener('timeupdate', () => {
+    if (document.getElementById('enableAB').checked) {
+      const endLoop = parseFloat(loopB.value);
+      const startLoop = parseFloat(loopA.value) || 0;
+      if (endLoop && currentAudio.currentTime >= endLoop) {
+        currentAudio.currentTime = startLoop;
+      }
+    }
+  });
+
+  // 4. File Completion & Autoplay Next
+  currentAudio.addEventListener('ended', () => {
+    currentLoopCount++;
+    const targetRepeat = parseInt(document.getElementById('repeatInput').value) || 1;
+    
+    if (currentLoopCount < targetRepeat) {
+      currentAudio.currentTime = parseFloat(loopA.value) || 0; 
+      currentAudio.play();
+    } else {
+      handleNextTrack();
+    }
+  });
+
+  function handleNextTrack() {
+    const autoplay = document.getElementById('autoplayNext').checked;
+    const markedOnly = document.getElementById('playMarkedOnly').checked;
+
+    if (!autoplay) {
+      isPlaying = false;
+      updatePlayUI();
+      return;
+    }
+
+    let nextId = activeId + 1;
+    
+    // If Play Marked Only is checked, scan forward for the next marked item
+    if (markedOnly) {
+      while (nextId <= totalShlokas && !marks[nextId]) {
+        nextId++;
+      }
+    }
+
+    if (nextId <= totalShlokas) {
+      playShloka(nextId);
+    } else {
+      isPlaying = false;
+      updatePlayUI();
+    }
+  }
+
+  // --- GLOBAL BUTTON CONTROLS ---
+  playBtn.addEventListener('click', () => {
+    if (!activeId) playShloka(1);
+    else if (isPlaying) { currentAudio.pause(); isPlaying = false; updatePlayUI(); }
+    else { currentAudio.play(); isPlaying = true; updatePlayUI(); }
   });
 
   document.getElementById('stopBtn').addEventListener('click', () => {
     currentAudio.pause();
     currentAudio.currentTime = 0;
     isPlaying = false;
+    updatePlayUI();
     document.querySelectorAll('.list-item').forEach(el => el.classList.remove('active-row'));
-    document.getElementById('counterDisplay').innerText = `० / ${totalShlokas}`;
     activeId = null;
   });
 
-  document.getElementById('speedInput').addEventListener('change', (e) => {
-    currentAudio.playbackRate = parseFloat(e.target.value);
+  // Slider Speed Sync
+  speedInput.addEventListener('input', (e) => {
+    const val = parseFloat(e.target.value).toFixed(1);
+    speedVal.innerText = val;
+    currentAudio.playbackRate = val;
   });
 
-  // A-B Loop Logic (Fires repeatedly as audio plays)
-  currentAudio.addEventListener('timeupdate', () => {
-    const enableAB = document.getElementById('enableAB').checked;
-    if (enableAB) {
-      const loopB = parseFloat(document.getElementById('loopB').value);
-      const loopA = parseFloat(document.getElementById('loopA').value) || 0;
-      
-      if (loopB && currentAudio.currentTime >= loopB) {
-        currentAudio.currentTime = loopA;
-      }
-    }
-  });
-
-  // Standard Loop & Autoplay Logic (Fires when file ends naturally)
-  currentAudio.addEventListener('ended', () => {
-    currentLoopCount++;
-    const autoplayNext = document.getElementById('autoplayNext').checked;
-    
-    if (currentLoopCount < targetRepeatCount) {
-      currentAudio.currentTime = 0; 
-      currentAudio.play();
-    } else if (autoplayNext && activeId < totalShlokas) {
-      playShloka(activeId + 1); // Move to next file
-    } else {
-      isPlaying = false;
-    }
-  });
-
-  function toggleFavorite(id) {
-    let favorites = JSON.parse(localStorage.getItem('narasimhaFavs')) || [];
-    const favBtn = document.getElementById(`fav-${id}`);
-    
-    if (favorites.includes(id)) {
-      favorites = favorites.filter(favId => favId !== id);
-      favBtn.classList.remove('is-favorite');
-    } else {
-      favorites.push(id);
-      favBtn.classList.add('is-favorite');
-    }
-    localStorage.setItem('narasimhaFavs', JSON.stringify(favorites));
+  // --- MARKER SYSTEM ---
+  function openMarkerMenu(e, id) {
+    targetMarkId = id;
+    markerMenu.style.left = `${e.pageX - 100}px`;
+    markerMenu.style.top = `${e.pageY + 10}px`;
+    markerMenu.classList.add('show');
   }
 
+  function setMark(type) {
+    if (type === 'none') {
+      delete marks[targetMarkId];
+    } else {
+      marks[targetMarkId] = type;
+    }
+    localStorage.setItem('gitaMarks', JSON.stringify(marks));
+    markerMenu.classList.remove('show');
+    renderList(); // Re-render to update icons
+    if (activeId) {
+      // Re-apply active class to current playing track after render
+      document.getElementById(`row-${activeId}`).classList.add('active-row');
+    }
+  }
+
+  // Close marker menu if clicked outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.action-icons') && !e.target.closest('.marker-menu')) {
+      markerMenu.classList.remove('show');
+    }
+  });
+
+  // --- NOTES SYSTEM ---
+  let targetNoteId = null;
+  
+  function openNote(id) {
+    targetNoteId = id;
+    document.getElementById('noteShlokaNum').innerText = id;
+    document.getElementById('noteText').value = notes[id] || "";
+    document.getElementById('noteModal').style.display = "flex";
+  }
+
+  function closeNote() {
+    document.getElementById('noteModal').style.display = "none";
+  }
+
+  function saveNote() {
+    const txt = document.getElementById('noteText').value.trim();
+    if (txt) {
+      notes[targetNoteId] = txt;
+    } else {
+      delete notes[targetNoteId];
+    }
+    localStorage.setItem('gitaNotes', JSON.stringify(notes));
+    closeNote();
+    renderList();
+    if (activeId) { document.getElementById(`row-${activeId}`).classList.add('active-row'); }
+  }
+
+  // Init
   renderList();
 </script>
 </body>
