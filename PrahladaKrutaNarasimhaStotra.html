@@ -148,7 +148,11 @@
     border-top: 1px solid #eee; padding-top: 8px; margin-top: 4px; display: flex; flex-direction: column; gap: 6px; font-size: 11px; font-weight: bold;
   }
   .range-inputs { display: flex; align-items: center; gap: 4px; }
-  .range-inputs input { width: 45px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
+  .range-inputs input { width: 40px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
+  .clear-range-btn {
+    background: #eee; border: none; border-radius: 4px; font-size: 10px; padding: 2px 6px; cursor: pointer; font-weight: bold; color: #555;
+  }
+  .clear-range-btn:hover { background: #ddd; }
 
   /* Menus & Modals */
   .marker-menu { position: absolute; background: white; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: none; flex-direction: column; z-index: 200; }
@@ -212,7 +216,7 @@
         <div class="popup-option" id="opt-practice" onclick="setFilter('practice')">▶ 🚩 Practice</div>
         <div class="popup-option" id="opt-none" onclick="setFilter('none')">⏸ Single Track</div>
         
-        <!-- Range Filter Option -->
+        <!-- Range Filter Box with Clear Button -->
         <div class="range-box">
           <div style="display:flex; justify-content:space-between; align-items:center;">
             <span>📐 Range:</span>
@@ -225,6 +229,7 @@
             <input type="number" id="rangeStart" placeholder="From" min="1" max="43" onchange="applyRangeFilter()">
             <span>to</span>
             <input type="number" id="rangeEnd" placeholder="To" min="1" max="43" onchange="applyRangeFilter()">
+            <button class="clear-range-btn" onclick="clearRange()">Clear</button>
           </div>
         </div>
       </div>
@@ -321,7 +326,6 @@
 
   let targetMenuId = null;
 
-  // --- MILLISECOND TIME FORMATTER ---
   function formatTime(seconds) {
     if (isNaN(seconds)) return "0:00.000";
     const m = Math.floor(seconds / 60);
@@ -353,7 +357,7 @@
     window.history.pushState({}, document.title, window.location.pathname);
   }
 
-  // --- RANGE FILTER CHECKER ---
+  // --- RANGE FILTER CHECKER & CLEAR ---
   function getFilteredIds() {
     let ids = [];
     const rStart = parseInt(document.getElementById('rangeStart').value);
@@ -362,11 +366,9 @@
     const hasRange = !isNaN(rStart) && !isNaN(rEnd) && rStart <= rEnd;
 
     for (let i = 1; i <= totalShlokas; i++) {
-      // Basic type filters
       if (currentFilter === 'fav' && marks[i] !== 'fav') continue;
       if (currentFilter === 'practice' && marks[i] !== 'practice') continue;
 
-      // Range filters
       if (hasRange) {
         const inRange = (i >= rStart && i <= rEnd);
         if (rMode === 'include' && !inRange) continue;
@@ -376,6 +378,12 @@
       ids.push(i);
     }
     return ids;
+  }
+
+  function clearRange() {
+    document.getElementById('rangeStart').value = "";
+    document.getElementById('rangeEnd').value = "";
+    applyRangeFilter();
   }
 
   function setFilter(type) {
@@ -674,19 +682,20 @@
     setTimeout(() => { btnElement.innerText = originalText; markerMenu.classList.remove('show'); }, 2000);
   }
 
-  // --- SMART CACHE CHECKER & PRELOADER ---
-  async function checkCacheStatus() {
-    try {
-      let testRes = await fetch(`${archiveBaseUrl}${filePrefix}1${fileExtension}`).catch(() => null);
-      if(testRes && testRes.ok) {
-        // Simple check if cached via blob inspection
-        cacheBtn.innerText = "📥 Preload All Audio";
-      }
-    } catch(e) {}
+  // --- PERSISTENT LOCAL STORAGE CACHE LOCKER ---
+  function checkCacheStatus() {
+    const cachedState = localStorage.getItem('narasimhaAllCached');
+    if (cachedState === 'true') {
+      cacheBtn.innerText = "✅ All Cached (43/43)";
+      cacheBtn.dataset.cached = "true";
+      cacheBtn.style.background = "#e8f5e9";
+      cacheBtn.style.color = "#2e7d32";
+      cacheBtn.style.borderColor = "#c8e6c9";
+    }
   }
 
   async function cacheAllAudio(btn) {
-    if(btn.dataset.cached === "true") return; // Locked out if already cached
+    if(btn.dataset.cached === "true") return;
     
     const origText = btn.innerText;
     btn.innerText = "⏳ Preloading...";
@@ -708,6 +717,7 @@
       } catch(e) {}
     }
     
+    localStorage.setItem('narasimhaAllCached', 'true');
     btn.innerText = `✅ All Cached (${successCount}/${totalShlokas})`;
     btn.dataset.cached = "true";
     btn.style.background = "#e8f5e9";
