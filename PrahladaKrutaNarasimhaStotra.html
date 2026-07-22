@@ -39,7 +39,7 @@
   /* Reading & List Cards */
   .reading-card { background: var(--card-bg); border: 2px solid #ffcdd2; border-radius: 12px; padding: 20px 16px; text-align: center; font-size: 20px; color: var(--text-sanskrit); line-height: 1.5; font-weight: 600; margin-bottom: 12px; min-height: 60px; display: flex; align-items: center; justify-content: center; }
   .shloka-list { display: flex; flex-direction: column; gap: 8px; }
-  .shloka-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; gap: 10px; }
+  .shloka-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; gap: 10px; transition: background 0.2s; }
   .shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left: 4px solid var(--accent-red); }
   .shloka-num { font-size: 12px; font-weight: bold; color: #666; min-width: 20px; }
   .shloka-text { flex-grow: 1; font-size: 15px; color: var(--text-sanskrit); line-height: 1.4; font-weight: 500; cursor: pointer; }
@@ -48,14 +48,17 @@
   .is-practice { color: var(--accent-red) !important; }
   .has-note { color: #1976d2 !important; }
 
-  /* Bottom Toolbar Grid */
+  /* Bottom Toolbar Grid - 4 Equally Spaced Sections */
   .bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #e0e0e0; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 100; }
-  .player-inner { max-width: 600px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 8px 10px; gap: 6px; }
-  .controls-main { display: flex; gap: 10px; justify-content: flex-start; }
-  .timer-group { display: flex; flex-direction: column; text-align: center; }
-  .tools-main { display: flex; gap: 6px; justify-content: flex-end; position: relative; }
+  
+  .player-inner { 
+    max-width: 600px; margin: 0 auto; display: flex; align-items: center; justify-content: space-evenly; padding: 8px 4px; 
+  }
+  
+  .timer-group { display: flex; flex-direction: column; text-align: center; min-width: 75px; }
+  .popup-container { position: relative; display: flex; align-items: center; justify-content: center; }
 
-  .btn-play { background: var(--accent-red); color: #fff; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 16px; cursor: pointer; box-shadow: 0 2px 6px rgba(211, 47, 47, 0.4); flex-shrink: 0; }
+  .btn-play { background: var(--accent-red); color: #fff; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 16px; cursor: pointer; box-shadow: 0 2px 6px rgba(211, 47, 47, 0.4); flex-shrink: 0; margin: 0 6px; }
   .btn-nav { background: none; border: none; font-size: 16px; color: #333; cursor: pointer; padding: 2px; }
   .btn-sm { background: #f0f4f8; border: 1px solid #bccbde; border-radius: 14px; padding: 5px 10px; font-size: 11px; font-weight: bold; color: #222; cursor: pointer; white-space: nowrap; }
 
@@ -64,7 +67,7 @@
   .repeat-counter { font-size: 9px; font-weight: bold; color: var(--accent-red); }
 
   /* Popups */
-  .popup { position: absolute; bottom: 55px; right: 0; background: #fff; border: 1px solid #ccc; border-radius: 10px; padding: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 10px; z-index: 105; width: 210px; box-sizing: border-box; }
+  .popup { position: absolute; bottom: 50px; right: 0; background: #fff; border: 1px solid #ccc; border-radius: 10px; padding: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 10px; z-index: 105; width: 220px; box-sizing: border-box; }
   .popup.show { display: flex; }
   .popup hr { width: 100%; border: 0; border-top: 1px solid #eee; margin: 0; }
   
@@ -108,25 +111,26 @@
 <div class="bottom-player">
   <div class="player-inner">
     
-    <div class="controls-main flex-row">
+    <!-- 1. Playback Controls -->
+    <div class="flex-row">
       <button class="btn-nav" onclick="playPrevFiltered()">⏮</button>
       <button class="btn-play flex-center" id="playBtn" onclick="togglePlay()">▶</button>
       <button class="btn-nav" onclick="playNextFiltered()">⏭</button>
     </div>
 
+    <!-- 2. Timer Group -->
     <div class="timer-group">
       <div class="track-label" id="trackLabel">०/४३</div>
       <div class="time-display" id="timeDisplay">0:00.000 / 0:00.000</div>
       <div class="repeat-counter" id="repeatCounter"></div>
     </div>
 
-    <!-- Right Side Buttons -->
-    <div class="tools-main flex-row">
-      <button class="btn-sm" onclick="togglePopup('filterPopup')" id="filterBtn">🔽 All</button>
-      <button class="btn-sm" onclick="togglePopup('toolsPopup')" title="Tools">⚙️</button>
-
+    <!-- 3. Filter Section -->
+    <div class="popup-container">
+      <button class="btn-sm" onclick="togglePopup('filterPopup')" id="filterBtn">Filter: All</button>
+      
       <!-- Filter Popup -->
-      <div class="popup" id="filterPopup">
+      <div class="popup" id="filterPopup" style="right: -40px;">
         <div class="pop-item active" id="opt-all" onclick="setFilter('all')">▶ All</div>
         <div class="pop-item" id="opt-fav" onclick="setFilter('fav')">▶ ★ Favorites</div>
         <div class="pop-item" id="opt-practice" onclick="setFilter('practice')">▶ 🚩 Practice</div>
@@ -149,9 +153,14 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- 4. Tools Section -->
+    <div class="popup-container">
+      <button class="btn-sm" onclick="togglePopup('toolsPopup')" title="Tools">⚙️ Tools</button>
 
       <!-- Tools Popup -->
-      <div class="popup" id="toolsPopup">
+      <div class="popup" id="toolsPopup" style="right: 0;">
         <div class="pop-row">
           <span>⚡ <span id="speedVal">1.0</span>x</span>
           <input type="range" class="pop-range" id="speedInput" min="0.5" max="2.0" step="0.1" value="1.0">
@@ -161,7 +170,7 @@
           <input type="number" class="pop-input" id="repeatInput" value="1" min="1" onchange="updateRepeatDisplay()">
         </div>
         <hr>
-        <!-- A-B Box Inline -->
+        <!-- Perfectly Aligned A-B Loop Stack -->
         <div style="font-size: 12px; font-weight: bold;">
           <label class="flex-row" style="gap:4px; cursor:pointer; margin-bottom:6px;">
             <input type="checkbox" id="enableAB" style="margin:0;"> ✂️ A-B Loop
@@ -174,8 +183,8 @@
         <hr>
         <button class="btn-sm flex-center" id="cacheBtn" style="background:#ffebee; color:var(--accent-red); border-color:#ffcdd2;" onclick="cacheAllAudio(this)">📥 Preload All Audio</button>
       </div>
-
     </div>
+
   </div>
 </div>
 
@@ -270,7 +279,7 @@
     els.filterPopup.classList.remove('show');
     document.querySelectorAll('.pop-item').forEach(el => el.classList.remove('active'));
     
-    const labels = { 'all': '🔽 All', 'fav': '🔽 ★', 'practice': '🔽 🚩', 'none': '⏸ One' };
+    const labels = { 'all': 'Filter: All', 'fav': 'Filter: ★', 'practice': 'Filter: 🚩', 'none': 'Filter: One' };
     els.filterBtn.innerText = labels[type];
     document.getElementById(`opt-${type}`).classList.add('active');
 
@@ -449,7 +458,7 @@
   }
 
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.filter-section') && !e.target.closest('.tools-section') && !e.target.closest('.popup')) document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
+    if (!e.target.closest('.popup-container') && !e.target.closest('.popup')) document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
     if (!e.target.closest('.card-actions') && !e.target.closest('.context-menu')) els.markerMenu.classList.remove('show');
   });
 
