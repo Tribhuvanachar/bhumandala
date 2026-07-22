@@ -17,7 +17,6 @@
     background-color: var(--bg-main); color: var(--text-primary);
   }
 
-  /* YouTube Style Loading Bar */
   #loadingBar {
     position: fixed; top: 0; left: 0; height: 3px; background: #ff1744;
     width: 0%; z-index: 9999; transition: width 0.2s ease; opacity: 0;
@@ -27,10 +26,18 @@
 
   .app-container { max-width: 600px; margin: 0 auto; padding: 12px; }
 
-  /* Header */
-  .header { text-align: center; padding: 10px 0; }
+  /* Header & Search */
+  .header { text-align: center; padding: 10px 0 5px 0; }
   .header h1 { margin: 0; font-size: 20px; color: var(--accent-red); font-weight: 800; }
-  .header .author { font-size: 10px; color: #555; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+  .header .author { font-size: 10px; color: #555; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 10px; }
+
+  .search-bar-container { margin-bottom: 12px; }
+  .search-input {
+    width: 100%; padding: 10px 14px; border: 1px solid var(--card-border);
+    border-radius: 20px; font-size: 14px; background: #fff; box-sizing: border-box;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); outline: none; transition: border 0.2s;
+  }
+  .search-input:focus { border-color: var(--accent-red); }
 
   /* Mini-Mode */
   .expand-btn {
@@ -39,7 +46,7 @@
     font-size: 13px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
   body.mini-mode .expand-btn { display: block; }
-  body.mini-mode .header, body.mini-mode .shloka-list { display: none; }
+  body.mini-mode .header, body.mini-mode .shloka-list, body.mini-mode .search-bar-container { display: none; }
   body.mini-mode { 
     background-color: #121212; display: flex; flex-direction: column; justify-content: center; height: 100vh; padding-bottom: 0;
   }
@@ -74,7 +81,7 @@
   .is-practice { color: var(--accent-red) !important; }
   .has-note { color: #1976d2 !important; }
 
-  /* Bottom Toolbar */
+  /* Perfectly Balanced 4-Section Bottom Toolbar */
   .bottom-player {
     position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg);
     border-top: 1px solid #e0e0e0; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 100;
@@ -83,52 +90,55 @@
   .player-inner {
     max-width: 600px; margin: 0 auto; 
     display: flex; align-items: center; justify-content: space-between; 
-    padding: 10px 12px;
+    padding: 8px 10px; gap: 6px;
   }
   
-  /* Flexbox Grid for Perfect Spacing */
-  .controls-main { display: flex; align-items: center; gap: 12px; flex: 1; justify-content: flex-start; }
-  .timer-group { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; text-align: center; }
-  .settings-row { display: flex; align-items: center; gap: 6px; flex: 1; justify-content: flex-end; }
+  /* 4 Equal Grid Sections */
+  .player-section { flex: 1; display: flex; align-items: center; justify-content: center; }
+  
+  .controls-main { gap: 8px; justify-content: flex-start; }
+  .timer-group { flex-direction: column; text-align: center; }
+  .filter-section { justify-content: center; }
+  .tools-section { justify-content: flex-end; }
 
   .btn-play-main {
-    background: var(--accent-red); color: white; border: none; width: 44px; height: 44px;
-    border-radius: 50%; font-size: 18px; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; box-shadow: 0 3px 8px rgba(211, 47, 47, 0.4); flex-shrink: 0;
+    background: var(--accent-red); color: white; border: none; width: 38px; height: 38px;
+    border-radius: 50%; font-size: 16px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 2px 6px rgba(211, 47, 47, 0.4); flex-shrink: 0;
   }
-  .btn-nav { background: none; border: none; font-size: 18px; color: #333; cursor: pointer; padding: 4px; }
+  .btn-nav { background: none; border: none; font-size: 16px; color: #333; cursor: pointer; padding: 2px; }
 
-  .track-label { font-size: 12px; font-weight: 800; color: #333; }
-  .time-display { font-size: 11px; font-weight: 600; color: #666; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .track-label { font-size: 11px; font-weight: 800; color: #333; }
+  .time-display { font-size: 10px; font-weight: 600; color: #666; font-variant-numeric: tabular-nums; }
 
   .btn-setting {
-    background: #f0f4f8; border: 1px solid #bccbde; border-radius: 16px; padding: 4px 8px;
-    font-size: 12px; font-weight: bold; color: #222; cursor: pointer; display: flex; align-items: center;
+    background: #f0f4f8; border: 1px solid #bccbde; border-radius: 14px; padding: 4px 8px;
+    font-size: 11px; font-weight: bold; color: #222; cursor: pointer; display: flex; align-items: center; gap: 4px;
+    white-space: nowrap;
   }
-  select.btn-setting { padding-right: 4px; }
 
-  /* Floating Tools Popup */
+  /* Compact Popups (Filter & Tools) */
   .popup-bubble {
-    position: absolute; bottom: 65px; right: 15px; background: white;
-    border: 1px solid #ccc; border-radius: 10px; padding: 12px 14px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 14px;
-    z-index: 105; min-width: 170px;
+    position: absolute; bottom: 60px; background: white;
+    border: 1px solid #ccc; border-radius: 10px; padding: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 8px;
+    z-index: 105; min-width: 140px;
   }
   .popup-bubble.show { display: flex; }
   
+  .popup-option {
+    padding: 6px 10px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: 6px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .popup-option:hover { background: #f0f4f8; }
+  .popup-option.selected { background: #ffebee; color: var(--accent-red); }
+
   .popup-row { 
     display: flex; align-items: center; justify-content: space-between; 
-    font-size: 13px; font-weight: bold; 
+    font-size: 12px; font-weight: bold; gap: 10px;
   }
-  .popup-row label {
-    display: flex; align-items: center; gap: 6px; margin: 0; cursor: pointer;
-  }
-  .popup-row-inputs {
-    display: flex; align-items: center; gap: 4px;
-  }
-
-  .popup-bubble input[type="range"] { width: 85px; cursor: pointer; }
-  .popup-bubble input[type="number"] { width: 45px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 3px; }
+  .popup-bubble input[type="range"] { width: 75px; cursor: pointer; }
+  .popup-bubble input[type="number"] { width: 40px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
 
   /* Menus & Modals */
   .marker-menu { position: absolute; background: white; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: none; flex-direction: column; z-index: 200; }
@@ -152,6 +162,11 @@
     <div class="author">By Tribhuvan Achar</div>
   </div>
 
+  <!-- Top Search Bar -->
+  <div class="search-bar-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search shloka number or text..." oninput="handleSearch()">
+  </div>
+
   <div class="reading-card" id="readingCard">
     श्लोकं चिनोतु (Select a shloka)
   </div>
@@ -161,59 +176,57 @@
   </div>
 </div>
 
-<!-- Bottom Toolbar -->
+<!-- Bottom Toolbar (Equally Spaced 4 Sections) -->
 <div class="bottom-player">
   <div class="player-inner">
     
-    <!-- Group 1: Playback -->
-    <div class="controls-main">
+    <!-- Section 1: Playback Controls -->
+    <div class="player-section controls-main">
       <button class="btn-nav" onclick="playPrev()">⏮</button>
       <button class="btn-play-main" id="playBtn" onclick="togglePlay()">▶</button>
       <button class="btn-nav" onclick="playNext()">⏭</button>
     </div>
 
-    <!-- Group 2: Timer -->
-    <div class="timer-group">
+    <!-- Section 2: Timer & Counter -->
+    <div class="player-section timer-group">
       <div class="track-label" id="trackLabel">०/४३</div>
       <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
     </div>
 
-    <!-- Group 3: Settings -->
-    <div class="settings-row">
-      <select class="btn-setting" id="playMode">
-        <option value="all">▶ All</option>
-        <option value="fav">▶ ★</option>
-        <option value="practice">▶ 🚩</option>
-        <option value="none">⏸ One</option>
-      </select>
-      <button class="btn-setting" onclick="togglePopup('toolsPopup')" title="Tools">⚙️</button>
+    <!-- Section 3: Filter Menu -->
+    <div class="player-section filter-section" style="position:relative;">
+      <button class="btn-setting" onclick="togglePopup('filterPopup')" id="filterBtn">filter: All</button>
+      
+      <div class="popup-bubble" id="filterPopup" style="right: auto; left: 0;">
+        <div class="popup-option selected" id="opt-all" onclick="setFilter('all')">▶ All</div>
+        <div class="popup-option" id="opt-fav" onclick="setFilter('fav')">▶ ★ Favorites</div>
+        <div class="popup-option" id="opt-practice" onclick="setFilter('practice')">▶ 🚩 Practice</div>
+        <div class="popup-option" id="opt-none" onclick="setFilter('none')">⏸ Single Track</div>
+      </div>
     </div>
 
-    <!-- Unified Tools Popup -->
-    <div class="popup-bubble" id="toolsPopup">
-      <div class="popup-row">
-        <label>⚡ <span id="speedVal">1.0</span>x</label>
-        <div class="popup-row-inputs">
+    <!-- Section 4: Tools Menu -->
+    <div class="player-section tools-section" style="position:relative;">
+      <button class="btn-setting" onclick="togglePopup('toolsPopup')" title="Tools">⚙️ Tools</button>
+      
+      <div class="popup-bubble" id="toolsPopup" style="right: 0; left: auto;">
+        <div class="popup-row">
+          <span>⚡ <span id="speedVal">1.0</span>x</span>
           <input type="range" id="speedInput" min="0.5" max="2.0" step="0.1" value="1.0">
         </div>
-      </div>
-      <div class="popup-row">
-        <label>🔁 Repeat:</label>
-        <div class="popup-row-inputs">
+        <div class="popup-row">
+          <span>🔁 Rep:</span>
           <input type="number" id="repeatInput" value="1" min="1">
         </div>
-      </div>
-      <hr style="width:100%; border:0; border-top:1px solid #eee; margin:0;">
-      <div class="popup-row">
-        <label for="enableAB">
-          <input type="checkbox" id="enableAB"> ✂️ A-B:
-        </label>
-        <div class="popup-row-inputs">
-          <input type="number" id="loopA" placeholder="0.0" step="0.1"> 
-          <input type="number" id="loopB" placeholder="End" step="0.1">
+        <hr style="width:100%; border:0; border-top:1px solid #eee; margin:0;">
+        <div class="popup-row">
+          <span><input type="checkbox" id="enableAB"> ✂️ A-B:</span>
+          <input type="number" id="loopA" placeholder="0" step="0.1" style="width:35px;"> 
+          <input type="number" id="loopB" placeholder="End" step="0.1" style="width:35px;">
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -254,6 +267,7 @@
   let isPlaying = false;
   let currentLoopCount = 0;
   let attemptedSpaceFallback = false;
+  let currentFilter = 'all';
 
   let marks = JSON.parse(localStorage.getItem('narasimhaMarks')) || {};
   let notes = JSON.parse(localStorage.getItem('narasimhaNotes')) || {};
@@ -265,7 +279,9 @@
   const timeDisplay = document.getElementById('timeDisplay');
   const readingCard = document.getElementById('readingCard');
   const toolsPopup = document.getElementById('toolsPopup');
+  const filterPopup = document.getElementById('filterPopup');
   const markerMenu = document.getElementById('markerMenu');
+  const filterBtn = document.getElementById('filterBtn');
 
   let targetMenuId = null;
 
@@ -290,10 +306,46 @@
     window.history.pushState({}, document.title, window.location.pathname);
   }
 
+  // --- FILTER & RENDER LOGIC ---
+  function setFilter(type) {
+    currentFilter = type;
+    filterPopup.classList.remove('show');
+    
+    // Update button text & highlight active option
+    document.querySelectorAll('.popup-option').forEach(el => el.classList.remove('selected'));
+    if(type === 'all') { filterBtn.innerText = "filter: All"; document.getElementById('opt-all').classList.add('selected'); }
+    else if(type === 'fav') { filterBtn.innerText = "filter: ★"; document.getElementById('opt-fav').classList.add('selected'); }
+    else if(type === 'practice') { filterBtn.innerText = "filter: 🚩"; document.getElementById('opt-practice').classList.add('selected'); }
+    else if(type === 'none') { filterBtn.innerText = "filter: One"; document.getElementById('opt-none').classList.add('selected'); }
+
+    renderList();
+  }
+
+  function handleSearch() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.shloka-card');
+    
+    cards.forEach(card => {
+      const id = card.id.replace('shloka-', '');
+      const text = card.querySelector('.shloka-text-body').innerText.toLowerCase();
+      
+      if (id.includes(query) || text.includes(query)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
   function renderList() {
     const listEl = document.getElementById('shlokaList');
     listEl.innerHTML = '';
+    
     for (let i = 1; i <= totalShlokas; i++) {
+      // Respect Filter visibility
+      if (currentFilter === 'fav' && marks[i] !== 'fav') continue;
+      if (currentFilter === 'practice' && marks[i] !== 'practice') continue;
+
       const card = document.createElement('div');
       card.className = 'shloka-card';
       card.id = `shloka-${i}`;
@@ -425,22 +477,23 @@
   });
 
   function handleNextAutoplay() {
-    const mode = document.getElementById('playMode').value;
-    if (mode === 'none' || document.body.classList.contains('mini-mode')) {
+    if (currentFilter === 'none' || document.body.classList.contains('mini-mode')) {
       isPlaying = false; updateUI(); return;
     }
+    
     let nextId = activeId + 1;
-    if (mode === 'fav') { while (nextId <= totalShlokas && marks[nextId] !== 'fav') nextId++; }
-    else if (mode === 'practice') { while (nextId <= totalShlokas && marks[nextId] !== 'practice') nextId++; }
+    if (currentFilter === 'fav') { while (nextId <= totalShlokas && marks[nextId] !== 'fav') nextId++; }
+    else if (currentFilter === 'practice') { while (nextId <= totalShlokas && marks[nextId] !== 'practice') nextId++; }
     
     if (nextId <= totalShlokas) playShloka(nextId);
     else { isPlaying = false; updateUI(); }
   }
 
   function togglePopup(id) {
+    // Close other popups first
+    document.querySelectorAll('.popup-bubble').forEach(p => { if(p.id !== id) p.classList.remove('show'); });
     const popup = document.getElementById(id);
-    if (popup.classList.contains('show')) popup.classList.remove('show');
-    else popup.classList.add('show');
+    popup.classList.toggle('show');
   }
 
   function openMarkerMenu(e, id) {
@@ -456,7 +509,8 @@
     localStorage.setItem('narasimhaMarks', JSON.stringify(marks));
     markerMenu.classList.remove('show'); renderList();
     if (activeId && !document.body.classList.contains('mini-mode')) {
-      document.getElementById(`shloka-${activeId}`).classList.add('active');
+      const activeEl = document.getElementById(`shloka-${activeId}`);
+      if(activeEl) activeEl.classList.add('active');
     }
   }
 
@@ -476,15 +530,12 @@
     btnElement.innerText = "⏳ Downloading...";
 
     let url = `${archiveBaseUrl}${filePrefix}${targetMenuId}${fileExtension}`;
-    
     try {
       let response = await fetch(url).catch(() => null);
-
       if (!response || !response.ok) {
         url = `${archiveBaseUrl}${filePrefix}${targetMenuId}%E2%80%8B${fileExtension}`;
         response = await fetch(url).catch(() => null);
       }
-
       if (response && response.ok) {
         const blob = await response.blob();
         const blobUrl = window.URL.createObjectURL(blob);
@@ -497,22 +548,20 @@
         window.URL.revokeObjectURL(blobUrl);
         btnElement.innerText = "✅ Downloaded";
       } else {
-        alert("Download failed. The file could not be found on the server.");
+        alert("Download failed.");
         btnElement.innerText = originalText;
       }
     } catch (e) {
-      alert("Download failed due to a network error.");
+      alert("Download failed.");
       btnElement.innerText = originalText;
     }
-
-    setTimeout(() => {
-      btnElement.innerText = originalText;
-      markerMenu.classList.remove('show');
-    }, 2000);
+    setTimeout(() => { btnElement.innerText = originalText; markerMenu.classList.remove('show'); }, 2000);
   }
 
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.btn-setting') && !e.target.closest('.popup-bubble')) toolsPopup.classList.remove('show');
+    if (!e.target.closest('.filter-section') && !e.target.closest('.tools-section') && !e.target.closest('.popup-bubble')) {
+      document.querySelectorAll('.popup-bubble').forEach(p => p.classList.remove('show'));
+    }
     if (!e.target.closest('.card-actions') && !e.target.closest('.marker-menu')) markerMenu.classList.remove('show');
   });
 
@@ -535,9 +584,6 @@
     if (txt) notes[targetNoteId] = txt; else delete notes[targetNoteId];
     localStorage.setItem('narasimhaNotes', JSON.stringify(notes));
     closeNote(); renderList();
-    if (activeId && !document.body.classList.contains('mini-mode')) {
-      document.getElementById(`shloka-${activeId}`).classList.add('active');
-    }
   }
 
   renderList();
