@@ -119,7 +119,7 @@
     position: absolute; bottom: 60px; background: white;
     border: 1px solid #ccc; border-radius: 10px; padding: 12px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 10px;
-    z-index: 105; min-width: 200px; box-sizing: border-box;
+    z-index: 105; min-width: 210px; box-sizing: border-box;
   }
   .popup-bubble.show { display: flex; }
   
@@ -134,23 +134,27 @@
     display: flex; align-items: center; justify-content: space-between; 
     font-size: 12px; font-weight: bold; width: 100%; gap: 6px;
   }
-  .popup-bubble input[type="range"] { width: 75px; cursor: pointer; }
-  .popup-bubble input[type="number"] { width: 40px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
+  .popup-bubble input[type="range"] { width: 90px; cursor: pointer; }
+  .popup-bubble input[type="number"] { width: 45px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
 
+  /* Perfectly Aligned Compact A-B Row */
   .ab-row {
     display: flex; align-items: center; justify-content: space-between;
     width: 100%; font-size: 12px; font-weight: bold; white-space: nowrap;
   }
-  .ab-inputs { display: flex; align-items: center; gap: 3px; }
+  .ab-inputs { display: flex; align-items: center; gap: 4px; }
 
-  /* Range Filter Box inside Filter Popup */
+  /* Compact Range Filter Box */
   .range-box {
-    border-top: 1px solid #eee; padding-top: 8px; margin-top: 4px; display: flex; flex-direction: column; gap: 6px; font-size: 11px; font-weight: bold;
+    border-top: 1px solid #eee; padding-top: 6px; margin-top: 2px; 
+    display: flex; flex-direction: column; gap: 4px; font-size: 11px; font-weight: bold;
   }
-  .range-inputs { display: flex; align-items: center; gap: 4px; }
-  .range-inputs input { width: 40px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
+  .range-inputs { display: flex; align-items: center; gap: 3px; }
+  .range-inputs input { 
+    width: 38px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; font-size: 11px;
+  }
   .clear-range-btn {
-    background: #eee; border: none; border-radius: 4px; font-size: 10px; padding: 2px 6px; cursor: pointer; font-weight: bold; color: #555;
+    background: #eee; border: none; border-radius: 4px; font-size: 10px; padding: 2px 5px; cursor: pointer; font-weight: bold; color: #555;
   }
   .clear-range-btn:hover { background: #ddd; }
 
@@ -216,7 +220,7 @@
         <div class="popup-option" id="opt-practice" onclick="setFilter('practice')">▶ 🚩 Practice</div>
         <div class="popup-option" id="opt-none" onclick="setFilter('none')">⏸ Single Track</div>
         
-        <!-- Range Filter Box with Clear Button -->
+        <!-- Compact Range Filter Box -->
         <div class="range-box">
           <div style="display:flex; justify-content:space-between; align-items:center;">
             <span>📐 Range:</span>
@@ -250,12 +254,12 @@
         </div>
         <hr style="width:100%; border:0; border-top:1px solid #eee; margin:0;">
         <div class="ab-row">
-          <label style="display:flex; align-items:center; gap:4px; cursor:pointer; margin:0;">
+          <label style="display:flex; align-items:center; gap:3px; cursor:pointer; margin:0;">
             <input type="checkbox" id="enableAB" style="margin:0;"> ✂️ A-B:
           </label>
           <div class="ab-inputs">
-            <input type="number" id="loopA" placeholder="0" step="0.1" style="width:36px;"> 
-            <input type="number" id="loopB" placeholder="End" step="0.1" style="width:36px;">
+            <input type="number" id="loopA" placeholder="0" step="0.1" style="width:40px;"> 
+            <input type="number" id="loopB" placeholder="End" step="0.1" style="width:40px;">
           </div>
         </div>
         <hr style="width:100%; border:0; border-top:1px solid #eee; margin:0;">
@@ -357,7 +361,6 @@
     window.history.pushState({}, document.title, window.location.pathname);
   }
 
-  // --- RANGE FILTER CHECKER & CLEAR ---
   function getFilteredIds() {
     let ids = [];
     const rStart = parseInt(document.getElementById('rangeStart').value);
@@ -682,7 +685,6 @@
     setTimeout(() => { btnElement.innerText = originalText; markerMenu.classList.remove('show'); }, 2000);
   }
 
-  // --- PERSISTENT LOCAL STORAGE CACHE LOCKER ---
   function checkCacheStatus() {
     const cachedState = localStorage.getItem('narasimhaAllCached');
     if (cachedState === 'true') {
