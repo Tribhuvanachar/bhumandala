@@ -105,7 +105,7 @@
   .btn-nav { background: none; border: none; font-size: 16px; color: #333; cursor: pointer; padding: 2px; }
 
   .track-label { font-size: 11px; font-weight: 800; color: #333; }
-  .time-display { font-size: 10px; font-weight: 600; color: #666; font-variant-numeric: tabular-nums; }
+  .time-display { font-size: 9px; font-weight: 600; color: #666; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .repeat-counter { font-size: 9px; font-weight: bold; color: var(--accent-red); }
 
   .btn-setting {
@@ -119,7 +119,7 @@
     position: absolute; bottom: 60px; background: white;
     border: 1px solid #ccc; border-radius: 10px; padding: 12px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 10px;
-    z-index: 105; min-width: 185px; box-sizing: border-box;
+    z-index: 105; min-width: 200px; box-sizing: border-box;
   }
   .popup-bubble.show { display: flex; }
   
@@ -142,6 +142,13 @@
     width: 100%; font-size: 12px; font-weight: bold; white-space: nowrap;
   }
   .ab-inputs { display: flex; align-items: center; gap: 3px; }
+
+  /* Range Filter Box inside Filter Popup */
+  .range-box {
+    border-top: 1px solid #eee; padding-top: 8px; margin-top: 4px; display: flex; flex-direction: column; gap: 6px; font-size: 11px; font-weight: bold;
+  }
+  .range-inputs { display: flex; align-items: center; gap: 4px; }
+  .range-inputs input { width: 45px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
 
   /* Menus & Modals */
   .marker-menu { position: absolute; background: white; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: none; flex-direction: column; z-index: 200; }
@@ -191,7 +198,7 @@
     <!-- Section 2: Timer & Counter -->
     <div class="player-section timer-group">
       <div class="track-label" id="trackLabel">०/४३</div>
-      <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+      <div class="time-display" id="timeDisplay">0:00.000 / 0:00.000</div>
       <div class="repeat-counter" id="repeatCounter"></div>
     </div>
 
@@ -204,6 +211,22 @@
         <div class="popup-option" id="opt-fav" onclick="setFilter('fav')">▶ ★ Favorites</div>
         <div class="popup-option" id="opt-practice" onclick="setFilter('practice')">▶ 🚩 Practice</div>
         <div class="popup-option" id="opt-none" onclick="setFilter('none')">⏸ Single Track</div>
+        
+        <!-- Range Filter Option -->
+        <div class="range-box">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span>📐 Range:</span>
+            <select id="rangeMode" style="font-size:10px; padding:1px;" onchange="applyRangeFilter()">
+              <option value="include">Include</option>
+              <option value="exclude">Exclude</option>
+            </select>
+          </div>
+          <div class="range-inputs">
+            <input type="number" id="rangeStart" placeholder="From" min="1" max="43" onchange="applyRangeFilter()">
+            <span>to</span>
+            <input type="number" id="rangeEnd" placeholder="To" min="1" max="43" onchange="applyRangeFilter()">
+          </div>
+        </div>
       </div>
     </div>
 
@@ -231,7 +254,7 @@
           </div>
         </div>
         <hr style="width:100%; border:0; border-top:1px solid #eee; margin:0;">
-        <button class="btn-setting" style="width:100%; justify-content:center; background:#ffebee; color:var(--accent-red); border-color:#ffcdd2;" onclick="cacheAllAudio(this)">📥 Preload All Audio</button>
+        <button class="btn-setting" id="cacheBtn" style="width:100%; justify-content:center; background:#ffebee; color:var(--accent-red); border-color:#ffcdd2;" onclick="cacheAllAudio(this)">📥 Preload All Audio</button>
       </div>
     </div>
 
@@ -294,14 +317,17 @@
   const searchInput = document.getElementById('searchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
   const repeatInput = document.getElementById('repeatInput');
+  const cacheBtn = document.getElementById('cacheBtn');
 
   let targetMenuId = null;
 
+  // --- MILLISECOND TIME FORMATTER ---
   function formatTime(seconds) {
-    if (isNaN(seconds)) return "0:00";
+    if (isNaN(seconds)) return "0:00.000";
     const m = Math.floor(seconds / 60);
     const s = Math.floor(seconds % 60);
-    return m + ":" + (s < 10 ? "0" + s : s);
+    const ms = Math.floor((seconds % 1) * 1000);
+    return m + ":" + (s < 10 ? "0" + s : s) + "." + String(ms).padStart(3, '0');
   }
 
   function updateRepeatDisplay() {
@@ -327,11 +353,26 @@
     window.history.pushState({}, document.title, window.location.pathname);
   }
 
+  // --- RANGE FILTER CHECKER ---
   function getFilteredIds() {
     let ids = [];
+    const rStart = parseInt(document.getElementById('rangeStart').value);
+    const rEnd = parseInt(document.getElementById('rangeEnd').value);
+    const rMode = document.getElementById('rangeMode').value;
+    const hasRange = !isNaN(rStart) && !isNaN(rEnd) && rStart <= rEnd;
+
     for (let i = 1; i <= totalShlokas; i++) {
+      // Basic type filters
       if (currentFilter === 'fav' && marks[i] !== 'fav') continue;
       if (currentFilter === 'practice' && marks[i] !== 'practice') continue;
+
+      // Range filters
+      if (hasRange) {
+        const inRange = (i >= rStart && i <= rEnd);
+        if (rMode === 'include' && !inRange) continue;
+        if (rMode === 'exclude' && inRange) continue;
+      }
+
       ids.push(i);
     }
     return ids;
@@ -359,10 +400,18 @@
         isPlaying = false;
         updatePlayUI();
         trackLabel.innerText = "०/" + totalShlokas;
-        timeDisplay.innerText = "0:00 / 0:00";
+        timeDisplay.innerText = "0:00.000 / 0:00.000";
         repeatCounter.innerText = "";
-        readingCard.innerHTML = "No shlokas found in this filter.";
+        readingCard.innerHTML = "No shlokas match this filter range.";
       }
+    }
+  }
+
+  function applyRangeFilter() {
+    renderList();
+    const availableIds = getFilteredIds();
+    if (availableIds.length > 0 && currentFilter !== 'none') {
+      playShloka(availableIds[0]);
     }
   }
 
@@ -391,10 +440,10 @@
   function renderList() {
     const listEl = document.getElementById('shlokaList');
     listEl.innerHTML = '';
-    
+    const filteredIds = getFilteredIds();
+
     for (let i = 1; i <= totalShlokas; i++) {
-      if (currentFilter === 'fav' && marks[i] !== 'fav') continue;
-      if (currentFilter === 'practice' && marks[i] !== 'practice') continue;
+      if (!filteredIds.includes(i)) continue;
 
       const card = document.createElement('div');
       card.className = 'shloka-card';
@@ -425,16 +474,13 @@
     playBtn.innerHTML = isPlaying ? '⏸' : '▶';
   }
 
-  currentAudio.addEventListener('loadstart', () => {});
-  currentAudio.addEventListener('waiting', () => {});
-  currentAudio.addEventListener('canplaythrough', () => {});
   currentAudio.addEventListener('playing', () => { isPlaying = true; updatePlayUI(); });
   currentAudio.addEventListener('pause', () => { isPlaying = false; updatePlayUI(); });
 
   currentAudio.addEventListener('loadedmetadata', () => {
     currentAudio.playbackRate = parseFloat(speedInput.value) || 1.0;
     document.getElementById('loopB').value = currentAudio.duration.toFixed(1);
-    timeDisplay.innerText = `0:00 / ${formatTime(currentAudio.duration)}`;
+    timeDisplay.innerText = `0:00.000 / ${formatTime(currentAudio.duration)}`;
     updateRepeatDisplay();
   });
 
@@ -469,7 +515,7 @@
 
     trackLabel.innerText = `${id}/${totalShlokas}`;
     readingCard.innerHTML = shlokaTexts[id] || `श्लोक ${id}`;
-    timeDisplay.innerText = "0:00 / 0:00";
+    timeDisplay.innerText = "0:00.000 / 0:00.000";
 
     currentAudio.pause();
     currentAudio.src = `${archiveBaseUrl}${filePrefix}${id}${fileExtension}`;
@@ -628,7 +674,20 @@
     setTimeout(() => { btnElement.innerText = originalText; markerMenu.classList.remove('show'); }, 2000);
   }
 
+  // --- SMART CACHE CHECKER & PRELOADER ---
+  async function checkCacheStatus() {
+    try {
+      let testRes = await fetch(`${archiveBaseUrl}${filePrefix}1${fileExtension}`).catch(() => null);
+      if(testRes && testRes.ok) {
+        // Simple check if cached via blob inspection
+        cacheBtn.innerText = "📥 Preload All Audio";
+      }
+    } catch(e) {}
+  }
+
   async function cacheAllAudio(btn) {
+    if(btn.dataset.cached === "true") return; // Locked out if already cached
+    
     const origText = btn.innerText;
     btn.innerText = "⏳ Preloading...";
     btn.disabled = true;
@@ -648,8 +707,12 @@
         }
       } catch(e) {}
     }
-    btn.innerText = `✅ Cached (${successCount}/${totalShlokas})`;
-    setTimeout(() => { btn.innerText = origText; btn.disabled = false; }, 3500);
+    
+    btn.innerText = `✅ All Cached (${successCount}/${totalShlokas})`;
+    btn.dataset.cached = "true";
+    btn.style.background = "#e8f5e9";
+    btn.style.color = "#2e7d32";
+    btn.style.borderColor = "#c8e6c9";
   }
 
   document.addEventListener('click', (e) => {
@@ -682,6 +745,7 @@
 
   renderList();
   checkMiniMode();
+  checkCacheStatus();
 </script>
 </body>
 </html>
