@@ -31,13 +31,18 @@
   .header h1 { margin: 0; font-size: 20px; color: var(--accent-red); font-weight: 800; }
   .header .author { font-size: 10px; color: #555; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 10px; }
 
-  .search-bar-container { margin-bottom: 12px; }
+  .search-bar-container { position: relative; margin-bottom: 12px; }
   .search-input {
-    width: 100%; padding: 10px 14px; border: 1px solid var(--card-border);
+    width: 100%; padding: 10px 36px 10px 14px; border: 1px solid var(--card-border);
     border-radius: 20px; font-size: 14px; background: #fff; box-sizing: border-box;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); outline: none; transition: border 0.2s;
   }
   .search-input:focus { border-color: var(--accent-red); }
+  
+  .clear-search-btn {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; font-size: 16px; color: #999; cursor: pointer; display: none;
+  }
 
   /* Mini-Mode */
   .expand-btn {
@@ -81,7 +86,7 @@
   .is-practice { color: var(--accent-red) !important; }
   .has-note { color: #1976d2 !important; }
 
-  /* Perfectly Balanced 4-Section Bottom Toolbar */
+  /* Bottom Toolbar */
   .bottom-player {
     position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg);
     border-top: 1px solid #e0e0e0; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 100;
@@ -93,9 +98,7 @@
     padding: 8px 10px; gap: 6px;
   }
   
-  /* 4 Equal Grid Sections */
   .player-section { flex: 1; display: flex; align-items: center; justify-content: center; }
-  
   .controls-main { gap: 8px; justify-content: flex-start; }
   .timer-group { flex-direction: column; text-align: center; }
   .filter-section { justify-content: center; }
@@ -117,12 +120,12 @@
     white-space: nowrap;
   }
 
-  /* Compact Popups (Filter & Tools) */
+  /* Compact Popups (Fixed Layout Wrapping) */
   .popup-bubble {
     position: absolute; bottom: 60px; background: white;
-    border: 1px solid #ccc; border-radius: 10px; padding: 10px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 8px;
-    z-index: 105; min-width: 140px;
+    border: 1px solid #ccc; border-radius: 10px; padding: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 10px;
+    z-index: 105; min-width: 175px; box-sizing: border-box;
   }
   .popup-bubble.show { display: flex; }
   
@@ -135,7 +138,7 @@
 
   .popup-row { 
     display: flex; align-items: center; justify-content: space-between; 
-    font-size: 12px; font-weight: bold; gap: 10px;
+    font-size: 12px; font-weight: bold; width: 100%; gap: 6px;
   }
   .popup-bubble input[type="range"] { width: 75px; cursor: pointer; }
   .popup-bubble input[type="number"] { width: 40px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
@@ -162,9 +165,10 @@
     <div class="author">By Tribhuvan Achar</div>
   </div>
 
-  <!-- Top Search Bar -->
+  <!-- Top Search Bar with Clear Button -->
   <div class="search-bar-container">
     <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search shloka number or text..." oninput="handleSearch()">
+    <button class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()">✖</button>
   </div>
 
   <div class="reading-card" id="readingCard">
@@ -176,7 +180,7 @@
   </div>
 </div>
 
-<!-- Bottom Toolbar (Equally Spaced 4 Sections) -->
+<!-- Bottom Toolbar -->
 <div class="bottom-player">
   <div class="player-inner">
     
@@ -205,7 +209,7 @@
       </div>
     </div>
 
-    <!-- Section 4: Tools Menu -->
+    <!-- Section 4: Tools Menu (Fixed Width/Layout) -->
     <div class="player-section tools-section" style="position:relative;">
       <button class="btn-setting" onclick="togglePopup('toolsPopup')" title="Tools">⚙️ Tools</button>
       
@@ -219,10 +223,12 @@
           <input type="number" id="repeatInput" value="1" min="1">
         </div>
         <hr style="width:100%; border:0; border-top:1px solid #eee; margin:0;">
-        <div class="popup-row">
+        <div class="popup-row" style="white-space: nowrap;">
           <span><input type="checkbox" id="enableAB"> ✂️ A-B:</span>
-          <input type="number" id="loopA" placeholder="0" step="0.1" style="width:35px;"> 
-          <input type="number" id="loopB" placeholder="End" step="0.1" style="width:35px;">
+          <div style="display:flex; gap:3px;">
+            <input type="number" id="loopA" placeholder="0" step="0.1" style="width:34px;"> 
+            <input type="number" id="loopB" placeholder="End" step="0.1" style="width:34px;">
+          </div>
         </div>
       </div>
     </div>
@@ -282,6 +288,8 @@
   const filterPopup = document.getElementById('filterPopup');
   const markerMenu = document.getElementById('markerMenu');
   const filterBtn = document.getElementById('filterBtn');
+  const searchInput = document.getElementById('searchInput');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
 
   let targetMenuId = null;
 
@@ -306,12 +314,10 @@
     window.history.pushState({}, document.title, window.location.pathname);
   }
 
-  // --- FILTER & RENDER LOGIC ---
   function setFilter(type) {
     currentFilter = type;
     filterPopup.classList.remove('show');
     
-    // Update button text & highlight active option
     document.querySelectorAll('.popup-option').forEach(el => el.classList.remove('selected'));
     if(type === 'all') { filterBtn.innerText = "filter: All"; document.getElementById('opt-all').classList.add('selected'); }
     else if(type === 'fav') { filterBtn.innerText = "filter: ★"; document.getElementById('opt-fav').classList.add('selected'); }
@@ -322,13 +328,13 @@
   }
 
   function handleSearch() {
-    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const query = searchInput.value.toLowerCase().trim();
+    clearSearchBtn.style.display = query ? 'block' : 'none';
     const cards = document.querySelectorAll('.shloka-card');
     
     cards.forEach(card => {
       const id = card.id.replace('shloka-', '');
       const text = card.querySelector('.shloka-text-body').innerText.toLowerCase();
-      
       if (id.includes(query) || text.includes(query)) {
         card.style.display = 'flex';
       } else {
@@ -337,12 +343,17 @@
     });
   }
 
+  function clearSearch() {
+    searchInput.value = '';
+    clearSearchBtn.style.display = 'none';
+    renderList();
+  }
+
   function renderList() {
     const listEl = document.getElementById('shlokaList');
     listEl.innerHTML = '';
     
     for (let i = 1; i <= totalShlokas; i++) {
-      // Respect Filter visibility
       if (currentFilter === 'fav' && marks[i] !== 'fav') continue;
       if (currentFilter === 'practice' && marks[i] !== 'practice') continue;
 
@@ -480,7 +491,6 @@
     if (currentFilter === 'none' || document.body.classList.contains('mini-mode')) {
       isPlaying = false; updateUI(); return;
     }
-    
     let nextId = activeId + 1;
     if (currentFilter === 'fav') { while (nextId <= totalShlokas && marks[nextId] !== 'fav') nextId++; }
     else if (currentFilter === 'practice') { while (nextId <= totalShlokas && marks[nextId] !== 'practice') nextId++; }
@@ -490,7 +500,6 @@
   }
 
   function togglePopup(id) {
-    // Close other popups first
     document.querySelectorAll('.popup-bubble').forEach(p => { if(p.id !== id) p.classList.remove('show'); });
     const popup = document.getElementById(id);
     popup.classList.toggle('show');
