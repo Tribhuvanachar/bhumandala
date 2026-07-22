@@ -17,13 +17,6 @@
     background-color: var(--bg-main); color: var(--text-primary);
   }
 
-  #loadingBar {
-    position: fixed; top: 0; left: 0; height: 3px; background: #ff1744;
-    width: 0%; z-index: 9999; transition: width 0.2s ease; opacity: 0;
-  }
-  .is-loading #loadingBar { opacity: 1; animation: loadPulse 1.5s infinite; }
-  @keyframes loadPulse { 0% { width: 10%; } 50% { width: 65%; } 100% { width: 90%; } }
-
   .app-container { max-width: 600px; margin: 0 auto; padding: 12px; }
 
   /* Header & Search */
@@ -113,6 +106,7 @@
 
   .track-label { font-size: 11px; font-weight: 800; color: #333; }
   .time-display { font-size: 10px; font-weight: 600; color: #666; font-variant-numeric: tabular-nums; }
+  .repeat-counter { font-size: 9px; font-weight: bold; color: var(--accent-red); }
 
   .btn-setting {
     background: #f0f4f8; border: 1px solid #bccbde; border-radius: 14px; padding: 4px 8px;
@@ -123,9 +117,9 @@
   /* Popups */
   .popup-bubble {
     position: absolute; bottom: 60px; background: white;
-    border: 1px solid #ccc; border-radius: 10px; padding: 10px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 8px;
-    z-index: 105; min-width: 140px;
+    border: 1px solid #ccc; border-radius: 10px; padding: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 10px;
+    z-index: 105; min-width: 185px; box-sizing: border-box;
   }
   .popup-bubble.show { display: flex; }
   
@@ -143,6 +137,12 @@
   .popup-bubble input[type="range"] { width: 75px; cursor: pointer; }
   .popup-bubble input[type="number"] { width: 40px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
 
+  .ab-row {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; font-size: 12px; font-weight: bold; white-space: nowrap;
+  }
+  .ab-inputs { display: flex; align-items: center; gap: 3px; }
+
   /* Menus & Modals */
   .marker-menu { position: absolute; background: white; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: none; flex-direction: column; z-index: 200; }
   .marker-menu.show { display: flex; }
@@ -154,8 +154,6 @@
 </style>
 </head>
 <body>
-
-<div id="loadingBar"></div>
 
 <div class="app-container">
   <button class="expand-btn" onclick="exitMiniMode()">↙ Full Library</button>
@@ -194,6 +192,7 @@
     <div class="player-section timer-group">
       <div class="track-label" id="trackLabel">०/४३</div>
       <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+      <div class="repeat-counter" id="repeatCounter"></div>
     </div>
 
     <!-- Section 3: Filter Menu -->
@@ -219,16 +218,20 @@
         </div>
         <div class="popup-row">
           <span>🔁 Rep:</span>
-          <input type="number" id="repeatInput" value="1" min="1">
+          <input type="number" id="repeatInput" value="1" min="1" onchange="updateRepeatDisplay()">
         </div>
         <hr style="width:100%; border:0; border-top:1px solid #eee; margin:0;">
-        <div class="popup-row" style="white-space: nowrap;">
-          <span><input type="checkbox" id="enableAB"> ✂️ A-B:</span>
-          <div style="display:flex; gap:3px;">
-            <input type="number" id="loopA" placeholder="0" step="0.1" style="width:34px;"> 
-            <input type="number" id="loopB" placeholder="End" step="0.1" style="width:34px;">
+        <div class="ab-row">
+          <label style="display:flex; align-items:center; gap:4px; cursor:pointer; margin:0;">
+            <input type="checkbox" id="enableAB" style="margin:0;"> ✂️ A-B:
+          </label>
+          <div class="ab-inputs">
+            <input type="number" id="loopA" placeholder="0" step="0.1" style="width:36px;"> 
+            <input type="number" id="loopB" placeholder="End" step="0.1" style="width:36px;">
           </div>
         </div>
+        <hr style="width:100%; border:0; border-top:1px solid #eee; margin:0;">
+        <button class="btn-setting" style="width:100%; justify-content:center; background:#ffebee; color:var(--accent-red); border-color:#ffcdd2;" onclick="cacheAllAudio(this)">📥 Preload All Audio</button>
       </div>
     </div>
 
@@ -282,6 +285,7 @@
   const speedVal = document.getElementById('speedVal');
   const trackLabel = document.getElementById('trackLabel');
   const timeDisplay = document.getElementById('timeDisplay');
+  const repeatCounter = document.getElementById('repeatCounter');
   const readingCard = document.getElementById('readingCard');
   const toolsPopup = document.getElementById('toolsPopup');
   const filterPopup = document.getElementById('filterPopup');
@@ -289,6 +293,7 @@
   const filterBtn = document.getElementById('filterBtn');
   const searchInput = document.getElementById('searchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
+  const repeatInput = document.getElementById('repeatInput');
 
   let targetMenuId = null;
 
@@ -297,6 +302,15 @@
     const m = Math.floor(seconds / 60);
     const s = Math.floor(seconds % 60);
     return m + ":" + (s < 10 ? "0" + s : s);
+  }
+
+  function updateRepeatDisplay() {
+    const targetRepeat = parseInt(repeatInput.value) || 1;
+    if (activeId && targetRepeat > 1) {
+      repeatCounter.innerText = `Loop ${currentLoopCount + 1}/${targetRepeat}`;
+    } else {
+      repeatCounter.innerText = "";
+    }
   }
 
   function checkMiniMode() {
@@ -313,7 +327,6 @@
     window.history.pushState({}, document.title, window.location.pathname);
   }
 
-  // --- GET ACTIVE FILTERED ARRAY ---
   function getFilteredIds() {
     let ids = [];
     for (let i = 1; i <= totalShlokas; i++) {
@@ -324,7 +337,6 @@
     return ids;
   }
 
-  // --- SET FILTER & AUTO-PLAY FIRST MATCH ---
   function setFilter(type) {
     currentFilter = type;
     filterPopup.classList.remove('show');
@@ -337,11 +349,19 @@
 
     renderList();
 
-    // Auto-trigger playback on the first item of the new filter
     if (type !== 'none') {
       const availableIds = getFilteredIds();
       if (availableIds.length > 0) {
         playShloka(availableIds[0]);
+      } else {
+        currentAudio.pause();
+        activeId = null;
+        isPlaying = false;
+        updatePlayUI();
+        trackLabel.innerText = "०/" + totalShlokas;
+        timeDisplay.innerText = "0:00 / 0:00";
+        repeatCounter.innerText = "";
+        readingCard.innerHTML = "No shlokas found in this filter.";
       }
     }
   }
@@ -401,30 +421,29 @@
     }
   }
 
-  function setLoading(isLoading) {
-    if (isLoading) document.body.classList.add('is-loading');
-    else document.body.classList.remove('is-loading');
+  function updatePlayUI() {
+    playBtn.innerHTML = isPlaying ? '⏸' : '▶';
   }
 
-  currentAudio.addEventListener('loadstart', () => setLoading(true));
-  currentAudio.addEventListener('waiting', () => setLoading(true));
-  currentAudio.addEventListener('canplaythrough', () => setLoading(false));
-  currentAudio.addEventListener('playing', () => setLoading(false));
-  currentAudio.addEventListener('pause', () => setLoading(false));
+  currentAudio.addEventListener('loadstart', () => {});
+  currentAudio.addEventListener('waiting', () => {});
+  currentAudio.addEventListener('canplaythrough', () => {});
+  currentAudio.addEventListener('playing', () => { isPlaying = true; updatePlayUI(); });
+  currentAudio.addEventListener('pause', () => { isPlaying = false; updatePlayUI(); });
 
   currentAudio.addEventListener('loadedmetadata', () => {
     currentAudio.playbackRate = parseFloat(speedInput.value) || 1.0;
     document.getElementById('loopB').value = currentAudio.duration.toFixed(1);
     timeDisplay.innerText = `0:00 / ${formatTime(currentAudio.duration)}`;
+    updateRepeatDisplay();
   });
 
   currentAudio.addEventListener('error', () => {
-    setLoading(false);
     if (!attemptedSpaceFallback && activeId) {
       attemptedSpaceFallback = true;
       currentAudio.src = `${archiveBaseUrl}${filePrefix}${activeId}%E2%80%8B${fileExtension}`;
       currentAudio.load();
-      currentAudio.play().then(() => { isPlaying = true; updateUI(); }).catch(e => console.log(e));
+      currentAudio.play().then(() => { isPlaying = true; updatePlayUI(); }).catch(e => console.log(e));
     }
   });
 
@@ -432,13 +451,14 @@
     if (activeId === id && isPlaying) {
       currentAudio.pause();
       isPlaying = false;
-      updateUI();
+      updatePlayUI();
       return;
     }
 
     activeId = id;
     currentLoopCount = 0;
     attemptedSpaceFallback = false;
+    updateRepeatDisplay();
     
     document.querySelectorAll('.shloka-card').forEach(c => c.classList.remove('active'));
     const activeCard = document.getElementById(`shloka-${id}`);
@@ -461,15 +481,13 @@
     document.getElementById('loopA').value = "0.0";
     document.getElementById('loopB').value = "";
 
-    setLoading(true);
     let playPromise = currentAudio.play();
     if (playPromise !== undefined) {
       playPromise.then(() => {
         isPlaying = true;
         currentAudio.playbackRate = targetSpeed;
-        updateUI();
+        updatePlayUI();
       }).catch(err => {
-        setLoading(false);
         if (err.name !== 'AbortError') console.error("Playback error:", err);
       });
     }
@@ -480,13 +498,12 @@
       const availableIds = getFilteredIds();
       if(availableIds.length > 0) playShloka(availableIds[0]);
     } else if (isPlaying) { 
-      currentAudio.pause(); isPlaying = false; updateUI(); 
+      currentAudio.pause(); isPlaying = false; updatePlayUI(); 
     } else { 
-      currentAudio.play(); isPlaying = true; updateUI(); 
+      currentAudio.play(); isPlaying = true; updatePlayUI(); 
     }
   }
 
-  // --- FILTERED NEXT / PREV NAVIGATION ---
   function playNextFiltered() {
     const ids = getFilteredIds();
     if (ids.length === 0) return;
@@ -494,7 +511,10 @@
     if (currentIndex !== -1 && currentIndex < ids.length - 1) {
       playShloka(ids[currentIndex + 1]);
     } else {
-      playShloka(ids[0]); // Loop back to start of filter
+      currentAudio.pause();
+      isPlaying = false;
+      updatePlayUI();
+      repeatCounter.innerText = "";
     }
   }
 
@@ -505,7 +525,7 @@
     if (currentIndex > 0) {
       playShloka(ids[currentIndex - 1]);
     } else {
-      playShloka(ids[ids.length - 1]); // Loop to end of filter
+      playShloka(ids[ids.length - 1]);
     }
   }
 
@@ -521,18 +541,21 @@
 
   currentAudio.addEventListener('ended', () => {
     currentLoopCount++;
-    const targetRepeat = parseInt(document.getElementById('repeatInput').value) || 1;
+    const targetRepeat = parseInt(repeatInput.value) || 1;
     if (currentLoopCount < targetRepeat) {
       currentAudio.currentTime = parseFloat(document.getElementById('loopA').value) || 0;
+      updateRepeatDisplay();
       currentAudio.play();
     } else {
+      currentLoopCount = 0;
+      updateRepeatDisplay();
       handleNextAutoplay();
     }
   });
 
   function handleNextAutoplay() {
     if (currentFilter === 'none' || document.body.classList.contains('mini-mode')) {
-      isPlaying = false; updateUI(); return;
+      isPlaying = false; updatePlayUI(); return;
     }
     playNextFiltered();
   }
@@ -603,6 +626,30 @@
       btnElement.innerText = originalText;
     }
     setTimeout(() => { btnElement.innerText = originalText; markerMenu.classList.remove('show'); }, 2000);
+  }
+
+  async function cacheAllAudio(btn) {
+    const origText = btn.innerText;
+    btn.innerText = "⏳ Preloading...";
+    btn.disabled = true;
+    
+    let successCount = 0;
+    for(let i=1; i<=totalShlokas; i++) {
+      try {
+        let u = `${archiveBaseUrl}${filePrefix}${i}${fileExtension}`;
+        let res = await fetch(u);
+        if(!res.ok) {
+          u = `${archiveBaseUrl}${filePrefix}${i}%E2%80%8B${fileExtension}`;
+          res = await fetch(u);
+        }
+        if(res.ok) {
+          await res.blob();
+          successCount++;
+        }
+      } catch(e) {}
+    }
+    btn.innerText = `✅ Cached (${successCount}/${totalShlokas})`;
+    setTimeout(() => { btn.innerText = origText; btn.disabled = false; }, 3500);
   }
 
   document.addEventListener('click', (e) => {
