@@ -8,141 +8,94 @@
   :root {
     --bg-main: #f4f6f9; --card-bg: #fff; --card-border: #e0e6ed;
     --card-active: #ffebee; --text-primary: #1a1a1a; --text-sanskrit: #b71c1c;
-    --accent-red: #d32f2f; --accent-gold: #ffa000; --panel-bg: #fff;
+    --accent-red: #d32f2f; --accent-gold: #ffa000;
   }
-  body {
-    margin: 0; padding-bottom: 90px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--bg-main); color: var(--text-primary);
-  }
+  body { margin: 0; padding-bottom: 90px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg-main); color: var(--text-primary); }
   .app-container { max-width: 600px; margin: 0 auto; padding: 12px; }
+
+  /* Utility Flex Classes */
+  .flex-row { display: flex; align-items: center; }
+  .flex-between { display: flex; align-items: center; justify-content: space-between; }
+  .flex-center { display: flex; align-items: center; justify-content: center; }
 
   /* Header & Search */
   .header { text-align: center; padding: 10px 0 5px; }
   .header h1 { margin: 0; font-size: 20px; color: var(--accent-red); font-weight: 800; }
   .header .author { font-size: 10px; color: #555; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 10px; }
-
-  .search-bar-container { position: relative; margin-bottom: 12px; }
-  .search-input {
-    width: 100%; padding: 10px 36px 10px 14px; border: 1px solid var(--card-border);
-    border-radius: 20px; font-size: 14px; background: #fff; box-sizing: border-box; outline: none;
-  }
+  .search-container { position: relative; margin-bottom: 12px; }
+  .search-input { width: 100%; padding: 10px 36px 10px 14px; border: 1px solid var(--card-border); border-radius: 20px; font-size: 14px; box-sizing: border-box; outline: none; }
   .search-input:focus { border-color: var(--accent-red); }
-  .clear-search-btn {
-    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-    background: none; border: none; font-size: 16px; color: #999; cursor: pointer; display: none;
-  }
+  .clear-search-btn { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 16px; color: #999; cursor: pointer; display: none; }
 
   /* Mini-Mode */
-  .expand-btn {
-    display: none; background: var(--accent-red); color: white; border: none;
-    padding: 8px 16px; border-radius: 20px; margin: 0 auto 15px; font-size: 13px; font-weight: bold; cursor: pointer;
-  }
+  .expand-btn { display: none; background: var(--accent-red); color: #fff; border: none; padding: 8px 16px; border-radius: 20px; margin: 0 auto 15px; font-size: 13px; font-weight: bold; cursor: pointer; }
   body.mini-mode .expand-btn { display: block; }
-  body.mini-mode .header, body.mini-mode .shloka-list, body.mini-mode .search-bar-container { display: none; }
-  body.mini-mode { background-color: #121212; display: flex; flex-direction: column; justify-content: center; height: 100vh; padding-bottom: 0; }
+  body.mini-mode .header, body.mini-mode .shloka-list, body.mini-mode .search-container { display: none; }
+  body.mini-mode { background: #121212; display: flex; flex-direction: column; justify-content: center; height: 100vh; padding-bottom: 0; }
   body.mini-mode .reading-card { background: #1e1e1e; border: 1px solid #333; color: #fff; margin: 0 15px; border-radius: 16px; }
   body.mini-mode .bottom-player { position: relative; background: transparent; border: none; box-shadow: none; margin-top: 20px; }
-  body.mini-mode .btn-setting, body.mini-mode .track-label, body.mini-mode .time-display { color: #aaa; background: #333; border: none; }
+  body.mini-mode .btn-sm, body.mini-mode .track-label, body.mini-mode .time-display { color: #aaa; background: #333; border: none; }
 
-  /* Reading Card & List */
-  .reading-card {
-    background: var(--card-bg); border: 2px solid #ffcdd2; border-radius: 12px;
-    padding: 20px 16px; text-align: center; font-size: 20px; color: var(--text-sanskrit); 
-    line-height: 1.5; font-weight: 600; margin-bottom: 12px; min-height: 60px; display: flex; align-items: center; justify-content: center;
-  }
+  /* Reading & List Cards */
+  .reading-card { background: var(--card-bg); border: 2px solid #ffcdd2; border-radius: 12px; padding: 20px 16px; text-align: center; font-size: 20px; color: var(--text-sanskrit); line-height: 1.5; font-weight: 600; margin-bottom: 12px; min-height: 60px; display: flex; align-items: center; justify-content: center; }
   .shloka-list { display: flex; flex-direction: column; gap: 8px; }
-  .shloka-card {
-    background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px;
-    padding: 10px 12px; display: flex; align-items: center; gap: 10px; transition: background 0.2s;
-  }
-  .shloka-card.active { background-color: var(--card-active); border-color: var(--accent-red); border-left: 4px solid var(--accent-red); }
+  .shloka-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; gap: 10px; }
+  .shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left: 4px solid var(--accent-red); }
   .shloka-num { font-size: 12px; font-weight: bold; color: #666; min-width: 20px; }
-  .shloka-text-body { flex-grow: 1; font-size: 15px; color: var(--text-sanskrit); line-height: 1.4; font-weight: 500; cursor: pointer; }
-  .card-actions { display: flex; gap: 6px; align-items: center; }
+  .shloka-text { flex-grow: 1; font-size: 15px; color: var(--text-sanskrit); line-height: 1.4; font-weight: 500; cursor: pointer; }
   .btn-icon { background: none; border: none; font-size: 16px; cursor: pointer; color: #b0bec5; padding: 4px; }
   .is-fav { color: var(--accent-gold) !important; }
   .is-practice { color: var(--accent-red) !important; }
   .has-note { color: #1976d2 !important; }
 
-  /* Bottom Toolbar */
-  .bottom-player {
-    position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg);
-    border-top: 1px solid #e0e0e0; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 100;
-  }
-  .player-inner {
-    max-width: 600px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; gap: 6px;
-  }
-  .player-section { flex: 1; display: flex; align-items: center; justify-content: center; }
-  .controls-main { gap: 8px; justify-content: flex-start; }
-  .timer-group { flex-direction: column; text-align: center; }
-  .filter-section { justify-content: center; position: relative; }
-  .tools-section { justify-content: flex-end; position: relative; }
+  /* Bottom Toolbar Grid */
+  .bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #e0e0e0; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 100; }
+  .player-inner { max-width: 600px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 8px 10px; gap: 6px; }
+  .controls-main { display: flex; gap: 10px; justify-content: flex-start; }
+  .timer-group { display: flex; flex-direction: column; text-align: center; }
+  .tools-main { display: flex; gap: 6px; justify-content: flex-end; position: relative; }
 
-  .btn-play-main {
-    background: var(--accent-red); color: white; border: none; width: 38px; height: 38px;
-    border-radius: 50%; font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
-  }
+  .btn-play { background: var(--accent-red); color: #fff; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 16px; cursor: pointer; box-shadow: 0 2px 6px rgba(211, 47, 47, 0.4); flex-shrink: 0; }
   .btn-nav { background: none; border: none; font-size: 16px; color: #333; cursor: pointer; padding: 2px; }
+  .btn-sm { background: #f0f4f8; border: 1px solid #bccbde; border-radius: 14px; padding: 5px 10px; font-size: 11px; font-weight: bold; color: #222; cursor: pointer; white-space: nowrap; }
+
   .track-label { font-size: 11px; font-weight: 800; color: #333; }
-  .time-display { font-size: 9px; font-weight: 600; color: #666; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .time-display { font-size: 9px; font-weight: 600; color: #666; font-variant-numeric: tabular-nums; }
   .repeat-counter { font-size: 9px; font-weight: bold; color: var(--accent-red); }
 
-  .btn-setting {
-    background: #f0f4f8; border: 1px solid #bccbde; border-radius: 14px; padding: 4px 8px;
-    font-size: 11px; font-weight: bold; color: #222; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap;
-  }
-
-  /* Compact Popups */
-  .popup-bubble {
-    position: absolute; bottom: 60px; background: white; border: 1px solid #ccc;
-    border-radius: 10px; padding: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    display: none; flex-direction: column; gap: 8px; z-index: 105; width: 220px; box-sizing: border-box;
-  }
-  .popup-bubble.show { display: flex; }
-  .popup-option {
-    padding: 5px 8px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: 6px; display: flex; align-items: center; gap: 6px;
-  }
-  .popup-option:hover { background: #f0f4f8; }
-  .popup-option.selected { background: #ffebee; color: var(--accent-red); }
-
-  .popup-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: bold; width: 100%; gap: 6px; }
-  .popup-bubble input[type="range"] { width: 90px; cursor: pointer; }
-  .popup-bubble input[type="number"] { width: 45px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
-
-  /* Streamlined A-B Row */
-  .ab-container { display: flex; flex-direction: column; gap: 4px; width: 100%; font-size: 12px; font-weight: bold; }
-  .ab-row-inputs { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
-  .ab-row-inputs input { width: 45px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
-
-  /* Compact Range Box */
-  .range-box {
-    border-top: 1px solid #eee; padding-top: 6px; margin-top: 2px; display: flex; flex-direction: column; gap: 4px; font-size: 11px; font-weight: bold;
-  }
-  .range-row-flex { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
-  .range-row-flex input { width: 42px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; font-size: 11px; }
-  .clear-range-btn { background: #eee; border: none; border-radius: 4px; font-size: 10px; padding: 2px 6px; cursor: pointer; color: #555; }
+  /* Popups */
+  .popup { position: absolute; bottom: 55px; right: 0; background: #fff; border: 1px solid #ccc; border-radius: 10px; padding: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 10px; z-index: 105; width: 210px; box-sizing: border-box; }
+  .popup.show { display: flex; }
+  .popup hr { width: 100%; border: 0; border-top: 1px solid #eee; margin: 0; }
+  
+  /* Popup Layouts */
+  .pop-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: bold; width: 100%; }
+  .pop-input { width: 45px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 3px; font-size: 11px; }
+  .pop-range { width: 75px; cursor: pointer; }
+  .pop-item { padding: 6px 10px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: 6px; display: flex; align-items: center; gap: 6px; }
+  .pop-item:hover { background: #f0f4f8; }
+  .pop-item.active { background: #ffebee; color: var(--accent-red); }
 
   /* Menus & Modals */
-  .marker-menu { position: absolute; background: white; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: none; flex-direction: column; z-index: 200; }
-  .marker-menu.show { display: flex; }
-  .marker-menu div { padding: 8px 14px; cursor: pointer; font-size: 13px; font-weight: 600; display: flex; gap: 8px; }
+  .context-menu { position: absolute; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: none; flex-direction: column; z-index: 200; }
+  .context-menu.show { display: flex; }
+  .context-menu div { padding: 8px 14px; cursor: pointer; font-size: 13px; font-weight: 600; display: flex; gap: 8px; }
+  
   .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 300; }
-  .modal-content { background: white; padding: 16px; border-radius: 10px; width: 80%; max-width: 300px; }
-  .modal-content textarea { width: 100%; height: 70px; margin: 8px 0; padding: 8px; border-radius: 6px; border: 1px solid #ccc; font-family: inherit; }
+  .modal-content { background: #fff; padding: 16px; border-radius: 10px; width: 80%; max-width: 300px; }
+  .modal-content textarea { width: 100%; height: 70px; margin: 8px 0; padding: 8px; border-radius: 6px; border: 1px solid #ccc; font-family: inherit; box-sizing: border-box; }
 </style>
 </head>
 <body>
 
 <div class="app-container">
   <button class="expand-btn" onclick="exitMiniMode()">↙ Full Library</button>
-  
   <div class="header">
     <h1>॥ प्रह्लादकृत नृसिंह स्तोत्र ॥</h1>
     <div class="author">By Tribhuvan Achar</div>
   </div>
 
-  <div class="search-bar-container">
+  <div class="search-container">
     <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search shloka number or text..." oninput="handleSearch()">
     <button class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()">✖</button>
   </div>
@@ -155,80 +108,79 @@
 <div class="bottom-player">
   <div class="player-inner">
     
-    <div class="player-section controls-main">
+    <div class="controls-main flex-row">
       <button class="btn-nav" onclick="playPrevFiltered()">⏮</button>
-      <button class="btn-play-main" id="playBtn" onclick="togglePlay()">▶</button>
+      <button class="btn-play flex-center" id="playBtn" onclick="togglePlay()">▶</button>
       <button class="btn-nav" onclick="playNextFiltered()">⏭</button>
     </div>
 
-    <div class="player-section timer-group">
+    <div class="timer-group">
       <div class="track-label" id="trackLabel">०/४३</div>
       <div class="time-display" id="timeDisplay">0:00.000 / 0:00.000</div>
       <div class="repeat-counter" id="repeatCounter"></div>
     </div>
 
-    <div class="player-section filter-section">
-      <button class="btn-setting" onclick="togglePopup('filterPopup')" id="filterBtn">filter: All</button>
-      
-      <div class="popup-bubble" id="filterPopup" style="left: 0; right: auto;">
-        <div class="popup-option selected" id="opt-all" onclick="setFilter('all')">▶ All</div>
-        <div class="popup-option" id="opt-fav" onclick="setFilter('fav')">▶ ★ Favorites</div>
-        <div class="popup-option" id="opt-practice" onclick="setFilter('practice')">▶ 🚩 Practice</div>
-        <div class="popup-option" id="opt-none" onclick="setFilter('none')">⏸ Single Track</div>
-        
-        <div class="range-box">
-          <div class="range-row-flex">
+    <!-- Right Side Buttons -->
+    <div class="tools-main flex-row">
+      <button class="btn-sm" onclick="togglePopup('filterPopup')" id="filterBtn">🔽 All</button>
+      <button class="btn-sm" onclick="togglePopup('toolsPopup')" title="Tools">⚙️</button>
+
+      <!-- Filter Popup -->
+      <div class="popup" id="filterPopup">
+        <div class="pop-item active" id="opt-all" onclick="setFilter('all')">▶ All</div>
+        <div class="pop-item" id="opt-fav" onclick="setFilter('fav')">▶ ★ Favorites</div>
+        <div class="pop-item" id="opt-practice" onclick="setFilter('practice')">▶ 🚩 Practice</div>
+        <div class="pop-item" id="opt-none" onclick="setFilter('none')">⏸ Single Track</div>
+        <hr>
+        <!-- Compact Range Box -->
+        <div style="font-size: 11px; font-weight: bold;">
+          <div class="flex-between" style="margin-bottom:6px;">
             <span>📐 Range:</span>
-            <select id="rangeMode" style="font-size:10px; padding:1px;" onchange="applyRangeFilter()">
+            <select id="rangeMode" style="font-size:10px; padding:2px;" onchange="applyRangeFilter()">
               <option value="include">Include</option>
               <option value="exclude">Exclude</option>
             </select>
           </div>
-          <div class="range-row-flex">
-            <input type="number" id="rangeStart" placeholder="From" min="1" max="43" onchange="applyRangeFilter()">
+          <div class="flex-between">
+            <input class="pop-input" type="number" id="rangeStart" placeholder="From" min="1" max="43" onchange="applyRangeFilter()">
             <span>to</span>
-            <input type="number" id="rangeEnd" placeholder="To" min="1" max="43" onchange="applyRangeFilter()">
-            <button class="clear-range-btn" onclick="clearRange()">Clear</button>
+            <input class="pop-input" type="number" id="rangeEnd" placeholder="To" min="1" max="43" onchange="applyRangeFilter()">
+            <button class="btn-sm" style="padding: 4px 6px;" onclick="clearRange()">Clear</button>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="player-section tools-section">
-      <button class="btn-setting" onclick="togglePopup('toolsPopup')" title="Tools">⚙️ Tools</button>
-      
-      <div class="popup-bubble" id="toolsPopup" style="right: 0; left: auto;">
-        <div class="popup-row">
+      <!-- Tools Popup -->
+      <div class="popup" id="toolsPopup">
+        <div class="pop-row">
           <span>⚡ <span id="speedVal">1.0</span>x</span>
-          <input type="range" id="speedInput" min="0.5" max="2.0" step="0.1" value="1.0">
+          <input type="range" class="pop-range" id="speedInput" min="0.5" max="2.0" step="0.1" value="1.0">
         </div>
-        <div class="popup-row">
+        <div class="pop-row">
           <span>🔁 Rep:</span>
-          <input type="number" id="repeatInput" value="1" min="1" onchange="updateRepeatDisplay()">
+          <input type="number" class="pop-input" id="repeatInput" value="1" min="1" onchange="updateRepeatDisplay()">
         </div>
-        <hr style="width:100%; border:0; border-top:1px solid #eee; margin:0;">
-        
-        <div class="ab-container">
-          <div class="popup-row">
-            <label style="display:flex; align-items:center; gap:4px; cursor:pointer; margin:0;">
-              <input type="checkbox" id="enableAB" style="margin:0;"> ✂️ A-B Loop
-            </label>
-          </div>
-          <div class="ab-row-inputs">
-            <span>Start: <input type="number" id="loopA" placeholder="0.0" step="0.1"></span>
-            <span>End: <input type="number" id="loopB" placeholder="End" step="0.1"></span>
+        <hr>
+        <!-- A-B Box Inline -->
+        <div style="font-size: 12px; font-weight: bold;">
+          <label class="flex-row" style="gap:4px; cursor:pointer; margin-bottom:6px;">
+            <input type="checkbox" id="enableAB" style="margin:0;"> ✂️ A-B Loop
+          </label>
+          <div class="flex-between">
+            <span>Start <input class="pop-input" type="number" id="loopA" placeholder="0.0" step="0.1"></span>
+            <span>End <input class="pop-input" type="number" id="loopB" placeholder="End" step="0.1"></span>
           </div>
         </div>
-
-        <hr style="width:100%; border:0; border-top:1px solid #eee; margin:0;">
-        <button class="btn-setting" id="cacheBtn" style="width:100%; justify-content:center; background:#ffebee; color:var(--accent-red); border-color:#ffcdd2;" onclick="cacheAllAudio(this)">📥 Preload All Audio</button>
+        <hr>
+        <button class="btn-sm flex-center" id="cacheBtn" style="background:#ffebee; color:var(--accent-red); border-color:#ffcdd2;" onclick="cacheAllAudio(this)">📥 Preload All Audio</button>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
 
-<div class="marker-menu" id="markerMenu">
+<!-- Menus & Modals -->
+<div class="context-menu" id="markerMenu">
   <div onclick="setMark('fav')">⭐ Mark Favorite</div>
   <div onclick="setMark('practice')">🚩 Needs Practice</div>
   <div onclick="shareShloka()">🔗 Share / Mini-Link</div>
@@ -241,8 +193,8 @@
     <h4 style="margin:0 0 6px 0;">Notes (Shloka <span id="noteShlokaNum"></span>)</h4>
     <textarea id="noteText"></textarea>
     <div style="text-align:right;">
-      <button onclick="closeNote()" style="padding:4px 10px; border:none; background:#eee; border-radius:4px;">Cancel</button>
-      <button onclick="saveNote()" style="padding:4px 10px; border:none; background:var(--accent-red); color:white; border-radius:4px; margin-left:6px; font-weight:bold;">Save</button>
+      <button class="btn-sm" onclick="closeNote()">Cancel</button>
+      <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; margin-left:6px;" onclick="saveNote()">Save</button>
     </div>
   </div>
 </div>
@@ -252,61 +204,42 @@
   const filePrefix = "NS"; 
   const fileExtension = ".mp3";
   const totalShlokas = 43; 
-
-  const shlokaTexts = {
-    1: "ब्रह्मोवाच ।<br>त्वं नस्तपः परममात्थ यदात्मतन्त्रो...",
-    2: "श्रीशुक उवाच ।<br>इत्युक्त्वा तं तदा ब्रह्मा...",
-  };
+  const shlokaTexts = { 1: "ब्रह्मोवाच ।<br>त्वं नस्तपः परममात्थ यदात्मतन्त्रो...", 2: "श्रीशुक उवाच ।<br>इत्युक्त्वा तं तदा ब्रह्मा..." };
 
   let currentAudio = new Audio();
   let activeId = null;
   let isPlaying = false;
   let currentLoopCount = 0;
-  let attemptedSpaceFallback = false;
   let currentFilter = 'all';
 
   let marks = JSON.parse(localStorage.getItem('narasimhaMarks')) || {};
   let notes = JSON.parse(localStorage.getItem('narasimhaNotes')) || {};
 
-  const playBtn = document.getElementById('playBtn');
-  const speedInput = document.getElementById('speedInput');
-  const speedVal = document.getElementById('speedVal');
-  const trackLabel = document.getElementById('trackLabel');
-  const timeDisplay = document.getElementById('timeDisplay');
-  const repeatCounter = document.getElementById('repeatCounter');
-  const readingCard = document.getElementById('readingCard');
-  const toolsPopup = document.getElementById('toolsPopup');
-  const filterPopup = document.getElementById('filterPopup');
-  const markerMenu = document.getElementById('markerMenu');
-  const filterBtn = document.getElementById('filterBtn');
-  const searchInput = document.getElementById('searchInput');
-  const clearSearchBtn = document.getElementById('clearSearchBtn');
-  const repeatInput = document.getElementById('repeatInput');
-  const cacheBtn = document.getElementById('cacheBtn');
+  const els = {
+    playBtn: document.getElementById('playBtn'), speedInput: document.getElementById('speedInput'),
+    speedVal: document.getElementById('speedVal'), trackLabel: document.getElementById('trackLabel'),
+    timeDisplay: document.getElementById('timeDisplay'), repeatCounter: document.getElementById('repeatCounter'),
+    readingCard: document.getElementById('readingCard'), toolsPopup: document.getElementById('toolsPopup'),
+    filterPopup: document.getElementById('filterPopup'), markerMenu: document.getElementById('markerMenu'),
+    filterBtn: document.getElementById('filterBtn'), searchInput: document.getElementById('searchInput'),
+    clearSearchBtn: document.getElementById('clearSearchBtn'), repeatInput: document.getElementById('repeatInput'),
+    cacheBtn: document.getElementById('cacheBtn'), listEl: document.getElementById('shlokaList')
+  };
 
-  let targetMenuId = null;
-
-  function formatTime(seconds) {
-    if (isNaN(seconds)) return "0:00.000";
-    const m = Math.floor(seconds / 60);
-    const s = Math.floor(seconds % 60);
-    const ms = Math.floor((seconds % 1) * 1000);
-    return m + ":" + (s < 10 ? "0" + s : s) + "." + String(ms).padStart(3, '0');
+  function formatTime(s) {
+    if (isNaN(s)) return "0:00.000";
+    const m = Math.floor(s/60), sec = Math.floor(s%60), ms = Math.floor((s%1)*1000);
+    return m + ":" + (sec<10?"0":"") + sec + "." + String(ms).padStart(3,'0');
   }
 
   function updateRepeatDisplay() {
-    const targetRepeat = parseInt(repeatInput.value) || 1;
-    if (activeId && targetRepeat > 1) {
-      repeatCounter.innerText = `Loop ${currentLoopCount + 1}/${targetRepeat}`;
-    } else {
-      repeatCounter.innerText = "";
-    }
+    const t = parseInt(els.repeatInput.value) || 1;
+    els.repeatCounter.innerText = (activeId && t > 1) ? `Loop ${currentLoopCount + 1}/${t}` : "";
   }
 
   function checkMiniMode() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const miniId = urlParams.get('mini');
-    if (miniId && parseInt(miniId) >= 1 && parseInt(miniId) <= totalShlokas) {
+    const miniId = new URLSearchParams(window.location.search).get('mini');
+    if (miniId && miniId >= 1 && miniId <= totalShlokas) {
       document.body.classList.add('mini-mode');
       setTimeout(() => playShloka(parseInt(miniId)), 400);
     }
@@ -319,401 +252,215 @@
 
   function getFilteredIds() {
     let ids = [];
-    const rStart = parseInt(document.getElementById('rangeStart').value);
-    const rEnd = parseInt(document.getElementById('rangeEnd').value);
-    const rMode = document.getElementById('rangeMode').value;
-    const hasRange = !isNaN(rStart) && !isNaN(rEnd) && rStart <= rEnd;
-
+    const rs = parseInt(document.getElementById('rangeStart').value), re = parseInt(document.getElementById('rangeEnd').value);
+    const rm = document.getElementById('rangeMode').value, hasRange = !isNaN(rs) && !isNaN(re) && rs <= re;
     for (let i = 1; i <= totalShlokas; i++) {
       if (currentFilter === 'fav' && marks[i] !== 'fav') continue;
       if (currentFilter === 'practice' && marks[i] !== 'practice') continue;
-
-      if (hasRange) {
-        const inRange = (i >= rStart && i <= rEnd);
-        if (rMode === 'include' && !inRange) continue;
-        if (rMode === 'exclude' && inRange) continue;
-      }
-
+      if (hasRange) { const inR = (i >= rs && i <= re); if ((rm === 'include' && !inR) || (rm === 'exclude' && inR)) continue; }
       ids.push(i);
     }
     return ids;
   }
 
-  function clearRange() {
-    document.getElementById('rangeStart').value = "";
-    document.getElementById('rangeEnd').value = "";
-    applyRangeFilter();
-  }
+  function clearRange() { document.getElementById('rangeStart').value = ""; document.getElementById('rangeEnd').value = ""; applyRangeFilter(); }
 
   function setFilter(type) {
     currentFilter = type;
-    filterPopup.classList.remove('show');
+    els.filterPopup.classList.remove('show');
+    document.querySelectorAll('.pop-item').forEach(el => el.classList.remove('active'));
     
-    document.querySelectorAll('.popup-option').forEach(el => el.classList.remove('selected'));
-    if(type === 'all') { filterBtn.innerText = "filter: All"; document.getElementById('opt-all').classList.add('selected'); }
-    else if(type === 'fav') { filterBtn.innerText = "filter: ★"; document.getElementById('opt-fav').classList.add('selected'); }
-    else if(type === 'practice') { filterBtn.innerText = "filter: 🚩"; document.getElementById('opt-practice').classList.add('selected'); }
-    else if(type === 'none') { filterBtn.innerText = "filter: One"; document.getElementById('opt-none').classList.add('selected'); }
+    const labels = { 'all': '🔽 All', 'fav': '🔽 ★', 'practice': '🔽 🚩', 'none': '⏸ One' };
+    els.filterBtn.innerText = labels[type];
+    document.getElementById(`opt-${type}`).classList.add('active');
 
     renderList();
-
     if (type !== 'none') {
-      const availableIds = getFilteredIds();
-      if (availableIds.length > 0) {
-        playShloka(availableIds[0]);
-      } else {
-        currentAudio.pause();
-        activeId = null;
-        isPlaying = false;
-        updatePlayUI();
-        trackLabel.innerText = "०/" + totalShlokas;
-        timeDisplay.innerText = "0:00.000 / 0:00.000";
-        repeatCounter.innerText = "";
-        readingCard.innerHTML = "No shlokas match this filter range.";
-      }
+      const aIds = getFilteredIds();
+      if (aIds.length) playShloka(aIds[0]);
+      else { currentAudio.pause(); activeId = null; isPlaying = false; updatePlayUI(); els.trackLabel.innerText = "०/"+totalShlokas; els.timeDisplay.innerText = "0:00.000 / 0:00.000"; els.repeatCounter.innerText = ""; els.readingCard.innerHTML = "No matches."; }
     }
   }
 
   function applyRangeFilter() {
     renderList();
-    const availableIds = getFilteredIds();
-    if (availableIds.length > 0 && currentFilter !== 'none') {
-      playShloka(availableIds[0]);
-    }
+    const aIds = getFilteredIds();
+    if (aIds.length && currentFilter !== 'none') playShloka(aIds[0]);
   }
 
   function handleSearch() {
-    const query = searchInput.value.toLowerCase().trim();
-    clearSearchBtn.style.display = query ? 'block' : 'none';
-    const cards = document.querySelectorAll('.shloka-card');
-    
-    cards.forEach(card => {
-      const id = card.id.replace('shloka-', '');
-      const text = card.querySelector('.shloka-text-body').innerText.toLowerCase();
-      if (id.includes(query) || text.includes(query)) {
-        card.style.display = 'flex';
-      } else {
-        card.style.display = 'none';
-      }
+    const q = els.searchInput.value.toLowerCase().trim();
+    els.clearSearchBtn.style.display = q ? 'block' : 'none';
+    document.querySelectorAll('.shloka-card').forEach(c => {
+      const t = c.querySelector('.shloka-text').innerText.toLowerCase();
+      c.style.display = (c.id.replace('shloka-','').includes(q) || t.includes(q)) ? 'flex' : 'none';
     });
   }
 
-  function clearSearch() {
-    searchInput.value = '';
-    clearSearchBtn.style.display = 'none';
-    renderList();
-  }
+  function clearSearch() { els.searchInput.value = ''; els.clearSearchBtn.style.display = 'none'; renderList(); }
 
   function renderList() {
-    const listEl = document.getElementById('shlokaList');
-    listEl.innerHTML = '';
-    const filteredIds = getFilteredIds();
-
+    els.listEl.innerHTML = '';
+    const fIds = getFilteredIds();
     for (let i = 1; i <= totalShlokas; i++) {
-      if (!filteredIds.includes(i)) continue;
+      if (!fIds.includes(i)) continue;
+      const c = document.createElement('div');
+      c.className = `shloka-card ${activeId===i && !document.body.classList.contains('mini-mode') ? 'active':''}`;
+      c.id = `shloka-${i}`;
+      let mClass = "btn-icon", mIcon = "⋮";
+      if (marks[i] === 'fav') { mClass += " is-fav"; mIcon = "★"; }
+      else if (marks[i] === 'practice') { mClass += " is-practice"; mIcon = "🚩"; }
+      const nClass = notes[i] ? "btn-icon has-note" : "btn-icon";
 
-      const card = document.createElement('div');
-      card.className = 'shloka-card';
-      card.id = `shloka-${i}`;
-
-      const text = shlokaTexts[i] || `श्लोक ${i}`;
-      let markClass = "btn-icon";
-      let markIcon = "⋮";
-      
-      if (marks[i] === 'fav') { markClass += " is-fav"; markIcon = "★"; }
-      else if (marks[i] === 'practice') { markClass += " is-practice"; markIcon = "🚩"; }
-      
-      const noteClass = notes[i] ? "btn-icon has-note" : "btn-icon";
-
-      card.innerHTML = `
-        <div class="shloka-num">${i}</div>
-        <div class="shloka-text-body" onclick="playShloka(${i})">${text}</div>
-        <div class="card-actions">
-          <button class="${noteClass}" onclick="openNote(${i})">📝</button>
-          <button class="${markClass}" onclick="openMarkerMenu(event, ${i})">${markIcon}</button>
-        </div>
-      `;
-      listEl.appendChild(card);
+      c.innerHTML = `<div class="shloka-num">${i}</div>
+        <div class="shloka-text" onclick="playShloka(${i})">${shlokaTexts[i] || 'श्लोक '+i}</div>
+        <div class="card-actions"><button class="${nClass}" onclick="openNote(${i})">📝</button><button class="${mClass}" onclick="openMarkerMenu(event, ${i})">${mIcon}</button></div>`;
+      els.listEl.appendChild(c);
     }
   }
 
-  function updatePlayUI() {
-    playBtn.innerHTML = isPlaying ? '⏸' : '▶';
-  }
+  function updatePlayUI() { els.playBtn.innerHTML = isPlaying ? '⏸' : '▶'; }
 
   currentAudio.addEventListener('playing', () => { isPlaying = true; updatePlayUI(); });
   currentAudio.addEventListener('pause', () => { isPlaying = false; updatePlayUI(); });
-
   currentAudio.addEventListener('loadedmetadata', () => {
-    currentAudio.playbackRate = parseFloat(speedInput.value) || 1.0;
+    currentAudio.playbackRate = parseFloat(els.speedInput.value) || 1.0;
     document.getElementById('loopB').value = currentAudio.duration.toFixed(1);
-    timeDisplay.innerText = `0:00.000 / ${formatTime(currentAudio.duration)}`;
+    els.timeDisplay.innerText = `0:00.000 / ${formatTime(currentAudio.duration)}`;
     updateRepeatDisplay();
   });
-
   currentAudio.addEventListener('error', () => {
-    if (!attemptedSpaceFallback && activeId) {
-      attemptedSpaceFallback = true;
+    if (activeId) {
       currentAudio.src = `${archiveBaseUrl}${filePrefix}${activeId}%E2%80%8B${fileExtension}`;
-      currentAudio.load();
-      currentAudio.play().then(() => { isPlaying = true; updatePlayUI(); }).catch(e => console.log(e));
+      currentAudio.load(); currentAudio.play().then(() => { isPlaying=true; updatePlayUI(); }).catch(()=>{});
     }
   });
 
   function playShloka(id) {
-    if (activeId === id && isPlaying) {
-      currentAudio.pause();
-      isPlaying = false;
-      updatePlayUI();
-      return;
-    }
-
-    activeId = id;
-    currentLoopCount = 0;
-    attemptedSpaceFallback = false;
-    updateRepeatDisplay();
+    if (activeId === id && isPlaying) { currentAudio.pause(); return; }
+    activeId = id; currentLoopCount = 0; updateRepeatDisplay(); renderList();
     
-    document.querySelectorAll('.shloka-card').forEach(c => c.classList.remove('active'));
-    const activeCard = document.getElementById(`shloka-${id}`);
-    if (activeCard && !document.body.classList.contains('mini-mode')) {
-      activeCard.classList.add('active');
-      activeCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    const ac = document.getElementById(`shloka-${id}`);
+    if (ac && !document.body.classList.contains('mini-mode')) ac.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-    trackLabel.innerText = `${id}/${totalShlokas}`;
-    readingCard.innerHTML = shlokaTexts[id] || `श्लोक ${id}`;
-    timeDisplay.innerText = "0:00.000 / 0:00.000";
+    els.trackLabel.innerText = `${id}/${totalShlokas}`;
+    els.readingCard.innerHTML = shlokaTexts[id] || `श्लोक ${id}`;
+    els.timeDisplay.innerText = "0:00.000 / 0:00.000";
 
-    currentAudio.pause();
     currentAudio.src = `${archiveBaseUrl}${filePrefix}${id}${fileExtension}`;
-    currentAudio.load();
+    currentAudio.playbackRate = parseFloat(els.speedInput.value) || 1.0;
+    document.getElementById('loopA').value = "0.0"; document.getElementById('loopB').value = "";
     
-    const targetSpeed = parseFloat(speedInput.value) || 1.0;
-    currentAudio.playbackRate = targetSpeed;
-    
-    document.getElementById('loopA').value = "0.0";
-    document.getElementById('loopB').value = "";
-
-    let playPromise = currentAudio.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        isPlaying = true;
-        currentAudio.playbackRate = targetSpeed;
-        updatePlayUI();
-      }).catch(err => {
-        if (err.name !== 'AbortError') console.error("Playback error:", err);
-      });
-    }
+    currentAudio.play().catch(err => { if(err.name !== 'AbortError') console.error(err); });
   }
 
   function togglePlay() {
-    if (!activeId) {
-      const availableIds = getFilteredIds();
-      if(availableIds.length > 0) playShloka(availableIds[0]);
-    } else if (isPlaying) { 
-      currentAudio.pause(); isPlaying = false; updatePlayUI(); 
-    } else { 
-      currentAudio.play(); isPlaying = true; updatePlayUI(); 
-    }
+    if (!activeId) { const aIds = getFilteredIds(); if(aIds.length) playShloka(aIds[0]); }
+    else if (isPlaying) currentAudio.pause();
+    else currentAudio.play();
   }
 
   function playNextFiltered() {
-    const ids = getFilteredIds();
-    if (ids.length === 0) return;
-    const currentIndex = ids.indexOf(activeId);
-    if (currentIndex !== -1 && currentIndex < ids.length - 1) {
-      playShloka(ids[currentIndex + 1]);
-    } else {
-      currentAudio.pause();
-      isPlaying = false;
-      updatePlayUI();
-      repeatCounter.innerText = "";
-    }
+    const ids = getFilteredIds(); if (!ids.length) return;
+    const idx = ids.indexOf(activeId);
+    if (idx !== -1 && idx < ids.length - 1) playShloka(ids[idx + 1]);
+    else { currentAudio.pause(); els.repeatCounter.innerText = ""; }
   }
 
   function playPrevFiltered() {
-    const ids = getFilteredIds();
-    if (ids.length === 0) return;
-    const currentIndex = ids.indexOf(activeId);
-    if (currentIndex > 0) {
-      playShloka(ids[currentIndex - 1]);
-    } else {
-      playShloka(ids[ids.length - 1]);
-    }
+    const ids = getFilteredIds(); if (!ids.length) return;
+    const idx = ids.indexOf(activeId);
+    if (idx > 0) playShloka(ids[idx - 1]); else playShloka(ids[ids.length - 1]);
   }
 
   currentAudio.addEventListener('timeupdate', () => {
-    timeDisplay.innerText = `${formatTime(currentAudio.currentTime)} / ${formatTime(currentAudio.duration)}`;
-    
+    els.timeDisplay.innerText = `${formatTime(currentAudio.currentTime)} / ${formatTime(currentAudio.duration)}`;
     if (document.getElementById('enableAB').checked) {
-      const end = parseFloat(document.getElementById('loopB').value);
-      const start = parseFloat(document.getElementById('loopA').value) || 0;
+      const end = parseFloat(document.getElementById('loopB').value), start = parseFloat(document.getElementById('loopA').value) || 0;
       if (end && currentAudio.currentTime >= end) currentAudio.currentTime = start;
     }
   });
 
   currentAudio.addEventListener('ended', () => {
-    currentLoopCount++;
-    const targetRepeat = parseInt(repeatInput.value) || 1;
-    if (currentLoopCount < targetRepeat) {
+    const tRep = parseInt(els.repeatInput.value) || 1;
+    if (++currentLoopCount < tRep) {
       currentAudio.currentTime = parseFloat(document.getElementById('loopA').value) || 0;
-      updateRepeatDisplay();
-      currentAudio.play();
+      updateRepeatDisplay(); currentAudio.play();
     } else {
-      currentLoopCount = 0;
-      updateRepeatDisplay();
-      handleNextAutoplay();
+      currentLoopCount = 0; updateRepeatDisplay();
+      if (currentFilter === 'none' || document.body.classList.contains('mini-mode')) { isPlaying=false; updatePlayUI(); return; }
+      playNextFiltered();
     }
   });
 
-  function handleNextAutoplay() {
-    if (currentFilter === 'none' || document.body.classList.contains('mini-mode')) {
-      isPlaying = false; updatePlayUI(); return;
-    }
-    playNextFiltered();
-  }
+  function togglePopup(id) { document.querySelectorAll('.popup').forEach(p => { if(p.id !== id) p.classList.remove('show'); }); document.getElementById(id).classList.toggle('show'); }
 
-  function togglePopup(id) {
-    document.querySelectorAll('.popup-bubble').forEach(p => { if(p.id !== id) p.classList.remove('show'); });
-    const popup = document.getElementById(id);
-    popup.classList.toggle('show');
-  }
-
-  function openMarkerMenu(e, id) {
-    targetMenuId = id;
-    markerMenu.style.left = `${e.pageX - 130}px`;
-    markerMenu.style.top = `${e.pageY - 40}px`; 
-    markerMenu.classList.add('show');
-  }
+  let targetMenuId = null;
+  function openMarkerMenu(e, id) { targetMenuId = id; els.markerMenu.style.left = `${e.pageX - 130}px`; els.markerMenu.style.top = `${e.pageY - 40}px`; els.markerMenu.classList.add('show'); }
 
   function setMark(type) {
-    if (type === 'none') delete marks[targetMenuId];
-    else marks[targetMenuId] = type;
+    if (type === 'none') delete marks[targetMenuId]; else marks[targetMenuId] = type;
     localStorage.setItem('narasimhaMarks', JSON.stringify(marks));
-    markerMenu.classList.remove('show'); renderList();
-    if (activeId && !document.body.classList.contains('mini-mode')) {
-      const activeEl = document.getElementById(`shloka-${activeId}`);
-      if(activeEl) activeEl.classList.add('active');
-    }
+    els.markerMenu.classList.remove('show'); renderList();
   }
 
   function shareShloka() {
-    const shareUrl = `${window.location.origin}${window.location.pathname}?mini=${targetMenuId}`;
-    if (navigator.share) {
-      navigator.share({ title: 'Narasimha Stotram', text: `Listen to Shloka ${targetMenuId}`, url: shareUrl });
-    } else if (navigator.clipboard) {
-      navigator.clipboard.writeText(shareUrl);
-      alert("Mini-Player link copied to clipboard!");
-    }
-    markerMenu.classList.remove('show');
+    const u = `${window.location.origin}${window.location.pathname}?mini=${targetMenuId}`;
+    if (navigator.share) navigator.share({ title: 'Narasimha Stotram', url: u });
+    else { navigator.clipboard.writeText(u); alert("Link copied!"); }
+    els.markerMenu.classList.remove('show');
   }
 
-  async function downloadShloka(btnElement) {
-    const originalText = btnElement.innerText;
-    btnElement.innerText = "⏳ Downloading...";
-
-    let url = `${archiveBaseUrl}${filePrefix}${targetMenuId}${fileExtension}`;
+  async function downloadShloka(btn) {
+    const orig = btn.innerText; btn.innerText = "⏳ Downloading...";
     try {
-      let response = await fetch(url).catch(() => null);
-      if (!response || !response.ok) {
-        url = `${archiveBaseUrl}${filePrefix}${targetMenuId}%E2%80%8B${fileExtension}`;
-        response = await fetch(url).catch(() => null);
-      }
-      if (response && response.ok) {
-        const blob = await response.blob();
-        const blobUrl = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = blobUrl;
-        a.download = `Narasimha_Stotram_Shloka_${targetMenuId}${fileExtension}`;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(blobUrl);
-        btnElement.innerText = "✅ Downloaded";
-      } else {
-        alert("Download failed.");
-        btnElement.innerText = originalText;
-      }
-    } catch (e) {
-      alert("Download failed.");
-      btnElement.innerText = originalText;
-    }
-    setTimeout(() => { btnElement.innerText = originalText; markerMenu.classList.remove('show'); }, 2000);
+      let r = await fetch(`${archiveBaseUrl}${filePrefix}${targetMenuId}${fileExtension}`).catch(()=>null);
+      if(!r || !r.ok) r = await fetch(`${archiveBaseUrl}${filePrefix}${targetMenuId}%E2%80%8B${fileExtension}`).catch(()=>null);
+      if (r && r.ok) {
+        const bl = await r.blob(), u = window.URL.createObjectURL(bl), a = document.createElement('a');
+        a.href = u; a.download = `Shloka_${targetMenuId}${fileExtension}`; document.body.appendChild(a); a.click(); window.URL.revokeObjectURL(u);
+        btn.innerText = "✅ Downloaded";
+      } else alert("Download failed.");
+    } catch(e) { alert("Download failed."); }
+    setTimeout(() => { btn.innerText = orig; els.markerMenu.classList.remove('show'); }, 2000);
   }
 
   function checkCacheStatus() {
-    const cachedState = localStorage.getItem('narasimhaAllCached');
-    if (cachedState === 'true') {
-      cacheBtn.innerText = "✅ All Cached (43/43)";
-      cacheBtn.dataset.cached = "true";
-      cacheBtn.style.background = "#e8f5e9";
-      cacheBtn.style.color = "#2e7d32";
-      cacheBtn.style.borderColor = "#c8e6c9";
+    if (localStorage.getItem('narasimhaAllCached') === 'true') {
+      els.cacheBtn.innerText = "✅ All Cached (43/43)"; els.cacheBtn.dataset.cached = "true";
+      els.cacheBtn.style.background = "#e8f5e9"; els.cacheBtn.style.color = "#2e7d32"; els.cacheBtn.style.borderColor = "#c8e6c9";
     }
   }
 
   async function cacheAllAudio(btn) {
     if(btn.dataset.cached === "true") return;
-    
-    const origText = btn.innerText;
-    btn.innerText = "⏳ Preloading...";
-    btn.disabled = true;
-    
-    let successCount = 0;
+    const orig = btn.innerText; btn.innerText = "⏳ Preloading..."; btn.disabled = true;
+    let success = 0;
     for(let i=1; i<=totalShlokas; i++) {
       try {
-        let u = `${archiveBaseUrl}${filePrefix}${i}${fileExtension}`;
-        let res = await fetch(u);
-        if(!res.ok) {
-          u = `${archiveBaseUrl}${filePrefix}${i}%E2%80%8B${fileExtension}`;
-          res = await fetch(u);
-        }
-        if(res.ok) {
-          await res.blob();
-          successCount++;
-        }
+        let r = await fetch(`${archiveBaseUrl}${filePrefix}${i}${fileExtension}`);
+        if(!r.ok) r = await fetch(`${archiveBaseUrl}${filePrefix}${i}%E2%80%8B${fileExtension}`);
+        if(r.ok) { await r.blob(); success++; }
       } catch(e) {}
     }
-    
     localStorage.setItem('narasimhaAllCached', 'true');
-    btn.innerText = `✅ All Cached (${successCount}/${totalShlokas})`;
-    btn.dataset.cached = "true";
-    btn.style.background = "#e8f5e9";
-    btn.style.color = "#2e7d32";
-    btn.style.borderColor = "#c8e6c9";
+    btn.innerText = `✅ All Cached (${success}/${totalShlokas})`; btn.dataset.cached = "true";
+    btn.style.background = "#e8f5e9"; btn.style.color = "#2e7d32"; btn.style.borderColor = "#c8e6c9";
   }
 
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.filter-section') && !e.target.closest('.tools-section') && !e.target.closest('.popup-bubble')) {
-      document.querySelectorAll('.popup-bubble').forEach(p => p.classList.remove('show'));
-    }
-    if (!e.target.closest('.card-actions') && !e.target.closest('.marker-menu')) markerMenu.classList.remove('show');
+    if (!e.target.closest('.filter-section') && !e.target.closest('.tools-section') && !e.target.closest('.popup')) document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
+    if (!e.target.closest('.card-actions') && !e.target.closest('.context-menu')) els.markerMenu.classList.remove('show');
   });
 
-  speedInput.addEventListener('input', (e) => {
-    const v = parseFloat(e.target.value).toFixed(1);
-    speedVal.innerText = v;
-    currentAudio.playbackRate = v;
-  });
+  els.speedInput.addEventListener('input', (e) => { els.speedVal.innerText = parseFloat(e.target.value).toFixed(1); currentAudio.playbackRate = e.target.value; });
 
   let targetNoteId = null;
-  function openNote(id) {
-    targetNoteId = id;
-    document.getElementById('noteShlokaNum').innerText = id;
-    document.getElementById('noteText').value = notes[id] || "";
-    document.getElementById('noteModal').style.display = "flex";
-  }
+  function openNote(id) { targetNoteId = id; document.getElementById('noteShlokaNum').innerText = id; document.getElementById('noteText').value = notes[id] || ""; document.getElementById('noteModal').style.display = "flex"; }
   function closeNote() { document.getElementById('noteModal').style.display = "none"; }
-  function saveNote() {
-    const txt = document.getElementById('noteText').value.trim();
-    if (txt) notes[targetNoteId] = txt; else delete notes[targetNoteId];
-    localStorage.setItem('narasimhaNotes', JSON.stringify(notes));
-    closeNote(); renderList();
-  }
+  function saveNote() { const txt = document.getElementById('noteText').value.trim(); if(txt) notes[targetNoteId] = txt; else delete notes[targetNoteId]; localStorage.setItem('narasimhaNotes', JSON.stringify(notes)); closeNote(); renderList(); }
 
-  renderList();
-  checkMiniMode();
-  checkCacheStatus();
+  renderList(); checkMiniMode(); checkCacheStatus();
 </script>
 </body>
 </html>
