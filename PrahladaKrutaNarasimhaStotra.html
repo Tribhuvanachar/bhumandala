@@ -6,32 +6,28 @@
 <title>Narasimha Stotram</title>
 <style>
   :root {
-    --bg-main: #f4f6f9; --card-bg: #ffffff; --card-border: #e0e6ed;
+    --bg-main: #f4f6f9; --card-bg: #fff; --card-border: #e0e6ed;
     --card-active: #ffebee; --text-primary: #1a1a1a; --text-sanskrit: #b71c1c;
-    --accent-red: #d32f2f; --accent-gold: #ffa000; --panel-bg: #ffffff;
+    --accent-red: #d32f2f; --accent-gold: #ffa000; --panel-bg: #fff;
   }
-
   body {
     margin: 0; padding-bottom: 90px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-main); color: var(--text-primary);
   }
-
   .app-container { max-width: 600px; margin: 0 auto; padding: 12px; }
 
   /* Header & Search */
-  .header { text-align: center; padding: 10px 0 5px 0; }
+  .header { text-align: center; padding: 10px 0 5px; }
   .header h1 { margin: 0; font-size: 20px; color: var(--accent-red); font-weight: 800; }
   .header .author { font-size: 10px; color: #555; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 10px; }
 
   .search-bar-container { position: relative; margin-bottom: 12px; }
   .search-input {
     width: 100%; padding: 10px 36px 10px 14px; border: 1px solid var(--card-border);
-    border-radius: 20px; font-size: 14px; background: #fff; box-sizing: border-box;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); outline: none; transition: border 0.2s;
+    border-radius: 20px; font-size: 14px; background: #fff; box-sizing: border-box; outline: none;
   }
   .search-input:focus { border-color: var(--accent-red); }
-  
   .clear-search-btn {
     position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
     background: none; border: none; font-size: 16px; color: #999; cursor: pointer; display: none;
@@ -40,39 +36,29 @@
   /* Mini-Mode */
   .expand-btn {
     display: none; background: var(--accent-red); color: white; border: none;
-    padding: 8px 16px; border-radius: 20px; margin: 0 auto 15px auto;
-    font-size: 13px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    padding: 8px 16px; border-radius: 20px; margin: 0 auto 15px; font-size: 13px; font-weight: bold; cursor: pointer;
   }
   body.mini-mode .expand-btn { display: block; }
   body.mini-mode .header, body.mini-mode .shloka-list, body.mini-mode .search-bar-container { display: none; }
-  body.mini-mode { 
-    background-color: #121212; display: flex; flex-direction: column; justify-content: center; height: 100vh; padding-bottom: 0;
-  }
-  body.mini-mode .reading-card {
-    background: #1e1e1e; border: 1px solid #333; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin: 0 15px; border-radius: 16px;
-  }
+  body.mini-mode { background-color: #121212; display: flex; flex-direction: column; justify-content: center; height: 100vh; padding-bottom: 0; }
+  body.mini-mode .reading-card { background: #1e1e1e; border: 1px solid #333; color: #fff; margin: 0 15px; border-radius: 16px; }
   body.mini-mode .bottom-player { position: relative; background: transparent; border: none; box-shadow: none; margin-top: 20px; }
   body.mini-mode .btn-setting, body.mini-mode .track-label, body.mini-mode .time-display { color: #aaa; background: #333; border: none; }
 
-  /* Featured Reading Card */
+  /* Reading Card & List */
   .reading-card {
     background: var(--card-bg); border: 2px solid #ffcdd2; border-radius: 12px;
     padding: 20px 16px; text-align: center; font-size: 20px; color: var(--text-sanskrit); 
-    line-height: 1.5; font-weight: 600; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(211, 47, 47, 0.08);
-    min-height: 60px; display: flex; align-items: center; justify-content: center;
+    line-height: 1.5; font-weight: 600; margin-bottom: 12px; min-height: 60px; display: flex; align-items: center; justify-content: center;
   }
-
-  /* Shloka Card List */
   .shloka-list { display: flex; flex-direction: column; gap: 8px; }
   .shloka-card {
-    background: var(--card-bg); border: 1px solid var(--card-border);
-    border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; gap: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: all 0.2s ease;
+    background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px;
+    padding: 10px 12px; display: flex; align-items: center; gap: 10px; transition: background 0.2s;
   }
   .shloka-card.active { background-color: var(--card-active); border-color: var(--accent-red); border-left: 4px solid var(--accent-red); }
   .shloka-num { font-size: 12px; font-weight: bold; color: #666; min-width: 20px; }
   .shloka-text-body { flex-grow: 1; font-size: 15px; color: var(--text-sanskrit); line-height: 1.4; font-weight: 500; cursor: pointer; }
-  
   .card-actions { display: flex; gap: 6px; align-items: center; }
   .btn-icon { background: none; border: none; font-size: 16px; cursor: pointer; color: #b0bec5; padding: 4px; }
   .is-fav { color: var(--accent-gold) !important; }
@@ -84,86 +70,63 @@
     position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg);
     border-top: 1px solid #e0e0e0; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 100;
   }
-  
   .player-inner {
-    max-width: 600px; margin: 0 auto; 
-    display: flex; align-items: center; justify-content: space-between; 
-    padding: 8px 10px; gap: 6px;
+    max-width: 600px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; gap: 6px;
   }
-  
   .player-section { flex: 1; display: flex; align-items: center; justify-content: center; }
   .controls-main { gap: 8px; justify-content: flex-start; }
   .timer-group { flex-direction: column; text-align: center; }
-  .filter-section { justify-content: center; }
-  .tools-section { justify-content: flex-end; }
+  .filter-section { justify-content: center; position: relative; }
+  .tools-section { justify-content: flex-end; position: relative; }
 
   .btn-play-main {
     background: var(--accent-red); color: white; border: none; width: 38px; height: 38px;
-    border-radius: 50%; font-size: 16px; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; box-shadow: 0 2px 6px rgba(211, 47, 47, 0.4); flex-shrink: 0;
+    border-radius: 50%; font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
   }
   .btn-nav { background: none; border: none; font-size: 16px; color: #333; cursor: pointer; padding: 2px; }
-
   .track-label { font-size: 11px; font-weight: 800; color: #333; }
   .time-display { font-size: 9px; font-weight: 600; color: #666; font-variant-numeric: tabular-nums; white-space: nowrap; }
   .repeat-counter { font-size: 9px; font-weight: bold; color: var(--accent-red); }
 
   .btn-setting {
     background: #f0f4f8; border: 1px solid #bccbde; border-radius: 14px; padding: 4px 8px;
-    font-size: 11px; font-weight: bold; color: #222; cursor: pointer; display: flex; align-items: center; gap: 4px;
-    white-space: nowrap;
+    font-size: 11px; font-weight: bold; color: #222; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap;
   }
 
-  /* Popups (Smart Safe Boundaries) */
+  /* Compact Popups */
   .popup-bubble {
-    position: absolute; bottom: 60px; background: white;
-    border: 1px solid #ccc; border-radius: 10px; padding: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 10px;
-    z-index: 105; width: 220px; box-sizing: border-box;
+    position: absolute; bottom: 60px; background: white; border: 1px solid #ccc;
+    border-radius: 10px; padding: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    display: none; flex-direction: column; gap: 8px; z-index: 105; width: 220px; box-sizing: border-box;
   }
   .popup-bubble.show { display: flex; }
-  
   .popup-option {
-    padding: 6px 10px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: 6px;
-    display: flex; align-items: center; gap: 6px;
+    padding: 5px 8px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: 6px; display: flex; align-items: center; gap: 6px;
   }
   .popup-option:hover { background: #f0f4f8; }
   .popup-option.selected { background: #ffebee; color: var(--accent-red); }
 
-  .popup-row { 
-    display: flex; align-items: center; justify-content: space-between; 
-    font-size: 12px; font-weight: bold; width: 100%; gap: 6px;
-  }
-  .popup-bubble input[type="range"] { width: 95px; cursor: pointer; }
+  .popup-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: bold; width: 100%; gap: 6px; }
+  .popup-bubble input[type="range"] { width: 90px; cursor: pointer; }
   .popup-bubble input[type="number"] { width: 45px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
 
-  /* Perfectly Aligned Clean A-B Box Structure */
-  .ab-container {
-    display: flex; flex-direction: column; gap: 6px; width: 100%; font-size: 12px; font-weight: bold;
-  }
-  .ab-top { display: flex; align-items: center; justify-content: space-between; }
-  .ab-bottom { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
-  .ab-bottom input { width: 45px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
+  /* Streamlined A-B Row */
+  .ab-container { display: flex; flex-direction: column; gap: 4px; width: 100%; font-size: 12px; font-weight: bold; }
+  .ab-row-inputs { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+  .ab-row-inputs input { width: 45px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
 
-  /* Range Filter Box */
+  /* Compact Range Box */
   .range-box {
-    border-top: 1px solid #eee; padding-top: 8px; margin-top: 4px; 
-    display: flex; flex-direction: column; gap: 6px; font-size: 11px; font-weight: bold;
+    border-top: 1px solid #eee; padding-top: 6px; margin-top: 2px; display: flex; flex-direction: column; gap: 4px; font-size: 11px; font-weight: bold;
   }
-  .range-inputs { display: flex; align-items: center; gap: 4px; }
-  .range-inputs input { 
-    width: 42px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; font-size: 11px;
-  }
-  .clear-range-btn {
-    background: #eee; border: none; border-radius: 4px; font-size: 10px; padding: 2px 6px; cursor: pointer; font-weight: bold; color: #555;
-  }
-  .clear-range-btn:hover { background: #ddd; }
+  .range-row-flex { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+  .range-row-flex input { width: 42px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; font-size: 11px; }
+  .clear-range-btn { background: #eee; border: none; border-radius: 4px; font-size: 10px; padding: 2px 6px; cursor: pointer; color: #555; }
 
   /* Menus & Modals */
   .marker-menu { position: absolute; background: white; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: none; flex-direction: column; z-index: 200; }
   .marker-menu.show { display: flex; }
   .marker-menu div { padding: 8px 14px; cursor: pointer; font-size: 13px; font-weight: 600; display: flex; gap: 8px; }
-  
   .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 300; }
   .modal-content { background: white; padding: 16px; border-radius: 10px; width: 80%; max-width: 300px; }
   .modal-content textarea { width: 100%; height: 70px; margin: 8px 0; padding: 8px; border-radius: 6px; border: 1px solid #ccc; font-family: inherit; }
@@ -184,35 +147,27 @@
     <button class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()">✖</button>
   </div>
 
-  <div class="reading-card" id="readingCard">
-    श्लोकं चिनोतु (Select a shloka)
-  </div>
-
-  <div class="shloka-list" id="shlokaList">
-    <!-- Cards generated by JS -->
-  </div>
+  <div class="reading-card" id="readingCard">श्लोकं चिनोतु (Select a shloka)</div>
+  <div class="shloka-list" id="shlokaList"></div>
 </div>
 
 <!-- Bottom Toolbar -->
 <div class="bottom-player">
   <div class="player-inner">
     
-    <!-- Section 1: Playback Controls -->
     <div class="player-section controls-main">
       <button class="btn-nav" onclick="playPrevFiltered()">⏮</button>
       <button class="btn-play-main" id="playBtn" onclick="togglePlay()">▶</button>
       <button class="btn-nav" onclick="playNextFiltered()">⏭</button>
     </div>
 
-    <!-- Section 2: Timer & Counter -->
     <div class="player-section timer-group">
       <div class="track-label" id="trackLabel">०/४३</div>
       <div class="time-display" id="timeDisplay">0:00.000 / 0:00.000</div>
       <div class="repeat-counter" id="repeatCounter"></div>
     </div>
 
-    <!-- Section 3: Filter Menu (Safe Left Boundary) -->
-    <div class="player-section filter-section" style="position:relative;">
+    <div class="player-section filter-section">
       <button class="btn-setting" onclick="togglePopup('filterPopup')" id="filterBtn">filter: All</button>
       
       <div class="popup-bubble" id="filterPopup" style="left: 0; right: auto;">
@@ -221,16 +176,15 @@
         <div class="popup-option" id="opt-practice" onclick="setFilter('practice')">▶ 🚩 Practice</div>
         <div class="popup-option" id="opt-none" onclick="setFilter('none')">⏸ Single Track</div>
         
-        <!-- Range Filter Box -->
         <div class="range-box">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div class="range-row-flex">
             <span>📐 Range:</span>
             <select id="rangeMode" style="font-size:10px; padding:1px;" onchange="applyRangeFilter()">
               <option value="include">Include</option>
               <option value="exclude">Exclude</option>
             </select>
           </div>
-          <div class="range-inputs">
+          <div class="range-row-flex">
             <input type="number" id="rangeStart" placeholder="From" min="1" max="43" onchange="applyRangeFilter()">
             <span>to</span>
             <input type="number" id="rangeEnd" placeholder="To" min="1" max="43" onchange="applyRangeFilter()">
@@ -240,8 +194,7 @@
       </div>
     </div>
 
-    <!-- Section 4: Tools Menu (Safe Right Boundary) -->
-    <div class="player-section tools-section" style="position:relative;">
+    <div class="player-section tools-section">
       <button class="btn-setting" onclick="togglePopup('toolsPopup')" title="Tools">⚙️ Tools</button>
       
       <div class="popup-bubble" id="toolsPopup" style="right: 0; left: auto;">
@@ -255,19 +208,15 @@
         </div>
         <hr style="width:100%; border:0; border-top:1px solid #eee; margin:0;">
         
-        <!-- Clean Vertical Stack for A-B Loop -->
         <div class="ab-container">
-          <div class="ab-top">
+          <div class="popup-row">
             <label style="display:flex; align-items:center; gap:4px; cursor:pointer; margin:0;">
               <input type="checkbox" id="enableAB" style="margin:0;"> ✂️ A-B Loop
             </label>
           </div>
-          <div class="ab-bottom">
-            <span>Start / End:</span>
-            <div style="display:flex; gap:4px;">
-              <input type="number" id="loopA" placeholder="0.0" step="0.1"> 
-              <input type="number" id="loopB" placeholder="End" step="0.1">
-            </div>
+          <div class="ab-row-inputs">
+            <span>Start: <input type="number" id="loopA" placeholder="0.0" step="0.1"></span>
+            <span>End: <input type="number" id="loopB" placeholder="End" step="0.1"></span>
           </div>
         </div>
 
@@ -279,7 +228,6 @@
   </div>
 </div>
 
-<!-- Action Menu -->
 <div class="marker-menu" id="markerMenu">
   <div onclick="setMark('fav')">⭐ Mark Favorite</div>
   <div onclick="setMark('practice')">🚩 Needs Practice</div>
@@ -288,7 +236,6 @@
   <div onclick="setMark('none')" style="color: #888;">❌ Clear Marker</div>
 </div>
 
-<!-- Notes Modal -->
 <div class="modal-overlay" id="noteModal">
   <div class="modal-content">
     <h4 style="margin:0 0 6px 0;">Notes (Shloka <span id="noteShlokaNum"></span>)</h4>
