@@ -120,12 +120,12 @@
     white-space: nowrap;
   }
 
-  /* Compact Popups (Fixed Layout Wrapping) */
+  /* Popups */
   .popup-bubble {
     position: absolute; bottom: 60px; background: white;
-    border: 1px solid #ccc; border-radius: 10px; padding: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 10px;
-    z-index: 105; min-width: 175px; box-sizing: border-box;
+    border: 1px solid #ccc; border-radius: 10px; padding: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 8px;
+    z-index: 105; min-width: 140px;
   }
   .popup-bubble.show { display: flex; }
   
@@ -165,7 +165,6 @@
     <div class="author">By Tribhuvan Achar</div>
   </div>
 
-  <!-- Top Search Bar with Clear Button -->
   <div class="search-bar-container">
     <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search shloka number or text..." oninput="handleSearch()">
     <button class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()">✖</button>
@@ -186,9 +185,9 @@
     
     <!-- Section 1: Playback Controls -->
     <div class="player-section controls-main">
-      <button class="btn-nav" onclick="playPrev()">⏮</button>
+      <button class="btn-nav" onclick="playPrevFiltered()">⏮</button>
       <button class="btn-play-main" id="playBtn" onclick="togglePlay()">▶</button>
-      <button class="btn-nav" onclick="playNext()">⏭</button>
+      <button class="btn-nav" onclick="playNextFiltered()">⏭</button>
     </div>
 
     <!-- Section 2: Timer & Counter -->
@@ -209,7 +208,7 @@
       </div>
     </div>
 
-    <!-- Section 4: Tools Menu (Fixed Width/Layout) -->
+    <!-- Section 4: Tools Menu -->
     <div class="player-section tools-section" style="position:relative;">
       <button class="btn-setting" onclick="togglePopup('toolsPopup')" title="Tools">⚙️ Tools</button>
       
@@ -314,6 +313,18 @@
     window.history.pushState({}, document.title, window.location.pathname);
   }
 
+  // --- GET ACTIVE FILTERED ARRAY ---
+  function getFilteredIds() {
+    let ids = [];
+    for (let i = 1; i <= totalShlokas; i++) {
+      if (currentFilter === 'fav' && marks[i] !== 'fav') continue;
+      if (currentFilter === 'practice' && marks[i] !== 'practice') continue;
+      ids.push(i);
+    }
+    return ids;
+  }
+
+  // --- SET FILTER & AUTO-PLAY FIRST MATCH ---
   function setFilter(type) {
     currentFilter = type;
     filterPopup.classList.remove('show');
@@ -325,6 +336,14 @@
     else if(type === 'none') { filterBtn.innerText = "filter: One"; document.getElementById('opt-none').classList.add('selected'); }
 
     renderList();
+
+    // Auto-trigger playback on the first item of the new filter
+    if (type !== 'none') {
+      const availableIds = getFilteredIds();
+      if (availableIds.length > 0) {
+        playShloka(availableIds[0]);
+      }
+    }
   }
 
   function handleSearch() {
@@ -457,14 +476,38 @@
   }
 
   function togglePlay() {
-    if (!activeId) playShloka(1);
-    else if (isPlaying) { currentAudio.pause(); isPlaying = false; updateUI(); }
-    else { currentAudio.play(); isPlaying = true; updateUI(); }
+    if (!activeId) {
+      const availableIds = getFilteredIds();
+      if(availableIds.length > 0) playShloka(availableIds[0]);
+    } else if (isPlaying) { 
+      currentAudio.pause(); isPlaying = false; updateUI(); 
+    } else { 
+      currentAudio.play(); isPlaying = true; updateUI(); 
+    }
   }
 
-  function playNext() { if (activeId < totalShlokas) playShloka(activeId ? activeId + 1 : 1); }
-  function playPrev() { if (activeId > 1) playShloka(activeId - 1); }
-  function updateUI() { playBtn.innerHTML = isPlaying ? '⏸' : '▶'; }
+  // --- FILTERED NEXT / PREV NAVIGATION ---
+  function playNextFiltered() {
+    const ids = getFilteredIds();
+    if (ids.length === 0) return;
+    const currentIndex = ids.indexOf(activeId);
+    if (currentIndex !== -1 && currentIndex < ids.length - 1) {
+      playShloka(ids[currentIndex + 1]);
+    } else {
+      playShloka(ids[0]); // Loop back to start of filter
+    }
+  }
+
+  function playPrevFiltered() {
+    const ids = getFilteredIds();
+    if (ids.length === 0) return;
+    const currentIndex = ids.indexOf(activeId);
+    if (currentIndex > 0) {
+      playShloka(ids[currentIndex - 1]);
+    } else {
+      playShloka(ids[ids.length - 1]); // Loop to end of filter
+    }
+  }
 
   currentAudio.addEventListener('timeupdate', () => {
     timeDisplay.innerText = `${formatTime(currentAudio.currentTime)} / ${formatTime(currentAudio.duration)}`;
@@ -491,12 +534,7 @@
     if (currentFilter === 'none' || document.body.classList.contains('mini-mode')) {
       isPlaying = false; updateUI(); return;
     }
-    let nextId = activeId + 1;
-    if (currentFilter === 'fav') { while (nextId <= totalShlokas && marks[nextId] !== 'fav') nextId++; }
-    else if (currentFilter === 'practice') { while (nextId <= totalShlokas && marks[nextId] !== 'practice') nextId++; }
-    
-    if (nextId <= totalShlokas) playShloka(nextId);
-    else { isPlaying = false; updateUI(); }
+    playNextFiltered();
   }
 
   function togglePopup(id) {
