@@ -32,7 +32,7 @@
   .header h1 { margin: 0; font-size: 20px; color: var(--accent-red); font-weight: 800; }
   .header .author { font-size: 10px; color: #555; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
 
-  /* Mini-Mode (Cinematic Widget Look) */
+  /* Mini-Mode */
   .expand-btn {
     display: none; background: var(--accent-red); color: white; border: none;
     padding: 8px 16px; border-radius: 20px; margin: 0 auto 15px auto;
@@ -41,12 +41,10 @@
   body.mini-mode .expand-btn { display: block; }
   body.mini-mode .header, body.mini-mode .shloka-list { display: none; }
   body.mini-mode { 
-    background-color: #121212; 
-    display: flex; flex-direction: column; justify-content: center; height: 100vh; padding-bottom: 0;
+    background-color: #121212; display: flex; flex-direction: column; justify-content: center; height: 100vh; padding-bottom: 0;
   }
   body.mini-mode .reading-card {
-    background: #1e1e1e; border: 1px solid #333; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    margin: 0 15px; border-radius: 16px;
+    background: #1e1e1e; border: 1px solid #333; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin: 0 15px; border-radius: 16px;
   }
   body.mini-mode .bottom-player { position: relative; background: transparent; border: none; box-shadow: none; margin-top: 20px; }
   body.mini-mode .btn-setting, body.mini-mode .track-label, body.mini-mode .time-display { color: #aaa; background: #333; border: none; }
@@ -76,29 +74,33 @@
   .is-practice { color: var(--accent-red) !important; }
   .has-note { color: #1976d2 !important; }
 
-  /* Compact Bottom Player Toolbar */
+  /* Bottom Toolbar */
   .bottom-player {
     position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg);
     border-top: 1px solid #e0e0e0; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 100;
   }
+  
   .player-inner {
-    max-width: 600px; margin: 0 auto; display: flex; align-items: center;
-    justify-content: space-between; padding: 8px 10px; gap: 6px;
+    max-width: 600px; margin: 0 auto; 
+    display: flex; align-items: center; justify-content: space-between; 
+    padding: 10px 12px;
   }
   
-  .controls-main { display: flex; align-items: center; gap: 10px; }
+  /* Flexbox Grid for Perfect Spacing */
+  .controls-main { display: flex; align-items: center; gap: 12px; flex: 1; justify-content: flex-start; }
+  .timer-group { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; text-align: center; }
+  .settings-row { display: flex; align-items: center; gap: 6px; flex: 1; justify-content: flex-end; }
+
   .btn-play-main {
-    background: var(--accent-red); color: white; border: none; width: 42px; height: 42px;
+    background: var(--accent-red); color: white; border: none; width: 44px; height: 44px;
     border-radius: 50%; font-size: 18px; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; box-shadow: 0 3px 8px rgba(211, 47, 47, 0.4);
+    cursor: pointer; box-shadow: 0 3px 8px rgba(211, 47, 47, 0.4); flex-shrink: 0;
   }
   .btn-nav { background: none; border: none; font-size: 18px; color: #333; cursor: pointer; padding: 4px; }
 
-  /* Duration Timer */
-  .time-display { font-size: 11px; font-weight: 600; color: #666; min-width: 65px; text-align: center; font-variant-numeric: tabular-nums; }
-  .track-label { font-size: 11px; font-weight: 800; color: #333; padding: 0 4px; }
+  .track-label { font-size: 12px; font-weight: 800; color: #333; }
+  .time-display { font-size: 11px; font-weight: 600; color: #666; font-variant-numeric: tabular-nums; margin-top: 2px; }
 
-  .settings-row { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
   .btn-setting {
     background: #f0f4f8; border: 1px solid #bccbde; border-radius: 16px; padding: 4px 8px;
     font-size: 12px; font-weight: bold; color: #222; cursor: pointer; display: flex; align-items: center;
@@ -107,15 +109,26 @@
 
   /* Floating Tools Popup */
   .popup-bubble {
-    position: absolute; bottom: 60px; right: 10px; background: white;
-    border: 1px solid #ccc; border-radius: 10px; padding: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 12px;
-    z-index: 105; min-width: 150px;
+    position: absolute; bottom: 65px; right: 15px; background: white;
+    border: 1px solid #ccc; border-radius: 10px; padding: 12px 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15); display: none; flex-direction: column; gap: 14px;
+    z-index: 105; min-width: 170px;
   }
   .popup-bubble.show { display: flex; }
-  .popup-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: bold; }
-  .popup-bubble input[type="range"] { width: 80px; }
-  .popup-bubble input[type="number"] { width: 40px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 2px; }
+  
+  .popup-row { 
+    display: flex; align-items: center; justify-content: space-between; 
+    font-size: 13px; font-weight: bold; 
+  }
+  .popup-row label {
+    display: flex; align-items: center; gap: 6px; margin: 0; cursor: pointer;
+  }
+  .popup-row-inputs {
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  .popup-bubble input[type="range"] { width: 85px; cursor: pointer; }
+  .popup-bubble input[type="number"] { width: 45px; text-align: center; border: 1px solid #ccc; border-radius: 4px; padding: 3px; }
 
   /* Menus & Modals */
   .marker-menu { position: absolute; background: white; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: none; flex-direction: column; z-index: 200; }
@@ -152,17 +165,20 @@
 <div class="bottom-player">
   <div class="player-inner">
     
+    <!-- Group 1: Playback -->
     <div class="controls-main">
       <button class="btn-nav" onclick="playPrev()">⏮</button>
       <button class="btn-play-main" id="playBtn" onclick="togglePlay()">▶</button>
       <button class="btn-nav" onclick="playNext()">⏭</button>
-      
-      <div style="display:flex; flex-direction:column; align-items:center;">
-        <div class="track-label" id="trackLabel">०/४३</div>
-        <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
-      </div>
     </div>
 
+    <!-- Group 2: Timer -->
+    <div class="timer-group">
+      <div class="track-label" id="trackLabel">०/४३</div>
+      <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+    </div>
+
+    <!-- Group 3: Settings -->
     <div class="settings-row">
       <select class="btn-setting" id="playMode">
         <option value="all">▶ All</option>
@@ -176,18 +192,26 @@
     <!-- Unified Tools Popup -->
     <div class="popup-bubble" id="toolsPopup">
       <div class="popup-row">
-        <span>⚡ <span id="speedVal">1.0</span>x</span>
-        <input type="range" id="speedInput" min="0.5" max="2.0" step="0.1" value="1.0">
+        <label>⚡ <span id="speedVal">1.0</span>x</label>
+        <div class="popup-row-inputs">
+          <input type="range" id="speedInput" min="0.5" max="2.0" step="0.1" value="1.0">
+        </div>
       </div>
       <div class="popup-row">
-        <span>🔁 Repeat:</span>
-        <input type="number" id="repeatInput" value="1" min="1">
+        <label>🔁 Repeat:</label>
+        <div class="popup-row-inputs">
+          <input type="number" id="repeatInput" value="1" min="1">
+        </div>
       </div>
       <hr style="width:100%; border:0; border-top:1px solid #eee; margin:0;">
       <div class="popup-row">
-        <span><input type="checkbox" id="enableAB"> ✂️ A-B:</span>
-        <input type="number" id="loopA" placeholder="0.0" step="0.1"> 
-        <input type="number" id="loopB" placeholder="End" step="0.1">
+        <label for="enableAB">
+          <input type="checkbox" id="enableAB"> ✂️ A-B:
+        </label>
+        <div class="popup-row-inputs">
+          <input type="number" id="loopA" placeholder="0.0" step="0.1"> 
+          <input type="number" id="loopB" placeholder="End" step="0.1">
+        </div>
       </div>
     </div>
   </div>
@@ -198,7 +222,7 @@
   <div onclick="setMark('fav')">⭐ Mark Favorite</div>
   <div onclick="setMark('practice')">🚩 Needs Practice</div>
   <div onclick="shareShloka()">🔗 Share / Mini-Link</div>
-  <div onclick="downloadShloka()">⬇️ Download MP3</div>
+  <div onclick="downloadShloka(this)">⬇️ Download MP3</div>
   <div onclick="setMark('none')" style="color: #888;">❌ Clear Marker</div>
 </div>
 
@@ -245,7 +269,6 @@
 
   let targetMenuId = null;
 
-  // --- TIME FORMATTER ---
   function formatTime(seconds) {
     if (isNaN(seconds)) return "0:00";
     const m = Math.floor(seconds / 60);
@@ -380,7 +403,6 @@
   function playPrev() { if (activeId > 1) playShloka(activeId - 1); }
   function updateUI() { playBtn.innerHTML = isPlaying ? '⏸' : '▶'; }
 
-  // A-B Looping & Timer Updates
   currentAudio.addEventListener('timeupdate', () => {
     timeDisplay.innerText = `${formatTime(currentAudio.currentTime)} / ${formatTime(currentAudio.duration)}`;
     
@@ -424,7 +446,7 @@
   function openMarkerMenu(e, id) {
     targetMenuId = id;
     markerMenu.style.left = `${e.pageX - 130}px`;
-    markerMenu.style.top = `${e.pageY - 40}px`; /* Open upwards so it doesn't fall off screen */
+    markerMenu.style.top = `${e.pageY - 40}px`; 
     markerMenu.classList.add('show');
   }
 
@@ -449,16 +471,44 @@
     markerMenu.classList.remove('show');
   }
 
-  function downloadShloka() {
-    // The clean static URL ensures a proper download without 404s from temporary streaming nodes.
-    const url = `${archiveBaseUrl}${filePrefix}${targetMenuId}${fileExtension}`;
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `Narasimha_Stotram_Shloka_${targetMenuId}${fileExtension}`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    markerMenu.classList.remove('show');
+  async function downloadShloka(btnElement) {
+    const originalText = btnElement.innerText;
+    btnElement.innerText = "⏳ Downloading...";
+
+    let url = `${archiveBaseUrl}${filePrefix}${targetMenuId}${fileExtension}`;
+    
+    try {
+      let response = await fetch(url).catch(() => null);
+
+      if (!response || !response.ok) {
+        url = `${archiveBaseUrl}${filePrefix}${targetMenuId}%E2%80%8B${fileExtension}`;
+        response = await fetch(url).catch(() => null);
+      }
+
+      if (response && response.ok) {
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = blobUrl;
+        a.download = `Narasimha_Stotram_Shloka_${targetMenuId}${fileExtension}`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(blobUrl);
+        btnElement.innerText = "✅ Downloaded";
+      } else {
+        alert("Download failed. The file could not be found on the server.");
+        btnElement.innerText = originalText;
+      }
+    } catch (e) {
+      alert("Download failed due to a network error.");
+      btnElement.innerText = originalText;
+    }
+
+    setTimeout(() => {
+      btnElement.innerText = originalText;
+      markerMenu.classList.remove('show');
+    }, 2000);
   }
 
   document.addEventListener('click', (e) => {
@@ -472,7 +522,6 @@
     currentAudio.playbackRate = v;
   });
 
-  // Notes Modal
   let targetNoteId = null;
   function openNote(id) {
     targetNoteId = id;
