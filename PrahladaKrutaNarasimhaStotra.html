@@ -6,7 +6,6 @@
 <title>Bhagavata Digital Library</title>
 <style>
   :root {
-    /* Light Theme Variables */
     --bg-main: #f4f6f9; --card-bg: #fff; --card-border: #e0e6ed;
     --card-active: #ffebee; --text-primary: #1a1a1a; --text-sanskrit: #b71c1c;
     --accent-red: #d32f2f; --accent-gold: #ffa000; --panel-bg: #fff;
@@ -15,7 +14,6 @@
   }
 
   body.dark-mode {
-    /* Dark Theme Variables */
     --bg-main: #121212; --card-bg: #1e1e1e; --card-border: #333;
     --card-active: #3e2723; --text-primary: #e0e0e0; --text-sanskrit: #ffab91;
     --accent-red: #ef5350; --panel-bg: #1e1e1e;
@@ -110,7 +108,7 @@
   .context-menu div:hover { background: var(--card-border); }
   
   .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 300; }
-  .modal-content { background: var(--card-bg); color: var(--text-primary); padding: 16px; border-radius: 10px; width: 90%; max-width: 400px; border: 1px solid var(--card-border); max-height: 80vh; overflow-y: auto; }
+  .modal-content { background: var(--card-bg); color: var(--text-primary); padding: 16px; border-radius: 10px; width: 90%; max-width: 400px; border: 1px solid var(--card-border); max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
   .modal-content textarea { width: 100%; height: 70px; margin: 8px 0; padding: 8px; border-radius: 6px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); font-family: inherit; box-sizing: border-box; }
 
   .snip-list-item { background: var(--bg-main); padding: 8px; border-radius: 6px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--card-border); }
@@ -392,7 +390,6 @@
   document.getElementById('rangeStart').max = stotraData.metadata.totalShlokas;
   document.getElementById('rangeEnd').max = stotraData.metadata.totalShlokas;
 
-  // Smart Fallback to Sanskrit ('sa') if selected language is empty
   function getText(id) { 
     if (!stotraData.shlokas[id]) return `श्लोक ${id}`;
     const langTxt = stotraData.shlokas[id][activeLang];
@@ -531,8 +528,10 @@
     const text = window.getSelection().toString().trim();
     if(!text) return;
 
-    // HARDCODED API KEY (Per user request)
-    const apiKey = "AQ.Ab8RN6KqxKivITaUIZfZAbBXrdLjAYWJPJNVTS44568MQ3rnPQ";
+    window.getSelection().removeAllRanges(); 
+
+    // ---- API KEY GOES HERE ----
+    const apiKey = "AQ.Ab8RN6JgwPb2CLHoKe2N3lMNHYmvEzJiNU7FgE0Lg_RLNNaEyA"; 
 
     els.acharyaTooltip.style.display = 'none';
     document.getElementById('acharyaModal').style.display = 'flex';
@@ -542,9 +541,13 @@
     const promptText = `You are a traditional Sanskrit Acharya. Analyze this text: "${text}". Provide: 1. Padachheda (Word-by-word split) 2. Grammatical Breakdown (Dhatu, Sandhi rules, Vibhakti) 3. Meaning. Format cleanly and concisely.`;
 
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+      // Updated to Official Header Method for modern 'AQ.' Keys
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "x-goog-api-key": apiKey
+        },
         body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
       });
       
@@ -559,8 +562,6 @@
       document.getElementById('acharyaLoading').style.display = 'none';
       document.getElementById('acharyaResult').innerHTML = result;
       
-      window.getSelection().removeAllRanges(); 
-
     } catch (err) {
       document.getElementById('acharyaLoading').style.display = 'none';
       document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">Error: Could not fetch analysis. Check your API key.</span><br><br><span style="font-size:11px;">${err.message}</span>`;
