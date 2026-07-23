@@ -137,7 +137,7 @@
 </head>
 <body>
 
-<!-- Magic Selection Tooltip (Hidden by default unless authorized) -->
+<!-- Magic Selection Tooltip -->
 <div id="acharyaTooltip" onpointerdown="askAcharya(event)">🕉️ Ask Acharya</div>
 
 <!-- Top App Bar -->
@@ -312,7 +312,6 @@
 
 <script>
   // --- PASSKEY SECURITY CHECK ---
-  // Change 'shri108' to any secret word you want.
   const SECRET_PASSKEY = "shri108";
   
   const urlParams = new URLSearchParams(window.location.search);
@@ -346,7 +345,7 @@
       16: { "sa": "दृष्टा मया दिवि विभोऽखिलधिष्ण्यपानाम्<br>आयुः श्रियो विभव इच्छति यान् जनोऽयम् ।<br>येऽस्मत्पितुः कुपितहासविजृम्भितभ्रू-<br>विस्फूर्जितेन लुलिताः स तु ते निरस्तः ॥ २३ ॥" },
       17: { "sa": "तस्मादमूस्तनुभृतामहमाशिषोऽज्ञ<br>आयुः श्रियं विभवमैन्द्रियमाविरिञ्च्यात् ।<br>नेच्छामि ते विलुलितानुरुविक्रमेण<br>कालात्मनोपनय मां निजभृत्यपार्श्वम् ॥ २४ ॥" },
       18: { "sa": "कुत्राशिषः श्रुतिसुखा मृगतृष्णिरूपाः<br>क्वेदं कलेवरमशेषरुजां विरोहः ।<br>निर्विद्यते न तु जनो यदपीति विद्वान्<br>कामानलं मधुलवैः शमयन् दुरापैः ॥ २५ ॥" },
-      19: { "sa": "क्वाहं रजःप्रभव ईश तमोऽधिकेऽस्मिन्<br>जातः सुरेतरकुले क्व तवानुकम्पा ।<br>न ब्रह्मणो न तु भवस्य न वै रमाया<br>यन्मेऽर्पितः शिरसि पद्मकरः प्रसादः ॥ ২৬ ॥" },
+      19: { "sa": "क्वाहं रजःप्रभव ईश तमोऽधिकेऽस्मिन्<br>जातः सुरेतरकुले क्व तवानुकम्पा ।<br>न ब्रह्मणो न तु भवस्य न वै रमाया<br>यन्मेऽर्पितः शिरसि पद्मकरः प्रसादः ॥ २६ ॥" },
       20: { "sa": "नैषा परावरमतिर्भवतो न नु स्याज्<br>जन्तैर्यथात्मसुहृदो जगतस्तथापि ।<br>संसेवया सुरतरोरिव ते प्रसादः<br>सेवानुरूपमुदयो न परावरत्वम् ॥ २७ ॥" },
       21: { "sa": "एवं जनं निपतितं प्रभवाहिकूपे<br>कामाभिकाममनु यः प्रपतन् प्रसङ्गात् ।<br>कृत्वात्मसात् सुरर्षिणा भगवन् गृहीतः<br>सोऽहं कथं नु विसृजे तव भृत्यसेवाम् ॥ २८ ॥" },
       22: { "sa": "मत्प्राणरक्षणमनन्त पितुर्वधश्च<br>मन्ये स्वभृत्यऋषिवाक्यमृतं विधातुम् ।<br>खड्गं प्रगृह्य यदवोचदसद्विधित्सुस्<br>त्वामीश्वरो मदपरोऽवतु कं हरामि ॥ २९ ॥" },
@@ -519,7 +518,6 @@
 
   // --- ASK ACHARYA (GEMINI API) INTEGRATION ---
   document.addEventListener('selectionchange', () => {
-    // Only display if authorized via passkey!
     if (!isAuthorized) return;
 
     setTimeout(() => {
@@ -547,8 +545,8 @@
 
     window.getSelection().removeAllRanges(); 
 
-    // Hardcoded Key Provided by User
-    const apiKey = "AQ.Ab8RN6JgwPb2CLHoKe2N3lMNHYmvEzJiNU7FgE0Lg_RLNNaEyA"; 
+    // Hardcoded New AQ Key Provided by User
+    const apiKey = "AQ.Ab8RN6JoWoryJnyhCIaQYln1v3QbC40DmJvrYFQQtERfJ3Ajyw"; 
 
     els.acharyaTooltip.style.display = 'none';
     document.getElementById('acharyaModal').style.display = 'flex';
@@ -558,12 +556,18 @@
     const promptText = `You are a traditional Sanskrit Acharya. Analyze this text: "${text}". Provide: 1. Padachheda (Word-by-word split) 2. Grammatical Breakdown (Dhatu, Sandhi rules, Vibhakti) 3. Meaning. Format cleanly and concisely.`;
 
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent`, {
+      const fetchHeaders = { "Content-Type": "application/json" };
+      let fetchUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent`;
+
+      if (apiKey.startsWith("AQ.")) {
+        fetchHeaders["Authorization"] = `Bearer ${apiKey}`;
+      } else {
+        fetchUrl += `?key=${apiKey}`;
+      }
+
+      const response = await fetch(fetchUrl, {
         method: "POST",
-        headers: { 
-          "Content-Type": "application/json",
-          "x-goog-api-key": apiKey
-        },
+        headers: fetchHeaders,
         body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
       });
       
@@ -580,7 +584,7 @@
       
     } catch (err) {
       document.getElementById('acharyaLoading').style.display = 'none';
-      document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">Error: Could not fetch analysis. Check API key format.</span><br><br><span style="font-size:11px;">${err.message}</span>`;
+      document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">Error: Could not fetch analysis. Check API key.</span><br><br><span style="font-size:11px;">${err.message}</span>`;
     }
   }
 
