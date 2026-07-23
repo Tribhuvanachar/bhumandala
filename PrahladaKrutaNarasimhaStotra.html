@@ -6,7 +6,6 @@
 <title>Bhagavata Digital Library</title>
 <style>
   :root {
-    /* Light Theme Variables */
     --bg-main: #f4f6f9; --card-bg: #fff; --card-border: #e0e6ed;
     --card-active: #ffebee; --text-primary: #1a1a1a; --text-sanskrit: #b71c1c;
     --accent-red: #d32f2f; --accent-gold: #ffa000; --panel-bg: #fff;
@@ -15,7 +14,6 @@
   }
 
   body.dark-mode {
-    /* Dark Theme Variables */
     --bg-main: #121212; --card-bg: #1e1e1e; --card-border: #333;
     --card-active: #3e2723; --text-primary: #e0e0e0; --text-sanskrit: #ffab91;
     --accent-red: #ef5350; --panel-bg: #1e1e1e;
@@ -61,7 +59,6 @@
   .btn-icon { background: none; border: none; font-size: 16px; cursor: pointer; color: #b0bec5; padding: 4px; }
   .is-fav { color: var(--accent-gold) !important; }
   .is-practice { color: var(--accent-red) !important; }
-  .has-note { color: #1976d2 !important; }
 
   .snippet-badge { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; border-radius: 12px; padding: 2px 8px; font-size: 10px; font-weight: bold; cursor: pointer; margin-left: 32px; display: inline-block; }
   body.dark-mode .snippet-badge { background: #1b5e20; color: #c8e6c9; border-color: #2e7d32; }
@@ -116,10 +113,10 @@
 
   .snip-list-item { background: var(--bg-main); padding: 8px; border-radius: 6px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--card-border); }
 
-  /* Ask Gemini Magic Tooltip */
+  /* Ask Gemini Magic Tooltip - Rendered BELOW selection to avoid Android Menu collision */
   #geminiTooltip {
     position: fixed;
-    background: linear-gradient(135deg, #4285f4, #9b72cb, #d96570);
+    background: linear-gradient(135deg, #1a73e8, #8e24aa, #d93025);
     color: white;
     padding: 8px 14px;
     border-radius: 20px;
@@ -128,13 +125,12 @@
     cursor: pointer;
     display: none;
     z-index: 10000;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
     transform: translateX(-50%);
     align-items: center;
     gap: 6px;
     letter-spacing: 0.5px;
   }
-  #geminiTooltip:hover { opacity: 0.9; }
 </style>
 </head>
 <body>
@@ -146,8 +142,7 @@
 <div class="top-bar">
   <div class="top-bar-title">❮ Library</div>
   <div class="top-actions">
-    <!-- Beginner Feature Placeholder -->
-    <button class="btn-lang" onclick="alert('Padachheda (Word-Split) view will be available once specific datasets are uploaded by the editors!')" title="Padachheda View">Pada</button>
+    <button class="btn-lang" onclick="alert('Padachheda (Word-Split) view will be available once specific datasets are uploaded!')" title="Padachheda View">Pada</button>
     
     <div style="position:relative;">
       <button class="btn-top" onclick="togglePopup('fontPopup')">Aa</button>
@@ -272,18 +267,6 @@
   <div onclick="setMark('none')" style="color: #888;">❌ Clear Marker</div>
 </div>
 
-<!-- Notes Modal -->
-<div class="modal-overlay" id="noteModal">
-  <div class="modal-content">
-    <h4 style="margin:0 0 6px 0;">📝 Notes (Shloka <span id="noteShlokaNum"></span>)</h4>
-    <textarea id="noteText"></textarea>
-    <div style="text-align:right;">
-      <button class="btn-sm" onclick="closeNote()">Cancel</button>
-      <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; margin-left:6px;" onclick="saveNote()">Save</button>
-    </div>
-  </div>
-</div>
-
 <!-- Snippets Modal -->
 <div class="modal-overlay" id="snippetModal">
   <div class="modal-content">
@@ -296,55 +279,60 @@
 </div>
 
 <script>
-  // --- DATA ---
+  // --- COMPLETE 43-SHLOKA MAPPING (1 to 43 mapped to Audio Files NS1 to NS43) ---
   const stotraData = {
-    metadata: { title: "॥ प्रह्लादकृत नृसिंह स्तोत्र ॥", author: "By Tribhuvan Achar", archiveBaseUrl: "https://archive.org/download/svg_3bu1_pns/", filePrefix: "NS", fileExtension: ".mp3", totalShlokas: 50 },
+    metadata: { 
+      title: "॥ प्रह्लादकृत नृसिंह स्तोत्र ॥", 
+      author: "By Tribhuvan Achar", 
+      archiveBaseUrl: "https://archive.org/download/svg_3bu1_pns/", 
+      filePrefix: "NS", 
+      fileExtension: ".mp3", 
+      totalShlokas: 43 
+    },
     shlokas: {
-      1: { "sa": "ब्रह्मोवाच ।<br>त्वं नस्तपः परममात्थ यदात्मतन्त्रो...", "kn": "(Kannada text here...)", "en": "Lord Brahma said..." },
-      2: { "sa": "श्रीशुक उवाच ।<br>इत्युक्त्वा तं तदा ब्रह्मा..." },
-      8: { "sa": "श्रीप्रह्राद उवाच |<br>ब्रह्मादयः सुरगणा मुनयोऽथ सिद्धाः |<br>सत्त्वैक्तानगतयो वचसां प्रवाहैः |<br>नाराधितुं पुरुगुणैर् अधुनापि पिप्रुः |<br>किं तोष्टुम् अर्हति स मे हरिर् उग्रजातेः || ८ ||" },
-      9: { "sa": "मन्ये धनाभिजनरूपतपःश्रुतौजस्<br>तेजःप्रभावबलपौरुषबुद्धियोगाः ।<br>नाराधनाय हि भवन्ति परस्य पुंसो<br>भक्त्या तुतोष भगवान् गजयूथपाय ॥ ९ ॥" },
-      10: { "sa": "विप्राद् द्विषड्गुणयुताद् अरविन्दनाभ-<br>पादारविन्दविमुखात् श्वपचं वरिष्ठम् ।<br>मन्ये तदर्पितमनोवचनेहितार्थ-<br>प्राणं पुनाति स कुलं न तु भूरिमानः ॥ १० ॥" },
-      11: { "sa": "नैवात्मनः प्रभुरयं निजलाभपूर्णो<br>मानं जनादविदुषः करुणो वृणीते ।<br>यद्यज्जनो भगवते विदधीत मानं<br>तच्चात्मने प्रतिमुखस्य यथा मुखश्रीः ॥ ११ ॥" },
-      12: { "sa": "तस्मादहं विगतविकलव ईश्वरस्य<br>सर्वात्मना महि गृणामि यथा मनीषम् ।<br>नीचोऽजया गुणविसर्गमनुप्रविष्टः<br>पूयेत येन हि पुमाननुवर्णितेन ॥ १२ ॥" },
-      13: { "sa": "सर्वे ह्यमी विधिकरास्तव सत्त्वधाम्नो<br>ब्रह्मादयो वयमिवेश न चोद्विजन्तः ।<br>क्षेमाय भूतय उत आत्मसुखाय चास्य<br>विक्रीडितं भगवतो रुचिरावतारैः ॥ १३ ॥" },
-      14: { "sa": "तद्यच्छ मन्युमसुरश्च हतस्त्वयाद्य<br>मोदेत साधुरपि वृश्चिकसर्पहत्या ।<br>लोकाश्च निर्वृतिमिताः प्रतियन्ति सर्वे<br>रूपं नृसिंह विभयाय जनाः स्मरन्ति ॥ १४ ॥" },
-      15: { "sa": "नाहं बिभेम्यजित तेऽतिभयानकास्य-<br>जिह्वार्कनेत्रभ्रुकुटीरभसोग्रदंष्ट्रात् ।<br>आन्त्रस्रजःक्षतजकेशरशङ्कुकर्णान्<br>निर्ह्रादभीतदिगिभादरिभिन्नखाग्रात् ॥ १५ ॥" },
-      16: { "sa": "त्रस्तोऽस्म्यहं कृपणवत्सल दुःसहोग्र-<br>संसारचक्रकदनाद् ग्रसतां प्रणीतः ।<br>बद्धः स्वकर्मभिरुशत्तम तेऽङ्घ्रिमूलं<br>प्रीतोऽपवर्गशरणं ह्वयसे कदा नु ॥ १६ ॥" },
-      17: { "sa": "यस्मात् प्रियाप्रियवियोगसंयोगजन्म-<br>शोकाग्निना सकलयोनिषु दह्यमानः ।<br>दुःखौषधं तदपि दुःखमतद्धियाहं<br>भूमन् भ्रमामि वद मे तव दास्ययोगम् ॥ १७ ॥" },
-      18: { "sa": "सोऽहं प्रियस्य सुहृदः परदेवताया<br>लीलाकथास्तव नृसिंह विरिञ्चगीताः ।<br>अञ्जस्तितर्म्यनुगृणन् गुणविप्रमुक्तो<br>दुर्गाणि ते पदयुगालयहंससङ्गः ॥ १८ ॥" },
-      19: { "sa": "बालस्य नेह शरणं पितरौ नृसिंह<br>नार्तस्य चागदमुदन्वति मज्जतो नौः ।<br>तप्तस्य तत्प्रतिवीधिर्य इहाञ्जसेष्टस्<br>तावद्विभो तनुभृतां त्वदुपेक्षितानाम् ॥ १९ ॥" },
-      20: { "sa": "यस्मिन् यतो यर्हि येन च यस्य यस्माद्<br>यस्मै यथा यदुत यस्त्वपरः परो वा ।<br>भावः करोति विकरोति पृथक् स्वभावः<br>सञ्चोदितस्तदखिलं भवतः स्वरूपम् ॥ २० ॥" },
-      21: { "sa": "माया मनः सृजति कर्ममयं बलीयः<br>कालेन चोदितगुणानुमतेन पुंसः ।<br>छन्दोमयं यदजयार्पितषोडशारं<br>संसारचक्रमज कोऽतितरेत् त्वदन्यः ॥ २१ ॥" },
-      22: { "sa": "स त्वं हि नित्यविजितात्मगुणः स्वधाम्ना<br>कालो वशीकृतविसृज्यविसर्गशक्तिः ।<br>चक्रे विसृष्टमजयेश्वर षोडशारे<br>निष्पीड्यमानमुपकर्ष विभो प्रपन्नम् ॥ २२ ॥" },
-      23: { "sa": "दृष्टा मया दिवि विभोऽखिलधिष्ण्यपानाम्<br>आयुः श्रियो विभव इच्छति यान् जनोऽयम् ।<br>येऽस्मत्पितुः कुपितहासविजृम्भितभ्रू-<br>विस्फूर्जितेन लुलिताः स तु ते निरस्तः ॥ २३ ॥" },
-      24: { "sa": "तस्मादमूस्तनुभृतामहमाशिषोऽज्ञ<br>आयुः श्रियं विभवमैन्द्रियमाविरिञ्च्यात् ।<br>नेच्छामि ते विलुलितानुरुविक्रमेण<br>कालात्मनोपनय मां निजभृत्यपार्श्वम् ॥ २४ ॥" },
-      25: { "sa": "कुत्राशिषः श्रुतिसुखा मृगतृष्णिरूपाः<br>क्वेदं कलेवरमशेषरुजां विरोहः ।<br>निर्विद्यते न तु जनो यदपीति विद्वान्<br>कामानलं मधुलवैः शमयन् दुरापैः ॥ २५ ॥" },
-      26: { "sa": "क्वाहं रजःप्रभव ईश तमोऽधिकेऽस्मिन्<br>जातः सुरेतरकुले क्व तवानुकम्पा ।<br>न ब्रह्मणो न तु भवस्य न वै रमाया<br>यन्मेऽर्पितः शिरसि पद्मकरः प्रसादः ॥ २६ ॥" },
-      27: { "sa": "नैषा परावरमतिर्भवतो न नु स्याज्<br>जन्तैर्यथात्मसुहृदो जगतस्तथापि ।<br>संसेवया सुरतरोरिव ते प्रसादः<br>सेवानुरूपमुदयो न परावरत्वम् ॥ २७ ॥" },
-      28: { "sa": "एवं जनं निपतितं प्रभवाहिकूपे<br>कामाभिकाममनु यः प्रपतन् प्रसङ्गात् ।<br>कृत्वात्मसात् सुरर्षिणा भगवन् गृहीतः<br>सोऽहं कथं नु विसृजे तव भृत्यसेवाम् ॥ २८ ॥" },
-      29: { "sa": "मत्प्राणरक्षणमनन्त पितुर्वधश्च<br>मन्ये स्वभृत्यऋषिवाक्यमृतं विधातुम् ।<br>खड्गं प्रगृह्य यदवोचदसद्विधित्सुस्<br>त्वामीश्वरो मदपरोऽवतु कं हरामि ॥ २९ ॥" },
-      30: { "sa": "एकस्त्वमेव जगदेतममुष्य यत्त्वम्<br>आद्यन्तयोः पृथगवस्यसि मध्यतश्च ।<br>सृष्ट्वा गुणव्यतिकरं निजमाययेदं<br>नानेव तैरवसितस्तदनुप्रविष्टः ॥ ३० ॥" },
-      31: { "sa": "त्वं वा इदं सदसदीश भवांस्ततोऽन्यो<br>माया यदात्मपरबुद्धिरियं ह्यपार्था ।<br>यद्यस्य जन्म निधनं स्थितिरीक्षणं च<br>तद्वैतदेव वसुकालवदष्टितर्वोः ॥ ३१ ॥" },
-      32: { "sa": "न्यस्येदमात्मनि जगद्विलयाम्बुमध्ये<br>शेषे त्मना निजसुखानुभवो निरीहः ।<br>योगेन मीलितदृगात्मनिपीतनिद्रस्<br>तुर्ये स्थितो न तु तमो न गुणांश्च युङ्क्षे ॥ ३२ ॥" },
-      33: { "sa": "तस्यैव ते वपुरिदं निजकालशक्त्या<br>सञ्चोदितप्रकृतिधर्मण आत्मगूढम् ।<br>अम्भस्यनन्तशयनाद्विरमत्समाधेर्<br>नाभेरभूत् स्वकणिकावटवन्महाब्जम् ॥ ३३ ॥" },
-      34: { "sa": "तत्सम्भवः कविरतोऽन्यदपश्यमानस्<br>त्वां बीजमात्मनि ततं स बहिर्विचिन्त्य ।<br>नाविन्ददब्दशतमप्सु निमज्जमानो<br>जातेऽङ्कुरे कथमु होपलभेत बीजम् ॥ ३४ ॥" },
-      35: { "sa": "स त्वात्मयोनिरतिविस्मित आश्रितोऽब्जं<br>कालेन तीव्रतपसा परिशुद्धभावः ।<br>त्वामात्मनीश भुवि गन्धमिवातिसूक्ष्मं<br>भूतेन्द्रियाशयमये विततं ददर्श ॥ ३५ ॥" },
-      36: { "sa": "एवं सहस्रवदनाङ्घ्रिशिरःकरोरु-<br>नासाद्यकर्णनयनाभरणायुधाढ्यम् ।<br>मायामयं सदुपलक्षितसन्निवेशं<br>दृष्ट्वा महापुरुषमाप मुदं विरिञ्चः ॥ ३६ ॥" },
-      37: { "sa": "तस्मै भवान् हयशिरस्तनुवं हि बिभ्रद्<br>वेदद्रुहावतिबलौ मधुकैटभाख्यौ ।<br>हत्वानयच्छ्रुतिगणांश्च रजस्तमश्च<br>सत्त्वं तव प्रियतमां तनुमामनन्ति ॥ ३७ ॥" },
-      38: { "sa": "इत्थं नृतिर्यगृषिदेवझषावतारैर्<br>लोकान् विभावयसि हंसि जगत्प्रतीपान् ।<br>धर्मं महापुरुष पासि युगानुवृत्तं<br>छन्नः कलौ यदभवस्त्रियुगोऽथ स त्वम् ॥ ३८ ॥" },
-      39: { "sa": "नैतन्मनस्तव कथासु विकुण्ठनाथ<br>सम्प्रीयते दुरितदुष्टमसाधु तीव्रम् ।<br>कामातुरं हर्षशोकभयैषणार्तं<br>तस्मिन् कथं तव गतिं विमृशामि दीनः ॥ ३९ ॥" },
-      40: { "sa": "जिह्वैकतोऽच्युत विकर्षति मावितृप्ता<br>शिश्नोऽन्यतस्त्वगुदरं श्रवणं कुतश्चित् ।<br>घ्राणोऽन्यतश्चपलदृक् क्व च कर्मशक्तिर्<br>बह्व्यः सपत्न्य इव गेहपतिं लुनन्ति ॥ ४० ॥" },
-      41: { "sa": "एवं स्वकर्मपतितं भववैतरण्याम्<br>अन्योन्यजन्ममरणाशनभीतभीतम् ।<br>पश्यन् जनं स्वपरविग्रहवैरमैत्रं<br>हन्तेति पारचर पीपृहि मूढमद्य ॥ ४१ ॥" },
-      42: { "sa": "को न्वत्र तेऽखिलगुरो भगवन् प्रयास<br>उत्तारणेऽस्य भवसम्भवलोपहेतोः ।<br>मूढेषु वै महदनुग्रह आर्तबन्धो<br>किं तेन ते प्रियजनाननुसेवतां नः ॥ ४२ ॥" },
-      43: { "sa": "नैवोद्विजे पर दुरत्ययवैतरण्यास्<br>त्वद्वीर्यगायनमहामृतमग्नचित्तः ।<br>शोचे ततो विमुखचेतस इन्द्रियार्थ-<br>मायासुखाय भरमुद्वहतो विमूढान् ॥ ४३ ॥" },
-      44: { "sa": "प्रायेण देव मुनयः स्वविमुक्तिकामा<br>मौनं चरन्ति विजने न परार्थनिष्ठाः ।<br>नैतान् विहाय कृपणान् विमुमुक्ष एको<br>नान्यं त्वदस्य शरणं भ्रमतोऽनुपश्ये ॥ ४४ ॥" },
-      45: { "sa": "यन्मैथुनादिगृहमेधिसुखं हि तुच्छं<br>कण्डूयनेन करयोरिव दुःखदुःखम् ।<br>तृप्यन्ति नेह कृपणा बहुदुःखभाजः<br>कण्डूतिवन्मनसिजं विषहेत धीरः ॥ ४५ ॥" },
-      46: { "sa": "मौनव्रतश्रुततपोऽध्ययनस्वधर्म-<br>व्याख्यारहोजपसमाधय आपवर्ग्याः ।<br>प्रायः परं पुरुष ते त्वजितेन्द्रियाणां<br>वार्ता भवन्त्युत न वात्र तु दाम्भिकानाम् ॥ ४६ ॥" },
-      47: { "sa": "रूपे इमे सदसती तव वेदसृष्टे<br>बीजाङ्कुराविव न चान्यदरूपकस्य ।<br>युक्ताः समक्षमुभयत्र विचक्षन्ते त्वां<br>योगेन वह्निमिव दारुषु नान्यतः स्यात् ॥ ४७ ॥" },
-      48: { "sa": "त्वं वायुरग्निरवनिर्वियदम्बु मात्राः<br>प्राणेन्द्रियाणि हृदयं चिदनुग्रहश्च ।<br>सर्वं त्वमेव सगुणो विगुणश्च भूमन्<br>नान्यत् त्वदस्त्यपि मनोवचसा निरुक्तम् ॥ ४8 ॥" },
-      49: { "sa": "नैते गुणा न गुणिनो महदादयो ये<br>सर्वे मनःप्रभृतयः सहदेवमर्त्याः ।<br>आद्यन्तवन्त उरुगाय विदन्ति हि त्वां<br>एवं विमृश्य सुधियो विरमन्ति शब्दात् ॥ ४९ ॥" },
-      50: { "sa": "तत्तेऽर्हत्तम नमः स्तुतिकर्मपूजाः<br>कर्म स्मृतिश्चरणयोः श्रवणं कथायाम् ।<br>संसेवया त्वयि विनेति षडङ्गया किं<br>भक्तिं जनः परमहंसगतौ लभेत ॥ ५० ॥" }
+      1: { "sa": "श्रीप्रह्राद उवाच |<br>ब्रह्मादयः सुरगणा मुनयोऽथ सिद्धाः |<br>सत्त्वैक्तानगतयो वचसां प्रवाहैः |<br>नाराधितुं पुरुगुणैर् अधुनापि पिप्रुः |<br>किं तोष्टुम् अर्हति स मे हरिर् उग्रजातेः || ८ ||" },
+      2: { "sa": "मन्ये धनाभिजनरूपतपःश्रुतौजस्<br>तेजःप्रभावबलपौरुषबुद्धियोगाः ।<br>नाराधनाय हि भवन्ति परस्य पुंसो<br>भक्त्या तुतोष भगवान् गजयूथपाय ॥ ९ ॥" },
+      3: { "sa": "विप्राद् द्विषड्गुणयुताद् अरविन्दनाभ-<br>पादारविन्दविमुखात् श्वपचं वरिष्ठम् ।<br>मन्ये तदर्पितमनोवचनेहितार्थ-<br>प्राणं पुनाति स कुलं न तु भूरिमानः ॥ १० ॥" },
+      4: { "sa": "नैवात्मनः प्रभुरयं निजलाभपूर्णो<br>मानं जनादविदुषः करुणो वृणीते ।<br>यद्यज्जनो भगवते विदधीत मानं<br>तच्चात्मने प्रतिमुखस्य यथा मुखश्रीः ॥ ११ ॥" },
+      5: { "sa": "तस्मादहं विगतविकलव ईश्वरस्य<br>सर्वात्मना महि गृणामि यथा मनीषम् ।<br>नीचोऽजया गुणविसर्गमनुप्रविष्टः<br>पूयेत येन हि पुमाननुवर्णितेन ॥ १२ ॥" },
+      6: { "sa": "सर्वे ह्यमी विधिकरास्तव सत्त्वधाम्नो<br>ब्रह्मादयो वयमिवेश न चोद्विजन्तः ।<br>क्षेमाय भूतय उत आत्मसुखाय चास्य<br>विक्रीडितं भगवतो रुचिरावतारैः ॥ १३ ॥" },
+      7: { "sa": "तद्यच्छ मन्युमसुरश्च हतस्त्वयाद्य<br>मोदेत साधुरपि वृश्चिकसर्पहत्या ।<br>लोकाश्च निर्वृतिमिताः प्रतियन्ति सर्वे<br>रूपं नृसिंह विभयाय जनाः स्मरन्ति ॥ १४ ॥" },
+      8: { "sa": "नाहं बिभेम्यजित तेऽतिभयानकास्य-<br>जिह्वार्कनेत्रभ्रुकुटीरभसोग्रदंष्ट्रात् ।<br>आन्त्रस्रजःक्षतजकेशरशङ्कुकर्णान्<br>निर्ह्रादभीतदिगिभादरिभिन्नखाग्रात् ॥ १५ ॥" },
+      9: { "sa": "त्रस्तोऽस्म्यहं कृपणवत्सल दुःसहोग्र-<br>संसारचक्रकदनाद् ग्रसतां प्रणीतः ।<br>बद्धः स्वकर्मभिरुशत्तम तेऽङ्घ्रिमूलं<br>प्रीतोऽपवर्गशरणं ह्वयसे कदा नु ॥ १६ ॥" },
+      10: { "sa": "यस्मात् प्रियाप्रियवियोगसंयोगजन्म-<br>शोकाग्निना सकलयोनिषु दह्यमानः ।<br>दुःखौषधं तदपि दुःखमतद्धियाहं<br>भूमन् भ्रमामि वद मे तव दास्ययोगम् ॥ १७ ॥" },
+      11: { "sa": "सोऽहं प्रियस्य सुहृदः परदेवताया<br>लीलाकथास्तव नृसिंह विरिञ्चगीताः ।<br>अञ्जस्तितर्म्यनुगृणन् गुणविप्रमुक्तो<br>दुर्गाणि ते पदयुगालयहंससङ्गः ॥ १८ ॥" },
+      12: { "sa": "बालस्य नेह शरणं पितरौ नृसिंह<br>नार्तस्य चागदमुदन्वति मज्जतो नौः ।<br>तप्तस्य तत्प्रतिवीधिर्य इहाञ्जसेष्टस्<br>तावद्विभो तनुभृतां त्वदुपेक्षितानाम् ॥ १९ ॥" },
+      13: { "sa": "यस्मिन् यतो यर्हि येन च यस्य यस्माद्<br>यस्मै यथा यदुत यस्त्वपरः परो वा ।<br>भावः करोति विकरोति पृथक् स्वभावः<br>सञ्चोदितस्तदखिलं भवतः स्वरूपम् ॥ २० ॥" },
+      14: { "sa": "माया मनः सृजति कर्ममयं बलीयः<br>कालेन चोदितगुणानुमतेन पुंसः ।<br>छन्दोमयं यदजयार्पितषोडशारं<br>संसारचक्रमज कोऽतितरेत् त्वदन्यः ॥ २१ ॥" },
+      15: { "sa": "स त्वं हि नित्यविजितात्मगुणः स्वधाम्ना<br>कालो वशीकृतविसृज्यविसर्गशक्तिः ।<br>चक्रे विसृष्टमजयेश्वर षोडशारे<br>निष्पीड्यमानमुपकर्ष विभो प्रपन्नम् ॥ २२ ॥" },
+      16: { "sa": "दृष्टा मया दिवि विभोऽखिलधिष्ण्यपानाम्<br>आयुः श्रियो विभव इच्छति यान् जनोऽयम् ।<br>येऽस्मत्पितुः कुपितहासविजृम्भितभ्रू-<br>विस्फूर्जितेन लुलिताः स तु ते निरस्तः ॥ २३ ॥" },
+      17: { "sa": "तस्मादमूस्तनुभृतामहमाशिषोऽज्ञ<br>आयुः श्रियं विभवमैन्द्रियमाविरिञ्च्यात् ।<br>नेच्छामि ते विलुलितानुरुविक्रमेण<br>कालात्मनोपनय मां निजभृत्यपार्श्वम् ॥ २४ ॥" },
+      18: { "sa": "कुत्राशिषः श्रुतिसुखा मृगतृष्णिरूपाः<br>क्वेदं कलेवरमशेषरुजां विरोहः ।<br>निर्विद्यते न तु जनो यदपीति विद्वान्<br>कामानलं मधुलवैः शमयन् दुरापैः ॥ २५ ॥" },
+      19: { "sa": "क्वाहं रजःप्रभव ईश तमोऽधिकेऽस्मिन्<br>जातः सुरेतरकुले क्व तवानुकम्पा ।<br>न ब्रह्मणो न तु भवस्य न वै रमाया<br>यन्मेऽर्पितः शिरसि पद्मकरः प्रसादः ॥ २६ ॥" },
+      20: { "sa": "नैषा परावरमतिर्भवतो न नु स्याज्<br>जन्तैर्यथात्मसुहृदो जगतस्तथापि ।<br>संसेवया सुरतरोरिव ते प्रसादः<br>सेवानुरूपमुदयो न परावरत्वम् ॥ २७ ॥" },
+      21: { "sa": "एवं जनं निपतितं प्रभवाहिकूपे<br>कामाभिकाममनु यः प्रपतन् प्रसङ्गात् ।<br>कृत्वात्मसात् सुरर्षिणा भगवन् गृहीतः<br>सोऽहं कथं नु विसृजे तव भृत्यसेवाम् ॥ २८ ॥" },
+      22: { "sa": "मत्प्राणरक्षणमनन्त पितुर्वधश्च<br>मन्ये स्वभृत्यऋषिवाक्यमृतं विधातुम् ।<br>खड्गं प्रगृह्य यदवोचदसद्विधित्सुस्<br>त्वामीश्वरो मदपरोऽवतु कं हरामि ॥ २९ ॥" },
+      23: { "sa": "एकस्त्वमेव जगदेतममुष्य यत्त्वम्<br>आद्यन्तयोः पृथगवस्यसि मध्यतश्च ।<br>सृष्ट्वा गुणव्यतिकरं निजमाययेदं<br>नानेव तैरवसितस्तदनुप्रविष्टः ॥ ३० ॥" },
+      24: { "sa": "त्वं वा इदं सदसदीश भवांस्ततोऽन्यो<br>माया यदात्मपरबुद्धिरियं ह्यपार्था ।<br>यद्यस्य जन्म निधनं स्थितिरीक्षणं च<br>तद्वैतदेव वसुकालवदष्टितर्वोः ॥ ३१ ॥" },
+      25: { "sa": "न्यस्येदमात्मनि जगद्विलयाम्बुमध्ये<br>शेषे त्मना निजसुखानुभवो निरीहः ।<br>योगेन मीलितदृगात्मनिपीतनिद्रस्<br>तुर्ये स्थितो न तु तमो न गुणांश्च युङ्क्षे ॥ ३२ ॥" },
+      26: { "sa": "तस्यैव ते वपुरिदं निजकालशक्त्या<br>सञ्चोदितप्रकृतिधर्मण आत्मगूढम् ।<br>अम्भस्यनन्तशयनाद्विरमत्समाधेर्<br>नाभेरभूत् स्वकणिकावटवन्महाब्जम् ॥ ३३ ॥" },
+      27: { "sa": "तत्सम्भवः कविरतोऽन्यदपश्यमानस्<br>त्वां बीजमात्मनि ततं स बहिर्विचिन्त्य ।<br>नाविन्ददब्दशतमप्सु निमज्जमानो<br>जातेऽङ्कुरे कथमु होपलभेत बीजम् ॥ ३४ ॥" },
+      28: { "sa": "स त्वात्मयोनिरतिविस्मित आश्रितोऽब्जं<br>कालेन तीव्रतपसा परिशुद्धभावः ।<br>त्वामात्मनीश भुवि गन्धमिवातिसूक्ष्मं<br>भूतेन्द्रियाशयमये विततं ददर्श ॥ ३५ ॥" },
+      29: { "sa": "एवं सहस्रवदनाङ्घ्रिशिरःकरोरु-<br>नासाद्यकर्णनयनाभरणायुधाढ्यम् ।<br>मायामयं सदुपलक्षितसन्निवेशं<br>दृष्ट्वा महापुरुषमाप मुदं विरिञ्चः ॥ ३६ ॥" },
+      30: { "sa": "तस्मै भवान् हयशिरस्तनुवं हि बिभ्रद्<br>वेदद्रुहावतिबलौ मधुकैटभाख्यौ ।<br>हत्वानयच्छ्रुतिगणांश्च रजस्तमश्च<br>सत्त्वं तव प्रियतमां तनुमामनन्ति ॥ ३७ ॥" },
+      31: { "sa": "इत्थं नृतिर्यगृषिदेवझषावतारैर्<br>लोकान् विभावयसि हंसि जगत्प्रतीपान् ।<br>धर्मं महापुरुष पासि युगानुवृत्तं<br>छन्नः कलौ यदभवस्त्रियुगोऽथ स त्वम् ॥ ३८ ॥" },
+      32: { "sa": "नैतन्मनस्तव कथासु विकुण्ठनाथ<br>सम्प्रीयते दुरितदुष्टमसाधु तीव्रम् ।<br>कामातुरं हर्षशोकभयैषणार्तं<br>तस्मिन् कथं तव गतिं विमृशामि दीनः ॥ ३९ ॥" },
+      33: { "sa": "जिह्वैकतोऽच्युत विकर्षति मावितृप्ता<br>शिश्नोऽन्यतस्त्वगुदरं श्रवणं कुतश्चित् ।<br>घ्राणोऽन्यतश्चपलदृक् क्व च कर्मशक्तिर्<br>बह्व्यः सपत्न्य इव गेहपतिं लुनन्ति ॥ ४० ॥" },
+      34: { "sa": "एवं स्वकर्मपतितं भववैतरण्याम्<br>अन्योन्यजन्ममरणाशनभीतभीतम् ।<br>पश्यन् जनं स्वपरविग्रहवैरमैत्रं<br>हन्तेति पारचर पीपृहि मूढमद्य ॥ ४१ ॥" },
+      35: { "sa": "को न्वत्र तेऽखिलगुरो भगवन् प्रयास<br>उत्तारणेऽस्य भवसम्भवलोपहेतोः ।<br>मूढेषु वै महदनुग्रह आर्तबन्धो<br>किं तेन ते प्रियजनाननुसेवतां नः ॥ ४२ ॥" },
+      36: { "sa": "नैवोद्विजे पर दुरत्ययवैतरण्यास्<br>त्वद्वीर्यगायनमहामृतमग्नचित्तः ।<br>शोचे ततो विमुखचेतस इन्द्रियार्थ-<br>मायासुखाय भरमुद्वहतो विमूढान् ॥ ४३ ॥" },
+      37: { "sa": "प्रायेण देव मुनयः स्वविमुक्तिकामा<br>मौनं चरन्ति विजने न परार्थनिष्ठाः ।<br>नैतान् विहाय कृपणान् विमुमुक्ष एको<br>नान्यं त्वदस्य शरणं भ्रमतोऽनुपश्ये ॥ ४४ ॥" },
+      38: { "sa": "यन्मैथुनादिगृहमेधिसुखं हि तुच्छं<br>कण्डूयनेन करयोरिव दुःखदुःखम् ।<br>तृप्यन्ति नेह कृपणा बहुदुःखभाजः<br>कण्डूतिवन्मनसिजं विषहेत धीरः ॥ ४५ ॥" },
+      39: { "sa": "मौनव्रतश्रुततपोऽध्ययनस्वधर्म-<br>व्याख्यारहोजपसमाधय आपवर्ग्याः ।<br>प्रायः परं पुरुष ते त्वजितेन्द्रियाणां<br>वार्ता भवन्त्युत न वात्र तु दाम्भिकानाम् ॥ ४६ ॥" },
+      40: { "sa": "रूपे इमे सदसती तव वेदसृष्टे<br>बीजाङ्कुराविव न चान्यदरूपकस्य ।<br>युक्ताः समक्षमुभयत्र विचक्षन्ते त्वां<br>योगेन वह्निमिव दारुषु नान्यतः स्यात् ॥ ४७ ॥" },
+      41: { "sa": "त्वं वायुरग्निरवनिर्वियदम्बु मात्राः<br>प्राणेन्द्रियाणि हृदयं चिदनुग्रहश्च ।<br>सर्वं त्वमेव सगुणो विगुणश्च भूमन्<br>नान्यत् त्वदस्त्यपि मनोवचसा निरुक्तम् ॥ ४8 ॥" },
+      42: { "sa": "नैते गुणा न गुणिनो महदादयो ये<br>सर्वे मनःप्रभृतयः सहदेवमर्त्याः ।<br>आद्यन्तवन्त उरुगाय विदन्ति हि त्वां<br>एवं विमृश्य सुधियो विरमन्ति शब्दात् ॥ ४९ ॥" },
+      43: { "sa": "तत्तेऽर्हत्तम नमः स्तुतिकर्मपूजाः<br>कर्म स्मृतिश्चरणयोः श्रवणं कथायाम् ।<br>संसेवया त्वयि विनेति षडङ्गया किं<br>भक्तिं जनः परमहंसगतौ लभेत ॥ ५० ॥" }
     }
   };
 
@@ -357,7 +345,6 @@
   let activeLang = 'sa'; 
 
   let marks = JSON.parse(localStorage.getItem('narasimhaMarks')) || {};
-  let notes = JSON.parse(localStorage.getItem('narasimhaNotes')) || {};
   let snippets = JSON.parse(localStorage.getItem('narasimhaSnippets')) || {};
 
   const els = {
@@ -369,8 +356,7 @@
     clearSearchBtn: document.getElementById('clearSearchBtn'), repeatInput: document.getElementById('repeatInput'),
     cacheBtn: document.getElementById('cacheBtn'), listEl: document.getElementById('shlokaList'),
     loopA: document.getElementById('loopA'), loopB: document.getElementById('loopB'), enableAB: document.getElementById('enableAB'),
-    autoABToggle: document.getElementById('autoABToggle'),
-    geminiTooltip: document.getElementById('geminiTooltip')
+    autoABToggle: document.getElementById('autoABToggle'), geminiTooltip: document.getElementById('geminiTooltip')
   };
 
   document.getElementById('stotraTitle').innerText = stotraData.metadata.title;
@@ -378,13 +364,28 @@
   document.getElementById('rangeStart').max = stotraData.metadata.totalShlokas;
   document.getElementById('rangeEnd').max = stotraData.metadata.totalShlokas;
 
-  function getText(id) { return (stotraData.shlokas[id] && stotraData.shlokas[id][activeLang]) ? stotraData.shlokas[id][activeLang] : (stotraData.shlokas[id] ? stotraData.shlokas[id]['sa'] : `श्लोक ${id}`); }
+  // Smart Fallback to Sanskrit ('sa') if selected language is empty
+  function getText(id) { 
+    if (!stotraData.shlokas[id]) return `श्लोक ${id}`;
+    const langTxt = stotraData.shlokas[id][activeLang];
+    return (langTxt && langTxt.trim().length > 0) ? langTxt : stotraData.shlokas[id]['sa']; 
+  }
+
   function formatTime(s) { if (isNaN(s)) return "0:00.000"; const m = Math.floor(s/60), sec = Math.floor(s%60), ms = Math.floor((s%1)*1000); return m + ":" + (sec<10?"0":"") + sec + "." + String(ms).padStart(3,'0'); }
   function updateRepeatDisplay() { const t = parseInt(els.repeatInput.value) || 1; els.repeatCounter.innerText = (activeId && t > 1) ? `Loop ${currentLoopCount + 1}/${t}` : ""; }
 
   function toggleDarkMode() { document.body.classList.toggle('dark-mode'); document.getElementById('darkModeBtn').innerText = document.body.classList.contains('dark-mode') ? '☾' : '☼'; }
   function setFontSize(px) { document.documentElement.style.setProperty('--font-multiplier', px + 'px'); document.querySelectorAll('#fontPopup .pop-item').forEach(el => el.classList.remove('active')); event.currentTarget.classList.add('active'); togglePopup('fontPopup'); }
-  function setLanguage(code) { activeLang = code; document.querySelectorAll('#langPopup .pop-item').forEach(el => el.classList.remove('active')); event.currentTarget.classList.add('active'); document.getElementById('activeLangBtn').innerText = event.currentTarget.childNodes[0].nodeValue.trim(); renderList(); if(activeId) els.readingCard.innerHTML = getText(activeId); togglePopup('langPopup'); }
+  
+  function setLanguage(code) { 
+    activeLang = code; 
+    document.querySelectorAll('#langPopup .pop-item').forEach(el => el.classList.remove('active')); 
+    event.currentTarget.classList.add('active'); 
+    document.getElementById('activeLangBtn').innerText = event.currentTarget.childNodes[0].nodeValue.trim(); 
+    renderList(); 
+    if(activeId) els.readingCard.innerHTML = getText(activeId); 
+    togglePopup('langPopup'); 
+  }
 
   // --- FILTERS ---
   function getFilteredIds() {
@@ -422,7 +423,6 @@
       c.className = `shloka-card ${activeId===i ? 'active':''}`; c.id = `shloka-${i}`;
       let mClass = "btn-icon", mIcon = "⋮";
       if (marks[i] === 'fav') { mClass += " is-fav"; mIcon = "★"; } else if (marks[i] === 'practice') { mClass += " is-practice"; mIcon = "🚩"; }
-      const nClass = notes[i] ? "btn-icon has-note" : "btn-icon";
       
       let badgeHtml = (snippets[i] && snippets[i].length > 0) ? `<div class="snippet-badge" onclick="openSnippetModal(${i}, event)">🎯 ${snippets[i].length} Snippets</div>` : '';
 
@@ -430,7 +430,7 @@
         <div class="shloka-main-row">
           <div class="shloka-num">${i}</div>
           <div class="shloka-text" onclick="playShloka(${i})">${getText(i)} ${badgeHtml}</div>
-          <div class="card-actions"><button class="${nClass}" onclick="openNote(${i})">📝</button><button class="${mClass}" onclick="openMarkerMenu(event, ${i})">${mIcon}</button></div>
+          <div class="card-actions"><button class="${mClass}" onclick="openMarkerMenu(event, ${i})">${mIcon}</button></div>
         </div>`;
       els.listEl.appendChild(c);
     }
@@ -479,23 +479,27 @@
     else { currentLoopCount = 0; updateRepeatDisplay(); if (currentFilter === 'none') { isPlaying=false; updatePlayUI(); return; } playNextFiltered(); }
   });
 
-  // --- ASK GEMINI TOOLTIP ---
+  // --- ASK GEMINI TOOLTIP (Rendered BELOW selection rect to avoid Android native menu clash) ---
   document.addEventListener('selectionchange', () => {
     const selection = window.getSelection();
     if (selection.toString().trim().length > 0) {
       const range = selection.getRangeAt(0);
       const rect = range.getBoundingClientRect();
       if(rect.top === 0 && rect.left === 0) return; 
+      
       els.geminiTooltip.style.display = 'flex';
-      els.geminiTooltip.style.top = `${rect.top - 45}px`;
-      els.geminiTooltip.style.left = `${rect.left + (rect.width/2)}px`;
-    } else { els.geminiTooltip.style.display = 'none'; }
+      // Placed 12px BELOW selection so Android Chrome popup stays above it!
+      els.geminiTooltip.style.top = `${rect.bottom + 12}px`;
+      els.geminiTooltip.style.left = `${rect.left + (rect.width / 2)}px`;
+    } else { 
+      els.geminiTooltip.style.display = 'none'; 
+    }
   });
 
   function askGemini() {
     const text = window.getSelection().toString().trim();
     if(text) {
-      const prompt = `Provide the word-by-word grammatical split (Padachheda) and meaning for this Sanskrit fragment: "${text}" from Prahlada-krita Narasimha Stotram.`;
+      const prompt = `Provide the word-by-word grammatical split (Padachheda), Dhatu, Sandhi, and meaning for this Sanskrit fragment: "${text}" from Prahlada-krita Narasimha Stotram.`;
       window.open(`https://gemini.google.com/app?q=${encodeURIComponent(prompt)}`, '_blank');
       els.geminiTooltip.style.display = 'none';
       window.getSelection().removeAllRanges();
@@ -548,11 +552,12 @@
   }
 
   function togglePopup(id) { document.querySelectorAll('.popup').forEach(p => { if(p.id !== id) p.classList.remove('show'); }); document.getElementById(id).classList.toggle('show'); }
+  let targetMenuId = null;
   function openMarkerMenu(e, id) { targetMenuId = id; els.markerMenu.style.left = `${e.pageX - 130}px`; els.markerMenu.style.top = `${e.pageY - 40}px`; els.markerMenu.classList.add('show'); }
   function setMark(type) { if (type === 'none') delete marks[targetMenuId]; else marks[targetMenuId] = type; localStorage.setItem('narasimhaMarks', JSON.stringify(marks)); els.markerMenu.classList.remove('show'); renderList(); }
 
   // Check Cache on Load
-  if (localStorage.getItem('narasimhaAllCached') === 'true') { els.cacheBtn.innerText = `✅ All Cached (50)`; els.cacheBtn.dataset.cached = "true"; els.cacheBtn.style.background = "#e8f5e9"; els.cacheBtn.style.color = "#2e7d32"; els.cacheBtn.style.borderColor = "#c8e6c9"; }
+  if (localStorage.getItem('narasimhaAllCached') === 'true') { els.cacheBtn.innerText = `✅ All Cached (43)`; els.cacheBtn.dataset.cached = "true"; els.cacheBtn.style.background = "#e8f5e9"; els.cacheBtn.style.color = "#2e7d32"; els.cacheBtn.style.borderColor = "#c8e6c9"; }
   async function cacheAllAudio(btn) {
     if(btn.dataset.cached === "true") return;
     const orig = btn.innerText; btn.innerText = "⏳ Preloading..."; btn.disabled = true; let success = 0;
@@ -568,10 +573,6 @@
   });
 
   els.speedInput.addEventListener('input', (e) => { els.speedVal.innerText = parseFloat(e.target.value).toFixed(1); currentAudio.playbackRate = e.target.value; });
-
-  function openNote(id) { targetNoteId = id; document.getElementById('noteShlokaNum').innerText = id; document.getElementById('noteText').value = notes[id] || ""; document.getElementById('noteModal').style.display = "flex"; }
-  function closeNote() { document.getElementById('noteModal').style.display = "none"; }
-  function saveNote() { const txt = document.getElementById('noteText').value.trim(); if(txt) notes[targetNoteId] = txt; else delete notes[targetNoteId]; localStorage.setItem('narasimhaNotes', JSON.stringify(notes)); closeNote(); renderList(); }
 
   renderList();
 </script>
