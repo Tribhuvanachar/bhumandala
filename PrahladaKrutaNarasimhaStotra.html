@@ -39,6 +39,7 @@
   .header { text-align: center; padding: 10px 0 15px; }
   .header h1 { margin: 0; font-size: 22px; color: var(--accent-red); font-weight: 800; }
   .header .author { font-size: 11px; color: #777; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-top: 4px; }
+  .version-tag { font-size: 10px; color: #999; margin-top: 6px; font-weight: bold; letter-spacing: 1px; }
   .search-container { position: relative; margin-bottom: 12px; }
   .search-input { width: 100%; padding: 12px 36px 12px 16px; border: 1px solid var(--card-border); border-radius: 20px; font-size: 14px; background: var(--card-bg); color: var(--text-primary); box-sizing: border-box; outline: none; transition: border 0.2s; }
   .search-input:focus { border-color: var(--accent-red); }
@@ -173,6 +174,7 @@
   <div class="header">
     <h1 id="stotraTitle">Loading...</h1>
     <div class="author" id="stotraAuthor">Loading...</div>
+    <div class="version-tag">APP VERSION: v1</div>
   </div>
 
   <div class="search-container">
@@ -321,7 +323,7 @@
     localStorage.setItem('acharyaAuthorized', 'true');
   }
   
-  const isAuthorized = localStorage.getItem('acharyaAuthorized'] === 'true';
+  const isAuthorized = localStorage.getItem('acharyaAuthorized') === 'true';
 
   // --- COMPLETE 43-SHLOKA MAPPING ---
   const stotraData = {
@@ -367,7 +369,7 @@
       38: { "sa": "यन्मैथुनादिगृहमेधिसुखं हि तुच्छं<br>कण्डूयनेन करयोरिव दुःखदुःखम् ।<br>तृप्यन्ति नेह कृपणा बहुदुःखभाजः<br>कण्डूतिवन्मनसिजं विषहेत धीरः ॥ ४५ ॥" },
       39: { "sa": "मौनव्रतश्रुततपोऽध्ययनस्वधर्म-<br>व्याख्यारहोजपसमाधय आपवर्ग्याः ।<br>प्रायः परं पुरुष ते त्वजितेन्द्रियाणां<br>वार्ता भवन्त्युत न वात्र तु दाम्भिकानाम् ॥ ४६ ॥" },
       40: { "sa": "रूपे इमे सदसती तव वेदसृष्टे<br>बीजाङ्कुराविव न चान्यदरूपकस्य ।<br>युक्ताः समक्षमुभयत्र विचक्षन्ते त्वां<br>योगेन वह्निमिव दारुषु नान्यतः स्यात् ॥ ४७ ॥" },
-      41: { "sa": "त्वं वायुरग्निरवनिर्वियदम्बु मात्राः<br>प्राणेन्द्रियाणि हृदयं चिदनुग्रहश्च ।<br>सर्वं त्वमेव सगुणो विगुणश्च भूमन्<br>नान्यत् त्वदस्त्यपि मनोवचसा निरुक्तम् ॥ 48 ॥" },
+      41: { "sa": "त्वं वायुरग्निरवनिर्वियदम्बु मात्राः<br>प्राणेन्द्रियाणि हृदयं चिदनुग्रहश्च ।<br>सर्वं त्वमेव सगुणो विगुणश्च भूमन्<br>नान्यत् त्वदस्त्यपि मनोवचसा निरुक्तम् ॥ ४8 ॥" },
       42: { "sa": "नैते गुणा न गुणिनो महदादयो ये<br>सर्वे मनःप्रभृतयः सहदेवमर्त्याः ।<br>आद्यन्तवन्त उरुगाय विदन्ति हि त्वां<br>एवं विमृश्य सुधियो विरमन्ति शब्दात् ॥ ४९ ॥" },
       43: { "sa": "तत्तेऽर्हत्तम नमः स्तुतिकर्मपूजाः<br>कर्म स्मृतिश्चरणयोः श्रवणं कथायाम् ।<br>संसेवया त्वयि विनेति षडङ्गया किं<br>भक्तिं जनः परमहंसगतौ लभेत ॥ ५० ॥" }
     }
@@ -545,7 +547,6 @@
 
     window.getSelection().removeAllRanges(); 
 
-    // Hardcoded AQ Key Provided by User
     const apiKey = "AQ.Ab8RN6Ip96uUiQhbkmOae6un1yLkSUzs1BUYIDINX4jhwbqDCw"; 
 
     els.acharyaTooltip.style.display = 'none';
@@ -578,7 +579,7 @@
       
     } catch (err) {
       document.getElementById('acharyaLoading').style.display = 'none';
-      document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">Error: Could not fetch analysis. Check API key.</span><br><br><span style="font-size:11px;">${err.message}</span>`;
+      document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">Error: Could not fetch analysis. Check API key format.</span><br><br><span style="font-size:11px;">${err.message}</span>`;
     }
   }
 
