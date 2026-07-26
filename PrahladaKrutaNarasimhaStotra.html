@@ -7,11 +7,11 @@
 <meta name="theme-color" id="themeColorMeta" content="#FFFDF9">
 <title>Bhagavata Digital Library</title>
 
-<!-- Fonts & Active Transliteration Engine -->
+<!-- Fonts & Highly Stable Transliteration Engine -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.2.2/sanscript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@sanskrit-lexicon/sanscript@1.0.2/sanscript.min.js"></script>
 
 <style>
   :root {
@@ -34,6 +34,11 @@
   * { -webkit-tap-highlight-color: transparent; }
   body { margin: 0; padding-top: calc(60px + env(safe-area-inset-top)); padding-bottom: calc(126px + env(safe-area-inset-bottom)); font-family: var(--font-ui); background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
   .app-container { max-width: 650px; margin: 0 auto; padding: 12px; position: relative; }
+
+  /* Dynamic Font Switching for Non-Devanagari Scripts */
+  body.non-devanagari .reading-card,
+  body.non-devanagari .shloka-text,
+  body.non-devanagari .commentary-block { font-family: var(--font-ui) !important; }
 
   .flex-row { display: flex; align-items: center; }
   .flex-center { display: flex; align-items: center; justify-content: center; }
@@ -153,7 +158,7 @@
 
   /* Floating Selection Button inside Modal */
   #modalAppendBtn {
-    display: none; position: fixed; z-index: 10001; background: var(--accent-red); color: white;
+    display: none; position: fixed; z-index: 11001; background: var(--accent-red); color: white;
     border: none; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700;
     box-shadow: 0 6px 16px rgba(174, 35, 31, 0.4); cursor: pointer; transform: translateX(-50%);
   }
@@ -162,12 +167,12 @@
   #toastMsg {
     display: none; position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
     background: var(--text-primary); color: var(--bg-main); padding: 10px 20px;
-    border-radius: 24px; font-size: 12px; font-weight: 700; z-index: 10005;
+    border-radius: 24px; font-size: 12px; font-weight: 700; z-index: 12000;
     box-shadow: 0 6px 16px rgba(0,0,0,0.3); text-align: center; white-space: nowrap;
   }
 
-  /* Structural Modals with Pinned Headers */
-  .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 400; backdrop-filter: blur(2px); }
+  /* Modals with Absolute Sticky Headers - High Z-Index */
+  .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 11000; backdrop-filter: blur(2px); }
   
   .modal-content { background: var(--card-bg); color: var(--text-primary); border-radius: 16px; width: 90%; max-width: 440px; border: 1px solid var(--card-border); max-height: 85vh; box-shadow: 0 10px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; overflow: hidden; transition: all 0.3s; position: relative; }
   
@@ -291,7 +296,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v7.0</div>
+  <div class="app-footer" id="appFooter">v8.0</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -384,7 +389,7 @@
   <div onclick="setMark('none')" style="color: #888;">❌ Clear Marker</div>
 </div>
 
-<!-- Modals -->
+<!-- Structural Modals -->
 <div class="modal-overlay" id="snippetModal">
   <div class="modal-content">
     <div class="modal-header-sticky">
@@ -397,7 +402,6 @@
   </div>
 </div>
 
-<!-- Notes Modal with Expand & Clear All -->
 <div class="modal-overlay" id="noteModal">
   <div class="modal-content" id="noteModalBox">
     <div class="modal-header-sticky">
@@ -425,7 +429,7 @@
        <button class="btn-sm" onclick="closeBhashyaPicker()" style="font-size:11px;">✖ Close</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:12px; color:#8a7a63; margin-0 0 12px 0;">Which traditional commentary would you like Acharya to break down line-by-line?</p>
+      <p style="font-size:12px; color:#8a7a63; margin:0 0 12px 0;">Which traditional commentary would you like Acharya to break down line-by-line?</p>
       <div id="bhashyaOptionsContainer"></div>
     </div>
   </div>
@@ -474,7 +478,7 @@
     contactEmail: "sanatanavidyagurukulam@gmail.com",
     geminiModel: "gemini-3.6-flash", 
     secretPasskey: "SHRI108",
-    version: "v7.0 (Precision Bhashya Edition)"
+    version: "v8.0 (Master Scholar Edition)"
   };
 
   function showToast(msg) {
@@ -528,7 +532,7 @@
   let currentAudio = new Audio();
   let activeId = null;
   let contextShlokaId = null; 
-  let currentAcharyaShlokaId = null;
+  let currentAcharyaShlokaId = null; 
   let isPlaying = false;
   let currentLoopCount = 0;
   let currentFilter = 'all';
@@ -561,6 +565,7 @@
     navContainer: document.getElementById('searchNavigator')
   };
 
+  // --- PREFERENCES & TRANSLITERATION ---
   function applyDarkMode(isDark) {
     document.body.classList.toggle('dark-mode', isDark);
     document.getElementById('darkModeBtn').innerText = isDark ? '🌙' : '☀️';
@@ -585,11 +590,12 @@
     togglePopup('fontPopup');
   }
 
-  // Active Indic Transliteration Parser
   function applyTransliteration(htmlText, script) {
     if (script === 'devanagari' || !htmlText) return htmlText;
-    if (typeof Sanscript === 'undefined') return htmlText;
-
+    if (typeof Sanscript === 'undefined') {
+       console.warn("Sanscript engine not loaded yet.");
+       return htmlText;
+    }
     const parts = htmlText.split(/(<[^>]+>)/g);
     for (let i = 0; i < parts.length; i++) {
       if (!parts[i].startsWith('<')) {
@@ -606,6 +612,12 @@
         el.classList.toggle('active', el.dataset.script === code);
       }
     });
+    // Remove fixed Devanagari font when reading in Kannada/Telugu
+    if (code !== 'devanagari') {
+        document.body.classList.add('non-devanagari');
+    } else {
+        document.body.classList.remove('non-devanagari');
+    }
   }
   
   function setScript(code, el) {
@@ -932,7 +944,6 @@
           let left = rect.left + (rect.width / 2);
           left = Math.max(tw/2 + 8, Math.min(left, window.innerWidth - tw/2 - 8));
           
-          // Position relative to user's touch point
           let yPos = rect.bottom + 8;
           if (yPos + 100 > window.innerHeight) { 
               yPos = rect.top - 95; 
@@ -969,7 +980,7 @@
     const targetId = currentAcharyaShlokaId || contextShlokaId || activeId;
 
     if (!targetId) {
-      showToast("Please select text directly from a specific Shloka card first to append notes.");
+      showToast("Please tap on a Shloka card first to make it active before appending notes.");
       return;
     }
 
@@ -1010,21 +1021,21 @@
         const name = stotraData.metadata.availableCommentaries[cKey] || cKey;
         const displayName = applyTransliteration(name, activeScript);
         container.innerHTML += `
-          <button class="bhashya-picker-btn" onclick="executeBhashyaAnalysis('${cKey}')">
+          <button class="bhashya-picker-btn" onpointerdown="executeBhashyaAnalysis('${cKey}')">
              <span>📖 ${displayName}</span>
              <span style="font-size:11px; opacity:0.6;">Analyze ➔</span>
           </button>`;
       });
 
       container.innerHTML += `
-        <button class="bhashya-picker-btn" style="border-color: var(--accent-gold);" onclick="executeBhashyaAnalysis('all')">
+        <button class="bhashya-picker-btn" style="border-color: var(--accent-gold);" onpointerdown="executeBhashyaAnalysis('all')">
            <span>📚 All Available Commentaries Combined</span>
            <span style="font-size:11px; opacity:0.6;">Analyze ➔</span>
         </button>`;
     }
 
     container.innerHTML += `
-      <button class="bhashya-picker-btn" style="background:transparent; border-style:dashed;" onclick="executeBhashyaAnalysis('general')">
+      <button class="bhashya-picker-btn" style="background:transparent; border-style:dashed;" onpointerdown="executeBhashyaAnalysis('general')">
          <span>🌐 General Acharya Analysis (External Knowledge)</span>
          <span style="font-size:11px; opacity:0.6;">Analyze ➔</span>
       </button>`;
@@ -1066,7 +1077,7 @@
     askAcharya(null, 'commentary', payload);
   }
 
-  // --- ASK ACHARYA ENGINE ---
+  // --- ASK ACHARYA (Madhva Sampradaya Context) ---
   async function askAcharya(e, type, payload) {
     if (e) e.preventDefault();
     document.getElementById('actionTooltip').style.display = 'none';
@@ -1079,7 +1090,7 @@
     } else if (!apiKey) {
         document.getElementById('acharyaModal').style.display = 'flex';
         document.getElementById('acharyaLoading').style.display = 'none';
-        document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>The traditional text analysis engine is currently unavailable. Please try again later or contact the administrator.`;
+        document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>The traditional text analysis engine is currently unavailable. Please try again later.`;
         return;
     }
 
@@ -1112,7 +1123,7 @@ Commentary Text: "${payload.commentaryText}"
 Highlighted Fragment: "${payload.selectedText}"
 
 Provide a detailed scholarly breakdown in clean markdown:
-1. Sentence-by-Sentence Breakdown & Word-by-Word Meaning of this supplied commentary.
+1. Sentence-by-Sentence Breakdown & Word-by-Word Meaning of this supplied commentary fragment.
 2. Pramana & Citation Expansion: Identify every scriptural quote (Shruti, Smriti, Gita, Amarakosha, etc.) cited in this text. Provide the FULL Sanskrit quote, source attribution, and precise meaning.
 3. Philosophical Siddhanta strictly according to Sri Madhvacharya's Dvaita philosophy derived from this commentary.`;
         } else {
@@ -1138,7 +1149,7 @@ Provide a detailed scholarly breakdown in clean markdown:
       if (document.body.classList.contains('is-authorized')) {
          document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">Admin Debug Error:</span> ${err.message}`;
       } else {
-         document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>The traditional text analysis engine is currently unavailable. Please try again later or contact the administrator.`;
+         document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>The traditional text analysis engine is currently unavailable. Please try again later.`;
       }
     }
   }
