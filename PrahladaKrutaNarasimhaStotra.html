@@ -30,15 +30,13 @@
   * { -webkit-tap-highlight-color: transparent; }
   body { margin: 0; padding-top: calc(60px + env(safe-area-inset-top)); padding-bottom: calc(126px + env(safe-area-inset-bottom)); font-family: var(--font-ui); background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
   .app-container { max-width: 650px; margin: 0 auto; padding: 12px; position: relative; }
-  :focus-visible { outline: 2px solid var(--accent-gold); outline-offset: 2px; border-radius: 4px; }
-  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; } }
 
   /* Utility Flex */
   .flex-row { display: flex; align-items: center; }
   .flex-center { display: flex; align-items: center; justify-content: center; }
 
   /* Top App Bar */
-  .top-bar { position: fixed; top: 0; left: 0; right: 0; height: calc(50px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top); background: var(--top-bar-bg); border-bottom: 1px solid var(--top-bar-border); z-index: 200; display: flex; align-items: center; justify-content: space-between; padding-left: 6px; padding-right: 6px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: background 0.3s; box-sizing: border-box; }
+  .top-bar { position: fixed; top: 0; left: 0; right: 0; height: calc(50px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top); background: var(--top-bar-bg); border-bottom: 1px solid var(--top-bar-border); z-index: 200; display: flex; align-items: center; justify-content: space-between; padding-left: 6px; padding-right: 6px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); box-sizing: border-box; }
   .top-bar-title { font-size: 14px; font-weight: 700; color: var(--accent-red); cursor: pointer; white-space: nowrap; flex-shrink: 0; margin-right: auto; padding-left: 4px; }
   .top-actions { display: flex; gap: 2px; align-items: center; justify-content: flex-end; flex-wrap: nowrap; }
 
@@ -51,11 +49,10 @@
   body.is-authorized .advanced-feature { display: flex !important; }
 
   /* Header & Search Bar */
-  .header { text-align: center; padding: 14px 0 18px; }
-  .header h1 { margin: 0; font-family: var(--font-sanskrit); font-size: 24px; color: var(--accent-red); font-weight: 700; letter-spacing: 0.2px; }
-  .header .author { font-size: 11px; color: #8a7a63; text-transform: uppercase; font-weight: 600; letter-spacing: 0.6px; margin-top: 6px; }
-  body.dark-mode .header .author { color: #a8907a; }
-  .header .rule { width: 64px; height: 2px; margin: 10px auto 0; background: linear-gradient(90deg, transparent, var(--accent-gold), transparent); opacity: 0.8; }
+  .header { text-align: center; padding: 10px 0 14px; }
+  .header h1 { margin: 0; font-family: var(--font-sanskrit); font-size: 24px; color: var(--accent-red); font-weight: 700; }
+  .header .author { font-size: 11px; color: #8a7a63; text-transform: uppercase; font-weight: 600; letter-spacing: 0.6px; margin-top: 4px; }
+  .header .rule { width: 64px; height: 2px; margin: 8px auto 0; background: linear-gradient(90deg, transparent, var(--accent-gold), transparent); opacity: 0.8; }
 
   .search-box-group { display: flex; gap: 6px; margin-bottom: 12px; }
   .search-scope-select { border: 1px solid var(--card-border); border-radius: 16px; padding: 0 8px; font-size: 11px; font-weight: 700; background: var(--card-bg); color: var(--text-primary); outline: none; }
@@ -67,19 +64,18 @@
   .search-match { background-color: #fff59d; color: #000; padding: 0 2px; border-radius: 3px; font-weight: bold; }
   body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
   .search-match.active-match { background-color: #ff9800; color: #fff; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ff9800; }
-  body.dark-mode .search-match.active-match { background-color: #ff5722; color: #fff; box-shadow: 0 0 0 2px #18120E, 0 0 0 4px #ff5722; }
-
+  
   .search-navigator { position: fixed; top: calc(60px + env(safe-area-inset-top)); right: 10px; background: var(--card-bg); border: 2px solid var(--accent-red); border-radius: 20px; padding: 4px 12px; display: none; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 1000; font-size: 12px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
   .search-nav-btn { background: none; border: none; font-size: 14px; cursor: pointer; color: var(--accent-red); padding: 4px; display: flex; align-items: center; justify-content: center; }
 
   /* Reading & List Cards */
-  .reading-card { position: relative; width: 100%; box-sizing: border-box; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 14px; padding: 26px 18px; text-align: center; font-family: var(--font-sanskrit); font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.7; font-weight: 500; margin-bottom: 16px; min-height: 70px; display: block; overflow-wrap: anywhere; box-shadow: 0 4px 16px rgba(0,0,0,0.06); transition: background 0.3s, border 0.3s; }
+  .reading-card { position: relative; width: 100%; box-sizing: border-box; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 14px; padding: 22px 18px; text-align: center; font-family: var(--font-sanskrit); font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.7; font-weight: 500; margin-bottom: 16px; min-height: 70px; display: block; overflow-wrap: anywhere; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
   .reading-card.highlight { border-color: var(--accent-red); }
-  .reading-card::before, .reading-card::after { content: "❈"; display: block; font-size: 12px; color: var(--accent-gold); opacity: 0.6; margin-bottom: 8px; font-family: var(--font-ui); }
-  .reading-card::after { margin-bottom: 0; margin-top: 8px; }
+  .reading-card::before, .reading-card::after { content: "❈"; display: block; font-size: 12px; color: var(--accent-gold); opacity: 0.6; margin-bottom: 6px; font-family: var(--font-ui); }
+  .reading-card::after { margin-bottom: 0; margin-top: 6px; }
 
   .shloka-list { display: flex; flex-direction: column; gap: 10px; }
-  .shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 8px; transition: background 0.2s, border 0.2s; overflow-wrap: anywhere; }
+  .shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-wrap: anywhere; }
   .shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left: 4px solid var(--accent-red); }
 
   .shloka-main-row { display: flex; width: 100%; gap: 12px; align-items: flex-start; }
@@ -93,22 +89,21 @@
   .has-note { color: var(--accent-red) !important; }
 
   .snippet-badge { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; border-radius: 12px; padding: 2px 8px; font-size: 10px; font-weight: 700; cursor: pointer; margin-left: 6px; display: inline-block; }
-  body.dark-mode .snippet-badge { background: #1b5e20; color: #c8e6c9; border-color: #2e7d32; }
 
-  /* Commentary Display inside Shloka Card */
+  /* Commentary Block */
   .commentary-block { background: rgba(0,0,0,0.025); border-left: 3px solid var(--accent-gold); padding: 8px 12px; border-radius: 4px; font-size: calc(var(--font-multiplier) * 0.85); line-height: 1.6; color: var(--text-primary); margin-top: 6px; overflow-wrap: anywhere; }
   body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
   .commentary-title { font-weight: 700; color: var(--accent-red); font-size: 11px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
 
   /* Bottom Toolbar Grid */
-  .bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); border-top: 1px solid var(--card-border); box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 9999; transition: background 0.3s, border 0.3s; box-sizing: border-box; padding-bottom: env(safe-area-inset-bottom); }
+  .bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); border-top: 1px solid var(--card-border); box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 9999; box-sizing: border-box; padding-bottom: env(safe-area-inset-bottom); }
   .player-inner { max-width: 650px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 8px 4px; box-sizing: border-box; gap: 4px; }
 
   .controls-main { display: flex; gap: 8px; justify-content: center; }
   .timer-group { display: flex; flex-direction: column; text-align: center; min-width: 60px; }
   .popup-container { position: relative; display: flex; justify-content: center; }
 
-  .btn-play { background: var(--accent-red); color: #fff; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; box-shadow: 0 4px 10px rgba(174, 35, 31, 0.4); flex-shrink: 0; margin: 0 4px; transition: transform 0.1s; }
+  .btn-play { background: var(--accent-red); color: #fff; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; box-shadow: 0 4px 10px rgba(174, 35, 31, 0.4); flex-shrink: 0; margin: 0 4px; }
   .btn-play:active { transform: scale(0.95); }
   .btn-nav { background: none; border: none; font-size: 18px; color: var(--text-primary); cursor: pointer; padding: 2px; }
   .btn-sm { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 6px 8px; font-size: 11px; font-weight: 700; color: var(--text-primary); cursor: pointer; white-space: nowrap; }
@@ -125,8 +120,6 @@
 
   .pop-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 700; width: 100%; gap: 12px; white-space: nowrap; }
   .pop-input { width: 48px; text-align: center; border: 1px solid var(--card-border); border-radius: 6px; padding: 4px; font-size: 12px; box-sizing: border-box; background: var(--card-bg); color: var(--text-primary); }
-  .pop-input:focus { border-color: var(--accent-red); outline: none; }
-  .pop-range { width: 80px; cursor: pointer; accent-color: var(--accent-red); }
   .pop-item { padding: 8px 12px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: 8px; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
   .pop-item:hover { background: var(--card-border); }
   .pop-item.active { background: var(--card-active); color: var(--accent-red); }
@@ -153,16 +146,25 @@
   .tooltip-btn { background: transparent; color: white; border: none; padding: 6px 10px; border-radius: 16px; cursor: pointer; font-weight: 700; }
   .tooltip-btn:hover { background: rgba(255,255,255,0.2); }
 
+  /* Floating Selection Button inside Modal */
+  #modalAppendBtn {
+    display: none; position: fixed; z-index: 10001; background: var(--accent-red); color: white;
+    border: none; padding: 6px 12px; border-radius: 16px; font-size: 11px; font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; transform: translateX(-50%);
+  }
+
   /* Modals */
   .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 400; }
-  .modal-content { background: var(--card-bg); color: var(--text-primary); padding: 18px; border-radius: 12px; width: 85%; max-width: 360px; border: 1px solid var(--card-border); max-height: 75vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+  .modal-content { background: var(--card-bg); color: var(--text-primary); padding: 18px; border-radius: 12px; width: 85%; max-width: 380px; border: 1px solid var(--card-border); max-height: 75vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
   .modal-content textarea { width: 100%; height: 70px; margin: 8px 0; padding: 8px; border-radius: 6px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); font-family: inherit; box-sizing: border-box; }
   .modal-input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); margin: 8px 0; box-sizing: border-box; }
 
-  .snip-list-item { background: var(--bg-main); padding: 8px; border-radius: 6px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--card-border); }
+  /* Project Contribution Banner */
+  .project-banner { background: var(--card-active); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 12px; margin-top: 16px; text-align: center; font-size: 11px; color: var(--text-primary); line-height: 1.5; }
+  .project-banner a { color: var(--accent-red); font-weight: 700; text-decoration: none; }
 
   @keyframes spin { 100% { transform: rotate(360deg); } }
-  .app-footer { text-align: center; padding: 24px 10px 40px; font-size: 11px; color: #999; font-weight: 700; border-top: 1px solid var(--card-border); margin-top: 20px; }
+  .app-footer { text-align: center; padding: 20px 10px 30px; font-size: 10px; color: #a8907a; border-top: 1px solid var(--card-border); margin-top: 20px; }
 </style>
 </head>
 <body>
@@ -173,6 +175,9 @@
   <span style="color:#555;">|</span>
   <button class="tooltip-btn" onpointerdown="translateText(event)">🌐 Translate</button>
 </div>
+
+<!-- Floating Append-to-Notes Selection Button for Modal -->
+<button id="modalAppendBtn" onpointerdown="appendSelectedTextToNote(event)">➕ Append to My Notes</button>
 
 <!-- Top Bar -->
 <div class="top-bar">
@@ -201,7 +206,7 @@
       </div>
     </div>
 
-    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="openKeyModal()" title="API Key Settings" style="font-size: 18px;">🔑</button>
+    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="openKeyModal()" title="Access Key Settings" style="font-size: 18px;">🔑</button>
     <button class="btn-top" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle Dark Mode" style="font-size: 18px;">☀️</button>
 
     <div style="position:relative;">
@@ -236,7 +241,15 @@
 
   <div class="reading-card" id="readingCard">श्लोकं चिनोतु (Select a shloka)</div>
   <div class="shloka-list" id="shlokaList"></div>
-  <div class="app-footer">APP VERSION: v3.3 &middot; Active API Fix</div>
+
+  <!-- Contribution & Support Banner -->
+  <div class="project-banner">
+    <strong>🙏 Sarvamoola Digitisation Project</strong><br>
+    To contribute, digitize, or support our voluntary classes, write to:<br>
+    <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink">sanatanavidyagurukulam@gmail.com</a>
+  </div>
+
+  <div class="app-footer" id="appFooter">v4.0</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -353,9 +366,9 @@
 
 <div class="modal-overlay" id="keyModal">
   <div class="modal-content">
-    <h3 style="margin:0 0 10px 0; color:var(--accent-red);">🔑 Gemini API Key Settings</h3>
-    <p style="font-size:12px; color:#666; margin:0 0 8px 0;">Paste your personal Google Gemini API key below. It is stored only in this browser's local storage and is sent directly from your device to Google — never through any server of ours. Do not use this on a shared or public computer.</p>
-    <input type="password" id="userApiKeyInput" class="modal-input" placeholder="Paste key here...">
+    <h3 style="margin:0 0 10px 0; color:var(--accent-red);">🔑 Secret Access Settings</h3>
+    <p style="font-size:12px; color:#666; margin:0 0 8px 0;">Enter your Secret Access Key below. If you do not have one, please contact Tribhuvan Achar at <strong id="contactEmailDisplay">sanatanavidyagurukulam@gmail.com</strong>.</p>
+    <input type="password" id="userApiKeyInput" class="modal-input" placeholder="Enter Key Here...">
     <div style="text-align:right; margin-top:12px;">
       <button class="btn-sm" onclick="closeKeyModal()">Cancel</button>
       <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; margin-left:6px;" onclick="saveUserApiKey()">Save Key</button>
@@ -365,10 +378,13 @@
 
 <div class="modal-overlay" id="acharyaModal">
   <div class="modal-content">
-    <h4 style="margin:0 0 10px 0; color:var(--accent-red); border-bottom:1px solid var(--card-border); padding-bottom:8px;">🕉️ Acharya's Analysis</h4>
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--card-border); padding-bottom:8px; margin-bottom:10px;">
+      <h4 style="margin:0; color:var(--accent-red);">🕉️ Acharya's Analysis</h4>
+      <button class="btn-sm" onclick="shareAcharyaAnalysis()" style="font-size:10px;">📤 Share</button>
+    </div>
     <div id="acharyaLoading" style="display:none; text-align:center; padding: 20px;">
       <span style="font-size:24px; display:inline-block; animation: spin 1s linear infinite;">⏳</span>
-      <p style="font-size:12px; color:#8a7a63; margin-top:8px;">Consulting scriptures...</p>
+      <p style="font-size:12px; color:#8a7a63; margin-top:8px;">Consulting traditional scriptures...</p>
     </div>
     <div id="acharyaResult" style="font-size:13px; line-height:1.6; overflow-wrap: anywhere;"></div>
     <div style="text-align:right; margin-top:16px;">
@@ -378,25 +394,47 @@
 </div>
 
 <script>
-  // --- PASSKEY AUTHENTICATION (client-side gate only — see notes) ---
-  const SECRET_PASSKEY = "SHRI108";
+  // --- MASTER CONFIG STATE ---
+  let appConfig = {
+    appName: "Bhagavata Digital Library",
+    designedBy: "Tribhuvan Achar",
+    contactEmail: "sanatanavidyagurukulam@gmail.com",
+    geminiModel: "gemini-2.5-flash",
+    secretPasskey: "SHRI108",
+    version: "v4.0"
+  };
+
+  // --- PASSKEY AUTHENTICATION SYSTEM ---
   const urlParams = new URLSearchParams(window.location.search);
   const providedPass = urlParams.get('pass');
 
-  if (providedPass && providedPass.toUpperCase() === SECRET_PASSKEY) {
-    localStorage.setItem('acharyaAuthorized', 'true');
-  }
+  // Dynamic config fetch
+  fetch('config.json')
+    .then(r => r.ok ? r.json() : {})
+    .then(cfg => {
+      appConfig = { ...appConfig, ...cfg };
+      if (providedPass && providedPass.toUpperCase() === appConfig.secretPasskey.toUpperCase()) {
+        localStorage.setItem('acharyaAuthorized', 'true');
+      }
+      initAuthAndBranding();
+    })
+    .catch(() => initAuthAndBranding());
 
-  const isAuthorized = localStorage.getItem('acharyaAuthorized') === 'true';
-  if (isAuthorized) { document.body.classList.add('is-authorized'); }
+  function initAuthAndBranding() {
+    const isAuthorized = localStorage.getItem('acharyaAuthorized') === 'true';
+    if (isAuthorized) { document.body.classList.add('is-authorized'); }
+    document.getElementById('stotraAuthor').innerText = `DESIGNED BY ${appConfig.designedBy.toUpperCase()}`;
+    document.getElementById('contactEmailDisplay').innerText = appConfig.contactEmail;
+    document.getElementById('configEmailLink').href = `mailto:${appConfig.contactEmail}`;
+    document.getElementById('configEmailLink').innerText = appConfig.contactEmail;
+    document.getElementById('appFooter').innerText = `${appConfig.version} · Designed by ${appConfig.designedBy}`;
+  }
 
   // --- APP STATE ---
   const stotraCode = urlParams.get('code') || 'pns';
   const jsonFileName = `data_${stotraCode}.json`;
   const AUDIO_CACHE_NAME = `narasimha-audio-${stotraCode}`;
 
-  // Per-stotra storage is namespaced by stotraCode so marks/notes/snippets
-  // never bleed between different stotra files loaded via ?code=
   function nsKey(base) { return `narasimha_${base}_${stotraCode}`; }
 
   let stotraData = null;
@@ -408,6 +446,7 @@
   let activeLang = 'sa';
   let selectedCommentaryView = 'none';
   let lastSelectedText = "";
+  let modalSelectedText = "";
   let targetNoteId = null;
   let targetMenuId = null;
   let audioRetryDone = false;
@@ -433,7 +472,7 @@
     navContainer: document.getElementById('searchNavigator')
   };
 
-  // --- RESTORE GLOBAL PREFERENCES (dark mode / font size / language) ---
+  // Preferences
   function applyDarkMode(isDark) {
     document.body.classList.toggle('dark-mode', isDark);
     document.getElementById('darkModeBtn').innerText = isDark ? '🌙' : '☀️';
@@ -480,18 +519,17 @@
     if (savedLang) applyLanguage(savedLang);
   })();
 
-  // --- DYNAMIC JSON LOADING ---
+  // Dynamic JSON Load
   fetch(jsonFileName)
     .then(res => { if(!res.ok) throw new Error(`Could not find ${jsonFileName}`); return res.json(); })
     .then(data => { stotraData = data; initApp(); })
     .catch(err => {
       document.getElementById('stotraTitle').innerText = "Data Not Found";
-      els.readingCard.innerText = `Error: Please make sure '${jsonFileName}' exists.`;
+      els.readingCard.innerText = `Error: Please ensure '${jsonFileName}' is available in your repository.`;
     });
 
   function initApp() {
     document.getElementById('stotraTitle').innerText = stotraData.metadata.title;
-    document.getElementById('stotraAuthor').innerText = stotraData.metadata.author;
     document.getElementById('rangeStart').max = stotraData.metadata.totalShlokas || 43;
     document.getElementById('rangeEnd').max = stotraData.metadata.totalShlokas || 43;
 
@@ -608,7 +646,7 @@
 
       let cardActionsHtml = '';
       let badgeHtml = '';
-      if (isAuthorized) {
+      if (document.body.classList.contains('is-authorized')) {
         let mClass = "btn-icon", mIcon = "⋮";
         if (marks[i] === 'fav') { mClass += " is-fav"; mIcon = "★"; } else if (marks[i] === 'practice') { mClass += " is-practice"; mIcon = "🚩"; }
         const nClass = notes[i] ? "btn-icon has-note" : "btn-icon";
@@ -639,7 +677,6 @@
       els.listEl.appendChild(c);
     }
 
-    // Initialize Navigator if search highlights exist
     window.searchMatches = Array.from(document.querySelectorAll('.search-match'));
     if (query && window.searchMatches.length > 0) {
       els.navContainer.style.display = 'flex';
@@ -669,23 +706,15 @@
   currentAudio.addEventListener('pause', () => { isPlaying = false; updatePlayUI(); });
   currentAudio.addEventListener('loadedmetadata', () => { currentAudio.playbackRate = parseFloat(els.speedInput.value) || 1.0; els.timeDisplay.innerText = `0:00.000 / ${formatTime(currentAudio.duration)}`; updateRepeatDisplay(); });
 
-  // Guarded against infinite retry loops: if the zero-width-space fallback
-  // URL also fails, we stop instead of re-triggering 'error' forever.
   currentAudio.addEventListener('error', () => {
     if (!activeId || !stotraData) return;
-    if (audioRetryDone) {
-      els.timeDisplay.innerText = "Audio unavailable";
-      return;
-    }
+    if (audioRetryDone) { els.timeDisplay.innerText = "Audio unavailable"; return; }
     audioRetryDone = true;
     currentAudio.src = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${activeId}%E2%80%8B${stotraData.metadata.fileExtension}`;
     currentAudio.load();
     currentAudio.play().then(() => { isPlaying=true; updatePlayUI(); }).catch(()=>{});
   });
 
-  // Resolves an audio source, preferring a Cache Storage hit (from
-  // "Preload All Audio") over the network so playback survives HTTP
-  // cache eviction and works offline once preloaded.
   async function resolveAudioSrc(id) {
     const primary = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${id}${stotraData.metadata.fileExtension}`;
     const alt = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${id}%E2%80%8B${stotraData.metadata.fileExtension}`;
@@ -694,7 +723,7 @@
         const cache = await caches.open(AUDIO_CACHE_NAME);
         const hit = (await cache.match(primary)) || (await cache.match(alt));
         if (hit) { const blob = await hit.blob(); return URL.createObjectURL(blob); }
-      } catch (e) { /* fall through to network */ }
+      } catch (e) {}
     }
     return primary;
   }
@@ -747,13 +776,14 @@
     renderList();
   }
 
-  // --- DUAL SELECTION TOOLTIP (Advanced Mode Only) ---
+  // --- SELECTION TOOLTIP (Page Level) ---
   document.addEventListener('selectionchange', () => {
-    if (!isAuthorized) return;
+    if (!document.body.classList.contains('is-authorized')) return;
 
     const activeTag = document.activeElement ? document.activeElement.tagName : '';
     if (['INPUT', 'TEXTAREA'].includes(activeTag)) {
        document.getElementById('actionTooltip').style.display = 'none';
+       document.getElementById('modalAppendBtn').style.display = 'none';
        return;
     }
 
@@ -761,34 +791,94 @@
       const selection = window.getSelection();
       const txt = selection.toString().trim();
       const tooltip = document.getElementById('actionTooltip');
+      const modalAppendBtn = document.getElementById('modalAppendBtn');
+
+      // Check if selecting inside the Acharya modal result
+      const acharyaResEl = document.getElementById('acharyaResult');
+      const isInsideAcharyaModal = acharyaResEl && acharyaResEl.contains(selection.anchorNode);
+
       if (txt.length > 0) {
-        lastSelectedText = txt;
         const range = selection.getRangeAt(0);
         const rect = range.getBoundingClientRect();
         if(rect.top === 0 && rect.left === 0) return;
-        tooltip.style.display = 'flex';
-        const tw = tooltip.offsetWidth || 160;
-        let left = rect.left + (rect.width / 2);
-        left = Math.max(tw/2 + 8, Math.min(left, window.innerWidth - tw/2 - 8));
-        tooltip.style.top = `${Math.min(rect.bottom + 12, window.innerHeight - 50)}px`;
-        tooltip.style.left = `${left}px`;
-      } else { tooltip.style.display = 'none'; }
+
+        if (isInsideAcharyaModal) {
+          modalSelectedText = txt;
+          tooltip.style.display = 'none';
+          modalAppendBtn.style.display = 'block';
+          modalAppendBtn.style.top = `${Math.min(rect.bottom + 8, window.innerHeight - 50)}px`;
+          modalAppendBtn.style.left = `${rect.left + (rect.width / 2)}px`;
+        } else {
+          lastSelectedText = txt;
+          modalAppendBtn.style.display = 'none';
+          tooltip.style.display = 'flex';
+          const tw = tooltip.offsetWidth || 160;
+          let left = rect.left + (rect.width / 2);
+          left = Math.max(tw/2 + 8, Math.min(left, window.innerWidth - tw/2 - 8));
+          tooltip.style.top = `${Math.min(rect.bottom + 12, window.innerHeight - 50)}px`;
+          tooltip.style.left = `${left}px`;
+        }
+      } else {
+        tooltip.style.display = 'none';
+        modalAppendBtn.style.display = 'none';
+      }
     }, 50);
   });
 
-  async function translateText(e) {
-    e.preventDefault();
-    if(!lastSelectedText) return;
+  // --- SELECTIVE APPEND TO NOTES ---
+  function appendSelectedTextToNote(e) {
+    if (e) e.preventDefault();
+    if (!activeId) return alert("Select a Shloka card first to append notes.");
+    if (!modalSelectedText) return;
 
-    try { await navigator.clipboard.writeText(lastSelectedText); } catch(err) { console.warn("Clipboard access denied."); }
+    const existingNote = notes[activeId] || "";
+    const updatedNote = existingNote ? `${existingNote}\n\n[Acharya Excerpt]:\n${modalSelectedText}` : `[Acharya Excerpt]:\n${modalSelectedText}`;
+    notes[activeId] = updatedNote;
+    localStorage.setItem(nsKey('notes'), JSON.stringify(notes));
 
-    const url = `https://translate.google.com/?sl=sa&tl=en&text=${encodeURIComponent(lastSelectedText)}&op=translate`;
-    window.open(url, '_blank');
-    document.getElementById('actionTooltip').style.display = 'none';
+    document.getElementById('modalAppendBtn').style.display = 'none';
     window.getSelection().removeAllRanges();
+    renderList();
+    alert(`Appended excerpt to Shloka ${activeId} notes!`);
   }
 
-  // --- ASK ACHARYA (BYOK) ---
+  // --- ON-THE-FLY TRANSLATE / AI ANALYSIS ---
+  async function translateText(e) {
+    if (e) e.preventDefault();
+    document.getElementById('actionTooltip').style.display = 'none';
+
+    const apiKey = localStorage.getItem('user_gemini_key');
+    if (!apiKey) { openKeyModal(); return; }
+
+    const text = lastSelectedText || window.getSelection().toString().trim();
+    if(!text) return;
+    window.getSelection().removeAllRanges();
+
+    document.getElementById('acharyaModal').style.display = 'flex';
+    document.getElementById('acharyaLoading').style.display = 'block';
+    document.getElementById('acharyaResult').innerHTML = '';
+
+    const promptText = `Translate this text: "${text}". Target Language: ${activeLang === 'kn' ? 'Kannada' : (activeLang === 'en' ? 'English' : 'Simple Sanskrit')}. Provide: 1. Natural Translation 2. Word-by-word meaning breakdown.`;
+
+    try {
+      const modelName = appConfig.geminiModel || "gemini-2.5-flash";
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`, {
+        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
+      });
+      const data = await response.json();
+      if(data.error) throw new Error(data.error.message);
+
+      let result = data.candidates[0].content.parts[0].text;
+      result = result.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+      document.getElementById('acharyaLoading').style.display = 'none';
+      document.getElementById('acharyaResult').innerHTML = result;
+    } catch (err) {
+      document.getElementById('acharyaLoading').style.display = 'none';
+      document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">Error:</span> ${err.message}`;
+    }
+  }
+
+  // --- SECRET KEY SETTINGS ---
   function openKeyModal() { document.getElementById('userApiKeyInput').value = localStorage.getItem('user_gemini_key') || ''; document.getElementById('keyModal').style.display = 'flex'; }
   function closeKeyModal() { document.getElementById('keyModal').style.display = 'none'; }
   function saveUserApiKey() {
@@ -797,6 +887,7 @@
     closeKeyModal();
   }
 
+  // --- ASK ACHARYA ---
   async function askAcharya(e) {
     if (e) e.preventDefault();
     document.getElementById('actionTooltip').style.display = 'none';
@@ -815,7 +906,8 @@
     const promptText = `You are a traditional Sanskrit Acharya. Analyze this text: "${text}". Provide: 1. Padachheda (Word-by-word split) 2. Grammatical Breakdown (Dhatu, Sandhi rules, Vibhakti) 3. Meaning. Format cleanly and concisely.`;
 
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`, {
+      const modelName = appConfig.geminiModel || "gemini-2.5-flash";
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`, {
         method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
       });
       const data = await response.json();
@@ -830,6 +922,18 @@
       document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">Error:</span> ${err.message}`;
     }
   }
+
+  function shareAcharyaAnalysis() {
+    const resText = document.getElementById('acharyaResult').innerText;
+    if (!resText) return;
+    if (navigator.share) {
+      navigator.share({ title: `Acharya Analysis (Shloka ${activeId || ''})`, text: resText }).catch(()=>{});
+    } else {
+      navigator.clipboard.writeText(resText);
+      alert("Analysis copied to clipboard!");
+    }
+  }
+
   function closeAcharyaModal() { document.getElementById('acharyaModal').style.display = 'none'; }
 
   // --- SNIPPETS ---
@@ -880,7 +984,7 @@
   }
   function setMark(type) { if (type === 'none') delete marks[targetMenuId]; else marks[targetMenuId] = type; localStorage.setItem(nsKey('marks'), JSON.stringify(marks)); els.markerMenu.classList.remove('show'); renderList(); }
 
-  // --- AUDIO PRELOAD (real persistent cache via the Cache Storage API) ---
+  // --- AUDIO PRELOAD ---
   async function cacheAllAudio(btn) {
     if(!stotraData || btn.dataset.cached === "true") return;
     if (!('caches' in window)) { alert('This browser does not support offline caching.'); return; }
@@ -901,7 +1005,7 @@
           let res = await fetch(primary);
           if (!res.ok) res = await fetch(alt);
           if (res.ok) { await cache.put(res.url, res.clone()); success++; }
-        } catch (e) { /* skip this track */ }
+        } catch (e) {}
         done++;
         btn.innerText = `⏳ Preloading ${Math.round((done/total)*100)}%`;
       }
