@@ -11,7 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@sanskrit-lexicon/sanscript@1.0.2/sanscript.min.js"></script>
+<!-- FIX: Reverted to the most stable Indic Transliteration CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.2.2/sanscript.min.js"></script>
 
 <style>
   :root {
@@ -33,6 +34,10 @@
 
   * { -webkit-tap-highlight-color: transparent; }
   body { margin: 0; padding-top: calc(60px + env(safe-area-inset-top)); padding-bottom: calc(126px + env(safe-area-inset-bottom)); font-family: var(--font-ui); background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+  
+  /* FIX: Stops background scrolling when modals are open */
+  body.modal-open { overflow: hidden !important; }
+
   .app-container { max-width: 650px; margin: 0 auto; padding: 12px; position: relative; }
 
   /* Dynamic Font Switching for Non-Devanagari Scripts */
@@ -52,7 +57,6 @@
   .btn-top:hover, .btn-lang:hover { background: var(--card-active); }
   .btn-lang { font-size: 12px; font-weight: 700; border: 1px solid var(--card-border); border-radius: 12px; padding: 4px 6px; }
 
-  /* Advanced Feature Hiding */
   .advanced-feature { display: none !important; }
   body.is-authorized .advanced-feature { display: flex !important; }
 
@@ -97,7 +101,6 @@
 
   .snippet-badge { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; border-radius: 12px; padding: 2px 8px; font-size: 10px; font-weight: 700; cursor: pointer; margin-left: 6px; display: inline-block; }
 
-  /* Commentary Block */
   .commentary-block { background: rgba(0,0,0,0.025); border-left: 3px solid var(--accent-gold); padding: 8px 12px; border-radius: 4px; font-size: calc(var(--font-multiplier) * 0.85); line-height: 1.6; color: var(--text-primary); margin-top: 6px; overflow-wrap: anywhere; font-family: var(--font-sanskrit); }
   body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
   .commentary-title { font-weight: 700; font-family: var(--font-ui); color: var(--accent-red); font-size: 11px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
@@ -171,12 +174,15 @@
     box-shadow: 0 6px 16px rgba(0,0,0,0.3); text-align: center; white-space: nowrap;
   }
 
-  /* Modals with Absolute Sticky Headers - High Z-Index */
+  /* Structural Modals with Pinned Headers */
   .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 11000; backdrop-filter: blur(2px); }
   
   .modal-content { background: var(--card-bg); color: var(--text-primary); border-radius: 16px; width: 90%; max-width: 440px; border: 1px solid var(--card-border); max-height: 85vh; box-shadow: 0 10px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; overflow: hidden; transition: all 0.3s; position: relative; }
   
-  .modal-content.fullscreen { width: 100%; height: 100%; max-width: none; max-height: none; border-radius: 0; border: none; }
+  /* FIX: True Fullscreen Notes Flexbox Expansion */
+  .modal-content.fullscreen { width: 100%; height: 100%; max-width: none; max-height: none; border-radius: 0; border: none; display: flex; flex-direction: column; }
+  .modal-content.fullscreen .modal-body { display: flex; flex-direction: column; flex-grow: 1; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+  .modal-content.fullscreen textarea { flex-grow: 1; height: auto; min-height: 50vh; resize: none; margin-bottom: 12px; }
 
   .modal-header-sticky { padding: 16px; background: var(--card-bg); z-index: 10; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
   .modal-body { padding: 16px; overflow-y: auto; flex-grow: 1; }
@@ -204,7 +210,6 @@
 </head>
 <body>
 
-<!-- Custom UI Toast -->
 <div id="toastMsg"></div>
 
 <!-- Context-Aware Floating Palette Tooltip -->
@@ -249,7 +254,7 @@
       </div>
     </div>
 
-    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="openKeyModal()" title="Access Key Settings" style="font-size: 18px;">🔑</button>
+    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="openModal('keyModal')" title="Access Key Settings" style="font-size: 18px;">🔑</button>
     <button class="btn-top" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle Dark Mode" style="font-size: 18px;">☀️</button>
 
     <!-- Transliteration Script Selector -->
@@ -296,7 +301,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v8.0</div>
+  <div class="app-footer" id="appFooter">v9.0</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -389,12 +394,23 @@
   <div onclick="setMark('none')" style="color: #888;">❌ Clear Marker</div>
 </div>
 
-<!-- Structural Modals -->
+<!-- Modal Structure Engine -->
+<script>
+  function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+    document.body.classList.add('modal-open'); // Locks background scroll
+  }
+  function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+    document.body.classList.remove('modal-open'); // Unlocks background scroll
+  }
+</script>
+
 <div class="modal-overlay" id="snippetModal">
   <div class="modal-content">
     <div class="modal-header-sticky">
        <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">🎯 Saved Snippets</h4>
-       <button class="btn-sm" onclick="closeSnippetModal()" style="font-size:11px;">✖ Close</button>
+       <button class="btn-sm" onclick="closeModal('snippetModal')" style="font-size:11px;">✖ Close</button>
     </div>
     <div class="modal-body">
       <div id="snippetListContainer"></div>
@@ -402,18 +418,19 @@
   </div>
 </div>
 
+<!-- Notes Modal with Maximize Fix -->
 <div class="modal-overlay" id="noteModal">
   <div class="modal-content" id="noteModalBox">
     <div class="modal-header-sticky">
        <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">📝 Notes (Shloka <span id="noteShlokaNum"></span>)</h4>
        <div style="display:flex; gap:6px;">
          <button class="btn-sm" onclick="toggleMaximizeNote()" id="maxNoteBtn" style="font-size:11px;">⛶ Expand</button>
-         <button class="btn-sm" onclick="closeNote()" style="font-size:11px;">✖ Close</button>
+         <button class="btn-sm" onclick="closeNoteModal()" style="font-size:11px;">✖ Close</button>
        </div>
     </div>
     <div class="modal-body">
       <textarea id="noteText" placeholder="Write your notes or append Acharya excerpts here..."></textarea>
-      <div style="display:flex; justify-content:space-between; margin-top: 12px;">
+      <div style="display:flex; justify-content:space-between; margin-top: 12px; flex-shrink: 0;">
         <button class="btn-sm" onclick="clearNote()" style="color:var(--accent-red);">🗑 Clear All</button>
         <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="saveNote()">Save Notes</button>
       </div>
@@ -421,12 +438,12 @@
   </div>
 </div>
 
-<!-- Commentary Selection Modal -->
+<!-- Bhashya Picker Modal -->
 <div class="modal-overlay" id="bhashyaPickerModal">
   <div class="modal-content">
     <div class="modal-header-sticky">
        <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">📜 Select Bhashya to Analyze</h4>
-       <button class="btn-sm" onclick="closeBhashyaPicker()" style="font-size:11px;">✖ Close</button>
+       <button class="btn-sm" onclick="closeModal('bhashyaPickerModal')" style="font-size:11px;">✖ Close</button>
     </div>
     <div class="modal-body">
       <p style="font-size:12px; color:#8a7a63; margin:0 0 12px 0;">Which traditional commentary would you like Acharya to break down line-by-line?</p>
@@ -439,7 +456,7 @@
   <div class="modal-content">
     <div class="modal-header-sticky">
        <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">🔑 Secret Access</h3>
-       <button class="btn-sm" onclick="closeKeyModal()" style="font-size:11px;">✖ Close</button>
+       <button class="btn-sm" onclick="closeModal('keyModal')" style="font-size:11px;">✖ Close</button>
     </div>
     <div class="modal-body">
       <p style="font-size:12px; color:#666; margin:0 0 12px 0; line-height: 1.5;">Enter your Secret Access Key below to enable deep textual analysis. If you do not have one, please contact the administrator at <strong id="contactEmailDisplay">sanatanavidyagurukulam@gmail.com</strong>.</p>
@@ -478,15 +495,8 @@
     contactEmail: "sanatanavidyagurukulam@gmail.com",
     geminiModel: "gemini-3.6-flash", 
     secretPasskey: "SHRI108",
-    version: "v8.0 (Master Scholar Edition)"
+    version: "v9.0 (Ultimate Transliteration Edition)"
   };
-
-  function showToast(msg) {
-    const t = document.getElementById('toastMsg');
-    t.innerText = msg;
-    t.style.display = 'block';
-    setTimeout(() => { t.style.display = 'none'; }, 3000);
-  }
 
   const urlParams = new URLSearchParams(window.location.search);
   const providedPass = urlParams.get('pass');
@@ -565,7 +575,6 @@
     navContainer: document.getElementById('searchNavigator')
   };
 
-  // --- PREFERENCES & TRANSLITERATION ---
   function applyDarkMode(isDark) {
     document.body.classList.toggle('dark-mode', isDark);
     document.getElementById('darkModeBtn').innerText = isDark ? '🌙' : '☀️';
@@ -590,19 +599,25 @@
     togglePopup('fontPopup');
   }
 
+  // Ultra-Stable Transliteration Core
   function applyTransliteration(htmlText, script) {
     if (script === 'devanagari' || !htmlText) return htmlText;
     if (typeof Sanscript === 'undefined') {
-       console.warn("Sanscript engine not loaded yet.");
-       return htmlText;
+       console.error("Transliteration engine failed to load. Check internet connection.");
+       return htmlText; // Fail gracefully
     }
-    const parts = htmlText.split(/(<[^>]+>)/g);
-    for (let i = 0; i < parts.length; i++) {
-      if (!parts[i].startsWith('<')) {
-        parts[i] = Sanscript.t(parts[i], 'devanagari', script);
-      }
+    try {
+        const parts = htmlText.split(/(<[^>]+>)/g);
+        for (let i = 0; i < parts.length; i++) {
+          if (!parts[i].startsWith('<')) {
+            parts[i] = Sanscript.t(parts[i], 'devanagari', script);
+          }
+        }
+        return parts.join('');
+    } catch (e) {
+        console.error("Transliteration error:", e);
+        return htmlText;
     }
-    return parts.join('');
   }
 
   function applyScript(code) {
@@ -612,7 +627,7 @@
         el.classList.toggle('active', el.dataset.script === code);
       }
     });
-    // Remove fixed Devanagari font when reading in Kannada/Telugu
+    // Dynamically toggle sanskrit font dependency to fix square-box rendering bugs
     if (code !== 'devanagari') {
         document.body.classList.add('non-devanagari');
     } else {
@@ -650,7 +665,7 @@
     });
 
   function initApp() {
-    document.getElementById('stotraTitle').innerText = applyTransliteration(stotraData.metadata.title, activeScript);
+    document.getElementById('stotraTitle').innerHTML = applyTransliteration(stotraData.metadata.title, activeScript);
     document.getElementById('rangeStart').max = stotraData.metadata.totalShlokas || 43;
     document.getElementById('rangeEnd').max = stotraData.metadata.totalShlokas || 43;
 
@@ -996,8 +1011,11 @@
   }
 
   // --- SECRET KEY SETTINGS ---
-  function openKeyModal() { document.getElementById('userApiKeyInput').value = localStorage.getItem('user_gemini_key') || ''; document.getElementById('keyModal').style.display = 'flex'; }
-  function closeKeyModal() { document.getElementById('keyModal').style.display = 'none'; }
+  function openKeyModal() { 
+      document.getElementById('userApiKeyInput').value = localStorage.getItem('user_gemini_key') || ''; 
+      openModal('keyModal');
+  }
+  function closeKeyModal() { closeModal('keyModal'); }
   function saveUserApiKey() {
     const key = document.getElementById('userApiKeyInput').value.trim();
     if(key) { localStorage.setItem('user_gemini_key', key); } else { localStorage.removeItem('user_gemini_key'); }
@@ -1008,6 +1026,9 @@
   function openBhashyaPicker(e) {
     if (e) e.preventDefault();
     document.getElementById('actionTooltip').style.display = 'none';
+    
+    // FIX: Clear Android selection toolbar immediately
+    window.getSelection().removeAllRanges();
 
     const targetId = contextShlokaId || activeId || 1;
     currentAcharyaShlokaId = targetId;
@@ -1040,11 +1061,11 @@
          <span style="font-size:11px; opacity:0.6;">Analyze ➔</span>
       </button>`;
 
-    document.getElementById('bhashyaPickerModal').style.display = 'flex';
+    openModal('bhashyaPickerModal');
   }
 
   function closeBhashyaPicker() {
-    document.getElementById('bhashyaPickerModal').style.display = 'none';
+    closeModal('bhashyaPickerModal');
   }
 
   function executeBhashyaAnalysis(cKey) {
@@ -1088,7 +1109,7 @@
     if (!apiKey && document.body.classList.contains('is-authorized')) { 
         openKeyModal(); return; 
     } else if (!apiKey) {
-        document.getElementById('acharyaModal').style.display = 'flex';
+        openModal('acharyaModal');
         document.getElementById('acharyaLoading').style.display = 'none';
         document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>The traditional text analysis engine is currently unavailable. Please try again later.`;
         return;
@@ -1098,7 +1119,7 @@
     if(!text && type !== 'commentary') return;
     window.getSelection().removeAllRanges();
 
-    document.getElementById('acharyaModal').style.display = 'flex';
+    openModal('acharyaModal');
     document.getElementById('acharyaLoading').style.display = 'block';
     document.getElementById('acharyaResult').innerHTML = '';
 
@@ -1166,7 +1187,7 @@ Provide a detailed scholarly breakdown in clean markdown:
   }
 
   function closeAcharyaModal() { 
-    document.getElementById('acharyaModal').style.display = 'none'; 
+    closeModal('acharyaModal');
     document.getElementById('modalAppendBtn').style.display = 'none';
     window.getSelection().removeAllRanges();
   }
@@ -1197,9 +1218,9 @@ Provide a detailed scholarly breakdown in clean markdown:
           </div>`;
       });
     } else { container.innerHTML = "<p style='font-size:12px; color:#8a7a63;'>No snippets saved.</p>"; }
-    document.getElementById('snippetModal').style.display = "flex";
+    openModal('snippetModal');
   }
-  function closeSnippetModal() { document.getElementById('snippetModal').style.display = "none"; }
+  function closeSnippetModal() { closeModal('snippetModal'); }
   function playSnippet(id, start, end) { closeSnippetModal(); if(activeId !== id) { playShloka(id); } els.loopA.value = start; els.loopB.value = end; els.enableAB.checked = true; currentAudio.currentTime = start; currentAudio.play(); }
   function deleteSnippet(id, index) { snippets[id].splice(index, 1); if(snippets[id].length === 0) delete snippets[id]; localStorage.setItem(nsKey('snippets'), JSON.stringify(snippets)); renderList(); openSnippetModal(id, {stopPropagation:()=>{}}); }
 
@@ -1254,22 +1275,25 @@ Provide a detailed scholarly breakdown in clean markdown:
   }
 
   // --- NOTES MODAL & EXPAND/MINIMIZE ---
+  function openNoteModal() {
+     openModal('noteModal');
+  }
+  function closeNoteModal() {
+     closeModal('noteModal');
+     document.getElementById('noteModalBox').classList.remove('fullscreen');
+     document.getElementById('maxNoteBtn').innerText = '⛶ Expand';
+  }
   function openNote(id) { 
     targetNoteId = id; 
     document.getElementById('noteShlokaNum').innerText = id; 
     document.getElementById('noteText').value = notes[id] || ""; 
-    document.getElementById('noteModal').style.display = "flex"; 
-  }
-  function closeNote() { 
-    document.getElementById('noteModal').style.display = "none"; 
-    document.getElementById('noteModalBox').classList.remove('fullscreen');
-    document.getElementById('maxNoteBtn').innerText = '⛶ Expand';
+    openNoteModal();
   }
   function saveNote() { 
     const txt = document.getElementById('noteText').value.trim(); 
     if(txt) notes[targetNoteId] = txt; else delete notes[targetNoteId]; 
     localStorage.setItem(nsKey('notes'), JSON.stringify(notes)); 
-    closeNote(); 
+    closeNoteModal(); 
     renderList(); 
     showToast(`Saved notes for Shloka ${targetNoteId}!`);
   }
