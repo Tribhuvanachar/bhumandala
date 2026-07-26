@@ -157,6 +157,14 @@
     box-shadow: 0 6px 16px rgba(174, 35, 31, 0.4); cursor: pointer; transform: translateX(-50%);
   }
 
+  /* Custom Toast (Replaces block alert) */
+  #toastMsg {
+    display: none; position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+    background: var(--text-primary); color: var(--bg-main); padding: 10px 20px;
+    border-radius: 24px; font-size: 12px; font-weight: 700; z-index: 10005;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3); text-align: center; white-space: nowrap;
+  }
+
   /* Modals */
   .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 400; backdrop-filter: blur(2px); }
   .modal-content { background: var(--card-bg); color: var(--text-primary); padding: 20px; border-radius: 16px; width: 90%; max-width: 420px; border: 1px solid var(--card-border); max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
@@ -179,6 +187,9 @@
 </head>
 <body>
 
+<!-- Custom UI Toast -->
+<div id="toastMsg"></div>
+
 <!-- Context-Aware Floating Palette Tooltip -->
 <div id="actionTooltip">
   <div class="tooltip-header">🕉️ Ask Acharya</div>
@@ -198,7 +209,7 @@
 <div class="top-bar">
   <div class="top-bar-title" onclick="location.reload()">❮ Library</div>
   <div class="top-actions">
-    <button class="btn-lang" onclick="alert('Padachheda (Word-Split) view will be available once specific datasets are uploaded!')" title="Pada View">पद</button>
+    <button class="btn-lang" onclick="showToast('Padachheda view will be available once datasets are uploaded!')" title="Pada View">पद</button>
 
     <div style="position:relative;">
       <button class="btn-top" onclick="togglePopup('fontPopup')" title="Font Size">Aa</button>
@@ -224,7 +235,7 @@
     <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="openKeyModal()" title="Access Key Settings" style="font-size: 18px;">🔑</button>
     <button class="btn-top" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle Dark Mode" style="font-size: 18px;">☀️</button>
 
-    <!-- Transliteration Script Selector -->
+    <!-- Transliteration Script Selector (FIXED ID logic) -->
     <div style="position:relative;">
       <button class="btn-top" onclick="togglePopup('scriptPopup')" id="activeScriptBtn" title="Transliterate Script" style="font-size: 18px;">🔠</button>
       <div class="popup popup-top" id="scriptPopup">
@@ -268,7 +279,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v6.0</div>
+  <div class="app-footer" id="appFooter">v6.1</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -397,18 +408,19 @@
 
 <div class="modal-overlay" id="acharyaModal">
   <div class="modal-content">
+    <!-- FIX: Close button explicitly moved to the TOP flex container -->
     <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--card-border); padding-bottom:12px; margin-bottom:14px;">
       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">🕉️ Acharya's Analysis</h4>
-      <button class="btn-sm" onclick="shareAcharyaAnalysis()" style="font-size:11px;">📤 Share</button>
+      <div>
+         <button class="btn-sm" onclick="shareAcharyaAnalysis()" style="font-size:11px;">📤 Share</button>
+         <button class="btn-sm" onclick="closeAcharyaModal()" style="font-size:11px; margin-left:6px;">✖ Close</button>
+      </div>
     </div>
     <div id="acharyaLoading" style="display:none; text-align:center; padding: 30px;">
       <span style="font-size:28px; display:inline-block; animation: spin 1s linear infinite;">⏳</span>
       <p style="font-size:13px; font-weight: 600; color:#8a7a63; margin-top:12px;">Consulting traditional scriptures...</p>
     </div>
     <div id="acharyaResult" style="font-size:14px; line-height:1.7; overflow-wrap: anywhere;"></div>
-    <div style="text-align:right; margin-top:20px; border-top: 1px solid var(--card-border); padding-top: 12px;">
-      <button class="btn-sm" onclick="closeAcharyaModal()">Close</button>
-    </div>
   </div>
 </div>
 
@@ -420,8 +432,16 @@
     contactEmail: "sanatanavidyagurukulam@gmail.com",
     geminiModel: "gemini-3.6-flash", 
     secretPasskey: "SHRI108",
-    version: "v6.0"
+    version: "v6.1 (Loop Fix & Layout)"
   };
+
+  // Custom Toast UI Tool
+  function showToast(msg) {
+    const t = document.getElementById('toastMsg');
+    t.innerText = msg;
+    t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 3000);
+  }
 
   const urlParams = new URLSearchParams(window.location.search);
   const providedPass = urlParams.get('pass');
@@ -470,7 +490,7 @@
   let isPlaying = false;
   let currentLoopCount = 0;
   let currentFilter = 'all';
-  let activeScript = 'devanagari';
+  let activeScript = 'devanagari'; // Using Script logic instead of standard translation
   let selectedCommentaryView = 'none';
   let lastSelectedText = "";
   let modalSelectedText = "";
@@ -539,16 +559,25 @@
 
   function applyScript(code) {
     activeScript = code;
-    document.querySelectorAll('#langPopup .pop-item').forEach(el => {
+    // FIX: Match the ID correctly to #scriptPopup
+    document.querySelectorAll('#scriptPopup .pop-item').forEach(el => {
       el.classList.toggle('active', el.dataset.script === code);
     });
   }
+  
   function setScript(code, el) {
     applyScript(code);
     localStorage.setItem('app_script', code);
-    renderList();
-    if (activeId) els.readingCard.innerHTML = getText(activeId);
-    togglePopup('langPopup');
+    
+    // Add brief progress toast
+    showToast("Transliterating text...");
+    
+    // Use timeout to allow UI toast to render before heavy parsing
+    setTimeout(() => {
+        renderList();
+        if (activeId) els.readingCard.innerHTML = getText(activeId);
+        togglePopup('scriptPopup');
+    }, 50);
   }
 
   (function restorePrefs() {
@@ -595,6 +624,7 @@
 
   function getText(id) {
     if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
+    // Get raw Sanskrit, then apply transliteration
     const baseText = stotraData.shlokas[id].sa;
     return applyTransliteration(baseText, activeScript);
   }
@@ -702,7 +732,9 @@
 
           if (isSelected || isForcedBySearch) {
             const name = stotraData.metadata.availableCommentaries[cKey] || cKey;
-            commentaryHtml += `<div class="commentary-block"><div class="commentary-title">${name}</div>${highlightText(applyTransliteration(cText, activeScript), query)}</div>`;
+            // FIX: Transliterate raw text FIRST, then apply highlight.
+            let convertedText = applyTransliteration(cText, activeScript);
+            commentaryHtml += `<div class="commentary-block"><div class="commentary-title">${name}</div>${highlightText(convertedText, query)}</div>`;
           }
         });
       }
@@ -852,10 +884,17 @@
           lastSelectedText = txt;
           modalAppendBtn.style.display = 'none';
           tooltip.style.display = 'flex';
-          const tw = tooltip.offsetWidth || 260; // wider because of more buttons
+          const tw = tooltip.offsetWidth || 260;
           let left = rect.left + (rect.width / 2);
           left = Math.max(tw/2 + 8, Math.min(left, window.innerWidth - tw/2 - 8));
-          tooltip.style.top = `${Math.min(rect.bottom + 12, window.innerHeight - 100)}px`;
+          
+          // FIX: Smart Tooltip Position! Find the bottom of the current Shloka Card.
+          let yPos = rect.bottom + 12;
+          const anchor = selection.anchorNode;
+          const shlokaCard = anchor.nodeType === 3 ? anchor.parentElement.closest('.shloka-card') : anchor.closest('.shloka-card');
+          if (shlokaCard) { yPos = shlokaCard.getBoundingClientRect().bottom + 12; }
+          
+          tooltip.style.top = `${Math.min(yPos, window.innerHeight - 100)}px`;
           tooltip.style.left = `${left}px`;
         }
       } else {
@@ -886,7 +925,7 @@
     window.getSelection().removeAllRanges();
 
     if (!activeId) {
-      alert("Please tap on a Shloka card first to make it active before appending notes.");
+      showToast("Please tap on a Shloka card first to make it active before appending notes.");
       return;
     }
 
@@ -898,7 +937,7 @@
     localStorage.setItem(nsKey('notes'), JSON.stringify(notes));
 
     renderList();
-    alert(`Successfully appended excerpt to Shloka ${activeId} notes!`);
+    showToast(`Successfully appended excerpt to Shloka ${activeId} notes!`);
   }
 
   // --- SECRET KEY SETTINGS (Masked) ---
@@ -921,7 +960,7 @@
     } else if (!apiKey) {
         document.getElementById('acharyaModal').style.display = 'flex';
         document.getElementById('acharyaLoading').style.display = 'none';
-        document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is currently meditating).</span><br><br>The traditional text analysis engine is currently unavailable. Please try again later or contact the administrator.`;
+        document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>The traditional text analysis engine is currently unavailable. Please try again later or contact the administrator.`;
         return;
     }
 
@@ -964,10 +1003,11 @@
       document.getElementById('acharyaResult').innerHTML = parseMarkdown(result);
     } catch (err) {
       document.getElementById('acharyaLoading').style.display = 'none';
+      // FIX: Ensure strict error masking for non-admins
       if (document.body.classList.contains('is-authorized')) {
          document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">Admin Debug Error:</span> ${err.message}`;
       } else {
-         document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is currently meditating).</span><br><br>The traditional text analysis engine is currently unavailable. Please try again later or contact the administrator.`;
+         document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>The traditional text analysis engine is currently unavailable. Please try again later or contact the administrator.`;
       }
     }
   }
@@ -979,7 +1019,7 @@
       navigator.share({ title: `Acharya Analysis (Shloka ${activeId || ''})`, text: resText }).catch(()=>{});
     } else {
       navigator.clipboard.writeText(resText);
-      alert("Analysis copied to clipboard!");
+      showToast("Analysis copied to clipboard!");
     }
   }
 
@@ -1058,7 +1098,7 @@
           let res = await fetch(primary);
           if (!res.ok) res = await fetch(alt);
           if (res.ok) { await cache.put(res.url, res.clone()); success++; }
-        } catch (e) {}
+        } catch (e) { /* skip this track */ }
         done++;
         btn.innerText = `⏳ Preloading ${Math.round((done/total)*100)}%`;
       }
