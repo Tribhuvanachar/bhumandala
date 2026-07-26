@@ -27,7 +27,7 @@
   .flex-row { display: flex; align-items: center; }
   .flex-center { display: flex; align-items: center; justify-content: center; }
 
-  /* Top App Bar - Fixed Clipping & Spacing */
+  /* Top App Bar */
   .top-bar { position: fixed; top: 0; left: 0; right: 0; height: 50px; background: var(--top-bar-bg); border-bottom: 1px solid var(--top-bar-border); z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 6px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: background 0.3s; }
   .top-bar-title { font-size: 14px; font-weight: 600; color: var(--accent-red); cursor: pointer; white-space: nowrap; flex-shrink: 0; margin-right: auto; padding-left: 4px; }
   .top-actions { display: flex; gap: 4px; align-items: center; justify-content: flex-end; flex-wrap: nowrap; }
@@ -181,22 +181,22 @@
       <button class="btn-top" onclick="togglePopup('commentaryPopup')" id="activeCommBtn" title="Commentary Options">💬</button>
       <div class="popup popup-top" id="commentaryPopup">
         <div style="font-size:10px; color:#777; margin-bottom:4px; text-transform:uppercase;">View Bhashya</div>
-        <div class="pop-item active" onclick="setCommentaryView('none')">None (Mula Only)</div>
-        <div class="pop-item" onclick="setCommentaryView('all')">All Commentaries</div>
+        <div class="pop-item active" onclick="setCommentaryView('none', this)">None (Mula Only)</div>
+        <div class="pop-item" onclick="setCommentaryView('all', this)">All Commentaries</div>
         <div id="commentaryDynamicList"></div>
       </div>
     </div>
 
-    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="openKeyModal()" title="API Key Settings">🔑</button>
-    <button class="btn-top" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle Dark Mode">☼</button>
+    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="openKeyModal()" title="API Key Settings" style="font-size: 18px;">🔑</button>
+    <button class="btn-top" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle Dark Mode" style="font-size: 18px;">☀️</button>
 
     <div style="position:relative;">
-      <button class="btn-top" onclick="togglePopup('langPopup')" id="activeLangBtn" title="Language Select">🌐</button>
+      <button class="btn-top" onclick="togglePopup('langPopup')" id="activeLangBtn" title="Language Select" style="font-size: 18px;">🌐</button>
       <div class="popup popup-top" id="langPopup">
         <div style="font-size:10px; color:#777; margin-bottom:4px; text-transform:uppercase;">Reading Language</div>
-        <div class="pop-item active" onclick="setLanguage('sa')">Sanskrit <span style="margin-left:auto; font-family:serif;">संस्कृतम्</span></div>
-        <div class="pop-item" onclick="setLanguage('kn')">Kannada <span style="margin-left:auto; font-family:serif;">ಕನ್ನಡ</span></div>
-        <div class="pop-item" onclick="setLanguage('en')">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
+        <div class="pop-item active" onclick="setLanguage('sa', this)">Sanskrit <span style="margin-left:auto; font-family:serif;">संस्कृतम्</span></div>
+        <div class="pop-item" onclick="setLanguage('kn', this)">Kannada <span style="margin-left:auto; font-family:serif;">ಕನ್ನಡ</span></div>
+        <div class="pop-item" onclick="setLanguage('en', this)">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
       </div>
     </div>
   </div>
@@ -206,7 +206,7 @@
   <div class="header">
     <h1 id="stotraTitle">Loading...</h1>
     <div class="author" id="stotraAuthor">...</div>
-    <div class="version-tag">APP VERSION: v2.6 (Core Refined Edition)</div>
+    <div class="version-tag">APP VERSION: v2.7 (State & Icon Fix)</div>
   </div>
 
   <div class="search-box-group">
@@ -222,7 +222,7 @@
 
   <div class="reading-card" id="readingCard">श्लोकं चिनोतु (Select a shloka)</div>
   <div class="shloka-list" id="shlokaList"></div>
-  <div class="app-footer">APP VERSION: v2.6</div>
+  <div class="app-footer">APP VERSION: v2.7</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -250,7 +250,7 @@
     </div>
 
     <div class="popup-container advanced-feature">
-      <button class="btn-sm" onclick="togglePopup('filterPopup')" id="filterBtn">Y Filter</button>
+      <button class="btn-sm" onclick="togglePopup('filterPopup')" id="filterBtn">🔽 Filter</button>
       <div class="popup" id="filterPopup" style="left: 50%; transform: translateX(-50%);">
         <div class="pop-item active" id="opt-all" onclick="setFilter('all')">▶ All</div>
         <div class="pop-item" id="opt-fav" onclick="setFilter('fav')">▶ ★ Favorites</div>
@@ -433,7 +433,7 @@
 
     if(stotraData.metadata.availableCommentaries) {
       Object.entries(stotraData.metadata.availableCommentaries).forEach(([key, name]) => {
-        dynamicList.innerHTML += `<div class="pop-item" onclick="setCommentaryView('${key}')">${name}</div>`;
+        dynamicList.innerHTML += `<div class="pop-item" onclick="setCommentaryView('${key}', this)">${name}</div>`;
         els.searchScope.innerHTML += `<option value="${key}">${name} Only</option>`;
       });
     }
@@ -450,13 +450,17 @@
   function formatTime(s) { if (isNaN(s)) return "0:00.000"; const m = Math.floor(s/60), sec = Math.floor(s%60), ms = Math.floor((s%1)*1000); return m + ":" + (sec<10?"0":"") + sec + "." + String(ms).padStart(3,'0'); }
   function updateRepeatDisplay() { const t = parseInt(els.repeatInput.value) || 1; els.repeatCounter.innerText = (activeId && t > 1) ? `Loop ${currentLoopCount + 1}/${t}` : ""; }
 
-  function toggleDarkMode() { document.body.classList.toggle('dark-mode'); document.getElementById('darkModeBtn').innerText = document.body.classList.contains('dark-mode') ? '☾' : '☼'; }
+  function toggleDarkMode() { 
+    document.body.classList.toggle('dark-mode'); 
+    document.getElementById('darkModeBtn').innerText = document.body.classList.contains('dark-mode') ? '🌙' : '☀️'; 
+  }
+  
   function setFontSize(px) { document.documentElement.style.setProperty('--font-multiplier', px + 'px'); document.querySelectorAll('#fontPopup .pop-item').forEach(el => el.classList.remove('active')); event.currentTarget.classList.add('active'); togglePopup('fontPopup'); }
   
-  function setLanguage(code) { 
+  function setLanguage(code, el) { 
     activeLang = code; 
-    document.querySelectorAll('#langPopup .pop-item').forEach(el => el.classList.remove('active')); 
-    event.currentTarget.classList.add('active'); 
+    document.querySelectorAll('#langPopup .pop-item').forEach(item => item.classList.remove('active')); 
+    if (el) el.classList.add('active'); 
     renderList(); 
     if(activeId) els.readingCard.innerHTML = getText(activeId); 
     togglePopup('langPopup'); 
@@ -531,7 +535,7 @@
           hasMatch = i.toString().includes(query) || shloka.sa.toLowerCase().includes(query);
         } else if(shloka.commentaries && shloka.commentaries[scope]) {
           hasMatch = shloka.commentaries[scope].toLowerCase().includes(query);
-          if(hasMatch) forceCommentaries.push(scope); // Fixed: Auto-expand when scoped search matches
+          if(hasMatch) forceCommentaries.push(scope);
         }
         if(!hasMatch) continue;
       }
@@ -649,7 +653,13 @@
     else { currentLoopCount = 0; updateRepeatDisplay(); if (currentFilter === 'none') { isPlaying=false; updatePlayUI(); return; } playNextFiltered(); }
   });
 
-  function setCommentaryView(view) { selectedCommentaryView = view; togglePopup('commentaryPopup'); renderList(); }
+  function setCommentaryView(view, el) { 
+    selectedCommentaryView = view; 
+    document.querySelectorAll('#commentaryPopup .pop-item').forEach(item => item.classList.remove('active'));
+    if (el) el.classList.add('active');
+    togglePopup('commentaryPopup'); 
+    renderList(); 
+  }
 
   // --- DUAL SELECTION TOOLTIP (Advanced Mode Only) ---
   document.addEventListener('selectionchange', () => {
