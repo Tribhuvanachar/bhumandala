@@ -6,9 +6,13 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" id="themeColorMeta" content="#FFFDF9">
 <title>Bhagavata Digital Library</title>
+
+<!-- Fonts & Transliteration Engine -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@sanskrit-lexicon/sanscript/sanscript.min.js"></script>
+
 <style>
   :root {
     --bg-main: #FAF3E6; --card-bg: #ffffff; --card-border: #E9DCC3;
@@ -89,9 +93,9 @@
   .snippet-badge { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; border-radius: 12px; padding: 2px 8px; font-size: 10px; font-weight: 700; cursor: pointer; margin-left: 6px; display: inline-block; }
 
   /* Commentary Block */
-  .commentary-block { background: rgba(0,0,0,0.025); border-left: 3px solid var(--accent-gold); padding: 8px 12px; border-radius: 4px; font-size: calc(var(--font-multiplier) * 0.85); line-height: 1.6; color: var(--text-primary); margin-top: 6px; overflow-wrap: anywhere; }
+  .commentary-block { background: rgba(0,0,0,0.025); border-left: 3px solid var(--accent-gold); padding: 8px 12px; border-radius: 4px; font-size: calc(var(--font-multiplier) * 0.85); line-height: 1.6; color: var(--text-primary); margin-top: 6px; overflow-wrap: anywhere; font-family: var(--font-sanskrit); }
   body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
-  .commentary-title { font-weight: 700; color: var(--accent-red); font-size: 11px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .commentary-title { font-weight: 700; font-family: var(--font-ui); color: var(--accent-red); font-size: 11px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
 
   /* Bottom Toolbar Grid */
   .bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); border-top: 1px solid var(--card-border); box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 9999; box-sizing: border-box; padding-bottom: env(safe-area-inset-bottom); }
@@ -137,39 +141,40 @@
 
   /* Context-Aware Palette Tooltip */
   #actionTooltip {
-    position: fixed; background: #1a1a1a; color: white; padding: 6px 8px; border-radius: 12px;
-    font-size: 11px; font-weight: 700; display: none; z-index: 10000; box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-    transform: translateX(-50%); flex-direction: column; gap: 4px; user-select: none;
+    position: fixed; background: #1a1a1a; padding: 8px 10px; border-radius: 14px;
+    display: none; z-index: 10000; box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    transform: translateX(-50%); flex-direction: column; gap: 6px; user-select: none;
   }
-  .tooltip-header { font-size: 9px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; margin-bottom: 2px; }
-  .tooltip-row { display: flex; gap: 4px; justify-content: center; }
-  .tooltip-btn { background: rgba(255,255,255,0.1); color: white; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-weight: 700; white-space: nowrap; transition: background 0.2s; }
+  .tooltip-header { font-size: 10px; font-weight: 800; color: #a8907a; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; margin-bottom: 2px; }
+  .tooltip-row { display: flex; gap: 6px; justify-content: center; }
+  .tooltip-btn { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.05); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 12px; white-space: nowrap; transition: background 0.2s; }
   .tooltip-btn:hover { background: rgba(255,255,255,0.25); }
 
   /* Floating Selection Button inside Modal */
   #modalAppendBtn {
     display: none; position: fixed; z-index: 10001; background: var(--accent-red); color: white;
-    border: none; padding: 6px 12px; border-radius: 16px; font-size: 11px; font-weight: 700;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; transform: translateX(-50%);
+    border: none; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700;
+    box-shadow: 0 6px 16px rgba(174, 35, 31, 0.4); cursor: pointer; transform: translateX(-50%);
   }
 
   /* Modals */
-  .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 400; }
-  .modal-content { background: var(--card-bg); color: var(--text-primary); padding: 18px; border-radius: 12px; width: 85%; max-width: 380px; border: 1px solid var(--card-border); max-height: 75vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
-  .modal-content textarea { width: 100%; height: 70px; margin: 8px 0; padding: 8px; border-radius: 6px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); font-family: inherit; box-sizing: border-box; }
-  .modal-input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); margin: 8px 0; box-sizing: border-box; }
+  .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 400; backdrop-filter: blur(2px); }
+  .modal-content { background: var(--card-bg); color: var(--text-primary); padding: 20px; border-radius: 16px; width: 90%; max-width: 420px; border: 1px solid var(--card-border); max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+  .modal-content textarea { width: 100%; height: 80px; margin: 8px 0; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); font-family: inherit; font-size: 13px; box-sizing: border-box; resize: vertical; }
+  .modal-input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); margin: 8px 0; font-size: 13px; box-sizing: border-box; }
 
   /* Project Contribution Banner */
-  .project-banner { background: var(--card-active); border: 1px solid var(--card-border); border-radius: 8px; padding: 10px 12px; margin-top: 16px; text-align: center; font-size: 11px; color: var(--text-primary); line-height: 1.5; }
-  .project-banner a { color: var(--accent-red); font-weight: 700; text-decoration: none; }
+  .project-banner { background: var(--card-active); border: 1px solid var(--accent-red); border-radius: 10px; padding: 14px 16px; margin-top: 24px; text-align: center; font-size: 12px; font-weight: 500; color: var(--text-primary); line-height: 1.6; }
+  .project-banner a { color: var(--accent-red); font-weight: 700; text-decoration: none; border-bottom: 1px dashed var(--accent-red); padding-bottom: 1px; }
 
   /* Markdown Rendering Classes */
-  .md-h2 { color: var(--accent-red); font-size: 16px; margin: 12px 0 6px; border-bottom: 1px solid var(--card-border); padding-bottom: 4px; }
-  .md-h3 { color: var(--accent-gold); font-size: 14px; margin: 10px 0 4px; }
-  .md-list { margin: 4px 0 4px 16px; padding: 0; }
+  .md-h2 { color: var(--accent-red); font-size: 16px; font-weight: 800; margin: 16px 0 8px; border-bottom: 1px solid var(--card-border); padding-bottom: 6px; }
+  .md-h3 { color: var(--accent-gold); font-size: 14px; font-weight: 700; margin: 14px 0 6px; }
+  .md-list { margin: 6px 0 6px 20px; padding: 0; line-height: 1.7; }
+  .md-strong { font-weight: 700; color: var(--text-primary); }
 
   @keyframes spin { 100% { transform: rotate(360deg); } }
-  .app-footer { text-align: center; padding: 20px 10px 30px; font-size: 10px; color: #a8907a; border-top: 1px solid var(--card-border); margin-top: 20px; }
+  .app-footer { text-align: center; padding: 24px 10px 40px; font-size: 10px; font-weight: 600; color: #a8907a; border-top: 1px solid var(--card-border); margin-top: 24px; text-transform: uppercase; letter-spacing: 0.5px; }
 </style>
 </head>
 <body>
@@ -182,12 +187,12 @@
     <button class="tooltip-btn" onpointerdown="askAcharya(event, 'grammar')">⚙️ Word</button>
     <button class="tooltip-btn" onpointerdown="askAcharya(event, 'commentary')">🔍 Bhashya</button>
   </div>
-  <div style="height:1px; background:rgba(255,255,255,0.1); margin:2px 0;"></div>
-  <button class="tooltip-btn" style="width:100%; text-align:center;" onpointerdown="askAcharya(event, 'translate')">🌐 Auto Translate</button>
+  <div style="height:1px; background:rgba(255,255,255,0.1); margin:4px 0;"></div>
+  <button class="tooltip-btn" style="width:100%; text-align:center; background: rgba(226, 102, 74, 0.2);" onpointerdown="askAcharya(event, 'translate')">🌐 Native Meaning</button>
 </div>
 
 <!-- Floating Append-to-Notes Selection Button for Modal -->
-<button id="modalAppendBtn" onpointerdown="appendSelectedTextToNote(event)">➕ Append to My Notes</button>
+<button id="modalAppendBtn" onpointerdown="appendSelectedTextToNote(event)">➕ Add Selection to Notes</button>
 
 <!-- Top Bar -->
 <div class="top-bar">
@@ -219,13 +224,17 @@
     <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="openKeyModal()" title="Access Key Settings" style="font-size: 18px;">🔑</button>
     <button class="btn-top" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle Dark Mode" style="font-size: 18px;">☀️</button>
 
+    <!-- Transliteration Script Selector -->
     <div style="position:relative;">
-      <button class="btn-top" onclick="togglePopup('langPopup')" id="activeLangBtn" title="Language Select" style="font-size: 18px;">🌐</button>
-      <div class="popup popup-top" id="langPopup">
-        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Reading Language</div>
-        <div class="pop-item active" data-lang="sa" onclick="setLanguage('sa', this)">Sanskrit <span style="margin-left:auto; font-family:var(--font-sanskrit);">संस्कृतम्</span></div>
-        <div class="pop-item" data-lang="kn" onclick="setLanguage('kn', this)">Kannada <span style="margin-left:auto; font-family:serif;">ಕನ್ನಡ</span></div>
-        <div class="pop-item" data-lang="en" onclick="setLanguage('en', this)">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
+      <button class="btn-top" onclick="togglePopup('scriptPopup')" id="activeScriptBtn" title="Transliterate Script" style="font-size: 18px;">🔠</button>
+      <div class="popup popup-top" id="scriptPopup">
+        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Reading Script</div>
+        <div class="pop-item active" data-script="devanagari" onclick="setScript('devanagari', this)">Sanskrit <span style="margin-left:auto; font-family:var(--font-sanskrit);">संस्कृतम्</span></div>
+        <div class="pop-item" data-script="iast" onclick="setScript('iast', this)">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
+        <div class="pop-item" data-script="kannada" onclick="setScript('kannada', this)">Kannada <span style="margin-left:auto; font-family:serif;">ಕನ್ನಡ</span></div>
+        <div class="pop-item" data-script="telugu" onclick="setScript('telugu', this)">Telugu <span style="margin-left:auto; font-family:serif;">తెలుగు</span></div>
+        <div class="pop-item" data-script="tamil" onclick="setScript('tamil', this)">Tamil <span style="margin-left:auto; font-family:serif;">தமிழ்</span></div>
+        <div class="pop-item" data-script="malayalam" onclick="setScript('malayalam', this)">Malayalam <span style="margin-left:auto; font-family:serif;">മലയാളം</span></div>
       </div>
     </div>
   </div>
@@ -254,12 +263,12 @@
 
   <!-- Contribution & Support Banner -->
   <div class="project-banner">
-    <strong>🙏 Sarvamoola Digitisation Project</strong><br>
-    To contribute, digitize, or support our voluntary classes, write to:<br>
-    <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink">sanatanavidyagurukulam@gmail.com</a>
+    <strong style="font-size: 13px;">🙏 Sarvamoola Digitisation Project</strong><br>
+    To contribute, sponsor digitisation, or support our educational initiatives, please write to:<br>
+    <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v5.1</div>
+  <div class="app-footer" id="appFooter">v6.0</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -357,7 +366,7 @@
   <div class="modal-content">
     <h4 style="margin:0 0 10px 0; color:var(--accent-red);">🎯 Saved Snippets (Shloka <span id="snipShlokaNum"></span>)</h4>
     <div id="snippetListContainer"></div>
-    <div style="text-align:right; margin-top:12px;">
+    <div style="text-align:right; margin-top:16px;">
       <button class="btn-sm" onclick="closeSnippetModal()">Close</button>
     </div>
   </div>
@@ -365,39 +374,39 @@
 
 <div class="modal-overlay" id="noteModal">
   <div class="modal-content">
-    <h4 style="margin:0 0 6px 0;">📝 Notes (Shloka <span id="noteShlokaNum"></span>)</h4>
+    <h4 style="margin:0 0 10px 0;">📝 Notes (Shloka <span id="noteShlokaNum"></span>)</h4>
     <textarea id="noteText"></textarea>
-    <div style="text-align:right;">
+    <div style="text-align:right; margin-top: 8px;">
       <button class="btn-sm" onclick="closeNote()">Cancel</button>
-      <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; margin-left:6px;" onclick="saveNote()">Save</button>
+      <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; margin-left:8px;" onclick="saveNote()">Save Notes</button>
     </div>
   </div>
 </div>
 
 <div class="modal-overlay" id="keyModal">
   <div class="modal-content">
-    <h3 style="margin:0 0 10px 0; color:var(--accent-red);">🔑 Secret Access Settings</h3>
-    <p style="font-size:12px; color:#666; margin:0 0 8px 0;">Enter your Secret Access Key below. If you do not have one, please contact the administrator at <strong id="contactEmailDisplay">sanatanavidyagurukulam@gmail.com</strong>.</p>
+    <h3 style="margin:0 0 12px 0; color:var(--accent-red);">🔑 Secret Access Settings</h3>
+    <p style="font-size:12px; color:#666; margin:0 0 12px 0; line-height: 1.5;">Enter your Secret Access Key below to enable deep textual analysis. If you do not have one, please contact the administrator at <strong id="contactEmailDisplay">sanatanavidyagurukulam@gmail.com</strong>.</p>
     <input type="password" id="userApiKeyInput" class="modal-input" placeholder="Enter Access Key Here...">
-    <div style="text-align:right; margin-top:12px;">
+    <div style="text-align:right; margin-top:16px;">
       <button class="btn-sm" onclick="closeKeyModal()">Cancel</button>
-      <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; margin-left:6px;" onclick="saveUserApiKey()">Save Key</button>
+      <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; margin-left:8px;" onclick="saveUserApiKey()">Save Key</button>
     </div>
   </div>
 </div>
 
 <div class="modal-overlay" id="acharyaModal">
   <div class="modal-content">
-    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--card-border); padding-bottom:8px; margin-bottom:10px;">
-      <h4 style="margin:0; color:var(--accent-red);">🕉️ Acharya's Analysis</h4>
-      <button class="btn-sm" onclick="shareAcharyaAnalysis()" style="font-size:10px;">📤 Share</button>
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--card-border); padding-bottom:12px; margin-bottom:14px;">
+      <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">🕉️ Acharya's Analysis</h4>
+      <button class="btn-sm" onclick="shareAcharyaAnalysis()" style="font-size:11px;">📤 Share</button>
     </div>
-    <div id="acharyaLoading" style="display:none; text-align:center; padding: 20px;">
-      <span style="font-size:24px; display:inline-block; animation: spin 1s linear infinite;">⏳</span>
-      <p style="font-size:12px; color:#8a7a63; margin-top:8px;">Consulting traditional scriptures...</p>
+    <div id="acharyaLoading" style="display:none; text-align:center; padding: 30px;">
+      <span style="font-size:28px; display:inline-block; animation: spin 1s linear infinite;">⏳</span>
+      <p style="font-size:13px; font-weight: 600; color:#8a7a63; margin-top:12px;">Consulting traditional scriptures...</p>
     </div>
-    <div id="acharyaResult" style="font-size:13px; line-height:1.6; overflow-wrap: anywhere;"></div>
-    <div style="text-align:right; margin-top:16px;">
+    <div id="acharyaResult" style="font-size:14px; line-height:1.7; overflow-wrap: anywhere;"></div>
+    <div style="text-align:right; margin-top:20px; border-top: 1px solid var(--card-border); padding-top: 12px;">
       <button class="btn-sm" onclick="closeAcharyaModal()">Close</button>
     </div>
   </div>
@@ -409,20 +418,23 @@
     appName: "Bhagavata Digital Library",
     designedBy: "Tribhuvan Achar",
     contactEmail: "sanatanavidyagurukulam@gmail.com",
-    geminiModel: "gemini-1.5-flash", 
+    geminiModel: "gemini-3.6-flash", 
     secretPasskey: "SHRI108",
-    version: "v5.1 (Loop Fix & Polish)"
+    version: "v6.0"
   };
 
-  // --- PASSKEY AUTHENTICATION SYSTEM ---
   const urlParams = new URLSearchParams(window.location.search);
   const providedPass = urlParams.get('pass');
 
-  // Dynamic config fetch
+  // Dynamic config fetch overriding defaults
   fetch('config.json')
     .then(r => r.ok ? r.json() : {})
     .then(cfg => {
-      appConfig = { ...appConfig, ...cfg };
+      if (cfg.geminiModel) appConfig.geminiModel = cfg.geminiModel;
+      if (cfg.designedBy) appConfig.designedBy = cfg.designedBy;
+      if (cfg.secretPasskey) appConfig.secretPasskey = cfg.secretPasskey;
+      if (cfg.contactEmail) appConfig.contactEmail = cfg.contactEmail;
+      
       if (providedPass && providedPass.toUpperCase() === appConfig.secretPasskey.toUpperCase()) {
         localStorage.setItem('acharyaAuthorized', 'true');
       }
@@ -458,7 +470,7 @@
   let isPlaying = false;
   let currentLoopCount = 0;
   let currentFilter = 'all';
-  let activeLang = 'sa';
+  let activeScript = 'devanagari';
   let selectedCommentaryView = 'none';
   let lastSelectedText = "";
   let modalSelectedText = "";
@@ -487,7 +499,7 @@
     navContainer: document.getElementById('searchNavigator')
   };
 
-  // Preferences
+  // --- PREFERENCES & TRANSLITERATION ---
   function applyDarkMode(isDark) {
     document.body.classList.toggle('dark-mode', isDark);
     document.getElementById('darkModeBtn').innerText = isDark ? '🌙' : '☀️';
@@ -512,15 +524,28 @@
     togglePopup('fontPopup');
   }
 
-  function applyLanguage(code) {
-    activeLang = code;
+  // Client-Side Transliteration Core
+  function applyTransliteration(text, script) {
+    if (script === 'devanagari' || !text) return text;
+    try {
+      if (typeof Sanscript !== 'undefined') {
+        return Sanscript.t(text, 'devanagari', script);
+      }
+    } catch (e) {
+      console.warn("Sanscript conversion failed:", e);
+    }
+    return text;
+  }
+
+  function applyScript(code) {
+    activeScript = code;
     document.querySelectorAll('#langPopup .pop-item').forEach(el => {
-      el.classList.toggle('active', el.dataset.lang === code);
+      el.classList.toggle('active', el.dataset.script === code);
     });
   }
-  function setLanguage(code, el) {
-    applyLanguage(code);
-    localStorage.setItem('app_lang', code);
+  function setScript(code, el) {
+    applyScript(code);
+    localStorage.setItem('app_script', code);
     renderList();
     if (activeId) els.readingCard.innerHTML = getText(activeId);
     togglePopup('langPopup');
@@ -530,11 +555,11 @@
     applyDarkMode(localStorage.getItem('app_darkMode') === 'true');
     const savedFont = parseInt(localStorage.getItem('app_fontSize'), 10);
     if (!isNaN(savedFont)) applyFontSize(savedFont);
-    const savedLang = localStorage.getItem('app_lang');
-    if (savedLang) applyLanguage(savedLang);
+    const savedScript = localStorage.getItem('app_script');
+    if (savedScript) applyScript(savedScript);
   })();
 
-  // Dynamic JSON Load
+  // --- DATA LOADING ---
   fetch(jsonFileName)
     .then(res => { if(!res.ok) throw new Error(`Could not find ${jsonFileName}`); return res.json(); })
     .then(data => { stotraData = data; initApp(); })
@@ -570,9 +595,8 @@
 
   function getText(id) {
     if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
-    const shloka = stotraData.shlokas[id];
-    const langTxt = shloka[activeLang];
-    return (langTxt && langTxt.trim().length > 0) ? langTxt : shloka.sa;
+    const baseText = stotraData.shlokas[id].sa;
+    return applyTransliteration(baseText, activeScript);
   }
 
   function formatTime(s) { if (isNaN(s)) return "0:00.000"; const m = Math.floor(s/60), sec = Math.floor(s%60), ms = Math.floor((s%1)*1000); return m + ":" + (sec<10?"0":"") + sec + "." + String(ms).padStart(3,'0'); }
@@ -636,6 +660,7 @@
       let forceCommentaries = [];
       let hasMatch = false;
 
+      // Base search logic applies to the raw JSON text directly
       if(query) {
         if(scope === 'all') {
           hasMatch = i.toString().includes(query) || shloka.sa.toLowerCase().includes(query);
@@ -677,7 +702,7 @@
 
           if (isSelected || isForcedBySearch) {
             const name = stotraData.metadata.availableCommentaries[cKey] || cKey;
-            commentaryHtml += `<div class="commentary-block"><div class="commentary-title">${name}</div>${highlightText(cText, query)}</div>`;
+            commentaryHtml += `<div class="commentary-block"><div class="commentary-title">${name}</div>${highlightText(applyTransliteration(cText, activeScript), query)}</div>`;
           }
         });
       }
@@ -791,7 +816,7 @@
     renderList();
   }
 
-  // --- SELECTION TOOLTIP (Page Level) ---
+  // --- SELECTION TOOLTIP & SMART PALETTE ---
   document.addEventListener('selectionchange', () => {
     if (!document.body.classList.contains('is-authorized')) return;
 
@@ -827,10 +852,10 @@
           lastSelectedText = txt;
           modalAppendBtn.style.display = 'none';
           tooltip.style.display = 'flex';
-          const tw = tooltip.offsetWidth || 160;
+          const tw = tooltip.offsetWidth || 260; // wider because of more buttons
           let left = rect.left + (rect.width / 2);
           left = Math.max(tw/2 + 8, Math.min(left, window.innerWidth - tw/2 - 8));
-          tooltip.style.top = `${Math.min(rect.bottom + 12, window.innerHeight - 80)}px`;
+          tooltip.style.top = `${Math.min(rect.bottom + 12, window.innerHeight - 100)}px`;
           tooltip.style.left = `${left}px`;
         }
       } else {
@@ -840,28 +865,28 @@
     }, 50);
   });
 
-  // Markdown Parser
+  // Simple Markdown Parser for Acharya Output
   function parseMarkdown(md) {
     return md
       .replace(/^### (.*$)/gim, '<div class="md-h3">$1</div>')
       .replace(/^## (.*$)/gim, '<div class="md-h2">$1</div>')
       .replace(/^\* (.*$)/gim, '<ul class="md-list"><li>$1</li></ul>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="md-strong">$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
       .replace(/<\/ul>\n<ul class="md-list">/gim, '')
       .replace(/\n/g, '<br>');
   }
 
-  // --- SELECTIVE APPEND TO NOTES ---
+  // --- SELECTIVE APPEND TO NOTES (FIXED LOOP) ---
   function appendSelectedTextToNote(e) {
     if (e) e.preventDefault();
 
-    // FIX: Hide button and clear selection FIRST to prevent Android alert-focus loops
+    // Hide UI and clear selection FIRST to stop Android re-focus loops
     document.getElementById('modalAppendBtn').style.display = 'none';
     window.getSelection().removeAllRanges();
 
     if (!activeId) {
-      alert("Please tap on a Shloka (to make it active) before appending notes.");
+      alert("Please tap on a Shloka card first to make it active before appending notes.");
       return;
     }
 
@@ -873,10 +898,10 @@
     localStorage.setItem(nsKey('notes'), JSON.stringify(notes));
 
     renderList();
-    alert(`Appended excerpt to Shloka ${activeId} notes!`);
+    alert(`Successfully appended excerpt to Shloka ${activeId} notes!`);
   }
 
-  // --- SECRET KEY SETTINGS ---
+  // --- SECRET KEY SETTINGS (Masked) ---
   function openKeyModal() { document.getElementById('userApiKeyInput').value = localStorage.getItem('user_gemini_key') || ''; document.getElementById('keyModal').style.display = 'flex'; }
   function closeKeyModal() { document.getElementById('keyModal').style.display = 'none'; }
   function saveUserApiKey() {
@@ -885,7 +910,7 @@
     closeKeyModal();
   }
 
-  // --- ASK ACHARYA (Context-Aware) ---
+  // --- ASK ACHARYA (Context-Aware Palette) ---
   async function askAcharya(e, type) {
     if (e) e.preventDefault();
     document.getElementById('actionTooltip').style.display = 'none';
@@ -908,6 +933,13 @@
     document.getElementById('acharyaLoading').style.display = 'block';
     document.getElementById('acharyaResult').innerHTML = '';
 
+    // Determine target translation language from the current UI script setting
+    let targetLang = "English";
+    if(activeScript === 'kannada') targetLang = "Kannada";
+    if(activeScript === 'telugu') targetLang = "Telugu";
+    if(activeScript === 'tamil') targetLang = "Tamil";
+    if(activeScript === 'malayalam') targetLang = "Malayalam";
+
     let promptText = "";
     if (type === 'shloka') {
         promptText = `You are a traditional Sanskrit Acharya. For the verse: "${text}", provide: 1. Padachheda (Word-by-word split) 2. Anvaya (Prose word order) 3. Word Meaning 4. Bhavartha (Overarching theme). Format using clean markdown headings.`;
@@ -916,12 +948,11 @@
     } else if (type === 'commentary') {
         promptText = `You are a traditional scholar. Analyze this Bhashya excerpt: "${text}". Provide: 1. Sentence Breakdown 2. Purvapaksha & Siddhanta (if any) 3. Pramana/Citations expanded. Format using clean markdown.`;
     } else if (type === 'translate') {
-        promptText = `Translate this text: "${text}" into ${activeLang === 'kn' ? 'Kannada' : (activeLang === 'en' ? 'English' : 'Simple Sanskrit')}. Provide a natural translation and a brief summary. Format cleanly.`;
+        promptText = `Translate and explain the meaning of this Sanskrit text: "${text}" into ${targetLang}. Provide a natural translation and a brief summary of its philosophical significance. Format cleanly using markdown.`;
     }
 
     try {
-      // Hardcoded to standard 1.5-flash as the fallback stable model
-      const modelName = appConfig.geminiModel || "gemini-1.5-flash";
+      const modelName = appConfig.geminiModel || "gemini-3.6-flash";
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`, {
         method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
       });
@@ -933,7 +964,6 @@
       document.getElementById('acharyaResult').innerHTML = parseMarkdown(result);
     } catch (err) {
       document.getElementById('acharyaLoading').style.display = 'none';
-      // Role-Based Error Masking
       if (document.body.classList.contains('is-authorized')) {
          document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">Admin Debug Error:</span> ${err.message}`;
       } else {
@@ -953,7 +983,6 @@
     }
   }
 
-  // FIX: Force clear all ghost selections when modal is closed to stop loops
   function closeAcharyaModal() { 
     document.getElementById('acharyaModal').style.display = 'none'; 
     document.getElementById('modalAppendBtn').style.display = 'none';
@@ -1029,7 +1058,7 @@
           let res = await fetch(primary);
           if (!res.ok) res = await fetch(alt);
           if (res.ok) { await cache.put(res.url, res.clone()); success++; }
-        } catch (e) { /* skip this track */ }
+        } catch (e) {}
         done++;
         btn.innerText = `⏳ Preloading ${Math.round((done/total)*100)}%`;
       }
