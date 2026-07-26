@@ -25,7 +25,6 @@
 
   /* Utility Flex */
   .flex-row { display: flex; align-items: center; }
-  .flex-between { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
   .flex-center { display: flex; align-items: center; justify-content: center; }
 
   /* Top App Bar */
@@ -34,6 +33,10 @@
   .top-actions { display: flex; gap: 8px; align-items: center; }
   .btn-top { background: none; border: none; font-size: 16px; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; }
   .btn-lang { background: transparent; border: 1px solid var(--card-border); color: var(--text-primary); border-radius: 16px; padding: 4px 10px; font-size: 11px; font-weight: bold; cursor: pointer; }
+
+  /* Advanced Feature Hiding */
+  .advanced-feature { display: none !important; }
+  body.is-authorized .advanced-feature { display: flex !important; }
 
   /* Header & Search Bar */
   .header { text-align: center; padding: 10px 0 15px; }
@@ -48,7 +51,7 @@
   .clear-search-btn { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 14px; color: #999; cursor: pointer; display: none; }
 
   /* Reading & List Cards */
-  .reading-card { background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 12px; padding: 20px 16px; text-align: center; font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.6; font-weight: 600; margin-bottom: 16px; min-height: 70px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+  .reading-card { background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 12px; padding: 20px 16px; text-align: center; font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.6; font-weight: 600; margin-bottom: 16px; min-height: 70px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: background 0.3s, border 0.3s; }
   .reading-card.highlight { border-color: var(--accent-red); }
   
   .shloka-list { display: flex; flex-direction: column; gap: 10px; }
@@ -63,6 +66,10 @@
   .btn-icon { background: none; border: none; font-size: 16px; cursor: pointer; color: #b0bec5; padding: 4px; }
   .is-fav { color: var(--accent-gold) !important; }
   .is-practice { color: var(--accent-red) !important; }
+  .has-note { color: var(--accent-red) !important; }
+
+  .snippet-badge { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; border-radius: 12px; padding: 2px 8px; font-size: 10px; font-weight: bold; cursor: pointer; margin-left: 6px; display: inline-block; }
+  body.dark-mode .snippet-badge { background: #1b5e20; color: #c8e6c9; border-color: #2e7d32; }
 
   /* Commentary Display inside Shloka Card */
   .commentary-block { background: rgba(0,0,0,0.02); border-left: 3px solid var(--accent-gold); padding: 8px 12px; border-radius: 4px; font-size: calc(var(--font-multiplier) * 0.85); line-height: 1.6; color: var(--text-primary); margin-top: 6px; }
@@ -70,27 +77,48 @@
   .commentary-title { font-weight: bold; color: var(--accent-red); font-size: 11px; margin-bottom: 4px; text-transform: uppercase; }
 
   /* Bottom Toolbar Grid */
-  .bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); border-top: 1px solid var(--card-border); box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 100; }
+  .bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); border-top: 1px solid var(--card-border); box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 100; transition: background 0.3s, border 0.3s; }
   .player-inner { max-width: 650px; margin: 0 auto; display: flex; align-items: center; justify-content: space-evenly; padding: 8px 4px; }
   
   .controls-main { display: flex; gap: 8px; justify-content: center; }
   .timer-group { display: flex; flex-direction: column; text-align: center; min-width: 80px; }
   .popup-container { position: relative; display: flex; justify-content: center; }
 
-  .btn-play { background: var(--accent-red); color: #fff; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; box-shadow: 0 4px 10px rgba(211, 47, 47, 0.4); flex-shrink: 0; margin: 0 4px; }
+  .btn-play { background: var(--accent-red); color: #fff; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; box-shadow: 0 4px 10px rgba(211, 47, 47, 0.4); flex-shrink: 0; margin: 0 4px; transition: transform 0.1s; }
+  .btn-play:active { transform: scale(0.95); }
   .btn-nav { background: none; border: none; font-size: 18px; color: var(--text-primary); cursor: pointer; padding: 2px; }
   .btn-sm { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 6px 12px; font-size: 11px; font-weight: bold; color: var(--text-primary); cursor: pointer; white-space: nowrap; }
 
   .track-label { font-size: 11px; font-weight: 800; color: var(--text-primary); }
   .time-display { font-size: 10px; font-weight: 600; color: #777; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .repeat-counter { font-size: 9px; font-weight: bold; color: var(--accent-red); }
 
   /* Popups */
   .popup { position: absolute; bottom: 45px; background: var(--panel-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: none; flex-direction: column; gap: 12px; z-index: 105; width: max-content; min-width: 170px; color: var(--text-primary); }
   .popup-top { bottom: auto; top: 35px; right: 0; }
   .popup.show { display: flex; }
-  .pop-item { padding: 8px 12px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: 8px; display: flex; align-items: center; gap: 8px; }
+  .popup hr { width: 100%; border: 0; border-top: 1px solid var(--card-border); margin: 0; }
+  
+  .pop-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: bold; width: 100%; gap: 12px; white-space: nowrap; }
+  .pop-input { width: 48px; text-align: center; border: 1px solid var(--card-border); border-radius: 6px; padding: 4px; font-size: 12px; box-sizing: border-box; background: var(--card-bg); color: var(--text-primary); }
+  .pop-input:focus { border-color: var(--accent-red); outline: none; }
+  .pop-range { width: 80px; cursor: pointer; accent-color: var(--accent-red); }
+  .pop-item { padding: 8px 12px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: 8px; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
   .pop-item:hover { background: var(--card-border); }
   .pop-item.active { background: var(--card-active); color: var(--accent-red); }
+
+  .ab-container { display: flex; flex-direction: column; gap: 8px; width: 100%; font-size: 12px; font-weight: bold; }
+  .ab-row-inputs { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  
+  .range-box { border-top: 1px solid var(--card-border); padding-top: 8px; margin-top: 4px; display: flex; flex-direction: column; gap: 8px; font-size: 11px; font-weight: bold; }
+  .range-row-flex { display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+  .clear-range-btn { background: var(--card-border); border: none; border-radius: 4px; font-size: 10px; padding: 4px 8px; cursor: pointer; color: var(--text-primary); }
+
+  /* Context Menu */
+  .context-menu { position: absolute; background: var(--panel-bg); border: 1px solid var(--card-border); border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); display: none; flex-direction: column; z-index: 200; color: var(--text-primary); }
+  .context-menu.show { display: flex; }
+  .context-menu div { padding: 10px 16px; cursor: pointer; font-size: 13px; font-weight: 600; display: flex; gap: 8px; }
+  .context-menu div:hover { background: var(--card-border); }
 
   /* Double Selection Tooltip */
   #actionTooltip {
@@ -104,8 +132,12 @@
   /* Modals */
   .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 300; }
   .modal-content { background: var(--card-bg); color: var(--text-primary); padding: 16px; border-radius: 10px; width: 90%; max-width: 420px; border: 1px solid var(--card-border); max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+  .modal-content textarea { width: 100%; height: 70px; margin: 8px 0; padding: 8px; border-radius: 6px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); font-family: inherit; box-sizing: border-box; }
   .modal-input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); margin: 8px 0; box-sizing: border-box; }
 
+  .snip-list-item { background: var(--bg-main); padding: 8px; border-radius: 6px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--card-border); }
+
+  @keyframes spin { 100% { transform: rotate(360deg); } }
   .app-footer { text-align: center; padding: 24px 10px 40px; font-size: 11px; color: #999; font-weight: bold; border-top: 1px solid var(--card-border); margin-top: 20px; }
 </style>
 </head>
@@ -122,6 +154,20 @@
 <div class="top-bar">
   <div class="top-bar-title" onclick="location.reload()">❮ Library</div>
   <div class="top-actions">
+    <button class="btn-lang" onclick="alert('Padachheda (Word-Split) view will be available once specific datasets are uploaded!')" title="Padachheda View">Pada</button>
+    
+    <!-- Font Size Selector -->
+    <div style="position:relative;">
+      <button class="btn-top" onclick="togglePopup('fontPopup')">Aa</button>
+      <div class="popup popup-top" id="fontPopup" style="min-width: 140px;">
+        <div style="font-size:10px; color:#777; margin-bottom:4px; text-transform:uppercase;">Reading Size</div>
+        <div class="pop-item" onclick="setFontSize(16)">Small <span style="margin-left:auto; color:#777; font-size:10px;">16px</span></div>
+        <div class="pop-item active" onclick="setFontSize(18)" id="font-def">Medium <span style="margin-left:auto; color:#777; font-size:10px;">18px</span></div>
+        <div class="pop-item" onclick="setFontSize(20)">Large <span style="margin-left:auto; color:#777; font-size:10px;">20px</span></div>
+        <div class="pop-item" onclick="setFontSize(23)">Larger <span style="margin-left:auto; color:#777; font-size:10px;">23px</span></div>
+      </div>
+    </div>
+
     <!-- Commentary Selector Dropdown -->
     <div style="position:relative;">
       <button class="btn-lang" onclick="togglePopup('commentaryPopup')" id="activeCommBtn">💬 Commentary</button>
@@ -133,11 +179,22 @@
       </div>
     </div>
 
-    <!-- Key Settings -->
-    <button class="btn-top" onclick="openKeyModal()" title="API Key Settings">⚙️</button>
+    <!-- Key Settings Modal Trigger (Advanced Mode Only) -->
+    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="openKeyModal()" title="API Key Settings">🔑</button>
     
-    <!-- Dark Mode -->
+    <!-- Dark Mode Toggle -->
     <button class="btn-top" onclick="toggleDarkMode()" id="darkModeBtn">☼</button>
+
+    <!-- Language Selector Popup -->
+    <div style="position:relative;">
+      <button class="btn-lang" onclick="togglePopup('langPopup')" id="activeLangBtn">Sanskrit</button>
+      <div class="popup popup-top" id="langPopup">
+        <div style="font-size:10px; color:#777; margin-bottom:4px; text-transform:uppercase;">Reading Language</div>
+        <div class="pop-item active" onclick="setLanguage('sa')">Sanskrit <span style="margin-left:auto; font-family:serif;">संस्कृतम्</span></div>
+        <div class="pop-item" onclick="setLanguage('kn')">Kannada <span style="margin-left:auto; font-family:serif;">ಕನ್ನಡ</span></div>
+        <div class="pop-item" onclick="setLanguage('en')">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -145,7 +202,7 @@
   <div class="header">
     <h1 id="stotraTitle">Loading...</h1>
     <div class="author" id="stotraAuthor">...</div>
-    <div class="version-tag">APP VERSION: v2.0 (BYOK Edition)</div>
+    <div class="version-tag">APP VERSION: v2.2 (Protected Edition)</div>
   </div>
 
   <!-- Multi-Scope Search Engine -->
@@ -162,20 +219,115 @@
 
   <div class="reading-card" id="readingCard">श्लोकं चिनोतु (Select a shloka)</div>
   <div class="shloka-list" id="shlokaList"></div>
-  <div class="app-footer">APP VERSION: v2.0</div>
+  <div class="app-footer">APP VERSION: v2.2</div>
 </div>
 
 <!-- Bottom Toolbar -->
 <div class="bottom-player">
   <div class="player-inner">
     <div class="controls-main">
-      <button class="btn-nav" onclick="playPrev()">⏮</button>
+      <button class="btn-nav" onclick="playPrevFiltered()">⏮</button>
       <button class="btn-play flex-center" id="playBtn" onclick="togglePlay()">▶</button>
-      <button class="btn-nav" onclick="playNext()">⏭</button>
+      <button class="btn-nav" onclick="playNextFiltered()">⏭</button>
     </div>
+
     <div class="timer-group">
-      <div class="track-label" id="trackLabel">०/०</div>
-      <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+      <div class="track-label" id="trackLabel">०/४३</div>
+      <div class="time-display" id="timeDisplay">0:00.000 / 0:00.000</div>
+      <div class="repeat-counter" id="repeatCounter"></div>
+    </div>
+
+    <!-- Filter Popup (Advanced Mode Only) -->
+    <div class="popup-container advanced-feature">
+      <button class="btn-sm" onclick="togglePopup('filterPopup')" id="filterBtn">🔽 Filter</button>
+      <div class="popup" id="filterPopup" style="left: 50%; transform: translateX(-50%);">
+        <div class="pop-item active" id="opt-all" onclick="setFilter('all')">▶ All</div>
+        <div class="pop-item" id="opt-fav" onclick="setFilter('fav')">▶ ★ Favorites</div>
+        <div class="pop-item" id="opt-practice" onclick="setFilter('practice')">▶ 🚩 Practice</div>
+        <div class="pop-item" id="opt-none" onclick="setFilter('none')">⏸ Single Track</div>
+        <hr>
+        <div class="range-box">
+          <div class="range-row-flex">
+            <span>📐 Range:</span>
+            <select id="rangeMode" style="font-size:11px; padding:2px; border-radius:4px; background:var(--card-bg); color:var(--text-primary); border:1px solid var(--card-border);" onchange="applyRangeFilter()">
+              <option value="include">Include</option>
+              <option value="exclude">Exclude</option>
+            </select>
+          </div>
+          <div class="range-row-flex">
+            <input class="pop-input" type="number" id="rangeStart" placeholder="From" min="1" max="43" onchange="applyRangeFilter()">
+            <span style="font-size: 10px; font-weight:normal;">to</span>
+            <input class="pop-input" type="number" id="rangeEnd" placeholder="To" min="1" max="43" onchange="applyRangeFilter()">
+            <button class="clear-range-btn" onclick="clearRange()">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tools Popup (Advanced Mode Only) -->
+    <div class="popup-container advanced-feature">
+      <button class="btn-sm" onclick="togglePopup('toolsPopup')" title="Tools">⚙️ Tools</button>
+      <div class="popup" id="toolsPopup" style="right: 0;">
+        <div class="pop-row">
+          <span>⚡ <span id="speedVal">1.0</span>x</span>
+          <input type="range" class="pop-range" id="speedInput" min="0.5" max="2.0" step="0.1" value="1.0">
+        </div>
+        <div class="pop-row">
+          <span>🔁 Rep:</span>
+          <input type="number" class="pop-input" id="repeatInput" value="1" min="1" onchange="updateRepeatDisplay()">
+        </div>
+        <hr>
+
+        <div style="font-size: 12px; font-weight: bold; margin-bottom: 4px;">
+          <label class="flex-row" style="gap:6px; cursor:pointer; color: var(--accent-red);">
+            <input type="checkbox" id="autoABToggle" style="margin:0; width:14px; height:14px;"> 🎯 Auto A-B Capture
+          </label>
+        </div>
+
+        <div class="ab-container">
+          <label class="flex-row" style="gap:6px; cursor:pointer; margin:0;">
+            <input type="checkbox" id="enableAB" style="margin:0; width:14px; height:14px;"> ✂️ Active Loop
+          </label>
+          <div class="ab-row-inputs">
+            <span>Start: <input class="pop-input" type="number" id="loopA" placeholder="0.0" step="0.1"></span>
+            <span>End: <input class="pop-input" type="number" id="loopB" placeholder="End" step="0.1"></span>
+          </div>
+          <button class="btn-sm" style="margin-top: 4px;" onclick="saveSnippet()">💾 Save Snippet</button>
+        </div>
+        <hr>
+        <button class="btn-sm flex-center" id="cacheBtn" style="width:100%; background:var(--card-active); color:var(--accent-red); border-color:var(--accent-red);" onclick="cacheAllAudio(this)">📥 Preload All Audio</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Marker Context Menu (Advanced Mode Only) -->
+<div class="context-menu" id="markerMenu">
+  <div onclick="setMark('fav')">⭐ Mark Favorite</div>
+  <div onclick="setMark('practice')">🚩 Needs Practice</div>
+  <div onclick="setMark('none')" style="color: #888;">❌ Clear Marker</div>
+</div>
+
+<!-- Snippets Modal -->
+<div class="modal-overlay" id="snippetModal">
+  <div class="modal-content">
+    <h4 style="margin:0 0 10px 0; color:var(--accent-red);">🎯 Saved Snippets (Shloka <span id="snipShlokaNum"></span>)</h4>
+    <div id="snippetListContainer"></div>
+    <div style="text-align:right; margin-top:12px;">
+      <button class="btn-sm" onclick="closeSnippetModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Notes Modal -->
+<div class="modal-overlay" id="noteModal">
+  <div class="modal-content">
+    <h4 style="margin:0 0 6px 0;">📝 Notes (Shloka <span id="noteShlokaNum"></span>)</h4>
+    <textarea id="noteText"></textarea>
+    <div style="text-align:right;">
+      <button class="btn-sm" onclick="closeNote()">Cancel</button>
+      <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; margin-left:6px;" onclick="saveNote()">Save</button>
     </div>
   </div>
 </div>
@@ -185,7 +337,7 @@
   <div class="modal-content">
     <h3 style="margin:0 0 10px 0; color:var(--accent-red);">🔑 Gemini API Key Settings</h3>
     <p style="font-size:12px; color:#666; margin:0 0 8px 0;">Paste your personal Google Gemini API key below. It will be stored locally in your browser and will never be shared publicly.</p>
-    <input type="password" id="userApiKeyInput" class="modal-input" placeholder="Paste AIza... key here">
+    <input type="password" id="userApiKeyInput" class="modal-input" placeholder="Paste key here...">
     <div style="text-align:right; margin-top:12px;">
       <button class="btn-sm" onclick="closeKeyModal()">Cancel</button>
       <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; margin-left:6px;" onclick="saveUserApiKey()">Save Key</button>
@@ -209,19 +361,54 @@
 </div>
 
 <script>
-  // --- DYNAMIC DATA LOADING ---
+  // --- PASSKEY AUTHENTICATION SYSTEM ---
+  const SECRET_PASSKEY = "SHRI108";
   const urlParams = new URLSearchParams(window.location.search);
+  const providedPass = urlParams.get('pass');
+  
+  // If correct passkey in URL, permanently authorize the browser
+  if (providedPass && providedPass.toUpperCase() === SECRET_PASSKEY) {
+    localStorage.setItem('acharyaAuthorized', 'true');
+  }
+  
+  const isAuthorized = localStorage.getItem('acharyaAuthorized') === 'true';
+  if (isAuthorized) {
+    document.body.classList.add('is-authorized');
+  }
+
+  // --- APP STATE ---
   const stotraCode = urlParams.get('code') || 'pns'; 
   const jsonFileName = `data_${stotraCode}.json`;
 
   let stotraData = null;
-  let activeId = null;
   let currentAudio = new Audio();
+  let activeId = null;
   let isPlaying = false;
+  let currentLoopCount = 0;
+  let currentFilter = 'all';
+  let activeLang = 'sa'; 
   let selectedCommentaryView = 'none'; 
   let lastSelectedText = "";
+  let targetNoteId = null;
+  let targetMenuId = null;
 
-  // Load JSON dynamically
+  let marks = JSON.parse(localStorage.getItem('narasimhaMarks')) || {};
+  let notes = JSON.parse(localStorage.getItem('narasimhaNotes')) || {};
+  let snippets = JSON.parse(localStorage.getItem('narasimhaSnippets')) || {};
+
+  const els = {
+    playBtn: document.getElementById('playBtn'), speedInput: document.getElementById('speedInput'),
+    speedVal: document.getElementById('speedVal'), trackLabel: document.getElementById('trackLabel'),
+    timeDisplay: document.getElementById('timeDisplay'), repeatCounter: document.getElementById('repeatCounter'),
+    readingCard: document.getElementById('readingCard'), markerMenu: document.getElementById('markerMenu'),
+    filterBtn: document.getElementById('filterBtn'), searchInput: document.getElementById('searchInput'),
+    clearSearchBtn: document.getElementById('clearSearchBtn'), repeatInput: document.getElementById('repeatInput'),
+    cacheBtn: document.getElementById('cacheBtn'), listEl: document.getElementById('shlokaList'),
+    loopA: document.getElementById('loopA'), loopB: document.getElementById('loopB'), enableAB: document.getElementById('enableAB'),
+    autoABToggle: document.getElementById('autoABToggle'), searchScope: document.getElementById('searchScope')
+  };
+
+  // --- DYNAMIC JSON LOADING ---
   fetch(jsonFileName)
     .then(res => {
       if(!res.ok) throw new Error(`Could not find ${jsonFileName}`);
@@ -233,48 +420,104 @@
     })
     .catch(err => {
       document.getElementById('stotraTitle').innerText = "Data Not Found";
-      document.getElementById('readingCard').innerText = `Error: Please make sure '${jsonFileName}' exists in your GitHub repository directory.`;
+      els.readingCard.innerText = `Error: Please make sure '${jsonFileName}' exists in your GitHub repository.`;
     });
 
   function initApp() {
     document.getElementById('stotraTitle').innerText = stotraData.metadata.title;
     document.getElementById('stotraAuthor').innerText = stotraData.metadata.author;
+    document.getElementById('rangeStart').max = stotraData.metadata.totalShlokas || 43;
+    document.getElementById('rangeEnd').max = stotraData.metadata.totalShlokas || 43;
     
     // Populate Commentary Dropdown & Search Scope
     const dynamicList = document.getElementById('commentaryDynamicList');
-    const searchScope = document.getElementById('searchScope');
     dynamicList.innerHTML = '';
+    els.searchScope.innerHTML = '<option value="all">Search All</option><option value="mula">Shloka Only</option>';
 
     if(stotraData.metadata.availableCommentaries) {
       Object.entries(stotraData.metadata.availableCommentaries).forEach(([key, name]) => {
         dynamicList.innerHTML += `<div class="pop-item" onclick="setCommentaryView('${key}')">${name}</div>`;
-        searchScope.innerHTML += `<option value="${key}">${name} Only</option>`;
+        els.searchScope.innerHTML += `<option value="${key}">${name} Only</option>`;
       });
     }
 
     renderList();
   }
 
-  // --- RENDER FUNCTION ---
+  function getText(id) { 
+    if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
+    const shloka = stotraData.shlokas[id];
+    const langTxt = shloka[activeLang];
+    return (langTxt && langTxt.trim().length > 0) ? langTxt : shloka.sa; 
+  }
+
+  function formatTime(s) { if (isNaN(s)) return "0:00.000"; const m = Math.floor(s/60), sec = Math.floor(s%60), ms = Math.floor((s%1)*1000); return m + ":" + (sec<10?"0":"") + sec + "." + String(ms).padStart(3,'0'); }
+  function updateRepeatDisplay() { const t = parseInt(els.repeatInput.value) || 1; els.repeatCounter.innerText = (activeId && t > 1) ? `Loop ${currentLoopCount + 1}/${t}` : ""; }
+
+  function toggleDarkMode() { document.body.classList.toggle('dark-mode'); document.getElementById('darkModeBtn').innerText = document.body.classList.contains('dark-mode') ? '☾' : '☼'; }
+  function setFontSize(px) { document.documentElement.style.setProperty('--font-multiplier', px + 'px'); document.querySelectorAll('#fontPopup .pop-item').forEach(el => el.classList.remove('active')); event.currentTarget.classList.add('active'); togglePopup('fontPopup'); }
+  
+  function setLanguage(code) { 
+    activeLang = code; 
+    document.querySelectorAll('#langPopup .pop-item').forEach(el => el.classList.remove('active')); 
+    event.currentTarget.classList.add('active'); 
+    document.getElementById('activeLangBtn').innerText = event.currentTarget.childNodes[0].nodeValue.trim(); 
+    renderList(); 
+    if(activeId) els.readingCard.innerHTML = getText(activeId); 
+    togglePopup('langPopup'); 
+  }
+
+  // --- FILTERS ---
+  function getFilteredIds() {
+    if(!stotraData) return [];
+    let ids = [];
+    const total = stotraData.metadata.totalShlokas || 43;
+    const rs = parseInt(document.getElementById('rangeStart').value), re = parseInt(document.getElementById('rangeEnd').value);
+    const rm = document.getElementById('rangeMode').value, hasRange = !isNaN(rs) && !isNaN(re) && rs <= re;
+    for (let i = 1; i <= total; i++) {
+      if (currentFilter === 'fav' && marks[i] !== 'fav') continue;
+      if (currentFilter === 'practice' && marks[i] !== 'practice') continue;
+      if (hasRange) { const inR = (i >= rs && i <= re); if ((rm === 'include' && !inR) || (rm === 'exclude' && inR)) continue; }
+      ids.push(i);
+    }
+    return ids;
+  }
+
+  function clearRange() { document.getElementById('rangeStart').value = ""; document.getElementById('rangeEnd').value = ""; applyRangeFilter(); }
+  function setFilter(type) {
+    currentFilter = type; document.getElementById('filterPopup').classList.remove('show');
+    document.querySelectorAll('#filterPopup .pop-item').forEach(el => el.classList.remove('active')); document.getElementById(`opt-${type}`).classList.add('active');
+    renderList();
+    if (type !== 'none') {
+      const aIds = getFilteredIds();
+      if (aIds.length) playShloka(aIds[0]); else { currentAudio.pause(); activeId = null; isPlaying = false; updatePlayUI(); els.trackLabel.innerText = "०/०"; els.timeDisplay.innerText = "0:00.000 / 0:00.000"; els.repeatCounter.innerText = ""; els.readingCard.innerHTML = "No matches."; }
+    }
+  }
+  function applyRangeFilter() { renderList(); const aIds = getFilteredIds(); if (aIds.length && currentFilter !== 'none') playShloka(aIds[0]); }
+
+  function handleSearch() { els.clearSearchBtn.style.display = els.searchInput.value ? 'block' : 'none'; renderList(); }
+  function clearSearch() { els.searchInput.value = ''; handleSearch(); }
+
+  // --- RENDER ---
   function renderList() {
-    const listEl = document.getElementById('shlokaList');
-    listEl.innerHTML = '';
+    if(!stotraData) return;
+    els.listEl.innerHTML = ''; 
+    const fIds = getFilteredIds();
+    const query = els.searchInput.value.toLowerCase().trim();
+    const scope = els.searchScope.value;
+    const total = stotraData.metadata.totalShlokas || 43;
 
-    const query = document.getElementById('searchInput').value.toLowerCase().trim();
-    const scope = document.getElementById('searchScope').value;
-
-    for (let i = 1; i <= stotraData.metadata.totalShlokas; i++) {
+    for (let i = 1; i <= total; i++) {
+      if (!fIds.includes(i)) continue;
       const shloka = stotraData.shlokas[i];
-      if(!shloka) continue;
+      if (!shloka) continue;
 
-      // Filter logic
+      // Multi-scope search query check
       if(query) {
         let match = false;
         if(scope === 'all') {
           match = i.toString().includes(query) || shloka.sa.toLowerCase().includes(query);
-          if(!match && shloka.commentaries) {
-            match = Object.values(shloka.commentaries).some(c => c.toLowerCase().includes(query));
-          }
+          if(!match && shloka.commentaries) { match = Object.values(shloka.commentaries).some(c => c.toLowerCase().includes(query)); }
         } else if(scope === 'mula') {
           match = i.toString().includes(query) || shloka.sa.toLowerCase().includes(query);
         } else if(shloka.commentaries && shloka.commentaries[scope]) {
@@ -283,11 +526,22 @@
         if(!match) continue;
       }
 
-      // Card Creation
-      const card = document.createElement('div');
-      card.className = `shloka-card ${activeId === i ? 'active' : ''}`;
-      card.id = `shloka-${i}`;
+      // Card Element
+      const c = document.createElement('div');
+      c.className = `shloka-card ${activeId===i ? 'active':''}`; c.id = `shloka-${i}`;
+      
+      // Advanced Actions (Only generated if Authorized)
+      let cardActionsHtml = '';
+      let badgeHtml = '';
+      if (isAuthorized) {
+        let mClass = "btn-icon", mIcon = "⋮";
+        if (marks[i] === 'fav') { mClass += " is-fav"; mIcon = "★"; } else if (marks[i] === 'practice') { mClass += " is-practice"; mIcon = "🚩"; }
+        const nClass = notes[i] ? "btn-icon has-note" : "btn-icon";
+        badgeHtml = (snippets[i] && snippets[i].length > 0) ? `<div class="snippet-badge" onclick="openSnippetModal(${i}, event)">🎯 ${snippets[i].length} Snippets</div>` : '';
+        cardActionsHtml = `<div class="card-actions"><button class="${nClass}" onclick="openNote(${i})">📝</button><button class="${mClass}" onclick="openMarkerMenu(event, ${i})">${mIcon}</button></div>`;
+      }
 
+      // Commentary Block Html
       let commentaryHtml = '';
       if (shloka.commentaries) {
         if (selectedCommentaryView === 'all') {
@@ -301,51 +555,76 @@
         }
       }
 
-      card.innerHTML = `
+      c.innerHTML = `
         <div class="shloka-main-row">
           <div class="shloka-num">${i}</div>
-          <div class="shloka-text" onclick="playShloka(${i})">${shloka.sa}</div>
+          <div class="shloka-text" onclick="playShloka(${i})">${getText(i)} ${badgeHtml}</div>
+          ${cardActionsHtml}
         </div>
-        ${commentaryHtml}
-      `;
-      listEl.appendChild(card);
+        ${commentaryHtml}`;
+      els.listEl.appendChild(c);
     }
   }
 
-  // --- AUDIO PLAYER ---
-  function playShloka(id) {
-    if (activeId === id && isPlaying) { currentAudio.pause(); return; }
-    activeId = id; renderList();
-    
-    document.getElementById('trackLabel').innerText = `${id}/${stotraData.metadata.totalShlokas}`;
-    document.getElementById('readingCard').innerHTML = stotraData.shlokas[id].sa;
+  function updatePlayUI() { els.playBtn.innerHTML = isPlaying ? '⏸' : '▶'; if(activeId) els.readingCard.classList.toggle('highlight', isPlaying); }
 
-    currentAudio.src = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${id}${stotraData.metadata.fileExtension}`;
-    currentAudio.play().catch(()=>{});
+  currentAudio.addEventListener('playing', () => { isPlaying = true; updatePlayUI(); });
+  currentAudio.addEventListener('pause', () => { isPlaying = false; updatePlayUI(); });
+  currentAudio.addEventListener('loadedmetadata', () => { currentAudio.playbackRate = parseFloat(els.speedInput.value) || 1.0; els.timeDisplay.innerText = `0:00.000 / ${formatTime(currentAudio.duration)}`; updateRepeatDisplay(); });
+  
+  // Archive.org Fallback URL handler for audio errors
+  currentAudio.addEventListener('error', () => { 
+    if (activeId && stotraData) { 
+      currentAudio.src = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${activeId}%E2%80%8B${stotraData.metadata.fileExtension}`; 
+      currentAudio.load(); 
+      currentAudio.play().then(() => { isPlaying=true; updatePlayUI(); }).catch(()=>{}); 
+    } 
+  });
+
+  function playShloka(id) {
+    if (!stotraData) return;
+    if (activeId === id && isPlaying) { currentAudio.pause(); return; }
+    activeId = id; currentLoopCount = 0; updateRepeatDisplay(); renderList();
+    const ac = document.getElementById(`shloka-${id}`); if (ac) ac.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const total = stotraData.metadata.totalShlokas || 43;
+    els.trackLabel.innerText = `${id}/${total}`; els.readingCard.innerHTML = getText(id); els.timeDisplay.innerText = "0:00.000 / 0:00.000";
+    currentAudio.src = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${id}${stotraData.metadata.fileExtension}`; currentAudio.playbackRate = parseFloat(els.speedInput.value) || 1.0;
+    els.loopA.value = ""; els.loopB.value = ""; els.enableAB.checked = false;
+    currentAudio.play().catch(err => { if(err.name !== 'AbortError') console.error(err); });
   }
 
   function togglePlay() {
-    if (!activeId) playShloka(1);
-    else if (isPlaying) currentAudio.pause();
-    else currentAudio.play();
+    if (!stotraData) return;
+    if (!activeId) { const aIds = getFilteredIds(); if(aIds.length) playShloka(aIds[0]); }
+    else if (isPlaying) {
+      currentAudio.pause();
+      if (els.autoABToggle.checked) {
+        const curr = currentAudio.currentTime.toFixed(1);
+        if (!els.loopA.value) { els.loopA.value = curr; }
+        else if (!els.loopB.value) { els.loopB.value = curr; els.enableAB.checked = true; currentAudio.currentTime = parseFloat(els.loopA.value); currentAudio.play(); }
+        else { els.loopA.value = ""; els.loopB.value = ""; els.enableAB.checked = false; }
+      }
+    } else { currentAudio.play(); }
   }
 
-  function playNext() { if (activeId && activeId < stotraData.metadata.totalShlokas) playShloka(activeId + 1); }
-  function playPrev() { if (activeId && activeId > 1) playShloka(activeId - 1); }
+  function playNextFiltered() { const ids = getFilteredIds(); if (!ids.length) return; const idx = ids.indexOf(activeId); if (idx !== -1 && idx < ids.length - 1) playShloka(ids[idx + 1]); else { currentAudio.pause(); els.repeatCounter.innerText = ""; } }
+  function playPrevFiltered() { const ids = getFilteredIds(); if (!ids.length) return; const idx = ids.indexOf(activeId); if (idx > 0) playShloka(ids[idx - 1]); else playShloka(ids[ids.length - 1]); }
 
-  currentAudio.addEventListener('playing', () => { isPlaying = true; document.getElementById('playBtn').innerText = '⏸'; });
-  currentAudio.addEventListener('pause', () => { isPlaying = false; document.getElementById('playBtn').innerText = '▶'; });
-  currentAudio.addEventListener('ended', () => { playNext(); });
+  currentAudio.addEventListener('timeupdate', () => {
+    els.timeDisplay.innerText = `${formatTime(currentAudio.currentTime)} / ${formatTime(currentAudio.duration)}`;
+    if (els.enableAB.checked) { const end = parseFloat(els.loopB.value), start = parseFloat(els.loopA.value) || 0; if (end && currentAudio.currentTime >= end) currentAudio.currentTime = start; }
+  });
+  currentAudio.addEventListener('ended', () => {
+    const tRep = parseInt(els.repeatInput.value) || 1;
+    if (++currentLoopCount < tRep) { currentAudio.currentTime = parseFloat(els.loopA.value) || 0; updateRepeatDisplay(); currentAudio.play(); }
+    else { currentLoopCount = 0; updateRepeatDisplay(); if (currentFilter === 'none') { isPlaying=false; updatePlayUI(); return; } playNextFiltered(); }
+  });
 
-  // --- TOOLBAR POPUPS & SEARCH ---
-  function togglePopup(id) { document.querySelectorAll('.popup').forEach(p => { if(p.id !== id) p.classList.remove('show'); }); document.getElementById(id).classList.toggle('show'); }
   function setCommentaryView(view) { selectedCommentaryView = view; togglePopup('commentaryPopup'); renderList(); }
-  function handleSearch() { document.getElementById('clearSearchBtn').style.display = document.getElementById('searchInput').value ? 'block' : 'none'; renderList(); }
-  function clearSearch() { document.getElementById('searchInput').value = ''; handleSearch(); }
-  function toggleDarkMode() { document.body.classList.toggle('dark-mode'); document.getElementById('darkModeBtn').innerText = document.body.classList.contains('dark-mode') ? '☾' : '☼'; }
 
-  // --- DUAL SELECTION TOOLTIP ---
+  // --- DUAL SELECTION TOOLTIP (Advanced Mode Only) ---
   document.addEventListener('selectionchange', () => {
+    if (!isAuthorized) return; 
     setTimeout(() => {
       const selection = window.getSelection();
       const txt = selection.toString().trim();
@@ -383,7 +662,7 @@
     if (e) e.preventDefault();
     const apiKey = localStorage.getItem('user_gemini_key');
     if (!apiKey) {
-      alert("Please set your personal Gemini API Key first by tapping the ⚙️ icon in the top toolbar.");
+      alert("Please set your personal Gemini API Key first by tapping the 🔑 icon in the top toolbar.");
       openKeyModal();
       return;
     }
@@ -419,7 +698,80 @@
   }
 
   function closeAcharyaModal() { document.getElementById('acharyaModal').style.display = 'none'; }
-  document.addEventListener('click', (e) => { if (!e.target.closest('.popup-container') && !e.target.closest('.popup') && !e.target.closest('.top-actions')) document.querySelectorAll('.popup').forEach(p => p.classList.remove('show')); });
+
+  // --- SNIPPET MANAGER ---
+  function saveSnippet() {
+    if(!activeId) return alert("Select a shloka first.");
+    const a = parseFloat(els.loopA.value), b = parseFloat(els.loopB.value);
+    if(isNaN(a) || isNaN(b)) return alert("Set Start and End times in the A-B Loop first.");
+    if(!snippets[activeId]) snippets[activeId] = [];
+    snippets[activeId].push({ start: a, end: b });
+    localStorage.setItem('narasimhaSnippets', JSON.stringify(snippets));
+    renderList(); alert(`Snippet saved for Shloka ${activeId}!`);
+  }
+
+  let targetSnipId = null;
+  function openSnippetModal(id, e) {
+    e.stopPropagation(); targetSnipId = id;
+    document.getElementById('snipShlokaNum').innerText = id;
+    const container = document.getElementById('snippetListContainer'); container.innerHTML = '';
+    
+    if(snippets[id] && snippets[id].length > 0) {
+      snippets[id].forEach((snip, index) => {
+        container.innerHTML += `
+          <div class="snip-list-item">
+            <div><strong>Loop ${index + 1}:</strong> ${snip.start}s to ${snip.end}s</div>
+            <div>
+              <button class="btn-sm" style="color:var(--accent-red); margin-right:4px;" onclick="playSnippet(${id}, ${snip.start}, ${snip.end})">▶ Play</button>
+              <button class="btn-sm" onclick="deleteSnippet(${id}, ${index})">🗑</button>
+            </div>
+          </div>`;
+      });
+    } else { container.innerHTML = "<p style='font-size:12px; color:#777;'>No snippets saved.</p>"; }
+    document.getElementById('snippetModal').style.display = "flex";
+  }
+  function closeSnippetModal() { document.getElementById('snippetModal').style.display = "none"; }
+  function playSnippet(id, start, end) {
+    closeSnippetModal();
+    if(activeId !== id) { playShloka(id); }
+    els.loopA.value = start; els.loopB.value = end; els.enableAB.checked = true;
+    currentAudio.currentTime = start; currentAudio.play();
+  }
+  function deleteSnippet(id, index) {
+    snippets[id].splice(index, 1);
+    if(snippets[id].length === 0) delete snippets[id];
+    localStorage.setItem('narasimhaSnippets', JSON.stringify(snippets));
+    renderList(); openSnippetModal(id, {stopPropagation:()=>{}}); 
+  }
+
+  // --- POPUPS & MARKERS ---
+  function togglePopup(id) { document.querySelectorAll('.popup').forEach(p => { if(p.id !== id) p.classList.remove('show'); }); document.getElementById(id).classList.toggle('show'); }
+  function openMarkerMenu(e, id) { targetMenuId = id; els.markerMenu.style.left = `${e.pageX - 130}px`; els.markerMenu.style.top = `${e.pageY - 40}px`; els.markerMenu.classList.add('show'); }
+  function setMark(type) { if (type === 'none') delete marks[targetMenuId]; else marks[targetMenuId] = type; localStorage.setItem('narasimhaMarks', JSON.stringify(marks)); els.markerMenu.classList.remove('show'); renderList(); }
+
+  // --- AUDIO PRELOAD / CACHE ---
+  if (localStorage.getItem('narasimhaAllCached') === 'true') { els.cacheBtn.innerText = `✅ All Cached`; els.cacheBtn.dataset.cached = "true"; els.cacheBtn.style.background = "#e8f5e9"; els.cacheBtn.style.color = "#2e7d32"; els.cacheBtn.style.borderColor = "#c8e6c9"; }
+  async function cacheAllAudio(btn) {
+    if(!stotraData || btn.dataset.cached === "true") return;
+    btn.innerText = "⏳ Preloading..."; btn.disabled = true; let success = 0;
+    const total = stotraData.metadata.totalShlokas || 43;
+    for(let i=1; i<=total; i++) {
+      try { let r = await fetch(`${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${i}${stotraData.metadata.fileExtension}`); if(!r.ok) r = await fetch(`${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${i}%E2%80%8B${stotraData.metadata.fileExtension}`); if(r.ok) { await r.blob(); success++; } } catch(e) {}
+    }
+    localStorage.setItem('narasimhaAllCached', 'true'); btn.innerText = `✅ All Cached (${success}/${total})`; btn.dataset.cached = "true"; btn.style.background = "#e8f5e9"; btn.style.color = "#2e7d32"; btn.style.borderColor = "#c8e6c9";
+  }
+
+  // --- NOTES MODAL ---
+  function openNote(id) { targetNoteId = id; document.getElementById('noteShlokaNum').innerText = id; document.getElementById('noteText').value = notes[id] || ""; document.getElementById('noteModal').style.display = "flex"; }
+  function closeNote() { document.getElementById('noteModal').style.display = "none"; }
+  function saveNote() { const txt = document.getElementById('noteText').value.trim(); if(txt) notes[targetNoteId] = txt; else delete notes[targetNoteId]; localStorage.setItem('narasimhaNotes', JSON.stringify(notes)); closeNote(); renderList(); }
+
+  // Event Listeners for controls
+  els.speedInput.addEventListener('input', (e) => { els.speedVal.innerText = parseFloat(e.target.value).toFixed(1); currentAudio.playbackRate = e.target.value; });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.popup-container') && !e.target.closest('.popup') && !e.target.closest('.top-actions')) document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
+    if (!e.target.closest('.card-actions') && !e.target.closest('.context-menu')) els.markerMenu.classList.remove('show');
+  });
 </script>
 </body>
 </html>
