@@ -2,16 +2,16 @@
 <html lang="sa">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" id="themeColorMeta" content="#FFFDF9">
 <title>Bhagavata Digital Library</title>
 
-<!-- Fonts & Transliteration Engine -->
+<!-- Fonts & Active Transliteration Engine -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@sanskrit-lexicon/sanscript/sanscript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.2.2/sanscript.min.js"></script>
 
 <style>
   :root {
@@ -108,7 +108,8 @@
   .btn-play { background: var(--accent-red); color: #fff; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 18px; cursor: pointer; box-shadow: 0 4px 10px rgba(174, 35, 31, 0.4); flex-shrink: 0; margin: 0 4px; }
   .btn-play:active { transform: scale(0.95); }
   .btn-nav { background: none; border: none; font-size: 18px; color: var(--text-primary); cursor: pointer; padding: 2px; }
-  .btn-sm { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 6px 8px; font-size: 11px; font-weight: 700; color: var(--text-primary); cursor: pointer; white-space: nowrap; }
+  .btn-sm { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 6px 10px; font-size: 11px; font-weight: 700; color: var(--text-primary); cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+  .btn-sm:active { filter: brightness(0.9); }
 
   .track-label { font-size: 11px; font-weight: 800; color: var(--text-primary); }
   .time-display { font-size: 10px; font-weight: 600; color: #8a7a63; font-variant-numeric: tabular-nums; margin-top: 2px; }
@@ -165,17 +166,24 @@
     box-shadow: 0 6px 16px rgba(0,0,0,0.3); text-align: center; white-space: nowrap;
   }
 
-  /* Modals with Sticky Headers */
+  /* Structural Modals with Pinned Headers */
   .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 400; backdrop-filter: blur(2px); }
-  .modal-content { background: var(--card-bg); color: var(--text-primary); padding: 0; border-radius: 16px; width: 90%; max-width: 440px; border: 1px solid var(--card-border); max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.4); position: relative; }
   
-  .modal-header-sticky { position: sticky; top: 0; background: var(--card-bg); z-index: 10; padding: 16px 18px 12px; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; border-radius: 16px 16px 0 0; }
-  .modal-body { padding: 14px 18px 18px; }
+  .modal-content { background: var(--card-bg); color: var(--text-primary); border-radius: 16px; width: 90%; max-width: 440px; border: 1px solid var(--card-border); max-height: 85vh; box-shadow: 0 10px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; overflow: hidden; transition: all 0.3s; position: relative; }
+  
+  .modal-content.fullscreen { width: 100%; height: 100%; max-width: none; max-height: none; border-radius: 0; border: none; }
 
-  .modal-content textarea { width: 100%; height: 80px; margin: 8px 0; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); font-family: inherit; font-size: 13px; box-sizing: border-box; resize: vertical; }
+  .modal-header-sticky { padding: 16px; background: var(--card-bg); z-index: 10; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+  .modal-body { padding: 16px; overflow-y: auto; flex-grow: 1; }
+
+  .modal-content textarea { width: 100%; height: 140px; margin: 8px 0; padding: 12px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); font-family: inherit; font-size: 13px; box-sizing: border-box; resize: vertical; line-height: 1.5; }
   .modal-input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); margin: 8px 0; font-size: 13px; box-sizing: border-box; }
 
-  /* Project Contribution Banner */
+  /* Bhashya Picker Item Styling */
+  .bhashya-picker-btn { width: 100%; text-align: left; background: var(--bg-main); border: 1px solid var(--card-border); padding: 12px 14px; border-radius: 10px; font-weight: 700; color: var(--text-primary); font-size: 13px; margin-bottom: 8px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s, border 0.2s; }
+  .bhashya-picker-btn:hover { background: var(--card-active); border-color: var(--accent-red); color: var(--accent-red); }
+
+  /* Project Banner */
   .project-banner { background: var(--card-active); border: 1px solid var(--accent-red); border-radius: 10px; padding: 14px 16px; margin-top: 24px; text-align: center; font-size: 12px; font-weight: 500; color: var(--text-primary); line-height: 1.6; }
   .project-banner a { color: var(--accent-red); font-weight: 700; text-decoration: none; border-bottom: 1px dashed var(--accent-red); padding-bottom: 1px; }
 
@@ -200,7 +208,7 @@
   <div class="tooltip-row">
     <button class="tooltip-btn" onpointerdown="askAcharya(event, 'shloka')">📜 Shloka</button>
     <button class="tooltip-btn" onpointerdown="askAcharya(event, 'grammar')">⚙️ Word</button>
-    <button class="tooltip-btn" onpointerdown="askAcharya(event, 'commentary')">🔍 Bhashya</button>
+    <button class="tooltip-btn" onpointerdown="openBhashyaPicker(event)">🔍 Bhashya</button>
   </div>
   <div style="height:1px; background:rgba(255,255,255,0.1); margin:4px 0;"></div>
   <button class="tooltip-btn" style="width:100%; text-align:center; background: rgba(226, 102, 74, 0.2);" onpointerdown="askAcharya(event, 'translate')">🌐 Native Meaning</button>
@@ -283,7 +291,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v6.2</div>
+  <div class="app-footer" id="appFooter">v7.0</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -376,7 +384,7 @@
   <div onclick="setMark('none')" style="color: #888;">❌ Clear Marker</div>
 </div>
 
-<!-- Modals with sticky headers -->
+<!-- Modals -->
 <div class="modal-overlay" id="snippetModal">
   <div class="modal-content">
     <div class="modal-header-sticky">
@@ -389,17 +397,36 @@
   </div>
 </div>
 
+<!-- Notes Modal with Expand & Clear All -->
 <div class="modal-overlay" id="noteModal">
-  <div class="modal-content">
+  <div class="modal-content" id="noteModalBox">
     <div class="modal-header-sticky">
        <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">📝 Notes (Shloka <span id="noteShlokaNum"></span>)</h4>
-       <button class="btn-sm" onclick="closeNote()" style="font-size:11px;">✖ Close</button>
+       <div style="display:flex; gap:6px;">
+         <button class="btn-sm" onclick="toggleMaximizeNote()" id="maxNoteBtn" style="font-size:11px;">⛶ Expand</button>
+         <button class="btn-sm" onclick="closeNote()" style="font-size:11px;">✖ Close</button>
+       </div>
     </div>
     <div class="modal-body">
-      <textarea id="noteText"></textarea>
-      <div style="text-align:right; margin-top: 8px;">
+      <textarea id="noteText" placeholder="Write your notes or append Acharya excerpts here..."></textarea>
+      <div style="display:flex; justify-content:space-between; margin-top: 12px;">
+        <button class="btn-sm" onclick="clearNote()" style="color:var(--accent-red);">🗑 Clear All</button>
         <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="saveNote()">Save Notes</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Commentary Selection Modal -->
+<div class="modal-overlay" id="bhashyaPickerModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">📜 Select Bhashya to Analyze</h4>
+       <button class="btn-sm" onclick="closeBhashyaPicker()" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12px; color:#8a7a63; margin-0 0 12px 0;">Which traditional commentary would you like Acharya to break down line-by-line?</p>
+      <div id="bhashyaOptionsContainer"></div>
     </div>
   </div>
 </div>
@@ -421,12 +448,12 @@
 </div>
 
 <div class="modal-overlay" id="acharyaModal">
-  <div class="modal-content">
+  <div class="modal-content" id="acharyaModalBox">
     <div class="modal-header-sticky">
       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">🕉️ Acharya's Analysis</h4>
-      <div>
+      <div style="display:flex; gap:6px;">
          <button class="btn-sm" onclick="shareAcharyaAnalysis()" style="font-size:11px;">📤 Share</button>
-         <button class="btn-sm" onclick="closeAcharyaModal()" style="font-size:11px; margin-left:6px;">✖ Close</button>
+         <button class="btn-sm" onclick="closeAcharyaModal()" style="font-size:11px;">✖ Close</button>
       </div>
     </div>
     <div class="modal-body">
@@ -447,10 +474,9 @@
     contactEmail: "sanatanavidyagurukulam@gmail.com",
     geminiModel: "gemini-3.6-flash", 
     secretPasskey: "SHRI108",
-    version: "v6.2 (Dvaita Scholar Edition)"
+    version: "v7.0 (Precision Bhashya Edition)"
   };
 
-  // Custom Toast UI Tool
   function showToast(msg) {
     const t = document.getElementById('toastMsg');
     t.innerText = msg;
@@ -461,7 +487,6 @@
   const urlParams = new URLSearchParams(window.location.search);
   const providedPass = urlParams.get('pass');
 
-  // Dynamic config fetch overriding defaults
   fetch('config.json')
     .then(r => r.ok ? r.json() : {})
     .then(cfg => {
@@ -502,7 +527,8 @@
   let stotraData = null;
   let currentAudio = new Audio();
   let activeId = null;
-  let contextShlokaId = null; // Tracks which shloka the user is interacting with for notes
+  let contextShlokaId = null; 
+  let currentAcharyaShlokaId = null;
   let isPlaying = false;
   let currentLoopCount = 0;
   let currentFilter = 'all';
@@ -535,7 +561,6 @@
     navContainer: document.getElementById('searchNavigator')
   };
 
-  // --- PREFERENCES & TRANSLITERATION ---
   function applyDarkMode(isDark) {
     document.body.classList.toggle('dark-mode', isDark);
     document.getElementById('darkModeBtn').innerText = isDark ? '🌙' : '☀️';
@@ -560,7 +585,7 @@
     togglePopup('fontPopup');
   }
 
-  // HTML-Safe Transliteration Core
+  // Active Indic Transliteration Parser
   function applyTransliteration(htmlText, script) {
     if (script === 'devanagari' || !htmlText) return htmlText;
     if (typeof Sanscript === 'undefined') return htmlText;
@@ -587,7 +612,7 @@
     applyScript(code);
     localStorage.setItem('app_script', code);
     
-    showToast("आचार्यः ग्रन्थं सज्जीकुर्वन् अस्ति... (Preparing text)");
+    showToast("आचार्यः ग्रन्थं सज्जीकुर्वन् अस्ति... (Translating script)");
     
     setTimeout(() => {
         renderList();
@@ -604,7 +629,6 @@
     if (savedScript) applyScript(savedScript);
   })();
 
-  // --- DATA LOADING ---
   fetch(jsonFileName)
     .then(res => { if(!res.ok) throw new Error(`Could not find ${jsonFileName}`); return res.json(); })
     .then(data => { stotraData = data; initApp(); })
@@ -684,7 +708,6 @@
     return text.replace(regex, '<mark class="search-match">$1</mark>');
   }
 
-  // --- RENDER ---
   function renderList() {
     if(!stotraData) return;
     els.listEl.innerHTML = '';
@@ -747,7 +770,7 @@
             const name = stotraData.metadata.availableCommentaries[cKey] || cKey;
             let convertedText = applyTransliteration(cText, activeScript);
             let convertedName = applyTransliteration(name, activeScript);
-            commentaryHtml += `<div class="commentary-block"><div class="commentary-title">${convertedName}</div>${highlightText(convertedText, query)}</div>`;
+            commentaryHtml += `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}</div>${highlightText(convertedText, query)}</div>`;
           }
         });
       }
@@ -882,7 +905,6 @@
       const acharyaResEl = document.getElementById('acharyaResult');
       const isInsideAcharyaModal = acharyaResEl && acharyaResEl.contains(selection.anchorNode);
 
-      // Dynamically track which shloka card we are inside, even if not playing audio
       const anchor = selection.anchorNode;
       const shlokaCard = anchor && anchor.nodeType === 3 ? anchor.parentElement.closest('.shloka-card') : (anchor && anchor.closest ? anchor.closest('.shloka-card') : null);
       if (shlokaCard) {
@@ -910,10 +932,13 @@
           let left = rect.left + (rect.width / 2);
           left = Math.max(tw/2 + 8, Math.min(left, window.innerWidth - tw/2 - 8));
           
-          let yPos = rect.bottom + 12;
-          if (shlokaCard) { yPos = shlokaCard.getBoundingClientRect().bottom + 12; }
+          // Position relative to user's touch point
+          let yPos = rect.bottom + 8;
+          if (yPos + 100 > window.innerHeight) { 
+              yPos = rect.top - 95; 
+          }
           
-          tooltip.style.top = `${Math.min(yPos, window.innerHeight - 100)}px`;
+          tooltip.style.top = `${yPos}px`;
           tooltip.style.left = `${left}px`;
         }
       } else {
@@ -941,8 +966,7 @@
     document.getElementById('modalAppendBtn').style.display = 'none';
     window.getSelection().removeAllRanges();
 
-    // Use contextShlokaId (card they tapped) or activeId (card currently playing)
-    const targetId = contextShlokaId || activeId;
+    const targetId = currentAcharyaShlokaId || contextShlokaId || activeId;
 
     if (!targetId) {
       showToast("Please select text directly from a specific Shloka card first to append notes.");
@@ -969,10 +993,85 @@
     closeKeyModal();
   }
 
-  // --- ASK ACHARYA (Madhva Sampradaya Context) ---
-  async function askAcharya(e, type) {
+  // --- DYNAMIC BHASHYA PICKER WORKFLOW ---
+  function openBhashyaPicker(e) {
     if (e) e.preventDefault();
     document.getElementById('actionTooltip').style.display = 'none';
+
+    const targetId = contextShlokaId || activeId || 1;
+    currentAcharyaShlokaId = targetId;
+
+    const shloka = stotraData.shlokas[targetId];
+    const container = document.getElementById('bhashyaOptionsContainer');
+    container.innerHTML = '';
+
+    if (shloka && shloka.commentaries) {
+      Object.entries(shloka.commentaries).forEach(([cKey, cText]) => {
+        const name = stotraData.metadata.availableCommentaries[cKey] || cKey;
+        const displayName = applyTransliteration(name, activeScript);
+        container.innerHTML += `
+          <button class="bhashya-picker-btn" onclick="executeBhashyaAnalysis('${cKey}')">
+             <span>📖 ${displayName}</span>
+             <span style="font-size:11px; opacity:0.6;">Analyze ➔</span>
+          </button>`;
+      });
+
+      container.innerHTML += `
+        <button class="bhashya-picker-btn" style="border-color: var(--accent-gold);" onclick="executeBhashyaAnalysis('all')">
+           <span>📚 All Available Commentaries Combined</span>
+           <span style="font-size:11px; opacity:0.6;">Analyze ➔</span>
+        </button>`;
+    }
+
+    container.innerHTML += `
+      <button class="bhashya-picker-btn" style="background:transparent; border-style:dashed;" onclick="executeBhashyaAnalysis('general')">
+         <span>🌐 General Acharya Analysis (External Knowledge)</span>
+         <span style="font-size:11px; opacity:0.6;">Analyze ➔</span>
+      </button>`;
+
+    document.getElementById('bhashyaPickerModal').style.display = 'flex';
+  }
+
+  function closeBhashyaPicker() {
+    document.getElementById('bhashyaPickerModal').style.display = 'none';
+  }
+
+  function executeBhashyaAnalysis(cKey) {
+    closeBhashyaPicker();
+    const targetId = currentAcharyaShlokaId || contextShlokaId || activeId || 1;
+    const shloka = stotraData.shlokas[targetId];
+
+    let commentaryTextToFeed = "";
+    let commTitle = "";
+
+    if (cKey === 'all') {
+      commTitle = "All Available Commentaries";
+      Object.entries(shloka.commentaries).forEach(([k, v]) => {
+         const name = stotraData.metadata.availableCommentaries[k] || k;
+         commentaryTextToFeed += `\n--- Commentary: ${name} ---\n${v}\n`;
+      });
+    } else if (cKey !== 'general' && shloka.commentaries && shloka.commentaries[cKey]) {
+      commTitle = stotraData.metadata.availableCommentaries[cKey] || cKey;
+      commentaryTextToFeed = shloka.commentaries[cKey];
+    }
+
+    const payload = {
+      type: 'commentary',
+      selectedText: lastSelectedText,
+      shlokaText: shloka ? shloka.sa : "",
+      commentaryTitle: commTitle,
+      commentaryText: commentaryTextToFeed
+    };
+
+    askAcharya(null, 'commentary', payload);
+  }
+
+  // --- ASK ACHARYA ENGINE ---
+  async function askAcharya(e, type, payload) {
+    if (e) e.preventDefault();
+    document.getElementById('actionTooltip').style.display = 'none';
+
+    currentAcharyaShlokaId = contextShlokaId || activeId;
 
     const apiKey = localStorage.getItem('user_gemini_key');
     if (!apiKey && document.body.classList.contains('is-authorized')) { 
@@ -984,8 +1083,8 @@
         return;
     }
 
-    const text = lastSelectedText || window.getSelection().toString().trim();
-    if(!text) return;
+    const text = payload ? payload.selectedText : (lastSelectedText || window.getSelection().toString().trim());
+    if(!text && type !== 'commentary') return;
     window.getSelection().removeAllRanges();
 
     document.getElementById('acharyaModal').style.display = 'flex';
@@ -1004,7 +1103,21 @@
     } else if (type === 'grammar') {
         promptText = `You are a traditional Vyakarana Acharya. For the text: "${text}", provide: 1. Dhatu & Gana (if verb) 2. Pratyaya (Krt/Taddhita/Tin) 3. Vibhakti & Linga (if noun) 4. Samasa Vigraha (if compound). Format using clean markdown.`;
     } else if (type === 'commentary') {
-        promptText = `You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta). Analyze this Bhashya excerpt: "${text}". Provide: 1. Sentence Breakdown 2. Purvapaksha & Siddhanta (strictly according to Sri Madhvacharya's philosophy) 3. Pramana/Citations expanded. Format using clean markdown.`;
+        if (payload && payload.commentaryText) {
+            promptText = `You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta). Analyze ONLY the supplied commentary text provided below. Do NOT hallucinate external commentaries.
+
+Mula Shloka: "${payload.shlokaText}"
+Commentary Name: "${payload.commentaryTitle}"
+Commentary Text: "${payload.commentaryText}"
+Highlighted Fragment: "${payload.selectedText}"
+
+Provide a detailed scholarly breakdown in clean markdown:
+1. Sentence-by-Sentence Breakdown & Word-by-Word Meaning of this supplied commentary.
+2. Pramana & Citation Expansion: Identify every scriptural quote (Shruti, Smriti, Gita, Amarakosha, etc.) cited in this text. Provide the FULL Sanskrit quote, source attribution, and precise meaning.
+3. Philosophical Siddhanta strictly according to Sri Madhvacharya's Dvaita philosophy derived from this commentary.`;
+        } else {
+            promptText = `You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta). Analyze this commentary excerpt: "${text}". Provide: 1. Sentence Breakdown 2. Purvapaksha & Siddhanta (strictly according to Sri Madhvacharya) 3. Pramana/Citations expanded with full quotes. Format using clean markdown.`;
+        }
     } else if (type === 'translate') {
         promptText = `Translate and explain the meaning of this Sanskrit text: "${text}" into ${targetLang}. Provide a natural translation and a brief summary of its philosophical significance according to the Madhva Sampradaya (Dvaita philosophy). Format cleanly using markdown.`;
     }
@@ -1034,7 +1147,7 @@
     const resText = document.getElementById('acharyaResult').innerText;
     if (!resText) return;
     if (navigator.share) {
-      navigator.share({ title: `Acharya Analysis (Shloka ${contextShlokaId || activeId || ''})`, text: resText }).catch(()=>{});
+      navigator.share({ title: `Acharya Analysis (Shloka ${currentAcharyaShlokaId || activeId || ''})`, text: resText }).catch(()=>{});
     } else {
       navigator.clipboard.writeText(resText);
       showToast("Analysis copied to clipboard!");
@@ -1116,7 +1229,7 @@
           let res = await fetch(primary);
           if (!res.ok) res = await fetch(alt);
           if (res.ok) { await cache.put(res.url, res.clone()); success++; }
-        } catch (e) {}
+        } catch (e) { /* skip this track */ }
         done++;
         btn.innerText = `⏳ Preloading ${Math.round((done/total)*100)}%`;
       }
@@ -1129,10 +1242,41 @@
     btn.style.background = "#e8f5e9"; btn.style.color = "#2e7d32"; btn.style.borderColor = "#c8e6c9";
   }
 
-  // --- NOTES MODAL ---
-  function openNote(id) { targetNoteId = id; document.getElementById('noteShlokaNum').innerText = id; document.getElementById('noteText').value = notes[id] || ""; document.getElementById('noteModal').style.display = "flex"; }
-  function closeNote() { document.getElementById('noteModal').style.display = "none"; }
-  function saveNote() { const txt = document.getElementById('noteText').value.trim(); if(txt) notes[targetNoteId] = txt; else delete notes[targetNoteId]; localStorage.setItem(nsKey('notes'), JSON.stringify(notes)); closeNote(); renderList(); }
+  // --- NOTES MODAL & EXPAND/MINIMIZE ---
+  function openNote(id) { 
+    targetNoteId = id; 
+    document.getElementById('noteShlokaNum').innerText = id; 
+    document.getElementById('noteText').value = notes[id] || ""; 
+    document.getElementById('noteModal').style.display = "flex"; 
+  }
+  function closeNote() { 
+    document.getElementById('noteModal').style.display = "none"; 
+    document.getElementById('noteModalBox').classList.remove('fullscreen');
+    document.getElementById('maxNoteBtn').innerText = '⛶ Expand';
+  }
+  function saveNote() { 
+    const txt = document.getElementById('noteText').value.trim(); 
+    if(txt) notes[targetNoteId] = txt; else delete notes[targetNoteId]; 
+    localStorage.setItem(nsKey('notes'), JSON.stringify(notes)); 
+    closeNote(); 
+    renderList(); 
+    showToast(`Saved notes for Shloka ${targetNoteId}!`);
+  }
+  function clearNote() {
+    if (confirm("Are you sure you want to clear all notes for this Shloka?")) {
+        document.getElementById('noteText').value = "";
+    }
+  }
+  function toggleMaximizeNote() {
+    const box = document.getElementById('noteModalBox');
+    const btn = document.getElementById('maxNoteBtn');
+    box.classList.toggle('fullscreen');
+    if (box.classList.contains('fullscreen')) {
+        btn.innerText = '🗗 Minimize';
+    } else {
+        btn.innerText = '⛶ Expand';
+    }
+  }
 
   els.speedInput.addEventListener('input', (e) => { els.speedVal.innerText = parseFloat(e.target.value).toFixed(1); currentAudio.playbackRate = e.target.value; });
   document.addEventListener('click', (e) => {
