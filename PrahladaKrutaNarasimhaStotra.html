@@ -157,7 +157,7 @@
     box-shadow: 0 6px 16px rgba(174, 35, 31, 0.4); cursor: pointer; transform: translateX(-50%);
   }
 
-  /* Custom Toast (Replaces block alert) */
+  /* Custom Toast */
   #toastMsg {
     display: none; position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
     background: var(--text-primary); color: var(--bg-main); padding: 10px 20px;
@@ -165,9 +165,13 @@
     box-shadow: 0 6px 16px rgba(0,0,0,0.3); text-align: center; white-space: nowrap;
   }
 
-  /* Modals */
+  /* Modals with Sticky Headers */
   .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 400; backdrop-filter: blur(2px); }
-  .modal-content { background: var(--card-bg); color: var(--text-primary); padding: 20px; border-radius: 16px; width: 90%; max-width: 420px; border: 1px solid var(--card-border); max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+  .modal-content { background: var(--card-bg); color: var(--text-primary); padding: 0; border-radius: 16px; width: 90%; max-width: 440px; border: 1px solid var(--card-border); max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.4); position: relative; }
+  
+  .modal-header-sticky { position: sticky; top: 0; background: var(--card-bg); z-index: 10; padding: 16px 18px 12px; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; border-radius: 16px 16px 0 0; }
+  .modal-body { padding: 14px 18px 18px; }
+
   .modal-content textarea { width: 100%; height: 80px; margin: 8px 0; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); font-family: inherit; font-size: 13px; box-sizing: border-box; resize: vertical; }
   .modal-input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); margin: 8px 0; font-size: 13px; box-sizing: border-box; }
 
@@ -235,7 +239,7 @@
     <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="openKeyModal()" title="Access Key Settings" style="font-size: 18px;">🔑</button>
     <button class="btn-top" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle Dark Mode" style="font-size: 18px;">☀️</button>
 
-    <!-- Transliteration Script Selector (FIXED ID logic) -->
+    <!-- Transliteration Script Selector -->
     <div style="position:relative;">
       <button class="btn-top" onclick="togglePopup('scriptPopup')" id="activeScriptBtn" title="Transliterate Script" style="font-size: 18px;">🔠</button>
       <div class="popup popup-top" id="scriptPopup">
@@ -279,7 +283,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v6.1</div>
+  <div class="app-footer" id="appFooter">v6.2</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -372,55 +376,66 @@
   <div onclick="setMark('none')" style="color: #888;">❌ Clear Marker</div>
 </div>
 
-<!-- Modals -->
+<!-- Modals with sticky headers -->
 <div class="modal-overlay" id="snippetModal">
   <div class="modal-content">
-    <h4 style="margin:0 0 10px 0; color:var(--accent-red);">🎯 Saved Snippets (Shloka <span id="snipShlokaNum"></span>)</h4>
-    <div id="snippetListContainer"></div>
-    <div style="text-align:right; margin-top:16px;">
-      <button class="btn-sm" onclick="closeSnippetModal()">Close</button>
+    <div class="modal-header-sticky">
+       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">🎯 Saved Snippets</h4>
+       <button class="btn-sm" onclick="closeSnippetModal()" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <div id="snippetListContainer"></div>
     </div>
   </div>
 </div>
 
 <div class="modal-overlay" id="noteModal">
   <div class="modal-content">
-    <h4 style="margin:0 0 10px 0;">📝 Notes (Shloka <span id="noteShlokaNum"></span>)</h4>
-    <textarea id="noteText"></textarea>
-    <div style="text-align:right; margin-top: 8px;">
-      <button class="btn-sm" onclick="closeNote()">Cancel</button>
-      <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; margin-left:8px;" onclick="saveNote()">Save Notes</button>
+    <div class="modal-header-sticky">
+       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">📝 Notes (Shloka <span id="noteShlokaNum"></span>)</h4>
+       <button class="btn-sm" onclick="closeNote()" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <textarea id="noteText"></textarea>
+      <div style="text-align:right; margin-top: 8px;">
+        <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="saveNote()">Save Notes</button>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="modal-overlay" id="keyModal">
   <div class="modal-content">
-    <h3 style="margin:0 0 12px 0; color:var(--accent-red);">🔑 Secret Access Settings</h3>
-    <p style="font-size:12px; color:#666; margin:0 0 12px 0; line-height: 1.5;">Enter your Secret Access Key below to enable deep textual analysis. If you do not have one, please contact the administrator at <strong id="contactEmailDisplay">sanatanavidyagurukulam@gmail.com</strong>.</p>
-    <input type="password" id="userApiKeyInput" class="modal-input" placeholder="Enter Access Key Here...">
-    <div style="text-align:right; margin-top:16px;">
-      <button class="btn-sm" onclick="closeKeyModal()">Cancel</button>
-      <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; margin-left:8px;" onclick="saveUserApiKey()">Save Key</button>
+    <div class="modal-header-sticky">
+       <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">🔑 Secret Access</h3>
+       <button class="btn-sm" onclick="closeKeyModal()" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12px; color:#666; margin:0 0 12px 0; line-height: 1.5;">Enter your Secret Access Key below to enable deep textual analysis. If you do not have one, please contact the administrator at <strong id="contactEmailDisplay">sanatanavidyagurukulam@gmail.com</strong>.</p>
+      <input type="password" id="userApiKeyInput" class="modal-input" placeholder="Enter Access Key Here...">
+      <div style="text-align:right; margin-top:16px;">
+        <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="saveUserApiKey()">Save Key</button>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="modal-overlay" id="acharyaModal">
   <div class="modal-content">
-    <!-- FIX: Close button explicitly moved to the TOP flex container -->
-    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--card-border); padding-bottom:12px; margin-bottom:14px;">
+    <div class="modal-header-sticky">
       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">🕉️ Acharya's Analysis</h4>
       <div>
          <button class="btn-sm" onclick="shareAcharyaAnalysis()" style="font-size:11px;">📤 Share</button>
          <button class="btn-sm" onclick="closeAcharyaModal()" style="font-size:11px; margin-left:6px;">✖ Close</button>
       </div>
     </div>
-    <div id="acharyaLoading" style="display:none; text-align:center; padding: 30px;">
-      <span style="font-size:28px; display:inline-block; animation: spin 1s linear infinite;">⏳</span>
-      <p style="font-size:13px; font-weight: 600; color:#8a7a63; margin-top:12px;">Consulting traditional scriptures...</p>
+    <div class="modal-body">
+      <div id="acharyaLoading" style="display:none; text-align:center; padding: 30px;">
+        <span style="font-size:28px; display:inline-block; animation: spin 1s linear infinite;">⏳</span>
+        <p style="font-size:13px; font-weight: 600; color:#8a7a63; margin-top:12px;">Consulting traditional scriptures...</p>
+      </div>
+      <div id="acharyaResult" style="font-size:14px; line-height:1.7; overflow-wrap: anywhere;"></div>
     </div>
-    <div id="acharyaResult" style="font-size:14px; line-height:1.7; overflow-wrap: anywhere;"></div>
   </div>
 </div>
 
@@ -432,7 +447,7 @@
     contactEmail: "sanatanavidyagurukulam@gmail.com",
     geminiModel: "gemini-3.6-flash", 
     secretPasskey: "SHRI108",
-    version: "v6.1 (Loop Fix & Layout)"
+    version: "v6.2 (Dvaita Scholar Edition)"
   };
 
   // Custom Toast UI Tool
@@ -487,10 +502,11 @@
   let stotraData = null;
   let currentAudio = new Audio();
   let activeId = null;
+  let contextShlokaId = null; // Tracks which shloka the user is interacting with for notes
   let isPlaying = false;
   let currentLoopCount = 0;
   let currentFilter = 'all';
-  let activeScript = 'devanagari'; // Using Script logic instead of standard translation
+  let activeScript = 'devanagari'; 
   let selectedCommentaryView = 'none';
   let lastSelectedText = "";
   let modalSelectedText = "";
@@ -544,24 +560,26 @@
     togglePopup('fontPopup');
   }
 
-  // Client-Side Transliteration Core
-  function applyTransliteration(text, script) {
-    if (script === 'devanagari' || !text) return text;
-    try {
-      if (typeof Sanscript !== 'undefined') {
-        return Sanscript.t(text, 'devanagari', script);
+  // HTML-Safe Transliteration Core
+  function applyTransliteration(htmlText, script) {
+    if (script === 'devanagari' || !htmlText) return htmlText;
+    if (typeof Sanscript === 'undefined') return htmlText;
+
+    const parts = htmlText.split(/(<[^>]+>)/g);
+    for (let i = 0; i < parts.length; i++) {
+      if (!parts[i].startsWith('<')) {
+        parts[i] = Sanscript.t(parts[i], 'devanagari', script);
       }
-    } catch (e) {
-      console.warn("Sanscript conversion failed:", e);
     }
-    return text;
+    return parts.join('');
   }
 
   function applyScript(code) {
     activeScript = code;
-    // FIX: Match the ID correctly to #scriptPopup
     document.querySelectorAll('#scriptPopup .pop-item').forEach(el => {
-      el.classList.toggle('active', el.dataset.script === code);
+      if (el.dataset.script) {
+        el.classList.toggle('active', el.dataset.script === code);
+      }
     });
   }
   
@@ -569,10 +587,8 @@
     applyScript(code);
     localStorage.setItem('app_script', code);
     
-    // Add brief progress toast
-    showToast("Transliterating text...");
+    showToast("आचार्यः ग्रन्थं सज्जीकुर्वन् अस्ति... (Preparing text)");
     
-    // Use timeout to allow UI toast to render before heavy parsing
     setTimeout(() => {
         renderList();
         if (activeId) els.readingCard.innerHTML = getText(activeId);
@@ -598,7 +614,7 @@
     });
 
   function initApp() {
-    document.getElementById('stotraTitle').innerText = stotraData.metadata.title;
+    document.getElementById('stotraTitle').innerText = applyTransliteration(stotraData.metadata.title, activeScript);
     document.getElementById('rangeStart').max = stotraData.metadata.totalShlokas || 43;
     document.getElementById('rangeEnd').max = stotraData.metadata.totalShlokas || 43;
 
@@ -608,8 +624,8 @@
 
     if(stotraData.metadata.availableCommentaries) {
       Object.entries(stotraData.metadata.availableCommentaries).forEach(([key, name]) => {
-        dynamicList.innerHTML += `<div class="pop-item" onclick="setCommentaryView('${key}', this)">${name}</div>`;
-        els.searchScope.innerHTML += `<option value="${key}">${name} Only</option>`;
+        dynamicList.innerHTML += `<div class="pop-item" onclick="setCommentaryView('${key}', this)">${applyTransliteration(name, activeScript)}</div>`;
+        els.searchScope.innerHTML += `<option value="${key}">${applyTransliteration(name, activeScript)} Only</option>`;
       });
     }
 
@@ -624,9 +640,7 @@
 
   function getText(id) {
     if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
-    // Get raw Sanskrit, then apply transliteration
-    const baseText = stotraData.shlokas[id].sa;
-    return applyTransliteration(baseText, activeScript);
+    return applyTransliteration(stotraData.shlokas[id].sa, activeScript);
   }
 
   function formatTime(s) { if (isNaN(s)) return "0:00.000"; const m = Math.floor(s/60), sec = Math.floor(s%60), ms = Math.floor((s%1)*1000); return m + ":" + (sec<10?"0":"") + sec + "." + String(ms).padStart(3,'0'); }
@@ -690,7 +704,6 @@
       let forceCommentaries = [];
       let hasMatch = false;
 
-      // Base search logic applies to the raw JSON text directly
       if(query) {
         if(scope === 'all') {
           hasMatch = i.toString().includes(query) || shloka.sa.toLowerCase().includes(query);
@@ -732,9 +745,9 @@
 
           if (isSelected || isForcedBySearch) {
             const name = stotraData.metadata.availableCommentaries[cKey] || cKey;
-            // FIX: Transliterate raw text FIRST, then apply highlight.
             let convertedText = applyTransliteration(cText, activeScript);
-            commentaryHtml += `<div class="commentary-block"><div class="commentary-title">${name}</div>${highlightText(convertedText, query)}</div>`;
+            let convertedName = applyTransliteration(name, activeScript);
+            commentaryHtml += `<div class="commentary-block"><div class="commentary-title">${convertedName}</div>${highlightText(convertedText, query)}</div>`;
           }
         });
       }
@@ -803,7 +816,7 @@
   async function playShloka(id) {
     if (!stotraData) return;
     if (activeId === id && isPlaying) { currentAudio.pause(); return; }
-    activeId = id; currentLoopCount = 0; audioRetryDone = false; updateRepeatDisplay(); renderList();
+    activeId = id; contextShlokaId = id; currentLoopCount = 0; audioRetryDone = false; updateRepeatDisplay(); renderList();
     const ac = document.getElementById(`shloka-${id}`); if (ac) ac.scrollIntoView({ behavior: 'smooth', block: 'center' });
     const total = stotraData.metadata.totalShlokas || 43;
     els.trackLabel.innerText = `${id}/${total}`; els.readingCard.innerHTML = getText(id); els.timeDisplay.innerText = "0:00.000 / 0:00.000";
@@ -848,7 +861,7 @@
     renderList();
   }
 
-  // --- SELECTION TOOLTIP & SMART PALETTE ---
+  // --- SELECTION TOOLTIP & DYNAMIC ID TRACKING ---
   document.addEventListener('selectionchange', () => {
     if (!document.body.classList.contains('is-authorized')) return;
 
@@ -869,6 +882,15 @@
       const acharyaResEl = document.getElementById('acharyaResult');
       const isInsideAcharyaModal = acharyaResEl && acharyaResEl.contains(selection.anchorNode);
 
+      // Dynamically track which shloka card we are inside, even if not playing audio
+      const anchor = selection.anchorNode;
+      const shlokaCard = anchor && anchor.nodeType === 3 ? anchor.parentElement.closest('.shloka-card') : (anchor && anchor.closest ? anchor.closest('.shloka-card') : null);
+      if (shlokaCard) {
+        contextShlokaId = parseInt(shlokaCard.id.split('-')[1]);
+      } else if (!isInsideAcharyaModal) {
+        contextShlokaId = null;
+      }
+
       if (txt.length > 0) {
         const range = selection.getRangeAt(0);
         const rect = range.getBoundingClientRect();
@@ -888,10 +910,7 @@
           let left = rect.left + (rect.width / 2);
           left = Math.max(tw/2 + 8, Math.min(left, window.innerWidth - tw/2 - 8));
           
-          // FIX: Smart Tooltip Position! Find the bottom of the current Shloka Card.
           let yPos = rect.bottom + 12;
-          const anchor = selection.anchorNode;
-          const shlokaCard = anchor.nodeType === 3 ? anchor.parentElement.closest('.shloka-card') : anchor.closest('.shloka-card');
           if (shlokaCard) { yPos = shlokaCard.getBoundingClientRect().bottom + 12; }
           
           tooltip.style.top = `${Math.min(yPos, window.innerHeight - 100)}px`;
@@ -904,7 +923,6 @@
     }, 50);
   });
 
-  // Simple Markdown Parser for Acharya Output
   function parseMarkdown(md) {
     return md
       .replace(/^### (.*$)/gim, '<div class="md-h3">$1</div>')
@@ -916,31 +934,33 @@
       .replace(/\n/g, '<br>');
   }
 
-  // --- SELECTIVE APPEND TO NOTES (FIXED LOOP) ---
+  // --- SELECTIVE APPEND TO NOTES ---
   function appendSelectedTextToNote(e) {
     if (e) e.preventDefault();
 
-    // Hide UI and clear selection FIRST to stop Android re-focus loops
     document.getElementById('modalAppendBtn').style.display = 'none';
     window.getSelection().removeAllRanges();
 
-    if (!activeId) {
-      showToast("Please tap on a Shloka card first to make it active before appending notes.");
+    // Use contextShlokaId (card they tapped) or activeId (card currently playing)
+    const targetId = contextShlokaId || activeId;
+
+    if (!targetId) {
+      showToast("Please select text directly from a specific Shloka card first to append notes.");
       return;
     }
 
     if (!modalSelectedText) return;
 
-    const existingNote = notes[activeId] || "";
+    const existingNote = notes[targetId] || "";
     const updatedNote = existingNote ? `${existingNote}\n\n[Acharya Excerpt]:\n${modalSelectedText}` : `[Acharya Excerpt]:\n${modalSelectedText}`;
-    notes[activeId] = updatedNote;
+    notes[targetId] = updatedNote;
     localStorage.setItem(nsKey('notes'), JSON.stringify(notes));
 
     renderList();
-    showToast(`Successfully appended excerpt to Shloka ${activeId} notes!`);
+    showToast(`Successfully appended excerpt to Shloka ${targetId} notes!`);
   }
 
-  // --- SECRET KEY SETTINGS (Masked) ---
+  // --- SECRET KEY SETTINGS ---
   function openKeyModal() { document.getElementById('userApiKeyInput').value = localStorage.getItem('user_gemini_key') || ''; document.getElementById('keyModal').style.display = 'flex'; }
   function closeKeyModal() { document.getElementById('keyModal').style.display = 'none'; }
   function saveUserApiKey() {
@@ -949,7 +969,7 @@
     closeKeyModal();
   }
 
-  // --- ASK ACHARYA (Context-Aware Palette) ---
+  // --- ASK ACHARYA (Madhva Sampradaya Context) ---
   async function askAcharya(e, type) {
     if (e) e.preventDefault();
     document.getElementById('actionTooltip').style.display = 'none';
@@ -972,7 +992,6 @@
     document.getElementById('acharyaLoading').style.display = 'block';
     document.getElementById('acharyaResult').innerHTML = '';
 
-    // Determine target translation language from the current UI script setting
     let targetLang = "English";
     if(activeScript === 'kannada') targetLang = "Kannada";
     if(activeScript === 'telugu') targetLang = "Telugu";
@@ -981,13 +1000,13 @@
 
     let promptText = "";
     if (type === 'shloka') {
-        promptText = `You are a traditional Sanskrit Acharya. For the verse: "${text}", provide: 1. Padachheda (Word-by-word split) 2. Anvaya (Prose word order) 3. Word Meaning 4. Bhavartha (Overarching theme). Format using clean markdown headings.`;
+        promptText = `You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta). For the verse: "${text}", provide: 1. Padachheda (Word-by-word split) 2. Anvaya (Prose word order) 3. Word Meaning 4. Bhavartha (Overarching theme strictly according to Sri Madhvacharya's philosophy). Format using clean markdown headings.`;
     } else if (type === 'grammar') {
-        promptText = `You are a Vyakarana Acharya. For the text: "${text}", provide: 1. Dhatu & Gana (if verb) 2. Pratyaya (Krt/Taddhita/Tin) 3. Vibhakti & Linga (if noun) 4. Samasa Vigraha (if compound). Format using clean markdown.`;
+        promptText = `You are a traditional Vyakarana Acharya. For the text: "${text}", provide: 1. Dhatu & Gana (if verb) 2. Pratyaya (Krt/Taddhita/Tin) 3. Vibhakti & Linga (if noun) 4. Samasa Vigraha (if compound). Format using clean markdown.`;
     } else if (type === 'commentary') {
-        promptText = `You are a traditional scholar. Analyze this Bhashya excerpt: "${text}". Provide: 1. Sentence Breakdown 2. Purvapaksha & Siddhanta (if any) 3. Pramana/Citations expanded. Format using clean markdown.`;
+        promptText = `You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta). Analyze this Bhashya excerpt: "${text}". Provide: 1. Sentence Breakdown 2. Purvapaksha & Siddhanta (strictly according to Sri Madhvacharya's philosophy) 3. Pramana/Citations expanded. Format using clean markdown.`;
     } else if (type === 'translate') {
-        promptText = `Translate and explain the meaning of this Sanskrit text: "${text}" into ${targetLang}. Provide a natural translation and a brief summary of its philosophical significance. Format cleanly using markdown.`;
+        promptText = `Translate and explain the meaning of this Sanskrit text: "${text}" into ${targetLang}. Provide a natural translation and a brief summary of its philosophical significance according to the Madhva Sampradaya (Dvaita philosophy). Format cleanly using markdown.`;
     }
 
     try {
@@ -1003,7 +1022,6 @@
       document.getElementById('acharyaResult').innerHTML = parseMarkdown(result);
     } catch (err) {
       document.getElementById('acharyaLoading').style.display = 'none';
-      // FIX: Ensure strict error masking for non-admins
       if (document.body.classList.contains('is-authorized')) {
          document.getElementById('acharyaResult').innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">Admin Debug Error:</span> ${err.message}`;
       } else {
@@ -1016,7 +1034,7 @@
     const resText = document.getElementById('acharyaResult').innerText;
     if (!resText) return;
     if (navigator.share) {
-      navigator.share({ title: `Acharya Analysis (Shloka ${activeId || ''})`, text: resText }).catch(()=>{});
+      navigator.share({ title: `Acharya Analysis (Shloka ${contextShlokaId || activeId || ''})`, text: resText }).catch(()=>{});
     } else {
       navigator.clipboard.writeText(resText);
       showToast("Analysis copied to clipboard!");
@@ -1098,7 +1116,7 @@
           let res = await fetch(primary);
           if (!res.ok) res = await fetch(alt);
           if (res.ok) { await cache.put(res.url, res.clone()); success++; }
-        } catch (e) { /* skip this track */ }
+        } catch (e) {}
         done++;
         btn.innerText = `⏳ Preloading ${Math.round((done/total)*100)}%`;
       }
