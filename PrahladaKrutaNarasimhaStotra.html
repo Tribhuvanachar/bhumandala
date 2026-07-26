@@ -27,13 +27,13 @@
   .flex-row { display: flex; align-items: center; }
   .flex-center { display: flex; align-items: center; justify-content: center; }
 
-  /* Top App Bar */
-  .top-bar { position: fixed; top: 0; left: 0; right: 0; height: 50px; background: var(--top-bar-bg); border-bottom: 1px solid var(--top-bar-border); z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: background 0.3s; overflow-x: auto; scrollbar-width: none; }
-  .top-bar::-webkit-scrollbar { display: none; }
-  .top-bar-title { font-size: 14px; font-weight: 600; color: var(--accent-red); cursor: pointer; white-space: nowrap; padding-right: 8px; }
-  .top-actions { display: flex; gap: 4px; align-items: center; }
-  .btn-top { background: none; border: none; font-size: 16px; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; padding: 6px 4px; }
-  .btn-lang { background: transparent; border: 1px solid var(--card-border); color: var(--text-primary); border-radius: 16px; padding: 4px 8px; font-size: 11px; font-weight: bold; cursor: pointer; display: flex; align-items: center; white-space: nowrap; }
+  /* Top App Bar - Fixed Clipping & Spacing */
+  .top-bar { position: fixed; top: 0; left: 0; right: 0; height: 50px; background: var(--top-bar-bg); border-bottom: 1px solid var(--top-bar-border); z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: background 0.3s; }
+  .top-bar-title { font-size: 14px; font-weight: 600; color: var(--accent-red); cursor: pointer; white-space: nowrap; flex-shrink: 0; margin-right: auto; }
+  .top-actions { display: flex; gap: 8px; align-items: center; justify-content: flex-end; flex-wrap: nowrap; }
+  
+  .btn-top, .btn-lang { background: transparent; border: none; font-size: 16px; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px; border-radius: 6px; }
+  .btn-lang { font-size: 14px; font-weight: bold; border: 1px solid var(--card-border); border-radius: 12px; padding: 4px 8px; }
 
   /* Advanced Feature Hiding */
   .advanced-feature { display: none !important; }
@@ -57,22 +57,22 @@
   .search-match.active-match { background-color: #ff9800; color: #fff; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ff9800; }
   body.dark-mode .search-match.active-match { background-color: #ff5722; color: #fff; box-shadow: 0 0 0 2px #121212, 0 0 0 4px #ff5722; }
   
-  .search-navigator { position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%); background: var(--card-bg); border: 2px solid var(--accent-red); border-radius: 20px; padding: 4px 12px; display: none; align-items: center; gap: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 150; font-size: 12px; font-weight: bold; color: var(--text-primary); white-space: nowrap; }
-  .search-nav-btn { background: none; border: none; font-size: 16px; cursor: pointer; color: var(--accent-red); padding: 0 4px; }
+  .search-navigator { position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%); background: var(--card-bg); border: 2px solid var(--accent-red); border-radius: 20px; padding: 4px 12px; display: none; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.3); z-index: 150; font-size: 12px; font-weight: bold; color: var(--text-primary); white-space: nowrap; }
+  .search-nav-btn { background: none; border: none; font-size: 14px; cursor: pointer; color: var(--accent-red); padding: 4px; display: flex; align-items: center; justify-content: center; }
 
   /* Reading & List Cards */
-  .reading-card { background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 12px; padding: 20px 16px; text-align: center; font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.6; font-weight: 600; margin-bottom: 16px; min-height: 70px; display: block; word-wrap: break-word; overflow-wrap: break-word; hyphens: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: background 0.3s, border 0.3s; }
+  .reading-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 12px; padding: 20px 16px; text-align: center; font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.6; font-weight: 600; margin-bottom: 16px; min-height: 70px; display: block; word-wrap: break-word; word-break: break-word; overflow-wrap: break-word; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: background 0.3s, border 0.3s; }
   .reading-card.highlight { border-color: var(--accent-red); }
   
   .shloka-list { display: flex; flex-direction: column; gap: 10px; }
-  .shloka-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 8px; transition: background 0.2s, border 0.2s; word-wrap: break-word; overflow-wrap: break-word; }
+  .shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 8px; transition: background 0.2s, border 0.2s; word-wrap: break-word; overflow-wrap: break-word; }
   .shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left: 4px solid var(--accent-red); }
   
   .shloka-main-row { display: flex; width: 100%; gap: 12px; align-items: flex-start; }
   .shloka-num { font-size: 12px; font-weight: bold; color: #777; min-width: 20px; margin-top: 4px; }
   .shloka-text { flex-grow: 1; font-size: var(--font-multiplier); color: var(--text-sanskrit); line-height: 1.5; font-weight: 500; cursor: pointer; }
   
-  .card-actions { display: flex; gap: 6px; align-items: flex-start; }
+  .card-actions { display: flex; gap: 6px; align-items: flex-start; flex-shrink: 0; }
   .btn-icon { background: none; border: none; font-size: 16px; cursor: pointer; color: #b0bec5; padding: 4px; }
   .is-fav { color: var(--accent-gold) !important; }
   .is-practice { color: var(--accent-red) !important; }
@@ -104,7 +104,7 @@
   .repeat-counter { font-size: 9px; font-weight: bold; color: var(--accent-red); }
 
   /* Popups */
-  .popup { position: absolute; bottom: 45px; background: var(--panel-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: none; flex-direction: column; gap: 12px; z-index: 105; width: max-content; min-width: 170px; color: var(--text-primary); }
+  .popup { position: absolute; bottom: 45px; background: var(--panel-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: none; flex-direction: column; gap: 12px; z-index: 300; width: max-content; min-width: 170px; color: var(--text-primary); }
   .popup-top { bottom: auto; top: 35px; right: 0; }
   .popup.show { display: flex; }
   .popup hr { width: 100%; border: 0; border-top: 1px solid var(--card-border); margin: 0; }
@@ -140,7 +140,7 @@
   .tooltip-btn:hover { background: rgba(255,255,255,0.2); }
 
   /* Modals */
-  .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 300; }
+  .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 400; }
   .modal-content { background: var(--card-bg); color: var(--text-primary); padding: 18px; border-radius: 12px; width: 85%; max-width: 360px; border: 1px solid var(--card-border); max-height: 75vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
   .modal-content textarea { width: 100%; height: 70px; margin: 8px 0; padding: 8px; border-radius: 6px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); font-family: inherit; box-sizing: border-box; }
   .modal-input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); margin: 8px 0; box-sizing: border-box; }
@@ -164,7 +164,6 @@
 <div class="top-bar">
   <div class="top-bar-title" onclick="location.reload()">❮ Library</div>
   <div class="top-actions">
-    <!-- Streamlined Icons for mobile fitting -->
     <button class="btn-lang" onclick="alert('Padachheda (Word-Split) view will be available once specific datasets are uploaded!')" title="Pada View">पद</button>
     
     <div style="position:relative;">
@@ -178,7 +177,6 @@
       </div>
     </div>
 
-    <!-- Icon instead of text for Commentary -->
     <div style="position:relative;">
       <button class="btn-top" onclick="togglePopup('commentaryPopup')" id="activeCommBtn" title="Commentary Options">💬</button>
       <div class="popup popup-top" id="commentaryPopup">
@@ -192,9 +190,8 @@
     <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="openKeyModal()" title="API Key Settings">🔑</button>
     <button class="btn-top" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle Dark Mode">☼</button>
 
-    <!-- Icon instead of text for Language -->
     <div style="position:relative;">
-      <button class="btn-lang" onclick="togglePopup('langPopup')" id="activeLangBtn" title="Language Select">🌐</button>
+      <button class="btn-top" onclick="togglePopup('langPopup')" id="activeLangBtn" title="Language Select">🌐</button>
       <div class="popup popup-top" id="langPopup">
         <div style="font-size:10px; color:#777; margin-bottom:4px; text-transform:uppercase;">Reading Language</div>
         <div class="pop-item active" onclick="setLanguage('sa')">Sanskrit <span style="margin-left:auto; font-family:serif;">संस्कृतम्</span></div>
@@ -209,7 +206,7 @@
   <div class="header">
     <h1 id="stotraTitle">Loading...</h1>
     <div class="author" id="stotraAuthor">...</div>
-    <div class="version-tag">APP VERSION: v2.4 (Responsive Edition)</div>
+    <div class="version-tag">APP VERSION: v2.5 (UI Polish Edition)</div>
   </div>
 
   <div class="search-box-group">
@@ -225,7 +222,7 @@
 
   <div class="reading-card" id="readingCard">श्लोकं चिनोतु (Select a shloka)</div>
   <div class="shloka-list" id="shlokaList"></div>
-  <div class="app-footer">APP VERSION: v2.4</div>
+  <div class="app-footer">APP VERSION: v2.5</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -233,6 +230,8 @@
   <span id="searchMatchCount">0/0</span>
   <button class="search-nav-btn" onclick="navSearch(-1)">▲</button>
   <button class="search-nav-btn" onclick="navSearch(1)">▼</button>
+  <div style="width: 1px; height: 16px; background: var(--card-border); margin: 0 4px;"></div>
+  <button class="search-nav-btn" style="color: #777;" onclick="clearSearch()" title="Clear Search">✖</button>
 </div>
 
 <!-- Bottom Toolbar -->
@@ -393,12 +392,12 @@
   let targetNoteId = null;
   let targetMenuId = null;
 
+  window.searchMatches = [];
+  window.currentMatchIdx = -1;
+
   let marks = JSON.parse(localStorage.getItem('narasimhaMarks')) || {};
   let notes = JSON.parse(localStorage.getItem('narasimhaNotes')) || {};
   let snippets = JSON.parse(localStorage.getItem('narasimhaSnippets')) || {};
-
-  window.searchMatches = [];
-  window.currentMatchIdx = -1;
 
   const els = {
     playBtn: document.getElementById('playBtn'), speedInput: document.getElementById('speedInput'),
