@@ -7,12 +7,12 @@
 <meta name="theme-color" id="themeColorMeta" content="#FFFDF9">
 <title>Bhagavata Digital Library</title>
 
-<!-- Fonts & Highly Stable Transliteration Engine -->
+<!-- Fonts & Bulletproof Transliteration Engine -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<!-- FIX: Reverted to the most stable Indic Transliteration CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.2.2/sanscript.min.js"></script>
+<!-- FIX: Reverted to the original, highly stable sanscript vanilla package -->
+<script src="https://unpkg.com/sanscript@0.1.3/sanscript.min.js"></script>
 
 <style>
   :root {
@@ -35,7 +35,6 @@
   * { -webkit-tap-highlight-color: transparent; }
   body { margin: 0; padding-top: calc(60px + env(safe-area-inset-top)); padding-bottom: calc(126px + env(safe-area-inset-bottom)); font-family: var(--font-ui); background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
   
-  /* FIX: Stops background scrolling when modals are open */
   body.modal-open { overflow: hidden !important; }
 
   .app-container { max-width: 650px; margin: 0 auto; padding: 12px; position: relative; }
@@ -174,12 +173,11 @@
     box-shadow: 0 6px 16px rgba(0,0,0,0.3); text-align: center; white-space: nowrap;
   }
 
-  /* Structural Modals with Pinned Headers */
+  /* Modals with Absolute Sticky Headers - High Z-Index */
   .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 11000; backdrop-filter: blur(2px); }
   
   .modal-content { background: var(--card-bg); color: var(--text-primary); border-radius: 16px; width: 90%; max-width: 440px; border: 1px solid var(--card-border); max-height: 85vh; box-shadow: 0 10px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; overflow: hidden; transition: all 0.3s; position: relative; }
   
-  /* FIX: True Fullscreen Notes Flexbox Expansion */
   .modal-content.fullscreen { width: 100%; height: 100%; max-width: none; max-height: none; border-radius: 0; border: none; display: flex; flex-direction: column; }
   .modal-content.fullscreen .modal-body { display: flex; flex-direction: column; flex-grow: 1; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
   .modal-content.fullscreen textarea { flex-grow: 1; height: auto; min-height: 50vh; resize: none; margin-bottom: 12px; }
@@ -301,7 +299,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v9.0</div>
+  <div class="app-footer" id="appFooter">v9.1</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -398,11 +396,11 @@
 <script>
   function openModal(id) {
     document.getElementById(id).style.display = 'flex';
-    document.body.classList.add('modal-open'); // Locks background scroll
+    document.body.classList.add('modal-open'); 
   }
   function closeModal(id) {
     document.getElementById(id).style.display = 'none';
-    document.body.classList.remove('modal-open'); // Unlocks background scroll
+    document.body.classList.remove('modal-open'); 
   }
 </script>
 
@@ -495,7 +493,7 @@
     contactEmail: "sanatanavidyagurukulam@gmail.com",
     geminiModel: "gemini-3.6-flash", 
     secretPasskey: "SHRI108",
-    version: "v9.0 (Ultimate Transliteration Edition)"
+    version: "v9.1 (Transliteration Patch)"
   };
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -599,18 +597,20 @@
     togglePopup('fontPopup');
   }
 
-  // Ultra-Stable Transliteration Core
+  // ROBUST HTML-Safe Transliteration Core
   function applyTransliteration(htmlText, script) {
     if (script === 'devanagari' || !htmlText) return htmlText;
     if (typeof Sanscript === 'undefined') {
        console.error("Transliteration engine failed to load. Check internet connection.");
-       return htmlText; // Fail gracefully
+       return htmlText; 
     }
     try {
         const parts = htmlText.split(/(<[^>]+>)/g);
         for (let i = 0; i < parts.length; i++) {
           if (!parts[i].startsWith('<')) {
-            parts[i] = Sanscript.t(parts[i], 'devanagari', script);
+            // FIX: Strip invisible zero-width characters that break transliterators
+            let cleanText = parts[i].replace(/[\u200B-\u200D\uFEFF]/g, '');
+            parts[i] = Sanscript.t(cleanText, 'devanagari', script);
           }
         }
         return parts.join('');
@@ -627,7 +627,6 @@
         el.classList.toggle('active', el.dataset.script === code);
       }
     });
-    // Dynamically toggle sanskrit font dependency to fix square-box rendering bugs
     if (code !== 'devanagari') {
         document.body.classList.add('non-devanagari');
     } else {
@@ -1027,7 +1026,7 @@
     if (e) e.preventDefault();
     document.getElementById('actionTooltip').style.display = 'none';
     
-    // FIX: Clear Android selection toolbar immediately
+    // FIX: Force Android Native Toolbar Dismissal
     window.getSelection().removeAllRanges();
 
     const targetId = contextShlokaId || activeId || 1;
