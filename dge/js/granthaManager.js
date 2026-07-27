@@ -1,15 +1,55 @@
+/*
+=========================================================
+Digital Grantha Engine
+Grantha Manager
+Build 010
+=========================================================
+*/
+
 class DGEGranthaManager {
 
+    constructor() {
+
+        this.dataset = [];
+        this.title = "Digital Grantha Engine";
+
+    }
+
     async start() {
-        console.log("DGE GranthaManager started");
+
+        this.title = "Digital Grantha Engine";
+
+        this.dataset = [];
+
+        try {
+
+            const response = await fetch("data/pns/data.json");
+
+            this.dataset = await response.json();
+
+            return true;
+
+        }
+        catch (e) {
+
+            console.error(e);
+
+            throw e;
+
+        }
+
     }
 
     getDataset() {
-        return [];
+
+        return this.dataset;
+
     }
 
     getTitle() {
-        return "Digital Grantha Engine";
+
+        return this.title;
+
     }
 
 }
