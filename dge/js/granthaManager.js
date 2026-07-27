@@ -117,5 +117,4 @@ class GranthaManager {
 
 }
 
-window.GranthaManager =
-    new GranthaManager();
+window.DGEGranthaManager = new GranthaManager();
