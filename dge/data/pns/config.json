@@ -1,1 +1,23 @@
-
+{
+  "id": "pns",
+  "title": "Prahlada Kruta Narasimha Stotra",
+  "shortTitle": "PNS",
+  "author": "Prahlada",
+  "language": "sa",
+  "category": "stotra",
+  "version": "1.0",
+  "dataset": "data/pns/data.json",
+  "defaultScript": "Devanagari",
+  "scripts": [
+    "Devanagari",
+    "Kannada",
+    "IAST"
+  ],
+  "features": {
+    "audio": true,
+    "search": true,
+    "notes": true,
+    "bookmarks": true,
+    "commentary": true
+  }
+}
