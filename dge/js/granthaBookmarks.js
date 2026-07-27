@@ -2,7 +2,8 @@
 =========================================================
 Digital Grantha Engine
 Grantha Bookmarks
-Build 026
+Build 001
+Migrated from PrahladaKrutaNarasimhaStotra.html
 =========================================================
 */
 
@@ -10,31 +11,35 @@ class DGEGranthaBookmarks {
 
     constructor() {
 
-        this.storageKey = "DGE_MARKS";
+        this.storageKey = "dge_bookmarks";
 
-        this.marks = this.load();
+        this.data = {};
 
     }
 
-    load() {
+    initialize(storageKey) {
 
-        try {
+        if (storageKey) {
 
-            return JSON.parse(
-
-                localStorage.getItem(
-
-                    this.storageKey
-
-                )
-
-            ) || {};
+            this.storageKey = storageKey;
 
         }
 
-        catch (e) {
+        try {
 
-            return {};
+            this.data = JSON.parse(
+
+                localStorage.getItem(this.storageKey)
+
+                || "{}"
+
+            );
+
+        }
+
+        catch {
+
+            this.data = {};
 
         }
 
@@ -46,164 +51,113 @@ class DGEGranthaBookmarks {
 
             this.storageKey,
 
-            JSON.stringify(
-
-                this.marks
-
-            )
+            JSON.stringify(this.data)
 
         );
 
     }
 
-    get(verseId) {
+    getMark(verseNumber) {
 
-        return this.marks[verseId] || "";
-
-    }
-
-    isFavorite(verseId) {
-
-        return this.get(verseId) === "fav";
+        return this.data[verseNumber] || "none";
 
     }
 
-    isPractice(verseId) {
+    setFavorite(verseNumber) {
 
-        return this.get(verseId) === "practice";
-
-    }
-
-    setFavorite(verseId) {
-
-        this.marks[verseId] = "fav";
+        this.data[verseNumber] = "fav";
 
         this.save();
 
     }
 
-    setPractice(verseId) {
+    setPractice(verseNumber) {
 
-        this.marks[verseId] = "practice";
-
-        this.save();
-
-    }
-
-    clear(verseId) {
-
-        delete this.marks[verseId];
+        this.data[verseNumber] = "practice";
 
         this.save();
 
     }
 
-    toggleFavorite(verseId) {
+    clear(verseNumber) {
 
-        if (this.isFavorite(verseId)) {
+        delete this.data[verseNumber];
 
-            this.clear(verseId);
-
-        }
-
-        else {
-
-            this.setFavorite(verseId);
-
-        }
+        this.save();
 
     }
 
-    togglePractice(verseId) {
-
-        if (this.isPractice(verseId)) {
-
-            this.clear(verseId);
-
-        }
-
-        else {
-
-            this.setPractice(verseId);
-
-        }
-
-    }
-    setMark(verseId, type) {
+    toggleFavorite(verseNumber) {
 
         if (
 
-            type === "none" ||
+            this.getMark(verseNumber)
 
-            !type
+            === "fav"
 
         ) {
 
-            delete this.marks[verseId];
+            this.clear(verseNumber);
 
         }
 
         else {
 
-            this.marks[verseId] = type;
-
-        }
-
-        this.save();
-
-        if (this.onChanged) {
-
-            this.onChanged(
-
-                verseId,
-
-                this.get(verseId)
-
-            );
+            this.setFavorite(verseNumber);
 
         }
 
     }
 
-    toggle(verseId, type) {
+    togglePractice(verseNumber) {
 
         if (
 
-            this.get(verseId) === type
+            this.getMark(verseNumber)
+
+            === "practice"
 
         ) {
 
-            this.setMark(
-
-                verseId,
-
-                "none"
-
-            );
+            this.clear(verseNumber);
 
         }
 
         else {
 
-            this.setMark(
-
-                verseId,
-
-                type
-
-            );
+            this.setPractice(verseNumber);
 
         }
 
     }
 
-    getFavoriteVerses() {
+    isFavorite(verseNumber) {
 
-        return Object.keys(this.marks)
+        return this.getMark(
 
-            .filter(id =>
+            verseNumber
 
-                this.marks[id] === "fav"
+        ) === "fav";
+
+    }
+
+    isPractice(verseNumber) {
+
+        return this.getMark(
+
+            verseNumber
+
+        ) === "practice";
+
+    }
+
+    getFavorites() {
+
+        return Object.keys(this.data)
+
+            .filter(
+
+                k => this.data[k] === "fav"
 
             )
 
@@ -211,13 +165,13 @@ class DGEGranthaBookmarks {
 
     }
 
-    getPracticeVerses() {
+    getPracticeList() {
 
-        return Object.keys(this.marks)
+        return Object.keys(this.data)
 
-            .filter(id =>
+            .filter(
 
-                this.marks[id] === "practice"
+                k => this.data[k] === "practice"
 
             )
 
@@ -225,82 +179,47 @@ class DGEGranthaBookmarks {
 
     }
 
-    setChangedListener(callback) {
+    getFilteredIds(
 
-        this.onChanged = callback;
+        total,
 
-    }
-    exportMarks() {
+        filter
 
-        return JSON.stringify(
+    ) {
 
-            this.marks,
+        const ids = [];
 
-            null,
+        for (
 
-            2
+            let i = 1;
 
-        );
+            i <= total;
 
-    }
+            i++
 
-    importMarks(json) {
-
-        try {
-
-            const data = JSON.parse(json);
+        ) {
 
             if (
 
-                data &&
+                filter === "fav" &&
 
-                typeof data === "object"
+                !this.isFavorite(i)
 
-            ) {
+            ) continue;
 
-                this.marks = data;
+            if (
 
-                this.save();
+                filter === "practice" &&
 
-                return true;
+                !this.isPractice(i)
 
-            }
+            ) continue;
 
-        }
-
-        catch (e) {
-
-            console.error(e);
+            ids.push(i);
 
         }
 
-        return false;
-
-    }
-
-    count(type = null) {
-
-        if (!type) {
-
-            return Object.keys(
-
-                this.marks
-
-            ).length;
-
-        }
-
-        return Object.values(
-
-            this.marks
-
-        ).filter(v => v === type).length;
-
-    }
-
-    destroy() {
-
-        this.onChanged = null;
+        return ids;
 
     }
 
@@ -309,23 +228,3 @@ class DGEGranthaBookmarks {
 window.DGEGranthaBookmarks =
 
     new DGEGranthaBookmarks();
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
