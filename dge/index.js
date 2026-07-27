@@ -1,26 +1,21 @@
 const debug = document.getElementById("debugLog");
 
-function log(msg) {
-    console.log(msg);
-    if (debug) {
-        debug.value += msg + "\n";
-    }
+function log(x) {
+    console.log(x);
+    if (debug) debug.value += x + "\n";
 }
 
-window.onerror = function(message, source, line, col, error) {
-    log("ERROR: " + message);
-    if (error && error.stack) {
-        log(error.stack);
-    }
-};
+log("=== BUILD 008 ===");
 
-(async function () {
+log("typeof DGEGranthaManager = " + typeof DGEGranthaManager);
+log("typeof DGEDatasetAdapter = " + typeof DGEDatasetAdapter);
+log("typeof DGEGranthaReader = " + typeof DGEGranthaReader);
 
-    log("DGE Build 007");
-    log("index.js loaded");
+log("typeof DGEGranthaManager.start = " +
+    typeof DGEGranthaManager.start);
 
-    log("typeof DGEGranthaManager = " + typeof DGEGranthaManager);
-    log("typeof DGEDatasetAdapter = " + typeof DGEDatasetAdapter);
-    log("typeof DGEGranthaReader = " + typeof DGEGranthaReader);
+log("typeof DGEDatasetAdapter.load = " +
+    typeof DGEDatasetAdapter.load);
 
-})();
+log("typeof DGEGranthaReader.initialize = " +
+    typeof DGEGranthaReader.initialize);
