@@ -1,25 +1,66 @@
-document.body.insertAdjacentHTML(
-    "afterbegin",
-    '<div style="background:green;color:white;padding:8px;font-family:monospace">index.js loaded</div>'
-);
+/*
+=========================================================
+Digital Grantha Engine
+Startup
+Build 010
+=========================================================
+*/
+
 const debug = document.getElementById("debugLog");
 
-function log(x) {
-    console.log(x);
-    if (debug) debug.value += x + "\n";
+function log(message) {
+
+    console.log(message);
+
+    if (debug) {
+
+        debug.value += message + "\n";
+
+    }
+
 }
 
-log("=== BUILD 008 ===");
+window.onerror = function (message, source, line, column, error) {
 
-log("typeof DGEGranthaManager = " + typeof DGEGranthaManager);
-log("typeof DGEDatasetAdapter = " + typeof DGEDatasetAdapter);
-log("typeof DGEGranthaReader = " + typeof DGEGranthaReader);
+    log("ERROR: " + message);
 
-log("typeof DGEGranthaManager.start = " +
-    typeof DGEGranthaManager.start);
+    log("FILE : " + source);
 
-log("typeof DGEDatasetAdapter.load = " +
-    typeof DGEDatasetAdapter.load);
+    log("LINE : " + line);
 
-log("typeof DGEGranthaReader.initialize = " +
-    typeof DGEGranthaReader.initialize);
+    if (error && error.stack) {
+
+        log(error.stack);
+
+    }
+
+    return true;
+
+};
+
+(async function () {
+
+    log("=== BUILD 010 ===");
+
+    log("Manager object : " + typeof DGEGranthaManager);
+
+    log("Manager.start : " + typeof DGEGranthaManager.start);
+
+    log("DatasetAdapter : " + typeof DGEDatasetAdapter);
+
+    log("DatasetAdapter.load : " + typeof DGEDatasetAdapter.load);
+
+    await DGEGranthaManager.start();
+
+    log("Manager started");
+
+    const dataset =
+        DGEDatasetAdapter.load(
+            DGEGranthaManager.getDataset()
+        );
+
+    log("Dataset loaded");
+
+    log("Verse count : " + dataset.length);
+
+})();
