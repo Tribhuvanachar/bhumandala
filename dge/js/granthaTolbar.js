@@ -2,31 +2,45 @@
 =========================================================
 Digital Grantha Engine
 Grantha Toolbar
-Build 001
+Build 002
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#8E24AA;color:#fff;padding:6px;font-family:monospace">granthaToolbar.js BUILD 001</div>'
+    '<div style="background:#8E24AA;color:#fff;padding:6px;font-family:monospace">granthaToolbar.js BUILD 002</div>'
 );
 
-class DGEGranthaToolbar {
+class DGEGranthaToolbar{
 
     render(verse){
+
+        const id = verse?.id || verse?.number || 0;
 
         return `
 <div class="dge-toolbar">
 
-<button id="btnBookmark">⭐</button>
+<button onclick="DGEGranthaBookmarks.toggle('${id}')">
+⭐ Bookmark
+</button>
 
-<button id="btnNotes">📝</button>
+<button onclick="alert('Notes editor coming in next build')">
+📝 Notes
+</button>
 
-<button id="btnAudio">▶</button>
+<button onclick="navigator.clipboard.writeText(\`${(verse?.sanskrit||"").replace(/`/g,"\\`")}\`)">
+📋 Copy
+</button>
 
-<button id="btnCopy">📋</button>
-
-<button id="btnShare">🔗</button>
+<button onclick="
+if(navigator.share){
+navigator.share({
+title:'Digital Grantha Engine',
+text:\`${(verse?.sanskrit||"").replace(/`/g,"\\`")}\`
+});
+}">
+🔗 Share
+</button>
 
 </div>
 `;
