@@ -2,6 +2,7 @@
 =========================================================
 Digital Grantha Engine
 Grantha Navigator
+Build 013
 =========================================================
 */
 
@@ -11,26 +12,78 @@ class DGEGranthaNavigator {
 
         this.reader = reader;
 
-        this.bindButton("btnFirst", () => this.reader.first());
-        this.bindButton("btnPrevious", () => this.reader.previous());
-        this.bindButton("btnNext", () => this.reader.next());
-        this.bindButton("btnLast", () => this.reader.last());
+        this.firstButton =
+            document.getElementById("btnFirst");
+
+        this.previousButton =
+            document.getElementById("btnPrevious");
+
+        this.nextButton =
+            document.getElementById("btnNext");
+
+        this.lastButton =
+            document.getElementById("btnLast");
+
+        this.attachEvents();
 
     }
 
-    bindButton(id, action) {
+    attachEvents() {
 
-        const button = document.getElementById(id);
+        this.firstButton?.addEventListener(
+            "click",
+            () => this.reader.first()
+        );
 
-        if (!button) return;
+        this.previousButton?.addEventListener(
+            "click",
+            () => this.reader.previous()
+        );
 
-        button.onclick = action;
+        this.nextButton?.addEventListener(
+            "click",
+            () => this.reader.next()
+        );
 
-    }
+        this.lastButton?.addEventListener(
+            "click",
+            () => this.reader.last()
+        );
 
-    goto(index) {
+        document.addEventListener(
+            "keydown",
+            (event) => {
 
-        this.reader.show(index);
+                switch (event.key) {
+
+                    case "ArrowLeft":
+
+                        this.reader.previous();
+
+                        break;
+
+                    case "ArrowRight":
+
+                        this.reader.next();
+
+                        break;
+
+                    case "Home":
+
+                        this.reader.first();
+
+                        break;
+
+                    case "End":
+
+                        this.reader.last();
+
+                        break;
+
+                }
+
+            }
+        );
 
     }
 
