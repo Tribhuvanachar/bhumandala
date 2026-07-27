@@ -2,183 +2,84 @@
 =========================================================
 Digital Grantha Engine
 Grantha Search
-Version: 10.1.0 Alpha
+Build 013
 =========================================================
 */
 
-class GranthaSearch {
-
-    constructor() {
-
-        this.dataset = [];
-
-        this.results = [];
-
-    }
+class DGEGranthaSearch {
 
     initialize(dataset) {
 
         this.dataset = dataset || [];
 
-        this.bind();
-
-    }
-
-    bind() {
-
-        const box =
+        this.input =
             document.getElementById("searchInput");
 
-        if (!box)
-            return;
+        this.results =
+            document.getElementById("searchResults");
 
-        box.addEventListener(
+        if (!this.input) return;
 
+        this.input.addEventListener(
             "input",
-
-            (event) => {
-
-                this.search(event.target.value);
-
-            }
-
+            () => this.search()
         );
 
     }
 
-    search(text) {
+    search() {
 
-        text = text.trim().toLowerCase();
+        const query =
+            this.input.value
+                .trim()
+                .toLowerCase();
 
-        this.results = [];
+        if (!query) {
 
-        if (text.length < 2) {
-
-            this.render();
+            this.results.innerHTML = "";
 
             return;
 
         }
 
-        this.dataset.forEach(
+        const matches =
+            this.dataset.filter(v =>
 
-            (verse, index) => {
+                (v.sanskrit || "")
+                    .toLowerCase()
+                    .includes(query)
 
-                const source = [
+                ||
 
-                    verse.sanskrit,
+                (v.transliteration || "")
+                    .toLowerCase()
+                    .includes(query)
 
-                    verse.transliteration,
+                ||
 
-                    verse.meaning,
-
-                    verse.commentary
-
-                ]
-
-                .join(" ")
-
-                .toLowerCase();
-
-                if (
-
-                    source.includes(text)
-
-                ) {
-
-                    this.results.push({
-
-                        index,
-
-                        verse
-
-                    });
-
-                }
-
-            }
-
-        );
-
-        this.render();
-
-    }
-
-    render() {
-
-        const panel =
-
-            document.getElementById(
-
-                "searchResults"
+                (v.meaning || "")
+                    .toLowerCase()
+                    .includes(query)
 
             );
 
-        if (!panel)
-            return;
+        this.results.innerHTML =
+            matches
+                .slice(0,20)
+                .map(v =>
 
-        if (this.results.length === 0) {
+`<div style="padding:8px;border-bottom:1px solid #ddd">
 
-            panel.innerHTML = "";
+<b>Verse ${v.number}</b>
 
-            return;
+</div>`
 
-        }
-
-        panel.innerHTML = this.results
-
-            .map(
-
-                item =>
-
-                `<div class="searchResult"
-                    data-index="${item.index}">
-                    Verse ${item.verse.number}
-                 </div>`
-
-            )
-
-            .join("");
-
-        panel
-
-        .querySelectorAll(
-
-            ".searchResult"
-
-        )
-
-        .forEach(
-
-            element => {
-
-                element.addEventListener(
-
-                    "click",
-
-                    () => {
-
-                        GranthaReader.render(
-
-                            Number(
-
-                                element.dataset.index
-
-                            )
-
-                        );
-
-                    }
-
-                );
-
-            }
-
-        );
+                )
+                .join("");
 
     }
 
 }
 
 window.GranthaSearch =
-    new GranthaSearch();
+    new DGEGranthaSearch();
