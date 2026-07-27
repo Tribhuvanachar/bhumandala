@@ -2,90 +2,32 @@
 =========================================================
 Digital Grantha Engine
 Startup
-Build 018
+Build 019
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#008000;color:#fff;padding:6px;font-family:monospace">index.js BUILD 018</div>'
+    '<div style="background:#008000;color:#fff;padding:6px;font-family:monospace">index.js BUILD 019</div>'
 );
 
-const debug=document.getElementById("debugLog");
+const debug = document.getElementById("debugLog");
 
-function log(x){
-
-    console.log(x);
-
-    if(debug){
-
-        debug.value+=x+"\n";
-
-    }
-
+function log(msg){
+    console.log(msg);
+    if(debug) debug.value += msg + "\n";
 }
 
-window.onerror=function(message,source,line,col,error){
+log("========== DGE BUILD 019 ==========");
 
-    log("ERROR : "+message);
+log("typeof window.DGEGranthaManager = " + typeof window.DGEGranthaManager);
+log("typeof window.DGEDatasetAdapter = " + typeof window.DGEDatasetAdapter);
+log("typeof window.DGEGranthaReader = " + typeof window.DGEGranthaReader);
+log("typeof window.DGEGranthaNavigator = " + typeof window.DGEGranthaNavigator);
+log("typeof window.DGEGranthaCommentary = " + typeof window.DGEGranthaCommentary);
 
-    if(error&&error.stack){
-
-        log(error.stack);
-
-    }
-
-    return true;
-
-};
-
-(async()=>{
-
-try{
-
-log("========== DGE BUILD 018 ==========");
-
-const Manager=window.DGEGranthaManager;
-const Adapter=window.DGEDatasetAdapter;
-const Reader=window.DGEGranthaReader;
-const Navigator=window.DGEGranthaNavigator;
-
-await Manager.start();
-
-log("✓ GranthaManager started");
-
-const dataset=Adapter.load(
-Manager.getDataset());
-
-log("✓ Dataset adapted");
-
-log("Verse Count : "+dataset.length);
-
-Reader.initialize();
-
-Reader.load(dataset);
-
-log("✓ Reader initialized");
-
-Navigator.initialize(Reader);
-
-log("✓ Navigator initialized");
-
-log("========== DGE READY ==========");
-
-}
-catch(e){
-
-log("STARTUP FAILED");
-
-log(e.message);
-
-if(e.stack){
-
-log(e.stack);
-
+if (window.DGEGranthaManager) {
+    log("typeof start = " + typeof window.DGEGranthaManager.start);
 }
 
-}
-
-})();
+log("========== END ==========");
