@@ -2,28 +2,30 @@
 =========================================================
 Digital Grantha Engine
 Dataset Adapter
-Build 014
+Build 020
 =========================================================
 */
+
+document.body.insertAdjacentHTML(
+    "afterbegin",
+    '<div style="background:#f9a825;color:#000;padding:6px;font-family:monospace">datasetAdapter.js BUILD 020</div>'
+);
 
 class DGEDatasetAdapter {
 
     load(raw) {
 
-        if (!raw) return [];
-
-        if (!raw.shlokas) return [];
+        if (!raw || !raw.shlokas)
+            return [];
 
         const verses = [];
 
-        const keys =
-            Object.keys(raw.shlokas)
-                .sort((a,b)=>Number(a)-Number(b));
+        const keys = Object.keys(raw.shlokas)
+            .sort((a,b)=>Number(a)-Number(b));
 
-        for (const key of keys) {
+        for(const key of keys){
 
-            const shloka =
-                raw.shlokas[key];
+            const s = raw.shlokas[key];
 
             verses.push({
 
@@ -31,29 +33,27 @@ class DGEDatasetAdapter {
 
                 number:Number(key),
 
-                sanskrit:
-                    shloka.sa || "",
+                sanskrit:s.sa || "",
 
-                transliteration:
-                    shloka.itrans ||
-                    shloka.transliteration ||
-                    "",
+                transliteration:s.itrans || "",
 
-                meaning:
-                    shloka.en ||
-                    shloka.meaning ||
-                    "",
+                meaning:s.en || "",
 
-                commentary:
-                    shloka.commentaries || {},
+                commentary:s.commentaries || {},
 
-                raw:shloka
+                raw:s
 
             });
 
         }
 
         return verses;
+
+    }
+
+    getDataset(raw){
+
+        return this.load(raw);
 
     }
 
