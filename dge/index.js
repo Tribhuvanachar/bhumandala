@@ -2,9 +2,14 @@
 =========================================================
 Digital Grantha Engine
 Startup
-Build 012
+Build 017
 =========================================================
 */
+
+document.body.insertAdjacentHTML(
+    "afterbegin",
+    '<div style="background:#008000;color:#fff;padding:6px;font-family:monospace">index.js BUILD 017</div>'
+);
 
 const debug = document.getElementById("debugLog");
 
@@ -24,10 +29,6 @@ window.onerror = function(message, source, line, column, error) {
 
     log("ERROR : " + message);
 
-    log("FILE  : " + source);
-
-    log("LINE  : " + line);
-
     if (error && error.stack) {
 
         log(error.stack);
@@ -40,51 +41,61 @@ window.onerror = function(message, source, line, column, error) {
 
 (async function () {
 
-    log("========== DGE BUILD 012 ==========");
+    try {
 
-    const Manager = window.DGEGranthaManager;
-    const Adapter = window.DGEDatasetAdapter;
-    const Reader = window.DGEGranthaReader;
-    const Navigator = window.DGEGranthaNavigator;
+        log("========== DGE BUILD 017 ==========");
 
-    log("Manager : " + typeof Manager);
-    log("Adapter : " + typeof Adapter);
-    log("Reader  : " + typeof Reader);
-    log("Navigator : " + typeof Navigator);
+        const Manager = window.DGEGranthaManager;
+        const Adapter = window.DGEDatasetAdapter;
+        const Reader = window.DGEGranthaReader;
+        const Navigator = window.DGEGranthaNavigator;
 
-    await Manager.start();
+        await Manager.start();
 
-    log("✓ GranthaManager started");
+        log("✓ GranthaManager started");
 
-    const dataset =
-        Adapter.load(
-            Manager.getDataset()
-        );
+        const dataset =
+            Adapter.load(
+                Manager.getDataset()
+            );
 
-    log("✓ Dataset adapted");
+        log("✓ Dataset adapted");
 
-    log("Verse Count : " + dataset.length);
+        log("Verse Count : " + dataset.length);
 
-    Reader.initialize();
+        Reader.initialize();
 
-    Reader.load(dataset);
+        Reader.load(dataset);
 
-    log("✓ Reader initialized");
+        log("✓ Reader initialized");
 
-    Navigator.initialize(Reader);
+        Navigator.initialize(Reader);
 
-    log("✓ Navigator initialized");
+        log("✓ Navigator initialized");
 
-    const title =
-        document.getElementById("granthaTitle");
+        if (window.DGEGranthaCommentary) {
 
-    if (title) {
+            DGEGranthaCommentary.initialize(dataset);
 
-        title.textContent =
-            Manager.getTitle();
+            log("✓ Commentary initialized");
+
+        }
+
+        log("========== DGE READY ==========");
 
     }
+    catch (e) {
 
-    log("========== DGE READY ==========");
+        log("STARTUP FAILED");
+
+        log(e.message);
+
+        if (e.stack) {
+
+            log(e.stack);
+
+        }
+
+    }
 
 })();
