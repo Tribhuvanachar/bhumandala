@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+
+  "navigation": {
+    "home": true,
+    "library": true,
+    "search": true,
+    "previousVerse": true,
+    "nextVerse": true,
+    "firstVerse": true,
+    "lastVerse": true,
+    "gotoVerse": true,
+    "history": true,
+    "recent": true
+  }
+}
