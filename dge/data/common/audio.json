@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+
+  "player": {
+    "defaultSpeed": 1.0,
+    "minimumSpeed": 0.5,
+    "maximumSpeed": 2.0,
+    "speedStep": 0.1,
+
+    "defaultRepeat": 1,
+    "maximumRepeat": 108,
+
+    "preload": "metadata",
+    "autoplay": false,
+
+    "abLoop": true,
+    "cacheAudio": true,
+
+    "rememberPlaybackSpeed": true,
+    "rememberRepeatCount": true
+  }
+}
