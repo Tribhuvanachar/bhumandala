@@ -1,29 +1,78 @@
 /*
-====================================================
-DGE DEVELOPMENT ROADMAP
-
-1. Load version.json
-2. Load granthas.json
-3. Load config.json
-4. Load dataset
-5. Initialize datasetAdapter
-6. Initialize granthaReader
-7. Initialize granthaNavigator
-8. Initialize granthaSearch
-9. Initialize granthaAudio
-10. Initialize granthaNotes
-11. Initialize granthaBookmarks
-12. Initialize granthaCommentary
-
-====================================================
+=========================================================
+Digital Grantha Engine
+Startup
+Version: 10.1.0 Alpha
+=========================================================
 */
-import {GranthaManager} from './js/granthaManager.js';
-import {normalize} from './js/adapter.js';
-import {renderVerse} from './js/reader.js';
-(async()=>{
- const gm=new GranthaManager();
- const {config,data}=await gm.loadCurrent();
- document.getElementById('granthaTitle').textContent=config.title||'Digital Grantha Engine';
- const verses=normalize(data);
- if(verses.length) renderVerse(document.getElementById('readerCard'),verses[0]);
+
+(async function () {
+
+    try {
+
+        await GranthaManager.start();
+
+        const dataset = DatasetAdapter.load(
+            GranthaManager.getDataset()
+        );
+
+        GranthaReader.initialize(
+            "readerCard"
+        );
+
+        GranthaReader.load(dataset);
+
+        GranthaNavigator.initialize(
+            GranthaReader
+        );
+
+        GranthaSearch.initialize(
+            dataset
+        );
+
+        GranthaAudio.initialize(
+            "audioPlayer"
+        );
+
+        GranthaAudio.load(
+            dataset
+        );
+
+        GranthaNotes.initialize();
+
+        GranthaBookmarks.initialize();
+
+        GranthaCommentary.initialize(
+            dataset
+        );
+
+        const title =
+            document.getElementById(
+                "granthaTitle"
+            );
+
+        if (title) {
+
+            title.textContent =
+                GranthaManager.getTitle();
+
+        }
+
+        console.log(
+            "DGE Started Successfully"
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "DGE Startup Failed.\n\n" +
+            error.message
+        );
+
+    }
+
 })();
