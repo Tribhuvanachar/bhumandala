@@ -2,16 +2,16 @@
 =========================================================
 Digital Grantha Engine
 Startup
-Build 023
+Build 024
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#008000;color:#fff;padding:6px;font-family:monospace">index.js BUILD 023</div>'
+    '<div style="background:#008000;color:#fff;padding:6px;font-family:monospace">index.js BUILD 024</div>'
 );
 
-const debug=document.getElementById("debugLog");
+const debug = document.getElementById("debugLog");
 
 function log(msg){
 
@@ -19,17 +19,17 @@ function log(msg){
 
     if(debug){
 
-        debug.value+=msg+"\n";
+        debug.value += msg + "\n";
 
     }
 
 }
 
-window.onerror=function(message,source,line,column,error){
+window.onerror = function(message, source, line, column, error){
 
-    log("ERROR : "+message);
+    log("ERROR : " + message);
 
-    if(error&&error.stack){
+    if(error && error.stack){
 
         log(error.stack);
 
@@ -43,34 +43,50 @@ window.onerror=function(message,source,line,column,error){
 
 try{
 
-log("========== DGE BUILD 023 ==========");
+log("========== DGE BUILD 024 ==========");
 
-const manager=window.DGEGranthaManager;
+const manager = window.DGEGranthaManager;
 
 await manager.start();
 
 log("✓ GranthaManager started");
 
-const raw=manager.getDataset();
+const raw = manager.getDataset();
 
-log("Raw dataset type : "+typeof raw);
+log("Raw dataset type : " + typeof raw);
 
-log("Raw dataset keys : "+Object.keys(raw).join(","));
+log("Raw dataset keys : " + Object.keys(raw).join(","));
 
-const grantha=
+const grantha =
 window.DGEDatasetAdapter.getDataset(raw);
 
 log("✓ Dataset adapted");
 
-log("Metadata title : "+(grantha.metadata?.title||""));
+log("Metadata title : " + (grantha.metadata?.title || ""));
 
-log("Verse Count : "+grantha.verses.length);
+log("Verse Count : " + grantha.verses.length);
+
+/* ---------- Commentary ---------- */
+
+window.DGEGranthaCommentary.initialize(
+    grantha.verses
+);
+
+window.DGEGranthaCommentary.enableAll(0);
+
+log("✓ Commentary initialized");
+
+/* ---------- Reader ---------- */
 
 window.DGEGranthaReader.initialize();
 
-window.DGEGranthaReader.load(grantha.verses);
+window.DGEGranthaReader.load(
+    grantha.verses
+);
 
 log("✓ Reader initialized");
+
+/* ---------- Navigator ---------- */
 
 window.DGEGranthaNavigator.initialize(
     window.DGEGranthaReader
@@ -78,23 +94,18 @@ window.DGEGranthaNavigator.initialize(
 
 log("✓ Navigator initialized");
 
-/* -------- Search Integration -------- */
+/* ---------- Search ---------- */
 
 if(window.DGEGranthaSearch){
 
     window.DGEGranthaSearch.initialize(
-
         window.DGEGranthaReader,
-
         grantha.verses
-
     );
 
     log("✓ Search initialized");
 
 }
-
-/* ----------------------------------- */
 
 log("========== DGE READY ==========");
 
