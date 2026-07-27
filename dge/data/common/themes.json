@@ -1,0 +1,22 @@
+{
+  "default": "classic",
+
+  "themes": [
+    {
+      "id": "classic",
+      "name": "Classic"
+    },
+    {
+      "id": "dark",
+      "name": "Dark"
+    },
+    {
+      "id": "sepia",
+      "name": "Sepia"
+    },
+    {
+      "id": "paper",
+      "name": "Paper"
+    }
+  ]
+}
