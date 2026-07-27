@@ -1,0 +1,7 @@
+#readerCard{
+max-width:900px;
+margin:auto;
+padding:1rem;
+background:#fff;
+border-radius:12px;
+}
