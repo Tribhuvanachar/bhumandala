@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+
+  "export": {
+    "formats": [
+      "txt",
+      "html",
+      "json",
+      "pdf"
+    ],
+
+    "allowVerseExport": true,
+    "allowNotesExport": true,
+    "allowBookmarksExport": true,
+    "allowCommentaryExport": true,
+
+    "includeMetadata": true,
+    "includeTimestamp": true,
+
+    "defaultFormat": "html"
+  }
+}
