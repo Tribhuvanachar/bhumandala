@@ -2,7 +2,7 @@
 =========================================================
 Digital Grantha Engine
 Grantha Reader
-Build 016
+Build 017
 =========================================================
 */
 
@@ -18,20 +18,14 @@ class DGEGranthaReader {
 
     initialize() {
 
-        this.container =
-            document.getElementById("readerCard");
+        this.container = document.getElementById("readerCard");
 
     }
 
     load(dataset) {
 
         this.dataset = dataset || [];
-
         this.currentIndex = 0;
-
-        DGEGranthaCommentary.initialize(this.dataset);
-
-        DGEGranthaCommentary.enableAll(0);
 
         this.render();
 
@@ -44,97 +38,51 @@ class DGEGranthaReader {
         if (!this.dataset.length) {
 
             this.container.innerHTML =
-                "<h2>No verses available.</h2>";
+                "<div style='padding:30px;text-align:center'>No verses available.</div>";
 
             return;
 
         }
 
-        const verse =
-            this.dataset[this.currentIndex];
-
-        const commentary =
-            DGEGranthaCommentary
-                .getEnabled(this.currentIndex);
+        const verse = this.dataset[this.currentIndex];
 
         let commentaryHtml = "";
 
-        commentary.forEach(item => {
+        if (
+            window.DGEGranthaCommentary &&
+            typeof window.DGEGranthaCommentary.getEnabled === "function"
+        ) {
 
-            commentaryHtml += `
+            const items =
+                window.DGEGranthaCommentary.getEnabled(this.currentIndex);
 
-<div style="
-margin-top:20px;
-padding:16px;
-border:1px solid #cccccc;
-border-radius:8px;
-">
-
-<div style="
-font-size:20px;
-font-weight:bold;
-margin-bottom:12px;
-color:#003366;">
-
-${item.name}
-
+            commentaryHtml = items.map(item => `
+<div style="margin-top:18px;padding:14px;border:1px solid #ccc;border-radius:8px">
+<div style="font-weight:bold;margin-bottom:10px">${item.name}</div>
+<div>${item.text}</div>
 </div>
+`).join("");
 
-<div style="
-font-size:18px;
-line-height:1.8;
-">
-
-${item.text}
-
-</div>
-
-</div>
-
-`;
-
-        });
+        }
 
         this.container.innerHTML = `
+<div style="padding:20px">
 
-<div style="padding:20px;">
-
-<div style="
-font-size:28px;
-font-weight:bold;
-text-align:center;">
-
+<h2 style="text-align:center">
 Digital Grantha Engine
+</h2>
 
+<div style="text-align:center;margin-bottom:20px">
+Verse ${this.currentIndex + 1} / ${this.dataset.length}
 </div>
 
-<div style="
-margin-top:8px;
-text-align:center;
-font-size:18px;">
-
-Verse ${this.currentIndex + 1}
-/
-${this.dataset.length}
-
-</div>
-
-<hr>
-
-<div style="
-margin-top:24px;
-font-size:31px;
-line-height:1.9;
-text-align:center;">
-
+<div style="font-size:30px;line-height:1.9;text-align:center">
 ${verse.sanskrit || ""}
-
 </div>
 
 ${commentaryHtml}
 
 </div>
-
 `;
 
     }
@@ -142,9 +90,6 @@ ${commentaryHtml}
     first() {
 
         this.currentIndex = 0;
-
-        DGEGranthaCommentary.enableAll(0);
-
         this.render();
 
     }
@@ -154,9 +99,6 @@ ${commentaryHtml}
         if (this.currentIndex > 0) {
 
             this.currentIndex--;
-
-            DGEGranthaCommentary.enableAll(this.currentIndex);
-
             this.render();
 
         }
@@ -168,9 +110,6 @@ ${commentaryHtml}
         if (this.currentIndex < this.dataset.length - 1) {
 
             this.currentIndex++;
-
-            DGEGranthaCommentary.enableAll(this.currentIndex);
-
             this.render();
 
         }
@@ -179,16 +118,11 @@ ${commentaryHtml}
 
     last() {
 
-        this.currentIndex =
-            this.dataset.length - 1;
-
-        DGEGranthaCommentary.enableAll(this.currentIndex);
-
+        this.currentIndex = this.dataset.length - 1;
         this.render();
 
     }
 
 }
 
-window.DGEGranthaReader =
-    new DGEGranthaReader();
+window.DGEGranthaReader = new DGEGranthaReader();
