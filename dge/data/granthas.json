@@ -7,8 +7,8 @@
       "title": "Prahlada Kruta Narasimha Stotra",
       "language": "Sanskrit",
       "type": "Stotra",
-      "config": "data/stotras/pns/config.json",
-"dataset": "data/stotras/pns/data.json" ,
+      "config": "data/pns/config.json",
+      "dataset": "data/pns/data.json" ,
       "enabled": true
     }
   ]
