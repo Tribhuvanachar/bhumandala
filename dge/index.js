@@ -1,22 +1,38 @@
-alert("INDEX BUILD 006");
+window.onerror = function (message, source, line, column, error) {
 
-(async () => {
+    const box = document.getElementById("debugLog");
 
-try {
+    if (box) {
 
-    alert("Before start");
+        box.value +=
+            "\n\nERROR: " + message +
+            "\nFILE : " + source +
+            "\nLINE : " + line +
+            "\nCOL  : " + column;
 
-    await DGEGranthaManager.start();
+        if (error && error.stack) {
 
-    alert("After start");
+            box.value +=
+                "\n\nSTACK:\n" + error.stack;
+
+        }
+
+    }
+
+    return true;
+
+};
+
+function log(message) {
+
+    const box = document.getElementById("debugLog");
+
+    if (box) {
+
+        box.value += message + "\n";
+
+    }
 
 }
-catch(e){
 
-    alert(e.message);
-
-    alert(e.stack);
-
-}
-
-})();
+log("INDEX STARTED");
