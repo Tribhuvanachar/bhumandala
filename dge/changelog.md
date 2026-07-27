@@ -1,11 +1,25 @@
-# DGE Changelog
+# Digital Grantha Engine
 
-## v10.1.0-alpha.002
-- Initial DGE repository created.
-- index.html added.
-- assets/ folder created.
-- data/ folder created.
-- data_pns.json moved into data/.
-- granthas.json added.
-- version.json added.
-- External audio architecture retained (Archive.org).
+## 10.1.0 Alpha
+
+Initial modular architecture.
+
+### Added
+
+- Engine framework
+- Plugin framework
+- Grantha Manager
+- Generic Adapter
+- Reader Engine
+- Search Engine
+- Audio Engine
+- Notes
+- Bookmarks
+- Commentary
+- AI module
+- Dataset architecture
+- Library architecture
+
+### Next Milestone
+
+Migration of Prahlada Kruta Narasimha Stotra to DGE.
