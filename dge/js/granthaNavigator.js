@@ -2,49 +2,101 @@
 =========================================================
 Digital Grantha Engine
 Grantha Navigator
-Build 022
+Build 025
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#795548;color:#fff;padding:6px;font-family:monospace">granthaNavigator.js BUILD 022</div>'
+    '<div style="background:#00695C;color:#fff;padding:6px;font-family:monospace">granthaNavigator.js BUILD 025</div>'
 );
 
-class DGEGranthaNavigator {
+class DGEGranthaNavigator{
 
-    constructor() {
+    constructor(){
 
-        this.reader = null;
+        this.reader=null;
 
     }
 
-    initialize(reader) {
+    initialize(reader){
 
-        this.reader = reader;
+        this.reader=reader;
 
-        const first = document.getElementById("btnFirst");
-        const prev  = document.getElementById("btnPrevious");
-        const next  = document.getElementById("btnNext");
-        const last  = document.getElementById("btnLast");
+        this.bind();
 
-        if (first)
-            first.onclick = () => this.reader.first();
+    }
 
-        if (prev)
-            prev.onclick = () => this.reader.previous();
+    bind(){
 
-        if (next)
-            next.onclick = () => this.reader.next();
+        const map={
 
-        if (last)
-            last.onclick = () => this.reader.last();
+            btnFirst:"first",
 
-        console.log("Navigator initialized.");
+            btnPrevious:"previous",
+
+            btnNext:"next",
+
+            btnLast:"last"
+
+        };
+
+        Object.keys(map).forEach(id=>{
+
+            const btn=document.getElementById(id);
+
+            if(!btn) return;
+
+            btn.onclick=()=>{
+
+                if(this.reader &&
+                    typeof this.reader[map[id]]==="function"){
+
+                    this.reader[map[id]]();
+
+                }
+
+            };
+
+        });
+
+        document.addEventListener("keydown",e=>{
+
+            if(!this.reader) return;
+
+            switch(e.key){
+
+                case "ArrowLeft":
+
+                    this.reader.previous();
+
+                    break;
+
+                case "ArrowRight":
+
+                    this.reader.next();
+
+                    break;
+
+                case "Home":
+
+                    this.reader.first();
+
+                    break;
+
+                case "End":
+
+                    this.reader.last();
+
+                    break;
+
+            }
+
+        });
 
     }
 
 }
 
-window.DGEGranthaNavigator =
-    new DGEGranthaNavigator();
+window.DGEGranthaNavigator=
+new DGEGranthaNavigator();
