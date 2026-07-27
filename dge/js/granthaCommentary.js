@@ -2,23 +2,28 @@
 =========================================================
 Digital Grantha Engine
 Grantha Commentary
-Build 017
+Build 018
 =========================================================
 */
+
+document.body.insertAdjacentHTML(
+    "afterbegin",
+    '<div style="background:#7b1fa2;color:white;padding:6px;font-family:monospace">granthaCommentary.js BUILD 018</div>'
+);
 
 class DGEGranthaCommentary {
 
     getEnabled(index, dataset) {
 
-        if (!dataset) return [];
+        if (!dataset || !dataset[index]) {
 
-        if (!dataset[index]) return [];
+            return [];
 
-        const verse = dataset[index];
+        }
 
-        if (!verse.commentary) return [];
+        const commentary = dataset[index].commentary || {};
 
-        return Object.entries(verse.commentary).map(([name, text]) => ({
+        return Object.entries(commentary).map(([name, text]) => ({
 
             name,
 
@@ -30,5 +35,4 @@ class DGEGranthaCommentary {
 
 }
 
-window.DGEGranthaCommentary =
-    new DGEGranthaCommentary();
+window.DGEGranthaCommentary = new DGEGranthaCommentary();
