@@ -3,31 +3,29 @@
 
 <head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="version" content="BUILD-006">
 
-<title>
+<title>Digital Grantha Engine</title>
 
-Digital Grantha Engine
-
-</title>
-
-<link
-rel="stylesheet"
-href="css/main.css">
+<link rel="stylesheet" href="css/main.css">
 
 </head>
 
 <body>
+
 <div style="background:#b71c1c;color:white;padding:8px;font-family:monospace">
-DGE DEV BUILD 008
+DGE DEV BUILD 011
 </div>
+
 <header>
 
 <h1 id="granthaTitle">
-DGE v10.1.0 Alpha Build 001
+DGE v10.1.0 Alpha Build 011
 </h1>
 
 </header>
@@ -37,38 +35,20 @@ DGE v10.1.0 Alpha Build 001
 <section id="readerSection">
 
 <div id="readerCard">
-
 Loading...
-
 </div>
 
 </section>
 
 <section id="navigationSection">
 
-<button id="btnFirst">
+<button id="btnFirst">⏮</button>
 
-⏮
+<button id="btnPrevious">◀</button>
 
-</button>
+<button id="btnNext">▶</button>
 
-<button id="btnPrevious">
-
-◀
-
-</button>
-
-<button id="btnNext">
-
-▶
-
-</button>
-
-<button id="btnLast">
-
-⏭
-
-</button>
+<button id="btnLast">⏭</button>
 
 </section>
 
@@ -79,9 +59,7 @@ id="searchInput"
 type="search"
 placeholder="Search">
 
-<div id="searchResults">
-
-</div>
+<div id="searchResults"></div>
 
 </section>
 
@@ -90,7 +68,6 @@ placeholder="Search">
 <audio
 id="audioPlayer"
 controls>
-
 </audio>
 
 </section>
@@ -98,15 +75,26 @@ controls>
 <section
 id="commentaryPanel"
 style="display:none;">
-
 </section>
 
 </main>
 
+<textarea
+id="debugLog"
+style="
+width:100%;
+height:250px;
+font-family:monospace;
+font-size:12px;
+margin-top:20px;">
+</textarea>
+
 <script>
+
 const BUILD = Date.now();
 
-[
+const files = [
+
 "js/granthaManager.js",
 "js/datasetAdapter.js",
 "js/granthaReader.js",
@@ -117,23 +105,49 @@ const BUILD = Date.now();
 "js/granthaBookmarks.js",
 "js/granthaCommentary.js",
 "index.js"
-].forEach(file => {
 
-    const s = document.createElement("script");
-    s.src = file + "?v=" + BUILD;
-    document.body.appendChild(s);
+];
+
+async function loadScriptsSequentially() {
+
+    for (const file of files) {
+
+        await new Promise((resolve, reject) => {
+
+            const script = document.createElement("script");
+
+            script.src = file + "?v=" + BUILD;
+
+            script.onload = resolve;
+
+            script.onerror = () => reject(
+                new Error("Failed to load: " + file)
+            );
+
+            document.body.appendChild(script);
+
+        });
+
+    }
+
+}
+
+loadScriptsSequentially().catch(error => {
+
+    console.error(error);
+
+    const box = document.getElementById("debugLog");
+
+    if (box) {
+
+        box.value += error.message + "\n";
+
+    }
 
 });
+
 </script>
-  <textarea
-id="debugLog"
-style="
-width:100%;
-height:250px;
-font-family:monospace;
-font-size:12px;
-margin-top:20px;">
-</textarea>
+
 </body>
 
 </html>
