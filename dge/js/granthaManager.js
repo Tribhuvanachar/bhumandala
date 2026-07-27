@@ -1,57 +1,30 @@
-/*
-=========================================================
-Digital Grantha Engine
-Grantha Manager
-Build 010
-=========================================================
-*/
+document.body.insertAdjacentHTML(
+    "afterbegin",
+    '<div style="background:#008000;color:#fff;padding:8px;font-family:monospace">granthaManager.js BUILD 011 LOADED</div>'
+);
 
 class DGEGranthaManager {
 
-    constructor() {
-
-        this.dataset = [];
-        this.title = "Digital Grantha Engine";
-
-    }
-
     async start() {
 
-        this.title = "Digital Grantha Engine";
-
-        this.dataset = [];
-
-        try {
-
-            const response = await fetch("data/pns/data.json");
-
-            this.dataset = await response.json();
-
-            return true;
-
-        }
-        catch (e) {
-
-            console.error(e);
-
-            throw e;
-
-        }
+        return true;
 
     }
 
     getDataset() {
 
-        return this.dataset;
+        return [];
 
     }
 
     getTitle() {
 
-        return this.title;
+        return "TEST";
 
     }
 
 }
 
 window.DGEGranthaManager = new DGEGranthaManager();
+
+console.log(window.DGEGranthaManager);
