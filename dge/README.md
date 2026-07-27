@@ -1,29 +1,31 @@
-# Digital Grantha Engine (DGE)
+# Current Status
 
-Digital Grantha Engine is a modular web engine for reading, searching, studying and listening to Sanskrit granthas.
+## Repository
+- [x] Folder structure
+- [x] Common configuration
+- [x] Grantha configuration
+- [x] Version management
+- [x] Plugin architecture
 
-## Goals
+## Core Modules
+- [x] GranthaManager
+- [x] DatasetAdapter
+- [x] GranthaReader
+- [x] GranthaNavigator
+- [x] GranthaSearch
+- [x] GranthaAudio
+- [x] GranthaNotes
+- [x] GranthaBookmarks
+- [x] GranthaCommentary
 
-- One engine
-- Unlimited granthas
-- Plugin architecture
-- Offline capable
-- Archive.org audio support
-- AI-assisted study
-- Multiple scripts
-- Notes
-- Bookmarks
-- Commentary support
-
-## Repository Structure
-
-css/
-data/
-js/
-plugins/
-assets/
-audio/
-
-## Status
-
-Alpha Development
+## Pending
+- [ ] First verse rendering
+- [ ] Navigation
+- [ ] Search
+- [ ] Audio playback
+- [ ] Transliteration
+- [ ] Notes
+- [ ] Bookmarks
+- [ ] Commentary
+- [ ] AI
+- [ ] Multi-grantha support
