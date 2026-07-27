@@ -1,0 +1,39 @@
+{
+  "$schema": "https://dge.dev/schema/v1",
+
+  "version": "1.0",
+
+  "grantha": {
+    "id": "",
+    "title": "",
+    "author": "",
+    "language": "",
+    "type": "",
+    "chapters": [],
+    "audioBaseUrl": "",
+    "commentary": [],
+    "scripts": [
+      "Devanagari",
+      "Kannada",
+      "IAST"
+    ]
+  },
+
+  "chapter": {
+    "id": "",
+    "title": "",
+    "verses": []
+  },
+
+  "verse": {
+    "id": "",
+    "number": "",
+    "sanskrit": "",
+    "transliteration": "",
+    "meaning": "",
+    "commentary": "",
+    "audio": "",
+    "tags": [],
+    "notes": ""
+  }
+}
