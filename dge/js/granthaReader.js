@@ -2,7 +2,7 @@
 =========================================================
 Digital Grantha Engine
 Grantha Reader
-Build 013
+Build 015
 =========================================================
 */
 
@@ -12,6 +12,7 @@ class DGEGranthaReader {
 
         this.dataset = [];
         this.currentIndex = 0;
+        this.container = null;
 
     }
 
@@ -39,14 +40,9 @@ class DGEGranthaReader {
         if (this.dataset.length === 0) {
 
             this.container.innerHTML = `
-
-<div class="dgeEmpty">
-
+<div style="padding:40px;text-align:center;font-size:22px;">
 No verses available.
-
-</div>
-
-`;
+</div>`;
 
             return;
 
@@ -57,44 +53,55 @@ No verses available.
 
         this.container.innerHTML = `
 
-<div class="dgeReader">
+<div style="padding:20px;">
 
-<div
-style="
-font-size:14px;
-color:#666;
-margin-bottom:10px;">
+<div style="
+font-size:28px;
+font-weight:bold;
+text-align:center;
+margin-bottom:8px;">
 
-Verse ${this.currentIndex + 1}
-of ${this.dataset.length}
+Digital Grantha Engine
 
 </div>
 
-<div
-style="
-font-size:30px;
-line-height:1.8;
+<div style="
+font-size:17px;
 text-align:center;
-margin-bottom:24px;">
+color:#555;
+margin-bottom:18px;">
+
+Verse ${this.currentIndex + 1}
+/
+${this.dataset.length}
+
+</div>
+
+<hr>
+
+<div style="
+font-size:31px;
+line-height:1.9;
+text-align:center;
+margin-top:22px;
+margin-bottom:30px;">
 
 ${verse.sanskrit || ""}
 
 </div>
 
-<div
-style="
-font-size:19px;
-line-height:1.7;
-margin-bottom:18px;">
+<div style="
+font-size:20px;
+line-height:1.8;
+margin-bottom:24px;">
 
 ${verse.transliteration || ""}
 
 </div>
 
-<div
-style="
-font-size:18px;
-line-height:1.8;">
+<div style="
+font-size:19px;
+line-height:1.9;">
 
 ${verse.meaning || ""}
 
