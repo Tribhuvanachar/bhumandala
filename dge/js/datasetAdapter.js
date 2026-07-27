@@ -2,78 +2,50 @@
 =========================================================
 Digital Grantha Engine
 Dataset Adapter
+Build 010
 =========================================================
 */
 
 class DGEDatasetAdapter {
 
-    constructor() {
+    load(raw) {
 
-        this.dataset = [];
+        if (!Array.isArray(raw)) {
 
-    }
+            return [];
 
-    load(rawDataset) {
+        }
 
-        this.dataset = [];
+        return raw.map((item, index) => ({
 
-        if (!Array.isArray(rawDataset))
-            return this.dataset;
+            id:
+                item.id ?? index + 1,
 
-        rawDataset.forEach((item, index) => {
+            number:
+                item.number ?? index + 1,
 
-            this.dataset.push({
+            sanskrit:
+                item.sanskrit ??
+                item.text ??
+                "",
 
-                id: item.id ?? index + 1,
+            transliteration:
+                item.transliteration ??
+                "",
 
-                number: item.number ?? index + 1,
+            meaning:
+                item.meaning ??
+                "",
 
-                sanskrit:
-                    item.sanskrit ??
-                    item.text ??
-                    "",
+            commentary:
+                item.commentary ??
+                "",
 
-                transliteration:
-                    item.transliteration ??
-                    "",
+            audio:
+                item.audio ??
+                ""
 
-                meaning:
-                    item.meaning ??
-                    "",
-
-                commentary:
-                    item.commentary ??
-                    "",
-
-                audio:
-                    item.audio ??
-                    "",
-
-                raw: item
-
-            });
-
-        });
-
-        return this.dataset;
-
-    }
-
-    count() {
-
-        return this.dataset.length;
-
-    }
-
-    verse(index) {
-
-        return this.dataset[index];
-
-    }
-
-    all() {
-
-        return this.dataset;
+        }));
 
     }
 
