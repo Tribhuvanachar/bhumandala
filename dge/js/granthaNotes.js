@@ -2,95 +2,48 @@
 =========================================================
 Digital Grantha Engine
 Grantha Notes
-Version: 10.1.0 Alpha
+Build 022
 =========================================================
 */
 
-class GranthaNotes {
+document.body.insertAdjacentHTML(
+    "afterbegin",
+    '<div style="background:#009688;color:#fff;padding:6px;font-family:monospace">granthaNotes.js BUILD 022</div>'
+);
 
-    constructor() {
+class DGEGranthaNotes {
 
-        this.storageKey = "dge_notes";
+    constructor(){
 
-        this.notes = {};
-
-    }
-
-    initialize() {
-
-        this.load();
+        this.prefix="DGE_NOTE_";
 
     }
 
-    load() {
+    get(id){
 
-        const saved = localStorage.getItem(this.storageKey);
-
-        if (saved) {
-
-            this.notes = JSON.parse(saved);
-
-        }
+        return localStorage.getItem(
+            this.prefix+id
+        ) || "";
 
     }
 
-    save() {
+    save(id,text){
 
         localStorage.setItem(
 
-            this.storageKey,
+            this.prefix+id,
 
-            JSON.stringify(this.notes)
+            text
 
         );
 
     }
 
-    set(verseId, text) {
+    clear(id){
 
-        this.notes[verseId] = text;
+        localStorage.removeItem(
 
-        this.save();
-
-    }
-
-    get(verseId) {
-
-        return this.notes[verseId] || "";
-
-    }
-
-    remove(verseId) {
-
-        delete this.notes[verseId];
-
-        this.save();
-
-    }
-
-    has(verseId) {
-
-        return verseId in this.notes;
-
-    }
-
-    clear() {
-
-        this.notes = {};
-
-        this.save();
-
-    }
-
-    export() {
-
-        return JSON.stringify(
-
-            this.notes,
-
-            null,
-
-            2
+            this.prefix+id
 
         );
 
@@ -98,5 +51,5 @@ class GranthaNotes {
 
 }
 
-window.GranthaNotes =
-    new GranthaNotes();
+window.DGEGranthaNotes=
+new DGEGranthaNotes();
