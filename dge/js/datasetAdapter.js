@@ -2,7 +2,7 @@
 =========================================================
 Digital Grantha Engine
 Dataset Adapter
-Build 010
+Build 013
 =========================================================
 */
 
@@ -10,42 +10,81 @@ class DGEDatasetAdapter {
 
     load(raw) {
 
-        if (!Array.isArray(raw)) {
+        let root = raw;
+
+        /*
+         * Your data.json is in the form:
+         *
+         * {
+         *   metadata:{...},
+         *   shlokas:{...}
+         * }
+         */
+
+        if (Array.isArray(raw)) {
+
+            root = raw[0];
+
+        }
+
+        if (!root) {
 
             return [];
 
         }
 
-        return raw.map((item, index) => ({
+        if (!root.shlokas) {
 
-            id:
-                item.id ?? index + 1,
+            return [];
 
-            number:
-                item.number ?? index + 1,
+        }
 
-            sanskrit:
-                item.sanskrit ??
-                item.text ??
-                "",
+        const verses = [];
 
-            transliteration:
-                item.transliteration ??
-                "",
+        const keys = Object.keys(root.shlokas)
+            .sort((a, b) => Number(a) - Number(b));
 
-            meaning:
-                item.meaning ??
-                "",
+        for (const key of keys) {
 
-            commentary:
-                item.commentary ??
-                "",
+            const s = root.shlokas[key];
 
-            audio:
-                item.audio ??
-                ""
+            verses.push({
 
-        }));
+                id: Number(key),
+
+                number: Number(key),
+
+                sanskrit:
+                    s.sanskrit ??
+                    s.devanagari ??
+                    s.text ??
+                    "",
+
+                transliteration:
+                    s.transliteration ??
+                    s.itrans ??
+                    "",
+
+                meaning:
+                    s.meaning ??
+                    s.translation ??
+                    "",
+
+                commentary:
+                    s.commentary ??
+                    "",
+
+                audio:
+                    s.audio ??
+                    "",
+
+                raw: s
+
+            });
+
+        }
+
+        return verses;
 
     }
 
