@@ -2,13 +2,13 @@
 =========================================================
 Digital Grantha Engine
 Grantha Bookmarks
-Build 022
+Build 024
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#C2185B;color:#fff;padding:6px;font-family:monospace">granthaBookmarks.js BUILD 022</div>'
+    '<div style="background:#C2185B;color:#fff;padding:6px;font-family:monospace">granthaBookmarks.js BUILD 024</div>'
 );
 
 class DGEGranthaBookmarks {
@@ -19,13 +19,13 @@ class DGEGranthaBookmarks {
 
     }
 
-    load(){
+    getAll(){
 
         try{
 
             return JSON.parse(
                 localStorage.getItem(this.key)
-            )||[];
+            ) || [];
 
         }catch(e){
 
@@ -35,24 +35,30 @@ class DGEGranthaBookmarks {
 
     }
 
-    save(bookmarks){
+    saveAll(list){
 
         localStorage.setItem(
             this.key,
-            JSON.stringify(bookmarks)
+            JSON.stringify(list)
         );
+
+    }
+
+    has(id){
+
+        return this.getAll().includes(id);
 
     }
 
     add(id){
 
-        const bookmarks=this.load();
+        const list=this.getAll();
 
-        if(!bookmarks.includes(id)){
+        if(!list.includes(id)){
 
-            bookmarks.push(id);
+            list.push(id);
 
-            this.save(bookmarks);
+            this.saveAll(list);
 
         }
 
@@ -60,21 +66,41 @@ class DGEGranthaBookmarks {
 
     remove(id){
 
-        this.save(
-
-            this.load().filter(x=>x!==id)
-
+        this.saveAll(
+            this.getAll().filter(x=>x!==id)
         );
 
     }
 
-    has(id){
+    toggle(id){
 
-        return this.load().includes(id);
+        if(this.has(id)){
+
+            this.remove(id);
+
+            return false;
+
+        }
+
+        this.add(id);
+
+        return true;
+
+    }
+
+    count(){
+
+        return this.getAll().length;
+
+    }
+
+    clear(){
+
+        localStorage.removeItem(this.key);
 
     }
 
 }
 
-window.DGEGranthaBookmarks=
+window.DGEGranthaBookmarks =
 new DGEGranthaBookmarks();
