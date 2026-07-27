@@ -2,97 +2,39 @@
 =========================================================
 Digital Grantha Engine
 Grantha Navigator
-Version: 10.1.0 Alpha
 =========================================================
 */
 
-class GranthaNavigator {
+class DGEGranthaNavigator {
 
     initialize(reader) {
 
         this.reader = reader;
 
-        this.bind();
+        this.bindButton("btnFirst", () => this.reader.first());
+        this.bindButton("btnPrevious", () => this.reader.previous());
+        this.bindButton("btnNext", () => this.reader.next());
+        this.bindButton("btnLast", () => this.reader.last());
 
     }
 
-    bind() {
+    bindButton(id, action) {
 
-        this.connect("btnFirst", () => {
+        const button = document.getElementById(id);
 
-            this.reader.first();
+        if (!button) return;
 
-        });
-
-        this.connect("btnPrevious", () => {
-
-            this.reader.previous();
-
-        });
-
-        this.connect("btnNext", () => {
-
-            this.reader.next();
-
-        });
-
-        this.connect("btnLast", () => {
-
-            this.reader.last();
-
-        });
-
-    }
-
-    connect(id, action) {
-
-        const button =
-            document.getElementById(id);
-
-        if (!button)
-            return;
-
-        button.addEventListener(
-
-            "click",
-
-            action
-
-        );
+        button.onclick = action;
 
     }
 
     goto(index) {
 
-        this.reader.render(index);
-
-    }
-
-    next() {
-
-        this.reader.next();
-
-    }
-
-    previous() {
-
-        this.reader.previous();
-
-    }
-
-    first() {
-
-        this.reader.first();
-
-    }
-
-    last() {
-
-        this.reader.last();
+        this.reader.show(index);
 
     }
 
 }
 
-window.GranthaNavigator =
-    new GranthaNavigator();
+window.DGEGranthaNavigator =
+    new DGEGranthaNavigator();
