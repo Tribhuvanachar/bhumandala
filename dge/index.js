@@ -2,13 +2,13 @@
 =========================================================
 Digital Grantha Engine
 Startup
-Build 022
+Build 023
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#008000;color:#fff;padding:6px;font-family:monospace">index.js BUILD 022</div>'
+    '<div style="background:#008000;color:#fff;padding:6px;font-family:monospace">index.js BUILD 023</div>'
 );
 
 const debug=document.getElementById("debugLog");
@@ -43,7 +43,7 @@ window.onerror=function(message,source,line,column,error){
 
 try{
 
-log("========== DGE BUILD 022 ==========");
+log("========== DGE BUILD 023 ==========");
 
 const manager=window.DGEGranthaManager;
 
@@ -68,16 +68,33 @@ log("Verse Count : "+grantha.verses.length);
 
 window.DGEGranthaReader.initialize();
 
-/* Temporary compatibility until Reader Build 022 */
 window.DGEGranthaReader.load(grantha.verses);
 
 log("✓ Reader initialized");
 
 window.DGEGranthaNavigator.initialize(
-window.DGEGranthaReader
+    window.DGEGranthaReader
 );
 
 log("✓ Navigator initialized");
+
+/* -------- Search Integration -------- */
+
+if(window.DGEGranthaSearch){
+
+    window.DGEGranthaSearch.initialize(
+
+        window.DGEGranthaReader,
+
+        grantha.verses
+
+    );
+
+    log("✓ Search initialized");
+
+}
+
+/* ----------------------------------- */
 
 log("========== DGE READY ==========");
 
