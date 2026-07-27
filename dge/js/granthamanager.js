@@ -1,3 +1,21 @@
+/*
+=========================================
+Digital Grantha Engine
+
+CORE MODULE
+
+Responsibilities
+
+✓ Load version.json
+✓ Load granthas.json
+✓ Load config.json
+✓ Load data.json
+✓ Initialize DatasetAdapter
+✓ Initialize GranthaReader
+✓ Notify remaining modules
+
+=========================================
+*/
 export class GranthaManager{
 async loadCatalog(){const r=await fetch('data/granthas.json');this.catalog=await r.json();return this.catalog;}
 async loadDefault(){if(!this.catalog)await this.loadCatalog();this.current=this.catalog.granthas.find(g=>g.id===this.catalog.defaultGrantha);return this.current;}
