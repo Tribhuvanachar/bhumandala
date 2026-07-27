@@ -1,8 +1,15 @@
-[
-  {
-    "id": "pns",
-    "title": "Prahlada Kruta Narasimha Stotra",
-    "data": "data/data_pns.json",
-    "enabled": true
-  }
-]
+{
+  "version": "1.0",
+  "defaultGrantha": "pns",
+  "granthas": [
+    {
+      "id": "pns",
+      "title": "Prahlada Kruta Narasimha Stotra",
+      "language": "Sanskrit",
+      "type": "Stotra",
+      "config": "data/pns/config.json",
+      "dataset": "data/pns/data.json",
+      "enabled": true
+    }
+  ]
+}
