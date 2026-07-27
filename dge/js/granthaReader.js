@@ -2,6 +2,7 @@
 =========================================================
 Digital Grantha Engine
 Grantha Reader
+Build 013
 =========================================================
 */
 
@@ -10,10 +11,7 @@ class DGEGranthaReader {
     constructor() {
 
         this.dataset = [];
-
-        this.index = 0;
-
-        this.container = null;
+        this.currentIndex = 0;
 
     }
 
@@ -28,60 +26,75 @@ class DGEGranthaReader {
 
         this.dataset = dataset || [];
 
-        this.index = 0;
+        this.currentIndex = 0;
 
-        this.show(0);
+        this.render();
 
     }
 
-    show(index) {
+    render() {
 
-        if (!this.container)
-            return;
+        if (!this.container) return;
 
-        if (!this.dataset.length) {
+        if (this.dataset.length === 0) {
 
-            this.container.innerHTML =
-                "<p>No verses found.</p>";
+            this.container.innerHTML = `
+
+<div class="dgeEmpty">
+
+No verses available.
+
+</div>
+
+`;
 
             return;
 
         }
 
-        if (index < 0)
-            index = 0;
-
-        if (index >= this.dataset.length)
-            index = this.dataset.length - 1;
-
-        this.index = index;
-
         const verse =
-            this.dataset[index];
+            this.dataset[this.currentIndex];
 
         this.container.innerHTML = `
 
-<div class="dgeVerse">
+<div class="dgeReader">
 
-<div class="dgeVerseNumber">
+<div
+style="
+font-size:14px;
+color:#666;
+margin-bottom:10px;">
 
-Verse ${verse.number}
+Verse ${this.currentIndex + 1}
+of ${this.dataset.length}
 
 </div>
 
-<div class="dgeSanskrit">
+<div
+style="
+font-size:30px;
+line-height:1.8;
+text-align:center;
+margin-bottom:24px;">
 
-${verse.sanskrit}
+${verse.sanskrit || ""}
 
 </div>
 
-<div class="dgeTransliteration">
+<div
+style="
+font-size:19px;
+line-height:1.7;
+margin-bottom:18px;">
 
 ${verse.transliteration || ""}
 
 </div>
 
-<div class="dgeMeaning">
+<div
+style="
+font-size:18px;
+line-height:1.8;">
 
 ${verse.meaning || ""}
 
@@ -93,27 +106,44 @@ ${verse.meaning || ""}
 
     }
 
-    next() {
+    first() {
 
-        this.show(this.index + 1);
+        this.currentIndex = 0;
+
+        this.render();
 
     }
 
     previous() {
 
-        this.show(this.index - 1);
+        if (this.currentIndex > 0) {
+
+            this.currentIndex--;
+
+            this.render();
+
+        }
 
     }
 
-    first() {
+    next() {
 
-        this.show(0);
+        if (this.currentIndex < this.dataset.length - 1) {
+
+            this.currentIndex++;
+
+            this.render();
+
+        }
 
     }
 
     last() {
 
-        this.show(this.dataset.length - 1);
+        this.currentIndex =
+            this.dataset.length - 1;
+
+        this.render();
 
     }
 
