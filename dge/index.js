@@ -2,13 +2,13 @@
 =========================================================
 Digital Grantha Engine
 Startup
-Build 019
+Build 020
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#008000;color:#fff;padding:6px;font-family:monospace">index.js BUILD 019</div>'
+    '<div style="background:#008000;color:#fff;padding:6px;font-family:monospace">index.js BUILD 020</div>'
 );
 
 const debug = document.getElementById("debugLog");
@@ -18,16 +18,55 @@ function log(msg){
     if(debug) debug.value += msg + "\n";
 }
 
-log("========== DGE BUILD 019 ==========");
+(async()=>{
 
-log("typeof window.DGEGranthaManager = " + typeof window.DGEGranthaManager);
-log("typeof window.DGEDatasetAdapter = " + typeof window.DGEDatasetAdapter);
-log("typeof window.DGEGranthaReader = " + typeof window.DGEGranthaReader);
-log("typeof window.DGEGranthaNavigator = " + typeof window.DGEGranthaNavigator);
-log("typeof window.DGEGranthaCommentary = " + typeof window.DGEGranthaCommentary);
+try{
 
-if (window.DGEGranthaManager) {
-    log("typeof start = " + typeof window.DGEGranthaManager.start);
+log("========== DGE BUILD 020 ==========");
+
+const manager = window.DGEGranthaManager;
+
+await manager.start();
+
+log("✓ GranthaManager started");
+
+const dataset =
+window.DGEDatasetAdapter.getDataset
+? window.DGEDatasetAdapter.getDataset()
+: window.DGEDatasetAdapter.load(
+manager.getDataset()
+);
+
+log("✓ Dataset adapted");
+
+log("Verse Count : "+dataset.length);
+
+window.DGEGranthaReader.initialize();
+
+window.DGEGranthaReader.load(dataset);
+
+log("✓ Reader initialized");
+
+window.DGEGranthaNavigator.initialize(
+window.DGEGranthaReader
+);
+
+log("✓ Navigator initialized");
+
+log("========== DGE READY ==========");
+
+}catch(e){
+
+log("STARTUP FAILED");
+
+log(e.message);
+
+if(e.stack){
+
+log(e.stack);
+
 }
 
-log("========== END ==========");
+}
+
+})();
