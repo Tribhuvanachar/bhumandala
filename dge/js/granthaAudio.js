@@ -2,13 +2,13 @@
 =========================================================
 Digital Grantha Engine
 Grantha Audio
-Build 022
+Build 023
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#3F51B5;color:#fff;padding:6px;font-family:monospace">granthaAudio.js BUILD 022</div>'
+    '<div style="background:#3F51B5;color:#fff;padding:6px;font-family:monospace">granthaAudio.js BUILD 023</div>'
 );
 
 class DGEGranthaAudio {
@@ -25,11 +25,23 @@ class DGEGranthaAudio {
 
     }
 
-    play(url){
+    playVerse(metadata,verseNo){
 
         if(!this.player) return;
 
-        this.player.src=url;
+        if(!metadata) return;
+
+        const base=
+            metadata.archiveBaseUrl;
+
+        const prefix=
+            metadata.filePrefix;
+
+        const ext=
+            metadata.fileExtension;
+
+        this.player.src=
+            `${base}${prefix}${verseNo}${ext}`;
 
         this.player.play();
 
@@ -37,17 +49,11 @@ class DGEGranthaAudio {
 
     stop(){
 
-        if(!this.player) return;
+        if(this.player){
 
-        this.player.pause();
+            this.player.pause();
 
-    }
-
-    setRate(rate){
-
-        if(!this.player) return;
-
-        this.player.playbackRate=rate;
+        }
 
     }
 
