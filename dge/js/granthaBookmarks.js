@@ -2,95 +2,79 @@
 =========================================================
 Digital Grantha Engine
 Grantha Bookmarks
-Version: 10.1.0 Alpha
+Build 022
 =========================================================
 */
 
-class GranthaBookmarks {
+document.body.insertAdjacentHTML(
+    "afterbegin",
+    '<div style="background:#C2185B;color:#fff;padding:6px;font-family:monospace">granthaBookmarks.js BUILD 022</div>'
+);
 
-    constructor() {
+class DGEGranthaBookmarks {
 
-        this.storageKey = "dge_bookmarks";
+    constructor(){
 
-        this.bookmarks = [];
-
-    }
-
-    initialize() {
-
-        this.load();
+        this.key="DGE_BOOKMARKS";
 
     }
 
-    load() {
+    load(){
 
-        const saved = localStorage.getItem(this.storageKey);
+        try{
 
-        if (saved) {
+            return JSON.parse(
+                localStorage.getItem(this.key)
+            )||[];
 
-            this.bookmarks = JSON.parse(saved);
+        }catch(e){
+
+            return [];
 
         }
 
     }
 
-    save() {
+    save(bookmarks){
 
         localStorage.setItem(
-
-            this.storageKey,
-
-            JSON.stringify(this.bookmarks)
-
+            this.key,
+            JSON.stringify(bookmarks)
         );
 
     }
 
-    add(verseId) {
+    add(id){
 
-        if (!this.bookmarks.includes(verseId)) {
+        const bookmarks=this.load();
 
-            this.bookmarks.push(verseId);
+        if(!bookmarks.includes(id)){
 
-            this.save();
+            bookmarks.push(id);
+
+            this.save(bookmarks);
 
         }
 
     }
 
-    remove(verseId) {
+    remove(id){
 
-        this.bookmarks = this.bookmarks.filter(
+        this.save(
 
-            id => id !== verseId
+            this.load().filter(x=>x!==id)
 
         );
 
-        this.save();
-
     }
 
-    has(verseId) {
+    has(id){
 
-        return this.bookmarks.includes(verseId);
-
-    }
-
-    getAll() {
-
-        return [...this.bookmarks];
-
-    }
-
-    clear() {
-
-        this.bookmarks = [];
-
-        this.save();
+        return this.load().includes(id);
 
     }
 
 }
 
-window.GranthaBookmarks =
-    new GranthaBookmarks();
+window.DGEGranthaBookmarks=
+new DGEGranthaBookmarks();
