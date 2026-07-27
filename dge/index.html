@@ -1,21 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Digital Grantha Engine v10</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DGE v10.1 Alpha 002 Starter</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#f8f5ef}
+header{background:#6b1d1d;color:#fff;padding:16px}
+main{max-width:900px;margin:auto;padding:20px}
+.card{background:#fff;border-radius:12px;padding:16px;margin:16px 0;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+button{padding:10px 16px}
+</style>
 </head>
-
 <body>
+<header>
+<h1>Digital Grantha Engine</h1>
+<div>v10.1.0 Alpha 002 Starter</div>
+</header>
 
-<h2>Digital Grantha Engine</h2>
+<main>
+<div class="card">
+<h2>Status</h2>
+<p>This starter is intended to become your future DGE index.html.</p>
+<p id="status">Waiting...</p>
+<button onclick="loadConfig()">Load config.json</button>
+</div>
 
-<p>
-Version:
-<b>v10.1.0-alpha-001</b>
-</p>
+<div class="card">
+<h2>Engine Log</h2>
+<pre id="log"></pre>
+</div>
+</main>
 
-<p>
-This is the new development branch.
-</p>
+<script>
+const DGE={
+ version:"10.1.0-alpha.002",
+ log(m){
+   document.getElementById("log").textContent+=m+"\n";
+   console.log(m);
+ }
+};
 
+async function loadConfig(){
+ try{
+   const r=await fetch("config.json");
+   const cfg=await r.json();
+   document.getElementById("status").textContent="Loaded config.json";
+   DGE.log("Config loaded");
+   DGE.log(JSON.stringify(cfg,null,2));
+ }catch(e){
+   document.getElementById("status").textContent="config.json not found";
+   DGE.log(e.toString());
+ }
+}
+</script>
 </body>
 </html>
