@@ -2,30 +2,41 @@
 =========================================================
 Digital Grantha Engine
 Dataset Adapter
-Build 020
+Build 021
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#f9a825;color:#000;padding:6px;font-family:monospace">datasetAdapter.js BUILD 020</div>'
+    '<div style="background:#fbc02d;color:#000;padding:6px;font-family:monospace">datasetAdapter.js BUILD 021</div>'
 );
 
 class DGEDatasetAdapter {
 
     load(raw) {
 
-        if (!raw || !raw.shlokas)
-            return [];
+        if (!raw) {
 
-        const verses = [];
+            return {
 
-        const keys = Object.keys(raw.shlokas)
+                metadata:{},
+
+                verses:[]
+
+            };
+
+        }
+
+        const verses=[];
+
+        const shlokas=raw.shlokas||{};
+
+        const keys=Object.keys(shlokas)
             .sort((a,b)=>Number(a)-Number(b));
 
         for(const key of keys){
 
-            const s = raw.shlokas[key];
+            const s=shlokas[key];
 
             verses.push({
 
@@ -33,13 +44,13 @@ class DGEDatasetAdapter {
 
                 number:Number(key),
 
-                sanskrit:s.sa || "",
+                sanskrit:s.sa||"",
 
-                transliteration:s.itrans || "",
+                transliteration:s.itrans||"",
 
-                meaning:s.en || "",
+                meaning:s.en||"",
 
-                commentary:s.commentaries || {},
+                commentary:s.commentaries||{},
 
                 raw:s
 
@@ -47,7 +58,13 @@ class DGEDatasetAdapter {
 
         }
 
-        return verses;
+        return{
+
+            metadata:raw.metadata||{},
+
+            verses:verses
+
+        };
 
     }
 
@@ -59,5 +76,5 @@ class DGEDatasetAdapter {
 
 }
 
-window.DGEDatasetAdapter =
-    new DGEDatasetAdapter();
+window.DGEDatasetAdapter=
+new DGEDatasetAdapter();
