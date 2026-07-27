@@ -1,1 +1,1 @@
-
+import {GranthaManager} from './granthaManager.js';import {normalize} from './adapter.js';import {renderVerse} from './reader.js';(async()=>{const gm=new GranthaManager();const {data}=await gm.loadCurrent();const verses=normalize(data);const el=document.getElementById('readerCard');if(el&&verses.length)renderVerse(el,verses[0]);})();
