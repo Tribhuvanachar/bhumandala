@@ -2,49 +2,39 @@
 =========================================================
 Digital Grantha Engine
 Startup
-Version: 10.1.0 Alpha
 =========================================================
 */
 
-(async function () {
+(async () => {
 
     try {
 
-        await GranthaManager.start();
+        await DGEGranthaManager.start();
 
-        const dataset = DatasetAdapter.load(
-            GranthaManager.getDataset()
+        const dataset =
+            DGEDatasetAdapter.load(
+                DGEGranthaManager.getDataset()
+            );
+
+        DGEGranthaReader.initialize();
+
+        DGEGranthaReader.load(dataset);
+
+        DGEGranthaNavigator.initialize(
+            DGEGranthaReader
         );
 
-        GranthaReader.initialize(
-            "readerCard"
-        );
+        GranthaSearch.initialize(dataset);
 
-        GranthaReader.load(dataset);
+        GranthaAudio.initialize("audioPlayer");
 
-        GranthaNavigator.initialize(
-            GranthaReader
-        );
-
-        GranthaSearch.initialize(
-            dataset
-        );
-
-        GranthaAudio.initialize(
-            "audioPlayer"
-        );
-
-        GranthaAudio.load(
-            dataset
-        );
+        GranthaAudio.load(dataset);
 
         GranthaNotes.initialize();
 
         GranthaBookmarks.initialize();
 
-        GranthaCommentary.initialize(
-            dataset
-        );
+        GranthaCommentary.initialize(dataset);
 
         const title =
             document.getElementById(
@@ -54,13 +44,11 @@ Version: 10.1.0 Alpha
         if (title) {
 
             title.textContent =
-                GranthaManager.getTitle();
+                DGEGranthaManager.getTitle();
 
         }
 
-        console.log(
-            "DGE Started Successfully"
-        );
+        console.log("DGE Ready");
 
     }
 
@@ -68,10 +56,7 @@ Version: 10.1.0 Alpha
 
         console.error(error);
 
-        alert(
-            "DGE Startup Failed.\n\n" +
-            error.message
-        );
+        alert(error.message);
 
     }
 
