@@ -1,38 +1,26 @@
-window.onerror = function (message, source, line, column, error) {
+const debug = document.getElementById("debugLog");
 
-    const box = document.getElementById("debugLog");
-
-    if (box) {
-
-        box.value +=
-            "\n\nERROR: " + message +
-            "\nFILE : " + source +
-            "\nLINE : " + line +
-            "\nCOL  : " + column;
-
-        if (error && error.stack) {
-
-            box.value +=
-                "\n\nSTACK:\n" + error.stack;
-
-        }
-
+function log(msg) {
+    console.log(msg);
+    if (debug) {
+        debug.value += msg + "\n";
     }
-
-    return true;
-
-};
-
-function log(message) {
-
-    const box = document.getElementById("debugLog");
-
-    if (box) {
-
-        box.value += message + "\n";
-
-    }
-
 }
 
-log("INDEX STARTED");
+window.onerror = function(message, source, line, col, error) {
+    log("ERROR: " + message);
+    if (error && error.stack) {
+        log(error.stack);
+    }
+};
+
+(async function () {
+
+    log("DGE Build 007");
+    log("index.js loaded");
+
+    log("typeof DGEGranthaManager = " + typeof DGEGranthaManager);
+    log("typeof DGEDatasetAdapter = " + typeof DGEDatasetAdapter);
+    log("typeof DGEGranthaReader = " + typeof DGEGranthaReader);
+
+})();
