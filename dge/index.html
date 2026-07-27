@@ -38,28 +38,6 @@ button{padding:10px 16px}
 <pre id="log"></pre>
 </div>
 </main>
-
-<script>
-const DGE={
- version:"10.1.0-alpha.002",
- log(m){
-   document.getElementById("log").textContent+=m+"\n";
-   console.log(m);
- }
-};
-
-async function loadConfig(){
- try{
-   const r=await fetch("config.json");
-   const cfg=await r.json();
-   document.getElementById("status").textContent="Loaded config.json";
-   DGE.log("Config loaded");
-   DGE.log(JSON.stringify(cfg,null,2));
- }catch(e){
-   document.getElementById("status").textContent="config.json not found";
-   DGE.log(e.toString());
- }
-}
-</script>
+<script src="js/engine.js"></script>
 </body>
 </html>
