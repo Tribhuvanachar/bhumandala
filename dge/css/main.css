@@ -1,1 +1,214 @@
-body{font-family:system-ui,sans-serif;margin:0;padding:1rem;background:#faf7f2}header{padding:1rem;background:#6b1d1d;color:#fff}#readerCard{background:#fff;padding:1rem;border-radius:8px;margin-top:1rem;}
+/* =========================================================
+   Digital Grantha Engine
+   Main Style
+   ========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    font-family:system-ui,-apple-system,sans-serif;
+
+    background:#f5f1e8;
+
+    color:#222;
+
+}
+
+header{
+
+    background:#6b1d1d;
+
+    color:white;
+
+    padding:16px;
+
+    text-align:center;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+
+}
+
+main{
+
+    max-width:1000px;
+
+    margin:auto;
+
+    padding:20px;
+
+}
+
+#readerCard{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:24px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.10);
+
+    min-height:220px;
+
+}
+
+.dgeVerseNumber{
+
+    font-size:14px;
+
+    color:#666;
+
+    margin-bottom:16px;
+
+}
+
+.dgeSanskrit{
+
+    font-size:2rem;
+
+    line-height:1.8;
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+.dgeTransliteration{
+
+    font-size:1.2rem;
+
+    color:#444;
+
+    line-height:1.7;
+
+    margin-bottom:20px;
+
+}
+
+.dgeMeaning{
+
+    font-size:1rem;
+
+    line-height:1.8;
+
+}
+
+#navigationSection{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+    margin:20px 0;
+
+}
+
+button{
+
+    padding:10px 18px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    background:#6b1d1d;
+
+    color:white;
+
+    font-size:16px;
+
+}
+
+button:hover{
+
+    opacity:.9;
+
+}
+
+#searchInput{
+
+    width:100%;
+
+    padding:12px;
+
+    font-size:16px;
+
+    margin-bottom:10px;
+
+}
+
+.searchResult{
+
+    padding:10px;
+
+    border-bottom:1px solid #ddd;
+
+    cursor:pointer;
+
+}
+
+.searchResult:hover{
+
+    background:#eee;
+
+}
+
+#audioSection{
+
+    margin-top:20px;
+
+}
+
+#audioPlayer{
+
+    width:100%;
+
+}
+
+#commentaryPanel{
+
+    margin-top:24px;
+
+    padding:18px;
+
+    border-radius:10px;
+
+    background:#fff8dc;
+
+    border-left:5px solid #6b1d1d;
+
+}
+
+@media(max-width:768px){
+
+    main{
+
+        padding:12px;
+
+    }
+
+    .dgeSanskrit{
+
+        font-size:1.5rem;
+
+    }
+
+    button{
+
+        flex:1;
+
+        font-size:14px;
+
+    }
+
+}
