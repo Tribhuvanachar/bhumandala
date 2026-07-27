@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+
+  "autoload": [
+
+    "engine",
+    "reader",
+    "audio",
+    "search",
+    "navigation",
+    "bookmarks",
+    "notes",
+    "commentary",
+    "ai"
+
+  ]
+}
