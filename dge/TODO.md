@@ -1,25 +1,37 @@
 # DGE TODO
 
-## Priority 1 (Must Have)
-- [ ] Load config.json
-- [ ] Load engine.json
-- [ ] Load version.json
-- [ ] Load granthas.json
-- [ ] Load selected dataset
-- [ ] Render shlokas
-- [ ] Audio playback
-- [ ] Search
+## HIGH PRIORITY
 
-## Priority 2 (Should Have)
-- [ ] Bookmarks
-- [ ] Notes
-- [ ] Recently played
-- [ ] Resume last position
-- [ ] Theme switcher
+- [ ] Reader v2 (single-page reading experience)
+- [ ] Commentary Explorer
+- [ ] Verse Drawer
+- [ ] Audio playback integration
+- [ ] Bookmark button
+- [ ] Notes editor
+- [ ] Copy verse
+- [ ] Share verse
 
-## Priority 3 (Future)
-- [ ] Multiple granthas
-- [ ] Cross references
-- [ ] Commentary
-- [ ] Offline mode
-- [ ] AI assistant
+---
+
+## MEDIUM PRIORITY
+
+- [ ] Multiple Granthas
+- [ ] OCR Import
+- [ ] Full Search
+- [ ] Settings
+- [ ] Dark Mode
+
+---
+
+## LOW PRIORITY
+
+- [ ] Themes
+- [ ] Statistics
+- [ ] Reading History
+- [ ] Export Notes
+- [ ] Import Notes
+
+---
+
+Current Stable Build:
+024
