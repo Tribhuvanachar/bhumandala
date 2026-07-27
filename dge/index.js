@@ -1,22 +1,22 @@
-alert("INDEX BUILD 005");
+alert("INDEX BUILD 006");
 
 (async () => {
 
+try {
+
+    alert("Before start");
+
     await DGEGranthaManager.start();
 
-    alert("GranthaManager OK");
+    alert("After start");
 
-    const dataset =
-        DGEDatasetAdapter.load(
-            DGEGranthaManager.getDataset()
-        );
+}
+catch(e){
 
-    alert("Dataset: " + dataset.length);
+    alert(e.message);
 
-    DGEGranthaReader.initialize();
+    alert(e.stack);
 
-    DGEGranthaReader.load(dataset);
-
-    alert("Reader OK");
+}
 
 })();
