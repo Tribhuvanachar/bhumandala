@@ -1,0 +1,8 @@
+[
+  {
+    "id": "pns",
+    "title": "Prahlada Kruta Narasimha Stotra",
+    "data": "data/data_pns.json",
+    "enabled": true
+  }
+]
