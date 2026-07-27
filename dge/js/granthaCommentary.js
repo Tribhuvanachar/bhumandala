@@ -2,99 +2,109 @@
 =========================================================
 Digital Grantha Engine
 Grantha Commentary
-Version: 10.1.0 Alpha
+Build 016
 =========================================================
 */
 
-class GranthaCommentary {
+class DGEGranthaCommentary {
 
     constructor() {
 
         this.dataset = [];
 
-        this.enabled = false;
+        this.enabled = {};
 
     }
 
-    initialize(dataset = []) {
+    initialize(dataset) {
 
-        this.dataset = dataset;
-
-    }
-
-    enable() {
-
-        this.enabled = true;
-
-        this.refresh();
+        this.dataset = dataset || [];
 
     }
 
-    disable() {
+    getNames(index) {
 
-        this.enabled = false;
+        if (!this.dataset[index])
+            return [];
 
-        this.refresh();
+        const commentary =
+            this.dataset[index].commentary || {};
 
-    }
-
-    toggle() {
-
-        this.enabled = !this.enabled;
-
-        this.refresh();
+        return Object.keys(commentary);
 
     }
 
-    isEnabled() {
+    get(index, name) {
 
-        return this.enabled;
-
-    }
-
-    get(verseIndex) {
-
-        if (
-
-            verseIndex < 0 ||
-
-            verseIndex >= this.dataset.length
-
-        ) {
-
+        if (!this.dataset[index])
             return "";
 
-        }
+        const commentary =
+            this.dataset[index].commentary || {};
 
-        return this.dataset[verseIndex].commentary || "";
+        return commentary[name] || "";
 
     }
 
-    refresh() {
+    enable(name) {
 
-        const panel = document.getElementById(
+        this.enabled[name] = true;
 
-            "commentaryPanel"
+    }
 
-        );
+    disable(name) {
 
-        if (!panel)
+        delete this.enabled[name];
 
-            return;
+    }
 
-        if (!this.enabled) {
+    isEnabled(name) {
 
-            panel.style.display = "none";
+        return !!this.enabled[name];
 
-            return;
+    }
 
-        }
+    enableAll(index) {
 
-        panel.style.display = "block";
+        this.getNames(index).forEach(name => {
+
+            this.enabled[name] = true;
+
+        });
+
+    }
+
+    disableAll() {
+
+        this.enabled = {};
+
+    }
+
+    getEnabled(index) {
+
+        const result = [];
+
+        this.getNames(index).forEach(name => {
+
+            if (this.enabled[name]) {
+
+                result.push({
+
+                    name,
+
+                    text: this.get(index, name)
+
+                });
+
+            }
+
+        });
+
+        return result;
 
     }
 
 }
 
-window.GranthaCommentary =
-    new GranthaCommentary();
+window.DGEGranthaCommentary =
+    new DGEGranthaCommentary();
