@@ -2,84 +2,63 @@
 =========================================================
 Digital Grantha Engine
 Grantha Search
-Build 013
+Build 022
 =========================================================
 */
 
+document.body.insertAdjacentHTML(
+    "afterbegin",
+    '<div style="background:#424242;color:#fff;padding:6px;font-family:monospace">granthaSearch.js BUILD 022</div>'
+);
+
 class DGEGranthaSearch {
 
-    initialize(dataset) {
+    constructor() {
 
-        this.dataset = dataset || [];
-
-        this.input =
-            document.getElementById("searchInput");
-
-        this.results =
-            document.getElementById("searchResults");
-
-        if (!this.input) return;
-
-        this.input.addEventListener(
-            "input",
-            () => this.search()
-        );
+        this.reader = null;
+        this.dataset = [];
 
     }
 
-    search() {
+    initialize(reader, dataset) {
 
-        const query =
-            this.input.value
-                .trim()
-                .toLowerCase();
+        this.reader = reader;
+        this.dataset = dataset || [];
 
-        if (!query) {
+        const box = document.getElementById("searchBox");
 
-            this.results.innerHTML = "";
+        if (!box) return;
 
-            return;
+        box.oninput = () => {
 
-        }
+            const q = box.value.trim().toLowerCase();
 
-        const matches =
-            this.dataset.filter(v =>
+            if (!q)
+                return;
 
-                (v.sanskrit || "")
-                    .toLowerCase()
-                    .includes(query)
+            const index = this.dataset.findIndex(v =>
 
-                ||
+                (v.sanskrit || "").toLowerCase().includes(q) ||
 
-                (v.transliteration || "")
-                    .toLowerCase()
-                    .includes(query)
+                (v.transliteration || "").toLowerCase().includes(q) ||
 
-                ||
-
-                (v.meaning || "")
-                    .toLowerCase()
-                    .includes(query)
+                (v.meaning || "").toLowerCase().includes(q)
 
             );
 
-        this.results.innerHTML =
-            matches
-                .slice(0,20)
-                .map(v =>
+            if (index >= 0) {
 
-`<div style="padding:8px;border-bottom:1px solid #ddd">
+                this.reader.currentIndex = index;
 
-<b>Verse ${v.number}</b>
+                this.reader.render();
 
-</div>`
+            }
 
-                )
-                .join("");
+        };
 
     }
 
 }
 
-window.GranthaSearch =
+window.DGEGranthaSearch =
     new DGEGranthaSearch();
