@@ -2,68 +2,49 @@
 =========================================================
 Digital Grantha Engine
 Grantha Manager
-Version: 10.1.0 Alpha
 =========================================================
 */
 
-class GranthaManager {
+class DGEGranthaManager {
 
     constructor() {
-        this.version = null;
-        this.catalog = null;
-        this.currentGrantha = null;
-        this.currentConfig = null;
-        this.currentDataset = null;
+        this.version = {};
+        this.catalog = {};
+        this.current = {};
+        this.config = {};
+        this.dataset = [];
     }
 
     async start() {
 
         await this.loadVersion();
-
         await this.loadCatalog();
-
-        await this.loadDefaultGrantha();
-
+        await this.loadCurrent();
         await this.loadConfig();
-
         await this.loadDataset();
-
-        console.log(
-            "Grantha Loaded:",
-            this.currentConfig.title
-        );
 
     }
 
     async loadVersion() {
 
-        const response =
-            await fetch("version.json");
-
-        this.version =
-            await response.json();
+        const r = await fetch("version.json");
+        this.version = await r.json();
 
     }
 
     async loadCatalog() {
 
-        const response =
-            await fetch("data/granthas.json");
-
-        this.catalog =
-            await response.json();
+        const r = await fetch("data/granthas.json");
+        this.catalog = await r.json();
 
     }
 
-    async loadDefaultGrantha() {
+    async loadCurrent() {
 
-        const id =
-            this.catalog.defaultGrantha;
-
-        this.currentGrantha =
+        this.current =
             this.catalog.granthas.find(
 
-                g => g.id === id
+                g => g.id === this.catalog.defaultGrantha
 
             );
 
@@ -71,50 +52,37 @@ class GranthaManager {
 
     async loadConfig() {
 
-        const response =
-            await fetch(
+        const r =
+            await fetch(this.current.config);
 
-                this.currentGrantha.config
-
-            );
-
-        this.currentConfig =
-            await response.json();
+        this.config =
+            await r.json();
 
     }
 
     async loadDataset() {
 
-        const response =
-            await fetch(
+        const r =
+            await fetch(this.current.dataset);
 
-                this.currentGrantha.dataset
-
-            );
-
-        this.currentDataset =
-            await response.json();
-
-    }
-
-    getDataset() {
-
-        return this.currentDataset;
-
-    }
-
-    getConfig() {
-
-        return this.currentConfig;
+        this.dataset =
+            await r.json();
 
     }
 
     getTitle() {
 
-        return this.currentConfig.title;
+        return this.config.title;
+
+    }
+
+    getDataset() {
+
+        return this.dataset;
 
     }
 
 }
 
-window.DGEGranthaManager = new GranthaManager();
+window.DGEGranthaManager =
+    new DGEGranthaManager();
