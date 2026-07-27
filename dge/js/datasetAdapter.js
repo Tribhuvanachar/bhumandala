@@ -2,85 +2,58 @@
 =========================================================
 Digital Grantha Engine
 Dataset Adapter
-Version: 10.1.0 Alpha
 =========================================================
 */
 
-class DatasetAdapter {
+class DGEDatasetAdapter {
 
     constructor() {
 
-        this.rawData = [];
-
         this.dataset = [];
 
     }
 
-    load(data) {
-
-        this.rawData = data;
+    load(rawDataset) {
 
         this.dataset = [];
 
-        if (Array.isArray(data)) {
+        if (!Array.isArray(rawDataset))
+            return this.dataset;
 
-            data.forEach((item, index) => {
+        rawDataset.forEach((item, index) => {
 
-                this.dataset.push(
+            this.dataset.push({
 
-                    this.normalize(item, index)
+                id: item.id ?? index + 1,
 
-                );
+                number: item.number ?? index + 1,
+
+                sanskrit:
+                    item.sanskrit ??
+                    item.text ??
+                    "",
+
+                transliteration:
+                    item.transliteration ??
+                    "",
+
+                meaning:
+                    item.meaning ??
+                    "",
+
+                commentary:
+                    item.commentary ??
+                    "",
+
+                audio:
+                    item.audio ??
+                    "",
+
+                raw: item
 
             });
 
-        }
-
-        return this.dataset;
-
-    }
-
-    normalize(item, index) {
-
-        return {
-
-            id: item.id || index + 1,
-
-            number: item.number || index + 1,
-
-            title: item.title || "",
-
-            sanskrit:
-                item.sanskrit ||
-                item.text ||
-                "",
-
-            transliteration:
-                item.transliteration || "",
-
-            meaning:
-                item.meaning || "",
-
-            commentary:
-                item.commentary || "",
-
-            audio:
-                item.audio || "",
-
-            notes:
-                item.notes || []
-
-        };
-
-    }
-
-    getVerse(index) {
-
-        return this.dataset[index];
-
-    }
-
-    getAll() {
+        });
 
         return this.dataset;
 
@@ -92,7 +65,19 @@ class DatasetAdapter {
 
     }
 
+    verse(index) {
+
+        return this.dataset[index];
+
+    }
+
+    all() {
+
+        return this.dataset;
+
+    }
+
 }
 
-window.DatasetAdapter =
-    new DatasetAdapter();
+window.DGEDatasetAdapter =
+    new DGEDatasetAdapter();
