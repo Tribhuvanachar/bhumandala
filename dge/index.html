@@ -101,26 +101,28 @@ style="display:none;">
 
 </main>
 
-<script src="js/granthaManager.js"></script>
+<script>
+const BUILD = Date.now();
 
-<script src="js/datasetAdapter.js"></script>
+[
+"js/granthaManager.js",
+"js/datasetAdapter.js",
+"js/granthaReader.js",
+"js/granthaNavigator.js",
+"js/granthaSearch.js",
+"js/granthaAudio.js",
+"js/granthaNotes.js",
+"js/granthaBookmarks.js",
+"js/granthaCommentary.js",
+"index.js"
+].forEach(file => {
 
-<script src="js/granthaReader.js"></script>
+    const s = document.createElement("script");
+    s.src = file + "?v=" + BUILD;
+    document.body.appendChild(s);
 
-<script src="js/granthaNavigator.js"></script>
-
-<script src="js/granthaSearch.js"></script>
-
-<script src="js/granthaAudio.js"></script>
-
-<script src="js/granthaNotes.js"></script>
-
-<script src="js/granthaBookmarks.js"></script>
-
-<script src="js/granthaCommentary.js"></script>
-
-<script src="index.js?v1.006"></script>
-
+});
+</script>
   <textarea
 id="debugLog"
 style="
