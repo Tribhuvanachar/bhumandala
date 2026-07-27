@@ -2,16 +2,16 @@
 =========================================================
 Digital Grantha Engine
 Startup
-Build 021
+Build 022
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#008000;color:#fff;padding:6px;font-family:monospace">index.js BUILD 021</div>'
+    '<div style="background:#008000;color:#fff;padding:6px;font-family:monospace">index.js BUILD 022</div>'
 );
 
-const debug = document.getElementById("debugLog");
+const debug=document.getElementById("debugLog");
 
 function log(msg){
 
@@ -19,17 +19,17 @@ function log(msg){
 
     if(debug){
 
-        debug.value += msg + "\n";
+        debug.value+=msg+"\n";
 
     }
 
 }
 
-window.onerror = function(message, source, line, column, error){
+window.onerror=function(message,source,line,column,error){
 
-    log("ERROR : " + message);
+    log("ERROR : "+message);
 
-    if(error && error.stack){
+    if(error&&error.stack){
 
         log(error.stack);
 
@@ -43,52 +43,38 @@ window.onerror = function(message, source, line, column, error){
 
 try{
 
-log("========== DGE BUILD 021 ==========");
+log("========== DGE BUILD 022 ==========");
 
-const manager = window.DGEGranthaManager;
+const manager=window.DGEGranthaManager;
 
 await manager.start();
 
 log("✓ GranthaManager started");
 
-const rawDataset = manager.getDataset();
+const raw=manager.getDataset();
 
-log("Raw dataset type : " + typeof rawDataset);
+log("Raw dataset type : "+typeof raw);
 
-if(rawDataset){
+log("Raw dataset keys : "+Object.keys(raw).join(","));
 
-    log("Raw dataset keys : " + Object.keys(rawDataset).join(","));
-
-}
-
-const dataset =
-window.DGEDatasetAdapter.getDataset
-? window.DGEDatasetAdapter.getDataset(rawDataset)
-: window.DGEDatasetAdapter.load(rawDataset);
+const grantha=
+window.DGEDatasetAdapter.getDataset(raw);
 
 log("✓ Dataset adapted");
 
-log("Dataset type : " + typeof dataset);
+log("Metadata title : "+(grantha.metadata?.title||""));
 
-log("Is Array : " + Array.isArray(dataset));
-
-log("Dataset length : " + (dataset ? dataset.length : "NULL"));
-
-if(Array.isArray(dataset) && dataset.length){
-
-    log("First verse keys : " +
-        Object.keys(dataset[0]).join(","));
-
-}
+log("Verse Count : "+grantha.verses.length);
 
 window.DGEGranthaReader.initialize();
 
-window.DGEGranthaReader.load(dataset);
+/* Temporary compatibility until Reader Build 022 */
+window.DGEGranthaReader.load(grantha.verses);
 
 log("✓ Reader initialized");
 
 window.DGEGranthaNavigator.initialize(
-    window.DGEGranthaReader
+window.DGEGranthaReader
 );
 
 log("✓ Navigator initialized");
