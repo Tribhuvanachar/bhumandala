@@ -2,7 +2,7 @@
 =========================================================
 Digital Grantha Engine
 Dataset Adapter
-Build 013
+Build 014
 =========================================================
 */
 
@@ -10,75 +10,44 @@ class DGEDatasetAdapter {
 
     load(raw) {
 
-        let root = raw;
+        if (!raw) return [];
 
-        /*
-         * Your data.json is in the form:
-         *
-         * {
-         *   metadata:{...},
-         *   shlokas:{...}
-         * }
-         */
-
-        if (Array.isArray(raw)) {
-
-            root = raw[0];
-
-        }
-
-        if (!root) {
-
-            return [];
-
-        }
-
-        if (!root.shlokas) {
-
-            return [];
-
-        }
+        if (!raw.shlokas) return [];
 
         const verses = [];
 
-        const keys = Object.keys(root.shlokas)
-            .sort((a, b) => Number(a) - Number(b));
+        const keys =
+            Object.keys(raw.shlokas)
+                .sort((a,b)=>Number(a)-Number(b));
 
         for (const key of keys) {
 
-            const s = root.shlokas[key];
+            const shloka =
+                raw.shlokas[key];
 
             verses.push({
 
-                id: Number(key),
+                id:Number(key),
 
-                number: Number(key),
+                number:Number(key),
 
                 sanskrit:
-                    s.sanskrit ??
-                    s.devanagari ??
-                    s.text ??
-                    "",
+                    shloka.sa || "",
 
                 transliteration:
-                    s.transliteration ??
-                    s.itrans ??
+                    shloka.itrans ||
+                    shloka.transliteration ||
                     "",
 
                 meaning:
-                    s.meaning ??
-                    s.translation ??
+                    shloka.en ||
+                    shloka.meaning ||
                     "",
 
                 commentary:
-                    s.commentary ??
-                    "",
+                    shloka.commentaries || {},
 
-                audio:
-                    s.audio ??
-                    "",
-
-                raw: s
+                raw:shloka
 
             });
 
