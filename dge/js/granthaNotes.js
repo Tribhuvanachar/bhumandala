@@ -2,7 +2,8 @@
 =========================================================
 Digital Grantha Engine
 Grantha Notes
-Build 026
+Build 001
+Migrated from PrahladaKrutaNarasimhaStotra.html
 =========================================================
 */
 
@@ -10,33 +11,37 @@ class DGEGranthaNotes {
 
     constructor() {
 
-        this.storageKey = "DGE_NOTES";
+        this.storageKey = "dge_notes";
 
-        this.notes = this.load();
+        this.notes = {};
 
         this.currentVerse = null;
 
     }
 
-    load() {
+    initialize(storageKey) {
 
-        try {
+        if (storageKey) {
 
-            return JSON.parse(
-
-                localStorage.getItem(
-
-                    this.storageKey
-
-                )
-
-            ) || {};
+            this.storageKey = storageKey;
 
         }
 
-        catch (e) {
+        try {
 
-            return {};
+            this.notes = JSON.parse(
+
+                localStorage.getItem(this.storageKey)
+
+                || "{}"
+
+            );
+
+        }
+
+        catch {
+
+            this.notes = {};
 
         }
 
@@ -54,95 +59,213 @@ class DGEGranthaNotes {
 
     }
 
-    open(verseId) {
+    has(verse) {
 
-        this.currentVerse = verseId;
+        return !!(
 
-        return this.get(verseId);
+            this.notes[verse]
 
-    }
+            &&
 
-    get(verseId) {
-
-        return this.notes[verseId] || "";
-
-    }
-
-    save(text) {
-
-        if (this.currentVerse == null) return;
-
-        text = (text || "").trim();
-
-        if (text) {
-
-            this.notes[this.currentVerse] = text;
-
-        }
-
-        else {
-
-            delete this.notes[this.currentVerse];
-
-        }
-
-        this.saveStorage();
-
-    }
-
-    clear() {
-
-        if (this.currentVerse == null) return;
-
-        delete this.notes[this.currentVerse];
-
-        this.saveStorage();
-
-    }
-
-    has(verseId) {
-
-        return Object.prototype.hasOwnProperty.call(
-
-            this.notes,
-
-            verseId
+            this.notes[verse].trim()
 
         );
 
     }
 
-    openEditor(verseId) {
+    get(verse) {
 
-        this.currentVerse = verseId;
-
-        if (this.onOpenEditor) {
-
-            this.onOpenEditor(
-
-                verseId,
-
-                this.get(verseId)
-
-            );
-
-        }
+        return this.notes[verse] || "";
 
     }
 
-    saveCurrent(text) {
+    set(verse, text) {
 
-        this.save(text);
+        if (
 
-        if (this.onSaved) {
+            text
 
-            this.onSaved(
+            &&
 
-                this.currentVerse,
+            text.trim()
 
-                text
+        ) {
+
+            this.notes[verse] = text;
+
+        }
+
+        else {
+
+            delete this.notes[verse];
+
+        }
+
+        this.saveStorage();
+
+    }
+
+    append(verse, text) {
+
+        const oldText =
+
+            this.get(verse);
+
+        const newText =
+
+            oldText
+
+            ?
+
+            oldText +
+
+            "\n\n" +
+
+            text
+
+            :
+
+            text;
+
+        this.set(
+
+            verse,
+
+            newText
+
+        );
+
+    }
+
+    clear(verse) {
+
+        delete this.notes[verse];
+
+        this.saveStorage();
+
+    }
+
+    openEditor(verse) {
+
+        this.currentVerse = verse;
+
+        const modal =
+
+            document.getElementById(
+
+                "noteModal"
 
             );
+
+        if (!modal) return;
+
+        const num =
+
+            document.getElementById(
+
+                "noteShlokaNum"
+
+            );
+
+        const txt =
+
+            document.getElementById(
+
+                "noteText"
+
+            );
+
+        if (num) {
+
+            num.innerText = verse;
+
+        }
+
+        if (txt) {
+
+            txt.value =
+
+                this.get(verse);
+
+        }
+
+        modal.style.display =
+
+            "flex";
+
+        document.body.classList.add(
+
+            "modal-open"
+
+        );
+
+    }
+
+    closeEditor() {
+
+        const modal =
+
+            document.getElementById(
+
+                "noteModal"
+
+            );
+
+        if (modal) {
+
+            modal.style.display =
+
+                "none";
+
+        }
+
+        document.body.classList.remove(
+
+            "modal-open"
+
+        );
+
+    }
+
+    saveCurrent() {
+
+        if (
+
+            this.currentVerse == null
+
+        ) {
+
+            return;
+
+        }
+
+        const txt =
+
+            document.getElementById(
+
+                "noteText"
+
+            );
+
+        if (!txt) return;
+
+        this.set(
+
+            this.currentVerse,
+
+            txt.value
+
+        );
+
+        this.closeEditor();
+
+        if (
+
+            window.DGEGranthaReader
+
+        ) {
+
+            DGEGranthaReader.renderList();
 
         }
 
@@ -150,117 +273,45 @@ class DGEGranthaNotes {
 
     clearCurrent() {
 
-        this.clear();
+        if (
 
-        if (this.onCleared) {
+            this.currentVerse == null
 
-            this.onCleared(
+        ) {
 
-                this.currentVerse
+            return;
+
+        }
+
+        this.clear(
+
+            this.currentVerse
+
+        );
+
+        const txt =
+
+            document.getElementById(
+
+                "noteText"
 
             );
 
-        }
+        if (txt) {
 
-    }
-
-    getAll() {
-
-        return structuredClone(
-
-            this.notes
-
-        );
-
-    }
-
-    count() {
-
-        return Object.keys(
-
-            this.notes
-
-        ).length;
-
-    }
-
-    setOpenEditorListener(callback) {
-
-        this.onOpenEditor = callback;
-
-    }
-
-    setSavedListener(callback) {
-
-        this.onSaved = callback;
-
-    }
-
-    setClearedListener(callback) {
-
-        this.onCleared = callback;
-
-    }
-
-    exportNotes() {
-
-        return JSON.stringify(
-
-            this.notes,
-
-            null,
-
-            2
-
-        );
-
-    }
-
-    importNotes(json) {
-
-        try {
-
-            const data = JSON.parse(json);
-
-            if (
-
-                data &&
-
-                typeof data === "object"
-
-            ) {
-
-                this.notes = data;
-
-                this.saveStorage();
-
-                return true;
-
-            }
+            txt.value = "";
 
         }
 
-        catch (e) {
+        if (
 
-            console.error(e);
+            window.DGEGranthaReader
+
+        ) {
+
+            DGEGranthaReader.renderList();
 
         }
-
-        return false;
-
-    }
-
-    delete(verseId) {
-
-        delete this.notes[verseId];
-
-        this.saveStorage();
-
-    }
-
-    destroy() {
-
-        this.currentVerse = null;
 
     }
 
@@ -269,13 +320,3 @@ class DGEGranthaNotes {
 window.DGEGranthaNotes =
 
     new DGEGranthaNotes();
-
-
-
-
-
-
-
-
-
-
