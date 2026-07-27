@@ -2,105 +2,330 @@
 =========================================================
 Digital Grantha Engine
 Grantha Bookmarks
-Build 024
+Build 026
 =========================================================
 */
 
-document.body.insertAdjacentHTML(
-    "afterbegin",
-    '<div style="background:#C2185B;color:#fff;padding:6px;font-family:monospace">granthaBookmarks.js BUILD 024</div>'
-);
-
 class DGEGranthaBookmarks {
 
-    constructor(){
+    constructor() {
 
-        this.key="DGE_BOOKMARKS";
+        this.storageKey = "DGE_MARKS";
+
+        this.marks = this.load();
 
     }
 
-    getAll(){
+    load() {
 
-        try{
+        try {
 
             return JSON.parse(
-                localStorage.getItem(this.key)
-            ) || [];
 
-        }catch(e){
+                localStorage.getItem(
 
-            return [];
+                    this.storageKey
+
+                )
+
+            ) || {};
+
+        }
+
+        catch (e) {
+
+            return {};
 
         }
 
     }
 
-    saveAll(list){
+    save() {
 
         localStorage.setItem(
-            this.key,
-            JSON.stringify(list)
+
+            this.storageKey,
+
+            JSON.stringify(
+
+                this.marks
+
+            )
+
         );
 
     }
 
-    has(id){
+    get(verseId) {
 
-        return this.getAll().includes(id);
+        return this.marks[verseId] || "";
 
     }
 
-    add(id){
+    isFavorite(verseId) {
 
-        const list=this.getAll();
+        return this.get(verseId) === "fav";
 
-        if(!list.includes(id)){
+    }
 
-            list.push(id);
+    isPractice(verseId) {
 
-            this.saveAll(list);
+        return this.get(verseId) === "practice";
+
+    }
+
+    setFavorite(verseId) {
+
+        this.marks[verseId] = "fav";
+
+        this.save();
+
+    }
+
+    setPractice(verseId) {
+
+        this.marks[verseId] = "practice";
+
+        this.save();
+
+    }
+
+    clear(verseId) {
+
+        delete this.marks[verseId];
+
+        this.save();
+
+    }
+
+    toggleFavorite(verseId) {
+
+        if (this.isFavorite(verseId)) {
+
+            this.clear(verseId);
+
+        }
+
+        else {
+
+            this.setFavorite(verseId);
 
         }
 
     }
 
-    remove(id){
+    togglePractice(verseId) {
 
-        this.saveAll(
-            this.getAll().filter(x=>x!==id)
+        if (this.isPractice(verseId)) {
+
+            this.clear(verseId);
+
+        }
+
+        else {
+
+            this.setPractice(verseId);
+
+        }
+
+    }
+    setMark(verseId, type) {
+
+        if (
+
+            type === "none" ||
+
+            !type
+
+        ) {
+
+            delete this.marks[verseId];
+
+        }
+
+        else {
+
+            this.marks[verseId] = type;
+
+        }
+
+        this.save();
+
+        if (this.onChanged) {
+
+            this.onChanged(
+
+                verseId,
+
+                this.get(verseId)
+
+            );
+
+        }
+
+    }
+
+    toggle(verseId, type) {
+
+        if (
+
+            this.get(verseId) === type
+
+        ) {
+
+            this.setMark(
+
+                verseId,
+
+                "none"
+
+            );
+
+        }
+
+        else {
+
+            this.setMark(
+
+                verseId,
+
+                type
+
+            );
+
+        }
+
+    }
+
+    getFavoriteVerses() {
+
+        return Object.keys(this.marks)
+
+            .filter(id =>
+
+                this.marks[id] === "fav"
+
+            )
+
+            .map(Number);
+
+    }
+
+    getPracticeVerses() {
+
+        return Object.keys(this.marks)
+
+            .filter(id =>
+
+                this.marks[id] === "practice"
+
+            )
+
+            .map(Number);
+
+    }
+
+    setChangedListener(callback) {
+
+        this.onChanged = callback;
+
+    }
+    exportMarks() {
+
+        return JSON.stringify(
+
+            this.marks,
+
+            null,
+
+            2
+
         );
 
     }
 
-    toggle(id){
+    importMarks(json) {
 
-        if(this.has(id)){
+        try {
 
-            this.remove(id);
+            const data = JSON.parse(json);
 
-            return false;
+            if (
+
+                data &&
+
+                typeof data === "object"
+
+            ) {
+
+                this.marks = data;
+
+                this.save();
+
+                return true;
+
+            }
 
         }
 
-        this.add(id);
+        catch (e) {
 
-        return true;
+            console.error(e);
 
-    }
+        }
 
-    count(){
-
-        return this.getAll().length;
+        return false;
 
     }
 
-    clear(){
+    count(type = null) {
 
-        localStorage.removeItem(this.key);
+        if (!type) {
+
+            return Object.keys(
+
+                this.marks
+
+            ).length;
+
+        }
+
+        return Object.values(
+
+            this.marks
+
+        ).filter(v => v === type).length;
+
+    }
+
+    destroy() {
+
+        this.onChanged = null;
 
     }
 
 }
 
 window.DGEGranthaBookmarks =
-new DGEGranthaBookmarks();
+
+    new DGEGranthaBookmarks();
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
