@@ -2,13 +2,13 @@
 =========================================================
 Digital Grantha Engine
 Grantha Search
-Build 022
+Build 023
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#424242;color:#fff;padding:6px;font-family:monospace">granthaSearch.js BUILD 022</div>'
+    '<div style="background:#424242;color:#fff;padding:6px;font-family:monospace">granthaSearch.js BUILD 023</div>'
 );
 
 class DGEGranthaSearch {
@@ -25,16 +25,25 @@ class DGEGranthaSearch {
         this.reader = reader;
         this.dataset = dataset || [];
 
-        const box = document.getElementById("searchBox");
+        const box = document.getElementById("searchInput");
 
-        if (!box) return;
+        if (!box) {
+
+            console.warn("Search input not found.");
+
+            return;
+
+        }
 
         box.oninput = () => {
 
             const q = box.value.trim().toLowerCase();
 
-            if (!q)
+            if (!q) {
+
                 return;
+
+            }
 
             const index = this.dataset.findIndex(v =>
 
@@ -60,5 +69,4 @@ class DGEGranthaSearch {
 
 }
 
-window.DGEGranthaSearch =
-    new DGEGranthaSearch();
+window.DGEGranthaSearch = new DGEGranthaSearch();
