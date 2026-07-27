@@ -1,17 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Digital Grantha Engine</title>
-<link rel="stylesheet" href="css/main.css">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>
+
+Digital Grantha Engine
+
+</title>
+
+<link
+rel="stylesheet"
+href="css/main.css">
+
 </head>
+
 <body>
-<header><h1>Digital Grantha Engine</h1></header>
+
+<header>
+
+<h1 id="granthaTitle">
+
+Digital Grantha Engine
+
+</h1>
+
+</header>
+
 <main>
-<h2 id="granthaTitle">Loading...</h2>
-<div id="readerCard">Loading...</div>
+
+<section id="readerSection">
+
+<div id="readerCard">
+
+Loading...
+
+</div>
+
+</section>
+
+<section id="navigationSection">
+
+<button id="btnFirst">
+
+⏮
+
+</button>
+
+<button id="btnPrevious">
+
+◀
+
+</button>
+
+<button id="btnNext">
+
+▶
+
+</button>
+
+<button id="btnLast">
+
+⏭
+
+</button>
+
+</section>
+
+<section id="searchSection">
+
+<input
+id="searchInput"
+type="search"
+placeholder="Search">
+
+<div id="searchResults">
+
+</div>
+
+</section>
+
+<section id="audioSection">
+
+<audio
+id="audioPlayer"
+controls>
+
+</audio>
+
+</section>
+
+<section
+id="commentaryPanel"
+style="display:none;">
+
+</section>
+
 </main>
-<script type="module" src="index.js"></script>
+
+<script src="js/granthaManager.js"></script>
+
+<script src="js/datasetAdapter.js"></script>
+
+<script src="js/granthaReader.js"></script>
+
+<script src="js/granthaNavigator.js"></script>
+
+<script src="js/granthaSearch.js"></script>
+
+<script src="js/granthaAudio.js"></script>
+
+<script src="js/granthaNotes.js"></script>
+
+<script src="js/granthaBookmarks.js"></script>
+
+<script src="js/granthaCommentary.js"></script>
+
+<script src="index.js"></script>
+
 </body>
+
 </html>
