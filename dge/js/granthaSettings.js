@@ -2,32 +2,38 @@
 =========================================================
 Digital Grantha Engine
 Grantha Settings
-Build 001
+Build 002
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#607D8B;color:#fff;padding:6px;font-family:monospace">granthaSettings.js BUILD 001</div>'
+    '<div style="background:#607D8B;color:#fff;padding:6px;font-family:monospace">granthaSettings.js BUILD 002</div>'
 );
 
 class DGEGranthaSettings {
 
     constructor(){
 
-        this.key = "DGE_SETTINGS";
+        this.key="DGE_SETTINGS";
 
-        this.settings = {
+        this.defaults={
 
-            showTransliteration : true,
+            showTransliteration:true,
 
-            showMeaning : true,
+            showMeaning:true,
 
-            autoExpandCommentary : true,
+            autoExpandCommentary:true,
 
-            fontScale : 100
+            rememberLastVerse:true,
+
+            darkMode:false,
+
+            fontScale:100
 
         };
+
+        this.settings={...this.defaults};
 
         this.load();
 
@@ -37,13 +43,16 @@ class DGEGranthaSettings {
 
         try{
 
-            const saved = JSON.parse(
+            const saved=JSON.parse(
                 localStorage.getItem(this.key)
             );
 
             if(saved){
 
-                Object.assign(this.settings,saved);
+                Object.assign(
+                    this.settings,
+                    saved
+                );
 
             }
 
@@ -77,7 +86,15 @@ class DGEGranthaSettings {
 
     }
 
+    reset(){
+
+        this.settings={...this.defaults};
+
+        this.save();
+
+    }
+
 }
 
-window.DGEGranthaSettings =
+window.DGEGranthaSettings=
 new DGEGranthaSettings();
