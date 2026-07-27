@@ -2,13 +2,13 @@
 =========================================================
 Digital Grantha Engine
 Grantha Reader
-Build 023
+Build 024
 =========================================================
 */
 
 document.body.insertAdjacentHTML(
     "afterbegin",
-    '<div style="background:#FB8C00;color:#000;padding:6px;font-family:monospace">granthaReader.js BUILD 023</div>'
+    '<div style="background:#FB8C00;color:#000;padding:6px;font-family:monospace">granthaReader.js BUILD 024</div>'
 );
 
 class DGEGranthaReader {
@@ -62,13 +62,31 @@ class DGEGranthaReader {
                 window.DGEGranthaCommentary.getEnabled(this.currentIndex);
 
             commentaryHtml = items.map(item => `
-<div style="margin-top:16px;padding:14px;border:1px solid #bbb;border-radius:8px;background:#fafafa">
-    <div style="font-weight:bold;margin-bottom:8px">
-        ${item.name}
-    </div>
-    <div style="line-height:1.8">
-        ${item.text}
-    </div>
+<div style="
+margin-top:18px;
+padding:16px;
+border:1px solid #d0d0d0;
+border-radius:10px;
+background:#fafafa;
+">
+
+<div style="
+font-weight:bold;
+font-size:18px;
+margin-bottom:10px;
+color:#1565C0;
+">
+${item.name}
+</div>
+
+<div style="
+line-height:1.9;
+font-size:17px;
+white-space:pre-wrap;
+">
+${item.text}
+</div>
+
 </div>
 `).join("");
 
@@ -78,52 +96,79 @@ class DGEGranthaReader {
 
 <div style="padding:20px">
 
-<div style="
-font-size:28px;
-font-weight:bold;
+<h2 style="
 text-align:center;
-margin-bottom:12px;">
-श्लोक ${verse.number}
-</div>
+margin-bottom:6px;
+">
+॥ प्रह्लादकृत नृसिंह स्तोत्र ॥
+</h2>
 
 <div style="
-font-size:17px;
 text-align:center;
 color:#666;
-margin-bottom:20px;">
-Verse ${this.currentIndex + 1} / ${this.dataset.length}
+margin-bottom:6px;
+">
+Verse ${this.currentIndex + 1}
 </div>
 
 <div style="
-font-size:32px;
+text-align:center;
+font-size:14px;
+color:#888;
+margin-bottom:24px;
+">
+Digitized : ${this.dataset.length} verses
+</div>
+
+<div style="
+font-size:31px;
 line-height:2.0;
 text-align:center;
-margin-bottom:24px;">
+margin-bottom:28px;
+">
 ${verse.sanskrit || ""}
 </div>
 
 ${verse.transliteration ? `
+
 <div style="
-margin-top:20px;
-padding:12px;
-border-left:4px solid #1976D2;
-background:#F5F9FF;
+padding:14px;
+background:#F3F8FF;
+border-left:5px solid #1976D2;
+margin-bottom:18px;
 ">
-<b>Transliteration</b><br><br>
+
+<div style="font-weight:bold;margin-bottom:8px">
+Transliteration
+</div>
+
+<div style="line-height:1.8">
 ${verse.transliteration}
 </div>
+
+</div>
+
 ` : ""}
 
 ${verse.meaning ? `
+
 <div style="
-margin-top:18px;
-padding:12px;
-border-left:4px solid #388E3C;
-background:#F6FFF6;
+padding:14px;
+background:#F5FFF5;
+border-left:5px solid #2E7D32;
+margin-bottom:18px;
 ">
-<b>Meaning</b><br><br>
+
+<div style="font-weight:bold;margin-bottom:8px">
+Meaning
+</div>
+
+<div style="line-height:1.8">
 ${verse.meaning}
 </div>
+
+</div>
+
 ` : ""}
 
 ${commentaryHtml}
@@ -145,6 +190,7 @@ ${commentaryHtml}
         if (this.currentIndex > 0) {
 
             this.currentIndex--;
+
             this.render();
 
         }
@@ -156,6 +202,7 @@ ${commentaryHtml}
         if (this.currentIndex < this.dataset.length - 1) {
 
             this.currentIndex++;
+
             this.render();
 
         }
@@ -165,6 +212,7 @@ ${commentaryHtml}
     last() {
 
         this.currentIndex = this.dataset.length - 1;
+
         this.render();
 
     }
