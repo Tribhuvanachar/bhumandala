@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Digital Grantha Engine v10.1 - Part 1</title>
+
+<!--
+==============================================================================
+Digital Grantha Engine (DGE) v10.1 - PART 1
+Foundation Build
+
+This is the architectural foundation only.
+Current Version 9 functionality is NOT yet migrated.
+Later parts will plug into this foundation.
+
+Target platforms:
+✓ Android Chrome/WebView (Primary)
+✓ iPhone Safari
+✓ Desktop browsers
+==============================================================================
+-->
+
+<style>
+:root{
+    --bg:#faf3e6;
+    --fg:#2b2119;
+    --accent:#ae231f;
+    --radius:16px;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg);
+    color:var(--fg);
+    font-family:system-ui,sans-serif;
+}
+
+header{
+    position:sticky;
+    top:0;
+    background:white;
+    padding:14px;
+    border-bottom:1px solid #ddd;
+}
+
+main{
+    padding:16px;
+}
+
+.card{
+    border:1px solid #ddd;
+    border-radius:var(--radius);
+    padding:16px;
+    margin-bottom:16px;
+    background:white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>Digital Grantha Engine v10.1</h2>
+<div>Foundation Build (Part 1)</div>
+</header>
+
+<main>
+
+<div class="card">
+<h3>Status</h3>
+
+<p>This build establishes the architecture that future parts will use.</p>
+
+<ul>
+<li>DGE namespace</li>
+<li>State Manager</li>
+<li>Config Loader</li>
+<li>Cache Manager</li>
+<li>Event Bus</li>
+<li>Text Engine (placeholder)</li>
+<li>Render Engine (placeholder)</li>
+</ul>
+
+</div>
+
+</main>
+
+<script>
+
+"use strict";
+
+/******************************************************************************
+ DIGITAL GRANTHA ENGINE
+******************************************************************************/
+
+const DGE={
+
+version:"10.1-part1",
+
+config:{},
+
+state:{},
+
+cache:{},
+
+events:{},
+
+modules:{},
+
+init:async function(){
+
+    console.log("DGE Initializing...");
+
+    await this.configEngine.load();
+
+    this.stateEngine.init();
+
+    this.eventEngine.init();
+
+    this.cacheEngine.init();
+
+    this.textEngine.init();
+
+    this.renderEngine.init();
+
+    console.log("Initialization Complete");
+
+}
+
+};
+
+/******************************************************************************
+ CONFIG ENGINE
+******************************************************************************/
+
+DGE.configEngine={
+
+async load(){
+
+    try{
+
+        const r=await fetch("config.json");
+
+        DGE.config=await r.json();
+
+        console.log("Config Loaded");
+
+    }catch(e){
+
+        console.warn("Config load failed",e);
+
+    }
+
+}
+
+};
+
+/******************************************************************************
+ STATE ENGINE
+******************************************************************************/
+
+DGE.stateEngine={
+
+init(){
+
+    DGE.state.currentBook=null;
+
+    DGE.state.currentVerse=null;
+
+    DGE.state.script="devanagari";
+
+}
+
+};
+
+/******************************************************************************
+ EVENT BUS
+******************************************************************************/
+
+DGE.eventEngine={
+
+listeners:{},
+
+init(){},
+
+on(name,fn){
+
+    if(!this.listeners[name])
+
+        this.listeners[name]=[];
+
+    this.listeners[name].push(fn);
+
+},
+
+emit(name,data){
+
+    (this.listeners[name]||[]).forEach(fn=>fn(data));
+
+}
+
+};
+
+/******************************************************************************
+ CACHE MANAGER
+******************************************************************************/
+
+DGE.cacheEngine={
+
+init(){
+
+    console.log("Cache Ready");
+
+}
+
+};
+
+/******************************************************************************
+ TEXT ENGINE
+******************************************************************************/
+
+DGE.textEngine={
+
+init(){
+
+    console.log("Text Engine Ready");
+
+},
+
+normalize(text){
+
+    return (text||"").normalize("NFC");
+
+}
+
+};
+
+/******************************************************************************
+ RENDER ENGINE
+******************************************************************************/
+
+DGE.renderEngine={
+
+init(){
+
+    console.log("Render Engine Ready");
+
+}
+
+};
+
+window.addEventListener("DOMContentLoaded",()=>DGE.init());
+
+</script>
+
+</body>
+</html>
