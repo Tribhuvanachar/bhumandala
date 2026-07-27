@@ -1,3 +1,7 @@
+document.body.insertAdjacentHTML(
+    "afterbegin",
+    '<div style="background:green;color:white;padding:8px;font-family:monospace">index.js loaded</div>'
+);
 const debug = document.getElementById("debugLog");
 
 function log(x) {
