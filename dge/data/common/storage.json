@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+
+  "storage": {
+    "bookmarks": "dge_bookmarks",
+    "notes": "dge_notes",
+    "settings": "dge_settings",
+    "history": "dge_history",
+    "snippets": "dge_snippets",
+    "cache": "dge_cache",
+    "theme": "dge_theme",
+    "language": "dge_language",
+    "script": "dge_script",
+    "lastGrantha": "dge_last_grantha",
+    "lastVerse": "dge_last_verse"
+  }
+}
