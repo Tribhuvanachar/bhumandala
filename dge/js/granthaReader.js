@@ -2,26 +2,25 @@
 =========================================================
 Digital Grantha Engine
 Grantha Reader
-Version: 10.1.0 Alpha
 =========================================================
 */
 
-class GranthaReader {
+class DGEGranthaReader {
 
     constructor() {
 
         this.dataset = [];
 
-        this.currentIndex = 0;
+        this.index = 0;
 
         this.container = null;
 
     }
 
-    initialize(containerId = "readerCard") {
+    initialize() {
 
         this.container =
-            document.getElementById(containerId);
+            document.getElementById("readerCard");
 
     }
 
@@ -29,18 +28,18 @@ class GranthaReader {
 
         this.dataset = dataset || [];
 
-        this.currentIndex = 0;
+        this.index = 0;
 
-        this.render();
+        this.show(0);
 
     }
 
-    render(index = this.currentIndex) {
+    show(index) {
 
         if (!this.container)
             return;
 
-        if (this.dataset.length === 0) {
+        if (!this.dataset.length) {
 
             this.container.innerHTML =
                 "<p>No verses found.</p>";
@@ -55,7 +54,7 @@ class GranthaReader {
         if (index >= this.dataset.length)
             index = this.dataset.length - 1;
 
-        this.currentIndex = index;
+        this.index = index;
 
         const verse =
             this.dataset[index];
@@ -76,37 +75,17 @@ ${verse.sanskrit}
 
 </div>
 
-${
-verse.transliteration
-?
+<div class="dgeTransliteration">
 
-`<div class="dgeTransliteration">
+${verse.transliteration || ""}
 
-${verse.transliteration}
+</div>
 
-</div>`
+<div class="dgeMeaning">
 
-:
+${verse.meaning || ""}
 
-""
-
-}
-
-${
-verse.meaning
-?
-
-`<div class="dgeMeaning">
-
-${verse.meaning}
-
-</div>`
-
-:
-
-""
-
-}
+</div>
 
 </div>
 
@@ -116,62 +95,29 @@ ${verse.meaning}
 
     next() {
 
-        if (
-            this.currentIndex <
-            this.dataset.length - 1
-        ) {
-
-            this.render(
-
-                this.currentIndex + 1
-
-            );
-
-        }
+        this.show(this.index + 1);
 
     }
 
     previous() {
 
-        if (
-            this.currentIndex > 0
-        ) {
-
-            this.render(
-
-                this.currentIndex - 1
-
-            );
-
-        }
+        this.show(this.index - 1);
 
     }
 
     first() {
 
-        this.render(0);
+        this.show(0);
 
     }
 
     last() {
 
-        this.render(
-
-            this.dataset.length - 1
-
-        );
-
-    }
-
-    current() {
-
-        return this.dataset[
-            this.currentIndex
-        ];
+        this.show(this.dataset.length - 1);
 
     }
 
 }
 
-window.GranthaReader =
-    new GranthaReader();
+window.DGEGranthaReader =
+    new DGEGranthaReader();
