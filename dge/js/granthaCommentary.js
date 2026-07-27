@@ -2,105 +2,29 @@
 =========================================================
 Digital Grantha Engine
 Grantha Commentary
-Build 016
+Build 017
 =========================================================
 */
 
 class DGEGranthaCommentary {
 
-    constructor() {
+    getEnabled(index, dataset) {
 
-        this.dataset = [];
+        if (!dataset) return [];
 
-        this.enabled = {};
+        if (!dataset[index]) return [];
 
-    }
+        const verse = dataset[index];
 
-    initialize(dataset) {
+        if (!verse.commentary) return [];
 
-        this.dataset = dataset || [];
+        return Object.entries(verse.commentary).map(([name, text]) => ({
 
-    }
+            name,
 
-    getNames(index) {
+            text
 
-        if (!this.dataset[index])
-            return [];
-
-        const commentary =
-            this.dataset[index].commentary || {};
-
-        return Object.keys(commentary);
-
-    }
-
-    get(index, name) {
-
-        if (!this.dataset[index])
-            return "";
-
-        const commentary =
-            this.dataset[index].commentary || {};
-
-        return commentary[name] || "";
-
-    }
-
-    enable(name) {
-
-        this.enabled[name] = true;
-
-    }
-
-    disable(name) {
-
-        delete this.enabled[name];
-
-    }
-
-    isEnabled(name) {
-
-        return !!this.enabled[name];
-
-    }
-
-    enableAll(index) {
-
-        this.getNames(index).forEach(name => {
-
-            this.enabled[name] = true;
-
-        });
-
-    }
-
-    disableAll() {
-
-        this.enabled = {};
-
-    }
-
-    getEnabled(index) {
-
-        const result = [];
-
-        this.getNames(index).forEach(name => {
-
-            if (this.enabled[name]) {
-
-                result.push({
-
-                    name,
-
-                    text: this.get(index, name)
-
-                });
-
-            }
-
-        });
-
-        return result;
+        }));
 
     }
 
