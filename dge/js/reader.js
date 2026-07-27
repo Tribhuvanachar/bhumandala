@@ -1,1 +1,1 @@
-export function renderVerse(el,v){if(!el||!v)return;el.innerHTML=`<article><h2>${v.number||''}</h2><div>${v.sanskrit||''}</div></article>`;}
+export function renderVerse(el,v){el.innerHTML=`<h3>${v.number||''}</h3><div>${v.sanskrit||''}</div>`;}
