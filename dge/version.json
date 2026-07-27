@@ -1,0 +1,9 @@
+{
+  "engine": "Digital Grantha Engine",
+  "version": "10.1.0",
+  "channel": "alpha",
+  "build": 1,
+  "releaseDate": "2026-07-27",
+  "minimumDataVersion": "1.0",
+  "cacheVersion": "10.1.0-alpha-001"
+}
