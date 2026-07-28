@@ -1,224 +1,134 @@
-/*
-=========================================================
-Digital Grantha Engine
-snippets.js
-Version: 10.1.0 Alpha 005
-=========================================================
-*/
+"use strict";
+
+/*=============================================================================
+ Digital Grantha Engine
+ snippets.js
+ Legacy Snippet Manager
+ Migrated from functions.js
+=============================================================================*/
 
 (function () {
 
-"use strict";
+if (!window.DGE)
+    throw new Error("DGE core must be loaded first.");
 
-const SnippetEngine = {
+const Snippets = {
 
-    current: null,
+    items: {},
+    targetId: null,
 
     init() {
 
-        DGE.log("Snippet Engine Ready");
+        this.items = DGE.Storage
+            ? DGE.Storage.get("snippets", {})
+            : {};
 
     },
 
-    build(verse) {
+    save() {
 
-        if (!verse)
-            return "";
-
-        let out = "";
-
-        if (verse.number)
-            out += "Verse " + verse.number + "\n\n";
-
-        if (verse.sanskrit)
-            out += verse.sanskrit + "\n\n";
-
-        if (verse.transliteration)
-            out += verse.transliteration + "\n\n";
-
-        if (verse.meaning)
-            out += verse.meaning + "\n\n";
-
-        return out.trim();
+        if (DGE.Storage)
+            DGE.Storage.set("snippets", this.items);
 
     },
 
-    setCurrent(verse) {
+    saveSnippet() {
 
-        this.current = verse;
-
-    },
-
-    copy() {
-
-        if (!this.current)
+        if (!window.activeId) {
+            alert("Select a shloka first.");
             return;
+        }
 
-        navigator.clipboard.writeText(
+        const a = parseFloat(els.loopA.value);
+        const b = parseFloat(els.loopB.value);
 
-            this.build(this.current)
+        if (isNaN(a) || isNaN(b)) {
+            alert("Set Start and End times in the A-B Loop first.");
+            return;
+        }
 
-        );
+        if (!this.items[activeId])
+            this.items[activeId] = [];
 
-        DGE.log("Snippet Copied");
+        this.items[activeId].push({
+            start: a,
+            end: b
+        });
+
+        this.save();
+
+        if (typeof renderList === "function")
+            renderList();
 
     },
 
-    copySanskrit() {
+    openSnippetModal(id, e) {
 
-        if (!this.current)
-            return;
+        if (e && e.stopPropagation)
+            e.stopPropagation();
 
-        navigator.clipboard.writeText(
+        this.targetId = id;
 
-            this.current.sanskrit || ""
+        document.getElementById("snipShlokaNum").innerText = id;
 
-        );
+        const container =
+            document.getElementById("snippetListContainer");
 
-        DGE.log("Sanskrit Copied");
-
-    },
-
-    copyMeaning() {
-
-        if (!this.current)
-            return;
-
-        navigator.clipboard.writeText(
-
-            this.current.meaning || ""
-
-        );
-
-        DGE.log("Meaning Copied");
-
-    },
-
-    copyTransliteration() {
-
-        if (!this.current)
-            return;
-
-        navigator.clipboard.writeText(
-
-            this.current.transliteration || ""
-
-        );
-
-        DGE.log("Transliteration Copied");
-
-    },
-
-    download(filename = "snippet.txt") {
-
-        if (!this.current)
-            return;
-
-        const blob = new Blob(
-
-            [this.build(this.current)],
-
-            {
-
-                type: "text/plain"
-
-            }
-
-        );
-
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement("a");
-
-        a.href = url;
-
-        a.download = filename;
-
-        a.click();
-
-        URL.revokeObjectURL(url);
-
-    },
-
-    share() {
-
-        if (!this.current)
-            return;
-
-        const text = this.build(this.current);
+        container.innerHTML = "";
 
         if (
-
-            navigator.share
-
+            this.items[id] &&
+            this.items[id].length
         ) {
 
-            navigator.share({
+            this.items[id].forEach((snip, index) => {
 
-                title: "Digital Grantha",
+                container.innerHTML += `
+<div class="snip-list-item">
+<div>
+<strong>Loop ${index + 1}:</strong>
+${snip.start}s to ${snip.end}s
+</div>
+<div>
+<button class="btn-sm"
+style="color:var(--accent-red);margin-right:4px;"
+onclick="playSnippet(${id},${snip.start},${snip.end})">
+▶ Play
+</button>
 
-                text
+<button class="btn-sm"
+onclick="deleteSnippet(${id},${index})">
+🗑
+</button>
+</div>
+</div>`;
 
             });
 
+        } else {
+
+            container.innerHTML =
+                "<p style='font-size:12px;color:#8a7a63;'>No snippets saved.</p>";
+
         }
 
-        else {
-
-            this.copy();
-
-        }
+        openModal("snippetModal");
 
     },
 
-    exportMarkdown() {
+    closeSnippetModal() {
 
-        if (!this.current)
-            return "";
-
-        let md = "";
-
-        md += "# Verse\n\n";
-
-        md += this.build(this.current);
-
-        return md;
+        closeModal("snippetModal");
 
     },
 
-    exportHTML() {
+    playSnippet(id, start, end) {
 
-        if (!this.current)
-            return "";
+        this.closeSnippetModal();
 
-        return "<pre>" +
+        if (window.activeId !== id)
+            playShloka(id);
 
-            this.build(this.current)
-
-            .replace(/</g,"&lt;")
-
-            .replace(/>/g,"&gt;")
-
-            +
-
-            "</pre>";
-
-    }
-
-};
-
-window.SnippetEngine = SnippetEngine;
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    function(){
-
-        SnippetEngine.init();
-
-    }
-
-);
-
-})();
+        els.loopA.value = start;
+        els.loopB.value = end;
+        els.enableAB.checked =
