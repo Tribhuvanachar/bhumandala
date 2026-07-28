@@ -1,141 +1,298 @@
-/*
-=========================================================
-Digital Grantha Engine
-search.js
-Version: 10.1.0 Alpha 005
-=========================================================
-*/
-
-(function () {
-
 "use strict";
 
-const SearchEngine = {
+/*=============================================================================
+ Digital Grantha Engine
+ Search Engine
+ Version : 10.1.0 Alpha
+=============================================================================*/
 
-    index: [],
+(function(){
 
-    build(dataset) {
+if(!window.DGE)
+    throw new Error("DGE core must be loaded first.");
 
-        this.index = [];
+const Search={
 
-        if (!dataset) return;
+    lastQuery:"",
 
-        if (Array.isArray(dataset)) {
+    lastResults:[],
 
-            dataset.forEach((item, i) => {
+    options:{
 
-                this.index.push({
+        caseSensitive:false,
 
-                    id: i,
+        wholeWord:false,
 
-                    source: item,
-
-                    text: JSON.stringify(item).toLowerCase()
-
-                });
-
-            });
-
-        }
-
-        DGE.log("Search Index : " + this.index.length + " records");
+        maxResults:100
 
     },
 
-    search(query) {
+    configure(options={}){
 
-        query = (query || "").trim().toLowerCase();
-
-        if (!query.length) return [];
-
-        return this.index.filter(item =>
-            item.text.includes(query)
+        Object.assign(
+            this.options,
+            options
         );
 
     },
 
-    highlight(text, query) {
+    search(query){
 
-        if (!query) return text;
+        this.lastQuery=query;
 
-        const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        if(!query){
 
-        return text.replace(
+            this.lastResults=[];
 
-            new RegExp(escaped, "gi"),
-
-            match => "<mark>" + match + "</mark>"
-
-        );
-
-    },
-
-    render(results, containerId) {
-
-        const box = document.getElementById(containerId);
-
-        if (!box) return;
-
-        if (!results.length) {
-
-            box.innerHTML = "<p>No results found.</p>";
-
-            return;
+            return [];
 
         }
 
-        let html = "";
+        const verses=DGE.Data.getAll();
 
-        results.forEach(r => {
+        const results=[];
 
-            html +=
+        const searchText=this.options.caseSensitive
+            ?query
+            :query.toLowerCase();
 
-            "<div class='search-result'>" +
+        for(const verse of verses){
 
-            "<pre>" +
+            const body=
+                String(
+                    verse.text ??
+                    verse.verse ??
+                    verse.content ??
+                    ""
+                );
 
-            JSON.stringify(r.source, null, 2) +
+            const candidate=this.options.caseSensitive
+                ?body
+                :body.toLowerCase();
 
-            "</pre>" +
+            if(candidate.includes(searchText)){
 
-            "</div>";
+                results.push(verse);
+
+            }
+
+            if(results.length>=this.options.maxResults)
+
+                break;
+
+        }
+
+        this.lastResults=results;
+
+        DGE.emit(
+            "search:completed",
+            results
+        );
+
+        return results;
+
+    },
+
+    searchAndRender(query){
+
+        const results=this.search(query);
+
+        DGE.Render.renderSearchResults(
+            results
+        );
+
+        return results;
+
+    },
+
+    clear(){
+
+        this.lastQuery="";
+
+        this.lastResults=[];
+
+    },
+
+    findByNumber(number){
+
+        const verses=DGE.Data.getAll();
+
+        return verses.find(v=>
+
+            String(
+                v.number ??
+                v.id
+            )===String(number)
+
+        ) || null;
+
+    },
+
+    searchTitle(query){
+
+        if(!query)
+            return [];
+
+        const verses=DGE.Data.getAll();
+
+        const q=this.options.caseSensitive
+            ?query
+            :query.toLowerCase();
+
+        return verses.filter(v=>{
+
+            const title=String(
+                v.title ?? ""
+            );
+
+            const value=this.options.caseSensitive
+                ?title
+                :title.toLowerCase();
+
+            return value.includes(q);
 
         });
 
-        box.innerHTML = html;
+    },
+
+    searchMetadata(field,value){
+
+        const verses=DGE.Data.getAll();
+
+        return verses.filter(v=>
+
+            String(v[field] ?? "")
+                .toLowerCase()
+                .includes(
+                    String(value)
+                    .toLowerCase()
+                )
+
+        );
 
     },
 
-    run(query, containerId) {
+    searchRegex(pattern,flags="i"){
 
-        const results = this.search(query);
+        const regex=new RegExp(
+            pattern,
+            flags
+        );
 
-        this.render(results, containerId);
+        return DGE.Data.getAll().filter(v=>
 
-        DGE.log(results.length + " result(s)");
+            regex.test(
+
+                String(
+                    v.text ??
+                    v.verse ??
+                    ""
+                )
+
+            )
+
+        );
+
+    },
+
+    getLastResults(){
+
+        return [...this.lastResults];
+
+    },
+
+    getLastQuery(){
+
+        return this.lastQuery;
+
+    },
+    count(query){
+
+        return this.search(query).length;
+
+    },
+
+    exists(query){
+
+        return this.count(query)>0;
+
+    },
+
+    first(query){
+
+        const results=this.search(query);
+
+        return results.length
+            ?results[0]
+            :null;
+
+    },
+
+    next(currentIndex){
+
+        if(
+
+            currentIndex<0 ||
+
+            currentIndex>=this.lastResults.length-1
+
+        )
+
+            return null;
+
+        return this.lastResults[
+            currentIndex+1
+        ];
+
+    },
+
+    previous(currentIndex){
+
+        if(currentIndex<=0)
+
+            return null;
+
+        return this.lastResults[
+            currentIndex-1
+        ];
+
+    },
+
+    destroy(){
+
+        this.clear();
 
     }
 
 };
 
-window.SearchEngine = SearchEngine;
-
-/* Automatically build index after dataset loads */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const wait = setInterval(() => {
-
-        if (window.DGE && DGE.data) {
-
-            SearchEngine.build(DGE.data);
-
-            clearInterval(wait);
-
-        }
-
-    }, 300);
-
-});
+DGE.Search=Search;
 
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
