@@ -1,57 +1,89 @@
-/*
-=========================================================
-Digital Grantha Engine
-transliteration.js
-Version: 10.1.0 Alpha 005
-=========================================================
-*/
-
-(function () {
-
 "use strict";
 
-const TransliterationEngine = {
+/*=============================================================================
+ Digital Grantha Engine
+ Transliteration Engine
+ Version : 10.1.0 Alpha
+=============================================================================*/
 
-    mode: "devanagari",
+(function(){
 
-    supportedModes: [
-        "devanagari",
+if(!window.DGE)
+    throw new Error("DGE core must be loaded first.");
+
+const Transliteration={
+
+    scheme:"iast",
+
+    schemes:[
+
         "iast",
+        "devanagari",
         "kannada",
         "telugu",
         "tamil",
         "malayalam"
+
     ],
 
-    setMode(mode) {
+    init(){
 
-        if (this.supportedModes.includes(mode)) {
+        return this;
 
-            this.mode = mode;
+    },
 
-            DGE.log("Transliteration : " + mode);
+    current(){
+
+        return this.scheme;
+
+    },
+
+    set(name){
+
+        if(
+
+            this.schemes.includes(name)
+
+        ){
+
+            this.scheme=name;
+
+            DGE.emit(
+
+                "transliteration:change",
+
+                name
+
+            );
 
         }
 
     },
 
-    getMode() {
+    list(){
 
-        return this.mode;
+        return [
+
+            ...this.schemes
+
+        ];
 
     },
+    convert(text,target=null){
 
-    convert(text) {
+        target=target||this.scheme;
 
-        if (!text) return "";
+        if(typeof text!=="string")
 
-        switch (this.mode) {
+            return "";
 
-            case "devanagari":
-                return text;
+        switch(target){
 
             case "iast":
-                return this.toIAST(text);
+                return text;
+
+            case "devanagari":
+                return this.toDevanagari(text);
 
             case "kannada":
                 return this.toKannada(text);
@@ -72,67 +104,96 @@ const TransliterationEngine = {
 
     },
 
-    toIAST(text) {
+    toDevanagari(text){
 
         return text;
 
     },
 
-    toKannada(text) {
+    toKannada(text){
 
         return text;
 
     },
 
-    toTelugu(text) {
+    toTelugu(text){
+
+        return text;
+
+    },
+    toTamil(text){
 
         return text;
 
     },
 
-    toTamil(text) {
+    toMalayalam(text){
 
         return text;
 
     },
 
-    toMalayalam(text) {
+    supported(name){
 
-        return text;
+        return this.schemes.includes(
 
-    },
+            String(name)
 
-    render(elementId, text) {
-
-        const element = document.getElementById(elementId);
-
-        if (!element) return;
-
-        element.innerHTML = this.convert(text);
+        );
 
     },
 
-    autoRender() {
+    destroy(){
 
-        document.querySelectorAll("[data-transliteration]")
-
-        .forEach(node => {
-
-            const value = node.dataset.transliteration;
-
-            node.innerHTML = this.convert(value);
-
-        });
+        /* Reserved */
 
     }
 
 };
 
-window.TransliterationEngine = TransliterationEngine;
+DGE.Transliteration=Transliteration;
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener(
 
-    TransliterationEngine.autoRender();
+    "DOMContentLoaded",
 
-});
+    ()=>{
+
+        Transliteration.init();
+
+    }
+
+);
+
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
