@@ -1,119 +1,176 @@
-/*
-=========================================================
-Digital Grantha Engine
-bookmarks.js
-Version: 10.1.0 Alpha 005
-=========================================================
-*/
-
-(function () {
-
 "use strict";
 
-const BookmarkEngine = {
+/*=============================================================================
+ Digital Grantha Engine
+ Bookmark Manager
+ Version : 10.1.0 Alpha
+=============================================================================*/
 
-    STORAGE_KEY: "bookmarks",
+(function(){
 
-    bookmarks: [],
+if(!window.DGE)
+    throw new Error("DGE core must be loaded first.");
 
-    init() {
+const Bookmarks={
 
-        this.bookmarks = CacheEngine.get(this.STORAGE_KEY, []);
+    storageKey:"DGE_BOOKMARKS",
 
-        DGE.log("Bookmarks Loaded : " + this.bookmarks.length);
+    items:[],
 
-    },
+    init(){
 
-    save() {
+        this.load();
 
-        CacheEngine.set(this.STORAGE_KEY, this.bookmarks);
-
-    },
-
-    exists(granthaId, verseNo) {
-
-        return this.bookmarks.some(item =>
-
-            item.granthaId === granthaId &&
-            item.verseNo === verseNo
-
-        );
+        return this;
 
     },
 
-    add(granthaId, verseNo, title = "") {
+    load(){
 
-        if (this.exists(granthaId, verseNo))
-            return;
+        try{
 
-        this.bookmarks.push({
+            const data=localStorage.getItem(
+                this.storageKey
+            );
 
-            granthaId,
+            this.items=data
+                ?JSON.parse(data)
+                :[];
 
-            verseNo,
+        }catch(e){
 
-            title,
-
-            created: Date.now()
-
-        });
-
-        this.save();
-
-        DGE.log("Bookmark Added");
-
-    },
-
-    remove(granthaId, verseNo) {
-
-        this.bookmarks = this.bookmarks.filter(item =>
-
-            !(item.granthaId === granthaId &&
-              item.verseNo === verseNo)
-
-        );
-
-        this.save();
-
-        DGE.log("Bookmark Removed");
-
-    },
-
-    toggle(granthaId, verseNo, title = "") {
-
-        if (this.exists(granthaId, verseNo)) {
-
-            this.remove(granthaId, verseNo);
-
-        } else {
-
-            this.add(granthaId, verseNo, title);
+            this.items=[];
 
         }
 
     },
 
-    all() {
+    save(){
 
-        return [...this.bookmarks];
+        localStorage.setItem(
+
+            this.storageKey,
+
+            JSON.stringify(this.items)
+
+        );
 
     },
 
-    clear() {
+    add(bookmark){
 
-        this.bookmarks = [];
+        if(!bookmark)
+            return false;
+
+        if(this.exists(bookmark.id))
+            return false;
+
+        this.items.push(bookmark);
 
         this.save();
 
-        DGE.log("Bookmarks Cleared");
+        DGE.emit(
+            "bookmark:add",
+            bookmark
+        );
+
+        return true;
 
     },
 
-    export() {
+    remove(id){
+
+        this.items=this.items.filter(
+
+            item=>String(item.id)!==String(id)
+
+        );
+
+        this.save();
+
+        DGE.emit(
+            "bookmark:remove",
+            id
+        );
+
+    },
+
+    exists(id){
+
+        return this.items.some(
+
+            item=>String(item.id)===String(id)
+
+        );
+
+    },
+
+    get(id){
+
+        return this.items.find(
+
+            item=>String(item.id)===String(id)
+
+        ) || null;
+
+    },
+
+    getAll(){
+
+        return [...this.items];
+
+    },
+
+    clear(){
+
+        this.items=[];
+
+        this.save();
+
+        DGE.emit(
+            "bookmark:clear"
+        );
+
+    },
+
+    count(){
+
+        return this.items.length;
+
+    },
+
+    toggle(bookmark){
+
+        if(this.exists(bookmark.id)){
+
+            this.remove(bookmark.id);
+
+            return false;
+
+        }
+
+        this.add(bookmark);
+
+        return true;
+
+    },
+
+    import(list){
+
+        if(!Array.isArray(list))
+            return;
+
+        this.items=[...list];
+
+        this.save();
+
+    },
+
+    export(){
 
         return JSON.stringify(
 
-            this.bookmarks,
+            this.items,
 
             null,
 
@@ -122,41 +179,77 @@ const BookmarkEngine = {
         );
 
     },
+    importJSON(json){
 
-    import(json) {
+        try{
 
-        try {
+            const data=JSON.parse(json);
 
-            this.bookmarks = JSON.parse(json);
+            if(Array.isArray(data)){
 
-            this.save();
+                this.items=data;
 
-            DGE.log("Bookmarks Imported");
+                this.save();
+
+                return true;
+
+            }
+
+        }catch(e){
+
+            return false;
 
         }
 
-        catch (e) {
+        return false;
 
-            DGE.log("Bookmark Import Failed");
+    },
 
-        }
+    destroy(){
+
+        this.items=[];
 
     }
 
 };
 
-window.BookmarkEngine = BookmarkEngine;
+DGE.Bookmarks=Bookmarks;
 
 document.addEventListener(
 
     "DOMContentLoaded",
 
-    function () {
+    ()=>{
 
-        BookmarkEngine.init();
+        Bookmarks.init();
 
     }
 
 );
 
 })();
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
