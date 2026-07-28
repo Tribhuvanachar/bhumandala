@@ -1,160 +1,153 @@
-/*
-=========================================================
-Digital Grantha Engine
-notes.js
-Version: 10.1.0 Alpha 005
-=========================================================
-*/
-
-(function () {
-
 "use strict";
 
-const NotesEngine = {
+/*=============================================================================
+ Digital Grantha Engine
+ Notes Manager
+ Version : 10.1.0 Alpha
+=============================================================================*/
 
-    STORAGE_KEY: "notes",
+(function(){
 
-    notes: {},
+if(!window.DGE)
+    throw new Error("DGE core must be loaded first.");
 
-    init() {
+const Notes={
 
-        this.notes = CacheEngine.get(this.STORAGE_KEY, {});
+    storageKey:"DGE_NOTES",
 
-        DGE.log("Notes Loaded");
+    items:{},
+
+    init(){
+
+        this.load();
+
+        return this;
 
     },
 
-    key(granthaId, verseNo) {
+    load(){
 
-        return granthaId + ":" + verseNo;
+        try{
+
+            const data=localStorage.getItem(
+                this.storageKey
+            );
+
+            this.items=data
+                ?JSON.parse(data)
+                :{};
+
+        }catch(e){
+
+            this.items={};
+
+        }
 
     },
 
-    save() {
+    save(){
 
-        CacheEngine.set(
+        localStorage.setItem(
 
-            this.STORAGE_KEY,
+            this.storageKey,
 
-            this.notes
+            JSON.stringify(this.items)
 
         );
 
     },
 
-    get(granthaId, verseNo) {
+    set(id,text){
 
-        return this.notes[
-
-            this.key(granthaId, verseNo)
-
-        ] || "";
-
-    },
-
-    set(granthaId, verseNo, text) {
-
-        this.notes[
-
-            this.key(granthaId, verseNo)
-
-        ] = {
-
-            text,
-
-            modified: Date.now()
-
-        };
+        this.items[String(id)]=text;
 
         this.save();
 
-        DGE.log("Note Saved");
+        DGE.emit(
+            "note:set",
+            id
+        );
 
     },
 
-    remove(granthaId, verseNo) {
+    get(id){
 
-        delete this.notes[
+        return this.items[
+            String(id)
+        ] ?? "";
 
-            this.key(granthaId, verseNo)
+    },
 
+    remove(id){
+
+        delete this.items[
+            String(id)
         ];
 
         this.save();
 
-        DGE.log("Note Removed");
+        DGE.emit(
+            "note:remove",
+            id
+        );
 
     },
 
-    has(granthaId, verseNo) {
+    has(id){
 
-        return this.notes.hasOwnProperty(
+        return Object.prototype.hasOwnProperty.call(
 
-            this.key(granthaId, verseNo)
+            this.items,
+
+            String(id)
 
         );
 
     },
 
-    all() {
+    clear(){
 
-        return this.notes;
-
-    },
-
-    clear() {
-
-        this.notes = {};
+        this.items={};
 
         this.save();
 
-        DGE.log("All Notes Cleared");
+        DGE.emit(
+            "note:clear"
+        );
 
     },
 
-    search(query) {
+    getAll(){
 
-        query = query.toLowerCase();
+        return {
 
-        let result = [];
+            ...this.items
 
-        Object.keys(this.notes)
-
-        .forEach(key => {
-
-            const note = this.notes[key];
-
-            if (
-
-                note.text
-
-                .toLowerCase()
-
-                .includes(query)
-
-            ) {
-
-                result.push({
-
-                    key,
-
-                    note
-
-                });
-
-            }
-
-        });
-
-        return result;
+        };
 
     },
 
-    export() {
+    keys(){
+
+        return Object.keys(
+
+            this.items
+
+        );
+
+    },
+
+    count(){
+
+        return this.keys().length;
+
+    },
+
+    export(){
 
         return JSON.stringify(
 
-            this.notes,
+            this.items,
 
             null,
 
@@ -164,40 +157,90 @@ const NotesEngine = {
 
     },
 
-    import(json) {
+    import(data){
 
-        try {
+        if(
 
-            this.notes = JSON.parse(json);
+            typeof data!=="object" ||
 
-            this.save();
+            data===null
 
-            DGE.log("Notes Imported");
+        )
+
+            return false;
+
+        this.items={...data};
+
+        this.save();
+
+        return true;
+
+    },
+
+    importJSON(json){
+
+        try{
+
+            const data=JSON.parse(json);
+
+            return this.import(data);
+
+        }catch(e){
+
+            return false;
 
         }
 
-        catch(e){
+    },
 
-            DGE.log("Invalid Notes File");
+    destroy(){
 
-        }
+        this.items={};
 
     }
 
 };
 
-window.NotesEngine = NotesEngine;
+DGE.Notes=Notes;
 
 document.addEventListener(
 
     "DOMContentLoaded",
 
-    function(){
+    ()=>{
 
-        NotesEngine.init();
+        Notes.init();
 
     }
 
 );
 
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
+
+
+    
