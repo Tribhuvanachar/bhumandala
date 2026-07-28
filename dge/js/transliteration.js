@@ -1,135 +1,418 @@
 "use strict";
 
-/*=============================================================================
- Digital Grantha Engine
- Transliteration Engine
- Version : 10.1.0 Alpha
-=============================================================================*/
-
 (function(){
 
 if(!window.DGE)
-    throw new Error("DGE core must be loaded first.");
+    throw new Error(
+        "DGE core must be loaded first."
+    );
 
 const Transliteration={
 
-    scheme:"iast",
+    current:"devanagari",
+
+    cache:new Map(),
 
     schemes:[
-
-        "iast",
         "devanagari",
         "kannada",
         "telugu",
         "tamil",
-        "malayalam"
-
+        "malayalam",
+        "iast"
     ],
 
     init(){
 
-        return this;
+        this.current=
+
+            localStorage.getItem(
+
+                "app_script"
+
+            ) ||
+
+            "devanagari";
 
     },
 
-    current(){
+    setScheme(name){
 
-        return this.scheme;
+        if(
+            !this.supported(name)
+        )
+            return false;
+
+        this.current=name;
+
+        localStorage.setItem(
+
+            "app_script",
+
+            name
+
+        );
+
+        this.cache.clear();
+
+        DGE.emit(
+
+            "script:changed",
+
+            name
+
+        );
+
+        return true;
 
     },
 
-    set(name){
+    getScheme(){
+
+        return this.current;
+
+    },
+
+    transliterate(text){
+
+        return this.convert(
+
+            text,
+
+            this.current
+
+        );
+
+    },
+
+    convert(
+
+        html,
+
+        scheme
+
+    ){
 
         if(
 
-            this.schemes.includes(name)
+            !html ||
+
+            scheme==="devanagari"
+
+        )
+
+            return html;
+
+        const key=
+
+            scheme+
+
+            "::"+
+
+            html;
+
+        if(
+
+            this.cache.has(key)
+
+        )
+
+            return this.cache.get(
+
+                key
+
+            );
+
+        const result=
+
+            this.safeHTML(
+
+                html,
+
+                scheme
+
+            );
+
+        this.cache.set(
+
+            key,
+
+            result
+
+        );
+
+        return result;
+
+    },
+
+    safeHTML(
+
+        html,
+
+        scheme
+
+    ){
+
+        if(
+
+            typeof Sanscript===
+
+            "undefined"
 
         ){
 
-            this.scheme=name;
+            console.error(
 
-            DGE.emit(
+                "Sanscript not loaded."
 
-                "transliteration:change",
+            );
 
-                name
+            return html;
+
+        }
+
+        const root=
+
+            document.createElement(
+
+                "div"
+
+            );
+
+        root.innerHTML=html;
+
+        this.walk(
+
+            root,
+
+            scheme
+
+        );
+
+        return root.innerHTML;
+
+    },
+
+    walk(
+
+        node,
+
+        scheme
+
+    ){
+
+        node.childNodes.forEach(
+
+            child=>{
+
+                if(
+
+                    child.nodeType===
+
+                    Node.TEXT_NODE
+
+                ){
+
+                    child.textContent=
+
+                        this.convertText(
+
+                            child.textContent,
+
+                            scheme
+
+                        );
+
+                }
+
+                else{
+
+                    this.walk(
+
+                        child,
+
+                        scheme
+
+                    );
+
+                }
+
+            }
+
+        );
+
+    },
+
+    convertText(
+
+        text,
+
+        scheme
+
+    ){
+
+        if(
+
+            !text ||
+
+            !text.trim()
+
+        )
+
+            return text;
+
+        try{
+
+            return Sanscript.t(
+
+                text.normalize(
+
+                    "NFC"
+
+                ),
+
+                "devanagari",
+
+                scheme
 
             );
 
         }
 
-    },
+        catch(err){
 
-    list(){
+            console.error(
 
-        return [
+                err
 
-            ...this.schemes
+            );
 
-        ];
-
-    },
-    convert(text,target=null){
-
-        target=target||this.scheme;
-
-        if(typeof text!=="string")
-
-            return "";
-
-        switch(target){
-
-            case "iast":
-                return text;
-
-            case "devanagari":
-                return this.toDevanagari(text);
-
-            case "kannada":
-                return this.toKannada(text);
-
-            case "telugu":
-                return this.toTelugu(text);
-
-            case "tamil":
-                return this.toTamil(text);
-
-            case "malayalam":
-                return this.toMalayalam(text);
-
-            default:
-                return text;
+            return text;
 
         }
 
     },
 
-    toDevanagari(text){
+    applyToElement(
 
-        return text;
+        element,
+
+        scheme=this.current
+
+    ){
+
+        if(!element)
+            return;
+
+        element.innerHTML=
+
+            this.convert(
+
+                element.innerHTML,
+
+                scheme
+
+            );
 
     },
 
-    toKannada(text){
+    applyToSelector(
 
-        return text;
+        selector,
+
+        scheme=this.current
+
+    ){
+
+        document
+
+            .querySelectorAll(
+
+                selector
+
+            )
+
+            .forEach(
+
+                el=>{
+
+                    this.applyToElement(
+
+                        el,
+
+                        scheme
+
+                    );
+
+                }
+
+            );
 
     },
 
-    toTelugu(text){
+    refresh(){
 
-        return text;
+        DGE.emit(
+
+            "transliteration:before",
+
+            this.current
+
+        );
+
+        /*
+         * Rendering module should redraw
+         * the current grantha using the
+         * selected script instead of
+         * repeatedly transliterating
+         * already-transliterated DOM.
+         */
+
+        if(
+
+            DGE.Render &&
+
+            typeof DGE.Render.render==="function"
+
+        ){
+
+            DGE.Render.render();
+
+        }
+
+        DGE.emit(
+
+            "transliteration:after",
+
+            this.current
+
+        );
 
     },
-    toTamil(text){
 
-        return text;
+    clearCache(){
+
+        this.cache.clear();
 
     },
 
-    toMalayalam(text){
+    normalize(text){
 
-        return text;
+        if(
+
+            typeof text!==
+
+            "string"
+
+        )
+
+            return text;
+
+        return text.normalize(
+
+            "NFC"
+
+        );
 
     },
 
@@ -139,19 +422,51 @@ const Transliteration={
 
             String(name)
 
+                .toLowerCase()
+
         );
+
+    },
+
+    registerScheme(name){
+
+        name=
+
+            String(name)
+
+            .toLowerCase();
+
+        if(
+
+            !this.schemes.includes(
+
+                name
+
+            )
+
+        ){
+
+            this.schemes.push(
+
+                name
+
+            );
+
+        }
 
     },
 
     destroy(){
 
-        /* Reserved */
+        this.clearCache();
 
     }
 
 };
 
-DGE.Transliteration=Transliteration;
+DGE.Transliteration=
+
+    Transliteration;
 
 document.addEventListener(
 
@@ -179,21 +494,5 @@ document.addEventListener(
 
 
 
-    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+ 
