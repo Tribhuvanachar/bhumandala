@@ -2,8 +2,9 @@
 =========================================================
 Digital Grantha Engine
 Grantha Notes
-Build 001
-Migrated from PrahladaKrutaNarasimhaStotra.html
+Build 002
+Mechanically migrated from
+PrahladaKrutaNarasimhaStotra.html
 =========================================================
 */
 
@@ -15,7 +16,7 @@ class DGEGranthaNotes {
 
         this.notes = {};
 
-        this.currentVerse = null;
+        this.targetNoteId = null;
 
     }
 
@@ -59,257 +60,143 @@ class DGEGranthaNotes {
 
     }
 
-    has(verse) {
+    openNoteModal() {
 
-        return !!(
-
-            this.notes[verse]
-
-            &&
-
-            this.notes[verse].trim()
-
-        );
+        openModal("noteModal");
 
     }
 
-    get(verse) {
+    closeNoteModal() {
 
-        return this.notes[verse] || "";
+        closeModal("noteModal");
+
+        document
+            .getElementById("noteModalBox")
+            .classList
+            .remove("fullscreen");
+
+        document
+            .getElementById("maxNoteBtn")
+            .innerText = "⛶ Expand";
 
     }
 
-    set(verse, text) {
+    openNote(id) {
 
-        if (
+        this.targetNoteId = id;
 
-            text
+        document
+            .getElementById("noteShlokaNum")
+            .innerText = id;
 
-            &&
+        document
+            .getElementById("noteText")
+            .value = this.notes[id] || "";
 
-            text.trim()
+        this.openNoteModal();
 
-        ) {
+    }
 
-            this.notes[verse] = text;
+    saveNote() {
+
+        const txt =
+
+            document
+                .getElementById("noteText")
+                .value
+                .trim();
+
+        if (txt) {
+
+            this.notes[this.targetNoteId] = txt;
 
         }
 
         else {
 
-            delete this.notes[verse];
+            delete this.notes[this.targetNoteId];
 
         }
 
         this.saveStorage();
 
-    }
+        this.closeNoteModal();
 
-    append(verse, text) {
+        DGEGranthaReader.renderList();
 
-        const oldText =
+        showToast(
 
-            this.get(verse);
-
-        const newText =
-
-            oldText
-
-            ?
-
-            oldText +
-
-            "\n\n" +
-
-            text
-
-            :
-
-            text;
-
-        this.set(
-
-            verse,
-
-            newText
+            `Saved notes for Shloka ${this.targetNoteId}!`
 
         );
 
     }
 
-    clear(verse) {
-
-        delete this.notes[verse];
-
-        this.saveStorage();
-
-    }
-
-    openEditor(verse) {
-
-        this.currentVerse = verse;
-
-        const modal =
-
-            document.getElementById(
-
-                "noteModal"
-
-            );
-
-        if (!modal) return;
-
-        const num =
-
-            document.getElementById(
-
-                "noteShlokaNum"
-
-            );
-
-        const txt =
-
-            document.getElementById(
-
-                "noteText"
-
-            );
-
-        if (num) {
-
-            num.innerText = verse;
-
-        }
-
-        if (txt) {
-
-            txt.value =
-
-                this.get(verse);
-
-        }
-
-        modal.style.display =
-
-            "flex";
-
-        document.body.classList.add(
-
-            "modal-open"
-
-        );
-
-    }
-
-    closeEditor() {
-
-        const modal =
-
-            document.getElementById(
-
-                "noteModal"
-
-            );
-
-        if (modal) {
-
-            modal.style.display =
-
-                "none";
-
-        }
-
-        document.body.classList.remove(
-
-            "modal-open"
-
-        );
-
-    }
-
-    saveCurrent() {
+    clearNote() {
 
         if (
 
-            this.currentVerse == null
+            confirm(
+
+                "Are you sure you want to clear all notes for this Shloka?"
+
+            )
 
         ) {
 
-            return;
-
-        }
-
-        const txt =
-
-            document.getElementById(
-
-                "noteText"
-
-            );
-
-        if (!txt) return;
-
-        this.set(
-
-            this.currentVerse,
-
-            txt.value
-
-        );
-
-        this.closeEditor();
-
-        if (
-
-            window.DGEGranthaReader
-
-        ) {
-
-            DGEGranthaReader.renderList();
+            document
+                .getElementById("noteText")
+                .value = "";
 
         }
 
     }
 
-    clearCurrent() {
+    toggleMaximizeNote() {
 
-        if (
-
-            this.currentVerse == null
-
-        ) {
-
-            return;
-
-        }
-
-        this.clear(
-
-            this.currentVerse
-
-        );
-
-        const txt =
+        const box =
 
             document.getElementById(
 
-                "noteText"
+                "noteModalBox"
 
             );
 
-        if (txt) {
+        const btn =
 
-            txt.value = "";
+            document.getElementById(
 
-        }
+                "maxNoteBtn"
+
+            );
+
+        box.classList.toggle(
+
+            "fullscreen"
+
+        );
 
         if (
 
-            window.DGEGranthaReader
+            box.classList.contains(
+
+                "fullscreen"
+
+            )
 
         ) {
 
-            DGEGranthaReader.renderList();
+            btn.innerText =
+
+                "🗗 Minimize";
+
+        }
+
+        else {
+
+            btn.innerText =
+
+                "⛶ Expand";
 
         }
 
@@ -320,3 +207,7 @@ class DGEGranthaNotes {
 window.DGEGranthaNotes =
 
     new DGEGranthaNotes();
+
+/*
+END OF FILE
+*/
