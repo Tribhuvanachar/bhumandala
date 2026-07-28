@@ -13,254 +13,356 @@ if(!window.DGE)
 
 const Search={
 
-    lastQuery:"",
+    timer:null,
 
-    lastResults:[],
+    query:"",
 
-    options:{
+    scope:"all",
 
-        caseSensitive:false,
+    matches:[],
 
-        wholeWord:false,
+    current:-1,
 
-        maxResults:100
+    debounce:250,
 
-    },
+    init(){
 
-    configure(options={}){
+        const box=document.getElementById("searchInput");
 
-        Object.assign(
-            this.options,
-            options
-        );
+        if(!box) return;
 
-    },
+        box.addEventListener(
 
-    search(query){
+            "input",
 
-        this.lastQuery=query;
+            ()=>{
 
-        if(!query){
+                clearTimeout(this.timer);
 
-            this.lastResults=[];
+                this.timer=setTimeout(
 
-            return [];
+                    ()=>{
 
-        }
+                        this.search(
 
-        const verses=DGE.Data.getAll();
+                            box.value
 
-        const results=[];
+                        );
 
-        const searchText=this.options.caseSensitive
-            ?query
-            :query.toLowerCase();
+                    },
 
-        for(const verse of verses){
+                    this.debounce
 
-            const body=
-                String(
-                    verse.text ??
-                    verse.verse ??
-                    verse.content ??
-                    ""
                 );
-
-            const candidate=this.options.caseSensitive
-                ?body
-                :body.toLowerCase();
-
-            if(candidate.includes(searchText)){
-
-                results.push(verse);
 
             }
 
-            if(results.length>=this.options.maxResults)
-
-                break;
-
-        }
-
-        this.lastResults=results;
-
-        DGE.emit(
-            "search:completed",
-            results
         );
-
-        return results;
 
     },
 
-    searchAndRender(query){
+    normalize(text){
 
-        const results=this.search(query);
+        return (text||"")
 
-        DGE.Render.renderSearchResults(
-            results
+            .normalize("NFC")
+
+            .toLowerCase()
+
+            .replace(/\s+/g," ")
+
+            .trim();
+
+    },
+
+    search(q){
+
+        this.query=this.normalize(q);
+
+        this.matches=[];
+
+        this.current=-1;
+
+        if(!this.query){
+
+            DGE.emit(
+
+                "search:clear"
+
+            );
+
+            return;
+
+        }
+
+        const data=
+
+            DGE.Data.all();
+
+        if(!Array.isArray(data))
+
+            return;
+
+        data.forEach(
+
+            (item,index)=>{
+
+                if(
+
+                    this.match(
+
+                        item
+
+                    )
+
+                ){
+
+                    this.matches.push(
+
+                        index
+
+                    );
+
+                }
+
+            }
+
         );
 
-        return results;
+        DGE.emit(
+
+            "search:results",
+
+            {
+
+                query:this.query,
+
+                matches:this.matches
+
+            }
+
+        );
+
+        if(
+
+            this.matches.length
+
+        ){
+
+            this.goto(0);
+
+        }
+
+    },
+    match(item){
+
+        if(!item)
+            return false;
+
+        const fields=[];
+
+        if(item.sa)
+            fields.push(item.sa);
+
+        if(item.sanskrit)
+            fields.push(item.sanskrit);
+
+        if(item.title)
+            fields.push(item.title);
+
+        if(item.en)
+            fields.push(item.en);
+
+        if(item.translation)
+            fields.push(item.translation);
+
+        if(item.kn)
+            fields.push(item.kn);
+
+        if(item.te)
+            fields.push(item.te);
+
+        if(item.ta)
+            fields.push(item.ta);
+
+        if(item.ml)
+            fields.push(item.ml);
+
+        if(item.commentary){
+
+            if(typeof item.commentary==="string")
+
+                fields.push(item.commentary);
+
+            else{
+
+                Object.values(
+
+                    item.commentary
+
+                ).forEach(
+
+                    value=>{
+
+                        if(value)
+
+                            fields.push(value);
+
+                    }
+
+                );
+
+            }
+
+        }
+
+        return fields.some(
+
+            text=>{
+
+                text=this.normalize(text);
+
+                return text.includes(
+
+                    this.query
+
+                );
+
+            }
+
+        );
+
+    },
+
+    goto(index){
+
+        if(
+
+            !this.matches.length
+
+        )
+
+            return;
+
+        if(index<0)
+
+            index=0;
+
+        if(
+
+            index>=this.matches.length
+
+        )
+
+            index=this.matches.length-1;
+
+        this.current=index;
+
+        const verse=this.matches[index];
+
+        DGE.emit(
+
+            "search:goto",
+
+            {
+
+                verse,
+
+                index,
+
+                total:this.matches.length
+
+            }
+
+        );
+
+    },
+
+    next(){
+
+        if(
+
+            !this.matches.length
+
+        )
+
+            return;
+
+        let i=this.current+1;
+
+        if(
+
+            i>=this.matches.length
+
+        )
+
+            i=0;
+
+        this.goto(i);
+
+    },
+
+    previous(){
+
+        if(
+
+            !this.matches.length
+
+        )
+
+            return;
+
+        let i=this.current-1;
+
+        if(
+
+            i<0
+
+        )
+
+            i=this.matches.length-1;
+
+        this.goto(i);
 
     },
 
     clear(){
 
-        this.lastQuery="";
+        this.query="";
 
-        this.lastResults=[];
+        this.matches=[];
 
-    },
+        this.current=-1;
 
-    findByNumber(number){
+        DGE.emit(
 
-        const verses=DGE.Data.getAll();
-
-        return verses.find(v=>
-
-            String(
-                v.number ??
-                v.id
-            )===String(number)
-
-        ) || null;
-
-    },
-
-    searchTitle(query){
-
-        if(!query)
-            return [];
-
-        const verses=DGE.Data.getAll();
-
-        const q=this.options.caseSensitive
-            ?query
-            :query.toLowerCase();
-
-        return verses.filter(v=>{
-
-            const title=String(
-                v.title ?? ""
-            );
-
-            const value=this.options.caseSensitive
-                ?title
-                :title.toLowerCase();
-
-            return value.includes(q);
-
-        });
-
-    },
-
-    searchMetadata(field,value){
-
-        const verses=DGE.Data.getAll();
-
-        return verses.filter(v=>
-
-            String(v[field] ?? "")
-                .toLowerCase()
-                .includes(
-                    String(value)
-                    .toLowerCase()
-                )
+            "search:clear"
 
         );
 
     },
 
-    searchRegex(pattern,flags="i"){
+    resultCount(){
 
-        const regex=new RegExp(
-            pattern,
-            flags
-        );
-
-        return DGE.Data.getAll().filter(v=>
-
-            regex.test(
-
-                String(
-                    v.text ??
-                    v.verse ??
-                    ""
-                )
-
-            )
-
-        );
+        return this.matches.length;
 
     },
 
-    getLastResults(){
-
-        return [...this.lastResults];
-
-    },
-
-    getLastQuery(){
-
-        return this.lastQuery;
-
-    },
-    count(query){
-
-        return this.search(query).length;
-
-    },
-
-    exists(query){
-
-        return this.count(query)>0;
-
-    },
-
-    first(query){
-
-        const results=this.search(query);
-
-        return results.length
-            ?results[0]
-            :null;
-
-    },
-
-    next(currentIndex){
+    activeResult(){
 
         if(
 
-            currentIndex<0 ||
-
-            currentIndex>=this.lastResults.length-1
+            this.current<0
 
         )
 
             return null;
 
-        return this.lastResults[
-            currentIndex+1
+        return this.matches[
+
+            this.current
+
         ];
-
-    },
-
-    previous(currentIndex){
-
-        if(currentIndex<=0)
-
-            return null;
-
-        return this.lastResults[
-            currentIndex-1
-        ];
-
-    },
-
-    destroy(){
-
-        this.clear();
 
     }
 
@@ -268,31 +370,525 @@ const Search={
 
 DGE.Search=Search;
 
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
+
+        Search.init();
+
+    }
+
+);
+
 })();
+    setScope(scope){
 
+        this.scope=scope||"all";
 
+    },
 
+    collectFields(item){
 
+        const fields=[];
 
+        switch(this.scope){
 
+            case "mula":
 
+                if(item.sa)
+                    fields.push(item.sa);
 
+                if(item.sanskrit)
+                    fields.push(item.sanskrit);
 
+                break;
 
+            case "translation":
 
+                if(item.en)
+                    fields.push(item.en);
 
+                if(item.translation)
+                    fields.push(item.translation);
 
-    
+                break;
 
+            case "commentary":
 
+                if(item.commentary){
 
+                    if(typeof item.commentary==="string")
 
+                        fields.push(item.commentary);
 
+                    else
 
+                        Object.values(
 
+                            item.commentary
 
+                        ).forEach(
 
+                            t=>{
 
+                                if(t)
 
+                                    fields.push(t);
 
-    
+                            }
+
+                        );
+
+                }
+
+                break;
+
+            default:
+
+                [
+
+                    item.sa,
+                    item.sanskrit,
+                    item.en,
+                    item.translation,
+                    item.kn,
+                    item.te,
+                    item.ta,
+                    item.ml,
+                    item.title
+
+                ].forEach(
+
+                    t=>{
+
+                        if(t)
+
+                            fields.push(t);
+
+                    }
+
+                );
+
+                if(item.commentary){
+
+                    if(typeof item.commentary==="string")
+
+                        fields.push(item.commentary);
+
+                    else
+
+                        Object.values(
+
+                            item.commentary
+
+                        ).forEach(
+
+                            t=>{
+
+                                if(t)
+
+                                    fields.push(t);
+
+                            }
+
+                        );
+
+                }
+
+        }
+
+        return fields;
+
+    },
+
+    match(item){
+
+        return this.collectFields(item)
+
+            .some(
+
+                text=>
+
+                    this.normalize(text)
+
+                    .includes(
+
+                        this.query
+
+                    )
+
+            );
+
+    },
+
+    highlight(text){
+
+        if(
+
+            !this.query ||
+
+            !text
+
+        )
+
+            return text;
+
+        const escaped=
+
+            this.query.replace(
+
+                /[-\/\\^$*+?.()|[\]{}]/g,
+
+                "\\$&"
+
+            );
+
+        return text.replace(
+
+            new RegExp(
+
+                "("+
+
+                escaped+
+
+                ")",
+
+                "ig"
+
+            ),
+
+            "<mark>$1</mark>"
+
+        );
+
+    },
+
+    highlightVerse(verse){
+
+        if(!verse)
+
+            return verse;
+
+        const copy=
+
+            structuredClone(
+
+                verse
+
+            );
+
+        [
+
+            "sa",
+            "sanskrit",
+            "en",
+            "translation",
+            "kn",
+            "te",
+            "ta",
+            "ml"
+
+        ].forEach(
+
+            key=>{
+
+                if(copy[key])
+
+                    copy[key]=
+
+                        this.highlight(
+
+                            copy[key]
+
+                        );
+
+            }
+
+        );
+
+        return copy;
+
+    },
+    renderResults(){
+
+        if(!DGE.Render)
+            return;
+
+        const data=DGE.Data.all();
+
+        if(!Array.isArray(data))
+            return;
+
+        DGE.Render.beginSearch();
+
+        this.matches.forEach(
+
+            id=>{
+
+                const verse=this.highlightVerse(
+
+                    data[id]
+
+                );
+
+                DGE.Render.updateVerse(
+
+                    id,
+
+                    verse
+
+                );
+
+            }
+
+        );
+
+        DGE.Render.endSearch();
+
+    },
+
+    goto(index){
+
+        if(!this.matches.length)
+            return;
+
+        if(index<0)
+            index=0;
+
+        if(index>=this.matches.length)
+            index=this.matches.length-1;
+
+        this.current=index;
+
+        const verseId=this.matches[index];
+
+        DGE.emit(
+
+            "search:goto",
+
+            {
+
+                verse:verseId,
+
+                index,
+
+                total:this.matches.length
+
+            }
+
+        );
+
+        this.scrollTo(
+
+            verseId
+
+        );
+
+    },
+
+    scrollTo(id){
+
+        requestAnimationFrame(
+
+            ()=>{
+
+                const el=
+
+                    document.querySelector(
+
+                        `[data-verse="${id}"]`
+
+                    ) ||
+
+                    document.getElementById(
+
+                        "verse-"+id
+
+                    );
+
+                if(!el)
+                    return;
+
+                el.scrollIntoView({
+
+                    behavior:"smooth",
+
+                    block:"center"
+
+                });
+
+                document
+
+                    .querySelectorAll(
+
+                        ".dge-search-active"
+
+                    )
+
+                    .forEach(
+
+                        e=>e.classList.remove(
+
+                            "dge-search-active"
+
+                        )
+
+                    );
+
+                el.classList.add(
+
+                    "dge-search-active"
+
+                );
+
+            }
+
+        );
+
+    },
+
+    bindNavigator(){
+
+        const prev=
+
+            document.getElementById(
+
+                "searchPrev"
+
+            );
+
+        const next=
+
+            document.getElementById(
+
+                "searchNext"
+
+            );
+
+        const clear=
+
+            document.getElementById(
+
+                "clearSearchBtn"
+
+            );
+
+        prev?.addEventListener(
+
+            "click",
+
+            ()=>this.previous()
+
+        );
+
+        next?.addEventListener(
+
+            "click",
+
+            ()=>this.next()
+
+        );
+
+        clear?.addEventListener(
+
+            "click",
+
+            ()=>{
+
+                const input=
+
+                    document.getElementById(
+
+                        "searchInput"
+
+                    );
+
+                if(input)
+
+                    input.value="";
+
+                this.clear();
+
+            }
+
+        );
+
+    },
+
+    init(){
+
+        this.bindNavigator();
+
+        const input=
+
+            document.getElementById(
+
+                "searchInput"
+
+            );
+
+        const scope=
+
+            document.getElementById(
+
+                "searchScope"
+
+            );
+
+        input?.addEventListener(
+
+            "input",
+
+            ()=>{
+
+                clearTimeout(
+
+                    this.timer
+
+                );
+
+                this.timer=setTimeout(
+
+                    ()=>{
+
+                        this.search(
+
+                            input.value
+
+                        );
+
+                    },
+
+                    this.debounce
+
+                );
+
+            }
+
+        );
+
+        scope?.addEventListener(
+
+            "change",
+
+            e=>{
+
+                this.setScope(
+
+                    e.target.value
+
+                );
+
+                this.search(
+
+                    input?.value||""
+
+                );
+
+            }
+
+        );
+
+    }
