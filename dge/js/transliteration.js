@@ -24,15 +24,9 @@ const Transliteration={
 
     init(){
 
-        this.current=
+        this.current="devanagari";
 
-            localStorage.getItem(
-
-                "app_script"
-
-            ) ||
-
-            "devanagari";
+        this.restorePrefs();
 
     },
 
@@ -42,6 +36,8 @@ const Transliteration={
             !this.supported(name)
         )
             return false;
+
+        name = String(name).toLowerCase();
 
         this.current=name;
 
@@ -368,15 +364,17 @@ const Transliteration={
          * already-transliterated DOM.
          */
 
-        if(
+        if (DGE.Render) {
 
-            DGE.Render &&
+            if (typeof DGE.Render.rerender === "function") {
 
-            typeof DGE.Render.render==="function"
+                DGE.Render.rerender();
 
-        ){
+            } else if (typeof DGE.Render.renderList === "function") {
 
-            DGE.Render.render();
+                DGE.Render.renderList();
+
+            }
 
         }
 
@@ -456,6 +454,80 @@ const Transliteration={
 
     },
 
+    apply(text){
+
+        return this.transliterate(
+            text
+        );
+
+    },
+
+    applyScript(script){
+
+        if(
+            !this.setScheme(script)
+        ){
+            return;
+        }
+
+        this.refresh();
+
+    },
+
+    setScript(script){
+
+        this.applyScript(
+            script
+        );
+
+    },
+
+    restorePrefs(){
+
+        const saved=
+
+            localStorage.getItem(
+                "app_script"
+            );
+
+        if(
+            saved &&
+            this.supported(saved)
+        ){
+
+            this.current=saved;
+
+        }
+
+    },
+
+    getAvailableSchemes(){
+
+        return [
+            ...this.schemes
+        ];
+
+    },
+
+    isCurrent(name){
+
+        return (
+            String(name)
+                .toLowerCase()===
+
+            this.current
+        );
+
+    },
+
+    toggle(nextScheme){
+
+        this.applyScript(
+            nextScheme
+        );
+
+    },
+
     destroy(){
 
         this.clearCache();
@@ -481,18 +553,3 @@ document.addEventListener(
 );
 
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
