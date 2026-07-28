@@ -1,194 +1,250 @@
-/*
-=========================================================
-Digital Grantha Engine
-commentary.js
-Version: 10.1.0 Alpha 005
-=========================================================
-*/
-
-(function () {
-
 "use strict";
 
-const CommentaryEngine = {
+/*=============================================================================
+ Digital Grantha Engine
+ Commentary Manager
+ Version : 10.1.0 Alpha
+=============================================================================*/
 
-    sources: {},
+(function(){
 
-    activeSource: "",
+if(!window.DGE)
+    throw new Error("DGE core must be loaded first.");
 
-    init() {
+const Commentary={
 
-        DGE.log("Commentary Engine Ready");
+    items:{},
+
+    current:null,
+
+    init(){
+
+        this.items={};
+
+        return this;
 
     },
 
-    register(name, data) {
+    load(data={}){
 
-        this.sources[name] = data;
+        this.items={...data};
 
-        if (!this.activeSource)
-            this.activeSource = name;
-
-        DGE.log("Commentary Registered : " + name);
+        DGE.emit(
+            "commentary:load",
+            this.items
+        );
 
     },
 
-    setSource(name) {
+    get(id){
 
-        if (!this.sources[name]) {
+        return this.items[
+            String(id)
+        ] ?? null;
 
-            DGE.log("Commentary Source Missing");
+    },
 
-            return;
+    set(id,data){
+
+        this.items[
+            String(id)
+        ]=data;
+
+        DGE.emit(
+            "commentary:set",
+            id
+        );
+
+    },
+
+    has(id){
+
+        return Object.prototype.hasOwnProperty.call(
+
+            this.items,
+
+            String(id)
+
+        );
+
+    },
+
+    open(id){
+
+        this.current=String(id);
+
+        DGE.emit(
+
+            "commentary:open",
+
+            id
+
+        );
+
+    },
+
+    close(){
+
+        this.current=null;
+
+        DGE.emit(
+            "commentary:close"
+        );
+
+    },
+    currentId(){
+
+        return this.current;
+
+    },
+
+    currentData(){
+
+        if(this.current===null)
+            return null;
+
+        return this.get(this.current);
+
+    },
+
+    remove(id){
+
+        delete this.items[
+            String(id)
+        ];
+
+        if(String(this.current)===String(id))
+            this.current=null;
+
+        DGE.emit(
+            "commentary:remove",
+            id
+        );
+
+    },
+
+    clear(){
+
+        this.items={};
+
+        this.current=null;
+
+        DGE.emit(
+            "commentary:clear"
+        );
+
+    },
+
+    count(){
+
+        return Object.keys(
+
+            this.items
+
+        ).length;
+
+    },
+
+    getAll(){
+
+        return {
+
+            ...this.items
+
+        };
+
+    },
+
+    keys(){
+
+        return Object.keys(
+
+            this.items
+
+        );
+
+    },
+    importJSON(json){
+
+        try{
+
+            const data=JSON.parse(json);
+
+            this.load(data);
+
+            return true;
+
+        }catch(e){
+
+            return false;
 
         }
 
-        this.activeSource = name;
+    },
 
-        DGE.log("Commentary Source : " + name);
+    export(){
+
+        return JSON.stringify(
+
+            this.items,
+
+            null,
+
+            2
+
+        );
 
     },
 
-    currentSource() {
+    destroy(){
 
-        return this.activeSource;
+        this.items={};
 
-    },
-
-    get(granthaId, verseNo) {
-
-        if (!this.activeSource)
-            return "";
-
-        const source =
-
-            this.sources[this.activeSource];
-
-        if (!source)
-            return "";
-
-        if (!source[granthaId])
-            return "";
-
-        return source[granthaId][verseNo] || "";
-
-    },
-
-    render(containerId, granthaId, verseNo) {
-
-        const box =
-
-            document.getElementById(containerId);
-
-        if (!box)
-            return;
-
-        const commentary =
-
-            this.get(granthaId, verseNo);
-
-        if (!commentary) {
-
-            box.innerHTML =
-
-                "<em>No commentary available.</em>";
-
-            return;
-
-        }
-
-        box.innerHTML =
-
-            "<div class='dge-commentary'>" +
-
-            commentary +
-
-            "</div>";
-
-    },
-
-    search(query) {
-
-        query =
-
-            query.toLowerCase();
-
-        let result = [];
-
-        Object.keys(this.sources)
-
-        .forEach(sourceName => {
-
-            const source =
-
-                this.sources[sourceName];
-
-            Object.keys(source)
-
-            .forEach(grantha => {
-
-                Object.keys(source[grantha])
-
-                .forEach(verse => {
-
-                    const text =
-
-                        source[grantha][verse];
-
-                    if (
-
-                        text
-
-                        .toLowerCase()
-
-                        .includes(query)
-
-                    ) {
-
-                        result.push({
-
-                            source: sourceName,
-
-                            grantha,
-
-                            verse,
-
-                            text
-
-                        });
-
-                    }
-
-                });
-
-            });
-
-        });
-
-        return result;
-
-    },
-
-    listSources() {
-
-        return Object.keys(this.sources);
+        this.current=null;
 
     }
 
 };
 
-window.CommentaryEngine = CommentaryEngine;
+DGE.Commentary=Commentary;
 
 document.addEventListener(
 
     "DOMContentLoaded",
 
-    function () {
+    ()=>{
 
-        CommentaryEngine.init();
+        Commentary.init();
 
     }
 
 );
 
 })();
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    
