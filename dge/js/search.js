@@ -27,17 +27,35 @@ const Search={
 
     init(){
 
-        const box=document.getElementById("searchInput");
+        this.bindNavigator();
 
-        if(!box) return;
+        const input=
 
-        box.addEventListener(
+            document.getElementById(
+
+                "searchInput"
+
+            );
+
+        const scope=
+
+            document.getElementById(
+
+                "searchScope"
+
+            );
+
+        input?.addEventListener(
 
             "input",
 
             ()=>{
 
-                clearTimeout(this.timer);
+                clearTimeout(
+
+                    this.timer
+
+                );
 
                 this.timer=setTimeout(
 
@@ -45,13 +63,35 @@ const Search={
 
                         this.search(
 
-                            box.value
+                            input.value
 
                         );
 
                     },
 
                     this.debounce
+
+                );
+
+            }
+
+        );
+
+        scope?.addEventListener(
+
+            "change",
+
+            e=>{
+
+                this.setScope(
+
+                    e.target.value
+
+                );
+
+                this.search(
+
+                    input?.value||""
 
                 );
 
@@ -75,314 +115,6 @@ const Search={
 
     },
 
-    search(q){
-
-        this.query=this.normalize(q);
-
-        this.matches=[];
-
-        this.current=-1;
-
-        if(!this.query){
-
-            DGE.emit(
-
-                "search:clear"
-
-            );
-
-            return;
-
-        }
-
-        const data=
-
-            DGE.Data.all();
-
-        if(!Array.isArray(data))
-
-            return;
-
-        data.forEach(
-
-            (item,index)=>{
-
-                if(
-
-                    this.match(
-
-                        item
-
-                    )
-
-                ){
-
-                    this.matches.push(
-
-                        index
-
-                    );
-
-                }
-
-            }
-
-        );
-
-        DGE.emit(
-
-            "search:results",
-
-            {
-
-                query:this.query,
-
-                matches:this.matches
-
-            }
-
-        );
-
-        if(
-
-            this.matches.length
-
-        ){
-
-            this.goto(0);
-
-        }
-
-    },
-    match(item){
-
-        if(!item)
-            return false;
-
-        const fields=[];
-
-        if(item.sa)
-            fields.push(item.sa);
-
-        if(item.sanskrit)
-            fields.push(item.sanskrit);
-
-        if(item.title)
-            fields.push(item.title);
-
-        if(item.en)
-            fields.push(item.en);
-
-        if(item.translation)
-            fields.push(item.translation);
-
-        if(item.kn)
-            fields.push(item.kn);
-
-        if(item.te)
-            fields.push(item.te);
-
-        if(item.ta)
-            fields.push(item.ta);
-
-        if(item.ml)
-            fields.push(item.ml);
-
-        if(item.commentary){
-
-            if(typeof item.commentary==="string")
-
-                fields.push(item.commentary);
-
-            else{
-
-                Object.values(
-
-                    item.commentary
-
-                ).forEach(
-
-                    value=>{
-
-                        if(value)
-
-                            fields.push(value);
-
-                    }
-
-                );
-
-            }
-
-        }
-
-        return fields.some(
-
-            text=>{
-
-                text=this.normalize(text);
-
-                return text.includes(
-
-                    this.query
-
-                );
-
-            }
-
-        );
-
-    },
-
-    goto(index){
-
-        if(
-
-            !this.matches.length
-
-        )
-
-            return;
-
-        if(index<0)
-
-            index=0;
-
-        if(
-
-            index>=this.matches.length
-
-        )
-
-            index=this.matches.length-1;
-
-        this.current=index;
-
-        const verse=this.matches[index];
-
-        DGE.emit(
-
-            "search:goto",
-
-            {
-
-                verse,
-
-                index,
-
-                total:this.matches.length
-
-            }
-
-        );
-
-    },
-
-    next(){
-
-        if(
-
-            !this.matches.length
-
-        )
-
-            return;
-
-        let i=this.current+1;
-
-        if(
-
-            i>=this.matches.length
-
-        )
-
-            i=0;
-
-        this.goto(i);
-
-    },
-
-    previous(){
-
-        if(
-
-            !this.matches.length
-
-        )
-
-            return;
-
-        let i=this.current-1;
-
-        if(
-
-            i<0
-
-        )
-
-            i=this.matches.length-1;
-
-        this.goto(i);
-
-    },
-
-    clear(){
-
-        this.query="";
-
-        this.matches=[];
-
-        this.current=-1;
-
-        DGE.emit(
-
-            "search:clear"
-
-        );
-
-    },
-
-    resultCount(){
-
-        return this.matches.length;
-
-    },
-
-    activeResult(){
-
-        if(
-
-            this.current<0
-
-        )
-
-            return null;
-
-        return this.matches[
-
-            this.current
-
-        ];
-
-    }
-
-};
-
-DGE.Search=Search;
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
-    ()=>{
-
-        Search.init();
-
-    }
-
-);
-
-})();
     setScope(scope){
 
         this.scope=scope||"all";
@@ -503,6 +235,88 @@ document.addEventListener(
 
     },
 
+    search(q){
+
+        this.query=this.normalize(q);
+
+        this.matches=[];
+
+        this.current=-1;
+
+        if(!this.query){
+
+            DGE.emit(
+
+                "search:clear"
+
+            );
+
+            return;
+
+        }
+
+        const data=
+
+            DGE.Data.all();
+
+        if(!Array.isArray(data))
+
+            return;
+
+        data.forEach(
+
+            (item,index)=>{
+
+                if(
+
+                    this.match(
+
+                        item
+
+                    )
+
+                ){
+
+                    this.matches.push(
+
+                        index
+
+                    );
+
+                }
+
+            }
+
+        );
+
+        DGE.emit(
+
+            "search:results",
+
+            {
+
+                query:this.query,
+
+                matches:this.matches
+
+            }
+
+        );
+
+        if(
+
+            this.matches.length
+
+        ){
+
+            this.goto(0);
+
+            this.renderResults();
+
+        }
+
+    },
+
     match(item){
 
         return this.collectFields(item)
@@ -611,6 +425,7 @@ document.addEventListener(
         return copy;
 
     },
+
     renderResults(){
 
         if(!DGE.Render)
@@ -817,78 +632,244 @@ document.addEventListener(
 
     },
 
-    init(){
+    next(){
 
-        this.bindNavigator();
+        if(
 
-        const input=
+            !this.matches.length
 
-            document.getElementById(
+        )
 
-                "searchInput"
+            return;
+
+        let i=this.current+1;
+
+        if(
+
+            i>=this.matches.length
+
+        )
+
+            i=0;
+
+        this.goto(i);
+
+    },
+
+    previous(){
+
+        if(
+
+            !this.matches.length
+
+        )
+
+            return;
+
+        let i=this.current-1;
+
+        if(
+
+            i<0
+
+        )
+
+            i=this.matches.length-1;
+
+        this.goto(i);
+
+    },
+
+    hasResults(){
+
+        return this.matches.length > 0;
+
+    },
+
+    first(){
+
+        if(this.matches.length){
+
+            this.goto(0);
+
+        }
+
+    },
+
+    last(){
+
+        if(this.matches.length){
+
+            this.goto(
+
+                this.matches.length - 1
 
             );
 
-        const scope=
+        }
 
-            document.getElementById(
+    },
 
-                "searchScope"
+    currentVerse(){
 
-            );
+        if(
 
-        input?.addEventListener(
+            this.current < 0 ||
 
-            "input",
+            this.current >= this.matches.length
 
-            ()=>{
+        ){
 
-                clearTimeout(
+            return null;
 
-                    this.timer
+        }
 
-                );
+        return this.matches[
 
-                this.timer=setTimeout(
+            this.current
 
-                    ()=>{
+        ];
 
-                        this.search(
+    },
 
-                            input.value
+    currentIndex(){
 
-                        );
+        return this.current;
 
-                    },
+    },
 
-                    this.debounce
+    isSearching(){
 
-                );
+        return this.query.length > 0;
 
-            }
+    },
+
+    refresh(){
+
+        this.search(
+
+            this.query
+
+        );
+
+    },
+
+    getQuery(){
+
+        return this.query;
+
+    },
+
+    getScope(){
+
+        return this.scope;
+
+    },
+
+    getMatches(){
+
+        return [
+
+            ...this.matches
+
+        ];
+
+    },
+
+    contains(id){
+
+        return this.matches.includes(
+
+            id
 
         );
 
-        scope?.addEventListener(
+    },
 
-            "change",
+    positionOf(id){
 
-            e=>{
+        return this.matches.indexOf(
 
-                this.setScope(
-
-                    e.target.value
-
-                );
-
-                this.search(
-
-                    input?.value||""
-
-                );
-
-            }
+            id
 
         );
+
+    },
+
+    gotoVerse(id){
+
+        const index=
+
+            this.matches.indexOf(id);
+
+        if(index>=0){
+
+            this.goto(index);
+
+        }
+
+    },
+
+    clear(){
+
+        this.query="";
+
+        this.matches=[];
+
+        this.current=-1;
+
+        if(DGE.Render){
+
+            DGE.Render.refresh();
+
+        }
+
+        DGE.emit(
+
+            "search:clear"
+
+        );
+
+    },
+
+    resultCount(){
+
+        return this.matches.length;
+
+    },
+
+    activeResult(){
+
+        if(
+
+            this.current<0
+
+        )
+
+            return null;
+
+        return this.matches[
+
+            this.current
+
+        ];
 
     }
+
+};
+
+DGE.Search=Search;
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    ()=>{
+
+        Search.init();
+
+    }
+
+);
+
+})();
