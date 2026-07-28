@@ -1,164 +1,417 @@
-/*
-=========================================================
-Digital Grantha Engine
-render.js
-Version: 10.1.0 Alpha 005
-=========================================================
-*/
+"use strict";
+
+/*=============================================================================
+ Digital Grantha Engine
+ Render Engine
+ Version : 10.1.0 Alpha
+=============================================================================*/
 
 (function () {
 
-"use strict";
+if (!window.DGE)
+    throw new Error("DGE core must be loaded first.");
 
-const RenderEngine = {
+const Render={
 
-    containerId: "content",
+    root:null,
 
-    setContainer(id) {
-        this.containerId = id;
-    },
+    currentVerse:null,
 
-    getContainer() {
+    selectors:{
 
-        return document.getElementById(this.containerId);
+        container:"#granthaContainer",
 
-    },
+        title:"#granthaTitle",
 
-    clear() {
+        subtitle:"#granthaSubtitle",
 
-        const c = this.getContainer();
+        verse:"#verse",
 
-        if (c) c.innerHTML = "";
+        verseNumber:"#verseNumber",
 
-    },
+        navigation:"#navigation",
 
-    renderVerse(verse) {
+        search:"#searchResults",
 
-        const c = this.getContainer();
-
-        if (!c || !verse) return;
-
-        let html = "";
-
-        html += "<div class='dge-verse'>";
-
-        if (verse.number)
-            html += "<h2>Verse " + verse.number + "</h2>";
-
-        if (verse.sanskrit)
-            html += "<div class='dge-sanskrit'>" +
-                    verse.sanskrit +
-                    "</div>";
-
-        if (verse.transliteration)
-            html += "<div class='dge-transliteration'>" +
-                    verse.transliteration +
-                    "</div>";
-
-        if (verse.meaning)
-            html += "<div class='dge-meaning'>" +
-                    verse.meaning +
-                    "</div>";
-
-        if (verse.commentary)
-            html += "<div class='dge-commentary'>" +
-                    verse.commentary +
-                    "</div>";
-
-        html += "</div>";
-
-        c.innerHTML = html;
+        commentary:"#commentary"
 
     },
 
-    renderGrantha(data) {
+    init(){
 
-        if (!Array.isArray(data)) {
+        this.root=document.querySelector(
+            this.selectors.container
+        );
 
-            DGE.log("Renderer: invalid dataset");
+        return this;
+
+    },
+
+    $(selector){
+
+        return document.querySelector(selector);
+
+    },
+
+    clear(selector){
+
+        const node=this.$(selector);
+
+        if(node)
+            node.innerHTML="";
+
+    },
+
+    text(selector,value){
+
+        const node=this.$(selector);
+
+        if(node)
+            node.textContent=value ?? "";
+
+    },
+
+    html(selector,value){
+
+        const node=this.$(selector);
+
+        if(node)
+            node.innerHTML=value ?? "";
+
+    },
+
+    append(selector,node){
+
+        const target=this.$(selector);
+
+        if(target)
+            target.appendChild(node);
+
+    },
+
+    show(selector){
+
+        const node=this.$(selector);
+
+        if(node)
+            node.style.display="";
+
+    },
+
+    hide(selector){
+
+        const node=this.$(selector);
+
+        if(node)
+            node.style.display="none";
+
+    },
+
+    renderGrantha(grantha){
+
+        if(!grantha)
+            return;
+
+        this.text(
+            this.selectors.title,
+            grantha.title
+        );
+
+        this.text(
+            this.selectors.subtitle,
+            grantha.subtitle || ""
+        );
+
+    },
+
+    renderVerse(verse){
+
+        if(!verse)
+            return;
+
+        this.currentVerse=verse;
+
+        const number=
+            verse.number ??
+            verse.id ??
+            "";
+
+        this.text(
+            this.selectors.verseNumber,
+            number
+        );
+
+        const body=
+            verse.text ??
+            verse.verse ??
+            verse.content ??
+            "";
+
+        this.html(
+            this.selectors.verse,
+            body
+        );
+
+        DGE.emit(
+            "render:verse",
+            verse
+        );
+
+    },
+
+    renderNavigation(previous,next){
+
+        const nav=this.$(
+            this.selectors.navigation
+        );
+
+        if(!nav)
+            return;
+
+        nav.innerHTML="";
+
+        const prev=document.createElement("button");
+
+        prev.textContent="◀ Previous";
+
+        prev.disabled=!previous;
+
+        prev.onclick=()=>{
+
+            if(previous)
+                this.renderVerse(previous);
+
+        };
+
+        const nextBtn=document.createElement("button");
+
+        nextBtn.textContent="Next ▶";
+
+        nextBtn.disabled=!next;
+
+        nextBtn.onclick=()=>{
+
+            if(next)
+                this.renderVerse(next);
+
+        };
+
+        nav.appendChild(prev);
+
+        nav.appendChild(nextBtn);
+
+    },
+
+    renderSearchResults(results){
+
+        const target=this.$(
+            this.selectors.search
+        );
+
+        if(!target)
+            return;
+
+        target.innerHTML="";
+
+        if(!results || results.length===0){
+
+            target.innerHTML=
+                "<p>No results found.</p>";
 
             return;
 
         }
 
-        if (data.length === 0) {
+        results.forEach(result=>{
 
-            DGE.log("Renderer: empty dataset");
+            const item=document.createElement("div");
 
+            item.className="dge-search-result";
+
+            item.textContent=
+                result.number ??
+                result.id ??
+                "";
+
+            item.onclick=()=>{
+
+                this.renderVerse(result);
+
+            };
+
+            target.appendChild(item);
+
+        });
+
+    },
+
+    renderCommentary(html){
+
+        this.html(
+            this.selectors.commentary,
+            html
+        );
+
+    },
+
+    highlight(text){
+
+        if(!text || !this.currentVerse)
             return;
+
+        const verseNode=this.$(
+            this.selectors.verse
+        );
+
+        if(!verseNode)
+            return;
+
+        const escaped=text.replace(
+            /[-\/\\^$*+?.()|[\]{}]/g,
+            "\\$&"
+        );
+
+        const regex=new RegExp(
+            escaped,
+            "gi"
+        );
+
+        verseNode.innerHTML=
+            verseNode.innerHTML.replace(
+                regex,
+                match=>
+                `<mark>${match}</mark>`
+            );
+
+    },
+
+    clearHighlight(){
+
+        if(!this.currentVerse)
+            return;
+
+        this.renderVerse(
+            this.currentVerse
+        );
+
+    },
+
+    renderMetadata(metadata){
+
+        if(!metadata)
+            return;
+
+        Object.entries(metadata).forEach(([key,value])=>{
+
+            const element=document.querySelector(
+                `[data-meta="${key}"]`
+            );
+
+            if(element)
+                element.textContent=value ?? "";
+
+        });
+
+    },
+
+    renderError(message){
+
+        this.html(
+            this.selectors.verse,
+            `<div class="dge-error">${message}</div>`
+        );
+
+    },
+
+    renderLoading(message="Loading..."){
+
+        this.html(
+            this.selectors.verse,
+            `<div class="dge-loading">${message}</div>`
+        );
+
+    },
+
+    renderEmpty(){
+
+        this.html(
+            this.selectors.verse,
+            ""
+        );
+
+    },
+
+    scrollToVerse(){
+
+        const node=this.$(
+            this.selectors.verse
+        );
+
+        if(node){
+
+            node.scrollIntoView({
+
+                behavior:"smooth",
+
+                block:"start"
+
+            });
 
         }
 
-        this.renderVerse(data[0]);
+    },
+
+    refresh(){
+
+        if(this.currentVerse)
+
+            this.renderVerse(
+                this.currentVerse
+            );
 
     },
 
-    next() {
+    renderCurrent(){
 
-        if (!DGE.data) return;
-
-        if (!DGE.state.currentVerse)
-            DGE.state.currentVerse = 0;
-
-        DGE.state.currentVerse++;
-
-        if (DGE.state.currentVerse >= DGE.data.length)
-            DGE.state.currentVerse = DGE.data.length - 1;
-
-        this.renderVerse(DGE.data[DGE.state.currentVerse]);
+        this.refresh();
 
     },
 
-    previous() {
+    destroy(){
 
-        if (!DGE.data) return;
+        this.root=null;
 
-        if (!DGE.state.currentVerse)
-            DGE.state.currentVerse = 0;
-
-        DGE.state.currentVerse--;
-
-        if (DGE.state.currentVerse < 0)
-            DGE.state.currentVerse = 0;
-
-        this.renderVerse(DGE.data[DGE.state.currentVerse]);
-
-    },
-
-    goTo(index) {
-
-        if (!DGE.data) return;
-
-        if (index < 0)
-            index = 0;
-
-        if (index >= DGE.data.length)
-            index = DGE.data.length - 1;
-
-        DGE.state.currentVerse = index;
-
-        this.renderVerse(DGE.data[index]);
+        this.currentVerse=null;
 
     }
 
 };
 
-window.RenderEngine = RenderEngine;
+DGE.Render=Render;
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener(
+    "DOMContentLoaded",
+    ()=>{
 
-    const wait = setInterval(function () {
+        Render.init();
 
-        if (window.DGE && DGE.data) {
-
-            RenderEngine.renderGrantha(DGE.data);
-
-            clearInterval(wait);
-
-        }
-
-    }, 300);
-
-});
+    }
+);
 
 })();
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    
