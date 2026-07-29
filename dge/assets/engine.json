@@ -1,7 +1,0 @@
-{
-  "engine": "DGE",
-  "version": "10.1.0-alpha.002",
-  "build": 2,
-  "cacheBuster": "20260727-001",
-  "debug": true
-}

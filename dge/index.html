@@ -1,153 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="sa">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Digital Grantha Engine</title>
-
 <link rel="stylesheet" href="css/main.css">
-
+<script src="https://unpkg.com/sanscript@0.1.3/sanscript.min.js"></script>
 </head>
-
 <body>
+<div id="toastMsg"></div>
 
-<div style="background:#b71c1c;color:white;padding:8px;font-family:monospace">
-DGE DEV BUILD 011
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="top-bar-title" onclick="location.reload()">❮ Grantha Engine</div>
+  <div class="top-actions">
+    <button class="btn-top" onclick="togglePopup('commentaryPopup')">💬</button>
+    <button class="btn-top" onclick="toggleDarkMode()">☀️</button>
+    <button class="btn-top" onclick="togglePopup('scriptPopup')">🔠</button>
+  </div>
 </div>
 
-<header>
+<div class="app-container">
+  <div class="header">
+    <h1 id="stotraTitle">Loading Grantha...</h1>
+    <div class="author" id="stotraAuthor">...</div>
+    <div class="rule"></div>
+  </div>
 
-<h1 id="granthaTitle">
-DGE v10.1.0 Alpha Build 011
-</h1>
+  <div class="search-box-group">
+    <select id="searchScope" class="search-scope-select" onchange="handleSearch()">
+      <option value="all">Search All</option>
+      <option value="mula">Shloka Only</option>
+    </select>
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search text or shloka number..." oninput="handleSearch()">
+      <button class="clear-search-btn" id="clearSearchBtn" onclick="clearSearch()">✖</button>
+    </div>
+  </div>
 
-</header>
-
-<main>
-
-<section id="readerSection">
-
-<div id="readerCard">
-Loading...
+  <div class="reading-card" id="readingCard">Select a shloka</div>
+  <div class="shloka-list" id="shlokaList"></div>
 </div>
 
-</section>
-
-<section id="navigationSection">
-
-<button id="btnFirst">⏮</button>
-
-<button id="btnPrevious">◀</button>
-
-<button id="btnNext">▶</button>
-
-<button id="btnLast">⏭</button>
-
-</section>
-
-<section id="searchSection">
-
-<input
-id="searchInput"
-type="search"
-placeholder="Search">
-
-<div id="searchResults"></div>
-
-</section>
-
-<section id="audioSection">
-
-<audio
-id="audioPlayer"
-controls>
-</audio>
-
-</section>
-
-<section
-id="commentaryPanel"
-style="display:none;">
-</section>
-
-</main>
-
-<textarea
-id="debugLog"
-style="
-width:100%;
-height:250px;
-font-family:monospace;
-font-size:12px;
-margin-top:20px;">
-</textarea>
-
-<script>
-
-const BUILD = Date.now();
-
-const files = [
-
-"js/granthaManager.js",
-"js/datasetAdapter.js",
-"js/granthaReader.js",
-"js/granthaNavigator.js",
-"js/granthaSearch.js",
-"js/granthaAudio.js",
-"js/granthaNotes.js",
-"js/granthaBookmarks.js",
-"js/granthaCommentary.js",
-"index.js"
-
-];
-
-async function loadScriptsSequentially() {
-
-    for (const file of files) {
-
-        await new Promise((resolve, reject) => {
-
-            const script = document.createElement("script");
-
-            script.src = file + "?v=" + BUILD;
-
-            script.onload = resolve;
-
-            script.onerror = () => reject(
-                new Error("Failed to load: " + file)
-            );
-
-            document.body.appendChild(script);
-
-        });
-
-    }
-
-}
-
-loadScriptsSequentially().catch(error => {
-
-    console.error(error);
-
-    const box = document.getElementById("debugLog");
-
-    if (box) {
-
-        box.value += error.message + "\n";
-
-    }
-
-});
-
-</script>
-
+<!-- Layer B Modular Scripts -->
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/transliteration.js"></script>
+<script src="js/render.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/search.js"></script>
+<script src="js/notes.js"></script>
+<script src="js/snippets.js"></script>
+<script src="js/markers.js"></script>
+<script src="js/filter.js"></script>
+<script src="js/modals.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/core.js"></script>
 </body>
-
 </html>
