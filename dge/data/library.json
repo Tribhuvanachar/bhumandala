@@ -22,13 +22,19 @@
       "path": "puranas/bhagavata/skandha_1/data.json"
     },
     {
-      "id": "mahabharata_bp",
+      "id": "mahabharata_sabha",
+      "title": "Mahabharata - Sabha Parva",
+      "category": "Itihasas",
+      "path": "itihasas/mahabharata/sabha_parva/data.json"
+    },
+    {
+      "id": "mahabharata_bhishma",
       "title": "Mahabharata - Bhishma Parva",
       "category": "Itihasas",
       "path": "itihasas/mahabharata/bhishma_parva/data.json"
     },
     {
-      "id": "ramayana_bk",
+      "id": "ramayana_bala",
       "title": "Ramayana - Bala Kanda",
       "category": "Itihasas",
       "path": "itihasas/ramayana/bala_kanda/data.json"
