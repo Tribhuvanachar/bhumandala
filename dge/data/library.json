@@ -1,0 +1,73 @@
+{
+  "libraryVersion": "1.0",
+  "categories": [
+    "Vedas",
+    "Puranas",
+    "Itihasas",
+    "Vedanta",
+    "Stotras",
+    "Agamas"
+  ],
+  "granthas": [
+    {
+      "id": "pns",
+      "title": "Prahlada Krita Narasimha Stotra",
+      "category": "Stotras",
+      "path": "stotras/pns/data.json"
+    },
+    {
+      "id": "bhagavata_sk1",
+      "title": "Srimad Bhagavatam - Skandha 1",
+      "category": "Puranas",
+      "path": "puranas/bhagavata/skandha_1/data.json"
+    },
+    {
+      "id": "mahabharata_bp",
+      "title": "Mahabharata - Bhishma Parva",
+      "category": "Itihasas",
+      "path": "itihasas/mahabharata/bhishma_parva/data.json"
+    },
+    {
+      "id": "ramayana_bk",
+      "title": "Ramayana - Bala Kanda",
+      "category": "Itihasas",
+      "path": "itihasas/ramayana/bala_kanda/data.json"
+    },
+    {
+      "id": "sarvamula_gita",
+      "title": "Gita Bhashyam (Madhvacharya)",
+      "category": "Vedanta",
+      "path": "vedanta/sarvamula/gita_bhashya/data.json"
+    },
+    {
+      "id": "rigveda_m1",
+      "title": "Rig Veda - Mandala 1",
+      "category": "Vedas",
+      "path": "vedas/rigveda/mandala_1/data.json"
+    },
+    {
+      "id": "yajurveda_ts",
+      "title": "Yajur Veda - Taittiriya Samhita",
+      "category": "Vedas",
+      "path": "vedas/yajurveda/taittiriya/data.json"
+    },
+    {
+      "id": "samaveda_kauthuma",
+      "title": "Sama Veda - Kauthuma Shakha",
+      "category": "Vedas",
+      "path": "vedas/samaveda/kauthuma/data.json"
+    },
+    {
+      "id": "atharvaveda_shaunaka",
+      "title": "Atharva Veda - Shaunaka",
+      "category": "Vedas",
+      "path": "vedas/atharvaveda/shaunaka/data.json"
+    },
+    {
+      "id": "pancharatra_ah",
+      "title": "Ahirbudhnya Samhita",
+      "category": "Agamas",
+      "path": "agamas/pancharatra/ahirbudhnya/data.json"
+    }
+  ]
+}
