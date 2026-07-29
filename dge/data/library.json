@@ -1,12 +1,19 @@
 {
-  "libraryVersion": "1.0",
+  "libraryVersion": "2.0",
   "categories": [
     "Vedas",
+    "Brahmanas",
+    "Aranyakas",
+    "Upanishads",
     "Puranas",
     "Itihasas",
-    "Vedanta",
+    "Sarvamoola",
     "Stotras",
-    "Agamas"
+    "Pancharatra",
+    "Agama",
+    "Dharmashastra",
+    "Sutras",
+    "Ancillary"
   ],
   "granthas": [
     {
@@ -19,7 +26,13 @@
       "id": "bhagavata_sk1",
       "title": "Srimad Bhagavatam - Skandha 1",
       "category": "Puranas",
-      "path": "puranas/bhagavata/skandha_1/data.json"
+      "path": "puranas/bhagavata_purana/skandha_01/data.json"
+    },
+    {
+      "id": "ramayana_bala",
+      "title": "Ramayana - Bala Kanda",
+      "category": "Itihasas",
+      "path": "itihasas/ramayana/bala_kanda/data.json"
     },
     {
       "id": "mahabharata_sabha",
@@ -34,22 +47,34 @@
       "path": "itihasas/mahabharata/bhishma_parva/data.json"
     },
     {
-      "id": "ramayana_bala",
-      "title": "Ramayana - Bala Kanda",
+      "id": "mahabharata_drona",
+      "title": "Mahabharata - Drona Parva",
       "category": "Itihasas",
-      "path": "itihasas/ramayana/bala_kanda/data.json"
+      "path": "itihasas/mahabharata/drona_parva/data.json"
     },
     {
-      "id": "sarvamula_gita",
+      "id": "sarvamula_gita_bhashya",
       "title": "Gita Bhashyam (Madhvacharya)",
-      "category": "Vedanta",
-      "path": "vedanta/sarvamula/gita_bhashya/data.json"
+      "category": "Sarvamoola",
+      "path": "sarvamoola/gita_bhashya/data.json"
+    },
+    {
+      "id": "sarvamula_tatparya",
+      "title": "Gita Tatparya Nirnaya",
+      "category": "Sarvamoola",
+      "path": "sarvamoola/gita_tatparya/data.json"
     },
     {
       "id": "rigveda_m1",
       "title": "Rig Veda - Mandala 1",
       "category": "Vedas",
-      "path": "vedas/rigveda/mandala_1/data.json"
+      "path": "vedas/rigveda/mandala_01/data.json"
+    },
+    {
+      "id": "taittiriya_samhita",
+      "title": "Krishna Yajurveda - Taittiriya Samhita",
+      "category": "Vedas",
+      "path": "vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/data.json"
     }
   ]
 }
