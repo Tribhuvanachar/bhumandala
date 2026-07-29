@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "title": "Yajur Veda - Taittiriya Samhita",
+    "author": "Author / Rishi",
+    "stotraCode": "yajurveda_ts",
+    "archiveBaseUrl": "https://archive.org/download/your_identifier/",
+    "filePrefix": "PREFIX_",
+    "fileExtension": ".mp3",
+    "totalShlokas": 1,
+    "availableCommentaries": {
+      "commentary_1": "Primary Commentary Name",
+      "footnotes": "Footnotes"
+    }
+  },
+  "shlokas": {
+    "1": {
+      "sa": "Sanskrit text goes here...",
+      "commentaries": {
+        "commentary_1": "Commentary text goes here..."
+      }
+    }
+  }
+}
