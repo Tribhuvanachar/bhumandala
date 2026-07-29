@@ -3,20 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" id="themeColorMeta" content="#FFFDF9">
 <title>Digital Grantha Engine</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
 <script src="https://unpkg.com/sanscript@0.1.3/sanscript.min.js"></script>
 </head>
 <body>
 <div id="toastMsg"></div>
 
+<!-- Context-Aware Floating Palette Tooltip -->
+<div id="actionTooltip" style="display:none;">
+  <div class="tooltip-header">🕉️ Ask Acharya</div>
+  <div class="tooltip-row">
+    <button class="tooltip-btn" onpointerdown="askAcharya(event, 'shloka')">📜 Shloka</button>
+    <button class="tooltip-btn" onpointerdown="askAcharya(event, 'grammar')">⚙️ Word</button>
+    <button class="tooltip-btn" onpointerdown="openBhashyaPicker(event)">🔍 Bhashya</button>
+  </div>
+  <div style="height:1px; background:rgba(255,255,255,0.1); margin:4px 0;"></div>
+  <button class="tooltip-btn" style="width:100%; text-align:center; background: rgba(226, 102, 74, 0.2);" onpointerdown="askAcharya(event, 'translate')">🌐 Native Meaning</button>
+</div>
+
+<button id="modalAppendBtn" style="display:none;" onpointerdown="appendSelectedTextToNote(event)">➕ Add Selection to Notes</button>
+
 <!-- Top Bar -->
 <div class="top-bar">
-  <div class="top-bar-title" onclick="location.reload()">❮ Grantha Engine</div>
+  <div class="top-bar-title" onclick="location.reload()">❮ Library</div>
   <div class="top-actions">
-    <button class="btn-top" onclick="togglePopup('commentaryPopup')">💬</button>
-    <button class="btn-top" onclick="toggleDarkMode()">☀️</button>
-    <button class="btn-top" onclick="togglePopup('scriptPopup')">🔠</button>
+    <div style="position:relative;">
+      <button class="btn-top" onclick="togglePopup('fontPopup')" title="Font Size">Aa</button>
+      <div class="popup popup-top" id="fontPopup" style="min-width: 140px;">
+        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Reading Size</div>
+        <div class="pop-item" data-size="16" onclick="setFontSize(16, this)">Small</div>
+        <div class="pop-item active" data-size="18" onclick="setFontSize(18, this)">Medium</div>
+        <div class="pop-item" data-size="20" onclick="setFontSize(20, this)">Large</div>
+        <div class="pop-item" data-size="23" onclick="setFontSize(23, this)">Larger</div>
+      </div>
+    </div>
+
+    <div style="position:relative;">
+      <button class="btn-top" onclick="togglePopup('commentaryPopup')" id="activeCommBtn" title="Commentary Options">💬</button>
+      <div class="popup popup-top" id="commentaryPopup">
+        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">View Bhashya</div>
+        <div class="pop-item active" onclick="setCommentaryView('none', this)">None (Mula Only)</div>
+        <div class="pop-item" onclick="setCommentaryView('all', this)">All Commentaries</div>
+        <div id="commentaryDynamicList"></div>
+      </div>
+    </div>
+
+    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="openKeyModal()" title="Access Key Settings">🔑</button>
+    <button class="btn-top" onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle Dark Mode">☀️</button>
+
+    <div style="position:relative;">
+      <button class="btn-top" onclick="togglePopup('scriptPopup')" id="activeScriptBtn" title="Transliterate Script">🔠</button>
+      <div class="popup popup-top" id="scriptPopup">
+        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Reading Script</div>
+        <div class="pop-item active" data-script="devanagari" onclick="setScript('devanagari', this)">Sanskrit</div>
+        <div class="pop-item" data-script="iast" onclick="setScript('iast', this)">English</div>
+        <div class="pop-item" data-script="kannada" onclick="setScript('kannada', this)">Kannada</div>
+        <div class="pop-item" data-script="telugu" onclick="setScript('telugu', this)">Telugu</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -40,11 +91,174 @@
 
   <div class="reading-card" id="readingCard">Select a shloka</div>
   <div class="shloka-list" id="shlokaList"></div>
+
+  <div class="project-banner">
+    <strong style="font-size: 13px;">🙏 Sarvamoola Digitisation Project</strong><br>
+    <a href="#" id="configEmailLink" style="display:inline-block; margin-top:6px;">Contact</a>
+  </div>
+  <div class="app-footer" id="appFooter"></div>
 </div>
 
-<!-- Layer B Modular Scripts -->
+<!-- Search Navigator -->
+<div class="search-navigator" id="searchNavigator">
+  <span id="searchMatchCount">0/0</span>
+  <button class="search-nav-btn" onclick="navSearch(-1)">▲</button>
+  <button class="search-nav-btn" onclick="navSearch(1)">▼</button>
+  <button class="search-nav-btn" style="color: #8a7a63;" onclick="clearSearch()" title="Clear Search">✖</button>
+</div>
+
+<!-- Bottom Toolbar -->
+<div class="bottom-player">
+  <div class="player-inner">
+    <div class="controls-main">
+      <button class="btn-nav" onclick="playPrevFiltered()" aria-label="Previous">⏮</button>
+      <button class="btn-play flex-center" id="playBtn" onclick="togglePlay()" aria-label="Play/Pause">▶</button>
+      <button class="btn-nav" onclick="playNextFiltered()" aria-label="Next">⏭</button>
+    </div>
+
+    <div class="timer-group">
+      <div class="track-label" id="trackLabel">0/0</div>
+      <div class="time-display" id="timeDisplay">0:00.000 / 0:00.000</div>
+      <div class="repeat-counter" id="repeatCounter"></div>
+    </div>
+
+    <div class="popup-container advanced-feature">
+      <button class="btn-sm" onclick="togglePopup('filterPopup')" id="filterBtn">🔽 Filter</button>
+      <div class="popup" id="filterPopup" style="left: 50%; transform: translateX(-50%);">
+        <div class="pop-item active" id="opt-all" onclick="setFilter('all')">▶ All</div>
+        <div class="pop-item" id="opt-fav" onclick="setFilter('fav')">▶ ★ Favorites</div>
+        <div class="pop-item" id="opt-practice" onclick="setFilter('practice')">▶ 🚩 Practice</div>
+        <div class="pop-item" id="opt-none" onclick="setFilter('none')">⏸ Single Track</div>
+        <hr>
+        <div class="range-box">
+          <div class="range-row-flex">
+            <select id="rangeMode" style="font-size:11px; padding:2px; border-radius:4px; background:var(--card-bg); color:var(--text-primary); border:1px solid var(--card-border);" onchange="applyRangeFilter()">
+              <option value="include">Include</option>
+              <option value="exclude">Exclude</option>
+            </select>
+          </div>
+          <div class="range-row-flex">
+            <input class="pop-input" type="number" id="rangeStart" placeholder="From" min="1" onchange="applyRangeFilter()">
+            <span style="font-size: 10px;">to</span>
+            <input class="pop-input" type="number" id="rangeEnd" placeholder="To" min="1" onchange="applyRangeFilter()">
+            <button class="clear-range-btn" onclick="clearRange()">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup-container advanced-feature">
+      <button class="btn-sm" onclick="togglePopup('toolsPopup')" title="Tools">⚙️ Tools</button>
+      <div class="popup" id="toolsPopup" style="right: 0;">
+        <div class="pop-row">
+          <span>⚡ <span id="speedVal">1.0</span>x</span>
+          <input type="range" class="pop-range" id="speedInput" min="0.5" max="2.0" step="0.1" value="1.0">
+        </div>
+        <div class="pop-row">
+          <span>🔁 Rep:</span>
+          <input type="number" class="pop-input" id="repeatInput" value="1" min="1" onchange="updateRepeatDisplay()">
+        </div>
+        <hr>
+        <div class="ab-container">
+          <label class="flex-row" style="gap:6px; cursor:pointer; margin:0;">
+            <input type="checkbox" id="enableAB" style="margin:0; width:14px; height:14px;"> ✂️ Active Loop
+          </label>
+          <div class="ab-row-inputs">
+            <span>Start: <input class="pop-input" type="number" id="loopA" placeholder="0.0" step="0.1"></span>
+            <span>End: <input class="pop-input" type="number" id="loopB" placeholder="End" step="0.1"></span>
+          </div>
+          <button class="btn-sm" style="margin-top: 4px;" onclick="saveSnippet()">💾 Save Snippet</button>
+        </div>
+        <hr>
+        <button class="btn-sm flex-center" id="cacheBtn" style="width:100%; background:var(--card-active); color:var(--accent-red); border-color:var(--accent-red);" onclick="cacheAllAudio(this)">📥 Preload All Audio</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="context-menu" id="markerMenu">
+  <div onclick="setMark('fav')">⭐ Mark Favorite</div>
+  <div onclick="setMark('practice')">🚩 Needs Practice</div>
+  <div onclick="setMark('none')" style="color: #888;">❌ Clear Marker</div>
+</div>
+
+<!-- Modals -->
+<div class="modal-overlay" id="snippetModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">🎯 Saved Snippets</h4>
+       <button class="btn-sm" onclick="closeSnippetModal()">✖ Close</button>
+    </div>
+    <div class="modal-body"><div id="snippetListContainer"></div></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="noteModal">
+  <div class="modal-content" id="noteModalBox">
+    <div class="modal-header-sticky">
+       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">📝 Notes (Shloka <span id="noteShlokaNum"></span>)</h4>
+       <div style="display:flex; gap:6px;">
+         <button class="btn-sm" onclick="toggleMaximizeNote()" id="maxNoteBtn">⛶ Expand</button>
+         <button class="btn-sm" onclick="closeNoteModal()">✖ Close</button>
+       </div>
+    </div>
+    <div class="modal-body">
+      <textarea id="noteText" placeholder="Write your notes or append Acharya excerpts here..."></textarea>
+      <div style="display:flex; justify-content:space-between; margin-top: 12px;">
+        <button class="btn-sm" onclick="clearNote()" style="color:var(--accent-red);">🗑 Clear All</button>
+        <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="saveNote()">Save Notes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="bhashyaPickerModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">📜 Select Bhashya</h4>
+       <button class="btn-sm" onclick="closeBhashyaPicker()">✖ Close</button>
+    </div>
+    <div class="modal-body"><div id="bhashyaOptionsContainer"></div></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="keyModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+       <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">🔑 Secret Access</h3>
+       <button class="btn-sm" onclick="closeKeyModal()">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <input type="password" id="userApiKeyInput" class="modal-input" placeholder="Enter Access Key Here...">
+      <div style="text-align:right; margin-top:16px;">
+        <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="saveUserApiKey()">Save Key</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="acharyaModal">
+  <div class="modal-content" id="acharyaModalBox">
+    <div class="modal-header-sticky">
+      <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">🕉️ Acharya's Analysis</h4>
+      <div style="display:flex; gap:6px;">
+         <button class="btn-sm" onclick="shareAcharyaAnalysis()">📤 Share</button>
+         <button class="btn-sm" onclick="closeAcharyaModal()">✖ Close</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div id="acharyaLoading" style="display:none; text-align:center; padding: 30px;">
+        <span style="font-size:28px; display:inline-block;">⏳</span>
+      </div>
+      <div id="acharyaResult" style="font-size:14px; line-height:1.7;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts Pipeline -->
 <script src="js/config.js"></script>
 <script src="js/utils.js"></script>
+<script src="js/modals.js"></script>
 <script src="js/transliteration.js"></script>
 <script src="js/render.js"></script>
 <script src="js/audio.js"></script>
@@ -53,7 +267,6 @@
 <script src="js/snippets.js"></script>
 <script src="js/markers.js"></script>
 <script src="js/filter.js"></script>
-<script src="js/modals.js"></script>
 <script src="js/ai.js"></script>
 <script src="js/core.js"></script>
 </body>
