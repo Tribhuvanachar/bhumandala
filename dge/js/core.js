@@ -1,10 +1,10 @@
 // DGE Module: core.js
-// js/core.js
-// Maps to F-001: Bootstrap
+// Maps to F-001: Bootstrap & Multi-Path Data Loader
+window.DGE_VERSIONS = window.DGE_VERSIONS || {};
+window.DGE_VERSIONS['core.js'] = 'v2.1 (Multi-Path Fallback)';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. INITIALIZE GLOBAL DOM ELEMENTS
-  // Required so decoupled files (render.js, audio.js) don't crash when looking for buttons.
   window.els = {
     playBtn: document.getElementById('playBtn'),
     speedInput: document.getElementById('speedInput'),
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navContainer: document.getElementById('searchNavigator')
   };
 
-  // 2. PARSE URL PARAMETERS SAFELY
+  // 2. PARSE URL PARAMETERS
   const urlParams = new URLSearchParams(window.location.search);
   window.stotraCode = urlParams.get('code') || 'pns';
   
@@ -38,37 +38,67 @@ document.addEventListener('DOMContentLoaded', () => {
   if (providedPass && providedPass.toUpperCase() === passkey.toUpperCase()) {
     localStorage.setItem('acharyaAuthorized', 'true');
   }
-  
-  // 3. DYNAMIC PATH ROUTING
-  // Points exactly to your taxonomy: e.g., data/stotras/pns/data.json
-  // Fix: Ensure robust path resolution for GitHub Pages and local testing
-  window.jsonFileName = window.stotraCode === 'pns' ? 'data/stotras/pns/data.json' : `data/stotras/${window.stotraCode}/data.json`;
 
-
-  
-  // 4. FETCH GRANTHA DATASET
-  fetch(window.jsonFileName)
-    .then(res => { 
-        if(!res.ok) throw new Error(`Could not find dataset for ${window.stotraCode}`); 
-        return res.json(); 
-    })
-    .then(data => { 
-        window.stotraData = data; 
-        initApp(); 
-    })
-    .catch(err => {
-      console.error(err);
-      const titleEl = document.getElementById('stotraTitle');
-      const cardEl = document.getElementById('readingCard');
-      if (titleEl) titleEl.innerText = "Data Not Found";
-      if (cardEl) cardEl.innerText = `Error: Please ensure ${window.jsonFileName} is available in the repository.`;
-    });
+  // 3. LOAD CONFIG & GRANTHA DATA
+  initAppBootstrap();
 });
 
-function initApp() {
+async function initAppBootstrap() {
   if (typeof restorePrefs === 'function') restorePrefs();
-  if (typeof initAuthAndBranding === 'function') initAuthAndBranding();
+
+  // Fetch configuration file
+  try {
+    const cfgRes = await fetch('config.json');
+    if (cfgRes.ok) {
+      const cfg = await cfgRes.json();
+      if (cfg.appName && window.appConfig) Object.assign(window.appConfig, cfg);
+    }
+  } catch (e) {
+    console.warn("Using default config parameters.");
+  }
   
+  if (typeof initAuthAndBranding === 'function') initAuthAndBranding();
+
+  // 4. ROBUST MULTI-PATH DATA FETCHER
+  // Scans all possible taxonomy paths automatically to prevent 404 errors
+  const possiblePaths = [
+    `data/stotras/${window.stotraCode}/data.json`,
+    `data/stotras/${window.stotraCode}/mula/data.json`,
+    `data_${window.stotraCode}.json`,
+    `./data_${window.stotraCode}.json`,
+    `../data_${window.stotraCode}.json`
+  ];
+
+  let data = null;
+  let loadedPath = '';
+
+  for (const path of possiblePaths) {
+    try {
+      const res = await fetch(path);
+      if (res.ok) {
+        data = await res.json();
+        loadedPath = path;
+        break;
+      }
+    } catch (err) {
+      // Continue to next path
+    }
+  }
+
+  if (data) {
+    window.stotraData = data;
+    window.jsonFileName = loadedPath;
+    window.AUDIO_CACHE_NAME = `narasimha-audio-${window.stotraCode}`;
+    if (typeof initApp === 'function') initApp();
+  } else {
+    const titleEl = document.getElementById('stotraTitle');
+    const cardEl = document.getElementById('readingCard');
+    if (titleEl) titleEl.innerText = "Data Not Found";
+    if (cardEl) cardEl.innerText = `Error: Could not locate dataset for code '${window.stotraCode}'. Checked paths: ${possiblePaths.join(', ')}`;
+  }
+}
+
+function initApp() {
   if(window.stotraData && window.stotraData.metadata) {
     const titleEl = document.getElementById('stotraTitle');
     if (titleEl) {
