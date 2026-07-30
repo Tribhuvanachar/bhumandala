@@ -1,6 +1,7 @@
 // js/utils.js
 // Maps to Feature: Theme & Utilities
 
+window.DGE_VERSIONS['utils.js'] = 'v1.0';
 function applyDarkMode(isDark) {
   document.body.classList.toggle('dark-mode', isDark);
   
