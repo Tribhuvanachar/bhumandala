@@ -1,7 +1,6 @@
-// DGE Module: core.js
-// Maps to F-001: Bootstrap & Multi-Path Data Loader
+// DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v2.1 (Multi-Path Fallback)';
+window.DGE_VERSIONS['core.js'] = 'v2.2 (Taxonomy Path Fix)';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. INITIALIZE GLOBAL DOM ELEMENTS
@@ -39,66 +38,34 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('acharyaAuthorized', 'true');
   }
 
-  // 3. LOAD CONFIG & GRANTHA DATA
-  initAppBootstrap();
+  // 3. EXACT TAXONOMY PATH ROUTING
+  // Maps directly to dge/data/stotras/pns/mula/data.json
+  window.jsonFileName = `data/stotras/${window.stotraCode}/mula/data.json`;
+  window.AUDIO_CACHE_NAME = `narasimha-audio-${window.stotraCode}`;
+
+  // 4. FETCH GRANTHA DATASET
+  fetch(window.jsonFileName)
+    .then(res => { 
+        if(!res.ok) throw new Error(`Could not find dataset at ${window.jsonFileName}`); 
+        return res.json(); 
+    })
+    .then(data => { 
+        window.stotraData = data; 
+        initApp(); 
+    })
+    .catch(err => {
+      console.error("DGE Fetch Error:", err);
+      const titleEl = document.getElementById('stotraTitle');
+      const cardEl = document.getElementById('readingCard');
+      if (titleEl) titleEl.innerText = "Data Not Found";
+      if (cardEl) cardEl.innerText = `Error: Please ensure ${window.jsonFileName} is available in the repository.`;
+    });
 });
 
-async function initAppBootstrap() {
-  if (typeof restorePrefs === 'function') restorePrefs();
-
-  // Fetch configuration file
-  try {
-    const cfgRes = await fetch('config.json');
-    if (cfgRes.ok) {
-      const cfg = await cfgRes.json();
-      if (cfg.appName && window.appConfig) Object.assign(window.appConfig, cfg);
-    }
-  } catch (e) {
-    console.warn("Using default config parameters.");
-  }
-  
-  if (typeof initAuthAndBranding === 'function') initAuthAndBranding();
-
-  // 4. ROBUST MULTI-PATH DATA FETCHER
-  // Scans all possible taxonomy paths automatically to prevent 404 errors
-  const possiblePaths = [
-    `data/stotras/${window.stotraCode}/data.json`,
-    `data/stotras/${window.stotraCode}/mula/data.json`,
-    `data_${window.stotraCode}.json`,
-    `./data_${window.stotraCode}.json`,
-    `../data_${window.stotraCode}.json`
-  ];
-
-  let data = null;
-  let loadedPath = '';
-
-  for (const path of possiblePaths) {
-    try {
-      const res = await fetch(path);
-      if (res.ok) {
-        data = await res.json();
-        loadedPath = path;
-        break;
-      }
-    } catch (err) {
-      // Continue to next path
-    }
-  }
-
-  if (data) {
-    window.stotraData = data;
-    window.jsonFileName = loadedPath;
-    window.AUDIO_CACHE_NAME = `narasimha-audio-${window.stotraCode}`;
-    if (typeof initApp === 'function') initApp();
-  } else {
-    const titleEl = document.getElementById('stotraTitle');
-    const cardEl = document.getElementById('readingCard');
-    if (titleEl) titleEl.innerText = "Data Not Found";
-    if (cardEl) cardEl.innerText = `Error: Could not locate dataset for code '${window.stotraCode}'. Checked paths: ${possiblePaths.join(', ')}`;
-  }
-}
-
 function initApp() {
+  if (typeof restorePrefs === 'function') restorePrefs();
+  if (typeof initAuthAndBranding === 'function') initAuthAndBranding();
+  
   if(window.stotraData && window.stotraData.metadata) {
     const titleEl = document.getElementById('stotraTitle');
     if (titleEl) {
@@ -166,7 +133,7 @@ function restorePrefs() {
   
   const savedFont = parseInt(localStorage.getItem('app_fontSize'), 10);
   if (!isNaN(savedFont) && typeof applyFontSize === 'function') applyFontSize(savedFont);
-  
+
   const savedScript = localStorage.getItem('app_script');
   if (savedScript && typeof applyScript === 'function') applyScript(savedScript);
 }
