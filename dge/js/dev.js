@@ -1,4 +1,7 @@
 // DGE Module: dev.js
+window.DGE_VERSIONS = window.DGE_VERSIONS || {};
+window.DGE_VERSIONS['dev.js'] = 'v1.0';
+
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     if(urlParams.get('dev') === 'true') {
