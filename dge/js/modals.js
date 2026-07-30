@@ -1,51 +1,38 @@
-// js/markers.js
-// Maps to F-010: Markers Engine
+// DGE Module: modals.js
+// Maps to F-012: ModalsUI
 
-function openMarkerMenu(e, id) {
-  if (typeof targetMenuId !== 'undefined') {
-      targetMenuId = id;
+window.openModal = function(id) {
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.style.display = 'flex';
+    document.body.classList.add('modal-open'); 
   }
+};
 
-  const menu = document.getElementById('markerMenu');
-  if (!menu) return;
-
-  menu.classList.add('show');
-  
-  const rect = menu.getBoundingClientRect();
-  let x = e.clientX - 130;
-  let y = e.clientY - 40;
-  
-  // Ensure the menu does not render off-screen
-  x = Math.max(8, Math.min(x, window.innerWidth - rect.width - 8));
-  y = Math.max(8, Math.min(y, window.innerHeight - rect.height - 8));
-  
-  menu.style.left = `${x}px`;
-  menu.style.top = `${y}px`;
-}
-
-function setMark(type) {
-  const menu = document.getElementById('markerMenu');
-
-  if (typeof marks !== 'undefined' && typeof targetMenuId !== 'undefined') {
-    if (type === 'none') {
-        delete marks[targetMenuId];
-    } else {
-        marks[targetMenuId] = type;
-    }
-
-    if (typeof nsKey === 'function') {
-      localStorage.setItem(nsKey('marks'), JSON.stringify(marks));
-    }
+window.closeModal = function(id) {
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open'); 
   }
+};
 
-  if (menu) menu.classList.remove('show');
-  if (typeof renderList === 'function') renderList();
-}
+window.togglePopup = function(id) { 
+  // Close all other open popups first to prevent overlap
+  document.querySelectorAll('.popup').forEach(p => { 
+    if (p.id !== id) p.classList.remove('show'); 
+  }); 
+  
+  // Toggle the requested popup
+  const target = document.getElementById(id);
+  if (target) {
+    target.classList.toggle('show'); 
+  }
+};
 
-// Global listener to close the marker menu when clicking outside of it
+// Global click listener to close popups when tapping outside of them
 document.addEventListener('click', (e) => {
-  const menu = document.getElementById('markerMenu');
-  if (menu && !e.target.closest('.card-actions') && !e.target.closest('.context-menu')) {
-     menu.classList.remove('show');
+  if (!e.target.closest('.popup-container') && !e.target.closest('.popup') && !e.target.closest('.top-actions')) {
+    document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
   }
 });
