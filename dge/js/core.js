@@ -3,8 +3,8 @@
 // Maps to F-001: Bootstrap
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. INITIALIZE GLOBAL ELEMENTS
-  // Critical Fix: If this is missing, the toolbars, popups, and audio controls will crash.
+  // 1. INITIALIZE GLOBAL DOM ELEMENTS
+  // Required so decoupled files (render.js, audio.js) don't crash when looking for buttons.
   window.els = {
     playBtn: document.getElementById('playBtn'),
     speedInput: document.getElementById('speedInput'),
@@ -29,24 +29,24 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // 2. PARSE URL PARAMETERS SAFELY
-  const params = new URLSearchParams(window.location.search);
-  window.stotraCode = params.get('code') || 'pns';
+  const urlParams = new URLSearchParams(window.location.search);
+  window.stotraCode = urlParams.get('code') || 'pns';
   
-  const providedPass = params.get('pass');
-  if (providedPass && window.appConfig && providedPass.toUpperCase() === window.appConfig.secretPasskey.toUpperCase()) {
+  const providedPass = urlParams.get('pass');
+  const passkey = (window.appConfig && window.appConfig.secretPasskey) ? window.appConfig.secretPasskey : 'SHRI108';
+  
+  if (providedPass && providedPass.toUpperCase() === passkey.toUpperCase()) {
     localStorage.setItem('acharyaAuthorized', 'true');
   }
   
   // 3. DYNAMIC PATH ROUTING
-  // Adjusts dynamically based on the '?code=' URL parameter.
-  // Note: Based on your repository structure, the file sits inside the 'mula' directory. 
-  // If you moved it out of 'mula', change this to `data/stotras/${window.stotraCode}/data.json`
+  // Points exactly to your taxonomy: e.g., data/stotras/pns/data.json
   window.jsonFileName = `data/stotras/${window.stotraCode}/data.json`;
   
   // 4. FETCH GRANTHA DATASET
   fetch(window.jsonFileName)
     .then(res => { 
-        if(!res.ok) throw new Error(`Could not find dataset for ${window.stotraCode} at ${window.jsonFileName}`); 
+        if(!res.ok) throw new Error(`Could not find dataset for ${window.stotraCode}`); 
         return res.json(); 
     })
     .then(data => { 
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initApp(); 
     })
     .catch(err => {
-      console.error("DGE Fetch Error:", err);
+      console.error(err);
       const titleEl = document.getElementById('stotraTitle');
       const cardEl = document.getElementById('readingCard');
       if (titleEl) titleEl.innerText = "Data Not Found";
@@ -95,7 +95,8 @@ function initApp() {
   }
 
   const cacheBtn = document.getElementById('cacheBtn');
-  if (cacheBtn && localStorage.getItem(window.nsKey ? window.nsKey('allCached') : `narasimha_allCached_${window.stotraCode}`) === 'true') {
+  const cacheKey = window.nsKey ? window.nsKey('allCached') : `narasimha_allCached_${window.stotraCode}`;
+  if (cacheBtn && localStorage.getItem(cacheKey) === 'true') {
     cacheBtn.innerText = `✅ All Cached`;
     cacheBtn.dataset.cached = "true";
     cacheBtn.style.background = "#e8f5e9"; 
@@ -112,15 +113,17 @@ function initAuthAndBranding() {
   if (isAuthorized) document.body.classList.add('is-authorized');
   
   const authorEl = document.getElementById('stotraAuthor');
-  if(authorEl && window.appConfig) authorEl.innerText = `DESIGNED BY ${window.appConfig.designedBy.toUpperCase()}`;
+  const designedBy = (window.appConfig && window.appConfig.designedBy) ? window.appConfig.designedBy : 'TRIBHUVAN ACHAR';
+  if(authorEl) authorEl.innerText = `DESIGNED BY ${designedBy.toUpperCase()}`;
   
   const emailDisplay = document.getElementById('contactEmailDisplay');
-  if(emailDisplay && window.appConfig) emailDisplay.innerText = window.appConfig.contactEmail;
+  const contactEmail = (window.appConfig && window.appConfig.contactEmail) ? window.appConfig.contactEmail : 'sanatanavidyagurukulam@gmail.com';
+  if(emailDisplay) emailDisplay.innerText = contactEmail;
   
   const emailLink = document.getElementById('configEmailLink');
-  if(emailLink && window.appConfig) {
-      emailLink.href = `mailto:${window.appConfig.contactEmail}`;
-      emailLink.innerText = window.appConfig.contactEmail;
+  if(emailLink) {
+      emailLink.href = `mailto:${contactEmail}`;
+      emailLink.innerText = contactEmail;
   }
 }
 
