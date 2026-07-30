@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3. EXACT TAXONOMY PATH ROUTING
   // Maps directly to dge/data/stotras/pns/mula/data.json
-  window.jsonFileName = `data/stotras/${window.stotraCode}/mula/data.json`;
+  window.jsonFileName = `data/stotras/${window.stotraCode}/data.json`;
   window.AUDIO_CACHE_NAME = `narasimha-audio-${window.stotraCode}`;
 
   // 4. FETCH GRANTHA DATASET
