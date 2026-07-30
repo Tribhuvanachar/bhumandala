@@ -41,7 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 3. DYNAMIC PATH ROUTING
   // Points exactly to your taxonomy: e.g., data/stotras/pns/data.json
-  window.jsonFileName = `data/stotras/${window.stotraCode}/data.json`;
+  // Fix: Ensure robust path resolution for GitHub Pages and local testing
+  window.jsonFileName = window.stotraCode === 'pns' ? 'data/stotras/pns/data.json' : `data/stotras/${window.stotraCode}/data.json`;
+
+
   
   // 4. FETCH GRANTHA DATASET
   fetch(window.jsonFileName)
