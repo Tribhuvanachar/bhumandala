@@ -1,7 +1,7 @@
 // DGE Module: transliteration.js
-// Maps to Feature F-006: Transliteration Engine
+// Maps to Feature F-006: Aksharamukha Transliteration Engine
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['transliteration.js'] = 'v2.0 (DOM Text-Node & Cache Engine)';
+window.DGE_VERSIONS['transliteration.js'] = 'v2.1 (Aksharamukha DOM & Cache Engine)';
 
 // Cache layer to store converted text per script and avoid redundant conversions
 const transliterationCache = {
@@ -14,22 +14,11 @@ const transliterationCache = {
 };
 
 /**
- * Transliterates container contents in-place by walking DOM text nodes.
- * Avoids innerHTML regex replacement and preserves active event listeners/DOM state.
+ * Transliterates container contents in-place by walking DOM text nodes via Aksharamukha.
  */
-window.applyDOMTransliteration = function(rootElement, targetScript) {
+window.applyDOMTransliteration = async function(rootElement, targetScript) {
   const script = targetScript || window.activeScript || 'devanagari';
-  if (!rootElement) return;
-
-  if (script === 'devanagari') {
-    // Restore original text if available or skip
-    return; 
-  }
-
-  if (typeof Sanscript === 'undefined') {
-    console.error("Sanscript library not loaded.");
-    return;
-  }
+  if (!rootElement || script === 'devanagari') return;
 
   const walker = document.createTreeWalker(rootElement, NodeFilter.SHOW_TEXT, null, false);
   let node;
@@ -46,13 +35,20 @@ window.applyDOMTransliteration = function(rootElement, targetScript) {
 
     try {
       const cleanText = originalText.replace(/[\u200B-\u200D\uFEFF]/g, '');
-      const converted = Sanscript.t(cleanText, 'devanagari', script);
+      // Convert via Aksharamukha API / Global function if available
+      let converted = cleanText;
+      if (typeof Aksharamukha !== 'undefined' && Aksharamukha.transliterate) {
+        converted = await Aksharamukha.transliterate({
+          text: cleanText,
+          from: 'Devanagari',
+          to: script.charAt(0).toUpperCase() + script.slice(1)
+        });
+      }
       
-      // Store in cache
       transliterationCache[script][originalText] = converted;
       node.nodeValue = converted;
     } catch (e) {
-      console.error("Transliteration error on node:", e);
+      console.error("Aksharamukha transliteration error:", e);
     }
   }
 };
@@ -72,7 +68,7 @@ window.applyScript = function(code) {
   }
 };
 
-window.setScript = function(code, el) {
+window.setScript = async function(code, el) {
   window.applyScript(code);
   localStorage.setItem('app_script', code);
   
@@ -80,11 +76,11 @@ window.setScript = function(code, el) {
     showToast("आचार्यः ग्रन्थं सज्जीकुर्वन् अस्ति... (Translating script)");
   }
   
-  setTimeout(() => {
+  setTimeout(async () => {
     if (typeof renderList === 'function') renderList();
     if (window.activeId && window.els && window.els.readingCard) {
       window.els.readingCard.innerHTML = window.getText ? window.getText(window.activeId) : '';
-      window.applyDOMTransliteration(window.els.readingCard, code);
+      await window.applyDOMTransliteration(window.els.readingCard, code);
     }
     if (typeof togglePopup === 'function') togglePopup('scriptPopup');
   }, 50);
