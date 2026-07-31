@@ -1,4 +1,7 @@
-/* css/main.css */
+/* ================================================================= */
+/* DGE Main Stylesheet - Updated for Aksharamukha & UI Stability     */
+/* ================================================================= */
+
 :root {
   --bg-main: #FAF3E6; --card-bg: #ffffff; --card-border: #E9DCC3;
   --card-active: #FCE9DE; --text-primary: #2B2119; --text-sanskrit: #9A1B1B;
@@ -8,15 +11,6 @@
   --font-sanskrit: 'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', serif;
   --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
-
-
-/* Hide Aksharamukha's default injected UI widget */
-.aksharamukha-widget, 
-div[id^="aksharamukha"], 
-iframe[src*="aksharamukha"] {
-  display: none !important;
-}
-
 
 body.dark-mode {
   --bg-main: #18120E; --card-bg: #241A14; --card-border: #3A2A1F;
@@ -40,8 +34,25 @@ body.non-devanagari .commentary-block { font-family: var(--font-ui) !important; 
 .flex-row { display: flex; align-items: center; }
 .flex-center { display: flex; align-items: center; justify-content: center; }
 
-/* Top App Bar */
-.top-bar { position: fixed; top: 0; left: 0; right: 0; height: calc(50px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top); background: var(--top-bar-bg); border-bottom: 1px solid var(--top-bar-border); z-index: 200; display: flex; align-items: center; justify-content: space-between; padding-left: 6px; padding-right: 6px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); box-sizing: border-box; }
+/* Top App Bar - Fixed High Z-Index to prevent toolbar disappearing */
+.top-bar { 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  height: calc(50px + env(safe-area-inset-top)); 
+  padding-top: env(safe-area-inset-top); 
+  background: var(--top-bar-bg); 
+  border-bottom: 1px solid var(--top-bar-border); 
+  z-index: 99999 !important; 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding-left: 6px; 
+  padding-right: 6px; 
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+  box-sizing: border-box; 
+}
 .top-bar-title { font-size: 14px; font-weight: 700; color: var(--accent-red); cursor: pointer; white-space: nowrap; flex-shrink: 0; margin-right: auto; padding-left: 4px; }
 .top-actions { display: flex; gap: 2px; align-items: center; justify-content: flex-end; flex-wrap: nowrap; }
 
@@ -166,13 +177,13 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
   box-shadow: 0 6px 16px rgba(0,0,0,0.3); text-align: center; white-space: nowrap;
 }
 
-/* Modals */
+/* Modals with Absolute Sticky Headers - High Z-Index */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 11000; backdrop-filter: blur(2px); }
 
 .modal-content { background: var(--card-bg); color: var(--text-primary); border-radius: 16px; width: 90%; max-width: 440px; border: 1px solid var(--card-border); max-height: 85vh; box-shadow: 0 10px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; overflow: hidden; transition: all 0.3s; position: relative; }
 
 .modal-content.fullscreen { width: 100%; height: 100%; max-width: none; max-height: none; border-radius: 0; border: none; display: flex; flex-direction: column; }
-.modal-content.fullscreen .modal-body { display: flex; flex-direction: column; flex-grow: 1; padding-bottom: calc(20px + env(safe-area-bottom)); }
+.modal-content.fullscreen .modal-body { display: flex; flex-direction: column; flex-grow: 1; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
 .modal-content.fullscreen textarea { flex-grow: 1; height: auto; min-height: 50vh; resize: none; margin-bottom: 12px; }
 
 .modal-header-sticky { padding: 16px; background: var(--card-bg); z-index: 10; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
@@ -181,15 +192,48 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 .modal-content textarea { width: 100%; height: 140px; margin: 8px 0; padding: 12px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); font-family: inherit; font-size: 13px; box-sizing: border-box; resize: vertical; line-height: 1.5; }
 .modal-input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-primary); margin: 8px 0; font-size: 13px; box-sizing: border-box; }
 
+/* Bhashya Picker Item Styling */
 .bhashya-picker-btn { width: 100%; text-align: left; background: var(--bg-main); border: 1px solid var(--card-border); padding: 12px 14px; border-radius: 10px; font-weight: 700; color: var(--text-primary); font-size: 13px; margin-bottom: 8px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s, border 0.2s; }
 .bhashya-picker-btn:hover { background: var(--card-active); border-color: var(--accent-red); color: var(--accent-red); }
 
+/* Project Banner */
 .project-banner { background: var(--card-active); border: 1px solid var(--accent-red); border-radius: 10px; padding: 14px 16px; margin-top: 24px; text-align: center; font-size: 12px; font-weight: 500; color: var(--text-primary); line-height: 1.6; }
 .project-banner a { color: var(--accent-red); font-weight: 700; text-decoration: none; border-bottom: 1px dashed var(--accent-red); padding-bottom: 1px; }
 
+/* Markdown Rendering Classes */
 .md-h2 { color: var(--accent-red); font-size: 16px; font-weight: 800; margin: 16px 0 8px; border-bottom: 1px solid var(--card-border); padding-bottom: 6px; }
 .md-h3 { color: var(--accent-gold); font-size: 14px; font-weight: 700; margin: 14px 0 6px; }
 .md-list { margin: 6px 0 6px 20px; padding: 0; line-height: 1.7; }
 .md-strong { font-weight: 700; color: var(--text-primary); }
 
+@keyframes spin { 100% { transform: rotate(360deg); } }
 .app-footer { text-align: center; padding: 24px 10px 40px; font-size: 10px; font-weight: 600; color: #a8907a; border-top: 1px solid var(--card-border); margin-top: 24px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ================================================================= */
+/* Aksharamukha & Mobile Debug Log Suppressions / Fixes              */
+/* ================================================================= */
+
+/* Force-hide Aksharamukha's default injected UI elements */
+.aksharamukha-widget, 
+div[id*="aksharamukha"], 
+iframe[src*="aksharamukha"] {
+  display: none !important;
+}
+
+/* Mobile Debug Log Styling */
+#mobileDebugLog {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  color: #00ff00;
+  font-family: monospace;
+  font-size: 11px;
+  padding: 6px 10px;
+  z-index: 999999;
+  max-height: 100px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  border-top: 2px solid #00ff00;
+}
