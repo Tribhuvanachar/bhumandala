@@ -1,12 +1,13 @@
-/**
- * DGE Transliteration Engine
- * Handles character conversion across Indic scripts using Sanscript.
- */
+// js/transliteration.js
+// Maps to Feature: ScriptTransliteration
+
+window.DGE_VERSIONS = window.DGE_VERSIONS || {};
+window.DGE_VERSIONS['transliteration.js'] = 'v1.1';
 
 const TransliterationEngine = {
     isAvailable: function() {
         const available = typeof window.Sanscript !== 'undefined';
-        console.log("[Transliteration] Engine available:", available);
+        console.log("[Transliteration] Engine available globally:", available);
         return available;
     },
 
@@ -19,7 +20,7 @@ const TransliterationEngine = {
         }
         
         if (!this.isAvailable()) {
-            console.error("[Transliteration] Fatal: Sanscript engine missing from global window. Check CDN/network.");
+            console.error("[Transliteration] Fatal: Sanscript engine missing from global window. Verify CDN network status.");
             return htmlText; 
         }
         
@@ -31,7 +32,7 @@ const TransliterationEngine = {
                     let cleanText = parts[i].replace(/[\u200B-\u200D\uFEFF]/g, '');
                     
                     if (cleanText.trim().length > 0) {
-                        console.log(`[Transliteration] Converting chunk length: ${cleanText.length}`);
+                        console.log(`[Transliteration] Converting chunk of length: ${cleanText.length}`);
                         parts[i] = window.Sanscript.t(cleanText, 'devanagari', targetScript);
                     }
                 }
@@ -45,17 +46,16 @@ const TransliterationEngine = {
     }
 };
 
-// Global bindings for legacy HTML compatibility
 window.applyTransliteration = function(htmlText, script) {
     return TransliterationEngine.apply(htmlText, script);
 };
 
 window.applyScript = function(code) {
-    activeScript = code;
+    window.activeScript = code;
     document.querySelectorAll('#scriptPopup .pop-item').forEach(el => {
-      if (el.dataset.script) {
-        el.classList.toggle('active', el.dataset.script === code);
-      }
+        if (el.dataset.script) {
+            el.classList.toggle('active', el.dataset.script === code);
+        }
     });
     
     if (code !== 'devanagari') {
@@ -67,18 +67,18 @@ window.applyScript = function(code) {
 
 window.setScript = function(code, el) {
     console.log(`[Transliteration] User requested script change to: ${code}`);
-    applyScript(code);
+    window.applyScript(code);
     localStorage.setItem('app_script', code);
     
-    if (typeof showToast === 'function') {
-        showToast("आचार्यः ग्रन्थं सज्जीकुर्वन् अस्ति... (Translating script)");
+    if (typeof window.showToast === 'function') {
+        window.showToast("आचार्यः ग्रन्थं सज्जीकुर्वन् अस्ति... (Translating script)");
     }
     
     setTimeout(() => {
-        if (typeof renderList === 'function') renderList();
-        if (activeId && els.readingCard) {
-            els.readingCard.innerHTML = window.getText(activeId);
+        if (typeof window.renderList === 'function') window.renderList();
+        if (window.activeId && window.els && window.els.readingCard) {
+            window.els.readingCard.innerHTML = window.getText(window.activeId);
         }
-        if (typeof togglePopup === 'function') togglePopup('scriptPopup');
+        if (typeof window.togglePopup === 'function') window.togglePopup('scriptPopup');
     }, 50);
 };
