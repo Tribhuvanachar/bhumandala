@@ -5,16 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" id="themeColorMeta" content="#FFFDF9">
-<title>Sarvamoola Digital Library</title>
+<title>Bhagavata Digital Library</title>
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Robust Indic Transliteration Engine -->
-<script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.2.6/sanscript.min.js"></script>
-
+<!-- Bulletproof Transliteration Engine (Direct GitHub CDN) -->
+<script src="https://cdn.jsdelivr.net/gh/sanskrit/sanscript.js@master/sanscript.js"></script>
 
 <!-- DGE Stylesheet -->
 <link rel="stylesheet" href="css/main.css">
@@ -288,7 +287,7 @@
   </div>
 </div>
 
-<!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
+<!-- DGE MODULAR SCRIPTS PIPELINE -->
 <script src="js/config.js"></script>
 <script src="js/state.js"></script>
 <script src="js/dev.js"></script>
@@ -307,7 +306,7 @@
 
 <script>
   if (typeof console.log === "function") {
-      console.log("HTML parsed. Explicit modular script tags initialized.");
+      console.log("[Init] index.html DOM parsed. Explicit modular script tags executed.");
   }
 </script>
 
