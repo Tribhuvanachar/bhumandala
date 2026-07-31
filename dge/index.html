@@ -308,10 +308,12 @@
   // Log successful HTML parse
   mobileLog("HTML parsed. Explicit modular script tags initialized.");
 </script>
-  <!-- ON-SCREEN MOBILE DEBUGGER (Moved to bottom so it never covers the top bar) -->
-<div id="mobileDebugLog" style="display:none; position:fixed; bottom:0; left:0; width:100%; background:rgba(0,0,0,0.9); color:#00ff00; font-family:monospace; font-size:11px; padding:8px; z-index:99999; max-height:120px; overflow-y:auto; box-sizing:border-box; border-top:2px solid #00ff00;">
+  <!-- ON-SCREEN MOBILE DEBUGGER -->
+<div id="mobileDebugLog" style="display: block; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.9); color: #00ff00; font-family: monospace; font-size: 11px; padding: 8px; z-index: 99999; max-height: 120px; overflow-y: auto; box-sizing: border-box; border-top: 2px solid #00ff00;">
   <strong>📱 Mobile Debug Log:</strong><br>
+  <span>Debug panel active.</span><br>
 </div>
+
 <script>
   window.onerror = function(msg, url, line) {
     const logBox = document.getElementById('mobileDebugLog');
