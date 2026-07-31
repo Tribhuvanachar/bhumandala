@@ -9,6 +9,15 @@
   --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+
+/* Hide Aksharamukha's default injected UI widget */
+.aksharamukha-widget, 
+div[id^="aksharamukha"], 
+iframe[src*="aksharamukha"] {
+  display: none !important;
+}
+
+
 body.dark-mode {
   --bg-main: #18120E; --card-bg: #241A14; --card-border: #3A2A1F;
   --card-active: #3E2013; --text-primary: #EDE2D3; --text-sanskrit: #E8A067;
