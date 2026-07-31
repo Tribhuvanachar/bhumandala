@@ -9,7 +9,7 @@ window.applyTransliteration = function(htmlText, script) {
     }
     
     if (typeof window.Sanscript === 'undefined') {
-        console.error("[Transliteration] Fatal error: Sanscript engine missing from global window. Ensure you are using 'https://cdn.jsdelivr.net/npm/sanscript@0.1.3/sanscript.min.js' in your index.html head.");
+        console.error("[Transliteration] Fatal error: Sanscript engine missing from global window. Check that the @indic-transliteration/sanscript <script> tag in index.html <head> loaded successfully (see Network tab for a 404) and that it appears BEFORE js/transliteration.js in the document.");
         return htmlText; 
     }
     
