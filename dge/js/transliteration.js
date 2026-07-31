@@ -1,41 +1,30 @@
-// DGE Module: transliteration.js
-// Maps to Feature F-006: DOM Text-Node Transliteration & Caching Engine
-window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['transliteration.js'] = 'v3.0 (DOM Text-Node & Cache Engine)';
+// =================================================================
+// DGE Module: js/transliteration.js
+// Maps to Feature F-006: Script Transliteration Engine
+// =================================================================
 
-const transliterationCache = {
-  iast: {},
-  kannada: {},
-  telugu: {},
-  tamil: {},
-  malayalam: {},
-  devanagari: {}
-};
-
-/**
- * Converts a raw string using caching and Sanscript.
- */
-window.convertText = function(text, script) {
+window.applyTransliteration = function(htmlText, script) {
   const targetScript = script || window.activeScript || 'devanagari';
-  if (!text || targetScript === 'devanagari') return text;
-  
-  if (transliterationCache[targetScript][text]) {
-    return transliterationCache[targetScript][text];
-  }
+  if (targetScript === 'devanagari' || !htmlText) return htmlText;
   
   if (typeof Sanscript === 'undefined') {
-    console.error("Sanscript library not loaded.");
-    return text;
+     console.error("Transliteration engine failed to load. Check internet connection.");
+     return htmlText; 
   }
   
   try {
-    const cleanText = text.replace(/[\u200B-\u200D\uFEFF]/g, '');
-    const converted = Sanscript.t(cleanText, 'devanagari', targetScript);
-    transliterationCache[targetScript][text] = converted;
-    return converted;
+      const parts = htmlText.split(/(<[^>]+>)/g);
+      for (let i = 0; i < parts.length; i++) {
+        if (!parts[i].startsWith('<')) {
+          // Strip invisible zero-width characters that break transliterators
+          let cleanText = parts[i].replace(/[\u200B-\u200D\uFEFF]/g, '');
+          parts[i] = Sanscript.t(cleanText, 'devanagari', targetScript);
+        }
+      }
+      return parts.join('');
   } catch (e) {
-    console.error("Transliteration error:", e);
-    return text;
+      console.error("Transliteration error:", e);
+      return htmlText;
   }
 };
 
@@ -47,9 +36,9 @@ window.applyScript = function(code) {
     }
   });
   if (code !== 'devanagari') {
-    document.body.classList.add('non-devanagari');
+      document.body.classList.add('non-devanagari');
   } else {
-    document.body.classList.remove('non-devanagari');
+      document.body.classList.remove('non-devanagari');
   }
 };
 
@@ -58,17 +47,16 @@ window.setScript = function(code, el) {
   localStorage.setItem('app_script', code);
   
   if (typeof showToast === 'function') {
-    showToast("आचार्यः ग्रन्थं सज्जीकुर्वन् अस्ति... (Translating script)");
+      showToast("आचार्यः ग्रन्थं सज्जीकुर्वन् अस्ति... (Translating script)");
   }
   
   setTimeout(() => {
-    if (typeof renderList === 'function') renderList();
-    document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
+      if (typeof renderList === 'function') renderList();
+      if (window.activeId && typeof getText === 'function' && window.els && window.els.readingCard) {
+          window.els.readingCard.innerHTML = getText(window.activeId);
+      }
+      if (typeof togglePopup === 'function') {
+          togglePopup('scriptPopup');
+      }
   }, 50);
 };
-
-// Auto-restore saved script preference on load
-(function restoreScriptPref() {
-  const savedScript = localStorage.getItem('app_script');
-  if (savedScript) window.applyScript(savedScript);
-})();
