@@ -57,7 +57,7 @@ window.showToast = function(msg) {
     // Create an isolated container only when active
     const dgeLog = document.createElement('div');
     dgeLog.id = 'dgeMobileLogContainer';
-    dgeLog.style.cssText = 'display: block; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.95); color: #0f0; font-family: monospace; font-size: 11px; padding: 10px; z-index: 999999; max-height: 150px; overflow-y: auto; box-sizing: border-box; border-top: 2px solid #0f0; pointer-events: none;';
+    dgeLog.style.cssText = 'display: block; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.95); color: #0f0; font-family: monospace; font-size: 11px; padding: 10px; z-index: 999999; max-height: 150px; overflow-y: auto; box-sizing: border-box; border-top: 2px solid #0f0; touch-action: pan-y; overscroll-behavior: contain; -webkit-user-select: text; user-select: text; pointer-events: auto;';
     dgeLog.innerHTML = '<strong>📱 DGE Dev Logger Active</strong><br>';
     document.body.appendChild(dgeLog);
 
