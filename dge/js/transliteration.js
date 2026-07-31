@@ -1,9 +1,8 @@
 // DGE Module: transliteration.js
-// Maps to Feature F-006: Aksharamukha Transliteration Engine
+// Maps to Feature F-006: DOM Text-Node Transliteration & Caching Engine
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['transliteration.js'] = 'v2.1 (Aksharamukha DOM & Cache Engine)';
+window.DGE_VERSIONS['transliteration.js'] = 'v3.0 (DOM Text-Node & Cache Engine)';
 
-// Cache layer to store converted text per script and avoid redundant conversions
 const transliterationCache = {
   iast: {},
   kannada: {},
@@ -14,42 +13,29 @@ const transliterationCache = {
 };
 
 /**
- * Transliterates container contents in-place by walking DOM text nodes via Aksharamukha.
+ * Converts a raw string using caching and Sanscript.
  */
-window.applyDOMTransliteration = async function(rootElement, targetScript) {
-  const script = targetScript || window.activeScript || 'devanagari';
-  if (!rootElement || script === 'devanagari') return;
-
-  const walker = document.createTreeWalker(rootElement, NodeFilter.SHOW_TEXT, null, false);
-  let node;
+window.convertText = function(text, script) {
+  const targetScript = script || window.activeScript || 'devanagari';
+  if (!text || targetScript === 'devanagari') return text;
   
-  while ((node = walker.nextNode())) {
-    const originalText = node.nodeValue;
-    if (!originalText || !originalText.trim()) continue;
-
-    // Check cache first
-    if (transliterationCache[script][originalText]) {
-      node.nodeValue = transliterationCache[script][originalText];
-      continue;
-    }
-
-    try {
-      const cleanText = originalText.replace(/[\u200B-\u200D\uFEFF]/g, '');
-      // Convert via Aksharamukha API / Global function if available
-      let converted = cleanText;
-      if (typeof Aksharamukha !== 'undefined' && Aksharamukha.transliterate) {
-        converted = await Aksharamukha.transliterate({
-          text: cleanText,
-          from: 'Devanagari',
-          to: script.charAt(0).toUpperCase() + script.slice(1)
-        });
-      }
-      
-      transliterationCache[script][originalText] = converted;
-      node.nodeValue = converted;
-    } catch (e) {
-      console.error("Aksharamukha transliteration error:", e);
-    }
+  if (transliterationCache[targetScript][text]) {
+    return transliterationCache[targetScript][text];
+  }
+  
+  if (typeof Sanscript === 'undefined') {
+    console.error("Sanscript library not loaded.");
+    return text;
+  }
+  
+  try {
+    const cleanText = text.replace(/[\u200B-\u200D\uFEFF]/g, '');
+    const converted = Sanscript.t(cleanText, 'devanagari', targetScript);
+    transliterationCache[targetScript][text] = converted;
+    return converted;
+  } catch (e) {
+    console.error("Transliteration error:", e);
+    return text;
   }
 };
 
@@ -60,7 +46,6 @@ window.applyScript = function(code) {
       el.classList.toggle('active', el.dataset.script === code);
     }
   });
-  
   if (code !== 'devanagari') {
     document.body.classList.add('non-devanagari');
   } else {
@@ -68,7 +53,7 @@ window.applyScript = function(code) {
   }
 };
 
-window.setScript = async function(code, el) {
+window.setScript = function(code, el) {
   window.applyScript(code);
   localStorage.setItem('app_script', code);
   
@@ -76,17 +61,13 @@ window.setScript = async function(code, el) {
     showToast("आचार्यः ग्रन्थं सज्जीकुर्वन् अस्ति... (Translating script)");
   }
   
-  setTimeout(async () => {
+  setTimeout(() => {
     if (typeof renderList === 'function') renderList();
-    if (window.activeId && window.els && window.els.readingCard) {
-      window.els.readingCard.innerHTML = window.getText ? window.getText(window.activeId) : '';
-      await window.applyDOMTransliteration(window.els.readingCard, code);
-    }
-    if (typeof togglePopup === 'function') togglePopup('scriptPopup');
+    document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
   }, 50);
 };
 
-// Auto-restore saved script preference on boot
+// Auto-restore saved script preference on load
 (function restoreScriptPref() {
   const savedScript = localStorage.getItem('app_script');
   if (savedScript) window.applyScript(savedScript);
