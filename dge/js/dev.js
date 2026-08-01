@@ -1,37 +1,35 @@
 // DGE Module: dev.js
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['dev.js'] = 'v1.0';
+window.DGE_VERSIONS['dev.js'] = 'v1.1 (merged into shared log panel)';
 
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     if(urlParams.get('dev') === 'true') {
-        const logBox = document.createElement('div');
-        logBox.style.cssText = `
-            position: fixed; bottom: 0; left: 0; width: 100%; height: 140px;
-            background: rgba(0, 0, 0, 0.95); color: #00FF00; font-family: monospace;
-            font-size: 11px; z-index: 99999; padding: 10px; overflow-y: auto;
-            border-top: 3px solid #00FF00; box-sizing: border-box; line-height: 1.4;
-        `;
-        
-        let html = "<strong style='color:#FFF;'>🛠️ DGE DEVELOPMENT LOG</strong><br/><hr style='border-color:#333;'/>";
-        
+
+        let html = "<div style='margin-bottom:8px; padding-bottom:8px; border-bottom:1px dashed rgba(0,255,0,0.3);'>";
+        html += "<strong style='color:#FFF;'>🛠️ DGE DEVELOPMENT LOG</strong><br/>";
+
         if(window.DGE_VERSIONS) {
             html += "<strong style='color:#0FF;'>[MODULES LOADED]</strong><br/>";
             for(let script in window.DGE_VERSIONS) { html += `✔️ ${script}: <span style="color:#FF0;">${window.DGE_VERSIONS[script]}</span><br/>`; }
         }
-        
+
         html += "<br/><strong style='color:#0FF;'>[FUNCTION DIAGNOSTICS]</strong><br/>";
         const criticalFuncs = ['togglePopup', 'applyDarkMode', 'playShloka', 'renderList', 'initApp'];
         criticalFuncs.forEach(func => {
             html += (typeof window[func] === 'function') ? `✔️ ${func}() is ready.<br/>` : `❌ <span style='color:red;'>${func}() is MISSING.</span><br/>`;
         });
+        html += "</div>";
 
-        logBox.innerHTML = html;
-        document.body.appendChild(logBox);
-
-        // FIX: Push the bottom audio player up so it isn't hidden
-        const bottomPlayer = document.querySelector('.bottom-player');
-        if (bottomPlayer) bottomPlayer.style.bottom = '140px';
-        document.body.style.paddingBottom = '280px'; 
+        // Feed this diagnostic block into the ONE shared log panel (created
+        // by utils.js) instead of spawning a second, uncontrolled overlay.
+        // This also drops the old hardcoded bottom-player/body padding
+        // hacks that used to fight with the panel's own positioning logic.
+        if (window.DGE_DEV_LOG && typeof window.DGE_DEV_LOG.appendHTML === 'function') {
+            window.DGE_DEV_LOG.appendHTML(html);
+        } else {
+            console.warn('[dev.js] Shared dev log panel unavailable — skipping diagnostics UI.');
+        }
     }
 });
+
