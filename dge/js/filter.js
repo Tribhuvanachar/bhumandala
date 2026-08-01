@@ -16,9 +16,13 @@ function getFilteredIds() {
   const hasRange = !isNaN(rs) && !isNaN(re) && rs <= re;
   
   for (let i = 1; i <= total; i++) {
-    if (typeof currentFilter !== 'undefined') {
-      if (currentFilter === 'fav' && (typeof marks === 'undefined' || marks[i] !== 'fav')) continue;
-      if (currentFilter === 'practice' && (typeof marks === 'undefined' || marks[i] !== 'practice')) continue;
+    if (typeof currentFilter !== 'undefined' && currentFilter !== 'all' && currentFilter !== 'none') {
+      const m = (typeof marks !== 'undefined') ? marks[i] : null;
+      if (currentFilter === 'fav' && !(m && m.fav)) continue;
+      if (currentFilter === 'pending' && !(m && m.status === 'pending')) continue;
+      if (currentFilter === 'practice' && !(m && m.status === 'practice')) continue;
+      if (currentFilter === 'done' && !(m && m.status === 'done')) continue;
+      if (currentFilter === 'doubt' && !(m && m.doubt)) continue;
     }
     
     if (hasRange) { 

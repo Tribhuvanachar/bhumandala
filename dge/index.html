@@ -22,22 +22,19 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.3.0">
+<link rel="stylesheet" href="css/main.css?v=4.4.0">
 </head>
 <body>
 
 <div id="toastMsg"></div>
 
 <!-- Context-Aware Floating Palette Tooltip -->
+<!-- Buttons here are rendered dynamically by ai.js from window.ACHARYA_QUERY_TYPES -->
+<!-- (see js/config.js) so the set can be reconfigured in one place. -->
 <div id="actionTooltip" style="display:none;">
   <div class="tooltip-header">🕉️ Ask Acharya</div>
-  <div class="tooltip-row">
-    <button class="tooltip-btn" onpointerdown="window.askAcharya(event, 'shloka')">📜 Shloka</button>
-    <button class="tooltip-btn" onpointerdown="window.askAcharya(event, 'grammar')">⚙️ Word</button>
-    <button class="tooltip-btn" onpointerdown="window.openBhashyaPicker(event)">🔍 Bhashya</button>
-  </div>
-  <div style="height:1px; background:rgba(255,255,255,0.1); margin:4px 0;"></div>
-  <button class="tooltip-btn" style="width:100%; text-align:center; background: rgba(226, 102, 74, 0.2);" onpointerdown="window.askAcharya(event, 'translate')">🌐 Native Meaning</button>
+  <div class="tooltip-row" id="acharyaQueryButtonsRow"></div>
+  <div id="acharyaFullWidthButtons"></div>
 </div>
 
 <!-- Floating Append-to-Notes Selection Button for Modal -->
@@ -70,7 +67,7 @@
       </div>
     </div>
 
-    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="window.openModal('keyModal')" title="Access Key Settings" style="font-size: 18px;">🔑</button>
+    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="window.openKeyModal()" title="Access Key Settings" style="font-size: 18px;">🔑</button>
 
     <!-- Theme Picker -->
     <div style="position:relative;">
@@ -114,6 +111,7 @@
     </select>
     <div class="search-container">
       <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search text or shloka number..." oninput="window.handleSearch()">
+      <button class="mic-btn" id="searchMicBtn" onclick="window.startSearchVoiceInput()" title="Search by voice">🎤</button>
       <button class="clear-search-btn" id="clearSearchBtn" onclick="window.clearSearch()">✖</button>
     </div>
   </div>
@@ -128,7 +126,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.3 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.4 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -160,7 +158,10 @@
       <div class="popup" id="filterPopup" style="left: 50%; transform: translateX(-50%);">
         <div class="pop-item active" id="opt-all" onclick="window.setFilter('all')">▶ All</div>
         <div class="pop-item" id="opt-fav" onclick="window.setFilter('fav')">▶ ★ Favorites</div>
-        <div class="pop-item" id="opt-practice" onclick="window.setFilter('practice')">▶ 🚩 Practice</div>
+        <div class="pop-item" id="opt-pending" onclick="window.setFilter('pending')">▶ ○ Pending</div>
+        <div class="pop-item" id="opt-practice" onclick="window.setFilter('practice')">▶ 🚧 Needs Practice</div>
+        <div class="pop-item" id="opt-done" onclick="window.setFilter('done')">▶ ✅ Done</div>
+        <div class="pop-item" id="opt-doubt" onclick="window.setFilter('doubt')">▶ ❓ Doubts</div>
         <div class="pop-item" id="opt-none" onclick="window.setFilter('none')">⏸ Single Track</div>
         <hr>
         <div class="range-box">
@@ -191,6 +192,18 @@
         <div class="pop-row">
           <span>🔁 Rep:</span>
           <input type="number" class="pop-input" id="repeatInput" value="1" min="1" onchange="window.updateRepeatDisplay()">
+        </div>
+        <hr>
+        <div style="display:flex; flex-direction:column; gap:6px; margin-bottom: 4px;">
+          <div class="flex-row" style="justify-content:space-between; font-size:12px; font-weight:700;">
+            <span>⏱ Seek</span>
+            <button class="btn-sm" id="seekPrecisionBtn" onclick="window.toggleSeekPrecision()" style="font-size:10px; padding:2px 8px;">1s</button>
+          </div>
+          <input type="range" id="seekSlider" min="0" max="0" step="1" value="0" oninput="window.onSeekSliderInput(this.value)">
+          <div class="flex-row" style="justify-content:space-between; font-size:10px; color:var(--muted-text);">
+            <span id="seekSliderCurrent">0:00.000</span>
+            <span id="seekSliderTotal">0:00.000</span>
+          </div>
         </div>
         <hr>
         <div style="font-size: 12px; font-weight: 700; margin-bottom: 4px;">
@@ -232,17 +245,16 @@
 <div class="modal-overlay" id="noteModal">
   <div class="modal-content" id="noteModalBox">
     <div class="modal-header-sticky">
-       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">📝 Notes (Shloka <span id="noteShlokaNum"></span>)</h4>
+       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">➕ New Note (Shloka <span id="noteShlokaNum"></span>)</h4>
        <div style="display:flex; gap:6px;">
          <button class="btn-sm" onclick="window.toggleMaximizeNote()" id="maxNoteBtn" style="font-size:11px;">⛶ Expand</button>
          <button class="btn-sm" onclick="window.closeModal('noteModal')" style="font-size:11px;">✖ Close</button>
        </div>
     </div>
     <div class="modal-body">
-      <textarea id="noteText" placeholder="Write your notes or append Acharya excerpts here..."></textarea>
-      <div style="display:flex; justify-content:space-between; margin-top: 12px; flex-shrink: 0;">
-        <button class="btn-sm" onclick="window.clearNote()" style="color:var(--accent-red);">🗑 Clear All</button>
-        <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="window.saveNote()">Save Notes</button>
+      <textarea id="noteText" placeholder="Write a note or append Acharya excerpts here — it'll be added as its own entry, viewable and shareable separately from Shloka Actions…"></textarea>
+      <div style="display:flex; justify-content:flex-end; margin-top: 12px; flex-shrink: 0;">
+        <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="window.saveNote()">💾 Add Note</button>
       </div>
     </div>
   </div>
@@ -266,14 +278,37 @@
 <div class="modal-overlay" id="keyModal">
   <div class="modal-content">
     <div class="modal-header-sticky">
-       <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">🔑 Secret Access</h3>
+       <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">🔑 AI Provider Keys</h3>
        <button class="btn-sm" onclick="window.closeModal('keyModal')" style="font-size:11px;">✖ Close</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:12px; color:#666; margin:0 0 12px 0; line-height: 1.5;">Enter your Secret Access Key below to enable deep textual analysis. If you do not have one, please contact the administrator at <strong id="contactEmailDisplay">sanatanavidyagurukulam@gmail.com</strong>.</p>
-      <input type="password" id="userApiKeyInput" class="modal-input" placeholder="Enter Access Key Here...">
+      <p style="font-size:12px; color:#666; margin:0 0 12px 0; line-height: 1.5;">Add a key for any AI provider you'd like Acharya to use. If you don't have one, contact <strong id="contactEmailDisplay">sanatanavidyagurukulam@gmail.com</strong>. Keys are stored only on this device.</p>
+
+      <div class="provider-key-row">
+        <label>Gemini API Key</label>
+        <input type="password" id="userGeminiKeyInput" class="modal-input" placeholder="Gemini key" style="margin:4px 0;">
+        <input type="text" id="userGeminiModelInput" class="modal-input" placeholder="Model (e.g. gemini-3.6-flash)" style="margin:0;">
+      </div>
+
+      <div class="provider-key-row">
+        <label>OpenAI (ChatGPT) API Key</label>
+        <input type="password" id="userOpenaiKeyInput" class="modal-input" placeholder="OpenAI key" style="margin:4px 0;">
+        <input type="text" id="userOpenaiModelInput" class="modal-input" placeholder="Model (e.g. a current GPT model)" style="margin:0;">
+      </div>
+
+      <div class="provider-key-row">
+        <label>Claude (Anthropic) API Key</label>
+        <input type="password" id="userClaudeKeyInput" class="modal-input" placeholder="Claude key" style="margin:4px 0;">
+        <input type="text" id="userClaudeModelInput" class="modal-input" placeholder="Model (e.g. a current Claude model)" style="margin:0;">
+      </div>
+
+      <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:700; margin-top:8px;">
+        <input type="checkbox" id="aiParallelModeToggle" style="margin:0; width:14px; height:14px;">
+        🧭 Ask all configured providers in parallel and combine into one summary
+      </label>
+
       <div style="text-align:right; margin-top:16px;">
-        <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="window.saveUserApiKey()">Save Key</button>
+        <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="window.saveAllApiKeys()">Save Keys</button>
       </div>
     </div>
   </div>
@@ -295,30 +330,37 @@
         <p style="font-size:13px; font-weight: 600; color:#8a7a63; margin-top:12px;">Consulting traditional scriptures...</p>
       </div>
       <div id="acharyaResult" style="font-size:14px; line-height:1.7; overflow-wrap: anywhere;"></div>
+
+      <div id="acharyaFollowUpBox" style="display:none; gap:6px; margin-top:16px; padding-top:12px; border-top:1px solid var(--card-border);">
+        <input type="text" id="acharyaFollowUpInput" class="modal-input" placeholder="Ask a follow-up question…" style="margin:0; flex-grow:1;" onkeydown="if(event.key==='Enter'){event.preventDefault(); window.sendAcharyaFollowUp();}">
+        <button class="btn-icon" title="Ask by voice" onclick="window.startFollowUpVoiceInput()" style="font-size:18px;">🎤</button>
+        <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; flex-shrink:0;" onclick="window.sendAcharyaFollowUp()">Ask</button>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.3.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.4.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.3.0"></script>
-<script src="js/state.js?v=4.3.0"></script>
-<script src="js/dev.js?v=4.3.0"></script>
-<script src="js/utils.js?v=4.3.0"></script>
-<script src="js/modals.js?v=4.3.0"></script>
-<script src="js/transliteration.js?v=4.3.0"></script>
-<script src="js/audio.js?v=4.3.0"></script>
-<script src="js/filter.js?v=4.3.0"></script>
-<script src="js/search.js?v=4.3.0"></script>
-<script src="js/markers.js?v=4.3.0"></script>
-<script src="js/notes.js?v=4.3.0"></script>
-<script src="js/snippets.js?v=4.3.0"></script>
-<script src="js/actions.js?v=4.3.0"></script>
-<script src="js/ai.js?v=4.3.0"></script>
-<script src="js/render.js?v=4.3.0"></script>
-<script src="js/core.js?v=4.3.0"></script>
+<script src="js/config.js?v=4.4.0"></script>
+<script src="js/state.js?v=4.4.0"></script>
+<script src="js/dev.js?v=4.4.0"></script>
+<script src="js/utils.js?v=4.4.0"></script>
+<script src="js/modals.js?v=4.4.0"></script>
+<script src="js/transliteration.js?v=4.4.0"></script>
+<script src="js/audio.js?v=4.4.0"></script>
+<script src="js/filter.js?v=4.4.0"></script>
+<script src="js/search.js?v=4.4.0"></script>
+<script src="js/markers.js?v=4.4.0"></script>
+<script src="js/notes.js?v=4.4.0"></script>
+<script src="js/snippets.js?v=4.4.0"></script>
+<script src="js/actions.js?v=4.4.0"></script>
+<script src="js/voice.js?v=4.4.0"></script>
+<script src="js/ai.js?v=4.4.0"></script>
+<script src="js/render.js?v=4.4.0"></script>
+<script src="js/core.js?v=4.4.0"></script>
 
 <script>
   if (typeof console.log === "function") {

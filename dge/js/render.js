@@ -88,18 +88,23 @@ function renderList() {
     let cardActionsHtml = '';
     
     if (document.body.classList.contains('is-authorized')) {
-      const isFav = typeof marks !== 'undefined' && marks[i] === 'fav';
-      const isPractice = typeof marks !== 'undefined' && marks[i] === 'practice';
-      const hasNote = typeof notes !== 'undefined' && !!notes[i];
+      const m = (typeof marks !== 'undefined') ? marks[i] : null;
+      const isFav = !!(m && m.fav);
+      const status = m ? m.status : null;
+      const isDoubt = !!(m && m.doubt);
+      const noteCount = (typeof notes !== 'undefined' && notes[i]) ? notes[i].length : 0;
       const snipCount = (typeof snippets !== 'undefined' && snippets[i]) ? snippets[i].length : 0;
 
       let chips = '';
       if (isFav) chips += `<span class="status-chip is-fav" title="Favorite">★</span>`;
-      if (isPractice) chips += `<span class="status-chip is-practice" title="Needs practice">🚩</span>`;
-      if (hasNote) chips += `<span class="status-chip has-note" title="Has a note">📝</span>`;
+      if (status === 'pending') chips += `<span class="status-chip is-pending" title="Pending">○</span>`;
+      if (status === 'practice') chips += `<span class="status-chip is-practice" title="Needs practice">🚧</span>`;
+      if (status === 'done') chips += `<span class="status-chip is-done" title="Done">✅</span>`;
+      if (isDoubt) chips += `<span class="status-chip is-doubt" title="Has a doubt">❓</span>`;
+      if (noteCount > 0) chips += `<span class="status-chip has-note" title="${noteCount} note(s)">📝 ${noteCount}</span>`;
       if (snipCount > 0) chips += `<span class="status-chip" title="${snipCount} saved snippet(s)">🎯 ${snipCount}</span>`;
 
-      cardActionsHtml = `<div class="card-actions">${chips}<button class="btn-icon" title="Favorite, note, snippets, share…" onclick="event.stopPropagation(); if(typeof openActionsSheet==='function') openActionsSheet(${i})">⋯</button></div>`;
+      cardActionsHtml = `<div class="card-actions">${chips}<button class="btn-icon" title="Favorite, status, doubt, note, snippets, share…" onclick="event.stopPropagation(); if(typeof openActionsSheet==='function') openActionsSheet(${i})">⋯</button></div>`;
     }
 
     let commentaryHtml = '';

@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v1.3 (Explicit Global Binding)';
+window.DGE_VERSIONS['ai.js'] = 'v2.0 (Multi-Provider + Follow-up Chat)';
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -85,10 +85,19 @@ function parseMarkdown(md) {
     .replace(/\n/g, '<br>');
 }
 
-// 3. Secret Key Modals & Settings
-window.openKeyModal = function() { 
-  const input = document.getElementById('userApiKeyInput');
-  if (input) input.value = localStorage.getItem('user_gemini_key') || ''; 
+// 3. Multi-Provider AI Key Settings
+function dgeCap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+const AI_PROVIDER_IDS = ['gemini', 'openai', 'claude'];
+
+window.openKeyModal = function() {
+  AI_PROVIDER_IDS.forEach(id => {
+    const keyInput = document.getElementById(`user${dgeCap(id)}KeyInput`);
+    const modelInput = document.getElementById(`user${dgeCap(id)}ModelInput`);
+    if (keyInput) keyInput.value = localStorage.getItem(`user_${id}_key`) || '';
+    if (modelInput) modelInput.value = localStorage.getItem(`user_${id}_model`) || (window.AI_PROVIDERS && window.AI_PROVIDERS[id] ? window.AI_PROVIDERS[id].defaultModel : '') || '';
+  });
+  const parallelToggle = document.getElementById('aiParallelModeToggle');
+  if (parallelToggle) parallelToggle.checked = localStorage.getItem('user_ai_parallel_mode') === 'true';
   if (typeof openModal === 'function') openModal('keyModal');
 };
 
@@ -96,12 +105,92 @@ window.closeKeyModal = function() {
   if (typeof closeModal === 'function') closeModal('keyModal'); 
 };
 
-window.saveUserApiKey = function() {
-  const input = document.getElementById('userApiKeyInput');
-  const key = input ? input.value.trim() : '';
-  if(key) { localStorage.setItem('user_gemini_key', key); } else { localStorage.removeItem('user_gemini_key'); }
+window.saveAllApiKeys = function() {
+  AI_PROVIDER_IDS.forEach(id => {
+    const keyInput = document.getElementById(`user${dgeCap(id)}KeyInput`);
+    const modelInput = document.getElementById(`user${dgeCap(id)}ModelInput`);
+    const key = keyInput ? keyInput.value.trim() : '';
+    const model = modelInput ? modelInput.value.trim() : '';
+    if (key) localStorage.setItem(`user_${id}_key`, key); else localStorage.removeItem(`user_${id}_key`);
+    if (model) localStorage.setItem(`user_${id}_model`, model); else localStorage.removeItem(`user_${id}_model`);
+  });
+  const parallelToggle = document.getElementById('aiParallelModeToggle');
+  if (parallelToggle) localStorage.setItem('user_ai_parallel_mode', parallelToggle.checked ? 'true' : 'false');
+
   window.closeKeyModal();
+  if (typeof showToast === 'function') showToast('AI settings saved.');
 };
+
+function dgeGetConfiguredProviders() {
+  const out = [];
+  AI_PROVIDER_IDS.forEach(id => {
+    const key = localStorage.getItem(`user_${id}_key`);
+    if (key) {
+      const model = localStorage.getItem(`user_${id}_model`) || (window.AI_PROVIDERS && window.AI_PROVIDERS[id] ? window.AI_PROVIDERS[id].defaultModel : '') || '';
+      out.push({ id, key, model });
+    }
+  });
+  return out;
+}
+
+// --- Provider call adapters ---------------------------------------------
+// Note: Gemini and OpenAI's chat/completions endpoints support direct
+// browser calls out of the box. Anthropic's API requires the
+// 'anthropic-dangerous-direct-browser-access' header to allow CORS from a
+// browser context (a deliberate, documented opt-in on their side for
+// "bring your own key" apps like this one) — without it, requests are
+// rejected with a CORS/auth error.
+
+async function dgeCallGemini(apiKey, model, systemPrompt, history) {
+  const modelName = model || (typeof appConfig !== 'undefined' && appConfig.geminiModel) || 'gemini-3.6-flash';
+  const contents = history.map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] }));
+  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt }] }, contents })
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message || 'Gemini request failed');
+  return data.candidates[0].content.parts[0].text;
+}
+
+async function dgeCallOpenAI(apiKey, model, systemPrompt, history) {
+  if (!model) throw new Error('No OpenAI model set — add one in 🔑 Key settings (e.g. a current GPT model name from your OpenAI account).');
+  const messages = [{ role: 'system', content: systemPrompt }, ...history.map(m => ({ role: m.role, content: m.content }))];
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+    body: JSON.stringify({ model, messages })
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message || 'OpenAI request failed');
+  return data.choices[0].message.content;
+}
+
+async function dgeCallClaude(apiKey, model, systemPrompt, history) {
+  if (!model) throw new Error('No Claude model set — add one in 🔑 Key settings (e.g. a current Claude model name from your Anthropic console).');
+  const messages = history.map(m => ({ role: m.role, content: m.content }));
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({ model, max_tokens: 1500, system: systemPrompt, messages })
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message || 'Claude request failed');
+  return (data.content || []).map(b => b.text || '').join('');
+}
+
+async function dgeCallProvider(p, systemPrompt, history) {
+  if (p.id === 'gemini') return dgeCallGemini(p.key, p.model, systemPrompt, history);
+  if (p.id === 'openai') return dgeCallOpenAI(p.key, p.model, systemPrompt, history);
+  if (p.id === 'claude') return dgeCallClaude(p.key, p.model, systemPrompt, history);
+  throw new Error('Unknown provider: ' + p.id);
+}
 
 // 4. Bhashya Picker Workflow
 window.openBhashyaPicker = function(e) {
@@ -181,6 +270,85 @@ window.executeBhashyaAnalysis = function(cKey) {
 };
 
 // 5. Core Ask Acharya Engine (Madhva Sampradaya Context)
+function dgeShowFollowUpBox(visible) {
+  const box = document.getElementById('acharyaFollowUpBox');
+  if (box) box.style.display = visible ? 'flex' : 'none';
+}
+
+async function dgeRunAcharyaQuery(promptText) {
+  const resultEl = document.getElementById('acharyaResult');
+  const loadingEl = document.getElementById('acharyaLoading');
+  const providers = dgeGetConfiguredProviders();
+
+  if (providers.length === 0) {
+    if (loadingEl) loadingEl.style.display = 'none';
+    if (resultEl) resultEl.innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>Please add at least one AI key via the Key Manager (🔑) in the top toolbar.`;
+    dgeShowFollowUpBox(false);
+    return;
+  }
+
+  window.acharyaHistory = window.acharyaHistory || [];
+  window.acharyaHistory.push({ role: 'user', content: promptText });
+
+  if (loadingEl) loadingEl.style.display = 'block';
+  dgeShowFollowUpBox(false);
+
+  const parallelMode = localStorage.getItem('user_ai_parallel_mode') === 'true';
+  const activeProviders = parallelMode ? providers : providers.slice(0, 1);
+
+  const settled = await Promise.allSettled(
+    activeProviders.map(p => dgeCallProvider(p, window.acharyaSystemPrompt || '', window.acharyaHistory))
+  );
+
+  const succeeded = [];
+  settled.forEach((r, i) => {
+    if (r.status === 'fulfilled') succeeded.push({ provider: activeProviders[i], text: r.value });
+    else console.error(`${activeProviders[i].id} failed:`, r.reason);
+  });
+
+  if (loadingEl) loadingEl.style.display = 'none';
+
+  if (succeeded.length === 0) {
+    window.acharyaHistory.pop();
+    if (resultEl) {
+      const isAuth = document.body.classList.contains('is-authorized');
+      resultEl.innerHTML = isAuth
+        ? `<span style="color:var(--accent-red); font-weight:bold;">All configured providers failed.</span> Check the API key(s) and model name(s) in 🔑, and the browser console for details.`
+        : `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>The traditional text analysis engine is currently unavailable. Please try again later.`;
+    }
+    dgeShowFollowUpBox(true);
+    return;
+  }
+
+  let finalReplyForHistory;
+  let html = '';
+
+  if (succeeded.length === 1) {
+    finalReplyForHistory = succeeded[0].text;
+    html = parseMarkdown(finalReplyForHistory);
+  } else {
+    succeeded.forEach(s => {
+      const label = (window.AI_PROVIDERS && window.AI_PROVIDERS[s.provider.id]) ? window.AI_PROVIDERS[s.provider.id].label : s.provider.id;
+      html += `<div class="provider-answer"><div class="provider-answer-label">${label}</div>${parseMarkdown(s.text)}</div>`;
+    });
+
+    try {
+      const summaryPrompt = `Here are ${succeeded.length} independent AI responses to the same question: "${promptText}"\n\n` +
+        succeeded.map((s, i) => `Response ${i + 1} (${s.provider.id}):\n${s.text}`).join('\n\n---\n\n') +
+        `\n\nSynthesize these into ONE combined answer, noting any point where they meaningfully disagree. Format using clean markdown.`;
+      finalReplyForHistory = await dgeCallProvider(succeeded[0].provider, window.acharyaSystemPrompt || '', [{ role: 'user', content: summaryPrompt }]);
+      html = `<div class="provider-summary"><div class="provider-answer-label">🧭 Combined Summary</div>${parseMarkdown(finalReplyForHistory)}</div>` + html;
+    } catch (e) {
+      console.error('Summary generation failed', e);
+      finalReplyForHistory = succeeded[0].text;
+    }
+  }
+
+  window.acharyaHistory.push({ role: 'assistant', content: finalReplyForHistory });
+  if (resultEl) resultEl.innerHTML = html;
+  dgeShowFollowUpBox(true);
+}
+
 window.askAcharya = async function(e, type, payload) {
   if (e) e.preventDefault();
   const tooltip = document.getElementById('actionTooltip');
@@ -188,16 +356,16 @@ window.askAcharya = async function(e, type, payload) {
 
   window.currentAcharyaShlokaId = window.contextShlokaId || window.activeId;
 
-  const apiKey = localStorage.getItem('user_gemini_key');
-  if (!apiKey && document.body.classList.contains('is-authorized')) { 
-      window.openKeyModal(); return; 
-  } else if (!apiKey) {
-      if (typeof openModal === 'function') openModal('acharyaModal');
-      const loading = document.getElementById('acharyaLoading');
-      const result = document.getElementById('acharyaResult');
-      if (loading) loading.style.display = 'none';
-      if (result) result.innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>Please configure your Gemini API key via the Key Manager (🔑) in the top toolbar.`;
-      return;
+  const providers = dgeGetConfiguredProviders();
+  if (providers.length === 0) {
+    if (document.body.classList.contains('is-authorized')) { window.openKeyModal(); return; }
+    if (typeof openModal === 'function') openModal('acharyaModal');
+    const loading = document.getElementById('acharyaLoading');
+    const result = document.getElementById('acharyaResult');
+    if (loading) loading.style.display = 'none';
+    if (result) result.innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>Please configure at least one AI key via the Key Manager (🔑) in the top toolbar.`;
+    dgeShowFollowUpBox(false);
+    return;
   }
 
   const text = payload ? payload.selectedText : (window.lastSelectedText || window.getSelection().toString().trim());
@@ -205,9 +373,7 @@ window.askAcharya = async function(e, type, payload) {
   window.getSelection().removeAllRanges();
 
   if (typeof openModal === 'function') openModal('acharyaModal');
-  const loadingEl = document.getElementById('acharyaLoading');
   const resultEl = document.getElementById('acharyaResult');
-  if (loadingEl) loadingEl.style.display = 'block';
   if (resultEl) resultEl.innerHTML = '';
 
   let targetLang = "English";
@@ -241,27 +407,40 @@ Provide a detailed scholarly breakdown in clean markdown:
       promptText = `Translate and explain the meaning of this Sanskrit text: "${text}" into ${targetLang}. Provide a natural translation and a brief summary of its philosophical significance according to the Madhva Sampradaya (Dvaita philosophy). Format cleanly using markdown.`;
   }
 
-  try {
-    const modelName = (window.appConfig && window.appConfig.geminiModel) ? window.appConfig.geminiModel : "gemini-3.6-flash";
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`, {
-      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ contents: [{ parts: [{ text: promptText }] }] })
-    });
-    const data = await response.json();
-    if(data.error) throw new Error(data.error.message);
+  // Fresh top-level question — start a new conversation thread.
+  window.acharyaHistory = [];
+  window.acharyaSystemPrompt = "You are Acharya, embedded in a Vedic text reading app. If the user asks a follow-up question, continue this conversation naturally and stay consistent with your earlier answers, in the philosophical tradition of Sri Madhvacharya (Dvaita Vedanta) unless asked otherwise.";
 
-    let result = data.candidates[0].content.parts[0].text;
-    if (loadingEl) loadingEl.style.display = 'none';
-    if (resultEl) resultEl.innerHTML = parseMarkdown(result);
-  } catch (err) {
-    if (loadingEl) loadingEl.style.display = 'none';
-    if (resultEl) {
-      if (document.body.classList.contains('is-authorized')) {
-         resultEl.innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">Admin Debug Error:</span> ${err.message}`;
-      } else {
-         resultEl.innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>The traditional text analysis engine is currently unavailable. Please try again later.`;
-      }
-    }
-  }
+  await dgeRunAcharyaQuery(promptText);
+};
+
+window.sendAcharyaFollowUp = async function() {
+  const input = document.getElementById('acharyaFollowUpInput');
+  if (!input) return;
+  const q = input.value.trim();
+  if (!q) return;
+  input.value = '';
+  await dgeRunAcharyaQuery(q);
+};
+
+// Follow-up mic input (independent tiny SpeechRecognition instance so it
+// doesn't collide with the search box's listener in voice.js).
+let dgeFollowUpRecognition = null;
+window.startFollowUpVoiceInput = function() {
+  const Ctor = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const input = document.getElementById('acharyaFollowUpInput');
+  if (!Ctor || !input) return;
+
+  dgeFollowUpRecognition = new Ctor();
+  dgeFollowUpRecognition.lang = document.documentElement.lang || 'en-IN';
+  dgeFollowUpRecognition.interimResults = true;
+  dgeFollowUpRecognition.onresult = (event) => {
+    let transcript = '';
+    for (let i = 0; i < event.results.length; i++) transcript += event.results[i][0].transcript;
+    input.value = transcript;
+  };
+  dgeFollowUpRecognition.onerror = () => {};
+  try { dgeFollowUpRecognition.start(); } catch (e) { /* ignore */ }
 };
 
 window.shareAcharyaAnalysis = function() {
@@ -281,4 +460,36 @@ window.closeAcharyaModal = function() {
   const appendBtn = document.getElementById('modalAppendBtn');
   if (appendBtn) appendBtn.style.display = 'none';
   window.getSelection().removeAllRanges();
+  dgeShowFollowUpBox(false);
+  window.acharyaHistory = [];
 };
+
+// 6. Render the (globally configurable) Ask Acharya query-type buttons
+function renderAcharyaQueryButtons() {
+  const row = document.getElementById('acharyaQueryButtonsRow');
+  const fullContainer = document.getElementById('acharyaFullWidthButtons');
+  if (!row || !fullContainer || !window.ACHARYA_QUERY_TYPES) return;
+
+  row.innerHTML = '';
+  fullContainer.innerHTML = '';
+
+  const enabled = window.ACHARYA_QUERY_TYPES.filter(q => q.enabled);
+  enabled.forEach(q => {
+    const btn = document.createElement('button');
+    btn.className = 'tooltip-btn';
+    btn.innerText = `${q.icon} ${q.label}`;
+    if (q.style === 'full') {
+      btn.style.cssText = 'width:100%; text-align:center; background: rgba(226, 102, 74, 0.2);';
+    }
+    btn.addEventListener('pointerdown', (e) => {
+      if (q.action === 'bhashya') window.openBhashyaPicker(e);
+      else window.askAcharya(e, q.id);
+    });
+    (q.style === 'full' ? fullContainer : row).appendChild(btn);
+  });
+
+  if (fullContainer.children.length > 0) {
+    fullContainer.insertAdjacentHTML('afterbegin', '<div style="height:1px; background:rgba(255,255,255,0.1); margin:4px 0;"></div>');
+  }
+}
+document.addEventListener('DOMContentLoaded', renderAcharyaQueryButtons);

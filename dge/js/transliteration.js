@@ -70,6 +70,7 @@ window.setScript = function(code, el) {
         
         if (window.activeId && window.els && window.els.readingCard && typeof window.getText === 'function') {
             window.els.readingCard.innerHTML = window.getText(window.activeId);
+            if (typeof window.wrapReadingCardWordsForSync === 'function') window.wrapReadingCardWordsForSync();
         }
         
         if (typeof window.togglePopup === 'function') window.togglePopup('scriptPopup');

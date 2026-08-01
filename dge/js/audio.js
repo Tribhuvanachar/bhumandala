@@ -70,7 +70,10 @@ async function playShloka(id) {
   const timeDisplay = document.getElementById('timeDisplay');
   
   if (trackLabel) trackLabel.innerText = `${id}/${total}`; 
-  if (readingCard && typeof getText === 'function') readingCard.innerHTML = getText(id); 
+  if (readingCard && typeof getText === 'function') {
+    readingCard.innerHTML = getText(id);
+    if (typeof wrapReadingCardWordsForSync === 'function') wrapReadingCardWordsForSync();
+  }
   if (timeDisplay) timeDisplay.innerText = "0:00.000 / 0:00.000";
   
   currentAudio.src = await resolveAudioSrc(id);
@@ -216,6 +219,14 @@ if (currentAudio) {
     const timeDisplay = document.getElementById('timeDisplay');
     if (timeDisplay) timeDisplay.innerText = `0:00.000 / ${formatTime(currentAudio.duration)}`; 
     updateRepeatDisplay(); 
+
+    const seekSlider = document.getElementById('seekSlider');
+    const seekSliderTotal = document.getElementById('seekSliderTotal');
+    if (seekSlider && !isNaN(currentAudio.duration)) {
+      seekSlider.max = currentAudio.duration;
+      seekSlider.value = 0;
+    }
+    if (seekSliderTotal) seekSliderTotal.innerText = formatTime(currentAudio.duration);
   });
 
   currentAudio.addEventListener('error', () => {
@@ -249,6 +260,15 @@ if (currentAudio) {
       const start = parseFloat(loopA.value) || 0; 
       if (end && currentAudio.currentTime >= end) currentAudio.currentTime = start; 
     }
+
+    if (!window._dgeSeekDragging) {
+      const seekSlider = document.getElementById('seekSlider');
+      if (seekSlider) seekSlider.value = currentAudio.currentTime;
+      const seekSliderCurrent = document.getElementById('seekSliderCurrent');
+      if (seekSliderCurrent) seekSliderCurrent.innerText = formatTime(currentAudio.currentTime);
+    }
+
+    if (typeof updateReadingCardSyncHighlight === 'function') updateReadingCardSyncHighlight();
   });
 
   currentAudio.addEventListener('ended', () => {
@@ -283,5 +303,104 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentAudio) currentAudio.playbackRate = e.target.value; 
         });
     }
+});
+
+// ==========================================
+// Approximate reading-along highlight
+// ==========================================
+// There's no per-word timestamp data for these recordings, so this is an
+// ESTIMATE: it splits the shloka text into words and assumes each word
+// takes an equal share of the total duration. It's not true karaoke-style
+// sync — real word-level sync would need timestamped audio data, which
+// isn't available — but it gives a reasonable "roughly where we are"
+// visual cue while listening.
+function wrapReadingCardWordsForSync() {
+  const readingCard = document.getElementById('readingCard');
+  if (!readingCard) return;
+  const text = readingCard.textContent || '';
+  const tokens = text.split(/(\s+)/);
+  let html = '';
+  let wordIndex = 0;
+
+  tokens.forEach(tok => {
+    if (tok.trim().length === 0) { html += tok; return; }
+    html += `<span class="sync-word" data-widx="${wordIndex}">${tok}</span>`;
+    wordIndex++;
+  });
+
+  window._dgeSyncWordCount = wordIndex;
+  readingCard.innerHTML = html;
+}
+
+function updateReadingCardSyncHighlight() {
+  if (!window._dgeSyncWordCount || !currentAudio || isNaN(currentAudio.duration) || currentAudio.duration <= 0) return;
+
+  const frac = Math.min(1, Math.max(0, currentAudio.currentTime / currentAudio.duration));
+  const activeIdx = Math.min(window._dgeSyncWordCount - 1, Math.floor(frac * window._dgeSyncWordCount));
+
+  const readingCard = document.getElementById('readingCard');
+  if (!readingCard) return;
+
+  const prev = readingCard.querySelector('.sync-word.active');
+  if (prev && parseInt(prev.dataset.widx, 10) === activeIdx) return;
+  if (prev) prev.classList.remove('active');
+
+  const next = readingCard.querySelector(`.sync-word[data-widx="${activeIdx}"]`);
+  if (next) next.classList.add('active');
+}
+window.wrapReadingCardWordsForSync = wrapReadingCardWordsForSync;
+window.updateReadingCardSyncHighlight = updateReadingCardSyncHighlight;
+
+// ==========================================
+// Seek slider (scrubber) with adjustable precision
+// ==========================================
+const SEEK_PRECISIONS = [
+  { step: 1, label: '1s' },
+  { step: 0.1, label: '0.1s' },
+  { step: 0.01, label: '10ms' }
+];
+window._dgeSeekPrecisionIdx = 0;
+window._dgeSeekDragging = false;
+
+window.toggleSeekPrecision = function() {
+  window._dgeSeekPrecisionIdx = (window._dgeSeekPrecisionIdx + 1) % SEEK_PRECISIONS.length;
+  const p = SEEK_PRECISIONS[window._dgeSeekPrecisionIdx];
+  const seekSlider = document.getElementById('seekSlider');
+  const btn = document.getElementById('seekPrecisionBtn');
+  if (seekSlider) seekSlider.step = p.step;
+  if (btn) btn.innerText = p.label;
+};
+
+window.onSeekSliderInput = function(value) {
+  if (!currentAudio) return;
+  currentAudio.currentTime = parseFloat(value);
+  const seekSliderCurrent = document.getElementById('seekSliderCurrent');
+  if (seekSliderCurrent) seekSliderCurrent.innerText = formatTime(currentAudio.currentTime);
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const seekSlider = document.getElementById('seekSlider');
+  if (seekSlider) {
+    ['pointerdown', 'touchstart'].forEach(evt => seekSlider.addEventListener(evt, () => { window._dgeSeekDragging = true; }));
+    ['pointerup', 'touchend', 'change'].forEach(evt => seekSlider.addEventListener(evt, () => { window._dgeSeekDragging = false; }));
+  }
+
+  // Enter in the Start/End (loop A/B) boxes seeks + plays from that point,
+  // instead of only taking effect once a snippet is saved.
+  const loopA = document.getElementById('loopA');
+  const loopB = document.getElementById('loopB');
+  [loopA, loopB].forEach(input => {
+    if (!input) return;
+    input.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      if (!currentAudio || !activeId) return;
+      const t = parseFloat(input.value);
+      if (isNaN(t)) return;
+      currentAudio.currentTime = Math.max(0, t);
+      currentAudio.play().catch(() => {});
+      input.blur();
+    });
+  });
 });
 

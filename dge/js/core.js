@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initApp() {
+  if (typeof loadPersistedState === 'function') loadPersistedState();
   if (typeof restorePrefs === 'function') restorePrefs();
   if (typeof initAuthAndBranding === 'function') initAuthAndBranding();
 

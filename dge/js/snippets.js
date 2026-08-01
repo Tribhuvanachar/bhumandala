@@ -209,7 +209,7 @@ window.downloadSnippetAudio = async function(id, start, end) {
         dgeTriggerBlobDownload(blob, `Shloka-${id}-snippet-${start.toFixed(1)}-${end.toFixed(1)}.wav`);
     } catch (e) {
         console.error('Snippet download failed', e);
-        if (typeof showToast === 'function') showToast('Could not prepare this snippet for download (the audio host may not allow this in your browser).');
+        if (typeof showToast === 'function') showToast('Could not prepare this snippet — try 📥 Preload All Audio in 🛠 Tools first, then retry.');
     }
 };
 
@@ -221,19 +221,42 @@ window.shareShlokaAudio = async function(id, snippet) {
         const rawText = typeof getText === 'function' ? getText(id).replace(/<[^>]*>/g, '') : '';
         const text = `${rawText}\n\n— Shloka ${id}, ${document.title || 'Sarvamoola Digital Library'}`;
 
-        let blob, filename;
-        if (snippet) {
-            const decoded = await dgeFetchAndDecode(id);
-            const sliced = dgeSliceAudioBuffer(decoded, snippet.start, snippet.end);
-            blob = dgeAudioBufferToWavBlob(sliced);
-            filename = `Shloka-${id}-snippet-${snippet.start.toFixed(1)}-${snippet.end.toFixed(1)}.wav`;
-        } else {
-            const src = await resolveAudioSrc(id);
-            const res = await fetch(src);
-            if (!res.ok) throw new Error('Fetch failed: ' + res.status);
-            blob = await res.blob();
-            const ext = (typeof stotraData !== 'undefined' && stotraData && stotraData.metadata && stotraData.metadata.fileExtension) || '.mp3';
-            filename = `Shloka-${id}${ext}`;
+        let blob, filename, fetchFailed = false;
+        try {
+            if (snippet) {
+                const decoded = await dgeFetchAndDecode(id);
+                const sliced = dgeSliceAudioBuffer(decoded, snippet.start, snippet.end);
+                blob = dgeAudioBufferToWavBlob(sliced);
+                filename = `Shloka-${id}-snippet-${snippet.start.toFixed(1)}-${snippet.end.toFixed(1)}.wav`;
+            } else {
+                const src = await resolveAudioSrc(id);
+                const res = await fetch(src);
+                if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+                blob = await res.blob();
+                const ext = (typeof stotraData !== 'undefined' && stotraData && stotraData.metadata && stotraData.metadata.fileExtension) || '.mp3';
+                filename = `Shloka-${id}${ext}`;
+            }
+        } catch (fetchErr) {
+            // Most likely cause: this audio isn't in the offline cache yet,
+            // so we tried to fetch it directly from the (cross-origin)
+            // audio host, which doesn't return CORS headers for fetch().
+            // A plain <audio> tag can still play it fine — it's only
+            // reading the raw bytes in JS that's blocked. Fall back to
+            // sharing a link instead of the bytes.
+            console.warn('Could not fetch audio bytes for sharing (likely CORS on an uncached file):', fetchErr);
+            fetchFailed = true;
+        }
+
+        if (fetchFailed) {
+            const directUrl = snippet ? await resolveAudioSrc(id) : await resolveAudioSrc(id);
+            const textWithLink = `${text}\n\n🎧 Audio: ${directUrl}`;
+            if (navigator.share) {
+                await navigator.share({ text: textWithLink, title: `Shloka ${id}` });
+            } else if (navigator.clipboard) {
+                await navigator.clipboard.writeText(textWithLink);
+                if (typeof showToast === 'function') showToast("Couldn't attach the audio file directly — copied the text with a link to it instead.");
+            }
+            return;
         }
 
         const file = new File([blob], filename, { type: blob.type || 'audio/mpeg' });
