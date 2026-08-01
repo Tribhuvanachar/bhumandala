@@ -60,6 +60,10 @@ window.setScript = function(code, el) {
     }
     
     setTimeout(() => {
+        if (typeof window.renderStotraChrome === 'function') {
+            window.renderStotraChrome();
+        }
+
         if (typeof window.renderList === 'function') {
             window.renderList();
         }
