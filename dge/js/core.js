@@ -65,34 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
 function initApp() {
   if (typeof restorePrefs === 'function') restorePrefs();
   if (typeof initAuthAndBranding === 'function') initAuthAndBranding();
-  
-  if(window.stotraData && window.stotraData.metadata) {
-    const titleEl = document.getElementById('stotraTitle');
-    if (titleEl) {
-        titleEl.innerHTML = typeof applyTransliteration === 'function' 
-            ? applyTransliteration(window.stotraData.metadata.title, window.activeScript || 'devanagari') 
-            : window.stotraData.metadata.title;
-    }
 
-    const rangeStart = document.getElementById('rangeStart');
-    const rangeEnd = document.getElementById('rangeEnd');
-    if (rangeStart) rangeStart.max = window.stotraData.metadata.totalShlokas || 43;
-    if (rangeEnd) rangeEnd.max = window.stotraData.metadata.totalShlokas || 43;
-
-    const dynamicList = document.getElementById('commentaryDynamicList');
-    const searchScope = document.getElementById('searchScope');
-    
-    if (dynamicList && searchScope && window.stotraData.metadata.availableCommentaries) {
-      dynamicList.innerHTML = '';
-      searchScope.innerHTML = '<option value="all">Search All</option><option value="mula">Shloka Only</option>';
-      
-      Object.entries(window.stotraData.metadata.availableCommentaries).forEach(([key, name]) => {
-        const transName = typeof applyTransliteration === 'function' ? applyTransliteration(name, window.activeScript || 'devanagari') : name;
-        dynamicList.innerHTML += `<div class="pop-item" onclick="setCommentaryView('${key}', this)">${transName}</div>`;
-        searchScope.innerHTML += `<option value="${key}">${transName} Only</option>`;
-      });
-    }
-  }
+  window.renderStotraChrome();
 
   const cacheBtn = document.getElementById('cacheBtn');
   const cacheKey = window.nsKey ? window.nsKey('allCached') : `narasimha_allCached_${window.stotraCode}`;
@@ -107,6 +81,41 @@ function initApp() {
   // Pass control to the rendering pipeline
   if (typeof renderList === 'function') renderList();
 }
+
+// Renders every piece of "chrome" (title, commentary list, search-scope
+// options) that depends on the currently selected transliteration script.
+// Called once on initial load, and again whenever the script changes, so
+// the header title stays in sync instead of only updating on page refresh.
+window.renderStotraChrome = function() {
+  if (!(window.stotraData && window.stotraData.metadata)) return;
+
+  const activeScript = window.activeScript || 'devanagari';
+  const doTranslit = (text) => typeof applyTransliteration === 'function' ? applyTransliteration(text, activeScript) : text;
+
+  const titleEl = document.getElementById('stotraTitle');
+  if (titleEl) {
+    titleEl.innerHTML = doTranslit(window.stotraData.metadata.title);
+  }
+
+  const rangeStart = document.getElementById('rangeStart');
+  const rangeEnd = document.getElementById('rangeEnd');
+  if (rangeStart) rangeStart.max = window.stotraData.metadata.totalShlokas || 43;
+  if (rangeEnd) rangeEnd.max = window.stotraData.metadata.totalShlokas || 43;
+
+  const dynamicList = document.getElementById('commentaryDynamicList');
+  const searchScope = document.getElementById('searchScope');
+
+  if (dynamicList && searchScope && window.stotraData.metadata.availableCommentaries) {
+    dynamicList.innerHTML = '';
+    searchScope.innerHTML = '<option value="all">Search All</option><option value="mula">Shloka Only</option>';
+
+    Object.entries(window.stotraData.metadata.availableCommentaries).forEach(([key, name]) => {
+      const transName = doTranslit(name);
+      dynamicList.innerHTML += `<div class="pop-item" onclick="setCommentaryView('${key}', this)">${transName}</div>`;
+      searchScope.innerHTML += `<option value="${key}">${transName} Only</option>`;
+    });
+  }
+};
 
 function initAuthAndBranding() {
   const isAuthorized = localStorage.getItem('acharyaAuthorized') === 'true';
@@ -128,9 +137,15 @@ function initAuthAndBranding() {
 }
 
 function restorePrefs() {
-  const isDark = localStorage.getItem('app_darkMode') === 'true';
-  if(typeof applyDarkMode === 'function') applyDarkMode(isDark);
-  
+  const savedTheme = localStorage.getItem('app_theme');
+  if (savedTheme && typeof applyTheme === 'function') {
+    applyTheme(savedTheme);
+  } else if (typeof applyTheme === 'function') {
+    // One-time migration: honor a previously saved plain dark-mode flag.
+    const wasDark = localStorage.getItem('app_darkMode') === 'true';
+    applyTheme(wasDark ? 'darkglass' : 'traditional');
+  }
+
   const savedFont = parseInt(localStorage.getItem('app_fontSize'), 10);
   if (!isNaN(savedFont) && typeof applyFontSize === 'function') applyFontSize(savedFont);
 
