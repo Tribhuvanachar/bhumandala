@@ -2,13 +2,13 @@
 // Maps to F-012: Preferences & Global Configuration
 
 const appConfig = {
-  appName: "Bhagavata Digital Library",
+  appName: "Sarvamoola Digital Library",
   designedBy: "Tribhuvan Achar",
   contactEmail: "sanatanavidyagurukulam@gmail.com",
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
   secretPasskey: "SHRI108",
-  version: "v4.0"
+  version: "v4.2"
 };
 
 // Note: All dynamic state variables (stotraData, activeId, marks, notes, etc.)
