@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     timeDisplay: document.getElementById('timeDisplay'),
     repeatCounter: document.getElementById('repeatCounter'),
     readingCard: document.getElementById('readingCard'),
-    markerMenu: document.getElementById('markerMenu'),
     filterBtn: document.getElementById('filterBtn'),
     searchInput: document.getElementById('searchInput'),
     clearSearchBtn: document.getElementById('clearSearchBtn'),

@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.2.0">
+<link rel="stylesheet" href="css/main.css?v=4.3.0">
 </head>
 <body>
 
@@ -128,7 +128,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.2 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.3 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -215,20 +215,15 @@
   </div>
 </div>
 
-<div class="context-menu" id="markerMenu">
-  <div onclick="window.setMark('fav')">⭐ Mark Favorite</div>
-  <div onclick="window.setMark('practice')">🚩 Needs Practice</div>
-  <div onclick="window.setMark('none')" style="color: #888;">❌ Clear Marker</div>
-</div>
-
-<div class="modal-overlay" id="snippetModal">
+<!-- Unified Shloka Actions Sheet: Favorite / Practice flag / Note / Snippets / Download / Share -->
+<div class="modal-overlay" id="actionsSheetModal">
   <div class="modal-content">
     <div class="modal-header-sticky">
-       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">🎯 Saved Snippets</h4>
-       <button class="btn-sm" onclick="window.closeModal('snippetModal')" style="font-size:11px;">✖ Close</button>
+       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">Shloka <span id="actionsSheetShlokaNum"></span> — Actions</h4>
+       <button class="btn-sm" onclick="window.closeModal('actionsSheetModal')" style="font-size:11px;">✖ Close</button>
     </div>
     <div class="modal-body">
-      <div id="snippetListContainer"></div>
+      <div id="actionsSheetContainer"></div>
     </div>
   </div>
 </div>
@@ -305,24 +300,25 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.2.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.3.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.2.0"></script>
-<script src="js/state.js?v=4.2.0"></script>
-<script src="js/dev.js?v=4.2.0"></script>
-<script src="js/utils.js?v=4.2.0"></script>
-<script src="js/modals.js?v=4.2.0"></script>
-<script src="js/transliteration.js?v=4.2.0"></script>
-<script src="js/audio.js?v=4.2.0"></script>
-<script src="js/filter.js?v=4.2.0"></script>
-<script src="js/search.js?v=4.2.0"></script>
-<script src="js/markers.js?v=4.2.0"></script>
-<script src="js/notes.js?v=4.2.0"></script>
-<script src="js/snippets.js?v=4.2.0"></script>
-<script src="js/ai.js?v=4.2.0"></script>
-<script src="js/render.js?v=4.2.0"></script>
-<script src="js/core.js?v=4.2.0"></script>
+<script src="js/config.js?v=4.3.0"></script>
+<script src="js/state.js?v=4.3.0"></script>
+<script src="js/dev.js?v=4.3.0"></script>
+<script src="js/utils.js?v=4.3.0"></script>
+<script src="js/modals.js?v=4.3.0"></script>
+<script src="js/transliteration.js?v=4.3.0"></script>
+<script src="js/audio.js?v=4.3.0"></script>
+<script src="js/filter.js?v=4.3.0"></script>
+<script src="js/search.js?v=4.3.0"></script>
+<script src="js/markers.js?v=4.3.0"></script>
+<script src="js/notes.js?v=4.3.0"></script>
+<script src="js/snippets.js?v=4.3.0"></script>
+<script src="js/actions.js?v=4.3.0"></script>
+<script src="js/ai.js?v=4.3.0"></script>
+<script src="js/render.js?v=4.3.0"></script>
+<script src="js/core.js?v=4.3.0"></script>
 
 <script>
   if (typeof console.log === "function") {

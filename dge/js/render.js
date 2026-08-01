@@ -16,6 +16,15 @@ function setCommentaryView(view, el) {
   if (el) el.classList.add('active');
   if (typeof togglePopup === 'function') togglePopup('commentaryPopup');
   renderList();
+
+  // renderList() just rebuilt the list at a new (shorter or taller) height,
+  // so the old scroll position no longer points at the active shloka.
+  // Re-anchor to it so collapsing/expanding commentary doesn't strand the
+  // viewport wherever the old commentary block used to end.
+  if (typeof activeId !== 'undefined' && activeId) {
+    const ac = document.getElementById(`shloka-${activeId}`);
+    if (ac) ac.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 function highlightText(text, query) {
@@ -77,18 +86,20 @@ function renderList() {
     c.id = `shloka-${i}`;
 
     let cardActionsHtml = '';
-    let badgeHtml = '';
     
     if (document.body.classList.contains('is-authorized')) {
-      let mClass = "btn-icon", mIcon = "⋮";
-      if (typeof marks !== 'undefined' && marks[i] === 'fav') { mClass += " is-fav"; mIcon = "★"; } 
-      else if (typeof marks !== 'undefined' && marks[i] === 'practice') { mClass += " is-practice"; mIcon = "🚩"; }
-      
-      const nClass = (typeof notes !== 'undefined' && notes[i]) ? "btn-icon has-note" : "btn-icon";
-      badgeHtml = (typeof snippets !== 'undefined' && snippets[i] && snippets[i].length > 0) 
-        ? `<div class="snippet-badge" onclick="if(typeof openSnippetModal==='function') openSnippetModal(${i}, event)">🎯 ${snippets[i].length}</div>` : '';
-      
-      cardActionsHtml = `<div class="card-actions"><button class="${nClass}" onclick="if(typeof openNote==='function') openNote(${i})">📝</button><button class="${mClass}" onclick="if(typeof openMarkerMenu==='function') openMarkerMenu(event, ${i})">${mIcon}</button></div>`;
+      const isFav = typeof marks !== 'undefined' && marks[i] === 'fav';
+      const isPractice = typeof marks !== 'undefined' && marks[i] === 'practice';
+      const hasNote = typeof notes !== 'undefined' && !!notes[i];
+      const snipCount = (typeof snippets !== 'undefined' && snippets[i]) ? snippets[i].length : 0;
+
+      let chips = '';
+      if (isFav) chips += `<span class="status-chip is-fav" title="Favorite">★</span>`;
+      if (isPractice) chips += `<span class="status-chip is-practice" title="Needs practice">🚩</span>`;
+      if (hasNote) chips += `<span class="status-chip has-note" title="Has a note">📝</span>`;
+      if (snipCount > 0) chips += `<span class="status-chip" title="${snipCount} saved snippet(s)">🎯 ${snipCount}</span>`;
+
+      cardActionsHtml = `<div class="card-actions">${chips}<button class="btn-icon" title="Favorite, note, snippets, share…" onclick="event.stopPropagation(); if(typeof openActionsSheet==='function') openActionsSheet(${i})">⋯</button></div>`;
     }
 
     let commentaryHtml = '';
@@ -109,7 +120,7 @@ function renderList() {
     c.innerHTML = `
       <div class="shloka-main-row">
         <div class="shloka-num">${i}</div>
-        <div class="shloka-text" onclick="if(typeof playShloka==='function') playShloka(${i})">${highlightText(getText(i), query)} ${badgeHtml}</div>
+        <div class="shloka-text" onclick="if(typeof playShloka==='function') playShloka(${i})">${highlightText(getText(i), query)}</div>
         ${cardActionsHtml}
       </div>
       ${commentaryHtml}`;

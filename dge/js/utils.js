@@ -152,6 +152,9 @@ window.showToast = function(msg) {
         minimizeBtn.innerText = min ? '▔ Max' : '▁ Min';
     }
     minimizeBtn.onclick = () => setMinimized(!isMinimized);
+    // Start collapsed so it doesn't dominate the screen on load — the
+    // header (with the Max button) stays visible so it's a single tap away.
+    setMinimized(true);
 
     closeBtn.onclick = () => {
         dgeLog.style.display = 'none';

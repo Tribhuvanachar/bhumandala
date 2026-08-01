@@ -62,7 +62,7 @@ async function playShloka(id) {
   if (typeof renderList === 'function') renderList();
   
   const ac = document.getElementById(`shloka-${id}`); 
-  if (ac) ac.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  if (ac) ac.scrollIntoView({ behavior: 'smooth', block: 'start' });
   
   const total = stotraData.metadata.totalShlokas || Object.keys(stotraData.shlokas).length;
   const trackLabel = document.getElementById('trackLabel');

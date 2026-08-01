@@ -74,6 +74,7 @@ body.theme-darkglass, body.dark-mode {
 }
 
 * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+input[type="checkbox"], input[type="range"] { accent-color: var(--accent-red); }
 body { margin: 0; padding-top: calc(60px + env(safe-area-inset-top)); padding-bottom: calc(126px + env(safe-area-inset-bottom)); font-family: var(--font-ui); background: var(--bg-main); color: var(--text-primary); transition: background var(--t-med) var(--ease), color var(--t-med) var(--ease); }
 
 body.modal-open { overflow: hidden !important; }
@@ -136,7 +137,7 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .reading-card::after { margin-bottom: 0; margin-top: 6px; }
 
 .shloka-list { display: flex; flex-direction: column; gap: 10px; }
-.shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-wrap: anywhere; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), transform var(--t-fast) var(--ease); }
+.shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-wrap: anywhere; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), transform var(--t-fast) var(--ease); scroll-margin-top: calc(60px + env(safe-area-inset-top) + 14px); }
 .shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left: 4px solid var(--accent-red); }
 .shloka-card:active { transform: scale(0.99); }
 
@@ -152,6 +153,24 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .has-note { color: var(--accent-red) !important; }
 
 .snippet-badge { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; border-radius: var(--radius-pill); padding: 2px 8px; font-size: 10px; font-weight: 700; cursor: pointer; margin-left: 6px; display: inline-block; }
+
+/* Unified Shloka Actions Sheet */
+.status-chip { font-size: 11px; padding: 3px 7px; border-radius: var(--radius-pill); background: var(--card-active); color: var(--muted-text); font-weight: 700; display: inline-flex; align-items: center; gap: 2px; line-height: 1; }
+.status-chip.is-fav { color: var(--accent-gold); }
+.status-chip.is-practice { color: var(--accent-red); }
+.status-chip.has-note { color: var(--accent-red); }
+
+.actions-section-label { font-size: 10px; color: var(--muted-text); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700; }
+
+.mark-toggle-btn.active-fav { background: var(--card-active); border-color: var(--accent-gold); color: var(--accent-gold); }
+.mark-toggle-btn.active-practice { background: var(--card-active); border-color: var(--accent-red); color: var(--accent-red); }
+
+.note-preview-box { background: var(--bg-main); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 12px; line-height: 1.5; margin-bottom: 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.note-preview-box.empty { color: var(--muted-text); font-style: italic; }
+
+.snippet-row { display: flex; align-items: center; gap: 8px; background: var(--bg-main); border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 8px 10px; }
+.snippet-row-actions { display: flex; gap: 2px; flex-shrink: 0; }
+.snippet-row-actions .btn-icon { font-size: 15px; padding: 4px; }
 
 .commentary-block { background: rgba(0,0,0,0.025); border-left: 3px solid var(--accent-gold); padding: 8px 12px; border-radius: var(--radius-xs); font-size: calc(var(--font-multiplier) * 0.85); line-height: 1.6; color: var(--text-primary); margin-top: 6px; overflow-wrap: anywhere; font-family: var(--font-sanskrit); }
 body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
