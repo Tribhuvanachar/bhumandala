@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/main.css?v=4.2.0">
 </head>
 <body>
 
@@ -71,7 +71,18 @@
     </div>
 
     <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="window.openModal('keyModal')" title="Access Key Settings" style="font-size: 18px;">🔑</button>
-    <button class="btn-top" onclick="window.toggleDarkMode()" id="darkModeBtn" title="Toggle Dark Mode" style="font-size: 18px;">☀️</button>
+
+    <!-- Theme Picker -->
+    <div style="position:relative;">
+      <button class="btn-top" onclick="window.togglePopup('themePopup')" id="activeThemeBtn" title="Appearance / Theme" style="font-size: 18px;">🎨</button>
+      <div class="popup popup-top" id="themePopup">
+        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Appearance</div>
+        <div class="pop-item active" data-theme="traditional" onclick="window.setTheme('traditional', this)"><span class="theme-swatch theme-swatch-traditional"></span>Traditional <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Warm</span></div>
+        <div class="pop-item" data-theme="minimal" onclick="window.setTheme('minimal', this)"><span class="theme-swatch theme-swatch-minimal"></span>Minimal <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Clean</span></div>
+        <div class="pop-item" data-theme="vibrant" onclick="window.setTheme('vibrant', this)"><span class="theme-swatch theme-swatch-vibrant"></span>Vibrant <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Temple</span></div>
+        <div class="pop-item" data-theme="darkglass" onclick="window.setTheme('darkglass', this)"><span class="theme-swatch theme-swatch-darkglass"></span>Dark Glass <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Premium</span></div>
+      </div>
+    </div>
 
     <!-- Transliteration Script Selector -->
     <div style="position:relative;">
@@ -117,7 +128,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.0 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.2 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -294,21 +305,24 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<script src="js/config.js"></script>
-<script src="js/state.js"></script>
-<script src="js/dev.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/modals.js"></script>
-<script src="js/transliteration.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/filter.js"></script>
-<script src="js/search.js"></script>
-<script src="js/markers.js"></script>
-<script src="js/notes.js"></script>
-<script src="js/snippets.js"></script>
-<script src="js/ai.js"></script>
-<script src="js/render.js"></script>
-<script src="js/core.js"></script>
+<!-- ?v=4.2.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
+<!-- serving an old cached copy of a script indefinitely. -->
+<script src="js/config.js?v=4.2.0"></script>
+<script src="js/state.js?v=4.2.0"></script>
+<script src="js/dev.js?v=4.2.0"></script>
+<script src="js/utils.js?v=4.2.0"></script>
+<script src="js/modals.js?v=4.2.0"></script>
+<script src="js/transliteration.js?v=4.2.0"></script>
+<script src="js/audio.js?v=4.2.0"></script>
+<script src="js/filter.js?v=4.2.0"></script>
+<script src="js/search.js?v=4.2.0"></script>
+<script src="js/markers.js?v=4.2.0"></script>
+<script src="js/notes.js?v=4.2.0"></script>
+<script src="js/snippets.js?v=4.2.0"></script>
+<script src="js/ai.js?v=4.2.0"></script>
+<script src="js/render.js?v=4.2.0"></script>
+<script src="js/core.js?v=4.2.0"></script>
 
 <script>
   if (typeof console.log === "function") {
