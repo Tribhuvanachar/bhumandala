@@ -1,18 +1,46 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
 window.DGE_VERSIONS['utils.js'] = 'v1.2';
 
-window.applyDarkMode = function(isDark) {
-  document.body.classList.toggle('dark-mode', isDark);
-  const btn = document.getElementById('darkModeBtn');
-  if (btn) btn.innerText = isDark ? '🌙' : '☀️';
-  const meta = document.getElementById('themeColorMeta');
-  if (meta) meta.setAttribute('content', isDark ? '#18120E' : '#FFFDF9');
+window.DGE_THEMES = ['traditional', 'minimal', 'vibrant', 'darkglass'];
+window.DGE_THEME_META_COLORS = {
+  traditional: '#FFFDF9',
+  minimal: '#FBFBFA',
+  vibrant: '#FFF6E8',
+  darkglass: '#0E0C0B'
 };
 
+window.applyTheme = function(theme) {
+  if (window.DGE_THEMES.indexOf(theme) === -1) theme = 'traditional';
+  window.activeTheme = theme;
+
+  window.DGE_THEMES.forEach(t => document.body.classList.remove('theme-' + t));
+  document.body.classList.add('theme-' + theme);
+
+  // 'dark-mode' is kept as an alias so the couple of legacy selectors that
+  // still key off it (search highlight, commentary block tint) stay correct.
+  document.body.classList.toggle('dark-mode', theme === 'darkglass');
+
+  document.querySelectorAll('#themePopup .pop-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.theme === theme);
+  });
+
+  const meta = document.getElementById('themeColorMeta');
+  if (meta) meta.setAttribute('content', window.DGE_THEME_META_COLORS[theme] || '#FFFDF9');
+};
+
+window.setTheme = function(theme, el) {
+  window.applyTheme(theme);
+  localStorage.setItem('app_theme', theme);
+  if (typeof window.togglePopup === 'function') window.togglePopup('themePopup');
+};
+
+// Legacy aliases kept so nothing that still calls these (or a bookmarked
+// console command) throws — they now just map onto the theme system.
+window.applyDarkMode = function(isDark) {
+  window.applyTheme(isDark ? 'darkglass' : 'traditional');
+};
 window.toggleDarkMode = function() {
-  const isDark = !document.body.classList.contains('dark-mode');
-  window.applyDarkMode(isDark);
-  localStorage.setItem('app_darkMode', isDark ? 'true' : 'false');
+  window.setTheme(window.activeTheme === 'darkglass' ? 'traditional' : 'darkglass');
 };
 
 window.applyFontSize = function(px) {
@@ -173,7 +201,16 @@ window.showToast = function(msg) {
     window.onerror = function(msg, url, line) {
         console.error(`Uncaught Error: ${msg} (Line ${line})`);
     };
-    
+
+    // Public API so other modules (e.g. dev.js) can feed content into THIS
+    // single log panel instead of creating their own separate overlay.
+    window.DGE_DEV_LOG = {
+        appendHTML: function(html) {
+            logTextContainer.innerHTML += html;
+            dgeLog.scrollTop = dgeLog.scrollHeight;
+        }
+    };
+
 })();
 
 console.log("[Init] utils.js loaded successfully.");
