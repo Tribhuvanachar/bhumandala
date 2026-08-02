@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v3.0 (Inline chip toggles + native-script search fix + copy button)';
+window.DGE_VERSIONS['render.js'] = 'v3.1 (SVG icons + configurable extra shloka fields)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -168,17 +168,18 @@ function renderList() {
       const noteCount = (typeof notes !== 'undefined' && notes[i]) ? notes[i].length : 0;
       const snipCount = (typeof snippets !== 'undefined' && snippets[i]) ? snippets[i].length : 0;
 
-      const statusIcons = { pending: '○', practice: '🚧', done: '✅' };
-      const statusIcon = status ? statusIcons[status] : '○';
+      const ic = window.DGE_ICONS || {};
+      const statusIconsSvg = { pending: ic.statusPending, practice: ic.statusPractice, done: ic.statusDone };
+      const statusIcon = status ? statusIconsSvg[status] : ic.statusPending;
       const statusClass = status ? ` active-status-${status}` : '';
 
       let rowHtml = '';
-      if (flags.showFavorite) rowHtml += `<button class="chip-toggle${isFav ? ' active-fav' : ''}" title="Favorite" onclick="event.stopPropagation(); window.toggleFavorite(${i})">${isFav ? '★' : '☆'}</button>`;
+      if (flags.showFavorite) rowHtml += `<button class="chip-toggle${isFav ? ' active-fav' : ''}" title="Favorite" onclick="event.stopPropagation(); window.toggleFavorite(${i})">${isFav ? ic.starFilled : ic.star}</button>`;
       if (flags.showStatus) rowHtml += `<button class="chip-toggle status-picker-btn${statusClass}" title="Set status" onclick="window.openStatusPicker(${i}, event)">${statusIcon}</button>`;
-      if (flags.showDoubt) rowHtml += `<button class="chip-toggle${isDoubt ? ' active-doubt' : ''}" title="Doubt" onclick="event.stopPropagation(); window.toggleDoubt(${i})">❓</button>`;
-      if (flags.showNotes && noteCount > 0) rowHtml += `<span class="status-chip has-note" title="${noteCount} note(s)">📝 ${noteCount}</span>`;
-      if (flags.showSnippetTools && snipCount > 0) rowHtml += `<span class="status-chip" title="${snipCount} saved snippet(s)">🎯 ${snipCount}</span>`;
-      rowHtml += `<button class="btn-icon" style="margin-left:auto;" title="Notes, snippets, share, download" onclick="event.stopPropagation(); if(typeof openActionsSheet==='function') openActionsSheet(${i})">⋯</button>`;
+      if (flags.showDoubt) rowHtml += `<button class="chip-toggle${isDoubt ? ' active-doubt' : ''}" title="Doubt" onclick="event.stopPropagation(); window.toggleDoubt(${i})">${ic.question}</button>`;
+      if (flags.showNotes && noteCount > 0) rowHtml += `<span class="status-chip has-note" title="${noteCount} note(s)">${ic.note} ${noteCount}</span>`;
+      if (flags.showSnippetTools && snipCount > 0) rowHtml += `<span class="status-chip" title="${snipCount} saved snippet(s)">${ic.snippet} ${snipCount}</span>`;
+      rowHtml += `<button class="btn-icon" style="margin-left:auto;" title="Notes, snippets, share, download" onclick="event.stopPropagation(); if(typeof openActionsSheet==='function') openActionsSheet(${i})">${ic.more}</button>`;
 
       cardActionsHtml = `<div class="shloka-status-row">${rowHtml}</div>`;
     }
@@ -198,6 +199,23 @@ function renderList() {
       });
     }
 
+    // Additional structured fields (Padaccheda, Anvaya, Vrutta, etc.) —
+    // shown independent of which commentary is selected, since these are
+    // grammatical/analytical rather than per-commentary. Only renders for
+    // fields that are both enabled AND actually present in this shloka's
+    // data — silently absent otherwise, so this is safe to ship even
+    // before any shloka has this data populated.
+    let extraFieldsHtml = '';
+    const effectiveExtraFields = (typeof dgeGetEffectiveShlokaFields === 'function') ? dgeGetEffectiveShlokaFields() : (window.SHLOKA_EXTRA_FIELDS || []);
+    effectiveExtraFields.forEach(f => {
+      if (!f.enabled) return;
+      const raw = shloka[f.dataKey];
+      if (!raw || (Array.isArray(raw) && raw.length === 0)) return;
+      const displayText = Array.isArray(raw) ? raw.join(', ') : raw;
+      const converted = typeof applyTransliteration === 'function' ? applyTransliteration(displayText, activeScript) : displayText;
+      extraFieldsHtml += `<div class="commentary-block" data-field="${f.id}"><div class="commentary-title">${f.icon} ${f.label}</div>${highlightText(converted, pattern)}</div>`;
+    });
+
     c.innerHTML = `
       ${cardActionsHtml}
       <div class="shloka-main-row">
@@ -205,6 +223,7 @@ function renderList() {
         <div class="shloka-text" onclick="if(typeof playShloka==='function') playShloka(${i})">${highlightText(mulaDisplayText, pattern)}</div>
         <button class="btn-icon copy-shloka-btn" title="Copy shloka text" onclick="event.stopPropagation(); if(typeof copyShlokaText==='function') copyShlokaText(${i})">📋</button>
       </div>
+      ${extraFieldsHtml}
       ${commentaryHtml}`;
     listEl.appendChild(c);
   }

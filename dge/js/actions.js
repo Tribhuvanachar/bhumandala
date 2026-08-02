@@ -32,15 +32,22 @@ window.renderActionsSheetContent = function(id) {
   const m = (typeof marks !== 'undefined' && marks[id]) ? marks[id] : { fav: false, status: null, doubt: false };
   const noteEntries = (typeof notes !== 'undefined' && notes[id]) ? notes[id] : [];
   const snippetList = (typeof snippets !== 'undefined' && snippets[id]) ? snippets[id] : [];
+  const flags = (typeof dgeGetEffectiveFeatureFlags === 'function') ? dgeGetEffectiveFeatureFlags() : {};
 
   let html = '';
 
-  // Favorite/Status/Doubt are now directly on the card itself (tap the
-  // ★ / status / ❓ chips) — this sheet focuses on Notes, Snippets, and
-  // Share/Download.
-  html += `<div style="display:flex; gap:8px; margin-bottom:18px; font-size:11px; color:var(--muted-text); align-items:center;">`;
-  html += `<span>${m.fav ? '★ Favorite' : '☆ Not favorited'} · ${m.status ? STATUS_LABELS[m.status].icon + ' ' + STATUS_LABELS[m.status].label : '○ No status'} · ${m.doubt ? '❓ Has doubt' : 'No doubt marked'}</span>`;
-  html += `</div>`;
+  // Favorite/Status/Doubt are directly on the card itself (tap the
+  // ★ / status / ❓ chips) — this line is just a summary, and only shows
+  // the parts whose feature flag is actually on.
+  const summaryParts = [];
+  if (flags.showFavorite) summaryParts.push(m.fav ? '★ Favorite' : '☆ Not favorited');
+  if (flags.showStatus) summaryParts.push(m.status ? STATUS_LABELS[m.status].icon + ' ' + STATUS_LABELS[m.status].label : '○ No status');
+  if (flags.showDoubt) summaryParts.push(m.doubt ? '❓ Has doubt' : 'No doubt marked');
+  if (summaryParts.length) {
+    html += `<div style="display:flex; gap:8px; margin-bottom:18px; font-size:11px; color:var(--muted-text); align-items:center;">`;
+    html += `<span>${summaryParts.join(' · ')}</span>`;
+    html += `</div>`;
+  }
 
   // --- Ask Acharya (works without selecting any text first) ---
   const acharyaTypes = (typeof dgeGetEffectiveQueryTypes === 'function') ? dgeGetEffectiveQueryTypes() : [];
@@ -56,6 +63,7 @@ window.renderActionsSheetContent = function(id) {
   }
 
   // --- Notes (structured, individually shareable) ---
+  if (flags.showNotes !== false) {
   html += `<div class="actions-section-label">Notes (${noteEntries.length})</div>`;
   if (noteEntries.length === 0) {
     html += `<div class="note-preview-box empty" style="margin-bottom:10px;">No notes yet.</div>`;
@@ -80,8 +88,10 @@ window.renderActionsSheetContent = function(id) {
     html += `</div>`;
   }
   html += `<button class="btn-sm" style="width:100%; margin-bottom:18px;" onclick="window.closeModal('actionsSheetModal'); window.openNote(${id});">➕ Add Note</button>`;
+  }
 
   // --- Snippets ---
+  if (flags.showSnippetTools !== false) {
   html += `<div class="actions-section-label">Saved Snippets (${snippetList.length})</div>`;
   if (snippetList.length === 0) {
     html += `<div class="note-preview-box empty" style="margin-bottom:18px;">No snippets yet. In 🛠 Tools, turn on ✂️ Active Loop, set Start/End (or use 🎯 Auto A-B Capture), then 💾 Save Snippet.</div>`;
@@ -106,6 +116,7 @@ window.renderActionsSheetContent = function(id) {
     });
     html += `</div>`;
   }
+  } // end flags.showSnippetTools
 
   // --- Full shloka download / share ---
   html += `<div class="actions-section-label">Share / Download Full Shloka</div>`;

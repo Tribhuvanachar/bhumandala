@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.0 (Checkbox preset UI + nested Ask Further)';
+window.DGE_VERSIONS['ai.js'] = 'v3.1 (Follow-up clear fix + Shloka Fields settings)';
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -100,6 +100,7 @@ window.openKeyModal = function() {
   if (parallelToggle) parallelToggle.checked = localStorage.getItem('user_ai_parallel_mode') === 'true';
   dgeRenderAcharyaSettingsUI();
   dgeLoadFeatureFlagsIntoUI();
+  dgeLoadShlokaFieldsIntoUI();
   if (typeof openModal === 'function') openModal('keyModal');
 };
 
@@ -121,6 +122,7 @@ window.saveAllApiKeys = function() {
 
   dgeSaveAcharyaSettingsFromUI();
   dgeSaveFeatureFlagsFromUI();
+  dgeSaveShlokaFieldsFromUI();
 
   window.closeKeyModal();
   if (typeof showToast === 'function') showToast('AI settings saved.');
@@ -190,6 +192,46 @@ window.resetFeatureFlagsToDefault = function() {
   dgeLoadFeatureFlagsIntoUI();
   if (typeof applyFeatureFlags === 'function') applyFeatureFlags();
   if (typeof showToast === 'function') showToast('Feature visibility reset to defaults.');
+};
+
+// --- Shloka Fields (🧩) — Padaccheda, Anvaya, Vrutta, etc. -------------
+
+const SHLOKA_FIELD_CHECKBOX_IDS = {
+  padaccheda: 'fieldPadaccheda',
+  anvaya: 'fieldAnvaya',
+  pratipadartha: 'fieldPratipadartha',
+  tatparya: 'fieldTatparya',
+  vyakarana: 'fieldVyakarana',
+  vrutta: 'fieldVrutta',
+  alankara: 'fieldAlankara',
+  crossReferences: 'fieldCrossReferences'
+};
+
+function dgeLoadShlokaFieldsIntoUI() {
+  const fields = (typeof dgeGetEffectiveShlokaFields === 'function') ? dgeGetEffectiveShlokaFields() : (window.SHLOKA_EXTRA_FIELDS || []);
+  fields.forEach(f => {
+    const elId = SHLOKA_FIELD_CHECKBOX_IDS[f.id];
+    const el = elId ? document.getElementById(elId) : null;
+    if (el) el.checked = f.enabled !== false;
+  });
+}
+
+function dgeSaveShlokaFieldsFromUI() {
+  const override = {};
+  let any = false;
+  Object.entries(SHLOKA_FIELD_CHECKBOX_IDS).forEach(([fieldId, elId]) => {
+    const el = document.getElementById(elId);
+    if (el) { override[fieldId] = el.checked; any = true; }
+  });
+  if (any) localStorage.setItem('shloka_extra_fields_override', JSON.stringify(override));
+  if (typeof renderList === 'function') renderList();
+}
+
+window.resetShlokaFieldsToDefault = function() {
+  localStorage.removeItem('shloka_extra_fields_override');
+  dgeLoadShlokaFieldsIntoUI();
+  if (typeof renderList === 'function') renderList();
+  if (typeof showToast === 'function') showToast('Shloka field visibility reset to defaults.');
 };
 
 // Resolves the ACHARYA_QUERY_TYPES list with any per-device overrides (from
@@ -649,8 +691,12 @@ ${extraFieldsPrompt}Format using clean markdown.${externalLinksNote}`;
       promptText = `For this Sanskrit text: "${text}" (target language: ${targetLang} where relevant), provide:\n${fieldsPrompt}\nFormat cleanly using markdown.${externalLinksNote}`;
   }
 
-  // Fresh top-level question — start a new conversation thread.
+  // Fresh top-level question — start a new conversation thread. Also
+  // clear any leftover follow-up text from a PREVIOUS analysis, which was
+  // otherwise staying populated when switching to a different button.
   window.acharyaHistory = [];
+  const staleFollowUpInput = document.getElementById('acharyaFollowUpInput');
+  if (staleFollowUpInput) staleFollowUpInput.value = '';
   window.acharyaSystemPrompt = "You are Acharya, embedded in a Vedic text reading app. If the user asks a follow-up question, continue this conversation naturally and stay consistent with your earlier answers, in the philosophical tradition of Sri Madhvacharya (Dvaita Vedanta) unless asked otherwise. IMPORTANT FORMATTING RULE: never use LaTeX or math notation of any kind (no $...$, \\sqrt{}, \\text{}, \\rightarrow, or similar). This app only renders plain text and basic markdown (headings, bold, italic, lists) — LaTeX shows up as broken literal text. Write all derivations in plain prose instead: e.g. write 'root labh (bhvādi-gaṇa, 1st class)' instead of '$\\sqrt{\\text{labh}}$', and 'X + Y becomes Z' instead of an arrow/equation.";
 
   await dgeRunAcharyaQuery(promptText);
@@ -732,6 +778,8 @@ window.closeAcharyaModal = function() {
   window.getSelection().removeAllRanges();
   dgeShowFollowUpBox(false);
   window.acharyaHistory = [];
+  const followUpInput = document.getElementById('acharyaFollowUpInput');
+  if (followUpInput) followUpInput.value = '';
 };
 
 // 6. Render the (globally configurable) Ask Acharya query-type buttons

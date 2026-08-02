@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v4.0 (Checkbox presets + custom notes + Amarakosha/Vyakarana fields)';
+window.DGE_VERSIONS['config.js'] = 'v4.1 (Configurable extra shloka fields schema)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -10,7 +10,7 @@ const appConfig = {
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
   secretPasskey: "SHRI108",
-  version: "v4.11"
+  version: "v4.12"
 };
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
@@ -75,6 +75,35 @@ const ACHARYA_QUERY_TYPES = [
   }
 ];
 window.ACHARYA_QUERY_TYPES = ACHARYA_QUERY_TYPES;
+
+// Additional structured per-shloka fields, beyond the existing free-form
+// commentaries — Padaccheda, Anvaya, etc. Purely additive and forward-
+// looking: dataKey is what render.js looks for on each shloka object
+// (e.g. shloka.padaccheda). If a given shloka's data doesn't have that
+// field populated, that section simply doesn't render — nothing breaks
+// for shlokas without this data yet. Toggle individual fields on/off in
+// ⚙️ Settings → 🧩 Shloka Fields, or edit `enabled` here for the default.
+const SHLOKA_EXTRA_FIELDS = [
+  { id: 'padaccheda', label: 'Padaccheda', icon: '🔤', dataKey: 'padaccheda', enabled: true },
+  { id: 'anvaya', label: 'Anvaya', icon: '🔗', dataKey: 'anvaya', enabled: true },
+  { id: 'pratipadartha', label: 'Pratipadartha', icon: '📖', dataKey: 'pratipadartha', enabled: true },
+  { id: 'tatparya', label: 'Tatparya', icon: '🎯', dataKey: 'tatparya', enabled: true },
+  { id: 'vyakarana', label: 'Vyakarana', icon: '⚙️', dataKey: 'vyakarana', enabled: false },
+  { id: 'vrutta', label: 'Vrutta (Meter)', icon: '🎼', dataKey: 'vrutta', enabled: true },
+  { id: 'alankara', label: 'Alankara', icon: '✨', dataKey: 'alankara', enabled: false },
+  { id: 'crossReferences', label: 'Cross References', icon: '🔀', dataKey: 'crossReferences', enabled: true }
+];
+window.SHLOKA_EXTRA_FIELDS = SHLOKA_EXTRA_FIELDS;
+
+window.dgeGetEffectiveShlokaFields = function() {
+  try {
+    const override = JSON.parse(localStorage.getItem('shloka_extra_fields_override') || 'null');
+    if (override && typeof override === 'object') {
+      return SHLOKA_EXTRA_FIELDS.map(f => ({ ...f, enabled: override[f.id] !== undefined ? override[f.id] : f.enabled }));
+    }
+  } catch (e) { /* fall through to defaults */ }
+  return SHLOKA_EXTRA_FIELDS;
+};
 
 // Admin-only: whether Acharya may be instructed that it's allowed to
 // include a plain external hyperlink when it's confident one exists (e.g.

@@ -5,7 +5,7 @@
 // shloka can be shared as a standalone image instead of just plain text.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['screenshot.js'] = 'v1.0';
+window.DGE_VERSIONS['screenshot.js'] = 'v1.1 (Optional custom template support)';
 
 function dgeWrapCanvasText(ctx, text, maxWidth) {
   const words = text.split(/\s+/).filter(Boolean);
@@ -34,6 +34,15 @@ function dgeRoundRect(ctx, x, y, w, h, r) {
   ctx.closePath();
 }
 
+function dgeLoadTemplateImage(path) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+    img.src = path;
+  });
+}
+
 async function dgeRenderShlokaCard(id) {
   if (document.fonts && document.fonts.ready) {
     try { await document.fonts.ready; } catch (e) { /* best-effort */ }
@@ -51,16 +60,24 @@ async function dgeRenderShlokaCard(id) {
   const textColor = style.getPropertyValue('--text-sanskrit').trim() || '#9A1B1B';
   const cardBg = style.getPropertyValue('--card-bg').trim() || '#ffffff';
 
-  ctx.fillStyle = bg;
-  ctx.fillRect(0, 0, W, H);
+  // Optional custom template: drop images/share-template.png in the repo
+  // to use it as the card's background/frame instead of the plain
+  // programmatic card. Falls back cleanly if it doesn't exist.
+  const templateImg = await dgeLoadTemplateImage('images/share-template.png');
 
   const pad = 60;
-  ctx.fillStyle = cardBg;
-  ctx.strokeStyle = accentGold;
-  ctx.lineWidth = 4;
-  dgeRoundRect(ctx, pad, pad, W - pad * 2, H - pad * 2, 28);
-  ctx.fill();
-  ctx.stroke();
+  if (templateImg) {
+    ctx.drawImage(templateImg, 0, 0, W, H);
+  } else {
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = cardBg;
+    ctx.strokeStyle = accentGold;
+    ctx.lineWidth = 4;
+    dgeRoundRect(ctx, pad, pad, W - pad * 2, H - pad * 2, 28);
+    ctx.fill();
+    ctx.stroke();
+  }
 
   ctx.textAlign = 'center';
 

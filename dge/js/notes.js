@@ -143,7 +143,7 @@ function appendSelectedTextToNote(e) {
   }
   if (typeof modalSelectedText === 'undefined' || !modalSelectedText) return;
 
-  addNoteEntry(targetId, modalSelectedText, 'AI Excerpt');
+  addNoteEntry(targetId, modalSelectedText, 'Acharya Excerpt');
   if (typeof showToast === 'function') showToast(`Successfully added excerpt to Shloka ${targetId} notes!`);
 };
 
