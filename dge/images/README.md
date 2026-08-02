@@ -45,3 +45,28 @@ to be cropped out individually — happy to do that (crop coordinates can be
 worked out from the grid), or if there's a way to re-export them
 individually from whatever generated them, that'll give cleaner edges
 than cropping a compressed collage.
+
+## Chip icons (js/render.js)
+
+Drawn PNGs replacing the earlier inline-SVG set, used for the per-shloka
+Favorite/Status/Doubt/Notes/Snippets/⋯ chips:
+
+| File | Used when |
+|---|---|
+| `icon-star-outline.png` | Favorite is off |
+| `icon-star-filled.png` | Favorite is on (white, since the button background itself turns gold) |
+| `icon-question-outline.png` | Doubt is off |
+| `icon-question-filled.png` | Doubt is on |
+| `icon-status-none.png` | No status assigned yet (dark ring, sits on light background) |
+| `icon-status-pending.png` | Status = Pending (white ring, sits on the gray active background) |
+| `icon-status-practice.png` | Status = Needs Practice (white, sits on orange) |
+| `icon-status-done.png` | Status = Done (white, sits on green) |
+| `icon-note.png` | Note-count badge |
+| `icon-snippet.png` | Snippet-count badge |
+| `icon-more.png` | The ⋯ actions-sheet button |
+
+Note that `status-none`/`status-pending` are deliberately two separate
+files, not one reused icon — the "no status yet" state sits on a plain
+light background and needs a dark icon, while "Pending" sits on a
+colored (muted-gray) active background and needs a white one. Same
+reasoning applies to why star/question each have two files.

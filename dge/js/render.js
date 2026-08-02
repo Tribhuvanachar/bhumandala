@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v3.1 (SVG icons + configurable extra shloka fields)';
+window.DGE_VERSIONS['render.js'] = 'v3.2 (PNG icon set, contrast-fixed)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -168,18 +168,18 @@ function renderList() {
       const noteCount = (typeof notes !== 'undefined' && notes[i]) ? notes[i].length : 0;
       const snipCount = (typeof snippets !== 'undefined' && snippets[i]) ? snippets[i].length : 0;
 
-      const ic = window.DGE_ICONS || {};
-      const statusIconsSvg = { pending: ic.statusPending, practice: ic.statusPractice, done: ic.statusDone };
-      const statusIcon = status ? statusIconsSvg[status] : ic.statusPending;
+      const iconImg = (name, size) => `<img src="images/icon-${name}.png" width="${size}" height="${size}" alt="" style="display:block;">`;
+      const statusIconFiles = { pending: 'status-pending', practice: 'status-practice', done: 'status-done' };
+      const statusIconFile = status ? statusIconFiles[status] : 'status-none';
       const statusClass = status ? ` active-status-${status}` : '';
 
       let rowHtml = '';
-      if (flags.showFavorite) rowHtml += `<button class="chip-toggle${isFav ? ' active-fav' : ''}" title="Favorite" onclick="event.stopPropagation(); window.toggleFavorite(${i})">${isFav ? ic.starFilled : ic.star}</button>`;
-      if (flags.showStatus) rowHtml += `<button class="chip-toggle status-picker-btn${statusClass}" title="Set status" onclick="window.openStatusPicker(${i}, event)">${statusIcon}</button>`;
-      if (flags.showDoubt) rowHtml += `<button class="chip-toggle${isDoubt ? ' active-doubt' : ''}" title="Doubt" onclick="event.stopPropagation(); window.toggleDoubt(${i})">${ic.question}</button>`;
-      if (flags.showNotes && noteCount > 0) rowHtml += `<span class="status-chip has-note" title="${noteCount} note(s)">${ic.note} ${noteCount}</span>`;
-      if (flags.showSnippetTools && snipCount > 0) rowHtml += `<span class="status-chip" title="${snipCount} saved snippet(s)">${ic.snippet} ${snipCount}</span>`;
-      rowHtml += `<button class="btn-icon" style="margin-left:auto;" title="Notes, snippets, share, download" onclick="event.stopPropagation(); if(typeof openActionsSheet==='function') openActionsSheet(${i})">${ic.more}</button>`;
+      if (flags.showFavorite) rowHtml += `<button class="chip-toggle${isFav ? ' active-fav' : ''}" title="Favorite" onclick="event.stopPropagation(); window.toggleFavorite(${i})">${iconImg(isFav ? 'star-filled' : 'star-outline', 15)}</button>`;
+      if (flags.showStatus) rowHtml += `<button class="chip-toggle status-picker-btn${statusClass}" title="Set status" onclick="window.openStatusPicker(${i}, event)">${iconImg(statusIconFile, 16)}</button>`;
+      if (flags.showDoubt) rowHtml += `<button class="chip-toggle${isDoubt ? ' active-doubt' : ''}" title="Doubt" onclick="event.stopPropagation(); window.toggleDoubt(${i})">${iconImg(isDoubt ? 'question-filled' : 'question-outline', 15)}</button>`;
+      if (flags.showNotes && noteCount > 0) rowHtml += `<span class="status-chip has-note" title="${noteCount} note(s)">${iconImg('note', 12)} ${noteCount}</span>`;
+      if (flags.showSnippetTools && snipCount > 0) rowHtml += `<span class="status-chip" title="${snipCount} saved snippet(s)">${iconImg('snippet', 12)} ${snipCount}</span>`;
+      rowHtml += `<button class="btn-icon" style="margin-left:auto;" title="Notes, snippets, share, download" onclick="event.stopPropagation(); if(typeof openActionsSheet==='function') openActionsSheet(${i})">${iconImg('more', 15)}</button>`;
 
       cardActionsHtml = `<div class="shloka-status-row">${rowHtml}</div>`;
     }
