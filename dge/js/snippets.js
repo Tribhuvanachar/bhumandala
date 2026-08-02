@@ -2,7 +2,7 @@
 // Maps to F-009: Snippets — capture, save, play, download and share
 // trimmed audio segments of a shloka.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['snippets.js'] = 'v2.1 (CORS download fallback)';
+window.DGE_VERSIONS['snippets.js'] = 'v2.2 (Alt-filename fallback, real 404 fix)';
 
 window.playSnippet = async function(id, start, end) {
     if (typeof closeModal === 'function') closeModal('actionsSheetModal');
@@ -95,11 +95,48 @@ function dgeGetAudioContext() {
     return window._dgeAudioCtx;
 }
 
+// Fetches actual audio bytes for a shloka, checking the offline cache
+// first, then falling back to a live fetch — trying BOTH the primary
+// filename and the alt filename (some files on archive.org are only
+// reachable with a zero-width space before the extension; this mirrors
+// the exact fallback cacheAllAudio() already uses, which is why bulk
+// preload succeeds even when a single direct fetch of the primary URL
+// 404s). A successful live fetch is opportunistically cached so future
+// requests hit the cache instead of re-discovering which variant works.
+async function dgeFetchAudioBlob(id) {
+    if (!stotraData || !stotraData.metadata) throw new Error('No stotra data loaded');
+    const primary = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${id}${stotraData.metadata.fileExtension}`;
+    const alt = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${id}%E2%80%8B${stotraData.metadata.fileExtension}`;
+
+    if ('caches' in window && typeof AUDIO_CACHE_NAME !== 'undefined') {
+        try {
+            const cache = await caches.open(AUDIO_CACHE_NAME);
+            const hit = (await cache.match(primary)) || (await cache.match(alt));
+            if (hit) return await hit.blob();
+        } catch (e) {
+            console.warn('Offline cache read error:', e);
+        }
+    }
+
+    let res = await fetch(primary);
+    if (!res.ok) res = await fetch(alt);
+    if (!res.ok) throw new Error(`Could not fetch audio (tried both filename variants, last status ${res.status})`);
+
+    const blob = await res.blob();
+
+    if ('caches' in window && typeof AUDIO_CACHE_NAME !== 'undefined') {
+        try {
+            const cache = await caches.open(AUDIO_CACHE_NAME);
+            await cache.put(res.url, new Response(blob, { headers: res.headers }));
+        } catch (e) { /* best-effort, not fatal if this fails */ }
+    }
+
+    return blob;
+}
+
 async function dgeFetchAndDecode(id) {
-    const src = await resolveAudioSrc(id);
-    const res = await fetch(src);
-    if (!res.ok) throw new Error('Could not fetch audio (' + res.status + ')');
-    const arrayBuffer = await res.arrayBuffer();
+    const blob = await dgeFetchAudioBlob(id);
+    const arrayBuffer = await blob.arrayBuffer();
     const ctx = dgeGetAudioContext();
     return await ctx.decodeAudioData(arrayBuffer.slice(0));
 }
@@ -188,14 +225,11 @@ function dgeTriggerBlobDownload(blob, filename) {
 window.downloadFullShlokaAudio = async function(id) {
     if (typeof showToast === 'function') showToast('Preparing download…');
     try {
-        const src = await resolveAudioSrc(id);
-        const res = await fetch(src);
-        if (!res.ok) throw new Error('Fetch failed: ' + res.status);
-        const blob = await res.blob();
+        const blob = await dgeFetchAudioBlob(id);
         const ext = (typeof stotraData !== 'undefined' && stotraData && stotraData.metadata && stotraData.metadata.fileExtension) || '.mp3';
         dgeTriggerBlobDownload(blob, `Shloka-${id}${ext}`);
     } catch (e) {
-        console.warn('Direct download failed (likely CORS on an uncached file) — opening the audio directly instead:', e);
+        console.warn('Download failed even after trying both filename variants:', e);
         try {
             const src = await resolveAudioSrc(id);
             window.open(src, '_blank');
@@ -253,21 +287,15 @@ window.shareShlokaAudio = async function(id, snippet) {
                 blob = dgeAudioBufferToWavBlob(sliced);
                 filename = `Shloka-${id}-snippet-${snippet.start.toFixed(1)}-${snippet.end.toFixed(1)}.wav`;
             } else {
-                const src = await resolveAudioSrc(id);
-                const res = await fetch(src);
-                if (!res.ok) throw new Error('Fetch failed: ' + res.status);
-                blob = await res.blob();
+                blob = await dgeFetchAudioBlob(id);
                 const ext = (typeof stotraData !== 'undefined' && stotraData && stotraData.metadata && stotraData.metadata.fileExtension) || '.mp3';
                 filename = `Shloka-${id}${ext}`;
             }
         } catch (fetchErr) {
-            // Most likely cause: this audio isn't in the offline cache yet,
-            // so we tried to fetch it directly from the (cross-origin)
-            // audio host, which doesn't return CORS headers for fetch().
-            // A plain <audio> tag can still play it fine — it's only
-            // reading the raw bytes in JS that's blocked. Fall back to
+            // Both the primary and alt (zero-width-space) filenames failed
+            // live, and it isn't in the offline cache either. Fall back to
             // sharing a link instead of the bytes.
-            console.warn('Could not fetch audio bytes for sharing (likely CORS on an uncached file):', fetchErr);
+            console.warn('Could not fetch audio bytes for sharing after trying both filename variants:', fetchErr);
             fetchFailed = true;
         }
 

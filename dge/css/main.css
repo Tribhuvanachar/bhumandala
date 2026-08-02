@@ -133,7 +133,13 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .search-nav-btn { background: none; border: none; font-size: 14px; cursor: pointer; color: var(--accent-red); padding: 4px; display: flex; align-items: center; justify-content: center; }
 
 /* Reading & List Cards */
-.reading-card { position: relative; width: 100%; box-sizing: border-box; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: var(--radius-lg); padding: 22px 18px; text-align: center; font-family: var(--font-sanskrit); font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.7; font-weight: 500; margin-bottom: 16px; min-height: 70px; display: block; overflow-wrap: anywhere; box-shadow: var(--shadow-sm); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease); }
+.reading-card-wrap { position: sticky; top: calc(60px + env(safe-area-inset-top)); z-index: 150; background: var(--bg-main); padding-top: 2px; }
+.reading-card-toggle { position: absolute; top: 8px; right: 8px; z-index: 2; width: 26px; height: 26px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--muted-text); font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform var(--t-fast) var(--ease); }
+.reading-card-wrap.minimized .reading-card { max-height: 44px; overflow: hidden; padding: 11px 44px 11px 18px; text-align: left; font-size: calc(var(--font-multiplier) * 0.85); white-space: nowrap; text-overflow: ellipsis; }
+.reading-card-wrap.minimized .reading-card::before, .reading-card-wrap.minimized .reading-card::after { display: none; }
+.reading-card-wrap.minimized .reading-card-toggle { transform: rotate(180deg); }
+
+.reading-card { position: relative; width: 100%; box-sizing: border-box; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: var(--radius-lg); padding: 22px 18px; text-align: center; font-family: var(--font-sanskrit); font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.7; font-weight: 500; margin-bottom: 16px; min-height: 70px; display: block; overflow-wrap: anywhere; box-shadow: var(--shadow-sm); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease), max-height var(--t-med) var(--ease), padding var(--t-med) var(--ease); }
 .reading-card.highlight { border-color: var(--accent-red); box-shadow: 0 0 0 4px var(--accent-glow), var(--shadow-sm); }
 .reading-card::before, .reading-card::after { content: "❈"; display: block; font-size: 12px; color: var(--accent-gold); opacity: 0.6; margin-bottom: 6px; font-family: var(--font-ui); }
 .reading-card::after { margin-bottom: 0; margin-top: 6px; }
@@ -156,13 +162,13 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 
 /* Inline chip toggles directly on the card — Favorite/Doubt toggle in
    place; Status opens the shared floating picker (#statusPickerMenu). */
-.chip-toggle { width: 26px; height: 26px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--muted-text); font-size: 13px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all var(--t-fast) var(--ease); padding: 0; }
+.chip-toggle { width: 27px; height: 27px; border-radius: 50%; background: var(--card-bg); border: 1.5px solid var(--card-border); color: var(--muted-text); font-size: 13px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all var(--t-fast) var(--ease); padding: 0; }
 .chip-toggle:active { transform: scale(0.88); }
-.chip-toggle.active-fav { background: var(--accent-gold); border-color: var(--accent-gold); color: #fff; }
-.chip-toggle.active-doubt { background: #6a4fb0; border-color: #6a4fb0; color: #fff; }
-.chip-toggle.active-status-pending { background: var(--muted-text); border-color: var(--muted-text); color: #fff; }
-.chip-toggle.active-status-practice { background: var(--accent-red); border-color: var(--accent-red); color: #fff; }
-.chip-toggle.active-status-done { background: #2e7d32; border-color: #2e7d32; color: #fff; }
+.chip-toggle.active-fav { background: var(--accent-gold); border-color: var(--accent-gold); color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+.chip-toggle.active-doubt { background: transparent; border-color: var(--accent-red); color: var(--accent-red); box-shadow: inset 0 0 0 1px var(--accent-red); }
+.chip-toggle.active-status-pending { background: var(--muted-text); border-color: var(--muted-text); color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.12); }
+.chip-toggle.active-status-practice { background: var(--accent-red); border-color: var(--accent-red); color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+.chip-toggle.active-status-done { background: var(--accent-gold); border-color: var(--accent-gold); color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
 
 .filter-checkbox-item { padding: 8px 12px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 8px; white-space: nowrap; transition: background var(--t-fast) var(--ease); }
 .filter-checkbox-item::before { content: "☐"; font-size: 13px; flex-shrink: 0; }
@@ -182,8 +188,8 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .status-chip.is-fav { color: var(--accent-gold); }
 .status-chip.is-pending { color: var(--muted-text); }
 .status-chip.is-practice { color: var(--accent-red); }
-.status-chip.is-done { color: #2e7d32; }
-.status-chip.is-doubt { color: #6a4fb0; }
+.status-chip.is-done { color: var(--accent-gold); }
+.status-chip.is-doubt { color: var(--accent-red); }
 .status-chip.has-note { color: var(--accent-red); }
 
 .actions-section-label { font-size: 10px; color: var(--muted-text); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.4px; font-weight: 700; }

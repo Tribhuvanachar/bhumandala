@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v2.1 (Feature-flag settings UI)';
+window.DGE_VERSIONS['ai.js'] = 'v2.2 (Selection-aware Shloka/Word/Native logic)';
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -135,7 +135,18 @@ const FEATURE_FLAG_CHECKBOX_IDS = {
   showNotes: 'flagShowNotes',
   showSnippetTools: 'flagShowSnippetTools',
   showThemePicker: 'flagShowThemePicker',
-  showScriptPicker: 'flagShowScriptPicker'
+  showScriptPicker: 'flagShowScriptPicker',
+  showPreloadButton: 'flagShowPreloadButton',
+  showSpeedControl: 'flagShowSpeedControl'
+};
+
+const SCRIPT_OPTION_CHECKBOX_IDS = {
+  devanagari: 'scriptOptDevanagari',
+  iast: 'scriptOptIast',
+  kannada: 'scriptOptKannada',
+  telugu: 'scriptOptTelugu',
+  tamil: 'scriptOptTamil',
+  malayalam: 'scriptOptMalayalam'
 };
 
 function dgeLoadFeatureFlagsIntoUI() {
@@ -143,6 +154,13 @@ function dgeLoadFeatureFlagsIntoUI() {
   Object.entries(FEATURE_FLAG_CHECKBOX_IDS).forEach(([flagKey, elId]) => {
     const el = document.getElementById(elId);
     if (el) el.checked = flags[flagKey] !== false;
+  });
+
+  const scriptOptions = (typeof dgeGetEffectiveScriptOptions === 'function') ? dgeGetEffectiveScriptOptions() : (window.SCRIPT_OPTIONS || []);
+  scriptOptions.forEach(opt => {
+    const elId = SCRIPT_OPTION_CHECKBOX_IDS[opt.id];
+    const el = elId ? document.getElementById(elId) : null;
+    if (el) el.checked = opt.enabled !== false;
   });
 }
 
@@ -153,13 +171,22 @@ function dgeSaveFeatureFlagsFromUI() {
     const el = document.getElementById(elId);
     if (el) { override[flagKey] = el.checked; any = true; }
   });
-  if (!any) return;
-  localStorage.setItem('feature_flags_override', JSON.stringify(override));
+  if (any) localStorage.setItem('feature_flags_override', JSON.stringify(override));
+
+  const scriptOverride = {};
+  let anyScript = false;
+  Object.entries(SCRIPT_OPTION_CHECKBOX_IDS).forEach(([scriptId, elId]) => {
+    const el = document.getElementById(elId);
+    if (el) { scriptOverride[scriptId] = el.checked; anyScript = true; }
+  });
+  if (anyScript) localStorage.setItem('script_options_override', JSON.stringify(scriptOverride));
+
   if (typeof applyFeatureFlags === 'function') applyFeatureFlags();
 }
 
 window.resetFeatureFlagsToDefault = function() {
   localStorage.removeItem('feature_flags_override');
+  localStorage.removeItem('script_options_override');
   dgeLoadFeatureFlagsIntoUI();
   if (typeof applyFeatureFlags === 'function') applyFeatureFlags();
   if (typeof showToast === 'function') showToast('Feature visibility reset to defaults.');
@@ -459,6 +486,22 @@ async function dgeRunAcharyaQuery(promptText) {
   dgeShowFollowUpBox(true);
 }
 
+// Per-card entry point — lets Ask Acharya be triggered directly from a
+// shloka's card/actions-sheet without first selecting any text. "Shloka"
+// and "Native Meaning" fall back to the full verse text automatically
+// (see askAcharya above); "Word" isn't offered here since it needs an
+// actual word selection to mean anything.
+window.askAcharyaForShloka = function(id, type) {
+  window.contextShlokaId = id;
+  window.lastSelectedText = '';
+  window.askAcharya(null, type);
+};
+
+window.openBhashyaPickerForShloka = function(id) {
+  window.contextShlokaId = id;
+  window.openBhashyaPicker(null);
+};
+
 window.askAcharya = async function(e, type, payload) {
   if (e) e.preventDefault();
   const tooltip = document.getElementById('actionTooltip');
@@ -478,7 +521,29 @@ window.askAcharya = async function(e, type, payload) {
     return;
   }
 
-  const text = payload ? payload.selectedText : (window.lastSelectedText || window.getSelection().toString().trim());
+  const text0 = payload ? payload.selectedText : (window.lastSelectedText || window.getSelection().toString().trim());
+  let text = text0;
+
+  // "Shloka" always means the WHOLE verse — a selection (or none at all)
+  // only tells us WHICH shloka, not how much of it to analyze. Selecting
+  // a single word and tapping Shloka still gets the full-verse analysis.
+  if (type === 'shloka' && window.currentAcharyaShlokaId && typeof getText === 'function') {
+    text = getText(window.currentAcharyaShlokaId).replace(/<[^>]*>/g, '');
+  }
+
+  // "Word" genuinely needs a specific selection — can't run without one.
+  if (type === 'grammar' && !text) {
+    if (typeof closeModal === 'function') closeModal('acharyaModal');
+    if (typeof showToast === 'function') showToast('Select a specific word first to ask for word-level analysis.');
+    return;
+  }
+
+  // "Native Meaning" works with or without a selection — falls back to
+  // the whole shloka if nothing specific was highlighted.
+  if (type === 'translate' && !text && window.currentAcharyaShlokaId && typeof getText === 'function') {
+    text = getText(window.currentAcharyaShlokaId).replace(/<[^>]*>/g, '');
+  }
+
   if(!text && type !== 'commentary') return;
   window.getSelection().removeAllRanges();
 

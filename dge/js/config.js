@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v3.0 (Feature Flags)';
+window.DGE_VERSIONS['config.js'] = 'v3.1 (Feature Flags + Script Options)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -10,7 +10,7 @@ const appConfig = {
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
   secretPasskey: "SHRI108",
-  version: "v4.7"
+  version: "v4.8"
 };
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
@@ -84,9 +84,35 @@ const FEATURE_FLAGS = {
   showNotes: true,
   showSnippetTools: true, // saved snippets + A-B repeat tools in 🛠 Tools
   showThemePicker: true,
-  showScriptPicker: true
+  showScriptPicker: true,
+  showPreloadButton: true, // "📥 Preload All Audio" button in 🛠 Tools
+  showSpeedControl: true   // playback speed slider in 🛠 Tools
 };
 window.FEATURE_FLAGS = FEATURE_FLAGS;
+
+// Which scripts/languages appear in the 🔠 script selector, and in what
+// order. Remove an entry (or set enabled:false) to hide it from the
+// picker without touching any transliteration code — it still works if
+// selected via a saved preference, this only affects what's offered.
+const SCRIPT_OPTIONS = [
+  { id: 'devanagari', label: 'Sanskrit', enabled: true },
+  { id: 'iast', label: 'English', enabled: true },
+  { id: 'kannada', label: 'Kannada', enabled: true },
+  { id: 'telugu', label: 'Telugu', enabled: true },
+  { id: 'tamil', label: 'Tamil', enabled: true },
+  { id: 'malayalam', label: 'Malayalam', enabled: true }
+];
+window.SCRIPT_OPTIONS = SCRIPT_OPTIONS;
+
+window.dgeGetEffectiveScriptOptions = function() {
+  try {
+    const override = JSON.parse(localStorage.getItem('script_options_override') || 'null');
+    if (override && typeof override === 'object') {
+      return SCRIPT_OPTIONS.map(opt => ({ ...opt, enabled: override[opt.id] !== undefined ? override[opt.id] : opt.enabled }));
+    }
+  } catch (e) { /* fall through to defaults */ }
+  return SCRIPT_OPTIONS;
+};
 
 window.dgeGetEffectiveFeatureFlags = function() {
   try {

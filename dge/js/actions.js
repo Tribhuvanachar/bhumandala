@@ -6,7 +6,7 @@
 // and note entries.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['actions.js'] = 'v3.0 (Inline marks, Copy buttons)';
+window.DGE_VERSIONS['actions.js'] = 'v3.1 (Ask Acharya section)';
 
 window.currentActionsSheetId = null;
 
@@ -41,6 +41,19 @@ window.renderActionsSheetContent = function(id) {
   html += `<div style="display:flex; gap:8px; margin-bottom:18px; font-size:11px; color:var(--muted-text); align-items:center;">`;
   html += `<span>${m.fav ? '★ Favorite' : '☆ Not favorited'} · ${m.status ? STATUS_LABELS[m.status].icon + ' ' + STATUS_LABELS[m.status].label : '○ No status'} · ${m.doubt ? '❓ Has doubt' : 'No doubt marked'}</span>`;
   html += `</div>`;
+
+  // --- Ask Acharya (works without selecting any text first) ---
+  const acharyaTypes = (typeof dgeGetEffectiveQueryTypes === 'function') ? dgeGetEffectiveQueryTypes() : [];
+  const acharyaButtons = acharyaTypes.filter(q => q.enabled && q.id !== 'grammar').map(q => {
+    const action = q.action === 'bhashya'
+      ? `window.closeModal('actionsSheetModal'); window.openBhashyaPickerForShloka(${id});`
+      : `window.closeModal('actionsSheetModal'); window.askAcharyaForShloka(${id}, '${q.id}');`;
+    return `<button class="btn-sm" style="flex:1; min-width:100px;" onclick="${action}">${q.icon} ${q.label}</button>`;
+  }).join('');
+  if (acharyaButtons) {
+    html += `<div class="actions-section-label">🕉️ Ask Acharya</div>`;
+    html += `<div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px;">${acharyaButtons}</div>`;
+  }
 
   // --- Notes (structured, individually shareable) ---
   html += `<div class="actions-section-label">Notes (${noteEntries.length})</div>`;

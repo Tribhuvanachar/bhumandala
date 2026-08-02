@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['utils.js'] = 'v1.4 (Feature flags applier)';
+window.DGE_VERSIONS['utils.js'] = 'v1.5 (Reading-card minimize/sticky)';
 
 window.DGE_THEMES = ['traditional', 'minimal', 'vibrant', 'darkglass'];
 window.DGE_THEME_META_COLORS = {
@@ -70,6 +70,19 @@ window.applyFeatureFlags = function() {
   const abSection = document.getElementById('abSnippetToolsSection');
   if (abSection) abSection.style.display = flags.showSnippetTools ? '' : 'none';
 
+  const speedRow = document.getElementById('speedControlRow');
+  if (speedRow) speedRow.style.display = flags.showSpeedControl ? '' : 'none';
+
+  const cacheBtn = document.getElementById('cacheBtn');
+  if (cacheBtn) cacheBtn.style.display = flags.showPreloadButton ? '' : 'none';
+
+  // Which scripts/languages show up in the 🔠 picker
+  const scriptOptions = (typeof dgeGetEffectiveScriptOptions === 'function') ? dgeGetEffectiveScriptOptions() : (window.SCRIPT_OPTIONS || []);
+  scriptOptions.forEach(opt => {
+    const el = document.querySelector(`#scriptPopup .pop-item[data-script="${opt.id}"]`);
+    if (el) el.style.display = opt.enabled ? '' : 'none';
+  });
+
   if (typeof renderList === 'function') renderList();
 };
 
@@ -86,6 +99,27 @@ window.showToast = function(msg) {
   toast.style.display = 'block';
   setTimeout(() => { toast.style.display = 'none'; }, 3000);
 };
+
+// Reading-card minimize — it's now pinned (sticky) at the top of the
+// scrolling list, so this lets it be collapsed to a slim strip instead of
+// permanently taking up a big block of vertical space.
+window.toggleReadingCardMinimize = function() {
+  const wrap = document.getElementById('readingCardWrap');
+  const btn = document.getElementById('readingCardToggleBtn');
+  if (!wrap) return;
+  const isMin = wrap.classList.toggle('minimized');
+  if (btn) btn.innerText = isMin ? '⌃' : '⌄';
+  localStorage.setItem('readingCardMinimized', isMin ? 'true' : 'false');
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('readingCardMinimized') === 'true') {
+    const wrap = document.getElementById('readingCardWrap');
+    const btn = document.getElementById('readingCardToggleBtn');
+    if (wrap) wrap.classList.add('minimized');
+    if (btn) btn.innerText = '⌃';
+  }
+});
 
 // --- DYNAMIC DEV LOGGER WITH COPY / MINIMIZE / CLOSE ---
 (function initDevLogger() {
