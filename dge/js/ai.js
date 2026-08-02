@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.3 (Visual template thumbnail picker)';
+window.DGE_VERSIONS['ai.js'] = 'v3.4 (Async live-discovered template picker + refresh)';
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -245,12 +245,15 @@ window.selectShareTemplate = function(id) {
   });
 };
 
-function dgeLoadShareTemplateIntoUI() {
+async function dgeLoadShareTemplateIntoUI() {
   const grid = document.getElementById('defaultShareTemplateGrid');
-  if (!grid || !window.SHARE_IMAGE_TEMPLATES) return;
+  if (!grid) return;
+  grid.innerHTML = `<div style="grid-column: 1 / -1; font-size:11px; color:var(--muted-text); padding:8px 0;">Loading templates…</div>`;
+
+  const templates = (typeof dgeDiscoverShareTemplates === 'function') ? await dgeDiscoverShareTemplates() : [];
   const current = localStorage.getItem('default_share_template') || 'plain';
 
-  grid.innerHTML = window.SHARE_IMAGE_TEMPLATES.map(t => {
+  grid.innerHTML = templates.map(t => {
     const thumb = t.filename
       ? `<img src="images/${t.filename}" alt="" style="width:100%; height:100%; object-fit:cover;">`
       : `<div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--card-bg); color:var(--muted-text); font-size:10px;">Plain</div>`;
@@ -259,8 +262,14 @@ function dgeLoadShareTemplateIntoUI() {
         <div class="share-tpl-thumb-img">${thumb}</div>
         <div class="share-tpl-thumb-label">${t.label}</div>
       </button>`;
-  }).join('');
+  }).join('') + `<button type="button" class="btn-sm" style="grid-column: 1 / -1;" onclick="window.refreshShareTemplates()">↻ Refresh (check for new uploads)</button>`;
 }
+
+window.refreshShareTemplates = async function() {
+  if (typeof dgeDiscoverShareTemplates === 'function') await dgeDiscoverShareTemplates(true);
+  dgeLoadShareTemplateIntoUI();
+  if (typeof showToast === 'function') showToast('Template list refreshed.');
+};
 
 function dgeSaveShareTemplateFromUI() {
   // selection is already saved live by selectShareTemplate() on tap —

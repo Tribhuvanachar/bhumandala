@@ -5,7 +5,7 @@
 // shloka can be shared as a standalone image instead of just plain text.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['screenshot.js'] = 'v2.0 (Template picker + gold embossed text, H+V centered)';
+window.DGE_VERSIONS['screenshot.js'] = 'v2.1 (Real image dimensions, no stretching)';
 
 function dgeWrapCanvasText(ctx, text, maxWidth) {
   const words = text.split(/\s+/).filter(Boolean);
@@ -78,8 +78,18 @@ async function dgeRenderShlokaCard(id) {
     try { await document.fonts.ready; } catch (e) { /* best-effort */ }
   }
 
-  const tpl = (typeof dgeGetSelectedShareTemplate === 'function') ? dgeGetSelectedShareTemplate() : { id: 'plain', filename: null, w: 1080, h: 1080, safeZone: { x: 90, y: 260, w: 900, h: 560 }, hasBakedBranding: false };
-  const W = tpl.w || 1080, H = tpl.h || 1080;
+  const tpl = (typeof dgeGetSelectedShareTemplate === 'function')
+    ? await dgeGetSelectedShareTemplate()
+    : { id: 'plain', filename: null, safeZone: { x: 90, y: 260, w: 900, h: 560 }, hasBakedBranding: false };
+
+  const templateImg = tpl.filename ? await dgeLoadTemplateImage(`images/${tpl.filename}`) : null;
+
+  // Size the canvas to the template's REAL dimensions (read from the
+  // loaded image) rather than a guessed/hardcoded size — this way a
+  // newly-uploaded template of any aspect ratio is never stretched or
+  // distorted to fit an assumed size.
+  const W = templateImg ? templateImg.naturalWidth : 1080;
+  const H = templateImg ? templateImg.naturalHeight : 1080;
   const canvas = document.createElement('canvas');
   canvas.width = W; canvas.height = H;
   const ctx = canvas.getContext('2d');
@@ -88,8 +98,6 @@ async function dgeRenderShlokaCard(id) {
   const bg = style.getPropertyValue('--bg-main').trim() || '#FAF3E6';
   const accentGold = style.getPropertyValue('--accent-gold').trim() || '#B9821F';
   const cardBg = style.getPropertyValue('--card-bg').trim() || '#ffffff';
-
-  const templateImg = tpl.filename ? await dgeLoadTemplateImage(`images/${tpl.filename}`) : null;
 
   const pad = 60;
   if (templateImg) {

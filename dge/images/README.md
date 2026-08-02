@@ -70,3 +70,30 @@ files, not one reused icon — the "no status yet" state sits on a plain
 light background and needs a dark icon, while "Pending" sits on a
 colored (muted-gray) active background and needs a white one. Same
 reasoning applies to why star/question each have two files.
+
+## Templates are now auto-discovered — no code changes needed
+
+As of this version, the Share Image Template picker no longer reads from
+a hardcoded list in `config.js`. Instead, the app queries GitHub's public
+Contents API at runtime for whatever is actually in this folder right now
+and offers every file matching `template*.png` / `.jpg` / `.jpeg`.
+
+**To add a new template:** just upload a file here named
+`template-whatever.png` (or `.jpg`) directly on GitHub. It'll show up in
+the picker within an hour automatically (results are cached for an hour
+to avoid hitting GitHub's API rate limit — tap "↻ Refresh" in the picker
+to see it immediately without waiting).
+
+**To exclude a file** that matches the naming pattern but shouldn't be
+offered to end users (like a reference/working file), add its filename
+(without extension) to `SHARE_TEMPLATE_EXCLUDE` in `js/config.js`.
+
+**To fine-tune a specific template** (where exactly the shloka text sits,
+or mark it as already having "सनातन विद्या गुरुकुल" baked into the
+image), add an entry to `SHARE_TEMPLATE_OVERRIDES` in `js/config.js` keyed
+by the filename without its extension. Anything without an override still
+works — it just gets a generic centered text placement by default.
+
+If GitHub's API is ever unreachable (offline, rate-limited), the picker
+falls back to whatever was last successfully cached, or just "Plain" if
+nothing has ever been cached yet — sharing never breaks entirely.

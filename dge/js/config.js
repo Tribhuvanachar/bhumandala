@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v4.2 (Share-image template registry, Custom icon)';
+window.DGE_VERSIONS['config.js'] = 'v5.0 (Live GitHub template discovery, no hardcoded list)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -10,7 +10,7 @@ const appConfig = {
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
   secretPasskey: "SHRI108",
-  version: "v4.13"
+  version: "v4.17"
 };
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
@@ -113,33 +113,101 @@ window.dgeGetEffectiveShlokaFields = function() {
 // hasBakedBranding: true means "सनातन विद्या गुरुकुल · 3BU1" is already
 // drawn into the image itself — the code must NOT draw its own footer
 // text on top of these, or it'll double up.
-const SHARE_IMAGE_TEMPLATES = [
-  { id: 'plain', filename: null, label: 'Plain (no template)', w: 1080, h: 1080,
-    safeZone: { x: 90, y: 260, w: 900, h: 560 }, hasBakedBranding: false },
-  { id: 'jade-meander', filename: 'template-01-jade-meander.jpg', label: 'Jade Meander Border', w: 784, h: 1168,
-    safeZone: { x: 110, y: 180, w: 560, h: 780 }, hasBakedBranding: false },
-  { id: 'lotus-watercolor', filename: 'template-02-lotus-watercolor.jpg', label: 'Lotus Watercolor', w: 784, h: 1168,
-    safeZone: { x: 110, y: 260, w: 560, h: 600 }, hasBakedBranding: false },
-  { id: 'temple-arch-dark', filename: 'template-03-temple-arch-dark.jpg', label: 'Dark Temple Arch', w: 784, h: 1168,
-    safeZone: { x: 190, y: 300, w: 400, h: 640 }, hasBakedBranding: false },
-  { id: 'lotus-medallion', filename: 'template-04-lotus-medallion.jpg', label: 'Lotus Medallion', w: 784, h: 1168,
-    safeZone: { x: 130, y: 220, w: 520, h: 750 }, hasBakedBranding: false },
-  { id: 'parchment-diya', filename: 'template-05-parchment-diya.png', label: 'Parchment + Diya', w: 1024, h: 1024,
-    safeZone: { x: 110, y: 110, w: 800, h: 650 }, hasBakedBranding: true },
-  { id: 'minimal-gold', filename: 'template-06-minimal-gold.png', label: 'Minimal Gold', w: 1024, h: 1024,
-    safeZone: { x: 110, y: 240, w: 800, h: 560 }, hasBakedBranding: true },
-  { id: 'geometric-mihrab', filename: 'template-07-geometric-mihrab.png', label: 'Geometric Mihrab', w: 1024, h: 1024,
-    safeZone: { x: 300, y: 300, w: 430, h: 470 }, hasBakedBranding: true },
-  { id: 'watercolor-river', filename: 'template-08-watercolor-river.png', label: 'Watercolor River', w: 1024, h: 1024,
-    safeZone: { x: 160, y: 160, w: 700, h: 440 }, hasBakedBranding: true },
-  { id: 'stone-inscription', filename: 'template-09-stone-inscription.png', label: 'Stone Inscription', w: 1024, h: 1024,
-    safeZone: { x: 130, y: 190, w: 780, h: 580 }, hasBakedBranding: true }
-];
-window.SHARE_IMAGE_TEMPLATES = SHARE_IMAGE_TEMPLATES;
+// Share-as-Image templates (js/screenshot.js) are now discovered LIVE from
+// the actual images/ folder on GitHub — nothing here is a hardcoded file
+// list. Upload a new file named "template-whatever.png/.jpg" directly on
+// GitHub and it appears in the picker automatically, no code change
+// needed. This section only holds:
+//   - where to look (repo location)
+//   - explicit exclusions (files matching the pattern that should NOT
+//     be offered — e.g. a reference/working file)
+//   - optional fine-tuned overrides (safe zone, baked-branding flag) for
+//     specific templates. Anything discovered that ISN'T listed here
+//     still works, just with a generic centered safe zone by default.
+const GITHUB_REPO_CONFIG = { owner: 'Tribhuvanachar', repo: 'bhumandala', branch: 'main', imagesPath: 'dge/images' };
+window.GITHUB_REPO_CONFIG = GITHUB_REPO_CONFIG;
 
-window.dgeGetSelectedShareTemplate = function() {
+const SHARE_TEMPLATE_EXCLUDE = ['_collage-uncropped-reference'];
+window.SHARE_TEMPLATE_EXCLUDE = SHARE_TEMPLATE_EXCLUDE;
+
+const SHARE_TEMPLATE_OVERRIDES = {
+  'template-01-jade-meander': { label: 'Jade Meander Border', safeZone: { x: 110, y: 180, w: 560, h: 780 } },
+  'template-02-lotus-watercolor': { label: 'Lotus Watercolor', safeZone: { x: 110, y: 260, w: 560, h: 600 } },
+  'template-03-temple-arch-dark': { label: 'Dark Temple Arch', safeZone: { x: 190, y: 300, w: 400, h: 640 } },
+  'template-04-lotus-medallion': { label: 'Lotus Medallion', safeZone: { x: 130, y: 220, w: 520, h: 750 } },
+  'template-05-parchment-diya': { label: 'Parchment + Diya', safeZone: { x: 110, y: 110, w: 800, h: 650 }, hasBakedBranding: true },
+  'template-06-minimal-gold': { label: 'Minimal Gold', safeZone: { x: 110, y: 240, w: 800, h: 560 }, hasBakedBranding: true },
+  'template-07-geometric-mihrab': { label: 'Geometric Mihrab', safeZone: { x: 300, y: 300, w: 430, h: 470 }, hasBakedBranding: true },
+  'template-08-watercolor-river': { label: 'Watercolor River', safeZone: { x: 160, y: 160, w: 700, h: 440 }, hasBakedBranding: true },
+  'template-09-stone-inscription': { label: 'Stone Inscription', safeZone: { x: 130, y: 190, w: 780, h: 580 }, hasBakedBranding: true }
+};
+window.SHARE_TEMPLATE_OVERRIDES = SHARE_TEMPLATE_OVERRIDES;
+
+const PLAIN_TEMPLATE = { id: 'plain', filename: null, label: 'Plain (no template)', safeZone: { x: 90, y: 260, w: 900, h: 560 }, hasBakedBranding: false };
+
+function dgeLabelFromFilename(id) {
+  return id.replace(/^template-\d+-/, '').replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+// Live-discovers templates via GitHub's public (unauthenticated, CORS-
+// enabled) Contents API, caching the result for an hour so repeat visits
+// don't hit GitHub's rate limit or slow the page down. Falls back to
+// whatever was last successfully cached — or just "Plain" — if the API
+// call fails (offline, rate-limited, etc.), so this never breaks sharing.
+window.dgeDiscoverShareTemplates = async function(forceRefresh) {
+  const CACHE_KEY = 'share_templates_cache_v2';
+  const CACHE_TTL_MS = 60 * 60 * 1000;
+
+  if (!forceRefresh) {
+    try {
+      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      if (cached && (Date.now() - cached.fetchedAt) < CACHE_TTL_MS && Array.isArray(cached.templates)) {
+        return cached.templates;
+      }
+    } catch (e) { /* fall through to a live fetch */ }
+  }
+
+  const { owner, repo, branch, imagesPath } = GITHUB_REPO_CONFIG;
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${imagesPath}?ref=${branch}`;
+  const excludeSet = new Set(SHARE_TEMPLATE_EXCLUDE);
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('GitHub API returned ' + res.status);
+    const files = await res.json();
+
+    const templates = [PLAIN_TEMPLATE];
+    files
+      .filter(f => f.type === 'file' && /^template.*\.(png|jpe?g)$/i.test(f.name))
+      .forEach(f => {
+        const id = f.name.replace(/\.(png|jpe?g)$/i, '');
+        if (excludeSet.has(id)) return;
+        const o = SHARE_TEMPLATE_OVERRIDES[id] || {};
+        templates.push({
+          id,
+          filename: f.name,
+          label: o.label || dgeLabelFromFilename(id),
+          safeZone: o.safeZone || { x: 110, y: 220, w: 800, h: 600 },
+          hasBakedBranding: !!o.hasBakedBranding
+        });
+      });
+
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ fetchedAt: Date.now(), templates }));
+    return templates;
+  } catch (e) {
+    console.warn('Live template discovery failed, using last known list:', e);
+    try {
+      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      if (cached && Array.isArray(cached.templates) && cached.templates.length) return cached.templates;
+    } catch (e2) { /* ignore */ }
+    return [PLAIN_TEMPLATE];
+  }
+};
+
+window.dgeGetSelectedShareTemplate = async function() {
   const id = localStorage.getItem('default_share_template') || 'plain';
-  return SHARE_IMAGE_TEMPLATES.find(t => t.id === id) || SHARE_IMAGE_TEMPLATES[0];
+  const templates = await window.dgeDiscoverShareTemplates();
+  return templates.find(t => t.id === id) || templates[0] || PLAIN_TEMPLATE;
 };
 
 // Admin-only: whether Acharya may be instructed that it's allowed to
