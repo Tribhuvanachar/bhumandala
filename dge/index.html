@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.9.0">
+<link rel="stylesheet" href="css/main.css?v=4.11.0">
 </head>
 <body>
 
@@ -38,7 +38,10 @@
 </div>
 
 <!-- Floating Append-to-Notes Selection Button for Modal -->
-<button id="modalAppendBtn" style="display:none;" onpointerdown="window.appendSelectedTextToNote(event)">➕ Add Selection to Notes</button>
+<div id="modalAppendBtn" style="display:none;">
+  <button onpointerdown="window.appendSelectedTextToNote(event)">➕ Notes</button>
+  <button class="ask-further-btn" onpointerdown="window.askFurtherAboutSelection(event)">🔍 Ask Further</button>
+</div>
 
 <!-- Top Bar -->
 <div class="top-bar">
@@ -67,7 +70,7 @@
       </div>
     </div>
 
-    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="window.openKeyModal()" title="Settings: AI Keys, Ask Acharya, Feature Visibility" style="font-size: 18px;">🔑</button>
+    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="window.openKeyModal()" title="Settings: AI Keys, Ask Acharya, Feature Visibility" style="font-size: 18px;">⚙️</button>
 
     <!-- Theme Picker -->
     <div style="position:relative;">
@@ -130,7 +133,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.9 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.11 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -284,7 +287,7 @@
        <button class="btn-sm" onclick="window.closeModal('bhashyaPickerModal')" style="font-size:11px;">✖ Close</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:12px; color:#8a7a63; margin:0 0 12px 0;">Which traditional commentary would you like Acharya to break down line-by-line? (For a plain translation instead of a scholarly commentary breakdown, use 🌐 Native Meaning.)</p>
+      <p style="font-size:12px; color:#8a7a63; margin:0 0 12px 0;">Which traditional commentary would you like Acharya to break down line-by-line? (For a plain translation or a custom question instead of a scholarly commentary breakdown, use 🌐 Custom.)</p>
       <div id="bhashyaOptionsContainer"></div>
     </div>
   </div>
@@ -326,29 +329,9 @@
 
       <details style="margin-top:16px; border-top:1px solid var(--card-border); padding-top:12px;">
         <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red);">⚙️ Ask Acharya Settings</summary>
-        <div style="margin-top:10px;">
-          <div class="provider-key-row">
-            <label>📜 Shloka — fields to request (one per line)</label>
-            <textarea id="acharyaFieldsShloka" class="modal-input" style="height:90px; margin-top:4px; font-size:12px;"></textarea>
-          </div>
-          <div class="provider-key-row">
-            <label>⚙️ Word — fields to request (one per line)</label>
-            <textarea id="acharyaFieldsGrammar" class="modal-input" style="height:120px; margin-top:4px; font-size:12px;"></textarea>
-          </div>
-          <div class="provider-key-row">
-            <label>🔍 Bhashya — analysis depth</label>
-            <select id="acharyaBhashyaDepth" class="modal-input" style="margin-top:4px;">
-              <option value="summary">Summary</option>
-              <option value="sentence">Sentence-by-sentence</option>
-              <option value="word">Word-by-word</option>
-            </select>
-          </div>
-          <div class="provider-key-row">
-            <label>🌐 Native Meaning — fields to request (one per line)</label>
-            <textarea id="acharyaFieldsTranslate" class="modal-input" style="height:90px; margin-top:4px; font-size:12px;"></textarea>
-          </div>
-          <button class="btn-sm" style="width:100%;" onclick="window.resetAcharyaFieldsToDefault()">↺ Reset to Defaults</button>
-        </div>
+        <p style="font-size:11px; color:var(--muted-text); margin:8px 0;">Checkboxes are fixed wording (can't be mistyped). Use "Additional instructions" for anything not covered.</p>
+        <div id="acharyaSettingsContainer" style="margin-top:6px;"></div>
+        <button class="btn-sm" style="width:100%; margin-top:8px;" onclick="window.resetAcharyaFieldsToDefault()">↺ Reset to Defaults</button>
       </details>
 
       <details id="featureVisibilitySection" open style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
@@ -440,27 +423,27 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.9.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.11.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.9.0"></script>
-<script src="js/state.js?v=4.9.0"></script>
-<script src="js/dev.js?v=4.9.0"></script>
-<script src="js/utils.js?v=4.9.0"></script>
-<script src="js/modals.js?v=4.9.0"></script>
-<script src="js/transliteration.js?v=4.9.0"></script>
-<script src="js/audio.js?v=4.9.0"></script>
-<script src="js/filter.js?v=4.9.0"></script>
-<script src="js/search.js?v=4.9.0"></script>
-<script src="js/markers.js?v=4.9.0"></script>
-<script src="js/notes.js?v=4.9.0"></script>
-<script src="js/snippets.js?v=4.9.0"></script>
-<script src="js/actions.js?v=4.9.0"></script>
-<script src="js/voice.js?v=4.9.0"></script>
-<script src="js/screenshot.js?v=4.9.0"></script>
-<script src="js/ai.js?v=4.9.0"></script>
-<script src="js/render.js?v=4.9.0"></script>
-<script src="js/core.js?v=4.9.0"></script>
+<script src="js/config.js?v=4.11.0"></script>
+<script src="js/state.js?v=4.11.0"></script>
+<script src="js/dev.js?v=4.11.0"></script>
+<script src="js/utils.js?v=4.11.0"></script>
+<script src="js/modals.js?v=4.11.0"></script>
+<script src="js/transliteration.js?v=4.11.0"></script>
+<script src="js/audio.js?v=4.11.0"></script>
+<script src="js/filter.js?v=4.11.0"></script>
+<script src="js/search.js?v=4.11.0"></script>
+<script src="js/markers.js?v=4.11.0"></script>
+<script src="js/notes.js?v=4.11.0"></script>
+<script src="js/snippets.js?v=4.11.0"></script>
+<script src="js/actions.js?v=4.11.0"></script>
+<script src="js/voice.js?v=4.11.0"></script>
+<script src="js/screenshot.js?v=4.11.0"></script>
+<script src="js/ai.js?v=4.11.0"></script>
+<script src="js/render.js?v=4.11.0"></script>
+<script src="js/core.js?v=4.11.0"></script>
 
 <script>
   if (typeof console.log === "function") {

@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v3.1 (Feature Flags + Script Options)';
+window.DGE_VERSIONS['config.js'] = 'v4.0 (Checkbox presets + custom notes + Amarakosha/Vyakarana fields)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -10,59 +10,81 @@ const appConfig = {
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
   secretPasskey: "SHRI108",
-  version: "v4.8"
+  version: "v4.11"
 };
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
 // remove, rename, reorder, or temporarily disable (enabled:false) any of
-// the buttons shown in the selection tooltip. `fields` is the exact list
-// of things Acharya is asked to provide for that query type — end users
-// can also override these per-device from the ⚙️ Ask Acharya Settings
-// section in the 🔑 modal; this array is just the shipped default.
+// the buttons shown in the selection tooltip.
+//
+// `presets` are fixed-wording checkbox options (each has a stable `id` so
+// per-device on/off overrides persist correctly even if labels change) —
+// end users toggle these individually in ⚙️ Settings without being able
+// to typo/break the wording. `customNotes` is a free-text box layered on
+// top for anything not covered by the presets — editable, at the user's
+// own risk, same as before.
 // action: 'ask' calls window.askAcharya(event, id); 'bhashya' opens the
 // Bhashya picker. style: 'row' groups buttons side-by-side; 'full' renders
 // its own full-width button below a divider.
 const ACHARYA_QUERY_TYPES = [
   {
     id: 'shloka', icon: '📜', label: 'Shloka', style: 'row', action: 'ask', enabled: true,
-    fields: [
-      'Padachheda (word-by-word split)',
-      'Anvaya (prose word order)',
-      'Word Meaning',
-      "Bhavartha (overarching theme, strictly per Sri Madhvacharya's Dvaita philosophy)",
-      'Chandas / meter of this verse, if identifiable',
-      'Alankara (figures of speech), if any are present'
-    ]
+    presets: [
+      { id: 'padachheda', label: 'Padachheda (word-by-word split)', default: true },
+      { id: 'anvaya', label: 'Anvaya (prose word order)', default: true },
+      { id: 'wordmeaning', label: 'Word Meaning', default: true },
+      { id: 'bhavartha', label: "Bhavartha (overarching theme, per Sri Madhvacharya's Dvaita philosophy)", default: true },
+      { id: 'chandas', label: 'Chandas / meter of this verse, if identifiable', default: true },
+      { id: 'alankara', label: 'Alankara (figures of speech), if any are present', default: true },
+      { id: 'citations', label: 'Citations & exact quotes for scriptural references (AI-generated — verify independently)', default: false }
+    ],
+    customNotes: ''
   },
   {
     id: 'grammar', icon: '⚙️', label: 'Word', style: 'row', action: 'ask', enabled: true,
-    fields: [
-      'Word Meaning',
-      'Prakriti & Pratyaya',
-      'Dhatu & Gana (if this is a verb form)',
-      'Vibhakti & Linga (if this is a noun form)',
-      'Sandhi split, if applicable',
-      'Samasa Vigraha — and if it is a compound, the Vigrahavakya and Samasta-pada'
-    ]
+    presets: [
+      { id: 'wordmeaning', label: 'Word Meaning', default: true },
+      { id: 'prakritipratyaya', label: 'Prakriti & Pratyaya', default: true },
+      { id: 'dhatugana', label: 'Dhatu & Gana (if this is a verb form)', default: true },
+      { id: 'vibhaktilinga', label: 'Vibhakti & Linga (if this is a noun form)', default: true },
+      { id: 'sandhi', label: 'Sandhi split, if applicable', default: true },
+      { id: 'samasa', label: 'Samasa Vigraha — Vigrahavakya & Samasta-pada if a compound', default: true }
+    ],
+    customNotes: ''
   },
   {
     id: 'bhashya', icon: '🔍', label: 'Bhashya', style: 'row', action: 'bhashya', enabled: true,
-    // 'summary' | 'sentence' | 'word' — how deep the commentary analysis goes
-    depth: 'summary'
+    // 'summary' | 'sentence' | 'word' — how deep the core breakdown goes
+    depth: 'summary',
+    presets: [
+      { id: 'vyakarana', label: 'List grammatical (Vyakarana) aspects invoked, including relevant Ashtadhyayi sutras', default: true },
+      { id: 'amarakosha_verse', label: 'Amarakosha deep-dive: the actual verse(s) for key terms, plus neighboring verses for context', default: false },
+      { id: 'amarakosha_word', label: 'Word-by-word meaning for each word per Amarakosha', default: false },
+      { id: 'parallels', label: 'Similar/parallel verses or expressions elsewhere (any author) — list them', default: true },
+      { id: 'etymology_diff', label: 'Where commentators differ on etymology or interpretation, list the differences', default: true },
+      { id: 'citations', label: 'Citations & exact quotes (AI-generated — verify independently)', default: true }
+    ],
+    customNotes: ''
   },
   {
-    id: 'translate', icon: '🌐', label: 'Native Meaning', style: 'full', action: 'ask', enabled: true,
-    fields: [
-      'A natural translation into the selected language',
-      'A brief note on its philosophical significance per the Madhva Sampradaya (Dvaita philosophy)',
-      'If commentary text is available for this shloka, a short combined summary noting where the commentaries agree or differ'
-    ]
+    id: 'translate', icon: '🌐', label: 'Custom', style: 'full', action: 'ask', enabled: true,
+    // No fixed presets — this is the open-ended slot. customNotes below IS
+    // the entire instruction sent to Acharya for this button.
+    presets: [],
+    customNotes: 'Provide a natural translation into the selected language, plus a brief note on its philosophical significance per the Madhva Sampradaya (Dvaita philosophy).'
   }
 ];
 window.ACHARYA_QUERY_TYPES = ACHARYA_QUERY_TYPES;
 
+// Admin-only: whether Acharya may be instructed that it's allowed to
+// include a plain external hyperlink when it's confident one exists (e.g.
+// a well-known text repository). NOT exposed in the end-user Feature
+// Visibility panel — AI-generated URLs can be hallucinated, so this is a
+// deliberate admin call, made here in config.js only.
+window.AI_ALLOW_EXTERNAL_LINKS = false;
+
 // Multi-provider AI configuration. Each provider is only used if the person
-// has saved a key for it (via the 🔑 Key modal). Model names are left
+// has saved a key for it (via the ⚙️ Settings). Model names are left
 // user-editable rather than hardcoded, since exact current API model
 // strings change over time and get out of date fast.
 const AI_PROVIDERS = {
@@ -74,7 +96,7 @@ window.AI_PROVIDERS = AI_PROVIDERS;
 
 // Globally configurable feature visibility. Controls which per-shloka
 // indicators/controls and top-bar tools are shown. Can be overridden per
-// device via 🔑 → 🎛️ Feature Visibility (saved to localStorage), which
+// device via ⚙️ → 🎛️ Feature Visibility (saved to localStorage), which
 // layers on top of these shipped defaults the same way ACHARYA_QUERY_TYPES
 // and AI_PROVIDERS overrides work.
 const FEATURE_FLAGS = {

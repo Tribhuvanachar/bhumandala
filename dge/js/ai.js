@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v2.3 (Clarified Bhashya vs Native Meaning wording)';
+window.DGE_VERSIONS['ai.js'] = 'v3.0 (Checkbox preset UI + nested Ask Further)';
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -45,7 +45,7 @@ document.addEventListener('selectionchange', () => {
       if (isInsideAcharyaModal && modalAppendBtn) {
         window.modalSelectedText = txt;
         tooltip.style.display = 'none';
-        modalAppendBtn.style.display = 'block';
+        modalAppendBtn.style.display = 'flex';
         modalAppendBtn.style.top = `${Math.min(rect.bottom + 8, window.innerHeight - 50)}px`;
         modalAppendBtn.style.left = `${rect.left + (rect.width / 2)}px`;
       } else {
@@ -98,7 +98,7 @@ window.openKeyModal = function() {
   });
   const parallelToggle = document.getElementById('aiParallelModeToggle');
   if (parallelToggle) parallelToggle.checked = localStorage.getItem('user_ai_parallel_mode') === 'true';
-  dgeLoadAcharyaSettingsIntoUI();
+  dgeRenderAcharyaSettingsUI();
   dgeLoadFeatureFlagsIntoUI();
   if (typeof openModal === 'function') openModal('keyModal');
 };
@@ -197,63 +197,106 @@ window.resetFeatureFlagsToDefault = function() {
 // defaults in config.js.
 function dgeGetEffectiveQueryTypes() {
   const defaults = window.ACHARYA_QUERY_TYPES || [];
-  try {
-    const override = JSON.parse(localStorage.getItem('acharya_query_config') || 'null');
-    if (override && Array.isArray(override)) {
-      return defaults.map(def => {
-        const o = override.find(x => x.id === def.id);
-        if (!o) return def;
-        return {
-          ...def,
-          fields: Array.isArray(o.fields) ? o.fields : def.fields,
-          depth: o.depth || def.depth
-        };
-      });
-    }
-  } catch (e) { /* fall through to defaults */ }
-  return defaults;
+  let override = null;
+  try { override = JSON.parse(localStorage.getItem('acharya_query_config') || 'null'); } catch (e) { /* ignore */ }
+
+  return defaults.map(def => {
+    const o = (override && Array.isArray(override)) ? override.find(x => x.id === def.id) : null;
+    const presetOverrides = (o && o.presetOverrides) || {};
+    const presets = (def.presets || []).map(p => ({
+      ...p,
+      enabled: presetOverrides[p.id] !== undefined ? presetOverrides[p.id] : p.default
+    }));
+    return {
+      ...def,
+      presets,
+      customNotes: (o && o.customNotes !== undefined) ? o.customNotes : def.customNotes,
+      depth: (o && o.depth) || def.depth
+    };
+  });
 }
 window.dgeGetEffectiveQueryTypes = dgeGetEffectiveQueryTypes;
 
-function dgeFieldsToTextareaValue(fields) {
-  return Array.isArray(fields) ? fields.join('\n') : '';
+// Builds the actual numbered "provide:" list sent to Acharya for a given
+// (effective, override-aware) type config — enabled presets first (fixed
+// wording, can't be typo'd), then the free-text custom notes appended
+// last if present.
+function dgeBuildFieldsForType(typeConfig) {
+  const out = (typeConfig.presets || []).filter(p => p.enabled !== false).map(p => p.label);
+  if (typeConfig.customNotes && typeConfig.customNotes.trim()) {
+    out.push(typeConfig.customNotes.trim());
+  }
+  return out;
 }
-function dgeTextareaValueToFields(value) {
-  return value.split('\n').map(s => s.trim()).filter(Boolean);
-}
+window.dgeBuildFieldsForType = dgeBuildFieldsForType;
 
-function dgeLoadAcharyaSettingsIntoUI() {
-  const q = dgeGetEffectiveQueryTypes();
-  const byId = id => q.find(x => x.id === id) || {};
-  const shlokaEl = document.getElementById('acharyaFieldsShloka');
-  const grammarEl = document.getElementById('acharyaFieldsGrammar');
-  const depthEl = document.getElementById('acharyaBhashyaDepth');
-  const translateEl = document.getElementById('acharyaFieldsTranslate');
-  if (shlokaEl) shlokaEl.value = dgeFieldsToTextareaValue(byId('shloka').fields);
-  if (grammarEl) grammarEl.value = dgeFieldsToTextareaValue(byId('grammar').fields);
-  if (depthEl) depthEl.value = byId('bhashya').depth || 'summary';
-  if (translateEl) translateEl.value = dgeFieldsToTextareaValue(byId('translate').fields);
+// Renders the entire "⚙️ Ask Acharya Settings" body from config — a
+// checkbox per preset (fixed label, can't be mistyped) plus one free-text
+// "additional instructions" box per type. Bhashya also gets its depth
+// selector above its checkboxes.
+function dgeRenderAcharyaSettingsUI() {
+  const container = document.getElementById('acharyaSettingsContainer');
+  if (!container) return;
+  const types = dgeGetEffectiveQueryTypes();
+
+  let html = '';
+  types.forEach(t => {
+    html += `<div class="provider-key-row">`;
+    html += `<label>${t.icon} ${t.label} — fields to include</label>`;
+
+    if (t.id === 'bhashya') {
+      html += `<div style="margin:8px 0;">`;
+      html += `<div style="font-size:11px; font-weight:700; color:var(--muted-text); margin-bottom:4px;">Analysis depth</div>`;
+      html += `<select class="modal-input" data-acharya-depth="${t.id}" style="margin:0;">`;
+      ['summary', 'sentence', 'word'].forEach(d => {
+        const dLabel = d === 'summary' ? 'Summary' : d === 'sentence' ? 'Sentence-by-sentence' : 'Word-by-word';
+        html += `<option value="${d}" ${t.depth === d ? 'selected' : ''}>${dLabel}</option>`;
+      });
+      html += `</select></div>`;
+    }
+
+    (t.presets || []).forEach(p => {
+      html += `<label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:500; margin:6px 0; align-items:flex-start;">
+        <input type="checkbox" data-acharya-preset="${t.id}::${p.id}" ${p.enabled !== false ? 'checked' : ''} style="margin:2px 0 0 0; width:14px; height:14px; flex-shrink:0;">
+        <span>${p.label}</span>
+      </label>`;
+    });
+
+    html += `<div style="font-size:11px; font-weight:700; color:var(--muted-text); margin-top:8px;">Additional instructions${t.id === 'translate' ? ' (this IS the whole instruction for Custom)' : ' (optional, free text)'}</div>`;
+    html += `<textarea class="modal-input" data-acharya-notes="${t.id}" style="height:70px; margin-top:4px; font-size:12px;">${(t.customNotes || '').replace(/</g, '&lt;')}</textarea>`;
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
 }
 
 window.resetAcharyaFieldsToDefault = function() {
   localStorage.removeItem('acharya_query_config');
-  dgeLoadAcharyaSettingsIntoUI();
+  dgeRenderAcharyaSettingsUI();
   if (typeof showToast === 'function') showToast('Ask Acharya settings reset to defaults.');
 };
 
 function dgeSaveAcharyaSettingsFromUI() {
-  const shlokaEl = document.getElementById('acharyaFieldsShloka');
-  const grammarEl = document.getElementById('acharyaFieldsGrammar');
-  const depthEl = document.getElementById('acharyaBhashyaDepth');
-  const translateEl = document.getElementById('acharyaFieldsTranslate');
-  if (!shlokaEl && !grammarEl && !depthEl && !translateEl) return;
+  const container = document.getElementById('acharyaSettingsContainer');
+  if (!container) return;
 
-  const override = [
-    { id: 'shloka', fields: shlokaEl ? dgeTextareaValueToFields(shlokaEl.value) : undefined },
-    { id: 'grammar', fields: grammarEl ? dgeTextareaValueToFields(grammarEl.value) : undefined },
-    { id: 'bhashya', depth: depthEl ? depthEl.value : undefined },
-    { id: 'translate', fields: translateEl ? dgeTextareaValueToFields(translateEl.value) : undefined }
-  ];
+  const types = window.ACHARYA_QUERY_TYPES || [];
+  const override = types.map(t => {
+    const presetOverrides = {};
+    container.querySelectorAll(`input[data-acharya-preset^="${t.id}::"]`).forEach(cb => {
+      const presetId = cb.dataset.acharyaPreset.split('::')[1];
+      presetOverrides[presetId] = cb.checked;
+    });
+    const notesEl = container.querySelector(`textarea[data-acharya-notes="${t.id}"]`);
+    const depthEl = container.querySelector(`select[data-acharya-depth="${t.id}"]`);
+    return {
+      id: t.id,
+      presetOverrides,
+      customNotes: notesEl ? notesEl.value : undefined,
+      depth: depthEl ? depthEl.value : undefined
+    };
+  });
+
   localStorage.setItem('acharya_query_config', JSON.stringify(override));
   renderAcharyaQueryButtons();
 }
@@ -292,7 +335,7 @@ async function dgeCallGemini(apiKey, model, systemPrompt, history) {
 }
 
 async function dgeCallOpenAI(apiKey, model, systemPrompt, history) {
-  if (!model) throw new Error('No OpenAI model set — add one in 🔑 Key settings (e.g. a current GPT model name from your OpenAI account).');
+  if (!model) throw new Error('No OpenAI model set — add one in ⚙️ Settings (e.g. a current GPT model name from your OpenAI account).');
   const messages = [{ role: 'system', content: systemPrompt }, ...history.map(m => ({ role: m.role, content: m.content }))];
   const res = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
@@ -305,7 +348,7 @@ async function dgeCallOpenAI(apiKey, model, systemPrompt, history) {
 }
 
 async function dgeCallClaude(apiKey, model, systemPrompt, history) {
-  if (!model) throw new Error('No Claude model set — add one in 🔑 Key settings (e.g. a current Claude model name from your Anthropic console).');
+  if (!model) throw new Error('No Claude model set — add one in ⚙️ Settings (e.g. a current Claude model name from your Anthropic console).');
   const messages = history.map(m => ({ role: m.role, content: m.content }));
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -419,7 +462,7 @@ async function dgeRunAcharyaQuery(promptText) {
 
   if (providers.length === 0) {
     if (loadingEl) loadingEl.style.display = 'none';
-    if (resultEl) resultEl.innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>Please add at least one AI key via the Key Manager (🔑) in the top toolbar.`;
+    if (resultEl) resultEl.innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>Please add at least one AI key via the Settings (⚙️) in the top toolbar.`;
     dgeShowFollowUpBox(false);
     return;
   }
@@ -450,7 +493,7 @@ async function dgeRunAcharyaQuery(promptText) {
     if (resultEl) {
       const isAuth = document.body.classList.contains('is-authorized');
       resultEl.innerHTML = isAuth
-        ? `<span style="color:var(--accent-red); font-weight:bold;">All configured providers failed.</span> Check the API key(s) and model name(s) in 🔑, and the browser console for details.`
+        ? `<span style="color:var(--accent-red); font-weight:bold;">All configured providers failed.</span> Check the API key(s) and model name(s) in ⚙️ Settings, and the browser console for details.`
         : `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>The traditional text analysis engine is currently unavailable. Please try again later.`;
     }
     dgeShowFollowUpBox(true);
@@ -516,7 +559,7 @@ window.askAcharya = async function(e, type, payload) {
     const loading = document.getElementById('acharyaLoading');
     const result = document.getElementById('acharyaResult');
     if (loading) loading.style.display = 'none';
-    if (result) result.innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>Please configure at least one AI key via the Key Manager (🔑) in the top toolbar.`;
+    if (result) result.innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">आचार्यः ध्याने मग्नः अस्ति (Acharya is meditating).</span><br><br>Please configure at least one AI key via the Settings (⚙️) in the top toolbar.`;
     dgeShowFollowUpBox(false);
     return;
   }
@@ -560,14 +603,18 @@ window.askAcharya = async function(e, type, payload) {
   const effectiveTypes = dgeGetEffectiveQueryTypes();
   const typeConfig = effectiveTypes.find(q => q.id === type);
 
+  const externalLinksNote = window.AI_ALLOW_EXTERNAL_LINKS
+    ? ' If you are confident a specific external resource exists for this (e.g. a well-known Sanskrit text repository), you may include one plain hyperlink.'
+    : ' Do not include any hyperlinks or URLs.';
+
   let promptText = "";
   if (type === 'shloka' || type === 'grammar') {
-      const fieldsList = (typeConfig && typeConfig.fields && typeConfig.fields.length) ? typeConfig.fields : ['Word Meaning'];
+      const fieldsList = dgeBuildFieldsForType(typeConfig || {});
       const persona = type === 'shloka'
         ? "You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta)."
         : "You are a traditional Vyakarana Acharya.";
-      const fieldsPrompt = fieldsList.map((f, i) => `${i + 1}. ${f}`).join('\n');
-      promptText = `${persona} For the text: "${text}", provide:\n${fieldsPrompt}\nFormat using clean markdown headings.`;
+      const fieldsPrompt = (fieldsList.length ? fieldsList : ['Word Meaning']).map((f, i) => `${i + 1}. ${f}`).join('\n');
+      promptText = `${persona} For the text: "${text}", provide:\n${fieldsPrompt}\nFormat using clean markdown headings.${externalLinksNote}`;
   } else if (type === 'commentary') {
       const depth = (typeConfig && typeConfig.depth) || 'summary';
       const depthInstruction = {
@@ -575,6 +622,9 @@ window.askAcharya = async function(e, type, payload) {
         sentence: 'Provide a sentence-by-sentence breakdown and explanation.',
         word: 'Provide a detailed word-by-word meaning and analysis.'
       }[depth] || 'Provide a concise overall summary of the philosophical Siddhanta.';
+
+      const extraFields = dgeBuildFieldsForType(typeConfig || {});
+      const extraFieldsPrompt = extraFields.length ? extraFields.map((f, i) => `${i + 4}. ${f}`).join('\n') + '\n' : '';
 
       if (payload && payload.commentaryText) {
           promptText = `You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta). Analyze ONLY the supplied commentary text provided below. Do NOT hallucinate external commentaries.
@@ -587,21 +637,48 @@ Highlighted Fragment: "${payload.selectedText}"
 Provide a detailed scholarly breakdown in clean markdown:
 1. ${depthInstruction}
 2. Pramana & Citation Expansion: Identify every scriptural quote (Shruti, Smriti, Gita, Amarakosha, etc.) cited in this text. Provide the FULL Sanskrit quote, source attribution, and precise meaning.
-3. Philosophical Siddhanta strictly according to Sri Madhvacharya's Dvaita philosophy derived from this commentary.`;
+3. Philosophical Siddhanta strictly according to Sri Madhvacharya's Dvaita philosophy derived from this commentary.
+${extraFieldsPrompt}${externalLinksNote}`;
       } else {
-          promptText = `You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta). Analyze this commentary excerpt: "${text}". ${depthInstruction} Also provide Purvapaksha & Siddhanta (strictly according to Sri Madhvacharya), and Pramana/Citations expanded with full quotes. Format using clean markdown.`;
+          promptText = `You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta). Analyze this commentary excerpt: "${text}". ${depthInstruction} Also provide Purvapaksha & Siddhanta (strictly according to Sri Madhvacharya), and Pramana/Citations expanded with full quotes.
+${extraFieldsPrompt}Format using clean markdown.${externalLinksNote}`;
       }
   } else if (type === 'translate') {
-      const fieldsList = (typeConfig && typeConfig.fields && typeConfig.fields.length) ? typeConfig.fields : ['A natural translation'];
-      const fieldsPrompt = fieldsList.map((f, i) => `${i + 1}. ${f}`).join('\n');
-      promptText = `Translate and explain the meaning of this Sanskrit text: "${text}" into ${targetLang}. Provide:\n${fieldsPrompt}\nFormat cleanly using markdown.`;
+      const fieldsList = dgeBuildFieldsForType(typeConfig || {});
+      const fieldsPrompt = (fieldsList.length ? fieldsList : ['A natural translation']).map((f, i) => `${i + 1}. ${f}`).join('\n');
+      promptText = `For this Sanskrit text: "${text}" (target language: ${targetLang} where relevant), provide:\n${fieldsPrompt}\nFormat cleanly using markdown.${externalLinksNote}`;
   }
 
   // Fresh top-level question — start a new conversation thread.
   window.acharyaHistory = [];
-  window.acharyaSystemPrompt = "You are Acharya, embedded in a Vedic text reading app. If the user asks a follow-up question, continue this conversation naturally and stay consistent with your earlier answers, in the philosophical tradition of Sri Madhvacharya (Dvaita Vedanta) unless asked otherwise.";
+  window.acharyaSystemPrompt = "You are Acharya, embedded in a Vedic text reading app. If the user asks a follow-up question, continue this conversation naturally and stay consistent with your earlier answers, in the philosophical tradition of Sri Madhvacharya (Dvaita Vedanta) unless asked otherwise. IMPORTANT FORMATTING RULE: never use LaTeX or math notation of any kind (no $...$, \\sqrt{}, \\text{}, \\rightarrow, or similar). This app only renders plain text and basic markdown (headings, bold, italic, lists) — LaTeX shows up as broken literal text. Write all derivations in plain prose instead: e.g. write 'root labh (bhvādi-gaṇa, 1st class)' instead of '$\\sqrt{\\text{labh}}$', and 'X + Y becomes Z' instead of an arrow/equation.";
 
   await dgeRunAcharyaQuery(promptText);
+};
+
+// Nested Ask Acharya: selecting text INSIDE Acharya's own analysis offers
+// this alongside "Add to Notes". Rather than reusing the Shloka/Word/
+// Bhashya buttons (which are built around the ORIGINAL verse, not
+// Acharya's own explanatory prose), this pre-fills the existing follow-up
+// box with the selection — the follow-up mechanism already carries the
+// full conversation history, so the AI has real context for what's being
+// asked about. Pre-filling (not auto-sending) lets the user edit the
+// question before it goes out.
+window.askFurtherAboutSelection = function(e) {
+  if (e) e.preventDefault();
+  const modalBtn = document.getElementById('modalAppendBtn');
+  if (modalBtn) modalBtn.style.display = 'none';
+  if (window.getSelection) window.getSelection().removeAllRanges();
+
+  const selectedText = window.modalSelectedText;
+  if (!selectedText) return;
+
+  const input = document.getElementById('acharyaFollowUpInput');
+  if (input) {
+    input.value = `Please go deeper on this part: "${selectedText}"`;
+    input.focus();
+  }
+  if (typeof showToast === 'function') showToast('Edit the question if needed, then tap Ask.');
 };
 
 window.sendAcharyaFollowUp = async function() {

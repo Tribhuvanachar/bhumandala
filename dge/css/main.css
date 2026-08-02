@@ -149,7 +149,7 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .shloka-list { display: flex; flex-direction: column; gap: 10px; }
 .shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-wrap: anywhere; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), transform var(--t-fast) var(--ease); scroll-margin-top: calc(60px + env(safe-area-inset-top) + 14px); }
 .shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left: 4px solid var(--accent-red); }
-.shloka-card:active { transform: scale(0.99); }
+.shloka-card:active { background: var(--card-active); }
 
 .shloka-main-row { display: flex; width: 100%; gap: 10px; align-items: flex-start; }
 .shloka-status-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
@@ -270,13 +270,17 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 .tooltip-btn { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.05); padding: 8px 14px; border-radius: var(--radius-xs); cursor: pointer; font-weight: 700; font-size: 12px; white-space: nowrap; transition: background var(--t-fast) var(--ease); }
 .tooltip-btn:hover { background: rgba(255,255,255,0.25); }
 
-/* Floating Selection Button inside Modal */
+/* Floating Selection Toolbar inside Modal — Add to Notes / Ask Further */
 #modalAppendBtn {
-  display: none; position: fixed; z-index: 11001; background: var(--accent-red); color: white;
-  border: none; padding: 8px 16px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 700;
-  box-shadow: 0 6px 16px var(--accent-glow); cursor: pointer; transform: translateX(-50%);
-  animation: popIn var(--t-fast) var(--ease);
+  display: none; position: fixed; z-index: 11001; gap: 6px;
+  transform: translateX(-50%); animation: popIn var(--t-fast) var(--ease);
 }
+#modalAppendBtn button {
+  background: var(--accent-red); color: white; border: none; padding: 8px 14px;
+  border-radius: var(--radius-pill); font-size: 12px; font-weight: 700;
+  box-shadow: 0 6px 16px var(--accent-glow); cursor: pointer; white-space: nowrap;
+}
+#modalAppendBtn button.ask-further-btn { background: #333; box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
 
 /* Custom Toast */
 #toastMsg {
