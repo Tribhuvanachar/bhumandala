@@ -135,7 +135,7 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 /* Reading & List Cards */
 .reading-card-wrap { position: sticky; top: calc(60px + env(safe-area-inset-top)); z-index: 150; background: var(--bg-main); padding-top: 2px; }
 .reading-card-toggle { position: absolute; top: 8px; right: 8px; z-index: 2; width: 26px; height: 26px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--muted-text); font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform var(--t-fast) var(--ease); }
-.reading-card-wrap.minimized .reading-card { max-height: 44px; overflow: hidden; padding: 11px 44px 11px 18px; text-align: left; font-size: calc(var(--font-multiplier) * 0.85); white-space: nowrap; text-overflow: ellipsis; }
+.reading-card-wrap.minimized .reading-card { max-height: 44px; overflow: hidden; padding: 11px 44px 11px 18px; text-align: left; font-size: calc(var(--font-multiplier) * 0.85); }
 .reading-card-wrap.minimized .reading-card::before, .reading-card-wrap.minimized .reading-card::after { display: none; }
 .reading-card-wrap.minimized .reading-card-toggle { transform: rotate(180deg); }
 

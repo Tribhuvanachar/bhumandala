@@ -2,7 +2,7 @@
 // js/audio.js
 // Maps to F-004 (Audio Engine) & F-013 (Offline Cache)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['audio.js'] = 'v2.1 (Length-weighted sync timing)';
+window.DGE_VERSIONS['audio.js'] = 'v2.2 (Minimized-view auto-scroll to active word)';
 
 function formatTime(s) { 
   if (isNaN(s)) return "0:00.000"; 
@@ -361,7 +361,21 @@ function updateReadingCardSyncHighlight() {
   if (prev) prev.classList.remove('active');
 
   const next = readingCard.querySelector(`.sync-word[data-widx="${activeIdx}"]`);
-  if (next) next.classList.add('active');
+  if (next) {
+    next.classList.add('active');
+
+    // When minimized (a short fixed-height strip with overflow hidden),
+    // the highlighted word can end up several lines down and clipped out
+    // of view. Scroll the card's own content so it stays visible instead
+    // of only ever showing the first line.
+    const wrap = document.getElementById('readingCardWrap');
+    if (wrap && wrap.classList.contains('minimized')) {
+      const cardRect = readingCard.getBoundingClientRect();
+      const wordRect = next.getBoundingClientRect();
+      const delta = (wordRect.top - cardRect.top) - (readingCard.clientHeight / 2) + (wordRect.height / 2);
+      readingCard.scrollTo({ top: Math.max(0, readingCard.scrollTop + delta), behavior: 'smooth' });
+    }
+  }
 }
 window.wrapReadingCardWordsForSync = wrapReadingCardWordsForSync;
 window.updateReadingCardSyncHighlight = updateReadingCardSyncHighlight;

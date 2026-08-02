@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v2.2 (Selection-aware Shloka/Word/Native logic)';
+window.DGE_VERSIONS['ai.js'] = 'v2.3 (Clarified Bhashya vs Native Meaning wording)';
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -365,7 +365,7 @@ window.openBhashyaPicker = function(e) {
 
   container.innerHTML += `
     <button class="bhashya-picker-btn" style="background:transparent; border-style:dashed;" onpointerdown="window.executeBhashyaAnalysis('general')">
-       <span>🌐 General Acharya Analysis (External Knowledge)</span>
+       <span>📖 Commentary-Style Analysis (No specific source)</span>
        <span style="font-size:11px; opacity:0.6;">Analyze ➔</span>
     </button>`;
 
