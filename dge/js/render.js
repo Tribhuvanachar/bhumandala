@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v2.0 (Status/Doubt chips + Notes search)';
+window.DGE_VERSIONS['render.js'] = 'v3.0 (Inline chip toggles + native-script search fix + copy button)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -29,12 +29,68 @@ function setCommentaryView(view, el) {
   }
 }
 
-function highlightText(text, query) {
-  if (!query) return text;
-  const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const regex = new RegExp(`(${escapedQuery})(?![^<]*>|[^<>]*<\\/)`, 'gi');
-  return text.replace(regex, '<mark class="search-match">$1</mark>');
+// Builds a case-insensitive regex source from a query. For IAST, each
+// plain ASCII letter that has a diacritic'd counterpart (a/ā, i/ī, u/ū,
+// r/ṛ, n/ṅ/ñ/ṇ, t/ṭ, d/ḍ, s/ś/ṣ, m/ṃ, h/ḥ) becomes a character class
+// matching either form — there's no way to type diacritics on a normal
+// keyboard, so a plain "uvaca" needs to match displayed "uvāca". This
+// covers both "does it match" and "highlight the match" in one regex,
+// rather than stripping accents (which finds the match but can't then
+// highlight it back in the accented text).
+const IAST_TOLERANT = { a: 'aā', i: 'iī', u: 'uū', r: 'rṛṝ', l: 'lḷ', n: 'nṅñṇ', t: 'tṭ', d: 'dḍ', s: 'sśṣ', m: 'mṃ', h: 'hḥ' };
+
+function dgeBuildSearchPattern(query) {
+  let escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  if (window.activeScript === 'iast') {
+    escaped = escaped.replace(/[aiurlndtsmh]/gi, (ch) => {
+      const variants = IAST_TOLERANT[ch.toLowerCase()];
+      return variants ? `[${variants}${variants.toUpperCase()}]` : ch;
+    });
+  }
+  return escaped;
 }
+
+function dgeTextMatchesQuery(text, pattern) {
+  if (!pattern) return false;
+  try {
+    return new RegExp(pattern, 'i').test(text || '');
+  } catch (e) {
+    return (text || '').toLowerCase().includes(pattern.toLowerCase());
+  }
+}
+
+function highlightText(text, pattern) {
+  if (!pattern) return text;
+  try {
+    const regex = new RegExp(`(${pattern})(?![^<]*>|[^<>]*<\\/)`, 'gi');
+    return text.replace(regex, '<mark class="search-match">$1</mark>');
+  } catch (e) {
+    return text;
+  }
+}
+
+window.copyShlokaText = async function(id) {
+  const text = typeof getText === 'function' ? getText(id).replace(/<[^>]*>/g, '') : '';
+  if (!text) return;
+  try {
+    if (navigator.clipboard) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    if (typeof showToast === 'function') showToast(`Shloka ${id} copied to clipboard.`);
+  } catch (e) {
+    console.error('Copy failed', e);
+    if (typeof showToast === 'function') showToast('Could not copy this text.');
+  }
+};
 
 function renderList() {
   if(!stotraData) return;
@@ -48,7 +104,8 @@ function renderList() {
   
   const searchInput = document.getElementById('searchInput');
   const searchScope = document.getElementById('searchScope');
-  const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+  const rawQuery = searchInput ? searchInput.value.trim() : '';
+  const pattern = dgeBuildSearchPattern(rawQuery);
   const scope = searchScope ? searchScope.value : 'all';
   const total = stotraData.metadata.totalShlokas || Object.keys(stotraData.shlokas).length;
 
@@ -60,27 +117,37 @@ function renderList() {
     const shloka = stotraData.shlokas[i];
     if (!shloka) continue;
 
+    // Transliterate once per shloka, to whatever script is currently
+    // active, and reuse for BOTH search matching and display — this is
+    // the actual text on screen, which is what a search should match.
+    const mulaDisplayText = getText(i);
+
+    const convertedCommentaries = {};
+    if (shloka.commentaries) {
+      Object.entries(shloka.commentaries).forEach(([cKey, cText]) => {
+        convertedCommentaries[cKey] = typeof applyTransliteration === 'function' ? applyTransliteration(cText, activeScript) : cText;
+      });
+    }
+
     let forceCommentaries = [];
     let hasMatch = false;
 
-    if(query) {
+    if(rawQuery) {
       if(scope === 'all') {
-        hasMatch = i.toString().includes(query) || shloka.sa.toLowerCase().includes(query);
-        if (shloka.commentaries) {
-          Object.entries(shloka.commentaries).forEach(([cKey, cText]) => {
-            if (cText.toLowerCase().includes(query)) {
-              forceCommentaries.push(cKey);
-              hasMatch = true;
-            }
-          });
-        }
+        hasMatch = i.toString().includes(rawQuery) || dgeTextMatchesQuery(mulaDisplayText, pattern);
+        Object.entries(convertedCommentaries).forEach(([cKey, cText]) => {
+          if (dgeTextMatchesQuery(cText, pattern)) {
+            forceCommentaries.push(cKey);
+            hasMatch = true;
+          }
+        });
       } else if(scope === 'mula') {
-        hasMatch = i.toString().includes(query) || shloka.sa.toLowerCase().includes(query);
+        hasMatch = i.toString().includes(rawQuery) || dgeTextMatchesQuery(mulaDisplayText, pattern);
       } else if(scope === 'notes') {
         const noteArr = (typeof notes !== 'undefined' && notes[i]) ? notes[i] : [];
-        hasMatch = noteArr.some(n => (n.text || '').toLowerCase().includes(query));
-      } else if(shloka.commentaries && shloka.commentaries[scope]) {
-        hasMatch = shloka.commentaries[scope].toLowerCase().includes(query);
+        hasMatch = noteArr.some(n => dgeTextMatchesQuery(n.text || '', pattern));
+      } else if(convertedCommentaries[scope]) {
+        hasMatch = dgeTextMatchesQuery(convertedCommentaries[scope], pattern);
         if(hasMatch) forceCommentaries.push(scope);
       }
       if(!hasMatch) continue;
@@ -93,6 +160,7 @@ function renderList() {
     let cardActionsHtml = '';
     
     if (document.body.classList.contains('is-authorized')) {
+      const flags = (typeof dgeGetEffectiveFeatureFlags === 'function') ? dgeGetEffectiveFeatureFlags() : {};
       const m = (typeof marks !== 'undefined') ? marks[i] : null;
       const isFav = !!(m && m.fav);
       const status = m ? m.status : null;
@@ -100,16 +168,19 @@ function renderList() {
       const noteCount = (typeof notes !== 'undefined' && notes[i]) ? notes[i].length : 0;
       const snipCount = (typeof snippets !== 'undefined' && snippets[i]) ? snippets[i].length : 0;
 
-      let chips = '';
-      if (isFav) chips += `<span class="status-chip is-fav" title="Favorite">★</span>`;
-      if (status === 'pending') chips += `<span class="status-chip is-pending" title="Pending">○</span>`;
-      if (status === 'practice') chips += `<span class="status-chip is-practice" title="Needs practice">🚧</span>`;
-      if (status === 'done') chips += `<span class="status-chip is-done" title="Done">✅</span>`;
-      if (isDoubt) chips += `<span class="status-chip is-doubt" title="Has a doubt">❓</span>`;
-      if (noteCount > 0) chips += `<span class="status-chip has-note" title="${noteCount} note(s)">📝 ${noteCount}</span>`;
-      if (snipCount > 0) chips += `<span class="status-chip" title="${snipCount} saved snippet(s)">🎯 ${snipCount}</span>`;
+      const statusIcons = { pending: '○', practice: '🚧', done: '✅' };
+      const statusIcon = status ? statusIcons[status] : '○';
+      const statusClass = status ? ` active-status-${status}` : '';
 
-      cardActionsHtml = `<div class="card-actions">${chips}<button class="btn-icon" title="Favorite, status, doubt, note, snippets, share…" onclick="event.stopPropagation(); if(typeof openActionsSheet==='function') openActionsSheet(${i})">⋯</button></div>`;
+      let rowHtml = '';
+      if (flags.showFavorite) rowHtml += `<button class="chip-toggle${isFav ? ' active-fav' : ''}" title="Favorite" onclick="event.stopPropagation(); window.toggleFavorite(${i})">${isFav ? '★' : '☆'}</button>`;
+      if (flags.showStatus) rowHtml += `<button class="chip-toggle status-picker-btn${statusClass}" title="Set status" onclick="window.openStatusPicker(${i}, event)">${statusIcon}</button>`;
+      if (flags.showDoubt) rowHtml += `<button class="chip-toggle${isDoubt ? ' active-doubt' : ''}" title="Doubt" onclick="event.stopPropagation(); window.toggleDoubt(${i})">❓</button>`;
+      if (flags.showNotes && noteCount > 0) rowHtml += `<span class="status-chip has-note" title="${noteCount} note(s)">📝 ${noteCount}</span>`;
+      if (flags.showSnippetTools && snipCount > 0) rowHtml += `<span class="status-chip" title="${snipCount} saved snippet(s)">🎯 ${snipCount}</span>`;
+      rowHtml += `<button class="btn-icon" style="margin-left:auto;" title="Notes, snippets, share, download" onclick="event.stopPropagation(); if(typeof openActionsSheet==='function') openActionsSheet(${i})">⋯</button>`;
+
+      cardActionsHtml = `<div class="shloka-status-row">${rowHtml}</div>`;
     }
 
     let commentaryHtml = '';
@@ -120,18 +191,19 @@ function renderList() {
 
         if (isSelected || isForcedBySearch) {
           const name = stotraData.metadata.availableCommentaries[cKey] || cKey;
-          let convertedText = typeof applyTransliteration === 'function' ? applyTransliteration(cText, activeScript) : cText;
+          let convertedText = convertedCommentaries[cKey];
           let convertedName = typeof applyTransliteration === 'function' ? applyTransliteration(name, activeScript) : name;
-          commentaryHtml += `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}</div>${highlightText(convertedText, query)}</div>`;
+          commentaryHtml += `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}</div>${highlightText(convertedText, pattern)}</div>`;
         }
       });
     }
 
     c.innerHTML = `
+      ${cardActionsHtml}
       <div class="shloka-main-row">
         <div class="shloka-num">${i}</div>
-        <div class="shloka-text" onclick="if(typeof playShloka==='function') playShloka(${i})">${highlightText(getText(i), query)}</div>
-        ${cardActionsHtml}
+        <div class="shloka-text" onclick="if(typeof playShloka==='function') playShloka(${i})">${highlightText(mulaDisplayText, pattern)}</div>
+        <button class="btn-icon copy-shloka-btn" title="Copy shloka text" onclick="event.stopPropagation(); if(typeof copyShlokaText==='function') copyShlokaText(${i})">📋</button>
       </div>
       ${commentaryHtml}`;
     listEl.appendChild(c);
@@ -139,7 +211,7 @@ function renderList() {
 
   window.searchMatches = Array.from(document.querySelectorAll('.search-match'));
   const navContainer = document.getElementById('searchNavigator');
-  if (query && window.searchMatches.length > 0 && navContainer) {
+  if (rawQuery && window.searchMatches.length > 0 && navContainer) {
     navContainer.style.display = 'flex';
     navSearch(1);
   } else if (navContainer) {

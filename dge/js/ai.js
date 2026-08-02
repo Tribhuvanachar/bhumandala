@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v2.0 (Multi-Provider + Follow-up Chat)';
+window.DGE_VERSIONS['ai.js'] = 'v2.1 (Feature-flag settings UI)';
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -99,6 +99,7 @@ window.openKeyModal = function() {
   const parallelToggle = document.getElementById('aiParallelModeToggle');
   if (parallelToggle) parallelToggle.checked = localStorage.getItem('user_ai_parallel_mode') === 'true';
   dgeLoadAcharyaSettingsIntoUI();
+  dgeLoadFeatureFlagsIntoUI();
   if (typeof openModal === 'function') openModal('keyModal');
 };
 
@@ -119,9 +120,49 @@ window.saveAllApiKeys = function() {
   if (parallelToggle) localStorage.setItem('user_ai_parallel_mode', parallelToggle.checked ? 'true' : 'false');
 
   dgeSaveAcharyaSettingsFromUI();
+  dgeSaveFeatureFlagsFromUI();
 
   window.closeKeyModal();
   if (typeof showToast === 'function') showToast('AI settings saved.');
+};
+
+// --- Feature Visibility (🎛️) ---------------------------------------
+
+const FEATURE_FLAG_CHECKBOX_IDS = {
+  showFavorite: 'flagShowFavorite',
+  showStatus: 'flagShowStatus',
+  showDoubt: 'flagShowDoubt',
+  showNotes: 'flagShowNotes',
+  showSnippetTools: 'flagShowSnippetTools',
+  showThemePicker: 'flagShowThemePicker',
+  showScriptPicker: 'flagShowScriptPicker'
+};
+
+function dgeLoadFeatureFlagsIntoUI() {
+  const flags = (typeof dgeGetEffectiveFeatureFlags === 'function') ? dgeGetEffectiveFeatureFlags() : (window.FEATURE_FLAGS || {});
+  Object.entries(FEATURE_FLAG_CHECKBOX_IDS).forEach(([flagKey, elId]) => {
+    const el = document.getElementById(elId);
+    if (el) el.checked = flags[flagKey] !== false;
+  });
+}
+
+function dgeSaveFeatureFlagsFromUI() {
+  const override = {};
+  let any = false;
+  Object.entries(FEATURE_FLAG_CHECKBOX_IDS).forEach(([flagKey, elId]) => {
+    const el = document.getElementById(elId);
+    if (el) { override[flagKey] = el.checked; any = true; }
+  });
+  if (!any) return;
+  localStorage.setItem('feature_flags_override', JSON.stringify(override));
+  if (typeof applyFeatureFlags === 'function') applyFeatureFlags();
+}
+
+window.resetFeatureFlagsToDefault = function() {
+  localStorage.removeItem('feature_flags_override');
+  dgeLoadFeatureFlagsIntoUI();
+  if (typeof applyFeatureFlags === 'function') applyFeatureFlags();
+  if (typeof showToast === 'function') showToast('Feature visibility reset to defaults.');
 };
 
 // Resolves the ACHARYA_QUERY_TYPES list with any per-device overrides (from

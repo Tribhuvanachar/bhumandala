@@ -6,7 +6,7 @@
 // AI append, etc.) can be shared or deleted on its own.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['notes.js'] = 'v2.0 (Structured Entries)';
+window.DGE_VERSIONS['notes.js'] = 'v2.1 (Copy button)';
 
 function openNoteModal() {
   if (typeof openModal === 'function') openModal('noteModal');
@@ -78,6 +78,29 @@ window.deleteNoteEntry = function(id, entryIndex) {
   if (typeof renderList === 'function') renderList();
   if (typeof renderActionsSheetContent === 'function') renderActionsSheetContent(id);
   if (typeof showToast === 'function') showToast('Note entry deleted.');
+};
+
+window.copyNoteEntry = async function(id, entryIndex) {
+  if (typeof notes === 'undefined' || !notes[id] || !notes[id][entryIndex]) return;
+  const text = notes[id][entryIndex].text;
+  try {
+    if (navigator.clipboard) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    if (typeof showToast === 'function') showToast('Note copied to clipboard.');
+  } catch (e) {
+    console.error('Copy note failed', e);
+    if (typeof showToast === 'function') showToast('Could not copy this note.');
+  }
 };
 
 window.shareNoteEntry = async function(id, entryIndex) {

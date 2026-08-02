@@ -2,7 +2,7 @@
 // Maps to F-009: Snippets — capture, save, play, download and share
 // trimmed audio segments of a shloka.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['snippets.js'] = 'v2.0 (Save/Download/Share implemented)';
+window.DGE_VERSIONS['snippets.js'] = 'v2.1 (CORS download fallback)';
 
 window.playSnippet = async function(id, start, end) {
     if (typeof closeModal === 'function') closeModal('actionsSheetModal');
@@ -195,8 +195,15 @@ window.downloadFullShlokaAudio = async function(id) {
         const ext = (typeof stotraData !== 'undefined' && stotraData && stotraData.metadata && stotraData.metadata.fileExtension) || '.mp3';
         dgeTriggerBlobDownload(blob, `Shloka-${id}${ext}`);
     } catch (e) {
-        console.error('Download failed', e);
-        if (typeof showToast === 'function') showToast('Could not download this audio file.');
+        console.warn('Direct download failed (likely CORS on an uncached file) — opening the audio directly instead:', e);
+        try {
+            const src = await resolveAudioSrc(id);
+            window.open(src, '_blank');
+            if (typeof showToast === 'function') showToast("Couldn't auto-download this file — opened it in a new tab instead. Long-press the player there to save it.");
+        } catch (e2) {
+            console.error('Download failed', e2);
+            if (typeof showToast === 'function') showToast('Could not download this audio file.');
+        }
     }
 };
 

@@ -6,7 +6,7 @@
 // and note entries.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['actions.js'] = 'v2.0 (Status + Doubt + Structured Notes)';
+window.DGE_VERSIONS['actions.js'] = 'v3.0 (Inline marks, Copy buttons)';
 
 window.currentActionsSheetId = null;
 
@@ -35,14 +35,12 @@ window.renderActionsSheetContent = function(id) {
 
   let html = '';
 
-  // --- Favorite / Status / Doubt ---
-  const statusInfo = m.status ? STATUS_LABELS[m.status] : { icon: '○', label: 'Set Status' };
-  html += `<div class="actions-section-label">Mark This Shloka</div>`;
-  html += `<div style="display:flex; gap:8px; margin-bottom:10px;">`;
-  html += `<button class="btn-sm mark-toggle-btn${m.fav ? ' active-fav' : ''}" style="flex:1;" onclick="window.toggleFavorite(${id})">${m.fav ? '★' : '☆'} Favorite</button>`;
-  html += `<button class="btn-sm mark-toggle-btn${m.doubt ? ' active-doubt' : ''}" style="flex:1;" onclick="window.toggleDoubt(${id})">❓ ${m.doubt ? 'Has Doubt' : 'Mark Doubt'}</button>`;
+  // Favorite/Status/Doubt are now directly on the card itself (tap the
+  // ★ / status / ❓ chips) — this sheet focuses on Notes, Snippets, and
+  // Share/Download.
+  html += `<div style="display:flex; gap:8px; margin-bottom:18px; font-size:11px; color:var(--muted-text); align-items:center;">`;
+  html += `<span>${m.fav ? '★ Favorite' : '☆ Not favorited'} · ${m.status ? STATUS_LABELS[m.status].icon + ' ' + STATUS_LABELS[m.status].label : '○ No status'} · ${m.doubt ? '❓ Has doubt' : 'No doubt marked'}</span>`;
   html += `</div>`;
-  html += `<button class="btn-sm mark-toggle-btn${m.status ? ' active-status-' + m.status : ''}" style="width:100%; margin-bottom:18px;" onclick="window.cycleStatus(${id})">${statusInfo.icon} Status: ${statusInfo.label} <span style="opacity:0.6; font-weight:500;">(tap to cycle)</span></button>`;
 
   // --- Notes (structured, individually shareable) ---
   html += `<div class="actions-section-label">Notes (${noteEntries.length})</div>`;
@@ -60,6 +58,7 @@ window.renderActionsSheetContent = function(id) {
           </div>
           <div>${preview.replace(/</g, '&lt;')}</div>
           <div style="display:flex; gap:6px; margin-top:8px;">
+            <button class="btn-icon" title="Copy this note" onclick="window.copyNoteEntry(${id}, ${idx})">📋</button>
             <button class="btn-icon" title="Share this note" onclick="window.shareNoteEntry(${id}, ${idx})">📤</button>
             <button class="btn-icon" title="Delete this note" style="color:var(--accent-red);" onclick="window.deleteNoteEntry(${id}, ${idx})">🗑️</button>
           </div>
@@ -97,6 +96,7 @@ window.renderActionsSheetContent = function(id) {
 
   // --- Full shloka download / share ---
   html += `<div class="actions-section-label">Share / Download Full Shloka</div>`;
+  html += `<button class="btn-sm" style="width:100%; margin-bottom:8px;" onclick="if(typeof copyShlokaText==='function') copyShlokaText(${id})">📋 Copy Shloka Text</button>`;
   html += `<div style="display:flex; gap:8px; margin-bottom:8px;">`;
   html += `<button class="btn-sm" style="flex:1;" onclick="window.downloadFullShlokaAudio(${id})">⬇️ Audio</button>`;
   html += `<button class="btn-sm" style="flex:1;" onclick="window.shareShlokaAudio(${id})">📤 Share Text + Audio</button>`;

@@ -145,11 +145,30 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left: 4px solid var(--accent-red); }
 .shloka-card:active { transform: scale(0.99); }
 
-.shloka-main-row { display: flex; width: 100%; gap: 12px; align-items: flex-start; }
+.shloka-main-row { display: flex; width: 100%; gap: 10px; align-items: flex-start; }
+.shloka-status-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.copy-shloka-btn { flex-shrink: 0; opacity: 0.55; }
+.copy-shloka-btn:active { opacity: 1; }
 .shloka-num { font-size: 12px; font-weight: 700; color: var(--muted-text); min-width: 20px; margin-top: 4px; }
 .shloka-text { flex-grow: 1; font-family: var(--font-sanskrit); font-size: var(--font-multiplier); color: var(--text-sanskrit); line-height: 1.55; font-weight: 500; cursor: pointer; overflow-wrap: anywhere; }
 
 .card-actions { display: flex; gap: 6px; align-items: flex-start; flex-shrink: 0; }
+
+/* Inline chip toggles directly on the card — Favorite/Doubt toggle in
+   place; Status opens the shared floating picker (#statusPickerMenu). */
+.chip-toggle { width: 26px; height: 26px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--muted-text); font-size: 13px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all var(--t-fast) var(--ease); padding: 0; }
+.chip-toggle:active { transform: scale(0.88); }
+.chip-toggle.active-fav { background: var(--accent-gold); border-color: var(--accent-gold); color: #fff; }
+.chip-toggle.active-doubt { background: #6a4fb0; border-color: #6a4fb0; color: #fff; }
+.chip-toggle.active-status-pending { background: var(--muted-text); border-color: var(--muted-text); color: #fff; }
+.chip-toggle.active-status-practice { background: var(--accent-red); border-color: var(--accent-red); color: #fff; }
+.chip-toggle.active-status-done { background: #2e7d32; border-color: #2e7d32; color: #fff; }
+
+.filter-checkbox-item { padding: 8px 12px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 8px; white-space: nowrap; transition: background var(--t-fast) var(--ease); }
+.filter-checkbox-item::before { content: "☐"; font-size: 13px; flex-shrink: 0; }
+.filter-checkbox-item.active::before { content: "☑"; color: var(--accent-red); }
+.filter-checkbox-item:hover { background: var(--card-border); }
+.filter-checkbox-item.active { background: var(--card-active); color: var(--accent-red); }
 .btn-icon { background: none; border: none; font-size: 16px; cursor: pointer; color: #b0bec5; padding: 4px; transition: transform var(--t-fast) var(--ease); }
 .btn-icon:active { transform: scale(0.85); }
 .is-fav { color: var(--accent-gold) !important; }

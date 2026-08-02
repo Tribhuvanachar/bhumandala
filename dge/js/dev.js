@@ -1,6 +1,6 @@
 // DGE Module: dev.js
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['dev.js'] = 'v2.0 (Expanded diagnostics)';
+window.DGE_VERSIONS['dev.js'] = 'v2.1 (Diagnostics updated for this session)';
 
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -25,19 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // file failed to load, or an earlier line in it threw before
         // reaching this assignment — check [ERR] lines above for why.
         const groups = {
-            'Core / Rendering': ['initApp', 'renderList', 'renderStotraChrome', 'togglePopup', 'openModal', 'closeModal'],
+            'Core / Rendering': ['initApp', 'renderList', 'renderStotraChrome', 'togglePopup', 'openModal', 'closeModal', 'copyShlokaText'],
             'Persistence (nsKey bug class)': ['nsKey', 'loadPersistedState', 'dgeSaveMarks', 'dgeSaveNotes'],
             'Audio Engine': ['playShloka', 'togglePlay', 'resolveAudioSrc', 'cacheAllAudio', 'onSeekSliderInput', 'toggleSeekPrecision'],
             'Reading-Along Sync': ['wrapReadingCardWordsForSync', 'updateReadingCardSyncHighlight'],
-            'Marks (Favorite/Status/Doubt)': ['toggleFavorite', 'cycleStatus', 'toggleDoubt'],
-            'Notes': ['openNote', 'saveNote', 'addNoteEntry', 'shareNoteEntry', 'deleteNoteEntry'],
+            'Marks (Favorite/Status/Doubt)': ['toggleFavorite', 'toggleDoubt', 'openStatusPicker', 'setStatus'],
+            'Notes': ['openNote', 'saveNote', 'addNoteEntry', 'shareNoteEntry', 'deleteNoteEntry', 'copyNoteEntry'],
             'Snippets': ['saveSnippet', 'playSnippet', 'deleteSnippet', 'downloadSnippetAudio', 'downloadFullShlokaAudio'],
             'Unified Actions Sheet': ['openActionsSheet', 'renderActionsSheetContent'],
             'Sharing': ['shareShlokaAudio', 'shareShlokaTextOnly', 'shareShlokaScreenshot', 'downloadShlokaScreenshot'],
             'Theme & Appearance': ['applyTheme', 'setTheme', 'applyFontSize'],
+            'Feature Flags': ['dgeGetEffectiveFeatureFlags', 'applyFeatureFlags', 'resetFeatureFlagsToDefault'],
             'Ask Acharya': ['askAcharya', 'sendAcharyaFollowUp', 'renderAcharyaQueryButtons', 'dgeGetEffectiveQueryTypes', 'openKeyModal', 'saveAllApiKeys'],
             'Voice Search': ['startSearchVoiceInput', 'startFollowUpVoiceInput'],
-            'Filter & Search': ['setFilter', 'getFilteredIds', 'handleSearch']
+            'Filter & Search': ['toggleFilterCriterion', 'clearAllFilterCriteria', 'toggleSingleTrackMode', 'getFilteredIds', 'handleSearch']
         };
 
         Object.entries(groups).forEach(([groupName, funcs]) => {

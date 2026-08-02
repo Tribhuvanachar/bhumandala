@@ -1,7 +1,15 @@
 // js/filter.js
 // Maps to Feature: Filter
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['filter.js'] = 'v2.0 (Status + Doubt filters)';
+window.DGE_VERSIONS['filter.js'] = 'v3.0 (Multi-select checkbox filters)';
+
+// Multiple mark-based criteria can now be active at once (checkbox-style,
+// OR logic — a shloka shows if it matches ANY checked criterion), instead
+// of the old single-select radio behavior. "Single Track" (no auto-advance
+// to the next matching shloka) stays a separate toggle, tracked via the
+// existing window.currentFilter — audio.js already checks for
+// currentFilter === 'none' to skip auto-advance, so that's left as-is.
+window.activeFilters = window.activeFilters || new Set();
 
 function getFilteredIds() {
   if (!stotraData) return [];
@@ -17,14 +25,18 @@ function getFilteredIds() {
   const rm = rangeModeEl ? rangeModeEl.value : 'include';
   const hasRange = !isNaN(rs) && !isNaN(re) && rs <= re;
   
+  const filters = window.activeFilters || new Set();
+
   for (let i = 1; i <= total; i++) {
-    if (typeof currentFilter !== 'undefined' && currentFilter !== 'all' && currentFilter !== 'none') {
+    if (filters.size > 0) {
       const m = (typeof marks !== 'undefined') ? marks[i] : null;
-      if (currentFilter === 'fav' && !(m && m.fav)) continue;
-      if (currentFilter === 'pending' && !(m && m.status === 'pending')) continue;
-      if (currentFilter === 'practice' && !(m && m.status === 'practice')) continue;
-      if (currentFilter === 'done' && !(m && m.status === 'done')) continue;
-      if (currentFilter === 'doubt' && !(m && m.doubt)) continue;
+      let matchesAny = false;
+      if (filters.has('fav') && m && m.fav) matchesAny = true;
+      if (filters.has('pending') && m && m.status === 'pending') matchesAny = true;
+      if (filters.has('practice') && m && m.status === 'practice') matchesAny = true;
+      if (filters.has('done') && m && m.status === 'done') matchesAny = true;
+      if (filters.has('doubt') && m && m.doubt) matchesAny = true;
+      if (!matchesAny) continue;
     }
     
     if (hasRange) { 
@@ -45,30 +57,58 @@ function clearRange() {
   applyRangeFilter(); 
 }
 
-function setFilter(type) {
-  if (typeof currentFilter !== 'undefined') currentFilter = type; 
-  
-  const popup = document.getElementById('filterPopup');
-  if (popup) popup.classList.remove('show');
-  
-  document.querySelectorAll('#filterPopup .pop-item').forEach(el => el.classList.remove('active')); 
-  
-  const optEl = document.getElementById(`opt-${type}`);
-  if (optEl) optEl.classList.add('active');
-  
-  if (typeof renderList === 'function') renderList();
-  
-  if (type !== 'none') { 
-    const aIds = getFilteredIds(); 
-    if (aIds.length) {
-        if (typeof playShloka === 'function') playShloka(aIds[0]); 
-    } else { 
-        if (typeof currentAudio !== 'undefined' && currentAudio) currentAudio.pause(); 
-        if (typeof activeId !== 'undefined') activeId = null; 
-        if (typeof isPlaying !== 'undefined') isPlaying = false; 
-        if (typeof updatePlayUI === 'function') updatePlayUI(); 
-    } 
+function dgeJumpToFirstFiltered() {
+  const aIds = getFilteredIds();
+  if (aIds.length) {
+    if (typeof playShloka === 'function') playShloka(aIds[0]);
+  } else {
+    if (typeof currentAudio !== 'undefined' && currentAudio) currentAudio.pause();
+    if (typeof activeId !== 'undefined') activeId = null;
+    if (typeof isPlaying !== 'undefined') isPlaying = false;
+    if (typeof updatePlayUI === 'function') updatePlayUI();
   }
+}
+
+// Toggles one checkbox-style filter criterion on/off; any number can be
+// active simultaneously (OR logic).
+window.toggleFilterCriterion = function(type) {
+  if (!window.activeFilters) window.activeFilters = new Set();
+  if (window.activeFilters.has(type)) {
+    window.activeFilters.delete(type);
+  } else {
+    window.activeFilters.add(type);
+  }
+
+  document.querySelectorAll('#filterPopup .filter-checkbox-item').forEach(el => {
+    el.classList.toggle('active', window.activeFilters.has(el.dataset.filterType));
+  });
+
+  if (typeof renderList === 'function') renderList();
+  dgeJumpToFirstFiltered();
+};
+
+window.clearAllFilterCriteria = function() {
+  window.activeFilters = new Set();
+  document.querySelectorAll('#filterPopup .filter-checkbox-item').forEach(el => el.classList.remove('active'));
+  if (typeof renderList === 'function') renderList();
+  dgeJumpToFirstFiltered();
+};
+
+// "Single Track" — a separate toggle for turning OFF auto-advance to the
+// next filtered shloka, independent of which mark criteria are checked.
+window.toggleSingleTrackMode = function() {
+  const isSingleTrack = (typeof currentFilter !== 'undefined' && currentFilter === 'none');
+  if (typeof currentFilter !== 'undefined') currentFilter = isSingleTrack ? 'all' : 'none';
+
+  const btn = document.getElementById('opt-none');
+  if (btn) btn.classList.toggle('active', !isSingleTrack);
+};
+
+// Kept for backward compatibility with any older direct call.
+function setFilter(type) {
+  if (type === 'none') { window.toggleSingleTrackMode(); return; }
+  if (type === 'all') { window.clearAllFilterCriteria(); return; }
+  window.toggleFilterCriterion(type);
 }
 
 function applyRangeFilter() { 

@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.6.0">
+<link rel="stylesheet" href="css/main.css?v=4.7.0">
 </head>
 <body>
 
@@ -127,7 +127,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.6 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.7 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -157,13 +157,15 @@
     <div class="popup-container advanced-feature">
       <button class="btn-sm" onclick="window.togglePopup('filterPopup')" id="filterBtn">🔽 Filter</button>
       <div class="popup" id="filterPopup" style="left: 50%; transform: translateX(-50%);">
-        <div class="pop-item active" id="opt-all" onclick="window.setFilter('all')">▶ All</div>
-        <div class="pop-item" id="opt-fav" onclick="window.setFilter('fav')">▶ ★ Favorites</div>
-        <div class="pop-item" id="opt-pending" onclick="window.setFilter('pending')">▶ ○ Pending</div>
-        <div class="pop-item" id="opt-practice" onclick="window.setFilter('practice')">▶ 🚧 Needs Practice</div>
-        <div class="pop-item" id="opt-done" onclick="window.setFilter('done')">▶ ✅ Done</div>
-        <div class="pop-item" id="opt-doubt" onclick="window.setFilter('doubt')">▶ ❓ Doubts</div>
-        <div class="pop-item" id="opt-none" onclick="window.setFilter('none')">⏸ Single Track</div>
+        <div style="font-size:10px; color:var(--muted-text); margin-bottom:2px; text-transform:uppercase;">Show shlokas matching ANY checked:</div>
+        <div class="filter-checkbox-item" data-filter-type="fav" onclick="window.toggleFilterCriterion('fav')">★ Favorites</div>
+        <div class="filter-checkbox-item" data-filter-type="pending" onclick="window.toggleFilterCriterion('pending')">○ Pending</div>
+        <div class="filter-checkbox-item" data-filter-type="practice" onclick="window.toggleFilterCriterion('practice')">🚧 Needs Practice</div>
+        <div class="filter-checkbox-item" data-filter-type="done" onclick="window.toggleFilterCriterion('done')">✅ Done</div>
+        <div class="filter-checkbox-item" data-filter-type="doubt" onclick="window.toggleFilterCriterion('doubt')">❓ Doubts</div>
+        <button class="btn-sm" style="width:100%;" onclick="window.clearAllFilterCriteria()">✖ Clear All (Show Everything)</button>
+        <hr>
+        <div class="pop-item" id="opt-none" onclick="window.toggleSingleTrackMode()">⏸ Single Track (no auto-advance)</div>
         <hr>
         <div class="range-box">
           <div class="range-row-flex">
@@ -207,26 +209,36 @@
           </div>
         </div>
         <hr>
-        <div style="font-size: 12px; font-weight: 700; margin-bottom: 4px;">
-          <label class="flex-row" style="gap:6px; cursor:pointer; color: var(--accent-red);">
-            <input type="checkbox" id="autoABToggle" style="margin:0; width:14px; height:14px;"> 🎯 Auto A-B Capture
-          </label>
-        </div>
-        <div class="ab-container">
-          <label class="flex-row" style="gap:6px; cursor:pointer; margin:0;">
-            <input type="checkbox" id="enableAB" style="margin:0; width:14px; height:14px;"> ✂️ Active Loop
-          </label>
-          <div class="ab-row-inputs">
-            <span>Start: <input class="pop-input" type="number" id="loopA" placeholder="0.0" step="0.1"></span>
-            <span>End: <input class="pop-input" type="number" id="loopB" placeholder="End" step="0.1"></span>
+        <div id="abSnippetToolsSection">
+          <div style="font-size: 12px; font-weight: 700; margin-bottom: 4px;">
+            <label class="flex-row" style="gap:6px; cursor:pointer; color: var(--accent-red);">
+              <input type="checkbox" id="autoABToggle" style="margin:0; width:14px; height:14px;"> 🎯 Auto A-B Capture
+            </label>
           </div>
-          <button class="btn-sm" style="margin-top: 4px;" onclick="window.saveSnippet()">💾 Save Snippet</button>
+          <div class="ab-container">
+            <label class="flex-row" style="gap:6px; cursor:pointer; margin:0;">
+              <input type="checkbox" id="enableAB" style="margin:0; width:14px; height:14px;"> ✂️ Active Loop
+            </label>
+            <div class="ab-row-inputs">
+              <span>Start: <input class="pop-input" type="number" id="loopA" placeholder="0.0" step="0.1"></span>
+              <span>End: <input class="pop-input" type="number" id="loopB" placeholder="End" step="0.1"></span>
+            </div>
+            <button class="btn-sm" style="margin-top: 4px;" onclick="window.saveSnippet()">💾 Save Snippet</button>
+          </div>
         </div>
         <hr>
         <button class="btn-sm flex-center" id="cacheBtn" style="width:100%; background:var(--card-active); color:var(--accent-red); border-color:var(--accent-red);" onclick="window.cacheAllAudio(this)">📥 Preload All Audio</button>
       </div>
     </div>
   </div>
+</div>
+
+<!-- Shared status picker — opened from the inline status chip on any card -->
+<div class="context-menu" id="statusPickerMenu">
+  <div onclick="window.setStatus('pending')">○ Pending</div>
+  <div onclick="window.setStatus('practice')">🚧 Needs Practice</div>
+  <div onclick="window.setStatus('done')">✅ Done</div>
+  <div onclick="window.setStatus(null)" style="color: #888;">✕ Clear</div>
 </div>
 
 <!-- Unified Shloka Actions Sheet: Favorite / Practice flag / Note / Snippets / Download / Share -->
@@ -335,6 +347,34 @@
         </div>
       </details>
 
+      <details style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red);">🎛️ Feature Visibility</summary>
+        <div style="margin-top:10px; display:flex; flex-direction:column; gap:8px;">
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowFavorite" style="margin:0; width:14px; height:14px;"> ★ Favorite marking
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowStatus" style="margin:0; width:14px; height:14px;"> ✅ Status (Pending/Needs Practice/Done)
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowDoubt" style="margin:0; width:14px; height:14px;"> ❓ Doubt marking
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowNotes" style="margin:0; width:14px; height:14px;"> 📝 Notes
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowSnippetTools" style="margin:0; width:14px; height:14px;"> 🎯 Snippets & A-B repeat tools
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowThemePicker" style="margin:0; width:14px; height:14px;"> 🎨 Theme picker
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowScriptPicker" style="margin:0; width:14px; height:14px;"> 🔠 Script/language picker
+          </label>
+          <button class="btn-sm" style="width:100%;" onclick="window.resetFeatureFlagsToDefault()">↺ Reset to Defaults</button>
+        </div>
+      </details>
+
       <div style="text-align:right; margin-top:16px;">
         <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="window.saveAllApiKeys()">Save Keys</button>
       </div>
@@ -369,27 +409,27 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.6.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.7.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.6.0"></script>
-<script src="js/state.js?v=4.6.0"></script>
-<script src="js/dev.js?v=4.6.0"></script>
-<script src="js/utils.js?v=4.6.0"></script>
-<script src="js/modals.js?v=4.6.0"></script>
-<script src="js/transliteration.js?v=4.6.0"></script>
-<script src="js/audio.js?v=4.6.0"></script>
-<script src="js/filter.js?v=4.6.0"></script>
-<script src="js/search.js?v=4.6.0"></script>
-<script src="js/markers.js?v=4.6.0"></script>
-<script src="js/notes.js?v=4.6.0"></script>
-<script src="js/snippets.js?v=4.6.0"></script>
-<script src="js/actions.js?v=4.6.0"></script>
-<script src="js/voice.js?v=4.6.0"></script>
-<script src="js/screenshot.js?v=4.6.0"></script>
-<script src="js/ai.js?v=4.6.0"></script>
-<script src="js/render.js?v=4.6.0"></script>
-<script src="js/core.js?v=4.6.0"></script>
+<script src="js/config.js?v=4.7.0"></script>
+<script src="js/state.js?v=4.7.0"></script>
+<script src="js/dev.js?v=4.7.0"></script>
+<script src="js/utils.js?v=4.7.0"></script>
+<script src="js/modals.js?v=4.7.0"></script>
+<script src="js/transliteration.js?v=4.7.0"></script>
+<script src="js/audio.js?v=4.7.0"></script>
+<script src="js/filter.js?v=4.7.0"></script>
+<script src="js/search.js?v=4.7.0"></script>
+<script src="js/markers.js?v=4.7.0"></script>
+<script src="js/notes.js?v=4.7.0"></script>
+<script src="js/snippets.js?v=4.7.0"></script>
+<script src="js/actions.js?v=4.7.0"></script>
+<script src="js/voice.js?v=4.7.0"></script>
+<script src="js/screenshot.js?v=4.7.0"></script>
+<script src="js/ai.js?v=4.7.0"></script>
+<script src="js/render.js?v=4.7.0"></script>
+<script src="js/core.js?v=4.7.0"></script>
 
 <script>
   if (typeof console.log === "function") {

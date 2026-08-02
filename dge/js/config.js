@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v2.0 (Configurable Acharya Fields + AI Providers)';
+window.DGE_VERSIONS['config.js'] = 'v3.0 (Feature Flags)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -10,7 +10,7 @@ const appConfig = {
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
   secretPasskey: "SHRI108",
-  version: "v4.6"
+  version: "v4.7"
 };
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
@@ -29,7 +29,9 @@ const ACHARYA_QUERY_TYPES = [
       'Padachheda (word-by-word split)',
       'Anvaya (prose word order)',
       'Word Meaning',
-      "Bhavartha (overarching theme, strictly per Sri Madhvacharya's Dvaita philosophy)"
+      "Bhavartha (overarching theme, strictly per Sri Madhvacharya's Dvaita philosophy)",
+      'Chandas / meter of this verse, if identifiable',
+      'Alankara (figures of speech), if any are present'
     ]
   },
   {
@@ -40,8 +42,7 @@ const ACHARYA_QUERY_TYPES = [
       'Dhatu & Gana (if this is a verb form)',
       'Vibhakti & Linga (if this is a noun form)',
       'Sandhi split, if applicable',
-      'Samasa Vigraha — and if it is a compound, the Vigrahavakya and Samasta-pada',
-      'Chandas / meter, if identifiable'
+      'Samasa Vigraha — and if it is a compound, the Vigrahavakya and Samasta-pada'
     ]
   },
   {
@@ -70,6 +71,32 @@ const AI_PROVIDERS = {
   claude: { label: 'Claude (Anthropic)', defaultModel: '' }
 };
 window.AI_PROVIDERS = AI_PROVIDERS;
+
+// Globally configurable feature visibility. Controls which per-shloka
+// indicators/controls and top-bar tools are shown. Can be overridden per
+// device via 🔑 → 🎛️ Feature Visibility (saved to localStorage), which
+// layers on top of these shipped defaults the same way ACHARYA_QUERY_TYPES
+// and AI_PROVIDERS overrides work.
+const FEATURE_FLAGS = {
+  showFavorite: true,
+  showStatus: true,
+  showDoubt: true,
+  showNotes: true,
+  showSnippetTools: true, // saved snippets + A-B repeat tools in 🛠 Tools
+  showThemePicker: true,
+  showScriptPicker: true
+};
+window.FEATURE_FLAGS = FEATURE_FLAGS;
+
+window.dgeGetEffectiveFeatureFlags = function() {
+  try {
+    const override = JSON.parse(localStorage.getItem('feature_flags_override') || 'null');
+    if (override && typeof override === 'object') {
+      return Object.assign({}, FEATURE_FLAGS, override);
+    }
+  } catch (e) { /* fall through to defaults */ }
+  return FEATURE_FLAGS;
+};
 
 // Note: All dynamic state variables (stotraData, activeId, marks, notes, etc.)
 // and URL parameter parsing have been successfully migrated to js/state.js to 

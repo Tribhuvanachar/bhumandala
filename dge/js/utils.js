@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['utils.js'] = 'v1.3 (warn + unhandledrejection capture)';
+window.DGE_VERSIONS['utils.js'] = 'v1.4 (Feature flags applier)';
 
 window.DGE_THEMES = ['traditional', 'minimal', 'vibrant', 'darkglass'];
 window.DGE_THEME_META_COLORS = {
@@ -48,6 +48,29 @@ window.applyFontSize = function(px) {
   document.querySelectorAll('#fontPopup .pop-item').forEach(el => {
     el.classList.toggle('active', parseInt(el.dataset.size, 10) === px);
   });
+};
+
+// Applies the (possibly per-device overridden) feature flags — hides the
+// theme/script picker buttons and the A-B/snippet tools section when
+// their flag is off. Chip-level flags (favorite/status/doubt/notes/
+// snippet-count) are read directly by render.js on every renderList() call
+// instead, since those need to react per-card rather than as a one-time
+// show/hide.
+window.applyFeatureFlags = function() {
+  const flags = (typeof dgeGetEffectiveFeatureFlags === 'function') ? dgeGetEffectiveFeatureFlags() : (window.FEATURE_FLAGS || {});
+
+  const themeBtn = document.getElementById('activeThemeBtn');
+  const themeWrap = themeBtn ? themeBtn.closest('div') : null;
+  if (themeWrap) themeWrap.style.display = flags.showThemePicker ? '' : 'none';
+
+  const scriptBtn = document.getElementById('activeScriptBtn');
+  const scriptWrap = scriptBtn ? scriptBtn.closest('div') : null;
+  if (scriptWrap) scriptWrap.style.display = flags.showScriptPicker ? '' : 'none';
+
+  const abSection = document.getElementById('abSnippetToolsSection');
+  if (abSection) abSection.style.display = flags.showSnippetTools ? '' : 'none';
+
+  if (typeof renderList === 'function') renderList();
 };
 
 window.setFontSize = function(px, el) {

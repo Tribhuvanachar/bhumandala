@@ -2,7 +2,7 @@
 // js/audio.js
 // Maps to F-004 (Audio Engine) & F-013 (Offline Cache)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['audio.js'] = 'v2.0 (Seek Slider + Enter-to-seek + Sync Highlight)';
+window.DGE_VERSIONS['audio.js'] = 'v2.1 (Length-weighted sync timing)';
 
 function formatTime(s) { 
   if (isNaN(s)) return "0:00.000"; 
@@ -311,11 +311,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // Approximate reading-along highlight
 // ==========================================
 // There's no per-word timestamp data for these recordings, so this is an
-// ESTIMATE: it splits the shloka text into words and assumes each word
-// takes an equal share of the total duration. It's not true karaoke-style
-// sync — real word-level sync would need timestamped audio data, which
-// isn't available — but it gives a reasonable "roughly where we are"
-// visual cue while listening.
+// ESTIMATE. Each word's on-screen time slice is weighted by its character
+// length (a long compound gets proportionally more time than a short
+// word like "na") rather than dividing time equally per word — equal
+// division was visibly outrunning the audio on longer words. This is
+// still an approximation, not true karaoke-style sync — real word-level
+// sync would need timestamped audio data, which isn't available.
 function wrapReadingCardWordsForSync() {
   const readingCard = document.getElementById('readingCard');
   if (!readingCard) return;
@@ -323,22 +324,34 @@ function wrapReadingCardWordsForSync() {
   const tokens = text.split(/(\s+)/);
   let html = '';
   let wordIndex = 0;
+  const wordLengths = [];
 
   tokens.forEach(tok => {
     if (tok.trim().length === 0) { html += tok; return; }
     html += `<span class="sync-word" data-widx="${wordIndex}">${tok}</span>`;
+    wordLengths.push(Math.max(tok.length, 2)); // floor so short words still get a fair minimum
     wordIndex++;
   });
 
   window._dgeSyncWordCount = wordIndex;
+
+  const totalWeight = wordLengths.reduce((a, b) => a + b, 0) || 1;
+  let cumulative = 0;
+  window._dgeSyncWordBoundaries = wordLengths.map(len => {
+    cumulative += len;
+    return cumulative / totalWeight;
+  });
+
   readingCard.innerHTML = html;
 }
 
 function updateReadingCardSyncHighlight() {
-  if (!window._dgeSyncWordCount || !currentAudio || isNaN(currentAudio.duration) || currentAudio.duration <= 0) return;
+  if (!window._dgeSyncWordCount || !window._dgeSyncWordBoundaries || !currentAudio || isNaN(currentAudio.duration) || currentAudio.duration <= 0) return;
 
   const frac = Math.min(1, Math.max(0, currentAudio.currentTime / currentAudio.duration));
-  const activeIdx = Math.min(window._dgeSyncWordCount - 1, Math.floor(frac * window._dgeSyncWordCount));
+  const boundaries = window._dgeSyncWordBoundaries;
+  let activeIdx = boundaries.findIndex(b => frac <= b);
+  if (activeIdx === -1) activeIdx = boundaries.length - 1;
 
   const readingCard = document.getElementById('readingCard');
   if (!readingCard) return;
