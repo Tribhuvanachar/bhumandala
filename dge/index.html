@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.15.0">
+<link rel="stylesheet" href="css/main.css?v=4.16.0">
 </head>
 <body>
 
@@ -132,7 +132,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.15 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.16 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -339,7 +339,7 @@
       <details open style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
         <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red);">🖼️ Share Image Template</summary>
         <p style="font-size:11px; color:var(--muted-text); margin:8px 0;">Used when you tap "⬇️ Image" or "🖼️ Share as Image" for any shloka.</p>
-        <select id="defaultShareTemplateSelect" class="modal-input" style="margin-top:4px;"></select>
+        <div id="defaultShareTemplateGrid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; margin-top:8px;"></div>
       </details>
 
       <details id="featureVisibilitySection" open style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
@@ -443,27 +443,27 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.15.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.16.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.15.0"></script>
-<script src="js/state.js?v=4.15.0"></script>
-<script src="js/dev.js?v=4.15.0"></script>
-<script src="js/utils.js?v=4.15.0"></script>
-<script src="js/modals.js?v=4.15.0"></script>
-<script src="js/transliteration.js?v=4.15.0"></script>
-<script src="js/audio.js?v=4.15.0"></script>
-<script src="js/filter.js?v=4.15.0"></script>
-<script src="js/search.js?v=4.15.0"></script>
-<script src="js/markers.js?v=4.15.0"></script>
-<script src="js/notes.js?v=4.15.0"></script>
-<script src="js/snippets.js?v=4.15.0"></script>
-<script src="js/actions.js?v=4.15.0"></script>
-<script src="js/voice.js?v=4.15.0"></script>
-<script src="js/screenshot.js?v=4.15.0"></script>
-<script src="js/ai.js?v=4.15.0"></script>
-<script src="js/render.js?v=4.15.0"></script>
-<script src="js/core.js?v=4.15.0"></script>
+<script src="js/config.js?v=4.16.0"></script>
+<script src="js/state.js?v=4.16.0"></script>
+<script src="js/dev.js?v=4.16.0"></script>
+<script src="js/utils.js?v=4.16.0"></script>
+<script src="js/modals.js?v=4.16.0"></script>
+<script src="js/transliteration.js?v=4.16.0"></script>
+<script src="js/audio.js?v=4.16.0"></script>
+<script src="js/filter.js?v=4.16.0"></script>
+<script src="js/search.js?v=4.16.0"></script>
+<script src="js/markers.js?v=4.16.0"></script>
+<script src="js/notes.js?v=4.16.0"></script>
+<script src="js/snippets.js?v=4.16.0"></script>
+<script src="js/actions.js?v=4.16.0"></script>
+<script src="js/voice.js?v=4.16.0"></script>
+<script src="js/screenshot.js?v=4.16.0"></script>
+<script src="js/ai.js?v=4.16.0"></script>
+<script src="js/render.js?v=4.16.0"></script>
+<script src="js/core.js?v=4.16.0"></script>
 
 <script>
   if (typeof console.log === "function") {

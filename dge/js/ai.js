@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.2 (Save button repositioned, template picker wiring)';
+window.DGE_VERSIONS['ai.js'] = 'v3.3 (Visual template thumbnail picker)';
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -238,19 +238,34 @@ window.resetShlokaFieldsToDefault = function() {
 
 // --- Share Image Template (🖼️) ------------------------------------
 
+window.selectShareTemplate = function(id) {
+  localStorage.setItem('default_share_template', id);
+  document.querySelectorAll('#defaultShareTemplateGrid .share-tpl-thumb').forEach(el => {
+    el.classList.toggle('selected', el.dataset.tplId === id);
+  });
+};
+
 function dgeLoadShareTemplateIntoUI() {
-  const sel = document.getElementById('defaultShareTemplateSelect');
-  if (!sel || !window.SHARE_IMAGE_TEMPLATES) return;
+  const grid = document.getElementById('defaultShareTemplateGrid');
+  if (!grid || !window.SHARE_IMAGE_TEMPLATES) return;
   const current = localStorage.getItem('default_share_template') || 'plain';
-  sel.innerHTML = window.SHARE_IMAGE_TEMPLATES.map(t =>
-    `<option value="${t.id}" ${t.id === current ? 'selected' : ''}>${t.label}</option>`
-  ).join('');
+
+  grid.innerHTML = window.SHARE_IMAGE_TEMPLATES.map(t => {
+    const thumb = t.filename
+      ? `<img src="images/${t.filename}" alt="" style="width:100%; height:100%; object-fit:cover;">`
+      : `<div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--card-bg); color:var(--muted-text); font-size:10px;">Plain</div>`;
+    return `
+      <button type="button" class="share-tpl-thumb${t.id === current ? ' selected' : ''}" data-tpl-id="${t.id}" onclick="window.selectShareTemplate('${t.id}')">
+        <div class="share-tpl-thumb-img">${thumb}</div>
+        <div class="share-tpl-thumb-label">${t.label}</div>
+      </button>`;
+  }).join('');
 }
 
 function dgeSaveShareTemplateFromUI() {
-  const sel = document.getElementById('defaultShareTemplateSelect');
-  if (!sel) return;
-  localStorage.setItem('default_share_template', sel.value);
+  // selection is already saved live by selectShareTemplate() on tap —
+  // nothing further needed here, kept only so the shared Save flow can
+  // still call it without checking whether it exists.
 }
 
 // Resolves the ACHARYA_QUERY_TYPES list with any per-device overrides (from
