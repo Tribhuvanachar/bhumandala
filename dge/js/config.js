@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v4.1 (Configurable extra shloka fields schema)';
+window.DGE_VERSIONS['config.js'] = 'v4.2 (Share-image template registry, Custom icon)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -10,7 +10,7 @@ const appConfig = {
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
   secretPasskey: "SHRI108",
-  version: "v4.12"
+  version: "v4.13"
 };
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
@@ -67,7 +67,7 @@ const ACHARYA_QUERY_TYPES = [
     customNotes: ''
   },
   {
-    id: 'translate', icon: '🌐', label: 'Custom', style: 'full', action: 'ask', enabled: true,
+    id: 'translate', icon: '✏️', label: 'Custom', style: 'full', action: 'ask', enabled: true,
     // No fixed presets — this is the open-ended slot. customNotes below IS
     // the entire instruction sent to Acharya for this button.
     presets: [],
@@ -103,6 +103,43 @@ window.dgeGetEffectiveShlokaFields = function() {
     }
   } catch (e) { /* fall through to defaults */ }
   return SHLOKA_EXTRA_FIELDS;
+};
+
+// Share-as-Image templates (js/screenshot.js). Each safeZone is the
+// approximate empty area (in the template's own native pixel dimensions)
+// where shloka text can sit without colliding with the artwork — these
+// are estimates from visual inspection, not pixel-measured, so nudge them
+// if text still overlaps a border/motif on a given template.
+// hasBakedBranding: true means "सनातन विद्या गुरुकुल · 3BU1" is already
+// drawn into the image itself — the code must NOT draw its own footer
+// text on top of these, or it'll double up.
+const SHARE_IMAGE_TEMPLATES = [
+  { id: 'plain', filename: null, label: 'Plain (no template)', w: 1080, h: 1080,
+    safeZone: { x: 90, y: 260, w: 900, h: 560 }, hasBakedBranding: false },
+  { id: 'jade-meander', filename: 'template-01-jade-meander.jpg', label: 'Jade Meander Border', w: 784, h: 1168,
+    safeZone: { x: 110, y: 180, w: 560, h: 780 }, hasBakedBranding: false },
+  { id: 'lotus-watercolor', filename: 'template-02-lotus-watercolor.jpg', label: 'Lotus Watercolor', w: 784, h: 1168,
+    safeZone: { x: 110, y: 260, w: 560, h: 600 }, hasBakedBranding: false },
+  { id: 'temple-arch-dark', filename: 'template-03-temple-arch-dark.jpg', label: 'Dark Temple Arch', w: 784, h: 1168,
+    safeZone: { x: 190, y: 300, w: 400, h: 640 }, hasBakedBranding: false },
+  { id: 'lotus-medallion', filename: 'template-04-lotus-medallion.jpg', label: 'Lotus Medallion', w: 784, h: 1168,
+    safeZone: { x: 130, y: 220, w: 520, h: 750 }, hasBakedBranding: false },
+  { id: 'parchment-diya', filename: 'template-05-parchment-diya.png', label: 'Parchment + Diya', w: 1024, h: 1024,
+    safeZone: { x: 110, y: 110, w: 800, h: 650 }, hasBakedBranding: true },
+  { id: 'minimal-gold', filename: 'template-06-minimal-gold.png', label: 'Minimal Gold', w: 1024, h: 1024,
+    safeZone: { x: 110, y: 240, w: 800, h: 560 }, hasBakedBranding: true },
+  { id: 'geometric-mihrab', filename: 'template-07-geometric-mihrab.png', label: 'Geometric Mihrab', w: 1024, h: 1024,
+    safeZone: { x: 300, y: 300, w: 430, h: 470 }, hasBakedBranding: true },
+  { id: 'watercolor-river', filename: 'template-08-watercolor-river.png', label: 'Watercolor River', w: 1024, h: 1024,
+    safeZone: { x: 160, y: 160, w: 700, h: 440 }, hasBakedBranding: true },
+  { id: 'stone-inscription', filename: 'template-09-stone-inscription.png', label: 'Stone Inscription', w: 1024, h: 1024,
+    safeZone: { x: 130, y: 190, w: 780, h: 580 }, hasBakedBranding: true }
+];
+window.SHARE_IMAGE_TEMPLATES = SHARE_IMAGE_TEMPLATES;
+
+window.dgeGetSelectedShareTemplate = function() {
+  const id = localStorage.getItem('default_share_template') || 'plain';
+  return SHARE_IMAGE_TEMPLATES.find(t => t.id === id) || SHARE_IMAGE_TEMPLATES[0];
 };
 
 // Admin-only: whether Acharya may be instructed that it's allowed to

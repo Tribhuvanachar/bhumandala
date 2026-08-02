@@ -5,7 +5,7 @@
 // shloka can be shared as a standalone image instead of just plain text.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['screenshot.js'] = 'v1.1 (Optional custom template support)';
+window.DGE_VERSIONS['screenshot.js'] = 'v2.0 (Template picker + gold embossed text, H+V centered)';
 
 function dgeWrapCanvasText(ctx, text, maxWidth) {
   const words = text.split(/\s+/).filter(Boolean);
@@ -43,27 +43,53 @@ function dgeLoadTemplateImage(path) {
   });
 }
 
+// Layered gold "engraved plaque" text: a dark offset shadow (recess),
+// a gold gradient body, and a thin dark edge stroke — gives a metallic,
+// embossed look entirely via Canvas, no external assets needed.
+function dgeDrawEmbossedGoldText(ctx, text, x, y) {
+  ctx.save();
+  ctx.fillStyle = 'rgba(0,0,0,0.5)';
+  ctx.fillText(text, x + 2, y + 3);
+  ctx.restore();
+
+  const grad = ctx.createLinearGradient(0, y - 32, 0, y + 12);
+  grad.addColorStop(0, '#fff7c0');
+  grad.addColorStop(0.25, '#ffe98a');
+  grad.addColorStop(0.5, '#ffd54a');
+  grad.addColorStop(0.75, '#c69214');
+  grad.addColorStop(1, '#fff2a8');
+
+  ctx.save();
+  ctx.fillStyle = grad;
+  ctx.shadowColor = 'rgba(255, 213, 77, 0.55)';
+  ctx.shadowBlur = 14;
+  ctx.fillText(text, x, y);
+  ctx.restore();
+
+  ctx.save();
+  ctx.strokeStyle = '#5e3d00';
+  ctx.lineWidth = 1.1;
+  ctx.strokeText(text, x, y);
+  ctx.restore();
+}
+
 async function dgeRenderShlokaCard(id) {
   if (document.fonts && document.fonts.ready) {
     try { await document.fonts.ready; } catch (e) { /* best-effort */ }
   }
 
-  const W = 1080, H = 1080;
+  const tpl = (typeof dgeGetSelectedShareTemplate === 'function') ? dgeGetSelectedShareTemplate() : { id: 'plain', filename: null, w: 1080, h: 1080, safeZone: { x: 90, y: 260, w: 900, h: 560 }, hasBakedBranding: false };
+  const W = tpl.w || 1080, H = tpl.h || 1080;
   const canvas = document.createElement('canvas');
   canvas.width = W; canvas.height = H;
   const ctx = canvas.getContext('2d');
 
   const style = getComputedStyle(document.body);
   const bg = style.getPropertyValue('--bg-main').trim() || '#FAF3E6';
-  const accentRed = style.getPropertyValue('--accent-red').trim() || '#AE231F';
   const accentGold = style.getPropertyValue('--accent-gold').trim() || '#B9821F';
-  const textColor = style.getPropertyValue('--text-sanskrit').trim() || '#9A1B1B';
   const cardBg = style.getPropertyValue('--card-bg').trim() || '#ffffff';
 
-  // Optional custom template: drop images/share-template.png in the repo
-  // to use it as the card's background/frame instead of the plain
-  // programmatic card. Falls back cleanly if it doesn't exist.
-  const templateImg = await dgeLoadTemplateImage('images/share-template.png');
+  const templateImg = tpl.filename ? await dgeLoadTemplateImage(`images/${tpl.filename}`) : null;
 
   const pad = 60;
   if (templateImg) {
@@ -81,42 +107,63 @@ async function dgeRenderShlokaCard(id) {
 
   ctx.textAlign = 'center';
 
+  const zone = tpl.safeZone || { x: pad, y: pad + 80, w: W - pad * 2, h: H - pad * 2 - 160 };
+  const zoneCx = zone.x + zone.w / 2;
+
   const stotraTitleRaw = (typeof stotraData !== 'undefined' && stotraData && stotraData.metadata) ? stotraData.metadata.title : '';
   const stotraTitle = (typeof applyTransliteration === 'function' ? applyTransliteration(stotraTitleRaw, window.activeScript || 'devanagari') : stotraTitleRaw).replace(/<[^>]*>/g, '');
-  ctx.fillStyle = accentRed;
-  ctx.font = "bold 34px 'Tiro Devanagari Sanskrit', serif";
-  dgeWrapCanvasText(ctx, stotraTitle, W - pad * 2 - 60).forEach((line, i) => {
-    ctx.fillText(line, W / 2, pad + 80 + i * 44, W - pad * 2 - 60);
-  });
-
-  ctx.strokeStyle = accentGold;
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(W / 2 - 60, pad + 140);
-  ctx.lineTo(W / 2 + 60, pad + 140);
-  ctx.stroke();
-
-  ctx.fillStyle = accentGold;
-  ctx.font = "600 22px 'Inter', sans-serif";
-  ctx.fillText(`Shloka ${id}`, W / 2, pad + 185);
 
   const shlokaTextRaw = typeof getText === 'function' ? getText(id) : '';
   const shlokaText = shlokaTextRaw.replace(/<[^>]*>/g, '');
-  ctx.fillStyle = textColor;
+
+  // Measure everything first so the whole block can be vertically
+  // centered in the safe zone, not just horizontally.
+  ctx.font = "bold 32px 'Tiro Devanagari Sanskrit', serif";
+  const titleLines = dgeWrapCanvasText(ctx, stotraTitle, zone.w);
+  const titleLineH = 40;
+
   ctx.font = "44px 'Tiro Devanagari Sanskrit', serif";
-  const maxTextWidth = W - pad * 2 - 80;
-  const lines = dgeWrapCanvasText(ctx, shlokaText, maxTextWidth);
-  const lineHeight = 62;
-  const totalTextHeight = lines.length * lineHeight;
-  let startY = (H / 2) - (totalTextHeight / 2) + 40;
-  lines.forEach(line => {
-    ctx.fillText(line, W / 2, startY, maxTextWidth);
-    startY += lineHeight;
+  const shlokaLines = dgeWrapCanvasText(ctx, shlokaText, zone.w);
+  const shlokaLineH = 58;
+
+  const badgeH = 40;
+  const ruleGap = 26;
+  const gapBeforeShloka = 22;
+
+  const totalH = (titleLines.length * titleLineH) + ruleGap + badgeH + gapBeforeShloka + (shlokaLines.length * shlokaLineH);
+  let curY = zone.y + Math.max(0, (zone.h - totalH) / 2) + titleLineH * 0.75;
+
+  ctx.font = "bold 32px 'Tiro Devanagari Sanskrit', serif";
+  titleLines.forEach(line => {
+    dgeDrawEmbossedGoldText(ctx, line, zoneCx, curY);
+    curY += titleLineH;
   });
 
-  ctx.fillStyle = accentRed;
-  ctx.font = "600 20px 'Inter', sans-serif";
-  ctx.fillText('🙏 ' + (document.title || 'Sarvamoola Digital Library'), W / 2, H - pad - 30);
+  curY += ruleGap * 0.4;
+  ctx.strokeStyle = 'rgba(198,146,20,0.85)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(zoneCx - 60, curY);
+  ctx.lineTo(zoneCx + 60, curY);
+  ctx.stroke();
+  curY += ruleGap * 0.6 + 14;
+
+  ctx.font = "600 22px 'Inter', sans-serif";
+  dgeDrawEmbossedGoldText(ctx, `Shloka ${id}`, zoneCx, curY);
+  curY += gapBeforeShloka + 16;
+
+  ctx.font = "44px 'Tiro Devanagari Sanskrit', serif";
+  shlokaLines.forEach(line => {
+    dgeDrawEmbossedGoldText(ctx, line, zoneCx, curY);
+    curY += shlokaLineH;
+  });
+
+  // Skip the footer if this template already has branding baked into
+  // the artwork — drawing our own here would double it up.
+  if (!tpl.hasBakedBranding) {
+    ctx.font = "600 20px 'Inter', sans-serif";
+    dgeDrawEmbossedGoldText(ctx, '🙏 ' + (document.title || 'Sarvamoola Digital Library'), W / 2, H - pad - 30);
+  }
 
   return new Promise(resolve => canvas.toBlob(blob => resolve(blob), 'image/png'));
 }

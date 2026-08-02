@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.1 (Follow-up clear fix + Shloka Fields settings)';
+window.DGE_VERSIONS['ai.js'] = 'v3.2 (Save button repositioned, template picker wiring)';
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -101,6 +101,7 @@ window.openKeyModal = function() {
   dgeRenderAcharyaSettingsUI();
   dgeLoadFeatureFlagsIntoUI();
   dgeLoadShlokaFieldsIntoUI();
+  dgeLoadShareTemplateIntoUI();
   if (typeof openModal === 'function') openModal('keyModal');
 };
 
@@ -123,9 +124,10 @@ window.saveAllApiKeys = function() {
   dgeSaveAcharyaSettingsFromUI();
   dgeSaveFeatureFlagsFromUI();
   dgeSaveShlokaFieldsFromUI();
+  dgeSaveShareTemplateFromUI();
 
   window.closeKeyModal();
-  if (typeof showToast === 'function') showToast('AI settings saved.');
+  if (typeof showToast === 'function') showToast('Settings saved.');
 };
 
 // --- Feature Visibility (🎛️) ---------------------------------------
@@ -233,6 +235,23 @@ window.resetShlokaFieldsToDefault = function() {
   if (typeof renderList === 'function') renderList();
   if (typeof showToast === 'function') showToast('Shloka field visibility reset to defaults.');
 };
+
+// --- Share Image Template (🖼️) ------------------------------------
+
+function dgeLoadShareTemplateIntoUI() {
+  const sel = document.getElementById('defaultShareTemplateSelect');
+  if (!sel || !window.SHARE_IMAGE_TEMPLATES) return;
+  const current = localStorage.getItem('default_share_template') || 'plain';
+  sel.innerHTML = window.SHARE_IMAGE_TEMPLATES.map(t =>
+    `<option value="${t.id}" ${t.id === current ? 'selected' : ''}>${t.label}</option>`
+  ).join('');
+}
+
+function dgeSaveShareTemplateFromUI() {
+  const sel = document.getElementById('defaultShareTemplateSelect');
+  if (!sel) return;
+  localStorage.setItem('default_share_template', sel.value);
+}
 
 // Resolves the ACHARYA_QUERY_TYPES list with any per-device overrides (from
 // the ⚙️ Ask Acharya Settings section below) layered on top of the shipped
