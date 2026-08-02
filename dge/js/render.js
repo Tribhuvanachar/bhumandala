@@ -1,6 +1,8 @@
 // DGE Module: render.js
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
+window.DGE_VERSIONS = window.DGE_VERSIONS || {};
+window.DGE_VERSIONS['render.js'] = 'v2.0 (Status/Doubt chips + Notes search)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -74,6 +76,9 @@ function renderList() {
         }
       } else if(scope === 'mula') {
         hasMatch = i.toString().includes(query) || shloka.sa.toLowerCase().includes(query);
+      } else if(scope === 'notes') {
+        const noteArr = (typeof notes !== 'undefined' && notes[i]) ? notes[i] : [];
+        hasMatch = noteArr.some(n => (n.text || '').toLowerCase().includes(query));
       } else if(shloka.commentaries && shloka.commentaries[scope]) {
         hasMatch = shloka.commentaries[scope].toLowerCase().includes(query);
         if(hasMatch) forceCommentaries.push(scope);

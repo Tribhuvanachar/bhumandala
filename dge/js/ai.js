@@ -98,6 +98,7 @@ window.openKeyModal = function() {
   });
   const parallelToggle = document.getElementById('aiParallelModeToggle');
   if (parallelToggle) parallelToggle.checked = localStorage.getItem('user_ai_parallel_mode') === 'true';
+  dgeLoadAcharyaSettingsIntoUI();
   if (typeof openModal === 'function') openModal('keyModal');
 };
 
@@ -117,9 +118,77 @@ window.saveAllApiKeys = function() {
   const parallelToggle = document.getElementById('aiParallelModeToggle');
   if (parallelToggle) localStorage.setItem('user_ai_parallel_mode', parallelToggle.checked ? 'true' : 'false');
 
+  dgeSaveAcharyaSettingsFromUI();
+
   window.closeKeyModal();
   if (typeof showToast === 'function') showToast('AI settings saved.');
 };
+
+// Resolves the ACHARYA_QUERY_TYPES list with any per-device overrides (from
+// the ⚙️ Ask Acharya Settings section below) layered on top of the shipped
+// defaults in config.js.
+function dgeGetEffectiveQueryTypes() {
+  const defaults = window.ACHARYA_QUERY_TYPES || [];
+  try {
+    const override = JSON.parse(localStorage.getItem('acharya_query_config') || 'null');
+    if (override && Array.isArray(override)) {
+      return defaults.map(def => {
+        const o = override.find(x => x.id === def.id);
+        if (!o) return def;
+        return {
+          ...def,
+          fields: Array.isArray(o.fields) ? o.fields : def.fields,
+          depth: o.depth || def.depth
+        };
+      });
+    }
+  } catch (e) { /* fall through to defaults */ }
+  return defaults;
+}
+window.dgeGetEffectiveQueryTypes = dgeGetEffectiveQueryTypes;
+
+function dgeFieldsToTextareaValue(fields) {
+  return Array.isArray(fields) ? fields.join('\n') : '';
+}
+function dgeTextareaValueToFields(value) {
+  return value.split('\n').map(s => s.trim()).filter(Boolean);
+}
+
+function dgeLoadAcharyaSettingsIntoUI() {
+  const q = dgeGetEffectiveQueryTypes();
+  const byId = id => q.find(x => x.id === id) || {};
+  const shlokaEl = document.getElementById('acharyaFieldsShloka');
+  const grammarEl = document.getElementById('acharyaFieldsGrammar');
+  const depthEl = document.getElementById('acharyaBhashyaDepth');
+  const translateEl = document.getElementById('acharyaFieldsTranslate');
+  if (shlokaEl) shlokaEl.value = dgeFieldsToTextareaValue(byId('shloka').fields);
+  if (grammarEl) grammarEl.value = dgeFieldsToTextareaValue(byId('grammar').fields);
+  if (depthEl) depthEl.value = byId('bhashya').depth || 'summary';
+  if (translateEl) translateEl.value = dgeFieldsToTextareaValue(byId('translate').fields);
+}
+
+window.resetAcharyaFieldsToDefault = function() {
+  localStorage.removeItem('acharya_query_config');
+  dgeLoadAcharyaSettingsIntoUI();
+  if (typeof showToast === 'function') showToast('Ask Acharya settings reset to defaults.');
+};
+
+function dgeSaveAcharyaSettingsFromUI() {
+  const shlokaEl = document.getElementById('acharyaFieldsShloka');
+  const grammarEl = document.getElementById('acharyaFieldsGrammar');
+  const depthEl = document.getElementById('acharyaBhashyaDepth');
+  const translateEl = document.getElementById('acharyaFieldsTranslate');
+  if (!shlokaEl && !grammarEl && !depthEl && !translateEl) return;
+
+  const override = [
+    { id: 'shloka', fields: shlokaEl ? dgeTextareaValueToFields(shlokaEl.value) : undefined },
+    { id: 'grammar', fields: grammarEl ? dgeTextareaValueToFields(grammarEl.value) : undefined },
+    { id: 'bhashya', depth: depthEl ? depthEl.value : undefined },
+    { id: 'translate', fields: translateEl ? dgeTextareaValueToFields(translateEl.value) : undefined }
+  ];
+  localStorage.setItem('acharya_query_config', JSON.stringify(override));
+  renderAcharyaQueryButtons();
+}
 
 function dgeGetConfiguredProviders() {
   const out = [];
@@ -382,12 +451,25 @@ window.askAcharya = async function(e, type, payload) {
   if(window.activeScript === 'tamil') targetLang = "Tamil";
   if(window.activeScript === 'malayalam') targetLang = "Malayalam";
 
+  const effectiveTypes = dgeGetEffectiveQueryTypes();
+  const typeConfig = effectiveTypes.find(q => q.id === type);
+
   let promptText = "";
-  if (type === 'shloka') {
-      promptText = `You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta). For the verse: "${text}", provide: 1. Padachheda (Word-by-word split) 2. Anvaya (Prose word order) 3. Word Meaning 4. Bhavartha (Overarching theme strictly according to Sri Madhvacharya's philosophy). Format using clean markdown headings.`;
-  } else if (type === 'grammar') {
-      promptText = `You are a traditional Vyakarana Acharya. For the text: "${text}", provide: 1. Dhatu & Gana (if verb) 2. Pratyaya (Krt/Taddhita/Tin) 3. Vibhakti & Linga (if noun) 4. Samasa Vigraha (if compound). Format using clean markdown.`;
+  if (type === 'shloka' || type === 'grammar') {
+      const fieldsList = (typeConfig && typeConfig.fields && typeConfig.fields.length) ? typeConfig.fields : ['Word Meaning'];
+      const persona = type === 'shloka'
+        ? "You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta)."
+        : "You are a traditional Vyakarana Acharya.";
+      const fieldsPrompt = fieldsList.map((f, i) => `${i + 1}. ${f}`).join('\n');
+      promptText = `${persona} For the text: "${text}", provide:\n${fieldsPrompt}\nFormat using clean markdown headings.`;
   } else if (type === 'commentary') {
+      const depth = (typeConfig && typeConfig.depth) || 'summary';
+      const depthInstruction = {
+        summary: 'Provide a concise overall summary of the philosophical Siddhanta.',
+        sentence: 'Provide a sentence-by-sentence breakdown and explanation.',
+        word: 'Provide a detailed word-by-word meaning and analysis.'
+      }[depth] || 'Provide a concise overall summary of the philosophical Siddhanta.';
+
       if (payload && payload.commentaryText) {
           promptText = `You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta). Analyze ONLY the supplied commentary text provided below. Do NOT hallucinate external commentaries.
 
@@ -397,14 +479,16 @@ Commentary Text: "${payload.commentaryText}"
 Highlighted Fragment: "${payload.selectedText}"
 
 Provide a detailed scholarly breakdown in clean markdown:
-1. Sentence-by-Sentence Breakdown & Word-by-Word Meaning of this supplied commentary fragment.
+1. ${depthInstruction}
 2. Pramana & Citation Expansion: Identify every scriptural quote (Shruti, Smriti, Gita, Amarakosha, etc.) cited in this text. Provide the FULL Sanskrit quote, source attribution, and precise meaning.
 3. Philosophical Siddhanta strictly according to Sri Madhvacharya's Dvaita philosophy derived from this commentary.`;
       } else {
-          promptText = `You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta). Analyze this commentary excerpt: "${text}". Provide: 1. Sentence Breakdown 2. Purvapaksha & Siddhanta (strictly according to Sri Madhvacharya) 3. Pramana/Citations expanded with full quotes. Format using clean markdown.`;
+          promptText = `You are a traditional scholar of the Madhva Sampradaya (Dvaita Vedanta). Analyze this commentary excerpt: "${text}". ${depthInstruction} Also provide Purvapaksha & Siddhanta (strictly according to Sri Madhvacharya), and Pramana/Citations expanded with full quotes. Format using clean markdown.`;
       }
   } else if (type === 'translate') {
-      promptText = `Translate and explain the meaning of this Sanskrit text: "${text}" into ${targetLang}. Provide a natural translation and a brief summary of its philosophical significance according to the Madhva Sampradaya (Dvaita philosophy). Format cleanly using markdown.`;
+      const fieldsList = (typeConfig && typeConfig.fields && typeConfig.fields.length) ? typeConfig.fields : ['A natural translation'];
+      const fieldsPrompt = fieldsList.map((f, i) => `${i + 1}. ${f}`).join('\n');
+      promptText = `Translate and explain the meaning of this Sanskrit text: "${text}" into ${targetLang}. Provide:\n${fieldsPrompt}\nFormat cleanly using markdown.`;
   }
 
   // Fresh top-level question — start a new conversation thread.
@@ -425,6 +509,9 @@ window.sendAcharyaFollowUp = async function() {
 
 // Follow-up mic input (independent tiny SpeechRecognition instance so it
 // doesn't collide with the search box's listener in voice.js).
+const DGE_SCRIPT_TO_SPEECH_LANG_AI = {
+  devanagari: 'hi-IN', iast: 'en-IN', kannada: 'kn-IN', telugu: 'te-IN', tamil: 'ta-IN', malayalam: 'ml-IN'
+};
 let dgeFollowUpRecognition = null;
 window.startFollowUpVoiceInput = function() {
   const Ctor = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -432,7 +519,7 @@ window.startFollowUpVoiceInput = function() {
   if (!Ctor || !input) return;
 
   dgeFollowUpRecognition = new Ctor();
-  dgeFollowUpRecognition.lang = document.documentElement.lang || 'en-IN';
+  dgeFollowUpRecognition.lang = DGE_SCRIPT_TO_SPEECH_LANG_AI[window.activeScript] || 'en-IN';
   dgeFollowUpRecognition.interimResults = true;
   dgeFollowUpRecognition.onresult = (event) => {
     let transcript = '';
@@ -468,12 +555,13 @@ window.closeAcharyaModal = function() {
 function renderAcharyaQueryButtons() {
   const row = document.getElementById('acharyaQueryButtonsRow');
   const fullContainer = document.getElementById('acharyaFullWidthButtons');
-  if (!row || !fullContainer || !window.ACHARYA_QUERY_TYPES) return;
+  const types = dgeGetEffectiveQueryTypes();
+  if (!row || !fullContainer || !types) return;
 
   row.innerHTML = '';
   fullContainer.innerHTML = '';
 
-  const enabled = window.ACHARYA_QUERY_TYPES.filter(q => q.enabled);
+  const enabled = types.filter(q => q.enabled);
   enabled.forEach(q => {
     const btn = document.createElement('button');
     btn.className = 'tooltip-btn';

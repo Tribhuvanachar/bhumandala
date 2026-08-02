@@ -1,14 +1,20 @@
 // js/actions.js
 // Maps to F-014: Unified Shloka Actions Sheet
-// One entry point (the ⋯ button on each card) for everything that used to
-// be spread across a separate note button, a marker context-menu, and a
-// snippet badge: favorite / practice flags, notes, and saved snippets —
-// plus download & share for the full shloka and for individual snippets.
+// One entry point (the ⋯ button on each card) for everything spread
+// across marks (favorite / status / doubt), notes, and saved snippets —
+// plus download & share for the full shloka and for individual snippets
+// and note entries.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['actions.js'] = 'v1.0';
+window.DGE_VERSIONS['actions.js'] = 'v2.0 (Status + Doubt + Structured Notes)';
 
 window.currentActionsSheetId = null;
+
+const STATUS_LABELS = {
+  pending: { icon: '○', label: 'Pending' },
+  practice: { icon: '🚧', label: 'Needs Practice' },
+  done: { icon: '✅', label: 'Done' }
+};
 
 window.openActionsSheet = function(id) {
   window.currentActionsSheetId = id;
@@ -23,29 +29,45 @@ window.renderActionsSheetContent = function(id) {
   const numEl = document.getElementById('actionsSheetShlokaNum');
   if (numEl) numEl.innerText = id;
 
-  const isFav = typeof marks !== 'undefined' && marks[id] === 'fav';
-  const isPractice = typeof marks !== 'undefined' && marks[id] === 'practice';
-  const noteText = (typeof notes !== 'undefined' && notes[id]) ? notes[id] : '';
+  const m = (typeof marks !== 'undefined' && marks[id]) ? marks[id] : { fav: false, status: null, doubt: false };
+  const noteEntries = (typeof notes !== 'undefined' && notes[id]) ? notes[id] : [];
   const snippetList = (typeof snippets !== 'undefined' && snippets[id]) ? snippets[id] : [];
 
   let html = '';
 
-  // --- Favorite / Practice marks ---
+  // --- Favorite / Status / Doubt ---
+  const statusInfo = m.status ? STATUS_LABELS[m.status] : { icon: '○', label: 'Set Status' };
   html += `<div class="actions-section-label">Mark This Shloka</div>`;
-  html += `<div style="display:flex; gap:8px; margin-bottom:18px;">`;
-  html += `<button class="btn-sm mark-toggle-btn${isFav ? ' active-fav' : ''}" style="flex:1;" onclick="window.toggleMark(${id}, 'fav')">${isFav ? '★' : '☆'} Favorite</button>`;
-  html += `<button class="btn-sm mark-toggle-btn${isPractice ? ' active-practice' : ''}" style="flex:1;" onclick="window.toggleMark(${id}, 'practice')">🚩 ${isPractice ? 'Flagged' : 'Needs Practice'}</button>`;
+  html += `<div style="display:flex; gap:8px; margin-bottom:10px;">`;
+  html += `<button class="btn-sm mark-toggle-btn${m.fav ? ' active-fav' : ''}" style="flex:1;" onclick="window.toggleFavorite(${id})">${m.fav ? '★' : '☆'} Favorite</button>`;
+  html += `<button class="btn-sm mark-toggle-btn${m.doubt ? ' active-doubt' : ''}" style="flex:1;" onclick="window.toggleDoubt(${id})">❓ ${m.doubt ? 'Has Doubt' : 'Mark Doubt'}</button>`;
   html += `</div>`;
+  html += `<button class="btn-sm mark-toggle-btn${m.status ? ' active-status-' + m.status : ''}" style="width:100%; margin-bottom:18px;" onclick="window.cycleStatus(${id})">${statusInfo.icon} Status: ${statusInfo.label} <span style="opacity:0.6; font-weight:500;">(tap to cycle)</span></button>`;
 
-  // --- Note ---
-  html += `<div class="actions-section-label">Your Note</div>`;
-  if (noteText) {
-    const preview = noteText.length > 140 ? noteText.slice(0, 140) + '…' : noteText;
-    html += `<div class="note-preview-box">${preview.replace(/</g, '&lt;')}</div>`;
+  // --- Notes (structured, individually shareable) ---
+  html += `<div class="actions-section-label">Notes (${noteEntries.length})</div>`;
+  if (noteEntries.length === 0) {
+    html += `<div class="note-preview-box empty" style="margin-bottom:10px;">No notes yet.</div>`;
   } else {
-    html += `<div class="note-preview-box empty">No note yet.</div>`;
+    html += `<div style="display:flex; flex-direction:column; gap:8px; margin-bottom:10px;">`;
+    noteEntries.forEach((entry, idx) => {
+      const preview = entry.text.length > 160 ? entry.text.slice(0, 160) + '…' : entry.text;
+      const when = new Date(entry.addedAt).toLocaleDateString();
+      html += `
+        <div class="note-preview-box" style="margin-bottom:0;">
+          <div style="font-size:10px; color:var(--muted-text); margin-bottom:4px; display:flex; justify-content:space-between;">
+            <span>${(entry.source || 'Manual').replace(/</g, '&lt;')} · ${when}</span>
+          </div>
+          <div>${preview.replace(/</g, '&lt;')}</div>
+          <div style="display:flex; gap:6px; margin-top:8px;">
+            <button class="btn-icon" title="Share this note" onclick="window.shareNoteEntry(${id}, ${idx})">📤</button>
+            <button class="btn-icon" title="Delete this note" style="color:var(--accent-red);" onclick="window.deleteNoteEntry(${id}, ${idx})">🗑️</button>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
   }
-  html += `<button class="btn-sm" style="width:100%; margin-bottom:18px;" onclick="window.closeModal('actionsSheetModal'); window.openNote(${id});">${noteText ? '✏️ Edit Note' : '➕ Add Note'}</button>`;
+  html += `<button class="btn-sm" style="width:100%; margin-bottom:18px;" onclick="window.closeModal('actionsSheetModal'); window.openNote(${id});">➕ Add Note</button>`;
 
   // --- Snippets ---
   html += `<div class="actions-section-label">Saved Snippets (${snippetList.length})</div>`;
@@ -75,10 +97,16 @@ window.renderActionsSheetContent = function(id) {
 
   // --- Full shloka download / share ---
   html += `<div class="actions-section-label">Share / Download Full Shloka</div>`;
-  html += `<div style="display:flex; gap:8px;">`;
+  html += `<div style="display:flex; gap:8px; margin-bottom:8px;">`;
   html += `<button class="btn-sm" style="flex:1;" onclick="window.downloadFullShlokaAudio(${id})">⬇️ Audio</button>`;
   html += `<button class="btn-sm" style="flex:1;" onclick="window.shareShlokaAudio(${id})">📤 Share Text + Audio</button>`;
   html += `</div>`;
+  html += `<div style="display:flex; gap:8px; margin-bottom:8px;">`;
+  html += `<button class="btn-sm" style="flex:1;" onclick="window.downloadShlokaScreenshot(${id})">⬇️ Image</button>`;
+  html += `<button class="btn-sm" style="flex:1;" onclick="window.shareShlokaScreenshot(${id})">🖼️ Share as Image</button>`;
+  html += `</div>`;
+  html += `<button class="btn-sm" style="width:100%;" onclick="window.shareShlokaTextOnly(${id})">📝 Share Text Only</button>`;
+  html += `<div style="font-size:10px; color:var(--muted-text); margin-top:6px; line-height:1.5;">Some apps (e.g. WhatsApp for audio files) drop the caption text when sharing a file — use "Text Only" if the combined share arrives without it.</div>`;
 
   container.innerHTML = html;
 };

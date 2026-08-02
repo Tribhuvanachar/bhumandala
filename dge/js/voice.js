@@ -12,6 +12,18 @@ window.DGE_VERSIONS['voice.js'] = 'v1.0';
 let dgeRecognition = null;
 let dgeListening = false;
 
+// Maps the app's transliteration script selector to a speech-recognition
+// language code, so the mic listens in the language that matches whatever
+// script is currently selected instead of always assuming English.
+const DGE_SCRIPT_TO_SPEECH_LANG = {
+  devanagari: 'hi-IN',
+  iast: 'en-IN',
+  kannada: 'kn-IN',
+  telugu: 'te-IN',
+  tamil: 'ta-IN',
+  malayalam: 'ml-IN'
+};
+
 function dgeGetSpeechRecognitionCtor() {
   return window.SpeechRecognition || window.webkitSpeechRecognition || null;
 }
@@ -28,7 +40,7 @@ window.startSearchVoiceInput = function() {
   }
 
   dgeRecognition = new Ctor();
-  dgeRecognition.lang = document.documentElement.lang || 'en-IN';
+  dgeRecognition.lang = DGE_SCRIPT_TO_SPEECH_LANG[window.activeScript] || 'en-IN';
   dgeRecognition.interimResults = true;
   dgeRecognition.maxAlternatives = 1;
 

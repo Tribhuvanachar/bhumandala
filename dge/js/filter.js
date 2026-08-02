@@ -1,5 +1,7 @@
 // js/filter.js
-// Maps to Feature: Filter 
+// Maps to Feature: Filter
+window.DGE_VERSIONS = window.DGE_VERSIONS || {};
+window.DGE_VERSIONS['filter.js'] = 'v2.0 (Status + Doubt filters)';
 
 function getFilteredIds() {
   if (!stotraData) return [];

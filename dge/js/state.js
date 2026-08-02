@@ -1,4 +1,7 @@
 // DGE Module: state.js
+window.DGE_VERSIONS = window.DGE_VERSIONS || {};
+window.DGE_VERSIONS['state.js'] = 'v2.0 (nsKey fix + marks/notes migration)';
+
 window.activeScript = localStorage.getItem('app_script') || 'devanagari';
 window.activeId = null;
 window.stotraData = null;

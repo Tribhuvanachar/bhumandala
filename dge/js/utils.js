@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['utils.js'] = 'v1.2';
+window.DGE_VERSIONS['utils.js'] = 'v1.3 (warn + unhandledrejection capture)';
 
 window.DGE_THEMES = ['traditional', 'minimal', 'vibrant', 'darkglass'];
 window.DGE_THEME_META_COLORS = {
@@ -185,12 +185,20 @@ window.showToast = function(msg) {
     window.addEventListener('orientationchange', positionAboveBottomPlayer);
 
     const oldLog = console.log;
+    const oldWarn = console.warn;
     const oldErr = console.error;
 
     console.log = function(...args) {
         oldLog(...args);
         const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ');
         logTextContainer.innerHTML += `<span style="color:#0f0;">> ${msg}</span><br>`;
+        dgeLog.scrollTop = dgeLog.scrollHeight;
+    };
+
+    console.warn = function(...args) {
+        oldWarn(...args);
+        const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ');
+        logTextContainer.innerHTML += `<span style="color:#ffcc00;">> [WARN] ${msg}</span><br>`;
         dgeLog.scrollTop = dgeLog.scrollHeight;
     };
 
@@ -204,6 +212,16 @@ window.showToast = function(msg) {
     window.onerror = function(msg, url, line) {
         console.error(`Uncaught Error: ${msg} (Line ${line})`);
     };
+
+    // Several features added recently (Ask Acharya, snippet download/share,
+    // audio caching) are async functions. A thrown error inside one of
+    // those becomes an unhandled promise rejection, which window.onerror
+    // does NOT catch — only this listener does.
+    window.addEventListener('unhandledrejection', (event) => {
+        const reason = event.reason;
+        const msg = (reason && reason.message) ? reason.message : String(reason);
+        console.error(`Unhandled Promise Rejection: ${msg}`);
+    });
 
     // Public API so other modules (e.g. dev.js) can feed content into THIS
     // single log panel instead of creating their own separate overlay.

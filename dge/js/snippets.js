@@ -215,6 +215,23 @@ window.downloadSnippetAudio = async function(id, start, end) {
 
 // --- Share (Web Share API, with graceful fallback) ---------------------
 
+window.shareShlokaTextOnly = async function(id) {
+    const rawText = typeof getText === 'function' ? getText(id).replace(/<[^>]*>/g, '') : '';
+    const text = `${rawText}\n\n— Shloka ${id}, ${document.title || 'Sarvamoola Digital Library'}`;
+    try {
+        if (navigator.share) {
+            await navigator.share({ text, title: `Shloka ${id}` });
+        } else if (navigator.clipboard) {
+            await navigator.clipboard.writeText(text);
+            if (typeof showToast === 'function') showToast('Text copied to clipboard.');
+        }
+    } catch (e) {
+        if (e && e.name === 'AbortError') return;
+        console.error('Share text failed', e);
+        if (typeof showToast === 'function') showToast('Could not share this text.');
+    }
+};
+
 window.shareShlokaAudio = async function(id, snippet) {
     if (typeof showToast === 'function') showToast('Preparing to share…');
     try {

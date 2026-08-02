@@ -1,6 +1,8 @@
 // DGE Module: audio.js
 // js/audio.js
 // Maps to F-004 (Audio Engine) & F-013 (Offline Cache)
+window.DGE_VERSIONS = window.DGE_VERSIONS || {};
+window.DGE_VERSIONS['audio.js'] = 'v2.0 (Seek Slider + Enter-to-seek + Sync Highlight)';
 
 function formatTime(s) { 
   if (isNaN(s)) return "0:00.000"; 

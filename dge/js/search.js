@@ -1,5 +1,7 @@
 // js/search.js
 // Maps to F-005: Search & Highlighting
+window.DGE_VERSIONS = window.DGE_VERSIONS || {};
+window.DGE_VERSIONS['search.js'] = 'v1.0';
 
 function handleSearch() {
   const searchInput = document.getElementById('searchInput');

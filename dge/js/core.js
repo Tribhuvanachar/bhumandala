@@ -107,7 +107,7 @@ window.renderStotraChrome = function() {
 
   if (dynamicList && searchScope && window.stotraData.metadata.availableCommentaries) {
     dynamicList.innerHTML = '';
-    searchScope.innerHTML = '<option value="all">Search All</option><option value="mula">Shloka Only</option>';
+    searchScope.innerHTML = '<option value="all">Search All</option><option value="mula">Shloka Only</option><option value="notes">My Notes Only</option>';
 
     Object.entries(window.stotraData.metadata.availableCommentaries).forEach(([key, name]) => {
       const transName = doTranslit(name);
