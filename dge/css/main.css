@@ -164,7 +164,7 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
    place; Status opens the shared floating picker (#statusPickerMenu). */
 .chip-toggle { width: 27px; height: 27px; border-radius: 50%; background: var(--card-bg); border: 1.5px solid var(--card-border); color: var(--muted-text); font-size: 13px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all var(--t-fast) var(--ease); padding: 0; }
 .chip-toggle:active { transform: scale(0.88); }
-.chip-toggle.active-fav { background: var(--accent-gold); border-color: var(--accent-gold); color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+.chip-toggle.active-fav { background: #2b2118; border-color: var(--accent-gold); color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
 .chip-toggle.active-doubt { background: transparent; border-color: var(--accent-red); color: var(--accent-red); box-shadow: inset 0 0 0 1px var(--accent-red); }
 .chip-toggle.active-status-pending { background: var(--muted-text); border-color: var(--muted-text); color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.12); }
 .chip-toggle.active-status-practice { background: #e8791a; border-color: #e8791a; color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
