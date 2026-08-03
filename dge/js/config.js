@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v5.6 (Exact "- 3BU1 -" format)';
+window.DGE_VERSIONS['config.js'] = 'v5.7 (ADMIN_NEW_FILE_EXTENSIONS)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -10,7 +10,7 @@ const appConfig = {
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
   secretPasskey: "SHRI108",
-  version: "v4.24"
+  version: "v4.25"
 };
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
@@ -126,6 +126,11 @@ window.dgeGetEffectiveShlokaFields = function() {
 //     still works, just with a generic centered safe zone by default.
 const GITHUB_REPO_CONFIG = { owner: 'Tribhuvanachar', repo: 'bhumandala', branch: 'main', imagesPath: 'dge/images' };
 window.GITHUB_REPO_CONFIG = GITHUB_REPO_CONFIG;
+
+// New-file extensions offered in the admin editor's "+ New File" button —
+// deliberately a curated list, not every possible extension.
+const ADMIN_NEW_FILE_EXTENSIONS = ['.js', '.json', '.html', '.css', '.md', '.txt', '.svg'];
+window.ADMIN_NEW_FILE_EXTENSIONS = ADMIN_NEW_FILE_EXTENSIONS;
 
 // Admin access levels — each superadmin URL code is bound to a specific
 // root path it can NEVER navigate above, even by tapping "Up" repeatedly.

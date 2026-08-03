@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.3 (Fixed empty-file false-positive, graceful 404 handling, drag auto-scroll, folder upload)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.4 (New File + Add Image from URL)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -402,6 +402,69 @@ window.dgeAdminNewFolder = async function() {
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
     if (typeof showToast === 'function') showToast('Failed: ' + e.message);
+  }
+};
+
+// Creates a new blank file, restricted to a curated extension list
+// (ADMIN_NEW_FILE_EXTENSIONS in config.js) rather than allowing anything.
+window.dgeAdminNewFile = async function() {
+  const allowed = window.ADMIN_NEW_FILE_EXTENSIONS || ['.js', '.json', '.html', '.css', '.md', '.txt'];
+  const name = prompt(`New file name (allowed types: ${allowed.join(', ')}):`, 'untitled.txt');
+  if (!name) return;
+  const trimmed = name.trim();
+  const hasAllowedExt = allowed.some(ext => trimmed.toLowerCase().endsWith(ext));
+  if (!hasAllowedExt) {
+    if (typeof showToast === 'function') showToast(`File type not allowed. Use one of: ${allowed.join(', ')}`);
+    return;
+  }
+  const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + trimmed;
+  try {
+    await dgeGithubPutFile(targetPath, dgeUtf8ToBase64(''), `Create ${trimmed} via admin editor`);
+    if (typeof showToast === 'function') showToast('File created.');
+    dgeAdminNavigate(dgeAdminCurrentPath);
+  } catch (e) {
+    if (typeof showToast === 'function') showToast('Failed: ' + e.message);
+  }
+};
+
+// Fetches an image from an external URL and uploads it into the current
+// folder. Honest limitation: this only works when the source host sends
+// permissive CORS headers — many image hosts (and most social/CMS sites)
+// don't, and the fetch will fail for those. There's no way around this
+// from client-side JS; it would need a server-side proxy to fetch on the
+// browser's behalf, which this static site doesn't have.
+window.dgeAdminAddImageFromUrl = async function() {
+  const url = prompt('Image URL to fetch and upload here:');
+  if (!url || !url.trim()) return;
+  const trimmedUrl = url.trim();
+
+  let filename;
+  try {
+    const u = new URL(trimmedUrl);
+    filename = u.pathname.split('/').pop() || 'image.png';
+    if (!/\.[a-z0-9]+$/i.test(filename)) filename += '.png';
+  } catch (e) {
+    if (typeof showToast === 'function') showToast('That doesn\'t look like a valid URL.');
+    return;
+  }
+
+  if (typeof showToast === 'function') showToast('Fetching image…');
+  try {
+    const res = await fetch(trimmedUrl);
+    if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+    const blob = await res.blob();
+    const base64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.substring(reader.result.indexOf(',') + 1));
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+    const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + filename;
+    await dgeGithubPutFile(targetPath, base64, `Add image from URL: ${trimmedUrl}`);
+    if (typeof showToast === 'function') showToast('Image uploaded.');
+    dgeAdminNavigate(dgeAdminCurrentPath);
+  } catch (e) {
+    if (typeof showToast === 'function') showToast(`Couldn't fetch that image — likely a CORS restriction from the source site (${e.message}). Try downloading it and using Upload instead.`);
   }
 };
 
