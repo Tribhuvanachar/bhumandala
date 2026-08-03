@@ -119,6 +119,12 @@ body.is-authorized .advanced-feature { display: flex !important; }
 .support-project-btn:active { transform: scale(0.96); background: var(--accent-glow); }
 
 .search-box-group { display: flex; gap: 6px; margin-bottom: 12px; }
+.char-palette-toggle { flex-shrink: 0; width: 38px; border-radius: var(--radius-md); border: 1px solid var(--card-border); background: var(--card-bg); color: var(--text-primary); font-weight: 700; font-style: italic; cursor: pointer; }
+.char-palette-panel { display: none; position: sticky; top: calc(60px + env(safe-area-inset-top)); z-index: 160; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 8px; margin-bottom: 12px; box-shadow: var(--shadow-md); }
+.char-palette-panel.show { display: block; }
+.char-palette-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.char-palette-grid button { padding: 8px 0; border-radius: var(--radius-xs); border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-sanskrit); font-size: 15px; font-weight: 600; cursor: pointer; }
+.char-palette-grid button:active { background: var(--card-active); transform: scale(0.92); }
 .search-scope-select { border: 1px solid var(--card-border); border-radius: var(--radius-pill); padding: 0 8px; font-size: 11px; font-weight: 700; background: var(--card-bg); color: var(--text-primary); outline: none; }
 .search-container { position: relative; flex-grow: 1; }
 .search-input { width: 100%; padding: 10px 64px 10px 14px; border: 1px solid var(--card-border); border-radius: var(--radius-pill); font-size: 13px; background: var(--card-bg); color: var(--text-primary); box-sizing: border-box; outline: none; transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease); }
@@ -142,7 +148,7 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .reading-card-wrap.minimized .reading-card::before, .reading-card-wrap.minimized .reading-card::after { display: none; }
 .reading-card-wrap.minimized .reading-card-toggle { transform: rotate(180deg); }
 
-.reading-card { position: relative; width: 100%; box-sizing: border-box; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: var(--radius-lg); padding: 22px 18px; text-align: center; font-family: var(--font-sanskrit); font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.7; font-weight: 500; margin-bottom: 16px; min-height: 70px; display: block; overflow-wrap: anywhere; box-shadow: var(--shadow-sm); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease), max-height var(--t-med) var(--ease), padding var(--t-med) var(--ease); -webkit-touch-callout: none; }
+.reading-card { position: relative; width: 100%; box-sizing: border-box; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: var(--radius-lg); padding: 40px 18px 22px 18px; text-align: center; font-family: var(--font-sanskrit); font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.7; font-weight: 500; margin-bottom: 16px; min-height: 70px; display: block; overflow-wrap: anywhere; box-shadow: var(--shadow-sm); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease), max-height var(--t-med) var(--ease), padding var(--t-med) var(--ease); -webkit-touch-callout: none; }
 .reading-card.highlight { border-color: var(--accent-red); box-shadow: 0 0 0 4px var(--accent-glow), var(--shadow-sm); }
 .reading-card::before, .reading-card::after { content: "❈"; display: block; font-size: 12px; color: var(--accent-gold); opacity: 0.6; margin-bottom: 6px; font-family: var(--font-ui); }
 .reading-card::after { margin-bottom: 0; margin-top: 6px; }
@@ -155,7 +161,7 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .shloka-card:active { background: var(--card-active); }
 
 .shloka-main-row { display: flex; width: 100%; gap: 10px; align-items: flex-start; }
-.shloka-status-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.shloka-status-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-left: 28px; }
 .copy-shloka-btn { flex-shrink: 0; opacity: 0.55; }
 .copy-shloka-btn:active { opacity: 1; }
 .shloka-num { font-size: 12px; font-weight: 700; color: var(--muted-text); min-width: 20px; margin-top: 4px; }
@@ -165,7 +171,7 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 
 /* Inline chip toggles directly on the card — Favorite/Doubt toggle in
    place; Status opens the shared floating picker (#statusPickerMenu). */
-.chip-toggle { width: 22px; height: 22px; border-radius: 50%; background: var(--card-bg); border: 1.5px solid var(--card-border); color: var(--muted-text); font-size: 11px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all var(--t-fast) var(--ease); padding: 0; }
+.chip-toggle { width: 19px; height: 19px; border-radius: 50%; background: var(--card-bg); border: 1.3px solid var(--card-border); color: var(--muted-text); font-size: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all var(--t-fast) var(--ease); padding: 0; }
 .chip-toggle:active { transform: scale(0.88); }
 .chip-toggle.active-fav { background: #2b2118; border-color: var(--accent-gold); color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
 .chip-toggle.active-doubt { background: transparent; border-color: var(--accent-red); color: var(--accent-red); box-shadow: inset 0 0 0 1px var(--accent-red); }
@@ -187,7 +193,7 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .snippet-badge { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; border-radius: var(--radius-pill); padding: 2px 8px; font-size: 10px; font-weight: 700; cursor: pointer; margin-left: 6px; display: inline-block; }
 
 /* Unified Shloka Actions Sheet */
-.status-chip { height: 22px; box-sizing: border-box; padding: 0 8px; border-radius: var(--radius-pill); background: var(--card-active); color: var(--muted-text); font-weight: 700; font-size: 11px; display: inline-flex; align-items: center; gap: 3px; line-height: 1; }
+.status-chip { height: 19px; box-sizing: border-box; padding: 0 7px; border-radius: var(--radius-pill); background: var(--card-active); color: var(--muted-text); font-weight: 700; font-size: 10px; display: inline-flex; align-items: center; gap: 3px; line-height: 1; }
 .status-chip.is-fav { color: var(--accent-gold); }
 .status-chip.is-pending { color: var(--muted-text); }
 .status-chip.is-practice { color: var(--accent-red); }

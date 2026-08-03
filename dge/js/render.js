@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v3.3 (Smaller, consistent icon sizing)';
+window.DGE_VERSIONS['render.js'] = 'v3.4 (Phonetic search tolerance, smaller icons)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -29,25 +29,56 @@ function setCommentaryView(view, el) {
   }
 }
 
-// Builds a case-insensitive regex source from a query. For IAST, each
-// plain ASCII letter that has a diacritic'd counterpart (a/ā, i/ī, u/ū,
-// r/ṛ, n/ṅ/ñ/ṇ, t/ṭ, d/ḍ, s/ś/ṣ, m/ṃ, h/ḥ) becomes a character class
-// matching either form — there's no way to type diacritics on a normal
-// keyboard, so a plain "uvaca" needs to match displayed "uvāca". This
-// covers both "does it match" and "highlight the match" in one regex,
-// rather than stripping accents (which finds the match but can't then
-// highlight it back in the accented text).
-const IAST_TOLERANT = { a: 'aā', i: 'iī', u: 'uū', r: 'rṛṝ', l: 'lḷ', n: 'nṅñṇ', t: 'tṭ', d: 'dḍ', s: 'sśṣ', m: 'mṃ', h: 'hḥ' };
+// Builds a case-insensitive regex source from a query. For IAST, this
+// tolerates both plain-letter-for-diacritic typing (a/ā, i/ī, u/ū, r/ṛ,
+// n/ṅ/ñ/ṇ, t/ṭ, d/ḍ, s/ś/ṣ, m/ṃ, h/ḥ) AND common casual-romanization
+// clusters (ch→c, sh→ś/ṣ, doubled vowels→long vowels, ri→ṛ) — so
+// "uvacha", "uvaaca", or "uvaca" all match displayed "uvāca", and
+// "krishna" matches "kṛṣṇa". Built as a single left-to-right scan
+// (checking the longest cluster first at each position) rather than
+// several chained string replacements, so substitutions never
+// double-process each other's output. Covers common cases, not every
+// possible spelling.
+const IAST_SINGLE_TOLERANT = { a: 'aā', i: 'iī', u: 'uū', r: 'rṛṝ', l: 'lḷ', n: 'nṅñṇ', t: 'tṭ', d: 'dḍ', s: 'sśṣ', m: 'mṃ', h: 'hḥ' };
+const IAST_CLUSTER_TOLERANT = [
+  { pat: 'chh', out: '(?:chh|ch|c)' },
+  { pat: 'ch', out: '(?:ch|c)' },
+  { pat: 'sh', out: '(?:sh|ś|ṣ)' },
+  { pat: 'aa', out: '(?:aa|ā|a)' },
+  { pat: 'ii', out: '(?:ii|ī|i)' },
+  { pat: 'uu', out: '(?:uu|ū|u)' },
+  { pat: 'ri', out: '(?:ri|ṛ)' }
+];
+const REGEX_SPECIAL_CHARS = /[.*+?^${}()|[\]\\]/;
 
 function dgeBuildSearchPattern(query) {
-  let escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  if (window.activeScript === 'iast') {
-    escaped = escaped.replace(/[aiurlndtsmh]/gi, (ch) => {
-      const variants = IAST_TOLERANT[ch.toLowerCase()];
-      return variants ? `[${variants}${variants.toUpperCase()}]` : ch;
-    });
+  if (window.activeScript !== 'iast') {
+    return query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
-  return escaped;
+
+  let out = '';
+  let i = 0;
+  while (i < query.length) {
+    const rest = query.slice(i).toLowerCase();
+    const cluster = IAST_CLUSTER_TOLERANT.find(c => rest.startsWith(c.pat));
+    if (cluster) {
+      out += cluster.out;
+      i += cluster.pat.length;
+      continue;
+    }
+    const ch = query[i];
+    const lower = ch.toLowerCase();
+    if (IAST_SINGLE_TOLERANT[lower]) {
+      const variants = IAST_SINGLE_TOLERANT[lower];
+      out += `[${variants}${variants.toUpperCase()}]`;
+    } else if (REGEX_SPECIAL_CHARS.test(ch)) {
+      out += '\\' + ch;
+    } else {
+      out += ch;
+    }
+    i += 1;
+  }
+  return out;
 }
 
 function dgeTextMatchesQuery(text, pattern) {
@@ -174,12 +205,12 @@ function renderList() {
       const statusClass = status ? ` active-status-${status}` : '';
 
       let rowHtml = '';
-      if (flags.showFavorite) rowHtml += `<button class="chip-toggle${isFav ? ' active-fav' : ''}" title="Favorite" onclick="event.stopPropagation(); window.toggleFavorite(${i})">${iconImg(isFav ? 'star-filled' : 'star-outline', 12)}</button>`;
-      if (flags.showStatus) rowHtml += `<button class="chip-toggle status-picker-btn${statusClass}" title="Set status" onclick="window.openStatusPicker(${i}, event)">${iconImg(statusIconFile, 13)}</button>`;
-      if (flags.showDoubt) rowHtml += `<button class="chip-toggle${isDoubt ? ' active-doubt' : ''}" title="Doubt" onclick="event.stopPropagation(); window.toggleDoubt(${i})">${iconImg(isDoubt ? 'question-filled' : 'question-outline', 12)}</button>`;
-      if (flags.showNotes && noteCount > 0) rowHtml += `<span class="status-chip has-note" title="${noteCount} note(s)">${iconImg('note', 10)} ${noteCount}</span>`;
-      if (flags.showSnippetTools && snipCount > 0) rowHtml += `<span class="status-chip" title="${snipCount} saved snippet(s)">${iconImg('snippet', 10)} ${snipCount}</span>`;
-      rowHtml += `<button class="btn-icon" style="margin-left:auto;" title="Notes, snippets, share, download" onclick="event.stopPropagation(); if(typeof openActionsSheet==='function') openActionsSheet(${i})">${iconImg('more', 12)}</button>`;
+      if (flags.showFavorite) rowHtml += `<button class="chip-toggle${isFav ? ' active-fav' : ''}" title="Favorite" onclick="event.stopPropagation(); window.toggleFavorite(${i})">${iconImg(isFav ? 'star-filled' : 'star-outline', 10)}</button>`;
+      if (flags.showStatus) rowHtml += `<button class="chip-toggle status-picker-btn${statusClass}" title="Set status" onclick="window.openStatusPicker(${i}, event)">${iconImg(statusIconFile, 11)}</button>`;
+      if (flags.showDoubt) rowHtml += `<button class="chip-toggle${isDoubt ? ' active-doubt' : ''}" title="Doubt" onclick="event.stopPropagation(); window.toggleDoubt(${i})">${iconImg(isDoubt ? 'question-filled' : 'question-outline', 10)}</button>`;
+      if (flags.showNotes && noteCount > 0) rowHtml += `<span class="status-chip has-note" title="${noteCount} note(s)">${iconImg('note', 9)} ${noteCount}</span>`;
+      if (flags.showSnippetTools && snipCount > 0) rowHtml += `<span class="status-chip" title="${snipCount} saved snippet(s)">${iconImg('snippet', 9)} ${snipCount}</span>`;
+      rowHtml += `<button class="btn-icon" style="margin-left:auto;" title="Notes, snippets, share, download" onclick="event.stopPropagation(); if(typeof openActionsSheet==='function') openActionsSheet(${i})">${iconImg('more', 10)}</button>`;
 
       cardActionsHtml = `<div class="shloka-status-row">${rowHtml}</div>`;
     }

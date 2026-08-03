@@ -1,6 +1,6 @@
 // DGE Module: state.js
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['state.js'] = 'v2.0 (nsKey fix + marks/notes migration)';
+window.DGE_VERSIONS['state.js'] = 'v2.1 (AI Excerpt legacy-note migration)';
 
 window.activeScript = localStorage.getItem('app_script') || 'devanagari';
 window.activeId = null;
@@ -65,12 +65,16 @@ window.loadPersistedState = function() {
     Object.keys(rawNotes).forEach(id => {
       const v = rawNotes[id];
       if (Array.isArray(v)) {
-        migratedNotes[id] = v;
+        migratedNotes[id] = v.map(entry => {
+          if (entry && entry.source === 'AI Excerpt') return { ...entry, source: 'Acharya Excerpt' };
+          return entry;
+        });
       } else if (typeof v === 'string' && v.trim()) {
         migratedNotes[id] = [{ id: dgeGenId(), text: v, source: 'Migrated Note', addedAt: Date.now() }];
       }
     });
     window.notes = migratedNotes;
+    dgeSaveNotes();
   } catch (e) {
     console.warn('Could not load notes:', e);
     window.notes = {};

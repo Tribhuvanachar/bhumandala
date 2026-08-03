@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.19.0">
+<link rel="stylesheet" href="css/main.css?v=4.20.0">
 </head>
 <body>
 
@@ -120,6 +120,11 @@
       <button class="mic-btn" id="searchMicBtn" onclick="window.startSearchVoiceInput()" title="Search by voice">🎤</button>
       <button class="clear-search-btn" id="clearSearchBtn" onclick="window.clearSearch()">✖</button>
     </div>
+    <button class="char-palette-toggle" onclick="window.toggleCharPalette()" title="Special characters (ā, ḥ, ॐ, etc.)">Ω</button>
+  </div>
+
+  <div id="charPalettePanel" class="char-palette-panel">
+    <div id="charPaletteGrid" class="char-palette-grid"></div>
   </div>
 
   <div class="reading-card-wrap" id="readingCardWrap">
@@ -136,7 +141,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.19 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.20 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -314,30 +319,34 @@
     </div>
     <div class="modal-body">
       <p style="font-size:11px; color:var(--muted-text); margin:0 0 14px 0;">AI provider keys below · <a href="#featureVisibilitySection" style="color:var(--accent-red); font-weight:700;">jump to 🎛️ Feature Visibility ↓</a></p>
-      <p style="font-size:12px; color:#666; margin:0 0 12px 0; line-height: 1.5;">Add a key for any AI provider you'd like Acharya to use. If you don't have one, contact <strong id="contactEmailDisplay">sanatanavidyagurukulam@gmail.com</strong>. Keys are stored only on this device.</p>
 
-      <div class="provider-key-row">
-        <label>Gemini API Key</label>
-        <input type="password" id="userGeminiKeyInput" class="modal-input" placeholder="Gemini key" style="margin:4px 0;">
-        <input type="text" id="userGeminiModelInput" class="modal-input" placeholder="Model (e.g. gemini-3.6-flash)" style="margin:0;">
-      </div>
+      <details style="border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red);">🔑 AI Provider Keys</summary>
+        <p style="font-size:12px; color:#666; margin:8px 0 12px 0; line-height: 1.5;">Add a key for any AI provider you'd like Acharya to use. If you don't have one, contact <strong id="contactEmailDisplay">sanatanavidyagurukulam@gmail.com</strong>. Keys are stored only on this device.</p>
 
-      <div class="provider-key-row">
-        <label>OpenAI (ChatGPT) API Key</label>
-        <input type="password" id="userOpenaiKeyInput" class="modal-input" placeholder="OpenAI key" style="margin:4px 0;">
-        <input type="text" id="userOpenaiModelInput" class="modal-input" placeholder="Model (e.g. a current GPT model)" style="margin:0;">
-      </div>
+        <div class="provider-key-row">
+          <label>Gemini API Key</label>
+          <input type="password" id="userGeminiKeyInput" class="modal-input" placeholder="Gemini key" style="margin:4px 0;">
+          <input type="text" id="userGeminiModelInput" class="modal-input" placeholder="Model (e.g. gemini-3.6-flash)" style="margin:0;">
+        </div>
 
-      <div class="provider-key-row">
-        <label>Claude (Anthropic) API Key</label>
-        <input type="password" id="userClaudeKeyInput" class="modal-input" placeholder="Claude key" style="margin:4px 0;">
-        <input type="text" id="userClaudeModelInput" class="modal-input" placeholder="Model (e.g. a current Claude model)" style="margin:0;">
-      </div>
+        <div class="provider-key-row">
+          <label>OpenAI (ChatGPT) API Key</label>
+          <input type="password" id="userOpenaiKeyInput" class="modal-input" placeholder="OpenAI key" style="margin:4px 0;">
+          <input type="text" id="userOpenaiModelInput" class="modal-input" placeholder="Model (e.g. a current GPT model)" style="margin:0;">
+        </div>
 
-      <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:700; margin-top:8px;">
-        <input type="checkbox" id="aiParallelModeToggle" style="margin:0; width:14px; height:14px;">
-        🧭 Ask all configured providers in parallel and combine into one summary
-      </label>
+        <div class="provider-key-row">
+          <label>Claude (Anthropic) API Key</label>
+          <input type="password" id="userClaudeKeyInput" class="modal-input" placeholder="Claude key" style="margin:4px 0;">
+          <input type="text" id="userClaudeModelInput" class="modal-input" placeholder="Model (e.g. a current Claude model)" style="margin:0;">
+        </div>
+
+        <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:700; margin-top:8px;">
+          <input type="checkbox" id="aiParallelModeToggle" style="margin:0; width:14px; height:14px;">
+          🧭 Ask all configured providers in parallel and combine into one summary
+        </label>
+      </details>
 
       <details style="margin-top:16px; border-top:1px solid var(--card-border); padding-top:12px;">
         <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red);">⚙️ Ask Acharya Settings</summary>
@@ -355,6 +364,9 @@
       <details id="featureVisibilitySection" open style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
         <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red);">🎛️ Feature Visibility</summary>
         <div style="margin-top:10px; display:flex; flex-direction:column; gap:8px;">
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:700; padding:8px; border:1px solid var(--card-border); border-radius:var(--radius-sm); background:var(--card-active);">
+            <input type="checkbox" id="flagShowAllMarkers" style="margin:0; width:14px; height:14px;" onchange="window.dgeToggleAllMarkers(this.checked)"> 👁️ Show All Shloka Markers (Favorite/Status/Doubt/Notes/Snippets)
+          </label>
           <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
             <input type="checkbox" id="flagShowFavorite" style="margin:0; width:14px; height:14px;"> ★ Favorite marking
           </label>
@@ -451,6 +463,8 @@
         <textarea id="reportTypoDetails" class="modal-input" style="height:80px; margin-top:4px; font-size:12px;" placeholder="Describe the typo or issue…"></textarea>
       </div>
       <button class="btn-sm" style="width:100%; background:var(--accent-red); color:#fff; border:none;" onclick="window.sendTypoReport()">📧 Open Email to Report</button>
+
+      <div id="contributorsSection"></div>
 
       <div class="actions-section-label" style="margin-top:20px;">🕉️ Designed By</div>
       <p style="font-size:12px; color:var(--muted-text); margin:0;">Tribhuvan Achar</p>
@@ -557,29 +571,30 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.19.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.20.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.19.0"></script>
-<script src="js/state.js?v=4.19.0"></script>
-<script src="js/dev.js?v=4.19.0"></script>
-<script src="js/utils.js?v=4.19.0"></script>
-<script src="js/modals.js?v=4.19.0"></script>
-<script src="js/transliteration.js?v=4.19.0"></script>
-<script src="js/audio.js?v=4.19.0"></script>
-<script src="js/filter.js?v=4.19.0"></script>
-<script src="js/search.js?v=4.19.0"></script>
-<script src="js/markers.js?v=4.19.0"></script>
-<script src="js/notes.js?v=4.19.0"></script>
-<script src="js/history.js?v=4.19.0"></script>
-<script src="js/snippets.js?v=4.19.0"></script>
-<script src="js/actions.js?v=4.19.0"></script>
-<script src="js/voice.js?v=4.19.0"></script>
-<script src="js/screenshot.js?v=4.19.0"></script>
-<script src="js/ai.js?v=4.19.0"></script>
-<script src="js/render.js?v=4.19.0"></script>
-<script src="js/admin-editor.js?v=4.19.0"></script>
-<script src="js/core.js?v=4.19.0"></script>
+<script src="js/config.js?v=4.20.0"></script>
+<script src="js/state.js?v=4.20.0"></script>
+<script src="js/dev.js?v=4.20.0"></script>
+<script src="js/utils.js?v=4.20.0"></script>
+<script src="js/modals.js?v=4.20.0"></script>
+<script src="js/transliteration.js?v=4.20.0"></script>
+<script src="js/audio.js?v=4.20.0"></script>
+<script src="js/filter.js?v=4.20.0"></script>
+<script src="js/search.js?v=4.20.0"></script>
+<script src="js/markers.js?v=4.20.0"></script>
+<script src="js/notes.js?v=4.20.0"></script>
+<script src="js/history.js?v=4.20.0"></script>
+<script src="js/char-palette.js?v=4.20.0"></script>
+<script src="js/snippets.js?v=4.20.0"></script>
+<script src="js/actions.js?v=4.20.0"></script>
+<script src="js/voice.js?v=4.20.0"></script>
+<script src="js/screenshot.js?v=4.20.0"></script>
+<script src="js/ai.js?v=4.20.0"></script>
+<script src="js/render.js?v=4.20.0"></script>
+<script src="js/admin-editor.js?v=4.20.0"></script>
+<script src="js/core.js?v=4.20.0"></script>
 
 <script>
   if (typeof console.log === "function") {

@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v5.1 (Sponsor/Expenses config)';
+window.DGE_VERSIONS['config.js'] = 'v5.2 (Contributors config)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -10,7 +10,7 @@ const appConfig = {
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
   secretPasskey: "SHRI108",
-  version: "v4.19"
+  version: "v4.20"
 };
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
@@ -243,6 +243,16 @@ const SPONSOR_CONFIG = {
   contactForSponsorship: 'sanatanavidyagurukulam@gmail.com'
 };
 window.SPONSOR_CONFIG = SPONSOR_CONFIG;
+
+// Contributors — admin-configured only, same pattern as SPONSOR_CONFIG.
+// Empty by default; add entries here as real names/roles are confirmed.
+const CONTRIBUTORS_CONFIG = {
+  enabled: true,
+  contributors: [
+    // { name: 'Tribhuvan Achar', role: 'Founder & Developer' },
+  ]
+};
+window.CONTRIBUTORS_CONFIG = CONTRIBUTORS_CONFIG;
 
 // Multi-provider AI configuration. Each provider is only used if the person
 // has saved a key for it (via the ⚙️ Settings). Model names are left

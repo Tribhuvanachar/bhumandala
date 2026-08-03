@@ -3,7 +3,7 @@
 
 // Register Module Version
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['modals.js'] = 'v1.2 (About/Welcome modal + typo report)';
+window.DGE_VERSIONS['modals.js'] = 'v1.3 (Contributors section)';
 
 function openModal(id) {
   const modal = document.getElementById(id);
@@ -42,6 +42,24 @@ document.addEventListener('click', (e) => {
 });
 
 window.openAboutModal = function() {
+  const contribEl = document.getElementById('contributorsSection');
+  if (contribEl) {
+    const cfg = (typeof CONTRIBUTORS_CONFIG !== 'undefined') ? CONTRIBUTORS_CONFIG : null;
+    const list = (cfg && cfg.enabled && Array.isArray(cfg.contributors)) ? cfg.contributors : [];
+    if (list.length) {
+      contribEl.innerHTML = `
+        <div class="actions-section-label" style="margin-top:20px;">🙏 Contributors</div>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          ${list.map(c => `
+            <div style="display:flex; justify-content:space-between; font-size:12px;">
+              <span style="font-weight:700;">${c.name}</span>
+              <span style="color:var(--muted-text);">${c.role || ''}</span>
+            </div>`).join('')}
+        </div>`;
+    } else {
+      contribEl.innerHTML = '';
+    }
+  }
   openModal('aboutModal');
   localStorage.setItem('has_seen_welcome', 'true');
 };

@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.4 (Async live-discovered template picker + refresh)';
+window.DGE_VERSIONS['ai.js'] = 'v3.5 (Master show/hide marker toggle, collapsible keys)';
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -160,6 +160,12 @@ function dgeLoadFeatureFlagsIntoUI() {
     if (el) el.checked = flags[flagKey] !== false;
   });
 
+  const masterEl = document.getElementById('flagShowAllMarkers');
+  if (masterEl) {
+    const markerFlags = ['showFavorite', 'showStatus', 'showDoubt', 'showNotes', 'showSnippetTools'];
+    masterEl.checked = markerFlags.every(f => flags[f] !== false);
+  }
+
   const scriptOptions = (typeof dgeGetEffectiveScriptOptions === 'function') ? dgeGetEffectiveScriptOptions() : (window.SCRIPT_OPTIONS || []);
   scriptOptions.forEach(opt => {
     const elId = SCRIPT_OPTION_CHECKBOX_IDS[opt.id];
@@ -167,6 +173,13 @@ function dgeLoadFeatureFlagsIntoUI() {
     if (el) el.checked = opt.enabled !== false;
   });
 }
+
+window.dgeToggleAllMarkers = function(checked) {
+  ['flagShowFavorite', 'flagShowStatus', 'flagShowDoubt', 'flagShowNotes', 'flagShowSnippetTools'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.checked = checked;
+  });
+};
 
 function dgeSaveFeatureFlagsFromUI() {
   const override = {};
