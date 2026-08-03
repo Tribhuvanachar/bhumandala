@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.6 (Fixed stale-editor-after-delete bug, cache-busting on file fetch, clearer sha-mismatch errors, toolbar overflow fix)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.7 (Download folder as zip)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -235,6 +235,7 @@ async function dgeAdminNavigate(path) {
             ${sizeLabel}
           </div>
           <div class="admin-file-actions">
+            ${item.type === 'dir' ? `<button class="btn-icon" title="Download this folder as a .zip" onclick="event.stopPropagation(); window.dgeAdminDownloadFolderZip('${item.path}')">📦</button>` : ''}
             <button class="btn-icon" title="Rename" onclick="event.stopPropagation(); window.dgeAdminRename('${item.path}', '${item.type}')">✏️</button>
             <button class="btn-icon" title="Delete" onclick="event.stopPropagation(); window.dgeAdminDelete('${item.path}', '${item.type}', '${item.sha || ''}')">🗑️</button>
           </div>
@@ -582,6 +583,55 @@ async function dgeAdminMoveOneFile(oldPath, newPath, message) {
   await dgeGithubPutFile(newPath, content, message);
   await dgeGithubDeleteFile(oldPath, message, sha);
 }
+
+// Downloads a folder and everything in it as a single .zip, built
+// entirely client-side with JSZip. Uses the Git Blobs API (not the
+// Contents API) to fetch each file's bytes, since the Contents API
+// silently omits content for files above ~1MB — the same lesson learned
+// from the earlier rename data-loss bug applies here.
+window.dgeAdminDownloadFolderZip = async function(folderPath) {
+  if (typeof JSZip === 'undefined') {
+    if (typeof showToast === 'function') showToast('Zip library failed to load — check your connection and try again.');
+    return;
+  }
+  if (typeof showToast === 'function') showToast(`Preparing zip of "${folderPath}"…`);
+  dgeAdminShowWorking();
+
+  try {
+    const tree = await dgeGithubGetRecursiveTree();
+    const descendants = tree.tree.filter(t => t.type === 'blob' && t.path.startsWith(folderPath + '/'));
+    if (!descendants.length) {
+      throw new Error('No files found in this folder according to GitHub\'s current tree.');
+    }
+
+    const zip = new JSZip();
+    let done = 0;
+    for (const entry of descendants) {
+      const blob = await dgeGithubGetBlob(entry.sha);
+      const relativePath = entry.path.slice(folderPath.length + 1);
+      zip.file(relativePath, blob.content, { base64: true });
+      done++;
+      if (typeof showToast === 'function' && done % 5 === 0) showToast(`Zipping… ${done}/${descendants.length}`);
+    }
+
+    const zipBlob = await zip.generateAsync({ type: 'blob' });
+    const folderName = folderPath.split('/').pop() || 'download';
+    const url = URL.createObjectURL(zipBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${folderName}.zip`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+
+    if (typeof showToast === 'function') showToast(`Downloaded ${folderName}.zip (${descendants.length} file(s)).`);
+  } catch (e) {
+    if (typeof showToast === 'function') showToast('Zip download failed: ' + e.message);
+  } finally {
+    dgeAdminHideWorking();
+  }
+};
 
 async function dgeAdminMoveFolder(oldFolderPath, newFolderPath) {
   const tree = await dgeGithubGetRecursiveTree();
