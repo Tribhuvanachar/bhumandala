@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.5 (Fixed folder-rename silent failure, folder-upload structure, remembers last folder, open-file highlight, working indicator, select/clear all)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.6 (Fixed stale-editor-after-delete bug, cache-busting on file fetch, clearer sha-mismatch errors, toolbar overflow fix)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -77,6 +77,7 @@ async function dgeGithubRequest(path, options) {
     let msg = `${res.status} ${res.statusText}`;
     try { const j = await res.json(); if (j.message) msg += ` — ${j.message}`; } catch (e) { /* ignore */ }
     if (res.status === 401 || res.status === 403) msg += ' (check your GitHub token in Settings)';
+    if (msg.includes('does not match')) msg += ' — this file was likely deleted, moved, or edited elsewhere since it was opened here. Close and reopen it, then try again.';
     throw new Error(msg);
   }
   return res.status === 204 ? null : res.json();
@@ -90,8 +91,8 @@ function dgeGithubListDir(dirPath) {
 
 function dgeGithubGetFile(filePath) {
   const { owner, repo, branch } = GITHUB_REPO_CONFIG;
-  const url = `${GH_API}/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}`;
-  return dgeGithubRequest(url, { headers: dgeGithubHeaders() });
+  const url = `${GH_API}/repos/${owner}/${repo}/contents/${filePath}?ref=${branch}&_=${Date.now()}`;
+  return dgeGithubRequest(url, { headers: dgeGithubHeaders(), cache: 'no-store' });
 }
 
 function dgeGithubPutFile(filePath, contentBase64, message, sha) {
@@ -387,7 +388,8 @@ window.dgeAdminUploadFiles = async function(fileList) {
 // folder name redundantly.
 window.dgeAdminUploadFolder = async function(fileList) {
   if (!fileList || !fileList.length) return;
-  if (typeof showToast === 'function') showToast(`Uploading ${fileList.length} file(s) from folder… (working)`);
+  const topFolderName = (fileList[0].webkitRelativePath || '').split('/')[0] || 'this folder';
+  if (typeof showToast === 'function') showToast(`Creating "${topFolderName}" here with all ${fileList.length} of its file(s)…`);
   dgeAdminShowWorking();
 
   let ok = 0, failed = 0;
@@ -619,9 +621,11 @@ window.dgeAdminDelete = async function(path, type, sha) {
       for (const entry of descendants) {
         const f = await dgeGithubGetFile(entry.path);
         await dgeGithubDeleteFile(entry.path, `Delete ${entry.path} via admin editor`, f.sha);
+        if (dgeAdminOpenFilePath === entry.path) window.dgeAdminCloseFileEditor();
       }
     } else {
       await dgeGithubDeleteFile(path, `Delete ${path} via admin editor`, sha);
+      if (dgeAdminOpenFilePath === path) window.dgeAdminCloseFileEditor();
     }
     if (typeof showToast === 'function') showToast('Deleted.');
     dgeAdminNavigate(dgeAdminCurrentPath);

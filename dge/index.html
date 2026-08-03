@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.26.0">
+<link rel="stylesheet" href="css/main.css?v=4.27.0">
 </head>
 <body>
 
@@ -150,7 +150,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.26 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.27 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -529,7 +529,7 @@
         <p style="font-size:10px; color:var(--muted-text); margin:6px 0 0 0;">Stored only in this browser's local storage — never sent anywhere except directly to GitHub's API. Use a token scoped to only this repo, with an expiry date.</p>
       </div>
 
-      <div style="display:flex; gap:6px; margin:12px 0;">
+      <div style="display:flex; gap:6px; margin:12px 0; flex-wrap:wrap;">
         <button class="btn-sm" onclick="window.dgeAdminGoUp()" id="adminUpBtn">⬆ Up</button>
         <button class="btn-sm" onclick="window.dgeAdminNavigate(dgeAdminCurrentPath)" title="Refresh this folder listing">🔄</button>
         <label class="btn-sm" style="cursor:pointer; margin:0;">📤 Upload<input type="file" multiple style="display:none;" onchange="window.dgeAdminUploadFiles(this.files)"></label>
@@ -589,30 +589,30 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.26.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.27.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.26.0"></script>
-<script src="js/state.js?v=4.26.0"></script>
-<script src="js/dev.js?v=4.26.0"></script>
-<script src="js/utils.js?v=4.26.0"></script>
-<script src="js/modals.js?v=4.26.0"></script>
-<script src="js/transliteration.js?v=4.26.0"></script>
-<script src="js/audio.js?v=4.26.0"></script>
-<script src="js/filter.js?v=4.26.0"></script>
-<script src="js/search.js?v=4.26.0"></script>
-<script src="js/markers.js?v=4.26.0"></script>
-<script src="js/notes.js?v=4.26.0"></script>
-<script src="js/history.js?v=4.26.0"></script>
-<script src="js/char-palette.js?v=4.26.0"></script>
-<script src="js/snippets.js?v=4.26.0"></script>
-<script src="js/actions.js?v=4.26.0"></script>
-<script src="js/voice.js?v=4.26.0"></script>
-<script src="js/screenshot.js?v=4.26.0"></script>
-<script src="js/ai.js?v=4.26.0"></script>
-<script src="js/render.js?v=4.26.0"></script>
-<script src="js/admin-editor.js?v=4.26.0"></script>
-<script src="js/core.js?v=4.26.0"></script>
+<script src="js/config.js?v=4.27.0"></script>
+<script src="js/state.js?v=4.27.0"></script>
+<script src="js/dev.js?v=4.27.0"></script>
+<script src="js/utils.js?v=4.27.0"></script>
+<script src="js/modals.js?v=4.27.0"></script>
+<script src="js/transliteration.js?v=4.27.0"></script>
+<script src="js/audio.js?v=4.27.0"></script>
+<script src="js/filter.js?v=4.27.0"></script>
+<script src="js/search.js?v=4.27.0"></script>
+<script src="js/markers.js?v=4.27.0"></script>
+<script src="js/notes.js?v=4.27.0"></script>
+<script src="js/history.js?v=4.27.0"></script>
+<script src="js/char-palette.js?v=4.27.0"></script>
+<script src="js/snippets.js?v=4.27.0"></script>
+<script src="js/actions.js?v=4.27.0"></script>
+<script src="js/voice.js?v=4.27.0"></script>
+<script src="js/screenshot.js?v=4.27.0"></script>
+<script src="js/ai.js?v=4.27.0"></script>
+<script src="js/render.js?v=4.27.0"></script>
+<script src="js/admin-editor.js?v=4.27.0"></script>
+<script src="js/core.js?v=4.27.0"></script>
 
 <script>
   if (typeof console.log === "function") {
