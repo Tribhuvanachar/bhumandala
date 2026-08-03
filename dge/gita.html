@@ -29,6 +29,18 @@
             margin-bottom: 30px;
         }
 
+        /* Loading & Error States */
+        #status-message {
+            text-align: center;
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-top: 50px;
+        }
+
+        .error-text {
+            color: #e74c3c !important;
+        }
+
         /* Card Layout for Verses */
         .verse-card {
             background-color: #ffffff;
@@ -83,40 +95,45 @@
         .commentary-text {
             color: #444;
             font-size: 1em;
+            white-space: pre-wrap;
         }
     </style>
 </head>
 <body>
 
     <div id="gita-container">
-        <!-- Content will be injected here by JavaScript -->
+        <div id="status-message">Loading sacred texts...</div>
     </div>
 
     <script>
-        // 1. Assign your JSON data to this variable. 
-        // (I am including a tiny snippet as a placeholder. Paste your full JSON over this object).
-        const gitaData = {
-            "chapter": 1,
-            "title": "Yoga of Despondency",
-            "verses": [
-                {
-                  "verse_numbers": "1.1",
-                  "shloka": "धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः । मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय ॥ १.१॥",
-                  "gita_bhashya": "Not provided for Chapter 1 verses in GEETA BHASHYA Tatparya Nirnaya by Madhvacharya.pdf",
-                  "gita_tatparya": "Not provided for Chapter 1 verses in GEETA BHASHYA Tatparya Nirnaya by Madhvacharya.pdf",
-                  "gita_vivruti": "\"धर्म\" इति - धर्मसाधनभूमौ \"कुरुक्षेत्रे\" \"युयुत्सवः” युद्धमिच्छन्त एव \"समवेता\" मिळिताः सन्तो \"मामका\" मदीयाः दुर्योधनादयः \"पाण्डवाश्च\" हे \"सञ्जय\" \"किमकुर्वत\"? इति शब्दो योज्यः । 'पाण्डवानां भगवत्प्रियत्वं सर्वसाक्षिकमप्यजानन्धृतराष्ट्रः स्वपुत्राणां विजयविविदिषया सञ्जयं पप्रच्छ' इत्यर्थः ॥ १.१॥"
-                }
-                // PASTE THE REST OF YOUR JSON VERSES HERE
-            ]
-        };
-
-        // 2. Function to render the JSON data into HTML
-        function renderGita() {
+        document.addEventListener("DOMContentLoaded", () => {
             const container = document.getElementById('gita-container');
+            const statusMessage = document.getElementById('status-message');
 
+            // Fetch the JSON file from the same directory
+            fetch('gita.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Clear the loading message
+                    container.innerHTML = '';
+                    renderGita(data, container);
+                })
+                .catch(error => {
+                    console.error("Error fetching the JSON:", error);
+                    statusMessage.innerHTML = `<span class="error-text">Failed to load the texts. Please ensure <strong>gita.json</strong> is uploaded to the same directory on GitHub.</span>`;
+                });
+        });
+
+        // Function to render the JSON data into HTML
+        function renderGita(gitaData, container) {
             // Add the Chapter Title
             const header = document.createElement('h1');
-            header.textContent = `Chapter ${gitaData.chapter}: ${gitaData.title}`;
+            header.textContent = `Chapter ${gitaData.chapter}: ${gitaData.title.replace(/\/g, '')}`; 
             container.appendChild(header);
 
             // Loop through each verse and create a card
@@ -124,26 +141,29 @@
                 const card = document.createElement('div');
                 card.className = 'verse-card';
 
+                // Helper to clean up citation brackets if you want a cleaner UI
+                const cleanText = (text) => text ? text.replace(/\/g, '') : "Not provided";
+
                 // Construct the HTML for the card
                 card.innerHTML = `
                     <div class="verse-header">
                         <span class="verse-number">Verse ${verse.verse_numbers}</span>
                     </div>
-                    <div class="shloka">${verse.shloka}</div>
+                    <div class="shloka">${cleanText(verse.shloka)}</div>
                     
                     <div class="commentary-block">
                         <div class="commentary-label">Gita Vivruti (Raghavendra Swami)</div>
-                        <div class="commentary-text">${verse.gita_vivruti}</div>
+                        <div class="commentary-text">${cleanText(verse.gita_vivruti)}</div>
                     </div>
 
                     <div class="commentary-block">
                         <div class="commentary-label">Gita Bhashya (Madhvacharya)</div>
-                        <div class="commentary-text">${verse.gita_bhashya}</div>
+                        <div class="commentary-text">${cleanText(verse.gita_bhashya)}</div>
                     </div>
 
                     <div class="commentary-block">
-                        <div class="commentary-label">Gita Tatparya (Madhvacharya)</div>
-                        <div class="commentary-text">${verse.gita_tatparya}</div>
+                        <div class="commentary-label">Gita Tatparya Nirnaya (Madhvacharya)</div>
+                        <div class="commentary-text">${cleanText(verse.gita_tatparya)}</div>
                     </div>
                 `;
 
@@ -151,9 +171,6 @@
                 container.appendChild(card);
             });
         }
-
-        // 3. Run the render function when the page loads
-        window.onload = renderGita;
     </script>
 </body>
 </html>
