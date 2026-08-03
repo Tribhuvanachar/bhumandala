@@ -156,45 +156,47 @@
             // Add the Chapter Title
             const header = document.createElement('h1');
             
-            // Clean up any citation brackets from the title if they exist
+            // Safely clean up citation tags like[span_0](start_span)[span_0](end_span) from the title
             const cleanTitle = gitaData.title ? gitaData.title.replace(/\/g, '') : "Unknown Title";
             header.textContent = `Chapter ${gitaData.chapter}: ${cleanTitle}`; 
             container.appendChild(header);
 
             // Loop through each verse and create a card for the list
-            gitaData.verses.forEach(verse => {
-                const card = document.createElement('div');
-                card.className = 'verse-card';
+            if (gitaData.verses && Array.isArray(gitaData.verses)) {
+                gitaData.verses.forEach(verse => {
+                    const card = document.createElement('div');
+                    card.className = 'verse-card';
 
-                // Helper to clean up citation brackets for a cleaner UI
-                const cleanText = (text) => text ? text.replace(/\/g, '') : "Not provided";
+                    // Helper to clean up citation tags like[span_1](start_span)[span_1](end_span) for a cleaner UI
+                    const cleanText = (text) => text ? text.replace(/\/g, '') : "Not provided";
 
-                // Construct the HTML for the card
-                card.innerHTML = `
-                    <div class="verse-header">
-                        <span class="verse-number">Verse ${verse.verse_numbers}</span>
-                    </div>
-                    <div class="shloka">${cleanText(verse.shloka)}</div>
-                    
-                    <div class="commentary-block">
-                        <div class="commentary-label">Gita Vivruti (Raghavendra Swami)</div>
-                        <div class="commentary-text">${cleanText(verse.gita_vivruti)}</div>
-                    </div>
+                    // Construct the HTML for the card
+                    card.innerHTML = `
+                        <div class="verse-header">
+                            <span class="verse-number">Verse ${verse.verse_numbers}</span>
+                        </div>
+                        <div class="shloka">${cleanText(verse.shloka)}</div>
+                        
+                        <div class="commentary-block">
+                            <div class="commentary-label">Gita Vivruti (Raghavendra Swami)</div>
+                            <div class="commentary-text">${cleanText(verse.gita_vivruti)}</div>
+                        </div>
 
-                    <div class="commentary-block">
-                        <div class="commentary-label">Gita Bhashya (Madhvacharya)</div>
-                        <div class="commentary-text">${cleanText(verse.gita_bhashya)}</div>
-                    </div>
+                        <div class="commentary-block">
+                            <div class="commentary-label">Gita Bhashya (Madhvacharya)</div>
+                            <div class="commentary-text">${cleanText(verse.gita_bhashya)}</div>
+                        </div>
 
-                    <div class="commentary-block">
-                        <div class="commentary-label">Gita Tatparya Nirnaya (Madhvacharya)</div>
-                        <div class="commentary-text">${cleanText(verse.gita_tatparya)}</div>
-                    </div>
-                `;
+                        <div class="commentary-block">
+                            <div class="commentary-label">Gita Tatparya Nirnaya (Madhvacharya)</div>
+                            <div class="commentary-text">${cleanText(verse.gita_tatparya)}</div>
+                        </div>
+                    `;
 
-                // Append the card to the content container
-                container.appendChild(card);
-            });
+                    // Append the card to the content container
+                    container.appendChild(card);
+                });
+            }
         }
     </script>
 </body>
