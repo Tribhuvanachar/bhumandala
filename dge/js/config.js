@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v5.2 (Contributors config)';
+window.DGE_VERSIONS['config.js'] = 'v5.3 (3 contributor names added)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -10,7 +10,7 @@ const appConfig = {
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
   secretPasskey: "SHRI108",
-  version: "v4.20"
+  version: "v4.21"
 };
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
@@ -249,7 +249,9 @@ window.SPONSOR_CONFIG = SPONSOR_CONFIG;
 const CONTRIBUTORS_CONFIG = {
   enabled: true,
   contributors: [
-    // { name: 'Tribhuvan Achar', role: 'Founder & Developer' },
+    { name: 'Sameer', role: '' },
+    { name: 'Anirudha', role: '' },
+    { name: 'Madhu', role: '' }
   ]
 };
 window.CONTRIBUTORS_CONFIG = CONTRIBUTORS_CONFIG;

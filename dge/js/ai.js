@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.5 (Master show/hide marker toggle, collapsible keys)';
+window.DGE_VERSIONS['ai.js'] = 'v3.6 (Settings sections collapsed-by-default with pin)';
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -102,10 +102,49 @@ window.openKeyModal = function() {
   dgeLoadFeatureFlagsIntoUI();
   dgeLoadShlokaFieldsIntoUI();
   dgeLoadShareTemplateIntoUI();
+  dgeRestoreSettingsSectionPins();
   if (typeof openModal === 'function') openModal('keyModal');
 };
 
+// Every settings section is collapsed by default. Pinning a section (📌
+// in its header) keeps it expanded across future openings; anything
+// left unpinned auto-collapses again as soon as Settings is closed, so
+// it never silently accumulates as "always open" clutter.
+function dgeGetPinnedSettingsSections() {
+  try {
+    return JSON.parse(localStorage.getItem('pinned_settings_sections') || '[]');
+  } catch (e) {
+    return [];
+  }
+}
+
+function dgeRestoreSettingsSectionPins() {
+  const pinned = new Set(dgeGetPinnedSettingsSections());
+  document.querySelectorAll('#keyModal details[data-section-id]').forEach(details => {
+    const id = details.dataset.sectionId;
+    const pinBtn = details.querySelector('.settings-pin-btn');
+    const isPinned = pinned.has(id);
+    if (pinBtn) pinBtn.classList.toggle('pinned', isPinned);
+    details.open = isPinned;
+  });
+}
+
+window.dgeToggleSectionPin = function(btn) {
+  const details = btn.closest('details');
+  if (!details) return;
+  const id = details.dataset.sectionId;
+  if (!id) return;
+  const pinned = new Set(dgeGetPinnedSettingsSections());
+  if (pinned.has(id)) pinned.delete(id); else pinned.add(id);
+  localStorage.setItem('pinned_settings_sections', JSON.stringify([...pinned]));
+  btn.classList.toggle('pinned');
+};
+
 window.closeKeyModal = function() { 
+  const pinned = new Set(dgeGetPinnedSettingsSections());
+  document.querySelectorAll('#keyModal details[data-section-id]').forEach(details => {
+    if (!pinned.has(details.dataset.sectionId)) details.open = false;
+  });
   if (typeof closeModal === 'function') closeModal('keyModal'); 
 };
 

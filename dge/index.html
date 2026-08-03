@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.20.0">
+<link rel="stylesheet" href="css/main.css?v=4.21.0">
 </head>
 <body>
 
@@ -128,9 +128,11 @@
   </div>
 
   <div class="reading-card-wrap" id="readingCardWrap">
-    <button class="reading-card-toggle" id="readingCardToggleBtn" onclick="window.toggleReadingCardMinimize()" title="Minimize / Expand">⌄</button>
-    <button class="reading-card-toc-btn" onclick="window.openTocModal()" title="Jump to a shloka">🔢</button>
-    <div class="reading-card" id="readingCard">श्लोकं चिनोतु (Select a shloka)</div>
+    <div class="reading-card" id="readingCardBox">
+      <button class="reading-card-toggle" id="readingCardToggleBtn" onclick="window.toggleReadingCardMinimize()" title="Minimize / Expand">⌄</button>
+      <button class="reading-card-toc-btn" onclick="window.openTocModal()" title="Jump to a shloka">🔢</button>
+      <div id="readingCard">श्लोकं चिनोतु (Select a shloka)</div>
+    </div>
   </div>
   <div class="shloka-list" id="shlokaList"></div>
 
@@ -141,7 +143,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.20 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.21 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -314,14 +316,14 @@
        <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">⚙️ Settings</h3>
        <div style="display:flex; gap:6px;">
          <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="window.saveAllApiKeys()">Save</button>
-         <button class="btn-sm" onclick="window.closeModal('keyModal')" style="font-size:11px;">✖ Close</button>
+         <button class="btn-sm" onclick="window.closeKeyModal()" style="font-size:11px;">✖ Close</button>
        </div>
     </div>
     <div class="modal-body">
       <p style="font-size:11px; color:var(--muted-text); margin:0 0 14px 0;">AI provider keys below · <a href="#featureVisibilitySection" style="color:var(--accent-red); font-weight:700;">jump to 🎛️ Feature Visibility ↓</a></p>
 
-      <details style="border-top:1px solid var(--card-border); padding-top:12px;">
-        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red);">🔑 AI Provider Keys</summary>
+      <details data-section-id="providerKeys" style="border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>🔑 AI Provider Keys</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
         <p style="font-size:12px; color:#666; margin:8px 0 12px 0; line-height: 1.5;">Add a key for any AI provider you'd like Acharya to use. If you don't have one, contact <strong id="contactEmailDisplay">sanatanavidyagurukulam@gmail.com</strong>. Keys are stored only on this device.</p>
 
         <div class="provider-key-row">
@@ -348,21 +350,21 @@
         </label>
       </details>
 
-      <details style="margin-top:16px; border-top:1px solid var(--card-border); padding-top:12px;">
-        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red);">⚙️ Ask Acharya Settings</summary>
+      <details data-section-id="askAcharya" style="margin-top:16px; border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>⚙️ Ask Acharya Settings</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
         <p style="font-size:11px; color:var(--muted-text); margin:8px 0;">Checkboxes are fixed wording (can't be mistyped). Use "Additional instructions" for anything not covered.</p>
         <div id="acharyaSettingsContainer" style="margin-top:6px;"></div>
         <button class="btn-sm" style="width:100%; margin-top:8px;" onclick="window.resetAcharyaFieldsToDefault()">↺ Reset to Defaults</button>
       </details>
 
-      <details open style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
-        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red);">🖼️ Share Image Template</summary>
+      <details data-section-id="shareTemplate" style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>🖼️ Share Image Template</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
         <p style="font-size:11px; color:var(--muted-text); margin:8px 0;">Used when you tap "⬇️ Image" or "🖼️ Share as Image" for any shloka.</p>
         <div id="defaultShareTemplateGrid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; margin-top:8px;"></div>
       </details>
 
-      <details id="featureVisibilitySection" open style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
-        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red);">🎛️ Feature Visibility</summary>
+      <details id="featureVisibilitySection" data-section-id="featureVisibility" style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>🎛️ Feature Visibility</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
         <div style="margin-top:10px; display:flex; flex-direction:column; gap:8px;">
           <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:700; padding:8px; border:1px solid var(--card-border); border-radius:var(--radius-sm); background:var(--card-active);">
             <input type="checkbox" id="flagShowAllMarkers" style="margin:0; width:14px; height:14px;" onchange="window.dgeToggleAllMarkers(this.checked)"> 👁️ Show All Shloka Markers (Favorite/Status/Doubt/Notes/Snippets)
@@ -419,8 +421,8 @@
         </div>
       </details>
 
-      <details style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
-        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red);">🧩 Shloka Fields</summary>
+      <details data-section-id="shlokaFields" style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>🧩 Shloka Fields</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
         <p style="font-size:11px; color:var(--muted-text); margin:8px 0;">Padaccheda, Anvaya, and similar fields only appear for a shloka if that field actually exists in its data — these toggles just control whether to show it when available.</p>
         <div style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
           <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldPadaccheda" style="margin:0; width:14px; height:14px;"> 🔤 Padaccheda</label>
@@ -571,30 +573,30 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.20.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.21.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.20.0"></script>
-<script src="js/state.js?v=4.20.0"></script>
-<script src="js/dev.js?v=4.20.0"></script>
-<script src="js/utils.js?v=4.20.0"></script>
-<script src="js/modals.js?v=4.20.0"></script>
-<script src="js/transliteration.js?v=4.20.0"></script>
-<script src="js/audio.js?v=4.20.0"></script>
-<script src="js/filter.js?v=4.20.0"></script>
-<script src="js/search.js?v=4.20.0"></script>
-<script src="js/markers.js?v=4.20.0"></script>
-<script src="js/notes.js?v=4.20.0"></script>
-<script src="js/history.js?v=4.20.0"></script>
-<script src="js/char-palette.js?v=4.20.0"></script>
-<script src="js/snippets.js?v=4.20.0"></script>
-<script src="js/actions.js?v=4.20.0"></script>
-<script src="js/voice.js?v=4.20.0"></script>
-<script src="js/screenshot.js?v=4.20.0"></script>
-<script src="js/ai.js?v=4.20.0"></script>
-<script src="js/render.js?v=4.20.0"></script>
-<script src="js/admin-editor.js?v=4.20.0"></script>
-<script src="js/core.js?v=4.20.0"></script>
+<script src="js/config.js?v=4.21.0"></script>
+<script src="js/state.js?v=4.21.0"></script>
+<script src="js/dev.js?v=4.21.0"></script>
+<script src="js/utils.js?v=4.21.0"></script>
+<script src="js/modals.js?v=4.21.0"></script>
+<script src="js/transliteration.js?v=4.21.0"></script>
+<script src="js/audio.js?v=4.21.0"></script>
+<script src="js/filter.js?v=4.21.0"></script>
+<script src="js/search.js?v=4.21.0"></script>
+<script src="js/markers.js?v=4.21.0"></script>
+<script src="js/notes.js?v=4.21.0"></script>
+<script src="js/history.js?v=4.21.0"></script>
+<script src="js/char-palette.js?v=4.21.0"></script>
+<script src="js/snippets.js?v=4.21.0"></script>
+<script src="js/actions.js?v=4.21.0"></script>
+<script src="js/voice.js?v=4.21.0"></script>
+<script src="js/screenshot.js?v=4.21.0"></script>
+<script src="js/ai.js?v=4.21.0"></script>
+<script src="js/render.js?v=4.21.0"></script>
+<script src="js/admin-editor.js?v=4.21.0"></script>
+<script src="js/core.js?v=4.21.0"></script>
 
 <script>
   if (typeof console.log === "function") {

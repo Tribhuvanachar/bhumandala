@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.0';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.1 (Fixed data-loss bug in rename/move for files >1MB)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -351,10 +351,35 @@ window.dgeAdminRename = async function(path, type) {
   }
 };
 
+function dgeGithubGetBlob(sha) {
+  const { owner, repo } = GITHUB_REPO_CONFIG;
+  const url = `${GH_API}/repos/${owner}/${repo}/git/blobs/${sha}`;
+  return dgeGithubRequest(url, { headers: dgeGithubHeaders() });
+}
+
+// Fetches a file's base64 content reliably regardless of size. GitHub's
+// Contents API silently omits `content` (no error — it just isn't
+// there) for files above roughly 1MB, which is exactly what caused a
+// renamed file to end up 0 bytes: the code trusted an empty string as
+// real content. This checks for that and falls back to the Git Blobs
+// API (much higher size limit) before ever writing anything.
+async function dgeAdminGetFileContentSafe(path) {
+  const file = await dgeGithubGetFile(path);
+  let content = file.content;
+  if (!content || !content.replace(/\n/g, '').trim()) {
+    const blob = await dgeGithubGetBlob(file.sha);
+    content = blob.content;
+  }
+  if (!content || !content.replace(/\n/g, '').trim()) {
+    throw new Error(`Could not read content for "${path}" (it may be too large, or a transient GitHub API issue) — stopped before writing anything, to avoid creating an empty file.`);
+  }
+  return { content: content.replace(/\n/g, ''), sha: file.sha };
+}
+
 async function dgeAdminMoveOneFile(oldPath, newPath, message) {
-  const file = await dgeGithubGetFile(oldPath);
-  await dgeGithubPutFile(newPath, file.content.replace(/\n/g, ''), message);
-  await dgeGithubDeleteFile(oldPath, message, file.sha);
+  const { content, sha } = await dgeAdminGetFileContentSafe(oldPath);
+  await dgeGithubPutFile(newPath, content, message);
+  await dgeGithubDeleteFile(oldPath, message, sha);
 }
 
 async function dgeAdminMoveFolder(oldFolderPath, newFolderPath) {

@@ -320,6 +320,9 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 .provider-key-row { border: 1px solid var(--card-border); border-radius: var(--radius-sm); padding: 10px; margin-bottom: 10px; }
 .provider-key-row label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--muted-text); letter-spacing: 0.3px; }
 
+.settings-pin-btn { background: none; border: none; font-size: 14px; cursor: pointer; padding: 2px 6px; opacity: 0.35; filter: grayscale(1); transition: all var(--t-fast) var(--ease); }
+.settings-pin-btn.pinned { opacity: 1; filter: none; transform: rotate(-25deg); }
+
 .history-entry-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; text-align: left; }
 
 .toc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
