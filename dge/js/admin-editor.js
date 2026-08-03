@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.4 (New File + Add Image from URL)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.5 (Fixed folder-rename silent failure, folder-upload structure, remembers last folder, open-file highlight, working indicator, select/clear all)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -120,8 +120,8 @@ function dgeGithubDeleteFile(filePath, message, sha) {
 // descendant file needs to be relocated.
 function dgeGithubGetRecursiveTree() {
   const { owner, repo, branch } = GITHUB_REPO_CONFIG;
-  const url = `${GH_API}/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
-  return dgeGithubRequest(url, { headers: dgeGithubHeaders() });
+  const url = `${GH_API}/repos/${owner}/${repo}/git/trees/${branch}?recursive=1&_=${Date.now()}`;
+  return dgeGithubRequest(url, { headers: dgeGithubHeaders(), cache: 'no-store' });
 }
 
 const DGE_TEXT_EXTENSIONS = ['.js', '.json', '.html', '.css', '.md', '.txt', '.svg', '.yml', '.yaml'];
@@ -132,12 +132,24 @@ function dgeIsTextFile(name) {
 // ---------------------------------------------------------------
 // Modal open / PAT check
 // ---------------------------------------------------------------
+function dgeAdminShowWorking() {
+  const el = document.getElementById('adminEditorWorking');
+  if (el) el.style.display = 'block';
+}
+function dgeAdminHideWorking() {
+  const el = document.getElementById('adminEditorWorking');
+  if (el) el.style.display = 'none';
+}
+
 window.openAdminEditor = function() {
   if (!dgeCheckSuperadminGate()) return;
   const tokenInput = document.getElementById('adminGithubTokenInput');
   if (tokenInput) tokenInput.value = dgeGithubToken();
   if (typeof openModal === 'function') openModal('adminEditorModal');
-  dgeAdminNavigate(dgeAdminGetRootPath());
+  // Return to wherever was last being browsed, not back to the root —
+  // dgeAdminCurrentPath survives a close (the modal only hides, it
+  // doesn't reset any state) so this just needs to not override it.
+  dgeAdminNavigate(dgeAdminCurrentPath || dgeAdminGetRootPath());
 };
 
 window.saveAdminGithubToken = function() {
@@ -152,6 +164,7 @@ window.saveAdminGithubToken = function() {
 // Navigation + listing render
 // ---------------------------------------------------------------
 async function dgeAdminNavigate(path) {
+  dgeAdminHideWorking();
   const root = dgeAdminGetRootPath();
   // Hard clamp: never allow the current folder to end up above the
   // granted root, regardless of how this was called.
@@ -208,9 +221,10 @@ async function dgeAdminNavigate(path) {
       const rowAction = item.type === 'dir'
         ? `onclick="window.dgeAdminNavigateClick('${item.path}')"`
         : `onclick="window.dgeAdminOpenFile('${item.path}', '${item.name}')"`;
+      const isOpenFile = item.type === 'file' && item.path === dgeAdminOpenFilePath;
 
       return `
-        <div class="admin-file-row" draggable="true"
+        <div class="admin-file-row${isOpenFile ? ' admin-file-row-open' : ''}" draggable="true"
              data-path="${item.path}" data-type="${item.type}"
              ondragstart="window.dgeAdminDragStart(event, '${item.path}')"
              ${item.type === 'dir' ? `ondragover="event.preventDefault(); this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="window.dgeAdminHandleDrop(event, '${item.path}')"` : ''}>
@@ -295,6 +309,9 @@ window.dgeAdminOpenFile = async function(path, name) {
     dgeAdminOpenFilePath = path;
     textarea.value = dgeBase64ToUtf8(file.content);
     if (nameEl) nameEl.innerText = path;
+    document.querySelectorAll('#adminEditorList .admin-file-row').forEach(row => {
+      row.classList.toggle('admin-file-row-open', row.dataset.path === path);
+    });
   } catch (e) {
     if (nameEl) nameEl.innerText = 'Failed to load: ' + e.message;
   }
@@ -305,6 +322,20 @@ window.dgeAdminCloseFileEditor = function() {
   if (editorBox) editorBox.style.display = 'none';
   dgeAdminOpenFileSha = null;
   dgeAdminOpenFilePath = null;
+  document.querySelectorAll('#adminEditorList .admin-file-row-open').forEach(row => row.classList.remove('admin-file-row-open'));
+};
+
+window.dgeAdminSelectAllText = function() {
+  const ta = document.getElementById('adminEditorTextarea');
+  if (ta) { ta.focus(); ta.select(); }
+};
+
+window.dgeAdminClearAllText = function() {
+  const ta = document.getElementById('adminEditorTextarea');
+  if (!ta) return;
+  if (!confirm('Clear all text in the editor? This only clears the box here — nothing is saved to GitHub until you tap Save.')) return;
+  ta.value = '';
+  ta.focus();
 };
 
 window.dgeAdminSaveFile = async function() {
@@ -315,11 +346,13 @@ window.dgeAdminSaveFile = async function() {
   if (msg === null) return;
 
   try {
+    dgeAdminShowWorking();
     await dgeGithubPutFile(dgeAdminOpenFilePath, dgeUtf8ToBase64(textarea.value), msg, dgeAdminOpenFileSha);
     if (typeof showToast === 'function') showToast('Saved to GitHub.');
     window.dgeAdminCloseFileEditor();
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
+    dgeAdminHideWorking();
     if (typeof showToast === 'function') showToast('Save failed: ' + e.message);
   }
 };
@@ -331,6 +364,7 @@ window.dgeAdminSaveFile = async function() {
 window.dgeAdminUploadFiles = async function(fileList) {
   if (!fileList || !fileList.length) return;
   if (typeof showToast === 'function') showToast(`Uploading ${fileList.length} file(s)…`);
+  dgeAdminShowWorking();
 
   for (const file of fileList) {
     try {
@@ -353,16 +387,18 @@ window.dgeAdminUploadFiles = async function(fileList) {
 // folder name redundantly.
 window.dgeAdminUploadFolder = async function(fileList) {
   if (!fileList || !fileList.length) return;
-  if (typeof showToast === 'function') showToast(`Uploading ${fileList.length} file(s) from folder…`);
+  if (typeof showToast === 'function') showToast(`Uploading ${fileList.length} file(s) from folder… (working)`);
+  dgeAdminShowWorking();
 
   let ok = 0, failed = 0;
   for (const file of fileList) {
     try {
+      // webkitRelativePath includes the selected folder's own name as its
+      // first segment (e.g. "myfolder/sub/file.js") — keep it as-is so
+      // the folder itself is recreated here, not just its contents.
       const rel = file.webkitRelativePath || file.name;
-      const parts = rel.split('/');
-      const withoutTopFolder = parts.length > 1 ? parts.slice(1).join('/') : rel;
       const base64 = await dgeReadFileAsBase64(file);
-      const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + withoutTopFolder;
+      const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + rel;
       await dgeGithubPutFile(targetPath, base64, `Upload ${targetPath} via admin editor (folder upload)`);
       ok++;
     } catch (e) {
@@ -397,10 +433,12 @@ window.dgeAdminNewFolder = async function() {
   if (!name) return;
   const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + name.trim() + '/.gitkeep';
   try {
+    dgeAdminShowWorking();
     await dgeGithubPutFile(targetPath, dgeUtf8ToBase64(''), `Create folder ${name} via admin editor`);
     if (typeof showToast === 'function') showToast('Folder created.');
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
+    dgeAdminHideWorking();
     if (typeof showToast === 'function') showToast('Failed: ' + e.message);
   }
 };
@@ -419,10 +457,12 @@ window.dgeAdminNewFile = async function() {
   }
   const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + trimmed;
   try {
+    dgeAdminShowWorking();
     await dgeGithubPutFile(targetPath, dgeUtf8ToBase64(''), `Create ${trimmed} via admin editor`);
     if (typeof showToast === 'function') showToast('File created.');
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
+    dgeAdminHideWorking();
     if (typeof showToast === 'function') showToast('Failed: ' + e.message);
   }
 };
@@ -450,6 +490,7 @@ window.dgeAdminAddImageFromUrl = async function() {
 
   if (typeof showToast === 'function') showToast('Fetching image…');
   try {
+    dgeAdminShowWorking();
     const res = await fetch(trimmedUrl);
     if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
     const blob = await res.blob();
@@ -464,6 +505,7 @@ window.dgeAdminAddImageFromUrl = async function() {
     if (typeof showToast === 'function') showToast('Image uploaded.');
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
+    dgeAdminHideWorking();
     if (typeof showToast === 'function') showToast(`Couldn't fetch that image — likely a CORS restriction from the source site (${e.message}). Try downloading it and using Upload instead.`);
   }
 };
@@ -486,6 +528,7 @@ window.dgeAdminRename = async function(path, type) {
   const newName = newPath.split('/').pop();
 
   try {
+    dgeAdminShowWorking();
     if (type === 'file') {
       await dgeAdminMoveOneFile(path, newPath, `Move/rename ${oldName} to ${newPath}`);
     } else {
@@ -494,6 +537,7 @@ window.dgeAdminRename = async function(path, type) {
     if (typeof showToast === 'function') showToast('Moved/renamed.');
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
+    dgeAdminHideWorking();
     if (typeof showToast === 'function') showToast('Rename failed: ' + e.message);
   }
 };
@@ -540,6 +584,9 @@ async function dgeAdminMoveOneFile(oldPath, newPath, message) {
 async function dgeAdminMoveFolder(oldFolderPath, newFolderPath) {
   const tree = await dgeGithubGetRecursiveTree();
   const descendants = tree.tree.filter(t => t.type === 'blob' && t.path.startsWith(oldFolderPath + '/'));
+  if (descendants.length === 0) {
+    throw new Error(`GitHub's current file tree shows no files under "${oldFolderPath}" — nothing to move. Try 🔄 Refresh first if you just changed something in this folder.`);
+  }
   for (const entry of descendants) {
     const relative = entry.path.slice(oldFolderPath.length + 1);
     const newPath = newFolderPath + '/' + relative;
@@ -565,6 +612,7 @@ window.dgeAdminDelete = async function(path, type, sha) {
   if (!confirm(confirmMsg)) return;
 
   try {
+    dgeAdminShowWorking();
     if (type === 'dir') {
       const tree = await dgeGithubGetRecursiveTree();
       const descendants = tree.tree.filter(t => t.type === 'blob' && t.path.startsWith(path + '/'));
@@ -579,6 +627,7 @@ window.dgeAdminDelete = async function(path, type, sha) {
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
     if (typeof showToast === 'function') showToast('Delete failed: ' + e.message);
+    dgeAdminHideWorking();
   }
 };
 
@@ -654,6 +703,7 @@ window.dgeAdminHandleDrop = async function(e, targetFolderPath) {
   const type = rowEl ? rowEl.dataset.type : 'file';
 
   try {
+    dgeAdminShowWorking();
     if (type === 'dir') {
       await dgeAdminMoveFolder(dgeAdminDragSourcePath, newPath);
     } else {
@@ -662,6 +712,7 @@ window.dgeAdminHandleDrop = async function(e, targetFolderPath) {
     if (typeof showToast === 'function') showToast(`Moved ${name}.`);
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (err) {
+    dgeAdminHideWorking();
     if (typeof showToast === 'function') showToast('Move failed: ' + err.message);
   }
   dgeAdminDragSourcePath = null;
