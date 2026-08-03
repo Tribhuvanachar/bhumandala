@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhagavad Gita - Chapter 1</title>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #gita-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Typography */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        /* Card Layout for Verses */
+        .verse-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #e67e22;
+        }
+
+        .verse-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .verse-number {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #d35400;
+        }
+
+        .shloka {
+            font-size: 1.3em;
+            color: #2980b9;
+            font-weight: 500;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+        }
+
+        /* Commentaries Section */
+        .commentary-block {
+            margin-bottom: 15px;
+            background: #fdfefe;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #e5e8e8;
+        }
+
+        .commentary-label {
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7f8c8d;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .commentary-text {
+            color: #444;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="gita-container">
+        <!-- Content will be injected here by JavaScript -->
+    </div>
+
+    <script>
+        // 1. Assign your JSON data to this variable. 
+        // (I am including a tiny snippet as a placeholder. Paste your full JSON over this object).
+        const gitaData = {
+            "chapter": 1,
+            "title": "Yoga of Despondency",
+            "verses": [
+                {
+                  "verse_numbers": "1.1",
+                  "shloka": "धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः । मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय ॥ १.१॥",
+                  "gita_bhashya": "Not provided for Chapter 1 verses in GEETA BHASHYA Tatparya Nirnaya by Madhvacharya.pdf",
+                  "gita_tatparya": "Not provided for Chapter 1 verses in GEETA BHASHYA Tatparya Nirnaya by Madhvacharya.pdf",
+                  "gita_vivruti": "\"धर्म\" इति - धर्मसाधनभूमौ \"कुरुक्षेत्रे\" \"युयुत्सवः” युद्धमिच्छन्त एव \"समवेता\" मिळिताः सन्तो \"मामका\" मदीयाः दुर्योधनादयः \"पाण्डवाश्च\" हे \"सञ्जय\" \"किमकुर्वत\"? इति शब्दो योज्यः । 'पाण्डवानां भगवत्प्रियत्वं सर्वसाक्षिकमप्यजानन्धृतराष्ट्रः स्वपुत्राणां विजयविविदिषया सञ्जयं पप्रच्छ' इत्यर्थः ॥ १.१॥"
+                }
+                // PASTE THE REST OF YOUR JSON VERSES HERE
+            ]
+        };
+
+        // 2. Function to render the JSON data into HTML
+        function renderGita() {
+            const container = document.getElementById('gita-container');
+
+            // Add the Chapter Title
+            const header = document.createElement('h1');
+            header.textContent = `Chapter ${gitaData.chapter}: ${gitaData.title}`;
+            container.appendChild(header);
+
+            // Loop through each verse and create a card
+            gitaData.verses.forEach(verse => {
+                const card = document.createElement('div');
+                card.className = 'verse-card';
+
+                // Construct the HTML for the card
+                card.innerHTML = `
+                    <div class="verse-header">
+                        <span class="verse-number">Verse ${verse.verse_numbers}</span>
+                    </div>
+                    <div class="shloka">${verse.shloka}</div>
+                    
+                    <div class="commentary-block">
+                        <div class="commentary-label">Gita Vivruti (Raghavendra Swami)</div>
+                        <div class="commentary-text">${verse.gita_vivruti}</div>
+                    </div>
+
+                    <div class="commentary-block">
+                        <div class="commentary-label">Gita Bhashya (Madhvacharya)</div>
+                        <div class="commentary-text">${verse.gita_bhashya}</div>
+                    </div>
+
+                    <div class="commentary-block">
+                        <div class="commentary-label">Gita Tatparya (Madhvacharya)</div>
+                        <div class="commentary-text">${verse.gita_tatparya}</div>
+                    </div>
+                `;
+
+                // Append the card to the main container
+                container.appendChild(card);
+            });
+        }
+
+        // 3. Run the render function when the page loads
+        window.onload = renderGita;
+    </script>
+</body>
+</html>
