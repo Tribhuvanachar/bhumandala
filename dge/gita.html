@@ -26,22 +26,31 @@
             color: #2c3e50;
             border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        /* Loading & Error States */
+        /* Loading, Success & Error States */
         #status-message {
             text-align: center;
-            font-size: 1.2em;
+            font-size: 1.1em;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            background-color: #ecf0f1;
             color: #7f8c8d;
-            margin-top: 50px;
+        }
+
+        .success-text {
+            color: #27ae60;
+            font-weight: 500;
         }
 
         .error-text {
-            color: #e74c3c !important;
+            color: #e74c3c;
+            font-weight: 500;
         }
 
-        /* Card Layout for Verses */
+        /* Card Layout for Verses (The Big List) */
         .verse-card {
             background-color: #ffffff;
             border-radius: 8px;
@@ -102,13 +111,17 @@
 <body>
 
     <div id="gita-container">
+        <!-- The status message will display loading, success, and count -->
         <div id="status-message">Loading sacred texts...</div>
+        
+        <!-- The actual verses will be appended here -->
+        <div id="content-area"></div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const container = document.getElementById('gita-container');
             const statusMessage = document.getElementById('status-message');
+            const contentArea = document.getElementById('content-area');
 
             // Fetch the JSON file from the same directory
             fetch('gita.json')
@@ -119,13 +132,22 @@
                     return response.json();
                 })
                 .then(data => {
-                    // Clear the loading message
-                    container.innerHTML = '';
-                    renderGita(data, container);
+                    // Calculate total shlokas in the array
+                    const totalShlokas = data.verses ? data.verses.length : 0;
+                    
+                    // Update the status message with success and the count
+                    statusMessage.innerHTML = `<span class="success-text">✓ <strong>gita.json</strong> loaded successfully! Displaying a list of <strong>${totalShlokas}</strong> shlokas.</span>`;
+                    statusMessage.style.backgroundColor = "#eafaf1"; // Light green background
+                    statusMessage.style.border = "1px solid #2ecc71";
+
+                    // Render the verses into the content area
+                    renderGita(data, contentArea);
                 })
                 .catch(error => {
                     console.error("Error fetching the JSON:", error);
-                    statusMessage.innerHTML = `<span class="error-text">Failed to load the texts. Please ensure <strong>gita.json</strong> is uploaded to the same directory on GitHub.</span>`;
+                    statusMessage.innerHTML = `<span class="error-text">✗ Failed to load the texts. Please ensure <strong>gita.json</strong> is uploaded to the same directory on GitHub.</span>`;
+                    statusMessage.style.backgroundColor = "#fdedec"; // Light red background
+                    statusMessage.style.border = "1px solid #e74c3c";
                 });
         });
 
@@ -133,15 +155,18 @@
         function renderGita(gitaData, container) {
             // Add the Chapter Title
             const header = document.createElement('h1');
-            header.textContent = `Chapter ${gitaData.chapter}: ${gitaData.title.replace(/\/g, '')}`; 
+            
+            // Clean up any citation brackets from the title if they exist
+            const cleanTitle = gitaData.title ? gitaData.title.replace(/\/g, '') : "Unknown Title";
+            header.textContent = `Chapter ${gitaData.chapter}: ${cleanTitle}`; 
             container.appendChild(header);
 
-            // Loop through each verse and create a card
+            // Loop through each verse and create a card for the list
             gitaData.verses.forEach(verse => {
                 const card = document.createElement('div');
                 card.className = 'verse-card';
 
-                // Helper to clean up citation brackets if you want a cleaner UI
+                // Helper to clean up citation brackets for a cleaner UI
                 const cleanText = (text) => text ? text.replace(/\/g, '') : "Not provided";
 
                 // Construct the HTML for the card
@@ -167,7 +192,7 @@
                     </div>
                 `;
 
-                // Append the card to the main container
+                // Append the card to the content container
                 container.appendChild(card);
             });
         }
