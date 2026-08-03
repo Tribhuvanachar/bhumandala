@@ -20,6 +20,24 @@
             margin: 0 auto;
         }
 
+        /* Diagnostic Log Area */
+        #log-area {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            font-family: Consolas, monospace;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .log-info { color: #569cd6; } /* Blueish */
+        .log-success { color: #4ec9b0; font-weight: bold; } /* Greenish */
+        .log-error { color: #f44336; font-weight: bold; } /* Red */
+
         /* Typography */
         h1 {
             text-align: center;
@@ -27,28 +45,6 @@
             border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
             margin-bottom: 20px;
-        }
-
-        /* Loading, Success & Error States */
-        #status-message {
-            text-align: center;
-            font-size: 1.1em;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 30px;
-            background-color: #ecf0f1;
-            color: #7f8c8d;
-            border: 1px solid #bdc3c7;
-        }
-
-        .success-text {
-            color: #27ae60;
-            font-weight: 500;
-        }
-
-        .error-text {
-            color: #e74c3c;
-            font-weight: 500;
         }
 
         /* Card Layout for Verses */
@@ -112,105 +108,130 @@
 <body>
 
     <div id="gita-container">
-        <!-- Status message -->
-        <div id="status-message">Loading sacred texts...</div>
+        <!-- Diagnostic Logging Area -->
+        <div id="log-area"></div>
         
         <!-- The actual verses will be appended here -->
         <div id="content-area"></div>
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const statusMessage = document.getElementById('status-message');
-            const contentArea = document.getElementById('content-area');
+        // Diagnostic Logger
+        const logArea = document.getElementById('log-area');
+        
+        function addLog(message, type = 'log-info') {
+            const div = document.createElement('div');
+            div.className = type;
+            const time = new Date().toLocaleTimeString();
+            div.textContent = `[${time}] ${message}`;
+            logArea.appendChild(div);
+            console.log(`[${time}] ${message}`); // Also log to browser console
+        }
 
-            // Force the browser to skip cache by appending a timestamp query string
-            const jsonUrl = 'gita.json?nocache=' + new Date().getTime();
-
-            fetch(jsonUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    try {
-                        // Render the verses into the content area
-                        renderGita(data, contentArea);
-                        
-                        // Calculate total shlokas in the array
-                        const totalShlokas = (data.verses && Array.isArray(data.verses)) ? data.verses.length : 0;
-                        
-                        // Update the status message on success
-                        statusMessage.innerHTML = `<span class="success-text">✓ <strong>gita.json</strong> loaded successfully! Displaying a list of <strong>${totalShlokas}</strong> shlokas.</span>`;
-                        statusMessage.style.backgroundColor = "#eafaf1"; 
-                        statusMessage.style.border = "1px solid #2ecc71";
-                    } catch (renderError) {
-                        console.error("Rendering Error:", renderError);
-                        statusMessage.innerHTML = `<span class="error-text">✗ JSON fetched, but failed to render. Error: ${renderError.message}</span>`;
-                        statusMessage.style.backgroundColor = "#fdedec"; 
-                        statusMessage.style.border = "1px solid #e74c3c";
-                    }
-                })
-                .catch(error => {
-                    console.error("Fetch Error:", error);
-                    statusMessage.innerHTML = `<span class="error-text">✗ Failed to load <strong>gita.json</strong>. Error: ${error.message}</span>`;
-                    statusMessage.style.backgroundColor = "#fdedec"; 
-                    statusMessage.style.border = "1px solid #e74c3c";
-                });
-        });
-
-        // Function to safely remove tags
-        function cleanText(text) {
+        // Safe text cleaner (Fixed the previous Syntax Error here)
+        function cleanTextSafely(text) {
             if (!text) return "Not provided";
-            // Uses a safe regular expression to strip out [span_2](start_span)"[span_2](end_span)", [span_3](start_span)"[span_3](end_span)", etc.
+            // Removes[span_1](start_span)[span_1](end_span),[span_2](start_span)[span_2](end_span), etc., safely.
             return text.replace(/\/g, '').trim();
         }
 
+        document.addEventListener("DOMContentLoaded", () => {
+            const contentArea = document.getElementById('content-area');
+
+            addLog("Script initialized. DOM Content Loaded.", "log-info");
+
+            // Build the absolute URL to ensure we fetch from the correct place
+            const currentUrl = window.location.href;
+            const baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
+            const jsonUrl = `${baseUrl}/gita.json?nocache=${new Date().getTime()}`; // Bypass cache
+
+            addLog(`Attempting to load file from URL: \n${jsonUrl}`, "log-info");
+
+            fetch(jsonUrl)
+                .then(response => {
+                    addLog(`Fetch response received. HTTP Status: ${response.status} ${response.statusText}`, response.ok ? "log-success" : "log-error");
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
+                    }
+                    // Read as text first so we can log file details before parsing
+                    return response.text(); 
+                })
+                .then(textData => {
+                    addLog(`File successfully fetched. Content length: ${textData.length} characters.`, "log-success");
+                    
+                    try {
+                        addLog("Attempting to parse JSON data...", "log-info");
+                        const data = JSON.parse(textData);
+                        addLog("JSON parsed successfully.", "log-success");
+
+                        // Count the shlokas
+                        let totalShlokas = 0;
+                        if (data.verses && Array.isArray(data.verses)) {
+                            totalShlokas = data.verses.length;
+                        }
+                        
+                        addLog(`Number of shlokas read from JSON: ${totalShlokas}`, "log-success");
+                        addLog("Starting HTML rendering process...", "log-info");
+
+                        // Render the content
+                        renderGita(data, contentArea);
+                        
+                        addLog("HTML rendering complete! You should see the texts below.", "log-success");
+
+                    } catch (parseError) {
+                        addLog(`CRITICAL ERROR parsing JSON: ${parseError.message}`, "log-error");
+                    }
+                })
+                .catch(fetchError => {
+                    addLog(`CRITICAL NETWORK/FETCH ERROR: ${fetchError.message}`, "log-error");
+                });
+        });
+
         // Function to render the JSON data into HTML
         function renderGita(gitaData, container) {
-            // Add the Chapter Title
-            const header = document.createElement('h1');
-            const chapterNum = gitaData.chapter || '';
-            const chapterTitle = cleanText(gitaData.title) || 'Unknown Title';
-            header.textContent = `Chapter ${chapterNum}: ${chapterTitle}`; 
-            container.appendChild(header);
+            try {
+                // Add the Chapter Title
+                const header = document.createElement('h1');
+                const chapterNum = gitaData.chapter || '';
+                const chapterTitle = cleanTextSafely(gitaData.title) || 'Unknown Title';
+                header.textContent = `Chapter ${chapterNum}: ${chapterTitle}`; 
+                container.appendChild(header);
 
-            // Loop through each verse and create a card for the list
-            if (gitaData.verses && Array.isArray(gitaData.verses)) {
-                gitaData.verses.forEach(verse => {
-                    const card = document.createElement('div');
-                    card.className = 'verse-card';
+                // Loop through each verse and create a card for the list
+                if (gitaData.verses && Array.isArray(gitaData.verses)) {
+                    gitaData.verses.forEach(verse => {
+                        const card = document.createElement('div');
+                        card.className = 'verse-card';
 
-                    // Construct the HTML for the card
-                    card.innerHTML = `
-                        <div class="verse-header">
-                            <span class="verse-number">Verse ${verse.verse_numbers || 'Unknown'}</span>
-                        </div>
-                        <div class="shloka">${cleanText(verse.shloka)}</div>
-                        
-                        <div class="commentary-block">
-                            <div class="commentary-label">Gita Vivruti (Raghavendra Swami)</div>
-                            <div class="commentary-text">${cleanText(verse.gita_vivruti)}</div>
-                        </div>
+                        card.innerHTML = `
+                            <div class="verse-header">
+                                <span class="verse-number">Verse ${verse.verse_numbers || 'Unknown'}</span>
+                            </div>
+                            <div class="shloka">${cleanTextSafely(verse.shloka)}</div>
+                            
+                            <div class="commentary-block">
+                                <div class="commentary-label">Gita Vivruti (Raghavendra Swami)</div>
+                                <div class="commentary-text">${cleanTextSafely(verse.gita_vivruti)}</div>
+                            </div>
 
-                        <div class="commentary-block">
-                            <div class="commentary-label">Gita Bhashya (Madhvacharya)</div>
-                            <div class="commentary-text">${cleanText(verse.gita_bhashya)}</div>
-                        </div>
+                            <div class="commentary-block">
+                                <div class="commentary-label">Gita Bhashya (Madhvacharya)</div>
+                                <div class="commentary-text">${cleanTextSafely(verse.gita_bhashya)}</div>
+                            </div>
 
-                        <div class="commentary-block">
-                            <div class="commentary-label">Gita Tatparya Nirnaya (Madhvacharya)</div>
-                            <div class="commentary-text">${cleanText(verse.gita_tatparya)}</div>
-                        </div>
-                    `;
-
-                    // Append the card to the content container
-                    container.appendChild(card);
-                });
-            } else {
-                container.innerHTML = "<p>No verses found in the JSON file.</p>";
+                            <div class="commentary-block">
+                                <div class="commentary-label">Gita Tatparya Nirnaya (Madhvacharya)</div>
+                                <div class="commentary-text">${cleanTextSafely(verse.gita_tatparya)}</div>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
+                } else {
+                    addLog("Warning: No 'verses' array found in the JSON structure.", "log-error");
+                }
+            } catch (renderError) {
+                addLog(`CRITICAL RENDER ERROR: ${renderError.message}`, "log-error");
             }
         }
     </script>
