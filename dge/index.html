@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.21.0">
+<link rel="stylesheet" href="css/main.css?v=4.22.0">
 </head>
 <body>
 
@@ -129,8 +129,10 @@
 
   <div class="reading-card-wrap" id="readingCardWrap">
     <div class="reading-card" id="readingCardBox">
-      <button class="reading-card-toggle" id="readingCardToggleBtn" onclick="window.toggleReadingCardMinimize()" title="Minimize / Expand">⌄</button>
-      <button class="reading-card-toc-btn" onclick="window.openTocModal()" title="Jump to a shloka">🔢</button>
+      <div class="reading-card-header">
+        <button class="reading-card-toc-btn" onclick="window.openTocModal()" title="Jump to a shloka">🔢</button>
+        <button class="reading-card-toggle" id="readingCardToggleBtn" onclick="window.toggleReadingCardMinimize()" title="Minimize / Expand">⌄</button>
+      </div>
       <div id="readingCard">श्लोकं चिनोतु (Select a shloka)</div>
     </div>
   </div>
@@ -143,7 +145,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.21 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.22 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -523,7 +525,8 @@
       </div>
 
       <div style="display:flex; gap:6px; margin:12px 0;">
-        <button class="btn-sm" onclick="window.dgeAdminGoUp()">⬆ Up</button>
+        <button class="btn-sm" onclick="window.dgeAdminGoUp()" id="adminUpBtn">⬆ Up</button>
+        <button class="btn-sm" onclick="window.dgeAdminNavigate(dgeAdminCurrentPath)" title="Refresh this folder listing">🔄</button>
         <label class="btn-sm" style="cursor:pointer; margin:0;">📤 Upload<input type="file" multiple style="display:none;" onchange="window.dgeAdminUploadFiles(this.files)"></label>
         <button class="btn-sm" onclick="window.dgeAdminNewFolder()">📁 New Folder</button>
       </div>
@@ -532,9 +535,9 @@
 
       <div id="adminEditorList" class="admin-file-list"
            ondragover="event.preventDefault();"
-           ondrop="window.dgeAdminHandleDrop(event, dgeAdminCurrentPath)"></div>
+           ondrop="window.dgeAdminHandleBackgroundDrop(event)"></div>
 
-      <div id="adminEditorFileBox" style="display:none; margin-top:16px; border-top:1px solid var(--card-border); padding-top:12px;">
+      <div id="adminEditorFileBox" style="display:none; margin-top:16px; border-top:1px solid var(--card-border); padding-top:12px; position:sticky; top:0; background:var(--card-bg); z-index:5; box-shadow:0 4px 10px rgba(0,0,0,0.08);">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
           <span id="adminEditorFileName" style="font-size:11px; font-weight:700; word-break:break-all;"></span>
           <button class="btn-sm" onclick="window.dgeAdminCloseFileEditor()" style="font-size:10px;">✖</button>
@@ -573,30 +576,30 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.21.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.22.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.21.0"></script>
-<script src="js/state.js?v=4.21.0"></script>
-<script src="js/dev.js?v=4.21.0"></script>
-<script src="js/utils.js?v=4.21.0"></script>
-<script src="js/modals.js?v=4.21.0"></script>
-<script src="js/transliteration.js?v=4.21.0"></script>
-<script src="js/audio.js?v=4.21.0"></script>
-<script src="js/filter.js?v=4.21.0"></script>
-<script src="js/search.js?v=4.21.0"></script>
-<script src="js/markers.js?v=4.21.0"></script>
-<script src="js/notes.js?v=4.21.0"></script>
-<script src="js/history.js?v=4.21.0"></script>
-<script src="js/char-palette.js?v=4.21.0"></script>
-<script src="js/snippets.js?v=4.21.0"></script>
-<script src="js/actions.js?v=4.21.0"></script>
-<script src="js/voice.js?v=4.21.0"></script>
-<script src="js/screenshot.js?v=4.21.0"></script>
-<script src="js/ai.js?v=4.21.0"></script>
-<script src="js/render.js?v=4.21.0"></script>
-<script src="js/admin-editor.js?v=4.21.0"></script>
-<script src="js/core.js?v=4.21.0"></script>
+<script src="js/config.js?v=4.22.0"></script>
+<script src="js/state.js?v=4.22.0"></script>
+<script src="js/dev.js?v=4.22.0"></script>
+<script src="js/utils.js?v=4.22.0"></script>
+<script src="js/modals.js?v=4.22.0"></script>
+<script src="js/transliteration.js?v=4.22.0"></script>
+<script src="js/audio.js?v=4.22.0"></script>
+<script src="js/filter.js?v=4.22.0"></script>
+<script src="js/search.js?v=4.22.0"></script>
+<script src="js/markers.js?v=4.22.0"></script>
+<script src="js/notes.js?v=4.22.0"></script>
+<script src="js/history.js?v=4.22.0"></script>
+<script src="js/char-palette.js?v=4.22.0"></script>
+<script src="js/snippets.js?v=4.22.0"></script>
+<script src="js/actions.js?v=4.22.0"></script>
+<script src="js/voice.js?v=4.22.0"></script>
+<script src="js/screenshot.js?v=4.22.0"></script>
+<script src="js/ai.js?v=4.22.0"></script>
+<script src="js/render.js?v=4.22.0"></script>
+<script src="js/admin-editor.js?v=4.22.0"></script>
+<script src="js/core.js?v=4.22.0"></script>
 
 <script>
   if (typeof console.log === "function") {

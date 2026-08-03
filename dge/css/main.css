@@ -122,10 +122,10 @@ body.is-authorized .advanced-feature { display: flex !important; }
 .char-palette-toggle { flex-shrink: 0; width: 38px; border-radius: var(--radius-md); border: 1px solid var(--card-border); background: var(--card-bg); color: var(--text-primary); font-weight: 700; font-style: italic; cursor: pointer; }
 .char-palette-panel { display: none; position: sticky; top: calc(60px + env(safe-area-inset-top)); z-index: 160; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 8px; margin-bottom: 12px; box-shadow: var(--shadow-md); }
 .char-palette-panel.show { display: block; }
-.char-palette-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.char-palette-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 6px; }
 .char-palette-grid button { padding: 8px 0; border-radius: var(--radius-xs); border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-sanskrit); font-size: 15px; font-weight: 600; cursor: pointer; }
 .char-palette-grid button:active { background: var(--card-active); transform: scale(0.92); }
-.search-scope-select { border: 1px solid var(--card-border); border-radius: var(--radius-pill); padding: 0 8px; font-size: 11px; font-weight: 700; background: var(--card-bg); color: var(--text-primary); outline: none; }
+.search-scope-select { appearance: none; -webkit-appearance: none; border: 1px solid var(--card-border); border-radius: var(--radius-pill); padding: 4px 22px 4px 10px; font-size: 11px; font-weight: 700; background: var(--card-bg) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6"><path d="M1 1l4 4 4-4" stroke="%238a7a63" stroke-width="1.5" fill="none"/></svg>') no-repeat right 8px center; color: var(--text-primary); outline: none; max-width: 84px; text-overflow: ellipsis; }
 .search-container { position: relative; flex-grow: 1; }
 .search-input { width: 100%; padding: 10px 64px 10px 14px; border: 1px solid var(--card-border); border-radius: var(--radius-pill); font-size: 13px; background: var(--card-bg); color: var(--text-primary); box-sizing: border-box; outline: none; transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease); }
 .search-input:focus { border-color: var(--accent-red); box-shadow: 0 0 0 3px var(--accent-glow); }
@@ -142,13 +142,15 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 
 /* Reading & List Cards */
 .reading-card-wrap { position: sticky; top: calc(60px + env(safe-area-inset-top)); z-index: 150; background: var(--bg-main); padding-top: 2px; }
-.reading-card-toggle { position: absolute; top: 8px; right: 8px; z-index: 2; width: 26px; height: 26px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--muted-text); font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform var(--t-fast) var(--ease); }
-.reading-card-toc-btn { position: absolute; top: 8px; left: 8px; z-index: 2; width: 26px; height: 26px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--muted-text); font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.reading-card-wrap.minimized .reading-card { max-height: 44px; overflow: hidden; padding: 11px 44px 11px 18px; text-align: left; font-size: calc(var(--font-multiplier) * 0.85); }
+.reading-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.reading-card-toggle { width: 26px; height: 26px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--muted-text); font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform var(--t-fast) var(--ease); flex-shrink: 0; }
+.reading-card-toc-btn { width: 26px; height: 26px; border-radius: 50%; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--muted-text); font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.reading-card-wrap.minimized .reading-card { max-height: 60px; overflow: hidden; padding: 10px 18px; text-align: left; font-size: calc(var(--font-multiplier) * 0.85); }
+.reading-card-wrap.minimized .reading-card-header { margin-bottom: 2px; }
 .reading-card-wrap.minimized .reading-card::before, .reading-card-wrap.minimized .reading-card::after { display: none; }
 .reading-card-wrap.minimized .reading-card-toggle { transform: rotate(180deg); }
 
-.reading-card { position: relative; width: 100%; box-sizing: border-box; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: var(--radius-lg); padding: 40px 18px 22px 18px; text-align: center; font-family: var(--font-sanskrit); font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.7; font-weight: 500; margin-bottom: 16px; min-height: 70px; display: block; overflow-wrap: anywhere; box-shadow: var(--shadow-sm); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease), max-height var(--t-med) var(--ease), padding var(--t-med) var(--ease); -webkit-touch-callout: none; }
+.reading-card { position: relative; width: 100%; box-sizing: border-box; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: var(--radius-lg); padding: 16px 18px 22px 18px; text-align: center; font-family: var(--font-sanskrit); font-size: calc(var(--font-multiplier) * 1.15); color: var(--text-sanskrit); line-height: 1.7; font-weight: 500; margin-bottom: 16px; min-height: 70px; display: block; overflow-wrap: anywhere; box-shadow: var(--shadow-sm); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease), max-height var(--t-med) var(--ease), padding var(--t-med) var(--ease); -webkit-touch-callout: none; }
 .reading-card.highlight { border-color: var(--accent-red); box-shadow: 0 0 0 4px var(--accent-glow), var(--shadow-sm); }
 .reading-card::before, .reading-card::after { content: "❈"; display: block; font-size: 12px; color: var(--accent-gold); opacity: 0.6; margin-bottom: 6px; font-family: var(--font-ui); }
 .reading-card::after { margin-bottom: 0; margin-top: 6px; }

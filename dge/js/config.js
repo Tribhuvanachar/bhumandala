@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v5.3 (3 contributor names added)';
+window.DGE_VERSIONS['config.js'] = 'v5.4 (Admin access levels, secretPasskey update)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -9,8 +9,8 @@ const appConfig = {
   contactEmail: "sanatanavidyagurukulam@gmail.com",
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
-  secretPasskey: "SHRI108",
-  version: "v4.21"
+  secretPasskey: "3BU1",
+  version: "v4.22"
 };
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
@@ -126,6 +126,17 @@ window.dgeGetEffectiveShlokaFields = function() {
 //     still works, just with a generic centered safe zone by default.
 const GITHUB_REPO_CONFIG = { owner: 'Tribhuvanachar', repo: 'bhumandala', branch: 'main', imagesPath: 'dge/images' };
 window.GITHUB_REPO_CONFIG = GITHUB_REPO_CONFIG;
+
+// Admin access levels — each superadmin URL code is bound to a specific
+// root path it can NEVER navigate above, even by tapping "Up" repeatedly.
+// This code (2) is scoped to only the dge/ website folder — it cannot
+// reach the repo root or any sibling folder. A future code with wider
+// reach would get its own entry here with a different (or empty, for
+// full-repo) rootPath — not something to hand out casually.
+const ADMIN_ACCESS_LEVELS = {
+  '2': { rootPath: 'dge', label: 'DGE Website Admin' }
+};
+window.ADMIN_ACCESS_LEVELS = ADMIN_ACCESS_LEVELS;
 
 const SHARE_TEMPLATE_EXCLUDE = ['_collage-uncropped-reference'];
 window.SHARE_TEMPLATE_EXCLUDE = SHARE_TEMPLATE_EXCLUDE;

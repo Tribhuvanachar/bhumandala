@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.1 (Fixed data-loss bug in rename/move for files >1MB)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.2 (Fixed drop-on-background bug, root-path security, sticky editor, full-path rename)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -26,13 +26,22 @@ let dgeAdminDragSourcePath = null;
 function dgeCheckSuperadminGate() {
   try {
     const params = new URLSearchParams(window.location.search);
-    if (params.get('superadmin') === '2') {
+    const code = params.get('superadmin');
+    if (code && window.ADMIN_ACCESS_LEVELS && window.ADMIN_ACCESS_LEVELS[code]) {
       localStorage.setItem('is_superadmin', 'true');
+      localStorage.setItem('admin_root_path', window.ADMIN_ACCESS_LEVELS[code].rootPath);
     }
   } catch (e) { /* ignore */ }
   return localStorage.getItem('is_superadmin') === 'true';
 }
 window.dgeCheckSuperadminGate = dgeCheckSuperadminGate;
+
+// The path this device's access code is bound to — navigation can never
+// go above this, regardless of what's clicked or dragged. Defaults to
+// 'dge' (the narrowest, safest scope) if nothing was ever granted.
+function dgeAdminGetRootPath() {
+  return localStorage.getItem('admin_root_path') || 'dge';
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   if (dgeCheckSuperadminGate()) {
@@ -75,8 +84,8 @@ async function dgeGithubRequest(path, options) {
 
 function dgeGithubListDir(dirPath) {
   const { owner, repo, branch } = GITHUB_REPO_CONFIG;
-  const url = `${GH_API}/repos/${owner}/${repo}/contents/${dirPath}?ref=${branch}`;
-  return dgeGithubRequest(url, { headers: dgeGithubHeaders() });
+  const url = `${GH_API}/repos/${owner}/${repo}/contents/${dirPath}?ref=${branch}&_=${Date.now()}`;
+  return dgeGithubRequest(url, { headers: dgeGithubHeaders(), cache: 'no-store' });
 }
 
 function dgeGithubGetFile(filePath) {
@@ -128,7 +137,7 @@ window.openAdminEditor = function() {
   const tokenInput = document.getElementById('adminGithubTokenInput');
   if (tokenInput) tokenInput.value = dgeGithubToken();
   if (typeof openModal === 'function') openModal('adminEditorModal');
-  dgeAdminNavigate('dge');
+  dgeAdminNavigate(dgeAdminGetRootPath());
 };
 
 window.saveAdminGithubToken = function() {
@@ -143,7 +152,22 @@ window.saveAdminGithubToken = function() {
 // Navigation + listing render
 // ---------------------------------------------------------------
 async function dgeAdminNavigate(path) {
+  const root = dgeAdminGetRootPath();
+  // Hard clamp: never allow the current folder to end up above the
+  // granted root, regardless of how this was called.
+  if (root && path !== root && !path.startsWith(root + '/')) {
+    path = root;
+  }
   dgeAdminCurrentPath = path;
+
+  const upBtn = document.getElementById('adminUpBtn');
+  if (upBtn) {
+    const atBoundary = (path === root);
+    upBtn.disabled = atBoundary;
+    upBtn.style.opacity = atBoundary ? '0.4' : '1';
+    upBtn.style.cursor = atBoundary ? 'default' : 'pointer';
+  }
+
   const listEl = document.getElementById('adminEditorList');
   const crumbEl = document.getElementById('adminEditorBreadcrumb');
   if (!listEl) return;
@@ -151,14 +175,17 @@ async function dgeAdminNavigate(path) {
   listEl.innerHTML = `<div style="padding:20px; text-align:center; color:var(--muted-text); font-size:12px;">Loading…</div>`;
 
   if (crumbEl) {
-    const parts = path.split('/').filter(Boolean);
-    let acc = '';
-    let crumbHtml = '';
-    parts.forEach((p, i) => {
-      acc += (i === 0 ? '' : '/') + p;
+    // Only render breadcrumb segments from the granted root onward — a
+    // scoped admin never sees (or can drop onto) anything above it.
+    const rootParts = root.split('/').filter(Boolean);
+    const allParts = path.split('/').filter(Boolean);
+    const visibleParts = allParts.slice(rootParts.length);
+    let acc = root;
+    let crumbHtml = `<span class="admin-crumb" data-path="${root}" onclick="window.dgeAdminNavigateClick('${root}')" ondragover="event.preventDefault(); this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="window.dgeAdminHandleDrop(event, '${root}')">${root || '/'}</span>`;
+    visibleParts.forEach(p => {
+      acc += '/' + p;
       const dest = acc;
-      crumbHtml += `<span class="admin-crumb" data-path="${dest}" onclick="window.dgeAdminNavigateClick('${dest}')" ondragover="event.preventDefault(); this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="window.dgeAdminHandleDrop(event, '${dest}')">${p}</span>`;
-      if (i < parts.length - 1) crumbHtml += ' / ';
+      crumbHtml += ` / <span class="admin-crumb" data-path="${dest}" onclick="window.dgeAdminNavigateClick('${dest}')" ondragover="event.preventDefault(); this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="window.dgeAdminHandleDrop(event, '${dest}')">${p}</span>`;
     });
     crumbEl.innerHTML = crumbHtml;
   }
@@ -215,9 +242,17 @@ function dgeFormatBytes(bytes) {
 }
 
 window.dgeAdminGoUp = function() {
+  const root = dgeAdminGetRootPath();
+  if (dgeAdminCurrentPath === root) return; // already at the boundary — Up does nothing, by design
   const parts = dgeAdminCurrentPath.split('/').filter(Boolean);
   parts.pop();
-  dgeAdminNavigate(parts.join('/'));
+  const candidate = parts.join('/');
+  // Never allow landing above the granted root, even via odd path math
+  if (root && !(candidate === root || candidate.startsWith(root + '/'))) {
+    dgeAdminNavigate(root);
+    return;
+  }
+  dgeAdminNavigate(candidate);
 };
 
 // ---------------------------------------------------------------
@@ -237,6 +272,7 @@ window.dgeAdminOpenFile = async function(path, name) {
   if (!editorBox || !textarea) return;
 
   editorBox.style.display = 'block';
+  editorBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
   if (nameEl) nameEl.innerText = 'Loading ' + path + '…';
   textarea.value = '';
 
@@ -332,19 +368,25 @@ window.dgeAdminNewFolder = async function() {
 // across every descendant via the recursive tree)
 // ---------------------------------------------------------------
 window.dgeAdminRename = async function(path, type) {
+  const root = dgeAdminGetRootPath();
+  const newPathRaw = prompt('Edit the full path (rename and/or move it here):', path);
+  if (!newPathRaw || newPathRaw.trim() === path) return;
+  const newPath = newPathRaw.trim().replace(/^\/+/, '').replace(/\/+$/, '');
+  if (!newPath) return;
+  if (root && newPath !== root && !newPath.startsWith(root + '/')) {
+    if (typeof showToast === 'function') showToast("Can't move outside your allowed folder.");
+    return;
+  }
   const oldName = path.split('/').pop();
-  const newName = prompt('Rename to:', oldName);
-  if (!newName || newName === oldName) return;
-  const parentPath = path.split('/').slice(0, -1).join('/');
-  const newPath = (parentPath ? parentPath + '/' : '') + newName.trim();
+  const newName = newPath.split('/').pop();
 
   try {
     if (type === 'file') {
-      await dgeAdminMoveOneFile(path, newPath, `Rename ${oldName} to ${newName}`);
+      await dgeAdminMoveOneFile(path, newPath, `Move/rename ${oldName} to ${newPath}`);
     } else {
       await dgeAdminMoveFolder(path, newPath);
     }
-    if (typeof showToast === 'function') showToast('Renamed.');
+    if (typeof showToast === 'function') showToast('Moved/renamed.');
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
     if (typeof showToast === 'function') showToast('Rename failed: ' + e.message);
@@ -428,11 +470,28 @@ window.dgeAdminDragStart = function(e, path) {
   e.dataTransfer.effectAllowed = 'move';
 };
 
-window.dgeAdminHandleDrop = async function(e, targetFolderPath) {
+// The list's own background (not a specific folder row) only accepts
+// real OS file drops for upload. An internal row dragged here and
+// released — without landing precisely on a folder or breadcrumb
+// segment — is intentionally a no-op: the file stays exactly where it
+// was, no error, nothing happens.
+window.dgeAdminHandleBackgroundDrop = async function(e) {
   e.preventDefault();
   document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
 
-  // OS files dropped from outside the browser (real File objects)
+  if (e.dataTransfer.files && e.dataTransfer.files.length) {
+    await window.dgeAdminUploadFiles(e.dataTransfer.files);
+  }
+  dgeAdminDragSourcePath = null;
+};
+
+// Drop target = a SPECIFIC folder row or breadcrumb segment — the only
+// valid places to actually move a file to.
+window.dgeAdminHandleDrop = async function(e, targetFolderPath) {
+  e.preventDefault();
+  e.stopPropagation();
+  document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+
   if (e.dataTransfer.files && e.dataTransfer.files.length) {
     const prevPath = dgeAdminCurrentPath;
     dgeAdminCurrentPath = targetFolderPath;
@@ -441,11 +500,10 @@ window.dgeAdminHandleDrop = async function(e, targetFolderPath) {
     return;
   }
 
-  // Internal move (dragging one of our own rows)
-  if (!dgeAdminDragSourcePath || dgeAdminDragSourcePath === targetFolderPath) return;
+  if (!dgeAdminDragSourcePath || dgeAdminDragSourcePath === targetFolderPath) { dgeAdminDragSourcePath = null; return; }
   const name = dgeAdminDragSourcePath.split('/').pop();
-  const newPath = targetFolderPath + '/' + name;
-  if (newPath === dgeAdminDragSourcePath) return;
+  const newPath = targetFolderPath ? targetFolderPath + '/' + name : name;
+  if (newPath === dgeAdminDragSourcePath) { dgeAdminDragSourcePath = null; return; }
 
   const rowEl = document.querySelector(`.admin-file-row[data-path="${dgeAdminDragSourcePath}"]`);
   const type = rowEl ? rowEl.dataset.type : 'file';
