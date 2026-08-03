@@ -1,16 +1,16 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v5.4 (Admin access levels, secretPasskey update)';
+window.DGE_VERSIONS['config.js'] = 'v5.6 (Exact "- 3BU1 -" format)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
-  designedBy: "Tribhuvan Achar",
+  designedBy: "- 3BU1 -",
   contactEmail: "sanatanavidyagurukulam@gmail.com",
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
-  secretPasskey: "3BU1",
-  version: "v4.22"
+  secretPasskey: "SHRI108",
+  version: "v4.24"
 };
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,

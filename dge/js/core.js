@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v2.3 (Resume-last-verse hook)';
+window.DGE_VERSIONS['core.js'] = 'v2.4 (Search-scope popup population)';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. INITIALIZE GLOBAL DOM ELEMENTS
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loopB: document.getElementById('loopB'),
     enableAB: document.getElementById('enableAB'),
     autoABToggle: document.getElementById('autoABToggle'),
-    searchScope: document.getElementById('searchScope'),
+    searchScope: document.getElementById('searchScopeBtn'),
     navContainer: document.getElementById('searchNavigator')
   };
 
@@ -106,16 +106,16 @@ window.renderStotraChrome = function() {
   if (rangeEnd) rangeEnd.max = window.stotraData.metadata.totalShlokas || 43;
 
   const dynamicList = document.getElementById('commentaryDynamicList');
-  const searchScope = document.getElementById('searchScope');
+  const searchScopeDynamicList = document.getElementById('searchScopeDynamicList');
 
-  if (dynamicList && searchScope && window.stotraData.metadata.availableCommentaries) {
+  if (dynamicList && searchScopeDynamicList && window.stotraData.metadata.availableCommentaries) {
     dynamicList.innerHTML = '';
-    searchScope.innerHTML = '<option value="all">Search All</option><option value="mula">Shloka Only</option><option value="notes">My Notes Only</option>';
+    searchScopeDynamicList.innerHTML = '';
 
     Object.entries(window.stotraData.metadata.availableCommentaries).forEach(([key, name]) => {
       const transName = doTranslit(name);
       dynamicList.innerHTML += `<div class="pop-item" onclick="setCommentaryView('${key}', this)">${transName}</div>`;
-      searchScope.innerHTML += `<option value="${key}">${transName} Only</option>`;
+      searchScopeDynamicList.innerHTML += `<div class="pop-item" data-scope="${key}" onclick="window.setSearchScope('${key}', '${transName} Only', this)">${transName} Only</div>`;
     });
   }
 };

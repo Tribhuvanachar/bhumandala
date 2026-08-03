@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v3.4 (Phonetic search tolerance, smaller icons)';
+window.DGE_VERSIONS['render.js'] = 'v3.5 (Search-scope custom popup, shloka scroll-margin fix)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -11,6 +11,17 @@ function getText(id) {
     ? applyTransliteration(stotraData.shlokas[id].sa, activeScript)
     : stotraData.shlokas[id].sa;
 }
+
+window.currentSearchScope = 'all';
+window.setSearchScope = function(scope, label, el) {
+  window.currentSearchScope = scope;
+  const btn = document.getElementById('searchScopeBtn');
+  if (btn) btn.innerText = label;
+  document.querySelectorAll('#searchScopePopup .pop-item').forEach(item => item.classList.remove('active'));
+  if (el) el.classList.add('active');
+  if (typeof togglePopup === 'function') togglePopup('searchScopePopup');
+  if (typeof handleSearch === 'function') handleSearch();
+};
 
 function setCommentaryView(view, el) {
   selectedCommentaryView = view;
@@ -134,10 +145,9 @@ function renderList() {
   const fIds = typeof getFilteredIds === 'function' ? getFilteredIds() : Object.keys(stotraData.shlokas).map(Number);
   
   const searchInput = document.getElementById('searchInput');
-  const searchScope = document.getElementById('searchScope');
   const rawQuery = searchInput ? searchInput.value.trim() : '';
   const pattern = dgeBuildSearchPattern(rawQuery);
-  const scope = searchScope ? searchScope.value : 'all';
+  const scope = window.currentSearchScope || 'all';
   const total = stotraData.metadata.totalShlokas || Object.keys(stotraData.shlokas).length;
 
   window.searchMatches = [];

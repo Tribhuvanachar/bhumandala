@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.2 (Fixed drop-on-background bug, root-path security, sticky editor, full-path rename)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.3 (Fixed empty-file false-positive, graceful 404 handling, drag auto-scroll, folder upload)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -226,6 +226,19 @@ async function dgeAdminNavigate(path) {
         </div>`;
     }).join('') || `<div class="note-preview-box" style="margin:0;">Empty folder.</div>`;
   } catch (e) {
+    // A 404 here usually means this folder just stopped existing — most
+    // often because its last remaining file was deleted, and Git doesn't
+    // track empty folders. Rather than dead-ending on an error, step up
+    // to the parent folder automatically (unless we're already at the
+    // granted root, which can't disappear).
+    if (String(e.message).includes('404') && path !== root) {
+      const parts = path.split('/').filter(Boolean);
+      parts.pop();
+      const parentPath = parts.join('/');
+      if (typeof showToast === 'function') showToast('That folder no longer exists (its last file was likely just removed) — moved up a level.');
+      dgeAdminNavigate(parentPath || root);
+      return;
+    }
     listEl.innerHTML = `<div class="note-preview-box" style="margin:0; color:var(--accent-red);">Couldn't load this folder: ${e.message}</div>`;
   }
 }
@@ -332,6 +345,35 @@ window.dgeAdminUploadFiles = async function(fileList) {
   dgeAdminNavigate(dgeAdminCurrentPath);
 };
 
+// Uploads an entire local folder, preserving its internal structure.
+// file.webkitRelativePath looks like "myFolder/sub/file.js" — everything
+// after the first segment (the folder name itself, which the browser
+// always includes) gets appended under the current admin folder, so the
+// SUBFOLDER structure is preserved without recreating the top-level
+// folder name redundantly.
+window.dgeAdminUploadFolder = async function(fileList) {
+  if (!fileList || !fileList.length) return;
+  if (typeof showToast === 'function') showToast(`Uploading ${fileList.length} file(s) from folder…`);
+
+  let ok = 0, failed = 0;
+  for (const file of fileList) {
+    try {
+      const rel = file.webkitRelativePath || file.name;
+      const parts = rel.split('/');
+      const withoutTopFolder = parts.length > 1 ? parts.slice(1).join('/') : rel;
+      const base64 = await dgeReadFileAsBase64(file);
+      const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + withoutTopFolder;
+      await dgeGithubPutFile(targetPath, base64, `Upload ${targetPath} via admin editor (folder upload)`);
+      ok++;
+    } catch (e) {
+      failed++;
+      console.warn(`Failed to upload ${file.webkitRelativePath || file.name}:`, e.message);
+    }
+  }
+  if (typeof showToast === 'function') showToast(`Folder upload done: ${ok} succeeded${failed ? `, ${failed} failed (see console)` : ''}.`);
+  dgeAdminNavigate(dgeAdminCurrentPath);
+};
+
 function dgeReadFileAsBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -407,6 +449,14 @@ function dgeGithubGetBlob(sha) {
 // API (much higher size limit) before ever writing anything.
 async function dgeAdminGetFileContentSafe(path) {
   const file = await dgeGithubGetFile(path);
+
+  // A genuinely empty file (0 bytes, e.g. a .gitkeep placeholder) legitimately
+  // has empty content — that's correct, not a failure, and must not be
+  // confused with "content missing because the file is too large."
+  if (file.size === 0) {
+    return { content: '', sha: file.sha };
+  }
+
   let content = file.content;
   if (!content || !content.replace(/\n/g, '').trim()) {
     const blob = await dgeGithubGetBlob(file.sha);
@@ -438,9 +488,17 @@ async function dgeAdminMoveFolder(oldFolderPath, newFolderPath) {
 // Delete
 // ---------------------------------------------------------------
 window.dgeAdminDelete = async function(path, type, sha) {
-  const confirmMsg = type === 'dir'
+  let confirmMsg = type === 'dir'
     ? `Delete the folder "${path}" and everything inside it? This can't be undone from here.`
     : `Delete "${path}"? This can't be undone from here.`;
+
+  if (type === 'file') {
+    const siblingCount = document.querySelectorAll('#adminEditorList .admin-file-row').length;
+    if (siblingCount <= 1) {
+      confirmMsg = `This is the only item in this folder. Git doesn't track empty folders, so deleting it will remove the folder itself too. Continue?`;
+    }
+  }
+
   if (!confirm(confirmMsg)) return;
 
   try {
@@ -469,6 +527,30 @@ window.dgeAdminDragStart = function(e, path) {
   dgeAdminDragSourcePath = path;
   e.dataTransfer.effectAllowed = 'move';
 };
+
+// Auto-scrolls the admin modal's body while dragging near its top/bottom
+// edge, so folders above or below the current viewport become reachable
+// as drop targets without needing to release and manually scroll first.
+let dgeAdminAutoScrollTimer = null;
+document.addEventListener('dragover', (e) => {
+  const modal = document.getElementById('adminEditorModal');
+  if (!modal || modal.style.display === 'none' || !modal.style.display) return;
+  const body = modal.querySelector('.modal-body');
+  if (!body) return;
+
+  const rect = body.getBoundingClientRect();
+  const EDGE = 60;
+  const y = e.clientY;
+
+  clearInterval(dgeAdminAutoScrollTimer);
+  if (y - rect.top < EDGE && y >= rect.top) {
+    dgeAdminAutoScrollTimer = setInterval(() => { body.scrollTop -= 12; }, 16);
+  } else if (rect.bottom - y < EDGE && y <= rect.bottom) {
+    dgeAdminAutoScrollTimer = setInterval(() => { body.scrollTop += 12; }, 16);
+  }
+});
+document.addEventListener('dragend', () => clearInterval(dgeAdminAutoScrollTimer));
+document.addEventListener('drop', () => clearInterval(dgeAdminAutoScrollTimer));
 
 // The list's own background (not a specific folder row) only accepts
 // real OS file drops for upload. An internal row dragged here and

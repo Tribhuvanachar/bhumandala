@@ -125,7 +125,6 @@ body.is-authorized .advanced-feature { display: flex !important; }
 .char-palette-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 6px; }
 .char-palette-grid button { padding: 8px 0; border-radius: var(--radius-xs); border: 1px solid var(--card-border); background: var(--bg-main); color: var(--text-sanskrit); font-size: 15px; font-weight: 600; cursor: pointer; }
 .char-palette-grid button:active { background: var(--card-active); transform: scale(0.92); }
-.search-scope-select { appearance: none; -webkit-appearance: none; border: 1px solid var(--card-border); border-radius: var(--radius-pill); padding: 4px 22px 4px 10px; font-size: 11px; font-weight: 700; background: var(--card-bg) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6"><path d="M1 1l4 4 4-4" stroke="%238a7a63" stroke-width="1.5" fill="none"/></svg>') no-repeat right 8px center; color: var(--text-primary); outline: none; max-width: 84px; text-overflow: ellipsis; }
 .search-container { position: relative; flex-grow: 1; }
 .search-input { width: 100%; padding: 10px 64px 10px 14px; border: 1px solid var(--card-border); border-radius: var(--radius-pill); font-size: 13px; background: var(--card-bg); color: var(--text-primary); box-sizing: border-box; outline: none; transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease); }
 .search-input:focus { border-color: var(--accent-red); box-shadow: 0 0 0 3px var(--accent-glow); }
@@ -158,7 +157,7 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .sync-word.active { background: var(--accent-red); color: #fff; box-shadow: 0 0 0 2px var(--accent-red); }
 
 .shloka-list { display: flex; flex-direction: column; gap: 10px; }
-.shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-wrap: anywhere; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), transform var(--t-fast) var(--ease); scroll-margin-top: calc(60px + env(safe-area-inset-top) + 14px); }
+.shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-wrap: anywhere; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), transform var(--t-fast) var(--ease); scroll-margin-top: calc(60px + env(safe-area-inset-top) + 150px); }
 .shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left: 4px solid var(--accent-red); }
 .shloka-card:active { background: var(--card-active); }
 

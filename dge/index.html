@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.22.0">
+<link rel="stylesheet" href="css/main.css?v=4.24.0">
 </head>
 <body>
 
@@ -110,11 +110,16 @@
   </div>
 
   <div class="search-box-group">
-    <select id="searchScope" class="search-scope-select" onchange="window.handleSearch()">
-      <option value="all">Search All</option>
-      <option value="mula">Shloka Only</option>
-      <option value="notes">My Notes Only</option>
-    </select>
+    <div class="popup-container" style="position:relative;">
+      <button class="btn-lang" id="searchScopeBtn" onclick="window.togglePopup('searchScopePopup')" style="max-width:90px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block;">Search All</button>
+      <div class="popup popup-top" id="searchScopePopup">
+        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Search Scope</div>
+        <div class="pop-item active" data-scope="all" onclick="window.setSearchScope('all', 'Search All', this)">Search All</div>
+        <div class="pop-item" data-scope="mula" onclick="window.setSearchScope('mula', 'Shloka Only', this)">Shloka Only</div>
+        <div class="pop-item" data-scope="notes" onclick="window.setSearchScope('notes', 'My Notes Only', this)">My Notes Only</div>
+        <div id="searchScopeDynamicList"></div>
+      </div>
+    </div>
     <div class="search-container">
       <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search text or shloka number..." oninput="window.handleSearch()">
       <button class="mic-btn" id="searchMicBtn" onclick="window.startSearchVoiceInput()" title="Search by voice">🎤</button>
@@ -145,7 +150,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.22 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.24 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -471,7 +476,7 @@
       <div id="contributorsSection"></div>
 
       <div class="actions-section-label" style="margin-top:20px;">🕉️ Designed By</div>
-      <p style="font-size:12px; color:var(--muted-text); margin:0;">Tribhuvan Achar</p>
+      <p style="font-size:12px; color:var(--muted-text); margin:0;">- 3BU1 -</p>
     </div>
   </div>
 </div>
@@ -528,6 +533,7 @@
         <button class="btn-sm" onclick="window.dgeAdminGoUp()" id="adminUpBtn">⬆ Up</button>
         <button class="btn-sm" onclick="window.dgeAdminNavigate(dgeAdminCurrentPath)" title="Refresh this folder listing">🔄</button>
         <label class="btn-sm" style="cursor:pointer; margin:0;">📤 Upload<input type="file" multiple style="display:none;" onchange="window.dgeAdminUploadFiles(this.files)"></label>
+        <label class="btn-sm" style="cursor:pointer; margin:0;">📂 Upload Folder<input type="file" webkitdirectory multiple style="display:none;" onchange="window.dgeAdminUploadFolder(this.files)"></label>
         <button class="btn-sm" onclick="window.dgeAdminNewFolder()">📁 New Folder</button>
       </div>
 
@@ -576,30 +582,30 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.22.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.24.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.22.0"></script>
-<script src="js/state.js?v=4.22.0"></script>
-<script src="js/dev.js?v=4.22.0"></script>
-<script src="js/utils.js?v=4.22.0"></script>
-<script src="js/modals.js?v=4.22.0"></script>
-<script src="js/transliteration.js?v=4.22.0"></script>
-<script src="js/audio.js?v=4.22.0"></script>
-<script src="js/filter.js?v=4.22.0"></script>
-<script src="js/search.js?v=4.22.0"></script>
-<script src="js/markers.js?v=4.22.0"></script>
-<script src="js/notes.js?v=4.22.0"></script>
-<script src="js/history.js?v=4.22.0"></script>
-<script src="js/char-palette.js?v=4.22.0"></script>
-<script src="js/snippets.js?v=4.22.0"></script>
-<script src="js/actions.js?v=4.22.0"></script>
-<script src="js/voice.js?v=4.22.0"></script>
-<script src="js/screenshot.js?v=4.22.0"></script>
-<script src="js/ai.js?v=4.22.0"></script>
-<script src="js/render.js?v=4.22.0"></script>
-<script src="js/admin-editor.js?v=4.22.0"></script>
-<script src="js/core.js?v=4.22.0"></script>
+<script src="js/config.js?v=4.24.0"></script>
+<script src="js/state.js?v=4.24.0"></script>
+<script src="js/dev.js?v=4.24.0"></script>
+<script src="js/utils.js?v=4.24.0"></script>
+<script src="js/modals.js?v=4.24.0"></script>
+<script src="js/transliteration.js?v=4.24.0"></script>
+<script src="js/audio.js?v=4.24.0"></script>
+<script src="js/filter.js?v=4.24.0"></script>
+<script src="js/search.js?v=4.24.0"></script>
+<script src="js/markers.js?v=4.24.0"></script>
+<script src="js/notes.js?v=4.24.0"></script>
+<script src="js/history.js?v=4.24.0"></script>
+<script src="js/char-palette.js?v=4.24.0"></script>
+<script src="js/snippets.js?v=4.24.0"></script>
+<script src="js/actions.js?v=4.24.0"></script>
+<script src="js/voice.js?v=4.24.0"></script>
+<script src="js/screenshot.js?v=4.24.0"></script>
+<script src="js/ai.js?v=4.24.0"></script>
+<script src="js/render.js?v=4.24.0"></script>
+<script src="js/admin-editor.js?v=4.24.0"></script>
+<script src="js/core.js?v=4.24.0"></script>
 
 <script>
   if (typeof console.log === "function") {
