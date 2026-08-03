@@ -1,8 +1,5 @@
-# Changelog
-
-## v0.2.0
-- Added versioning
-- Added cache-busting query strings
-- Added no-cache meta tags
-- Added PDF inspection module
-- Prepared pdf.js module
+# v0.3.0
+- Added PDF inspection module separation.
+- Added page preparation module.
+- Versioning and cache busting retained.
+Next: integrate PDF.js and enumerate actual page count.

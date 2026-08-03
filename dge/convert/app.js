@@ -1,12 +1,18 @@
-const VERSION='0.2.0';
-const log=t=>document.getElementById('log').textContent+=t+'\n';
+
+const V='0.3.0';
+const out=t=>log.textContent+=t+'\n';
 inspectBtn.onclick=()=>{
  const f=pdfFile.files[0];
- if(!f){alert('Select a PDF');return;}
- log('Version : '+VERSION);
- log('Name    : '+f.name);
- log('Size    : '+f.size+' bytes');
- log('Type    : '+f.type);
- log('Status  : Ready for PDF.js rendering (next module)');
+ if(!f)return alert('Select PDF');
+ const i=DGEPDF.inspect(f);
+ out('Version : '+V);
+ Object.entries(i).forEach(([k,v])=>out(k+' : '+v));
 };
-console.log('DGE Convert',VERSION);
+mockRenderBtn.onclick=()=>{
+ const f=pdfFile.files[0];
+ if(!f)return alert('Select PDF');
+ const p=DGEPDF.prepare(f);
+ out('--- Render Preparation ---');
+ Object.entries(p).forEach(([k,v])=>out(k+' : '+v));
+};
+console.log('DGE Convert',V);

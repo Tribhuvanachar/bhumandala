@@ -1,9 +1,18 @@
-// PDF module placeholder with real helper functions
+
 window.DGEPDF={
-  isPdf(file){return file && (file.type==='application/pdf'||file.name.toLowerCase().endsWith('.pdf'));},
-  formatBytes(bytes){
-    if(bytes<1024)return bytes+' B';
-    if(bytes<1048576)return (bytes/1024).toFixed(1)+' KB';
-    return (bytes/1048576).toFixed(2)+' MB';
-  }
+ inspect(file){
+   return {
+     name:file.name,
+     size:file.size,
+     type:file.type,
+     extension:file.name.split('.').pop().toLowerCase()
+   };
+ },
+ prepare(file){
+   return {
+      accepted:file && file.name.toLowerCase().endsWith('.pdf'),
+      status:'Ready for PDF.js page loading module',
+      estimatedPages:'Unknown until PDF.js is integrated'
+   };
+ }
 };
