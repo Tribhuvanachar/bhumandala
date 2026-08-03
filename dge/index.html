@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.18.0">
+<link rel="stylesheet" href="css/main.css?v=4.19.0">
 </head>
 <body>
 
@@ -70,6 +70,7 @@
     </div>
 
     <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="window.openKeyModal()" title="Settings: AI Keys, Ask Acharya, Feature Visibility" style="font-size: 18px;">⚙️</button>
+    <button class="btn-top" id="adminEditorBtn" onclick="window.openAdminEditor()" title="Admin: GitHub File Manager" style="font-size: 18px; display:none;">🗂️</button>
     <button class="btn-top" onclick="window.openAboutModal()" title="About / Contact / Report an Issue" style="font-size: 18px;">ℹ️</button>
 
     <!-- Theme Picker -->
@@ -104,6 +105,7 @@
   <div class="header">
     <h1 id="stotraTitle">Loading...</h1>
     <div class="author" id="stotraAuthor">...</div>
+    <button id="supportProjectBtn" class="support-project-btn" onclick="window.openSponsorModal()" style="display:none;">💝 Support This Project</button>
     <div class="rule"></div>
   </div>
 
@@ -134,7 +136,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.18 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.19 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -480,6 +482,54 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="sponsorModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">💝 Support This Project</h3>
+      <button class="btn-sm" onclick="window.closeModal('sponsorModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body" id="sponsorModalBody"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="adminEditorModal">
+  <div class="modal-content" style="max-width:600px;">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">🗂️ Admin: Repo Files</h3>
+      <button class="btn-sm" onclick="window.closeModal('adminEditorModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <div class="provider-key-row">
+        <label>Your GitHub Personal Access Token</label>
+        <input type="password" id="adminGithubTokenInput" class="modal-input" placeholder="Fine-grained PAT, Contents: Read & write, this repo only" style="margin-top:4px;">
+        <button class="btn-sm" style="width:100%; margin-top:6px;" onclick="window.saveAdminGithubToken()">Save Token to This Device</button>
+        <p style="font-size:10px; color:var(--muted-text); margin:6px 0 0 0;">Stored only in this browser's local storage — never sent anywhere except directly to GitHub's API. Use a token scoped to only this repo, with an expiry date.</p>
+      </div>
+
+      <div style="display:flex; gap:6px; margin:12px 0;">
+        <button class="btn-sm" onclick="window.dgeAdminGoUp()">⬆ Up</button>
+        <label class="btn-sm" style="cursor:pointer; margin:0;">📤 Upload<input type="file" multiple style="display:none;" onchange="window.dgeAdminUploadFiles(this.files)"></label>
+        <button class="btn-sm" onclick="window.dgeAdminNewFolder()">📁 New Folder</button>
+      </div>
+
+      <div id="adminEditorBreadcrumb" style="font-size:11px; color:var(--muted-text); margin-bottom:10px; word-break:break-all;"></div>
+
+      <div id="adminEditorList" class="admin-file-list"
+           ondragover="event.preventDefault();"
+           ondrop="window.dgeAdminHandleDrop(event, dgeAdminCurrentPath)"></div>
+
+      <div id="adminEditorFileBox" style="display:none; margin-top:16px; border-top:1px solid var(--card-border); padding-top:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span id="adminEditorFileName" style="font-size:11px; font-weight:700; word-break:break-all;"></span>
+          <button class="btn-sm" onclick="window.dgeAdminCloseFileEditor()" style="font-size:10px;">✖</button>
+        </div>
+        <textarea id="adminEditorTextarea" style="width:100%; height:260px; font-family:monospace; font-size:12px; box-sizing:border-box;"></textarea>
+        <button class="btn-sm" style="width:100%; margin-top:8px; background:var(--accent-red); color:#fff; border:none;" onclick="window.dgeAdminSaveFile()">💾 Save to GitHub</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Acharya AI Modal -->
 <div class="modal-overlay" id="acharyaModal">
   <div class="modal-content" id="acharyaModalBox">
@@ -507,28 +557,29 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.18.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.19.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.18.0"></script>
-<script src="js/state.js?v=4.18.0"></script>
-<script src="js/dev.js?v=4.18.0"></script>
-<script src="js/utils.js?v=4.18.0"></script>
-<script src="js/modals.js?v=4.18.0"></script>
-<script src="js/transliteration.js?v=4.18.0"></script>
-<script src="js/audio.js?v=4.18.0"></script>
-<script src="js/filter.js?v=4.18.0"></script>
-<script src="js/search.js?v=4.18.0"></script>
-<script src="js/markers.js?v=4.18.0"></script>
-<script src="js/notes.js?v=4.18.0"></script>
-<script src="js/history.js?v=4.18.0"></script>
-<script src="js/snippets.js?v=4.18.0"></script>
-<script src="js/actions.js?v=4.18.0"></script>
-<script src="js/voice.js?v=4.18.0"></script>
-<script src="js/screenshot.js?v=4.18.0"></script>
-<script src="js/ai.js?v=4.18.0"></script>
-<script src="js/render.js?v=4.18.0"></script>
-<script src="js/core.js?v=4.18.0"></script>
+<script src="js/config.js?v=4.19.0"></script>
+<script src="js/state.js?v=4.19.0"></script>
+<script src="js/dev.js?v=4.19.0"></script>
+<script src="js/utils.js?v=4.19.0"></script>
+<script src="js/modals.js?v=4.19.0"></script>
+<script src="js/transliteration.js?v=4.19.0"></script>
+<script src="js/audio.js?v=4.19.0"></script>
+<script src="js/filter.js?v=4.19.0"></script>
+<script src="js/search.js?v=4.19.0"></script>
+<script src="js/markers.js?v=4.19.0"></script>
+<script src="js/notes.js?v=4.19.0"></script>
+<script src="js/history.js?v=4.19.0"></script>
+<script src="js/snippets.js?v=4.19.0"></script>
+<script src="js/actions.js?v=4.19.0"></script>
+<script src="js/voice.js?v=4.19.0"></script>
+<script src="js/screenshot.js?v=4.19.0"></script>
+<script src="js/ai.js?v=4.19.0"></script>
+<script src="js/render.js?v=4.19.0"></script>
+<script src="js/admin-editor.js?v=4.19.0"></script>
+<script src="js/core.js?v=4.19.0"></script>
 
 <script>
   if (typeof console.log === "function") {

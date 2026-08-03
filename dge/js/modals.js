@@ -58,6 +58,54 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Shows/hides the "💝 Support This Project" button based on admin
+// config (SPONSOR_CONFIG.enabled in config.js) — not an end-user toggle.
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('supportProjectBtn');
+  if (btn && typeof SPONSOR_CONFIG !== 'undefined' && SPONSOR_CONFIG && SPONSOR_CONFIG.enabled) {
+    btn.style.display = 'block';
+  }
+});
+
+window.openSponsorModal = function() {
+  const body = document.getElementById('sponsorModalBody');
+  if (!body || typeof SPONSOR_CONFIG === 'undefined' || !SPONSOR_CONFIG) return;
+  const cfg = SPONSOR_CONFIG;
+  const cur = cfg.currency || '₹';
+
+  let html = `<p style="font-size:13px; line-height:1.6; margin:0 0 18px 0;">${cfg.introText || ''}</p>`;
+
+  html += `<div class="actions-section-label">📊 Recurring Expenses</div>`;
+  html += `<div style="display:flex; flex-direction:column; gap:8px; margin-bottom:20px;">`;
+  (cfg.recurringExpenses || []).forEach(e => {
+    html += `
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px; border:1px solid var(--card-border); border-radius:var(--radius-sm);">
+        <span style="font-size:12px; font-weight:600;">${e.label}</span>
+        <span style="font-size:13px; font-weight:800; color:var(--accent-red); white-space:nowrap; margin-left:10px;">${cur}${e.amount.toLocaleString('en-IN')}<span style="font-size:10px; font-weight:600; color:var(--muted-text);">/${e.period}</span></span>
+      </div>`;
+  });
+  html += `</div>`;
+
+  html += `<div class="actions-section-label">🙏 Ways to Sponsor</div>`;
+  html += `<div style="display:flex; flex-direction:column; gap:10px;">`;
+  (cfg.sponsorCategories || []).forEach(c => {
+    const subject = encodeURIComponent(`Sponsorship enquiry — ${c.label}`);
+    const bodyText = encodeURIComponent(`I'd like to know more about sponsoring: ${c.label}`);
+    const mailto = `mailto:${cfg.contactForSponsorship}?subject=${subject}&body=${bodyText}`;
+    html += `
+      <a href="${mailto}" style="display:block; padding:12px; border:1.5px solid var(--card-border); border-radius:var(--radius-sm); text-decoration:none; color:inherit;">
+        <div style="font-weight:800; font-size:13px; margin-bottom:3px;">${c.icon} ${c.label}</div>
+        <div style="font-size:11px; color:var(--muted-text); line-height:1.4;">${c.description}</div>
+      </a>`;
+  });
+  html += `</div>`;
+
+  html += `<p style="font-size:11px; color:var(--muted-text); margin-top:18px;">Tapping any option above opens an email to <strong>${cfg.contactForSponsorship}</strong> — there's no in-app payment yet, this just starts the conversation.</p>`;
+
+  body.innerHTML = html;
+  if (typeof openModal === 'function') openModal('sponsorModal');
+};
+
 window.sendTypoReport = function() {
   const shlokaEl = document.getElementById('reportTypoShloka');
   const detailsEl = document.getElementById('reportTypoDetails');

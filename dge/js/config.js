@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v5.0 (Live GitHub template discovery, no hardcoded list)';
+window.DGE_VERSIONS['config.js'] = 'v5.1 (Sponsor/Expenses config)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -10,7 +10,7 @@ const appConfig = {
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
   secretPasskey: "SHRI108",
-  version: "v4.17"
+  version: "v4.19"
 };
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
@@ -216,6 +216,33 @@ window.dgeGetSelectedShareTemplate = async function() {
 // Visibility panel — AI-generated URLs can be hallucinated, so this is a
 // deliberate admin call, made here in config.js only.
 window.AI_ALLOW_EXTERNAL_LINKS = false;
+
+// Sponsor / Ongoing Expenses — admin-configured only. Edit this directly
+// in config.js (via GitHub, or the admin editor once built) to update
+// amounts/categories — this is NOT an end-user setting. Purely
+// informational for now (no payment processing exists yet — that needs
+// auth + a backend, which is a later phase); each category links to a
+// pre-filled contact email.
+const SPONSOR_CONFIG = {
+  enabled: true,
+  introText: "This project runs independently, with no ads, and relies entirely on community support to keep going. Here's exactly where funds go, month to month — and where a contribution would help most.",
+  currency: '₹',
+  recurringExpenses: [
+    { label: 'Claude Pro subscription (development)', amount: 2000, period: 'month' },
+    { label: 'Server hosting (planned)', amount: 5000, period: 'month' },
+    { label: 'Domain & hosting', amount: 1000, period: 'year' },
+    { label: 'Content digitisation & proofreading', amount: 20000, period: 'as needed' }
+  ],
+  sponsorCategories: [
+    { icon: '💻', label: 'Backend / UI Development', description: 'Support ongoing feature work, bug fixes, and infrastructure for this app.' },
+    { icon: '🕉️', label: "Acharya's Monthly Support", description: "Contribute toward the Acharya's monthly food and living expenses." },
+    { icon: '🏫', label: 'Gurukula & Goshala', description: 'Support the Gurukula and the upcoming Goshala (cow shelter).' },
+    { icon: '📚', label: "Children's Education", description: 'Support educational expenses for children at the Gurukula.' },
+    { icon: '🙏', label: 'General Token of Appreciation', description: 'An open contribution, undesignated, used wherever most needed.' }
+  ],
+  contactForSponsorship: 'sanatanavidyagurukulam@gmail.com'
+};
+window.SPONSOR_CONFIG = SPONSOR_CONFIG;
 
 // Multi-provider AI configuration. Each provider is only used if the person
 // has saved a key for it (via the ⚙️ Settings). Model names are left
