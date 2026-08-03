@@ -6,7 +6,7 @@
 // and note entries.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['actions.js'] = 'v3.1 (Ask Acharya section)';
+window.DGE_VERSIONS['actions.js'] = 'v3.2 (Rich markdown note previews)';
 
 window.currentActionsSheetId = null;
 
@@ -77,7 +77,7 @@ window.renderActionsSheetContent = function(id) {
           <div style="font-size:10px; color:var(--muted-text); margin-bottom:4px; display:flex; justify-content:space-between;">
             <span>${(entry.source || 'Manual').replace(/</g, '&lt;')} · ${when}</span>
           </div>
-          <div>${preview.replace(/</g, '&lt;')}</div>
+          <div>${typeof dgeRenderNoteMarkdown === 'function' ? dgeRenderNoteMarkdown(preview) : preview.replace(/</g, '&lt;')}</div>
           <div style="display:flex; gap:6px; margin-top:8px;">
             <button class="btn-icon" title="Copy this note" onclick="window.copyNoteEntry(${id}, ${idx})">📋</button>
             <button class="btn-icon" title="Share this note" onclick="window.shareNoteEntry(${id}, ${idx})">📤</button>

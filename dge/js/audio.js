@@ -2,7 +2,7 @@
 // js/audio.js
 // Maps to F-004 (Audio Engine) & F-013 (Offline Cache)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['audio.js'] = 'v2.2 (Minimized-view auto-scroll to active word)';
+window.DGE_VERSIONS['audio.js'] = 'v3.0 (Speed memory, resume, progress, swipe nav, long-press word lookup)';
 
 function formatTime(s) { 
   if (isNaN(s)) return "0:00.000"; 
@@ -48,6 +48,157 @@ async function resolveAudioSrc(id) {
   return primary;
 }
 
+// Fills the thin progress bar under the N/total label — a quick visual
+// sense of how far through the stotra the current verse is.
+function dgeUpdateProgressIndicator(id, total) {
+  const fill = document.getElementById('verseProgressFill');
+  if (!fill || !total) return;
+  const pct = Math.max(0, Math.min(100, (id / total) * 100));
+  fill.style.width = pct + '%';
+}
+window.dgeUpdateProgressIndicator = dgeUpdateProgressIndicator;
+
+// On load, shows the last-played verse's text in the reading-card (and
+// updates the track label / progress bar) WITHOUT auto-playing audio —
+// autoplay is broadly blocked by browsers anyway, and starting sound
+// unexpectedly on load is poor manners even where it isn't. This just
+// picks up the reading experience where it left off; tapping play then
+// starts that same verse normally.
+function dgeRestoreLastVerse() {
+  if (!stotraData || activeId) return; // don't override an explicit selection
+  const key = typeof nsKey === 'function' ? nsKey('lastVerse') : null;
+  if (!key) return;
+  const saved = parseInt(localStorage.getItem(key), 10);
+  if (!saved || !stotraData.shlokas || !stotraData.shlokas[saved]) return;
+
+  contextShlokaId = saved;
+  const total = stotraData.metadata.totalShlokas || Object.keys(stotraData.shlokas).length;
+  const trackLabel = document.getElementById('trackLabel');
+  const readingCard = document.getElementById('readingCard');
+  if (trackLabel) trackLabel.innerText = `${saved}/${total}`;
+  dgeUpdateProgressIndicator(saved, total);
+  if (readingCard && typeof getText === 'function') {
+    readingCard.innerHTML = getText(saved);
+    if (typeof wrapReadingCardWordsForSync === 'function') wrapReadingCardWordsForSync();
+  }
+}
+// Long-press a word in the reading-card to select it and go straight to
+// Word-level Ask Acharya analysis, without needing to manually drag-select
+// on a touchscreen. Cancels itself if the finger moves (treating it as a
+// scroll/selection-drag instead) or lifts before the hold threshold.
+(function dgeSetupLongPressWordLookup() {
+  let pressTimer = null;
+  let startX = 0, startY = 0;
+  const MOVE_THRESHOLD = 10;
+  const PRESS_MS = 550;
+
+  function getWordRangeAtPoint(x, y) {
+    let range = null;
+    if (document.caretRangeFromPoint) {
+      range = document.caretRangeFromPoint(x, y);
+    } else if (document.caretPositionFromPoint) {
+      const pos = document.caretPositionFromPoint(x, y);
+      if (pos) {
+        range = document.createRange();
+        range.setStart(pos.offsetNode, pos.offset);
+        range.setEnd(pos.offsetNode, pos.offset);
+      }
+    }
+    if (!range || !range.startContainer || range.startContainer.nodeType !== 3) return null;
+
+    const textNode = range.startContainer;
+    const text = textNode.textContent;
+    let start = range.startOffset, end = range.startOffset;
+    const isWordChar = (ch) => !!ch && /[^\s.,;:!?()'"।॥]/.test(ch);
+
+    while (start > 0 && isWordChar(text[start - 1])) start--;
+    while (end < text.length && isWordChar(text[end])) end++;
+    if (start === end) return null;
+
+    const wordRange = document.createRange();
+    wordRange.setStart(textNode, start);
+    wordRange.setEnd(textNode, end);
+    return wordRange;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const card = document.getElementById('readingCard');
+    if (!card) return;
+
+    card.addEventListener('touchstart', (e) => {
+      if (!e.touches || !e.touches.length) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      const touchX = startX, touchY = startY;
+      pressTimer = setTimeout(() => {
+        pressTimer = null;
+        const wordRange = getWordRangeAtPoint(touchX, touchY);
+        if (!wordRange) return;
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(wordRange);
+        if (navigator.vibrate) navigator.vibrate(15);
+        window.lastSelectedText = wordRange.toString().trim();
+        if (typeof askAcharya === 'function') askAcharya(null, 'grammar');
+      }, PRESS_MS);
+    }, { passive: true });
+
+    const cancelPress = (e) => {
+      if (!pressTimer) return;
+      if (e.touches && e.touches.length) {
+        const dx = Math.abs(e.touches[0].clientX - startX);
+        const dy = Math.abs(e.touches[0].clientY - startY);
+        if (dx <= MOVE_THRESHOLD && dy <= MOVE_THRESHOLD) return;
+      }
+      clearTimeout(pressTimer);
+      pressTimer = null;
+    };
+    card.addEventListener('touchmove', cancelPress, { passive: true });
+    card.addEventListener('touchend', () => { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } }, { passive: true });
+    card.addEventListener('touchcancel', () => { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } }, { passive: true });
+  });
+})();
+
+window.dgeRestoreLastVerse = dgeRestoreLastVerse;
+
+// Swipe left/right on the reading-card to go to the next/previous verse.
+// Scoped to just this card (not the whole page) so it never fights with
+// normal list scrolling. Distinguishes a real swipe from a text-selection
+// drag by requiring a reasonably fast, mostly-horizontal gesture — a
+// slow drag (typical of selecting text) won't cross the speed threshold.
+(function dgeSetupSwipeNav() {
+  let touchStartX = 0, touchStartY = 0, touchStartTime = 0;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const card = document.getElementById('readingCard');
+    if (!card) return;
+
+    card.addEventListener('touchstart', (e) => {
+      if (!e.touches || !e.touches.length) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+    }, { passive: true });
+
+    card.addEventListener('touchend', (e) => {
+      if (!e.changedTouches || !e.changedTouches.length) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      const dt = Date.now() - touchStartTime;
+
+      const isHorizontalEnough = Math.abs(dx) > Math.abs(dy) * 1.5;
+      const isFarEnough = Math.abs(dx) > 60;
+      const isFastEnough = dt < 500;
+
+      if (isHorizontalEnough && isFarEnough && isFastEnough) {
+        if (window.getSelection && window.getSelection().toString().length > 0) return; // don't hijack a selection
+        if (dx < 0 && typeof playNextFiltered === 'function') playNextFiltered();
+        else if (dx > 0 && typeof playPrevFiltered === 'function') playPrevFiltered();
+      }
+    }, { passive: true });
+  });
+})();
+
 async function playShloka(id) {
   if (!stotraData) return;
   if (activeId === id && isPlaying) { 
@@ -59,6 +210,9 @@ async function playShloka(id) {
   contextShlokaId = id; 
   currentLoopCount = 0; 
   audioRetryDone = false; 
+
+  if (typeof nsKey === 'function') localStorage.setItem(nsKey('lastVerse'), String(id));
+  if (typeof dgeLogReadingHistory === 'function') dgeLogReadingHistory(id);
   
   updateRepeatDisplay(); 
   if (typeof renderList === 'function') renderList();
@@ -72,6 +226,7 @@ async function playShloka(id) {
   const timeDisplay = document.getElementById('timeDisplay');
   
   if (trackLabel) trackLabel.innerText = `${id}/${total}`; 
+  if (typeof dgeUpdateProgressIndicator === 'function') dgeUpdateProgressIndicator(id, total);
   if (readingCard && typeof getText === 'function') {
     readingCard.innerHTML = getText(id);
     if (typeof wrapReadingCardWordsForSync === 'function') wrapReadingCardWordsForSync();
@@ -299,10 +454,17 @@ if (currentAudio) {
 document.addEventListener('DOMContentLoaded', () => {
     const speedInput = document.getElementById('speedInput');
     if (speedInput) {
+        const savedSpeed = parseFloat(localStorage.getItem('app_playback_speed'));
+        if (!isNaN(savedSpeed)) {
+            speedInput.value = savedSpeed;
+            const speedVal = document.getElementById('speedVal');
+            if (speedVal) speedVal.innerText = savedSpeed.toFixed(1);
+        }
         speedInput.addEventListener('input', (e) => { 
             const speedVal = document.getElementById('speedVal');
             if (speedVal) speedVal.innerText = parseFloat(e.target.value).toFixed(1); 
             if (currentAudio) currentAudio.playbackRate = e.target.value; 
+            localStorage.setItem('app_playback_speed', e.target.value);
         });
     }
 });

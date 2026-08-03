@@ -6,7 +6,57 @@
 // AI append, etc.) can be shared or deleted on its own.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['notes.js'] = 'v2.1 (Copy button)';
+window.DGE_VERSIONS['notes.js'] = 'v3.0 (Rich markdown rendering + formatting helpers)';
+
+// Safe(r) markdown rendering for user-authored note text: escapes HTML
+// FIRST (unlike parseMarkdown() in ai.js, which assumes trusted AI output
+// and skips escaping), then applies basic bold/italic/list formatting on
+// top of the already-escaped text. Supports **bold**, *italic*, and
+// "- item" bullet lists — enough to make notes readable without needing
+// a full rich-text editor.
+function dgeRenderNoteMarkdown(text) {
+  if (!text) return '';
+  const escaped = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  return escaped
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/(?<!\*)\*([^*\n]+?)\*(?!\*)/g, '<em>$1</em>')
+    .replace(/^[-•] (.*)$/gim, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>\n?)+/g, m => `<ul style="margin:4px 0; padding-left:20px;">${m}</ul>`)
+    .replace(/\n/g, '<br>');
+}
+window.dgeRenderNoteMarkdown = dgeRenderNoteMarkdown;
+
+// Wraps the current selection (or inserts at the cursor) in the note
+// composer textarea with the given markdown markers — a lightweight
+// formatting toolbar without needing a full rich-text editor widget.
+window.dgeWrapNoteSelection = function(before, after) {
+  const ta = document.getElementById('noteText');
+  if (!ta) return;
+  const start = ta.selectionStart, end = ta.selectionEnd;
+  const val = ta.value;
+  const selected = val.slice(start, end);
+  ta.value = val.slice(0, start) + before + selected + (after !== undefined ? after : before) + val.slice(end);
+  const cursorPos = selected ? start + before.length + selected.length + (after !== undefined ? after.length : before.length) : start + before.length;
+  ta.focus();
+  ta.setSelectionRange(cursorPos, cursorPos);
+};
+
+window.dgeInsertNoteBullet = function() {
+  const ta = document.getElementById('noteText');
+  if (!ta) return;
+  const start = ta.selectionStart;
+  const val = ta.value;
+  const needsNewline = start > 0 && val[start - 1] !== '\n';
+  const insert = (needsNewline ? '\n' : '') + '- ';
+  ta.value = val.slice(0, start) + insert + val.slice(start);
+  const cursorPos = start + insert.length;
+  ta.focus();
+  ta.setSelectionRange(cursorPos, cursorPos);
+};
 
 function openNoteModal() {
   if (typeof openModal === 'function') openModal('noteModal');

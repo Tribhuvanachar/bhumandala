@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v2.2 (Taxonomy Path Fix)';
+window.DGE_VERSIONS['core.js'] = 'v2.3 (Resume-last-verse hook)';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. INITIALIZE GLOBAL DOM ELEMENTS
@@ -81,6 +81,8 @@ function initApp() {
 
   // Pass control to the rendering pipeline
   if (typeof renderList === 'function') renderList();
+
+  if (typeof dgeRestoreLastVerse === 'function') dgeRestoreLastVerse();
 }
 
 // Renders every piece of "chrome" (title, commentary list, search-scope
