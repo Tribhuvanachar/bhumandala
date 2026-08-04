@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.7 (Download folder as zip)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.9 (Commit messages with name+timestamp, per-file download, upload zip with auto-extract)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -41,6 +41,20 @@ window.dgeCheckSuperadminGate = dgeCheckSuperadminGate;
 // 'dge' (the narrowest, safest scope) if nothing was ever granted.
 function dgeAdminGetRootPath() {
   return localStorage.getItem('admin_root_path') || 'dge';
+}
+
+function dgeAdminGetName() {
+  return localStorage.getItem('admin_editor_name') || 'Admin';
+}
+
+// Appends who made a change and when to every commit message, so GitHub's
+// own commit history becomes scannable at a glance (which edit, by whom,
+// at what time) without clicking into each commit individually — and
+// makes reverting to a specific version straightforward.
+function dgeAdminBuildCommitMessage(action) {
+  const name = dgeAdminGetName();
+  const timestamp = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
+  return `${action} — by ${name} at ${timestamp}`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -146,6 +160,8 @@ window.openAdminEditor = function() {
   if (!dgeCheckSuperadminGate()) return;
   const tokenInput = document.getElementById('adminGithubTokenInput');
   if (tokenInput) tokenInput.value = dgeGithubToken();
+  const nameInput = document.getElementById('adminNameInput');
+  if (nameInput) nameInput.value = dgeAdminGetName();
   if (typeof openModal === 'function') openModal('adminEditorModal');
   // Return to wherever was last being browsed, not back to the root —
   // dgeAdminCurrentPath survives a close (the modal only hides, it
@@ -157,7 +173,9 @@ window.saveAdminGithubToken = function() {
   const tokenInput = document.getElementById('adminGithubTokenInput');
   if (!tokenInput) return;
   localStorage.setItem('github_admin_pat', tokenInput.value.trim());
-  if (typeof showToast === 'function') showToast('Token saved to this device.');
+  const nameInput = document.getElementById('adminNameInput');
+  if (nameInput) localStorage.setItem('admin_editor_name', nameInput.value.trim() || 'Admin');
+  if (typeof showToast === 'function') showToast('Saved to this device.');
   dgeAdminNavigate(dgeAdminCurrentPath);
 };
 
@@ -235,7 +253,7 @@ async function dgeAdminNavigate(path) {
             ${sizeLabel}
           </div>
           <div class="admin-file-actions">
-            ${item.type === 'dir' ? `<button class="btn-icon" title="Download this folder as a .zip" onclick="event.stopPropagation(); window.dgeAdminDownloadFolderZip('${item.path}')">📦</button>` : ''}
+            ${item.type === 'dir' ? `<button class="btn-icon" title="Download this folder as a .zip" onclick="event.stopPropagation(); window.dgeAdminDownloadFolderZip('${item.path}')">📦</button>` : `<button class="btn-icon" title="Download this file" onclick="event.stopPropagation(); window.dgeAdminDownloadFile('${item.path}')">⬇️</button>`}
             <button class="btn-icon" title="Rename" onclick="event.stopPropagation(); window.dgeAdminRename('${item.path}', '${item.type}')">✏️</button>
             <button class="btn-icon" title="Delete" onclick="event.stopPropagation(); window.dgeAdminDelete('${item.path}', '${item.type}', '${item.sha || ''}')">🗑️</button>
           </div>
@@ -344,7 +362,9 @@ window.dgeAdminSaveFile = async function() {
   if (!dgeAdminOpenFilePath) return;
   const textarea = document.getElementById('adminEditorTextarea');
   if (!textarea) return;
-  const msg = prompt('Commit message:', `Update ${dgeAdminOpenFilePath} via admin editor`);
+  const rawMsg = prompt('Commit message:', `Update ${dgeAdminOpenFilePath}`);
+  if (rawMsg === null) return;
+  const msg = dgeAdminBuildCommitMessage(rawMsg);
   if (msg === null) return;
 
   try {
@@ -372,7 +392,7 @@ window.dgeAdminUploadFiles = async function(fileList) {
     try {
       const base64 = await dgeReadFileAsBase64(file);
       const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + file.name;
-      await dgeGithubPutFile(targetPath, base64, `Upload ${file.name} via admin editor`);
+      await dgeAdminUpsertFile(targetPath, base64, dgeAdminBuildCommitMessage(`Upload ${file.name}`));
     } catch (e) {
       if (typeof showToast === 'function') showToast(`Failed to upload ${file.name}: ${e.message}`);
     }
@@ -402,7 +422,7 @@ window.dgeAdminUploadFolder = async function(fileList) {
       const rel = file.webkitRelativePath || file.name;
       const base64 = await dgeReadFileAsBase64(file);
       const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + rel;
-      await dgeGithubPutFile(targetPath, base64, `Upload ${targetPath} via admin editor (folder upload)`);
+      await dgeAdminUpsertFile(targetPath, base64, dgeAdminBuildCommitMessage(`Upload (folder) ${targetPath}`));
       ok++;
     } catch (e) {
       failed++;
@@ -412,6 +432,68 @@ window.dgeAdminUploadFolder = async function(fileList) {
   if (typeof showToast === 'function') showToast(`Folder upload done: ${ok} succeeded${failed ? `, ${failed} failed (see console)` : ''}.`);
   dgeAdminNavigate(dgeAdminCurrentPath);
 };
+
+// Extracts a .zip file entirely client-side (JSZip — already loaded for
+// the folder-download feature) and pushes every file it contains to
+// GitHub, preserving the zip's own internal folder structure relative to
+// the current admin folder. So a zip containing "dge/convert/app.js"
+// lands at "<current path>/dge/convert/app.js" — stand at the repo root
+// before uploading a zip shaped like the ones this app generates.
+window.dgeAdminUploadZip = async function(file) {
+  if (!file) return;
+  if (typeof JSZip === 'undefined') {
+    if (typeof showToast === 'function') showToast('Zip library not loaded — check your connection and try again.');
+    return;
+  }
+
+  if (typeof showToast === 'function') showToast(`Extracting "${file.name}"…`);
+  dgeAdminShowWorking();
+
+  try {
+    const zip = await JSZip.loadAsync(file);
+    const entries = Object.values(zip.files).filter(f => !f.dir);
+    if (!entries.length) throw new Error('No files found inside this zip.');
+
+    let ok = 0, failed = 0;
+    for (const entry of entries) {
+      try {
+        const base64 = await entry.async('base64');
+        const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + entry.name;
+        await dgeAdminUpsertFile(targetPath, base64, dgeAdminBuildCommitMessage(`Upload (from zip ${file.name}) ${targetPath}`));
+        ok++;
+        if (typeof showToast === 'function' && (ok + failed) % 5 === 0) showToast(`Uploading… ${ok + failed}/${entries.length}`);
+      } catch (e) {
+        failed++;
+        console.warn(`Failed to upload ${entry.name} from zip:`, e.message);
+      }
+    }
+
+    if (typeof showToast === 'function') showToast(`Zip upload done: ${ok} succeeded${failed ? `, ${failed} failed (see console)` : ''}, matching the zip's own folder structure.`);
+    dgeAdminNavigate(dgeAdminCurrentPath);
+  } catch (e) {
+    if (typeof showToast === 'function') showToast('Zip upload failed: ' + e.message);
+  } finally {
+    dgeAdminHideWorking();
+  }
+};
+
+// Uploads/writes a file whether or not something already exists at that
+// path — GitHub's PUT requires the CURRENT sha to update an existing
+// file; without one it's treated as "create new" and rejected with a
+// 422 if the path is already taken. This checks first and supplies the
+// sha automatically when needed, so Upload/Upload Folder correctly
+// overwrite existing files instead of erroring on every one of them.
+async function dgeAdminUpsertFile(targetPath, base64, message) {
+  let sha;
+  try {
+    const existing = await dgeGithubGetFile(targetPath);
+    sha = existing.sha;
+  } catch (e) {
+    // Doesn't exist yet — that's fine, sha stays undefined and this
+    // becomes a create rather than an update.
+  }
+  await dgeGithubPutFile(targetPath, base64, message, sha);
+}
 
 function dgeReadFileAsBase64(file) {
   return new Promise((resolve, reject) => {
@@ -437,7 +519,7 @@ window.dgeAdminNewFolder = async function() {
   const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + name.trim() + '/.gitkeep';
   try {
     dgeAdminShowWorking();
-    await dgeGithubPutFile(targetPath, dgeUtf8ToBase64(''), `Create folder ${name} via admin editor`);
+    await dgeGithubPutFile(targetPath, dgeUtf8ToBase64(''), dgeAdminBuildCommitMessage(`Create folder ${name}`));
     if (typeof showToast === 'function') showToast('Folder created.');
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
@@ -461,7 +543,7 @@ window.dgeAdminNewFile = async function() {
   const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + trimmed;
   try {
     dgeAdminShowWorking();
-    await dgeGithubPutFile(targetPath, dgeUtf8ToBase64(''), `Create ${trimmed} via admin editor`);
+    await dgeGithubPutFile(targetPath, dgeUtf8ToBase64(''), dgeAdminBuildCommitMessage(`Create ${trimmed}`));
     if (typeof showToast === 'function') showToast('File created.');
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
@@ -504,7 +586,7 @@ window.dgeAdminAddImageFromUrl = async function() {
       reader.readAsDataURL(blob);
     });
     const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + filename;
-    await dgeGithubPutFile(targetPath, base64, `Add image from URL: ${trimmedUrl}`);
+    await dgeAdminUpsertFile(targetPath, base64, dgeAdminBuildCommitMessage(`Add image from URL: ${trimmedUrl}`));
     if (typeof showToast === 'function') showToast('Image uploaded.');
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
@@ -533,7 +615,7 @@ window.dgeAdminRename = async function(path, type) {
   try {
     dgeAdminShowWorking();
     if (type === 'file') {
-      await dgeAdminMoveOneFile(path, newPath, `Move/rename ${oldName} to ${newPath}`);
+      await dgeAdminMoveOneFile(path, newPath, dgeAdminBuildCommitMessage(`Move/rename ${oldName} to ${newPath}`));
     } else {
       await dgeAdminMoveFolder(path, newPath);
     }
@@ -589,6 +671,34 @@ async function dgeAdminMoveOneFile(oldPath, newPath, message) {
 // Contents API) to fetch each file's bytes, since the Contents API
 // silently omits content for files above ~1MB — the same lesson learned
 // from the earlier rename data-loss bug applies here.
+// Downloads a single file, reusing the same safe content-fetch as
+// rename/move — so large files (>1MB, where the Contents API omits
+// content) download correctly via the Blobs API fallback too.
+window.dgeAdminDownloadFile = async function(path) {
+  try {
+    dgeAdminShowWorking();
+    const { content } = await dgeAdminGetFileContentSafe(path);
+    const byteChars = atob(content);
+    const byteNumbers = new Array(byteChars.length);
+    for (let i = 0; i < byteChars.length; i++) byteNumbers[i] = byteChars.charCodeAt(i);
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray]);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = path.split('/').pop();
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    if (typeof showToast === 'function') showToast('Downloaded.');
+  } catch (e) {
+    if (typeof showToast === 'function') showToast('Download failed: ' + e.message);
+  } finally {
+    dgeAdminHideWorking();
+  }
+};
+
 window.dgeAdminDownloadFolderZip = async function(folderPath) {
   if (typeof JSZip === 'undefined') {
     if (typeof showToast === 'function') showToast('Zip library failed to load — check your connection and try again.');
@@ -642,7 +752,7 @@ async function dgeAdminMoveFolder(oldFolderPath, newFolderPath) {
   for (const entry of descendants) {
     const relative = entry.path.slice(oldFolderPath.length + 1);
     const newPath = newFolderPath + '/' + relative;
-    await dgeAdminMoveOneFile(entry.path, newPath, `Move ${entry.path} to ${newPath}`);
+    await dgeAdminMoveOneFile(entry.path, newPath, dgeAdminBuildCommitMessage(`Move ${entry.path} to ${newPath}`));
   }
 }
 
@@ -670,11 +780,11 @@ window.dgeAdminDelete = async function(path, type, sha) {
       const descendants = tree.tree.filter(t => t.type === 'blob' && t.path.startsWith(path + '/'));
       for (const entry of descendants) {
         const f = await dgeGithubGetFile(entry.path);
-        await dgeGithubDeleteFile(entry.path, `Delete ${entry.path} via admin editor`, f.sha);
+        await dgeGithubDeleteFile(entry.path, dgeAdminBuildCommitMessage(`Delete ${entry.path}`), f.sha);
         if (dgeAdminOpenFilePath === entry.path) window.dgeAdminCloseFileEditor();
       }
     } else {
-      await dgeGithubDeleteFile(path, `Delete ${path} via admin editor`, sha);
+      await dgeGithubDeleteFile(path, dgeAdminBuildCommitMessage(`Delete ${path}`), sha);
       if (dgeAdminOpenFilePath === path) window.dgeAdminCloseFileEditor();
     }
     if (typeof showToast === 'function') showToast('Deleted.');
@@ -761,7 +871,7 @@ window.dgeAdminHandleDrop = async function(e, targetFolderPath) {
     if (type === 'dir') {
       await dgeAdminMoveFolder(dgeAdminDragSourcePath, newPath);
     } else {
-      await dgeAdminMoveOneFile(dgeAdminDragSourcePath, newPath, `Move ${name} to ${targetFolderPath}`);
+      await dgeAdminMoveOneFile(dgeAdminDragSourcePath, newPath, dgeAdminBuildCommitMessage(`Move ${name} to ${targetFolderPath}`));
     }
     if (typeof showToast === 'function') showToast(`Moved ${name}.`);
     dgeAdminNavigate(dgeAdminCurrentPath);
