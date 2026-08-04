@@ -6,13 +6,13 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>DGE Convert v0.4.0</title>
-<link rel="stylesheet" href="style.css?v=0.4.0">
+<title>DGE Convert v0.4.1</title>
+<link rel="stylesheet" href="style.css?v=0.4.1">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
-<div>Version: <b id="versionDisplay">0.4.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.4.1</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF → page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -52,6 +52,9 @@
 
 <fieldset>
   <legend>Preview</legend>
+  <button id="previewRawBtn">Show Raw OCR</button>
+  <button id="previewProofreadBtn">Show Proofread</button>
+  <div id="previewLabel" class="hint"></div>
   <div id="previewArea"></div>
 </fieldset>
 
@@ -61,7 +64,7 @@
 </fieldset>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.4.0';
+  window.DGE_CONVERT_VERSION = '0.4.1';
   window.DGE_CONVERT_BUILD = '2026-08-04';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
@@ -72,11 +75,11 @@
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   }
 </script>
-<script src="utils.js?v=0.4.0"></script>
-<script src="pdf.js?v=0.4.0"></script>
-<script src="vision.js?v=0.4.0"></script>
-<script src="gemini.js?v=0.4.0"></script>
-<script src="renderer.js?v=0.4.0"></script>
-<script src="app.js?v=0.4.0"></script>
+<script src="utils.js?v=0.4.1"></script>
+<script src="pdf.js?v=0.4.1"></script>
+<script src="vision.js?v=0.4.1"></script>
+<script src="gemini.js?v=0.4.1"></script>
+<script src="renderer.js?v=0.4.1"></script>
+<script src="app.js?v=0.4.1"></script>
 </body>
 </html>

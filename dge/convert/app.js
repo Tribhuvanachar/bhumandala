@@ -31,6 +31,11 @@ window.DGE.App = (function () {
     if (el) { el.style.display = 'none'; el.textContent = ''; }
   }
 
+  function setPreviewLabel(msg) {
+    const el = $('previewLabel');
+    if (el) el.textContent = msg;
+  }
+
   function progressKey() { return 'dge_convert_progress_' + currentFileKey; }
   function ocrDataKey() { return 'dge_convert_ocrdata_' + currentFileKey; }
 
@@ -54,6 +59,18 @@ window.DGE.App = (function () {
       log('Cancel requested — will stop after the current page finishes.');
     });
     $('proofreadBtn').addEventListener('click', runProofread);
+    $('previewRawBtn').addEventListener('click', () => {
+      if (!ocrPages.length) return setError('No OCR data yet — run OCR first.');
+      clearError();
+      RendererMod().renderRawOcr(ocrPages, $('previewArea'));
+      setPreviewLabel('Showing raw OCR text — untouched, before Gemini proofreading.');
+    });
+    $('previewProofreadBtn').addEventListener('click', () => {
+      if (!finalJson) return setError('No proofread JSON yet — run Proofread first.');
+      clearError();
+      RendererMod().renderPreview(finalJson, $('previewArea'));
+      setPreviewLabel('Showing Gemini-proofread text.');
+    });
     $('downloadOcrBtn').addEventListener('click', () => {
       if (!ocrPages.length) return setError('No OCR data yet — run OCR first.');
       U().downloadJson({ pages: ocrPages }, 'ocr.json');
@@ -81,6 +98,7 @@ window.DGE.App = (function () {
     ocrPages = [];
     finalJson = null;
     $('previewArea').innerHTML = '';
+    setPreviewLabel('');
     $('logArea').textContent = '';
     $('resumeBar').style.display = 'none';
 
@@ -153,6 +171,10 @@ window.DGE.App = (function () {
     $('resumeBtn').disabled = false;
     $('progressText').textContent = `Done — ${ocrPages.length} of ${total} page(s) processed.`;
     log('OCR pass complete.');
+    if (ocrPages.length) {
+      RendererMod().renderRawOcr(ocrPages, $('previewArea'));
+      setPreviewLabel('Showing raw OCR text — untouched, before Gemini proofreading.');
+    }
   }
 
   async function runProofread() {
@@ -168,6 +190,7 @@ window.DGE.App = (function () {
       const ocrText = ocrPages.map(p => `--- Page ${p.page} ---\n${p.text}`).join('\n\n');
       finalJson = await GeminiMod().proofread(ocrText, geminiKey);
       RendererMod().renderPreview(finalJson, $('previewArea'));
+      setPreviewLabel('Showing Gemini-proofread text.');
       $('progressText').textContent = 'Proofreading complete — see preview below.';
       log('Proofreading complete.');
     } catch (e) {

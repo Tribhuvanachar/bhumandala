@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.1 — 2026-08-04
+- Added a **raw OCR preview** — "Show Raw OCR" / "Show Proofread" toggle above the preview area, so Vision's untouched output can be eyeballed for accuracy independently of Gemini's proofreading pass. Raw preview auto-shows right after an OCR run finishes; proofread preview auto-shows right after a proofread run finishes; either can be recalled manually at any time via the toggle buttons.
+- Investigated a reported logger issue (console showing `{}` instead of a real Gemini error message). Reviewed `app.js`, `gemini.js`, and `utils.js` end to end — found no code path that produces this; every error is already resolved through `formatError()`, which correctly reads `e.message`. No fix was needed or made here; flag if the raw `{}` output recurs so it can be caught live (browser + exact console line would help pin it down).
+
 ## v0.4.0 — 2026-08-04
 - **First real functional pipeline.** Previous versions (up to 0.3.0) were stub/placeholder modules only.
 - PDF.js wired up for real (loaded from CDN — the local `libs/` placeholder files were never populated with a real build, so CDN is now the source of truth; `libs/` can be deleted).

@@ -28,5 +28,21 @@ window.DGE.Renderer = (function () {
     containerEl.innerHTML = html;
   }
 
-  return { renderPreview };
+  function renderRawOcr(ocrPages, containerEl) {
+    if (!containerEl) return;
+    if (!ocrPages || !ocrPages.length) {
+      containerEl.innerHTML = '<p>No OCR data to preview yet.</p>';
+      return;
+    }
+    let html = '';
+    ocrPages.forEach(function (p) {
+      html += '<div class="preview-raw-page">';
+      html += '<div class="preview-num">Page ' + (p.page != null ? p.page : '') + '</div>';
+      html += '<div class="preview-raw-text">' + escapeHtml(p.text || '(no text detected)') + '</div>';
+      html += '</div>';
+    });
+    containerEl.innerHTML = html;
+  }
+
+  return { renderPreview, renderRawOcr };
 })();
