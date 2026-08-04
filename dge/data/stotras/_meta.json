@@ -1,4 +1,5 @@
 {
   "directory": "stotras",
-  "description": "DGE Category structure file to anchor the directory."
+  "description": "DGE category structure file to anchor the directory.",
+  "schema": "stotra_text"
 }

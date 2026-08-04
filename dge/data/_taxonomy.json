@@ -1,0 +1,1282 @@
+{
+  "vedas": {
+    "_schema": "vedic_text",
+    "rigveda": {
+      "shakala_shakha": {
+        "samhita": {
+          "mandala_01": {},
+          "mandala_02": {},
+          "mandala_03": {},
+          "mandala_04": {},
+          "mandala_05": {},
+          "mandala_06": {},
+          "mandala_07": {},
+          "mandala_08": {},
+          "mandala_09": {},
+          "mandala_10": {}
+        },
+        "brahmanas": {
+          "aitareya_brahmana": {},
+          "kausitaki_shankhayana_brahmana": {}
+        },
+        "aranyakas": {
+          "aitareya_aranyaka": {},
+          "kausitaki_shankhayana_aranyaka": {}
+        },
+        "upanishads": {
+          "aitareya_upanishad": {},
+          "kausitaki_upanishad": {}
+        }
+      }
+    },
+    "yajurveda": {
+      "krishna_yajurveda": {
+        "taittiriya_shakha": {
+          "samhita": {
+            "kanda_01": {},
+            "kanda_02": {},
+            "kanda_03": {},
+            "kanda_04": {},
+            "kanda_05": {},
+            "kanda_06": {},
+            "kanda_07": {}
+          },
+          "brahmana": {
+            "taittiriya_brahmana": {}
+          },
+          "aranyaka": {
+            "taittiriya_aranyaka": {}
+          },
+          "upanishad": {
+            "taittiriya_upanishad": {}
+          }
+        },
+        "maitrayani_shakha": {
+          "samhita": {
+            "maitrayani_samhita": {}
+          },
+          "brahmana": {
+            "maitrayani_brahmana": {}
+          },
+          "upanishad": {
+            "maitrayaniya_upanishad": {}
+          }
+        },
+        "katha_shakha": {
+          "samhita": {
+            "katha_samhita": {}
+          },
+          "brahmana": {
+            "kathaka_brahmana": {}
+          },
+          "upanishad": {
+            "katha_upanishad": {}
+          }
+        },
+        "kapisthala_shakha": {
+          "samhita": {
+            "kapisthala_katha_samhita": {}
+          },
+          "brahmana": {
+            "katha_kapisthala_brahmana": {}
+          }
+        }
+      },
+      "shukla_yajurveda": {
+        "vajasaneyi_madhyandina_shakha": {
+          "samhita": {},
+          "brahmana": {
+            "shatapatha_brahmana_madhyandina": {}
+          },
+          "upanishad": {
+            "isha_upanishad": {},
+            "brihadaranyaka_upanishad_madhyandina": {}
+          }
+        },
+        "vajasaneyi_kanva_shakha": {
+          "samhita": {},
+          "brahmana": {
+            "shatapatha_brahmana_kanva": {}
+          },
+          "upanishad": {
+            "isha_upanishad_kanva": {},
+            "brihadaranyaka_upanishad_kanva": {}
+          }
+        }
+      }
+    },
+    "samaveda": {
+      "kauthuma_shakha": {
+        "samhita": {
+          "purvarchika": {},
+          "uttararchika": {}
+        },
+        "brahmanas": {
+          "panchavimsha_tandya_brahmana": {},
+          "shadvimsha_brahmana": {},
+          "samavidhana_brahmana": {},
+          "arsheya_brahmana": {},
+          "devatadhyaya_brahmana": {},
+          "chandogya_upanishad_brahmana": {},
+          "samhitopanishad_brahmana": {},
+          "vamsha_brahmana": {}
+        },
+        "upanishad": {
+          "chandogya_upanishad": {}
+        }
+      },
+      "ranayaniya_shakha": {
+        "samhita": {
+          "purvarchika": {},
+          "uttararchika": {}
+        }
+      },
+      "jaiminiya_shakha": {
+        "samhita": {
+          "purvarchika": {},
+          "uttararchika": {}
+        },
+        "brahmanas": {
+          "jaiminiya_brahmana": {},
+          "jaiminiya_arsheya_brahmana": {},
+          "jaiminiya_upanishad_brahmana": {}
+        },
+        "aranyaka": {
+          "jaiminiya_talavakara_aranyaka": {}
+        },
+        "upanishad": {
+          "kena_upanishad": {}
+        }
+      }
+    },
+    "atharvaveda": {
+      "shaunaka_shakha": {
+        "samhita": {
+          "kanda_01": {},
+          "kanda_02": {},
+          "kanda_03": {},
+          "kanda_04": {},
+          "kanda_05": {},
+          "kanda_06": {},
+          "kanda_07": {},
+          "kanda_08": {},
+          "kanda_09": {},
+          "kanda_10": {},
+          "kanda_11": {},
+          "kanda_12": {},
+          "kanda_13": {},
+          "kanda_14": {},
+          "kanda_15": {},
+          "kanda_16": {},
+          "kanda_17": {},
+          "kanda_18": {},
+          "kanda_19": {},
+          "kanda_20": {}
+        },
+        "brahmana": {
+          "gopatha_brahmana": {}
+        },
+        "upanishads": {
+          "mundaka_upanishad": {},
+          "mandukya_upanishad": {},
+          "prashna_upanishad": {},
+          "vaishnava_upanishads_group": {
+            "vasudeva_upanishad": {},
+            "narayana_upanishad": {},
+            "mahanarayana_upanishad": {},
+            "nrisimhatapaniya_upanishad": {
+              "purva_tapaniya": {},
+              "uttara_tapaniya": {}
+            },
+            "kalisantarana_upanishad": {},
+            "avyakta_upanishad": {},
+            "ramarahasya_upanishad": {},
+            "ramatapaniya_upanishad": {},
+            "advayataraka_upanishad": {},
+            "tarasara_upanishad": {},
+            "gopalatapani_upanishad": {},
+            "krishna_upanishad": {},
+            "hayagriva_upanishad": {},
+            "dattatreya_upanishad": {}
+          }
+        }
+      },
+      "paippalada_shakha": {
+        "samhita": {
+          "kanda_01": {},
+          "kanda_02": {},
+          "kanda_03": {},
+          "kanda_04": {},
+          "kanda_05": {},
+          "kanda_06": {},
+          "kanda_07": {},
+          "kanda_08": {},
+          "kanda_09": {},
+          "kanda_10": {},
+          "kanda_11": {},
+          "kanda_12": {},
+          "kanda_13": {},
+          "kanda_14": {},
+          "kanda_15": {},
+          "kanda_16": {},
+          "kanda_17": {},
+          "kanda_18": {},
+          "kanda_19": {},
+          "kanda_20": {}
+        }
+      }
+    },
+    "_default_author": "Apaurusheya (traditionally unauthored / eternally revealed; rishi per mantra may be noted in the item's own 'rishi' field)"
+  },
+  "puranas": {
+    "_schema": "itihasa_purana_text",
+    "bhagavata_purana": {
+      "skandha_01": {},
+      "skandha_02": {},
+      "skandha_03": {},
+      "skandha_04": {},
+      "skandha_05": {},
+      "skandha_06": {},
+      "skandha_07": {},
+      "skandha_08": {},
+      "skandha_09": {},
+      "skandha_10": {},
+      "skandha_11": {},
+      "skandha_12": {}
+    },
+    "brahma_purana": {},
+    "padma_purana": {
+      "srishti_khanda": {},
+      "bhumi_khanda": {},
+      "svarga_khanda": {},
+      "patala_khanda": {},
+      "uttara_khanda": {},
+      "kriya_yoga_sara_khanda": {}
+    },
+    "vishnu_purana": {
+      "amsha_01": {},
+      "amsha_02": {},
+      "amsha_03": {},
+      "amsha_04": {},
+      "amsha_05": {},
+      "amsha_06": {}
+    },
+    "shiva_purana": {
+      "vidyeshvara_samhita": {},
+      "rudra_samhita": {
+        "srishti_khanda": {},
+        "sati_khanda": {},
+        "parvati_khanda": {},
+        "kumara_khanda": {},
+        "yuddha_khanda": {}
+      },
+      "shatarudra_samhita": {},
+      "kotirudra_samhita": {},
+      "uma_samhita": {},
+      "kailasa_samhita": {},
+      "vayaviya_samhita": {}
+    },
+    "narada_purana": {
+      "purvabhaga": {
+        "pada_01": {},
+        "pada_02": {},
+        "pada_03": {},
+        "pada_04": {}
+      },
+      "uttarabhaga": {}
+    },
+    "markandeya_purana": {
+      "devi_mahatmya_durga_saptashati": {}
+    },
+    "agni_purana": {},
+    "bhavishya_purana": {
+      "brahma_parva": {},
+      "madhyama_parva": {},
+      "pratisarga_parva": {},
+      "uttara_parva": {}
+    },
+    "brahmavaivarta_purana": {
+      "brahma_khanda": {},
+      "prakriti_khanda": {},
+      "ganesha_khanda": {},
+      "krishna_janma_khanda": {}
+    },
+    "linga_purana": {
+      "purva_bhaga": {},
+      "uttara_bhaga": {}
+    },
+    "varaha_purana": {},
+    "skanda_purana": {
+      "maheshvara_khanda": {},
+      "vaishnava_khanda": {},
+      "brahma_khanda": {},
+      "kashi_khanda": {},
+      "avantya_khanda": {},
+      "nagara_khanda": {},
+      "prabhasa_khanda": {}
+    },
+    "vamana_purana": {
+      "saromahatmya": {}
+    },
+    "kurma_purana": {
+      "purva_bhaga": {},
+      "uttara_bhaga": {}
+    },
+    "matsya_purana": {},
+    "garuda_purana": {
+      "purva_khanda": {},
+      "uttara_khanda_pretakalpa": {},
+      "brahma_khanda": {}
+    },
+    "brahmanda_purana": {
+      "lalitopakhyana_lalita_sahasranama": {},
+      "adhyatma_ramayana": {}
+    },
+    "upapuranas": {
+      "vishnu_dharmottara_purana": {},
+      "devi_bhagavata_purana": {},
+      "kalika_purana": {},
+      "narasimha_purana": {},
+      "brihannaradiya_purana": {},
+      "saura_purana": {},
+      "ganesha_purana": {},
+      "sanatkumara_purana": {},
+      "nandi_purana": {},
+      "adi_purana": {}
+    },
+    "_default_author": "Maharshi Veda Vyasa"
+  },
+  "itihasas": {
+    "_schema": "itihasa_purana_text",
+    "ramayana": {
+      "bala_kanda": {},
+      "ayodhya_kanda": {},
+      "aranya_kanda": {},
+      "kishkindha_kanda": {},
+      "sundara_kanda": {},
+      "yuddha_kanda": {},
+      "uttara_kanda": {},
+      "_default_author": "Maharshi Valmiki"
+    },
+    "mahabharata": {
+      "adi_parva": {},
+      "sabha_parva": {},
+      "vana_parva": {},
+      "virata_parva": {},
+      "udyoga_parva": {},
+      "bhishma_parva": {},
+      "drona_parva": {},
+      "karna_parva": {},
+      "shalya_parva": {},
+      "sauptika_parva": {},
+      "stri_parva": {},
+      "shanti_parva": {},
+      "anushasana_parva": {},
+      "ashvamedhika_parva": {},
+      "ashramavasika_parva": {},
+      "mausala_parva": {},
+      "mahaprasthanika_parva": {},
+      "svargarohana_parva": {},
+      "harivamsha_khila": {
+        "harivamsha_parva": {},
+        "vishnu_parva": {},
+        "bhavishya_parva": {}
+      }
+    },
+    "_default_author": "Maharshi Veda Vyasa"
+  },
+  "sarvamoola_grantha": {
+    "_schema": "grantha_prakarana_text",
+    "gita_prasthana": {
+      "gita_bhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "gita_tatparya_nirnaya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      }
+    },
+    "sutra_prasthana": {
+      "brahma_sutra_bhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "anuvyakhyana": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "anubhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "nyaya_vivarana": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      }
+    },
+    "upanishad_prasthana": {
+      "ishavasyopanishad_bhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "kenopanishad_bhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "kathopanishad_bhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "mandukyopanishad_bhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "mundakopanishad_bhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "prashnopanishad_bhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "taittiriyopanishad_bhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "aitareyopanishad_bhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "brihadaranyakopanishad_bhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "chandogyopanishad_bhashya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      }
+    },
+    "rig_bhashya": {
+      "mula": {
+        "_schema": "grantha_mula_text"
+      },
+      "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "Sri Jayatirtha"
+      },
+      "tippani": {
+        "_schema": "grantha_tippani_text"
+      }
+    },
+    "dasha_prakarana_granthas": {
+      "tattva_sankhyana": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "tattva_viveka": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "tattvodyota": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "vishnu_tattva_vinirnaya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "katha_lakshana": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "pramana_lakshana": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "upadhi_khandana": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "mayavada_khandana": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "prapancha_mithyatvanumana_khandana": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "karma_nirnaya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      }
+    },
+    "itihasa_purana_tatparya_nirnaya": {
+      "mahabharata_tatparya_nirnaya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "bhagavata_tatparya_nirnaya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      }
+    },
+    "dvadasha_stotra": {
+      "mula": {
+        "_schema": "grantha_mula_text"
+      },
+      "tika_jayatirtha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "Sri Jayatirtha"
+      },
+      "tippani": {
+        "_schema": "grantha_tippani_text"
+      }
+    },
+    "achara_and_ancillary_granthas": {
+      "yamaka_bharata": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "tantrasara_sangraha": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "sadachara_smriti": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "jayanti_nirnaya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "nyasa_paddhati": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "tithi_nirnaya": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "yati_pranava_kalpa": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "krishnamrita_maharnava": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "kanduka_stuti": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      },
+      "nakha_stuti": {
+        "mula": {
+          "_schema": "grantha_mula_text"
+        },
+        "tika_jayatirtha": {
+          "_schema": "grantha_tika_text",
+          "_default_author": "Sri Jayatirtha"
+        },
+        "tippani": {
+          "_schema": "grantha_tippani_text"
+        }
+      }
+    },
+    "_default_author": "Sri Madhvacharya"
+  },
+  "smritis": {
+    "_schema": "smriti_dharmashastra_text",
+    "manu_smriti": {
+      "_default_author": "Manu"
+    },
+    "yajnavalkya_smriti": {
+      "_default_author": "Yajnavalkya"
+    },
+    "parashara_smriti": {
+      "_default_author": "Parashara"
+    },
+    "gautama_smriti": {
+      "_default_author": "Gautama"
+    },
+    "harita_smriti": {
+      "_default_author": "Harita"
+    },
+    "yama_smriti": {
+      "_default_author": "Yama"
+    },
+    "vishnu_smriti": {
+      "_default_author": "Maharshi Vishnu (smriti-rishi, distinct from the deity)"
+    },
+    "shankha_smriti": {
+      "_default_author": "Shankha"
+    },
+    "likhita_smriti": {
+      "_default_author": "Likhita"
+    },
+    "brihaspati_smriti": {
+      "_default_author": "Brihaspati"
+    },
+    "daksha_smriti": {
+      "_default_author": "Daksha"
+    },
+    "angiras_smriti": {
+      "_default_author": "Angiras"
+    },
+    "pracetas_smriti": {
+      "_default_author": "Pracetas"
+    },
+    "samvarta_smriti": {
+      "_default_author": "Samvarta"
+    },
+    "ushanas_smriti": {
+      "_default_author": "Ushanas (Shukracharya)"
+    },
+    "atri_smriti": {
+      "_default_author": "Atri"
+    },
+    "apastamba_smriti": {
+      "_default_author": "Apastamba"
+    },
+    "shatatapa_smriti": {
+      "_default_author": "Shatatapa"
+    }
+  },
+  "dharmashastra": {
+    "dharma_sindhu": {
+      "_default_author": "Kashinatha Upadhyaya (Kashinath Upadhyaya)"
+    },
+    "nirnaya_sindhu": {
+      "_default_author": "Kamalakara Bhatta"
+    },
+    "mitakshara": {
+      "_default_author": "Vijnaneshwara"
+    },
+    "dayabhaga": {
+      "_default_author": "Jimutavahana"
+    },
+    "smriti_chandrika": {},
+    "chaturvarga_chintamani": {
+      "_default_author": "Hemadri (Hemadripant)"
+    },
+    "kalpataru": {
+      "_default_author": "Lakshmidhara"
+    }
+  },
+  "pancharatra_agama": {
+    "pancharatra_samhitas": {
+      "sattvata_samhita": {},
+      "paushkara_samhita": {},
+      "jayakhya_samhita": {},
+      "ahirbudhnya_samhita": {},
+      "ishvara_samhita": {},
+      "parama_samhita": {},
+      "padma_samhita": {},
+      "vishnu_samhita": {},
+      "naradiya_samhita": {},
+      "lakshmi_tantra": {},
+      "hayagriva_samhita": {},
+      "parashara_samhita": {},
+      "vasishtha_samhita": {},
+      "vishvaksena_samhita": {}
+    },
+    "vaikhanasa_agama": {},
+    "shaiva_agama": {},
+    "shakta_agama": {},
+    "_default_author": "Traditionally revealed (Divya Prabandha of Bhagavan Narayana); human compiler varies by samhita and is often unrecorded"
+  },
+  "stotras": {
+    "_schema": "stotra_text",
+    "_readme": "Flat by design -- see ARCHITECTURE_DECISIONS.md 'Folders vs tags'. Deity/theme grouping is done via the 'deity' field in each stotra's own metadata and surfaced in the Library UI, not via folder nesting. This keeps published paths stable forever and avoids ever duplicating a text across two locations.",
+    "pns": {
+      "_default_author": "Bhakta Prahlada"
+    },
+    "gajendra_moksha": {
+      "_default_author": "Maharshi Veda Vyasa (from Bhagavata Purana)"
+    },
+    "vishnu_sahasranama": {
+      "_default_author": "From Mahabharata, Anushasana Parva"
+    }
+  },
+  "sutras": {
+    "kalpa_sutras": {
+      "rigveda": {
+        "ashvalayana": {
+          "shrautasutra": {},
+          "grihyasutra": {}
+        },
+        "shankhayana": {
+          "shrautasutra": {},
+          "grihyasutra": {}
+        }
+      },
+      "krishna_yajurveda": {
+        "apastamba": {
+          "shrautasutra": {},
+          "grihyasutra": {},
+          "dharmasutra": {},
+          "shulbasutra": {}
+        },
+        "baudhayana": {
+          "shrautasutra": {},
+          "grihyasutra": {},
+          "dharmasutra": {},
+          "shulbasutra": {}
+        },
+        "bharadvaja": {
+          "shrautasutra": {},
+          "grihyasutra": {}
+        },
+        "hiranyakeshin": {
+          "shrautasutra": {},
+          "grihyasutra": {},
+          "dharmasutra": {}
+        },
+        "manava": {
+          "shrautasutra": {},
+          "grihyasutra": {},
+          "dharmasutra": {},
+          "shulbasutra": {}
+        },
+        "vaikhanasa": {
+          "shrautasutra": {},
+          "grihyasutra": {},
+          "dharmasutra": {}
+        },
+        "kathaka": {
+          "grihyasutra": {}
+        },
+        "vadhula": {
+          "shrautasutra": {}
+        },
+        "satyashadha": {
+          "shrautasutra": {}
+        },
+        "varaha": {
+          "shrautasutra": {}
+        }
+      },
+      "shukla_yajurveda": {
+        "katyayana": {
+          "shrautasutra": {},
+          "shulbasutra": {}
+        },
+        "paraskara": {
+          "grihyasutra": {}
+        }
+      },
+      "samaveda": {
+        "jaiminiya": {
+          "shrautasutra": {},
+          "grihyasutra": {}
+        },
+        "latyayana": {
+          "shrautasutra": {}
+        },
+        "drahyayana": {
+          "shrautasutra": {}
+        },
+        "gobhila": {
+          "grihyasutra": {}
+        },
+        "khadira": {
+          "grihyasutra": {}
+        },
+        "kauthuma": {
+          "grihyasutra": {}
+        }
+      },
+      "atharvaveda": {
+        "vaitana": {
+          "shrautasutra": {}
+        },
+        "kaushika": {
+          "grihyasutra": {}
+        }
+      },
+      "independent_dharmasutras": {
+        "gautama_dharmasutra": {},
+        "vasishtha_dharmasutra": {}
+      }
+    }
+  },
+  "ancillary": {
+    "shiksha": {
+      "paniniya_shiksha": {},
+      "rigveda_shikshas": {
+        "swarankusha_shiksha": {},
+        "shodashasloki_shiksha": {},
+        "shaishiriya_shiksha": {},
+        "apishali_shiksha": {}
+      },
+      "yajurveda_shikshas": {
+        "shukla_yajurveda_shikshas": {
+          "yajnavalkya_shiksha": {},
+          "vasishthi_shiksha": {},
+          "katyayani_shiksha": {},
+          "parashari_shiksha": {},
+          "mandavya_shiksha": {},
+          "amoghanandini_shiksha": {},
+          "laghu_amoghanandini_shiksha": {},
+          "madhyandini_shiksha": {},
+          "varnaratnapradipika_shiksha": {},
+          "keshavi_shiksha": {},
+          "hastaswaraprakriya_shiksha": {},
+          "awasannirnaya_shiksha": {},
+          "swarabhaktilakshanaparishishta_shiksha": {},
+          "kramasandhana_shiksha": {},
+          "manahswar_shiksha": {},
+          "yajurvidhana_shiksha": {},
+          "swarashtaka_shiksha": {},
+          "kramakarika_shiksha": {}
+        },
+        "krishna_yajurveda_shikshas": {
+          "bharadwaja_shiksha": {},
+          "vyasa_shiksha": {},
+          "shambhu_shiksha": {},
+          "kauhaliya_shiksha": {},
+          "sarvamammata_shiksha": {},
+          "aranya_shiksha": {},
+          "siddhanta_shiksha": {}
+        }
+      },
+      "samaveda_shikshas": {
+        "gautami_shiksha": {},
+        "lomashi_shiksha": {},
+        "naradiya_shiksha": {}
+      },
+      "atharvaveda_shiksha": {
+        "manduki_shiksha": {}
+      }
+    },
+    "vyakarana": {
+      "aindra_school": {},
+      "paniniya_vyakarana": {
+        "ashtadhyayi": {},
+        "mahabhashya_patanjali": {},
+        "kashika_vritti": {},
+        "siddhanta_kaumudi": {}
+      },
+      "chandra_vyakarana": {},
+      "jainendra_vyakarana": {},
+      "shakatayana_vyakarana": {},
+      "katantra_vyakarana": {},
+      "haima_shabdanushasana": {},
+      "sarasvata_vyakarana": {},
+      "mugdhabodha_vyakarana": {}
+    },
+    "chandas": {},
+    "nirukta": {},
+    "jyotisha": {},
+    "pratishakhya": {
+      "rigveda_pratishakhya": {},
+      "taittiriya_pratishakhya": {},
+      "vajasaneyi_pratishakhya": {},
+      "samaveda_pratishakhya": {
+        "rik_tantra": {},
+        "pushpasutra": {}
+      },
+      "shaunakiya_chaturadhyayika": {}
+    }
+  },
+  "dasakuta": {
+    "_schema": "dasa_sahitya_composition",
+    "purandaradasa": {
+      "pada_kirtane": {},
+      "suladi": {},
+      "ugabhoga": {},
+      "mundige": {},
+      "dandaka": {},
+      "other_compositions": {},
+      "_default_author": "Sri Purandaradasa"
+    },
+    "kanakadasa": {
+      "pada_kirtane": {},
+      "suladi": {},
+      "ugabhoga": {},
+      "mundige": {},
+      "dandaka": {},
+      "other_compositions": {},
+      "_default_author": "Sri Kanakadasa"
+    },
+    "vijayadasa": {
+      "pada_kirtane": {},
+      "suladi": {},
+      "ugabhoga": {},
+      "mundige": {},
+      "dandaka": {},
+      "other_compositions": {},
+      "_default_author": "Sri Vijayadasa"
+    },
+    "gopaladasa": {
+      "pada_kirtane": {},
+      "suladi": {},
+      "ugabhoga": {},
+      "mundige": {},
+      "dandaka": {},
+      "other_compositions": {},
+      "_default_author": "Sri Gopaladasa"
+    },
+    "jagannathadasa": {
+      "pada_kirtane": {},
+      "suladi": {},
+      "ugabhoga": {},
+      "mundige": {},
+      "dandaka": {},
+      "other_compositions": {},
+      "_default_author": "Sri Jagannathadasa"
+    },
+    "prasannavenkatadasa": {
+      "pada_kirtane": {},
+      "suladi": {},
+      "ugabhoga": {},
+      "mundige": {},
+      "dandaka": {},
+      "other_compositions": {},
+      "_default_author": "Sri Prasanna Venkatadasa"
+    },
+    "mahipatidasa": {
+      "pada_kirtane": {},
+      "suladi": {},
+      "ugabhoga": {},
+      "mundige": {},
+      "dandaka": {},
+      "other_compositions": {},
+      "_default_author": "Sri Mahipatidasa"
+    }
+  },
+  "vyasakuta": {
+    "_schema": "grantha_prakarana_text",
+    "sripadaraja": {
+      "_default_author": "Sri Sripadaraja"
+    },
+    "vyasatirtha": {
+      "_default_author": "Sri Vyasatirtha (Vyasaraja)",
+      "nyayamrita": {},
+      "tarkatandava": {},
+      "tatparyachandrika": {},
+      "bhedojjivana": {},
+      "chandrika": {},
+      "mandaramanjari": {}
+    },
+    "vadiraja_tirtha": {
+      "_default_author": "Sri Vadiraja Tirtha",
+      "yuktimallika": {},
+      "rukminisha_vijaya": {}
+    },
+    "raghavendra_tirtha": {
+      "_default_author": "Sri Raghavendra Swami",
+      "parimala": {},
+      "bhattasangraha": {},
+      "tantradipika": {},
+      "nyayamuktavali": {},
+      "bhavabodha": {},
+      "gurvarthadipika": {}
+    },
+    "vijayendra_tirtha": {
+      "_default_author": "Sri Vijayendra Tirtha"
+    },
+    "vyasatatvajna_tirtha": {
+      "_default_author": "Sri Vyasatatvajna Tirtha"
+    },
+    "vishnu_tirtha": {
+      "_default_author": "Sri Vishnu Tirtha"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 {
   "directory": "garuda_purana",
-  "description": "DGE Category structure file to anchor the directory."
+  "description": "DGE category structure file to anchor the directory.",
+  "schema": "itihasa_purana_text"
 }

@@ -1,4 +1,5 @@
 {
   "directory": "vedas",
-  "description": "DGE Category structure file to anchor the directory."
+  "description": "DGE category structure file to anchor the directory.",
+  "schema": "vedic_text"
 }
