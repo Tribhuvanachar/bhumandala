@@ -1,523 +1,696 @@
 {
-  "libraryVersion": "4.0",
+  "libraryVersion": "4.1",
   "appName": "Bhagavata Digital Library",
   "description": "Master Catalog for Digital Grantha Engine",
   "granthas": [
     {
-      "path": "dge/data/vedas/rigveda/mandala_01/data.json"
+      "path": "dge/data/vedas/rigveda/mandala_01/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/rigveda/mandala_02/data.json"
+      "path": "dge/data/vedas/rigveda/mandala_02/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/rigveda/mandala_03/data.json"
+      "path": "dge/data/vedas/rigveda/mandala_03/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/rigveda/mandala_04/data.json"
+      "path": "dge/data/vedas/rigveda/mandala_04/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/rigveda/mandala_05/data.json"
+      "path": "dge/data/vedas/rigveda/mandala_05/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/rigveda/mandala_06/data.json"
+      "path": "dge/data/vedas/rigveda/mandala_06/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/rigveda/mandala_07/data.json"
+      "path": "dge/data/vedas/rigveda/mandala_07/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/rigveda/mandala_08/data.json"
+      "path": "dge/data/vedas/rigveda/mandala_08/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/rigveda/mandala_09/data.json"
+      "path": "dge/data/vedas/rigveda/mandala_09/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/rigveda/mandala_10/data.json"
+      "path": "dge/data/vedas/rigveda/mandala_10/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_01/data.json"
+      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_01/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_02/data.json"
+      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_02/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_03/data.json"
+      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_03/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_04/data.json"
+      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_04/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_05/data.json"
+      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_05/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_06/data.json"
+      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_06/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_07/data.json"
+      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_samhita/kanda_07/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/maitrayani_samhita/mula/data.json"
+      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/maitrayani_samhita/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/katha_samhita/mula/data.json"
+      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/katha_samhita/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/kapisthala_samhita/mula/data.json"
+      "path": "dge/data/vedas/yajurveda/krishna_yajurveda/kapisthala_samhita/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina/mula/data.json"
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_kanva/mula/data.json"
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_kanva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/samaveda/purvarchika/mula/data.json"
+      "path": "dge/data/vedas/samaveda/purvarchika/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/samaveda/uttararchika/mula/data.json"
+      "path": "dge/data/vedas/samaveda/uttararchika/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_01/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_01/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_02/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_02/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_03/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_03/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_04/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_04/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_05/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_05/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_06/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_06/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_07/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_07/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_08/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_08/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_09/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_09/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_10/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_10/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_11/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_11/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_12/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_12/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_13/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_13/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_14/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_14/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_15/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_15/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_16/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_16/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_17/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_17/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_18/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_18/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_19/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_19/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/vedas/atharvaveda/kanda_20/data.json"
+      "path": "dge/data/vedas/atharvaveda/kanda_20/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/brahmanas/aitareya/mula/data.json"
+      "path": "dge/data/brahmanas/aitareya/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/brahmanas/shatapatha/mula/data.json"
+      "path": "dge/data/brahmanas/shatapatha/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/aranyakas/aitareya/mula/data.json"
+      "path": "dge/data/aranyakas/aitareya/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/aranyakas/taittiriya/mula/data.json"
+      "path": "dge/data/aranyakas/taittiriya/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/upanishads/isha/mula/data.json"
+      "path": "dge/data/upanishads/isha/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/upanishads/kena/mula/data.json"
+      "path": "dge/data/upanishads/kena/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/upanishads/katha/mula/data.json"
+      "path": "dge/data/upanishads/katha/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/upanishads/prashna/mula/data.json"
+      "path": "dge/data/upanishads/prashna/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/upanishads/mundaka/mula/data.json"
+      "path": "dge/data/upanishads/mundaka/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/upanishads/mandukya/mula/data.json"
+      "path": "dge/data/upanishads/mandukya/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/upanishads/taittiriya/mula/data.json"
+      "path": "dge/data/upanishads/taittiriya/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/upanishads/aitareya/mula/data.json"
+      "path": "dge/data/upanishads/aitareya/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/upanishads/chandogya/mula/data.json"
+      "path": "dge/data/upanishads/chandogya/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/upanishads/brihadaranyaka/mula/data.json"
+      "path": "dge/data/upanishads/brihadaranyaka/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhagavata_purana/skandha_01/data.json"
+      "path": "dge/data/puranas/bhagavata_purana/skandha_01/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhagavata_purana/skandha_02/data.json"
+      "path": "dge/data/puranas/bhagavata_purana/skandha_02/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhagavata_purana/skandha_03/data.json"
+      "path": "dge/data/puranas/bhagavata_purana/skandha_03/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhagavata_purana/skandha_04/data.json"
+      "path": "dge/data/puranas/bhagavata_purana/skandha_04/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhagavata_purana/skandha_05/data.json"
+      "path": "dge/data/puranas/bhagavata_purana/skandha_05/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhagavata_purana/skandha_06/data.json"
+      "path": "dge/data/puranas/bhagavata_purana/skandha_06/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhagavata_purana/skandha_07/data.json"
+      "path": "dge/data/puranas/bhagavata_purana/skandha_07/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhagavata_purana/skandha_08/data.json"
+      "path": "dge/data/puranas/bhagavata_purana/skandha_08/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhagavata_purana/skandha_09/data.json"
+      "path": "dge/data/puranas/bhagavata_purana/skandha_09/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhagavata_purana/skandha_10/data.json"
+      "path": "dge/data/puranas/bhagavata_purana/skandha_10/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhagavata_purana/skandha_11/data.json"
+      "path": "dge/data/puranas/bhagavata_purana/skandha_11/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhagavata_purana/skandha_12/data.json"
+      "path": "dge/data/puranas/bhagavata_purana/skandha_12/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/vishnu_purana/amsa_01/data.json"
+      "path": "dge/data/puranas/vishnu_purana/amsa_01/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/vishnu_purana/amsa_02/data.json"
+      "path": "dge/data/puranas/vishnu_purana/amsa_02/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/vishnu_purana/amsa_03/data.json"
+      "path": "dge/data/puranas/vishnu_purana/amsa_03/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/vishnu_purana/amsa_04/data.json"
+      "path": "dge/data/puranas/vishnu_purana/amsa_04/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/vishnu_purana/amsa_05/data.json"
+      "path": "dge/data/puranas/vishnu_purana/amsa_05/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/vishnu_purana/amsa_06/data.json"
+      "path": "dge/data/puranas/vishnu_purana/amsa_06/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/brahma_purana/mula/data.json"
+      "path": "dge/data/puranas/brahma_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/padma_purana/mula/data.json"
+      "path": "dge/data/puranas/padma_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/shiva_purana/mula/data.json"
+      "path": "dge/data/puranas/shiva_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/narada_purana/mula/data.json"
+      "path": "dge/data/puranas/narada_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/markandeya_purana/mula/data.json"
+      "path": "dge/data/puranas/markandeya_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/agni_purana/mula/data.json"
+      "path": "dge/data/puranas/agni_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/bhavishya_purana/mula/data.json"
+      "path": "dge/data/puranas/bhavishya_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/brahmavaivarta_purana/mula/data.json"
+      "path": "dge/data/puranas/brahmavaivarta_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/linga_purana/mula/data.json"
+      "path": "dge/data/puranas/linga_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/varaha_purana/mula/data.json"
+      "path": "dge/data/puranas/varaha_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/skanda_purana/mula/data.json"
+      "path": "dge/data/puranas/skanda_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/vamana_purana/mula/data.json"
+      "path": "dge/data/puranas/vamana_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/kurma_purana/mula/data.json"
+      "path": "dge/data/puranas/kurma_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/matsya_purana/mula/data.json"
+      "path": "dge/data/puranas/matsya_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/garuda_purana/mula/data.json"
+      "path": "dge/data/puranas/garuda_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/puranas/brahmanda_purana/mula/data.json"
+      "path": "dge/data/puranas/brahmanda_purana/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/ramayana/bala_kanda/mula/data.json"
+      "path": "dge/data/itihasas/ramayana/bala_kanda/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/ramayana/ayodhya_kanda/mula/data.json"
+      "path": "dge/data/itihasas/ramayana/ayodhya_kanda/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/ramayana/aranya_kanda/mula/data.json"
+      "path": "dge/data/itihasas/ramayana/aranya_kanda/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/ramayana/kishkindha_kanda/mula/data.json"
+      "path": "dge/data/itihasas/ramayana/kishkindha_kanda/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/ramayana/sundara_kanda/mula/data.json"
+      "path": "dge/data/itihasas/ramayana/sundara_kanda/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/ramayana/yuddha_kanda/mula/data.json"
+      "path": "dge/data/itihasas/ramayana/yuddha_kanda/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/ramayana/uttara_kanda/mula/data.json"
+      "path": "dge/data/itihasas/ramayana/uttara_kanda/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/adi_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/adi_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/sabha_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/sabha_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/vana_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/vana_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/virata_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/virata_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/udyoga_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/udyoga_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/bhishma_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/bhishma_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/drona_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/drona_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/karna_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/karna_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/shalya_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/shalya_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/sauptika_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/sauptika_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/stri_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/stri_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/shanti_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/shanti_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/anushasana_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/anushasana_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/ashvamedhika_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/ashvamedhika_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/ashramavasika_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/ashramavasika_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/mausala_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/mausala_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/mahaprasthanika_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/mahaprasthanika_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/svargarohana_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/svargarohana_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/harivamsa/harivamsa_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/harivamsa/harivamsa_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/harivamsa/vishnu_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/harivamsa/vishnu_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/itihasas/mahabharata/harivamsa/bhavishya_parva/mula/data.json"
+      "path": "dge/data/itihasas/mahabharata/harivamsa/bhavishya_parva/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/gita_prasthana/gita_bhashya/data.json"
+      "path": "dge/data/sarvamoola/gita_prasthana/gita_bhashya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/gita_prasthana/gita_tatparya_nirnaya/data.json"
+      "path": "dge/data/sarvamoola/gita_prasthana/gita_tatparya_nirnaya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/sutra_prasthana/brahmasutra_bhashya/data.json"
+      "path": "dge/data/sarvamoola/sutra_prasthana/brahmasutra_bhashya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/sutra_prasthana/anu_bhashya/data.json"
+      "path": "dge/data/sarvamoola/sutra_prasthana/anu_bhashya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/sutra_prasthana/anuvyakhyana/data.json"
+      "path": "dge/data/sarvamoola/sutra_prasthana/anuvyakhyana/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/sutra_prasthana/nyayavivarana/data.json"
+      "path": "dge/data/sarvamoola/sutra_prasthana/nyayavivarana/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/upanishad_prasthana/isha/data.json"
+      "path": "dge/data/sarvamoola/upanishad_prasthana/isha/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/upanishad_prasthana/kena/data.json"
+      "path": "dge/data/sarvamoola/upanishad_prasthana/kena/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/upanishad_prasthana/katha/data.json"
+      "path": "dge/data/sarvamoola/upanishad_prasthana/katha/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/upanishad_prasthana/prashna/data.json"
+      "path": "dge/data/sarvamoola/upanishad_prasthana/prashna/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/upanishad_prasthana/mundaka/data.json"
+      "path": "dge/data/sarvamoola/upanishad_prasthana/mundaka/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/upanishad_prasthana/mandukya/data.json"
+      "path": "dge/data/sarvamoola/upanishad_prasthana/mandukya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/upanishad_prasthana/taittiriya/data.json"
+      "path": "dge/data/sarvamoola/upanishad_prasthana/taittiriya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/upanishad_prasthana/aitareya/data.json"
+      "path": "dge/data/sarvamoola/upanishad_prasthana/aitareya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/upanishad_prasthana/chandogya/data.json"
+      "path": "dge/data/sarvamoola/upanishad_prasthana/chandogya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/upanishad_prasthana/brihadaranyaka/data.json"
+      "path": "dge/data/sarvamoola/upanishad_prasthana/brihadaranyaka/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/rig_prasthana/rigveda_bhashya/data.json"
+      "path": "dge/data/sarvamoola/rig_prasthana/rigveda_bhashya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/itihasa_purana_prasthana/mahabharata_tatparya_nirnaya/data.json"
+      "path": "dge/data/sarvamoola/itihasa_purana_prasthana/mahabharata_tatparya_nirnaya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/itihasa_purana_prasthana/bhagavata_tatparya_nirnaya/data.json"
+      "path": "dge/data/sarvamoola/itihasa_purana_prasthana/bhagavata_tatparya_nirnaya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/itihasa_purana_prasthana/yamaka_bharata/data.json"
+      "path": "dge/data/sarvamoola/itihasa_purana_prasthana/yamaka_bharata/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/dashaprakarana/pramana_lakshana/data.json"
+      "path": "dge/data/sarvamoola/dashaprakarana/pramana_lakshana/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/dashaprakarana/katha_lakshana/data.json"
+      "path": "dge/data/sarvamoola/dashaprakarana/katha_lakshana/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/dashaprakarana/upadhi_khandana/data.json"
+      "path": "dge/data/sarvamoola/dashaprakarana/upadhi_khandana/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/dashaprakarana/mayavada_khandana/data.json"
+      "path": "dge/data/sarvamoola/dashaprakarana/mayavada_khandana/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/dashaprakarana/prapancha_mithyatvanumana_khandana/data.json"
+      "path": "dge/data/sarvamoola/dashaprakarana/prapancha_mithyatvanumana_khandana/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/dashaprakarana/tattva_sankhyana/data.json"
+      "path": "dge/data/sarvamoola/dashaprakarana/tattva_sankhyana/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/dashaprakarana/tattva_viveka/data.json"
+      "path": "dge/data/sarvamoola/dashaprakarana/tattva_viveka/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/dashaprakarana/tattvodyota/data.json"
+      "path": "dge/data/sarvamoola/dashaprakarana/tattvodyota/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/dashaprakarana/vishnu_tattva_nirnaya/data.json"
+      "path": "dge/data/sarvamoola/dashaprakarana/vishnu_tattva_nirnaya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/dashaprakarana/karma_nirnaya/data.json"
+      "path": "dge/data/sarvamoola/dashaprakarana/karma_nirnaya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/tantra_smriti_achara/tantra_sara_sangraha/data.json"
+      "path": "dge/data/sarvamoola/tantra_smriti_achara/tantra_sara_sangraha/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/tantra_smriti_achara/sadachara_smriti/data.json"
+      "path": "dge/data/sarvamoola/tantra_smriti_achara/sadachara_smriti/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/tantra_smriti_achara/krishna_amrutha_maharnava/data.json"
+      "path": "dge/data/sarvamoola/tantra_smriti_achara/krishna_amrutha_maharnava/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/tantra_smriti_achara/yati_pranava_kalpa/data.json"
+      "path": "dge/data/sarvamoola/tantra_smriti_achara/yati_pranava_kalpa/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/tantra_smriti_achara/jayanti_nirnaya/data.json"
+      "path": "dge/data/sarvamoola/tantra_smriti_achara/jayanti_nirnaya/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/stotras/dvadasha_stotra/data.json"
+      "path": "dge/data/sarvamoola/stotras/dvadasha_stotra/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/stotras/narasimha_nakha_stuti/data.json"
+      "path": "dge/data/sarvamoola/stotras/narasimha_nakha_stuti/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/sarvamoola/stotras/kanduka_stuti/data.json"
+      "path": "dge/data/sarvamoola/stotras/kanduka_stuti/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/dharmashastras/smritis/manu_smriti/mula/data.json"
+      "path": "dge/data/dharmashastras/smritis/manu_smriti/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/dharmashastras/smritis/yajnavalkya_smriti/mula/data.json"
+      "path": "dge/data/dharmashastras/smritis/yajnavalkya_smriti/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/dharmashastras/smritis/parashara_smriti/mula/data.json"
+      "path": "dge/data/dharmashastras/smritis/parashara_smriti/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/dharmashastras/smritis/gautama_smriti/mula/data.json"
+      "path": "dge/data/dharmashastras/smritis/gautama_smriti/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/dharmashastras/nibandhas/nirnaya_sindhu/mula/data.json"
+      "path": "dge/data/dharmashastras/nibandhas/nirnaya_sindhu/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/dharmashastras/nibandhas/dharma_sindhu/mula/data.json"
+      "path": "dge/data/dharmashastras/nibandhas/dharma_sindhu/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/pancharatra/ahirbudhnya_samhita/mula/data.json"
+      "path": "dge/data/pancharatra/ahirbudhnya_samhita/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/pancharatra/jayakhya_samhita/mula/data.json"
+      "path": "dge/data/pancharatra/jayakhya_samhita/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/pancharatra/paushkara_samhita/mula/data.json"
+      "path": "dge/data/pancharatra/paushkara_samhita/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/pancharatra/satvata_samhita/mula/data.json"
+      "path": "dge/data/pancharatra/satvata_samhita/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/pancharatra/vishnu_rahasya/mula/data.json"
+      "path": "dge/data/pancharatra/vishnu_rahasya/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/stotras/pns/mula/data.json"
+      "path": "dge/data/stotras/pns/data.json",
+      "title": "॥ प्रह्लादकृत नृसिंह स्तोत्र ॥",
+      "populated": true
     },
     {
-      "path": "dge/data/stotras/vishnu_sahasranama/mula/data.json"
+      "path": "dge/data/stotras/vishnu_sahasranama/mula/data.json",
+      "populated": false
     },
     {
-      "path": "dge/data/stotras/gajendra_moksha/mula/data.json"
+      "path": "dge/data/stotras/gajendra_moksha/mula/data.json",
+      "populated": false
     }
   ]
 }

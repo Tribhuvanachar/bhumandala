@@ -1,6 +1,24 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v2.4 (Search-scope popup population)';
+window.DGE_VERSIONS['core.js'] = 'v2.5 (Library-catalog-driven grantha resolution, ?path= addressing alongside legacy ?code=)';
+
+// Converts a library.json catalog path ("dge/data/x/y/data.json", always
+// repo-root-relative for GitHub API use) into a slug ("x/y") and a
+// fetch-relative path ("data/x/y/data.json", relative to this index.html
+// which itself lives inside dge/). Shared with library.js (the browser
+// modal), so both always agree on the same slug for the same file.
+window.dgeLibraryPathToFetchPath = function(catalogPath) {
+  return catalogPath.replace(/^dge\//, '');
+};
+window.dgeGranthaSlug = function(catalogPath) {
+  return window.dgeLibraryPathToFetchPath(catalogPath).replace(/^data\//, '').replace(/\/data\.json$/, '');
+};
+
+// Fetched once, shared with library.js so the browser modal doesn't need
+// a second network round trip for the same file.
+window.dgeLibraryCatalogPromise = fetch('data/library.json')
+  .then(res => res.ok ? res.json() : null)
+  .catch(() => null);
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. INITIALIZE GLOBAL DOM ELEMENTS
@@ -28,37 +46,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. PARSE URL PARAMETERS
   const urlParams = new URLSearchParams(window.location.search);
-  window.stotraCode = urlParams.get('code') || 'pns';
-  
+  const explicitPath = urlParams.get('path'); // new general addressing, e.g. "vedas/rigveda/mandala_01"
+  const explicitCode = urlParams.get('code'); // legacy addressing — always resolves under stotras/, unchanged behaviour
+
   const providedPass = urlParams.get('pass');
   const passkey = (window.appConfig && window.appConfig.secretPasskey) ? window.appConfig.secretPasskey : 'SHRI108';
-  
+
   if (providedPass && providedPass.toUpperCase() === passkey.toUpperCase()) {
     localStorage.setItem('acharyaAuthorized', 'true');
   }
 
-  // 3. EXACT TAXONOMY PATH ROUTING
-  // Maps directly to dge/data/stotras/pns/data.json
-  window.jsonFileName = `data/stotras/${window.stotraCode}/data.json`;
+  // 3. RESOLVE WHICH GRANTHA TO LOAD
+  // Legacy mode (?code=xxx, or no params at all) preserves the EXACT
+  // historical path and stotraCode value — this matters because existing
+  // users already have marks/notes/reading-history/audio-cache keyed off
+  // stotraCode as it's always been computed; changing that for the one
+  // real, already-live text would silently orphan their saved data.
+  // Anything reached via the new ?path= scheme is, for now, necessarily a
+  // brand-new grantha with no prior user data to protect, so it's free to
+  // use the full slug (kept unique across the whole catalog, unlike the
+  // last path segment alone — many granthas share a generic final folder
+  // name like "mula").
+  const legacyMode = !explicitPath;
+  const slug = explicitPath ? explicitPath.replace(/^\/+|\/+$/g, '') : `stotras/${explicitCode || 'pns'}`;
+
+  window.stotraCode = legacyMode ? (explicitCode || 'pns') : slug.replace(/\//g, '__');
+  window.currentGranthaSlug = slug;
+  window.jsonFileName = `data/${slug}/data.json`; // overwritten below if the catalog has a more specific real path
   window.AUDIO_CACHE_NAME = `narasimha-audio-${window.stotraCode}`;
 
-  // 4. FETCH GRANTHA DATASET
-  fetch(window.jsonFileName)
-    .then(res => { 
-        if(!res.ok) throw new Error(`Could not find dataset at ${window.jsonFileName}`); 
-        return res.json(); 
-    })
-    .then(data => { 
-        window.stotraData = data; 
-        initApp(); 
-    })
-    .catch(err => {
-      console.error("DGE Fetch Error:", err);
+  // 4. RESOLVE VIA THE LIBRARY CATALOG, THEN FETCH THE GRANTHA DATASET
+  window.dgeLibraryCatalogPromise.then(library => {
+    let entry = null;
+    if (library && Array.isArray(library.granthas)) {
+      entry = library.granthas.find(g => window.dgeGranthaSlug(g.path) === slug);
+    }
+    if (entry) {
+      window.jsonFileName = window.dgeLibraryPathToFetchPath(entry.path);
+    }
+
+    if (entry && entry.populated === false) {
       const titleEl = document.getElementById('stotraTitle');
       const cardEl = document.getElementById('readingCard');
-      if (titleEl) titleEl.innerText = "Data Not Found";
-      if (cardEl) cardEl.innerText = `Error: Please ensure ${window.jsonFileName} is available in the repository.`;
-    });
+      if (titleEl) titleEl.innerText = 'Not Yet Available';
+      if (cardEl) cardEl.innerText = "This text hasn't been added to the library yet — check back soon.";
+      return;
+    }
+
+    fetch(window.jsonFileName)
+      .then(res => {
+        if (!res.ok) throw new Error(`Could not find dataset at ${window.jsonFileName}`);
+        return res.json();
+      })
+      .then(data => {
+        window.stotraData = data;
+        initApp();
+      })
+      .catch(err => {
+        console.error("DGE Fetch Error:", err);
+        const titleEl = document.getElementById('stotraTitle');
+        const cardEl = document.getElementById('readingCard');
+        if (titleEl) titleEl.innerText = "Data Not Found";
+        if (cardEl) cardEl.innerText = `Error: Please ensure ${window.jsonFileName} is available in the repository.`;
+      });
+  });
 });
 
 function initApp() {
