@@ -14,11 +14,12 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.10 (Batch diff-commit: Upload/Upload Folder/Upload Zip now skip unchanged files and land as one commit via the Git Data API, instead of one Contents-API PUT+commit per file)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.11 (Fixed zip/folder double-nesting when uploading from a root-locked folder; auto-.gitkeep for empty zip folders; sort-by-modified-date toggle)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
 let dgeAdminDragSourcePath = null;
+let dgeAdminSortMode = 'name'; // 'name' | 'modified' — toggled via dgeAdminToggleSort()
 
 // ---------------------------------------------------------------
 // Superadmin gate
@@ -177,6 +178,30 @@ function dgeGithubUpdateRef(newCommitSha) {
   });
 }
 
+// GitHub's directory-listing endpoint doesn't include a modified date per
+// file — the only way to get one is a per-file commit-history lookup
+// (?per_page=1 for just the most recent). Deliberately NOT called on every
+// navigation — only when "Sort: Modified" is active — since it's one extra
+// API call per FILE in the current folder.
+function dgeGithubGetFileLastModified(filePath) {
+  const { owner, repo, branch } = GITHUB_REPO_CONFIG;
+  const url = `${GH_API}/repos/${owner}/${repo}/commits?path=${encodeURIComponent(filePath)}&sha=${branch}&per_page=1&_=${Date.now()}`;
+  return dgeGithubRequest(url, { headers: dgeGithubHeaders(), cache: 'no-store' });
+}
+
+function dgeFormatShortDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) + ' ' + d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+}
+
+window.dgeAdminToggleSort = function() {
+  dgeAdminSortMode = dgeAdminSortMode === 'name' ? 'modified' : 'name';
+  const btn = document.getElementById('adminSortBtn');
+  if (btn) btn.textContent = dgeAdminSortMode === 'modified' ? '🕒 Sort: Modified' : '🔤 Sort: Name';
+  dgeAdminNavigate(dgeAdminCurrentPath);
+};
+
 // Full recursive tree — used for folder-level rename/move, where every
 // descendant file needs to be relocated.
 function dgeGithubGetRecursiveTree() {
@@ -275,14 +300,48 @@ async function dgeAdminNavigate(path) {
 
   try {
     const items = await dgeGithubListDir(path);
-    const sorted = [...items].sort((a, b) => {
+    let sorted = [...items].sort((a, b) => {
       if (a.type !== b.type) return a.type === 'dir' ? -1 : 1;
       return a.name.localeCompare(b.name);
     });
 
+    let modifiedByPath = {};
+    if (dgeAdminSortMode === 'modified') {
+      const fileItems = sorted.filter(i => i.type === 'file');
+      if (fileItems.length) {
+        listEl.innerHTML = `<div style="padding:20px; text-align:center; color:var(--muted-text); font-size:12px;">Loading modified dates for ${fileItems.length} file(s)…</div>`;
+        const results = await Promise.all(fileItems.map(async item => {
+          try {
+            const commits = await dgeGithubGetFileLastModified(item.path);
+            const c = commits && commits[0];
+            const date = c && c.commit && c.commit.author && c.commit.author.date;
+            return { path: item.path, date: date || null };
+          } catch (e) {
+            return { path: item.path, date: null };
+          }
+        }));
+        results.forEach(r => { modifiedByPath[r.path] = r.date; });
+
+        // Folders still sort by name first (a folder's "modified" date
+        // would mean aggregating every descendant file — expensive and
+        // not worth it here); files within this folder sort newest first.
+        const dirs = sorted.filter(i => i.type === 'dir');
+        const files = fileItems.slice().sort((a, b) => {
+          const da = modifiedByPath[a.path], db = modifiedByPath[b.path];
+          if (!da && !db) return a.name.localeCompare(b.name);
+          if (!da) return 1;
+          if (!db) return -1;
+          return new Date(db) - new Date(da);
+        });
+        sorted = [...dirs, ...files];
+      }
+    }
+
     listEl.innerHTML = sorted.map(item => {
       const icon = item.type === 'dir' ? '📁' : (dgeIsTextFile(item.name) ? '📝' : '🖼️');
-      const sizeLabel = item.type === 'file' ? `<span class="admin-file-size">${dgeFormatBytes(item.size)}</span>` : '';
+      const modifiedLabel = (dgeAdminSortMode === 'modified' && item.type === 'file' && modifiedByPath[item.path])
+        ? `<span class="admin-file-size">${dgeFormatShortDate(modifiedByPath[item.path])}</span>`
+        : (item.type === 'file' ? `<span class="admin-file-size">${dgeFormatBytes(item.size)}</span>` : '');
       const rowAction = item.type === 'dir'
         ? `onclick="window.dgeAdminNavigateClick('${item.path}')"`
         : `onclick="window.dgeAdminOpenFile('${item.path}', '${item.name}')"`;
@@ -296,7 +355,7 @@ async function dgeAdminNavigate(path) {
           <div class="admin-file-main" ${rowAction}>
             <span>${icon}</span>
             <span class="admin-file-name">${item.name}</span>
-            ${sizeLabel}
+            ${modifiedLabel}
           </div>
           <div class="admin-file-actions">
             ${item.type === 'dir' ? `<button class="btn-icon" title="Download this folder as a .zip" onclick="event.stopPropagation(); window.dgeAdminDownloadFolderZip('${item.path}')">📦</button>` : `<button class="btn-icon" title="Download this file" onclick="event.stopPropagation(); window.dgeAdminDownloadFile('${item.path}')">⬇️</button>`}
@@ -469,14 +528,19 @@ window.dgeAdminUploadFolder = async function(fileList) {
   dgeAdminShowWorking();
 
   try {
+    const currentFolderName = (dgeAdminCurrentPath || '').split('/').filter(Boolean).pop() || '';
     const fileEntries = [];
     for (const file of fileList) {
       // webkitRelativePath includes the selected folder's own name as its
-      // first segment (e.g. "myfolder/sub/file.js") — keep it as-is so
-      // the folder itself is recreated here, not just its contents.
+      // first segment (e.g. "myfolder/sub/file.js") — normally kept as-is
+      // so the folder itself is recreated here, EXCEPT when that name
+      // matches the admin folder already being stood in, which would
+      // otherwise double up (see dgeStripRedundantFolderPrefix).
       const rel = file.webkitRelativePath || file.name;
+      const relPath = dgeStripRedundantFolderPrefix(rel, currentFolderName);
+      if (!relPath) continue;
       const bytes = await dgeReadFileAsUint8Array(file);
-      const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + rel;
+      const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + relPath;
       fileEntries.push({ path: targetPath, bytes });
     }
     const result = await dgeAdminBatchCommit(
@@ -499,10 +563,14 @@ window.dgeAdminUploadFolder = async function(fileList) {
 // Extracts a .zip file entirely client-side (JSZip — already loaded for
 // the folder-download feature) and pushes only the files that actually
 // changed to GitHub, all as ONE commit — see dgeAdminBatchCommit above.
-// Preserves the zip's own internal folder structure relative to the
-// current admin folder, so a zip containing "dge/convert/app.js" lands
-// at "<current path>/dge/convert/app.js" — stand at the repo root
-// before uploading a zip shaped like the ones this app generates.
+// Two things this handles that a naive extract-and-upload wouldn't:
+//  - Redundant leading folder segment (see dgeStripRedundantFolderPrefix)
+//    — matters a lot here since the admin's access is root-locked to
+//    "dge" and every delivery zip is itself wrapped in "dge/".
+//  - Directories in the zip that end up with no files under them (after
+//    stripping) get a ".gitkeep" placeholder — Git has no concept of an
+//    empty directory at all, so without this an empty folder in the zip
+//    simply wouldn't appear on GitHub.
 window.dgeAdminUploadZip = async function(file) {
   if (!file) return;
   if (typeof JSZip === 'undefined') {
@@ -515,14 +583,44 @@ window.dgeAdminUploadZip = async function(file) {
 
   try {
     const zip = await JSZip.loadAsync(file);
-    const entries = Object.values(zip.files).filter(f => !f.dir);
-    if (!entries.length) throw new Error('No files found inside this zip.');
+    const allEntries = Object.values(zip.files);
+    const fileZipEntries = allEntries.filter(f => !f.dir);
+    const dirZipEntries = allEntries.filter(f => f.dir);
+    if (!fileZipEntries.length && !dirZipEntries.length) throw new Error('This zip appears to be empty.');
+
+    const currentFolderName = (dgeAdminCurrentPath || '').split('/').filter(Boolean).pop() || '';
 
     const fileEntries = [];
-    for (const entry of entries) {
+    for (const entry of fileZipEntries) {
+      const relPath = dgeStripRedundantFolderPrefix(entry.name, currentFolderName);
+      if (!relPath) continue;
       const bytes = await entry.async('uint8array');
-      const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + entry.name;
+      const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + relPath;
       fileEntries.push({ path: targetPath, bytes });
+    }
+    if (!fileEntries.length && !dirZipEntries.length) throw new Error('No files found inside this zip.');
+
+    // Any directory in the zip with no file living under it needs an
+    // explicit placeholder, or it silently won't exist on GitHub at all.
+    const nonEmptyDirPrefixes = new Set();
+    fileEntries.forEach(f => {
+      const parts = f.path.split('/');
+      let acc = '';
+      for (let i = 0; i < parts.length - 1; i++) {
+        acc = acc ? acc + '/' + parts[i] : parts[i];
+        nonEmptyDirPrefixes.add(acc);
+      }
+    });
+    let emptyDirCount = 0;
+    for (const dirEntry of dirZipEntries) {
+      const relDir = dgeStripRedundantFolderPrefix(dirEntry.name.replace(/\/$/, ''), currentFolderName);
+      if (!relDir) continue;
+      const targetDirPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + relDir;
+      if (!nonEmptyDirPrefixes.has(targetDirPath)) {
+        fileEntries.push({ path: targetDirPath + '/.gitkeep', bytes: new Uint8Array(0) });
+        nonEmptyDirPrefixes.add(targetDirPath);
+        emptyDirCount++;
+      }
     }
 
     const result = await dgeAdminBatchCommit(
@@ -533,7 +631,7 @@ window.dgeAdminUploadZip = async function(file) {
     if (result.uploaded === 0) {
       if (typeof showToast === 'function') showToast(`Nothing to commit — all ${result.unchanged} file(s) in the zip already matched GitHub.`);
     } else {
-      if (typeof showToast === 'function') showToast(`Committed ${result.uploaded} changed file(s) in one commit (${result.unchanged} unchanged, skipped).`);
+      if (typeof showToast === 'function') showToast(`Committed ${result.uploaded} changed file(s) in one commit (${result.unchanged} unchanged, skipped)${emptyDirCount ? `, including ${emptyDirCount} empty folder(s) preserved via .gitkeep` : ''}.`);
     }
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
@@ -581,6 +679,21 @@ function dgeUint8ToBase64(bytes) {
     binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
   }
   return btoa(binary);
+}
+
+// A zip/folder upload's own internal paths often start with a folder name
+// that MATCHES the admin folder you're currently standing in (e.g. every
+// delivery zip for this project is wrapped in a top-level "dge/" folder,
+// and the admin's own access is root-locked to "dge" — so uploading from
+// there would otherwise land at "dge/dge/..."). Stripping one redundant
+// matching leading segment fixes that automatically, regardless of which
+// folder happens to be current when the upload runs. Returns '' if the
+// entry WAS just the folder name itself with nothing under it.
+function dgeStripRedundantFolderPrefix(relPath, currentFolderName) {
+  if (!currentFolderName) return relPath;
+  if (relPath === currentFolderName) return '';
+  if (relPath.startsWith(currentFolderName + '/')) return relPath.slice(currentFolderName.length + 1);
+  return relPath;
 }
 
 async function dgeReadFileAsUint8Array(file) {
