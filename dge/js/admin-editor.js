@@ -14,12 +14,13 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.11 (Fixed zip/folder double-nesting when uploading from a root-locked folder; auto-.gitkeep for empty zip folders; sort-by-modified-date toggle)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.12 (Multi-select + batch delete in one commit; single delete now uses the same batch technique instead of one commit per descendant file)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
 let dgeAdminDragSourcePath = null;
 let dgeAdminSortMode = 'name'; // 'name' | 'modified' — toggled via dgeAdminToggleSort()
+let dgeAdminSelectedItems = new Map(); // path -> type, cleared on every navigate (selection is per-folder)
 
 // ---------------------------------------------------------------
 // Superadmin gate
@@ -262,6 +263,7 @@ async function dgeAdminNavigate(path) {
     path = root;
   }
   dgeAdminCurrentPath = path;
+  dgeAdminSelectedItems.clear();
 
   const upBtn = document.getElementById('adminUpBtn');
   if (upBtn) {
@@ -347,11 +349,14 @@ async function dgeAdminNavigate(path) {
         : `onclick="window.dgeAdminOpenFile('${item.path}', '${item.name}')"`;
       const isOpenFile = item.type === 'file' && item.path === dgeAdminOpenFilePath;
 
+      const checked = dgeAdminSelectedItems.has(item.path) ? 'checked' : '';
+
       return `
         <div class="admin-file-row${isOpenFile ? ' admin-file-row-open' : ''}" draggable="true"
              data-path="${item.path}" data-type="${item.type}"
              ondragstart="window.dgeAdminDragStart(event, '${item.path}')"
              ${item.type === 'dir' ? `ondragover="event.preventDefault(); this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="window.dgeAdminHandleDrop(event, '${item.path}')"` : ''}>
+          <input type="checkbox" class="admin-select-checkbox" ${checked} onclick="event.stopPropagation(); window.dgeAdminToggleSelect('${item.path}', '${item.type}', this.checked)">
           <div class="admin-file-main" ${rowAction}>
             <span>${icon}</span>
             <span class="admin-file-name">${item.name}</span>
@@ -364,6 +369,8 @@ async function dgeAdminNavigate(path) {
           </div>
         </div>`;
     }).join('') || `<div class="note-preview-box" style="margin:0;">Empty folder.</div>`;
+
+    dgeAdminUpdateSelectionBar();
   } catch (e) {
     // A 404 here usually means this folder just stopped existing — most
     // often because its last remaining file was deleted, and Git doesn't
@@ -1013,7 +1020,43 @@ async function dgeAdminMoveFolder(oldFolderPath, newFolderPath) {
 // ---------------------------------------------------------------
 // Delete
 // ---------------------------------------------------------------
-window.dgeAdminDelete = async function(path, type, sha) {
+// Deletes one or more files/folders in ONE commit — a tree entry with
+// sha: null removes that path when built on top of the current base
+// tree (same Git Data API technique as dgeAdminBatchCommit, in reverse).
+// Folders are expanded to every descendant file first, since Git only
+// ever tracks files, never folders directly — "deleting a folder" really
+// means deleting everything inside it.
+async function dgeAdminBatchDelete(items) {
+  if (!items.length) return { deleted: 0 };
+
+  const head = await dgeGithubGetBranchHead();
+  const baseCommitSha = head.commit.sha;
+  const baseTreeSha = head.commit.commit.tree.sha;
+
+  const tree = await dgeGithubGetRecursiveTree();
+  const allBlobPaths = tree.tree.filter(t => t.type === 'blob').map(t => t.path);
+
+  const pathsToDelete = new Set();
+  items.forEach(item => {
+    if (item.type === 'dir') {
+      allBlobPaths.forEach(p => {
+        if (p === item.path || p.startsWith(item.path + '/')) pathsToDelete.add(p);
+      });
+    } else {
+      pathsToDelete.add(item.path);
+    }
+  });
+  if (!pathsToDelete.size) return { deleted: 0 };
+
+  const treeEntries = Array.from(pathsToDelete).map(p => ({ path: p, mode: '100644', type: 'blob', sha: null }));
+  const newTree = await dgeGithubCreateTree(baseTreeSha, treeEntries);
+  const message = dgeAdminBuildCommitMessage(items.length === 1 ? `Delete ${items[0].path}` : `Delete ${items.length} item(s)`);
+  const newCommit = await dgeGithubCreateCommit(message, newTree.sha, baseCommitSha);
+  await dgeGithubUpdateRef(newCommit.sha);
+  return { deleted: pathsToDelete.size };
+}
+
+window.dgeAdminDelete = async function(path, type) {
   let confirmMsg = type === 'dir'
     ? `Delete the folder "${path}" and everything inside it? This can't be undone from here.`
     : `Delete "${path}"? This can't be undone from here.`;
@@ -1029,23 +1072,72 @@ window.dgeAdminDelete = async function(path, type, sha) {
 
   try {
     dgeAdminShowWorking();
-    if (type === 'dir') {
-      const tree = await dgeGithubGetRecursiveTree();
-      const descendants = tree.tree.filter(t => t.type === 'blob' && t.path.startsWith(path + '/'));
-      for (const entry of descendants) {
-        const f = await dgeGithubGetFile(entry.path);
-        await dgeGithubDeleteFile(entry.path, dgeAdminBuildCommitMessage(`Delete ${entry.path}`), f.sha);
-        if (dgeAdminOpenFilePath === entry.path) window.dgeAdminCloseFileEditor();
-      }
-    } else {
-      await dgeGithubDeleteFile(path, dgeAdminBuildCommitMessage(`Delete ${path}`), sha);
-      if (dgeAdminOpenFilePath === path) window.dgeAdminCloseFileEditor();
+    await dgeAdminBatchDelete([{ path, type }]);
+    if (dgeAdminOpenFilePath === path || (type === 'dir' && dgeAdminOpenFilePath && dgeAdminOpenFilePath.startsWith(path + '/'))) {
+      window.dgeAdminCloseFileEditor();
     }
     if (typeof showToast === 'function') showToast('Deleted.');
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
     if (typeof showToast === 'function') showToast('Delete failed: ' + e.message);
     dgeAdminHideWorking();
+  }
+};
+
+// ---------------------------------------------------------------
+// Multi-select + batch delete
+// ---------------------------------------------------------------
+function dgeAdminUpdateSelectionBar() {
+  const bar = document.getElementById('adminSelectionBar');
+  const countEl = document.getElementById('adminSelectionCount');
+  if (!bar) return;
+  const count = dgeAdminSelectedItems.size;
+  bar.style.display = count ? 'flex' : 'none';
+  if (countEl) countEl.textContent = `${count} selected`;
+}
+
+window.dgeAdminToggleSelect = function(path, type, checked) {
+  if (checked) dgeAdminSelectedItems.set(path, type);
+  else dgeAdminSelectedItems.delete(path);
+  dgeAdminUpdateSelectionBar();
+};
+
+window.dgeAdminSelectAllInFolder = function() {
+  document.querySelectorAll('#adminEditorList .admin-file-row').forEach(row => {
+    const path = row.getAttribute('data-path');
+    const type = row.getAttribute('data-type');
+    dgeAdminSelectedItems.set(path, type);
+    const cb = row.querySelector('.admin-select-checkbox');
+    if (cb) cb.checked = true;
+  });
+  dgeAdminUpdateSelectionBar();
+};
+
+window.dgeAdminClearSelection = function() {
+  dgeAdminSelectedItems.clear();
+  document.querySelectorAll('#adminEditorList .admin-select-checkbox').forEach(cb => { cb.checked = false; });
+  dgeAdminUpdateSelectionBar();
+};
+
+window.dgeAdminDeleteSelected = async function() {
+  const items = Array.from(dgeAdminSelectedItems.entries()).map(([path, type]) => ({ path, type }));
+  if (!items.length) return;
+  const names = items.map(i => i.path.split('/').pop()).join(', ');
+  if (!confirm(`Delete ${items.length} selected item(s) in one commit?\n${names}\nThis can't be undone from here.`)) return;
+
+  try {
+    dgeAdminShowWorking();
+    const result = await dgeAdminBatchDelete(items);
+    const wasOpenFileAffected = dgeAdminOpenFilePath && items.some(i =>
+      i.path === dgeAdminOpenFilePath || (i.type === 'dir' && dgeAdminOpenFilePath.startsWith(i.path + '/'))
+    );
+    if (wasOpenFileAffected) window.dgeAdminCloseFileEditor();
+    dgeAdminSelectedItems.clear();
+    if (typeof showToast === 'function') showToast(`Deleted ${result.deleted} file(s) across ${items.length} selected item(s) — one commit.`);
+    dgeAdminNavigate(dgeAdminCurrentPath);
+  } catch (e) {
+    dgeAdminHideWorking();
+    if (typeof showToast === 'function') showToast('Batch delete failed: ' + e.message);
   }
 };
 

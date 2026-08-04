@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.33.0">
+<link rel="stylesheet" href="css/main.css?v=4.34.0">
 </head>
 <body>
 
@@ -150,7 +150,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.30 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.34.0 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -553,6 +553,13 @@
         <button class="btn-sm" onclick="window.dgeAdminNewFile()">➕ New File</button>
         <button class="btn-sm" onclick="window.dgeAdminAddImageFromUrl()">🔗 Image URL</button>
         <button class="btn-sm" onclick="window.dgeAdminToggleSort()" id="adminSortBtn">🔤 Sort: Name</button>
+        <button class="btn-sm" onclick="window.dgeAdminSelectAllInFolder()">☑️ Select All</button>
+      </div>
+
+      <div id="adminSelectionBar" style="display:none; align-items:center; gap:8px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px; padding:8px 10px; margin-bottom:10px;">
+        <span id="adminSelectionCount" style="font-size:12px; font-weight:700;">0 selected</span>
+        <button class="btn-sm" style="margin-left:auto;" onclick="window.dgeAdminClearSelection()">Clear</button>
+        <button class="btn-sm" style="color:var(--accent-red);" onclick="window.dgeAdminDeleteSelected()">🗑️ Delete Selected</button>
       </div>
 
       <div id="adminEditorBreadcrumb" style="font-size:11px; color:var(--muted-text); margin-bottom:10px; word-break:break-all;"></div>
@@ -605,32 +612,32 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.33.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.34.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.33.0"></script>
-<script src="js/state.js?v=4.33.0"></script>
-<script src="js/dev.js?v=4.33.0"></script>
-<script src="js/utils.js?v=4.33.0"></script>
-<script src="js/modals.js?v=4.33.0"></script>
-<script src="js/transliteration.js?v=4.33.0"></script>
-<script src="js/audio.js?v=4.33.0"></script>
-<script src="js/filter.js?v=4.33.0"></script>
-<script src="js/search.js?v=4.33.0"></script>
-<script src="js/markers.js?v=4.33.0"></script>
-<script src="js/notes.js?v=4.33.0"></script>
-<script src="js/history.js?v=4.33.0"></script>
-<script src="js/char-palette.js?v=4.33.0"></script>
-<script src="js/snippets.js?v=4.33.0"></script>
-<script src="js/actions.js?v=4.33.0"></script>
-<script src="js/voice.js?v=4.33.0"></script>
-<script src="js/screenshot.js?v=4.33.0"></script>
-<script src="js/ai.js?v=4.33.0"></script>
-<script src="js/render.js?v=4.33.0"></script>
+<script src="js/config.js?v=4.34.0"></script>
+<script src="js/state.js?v=4.34.0"></script>
+<script src="js/dev.js?v=4.34.0"></script>
+<script src="js/utils.js?v=4.34.0"></script>
+<script src="js/modals.js?v=4.34.0"></script>
+<script src="js/transliteration.js?v=4.34.0"></script>
+<script src="js/audio.js?v=4.34.0"></script>
+<script src="js/filter.js?v=4.34.0"></script>
+<script src="js/search.js?v=4.34.0"></script>
+<script src="js/markers.js?v=4.34.0"></script>
+<script src="js/notes.js?v=4.34.0"></script>
+<script src="js/history.js?v=4.34.0"></script>
+<script src="js/char-palette.js?v=4.34.0"></script>
+<script src="js/snippets.js?v=4.34.0"></script>
+<script src="js/actions.js?v=4.34.0"></script>
+<script src="js/voice.js?v=4.34.0"></script>
+<script src="js/screenshot.js?v=4.34.0"></script>
+<script src="js/ai.js?v=4.34.0"></script>
+<script src="js/render.js?v=4.34.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="js/admin-editor.js?v=4.33.0"></script>
-<script src="js/core.js?v=4.33.0"></script>
-<script src="js/library.js?v=4.33.0"></script>
+<script src="js/admin-editor.js?v=4.34.0"></script>
+<script src="js/core.js?v=4.34.0"></script>
+<script src="js/library.js?v=4.34.0"></script>
 
 <script>
   if (typeof console.log === "function") {

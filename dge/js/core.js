@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v2.5 (Library-catalog-driven grantha resolution, ?path= addressing alongside legacy ?code=)';
+window.DGE_VERSIONS['core.js'] = 'v2.6 (Fixed critical regression: ?path=stotras/<code> now resolves to the same stotraCode as legacy ?code=<code>, so the Library browser no longer orphans marks/notes/audio-cache under a different key)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -57,20 +57,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 3. RESOLVE WHICH GRANTHA TO LOAD
-  // Legacy mode (?code=xxx, or no params at all) preserves the EXACT
-  // historical path and stotraCode value — this matters because existing
-  // users already have marks/notes/reading-history/audio-cache keyed off
-  // stotraCode as it's always been computed; changing that for the one
-  // real, already-live text would silently orphan their saved data.
-  // Anything reached via the new ?path= scheme is, for now, necessarily a
-  // brand-new grantha with no prior user data to protect, so it's free to
-  // use the full slug (kept unique across the whole catalog, unlike the
-  // last path segment alone — many granthas share a generic final folder
-  // name like "mula").
-  const legacyMode = !explicitPath;
-  const slug = explicitPath ? explicitPath.replace(/^\/+|\/+$/g, '') : `stotras/${explicitCode || 'pns'}`;
+  // Any single-level "stotras/<code>" address — whether reached via the
+  // legacy ?code=<code> param, no params at all (defaults to pns), OR the
+  // newer ?path=stotras/<code> form — has ALWAYS used just <code> as its
+  // storage/cache namespace; that convention predates the library catalog
+  // entirely. This must hold regardless of how the page was reached: the
+  // Library browser itself links to PNS via ?path=stotras/pns, and if
+  // that used a different namespace it would silently orphan existing
+  // users' marks/notes/audio-cache under a key they'd never see again —
+  // not actual data loss (nothing is deleted), but functionally
+  // indistinguishable from it. Only deeper category paths (vedas/...,
+  // puranas/..., sarvamoola/..., etc.) use the full slug as the
+  // namespace, since collision risk there is real (many granthas share a
+  // generic last folder segment like "mula").
+  const slug = explicitPath
+    ? explicitPath.replace(/^\/+|\/+$/g, '')
+    : `stotras/${explicitCode || 'pns'}`;
+  const stotrasDirectChild = slug.match(/^stotras\/([^/]+)$/);
 
-  window.stotraCode = legacyMode ? (explicitCode || 'pns') : slug.replace(/\//g, '__');
+  window.stotraCode = stotrasDirectChild ? stotrasDirectChild[1] : slug.replace(/\//g, '__');
   window.currentGranthaSlug = slug;
   window.jsonFileName = `data/${slug}/data.json`; // overwritten below if the catalog has a more specific real path
   window.AUDIO_CACHE_NAME = `narasimha-audio-${window.stotraCode}`;
