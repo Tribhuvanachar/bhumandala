@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v2.6 (Fixed critical regression: ?path=stotras/<code> now resolves to the same stotraCode as legacy ?code=<code>, so the Library browser no longer orphans marks/notes/audio-cache under a different key)';
+window.DGE_VERSIONS['core.js'] = 'v2.7 (Restores single-view reading mode + last-read position on load)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -210,4 +210,12 @@ function restorePrefs() {
 
   const savedScript = localStorage.getItem('app_script');
   if (savedScript && typeof applyScript === 'function') applyScript(savedScript);
+
+  const savedViewMode = localStorage.getItem('app_viewMode');
+  window.viewMode = (savedViewMode === 'single') ? 'single' : 'list';
+  if (window.viewMode === 'single') {
+    const lastVerseKey = typeof nsKey === 'function' ? nsKey('lastVerse') : null;
+    const savedLastVerse = lastVerseKey ? parseInt(localStorage.getItem(lastVerseKey), 10) : NaN;
+    window.currentReadingId = !isNaN(savedLastVerse) ? savedLastVerse : 1;
+  }
 }

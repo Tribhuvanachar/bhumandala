@@ -5,7 +5,7 @@
 // recently-read verses.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['history.js'] = 'v1.1 (Quick-jump TOC added)';
+window.DGE_VERSIONS['history.js'] = 'v1.2 (TOC jump respects single-view reading mode)';
 
 const DGE_HISTORY_MAX_ENTRIES = 100;
 
@@ -110,5 +110,9 @@ window.openTocModal = function() {
 
 window.jumpToTocEntry = function(id) {
   if (typeof closeModal === 'function') closeModal('tocModal');
-  if (typeof playShloka === 'function') playShloka(id);
+  if (window.viewMode === 'single' && typeof window.dgeSetSingleViewId === 'function') {
+    window.dgeSetSingleViewId(id);
+  } else if (typeof playShloka === 'function') {
+    playShloka(id);
+  }
 };

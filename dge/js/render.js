@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v3.5 (Search-scope custom popup, shloka scroll-margin fix)';
+window.DGE_VERSIONS['render.js'] = 'v3.6 (Single-shloka "one at a time" view mode)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -153,8 +153,11 @@ function renderList() {
   window.searchMatches = [];
   window.currentMatchIdx = -1;
 
+  const singleMode = window.viewMode === 'single';
+
   for (let i = 1; i <= total; i++) {
     if (!fIds.includes(i)) continue;
+    if (singleMode && i !== window.currentReadingId) continue;
     const shloka = stotraData.shlokas[i];
     if (!shloka) continue;
 
@@ -277,7 +280,67 @@ function renderList() {
   } else if (navContainer) {
     navContainer.style.display = 'none';
   }
+
+  dgeUpdateSingleViewNav(fIds);
 }
+
+// ---------------------------------------------------------------
+// Single-shloka "one at a time" view mode — a separate reading position
+// (currentReadingId) from the audio-playback position (activeId), so
+// paging through verses to READ never jumps the currently playing audio
+// around. Tapping a shloka's text still starts its audio as always
+// (playShloka is unchanged); this only controls which card(s) renderList
+// actually builds.
+// ---------------------------------------------------------------
+function dgeUpdateSingleViewNav(fIds) {
+  const nav = document.getElementById('singleViewNav');
+  if (!nav) return;
+  if (window.viewMode !== 'single' || !stotraData) { nav.style.display = 'none'; return; }
+
+  const ids = fIds || (typeof getFilteredIds === 'function' ? getFilteredIds() : Object.keys(stotraData.shlokas).map(Number));
+  const idx = ids.indexOf(window.currentReadingId);
+  nav.style.display = 'flex';
+  nav.innerHTML = `
+    <button class="btn-sm" onclick="window.dgeSingleViewStep(-1)" ${idx <= 0 ? 'disabled' : ''}>⟨ Prev</button>
+    <span style="font-weight:700; font-size:13px;">${idx + 1} / ${ids.length}</span>
+    <button class="btn-sm" onclick="window.dgeSingleViewStep(1)" ${(idx === -1 || idx >= ids.length - 1) ? 'disabled' : ''}>Next ⟩</button>
+  `;
+}
+
+window.dgeSetViewMode = function(mode) {
+  window.viewMode = (mode === 'single') ? 'single' : 'list';
+  localStorage.setItem('app_viewMode', window.viewMode);
+  document.querySelectorAll('#viewModePopup .pop-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.viewmode === window.viewMode);
+  });
+  if (window.viewMode === 'single' && !window.currentReadingId) {
+    const fIds = typeof getFilteredIds === 'function' ? getFilteredIds() : (stotraData ? Object.keys(stotraData.shlokas).map(Number) : []);
+    window.currentReadingId = (typeof activeId !== 'undefined' && activeId) || fIds[0] || 1;
+  }
+  if (typeof renderList === 'function') renderList();
+};
+
+window.dgeSingleViewStep = function(direction) {
+  if (!stotraData) return;
+  const fIds = typeof getFilteredIds === 'function' ? getFilteredIds() : Object.keys(stotraData.shlokas).map(Number);
+  const idx = fIds.indexOf(window.currentReadingId);
+  const newIdx = idx + direction;
+  if (newIdx < 0 || newIdx >= fIds.length) return;
+  window.currentReadingId = fIds[newIdx];
+  renderList();
+  const listEl = document.getElementById('shlokaList');
+  if (listEl) listEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+// Used by TOC quick-jump: in single-view mode, jumping shows/reads that
+// verse without forcing audio playback (list mode's jump-and-play
+// behaviour via playShloka is untouched).
+window.dgeSetSingleViewId = function(id) {
+  window.currentReadingId = id;
+  renderList();
+  const listEl = document.getElementById('shlokaList');
+  if (listEl) listEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
 function navSearch(direction) {
   if (!window.searchMatches || window.searchMatches.length === 0) return;
