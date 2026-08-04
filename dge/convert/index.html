@@ -6,13 +6,13 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>DGE Convert v0.5.0</title>
-<link rel="stylesheet" href="style.css?v=0.5.0">
+<title>DGE Convert v0.6.0</title>
+<link rel="stylesheet" href="style.css?v=0.6.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
-<div>Version: <b id="versionDisplay">0.5.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.6.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF → page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -56,6 +56,35 @@
 </fieldset>
 
 <fieldset>
+  <legend>4. Schema Map &amp; Push to GitHub</legend>
+  <label for="githubTokenInput">GitHub Personal Access Token</label>
+  <input type="password" id="githubTokenInput" autocomplete="off">
+  <p class="hint">Shares the same token as the main app's Admin panel on this device — paste once, works in both. Scope it to only this repo.</p>
+
+  <label for="granthaTitleInput">Grantha title</label>
+  <input type="text" id="granthaTitleInput" placeholder="e.g. श्रीमद्भागवतम् — स्कन्ध १">
+  <label for="granthaAuthorInput">Author</label>
+  <input type="text" id="granthaAuthorInput" placeholder="e.g. Vyasa, with commentary by...">
+
+  <label for="targetSlugSelect">Target grantha (from the library catalog)</label>
+  <select id="targetSlugSelect"><option value="">Loading catalog…</option></select>
+  <input type="text" id="targetSlugCustom" placeholder="e.g. puranas/bhagavata_purana/skandha_01" style="display:none;">
+  <p class="hint">Only NOT-yet-populated catalog entries are listed — pushing to an already-populated one will ask you to confirm first. Choose "Other / new path" to add a grantha not yet in the catalog.</p>
+
+  <label for="commentaryKeyInput">Commentary key (short, no spaces)</label>
+  <input type="text" id="commentaryKeyInput" placeholder="e.g. tatparya">
+  <label for="commentaryLabelInput">Commentary display name</label>
+  <input type="text" id="commentaryLabelInput" placeholder="e.g. तात्पर्यम्">
+
+  <button id="buildSchemaBtn">Build Schema Preview</button>
+  <p class="hint">Builds an editable preview below — nothing is pushed yet. Fix anything before continuing.</p>
+  <div id="schemaPreviewArea"></div>
+
+  <button id="pushToGithubBtn">Push to GitHub</button>
+  <div id="pushStatusText" class="progress-text"></div>
+</fieldset>
+
+<fieldset>
   <legend>Danger zone</legend>
   <button id="clearProgressBtn">Clear saved progress for this file</button>
   <p class="hint">Wipes saved OCR + proofread progress for the currently loaded file only (other files' saved progress is untouched). Use this if you've replaced the PDF with a corrected version under the same name.</p>
@@ -75,8 +104,8 @@
 </fieldset>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.5.0';
-  window.DGE_CONVERT_BUILD = '2026-08-05';
+  window.DGE_CONVERT_VERSION = '0.6.0';
+  window.DGE_CONVERT_BUILD = '2026-08-06';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -86,12 +115,14 @@
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   }
 </script>
-<script src="utils.js?v=0.5.0"></script>
-<script src="idb.js?v=0.5.0"></script>
-<script src="pdf.js?v=0.5.0"></script>
-<script src="vision.js?v=0.5.0"></script>
-<script src="gemini.js?v=0.5.0"></script>
-<script src="renderer.js?v=0.5.0"></script>
-<script src="app.js?v=0.5.0"></script>
+<script src="utils.js?v=0.6.0"></script>
+<script src="idb.js?v=0.6.0"></script>
+<script src="pdf.js?v=0.6.0"></script>
+<script src="vision.js?v=0.6.0"></script>
+<script src="gemini.js?v=0.6.0"></script>
+<script src="github.js?v=0.6.0"></script>
+<script src="mapper.js?v=0.6.0"></script>
+<script src="renderer.js?v=0.6.0"></script>
+<script src="app.js?v=0.6.0"></script>
 </body>
 </html>

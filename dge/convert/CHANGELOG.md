@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.0 — 2026-08-06
+- **Schema Mapper + Push to GitHub — closes the pipeline.** New step 4: maps Gemini's generic proofread output into the REAL DGE grantha schema (matching `dge/data/stotras/pns/data.json`'s shape exactly), shown as an EDITABLE preview (every shloka's Sanskrit and commentary in its own textarea) before anything is pushed. "Push to GitHub" commits the new/updated grantha `data.json` AND the matching `data/library.json` catalog entry (title + `populated: true`) together in ONE atomic commit.
+- New `github.js` (`window.DGE.GitHub`) — a Convert-scoped port of the main app's batch diff-commit technique (blob/tree/commit/ref via the Git Data API), reusing the same approach rather than reimplementing something different. Shares the same `github_admin_pat` localStorage key as the main app's Admin panel — paste the token once, it works in both places.
+- New `mapper.js` (`window.DGE.Mapper`) — deliberately a plain deterministic function, not another AI call: assembling the exact nested schema needs admin-supplied context (commentary key naming, title, author) that Gemini has no way to know, and a rigid schema is exactly where letting an LLM free-form is riskiest.
+- Target grantha is chosen from the live `data/library.json` catalog (only NOT-yet-populated entries listed by default, to avoid accidental overwrites — pushing to an already-populated one requires an explicit confirmation), or a free-typed new path for anything not in the catalog yet.
+
 ## v0.5.0 — 2026-08-05
 - **Root-caused a real failure:** a 31-page PDF's single-request proofread call threw "Could not parse JSON from the model's response" — confirmed exactly the risk flagged in v0.4.0's known limitations. Fixed at the source, two ways:
   1. **Chunked proofreading.** Gemini is now called once per chunk of pages (default 8, adjustable in the UI) instead of once for the entire book. Each chunk's result is saved to IndexedDB the moment it completes, so re-running Proofread — even after closing the tab — automatically skips finished chunks and resumes from the first unfinished one. A failure on one chunk no longer loses any earlier chunks' work.

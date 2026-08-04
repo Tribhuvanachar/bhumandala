@@ -21,3 +21,6 @@ button:disabled { opacity: 0.5; cursor: default; }
 .preview-raw-page { border-bottom: 1px solid #ddd; padding: 10px 0; }
 .preview-raw-text { white-space: pre-wrap; font-size: 13px; margin-top: 4px; }
 #previewLabel { margin: 4px 0 8px; }
+select { width: 100%; box-sizing: border-box; padding: 8px; font-size: 14px; margin-bottom: 6px; }
+.schema-row { border-bottom: 1px solid #ddd; padding: 10px 0; }
+.schema-sa-input, .schema-commentary-input { width: 100%; box-sizing: border-box; padding: 6px; font-size: 13px; margin-bottom: 6px; font-family: inherit; }

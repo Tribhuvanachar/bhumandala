@@ -7,6 +7,8 @@ window.DGE.App = (function () {
   const VisionMod = () => window.DGE.Vision;
   const GeminiMod = () => window.DGE.Gemini;
   const RendererMod = () => window.DGE.Renderer;
+  const GitHubMod = () => window.DGE.GitHub;
+  const MapperMod = () => window.DGE.Mapper;
 
   const DEFAULT_CHUNK_SIZE = 8;
 
@@ -15,6 +17,8 @@ window.DGE.App = (function () {
   let currentFileKey = null;
   let cancelRequested = false;
   let proofreadCancelRequested = false;
+  let currentMappedJson = null;
+  let libraryCatalog = null; // fetched once, cached for the session
 
   function $(id) { return document.getElementById(id); }
 
@@ -101,9 +105,141 @@ window.DGE.App = (function () {
       U().downloadJson(finalJson, 'final.json');
     });
 
+    const githubTokenEl = $('githubTokenInput');
+    if (githubTokenEl) {
+      githubTokenEl.value = GitHubMod().getToken();
+      githubTokenEl.addEventListener('input', () => GitHubMod().setToken(githubTokenEl.value));
+    }
+    const targetSlugSelect = $('targetSlugSelect');
+    if (targetSlugSelect) {
+      targetSlugSelect.addEventListener('change', () => {
+        $('targetSlugCustom').style.display = (targetSlugSelect.value === '__other__') ? 'block' : 'none';
+      });
+    }
+    loadLibraryCatalog();
+
+    $('buildSchemaBtn').addEventListener('click', buildSchemaPreview);
+    $('pushToGithubBtn').addEventListener('click', pushToGithub);
+
     console.log('DGE Convert');
     console.log('Version', window.DGE_CONVERT_VERSION || '(unknown)');
     console.log('Build', window.DGE_CONVERT_BUILD || '(unknown)');
+  }
+
+  // Populates the target-grantha dropdown from the main app's own
+  // data/library.json (fetched relative to this page, one level up) —
+  // deliberately lists only NOT-yet-populated entries as the default,
+  // safe targets, plus an "Other / new path" escape hatch for a grantha
+  // not in the catalog yet.
+  async function loadLibraryCatalog() {
+    const select = $('targetSlugSelect');
+    try {
+      const res = await fetch('../data/library.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      libraryCatalog = await res.json();
+      const granthas = (libraryCatalog && libraryCatalog.granthas) || [];
+      const unpopulated = granthas.filter(g => !g.populated);
+      let html = unpopulated.map(g => {
+        const slug = g.path.replace(/^dge\//, '').replace(/^data\//, '').replace(/\/data\.json$/, '');
+        return `<option value="${slug}">${slug}</option>`;
+      }).join('');
+      html += `<option value="__other__">Other / new path…</option>`;
+      select.innerHTML = html;
+    } catch (e) {
+      log('Could not load the library catalog: ' + U().formatError(e) + ' — you can still type a path manually.');
+      select.innerHTML = `<option value="__other__">Other / new path…</option>`;
+      select.value = '__other__';
+      $('targetSlugCustom').style.display = 'block';
+    }
+  }
+
+  function getTargetSlug() {
+    const select = $('targetSlugSelect');
+    if (select && select.value && select.value !== '__other__') return select.value;
+    const custom = $('targetSlugCustom');
+    return custom ? custom.value.trim().replace(/^\/+|\/+$/g, '') : '';
+  }
+
+  function buildSchemaPreview() {
+    clearError();
+    if (!finalJson) return setError('No proofread JSON yet — run Proofread first.');
+    const slug = getTargetSlug();
+    if (!slug) return setError('Choose or type a target grantha path first.');
+
+    const profile = {
+      title: $('granthaTitleInput').value.trim(),
+      author: $('granthaAuthorInput').value.trim(),
+      slug: slug,
+      commentaryKey: $('commentaryKeyInput').value.trim(),
+      commentaryLabel: $('commentaryLabelInput').value.trim()
+    };
+    if (!profile.title) return setError('Enter a grantha title first — it\'s needed for the schema.');
+
+    currentMappedJson = MapperMod().buildGranthaJson(finalJson, profile);
+    RendererMod().renderSchemaMapEditable(currentMappedJson, $('schemaPreviewArea'));
+    log(`Schema preview built for "${slug}" — ${Object.keys(currentMappedJson.shlokas).length} shloka(s). Review and edit below before pushing.`);
+  }
+
+  async function pushToGithub() {
+    clearError();
+    if (!currentMappedJson) return setError('Build the schema preview first.');
+    const slug = getTargetSlug();
+    if (!slug) return setError('Choose or type a target grantha path first.');
+    if (!GitHubMod().getToken()) return setError('Paste your GitHub token above first.');
+
+    const commentaryKey = $('commentaryKeyInput').value.trim();
+    const editedShlokas = RendererMod().collectEditedShlokas($('schemaPreviewArea'), commentaryKey);
+
+    const granthaJson = {
+      metadata: Object.assign({}, currentMappedJson.metadata, { totalShlokas: Object.keys(editedShlokas).length }),
+      shlokas: editedShlokas
+    };
+    const granthaPath = `dge/data/${slug}/data.json`;
+
+    $('pushStatusText').textContent = 'Checking library catalog…';
+    $('pushToGithubBtn').disabled = true;
+
+    try {
+      // Fetch library.json fresh right before pushing — not relying on
+      // whatever was cached at page load, in case it changed meanwhile.
+      const libText = await GitHubMod().getFileText('dge/data/library.json');
+      const lib = JSON.parse(libText);
+      const catalogPath = `dge/${granthaPath.replace(/^dge\//, '')}`;
+      let entry = lib.granthas.find(g => g.path === catalogPath);
+
+      if (entry && entry.populated) {
+        const proceed = confirm(`"${slug}" already has content on GitHub. Push anyway and overwrite it?`);
+        if (!proceed) { $('pushStatusText').textContent = 'Cancelled.'; return; }
+      }
+
+      if (entry) {
+        entry.title = granthaJson.metadata.title;
+        entry.populated = true;
+      } else {
+        lib.granthas.push({ path: catalogPath, title: granthaJson.metadata.title, populated: true });
+      }
+
+      $('pushStatusText').textContent = 'Pushing to GitHub…';
+      const result = await GitHubMod().commitFiles(
+        [
+          { path: granthaPath, text: JSON.stringify(granthaJson, null, 2) },
+          { path: 'dge/data/library.json', text: JSON.stringify(lib, null, 2) }
+        ],
+        `Add/update grantha "${slug}" via Convert — ${Object.keys(editedShlokas).length} shloka(s)`
+      );
+
+      if (result.uploaded === 0) {
+        $('pushStatusText').textContent = 'Nothing to push — content already matched what\'s on GitHub.';
+      } else {
+        $('pushStatusText').textContent = `Pushed — ${result.uploaded} file(s) committed (${granthaPath} + library.json catalog entry).`;
+      }
+      log($('pushStatusText').textContent);
+    } catch (e) {
+      setError('Push failed: ' + U().formatError(e));
+      $('pushStatusText').textContent = '';
+    } finally {
+      $('pushToGithubBtn').disabled = false;
+    }
   }
 
   async function onFileSelected(e) {
