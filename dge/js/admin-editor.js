@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.9 (Commit messages with name+timestamp, per-file download, upload zip with auto-extract)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.10 (Batch diff-commit: Upload/Upload Folder/Upload Zip now skip unchanged files and land as one commit via the Git Data API, instead of one Contents-API PUT+commit per file)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -128,6 +128,52 @@ function dgeGithubDeleteFile(filePath, message, sha) {
     method: 'DELETE',
     headers: { ...dgeGithubHeaders(), 'Content-Type': 'application/json' },
     body: JSON.stringify({ message, sha, branch })
+  });
+}
+
+function dgeGithubGetBranchHead() {
+  const { owner, repo, branch } = GITHUB_REPO_CONFIG;
+  const url = `${GH_API}/repos/${owner}/${repo}/branches/${branch}?_=${Date.now()}`;
+  return dgeGithubRequest(url, { headers: dgeGithubHeaders(), cache: 'no-store' });
+}
+
+function dgeGithubCreateBlob(base64Content) {
+  const { owner, repo } = GITHUB_REPO_CONFIG;
+  const url = `${GH_API}/repos/${owner}/${repo}/git/blobs`;
+  return dgeGithubRequest(url, {
+    method: 'POST',
+    headers: { ...dgeGithubHeaders(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ content: base64Content, encoding: 'base64' })
+  });
+}
+
+function dgeGithubCreateTree(baseTreeSha, treeEntries) {
+  const { owner, repo } = GITHUB_REPO_CONFIG;
+  const url = `${GH_API}/repos/${owner}/${repo}/git/trees`;
+  return dgeGithubRequest(url, {
+    method: 'POST',
+    headers: { ...dgeGithubHeaders(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ base_tree: baseTreeSha, tree: treeEntries })
+  });
+}
+
+function dgeGithubCreateCommit(message, treeSha, parentSha) {
+  const { owner, repo } = GITHUB_REPO_CONFIG;
+  const url = `${GH_API}/repos/${owner}/${repo}/git/commits`;
+  return dgeGithubRequest(url, {
+    method: 'POST',
+    headers: { ...dgeGithubHeaders(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, tree: treeSha, parents: [parentSha] })
+  });
+}
+
+function dgeGithubUpdateRef(newCommitSha) {
+  const { owner, repo, branch } = GITHUB_REPO_CONFIG;
+  const url = `${GH_API}/repos/${owner}/${repo}/git/refs/heads/${branch}`;
+  return dgeGithubRequest(url, {
+    method: 'PATCH',
+    headers: { ...dgeGithubHeaders(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sha: newCommitSha })
   });
 }
 
@@ -385,19 +431,28 @@ window.dgeAdminSaveFile = async function() {
 // ---------------------------------------------------------------
 window.dgeAdminUploadFiles = async function(fileList) {
   if (!fileList || !fileList.length) return;
-  if (typeof showToast === 'function') showToast(`Uploading ${fileList.length} file(s)…`);
+  if (typeof showToast === 'function') showToast(`Preparing ${fileList.length} file(s)…`);
   dgeAdminShowWorking();
 
-  for (const file of fileList) {
-    try {
-      const base64 = await dgeReadFileAsBase64(file);
+  try {
+    const fileEntries = [];
+    for (const file of fileList) {
+      const bytes = await dgeReadFileAsUint8Array(file);
       const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + file.name;
-      await dgeAdminUpsertFile(targetPath, base64, dgeAdminBuildCommitMessage(`Upload ${file.name}`));
-    } catch (e) {
-      if (typeof showToast === 'function') showToast(`Failed to upload ${file.name}: ${e.message}`);
+      fileEntries.push({ path: targetPath, bytes });
     }
+    const label = fileEntries.length === 1 ? `Upload ${fileEntries[0].path.split('/').pop()}` : `Upload ${fileEntries.length} file(s)`;
+    const result = await dgeAdminBatchCommit(fileEntries, dgeAdminBuildCommitMessage(label));
+    if (result.uploaded === 0) {
+      if (typeof showToast === 'function') showToast(`Nothing to commit — already matched GitHub.`);
+    } else {
+      if (typeof showToast === 'function') showToast(`Committed ${result.uploaded} changed file(s) in one commit${result.unchanged ? ` (${result.unchanged} unchanged, skipped)` : ''}.`);
+    }
+  } catch (e) {
+    if (typeof showToast === 'function') showToast('Upload failed: ' + e.message);
+  } finally {
+    dgeAdminHideWorking();
   }
-  if (typeof showToast === 'function') showToast('Upload complete.');
   dgeAdminNavigate(dgeAdminCurrentPath);
 };
 
@@ -410,34 +465,43 @@ window.dgeAdminUploadFiles = async function(fileList) {
 window.dgeAdminUploadFolder = async function(fileList) {
   if (!fileList || !fileList.length) return;
   const topFolderName = (fileList[0].webkitRelativePath || '').split('/')[0] || 'this folder';
-  if (typeof showToast === 'function') showToast(`Creating "${topFolderName}" here with all ${fileList.length} of its file(s)…`);
+  if (typeof showToast === 'function') showToast(`Preparing "${topFolderName}" (${fileList.length} file(s))…`);
   dgeAdminShowWorking();
 
-  let ok = 0, failed = 0;
-  for (const file of fileList) {
-    try {
+  try {
+    const fileEntries = [];
+    for (const file of fileList) {
       // webkitRelativePath includes the selected folder's own name as its
       // first segment (e.g. "myfolder/sub/file.js") — keep it as-is so
       // the folder itself is recreated here, not just its contents.
       const rel = file.webkitRelativePath || file.name;
-      const base64 = await dgeReadFileAsBase64(file);
+      const bytes = await dgeReadFileAsUint8Array(file);
       const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + rel;
-      await dgeAdminUpsertFile(targetPath, base64, dgeAdminBuildCommitMessage(`Upload (folder) ${targetPath}`));
-      ok++;
-    } catch (e) {
-      failed++;
-      console.warn(`Failed to upload ${file.webkitRelativePath || file.name}:`, e.message);
+      fileEntries.push({ path: targetPath, bytes });
     }
+    const result = await dgeAdminBatchCommit(
+      fileEntries,
+      dgeAdminBuildCommitMessage(`Upload (folder) ${topFolderName} — ${fileEntries.length} file(s)`)
+    );
+    if (result.uploaded === 0) {
+      if (typeof showToast === 'function') showToast(`Nothing to commit — all ${result.unchanged} file(s) already matched GitHub.`);
+    } else {
+      if (typeof showToast === 'function') showToast(`Committed ${result.uploaded} changed file(s) in one commit (${result.unchanged} unchanged, skipped).`);
+    }
+  } catch (e) {
+    if (typeof showToast === 'function') showToast('Folder upload failed: ' + e.message);
+  } finally {
+    dgeAdminHideWorking();
   }
-  if (typeof showToast === 'function') showToast(`Folder upload done: ${ok} succeeded${failed ? `, ${failed} failed (see console)` : ''}.`);
   dgeAdminNavigate(dgeAdminCurrentPath);
 };
 
 // Extracts a .zip file entirely client-side (JSZip — already loaded for
-// the folder-download feature) and pushes every file it contains to
-// GitHub, preserving the zip's own internal folder structure relative to
-// the current admin folder. So a zip containing "dge/convert/app.js"
-// lands at "<current path>/dge/convert/app.js" — stand at the repo root
+// the folder-download feature) and pushes only the files that actually
+// changed to GitHub, all as ONE commit — see dgeAdminBatchCommit above.
+// Preserves the zip's own internal folder structure relative to the
+// current admin folder, so a zip containing "dge/convert/app.js" lands
+// at "<current path>/dge/convert/app.js" — stand at the repo root
 // before uploading a zip shaped like the ones this app generates.
 window.dgeAdminUploadZip = async function(file) {
   if (!file) return;
@@ -454,21 +518,23 @@ window.dgeAdminUploadZip = async function(file) {
     const entries = Object.values(zip.files).filter(f => !f.dir);
     if (!entries.length) throw new Error('No files found inside this zip.');
 
-    let ok = 0, failed = 0;
+    const fileEntries = [];
     for (const entry of entries) {
-      try {
-        const base64 = await entry.async('base64');
-        const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + entry.name;
-        await dgeAdminUpsertFile(targetPath, base64, dgeAdminBuildCommitMessage(`Upload (from zip ${file.name}) ${targetPath}`));
-        ok++;
-        if (typeof showToast === 'function' && (ok + failed) % 5 === 0) showToast(`Uploading… ${ok + failed}/${entries.length}`);
-      } catch (e) {
-        failed++;
-        console.warn(`Failed to upload ${entry.name} from zip:`, e.message);
-      }
+      const bytes = await entry.async('uint8array');
+      const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + entry.name;
+      fileEntries.push({ path: targetPath, bytes });
     }
 
-    if (typeof showToast === 'function') showToast(`Zip upload done: ${ok} succeeded${failed ? `, ${failed} failed (see console)` : ''}, matching the zip's own folder structure.`);
+    const result = await dgeAdminBatchCommit(
+      fileEntries,
+      dgeAdminBuildCommitMessage(`Sync from zip "${file.name}" — ${fileEntries.length} file(s) in zip`)
+    );
+
+    if (result.uploaded === 0) {
+      if (typeof showToast === 'function') showToast(`Nothing to commit — all ${result.unchanged} file(s) in the zip already matched GitHub.`);
+    } else {
+      if (typeof showToast === 'function') showToast(`Committed ${result.uploaded} changed file(s) in one commit (${result.unchanged} unchanged, skipped).`);
+    }
     dgeAdminNavigate(dgeAdminCurrentPath);
   } catch (e) {
     if (typeof showToast === 'function') showToast('Zip upload failed: ' + e.message);
@@ -495,18 +561,93 @@ async function dgeAdminUpsertFile(targetPath, base64, message) {
   await dgeGithubPutFile(targetPath, base64, message, sha);
 }
 
-function dgeReadFileAsBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      // dataURL looks like "data:*/*;base64,AAAA..." — strip the prefix
-      const result = reader.result;
-      const base64 = result.substring(result.indexOf(',') + 1);
-      resolve(base64);
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
+// Git's blob sha is sha1("blob " + byteLength + "\0" + content) — computing
+// this locally (Web Crypto, no library) lets us know whether a file has
+// actually changed WITHOUT fetching or re-uploading it, just by comparing
+// against the sha already sitting in the repo's tree listing.
+async function dgeComputeGitBlobSha(bytes) {
+  const header = new TextEncoder().encode(`blob ${bytes.length}\0`);
+  const combined = new Uint8Array(header.length + bytes.length);
+  combined.set(header, 0);
+  combined.set(bytes, header.length);
+  const digest = await crypto.subtle.digest('SHA-1', combined);
+  return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function dgeUint8ToBase64(bytes) {
+  let binary = '';
+  const chunkSize = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+  }
+  return btoa(binary);
+}
+
+async function dgeReadFileAsUint8Array(file) {
+  const buf = await file.arrayBuffer();
+  return new Uint8Array(buf);
+}
+
+// ---------------------------------------------------------------
+// Batch diff-commit — the core of "sync only what changed, in one
+// commit" behaviour. Given a list of { path, bytes } entries:
+//   1. Reads the current branch head + its recursive tree ONCE (not
+//      per file).
+//   2. Computes each entry's git blob sha locally and skips any file
+//      that's byte-identical to what's already on GitHub — no API
+//      call at all for unchanged files.
+//   3. For files that are new or different, creates blobs, builds one
+//      new tree on top of the existing base tree (untouched files are
+//      inherited automatically via base_tree — they don't need to be
+//      listed), creates ONE commit, and moves the branch ref forward.
+// This is atomic: either every changed file lands together in that one
+// commit, or (if something fails before the ref update) nothing on
+// GitHub changes at all — unlike the old per-file loop, where a failure
+// partway through left some files updated and others not.
+// ---------------------------------------------------------------
+async function dgeAdminBatchCommit(fileEntries, commitMessage) {
+  if (!fileEntries.length) return { uploaded: 0, unchanged: 0 };
+
+  const head = await dgeGithubGetBranchHead();
+  const baseCommitSha = head.commit.sha;
+  const baseTreeSha = head.commit.commit.tree.sha;
+
+  let existingTree = [];
+  try {
+    const treeData = await dgeGithubGetRecursiveTree();
+    existingTree = treeData.tree || [];
+  } catch (e) {
+    // Empty/new repo or branch — fine, everything is treated as new.
+  }
+  const existingShaByPath = {};
+  existingTree.forEach(entry => {
+    if (entry.type === 'blob') existingShaByPath[entry.path] = entry.sha;
   });
+
+  const changed = [];
+  let unchanged = 0;
+  for (const f of fileEntries) {
+    const localSha = await dgeComputeGitBlobSha(f.bytes);
+    if (existingShaByPath[f.path] === localSha) {
+      unchanged++;
+    } else {
+      changed.push(f);
+    }
+  }
+
+  if (!changed.length) return { uploaded: 0, unchanged };
+
+  const treeEntries = [];
+  for (const f of changed) {
+    const blob = await dgeGithubCreateBlob(dgeUint8ToBase64(f.bytes));
+    treeEntries.push({ path: f.path, mode: '100644', type: 'blob', sha: blob.sha });
+  }
+
+  const newTree = await dgeGithubCreateTree(baseTreeSha, treeEntries);
+  const newCommit = await dgeGithubCreateCommit(commitMessage, newTree.sha, baseCommitSha);
+  await dgeGithubUpdateRef(newCommit.sha);
+
+  return { uploaded: changed.length, unchanged };
 }
 
 // ---------------------------------------------------------------
