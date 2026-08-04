@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>DGE Convert v0.4.0</title>
+<link rel="stylesheet" href="style.css?v=0.4.0">
+</head>
+<body>
+
+<h2>DGE Convert</h2>
+<div>Version: <b id="versionDisplay">0.4.0</b> · Build: <span id="buildDisplay"></span></div>
+<p class="hint">PDF → page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
+
+<div id="errorBox" class="error-box"></div>
+
+<fieldset>
+  <legend>API Keys</legend>
+  <label for="visionKey">Vision API Key</label>
+  <input type="password" id="visionKey" autocomplete="off">
+  <label for="geminiKey">Gemini API Key</label>
+  <input type="password" id="geminiKey" autocomplete="off">
+  <p class="hint">Stored only in this browser's local storage.</p>
+</fieldset>
+
+<fieldset>
+  <legend>1. Upload PDF</legend>
+  <input id="pdfFile" type="file" accept="application/pdf,.pdf">
+  <div id="pageCountDisplay" class="hint"></div>
+</fieldset>
+
+<fieldset>
+  <legend>2. Run OCR</legend>
+  <div id="resumeBar" class="resume-bar" style="display:none;">
+    <span id="resumeText"></span>
+    <button id="resumeBtn">Resume</button>
+  </div>
+  <button id="runOcrBtn">Run OCR (from page 1)</button>
+  <button id="cancelBtn">Cancel</button>
+  <div id="progressText" class="progress-text"></div>
+  <button id="downloadOcrBtn">Download ocr.json</button>
+</fieldset>
+
+<fieldset>
+  <legend>3. Proofread</legend>
+  <button id="proofreadBtn">Proofread with Gemini</button>
+  <button id="downloadFinalBtn">Download final.json</button>
+</fieldset>
+
+<fieldset>
+  <legend>Preview</legend>
+  <div id="previewArea"></div>
+</fieldset>
+
+<fieldset>
+  <legend>Log</legend>
+  <pre id="logArea"></pre>
+</fieldset>
+
+<script>
+  window.DGE_CONVERT_VERSION = '0.4.0';
+  window.DGE_CONVERT_BUILD = '2026-08-04';
+  document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  // PDF.js needs its worker script pointed at explicitly when loaded via CDN.
+  if (typeof pdfjsLib !== 'undefined') {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+</script>
+<script src="utils.js?v=0.4.0"></script>
+<script src="pdf.js?v=0.4.0"></script>
+<script src="vision.js?v=0.4.0"></script>
+<script src="gemini.js?v=0.4.0"></script>
+<script src="renderer.js?v=0.4.0"></script>
+<script src="app.js?v=0.4.0"></script>
+</body>
+</html>
