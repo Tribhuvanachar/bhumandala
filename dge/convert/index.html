@@ -6,13 +6,13 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>DGE Convert v0.4.1</title>
-<link rel="stylesheet" href="style.css?v=0.4.1">
+<title>DGE Convert v0.5.0</title>
+<link rel="stylesheet" href="style.css?v=0.5.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
-<div>Version: <b id="versionDisplay">0.4.1</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.5.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF → page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -46,8 +46,19 @@
 
 <fieldset>
   <legend>3. Proofread</legend>
+  <label for="chunkSizeInput">Pages per Gemini request</label>
+  <input type="text" id="chunkSizeInput" inputmode="numeric" style="width:80px;">
+  <p class="hint">Large books are sent to Gemini in chunks of this many pages, not all at once — smaller chunks are less likely to hit an output limit or produce malformed JSON. Default 8; lower it if a chunk keeps failing.</p>
+  <div id="proofreadResumeNote" class="hint"></div>
   <button id="proofreadBtn">Proofread with Gemini</button>
+  <button id="proofreadCancelBtn" style="display:none;">Cancel</button>
   <button id="downloadFinalBtn">Download final.json</button>
+</fieldset>
+
+<fieldset>
+  <legend>Danger zone</legend>
+  <button id="clearProgressBtn">Clear saved progress for this file</button>
+  <p class="hint">Wipes saved OCR + proofread progress for the currently loaded file only (other files' saved progress is untouched). Use this if you've replaced the PDF with a corrected version under the same name.</p>
 </fieldset>
 
 <fieldset>
@@ -64,8 +75,8 @@
 </fieldset>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.4.1';
-  window.DGE_CONVERT_BUILD = '2026-08-04';
+  window.DGE_CONVERT_VERSION = '0.5.0';
+  window.DGE_CONVERT_BUILD = '2026-08-05';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -75,11 +86,12 @@
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   }
 </script>
-<script src="utils.js?v=0.4.1"></script>
-<script src="pdf.js?v=0.4.1"></script>
-<script src="vision.js?v=0.4.1"></script>
-<script src="gemini.js?v=0.4.1"></script>
-<script src="renderer.js?v=0.4.1"></script>
-<script src="app.js?v=0.4.1"></script>
+<script src="utils.js?v=0.5.0"></script>
+<script src="idb.js?v=0.5.0"></script>
+<script src="pdf.js?v=0.5.0"></script>
+<script src="vision.js?v=0.5.0"></script>
+<script src="gemini.js?v=0.5.0"></script>
+<script src="renderer.js?v=0.5.0"></script>
+<script src="app.js?v=0.5.0"></script>
 </body>
 </html>

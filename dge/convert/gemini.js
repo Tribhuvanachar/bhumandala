@@ -25,6 +25,30 @@ If a page doesn't cleanly split into shloka/commentary, put the whole corrected 
 Raw OCR input follows:
 `;
 
+  // Constrains Gemini's decoding to always emit syntactically valid JSON
+  // matching this shape — this is the primary fix for "Could not parse
+  // JSON from the model's response" failures, which were previously
+  // caused by the model emitting an unescaped character or similar
+  // syntax slip somewhere inside a long free-form response.
+  const PROOFREAD_RESPONSE_SCHEMA = {
+    type: 'object',
+    properties: {
+      shlokas: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            number: { type: 'integer' },
+            sa: { type: 'string' },
+            commentary: { type: 'string' }
+          },
+          required: ['sa']
+        }
+      }
+    },
+    required: ['shlokas']
+  };
+
   async function proofread(ocrPagesText, apiKey, model) {
     const modelName = model || 'gemini-3.6-flash';
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${encodeURIComponent(apiKey)}`;
@@ -35,7 +59,13 @@ Raw OCR input follows:
       res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            responseMimeType: 'application/json',
+            responseSchema: PROOFREAD_RESPONSE_SCHEMA
+          }
+        })
       });
     } catch (e) {
       throw new Error('Network error reaching Gemini API: ' + e.message);
@@ -51,10 +81,22 @@ Raw OCR input follows:
     }
 
     const candidate = data.candidates && data.candidates[0];
+    const finishReason = candidate && candidate.finishReason;
+
+    // Check finishReason BEFORE attempting to parse — a MAX_TOKENS cutoff
+    // can still leave a non-empty but incomplete `text`, which would
+    // otherwise reach the JSON parser and surface as a confusing generic
+    // syntax error instead of the real cause.
+    if (finishReason === 'MAX_TOKENS') {
+      throw new Error('Gemini\'s response was cut off before finishing (hit the output token limit) — this chunk is too large for one request. Try a smaller chunk size and re-run Proofread (it will resume from this chunk).');
+    }
+    if (finishReason && finishReason !== 'STOP') {
+      throw new Error(`Gemini stopped early (reason: ${finishReason}) instead of completing normally.`);
+    }
+
     const text = candidate && candidate.content && candidate.content.parts && candidate.content.parts[0] && candidate.content.parts[0].text;
     if (!text) {
-      const finishReason = candidate && candidate.finishReason;
-      throw new Error('Gemini returned no usable content' + (finishReason ? ` (finish reason: ${finishReason})` : '') + ' — the input may be too long for one request.');
+      throw new Error('Gemini returned no usable content.');
     }
 
     return window.DGE.Utils.parseJsonLoose(text);

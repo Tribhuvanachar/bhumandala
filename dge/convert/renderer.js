@@ -18,7 +18,7 @@ window.DGE.Renderer = (function () {
     let html = '';
     dgeJson.shlokas.forEach(function (s) {
       html += '<div class="preview-shloka">';
-      html += '<div class="preview-num">Shloka ' + (s.number != null ? s.number : '') + '</div>';
+      html += '<div class="preview-num">Shloka ' + (s.number != null ? s.number : (s.index != null ? s.index : '')) + '</div>';
       html += '<div class="preview-sa">' + escapeHtml(s.sa || '') + '</div>';
       if (s.commentary) {
         html += '<div class="preview-commentary">' + escapeHtml(s.commentary) + '</div>';
