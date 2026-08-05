@@ -1,10 +1,10 @@
 // DGE Module: dev.js
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['dev.js'] = 'v2.1 (Diagnostics updated for this session)';
+window.DGE_VERSIONS['dev.js'] = 'v2.2 (Auto-enables for super admins, not just ?dev=true)';
 
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    if(urlParams.get('dev') === 'true') {
+    if(urlParams.get('dev') === 'true' || localStorage.getItem('is_superadmin') === 'true') {
 
         let html = "<div style='margin-bottom:8px; padding-bottom:8px; border-bottom:1px dashed rgba(0,255,0,0.3);'>";
         html += "<strong style='color:#FFF;'>🛠️ DGE DEVELOPMENT LOG</strong><br/>";

@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['utils.js'] = 'v1.5 (Reading-card minimize/sticky)';
+window.DGE_VERSIONS['utils.js'] = 'v1.6 (Fixed dev-log Error-object serialization bug — was showing "{}" instead of the real message; dev log now also auto-enables for super admins)';
 
 window.DGE_THEMES = ['traditional', 'minimal', 'vibrant', 'darkglass'];
 window.DGE_THEME_META_COLORS = {
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- DYNAMIC DEV LOGGER WITH COPY / MINIMIZE / CLOSE ---
 (function initDevLogger() {
     const urlParams = new URLSearchParams(window.location.search);
-    const isDev = urlParams.get('dev') === 'true';
+    const isDev = urlParams.get('dev') === 'true' || localStorage.getItem('is_superadmin') === 'true';
     
     const legacyLog = document.getElementById('mobileDebugLog');
     if (legacyLog) legacyLog.remove();
@@ -245,23 +245,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const oldWarn = console.warn;
     const oldErr = console.error;
 
+    // JSON.stringify on a genuine Error object produces "{}" — its
+    // message/stack are non-enumerable own properties, so they get
+    // silently dropped, hiding the actual reason behind every error this
+    // panel shows. Extracting .message explicitly for Error objects (and
+    // falling back to normal string/JSON handling for everything else)
+    // fixes that for all three console overrides below.
+    function dgeFormatLogArg(a) {
+        if (a instanceof Error) return a.message || String(a);
+        return typeof a === 'object' ? JSON.stringify(a) : String(a);
+    }
+
     console.log = function(...args) {
         oldLog(...args);
-        const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ');
+        const msg = args.map(dgeFormatLogArg).join(' ');
         logTextContainer.innerHTML += `<span style="color:#0f0;">> ${msg}</span><br>`;
         dgeLog.scrollTop = dgeLog.scrollHeight;
     };
 
     console.warn = function(...args) {
         oldWarn(...args);
-        const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ');
+        const msg = args.map(dgeFormatLogArg).join(' ');
         logTextContainer.innerHTML += `<span style="color:#ffcc00;">> [WARN] ${msg}</span><br>`;
         dgeLog.scrollTop = dgeLog.scrollHeight;
     };
 
     console.error = function(...args) {
         oldErr(...args);
-        const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ');
+        const msg = args.map(dgeFormatLogArg).join(' ');
         logTextContainer.innerHTML += `<span style="color:#ff5555;">> [ERR] ${msg}</span><br>`;
         dgeLog.scrollTop = dgeLog.scrollHeight;
     };

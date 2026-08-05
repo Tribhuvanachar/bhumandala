@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v5.8 (Per-sponsor-item enabled flags; showDesignedBy toggle; KEY_SPONSORS_CONFIG)';
+window.DGE_VERSIONS['config.js'] = 'v5.9 (Real bug fix: appConfig was never actually attached to window — every appConfig-driven setting was silently using its hardcoded fallback regardless of what was configured)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -13,6 +13,10 @@ const appConfig = {
   secretPasskey: "SHRI108",
   version: "v4.25"
 };
+window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
+// throughout the app was always undefined without it, silently falling back to hardcoded
+// defaults no matter what was actually set above. Not a caching issue; a real, longstanding
+// bug that just happened not to be visible until a config value diverged from its fallback.
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
 // remove, rename, reorder, or temporarily disable (enabled:false) any of

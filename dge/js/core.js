@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v2.9 (Disabled bfcache to stop stale error/content persisting across grantha navigations; UI-discoverable admin passkey prompt)';
+window.DGE_VERSIONS['core.js'] = 'v3.0 (Softer caching + one automatic retry for large grantha content fetches, instead of a hard no-store with zero tolerance for a mobile-network hiccup)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -140,11 +140,28 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    fetch(window.jsonFileName + '?t=' + Date.now(), { cache: 'no-store' })
-      .then(res => {
-        if (!res.ok) throw new Error(`Could not find dataset at ${window.jsonFileName}`);
-        return res.json();
-      })
+    function fetchGranthaData(attempt) {
+      // The timestamp query param alone already guarantees a fresh fetch
+      // (it's a URL the browser has never cached) — cache:'no-store' on
+      // top of that is stricter still and, for large files like a full
+      // Rigveda maṇḍala (2MB+) on a mobile connection, gives zero
+      // tolerance for an ordinary transient network hiccup. One retry
+      // covers exactly that case without needing to know the real cause.
+      return fetch(window.jsonFileName + '?t=' + Date.now())
+        .then(res => {
+          if (!res.ok) throw new Error(`Could not find dataset at ${window.jsonFileName} (HTTP ${res.status})`);
+          return res.json();
+        })
+        .catch(err => {
+          if (attempt < 1) {
+            console.warn(`Grantha fetch failed, retrying once: ${err.message}`);
+            return fetchGranthaData(attempt + 1);
+          }
+          throw err;
+        });
+    }
+
+    fetchGranthaData(0)
       .then(data => {
         window.stotraData = data;
         initApp();

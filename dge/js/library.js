@@ -5,7 +5,7 @@
 // granthas but only a handful have real content at any given time;
 // showing empty placeholders in a public browse menu would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v1.1 (Fixed lexicographic sort bug — mandala_10 was sorting right after mandala_1; now sorts numerically by the trailing number in each slug)';
+window.DGE_VERSIONS['library.js'] = 'v1.2 (Grantha links keep readable slashes instead of %2F)';
 
 // Human-friendly labels for known top-level category folders under
 // data/ — anything not listed here just falls back to a capitalized
@@ -80,5 +80,12 @@ window.openLibraryModal = async function() {
 };
 
 window.dgeGoToGrantha = function(slug) {
-  window.location.href = window.location.pathname + '?path=' + encodeURIComponent(slug);
+  // Grantha slugs are always plain lowercase letters, digits, underscores,
+  // and slashes by design (see taxonomy.json) — none of that needs
+  // percent-encoding, and encodeURIComponent turning every "/" into
+  // "%2F" just makes the address bar hard to read for no real benefit.
+  // Falls back to full encoding only if something outside that safe set
+  // ever shows up, so this can't silently produce a broken URL.
+  const readableSlug = /^[a-z0-9_/]+$/i.test(slug) ? slug : encodeURIComponent(slug);
+  window.location.href = window.location.pathname + '?path=' + readableSlug;
 };
