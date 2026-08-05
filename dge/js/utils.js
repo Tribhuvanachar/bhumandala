@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['utils.js'] = 'v2.1 (Bumped the saved drag-position storage key — old saved positions from before the top-of-screen default was overriding the new default entirely)';
+window.DGE_VERSIONS['utils.js'] = 'v2.2 (Minimized dev log is now actually compact — was keeping its full expanded width even while collapsed, which is why it still looked "in the way" despite technically being minimized; Copy/Full hidden while minimized)';
 
 window.DGE_THEMES = ['traditional', 'minimal', 'vibrant', 'darkglass'];
 window.DGE_THEME_META_COLORS = {
@@ -273,11 +273,19 @@ document.addEventListener('DOMContentLoaded', () => {
         logTextContainer.style.display = min ? 'none' : 'block';
         dgeLog.style.maxHeight = min ? 'auto' : EXPANDED_HEIGHT + 'px';
         dgeLog.style.overflowY = min ? 'visible' : 'auto';
+        dgeLog.style.width = min ? 'auto' : 'min(320px, 90vw)';
+        // Copy/Full aren't meaningful without the log actually open, and
+        // hiding them (not just shrinking via width:auto, which alone
+        // barely helps with 4 buttons' worth of content still in the row)
+        // is what actually makes the collapsed footprint small.
+        copyBtn.style.display = min ? 'none' : 'inline-block';
+        fullscreenBtn.style.display = min ? 'none' : 'inline-block';
         minimizeBtn.innerText = min ? '▔ Max' : '▁ Min';
     }
     minimizeBtn.onclick = () => setMinimized(!isMinimized);
-    // Start collapsed so it doesn't dominate the screen on load — the
-    // header (with the Max button) stays visible so it's a single tap away.
+    // Start collapsed AND narrow so it doesn't dominate the screen on
+    // load — previously it kept the full expanded width even while
+    // "minimized", which is why it still looked like it was in the way.
     setMinimized(true);
 
     let isFullscreen = false;

@@ -75,7 +75,7 @@ body.theme-darkglass, body.dark-mode {
 
 * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
 input[type="checkbox"], input[type="range"] { accent-color: var(--accent-red); }
-body { margin: 0; padding-top: calc(60px + env(safe-area-inset-top)); padding-bottom: calc(126px + env(safe-area-inset-bottom)); font-family: var(--font-ui); background: var(--bg-main); color: var(--text-primary); transition: background var(--t-med) var(--ease), color var(--t-med) var(--ease); }
+body { margin: 0; padding-top: calc(60px + env(safe-area-inset-top)); padding-bottom: calc(126px + env(safe-area-inset-bottom)); font-family: var(--font-ui); background: var(--bg-main); color: var(--text-primary); transition: background var(--t-med) var(--ease), color var(--t-med) var(--ease); overflow-anchor: none; }
 
 body.modal-open { overflow: hidden !important; }
 
@@ -156,7 +156,7 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .sync-word { transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease); border-radius: 5px; padding: 0 2px; }
 .sync-word.active { background: var(--accent-red); color: #fff; box-shadow: 0 0 0 2px var(--accent-red); }
 
-.shloka-list { display: flex; flex-direction: column; gap: 10px; }
+.shloka-list { display: flex; flex-direction: column; gap: 10px; overflow-anchor: none; }
 .shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-wrap: anywhere; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), transform var(--t-fast) var(--ease); scroll-margin-top: calc(60px + env(safe-area-inset-top) + 150px); }
 .shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left: 4px solid var(--accent-red); }
 .shloka-card:active { background: var(--card-active); }
