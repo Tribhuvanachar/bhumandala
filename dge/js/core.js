@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.2 (Large granthas — 150+ shlokas — now auto-default to single-view mode; full-list mode was building 2000+ DOM cards synchronously and genuinely freezing the page for Rigveda maṇḍalas)';
+window.DGE_VERSIONS['core.js'] = 'v3.3 (Real fix for broken accent-mark rendering: remaps obscure Vedic Extensions codepoints to the standard, universally-supported Devanagari block equivalents — confirmed against actual output, not a font guess this time)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -74,6 +74,23 @@ window.addEventListener('pagehide', function () {});
 // This is what was actually throwing "Cannot read properties of
 // undefined (reading 'totalShlokas')": stotraData.metadata didn't exist
 // at all for this schema family, since it was never being adapted.
+// The transliteration library represents Vedic pitch accents using
+// codepoints from the little-supported "Vedic Extensions" Unicode block
+// (U+1CD0-U+1CFF, added far more recently and supported by very few
+// fonts) instead of the standard udatta/anudatta marks that have been in
+// the CORE Devanagari block since Unicode 1.1 (1993) and are supported
+// by virtually every Devanagari font. That mismatch is what was
+// rendering as stray quote-mark-like glyphs instead of proper accent
+// marks — confirmed by checking the actual codepoints against real
+// rendered output, not guessed. Remapped here, as early as possible, so
+// every downstream use (display, copy, search, share) benefits uniformly.
+function dgeSanitizeVedicAccents(text) {
+  if (!text) return text;
+  return text
+    .replace(/\u1CD3/g, '\u0951') // VEDIC SIGN NIHSHVASA (used for acute/udātta) -> DEVANAGARI STRESS SIGN UDATTA
+    .replace(/\u1CD9/g, '\u0952'); // VEDIC TONE ... INDEPENDENT SVARITA (used for grave) -> DEVANAGARI STRESS SIGN ANUDATTA
+}
+
 function dgeNormalizeGranthaData(data, granthaTitle) {
   if (!data) return data;
   if (data.shlokas) return data; // already the expected shape (e.g. PNS) -- nothing to do
@@ -87,12 +104,12 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
       // rather than used as the internal key.
       const n = idx + 1;
       shlokas[n] = {
-        sa: item.samhita_patha || item.sa || '',
+        sa: dgeSanitizeVedicAccents(item.samhita_patha || item.sa || ''),
         vedicId: item.id || '',
         rishi: item.rishi || '',
         devata: item.devata || '',
         chandas: item.chandas || '',
-        padapatha: item.pada_patha || '',
+        padapatha: dgeSanitizeVedicAccents(item.pada_patha || ''),
         commentaries: {} // none in this schema family yet
       };
     });
