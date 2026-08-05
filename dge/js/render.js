@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v3.9 (Deferred single-view scroll to next animation frame — measuring layout immediately after renderList\'s DOM rebuild could catch a mid-reflow stale position, visible as scroll-then-correct jank)';
+window.DGE_VERSIONS['render.js'] = 'v4.0 (Single-view Prev/Next: scroll position is measured a frame after the DOM rebuild settles, not immediately after — and the scroll itself is now instant, not animated-smooth, since the visible motion of a smooth scroll can itself look like reload-style jank on a quick tap)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -343,7 +343,12 @@ function dgeScrollCardIntoView(cardEl) {
   const topBarHeight = topBar ? topBar.getBoundingClientRect().height : 0;
   const wrapHeight = readingWrap ? readingWrap.getBoundingClientRect().height : 0;
   const targetY = window.scrollY + cardEl.getBoundingClientRect().top - topBarHeight - wrapHeight - 10;
-  window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+  // Instant, not smooth — an animated scroll visibly moves through the
+  // space between old and new position before settling, which for a
+  // quick Prev/Next tap can look exactly like "the page jumped and then
+  // readjusted" even when it's working correctly. An instant jump has no
+  // visible in-between motion to be misread that way.
+  window.scrollTo({ top: Math.max(0, targetY), behavior: 'auto' });
 }
 
 window.dgeSingleViewStep = function(direction) {

@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['utils.js'] = 'v2.2 (Minimized dev log is now actually compact — was keeping its full expanded width even while collapsed, which is why it still looked "in the way" despite technically being minimized; Copy/Full hidden while minimized)';
+window.DGE_VERSIONS['utils.js'] = 'v2.3 (Actually starts fully closed on load now — was starting minimized-with-header-visible, not the small pill-only closed state that was actually wanted)';
 
 window.DGE_THEMES = ['traditional', 'minimal', 'vibrant', 'darkglass'];
 window.DGE_THEME_META_COLORS = {
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const dgeLog = document.createElement('div');
     dgeLog.id = 'dgeMobileLogContainer';
-    dgeLog.style.cssText = 'display: block; position: fixed; right: 10px; top: 70px; width: min(320px, 90vw); background: rgba(0,0,0,0.95); color: #0f0; font-family: monospace; font-size: 11px; z-index: 999999; max-height: ' + EXPANDED_HEIGHT + 'px; overflow-y: auto; box-sizing: border-box; border: 2px solid #0f0; border-radius: 8px; touch-action: pan-y; overscroll-behavior: contain; pointer-events: auto; transition: max-height 0.15s ease;';
+    dgeLog.style.cssText = 'display: none; position: fixed; right: 10px; top: 70px; width: min(320px, 90vw); background: rgba(0,0,0,0.95); color: #0f0; font-family: monospace; font-size: 11px; z-index: 999999; max-height: ' + EXPANDED_HEIGHT + 'px; overflow-y: auto; box-sizing: border-box; border: 2px solid #0f0; border-radius: 8px; touch-action: pan-y; overscroll-behavior: contain; pointer-events: auto; transition: max-height 0.15s ease;';
 
     // Header bar: title + Minimize + Close (always visible, even when minimized)
     const header = document.createElement('div');
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const reopenBtn = document.createElement('button');
     reopenBtn.id = 'dgeLogReopenBtn';
     reopenBtn.innerText = '🐞 Logs';
-    reopenBtn.style.cssText = 'display:none; position: fixed; right: 10px; top: 70px; background: #111; color: #0f0; border: 1px solid #0f0; padding: 6px 10px; font-size: 11px; font-weight: bold; border-radius: 20px; z-index: 999999; cursor: pointer;';
+    reopenBtn.style.cssText = 'display:block; position: fixed; right: 10px; top: 70px; background: #111; color: #0f0; border: 1px solid #0f0; padding: 6px 10px; font-size: 11px; font-weight: bold; border-radius: 20px; z-index: 999999; cursor: pointer;';
 
     // Text container to isolate content for copying
     const logTextContainer = document.createElement('div');
