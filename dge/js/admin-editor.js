@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.12 (Multi-select + batch delete in one commit; single delete now uses the same batch technique instead of one commit per descendant file)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.13 (Parallel + cancellable folder-zip download; fast whole-repo zipball option for large folders; toolbar reorganized into primary actions + a More popup)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -962,12 +962,53 @@ window.dgeAdminDownloadFile = async function(path) {
   }
 };
 
+let dgeAdminZipInProgress = false;
+let dgeAdminZipCancelled = false;
+
+// GitHub generates this entirely server-side in one request — much faster
+// than fetching hundreds of individual file blobs through the API one at
+// a time, but it's the WHOLE repo, not a specific folder (there's no
+// GitHub endpoint that scopes a zip to a subfolder). Offered as a manual
+// option here, and auto-suggested for large folder downloads below.
+window.dgeAdminDownloadGithubRepoZip = async function() {
+  const { owner, repo, branch } = GITHUB_REPO_CONFIG;
+  const url = `${GH_API}/repos/${owner}/${repo}/zipball/${branch}`;
+  if (typeof showToast === 'function') showToast('Requesting full repo zip from GitHub…');
+  dgeAdminShowWorking();
+  try {
+    const res = await fetch(url, { headers: dgeGithubHeaders() });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const blob = await res.blob();
+    const dlUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = dlUrl;
+    a.download = `${repo}-${branch}.zip`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(dlUrl);
+    if (typeof showToast === 'function') showToast('Full repo zip downloaded — extract locally and grab whatever folder you need.');
+  } catch (e) {
+    if (typeof showToast === 'function') showToast('Repo zip download failed: ' + e.message);
+  } finally {
+    dgeAdminHideWorking();
+  }
+};
+
 window.dgeAdminDownloadFolderZip = async function(folderPath) {
+  // Tapping the same folder's zip button again while one is already
+  // running cancels it, instead of starting a second one — simplest way
+  // to offer "abort" without adding a whole new visible button.
+  if (dgeAdminZipInProgress) {
+    dgeAdminZipCancelled = true;
+    if (typeof showToast === 'function') showToast('Cancelling…');
+    return;
+  }
+
   if (typeof JSZip === 'undefined') {
     if (typeof showToast === 'function') showToast('Zip library failed to load — check your connection and try again.');
     return;
   }
-  if (typeof showToast === 'function') showToast(`Preparing zip of "${folderPath}"…`);
   dgeAdminShowWorking();
 
   try {
@@ -977,14 +1018,46 @@ window.dgeAdminDownloadFolderZip = async function(folderPath) {
       throw new Error('No files found in this folder according to GitHub\'s current tree.');
     }
 
+    if (descendants.length > 150) {
+      const useGithubZip = confirm(
+        `This folder has ${descendants.length} files — building the zip here in the browser fetches each one individually and will take a while.\n\n` +
+        `GitHub can generate a zip of the ENTIRE repo instantly on their end instead (extract just "${folderPath}" from it afterward) — much faster.\n\n` +
+        `Use GitHub's fast whole-repo download instead?`
+      );
+      if (useGithubZip) {
+        dgeAdminHideWorking();
+        window.dgeAdminDownloadGithubRepoZip();
+        return;
+      }
+    }
+
+    dgeAdminZipInProgress = true;
+    dgeAdminZipCancelled = false;
+    if (typeof showToast === 'function') showToast(`Zipping "${folderPath}"… (0/${descendants.length}) — tap 📦 again to cancel`);
+
     const zip = new JSZip();
     let done = 0;
-    for (const entry of descendants) {
-      const blob = await dgeGithubGetBlob(entry.sha);
-      const relativePath = entry.path.slice(folderPath.length + 1);
-      zip.file(relativePath, blob.content, { base64: true });
-      done++;
-      if (typeof showToast === 'function' && done % 5 === 0) showToast(`Zipping… ${done}/${descendants.length}`);
+    const CONCURRENCY = 12; // fetched in parallel batches instead of one at a time
+    let nextIndex = 0;
+
+    async function worker() {
+      while (nextIndex < descendants.length) {
+        if (dgeAdminZipCancelled) return;
+        const entry = descendants[nextIndex++];
+        const blob = await dgeGithubGetBlob(entry.sha);
+        if (dgeAdminZipCancelled) return;
+        const relativePath = entry.path.slice(folderPath.length + 1);
+        zip.file(relativePath, blob.content, { base64: true });
+        done++;
+        if (typeof showToast === 'function' && done % 20 === 0) showToast(`Zipping… ${done}/${descendants.length} — tap 📦 again to cancel`);
+      }
+    }
+
+    await Promise.all(Array.from({ length: Math.min(CONCURRENCY, descendants.length) }, worker));
+
+    if (dgeAdminZipCancelled) {
+      if (typeof showToast === 'function') showToast('Zip cancelled.');
+      return;
     }
 
     const zipBlob = await zip.generateAsync({ type: 'blob' });
@@ -1002,6 +1075,7 @@ window.dgeAdminDownloadFolderZip = async function(folderPath) {
   } catch (e) {
     if (typeof showToast === 'function') showToast('Zip download failed: ' + e.message);
   } finally {
+    dgeAdminZipInProgress = false;
     dgeAdminHideWorking();
   }
 };
