@@ -5,7 +5,7 @@
 // granthas but only a handful have real content at any given time;
 // showing empty placeholders in a public browse menu would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v1.0 (Library browser modal)';
+window.DGE_VERSIONS['library.js'] = 'v1.1 (Fixed lexicographic sort bug — mandala_10 was sorting right after mandala_1; now sorts numerically by the trailing number in each slug)';
 
 // Human-friendly labels for known top-level category folders under
 // data/ — anything not listed here just falls back to a capitalized
@@ -54,7 +54,21 @@ window.openLibraryModal = async function() {
 
   const categories = Object.keys(byCategory).sort();
   listEl.innerHTML = categories.map(cat => {
-    const items = byCategory[cat].slice().sort((a, b) => a.title.localeCompare(b.title));
+    // Plain string sort put "mandala 10" right after "mandala 1" (and
+    // before "mandala 2") because "१०" starts with the same character as
+    // "१" — classic lexicographic-vs-numeric ordering bug. Extracting the
+    // trailing number from the SLUG (plain ASCII digits like "mandala_01"
+    // — much more reliable to parse than the Devanagari numerals in the
+    // title itself) and comparing numerically fixes this for any
+    // similarly-numbered series, not just Rigveda mandalas.
+    const items = byCategory[cat].slice().sort((a, b) => {
+      const numA = (a.slug.match(/(\d+)$/) || [])[1];
+      const numB = (b.slug.match(/(\d+)$/) || [])[1];
+      if (numA !== undefined && numB !== undefined) {
+        return parseInt(numA, 10) - parseInt(numB, 10);
+      }
+      return a.title.localeCompare(b.title);
+    });
     const itemsHtml = items.map(item =>
       `<div class="pop-item" onclick="window.dgeGoToGrantha('${item.slug}')">${item.title}</div>`
     ).join('');
