@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v2.8 (Cache-busted library.json + grantha content fetches; new dgeForceRefreshContent helper)';
+window.DGE_VERSIONS['core.js'] = 'v2.9 (Disabled bfcache to stop stale error/content persisting across grantha navigations; UI-discoverable admin passkey prompt)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -19,6 +19,22 @@ window.dgeGranthaSlug = function(catalogPath) {
 // the browser has never seen before (same page, one changed query param).
 // Only affects what gets fetched from GitHub; marks/notes/history/theme
 // all live in localStorage and are completely unaffected.
+// UI-discoverable alternative to manually typing ?pass=... into the URL —
+// same validation, same effect, just reachable by tapping 🔑 instead of
+// editing the address bar.
+window.dgeShowAdminAccessPrompt = function() {
+  const entered = prompt('Enter admin passkey:');
+  if (!entered) return;
+  const passkey = (window.appConfig && window.appConfig.secretPasskey) ? window.appConfig.secretPasskey : 'SHRI108';
+  if (entered.toUpperCase() === passkey.toUpperCase()) {
+    localStorage.setItem('acharyaAuthorized', 'true');
+    if (typeof showToast === 'function') showToast('Admin access granted.');
+    location.reload();
+  } else {
+    if (typeof showToast === 'function') showToast('Incorrect passkey.');
+  }
+};
+
 window.dgeForceRefreshContent = function() {
   const url = new URL(window.location.href);
   url.searchParams.set('_refresh', Date.now());
@@ -35,6 +51,16 @@ window.dgeForceRefreshContent = function() {
 window.dgeLibraryCatalogPromise = fetch('data/library.json?t=' + Date.now(), { cache: 'no-store' })
   .then(res => res.ok ? res.json() : null)
   .catch(() => null);
+
+// Opts this page OUT of the browser's back/forward cache (bfcache).
+// Without this, navigating between granthas (a real page load to the
+// same index.html with a different ?path=) can sometimes have the
+// browser restore a frozen snapshot of the PREVIOUS page instead of
+// actually re-running this script — which is exactly what an "Error"
+// message from an earlier grantha still showing under a new URL means.
+// An empty pagehide/unload listener is the standard, reliable way to
+// disable bfcache eligibility across browsers.
+window.addEventListener('pagehide', function () {});
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. INITIALIZE GLOBAL DOM ELEMENTS

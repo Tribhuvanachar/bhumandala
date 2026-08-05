@@ -6,14 +6,23 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>DGE Convert v0.8.0</title>
-<link rel="stylesheet" href="style.css?v=0.8.0">
+<script>
+  // Access guard — runs before anything else on this page. Convert has
+  // real GitHub push capability, so it needs the same super-admin gate
+  // as the main app's admin panel, not just a hidden icon (a hidden icon
+  // alone doesn't stop someone who knows/guesses this URL directly).
+  if (localStorage.getItem('is_superadmin') !== 'true') {
+    window.location.replace('../index.html');
+  }
+</script>
+<title>DGE Convert v0.9.0</title>
+<link rel="stylesheet" href="style.css?v=0.9.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
 <div><a href="../index.html">🏠 Back to DGE main page</a></div>
-<div>Version: <b id="versionDisplay">0.8.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.9.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF → page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -110,8 +119,8 @@
 </fieldset>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.8.0';
-  window.DGE_CONVERT_BUILD = '2026-08-08';
+  window.DGE_CONVERT_VERSION = '0.9.0';
+  window.DGE_CONVERT_BUILD = '2026-08-09';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -121,15 +130,15 @@
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   }
 </script>
-<script src="utils.js?v=0.8.0"></script>
-<script src="idb.js?v=0.8.0"></script>
-<script src="pdf.js?v=0.8.0"></script>
-<script src="vision.js?v=0.8.0"></script>
-<script src="gemini.js?v=0.8.0"></script>
-<script src="github.js?v=0.8.0"></script>
-<script src="mapper.js?v=0.8.0"></script>
-<script src="urlimport.js?v=0.8.0"></script>
-<script src="renderer.js?v=0.8.0"></script>
-<script src="app.js?v=0.8.0"></script>
+<script src="utils.js?v=0.9.0"></script>
+<script src="idb.js?v=0.9.0"></script>
+<script src="pdf.js?v=0.9.0"></script>
+<script src="vision.js?v=0.9.0"></script>
+<script src="gemini.js?v=0.9.0"></script>
+<script src="github.js?v=0.9.0"></script>
+<script src="mapper.js?v=0.9.0"></script>
+<script src="urlimport.js?v=0.9.0"></script>
+<script src="renderer.js?v=0.9.0"></script>
+<script src="app.js?v=0.9.0"></script>
 </body>
 </html>

@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.15 (Upload Zip now shows a full preview — file count, size, paths — with explicit Confirm/Cancel before anything commits; real animated spinner instead of a static hourglass)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.16 (UI-discoverable super admin access prompt, no URL editing needed)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -37,6 +37,22 @@ function dgeCheckSuperadminGate() {
   return localStorage.getItem('is_superadmin') === 'true';
 }
 window.dgeCheckSuperadminGate = dgeCheckSuperadminGate;
+
+// UI-discoverable alternative to manually typing ?superadmin=CODE into
+// the URL — same validation, same effect, just reachable by tapping 🔑
+// instead of editing the address bar.
+window.dgeShowSuperAdminAccessPrompt = function() {
+  const code = prompt('Enter super admin code:');
+  if (!code) return;
+  if (window.ADMIN_ACCESS_LEVELS && window.ADMIN_ACCESS_LEVELS[code]) {
+    localStorage.setItem('is_superadmin', 'true');
+    localStorage.setItem('admin_root_path', window.ADMIN_ACCESS_LEVELS[code].rootPath);
+    if (typeof showToast === 'function') showToast('Super admin access granted.');
+    location.reload();
+  } else {
+    if (typeof showToast === 'function') showToast('Incorrect code.');
+  }
+};
 
 // The path this device's access code is bound to — navigation can never
 // go above this, regardless of what's clicked or dragged. Defaults to
