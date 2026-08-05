@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['utils.js'] = 'v1.7 (Dev log is now a small floating panel, draggable anywhere on screen, instead of a fixed full-width bottom bar)';
+window.DGE_VERSIONS['utils.js'] = 'v1.8 (Fixed a regression from the drag feature — the header drag-handle was swallowing taps on its own Copy/Max/✕ buttons; now only starts a drag when the touch didn\'t originate on one of them)';
 
 window.DGE_THEMES = ['traditional', 'minimal', 'vibrant', 'darkglass'];
 window.DGE_THEME_META_COLORS = {
@@ -153,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         handleEl.style.touchAction = 'none';
 
         handleEl.addEventListener('pointerdown', (e) => {
+            if (e.target.closest('button')) return; // let Copy/Max/✕ handle their own taps normally
             dragging = true;
             startX = e.clientX;
             startY = e.clientY;
@@ -197,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     title.innerText = '📱 DGE Dev Logger';
     title.style.cssText = 'flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;';
 
-    const btnRowStyle = 'background: #333; color: #fff; border: 1px solid #0f0; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 6px; cursor: pointer; flex-shrink: 0;';
+    const btnRowStyle = 'background: #333; color: #fff; border: 1px solid #0f0; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 6px; cursor: pointer; flex-shrink: 0; touch-action: manipulation;';
 
     const copyBtn = document.createElement('button');
     copyBtn.innerText = '📋 Copy';

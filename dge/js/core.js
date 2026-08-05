@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.1 (Real fix for the Rigveda "totalShlokas" crash: adapts the vedic_text items[] schema into the same shape every other module already renders, instead of leaving it unhandled)';
+window.DGE_VERSIONS['core.js'] = 'v3.2 (Large granthas — 150+ shlokas — now auto-default to single-view mode; full-list mode was building 2000+ DOM cards synchronously and genuinely freezing the page for Rigveda maṇḍalas)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -327,7 +327,17 @@ function restorePrefs() {
   if (savedScript && typeof applyScript === 'function') applyScript(savedScript);
 
   const savedViewMode = localStorage.getItem('app_viewMode');
-  window.viewMode = (savedViewMode === 'single') ? 'single' : 'list';
+  // renderList() builds a full DOM card per shloka in "list" mode — fine
+  // for something PNS-sized (43), but genuinely freezes a phone for a
+  // 2000-shloka Rigveda maṇḍala. This overrides to single-view mode for
+  // any large grantha regardless of the user's saved global preference,
+  // WITHOUT overwriting that saved preference — so a small grantha opened
+  // afterward still honors whatever they'd actually chosen.
+  const totalForThisGrantha = (window.stotraData && window.stotraData.metadata) ? (window.stotraData.metadata.totalShlokas || 0) : 0;
+  const LARGE_GRANTHA_THRESHOLD = 150;
+  const forceSingleForSize = totalForThisGrantha > LARGE_GRANTHA_THRESHOLD;
+
+  window.viewMode = (savedViewMode === 'single' || forceSingleForSize) ? 'single' : 'list';
   if (window.viewMode === 'single') {
     const lastVerseKey = typeof nsKey === 'function' ? nsKey('lastVerse') : null;
     const savedLastVerse = lastVerseKey ? parseInt(localStorage.getItem(lastVerseKey), 10) : NaN;
