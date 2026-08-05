@@ -247,6 +247,7 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
    can animate opacity/transform instead of snapping display:none<->flex. */
 .popup { position: absolute; bottom: 45px; background: var(--panel-bg); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 14px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 12px; z-index: 300; width: max-content; max-width: min(280px, calc(100vw - 24px)); min-width: 170px; color: var(--text-primary); opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(6px) scale(0.98); transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), visibility var(--t-fast) var(--ease); }
 .popup-top { bottom: auto; top: 35px; right: 0; }
+.popup-top-left { bottom: auto; top: 35px; left: 0; right: auto; }
 .popup.show { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
 .popup hr { width: 100%; border: 0; border-top: 1px solid var(--card-border); margin: 0; }
 

@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['utils.js'] = 'v1.6 (Fixed dev-log Error-object serialization bug — was showing "{}" instead of the real message; dev log now also auto-enables for super admins)';
+window.DGE_VERSIONS['utils.js'] = 'v1.7 (Dev log is now a small floating panel, draggable anywhere on screen, instead of a fixed full-width bottom bar)';
 
 window.DGE_THEMES = ['traditional', 'minimal', 'vibrant', 'darkglass'];
 window.DGE_THEME_META_COLORS = {
@@ -133,9 +133,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const EXPANDED_HEIGHT = 180;
 
+    // Small helper: makes targetEl repositionable anywhere on screen by
+    // dragging handleEl, remembering the chosen position across reloads.
+    // Pointer Events cover touch and mouse with the same code.
+    function makeDraggable(handleEl, targetEl, storageKey) {
+        let dragging = false, startX = 0, startY = 0, startLeft = 0, startTop = 0;
+
+        try {
+            const saved = JSON.parse(localStorage.getItem(storageKey) || 'null');
+            if (saved) {
+                targetEl.style.left = saved.left + 'px';
+                targetEl.style.top = saved.top + 'px';
+                targetEl.style.right = 'auto';
+                targetEl.style.bottom = 'auto';
+            }
+        } catch (e) { /* ignore, use default position */ }
+
+        handleEl.style.cursor = 'move';
+        handleEl.style.touchAction = 'none';
+
+        handleEl.addEventListener('pointerdown', (e) => {
+            dragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            const rect = targetEl.getBoundingClientRect();
+            startLeft = rect.left;
+            startTop = rect.top;
+            handleEl.setPointerCapture(e.pointerId);
+        });
+
+        handleEl.addEventListener('pointermove', (e) => {
+            if (!dragging) return;
+            let newLeft = startLeft + (e.clientX - startX);
+            let newTop = startTop + (e.clientY - startY);
+            // Keep at least 40px of the panel reachable on-screen either way.
+            newLeft = Math.max(-targetEl.offsetWidth + 40, Math.min(newLeft, window.innerWidth - 40));
+            newTop = Math.max(0, Math.min(newTop, window.innerHeight - 40));
+            targetEl.style.left = newLeft + 'px';
+            targetEl.style.top = newTop + 'px';
+            targetEl.style.right = 'auto';
+            targetEl.style.bottom = 'auto';
+        });
+
+        handleEl.addEventListener('pointerup', () => {
+            if (!dragging) return;
+            dragging = false;
+            try {
+                const rect = targetEl.getBoundingClientRect();
+                localStorage.setItem(storageKey, JSON.stringify({ left: rect.left, top: rect.top }));
+            } catch (e) { /* ignore */ }
+        });
+    }
+
     const dgeLog = document.createElement('div');
     dgeLog.id = 'dgeMobileLogContainer';
-    dgeLog.style.cssText = 'display: block; position: fixed; left: 0; width: 100%; background: rgba(0,0,0,0.95); color: #0f0; font-family: monospace; font-size: 11px; z-index: 999999; max-height: ' + EXPANDED_HEIGHT + 'px; overflow-y: auto; box-sizing: border-box; border-top: 2px solid #0f0; touch-action: pan-y; overscroll-behavior: contain; pointer-events: auto; transition: max-height 0.15s ease;';
+    dgeLog.style.cssText = 'display: block; position: fixed; right: 10px; bottom: 60px; width: min(320px, 90vw); background: rgba(0,0,0,0.95); color: #0f0; font-family: monospace; font-size: 11px; z-index: 999999; max-height: ' + EXPANDED_HEIGHT + 'px; overflow-y: auto; box-sizing: border-box; border: 2px solid #0f0; border-radius: 8px; touch-action: pan-y; overscroll-behavior: contain; pointer-events: auto; transition: max-height 0.15s ease;';
 
     // Header bar: title + Minimize + Close (always visible, even when minimized)
     const header = document.createElement('div');
@@ -168,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const reopenBtn = document.createElement('button');
     reopenBtn.id = 'dgeLogReopenBtn';
     reopenBtn.innerText = '🐞 Logs';
-    reopenBtn.style.cssText = 'display:none; position: fixed; left: 10px; background: #111; color: #0f0; border: 1px solid #0f0; padding: 6px 10px; font-size: 11px; font-weight: bold; border-radius: 20px; z-index: 999999; cursor: pointer;';
+    reopenBtn.style.cssText = 'display:none; position: fixed; right: 10px; bottom: 60px; background: #111; color: #0f0; border: 1px solid #0f0; padding: 6px 10px; font-size: 11px; font-weight: bold; border-radius: 20px; z-index: 999999; cursor: pointer;';
 
     // Text container to isolate content for copying
     const logTextContainer = document.createElement('div');
@@ -216,12 +268,10 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.onclick = () => {
         dgeLog.style.display = 'none';
         reopenBtn.style.display = 'block';
-        positionAboveBottomPlayer();
     };
     reopenBtn.onclick = () => {
         dgeLog.style.display = 'block';
         reopenBtn.style.display = 'none';
-        positionAboveBottomPlayer();
     };
 
     dgeLog.appendChild(header);
@@ -229,17 +279,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(dgeLog);
     document.body.appendChild(reopenBtn);
 
-    // Keep the log panel (and the reopen tab) sitting ABOVE the bottom
-    // player toolbar instead of overlapping/hiding its controls.
-    function positionAboveBottomPlayer() {
-        const player = document.querySelector('.bottom-player');
-        const playerHeight = player ? player.getBoundingClientRect().height : 0;
-        dgeLog.style.bottom = playerHeight + 'px';
-        reopenBtn.style.bottom = (playerHeight + 10) + 'px';
-    }
-    positionAboveBottomPlayer();
-    window.addEventListener('resize', positionAboveBottomPlayer);
-    window.addEventListener('orientationchange', positionAboveBottomPlayer);
+    // Floats anywhere on screen now instead of being docked full-width to
+    // the bottom — drag by the header (or the small pill when minimized
+    // to reopen-tab form), position remembered across reloads.
+    makeDraggable(header, dgeLog, 'dgeLogPanelPos');
+    makeDraggable(reopenBtn, reopenBtn, 'dgeLogReopenPos');
 
     const oldLog = console.log;
     const oldWarn = console.warn;

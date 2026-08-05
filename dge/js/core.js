@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.0 (Softer caching + one automatic retry for large grantha content fetches, instead of a hard no-store with zero tolerance for a mobile-network hiccup)';
+window.DGE_VERSIONS['core.js'] = 'v3.1 (Real fix for the Rigveda "totalShlokas" crash: adapts the vedic_text items[] schema into the same shape every other module already renders, instead of leaving it unhandled)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -61,6 +61,55 @@ window.dgeLibraryCatalogPromise = fetch('data/library.json?t=' + Date.now(), { c
 // An empty pagehide/unload listener is the standard, reliable way to
 // disable bfcache eligibility across browsers.
 window.addEventListener('pagehide', function () {});
+
+// Every other module in this app (render, audio, markers, notes, search,
+// filter, ai) reads grantha data in ONE shape: {metadata, shlokas: {n:
+// {sa, commentaries}}, totalShlokas}, with n a plain sequential integer.
+// That shape matches PNS exactly, but the newer vedic_text schema
+// (Rigveda etc.) uses a different shape: {schema, default_author,
+// items: [{id, samhita_patha, rishi, devata, ...}]}. Rather than teaching
+// every one of those modules a second data shape, this adapts new-schema
+// data into the SAME old shape right after fetching, once, here — so
+// everything downstream keeps working completely unchanged.
+// This is what was actually throwing "Cannot read properties of
+// undefined (reading 'totalShlokas')": stotraData.metadata didn't exist
+// at all for this schema family, since it was never being adapted.
+function dgeNormalizeGranthaData(data, granthaTitle) {
+  if (!data) return data;
+  if (data.shlokas) return data; // already the expected shape (e.g. PNS) -- nothing to do
+
+  if (Array.isArray(data.items)) {
+    const shlokas = {};
+    data.items.forEach((item, idx) => {
+      // Sequential 1..N internal key -- every other module assumes plain
+      // integer indices. The real Vedic reference (e.g. "1.1.01") is kept
+      // as a visible field (see the 'vedicId' extra field in config.js)
+      // rather than used as the internal key.
+      const n = idx + 1;
+      shlokas[n] = {
+        sa: item.samhita_patha || item.sa || '',
+        vedicId: item.id || '',
+        rishi: item.rishi || '',
+        devata: item.devata || '',
+        chandas: item.chandas || '',
+        padapatha: item.pada_patha || '',
+        commentaries: {} // none in this schema family yet
+      };
+    });
+    return {
+      metadata: {
+        title: granthaTitle || data.schema || 'Untitled',
+        author: data.default_author || '',
+        totalShlokas: data.items.length,
+        availableCommentaries: {}
+      },
+      shlokas,
+      totalShlokas: data.items.length
+    };
+  }
+
+  return data; // unrecognized shape -- nothing safe to adapt, let it fail downstream with a clearer error than before at least
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. INITIALIZE GLOBAL DOM ELEMENTS
@@ -163,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchGranthaData(0)
       .then(data => {
-        window.stotraData = data;
+        window.stotraData = dgeNormalizeGranthaData(data, entry ? entry.title : null);
         initApp();
       })
       .catch(err => {

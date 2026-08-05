@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v5.9 (Real bug fix: appConfig was never actually attached to window — every appConfig-driven setting was silently using its hardcoded fallback regardless of what was configured)';
+window.DGE_VERSIONS['config.js'] = 'v6.0 (Extra shloka fields for Vedic content: vedicId/rishi/devata/chandas/padapatha)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -96,7 +96,14 @@ const SHLOKA_EXTRA_FIELDS = [
   { id: 'vyakarana', label: 'Vyakarana', icon: '⚙️', dataKey: 'vyakarana', enabled: false },
   { id: 'vrutta', label: 'Vrutta (Meter)', icon: '🎼', dataKey: 'vrutta', enabled: true },
   { id: 'alankara', label: 'Alankara', icon: '✨', dataKey: 'alankara', enabled: false },
-  { id: 'crossReferences', label: 'Cross References', icon: '🔀', dataKey: 'crossReferences', enabled: true }
+  { id: 'crossReferences', label: 'Cross References', icon: '🔀', dataKey: 'crossReferences', enabled: true },
+  // Vedic-content fields (see dgeNormalizeGranthaData in core.js, which is
+  // what actually populates these dataKeys for vedic_text-schema granthas)
+  { id: 'vedicId', label: 'Reference', icon: '📍', dataKey: 'vedicId', enabled: true },
+  { id: 'rishi', label: 'Rishi', icon: '🧘', dataKey: 'rishi', enabled: true },
+  { id: 'devata', label: 'Devata', icon: '🔥', dataKey: 'devata', enabled: true },
+  { id: 'chandas', label: 'Chandas', icon: '🎵', dataKey: 'chandas', enabled: true },
+  { id: 'padapatha', label: 'Padapatha', icon: '✂️', dataKey: 'padapatha', enabled: true }
 ];
 window.SHLOKA_EXTRA_FIELDS = SHLOKA_EXTRA_FIELDS;
 
