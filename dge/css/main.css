@@ -20,7 +20,7 @@
   --t-fast: 0.15s;
   --t-med: 0.25s;
   --font-multiplier: 18px;
-  --font-sanskrit: 'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', serif;
+  --font-sanskrit: 'Tiro Devanagari Sanskrit', 'Noto Sans Devanagari', 'Noto Serif Devanagari', serif;
   --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Traditional (default) palette — also the pre-JS fallback so there's no

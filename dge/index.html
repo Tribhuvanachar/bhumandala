@@ -10,7 +10,7 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- Robust Indic Transliteration Engine -->
 <!-- Pinned to 1.3.3 (latest confirmed release) and the exact filename the -->
@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.44.0">
+<link rel="stylesheet" href="css/main.css?v=4.45.0">
 </head>
 <body>
 
@@ -50,7 +50,7 @@
 
     <div style="position:relative;">
       <button class="btn-top" onclick="window.togglePopup('fontPopup')" title="Font Size">Aa</button>
-      <div class="popup popup-top" id="fontPopup" style="min-width: 140px;">
+      <div class="popup popup-top-left" id="fontPopup" style="min-width: 140px;">
         <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Reading Size</div>
         <div class="pop-item" data-size="16" onclick="window.setFontSize(16, this)">Small <span style="margin-left:auto; color:#8a7a63; font-size:10px;">16px</span></div>
         <div class="pop-item active" data-size="18" onclick="window.setFontSize(18, this)" id="font-def">Medium <span style="margin-left:auto; color:#8a7a63; font-size:10px;">18px</span></div>
@@ -61,7 +61,7 @@
 
     <div style="position:relative;">
       <button class="btn-top" onclick="window.togglePopup('commentaryPopup')" id="activeCommBtn" title="Commentary Options">💬</button>
-      <div class="popup popup-top" id="commentaryPopup">
+      <div class="popup popup-top-left" id="commentaryPopup">
         <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">View Bhashya</div>
         <div class="pop-item active" onclick="window.setCommentaryView('none', this)">None (Mula Only)</div>
         <div class="pop-item" onclick="window.setCommentaryView('all', this)">All Commentaries</div>
@@ -172,7 +172,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.44.0 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.45.0 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -649,32 +649,32 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.44.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.45.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.44.0"></script>
-<script src="js/state.js?v=4.44.0"></script>
-<script src="js/dev.js?v=4.44.0"></script>
-<script src="js/utils.js?v=4.44.0"></script>
-<script src="js/modals.js?v=4.44.0"></script>
-<script src="js/transliteration.js?v=4.44.0"></script>
-<script src="js/audio.js?v=4.44.0"></script>
-<script src="js/filter.js?v=4.44.0"></script>
-<script src="js/search.js?v=4.44.0"></script>
-<script src="js/markers.js?v=4.44.0"></script>
-<script src="js/notes.js?v=4.44.0"></script>
-<script src="js/history.js?v=4.44.0"></script>
-<script src="js/char-palette.js?v=4.44.0"></script>
-<script src="js/snippets.js?v=4.44.0"></script>
-<script src="js/actions.js?v=4.44.0"></script>
-<script src="js/voice.js?v=4.44.0"></script>
-<script src="js/screenshot.js?v=4.44.0"></script>
-<script src="js/ai.js?v=4.44.0"></script>
-<script src="js/render.js?v=4.44.0"></script>
+<script src="js/config.js?v=4.45.0"></script>
+<script src="js/state.js?v=4.45.0"></script>
+<script src="js/dev.js?v=4.45.0"></script>
+<script src="js/utils.js?v=4.45.0"></script>
+<script src="js/modals.js?v=4.45.0"></script>
+<script src="js/transliteration.js?v=4.45.0"></script>
+<script src="js/audio.js?v=4.45.0"></script>
+<script src="js/filter.js?v=4.45.0"></script>
+<script src="js/search.js?v=4.45.0"></script>
+<script src="js/markers.js?v=4.45.0"></script>
+<script src="js/notes.js?v=4.45.0"></script>
+<script src="js/history.js?v=4.45.0"></script>
+<script src="js/char-palette.js?v=4.45.0"></script>
+<script src="js/snippets.js?v=4.45.0"></script>
+<script src="js/actions.js?v=4.45.0"></script>
+<script src="js/voice.js?v=4.45.0"></script>
+<script src="js/screenshot.js?v=4.45.0"></script>
+<script src="js/ai.js?v=4.45.0"></script>
+<script src="js/render.js?v=4.45.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="js/admin-editor.js?v=4.44.0"></script>
-<script src="js/core.js?v=4.44.0"></script>
-<script src="js/library.js?v=4.44.0"></script>
+<script src="js/admin-editor.js?v=4.45.0"></script>
+<script src="js/core.js?v=4.45.0"></script>
+<script src="js/library.js?v=4.45.0"></script>
 
 <script>
   if (typeof console.log === "function") {

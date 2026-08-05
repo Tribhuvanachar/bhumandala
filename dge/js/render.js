@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v3.6 (Single-shloka "one at a time" view mode)';
+window.DGE_VERSIONS['render.js'] = 'v3.7 (Fixed single-view Next/Prev scrolling content under the sticky top bar — was scrolling the list container, which has no scroll-margin-top, instead of the actual card; Vedic content now breaks padas onto separate lines)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -260,11 +260,22 @@ function renderList() {
       extraFieldsHtml += `<div class="commentary-block" data-field="${f.id}"><div class="commentary-title">${f.icon} ${f.label}</div>${highlightText(converted, pattern)}</div>`;
     });
 
+    // Vedic content stores padas (quarter-verses) separated by " / " —
+    // scoped to just that content (detected via vedicId, which only the
+    // Vedic-schema normalizer in core.js sets) so this can't affect PNS
+    // or any other text that might use "/" for something else. Applied
+    // AFTER highlightText() so a search match spanning a pada boundary
+    // still highlights correctly first.
+    let mulaHtml = highlightText(mulaDisplayText, pattern);
+    if (shloka.vedicId) {
+      mulaHtml = mulaHtml.replace(/\s*\/\s*/g, '<br>');
+    }
+
     c.innerHTML = `
       ${cardActionsHtml}
       <div class="shloka-main-row">
         <div class="shloka-num">${i}</div>
-        <div class="shloka-text" onclick="if(typeof playShloka==='function') playShloka(${i})">${highlightText(mulaDisplayText, pattern)}</div>
+        <div class="shloka-text" onclick="if(typeof playShloka==='function') playShloka(${i})">${mulaHtml}</div>
         <button class="btn-icon copy-shloka-btn" title="Copy shloka text" onclick="event.stopPropagation(); if(typeof copyShlokaText==='function') copyShlokaText(${i})">📋</button>
       </div>
       ${extraFieldsHtml}
@@ -328,8 +339,11 @@ window.dgeSingleViewStep = function(direction) {
   if (newIdx < 0 || newIdx >= fIds.length) return;
   window.currentReadingId = fIds[newIdx];
   renderList();
-  const listEl = document.getElementById('shlokaList');
-  if (listEl) listEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Scroll the actual card, not the list container — the container has
+  // no scroll-margin-top of its own, so scrolling IT let the sticky top
+  // bar cover the card that landed right underneath it.
+  const cardEl = document.getElementById(`shloka-${window.currentReadingId}`);
+  if (cardEl) cardEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
 // Used by TOC quick-jump: in single-view mode, jumping shows/reads that
@@ -338,8 +352,8 @@ window.dgeSingleViewStep = function(direction) {
 window.dgeSetSingleViewId = function(id) {
   window.currentReadingId = id;
   renderList();
-  const listEl = document.getElementById('shlokaList');
-  if (listEl) listEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const cardEl = document.getElementById(`shloka-${window.currentReadingId}`);
+  if (cardEl) cardEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
 function navSearch(direction) {

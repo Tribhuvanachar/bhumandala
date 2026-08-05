@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['utils.js'] = 'v1.8 (Fixed a regression from the drag feature — the header drag-handle was swallowing taps on its own Copy/Max/✕ buttons; now only starts a drag when the touch didn\'t originate on one of them)';
+window.DGE_VERSIONS['utils.js'] = 'v1.9 (Dedicated ✥ drag handle instead of the whole header — removes the tap-vs-drag ambiguity entirely; added ⛶ Full fullscreen toggle)';
 
 window.DGE_THEMES = ['traditional', 'minimal', 'vibrant', 'darkglass'];
 window.DGE_THEME_META_COLORS = {
@@ -153,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
         handleEl.style.touchAction = 'none';
 
         handleEl.addEventListener('pointerdown', (e) => {
-            if (e.target.closest('button')) return; // let Copy/Max/✕ handle their own taps normally
             dragging = true;
             startX = e.clientX;
             startY = e.clientY;
@@ -198,11 +197,24 @@ document.addEventListener('DOMContentLoaded', () => {
     title.innerText = '📱 DGE Dev Logger';
     title.style.cssText = 'flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;';
 
+    // Dedicated drag handle — a separate small element with NO click
+    // behavior at all, so there's no ambiguity between "tap" and "drag"
+    // to get wrong (that ambiguity on the header itself, even after
+    // excluding button taps, was still unreliable).
+    const dragHandle = document.createElement('span');
+    dragHandle.innerText = '✥';
+    dragHandle.title = 'Drag to move';
+    dragHandle.style.cssText = 'flex-shrink: 0; padding: 2px 8px; font-size: 14px; touch-action: none; cursor: move;';
+
     const btnRowStyle = 'background: #333; color: #fff; border: 1px solid #0f0; padding: 5px 10px; font-size: 11px; font-weight: bold; border-radius: 6px; cursor: pointer; flex-shrink: 0; touch-action: manipulation;';
 
     const copyBtn = document.createElement('button');
     copyBtn.innerText = '📋 Copy';
     copyBtn.style.cssText = btnRowStyle;
+
+    const fullscreenBtn = document.createElement('button');
+    fullscreenBtn.innerText = '⛶ Full';
+    fullscreenBtn.style.cssText = btnRowStyle;
 
     const minimizeBtn = document.createElement('button');
     minimizeBtn.innerText = '▁ Min';
@@ -212,8 +224,10 @@ document.addEventListener('DOMContentLoaded', () => {
     closeBtn.innerText = '✕';
     closeBtn.style.cssText = btnRowStyle + ' border-color:#ff5555;';
 
+    header.appendChild(dragHandle);
     header.appendChild(title);
     header.appendChild(copyBtn);
+    header.appendChild(fullscreenBtn);
     header.appendChild(minimizeBtn);
     header.appendChild(closeBtn);
 
@@ -266,6 +280,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // header (with the Max button) stays visible so it's a single tap away.
     setMinimized(true);
 
+    let isFullscreen = false;
+    let preFullscreenStyle = '';
+    fullscreenBtn.onclick = () => {
+        isFullscreen = !isFullscreen;
+        if (isFullscreen) {
+            preFullscreenStyle = dgeLog.style.cssText;
+            dgeLog.style.cssText = 'display: block; position: fixed; left: 8px; right: 8px; top: 8px; bottom: 8px; width: auto; background: rgba(0,0,0,0.97); color: #0f0; font-family: monospace; font-size: 12px; z-index: 999999; max-height: none; overflow-y: auto; box-sizing: border-box; border: 2px solid #0f0; border-radius: 8px;';
+            if (isMinimized) setMinimized(false);
+            fullscreenBtn.innerText = '⛶ Exit';
+        } else {
+            dgeLog.style.cssText = preFullscreenStyle;
+            fullscreenBtn.innerText = '⛶ Full';
+        }
+    };
+
     closeBtn.onclick = () => {
         dgeLog.style.display = 'none';
         reopenBtn.style.display = 'block';
@@ -281,9 +310,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(reopenBtn);
 
     // Floats anywhere on screen now instead of being docked full-width to
-    // the bottom — drag by the header (or the small pill when minimized
-    // to reopen-tab form), position remembered across reloads.
-    makeDraggable(header, dgeLog, 'dgeLogPanelPos');
+    // the bottom — drag via the dedicated ✥ handle (or the small pill
+    // when minimized to reopen-tab form), position remembered across
+    // reloads.
+    makeDraggable(dragHandle, dgeLog, 'dgeLogPanelPos');
     makeDraggable(reopenBtn, reopenBtn, 'dgeLogReopenPos');
 
     const oldLog = console.log;
