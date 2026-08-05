@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v3.7 (Fixed single-view Next/Prev scrolling content under the sticky top bar — was scrolling the list container, which has no scroll-margin-top, instead of the actual card; Vedic content now breaks padas onto separate lines)';
+window.DGE_VERSIONS['render.js'] = 'v3.8 (Prev/Next nav is now inside the same sticky unit as the reading card, as a sibling not a child, so it can\'t be separately covered/scrolled-away or clipped by the card\'s own minimize overflow; scroll offset is now measured live instead of a stale CSS guess)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -331,6 +331,21 @@ window.dgeSetViewMode = function(mode) {
   if (typeof renderList === 'function') renderList();
 };
 
+// Scrolls a card to sit just below the sticky header stack (top bar +
+// reading-card-wrap), using their ACTUAL current rendered height rather
+// than a guessed CSS scroll-margin-top — that guess was tuned for one
+// layout state and went stale (visible as a scroll-then-correct jump)
+// once the header's real height changed with the nav bar move.
+function dgeScrollCardIntoView(cardEl) {
+  if (!cardEl) return;
+  const topBar = document.querySelector('.top-bar');
+  const readingWrap = document.getElementById('readingCardWrap');
+  const topBarHeight = topBar ? topBar.getBoundingClientRect().height : 0;
+  const wrapHeight = readingWrap ? readingWrap.getBoundingClientRect().height : 0;
+  const targetY = window.scrollY + cardEl.getBoundingClientRect().top - topBarHeight - wrapHeight - 10;
+  window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+}
+
 window.dgeSingleViewStep = function(direction) {
   if (!stotraData) return;
   const fIds = typeof getFilteredIds === 'function' ? getFilteredIds() : Object.keys(stotraData.shlokas).map(Number);
@@ -339,11 +354,7 @@ window.dgeSingleViewStep = function(direction) {
   if (newIdx < 0 || newIdx >= fIds.length) return;
   window.currentReadingId = fIds[newIdx];
   renderList();
-  // Scroll the actual card, not the list container — the container has
-  // no scroll-margin-top of its own, so scrolling IT let the sticky top
-  // bar cover the card that landed right underneath it.
-  const cardEl = document.getElementById(`shloka-${window.currentReadingId}`);
-  if (cardEl) cardEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  dgeScrollCardIntoView(document.getElementById(`shloka-${window.currentReadingId}`));
 };
 
 // Used by TOC quick-jump: in single-view mode, jumping shows/reads that
@@ -352,8 +363,7 @@ window.dgeSingleViewStep = function(direction) {
 window.dgeSetSingleViewId = function(id) {
   window.currentReadingId = id;
   renderList();
-  const cardEl = document.getElementById(`shloka-${window.currentReadingId}`);
-  if (cardEl) cardEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  dgeScrollCardIntoView(document.getElementById(`shloka-${window.currentReadingId}`));
 };
 
 function navSearch(direction) {
