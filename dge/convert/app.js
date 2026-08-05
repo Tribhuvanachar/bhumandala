@@ -9,6 +9,7 @@ window.DGE.App = (function () {
   const RendererMod = () => window.DGE.Renderer;
   const GitHubMod = () => window.DGE.GitHub;
   const MapperMod = () => window.DGE.Mapper;
+  const UrlImportMod = () => window.DGE.UrlImport;
 
   const DEFAULT_CHUNK_SIZE = 8;
 
@@ -72,6 +73,7 @@ window.DGE.App = (function () {
     }
 
     $('pdfFile').addEventListener('change', onFileSelected);
+    $('importUrlBtn').addEventListener('click', handleUrlImport);
     $('runOcrBtn').addEventListener('click', () => runOcr(false));
     $('resumeBtn').addEventListener('click', () => runOcr(true));
     $('cancelBtn').addEventListener('click', () => {
@@ -295,6 +297,40 @@ window.DGE.App = (function () {
     }
   }
 
+  async function handleUrlImport() {
+    clearError();
+    const url = $('importUrlInput').value.trim();
+    if (!url) return setError('Paste a page URL first.');
+
+    $('importUrlBtn').disabled = true;
+    try {
+      log('Fetching "' + url + '"…');
+      const { title, text } = await UrlImportMod().fetchPageText(url);
+
+      // Same reset + state shape as a fresh PDF upload, so everything
+      // downstream (chunked proofread, resumability, schema map, push)
+      // behaves identically regardless of source.
+      currentFileKey = 'url_' + title.replace(/[^a-zA-Z0-9_-]/g, '_');
+      ocrPages = UrlImportMod().splitIntoPages(text);
+      finalJson = null;
+      $('previewArea').innerHTML = '';
+      setPreviewLabel('');
+      $('resumeBar').style.display = 'none';
+      $('proofreadResumeNote').textContent = '';
+
+      await IDB().set(ocrDataKey(), { pages: ocrPages });
+      await IDB().set(ocrProgressKey(), { lastPage: ocrPages.length });
+
+      $('pageCountDisplay').textContent = `Fetched "${title}" — ${text.length.toLocaleString()} character(s), split into ${ocrPages.length} chunk(s) for proofreading.`;
+      log(`Fetched "${title}" successfully — ${ocrPages.length} chunk(s) prepared. Ready for step 3 (Proofread) — no OCR needed.`);
+      RendererMod().renderRawOcr(ocrPages, $('previewArea'));
+      setPreviewLabel('Showing fetched page text — untouched, before Gemini proofreading.');
+    } catch (e) {
+      setError('Import failed: ' + U().formatError(e));
+    } finally {
+      $('importUrlBtn').disabled = false;
+    }
+  }
   async function runOcr(fromResume) {
     clearError();
     cancelRequested = false;

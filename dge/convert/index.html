@@ -6,13 +6,13 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>DGE Convert v0.6.0</title>
-<link rel="stylesheet" href="style.css?v=0.6.0">
+<title>DGE Convert v0.7.0</title>
+<link rel="stylesheet" href="style.css?v=0.7.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
-<div>Version: <b id="versionDisplay">0.6.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.7.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF → page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -27,9 +27,14 @@
 </fieldset>
 
 <fieldset>
-  <legend>1. Upload PDF</legend>
+  <legend>1. Upload PDF or Import from URL</legend>
   <input id="pdfFile" type="file" accept="application/pdf,.pdf">
   <div id="pageCountDisplay" class="hint"></div>
+  <p class="hint">— or —</p>
+  <label for="importUrlInput">Page URL (e.g. a MediaWiki page like anandamakaranda.in)</label>
+  <input type="text" id="importUrlInput" placeholder="https://anandamakaranda.in/index.php?title=Bhagavadgitabhashya">
+  <button id="importUrlBtn">Fetch Page</button>
+  <p class="hint">Already-digital text — no OCR needed. Fetches the raw page text and prepares it for Proofread directly.</p>
 </fieldset>
 
 <fieldset>
@@ -104,8 +109,8 @@
 </fieldset>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.6.0';
-  window.DGE_CONVERT_BUILD = '2026-08-06';
+  window.DGE_CONVERT_VERSION = '0.7.0';
+  window.DGE_CONVERT_BUILD = '2026-08-07';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -115,14 +120,15 @@
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   }
 </script>
-<script src="utils.js?v=0.6.0"></script>
-<script src="idb.js?v=0.6.0"></script>
-<script src="pdf.js?v=0.6.0"></script>
-<script src="vision.js?v=0.6.0"></script>
-<script src="gemini.js?v=0.6.0"></script>
-<script src="github.js?v=0.6.0"></script>
-<script src="mapper.js?v=0.6.0"></script>
-<script src="renderer.js?v=0.6.0"></script>
-<script src="app.js?v=0.6.0"></script>
+<script src="utils.js?v=0.7.0"></script>
+<script src="idb.js?v=0.7.0"></script>
+<script src="pdf.js?v=0.7.0"></script>
+<script src="vision.js?v=0.7.0"></script>
+<script src="gemini.js?v=0.7.0"></script>
+<script src="github.js?v=0.7.0"></script>
+<script src="mapper.js?v=0.7.0"></script>
+<script src="urlimport.js?v=0.7.0"></script>
+<script src="renderer.js?v=0.7.0"></script>
+<script src="app.js?v=0.7.0"></script>
 </body>
 </html>

@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.0 — 2026-08-07
+- **URL import** — new "Fetch Page" option alongside PDF upload, for sources that are already digital text (e.g. anandamakaranda.in, confirmed to be a MediaWiki site by fetching a real page before writing this). Pulls raw text via MediaWiki's `?action=raw` endpoint (works across essentially any MediaWiki install, no server-side extension dependency), strips basic wikitext markup, and feeds the result into the exact same chunked proofread → schema map → push pipeline that OCR'd PDFs already use — no OCR step, no separate code path, no new credential surface. A page that's already text just skips straight to step 3.
+- New `urlimport.js` (`window.DGE.UrlImport`).
+
 ## v0.6.0 — 2026-08-06
 - **Schema Mapper + Push to GitHub — closes the pipeline.** New step 4: maps Gemini's generic proofread output into the REAL DGE grantha schema (matching `dge/data/stotras/pns/data.json`'s shape exactly), shown as an EDITABLE preview (every shloka's Sanskrit and commentary in its own textarea) before anything is pushed. "Push to GitHub" commits the new/updated grantha `data.json` AND the matching `data/library.json` catalog entry (title + `populated: true`) together in ONE atomic commit.
 - New `github.js` (`window.DGE.GitHub`) — a Convert-scoped port of the main app's batch diff-commit technique (blob/tree/commit/ref via the Git Data API), reusing the same approach rather than reimplementing something different. Shares the same `github_admin_pat` localStorage key as the main app's Admin panel — paste the token once, it works in both places.
