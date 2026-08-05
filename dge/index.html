@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.37.0">
+<link rel="stylesheet" href="css/main.css?v=4.38.0">
 </head>
 <body>
 
@@ -162,7 +162,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.37.0 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.38.0 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -561,20 +561,20 @@
         <label class="btn-sm" style="cursor:pointer; margin:0;">📤 Upload<input type="file" multiple style="display:none;" onchange="window.dgeAdminUploadFiles(this.files)"></label>
         <label class="btn-sm" style="cursor:pointer; margin:0;">📂 Upload Folder<input type="file" webkitdirectory multiple style="display:none;" onchange="window.dgeAdminUploadFolder(this.files)"></label>
         <label class="btn-sm" style="cursor:pointer; margin:0;">🗜️ Upload Zip<input type="file" accept=".zip" style="display:none;" onchange="window.dgeAdminUploadZip(this.files[0])"></label>
-        <div style="position:relative;">
-          <button class="btn-sm" onclick="window.togglePopup('adminMorePopup')">⋯ More</button>
-          <div class="popup popup-top" id="adminMorePopup">
-            <div class="pop-item" onclick="window.dgeAdminNewFolder(); window.togglePopup('adminMorePopup')">📁 New Folder</div>
-            <div class="pop-item" onclick="window.dgeAdminNewFile(); window.togglePopup('adminMorePopup')">➕ New File</div>
-            <div class="pop-item" onclick="window.dgeAdminAddImageFromUrl(); window.togglePopup('adminMorePopup')">🔗 Image URL</div>
-            <hr>
-            <div class="pop-item" onclick="window.dgeAdminToggleSort(); window.togglePopup('adminMorePopup')" id="adminSortBtn">🔤 Sort: Name</div>
-            <div class="pop-item" onclick="window.dgeAdminSelectAllInFolder(); window.togglePopup('adminMorePopup')">☑️ Select All</div>
-            <hr>
-            <div class="pop-item" onclick="window.dgeAdminDownloadGithubRepoZip(); window.togglePopup('adminMorePopup')">⚡ Fast Full-Repo Zip (GitHub)</div>
-          </div>
-        </div>
+        <button class="btn-sm" onclick="window.dgeAdminToggleMoreMenu()">⋯ More</button>
       </div>
+
+      <div id="adminMoreMenu" style="display:none; flex-wrap:wrap; gap:6px; margin:-6px 0 12px 0; padding:10px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px;">
+        <button class="btn-sm" onclick="window.dgeAdminNewFolder()">📁 New Folder</button>
+        <button class="btn-sm" onclick="window.dgeAdminNewFile()">➕ New File</button>
+        <button class="btn-sm" onclick="window.dgeAdminAddImageFromUrl()">🔗 Image URL</button>
+        <button class="btn-sm" onclick="window.dgeAdminToggleSort()" id="adminSortBtn">🔤 Sort: Name</button>
+        <button class="btn-sm" onclick="window.dgeAdminSelectAllInFolder()">☑️ Select All</button>
+        <button class="btn-sm" onclick="window.dgeAdminDownloadGithubRepoZip()">⚡ Fast Full-Repo Zip (GitHub)</button>
+        <button class="btn-sm" onclick="window.dgeAdminToggleRecentActivity()">🕐 Recent Activity (Undo)</button>
+      </div>
+
+      <div id="adminActivityPanel" style="display:none; margin:-6px 0 12px 0; padding:10px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px;"></div>
 
       <div id="adminSelectionBar" style="display:none; align-items:center; gap:8px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px; padding:8px 10px; margin-bottom:10px;">
         <span id="adminSelectionCount" style="font-size:12px; font-weight:700;">0 selected</span>
@@ -632,32 +632,32 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.37.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.38.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.37.0"></script>
-<script src="js/state.js?v=4.37.0"></script>
-<script src="js/dev.js?v=4.37.0"></script>
-<script src="js/utils.js?v=4.37.0"></script>
-<script src="js/modals.js?v=4.37.0"></script>
-<script src="js/transliteration.js?v=4.37.0"></script>
-<script src="js/audio.js?v=4.37.0"></script>
-<script src="js/filter.js?v=4.37.0"></script>
-<script src="js/search.js?v=4.37.0"></script>
-<script src="js/markers.js?v=4.37.0"></script>
-<script src="js/notes.js?v=4.37.0"></script>
-<script src="js/history.js?v=4.37.0"></script>
-<script src="js/char-palette.js?v=4.37.0"></script>
-<script src="js/snippets.js?v=4.37.0"></script>
-<script src="js/actions.js?v=4.37.0"></script>
-<script src="js/voice.js?v=4.37.0"></script>
-<script src="js/screenshot.js?v=4.37.0"></script>
-<script src="js/ai.js?v=4.37.0"></script>
-<script src="js/render.js?v=4.37.0"></script>
+<script src="js/config.js?v=4.38.0"></script>
+<script src="js/state.js?v=4.38.0"></script>
+<script src="js/dev.js?v=4.38.0"></script>
+<script src="js/utils.js?v=4.38.0"></script>
+<script src="js/modals.js?v=4.38.0"></script>
+<script src="js/transliteration.js?v=4.38.0"></script>
+<script src="js/audio.js?v=4.38.0"></script>
+<script src="js/filter.js?v=4.38.0"></script>
+<script src="js/search.js?v=4.38.0"></script>
+<script src="js/markers.js?v=4.38.0"></script>
+<script src="js/notes.js?v=4.38.0"></script>
+<script src="js/history.js?v=4.38.0"></script>
+<script src="js/char-palette.js?v=4.38.0"></script>
+<script src="js/snippets.js?v=4.38.0"></script>
+<script src="js/actions.js?v=4.38.0"></script>
+<script src="js/voice.js?v=4.38.0"></script>
+<script src="js/screenshot.js?v=4.38.0"></script>
+<script src="js/ai.js?v=4.38.0"></script>
+<script src="js/render.js?v=4.38.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="js/admin-editor.js?v=4.37.0"></script>
-<script src="js/core.js?v=4.37.0"></script>
-<script src="js/library.js?v=4.37.0"></script>
+<script src="js/admin-editor.js?v=4.38.0"></script>
+<script src="js/core.js?v=4.38.0"></script>
+<script src="js/library.js?v=4.38.0"></script>
 
 <script>
   if (typeof console.log === "function") {

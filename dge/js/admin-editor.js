@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.13 (Parallel + cancellable folder-zip download; fast whole-repo zipball option for large folders; toolbar reorganized into primary actions + a More popup)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.14 (Fixed More menu not opening — was clipped by the modal\'s scroll container; selection-mode-aware row taps prevent accidental navigation while selecting; bigger checkbox tap targets; Recent Activity panel with one-step Undo via revert-commit)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -205,6 +205,103 @@ window.dgeAdminToggleSort = function() {
   dgeAdminNavigate(dgeAdminCurrentPath);
 };
 
+window.dgeAdminToggleMoreMenu = function() {
+  const el = document.getElementById('adminMoreMenu');
+  if (!el) return;
+  el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
+};
+
+function dgeEscapeHtmlSafe(s) {
+  const div = document.createElement('div');
+  div.textContent = s;
+  return div.innerHTML;
+}
+
+window.dgeAdminToggleRecentActivity = function() {
+  const panel = document.getElementById('adminActivityPanel');
+  if (!panel) return;
+  const willShow = panel.style.display !== 'block';
+  panel.style.display = willShow ? 'block' : 'none';
+  if (willShow) dgeAdminRenderRecentActivity();
+};
+
+// Shows the last 5 commits on the branch, with an Undo button on only the
+// most recent one. Undo works by creating a NEW commit whose tree matches
+// the state immediately before that commit — nothing is destroyed or
+// force-pushed, the change is just reversed and the full history
+// (including the undone commit itself) stays intact and visible on
+// GitHub. This is why only the most recent entry can be undone at any
+// moment: reverting an older one cleanly (without also discarding
+// whatever came after it) needs real diff/cherry-pick logic this doesn't
+// attempt. Undoing repeatedly, one step at a time, reaches further back.
+async function dgeAdminRenderRecentActivity() {
+  const panel = document.getElementById('adminActivityPanel');
+  if (!panel) return;
+  panel.innerHTML = '<div class="note-preview-box" style="margin:0;">Loading recent activity…</div>';
+
+  try {
+    const { owner, repo, branch } = GITHUB_REPO_CONFIG;
+    const url = `${GH_API}/repos/${owner}/${repo}/commits?sha=${branch}&per_page=5&_=${Date.now()}`;
+    const commits = await dgeGithubRequest(url, { headers: dgeGithubHeaders(), cache: 'no-store' });
+    if (!commits || !commits.length) {
+      panel.innerHTML = '<div class="note-preview-box" style="margin:0;">No commit history found.</div>';
+      return;
+    }
+
+    panel.innerHTML = `<div style="font-size:11px; font-weight:700; color:var(--muted-text); text-transform:uppercase; margin-bottom:6px;">Recent Activity</div>` +
+      commits.map((c, i) => {
+        const msg = dgeEscapeHtmlSafe((c.commit.message || '').split('\n')[0]);
+        const date = new Date(c.commit.author.date).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
+        const action = i === 0
+          ? `<button class="btn-sm" style="color:var(--accent-red); margin-top:4px;" onclick="window.dgeAdminUndoLastCommit('${c.sha}')">↩️ Undo This</button>`
+          : `<div class="hint" style="font-size:10px; margin-top:4px;">Undo the entry above first to reach this one</div>`;
+        return `<div style="padding:8px 0; ${i < commits.length - 1 ? 'border-bottom:1px solid var(--card-border);' : ''}">
+          <div style="font-size:12px; font-weight:600;">${msg}</div>
+          <div style="font-size:10px; color:var(--muted-text); margin-top:2px;">${date} · ${c.sha.slice(0, 7)}</div>
+          ${action}
+        </div>`;
+      }).join('');
+  } catch (e) {
+    panel.innerHTML = `<div class="note-preview-box" style="margin:0; color:var(--accent-red);">Couldn't load activity: ${e.message}</div>`;
+  }
+}
+
+window.dgeAdminUndoLastCommit = async function(commitSha) {
+  if (!confirm('Undo the most recent change?\n\nThis creates a new commit that reverses it — nothing is erased from history, but the files go back to how they were right before that change.')) return;
+
+  dgeAdminShowWorking();
+  try {
+    const { owner, repo } = GITHUB_REPO_CONFIG;
+
+    // Guard against undoing the wrong thing if something else committed
+    // since this list was loaded (e.g. another tab, or someone else).
+    const head = await dgeGithubGetBranchHead();
+    if (head.commit.sha !== commitSha) {
+      throw new Error('New changes have happened since this list loaded — reopen Recent Activity and try again.');
+    }
+
+    const commitDetail = await dgeGithubRequest(`${GH_API}/repos/${owner}/${repo}/git/commits/${commitSha}`, { headers: dgeGithubHeaders(), cache: 'no-store' });
+    const parentSha = commitDetail.parents && commitDetail.parents[0] && commitDetail.parents[0].sha;
+    if (!parentSha) throw new Error('This is the very first commit in the repo — there\'s nothing before it to undo to.');
+    const parentCommit = await dgeGithubRequest(`${GH_API}/repos/${owner}/${repo}/git/commits/${parentSha}`, { headers: dgeGithubHeaders(), cache: 'no-store' });
+
+    const newCommit = await dgeGithubCreateCommit(
+      dgeAdminBuildCommitMessage('Undo previous change'),
+      parentCommit.tree.sha,
+      commitSha
+    );
+    await dgeGithubUpdateRef(newCommit.sha);
+
+    if (typeof showToast === 'function') showToast('Undone — files restored to how they were before that change.');
+    dgeAdminNavigate(dgeAdminCurrentPath);
+    dgeAdminRenderRecentActivity();
+  } catch (e) {
+    if (typeof showToast === 'function') showToast('Undo failed: ' + e.message);
+  } finally {
+    dgeAdminHideWorking();
+  }
+};
+
 // Full recursive tree — used for folder-level rename/move, where every
 // descendant file needs to be relocated.
 function dgeGithubGetRecursiveTree() {
@@ -346,9 +443,7 @@ async function dgeAdminNavigate(path) {
       const modifiedLabel = (dgeAdminSortMode === 'modified' && item.type === 'file' && modifiedByPath[item.path])
         ? `<span class="admin-file-size">${dgeFormatShortDate(modifiedByPath[item.path])}</span>`
         : (item.type === 'file' ? `<span class="admin-file-size">${dgeFormatBytes(item.size)}</span>` : '');
-      const rowAction = item.type === 'dir'
-        ? `onclick="window.dgeAdminNavigateClick('${item.path}')"`
-        : `onclick="window.dgeAdminOpenFile('${item.path}', '${item.name}')"`;
+      const rowAction = `onclick="window.dgeAdminRowClick(event, '${item.path}', '${item.type}', '${item.name.replace(/'/g, "\\'")}')"`;
       const isOpenFile = item.type === 'file' && item.path === dgeAdminOpenFilePath;
 
       const checked = dgeAdminSelectedItems.has(item.path) ? 'checked' : '';
@@ -1176,6 +1271,25 @@ window.dgeAdminToggleSelect = function(path, type, checked) {
   if (checked) dgeAdminSelectedItems.set(path, type);
   else dgeAdminSelectedItems.delete(path);
   dgeAdminUpdateSelectionBar();
+};
+
+// Tapping a row normally opens/navigates into it. But once ANY item is
+// already selected (selection mode active), tapping the rest of a row —
+// not just its small checkbox — toggles selection instead. This is what
+// stops a slightly-off tap from accidentally opening a folder while
+// trying to select several items to delete: the very first checkbox tap
+// still has to land precisely, but every tap after that is forgiving.
+window.dgeAdminRowClick = function(event, path, type, name) {
+  if (dgeAdminSelectedItems.size > 0) {
+    const nowChecked = !dgeAdminSelectedItems.has(path);
+    window.dgeAdminToggleSelect(path, type, nowChecked);
+    const row = event.currentTarget.closest('.admin-file-row');
+    const checkbox = row ? row.querySelector('.admin-select-checkbox') : null;
+    if (checkbox) checkbox.checked = nowChecked;
+    return;
+  }
+  if (type === 'dir') window.dgeAdminNavigateClick(path);
+  else window.dgeAdminOpenFile(path, name);
 };
 
 window.dgeAdminSelectAllInFolder = function() {
