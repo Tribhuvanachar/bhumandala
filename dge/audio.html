@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhagavad Gita - Chapter 1 Player</title>
+    <style>
+        :root {
+            --primary: #d35400;
+            --bg-color: #faf8f5;
+            --text-color: #2c3e50;
+            --highlight: #f39c12;
+            --hover-bg: #fdebd0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.8;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .controls {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: var(--hover-bg);
+            border-color: var(--highlight);
+        }
+        
+        #audio-player {
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .scripture-container {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            font-size: 1.6rem;
+            text-align: center;
+        }
+
+        .shloka-block {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .shloka-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .shloka-number {
+            font-size: 1rem;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .speaker {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .word {
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: all 0.15s ease-in-out;
+            display: inline-block;
+        }
+
+        .word:hover {
+            background-color: var(--hover-bg);
+        }
+        
+        /* The active highlight class */
+        .word.active {
+            background-color: var(--highlight);
+            color: #fff;
+            font-weight: bold;
+            transform: scale(1.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bhagavad Gita - Chapter 1</h1>
+
+    <div class="controls">
+        <button id="btn-prev">⏮ Previous</button>
+        <button id="btn-play">⏯ Play / Pause</button>
+        <button id="btn-next">⏭ Next</button>
+
+        <!-- Placeholder Audio Track for Demo -->
+        <audio id="audio-player" controls src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+    </div>
+
+    <div class="scripture-container" id="text-container">
+        <!-- Words will be injected here via JavaScript -->
+    </div>
+
+<script>
+    // Bhagavad Gita Chapter 1, Shlokas 1 & 2 with mock timestamps for the demo audio
+    const wordsData = [
+      {
+        "shloka": 1,
+        "speaker": "धृतराष्ट्र उवाच ।",
+        "words": [
+          { "text": "धर्मक्षेत्रे", "start": 0.500, "end": 2.000 },
+          { "text": "कुरुक्षेत्रे", "start": 2.100, "end": 3.500 },
+          { "text": "समवेता", "start": 3.600, "end": 5.000 },
+          { "text": "युयुत्सवः", "start": 5.100, "end": 6.800 },
+          { "text": "।", "start": 6.801, "end": 7.000 },
+          { "text": "मामकाः", "start": 7.500, "end": 8.800 },
+          { "text": "पाण्डवाश्चैव", "start": 8.900, "end": 10.500 },
+          { "text": "किमकुर्वत", "start": 10.600, "end": 12.000 },
+          { "text": "सञ्जय", "start": 12.100, "end": 13.500 },
+          { "text": "॥ १ ॥", "start": 13.501, "end": 14.000 }
+        ]
+      },
+      {
+        "shloka": 2,
+        "speaker": "सञ्जय उवाच ।",
+        "words": [
+          { "text": "दृष्ट्वा", "start": 14.500, "end": 15.500 },
+          { "text": "तु", "start": 15.600, "end": 16.000 },
+          { "text": "पाण्डवानीकं", "start": 16.100, "end": 18.000 },
+          { "text": "व्यूढं", "start": 18.100, "end": 19.200 },
+          { "text": "दुर्योधनस्तदा", "start": 19.300, "end": 21.000 },
+          { "text": "।", "start": 21.001, "end": 21.200 },
+          { "text": "आचार्यमुपसङ्गम्य", "start": 21.500, "end": 23.500 },
+          { "text": "राजा", "start": 23.600, "end": 24.500 },
+          { "text": "वचनमब्रवीत्", "start": 24.600, "end": 26.500 },
+          { "text": "॥ २ ॥", "start": 26.501, "end": 27.000 }
+        ]
+      }
+    ];
+
+    const audio = document.getElementById('audio-player');
+    const textContainer = document.getElementById('text-container');
+    const btnPlay = document.getElementById('btn-play');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+
+    let currentShlokaIndex = 0;
+    
+    // This array acts as our high-performance cache. 
+    // It prevents us from having to query the DOM on every audio tick.
+    let wordElements = []; 
+
+    // 1. Render the text dynamically
+    function renderText() {
+        textContainer.innerHTML = '';
+        wordElements = [];
+
+        wordsData.forEach((shlokaObj, sIndex) => {
+            const shlokaDiv = document.createElement('div');
+            shlokaDiv.className = 'shloka-block';
+            
+            const shlokaNum = document.createElement('span');
+            shlokaNum.className = 'shloka-number';
+            shlokaNum.innerText = `Shloka ${shlokaObj.shloka}`;
+            shlokaDiv.appendChild(shlokaNum);
+
+            if (shlokaObj.speaker) {
+                const speakerSpan = document.createElement('span');
+                speakerSpan.className = 'speaker';
+                speakerSpan.innerText = shlokaObj.speaker;
+                shlokaDiv.appendChild(speakerSpan);
+            }
+
+            shlokaObj.words.forEach((wordObj) => {
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'word';
+                wordSpan.innerText = wordObj.text + ' ';
+                
+                // Click word -> jump to timestamp
+                wordSpan.addEventListener('click', () => {
+                    audio.currentTime = wordObj.start;
+                    audio.play();
+                });
+
+                shlokaDiv.appendChild(wordSpan);
+                
+                // Push to our fast cache
+                wordElements.push({ 
+                    span: wordSpan, 
+                    start: wordObj.start, 
+                    end: wordObj.end,
+                    shlokaIndex: sIndex
+                });
+            });
+
+            textContainer.appendChild(shlokaDiv);
+        });
+    }
+
+    // 2. High-performance auto-highlight words on timeupdate
+    audio.addEventListener('timeupdate', () => {
+        const currentTime = audio.currentTime;
+        
+        // Loop through our fast array instead of the DOM
+        for (let i = 0; i < wordElements.length; i++) {
+            const item = wordElements[i];
+            const isActive = item.span.classList.contains('active');
+            const shouldBeActive = currentTime >= item.start && currentTime <= item.end;
+
+            // Only manipulate the DOM if the state actually needs to change
+            if (shouldBeActive && !isActive) {
+                item.span.classList.add('active');
+                currentShlokaIndex = item.shlokaIndex;
+            } else if (!shouldBeActive && isActive) {
+                item.span.classList.remove('active');
+            }
+        }
+    });
+
+    // 3. Play / Pause logic
+    btnPlay.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+    });
+
+    // 4. Previous / Next Shloka Navigation
+    btnPrev.addEventListener('click', () => {
+        if (currentShlokaIndex > 0) {
+            currentShlokaIndex--;
+            const targetShloka = wordsData[currentShlokaIndex];
+            audio.currentTime = targetShloka.words[0].start;
+            audio.play();
+        } else {
+            audio.currentTime = 0; // Jump to start if on the first shloka
+        }
+    });
+
+    btnNext.addEventListener('click', () => {
+        if (currentShlokaIndex < wordsData.length - 1) {
+            currentShlokaIndex++;
+            const targetShloka = wordsData[currentShlokaIndex];
+            audio.currentTime = targetShloka.words[0].start;
+            audio.play();
+        }
+    });
+
+    // Initialize the app
+    renderText();
+
+</script>
+</body>
+</html>
