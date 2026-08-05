@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v2.7 (Restores single-view reading mode + last-read position on load)';
+window.DGE_VERSIONS['core.js'] = 'v2.8 (Cache-busted library.json + grantha content fetches; new dgeForceRefreshContent helper)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -14,9 +14,25 @@ window.dgeGranthaSlug = function(catalogPath) {
   return window.dgeLibraryPathToFetchPath(catalogPath).replace(/^data\//, '').replace(/\/data\.json$/, '');
 };
 
+// Forces a genuinely fresh reload — bypasses any browser/CDN caching of
+// index.html, the JS files, and the content JSON, by navigating to a URL
+// the browser has never seen before (same page, one changed query param).
+// Only affects what gets fetched from GitHub; marks/notes/history/theme
+// all live in localStorage and are completely unaffected.
+window.dgeForceRefreshContent = function() {
+  const url = new URL(window.location.href);
+  url.searchParams.set('_refresh', Date.now());
+  window.location.href = url.toString();
+};
+
 // Fetched once, shared with library.js so the browser modal doesn't need
-// a second network round trip for the same file.
-window.dgeLibraryCatalogPromise = fetch('data/library.json')
+// a second network round trip for the same file. Cache-busted with both
+// cache:'no-store' AND a timestamp query param — without this, a browser
+// (or GitHub Pages' CDN) can keep serving library.json from BEFORE your
+// most recent content update indefinitely, making newly-added/newly-
+// populated granthas silently invisible even though the real files are
+// correctly on GitHub.
+window.dgeLibraryCatalogPromise = fetch('data/library.json?t=' + Date.now(), { cache: 'no-store' })
   .then(res => res.ok ? res.json() : null)
   .catch(() => null);
 
@@ -98,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    fetch(window.jsonFileName)
+    fetch(window.jsonFileName + '?t=' + Date.now(), { cache: 'no-store' })
       .then(res => {
         if (!res.ok) throw new Error(`Could not find dataset at ${window.jsonFileName}`);
         return res.json();
@@ -181,8 +197,15 @@ function initAuthAndBranding() {
   if (isAuthorized) document.body.classList.add('is-authorized');
   
   const authorEl = document.getElementById('stotraAuthor');
-  const designedBy = (window.appConfig && window.appConfig.designedBy) ? window.appConfig.designedBy : 'TRIBHUVAN ACHAR';
-  if(authorEl) authorEl.innerText = `DESIGNED BY ${designedBy.toUpperCase()}`;
+  const showDesignedBy = !(window.appConfig && window.appConfig.showDesignedBy === false);
+  if (authorEl) {
+    if (!showDesignedBy) {
+      authorEl.style.display = 'none';
+    } else {
+      const designedBy = (window.appConfig && window.appConfig.designedBy) ? window.appConfig.designedBy : 'TRIBHUVAN ACHAR';
+      authorEl.innerText = `DESIGNED BY ${designedBy.toUpperCase()}`;
+    }
+  }
   
   const emailDisplay = document.getElementById('contactEmailDisplay');
   const contactEmail = (window.appConfig && window.appConfig.contactEmail) ? window.appConfig.contactEmail : 'sanatanavidyagurukulam@gmail.com';

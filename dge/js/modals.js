@@ -3,7 +3,7 @@
 
 // Register Module Version
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['modals.js'] = 'v1.3 (Contributors section)';
+window.DGE_VERSIONS['modals.js'] = 'v1.4 (Key Sponsors section; sponsor category enabled filter)';
 
 function openModal(id) {
   const modal = document.getElementById(id);
@@ -60,6 +60,26 @@ window.openAboutModal = function() {
       contribEl.innerHTML = '';
     }
   }
+
+  const sponsorsEl = document.getElementById('keySponsorsSection');
+  if (sponsorsEl) {
+    const sCfg = (typeof KEY_SPONSORS_CONFIG !== 'undefined') ? KEY_SPONSORS_CONFIG : null;
+    const sList = (sCfg && sCfg.enabled && Array.isArray(sCfg.sponsors)) ? sCfg.sponsors : [];
+    if (sList.length) {
+      sponsorsEl.innerHTML = `
+        <div class="actions-section-label" style="margin-top:20px;">💝 Key Sponsors</div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          ${sList.map(s => `
+            <div>
+              <div style="font-size:12px; font-weight:700;">${s.name}</div>
+              <div style="font-size:11px; color:var(--muted-text);">${s.contribution || ''}</div>
+            </div>`).join('')}
+        </div>`;
+    } else {
+      sponsorsEl.innerHTML = '';
+    }
+  }
+
   openModal('aboutModal');
   localStorage.setItem('has_seen_welcome', 'true');
 };
@@ -106,7 +126,7 @@ window.openSponsorModal = function() {
 
   html += `<div class="actions-section-label">🙏 Ways to Sponsor</div>`;
   html += `<div style="display:flex; flex-direction:column; gap:10px;">`;
-  (cfg.sponsorCategories || []).forEach(c => {
+  (cfg.sponsorCategories || []).filter(c => c.enabled !== false).forEach(c => {
     const subject = encodeURIComponent(`Sponsorship enquiry — ${c.label}`);
     const bodyText = encodeURIComponent(`I'd like to know more about sponsoring: ${c.label}`);
     const mailto = `mailto:${cfg.contactForSponsorship}?subject=${subject}&body=${bodyText}`;

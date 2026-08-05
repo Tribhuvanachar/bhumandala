@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.14 (Fixed More menu not opening — was clipped by the modal\'s scroll container; selection-mode-aware row taps prevent accidental navigation while selecting; bigger checkbox tap targets; Recent Activity panel with one-step Undo via revert-commit)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.15 (Upload Zip now shows a full preview — file count, size, paths — with explicit Confirm/Cancel before anything commits; real animated spinner instead of a static hourglass)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -320,7 +320,7 @@ function dgeIsTextFile(name) {
 // ---------------------------------------------------------------
 function dgeAdminShowWorking() {
   const el = document.getElementById('adminEditorWorking');
-  if (el) el.style.display = 'block';
+  if (el) el.style.display = 'flex';
 }
 function dgeAdminHideWorking() {
   const el = document.getElementById('adminEditorWorking');
@@ -675,6 +675,21 @@ window.dgeAdminUploadFolder = async function(fileList) {
 //    stripping) get a ".gitkeep" placeholder — Git has no concept of an
 //    empty directory at all, so without this an empty folder in the zip
 //    simply wouldn't appear on GitHub.
+let dgeAdminPendingZip = null; // { fileEntries, emptyDirCount, sourceName } -- awaiting confirmation
+
+// Extracts a .zip file entirely client-side (JSZip — already loaded for
+// the folder-download feature) and shows exactly what it WOULD commit —
+// every target path, total size, empty-folder count — before anything
+// actually touches GitHub. Nothing is pushed until dgeAdminConfirmZipUpload
+// is explicitly tapped.
+// Two things this handles that a naive extract-and-upload wouldn't:
+//  - Redundant leading folder segment (see dgeStripRedundantFolderPrefix)
+//    — matters a lot here since the admin's access is root-locked to
+//    "dge" and every delivery zip is itself wrapped in "dge/".
+//  - Directories in the zip that end up with no files under them (after
+//    stripping) get a ".gitkeep" placeholder — Git has no concept of an
+//    empty directory at all, so without this an empty folder in the zip
+//    simply wouldn't appear on GitHub.
 window.dgeAdminUploadZip = async function(file) {
   if (!file) return;
   if (typeof JSZip === 'undefined') {
@@ -682,7 +697,7 @@ window.dgeAdminUploadZip = async function(file) {
     return;
   }
 
-  if (typeof showToast === 'function') showToast(`Extracting "${file.name}"…`);
+  if (typeof showToast === 'function') showToast(`Reading "${file.name}"…`);
   dgeAdminShowWorking();
 
   try {
@@ -727,9 +742,58 @@ window.dgeAdminUploadZip = async function(file) {
       }
     }
 
+    dgeAdminPendingZip = { fileEntries, emptyDirCount, sourceName: file.name };
+    dgeAdminRenderZipPreview();
+  } catch (e) {
+    if (typeof showToast === 'function') showToast('Reading zip failed: ' + e.message);
+  } finally {
+    dgeAdminHideWorking();
+  }
+};
+
+function dgeAdminRenderZipPreview() {
+  const panel = document.getElementById('adminZipPreview');
+  if (!panel || !dgeAdminPendingZip) return;
+  const { fileEntries, emptyDirCount, sourceName } = dgeAdminPendingZip;
+
+  const totalBytes = fileEntries.reduce((sum, f) => sum + (f.bytes ? f.bytes.length : 0), 0);
+  const VISIBLE_LIMIT = 50;
+  const shown = fileEntries.slice(0, VISIBLE_LIMIT);
+  const remaining = fileEntries.length - shown.length;
+
+  panel.style.display = 'block';
+  panel.innerHTML = `
+    <div style="font-weight:800; font-size:13px; margin-bottom:6px;">📦 About to upload from "${sourceName}"</div>
+    <div style="font-size:12px; margin-bottom:8px;">${fileEntries.length} file(s), ${dgeFormatBytes(totalBytes)} total${emptyDirCount ? `, including ${emptyDirCount} empty folder(s) via .gitkeep` : ''}</div>
+    <div style="max-height:180px; overflow-y:auto; font-size:11px; font-family:monospace; background:var(--bg-main); border-radius:6px; padding:8px; margin-bottom:10px;">
+      ${shown.map(f => `<div>${f.path}</div>`).join('')}
+      ${remaining > 0 ? `<div style="color:var(--muted-text); margin-top:4px;">…and ${remaining} more</div>` : ''}
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn-sm" style="background:var(--accent-red); color:#fff;" onclick="window.dgeAdminConfirmZipUpload()">✅ Confirm & Upload</button>
+      <button class="btn-sm" onclick="window.dgeAdminCancelZipUpload()">❌ Cancel</button>
+    </div>`;
+}
+
+window.dgeAdminCancelZipUpload = function() {
+  dgeAdminPendingZip = null;
+  const panel = document.getElementById('adminZipPreview');
+  if (panel) { panel.style.display = 'none'; panel.innerHTML = ''; }
+};
+
+window.dgeAdminConfirmZipUpload = async function() {
+  if (!dgeAdminPendingZip) return;
+  const { fileEntries, emptyDirCount, sourceName } = dgeAdminPendingZip;
+
+  const panel = document.getElementById('adminZipPreview');
+  if (panel) { panel.style.display = 'none'; panel.innerHTML = ''; }
+  dgeAdminPendingZip = null;
+  dgeAdminShowWorking();
+
+  try {
     const result = await dgeAdminBatchCommit(
       fileEntries,
-      dgeAdminBuildCommitMessage(`Sync from zip "${file.name}" — ${fileEntries.length} file(s) in zip`)
+      dgeAdminBuildCommitMessage(`Sync from zip "${sourceName}" — ${fileEntries.length} file(s) in zip`)
     );
 
     if (result.uploaded === 0) {

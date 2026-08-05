@@ -1,11 +1,12 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v5.7 (ADMIN_NEW_FILE_EXTENSIONS)';
+window.DGE_VERSIONS['config.js'] = 'v5.8 (Per-sponsor-item enabled flags; showDesignedBy toggle; KEY_SPONSORS_CONFIG)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
   designedBy: "- 3BU1 -",
+  showDesignedBy: true, // set false to hide the credit line entirely instead of just changing its text
   contactEmail: "sanatanavidyagurukulam@gmail.com",
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
@@ -250,11 +251,11 @@ const SPONSOR_CONFIG = {
     { label: 'Content digitisation & proofreading', amount: 20000, period: 'as needed' }
   ],
   sponsorCategories: [
-    { icon: '💻', label: 'Backend / UI Development', description: 'Support ongoing feature work, bug fixes, and infrastructure for this app.' },
-    { icon: '🕉️', label: "Acharya's Monthly Support", description: "Contribute toward the Acharya's monthly food and living expenses." },
-    { icon: '🏫', label: 'Gurukula & Goshala', description: 'Support the Gurukula and the upcoming Goshala (cow shelter).' },
-    { icon: '📚', label: "Children's Education", description: 'Support educational expenses for children at the Gurukula.' },
-    { icon: '🙏', label: 'General Token of Appreciation', description: 'An open contribution, undesignated, used wherever most needed.' }
+    { icon: '💻', label: 'Backend / UI Development', description: 'Support ongoing feature work, bug fixes, and infrastructure for this app.', enabled: true },
+    { icon: '🕉️', label: "Acharya's Monthly Support", description: "Contribute toward the Acharya's monthly food and living expenses.", enabled: true },
+    { icon: '🏫', label: 'Gurukula & Goshala', description: 'Support the Gurukula and the upcoming Goshala (cow shelter).', enabled: true },
+    { icon: '📚', label: "Children's Education", description: 'Support educational expenses for children at the Gurukula.', enabled: true },
+    { icon: '🙏', label: 'General Token of Appreciation', description: 'An open contribution, undesignated, used wherever most needed.', enabled: true }
   ],
   contactForSponsorship: 'sanatanavidyagurukulam@gmail.com'
 };
@@ -271,6 +272,16 @@ const CONTRIBUTORS_CONFIG = {
   ]
 };
 window.CONTRIBUTORS_CONFIG = CONTRIBUTORS_CONFIG;
+
+// Key Sponsors — people/orgs covering a specific real cost, with a short
+// note on what exactly. Empty by default, same as CONTRIBUTORS_CONFIG —
+// add real entries here once confirmed, nothing invented. Example shape:
+//   { name: 'Jane Doe', contribution: 'Covers the Google Cloud Vision API billing' }
+const KEY_SPONSORS_CONFIG = {
+  enabled: true,
+  sponsors: []
+};
+window.KEY_SPONSORS_CONFIG = KEY_SPONSORS_CONFIG;
 
 // Multi-provider AI configuration. Each provider is only used if the person
 // has saved a key for it (via the ⚙️ Settings). Model names are left
