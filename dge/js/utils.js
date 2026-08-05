@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['utils.js'] = 'v2.0 (Dev log now defaults to near the top of the screen instead of mid-content, where it was landing on top of reading material by default)';
+window.DGE_VERSIONS['utils.js'] = 'v2.1 (Bumped the saved drag-position storage key — old saved positions from before the top-of-screen default was overriding the new default entirely)';
 
 window.DGE_THEMES = ['traditional', 'minimal', 'vibrant', 'darkglass'];
 window.DGE_THEME_META_COLORS = {
@@ -313,8 +313,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // the bottom — drag via the dedicated ✥ handle (or the small pill
     // when minimized to reopen-tab form), position remembered across
     // reloads.
-    makeDraggable(dragHandle, dgeLog, 'dgeLogPanelPos');
-    makeDraggable(reopenBtn, reopenBtn, 'dgeLogReopenPos');
+    makeDraggable(dragHandle, dgeLog, 'dgeLogPanelPos_v3');
+    makeDraggable(reopenBtn, reopenBtn, 'dgeLogReopenPos_v3');
 
     const oldLog = console.log;
     const oldWarn = console.warn;

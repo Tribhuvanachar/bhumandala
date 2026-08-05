@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v3.8 (Prev/Next nav is now inside the same sticky unit as the reading card, as a sibling not a child, so it can\'t be separately covered/scrolled-away or clipped by the card\'s own minimize overflow; scroll offset is now measured live instead of a stale CSS guess)';
+window.DGE_VERSIONS['render.js'] = 'v3.9 (Deferred single-view scroll to next animation frame — measuring layout immediately after renderList\'s DOM rebuild could catch a mid-reflow stale position, visible as scroll-then-correct jank)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -354,7 +354,14 @@ window.dgeSingleViewStep = function(direction) {
   if (newIdx < 0 || newIdx >= fIds.length) return;
   window.currentReadingId = fIds[newIdx];
   renderList();
-  dgeScrollCardIntoView(document.getElementById(`shloka-${window.currentReadingId}`));
+  // Deferred a frame: reading layout (getBoundingClientRect) immediately
+  // after renderList's DOM rebuild can catch the browser mid-reflow and
+  // return a stale position, which is what a visible "jump then correct"
+  // looks like — waiting for the next frame means layout has actually
+  // finished settling before anything gets measured.
+  requestAnimationFrame(() => {
+    dgeScrollCardIntoView(document.getElementById(`shloka-${window.currentReadingId}`));
+  });
 };
 
 // Used by TOC quick-jump: in single-view mode, jumping shows/reads that
@@ -363,7 +370,9 @@ window.dgeSingleViewStep = function(direction) {
 window.dgeSetSingleViewId = function(id) {
   window.currentReadingId = id;
   renderList();
-  dgeScrollCardIntoView(document.getElementById(`shloka-${window.currentReadingId}`));
+  requestAnimationFrame(() => {
+    dgeScrollCardIntoView(document.getElementById(`shloka-${window.currentReadingId}`));
+  });
 };
 
 function navSearch(direction) {
