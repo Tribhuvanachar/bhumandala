@@ -63,6 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (dgeCheckSuperadminGate()) {
     const btn = document.getElementById('adminEditorBtn');
     if (btn) btn.style.display = 'flex';
+    const convertBtn = document.getElementById('convertToolBtn');
+    if (convertBtn) convertBtn.style.display = 'flex';
   }
 });
 
