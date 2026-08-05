@@ -394,43 +394,53 @@
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_01/data.json",
-      "populated": false
+      "populated": true,
+      "title": "ऋग्वेदः मण्डलम् १"
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_02/data.json",
-      "populated": false
+      "populated": true,
+      "title": "ऋग्वेदः मण्डलम् २"
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_03/data.json",
-      "populated": false
+      "populated": true,
+      "title": "ऋग्वेदः मण्डलम् ३"
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_04/data.json",
-      "populated": false
+      "populated": true,
+      "title": "ऋग्वेदः मण्डलम् ४"
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_05/data.json",
-      "populated": false
+      "populated": true,
+      "title": "ऋग्वेदः मण्डलम् ५"
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_06/data.json",
-      "populated": false
+      "populated": true,
+      "title": "ऋग्वेदः मण्डलम् ६"
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_07/data.json",
-      "populated": false
+      "populated": true,
+      "title": "ऋग्वेदः मण्डलम् ७"
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_08/data.json",
-      "populated": false
+      "populated": true,
+      "title": "ऋग्वेदः मण्डलम् ८"
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_09/data.json",
-      "populated": false
+      "populated": true,
+      "title": "ऋग्वेदः मण्डलम् ९"
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_10/data.json",
-      "populated": false
+      "populated": true,
+      "title": "ऋग्वेदः मण्डलम् १०"
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/brahmanas/aitareya_brahmana/data.json",
