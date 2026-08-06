@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['transliteration.js'] = 'v1.2';
+window.DGE_VERSIONS['transliteration.js'] = 'v1.3 (Re-renders the library browser on script change so its labels follow the selected script)';
 
 window.applyTransliteration = function(htmlText, script) {
     console.log(`[Transliteration] Request to convert to: ${script}`);
@@ -71,6 +71,16 @@ window.setScript = function(code, el) {
         if (window.activeId && window.els && window.els.readingCard && typeof window.getText === 'function') {
             window.els.readingCard.innerHTML = window.getText(window.activeId);
             if (typeof window.wrapReadingCardWordsForSync === 'function') window.wrapReadingCardWordsForSync();
+        }
+
+        // The library browser builds its labels in the active script too,
+        // so it needs rebuilding if it happens to be open — otherwise it
+        // sits there in the previous script until manually reopened.
+        // (openModal sets style.display rather than adding a class.)
+        const libModal = document.getElementById('libraryModal');
+        if (libModal && libModal.style.display === 'flex' &&
+            typeof window.openLibraryModal === 'function') {
+            window.openLibraryModal();
         }
         
         if (typeof window.togglePopup === 'function') window.togglePopup('scriptPopup');

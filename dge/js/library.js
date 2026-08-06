@@ -8,55 +8,86 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v2.0 (Collapsible taxonomy tree; fixed sort that interleaved different texts by trailing number)';
+window.DGE_VERSIONS['library.js'] = 'v2.1 (Library labels and grantha titles now follow the selected script — were mixed IAST/Devanagari and ignored the script selector)';
 
-// Display names for path segments. Anything not listed falls back to
-// dgeAutoLabel() below, so new folders never break the browser — this map
-// only exists to give proper diacritics/Devanagari where it matters.
+// Display names for path segments, stored in DEVANAGARI as the single
+// source of truth — every label is then run through the app's existing
+// applyTransliteration() into whichever script the user has selected
+// (Sanskrit / English-IAST / Kannada / Telugu / Tamil / Malayalam).
+// Previously these were hardcoded IAST while grantha titles rendered in
+// Devanagari, so the same menu mixed two scripts and neither responded
+// to the script selector.
+// Anything not listed falls back to dgeAutoLabel(), which is ASCII and
+// deliberately left untransliterated — a folder name we have no Sanskrit
+// name for shouldn't be mangled through a Devanagari->script converter.
 const DGE_PATH_LABELS = {
-  vedas: 'Vedas', stotras: 'Stotras', puranas: 'Purāṇas',
-  itihasas: 'Itihāsas', smritis: 'Smṛtis', sutras: 'Sūtras',
-  dharmashastra: 'Dharmaśāstra', pancharatra_agama: 'Pāñcarātra Āgama',
-  sarvamoola_grantha: 'Sarvamūla Granthas', dasakuta: 'Dāsakūṭa',
-  vyasakuta: 'Vyāsakūṭa', ancillary: 'Ancillary',
+  vedas: 'वेदाः', stotras: 'स्तोत्राणि', puranas: 'पुराणानि',
+  itihasas: 'इतिहासाः', smritis: 'स्मृतयः', sutras: 'सूत्राणि',
+  dharmashastra: 'धर्मशास्त्रम्', pancharatra_agama: 'पाञ्चरात्रागमः',
+  sarvamoola_grantha: 'सर्वमूलग्रन्थाः', dasakuta: 'दासकूटः',
+  vyasakuta: 'व्यासकूटः',
 
-  rigveda: 'Ṛgveda', yajurveda: 'Yajurveda',
-  samaveda: 'Sāmaveda', atharvaveda: 'Atharvaveda',
+  rigveda: 'ऋग्वेदः', yajurveda: 'यजुर्वेदः',
+  samaveda: 'सामवेदः', atharvaveda: 'अथर्ववेदः',
 
-  krishna_yajurveda: 'Kṛṣṇa Yajurveda', shukla_yajurveda: 'Śukla Yajurveda',
+  krishna_yajurveda: 'कृष्णयजुर्वेदः', shukla_yajurveda: 'शुक्लयजुर्वेदः',
 
-  shakala_shakha: 'Śākala Śākhā', bashkala_shakha: 'Bāṣkala Śākhā',
-  shaunaka_shakha: 'Śaunaka Śākhā', paippalada_shakha: 'Paippalāda Śākhā',
-  kauthuma_shakha: 'Kauthuma Śākhā', ranayaniya_shakha: 'Rāṇāyanīya Śākhā',
-  jaiminiya_shakha: 'Jaiminīya Śākhā', taittiriya_shakha: 'Taittirīya Śākhā',
-  maitrayani_shakha: 'Maitrāyaṇī Śākhā', katha_shakha: 'Kaṭha Śākhā',
-  vajasaneyi_madhyandina_shakha: 'Vājasaneyi Mādhyandina Śākhā',
-  vajasaneyi_kanva_shakha: 'Vājasaneyi Kāṇva Śākhā',
+  shakala_shakha: 'शाकलशाखा', bashkala_shakha: 'बाष्कलशाखा',
+  shaunaka_shakha: 'शौनकशाखा', paippalada_shakha: 'पैप्पलादशाखा',
+  kauthuma_shakha: 'कौथुमशाखा', ranayaniya_shakha: 'राणायनीयशाखा',
+  jaiminiya_shakha: 'जैमिनीयशाखा', taittiriya_shakha: 'तैत्तिरीयशाखा',
+  maitrayani_shakha: 'मैत्रायणीशाखा', katha_shakha: 'कठशाखा',
+  vajasaneyi_madhyandina_shakha: 'वाजसनेयिमाध्यन्दिनशाखा',
+  vajasaneyi_kanva_shakha: 'वाजसनेयिकाण्वशाखा',
 
-  samhita: 'Saṃhitā', brahmana: 'Brāhmaṇa', brahmanas: 'Brāhmaṇas',
-  aranyaka: 'Āraṇyaka', aranyakas: 'Āraṇyakas',
-  upanishad: 'Upaniṣad', upanishads: 'Upaniṣads',
-  mula: 'Mūla', tika: 'Ṭīkā', tippani: 'Ṭippaṇī',
-  purvarchika: 'Pūrvārcika', uttararchika: 'Uttarārcika'
+  samhita: 'संहिता', brahmana: 'ब्राह्मणम्', brahmanas: 'ब्राह्मणानि',
+  aranyaka: 'आरण्यकम्', aranyakas: 'आरण्यकानि',
+  upanishad: 'उपनिषत्', upanishads: 'उपनिषदः',
+  mula: 'मूलम्', tika: 'टीका', tippani: 'टिप्पणी',
+  purvarchika: 'पूर्वार्चिकः', uttararchika: 'उत्तरार्चिकः',
+  taittiriya_brahmana: 'तैत्तिरीयब्राह्मणम्',
+  taittiriya_aranyaka: 'तैत्तिरीयारण्यकम्'
 };
 
-// "mandala_07" -> "Maṇḍala 7"; "some_folder_name" -> "Some Folder Name".
+// Numbered folders, e.g. "mandala_07". The prefix is Devanagari (so it
+// transliterates with everything else) and the numeral is converted to
+// the matching script's digits by the same engine.
 const DGE_NUMBERED_PREFIXES = {
-  mandala: 'Maṇḍala', kanda: 'Kāṇḍa', adhyaya: 'Adhyāya',
-  skandha: 'Skandha', prapathaka: 'Prapāṭhaka', anuvaka: 'Anuvāka',
-  ashtaka: 'Aṣṭaka', parva: 'Parva', sarga: 'Sarga'
+  mandala: 'मण्डलम्', kanda: 'काण्डम्', adhyaya: 'अध्यायः',
+  skandha: 'स्कन्धः', prapathaka: 'प्रपाठकः', anuvaka: 'अनुवाकः',
+  ashtaka: 'अष्टकम्', parva: 'पर्व', sarga: 'सर्गः'
 };
+
+const DGE_DEVA_DIGITS = ['०','१','२','३','४','५','६','७','८','९'];
+function dgeDevaNum(n) {
+  return String(n).split('').map(d => DGE_DEVA_DIGITS[+d]).join('');
+}
+
+// Converts a Devanagari label into the user's currently selected script,
+// reusing the same engine the reading view uses so the whole app stays
+// consistent. Non-Devanagari input (an auto-generated ASCII folder name)
+// is returned untouched.
+function dgeToActiveScript(devaText) {
+  const script = window.activeScript || localStorage.getItem('app_script') || 'devanagari';
+  if (script === 'devanagari') return devaText;
+  if (!/[\u0900-\u097F]/.test(devaText)) return devaText;
+  if (typeof window.applyTransliteration === 'function') {
+    try { return window.applyTransliteration(devaText, script); } catch (e) { return devaText; }
+  }
+  return devaText;
+}
 
 function dgeAutoLabel(seg) {
   const m = seg.match(/^([a-z]+)_(\d+)$/i);
   if (m && DGE_NUMBERED_PREFIXES[m[1].toLowerCase()]) {
-    return DGE_NUMBERED_PREFIXES[m[1].toLowerCase()] + ' ' + parseInt(m[2], 10);
+    return DGE_NUMBERED_PREFIXES[m[1].toLowerCase()] + ' ' + dgeDevaNum(parseInt(m[2], 10));
   }
+  // No Sanskrit name known — plain ASCII, left as-is by dgeToActiveScript.
   return seg.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 }
 
 function dgeSegLabel(seg) {
-  return DGE_PATH_LABELS[seg] || dgeAutoLabel(seg);
+  return dgeToActiveScript(DGE_PATH_LABELS[seg] || dgeAutoLabel(seg));
 }
 
 // Compares path segments so "mandala_2" precedes "mandala_10" (numeric
@@ -157,7 +188,7 @@ window.openLibraryModal = async function() {
 
   const populated = library.granthas.filter(g => g.populated).map(g => {
     const slug = window.dgeGranthaSlug(g.path);
-    return { slug, title: g.title || slug };
+    return { slug, title: dgeToActiveScript(g.title || slug) };
   });
   if (!populated.length) {
     listEl.innerHTML = `<div class="note-preview-box" style="margin:0;">No texts are available yet — check back soon.</div>`;
