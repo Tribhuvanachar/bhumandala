@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.4 (Vedic content commentaries/translations now actually read from data instead of hardcoded empty — reuses the existing multi-commentary display built for PNS, no new UI code)';
+window.DGE_VERSIONS['core.js'] = 'v3.5 (Added data-shape diagnostics — logs what was actually fetched and what the normalizer found, so import/caching problems are visible instead of silently rendering nothing)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -111,6 +111,7 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
   if (Array.isArray(data.items)) {
     const shlokas = {};
     const availableCommentaries = {};
+    let itemsWithCommentaries = 0;
     data.items.forEach((item, idx) => {
       // Sequential 1..N internal key -- every other module assumes plain
       // integer indices. The real Vedic reference (e.g. "1.1.01") is kept
@@ -120,6 +121,7 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
       const commentaries = (item.commentaries && typeof item.commentaries === 'object' && !Array.isArray(item.commentaries))
         ? item.commentaries
         : {};
+      if (Object.keys(commentaries).length) itemsWithCommentaries++;
       Object.keys(commentaries).forEach(key => {
         if (!availableCommentaries[key]) {
           availableCommentaries[key] = KNOWN_COMMENTARY_LABELS[key] || (key.charAt(0).toUpperCase() + key.slice(1));
@@ -135,6 +137,21 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         commentaries: commentaries
       };
     });
+
+    // Data-shape diagnostics — makes import problems visible in the dev
+    // log instead of just silently rendering nothing. Especially useful
+    // when a data file looks fine on GitHub but something upstream (a
+    // stale cached copy, a schema mismatch, an import that didn't
+    // actually include a field) means the app sees something different.
+    console.log(`[Data] Normalized "${granthaTitle || 'untitled'}": ${data.items.length} item(s), ` +
+      `${itemsWithCommentaries} with commentaries, ` +
+      `commentary keys found: ${JSON.stringify(Object.keys(availableCommentaries))}`);
+    if (data.items.length && !itemsWithCommentaries) {
+      console.warn('[Data] No commentaries found on ANY item — if commentaries were expected, ' +
+        'check that the uploaded data.json actually contains a "commentaries" object per item ' +
+        '(not an empty array), and that you are not seeing a cached older copy of the file.');
+    }
+
     return {
       metadata: {
         title: granthaTitle || data.schema || 'Untitled',
@@ -251,6 +268,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchGranthaData(0)
       .then(data => {
+        // Logged BEFORE normalization so the raw file shape is visible —
+        // if this doesn't match what you just uploaded, the problem is
+        // the fetch (stale cache, wrong path), not the rendering.
+        console.log(`[Data] Fetched ${window.jsonFileName} — top-level keys: ${JSON.stringify(Object.keys(data || {}))}`);
+        if (data && Array.isArray(data.items) && data.items.length) {
+          const first = data.items[0];
+          console.log(`[Data] First item keys: ${JSON.stringify(Object.keys(first))}, ` +
+            `commentaries type: ${Array.isArray(first.commentaries) ? 'ARRAY (empty placeholder — not readable as commentaries)' : typeof first.commentaries}`);
+        }
         window.stotraData = dgeNormalizeGranthaData(data, entry ? entry.title : null);
         initApp();
       })
