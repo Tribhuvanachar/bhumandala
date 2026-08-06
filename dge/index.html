@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.55.0">
+<link rel="stylesheet" href="css/main.css?v=4.56.0">
 </head>
 <body>
 
@@ -48,76 +48,70 @@
   <div class="top-bar-title" onclick="window.openLibraryModal()">❮ Library</div>
   <div class="top-actions">
 
-    <div style="position:relative;">
-      <button class="btn-top" onclick="window.togglePopup('fontPopup')" title="Font Size">Aa</button>
-      <div class="popup popup-top-left" id="fontPopup" style="min-width: 140px;">
-        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Reading Size</div>
-        <div class="pop-item" data-size="16" onclick="window.setFontSize(16, this)">Small <span style="margin-left:auto; color:#8a7a63; font-size:10px;">16px</span></div>
-        <div class="pop-item active" data-size="18" onclick="window.setFontSize(18, this)" id="font-def">Medium <span style="margin-left:auto; color:#8a7a63; font-size:10px;">18px</span></div>
-        <div class="pop-item" data-size="20" onclick="window.setFontSize(20, this)">Large <span style="margin-left:auto; color:#8a7a63; font-size:10px;">20px</span></div>
-        <div class="pop-item" data-size="23" onclick="window.setFontSize(23, this)">Larger <span style="margin-left:auto; color:#8a7a63; font-size:10px;">23px</span></div>
-      </div>
-    </div>
-
+    <!-- Commentary — content-related, used constantly, stays on its own -->
     <div style="position:relative;">
       <button class="btn-top" onclick="window.togglePopup('commentaryPopup')" id="activeCommBtn" title="Commentary Options">💬</button>
       <div class="popup popup-top-left" id="commentaryPopup">
-        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">View Bhashya</div>
+        <div class="popup-label">View Bhashya</div>
         <div class="pop-item active" onclick="window.setCommentaryView('none', this)">None (Mula Only)</div>
         <div class="pop-item" onclick="window.setCommentaryView('all', this)">All Commentaries</div>
         <div id="commentaryDynamicList"></div>
       </div>
     </div>
 
-    <!-- Access (Admin / Super Admin) -->
+    <!-- Display: font size, script, theme and reading view were four
+         separate toolbar icons. On a phone that (plus the admin icons)
+         pushed the last buttons off screen entirely. Merged into one
+         scrollable popup — same options, one entry point. -->
     <div style="position:relative;">
-      <button class="btn-top" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access" style="font-size: 18px;">🔑</button>
-      <div class="popup popup-top-left" id="accessPopup">
-        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Access</div>
-        <div class="pop-item" onclick="window.togglePopup('accessPopup'); window.dgeShowAdminAccessPrompt()">🔓 Admin Access</div>
-        <div class="pop-item" onclick="window.togglePopup('accessPopup'); window.dgeShowSuperAdminAccessPrompt()">🗝️ Super Admin Access</div>
-      </div>
-    </div>
-
-    <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="window.openKeyModal()" title="Settings: AI Keys, Ask Acharya, Feature Visibility" style="font-size: 18px;">⚙️</button>
-    <button class="btn-top" id="adminEditorBtn" onclick="window.openAdminEditor()" title="Admin: GitHub File Manager" style="font-size: 18px; display:none;">🗂️</button>
-    <button class="btn-top" id="configEditorBtn" onclick="window.openConfigEditor()" title="Site Settings (super admin)" style="font-size: 18px; display:none;">🛠️</button>
-    <button class="btn-top" id="convertToolBtn" onclick="window.location.href='convert/index.html'" title="Convert: PDF/URL → GitHub pipeline" style="font-size: 18px; display:none;">🔄</button>
-    <button class="btn-top" onclick="window.openAboutModal()" title="About / Contact / Report an Issue" style="font-size: 18px;">ℹ️</button>
-
-    <!-- Reading View Mode -->
-    <div style="position:relative;">
-      <button class="btn-top" onclick="window.togglePopup('viewModePopup')" id="activeViewModeBtn" title="Reading View" style="font-size: 18px;">👁️</button>
-      <div class="popup popup-top" id="viewModePopup">
-        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Reading View</div>
-        <div class="pop-item" data-viewmode="list" onclick="window.dgeSetViewMode('list'); window.togglePopup('viewModePopup')">📜 Full List</div>
-        <div class="pop-item" data-viewmode="single" onclick="window.dgeSetViewMode('single'); window.togglePopup('viewModePopup')">🔎 One at a Time</div>
-      </div>
-    </div>
-
-    <!-- Theme Picker -->
-    <div style="position:relative;">
-      <button class="btn-top" onclick="window.togglePopup('themePopup')" id="activeThemeBtn" title="Appearance / Theme" style="font-size: 18px;">🎨</button>
-      <div class="popup popup-top" id="themePopup">
-        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Appearance</div>
-        <div class="pop-item active" data-theme="traditional" onclick="window.setTheme('traditional', this)"><span class="theme-swatch theme-swatch-traditional"></span>Traditional <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Warm</span></div>
-        <div class="pop-item" data-theme="minimal" onclick="window.setTheme('minimal', this)"><span class="theme-swatch theme-swatch-minimal"></span>Minimal <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Clean</span></div>
-        <div class="pop-item" data-theme="vibrant" onclick="window.setTheme('vibrant', this)"><span class="theme-swatch theme-swatch-vibrant"></span>Vibrant <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Temple</span></div>
-        <div class="pop-item" data-theme="darkglass" onclick="window.setTheme('darkglass', this)"><span class="theme-swatch theme-swatch-darkglass"></span>Dark Glass <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Premium</span></div>
-      </div>
-    </div>
-
-    <!-- Transliteration Script Selector -->
-    <div style="position:relative;">
-      <button class="btn-top" onclick="window.togglePopup('scriptPopup')" id="activeScriptBtn" title="Transliterate Script" style="font-size: 18px;">🔠</button>
-      <div class="popup popup-top" id="scriptPopup">
-        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Reading Script</div>
+      <button class="btn-top" onclick="window.togglePopup('displayPopup')" title="Display: size, script, theme, view">🅰</button>
+      <div class="popup popup-top-left popup-scroll" id="displayPopup">
+        <div class="popup-label">Reading Script</div>
         <div class="pop-item active" data-script="devanagari" onclick="window.setScript('devanagari', this)">Sanskrit <span style="margin-left:auto; font-family:var(--font-sanskrit);">संस्कृतम्</span></div>
         <div class="pop-item" data-script="iast" onclick="window.setScript('iast', this)">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
         <div class="pop-item" data-script="kannada" onclick="window.setScript('kannada', this)">Kannada <span style="margin-left:auto; font-family:serif;">ಕನ್ನಡ</span></div>
         <div class="pop-item" data-script="telugu" onclick="window.setScript('telugu', this)">Telugu <span style="margin-left:auto; font-family:serif;">తెలుగు</span></div>
         <div class="pop-item" data-script="tamil" onclick="window.setScript('tamil', this)">Tamil <span style="margin-left:auto; font-family:serif;">தமிழ்</span></div>
         <div class="pop-item" data-script="malayalam" onclick="window.setScript('malayalam', this)">Malayalam <span style="margin-left:auto; font-family:serif;">മലയാളം</span></div>
+        <hr>
+        <div class="popup-label">Reading Size</div>
+        <div class="pop-item" data-size="16" onclick="window.setFontSize(16, this)">Small <span style="margin-left:auto; color:#8a7a63; font-size:10px;">16px</span></div>
+        <div class="pop-item active" data-size="18" onclick="window.setFontSize(18, this)" id="font-def">Medium <span style="margin-left:auto; color:#8a7a63; font-size:10px;">18px</span></div>
+        <div class="pop-item" data-size="20" onclick="window.setFontSize(20, this)">Large <span style="margin-left:auto; color:#8a7a63; font-size:10px;">20px</span></div>
+        <div class="pop-item" data-size="23" onclick="window.setFontSize(23, this)">Larger <span style="margin-left:auto; color:#8a7a63; font-size:10px;">23px</span></div>
+        <hr>
+        <div class="popup-label">Reading View</div>
+        <div class="pop-item" data-viewmode="list" onclick="window.dgeSetViewMode('list')">📜 Full List</div>
+        <div class="pop-item" data-viewmode="single" onclick="window.dgeSetViewMode('single')">🔎 One at a Time</div>
+        <hr>
+        <div class="popup-label">Appearance</div>
+        <div class="pop-item active" data-theme="traditional" onclick="window.setTheme('traditional', this)"><span class="theme-swatch theme-swatch-traditional"></span>Traditional</div>
+        <div class="pop-item" data-theme="minimal" onclick="window.setTheme('minimal', this)"><span class="theme-swatch theme-swatch-minimal"></span>Minimal</div>
+        <div class="pop-item" data-theme="vibrant" onclick="window.setTheme('vibrant', this)"><span class="theme-swatch theme-swatch-vibrant"></span>Vibrant</div>
+        <div class="pop-item" data-theme="darkglass" onclick="window.setTheme('darkglass', this)"><span class="theme-swatch theme-swatch-darkglass"></span>Dark Glass</div>
+      </div>
+    </div>
+
+    <!-- Admin tools, hidden entirely unless authorised -->
+    <div style="position:relative;">
+      <button class="btn-top" id="adminToolsBtn" onclick="window.togglePopup('adminToolsPopup')" title="Admin tools" style="display:none;">🛡️</button>
+      <div class="popup popup-top" id="adminToolsPopup">
+        <div class="popup-label">Admin</div>
+        <div class="pop-item advanced-feature" onclick="window.togglePopup('adminToolsPopup'); window.openKeyModal()">⚙️ AI Keys &amp; Features</div>
+        <div class="pop-item" id="adminFilesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openAdminEditor()">🗂️ Repo Files</div>
+        <div class="pop-item" id="adminConfigItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openConfigEditor()">🛠️ Site Settings</div>
+        <div class="pop-item" id="adminConvertItem" style="display:none;" onclick="window.location.href='convert/index.html'">🔄 Convert Tool</div>
+      </div>
+    </div>
+
+    <button class="btn-top" onclick="window.openAboutModal()" title="About / Contact / Report an Issue">ℹ️</button>
+
+    <div style="position:relative;">
+      <button class="btn-top" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access">🔑</button>
+      <div class="popup popup-top" id="accessPopup">
+        <div class="popup-label">Access</div>
+        <div class="pop-item" onclick="window.togglePopup('accessPopup'); window.dgeShowAdminAccessPrompt()">🔓 Admin Access</div>
+        <div class="pop-item" onclick="window.togglePopup('accessPopup'); window.dgeShowSuperAdminAccessPrompt()">🗝️ Super Admin Access</div>
       </div>
     </div>
   </div>
@@ -173,7 +167,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.55.0 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.56.0 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -669,33 +663,33 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.55.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.56.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.55.0"></script>
-<script src="js/state.js?v=4.55.0"></script>
-<script src="js/dev.js?v=4.55.0"></script>
-<script src="js/utils.js?v=4.55.0"></script>
-<script src="js/modals.js?v=4.55.0"></script>
-<script src="js/transliteration.js?v=4.55.0"></script>
-<script src="js/audio.js?v=4.55.0"></script>
-<script src="js/filter.js?v=4.55.0"></script>
-<script src="js/search.js?v=4.55.0"></script>
-<script src="js/markers.js?v=4.55.0"></script>
-<script src="js/notes.js?v=4.55.0"></script>
-<script src="js/history.js?v=4.55.0"></script>
-<script src="js/char-palette.js?v=4.55.0"></script>
-<script src="js/snippets.js?v=4.55.0"></script>
-<script src="js/actions.js?v=4.55.0"></script>
-<script src="js/voice.js?v=4.55.0"></script>
-<script src="js/screenshot.js?v=4.55.0"></script>
-<script src="js/ai.js?v=4.55.0"></script>
-<script src="js/render.js?v=4.55.0"></script>
+<script src="js/config.js?v=4.56.0"></script>
+<script src="js/state.js?v=4.56.0"></script>
+<script src="js/dev.js?v=4.56.0"></script>
+<script src="js/utils.js?v=4.56.0"></script>
+<script src="js/modals.js?v=4.56.0"></script>
+<script src="js/transliteration.js?v=4.56.0"></script>
+<script src="js/audio.js?v=4.56.0"></script>
+<script src="js/filter.js?v=4.56.0"></script>
+<script src="js/search.js?v=4.56.0"></script>
+<script src="js/markers.js?v=4.56.0"></script>
+<script src="js/notes.js?v=4.56.0"></script>
+<script src="js/history.js?v=4.56.0"></script>
+<script src="js/char-palette.js?v=4.56.0"></script>
+<script src="js/snippets.js?v=4.56.0"></script>
+<script src="js/actions.js?v=4.56.0"></script>
+<script src="js/voice.js?v=4.56.0"></script>
+<script src="js/screenshot.js?v=4.56.0"></script>
+<script src="js/ai.js?v=4.56.0"></script>
+<script src="js/render.js?v=4.56.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="js/admin-editor.js?v=4.55.0"></script>
-<script src="js/config-editor.js?v=4.55.0"></script>
-<script src="js/core.js?v=4.55.0"></script>
-<script src="js/library.js?v=4.55.0"></script>
+<script src="js/admin-editor.js?v=4.56.0"></script>
+<script src="js/config-editor.js?v=4.56.0"></script>
+<script src="js/core.js?v=4.56.0"></script>
+<script src="js/library.js?v=4.56.0"></script>
 
 <script>
   if (typeof console.log === "function") {
