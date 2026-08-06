@@ -13,7 +13,7 @@
 //   - deleting the overrides file restores every default instantly
 //   - config.js stays the single source of structure, hand-edited as before
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config-editor.js'] = 'v1.0 (Form-based text settings editor writing to config-overrides.json)';
+window.DGE_VERSIONS['config-editor.js'] = 'v1.1 (Collapsible sections, vertically stacked inputs — the flat form overflowed a phone screen)';
 
 const DGE_CONFIG_OVERRIDES_PATH = 'dge/data/config-overrides.json';
 
@@ -98,14 +98,32 @@ function dgeToggle(path, value, label) {
   </label>`;
 }
 
-function dgeSection(title, body) {
-  return `<div style="margin-bottom:18px; padding:12px; border:1px solid var(--card-border);
-                      border-radius:8px; background:var(--card-bg);">
-    <div style="font-size:12px; font-weight:800; text-transform:uppercase;
-                color:var(--accent-red); margin-bottom:10px;">${dgeEsc(title)}</div>
-    ${body}
+let dgeSectionSeq = 0;
+// Collapsible, and collapsed by default apart from the first — the full
+// form is far taller than a phone screen, so showing it all at once made
+// the panel unusable.
+function dgeSection(title, body, openByDefault) {
+  const id = 'cfgSec' + (dgeSectionSeq++);
+  return `<div style="margin-bottom:10px; border:1px solid var(--card-border);
+                      border-radius:8px; background:var(--card-bg); overflow:hidden;">
+    <div onclick="window.dgeToggleConfigSection('${id}', this)"
+         style="cursor:pointer; padding:12px; display:flex; align-items:center; gap:8px;
+                font-size:12px; font-weight:800; text-transform:uppercase; color:var(--accent-red);">
+      <span style="font-size:10px; width:10px;">${openByDefault ? '▾' : '▸'}</span>
+      <span style="flex:1;">${dgeEsc(title)}</span>
+    </div>
+    <div id="${id}" style="display:${openByDefault ? 'block' : 'none'}; padding:0 12px 12px;">${body}</div>
   </div>`;
 }
+
+window.dgeToggleConfigSection = function(id, header) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const open = el.style.display !== 'none';
+  el.style.display = open ? 'none' : 'block';
+  const arrow = header.querySelector('span');
+  if (arrow) arrow.textContent = open ? '▸' : '▾';
+};
 
 window.dgeConfigSet = function(path, value) {
   if (!dgeConfigDraft) return;
@@ -138,6 +156,7 @@ window.dgeConfigRemoveRow = function(listPath, idx) {
 };
 
 function dgeRenderConfigEditor() {
+  dgeSectionSeq = 0;
   const el = document.getElementById('configEditorBody');
   if (!el || !dgeConfigDraft) return;
   const d = dgeConfigDraft;
@@ -152,14 +171,14 @@ function dgeRenderConfigEditor() {
       <div style="display:flex; gap:6px; align-items:center; margin-bottom:6px;">
         <input type="text" value="${dgeEsc(c.icon)}"
                oninput="window.dgeConfigSet('SPONSOR_CONFIG.sponsorCategories.${i}.icon', this.value)"
-               style="width:52px; text-align:center; font-size:16px; padding:6px;
+               style="width:46px; flex:none; text-align:center; font-size:16px; padding:6px;
                       border:1px solid var(--card-border); border-radius:6px;
                       background:var(--bg-main); color:var(--text-primary);">
-        <input type="text" value="${dgeEsc(c.label)}"
+        <input type="text" value="${dgeEsc(c.label)}" placeholder="Label"
                oninput="window.dgeConfigSet('SPONSOR_CONFIG.sponsorCategories.${i}.label', this.value)"
-               style="flex:1; font-size:13px; padding:6px; border:1px solid var(--card-border);
+               style="flex:1; min-width:0; font-size:13px; padding:6px; border:1px solid var(--card-border);
                       border-radius:6px; background:var(--bg-main); color:var(--text-primary);">
-        <button class="btn-sm" style="color:var(--accent-red);"
+        <button class="btn-sm" style="flex:none; color:var(--accent-red);"
                 onclick="window.dgeConfigRemoveRow('SPONSOR_CONFIG.sponsorCategories', ${i})">🗑️</button>
       </div>
       <textarea rows="2"
@@ -171,31 +190,37 @@ function dgeRenderConfigEditor() {
     </div>`).join('');
 
   const contribRows = d.CONTRIBUTORS_CONFIG.contributors.map((c, i) => `
-    <div style="display:flex; gap:6px; margin-bottom:6px;">
-      <input type="text" value="${dgeEsc(c.name)}" placeholder="Name"
-             oninput="window.dgeConfigSet('CONTRIBUTORS_CONFIG.contributors.${i}.name', this.value)"
-             style="flex:1; font-size:13px; padding:6px; border:1px solid var(--card-border);
-                    border-radius:6px; background:var(--bg-main); color:var(--text-primary);">
+    <div style="border-top:1px dashed var(--card-border); padding-top:8px; margin-bottom:8px;">
+      <div style="display:flex; gap:6px; margin-bottom:5px;">
+        <input type="text" value="${dgeEsc(c.name)}" placeholder="Name"
+               oninput="window.dgeConfigSet('CONTRIBUTORS_CONFIG.contributors.${i}.name', this.value)"
+               style="flex:1; min-width:0; font-size:13px; padding:6px; border:1px solid var(--card-border);
+                      border-radius:6px; background:var(--bg-main); color:var(--text-primary);">
+        <button class="btn-sm" style="flex:none; color:var(--accent-red);"
+                onclick="window.dgeConfigRemoveRow('CONTRIBUTORS_CONFIG.contributors', ${i})">🗑️</button>
+      </div>
       <input type="text" value="${dgeEsc(c.role)}" placeholder="Role (optional)"
              oninput="window.dgeConfigSet('CONTRIBUTORS_CONFIG.contributors.${i}.role', this.value)"
-             style="flex:1; font-size:13px; padding:6px; border:1px solid var(--card-border);
-                    border-radius:6px; background:var(--bg-main); color:var(--text-primary);">
-      <button class="btn-sm" style="color:var(--accent-red);"
-              onclick="window.dgeConfigRemoveRow('CONTRIBUTORS_CONFIG.contributors', ${i})">🗑️</button>
+             style="width:100%; box-sizing:border-box; font-size:12px; padding:6px;
+                    border:1px solid var(--card-border); border-radius:6px;
+                    background:var(--bg-main); color:var(--text-primary);">
     </div>`).join('');
 
   const keySponsorRows = d.KEY_SPONSORS_CONFIG.sponsors.map((s, i) => `
-    <div style="display:flex; gap:6px; margin-bottom:6px;">
-      <input type="text" value="${dgeEsc(s.name)}" placeholder="Name"
-             oninput="window.dgeConfigSet('KEY_SPONSORS_CONFIG.sponsors.${i}.name', this.value)"
-             style="flex:1; font-size:13px; padding:6px; border:1px solid var(--card-border);
-                    border-radius:6px; background:var(--bg-main); color:var(--text-primary);">
+    <div style="border-top:1px dashed var(--card-border); padding-top:8px; margin-bottom:8px;">
+      <div style="display:flex; gap:6px; margin-bottom:5px;">
+        <input type="text" value="${dgeEsc(s.name)}" placeholder="Name"
+               oninput="window.dgeConfigSet('KEY_SPONSORS_CONFIG.sponsors.${i}.name', this.value)"
+               style="flex:1; min-width:0; font-size:13px; padding:6px; border:1px solid var(--card-border);
+                      border-radius:6px; background:var(--bg-main); color:var(--text-primary);">
+        <button class="btn-sm" style="flex:none; color:var(--accent-red);"
+                onclick="window.dgeConfigRemoveRow('KEY_SPONSORS_CONFIG.sponsors', ${i})">🗑️</button>
+      </div>
       <input type="text" value="${dgeEsc(s.contribution)}" placeholder="What they cover"
              oninput="window.dgeConfigSet('KEY_SPONSORS_CONFIG.sponsors.${i}.contribution', this.value)"
-             style="flex:2; font-size:13px; padding:6px; border:1px solid var(--card-border);
-                    border-radius:6px; background:var(--bg-main); color:var(--text-primary);">
-      <button class="btn-sm" style="color:var(--accent-red);"
-              onclick="window.dgeConfigRemoveRow('KEY_SPONSORS_CONFIG.sponsors', ${i})">🗑️</button>
+             style="width:100%; box-sizing:border-box; font-size:12px; padding:6px;
+                    border:1px solid var(--card-border); border-radius:6px;
+                    background:var(--bg-main); color:var(--text-primary);">
     </div>`).join('');
 
   el.innerHTML =
@@ -203,7 +228,7 @@ function dgeRenderConfigEditor() {
       <code>data/config-overrides.json</code>, a plain data file — never to
       <code>config.js</code>. A mistake here can only change text, never break
       the app, and "Reset all" restores every default.</p>` +
-    dgeSection('General', general) +
+    dgeSection('General', general, true) +
     dgeSection('Support / Sponsorship',
       dgeToggle('SPONSOR_CONFIG.enabled', d.SPONSOR_CONFIG.enabled, 'Show the Support section') +
       dgeField('SPONSOR_CONFIG.introText', d.SPONSOR_CONFIG.introText, 'Intro text', '', true) +

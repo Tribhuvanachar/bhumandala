@@ -92,7 +92,14 @@ body.non-devanagari .commentary-block { font-family: var(--font-ui) !important; 
 /* Top App Bar (frosted glass on themes that opt in via --glass-blur) */
 .top-bar { position: fixed; top: 0; left: 0; right: 0; height: calc(50px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top); background: var(--top-bar-bg); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border-bottom: 1px solid var(--top-bar-border); z-index: 200; display: flex; align-items: center; justify-content: space-between; padding-left: 6px; padding-right: 6px; box-shadow: var(--shadow-xs); box-sizing: border-box; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease); }
 .top-bar-title { font-size: 14px; font-weight: 700; color: var(--accent-red); cursor: pointer; white-space: nowrap; flex-shrink: 0; margin-right: auto; padding-left: 4px; transition: color var(--t-med) var(--ease); }
+/* NOTE: do NOT add overflow-x here to handle crowding. The dropdowns are
+   position:absolute children of this row, and any overflow value creates
+   a clipping context that hides them — the same bug that broke the admin
+   "More" menu. Crowding is solved by keeping the button count low
+   (currently 5, with display and admin options grouped into popups)
+   rather than by scrolling this row. */
 .top-actions { display: flex; gap: 2px; align-items: center; justify-content: flex-end; flex-wrap: nowrap; }
+.top-actions > * { flex: 0 0 auto; }
 
 .btn-top, .btn-lang { background: transparent; border: none; font-size: 18px; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px; border-radius: var(--radius-xs); transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease); }
 .btn-top:hover, .btn-lang:hover { background: var(--card-active); }
@@ -248,6 +255,10 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 .popup { position: absolute; bottom: 45px; background: var(--panel-bg); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 14px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 12px; z-index: 300; width: max-content; max-width: min(280px, calc(100vw - 24px)); min-width: 170px; color: var(--text-primary); opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(6px) scale(0.98); transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), visibility var(--t-fast) var(--ease); }
 .popup-top { bottom: auto; top: 35px; right: 0; }
 .popup-top-left { bottom: auto; top: 35px; left: 0; right: auto; }
+/* The consolidated Display popup holds four sections at once, so it needs
+   to scroll rather than run off the bottom of a phone screen. */
+.popup-scroll { max-height: min(70vh, 460px); overflow-y: auto; overscroll-behavior: contain; }
+.popup-label { font-size: 10px; color: #8a7a63; text-transform: uppercase; letter-spacing: 0.04em; }
 .popup.show { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
 .popup hr { width: 100%; border: 0; border-top: 1px solid var(--card-border); margin: 0; }
 

@@ -20,7 +20,7 @@ window.applyTheme = function(theme) {
   // still key off it (search highlight, commentary block tint) stay correct.
   document.body.classList.toggle('dark-mode', theme === 'darkglass');
 
-  document.querySelectorAll('#themePopup .pop-item').forEach(el => {
+  document.querySelectorAll('#displayPopup .pop-item[data-theme]').forEach(el => {
     el.classList.toggle('active', el.dataset.theme === theme);
   });
 
@@ -31,7 +31,7 @@ window.applyTheme = function(theme) {
 window.setTheme = function(theme, el) {
   window.applyTheme(theme);
   localStorage.setItem('app_theme', theme);
-  if (typeof window.togglePopup === 'function') window.togglePopup('themePopup');
+  // (see note in transliteration.js — Display popup stays open)
 };
 
 // Legacy aliases kept so nothing that still calls these (or a bookmarked
@@ -45,7 +45,7 @@ window.toggleDarkMode = function() {
 
 window.applyFontSize = function(px) {
   document.documentElement.style.setProperty('--font-multiplier', px + 'px');
-  document.querySelectorAll('#fontPopup .pop-item').forEach(el => {
+  document.querySelectorAll('#displayPopup .pop-item[data-size]').forEach(el => {
     el.classList.toggle('active', parseInt(el.dataset.size, 10) === px);
   });
 };
@@ -79,7 +79,7 @@ window.applyFeatureFlags = function() {
   // Which scripts/languages show up in the 🔠 picker
   const scriptOptions = (typeof dgeGetEffectiveScriptOptions === 'function') ? dgeGetEffectiveScriptOptions() : (window.SCRIPT_OPTIONS || []);
   scriptOptions.forEach(opt => {
-    const el = document.querySelector(`#scriptPopup .pop-item[data-script="${opt.id}"]`);
+    const el = document.querySelector(`#displayPopup .pop-item[data-script][data-script="${opt.id}"]`);
     if (el) el.style.display = opt.enabled ? '' : 'none';
   });
 
@@ -89,7 +89,7 @@ window.applyFeatureFlags = function() {
 window.setFontSize = function(px, el) {
   window.applyFontSize(px);
   localStorage.setItem('app_fontSize', String(px));
-  if (typeof window.togglePopup === 'function') window.togglePopup('fontPopup');
+  // (see note in transliteration.js — Display popup stays open)
 };
 
 window.showToast = function(msg) {

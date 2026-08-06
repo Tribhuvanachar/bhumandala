@@ -60,7 +60,7 @@ window.applyScript = function(code) {
     console.log(`[Transliteration] Applying script classes for UI: ${code}`);
     window.activeScript = code;
     
-    document.querySelectorAll('#scriptPopup .pop-item').forEach(el => {
+    document.querySelectorAll('#displayPopup .pop-item[data-script]').forEach(el => {
         if (el.dataset.script) {
             el.classList.toggle('active', el.dataset.script === code);
         }
@@ -105,7 +105,8 @@ window.setScript = function(code, el) {
             window.openLibraryModal();
         }
         
-        if (typeof window.togglePopup === 'function') window.togglePopup('scriptPopup');
+        // Display popup deliberately stays open — script, size, theme and view
+        // are often changed together, so closing after each one was fiddly.
     }, 50);
 };
 

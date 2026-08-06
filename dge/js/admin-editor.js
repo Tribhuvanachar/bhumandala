@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.16 (UI-discoverable super admin access prompt, no URL editing needed)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.17 (Verifies uploaded files actually landed on GitHub after commit, and warns on truncated tree listings — a file failing to update while everything reported success went unnoticed once)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -77,12 +77,12 @@ function dgeAdminBuildCommitMessage(action) {
 
 document.addEventListener('DOMContentLoaded', () => {
   if (dgeCheckSuperadminGate()) {
-    const btn = document.getElementById('adminEditorBtn');
+    const btn = document.getElementById('adminToolsBtn');
     if (btn) btn.style.display = 'flex';
-    const convertBtn = document.getElementById('convertToolBtn');
-    if (convertBtn) convertBtn.style.display = 'flex';
-    const configBtn = document.getElementById('configEditorBtn');
-    if (configBtn) configBtn.style.display = 'flex';
+    ['adminFilesItem', 'adminConfigItem', 'adminConvertItem'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'flex';
+    });
   }
 });
 
@@ -915,6 +915,14 @@ async function dgeAdminBatchCommit(fileEntries, commitMessage) {
   try {
     const treeData = await dgeGithubGetRecursiveTree();
     existingTree = treeData.tree || [];
+    // GitHub truncates this response for very large trees. The repo now
+    // holds thousands of data files, so this is a real possibility — and
+    // a truncated listing makes the "skip unchanged files" comparison
+    // unreliable. Surfaced rather than silently trusted.
+    if (treeData.truncated) {
+      console.warn('[Upload] GitHub truncated the repository tree listing. ' +
+        'Change-detection may be incomplete; files will be re-uploaded rather than skipped.');
+    }
   } catch (e) {
     // Empty/new repo or branch — fine, everything is treated as new.
   }
@@ -945,6 +953,33 @@ async function dgeAdminBatchCommit(fileEntries, commitMessage) {
   const newTree = await dgeGithubCreateTree(baseTreeSha, treeEntries);
   const newCommit = await dgeGithubCreateCommit(commitMessage, newTree.sha, baseCommitSha);
   await dgeGithubUpdateRef(newCommit.sha);
+
+  // Verify the files actually landed, rather than assuming a successful
+  // API response means the content is correct. A file silently failing to
+  // update — while everything reported success — cost real debugging time
+  // once, so this now re-reads the tree and confirms every changed file's
+  // sha matches what was just pushed.
+  try {
+    const check = await dgeGithubGetRecursiveTree();
+    const afterSha = {};
+    (check.tree || []).forEach(e => { if (e.type === 'blob') afterSha[e.path] = e.sha; });
+    const notLanded = [];
+    for (const f of changed) {
+      const expected = await dgeComputeGitBlobSha(f.bytes);
+      if (afterSha[f.path] !== expected) notLanded.push(f.path);
+    }
+    if (notLanded.length) {
+      console.error('[Upload] Files did NOT land as expected:', notLanded);
+      throw new Error(
+        `${notLanded.length} file(s) did not update on GitHub despite the commit succeeding: ` +
+        notLanded.slice(0, 5).join(', ') + (notLanded.length > 5 ? ' …' : '') +
+        '. Try uploading those file(s) individually with the Upload button.'
+      );
+    }
+  } catch (e) {
+    if (e.message && e.message.includes('did not update')) throw e;
+    console.warn('[Upload] Could not verify the commit landed:', e);
+  }
 
   return { uploaded: changed.length, unchanged };
 }

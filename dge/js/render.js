@@ -321,7 +321,7 @@ function dgeUpdateSingleViewNav(fIds) {
 window.dgeSetViewMode = function(mode) {
   window.viewMode = (mode === 'single') ? 'single' : 'list';
   localStorage.setItem('app_viewMode', window.viewMode);
-  document.querySelectorAll('#viewModePopup .pop-item').forEach(el => {
+  document.querySelectorAll('#displayPopup .pop-item[data-viewmode]').forEach(el => {
     el.classList.toggle('active', el.dataset.viewmode === window.viewMode);
   });
   if (window.viewMode === 'single' && !window.currentReadingId) {

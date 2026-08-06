@@ -85,6 +85,32 @@ window.dgeLibraryCatalogPromise = fetch('data/library.json?t=' + Date.now(), { c
 // disable bfcache eligibility across browsers.
 window.addEventListener('pagehide', function () {});
 
+// index.html is deliberately NOT cache-busted (browsers and the CDN may
+// cache it), while every JS/CSS file is. That combination means a stale
+// cached index.html can pair OLD markup with NEW scripts — which breaks
+// things in confusing ways, because the scripts query elements the old
+// HTML doesn't contain. This has caused real debugging detours, so rather
+// than leaving it to be rediscovered each time, the HTML now stamps its
+// own version and the JS checks it matches. Bump BOTH on any release that
+// changes index.html's structure.
+window.DGE_EXPECTED_HTML_VERSION = '4.57.0';
+document.addEventListener('DOMContentLoaded', () => {
+  const meta = document.querySelector('meta[name="dge-html-version"]');
+  const actual = meta ? meta.getAttribute('content') : '(none)';
+  if (actual !== window.DGE_EXPECTED_HTML_VERSION) {
+    const msg = `Stale page detected: index.html is version ${actual} but the scripts expect ${window.DGE_EXPECTED_HTML_VERSION}. ` +
+                `The browser is serving a cached index.html. Pull down to refresh, or clear this site's cache.`;
+    console.error('[Version] ' + msg);
+    const bar = document.createElement('div');
+    bar.style.cssText = 'position:fixed; top:0; left:0; right:0; z-index:99999; background:#b3261e; color:#fff; ' +
+      'font-size:12px; padding:10px 14px; text-align:center; line-height:1.4;';
+    bar.innerHTML = 'Cached page detected — some features will misbehave.<br>' +
+      '<b style="text-decoration:underline;">Tap here to reload</b>';
+    bar.onclick = () => location.reload(true);
+    document.body.appendChild(bar);
+  }
+});
+
 // Every other module in this app (render, audio, markers, notes, search,
 // filter, ai) reads grantha data in ONE shape: {metadata, shlokas: {n:
 // {sa, commentaries}}, totalShlokas}, with n a plain sequential integer.
@@ -378,6 +404,14 @@ window.renderStotraChrome = function() {
 function initAuthAndBranding() {
   const isAuthorized = localStorage.getItem('acharyaAuthorized') === 'true';
   if (isAuthorized) document.body.classList.add('is-authorized');
+
+  // The 🛡️ menu holds both plain-admin (AI keys) and super-admin (repo,
+  // config, convert) entries, so it shows for either tier — the
+  // super-admin-only items inside stay hidden until that gate passes.
+  if (isAuthorized || localStorage.getItem('is_superadmin') === 'true') {
+    const at = document.getElementById('adminToolsBtn');
+    if (at) at.style.display = 'flex';
+  }
   
   const authorEl = document.getElementById('stotraAuthor');
   const showDesignedBy = !(window.appConfig && window.appConfig.showDesignedBy === false);
