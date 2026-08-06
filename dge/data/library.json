@@ -468,39 +468,48 @@
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_shakha/samhita/kanda_01/data.json",
-      "populated": false
+      "populated": true,
+      "title": "तैत्तिरीयसंहिता काण्डम् १"
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_shakha/samhita/kanda_02/data.json",
-      "populated": false
+      "populated": true,
+      "title": "तैत्तिरीयसंहिता काण्डम् २"
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_shakha/samhita/kanda_03/data.json",
-      "populated": false
+      "populated": true,
+      "title": "तैत्तिरीयसंहिता काण्डम् ३"
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_shakha/samhita/kanda_04/data.json",
-      "populated": false
+      "populated": true,
+      "title": "तैत्तिरीयसंहिता काण्डम् ४"
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_shakha/samhita/kanda_05/data.json",
-      "populated": false
+      "populated": true,
+      "title": "तैत्तिरीयसंहिता काण्डम् ५"
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_shakha/samhita/kanda_06/data.json",
-      "populated": false
+      "populated": true,
+      "title": "तैत्तिरीयसंहिता काण्डम् ६"
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_shakha/samhita/kanda_07/data.json",
-      "populated": false
+      "populated": true,
+      "title": "तैत्तिरीयसंहिता काण्डम् ७"
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_shakha/brahmana/taittiriya_brahmana/data.json",
-      "populated": false
+      "populated": true,
+      "title": "तैत्तिरीयब्राह्मणम्"
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_shakha/aranyaka/taittiriya_aranyaka/data.json",
-      "populated": false
+      "populated": true,
+      "title": "तैत्तिरीयारण्यकम्"
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_shakha/upanishad/taittiriya_upanishad/data.json",
