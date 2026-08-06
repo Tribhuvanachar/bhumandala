@@ -540,7 +540,8 @@
     },
     {
       "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/samhita/data.json",
-      "populated": false
+      "populated": true,
+      "title": "शुक्लयजुर्वेदः (वाजसनेयि माध्यन्दिन संहिता)"
     },
     {
       "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana_madhyandina/data.json",
@@ -572,11 +573,13 @@
     },
     {
       "path": "dge/data/vedas/samaveda/kauthuma_shakha/samhita/purvarchika/data.json",
-      "populated": false
+      "populated": true,
+      "title": "सामवेदः पूर्वार्चिकः"
     },
     {
       "path": "dge/data/vedas/samaveda/kauthuma_shakha/samhita/uttararchika/data.json",
-      "populated": false
+      "populated": true,
+      "title": "सामवेदः उत्तरार्चिकः"
     },
     {
       "path": "dge/data/vedas/samaveda/kauthuma_shakha/brahmanas/panchavimsha_tandya_brahmana/data.json",
@@ -652,83 +655,103 @@
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_01/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् १"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_02/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् २"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_03/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् ३"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_04/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् ४"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_05/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् ५"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_06/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् ६"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_07/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् ७"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_08/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् ८"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_09/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् ९"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_10/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् १०"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_11/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् ११"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_12/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् १२"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_13/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् १३"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_14/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् १४"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_15/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् १५"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_16/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् १६"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_17/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् १७"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_18/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् १८"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_19/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् १९"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/samhita/kanda_20/data.json",
-      "populated": false
+      "populated": true,
+      "title": "अथर्ववेदः काण्डम् २०"
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/brahmana/gopatha_brahmana/data.json",
