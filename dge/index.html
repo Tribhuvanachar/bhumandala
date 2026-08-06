@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.56.0">
+<link rel="stylesheet" href="css/main.css?v=4.57.0">
 </head>
 <body>
 
@@ -44,6 +44,7 @@
 </div>
 
 <!-- Top Bar -->
+<meta name="dge-html-version" content="4.57.0">
 <div class="top-bar">
   <div class="top-bar-title" onclick="window.openLibraryModal()">❮ Library</div>
   <div class="top-actions">
@@ -167,7 +168,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.56.0 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.57.0 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -502,12 +503,12 @@
 </div>
 
 <div class="modal-overlay" id="configEditorModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h3>⚙️ Site Settings</h3>
-      <button class="btn-sm" onclick="window.closeModal('configEditorModal')">✖ Close</button>
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">🛠️ Site Settings</h3>
+      <button class="btn-sm" onclick="window.closeModal('configEditorModal')" style="font-size:11px;">✖ Close</button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" style="overflow-x:hidden;">
       <div id="configEditorBody"></div>
       <div style="display:flex; gap:8px; margin-top:16px; position:sticky; bottom:0;
                   background:var(--bg-main); padding:10px 0;">
@@ -663,33 +664,33 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.56.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.57.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.56.0"></script>
-<script src="js/state.js?v=4.56.0"></script>
-<script src="js/dev.js?v=4.56.0"></script>
-<script src="js/utils.js?v=4.56.0"></script>
-<script src="js/modals.js?v=4.56.0"></script>
-<script src="js/transliteration.js?v=4.56.0"></script>
-<script src="js/audio.js?v=4.56.0"></script>
-<script src="js/filter.js?v=4.56.0"></script>
-<script src="js/search.js?v=4.56.0"></script>
-<script src="js/markers.js?v=4.56.0"></script>
-<script src="js/notes.js?v=4.56.0"></script>
-<script src="js/history.js?v=4.56.0"></script>
-<script src="js/char-palette.js?v=4.56.0"></script>
-<script src="js/snippets.js?v=4.56.0"></script>
-<script src="js/actions.js?v=4.56.0"></script>
-<script src="js/voice.js?v=4.56.0"></script>
-<script src="js/screenshot.js?v=4.56.0"></script>
-<script src="js/ai.js?v=4.56.0"></script>
-<script src="js/render.js?v=4.56.0"></script>
+<script src="js/config.js?v=4.57.0"></script>
+<script src="js/state.js?v=4.57.0"></script>
+<script src="js/dev.js?v=4.57.0"></script>
+<script src="js/utils.js?v=4.57.0"></script>
+<script src="js/modals.js?v=4.57.0"></script>
+<script src="js/transliteration.js?v=4.57.0"></script>
+<script src="js/audio.js?v=4.57.0"></script>
+<script src="js/filter.js?v=4.57.0"></script>
+<script src="js/search.js?v=4.57.0"></script>
+<script src="js/markers.js?v=4.57.0"></script>
+<script src="js/notes.js?v=4.57.0"></script>
+<script src="js/history.js?v=4.57.0"></script>
+<script src="js/char-palette.js?v=4.57.0"></script>
+<script src="js/snippets.js?v=4.57.0"></script>
+<script src="js/actions.js?v=4.57.0"></script>
+<script src="js/voice.js?v=4.57.0"></script>
+<script src="js/screenshot.js?v=4.57.0"></script>
+<script src="js/ai.js?v=4.57.0"></script>
+<script src="js/render.js?v=4.57.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="js/admin-editor.js?v=4.56.0"></script>
-<script src="js/config-editor.js?v=4.56.0"></script>
-<script src="js/core.js?v=4.56.0"></script>
-<script src="js/library.js?v=4.56.0"></script>
+<script src="js/admin-editor.js?v=4.57.0"></script>
+<script src="js/config-editor.js?v=4.57.0"></script>
+<script src="js/core.js?v=4.57.0"></script>
+<script src="js/library.js?v=4.57.0"></script>
 
 <script>
   if (typeof console.log === "function") {
