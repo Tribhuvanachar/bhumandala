@@ -2,73 +2,94 @@
 _Last updated: this file should be re-saved via the admin editor every time a significant phase completes. If starting a fresh Claude conversation, paste this whole file as the first message for full context recovery._
 
 ## What this is
-**Digital Grantha Engine (DGE)** — a Sanskrit digital library reader app, currently hosting the *Prahlādakṛta Nṛsiṁha Stotra*. Part of the Sarvamoola Digitisation & Educational Project. Static site on GitHub Pages, no backend, no build step — plain HTML/CSS/JS only.
+**Digital Grantha Engine (DGE)** — a Sanskrit digital library reader app. Part of the Sarvamoola Digitisation & Educational Project. Static site on GitHub Pages, no backend, no build step.
 
 - **Repo:** `github.com/Tribhuvanachar/bhumandala`
-- **Live site:** `tribhuvanachar.github.io` (app lives at `/dge/`)
+- **Live site:** `tribhuvanachar.github.io/bhumandala` (app at `/dge/`)
 - **Owner/admin:** goes by "3BU1" in on-site credit text
-- **Current app version:** see `?v=` query string in `dge/index.html` script tags (bump on every deploy)
+- **Current app version:** check `?v=` on script tags in `dge/index.html` (bump on every deploy — currently v4.50.0 as of this writing, but treat the live file as ground truth, not this number)
 
-## Non-negotiable conventions
-1. **Cache-busting:** every `<script src="js/X.js?v=VERSION">` and `<link href="css/main.css?v=VERSION">` in `index.html` — bump VERSION on every single deploy that touches any file. `index.html` itself is NOT cache-busted (browsers/CDN can cache it) — if a fix "isn't showing up," suspect a stale `index.html` before suspecting the code.
-2. **Zip delivery:** only changed/new files, inside a `dge/` folder structure, filename `dge.zip` (lowercase). Never the whole project unless explicitly asked.
-3. **Before every delivery:** JS syntax check every file (`node -c`), check for duplicate top-level `const`/`let`/`class` across files (shared global scope, no modules), HTML `<div>` open/close balance, CSS `{`/`}` balance, dangling function-reference check.
-4. **BYOK pattern everywhere:** AI provider keys (Gemini/OpenAI/Claude), the admin's GitHub PAT, and the Vision/Gemini keys in the Convert tool are all stored in the *user's own* `localStorage`, used only in fetches from *their own* browser. This is why it's safe despite being "client-side secrets" — nobody else's browser ever has them.
-5. **Privacy/security block on child safety, weapons, etc.** — standard Claude guardrails apply throughout; nothing in this project has touched those areas.
+## Non-negotiable conventions (unchanged from project start)
+1. Cache-busting via `?v=VERSION` on every script/link tag, bumped on every delivery that touches any file. `index.html` itself is not cache-busted.
+2. Zip delivery: only changed/new files, inside a `dge/` folder structure.
+3. Pre-delivery checks: `node -c` syntax, duplicate top-level identifier scan, HTML div balance, CSS brace balance, dangling reference check.
+4. BYOK everywhere: GitHub PAT, Vision/Gemini keys all live in the user's own `localStorage`, never hardcoded, never sent anywhere but directly to the relevant API from the user's own browser.
+5. Standard safety guardrails apply; nothing in this project has touched sensitive areas. One live, explicit exception worth noting: Wisdom Lib, a Sri Aurobindo–affiliated Rigveda aggregator, and a Hindi Ved portal were all considered as sources for chandas/accented-padapatha/commentary and set aside — none had explicit reuse terms. "Not explicit" was treated as "not cleared," consistently.
+
+## Content currently live
+- **Prahlādakṛta Nṛsiṁha Stotra** (`stotras/pns`) — 43 shlokas, 5 commentaries (padaratnavali, satyadharmiya, mandanandini, tatparyam, footnotes). Fully populated, the original reference text for the whole project.
+- **Rigveda, all 10 maṇḍalas** (`vedas/rigveda/shakala_shakha/samhita/mandala_01`–`10`) — 10,552 mantras, imported from VedaWeb's TEI dataset. See "VedaWeb Rigveda import" below for full detail; a separate, more detailed doc (`VEDAWEB_IMPORT_STATUS.md`) covers this specifically and should be treated as the authoritative source for anything Rigveda-specific.
+- Full taxonomy scaffold (~700 placeholder entries) exists for the rest of the planned corpus — empty stubs, not yet populated, correctly hidden from the Library browser until real content lands (`populated: false` gate).
 
 ## Architecture — main reader app (`dge/`)
-Modular classic scripts (no bundler), shared global scope, loaded in order via `<script>` tags in `index.html`. Key modules and what they own:
+Modular classic scripts, shared global scope, loaded in order via `<script>` tags. Key modules:
 
 | File | Owns |
 |---|---|
-| `config.js` | All app-wide config: `appConfig`, `ACHARYA_QUERY_TYPES`, `AI_PROVIDERS`, `FEATURE_FLAGS`, `SHARE_IMAGE_TEMPLATES` (now live-discovered, see below), `SHLOKA_EXTRA_FIELDS`, `SPONSOR_CONFIG`, `CONTRIBUTORS_CONFIG`, `ADMIN_ACCESS_LEVELS`, `GITHUB_REPO_CONFIG` |
-| `state.js` | `nsKey()` namespacing, `marks`/`notes`/`snippets` persistence + migration logic |
-| `core.js` | `initApp()`, chrome rendering, resume-last-verse hook |
-| `render.js` | Card rendering, search (native-script + diacritic + phonetic-tolerant), commentary view |
-| `audio.js` | Playback, speed memory, swipe nav, long-press word lookup, sync highlight |
-| `ai.js` | Ask Acharya (multi-provider, checkbox-preset settings, nested follow-up), Settings modal orchestration |
-| `admin-editor.js` | Full GitHub file manager (see below) |
-| `screenshot.js` | Share-as-image, gold embossed text, template-aware |
-| `history.js` | Reading history + quick-jump TOC |
-| `char-palette.js` | Long-press diacritic keyboard |
-| `modals.js`, `notes.js`, `snippets.js`, `actions.js`, `filter.js`, `search.js`, `voice.js`, `markers.js`, `transliteration.js`, `utils.js`, `dev.js` | As named |
+| `config.js` | `appConfig`, `SHLOKA_EXTRA_FIELDS`, `SPONSOR_CONFIG`, `KEY_SPONSORS_CONFIG`, `CONTRIBUTORS_CONFIG`, `ADMIN_ACCESS_LEVELS`, `GITHUB_REPO_CONFIG` |
+| `core.js` | `initApp()`, chrome rendering, grantha fetch + `dgeNormalizeGranthaData()` (multi-schema adapter), access prompts, force-refresh |
+| `render.js` | Card rendering, search, single-view mode, Prev/Next nav |
+| `library.js` | Library browser modal, `dgeGoToGrantha()` |
+| `admin-editor.js` | GitHub file manager, batch commits, Recent Activity/Undo |
+| `utils.js` | Dev logger (floating/draggable panel), reading-card minimize |
+| `audio.js`, `ai.js`, `notes.js`, `snippets.js`, `markers.js`, `search.js`, `filter.js`, `modals.js`, `screenshot.js`, `history.js`, `char-palette.js`, `transliteration.js`, `voice.js`, `state.js`, `dev.js` | As named, unchanged in scope from original build |
 
-## Major features shipped (don't rebuild these)
-- Native-script + diacritic-tolerant + **casual-romanization-tolerant** search (handles "uvacha"/"krishna" typing, not just strict IAST)
-- 4 themes, dev logger (`?dev=true`)
-- Ask Acharya: Shloka (always full verse) / Word (needs real selection) / Bhashya (per-commentary or general) / Custom (open-ended), checkbox-preset settings UI, nested "Ask Further" inside AI's own output
-- Share as Image: **live-discovered** templates from `images/template*.png|jpg` via GitHub API (no hardcoded list — admin just uploads a file named `template-whatever.png`), visual thumbnail picker in Settings, gold-gradient embossed text rendering
-- Reading history, swipe next/prev, long-press-word→Word-analysis, quick-jump TOC, floating diacritic keyboard (long-press base letters for variants)
-- Configurable extra Shloka Fields schema (Padaccheda/Anvaya/Pratipadartha/Tatparya/Vyakarana/Vrutta/Alankara/CrossReferences) — renders only when both enabled AND present in data
-- Sponsor/Expenses section (💝 button under title) + Contributors section — both admin-config-driven, not end-user-editable
-- Settings: all sections collapsed by default with a 📌 per-section pin to keep one expanded
-- **Admin GitHub File Manager** (🗂️, gated behind `?superadmin=2` in URL, persists via localStorage): browse/upload/rename/move/delete/inline-edit any file, drag-and-drop with auto-scroll, New File (curated extensions), New Folder, Add Image from URL (CORS-limited, honest about it), Upload Folder (preserves structure), **Download folder as .zip** (via JSZip + Git Blobs API for large files)
-  - **Access is root-path-restricted per code** via `ADMIN_ACCESS_LEVELS` in config.js — code `2` is locked to `dge/`, cannot reach the repo root, by design
+## Major features shipped, in rough chronological order
 
-## Known-fixed bugs (do not reintroduce)
-- `nsKey()` was missing → marks/notes/snippets never persisted (root cause, fixed early)
-- Search compared query against raw Devanagari regardless of active script (fixed — compares against displayed script)
-- GitHub Contents API silently omits `content` for files >~1MB (no error!) — any code reading file content must check `file.size === 0` before treating empty content as a failure, and fall back to the Git Blobs API for large files. This caused two separate real bugs before being understood (a data-loss bug in rename, and a false-positive blocking `.gitkeep`/empty files)
-- Deleting the file currently open in the admin editor left stale state → later Save could resurrect a deleted file or throw a sha-mismatch error. Fixed: delete now closes the editor if it's the open file.
-- Drag-dropping onto the general list background (not a specific folder) constructed a path with a leading slash when at repo root → 422 error. Fixed: background drops only handle OS file uploads now, never internal moves.
-- GitHub API listing/tree responses need explicit cache-busting (`no-store` + timestamp param) or the admin panel shows stale folder contents after an edit.
-- `.chip-toggle:active { transform: scale() }` was plausibly interfering with native text-selection handle tracking on mobile (geometry shifting mid-touch) — replaced with a background-only active state.
+### Content pipeline
+- **Convert tool** (`dge/convert/`, v0.9.0): PDF → Vision OCR → Gemini proofread (chunked, resumable via IndexedDB) → Schema Mapper → GitHub push. Also supports **URL import** (MediaWiki raw-text fetch, e.g. anandamakaranda.in) which skips OCR entirely. Access-gated behind super admin at the page level (not just a hidden icon — closes a real gap where the tool was reachable by direct URL regardless).
+- **VedaWeb Rigveda import**: standalone Python script (not part of the live app), run in Colab. Full detail in `VEDAWEB_IMPORT_STATUS.md`. Headline: uses the `eichler` witness for main text (correct sandhi + spelling + standard accent marks, confirmed against real diagnostic output after two wrong guesses — `zurich` and `aufrecht` were both tried and rejected based on evidence). Chandas and accented padapatha remain open/unsolved — see that doc.
 
-## Convert tool (`dge/convert/`) — separate sub-project, own `window.DGE` namespace
-Goal: client-side PDF → page images → Google Vision OCR → Gemini proofreading → DGE-schema JSON, no backend, ever.
+### Admin GitHub File Manager
+- Batch commits (diff-based; unchanged files skipped via local blob SHA computation)
+- Multi-select + batch delete, single commit either way
+- **Upload Zip now shows a real preview** (file list, count, size) with explicit Confirm/Cancel before anything commits — was a blind "just uploads" flow before
+- Fast whole-repo zipball option (GitHub-generated, single request) offered automatically for large folder downloads, plus parallel (12-way) blob fetching for the existing per-file zip method
+- Toolbar reduced from 9 always-visible buttons to 5 + a "More" overflow
+- Selection-mode-aware row taps: once one item is selected, tapping anywhere on other rows toggles selection instead of navigating into folders — fixes accidental navigation while multi-selecting
+- **Recent Activity panel with one-step Undo** — shows last 5 commits, reverts the most recent one via a new commit (proper git revert semantics, nothing force-deleted from history)
 
-- **CORS validated:** confirmed via a real test that Vision API accepts direct browser calls (no backend needed for OCR). A 403 "API not enabled" response proved this — CORS blocks throw before any response is readable at all; getting a real error body back means CORS isn't the obstacle.
-- **Status as of this file:** admin has now enabled the Cloud Vision API + billing on their Google Cloud project. Pipeline implementation is in progress — check `dge/convert/CHANGELOG.md` for the latest state, since this file may be written before the pipeline is fully done.
-- Design intent: output should map toward the *actual* DGE shloka schema (see Shloka Fields above) wherever the source material supports it, not a generic flat shloka/commentary pair — so output can be dropped into the main app with minimal reformatting.
-- GitHub integration is deliberately NOT built into Convert yet — when it is, it should reuse the Contents/Blobs API helpers already in `admin-editor.js` rather than reimplementing them.
+### Access control
+- **UI-discoverable 🔑 Access menu** in the main toolbar — Admin Access and Super Admin Access both now work via a tap + prompt(), not just manual URL parameter editing (`?pass=`/`?superadmin=` still work too, unchanged)
+- Confirmed and documented: super admin only unlocks the *icons* (🗂️ Admin, 🔄 Convert) — actually doing anything still requires the user's own GitHub token, enforced at the API-call level regardless of admin tier
 
-## Open backlog (not started, not forgotten)
-- Single-shloka "one at a time" view mode with dedicated prev/next
-- Share-as-video (template + text + embedded audio) — genuinely complex, needs its own dedicated pass
-- Config UI (form-based editing of config.js instead of raw code) — deliberately deferred, real risk of corrupting the file if rushed
-- Guru Parampara section — waiting on real lineage content from the admin, won't be invented
-- True XML sitemap — waiting on an actual multi-page site structure to justify it
-- IndexedDB migration, transliteration engine full rework, waveform visualization, gapless audio, Google Sign-In, sponsor payment processing — all Phase 3/4 items from the original roadmap, untouched
+### Data architecture
+- Full taxonomy scaffold generated and deployed, then **cleaned of a significant set of orphaned duplicate categories** that predated the taxonomy work: `dharmashastras`/`pancharatra`/`sarvamoola` (old, unsuffixed) alongside their taxonomy-correct replacements (`dharmashastra`/`pancharatra_agama`/`sarvamoola_grantha`), plus a duplicate flat `vedas/rigveda/mandala_XX` structure alongside the correct nested one. All confirmed as pure empty stubs before deletion — verified programmatically, not assumed.
+- `library.json` cleaned to 635 entries, zero duplicates, correct `populated` flags throughout
+
+### Rendering / multi-schema support
+- `dgeNormalizeGranthaData()` in `core.js` — adapts the newer `{schema, items:[...]}` shape (used by Rigveda and any future non-stotra content) into the same legacy `{metadata, shlokas:{n:{...}}}` shape every other module already understands, rather than teaching every module a second data shape. This is what actually fixed the "Cannot read properties of undefined (reading 'totalShlokas')" crash.
+- Large-grantha auto-single-view: any grantha over 150 shlokas now opens in single-view mode automatically regardless of saved preference (full-list mode was building 2000+ DOM cards synchronously and freezing the page for Rigveda maṇḍalas) — the saved preference itself isn't touched, so small texts opened afterward still honor it
+- Vedic content (detected via a `vedicId` field) breaks padas onto separate lines and shows rishi/devata/chandas/padapatha/reference via the existing `SHLOKA_EXTRA_FIELDS` mechanism — no new UI needed, reused what Padaccheda/Anvaya already had
+
+### Bug fixes of note (the kind worth knowing exist, not just "fixed")
+- **`appConfig` was never attached to `window`** — a genuine, longstanding, silent bug. Every `window.appConfig.X` read across the whole app was always `undefined`, always falling back to hardcoded defaults regardless of what was actually configured. Only became *visible* when a configured value (designedBy) diverged from its fallback. One-line fix, but retroactively explains why several config changes appeared not to take effect earlier in the project.
+- **bfcache**: the app now explicitly opts out of the browser's back-forward cache (empty `pagehide` listener) — without this, navigating between granthas could restore a frozen snapshot of the previous page instead of actually re-running the load script, which looked like stale/wrong content persisting after updates.
+- **Cache-busting gaps**: neither the `library.json` fetch nor the grantha content fetch had any cache-busting at all originally. Fixed with timestamp query params; the large-file fetch specifically avoids the stricter `cache: 'no-store'` in favor of just the timestamp, since that combination was making large fetches (2MB+ maṇḍala files) more failure-prone on mobile connections for no added benefit.
+- **Scroll jank on Prev/Next** (single-view mode) had three compounding causes, fixed together: (1) the scroll-margin CSS was on the wrong element, (2) Chrome's automatic scroll anchoring was fighting the deliberate scroll call (now disabled via `overflow-anchor: none`), (3) smooth-scroll animation itself was being perceived as reload-like jank on a quick tap (switched to instant).
+- **Vedic accent marks rendering as quote-mark-like artifacts**: root cause was the transliteration library using obscure Vedic Extensions Unicode codepoints (`U+1CD3`, `U+1CD9`) that almost no font supports, instead of the standard core-Devanagari-block marks (`U+0951`/`U+0952`) every font has had since Unicode 1.1. Not a font problem — a codepoint problem. Fixed via `dgeSanitizeVedicAccents()`.
+
+### UI/UX
+- Dev logger: now a small floating panel, draggable via a dedicated handle (not the whole header — that caused a tap-vs-drag ambiguity bug that took two attempts to fix properly), has a fullscreen toggle, starts fully closed by default (just a small reopen pill)
+- Dropdown clipping: several popups (Access, Commentary/Ask Acharya, font size) were rendering off the left edge of the screen — root cause was reusing right-aligned positioning meant for buttons near the right side of the bar; fixed with a left-aligned variant for early-positioned buttons
+- Sponsor section: each item individually toggleable (`enabled: true/false`), new Key Sponsors section (name + contribution note, empty by default, real entries added as confirmed — nothing invented)
+- Designed-by credit line: fully configurable and hideable (`showDesignedBy`)
+- Force Refresh Content button in the About modal
+
+## Open / pending work
+
+**Rigveda-specific** (full detail in `VEDAWEB_IMPORT_STATUS.md`):
+- Chandas (metre) — no licensed/reliable source found yet; computational detection tested and confirmed unreliable
+- Accented padapatha — VedaWeb's own padapatha witness has no accents; would need either a better source or a computational sandhi-derivation approach, neither built yet
+- English translation/commentary — clean path identified (Griffith/Macdonell/Oldenberg, already in the same licensed VedaWeb data) but not yet built
+- Audio — not sourced at all, separate research problem
+- Progress-tracking UI (visual grid, per-unit status) — designed conceptually, not built; makes most sense to build alongside the next actual fill operation (e.g. the translation import) rather than retroactively
+
+**Longstanding backlog, untouched since early in the project** (still valid, still not started):
+- Config UI (form-based editing instead of raw code) — deliberately deferred, real risk of corrupting config.js if rushed
+- Guru Parampara section — waiting on real lineage content from the admin
+- True XML sitemap — waiting on real multi-page structure to justify it
+- IndexedDB migration for the main app (Convert already uses it), transliteration engine rework, waveform visualization, gapless audio, Google Sign-In, sponsor payment processing
 
 ## If you're a fresh Claude instance reading this
-Read this whole file before touching anything. Ask the admin which specific item they want worked on next rather than assuming. Preserve every convention above — they exist because of real bugs that already happened once.
+Read this whole file, and `VEDAWEB_IMPORT_STATUS.md` if the task is Rigveda-related, before touching anything. Ask the admin which specific item they want worked on next rather than assuming. The conventions and fixed-bugs sections above exist because of real issues that already happened once — some of them twice, from guessing at a fix instead of verifying against real output first. Verify before proposing, especially for anything involving Unicode/font rendering or external data sources.
