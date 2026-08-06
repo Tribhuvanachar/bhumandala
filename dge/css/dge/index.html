@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="sa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" id="themeColorMeta" content="#FFFDF9">
+<title>Sarvamoola Digital Library</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Robust Indic Transliteration Engine -->
+<!-- Pinned to 1.3.3 (latest confirmed release) and the exact filename the -->
+<!-- library documents (sanscript.js, not sanscript.min.js). onerror falls -->
+<!-- back to unpkg with the same file so one dead CDN path can't silently -->
+<!-- disable transliteration app-wide. -->
+<script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.3.3/sanscript.js"
+        onerror="this.onerror=null;console.warn('[Sanscript] jsDelivr failed, falling back to unpkg');var s=document.createElement('script');s.src='https://unpkg.com/@indic-transliteration/sanscript@1.3.3/sanscript.js';document.head.appendChild(s);"></script>
+
+
+<!-- DGE Stylesheet -->
+<link rel="stylesheet" href="css/main.css?v=4.56.0">
+</head>
+<body>
+
+<div id="toastMsg"></div>
+
+<!-- Context-Aware Floating Palette Tooltip -->
+<!-- Buttons here are rendered dynamically by ai.js from window.ACHARYA_QUERY_TYPES -->
+<!-- (see js/config.js) so the set can be reconfigured in one place. -->
+<div id="actionTooltip" style="display:none;">
+  <div class="tooltip-header">🕉️ Ask Acharya</div>
+  <div class="tooltip-row" id="acharyaQueryButtonsRow"></div>
+  <div id="acharyaFullWidthButtons"></div>
+</div>
+
+<!-- Floating Append-to-Notes Selection Button for Modal -->
+<div id="modalAppendBtn" style="display:none;">
+  <button onpointerdown="window.appendSelectedTextToNote(event)">➕ Notes</button>
+  <button class="ask-further-btn" onpointerdown="window.askFurtherAboutSelection(event)">🔍 Ask Further</button>
+</div>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="top-bar-title" onclick="window.openLibraryModal()">❮ Library</div>
+  <div class="top-actions">
+
+    <!-- Commentary — content-related, used constantly, stays on its own -->
+    <div style="position:relative;">
+      <button class="btn-top" onclick="window.togglePopup('commentaryPopup')" id="activeCommBtn" title="Commentary Options">💬</button>
+      <div class="popup popup-top-left" id="commentaryPopup">
+        <div class="popup-label">View Bhashya</div>
+        <div class="pop-item active" onclick="window.setCommentaryView('none', this)">None (Mula Only)</div>
+        <div class="pop-item" onclick="window.setCommentaryView('all', this)">All Commentaries</div>
+        <div id="commentaryDynamicList"></div>
+      </div>
+    </div>
+
+    <!-- Display: font size, script, theme and reading view were four
+         separate toolbar icons. On a phone that (plus the admin icons)
+         pushed the last buttons off screen entirely. Merged into one
+         scrollable popup — same options, one entry point. -->
+    <div style="position:relative;">
+      <button class="btn-top" onclick="window.togglePopup('displayPopup')" title="Display: size, script, theme, view">🅰</button>
+      <div class="popup popup-top-left popup-scroll" id="displayPopup">
+        <div class="popup-label">Reading Script</div>
+        <div class="pop-item active" data-script="devanagari" onclick="window.setScript('devanagari', this)">Sanskrit <span style="margin-left:auto; font-family:var(--font-sanskrit);">संस्कृतम्</span></div>
+        <div class="pop-item" data-script="iast" onclick="window.setScript('iast', this)">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
+        <div class="pop-item" data-script="kannada" onclick="window.setScript('kannada', this)">Kannada <span style="margin-left:auto; font-family:serif;">ಕನ್ನಡ</span></div>
+        <div class="pop-item" data-script="telugu" onclick="window.setScript('telugu', this)">Telugu <span style="margin-left:auto; font-family:serif;">తెలుగు</span></div>
+        <div class="pop-item" data-script="tamil" onclick="window.setScript('tamil', this)">Tamil <span style="margin-left:auto; font-family:serif;">தமிழ்</span></div>
+        <div class="pop-item" data-script="malayalam" onclick="window.setScript('malayalam', this)">Malayalam <span style="margin-left:auto; font-family:serif;">മലയാളം</span></div>
+        <hr>
+        <div class="popup-label">Reading Size</div>
+        <div class="pop-item" data-size="16" onclick="window.setFontSize(16, this)">Small <span style="margin-left:auto; color:#8a7a63; font-size:10px;">16px</span></div>
+        <div class="pop-item active" data-size="18" onclick="window.setFontSize(18, this)" id="font-def">Medium <span style="margin-left:auto; color:#8a7a63; font-size:10px;">18px</span></div>
+        <div class="pop-item" data-size="20" onclick="window.setFontSize(20, this)">Large <span style="margin-left:auto; color:#8a7a63; font-size:10px;">20px</span></div>
+        <div class="pop-item" data-size="23" onclick="window.setFontSize(23, this)">Larger <span style="margin-left:auto; color:#8a7a63; font-size:10px;">23px</span></div>
+        <hr>
+        <div class="popup-label">Reading View</div>
+        <div class="pop-item" data-viewmode="list" onclick="window.dgeSetViewMode('list')">📜 Full List</div>
+        <div class="pop-item" data-viewmode="single" onclick="window.dgeSetViewMode('single')">🔎 One at a Time</div>
+        <hr>
+        <div class="popup-label">Appearance</div>
+        <div class="pop-item active" data-theme="traditional" onclick="window.setTheme('traditional', this)"><span class="theme-swatch theme-swatch-traditional"></span>Traditional</div>
+        <div class="pop-item" data-theme="minimal" onclick="window.setTheme('minimal', this)"><span class="theme-swatch theme-swatch-minimal"></span>Minimal</div>
+        <div class="pop-item" data-theme="vibrant" onclick="window.setTheme('vibrant', this)"><span class="theme-swatch theme-swatch-vibrant"></span>Vibrant</div>
+        <div class="pop-item" data-theme="darkglass" onclick="window.setTheme('darkglass', this)"><span class="theme-swatch theme-swatch-darkglass"></span>Dark Glass</div>
+      </div>
+    </div>
+
+    <!-- Admin tools, hidden entirely unless authorised -->
+    <div style="position:relative;">
+      <button class="btn-top" id="adminToolsBtn" onclick="window.togglePopup('adminToolsPopup')" title="Admin tools" style="display:none;">🛡️</button>
+      <div class="popup popup-top" id="adminToolsPopup">
+        <div class="popup-label">Admin</div>
+        <div class="pop-item advanced-feature" onclick="window.togglePopup('adminToolsPopup'); window.openKeyModal()">⚙️ AI Keys &amp; Features</div>
+        <div class="pop-item" id="adminFilesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openAdminEditor()">🗂️ Repo Files</div>
+        <div class="pop-item" id="adminConfigItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openConfigEditor()">🛠️ Site Settings</div>
+        <div class="pop-item" id="adminConvertItem" style="display:none;" onclick="window.location.href='convert/index.html'">🔄 Convert Tool</div>
+      </div>
+    </div>
+
+    <button class="btn-top" onclick="window.openAboutModal()" title="About / Contact / Report an Issue">ℹ️</button>
+
+    <div style="position:relative;">
+      <button class="btn-top" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access">🔑</button>
+      <div class="popup popup-top" id="accessPopup">
+        <div class="popup-label">Access</div>
+        <div class="pop-item" onclick="window.togglePopup('accessPopup'); window.dgeShowAdminAccessPrompt()">🔓 Admin Access</div>
+        <div class="pop-item" onclick="window.togglePopup('accessPopup'); window.dgeShowSuperAdminAccessPrompt()">🗝️ Super Admin Access</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="app-container">
+  <div class="header">
+    <h1 id="stotraTitle">Loading...</h1>
+    <div class="author" id="stotraAuthor">...</div>
+    <button id="supportProjectBtn" class="support-project-btn" onclick="window.openSponsorModal()" style="display:none;">💝 Support This Project</button>
+    <div class="rule"></div>
+  </div>
+
+  <div class="search-box-group">
+    <div class="popup-container" style="position:relative;">
+      <button class="btn-lang" id="searchScopeBtn" onclick="window.togglePopup('searchScopePopup')" style="max-width:90px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block;">Search All</button>
+      <div class="popup popup-top" id="searchScopePopup">
+        <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Search Scope</div>
+        <div class="pop-item active" data-scope="all" onclick="window.setSearchScope('all', 'Search All', this)">Search All</div>
+        <div class="pop-item" data-scope="mula" onclick="window.setSearchScope('mula', 'Shloka Only', this)">Shloka Only</div>
+        <div class="pop-item" data-scope="notes" onclick="window.setSearchScope('notes', 'My Notes Only', this)">My Notes Only</div>
+        <div id="searchScopeDynamicList"></div>
+      </div>
+    </div>
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search text or shloka number..." oninput="window.handleSearch()">
+      <button class="mic-btn" id="searchMicBtn" onclick="window.startSearchVoiceInput()" title="Search by voice">🎤</button>
+      <button class="clear-search-btn" id="clearSearchBtn" onclick="window.clearSearch()">✖</button>
+    </div>
+    <button class="char-palette-toggle" onclick="window.toggleCharPalette()" title="Special characters (ā, ḥ, ॐ, etc.)">Ω</button>
+  </div>
+
+  <div id="charPalettePanel" class="char-palette-panel">
+    <div id="charPaletteGrid" class="char-palette-grid"></div>
+  </div>
+
+  <div class="reading-card-wrap" id="readingCardWrap">
+    <div id="singleViewNav" style="display:none; align-items:center; justify-content:space-between; gap:10px; padding:0 4px 8px;"></div>
+    <div class="reading-card" id="readingCardBox">
+      <div class="reading-card-header">
+        <button class="reading-card-toc-btn" onclick="window.openTocModal()" title="Jump to a shloka">🔢</button>
+        <button class="reading-card-toggle" id="readingCardToggleBtn" onclick="window.toggleReadingCardMinimize()" title="Minimize / Expand">⌄</button>
+      </div>
+      <div id="readingCard">श्लोकं चिनोतु (Select a shloka)</div>
+    </div>
+  </div>
+  <div class="shloka-list" id="shlokaList"></div>
+
+  <!-- Contribution & Support Banner -->
+  <div class="project-banner">
+    <strong style="font-size: 13px;">🙏 Sarvamoola Digitisation Project</strong><br>
+    To contribute, sponsor digitisation, or support our educational initiatives, please write to:<br>
+    <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
+  </div>
+
+  <div class="app-footer" id="appFooter">v4.56.0 (Modular)</div>
+</div>
+
+<!-- Search Navigator Floating Pill -->
+<div class="search-navigator" id="searchNavigator">
+  <span id="searchMatchCount">0/0</span>
+  <button class="search-nav-btn" onclick="window.navSearch(-1)">▲</button>
+  <button class="search-nav-btn" onclick="window.navSearch(1)">▼</button>
+  <div style="width: 1px; height: 16px; background: var(--card-border); margin: 0 4px;"></div>
+  <button class="search-nav-btn" style="color: #8a7a63;" onclick="window.clearSearch()" title="Clear Search">✖</button>
+</div>
+
+<!-- Bottom Toolbar -->
+<div class="bottom-player">
+  <div class="player-inner">
+    <div class="controls-main">
+      <button class="btn-nav" onclick="window.playPrevFiltered()" aria-label="Previous">⏮</button>
+      <button class="btn-play flex-center" id="playBtn" onclick="window.togglePlay()" aria-label="Play/Pause">▶</button>
+      <button class="btn-nav" onclick="window.playNextFiltered()" aria-label="Next">⏭</button>
+    </div>
+
+    <div class="timer-group">
+      <div class="track-label" id="trackLabel">०/४३</div>
+      <div class="verse-progress-track"><div class="verse-progress-fill" id="verseProgressFill"></div></div>
+      <div class="time-display" id="timeDisplay">0:00.000 / 0:00.000</div>
+      <div class="repeat-counter" id="repeatCounter"></div>
+    </div>
+
+    <div class="popup-container advanced-feature">
+      <button class="btn-sm" onclick="window.togglePopup('filterPopup')" id="filterBtn">🔽 Filter</button>
+      <div class="popup" id="filterPopup" style="left: 50%; transform: translateX(-50%);">
+        <div style="font-size:10px; color:var(--muted-text); margin-bottom:2px; text-transform:uppercase;">Show shlokas matching ANY checked:</div>
+        <div class="filter-checkbox-item" data-filter-type="fav" onclick="window.toggleFilterCriterion('fav')">★ Favorites</div>
+        <div class="filter-checkbox-item" data-filter-type="pending" onclick="window.toggleFilterCriterion('pending')">○ Pending</div>
+        <div class="filter-checkbox-item" data-filter-type="practice" onclick="window.toggleFilterCriterion('practice')">🚧 Needs Practice</div>
+        <div class="filter-checkbox-item" data-filter-type="done" onclick="window.toggleFilterCriterion('done')">✅ Done</div>
+        <div class="filter-checkbox-item" data-filter-type="doubt" onclick="window.toggleFilterCriterion('doubt')">❓ Doubts</div>
+        <button class="btn-sm" style="width:100%;" onclick="window.clearAllFilterCriteria()">✖ Clear All (Show Everything)</button>
+        <hr>
+        <div class="pop-item" id="opt-none" onclick="window.toggleSingleTrackMode()">⏸ Single Track (no auto-advance)</div>
+        <hr>
+        <div class="range-box">
+          <div class="range-row-flex">
+            <span>📐 Range:</span>
+            <select id="rangeMode" style="font-size:11px; padding:2px; border-radius:4px; background:var(--card-bg); color:var(--text-primary); border:1px solid var(--card-border);" onchange="window.applyRangeFilter()">
+              <option value="include">Include</option>
+              <option value="exclude">Exclude</option>
+            </select>
+          </div>
+          <div class="range-row-flex">
+            <input class="pop-input" type="number" id="rangeStart" placeholder="From" min="1" max="43" onchange="window.applyRangeFilter()">
+            <span style="font-size: 10px; font-weight:normal;">to</span>
+            <input class="pop-input" type="number" id="rangeEnd" placeholder="To" min="1" max="43" onchange="window.applyRangeFilter()">
+            <button class="clear-range-btn" onclick="window.clearRange()">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup-container advanced-feature">
+      <button class="btn-sm" onclick="window.togglePopup('toolsPopup')" title="Tools">⚙️ Tools</button>
+      <div class="popup" id="toolsPopup" style="right: 0;">
+        <div class="pop-row" id="speedControlRow">
+          <span>⚡ <span id="speedVal">1.0</span>x</span>
+          <input type="range" class="pop-range" id="speedInput" min="0.5" max="2.0" step="0.1" value="1.0">
+        </div>
+        <div class="pop-row">
+          <span>🔁 Rep:</span>
+          <input type="number" class="pop-input" id="repeatInput" value="1" min="1" onchange="window.updateRepeatDisplay()">
+        </div>
+        <hr>
+        <div style="display:flex; flex-direction:column; gap:6px; margin-bottom: 4px;">
+          <div class="flex-row" style="justify-content:space-between; font-size:12px; font-weight:700;">
+            <span>⏱ Seek</span>
+            <button class="btn-sm" id="seekPrecisionBtn" onclick="window.toggleSeekPrecision()" style="font-size:10px; padding:2px 8px;">1s</button>
+          </div>
+          <input type="range" id="seekSlider" min="0" max="0" step="1" value="0" oninput="window.onSeekSliderInput(this.value)">
+          <div class="flex-row" style="justify-content:space-between; font-size:10px; color:var(--muted-text);">
+            <span id="seekSliderCurrent">0:00.000</span>
+            <span id="seekSliderTotal">0:00.000</span>
+          </div>
+        </div>
+        <hr>
+        <div id="abSnippetToolsSection">
+          <div style="font-size: 12px; font-weight: 700; margin-bottom: 4px;">
+            <label class="flex-row" style="gap:6px; cursor:pointer; color: var(--accent-red);">
+              <input type="checkbox" id="autoABToggle" style="margin:0; width:14px; height:14px;"> 🎯 Auto A-B Capture
+            </label>
+          </div>
+          <div class="ab-container">
+            <label class="flex-row" style="gap:6px; cursor:pointer; margin:0;">
+              <input type="checkbox" id="enableAB" style="margin:0; width:14px; height:14px;"> ✂️ Active Loop
+            </label>
+            <div class="ab-row-inputs">
+              <span>Start: <input class="pop-input" type="number" id="loopA" placeholder="0.0" step="0.1"></span>
+              <span>End: <input class="pop-input" type="number" id="loopB" placeholder="End" step="0.1"></span>
+            </div>
+            <button class="btn-sm" style="margin-top: 4px;" onclick="window.saveSnippet()">💾 Save Snippet</button>
+          </div>
+        </div>
+        <hr>
+        <button class="btn-sm flex-center" id="cacheBtn" style="width:100%; background:var(--card-active); color:var(--accent-red); border-color:var(--accent-red);" onclick="window.cacheAllAudio(this)">📥 Preload All Audio</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Shared status picker — opened from the inline status chip on any card -->
+<div class="context-menu" id="statusPickerMenu">
+  <div onclick="window.setStatus('pending')">○ Pending</div>
+  <div onclick="window.setStatus('practice')">🚧 Needs Practice</div>
+  <div onclick="window.setStatus('done')">✅ Done</div>
+  <div onclick="window.setStatus(null)" style="color: #888;">✕ Clear</div>
+</div>
+
+<!-- Unified Shloka Actions Sheet: Favorite / Practice flag / Note / Snippets / Download / Share -->
+<div class="modal-overlay" id="actionsSheetModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">Shloka <span id="actionsSheetShlokaNum"></span> — Actions</h4>
+       <button class="btn-sm" onclick="window.closeModal('actionsSheetModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <div id="actionsSheetContainer"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Notes Modal -->
+<div class="modal-overlay" id="noteModal">
+  <div class="modal-content" id="noteModalBox">
+    <div class="modal-header-sticky">
+       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">➕ New Note (Shloka <span id="noteShlokaNum"></span>)</h4>
+       <div style="display:flex; gap:6px;">
+         <button class="btn-sm" onclick="window.toggleMaximizeNote()" id="maxNoteBtn" style="font-size:11px;">⛶ Expand</button>
+         <button class="btn-sm" onclick="window.closeModal('noteModal')" style="font-size:11px;">✖ Close</button>
+       </div>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex; gap:6px; margin-bottom:6px;">
+        <button type="button" class="btn-icon" title="Bold" onclick="window.dgeWrapNoteSelection('**')"><strong>B</strong></button>
+        <button type="button" class="btn-icon" title="Italic" onclick="window.dgeWrapNoteSelection('*')"><em>I</em></button>
+        <button type="button" class="btn-icon" title="Bullet list" onclick="window.dgeInsertNoteBullet()">• —</button>
+      </div>
+      <textarea id="noteText" placeholder="Write a note or append Acharya excerpts here — it'll be added as its own entry, viewable and shareable separately from Shloka Actions…"></textarea>
+      <div style="display:flex; justify-content:flex-end; margin-top: 12px; flex-shrink: 0;">
+        <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="window.saveNote()">💾 Add Note</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bhashya Picker Modal -->
+<div class="modal-overlay" id="bhashyaPickerModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">📜 Select Bhashya to Analyze</h4>
+       <button class="btn-sm" onclick="window.closeModal('bhashyaPickerModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12px; color:#8a7a63; margin:0 0 12px 0;">Which traditional commentary would you like Acharya to break down line-by-line? (For a plain translation or a custom question instead of a scholarly commentary breakdown, use 🌐 Custom.)</p>
+      <div id="bhashyaOptionsContainer"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Key Modal -->
+<div class="modal-overlay" id="keyModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+       <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">⚙️ Settings</h3>
+       <div style="display:flex; gap:6px;">
+         <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none;" onclick="window.saveAllApiKeys()">Save</button>
+         <button class="btn-sm" onclick="window.closeKeyModal()" style="font-size:11px;">✖ Close</button>
+       </div>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:11px; color:var(--muted-text); margin:0 0 14px 0;">AI provider keys below · <a href="#featureVisibilitySection" style="color:var(--accent-red); font-weight:700;">jump to 🎛️ Feature Visibility ↓</a></p>
+
+      <details data-section-id="providerKeys" style="border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>🔑 AI Provider Keys</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
+        <p style="font-size:12px; color:#666; margin:8px 0 12px 0; line-height: 1.5;">Add a key for any AI provider you'd like Acharya to use. If you don't have one, contact <strong id="contactEmailDisplay">sanatanavidyagurukulam@gmail.com</strong>. Keys are stored only on this device.</p>
+
+        <div class="provider-key-row">
+          <label>Gemini API Key</label>
+          <input type="password" id="userGeminiKeyInput" class="modal-input" placeholder="Gemini key" style="margin:4px 0;">
+          <input type="text" id="userGeminiModelInput" class="modal-input" placeholder="Model (e.g. gemini-3.6-flash)" style="margin:0;">
+        </div>
+
+        <div class="provider-key-row">
+          <label>OpenAI (ChatGPT) API Key</label>
+          <input type="password" id="userOpenaiKeyInput" class="modal-input" placeholder="OpenAI key" style="margin:4px 0;">
+          <input type="text" id="userOpenaiModelInput" class="modal-input" placeholder="Model (e.g. a current GPT model)" style="margin:0;">
+        </div>
+
+        <div class="provider-key-row">
+          <label>Claude (Anthropic) API Key</label>
+          <input type="password" id="userClaudeKeyInput" class="modal-input" placeholder="Claude key" style="margin:4px 0;">
+          <input type="text" id="userClaudeModelInput" class="modal-input" placeholder="Model (e.g. a current Claude model)" style="margin:0;">
+        </div>
+
+        <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:700; margin-top:8px;">
+          <input type="checkbox" id="aiParallelModeToggle" style="margin:0; width:14px; height:14px;">
+          🧭 Ask all configured providers in parallel and combine into one summary
+        </label>
+      </details>
+
+      <details data-section-id="askAcharya" style="margin-top:16px; border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>⚙️ Ask Acharya Settings</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
+        <p style="font-size:11px; color:var(--muted-text); margin:8px 0;">Checkboxes are fixed wording (can't be mistyped). Use "Additional instructions" for anything not covered.</p>
+        <div id="acharyaSettingsContainer" style="margin-top:6px;"></div>
+        <button class="btn-sm" style="width:100%; margin-top:8px;" onclick="window.resetAcharyaFieldsToDefault()">↺ Reset to Defaults</button>
+      </details>
+
+      <details data-section-id="shareTemplate" style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>🖼️ Share Image Template</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
+        <p style="font-size:11px; color:var(--muted-text); margin:8px 0;">Used when you tap "⬇️ Image" or "🖼️ Share as Image" for any shloka.</p>
+        <div id="defaultShareTemplateGrid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; margin-top:8px;"></div>
+      </details>
+
+      <details id="featureVisibilitySection" data-section-id="featureVisibility" style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>🎛️ Feature Visibility</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
+        <div style="margin-top:10px; display:flex; flex-direction:column; gap:8px;">
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:700; padding:8px; border:1px solid var(--card-border); border-radius:var(--radius-sm); background:var(--card-active);">
+            <input type="checkbox" id="flagShowAllMarkers" style="margin:0; width:14px; height:14px;" onchange="window.dgeToggleAllMarkers(this.checked)"> 👁️ Show All Shloka Markers (Favorite/Status/Doubt/Notes/Snippets)
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowFavorite" style="margin:0; width:14px; height:14px;"> ★ Favorite marking
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowStatus" style="margin:0; width:14px; height:14px;"> ✅ Status (Pending/Needs Practice/Done)
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowDoubt" style="margin:0; width:14px; height:14px;"> ❓ Doubt marking
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowNotes" style="margin:0; width:14px; height:14px;"> 📝 Notes
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowSnippetTools" style="margin:0; width:14px; height:14px;"> 🎯 Snippets & A-B repeat tools
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowPreloadButton" style="margin:0; width:14px; height:14px;"> 📥 "Preload All Audio" button
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowSpeedControl" style="margin:0; width:14px; height:14px;"> ⚡ Playback speed control
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowThemePicker" style="margin:0; width:14px; height:14px;"> 🎨 Theme picker
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="flagShowScriptPicker" style="margin:0; width:14px; height:14px;"> 🔠 Script/language picker
+          </label>
+
+          <div style="font-size:10px; color:var(--muted-text); margin-top:8px; text-transform:uppercase;">Languages shown in 🔠 picker</div>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="scriptOptDevanagari" style="margin:0; width:14px; height:14px;"> Sanskrit (Devanagari)
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="scriptOptIast" style="margin:0; width:14px; height:14px;"> English (IAST)
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="scriptOptKannada" style="margin:0; width:14px; height:14px;"> Kannada
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="scriptOptTelugu" style="margin:0; width:14px; height:14px;"> Telugu
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="scriptOptTamil" style="margin:0; width:14px; height:14px;"> Tamil
+          </label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;">
+            <input type="checkbox" id="scriptOptMalayalam" style="margin:0; width:14px; height:14px;"> Malayalam
+          </label>
+
+          <button class="btn-sm" style="width:100%; margin-top:4px;" onclick="window.resetFeatureFlagsToDefault()">↺ Reset to Defaults</button>
+        </div>
+      </details>
+
+      <details data-section-id="shlokaFields" style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>🧩 Shloka Fields</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
+        <p style="font-size:11px; color:var(--muted-text); margin:8px 0;">Padaccheda, Anvaya, and similar fields only appear for a shloka if that field actually exists in its data — these toggles just control whether to show it when available.</p>
+        <div style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldPadaccheda" style="margin:0; width:14px; height:14px;"> 🔤 Padaccheda</label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldAnvaya" style="margin:0; width:14px; height:14px;"> 🔗 Anvaya</label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldPratipadartha" style="margin:0; width:14px; height:14px;"> 📖 Pratipadartha</label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldTatparya" style="margin:0; width:14px; height:14px;"> 🎯 Tatparya</label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldVyakarana" style="margin:0; width:14px; height:14px;"> ⚙️ Vyakarana</label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldVrutta" style="margin:0; width:14px; height:14px;"> 🎼 Vrutta (Meter)</label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldAlankara" style="margin:0; width:14px; height:14px;"> ✨ Alankara</label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldCrossReferences" style="margin:0; width:14px; height:14px;"> 🔀 Cross References</label>
+          <button class="btn-sm" style="width:100%; margin-top:4px;" onclick="window.resetShlokaFieldsToDefault()">↺ Reset to Defaults</button>
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="aboutModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">🙏 About This Project</h3>
+      <button class="btn-sm" onclick="window.closeModal('aboutModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px; line-height:1.6; margin:0 0 16px 0;">This is part of the <strong>Sarvamoola Digitisation & Educational Project</strong> — a free, ad-free digital library of Sanskrit devotional and philosophical texts in the Madhva Sampradaya (Dvaita Vedanta) tradition, with transliteration, audio, and AI-assisted study tools, built for personal and community learning.</p>
+
+      <button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.closeModal('aboutModal'); window.openReadingHistory();">📜 View Reading History</button>
+      <button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.dgeForceRefreshContent()">🔄 Force Refresh Content</button>
+      <p class="hint" style="margin-top:-10px; margin-bottom:16px;">If text seems out of date after an update, tap this — reloads content fresh, doesn't touch your marks, notes, or settings.</p>
+
+      <div class="actions-section-label">📧 Contact Us</div>
+      <p style="font-size:13px; margin:0 0 16px 0;"><a href="mailto:sanatanavidyagurukulam@gmail.com" style="color:var(--accent-red); font-weight:700;" id="aboutContactEmail">sanatanavidyagurukulam@gmail.com</a></p>
+
+      <div class="actions-section-label">🐛 Report a Typo or Issue</div>
+      <p style="font-size:12px; color:var(--muted-text); margin:0 0 8px 0;">Found a typo in a shloka, a wrong audio file, or something not working? Let us know which shloka and what's wrong — this opens your email app with the details pre-filled.</p>
+      <div class="provider-key-row">
+        <label>Shloka number (optional)</label>
+        <input type="number" id="reportTypoShloka" class="modal-input" placeholder="e.g. 12" style="margin-top:4px;">
+      </div>
+      <div class="provider-key-row">
+        <label>What's the issue?</label>
+        <textarea id="reportTypoDetails" class="modal-input" style="height:80px; margin-top:4px; font-size:12px;" placeholder="Describe the typo or issue…"></textarea>
+      </div>
+      <button class="btn-sm" style="width:100%; background:var(--accent-red); color:#fff; border:none;" onclick="window.sendTypoReport()">📧 Open Email to Report</button>
+
+      <div id="contributorsSection"></div>
+      <div id="keySponsorsSection"></div>
+
+      <div class="actions-section-label" style="margin-top:20px;">🕉️ Designed By</div>
+      <p style="font-size:12px; color:var(--muted-text); margin:0;">- 3BU1 -</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="configEditorModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>⚙️ Site Settings</h3>
+      <button class="btn-sm" onclick="window.closeModal('configEditorModal')">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <div id="configEditorBody"></div>
+      <div style="display:flex; gap:8px; margin-top:16px; position:sticky; bottom:0;
+                  background:var(--bg-main); padding:10px 0;">
+        <button class="btn-sm" id="configSaveBtn"
+                style="flex:1; background:var(--accent-red); color:#fff;"
+                onclick="window.dgeSaveConfigOverrides()">💾 Save Changes</button>
+        <button class="btn-sm" onclick="window.dgeResetConfigOverrides()">↩️ Reset all</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="libraryModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">📚 Library</h3>
+      <button class="btn-sm" onclick="window.closeModal('libraryModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <div id="libraryModalList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="historyModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">📜 Reading History</h3>
+      <button class="btn-sm" onclick="window.closeModal('historyModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <div id="readingHistoryContainer"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="tocModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">🔢 Jump to a Shloka</h3>
+      <button class="btn-sm" onclick="window.closeModal('tocModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <div id="tocGrid" class="toc-grid"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="sponsorModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">💝 Support This Project</h3>
+      <button class="btn-sm" onclick="window.closeModal('sponsorModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body" id="sponsorModalBody"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="adminEditorModal">
+  <div class="modal-content" style="max-width:600px;">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">🗂️ Admin: Repo Files</h3>
+      <button class="btn-sm" onclick="window.closeModal('adminEditorModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <div class="provider-key-row">
+        <label>Your GitHub Personal Access Token</label>
+        <input type="password" id="adminGithubTokenInput" class="modal-input" placeholder="Fine-grained PAT, Contents: Read & write, this repo only" style="margin-top:4px;">
+        <label style="margin-top:10px;">Your Name (shown in commit messages)</label>
+        <input type="text" id="adminNameInput" class="modal-input" placeholder="e.g. 3BU1" style="margin-top:4px;">
+        <button class="btn-sm" style="width:100%; margin-top:6px;" onclick="window.saveAdminGithubToken()">Save to This Device</button>
+        <p style="font-size:10px; color:var(--muted-text); margin:6px 0 0 0;">Stored only in this browser's local storage — never sent anywhere except directly to GitHub's API. Use a token scoped to only this repo, with an expiry date.</p>
+      </div>
+
+      <div style="display:flex; gap:6px; margin:12px 0; flex-wrap:wrap;">
+        <button class="btn-sm" onclick="window.dgeAdminGoUp()" id="adminUpBtn">⬆ Up</button>
+        <button class="btn-sm" onclick="window.dgeAdminNavigate(dgeAdminCurrentPath)" title="Refresh this folder listing">🔄</button>
+        <label class="btn-sm" style="cursor:pointer; margin:0;">📤 Upload<input type="file" multiple style="display:none;" onchange="window.dgeAdminUploadFiles(this.files)"></label>
+        <label class="btn-sm" style="cursor:pointer; margin:0;">📂 Upload Folder<input type="file" webkitdirectory multiple style="display:none;" onchange="window.dgeAdminUploadFolder(this.files)"></label>
+        <label class="btn-sm" style="cursor:pointer; margin:0;">🗜️ Upload Zip<input type="file" accept=".zip" style="display:none;" onchange="window.dgeAdminUploadZip(this.files[0])"></label>
+        <button class="btn-sm" onclick="window.dgeAdminToggleMoreMenu()">⋯ More</button>
+      </div>
+
+      <div id="adminMoreMenu" style="display:none; flex-wrap:wrap; gap:6px; margin:-6px 0 12px 0; padding:10px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px;">
+        <button class="btn-sm" onclick="window.dgeAdminNewFolder()">📁 New Folder</button>
+        <button class="btn-sm" onclick="window.dgeAdminNewFile()">➕ New File</button>
+        <button class="btn-sm" onclick="window.dgeAdminAddImageFromUrl()">🔗 Image URL</button>
+        <button class="btn-sm" onclick="window.dgeAdminToggleSort()" id="adminSortBtn">🔤 Sort: Name</button>
+        <button class="btn-sm" onclick="window.dgeAdminSelectAllInFolder()">☑️ Select All</button>
+        <button class="btn-sm" onclick="window.dgeAdminDownloadGithubRepoZip()">⚡ Fast Full-Repo Zip (GitHub)</button>
+        <button class="btn-sm" onclick="window.dgeAdminToggleRecentActivity()">🕐 Recent Activity (Undo)</button>
+      </div>
+
+      <div id="adminActivityPanel" style="display:none; margin:-6px 0 12px 0; padding:10px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px;"></div>
+
+      <div id="adminSelectionBar" style="display:none; align-items:center; gap:8px; background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px; padding:8px 10px; margin-bottom:10px;">
+        <span id="adminSelectionCount" style="font-size:12px; font-weight:700;">0 selected</span>
+        <button class="btn-sm" style="margin-left:auto;" onclick="window.dgeAdminClearSelection()">Clear</button>
+        <button class="btn-sm" style="color:var(--accent-red);" onclick="window.dgeAdminDeleteSelected()">🗑️ Delete Selected</button>
+      </div>
+
+      <div id="adminEditorBreadcrumb" style="font-size:11px; color:var(--muted-text); margin-bottom:10px; word-break:break-all;"></div>
+      <div id="adminEditorWorking" style="display:none; align-items:center; gap:8px; font-size:12px; font-weight:700; color:var(--accent-red); margin-bottom:8px;">
+        <span class="admin-spinner"></span> Working…
+      </div>
+
+      <div id="adminZipPreview" style="display:none; margin-bottom:12px; padding:12px; background:var(--card-bg); border:1.5px solid var(--accent-red); border-radius:8px;"></div>
+
+      <div id="adminEditorList" class="admin-file-list"
+           ondragover="event.preventDefault();"
+           ondrop="window.dgeAdminHandleBackgroundDrop(event)"></div>
+
+      <div id="adminEditorFileBox" style="display:none; margin-top:16px; border-top:1px solid var(--card-border); padding-top:12px; position:sticky; top:0; background:var(--card-bg); z-index:5; box-shadow:0 4px 10px rgba(0,0,0,0.08);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span id="adminEditorFileName" style="font-size:11px; font-weight:700; word-break:break-all;"></span>
+          <button class="btn-sm" onclick="window.dgeAdminCloseFileEditor()" style="font-size:10px;">✖</button>
+        </div>
+        <div style="display:flex; gap:6px; margin-bottom:6px;">
+          <button class="btn-sm" onclick="window.dgeAdminSelectAllText()">🔤 Select All</button>
+          <button class="btn-sm" onclick="window.dgeAdminClearAllText()">🗑️ Clear All</button>
+        </div>
+        <textarea id="adminEditorTextarea" style="width:100%; height:260px; font-family:monospace; font-size:12px; box-sizing:border-box;"></textarea>
+        <button class="btn-sm" style="width:100%; margin-top:8px; background:var(--accent-red); color:#fff; border:none;" onclick="window.dgeAdminSaveFile()">💾 Save to GitHub</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Acharya AI Modal -->
+<div class="modal-overlay" id="acharyaModal">
+  <div class="modal-content" id="acharyaModalBox">
+    <div class="modal-header-sticky">
+      <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">🕉️ Acharya's Analysis</h4>
+      <div style="display:flex; gap:6px;">
+         <button class="btn-sm" onclick="window.shareAcharyaAnalysis()" style="font-size:11px;">📤 Share</button>
+         <button class="btn-sm" onclick="window.closeModal('acharyaModal')" style="font-size:11px;">✖ Close</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div id="acharyaLoading" style="display:none; text-align:center; padding: 30px;">
+        <span style="font-size:28px; display:inline-block; animation: spin 1s linear infinite;">⏳</span>
+        <p style="font-size:13px; font-weight: 600; color:#8a7a63; margin-top:12px;">Consulting traditional scriptures...</p>
+      </div>
+      <div id="acharyaResult" style="font-size:14px; line-height:1.7; overflow-wrap: anywhere;"></div>
+
+      <div id="acharyaFollowUpBox" style="display:none; gap:6px; margin-top:16px; padding-top:12px; border-top:1px solid var(--card-border);">
+        <input type="text" id="acharyaFollowUpInput" class="modal-input" placeholder="Ask a follow-up question…" style="margin:0; flex-grow:1;" onkeydown="if(event.key==='Enter'){event.preventDefault(); window.sendAcharyaFollowUp();}">
+        <button class="btn-icon" title="Ask by voice" onclick="window.startFollowUpVoiceInput()" style="font-size:18px;">🎤</button>
+        <button class="btn-sm" style="background:var(--accent-red); color:#fff; border:none; flex-shrink:0;" onclick="window.sendAcharyaFollowUp()">Ask</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
+<!-- ?v=4.56.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
+<!-- serving an old cached copy of a script indefinitely. -->
+<script src="js/config.js?v=4.56.0"></script>
+<script src="js/state.js?v=4.56.0"></script>
+<script src="js/dev.js?v=4.56.0"></script>
+<script src="js/utils.js?v=4.56.0"></script>
+<script src="js/modals.js?v=4.56.0"></script>
+<script src="js/transliteration.js?v=4.56.0"></script>
+<script src="js/audio.js?v=4.56.0"></script>
+<script src="js/filter.js?v=4.56.0"></script>
+<script src="js/search.js?v=4.56.0"></script>
+<script src="js/markers.js?v=4.56.0"></script>
+<script src="js/notes.js?v=4.56.0"></script>
+<script src="js/history.js?v=4.56.0"></script>
+<script src="js/char-palette.js?v=4.56.0"></script>
+<script src="js/snippets.js?v=4.56.0"></script>
+<script src="js/actions.js?v=4.56.0"></script>
+<script src="js/voice.js?v=4.56.0"></script>
+<script src="js/screenshot.js?v=4.56.0"></script>
+<script src="js/ai.js?v=4.56.0"></script>
+<script src="js/render.js?v=4.56.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="js/admin-editor.js?v=4.56.0"></script>
+<script src="js/config-editor.js?v=4.56.0"></script>
+<script src="js/core.js?v=4.56.0"></script>
+<script src="js/library.js?v=4.56.0"></script>
+
+<script>
+  if (typeof console.log === "function") {
+      console.log("HTML parsed. Explicit modular script tags initialized.");
+  }
+</script>
+
+</body>
+</html>
