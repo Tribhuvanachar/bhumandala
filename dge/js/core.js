@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.3 (Real fix for broken accent-mark rendering: remaps obscure Vedic Extensions codepoints to the standard, universally-supported Devanagari block equivalents — confirmed against actual output, not a font guess this time)';
+window.DGE_VERSIONS['core.js'] = 'v3.4 (Vedic content commentaries/translations now actually read from data instead of hardcoded empty — reuses the existing multi-commentary display built for PNS, no new UI code)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -95,14 +95,36 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
   if (!data) return data;
   if (data.shlokas) return data; // already the expected shape (e.g. PNS) -- nothing to do
 
+  // Display labels for known translation/commentary source keys -- falls
+  // back to a capitalized version of the key itself for anything not
+  // listed here, so adding a new source later doesn't require touching
+  // this function again.
+  const KNOWN_COMMENTARY_LABELS = {
+    griffith: 'Griffith (1889 English Translation)',
+    macdonell: 'Macdonell (English Translation)',
+    oldenberg: 'Oldenberg (English Translation)',
+    geldner: 'Geldner (German Translation)',
+    grassmann: 'Grassmann (German Translation)',
+    elizarenkova: 'Elizarenkova (Russian Translation)'
+  };
+
   if (Array.isArray(data.items)) {
     const shlokas = {};
+    const availableCommentaries = {};
     data.items.forEach((item, idx) => {
       // Sequential 1..N internal key -- every other module assumes plain
       // integer indices. The real Vedic reference (e.g. "1.1.01") is kept
       // as a visible field (see the 'vedicId' extra field in config.js)
       // rather than used as the internal key.
       const n = idx + 1;
+      const commentaries = (item.commentaries && typeof item.commentaries === 'object' && !Array.isArray(item.commentaries))
+        ? item.commentaries
+        : {};
+      Object.keys(commentaries).forEach(key => {
+        if (!availableCommentaries[key]) {
+          availableCommentaries[key] = KNOWN_COMMENTARY_LABELS[key] || (key.charAt(0).toUpperCase() + key.slice(1));
+        }
+      });
       shlokas[n] = {
         sa: dgeSanitizeVedicAccents(item.samhita_patha || item.sa || ''),
         vedicId: item.id || '',
@@ -110,7 +132,7 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         devata: item.devata || '',
         chandas: item.chandas || '',
         padapatha: dgeSanitizeVedicAccents(item.pada_patha || ''),
-        commentaries: {} // none in this schema family yet
+        commentaries: commentaries
       };
     });
     return {
@@ -118,7 +140,7 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         title: granthaTitle || data.schema || 'Untitled',
         author: data.default_author || '',
         totalShlokas: data.items.length,
-        availableCommentaries: {}
+        availableCommentaries: availableCommentaries
       },
       shlokas,
       totalShlokas: data.items.length
