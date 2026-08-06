@@ -81,6 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btn) btn.style.display = 'flex';
     const convertBtn = document.getElementById('convertToolBtn');
     if (convertBtn) convertBtn.style.display = 'flex';
+    const configBtn = document.getElementById('configEditorBtn');
+    if (configBtn) configBtn.style.display = 'flex';
   }
 });
 

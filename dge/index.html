@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.54.0">
+<link rel="stylesheet" href="css/main.css?v=4.55.0">
 </head>
 <body>
 
@@ -81,6 +81,7 @@
 
     <button class="btn-top advanced-feature" id="keyManagerBtn" onclick="window.openKeyModal()" title="Settings: AI Keys, Ask Acharya, Feature Visibility" style="font-size: 18px;">⚙️</button>
     <button class="btn-top" id="adminEditorBtn" onclick="window.openAdminEditor()" title="Admin: GitHub File Manager" style="font-size: 18px; display:none;">🗂️</button>
+    <button class="btn-top" id="configEditorBtn" onclick="window.openConfigEditor()" title="Site Settings (super admin)" style="font-size: 18px; display:none;">🛠️</button>
     <button class="btn-top" id="convertToolBtn" onclick="window.location.href='convert/index.html'" title="Convert: PDF/URL → GitHub pipeline" style="font-size: 18px; display:none;">🔄</button>
     <button class="btn-top" onclick="window.openAboutModal()" title="About / Contact / Report an Issue" style="font-size: 18px;">ℹ️</button>
 
@@ -172,7 +173,7 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="app-footer" id="appFooter">v4.54.0 (Modular)</div>
+  <div class="app-footer" id="appFooter">v4.55.0 (Modular)</div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -506,6 +507,25 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="configEditorModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>⚙️ Site Settings</h3>
+      <button class="btn-sm" onclick="window.closeModal('configEditorModal')">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <div id="configEditorBody"></div>
+      <div style="display:flex; gap:8px; margin-top:16px; position:sticky; bottom:0;
+                  background:var(--bg-main); padding:10px 0;">
+        <button class="btn-sm" id="configSaveBtn"
+                style="flex:1; background:var(--accent-red); color:#fff;"
+                onclick="window.dgeSaveConfigOverrides()">💾 Save Changes</button>
+        <button class="btn-sm" onclick="window.dgeResetConfigOverrides()">↩️ Reset all</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="libraryModal">
   <div class="modal-content">
     <div class="modal-header-sticky">
@@ -649,32 +669,33 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.54.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.55.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.54.0"></script>
-<script src="js/state.js?v=4.54.0"></script>
-<script src="js/dev.js?v=4.54.0"></script>
-<script src="js/utils.js?v=4.54.0"></script>
-<script src="js/modals.js?v=4.54.0"></script>
-<script src="js/transliteration.js?v=4.54.0"></script>
-<script src="js/audio.js?v=4.54.0"></script>
-<script src="js/filter.js?v=4.54.0"></script>
-<script src="js/search.js?v=4.54.0"></script>
-<script src="js/markers.js?v=4.54.0"></script>
-<script src="js/notes.js?v=4.54.0"></script>
-<script src="js/history.js?v=4.54.0"></script>
-<script src="js/char-palette.js?v=4.54.0"></script>
-<script src="js/snippets.js?v=4.54.0"></script>
-<script src="js/actions.js?v=4.54.0"></script>
-<script src="js/voice.js?v=4.54.0"></script>
-<script src="js/screenshot.js?v=4.54.0"></script>
-<script src="js/ai.js?v=4.54.0"></script>
-<script src="js/render.js?v=4.54.0"></script>
+<script src="js/config.js?v=4.55.0"></script>
+<script src="js/state.js?v=4.55.0"></script>
+<script src="js/dev.js?v=4.55.0"></script>
+<script src="js/utils.js?v=4.55.0"></script>
+<script src="js/modals.js?v=4.55.0"></script>
+<script src="js/transliteration.js?v=4.55.0"></script>
+<script src="js/audio.js?v=4.55.0"></script>
+<script src="js/filter.js?v=4.55.0"></script>
+<script src="js/search.js?v=4.55.0"></script>
+<script src="js/markers.js?v=4.55.0"></script>
+<script src="js/notes.js?v=4.55.0"></script>
+<script src="js/history.js?v=4.55.0"></script>
+<script src="js/char-palette.js?v=4.55.0"></script>
+<script src="js/snippets.js?v=4.55.0"></script>
+<script src="js/actions.js?v=4.55.0"></script>
+<script src="js/voice.js?v=4.55.0"></script>
+<script src="js/screenshot.js?v=4.55.0"></script>
+<script src="js/ai.js?v=4.55.0"></script>
+<script src="js/render.js?v=4.55.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="js/admin-editor.js?v=4.54.0"></script>
-<script src="js/core.js?v=4.54.0"></script>
-<script src="js/library.js?v=4.54.0"></script>
+<script src="js/admin-editor.js?v=4.55.0"></script>
+<script src="js/config-editor.js?v=4.55.0"></script>
+<script src="js/core.js?v=4.55.0"></script>
+<script src="js/library.js?v=4.55.0"></script>
 
 <script>
   if (typeof console.log === "function") {

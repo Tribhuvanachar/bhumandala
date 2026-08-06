@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.5 (Added data-shape diagnostics — logs what was actually fetched and what the normalizer found, so import/caching problems are visible instead of silently rendering nothing)';
+window.DGE_VERSIONS['core.js'] = 'v3.6 (Loads and merges data/config-overrides.json over config.js defaults before first render)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -40,6 +40,29 @@ window.dgeForceRefreshContent = function() {
   url.searchParams.set('_refresh', Date.now());
   window.location.href = url.toString();
 };
+
+// Admin-editable text settings, saved by the Config Editor to a plain
+// data file. Merged over the defaults from config.js at load, shallowly
+// per top-level object — so the overrides file only ever needs to hold
+// the fields actually changed, and anything absent falls back to the
+// hardcoded default. config.js itself is never modified by the UI.
+window.dgeConfigOverridesPromise = fetch('data/config-overrides.json?t=' + Date.now(), { cache: 'no-store' })
+  .then(res => res.ok ? res.json() : null)
+  .catch(() => null)
+  .then(ov => {
+    if (!ov) return null;
+    const targets = {
+      appConfig: window.appConfig,
+      SPONSOR_CONFIG: window.SPONSOR_CONFIG,
+      CONTRIBUTORS_CONFIG: window.CONTRIBUTORS_CONFIG,
+      KEY_SPONSORS_CONFIG: window.KEY_SPONSORS_CONFIG
+    };
+    Object.keys(targets).forEach(k => {
+      if (ov[k] && targets[k]) Object.assign(targets[k], ov[k]);
+    });
+    console.log(`[Config] Applied overrides for: ${Object.keys(ov).join(', ')}`);
+    return ov;
+  });
 
 // Fetched once, shared with library.js so the browser modal doesn't need
 // a second network round trip for the same file. Cache-busted with both
@@ -228,7 +251,10 @@ document.addEventListener('DOMContentLoaded', () => {
   window.AUDIO_CACHE_NAME = `narasimha-audio-${window.stotraCode}`;
 
   // 4. RESOLVE VIA THE LIBRARY CATALOG, THEN FETCH THE GRANTHA DATASET
-  window.dgeLibraryCatalogPromise.then(library => {
+  // Wait on the config overrides too, so any customised text is already
+  // in place before the first render rather than racing it.
+  Promise.all([window.dgeLibraryCatalogPromise, window.dgeConfigOverridesPromise])
+    .then(([library]) => {
     let entry = null;
     if (library && Array.isArray(library.granthas)) {
       entry = library.granthas.find(g => window.dgeGranthaSlug(g.path) === slug);

@@ -1,9 +1,33 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['transliteration.js'] = 'v1.3 (Re-renders the library browser on script change so its labels follow the selected script)';
+window.DGE_VERSIONS['transliteration.js'] = 'v1.4 (Vedic accent marks handled per target script — IAST gets combining acute/grave, other scripts drop them instead of rendering missing-glyph boxes)';
+
+// Vedic accent marks and the nasal sign have no direct equivalent in the
+// target scripts, so Sanscript passes them through untouched — they then
+// land on Latin/Kannada/Telugu letters as missing-glyph boxes (visible as
+// "NO GLYPH" rectangles). Handled explicitly here instead:
+//   - IAST gets the scholarly roman convention: combining acute for
+//     svarita, combining grave for anudatta. This matches how VedaWeb's
+//     own IAST renders the same text (agním, hy àgne), and both combine
+//     correctly with Latin letters in any normal font.
+//   - Other Indic scripts have no widely-supported Vedic accent
+//     convention in Unicode, so the marks are dropped rather than shown
+//     as boxes. The accented Devanagari remains available by switching
+//     back to Sanskrit — accent information is never lost from the data.
+//   - The nasal sign ꣳ (U+A8F3) becomes a plain anusvāra before
+//     conversion, which every script renders properly.
+const DGE_VEDIC_MARKS = /[\u0951\u0952\u1CD0-\u1CFF]/g;
+
+function dgePrepareForScript(text, script) {
+    let t = text.replace(/\uA8F3/g, '\u0902'); // ꣳ -> ं
+    if (script === 'iast') {
+        t = t.replace(/\u0951/g, '\u0301')     // svarita  -> combining acute
+             .replace(/\u0952/g, '\u0300');    // anudatta -> combining grave
+        return t.replace(/[\u1CD0-\u1CFF]/g, '');
+    }
+    return t.replace(DGE_VEDIC_MARKS, '');
+}
 
 window.applyTransliteration = function(htmlText, script) {
-    console.log(`[Transliteration] Request to convert to: ${script}`);
-    
     if (script === 'devanagari' || !htmlText) {
         return htmlText;
     }
@@ -15,15 +39,13 @@ window.applyTransliteration = function(htmlText, script) {
     
     try {
         const parts = htmlText.split(/(<[^>]+>)/g);
-        let convertedCount = 0;
         
         for (let i = 0; i < parts.length; i++) {
             if (!parts[i].startsWith('<')) {
                 let cleanText = parts[i].replace(/[\u200B-\u200D\uFEFF]/g, '');
                 
                 if (cleanText.trim().length > 0) {
-                    parts[i] = window.Sanscript.t(cleanText, 'devanagari', script);
-                    convertedCount++;
+                    parts[i] = window.Sanscript.t(dgePrepareForScript(cleanText, script), 'devanagari', script);
                 }
             }
         }
