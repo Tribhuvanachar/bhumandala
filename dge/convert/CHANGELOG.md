@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.10.0 — 2026-08-10
+- **Document Loader architecture** — OCR no longer assumes its source is a PDF. `app.js`'s OCR loop now talks to a generic `currentLoader` (`load()` / `getPageCount()` / `getDocumentName()` / `getPageImage(index)`), chosen at file-selection time by a new `loaders.js` factory. `pdf.js` was generalized to expose that same shape (its old `loadPdf`/`renderPageToPngBase64` still work — thin wrappers now, not a second code path) and Vision (`vision.js`) still only ever sees a base64 PNG, unchanged.
+- New **`image.js`** (`window.DGE.ImageLoader`) — upload one or more page-image files (JPG/PNG/WEBP) directly instead of a PDF, in the order you select them. Every page is normalized to PNG via canvas and capped at 3000px on its longest edge (bounds the Vision request payload and matches the resolution the PDF path already renders at — a raw phone photo or full-res scan gains nothing from going in uncapped).
+- New **`loaders.js`** (`window.DGE.Loaders.detect`) — picks PDF vs. image loader from what was actually selected; rejects a mixed PDF+image selection or multiple PDFs with a clear message instead of silently picking one.
+- **JP2 explicitly NOT supported yet, on purpose** — no mainstream browser decodes JPEG 2000 without an added WASM/JS decoder, and Vision's synchronous `images:annotate` endpoint doesn't accept JP2 bytes directly either. Selecting a `.jp2` file now fails immediately with a clear explanation instead of a silent blank-OCR result. Revisit if/when a specific decoder library is chosen and tested.
+- File input now accepts multiple files (`multiple` attribute) and both PDF and image MIME types/extensions.
+
 ## v0.7.0 — 2026-08-07
 - **URL import** — new "Fetch Page" option alongside PDF upload, for sources that are already digital text (e.g. anandamakaranda.in, confirmed to be a MediaWiki site by fetching a real page before writing this). Pulls raw text via MediaWiki's `?action=raw` endpoint (works across essentially any MediaWiki install, no server-side extension dependency), strips basic wikitext markup, and feeds the result into the exact same chunked proofread → schema map → push pipeline that OCR'd PDFs already use — no OCR step, no separate code path, no new credential surface. A page that's already text just skips straight to step 3.
 - New `urlimport.js` (`window.DGE.UrlImport`).

@@ -3,19 +3,20 @@ window.DGE = window.DGE || {};
 window.DGE.App = (function () {
   const U = () => window.DGE.Utils;
   const IDB = () => window.DGE.IDB;
-  const PDFMod = () => window.DGE.PDF;
   const VisionMod = () => window.DGE.Vision;
   const GeminiMod = () => window.DGE.Gemini;
   const RendererMod = () => window.DGE.Renderer;
   const GitHubMod = () => window.DGE.GitHub;
   const MapperMod = () => window.DGE.Mapper;
   const UrlImportMod = () => window.DGE.UrlImport;
+  const LoadersMod = () => window.DGE.Loaders;
 
   const DEFAULT_CHUNK_SIZE = 8;
 
   let ocrPages = [];
   let finalJson = null;
   let currentFileKey = null;
+  let currentLoader = null; // whichever loader (PDF/Image/…) is handling the current source — see loaders.js
   let cancelRequested = false;
   let proofreadCancelRequested = false;
   let currentMappedJson = null;
@@ -246,14 +247,23 @@ window.DGE.App = (function () {
 
   async function onFileSelected(e) {
     clearError();
-    const file = e.target.files[0];
-    if (!file) return;
-    if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
-      setError('That doesn\'t look like a PDF file.');
+    const files = e.target.files;
+    if (!files || !files.length) return;
+
+    let detected;
+    try {
+      detected = LoadersMod().detect(files);
+    } catch (err) {
+      setError(err.message);
+      e.target.value = ''; // clear the picker so the same fix-and-reselect works cleanly
       return;
     }
+    currentLoader = detected.loader;
 
-    currentFileKey = file.name + '_' + file.size;
+    // Multi-file-safe key: joins every selected file's name+size so a
+    // different set of images (even same count) gets its own saved
+    // progress instead of colliding with an unrelated prior selection.
+    currentFileKey = Array.from(files).map(f => f.name + '_' + f.size).join('|');
     ocrPages = [];
     finalJson = null;
     $('previewArea').innerHTML = '';
@@ -263,8 +273,8 @@ window.DGE.App = (function () {
     $('proofreadResumeNote').textContent = '';
 
     try {
-      log('Loading PDF…');
-      const info = await PDFMod().loadPdf(file);
+      log(`Loading ${detected.typeLabel}…`);
+      const info = await currentLoader.load(files);
       log(`Loaded "${info.name}" — ${info.numPages} page(s).`);
       $('pageCountDisplay').textContent = info.numPages + ' page(s) detected';
 
@@ -293,7 +303,7 @@ window.DGE.App = (function () {
         }
       }
     } catch (e) {
-      setError('Could not read this PDF: ' + U().formatError(e));
+      setError(`Could not read this ${detected.typeLabel}: ` + U().formatError(e));
     }
   }
 
@@ -337,8 +347,9 @@ window.DGE.App = (function () {
     const visionKey = $('visionKey').value.trim();
     if (!visionKey) return setError('Enter your Vision API key first.');
 
-    const total = PDFMod().getPageCount();
-    if (!total) return setError('Load a PDF first.');
+    if (!currentLoader) return setError('Load a PDF or image(s) first.');
+    const total = currentLoader.getPageCount();
+    if (!total) return setError('Load a PDF or image(s) first.');
 
     let startPage = 1;
     if (fromResume) {
@@ -366,8 +377,8 @@ window.DGE.App = (function () {
       }
       $('progressText').textContent = `Page ${p} / ${total}`;
       try {
-        const base64 = await PDFMod().renderPageToPngBase64(p, 2.0);
-        const text = await VisionMod().ocrImageBase64(base64, visionKey);
+        const pageObj = await currentLoader.getPageImage(p);
+        const text = await VisionMod().ocrImageBase64(pageObj.imageBase64, visionKey);
         ocrPages.push({ page: p, text: text });
         await IDB().set(ocrProgressKey(), { lastPage: p });
         await IDB().set(ocrDataKey(), { pages: ocrPages });
