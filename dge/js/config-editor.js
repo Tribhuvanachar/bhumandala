@@ -24,7 +24,8 @@ const DGE_EDITABLE_TEXT_FIELDS = [
   { key: 'appName', label: 'App name', hint: 'Shown in share images and page metadata.' },
   { key: 'designedBy', label: 'Credit line', hint: 'Shown under the title as "DESIGNED BY ...".' },
   { key: 'contactEmail', label: 'Contact email', hint: 'Used by the About modal and sponsor links.' },
-  { key: 'sarvamoolaProjectText', label: 'Project support text', hint: 'Shown in the support banner.' }
+  { key: 'sarvamoolaProjectText', label: 'Project support text', hint: 'Shown in the support banner.' },
+  { key: 'audioBaseUrl', label: 'Audio source base URL', hint: 'The shared host prefix for every grantha\'s audio (e.g. https://archive.org/download/) — must end with a slash. Each grantha\'s own identifier folder/filename stays exactly as stored; only this shared prefix changes. An end user can further override this on their own device in ⚙️ Settings.' }
 ];
 
 let dgeConfigDraft = null;
@@ -50,7 +51,8 @@ function dgeBuildDraft() {
       designedBy: app.designedBy || '',
       showDesignedBy: app.showDesignedBy !== false,
       contactEmail: app.contactEmail || '',
-      sarvamoolaProjectText: app.sarvamoolaProjectText || ''
+      sarvamoolaProjectText: app.sarvamoolaProjectText || '',
+      audioBaseUrl: app.audioBaseUrl || ''
     },
     SPONSOR_CONFIG: {
       enabled: sp.enabled !== false,
