@@ -294,6 +294,20 @@ const KEY_SPONSORS_CONFIG = {
 };
 window.KEY_SPONSORS_CONFIG = KEY_SPONSORS_CONFIG;
 
+// What's New / Coming Soon — admin-configured only, same pattern as
+// CONTRIBUTORS_CONFIG. "updates" are rendered newest-first by date
+// (missing dates sink to the bottom, keeping their stored order among
+// themselves); "coming soon" has no date concept at all, so its stored
+// array order IS the display order — reorder those manually to reflect
+// priority. Empty by default — nothing invented; add real entries as
+// features actually ship or get planned.
+const WHATS_NEW_CONFIG = {
+  enabled: true,
+  updates: [],
+  comingSoon: []
+};
+window.WHATS_NEW_CONFIG = WHATS_NEW_CONFIG;
+
 // Multi-provider AI configuration. Each provider is only used if the person
 // has saved a key for it (via the ⚙️ Settings). Model names are left
 // user-editable rather than hardcoded, since exact current API model
