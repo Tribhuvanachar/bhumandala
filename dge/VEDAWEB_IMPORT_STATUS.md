@@ -1,5 +1,14 @@
 # DGE — Rigveda / VedaWeb Import: Status & Architecture
 
+> **⚠️ Correction, 7 Aug 2026:** §5's "Open items" below (chandas, accented
+> padapatha, English translation) describe only the *first* import pass and
+> are now **out of date** — all three were subsequently solved via a second,
+> independently cross-validated source, and three more Vedas plus
+> Taittirīya were imported on top of it. `veda_toolkit/README.md` is now
+> the authoritative doc for current status and open items; treat §5 here as
+> historical record of the first pass's reasoning (still valid for *why*
+> `eichler` was chosen as the witness, etc.), not as today's todo list.
+
 _Reference document — written to be handed to any developer or AI tool
 picking this work up. One thing it deliberately does NOT include: scraping
 instructions for sites whose reuse terms aren't explicit (see the note at
