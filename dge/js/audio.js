@@ -27,11 +27,22 @@ function updatePlayUI() {
   if (activeId && readingCard) readingCard.classList.toggle('highlight', isPlaying); 
 }
 
+// Configurable Audio Source: swaps the shared host prefix stored in
+// stotraData.metadata.archiveBaseUrl for whatever's currently effective
+// (end-user override, then super-admin config, then the hardcoded
+// default) — see dgeApplyAudioBaseUrlOverride in config.js. Every
+// per-grantha identifier/folder after that prefix is untouched.
+function dgeEffectiveArchiveBase() {
+  const raw = stotraData.metadata.archiveBaseUrl;
+  return (typeof window.dgeApplyAudioBaseUrlOverride === 'function') ? window.dgeApplyAudioBaseUrlOverride(raw) : raw;
+}
+
 async function resolveAudioSrc(id) {
   if (!stotraData || !stotraData.metadata) return "";
-  
-  const primary = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${id}${stotraData.metadata.fileExtension}`;
-  const alt = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${id}%E2%80%8B${stotraData.metadata.fileExtension}`;
+
+  const base = dgeEffectiveArchiveBase();
+  const primary = `${base}${stotraData.metadata.filePrefix}${id}${stotraData.metadata.fileExtension}`;
+  const alt = `${base}${stotraData.metadata.filePrefix}${id}%E2%80%8B${stotraData.metadata.fileExtension}`;
   
   if ('caches' in window) {
     try {
@@ -327,11 +338,12 @@ async function cacheAllAudio(btn) {
   let done = 0, success = 0;
   const CONCURRENCY = 4;
 
+  const base = dgeEffectiveArchiveBase();
   async function worker() {
     while (queue.length) {
       const i = queue.shift();
-      const primary = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${i}${stotraData.metadata.fileExtension}`;
-      const alt = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${i}%E2%80%8B${stotraData.metadata.fileExtension}`;
+      const primary = `${base}${stotraData.metadata.filePrefix}${i}${stotraData.metadata.fileExtension}`;
+      const alt = `${base}${stotraData.metadata.filePrefix}${i}%E2%80%8B${stotraData.metadata.fileExtension}`;
       try {
         let res = await fetch(primary);
         if (!res.ok) res = await fetch(alt);
@@ -396,7 +408,7 @@ if (currentAudio) {
     }
     
     audioRetryDone = true;
-    currentAudio.src = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${activeId}%E2%80%8B${stotraData.metadata.fileExtension}`;
+    currentAudio.src = `${dgeEffectiveArchiveBase()}${stotraData.metadata.filePrefix}${activeId}%E2%80%8B${stotraData.metadata.fileExtension}`;
     currentAudio.load();
     currentAudio.play().then(() => { 
       isPlaying = true; 

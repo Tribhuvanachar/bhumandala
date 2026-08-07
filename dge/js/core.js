@@ -68,7 +68,8 @@ window.dgeConfigOverridesPromise = fetch('data/config-overrides.json?t=' + Date.
       appConfig: window.appConfig,
       SPONSOR_CONFIG: window.SPONSOR_CONFIG,
       CONTRIBUTORS_CONFIG: window.CONTRIBUTORS_CONFIG,
-      KEY_SPONSORS_CONFIG: window.KEY_SPONSORS_CONFIG
+      KEY_SPONSORS_CONFIG: window.KEY_SPONSORS_CONFIG,
+      WHATS_NEW_CONFIG: window.WHATS_NEW_CONFIG
     };
     Object.keys(targets).forEach(k => {
       if (ov[k] && targets[k]) Object.assign(targets[k], ov[k]);

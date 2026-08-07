@@ -24,7 +24,8 @@ const DGE_EDITABLE_TEXT_FIELDS = [
   { key: 'appName', label: 'App name', hint: 'Shown in share images and page metadata.' },
   { key: 'designedBy', label: 'Credit line', hint: 'Shown under the title as "DESIGNED BY ...".' },
   { key: 'contactEmail', label: 'Contact email', hint: 'Used by the About modal and sponsor links.' },
-  { key: 'sarvamoolaProjectText', label: 'Project support text', hint: 'Shown in the support banner.' }
+  { key: 'sarvamoolaProjectText', label: 'Project support text', hint: 'Shown in the support banner.' },
+  { key: 'audioBaseUrl', label: 'Audio source base URL', hint: 'The shared host prefix for every grantha\'s audio (e.g. https://archive.org/download/) — must end with a slash. Each grantha\'s own identifier folder/filename stays exactly as stored; only this shared prefix changes. An end user can further override this on their own device in ⚙️ Settings.' }
 ];
 
 let dgeConfigDraft = null;
@@ -43,13 +44,15 @@ function dgeBuildDraft() {
   const sp = window.SPONSOR_CONFIG || {};
   const co = window.CONTRIBUTORS_CONFIG || {};
   const ks = window.KEY_SPONSORS_CONFIG || {};
+  const wn = window.WHATS_NEW_CONFIG || {};
   return {
     appConfig: {
       appName: app.appName || '',
       designedBy: app.designedBy || '',
       showDesignedBy: app.showDesignedBy !== false,
       contactEmail: app.contactEmail || '',
-      sarvamoolaProjectText: app.sarvamoolaProjectText || ''
+      sarvamoolaProjectText: app.sarvamoolaProjectText || '',
+      audioBaseUrl: app.audioBaseUrl || ''
     },
     SPONSOR_CONFIG: {
       enabled: sp.enabled !== false,
@@ -67,6 +70,11 @@ function dgeBuildDraft() {
     KEY_SPONSORS_CONFIG: {
       enabled: ks.enabled !== false,
       sponsors: (ks.sponsors || []).map(s => ({ name: s.name || '', contribution: s.contribution || '' }))
+    },
+    WHATS_NEW_CONFIG: {
+      enabled: wn.enabled !== false,
+      updates: (wn.updates || []).map(u => ({ date: u.date || '', title: u.title || '', description: u.description || '' })),
+      comingSoon: (wn.comingSoon || []).map(c => ({ title: c.title || '', description: c.description || '' }))
     }
   };
 }
@@ -105,6 +113,17 @@ let dgeSectionSeq = 0;
 // Only reset when the editor is freshly opened (see openConfigEditor).
 let dgeOpenSections = {};
 
+// dgeEsc is HTML-escaping (safe for text NODE content) — it does nothing
+// for a single quote, since a raw apostrophe is perfectly valid inside a
+// text node. That makes it the WRONG escape for a value being embedded
+// inside a single-quoted JS string literal in an onclick="" attribute — a
+// title like "What's New" would end its own JS string early at the
+// apostrophe, breaking the handler with a syntax error. This one escapes
+// backslash and single-quote specifically for that context instead.
+function dgeJsStringEsc(s) {
+  return String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+}
+
 // Collapsible, and collapsed by default apart from the first — the full
 // form is far taller than a phone screen, so showing it all at once made
 // the panel unusable.
@@ -114,7 +133,7 @@ function dgeSection(title, body, openByDefault) {
   const isOpen = dgeOpenSections[title];
   return `<div style="margin-bottom:10px; border:1px solid var(--card-border);
                       border-radius:8px; background:var(--card-bg); overflow:hidden;">
-    <div onclick="window.dgeToggleConfigSection('${id}', this, '${dgeEsc(title)}')"
+    <div onclick="window.dgeToggleConfigSection('${id}', this, '${dgeJsStringEsc(title)}')"
          style="cursor:pointer; padding:12px; display:flex; align-items:center; gap:8px;
                 font-size:12px; font-weight:800; text-transform:uppercase; color:var(--accent-red);">
       <span style="font-size:10px; width:10px;">${isOpen ? '▾' : '▸'}</span>
@@ -250,6 +269,56 @@ function dgeRenderConfigEditor() {
                     background:var(--bg-main); color:var(--text-primary);">
     </div>`).join('');
 
+  const whatsNewUpdateRows = d.WHATS_NEW_CONFIG.updates.map((u, i) => `
+    <div style="border-top:1px dashed var(--card-border); padding-top:8px; margin-bottom:8px;">
+      <div style="display:flex; gap:6px; margin-bottom:5px;">
+        <input type="date" value="${dgeEsc(u.date)}" title="Date (used to sort newest-first)"
+               oninput="window.dgeConfigSet('WHATS_NEW_CONFIG.updates.${i}.date', this.value)"
+               style="flex:none; width:130px; font-size:12px; padding:6px; border:1px solid var(--card-border);
+                      border-radius:6px; background:var(--bg-main); color:var(--text-primary);">
+        <input type="text" value="${dgeEsc(u.title)}" placeholder="Title"
+               oninput="window.dgeConfigSet('WHATS_NEW_CONFIG.updates.${i}.title', this.value)"
+               style="flex:1; min-width:0; font-size:13px; padding:6px; border:1px solid var(--card-border);
+                      border-radius:6px; background:var(--bg-main); color:var(--text-primary);">
+      </div>
+      <textarea rows="2" placeholder="Description"
+        oninput="window.dgeConfigSet('WHATS_NEW_CONFIG.updates.${i}.description', this.value)"
+        style="width:100%; box-sizing:border-box; font-size:12px; padding:6px; margin-bottom:5px;
+               border:1px solid var(--card-border); border-radius:6px;
+               background:var(--bg-main); color:var(--text-primary);">${dgeEsc(u.description)}</textarea>
+      <div style="display:flex; gap:6px;">
+        <button class="btn-sm" style="flex:none; ${i === 0 ? 'opacity:0.3;' : ''}" title="Move up"
+                ${i === 0 ? 'disabled' : ''} onclick="window.dgeConfigMoveRow('WHATS_NEW_CONFIG.updates', ${i}, -1)">▲</button>
+        <button class="btn-sm" style="flex:none; ${i === d.WHATS_NEW_CONFIG.updates.length - 1 ? 'opacity:0.3;' : ''}" title="Move down"
+                ${i === d.WHATS_NEW_CONFIG.updates.length - 1 ? 'disabled' : ''} onclick="window.dgeConfigMoveRow('WHATS_NEW_CONFIG.updates', ${i}, 1)">▼</button>
+        <button class="btn-sm" style="flex:none; color:var(--accent-red); margin-left:auto;"
+                onclick="window.dgeConfigRemoveRow('WHATS_NEW_CONFIG.updates', ${i})">🗑️ Remove</button>
+      </div>
+    </div>`).join('');
+
+  const whatsNewComingSoonRows = d.WHATS_NEW_CONFIG.comingSoon.map((c, i) => `
+    <div style="border-top:1px dashed var(--card-border); padding-top:8px; margin-bottom:8px;">
+      <div style="display:flex; gap:6px; margin-bottom:5px;">
+        <input type="text" value="${dgeEsc(c.title)}" placeholder="Title"
+               oninput="window.dgeConfigSet('WHATS_NEW_CONFIG.comingSoon.${i}.title', this.value)"
+               style="flex:1; min-width:0; font-size:13px; padding:6px; border:1px solid var(--card-border);
+                      border-radius:6px; background:var(--bg-main); color:var(--text-primary);">
+      </div>
+      <textarea rows="2" placeholder="Description"
+        oninput="window.dgeConfigSet('WHATS_NEW_CONFIG.comingSoon.${i}.description', this.value)"
+        style="width:100%; box-sizing:border-box; font-size:12px; padding:6px; margin-bottom:5px;
+               border:1px solid var(--card-border); border-radius:6px;
+               background:var(--bg-main); color:var(--text-primary);">${dgeEsc(c.description)}</textarea>
+      <div style="display:flex; gap:6px;">
+        <button class="btn-sm" style="flex:none; ${i === 0 ? 'opacity:0.3;' : ''}" title="Move up (higher = shown first)"
+                ${i === 0 ? 'disabled' : ''} onclick="window.dgeConfigMoveRow('WHATS_NEW_CONFIG.comingSoon', ${i}, -1)">▲</button>
+        <button class="btn-sm" style="flex:none; ${i === d.WHATS_NEW_CONFIG.comingSoon.length - 1 ? 'opacity:0.3;' : ''}" title="Move down"
+                ${i === d.WHATS_NEW_CONFIG.comingSoon.length - 1 ? 'disabled' : ''} onclick="window.dgeConfigMoveRow('WHATS_NEW_CONFIG.comingSoon', ${i}, 1)">▼</button>
+        <button class="btn-sm" style="flex:none; color:var(--accent-red); margin-left:auto;"
+                onclick="window.dgeConfigRemoveRow('WHATS_NEW_CONFIG.comingSoon', ${i})">🗑️ Remove</button>
+      </div>
+    </div>`).join('');
+
   el.innerHTML =
     `<p class="hint" style="margin-top:0;">These settings are saved to
       <code>data/config-overrides.json</code>, a plain data file — never to
@@ -273,7 +342,17 @@ function dgeRenderConfigEditor() {
       dgeToggle('KEY_SPONSORS_CONFIG.enabled', d.KEY_SPONSORS_CONFIG.enabled, 'Show the Key Sponsors section') +
       keySponsorRows +
       `<button class="btn-sm" style="margin-top:6px;"
-        onclick='window.dgeConfigAddRow("KEY_SPONSORS_CONFIG.sponsors", ${JSON.stringify(JSON.stringify({name:'',contribution:''}))})'>➕ Add sponsor</button>`);
+        onclick='window.dgeConfigAddRow("KEY_SPONSORS_CONFIG.sponsors", ${JSON.stringify(JSON.stringify({name:'',contribution:''}))})'>➕ Add sponsor</button>`) +
+    dgeSection("What's New / Coming Soon",
+      dgeToggle('WHATS_NEW_CONFIG.enabled', d.WHATS_NEW_CONFIG.enabled, 'Show this section (via the About modal)') +
+      `<div style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--muted-text); margin-top:10px;">What's New (shown newest-first by date)</div>` +
+      whatsNewUpdateRows +
+      `<button class="btn-sm" style="margin-top:6px; margin-bottom:16px;"
+        onclick='window.dgeConfigAddRow("WHATS_NEW_CONFIG.updates", ${JSON.stringify(JSON.stringify({date:'',title:'',description:''}))})'>➕ Add update</button>` +
+      `<div style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--muted-text); margin-top:10px;">Coming Soon (order below = display order)</div>` +
+      whatsNewComingSoonRows +
+      `<button class="btn-sm" style="margin-top:6px;"
+        onclick='window.dgeConfigAddRow("WHATS_NEW_CONFIG.comingSoon", ${JSON.stringify(JSON.stringify({title:'',description:''}))})'>➕ Add coming-soon item</button>`);
 }
 
 window.openConfigEditor = function() {

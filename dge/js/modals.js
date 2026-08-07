@@ -151,6 +151,78 @@ window.openSponsorModal = function() {
   if (typeof openModal === 'function') openModal('sponsorModal');
 };
 
+// Local escape helper — config-editor.js has its own dgeEsc, but that's a
+// separate file/closure and isn't reachable from here.
+function dgeModalsEsc(s) {
+  const d = document.createElement('div');
+  d.textContent = s == null ? '' : String(s);
+  return d.innerHTML;
+}
+
+// "What's New" is chronological by nature (sorted here, newest first,
+// regardless of how the admin ordered them while editing) — entries
+// missing a date sink to the bottom but keep their relative order among
+// each other, rather than being scattered arbitrarily by a naive sort.
+// "Coming Soon" has no date concept at all: its stored array order IS
+// the display order, reordered manually in Site Settings to reflect
+// actual priority.
+function dgeSortUpdatesNewestFirst(updates) {
+  return updates
+    .map((u, i) => ({ u, i }))
+    .sort((a, b) => {
+      const ad = a.u.date, bd = b.u.date;
+      if (ad && bd) return bd.localeCompare(ad);
+      if (ad && !bd) return -1;
+      if (!ad && bd) return 1;
+      return a.i - b.i; // both undated — keep original relative order
+    })
+    .map(x => x.u);
+}
+
+window.openWhatsNewModal = function() {
+  const body = document.getElementById('whatsNewBody');
+  if (!body) return;
+  const cfg = (typeof WHATS_NEW_CONFIG !== 'undefined') ? WHATS_NEW_CONFIG : null;
+
+  if (!cfg || cfg.enabled === false || (!cfg.updates.length && !cfg.comingSoon.length)) {
+    body.innerHTML = `<p style="font-size:13px; color:var(--muted-text);">Nothing posted here yet — check back soon.</p>`;
+    if (typeof openModal === 'function') openModal('whatsNewModal');
+    return;
+  }
+
+  let html = '';
+
+  if (cfg.updates.length) {
+    html += `<div class="actions-section-label">✨ What's New</div>`;
+    html += `<div style="display:flex; flex-direction:column; gap:12px; margin-bottom:20px;">`;
+    dgeSortUpdatesNewestFirst(cfg.updates).forEach(u => {
+      html += `
+        <div style="border-left:3px solid var(--accent-red); padding-left:10px;">
+          ${u.date ? `<div style="font-size:10px; font-weight:700; color:var(--muted-text); text-transform:uppercase; margin-bottom:2px;">${dgeModalsEsc(u.date)}</div>` : ''}
+          <div style="font-size:13px; font-weight:800; margin-bottom:2px;">${dgeModalsEsc(u.title)}</div>
+          <div style="font-size:12px; color:var(--muted-text); line-height:1.5;">${dgeModalsEsc(u.description || '')}</div>
+        </div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (cfg.comingSoon.length) {
+    html += `<div class="actions-section-label">🔭 Coming Soon</div>`;
+    html += `<div style="display:flex; flex-direction:column; gap:12px;">`;
+    cfg.comingSoon.forEach(c => {
+      html += `
+        <div style="border-left:3px dashed var(--card-border); padding-left:10px;">
+          <div style="font-size:13px; font-weight:800; margin-bottom:2px;">${dgeModalsEsc(c.title)}</div>
+          <div style="font-size:12px; color:var(--muted-text); line-height:1.5;">${dgeModalsEsc(c.description || '')}</div>
+        </div>`;
+    });
+    html += `</div>`;
+  }
+
+  body.innerHTML = html;
+  if (typeof openModal === 'function') openModal('whatsNewModal');
+};
+
 window.sendTypoReport = function() {
   const shlokaEl = document.getElementById('reportTypoShloka');
   const detailsEl = document.getElementById('reportTypoDetails');

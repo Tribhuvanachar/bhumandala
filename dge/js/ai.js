@@ -98,6 +98,12 @@ window.openKeyModal = function() {
   });
   const parallelToggle = document.getElementById('aiParallelModeToggle');
   if (parallelToggle) parallelToggle.checked = localStorage.getItem('user_ai_parallel_mode') === 'true';
+
+  const audioBaseUrlInput = document.getElementById('userAudioBaseUrlInput');
+  if (audioBaseUrlInput) audioBaseUrlInput.value = localStorage.getItem('audio_base_url_override') || '';
+  const audioBaseUrlDefaultHint = document.getElementById('audioBaseUrlDefaultHint');
+  if (audioBaseUrlDefaultHint) audioBaseUrlDefaultHint.textContent = (window.appConfig && window.appConfig.audioBaseUrl) || 'https://archive.org/download/';
+
   dgeRenderAcharyaSettingsUI();
   dgeLoadFeatureFlagsIntoUI();
   dgeLoadShlokaFieldsIntoUI();
@@ -159,6 +165,14 @@ window.saveAllApiKeys = function() {
   });
   const parallelToggle = document.getElementById('aiParallelModeToggle');
   if (parallelToggle) localStorage.setItem('user_ai_parallel_mode', parallelToggle.checked ? 'true' : 'false');
+
+  const audioBaseUrlInput = document.getElementById('userAudioBaseUrlInput');
+  if (audioBaseUrlInput) {
+    let url = audioBaseUrlInput.value.trim();
+    if (url && !url.endsWith('/')) url += '/'; // must end with / — concatenated directly with each grantha's identifier folder
+    if (url) { localStorage.setItem('audio_base_url_override', url); audioBaseUrlInput.value = url; }
+    else localStorage.removeItem('audio_base_url_override');
+  }
 
   dgeSaveAcharyaSettingsFromUI();
   dgeSaveFeatureFlagsFromUI();
@@ -239,6 +253,13 @@ function dgeSaveFeatureFlagsFromUI() {
 
   if (typeof applyFeatureFlags === 'function') applyFeatureFlags();
 }
+
+window.resetAudioBaseUrlToDefault = function() {
+  localStorage.removeItem('audio_base_url_override');
+  const input = document.getElementById('userAudioBaseUrlInput');
+  if (input) input.value = '';
+  if (typeof showToast === 'function') showToast('Audio source reset to the project default.');
+};
 
 window.resetFeatureFlagsToDefault = function() {
   localStorage.removeItem('feature_flags_override');

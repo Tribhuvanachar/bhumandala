@@ -11,6 +11,16 @@ const appConfig = {
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
   secretPasskey: "SHRI108",
+  // Project-wide default audio host. Every grantha's data.json still
+  // stores its OWN full archiveBaseUrl (e.g.
+  // "https://archive.org/download/svg_3bu1_pns/") — that per-grantha
+  // identifier/folder is real per-text data and stays in JSON. This
+  // value is only the well-known HOST PREFIX shared by every one of
+  // those URLs today. dgeApplyAudioBaseUrlOverride() (below) swaps just
+  // that shared prefix for whatever's currently effective, so switching
+  // audio hosting for the whole site never requires editing a single
+  // grantha JSON file — see dgeGetEffectiveAudioBaseUrl.
+  audioBaseUrl: "https://archive.org/download/",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
@@ -294,6 +304,20 @@ const KEY_SPONSORS_CONFIG = {
 };
 window.KEY_SPONSORS_CONFIG = KEY_SPONSORS_CONFIG;
 
+// What's New / Coming Soon — admin-configured only, same pattern as
+// CONTRIBUTORS_CONFIG. "updates" are rendered newest-first by date
+// (missing dates sink to the bottom, keeping their stored order among
+// themselves); "coming soon" has no date concept at all, so its stored
+// array order IS the display order — reorder those manually to reflect
+// priority. Empty by default — nothing invented; add real entries as
+// features actually ship or get planned.
+const WHATS_NEW_CONFIG = {
+  enabled: true,
+  updates: [],
+  comingSoon: []
+};
+window.WHATS_NEW_CONFIG = WHATS_NEW_CONFIG;
+
 // Multi-provider AI configuration. Each provider is only used if the person
 // has saved a key for it (via the ⚙️ Settings). Model names are left
 // user-editable rather than hardcoded, since exact current API model
@@ -355,6 +379,38 @@ window.dgeGetEffectiveFeatureFlags = function() {
     }
   } catch (e) { /* fall through to defaults */ }
   return FEATURE_FLAGS;
+};
+
+// Configurable Audio Source. Precedence: end-user local override
+// (localStorage, this device only) > super-admin-configured global
+// default (appConfig.audioBaseUrl, via config-overrides.json — same
+// mechanism as every other appConfig field) > the hardcoded fallback.
+window.dgeGetEffectiveAudioBaseUrl = function() {
+  try {
+    const override = localStorage.getItem('audio_base_url_override');
+    if (override && override.trim()) return override.trim();
+  } catch (e) { /* fall through to the configured default */ }
+  return (window.appConfig && window.appConfig.audioBaseUrl) || 'https://archive.org/download/';
+};
+
+// The host prefix actually baked into every existing grantha's stored
+// archiveBaseUrl today. NOT the same thing as the current default above
+// (that can itself be changed by a super-admin) — this is specifically
+// what needs to be recognized-and-stripped from OLD data so it can be
+// replaced with whatever's effective NOW, without ever touching the
+// JSON files themselves.
+const AUDIO_LEGACY_DEFAULT_BASE = 'https://archive.org/download/';
+
+// Rewrites one grantha's stored archiveBaseUrl to use the currently
+// effective host, preserving everything after the recognized default
+// prefix (the per-grantha identifier folder) untouched. A grantha whose
+// stored URL does NOT start with the recognized default (someone already
+// pointed it at a fully custom host on purpose) is left exactly as-is —
+// this only ever substitutes the common, known prefix, never guesses.
+window.dgeApplyAudioBaseUrlOverride = function(rawBaseUrl) {
+  if (!rawBaseUrl || typeof rawBaseUrl !== 'string' || !rawBaseUrl.startsWith(AUDIO_LEGACY_DEFAULT_BASE)) return rawBaseUrl;
+  const effective = window.dgeGetEffectiveAudioBaseUrl();
+  return effective + rawBaseUrl.slice(AUDIO_LEGACY_DEFAULT_BASE.length);
 };
 
 // Note: All dynamic state variables (stotraData, activeId, marks, notes, etc.)
