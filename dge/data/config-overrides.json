@@ -40,12 +40,6 @@
         "label": "General Token of Appreciation",
         "description": "An open contribution, undesignated, used wherever most needed.",
         "enabled": true
-      },
-      {
-        "icon": "🙏",
-        "label": "Aradhana",
-        "description": "Rayara Aradhana",
-        "enabled": true
       }
     ]
   },
@@ -54,15 +48,19 @@
     "contributors": [
       {
         "name": "Sameer",
-        "role": ""
+        "role": "Content"
       },
       {
         "name": "Anirudha",
-        "role": ""
+        "role": "Content"
       },
       {
         "name": "Madhu",
-        "role": ""
+        "role": "Content"
+      },
+      {
+        "name": "Aruna",
+        "role": "Content"
       }
     ]
   },
@@ -71,11 +69,15 @@
     "sponsors": [
       {
         "name": "Adarsh",
-        "contribution": "Site Hosting And Key Subacriptions"
+        "contribution": "Site Hosting And Key Subscriptions"
       },
       {
-        "name": "Aruna",
-        "contribution": "Code Development  Cost"
+        "name": "Aruna Bharadwaj",
+        "contribution": "TTS"
+      },
+      {
+        "name": "Aruna Guru",
+        "contribution": "Misc"
       }
     ]
   }
