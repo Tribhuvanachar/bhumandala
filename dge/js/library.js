@@ -206,6 +206,27 @@ window.openLibraryModal = async function() {
     ).join('');
 };
 
+// Quick Search entry point — parses e.g. "rv1.1.3" (see
+// dgeParseQuickSearchQuery in config.js) and navigates straight to that
+// verse, reusing dgeGoToGrantha's own path-encoding rule. The actual
+// verse selection happens after the new page loads and normalizes its
+// data (see the jumpVedicId/jumpShloka handling in core.js) — a full
+// navigation is unavoidable here since the target grantha's data isn't
+// loaded yet at the point this runs.
+window.dgeQuickJump = function(text) {
+  const target = (typeof window.dgeParseQuickSearchQuery === 'function') ? window.dgeParseQuickSearchQuery(text) : null;
+  if (!target) {
+    if (typeof showToast === 'function') showToast('Not recognized — try e.g. "rv1.1.3" or "pns5".');
+    return false;
+  }
+  const readableSlug = /^[a-z0-9_/]+$/i.test(target.granthaPath) ? target.granthaPath : encodeURIComponent(target.granthaPath);
+  let url = window.location.pathname + '?path=' + readableSlug;
+  if (target.vedicId) url += '&jumpVedicId=' + encodeURIComponent(target.vedicId);
+  else if (target.shlokaNumber) url += '&jumpShloka=' + target.shlokaNumber;
+  window.location.href = url;
+  return true;
+};
+
 window.dgeGoToGrantha = function(slug) {
   // Grantha slugs are always plain lowercase letters, digits, underscores,
   // and slashes by design (see taxonomy.json) — none of that needs

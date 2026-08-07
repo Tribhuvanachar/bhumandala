@@ -259,6 +259,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const explicitPath = urlParams.get('path'); // new general addressing, e.g. "vedas/rigveda/mandala_01"
   const explicitCode = urlParams.get('code'); // legacy addressing — always resolves under stotras/, unchanged behaviour
 
+  // Quick Search jump target (see dgeQuickJump in library.js) — resolved
+  // against this grantha's actual shlokas object once it's loaded and
+  // normalized, at the end of initApp() below.
+  const jumpVedicId = urlParams.get('jumpVedicId');
+  const jumpShloka = urlParams.get('jumpShloka');
+  window._dgeJumpTarget = jumpVedicId ? { vedicId: jumpVedicId } : (jumpShloka ? { shlokaNumber: parseInt(jumpShloka, 10) } : null);
+
   const providedPass = urlParams.get('pass');
   const passkey = (window.appConfig && window.appConfig.secretPasskey) ? window.appConfig.secretPasskey : 'SHRI108';
 
@@ -378,6 +385,43 @@ function initApp() {
   if (typeof renderList === 'function') renderList();
 
   if (typeof dgeRestoreLastVerse === 'function') dgeRestoreLastVerse();
+
+  // A Quick Search jump (see dgeQuickJump in library.js) takes priority
+  // over restoring the last-viewed verse above — the user explicitly
+  // asked to go somewhere specific, so that intent wins.
+  if (window._dgeJumpTarget) dgeResolveQuickJumpTarget(window._dgeJumpTarget);
+  window._dgeJumpTarget = null;
+}
+
+// Turns a { vedicId } or { shlokaNumber } target into an actual internal
+// shloka key and jumps there via playShloka() — the same primitive every
+// other "go to this verse" interaction (tapping a card, Prev/Next) already
+// uses, so this behaves identically (scrolls into view, updates the
+// reading card, etc.) without a second, parallel navigation path.
+function dgeResolveQuickJumpTarget(target) {
+  if (!stotraData || !stotraData.shlokas) return;
+
+  let targetId = null;
+  if (target.shlokaNumber && stotraData.shlokas[target.shlokaNumber]) {
+    targetId = target.shlokaNumber;
+  } else if (target.vedicId) {
+    // Reverse scan by normalized value (parseInt each dot-segment, then
+    // rejoin) so "1.1.3" matches regardless of how either side pads its
+    // numbers — real data has no padding today, but this doesn't assume
+    // that stays true forever.
+    const normalize = s => String(s).split('.').map(p => parseInt(p, 10)).join('.');
+    const wanted = normalize(target.vedicId);
+    targetId = Object.keys(stotraData.shlokas).find(k => {
+      const vid = stotraData.shlokas[k].vedicId;
+      return vid && normalize(vid) === wanted;
+    });
+  }
+
+  if (targetId && typeof playShloka === 'function') {
+    playShloka(parseInt(targetId, 10));
+  } else if (typeof showToast === 'function') {
+    showToast('Could not find that verse in this text.');
+  }
 }
 
 // Renders every piece of "chrome" (title, commentary list, search-scope

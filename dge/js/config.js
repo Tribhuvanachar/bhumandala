@@ -413,6 +413,68 @@ window.dgeApplyAudioBaseUrlOverride = function(rawBaseUrl) {
   return effective + rawBaseUrl.slice(AUDIO_LEGACY_DEFAULT_BASE.length);
 };
 
+// Quick Search abbreviations — type e.g. "rv1.1.3" in the Library's quick
+// jump box to go straight to a specific verse anywhere in the library,
+// not just search within whichever text is currently open. Each entry
+// maps a case-insensitive prefix to a specific populated grantha (or, for
+// a multi-file text like the Rigveda, a per-mandala path template) and
+// how to read the number(s) that follow.
+//
+// Deliberately NOT wired up for texts that don't exist yet (Gita,
+// Bhagavata Purana, etc. are still 0% populated per library.json) —
+// pointing an abbreviation at empty content would silently land on "Not
+// Yet Available", which is worse than not offering the shortcut at all.
+// Add an entry here once a grantha is actually populated; resolve()
+// receives the dot-separated numeric parts already split out.
+const QUICK_SEARCH_ABBREVIATIONS = [
+  {
+    prefix: 'rv',
+    label: 'Rigveda',
+    example: 'rv1.1.3 → Maṇḍala 1, Sūkta 1, Mantra 3',
+    // Each maṇḍala is its own grantha/data.json, and every mantra's own
+    // "id" field is already "mandala.sukta.mantra" (confirmed against
+    // real data — no padding, e.g. "1.1.1" not "1.1.01") — no separate
+    // lookup table needed, just a reverse scan for that id at load time
+    // (see dgeResolveQuickJumpTarget in core.js).
+    resolve: function(parts) {
+      if (parts.length !== 3 || parts.some(p => !/^\d+$/.test(p))) return null;
+      const mandala = parseInt(parts[0], 10);
+      if (!mandala || mandala < 1 || mandala > 10) return null;
+      const mm = String(mandala).padStart(2, '0');
+      return {
+        granthaPath: `vedas/rigveda/shakala_shakha/samhita/mandala_${mm}`,
+        vedicId: `${parseInt(parts[0], 10)}.${parseInt(parts[1], 10)}.${parseInt(parts[2], 10)}`
+      };
+    }
+  },
+  {
+    prefix: 'pns',
+    label: 'Prahlādakṛta Nṛsiṁha Stotra',
+    example: 'pns5 → Shloka 5',
+    resolve: function(parts) {
+      if (parts.length !== 1 || !/^\d+$/.test(parts[0])) return null;
+      const n = parseInt(parts[0], 10);
+      if (!n) return null;
+      return { granthaPath: 'stotras/pns', shlokaNumber: n };
+    }
+  }
+];
+window.QUICK_SEARCH_ABBREVIATIONS = QUICK_SEARCH_ABBREVIATIONS;
+
+// Parses "rv1.1.3", "pns 5", "RV 1.1.3" etc. into a jump target, or
+// returns null if it doesn't match any known abbreviation — callers
+// should treat null as "not a quick-search query", not as an error.
+window.dgeParseQuickSearchQuery = function(text) {
+  const m = String(text || '').trim().match(/^([a-zA-Z]+)\s*([\d.]+)$/);
+  if (!m) return null;
+  const prefixInput = m[1].toLowerCase();
+  const parts = m[2].split('.').filter(p => p !== '');
+  const entry = QUICK_SEARCH_ABBREVIATIONS.find(e => e.prefix.toLowerCase() === prefixInput);
+  if (!entry) return null;
+  const resolved = entry.resolve(parts);
+  return resolved ? Object.assign({ label: entry.label }, resolved) : null;
+};
+
 // Note: All dynamic state variables (stotraData, activeId, marks, notes, etc.)
 // and URL parameter parsing have been successfully migrated to js/state.js to 
 // maintain strict separation of concerns.
