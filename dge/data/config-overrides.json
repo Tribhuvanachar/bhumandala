@@ -72,12 +72,16 @@
         "contribution": "Site Hosting And Key Subscriptions"
       },
       {
+        "name": "Aruna Guru",
+        "contribution": "Misc"
+      },
+      {
         "name": "Aruna Bharadwaj",
         "contribution": "TTS"
       },
       {
-        "name": "Aruna Guru",
-        "contribution": "Misc"
+        "name": "Test",
+        "contribution": "Test "
       }
     ]
   }
