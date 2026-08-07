@@ -875,10 +875,22 @@ function dgeUint8ToBase64(bytes) {
 // matching leading segment fixes that automatically, regardless of which
 // folder happens to be current when the upload runs. Returns '' if the
 // entry WAS just the folder name itself with nothing under it.
+//
+// Checked against BOTH the currently-browsed folder AND the admin's
+// root-locked folder (usually "dge"), not just the former: every delivery
+// zip is wrapped in the root folder name specifically, not whatever
+// subfolder the admin happens to be standing in when they upload. Syncing
+// a "dge/..." zip while browsing dge/css (currentFolderName === "css")
+// used to skip stripping entirely and land at dge/css/dge/... — a stale
+// duplicate of the whole app that shipped and sat unnoticed for several
+// commits (see PROJECT_STATUS.md history) until it was found and deleted.
 function dgeStripRedundantFolderPrefix(relPath, currentFolderName) {
-  if (!currentFolderName) return relPath;
-  if (relPath === currentFolderName) return '';
-  if (relPath.startsWith(currentFolderName + '/')) return relPath.slice(currentFolderName.length + 1);
+  const rootFolderName = (dgeAdminGetRootPath() || '').split('/').filter(Boolean).pop();
+  const candidates = [currentFolderName, rootFolderName].filter(Boolean);
+  for (const name of candidates) {
+    if (relPath === name) return '';
+    if (relPath.startsWith(name + '/')) return relPath.slice(name.length + 1);
+  }
   return relPath;
 }
 
