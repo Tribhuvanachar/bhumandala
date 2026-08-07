@@ -56,5 +56,29 @@ window.DGE.Utils = (function () {
     return String(e);
   }
 
-  return { fileToBase64, downloadJson, saveProgress, loadProgress, clearProgress, parseJsonLoose, formatError };
+  // Parses "1-10, 15, 20-25" into a sorted array of unique page numbers.
+  // Returns null for blank/whitespace-only input, meaning "all pages" —
+  // callers must treat that as distinct from an empty array (which would
+  // mean "select nothing"). Unparseable tokens are silently skipped
+  // rather than rejecting the whole input — this is a quick text box,
+  // not a strict format.
+  function parsePageSelection(text) {
+    const trimmed = String(text || '').trim();
+    if (!trimmed) return null;
+    const pages = new Set();
+    trimmed.split(',').forEach(part => {
+      const p = part.trim();
+      if (!p) return;
+      const range = p.match(/^(\d+)\s*-\s*(\d+)$/);
+      if (range) {
+        const start = parseInt(range[1], 10), end = parseInt(range[2], 10);
+        for (let i = Math.min(start, end); i <= Math.max(start, end); i++) pages.add(i);
+      } else if (/^\d+$/.test(p)) {
+        pages.add(parseInt(p, 10));
+      }
+    });
+    return Array.from(pages).sort((a, b) => a - b);
+  }
+
+  return { fileToBase64, downloadJson, saveProgress, loadProgress, clearProgress, parseJsonLoose, formatError, parsePageSelection };
 })();
