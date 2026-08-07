@@ -35,6 +35,19 @@ window.dgeShowAdminAccessPrompt = function() {
   }
 };
 
+// Explicit way to clear a granted access tier on this device, since it
+// otherwise persists in localStorage indefinitely (by design, so the
+// admin isn't re-prompted every visit) — without this there was no way
+// to get back to the locked state short of clearing all site data.
+window.dgeLogoutAdminAccess = function() {
+  if (!confirm('Log out of Admin / Super Admin access on this device?')) return;
+  localStorage.removeItem('acharyaAuthorized');
+  localStorage.removeItem('is_superadmin');
+  localStorage.removeItem('admin_root_path');
+  if (typeof showToast === 'function') showToast('Access cleared.');
+  location.reload();
+};
+
 window.dgeForceRefreshContent = function() {
   const url = new URL(window.location.href);
   url.searchParams.set('_refresh', Date.now());
@@ -403,16 +416,36 @@ window.renderStotraChrome = function() {
 
 function initAuthAndBranding() {
   const isAuthorized = localStorage.getItem('acharyaAuthorized') === 'true';
+  const isSuperadmin = localStorage.getItem('is_superadmin') === 'true';
   if (isAuthorized) document.body.classList.add('is-authorized');
 
   // The 🛡️ menu holds both plain-admin (AI keys) and super-admin (repo,
   // config, convert) entries, so it shows for either tier — the
   // super-admin-only items inside stay hidden until that gate passes.
-  if (isAuthorized || localStorage.getItem('is_superadmin') === 'true') {
+  if (isAuthorized || isSuperadmin) {
     const at = document.getElementById('adminToolsBtn');
     if (at) at.style.display = 'flex';
   }
-  
+
+  // Visible feedback for which access tier (if any) is currently unlocked
+  // on this device — previously the only sign was extra icons quietly
+  // appearing elsewhere, with no indication in the Access menu itself of
+  // what state you were already in.
+  const keyBtn = document.getElementById('accessKeyBtn');
+  const adminItem = document.getElementById('adminAccessItem');
+  const superItem = document.getElementById('superAdminAccessItem');
+  const logoutItem = document.getElementById('logoutAccessItem');
+  if (keyBtn) keyBtn.innerText = (isAuthorized || isSuperadmin) ? '🔓' : '🔑';
+  if (adminItem) {
+    adminItem.innerHTML = isAuthorized ? '🔓 Admin Access <span style="margin-left:auto; font-size:10px; color:var(--accent-red); font-weight:800;">ACTIVE</span>' : '🔒 Admin Access';
+    adminItem.classList.toggle('active', isAuthorized);
+  }
+  if (superItem) {
+    superItem.innerHTML = isSuperadmin ? '🔓 Super Admin Access <span style="margin-left:auto; font-size:10px; color:var(--accent-red); font-weight:800;">ACTIVE</span>' : '🔒 Super Admin Access';
+    superItem.classList.toggle('active', isSuperadmin);
+  }
+  if (logoutItem) logoutItem.style.display = (isAuthorized || isSuperadmin) ? 'flex' : 'none';
+
   const authorEl = document.getElementById('stotraAuthor');
   const showDesignedBy = !(window.appConfig && window.appConfig.showDesignedBy === false);
   if (authorEl) {
