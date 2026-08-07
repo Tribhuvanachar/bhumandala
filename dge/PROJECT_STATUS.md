@@ -1,5 +1,5 @@
 # DGE Project Status
-_Last updated: this file should be re-saved via the admin editor every time a significant phase completes. If starting a fresh Claude conversation, paste this whole file as the first message for full context recovery._
+_Last updated: 7 Aug 2026 (Claude Code session), correcting several sections that had gone stale since 6 Aug ~11:30am — a lot of real progress (all four Vedas, chandas, accented padapatha, translations) happened after that and was never written back here. This file should be re-saved every time a significant phase completes — don't let it drift again. If starting a fresh Claude conversation, paste this whole file as the first message for full context recovery._
 
 ## What this is
 **Digital Grantha Engine (DGE)** — a Sanskrit digital library reader app. Part of the Sarvamoola Digitisation & Educational Project. Static site on GitHub Pages, no backend, no build step.
@@ -7,7 +7,7 @@ _Last updated: this file should be re-saved via the admin editor every time a si
 - **Repo:** `github.com/Tribhuvanachar/bhumandala`
 - **Live site:** `tribhuvanachar.github.io/bhumandala` (app at `/dge/`)
 - **Owner/admin:** goes by "3BU1" in on-site credit text
-- **Current app version:** check `?v=` on script tags in `dge/index.html` (bump on every deploy — currently v4.50.0 as of this writing, but treat the live file as ground truth, not this number)
+- **Current app version:** check `?v=` on script tags in `dge/index.html` (bump on every deploy — currently v4.57.2 as of this writing, but treat the live file as ground truth, not this number)
 
 ## Non-negotiable conventions (unchanged from project start)
 1. Cache-busting via `?v=VERSION` on every script/link tag, bumped on every delivery that touches any file. `index.html` itself is not cache-busted.
@@ -17,9 +17,17 @@ _Last updated: this file should be re-saved via the admin editor every time a si
 5. Standard safety guardrails apply; nothing in this project has touched sensitive areas. One live, explicit exception worth noting: Wisdom Lib, a Sri Aurobindo–affiliated Rigveda aggregator, and a Hindi Ved portal were all considered as sources for chandas/accented-padapatha/commentary and set aside — none had explicit reuse terms. "Not explicit" was treated as "not cleared," consistently.
 
 ## Content currently live
+_Ground truth as of this update — checked directly against `library.json` and sample `data.json` files, not assumed:_ **43 of 601** catalog entries are actually populated (`populated: true`); the other 558 are correctly-hidden empty taxonomy stubs.
+
 - **Prahlādakṛta Nṛsiṁha Stotra** (`stotras/pns`) — 43 shlokas, 5 commentaries (padaratnavali, satyadharmiya, mandanandini, tatparyam, footnotes). Fully populated, the original reference text for the whole project.
-- **Rigveda, all 10 maṇḍalas** (`vedas/rigveda/shakala_shakha/samhita/mandala_01`–`10`) — 10,552 mantras, imported from VedaWeb's TEI dataset. See "VedaWeb Rigveda import" below for full detail; a separate, more detailed doc (`VEDAWEB_IMPORT_STATUS.md`) covers this specifically and should be treated as the authoritative source for anything Rigveda-specific.
-- Full taxonomy scaffold (~700 placeholder entries) exists for the rest of the planned corpus — empty stubs, not yet populated, correctly hidden from the Library browser until real content lands (`populated: false` gate).
+- **All four Vedas — 42 populated granthas total.** This grew a lot past what `VEDAWEB_IMPORT_STATUS.md` describes (that doc now only covers the *first* Rigveda-only pass and is stale on the "open items" front — see the correction note at its top). Live now:
+  - **Ṛgveda** (Śākala) — all 10 maṇḍalas, 10,552 mantras
+  - **Atharvaveda** (Śaunaka) — all 20 kāṇḍas, 5,977 mantras
+  - **Śukla Yajurveda** (Vājasaneyi Mādhyandina) — full saṃhitā, 1,975 mantras
+  - **Sāmaveda** (Kauthuma) — pūrvārcika + uttarārcika, 1,875 mantras
+  - **Taittirīya** (Kṛṣṇa Yajurveda) — all 7 kāṇḍas of saṃhitā + Brāhmaṇa + Āraṇyaka
+  - Every populated Vedic mantra now actually carries **accented `samhita_patha` AND accented `pada_patha`, `chandas`, `svara`, `rishi`, `devata`**, plus (Ṛgveda) six European-language `commentaries` (Griffith/Macdonell/Oldenberg/Geldner/Grassmann/Elizarenkova) — confirmed by reading real `data.json` records, not the metadata claims. The "chandas unsolved" / "accented padapatha unsolved" / "translation not yet built" items in `VEDAWEB_IMPORT_STATUS.md` are **no longer true** — see `veda_toolkit/README.md` §1–4 for how they actually got solved (a cross-validated spreadsheet source, 96.61% match against the original VedaWeb text).
+- **Full taxonomy scaffold, 601 entries total** exists for the rest of the planned corpus — correctly hidden from the Library browser until real content lands (`populated: false` gate). **This is the actual bulk of the project and is still 0% populated**: `sarvamoola_grantha` (120), `puranas` (102), `itihasas` (56), `ancillary` (55), `sutras` (42), `dasakuta` (42), `vyasakuta` (18), `smritis` (18), `pancharatra_agama` (17), `dharmashastra` (7). Worth being explicit about: the project's namesake corpus — Madhvācārya's own Sarvamoola Grantha — hasn't had a single text populated yet.
 
 ## Architecture — main reader app (`dge/`)
 Modular classic scripts, shared global scope, loaded in order via `<script>` tags. Key modules:
@@ -38,7 +46,11 @@ Modular classic scripts, shared global scope, loaded in order via `<script>` tag
 
 ### Content pipeline
 - **Convert tool** (`dge/convert/`, v0.9.0): PDF → Vision OCR → Gemini proofread (chunked, resumable via IndexedDB) → Schema Mapper → GitHub push. Also supports **URL import** (MediaWiki raw-text fetch, e.g. anandamakaranda.in) which skips OCR entirely. Access-gated behind super admin at the page level (not just a hidden icon — closes a real gap where the tool was reachable by direct URL regardless).
-- **VedaWeb Rigveda import**: standalone Python script (not part of the live app), run in Colab. Full detail in `VEDAWEB_IMPORT_STATUS.md`. Headline: uses the `eichler` witness for main text (correct sandhi + spelling + standard accent marks, confirmed against real diagnostic output after two wrong guesses — `zurich` and `aufrecht` were both tried and rejected based on evidence). Chandas and accented padapatha remain open/unsolved — see that doc.
+- **Veda ingestion toolkit** (`dge/veda_toolkit/`, standalone Python, run in Colab — not part of the live app). Full detail in `veda_toolkit/README.md`, which is now the authoritative doc for this pipeline (supersedes `VEDAWEB_IMPORT_STATUS.md`'s "open items" section — that doc covers only the earliest Rigveda-only pass). In order:
+  1. First pass imported just the Ṛgveda from VedaWeb's TEI dataset, using the `eichler` witness for main text (correct sandhi + spelling + standard accent marks, confirmed against real diagnostic output after two wrong guesses — `zurich` and `aufrecht` were both tried and rejected based on evidence).
+  2. A second, independent source (`FourVedas.xlsx`, the VedaKosh digitisation spreadsheet, 8+ years of volunteer effort) was cross-validated against that live VedaWeb text — 96.61% exact match across all 10,552 Ṛgveda mantras, every sampled mismatch a known edition variant, not an error — and then trusted to import **chandas, accented padapatha, and all four Vedas** (previously listed as open/unsolved; they aren't anymore).
+  3. Taittirīya (Kṛṣṇa Yajurveda) imported separately from ITRANS `.itx` files with a different admin's permission-cleared transliteration work.
+  - Traps worth knowing exist if this pipeline is ever re-run: VedaWeb's hymn `ana` attribute is a global 1–1028 counter, not a sūkta number (caused silent wrong verse IDs past maṇḍala 1); `indic_transliteration`'s Vedic-Extensions codepoints need remapping to core Devanagari (same underlying bug as the app-side fix below); ITRANS files repeat the whole text twice (accented, then stripped) after a marker. Full list in `veda_toolkit/README.md` §5.
 
 ### Admin GitHub File Manager
 - Batch commits (diff-based; unchanged files skipped via local blob SHA computation)
@@ -70,26 +82,42 @@ Modular classic scripts, shared global scope, loaded in order via `<script>` tag
 - **Vedic accent marks rendering as quote-mark-like artifacts**: root cause was the transliteration library using obscure Vedic Extensions Unicode codepoints (`U+1CD3`, `U+1CD9`) that almost no font supports, instead of the standard core-Devanagari-block marks (`U+0951`/`U+0952`) every font has had since Unicode 1.1. Not a font problem — a codepoint problem. Fixed via `dgeSanitizeVedicAccents()`.
 
 ### UI/UX
-- Dev logger: now a small floating panel, draggable via a dedicated handle (not the whole header — that caused a tap-vs-drag ambiguity bug that took two attempts to fix properly), has a fullscreen toggle, starts fully closed by default (just a small reopen pill)
-- Dropdown clipping: several popups (Access, Commentary/Ask Acharya, font size) were rendering off the left edge of the screen — root cause was reusing right-aligned positioning meant for buttons near the right side of the bar; fixed with a left-aligned variant for early-positioned buttons
+- Dev logger: now a small floating panel, draggable via a dedicated handle (not the whole header — that caused a tap-vs-drag ambiguity bug that took two attempts to fix properly), has a fullscreen toggle, starts fully closed by default (just a small reopen pill). **Update:** the pill now defaults to top-center and re-centers itself every time any popup/modal opens, instead of sitting wherever it was last dragged and covering whatever was just opened.
+- Dropdown clipping: several popups (Access, Commentary/Ask Acharya, font size) were rendering off the left edge of the screen — root cause was reusing right-aligned positioning meant for buttons near the right side of the bar; fixed with a left-aligned variant for early-positioned buttons. **This bug class recurred** (Search Scope popup overflowed left, Commentary/Display popups overflowed right after later toolbar changes) — re-fixed 7 Aug; audited all five toolbar popups against real viewport widths this time rather than fixing on inspection alone.
 - Sponsor section: each item individually toggleable (`enabled: true/false`), new Key Sponsors section (name + contribution note, empty by default, real entries added as confirmed — nothing invented)
 - Designed-by credit line: fully configurable and hideable (`showDesignedBy`)
-- Force Refresh Content button in the About modal
+- Force Refresh Content button in the About modal. Note: this only re-fetches grantha/library *data* (a cache-busting query param), not `index.html`/JS/CSS — it will not fix a stale-cached app shell (see the caching bug below).
+- Admin/Super Admin access state is now visible: the 🔑 icon flips to 🔓 and an "ACTIVE" badge marks whichever tier is granted, plus a "Log Out" action to clear it. Previously granted access persisted invisibly in `localStorage` with no on-screen sign beyond other icons quietly appearing.
+
+### Config Editor (form-based settings, `config-editor.js`)
+- **This existed already** — the "Config UI" item that used to sit in this doc's backlog as "deliberately deferred" is done and has been for a while; that backlog entry was stale and has been removed.
+- Contributors and Key Sponsors sections now have ▲▼ reorder buttons per row.
+- Fixed: adding/removing/reordering a row used to silently collapse whichever accordion section was open (open/closed state was hardcoded per section on every re-render instead of tracked) — looked like the whole editor had reset.
+
+### Repo hygiene
+- Found and removed a stale duplicate `dge/css/dge/` tree (a full second copy of the whole app, frozen at an old version) — created when a delivery zip (always wrapped in a top-level `dge/` folder, by convention #2 above) was synced while the admin was browsing `dge/css/` in the file manager rather than `dge/` itself. `dgeStripRedundantFolderPrefix` only stripped a leading path segment matching the *currently browsed* folder, not the admin's actual root-locked folder — hardened to check both, so this can't recur regardless of which subfolder a zip gets synced from.
+- **Real, unresolved caching issue found**, not yet fixed: `index.html` is deliberately never cache-busted (see convention #1), which means a browser (or GitHub Pages' CDN) can serve a stale cached copy of the entire app shell — including old footer version text — for a long time, survives what most people think of as a mobile "hard refresh" (only a true cache-clear or incognito tab reliably shows the current file). `DGE_EXPECTED_HTML_VERSION` (in `core.js`, checked against a `<meta name="dge-html-version">` tag) was added specifically to detect this and shows a "cached page, tap to reload" banner — but only once a browser has already loaded the current pairing at least once, so it can't rescue a tab that's been stuck on a much older snapshot since before that mechanism existed. No fix implemented yet; flagged as open work below.
 
 ## Open / pending work
+_Rewritten 7 Aug 2026 against actual repo/data state — the previous version of this section listed several Rigveda items as unsolved that had already been solved, and one UI item as not-started that had already shipped. Verify against real files before trusting any status doc again, this one included._
 
-**Rigveda-specific** (full detail in `VEDAWEB_IMPORT_STATUS.md`):
-- Chandas (metre) — no licensed/reliable source found yet; computational detection tested and confirmed unreliable
-- Accented padapatha — VedaWeb's own padapatha witness has no accents; would need either a better source or a computational sandhi-derivation approach, neither built yet
-- English translation/commentary — clean path identified (Griffith/Macdonell/Oldenberg, already in the same licensed VedaWeb data) but not yet built
-- Audio — not sourced at all, separate research problem
-- Progress-tracking UI (visual grid, per-unit status) — designed conceptually, not built; makes most sense to build alongside the next actual fill operation (e.g. the translation import) rather than retroactively
+**By far the biggest gap — content, not code:** the taxonomy scaffold has **558 of 601** catalog entries still fully empty, including the entire namesake corpus. Zero Sarvamoola Grantha (120 entries), Purana (102, including Bhāgavata), Itihāsa (56, Rāmāyaṇa/Mahābhārata), Sūtra (42), Dāsakūṭa (42), Vyāsakūṭa (18), Smṛti (18), Pañcarātra Āgama (17), or Dharmaśāstra (7) texts are populated. Everything shipped recently (Vedic import, UI fixes) has been infrastructure and a side corpus — worth naming plainly so it doesn't stay invisible under a stream of smaller completed tasks.
 
-**Longstanding backlog, untouched since early in the project** (still valid, still not started):
-- Config UI (form-based editing instead of raw code) — deliberately deferred, real risk of corrupting config.js if rushed
+**Vedic-specific, still genuinely open** (full detail in `veda_toolkit/README.md` §7 — more current than `VEDAWEB_IMPORT_STATUS.md`):
+- Accented padapāṭha for Taittirīya — its ITRANS source has none
+- Ṛṣi/devatā/chandas for Taittirīya — not present in the ITRANS files either
+- Sāmaveda gāna (melodic notation) — deliberately deferred, needs its own numeric-accent handling distinct from ṛk-style accents
+- Missing śākhās — most of the traditional 1,131 are genuinely lost, ~12 survive; still absent from DGE: Rāṇāyanīya and Jaiminīya (Sāma), Kāṇva (Śukla YV), Maitrāyaṇī and Kaṭha (Kṛṣṇa YV), Paippalāda (AV), Bāṣkala (RV, fragmentary). **Rāṇāyanīya flagged as easiest** — the FourVedas Sāmaveda sheet already carries its numbering alongside Kauthuma.
+- Audio (recitation) — not sourced at all for any Veda, separate research problem
+- Progress-tracking UI (visual grid, per-unit status) — designed conceptually, not built; makes most sense alongside the next real fill operation rather than retroactively
+
+**Known unresolved bug:**
+- `index.html` caching (see "Repo hygiene" above) — a stale cached app shell can persist through what most users think of as a hard refresh. No fix implemented; would need either a real cache-busting scheme for `index.html` itself or a more aggressive staleness check that doesn't depend on the stale page already having today's detection code.
+
+**Longstanding backlog, still not started:**
 - Guru Parampara section — waiting on real lineage content from the admin
 - True XML sitemap — waiting on real multi-page structure to justify it
 - IndexedDB migration for the main app (Convert already uses it), transliteration engine rework, waveform visualization, gapless audio, Google Sign-In, sponsor payment processing
 
 ## If you're a fresh Claude instance reading this
-Read this whole file, and `VEDAWEB_IMPORT_STATUS.md` if the task is Rigveda-related, before touching anything. Ask the admin which specific item they want worked on next rather than assuming. The conventions and fixed-bugs sections above exist because of real issues that already happened once — some of them twice, from guessing at a fix instead of verifying against real output first. Verify before proposing, especially for anything involving Unicode/font rendering or external data sources.
+Read this whole file, `veda_toolkit/README.md` if the task is Vedic-content-related (more current than `VEDAWEB_IMPORT_STATUS.md` — see the correction note at that file's top), or `VEDAWEB_IMPORT_STATUS.md` only for its historical witness-selection reasoning. Ask the admin which specific item they want worked on next rather than assuming — the content gap above is large enough that "next" is a real choice, not an obvious default. The conventions and fixed-bugs sections above exist because of real issues that already happened once — some of them twice, from guessing at a fix instead of verifying against real output first. Verify before proposing, especially for anything involving Unicode/font rendering, external data sources, or — as of this update — trusting this file's own "pending work" list without spot-checking `library.json` and a sample `data.json` first.
