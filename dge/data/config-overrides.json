@@ -40,6 +40,12 @@
         "label": "General Token of Appreciation",
         "description": "An open contribution, undesignated, used wherever most needed.",
         "enabled": true
+      },
+      {
+        "icon": "🙏",
+        "label": "Aradhana",
+        "description": "Rayara Aradhana",
+        "enabled": true
       }
     ]
   },
