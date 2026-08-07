@@ -83,6 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const el = document.getElementById(id);
       if (el) el.style.display = 'flex';
     });
+    // Manage Users only makes sense once accounts are actually set up —
+    // showing it before then would just be a menu item that always
+    // toasts "not set up yet" (see openUserRolesModal in user-roles.js).
+    if (window.AUTH_CONFIG && window.AUTH_CONFIG.enabled) {
+      const rolesItem = document.getElementById('adminUserRolesItem');
+      if (rolesItem) rolesItem.style.display = 'flex';
+    }
   }
 });
 

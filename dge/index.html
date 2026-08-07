@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.57.5">
+<link rel="stylesheet" href="css/main.css?v=4.57.6">
 </head>
 <body>
 
@@ -102,10 +102,18 @@
         <div class="pop-item" id="adminFilesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openAdminEditor()">🗂️ Repo Files</div>
         <div class="pop-item" id="adminConfigItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openConfigEditor()">🛠️ Site Settings</div>
         <div class="pop-item" id="adminConvertItem" style="display:none;" onclick="window.location.href='convert/index.html'">🔄 Convert Tool</div>
+        <div class="pop-item" id="adminUserRolesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openUserRolesModal()">👥 Manage Users</div>
       </div>
     </div>
 
     <button class="btn-top" onclick="window.openAboutModal()" title="About / Contact / Report an Issue">ℹ️</button>
+
+    <!-- User Accounts (Firebase) — hidden entirely unless AUTH_CONFIG.enabled
+         is true (see config.js / FIREBASE_SETUP.md). Opens a modal directly,
+         like About, rather than a popup — sidesteps the toolbar-popup
+         overflow issues fixed elsewhere in this file, since there's no
+         anchor-side positioning to get wrong for a plain modal trigger. -->
+    <button class="btn-top" id="accountBtn" onclick="window.openAccountModal()" title="My Account" style="display:none;">👤</button>
 
     <div style="position:relative;">
       <button class="btn-top" id="accessKeyBtn" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access">🔑</button>
@@ -526,6 +534,52 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="accountModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">👤 My Account</h3>
+      <button class="btn-sm" onclick="window.closeModal('accountModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <div id="accountSignedOut">
+        <p style="font-size:12px; color:var(--muted-text); margin:0 0 14px 0;">Sign in to save your progress across devices.</p>
+        <button class="btn-sm" style="width:100%; margin-bottom:10px;" onclick="window.dgeSignInWithGoogle()">🔵 Sign in with Google</button>
+
+        <div id="phoneSignInSection" style="display:none; margin-top:16px; border-top:1px solid var(--card-border); padding-top:12px;">
+          <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; color:var(--muted-text); margin-bottom:4px;">Phone number (with country code)</label>
+          <input type="tel" id="phoneNumberInput" class="modal-input" placeholder="+91XXXXXXXXXX">
+          <button class="btn-sm" style="width:100%; margin-top:8px;" onclick="window.dgeSendPhoneOtp(document.getElementById('phoneNumberInput').value.trim()).then(ok => { if (ok) document.getElementById('phoneOtpSection').style.display = 'block'; })">📱 Send Code</button>
+          <div id="phoneOtpSection" style="display:none; margin-top:10px;">
+            <input type="text" id="phoneOtpInput" class="modal-input" placeholder="Enter code">
+            <button class="btn-sm" style="width:100%; margin-top:8px;" onclick="window.dgeConfirmPhoneOtp(document.getElementById('phoneOtpInput').value.trim())">✔ Verify</button>
+          </div>
+        </div>
+        <div id="recaptchaContainer"></div>
+      </div>
+
+      <div id="accountSignedIn" style="display:none;">
+        <p style="font-size:14px; font-weight:700; margin:0 0 4px 0;" id="accountName"></p>
+        <p style="font-size:12px; color:var(--muted-text); margin:0 0 16px 0;">Role: <strong id="accountRole"></strong></p>
+        <button class="btn-sm" style="width:100%;" onclick="window.dgeSignOut()">Sign Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="userRolesModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">👥 Manage Users</h3>
+      <button class="btn-sm" onclick="window.closeModal('userRolesModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <input type="text" id="userRolesSearchInput" class="modal-input" placeholder="Search name, email, or phone…"
+             oninput="window.dgeSearchUserRoles(this.value)" style="margin-bottom:10px;">
+      <div id="userRolesBody"></div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="configEditorModal">
   <div class="modal-content">
     <div class="modal-header-sticky">
@@ -693,33 +747,43 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.57.5 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.57.6 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.57.5"></script>
-<script src="js/state.js?v=4.57.5"></script>
-<script src="js/dev.js?v=4.57.5"></script>
-<script src="js/utils.js?v=4.57.5"></script>
-<script src="js/modals.js?v=4.57.5"></script>
-<script src="js/transliteration.js?v=4.57.5"></script>
-<script src="js/audio.js?v=4.57.5"></script>
-<script src="js/filter.js?v=4.57.5"></script>
-<script src="js/search.js?v=4.57.5"></script>
-<script src="js/markers.js?v=4.57.5"></script>
-<script src="js/notes.js?v=4.57.5"></script>
-<script src="js/history.js?v=4.57.5"></script>
-<script src="js/char-palette.js?v=4.57.5"></script>
-<script src="js/snippets.js?v=4.57.5"></script>
-<script src="js/actions.js?v=4.57.5"></script>
-<script src="js/voice.js?v=4.57.5"></script>
-<script src="js/screenshot.js?v=4.57.5"></script>
-<script src="js/ai.js?v=4.57.5"></script>
-<script src="js/render.js?v=4.57.5"></script>
+<script src="js/config.js?v=4.57.6"></script>
+<script src="js/state.js?v=4.57.6"></script>
+<script src="js/dev.js?v=4.57.6"></script>
+<script src="js/utils.js?v=4.57.6"></script>
+<script src="js/modals.js?v=4.57.6"></script>
+<script src="js/transliteration.js?v=4.57.6"></script>
+<script src="js/audio.js?v=4.57.6"></script>
+<script src="js/filter.js?v=4.57.6"></script>
+<script src="js/search.js?v=4.57.6"></script>
+<script src="js/markers.js?v=4.57.6"></script>
+<script src="js/notes.js?v=4.57.6"></script>
+<script src="js/history.js?v=4.57.6"></script>
+<script src="js/char-palette.js?v=4.57.6"></script>
+<script src="js/snippets.js?v=4.57.6"></script>
+<script src="js/actions.js?v=4.57.6"></script>
+<script src="js/voice.js?v=4.57.6"></script>
+<script src="js/screenshot.js?v=4.57.6"></script>
+<script src="js/ai.js?v=4.57.6"></script>
+<script src="js/render.js?v=4.57.6"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="js/admin-editor.js?v=4.57.5"></script>
-<script src="js/config-editor.js?v=4.57.5"></script>
-<script src="js/core.js?v=4.57.5"></script>
-<script src="js/library.js?v=4.57.5"></script>
+<script src="js/admin-editor.js?v=4.57.6"></script>
+<script src="js/config-editor.js?v=4.57.6"></script>
+<script src="js/core.js?v=4.57.6"></script>
+<script src="js/library.js?v=4.57.6"></script>
+
+<!-- User Accounts (Firebase, compat build — matches this project's classic-
+     script/no-build-step convention rather than the newer ES-module SDK).
+     Loaded unconditionally but inert: user-auth.js checks AUTH_CONFIG.enabled
+     (config.js, default false) before calling any of these. -->
+<script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-compat.js"></script>
+<script src="js/user-auth.js?v=4.57.6"></script>
+<script src="js/user-roles.js?v=4.57.6"></script>
 
 <script>
   if (typeof console.log === "function") {
