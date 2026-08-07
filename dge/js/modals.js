@@ -9,7 +9,8 @@ function openModal(id) {
   const modal = document.getElementById(id);
   if (modal) {
     modal.style.display = 'flex';
-    document.body.classList.add('modal-open'); 
+    document.body.classList.add('modal-open');
+    if (window.DGE_DEV_LOG && window.DGE_DEV_LOG.recenterPill) window.DGE_DEV_LOG.recenterPill();
   }
 }
 
@@ -21,16 +22,22 @@ function closeModal(id) {
   }
 }
 
-function togglePopup(id) { 
+function togglePopup(id) {
   // Close all other open popups first
-  document.querySelectorAll('.popup').forEach(p => { 
-    if (p.id !== id) p.classList.remove('show'); 
-  }); 
-  
+  document.querySelectorAll('.popup').forEach(p => {
+    if (p.id !== id) p.classList.remove('show');
+  });
+
   // Toggle the requested popup
   const target = document.getElementById(id);
   if (target) {
-    target.classList.toggle('show'); 
+    const isOpening = !target.classList.contains('show');
+    target.classList.toggle('show');
+    // Keeps the floating dev-log pill from ever sitting on top of a
+    // popup that was just opened — see DGE_DEV_LOG.recenterPill in utils.js.
+    if (isOpening && window.DGE_DEV_LOG && window.DGE_DEV_LOG.recenterPill) {
+      window.DGE_DEV_LOG.recenterPill();
+    }
   }
 }
 

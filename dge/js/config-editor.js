@@ -99,30 +99,39 @@ function dgeToggle(path, value, label) {
 }
 
 let dgeSectionSeq = 0;
+// Which sections are open, keyed by title — survives across
+// dgeRenderConfigEditor() re-renders (triggered by Add/Remove/Move row)
+// so those actions don't silently collapse whatever the admin had open.
+// Only reset when the editor is freshly opened (see openConfigEditor).
+let dgeOpenSections = {};
+
 // Collapsible, and collapsed by default apart from the first — the full
 // form is far taller than a phone screen, so showing it all at once made
 // the panel unusable.
 function dgeSection(title, body, openByDefault) {
   const id = 'cfgSec' + (dgeSectionSeq++);
+  if (!(title in dgeOpenSections)) dgeOpenSections[title] = !!openByDefault;
+  const isOpen = dgeOpenSections[title];
   return `<div style="margin-bottom:10px; border:1px solid var(--card-border);
                       border-radius:8px; background:var(--card-bg); overflow:hidden;">
-    <div onclick="window.dgeToggleConfigSection('${id}', this)"
+    <div onclick="window.dgeToggleConfigSection('${id}', this, '${dgeEsc(title)}')"
          style="cursor:pointer; padding:12px; display:flex; align-items:center; gap:8px;
                 font-size:12px; font-weight:800; text-transform:uppercase; color:var(--accent-red);">
-      <span style="font-size:10px; width:10px;">${openByDefault ? '▾' : '▸'}</span>
+      <span style="font-size:10px; width:10px;">${isOpen ? '▾' : '▸'}</span>
       <span style="flex:1;">${dgeEsc(title)}</span>
     </div>
-    <div id="${id}" style="display:${openByDefault ? 'block' : 'none'}; padding:0 12px 12px;">${body}</div>
+    <div id="${id}" style="display:${isOpen ? 'block' : 'none'}; padding:0 12px 12px;">${body}</div>
   </div>`;
 }
 
-window.dgeToggleConfigSection = function(id, header) {
+window.dgeToggleConfigSection = function(id, header, title) {
   const el = document.getElementById(id);
   if (!el) return;
   const open = el.style.display !== 'none';
   el.style.display = open ? 'none' : 'block';
   const arrow = header.querySelector('span');
   if (arrow) arrow.textContent = open ? '▸' : '▾';
+  if (title) dgeOpenSections[title] = !open;
 };
 
 window.dgeConfigSet = function(path, value) {
@@ -152,6 +161,16 @@ window.dgeConfigRemoveRow = function(listPath, idx) {
   let node = dgeConfigDraft;
   parts.forEach(p => { node = node[p]; });
   node.splice(idx, 1);
+  dgeRenderConfigEditor();
+};
+
+window.dgeConfigMoveRow = function(listPath, idx, delta) {
+  const parts = listPath.split('.');
+  let node = dgeConfigDraft;
+  parts.forEach(p => { node = node[p]; });
+  const newIdx = idx + delta;
+  if (newIdx < 0 || newIdx >= node.length) return;
+  [node[idx], node[newIdx]] = [node[newIdx], node[idx]];
   dgeRenderConfigEditor();
 };
 
@@ -196,6 +215,10 @@ function dgeRenderConfigEditor() {
                oninput="window.dgeConfigSet('CONTRIBUTORS_CONFIG.contributors.${i}.name', this.value)"
                style="flex:1; min-width:0; font-size:13px; padding:6px; border:1px solid var(--card-border);
                       border-radius:6px; background:var(--bg-main); color:var(--text-primary);">
+        <button class="btn-sm" style="flex:none; ${i === 0 ? 'opacity:0.3;' : ''}" title="Move up"
+                ${i === 0 ? 'disabled' : ''} onclick="window.dgeConfigMoveRow('CONTRIBUTORS_CONFIG.contributors', ${i}, -1)">▲</button>
+        <button class="btn-sm" style="flex:none; ${i === d.CONTRIBUTORS_CONFIG.contributors.length - 1 ? 'opacity:0.3;' : ''}" title="Move down"
+                ${i === d.CONTRIBUTORS_CONFIG.contributors.length - 1 ? 'disabled' : ''} onclick="window.dgeConfigMoveRow('CONTRIBUTORS_CONFIG.contributors', ${i}, 1)">▼</button>
         <button class="btn-sm" style="flex:none; color:var(--accent-red);"
                 onclick="window.dgeConfigRemoveRow('CONTRIBUTORS_CONFIG.contributors', ${i})">🗑️</button>
       </div>
@@ -213,6 +236,10 @@ function dgeRenderConfigEditor() {
                oninput="window.dgeConfigSet('KEY_SPONSORS_CONFIG.sponsors.${i}.name', this.value)"
                style="flex:1; min-width:0; font-size:13px; padding:6px; border:1px solid var(--card-border);
                       border-radius:6px; background:var(--bg-main); color:var(--text-primary);">
+        <button class="btn-sm" style="flex:none; ${i === 0 ? 'opacity:0.3;' : ''}" title="Move up"
+                ${i === 0 ? 'disabled' : ''} onclick="window.dgeConfigMoveRow('KEY_SPONSORS_CONFIG.sponsors', ${i}, -1)">▲</button>
+        <button class="btn-sm" style="flex:none; ${i === d.KEY_SPONSORS_CONFIG.sponsors.length - 1 ? 'opacity:0.3;' : ''}" title="Move down"
+                ${i === d.KEY_SPONSORS_CONFIG.sponsors.length - 1 ? 'disabled' : ''} onclick="window.dgeConfigMoveRow('KEY_SPONSORS_CONFIG.sponsors', ${i}, 1)">▼</button>
         <button class="btn-sm" style="flex:none; color:var(--accent-red);"
                 onclick="window.dgeConfigRemoveRow('KEY_SPONSORS_CONFIG.sponsors', ${i})">🗑️</button>
       </div>
@@ -255,6 +282,7 @@ window.openConfigEditor = function() {
     return;
   }
   dgeConfigDraft = dgeBuildDraft();
+  dgeOpenSections = { 'General': true };
   if (typeof openModal === 'function') openModal('configEditorModal');
   dgeRenderConfigEditor();
 };

@@ -18,11 +18,10 @@ function getFilteredIds() {
   
   const rangeStartEl = document.getElementById('rangeStart');
   const rangeEndEl = document.getElementById('rangeEnd');
-  const rangeModeEl = document.getElementById('rangeMode');
-  
+
   const rs = rangeStartEl ? parseInt(rangeStartEl.value) : NaN;
   const re = rangeEndEl ? parseInt(rangeEndEl.value) : NaN;
-  const rm = rangeModeEl ? rangeModeEl.value : 'include';
+  const rm = window.currentRangeMode || 'include';
   const hasRange = !isNaN(rs) && !isNaN(re) && rs <= re;
   
   const filters = window.activeFilters || new Set();
@@ -48,14 +47,28 @@ function getFilteredIds() {
   return ids;
 }
 
-function clearRange() { 
+function clearRange() {
   const rangeStartEl = document.getElementById('rangeStart');
   const rangeEndEl = document.getElementById('rangeEnd');
-  
-  if (rangeStartEl) rangeStartEl.value = ""; 
-  if (rangeEndEl) rangeEndEl.value = ""; 
-  applyRangeFilter(); 
+
+  if (rangeStartEl) rangeStartEl.value = "";
+  if (rangeEndEl) rangeEndEl.value = "";
+  applyRangeFilter();
 }
+
+// Replaces the old native <select id="rangeMode"> with a two-button
+// toggle matching the rest of the app's popup styling (native <select>
+// dropdowns render as an OS picker on mobile, jarringly inconsistent with
+// every other custom-styled option list in this popup).
+window.currentRangeMode = 'include';
+window.setRangeMode = function(mode, btnEl) {
+  window.currentRangeMode = mode;
+  const toggle = document.getElementById('rangeModeToggle');
+  if (toggle) {
+    toggle.querySelectorAll('.range-mode-btn').forEach(b => b.classList.toggle('active', b === btnEl));
+  }
+  applyRangeFilter();
+};
 
 function dgeJumpToFirstFiltered() {
   const aIds = getFilteredIds();

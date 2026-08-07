@@ -235,7 +235,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const reopenBtn = document.createElement('button');
     reopenBtn.id = 'dgeLogReopenBtn';
     reopenBtn.innerText = '🐞 Logs';
-    reopenBtn.style.cssText = 'display:block; position: fixed; right: 10px; top: 70px; background: #111; color: #0f0; border: 1px solid #0f0; padding: 6px 10px; font-size: 11px; font-weight: bold; border-radius: 20px; z-index: 999999; cursor: pointer;';
+    reopenBtn.style.cssText = 'display:block; position: fixed; top: 8px; background: #111; color: #0f0; border: 1px solid #0f0; padding: 6px 10px; font-size: 11px; font-weight: bold; border-radius: 20px; z-index: 999999; cursor: pointer;';
+
+    // Pinned top-center by default (rather than a corner) so it can't sit
+    // on top of whatever the user just opened. Recentered on every popup
+    // open (see togglePopup in modals.js) — manual drags are honoured
+    // until the next popup open snaps it back.
+    function dgeRecenterLogPill() {
+        reopenBtn.style.left = Math.max(8, (window.innerWidth - reopenBtn.offsetWidth) / 2) + 'px';
+        reopenBtn.style.top = '8px';
+        reopenBtn.style.right = 'auto';
+        reopenBtn.style.bottom = 'auto';
+        try { localStorage.setItem('dgeLogReopenPos_v3', JSON.stringify({ left: reopenBtn.getBoundingClientRect().left, top: 8 })); } catch (e) { /* ignore */ }
+    }
 
     // Text container to isolate content for copying
     const logTextContainer = document.createElement('div');
@@ -323,6 +335,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // reloads.
     makeDraggable(dragHandle, dgeLog, 'dgeLogPanelPos_v3');
     makeDraggable(reopenBtn, reopenBtn, 'dgeLogReopenPos_v3');
+    // Overrides whatever makeDraggable just restored from a stale saved
+    // position — the pill always starts centered on a fresh load; a saved
+    // off-center spot from dragging earlier in THIS session is only
+    // meaningful until the next popup open snaps it back anyway.
+    dgeRecenterLogPill();
 
     const oldLog = console.log;
     const oldWarn = console.warn;
@@ -380,7 +397,10 @@ document.addEventListener('DOMContentLoaded', () => {
         appendHTML: function(html) {
             logTextContainer.innerHTML += html;
             dgeLog.scrollTop = dgeLog.scrollHeight;
-        }
+        },
+        // Called from togglePopup() (modals.js) whenever any dropdown/popup
+        // opens, so the pill can never end up sitting on top of it.
+        recenterPill: dgeRecenterLogPill
     };
 
 })();

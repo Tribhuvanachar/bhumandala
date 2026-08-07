@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.57.1">
+<link rel="stylesheet" href="css/main.css?v=4.57.2">
 </head>
 <body>
 
@@ -52,7 +52,7 @@
     <!-- Commentary — content-related, used constantly, stays on its own -->
     <div style="position:relative;">
       <button class="btn-top" onclick="window.togglePopup('commentaryPopup')" id="activeCommBtn" title="Commentary Options">💬</button>
-      <div class="popup popup-top-left" id="commentaryPopup">
+      <div class="popup popup-top" id="commentaryPopup">
         <div class="popup-label">View Bhashya</div>
         <div class="pop-item active" onclick="window.setCommentaryView('none', this)">None (Mula Only)</div>
         <div class="pop-item" onclick="window.setCommentaryView('all', this)">All Commentaries</div>
@@ -66,7 +66,7 @@
          scrollable popup — same options, one entry point. -->
     <div style="position:relative;">
       <button class="btn-top" onclick="window.togglePopup('displayPopup')" title="Display: size, script, theme, view">🅰</button>
-      <div class="popup popup-top-left popup-scroll" id="displayPopup">
+      <div class="popup popup-top popup-scroll" id="displayPopup">
         <div class="popup-label">Reading Script</div>
         <div class="pop-item active" data-script="devanagari" onclick="window.setScript('devanagari', this)">Sanskrit <span style="margin-left:auto; font-family:var(--font-sanskrit);">संस्कृतम्</span></div>
         <div class="pop-item" data-script="iast" onclick="window.setScript('iast', this)">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
@@ -108,11 +108,12 @@
     <button class="btn-top" onclick="window.openAboutModal()" title="About / Contact / Report an Issue">ℹ️</button>
 
     <div style="position:relative;">
-      <button class="btn-top" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access">🔑</button>
+      <button class="btn-top" id="accessKeyBtn" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access">🔑</button>
       <div class="popup popup-top" id="accessPopup">
         <div class="popup-label">Access</div>
-        <div class="pop-item" onclick="window.togglePopup('accessPopup'); window.dgeShowAdminAccessPrompt()">🔓 Admin Access</div>
-        <div class="pop-item" onclick="window.togglePopup('accessPopup'); window.dgeShowSuperAdminAccessPrompt()">🗝️ Super Admin Access</div>
+        <div class="pop-item" id="adminAccessItem" onclick="window.togglePopup('accessPopup'); window.dgeShowAdminAccessPrompt()">🔒 Admin Access</div>
+        <div class="pop-item" id="superAdminAccessItem" onclick="window.togglePopup('accessPopup'); window.dgeShowSuperAdminAccessPrompt()">🔒 Super Admin Access</div>
+        <div class="pop-item" id="logoutAccessItem" style="display:none; color:var(--accent-red);" onclick="window.togglePopup('accessPopup'); window.dgeLogoutAdminAccess()">🚪 Log Out (clear access)</div>
       </div>
     </div>
   </div>
@@ -129,7 +130,7 @@
   <div class="search-box-group">
     <div class="popup-container" style="position:relative;">
       <button class="btn-lang" id="searchScopeBtn" onclick="window.togglePopup('searchScopePopup')" style="max-width:90px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block;">Search All</button>
-      <div class="popup popup-top" id="searchScopePopup">
+      <div class="popup popup-top-left" id="searchScopePopup">
         <div style="font-size:10px; color:#8a7a63; margin-bottom:4px; text-transform:uppercase;">Search Scope</div>
         <div class="pop-item active" data-scope="all" onclick="window.setSearchScope('all', 'Search All', this)">Search All</div>
         <div class="pop-item" data-scope="mula" onclick="window.setSearchScope('mula', 'Shloka Only', this)">Shloka Only</div>
@@ -212,10 +213,10 @@
         <div class="range-box">
           <div class="range-row-flex">
             <span>📐 Range:</span>
-            <select id="rangeMode" style="font-size:11px; padding:2px; border-radius:4px; background:var(--card-bg); color:var(--text-primary); border:1px solid var(--card-border);" onchange="window.applyRangeFilter()">
-              <option value="include">Include</option>
-              <option value="exclude">Exclude</option>
-            </select>
+            <div class="range-mode-toggle" id="rangeModeToggle">
+              <button type="button" class="range-mode-btn active" data-mode="include" onclick="window.setRangeMode('include', this)">Include</button>
+              <button type="button" class="range-mode-btn" data-mode="exclude" onclick="window.setRangeMode('exclude', this)">Exclude</button>
+            </div>
           </div>
           <div class="range-row-flex">
             <input class="pop-input" type="number" id="rangeStart" placeholder="From" min="1" max="43" onchange="window.applyRangeFilter()">
@@ -664,33 +665,33 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.57.1 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.57.2 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.57.1"></script>
-<script src="js/state.js?v=4.57.1"></script>
-<script src="js/dev.js?v=4.57.1"></script>
-<script src="js/utils.js?v=4.57.1"></script>
-<script src="js/modals.js?v=4.57.1"></script>
-<script src="js/transliteration.js?v=4.57.1"></script>
-<script src="js/audio.js?v=4.57.1"></script>
-<script src="js/filter.js?v=4.57.1"></script>
-<script src="js/search.js?v=4.57.1"></script>
-<script src="js/markers.js?v=4.57.1"></script>
-<script src="js/notes.js?v=4.57.1"></script>
-<script src="js/history.js?v=4.57.1"></script>
-<script src="js/char-palette.js?v=4.57.1"></script>
-<script src="js/snippets.js?v=4.57.1"></script>
-<script src="js/actions.js?v=4.57.1"></script>
-<script src="js/voice.js?v=4.57.1"></script>
-<script src="js/screenshot.js?v=4.57.1"></script>
-<script src="js/ai.js?v=4.57.1"></script>
-<script src="js/render.js?v=4.57.1"></script>
+<script src="js/config.js?v=4.57.2"></script>
+<script src="js/state.js?v=4.57.2"></script>
+<script src="js/dev.js?v=4.57.2"></script>
+<script src="js/utils.js?v=4.57.2"></script>
+<script src="js/modals.js?v=4.57.2"></script>
+<script src="js/transliteration.js?v=4.57.2"></script>
+<script src="js/audio.js?v=4.57.2"></script>
+<script src="js/filter.js?v=4.57.2"></script>
+<script src="js/search.js?v=4.57.2"></script>
+<script src="js/markers.js?v=4.57.2"></script>
+<script src="js/notes.js?v=4.57.2"></script>
+<script src="js/history.js?v=4.57.2"></script>
+<script src="js/char-palette.js?v=4.57.2"></script>
+<script src="js/snippets.js?v=4.57.2"></script>
+<script src="js/actions.js?v=4.57.2"></script>
+<script src="js/voice.js?v=4.57.2"></script>
+<script src="js/screenshot.js?v=4.57.2"></script>
+<script src="js/ai.js?v=4.57.2"></script>
+<script src="js/render.js?v=4.57.2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="js/admin-editor.js?v=4.57.1"></script>
-<script src="js/config-editor.js?v=4.57.1"></script>
-<script src="js/core.js?v=4.57.1"></script>
-<script src="js/library.js?v=4.57.1"></script>
+<script src="js/admin-editor.js?v=4.57.2"></script>
+<script src="js/config-editor.js?v=4.57.2"></script>
+<script src="js/core.js?v=4.57.2"></script>
+<script src="js/library.js?v=4.57.2"></script>
 
 <script>
   if (typeof console.log === "function") {
