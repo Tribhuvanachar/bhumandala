@@ -1,0 +1,76 @@
+{
+  "appConfig": {
+    "appName": "Bhagavata Digital Library",
+    "designedBy": "- 3BU1 -",
+    "showDesignedBy": true,
+    "contactEmail": "sanatanavidyagurukulam@gmail.com",
+    "sarvamoolaProjectText": "Support the Sarvamoola Digitisation & Educational Project"
+  },
+  "SPONSOR_CONFIG": {
+    "enabled": true,
+    "introText": "This project runs independently, with no ads, and relies entirely on community support to keep going. Here's exactly where funds go, month to month — and where a contribution would help most.",
+    "contactForSponsorship": "sanatanavidyagurukulam@gmail.com",
+    "sponsorCategories": [
+      {
+        "icon": "💻",
+        "label": "Backend / UI Development",
+        "description": "Support ongoing feature work, bug fixes, and infrastructure for this app.",
+        "enabled": true
+      },
+      {
+        "icon": "🕉️",
+        "label": "Acharya's Monthly Support",
+        "description": "Contribute toward the Acharya's monthly food and living expenses.",
+        "enabled": false
+      },
+      {
+        "icon": "🏫",
+        "label": "Gurukula & Goshala",
+        "description": "Support the Gurukula and the upcoming Goshala (cow shelter).",
+        "enabled": true
+      },
+      {
+        "icon": "📚",
+        "label": "Children's Education",
+        "description": "Support educational expenses for children at the Gurukula.",
+        "enabled": true
+      },
+      {
+        "icon": "🙏",
+        "label": "General Token of Appreciation",
+        "description": "An open contribution, undesignated, used wherever most needed.",
+        "enabled": true
+      }
+    ]
+  },
+  "CONTRIBUTORS_CONFIG": {
+    "enabled": true,
+    "contributors": [
+      {
+        "name": "Sameer",
+        "role": ""
+      },
+      {
+        "name": "Anirudha",
+        "role": ""
+      },
+      {
+        "name": "Madhu",
+        "role": ""
+      }
+    ]
+  },
+  "KEY_SPONSORS_CONFIG": {
+    "enabled": true,
+    "sponsors": [
+      {
+        "name": "Adarsh",
+        "contribution": "Site Hosting And Key Subacriptions"
+      },
+      {
+        "name": "Aruna",
+        "contribution": "Code Development  Cost"
+      }
+    ]
+  }
+}
