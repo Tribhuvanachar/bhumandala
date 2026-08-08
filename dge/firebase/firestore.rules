@@ -1,0 +1,68 @@
+rules_version = '2';
+// DGE User Accounts & Roles — Firestore security rules.
+// Paste this into Firebase Console → Firestore Database → Rules, or
+// deploy via the Firebase CLI. See ../FIREBASE_SETUP.md for the rest of
+// the setup this depends on.
+//
+// This is the REAL enforcement layer. The client-side checks in
+// user-roles.js (is_superadmin in localStorage) are just UI convenience —
+// they decide whether to SHOW the Manage Users screen, not whether a
+// write is allowed. Someone bypassing the UI entirely and calling
+// Firestore directly is still bound by what's written here.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    // Reads the CALLER's own role from their own profile doc — a
+    // standard Firestore-rules pattern for "is this person an admin"
+    // that doesn't require a separate custom-claims setup for a basic
+    // version. Costs one extra document read per rule evaluation, which
+    // is normal and expected for this pattern.
+    function callerRole() {
+      return isSignedIn()
+        ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role
+        : null;
+    }
+
+    function isSuperadmin() {
+      return callerRole() == 'superadmin';
+    }
+
+    match /users/{uid} {
+      // Any signed-in person can read any profile — needed for the
+      // Manage Users list. Profiles hold only what the user already gave
+      // the app (name/email/phone/role), never payment info or secrets.
+      allow read: if isSignedIn();
+
+      // A user may create ONLY their own doc, and only with the default
+      // role — nobody can hand themselves "superadmin" (or any other
+      // tier) just by writing their own profile document on first sign-in.
+      allow create: if isOwner(uid)
+        && request.resource.data.role == 'basic';
+
+      // A user may update their own doc, but the role field must stay
+      // exactly what it already was — role changes never come from the
+      // person they apply to.
+      allow update: if isOwner(uid)
+        && request.resource.data.role == resource.data.role;
+
+      // A superadmin may update anyone ELSE's doc (role changes, from
+      // the Manage Users screen). Firestore OR-combines multiple `allow
+      // update` rules on the same match block, so this and the rule
+      // above cover "update your own non-role fields" and "a superadmin
+      // changes someone else's role" as two independent, non-overlapping
+      // permissions — neither one lets a person touch their own role.
+      allow update: if isSuperadmin() && !isOwner(uid);
+
+      // No client-side deletes in this basic version.
+      allow delete: if false;
+    }
+  }
+}

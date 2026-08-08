@@ -475,6 +475,72 @@ window.dgeParseQuickSearchQuery = function(text) {
   return resolved ? Object.assign({ label: entry.label }, resolved) : null;
 };
 
+// ---------------------------------------------------------------
+// User Accounts & Roles (Firebase) — see FIREBASE_SETUP.md for the
+// console steps that have to happen outside this codebase before any of
+// this does anything. Nothing here is live until FIREBASE_CONFIG below
+// is replaced with real values AND AUTH_CONFIG.enabled is set true.
+// ---------------------------------------------------------------
+
+// Placeholder — replace every value with your own Firebase project's
+// config (Project Settings → General → "Your apps" → SDK setup and
+// configuration → Config, in the Firebase console). These values are NOT
+// secret — Firebase's own docs are explicit that this object is safe to
+// ship in client code, since access control is enforced by Firestore
+// security rules (see dge/firebase/firestore.rules), not by hiding this.
+const FIREBASE_CONFIG = {
+  apiKey: "REPLACE_WITH_YOUR_FIREBASE_API_KEY",
+  authDomain: "REPLACE_WITH_YOUR_PROJECT.firebaseapp.com",
+  projectId: "REPLACE_WITH_YOUR_PROJECT_ID",
+  storageBucket: "REPLACE_WITH_YOUR_PROJECT.appspot.com",
+  messagingSenderId: "REPLACE_WITH_YOUR_SENDER_ID",
+  appId: "REPLACE_WITH_YOUR_APP_ID"
+};
+window.FIREBASE_CONFIG = FIREBASE_CONFIG;
+
+// Master switches — deliberately OFF by default so this entire feature
+// stays inert (no Firebase network calls, no Account button shown) on
+// any deployment that hasn't gone through the FIREBASE_SETUP.md steps.
+const AUTH_CONFIG = {
+  // Flip true only after FIREBASE_CONFIG above holds real values.
+  enabled: false,
+
+  // Google Sign-In: free at any volume, no billing plan needed at all.
+  enableGoogleSignIn: true,
+
+  // Phone/SMS OTP: real per-message cost, and requires Firebase's paid
+  // Blaze plan regardless of which provider actually sends the SMS. Off
+  // by default on purpose — flip on only once you've accepted that cost
+  // and picked a provider below.
+  enablePhoneAuth: false,
+
+  // 'firebase' — Firebase's own phone auth. Zero backend code needed
+  //   (Google's infra handles send+verify client-side), but ~5-6x
+  //   costlier per verification than an India-focused SMS gateway
+  //   (roughly $0.01/verification vs MSG91's ~₹0.15 ≈ $0.0018 — verify
+  //   current rates yourself before committing budget; official pricing
+  //   pages were not fully accessible while writing this).
+  // 'msg91' — cheapest mainstream India option found, no forex surcharge
+  //   (INR billing). Requires a small Cloud Function to send/verify the
+  //   OTP and mint a Firebase custom token, since the MSG91 API key must
+  //   stay server-side — NOT built yet (needs your Firebase/MSG91
+  //   credentials to deploy and test), see FIREBASE_SETUP.md for the
+  //   exact shape it needs to have.
+  phoneOtpProvider: 'firebase',
+
+  // Applied to a user's Firestore profile on first sign-in. Changing
+  // this later does NOT retroactively change existing users' roles.
+  defaultRole: 'basic',
+
+  // The full set of assignable roles, in the order they should list in
+  // the Manage Users admin UI. "special" is a deliberately generic top
+  // slot for a one-off grant (a specific person's exception) rather than
+  // a defined tier with its own rules — same spirit as "Other" options
+  // elsewhere in this app.
+  roles: ['basic', 'subscriber', 'sponsor', 'admin', 'superadmin', 'special']
+};
+window.AUTH_CONFIG = AUTH_CONFIG;
+
 // Note: All dynamic state variables (stotraData, activeId, marks, notes, etc.)
 // and URL parameter parsing have been successfully migrated to js/state.js to 
 // maintain strict separation of concerns.

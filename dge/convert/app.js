@@ -21,6 +21,7 @@ window.DGE.App = (function () {
   let proofreadCancelRequested = false;
   let currentMappedJson = null;
   let libraryCatalog = null; // fetched once, cached for the session
+  let lastProofreadMissingPages = []; // pages in the current selection with no proofread text — checked before schema build
 
   function $(id) { return document.getElementById(id); }
 
@@ -56,6 +57,43 @@ window.DGE.App = (function () {
     return (n && n > 0) ? n : DEFAULT_CHUNK_SIZE;
   }
 
+  // Blank means "use gemini.js's own default" — same convention as
+  // getTargetSlug's custom-path fallback below.
+  function getGeminiModel() {
+    const el = $('geminiModelInput');
+    const v = el ? el.value.trim() : '';
+    return v || undefined;
+  }
+
+  // Returns the full sorted page-number list this run should cover.
+  // Blank/unparseable input means "every page" (the existing, unchanged
+  // default) — see U().parsePageSelection for exactly how the text is read.
+  function getPageSelection(total) {
+    const el = $('pageSelectionInput');
+    const parsed = U().parsePageSelection(el ? el.value : '');
+    if (parsed === null) return Array.from({ length: total }, (_, i) => i + 1);
+    return parsed.filter(p => p >= 1 && p <= total);
+  }
+
+  function copyLogToClipboard() {
+    const btn = $('copyLogBtn');
+    const text = $('logArea').textContent;
+    const done = () => { if (btn) { btn.textContent = '✅ Copied!'; setTimeout(() => { btn.textContent = '📋 Copy Log'; }, 2000); } };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done).catch(() => setError('Could not copy the log.'));
+      return;
+    }
+    // Fallback for browsers/contexts without the async Clipboard API.
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-999999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) { setError('Could not copy the log.'); }
+    ta.remove();
+  }
+
   function init() {
     const visionKeyEl = $('visionKey');
     const geminiKeyEl = $('geminiKey');
@@ -67,10 +105,20 @@ window.DGE.App = (function () {
       geminiKeyEl.value = localStorage.getItem('gemini_api_key') || '';
       geminiKeyEl.addEventListener('input', () => localStorage.setItem('gemini_api_key', geminiKeyEl.value));
     }
+    const geminiModelEl = $('geminiModelInput');
+    if (geminiModelEl) {
+      geminiModelEl.value = localStorage.getItem('gemini_model') || '';
+      geminiModelEl.addEventListener('input', () => localStorage.setItem('gemini_model', geminiModelEl.value));
+    }
     const chunkSizeEl = $('chunkSizeInput');
     if (chunkSizeEl) {
       chunkSizeEl.value = localStorage.getItem('gemini_chunk_size') || String(DEFAULT_CHUNK_SIZE);
       chunkSizeEl.addEventListener('input', () => localStorage.setItem('gemini_chunk_size', chunkSizeEl.value));
+    }
+    const pageSelectionEl = $('pageSelectionInput');
+    if (pageSelectionEl) {
+      pageSelectionEl.value = localStorage.getItem('convert_page_selection') || '';
+      pageSelectionEl.addEventListener('input', () => localStorage.setItem('convert_page_selection', pageSelectionEl.value));
     }
 
     $('pdfFile').addEventListener('change', onFileSelected);
@@ -87,6 +135,7 @@ window.DGE.App = (function () {
       log('Cancel requested — will stop after the current chunk finishes.');
     });
     $('clearProgressBtn').addEventListener('click', clearAllProgressForFile);
+    $('copyLogBtn').addEventListener('click', copyLogToClipboard);
     $('previewRawBtn').addEventListener('click', () => {
       if (!ocrPages.length) return setError('No OCR data yet — run OCR first.');
       clearError();
@@ -166,6 +215,19 @@ window.DGE.App = (function () {
   function buildSchemaPreview() {
     clearError();
     if (!finalJson) return setError('No proofread JSON yet — run Proofread first.');
+    if (lastProofreadMissingPages.length) {
+      const proceed = confirm(
+        `⚠ Risky: ${lastProofreadMissingPages.length} selected page(s) have no proofread text — ` +
+        `${lastProofreadMissingPages.join(', ')}.\n\n` +
+        `Building the schema now will produce an incomplete text with those pages simply absent. ` +
+        `Proceed anyway?`
+      );
+      if (!proceed) {
+        log(`Schema build cancelled — ${lastProofreadMissingPages.length} page(s) still missing: ${lastProofreadMissingPages.join(', ')}.`);
+        return;
+      }
+      log(`Proceeding with schema build despite ${lastProofreadMissingPages.length} missing page(s) (user confirmed).`);
+    }
     const slug = getTargetSlug();
     if (!slug) return setError('Choose or type a target grantha path first.');
 
@@ -266,11 +328,14 @@ window.DGE.App = (function () {
     currentFileKey = Array.from(files).map(f => f.name + '_' + f.size).join('|');
     ocrPages = [];
     finalJson = null;
+    lastProofreadMissingPages = [];
     $('previewArea').innerHTML = '';
     setPreviewLabel('');
     $('logArea').textContent = '';
     $('resumeBar').style.display = 'none';
     $('proofreadResumeNote').textContent = '';
+    if ($('ocrGapsText')) $('ocrGapsText').textContent = '';
+    if ($('proofreadGapsText')) $('proofreadGapsText').textContent = '';
 
     try {
       log(`Loading ${detected.typeLabel}…`);
@@ -323,10 +388,13 @@ window.DGE.App = (function () {
       currentFileKey = 'url_' + title.replace(/[^a-zA-Z0-9_-]/g, '_');
       ocrPages = UrlImportMod().splitIntoPages(text);
       finalJson = null;
+      lastProofreadMissingPages = [];
       $('previewArea').innerHTML = '';
       setPreviewLabel('');
       $('resumeBar').style.display = 'none';
       $('proofreadResumeNote').textContent = '';
+      if ($('ocrGapsText')) $('ocrGapsText').textContent = '';
+      if ($('proofreadGapsText')) $('proofreadGapsText').textContent = '';
 
       await IDB().set(ocrDataKey(), { pages: ocrPages });
       await IDB().set(ocrProgressKey(), { lastPage: ocrPages.length });
@@ -351,14 +419,21 @@ window.DGE.App = (function () {
     const total = currentLoader.getPageCount();
     if (!total) return setError('Load a PDF or image(s) first.');
 
-    let startPage = 1;
+    const selectedPages = getPageSelection(total);
+    if (!selectedPages.length) return setError('The page selection above doesn\'t match any real page — check it or clear it to process all pages.');
+
+    let startIdx = 0;
     if (fromResume) {
       const saved = await IDB().get(ocrProgressKey());
       const savedData = await IDB().get(ocrDataKey());
       if (saved && saved.lastPage) {
-        startPage = saved.lastPage + 1;
+        // Position within the (possibly narrowed) selection, not a raw
+        // page number — findIndex relies on selectedPages being sorted
+        // ascending, which parsePageSelection guarantees.
+        const idx = selectedPages.findIndex(p => p > saved.lastPage);
+        startIdx = idx === -1 ? selectedPages.length : idx;
         ocrPages = (savedData && savedData.pages) || [];
-        log('Resuming OCR from page ' + startPage + '.');
+        log(`Resuming OCR — ${startIdx} of ${selectedPages.length} selected page(s) already done.`);
       }
     } else {
       ocrPages = [];
@@ -370,12 +445,13 @@ window.DGE.App = (function () {
     $('runOcrBtn').disabled = true;
     $('resumeBtn').disabled = true;
 
-    for (let p = startPage; p <= total; p++) {
+    for (let i = startIdx; i < selectedPages.length; i++) {
+      const p = selectedPages[i];
       if (cancelRequested) {
-        log('Stopped by user after page ' + (p - 1) + '. Progress is saved — you can resume later.');
+        log(`Stopped by user after ${i} of ${selectedPages.length} selected page(s). Progress is saved — you can resume later.`);
         break;
       }
-      $('progressText').textContent = `Page ${p} / ${total}`;
+      $('progressText').textContent = `Page ${p} (${i + 1} / ${selectedPages.length} selected)`;
       try {
         const pageObj = await currentLoader.getPageImage(p);
         const text = await VisionMod().ocrImageBase64(pageObj.imageBase64, visionKey);
@@ -383,7 +459,7 @@ window.DGE.App = (function () {
         await IDB().set(ocrProgressKey(), { lastPage: p });
         await IDB().set(ocrDataKey(), { pages: ocrPages });
       } catch (e) {
-        setError(`Failed on page ${p}: ${U().formatError(e)} — progress saved through page ${p - 1}. Fix the issue and tap Resume.`);
+        setError(`Failed on page ${p}: ${U().formatError(e)} — progress saved through the pages already done. Fix the issue and tap Resume.`);
         $('runOcrBtn').disabled = false;
         $('resumeBtn').disabled = false;
         return;
@@ -392,8 +468,15 @@ window.DGE.App = (function () {
 
     $('runOcrBtn').disabled = false;
     $('resumeBtn').disabled = false;
-    $('progressText').textContent = `Done — ${ocrPages.length} of ${total} page(s) processed.`;
+    $('progressText').textContent = `Done — ${ocrPages.length} of ${selectedPages.length} selected page(s) processed.`;
     log('OCR pass complete.');
+
+    const ocrPageNums = new Set(ocrPages.map(p => p.page));
+    const missing = selectedPages.filter(p => !ocrPageNums.has(p));
+    const gapsEl = $('ocrGapsText');
+    if (gapsEl) gapsEl.textContent = missing.length ? `⚠ ${missing.length} selected page(s) have no OCR text: ${missing.join(', ')}` : '';
+    if (missing.length) log(`⚠ ${missing.length} selected page(s) still missing OCR text: ${missing.join(', ')}`);
+
     if (ocrPages.length) {
       RendererMod().renderRawOcr(ocrPages, $('previewArea'));
       setPreviewLabel('Showing raw OCR text — untouched, before Gemini proofreading.');
@@ -417,6 +500,26 @@ window.DGE.App = (function () {
   // (even after closing the tab) skips every already-done chunk and
   // continues from the first undone one — no separate "resume" button
   // needed for this part.
+  // Selected pages that end up with no proofread text — either because
+  // they never got OCR text in the first place, or because the chunk
+  // covering them hasn't completed successfully yet. Chunk granularity is
+  // the finest we can track: Gemini's per-shloka output carries a verse
+  // "number", not a source page, so a failed/incomplete chunk marks every
+  // page it covers as missing, not just whichever page actually caused it.
+  function updateProofreadGaps(chunks, savedChunks, ocrGapPages) {
+    const chunkMissing = [];
+    for (let i = 0; i < chunks.length; i++) {
+      if (!savedChunks[i]) chunks[i].forEach(p => chunkMissing.push(p.page));
+    }
+    lastProofreadMissingPages = Array.from(new Set(ocrGapPages.concat(chunkMissing))).sort((a, b) => a - b);
+    const el = $('proofreadGapsText');
+    if (el) {
+      el.textContent = lastProofreadMissingPages.length
+        ? `⚠ ${lastProofreadMissingPages.length} selected page(s) will be missing from the proofread result: ${lastProofreadMissingPages.join(', ')}`
+        : '';
+    }
+  }
+
   async function runProofread() {
     clearError();
     proofreadCancelRequested = false;
@@ -424,8 +527,16 @@ window.DGE.App = (function () {
     if (!geminiKey) return setError('Enter your Gemini API key first.');
     if (!ocrPages.length) return setError('Run OCR first — nothing to proofread yet.');
 
+    // Scope to the same page selection used for OCR (step 2) — narrowing
+    // that box narrows this step too, per the same input.
+    const pageSelectionEl = $('pageSelectionInput');
+    const parsedSelection = U().parsePageSelection(pageSelectionEl ? pageSelectionEl.value : '');
+    const selectedOcrPages = parsedSelection === null ? ocrPages : ocrPages.filter(p => parsedSelection.includes(p.page));
+    if (!selectedOcrPages.length) return setError('The page selection above doesn\'t match any OCR\'d page — check it or clear it to proofread all pages.');
+    const ocrGapPages = parsedSelection === null ? [] : parsedSelection.filter(p => !ocrPages.some(op => op.page === p));
+
     const chunkSize = getChunkSize();
-    const chunks = buildChunks(ocrPages, chunkSize);
+    const chunks = buildChunks(selectedOcrPages, chunkSize);
     const totalChunks = chunks.length;
 
     let saved = await IDB().get(proofreadDataKey());
@@ -452,17 +563,19 @@ window.DGE.App = (function () {
         $('progressText').textContent = `Proofreading chunk ${i + 1} / ${totalChunks} (pages ${first}–${last})…`;
         const ocrText = chunks[i].map(p => `--- Page ${p.page} ---\n${p.text}`).join('\n\n');
         try {
-          const chunkResult = await GeminiMod().proofread(ocrText, geminiKey);
+          const chunkResult = await GeminiMod().proofread(ocrText, geminiKey, getGeminiModel());
           saved.chunks[i] = chunkResult;
           await IDB().set(proofreadDataKey(), saved);
           log(`Chunk ${i + 1}/${totalChunks} (pages ${first}–${last}) proofread and saved.`);
         } catch (e) {
           setError(`Proofreading failed on chunk ${i + 1}/${totalChunks} (pages ${first}–${last}): ${U().formatError(e)} — earlier chunks are saved. Tap "Proofread with Gemini" again to resume from this chunk once fixed (try a smaller chunk size above if this keeps happening on the same chunk).`);
+          updateProofreadGaps(chunks, saved.chunks, ocrGapPages);
           return;
         }
       }
 
       const doneCount = Object.keys(saved.chunks).length;
+      updateProofreadGaps(chunks, saved.chunks, ocrGapPages);
       if (doneCount < totalChunks) {
         $('progressText').textContent = `Proofreading paused — ${doneCount} of ${totalChunks} chunk(s) done so far.`;
         return;
@@ -486,7 +599,7 @@ window.DGE.App = (function () {
       RendererMod().renderPreview(finalJson, $('previewArea'));
       setPreviewLabel('Showing Gemini-proofread text.');
       $('progressText').textContent = `Proofreading complete — ${totalChunks} chunk(s), ${mergedShlokas.length} entries.`;
-      log('Proofreading complete — all chunks merged.');
+      log('Proofreading complete — all chunks merged.' + (lastProofreadMissingPages.length ? ` ⚠ ${lastProofreadMissingPages.length} selected page(s) missing: ${lastProofreadMissingPages.join(', ')}.` : ''));
     } finally {
       $('proofreadBtn').disabled = false;
       $('proofreadCancelBtn').style.display = 'none';
@@ -501,11 +614,14 @@ window.DGE.App = (function () {
     await IDB().del(proofreadDataKey());
     ocrPages = [];
     finalJson = null;
+    lastProofreadMissingPages = [];
     $('previewArea').innerHTML = '';
     setPreviewLabel('');
     $('proofreadResumeNote').textContent = '';
     $('resumeBar').style.display = 'none';
     $('progressText').textContent = '';
+    if ($('ocrGapsText')) $('ocrGapsText').textContent = '';
+    if ($('proofreadGapsText')) $('proofreadGapsText').textContent = '';
     log('Cleared saved progress for this file.');
   }
 
