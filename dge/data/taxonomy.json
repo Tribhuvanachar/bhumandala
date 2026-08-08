@@ -1096,6 +1096,32 @@
       }
     }
   },
+  "vyakarana": {
+    "_schema": "grantha_prakarana_text",
+    "_default_author": "Maharshi Pāṇini",
+    "ashtadhyayi": {
+      "sutrapatha": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "Maharshi Pāṇini"
+      },
+      "kashika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "Vāmana–Jayāditya"
+      },
+      "nyasa": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "Jinendrabuddhi"
+      },
+      "balamanorama": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "Vāsudeva Dīkṣita"
+      },
+      "tattvabodhini": {
+        "_schema": "grantha_tippani_text",
+        "_default_author": "Jñānendra Sarasvatī"
+      }
+    }
+  },
   "ancillary": {
     "shiksha": {
       "paniniya_shiksha": {},
