@@ -22,7 +22,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.57.6">
+<link rel="stylesheet" href="css/main.css?v=4.58.0">
 </head>
 <body>
 
@@ -44,7 +44,7 @@
 </div>
 
 <!-- Top Bar -->
-<meta name="dge-html-version" content="4.57.0">
+<meta name="dge-html-version" content="4.58.0">
 <div class="top-bar">
   <div class="top-bar-title" onclick="window.openLibraryModal()">❮ Library</div>
   <div class="top-actions">
@@ -106,7 +106,19 @@
       </div>
     </div>
 
-    <button class="btn-top" onclick="window.location.href='guru-parampara/index.html'" title="Guru Parampara — Madhva lineage tree">🪷</button>
+    <!-- Standalone DGE sections (Guru Parampara, Tirtha, Ashtadhyayi) — one
+         entry point rather than a growing row of raw icons, same reasoning
+         as the Display popup consolidation above: several separate toolbar
+         buttons push the last ones off-screen on a phone. -->
+    <div style="position:relative;">
+      <button class="btn-top" onclick="window.togglePopup('sectionsPopup')" title="More DGE Sections">🧭</button>
+      <div class="popup popup-top" id="sectionsPopup">
+        <div class="popup-label">Explore</div>
+        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='guru-parampara/index.html'">🪷 Guru Parampara</div>
+        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='tirtha/index.html'">🛕 Tirtha Prabandha</div>
+        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='ashtadhyayi.html'">📖 Aṣṭādhyāyī</div>
+      </div>
+    </div>
 
     <button class="btn-top" onclick="window.openAboutModal()" title="About / Contact / Report an Issue">ℹ️</button>
 
@@ -749,33 +761,34 @@
 </div>
 
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
-<!-- ?v=4.57.6 cache-busts these files. BUMP THIS VALUE on every deploy that -->
+<!-- ?v=4.58.0 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
 <!-- serving an old cached copy of a script indefinitely. -->
-<script src="js/config.js?v=4.57.6"></script>
-<script src="js/state.js?v=4.57.6"></script>
-<script src="js/dev.js?v=4.57.6"></script>
-<script src="js/utils.js?v=4.57.6"></script>
-<script src="js/modals.js?v=4.57.6"></script>
-<script src="js/transliteration.js?v=4.57.6"></script>
-<script src="js/audio.js?v=4.57.6"></script>
-<script src="js/filter.js?v=4.57.6"></script>
-<script src="js/search.js?v=4.57.6"></script>
-<script src="js/markers.js?v=4.57.6"></script>
-<script src="js/notes.js?v=4.57.6"></script>
-<script src="js/history.js?v=4.57.6"></script>
-<script src="js/char-palette.js?v=4.57.6"></script>
-<script src="js/snippets.js?v=4.57.6"></script>
-<script src="js/actions.js?v=4.57.6"></script>
-<script src="js/voice.js?v=4.57.6"></script>
-<script src="js/screenshot.js?v=4.57.6"></script>
-<script src="js/ai.js?v=4.57.6"></script>
-<script src="js/render.js?v=4.57.6"></script>
+<script src="js/config.js?v=4.58.0"></script>
+<script src="js/state.js?v=4.58.0"></script>
+<script src="js/dev.js?v=4.58.0"></script>
+<script src="js/utils.js?v=4.58.0"></script>
+<script src="js/modals.js?v=4.58.0"></script>
+<script src="js/transliteration.js?v=4.58.0"></script>
+<script src="js/kosha.js?v=4.58.0"></script>
+<script src="js/audio.js?v=4.58.0"></script>
+<script src="js/filter.js?v=4.58.0"></script>
+<script src="js/search.js?v=4.58.0"></script>
+<script src="js/markers.js?v=4.58.0"></script>
+<script src="js/notes.js?v=4.58.0"></script>
+<script src="js/history.js?v=4.58.0"></script>
+<script src="js/char-palette.js?v=4.58.0"></script>
+<script src="js/snippets.js?v=4.58.0"></script>
+<script src="js/actions.js?v=4.58.0"></script>
+<script src="js/voice.js?v=4.58.0"></script>
+<script src="js/screenshot.js?v=4.58.0"></script>
+<script src="js/ai.js?v=4.58.0"></script>
+<script src="js/render.js?v=4.58.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="js/admin-editor.js?v=4.57.6"></script>
-<script src="js/config-editor.js?v=4.57.6"></script>
-<script src="js/core.js?v=4.57.6"></script>
-<script src="js/library.js?v=4.57.6"></script>
+<script src="js/admin-editor.js?v=4.58.0"></script>
+<script src="js/config-editor.js?v=4.58.0"></script>
+<script src="js/core.js?v=4.58.0"></script>
+<script src="js/library.js?v=4.58.0"></script>
 
 <!-- User Accounts (Firebase, compat build — matches this project's classic-
      script/no-build-step convention rather than the newer ES-module SDK).
@@ -784,8 +797,8 @@
 <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-compat.js"></script>
-<script src="js/user-auth.js?v=4.57.6"></script>
-<script src="js/user-roles.js?v=4.57.6"></script>
+<script src="js/user-auth.js?v=4.58.0"></script>
+<script src="js/user-roles.js?v=4.58.0"></script>
 
 <script>
   if (typeof console.log === "function") {
