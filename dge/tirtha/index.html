@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>/* DGE theme sync: follow the site-wide theme choice (app_theme) */
+(function(){try{var A=['traditional','minimal','vibrant','darkglass'],t=localStorage.getItem('app_theme');if(A.indexOf(t)<0)t='traditional';var c=document.documentElement;c.classList.add('theme-'+t);if(t==='darkglass')c.classList.add('dark-mode');}catch(e){document.documentElement.classList.add('theme-traditional');}})();</script>
+
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Tīrtha Prabandha — Holy Places Database</title>
 <style>
+
+/* --- DGE shared theme tokens (mirrored from css/main.css) so this section
+       themes natively with the rest of the site. Theme class is applied to
+       <html> by the small script in <head>, honoring app_theme. --- */
+:root{
+  --bg-main:#FAF3E6;--card-bg:#ffffff;--card-border:#E9DCC3;--card-active:#FCE9DE;
+  --text-primary:#2B2119;--text-sanskrit:#9A1B1B;--accent-red:#AE231F;--accent-gold:#B9821F;
+  --panel-bg:#ffffff;--muted-text:#8a7a63;--accent-glow:rgba(174,35,31,0.22);
+}
+:root.theme-traditional{--bg-main:#FAF3E6;--card-bg:#ffffff;--card-border:#E9DCC3;--card-active:#FCE9DE;--text-primary:#2B2119;--text-sanskrit:#9A1B1B;--accent-red:#AE231F;--accent-gold:#B9821F;--panel-bg:#ffffff;--muted-text:#8a7a63;--accent-glow:rgba(174,35,31,0.22);}
+:root.theme-minimal{--bg-main:#F7F7F5;--card-bg:#ffffff;--card-border:#E7E7E3;--card-active:#F0EFEC;--text-primary:#1D1C1A;--text-sanskrit:#55433C;--accent-red:#A6433D;--accent-gold:#9C8A5E;--panel-bg:#ffffff;--muted-text:#8b8b85;--accent-glow:rgba(0,0,0,0);}
+:root.theme-vibrant{--bg-main:#FDEBD3;--card-bg:#FFFDF8;--card-border:#F0C36D;--card-active:#FFDCB0;--text-primary:#3A1408;--text-sanskrit:#D93A1F;--accent-red:#E0431F;--accent-gold:#D9A521;--panel-bg:#FFFDF8;--muted-text:#8a5a2e;--accent-glow:rgba(224,67,31,0.35);}
+:root.theme-darkglass,:root.dark-mode{--bg-main:#0E0C0B;--card-bg:#201B17;--card-border:rgba(255,255,255,0.10);--card-active:rgba(232,160,80,0.14);--text-primary:#EDE2D3;--text-sanskrit:#E8A067;--accent-red:#E2664A;--accent-gold:#E8B24D;--panel-bg:#181411;--muted-text:#b6a892;--accent-glow:rgba(232,178,77,0.35);}
+
   :root{
-    --bg:#0f1216; --panel:#171b21; --panel2:#1e242c; --line:#2a323c;
-    --ink:#eef2f6; --muted:#9aa7b4; --accent:#e8b64c;
+    --bg:var(--bg-main); --panel:var(--card-bg); --panel2:var(--card-active); --line:var(--card-border);
+    --ink:var(--text-primary); --muted:var(--muted-text); --accent:var(--accent-gold);
     --west:#4aa3df; --north:#8b7cf0; --east:#e0724d; --south:#3fb984;
-    --chip:#242c35;
+    --chip:var(--card-active);
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--ink);
