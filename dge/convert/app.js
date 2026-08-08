@@ -22,8 +22,12 @@ window.DGE.App = (function () {
   let currentMappedJson = null;
   let libraryCatalog = null; // fetched once, cached for the session
   let lastProofreadMissingPages = []; // pages in the current selection with no proofread text — checked before schema build
+  let wakeLock = null;
+  const KNOWN_FILES_KEY = 'convert_known_files';
+  const RETRY_DELAYS_MS = [5000, 15000, 45000]; // 3 automatic retries beyond the first attempt
 
   function $(id) { return document.getElementById(id); }
+  function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
   function log(msg) {
     const el = $('logArea');
@@ -50,6 +54,76 @@ window.DGE.App = (function () {
   function ocrProgressKey() { return 'ocr_progress:' + currentFileKey; }
   function ocrDataKey() { return 'ocr_data:' + currentFileKey; }
   function proofreadDataKey() { return 'proofread_data:' + currentFileKey; }
+
+  // Runs fn() with up to RETRY_DELAYS_MS.length extra automatic attempts on
+  // failure (4 attempts total by default), waiting a bit longer each time —
+  // covers a transient network blip or a brief rate-limit window without
+  // making the user manually re-click for every single failure. If every
+  // attempt fails, the last error is re-thrown so the caller's existing
+  // give-up-and-log path runs unchanged. shouldAbort() is checked before
+  // each attempt and during each backoff wait so Cancel still works.
+  async function withAutoRetry(fn, label, shouldAbort) {
+    let lastErr;
+    for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
+      if (shouldAbort && shouldAbort()) throw lastErr || new Error('Cancelled.');
+      try {
+        return await fn();
+      } catch (e) {
+        lastErr = e;
+        if (attempt === RETRY_DELAYS_MS.length) break; // out of automatic retries
+        const delaySec = Math.round(RETRY_DELAYS_MS[attempt] / 1000);
+        log(`${label} failed (attempt ${attempt + 1}/${RETRY_DELAYS_MS.length + 1}): ${U().formatError(e)} — retrying automatically in ${delaySec}s…`);
+        await sleep(RETRY_DELAYS_MS[attempt]);
+      }
+    }
+    throw lastErr;
+  }
+
+  // Screen Wake Lock — held only while a run is actively in progress, to
+  // stop the phone screen from auto-locking (the most common everyday cause
+  // of a run getting backgrounded and frozen by the OS/browser). This can't
+  // help if the user deliberately switches to another app — no page-level
+  // API can prevent that — only against idle-timeout screen lock.
+  async function acquireWakeLock() {
+    if (wakeLock || !('wakeLock' in navigator)) return;
+    try {
+      wakeLock = await navigator.wakeLock.request('screen');
+      wakeLock.addEventListener('release', () => { wakeLock = null; });
+    } catch (e) {
+      // Not fatal — commonly refused if the tab isn't focused at request
+      // time, or unsupported entirely. The run continues either way.
+    }
+  }
+  function releaseWakeLock() {
+    if (wakeLock) { wakeLock.release().catch(() => {}); wakeLock = null; }
+  }
+
+  // Small manifest of files with saved OCR/proofread progress on this
+  // device, so a returning user can see what's resumable instead of having
+  // to remember (or guess, or redo work) — see renderKnownFilesHint().
+  // Bounded to the most recent 15 so it can't grow without limit.
+  function updateKnownFilesManifest(name, ocrDone, ocrTotal) {
+    if (!currentFileKey) return;
+    let list;
+    try { list = JSON.parse(localStorage.getItem(KNOWN_FILES_KEY)) || []; } catch (e) { list = []; }
+    list = list.filter(f => f.key !== currentFileKey);
+    list.unshift({ key: currentFileKey, name, ocrDone, ocrTotal, updatedAt: Date.now() });
+    list = list.slice(0, 15);
+    try { localStorage.setItem(KNOWN_FILES_KEY, JSON.stringify(list)); } catch (e) { /* storage full — non-fatal */ }
+  }
+  function renderKnownFilesHint() {
+    const el = $('knownFilesHint');
+    if (!el) return;
+    let list;
+    try { list = JSON.parse(localStorage.getItem(KNOWN_FILES_KEY)) || []; } catch (e) { list = []; }
+    if (!list.length) { el.style.display = 'none'; return; }
+    const rows = list.map(f => {
+      const when = new Date(f.updatedAt).toLocaleString();
+      return `• ${f.name} — ${f.ocrDone}/${f.ocrTotal} page(s) OCR'd (${when})`;
+    }).join('<br>');
+    el.innerHTML = `<b>Files with saved progress on this device</b> — choose the same file again below to resume without redoing it:<br>${rows}`;
+    el.style.display = 'block';
+  }
 
   function getChunkSize() {
     const el = $('chunkSizeInput');
@@ -119,6 +193,21 @@ window.DGE.App = (function () {
     if (pageSelectionEl) {
       pageSelectionEl.value = localStorage.getItem('convert_page_selection') || '';
       pageSelectionEl.addEventListener('input', () => localStorage.setItem('convert_page_selection', pageSelectionEl.value));
+    }
+
+    renderKnownFilesHint();
+
+    // Asks the browser not to silently evict this origin's IndexedDB/
+    // localStorage under storage pressure — without this, saved OCR/
+    // proofread progress for a long book can disappear after enough idle
+    // time, especially on mobile. Not guaranteed (the browser can still
+    // refuse), but there's no downside to asking.
+    if (navigator.storage && navigator.storage.persist) {
+      navigator.storage.persist().then(granted => {
+        log(granted
+          ? 'Persistent storage granted — saved progress is protected from automatic eviction.'
+          : 'Persistent storage was not granted by the browser — saved progress could still be cleared under storage pressure.');
+      }).catch(() => {});
     }
 
     $('pdfFile').addEventListener('change', onFileSelected);
@@ -367,6 +456,9 @@ window.DGE.App = (function () {
             `${doneCount} of ${savedProofread.totalChunks || '?'} proofread chunk(s) already saved for this file — tapping Proofread will resume from where it left off.`;
         }
       }
+
+      updateKnownFilesManifest(info.name, ocrPages.length, info.numPages);
+      renderKnownFilesHint();
     } catch (e) {
       setError(`Could not read this ${detected.typeLabel}: ` + U().formatError(e));
     }
@@ -444,6 +536,7 @@ window.DGE.App = (function () {
     $('resumeBar').style.display = 'none';
     $('runOcrBtn').disabled = true;
     $('resumeBtn').disabled = true;
+    await acquireWakeLock();
 
     for (let i = startIdx; i < selectedPages.length; i++) {
       const p = selectedPages[i];
@@ -454,22 +547,30 @@ window.DGE.App = (function () {
       $('progressText').textContent = `Page ${p} (${i + 1} / ${selectedPages.length} selected)`;
       try {
         const pageObj = await currentLoader.getPageImage(p);
-        const text = await VisionMod().ocrImageBase64(pageObj.imageBase64, visionKey);
+        const text = await withAutoRetry(
+          () => VisionMod().ocrImageBase64(pageObj.imageBase64, visionKey),
+          `OCR on page ${p}`,
+          () => cancelRequested
+        );
         ocrPages.push({ page: p, text: text });
         await IDB().set(ocrProgressKey(), { lastPage: p });
         await IDB().set(ocrDataKey(), { pages: ocrPages });
+        updateKnownFilesManifest(currentLoader.getDocumentName(), ocrPages.length, total);
       } catch (e) {
-        setError(`Failed on page ${p}: ${U().formatError(e)} — progress saved through the pages already done. Fix the issue and tap Resume.`);
+        setError(`Failed on page ${p} after ${RETRY_DELAYS_MS.length + 1} attempts: ${U().formatError(e)} — progress saved through the pages already done. Fix the issue and tap Resume.`);
         $('runOcrBtn').disabled = false;
         $('resumeBtn').disabled = false;
+        releaseWakeLock();
         return;
       }
     }
 
     $('runOcrBtn').disabled = false;
     $('resumeBtn').disabled = false;
+    releaseWakeLock();
     $('progressText').textContent = `Done — ${ocrPages.length} of ${selectedPages.length} selected page(s) processed.`;
     log('OCR pass complete.');
+    renderKnownFilesHint();
 
     const ocrPageNums = new Set(ocrPages.map(p => p.page));
     const missing = selectedPages.filter(p => !ocrPageNums.has(p));
@@ -550,6 +651,7 @@ window.DGE.App = (function () {
     $('proofreadBtn').disabled = true;
     $('proofreadCancelBtn').style.display = 'inline-block';
     $('proofreadResumeNote').textContent = '';
+    await acquireWakeLock();
 
     try {
       for (let i = 0; i < totalChunks; i++) {
@@ -563,12 +665,16 @@ window.DGE.App = (function () {
         $('progressText').textContent = `Proofreading chunk ${i + 1} / ${totalChunks} (pages ${first}–${last})…`;
         const ocrText = chunks[i].map(p => `--- Page ${p.page} ---\n${p.text}`).join('\n\n');
         try {
-          const chunkResult = await GeminiMod().proofread(ocrText, geminiKey, getGeminiModel());
+          const chunkResult = await withAutoRetry(
+            () => GeminiMod().proofread(ocrText, geminiKey, getGeminiModel()),
+            `Proofreading chunk ${i + 1}/${totalChunks}`,
+            () => proofreadCancelRequested
+          );
           saved.chunks[i] = chunkResult;
           await IDB().set(proofreadDataKey(), saved);
           log(`Chunk ${i + 1}/${totalChunks} (pages ${first}–${last}) proofread and saved.`);
         } catch (e) {
-          setError(`Proofreading failed on chunk ${i + 1}/${totalChunks} (pages ${first}–${last}): ${U().formatError(e)} — earlier chunks are saved. Tap "Proofread with Gemini" again to resume from this chunk once fixed (try a smaller chunk size above if this keeps happening on the same chunk).`);
+          setError(`Proofreading failed on chunk ${i + 1}/${totalChunks} (pages ${first}–${last}) after ${RETRY_DELAYS_MS.length + 1} attempts: ${U().formatError(e)} — earlier chunks are saved, manual intervention needed. Tap "Proofread with Gemini" again to resume from this chunk once fixed (try a smaller chunk size above if this keeps happening on the same chunk).`);
           updateProofreadGaps(chunks, saved.chunks, ocrGapPages);
           return;
         }
@@ -603,6 +709,7 @@ window.DGE.App = (function () {
     } finally {
       $('proofreadBtn').disabled = false;
       $('proofreadCancelBtn').style.display = 'none';
+      releaseWakeLock();
     }
   }
 
@@ -622,6 +729,11 @@ window.DGE.App = (function () {
     $('progressText').textContent = '';
     if ($('ocrGapsText')) $('ocrGapsText').textContent = '';
     if ($('proofreadGapsText')) $('proofreadGapsText').textContent = '';
+    let list;
+    try { list = JSON.parse(localStorage.getItem(KNOWN_FILES_KEY)) || []; } catch (e) { list = []; }
+    list = list.filter(f => f.key !== currentFileKey);
+    try { localStorage.setItem(KNOWN_FILES_KEY, JSON.stringify(list)); } catch (e) { /* storage full — non-fatal */ }
+    renderKnownFilesHint();
     log('Cleared saved progress for this file.');
   }
 
