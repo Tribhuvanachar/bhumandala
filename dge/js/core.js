@@ -193,6 +193,9 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
       shlokas[n] = {
         sa: dgeSanitizeVedicAccents(item.samhita_patha || item.sa || ''),
         vedicId: item.id || '',
+        // Traditional Ashtaka.Adhyaya.Varga.Rik reference — present only for
+        // Rigveda Samhita data so far (see ashtaka_ref in the source data.json).
+        ashtakaId: item.ashtaka_ref || '',
         rishi: item.rishi || '',
         devata: item.devata || '',
         chandas: item.chandas || '',
