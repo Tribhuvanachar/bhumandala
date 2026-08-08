@@ -15,14 +15,14 @@
     window.location.replace('../index.html');
   }
 </script>
-<title>DGE Convert v0.11.0</title>
-<link rel="stylesheet" href="style.css?v=0.11.0">
+<title>DGE Convert v0.12.0</title>
+<link rel="stylesheet" href="style.css?v=0.12.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
 <div><a href="../index.html">🏠 Back to DGE main page</a></div>
-<div>Version: <b id="versionDisplay">0.11.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.12.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF or page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -41,8 +41,10 @@
 
 <fieldset>
   <legend>1. Upload PDF, Page Images, or Import from URL</legend>
+  <div id="knownFilesHint" class="hint" style="display:none;"></div>
   <input id="pdfFile" type="file" accept="application/pdf,.pdf,image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
   <p class="hint">A single PDF, or select multiple page-image files (JPG/PNG/WEBP) at once — pick them in reading order, since the order you select them in is the order they'll be OCR'd in. JP2 isn't supported yet (no browser can decode it without an extra library) — convert to JPG/PNG first.</p>
+  <p class="hint">⚠ Keep this tab open and in the foreground while OCR/Proofread are running — mobile browsers freeze background tabs' JavaScript entirely (switching apps, locking the screen) and no page can override that. Progress is saved after every single page/chunk, so if it does get interrupted, just reselect the same file and tap Resume/Proofread again — nothing already done gets redone.</p>
   <div id="pageCountDisplay" class="hint"></div>
   <p class="hint">— or —</p>
   <label for="importUrlInput">Page URL (e.g. a MediaWiki page like anandamakaranda.in)</label>
@@ -129,8 +131,8 @@
 </fieldset>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.11.0';
-  window.DGE_CONVERT_BUILD = '2026-08-11';
+  window.DGE_CONVERT_VERSION = '0.12.0';
+  window.DGE_CONVERT_BUILD = '2026-08-08';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -140,17 +142,17 @@
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   }
 </script>
-<script src="utils.js?v=0.11.0"></script>
-<script src="idb.js?v=0.11.0"></script>
-<script src="pdf.js?v=0.11.0"></script>
-<script src="image.js?v=0.11.0"></script>
-<script src="loaders.js?v=0.11.0"></script>
-<script src="vision.js?v=0.11.0"></script>
-<script src="gemini.js?v=0.11.0"></script>
-<script src="github.js?v=0.11.0"></script>
-<script src="mapper.js?v=0.11.0"></script>
-<script src="urlimport.js?v=0.11.0"></script>
-<script src="renderer.js?v=0.11.0"></script>
-<script src="app.js?v=0.11.0"></script>
+<script src="utils.js?v=0.12.0"></script>
+<script src="idb.js?v=0.12.0"></script>
+<script src="pdf.js?v=0.12.0"></script>
+<script src="image.js?v=0.12.0"></script>
+<script src="loaders.js?v=0.12.0"></script>
+<script src="vision.js?v=0.12.0"></script>
+<script src="gemini.js?v=0.12.0"></script>
+<script src="github.js?v=0.12.0"></script>
+<script src="mapper.js?v=0.12.0"></script>
+<script src="urlimport.js?v=0.12.0"></script>
+<script src="renderer.js?v=0.12.0"></script>
+<script src="app.js?v=0.12.0"></script>
 </body>
 </html>

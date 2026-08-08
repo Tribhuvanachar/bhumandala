@@ -1168,7 +1168,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/gita_prasthana/gita_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/gita_prasthana/gita_bhashya/tika_jayatirtha/data.json",
@@ -1180,11 +1180,11 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/gita_prasthana/gita_tatparya_nirnaya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/gita_prasthana/gita_tatparya_nirnaya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/gita_prasthana/gita_tatparya_nirnaya/tippani/data.json",
@@ -1192,7 +1192,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/brahma_sutra_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/brahma_sutra_bhashya/tika_jayatirtha/data.json",
@@ -1204,11 +1204,11 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/anuvyakhyana/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/anuvyakhyana/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/anuvyakhyana/tippani/data.json",
@@ -1216,7 +1216,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/anubhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/anubhashya/tika_jayatirtha/data.json",
@@ -1228,7 +1228,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/nyaya_vivarana/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/nyaya_vivarana/tika_jayatirtha/data.json",
@@ -1240,7 +1240,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/ishavasyopanishad_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/ishavasyopanishad_bhashya/tika_jayatirtha/data.json",
@@ -1252,7 +1252,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/kenopanishad_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/kenopanishad_bhashya/tika_jayatirtha/data.json",
@@ -1264,7 +1264,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/kathopanishad_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/kathopanishad_bhashya/tika_jayatirtha/data.json",
@@ -1276,7 +1276,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/mandukyopanishad_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/mandukyopanishad_bhashya/tika_jayatirtha/data.json",
@@ -1288,7 +1288,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/mundakopanishad_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/mundakopanishad_bhashya/tika_jayatirtha/data.json",
@@ -1300,7 +1300,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/prashnopanishad_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/prashnopanishad_bhashya/tika_jayatirtha/data.json",
@@ -1312,7 +1312,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/taittiriyopanishad_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/taittiriyopanishad_bhashya/tika_jayatirtha/data.json",
@@ -1324,7 +1324,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/aitareyopanishad_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/aitareyopanishad_bhashya/tika_jayatirtha/data.json",
@@ -1336,7 +1336,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/brihadaranyakopanishad_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/brihadaranyakopanishad_bhashya/tika_jayatirtha/data.json",
@@ -1348,7 +1348,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/chandogyopanishad_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/chandogyopanishad_bhashya/tika_jayatirtha/data.json",
@@ -1360,7 +1360,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/rig_bhashya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/rig_bhashya/tika_jayatirtha/data.json",
@@ -1372,11 +1372,11 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattva_sankhyana/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattva_sankhyana/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattva_sankhyana/tippani/data.json",
@@ -1384,11 +1384,11 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattva_viveka/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattva_viveka/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattva_viveka/tippani/data.json",
@@ -1396,7 +1396,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattvodyota/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattvodyota/tika_jayatirtha/data.json",
@@ -1408,7 +1408,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_jayatirtha/data.json",
@@ -1420,23 +1420,23 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/katha_lakshana/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/katha_lakshana/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/katha_lakshana/tippani/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/pramana_lakshana/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/pramana_lakshana/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/pramana_lakshana/tippani/data.json",
@@ -1444,7 +1444,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/upadhi_khandana/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/upadhi_khandana/tika_jayatirtha/data.json",
@@ -1456,7 +1456,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/mayavada_khandana/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/mayavada_khandana/tika_jayatirtha/data.json",
@@ -1468,7 +1468,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_jayatirtha/data.json",
@@ -1480,7 +1480,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/karma_nirnaya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/karma_nirnaya/tika_jayatirtha/data.json",
@@ -1492,7 +1492,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/itihasa_purana_tatparya_nirnaya/mahabharata_tatparya_nirnaya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/itihasa_purana_tatparya_nirnaya/mahabharata_tatparya_nirnaya/tika_jayatirtha/data.json",
@@ -1504,7 +1504,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/itihasa_purana_tatparya_nirnaya/bhagavata_tatparya_nirnaya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/itihasa_purana_tatparya_nirnaya/bhagavata_tatparya_nirnaya/tika_jayatirtha/data.json",
@@ -1516,7 +1516,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/dvadasha_stotra/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/dvadasha_stotra/tika_jayatirtha/data.json",
@@ -1528,7 +1528,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/yamaka_bharata/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/yamaka_bharata/tika_jayatirtha/data.json",
@@ -1540,7 +1540,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/tantrasara_sangraha/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/tantrasara_sangraha/tika_jayatirtha/data.json",
@@ -1552,7 +1552,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/sadachara_smriti/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/sadachara_smriti/tika_jayatirtha/data.json",
@@ -1564,7 +1564,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/jayanti_nirnaya/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/jayanti_nirnaya/tika_jayatirtha/data.json",
@@ -1600,7 +1600,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/yati_pranava_kalpa/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/yati_pranava_kalpa/tika_jayatirtha/data.json",
@@ -1612,7 +1612,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/krishnamrita_maharnava/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/krishnamrita_maharnava/tika_jayatirtha/data.json",
@@ -1624,7 +1624,7 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/kanduka_stuti/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/kanduka_stuti/tika_jayatirtha/data.json",
@@ -1636,15 +1636,15 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/nakha_stuti/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/nakha_stuti/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/nakha_stuti/tippani/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/smritis/manu_smriti/data.json",
@@ -2131,15 +2131,7 @@
       "populated": false
     },
     {
-      "path": "dge/data/ancillary/vyakarana/paniniya_vyakarana/ashtadhyayi/data.json",
-      "populated": false
-    },
-    {
       "path": "dge/data/ancillary/vyakarana/paniniya_vyakarana/mahabhashya_patanjali/data.json",
-      "populated": false
-    },
-    {
-      "path": "dge/data/ancillary/vyakarana/paniniya_vyakarana/kashika_vritti/data.json",
       "populated": false
     },
     {
