@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 562,
-  "loaded": 140,
-  "items": 174088
+  "loaded": 141,
+  "items": 180158
  },
  "sections": {
   "ancillary": {
@@ -23,8 +23,8 @@
   },
   "itihasas": {
    "total": 29,
-   "loaded": 25,
-   "items": 92197
+   "loaded": 26,
+   "items": 98267
   },
   "kavya": {
    "total": 4,
@@ -182,7 +182,7 @@
   "dharmashastra/mitakshara": 0,
   "dharmashastra/nirnaya_sindhu": 0,
   "dharmashastra/smriti_chandrika": 0,
-  "itihasas/harivamsha": 0,
+  "itihasas/harivamsha": 6070,
   "itihasas/mahabharata/adi_parva": 6957,
   "itihasas/mahabharata/anushasana_parva": 6536,
   "itihasas/mahabharata/ashramavasika_parva": 1062,

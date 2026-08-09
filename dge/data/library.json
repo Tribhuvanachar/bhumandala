@@ -2610,7 +2610,7 @@
     },
     {
       "path": "dge/data/itihasas/harivamsha/mula/data.json",
-      "populated": false
+      "populated": true
     },
     {
       "path": "dge/data/kavya/raghuvamsha/mula/data.json",
