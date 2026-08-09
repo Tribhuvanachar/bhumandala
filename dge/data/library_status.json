@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 562,
-  "loaded": 95,
-  "items": 55764
+  "loaded": 96,
+  "items": 56775
  },
  "sections": {
   "ancillary": {
@@ -48,8 +48,8 @@
   },
   "smritis": {
    "total": 19,
-   "loaded": 1,
-   "items": 805
+   "loaded": 2,
+   "items": 1816
   },
   "stotras": {
    "total": 3,
@@ -449,7 +449,7 @@
   "smritis/shatatapa_smriti": 0,
   "smritis/ushanas_smriti": 0,
   "smritis/vishnu_smriti": 0,
-  "smritis/yajnavalkya_smriti": 0,
+  "smritis/yajnavalkya_smriti": 1011,
   "smritis/yama_smriti": 0,
   "stotras/gajendra_moksha": 0,
   "stotras/pns": 0,
