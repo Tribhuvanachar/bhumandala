@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashtadhyayi Manager · DGE (super-admin)</title>
+<style>
+  :root{--bg:#f5efe4;--panel:#fffdf8;--panel2:#fbf4e7;--ink:#2b2117;--muted:#8b7c66;--line:#e6dac6;
+    --accent:#9a3b1b;--accent2:#1f6f5c;--gold:#b6862c;--ok:#2f9e6f;--pend:#b9ab90;--part:#c98a2b;--info:#1d5fa8;
+    --shadow:0 2px 16px rgba(90,60,20,.10);--radius:14px}
+  body.dark{--bg:#14161c;--panel:#1b1f27;--panel2:#20242f;--ink:#e9e3d5;--muted:#98a0b2;--line:#2b3140;
+    --accent:#e0794b;--accent2:#5bb894;--gold:#e0b25a;--ok:#5bb894;--pend:#5a5f6b;--part:#e0b25a;--info:#5aa0e6;--shadow:0 6px 26px rgba(0,0,0,.4)}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.5;
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;transition:.3s}
+  .deva{font-family:"Noto Serif Devanagari",serif}
+  header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+  .bar{max-width:1100px;margin:0 auto;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .brand{font-weight:700}.brand small{color:var(--muted);font-weight:400}.spacer{flex:1}
+  .crumbs{max-width:1100px;margin:0 auto;padding:6px 14px 0;color:var(--muted);font-size:13px}
+  .crumbs a{color:var(--accent)}
+  .icon,.btn{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:7px 12px;cursor:pointer;color:var(--ink);font:inherit;font-size:13px;text-decoration:none}
+  .btn.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
+  main{max-width:1100px;margin:0 auto;padding:16px 14px 80px}
+  .totals{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;box-shadow:var(--shadow)}
+  .stat b{font-size:24px;display:block}.stat span{color:var(--muted);font-size:12px}
+  h3{margin:22px 0 10px;font-size:16px}
+  .grid{display:grid;grid-template-columns:1fr;gap:10px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px;box-shadow:var(--shadow);border-left:4px solid var(--tag,#c9b79a)}
+  .card .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .card .t{font-weight:700;font-size:16px}.card .sub{color:var(--muted);font-size:12.5px}
+  .card .who{color:var(--muted);font-size:12px;font-style:italic;margin-left:auto}
+  .role{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:7px;padding:1px 7px}
+  .prog{height:9px;background:var(--panel2);border-radius:999px;overflow:hidden;border:1px solid var(--line);margin:9px 0 6px}
+  .prog i{display:block;height:100%;background:var(--tag,var(--ok))}
+  .meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);align-items:center}
+  .meta b{color:var(--ink)}
+  .badge{font-size:11px;border-radius:8px;padding:2px 8px;font-weight:600}
+  .badge.ok{color:#fff;background:var(--ok)}
+  .badge.info{color:#fff;background:var(--info)}
+  .badge.verify{color:#fff;background:var(--part)}
+  .badge.pend{color:var(--muted);border:1px solid var(--line)}
+  .src{font-size:11.5px;color:var(--muted);margin-top:7px;border-top:1px dashed var(--line);padding-top:7px;word-break:break-word}
+  .lic{font-size:11.5px;color:var(--muted);margin-top:3px;word-break:break-word}
+  .enrich{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+  .er{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 13px;min-width:120px}
+  .er b{font-size:19px;display:block}.er span{font-size:11.5px;color:var(--muted)}
+  .er .p{font-size:11px;color:var(--accent2)}
+  .gate{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:24px;text-align:center}
+  .gate input{font:inherit;font-size:18px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink)}
+  .muted{color:var(--muted);font-size:13px}
+  .warn{background:color-mix(in srgb,var(--part) 14%,var(--panel));border:1px solid var(--part);border-radius:10px;padding:10px 13px;font-size:13px;margin:10px 0 4px}
+</style>
+</head>
+<body>
+<div class="gate" id="gate">
+  <div style="font-size:22px;font-weight:700">🔐 Ashtadhyayi Manager</div>
+  <div class="muted">Super-admin only. Enter the passkey.</div>
+  <input id="gk" type="password" placeholder="passkey" autocomplete="off">
+  <button class="btn pri" id="gbtn">Enter</button>
+  <div class="muted" style="max-width:420px">Client-side gate for convenience, not real security — the page and data are public in the repo.</div>
+</div>
+
+<header style="display:none" id="hdr">
+  <div class="bar">
+    <div class="brand">📜 Ashtadhyayi Manager <small>· DGE super-admin</small></div>
+    <span class="spacer"></span>
+    <a class="icon" href="ashtadhyayi.html">◂ Reader</a>
+    <button class="icon" id="theme">◐</button>
+    <button class="btn" id="reload">↻ Refresh</button>
+  </div>
+  <div class="crumbs"><a href="index.html">⌂ DGE</a> › <a href="ashtadhyayi.html">अष्टाध्यायी</a> › <b>Layer &amp; coverage tracker</b></div>
+</header>
+
+<main id="app" style="display:none">
+  <div class="totals" id="totals"></div>
+
+  <h3>Commentary &amp; translation layers</h3>
+  <div class="grid" id="layers"></div>
+
+  <h3>Sūtrapāṭha enrichment coverage</h3>
+  <div class="muted" style="margin-bottom:8px">Structured per-sūtra fields shown in the reader's <b>॥ पदच्छेद / विश्लेषण ॥</b> panel. Source: ashtadhyayi.com <code>sutraani/data.txt</code> + <code>sutrartha_english.txt</code> — <b>padaccheda &amp; anvaya come from the sūtra metadata, not from any single commentary layer</b>.</div>
+  <div class="enrich" id="enrich"></div>
+
+  <div class="warn" id="licnote"></div>
+  <p class="muted" style="margin-top:14px">Coverage counts are read live from each layer's <code>data.json</code>. “Cleared (PD)” = public domain; “Permitted (curator)” = used under the ashtadhyayi.com curator's e-mail permission for non-commercial/educational use (source repo has no formal LICENSE) — keep attribution, resolve before public launch; “Verify” = sourced from the project lead's own StarDict dictionaries, edition/source not yet confirmed against a public copy. Licence resolution is a project-lead decision — this page only surfaces the status.</p>
+</main>
+
+<script>
+(function(){
+  var PASSKEY="SHRI108";
+  var $=function(s){return document.querySelector(s);};
+  if(sessionStorage.getItem("dge.admin.ok")==="1") start();
+  else {
+    $("#gate").style.display="flex";
+    var tryK=function(){ if($("#gk").value.trim()===PASSKEY){ sessionStorage.setItem("dge.admin.ok","1"); location.reload(); } else { $("#gk").value=""; $("#gk").placeholder="wrong — try again"; } };
+    $("#gbtn").onclick=tryK; $("#gk").addEventListener("keydown",function(e){ if(e.key==="Enter") tryK(); }); $("#gk").focus();
+  }
+
+  // layer registry — mirrors ashtadhyayi.js META/ORDER + the two ancillary leaves
+  var LAYERS=[
+    {key:"kashika",           t:"काशिकावृत्तिः",   sub:"Kāśikā-vṛtti",     who:"Vāmana–Jayāditya",  role:"tika",        tag:"var(--k)",  path:"data/vyakarana/ashtadhyayi/kashika/data.json"},
+    {key:"siddhanta_kaumudi", t:"सिद्धान्तकौमुदी", sub:"Siddhānta-Kaumudī",who:"Bhaṭṭoji Dīkṣita",  role:"tika",        tag:"var(--sk)", path:"data/ancillary/vyakarana/paniniya_vyakarana/siddhanta_kaumudi/data.json"},
+    {key:"mahabhashya",       t:"महाभाष्यम्",      sub:"Mahā-bhāṣya",      who:"Patañjali",         role:"bhāṣya",      tag:"var(--mb)", path:"data/ancillary/vyakarana/paniniya_vyakarana/mahabhashya_patanjali/data.json"},
+    {key:"balamanorama",      t:"बालमनोरमा",       sub:"Bāla-manoramā",    who:"Vāsudeva Dīkṣita",  role:"tippani",     tag:"var(--b)",  path:"data/vyakarana/ashtadhyayi/balamanorama/data.json"},
+    {key:"tattvabodhini",     t:"तत्त्वबोधिनी",    sub:"Tattva-bodhinī",   who:"Jñānendra Sarasvatī",role:"tippani",    tag:"var(--t)",  path:"data/vyakarana/ashtadhyayi/tattvabodhini/data.json"},
+    {key:"nyasa",             t:"न्यासः",          sub:"Nyāsa",            who:"Jinendrabuddhi",    role:"tippani",     tag:"var(--n)",  path:"data/vyakarana/ashtadhyayi/nyasa/data.json"},
+    {key:"vasu",              t:"Vasu · English",  sub:"S.C. Vasu (1891)", who:"Śrīśa Chandra Vasu",role:"translation", tag:"var(--vs)", path:"data/vyakarana/ashtadhyayi/vasu/data.json"}
+  ];
+  var PENDING=[{t:"⚙ प्रक्रिया (derivation engine)", note:"planned — external Vidyut/Vidyullekha engine, not a text layer"}];
+
+  function start(){
+    if(sessionStorage.getItem("dge.admin.ok")!=="1") return;
+    $("#gate").style.display="none"; $("#hdr").style.display=""; $("#app").style.display="";
+    if(localStorage.getItem("dge.ashadmin.dark")==="1") document.body.classList.add("dark");
+    $("#theme").onclick=function(){ document.body.classList.toggle("dark"); localStorage.setItem("dge.ashadmin.dark", document.body.classList.contains("dark")?"1":"0"); };
+    $("#reload").onclick=function(){ location.reload(); };
+    load();
+  }
+
+  function esc(s){ return (s||"").replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function fetchJSON(u){ return fetch(u).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }); }
+
+  function licBadge(lic){
+    var l=(lic||"").toLowerCase();
+    if(l.indexOf("public domain")>=0) return {cls:"ok",  txt:"Cleared (PD)"};
+    if(l.indexOf("curator")>=0||l.indexOf("permission")>=0) return {cls:"info",txt:"Permitted (curator)"};
+    if(l.indexOf("verify")>=0||!lic) return {cls:"verify",txt:"Verify"};
+    return {cls:"pend",txt:"See note"};
+  }
+
+  function load(){
+    var total=0;
+    fetchJSON("data/vyakarana/ashtadhyayi/sutrapatha/data.json").then(function(sp){
+      var sutras=sp.items||[]; total=sutras.length;
+      renderEnrichment(sutras, total);
+      return Promise.all(LAYERS.map(function(L){
+        return fetchJSON(L.path).then(function(d){ return {L:L, n:(d.items||[]).length, meta:d}; })
+          .catch(function(){ return {L:L, n:0, meta:null, err:true}; });
+      })).then(function(res){ renderLayers(res, total); renderTotals(res, total); });
+    }).catch(function(e){
+      $("#layers").innerHTML='<div class="muted">Could not load sutrapatha ('+e+'). Serve this page from the dge/ folder.</div>';
+    });
+  }
+
+  function renderTotals(res, total){
+    var loaded=res.filter(function(r){return r.n>0;}).length;
+    var pending=LAYERS.length-loaded+PENDING.length;
+    var toVerify=res.filter(function(r){return r.n>0 && licBadge(r.meta&&r.meta.licence).cls==="verify";}).length;
+    $("#totals").innerHTML=
+      stat(loaded+" / "+LAYERS.length, "text layers populated")+
+      stat(total.toLocaleString(), "sūtras (canonical)")+
+      stat(pending, "layers pending")+
+      stat(toVerify, "layers needing licence review");
+  }
+  function stat(b,s){ return '<div class="stat"><b>'+b+'</b><span>'+s+'</span></div>'; }
+
+  function renderLayers(res, total){
+    var html=res.map(function(r){
+      var L=r.L, pct=total?Math.round(r.n/total*100):0;
+      var lb=licBadge(r.meta&&r.meta.licence);
+      var statusBadge = r.n>0 ? '<span class="badge ok">loaded</span>' : '<span class="badge pend">pending</span>';
+      return '<div class="card" style="--tag:'+L.tag+'">'
+        +'<div class="top"><span class="t deva">'+esc(L.t)+'</span><span class="sub">'+esc(L.sub)+'</span>'
+        +'<span class="role">'+esc(L.role)+'</span>'
+        +'<span class="who">'+esc(L.who)+'</span></div>'
+        +'<div class="prog"><i style="width:'+pct+'%"></i></div>'
+        +'<div class="meta">'+statusBadge
+        +'<span><b>'+r.n.toLocaleString()+'</b> / '+total.toLocaleString()+' sūtras ('+pct+'%)</span>'
+        +'<span class="badge '+lb.cls+'">'+lb.txt+'</span></div>'
+        +(r.meta&&r.meta.source?'<div class="src">source: '+esc(r.meta.source)+'</div>':(r.err?'<div class="src">⚠ file not found at '+esc(L.path)+'</div>':''))
+        +(r.meta&&r.meta.licence?'<div class="lic">licence: '+esc(r.meta.licence)+'</div>':'')
+        +'</div>';
+    }).join("");
+    html+=PENDING.map(function(p){
+      return '<div class="card" style="--tag:var(--line)"><div class="top"><span class="t">'+esc(p.t)+'</span>'
+        +'<span class="badge pend" style="margin-left:auto">pending</span></div>'
+        +'<div class="lic">'+esc(p.note)+'</div></div>';
+    }).join("");
+    $("#layers").innerHTML=html;
+
+    var verifyList=res.filter(function(r){return r.n>0 && licBadge(r.meta&&r.meta.licence).cls==="verify";}).map(function(r){return r.L.sub;});
+    $("#licnote").innerHTML = verifyList.length
+      ? '⚠ <b>Licence review needed</b> for: '+verifyList.join(", ")+'. These were sourced from the project lead\'s own StarDict dictionaries and are tagged <code>licence: verify</code> — edition/source not yet confirmed against a public copy. Not treated as cleared.'
+      : 'All populated layers carry a public-domain or curator-permission licence note. Confirm attribution before public launch.';
+  }
+
+  function renderEnrichment(sutras, total){
+    function cov(pred){ return sutras.filter(pred).length; }
+    var fields=[
+      {k:"padaccheda", lbl:"padaccheda (word-split)", pred:function(s){return s.padaccheda&&s.padaccheda.length;}},
+      {k:"anvaya",     lbl:"anvaya (prose order)",    pred:function(s){return !!s.anvaya;}},
+      {k:"anuvritti",  lbl:"anuvṛtti (carried words)",pred:function(s){return s.anuvritti&&s.anuvritti.length;}},
+      {k:"adhikara",   lbl:"adhikāra",                pred:function(s){return !!s.adhikara;}},
+      {k:"sutra_type", lbl:"sūtra type",              pred:function(s){return !!s.sutra_type;}},
+      {k:"english",    lbl:"English gloss",           pred:function(s){return !!s.english;}}
+    ];
+    $("#enrich").innerHTML=fields.map(function(f){
+      var n=cov(f.pred), pct=total?Math.round(n/total*100):0;
+      return '<div class="er"><b>'+n.toLocaleString()+'</b><span>'+esc(f.lbl)+'</span><span class="p">'+pct+'% of sūtras</span></div>';
+    }).join("");
+  }
+})();
+</script>
+</body>
+</html>

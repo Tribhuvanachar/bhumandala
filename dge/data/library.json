@@ -2293,11 +2293,13 @@
     },
     {
       "path": "dge/data/ancillary/vyakarana/paniniya_vyakarana/mahabhashya_patanjali/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभाष्यम् (पतञ्जलि)"
     },
     {
       "path": "dge/data/ancillary/vyakarana/paniniya_vyakarana/siddhanta_kaumudi/data.json",
-      "populated": false
+      "populated": true,
+      "title": "सिद्धान्तकौमुदी (भट्टोजिदीक्षित)"
     },
     {
       "path": "dge/data/ancillary/vyakarana/chandra_vyakarana/data.json",

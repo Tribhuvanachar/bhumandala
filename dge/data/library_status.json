@@ -2,14 +2,14 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 574,
-  "loaded": 153,
-  "items": 194801
+  "loaded": 155,
+  "items": 200420
  },
  "sections": {
   "ancillary": {
    "total": 55,
-   "loaded": 0,
-   "items": 0
+   "loaded": 2,
+   "items": 5619
   },
   "dasakuta": {
    "total": 42,
@@ -129,8 +129,8 @@
   "ancillary/vyakarana/mugdhabodha_vyakarana": 0,
   "ancillary/vyakarana/paniniya_vyakarana/ashtadhyayi": 0,
   "ancillary/vyakarana/paniniya_vyakarana/kashika_vritti": 0,
-  "ancillary/vyakarana/paniniya_vyakarana/mahabhashya_patanjali": 0,
-  "ancillary/vyakarana/paniniya_vyakarana/siddhanta_kaumudi": 0,
+  "ancillary/vyakarana/paniniya_vyakarana/mahabhashya_patanjali": 1691,
+  "ancillary/vyakarana/paniniya_vyakarana/siddhanta_kaumudi": 3928,
   "ancillary/vyakarana/sarasvata_vyakarana": 0,
   "ancillary/vyakarana/shakatayana_vyakarana": 0,
   "dasakuta/gopaladasa/dandaka": 0,

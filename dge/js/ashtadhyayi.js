@@ -1,5 +1,9 @@
 /* ==========================================================================
- * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.1.1
+ * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.2.1
+ *   v1.2.0 — Stream 5: +Siddhānta-Kaumudī, +Mahābhāṣya, +Vasu(Eng) layers;
+ *            padaccheda / anvaya / anuvṛtti / adhikāra / sūtra-type analysis panel.
+ *   v1.2.1 — re-applied the shared DGEGemini client to askGemini() (Stream 5's
+ *            delivery predated it and had reverted to a raw fetch call).
  *
  * Blended Read⇄Compare UI for the Paninian sutrapatha + commentary layers
  * (Kashika / Balamanorama / Tattvabodhini / Nyasa), with a REAL Gemini
@@ -21,11 +25,17 @@
   var BASE = "data/vyakarana/ashtadhyayi/";
   var META = {
     kashika:      {t:"काशिकावृत्तिः", sub:"Kāśikā-vṛtti", who:"Vāmana–Jayāditya", tag:"var(--k)", role:"tika"},
+    siddhanta_kaumudi:{t:"सिद्धान्तकौमुदी", sub:"Siddhānta-Kaumudī", who:"Bhaṭṭoji Dīkṣita", tag:"var(--sk)", role:"tika",
+                      path:"data/ancillary/vyakarana/paniniya_vyakarana/siddhanta_kaumudi/data.json"},
+    mahabhashya:  {t:"महाभाष्यम्", sub:"Mahā-bhāṣya", who:"Patañjali", tag:"var(--mb)", role:"bhashya",
+                      path:"data/ancillary/vyakarana/paniniya_vyakarana/mahabhashya_patanjali/data.json"},
     balamanorama: {t:"बालमनोरमा", sub:"Bāla-manoramā", who:"Vāsudeva Dīkṣita", tag:"var(--b)", role:"tippani"},
     tattvabodhini:{t:"तत्त्वबोधिनी", sub:"Tattva-bodhinī", who:"Jñānendra Sarasvatī", tag:"var(--t)", role:"tippani"},
-    nyasa:        {t:"न्यासः", sub:"Kāśikāvivaraṇapañjikā", who:"Jinendrabuddhi", tag:"var(--n)", role:"tippani"}
+    nyasa:        {t:"न्यासः", sub:"Kāśikāvivaraṇapañjikā", who:"Jinendrabuddhi", tag:"var(--n)", role:"tippani"},
+    vasu:         {t:"Vasu · English", sub:"S.C. Vasu (1891)", who:"Śrīśa Chandra Vasu", tag:"var(--vs)", role:"translation", lang:"en",
+                      path:"data/vyakarana/ashtadhyayi/vasu/data.json"}
   };
-  var ORDER = ["kashika","balamanorama","tattvabodhini","nyasa"];
+  var ORDER = ["kashika","siddhanta_kaumudi","mahabhashya","balamanorama","tattvabodhini","nyasa","vasu"];
   var INMEM = !!window.DGE_INMEM || !!window.DGE_SAMPLE;
 
   var LS = {
@@ -36,7 +46,7 @@
 
   var state = {
     sutras: [], byId: {}, layers: {}, idx: 0,
-    enabled: LS.get("enabled", {kashika:true, balamanorama:true, tattvabodhini:false, nyasa:false}),
+    enabled: LS.get("enabled", {kashika:true, siddhanta_kaumudi:true, balamanorama:true, tattvabodhini:false, nyasa:false, mahabhashya:false, vasu:false}),
     script: LS.get("script", "devanagari"),
     mode: LS.get("mode", "read"),
     font: LS.get("font", 17),
@@ -73,7 +83,8 @@
     var L = state.layers[folder];
     if (L && (L.loaded||L.loading)) return L.promise||Promise.resolve(L);
     L = state.layers[folder] = {loaded:false, loading:true, byId:{}};
-    L.promise = fetchJSON(BASE+folder+"/data.json").then(function(d){
+    var url = (META[folder]&&META[folder].path) ? META[folder].path : BASE+folder+"/data.json";
+    L.promise = fetchJSON(url).then(function(d){
       (d.items||[]).forEach(function(it){ L.byId[it.id]=it; });
       L.loaded=true; L.loading=false; return L;
     }).catch(function(e){ L.loading=false; L.error=e; return L; });
@@ -94,23 +105,61 @@
     $("#dge-hsutraIt").textContent = iast(row.sanskrit_text);
     $("#dge-prevT").textContent = state.idx>0?tl(state.sutras[state.idx-1].sanskrit_text):"—";
     $("#dge-nextT").textContent = state.idx<state.sutras.length-1?tl(state.sutras[state.idx+1].sanskrit_text):"—";
+    renderAnalysis(row);
   }
+  /* ---------- padaccheda / anvaya / anuvritti (sutra analysis) ---------- */
+  function renderAnalysis(row){
+    var strip=$("#dge-sutrameta"), panel=$("#dge-analysis");
+    if(!strip||!panel) return;
+    var devCls = state.script==="iast"?"":"deva";
+    // always-visible compact strip: padaccheda words + type badge
+    var s="";
+    if(row.padaccheda&&row.padaccheda.length){
+      s+='<span class="pc-lbl">पदच्छेद</span> '+row.padaccheda.map(function(w){
+        return '<span class="pc-w '+devCls+'">'+esc(tl(w))+'</span>'; }).join('<span class="pc-plus">+</span>');
+    }
+    if(row.sutra_type&&(row.sutra_type.label_dev||row.sutra_type.label)){
+      s+='<span class="pc-type" title="'+esc(row.sutra_type.label||"")+'">'
+        +(row.sutra_type.label_dev?'<span class="deva">'+esc(row.sutra_type.label_dev)+'</span> ':'')
+        +esc(row.sutra_type.label||"")+'</span>';
+    }
+    strip.innerHTML=s;
+    // toggle panel: anvaya, anuvritti, adhikara, English
+    var rows="";
+    if(row.anvaya) rows+=arow("अन्वयः · anvaya (prose order)", '<span class="'+devCls+'">'+esc(tl(row.anvaya))+'</span>');
+    if(row.anuvritti&&row.anuvritti.length){
+      var av=row.anuvritti.map(function(a){
+        return '<span class="anu-w '+devCls+'">'+esc(tl(a.word))+'</span>'+(a.from?'<span class="anu-src">‹ '+a.from+'</span>':''); }).join(", ");
+      rows+=arow("अनुवृत्तिः · anuvṛtti (carried-over words)", av);
+    }
+    if(row.adhikara) rows+=arow("अधिकारः · adhikāra (governing rule)", '<span class="'+devCls+'">'+esc(tl(row.adhikara))+'</span>');
+    if(row.english) rows+=arow("English gloss", esc(row.english));
+    panel.innerHTML=rows||'<div class="an-empty">No structured analysis on record for this sūtra.</div>';
+    var hasStrip=!!s, hasPanel=!!rows;
+    $("#dge-pcBtn").style.display=(hasStrip||hasPanel)?"":"none";
+  }
+  function arow(label, val){ return '<div class="an-row"><div class="an-k">'+label+'</div><div class="an-v">'+val+'</div></div>'; }
+  function nl2br(s){ return s.replace(/\n/g,"<br>"); }
   function cardHTML(folder){
     var m=META[folder], row=state.sutras[state.idx], L=state.layers[folder];
+    var isEn = m.lang==="en";
+    var devCls = isEn ? "" : (state.script==="iast"?"":"deva");
     var col = (state.mode==="compare")?false:!!state.collapsed[folder];
     var body, hasText=false;
     if(!L||(!L.loaded&&L.loading)) body='<span class="dge-skel"></span><span class="dge-skel"></span><span class="dge-skel" style="width:70%"></span>';
     else if(L&&L.error) body='<span class="dge-more">could not load '+folder+'</span>';
-    else { var it=L&&L.byId[row.id]; if(it){body=esc(tl(it.sanskrit_text));hasText=true;} else body='<span class="dge-more">— no '+m.sub+' on this sutra —</span>'; }
-    var lic = (L&&L.byId[row.id])?('source: '+folder+'.dict · '+m.role+' · ref → sutrapatha/'+row.id):'';
+    else { var it=L&&L.byId[row.id];
+      if(it){ body=nl2br(esc(isEn ? it.sanskrit_text : tl(it.sanskrit_text))); hasText=true; }
+      else body='<span class="dge-more">— no '+m.sub+' on this sutra —</span>'; }
+    var lic = (L&&L.byId[row.id])?('layer: '+m.sub+' · '+m.role+' · ref → sutrapatha/'+row.id):'';
     return '<article class="dge-card '+(col?'collapsed':'')+'" data-c="'+folder+'" style="--tag:'+m.tag+'">'
       +'<div class="dge-head" data-h="'+folder+'">'
-      +'<span class="t '+(state.script==="iast"?"":"deva")+'">'+tl(m.t)+'</span>'
+      +'<span class="t '+(isEn?"":(state.script==="iast"?"":"deva"))+'">'+(isEn?m.t:tl(m.t))+'</span>'
       +'<span class="sub">'+m.sub+'</span><span class="who">'+m.who+'</span>'
       +(hasText?'<button class="dge-copy" data-copy="'+folder+'" title="copy">⧉</button>':'')
       +'<span class="caret">▾</span></div>'
       +'<div class="dge-body" style="font-size:'+state.font+'px">'
-      +'<div class="'+(state.script==="iast"?"":"deva")+'">'+body+'</div>'
+      +'<div class="'+devCls+'">'+body+'</div>'
       +(lic?'<span class="dge-lic">'+lic+'</span>':'')+'</div></article>';
   }
   function renderLayers(){
@@ -222,6 +271,11 @@
     $("#dge-collapse").addEventListener("click",function(){ if(state.mode!=="compare"){ORDER.forEach(function(k){state.collapsed[k]=true;}); renderLayers();} });
     $("#dge-prevBtn").addEventListener("click",function(){ go(state.idx-1); });
     $("#dge-nextBtn").addEventListener("click",function(){ go(state.idx+1); });
+    var pc=$("#dge-pcBtn"); if(pc) pc.addEventListener("click",function(){
+      var pn=$("#dge-analysis"); if(!pn) return;
+      var open=pn.classList.toggle("open"); pc.classList.toggle("on",open); });
+    var wex=$("#dge-whatBtn"); if(wex) wex.addEventListener("click",function(){
+      var el=$("#dge-chips"); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); });
     var jump=$("#dge-jump");
     if(jump) jump.addEventListener("change",function(){ var v=jump.value.trim(); if(state.byId[v]) go(state.sutras.indexOf(state.byId[v])); });
     document.addEventListener("keydown",function(e){
