@@ -75,6 +75,33 @@ def count_leaf(leaf_path):
             except Exception: pass
     return total
 
+# Self-heal library.json's own populated flags while we're here. This is
+# the ONE thing core.js actually gates a fetch on (entry.populated===false
+# short-circuits straight to "Not Yet Available" without even trying) --
+# an importer can write a perfectly good data.json and this script can
+# correctly count its verses, and the content is still completely
+# invisible on the live site until this flag catches up. Confirmed for
+# real, twice, in one day: every ingest here today needed this as a
+# separate manual follow-up commit. Auto-syncing it here means the next
+# one won't.
+changed = False
+for g in lib.get('granthas', []):
+    fp = to_local_path(g['path'])
+    if not os.path.exists(fp):
+        continue
+    try:
+        n = item_count(json.load(open(fp, encoding='utf-8')))
+    except Exception:
+        continue
+    if n > 0 and not g.get('populated'):
+        g['populated'] = True
+        changed = True
+        print(f"  populated:true -> {g['path']} ({n} items)")
+if changed:
+    json.dump(lib, open(os.path.join(DATA, 'library.json'), 'w', encoding='utf-8'),
+               ensure_ascii=False, indent=2)
+    open(os.path.join(DATA, 'library.json'), 'a', encoding='utf-8').write('\n')
+
 leaves = {}
 def walk(node, pre):
     ch = {k: v for k, v in node.items() if not k.startswith('_')}
