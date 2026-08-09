@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kosha Manager · DGE (super-admin)</title>
+<style>
+  :root{--bg:#f5efe4;--panel:#fffdf8;--panel2:#fbf4e7;--ink:#2b2117;--muted:#8b7c66;--line:#e6dac6;
+    --accent:#9a3b1b;--accent2:#1f6f5c;--gold:#b6862c;--ok:#2f9e6f;--pend:#b9ab90;--part:#c98a2b;--bad:#b23b2b;
+    --shadow:0 2px 16px rgba(90,60,20,.10);--radius:14px}
+  body.dark{--bg:#14161c;--panel:#1b1f27;--panel2:#20242f;--ink:#e9e3d5;--muted:#98a0b2;--line:#2b3140;
+    --accent:#e0794b;--accent2:#5bb894;--gold:#e0b25a;--ok:#5bb894;--pend:#5a5f6b;--part:#e0b25a;--bad:#e0794b;--shadow:0 6px 26px rgba(0,0,0,.4)}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.5;
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;transition:.3s}
+  header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+  .bar{max-width:1100px;margin:0 auto;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .brand{font-weight:700}.brand small{color:var(--muted);font-weight:400}.spacer{flex:1}
+  .icon,.btn{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:7px 12px;cursor:pointer;color:var(--ink);font:inherit;font-size:13px}
+  .btn.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
+  main{max-width:1100px;margin:0 auto;padding:16px 14px 80px}
+  h2.sect{font-size:16px;margin:22px 0 8px;border-bottom:1px solid var(--line);padding-bottom:5px}
+  .totals{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;box-shadow:var(--shadow)}
+  .stat b{font-size:24px;display:block}.stat span{color:var(--muted);font-size:12px}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0 12px}
+  .toolbar input[type=search]{flex:1;min-width:180px;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:9px 12px;font:inherit;color:var(--ink)}
+  .chip{border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:6px 11px;cursor:pointer;font-size:13px;color:var(--muted)}
+  .chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:middle}
+  th{background:var(--panel2);cursor:pointer;user-select:none;white-space:nowrap;font-size:12.5px;color:var(--muted)}
+  th.sorted::after{content:" ▾";color:var(--accent)}
+  th.sorted.asc::after{content:" ▴"}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+  tr.hiddenRow td.nm{opacity:.45;text-decoration:line-through}
+  .nm b{font-weight:700}.nm .slug{color:var(--muted);font-size:11px;display:block}
+  .badge{font-size:11px;border-radius:8px;padding:1px 8px;white-space:nowrap;border:1px solid}
+  .badge.ok{color:var(--ok);border-color:var(--ok)}
+  .badge.unclear{color:var(--part);border-color:var(--part)}
+  .badge.bad{color:var(--bad);border-color:var(--bad)}
+  .eye{border:1px solid var(--line);background:var(--panel);border-radius:8px;width:34px;height:28px;cursor:pointer;color:var(--ink);font-size:14px}
+  .eye.off{opacity:.55}
+  .note{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:12px 14px;margin:10px 0;font-size:13.5px}
+  .note b{color:var(--accent)}
+  .muted{color:var(--muted);font-size:13px}
+  .gate{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:24px;text-align:center}
+  .gate input{font:inherit;font-size:18px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink)}
+  a{color:var(--accent2)}
+  .cat{font-size:11px;color:var(--muted);text-transform:capitalize}
+</style>
+</head>
+<body>
+<div class="gate" id="gate">
+  <div style="font-size:22px;font-weight:700">🔐 DGE Kosha Manager</div>
+  <div class="muted">Super-admin only. Enter the passkey.</div>
+  <input id="gk" type="password" placeholder="passkey" autocomplete="off">
+  <button class="btn pri" id="gbtn">Enter</button>
+  <div class="muted" style="max-width:440px">Client-side gate for convenience, not real security — the page and dictionary data are public in the repo. Keep sensitive controls behind the app's real auth if needed.</div>
+</div>
+
+<header style="display:none" id="hdr">
+  <div class="bar">
+    <div class="brand"><a href="index.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> 📖 Kosha Manager <small>· super-admin</small></div>
+    <span class="spacer"></span>
+    <a class="icon" href="index.html#kosha" title="The कोश search opens from the floating button on the main library page">कोश →</a>
+    <button class="icon" id="theme">◐</button>
+    <button class="btn" id="reload">↻ Refresh</button>
+    <button class="btn pri" id="export">⬇ Export visibility</button>
+  </div>
+</header>
+
+<main id="app" style="display:none">
+  <div class="totals" id="totals"></div>
+
+  <h2 class="sect">Loaded dictionaries <span class="muted" id="loadedSub"></span></h2>
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="Filter by name / slug / language…">
+    <button class="chip on" data-f="all">All</button>
+    <button class="chip" data-f="cleared">Cleared only</button>
+    <button class="chip" data-f="unclear">Unclear only</button>
+    <button class="chip" data-f="hidden">Hidden only</button>
+  </div>
+  <table id="tbl">
+    <thead><tr>
+      <th data-k="name">Dictionary</th>
+      <th data-k="dir">Direction</th>
+      <th data-k="license">Licence</th>
+      <th data-k="headwords" class="num">Headwords</th>
+      <th data-k="senses" class="num">Senses</th>
+      <th data-k="vis">Search</th>
+    </tr></thead>
+    <tbody id="tb"></tbody>
+  </table>
+  <p class="muted" style="margin-top:10px">👁 toggles whether a dictionary is searched in <b>कोश</b>. The flag is read live by <code>kosha.js</code> on the next query (stored per-browser as <code>kosha_hidden_dicts</code>). Click <b>Export visibility</b> to download <code>kosha-visibility.json</code> if you want to bake a default into the repo.</p>
+
+  <h2 class="sect">Known but not yet loaded <span class="muted">— documented in <code>kosha_toolkit/LICENSING.md</code></span></h2>
+  <p class="muted" style="margin:0 0 8px">The <code>indic-dict/stardict-sanskrit</code> ecosystem has ~65 dictionaries; 28 carry a per-folder <code>LICENSE.xml</code> (the cleared Cologne set). The catalogue below lists the ones named in <code>LICENSING.md</code> that are <b>not</b> in the current manifest. Counts are unknown until ingested. This is the documented subset, not a full live scrape of the mirror.</p>
+  <table id="tbl2">
+    <thead><tr>
+      <th>Dictionary</th><th>Direction</th><th>Licence</th><th>Notes</th>
+    </tr></thead>
+    <tbody id="tb2"></tbody>
+  </table>
+
+  <div class="note" id="puranaNote"></div>
+</main>
+
+<script>
+(function(){
+  var PASSKEY="SHRI108";
+  var $=function(s){return document.querySelector(s);};
+  function gate(){
+    if(sessionStorage.getItem("dge.admin.ok")==="1"){ start(); return; }
+    $("#gate").style.display="flex";
+    var tryK=function(){ if($("#gk").value.trim()===PASSKEY){ sessionStorage.setItem("dge.admin.ok","1"); location.reload(); } else { $("#gk").value=""; $("#gk").placeholder="wrong — try again"; } };
+    $("#gbtn").onclick=tryK; $("#gk").addEventListener("keydown",function(e){ if(e.key==="Enter") tryK(); }); $("#gk").focus();
+  }
+
+  // dictionaries hidden from कोश search. Shared key with js/kosha.js.
+  var HIDDEN, FILTER="all", SORT={k:"headwords",dir:-1}, MAN=null, ROWS=[];
+  function loadVis(){ try{ HIDDEN=new Set(JSON.parse(localStorage.getItem("kosha_hidden_dicts")||"[]")); }catch(e){ HIDDEN=new Set(); } }
+  function saveVis(){ localStorage.setItem("kosha_hidden_dicts", JSON.stringify([...HIDDEN])); }
+
+  // Catalogue of documented-but-not-ingested dictionaries (from LICENSING.md).
+  var NOT_LOADED=[
+    // Cleared Cologne (CC-BY-SA 4.0) not yet in the manifest
+    {name:"Monier-Williams 1872",slug:"mw-1872",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
+    {name:"Apte 1890",slug:"apte-1890",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
+    {name:"Apte English-Sanskrit",slug:"apte-english-sanskrit-cologne",dir:"en→sa",lic:"cc",note:"Cologne reverse — CC-BY-SA 4.0"},
+    {name:"Cappeller",slug:"cappeller",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
+    {name:"Wilson",slug:"wilson",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
+    {name:"Yates",slug:"yates",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
+    {name:"Goldstücker",slug:"goldstucker",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
+    {name:"Lanman",slug:"lanman",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
+    {name:"Shabda-Sagara",slug:"shabda-sagara",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
+    {name:"Edgerton (Buddhist Hybrid)",slug:"edgerton",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
+    {name:"Mayrhofer",slug:"mayrhofer",dir:"sa→de",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
+    {name:"Bopp",slug:"bopp",dir:"sa→de",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
+    {name:"Böhtlingk-Roth (pw)",slug:"pw",dir:"sa→de",lic:"cc",note:"Cologne German — CC-BY-SA 4.0"},
+    {name:"Böhtlingk-Roth Große (pwg)",slug:"pwg",dir:"sa→de",lic:"cc",note:"Cologne German — CC-BY-SA 4.0"},
+    {name:"Stchoupak",slug:"stchoupak",dir:"sa→fr",lic:"cc",note:"Cologne French — CC-BY-SA 4.0"},
+    {name:"Burnouf",slug:"burnouf",dir:"sa→fr",lic:"cc",note:"Cologne French — CC-BY-SA 4.0"},
+    // Unclear — Sanskrit→Sanskrit koshas (no LICENSE.xml in the mirror)
+    {name:"Amarakosha + Sudhā",slug:"amara-sudhA",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
+    {name:"Abhidhānachintāmaṇi Pariśiṣṭa",slug:"abhidhanachintamani-parishishta",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
+    {name:"Abhidhānaratnamālā",slug:"abhidhanaratnamala",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
+    {name:"Anekārthadhvanimañjarī",slug:"anekarthadhvanimanjari",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
+    {name:"Śaiva-kosha",slug:"shaiva-kosha",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
+    {name:"Vaiṣṇava-kosha",slug:"vaishnava-kosha",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
+    {name:"Nyāya-kosha",slug:"nyaya-kosha",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
+    // Unclear — other Indic bridges (no LICENSE.xml)
+    {name:"Apte Sanskrit-Hindi",slug:"apte-hi",dir:"sa→hi",lic:"bad",note:"indic-dict — no LICENSE, modern compilation"},
+    {name:"Saṃskṛtam–Tamiḻam",slug:"samskritam-tamizham",dir:"sa→ta",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
+    {name:"Vedic Rituals (Hindi)",slug:"vedic-rituals-hi",dir:"sa→hi",lic:"unclear",note:"indic-dict — no LICENSE.xml"}
+  ];
+
+  function start(){
+    if(sessionStorage.getItem("dge.admin.ok")!=="1") return;
+    $("#gate").style.display="none"; $("#hdr").style.display=""; $("#app").style.display="";
+    loadVis();
+    if(localStorage.getItem("dge.koshaadmin.dark")==="1") document.body.classList.add("dark");
+    $("#theme").onclick=function(){ document.body.classList.toggle("dark"); localStorage.setItem("dge.koshaadmin.dark", document.body.classList.contains("dark")?"1":"0"); };
+    $("#reload").onclick=function(){ location.reload(); };
+    $("#export").onclick=exportVis;
+    $("#q").addEventListener("input",renderLoaded);
+    document.querySelectorAll(".chip[data-f]").forEach(function(c){ c.onclick=function(){ FILTER=c.dataset.f; document.querySelectorAll(".chip[data-f]").forEach(function(x){x.classList.toggle("on",x===c);}); renderLoaded(); }; });
+    document.querySelectorAll("#tbl th[data-k]").forEach(function(th){ th.onclick=function(){ var k=th.dataset.k; if(k==="vis") k="hidden"; if(SORT.k===k) SORT.dir*=-1; else {SORT.k=k;SORT.dir=(k==="name"||k==="license"||k==="dir")?1:-1;} renderLoaded(); }; });
+    renderNotLoaded(); renderPuranaNote();
+    fetch("data/koshas/_index/manifest.json?v=1.1").then(function(r){return r.json();})
+      .then(function(m){ MAN=m; buildRows(); renderTotals(); renderLoaded(); })
+      .catch(function(e){ $("#tb").innerHTML='<tr><td colspan="6" class="muted">Could not load data/koshas/_index/manifest.json ('+e+'). Place this page at dge/.</td></tr>'; });
+  }
+
+  function licClass(s){ s=(s||"").toLowerCase(); if(s.indexOf("cc-by")===0||s.indexOf("cc-by")>-1) return "ok"; if(s.indexOf("no license")>-1||s.indexOf("no licence")>-1) return "bad"; return "unclear"; }
+  function licLabel(s){ var c=licClass(s); return c==="ok"?"Cleared":(c==="bad"?"Unclear — no licence":"Unclear"); }
+  function dirOf(d){ var a={sa:"सं",en:"En",kn:"ಕ",hi:"हि",bn:"বা",ta:"த",te:"తె",fr:"Fr",de:"De"}; return (a[d.headword_language]||d.headword_language)+" → "+(a[d.gloss_language]||d.gloss_language); }
+
+  function buildRows(){
+    ROWS=Object.keys(MAN.dictionaries).map(function(slug){
+      var d=MAN.dictionaries[slug];
+      return {slug:slug,name:d.name,dir:dirOf(d),category:d.category,license:d.license||"",
+        licClass:licClass(d.license),headwords:d.headwords||0,senses:d.senses||0,attribution:d.attribution||""};
+    });
+  }
+  function renderTotals(){
+    var hw=0,se=0; ROWS.forEach(function(r){hw+=r.headwords;se+=r.senses;});
+    $("#loadedSub").textContent="("+ROWS.length+")";
+    $("#totals").innerHTML=
+      stat(ROWS.length,"dictionaries loaded")+
+      stat(hw.toLocaleString(),"headwords")+
+      stat(se.toLocaleString(),"senses")+
+      stat(HIDDEN.size,"hidden from search")+
+      stat(NOT_LOADED.length,"known, not yet loaded");
+  }
+  function stat(b,s){ return '<div class="stat"><b>'+b+'</b><span>'+s+'</span></div>'; }
+
+  function passFilter(r){
+    if(FILTER==="cleared") return r.licClass==="ok";
+    if(FILTER==="unclear") return r.licClass!=="ok";
+    if(FILTER==="hidden") return HIDDEN.has(r.slug);
+    return true;
+  }
+  function renderLoaded(){
+    var query=($("#q").value||"").trim().toLowerCase();
+    var list=ROWS.filter(function(r){
+      if(!passFilter(r)) return false;
+      if(query && (r.name+" "+r.slug+" "+r.dir+" "+r.license).toLowerCase().indexOf(query)<0) return false;
+      return true;
+    });
+    list.sort(function(a,b){
+      var k=SORT.k; var av,bv;
+      if(k==="hidden"){ av=HIDDEN.has(a.slug)?1:0; bv=HIDDEN.has(b.slug)?1:0; }
+      else { av=a[k]; bv=b[k]; }
+      if(typeof av==="string") return av.localeCompare(bv)*SORT.dir;
+      return (av-bv)*SORT.dir;
+    });
+    document.querySelectorAll("#tbl th[data-k]").forEach(function(th){ var k=th.dataset.k==="vis"?"hidden":th.dataset.k; th.classList.toggle("sorted",k===SORT.k); th.classList.toggle("asc",k===SORT.k&&SORT.dir===1); });
+    $("#tb").innerHTML=list.map(function(r){
+      var hid=HIDDEN.has(r.slug);
+      return '<tr class="'+(hid?"hiddenRow":"")+'">'+
+        '<td class="nm"><b>'+esc(r.name)+'</b><span class="slug">'+esc(r.slug)+' · <span class="cat">'+esc(r.category.replace(/_/g," "))+'</span></span></td>'+
+        '<td>'+esc(r.dir)+'</td>'+
+        '<td><span class="badge '+r.licClass+'" title="'+esc(r.license)+'">'+licLabel(r.license)+'</span></td>'+
+        '<td class="num">'+r.headwords.toLocaleString()+'</td>'+
+        '<td class="num">'+r.senses.toLocaleString()+'</td>'+
+        '<td><button class="eye'+(hid?" off":"")+'" data-h="'+esc(r.slug)+'" title="'+(hid?"hidden — click to search again":"searched — click to hide")+'">'+(hid?"🚫":"👁")+'</button></td>'+
+        '</tr>';
+    }).join("")|| '<tr><td colspan="6" class="muted">No dictionaries match.</td></tr>';
+    document.querySelectorAll("#tb .eye").forEach(function(b){ b.onclick=function(){ var s=b.dataset.h; if(HIDDEN.has(s)) HIDDEN.delete(s); else HIDDEN.add(s); saveVis(); renderTotals(); renderLoaded(); }; });
+  }
+
+  function renderNotLoaded(){
+    $("#tb2").innerHTML=NOT_LOADED.map(function(r){
+      var cls=r.lic==="cc"?"ok":(r.lic==="bad"?"bad":"unclear");
+      var lab=r.lic==="cc"?"Cleared":(r.lic==="bad"?"Unclear — no licence":"Unclear");
+      return '<tr><td class="nm"><b>'+esc(r.name)+'</b><span class="slug">'+esc(r.slug)+'</span></td>'+
+        '<td>'+esc(r.dir)+'</td>'+
+        '<td><span class="badge '+cls+'">'+lab+'</span></td>'+
+        '<td class="muted">'+esc(r.note)+'</td></tr>';
+    }).join("");
+  }
+
+  function renderPuranaNote(){
+    $("#puranaNote").innerHTML=
+      '<b>Sourcing gap — Purāṇic encyclopaedia:</b> No Purāṇa-encyclopaedia / Purāṇa-index dictionary '+
+      '(e.g. Vettam Mani’s <i>Purāṇic Encyclopaedia</i>) is present in the current manifest, and none is '+
+      'documented in <code>kosha_toolkit/LICENSING.md</code>’s inventory of the <code>indic-dict/stardict-sanskrit</code> '+
+      'mirror or the local <code>dict.zip</code>. The nearest subject-koshas the mirror does carry are Śaiva-kosha, '+
+      'Vaiṣṇava-kosha and Nyāya-kosha (all <i>Unclear — no LICENSE.xml</i>), which are not Purāṇic indices. '+
+      'Vettam Mani’s work is a 1975 Motilal Banarsidass publication and is almost certainly still in copyright — '+
+      'per this project’s rule (<i>absence of a licence is not permission</i>) it must not be sourced here. '+
+      'This is a decision for the project lead, not something to fabricate. '+
+      '(Note: the separate <code>purANa-encyclopedia</code> / <code>purANa-index-dev</code> datasets tracked in the '+
+      'corpus/Ashtadhyayi workstream are a different pipeline and are not part of the Kosha dictionary mirror.)';
+  }
+
+  function exportVis(){
+    var out={ note:"DGE Kosha search visibility. hidden = dictionary slugs (from data/koshas/_index/manifest.json) to exclude from कोश search. js/kosha.js reads this list at query time via localStorage key kosha_hidden_dicts.", hidden:[...HIDDEN].sort() };
+    var blob=new Blob([JSON.stringify(out,null,1)],{type:"application/json"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="kosha-visibility.json"; a.click();
+  }
+  function esc(s){ return (s||"").replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  gate(); // run last, after every var/function above is initialised
+})();
+</script>
+</body>
+</html>
