@@ -8,14 +8,51 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha.js'] = 'v1.1';
+  window.DGE_VERSIONS['kosha.js'] = 'v1.2';
 
-  var BASE = 'data/koshas';
-  var V = '?v=1.1';
+  // Citation-form normalizer: strip a trailing visarga (H) / anusvara (M) from
+  // an SLP1 headword so dictionaries that cite the nominative (रामः = rAmaH) or
+  // accusative (रामं = rAmaM) group with the bare stem (राम = rAma). Vowel
+  // length is preserved, so रम (rama) stays distinct from राम (rAma). This is
+  // why Śabdakalpadruma/Vācaspatyam (which list रामः, not राम) now appear under
+  // a "राम" search instead of looking absent.
+  function gkey(s) { s = s || ''; var t = s.replace(/[HM]+$/, ''); return t || s; }
+
+  // Data can live in-repo (data/koshas) or in a separate repo served over a CDN.
+  // Set window.KOSHA_DATA_BASE (e.g. a jsDelivr /gh/…/data/koshas URL) to point
+  // the app at the full external corpus once it outgrows the Pages repo.
+  var BASE = (window.KOSHA_DATA_BASE || 'data/koshas').replace(/\/+$/, '');
+  var V = '?v=1.2';
   var PREF_LANG = (localStorage.getItem('app_kosha_pref_lang') || 'kn'); // user's language (Kannada)
   var LANG_NAME = { sa: 'संस्कृतम्', kn: 'ಕನ್ನಡ', en: 'English', hi: 'हिन्दी',
                     bn: 'বাংলা', te: 'తెలుగు', ta: 'தமிழ்', fr: 'Français', de: 'Deutsch' };
   var cache = {}, manifest = null;
+
+  // ---- admin-controlled visibility (respected at query time) ----------------
+  // The Kosha admin dashboard (kosha-admin.html) writes a list of dictionary
+  // slugs to hide from search WITHOUT deleting their data. We read it fresh on
+  // every query so a change in the admin tab takes effect on the next search.
+  function hiddenDicts() {
+    try { var a = JSON.parse(localStorage.getItem('kosha_hidden_dicts') || '[]'); return Array.isArray(a) ? a : []; }
+    catch (e) { return []; }
+  }
+
+  // ---- BYOK Gemini credentials (shared with the rest of the app) ------------
+  // The key/model are set in the main app (⚙️ Settings → Gemini) as
+  // user_gemini_key / user_gemini_model, or on the Ashtadhyayi page as
+  // dge.ash.gkey / dge.ash.gmodel (JSON-encoded). Older builds used the bare
+  // gemini_api_key / gemini_model names. We accept all three so the pivot works
+  // no matter where the user saved their key. (Bug: the old code read ONLY the
+  // bare names, which nothing in the app ever writes, so it always failed.)
+  function lsRaw(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lsJSON(k) { try { var v = localStorage.getItem(k); return v == null ? null : JSON.parse(v); } catch (e) { return null; } }
+  function geminiKey() {
+    return (lsRaw('user_gemini_key') || lsJSON('dge.ash.gkey') || lsRaw('gemini_api_key') || '').toString().trim();
+  }
+  function geminiModel() {
+    return (lsRaw('user_gemini_model') || (window.appConfig && window.appConfig.geminiModel) ||
+            lsJSON('dge.ash.gmodel') || lsRaw('gemini_model') || '').toString().trim();
+  }
 
   function j(path) {
     if (cache[path]) return cache[path];
@@ -25,15 +62,6 @@
   }
   function safeBucket(b) { return b.replace(/[^0-9A-Za-z_]/g, function (c) {
     return '%' + c.charCodeAt(0).toString(16).padStart(2, '0'); }) || '_'; }
-
-  // ---- admin-controlled visibility (respected at query time) ----------------
-  // The Kosha admin dashboard (kosha-admin.html) writes a list of dictionary
-  // slugs to hide from search WITHOUT deleting their data. Read fresh on every
-  // query so a change in the admin tab takes effect on the next search.
-  function hiddenDicts() {
-    try { var a = JSON.parse(localStorage.getItem('kosha_hidden_dicts') || '[]'); return Array.isArray(a) ? a : []; }
-    catch (e) { return []; }
-  }
 
   // ---- SLP1 + fold (mirrors the importer / the app's search spine) ----------
   function fold(s) {
@@ -46,11 +74,11 @@
   // Return the SLP1 candidate spellings for a raw query. For Latin-script
   // input we try IAST/HK/ITRANS/SLP1 AND a lower-cased pass, because a casual
   // user typing "Madh"/"Rama" title-cased does NOT mean the SLP1/HK special
-  // meanings that capitals carry (capital M = anusvara ṃ, capital H = visarga).
-  // Confirmed for real: "Madh" was read as ṃ+a+dh -> folded to n-initial ->
-  // searched the wrong shard entirely. Any candidate beginning with anusvara
-  // ('M') or visarga ('H') in SLP1 is always a mis-parse (no Sanskrit word
-  // starts with either), so those are dropped outright.
+  // meanings that capitals carry (capital M = anusvara ṃ, capital H = visarga,
+  // etc.). We then DROP any candidate that begins with anusvara ('M') or
+  // visarga ('H') in SLP1 — no Sanskrit word can start with either, so such a
+  // candidate is always a mis-parse. That was the "Madh → न-words" bug: "Madh"
+  // was read as ṃ+a+dh → folded to n-initial → searched the wrong shard.
   function toSLP1list(q) {
     q = (q || '').trim(); if (!q) return [];
     var S = window.Sanscript, out = [];
@@ -77,8 +105,8 @@
   // ---- search ---------------------------------------------------------------
   // Returns { list, exact, q }:
   //   list  — ranked result groups (each group = one headword across dicts)
-  //   exact — true if at least one result's exact SLP1 spelling equals what
-  //           the user typed (used to show a "nearest match" note otherwise)
+  //   exact — true if at least one result's exact SLP1 spelling equals what the
+  //           user typed (used to decide whether to show a "nearest match" note)
   function search(query) {
     return (manifest ? Promise.resolve(manifest) : j(BASE + '/_index/manifest.json')
         .then(function (m) { manifest = m; return m; }))
@@ -107,25 +135,46 @@
                 if (hit) (byFold[fk] = byFold[fk] || []).push.apply(byFold[fk], sh[fk]);
               });
             });
-            // group by (fold, headword); skip records from admin-hidden dictionaries
+            // Group by citation-normalized key (gkey) so रामः/रामं fold in with
+            // राम. Skip records from admin-hidden dictionaries. Each group keeps
+            // its member index-records (with their own fold + headword) so the
+            // detail view can fetch every form.
             var groups = {};
             Object.keys(byFold).sort().forEach(function (fk) {
               byFold[fk].forEach(function (rec) {
                 if (hidden[rec.d]) return;
-                var key = fk + '|' + rec.h;
-                (groups[key] = groups[key] || { fold: fk, hw: rec.h, slp1: rec.s, hl: rec.hl, dicts: [], langs: {} })
-                  .dicts.push(rec);
-                (rec.l || []).forEach(function (l) { groups[key].langs[l] = 1; });
+                var gk = gkey(rec.s);
+                var g = groups[gk] || (groups[gk] = { gkey: gk, members: [], dictSet: {},
+                                                       hwCounts: {}, slps: {}, langs: {} });
+                rec.fold = fk;
+                g.members.push(rec);
+                g.dictSet[rec.d] = 1;
+                g.hwCounts[rec.h] = (g.hwCounts[rec.h] || 0) + 1;
+                g.slps[rec.s] = 1;
+                (rec.l || []).forEach(function (l) { g.langs[l] = 1; });
               });
             });
-            var arr = Object.keys(groups).map(function (k) { return groups[k]; });
-            arr.forEach(function (g) { g.exactSLP1 = !!rawSet[g.slp1]; });
+            var arr = Object.keys(groups).map(function (k) {
+              var g = groups[k];
+              // Display headword: prefer the bare-stem form (slp1 === gkey), else
+              // the most-cited spelling, else the shortest.
+              var base = g.members.filter(function (m) { return m.s === g.gkey; });
+              g.hw = base.length ? base[0].h
+                   : Object.keys(g.hwCounts).sort(function (a, b) {
+                       return g.hwCounts[b] - g.hwCounts[a] || a.length - b.length; })[0];
+              g.slp1 = g.gkey;
+              g.dicts = g.members;                       // for the "N कोश" count
+              g.dictCount = Object.keys(g.dictSet).length;
+              g.exactSLP1 = Object.keys(g.slps).some(function (s) { return rawSet[s]; });
+              g.foldExact = g.members.some(function (m) { return foldSet[m.fold]; });
+              return g;
+            });
             // Ranking: exact-SLP1 (राम beats रम when you typed राम) → exact-fold
             // → shorter headword → alphabetical.
             arr.sort(function (a, b) {
               var sa = a.exactSLP1 ? 0 : 1, sb = b.exactSLP1 ? 0 : 1;
               if (sa !== sb) return sa - sb;
-              var ea = foldSet[a.fold] ? 0 : 1, eb = foldSet[b.fold] ? 0 : 1;
+              var ea = a.foldExact ? 0 : 1, eb = b.foldExact ? 0 : 1;
               if (ea !== eb) return ea - eb;
               return a.hw.length - b.hw.length || a.hw.localeCompare(b.hw);
             });
@@ -135,37 +184,35 @@
   }
 
   // ---- full entry (tier-2) --------------------------------------------------
-  function loadEntry(fold, headword) {
-    var bucket = fold.slice(0, (manifest.entry_shard_len || 3));
+  // A result group may span several headword-forms (राम, रामः, रामं) across
+  // several dictionaries. Fetch each distinct (dict, fold, headword) member and
+  // merge the items per dictionary.
+  function loadEntry(group) {
     var dicts = manifest.dictionaries;
+    var eLen = manifest.entry_shard_len || 3;
     var hidden = {}; hiddenDicts().forEach(function (s) { hidden[s] = 1; });
-    return Promise.all(Object.keys(dicts).filter(function (slug) { return !hidden[slug]; }).map(function (slug) {
-      var cat = dicts[slug].category;
-      return j(BASE + '/' + cat + '/' + slug + '/e/' + safeBucket(bucket) + '.json')
+    var seen = {}, tasks = [];
+    (group.members || []).forEach(function (m) {
+      if (hidden[m.d] || !dicts[m.d]) return;
+      var key = m.d + '|' + m.fold + '|' + m.h; if (seen[key]) return; seen[key] = 1;
+      tasks.push(m);
+    });
+    return Promise.all(tasks.map(function (m) {
+      var cat = dicts[m.d].category, bucket = m.fold.slice(0, eLen);
+      return j(BASE + '/' + cat + '/' + m.d + '/e/' + safeBucket(bucket) + '.json')
         .then(function (sh) {
-          if (!sh || !sh[fold]) return null;
-          var items = sh[fold].filter(function (it) { return it.headword === headword; });
-          return items.length ? { slug: slug, meta: dicts[slug], items: items } : null;
+          if (!sh || !sh[m.fold]) return null;
+          var items = sh[m.fold].filter(function (it) { return it.headword === m.h; });
+          return items.length ? { slug: m.d, items: items } : null;
         });
-    })).then(function (a) { return a.filter(Boolean); });
-  }
-
-  // ---- BYOK Gemini credentials (shared with the rest of the app) ------------
-  // The key/model are set in the main app (⚙️ Settings → Gemini) as
-  // user_gemini_key / user_gemini_model, or on the Ashtadhyayi page as
-  // dge.ash.gkey / dge.ash.gmodel (JSON-encoded). Older builds used the bare
-  // gemini_api_key / gemini_model names. Accept all three so the pivot works
-  // no matter where the user saved their key -- confirmed for real that the
-  // old code read ONLY the bare names, which nothing in the app ever writes
-  // to, so the pivot always failed the "no key" check.
-  function lsRaw(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
-  function lsJSON(k) { try { var v = localStorage.getItem(k); return v == null ? null : JSON.parse(v); } catch (e) { return null; } }
-  function geminiKey() {
-    return (lsRaw('user_gemini_key') || lsJSON('dge.ash.gkey') || lsRaw('gemini_api_key') || '').toString().trim();
-  }
-  function geminiModel() {
-    return (lsRaw('user_gemini_model') || (window.appConfig && window.appConfig.geminiModel) ||
-            lsJSON('dge.ash.gmodel') || lsRaw('gemini_model') || '').toString().trim();
+    })).then(function (a) {
+      var bySlug = {}, order = [];
+      a.filter(Boolean).forEach(function (r) {
+        if (!bySlug[r.slug]) { bySlug[r.slug] = { slug: r.slug, meta: dicts[r.slug], items: [] }; order.push(r.slug); }
+        bySlug[r.slug].items.push.apply(bySlug[r.slug].items, r.items);
+      });
+      return order.map(function (s) { return bySlug[s]; });
+    });
   }
 
   // ---- BYOK Gemini translate pivot -----------------------------------------
@@ -199,8 +246,8 @@
     var list = result.list || [];
     resBox.innerHTML = '';
     if (!list.length) { resBox.appendChild(el('div', 'kosha-empty', 'No headwords found.')); return; }
-    // If nothing matches the exact spelling typed, say so rather than letting
-    // a near-neighbour (e.g. रम for राम) look like the answer.
+    // If nothing matches the exact spelling typed, say so rather than letting a
+    // near-neighbour (e.g. रम for राम) look like the answer.
     if (!result.exact && result.q) {
       resBox.appendChild(el('div', 'kosha-nearest',
         'No exact headword for “' + esc(tl(result.q)) + '”. Showing the nearest matches:'));
@@ -210,7 +257,7 @@
       var chips = Object.keys(g.langs).map(function (l) {
         return '<span class="kosha-chip">' + (LANG_NAME[l] || l) + '</span>'; }).join('');
       row.innerHTML = '<span class="kosha-hw">' + esc(tl(g.hw)) + '</span>' +
-        '<span class="kosha-count">' + g.dicts.length + ' कोश</span>' + chips;
+        '<span class="kosha-count">' + (g.dictCount || g.dicts.length) + ' कोश</span>' + chips;
       row.onclick = function () { openEntry(g, detail); };
       resBox.appendChild(row);
     });
@@ -218,7 +265,7 @@
 
   function openEntry(g, detail) {
     detail.innerHTML = '<div class="kosha-loading">…</div>';
-    loadEntry(g.fold, g.hw).then(function (perDict) {
+    loadEntry(g).then(function (perDict) {
       detail.innerHTML = '';
       detail.appendChild(el('h2', 'kosha-title', esc(tl(g.hw)) + ' <span class="kosha-slp1">' + esc(g.slp1) + '</span>'));
       if (!perDict.length) { detail.appendChild(el('div', 'kosha-empty', 'No full entry found.')); return; }
@@ -228,6 +275,8 @@
         card.appendChild(el('div', 'kosha-src',
           esc(d.meta.name) + ' <span class="kosha-lic' + (lic ? ' ok' : '') + '">' + esc(d.meta.license || '') + '</span>'));
         d.items.forEach(function (it) {
+          // when a dict's form differs from the group headword (रामः under राम), label it
+          if (it.headword && it.headword !== g.hw) card.appendChild(el('div', 'kosha-altform', esc(tl(it.headword))));
           it.senses.forEach(function (s, i) {
             var sd = el('div', 'kosha-sense');
             var glossLang = s.gloss_language || d.meta.gloss_language;
@@ -252,12 +301,6 @@
                   var out = el('div', 'kosha-xl-out', '<span class="kosha-lang">' + (LANG_NAME[target] || target) + ' *</span> ' + esc(t));
                   sd.appendChild(out); btn.remove();
                 }).catch(function (e) {
-                  // Previously left the failure reason only in a hover
-                  // tooltip on a bare "⚠" glyph, AND permanently removed the
-                  // button on failure with no way to retry -- confirmed for
-                  // real that no one finds a hover tooltip. Show the reason
-                  // inline and restore the button so a fixed key/model can
-                  // be retried without re-searching.
                   btn.disabled = false; btn.textContent = label;
                   var err = el('div', 'kosha-xl-err', '⚠ ' + esc(e && e.message ? e.message : 'Translation failed.'));
                   sd.appendChild(err);
@@ -303,6 +346,7 @@
       '.kosha-slp1{font-size:14px;color:var(--muted-text,#999);font-weight:400}',
       '.kosha-card{border:1px solid var(--card-border,#e6ddcf);border-radius:10px;padding:12px;margin:0 0 14px}',
       '.kosha-src{font-weight:600;margin-bottom:8px}',
+      '.kosha-altform{font-size:14px;font-weight:600;color:var(--muted-text,#8a5a2b);margin:6px 0 0}',
       '.kosha-lic{font-size:11px;color:#a33;border:1px solid #d99;border-radius:8px;padding:0 6px;margin-left:6px;font-weight:400}',
       '.kosha-lic.ok{color:#286;border-color:#8c9}',
       '.kosha-sense{padding:6px 0;border-top:1px dashed var(--card-border,#eee)}',
