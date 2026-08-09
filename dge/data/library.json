@@ -1712,7 +1712,8 @@
     },
     {
       "path": "dge/data/smritis/vishnu_smriti/data.json",
-      "populated": false
+      "populated": true,
+      "title": "विष्णुस्मृतिः"
     },
     {
       "path": "dge/data/smritis/shankha_smriti/data.json",
