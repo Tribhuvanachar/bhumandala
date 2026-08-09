@@ -104,13 +104,27 @@ _HV_MARKER = re.compile(
 )
 _HV_EDITORIAL    = re.compile(r"\[[hk]:.*?:[hk]\]", re.DOTALL)   # [h:...:h] header, [k:...:k] commentary
 _HV_INTERLOCUTOR = re.compile(r"\{[^}]*\}")                      # {speaker uvaca:} tags
-_HV_HEADER_RULE  = re.compile(r"_{6,}")                          # GRETIL's header/body separator rule
+_HV_HEADER_RULE  = re.compile(r"_{6,}")                          # GRETIL's header/body separator rule (older pages)
+# This plaintext transformation's own metadata block -- plain English
+# ("Editorial lines: = header = commentary ## Revisions: ... TEI encoding by
+# mass conversion of GRETIL's Sanskrit corpus") -- ends in a literal "# text"
+# marker and carries NO underscore-rule separator at all. Confirmed for real:
+# without this anchor, that whole English header got run through iast_to_dev()
+# as if it were IAST and landed as phonetic Devanagari garbage prepended to
+# the mangala verse (the marker-line fallback below doesn't help either,
+# since header and verse text sit on effectively the same unbroken span).
+_HV_HEADER_END = re.compile(r"#\s*text\b", re.IGNORECASE)
 
 def _hv_strip_header(text):
     m = _HV_MARKER.search(text)
     if m is None:
         return text
     head = text[:m.start()]
+    end_m = None
+    for e in _HV_HEADER_END.finditer(head):
+        end_m = e
+    if end_m is not None:
+        return text[end_m.end():]
     rule_end = None
     for r in _HV_HEADER_RULE.finditer(head):
         rule_end = r.end()
