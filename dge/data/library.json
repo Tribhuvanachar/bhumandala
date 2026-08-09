@@ -2610,7 +2610,8 @@
     },
     {
       "path": "dge/data/itihasas/harivamsha/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "हरिवंशः"
     },
     {
       "path": "dge/data/kavya/raghuvamsha/mula/data.json",
