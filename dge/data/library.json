@@ -5,51 +5,63 @@
   "granthas": [
     {
       "path": "dge/data/puranas/bhagavata_purana/skandha_01/data.json",
-      "populated": false
+      "populated": true,
+      "title": "श्रीमद्भागवतम् स्कन्धः 1"
     },
     {
       "path": "dge/data/puranas/bhagavata_purana/skandha_02/data.json",
-      "populated": false
+      "populated": true,
+      "title": "श्रीमद्भागवतम् स्कन्धः 2"
     },
     {
       "path": "dge/data/puranas/bhagavata_purana/skandha_03/data.json",
-      "populated": false
+      "populated": true,
+      "title": "श्रीमद्भागवतम् स्कन्धः 3"
     },
     {
       "path": "dge/data/puranas/bhagavata_purana/skandha_04/data.json",
-      "populated": false
+      "populated": true,
+      "title": "श्रीमद्भागवतम् स्कन्धः 4"
     },
     {
       "path": "dge/data/puranas/bhagavata_purana/skandha_05/data.json",
-      "populated": false
+      "populated": true,
+      "title": "श्रीमद्भागवतम् स्कन्धः 5"
     },
     {
       "path": "dge/data/puranas/bhagavata_purana/skandha_06/data.json",
-      "populated": false
+      "populated": true,
+      "title": "श्रीमद्भागवतम् स्कन्धः 6"
     },
     {
       "path": "dge/data/puranas/bhagavata_purana/skandha_07/data.json",
-      "populated": false
+      "populated": true,
+      "title": "श्रीमद्भागवतम् स्कन्धः 7"
     },
     {
       "path": "dge/data/puranas/bhagavata_purana/skandha_08/data.json",
-      "populated": false
+      "populated": true,
+      "title": "श्रीमद्भागवतम् स्कन्धः 8"
     },
     {
       "path": "dge/data/puranas/bhagavata_purana/skandha_09/data.json",
-      "populated": false
+      "populated": true,
+      "title": "श्रीमद्भागवतम् स्कन्धः 9"
     },
     {
       "path": "dge/data/puranas/bhagavata_purana/skandha_10/data.json",
-      "populated": false
+      "populated": true,
+      "title": "श्रीमद्भागवतम् स्कन्धः 10"
     },
     {
       "path": "dge/data/puranas/bhagavata_purana/skandha_11/data.json",
-      "populated": false
+      "populated": true,
+      "title": "श्रीमद्भागवतम् स्कन्धः 11"
     },
     {
       "path": "dge/data/puranas/bhagavata_purana/skandha_12/data.json",
-      "populated": false
+      "populated": true,
+      "title": "श्रीमद्भागवतम् स्कन्धः 12"
     },
     {
       "path": "dge/data/puranas/vishnu_purana/amsa_01/data.json",
@@ -141,103 +153,128 @@
     },
     {
       "path": "dge/data/itihasas/ramayana/bala_kanda/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "वाल्मीकिरामायणम् बालकाण्डः"
     },
     {
       "path": "dge/data/itihasas/ramayana/ayodhya_kanda/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "वाल्मीकिरामायणम् अयोध्याकाण्डः"
     },
     {
       "path": "dge/data/itihasas/ramayana/aranya_kanda/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "वाल्मीकिरामायणम् अरण्यकाण्डः"
     },
     {
       "path": "dge/data/itihasas/ramayana/kishkindha_kanda/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "वाल्मीकिरामायणम् किष्किन्धाकाण्डः"
     },
     {
       "path": "dge/data/itihasas/ramayana/sundara_kanda/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "वाल्मीकिरामायणम् सुन्दरकाण्डः"
     },
     {
       "path": "dge/data/itihasas/ramayana/yuddha_kanda/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "वाल्मीकिरामायणम् युद्धकाण्डः"
     },
     {
       "path": "dge/data/itihasas/ramayana/uttara_kanda/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "वाल्मीकिरामायणम् उत्तरकाण्डः"
     },
     {
       "path": "dge/data/itihasas/mahabharata/adi_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् आदिपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/sabha_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् सभापर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/vana_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् वनपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/virata_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् विराटपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/udyoga_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् उद्योगपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/bhishma_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् भीष्मपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/drona_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् द्रोणपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/karna_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् कर्णपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/shalya_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् शल्यपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/sauptika_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् सौप्तिकपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/stri_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् स्त्रीपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/shanti_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् शान्तिपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/anushasana_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् अनुशासनपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/ashvamedhika_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् अश्वमेधिकपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/ashramavasika_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् आश्रमवासिकपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/mausala_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् मौसलपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/mahaprasthanika_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् महाप्रस्थानिकपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/svargarohana_parva/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "महाभारतम् स्वर्गारोहणपर्व"
     },
     {
       "path": "dge/data/itihasas/mahabharata/harivamsa/harivamsa_parva/mula/data.json",
@@ -1648,15 +1685,18 @@
     },
     {
       "path": "dge/data/smritis/manu_smriti/data.json",
-      "populated": false
+      "populated": true,
+      "title": "मनुस्मृतिः"
     },
     {
       "path": "dge/data/smritis/yajnavalkya_smriti/data.json",
-      "populated": false
+      "populated": true,
+      "title": "याज्ञवल्क्यस्मृतिः"
     },
     {
       "path": "dge/data/smritis/parashara_smriti/data.json",
-      "populated": false
+      "populated": true,
+      "title": "पराशरस्मृतिः"
     },
     {
       "path": "dge/data/smritis/gautama_smriti/data.json",
@@ -2444,7 +2484,8 @@
     },
     {
       "path": "dge/data/smritis/narada_smriti/data.json",
-      "populated": false
+      "populated": true,
+      "title": "नारदस्मृतिः"
     },
     {
       "path": "dge/data/itihasas/harivamsha/mula/data.json",
@@ -2452,19 +2493,23 @@
     },
     {
       "path": "dge/data/kavya/raghuvamsha/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "रघुवंशम्"
     },
     {
       "path": "dge/data/kavya/kumarasambhava/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "कुमारसम्भवम्"
     },
     {
       "path": "dge/data/kavya/kiratarjuniya/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "किरातार्जुनीयम्"
     },
     {
       "path": "dge/data/kavya/shishupalavadha/mula/data.json",
-      "populated": false
+      "populated": true,
+      "title": "शिशुपालवधः"
     }
   ]
 }
