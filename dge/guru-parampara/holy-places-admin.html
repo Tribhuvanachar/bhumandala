@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holy Places Curation · DGE Guru Parampara (super-admin)</title>
+<style>
+  :root{--bg:#f5efe4;--panel:#fffdf8;--panel2:#fbf4e7;--ink:#2b2117;--muted:#8b7c66;--line:#e6dac6;
+    --accent:#9a3b1b;--accent2:#1f6f5c;--gold:#b6862c;--ok:#2f9e6f;--pend:#b9ab90;--part:#c98a2b;
+    --shadow:0 2px 16px rgba(90,60,20,.10);--radius:14px}
+  body.dark{--bg:#14161c;--panel:#1b1f27;--panel2:#20242f;--ink:#e9e3d5;--muted:#98a0b2;--line:#2b3140;
+    --accent:#e0794b;--accent2:#5bb894;--gold:#e0b25a;--ok:#5bb894;--pend:#5a5f6b;--part:#e0b25a;--shadow:0 6px 26px rgba(0,0,0,.4)}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.5;
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;transition:.3s}
+  header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+  .bar{max-width:1180px;margin:0 auto;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .brand{font-weight:700}.brand small{color:var(--muted);font-weight:400}.spacer{flex:1}
+  .crumb{font-size:13px;color:var(--muted)}.crumb a{color:var(--accent2);text-decoration:none}
+  .icon,.btn{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:7px 12px;cursor:pointer;color:var(--ink);font:inherit;font-size:13px}
+  .btn.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn.ok{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+  main{max-width:1180px;margin:0 auto;padding:16px 14px 90px}
+  .totals{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;box-shadow:var(--shadow)}
+  .stat b{font-size:24px;display:block}.stat span{color:var(--muted);font-size:12px}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0 12px}
+  .toolbar input[type=search]{flex:1;min-width:180px;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:9px 12px;font:inherit;color:var(--ink)}
+  .chip{border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:6px 11px;cursor:pointer;font-size:13px;color:var(--muted)}
+  .chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .list{display:flex;flex-direction:column;gap:8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+  .card.hiddenRow{opacity:.5}
+  .card.approved{border-left:4px solid var(--ok)}
+  .chd{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .chd .nm{font-weight:700;flex:1;min-width:140px}
+  .chd .nm small{color:var(--muted);font-weight:400}
+  .badge{font-size:11px;border-radius:8px;padding:1px 7px;border:1px solid var(--line);color:var(--muted)}
+  .badge.geo{color:var(--accent2);border-color:var(--accent2)}
+  .badge.img{color:var(--gold);border-color:var(--gold)}
+  .badge.appr{color:var(--ok);border-color:var(--ok)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:7px;margin-top:8px}
+  .fld{display:flex;flex-direction:column;gap:2px}
+  .fld label{font-size:11px;color:var(--muted)}
+  .fld input,.fld select{font:inherit;font-size:13px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);color:var(--ink)}
+  .rowbtns{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .mini{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:5px 9px;cursor:pointer;color:var(--ink);font:inherit;font-size:12px}
+  .mini.on{background:var(--ok);color:#fff;border-color:var(--ok)}
+  .thumb{width:52px;height:52px;object-fit:cover;border-radius:8px;border:1px solid var(--line);flex:none}
+  .gate{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:24px;text-align:center}
+  .gate input{font:inherit;font-size:18px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink)}
+  .muted{color:var(--muted);font-size:13px}
+  a{color:var(--accent2)}
+  .note{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:14px;font-size:13px;color:var(--muted)}
+  code{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 5px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="gate" id="gate">
+  <div style="font-size:22px;font-weight:700">🔐 Holy Places Curation</div>
+  <div class="muted">Super-admin only. Enter the passkey.</div>
+  <input id="gk" type="password" placeholder="passkey" autocomplete="off">
+  <button class="btn pri" id="gbtn">Enter</button>
+  <div class="muted" style="max-width:440px">Client-side gate for convenience, not real security — this page and its data are public in the repo. Edits live only in this browser until you export.</div>
+</div>
+
+<header style="display:none" id="hdr">
+  <div class="bar">
+    <div class="crumb"><a href="../index.html">⌂ DGE</a> › <a href="index.html">Guru Parampara</a> › Holy Places</div>
+    <span class="spacer"></span>
+    <button class="icon" id="theme">◐</button>
+    <button class="btn" id="addNew">＋ Add place</button>
+    <button class="btn" id="reset" title="Discard local edits">↺ Discard edits</button>
+    <button class="btn ok" id="expImg">⬇ Images JSON</button>
+    <button class="btn pri" id="expPlaces">⬇ Holy-places JSON</button>
+  </div>
+</header>
+
+<main id="app" style="display:none">
+  <div style="font-weight:700;font-size:19px;margin-bottom:2px">Which places are “holy”?</div>
+  <div class="muted" style="margin-bottom:12px">Curate every Brindavana / tīrtha in the dataset: set coordinates, approve or hide entries, and attach a licence-checked image. The <b>holy-places JSON</b> uses the shared shape the Tīrtha Prabandha “nearest holy place” finder consumes.</div>
+  <div class="totals" id="totals"></div>
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="Filter by place, saint, or town…">
+    <button class="chip on" data-f="all">All</button>
+    <button class="chip" data-f="nogeo">No coords</button>
+    <button class="chip" data-f="geo">Has coords</button>
+    <button class="chip" data-f="approved">Approved</button>
+    <button class="chip" data-f="image">With image</button>
+    <button class="chip" data-f="noimage">Needs image</button>
+    <button class="chip" data-f="hidden">Hidden</button>
+  </div>
+  <div class="list" id="list"></div>
+  <div class="note">
+    <b>Shared data shape (Stream 4 contract).</b> The holy-places JSON exports one record per place as
+    <code>{id, name, lat, lng, type, sourceDataset, approved, source, saint}</code> plus the image fields
+    <code>image, image_page, image_credit, image_licence</code>. Tīrtha Prabandha places should export the
+    same shape with <code>sourceDataset:"tirtha-prabandha"</code> so both merge into one nearest-place finder.
+    The <b>Images JSON</b> exports the Brindavana image registry (<code>data/brindavana_images.json</code> shape)
+    to drop back into the Guru Parampara pipeline — the 2D/3D detail cards render <code>image</code> with its
+    <code>image_credit · image_licence</code> caption once you fill and export it.
+    <br><br>
+    <b>Licence rule:</b> only paste an <code>image</code> URL after checking that specific file’s own licence
+    tag on Wikimedia Commons (CC-BY / CC-BY-SA / CC0 / public-domain only). Record the licence in
+    <code>image_licence</code>. Leave blank if nothing freely-licensed exists — never substitute an unrelated image.
+  </div>
+</main>
+
+<script>
+(function(){
+  var PASSKEY="SHRI108";
+  var $=function(s){return document.querySelector(s);};
+  var LSK="dge.holyplaces.edits", LSADD="dge.holyplaces.added", LSHIDE="dge.holyplaces.hidden", LSDARK="dge.holyplaces.dark";
+  if(sessionStorage.getItem("dge.admin.ok")==="1") start();
+  else {
+    $("#gate").style.display="flex";
+    var tryK=function(){ if($("#gk").value.trim()===PASSKEY){ sessionStorage.setItem("dge.admin.ok","1"); location.reload(); } else { $("#gk").value=""; $("#gk").placeholder="wrong — try again"; } };
+    $("#gbtn").onclick=tryK; $("#gk").addEventListener("keydown",function(e){ if(e.key==="Enter") tryK(); }); $("#gk").focus();
+  }
+
+  var PLACES=[], EDITS={}, ADDED=[], HIDDEN, FILTER="all";
+  function load(k,def){ try{ return JSON.parse(localStorage.getItem(k))||def; }catch(e){ return def; } }
+  function save(){ localStorage.setItem(LSK,JSON.stringify(EDITS)); localStorage.setItem(LSADD,JSON.stringify(ADDED)); localStorage.setItem(LSHIDE,JSON.stringify([].concat.apply([],[Array.from(HIDDEN)]))); }
+  function esc(s){ return (s==null?"":String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  function start(){
+    if(sessionStorage.getItem("dge.admin.ok")!=="1") return;
+    $("#gate").style.display="none"; $("#hdr").style.display=""; $("#app").style.display="";
+    EDITS=load(LSK,{}); ADDED=load(LSADD,[]); HIDDEN=new Set(load(LSHIDE,[]));
+    if(localStorage.getItem(LSDARK)==="1") document.body.classList.add("dark");
+    $("#theme").onclick=function(){ document.body.classList.toggle("dark"); localStorage.setItem(LSDARK, document.body.classList.contains("dark")?"1":"0"); };
+    $("#q").addEventListener("input",render);
+    document.querySelectorAll(".chip[data-f]").forEach(function(c){ c.onclick=function(){ FILTER=c.dataset.f; document.querySelectorAll(".chip[data-f]").forEach(function(x){x.classList.toggle("on",x===c);}); render(); }; });
+    $("#addNew").onclick=addNew;
+    $("#reset").onclick=function(){ if(confirm("Discard all local edits (coords, approvals, images, added places)?")){ localStorage.removeItem(LSK); localStorage.removeItem(LSADD); localStorage.removeItem(LSHIDE); location.reload(); } };
+    $("#expPlaces").onclick=exportPlaces;
+    $("#expImg").onclick=exportImages;
+    fetch("data/parampara.json").then(function(r){return r.json();}).then(function(d){ seed(d); render(); })
+      .catch(function(e){ $("#list").innerHTML='<div class="muted" style="padding:14px">Could not load data/parampara.json ('+e+'). Serve this page from dge/guru-parampara/.</div>'; });
+  }
+
+  // Build the place list from every node that has a brindavana (primary) or place-only.
+  function seed(d){
+    var imgs=d.brindavana_images||{};
+    PLACES=[];
+    d.nodes.forEach(function(n){
+      if(!n.brindavana && !n.place) return;
+      var im=imgs[n.id]||{};
+      PLACES.push({
+        id:n.id, name:n.brindavana||n.place, saint:n.name, town:n.place||"",
+        type: n.brindavana? "brindavana":"place",
+        sourceDataset:"guru-parampara",
+        lat:null, lng:null, approved:false, source:(n.sources&&n.sources[0])||"",
+        image:im.image||null, image_page:im.image_page||null, image_credit:im.image_credit||null,
+        image_licence:im.image_licence||null, commons_search:im.commons_search||null,
+        seeded:true
+      });
+    });
+    // merge any user-added places
+    ADDED.forEach(function(a){ PLACES.push(Object.assign({seeded:false},a)); });
+  }
+  // effective record = seed overlaid with local edits
+  function eff(p){ var e=EDITS[p.id]||{}; return Object.assign({},p,e); }
+  function setField(id,k,v){ if(!EDITS[id])EDITS[id]={}; EDITS[id][k]=v; save(); }
+
+  function num(v){ if(v===""||v==null)return null; var f=parseFloat(v); return isFinite(f)?f:null; }
+
+  function stat(b,s){ return '<div class="stat"><b>'+b+'</b><span>'+s+'</span></div>'; }
+  function renderTotals(){
+    var recs=PLACES.map(eff), total=recs.length;
+    var geo=recs.filter(function(r){return r.lat!=null&&r.lng!=null;}).length;
+    var appr=recs.filter(function(r){return r.approved;}).length;
+    var img=recs.filter(function(r){return r.image;}).length;
+    var hid=recs.filter(function(r){return HIDDEN.has(r.id);}).length;
+    $("#totals").innerHTML=
+      stat(total,"holy places")+
+      stat(geo+" / "+total,"with lat/long ("+pct(geo,total)+"%)")+
+      stat(appr,"approved")+
+      stat(img+" / "+total,"with image ("+pct(img,total)+"%)")+
+      stat(hid,"hidden");
+  }
+  function pct(a,b){ return b?Math.round(a/b*100):0; }
+
+  function passFilter(r){
+    if(FILTER==="all") return true;
+    if(FILTER==="nogeo") return r.lat==null||r.lng==null;
+    if(FILTER==="geo") return r.lat!=null&&r.lng!=null;
+    if(FILTER==="approved") return !!r.approved;
+    if(FILTER==="image") return !!r.image;
+    if(FILTER==="noimage") return !r.image;
+    if(FILTER==="hidden") return HIDDEN.has(r.id);
+    return true;
+  }
+
+  function render(){
+    renderTotals();
+    var query=($("#q").value||"").trim().toLowerCase();
+    var html="";
+    PLACES.map(eff).forEach(function(r){
+      if(query && (r.name+" "+r.saint+" "+r.town+" "+r.id).toLowerCase().indexOf(query)<0) return;
+      if(!passFilter(r)) return;
+      html+=cardHtml(r);
+    });
+    $("#list").innerHTML=html||'<div class="muted" style="padding:14px">No places match.</div>';
+    wire();
+  }
+
+  function cardHtml(r){
+    var hid=HIDDEN.has(r.id), appr=!!r.approved, geo=(r.lat!=null&&r.lng!=null);
+    var badges="";
+    if(appr) badges+='<span class="badge appr">approved</span>';
+    if(geo) badges+='<span class="badge geo">geo</span>';
+    if(r.image) badges+='<span class="badge img">image</span>';
+    var thumb=r.image?'<img class="thumb" src="'+esc(r.image)+'" alt="" loading="lazy">':'';
+    var typeOpts=["brindavana","tirtha","temple","matha","place","other"].map(function(t){return '<option'+(r.type===t?" selected":"")+'>'+t+'</option>';}).join("");
+    return '<div class="card'+(hid?" hiddenRow":"")+(appr?" approved":"")+'" data-id="'+esc(r.id)+'">'+
+      '<div class="chd">'+thumb+
+        '<div class="nm">'+esc(r.name)+' <small>· '+esc(r.saint)+(r.town?' — '+esc(r.town):'')+'</small></div>'+
+        badges+
+      '</div>'+
+      '<div class="grid">'+
+        fld(r.id,"lat","Latitude",r.lat,"number","e.g. 15.9457")+
+        fld(r.id,"lng","Longitude",r.lng,"number","e.g. 77.4386")+
+        selFld(r.id,"type","Type",typeOpts)+
+        fld(r.id,"source","Source / citation",r.source,"text","")+
+      '</div>'+
+      '<div class="grid">'+
+        fld(r.id,"image","Image URL (thumb)",r.image,"text","Commons thumb URL")+
+        fld(r.id,"image_page","Commons File: page",r.image_page,"text","https://commons.wikimedia.org/wiki/File:…")+
+        fld(r.id,"image_credit","Author / credit",r.image_credit,"text","")+
+        fld(r.id,"image_licence","Licence",r.image_licence,"text","e.g. CC BY-SA 4.0")+
+      '</div>'+
+      '<div class="rowbtns">'+
+        '<button class="mini'+(appr?" on":"")+'" data-act="approve">'+(appr?"✓ Approved":"Approve")+'</button>'+
+        '<button class="mini" data-act="hide">'+(hid?"🚫 Hidden — show":"👁 Hide")+'</button>'+
+        (r.commons_search?'<a class="mini" href="'+esc(r.commons_search)+'" target="_blank" rel="noopener">🔎 Commons search</a>':'')+
+        (r.seeded===false?'<button class="mini" data-act="del">🗑 Remove</button>':'')+
+      '</div>'+
+    '</div>';
+  }
+  function fld(id,k,label,val,type,ph){ return '<div class="fld"><label>'+esc(label)+'</label><input data-id="'+esc(id)+'" data-k="'+k+'" type="'+type+'" value="'+esc(val==null?"":val)+'" placeholder="'+esc(ph)+'"></div>'; }
+  function selFld(id,k,label,opts){ return '<div class="fld"><label>'+esc(label)+'</label><select data-id="'+esc(id)+'" data-k="'+k+'">'+opts+'</select></div>'; }
+
+  function wire(){
+    document.querySelectorAll('#list input,#list select').forEach(function(el){
+      el.addEventListener("change",function(){
+        var id=el.dataset.id,k=el.dataset.k,v=el.value;
+        if(k==="lat"||k==="lng") v=num(v);
+        setField(id,k,v);
+        if(k==="image") render(); // refresh thumb/badges
+      });
+    });
+    document.querySelectorAll('#list .mini[data-act]').forEach(function(b){
+      b.onclick=function(){
+        var card=b.closest(".card"), id=card.dataset.id, act=b.dataset.act;
+        if(act==="approve"){ var cur=eff(find(id)).approved; setField(id,"approved",!cur); }
+        else if(act==="hide"){ if(HIDDEN.has(id))HIDDEN.delete(id); else HIDDEN.add(id); save(); }
+        else if(act==="del"){ if(confirm("Remove this added place?")){ ADDED=ADDED.filter(function(a){return a.id!==id;}); delete EDITS[id]; save(); seedReload(); return; } }
+        render();
+      };
+    });
+  }
+  function find(id){ for(var i=0;i<PLACES.length;i++) if(PLACES[i].id===id) return PLACES[i]; return {}; }
+  function seedReload(){ fetch("data/parampara.json").then(function(r){return r.json();}).then(function(d){ seed(d); render(); }); }
+
+  function addNew(){
+    var name=prompt("Place / Brindavana name?"); if(!name) return;
+    var id="custom_"+name.toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"")+"_"+Math.random().toString(36).slice(2,6);
+    ADDED.push({id:id,name:name,saint:"",town:"",type:"tirtha",sourceDataset:"guru-parampara",lat:null,lng:null,approved:false,source:"",image:null,image_page:null,image_credit:null,image_licence:null,commons_search:null,seeded:false});
+    save(); seedReload();
+  }
+
+  function collect(){
+    return PLACES.map(eff).map(function(r){
+      return {
+        id:r.id, name:r.name, saint:r.saint||null, town:r.town||null,
+        lat:r.lat==null?null:r.lat, lng:r.lng==null?null:r.lng,
+        type:r.type||"brindavana", sourceDataset:r.sourceDataset||"guru-parampara",
+        approved:!!r.approved, hidden:HIDDEN.has(r.id), source:r.source||null,
+        image:r.image||null, image_page:r.image_page||null, image_credit:r.image_credit||null, image_licence:r.image_licence||null
+      };
+    });
+  }
+  function dl(name,obj){ var blob=new Blob([JSON.stringify(obj,null,1)],{type:"application/json"}); var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name; a.click(); }
+
+  function exportPlaces(){
+    var out={
+      note:"DGE shared holy-place registry. Consumed by Guru Parampara + Tirtha Prabandha (Stream 4) 'nearest holy place' finder. Merge Tirtha places with the same shape using sourceDataset:'tirtha-prabandha'.",
+      schema:{id:"stable id (parampara node id, or custom_*)",name:"place/brindavana name",lat:"decimal degrees or null",lng:"decimal degrees or null",type:"brindavana|tirtha|temple|matha|place|other",sourceDataset:"guru-parampara|tirtha-prabandha",approved:"boolean — vetted for the public map",hidden:"boolean — excluded from public views",source:"citation",saint:"associated figure (optional)",image:"verified image thumb URL (optional)"},
+      generated_by:"holy-places-admin.html",
+      places:collect()
+    };
+    dl("holy-places.json",out);
+  }
+  function exportImages(){
+    var imgs={};
+    PLACES.map(eff).forEach(function(r){
+      imgs[r.id]={saint:r.saint,brindavana:r.name,place:r.town,commons_search:r.commons_search||null,
+        image:r.image||null,image_page:r.image_page||null,image_credit:r.image_credit||null,image_licence:r.image_licence||null,
+        status:(r.image?"verified":(HIDDEN.has(r.id)?"blank":"pending"))};
+    });
+    dl("brindavana_images.json",{_note:"Curation registry for Brindavana images. Drop into dge/guru-parampara/data/ and re-embed into the views (the detail cards render image + image_credit · image_licence). Only fill image after verifying that file's licence on Wikimedia Commons.",images:imgs});
+  }
+})();
+</script>
+</body>
+</html>

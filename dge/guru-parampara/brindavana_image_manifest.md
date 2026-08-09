@@ -2,6 +2,15 @@
 For the Guru Parampara gallery. The user wants **decorated** and **plain** photographs of each Brindavana (Vrindavana). Note: I cannot download or embed third-party photographs here (copyright / content restrictions), so this manifest gives, for each resting place, a **Wikimedia Commons search link** (freely-licensed images you can vet and reuse with attribution) plus the associated saint.
 Workflow suggestion: (1) pull CC-licensed images from the Commons links below; (2) for shrines without Commons coverage, request photos from the matha or devotee groups (many allow non-commercial dharma-prachara use on request); (3) store two variants per shrine — `decorated/` and `plain/` — keyed by the saint `id` in `parampara.json`.
 
+> **Stream-3 update (Aug 2026).** This manifest is now backed by a machine-readable **curation registry** —
+> `data/brindavana_images.json` (and the embedded `brindavana_images` key in `parampara.json`), one entry per
+> row below (102), all currently `status: "pending"`. The 2D/3D detail cards already render an image the moment
+> a row's `image` (+ `image_page`, `image_credit`, `image_licence`) is filled. Easiest way to fill them:
+> **`holy-places-admin.html`** (SHRI108) → paste a licence-checked Commons URL per shrine → **⬇ Images JSON**.
+> Images were **not** auto-embedded because this build environment cannot reach Commons to verify each file's
+> own licence — and an unverified image must never be substituted. Use only CC-BY / CC-BY-SA / CC0 /
+> public-domain files, and record the licence.
+
 | Saint (id) | Lineage | Brindavana | Place | Wikimedia Commons search |
 |---|---|---|---|---|
 | Padmanabha Tirtha (`padmanabha`) | Core peetha (pre-split) | Nava Brindavana | island in the Tungabhadra near Hampi / Anegundi | [search](https://commons.wikimedia.org/w/index.php?search=Nava%20Brindavana%20island%20in%20the%20Tungabhadra%20near%20Hampi%20/%20Anegundi&title=Special:MediaSearch&type=image) |

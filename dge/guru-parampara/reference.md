@@ -302,14 +302,31 @@ The lineage is modelled as a single **guru → disciple / pontifical-succession 
 | **Kudli Arya Akshobhya Tirtha Matha** |  | centres Akshobhya Tirtha at Kudli | Koodli (Tunga-Bhadra sangama) | medium |
 | **Kukke Subrahmanya Matha** |  | 13th c. | Kukke Subrahmanya | medium |
 
-## Haridasa (Dasa parampara)  ·  5 figures
-| Figure | Purvashrama | Period (CE) | Brindavana / place | Conf. |
-|---|---|---|---|---|
-| **Purandara Dasa** |  | c.1484-1564 |  | medium |
-| **Kanaka Dasa** |  | c.1509-1609 |  | medium |
-| **Vijaya Dasa** |  | c.1682-1755 |  | medium |
-| **Gopala Dasa** |  | c.1721-1769 |  | medium |
-| **Jagannatha Dasa** |  | c.1728-1809 |  | medium |
+## Haridasa (Dasa parampara)  ·  10 figures
+
+The Dāsa Paramparā (Haridāsa movement) runs on a *dasa-dīkṣā* (initiatory) succession rather than a
+pontifical one. Its Vyāsakūṭa fountainheads — **Sripadaraja** (Sripadaraja Matha), **Vyāsatīrtha**
+(Vyasaraja Matha) and **Vādirājatīrtha** (Sode Matha) — appear under their own mathas elsewhere in this
+reference; the **Dāsakūṭa** singers below form the `haridasa` branch, rooted at Vyāsatīrtha via Purandara &
+Kanaka and revived in the 18th c. by Vijaya → Gopāla → Jagannātha Dāsa.
+
+| Figure | Purvashrama | Period (CE) | Ankita (mudra) | Brindavana / place | Conf. |
+|---|---|---|---|---|---|
+| **Purandara Dasa** | Srinivasa Nayaka | c.1470/1484-1564 | Purandara Vitthala | Purandara Mantapa, Hampi | medium |
+| **Kanaka Dasa** | Thimmappa Nayaka | c.1509-1609 | Kagineleya Adikeshava | Kaginele (Kanaka Gurupeetha), Haveri | medium |
+| **Vijaya Dasa** |  | c.1682-1755 | Vijaya Vitthala | Chippagiri (Bhaskara Kshetra), Kurnool dist., AP | medium |
+| **Gopala Dasa** | Bhaganna | c.1721-1762 (also 1769) | Gopala Vitthala | Uttanur, Raichur dist. | medium |
+| **Jagannatha Dasa** | Srinivasacharya | c.1728-1809 | Jagannatha Vitthala | Manvi, Raichur dist. | medium |
+| **Mohana Dasa** | Mohanna (foster son of Vijaya Dasa) | 18th c. | Mohana Vitthala |  | traditional |
+| **Venugopala Dasa** | Panganama Timmanna (a Diwan) | 18th c. | Venugopala Vitthala |  | traditional |
+| **Helavanakatte Giriyamma** |  | 18th c. |  | Helavanakatte | traditional |
+| **Prasanna Venkata Dasa** |  | c.1680-1752 | Prasanna Venkata Vitthala | Bagalkot | traditional |
+| **Kakhandaki Mahipati Dasa** |  | 1611-1681 | Mahipatiraya | Kakhandaki, Vijayapura dist. | traditional |
+
+*Caveats:* Prasanna Venkata Dāsa and Kakhandaki Mahipati Dāsa are shown on the Purandara stream for grouping —
+a firmly documented dasa-dīkṣā guru is not attested for either in accessible sources. Mohana / Venugopāla Dāsa
+and Helavanakatte Giriyamma have no firmly published dates. (Naraharitīrtha, the earliest proto-Haridāsa, sits
+on the `core` trunk, not here.)
 
 ## Principal works of the marquee acharyas
 **Madhvacharya** (1238-1317 CE (mainstream); 1199-1278 CE (older scholarly alt.)) — Brahmasutra Bhashya; Anuvyakhyana (masterpiece); Anubhashya; Gita Bhashya & Gita Tatparya Nirnaya; Bhashyas on 10 Upanishads; Rig Bhashya; Mahabharata Tatparya Nirnaya; Bhagavata Tatparya Nirnaya; Dasa Prakaranas (incl. Tattva Sankhyana, Vishnu Tattva Vinirnaya, Mayavada Khandana); Dvadasha Stotra; Krishnamruta Maharnava; Tantra Sara Sangraha.
