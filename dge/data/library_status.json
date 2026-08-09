@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 562,
-  "loaded": 137,
-  "items": 169558
+  "loaded": 139,
+  "items": 171725
  },
  "sections": {
   "ancillary": {
@@ -28,8 +28,8 @@
   },
   "kavya": {
    "total": 4,
-   "loaded": 2,
-   "items": 3267
+   "loaded": 4,
+   "items": 5434
   },
   "pancharatra_agama": {
    "total": 17,
@@ -211,8 +211,8 @@
   "itihasas/ramayana/sundara_kanda": 2487,
   "itihasas/ramayana/uttara_kanda": 2690,
   "itihasas/ramayana/yuddha_kanda": 4436,
-  "kavya/kiratarjuniya": 0,
-  "kavya/kumarasambhava": 0,
+  "kavya/kiratarjuniya": 1055,
+  "kavya/kumarasambhava": 1112,
   "kavya/raghuvamsha": 1637,
   "kavya/shishupalavadha": 1630,
   "pancharatra_agama/pancharatra_samhitas/ahirbudhnya_samhita": 0,
