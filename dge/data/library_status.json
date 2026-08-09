@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 562,
-  "loaded": 95,
-  "items": 55764
+  "loaded": 102,
+  "items": 74525
  },
  "sections": {
   "ancillary": {
@@ -23,8 +23,8 @@
   },
   "itihasas": {
    "total": 29,
-   "loaded": 0,
-   "items": 0
+   "loaded": 7,
+   "items": 18761
   },
   "kavya": {
    "total": 4,
@@ -204,13 +204,13 @@
   "itihasas/mahabharata/udyoga_parva": 0,
   "itihasas/mahabharata/vana_parva": 0,
   "itihasas/mahabharata/virata_parva": 0,
-  "itihasas/ramayana/aranya_kanda": 0,
-  "itihasas/ramayana/ayodhya_kanda": 0,
-  "itihasas/ramayana/bala_kanda": 0,
-  "itihasas/ramayana/kishkindha_kanda": 0,
-  "itihasas/ramayana/sundara_kanda": 0,
-  "itihasas/ramayana/uttara_kanda": 0,
-  "itihasas/ramayana/yuddha_kanda": 0,
+  "itihasas/ramayana/aranya_kanda": 2060,
+  "itihasas/ramayana/ayodhya_kanda": 3160,
+  "itihasas/ramayana/bala_kanda": 1941,
+  "itihasas/ramayana/kishkindha_kanda": 1987,
+  "itihasas/ramayana/sundara_kanda": 2487,
+  "itihasas/ramayana/uttara_kanda": 2690,
+  "itihasas/ramayana/yuddha_kanda": 4436,
   "kavya/kiratarjuniya": 0,
   "kavya/kumarasambhava": 0,
   "kavya/raghuvamsha": 0,
