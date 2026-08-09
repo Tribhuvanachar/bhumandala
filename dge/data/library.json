@@ -2632,6 +2632,66 @@
       "path": "dge/data/kavya/shishupalavadha/mula/data.json",
       "populated": true,
       "title": "शिशुपालवधः"
+    },
+    {
+      "path": "dge/data/puranas/bhagavata_purana_madhva/skandha_01/data.json",
+      "populated": true,
+      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 1"
+    },
+    {
+      "path": "dge/data/puranas/bhagavata_purana_madhva/skandha_02/data.json",
+      "populated": true,
+      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 2"
+    },
+    {
+      "path": "dge/data/puranas/bhagavata_purana_madhva/skandha_03/data.json",
+      "populated": true,
+      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 3"
+    },
+    {
+      "path": "dge/data/puranas/bhagavata_purana_madhva/skandha_04/data.json",
+      "populated": true,
+      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 4"
+    },
+    {
+      "path": "dge/data/puranas/bhagavata_purana_madhva/skandha_05/data.json",
+      "populated": true,
+      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 5"
+    },
+    {
+      "path": "dge/data/puranas/bhagavata_purana_madhva/skandha_06/data.json",
+      "populated": true,
+      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 6"
+    },
+    {
+      "path": "dge/data/puranas/bhagavata_purana_madhva/skandha_07/data.json",
+      "populated": true,
+      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 7"
+    },
+    {
+      "path": "dge/data/puranas/bhagavata_purana_madhva/skandha_08/data.json",
+      "populated": true,
+      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 8"
+    },
+    {
+      "path": "dge/data/puranas/bhagavata_purana_madhva/skandha_09/data.json",
+      "populated": true,
+      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 9"
+    },
+    {
+      "path": "dge/data/puranas/bhagavata_purana_madhva/skandha_10/data.json",
+      "populated": true,
+      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 10"
+    },
+    {
+      "path": "dge/data/puranas/bhagavata_purana_madhva/skandha_11/data.json",
+      "populated": true,
+      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 11"
+    },
+    {
+      "path": "dge/data/puranas/bhagavata_purana_madhva/skandha_12/data.json",
+      "populated": true,
+      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 12"
     }
   ]
 }

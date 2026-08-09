@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 562,
-  "loaded": 141,
-  "items": 180158
+  "leaves": 574,
+  "loaded": 153,
+  "items": 194801
  },
  "sections": {
   "ancillary": {
@@ -37,9 +37,9 @@
    "items": 0
   },
   "puranas": {
-   "total": 80,
-   "loaded": 12,
-   "items": 14054
+   "total": 92,
+   "loaded": 24,
+   "items": 28697
   },
   "sarvamoola_grantha": {
    "total": 120,
@@ -245,6 +245,18 @@
   "puranas/bhagavata_purana/skandha_10": 3936,
   "puranas/bhagavata_purana/skandha_11": 1366,
   "puranas/bhagavata_purana/skandha_12": 565,
+  "puranas/bhagavata_purana_madhva/skandha_01": 814,
+  "puranas/bhagavata_purana_madhva/skandha_02": 395,
+  "puranas/bhagavata_purana_madhva/skandha_03": 1423,
+  "puranas/bhagavata_purana_madhva/skandha_04": 1472,
+  "puranas/bhagavata_purana_madhva/skandha_05": 640,
+  "puranas/bhagavata_purana_madhva/skandha_06": 857,
+  "puranas/bhagavata_purana_madhva/skandha_07": 767,
+  "puranas/bhagavata_purana_madhva/skandha_08": 930,
+  "puranas/bhagavata_purana_madhva/skandha_09": 969,
+  "puranas/bhagavata_purana_madhva/skandha_10": 4441,
+  "puranas/bhagavata_purana_madhva/skandha_11": 1372,
+  "puranas/bhagavata_purana_madhva/skandha_12": 563,
   "puranas/bhavishya_purana/brahma_parva": 0,
   "puranas/bhavishya_purana/madhyama_parva": 0,
   "puranas/bhavishya_purana/pratisarga_parva": 0,
