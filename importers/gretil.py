@@ -15,7 +15,11 @@ from common import http_get, to_text, iast_to_dev, write_grantha
 GRETIL = {
   "harivamsha":        dict(name="Harivamsha", author="Maharshi Veda Vyasa", unit="adhyaya",
       schema="itihasa_purana_text", target="itihasas/harivamsha/mula",
-      urls=["https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/html/sa_harivaMza.htm"]),
+      # The corpustei *HTML* export (used until now) never matched anything --
+      # see _hv_parse() below for why. This is the plaintext transformation of
+      # the same constituted text, which actually uses the "// HV_a.v" /
+      # "*HV_a.v*n" marker convention _hv_parse() is built for.
+      urls=["https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_harivaMza.txt"]),
   "manu_smriti":       dict(name="Manu Smriti", author="Manu", unit="adhyaya",
       schema="smriti_dharmashastra_text", target="smritis/manu_smriti",
       urls=["https://gretil.sub.uni-goettingen.de/gretil/1_sanskr/6_sastra/4_dharma/smrti/manu2p_u.htm"]),
@@ -86,8 +90,67 @@ def parse(text, name, unit):
     return [{"id": f"{unit}_{c:02d}", "reference": f"{name}, {unit.title()} {c}", "shlokas": sh}
             for c, sh in cantos.items()]
 
+# --- Harivamsha: a genuinely different GRETIL markup convention ---------
+# Every other entry in GRETIL above uses "// ABBR_c.v //" or "Word c.v text /"
+# with a comma-or-dot separator and a symmetric "//...//" wrapper. Harivamsha's
+# plaintext transformation does neither: a verse ends in a BARE "// HV_c.v"
+# (dot separator, no closing "//" -- the ref itself terminates the marker),
+# and a star (secondary-recension) passage ends in "*HV_c.v*n" instead, with
+# "|" as its internal pada separator instead of "/". A regex built for the
+# common pattern matches nothing in this file, which is the actual reason
+# every import attempt wrote 0 shlokas -- not a network/access problem.
+_HV_MARKER = re.compile(
+    r"//\s*HV_(?P<ca>\d+)\.(?P<cv>\d+)|\*HV_(?P<sa>\d+)\.(?P<sv>\d+)\*(?P<sn>\d+)"
+)
+_HV_EDITORIAL    = re.compile(r"\[[hk]:.*?:[hk]\]", re.DOTALL)   # [h:...:h] header, [k:...:k] commentary
+_HV_INTERLOCUTOR = re.compile(r"\{[^}]*\}")                      # {speaker uvaca:} tags
+_HV_HEADER_RULE  = re.compile(r"_{6,}")                          # GRETIL's header/body separator rule
+
+def _hv_strip_header(text):
+    m = _HV_MARKER.search(text)
+    if m is None:
+        return text
+    head = text[:m.start()]
+    rule_end = None
+    for r in _HV_HEADER_RULE.finditer(head):
+        rule_end = r.end()
+    if rule_end is not None:
+        return text[rule_end:]
+    return text[text.rfind("\n", 0, m.start()) + 1:]
+
+def _hv_clean(raw):
+    s = _HV_EDITORIAL.sub(" ", raw)
+    s = _HV_INTERLOCUTOR.sub(" ", s)
+    s = s.replace("||*", " ").replace("*||", " ")
+    s = re.sub(r"\s*[/|]\s*", " / ", s)   # both constituted '/' and star '|' pada breaks
+    s = re.sub(r"_{3,}", " ", s)          # defensive: same page-break artifact as raghuvamsha
+    s = re.sub(r"\s+", " ", s).strip()
+    return s.rstrip("/ ").strip()
+
+def _hv_parse(text, name, unit):
+    text = _hv_strip_header(text)
+    cantos = collections.OrderedDict()
+    last_end = 0
+    for m in _HV_MARKER.finditer(text):
+        raw = text[last_end:m.start()]
+        last_end = m.end()
+        star = m.group("sa") is not None
+        c, v = (int(m.group("sa")), int(m.group("sv"))) if star else (int(m.group("ca")), int(m.group("cv")))
+        cleaned = _hv_clean(raw)
+        if not cleaned:
+            continue
+        dev = iast_to_dev(cleaned).replace("/", "।").strip()
+        dev = (dev[:-1].strip() if dev.endswith("।") else dev) + " ॥"
+        number = f"{v}*{m.group('sn')}" if star else v
+        cantos.setdefault(c, []).append({"number": number, "sanskrit_text": dev})
+    return [{"id": f"{unit}_{c:02d}", "reference": f"{name}, {unit.title()} {c}", "shlokas": sh}
+            for c, sh in cantos.items()]
+
 def run(tid):
     spec = GRETIL[tid]
     all_text = "\n".join(http_get(u) for u in spec["urls"])
-    items = parse(all_text, spec["name"], spec["unit"])
+    if tid == "harivamsha":
+        items = _hv_parse(all_text, spec["name"], spec["unit"])
+    else:
+        items = parse(all_text, spec["name"], spec["unit"])
     write_grantha(spec["target"], spec["schema"], spec["author"], items)
