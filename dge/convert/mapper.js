@@ -16,10 +16,14 @@ window.DGE.Mapper = (function () {
   function buildGranthaJson(proofread, profile) {
     const shlokas = {};
     (proofread.shlokas || []).forEach(s => {
-      // Prefer the model's own printed verse number when present (it may
-      // reflect a real number on the source page); fall back to the
-      // merge-safe sequential index assigned during chunked proofreading.
-      const num = (s.number != null ? s.number : s.index);
+      // Key by the merge-safe sequential "index" (see app.js), NOT the
+      // model's own "number" — Gemini restarts that field from scratch in
+      // every chunk, so it routinely repeats across a multi-chunk book and
+      // using it here silently drops every shloka but the last one sharing
+      // a given number. "index" is exactly the plain, gapless 1..N integer
+      // key every reader-app module already assumes (see the shape note in
+      // dge/js/core.js) — a real fix, not a workaround.
+      const num = (s.index != null ? s.index : s.number);
       const key = String(num);
       const commentaries = {};
       if (profile.commentaryKey && s.commentary) {

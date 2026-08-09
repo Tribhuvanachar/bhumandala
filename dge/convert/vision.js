@@ -45,33 +45,61 @@ window.DGE.Vision = (function () {
       throw new Error('Vision API returned an error for this page: ' + annotation.error.message);
     }
     const fta = annotation && annotation.fullTextAnnotation;
-    if (!fta) return { text: '', avgConfidence: null, lowConfidenceWords: [] };
-    return { text: fta.text || '', ...summarizeConfidence(fta) };
+    if (!fta) return { text: '', avgConfidence: null, lowConfidenceWords: [], words: [] };
+    const words = extractWords(fta);
+    return { text: fta.text || '', words, ...summarizeConfidence(words) };
   }
 
-  // Vision's own per-word confidence (0-1), buried in fullTextAnnotation's
-  // page/block/paragraph/word tree — this is what TEXT_DETECTION's plain
-  // .text string throws away entirely, and it's a real, cheap signal for
-  // which words are worth a human double-checking, without needing a second
-  // OCR pass or any ground truth to compare against.
-  const LOW_CONFIDENCE_THRESHOLD = 0.85;
-  function summarizeConfidence(fta) {
-    let sum = 0, count = 0;
-    const lowConfidenceWords = [];
+  // Flattens Vision's page/block/paragraph/word/symbol tree into one array
+  // of {text, confidence, boundingBox} per word. This — not the deeply
+  // nested raw response — is what "immutable OCR evidence" actually needs
+  // to be reproducible and reviewable: every word's text, confidence, and
+  // on-page location, with none of the redundant structural nesting. Vision
+  // reports each vertex of a (usually axis-aligned) quadrilateral; normalized
+  // here to a plain {x, y, width, height} box for direct use when cropping
+  // the source image later.
+  function extractWords(fta) {
+    const words = [];
     (fta.pages || []).forEach(page => {
       (page.blocks || []).forEach(block => {
         (block.paragraphs || []).forEach(para => {
           (para.words || []).forEach(word => {
-            if (typeof word.confidence !== 'number') return;
-            sum += word.confidence;
-            count++;
-            if (word.confidence < LOW_CONFIDENCE_THRESHOLD) {
-              const text = (word.symbols || []).map(s => s.text || '').join('');
-              if (text) lowConfidenceWords.push({ text, confidence: word.confidence });
-            }
+            const text = (word.symbols || []).map(s => s.text || '').join('');
+            if (!text) return;
+            words.push({
+              text,
+              confidence: typeof word.confidence === 'number' ? word.confidence : null,
+              boundingBox: normalizeBoundingBox(word.boundingBox)
+            });
           });
         });
       });
+    });
+    return words;
+  }
+
+  function normalizeBoundingBox(bb) {
+    const verts = bb && bb.vertices;
+    if (!verts || !verts.length) return null;
+    const xs = verts.map(v => v.x || 0), ys = verts.map(v => v.y || 0);
+    const x = Math.min(...xs), y = Math.min(...ys);
+    return { x, y, width: Math.max(...xs) - x, height: Math.max(...ys) - y };
+  }
+
+  // Vision's own per-word confidence (0-1) — a real, cheap signal for which
+  // words are worth a human double-checking, without needing a second OCR
+  // pass or any ground truth to compare against.
+  const LOW_CONFIDENCE_THRESHOLD = 0.85;
+  function summarizeConfidence(words) {
+    let sum = 0, count = 0;
+    const lowConfidenceWords = [];
+    words.forEach(word => {
+      if (typeof word.confidence !== 'number') return;
+      sum += word.confidence;
+      count++;
+      if (word.confidence < LOW_CONFIDENCE_THRESHOLD) {
+        lowConfidenceWords.push({ text: word.text, confidence: word.confidence });
+      }
     });
     return {
       avgConfidence: count ? sum / count : null,

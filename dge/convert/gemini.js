@@ -4,19 +4,42 @@
 window.DGE = window.DGE || {};
 window.DGE.Gemini = (function () {
 
-  const PROOFREAD_PROMPT = `You are proofreading raw OCR output from a scanned Sanskrit/Kannada devotional text. Rules:
-1. Correct OCR mistakes only (misread characters, broken/merged words, obvious scan artifacts).
-2. Do not rewrite, summarize, paraphrase, or "improve" the wording.
-3. Preserve Sanskrit text exactly as intended — do not modernize or alter it.
-4. Preserve Kannada text exactly as intended.
-5. Preserve the original paragraph and page order.
-6. Where distinguishable, identify which portions are the mula shloka (verse) text versus commentary/explanation.
-7. Output ONLY valid JSON — no markdown code fences, no explanations before or after, no trailing commentary.
+  // Some pages carry two independent OCR readings (Vision + a Tesseract
+  // cross-check, when that opt-in was used); app.js formats those pages
+  // with "[Vision]"/"[Tesseract]" labels. This prompt explicitly asks Gemini
+  // to compare rather than blindly rewrite — per the project's OCR
+  // verification policy, correction happens only where the readings agree
+  // or context clearly resolves a disagreement, and every shloka gets a
+  // self-reported classification instead of a silent, unqualified rewrite.
+  const PROOFREAD_PROMPT = `You are proofreading raw OCR output from a scanned Sanskrit/Kannada devotional text.
+
+Some pages below include TWO independent OCR readings from different engines, in this format:
+--- Page N ---
+[Vision]
+<text>
+[Tesseract]
+<text>
+Pages with only one reading show it with no engine label — there was nothing to compare it against.
+
+Rules:
+1. Correct OCR mistakes only (misread characters, broken/merged words, obvious scan artifacts). Do not rewrite, summarize, paraphrase, or "improve" the wording.
+2. When two readings are given for a page: where they agree (even loosely, allowing for the kind of surface variation different OCR engines produce), that agreement is strong evidence — use it directly rather than inventing a third reading. Where they disagree, use context (grammar, known vocabulary, metre, the surrounding sentence) to choose the more plausible one.
+3. Preserve Sanskrit and Kannada text exactly as intended — do not modernize or alter it.
+4. Preserve the original paragraph and page order.
+5. Where distinguishable, identify which portions are the mula shloka (verse) text versus commentary/explanation.
+6. Never invent text that isn't grounded in at least one OCR reading for that page, beyond fixing an obvious small OCR-level error (broken characters, merged words) that context clearly resolves.
+7. For every shloka, self-report a "classification":
+   - "accept": the two readings agree, or only one reading existed and it's unambiguous and plausible as-is.
+   - "review": readings disagreed and you resolved it using context — likely correct, but a human should still glance at it.
+   - "unresolved": you cannot determine confident text (readings are implausible, contradictory, or the source itself looks illegible). Keep your best-guess text in "sa" regardless, but do not invent details neither reading actually shows.
+   Add a brief "note" explaining why, but only when classification is not "accept" — omit it (empty string) otherwise.
+8. Also report which page (the number from the "--- Page N ---" marker) each shloka came from, in "page".
+9. Output ONLY valid JSON — no markdown code fences, no explanations before or after, no trailing commentary.
 
 Output exactly this JSON shape:
 {
   "shlokas": [
-    { "number": 1, "sa": "corrected shloka text", "commentary": "corrected commentary text, or empty string if none" }
+    { "number": 1, "page": 3, "sa": "corrected shloka text", "commentary": "corrected commentary text, or empty string if none", "classification": "accept", "note": "" }
   ]
 }
 
@@ -39,10 +62,13 @@ Raw OCR input follows:
           type: 'object',
           properties: {
             number: { type: 'integer' },
+            page: { type: 'integer' },
             sa: { type: 'string' },
-            commentary: { type: 'string' }
+            commentary: { type: 'string' },
+            classification: { type: 'string', enum: ['accept', 'review', 'unresolved'] },
+            note: { type: 'string' }
           },
-          required: ['sa']
+          required: ['sa', 'classification']
         }
       }
     },

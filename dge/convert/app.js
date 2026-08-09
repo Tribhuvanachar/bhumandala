@@ -5,6 +5,8 @@ window.DGE.App = (function () {
   const IDB = () => window.DGE.IDB;
   const VisionMod = () => window.DGE.Vision;
   const TesseractCheckMod = () => window.DGE.TesseractCheck;
+  const ReviewClassifierMod = () => window.DGE.ReviewClassifier;
+  const ReviewUIMod = () => window.DGE.ReviewUI;
   const GeminiMod = () => window.DGE.Gemini;
   const RendererMod = () => window.DGE.Renderer;
   const GitHubMod = () => window.DGE.GitHub;
@@ -286,6 +288,10 @@ window.DGE.App = (function () {
     }
     loadLibraryCatalog();
 
+    $('openReviewBtn').addEventListener('click', () => {
+      ReviewUIMod().open($('reviewDetailArea'), $('reviewIncludeC').checked, () => ReviewUIMod().renderSummary($('reviewSummary')));
+    });
+
     $('buildSchemaBtn').addEventListener('click', buildSchemaPreview);
     $('pushToGithubBtn').addEventListener('click', pushToGithub);
 
@@ -331,6 +337,20 @@ window.DGE.App = (function () {
   function buildSchemaPreview() {
     clearError();
     if (!finalJson) return setError('No proofread JSON yet — run Proofread first.');
+    const reviewSummary = ReviewUIMod().summary();
+    const unreviewed = reviewSummary.flaggedTotal - reviewSummary.flaggedReviewed;
+    if (unreviewed > 0) {
+      const proceed = confirm(
+        `⚠ Risky: ${unreviewed} unit(s) are flagged (class C/D/E) with no recorded human decision yet.\n\n` +
+        `Building the schema now uses Gemini's text for those as-is, unreviewed. Use "4. Review Flagged Units" ` +
+        `above first if you want to check them, or proceed anyway.`
+      );
+      if (!proceed) {
+        log(`Schema build cancelled — ${unreviewed} flagged unit(s) still unreviewed.`);
+        return;
+      }
+      log(`Proceeding with schema build despite ${unreviewed} unreviewed flagged unit(s) (user confirmed).`);
+    }
     if (lastProofreadMissingPages.length) {
       const proceed = confirm(
         `⚠ Risky: ${lastProofreadMissingPages.length} selected page(s) have no proofread text — ` +
@@ -452,6 +472,8 @@ window.DGE.App = (function () {
     $('proofreadResumeNote').textContent = '';
     if ($('ocrGapsText')) $('ocrGapsText').textContent = '';
     if ($('proofreadGapsText')) $('proofreadGapsText').textContent = '';
+    if ($('reviewSummary')) $('reviewSummary').textContent = 'Run Proofread first.';
+    if ($('reviewDetailArea')) $('reviewDetailArea').innerHTML = '';
 
     try {
       log(`Loading ${detected.typeLabel}…`);
@@ -579,7 +601,18 @@ window.DGE.App = (function () {
           `OCR on page ${p}`,
           () => cancelRequested
         );
-        const ocrEntry = { page: p, text: result.text, avgConfidence: result.avgConfidence, lowConfidenceWords: result.lowConfidenceWords };
+        // masterImage is the immutable evidence of record for this page —
+        // stored alongside every OCR candidate so a human (or a later re-run
+        // with a better engine) always has the actual source to check
+        // against, not just whatever text an engine claimed was on the page.
+        const ocrEntry = {
+          page: p,
+          text: result.text,
+          avgConfidence: result.avgConfidence,
+          lowConfidenceWords: result.lowConfidenceWords,
+          words: result.words,
+          masterImage: pageObj.imageBase64
+        };
         ocrPages.push(ocrEntry);
         if (result.lowConfidenceWords && result.lowConfidenceWords.length) {
           log(`Page ${p}: ${result.lowConfidenceWords.length} low-confidence word(s) — worth a manual check (avg confidence ${Math.round(result.avgConfidence * 100)}%).`);
@@ -591,9 +624,9 @@ window.DGE.App = (function () {
         if (getCrossCheckEnabled()) {
           try {
             const tessLang = TesseractCheckMod().mapLanguageHints(getLanguageHints());
-            const tessText = await TesseractCheckMod().recognizeBase64Png(pageObj.imageBase64, tessLang);
-            const sim = TesseractCheckMod().similarity(result.text, tessText);
-            ocrEntry.crossCheck = { text: tessText, similarity: sim };
+            const tessResult = await TesseractCheckMod().recognizeBase64Png(pageObj.imageBase64, tessLang);
+            const sim = TesseractCheckMod().similarity(result.text, tessResult.text);
+            ocrEntry.crossCheck = { text: tessResult.text, words: tessResult.words, similarity: sim };
             log(`Page ${p}: Tesseract cross-check ${Math.round(sim * 100)}% similar to Vision.` + (sim < 0.7 ? ' Low agreement — worth a manual check.' : ''));
           } catch (e) {
             log(`Page ${p}: Tesseract cross-check failed (non-fatal, Vision result kept): ${U().formatError(e)}`);
@@ -712,7 +745,17 @@ window.DGE.App = (function () {
 
         const first = chunks[i][0].page, last = chunks[i][chunks[i].length - 1].page;
         $('progressText').textContent = `Proofreading chunk ${i + 1} / ${totalChunks} (pages ${first}–${last})…`;
-        const ocrText = chunks[i].map(p => `--- Page ${p.page} ---\n${p.text}`).join('\n\n');
+        // Pages that had the Tesseract cross-check run show BOTH candidates,
+        // labeled, so Gemini compares rather than blindly rewriting Vision's
+        // text alone — see the prompt in gemini.js for how it's told to use
+        // this. Pages without a cross-check show just the one reading,
+        // unlabeled, exactly as before.
+        const ocrText = chunks[i].map(p => {
+          const body = p.crossCheck
+            ? `[Vision]\n${p.text}\n\n[Tesseract]\n${p.crossCheck.text}`
+            : p.text;
+          return `--- Page ${p.page} ---\n${body}`;
+        }).join('\n\n');
         try {
           const chunkResult = await withAutoRetry(
             () => GeminiMod().proofread(ocrText, geminiKey, getGeminiModel()),
@@ -750,11 +793,32 @@ window.DGE.App = (function () {
           c.shlokas.forEach(s => mergedShlokas.push(Object.assign({ index: seq++ }, s)));
         }
       }
+
+      // Review class (A-E): combines Gemini's self-reported classification
+      // with the source page's Vision confidence / Tesseract agreement —
+      // see review-classifier.js. Looked up by the "page" field Gemini now
+      // echoes back per shloka; legacy data without it just gets classified
+      // on classification alone (page-level signals unavailable).
+      const ocrPageByNum = {};
+      ocrPages.forEach(p => { ocrPageByNum[p.page] = p; });
+      const classCounts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+      mergedShlokas.forEach(s => {
+        const srcPage = ocrPageByNum[s.page];
+        s.reviewClass = ReviewClassifierMod().classify({
+          classification: s.classification,
+          avgConfidence: srcPage ? srcPage.avgConfidence : null,
+          crossCheckSimilarity: srcPage && srcPage.crossCheck ? srcPage.crossCheck.similarity : null
+        });
+        classCounts[s.reviewClass]++;
+      });
+
       finalJson = { shlokas: mergedShlokas };
       RendererMod().renderPreview(finalJson, $('previewArea'));
       setPreviewLabel('Showing Gemini-proofread text.');
       $('progressText').textContent = `Proofreading complete — ${totalChunks} chunk(s), ${mergedShlokas.length} entries.`;
-      log('Proofreading complete — all chunks merged.' + (lastProofreadMissingPages.length ? ` ⚠ ${lastProofreadMissingPages.length} selected page(s) missing: ${lastProofreadMissingPages.join(', ')}.` : ''));
+      const classSummary = Object.keys(classCounts).map(k => `${k}:${classCounts[k]}`).join(' ');
+      log(`Proofreading complete — all chunks merged. Review classes — ${classSummary} (D+E = ${classCounts.D + classCounts.E} unit(s) needing a human look).` + (lastProofreadMissingPages.length ? ` ⚠ ${lastProofreadMissingPages.length} selected page(s) missing: ${lastProofreadMissingPages.join(', ')}.` : ''));
+      ReviewUIMod().renderSummary($('reviewSummary'));
     } finally {
       $('proofreadBtn').disabled = false;
       $('proofreadCancelBtn').style.display = 'none';
@@ -778,6 +842,8 @@ window.DGE.App = (function () {
     $('progressText').textContent = '';
     if ($('ocrGapsText')) $('ocrGapsText').textContent = '';
     if ($('proofreadGapsText')) $('proofreadGapsText').textContent = '';
+    if ($('reviewSummary')) $('reviewSummary').textContent = 'Run Proofread first.';
+    if ($('reviewDetailArea')) $('reviewDetailArea').innerHTML = '';
     let list;
     try { list = JSON.parse(localStorage.getItem(KNOWN_FILES_KEY)) || []; } catch (e) { list = []; }
     list = list.filter(f => f.key !== currentFileKey);
@@ -788,5 +854,5 @@ window.DGE.App = (function () {
 
   document.addEventListener('DOMContentLoaded', init);
 
-  return { runOcr, runProofread };
+  return { runOcr, runProofread, getFinalJson: () => finalJson, getOcrPages: () => ocrPages };
 })();

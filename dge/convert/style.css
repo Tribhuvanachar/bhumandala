@@ -29,6 +29,17 @@ button:disabled { opacity: 0.5; cursor: default; }
 .crosscheck-col { flex: 1; min-width: 0; background: #fafafa; border: 1px solid #e2e2e2; border-radius: 4px; padding: 6px; word-wrap: break-word; }
 .crosscheck-label { font-weight: 700; color: #666; margin-bottom: 4px; }
 .diff-mismatch { background: #ffd9d9; border-radius: 2px; }
+.review-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; font-size: 13px; }
+.review-badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 12px; margin-bottom: 8px; }
+.review-badge-A, .review-badge-B { background: #e6f4ea; color: #1a7a3a; }
+.review-badge-C { background: #fff4dc; color: #a06a00; }
+.review-badge-D, .review-badge-E { background: #fce8e6; color: #c02020; }
+.review-note { background: #fafafa; border: 1px solid #e2e2e2; border-radius: 4px; padding: 8px; font-size: 13px; margin-bottom: 8px; }
+.review-canvas { max-width: 100%; border: 1px solid #ccc; margin-bottom: 8px; display: block; }
+.review-candidates { display: flex; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+.review-candidates > div { flex: 1; min-width: 200px; background: #fafafa; border: 1px solid #e2e2e2; border-radius: 4px; padding: 8px; font-size: 13px; }
+.review-cand-text { white-space: pre-wrap; margin-top: 4px; }
+.review-actions { display: flex; gap: 8px; margin-top: 8px; }
 #previewLabel { margin: 4px 0 8px; }
 select { width: 100%; box-sizing: border-box; padding: 8px; font-size: 14px; margin-bottom: 6px; }
 .schema-row { border-bottom: 1px solid #ddd; padding: 10px 0; }

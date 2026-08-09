@@ -38,10 +38,22 @@ window.DGE.TesseractCheck = (function () {
     return worker;
   }
 
+  // Returns {text, words} — words normalized to the same {text, confidence,
+  // boundingBox:{x,y,width,height}} shape vision.js uses, so both engines'
+  // output can be compared/rendered identically. Tesseract's confidence is
+  // 0-100; rescaled to 0-1 to match Vision's scale.
   async function recognizeBase64Png(base64Png, lang) {
     const w = await ensureWorker(lang);
     const result = await w.recognize('data:image/png;base64,' + base64Png);
-    return (result && result.data && result.data.text) || '';
+    const data = result && result.data;
+    const words = ((data && data.words) || []).map(word => ({
+      text: word.text || '',
+      confidence: typeof word.confidence === 'number' ? word.confidence / 100 : null,
+      boundingBox: word.bbox
+        ? { x: word.bbox.x0, y: word.bbox.y0, width: word.bbox.x1 - word.bbox.x0, height: word.bbox.y1 - word.bbox.y0 }
+        : null
+    })).filter(w => w.text);
+    return { text: (data && data.text) || '', words };
   }
 
   async function terminate() {
