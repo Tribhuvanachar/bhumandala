@@ -1,0 +1,166 @@
+{
+ "_note": "Verified source registry for DGE ingestion. status: ready = clean machine-readable text (an importer can run today); ocr = page-scan, needs Devanagari OCR + proofread before ingest. Add new 'ready' texts by cloning an importer and pointing it at the url. Target paths reviewed against the live catalog on 9 Aug 2026 -- several needed a \"/mula\" layer segment to match data/library.json (see PROJECT_STATUS.md).",
+ "ready": [
+  {
+   "id": "bhagavata",
+   "title": "Srimad Bhagavata Purana",
+   "target": "puranas/bhagavata_purana/skandha_NN",
+   "url": "http://gretil.sub.uni-goettingen.de/gretil/1_sanskr/3_purana/bhagp/bhp_01u.htm .. bhp_12u.htm",
+   "format": "GRETIL IAST, coded BhP_SS.AA.VVV/pada",
+   "importer": "bhagavata.py",
+   "validate_against": "sanskritdocuments bhagpur-NN.itx"
+  },
+  {
+   "id": "ramayana",
+   "title": "Valmiki Ramayana",
+   "target": "itihasas/ramayana/<kanda>/mula",
+   "url": "https://bombay.indology.info/ramayana/text/UD/Ram01.txt .. Ram07.txt",
+   "format": "BORI critical, native Devanagari, coded KSSSVVVpada",
+   "importer": "ramayana.py"
+  },
+  {
+   "id": "mahabharata",
+   "title": "Mahabharata",
+   "target": "itihasas/mahabharata/<parva>_parva/mula",
+   "url": "https://bombay.indology.info/mahabharata/text/UD/MBh01.txt .. MBh18.txt",
+   "format": "BORI critical, native Devanagari, coded BBAAAVVVpada",
+   "importer": "mahabharata.py",
+   "note": "parva 3 is \"vana_parva\" (traditional alt. name for aranyaka) -- taxonomy nodes already exist for all 18 parvas + this one"
+  },
+  {
+   "id": "harivamsha",
+   "title": "Harivamsha",
+   "target": "itihasas/harivamsha/mula",
+   "url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/html/sa_harivaMza.htm",
+   "format": "GRETIL TEI/HTML, IAST, HV_chapter.verse",
+   "importer": "gretil.py"
+  },
+  {
+   "id": "adhyatma_ramayana",
+   "title": "Adhyatma Ramayana",
+   "target": "itihasas/adhyatma_ramayana",
+   "url": "https://sanskritdocuments.org/sanskrit/adhyatmaramayana/",
+   "format": "ITX (ITRANS->dev)",
+   "importer": "TODO (ITX per-kanda)"
+  },
+  {
+   "id": "smritis",
+   "title": "Smritis (Manu/Yajnavalkya/Parashara/Narada/Vishnu/Gautama)",
+   "target": "smritis/<name>",
+   "url": "https://gretil.sub.uni-goettingen.de/gretil/1_sanskr/6_sastra/4_dharma/smrti/",
+   "format": "GRETIL IAST, verse-numbered",
+   "importer": "gretil.py (manu/yajnavalkya/parashara/narada/vishnu)"
+  },
+  {
+   "id": "raghuvamsha",
+   "title": "Raghuvamsha (mula)",
+   "target": "kavya/raghuvamsha/mula",
+   "url": "https://ambuda.org/texts/raghuvamsham | GRETIL kragh_pu",
+   "format": "Devanagari/IAST, Ragh_S.V",
+   "importer": "gretil.py",
+   "commentary": "Sanjivini = OCR"
+  },
+  {
+   "id": "kumarasambhava",
+   "title": "Kumarasambhava (mula)",
+   "target": "kavya/kumarasambhava/mula",
+   "url": "https://sanskritdocuments.org/doc_z_misc_major_works/kumArasambhavam.itx",
+   "format": "ITX",
+   "importer": "itx.py"
+  },
+  {
+   "id": "kiratarjuniya",
+   "title": "Kiratarjuniya (mula)",
+   "target": "kavya/kiratarjuniya/mula",
+   "url": "https://sanskritdocuments.org/doc_z_misc_major_works/kirAtArjunIyam.itx",
+   "format": "ITX",
+   "importer": "itx.py",
+   "commentary": "Ghantapatha = OCR"
+  },
+  {
+   "id": "shishupalavadha",
+   "title": "Shishupalavadha (mula)",
+   "target": "kavya/shishupalavadha/mula",
+   "url": "https://ambuda.org/texts/shishupalavadham",
+   "format": "Devanagari",
+   "importer": "gretil.py"
+  },
+  {
+   "id": "meghaduta",
+   "title": "Meghaduta + Mallinatha (bundled)",
+   "target": "kavya/meghaduta",
+   "url": "https://sanskritdocuments.org/doc_z_misc_major_works/meghadUtamsavyAkhyA.itx",
+   "format": "ITX, mula+commentary",
+   "importer": "special (mula+commentary split)"
+  },
+  {
+   "id": "bhatti_kavya",
+   "title": "Bhatti Kavya + Jayamangala",
+   "target": "kavya/bhatti_kavya",
+   "url": "https://ambuda.org/proofing/bhtttikaavyn-jymngglyaa-smetm/",
+   "format": "Ambuda proofing XML (Devanagari, mula+commentary)",
+   "importer": "special (Ambuda XML)"
+  },
+  {
+   "id": "shakuntala",
+   "title": "Abhijnana Shakuntala",
+   "target": "kavya/shakuntala",
+   "url": "https://sanskritdocuments.org/doc_z_misc_major_works/shaakuntala.itx",
+   "format": "ITX drama (act/prose/verse)",
+   "importer": "special (drama)"
+  },
+  {
+   "id": "sumadhva_vijaya",
+   "title": "Sumadhva Vijaya (mula)",
+   "target": "kavya/sumadhva_vijaya",
+   "url": "https://www.dvaita.net/pdf/smvijaya/smv.pdf",
+   "format": "typeset PDF (pdftotext)",
+   "importer": "special (PDF pdftotext)"
+  },
+  {
+   "id": "other_mahapuranas",
+   "title": "14 Mahapuranas (Agni,Brahma,Garuda,Kurma,Linga,Markandeya,Matsya,Narada,Siva,Skanda,Vamana,Vishnu, ...)",
+   "target": "puranas/<name>",
+   "url": "GRETIL + Zenodo mirror .txt",
+   "format": "IAST->dev",
+   "importer": "TODO (clone bhagavata.py)"
+  }
+ ],
+ "ocr": [
+  {
+   "id": "mani_manjari",
+   "title": "Mani Manjari",
+   "url": "archive.org ManimanjariOfNArAyaNaPaNDitAcharya"
+  },
+  {
+   "id": "tirtha_prabandha",
+   "title": "Tirtha Prabandha (Vadiraja)",
+   "url": "archive.org theertha-prabandha-...Prabhanjanachar"
+  },
+  {
+   "id": "rukminisha_vijaya",
+   "title": "Rukminisha Vijaya (Vadiraja)",
+   "url": "archive.org rukminisha-vijaya-1..4"
+  },
+  {
+   "id": "sangraha_ramayana",
+   "title": "Sangraha Ramayana",
+   "url": "srimadhvyasa.wordpress.com 03-Sanskrit-SangrahaRamayan.pdf"
+  },
+  {
+   "id": "ananda_ramayana",
+   "title": "Ananda Ramayana",
+   "url": "archive.org srimad-ananda-ramayana"
+  },
+  {
+   "id": "mallinatha_commentaries",
+   "title": "Mallinatha (Sanjivini/Ghantapatha/Sarvankasha)",
+   "url": "archive.org Kale/Nirnaya-Sagar/eGangotri scans"
+  },
+  {
+   "id": "naishadha",
+   "title": "Naishadha-charita + Jivatu",
+   "url": "archive.org OCR full-text (noisy)"
+  }
+ ]
+}

@@ -383,7 +383,8 @@
         "bhavishya_parva": {}
       }
     },
-    "_default_author": "Maharshi Veda Vyasa"
+    "_default_author": "Maharshi Veda Vyasa",
+    "harivamsha": {}
   },
   "sarvamoola_grantha": {
     "_schema": "grantha_prakarana_text",
@@ -936,7 +937,8 @@
     },
     "shatatapa_smriti": {
       "_default_author": "Shatatapa"
-    }
+    },
+    "narada_smriti": {}
   },
   "dharmashastra": {
     "dharma_sindhu": {
@@ -1304,5 +1306,12 @@
     "vishnu_tirtha": {
       "_default_author": "Sri Vishnu Tirtha"
     }
+  },
+  "kavya": {
+    "_schema": "itihasa_purana_text",
+    "raghuvamsha": {},
+    "kumarasambhava": {},
+    "kiratarjuniya": {},
+    "shishupalavadha": {}
   }
 }

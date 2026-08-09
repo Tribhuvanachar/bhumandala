@@ -107,7 +107,7 @@ window.addEventListener('pagehide', function () {});
 // than leaving it to be rediscovered each time, the HTML now stamps its
 // own version and the JS checks it matches. Bump BOTH on any release that
 // changes index.html's structure.
-window.DGE_EXPECTED_HTML_VERSION = '4.58.0';
+window.DGE_EXPECTED_HTML_VERSION = '4.59.0';
 document.addEventListener('DOMContentLoaded', () => {
   const meta = document.querySelector('meta[name="dge-html-version"]');
   const actual = meta ? meta.getAttribute('content') : '(none)';
@@ -170,6 +170,42 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
     grassmann: 'Grassmann (German Translation)',
     elizarenkova: 'Elizarenkova (Russian Translation)'
   };
+
+  // itihasa_purana_text schema (see dge/data/schemas.json): each item is a
+  // whole chapter (sarga/adhyaya/skandha) carrying its OWN nested shlokas[]
+  // array, unlike vedic_text's items (each item IS one verse, handled by
+  // the branch below). Detected by the first item actually having a
+  // shlokas array rather than a direct sa/samhita_patha string. Flattened
+  // here into the same sequential-integer-key shape every other module
+  // assumes; the chapter's "reference" (e.g. "Bala Kanda, Sarga 3") rides
+  // along in the existing generic 'vedicId' extra field rather than
+  // needing a new one wired through render/audio/filter/etc.
+  if (Array.isArray(data.items) && data.items.length && Array.isArray(data.items[0].shlokas)) {
+    const shlokas = {};
+    let n = 0;
+    data.items.forEach(chapter => {
+      (chapter.shlokas || []).forEach(v => {
+        n++;
+        shlokas[n] = {
+          sa: dgeSanitizeVedicAccents(v.sanskrit_text || v.sa || ''),
+          vedicId: chapter.reference ? (chapter.reference + (v.number != null ? ' · ' + v.number : '')) : '',
+          commentaries: {}
+        };
+      });
+    });
+    console.log(`[Data] Normalized "${granthaTitle || 'untitled'}" (itihasa_purana_text): ` +
+      `${data.items.length} chapter(s), ${n} shloka(s) total.`);
+    return {
+      metadata: {
+        title: granthaTitle || data.schema || 'Untitled',
+        author: data.default_author || '',
+        totalShlokas: n,
+        availableCommentaries: {}
+      },
+      shlokas,
+      totalShlokas: n
+    };
+  }
 
   if (Array.isArray(data.items)) {
     const shlokas = {};

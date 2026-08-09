@@ -2441,6 +2441,30 @@
     {
       "path": "dge/data/vyasakuta/vishnu_tirtha/data.json",
       "populated": false
+    },
+    {
+      "path": "dge/data/smritis/narada_smriti/data.json",
+      "populated": false
+    },
+    {
+      "path": "dge/data/itihasas/harivamsha/mula/data.json",
+      "populated": false
+    },
+    {
+      "path": "dge/data/kavya/raghuvamsha/mula/data.json",
+      "populated": false
+    },
+    {
+      "path": "dge/data/kavya/kumarasambhava/mula/data.json",
+      "populated": false
+    },
+    {
+      "path": "dge/data/kavya/kiratarjuniya/mula/data.json",
+      "populated": false
+    },
+    {
+      "path": "dge/data/kavya/shishupalavadha/mula/data.json",
+      "populated": false
     }
   ]
 }

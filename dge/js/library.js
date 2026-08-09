@@ -186,10 +186,21 @@ window.openLibraryModal = async function() {
     return;
   }
 
+  // Admin-curated show/hide overrides (see dge/library-admin.html, "Export
+  // visibility") -- optional file, most repos won't have one until the
+  // project lead actually hides something. Hiding a path hides its whole
+  // subtree, so a leaf is hidden if IT or any ancestor segment is listed.
+  let hiddenPaths = [];
+  try {
+    const vis = await fetch('data/library-visibility.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
+    if (vis && Array.isArray(vis.hidden)) hiddenPaths = vis.hidden;
+  } catch (e) { /* no visibility file yet -- nothing hidden */ }
+  const isHiddenSlug = slug => hiddenPaths.some(h => slug === h || slug.startsWith(h + '/'));
+
   const populated = library.granthas.filter(g => g.populated).map(g => {
     const slug = window.dgeGranthaSlug(g.path);
     return { slug, title: dgeToActiveScript(g.title || slug) };
-  });
+  }).filter(e => !isHiddenSlug(e.slug));
   if (!populated.length) {
     listEl.innerHTML = `<div class="note-preview-box" style="margin:0;">No texts are available yet — check back soon.</div>`;
     return;

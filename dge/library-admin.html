@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library Manager · DGE (super-admin)</title>
+<style>
+  :root{--bg:#f5efe4;--panel:#fffdf8;--panel2:#fbf4e7;--ink:#2b2117;--muted:#8b7c66;--line:#e6dac6;
+    --accent:#9a3b1b;--accent2:#1f6f5c;--gold:#b6862c;--ok:#2f9e6f;--pend:#b9ab90;--part:#c98a2b;
+    --shadow:0 2px 16px rgba(90,60,20,.10);--radius:14px}
+  body.dark{--bg:#14161c;--panel:#1b1f27;--panel2:#20242f;--ink:#e9e3d5;--muted:#98a0b2;--line:#2b3140;
+    --accent:#e0794b;--accent2:#5bb894;--gold:#e0b25a;--ok:#5bb894;--pend:#5a5f6b;--part:#e0b25a;--shadow:0 6px 26px rgba(0,0,0,.4)}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.5;
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;transition:.3s}
+  header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+  .bar{max-width:1100px;margin:0 auto;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .brand{font-weight:700}.brand small{color:var(--muted);font-weight:400}.spacer{flex:1}
+  .icon,.btn{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:7px 12px;cursor:pointer;color:var(--ink);font:inherit;font-size:13px}
+  .btn.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
+  main{max-width:1100px;margin:0 auto;padding:16px 14px 80px}
+  .totals{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;box-shadow:var(--shadow)}
+  .stat b{font-size:24px;display:block}.stat span{color:var(--muted);font-size:12px}
+  .secgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:18px}
+  .sec{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .sec .n{font-weight:700;text-transform:capitalize}
+  .sec .m{color:var(--muted);font-size:12px;margin:2px 0 7px}
+  .prog{height:8px;background:var(--panel2);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+  .prog i{display:block;height:100%;background:var(--ok)}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0 12px}
+  .toolbar input[type=search]{flex:1;min-width:180px;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:9px 12px;font:inherit;color:var(--ink)}
+  .chip{border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:6px 11px;cursor:pointer;font-size:13px;color:var(--muted)}
+  .chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .tree{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 4px}
+  .node{padding:2px 0}
+  .row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:8px}
+  .row:hover{background:var(--panel2)}
+  .tw{width:16px;text-align:center;color:var(--muted);cursor:pointer;user-select:none;flex:none}
+  .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .nm .path{color:var(--muted);font-size:11px}
+  .dot{width:9px;height:9px;border-radius:50%;flex:none}
+  .dot.ok{background:var(--ok)}.dot.pend{background:var(--pend)}.dot.part{background:var(--part)}
+  .cnt{font-size:12px;color:var(--muted);flex:none}
+  .badge{font-size:11px;border-radius:8px;padding:1px 7px;flex:none}
+  .badge.ok{color:var(--ok);border:1px solid var(--ok)}.badge.pend{color:var(--muted);border:1px solid var(--line)}
+  .eye{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:8px;width:30px;height:26px;cursor:pointer;color:var(--ink);font-size:13px}
+  .eye.off{opacity:.5}
+  .kids{margin-left:18px;border-left:1px dashed var(--line);padding-left:4px;display:none}
+  .node.open>.kids{display:block}
+  .hiddenNode>.row .nm{opacity:.45;text-decoration:line-through}
+  .gate{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:24px;text-align:center}
+  .gate input{font:inherit;font-size:18px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink)}
+  .muted{color:var(--muted);font-size:13px}
+  a{color:var(--accent2)}
+</style>
+</head>
+<body>
+<div class="gate" id="gate">
+  <div style="font-size:22px;font-weight:700">🔐 DGE Library Manager</div>
+  <div class="muted">Super-admin only. Enter the passkey.</div>
+  <input id="gk" type="password" placeholder="passkey" autocomplete="off">
+  <button class="btn pri" id="gbtn">Enter</button>
+  <div class="muted" style="max-width:420px">Note: this is a client-side gate for convenience, not real security — the page and data are public in the repo. Keep sensitive controls behind the app's real auth if needed.</div>
+</div>
+
+<header style="display:none" id="hdr">
+  <div class="bar">
+    <div class="brand">🗂️ Library Manager <small>· DGE super-admin</small></div>
+    <span class="spacer"></span>
+    <a class="icon" href="index.html">॥ Home ॥</a>
+    <button class="icon" id="theme">◐</button>
+    <button class="btn" id="reload">↻ Refresh</button>
+    <button class="btn pri" id="export">⬇ Export visibility</button>
+  </div>
+</header>
+
+<main id="app" style="display:none">
+  <div class="totals" id="totals"></div>
+  <div class="secgrid" id="secgrid"></div>
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="Filter by name or path…">
+    <button class="chip" id="fAll" data-f="all">All</button>
+    <button class="chip" id="fPend" data-f="pending">Pending only</button>
+    <button class="chip" id="fLoad" data-f="loaded">Loaded only</button>
+    <button class="chip" id="fHid" data-f="hidden">Hidden only</button>
+    <button class="chip" id="expand">⤢ Expand all</button>
+    <button class="chip" id="collapse">⤡ Collapse all</button>
+  </div>
+  <div class="tree" id="tree"></div>
+  <p class="muted" style="margin-top:14px">👁 toggles show/hide for the public library. Changes save in this browser; click <b>Export visibility</b> to download <code>library-visibility.json</code> to commit to the repo. Loaded = a <code>data.json</code> with items; Pending = empty/absent.</p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.3.3/sanscript.js" onerror=""></script>
+<script>
+(function(){
+  var PASSKEY="SHRI108";
+  var $=function(s){return document.querySelector(s);};
+  // ---- gate ----
+  if(sessionStorage.getItem("dge.admin.ok")==="1") start();
+  else {
+    $("#gate").style.display="flex";
+    var tryK=function(){ if($("#gk").value.trim()===PASSKEY){ sessionStorage.setItem("dge.admin.ok","1"); location.reload(); } else { $("#gk").value=""; $("#gk").placeholder="wrong — try again"; } };
+    $("#gbtn").onclick=tryK; $("#gk").addEventListener("keydown",function(e){ if(e.key==="Enter") tryK(); }); $("#gk").focus();
+  }
+
+  var TAX=null, ST=null, HIDDEN, FILTER="all";
+  function loadVis(){ try{ HIDDEN=new Set(JSON.parse(localStorage.getItem("dge.libvis")||"[]")); }catch(e){ HIDDEN=new Set(); } }
+  function saveVis(){ localStorage.setItem("dge.libvis", JSON.stringify([...HIDDEN])); }
+
+  function start(){
+    if(sessionStorage.getItem("dge.admin.ok")!=="1") return;
+    $("#gate").style.display="none"; $("#hdr").style.display=""; $("#app").style.display="";
+    loadVis();
+    if(localStorage.getItem("dge.libadmin.dark")==="1") document.body.classList.add("dark");
+    $("#theme").onclick=function(){ document.body.classList.toggle("dark"); localStorage.setItem("dge.libadmin.dark", document.body.classList.contains("dark")?"1":"0"); };
+    $("#reload").onclick=function(){ location.reload(); };
+    $("#export").onclick=exportVis;
+    $("#q").addEventListener("input",render);
+    document.querySelectorAll(".chip[data-f]").forEach(function(c){ c.onclick=function(){ FILTER=c.dataset.f; document.querySelectorAll(".chip[data-f]").forEach(function(x){x.classList.toggle("on",x===c);}); render(); }; });
+    $("#fAll").classList.add("on");
+    $("#expand").onclick=function(){ document.querySelectorAll(".node.hasK").forEach(function(n){n.classList.add("open");}); };
+    $("#collapse").onclick=function(){ document.querySelectorAll(".node.hasK").forEach(function(n){n.classList.remove("open");}); };
+    Promise.all([
+      fetch("data/taxonomy.json").then(function(r){return r.json();}),
+      fetch("data/library_status.json").then(function(r){return r.json();})
+    ]).then(function(a){ TAX=a[0]; ST=a[1]; renderTotals(); renderSections(); render(); })
+      .catch(function(e){ $("#tree").innerHTML='<div class="muted" style="padding:14px">Could not load taxonomy.json / library_status.json ('+e+'). Place this page at dge/ and generate data/library_status.json.</div>'; });
+  }
+
+  function renderTotals(){
+    var t=ST.totals, pct=Math.round(t.loaded/t.leaves*100);
+    $("#totals").innerHTML=
+      stat(t.loaded+" / "+t.leaves,"folders loaded ("+pct+"%)")+
+      stat(t.items.toLocaleString(),"verses / entries loaded")+
+      stat((t.leaves-t.loaded),"folders pending")+
+      stat(Object.keys(ST.sections).length,"top sections");
+  }
+  function stat(b,s){ return '<div class="stat"><b>'+b+'</b><span>'+s+'</span></div>'; }
+  function renderSections(){
+    var el=$("#secgrid"), html="";
+    Object.keys(ST.sections).forEach(function(k){ var s=ST.sections[k], pct=s.total?Math.round(s.loaded/s.total*100):0;
+      html+='<div class="sec"><div class="n">'+k.replace(/_/g," ")+'</div><div class="m">'+s.loaded+'/'+s.total+' folders · '+s.items.toLocaleString()+' items</div><div class="prog"><i style="width:'+pct+'%"></i></div></div>'; });
+    el.innerHTML=html;
+  }
+
+  // build tree model from taxonomy
+  function build(node, prefix){
+    var kids=Object.keys(node||{}).filter(function(k){return k[0]!=="_";});
+    if(!kids.length){ var path=prefix.join("/"); var items=(ST.leaves[path]||0); return {name:prefix[prefix.length-1],path:path,leaf:true,items:items}; }
+    var children=kids.map(function(k){ return build((typeof node[k]==="object")?node[k]:{}, prefix.concat(k)); });
+    var loaded=0,total=0,items=0;
+    children.forEach(function(c){ if(c.leaf){total++; if(c.items>0){loaded++; items+=c.items;}} else {total+=c.total; loaded+=c.loaded; items+=c.items;} });
+    return {name:prefix[prefix.length-1],path:prefix.join("/"),leaf:false,children:children,loaded:loaded,total:total,items:items};
+  }
+  function matchFilter(n){
+    if(FILTER==="all") return true;
+    if(FILTER==="hidden") return n.leaf? isHidden(n.path): true;
+    if(n.leaf){ if(FILTER==="loaded") return n.items>0; if(FILTER==="pending") return n.items===0; }
+    return true; // internal nodes shown so children reachable
+  }
+  function isHidden(path){ // hidden if itself or any ancestor is hidden
+    var parts=path.split("/");
+    for(var i=1;i<=parts.length;i++){ if(HIDDEN.has(parts.slice(0,i).join("/"))) return true; }
+    return false;
+  }
+  function q(){ return ($("#q").value||"").trim().toLowerCase(); }
+
+  function renderNode(n){
+    var query=q();
+    var self=(n.name+" "+n.path).toLowerCase().indexOf(query)>=0;
+    var kidsHtml="", anyKid=false;
+    if(!n.leaf){ n.children.forEach(function(c){ var h=renderNode(c); if(h){kidsHtml+=h; anyKid=true;} }); }
+    if(query && !self && !anyKid) return "";
+    if(!matchFilter(n) && !anyKid) return "";
+    var dot,badge,cnt="";
+    if(n.leaf){
+      var ok=n.items>0;
+      dot='<span class="dot '+(ok?"ok":"pend")+'"></span>';
+      badge= ok?'<span class="badge ok">loaded</span>':'<span class="badge pend">pending</span>';
+      cnt= ok?'<span class="cnt">'+n.items.toLocaleString()+'</span>':'';
+    } else {
+      var full=n.loaded===n.total&&n.total>0, none=n.loaded===0;
+      dot='<span class="dot '+(full?"ok":(none?"pend":"part"))+'"></span>';
+      badge='<span class="badge '+(full?"ok":"pend")+'">'+n.loaded+'/'+n.total+'</span>';
+      cnt= n.items?'<span class="cnt">'+n.items.toLocaleString()+'</span>':'';
+    }
+    var hid=HIDDEN.has(n.path);
+    var eff=isHidden(n.path);
+    var tw=n.leaf?'<span class="tw"></span>':'<span class="tw" data-tw="1">▸</span>';
+    var cls="node"+(n.leaf?"":" hasK")+(eff?" hiddenNode":"");
+    var row='<div class="row">'+tw+dot+
+      '<span class="nm">'+esc(n.name.replace(/_/g," "))+' <span class="path">'+esc(n.path)+'</span></span>'+
+      cnt+badge+
+      '<button class="eye'+(hid?" off":"")+'" data-h="'+esc(n.path)+'" title="'+(hid?"hidden — click to show":"visible — click to hide")+'">'+(hid?"🚫":"👁")+'</button>'+
+      '</div>';
+    return '<div class="'+cls+'" data-node="'+esc(n.path)+'">'+row+(n.leaf?"":'<div class="kids">'+kidsHtml+"</div>")+"</div>";
+  }
+  function render(){
+    var roots=Object.keys(TAX).filter(function(k){return k[0]!=="_";}).map(function(k){ return build((typeof TAX[k]==="object")?TAX[k]:{}, [k]); });
+    var html=roots.map(renderNode).join("");
+    $("#tree").innerHTML=html||'<div class="muted" style="padding:14px">No nodes match.</div>';
+    // wire twisties + eyes
+    document.querySelectorAll('#tree .tw[data-tw]').forEach(function(t){ t.onclick=function(){ var node=t.closest(".node"); node.classList.toggle("open"); t.textContent=node.classList.contains("open")?"▾":"▸"; }; });
+    document.querySelectorAll('#tree .eye').forEach(function(b){ b.onclick=function(ev){ ev.stopPropagation(); var p=b.dataset.h; if(HIDDEN.has(p)) HIDDEN.delete(p); else HIDDEN.add(p); saveVis(); render(); }; });
+    if(q()) document.querySelectorAll('#tree .node.hasK').forEach(function(n){n.classList.add("open");});
+  }
+  function esc(s){ return (s||"").replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  function exportVis(){
+    var out={ note:"DGE library visibility overrides. hidden = list of taxonomy paths to hide from the public library (a hidden node hides its whole subtree). Commit to dge/data/library-visibility.json and have library.js honor it.", hidden:[...HIDDEN].sort() };
+    var blob=new Blob([JSON.stringify(out,null,1)],{type:"application/json"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="library-visibility.json"; a.click();
+  }
+})();
+</script>
+</body>
+</html>
