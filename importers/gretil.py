@@ -64,6 +64,14 @@ def parse(text, name, unit):
                 seen_first_verse = True
             buf.append(before)
             iast = " ".join(x for x in buf if x).strip()
+            # Some GRETIL pages mark an original print-page break with a
+            # run of underscores, glued directly onto the start of the
+            # following text rather than sitting on its own line -- so it
+            # isn't caught by the header-prefix skip above. Confirmed for
+            # real on raghuvamsha: nearly every chapter opened with
+            # "_______...___ <real first word>". Underscores never appear
+            # in real Sanskrit verse text, so stripping any run of 3+ is safe.
+            iast = re.sub(r"_{3,}", " ", iast).strip()
             dev = iast_to_dev(iast).replace(" // ", " ॥ ").replace("//", "॥").replace(" / ", " । ").replace("/", "।")
             cantos.setdefault(int(m.group(1)), []).append({"number": int(m.group(2)), "sanskrit_text": dev})
             buf = []
