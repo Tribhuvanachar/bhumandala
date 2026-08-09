@@ -4,14 +4,21 @@
 window.DGE = window.DGE || {};
 window.DGE.Vision = (function () {
 
-  async function ocrImageBase64(base64Png, apiKey) {
+  async function ocrImageBase64(base64Png, apiKey, languageHints) {
     const url = `https://vision.googleapis.com/v1/images:annotate?key=${encodeURIComponent(apiKey)}`;
-    const body = {
-      requests: [{
-        image: { content: base64Png },
-        features: [{ type: 'TEXT_DETECTION' }]
-      }]
+    const request = {
+      image: { content: base64Png },
+      // DOCUMENT_TEXT_DETECTION, not TEXT_DETECTION — Google's own guidance is
+      // that this feature is the one tuned for dense document/book-page text;
+      // TEXT_DETECTION targets sparse scene text (signs, labels) and is a worse
+      // fit for a full scanned page. Also gives per-symbol confidence scores,
+      // which TEXT_DETECTION's plain fullTextAnnotation.text throws away.
+      features: [{ type: 'DOCUMENT_TEXT_DETECTION' }]
     };
+    if (languageHints && languageHints.length) {
+      request.imageContext = { languageHints };
+    }
+    const body = { requests: [request] };
 
     let res;
     try {
@@ -37,7 +44,39 @@ window.DGE.Vision = (function () {
     if (annotation && annotation.error) {
       throw new Error('Vision API returned an error for this page: ' + annotation.error.message);
     }
-    return (annotation && annotation.fullTextAnnotation) ? annotation.fullTextAnnotation.text : '';
+    const fta = annotation && annotation.fullTextAnnotation;
+    if (!fta) return { text: '', avgConfidence: null, lowConfidenceWords: [] };
+    return { text: fta.text || '', ...summarizeConfidence(fta) };
+  }
+
+  // Vision's own per-word confidence (0-1), buried in fullTextAnnotation's
+  // page/block/paragraph/word tree — this is what TEXT_DETECTION's plain
+  // .text string throws away entirely, and it's a real, cheap signal for
+  // which words are worth a human double-checking, without needing a second
+  // OCR pass or any ground truth to compare against.
+  const LOW_CONFIDENCE_THRESHOLD = 0.85;
+  function summarizeConfidence(fta) {
+    let sum = 0, count = 0;
+    const lowConfidenceWords = [];
+    (fta.pages || []).forEach(page => {
+      (page.blocks || []).forEach(block => {
+        (block.paragraphs || []).forEach(para => {
+          (para.words || []).forEach(word => {
+            if (typeof word.confidence !== 'number') return;
+            sum += word.confidence;
+            count++;
+            if (word.confidence < LOW_CONFIDENCE_THRESHOLD) {
+              const text = (word.symbols || []).map(s => s.text || '').join('');
+              if (text) lowConfidenceWords.push({ text, confidence: word.confidence });
+            }
+          });
+        });
+      });
+    });
+    return {
+      avgConfidence: count ? sum / count : null,
+      lowConfidenceWords
+    };
   }
 
   return { ocrImageBase64 };

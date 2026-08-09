@@ -20,6 +20,11 @@ button:disabled { opacity: 0.5; cursor: default; }
 .preview-commentary { color: #444; font-size: 13px; margin-top: 4px; }
 .preview-raw-page { border-bottom: 1px solid #ddd; padding: 10px 0; }
 .preview-raw-text { white-space: pre-wrap; font-size: 13px; margin-top: 4px; }
+.preview-confidence { font-size: 12px; margin-top: 4px; }
+.preview-confidence.conf-good { color: #1a7a3a; }
+.preview-confidence.conf-mid { color: #a06a00; }
+.preview-confidence.conf-low { color: #c02020; font-weight: 700; }
+.low-conf-word { background: #fff2cc; border-bottom: 1px dashed #c02020; padding: 0 2px; }
 #previewLabel { margin: 4px 0 8px; }
 select { width: 100%; box-sizing: border-box; padding: 8px; font-size: 14px; margin-bottom: 6px; }
 .schema-row { border-bottom: 1px solid #ddd; padding: 10px 0; }

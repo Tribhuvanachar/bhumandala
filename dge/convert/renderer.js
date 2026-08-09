@@ -38,6 +38,21 @@ window.DGE.Renderer = (function () {
     ocrPages.forEach(function (p) {
       html += '<div class="preview-raw-page">';
       html += '<div class="preview-num">Page ' + (p.page != null ? p.page : '') + '</div>';
+      // Vision's own per-word confidence — not proof of correctness, but a
+      // real, free signal for which words are worth a human double-checking
+      // instead of re-reading every single page start to finish.
+      if (typeof p.avgConfidence === 'number') {
+        const pct = Math.round(p.avgConfidence * 100);
+        const cls = pct >= 90 ? 'conf-good' : (pct >= 75 ? 'conf-mid' : 'conf-low');
+        html += '<div class="preview-confidence ' + cls + '">Vision confidence: ' + pct + '%';
+        if (p.lowConfidenceWords && p.lowConfidenceWords.length) {
+          html += ' — ' + p.lowConfidenceWords.length + ' word(s) worth checking: ';
+          html += p.lowConfidenceWords.map(function (w) {
+            return '<span class="low-conf-word" title="' + Math.round(w.confidence * 100) + '% confidence">' + escapeHtml(w.text) + '</span>';
+          }).join(' ');
+        }
+        html += '</div>';
+      }
       html += '<div class="preview-raw-text">' + escapeHtml(p.text || '(no text detected)') + '</div>';
       html += '</div>';
     });

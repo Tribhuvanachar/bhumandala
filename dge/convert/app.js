@@ -139,6 +139,17 @@ window.DGE.App = (function () {
     return v || undefined;
   }
 
+  // Comma-separated BCP-47/ISO language codes (e.g. "kn" or "kn,sa") to bias
+  // Vision's script/language detection — blank means auto-detect, unchanged
+  // default. Matters most for Kannada and other scripts that can otherwise
+  // get misdetected, especially on pages mixing Sanskrit-in-Kannada-script
+  // with plain Kannada.
+  function getLanguageHints() {
+    const el = $('languageHintsInput');
+    const v = el ? el.value.trim() : '';
+    return v ? v.split(',').map(s => s.trim()).filter(Boolean) : undefined;
+  }
+
   // Returns the full sorted page-number list this run should cover.
   // Blank/unparseable input means "every page" (the existing, unchanged
   // default) — see U().parsePageSelection for exactly how the text is read.
@@ -183,6 +194,11 @@ window.DGE.App = (function () {
     if (geminiModelEl) {
       geminiModelEl.value = localStorage.getItem('gemini_model') || '';
       geminiModelEl.addEventListener('input', () => localStorage.setItem('gemini_model', geminiModelEl.value));
+    }
+    const languageHintsEl = $('languageHintsInput');
+    if (languageHintsEl) {
+      languageHintsEl.value = localStorage.getItem('vision_language_hints') || '';
+      languageHintsEl.addEventListener('input', () => localStorage.setItem('vision_language_hints', languageHintsEl.value));
     }
     const chunkSizeEl = $('chunkSizeInput');
     if (chunkSizeEl) {
@@ -547,12 +563,15 @@ window.DGE.App = (function () {
       $('progressText').textContent = `Page ${p} (${i + 1} / ${selectedPages.length} selected)`;
       try {
         const pageObj = await currentLoader.getPageImage(p);
-        const text = await withAutoRetry(
-          () => VisionMod().ocrImageBase64(pageObj.imageBase64, visionKey),
+        const result = await withAutoRetry(
+          () => VisionMod().ocrImageBase64(pageObj.imageBase64, visionKey, getLanguageHints()),
           `OCR on page ${p}`,
           () => cancelRequested
         );
-        ocrPages.push({ page: p, text: text });
+        ocrPages.push({ page: p, text: result.text, avgConfidence: result.avgConfidence, lowConfidenceWords: result.lowConfidenceWords });
+        if (result.lowConfidenceWords && result.lowConfidenceWords.length) {
+          log(`Page ${p}: ${result.lowConfidenceWords.length} low-confidence word(s) — worth a manual check (avg confidence ${Math.round(result.avgConfidence * 100)}%).`);
+        }
         await IDB().set(ocrProgressKey(), { lastPage: p });
         await IDB().set(ocrDataKey(), { pages: ocrPages });
         updateKnownFilesManifest(currentLoader.getDocumentName(), ocrPages.length, total);

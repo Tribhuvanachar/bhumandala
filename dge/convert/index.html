@@ -15,14 +15,14 @@
     window.location.replace('../index.html');
   }
 </script>
-<title>DGE Convert v0.12.0</title>
-<link rel="stylesheet" href="style.css?v=0.12.0">
+<title>DGE Convert v0.13.0</title>
+<link rel="stylesheet" href="style.css?v=0.13.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
 <div><a href="../index.html">🏠 Back to DGE main page</a></div>
-<div>Version: <b id="versionDisplay">0.12.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.13.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF or page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -31,6 +31,9 @@
   <legend>API Keys</legend>
   <label for="visionKey">Vision API Key</label>
   <input type="password" id="visionKey" autocomplete="off">
+  <label for="languageHintsInput">OCR language hint(s) — optional</label>
+  <input type="text" id="languageHintsInput" placeholder="e.g. kn — or kn,sa for mixed Sanskrit-in-Kannada pages">
+  <p class="hint">Blank = auto-detect (default). For Kannada text — especially pages mixing plain Kannada with Sanskrit shlokas printed in Kannada script — an explicit hint noticeably helps Vision pick the right script. Comma-separate multiple codes.</p>
   <label for="geminiKey">Gemini API Key</label>
   <input type="password" id="geminiKey" autocomplete="off">
   <label for="geminiModelInput">Gemini model</label>
@@ -131,8 +134,8 @@
 </fieldset>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.12.0';
-  window.DGE_CONVERT_BUILD = '2026-08-08';
+  window.DGE_CONVERT_VERSION = '0.13.0';
+  window.DGE_CONVERT_BUILD = '2026-08-09';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -142,17 +145,17 @@
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   }
 </script>
-<script src="utils.js?v=0.12.0"></script>
-<script src="idb.js?v=0.12.0"></script>
-<script src="pdf.js?v=0.12.0"></script>
-<script src="image.js?v=0.12.0"></script>
-<script src="loaders.js?v=0.12.0"></script>
-<script src="vision.js?v=0.12.0"></script>
-<script src="gemini.js?v=0.12.0"></script>
-<script src="github.js?v=0.12.0"></script>
-<script src="mapper.js?v=0.12.0"></script>
-<script src="urlimport.js?v=0.12.0"></script>
-<script src="renderer.js?v=0.12.0"></script>
-<script src="app.js?v=0.12.0"></script>
+<script src="utils.js?v=0.13.0"></script>
+<script src="idb.js?v=0.13.0"></script>
+<script src="pdf.js?v=0.13.0"></script>
+<script src="image.js?v=0.13.0"></script>
+<script src="loaders.js?v=0.13.0"></script>
+<script src="vision.js?v=0.13.0"></script>
+<script src="gemini.js?v=0.13.0"></script>
+<script src="github.js?v=0.13.0"></script>
+<script src="mapper.js?v=0.13.0"></script>
+<script src="urlimport.js?v=0.13.0"></script>
+<script src="renderer.js?v=0.13.0"></script>
+<script src="app.js?v=0.13.0"></script>
 </body>
 </html>

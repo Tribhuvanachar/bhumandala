@@ -96,7 +96,7 @@ Modular classic scripts, shared global scope, loaded in order via `<script>` tag
 
 _(Convert tool, Veda ingestion toolkit, Admin GitHub File Manager, Access control, Data architecture, Rendering/multi-schema support, notable bug fixes, UI/UX, Config Editor, and repo hygiene sections are unchanged from the previous version of this document — see git history for the full text if needed. Newer additions below.)_
 
-### Convert tool (`dge/convert/`, now v0.12.0)
+### Convert tool (`dge/convert/`, now v0.13.0)
 PDF/page-images/URL → Vision OCR → Gemini proofread → Schema Mapper → GitHub push, all resumable via IndexedDB. Recent additions:
 - Super-admin-only page selection (`1-10, 15, 20-25`) scoping both OCR and Proofread to the same pages, defaulting to all.
 - Gemini model override (fixes hitting a rate-limited default model).
@@ -106,6 +106,7 @@ PDF/page-images/URL → Vision OCR → Gemini proofread → Schema Mapper → Gi
 - Screen Wake Lock during active runs (stops the phone screen auto-locking mid-run — the most common everyday cause of a run getting backgrounded; switching apps entirely is a hard mobile-browser platform limit no page code can override).
 - `navigator.storage.persist()` requested on load, to reduce the chance of the browser silently evicting saved progress under storage pressure.
 - A "files with saved progress on this device" hint panel.
+- **OCR accuracy tooling**: switched Vision's feature type from `TEXT_DETECTION` to `DOCUMENT_TEXT_DETECTION` (Google's own recommendation for dense document/book pages, not sparse scene text — was using the wrong one); added an optional language-hints field (e.g. `kn` or `kn,sa` for Sanskrit-in-Kannada-script pages, which auto-detect can otherwise misjudge); the raw OCR preview now shows Vision's own per-word confidence per page and highlights specific low-confidence words, so a human review pass can target exactly what's worth checking instead of re-reading every page. This is a real signal, not a substitute for verification against the source — there's still no way to check OCR against ground truth with zero human involvement, since none exists for an unseen scan.
 
 ### User accounts (Firebase) — inert by default
 `AUTH_CONFIG.enabled: false` in `config.js`. Google Sign-In + optional Phone OTP (flag-gated), Firestore-backed roles, sized for ~1 lakh accounts on Firebase's free/low-cost tier. Nothing user-visible until a superadmin flips the flag and fills in real project credentials — see `FIREBASE_SETUP.md` for cost tables and setup steps.
