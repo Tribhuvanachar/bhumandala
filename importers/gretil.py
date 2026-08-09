@@ -1,16 +1,17 @@
-"""Generic GRETIL importer (IAST -> Devanagari). Handles any GRETIL e-text whose
-verses end with a '// ABBR_canto.verse //' marker (Manu, Harivamsha, Raghuvamsha,
-Shishupalavadha, other smritis/kavyas). Star-passage lines (starting '*') and
+"""Generic GRETIL importer (IAST -> Devanagari). Handles both the older
+'// ABBR_canto.verse //' marker style (Manu/Raghuvamsha/Shishupalavadha/
+other smritis) and the plainer 'Word canto.verse text /' prose-citation
+style some pages use (Vishnu Smriti). Star-passage markers ('*ABBR_N') and
 '[h: ... :h]' headers are skipped. Run:  python importers/dispatch.py <id>
 """
 import re, collections
-from common import http_get, strip_html, iast_to_dev, write_grantha
+from common import http_get, to_text, iast_to_dev, write_grantha
 
 # id -> spec. unit = folder/label for each canto ('adhyaya'|'sarga').
-# harivamsha/raghuvamsha/shishupalavadha target a "/mula" leaf -- matches
-# the layer-folder convention already used for Ramayana/Mahabharata in the
-# catalog (leaves room for a commentary layer alongside it later). Smritis
-# below stay flat, matching their own already-scaffolded catalog entries.
+# All target a "/mula" leaf -- matches the layer-folder convention already
+# used for Ramayana/Mahabharata in the catalog (leaves room for a
+# commentary layer alongside it later). Smritis stay flat, matching their
+# own already-scaffolded catalog entries.
 GRETIL = {
   "harivamsha":        dict(name="Harivamsha", author="Maharshi Veda Vyasa", unit="adhyaya",
       schema="itihasa_purana_text", target="itihasas/harivamsha/mula",
@@ -38,45 +39,50 @@ GRETIL = {
       urls=["https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/html/sa_mAgha-zizupAlavadha.htm"]),
 }
 
-REF = re.compile(r"//\s*[A-Za-z]+_(\d+)[.,](\d+)")   # // ABBR_canto.verse (trailing // optional)
+RE_A  = re.compile(r"//\s*([A-Za-z]{1,8})_(\d+)[.,](\d+)")            # // ABBR_canto.verse  (Manu/Raghu/Shishu/Harivamsha)
+RE_B  = re.compile(r"^\s*\S+\s+(\d+)[.,](\d+)\s+(.+?)\s*\\?/{1,2}\s*$") # Word canto.verse  text //  (Visnu prose sutra)
+STAR  = re.compile(r"\*[A-Za-z]+_\d")                                   # *HV_1.0*1:1 star-passage marker
+
+def _emit(cantos, c, v, iast):
+    iast = re.sub(r"[\\^~]", "", iast).strip()       # drop GRETIL analytic markers
+    # Some GRETIL pages mark an original print-page break with a run of
+    # underscores glued directly onto the same line as the following verse
+    # marker -- confirmed for real on raghuvamsha. Since it shares the
+    # matched line rather than sitting on its own separate line, the
+    # stray-line-drop logic in parse() below never sees it as a discardable
+    # line on its own; it has to be stripped here instead. Underscores
+    # never appear in real Sanskrit verse text, so any run of 3+ is safe
+    # to remove regardless of position.
+    iast = re.sub(r"_{3,}", " ", iast).strip()
+    if not iast:
+        return
+    dev = iast_to_dev(iast).replace("//", "॥").replace("/", "।")
+    cantos.setdefault(c, []).append({"number": v, "sanskrit_text": dev})
 
 def parse(text, name, unit):
-    text = strip_html(text)
-    cantos = collections.OrderedDict()      # canto -> [ {number, sanskrit_text} ]
+    text = to_text(text)
+    cantos = collections.OrderedDict()
     buf = []
-    seen_first_verse = False
     for raw in text.splitlines():
         line = raw.strip()
-        if not line or line[0] in "[%*#":   # header / comment / star-passage / marker
+        if not line or line[0] in "[%#" or STAR.search(line):
             continue
-        m = REF.search(line)
+        m = RE_A.search(line)
         if m:
             before = line[:m.start()].strip()
-            if not seen_first_verse:
-                # Whatever accumulated before the very first verse marker is
-                # GRETIL's standard page preamble (embedded CSS, encoding-
-                # scheme description, copyright/credit lines) -- not verse
-                # text, even though none of it happens to start with the
-                # header markers skipped above. Confirmed for real: this
-                # was getting transliterated into nonsense as "verse 1"
-                # before this fix -- see PROJECT_STATUS.md.
-                buf = []
-                seen_first_verse = True
-            buf.append(before)
-            iast = " ".join(x for x in buf if x).strip()
-            # Some GRETIL pages mark an original print-page break with a
-            # run of underscores, glued directly onto the start of the
-            # following text rather than sitting on its own line -- so it
-            # isn't caught by the header-prefix skip above. Confirmed for
-            # real on raghuvamsha: nearly every chapter opened with
-            # "_______...___ <real first word>". Underscores never appear
-            # in real Sanskrit verse text, so stripping any run of 3+ is safe.
-            iast = re.sub(r"_{3,}", " ", iast).strip()
-            dev = iast_to_dev(iast).replace(" // ", " ॥ ").replace("//", "॥").replace(" / ", " । ").replace("/", "।")
-            cantos.setdefault(int(m.group(1)), []).append({"number": int(m.group(2)), "sanskrit_text": dev})
+            iast = (" ".join(buf) + " " + before).strip() if buf else before
+            _emit(cantos, int(m.group(2)), int(m.group(3)), iast)
             buf = []
-        else:
+            continue
+        b = RE_B.match(line)
+        if b:
+            _emit(cantos, int(b.group(1)), int(b.group(2)), b.group(3))
+            buf = []
+            continue
+        if line.endswith("/"):                 # pada continuation of a multi-line verse
             buf.append(line)
+            continue
+        buf = []                                # stray/header line: drop (do not pollute next verse)
     return [{"id": f"{unit}_{c:02d}", "reference": f"{name}, {unit.title()} {c}", "shlokas": sh}
             for c, sh in cantos.items()]
 

@@ -50,3 +50,21 @@ try:
 except Exception:
     def itrans_to_dev(s):
         raise RuntimeError("pip install indic-transliteration (see importers/requirements.txt)")
+
+def to_text(doc):
+    """HTML -> text preserving line breaks (for GRETIL corpustei + 1_sanskr
+    pages). Unlike strip_html() above, this doesn't assume a <pre> wrapper
+    or single-line-per-verse markup -- some GRETIL pages (the newer
+    corpustei/transformations exports, e.g. harivamsha) structure each line
+    with real HTML block tags (<l>, <lg>, <p>) instead of plain-text
+    newlines inside one <pre>, so treating the whole page as one blob (or
+    just extracting <pre> content) collapses all the line structure the
+    parser below actually needs. Also strips <style>/<script> element
+    content specifically (not just their tags) for the same reason
+    strip_html() does -- belt and suspenders with gretil.py's own
+    stray-line-drop logic below."""
+    doc = re.sub(r"(?i)<(script|style)\b[^>]*>.*?</\1>", "", doc)
+    doc = re.sub(r"(?i)<br\s*/?>", "\n", doc)
+    doc = re.sub(r"(?i)</(p|div|lg|l|tr|li|h[1-6])\s*>", "\n", doc)
+    doc = re.sub(r"<[^>]+>", "", doc)
+    return html.unescape(doc)
