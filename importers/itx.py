@@ -21,6 +21,7 @@ VEND = re.compile(r"\|\|\s*(\d+)(?:\\?\.(\d+))?\s*\|\|")
 
 def parse(itx, name, unit):
     sarga = 1; buf = []; cantos = collections.OrderedDict()
+    seen_first_verse = False
     for raw in itx.splitlines():
         s = raw.strip()
         if not s: continue
@@ -30,6 +31,13 @@ def parse(itx, name, unit):
         if s.startswith("iti "): buf = []; continue   # colophon
         mv = VEND.search(raw)
         if mv:
+            if not seen_first_verse:
+                # Same class of bug confirmed for real in gretil.py's parser
+                # (see common.py/gretil.py): a source's un-prefixed preamble
+                # text before the first verse marker isn't verse content,
+                # even if none of the usual comment-prefix checks catch it.
+                buf = []
+                seen_first_verse = True
             buf.append(raw[:mv.start()].strip())
             itrans = " ".join(x for x in buf if x).strip()
             dev = itrans_to_dev(itrans)

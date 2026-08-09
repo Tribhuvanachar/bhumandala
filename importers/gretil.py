@@ -44,6 +44,7 @@ def parse(text, name, unit):
     text = strip_html(text)
     cantos = collections.OrderedDict()      # canto -> [ {number, sanskrit_text} ]
     buf = []
+    seen_first_verse = False
     for raw in text.splitlines():
         line = raw.strip()
         if not line or line[0] in "[%*#":   # header / comment / star-passage / marker
@@ -51,6 +52,16 @@ def parse(text, name, unit):
         m = REF.search(line)
         if m:
             before = line[:m.start()].strip()
+            if not seen_first_verse:
+                # Whatever accumulated before the very first verse marker is
+                # GRETIL's standard page preamble (embedded CSS, encoding-
+                # scheme description, copyright/credit lines) -- not verse
+                # text, even though none of it happens to start with the
+                # header markers skipped above. Confirmed for real: this
+                # was getting transliterated into nonsense as "verse 1"
+                # before this fix -- see PROJECT_STATUS.md.
+                buf = []
+                seen_first_verse = True
             buf.append(before)
             iast = " ".join(x for x in buf if x).strip()
             dev = iast_to_dev(iast).replace(" // ", " ॥ ").replace("//", "॥").replace(" / ", " । ").replace("/", "।")

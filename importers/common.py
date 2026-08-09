@@ -18,8 +18,16 @@ def http_get(url, timeout=90):
         return r.read().decode("utf-8", "replace")
 
 def strip_html(doc):
+    # <style>/<script> element CONTENT (CSS/JS text) survives a plain
+    # tag-stripping regex -- only the tag delimiters get removed, not what's
+    # between them -- and some GRETIL pages embed a <style> block directly
+    # inside the body/<pre> content, not just in <head>. Confirmed for real:
+    # narada_smriti's live page did exactly this, and the CSS text got
+    # transliterated character-by-character into the first "verse" as
+    # garbage (e.g. "font-family" -> nonsense Devanagari) before this fix.
+    doc = re.sub(r"<(script|style)\b[^>]*>.*?</\1>", "", doc, flags=re.S | re.I)
     m = re.search(r"<pre[^>]*>(.*?)</pre>", doc, re.S | re.I)
-    txt = m.group(1) if m else re.sub(r"<[^>]+>", "", doc)
+    txt = re.sub(r"<[^>]+>", "", m.group(1) if m else doc)
     return html.unescape(txt)
 
 def data_base():
