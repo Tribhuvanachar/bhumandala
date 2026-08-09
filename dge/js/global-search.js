@@ -20,17 +20,27 @@
     if (document.getElementById('dge-gs-css')) return;
     var s = document.createElement('style');
     s.id = 'dge-gs-css';
+    // Colours read the app's real design tokens (css/main.css) so the search
+    // UI themes with the rest of the site. The FAB sits ABOVE the bottom
+    // toolbar (body reserves 126px for it) and above the toolbar z-index
+    // (9999) so it is never hidden behind Filter/Tools; the overlay sits at
+    // modal level (11000). The scheme <select> is styled to match the app's
+    // controls (custom chevron, themed background) instead of the bare OS look.
+    var ARROW = "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%238a7a63' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>\")";
     s.textContent = [
-      '.dge-gs-fab{position:fixed;right:16px;bottom:16px;z-index:9998;width:48px;height:48px;border-radius:50%;border:none;background:#7a3b1d;color:#fff;font-size:20px;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer}',
-      '.dge-gs-overlay{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.45);display:none}',
+      '.dge-gs-fab{position:fixed;right:16px;bottom:calc(134px + env(safe-area-inset-bottom));z-index:10000;width:48px;height:48px;border-radius:50%;border:none;background:var(--accent-red,#7a3b1d);color:#fff;font-size:20px;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer}',
+      '.dge-gs-overlay{position:fixed;inset:0;z-index:11000;background:rgba(0,0,0,.45);display:none}',
       '.dge-gs-overlay.open{display:block}',
-      '.dge-gs-panel{max-width:720px;margin:6vh auto 0;background:var(--card-bg,#fff);color:var(--text,#1a1a1a);border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);overflow:hidden;font-family:inherit}',
-      '.dge-gs-top{display:flex;gap:8px;padding:12px;border-bottom:1px solid rgba(0,0,0,.12)}',
-      '.dge-gs-input{flex:1;font-size:17px;padding:10px 12px;border:1px solid rgba(0,0,0,.2);border-radius:8px;background:transparent;color:inherit}',
-      '.dge-gs-scheme{border:1px solid rgba(0,0,0,.2);border-radius:8px;background:transparent;color:inherit;padding:0 6px}',
+      '.dge-gs-panel{max-width:720px;margin:6vh auto 0;background:var(--card-bg,#fff);color:var(--text-primary,#1a1a1a);border:1px solid var(--card-border,rgba(0,0,0,.12));border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);overflow:hidden;font-family:inherit}',
+      '.dge-gs-top{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--card-border,rgba(0,0,0,.12));align-items:center}',
+      '.dge-gs-input{flex:1;font-size:17px;padding:10px 12px;border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,transparent);color:inherit}',
+      '.dge-gs-scheme{border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,#fff) ' + ARROW + ' no-repeat right 8px center;background-size:10px;color:var(--text-primary,inherit);padding:0 26px 0 10px;height:40px;font:inherit;font-size:14px;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none}',
+      '.dge-gs-scheme:focus{outline:none;border-color:var(--accent-red,#7a3b1d)}',
+      '.dge-gs-x{border:1px solid var(--card-border,rgba(0,0,0,.2));background:var(--card-bg,#fff);color:var(--muted-text,#8a7a63);border-radius:8px;width:40px;height:40px;font-size:16px;cursor:pointer;flex:none}',
+      '.dge-gs-x:hover{color:var(--accent-red,#7a3b1d);border-color:var(--accent-red,#7a3b1d)}',
       '.dge-gs-results{max-height:64vh;overflow:auto;padding:6px 0}',
-      '.dge-gs-row{padding:10px 14px;cursor:pointer;border-bottom:1px solid rgba(0,0,0,.06)}',
-      '.dge-gs-row:hover{background:rgba(122,59,29,.08)}',
+      '.dge-gs-row{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--card-border,rgba(0,0,0,.06))}',
+      '.dge-gs-row:hover{background:var(--card-active,rgba(122,59,29,.08))}',
       '.dge-gs-meta{font-size:12px;opacity:.7;display:flex;gap:8px;flex-wrap:wrap}',
       '.dge-gs-snip{font-size:16px;margin-top:2px;line-height:1.5}',
       '.dge-gs-hint{padding:14px;opacity:.6;font-size:13px}'
@@ -54,16 +64,18 @@
       '<div class="dge-gs-panel" role="dialog" aria-label="Global search">' +
         '<div class="dge-gs-top">' +
           '<input class="dge-gs-input" id="dge-gs-input" placeholder="Search all texts — Devanagari, IAST, HK, or SLP1…" autocomplete="off">' +
-          '<select class="dge-gs-scheme" id="dge-gs-scheme">' +
+          '<select class="dge-gs-scheme" id="dge-gs-scheme" title="Input script">' +
             '<option value="auto">auto</option><option value="devanagari">देव</option>' +
             '<option value="iast">IAST</option><option value="hk">HK</option><option value="slp1">SLP1</option>' +
           '</select>' +
+          '<button class="dge-gs-x" id="dge-gs-x" title="Close (Esc)" aria-label="Close">✕</button>' +
         '</div>' +
         '<div class="dge-gs-results" id="dge-gs-results"><div class="dge-gs-hint">Type a word or phrase in any script. Matching is sandhi/spelling tolerant.</div></div>' +
       '</div>';
     ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
     document.body.appendChild(ov);
 
+    document.getElementById('dge-gs-x').addEventListener('click', close);
     document.getElementById('dge-gs-input').addEventListener('input', onType);
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }

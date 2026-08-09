@@ -199,39 +199,44 @@
   function injectCSS() {
     if (document.getElementById('kosha-css')) return;
     var css = document.createElement('style'); css.id = 'kosha-css';
+    // Fallbacks below map to the app's real design tokens (css/main.css) so
+    // the Kosha overlay themes with the rest of the site instead of using
+    // hard-coded colours. FAB sits ABOVE the bottom toolbar (body reserves
+    // 126px for it) and above the toolbar's z-index (9999) so it is never
+    // hidden behind Filter/Tools; the overlay sits at modal level (11000).
     css.textContent = [
-      '#kosha-fab{position:fixed;right:16px;bottom:84px;z-index:9998;background:var(--accent,#8a5a2b);color:#fff;border:none;border-radius:28px;padding:12px 18px;font-size:16px;box-shadow:0 3px 12px rgba(0,0,0,.3);cursor:pointer}',
-      '#kosha-ov{position:fixed;inset:0;z-index:9999;background:var(--bg,#fff);color:var(--text,#111);display:none;flex-direction:column}',
+      '#kosha-fab{position:fixed;right:16px;bottom:calc(192px + env(safe-area-inset-bottom));z-index:10000;background:var(--accent-red,#8a5a2b);color:#fff;border:none;border-radius:28px;padding:12px 18px;font-size:16px;box-shadow:0 3px 12px rgba(0,0,0,.3);cursor:pointer}',
+      '#kosha-ov{position:fixed;inset:0;z-index:11000;background:var(--bg-main,#fff);color:var(--text-primary,#111);display:none;flex-direction:column}',
       '#kosha-ov.open{display:flex}',
-      '.kosha-bar{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--border,#ddd);align-items:center}',
-      '.kosha-bar input{flex:1;font-size:18px;padding:10px 12px;border:1px solid var(--border,#ccc);border-radius:8px;background:var(--card,#fff);color:inherit}',
+      '.kosha-bar{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--card-border,#ddd);align-items:center}',
+      '.kosha-bar input{flex:1;font-size:18px;padding:10px 12px;border:1px solid var(--card-border,#ccc);border-radius:8px;background:var(--card-bg,#fff);color:inherit}',
       '.kosha-bar button{background:none;border:none;font-size:22px;cursor:pointer;color:inherit;padding:6px 10px}',
       '.kosha-body{flex:1;display:flex;min-height:0}',
-      '.kosha-res{width:38%;max-width:340px;overflow:auto;border-right:1px solid var(--border,#eee)}',
+      '.kosha-res{width:38%;max-width:340px;overflow:auto;border-right:1px solid var(--card-border,#eee)}',
       '.kosha-detail{flex:1;overflow:auto;padding:16px}',
       '@media(max-width:640px){.kosha-res{width:100%;max-width:none;border-right:none}.kosha-detail{display:none}#kosha-ov.showdetail .kosha-res{display:none}#kosha-ov.showdetail .kosha-detail{display:block}}',
-      '.kosha-hit{padding:10px 12px;border-bottom:1px solid var(--border,#f0f0f0);cursor:pointer}',
-      '.kosha-hit:hover{background:var(--hover,#f6f1ea)}',
+      '.kosha-hit{padding:10px 12px;border-bottom:1px solid var(--card-border,#f0f0f0);cursor:pointer}',
+      '.kosha-hit:hover{background:var(--card-active,#f6f1ea)}',
       '.kosha-hw{font-size:19px;font-weight:600;margin-right:8px}',
-      '.kosha-count{font-size:12px;color:var(--muted,#888);margin-right:6px}',
-      '.kosha-chip{display:inline-block;font-size:11px;background:var(--chip,#efe7dc);border-radius:10px;padding:1px 7px;margin:1px 2px}',
+      '.kosha-count{font-size:12px;color:var(--muted-text,#888);margin-right:6px}',
+      '.kosha-chip{display:inline-block;font-size:11px;background:var(--card-active,#efe7dc);border-radius:10px;padding:1px 7px;margin:1px 2px}',
       '.kosha-title{font-size:26px;margin:0 0 10px}',
-      '.kosha-slp1{font-size:14px;color:var(--muted,#999);font-weight:400}',
-      '.kosha-card{border:1px solid var(--border,#e6ddcf);border-radius:10px;padding:12px;margin:0 0 14px}',
+      '.kosha-slp1{font-size:14px;color:var(--muted-text,#999);font-weight:400}',
+      '.kosha-card{border:1px solid var(--card-border,#e6ddcf);border-radius:10px;padding:12px;margin:0 0 14px}',
       '.kosha-src{font-weight:600;margin-bottom:8px}',
       '.kosha-lic{font-size:11px;color:#a33;border:1px solid #d99;border-radius:8px;padding:0 6px;margin-left:6px;font-weight:400}',
       '.kosha-lic.ok{color:#286;border-color:#8c9}',
-      '.kosha-sense{padding:6px 0;border-top:1px dashed var(--border,#eee)}',
+      '.kosha-sense{padding:6px 0;border-top:1px dashed var(--card-border,#eee)}',
       '.kosha-sense-head{margin-bottom:2px}',
-      '.kosha-lang{font-size:11px;background:var(--accent,#8a5a2b);color:#fff;border-radius:8px;padding:1px 7px}',
-      '.kosha-pos{font-size:12px;color:var(--muted,#888);font-style:italic}',
+      '.kosha-lang{font-size:11px;background:var(--accent-red,#8a5a2b);color:#fff;border-radius:8px;padding:1px 7px}',
+      '.kosha-pos{font-size:12px;color:var(--muted-text,#888);font-style:italic}',
       '.kosha-gloss{font-size:17px;margin:2px 0}',
-      '.kosha-ety,.kosha-note,.kosha-cite{font-size:14px;color:var(--muted,#666);margin:2px 0}',
+      '.kosha-ety,.kosha-note,.kosha-cite{font-size:14px;color:var(--muted-text,#666);margin:2px 0}',
       '.kosha-cite{font-style:italic}',
-      '.kosha-xl{font-size:12px;margin:4px 6px 0 0;background:var(--chip,#efe7dc);border:none;border-radius:8px;padding:3px 8px;cursor:pointer;color:inherit}',
-      '.kosha-xl-out{font-size:15px;margin:4px 0;padding:6px 8px;background:var(--hover,#f6f1ea);border-radius:8px}',
-      '.kosha-empty,.kosha-loading,.kosha-foot{padding:14px;color:var(--muted,#999)}',
-      '.kosha-foot{font-size:12px;border-top:1px solid var(--border,#eee);margin-top:12px}'
+      '.kosha-xl{font-size:12px;margin:4px 6px 0 0;background:var(--card-active,#efe7dc);border:none;border-radius:8px;padding:3px 8px;cursor:pointer;color:inherit}',
+      '.kosha-xl-out{font-size:15px;margin:4px 0;padding:6px 8px;background:var(--card-active,#f6f1ea);border-radius:8px}',
+      '.kosha-empty,.kosha-loading,.kosha-foot{padding:14px;color:var(--muted-text,#999)}',
+      '.kosha-foot{font-size:12px;border-top:1px solid var(--card-border,#eee);margin-top:12px}'
     ].join('\n');
     document.head.appendChild(css);
   }
