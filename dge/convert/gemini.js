@@ -75,38 +75,29 @@ Raw OCR input follows:
     required: ['shlokas']
   };
 
+  // Delegates network + error classification to the shared window.DGEGemini
+  // client (js/gemini.js) -- same human-readable quota/permission/network
+  // messages and one-step lighter-model fallback as Ashtadhyayi/Kosha now
+  // get. The structured-JSON-output constraint (responseMimeType/Schema)
+  // and the finishReason/JSON-parse checks below are Convert-specific and
+  // stay on top of the shared client's response rather than inside it.
   async function proofread(ocrPagesText, apiKey, model) {
     const modelName = model || 'gemini-3.6-flash';
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${encodeURIComponent(apiKey)}`;
     const prompt = PROOFREAD_PROMPT + '\n\n' + ocrPagesText;
 
-    let res;
-    try {
-      res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            responseMimeType: 'application/json',
-            responseSchema: PROOFREAD_RESPONSE_SCHEMA
-          }
-        })
-      });
-    } catch (e) {
-      throw new Error('Network error reaching Gemini API: ' + e.message);
+    const r = await window.DGEGemini.generate({
+      prompt: prompt, apiKey: apiKey, model: modelName,
+      generationConfig: {
+        responseMimeType: 'application/json',
+        responseSchema: PROOFREAD_RESPONSE_SCHEMA
+      }
+    });
+
+    if (!r.ok) {
+      throw new Error(r.error.title + ': ' + r.error.message + ' ' + r.error.action);
     }
 
-    const data = await res.json().catch(() => ({}));
-
-    if (!res.ok) {
-      const msg = (data.error && data.error.message) || `HTTP ${res.status}`;
-      if (res.status === 401 || res.status === 403) throw new Error('Gemini API key rejected: ' + msg);
-      if (res.status === 429) throw new Error('Gemini quota/rate limit exceeded: ' + msg);
-      throw new Error('Gemini API error: ' + msg);
-    }
-
-    const candidate = data.candidates && data.candidates[0];
+    const candidate = r.raw && r.raw.candidates && r.raw.candidates[0];
     const finishReason = candidate && candidate.finishReason;
 
     // Check finishReason BEFORE attempting to parse — a MAX_TOKENS cutoff
@@ -120,12 +111,12 @@ Raw OCR input follows:
       throw new Error(`Gemini stopped early (reason: ${finishReason}) instead of completing normally.`);
     }
 
-    const text = candidate && candidate.content && candidate.content.parts && candidate.content.parts[0] && candidate.content.parts[0].text;
-    if (!text) {
+    if (!r.text) {
       throw new Error('Gemini returned no usable content.');
     }
+    if (r.fellBack) console.warn('[Convert] ' + r.notice);
 
-    return window.DGE.Utils.parseJsonLoose(text);
+    return window.DGE.Utils.parseJsonLoose(r.text);
   }
 
   return { proofread };

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.1.0
+ * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.1.1
  *
  * Blended Read⇄Compare UI for the Paninian sutrapatha + commentary layers
  * (Kashika / Balamanorama / Tattvabodhini / Nyasa), with a REAL Gemini
@@ -167,11 +167,21 @@
   }
   function askGemini(prompt){
     var key=getKey(); if(!key) return Promise.reject(new Error("NO_KEY"));
-    var url="https://generativelanguage.googleapis.com/v1beta/models/"+getModel()+":generateContent?key="+encodeURIComponent(key);
-    return fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.3,maxOutputTokens:800}})})
-      .then(function(r){ return r.json().then(function(j){ if(!r.ok) throw new Error((j.error&&j.error.message)||("HTTP "+r.status)); return j; }); })
-      .then(function(j){ var c=j.candidates&&j.candidates[0]; return (c&&c.content&&c.content.parts||[]).map(function(p){return p.text;}).join("")||"(empty response)"; });
+    // Delegates network + error classification to the shared window.DGEGemini
+    // client (js/gemini.js) so quota/permission/model errors read as plain
+    // English with an actual next step instead of a raw API error dump, and
+    // a quota/overload/missing-model failure gets one automatic retry on a
+    // lighter model before giving up. Key/model still come from THIS page's
+    // own LS wrapper (JSON-encoded under "dge.ash.*"), passed as per-call
+    // overrides -- DGEGemini's own localStorage lookup is never used here.
+    return window.DGEGemini.generate({
+      prompt: prompt, apiKey: key, model: getModel(),
+      generationConfig: { temperature: 0.3, maxOutputTokens: 800 }
+    }).then(function(r){
+      if(!r.ok) throw new Error(r.error.title+" — "+r.error.message+" "+r.error.action);
+      var text = r.text || "(empty response)";
+      return r.fellBack ? ("["+r.notice+"]\n\n"+text) : text;
+    });
   }
   var aiLang="en";
   function runAI(question){

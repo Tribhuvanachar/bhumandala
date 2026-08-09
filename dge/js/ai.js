@@ -479,17 +479,20 @@ function dgeGetConfiguredProviders() {
 // "bring your own key" apps like this one) — without it, requests are
 // rejected with a CORS/auth error.
 
+// Delegates network + error classification to the shared window.DGEGemini
+// client (js/gemini.js) so a quota/permission/network failure reads as
+// plain English with an actual next step instead of a raw API message, and
+// gets one automatic retry on a lighter model first. The function's own
+// contract (resolve to the answer text, throw Error on failure) is kept
+// unchanged so dgeCallProvider()'s uniform dispatch across Gemini/OpenAI/
+// Claude -- and the Promise.allSettled multi-provider flow above it --
+// don't need to change.
 async function dgeCallGemini(apiKey, model, systemPrompt, history) {
   const modelName = model || (typeof appConfig !== 'undefined' && appConfig.geminiModel) || 'gemini-3.6-flash';
   const contents = history.map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] }));
-  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt }] }, contents })
-  });
-  const data = await res.json();
-  if (data.error) throw new Error(data.error.message || 'Gemini request failed');
-  return data.candidates[0].content.parts[0].text;
+  const r = await window.DGEGemini.generate({ contents, system: systemPrompt, apiKey, model: modelName });
+  if (!r.ok) throw new Error(r.error.title + ' — ' + r.error.message + ' ' + r.error.action);
+  return r.fellBack ? `[${r.notice}]\n\n${r.text}` : r.text;
 }
 
 async function dgeCallOpenAI(apiKey, model, systemPrompt, history) {

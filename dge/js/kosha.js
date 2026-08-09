@@ -109,21 +109,22 @@
   }
 
   // ---- BYOK Gemini translate pivot -----------------------------------------
+  // Delegates to the shared window.DGEGemini client (js/gemini.js) for human
+  // error messages (quota/permission/etc.) and a one-step lighter-model
+  // fallback -- same reasoning as Ashtadhyayi's AI tutor. Key/model still
+  // read from Kosha's own existing localStorage keys, passed as per-call
+  // overrides.
   function translate(text, fromLang, toLang) {
     var key = localStorage.getItem('gemini_api_key');
     if (!key) return Promise.reject(new Error('Set your Gemini API key in the Convert tool first (stored as gemini_api_key).'));
     var model = localStorage.getItem('gemini_model') || 'gemini-3.6-flash';
-    var url = 'https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent?key=' + encodeURIComponent(key);
     var prompt = 'Translate this ' + (LANG_NAME[fromLang] || fromLang) + ' dictionary gloss of a Sanskrit word into ' +
       (LANG_NAME[toLang] || toLang) + '. Output only the translation, no notes:\n\n' + text;
-    return fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) })
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        var c = d.candidates && d.candidates[0];
-        var t = c && c.content && c.content.parts && c.content.parts[0] && c.content.parts[0].text;
-        if (!t) throw new Error((d.error && d.error.message) || 'No translation returned.');
-        return t.trim();
+    return window.DGEGemini.generate({ prompt: prompt, apiKey: key, model: model })
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.error.title + ' — ' + r.error.message + ' ' + r.error.action);
+        if (!r.text) throw new Error('No translation returned.');
+        return (r.fellBack ? '[' + r.notice + ']\n' : '') + r.text.trim();
       });
   }
 
@@ -182,7 +183,14 @@
                 translate(s.gloss, glossLang, target).then(function (t) {
                   var out = el('div', 'kosha-xl-out', '<span class="kosha-lang">' + (LANG_NAME[target] || target) + ' *</span> ' + esc(t));
                   sd.appendChild(out); btn.remove();
-                }).catch(function (e) { btn.disabled = false; btn.textContent = '⚠'; btn.title = e.message; });
+                }).catch(function (e) {
+                  // Previously left the failure reason only in a hover
+                  // tooltip on a bare "⚠" glyph -- confirmed for real that
+                  // no one finds it there. Show it inline instead, same
+                  // pattern as a successful translation's own output block.
+                  var out = el('div', 'kosha-xl-out', '<span class="kosha-lang" style="background:var(--muted-text,#999)">⚠</span> ' + esc(e.message));
+                  sd.appendChild(out); btn.remove();
+                });
               };
               sd.appendChild(btn);
             });

@@ -15,14 +15,14 @@
     window.location.replace('../index.html');
   }
 </script>
-<title>DGE Convert v0.15.0</title>
-<link rel="stylesheet" href="style.css?v=0.15.0">
+<title>DGE Convert v0.15.1</title>
+<link rel="stylesheet" href="style.css?v=0.15.1">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
 <div><a href="../index.html">🏠 Back to DGE main page</a></div>
-<div>Version: <b id="versionDisplay">0.15.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.15.1</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF or page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -151,7 +151,7 @@
 </fieldset>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.15.0';
+  window.DGE_CONVERT_VERSION = '0.15.1';
   window.DGE_CONVERT_BUILD = '2026-08-09';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
@@ -167,20 +167,21 @@
      harmless to load unconditionally otherwise. Pinned exact version, same
      convention as pdf.js/Sanscript above. -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
-<script src="utils.js?v=0.15.0"></script>
-<script src="idb.js?v=0.15.0"></script>
-<script src="pdf.js?v=0.15.0"></script>
-<script src="image.js?v=0.15.0"></script>
-<script src="loaders.js?v=0.15.0"></script>
-<script src="vision.js?v=0.15.0"></script>
-<script src="tesseract-check.js?v=0.15.0"></script>
-<script src="review-classifier.js?v=0.15.0"></script>
-<script src="gemini.js?v=0.15.0"></script>
-<script src="github.js?v=0.15.0"></script>
-<script src="mapper.js?v=0.15.0"></script>
-<script src="urlimport.js?v=0.15.0"></script>
-<script src="renderer.js?v=0.15.0"></script>
-<script src="review-ui.js?v=0.15.0"></script>
-<script src="app.js?v=0.15.0"></script>
+<script src="utils.js?v=0.15.1"></script>
+<script src="idb.js?v=0.15.1"></script>
+<script src="pdf.js?v=0.15.1"></script>
+<script src="image.js?v=0.15.1"></script>
+<script src="loaders.js?v=0.15.1"></script>
+<script src="vision.js?v=0.15.1"></script>
+<script src="tesseract-check.js?v=0.15.1"></script>
+<script src="review-classifier.js?v=0.15.1"></script>
+<script src="../js/gemini.js?v=0.15.1"></script>
+<script src="gemini.js?v=0.15.1"></script>
+<script src="github.js?v=0.15.1"></script>
+<script src="mapper.js?v=0.15.1"></script>
+<script src="urlimport.js?v=0.15.1"></script>
+<script src="renderer.js?v=0.15.1"></script>
+<script src="review-ui.js?v=0.15.1"></script>
+<script src="app.js?v=0.15.1"></script>
 </body>
 </html>
