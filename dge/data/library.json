@@ -1205,483 +1205,603 @@
     },
     {
       "path": "dge/data/sarvamoola_grantha/gita_prasthana/gita_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "गीताभाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/gita_prasthana/gita_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "गीताभाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/gita_prasthana/gita_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "गीताभाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/gita_prasthana/gita_tatparya_nirnaya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "गीतातात्पर्यनिर्णयः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/gita_prasthana/gita_tatparya_nirnaya/tika_jayatirtha/data.json",
-      "populated": true
+      "populated": true,
+      "title": "गीतातात्पर्यनिर्णयः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/gita_prasthana/gita_tatparya_nirnaya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "गीतातात्पर्यनिर्णयः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/brahma_sutra_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/brahma_sutra_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "ब्रह्मसूत्रभाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/brahma_sutra_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "ब्रह्मसूत्रभाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/anuvyakhyana/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "अनुव्याख्यानम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/anuvyakhyana/tika_jayatirtha/data.json",
-      "populated": true
+      "populated": true,
+      "title": "अनुव्याख्यानम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/anuvyakhyana/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "अनुव्याख्यानम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/anubhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "अणुभाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/anubhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "अणुभाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/anubhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "अणुभाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/nyaya_vivarana/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "न्यायविवरणम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/nyaya_vivarana/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "न्यायविवरणम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/sutra_prasthana/nyaya_vivarana/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "न्यायविवरणम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/ishavasyopanishad_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "ईशावास्योपनिषद्भाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/ishavasyopanishad_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "ईशावास्योपनिषद्भाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/ishavasyopanishad_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "ईशावास्योपनिषद्भाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/kenopanishad_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "केनोपनिषद्भाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/kenopanishad_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "केनोपनिषद्भाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/kenopanishad_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "केनोपनिषद्भाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/kathopanishad_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/kathopanishad_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "कठोपनिषद्भाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/kathopanishad_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "कठोपनिषद्भाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/mandukyopanishad_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "माण्डूक्योपनिषद्भाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/mandukyopanishad_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "माण्डूक्योपनिषद्भाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/mandukyopanishad_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "माण्डूक्योपनिषद्भाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/mundakopanishad_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "मुण्डकोपनिषद्भाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/mundakopanishad_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "मुण्डकोपनिषद्भाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/mundakopanishad_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "मुण्डकोपनिषद्भाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/prashnopanishad_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "प्रश्नोपनिषद्भाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/prashnopanishad_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "प्रश्नोपनिषद्भाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/prashnopanishad_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "प्रश्नोपनिषद्भाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/taittiriyopanishad_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "तैत्तिरीयोपनिषद्भाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/taittiriyopanishad_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "तैत्तिरीयोपनिषद्भाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/taittiriyopanishad_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "तैत्तिरीयोपनिषद्भाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/aitareyopanishad_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "ऐतरेयोपनिषद्भाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/aitareyopanishad_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "ऐतरेयोपनिषद्भाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/aitareyopanishad_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "ऐतरेयोपनिषद्भाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/brihadaranyakopanishad_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "बृहदारण्यकोपनिषद्भाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/brihadaranyakopanishad_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "बृहदारण्यकोपनिषद्भाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/brihadaranyakopanishad_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "बृहदारण्यकोपनिषद्भाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/chandogyopanishad_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "छान्दोग्योपनिषद्भाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/chandogyopanishad_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "छान्दोग्योपनिषद्भाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/upanishad_prasthana/chandogyopanishad_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "छान्दोग्योपनिषद्भाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/rig_bhashya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "ऋग्भाष्यम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/rig_bhashya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "ऋग्भाष्यम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/rig_bhashya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "ऋग्भाष्यम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattva_sankhyana/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "तत्त्वसंख्यानम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattva_sankhyana/tika_jayatirtha/data.json",
-      "populated": true
+      "populated": true,
+      "title": "तत्त्वसंख्यानम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattva_sankhyana/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "तत्त्वसंख्यानम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattva_viveka/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "तत्त्वविवेकः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattva_viveka/tika_jayatirtha/data.json",
-      "populated": true
+      "populated": true,
+      "title": "तत्त्वविवेकः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattva_viveka/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "तत्त्वविवेकः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattvodyota/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "तत्त्वोद्योतः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattvodyota/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "तत्त्वोद्योतः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/tattvodyota/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "तत्त्वोद्योतः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "विष्णुतत्त्वविनिर्णयः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "विष्णुतत्त्वविनिर्णयः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/katha_lakshana/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "कथालक्षणम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/katha_lakshana/tika_jayatirtha/data.json",
-      "populated": true
+      "populated": true,
+      "title": "कथालक्षणम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/katha_lakshana/tippani/data.json",
-      "populated": true
+      "populated": true,
+      "title": "कथालक्षणम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/pramana_lakshana/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "प्रमाणलक्षणम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/pramana_lakshana/tika_jayatirtha/data.json",
-      "populated": true
+      "populated": true,
+      "title": "प्रमाणलक्षणम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/pramana_lakshana/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "प्रमाणलक्षणम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/upadhi_khandana/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "उपाधिखण्डनम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/upadhi_khandana/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "उपाधिखण्डनम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/upadhi_khandana/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "उपाधिखण्डनम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/mayavada_khandana/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "मायावादखण्डनम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/mayavada_khandana/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "मायावादखण्डनम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/mayavada_khandana/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "मायावादखण्डनम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "प्रपञ्चमिथ्यात्वानुमानखण्डनम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "प्रपञ्चमिथ्यात्वानुमानखण्डनम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "प्रपञ्चमिथ्यात्वानुमानखण्डनम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/karma_nirnaya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "कर्मनिर्णयः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/karma_nirnaya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "कर्मनिर्णयः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dasha_prakarana_granthas/karma_nirnaya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "कर्मनिर्णयः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/itihasa_purana_tatparya_nirnaya/mahabharata_tatparya_nirnaya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "महाभारततात्पर्यनिर्णयः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/itihasa_purana_tatparya_nirnaya/mahabharata_tatparya_nirnaya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "महाभारततात्पर्यनिर्णयः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/itihasa_purana_tatparya_nirnaya/mahabharata_tatparya_nirnaya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "महाभारततात्पर्यनिर्णयः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/itihasa_purana_tatparya_nirnaya/bhagavata_tatparya_nirnaya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/itihasa_purana_tatparya_nirnaya/bhagavata_tatparya_nirnaya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "भागवततात्पर्यनिर्णयः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/itihasa_purana_tatparya_nirnaya/bhagavata_tatparya_nirnaya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "भागवततात्पर्यनिर्णयः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dvadasha_stotra/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "द्वादशस्तोत्रम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dvadasha_stotra/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "द्वादशस्तोत्रम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/dvadasha_stotra/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "द्वादशस्तोत्रम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/yamaka_bharata/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "यमकभारतम्"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/yamaka_bharata/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "यमकभारतम् (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/yamaka_bharata/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "यमकभारतम् (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/tantrasara_sangraha/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "तन्त्रसारसङ्ग्रहः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/tantrasara_sangraha/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "तन्त्रसारसङ्ग्रहः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/tantrasara_sangraha/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "तन्त्रसारसङ्ग्रहः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/sadachara_smriti/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "सदाचारस्मृतिः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/sadachara_smriti/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "सदाचारस्मृतिः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/sadachara_smriti/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "सदाचारस्मृतिः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/jayanti_nirnaya/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "जयन्तीनिर्णयः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/jayanti_nirnaya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "जयन्तीनिर्णयः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/jayanti_nirnaya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "जयन्तीनिर्णयः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/nyasa_paddhati/mula/data.json",
-      "populated": false
+      "populated": false,
+      "title": "न्यासपद्धतिः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/nyasa_paddhati/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "न्यासपद्धतिः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/nyasa_paddhati/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "न्यासपद्धतिः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/tithi_nirnaya/mula/data.json",
-      "populated": false
+      "populated": false,
+      "title": "तिथिनिर्णयः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/tithi_nirnaya/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "तिथिनिर्णयः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/tithi_nirnaya/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "तिथिनिर्णयः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/yati_pranava_kalpa/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "यतिप्रणवकल्पः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/yati_pranava_kalpa/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "यतिप्रणवकल्पः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/yati_pranava_kalpa/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "यतिप्रणवकल्पः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/krishnamrita_maharnava/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "कृष्णामृतमहार्णवः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/krishnamrita_maharnava/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "कृष्णामृतमहार्णवः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/krishnamrita_maharnava/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "कृष्णामृतमहार्णवः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/kanduka_stuti/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "कन्दुकस्तुतिः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/kanduka_stuti/tika_jayatirtha/data.json",
-      "populated": false
+      "populated": false,
+      "title": "कन्दुकस्तुतिः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/kanduka_stuti/tippani/data.json",
-      "populated": false
+      "populated": false,
+      "title": "कन्दुकस्तुतिः (टिप्पणी)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/nakha_stuti/mula/data.json",
-      "populated": true
+      "populated": true,
+      "title": "नखस्तुतिः"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/nakha_stuti/tika_jayatirtha/data.json",
-      "populated": true
+      "populated": true,
+      "title": "नखस्तुतिः (जयतीर्थटीका)"
     },
     {
       "path": "dge/data/sarvamoola_grantha/achara_and_ancillary_granthas/nakha_stuti/tippani/data.json",
-      "populated": true
+      "populated": true,
+      "title": "नखस्तुतिः (टिप्पणी)"
     },
     {
       "path": "dge/data/smritis/manu_smriti/data.json",
