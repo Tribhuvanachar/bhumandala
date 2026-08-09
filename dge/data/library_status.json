@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 562,
-  "loaded": 95,
-  "items": 55764
+  "loaded": 96,
+  "items": 57394
  },
  "sections": {
   "ancillary": {
@@ -28,8 +28,8 @@
   },
   "kavya": {
    "total": 4,
-   "loaded": 0,
-   "items": 0
+   "loaded": 1,
+   "items": 1630
   },
   "pancharatra_agama": {
    "total": 17,
@@ -214,7 +214,7 @@
   "kavya/kiratarjuniya": 0,
   "kavya/kumarasambhava": 0,
   "kavya/raghuvamsha": 0,
-  "kavya/shishupalavadha": 0,
+  "kavya/shishupalavadha": 1630,
   "pancharatra_agama/pancharatra_samhitas/ahirbudhnya_samhita": 0,
   "pancharatra_agama/pancharatra_samhitas/hayagriva_samhita": 0,
   "pancharatra_agama/pancharatra_samhitas/ishvara_samhita": 0,
