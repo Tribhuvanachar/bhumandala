@@ -15,14 +15,14 @@
     window.location.replace('../index.html');
   }
 </script>
-<title>DGE Convert v0.13.0</title>
-<link rel="stylesheet" href="style.css?v=0.13.0">
+<title>DGE Convert v0.14.0</title>
+<link rel="stylesheet" href="style.css?v=0.14.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
 <div><a href="../index.html">🏠 Back to DGE main page</a></div>
-<div>Version: <b id="versionDisplay">0.13.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.14.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF or page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -61,6 +61,11 @@
   <label for="pageSelectionInput">Pages to process (optional, super admin only tool)</label>
   <input type="text" id="pageSelectionInput" placeholder="e.g. 1-10, 15, 20-25 — blank = all pages">
   <p class="hint">Leave blank to OCR every page (default). Narrowing this also scopes step 3 (Proofread) to the same pages — useful for testing a few pages first, or re-running just the ones that failed, without redoing the whole book.</p>
+  <label style="display:flex; align-items:center; gap:6px; font-weight:400;">
+    <input type="checkbox" id="crossCheckEnabled" style="width:auto; margin:0;">
+    Also run a free Tesseract.js cross-check (independent second OCR opinion)
+  </label>
+  <p class="hint">Off by default — this roughly doubles per-page OCR time and downloads a language model the first time (a few MB, cached after). Where Vision and Tesseract agree, that's a real independent-agreement signal; where they don't, the page is flagged so you know exactly where to look instead of re-reading everything. Uses the language hint(s) above (falls back to English if none set).</p>
   <div id="resumeBar" class="resume-bar" style="display:none;">
     <span id="resumeText"></span>
     <button id="resumeBtn">Resume</button>
@@ -134,7 +139,7 @@
 </fieldset>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.13.0';
+  window.DGE_CONVERT_VERSION = '0.14.0';
   window.DGE_CONVERT_BUILD = '2026-08-09';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
@@ -145,17 +150,23 @@
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   }
 </script>
-<script src="utils.js?v=0.13.0"></script>
-<script src="idb.js?v=0.13.0"></script>
-<script src="pdf.js?v=0.13.0"></script>
-<script src="image.js?v=0.13.0"></script>
-<script src="loaders.js?v=0.13.0"></script>
-<script src="vision.js?v=0.13.0"></script>
-<script src="gemini.js?v=0.13.0"></script>
-<script src="github.js?v=0.13.0"></script>
-<script src="mapper.js?v=0.13.0"></script>
-<script src="urlimport.js?v=0.13.0"></script>
-<script src="renderer.js?v=0.13.0"></script>
-<script src="app.js?v=0.13.0"></script>
+<!-- Optional free second-opinion OCR (Tesseract.js, WASM, runs entirely in
+     the browser) — only ever invoked if the "cross-check" checkbox is on;
+     harmless to load unconditionally otherwise. Pinned exact version, same
+     convention as pdf.js/Sanscript above. -->
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
+<script src="utils.js?v=0.14.0"></script>
+<script src="idb.js?v=0.14.0"></script>
+<script src="pdf.js?v=0.14.0"></script>
+<script src="image.js?v=0.14.0"></script>
+<script src="loaders.js?v=0.14.0"></script>
+<script src="vision.js?v=0.14.0"></script>
+<script src="tesseract-check.js?v=0.14.0"></script>
+<script src="gemini.js?v=0.14.0"></script>
+<script src="github.js?v=0.14.0"></script>
+<script src="mapper.js?v=0.14.0"></script>
+<script src="urlimport.js?v=0.14.0"></script>
+<script src="renderer.js?v=0.14.0"></script>
+<script src="app.js?v=0.14.0"></script>
 </body>
 </html>

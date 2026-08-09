@@ -54,6 +54,20 @@ window.DGE.Renderer = (function () {
         html += '</div>';
       }
       html += '<div class="preview-raw-text">' + escapeHtml(p.text || '(no text detected)') + '</div>';
+      // Tesseract cross-check, when the opt-in checkbox was on for this run —
+      // a real independent-agreement signal, word-diffed against Vision's
+      // text so a mismatch is visible at a glance rather than requiring a
+      // full re-read of both texts side by side.
+      if (p.crossCheck) {
+        const pct = Math.round(p.crossCheck.similarity * 100);
+        const cls = pct >= 90 ? 'conf-good' : (pct >= 70 ? 'conf-mid' : 'conf-low');
+        html += '<div class="preview-confidence ' + cls + '">Tesseract cross-check: ' + pct + '% similar to Vision' + (pct < 70 ? ' — low agreement, worth checking' : '') + '</div>';
+        const diff = window.DGE.TesseractCheck.wordDiff(p.text, p.crossCheck.text);
+        html += '<div class="crosscheck-diff"><div class="crosscheck-col"><div class="crosscheck-label">Vision</div>' +
+          diff.a.map(w => '<span class="' + (w.match ? '' : 'diff-mismatch') + '">' + escapeHtml(w.text) + '</span>').join(' ') + '</div>';
+        html += '<div class="crosscheck-col"><div class="crosscheck-label">Tesseract</div>' +
+          diff.b.map(w => '<span class="' + (w.match ? '' : 'diff-mismatch') + '">' + escapeHtml(w.text) + '</span>').join(' ') + '</div></div>';
+      }
       html += '</div>';
     });
     containerEl.innerHTML = html;

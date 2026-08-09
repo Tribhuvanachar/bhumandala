@@ -4,6 +4,7 @@ window.DGE.App = (function () {
   const U = () => window.DGE.Utils;
   const IDB = () => window.DGE.IDB;
   const VisionMod = () => window.DGE.Vision;
+  const TesseractCheckMod = () => window.DGE.TesseractCheck;
   const GeminiMod = () => window.DGE.Gemini;
   const RendererMod = () => window.DGE.Renderer;
   const GitHubMod = () => window.DGE.GitHub;
@@ -150,6 +151,11 @@ window.DGE.App = (function () {
     return v ? v.split(',').map(s => s.trim()).filter(Boolean) : undefined;
   }
 
+  function getCrossCheckEnabled() {
+    const el = $('crossCheckEnabled');
+    return !!(el && el.checked);
+  }
+
   // Returns the full sorted page-number list this run should cover.
   // Blank/unparseable input means "every page" (the existing, unchanged
   // default) — see U().parsePageSelection for exactly how the text is read.
@@ -199,6 +205,11 @@ window.DGE.App = (function () {
     if (languageHintsEl) {
       languageHintsEl.value = localStorage.getItem('vision_language_hints') || '';
       languageHintsEl.addEventListener('input', () => localStorage.setItem('vision_language_hints', languageHintsEl.value));
+    }
+    const crossCheckEl = $('crossCheckEnabled');
+    if (crossCheckEl) {
+      crossCheckEl.checked = localStorage.getItem('convert_cross_check_enabled') === 'true';
+      crossCheckEl.addEventListener('change', () => localStorage.setItem('convert_cross_check_enabled', crossCheckEl.checked));
     }
     const chunkSizeEl = $('chunkSizeInput');
     if (chunkSizeEl) {
@@ -568,10 +579,27 @@ window.DGE.App = (function () {
           `OCR on page ${p}`,
           () => cancelRequested
         );
-        ocrPages.push({ page: p, text: result.text, avgConfidence: result.avgConfidence, lowConfidenceWords: result.lowConfidenceWords });
+        const ocrEntry = { page: p, text: result.text, avgConfidence: result.avgConfidence, lowConfidenceWords: result.lowConfidenceWords };
+        ocrPages.push(ocrEntry);
         if (result.lowConfidenceWords && result.lowConfidenceWords.length) {
           log(`Page ${p}: ${result.lowConfidenceWords.length} low-confidence word(s) — worth a manual check (avg confidence ${Math.round(result.avgConfidence * 100)}%).`);
         }
+
+        // Free independent second opinion, opt-in only — a failure here
+        // must never take down the primary OCR run, since Vision's result
+        // is already the authoritative one being saved either way.
+        if (getCrossCheckEnabled()) {
+          try {
+            const tessLang = TesseractCheckMod().mapLanguageHints(getLanguageHints());
+            const tessText = await TesseractCheckMod().recognizeBase64Png(pageObj.imageBase64, tessLang);
+            const sim = TesseractCheckMod().similarity(result.text, tessText);
+            ocrEntry.crossCheck = { text: tessText, similarity: sim };
+            log(`Page ${p}: Tesseract cross-check ${Math.round(sim * 100)}% similar to Vision.` + (sim < 0.7 ? ' Low agreement — worth a manual check.' : ''));
+          } catch (e) {
+            log(`Page ${p}: Tesseract cross-check failed (non-fatal, Vision result kept): ${U().formatError(e)}`);
+          }
+        }
+
         await IDB().set(ocrProgressKey(), { lastPage: p });
         await IDB().set(ocrDataKey(), { pages: ocrPages });
         updateKnownFilesManifest(currentLoader.getDocumentName(), ocrPages.length, total);
@@ -580,6 +608,7 @@ window.DGE.App = (function () {
         $('runOcrBtn').disabled = false;
         $('resumeBtn').disabled = false;
         releaseWakeLock();
+        await TesseractCheckMod().terminate();
         return;
       }
     }
@@ -587,6 +616,7 @@ window.DGE.App = (function () {
     $('runOcrBtn').disabled = false;
     $('resumeBtn').disabled = false;
     releaseWakeLock();
+    await TesseractCheckMod().terminate();
     $('progressText').textContent = `Done — ${ocrPages.length} of ${selectedPages.length} selected page(s) processed.`;
     log('OCR pass complete.');
     renderKnownFilesHint();

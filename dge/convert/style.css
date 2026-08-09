@@ -25,6 +25,10 @@ button:disabled { opacity: 0.5; cursor: default; }
 .preview-confidence.conf-mid { color: #a06a00; }
 .preview-confidence.conf-low { color: #c02020; font-weight: 700; }
 .low-conf-word { background: #fff2cc; border-bottom: 1px dashed #c02020; padding: 0 2px; }
+.crosscheck-diff { display: flex; gap: 10px; margin-top: 6px; font-size: 12px; }
+.crosscheck-col { flex: 1; min-width: 0; background: #fafafa; border: 1px solid #e2e2e2; border-radius: 4px; padding: 6px; word-wrap: break-word; }
+.crosscheck-label { font-weight: 700; color: #666; margin-bottom: 4px; }
+.diff-mismatch { background: #ffd9d9; border-radius: 2px; }
 #previewLabel { margin: 4px 0 8px; }
 select { width: 100%; box-sizing: border-box; padding: 8px; font-size: 14px; margin-bottom: 6px; }
 .schema-row { border-bottom: 1px solid #ddd; padding: 10px 0; }
