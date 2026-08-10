@@ -1,11 +1,13 @@
 # DGE Sanskrit TTS & Chanting Architecture
 
-**Version 1.0 — 10 August 2026**
+**Version 1.1 — 10 August 2026** (supersedes v1.0: adds §22-30, the Bhāgavata-Vāṇi
+APK vs. Vāgdhenu separation-of-responsibilities analysis)
 
 > **Status: planning document, not yet implemented.** Stored here for when TTS/chanting
 > work actually starts. No code in `dge/` currently reads or depends on anything in this
-> file. The original `.docx` this was generated from sits alongside it in this folder
-> (`DGE_Sanskrit_TTS_Architecture_V1.docx`) for reference.
+> file. The v1.0 `.docx` this was originally generated from sits alongside it in this
+> folder (`DGE_Sanskrit_TTS_Architecture_V1.docx`) for reference; this file has since
+> been updated to v1.1's content, which is a superset of v1.0 (§1-21 unchanged, §22-30 new).
 
 Architecture inspired by Bhāgavata-Vāṇi / Vāgdhenu and extended for classical Sanskrit, vṛtta/chandas and Vedic svara.
 
@@ -204,3 +206,343 @@ Sanskrit frontend -> Akṣara/phonology
 - Model weights: https://huggingface.co/prathoshap/vagdhenu
 - Dataset: https://huggingface.co/datasets/prathoshap/vagdhenu-data
 - Vāgbodhinī: https://prathosh.in/vagbodhini/
+
+
+## 22. Bhāgavata-Vāṇi APK vs. Vāgdhenu TTS — separation of responsibilities
+
+The investigation of the Bhāgavata-Vāṇi APK and its `classes.dex` leads to an important architectural conclusion: the Android application is the **content/player/distribution layer**, while Vāgdhenu is the **audio-generation layer**. The TTS model weights are not embedded in the Bhāgavata-Vāṇi APK.
+
+### 22.1 What belongs to the Bhāgavata-Vāṇi app
+
+```text
+Bhāgavata-Vāṇi
+│
+├── Android/Capacitor application code
+│     └── classes.dex
+│
+├── Local content database
+│     └── bhagavatam.db
+│
+├── Application/UI logic
+│
+├── Audio URL / download / playback logic
+│
+└── Optional local audio cache
+```
+
+The local database is the content source used by the application. It contains verse text and metadata such as section/verse identity, audio identifiers and timing information. Large audio assets are separate from the APK and can be downloaded/cached for playback.
+
+### 22.2 What belongs to Vāgdhenu
+
+Vāgdhenu is a separate Sanskrit chant TTS system. Its current public model is based on AI4Bharat IndicF5/F5-TTS with a flow-matching DiT and a fine-tuned BigVGAN-v2 vocoder. The public model repository contains approximately 3.15 GB of weights: two approximately 1.35 GB voice-model files plus a roughly 450 MB vocoder. The base IndicF5 components are obtained separately. citeturn0search0turn0search1
+
+The released Vāgdhenu system is explicitly intended for classical Sanskrit chant/pārāyaṇa and **does not support Vedic svaras**. Its prosody is reference-driven rather than an arbitrary pitch/duration controller. citeturn0search0
+
+### 22.3 End-to-end relationship
+
+```text
+                  VĀGDHENU / DGE TTS PIPELINE
+                           │
+        Sanskrit + meter + prosody/reference
+                           │
+                           ▼
+                     TTS inference
+                           │
+                           ▼
+                       WAV master
+                           │
+                         QC
+                           │
+                           ▼
+                     M4A / AAC
+                           │
+                           ▼
+                 Object storage / CDN
+                           │
+                           ▼
+                  BHĀGAVATA-VĀṆI
+                           │
+                    stream/download
+                           │
+                           ▼
+                       playback
+```
+
+Therefore DGE should **not** put a multi-gigabyte TTS model inside its Android/web application. The model belongs in a separate training/inference environment; the application should consume generated audio.
+
+## 23. What DGE should do differently
+
+DGE should preserve the good separation demonstrated by Bhāgavata-Vāṇi while extending it substantially.
+
+### Layer 1 — Sanskrit knowledge
+
+```text
+Canonical text
+   ↓
+Unicode normalization
+   ↓
+Sandhi/pronunciation rules
+   ↓
+Akṣara segmentation
+   ↓
+Phonological representation
+```
+
+### Layer 2 — Chandas
+
+```text
+Akṣaras
+   ↓
+Laghu / Guru
+   ↓
+Syllable count
+   ↓
+Vṛtta / chandas detection
+   ↓
+Pāda boundaries
+   ↓
+Yati / cadence
+```
+
+### Layer 3 — Vedic
+
+```text
+Akṣara
+   ↓
+Udātta / Anudātta / Svarita / Dīrgha-svarita
+   ↓
+Pitch contour
+   ↓
+Duration
+   ↓
+Tradition / śākhā / pāṭha rules
+```
+
+### Layer 4 — Voice
+
+```text
+Prosody plan + voice identity
+              ↓
+             TTS
+```
+
+### Layer 5 — Audio
+
+```text
+TTS
+ ↓
+Vocoder
+ ↓
+WAV master
+ ↓
+QC
+ ↓
+M4A/AAC
+ ↓
+Object storage/CDN
+```
+
+This keeps the TTS model independent from DGE's corpus, website and Android application.
+
+## 24. DGE should not make the TTS model responsible for everything
+
+The neural model should **not** be expected to infer all Sanskrit knowledge from raw Devanāgarī.
+
+The following should be deterministic or explicitly annotated before inference:
+
+- Sanskrit normalization
+- Akṣara/syllable segmentation
+- pronunciation
+- vowel quantity
+- visarga/anusvāra behavior
+- laghu/guru
+- meter identification
+- pāda boundaries
+- yati
+- Vedic accent labels
+- Vedic pitch/duration targets where available
+
+The model should primarily learn the mapping from these linguistic/prosodic controls to the desired acoustic realization.
+
+## 25. Vedic support must be a separate research track
+
+Vāgdhenu's public model card explicitly states that it is for classical Sanskrit chant and has no Vedic-svara support. citeturn0search0
+
+Therefore DGE should not attempt to obtain Vedic recitation simply by adding accent marks to classical TTS input.
+
+For Vedic work, create a dedicated dataset with:
+
+```text
+text
++
+śākhā
++
+pāṭha type
++
+accent per akṣara
++
+pitch/F0 contour
++
+duration
++
+pāda/boundary information
++
+speaker/tradition
+```
+
+A recent research direction on Rigvedic accent placement also demonstrates the importance of Unicode-safe, accent-aware representations and separate evaluation of accent errors. citeturn0academia23
+
+The eventual Vedic engine should therefore be **tradition-specific**, rather than claiming to produce a universal "Vedic voice".
+
+## 26. DGE voice-cloning strategy
+
+DGE should first build a dedicated voice-adaptation dataset using the user's own recordings.
+
+Recommended approach:
+
+1. Record clean Sanskrit speech/chant in a controlled environment.
+2. Keep lossless WAV masters.
+3. Record multiple sessions rather than one very long session.
+4. Cover Sanskrit phonetic combinations systematically.
+5. Record the same voice across multiple classical meters.
+6. Keep voice identity separate from meter/style references.
+7. Fine-tune an established backbone before considering training a new backbone from scratch.
+8. Maintain explicit model versions and evaluation sets.
+
+The Vāgdhenu corpus demonstrates that a relatively small, carefully curated single-speaker Sanskrit chant dataset can be useful for specialization; its public dataset is licensed CC-BY-4.0. citeturn0search4
+
+## 27. DGE should add an ASR/recitation-verification layer
+
+A powerful future extension is:
+
+```text
+Correct canonical verse
+        ↓
+DGE TTS reference
+        ↓
+Student/user recitation
+        ↓
+Sanskrit ASR
+        ↓
+Akṣara/word alignment
+        ↓
+Compare:
+  pronunciation
+  omissions
+  additions
+  timing
+  meter
+  Vedic accent
+        ↓
+Feedback
+```
+
+This is inspired by the broader Sanskrit speech-recognition direction: Sanskrit ASR benefits from language-specific units and phonetic/graphemic representations rather than treating Sanskrit as generic text. A published Sanskrit ASR study released a 78-hour corpus and found advantages from Sanskrit-specific modelling units. citeturn0academia22
+
+## 28. Recommended DGE deployment architecture
+
+```text
+                         DGE MASTER CORPUS
+                                │
+                                ▼
+                       Sanskrit/Metadata DB
+                                │
+              ┌─────────────────┼─────────────────┐
+              │                 │                 │
+              ▼                 ▼                 ▼
+         Sanskrit FE       CHANDAS ENGINE    VEDIC ENGINE
+              │                 │                 │
+              └─────────────────┼─────────────────┘
+                                ▼
+                         PROSODY PLAN
+                                │
+                                ▼
+                       YOUR VOICE MODEL
+                                │
+                                ▼
+                         TTS + VOCODER
+                                │
+                                ▼
+                          WAV / QC
+                                │
+                                ▼
+                           M4A / AAC
+                                │
+                                ▼
+                       Object Storage/CDN
+                                │
+                    ┌───────────┴───────────┐
+                    ▼                       ▼
+                 DGE Web                 DGE Android
+                    │                       │
+                    └───────────┬───────────┘
+                                ▼
+                          Audio playback
+                                │
+                       Timing/karaoke layer
+```
+
+The AI infrastructure and application infrastructure should therefore be independently scalable.
+
+## 29. Recommended development order
+
+### Phase A — Reproduce the classical architecture
+
+- Set up IndicF5/F5-TTS and Vāgdhenu as a reference baseline.
+- Run inference on Sanskrit verses.
+- Study its input/reference/meter mechanism.
+- Build the DGE Sanskrit frontend.
+- Build a small meter registry.
+- Produce a small test corpus.
+
+### Phase B — DGE's own voice
+
+- Record 1–2 hours of carefully controlled Sanskrit voice material.
+- Adapt the voice.
+- Test pronunciation separately from prosody.
+- Add 8–10 representative classical meters.
+- Build meter-specific reference recordings.
+- Generate a 100–500 verse pilot.
+
+### Phase C — Production architecture
+
+- Canonical DGE text database.
+- Audio asset generation pipeline.
+- Object storage/CDN.
+- Versioned audio IDs.
+- Timing metadata.
+- Web/Android player.
+- Offline cache.
+
+### Phase D — Vedic research
+
+- Choose one śākhā.
+- Choose one pāṭha type.
+- Obtain/record expert-approved material.
+- Build explicit accent/pitch/duration annotations.
+- Train/evaluate a Vedic prosody controller.
+- Expand only after expert validation.
+
+## 30. Final principle
+
+**DGE should copy the architectural separation, not merely copy the Vāgdhenu model.**
+
+The long-term DGE platform should be:
+
+```text
+                    SANSKRIT KNOWLEDGE
+                           +
+                      CHANDAS
+                           +
+                  VEDIC RECITATION
+                           +
+                    YOUR VOICE
+                           ↓
+                    DGE TTS ENGINE
+                           ↓
+                    AUDIO LIBRARY
+                           ↓
+                    DGE APPLICATION
+```
+
+The application should remain lightweight. The expensive AI work happens offline/in the TTS infrastructure; the resulting audio becomes a reusable digital asset.
