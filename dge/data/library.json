@@ -2563,7 +2563,8 @@
   },
   {
    "path": "dge/data/vyasakuta/vadiraja_tirtha/yuktimallika/data.json",
-   "populated": false
+   "populated": true,
+   "title": "ಯುಕ್ತಿಮಲ್ಲಿಕಾ (ಶ್ರೀ ವಾದಿರಾಜ ತೀರ್ಥ)"
   },
   {
    "path": "dge/data/vyasakuta/vadiraja_tirtha/rukminisha_vijaya/data.json",
