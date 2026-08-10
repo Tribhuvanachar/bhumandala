@@ -75,19 +75,19 @@ jobs:
             --out-dir vedavani_audio_out \
             $( [ "${{ inputs.dry_run }}" = "true" ] && echo --dry-run )
       - name: Report output size
-        if: ${{ inputs.dry_run == 'false' }}
+        if: ${{ !fromJSON(inputs.dry_run) }}
         run: |
           du -sh vedavani_audio_out || true
           find vedavani_audio_out -type f | wc -l
       - name: Upload output as workflow artifact
-        if: ${{ inputs.dry_run == 'false' }}
+        if: ${{ !fromJSON(inputs.dry_run) }}
         uses: actions/upload-artifact@v4
         with:
           name: vedavani-audio-${{ inputs.veda }}-${{ github.run_id }}
           path: vedavani_audio_out
           retention-days: 14
       - name: Open Pull Request
-        if: ${{ inputs.dry_run == 'false' && inputs.open_pr == 'true' }}
+        if: ${{ !fromJSON(inputs.dry_run) && fromJSON(inputs.open_pr) }}
         uses: peter-evans/create-pull-request@v6
         with:
           branch: ingest/vedavani-${{ inputs.veda }}
