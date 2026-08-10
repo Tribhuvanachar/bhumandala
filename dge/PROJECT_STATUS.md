@@ -211,6 +211,8 @@ What's New / Coming Soon modal, configurable audio source base URL (three-tier o
 - Decide how far to take the Kosha "Unclear"-licensed dictionaries (currently included per case-by-case authorization with attribution — confirm this stands, or narrow to the cleared Cologne core).
 - Review and decide on the `cowork/sarvamoola-and-search` branch merge (after this session's own review pass).
 - Optional follow-up, not urgent: Harivaṃśa's ~20-verse unmarked invocatory block (see "Round 3" above) could be split into individual verses with a verified daṇḍa-splitting heuristic, if anyone wants finer granularity there — the text itself is already correct as one merged entry.
+
+**Stored for later, not started:** a Sanskrit TTS/chanting architecture doc (`dge/tts/ARCHITECTURE.md` + the original `.docx`) — inspired by Bhāgavata-Vāṇi/Vāgdhenu, covering a Sanskrit linguistic frontend, a chandas/vṛtta meter engine, a separate Vedic svara/accent track, voice cloning, and an MVP plan (MVP-1 through MVP-8). No implementation work has started; this is purely a reference doc for whenever that feature is picked up.
 - **The biggest gap — content, not code:** 468 of 605 catalog entries are still empty — the remaining 14 Mahāpurāṇas, Itihāsas beyond Rāmāyaṇa/Mahābhārata/Harivaṃśa (Adhyātma Rāmāyaṇa), Dāsakūṭa (42), Vyāsakūṭa (18), Sūtras (42), Pañcarātra Āgama (17), Dharmaśāstra (7), and most Smṛtis (14 of 19 remaining, plus the "OCR tier" texts requiring explicit sourcing authorization first).
 
 **Pending on this session / next Claude session:**
