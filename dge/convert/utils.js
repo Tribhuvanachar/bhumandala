@@ -80,5 +80,43 @@ window.DGE.Utils = (function () {
     return Array.from(pages).sort((a, b) => a - b);
   }
 
-  return { fileToBase64, downloadJson, saveProgress, loadProgress, clearProgress, parseJsonLoose, formatError, parsePageSelection };
+  // Rebuilds page text from {text, boundingBox} words by visual row instead
+  // of trusting the OCR engine's own block/paragraph grouping. Fixes the
+  // case where a layout has a narrow side-column (e.g. right-margin verse
+  // numbers) that the engine detects as its own block and appends wholesale
+  // at the end of the page, rather than interleaved after each line.
+  // Words with no boundingBox (shouldn't happen for Vision/Tesseract output,
+  // but non-fatal if it does) are appended at the end, in their original order.
+  function reconstructReadingOrder(words) {
+    const placed = (words || []).filter(w => w && w.boundingBox);
+    const unplaced = (words || []).filter(w => !w || !w.boundingBox);
+    if (!placed.length) return (unplaced.map(w => w.text || '')).join(' ').trim();
+
+    // Sort top-to-bottom first so rows get built in page order.
+    const sorted = placed.slice().sort((a, b) => a.boundingBox.y - b.boundingBox.y);
+    const rows = [];
+    sorted.forEach(word => {
+      const cy = word.boundingBox.y + word.boundingBox.height / 2;
+      // A word joins the last row if its vertical center falls within that
+      // row's band (half the word's own height as tolerance) — cheap and
+      // good enough for the roughly-horizontal lines a scanned page has.
+      const last = rows[rows.length - 1];
+      if (last && Math.abs(cy - last.cy) <= Math.max(word.boundingBox.height, last.height) * 0.6) {
+        last.words.push(word);
+        last.cy = (last.cy * last.words.length + cy) / (last.words.length + 1);
+      } else {
+        rows.push({ cy, height: word.boundingBox.height, words: [word] });
+      }
+    });
+    const lines = rows.map(row =>
+      row.words.slice().sort((a, b) => a.boundingBox.x - b.boundingBox.x).map(w => w.text).join(' ')
+    );
+    if (unplaced.length) lines.push(unplaced.map(w => w.text || '').join(' '));
+    return lines.join('\n').trim();
+  }
+
+  return {
+    fileToBase64, downloadJson, saveProgress, loadProgress, clearProgress, parseJsonLoose, formatError,
+    parsePageSelection, reconstructReadingOrder
+  };
 })();

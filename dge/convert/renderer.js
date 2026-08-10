@@ -37,10 +37,12 @@ window.DGE.Renderer = (function () {
     let html = '';
     ocrPages.forEach(function (p) {
       html += '<div class="preview-raw-page">';
-      html += '<div class="preview-num">Page ' + (p.page != null ? p.page : '') + '</div>';
+      html += '<div class="preview-num">Page ' + (p.page != null ? p.page : '') + (p.engine === 'tesseract' ? ' (Tesseract.js only)' : '') + '</div>';
       // Vision's own per-word confidence — not proof of correctness, but a
       // real, free signal for which words are worth a human double-checking
-      // instead of re-reading every single page start to finish.
+      // instead of re-reading every single page start to finish. Tesseract-only
+      // pages have no comparable summarized confidence, so this whole block
+      // is skipped for them rather than showing a fabricated number.
       if (typeof p.avgConfidence === 'number') {
         const pct = Math.round(p.avgConfidence * 100);
         const cls = pct >= 90 ? 'conf-good' : (pct >= 75 ? 'conf-mid' : 'conf-low');

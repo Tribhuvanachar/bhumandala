@@ -153,8 +153,16 @@ window.DGE.App = (function () {
     return v ? v.split(',').map(s => s.trim()).filter(Boolean) : undefined;
   }
 
-  function getCrossCheckEnabled() {
-    const el = $('crossCheckEnabled');
+  // 'vision' | 'tesseract' | 'both' — replaces the old crossCheckEnabled
+  // boolean so "Tesseract only" (skip Vision entirely, no API key needed)
+  // is a real first-class option, not just a checkbox bolted onto Vision.
+  function getOcrEngine() {
+    const el = $('ocrEngineSelect');
+    return (el && el.value) || 'vision';
+  }
+
+  function getReadingOrderFix() {
+    const el = $('readingOrderFix');
     return !!(el && el.checked);
   }
 
@@ -208,10 +216,15 @@ window.DGE.App = (function () {
       languageHintsEl.value = localStorage.getItem('vision_language_hints') || '';
       languageHintsEl.addEventListener('input', () => localStorage.setItem('vision_language_hints', languageHintsEl.value));
     }
-    const crossCheckEl = $('crossCheckEnabled');
-    if (crossCheckEl) {
-      crossCheckEl.checked = localStorage.getItem('convert_cross_check_enabled') === 'true';
-      crossCheckEl.addEventListener('change', () => localStorage.setItem('convert_cross_check_enabled', crossCheckEl.checked));
+    const ocrEngineEl = $('ocrEngineSelect');
+    if (ocrEngineEl) {
+      ocrEngineEl.value = localStorage.getItem('convert_ocr_engine') || 'vision';
+      ocrEngineEl.addEventListener('change', () => localStorage.setItem('convert_ocr_engine', ocrEngineEl.value));
+    }
+    const readingOrderEl = $('readingOrderFix');
+    if (readingOrderEl) {
+      readingOrderEl.checked = localStorage.getItem('convert_reading_order_fix') === 'true';
+      readingOrderEl.addEventListener('change', () => localStorage.setItem('convert_reading_order_fix', readingOrderEl.checked));
     }
     const chunkSizeEl = $('chunkSizeInput');
     if (chunkSizeEl) {
@@ -280,10 +293,19 @@ window.DGE.App = (function () {
       githubTokenEl.value = GitHubMod().getToken();
       githubTokenEl.addEventListener('input', () => GitHubMod().setToken(githubTokenEl.value));
     }
-    const targetSlugSelect = $('targetSlugSelect');
-    if (targetSlugSelect) {
-      targetSlugSelect.addEventListener('change', () => {
-        $('targetSlugCustom').style.display = (targetSlugSelect.value === '__other__') ? 'block' : 'none';
+    const targetSlugSearchEl = $('targetSlugSearch');
+    if (targetSlugSearchEl) {
+      targetSlugSearchEl.addEventListener('input', () => renderTargetSlugResults(targetSlugSearchEl.value));
+      targetSlugSearchEl.addEventListener('focus', () => renderTargetSlugResults(targetSlugSearchEl.value));
+    }
+    const targetSlugUseOtherEl = $('targetSlugUseOther');
+    if (targetSlugUseOtherEl) {
+      targetSlugUseOtherEl.addEventListener('click', () => {
+        chosenTargetSlug = '';
+        $('targetSlugResults').style.display = 'none';
+        $('targetSlugChosen').style.display = 'none';
+        $('targetSlugCustom').style.display = 'block';
+        $('targetSlugCustom').focus();
       });
     }
     loadLibraryCatalog();
@@ -300,36 +322,84 @@ window.DGE.App = (function () {
     console.log('Build', window.DGE_CONVERT_BUILD || '(unknown)');
   }
 
-  // Populates the target-grantha dropdown from the main app's own
-  // data/library.json (fetched relative to this page, one level up) —
-  // deliberately lists only NOT-yet-populated entries as the default,
-  // safe targets, plus an "Other / new path" escape hatch for a grantha
-  // not in the catalog yet.
+  function escapeHtml(str) {
+    return String(str == null ? '' : str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // {slug, title} for every not-yet-populated catalog entry — built once
+  // from library.json, then filtered client-side as the admin types. A
+  // flat hundreds-of-entries <select> (the previous approach) is unusable
+  // once the catalog has more than a screenful of grantha slugs in it.
+  let targetSlugEntries = [];
+  let chosenTargetSlug = '';
+
   async function loadLibraryCatalog() {
-    const select = $('targetSlugSelect');
+    const searchEl = $('targetSlugSearch');
     try {
       const res = await fetch('../data/library.json', { cache: 'no-store' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       libraryCatalog = await res.json();
       const granthas = (libraryCatalog && libraryCatalog.granthas) || [];
-      const unpopulated = granthas.filter(g => !g.populated);
-      let html = unpopulated.map(g => {
-        const slug = g.path.replace(/^dge\//, '').replace(/^data\//, '').replace(/\/data\.json$/, '');
-        return `<option value="${slug}">${slug}</option>`;
-      }).join('');
-      html += `<option value="__other__">Other / new path…</option>`;
-      select.innerHTML = html;
+      targetSlugEntries = granthas.filter(g => !g.populated).map(g => ({
+        slug: g.path.replace(/^dge\//, '').replace(/^data\//, '').replace(/\/data\.json$/, ''),
+        title: g.title || ''
+      }));
+      if (searchEl) searchEl.placeholder = `Type to search ${targetSlugEntries.length} unpopulated grantha(s) — e.g. "yajurveda" or "grihyasutra"…`;
     } catch (e) {
       log('Could not load the library catalog: ' + U().formatError(e) + ' — you can still type a path manually.');
-      select.innerHTML = `<option value="__other__">Other / new path…</option>`;
-      select.value = '__other__';
-      $('targetSlugCustom').style.display = 'block';
+      targetSlugEntries = [];
+      if (searchEl) searchEl.placeholder = 'Catalog failed to load — use "Use a path not in the catalog" below.';
     }
   }
 
+  const MAX_TARGET_SLUG_RESULTS = 40;
+
+  function renderTargetSlugResults(query) {
+    const resultsEl = $('targetSlugResults');
+    if (!resultsEl) return;
+    const q = String(query || '').trim().toLowerCase();
+    if (!q) { resultsEl.style.display = 'none'; resultsEl.innerHTML = ''; return; }
+    const matches = targetSlugEntries.filter(e =>
+      e.slug.toLowerCase().includes(q) || e.title.toLowerCase().includes(q)
+    ).slice(0, MAX_TARGET_SLUG_RESULTS);
+    if (!matches.length) {
+      resultsEl.style.display = 'block';
+      resultsEl.innerHTML = '<div class="target-slug-result">No catalog match — try a different term, or "Use a path not in the catalog" below.</div>';
+      return;
+    }
+    resultsEl.style.display = 'block';
+    resultsEl.innerHTML = matches.map(e => {
+      const crumb = e.slug.split('/').map(escapeHtml).join('<span class="sep">›</span>');
+      return `<div class="target-slug-result" data-slug="${escapeHtml(e.slug)}" tabindex="0">` +
+        `<div class="target-slug-result-title">${escapeHtml(e.title || e.slug)}</div>` +
+        `<div class="target-slug-result-path">${crumb}</div></div>`;
+    }).join('');
+    resultsEl.querySelectorAll('.target-slug-result[data-slug]').forEach(row => {
+      row.addEventListener('click', () => pickTargetSlug(row.getAttribute('data-slug')));
+    });
+  }
+
+  function pickTargetSlug(slug) {
+    const entry = targetSlugEntries.find(e => e.slug === slug);
+    chosenTargetSlug = slug;
+    $('targetSlugSearch').value = '';
+    $('targetSlugResults').style.display = 'none';
+    $('targetSlugCustom').style.display = 'none';
+    const chosenEl = $('targetSlugChosen');
+    const crumb = slug.split('/').map(escapeHtml).join('<span class="sep">›</span>');
+    chosenEl.innerHTML = `<div class="target-slug-chosen-box">Selected: <strong>${escapeHtml((entry && entry.title) || slug)}</strong><br>` +
+      `<span class="target-slug-result-path">${crumb}</span> ` +
+      `<button type="button" id="targetSlugClearBtn" style="margin-left:6px;">Change</button></div>`;
+    chosenEl.style.display = 'block';
+    $('targetSlugClearBtn').addEventListener('click', () => {
+      chosenTargetSlug = '';
+      chosenEl.style.display = 'none';
+      $('targetSlugSearch').focus();
+    });
+  }
+
   function getTargetSlug() {
-    const select = $('targetSlugSelect');
-    if (select && select.value && select.value !== '__other__') return select.value;
+    if (chosenTargetSlug) return chosenTargetSlug;
     const custom = $('targetSlugCustom');
     return custom ? custom.value.trim().replace(/^\/+|\/+$/g, '') : '';
   }
@@ -553,8 +623,19 @@ window.DGE.App = (function () {
   async function runOcr(fromResume) {
     clearError();
     cancelRequested = false;
+    const engine = getOcrEngine();
     const visionKey = $('visionKey').value.trim();
-    if (!visionKey) return setError('Enter your Vision API key first.');
+    if (engine !== 'tesseract' && !visionKey) return setError('Enter your Vision API key first (or switch OCR engine to "Tesseract.js only" above, which needs no key).');
+    if (engine !== 'vision') {
+      const tessLangCheck = TesseractCheckMod().mapLanguageHints(getLanguageHints());
+      if (tessLangCheck === 'eng' && !(getLanguageHints() || []).includes('en')) {
+        return setError(
+          'Tesseract needs a language hint to read anything but English — it can\'t auto-detect script the way Vision can. ' +
+          'Set the language hint(s) field above (e.g. "sa" for Sanskrit, "kn" for Kannada) before running Tesseract, or it will ' +
+          'silently produce garbage on non-Latin text.'
+        );
+      }
+    }
 
     if (!currentLoader) return setError('Load a PDF or image(s) first.');
     const total = currentLoader.getPageCount();
@@ -596,43 +677,68 @@ window.DGE.App = (function () {
       $('progressText').textContent = `Page ${p} (${i + 1} / ${selectedPages.length} selected)`;
       try {
         const pageObj = await currentLoader.getPageImage(p);
-        const result = await withAutoRetry(
-          () => VisionMod().ocrImageBase64(pageObj.imageBase64, visionKey, getLanguageHints()),
-          `OCR on page ${p}`,
-          () => cancelRequested
-        );
-        // masterImage is the immutable evidence of record for this page —
-        // stored alongside every OCR candidate so a human (or a later re-run
-        // with a better engine) always has the actual source to check
-        // against, not just whatever text an engine claimed was on the page.
-        const ocrEntry = {
-          page: p,
-          text: result.text,
-          avgConfidence: result.avgConfidence,
-          lowConfidenceWords: result.lowConfidenceWords,
-          words: result.words,
-          masterImage: pageObj.imageBase64
-        };
-        ocrPages.push(ocrEntry);
-        if (result.lowConfidenceWords && result.lowConfidenceWords.length) {
-          log(`Page ${p}: ${result.lowConfidenceWords.length} low-confidence word(s) — worth a manual check (avg confidence ${Math.round(result.avgConfidence * 100)}%).`);
-        }
+        const tessLang = engine === 'vision' ? null : TesseractCheckMod().mapLanguageHints(getLanguageHints());
 
-        // Free independent second opinion, opt-in only — a failure here
-        // must never take down the primary OCR run, since Vision's result
-        // is already the authoritative one being saved either way.
-        if (getCrossCheckEnabled()) {
-          try {
-            const tessLang = TesseractCheckMod().mapLanguageHints(getLanguageHints());
-            const tessResult = await TesseractCheckMod().recognizeBase64Png(pageObj.imageBase64, tessLang);
-            const sim = TesseractCheckMod().similarity(result.text, tessResult.text);
-            ocrEntry.crossCheck = { text: tessResult.text, words: tessResult.words, similarity: sim };
-            log(`Page ${p}: Tesseract cross-check ${Math.round(sim * 100)}% similar to Vision.` + (sim < 0.7 ? ' Low agreement — worth a manual check.' : ''));
-          } catch (e) {
-            log(`Page ${p}: Tesseract cross-check failed (non-fatal, Vision result kept): ${U().formatError(e)}`);
+        let primary; // whichever engine's result is the page's authoritative text
+        let ocrEntry;
+        if (engine === 'tesseract') {
+          primary = await withAutoRetry(
+            () => TesseractCheckMod().recognizeBase64Png(pageObj.imageBase64, tessLang),
+            `Tesseract OCR on page ${p}`,
+            () => cancelRequested
+          );
+          ocrEntry = {
+            page: p,
+            text: primary.text,
+            avgConfidence: null, // Tesseract's per-word confidence isn't rescaled/summarized the way Vision's is (see tesseract-check.js) — not claiming a number we haven't actually computed
+            lowConfidenceWords: [],
+            words: primary.words,
+            engine: 'tesseract',
+            masterImage: pageObj.imageBase64
+          };
+        } else {
+          primary = await withAutoRetry(
+            () => VisionMod().ocrImageBase64(pageObj.imageBase64, visionKey, getLanguageHints()),
+            `OCR on page ${p}`,
+            () => cancelRequested
+          );
+          // masterImage is the immutable evidence of record for this page —
+          // stored alongside every OCR candidate so a human (or a later re-run
+          // with a better engine) always has the actual source to check
+          // against, not just whatever text an engine claimed was on the page.
+          ocrEntry = {
+            page: p,
+            text: primary.text,
+            avgConfidence: primary.avgConfidence,
+            lowConfidenceWords: primary.lowConfidenceWords,
+            words: primary.words,
+            engine: 'vision',
+            masterImage: pageObj.imageBase64
+          };
+          if (primary.lowConfidenceWords && primary.lowConfidenceWords.length) {
+            log(`Page ${p}: ${primary.lowConfidenceWords.length} low-confidence word(s) — worth a manual check (avg confidence ${Math.round(primary.avgConfidence * 100)}%).`);
+          }
+
+          // Free independent second opinion, opt-in only — a failure here
+          // must never take down the primary OCR run, since Vision's result
+          // is already the authoritative one being saved either way.
+          if (engine === 'both') {
+            try {
+              const tessResult = await TesseractCheckMod().recognizeBase64Png(pageObj.imageBase64, tessLang);
+              const sim = TesseractCheckMod().similarity(primary.text, tessResult.text);
+              ocrEntry.crossCheck = { text: tessResult.text, words: tessResult.words, similarity: sim };
+              log(`Page ${p}: Tesseract cross-check ${Math.round(sim * 100)}% similar to Vision.` + (sim < 0.7 ? ' Low agreement — worth a manual check.' : ''));
+            } catch (e) {
+              log(`Page ${p}: Tesseract cross-check failed (non-fatal, Vision result kept): ${U().formatError(e)}`);
+            }
           }
         }
 
+        if (getReadingOrderFix() && ocrEntry.words && ocrEntry.words.length) {
+          ocrEntry.text = U().reconstructReadingOrder(ocrEntry.words);
+        }
+
+        ocrPages.push(ocrEntry);
         await IDB().set(ocrProgressKey(), { lastPage: p });
         await IDB().set(ocrDataKey(), { pages: ocrPages });
         updateKnownFilesManifest(currentLoader.getDocumentName(), ocrPages.length, total);

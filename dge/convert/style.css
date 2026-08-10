@@ -44,3 +44,11 @@ button:disabled { opacity: 0.5; cursor: default; }
 select { width: 100%; box-sizing: border-box; padding: 8px; font-size: 14px; margin-bottom: 6px; }
 .schema-row { border-bottom: 1px solid #ddd; padding: 10px 0; }
 .schema-sa-input, .schema-commentary-input { width: 100%; box-sizing: border-box; padding: 6px; font-size: 13px; margin-bottom: 6px; font-family: inherit; }
+.target-slug-results { max-height: 260px; overflow-y: auto; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 6px; background: #fff; }
+.target-slug-result { padding: 8px 10px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 13px; }
+.target-slug-result:last-child { border-bottom: none; }
+.target-slug-result:hover, .target-slug-result:focus { background: #f0f4ff; }
+.target-slug-result-title { font-weight: 700; }
+.target-slug-result-path { color: #666; font-size: 11px; margin-top: 2px; }
+.target-slug-result-path .sep { color: #aaa; margin: 0 3px; }
+.target-slug-chosen-box { background: #eef7ee; border: 1px solid #cbe6cb; border-radius: 4px; padding: 8px; }
