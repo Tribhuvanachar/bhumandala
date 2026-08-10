@@ -2790,6 +2790,11 @@
    "path": "dge/data/vyasakuta/vadiraja_tirtha/svapna_vrindavana_akhyana/data.json",
    "populated": true,
    "title": "श्रीमत्स्वाप्नवृन्दावनाख्यानम् (श्री वादिराज तीर्थ)"
+  },
+  {
+   "path": "dge/data/dasakuta/jagannathadasa/harikathamrutasara/data.json",
+   "populated": true,
+   "title": "ಶ್ರೀ ಹರಿಕಥಾಮೃತಸಾರ (ಶ್ರೀ ಜಗನ್ನಾಥದಾಸರು)"
   }
  ]
 }
