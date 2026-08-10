@@ -5,41 +5,52 @@ folder currently holds **audio only** — no verse text yet (see below).
 
 ## Status
 
-- **Audio**: `assets/` — 1,041 mp3 files, renamed from the original app's
-  `<lead><sarga:2><index:3>.mp3` codes to `smv<sarga>.<n>.mp3`
-  (e.g. `smv1.1.mp3`, `smv1.2.mp3`, ..., `smv16.61.mp3`), sequential per
-  sarga in the source app's own recording order. Extracted from
-  `smv-assets-audio.7z.001/.002/.003` (joined, then a 7z containing a
-  nested `smv-assets-audio.zip`).
-- **Text**: not yet available. `smv-assets-text.zip` was expected to hold
-  the Sanskrit verse text but on inspection contains only Android `res/`
-  resources (layouts, ExoPlayer UI) — no `assets/` folder, no verse
-  content at all. A proper source (the app's actual `assets/` folder, or
+- **Audio**: `assets/` — 1,041 mp3 files, renamed using an authoritative
+  filename↔verse mapping (`sumadhvijaya_sarga_audio_mapping.json`,
+  user-supplied, derived directly from the original app's own playback
+  list `indplaylist.txt`) rather than the earlier heuristic guess. Naming:
+  - Numbered verse recitations: `smv<sarga>.<verse_no>.mp3` (e.g.
+    `smv1.1.mp3` … `smv16.58.mp3`), where `<verse_no>` is the app's own
+    true verse number for that sarga, not just sequential file position.
+  - Per-sarga chapter-opening announcement (1 per sarga, sargas 2–16):
+    `smv<sarga>.0.mp3`.
+  - Sarga 1's four preliminary tracks (app-level intro content preceding
+    the chapter-opening announcement, distinct from sargas 2–16 which only
+    have one): `smv1.0a.mp3` … `smv1.0d.mp3`.
+  - Closing colophon/phalashruti clip(s) after the last verse of a sarga:
+    `smv<sarga>.end.mp3` (sarga 16 has two: `smv16.end.mp3`,
+    `smv16.end2.mp3`).
+  - Full mapping (sarga, verse_no, track_type, new_name, original 6-digit
+    source code) for every file: `rename_manifest.json`.
+  - Extracted from `smv-assets-audio.7z.001/.002/.003` (joined, then a 7z
+    containing a nested `smv-assets-audio.zip`).
+- **3 verses have no audio file** — a real gap in the source app itself,
+  not a processing error. The app's own playlist references
+  `105008.mp3`, `105014.mp3`, `105016.mp3` (sarga 5, verses 8, 14, and 16)
+  but no corresponding file exists in the extracted archive. See
+  `rename_manifest.json` → `missing_from_source_archive`.
+- **Text**: not yet available. Two attempts so far:
+  - `smv-assets-text.zip` — Android `res/` resources only (layouts,
+    ExoPlayer UI), no `assets/` folder, no verse content at all.
+  - `smvassetstext2.zip` — sarga-name UI labels in six scripts, the audio
+    filename manifest (used above), and a Kannada tātparya (meaning)
+    fragment covering only the opening maṅgalācaraṇa (~8 lines); the
+    remaining ~1,040 lines are an empty, unfilled placeholder template.
+    No Sanskrit mūla text anywhere in the bundle.
+
+  A proper source (the app's actual verse-text `assets/` folder, or
   another edition) is still needed before this grantha can be populated
   with text the way Yukti Mallika / Svapna-Vrindavanakhyana were.
 
-## Flagged during renaming (20 files, ~2% of total) — worth a spot-check
+## History
 
-The source app's numbering is mostly a clean per-sarga sequence starting
-at 0, but two patterns didn't fit that and were kept (nothing discarded)
-rather than guessed away:
-
-1. **3 duplicate-index pairs, sarga 1 only** — `001001.mp3`/`101001.mp3`,
-   `001002.mp3`/`101002.mp3`, and `001003.mp3`/`101003.mp3` each map to
-   the same verse index under this renaming scheme. Both files in each
-   pair were kept as consecutive sequential numbers (landing next to each
-   other, e.g. around `smv1.1.mp3`/`smv1.2.mp3`) — likely an alternate
-   take of the opening verses, but which one (if either) should be
-   treated as canonical isn't determinable from the data alone.
-2. **One high-numbered outlier per sarga** (e.g. `101555.mp3` for sarga 1,
-   `116558.mp3`/`116559.mp3` for sarga 16) — index far above that sarga's
-   normal verse-count range. File sizes are normal (not empty/corrupt),
-   so these are real distinct short recordings — most likely a closing
-   colophon or phalashruti clip tacked on after the main verses, using a
-   high number to avoid colliding with future verse additions, rather
-   than genuinely being "verse 555" of a sarga with only ~55 verses. They
-   ended up as the **last** `smv<sarga>.<n>.mp3` file for their sarga.
-
-Full original-filename ↔ new-filename mapping for every file (not just
-the flagged ones) is available on request if useful for cross-checking
-against the source app.
+The audio was first renamed by a heuristic (sequential position per sarga,
+guessed from the numeric gaps in the source codes) which got the sarga
+groupings right but mis-ordered 4 files at the start of sarga 1 and
+couldn't distinguish "duplicate index" front-matter tracks from real
+verses. That heuristic was superseded once the user supplied the app's
+actual playlist-derived mapping, which resolved every prior ambiguity:
+the "duplicate index" pairs turned out to be two distinct track types
+(front-matter vs. numbered verse), not alternate takes of the same verse,
+and the "high-numbered outlier per sarga" guess (colophon/phalashruti)
+was confirmed correct by the mapping's own `sarga-ending/special` label.
