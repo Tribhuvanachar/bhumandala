@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 574,
-  "loaded": 155,
-  "items": 200420
+  "leaves": 592,
+  "loaded": 173,
+  "items": 297264
  },
  "sections": {
   "ancillary": {
@@ -22,9 +22,9 @@
    "items": 0
   },
   "itihasas": {
-   "total": 29,
-   "loaded": 26,
-   "items": 98267
+   "total": 47,
+   "loaded": 44,
+   "items": 195111
   },
   "kavya": {
    "total": 4,
@@ -204,6 +204,24 @@
   "itihasas/mahabharata/udyoga_parva": 6063,
   "itihasas/mahabharata/vana_parva": 10234,
   "itihasas/mahabharata/virata_parva": 1824,
+  "itihasas/mahabharata_kannada/adi_parva": 9627,
+  "itihasas/mahabharata_kannada/anushasana_parva": 12421,
+  "itihasas/mahabharata_kannada/ashramavasika_parva": 1095,
+  "itihasas/mahabharata_kannada/ashvamedhika_parva": 4715,
+  "itihasas/mahabharata_kannada/bhishma_parva": 5390,
+  "itihasas/mahabharata_kannada/drona_parva": 9126,
+  "itihasas/mahabharata_kannada/karna_parva": 5202,
+  "itihasas/mahabharata_kannada/mahaprasthanika_parva": 113,
+  "itihasas/mahabharata_kannada/mausala_parva": 316,
+  "itihasas/mahabharata_kannada/sabha_parva": 4219,
+  "itihasas/mahabharata_kannada/sauptika_parva": 846,
+  "itihasas/mahabharata_kannada/shalya_parva": 3809,
+  "itihasas/mahabharata_kannada/shanti_parva": 16937,
+  "itihasas/mahabharata_kannada/stri_parva": 846,
+  "itihasas/mahabharata_kannada/svargarohana_parva": 262,
+  "itihasas/mahabharata_kannada/udyoga_parva": 6999,
+  "itihasas/mahabharata_kannada/vana_parva": 11261,
+  "itihasas/mahabharata_kannada/virata_parva": 3660,
   "itihasas/ramayana/aranya_kanda": 2060,
   "itihasas/ramayana/ayodhya_kanda": 3160,
   "itihasas/ramayana/bala_kanda": 1941,
