@@ -2785,6 +2785,11 @@
    "path": "dge/data/itihasas/mahabharata_kannada/svargarohana_parva/data.json",
    "populated": true,
    "title": "ಮಹಾಭಾರತ (ಕನ್ನಡ ಅನುವಾದ ಸಹಿತ) — ಸ್ವರ್ಗಾರೋಹಣಪರ್ವ"
+  },
+  {
+   "path": "dge/data/vyasakuta/vadiraja_tirtha/svapna_vrindavana_akhyana/data.json",
+   "populated": true,
+   "title": "श्रीमत्स्वाप्नवृन्दावनाख्यानम् (श्री वादिराज तीर्थ)"
   }
  ]
 }
