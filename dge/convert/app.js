@@ -28,6 +28,14 @@ window.DGE.App = (function () {
   let wakeLock = null;
   const KNOWN_FILES_KEY = 'convert_known_files';
   const RETRY_DELAYS_MS = [5000, 15000, 45000]; // 3 automatic retries beyond the first attempt
+  // A 429/RESOURCE_EXHAUSTED is a per-minute (or per-day) rate window, not a
+  // transient blip — retrying after 5s almost always just hits the same
+  // window again. Give it real room: 65s clears a per-minute cap outright;
+  // if it's still failing after that, it's more likely a per-day cap or a
+  // genuinely-exhausted balance, which no amount of waiting fixes, so the
+  // schedule still gives up after the same number of attempts as any other
+  // error rather than retrying forever.
+  const QUOTA_RETRY_DELAYS_MS = [65000, 90000, 120000];
 
   function $(id) { return document.getElementById(id); }
   function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
@@ -74,9 +82,11 @@ window.DGE.App = (function () {
       } catch (e) {
         lastErr = e;
         if (attempt === RETRY_DELAYS_MS.length) break; // out of automatic retries
-        const delaySec = Math.round(RETRY_DELAYS_MS[attempt] / 1000);
-        log(`${label} failed (attempt ${attempt + 1}/${RETRY_DELAYS_MS.length + 1}): ${U().formatError(e)} — retrying automatically in ${delaySec}s…`);
-        await sleep(RETRY_DELAYS_MS[attempt]);
+        const isQuota = e && e.kind === 'quota';
+        const delayMs = isQuota ? QUOTA_RETRY_DELAYS_MS[attempt] : RETRY_DELAYS_MS[attempt];
+        const delaySec = Math.round(delayMs / 1000);
+        log(`${label} failed (attempt ${attempt + 1}/${RETRY_DELAYS_MS.length + 1}): ${U().formatError(e)} — retrying automatically in ${delaySec}s${isQuota ? ' (rate-limit backoff — this is a per-minute/per-day cap on your key, not your prepaid balance)' : ''}…`);
+        await sleep(delayMs);
       }
     }
     throw lastErr;
@@ -120,12 +130,67 @@ window.DGE.App = (function () {
     let list;
     try { list = JSON.parse(localStorage.getItem(KNOWN_FILES_KEY)) || []; } catch (e) { list = []; }
     if (!list.length) { el.style.display = 'none'; return; }
-    const rows = list.map(f => {
+    el.innerHTML = '';
+    const label = document.createElement('div');
+    label.innerHTML = '<b>Files with saved progress on this device</b> — tap one to resume Proofread/Review/Push on what\'s already OCR\'d, without re-uploading. Re-selecting the actual file below is still needed only if you want to OCR additional new pages.';
+    el.appendChild(label);
+    list.forEach(f => {
       const when = new Date(f.updatedAt).toLocaleString();
-      return `• ${f.name} — ${f.ocrDone}/${f.ocrTotal} page(s) OCR'd (${when})`;
-    }).join('<br>');
-    el.innerHTML = `<b>Files with saved progress on this device</b> — choose the same file again below to resume without redoing it:<br>${rows}`;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'known-file-btn';
+      btn.textContent = `${f.name} — ${f.ocrDone}/${f.ocrTotal} page(s) OCR'd (${when})`;
+      btn.addEventListener('click', () => resumeFromKnownFile(f.key));
+      el.appendChild(btn);
+    });
     el.style.display = 'block';
+  }
+
+  // Loads a previously-saved file's OCR/proofread progress directly from
+  // this device's storage, without needing the original file re-selected —
+  // possible because ocrPages/proofread chunks are looked up purely by
+  // currentFileKey (name_size), and runProofread() only ever reads
+  // ocrPages, never the actual File object. Only OCR'ing genuinely NEW
+  // pages still needs the real file (to render page images), which this
+  // can't provide — made explicit in the log line below rather than left
+  // to guesswork.
+  async function resumeFromKnownFile(key) {
+    clearError();
+    let list;
+    try { list = JSON.parse(localStorage.getItem(KNOWN_FILES_KEY)) || []; } catch (e) { list = []; }
+    const entry = list.find(f => f.key === key);
+    if (!entry) return;
+
+    currentFileKey = key;
+    currentLoader = null;
+    ocrPages = [];
+    finalJson = null;
+    lastProofreadMissingPages = [];
+    $('previewArea').innerHTML = '';
+    setPreviewLabel('');
+    $('logArea').textContent = '';
+    $('resumeBar').style.display = 'none';
+    $('proofreadResumeNote').textContent = '';
+    if ($('ocrGapsText')) $('ocrGapsText').textContent = '';
+    if ($('proofreadGapsText')) $('proofreadGapsText').textContent = '';
+    if ($('reviewSummary')) $('reviewSummary').textContent = 'Run Proofread first.';
+    if ($('reviewDetailArea')) $('reviewDetailArea').innerHTML = '';
+
+    const savedOcrData = await IDB().get(ocrDataKey());
+    if (savedOcrData && savedOcrData.pages && savedOcrData.pages.length) {
+      ocrPages = savedOcrData.pages;
+    }
+    $('pageCountDisplay').textContent = `${entry.name} — ${ocrPages.length}/${entry.ocrTotal || '?'} page(s) OCR'd (loaded from saved progress, no file re-selected).`;
+    log(`Loaded ${ocrPages.length} previously-OCR'd page(s) for "${entry.name}" without re-selecting the file — Proofread/Review/Push are ready to use. To OCR additional new pages for this file, re-select it above first.`);
+
+    const savedProofread = await IDB().get(proofreadDataKey());
+    if (savedProofread && savedProofread.chunks) {
+      const doneCount = Object.keys(savedProofread.chunks).length;
+      if (doneCount) {
+        $('proofreadResumeNote').textContent =
+          `${doneCount} of ${savedProofread.totalChunks || '?'} proofread chunk(s) already saved for this file — tapping Proofread will resume from where it left off.`;
+      }
+    }
   }
 
   function getChunkSize() {
@@ -134,12 +199,110 @@ window.DGE.App = (function () {
     return (n && n > 0) ? n : DEFAULT_CHUNK_SIZE;
   }
 
+  // Proactive spacing between successful chunks, on top of (not instead of)
+  // the reactive backoff above -- a burst of back-to-back requests can trip
+  // a per-minute rate cap even when every individual request would have
+  // succeeded on its own. Default 3s; 0 disables it for anyone who's sure
+  // their tier can take it.
+  const DEFAULT_CHUNK_DELAY_SEC = 3;
+  function getChunkDelayMs() {
+    const el = $('chunkDelayInput');
+    const n = el ? parseFloat(el.value) : DEFAULT_CHUNK_DELAY_SEC;
+    return (Number.isFinite(n) && n >= 0) ? Math.min(n, 60) * 1000 : DEFAULT_CHUNK_DELAY_SEC * 1000;
+  }
+
   // Blank means "use gemini.js's own default" — same convention as
-  // getTargetSlug's custom-path fallback below.
+  // getTargetSlug's custom-path fallback below. "__custom__" in the select
+  // means the model isn't in the fetched list (or the list was never
+  // fetched) — fall through to the free-text field next to it.
   function getGeminiModel() {
-    const el = $('geminiModelInput');
-    const v = el ? el.value.trim() : '';
+    const sel = $('geminiModelSelect');
+    const v = sel ? sel.value.trim() : '';
+    if (v === '__custom__') {
+      const customEl = $('geminiModelCustom');
+      const cv = customEl ? customEl.value.trim() : '';
+      return cv || undefined;
+    }
     return v || undefined;
+  }
+
+  const GEMINI_MODELS_CACHE_KEY = 'gemini_models_cache'; // { keyFingerprint, ts, models: [{id,displayName}] }
+
+  // Cheap non-cryptographic fingerprint so the cache is scoped to "this API
+  // key" without storing the raw key a second time anywhere (it's already
+  // in 'gemini_api_key' by itself) — good enough to detect "the user pasted
+  // a different key" and refetch, not intended as a security boundary.
+  function keyFingerprint(k) {
+    let h = 0;
+    for (let i = 0; i < k.length; i++) { h = (h * 31 + k.charCodeAt(i)) | 0; }
+    return String(h);
+  }
+
+  function populateModelSelect(models) {
+    const sel = $('geminiModelSelect');
+    if (!sel) return;
+    const prevValue = sel.value;
+    sel.innerHTML = '<option value="">(default)</option>';
+    models.forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = m.id;
+      opt.textContent = m.displayName && m.displayName !== m.id ? `${m.displayName} (${m.id})` : m.id;
+      sel.appendChild(opt);
+    });
+    const customOpt = document.createElement('option');
+    customOpt.value = '__custom__';
+    customOpt.textContent = 'Other (type below)…';
+    sel.appendChild(customOpt);
+    // Restore whatever was selected before, if it still exists in the new list.
+    if (prevValue && Array.from(sel.options).some(o => o.value === prevValue)) sel.value = prevValue;
+  }
+
+  async function refreshGeminiModels() {
+    const apiKey = $('geminiKey') ? $('geminiKey').value.trim() : '';
+    if (!apiKey) { $('modelsHint').textContent = 'Enter your Gemini API key above first.'; return; }
+    $('refreshModelsBtn').disabled = true;
+    $('modelsHint').textContent = 'Loading available models…';
+    try {
+      const models = await GeminiMod().listModels(apiKey);
+      populateModelSelect(models);
+      const cache = { keyFingerprint: keyFingerprint(apiKey), ts: Date.now(), models };
+      try { localStorage.setItem(GEMINI_MODELS_CACHE_KEY, JSON.stringify(cache)); } catch (e) { /* storage full — non-fatal */ }
+      $('modelsHint').textContent = `${models.length} model(s) available to this key, loaded just now.`;
+    } catch (e) {
+      $('modelsHint').textContent = 'Could not load models: ' + U().formatError(e) + ' — you can still type a model name below manually.';
+    } finally {
+      $('refreshModelsBtn').disabled = false;
+    }
+  }
+
+  function initGeminiModelPicker() {
+    const sel = $('geminiModelSelect');
+    const customEl = $('geminiModelCustom');
+    if (!sel) return;
+    sel.addEventListener('change', () => {
+      customEl.style.display = sel.value === '__custom__' ? 'block' : 'none';
+      localStorage.setItem('gemini_model_select', sel.value);
+    });
+    if (customEl) {
+      customEl.value = localStorage.getItem('gemini_model_custom') || '';
+      customEl.addEventListener('input', () => localStorage.setItem('gemini_model_custom', customEl.value));
+    }
+    $('refreshModelsBtn').addEventListener('click', refreshGeminiModels);
+
+    // Restore a cached list from the last time this exact key was used, so
+    // a returning user sees real model names immediately without an extra
+    // API call — refetch is one tap away if they want a fresh list.
+    const apiKey = localStorage.getItem('gemini_api_key') || '';
+    try {
+      const cache = JSON.parse(localStorage.getItem(GEMINI_MODELS_CACHE_KEY) || 'null');
+      if (cache && apiKey && cache.keyFingerprint === keyFingerprint(apiKey) && Array.isArray(cache.models)) {
+        populateModelSelect(cache.models);
+        const savedSelect = localStorage.getItem('gemini_model_select');
+        if (savedSelect) sel.value = savedSelect;
+        if (customEl) customEl.style.display = sel.value === '__custom__' ? 'block' : 'none';
+        $('modelsHint').textContent = `${cache.models.length} model(s) from a cached list (loaded ${new Date(cache.ts).toLocaleString()}) — tap "Load available models" for a fresh one.`;
+      }
+    } catch (e) { /* ignore a corrupt cache */ }
   }
 
   // Comma-separated BCP-47/ISO language codes (e.g. "kn" or "kn,sa") to bias
@@ -153,12 +316,63 @@ window.DGE.App = (function () {
     return v ? v.split(',').map(s => s.trim()).filter(Boolean) : undefined;
   }
 
+  // Quick-pick chips beside the language-hint field — one-tap toggle for
+  // the codes this project's texts actually use, so nobody has to
+  // remember/look up a BCP-47 code before running OCR.
+  const LANG_CHIPS = [
+    { code: 'sa', label: 'Sanskrit' }, { code: 'kn', label: 'Kannada' },
+    { code: 'te', label: 'Telugu' }, { code: 'ta', label: 'Tamil' },
+    { code: 'ml', label: 'Malayalam' }, { code: 'bn', label: 'Bengali' },
+    { code: 'hi', label: 'Hindi' }, { code: 'en', label: 'English' }
+  ];
+  function renderLangChips() {
+    const row = $('langChipRow');
+    const input = $('languageHintsInput');
+    if (!row || !input) return;
+    row.innerHTML = '';
+    LANG_CHIPS.forEach(({ code, label }) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'lang-chip';
+      btn.textContent = `${label} (${code})`;
+      btn.dataset.code = code;
+      btn.addEventListener('click', () => {
+        const codes = input.value.split(',').map(s => s.trim()).filter(Boolean);
+        const idx = codes.indexOf(code);
+        if (idx >= 0) codes.splice(idx, 1); else codes.push(code);
+        input.value = codes.join(',');
+        localStorage.setItem('vision_language_hints', input.value);
+        syncLangChips();
+      });
+      row.appendChild(btn);
+    });
+    syncLangChips();
+  }
+  function syncLangChips() {
+    const row = $('langChipRow');
+    const input = $('languageHintsInput');
+    if (!row || !input) return;
+    const codes = input.value.split(',').map(s => s.trim()).filter(Boolean);
+    row.querySelectorAll('.lang-chip').forEach(btn => {
+      btn.classList.toggle('on', codes.includes(btn.dataset.code));
+    });
+  }
+
   // 'vision' | 'tesseract' | 'both' — replaces the old crossCheckEnabled
   // boolean so "Tesseract only" (skip Vision entirely, no API key needed)
   // is a real first-class option, not just a checkbox bolted onto Vision.
   function getOcrEngine() {
     const el = $('ocrEngineSelect');
     return (el && el.value) || 'vision';
+  }
+
+  // Optional free-text context anchor (e.g. "Bhagavad Gita Chapter 1,
+  // Bhavadipa commentary") passed to Gemini so it can resolve ambiguous
+  // OCR errors using real context. Blank = same prompt as always.
+  function getProofreadContext() {
+    const el = $('proofreadContextInput');
+    const v = el ? el.value.trim() : '';
+    return v || undefined;
   }
 
   function getReadingOrderFix() {
@@ -206,15 +420,25 @@ window.DGE.App = (function () {
       geminiKeyEl.value = localStorage.getItem('gemini_api_key') || '';
       geminiKeyEl.addEventListener('input', () => localStorage.setItem('gemini_api_key', geminiKeyEl.value));
     }
-    const geminiModelEl = $('geminiModelInput');
-    if (geminiModelEl) {
-      geminiModelEl.value = localStorage.getItem('gemini_model') || '';
-      geminiModelEl.addEventListener('input', () => localStorage.setItem('gemini_model', geminiModelEl.value));
-    }
+    initGeminiModelPicker();
     const languageHintsEl = $('languageHintsInput');
     if (languageHintsEl) {
       languageHintsEl.value = localStorage.getItem('vision_language_hints') || '';
-      languageHintsEl.addEventListener('input', () => localStorage.setItem('vision_language_hints', languageHintsEl.value));
+      languageHintsEl.addEventListener('input', () => {
+        localStorage.setItem('vision_language_hints', languageHintsEl.value);
+        syncLangChips();
+      });
+    }
+    renderLangChips();
+    const chunkDelayEl = $('chunkDelayInput');
+    if (chunkDelayEl) {
+      chunkDelayEl.value = localStorage.getItem('gemini_chunk_delay_sec') || '3';
+      chunkDelayEl.addEventListener('input', () => localStorage.setItem('gemini_chunk_delay_sec', chunkDelayEl.value));
+    }
+    const proofreadContextEl = $('proofreadContextInput');
+    if (proofreadContextEl) {
+      proofreadContextEl.value = localStorage.getItem('convert_proofread_context') || '';
+      proofreadContextEl.addEventListener('input', () => localStorage.setItem('convert_proofread_context', proofreadContextEl.value));
     }
     const ocrEngineEl = $('ocrEngineSelect');
     if (ocrEngineEl) {
@@ -864,13 +1088,15 @@ window.DGE.App = (function () {
         }).join('\n\n');
         try {
           const chunkResult = await withAutoRetry(
-            () => GeminiMod().proofread(ocrText, geminiKey, getGeminiModel()),
+            () => GeminiMod().proofread(ocrText, geminiKey, getGeminiModel(), getProofreadContext()),
             `Proofreading chunk ${i + 1}/${totalChunks}`,
             () => proofreadCancelRequested
           );
           saved.chunks[i] = chunkResult;
           await IDB().set(proofreadDataKey(), saved);
           log(`Chunk ${i + 1}/${totalChunks} (pages ${first}–${last}) proofread and saved.`);
+          const chunkDelayMs = getChunkDelayMs();
+          if (chunkDelayMs > 0 && i < totalChunks - 1 && !proofreadCancelRequested) await sleep(chunkDelayMs);
         } catch (e) {
           setError(`Proofreading failed on chunk ${i + 1}/${totalChunks} (pages ${first}–${last}) after ${RETRY_DELAYS_MS.length + 1} attempts: ${U().formatError(e)} — earlier chunks are saved, manual intervention needed. Tap "Proofread with Gemini" again to resume from this chunk once fixed (try a smaller chunk size above if this keeps happening on the same chunk).`);
           updateProofreadGaps(chunks, saved.chunks, ocrGapPages);

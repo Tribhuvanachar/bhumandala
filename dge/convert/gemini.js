@@ -81,12 +81,24 @@ Raw OCR input follows:
   // get. The structured-JSON-output constraint (responseMimeType/Schema)
   // and the finishReason/JSON-parse checks below are Convert-specific and
   // stay on top of the shared client's response rather than inside it.
-  async function proofread(ocrPagesText, apiKey, model) {
-    const modelName = model || 'gemini-3.6-flash';
-    const prompt = PROOFREAD_PROMPT + '\n\n' + ocrPagesText;
+  async function proofread(ocrPagesText, apiKey, model, contextAnchor) {
+    // No hardcoded fallback name here on purpose -- passing model through
+    // as-is (undefined when the caller has none) lets window.DGEGemini's
+    // own DEFAULT_MODEL be the single source of truth for "what to use
+    // when nothing is picked", instead of this file keeping its own
+    // separately-hardcoded (and previously stale/inconsistent) copy.
+    //
+    // contextAnchor (optional) is a short human-supplied description of
+    // what the text actually is (e.g. "Bhagavad Gita Chapter 1, Bhavadipa
+    // commentary by Raghavendra Yati") -- giving Gemini this lets it
+    // resolve ambiguous OCR errors against real context instead of
+    // guessing blind. Prepended, not baked into PROOFREAD_PROMPT itself,
+    // so the prompt's behavior is unchanged when it's left blank.
+    const anchor = contextAnchor ? `Context anchor: this text is from ${contextAnchor}.\n\n` : '';
+    const prompt = anchor + PROOFREAD_PROMPT + '\n\n' + ocrPagesText;
 
     const r = await window.DGEGemini.generate({
-      prompt: prompt, apiKey: apiKey, model: modelName,
+      prompt: prompt, apiKey: apiKey, model: model,
       generationConfig: {
         responseMimeType: 'application/json',
         responseSchema: PROOFREAD_RESPONSE_SCHEMA
@@ -94,7 +106,12 @@ Raw OCR input follows:
     });
 
     if (!r.ok) {
-      throw new Error(r.error.title + ': ' + r.error.message + ' ' + r.error.action);
+      // Tag the error with DGEGemini's classified `kind` (e.g. "quota") so
+      // app.js's retry loop can back off appropriately long for a real
+      // rate limit instead of using the same short delay as a network blip.
+      const e = new Error(r.error.title + ': ' + r.error.message + ' ' + r.error.action);
+      e.kind = r.error.kind;
+      throw e;
     }
 
     const candidate = r.raw && r.raw.candidates && r.raw.candidates[0];
@@ -119,5 +136,33 @@ Raw OCR input follows:
     return window.DGE.Utils.parseJsonLoose(r.text);
   }
 
-  return { proofread };
+  // Fetches the real, current list of models this specific key can use,
+  // straight from Gemini's own models.list endpoint -- so the model picker
+  // always reflects reality instead of a hardcoded name that can go stale
+  // (exactly what happened with this file's own old 'gemini-3.6-flash'
+  // fallback). Filtered to models that actually support generateContent
+  // (the list also includes embedding/other non-chat models we can't use
+  // here). Returns [{ id: 'gemini-2.5-flash', displayName: '...' }, ...].
+  async function listModels(apiKey) {
+    if (!apiKey) throw new Error('Enter your Gemini API key first.');
+    const url = 'https://generativelanguage.googleapis.com/v1beta/models?key=' + encodeURIComponent(apiKey);
+    let res;
+    try {
+      res = await fetch(url);
+    } catch (e) {
+      throw new Error('Could not reach Gemini to list models: ' + (e.message || e));
+    }
+    const payload = await res.json().catch(() => null);
+    if (!res.ok) {
+      const msg = (payload && payload.error && payload.error.message) || ('HTTP ' + res.status);
+      throw new Error('Gemini rejected the models.list request: ' + msg);
+    }
+    const models = (payload && payload.models) || [];
+    return models
+      .filter(m => Array.isArray(m.supportedGenerationMethods) && m.supportedGenerationMethods.includes('generateContent'))
+      .map(m => ({ id: (m.name || '').replace(/^models\//, ''), displayName: m.displayName || m.name }))
+      .filter(m => m.id);
+  }
+
+  return { proofread, listModels };
 })();

@@ -117,6 +117,63 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
+- **Convert tool: real Gemini 429 bug hunt + fixes, from a real failed run
+  (SumadhvaVijayaMoola.pdf resumed, then GitaVivrti.pdf hit "quota
+  exceeded" on Proofread after only ~80 pages despite a newly-funded
+  prepaid billing account).** Root-caused and fixed several real, distinct
+  issues found while investigating, not just the one reported:
+  - **`convert/gemini.js` had its own hardcoded `'gemini-3.6-flash'`
+    fallback, inconsistent with the shared `js/gemini.js` client's own
+    real default (`gemini-2.5-flash`)** — two different hardcoded model
+    names for the same purpose in the same app is a bug regardless of
+    which (if either) is currently valid. Removed the duplicate; Convert
+    now defers entirely to the shared client's default when no model is
+    picked.
+  - **Model picker is now a real dropdown backed by Gemini's own
+    `models.list` API**, not a hardcoded/free-text guess — tap "Load
+    available models" (needs the Gemini key filled in first) to fetch the
+    live list for that exact key, cached locally so a reload doesn't
+    always refetch. An "Other (type below)…" option still allows a raw
+    custom name. Directly fixes "must be latest, not old ones" — it now
+    always reflects reality for that key rather than a name baked into
+    the code.
+  - **429 (RESOURCE_EXHAUSTED) is a per-minute/per-day rate window on the
+    key, not the prepaid balance** — confirmed this is really how Gemini's
+    API works (billing lifts the free-tier cap but doesn't remove
+    time-based rate limits). Added: (a) a proactive, configurable delay
+    between Proofread chunks (default 3s) so a sequence of successful
+    requests doesn't itself burst past a per-minute cap; (b) the retry
+    backoff now recognizes a quota-kind failure specifically and waits
+    65-120s instead of the 5-45s used for a plain network blip, since a
+    short retry on a per-minute cap almost always just hits the same
+    window again.
+  - **Added an optional "context anchor" field to Proofread** (e.g. "Bhagavad
+    Gita Chapter 1, Bhavadipa commentary by Raghavendra Yati") — per the
+    project lead's Gemini consultation's second suggestion, passed into
+    the prompt to help Gemini resolve ambiguous OCR errors using real
+    context. Blank = unchanged behavior. (Vision's `languageHints` via
+    `imageContext`, the consultation's other suggestion, was already
+    implemented earlier — verified nothing needed changing there.)
+  - **Language-hint quick-pick chips** (Sanskrit/Kannada/Telugu/Tamil/
+    Malayalam/Bengali/Hindi/English) added beside the language-hints field
+    — tap to toggle a code in/out instead of having to know/look up BCP-47
+    codes.
+  - **The "Files with saved progress" list is now actually clickable** —
+    it was pure informational text before (confirmed: the project lead
+    expected clicking a filename there to resume it, it did nothing).
+    Since OCR/proofread progress is looked up purely by filename+size (not
+    the actual File object) and Proofread only ever reads the saved OCR
+    text, tapping an entry now resumes Proofread/Review/Push directly
+    without re-uploading — re-selecting the real file is only still needed
+    to OCR genuinely new pages.
+  All verified in a real headless browser (mocked models.list + a seeded
+  IndexedDB resume scenario, since neither needs a live Gemini key to
+  exercise the actual code paths): model dropdown populates and filters
+  out non-generateContent models correctly, custom-model field toggles,
+  language chips toggle bidirectionally with the text field, and clicking
+  a saved-file entry loads its OCR data and enables Proofread with zero
+  file re-selection. Convert tool version 0.16.0 → 0.17.0.
+
 - **`dge/audio-admin.html` built (passkey `AUDIOADMIN`, own session flag,
   deliberately NOT SSO'd with the site's other admin pages) — client-side
   Web Audio port of the `Gita_Studio_Colab.ipynb` shloka-boundary

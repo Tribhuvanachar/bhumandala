@@ -52,3 +52,8 @@ select { width: 100%; box-sizing: border-box; padding: 8px; font-size: 14px; mar
 .target-slug-result-path { color: #666; font-size: 11px; margin-top: 2px; }
 .target-slug-result-path .sep { color: #aaa; margin: 0 3px; }
 .target-slug-chosen-box { background: #eef7ee; border: 1px solid #cbe6cb; border-radius: 4px; padding: 8px; }
+.lang-chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 6px; }
+.lang-chip { padding: 4px 10px; font-size: 12px; font-weight: 400; margin: 0; border: 1px solid #ccc; border-radius: 12px; background: #fff; cursor: pointer; }
+.lang-chip.on { background: #e0f0ff; border-color: #6ab0ff; font-weight: 700; }
+.known-file-btn { display: block; width: 100%; text-align: left; background: #fff; border: 1px solid #ddd; border-radius: 4px; padding: 6px 8px; margin: 3px 0; font-size: 12px; font-weight: 400; cursor: pointer; }
+.known-file-btn:hover { background: #f0f4ff; }
