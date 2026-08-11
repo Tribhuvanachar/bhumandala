@@ -169,7 +169,31 @@ complete record, not just a live queue.
   browser: open/maximize/restore/minimize (tapping the header while
   minimized restores it, since the minimize button itself becomes a small
   target once shrunk)/close, and switching views inside the modal with no
-  data yet shows the existing error message instead of breaking.
+  data yet shows the existing error message instead of breaking. Also
+  added a `📋 Copy` button in the modal header (per a follow-up report
+  that the preview had no copy option at all) — copies exactly what's
+  showing (raw OCR or proofread), same clipboard-with-fallback approach
+  as the existing "Copy Log" button.
+
+- **Convert tool: found and fixed the real cause of "response was cut off
+  (hit the output token limit)" (MAX_TOKENS) failures, separate from the
+  429/quota issue fixed earlier.** The shared `js/gemini.js` client (used
+  by Convert, Ashtadhyayi, and Kosha alike) had `maxOutputTokens: 2048`
+  hardcoded as its default — genuinely too low for Convert's use: a dense
+  commentary chunk's full corrected Sanskrit text plus a per-shloka
+  classification+note in strict JSON, for up to 8 pages at once, can
+  easily need more than that, and a cut-off response breaks the JSON
+  parse entirely (which is exactly the error the project lead saw on the
+  densest commentary page in a run). Raised the shared default to 8192,
+  and added a configurable "Max output tokens per Gemini response" field
+  in Convert's Proofread section so it can be raised further per-book if
+  needed, without waiting on another code change. (The project lead's
+  Gemini consultation on this also suggested specific claims — a
+  "Gemini 3.6 Flash" 65536-token ceiling, dropping temperature/top_p, a
+  new "thinking_level" parameter — none of which could be verified from
+  here and aren't things this session has confirmed are real/current API
+  behavior, so none of that was adopted; only the verifiable, safe fix
+  --  raising a value that was clearly too conservative -- was made.)
 
 - **Convert tool: real Gemini 429 bug hunt + fixes, from a real failed run
   (SumadhvaVijayaMoola.pdf resumed, then GitaVivrti.pdf hit "quota

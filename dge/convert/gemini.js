@@ -81,7 +81,7 @@ Raw OCR input follows:
   // get. The structured-JSON-output constraint (responseMimeType/Schema)
   // and the finishReason/JSON-parse checks below are Convert-specific and
   // stay on top of the shared client's response rather than inside it.
-  async function proofread(ocrPagesText, apiKey, model, contextAnchor) {
+  async function proofread(ocrPagesText, apiKey, model, contextAnchor, maxOutputTokens) {
     // No hardcoded fallback name here on purpose -- passing model through
     // as-is (undefined when the caller has none) lets window.DGEGemini's
     // own DEFAULT_MODEL be the single source of truth for "what to use
@@ -97,12 +97,18 @@ Raw OCR input follows:
     const anchor = contextAnchor ? `Context anchor: this text is from ${contextAnchor}.\n\n` : '';
     const prompt = anchor + PROOFREAD_PROMPT + '\n\n' + ocrPagesText;
 
+    const generationConfig = {
+      responseMimeType: 'application/json',
+      responseSchema: PROOFREAD_RESPONSE_SCHEMA
+    };
+    // Overrides the shared client's own default (8192) -- a dense
+    // multi-page commentary chunk's full corrected text plus per-shloka
+    // classification/notes can genuinely need more room than that.
+    if (maxOutputTokens) generationConfig.maxOutputTokens = maxOutputTokens;
+
     const r = await window.DGEGemini.generate({
       prompt: prompt, apiKey: apiKey, model: model,
-      generationConfig: {
-        responseMimeType: 'application/json',
-        responseSchema: PROOFREAD_RESPONSE_SCHEMA
-      }
+      generationConfig: generationConfig
     });
 
     if (!r.ok) {
@@ -122,7 +128,7 @@ Raw OCR input follows:
     // otherwise reach the JSON parser and surface as a confusing generic
     // syntax error instead of the real cause.
     if (finishReason === 'MAX_TOKENS') {
-      throw new Error('Gemini\'s response was cut off before finishing (hit the output token limit) — this chunk is too large for one request. Try a smaller chunk size and re-run Proofread (it will resume from this chunk).');
+      throw new Error('Gemini\'s response was cut off before finishing (hit the output token limit) — this chunk\'s full corrected text needed more room than allowed. Either raise "Max output tokens per Gemini response" above, or lower the chunk size, then re-run Proofread (it will resume from this chunk).');
     }
     if (finishReason && finishReason !== 'STOP') {
       throw new Error(`Gemini stopped early (reason: ${finishReason}) instead of completing normally.`);

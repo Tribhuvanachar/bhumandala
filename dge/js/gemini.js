@@ -67,8 +67,16 @@
     if (opts.system) {
       body.systemInstruction = { parts: [{ text: String(opts.system) }] };
     }
+    // maxOutputTokens: 2048 was the long-standing default here and is
+    // genuinely too low for anything that has to return a full page (or
+    // several) of structured JSON in one response -- a dense commentary
+    // chunk's corrected text + per-shloka classification/note easily runs
+    // past that, hitting MAX_TOKENS mid-response with no way to recover
+    // the cut-off JSON. Raised to a still-conservative-but-much-safer
+    // 8192; callers needing more (e.g. Convert's large chunks) can still
+    // override via opts.generationConfig.maxOutputTokens.
     body.generationConfig = Object.assign(
-      { temperature: 0.3, maxOutputTokens: 2048 },
+      { temperature: 0.3, maxOutputTokens: 8192 },
       opts.generationConfig || {}
     );
     if (opts.safetySettings) body.safetySettings = opts.safetySettings;

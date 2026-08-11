@@ -81,6 +81,9 @@ window.DGE.App = (function () {
       modal.classList.remove('minimized');
       modal.classList.toggle('maximized');
     });
+    $('copyOutputBtn').addEventListener('click', () => {
+      copyTextToClipboard($('previewArea').innerText, $('copyOutputBtn'), '📋 Copy');
+    });
     // Tapping the header while minimized restores it — the minimize
     // button itself is hard to re-target once the modal has shrunk to a
     // small corner pill, so the whole bar is a bigger, easier target.
@@ -247,6 +250,18 @@ window.DGE.App = (function () {
     const el = $('chunkSizeInput');
     const n = el ? parseInt(el.value, 10) : DEFAULT_CHUNK_SIZE;
     return (n && n > 0) ? n : DEFAULT_CHUNK_SIZE;
+  }
+
+  // Overrides the shared js/gemini.js client's own default (8192) when the
+  // user needs more room -- a dense multi-page commentary chunk's full
+  // corrected text plus per-shloka classification/notes can need more
+  // than that. Blank/invalid falls back to DEFAULT_MAX_OUTPUT_TOKENS
+  // rather than the field silently doing nothing.
+  const DEFAULT_MAX_OUTPUT_TOKENS = 8192;
+  function getMaxOutputTokens() {
+    const el = $('maxOutputTokensInput');
+    const n = el ? parseInt(el.value, 10) : DEFAULT_MAX_OUTPUT_TOKENS;
+    return (n && n > 0) ? n : DEFAULT_MAX_OUTPUT_TOKENS;
   }
 
   // Proactive spacing between successful chunks, on top of (not instead of)
@@ -440,12 +455,12 @@ window.DGE.App = (function () {
     return parsed.filter(p => p >= 1 && p <= total);
   }
 
-  function copyLogToClipboard() {
-    const btn = $('copyLogBtn');
-    const text = $('logArea').textContent;
-    const done = () => { if (btn) { btn.textContent = '✅ Copied!'; setTimeout(() => { btn.textContent = '📋 Copy Log'; }, 2000); } };
+  // Shared by "Copy Log" and the output modal's "Copy" button — same
+  // Clipboard-API-with-execCommand-fallback approach either way.
+  function copyTextToClipboard(text, btn, restoreLabel) {
+    const done = () => { if (btn) { const orig = btn.textContent; btn.textContent = '✅ Copied!'; setTimeout(() => { btn.textContent = restoreLabel || orig; }, 2000); } };
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(done).catch(() => setError('Could not copy the log.'));
+      navigator.clipboard.writeText(text).then(done).catch(() => setError('Could not copy — clipboard access was denied.'));
       return;
     }
     // Fallback for browsers/contexts without the async Clipboard API.
@@ -455,8 +470,11 @@ window.DGE.App = (function () {
     ta.style.left = '-999999px';
     document.body.appendChild(ta);
     ta.select();
-    try { document.execCommand('copy'); done(); } catch (e) { setError('Could not copy the log.'); }
+    try { document.execCommand('copy'); done(); } catch (e) { setError('Could not copy — clipboard access was denied.'); }
     ta.remove();
+  }
+  function copyLogToClipboard() {
+    copyTextToClipboard($('logArea').textContent, $('copyLogBtn'), '📋 Copy Log');
   }
 
   function init() {
@@ -504,6 +522,11 @@ window.DGE.App = (function () {
     if (chunkSizeEl) {
       chunkSizeEl.value = localStorage.getItem('gemini_chunk_size') || String(DEFAULT_CHUNK_SIZE);
       chunkSizeEl.addEventListener('input', () => localStorage.setItem('gemini_chunk_size', chunkSizeEl.value));
+    }
+    const maxOutputTokensEl = $('maxOutputTokensInput');
+    if (maxOutputTokensEl) {
+      maxOutputTokensEl.value = localStorage.getItem('gemini_max_output_tokens') || String(DEFAULT_MAX_OUTPUT_TOKENS);
+      maxOutputTokensEl.addEventListener('input', () => localStorage.setItem('gemini_max_output_tokens', maxOutputTokensEl.value));
     }
     const pageSelectionEl = $('pageSelectionInput');
     if (pageSelectionEl) {
@@ -1131,7 +1154,7 @@ window.DGE.App = (function () {
         }).join('\n\n');
         try {
           const chunkResult = await withAutoRetry(
-            () => GeminiMod().proofread(ocrText, geminiKey, getGeminiModel(), getProofreadContext()),
+            () => GeminiMod().proofread(ocrText, geminiKey, getGeminiModel(), getProofreadContext(), getMaxOutputTokens()),
             `Proofreading chunk ${i + 1}/${totalChunks}`,
             () => proofreadCancelRequested
           );
