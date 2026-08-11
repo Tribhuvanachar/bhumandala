@@ -117,33 +117,53 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
-- **⚠ FLAGGED, NOT YET FIXED — the just-pushed "Sumadhva Vijaya" text
-  (commit `0ad82fd`, "sarga_9") landed at the wrong catalog path and
-  needs the project lead's confirmation before it's moved.** Checked
-  `dge/data/kavya/raghavendra_vijaya/sarga_9/data.json` (pushed via
-  Convert, just before this fix landed): its `metadata.title` is
-  "Sumadhva Vijaya" / author "Narayana Panditacharya" — i.e. it's really
-  Sumadhva Vijaya text, sitting under a `raghavendra_vijaya` path, inside
-  `kavya/` (the classical-court-epic category — Raghuvamsha,
-  Kumarasambhava, etc. — not hagiographies). `PROJECT_STATUS.md` already
-  documents the intended convention: Sumadhva Vijaya's 1,041 audio files
-  already live at `guru_charitre/sumadhva_vijaya/assets/` (see that
-  folder's own README — "Text: not yet available... A proper source is
-  still needed before this grantha can be populated with text"), and
-  further "Vijaya" hagiographies including Raghavendra Vijaya are
-  documented as landing in that same `guru_charitre/` category — so this
-  push, celebrated as finally getting Sumadhva Vijaya SOME text, ended up
-  orphaned from its own audio under an unrelated work's path instead.
-  There is no pre-existing `raghavendra_vijaya` catalog entry this could
-  have been confused with (checked `library.json` — this was the only
-  entry, freshly created by this push), so it looks like a slug typed or
-  picked in error rather than a genuine reuse of an existing stub. Not
-  touched yet — moving a live pushed file/catalog entry needs the project
-  lead to confirm the real intended path first (likely
-  `guru_charitre/sumadhva_vijaya/sarga_9`, matching the audio's own
-  per-sarga numbering, but that should be confirmed against the actual
-  sarga this batch's verses 15–56ish belong to before assuming sarga 9 is
-  right for the TEXT too).
+- **RESOLVED — taxonomy decision: `guru_charitre` category is retired;
+  all "Vijaya" hagiography/mahakavya works fold into `kavya/` alongside
+  Raghuvamsha/Kumarasambhava/etc.** The project lead's call, in response
+  to the mis-filed Sumadhva Vijaya push flagged below: these are all
+  kavyas/mahakavyas, so a separate biography-vs-composed-by-an-acharya
+  category isn't wanted — one `kavya/` category for all of them. Carried
+  out: `dge/data/guru_charitre/sumadhva_vijaya/` (1,041 audio files +
+  README + rename_manifest.json + source_audio_mapping.json) moved whole
+  to `dge/data/kavya/sumadhva_vijaya/` via `git mv` (renames, not
+  delete+recreate, so history is preserved); the mis-filed
+  `kavya/raghavendra_vijaya/sarga_9/data.json` moved to
+  `kavya/sumadhva_vijaya/sarga_9/data.json` (see below); `library.json`'s
+  catalog entry path updated to match; `taxonomy.json`'s `guru_charitre`
+  block removed and `sumadhva_vijaya` added as a sibling of
+  raghuvamsha/kumarasambhava/etc. under `kavya` instead. Checked
+  `library.json` and every JS file under `js/`/`convert/` for other
+  `guru_charitre`/`raghavendra_vijaya` references first — none exist (the
+  audio was never wired into the live app yet, and no other catalog entry
+  used either path), so this was a pure rename with nothing else to
+  update. `taxonomy.json` isn't fetched by the live app or Convert at
+  runtime (confirmed by grep) — it's a reference/planning document only,
+  so this edit is documentation-accuracy, not a functional change.
+  `PROJECT_STATUS.md`'s original entry documenting the now-superseded
+  `guru_charitre` decision was left as-is (it's a dated historical record
+  of what was decided at the time, not a live spec) — this note is the
+  correction.
+
+- **RESOLVED — the mis-filed "Sumadhva Vijaya" push (commit `0ad82fd`,
+  originally at `kavya/raghavendra_vijaya/sarga_9`) is now at
+  `kavya/sumadhva_vijaya/sarga_9/data.json`, alongside its own audio.**
+  Was flagged, not yet fixed, as of the previous note in this file;
+  folded into the taxonomy move above once the project lead confirmed
+  `kavya/` as the destination. Also fixed the numbering bug (see the
+  Convert fix below) IN this already-pushed file, not just prospectively
+  for future pushes: checked every one of its 41 shlokas' own embedded
+  verse marker (॥१५॥ … ॥५५॥) against its stored dict key — all 41 were
+  consistently exactly +14 off, zero anomalies — so this wasn't a guess,
+  the file's own content proved the correct offset. Re-keyed "1"–"41" to
+  "15"–"55" directly (`metadata.totalShlokas` unaffected, still 41).
+  Verified with a fresh fetch in a real browser after the fix. One thing
+  still NOT independently verified (the project lead didn't address this
+  part, and I have no way to check it myself): whether "sarga 9" is
+  actually the correct sarga number for these verses against Sumadhva
+  Vijaya's real 16-sarga structure — that number was carried over as-is
+  from what was typed during the original push. Low risk to fix later if
+  wrong (a plain rename), but worth a glance before pushing sarga 8 or 10
+  alongside it.
 
 - **Convert tool: schema-build numbering now has a "Starting shloka/unit
   number" field (v0.23.0) — fixes exactly the bug that produced the
