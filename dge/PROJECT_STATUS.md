@@ -217,34 +217,11 @@ What's New / Coming Soon modal, configurable audio source base URL (three-tier o
 
 ## Open / pending work
 
-**Pending on the project lead:**
-- Revoke the exposed GitHub PAT (see top of this document).
-- Decide on the repo-splitting proposal above.
-- Run the full Kosha import (Colab notebook + the 2.3 GB `dict.zip`) and upload the result.
-- Resolve Ashtadhyayi commentary licensing (`licence: verify` — confirm with the source curator or replace/remove).
-- Decide how far to take the Kosha "Unclear"-licensed dictionaries (currently included per case-by-case authorization with attribution — confirm this stands, or narrow to the cleared Cologne core).
-- Review and decide on the `cowork/sarvamoola-and-search` branch merge (after this session's own review pass).
-- Optional follow-up, not urgent: Harivaṃśa's ~20-verse unmarked invocatory block (see "Round 3" above) could be split into individual verses with a verified daṇḍa-splitting heuristic, if anyone wants finer granularity there — the text itself is already correct as one merged entry.
-
-**Stored for later, not started:** a Sanskrit TTS/chanting architecture doc, now at **v1.1** (`dge/tts/ARCHITECTURE.md`; the v1.0 `.docx` it started from is kept alongside for reference) — inspired by Bhāgavata-Vāṇi/Vāgdhenu, covering a Sanskrit linguistic frontend, a chandas/vṛtta meter engine, a separate Vedic svara/accent track, voice cloning, and an MVP plan (MVP-1 through MVP-8). v1.1 adds an analysis of the Bhāgavata-Vāṇi APK vs. Vāgdhenu TTS separation of responsibilities (content/player app vs. audio-generation layer) and a phased development order (Phase A-D). No implementation work has started; this is purely a reference doc for whenever that feature is picked up.
-- **The biggest gap — content, not code:** 468 of 605 catalog entries are still empty — the remaining 14 Mahāpurāṇas, Itihāsas beyond Rāmāyaṇa/Mahābhārata/Harivaṃśa (Adhyātma Rāmāyaṇa), Dāsakūṭa (42), Vyāsakūṭa (18), Sūtras (42), Pañcarātra Āgama (17), Dharmaśāstra (7), and most Smṛtis (14 of 19 remaining, plus the "OCR tier" texts requiring explicit sourcing authorization first).
-
-**Pending on this session / next Claude session:**
-- `cowork/sarvamoola-and-search` is already merged (see "Content currently live" above — Sarvamoola's 47 granthas are live). Re-run/extend `build_search_index.py` to include today's new Rāmāyaṇa/Mahābhārata/Bhāgavata/smṛti/kāvya content plus Ashtadhyayi (should be automatic, standard schema) — Kosha stays separate (bespoke data shape) unless someone designs a unifying pass.
-- Optional: merge `kosha_schema_ADDITION.json`/`kosha_taxonomy_ADDITION.json` into `data/schemas.json`/`data/taxonomy.json` if koshas should appear in the normal library browser, not just the floating button.
-- A full-corpus indexing pass once Kosha's real dataset and Sarvamoola both exist, matching the original ask: search everything in DGE in seconds. The Sarvamoola branch's `build_search_index.py` is most of this already — extending it is more tractable than starting over.
-
-**Vedic-specific, still genuinely open** (full detail in `veda_toolkit/README.md` §7):
-- Accented padapāṭha, ṛṣi/devatā/chandas for Taittirīya — not present in its ITRANS source
-- Sāmaveda gāna (melodic notation) — deferred, needs its own accent handling
-- Missing śākhās (Rāṇāyanīya flagged as easiest — already numbered in the FourVedas source sheet)
-- Audio (recitation) — not sourced for any Veda yet
-
-**Known unresolved bug:**
-- `index.html` caching — a stale cached app shell can persist through what most users think of as a hard refresh. The version-check banner (`DGE_EXPECTED_HTML_VERSION`) detects it but can't rescue a tab stuck on a snapshot from before that mechanism existed. No fix implemented.
-
-**Longstanding backlog, still not started:**
-- True XML sitemap, IndexedDB migration for the main app, transliteration engine rework, waveform visualization, gapless audio, sponsor payment processing.
+**Moved to `dge/PENDING.md`** — the single running backlog for every open
+issue, half-finished feature, pending decision, and possible improvement
+across the project. Update *that* file (not this section) whenever new
+pending work is discovered or existing pending work is resolved; this
+document stays a narrative log of what already happened.
 
 ## If you're a fresh Claude instance reading this
 Read this whole file, `veda_toolkit/README.md` for anything Vedic-content-related, `kosha_toolkit/README.md` for anything Kosha-related. Ask the project lead which specific item they want worked on next rather than assuming — the content gap above is large enough that "next" is a real choice. Verify before proposing, especially for anything involving Unicode/font rendering, external data sources, or licensing — this project has a specific, deliberate rule about unlicensed sources (see "Non-negotiable conventions" above); don't relax it without the project lead's explicit, case-by-case say-so, and don't assume a prior case-by-case authorization for one source extends to a different one.
