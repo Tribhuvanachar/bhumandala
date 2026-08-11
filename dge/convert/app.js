@@ -15,6 +15,7 @@ window.DGE.App = (function () {
   const LoadersMod = () => window.DGE.Loaders;
 
   const DEFAULT_CHUNK_SIZE = 8;
+  const DEFAULT_OCR_BATCH_SIZE = 5;
 
   let ocrPages = [];
   let finalJson = null;
@@ -253,6 +254,47 @@ window.DGE.App = (function () {
     el.style.display = 'block';
   }
 
+  // Explains *why* Run OCR needs the file re-selected, instead of the old
+  // bare "Load a PDF or image(s) first." -- that message is technically
+  // correct but reads like the app lost the work, when what actually
+  // happened is almost always: the browser reclaimed a backgrounded tab's
+  // memory (very common on mobile after a few minutes away) and wiped the
+  // live PDF file handle, which the Web Platform gives no way to restore
+  // without the user picking the file again -- a browser security
+  // boundary, not something this app can route around. Named here so the
+  // message can say exactly which file and how much is already saved,
+  // using currentFileKey if a known-file resume already happened, or the
+  // single most recent known file otherwise (so it's still specific even
+  // right after a fresh reload, before the user has clicked anything).
+  function describeFileReselectNeeded() {
+    let name = currentFileDisplayName;
+    let done = null, total = null;
+    if (!name) {
+      try {
+        // Only name a specific file when there's exactly one candidate --
+        // with several known files and no resume click yet, we genuinely
+        // don't know which one the admin means, so naming one would be a
+        // guess dressed up as a fact.
+        const list = JSON.parse(localStorage.getItem(KNOWN_FILES_KEY)) || [];
+        if (list.length === 1) {
+          name = list[0].name;
+          done = list[0].ocrDone;
+          total = list[0].ocrTotal;
+        }
+      } catch (e) { /* fall through to the generic message below */ }
+    }
+    if (!name) {
+      return 'Load a PDF or image(s) first. (If you had one loaded before and the tab was backgrounded for a while, ' +
+        'the browser may have reclaimed its memory — check "Files with saved progress on this device" in the Upload tab first; ' +
+        'your OCR progress is safe either way, only the live file needs re-selecting.)';
+    }
+    const progress = (done != null && total != null) ? ` — ${done}/${total} page(s) already OCR\'d and safely saved` : '';
+    return `"${name}" needs to be re-selected to continue OCR${progress}. This isn't lost work — mobile browsers often ` +
+      'reclaim a backgrounded tab\'s memory after a few minutes away, which clears the live file handle (a browser security ' +
+      'restriction, not something this app can prevent). Tap "Choose Files" in the Upload tab and pick the same PDF again — ' +
+      'OCR will automatically continue from where it left off, nothing already done gets redone.';
+  }
+
   // Loads a previously-saved file's OCR/proofread progress directly from
   // this device's storage, without needing the original file re-selected —
   // possible because ocrPages/proofread chunks are looked up purely by
@@ -309,6 +351,16 @@ window.DGE.App = (function () {
     const el = $('chunkSizeInput');
     const n = el ? parseInt(el.value, 10) : DEFAULT_CHUNK_SIZE;
     return (n && n > 0) ? n : DEFAULT_CHUNK_SIZE;
+  }
+
+  // How many pages go into ONE Vision API call (see ocrImagesBatch() in
+  // vision.js) -- only applies to the pure "Vision AI only" engine.
+  // 1 disables batching entirely (back to the original one-call-per-page
+  // behavior), useful if a flaky page keeps taking a whole batch down.
+  function getOcrBatchSize() {
+    const el = $('ocrBatchSizeInput');
+    const n = el ? parseInt(el.value, 10) : DEFAULT_OCR_BATCH_SIZE;
+    return (n && n > 0) ? n : DEFAULT_OCR_BATCH_SIZE;
   }
 
   // Overrides the shared js/gemini.js client's own default (8192) when the
@@ -586,6 +638,11 @@ window.DGE.App = (function () {
     if (maxOutputTokensEl) {
       maxOutputTokensEl.value = localStorage.getItem('gemini_max_output_tokens') || String(DEFAULT_MAX_OUTPUT_TOKENS);
       maxOutputTokensEl.addEventListener('input', () => localStorage.setItem('gemini_max_output_tokens', maxOutputTokensEl.value));
+    }
+    const ocrBatchSizeEl = $('ocrBatchSizeInput');
+    if (ocrBatchSizeEl) {
+      ocrBatchSizeEl.value = localStorage.getItem('convert_ocr_batch_size') || String(DEFAULT_OCR_BATCH_SIZE);
+      ocrBatchSizeEl.addEventListener('input', () => localStorage.setItem('convert_ocr_batch_size', ocrBatchSizeEl.value));
     }
     const pageSelectionEl = $('pageSelectionInput');
     if (pageSelectionEl) {
@@ -1232,9 +1289,9 @@ window.DGE.App = (function () {
       }
     }
 
-    if (!currentLoader) return setError('Load a PDF or image(s) first.');
+    if (!currentLoader) return setError(describeFileReselectNeeded());
     const total = currentLoader.getPageCount();
-    if (!total) return setError('Load a PDF or image(s) first.');
+    if (!total) return setError(describeFileReselectNeeded());
 
     const selectedPages = getPageSelection(total);
     if (!selectedPages.length) return setError('The page selection above doesn\'t match any real page — check it or clear it to process all pages.');
@@ -1265,13 +1322,77 @@ window.DGE.App = (function () {
 
     const ocrEngineLabel = engine === 'both' ? 'Vision + Tesseract cross-check'
       : engine === 'tesseract' ? 'Tesseract' : 'Vision';
+    const ocrBatchSize = engine === 'vision' ? getOcrBatchSize() : 1;
     const ocrStartTime = Date.now();
-    for (let i = startIdx; i < selectedPages.length; i++) {
-      const p = selectedPages[i];
+    for (let i = startIdx; i < selectedPages.length; ) {
       if (cancelRequested) {
         log(`Stopped by user after ${i} of ${selectedPages.length} selected page(s). Progress is saved — you can resume later.`);
         break;
       }
+
+      // Pure Vision runs go through this batched path instead of the
+      // per-page one below -- sends several pages in ONE HTTP call (see
+      // ocrImagesBatch() in vision.js) to cut down network round-trips
+      // over a large book. Deliberately NOT used for 'tesseract' or
+      // 'both': Tesseract has no network call to batch (it's local WASM
+      // work), and 'both' interleaves a per-page cross-check that batching
+      // would only complicate for no matching benefit. A failure anywhere
+      // in the batch fails the WHOLE batch (same halt-and-resume-after
+      // semantics as a single page failing today, just a coarser unit) --
+      // simpler and safer than trying to salvage partial results.
+      if (engine === 'vision' && ocrBatchSize > 1) {
+        const batchPages = selectedPages.slice(i, i + ocrBatchSize);
+        const first = batchPages[0], last = batchPages[batchPages.length - 1];
+        updateProgress($('progressText'), $('ocrProgressBar'), i, selectedPages.length, i - startIdx, ocrStartTime, `${ocrEngineLabel} OCR — pages ${first}–${last}`);
+        try {
+          const pageObjs = [];
+          for (const p of batchPages) pageObjs.push(await currentLoader.getPageImage(p));
+          const results = await withAutoRetry(
+            () => VisionMod().ocrImagesBatch(
+              pageObjs.map((obj, idx) => ({ page: batchPages[idx], base64Png: obj.imageBase64 })),
+              visionKey, getLanguageHints()
+            ),
+            `OCR on pages ${first}–${last}`,
+            () => cancelRequested
+          );
+          results.forEach((primary, idx) => {
+            const p = batchPages[idx];
+            const ocrEntry = {
+              page: p,
+              text: primary.text,
+              avgConfidence: primary.avgConfidence,
+              lowConfidenceWords: primary.lowConfidenceWords,
+              words: primary.words,
+              engine: 'vision',
+              masterImage: pageObjs[idx].imageBase64
+            };
+            if (getReadingOrderFix() && ocrEntry.words && ocrEntry.words.length) {
+              ocrEntry.text = U().reconstructReadingOrder(ocrEntry.words);
+            }
+            if (primary.lowConfidenceWords && primary.lowConfidenceWords.length) {
+              log(`Page ${p}: ${primary.lowConfidenceWords.length} low-confidence word(s) — worth a manual check (avg confidence ${Math.round(primary.avgConfidence * 100)}%).`);
+            }
+            ocrPages.push(ocrEntry);
+          });
+          await IDB().set(ocrProgressKey(), { lastPage: last });
+          await IDB().set(ocrDataKey(), { pages: ocrPages });
+          updateKnownFilesManifest(currentLoader.getDocumentName(), ocrPages.length, total);
+          renderFileStatusBar();
+          log(`Pages ${first}–${last} OCR'd and saved (batch of ${batchPages.length}).`);
+        } catch (e) {
+          setError(`Failed on pages ${first}–${last} after ${RETRY_DELAYS_MS.length + 1} attempts: ${U().formatError(e)} — progress saved through the pages already done. Fix the issue and tap Resume (try lowering the batch size in Setup if one bad page keeps taking a whole batch down with it).`);
+          $('runOcrBtn').disabled = false;
+          $('resumeBtn').disabled = false;
+          releaseWakeLock();
+          await TesseractCheckMod().terminate();
+          renderFileStatusBar();
+          return;
+        }
+        i += batchPages.length;
+        continue;
+      }
+
+      const p = selectedPages[i];
       updateProgress($('progressText'), $('ocrProgressBar'), i, selectedPages.length, i - startIdx, ocrStartTime, `${ocrEngineLabel} OCR — page ${p}`);
       try {
         const pageObj = await currentLoader.getPageImage(p);
@@ -1350,6 +1471,7 @@ window.DGE.App = (function () {
         renderFileStatusBar();
         return;
       }
+      i++;
     }
 
     $('runOcrBtn').disabled = false;
@@ -1598,6 +1720,7 @@ window.DGE.App = (function () {
       chunkSizeInput: String(DEFAULT_CHUNK_SIZE),
       maxOutputTokensInput: String(DEFAULT_MAX_OUTPUT_TOKENS),
       chunkDelayInput: String(DEFAULT_CHUNK_DELAY_SEC),
+      ocrBatchSizeInput: String(DEFAULT_OCR_BATCH_SIZE),
       languageHintsInput: '',
       geminiModelCustom: '',
       pageSelectionInput: '',

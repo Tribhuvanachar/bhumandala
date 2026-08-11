@@ -15,14 +15,14 @@
     window.location.replace('../index.html');
   }
 </script>
-<title>DGE Convert v0.25.0</title>
-<link rel="stylesheet" href="style.css?v=0.25.0">
+<title>DGE Convert v0.27.0</title>
+<link rel="stylesheet" href="style.css?v=0.27.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
 <div><a href="../index.html">🏠 Back to DGE main page</a></div>
-<div>Version: <b id="versionDisplay">0.25.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.27.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF or page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -77,7 +77,7 @@
   <div id="knownFilesHint" class="hint" style="display:none;"></div>
   <input id="pdfFile" type="file" accept="application/pdf,.pdf,image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple>
   <p class="hint">A single PDF, or select multiple page-image files (JPG/PNG/WEBP) at once — pick them in reading order, since the order you select them in is the order they'll be OCR'd in. JP2 isn't supported yet (no browser can decode it without an extra library) — convert to JPG/PNG first.</p>
-  <p class="hint">⚠ Keep this tab open and in the foreground while OCR/Proofread are running — mobile browsers freeze background tabs' JavaScript entirely (switching apps, locking the screen) and no page can override that. Progress is saved after every single page/chunk, so if it does get interrupted, just reselect the same file and tap Resume/Proofread again — nothing already done gets redone.</p>
+  <p class="hint">⚠ Keep this tab open and in the foreground while OCR/Proofread are running. Two separate things can interrupt a run: (1) mobile browsers pause a backgrounded tab's JavaScript immediately (switching apps, locking the screen) — work simply pauses and continues when you come back; (2) after a few minutes away, the browser can go further and reclaim the whole tab's memory, which wipes the live PDF file (not something any web page can prevent — it's the same browser security boundary that stops any site from reading files without you re-picking them). Either way, <strong>no OCR/Proofread progress is lost</strong> — it's saved after every single page/chunk. If Run OCR says a file needs re-selecting, that's case (2): tap "Choose Files" and pick the same PDF again — it resumes exactly where it left off. Proofread never needs this (it only reads already-saved OCR text), which is why it can resume with one tap while OCR needs the file back first.</p>
   <div id="pageCountDisplay" class="hint"></div>
   <p class="hint">— or —</p>
   <label for="importUrlInput">Page URL (e.g. a MediaWiki page like anandamakaranda.in)</label>
@@ -96,7 +96,7 @@
     <input type="checkbox" id="clearProofreadDataCk" style="width:auto; margin:0;" checked> Proofread (Gemini) results for this file
   </label>
   <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin:6px 0;">
-    <input type="checkbox" id="clearOptionsDefaultsCk" style="width:auto; margin:0;"> Reset the options above (chunk size, max output tokens, request delay, language hints, model, engine) to their defaults
+    <input type="checkbox" id="clearOptionsDefaultsCk" style="width:auto; margin:0;"> Reset the options above (chunk size, max output tokens, request delay, OCR batch size, language hints, model, engine) to their defaults
   </label>
   <button id="clearProgressBtn">Clear the checked item(s) above</button>
   <p class="hint">Only affects what's checked, only for the file named above — nothing else, no other file's saved progress. Use this if you've replaced the PDF with a corrected version under the same name, or just want to redo one stage.</p>
@@ -117,6 +117,9 @@
     <option value="both">Both (Vision AI + free Tesseract.js cross-check)</option>
   </select>
   <p class="hint">"Tesseract.js only" lets you preview/download a free OCR pass — e.g. to sanity-check a file — without spending any Vision quota. "Both" runs Vision as the primary result and flags pages where Tesseract disagrees, roughly doubling per-page time and downloading a language model the first time (a few MB, cached after). Tesseract <strong>requires</strong> a matching language hint above (it can't auto-detect script like Vision can) — running it with none set is refused rather than silently guessing English.</p>
+  <label for="ocrBatchSizeInput">Pages per Vision API call ("Vision AI only" engine)</label>
+  <input type="text" id="ocrBatchSizeInput" inputmode="numeric" style="width:80px;">
+  <p class="hint">Sends this many pages in one Vision request instead of one call per page — real time savings on a large book, since it cuts the number of network round-trips, not how fast Vision reads any single page. Default 5. Set to 1 to go back to one call per page (e.g. if a single flaky page keeps taking a whole batch down — a batch fails as a unit, same "everything before it stays saved" resume as before, just a coarser unit). Only applies to "Vision AI only" — Tesseract runs locally with no network call to batch, and "Both" needs each page's cross-check done individually anyway.</p>
   <div id="resumeBar" class="resume-bar" style="display:none;">
     <span id="resumeText"></span>
     <button id="resumeBtn">Resume</button>
@@ -250,8 +253,8 @@
 </div>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.25.0';
-  window.DGE_CONVERT_BUILD = '2026-08-11i';
+  window.DGE_CONVERT_VERSION = '0.27.0';
+  window.DGE_CONVERT_BUILD = '2026-08-12b';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -266,22 +269,22 @@
      harmless to load unconditionally otherwise. Pinned exact version, same
      convention as pdf.js/Sanscript above. -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
-<script src="utils.js?v=0.25.0"></script>
-<script src="idb.js?v=0.25.0"></script>
-<script src="pdf.js?v=0.25.0"></script>
-<script src="image.js?v=0.25.0"></script>
-<script src="loaders.js?v=0.25.0"></script>
-<script src="vision.js?v=0.25.0"></script>
-<script src="tesseract-check.js?v=0.25.0"></script>
-<script src="review-classifier.js?v=0.25.0"></script>
-<script src="../js/gemini.js?v=0.25.0"></script>
-<script src="gemini.js?v=0.25.0"></script>
-<script src="github.js?v=0.25.0"></script>
-<script src="mapper.js?v=0.25.0"></script>
-<script src="urlimport.js?v=0.25.0"></script>
-<script src="renderer.js?v=0.25.0"></script>
-<script src="review-ui.js?v=0.25.0"></script>
-<script src="app.js?v=0.25.0"></script>
+<script src="utils.js?v=0.27.0"></script>
+<script src="idb.js?v=0.27.0"></script>
+<script src="pdf.js?v=0.27.0"></script>
+<script src="image.js?v=0.27.0"></script>
+<script src="loaders.js?v=0.27.0"></script>
+<script src="vision.js?v=0.27.0"></script>
+<script src="tesseract-check.js?v=0.27.0"></script>
+<script src="review-classifier.js?v=0.27.0"></script>
+<script src="../js/gemini.js?v=0.27.0"></script>
+<script src="gemini.js?v=0.27.0"></script>
+<script src="github.js?v=0.27.0"></script>
+<script src="mapper.js?v=0.27.0"></script>
+<script src="urlimport.js?v=0.27.0"></script>
+<script src="renderer.js?v=0.27.0"></script>
+<script src="review-ui.js?v=0.27.0"></script>
+<script src="app.js?v=0.27.0"></script>
 <script>
   // Tab/wizard navigation -- purely presentational (which panel is
   // visible), so it's kept separate from app.js's own state/logic and
