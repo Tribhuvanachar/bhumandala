@@ -1,14 +1,29 @@
-/* dge/convert/style.css — minimal, functional only, per project requirements */
-body { font-family: system-ui, sans-serif; max-width: 680px; margin: 16px auto; padding: 0 14px; line-height: 1.5; }
-h2 { margin-bottom: 4px; }
-.hint { color: #666; font-size: 12px; margin: 4px 0; }
-fieldset { margin: 16px 0; padding: 12px; }
-legend { font-weight: 700; }
-label { display: block; font-size: 13px; font-weight: 700; margin: 8px 0 2px; }
-input[type="password"], input[type="text"] { width: 100%; box-sizing: border-box; padding: 8px; font-size: 14px; margin-bottom: 6px; }
+/* dge/convert/style.css — same warm palette as the rest of DGE's admin
+   pages (audio-admin.html etc.), not a from-scratch look, so this tool
+   doesn't feel like a separate, unpolished product. */
+:root {
+  --bg:#f5efe4; --panel:#fffdf8; --panel2:#fbf4e7; --ink:#2b2117; --muted:#8b7c66; --line:#e6dac6;
+  --accent:#9a3b1b; --accent2:#1f6f5c; --gold:#b6862c; --ok:#2f9e6f; --bad:#b23b2b;
+  --shadow:0 2px 14px rgba(90,60,20,.10); --radius:12px;
+}
+* { box-sizing: border-box; }
+body { font-family: system-ui, sans-serif; max-width: 680px; margin: 16px auto; padding: 0 14px 60px; line-height: 1.5; background: var(--bg); color: var(--ink); }
+h2 { margin-bottom: 4px; color: var(--accent); }
+a { color: var(--accent2); }
+.hint { color: var(--muted); font-size: 12px; margin: 4px 0; }
+fieldset { margin: 18px 0; padding: 14px 16px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+legend { font-weight: 700; color: var(--accent); padding: 2px 8px; background: var(--panel); font-size: 15px; }
+label { display: block; font-size: 13px; font-weight: 700; margin: 10px 0 3px; color: var(--ink); }
+input[type="password"], input[type="text"] { width: 100%; box-sizing: border-box; padding: 9px 10px; font-size: 14px; margin-bottom: 6px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel2); color: var(--ink); }
+input[type="password"]:focus, input[type="text"]:focus, select:focus { outline: none; border-color: var(--accent2); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent2) 20%, transparent); }
 input[type="file"] { margin: 6px 0; }
-button { padding: 8px 16px; font-size: 14px; font-weight: 700; margin: 4px 6px 4px 0; cursor: pointer; }
+button { padding: 9px 16px; font-size: 14px; font-weight: 700; margin: 4px 6px 4px 0; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--panel2); color: var(--ink); transition: filter .15s, transform .05s; }
+button:hover:not(:disabled) { filter: brightness(0.97); }
+button:active:not(:disabled) { transform: translateY(1px); }
 button:disabled { opacity: 0.5; cursor: default; }
+button.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+progress { height: 10px; border-radius: 6px; overflow: hidden; margin: 6px 0; accent-color: var(--accent2); }
 .error-box { display: none; background: #fce8e6; border: 1px solid #ea4335; color: #5f1a13; padding: 10px; border-radius: 4px; margin-bottom: 12px; font-size: 13px; }
 .resume-bar { background: #fef7e0; border: 1px solid #f9ab00; padding: 8px; border-radius: 4px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 .progress-text { font-weight: 700; margin: 8px 0; }
@@ -41,7 +56,7 @@ button:disabled { opacity: 0.5; cursor: default; }
 .review-cand-text { white-space: pre-wrap; margin-top: 4px; }
 .review-actions { display: flex; gap: 8px; margin-top: 8px; }
 #previewLabel { margin: 4px 0 8px; }
-select { width: 100%; box-sizing: border-box; padding: 8px; font-size: 14px; margin-bottom: 6px; }
+select { width: 100%; box-sizing: border-box; padding: 9px 10px; font-size: 14px; margin-bottom: 6px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel2); color: var(--ink); }
 .schema-row { border-bottom: 1px solid #ddd; padding: 10px 0; }
 .schema-sa-input, .schema-commentary-input { width: 100%; box-sizing: border-box; padding: 6px; font-size: 13px; margin-bottom: 6px; font-family: inherit; }
 .target-slug-results { max-height: 260px; overflow-y: auto; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 6px; background: #fff; }

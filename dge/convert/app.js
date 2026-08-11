@@ -19,6 +19,7 @@ window.DGE.App = (function () {
   let ocrPages = [];
   let finalJson = null;
   let currentFileKey = null;
+  let currentFileDisplayName = '';
   let currentLoader = null; // whichever loader (PDF/Image/…) is handling the current source — see loaders.js
   let cancelRequested = false;
   let proofreadCancelRequested = false;
@@ -56,6 +57,36 @@ window.DGE.App = (function () {
     const el = $('errorBox');
     if (el) { el.style.display = 'none'; el.textContent = ''; }
   }
+
+  // Shared progress display (text + native <progress> bar + a rough time
+  // estimate from the actual average time-per-unit so far this run, not a
+  // guess) -- used by both the OCR page loop and the Proofread chunk loop,
+  // each with their own text/bar element pair so the two stages' status
+  // never overwrite each other.
+  function formatDuration(ms) {
+    const s = Math.round(ms / 1000);
+    if (s < 60) return s + 's';
+    const m = Math.floor(s / 60), rem = s % 60;
+    return m + 'm' + (rem ? ' ' + rem + 's' : '');
+  }
+  // overallDone/overallTotal drive the displayed "(X / Y)" and the bar --
+  // the real position in the whole job, including anything already done
+  // in an earlier session. thisRunDone is ONLY the count finished since
+  // startTime, used for the ETA average -- otherwise resuming a
+  // part-done job would divide elapsed-time-since-just-now by a doneCount
+  // that includes work from a previous session, producing a wildly wrong
+  // (usually way too optimistic, sometimes absurdly long) estimate.
+  function updateProgress(textEl, barEl, overallDone, overallTotal, thisRunDone, startTime, label) {
+    if (barEl) { barEl.style.display = ''; barEl.value = overallTotal ? Math.round((overallDone / overallTotal) * 100) : 0; }
+    if (!textEl) return;
+    let eta = '';
+    if (thisRunDone > 0 && overallDone < overallTotal) {
+      const avgMs = (Date.now() - startTime) / thisRunDone;
+      eta = ` — about ${formatDuration(avgMs * (overallTotal - overallDone))} left`;
+    }
+    textEl.textContent = `${label} (${overallDone} / ${overallTotal})${eta}`;
+  }
+  function hideProgressBar(barEl) { if (barEl) barEl.style.display = 'none'; }
 
   function setPreviewLabel(msg) {
     const el = $('previewLabel');
@@ -126,6 +157,23 @@ window.DGE.App = (function () {
   // attempt fails, the last error is re-thrown so the caller's existing
   // give-up-and-log path runs unchanged. shouldAbort() is checked before
   // each attempt and during each backoff wait so Cancel still works.
+  // Failures where retrying the IDENTICAL request will fail identically
+  // every time -- not a transient blip, so burning through the full retry
+  // schedule (up to ~65s) before finally giving up just makes the user
+  // wait through several guaranteed failures before they can act. Failing
+  // immediately on the first attempt still lets a real transient error of
+  // an otherwise-non-retryable kind (rare, but e.g. a flaky 400) surface
+  // once rather than being silently eaten.
+  const NON_RETRYABLE_KINDS = new Set(['max_tokens', 'bad_key', 'permission', 'model_missing', 'bad_request', 'blocked']);
+
+  async function sleepAbortable(ms, shouldAbort) {
+    const stepMs = 250;
+    for (let waited = 0; waited < ms; waited += stepMs) {
+      if (shouldAbort && shouldAbort()) return;
+      await sleep(Math.min(stepMs, ms - waited));
+    }
+  }
+
   async function withAutoRetry(fn, label, shouldAbort) {
     let lastErr;
     for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
@@ -134,12 +182,17 @@ window.DGE.App = (function () {
         return await fn();
       } catch (e) {
         lastErr = e;
+        if (e && NON_RETRYABLE_KINDS.has(e.kind)) {
+          log(`${label} failed: ${U().formatError(e)} — not retrying automatically (this would fail the same way again; fix the setting it's pointing at and try again).`);
+          break;
+        }
         if (attempt === RETRY_DELAYS_MS.length) break; // out of automatic retries
         const isQuota = e && e.kind === 'quota';
         const delayMs = isQuota ? QUOTA_RETRY_DELAYS_MS[attempt] : RETRY_DELAYS_MS[attempt];
         const delaySec = Math.round(delayMs / 1000);
         log(`${label} failed (attempt ${attempt + 1}/${RETRY_DELAYS_MS.length + 1}): ${U().formatError(e)} — retrying automatically in ${delaySec}s${isQuota ? ' (rate-limit backoff — this is a per-minute/per-day cap on your key, not your prepaid balance)' : ''}…`);
-        await sleep(delayMs);
+        await sleepAbortable(delayMs, shouldAbort);
+        if (shouldAbort && shouldAbort()) throw lastErr;
       }
     }
     throw lastErr;
@@ -215,6 +268,8 @@ window.DGE.App = (function () {
     if (!entry) return;
 
     currentFileKey = key;
+    currentFileDisplayName = entry.name;
+    updateDangerZoneLabel();
     currentLoader = null;
     ocrPages = [];
     finalJson = null;
@@ -696,6 +751,27 @@ window.DGE.App = (function () {
     return String(raw || '').trim().toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_-]/g, '');
   }
 
+  // Looks at the real sibling names at this level and, if they follow an
+  // obvious "<word>_<number>" series (sarga_01, skandha_2, ...), works out
+  // what the NEXT one should be called -- same prefix, same zero-padding
+  // width, number incremented. Returns null rather than guessing when the
+  // siblings don't agree on one clear pattern (e.g. a mix of prefixes, or
+  // fixed non-numbered names like "mula"/"tika_jayatirtha") -- a wrong
+  // auto-fill would be worse than none.
+  function detectNextSegmentSuggestion(childNames) {
+    const parsed = childNames.map(n => {
+      const m = n.match(/^([a-z]+)_(\d+)$/);
+      return m ? { prefix: m[1], num: parseInt(m[2], 10), digits: m[2].length } : null;
+    }).filter(Boolean);
+    if (!parsed.length) return null;
+    const prefixes = Array.from(new Set(parsed.map(p => p.prefix)));
+    if (prefixes.length !== 1) return null; // mixed naming at this level -- don't guess which series to continue
+    const prefix = prefixes[0];
+    const highest = parsed.reduce((a, b) => (b.num > a.num ? b : a));
+    const nextNum = String(highest.num + 1).padStart(highest.digits, '0');
+    return { kind: prefix, suggestion: `${prefix}_${nextNum}` };
+  }
+
   function renderTreeBrowser() {
     const breadcrumbEl = $('targetTreeBreadcrumb');
     const listEl = $('targetTreeList');
@@ -739,12 +815,34 @@ window.DGE.App = (function () {
         rowsHtml += `<div class="target-tree-row" data-action="drill" data-name="${escapeHtml(name)}">📁 ${escapeHtml(name)}</div>`;
       }
     });
-    const siblingHint = childNames.length
-      ? `Existing here: ${childNames.slice(0, 8).join(', ')}${childNames.length > 8 ? ', …' : ''}`
-      : 'Nothing here yet — this will be a brand new top-level folder.';
+    const suggestion = detectNextSegmentSuggestion(childNames);
+    let addLabel, addPlaceholder, addPrefill;
+    if (suggestion) {
+      // A clear numbered series exists here (sarga_01, sarga_02, ...) --
+      // name what's being added and hand over the exact next one, already
+      // in the right format, instead of leaving the admin to work it out.
+      addLabel = `＋ Add a new ${suggestion.kind}. Existing: ${childNames.slice(0, 8).join(', ')}${childNames.length > 8 ? ', …' : ''}. Suggested next: `;
+      addPlaceholder = suggestion.suggestion;
+      addPrefill = suggestion.suggestion;
+    } else if (childNames.length) {
+      // No numbered series -- naming a "kind" here would mean guessing
+      // whether this level holds more whole works (kavya/ -> "a new
+      // kavya", a real guess that happens to be right) or text layers of
+      // ONE work (kavya/raghuvamsha/ -> children are "mula"/"tika_x", NOT
+      // more raghuvamshas -- a guess that's actively wrong). Can't tell
+      // those apart reliably from names alone, so stay generic and let
+      // the real sibling list carry the context instead of a wrong label.
+      addLabel = `＋ Add new here. Existing: ${childNames.slice(0, 8).join(', ')}${childNames.length > 8 ? ', …' : ''}.`;
+      addPlaceholder = 'e.g. ' + (childNames[0] || 'new_item');
+      addPrefill = '';
+    } else {
+      addLabel = '＋ Add new here — nothing exists at this level yet, so this starts a brand new folder.';
+      addPlaceholder = 'e.g. sarga_01';
+      addPrefill = '';
+    }
     rowsHtml += `<div class="target-tree-add-row">` +
-      `<div class="hint">＋ Add new here. ${escapeHtml(siblingHint)}</div>` +
-      `<input type="text" id="targetTreeNewSegment" placeholder="e.g. sarga_02">` +
+      `<div class="hint">${addLabel}</div>` +
+      `<input type="text" id="targetTreeNewSegment" placeholder="${escapeHtml(addPlaceholder)}" value="${escapeHtml(addPrefill)}">` +
       `<button type="button" id="targetTreeNewSegmentBtn">Use this</button></div>`;
     listEl.innerHTML = rowsHtml;
 
@@ -951,6 +1049,8 @@ window.DGE.App = (function () {
     // different set of images (even same count) gets its own saved
     // progress instead of colliding with an unrelated prior selection.
     currentFileKey = Array.from(files).map(f => f.name + '_' + f.size).join('|');
+    currentFileDisplayName = Array.from(files).map(f => f.name).join(', ');
+    updateDangerZoneLabel();
     ocrPages = [];
     finalJson = null;
     lastProofreadMissingPages = [];
@@ -1016,6 +1116,8 @@ window.DGE.App = (function () {
       // downstream (chunked proofread, resumability, schema map, push)
       // behaves identically regardless of source.
       currentFileKey = 'url_' + title.replace(/[^a-zA-Z0-9_-]/g, '_');
+      currentFileDisplayName = title;
+      updateDangerZoneLabel();
       ocrPages = UrlImportMod().splitIntoPages(text);
       finalJson = null;
       lastProofreadMissingPages = [];
@@ -1087,13 +1189,16 @@ window.DGE.App = (function () {
     $('resumeBtn').disabled = true;
     await acquireWakeLock();
 
+    const ocrEngineLabel = engine === 'both' ? 'Vision + Tesseract cross-check'
+      : engine === 'tesseract' ? 'Tesseract' : 'Vision';
+    const ocrStartTime = Date.now();
     for (let i = startIdx; i < selectedPages.length; i++) {
       const p = selectedPages[i];
       if (cancelRequested) {
         log(`Stopped by user after ${i} of ${selectedPages.length} selected page(s). Progress is saved — you can resume later.`);
         break;
       }
-      $('progressText').textContent = `Page ${p} (${i + 1} / ${selectedPages.length} selected)`;
+      updateProgress($('progressText'), $('ocrProgressBar'), i, selectedPages.length, i - startIdx, ocrStartTime, `${ocrEngineLabel} OCR — page ${p}`);
       try {
         const pageObj = await currentLoader.getPageImage(p);
         const tessLang = engine === 'vision' ? null : TesseractCheckMod().mapLanguageHints(getLanguageHints());
@@ -1175,7 +1280,8 @@ window.DGE.App = (function () {
     $('resumeBtn').disabled = false;
     releaseWakeLock();
     await TesseractCheckMod().terminate();
-    $('progressText').textContent = `Done — ${ocrPages.length} of ${selectedPages.length} selected page(s) processed.`;
+    $('progressText').textContent = `Done — ${ocrPages.length} of ${selectedPages.length} selected page(s) processed (${formatDuration(Date.now() - ocrStartTime)}).`;
+    if ($('ocrProgressBar')) $('ocrProgressBar').value = 100;
     log('OCR pass complete.');
     renderKnownFilesHint();
 
@@ -1260,6 +1366,8 @@ window.DGE.App = (function () {
     $('proofreadResumeNote').textContent = '';
     await acquireWakeLock();
 
+    const proofreadStartTime = Date.now();
+    const alreadyDoneAtStart = Object.keys(saved.chunks).length;
     try {
       for (let i = 0; i < totalChunks; i++) {
         if (proofreadCancelRequested) {
@@ -1269,7 +1377,11 @@ window.DGE.App = (function () {
         if (saved.chunks[i]) continue; // already done previously — no API call
 
         const first = chunks[i][0].page, last = chunks[i][chunks[i].length - 1].page;
-        $('progressText').textContent = `Proofreading chunk ${i + 1} / ${totalChunks} (pages ${first}–${last})…`;
+        // ETA is based on chunks actually processed THIS run, not ones
+        // already-saved from an earlier session (those took no time now).
+        updateProgress($('proofreadProgressText'), $('proofreadProgressBar'),
+          i, totalChunks, Math.max(0, i - alreadyDoneAtStart), proofreadStartTime,
+          `Proofreading (pages ${first}–${last})`);
         // Pages that had the Tesseract cross-check run show BOTH candidates,
         // labeled, so Gemini compares rather than blindly rewriting Vision's
         // text alone — see the prompt in gemini.js for how it's told to use
@@ -1302,7 +1414,7 @@ window.DGE.App = (function () {
       const doneCount = Object.keys(saved.chunks).length;
       updateProofreadGaps(chunks, saved.chunks, ocrGapPages);
       if (doneCount < totalChunks) {
-        $('progressText').textContent = `Proofreading paused — ${doneCount} of ${totalChunks} chunk(s) done so far.`;
+        $('proofreadProgressText').textContent = `Proofreading paused — ${doneCount} of ${totalChunks} chunk(s) done so far.`;
         return;
       }
 
@@ -1342,7 +1454,8 @@ window.DGE.App = (function () {
       finalJson = { shlokas: mergedShlokas };
       RendererMod().renderPreview(finalJson, $('previewArea'));
       setPreviewLabel('Showing Gemini-proofread text.');
-      $('progressText').textContent = `Proofreading complete — ${totalChunks} chunk(s), ${mergedShlokas.length} entries.`;
+      if ($('proofreadProgressBar')) $('proofreadProgressBar').value = 100;
+      $('proofreadProgressText').textContent = `Proofreading complete — ${totalChunks} chunk(s), ${mergedShlokas.length} entries (${formatDuration(Date.now() - proofreadStartTime)}).`;
       const classSummary = Object.keys(classCounts).map(k => `${k}:${classCounts[k]}`).join(' ');
       log(`Proofreading complete — all chunks merged. Review classes — ${classSummary} (D+E = ${classCounts.D + classCounts.E} unit(s) needing a human look).` + (lastProofreadMissingPages.length ? ` ⚠ ${lastProofreadMissingPages.length} selected page(s) missing: ${lastProofreadMissingPages.join(', ')}.` : ''));
       ReviewUIMod().renderSummary($('reviewSummary'));
@@ -1353,30 +1466,84 @@ window.DGE.App = (function () {
     }
   }
 
+  function updateDangerZoneLabel() {
+    const el = $('dangerZoneFileLabel');
+    if (!el) return;
+    el.textContent = currentFileKey
+      ? `Current file: ${currentFileDisplayName || currentFileKey} — only this file's saved progress is affected below.`
+      : 'No file loaded — nothing to clear.';
+  }
+
+  function resetOptionsToDefaults() {
+    const defaults = {
+      chunkSizeInput: String(DEFAULT_CHUNK_SIZE),
+      maxOutputTokensInput: String(DEFAULT_MAX_OUTPUT_TOKENS),
+      chunkDelayInput: String(DEFAULT_CHUNK_DELAY_SEC),
+      languageHintsInput: '',
+      geminiModelCustom: '',
+      pageSelectionInput: '',
+      proofreadContextInput: ''
+    };
+    Object.keys(defaults).forEach(id => { const el = $(id); if (el) el.value = defaults[id]; });
+    const sel = $('geminiModelSelect'); if (sel) sel.value = '';
+    const engineSel = $('ocrEngineSelect'); if (engineSel) engineSel.value = 'vision';
+    const roFix = $('readingOrderFix'); if (roFix) roFix.checked = false;
+    ['gemini_chunk_size', 'gemini_max_output_tokens', 'gemini_chunk_delay_sec', 'vision_language_hints',
+     'gemini_model_select', 'gemini_model_custom', 'convert_ocr_engine', 'convert_reading_order_fix',
+     'convert_page_selection', 'convert_proofread_context'
+    ].forEach(k => localStorage.removeItem(k));
+    syncLangChips();
+  }
+
   async function clearAllProgressForFile() {
     if (!currentFileKey) return setError('No file loaded — nothing to clear.');
-    if (!confirm('Clear all saved OCR and proofread progress for this file? This can\'t be undone — the next run starts over from page 1.')) return;
-    await IDB().del(ocrProgressKey());
-    await IDB().del(ocrDataKey());
-    await IDB().del(proofreadDataKey());
-    ocrPages = [];
-    finalJson = null;
-    lastProofreadMissingPages = [];
-    $('previewArea').innerHTML = '';
-    setPreviewLabel('');
-    $('proofreadResumeNote').textContent = '';
-    $('resumeBar').style.display = 'none';
-    $('progressText').textContent = '';
-    if ($('ocrGapsText')) $('ocrGapsText').textContent = '';
-    if ($('proofreadGapsText')) $('proofreadGapsText').textContent = '';
-    if ($('reviewSummary')) $('reviewSummary').textContent = 'Run Proofread first.';
-    if ($('reviewDetailArea')) $('reviewDetailArea').innerHTML = '';
-    let list;
-    try { list = JSON.parse(localStorage.getItem(KNOWN_FILES_KEY)) || []; } catch (e) { list = []; }
-    list = list.filter(f => f.key !== currentFileKey);
-    try { localStorage.setItem(KNOWN_FILES_KEY, JSON.stringify(list)); } catch (e) { /* storage full — non-fatal */ }
-    renderKnownFilesHint();
-    log('Cleared saved progress for this file.');
+    const clearOcr = $('clearOcrDataCk').checked;
+    const clearProofread = $('clearProofreadDataCk').checked;
+    const clearOptions = $('clearOptionsDefaultsCk').checked;
+    if (!clearOcr && !clearProofread && !clearOptions) return setError('Nothing checked — pick at least one thing to clear.');
+
+    const parts = [];
+    if (clearOcr) parts.push('OCR text');
+    if (clearProofread) parts.push('proofread results');
+    if (clearOptions) parts.push('options (reset to defaults)');
+    if (!confirm(`Clear ${parts.join(' + ')} for "${currentFileDisplayName || currentFileKey}"? This can't be undone.`)) return;
+
+    if (clearOcr) {
+      await IDB().del(ocrProgressKey());
+      await IDB().del(ocrDataKey());
+      ocrPages = [];
+      $('resumeBar').style.display = 'none';
+      if ($('ocrGapsText')) $('ocrGapsText').textContent = '';
+    }
+    if (clearProofread) {
+      await IDB().del(proofreadDataKey());
+      finalJson = null;
+      lastProofreadMissingPages = [];
+      $('proofreadResumeNote').textContent = '';
+      if ($('proofreadGapsText')) $('proofreadGapsText').textContent = '';
+      if ($('reviewSummary')) $('reviewSummary').textContent = 'Run Proofread first.';
+      if ($('reviewDetailArea')) $('reviewDetailArea').innerHTML = '';
+    }
+    if (clearOptions) resetOptionsToDefaults();
+    if (clearOcr || clearProofread) {
+      $('previewArea').innerHTML = '';
+      setPreviewLabel('');
+    }
+    if (clearOcr) { $('progressText').textContent = ''; hideProgressBar($('ocrProgressBar')); }
+    if (clearProofread) { $('proofreadProgressText').textContent = ''; hideProgressBar($('proofreadProgressBar')); }
+
+    // The known-files entry tracks "how much OCR is done" -- only drop it
+    // from the list once there's genuinely nothing left for this file
+    // (both OCR and proofread cleared); if only one was cleared, the file
+    // still has real saved progress worth showing as resumable.
+    if (clearOcr && clearProofread) {
+      let list;
+      try { list = JSON.parse(localStorage.getItem(KNOWN_FILES_KEY)) || []; } catch (e) { list = []; }
+      list = list.filter(f => f.key !== currentFileKey);
+      try { localStorage.setItem(KNOWN_FILES_KEY, JSON.stringify(list)); } catch (e) { /* storage full — non-fatal */ }
+      renderKnownFilesHint();
+    }
+    log(`Cleared ${parts.join(' + ')} for "${currentFileDisplayName || currentFileKey}".`);
   }
 
   document.addEventListener('DOMContentLoaded', init);

@@ -15,14 +15,14 @@
     window.location.replace('../index.html');
   }
 </script>
-<title>DGE Convert v0.20.0</title>
-<link rel="stylesheet" href="style.css?v=0.20.0">
+<title>DGE Convert v0.21.0</title>
+<link rel="stylesheet" href="style.css?v=0.21.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
 <div><a href="../index.html">🏠 Back to DGE main page</a></div>
-<div>Version: <b id="versionDisplay">0.20.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.21.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF or page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -79,9 +79,10 @@
     <span id="resumeText"></span>
     <button id="resumeBtn">Resume</button>
   </div>
-  <button id="runOcrBtn">Run OCR (from page 1)</button>
+  <button id="runOcrBtn" class="btn-primary">Run OCR</button>
   <button id="cancelBtn">Cancel</button>
   <div id="progressText" class="progress-text"></div>
+  <progress id="ocrProgressBar" value="0" max="100" style="width:100%; display:none;"></progress>
   <div id="ocrGapsText" class="hint"></div>
   <button type="button" id="viewOcrOutputBtn">👁 View OCR Output</button>
   <button id="downloadOcrBtn">Download ocr.json</button>
@@ -104,8 +105,10 @@
   <input type="text" id="maxOutputTokensInput" inputmode="numeric" style="width:100px;">
   <p class="hint">Raise this if a chunk fails with "response was cut off before finishing (hit the output token limit)" — a dense commentary page's full corrected text plus per-shloka classification/notes can genuinely need more room than the old fixed default (2048) allowed. Default 8192; try 16000+ if it still gets cut off on the same chunk (or lower the chunk size above instead — either fixes it, pick whichever suits the book).</p>
   <div id="proofreadResumeNote" class="hint"></div>
-  <button id="proofreadBtn">Proofread with Gemini</button>
+  <button id="proofreadBtn" class="btn-primary">Proofread with Gemini</button>
   <button id="proofreadCancelBtn" style="display:none;">Cancel</button>
+  <div id="proofreadProgressText" class="progress-text"></div>
+  <progress id="proofreadProgressBar" value="0" max="100" style="width:100%; display:none;"></progress>
   <div id="proofreadGapsText" class="hint"></div>
   <button type="button" id="viewProofreadOutputBtn">👁 View Proofread Output</button>
   <button id="downloadFinalBtn">Download final.json</button>
@@ -153,18 +156,28 @@
   <label for="commentaryLabelInput">Commentary display name</label>
   <input type="text" id="commentaryLabelInput" placeholder="e.g. तात्पर्यम्">
 
-  <button id="buildSchemaBtn">Build Schema Preview</button>
+  <button id="buildSchemaBtn" class="btn-primary">Build Schema Preview</button>
   <p class="hint">Builds an editable preview below — nothing is pushed yet. Fix anything before continuing.</p>
   <div id="schemaPreviewArea"></div>
 
-  <button id="pushToGithubBtn">Push to GitHub</button>
+  <button id="pushToGithubBtn" class="btn-primary">Push to GitHub</button>
   <div id="pushStatusText" class="progress-text"></div>
 </fieldset>
 
 <fieldset>
   <legend>Danger zone</legend>
-  <button id="clearProgressBtn">Clear saved progress for this file</button>
-  <p class="hint">Wipes saved OCR + proofread progress for the currently loaded file only (other files' saved progress is untouched). Use this if you've replaced the PDF with a corrected version under the same name.</p>
+  <div id="dangerZoneFileLabel" class="hint">No file loaded — nothing to clear.</div>
+  <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin:6px 0;">
+    <input type="checkbox" id="clearOcrDataCk" style="width:auto; margin:0;" checked> OCR text (Vision and/or Tesseract results for this file)
+  </label>
+  <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin:6px 0;">
+    <input type="checkbox" id="clearProofreadDataCk" style="width:auto; margin:0;" checked> Proofread (Gemini) results for this file
+  </label>
+  <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin:6px 0;">
+    <input type="checkbox" id="clearOptionsDefaultsCk" style="width:auto; margin:0;"> Reset the options above (chunk size, max output tokens, request delay, language hints, model, engine) to their defaults
+  </label>
+  <button id="clearProgressBtn">Clear the checked item(s) above</button>
+  <p class="hint">Only affects what's checked, only for the file named above — nothing else, no other file's saved progress. Use this if you've replaced the PDF with a corrected version under the same name, or just want to redo one stage.</p>
 </fieldset>
 
 <div id="outputModal" class="output-modal">
@@ -192,8 +205,8 @@
 </fieldset>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.20.0';
-  window.DGE_CONVERT_BUILD = '2026-08-11d';
+  window.DGE_CONVERT_VERSION = '0.21.0';
+  window.DGE_CONVERT_BUILD = '2026-08-11e';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -208,21 +221,21 @@
      harmless to load unconditionally otherwise. Pinned exact version, same
      convention as pdf.js/Sanscript above. -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
-<script src="utils.js?v=0.20.0"></script>
-<script src="idb.js?v=0.20.0"></script>
-<script src="pdf.js?v=0.20.0"></script>
-<script src="image.js?v=0.20.0"></script>
-<script src="loaders.js?v=0.20.0"></script>
-<script src="vision.js?v=0.20.0"></script>
-<script src="tesseract-check.js?v=0.20.0"></script>
-<script src="review-classifier.js?v=0.20.0"></script>
-<script src="../js/gemini.js?v=0.20.0"></script>
-<script src="gemini.js?v=0.20.0"></script>
-<script src="github.js?v=0.20.0"></script>
-<script src="mapper.js?v=0.20.0"></script>
-<script src="urlimport.js?v=0.20.0"></script>
-<script src="renderer.js?v=0.20.0"></script>
-<script src="review-ui.js?v=0.20.0"></script>
-<script src="app.js?v=0.20.0"></script>
+<script src="utils.js?v=0.21.0"></script>
+<script src="idb.js?v=0.21.0"></script>
+<script src="pdf.js?v=0.21.0"></script>
+<script src="image.js?v=0.21.0"></script>
+<script src="loaders.js?v=0.21.0"></script>
+<script src="vision.js?v=0.21.0"></script>
+<script src="tesseract-check.js?v=0.21.0"></script>
+<script src="review-classifier.js?v=0.21.0"></script>
+<script src="../js/gemini.js?v=0.21.0"></script>
+<script src="gemini.js?v=0.21.0"></script>
+<script src="github.js?v=0.21.0"></script>
+<script src="mapper.js?v=0.21.0"></script>
+<script src="urlimport.js?v=0.21.0"></script>
+<script src="renderer.js?v=0.21.0"></script>
+<script src="review-ui.js?v=0.21.0"></script>
+<script src="app.js?v=0.21.0"></script>
 </body>
 </html>

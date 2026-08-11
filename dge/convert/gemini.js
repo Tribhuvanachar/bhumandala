@@ -128,7 +128,13 @@ Raw OCR input follows:
     // otherwise reach the JSON parser and surface as a confusing generic
     // syntax error instead of the real cause.
     if (finishReason === 'MAX_TOKENS') {
-      throw new Error('Gemini\'s response was cut off before finishing (hit the output token limit) — this chunk\'s full corrected text needed more room than allowed. Either raise "Max output tokens per Gemini response" above, or lower the chunk size, then re-run Proofread (it will resume from this chunk).');
+      // Tagged 'max_tokens' so app.js's retry loop doesn't burn through
+      // several automatic retries on this -- the exact same request would
+      // hit the exact same limit every time; only a setting change (not
+      // waiting) fixes it.
+      const e = new Error('Gemini\'s response was cut off before finishing (hit the output token limit) — this chunk\'s full corrected text needed more room than allowed. Either raise "Max output tokens per Gemini response" above, or lower the chunk size, then re-run Proofread (it will resume from this chunk).');
+      e.kind = 'max_tokens';
+      throw e;
     }
     if (finishReason && finishReason !== 'STOP') {
       throw new Error(`Gemini stopped early (reason: ${finishReason}) instead of completing normally.`);

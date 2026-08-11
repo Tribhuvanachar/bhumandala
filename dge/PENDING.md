@@ -159,6 +159,70 @@ complete record, not just a live queue.
   it covered, per the "check what's being extracted and how it's being
   converted" request, rather than just asserting it's fine.
 
+- **Convert tool: a real follow-up round of usability fixes, all reported
+  from actually using the tool on Raghavendra Vijaya + SumadhvaVijayaMoola:**
+  - **"Clear saved progress" was one all-or-nothing button with no
+    indication of WHICH file it would act on** — confirmed by reading the
+    actual code that it was correctly scoped to the current file only
+    (not the wider wipe it looked like), but the confirm dialog never
+    named the file, which is a real source of the "did it just delete
+    everything?" feeling when juggling multiple files in one session. Now
+    granular: separate checkboxes for OCR text / proofread results /
+    reset-options-to-default, and the Danger Zone always shows which file
+    it's about to act on by name before you click anything.
+  - **Retrying a deterministic failure (MAX_TOKENS, bad key, permission,
+    model missing, bad request, blocked) 3-4 times before giving up was
+    pure wasted waiting** — the exact same request fails the exact same
+    way every time; only a setting change fixes it, not a delay. These
+    now fail on the first attempt with a clear "not retrying automatically"
+    message. Quota/network/overload errors still retry as before (those
+    genuinely can clear with time).
+  - **Cancel didn't take effect until the current retry's FULL backoff
+    delay finished** — confirmed the retry loop only checked for
+    cancellation between attempts, never during the wait itself, so
+    Cancel during a 45s backoff meant waiting the full 45s regardless.
+    Fixed by polling the cancel flag every 250ms during any wait instead
+    of sleeping through it blind.
+  - **OCR/Proofread progress was a single line of text with no bar and no
+    time estimate** — added a real `<progress>` bar plus a rough ETA
+    (from the actual average time-per-unit so far THIS run, not a guess,
+    and correctly excluding anything already done in an earlier resumed
+    session so resuming doesn't produce a nonsense estimate) to both
+    stages, each with its own separate status line so OCR and Proofread
+    status never overwrite each other (they silently shared one element
+    before). OCR's line also now names which engine is actually running
+    (Vision / Tesseract / both).
+  - **The folder browser's "Add new" prompt still felt like guessing** —
+    added real convention detection: if the existing siblings at a level
+    already form an obvious numbered series (`sarga_01`, `sarga_02`, ...),
+    the next one is pre-filled automatically in the right format. Caught
+    and fixed a wrong first attempt at this during testing: naming the
+    "kind" being added from the parent folder's own name works for a
+    category level (`kavya/` → "a new kavya", correct) but is actively
+    wrong one level deeper (`kavya/raghuvamsha/` → children are text
+    layers like `mula`, not more "raghuvamsha"s) — since telling those
+    two cases apart reliably isn't possible from names alone, the
+    non-numeric case now stays generic and lets the real sibling list
+    speak for itself instead of guessing a label that can be wrong.
+  - **"Run OCR (from page 1)" had a confusing parenthetical** — simplified
+    to "Run OCR" (a separate "Resume" button/bar already exists for
+    continuing).
+  - **General visual polish** — the page used browser-default styling
+    throughout; restyled to the same warm palette as the rest of DGE's
+    admin pages (card-style sections, consistent rounded inputs/buttons,
+    primary-action buttons visually distinct from secondary ones) so it
+    doesn't feel like a separate, rougher tool from the rest of the
+    project. Not a full redesign — flagging that a dedicated UX pass is
+    still a reasonable future ask if the project lead wants one.
+  All verified in a real headless browser: granular clear correctly
+  preserves the unchecked category and removes only the checked one;
+  the non-retryable-kind list and the abortable-sleep function are both
+  present and wired in; the folder browser's numbered-series detector
+  round-trips correctly (`sarga_01`→`sarga_02`, `skandha_01..12`→`skandha_13`,
+  mixed/non-numeric siblings → no guess); the previously-wrong
+  "raghuvamsha" mislabel is gone; new styling actually renders (primary
+  button color, warm body background) with no console errors.
+
 - **Convert tool: added a folder browser for picking the push target
   path** (step 5, "📁 Browse existing folders…"), triggered by a real
   question: adding Sarga 1 of a new 10-sarga mahakavya (Raghavendra
