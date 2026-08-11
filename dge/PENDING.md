@@ -17,52 +17,103 @@ complete record, not just a live queue.
 
 ## Future feature ideas — designed but not yet greenlit
 
-- **"DGE Interlink" — click a word anywhere (Kosha entry, grantha verse,
-  Ashtadhyayi sutra) and see every other place in DGE that references it,
-  in a popup (minimize/maximize/close/copy/share) — same UI shell as
-  Ask Acharya, but backed by DGE's own precomputed cross-references
-  instead of a live Gemini call.** Requested with a concrete example:
-  a Kosha entry's etymology (Vācaspatyam/Śabdakalpadruma often give the
-  derivation, e.g. which pratyaya/sūtra produces a form) should link
-  straight to the matching sūtra or dhātu in the Ashtadhyayi section,
-  auto-detected, no manual tagging.
-  Investigated before designing (so this is grounded, not speculative):
-  - Ashtadhyayi sūtras already carry a clean, stable, addressable ID in
-    `data/vyakarana/ashtadhyayi/sutrapatha/data.json` (`"id": "1.2.27"`,
-    standard adhyāya.pāda.sūtra form, 3962 sūtras) — deep-linking straight
-    TO a specific sūtra is fully feasible today. Nothing currently exposes
-    that: `ashtadhyayi.html` has no hash/query-based "jump to sūtra by ID"
-    at all yet — that's real, small, immediately useful infrastructure to
-    build first regardless of anything else here (shareable direct links
-    to one sūtra), and it's the landing side of every link this feature
-    would ever produce.
-  - The other direction is the hard part: Kosha entries carry etymology as
-    **unstructured prose** (`sense.etymology`, rendered as free text under
-    "व्युत्पत्तिः:" in `kosha.js`'s `openEntry()`), not a structured
-    `{sutra_id: "3.1.134"}` field — going FROM a word TO "which sūtra
-    derives this" is not a lookup, it's either (a) regex/pattern-matching
-    known dictionaries' citation styles for explicit sūtra-number mentions
-    inside that prose (fragile, and only catches entries that already cite
-    one), or (b) a real generative-grammar derivation engine (essentially
-    what ashtadhyayi.com's own derivation/simulator tooling does) that can
-    derive any form and report which sūtras fired, in order — the second
-    is a genuine computational-linguistics undertaking (there are existing
-    open-source Pāṇinian engines, e.g. the sanskrit-coders/sanskrit_parser
-    ecosystem, worth evaluating to wrap rather than building one from
-    scratch, before assuming this needs to be built in-house).
-  Proposed staged plan, not started: **Stage 1** — build the sūtra
-  deep-link target in `ashtadhyayi.html` (small, real value on its own).
-  **Stage 2** — build the reusable "DGE Interlink" popup component
-  (minimize/maximize/close/copy/share chrome, likely shareable code with
-  Ask Acharya's popup shell) wired to whatever cross-references exist,
-  starting from whatever's cheaply extractable (explicit citations already
-  in the etymology text) rather than waiting on Stage 3. **Stage 3** —
-  evaluate/integrate a real derivation engine for the general case, sized
-  and scoped separately once Stages 1-2 prove the UI is worth it.
-  Same underlying popup, once built, generalizes beyond Kosha↔Ashtadhyayi
-  to "click any word in any grantha, see every DGE reference to it" per
-  the project lead's stated end goal. Not started — explicitly asked to
-  "think about it, keep architecture ready" before being told to proceed.
+- **"Intelligence" mode — an opt-in, per-source-toggleable reading overlay
+  that auto-detects cross-references live in the text being read, marks
+  them with a subtle blinking underline, and shows the reference(s) on
+  hover (tap on mobile) in a popup (minimize/maximize/close/copy/share) —
+  same UI shell as Ask Acharya, but backed by DGE's own precomputed
+  cross-references instead of a live Gemini call.** (Refines and replaces
+  the earlier "DGE Interlink" note below with the fuller spec given in a
+  follow-up message — kept the investigation, expanded the design.)
+  **UX spec as described:** a top-level "Intelligence" toggle, off by
+  default; once on, the end user activates individual source toggles
+  (Ashtadhyayi Sūtras, Dhātus, Kosha, "Dasara Pada" — *unconfirmed
+  transcription, possibly ದಾಸರ ಪದ / Haridāsa devotional compositions
+  given the project's Madhva/Sarvamoola context, needs confirming, not
+  guessed into code*, Sarvamoola, presumably more sources over time).
+  Whatever combination is active, every open page (grantha verses,
+  commentaries, Kosha entries alike) gets scanned for matches against
+  only the active sources; matched words/phrases get a blinking-underline
+  span; hovering (or tapping) shows the matched reference(s) with a link.
+  Two concrete examples given, and they are two genuinely different
+  detection mechanisms, not one:
+  1. **Word/headword matching** (Kosha, Dhātus, presumably Sarvamoola) —
+     a displayed word IS a known headword/dhātu; tokenize the rendered
+     text, SLP1-fold each token (same technique `kosha.js` already uses
+     for search), look it up against the relevant index, mark exact hits.
+     Cheap and low-risk (few false positives) since it's exact lookup
+     against a known set, not pattern inference.
+  2. **Citation detection in running prose** (Sūtras) — a commentator's
+     own words *reference* a sūtra, either by explicit number ("१.४.१",
+     or spelled out "adhyāya 1 pāda 4 sūtra 1") or, harder, by naming/
+     quoting the sūtra itself (e.g. citing "वृद्धिरादैच्" rather than its
+     number). Numeric-citation detection is a regex problem against known
+     adhyāya.pāda.sūtra patterns, feasible now since (per the investigation
+     below) every sūtra already has that exact ID in
+     `data/vyakarana/ashtadhyayi/sutrapatha/data.json`. Name/quote-citation
+     detection is substring/fuzzy matching of commentary text against the
+     3962 sūtras' own `sanskrit_text`, which is real but meaningfully
+     harder and needs real precision tuning — a wrong auto-link in the
+     middle of someone's commentary is worse than no link, so this piece
+     specifically should ship conservative (exact/near-exact matches only)
+     rather than aggressive.
+  **Performance note (my own addition, not yet discussed with the project
+  lead):** doing (1) and (2) as a live, in-browser, full-corpus scan on
+  every page render will not scale once Kosha (1.65M headwords) and the
+  full sūtra/commentary corpus are all in scope — likely needs the
+  per-text annotation computed *once*, offline/at data-build time, and
+  shipped as a small per-grantha index (which spans get which links),
+  with the live browser doing cheap index lookups rather than corpus-wide
+  matching on every view. Worth confirming before committing to an
+  architecture.
+  Investigated before any of the above was written (grounded, not
+  speculative):
+  - Ashtadhyayi sūtras already carry a clean, stable, addressable ID
+    (`"id": "1.2.27"`, standard adhyāya.pāda.sūtra form, 3962 sūtras) —
+    deep-linking straight TO a specific sūtra is feasible today, but
+    nothing exposes it yet: `ashtadhyayi.html` has no hash/query-based
+    "jump to sūtra by ID" at all. Small, real, immediately useful on its
+    own (shareable direct links to one sūtra), and it's the landing side
+    of every link this feature would ever produce — natural Stage 1.
+  - Kosha entries carry etymology as **unstructured prose**
+    (`sense.etymology`, rendered under "व्युत्पत्तिः:" in `kosha.js`'s
+    `openEntry()`), not a structured `{sutra_id: ...}` field, which is
+    exactly why word->sūtra needs either citation-parsing or (for the
+    general case, not just cited-in-etymology cases) a real Pāṇinian
+    generative-grammar derivation engine — essentially what ashtadhyayi.com
+    itself runs. Existing open-source engines (e.g. the
+    sanskrit-coders/sanskrit_parser ecosystem) are worth evaluating to
+    wrap rather than building one from scratch.
+  **Proposed staged plan, not started:** Stage 1 — sūtra deep-link target.
+  Stage 2 — the reusable hover/tap popup component (minimize/maximize/
+  close/copy/share, likely sharing code with Ask Acharya's shell) plus
+  word/headword-match detection (mechanism 1 above) for Kosha and Dhātus,
+  the cheap and low-risk half. Stage 3 — numeric sūtra-citation detection
+  in commentary prose (mechanism 2, numeric case). Stage 4 — named/quoted
+  sūtra-citation detection (mechanism 2, hard case) and/or a real
+  derivation engine, scoped separately once Stages 1-3 prove the UI is
+  worth it. Not started — explicitly asked twice now to design and log
+  this, not build it, until told to proceed.
+
+- **Batch Gemini-generated padaccheda ("word split") for every library
+  text that doesn't have one yet, rate-limited so it doesn't hit API
+  limits.** Once library content fills out further, run this as a batch
+  job over whatever granthas are missing padaccheda, using the project's
+  existing BYOK Gemini pattern (same `user_gemini_key`/model localStorage
+  keys already used by Ask Acharya, the Kosha translate pivot, and the
+  Convert tool). Needs, not yet designed in detail: (1) a scan step to
+  find which granthas/verses actually lack padaccheda already (don't
+  regenerate what exists); (2) a batched runner with real rate-limiting/
+  backoff — this project already has that exact pattern built twice
+  (Convert tool's OCR-page and Proofread-chunk auto-retry-with-backoff;
+  VedaVaNi's extraction script's retry/backoff) so it's a known shape, not
+  a new problem; (3) a decision on where this runs — a browser admin tool
+  where the project lead pastes their own key and reviews output before
+  pushing (matches Convert/Audio Admin's existing self-service pattern)
+  vs. a GitHub Action (matches VedaVaNi's scheduled/dispatched pattern) —
+  each has tradeoffs (browser tool = easier human review before commit,
+  more manual; Action = scales unattended, harder to eyeball each result
+  before it lands). Not started — noted for future discussion.
 
 ## Awaiting a decision or action from the project lead
 
