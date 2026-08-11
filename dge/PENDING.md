@@ -17,6 +17,29 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
+- **`Gita_Studio_Colab.ipynb` uploaded — a genuinely new tool, nothing to
+  reconcile against.** Checked: no prior notebook, script, or doc anywhere
+  in the repo does anything like this (only existing `.ipynb` is the Kosha
+  importer) — unlike the Tīrtha/Ashtadhyayi zips, this isn't a duplicate of
+  already-live work. What it does: BS-Roformer vocal separation (optional
+  2nd pass) on an uploaded chanting recording, then auto-detects each
+  shloka's boundary from the silence gaps (Otsu-thresholded per-recording,
+  no manual tuning needed), and exports **either or both** of (a) a
+  `shlokas.json` timestamp map (`{id, start, end}` in both seconds and ms)
+  against the *whole, uncut* audio file, or (b) individual per-shloka
+  clips — the project lead's stated target being the "Bhagwadgeeta/
+  Vachanamrut" seek-based playback architecture (single audio file + JSON
+  map, player does `audio.currentTime = start`) rather than one-file-per-verse.
+  **Directly relevant to an existing open item above**: this is exactly the
+  kind of tool that could resolve the VedaVaNi Rigveda per-Sukta-not-per-Rik
+  gap, IF real per-rik silence gaps exist in the downloaded Sukta audio
+  (untested — the notebook was verified by its author only on a synthetic
+  file with known boundaries, not on real VedaVaNi audio). Not yet run
+  against anything in this repo. Decide: (1) where this notebook should
+  live in the repo (`veda_toolkit/`? a new `audio_toolkit/`?), (2) whether
+  to actually try it against a real downloaded VedaVaNi Sukta file to see
+  if it can deliver real per-Rik boundaries.
+
 - **Two more delegated coworker deliverables uploaded, not yet checked
   against the live repo** (same pattern as Tīrtha Prabandha below —
   verification requested, in progress):
