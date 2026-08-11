@@ -117,6 +117,65 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
+- **⚠ FLAGGED, NOT YET FIXED — the just-pushed "Sumadhva Vijaya" text
+  (commit `0ad82fd`, "sarga_9") landed at the wrong catalog path and
+  needs the project lead's confirmation before it's moved.** Checked
+  `dge/data/kavya/raghavendra_vijaya/sarga_9/data.json` (pushed via
+  Convert, just before this fix landed): its `metadata.title` is
+  "Sumadhva Vijaya" / author "Narayana Panditacharya" — i.e. it's really
+  Sumadhva Vijaya text, sitting under a `raghavendra_vijaya` path, inside
+  `kavya/` (the classical-court-epic category — Raghuvamsha,
+  Kumarasambhava, etc. — not hagiographies). `PROJECT_STATUS.md` already
+  documents the intended convention: Sumadhva Vijaya's 1,041 audio files
+  already live at `guru_charitre/sumadhva_vijaya/assets/` (see that
+  folder's own README — "Text: not yet available... A proper source is
+  still needed before this grantha can be populated with text"), and
+  further "Vijaya" hagiographies including Raghavendra Vijaya are
+  documented as landing in that same `guru_charitre/` category — so this
+  push, celebrated as finally getting Sumadhva Vijaya SOME text, ended up
+  orphaned from its own audio under an unrelated work's path instead.
+  There is no pre-existing `raghavendra_vijaya` catalog entry this could
+  have been confused with (checked `library.json` — this was the only
+  entry, freshly created by this push), so it looks like a slug typed or
+  picked in error rather than a genuine reuse of an existing stub. Not
+  touched yet — moving a live pushed file/catalog entry needs the project
+  lead to confirm the real intended path first (likely
+  `guru_charitre/sumadhva_vijaya/sarga_9`, matching the audio's own
+  per-sarga numbering, but that should be confirmed against the actual
+  sarga this batch's verses 15–56ish belong to before assuming sarga 9 is
+  right for the TEXT too).
+
+- **Convert tool: schema-build numbering now has a "Starting shloka/unit
+  number" field (v0.23.0) — fixes exactly the bug that produced the
+  mislabeled push above.** Real bug, confirmed and reproduced: OCR/Proofread
+  scoped to a page selection starting partway through a work (e.g. the
+  "SumadhvaVijayaMoola.pdf" run that started at the page printed with
+  ॥१५॥) always got keyed 1, 2, 3… in the pushed schema regardless of
+  which real verse the batch actually started at — `runProofread()`'s
+  merge step (`let seq = 1`) assigns a fresh 1-based sequential `index`
+  to every run, with no way to tell it "this run continues from unit 15,
+  not unit 1." Root-caused by reading `mapper.js` (keys shlokas by
+  `s.index`) and `app.js`'s merge loop directly — the embedded canonical
+  verse numbers (॥१५॥, ॥१६॥…) inside the OCR'd `sa` text were correct all
+  along; only the dictionary KEY used to store each shloka was wrong.
+  Added a plain numeric field on the Push tab, next to Grantha
+  title/author: leave it blank (default 1) for a batch that starts at the
+  work's first unit, or set it to the real starting number for a partial
+  batch — "Build Schema Preview" then keys the shlokas starting from that
+  number instead of always restarting at 1. Reproduced the exact reported
+  bug and verified the fix in a real browser (seeded a synthetic partial
+  proofread run starting at page 15 — without the field, the preview
+  showed "Shloka 1"/"Shloka 2"; with it set to 15, it correctly showed
+  "Shloka 15"/"Shloka 16"). Also added a line to the push-success message
+  explaining that GitHub Pages can take a minute or two to redeploy, since
+  the project lead asked "should I refresh or do something?" after not
+  immediately seeing a just-pushed grantha in the Library — checked
+  `js/core.js`'s `library.json`/grantha `data.json` fetches, both already
+  use `cache:'no-store'` plus a cache-busting timestamp, so the app itself
+  isn't caching anything stale; the delay was GitHub Pages' own
+  build/deploy latency, not fixable from this side, just worth explaining
+  instead of leaving it as a mystery.
+
 - **Convert tool: revamped the whole page into a horizontal tab/wizard
   layout (v0.22.0), replacing the single long vertical scroll through
   every stage at once.** Seven tabs — ⚙️ Setup, 1. Upload, 2. OCR,

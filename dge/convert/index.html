@@ -15,14 +15,14 @@
     window.location.replace('../index.html');
   }
 </script>
-<title>DGE Convert v0.22.0</title>
-<link rel="stylesheet" href="style.css?v=0.22.0">
+<title>DGE Convert v0.23.0</title>
+<link rel="stylesheet" href="style.css?v=0.23.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
 <div><a href="../index.html">🏠 Back to DGE main page</a></div>
-<div>Version: <b id="versionDisplay">0.22.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.23.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF or page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -179,6 +179,10 @@
   <label for="granthaAuthorInput">Author</label>
   <input type="text" id="granthaAuthorInput" placeholder="e.g. Vyasa, with commentary by...">
 
+  <label for="startingShlokaInput">Starting shloka/unit number</label>
+  <input type="text" id="startingShlokaInput" inputmode="numeric" placeholder="1" style="width:100px;">
+  <p class="hint">Leave blank (or 1) if this batch starts at the very first unit of the work. If you only OCR'd/proofread from partway through (e.g. this run began at the page printed with ॥१५॥), set this to <strong>15</strong> so the shlokas below get numbered 15, 16, 17… instead of restarting at 1. Set this <em>before</em> tapping "Build Schema Preview" below — changing it after the preview is already built won't renumber it; tap Build again to regenerate (this discards any manual edits already made in the preview, same as rebuilding for any other reason).</p>
+
   <label for="targetSlugSearch">Target grantha (from the library catalog)</label>
   <input type="text" id="targetSlugSearch" placeholder="Type to search — e.g. &quot;yajurveda&quot; or &quot;grihyasutra&quot;… (loading catalog…)" autocomplete="off">
   <div id="targetSlugResults" class="target-slug-results" style="display:none;"></div>
@@ -236,8 +240,8 @@
 </div>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.22.0';
-  window.DGE_CONVERT_BUILD = '2026-08-11f';
+  window.DGE_CONVERT_VERSION = '0.23.0';
+  window.DGE_CONVERT_BUILD = '2026-08-11g';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -252,22 +256,22 @@
      harmless to load unconditionally otherwise. Pinned exact version, same
      convention as pdf.js/Sanscript above. -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
-<script src="utils.js?v=0.22.0"></script>
-<script src="idb.js?v=0.22.0"></script>
-<script src="pdf.js?v=0.22.0"></script>
-<script src="image.js?v=0.22.0"></script>
-<script src="loaders.js?v=0.22.0"></script>
-<script src="vision.js?v=0.22.0"></script>
-<script src="tesseract-check.js?v=0.22.0"></script>
-<script src="review-classifier.js?v=0.22.0"></script>
-<script src="../js/gemini.js?v=0.22.0"></script>
-<script src="gemini.js?v=0.22.0"></script>
-<script src="github.js?v=0.22.0"></script>
-<script src="mapper.js?v=0.22.0"></script>
-<script src="urlimport.js?v=0.22.0"></script>
-<script src="renderer.js?v=0.22.0"></script>
-<script src="review-ui.js?v=0.22.0"></script>
-<script src="app.js?v=0.22.0"></script>
+<script src="utils.js?v=0.23.0"></script>
+<script src="idb.js?v=0.23.0"></script>
+<script src="pdf.js?v=0.23.0"></script>
+<script src="image.js?v=0.23.0"></script>
+<script src="loaders.js?v=0.23.0"></script>
+<script src="vision.js?v=0.23.0"></script>
+<script src="tesseract-check.js?v=0.23.0"></script>
+<script src="review-classifier.js?v=0.23.0"></script>
+<script src="../js/gemini.js?v=0.23.0"></script>
+<script src="gemini.js?v=0.23.0"></script>
+<script src="github.js?v=0.23.0"></script>
+<script src="mapper.js?v=0.23.0"></script>
+<script src="urlimport.js?v=0.23.0"></script>
+<script src="renderer.js?v=0.23.0"></script>
+<script src="review-ui.js?v=0.23.0"></script>
+<script src="app.js?v=0.23.0"></script>
 <script>
   // Tab/wizard navigation -- purely presentational (which panel is
   // visible), so it's kept separate from app.js's own state/logic and

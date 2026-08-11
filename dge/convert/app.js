@@ -963,7 +963,19 @@ window.DGE.App = (function () {
     };
     if (!profile.title) return setError('Enter a grantha title first — it\'s needed for the schema.');
 
-    currentMappedJson = MapperMod().buildGranthaJson(finalJson, profile);
+    // Numbering offset for a batch that doesn't start at unit 1 of the
+    // work (e.g. OCR/Proofread only ran from partway through a book) —
+    // mergedShlokas' "index" in runProofread() always starts at 1 for
+    // THIS run regardless of where in the actual work it began, so
+    // without this every partial run gets mis-keyed as 1,2,3... instead
+    // of continuing the work's real numbering.
+    const startingNumRaw = parseInt($('startingShlokaInput').value, 10);
+    const startingOffset = (Number.isFinite(startingNumRaw) && startingNumRaw > 1) ? startingNumRaw - 1 : 0;
+    const numberedJson = startingOffset
+      ? { shlokas: finalJson.shlokas.map(s => Object.assign({}, s, { index: (s.index != null ? s.index : s.number) + startingOffset })) }
+      : finalJson;
+
+    currentMappedJson = MapperMod().buildGranthaJson(numberedJson, profile);
     RendererMod().renderSchemaMapEditable(currentMappedJson, $('schemaPreviewArea'));
     log(`Schema preview built for "${slug}" — ${Object.keys(currentMappedJson.shlokas).length} shloka(s). Review and edit below before pushing.`);
   }
@@ -1019,7 +1031,7 @@ window.DGE.App = (function () {
       if (result.uploaded === 0) {
         $('pushStatusText').textContent = 'Nothing to push — content already matched what\'s on GitHub.';
       } else {
-        $('pushStatusText').textContent = `Pushed — ${result.uploaded} file(s) committed (${granthaPath} + library.json catalog entry).`;
+        $('pushStatusText').textContent = `Pushed — ${result.uploaded} file(s) committed (${granthaPath} + library.json catalog entry). GitHub Pages can take a minute or two to redeploy — if the main app's Library doesn't show it yet, that's why; just wait a bit and reopen it (the app itself doesn't cache this, so it's not something to fix on your end).`;
       }
       log($('pushStatusText').textContent);
     } catch (e) {
