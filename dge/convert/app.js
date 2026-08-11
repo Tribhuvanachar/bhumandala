@@ -62,6 +62,56 @@ window.DGE.App = (function () {
     if (el) el.textContent = msg;
   }
 
+  // ---------------------------------------------------------------
+  // Output modal — expandable/minimizable/closeable view of OCR/Proofread
+  // text, so it's readable without scrolling to the bottom of a long page
+  // (the old inline "Preview" section required exactly that, especially
+  // painful on mobile after a long OCR/Proofread run).
+  // ---------------------------------------------------------------
+  function initOutputModal() {
+    const modal = $('outputModal');
+    if (!modal) return;
+    $('outputCloseBtn').addEventListener('click', () => {
+      modal.classList.remove('open', 'minimized', 'maximized');
+    });
+    $('outputMinimizeBtn').addEventListener('click', () => {
+      modal.classList.toggle('minimized');
+    });
+    $('outputMaximizeBtn').addEventListener('click', () => {
+      modal.classList.remove('minimized');
+      modal.classList.toggle('maximized');
+    });
+    // Tapping the header while minimized restores it — the minimize
+    // button itself is hard to re-target once the modal has shrunk to a
+    // small corner pill, so the whole bar is a bigger, easier target.
+    modal.querySelector('.output-modal-header').addEventListener('click', (e) => {
+      if (modal.classList.contains('minimized') && e.target.tagName !== 'BUTTON') {
+        modal.classList.remove('minimized');
+      }
+    });
+  }
+  function openOutputModal(title) {
+    const modal = $('outputModal');
+    if (!modal) return;
+    $('outputModalTitle').textContent = title;
+    modal.classList.remove('minimized');
+    modal.classList.add('open');
+  }
+  function showRawOcrOutput() {
+    if (!ocrPages.length) return setError('No OCR data yet — run OCR first.');
+    clearError();
+    RendererMod().renderRawOcr(ocrPages, $('previewArea'));
+    setPreviewLabel('Showing raw OCR text — untouched, before Gemini proofreading.');
+    openOutputModal('Raw OCR Output — ' + ocrPages.length + ' page(s)');
+  }
+  function showProofreadOutput() {
+    if (!finalJson) return setError('No proofread JSON yet — run Proofread first.');
+    clearError();
+    RendererMod().renderPreview(finalJson, $('previewArea'));
+    setPreviewLabel('Showing Gemini-proofread text.');
+    openOutputModal('Proofread Output — ' + (finalJson.shlokas || []).length + ' entries');
+  }
+
   function ocrProgressKey() { return 'ocr_progress:' + currentFileKey; }
   function ocrDataKey() { return 'ocr_data:' + currentFileKey; }
   function proofreadDataKey() { return 'proofread_data:' + currentFileKey; }
@@ -491,18 +541,11 @@ window.DGE.App = (function () {
     });
     $('clearProgressBtn').addEventListener('click', clearAllProgressForFile);
     $('copyLogBtn').addEventListener('click', copyLogToClipboard);
-    $('previewRawBtn').addEventListener('click', () => {
-      if (!ocrPages.length) return setError('No OCR data yet — run OCR first.');
-      clearError();
-      RendererMod().renderRawOcr(ocrPages, $('previewArea'));
-      setPreviewLabel('Showing raw OCR text — untouched, before Gemini proofreading.');
-    });
-    $('previewProofreadBtn').addEventListener('click', () => {
-      if (!finalJson) return setError('No proofread JSON yet — run Proofread first.');
-      clearError();
-      RendererMod().renderPreview(finalJson, $('previewArea'));
-      setPreviewLabel('Showing Gemini-proofread text.');
-    });
+    initOutputModal();
+    $('previewRawBtn').addEventListener('click', () => showRawOcrOutput());
+    $('previewProofreadBtn').addEventListener('click', () => showProofreadOutput());
+    $('viewOcrOutputBtn').addEventListener('click', () => showRawOcrOutput());
+    $('viewProofreadOutputBtn').addEventListener('click', () => showProofreadOutput());
     $('downloadOcrBtn').addEventListener('click', () => {
       if (!ocrPages.length) return setError('No OCR data yet — run OCR first.');
       U().downloadJson({ pages: ocrPages }, 'ocr.json');

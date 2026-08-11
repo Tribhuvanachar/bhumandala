@@ -117,6 +117,60 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
+- **Convert tool: "Reconstruct reading order" checkbox investigated against
+  real output (gltAvivRti-01.pdf, page 11/12) — not the cause of anything
+  wrong; a real finding went the other way.** The project lead asked
+  whether that checkbox (checked for this run) explains a suspected bad
+  reading. Checked the actual `ocr_1.json`/`ocr_2.json`/`ocr_3.json`
+  (Tesseract/Vision/both) against the real page image: verse numbers land
+  correctly inline (not clumped at page-end, the failure mode that
+  checkbox exists to fix), and Tesseract and Vision — two independent,
+  differently-built engines — agree with each other almost word-for-word.
+  The one real discrepancy found was in the OPPOSITE direction: the
+  project lead's own pasted "Gemini-generated ground truth" transcript of
+  the same image reads "एवं सन्ततः सन्तापमवधारयन्नाह" at one spot, while
+  both OCR engines (independently) AND the image itself (checked directly)
+  read "एवं सन्तप्तः सन्मृतिमेवार्थयमान आह" — i.e. that one line in the
+  "ground truth" comparison text looks like a Gemini image-reading slip,
+  not an OCR/checkbox bug. Worth remembering generally: a single
+  generative model's one-shot image reading isn't automatically more
+  trustworthy than two independent OCR engines agreeing with each other —
+  worth checking both ways before assuming which one is wrong.
+
+- **Convert tool: schema-building pipeline (`mapper.js`) audited end to
+  end, per the project lead's concern that "if it goes wrong, everything
+  goes wrong because we are directly writing it to GitHub."** Traced the
+  full path: Gemini's per-chunk `number` field restarts at 1 in every
+  chunk (expected, chunks have no memory of each other) — `app.js`'s merge
+  step already assigns a separate guaranteed-unique, guaranteed-ordered
+  `index` field across the whole merged result, and `mapper.js` correctly
+  keys the final schema by `index` (not the repeating `number`). Confirmed
+  against a real live grantha (`data/stotras/pns/data.json`) that this
+  matches the established, working schema convention exactly (plain
+  sequential "1","2","3"... keys, canonical verse numbers like "॥ १.४४॥"
+  living inside the `sa` text itself, not a separate field) — not a bug,
+  by design, and consistent with everything else already live. Also
+  confirmed there's a real human checkpoint already in place before
+  anything reaches GitHub: `renderSchemaMapEditable()` renders every
+  shloka's Sanskrit/commentary in editable textareas, and `pushToGithubBtn`
+  reads back the (possibly-edited) DOM state, not the original unedited
+  mapper output — nothing pushes without a chance to fix it first. No
+  correctness bug found in this pass; noting the audit happened and what
+  it covered, per the "check what's being extracted and how it's being
+  converted" request, rather than just asserting it's fine.
+
+- **Convert tool: added a "View Output" modal** (expandable/maximizable/
+  minimizable/closeable, doesn't require scrolling to the bottom of a long
+  page) — the project lead reported the old inline Preview section at the
+  bottom of the page was the only way to see generated text, requiring a
+  scroll-and-hunt every time on mobile. New `👁 View OCR Output` /
+  `👁 View Proofread Output` buttons sit right next to steps 2 and 3's own
+  action buttons and open the same modal directly. Verified in a real
+  browser: open/maximize/restore/minimize (tapping the header while
+  minimized restores it, since the minimize button itself becomes a small
+  target once shrunk)/close, and switching views inside the modal with no
+  data yet shows the existing error message instead of breaking.
+
 - **Convert tool: real Gemini 429 bug hunt + fixes, from a real failed run
   (SumadhvaVijayaMoola.pdf resumed, then GitaVivrti.pdf hit "quota
   exceeded" on Proofread after only ~80 pages despite a newly-funded
