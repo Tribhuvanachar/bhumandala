@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audio Admin · DGE (restricted)</title>
+<style>
+  :root{--bg:#f5efe4;--panel:#fffdf8;--panel2:#fbf4e7;--ink:#2b2117;--muted:#8b7c66;--line:#e6dac6;
+    --accent:#9a3b1b;--accent2:#1f6f5c;--gold:#b6862c;--ok:#2f9e6f;--pend:#b9ab90;--part:#c98a2b;--bad:#b23b2b;
+    --shadow:0 2px 16px rgba(90,60,20,.10);--radius:14px}
+  body.dark{--bg:#14161c;--panel:#1b1f27;--panel2:#20242f;--ink:#e9e3d5;--muted:#98a0b2;--line:#2b3140;
+    --accent:#e0794b;--accent2:#5bb894;--gold:#e0b25a;--ok:#5bb894;--pend:#5a5f6b;--part:#e0b25a;--bad:#e0794b;--shadow:0 6px 26px rgba(0,0,0,.4)}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.5;
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;transition:.3s}
+  header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+  .bar{max-width:1000px;margin:0 auto;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .brand{font-weight:700}.brand small{color:var(--muted);font-weight:400}.spacer{flex:1}
+  .icon,.btn{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:7px 12px;cursor:pointer;color:var(--ink);font:inherit;font-size:13px}
+  .btn.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  main{max-width:1000px;margin:0 auto;padding:16px 14px 80px}
+  h2.sect{font-size:16px;margin:22px 0 8px;border-bottom:1px solid var(--line);padding-bottom:5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);margin-bottom:14px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0}
+  label{font-size:13px;color:var(--muted);display:block;margin-bottom:3px}
+  input[type=text],input[type=number],input[type=password],select{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);color:var(--ink)}
+  input[type=checkbox]{width:auto;margin-right:6px}
+  .field{flex:1;min-width:160px}
+  .muted{color:var(--muted);font-size:13px}
+  .note{background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:12px 14px;margin:10px 0;font-size:13.5px}
+  .note b{color:var(--accent)}
+  table{width:100%;border-collapse:collapse;margin-top:8px}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);font-size:13.5px;vertical-align:middle}
+  th{background:var(--panel2);font-size:12px;color:var(--muted)}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .gate{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:24px;text-align:center}
+  .gate input{font:inherit;font-size:18px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink)}
+  .warn{background:color-mix(in srgb,var(--part) 14%,var(--panel));border:1px solid var(--part);border-radius:10px;padding:10px 13px;font-size:13px;margin:10px 0 4px}
+  .log{white-space:pre-wrap;font-family:ui-monospace,monospace;font-size:12.5px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px;max-height:220px;overflow:auto}
+  a{color:var(--accent2)}
+</style>
+</head>
+<body>
+<div class="gate" id="gate">
+  <div style="font-size:22px;font-weight:700">🎙️ Audio Admin</div>
+  <div class="muted">Restricted tool. Enter the passkey.</div>
+  <input id="gk" type="password" placeholder="passkey" autocomplete="off">
+  <button class="btn pri" id="gbtn">Enter</button>
+  <div class="muted" style="max-width:440px">Client-side gate for convenience, not real security — the page itself is public in the repo. Deliberately separate from the site's other admin pages: this one's write access is meant to reach only <code>bhumandala-audio-data</code>, never the main content repo, so use a GitHub token scoped to just that repository (see the note below the token field).</div>
+</div>
+
+<header style="display:none" id="hdr">
+  <div class="bar">
+    <div class="brand">🎙️ Audio Admin <small>· trim/chunk chanting audio, push to bhumandala-audio-data</small></div>
+    <span class="spacer"></span>
+    <a class="icon" href="index.html">◂ DGE</a>
+    <button class="icon" id="theme">◐</button>
+  </div>
+</header>
+
+<main id="app" style="display:none">
+
+  <h2 class="sect">1. Upload</h2>
+  <div class="card">
+    <label for="fileInput">Audio file (WAV/MP3/etc. — whatever your browser can decode)</label>
+    <input type="file" id="fileInput" accept="audio/*">
+    <div class="muted" id="fileInfo" style="margin-top:8px"></div>
+  </div>
+
+  <h2 class="sect">2. Options</h2>
+  <div class="card">
+    <div class="row">
+      <label style="display:flex;align-items:center;gap:6px;font-weight:400;margin:0;min-width:auto">
+        <input type="checkbox" id="optAutoDetect" checked> Auto-detect boundaries from silence gaps (recommended — no tuning needed)
+      </label>
+    </div>
+    <div class="row" id="manualParams" style="display:none">
+      <div class="field"><label for="optSilenceDb">Manual silence threshold (dB)</label><input type="number" id="optSilenceDb" value="-40"></div>
+      <div class="field"><label for="optMinGap">Manual min gap (sec)</label><input type="number" id="optMinGap" value="0.6" step="0.1"></div>
+      <div class="field"><label for="optMinLen">Manual min chunk length (sec)</label><input type="number" id="optMinLen" value="1.2" step="0.1"></div>
+    </div>
+    <div class="row">
+      <div class="field"><label for="optEdgePad">Edge cushion (sec)</label><input type="number" id="optEdgePad" value="0.10" step="0.01"></div>
+      <div class="field"><label for="optPrefix">Filename prefix</label><input type="text" id="optPrefix" value="chunk_"></div>
+      <div class="field"><label for="optStart">Start number</label><input type="number" id="optStart" value="1"></div>
+      <div class="field"><label for="optDigits">Digit padding</label><input type="number" id="optDigits" value="2"></div>
+    </div>
+    <div class="row">
+      <label style="display:flex;align-items:center;gap:6px;font-weight:400;margin:0;min-width:auto">
+        <input type="checkbox" id="optExportJson" checked> Export JSON timestamp map (single audio file stays whole)
+      </label>
+      <label style="display:flex;align-items:center;gap:6px;font-weight:400;margin:0;min-width:auto">
+        <input type="checkbox" id="optExportClips" checked> Export individual trimmed clips (WAV)
+      </label>
+    </div>
+    <div class="muted">At least one of the two above should stay checked, or there's nothing to produce. The edge cushion applies to both, so a clip and a JSON-seek of the same chunk always play the same audio.</div>
+  </div>
+
+  <div class="row">
+    <button class="btn pri" id="processBtn">▶ Process</button>
+    <span class="muted" id="processStatus"></span>
+  </div>
+
+  <h2 class="sect">3. Review</h2>
+  <div class="card" id="reviewCard" style="display:none">
+    <div class="muted" id="reviewSummary"></div>
+    <table id="reviewTable"><thead><tr><th>#</th><th>Name</th><th>Start</th><th>End</th><th>Dur</th><th>Preview</th></tr></thead><tbody></tbody></table>
+  </div>
+
+  <h2 class="sect">4. Push to <code>bhumandala-audio-data</code></h2>
+  <div class="card">
+    <div class="note"><b>Scope this token to ONLY <code>bhumandala-audio-data</code>.</b> GitHub → Settings → Developer settings → Fine-grained tokens → Repository access: "Only select repositories" → <code>bhumandala-audio-data</code> → Permissions: Contents: Read and write. This page hardcodes its target repo (no picker), but that only helps if the token itself can't reach anywhere else — a broadly-scoped token pasted here could still write elsewhere if this page had a bug, so don't rely on the UI alone.</div>
+    <div class="row">
+      <div class="field" style="flex:2"><label for="ghToken">GitHub token (scoped to bhumandala-audio-data only)</label><input type="password" id="ghToken" autocomplete="off"></div>
+      <div class="field"><label for="destFolder">Destination folder in the repo</label><input type="text" id="destFolder" placeholder="e.g. sumadhva_vijaya/sarga_1"></div>
+    </div>
+    <div class="row">
+      <button class="btn pri" id="pushBtn" disabled>⬆ Push to GitHub</button>
+      <span class="muted" id="pushStatus"></span>
+    </div>
+    <div class="log" id="pushLog" style="display:none"></div>
+  </div>
+
+</main>
+
+<script>
+(function(){
+  var PASSKEY = "AUDIOADMIN";
+  var $ = function(s){ return document.querySelector(s); };
+  var REPO_OWNER = "Tribhuvanachar", REPO_NAME = "bhumandala-audio-data", REPO_BRANCH = "main";
+
+  // Deliberately its own session flag ("dge.audioadmin.ok"), NOT shared with
+  // the site's other admin pages' "dge.admin.ok"/is_superadmin — this tool's
+  // whole point is a separate, more narrowly-scoped credential.
+  if (sessionStorage.getItem("dge.audioadmin.ok") === "1") start();
+  else {
+    $("#gate").style.display = "flex";
+    var tryK = function(){
+      if ($("#gk").value.trim().toUpperCase() === PASSKEY) { sessionStorage.setItem("dge.audioadmin.ok", "1"); location.reload(); }
+      else { $("#gk").value = ""; $("#gk").placeholder = "wrong — try again"; }
+    };
+    $("#gbtn").onclick = tryK;
+    $("#gk").addEventListener("keydown", function(e){ if (e.key === "Enter") tryK(); });
+    $("#gk").focus();
+  }
+
+  function start(){
+    if (sessionStorage.getItem("dge.audioadmin.ok") !== "1") return;
+    $("#gate").style.display = "none"; $("#hdr").style.display = ""; $("#app").style.display = "";
+    if (localStorage.getItem("dge.audioadmin.dark") === "1") document.body.classList.add("dark");
+    $("#theme").onclick = function(){ document.body.classList.toggle("dark"); localStorage.setItem("dge.audioadmin.dark", document.body.classList.contains("dark") ? "1" : "0"); };
+    var tok = localStorage.getItem("github_audio_admin_pat");
+    if (tok) $("#ghToken").value = tok;
+    $("#ghToken").addEventListener("input", function(){ localStorage.setItem("github_audio_admin_pat", $("#ghToken").value); });
+  }
+
+  // ---------------------------------------------------------------
+  // Decode + analysis
+  // ---------------------------------------------------------------
+  var decodedBuffer = null;
+  var sourceFileName = "";
+  var lastSegments = null; // [{id,name,start,end,start_ms,end_ms,duration}]
+  var lastClipBlobs = null; // name -> Blob
+
+  $("#optAutoDetect").addEventListener("change", function(){
+    $("#manualParams").style.display = this.checked ? "none" : "flex";
+  });
+
+  $("#fileInput").addEventListener("change", async function(){
+    var f = this.files[0];
+    if (!f) return;
+    sourceFileName = f.name;
+    $("#fileInfo").textContent = "Decoding " + f.name + " (" + (f.size / 1e6).toFixed(1) + " MB)…";
+    try {
+      var arrBuf = await f.arrayBuffer();
+      var ctx = new (window.AudioContext || window.webkitAudioContext)();
+      decodedBuffer = await ctx.decodeAudioData(arrBuf);
+      $("#fileInfo").textContent = f.name + " — " + decodedBuffer.duration.toFixed(1) + "s, " +
+        decodedBuffer.numberOfChannels + "ch, " + decodedBuffer.sampleRate + " Hz. Ready to process.";
+    } catch (e) {
+      $("#fileInfo").textContent = "Could not decode this file: " + e.message;
+      decodedBuffer = null;
+    }
+  });
+
+  function monoOf(buffer){
+    var ch = buffer.numberOfChannels;
+    var out = new Float32Array(buffer.length);
+    for (var c = 0; c < ch; c++) {
+      var data = buffer.getChannelData(c);
+      for (var i = 0; i < data.length; i++) out[i] += data[i] / ch;
+    }
+    return out;
+  }
+
+  function percentile(sortedAsc, p){
+    var idx = (p / 100) * (sortedAsc.length - 1);
+    var lo = Math.floor(idx), hi = Math.ceil(idx);
+    if (lo === hi) return sortedAsc[lo];
+    return sortedAsc[lo] + (sortedAsc[hi] - sortedAsc[lo]) * (idx - lo);
+  }
+
+  // 1-D Otsu split on log-gap-lengths -> the natural divide between short
+  // in-chunk breaths and real inter-chunk silence. Direct port of the
+  // Colab notebook's _otsu() (same bin count, same log-domain search).
+  function otsuSplit(vals){
+    var v = vals.map(function(x){ return Math.log(x + 1e-6); });
+    var bins = 64;
+    var lo = Math.min.apply(null, v), hi = Math.max.apply(null, v);
+    if (hi <= lo) return null;
+    var hist = new Float64Array(bins);
+    var mids = new Float64Array(bins);
+    for (var b = 0; b < bins; b++) mids[b] = lo + (hi - lo) * (b + 0.5) / bins;
+    v.forEach(function(x){
+      var b = Math.min(bins - 1, Math.floor((x - lo) / (hi - lo) * bins));
+      hist[b]++;
+    });
+    var tot = v.length;
+    var w = 0, mu = 0, muT = 0;
+    for (var i = 0; i < bins; i++) muT += hist[i] * mids[i];
+    var best = -1, bestK = -1;
+    var wAcc = 0, muAcc = 0;
+    for (var k = 0; k < bins; k++) {
+      wAcc += hist[k]; muAcc += hist[k] * mids[k];
+      var wF = tot - wAcc;
+      if (wAcc === 0 || wF === 0) continue;
+      var mB = muAcc / wAcc, mF = (muT - muAcc) / wF;
+      var sigma = wAcc * wF * (mB - mF) * (mB - mF);
+      if (sigma > best) { best = sigma; bestK = k; }
+    }
+    if (bestK < 0) return null;
+    return Math.exp(mids[bestK]);
+  }
+
+  // Direct port of the Colab notebook's detect_shlokas() -- same frame/hop
+  // sizes, same adaptive-threshold formula, same Otsu-based gap length,
+  // same 5ms boundary refinement window, same overlap resolution. Ported
+  // so the web tool and the notebook produce comparable results on the
+  // same recording, not two independently-tuned algorithms.
+  function detectSegments(mono, sr, opts){
+    var frame = Math.round(sr * 0.03), hop = Math.round(sr * 0.01);
+    var n = 1 + Math.floor((mono.length - frame) / hop);
+    var xs = new Float64Array(mono.length + 1);
+    for (var i = 0; i < mono.length; i++) xs[i + 1] = xs[i] + mono[i] * mono[i];
+    var db = new Float32Array(n);
+    for (var k = 0; k < n; k++) {
+      var idx = k * hop;
+      var power = (xs[idx + frame] - xs[idx]) / frame;
+      db[k] = 10 * Math.log10(power + 1e-12);
+    }
+    var total = mono.length / sr;
+
+    var thr;
+    if (opts.autoDetect) {
+      var sortedDb = Array.prototype.slice.call(db).sort(function(a, b){ return a - b; });
+      var floorDb = percentile(sortedDb, 10), peakDb = percentile(sortedDb, 90);
+      thr = Math.max(floorDb + 6.0, floorDb + 0.35 * (peakDb - floorDb));
+      thr = Math.min(thr, peakDb - 3.0);
+    } else {
+      thr = opts.manualSilenceDb;
+    }
+    var active = new Uint8Array(n);
+    for (k = 0; k < n; k++) active[k] = db[k] > thr ? 1 : 0;
+
+    var gaps = [];
+    i = 0;
+    while (i < n) {
+      if (!active[i]) {
+        var j = i; while (j < n && !active[j]) j++;
+        if (i > 0 && j < n) gaps.push((j - i) * hop / sr);
+        i = j;
+      } else i++;
+    }
+
+    var minGap, minLen;
+    if (opts.autoDetect) {
+      var og = gaps.length >= 3 ? otsuSplit(gaps) : null;
+      minGap = Math.min(1.5, Math.max(0.5, og || 0.5));
+      minLen = 0.8;
+    } else {
+      minGap = opts.manualMinGapSec; minLen = opts.manualMinLenSec;
+    }
+
+    var merged = active.slice();
+    var minGapFr = Math.round(minGap / (hop / sr));
+    i = 0;
+    while (i < n) {
+      if (!merged[i]) {
+        j = i; while (j < n && !merged[j]) j++;
+        if (i > 0 && j < n && (j - i) < minGapFr) for (var f = i; f < j; f++) merged[f] = 1;
+        i = j;
+      } else i++;
+    }
+
+    var segs = [];
+    i = 0;
+    while (i < n) {
+      if (merged[i]) {
+        j = i; while (j < n && merged[j]) j++;
+        var a = i * hop / sr, b = Math.min(total, j * hop / sr);
+        if (b - a >= minLen) segs.push([a, b]);
+        i = j;
+      } else i++;
+    }
+
+    var w = Math.round(sr * 0.005);
+    var pth = Math.pow(10, thr / 10);
+    function refine(t, forward){
+      var c = Math.round(t * sr);
+      var lo = Math.max(0, c - Math.round(0.03 * sr));
+      var hi = Math.min(mono.length - w, c + Math.round(0.03 * sr));
+      if (forward) {
+        for (var s = lo; s < hi; s++) { if ((xs[s + w] - xs[s]) / w > pth) return s / sr; }
+      } else {
+        for (var s2 = hi; s2 > lo; s2--) { if ((xs[s2 + w] - xs[s2]) / w > pth) return s2 / sr; }
+      }
+      return t;
+    }
+    segs.forEach(function(seg){
+      seg[0] = Math.max(0, refine(seg[0], true) - opts.edgePad);
+      seg[1] = Math.min(total, refine(seg[1], false) + opts.edgePad);
+    });
+    for (k = 1; k < segs.length; k++) {
+      if (segs[k][0] < segs[k - 1][1]) {
+        var mid = (segs[k][0] + segs[k - 1][1]) / 2;
+        segs[k - 1][1] = mid; segs[k][0] = mid;
+      }
+    }
+    return { segs: segs, total: total, thr: thr, minGap: minGap };
+  }
+
+  // ---------------------------------------------------------------
+  // WAV encoding (16-bit PCM) -- slices the ORIGINAL decoded buffer
+  // (native sample rate, all channels) for the actual clip, even though
+  // detection ran on a mono mixdown -- same split as the Colab notebook
+  // (analysis vs. extraction use different signals).
+  // ---------------------------------------------------------------
+  function sliceToWavBlob(buffer, startSec, endSec){
+    var sr = buffer.sampleRate, ch = buffer.numberOfChannels;
+    var startSample = Math.max(0, Math.floor(startSec * sr));
+    var endSample = Math.min(buffer.length, Math.ceil(endSec * sr));
+    var frames = Math.max(0, endSample - startSample);
+    var bytesPerSample = 2;
+    var blockAlign = ch * bytesPerSample;
+    var dataSize = frames * blockAlign;
+    var headerSize = 44;
+    var out = new ArrayBuffer(headerSize + dataSize);
+    var view = new DataView(out);
+    function writeStr(off, s){ for (var i = 0; i < s.length; i++) view.setUint8(off + i, s.charCodeAt(i)); }
+    writeStr(0, "RIFF"); view.setUint32(4, 36 + dataSize, true); writeStr(8, "WAVE");
+    writeStr(12, "fmt "); view.setUint32(16, 16, true); view.setUint16(20, 1, true);
+    view.setUint16(22, ch, true); view.setUint32(24, sr, true);
+    view.setUint32(28, sr * blockAlign, true); view.setUint16(32, blockAlign, true); view.setUint16(34, 16, true);
+    writeStr(36, "data"); view.setUint32(40, dataSize, true);
+    var channelData = []; for (var c = 0; c < ch; c++) channelData.push(buffer.getChannelData(c));
+    var off = headerSize;
+    for (var i = 0; i < frames; i++) {
+      for (c = 0; c < ch; c++) {
+        var s = channelData[c][startSample + i] || 0;
+        s = Math.max(-1, Math.min(1, s));
+        view.setInt16(off, s < 0 ? s * 0x8000 : s * 0x7fff, true);
+        off += 2;
+      }
+    }
+    return new Blob([out], { type: "audio/wav" });
+  }
+
+  // ---------------------------------------------------------------
+  // Process button
+  // ---------------------------------------------------------------
+  $("#processBtn").addEventListener("click", function(){
+    if (!decodedBuffer) { $("#processStatus").textContent = "Load an audio file first."; return; }
+    $("#processStatus").textContent = "Analyzing…";
+    setTimeout(function(){ // let the status text paint before the (synchronous, can be slow) analysis
+      try {
+        var mono = monoOf(decodedBuffer);
+        var opts = {
+          autoDetect: $("#optAutoDetect").checked,
+          manualSilenceDb: parseFloat($("#optSilenceDb").value),
+          manualMinGapSec: parseFloat($("#optMinGap").value),
+          manualMinLenSec: parseFloat($("#optMinLen").value),
+          edgePad: parseFloat($("#optEdgePad").value) || 0
+        };
+        var result = detectSegments(mono, decodedBuffer.sampleRate, opts);
+        var prefix = $("#optPrefix").value || "chunk_";
+        var startNum = parseInt($("#optStart").value, 10) || 1;
+        var digits = Math.max(1, parseInt($("#optDigits").value, 10) || 2);
+
+        lastSegments = result.segs.map(function(seg, i){
+          var num = startNum + i;
+          var name = prefix + String(num).padStart(digits, "0");
+          return { id: num, name: name, start: +seg[0].toFixed(3), end: +seg[1].toFixed(3),
+                    start_ms: Math.round(seg[0] * 1000), end_ms: Math.round(seg[1] * 1000),
+                    duration: +(seg[1] - seg[0]).toFixed(3) };
+        });
+
+        lastClipBlobs = {};
+        if ($("#optExportClips").checked) {
+          lastSegments.forEach(function(s){ lastClipBlobs[s.name + ".wav"] = sliceToWavBlob(decodedBuffer, s.start, s.end); });
+        }
+
+        renderReview(result);
+        $("#processStatus").textContent = "Done — " + lastSegments.length + " segment(s) found (threshold " +
+          result.thr.toFixed(1) + " dB, min gap " + result.minGap.toFixed(2) + "s).";
+        $("#pushBtn").disabled = lastSegments.length === 0;
+      } catch (e) {
+        $("#processStatus").textContent = "Processing failed: " + e.message;
+        console.error(e);
+      }
+    }, 30);
+  });
+
+  function renderReview(result){
+    $("#reviewCard").style.display = "block";
+    $("#reviewSummary").textContent = sourceFileName + " — " + result.total.toFixed(1) + "s total, " +
+      lastSegments.length + " segment(s) detected.";
+    var tbody = $("#reviewTable tbody");
+    tbody.innerHTML = "";
+    lastSegments.forEach(function(s){
+      var tr = document.createElement("tr");
+      var previewTd = document.createElement("td");
+      if (lastClipBlobs[s.name + ".wav"]) {
+        var audio = document.createElement("audio");
+        audio.controls = true; audio.style.height = "28px";
+        audio.src = URL.createObjectURL(lastClipBlobs[s.name + ".wav"]);
+        previewTd.appendChild(audio);
+      } else {
+        previewTd.textContent = "(clips off)";
+      }
+      tr.innerHTML = "<td>" + s.id + "</td><td>" + s.name + "</td><td>" + s.start.toFixed(3) +
+        "s</td><td>" + s.end.toFixed(3) + "s</td><td class=\"num\">" + s.duration.toFixed(2) + "s</td>";
+      tr.appendChild(previewTd);
+      tbody.appendChild(tr);
+    });
+  }
+
+  // ---------------------------------------------------------------
+  // Push to GitHub -- hardcoded to bhumandala-audio-data, no repo picker,
+  // so this page structurally cannot target anywhere else regardless of
+  // what token is pasted in (the token's own scope is still the real
+  // safety boundary -- see the note in the UI).
+  // ---------------------------------------------------------------
+  function b64FromArrayBuffer(buf){
+    var bytes = new Uint8Array(buf), binary = "";
+    for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+    return btoa(binary);
+  }
+  function b64FromString(str){ return btoa(unescape(encodeURIComponent(str))); }
+
+  async function ghGetSha(path, token){
+    var url = "https://api.github.com/repos/" + REPO_OWNER + "/" + REPO_NAME + "/contents/" + path + "?ref=" + REPO_BRANCH;
+    var res = await fetch(url, { headers: { Authorization: "token " + token, Accept: "application/vnd.github+json" } });
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error("GET " + path + " failed: " + res.status);
+    var j = await res.json();
+    return j.sha;
+  }
+  async function ghPutFile(path, base64Content, token, message){
+    var sha = await ghGetSha(path, token);
+    var body = { message: message, content: base64Content, branch: REPO_BRANCH };
+    if (sha) body.sha = sha;
+    var url = "https://api.github.com/repos/" + REPO_OWNER + "/" + REPO_NAME + "/contents/" + path;
+    var res = await fetch(url, {
+      method: "PUT",
+      headers: { Authorization: "token " + token, "Content-Type": "application/json", Accept: "application/vnd.github+json" },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) { var j = await res.json().catch(function(){ return {}; }); throw new Error("PUT " + path + " failed: " + res.status + " " + (j.message || "")); }
+  }
+
+  $("#pushBtn").addEventListener("click", async function(){
+    var token = $("#ghToken").value.trim();
+    if (!token) { $("#pushStatus").textContent = "Paste a GitHub token first (scoped to bhumandala-audio-data)."; return; }
+    if (!lastSegments || !lastSegments.length) { $("#pushStatus").textContent = "Process a file first."; return; }
+    var folder = ($("#destFolder").value || "").trim().replace(/^\/+|\/+$/g, "");
+    if (!folder) { $("#pushStatus").textContent = "Enter a destination folder first."; return; }
+
+    $("#pushBtn").disabled = true;
+    var log = $("#pushLog"); log.style.display = "block"; log.textContent = "";
+    function logLine(s){ log.textContent += s + "\n"; log.scrollTop = log.scrollHeight; }
+
+    try {
+      if ($("#optExportJson").checked) {
+        var mapping = {
+          source_audio: sourceFileName,
+          duration: decodedBuffer ? +decodedBuffer.duration.toFixed(3) : null,
+          count: lastSegments.length,
+          segments: lastSegments
+        };
+        logLine("Pushing " + folder + "/shlokas.json …");
+        await ghPutFile(folder + "/shlokas.json", b64FromString(JSON.stringify(mapping, null, 2)),
+          token, "Audio Admin: add timestamp map for " + sourceFileName);
+        logLine("  ok.");
+      }
+      if ($("#optExportClips").checked) {
+        for (var name in lastClipBlobs) {
+          if (!lastClipBlobs.hasOwnProperty(name)) continue;
+          logLine("Pushing " + folder + "/" + name + " …");
+          var buf = await lastClipBlobs[name].arrayBuffer();
+          await ghPutFile(folder + "/" + name, b64FromArrayBuffer(buf), token, "Audio Admin: add " + name);
+          logLine("  ok.");
+        }
+      }
+      $("#pushStatus").textContent = "Done — pushed to " + REPO_OWNER + "/" + REPO_NAME + "/" + folder;
+    } catch (e) {
+      logLine("FAILED: " + e.message);
+      $("#pushStatus").textContent = "Push failed partway — see log. Already-pushed files are safe; fix the issue and push again (unpushed files will be added, already-pushed ones updated in place).";
+    } finally {
+      $("#pushBtn").disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>
