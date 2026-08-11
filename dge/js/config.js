@@ -21,12 +21,27 @@ const appConfig = {
   // audio hosting for the whole site never requires editing a single
   // grantha JSON file — see dgeGetEffectiveAudioBaseUrl.
   audioBaseUrl: "https://archive.org/download/",
+  // Full ~1.65M-headword, 63-dictionary Kosha corpus, built and published
+  // to the "dist" branch of the separate Tribhuvanachar/bhumandala-kosha-data
+  // repo (too large for this repo's 1GB budget). Served over jsDelivr's
+  // GitHub CDN, which mirrors the branch with permissive CORS. kosha.js
+  // only ever fetches manifest.json plus small per-bucket/per-entry shards
+  // on demand (never the whole corpus at once), so pointing this at the
+  // full remote build doesn't add any real page-load cost.
+  koshaDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala-kosha-data@dist/data/koshas",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
 // throughout the app was always undefined without it, silently falling back to hardcoded
 // defaults no matter what was actually set above. Not a caching issue; a real, longstanding
 // bug that just happened not to be visible until a config value diverged from its fallback.
+
+// kosha.js reads window.KOSHA_DATA_BASE synchronously the moment its own
+// script tag runs, so this has to be set here (config.js loads first,
+// no async fetch involved) rather than through the async
+// data/config-overrides.json merge below -- that merge lands too late to
+// affect a value kosha.js has already captured into a local var.
+window.KOSHA_DATA_BASE = appConfig.koshaDataBase;
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
 // remove, rename, reorder, or temporarily disable (enabled:false) any of

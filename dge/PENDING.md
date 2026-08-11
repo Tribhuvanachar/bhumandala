@@ -49,11 +49,15 @@ complete record, not just a live queue.
   wanted: re-record with brief deliberate pauses between verses, or use a
   different technique entirely (e.g. forced alignment against the known
   verse text, or manual boundary marking in the Review table — not yet
-  built). Still blocked on pushing anywhere: **`Tribhuvanachar/bhumandala-audio-data`
-  doesn't exist yet** — repo creation is blocked by the same GitHub App
+  built). ~~Still blocked on pushing anywhere: `Tribhuvanachar/bhumandala-audio-data`
+  doesn't exist yet — repo creation is blocked by the same GitHub App
   permission restriction hit earlier for `bhumandala-kosha-data`
   (`403 Resource not accessible by integration`); the project lead needs to
-  create it manually (empty repo is fine).
+  create it manually (empty repo is fine).~~ Resolved: the project lead
+  created the repo. Ready for the project lead to actually test the page
+  end-to-end against the real repo now (upload → process → review → push);
+  not yet done from this side since it needs the project lead's own scoped
+  GitHub token, not something to test with a shared/synthetic one.
   **Follow-up round, answering "where does the audio go / can I download it /
   why does GitHub reject files over 25MB":** (1) added a destination-folder
   default, auto-filled from the uploaded filename (slugified) the first time

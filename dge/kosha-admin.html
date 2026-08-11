@@ -166,9 +166,17 @@
     document.querySelectorAll(".chip[data-f]").forEach(function(c){ c.onclick=function(){ FILTER=c.dataset.f; document.querySelectorAll(".chip[data-f]").forEach(function(x){x.classList.toggle("on",x===c);}); renderLoaded(); }; });
     document.querySelectorAll("#tbl th[data-k]").forEach(function(th){ th.onclick=function(){ var k=th.dataset.k; if(k==="vis") k="hidden"; if(SORT.k===k) SORT.dir*=-1; else {SORT.k=k;SORT.dir=(k==="name"||k==="license"||k==="dir")?1:-1;} renderLoaded(); }; });
     renderNotLoaded(); renderPuranaNote();
-    fetch("data/koshas/_index/manifest.json?v=1.1").then(function(r){return r.json();})
+    // Standalone admin page (no config.js include, like the other *-admin.html
+    // pages) so this is hardcoded rather than read from window.appConfig --
+    // keep in sync with appConfig.koshaDataBase in js/config.js. Points at
+    // the full corpus now that it's built and js/kosha.js's live search
+    // reads from the same place; the old local-sample manifest only ever
+    // covered 10 of ~1046 real buckets, so this page was showing an
+    // almost-empty dictionary list.
+    var KOSHA_BASE = "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala-kosha-data@dist/data/koshas";
+    fetch(KOSHA_BASE + "/_index/manifest.json?v=1.1").then(function(r){return r.json();})
       .then(function(m){ MAN=m; buildRows(); renderTotals(); renderLoaded(); })
-      .catch(function(e){ $("#tb").innerHTML='<tr><td colspan="6" class="muted">Could not load data/koshas/_index/manifest.json ('+e+'). Place this page at dge/.</td></tr>'; });
+      .catch(function(e){ $("#tb").innerHTML='<tr><td colspan="6" class="muted">Could not load '+KOSHA_BASE+'/_index/manifest.json ('+e+').</td></tr>'; });
   }
 
   function licClass(s){ s=(s||"").toLowerCase(); if(s.indexOf("cc-by")===0||s.indexOf("cc-by")>-1) return "ok"; if(s.indexOf("no license")>-1||s.indexOf("no licence")>-1) return "bad"; return "unclear"; }
