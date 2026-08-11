@@ -159,6 +159,26 @@ complete record, not just a live queue.
   it covered, per the "check what's being extracted and how it's being
   converted" request, rather than just asserting it's fine.
 
+- **Fixed a real gap: `audio-admin.html` was never linked from the main
+  ADMIN dropdown** — built and shipped earlier in the session, but the
+  link to it in `index.html` was missed, so a superadmin had no way to
+  discover the page existed at all short of typing the URL directly.
+  Added `🎙️ Audio Admin` to the dropdown (`js/admin-editor.js`'s
+  visibility toggle list updated too) — still routes to the page's own
+  separate `AUDIOADMIN` passkey gate, unaffected by this, since the whole
+  point of that page was a credential independent of `is_superadmin`.
+  Also added a general **"NEW" badge mechanism** for the Admin dropdown
+  (`js/modals.js`'s `markNewFeatureBadges()` + a `NEW_ADMIN_FEATURES`
+  list) per the project lead's request that newly-added features be
+  flagged so they don't go unnoticed sitting in a long menu — a small
+  blinking pill next to a dropdown item, shown once the first time that
+  menu is opened after the feature ships, then not shown again on future
+  page loads (tracked in localStorage). Audio Admin is the first entry;
+  add `{itemId, badgeId}` to that list for future admin-only additions.
+  Verified in a real browser: badge shows on first open, persists through
+  a same-session re-open until dismissed, and is gone after a reload;
+  clicking through still correctly hits Audio Admin's own passkey gate.
+
 - **Convert tool: added a "View Output" modal** (expandable/maximizable/
   minimizable/closeable, doesn't require scrolling to the bottom of a long
   page) — the project lead reported the old inline Preview section at the

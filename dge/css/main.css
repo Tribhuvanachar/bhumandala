@@ -271,6 +271,13 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 .pop-item { padding: 8px 12px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 8px; white-space: nowrap; transition: background var(--t-fast) var(--ease); }
 .pop-item:hover { background: var(--card-border); }
 .pop-item.active { background: var(--card-active); color: var(--accent-red); }
+/* Small "recently added" flag on a dropdown item -- shown until the user
+   has opened this menu once with it visible, so a new feature doesn't go
+   unnoticed sitting at the bottom of a long list. See modals.js
+   markNewFeatureBadges(). */
+.new-badge { margin-left: auto; padding: 1px 7px; font-size: 10px; font-weight: 700; letter-spacing: .03em;
+  border-radius: 999px; background: var(--accent-red); color: #fff; animation: dge-new-badge-pulse 1.6s ease-in-out infinite; }
+@keyframes dge-new-badge-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
 
 .ab-container { display: flex; flex-direction: column; gap: 8px; width: 100%; font-size: 12px; font-weight: 700; }
 .ab-row-inputs { display: flex; align-items: center; justify-content: space-between; gap: 6px; }

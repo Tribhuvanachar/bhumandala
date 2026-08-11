@@ -107,7 +107,7 @@ window.addEventListener('pagehide', function () {});
 // than leaving it to be rediscovered each time, the HTML now stamps its
 // own version and the JS checks it matches. Bump BOTH on any release that
 // changes index.html's structure.
-window.DGE_EXPECTED_HTML_VERSION = '4.60.5';
+window.DGE_EXPECTED_HTML_VERSION = '4.60.6';
 document.addEventListener('DOMContentLoaded', () => {
   const meta = document.querySelector('meta[name="dge-html-version"]');
   const actual = meta ? meta.getAttribute('content') : '(none)';

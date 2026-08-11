@@ -3,7 +3,7 @@
 
 // Register Module Version
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['modals.js'] = 'v1.4 (Key Sponsors section; sponsor category enabled filter)';
+window.DGE_VERSIONS['modals.js'] = 'v1.5 ("NEW" badges on recently-added Admin dropdown items)';
 
 function openModal(id) {
   const modal = document.getElementById(id);
@@ -19,6 +19,35 @@ function closeModal(id) {
   if (modal) {
     modal.style.display = 'none';
     document.body.classList.remove('modal-open'); 
+  }
+}
+
+// "NEW" badges on recently-added Admin dropdown items -- easy to forget a
+// link like Audio Admin ever got added at all once it's just one more row
+// among many. Each entry here shows its badge (with the blink animation
+// already in css/main.css) until the user has opened this menu once WHILE
+// it's visible; add a new {itemId, badgeId} pair whenever an admin-only
+// feature ships, and remove it once it's no longer worth flagging.
+const NEW_ADMIN_FEATURES = [
+  { itemId: 'adminAudioManagerItem', badgeId: 'adminAudioManagerBadge' }
+];
+const NEW_FEATURES_SEEN_KEY = 'dge_admin_new_features_seen';
+function markNewFeatureBadges() {
+  let seen;
+  try { seen = JSON.parse(localStorage.getItem(NEW_FEATURES_SEEN_KEY)) || []; } catch (e) { seen = []; }
+  const seenSet = new Set(seen);
+  let sawAnyNew = false;
+  NEW_ADMIN_FEATURES.forEach(({ itemId, badgeId }) => {
+    const item = document.getElementById(itemId);
+    const badge = document.getElementById(badgeId);
+    if (!item || !badge || item.style.display === 'none') return; // not unlocked for this user yet
+    if (seenSet.has(itemId)) { badge.style.display = 'none'; return; }
+    badge.style.display = 'inline-block';
+    sawAnyNew = true;
+    seenSet.add(itemId); // don't show again on a future page load, once they've had this one chance to notice it
+  });
+  if (sawAnyNew) {
+    try { localStorage.setItem(NEW_FEATURES_SEEN_KEY, JSON.stringify(Array.from(seenSet))); } catch (e) { /* storage full — non-fatal, badge just repeats next time */ }
   }
 }
 
@@ -38,6 +67,7 @@ function togglePopup(id) {
     if (isOpening && window.DGE_DEV_LOG && window.DGE_DEV_LOG.recenterPill) {
       window.DGE_DEV_LOG.recenterPill();
     }
+    if (isOpening && id === 'adminToolsPopup') markNewFeatureBadges();
   }
 }
 
