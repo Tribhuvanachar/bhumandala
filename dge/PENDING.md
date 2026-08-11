@@ -17,6 +17,44 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
+- **`dge/audio-admin.html` built (passkey `AUDIOADMIN`, own session flag,
+  deliberately NOT SSO'd with the site's other admin pages) — client-side
+  Web Audio port of the `Gita_Studio_Colab.ipynb` shloka-boundary
+  detector, plus the vṛtta-based floors requested afterwards. Upload an
+  audio file, it decodes in-browser, auto-detects boundaries from silence
+  gaps (Otsu-thresholded, same algorithm as the notebook), and now
+  additionally: (1) a user-adjustable **minimum shloka length** floor
+  (default 10s — below this a "segment" is dropped as noise, not kept, since
+  a real chanted verse's vṛtta gives it a physical minimum duration), (2) a
+  user-adjustable **minimum gap** floor (default 1.5s — a detected silence
+  shorter than this is treated as an in-verse breath and bridged, not kept
+  as a real boundary), (3) an optional manual **dB threshold override**
+  usable even with auto-detect on, since the auto-computed threshold can be
+  too permissive on real (non-studio) recordings. All three are exposed
+  directly in the Options section so the project lead can retune and
+  re-run without needing another Claude session. Verified against a
+  synthetic file with known boundaries (a 0.8s gap correctly bridged, a
+  0.5s "blip" correctly dropped, two real ≥10s segments correctly kept).
+  **Also verified against the real sample provided (`mangalacharana.mp3`,
+  359s)** — finding to flag for the project lead: sweeping the manual dB
+  override from -30 to -50 dB, and separately inspecting the raw gap
+  lengths at six different thresholds (-18 to -32 dB) directly, found that
+  outside the ~5s leading pre-roll before chanting starts, **no gap in this
+  recording exceeds ~1.25 seconds even at a lenient -18dB threshold** — this
+  particular recording has no real inter-verse silence to detect at all
+  (continuous/fluent chanting style, and/or room tone or normalization
+  filling any brief pause). This isn't a bug or a tuning gap in the tool —
+  no silence-based threshold can split audio that doesn't contain real
+  silences. Options if per-shloka splitting of this specific file is still
+  wanted: re-record with brief deliberate pauses between verses, or use a
+  different technique entirely (e.g. forced alignment against the known
+  verse text, or manual boundary marking in the Review table — not yet
+  built). Still blocked on pushing anywhere: **`Tribhuvanachar/bhumandala-audio-data`
+  doesn't exist yet** — repo creation is blocked by the same GitHub App
+  permission restriction hit earlier for `bhumandala-kosha-data`
+  (`403 Resource not accessible by integration`); the project lead needs to
+  create it manually (empty repo is fine, the page only uses the Contents API).
+
 - **`Gita_Studio_Colab.ipynb` uploaded — a genuinely new tool, nothing to
   reconcile against.** Checked: no prior notebook, script, or doc anywhere
   in the repo does anything like this (only existing `.ipynb` is the Kosha
