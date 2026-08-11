@@ -17,6 +17,36 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
+- **Two more delegated coworker deliverables uploaded, not yet checked
+  against the live repo** (same pattern as Tīrtha Prabandha below —
+  verification requested, in progress):
+  - `dge_stream5_ashtadhyayi1.zip` — claims 3 new layers (Siddhānta-Kaumudī,
+    Mahābhāṣya, Vasu), a pada-cheda/anvaya panel, and a new
+    `ashtadhyayi-admin.html`. **Spot-checked already: all 7 layers' `data.json`
+    files (kashika, siddhanta_kaumudi, mahabhashya_patanjali, balamanorama,
+    tattvabodhini, nyasa, vasu — 3.4 to 21.6 MB each, real content) and
+    `dge/ashtadhyayi-admin.html` already exist live on `main`** — this looks
+    like the SAME situation as Tīrtha Prabandha: the delegated session's work
+    (or equivalent) is already merged, and this zip may be entirely
+    redundant. NOT yet verified: the pada-cheda/anvaya reader panel itself,
+    and whether the live admin page's layer count/licence badges actually
+    match the zip's claims exactly.
+  - `dge_stream3_guruparampara_dropin1.zip` — claims a 10-figure Dāsa
+    Paramparā lineage (210→215 nodes), a Brindavana-image curation registry
+    (no images embedded, by the delegated session's own admission — couldn't
+    reach Wikimedia from its sandbox), and `holy-places-admin.html` seeding
+    135 places with a documented export shape for the Tīrtha nearest-finder.
+    **Not checked at all yet** — node count, whether `holy-places-admin.html`
+    already differs from what's live, whether 135 places overlaps/conflicts
+    with Tīrtha Prabandha's 95.
+  - **The `?` big picture**: at least 2 of 3 delegated-session deliverables
+    checked so far turned out to be full or partial duplicates of work
+    already live, because those sessions didn't have the live repo mounted.
+    Worth deciding whether future delegated tasks should require pulling
+    `main` first (Stream 3's own task update says it did this — "I pulled
+    your live `bhumandala` repo to match its exact conventions" — and its
+    findings are correspondingly more likely to be genuinely additive).
+
 - **Tīrtha Prabandha — likely duplicate build, needs reconciliation.** A
   separate delegated coworker session (task update pasted 2026-08-10)
   built a *second*, self-contained Tīrtha Prabandha bundle
