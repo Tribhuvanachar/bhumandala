@@ -15,6 +15,55 @@ complete record, not just a live queue.
 
 ---
 
+## Future feature ideas — designed but not yet greenlit
+
+- **"DGE Interlink" — click a word anywhere (Kosha entry, grantha verse,
+  Ashtadhyayi sutra) and see every other place in DGE that references it,
+  in a popup (minimize/maximize/close/copy/share) — same UI shell as
+  Ask Acharya, but backed by DGE's own precomputed cross-references
+  instead of a live Gemini call.** Requested with a concrete example:
+  a Kosha entry's etymology (Vācaspatyam/Śabdakalpadruma often give the
+  derivation, e.g. which pratyaya/sūtra produces a form) should link
+  straight to the matching sūtra or dhātu in the Ashtadhyayi section,
+  auto-detected, no manual tagging.
+  Investigated before designing (so this is grounded, not speculative):
+  - Ashtadhyayi sūtras already carry a clean, stable, addressable ID in
+    `data/vyakarana/ashtadhyayi/sutrapatha/data.json` (`"id": "1.2.27"`,
+    standard adhyāya.pāda.sūtra form, 3962 sūtras) — deep-linking straight
+    TO a specific sūtra is fully feasible today. Nothing currently exposes
+    that: `ashtadhyayi.html` has no hash/query-based "jump to sūtra by ID"
+    at all yet — that's real, small, immediately useful infrastructure to
+    build first regardless of anything else here (shareable direct links
+    to one sūtra), and it's the landing side of every link this feature
+    would ever produce.
+  - The other direction is the hard part: Kosha entries carry etymology as
+    **unstructured prose** (`sense.etymology`, rendered as free text under
+    "व्युत्पत्तिः:" in `kosha.js`'s `openEntry()`), not a structured
+    `{sutra_id: "3.1.134"}` field — going FROM a word TO "which sūtra
+    derives this" is not a lookup, it's either (a) regex/pattern-matching
+    known dictionaries' citation styles for explicit sūtra-number mentions
+    inside that prose (fragile, and only catches entries that already cite
+    one), or (b) a real generative-grammar derivation engine (essentially
+    what ashtadhyayi.com's own derivation/simulator tooling does) that can
+    derive any form and report which sūtras fired, in order — the second
+    is a genuine computational-linguistics undertaking (there are existing
+    open-source Pāṇinian engines, e.g. the sanskrit-coders/sanskrit_parser
+    ecosystem, worth evaluating to wrap rather than building one from
+    scratch, before assuming this needs to be built in-house).
+  Proposed staged plan, not started: **Stage 1** — build the sūtra
+  deep-link target in `ashtadhyayi.html` (small, real value on its own).
+  **Stage 2** — build the reusable "DGE Interlink" popup component
+  (minimize/maximize/close/copy/share chrome, likely shareable code with
+  Ask Acharya's popup shell) wired to whatever cross-references exist,
+  starting from whatever's cheaply extractable (explicit citations already
+  in the etymology text) rather than waiting on Stage 3. **Stage 3** —
+  evaluate/integrate a real derivation engine for the general case, sized
+  and scoped separately once Stages 1-2 prove the UI is worth it.
+  Same underlying popup, once built, generalizes beyond Kosha↔Ashtadhyayi
+  to "click any word in any grantha, see every DGE reference to it" per
+  the project lead's stated end goal. Not started — explicitly asked to
+  "think about it, keep architecture ready" before being told to proceed.
+
 ## Awaiting a decision or action from the project lead
 
 - **`dge/audio-admin.html` built (passkey `AUDIOADMIN`, own session flag,
