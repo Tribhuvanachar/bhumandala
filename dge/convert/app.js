@@ -13,6 +13,7 @@ window.DGE.App = (function () {
   const MapperMod = () => window.DGE.Mapper;
   const UrlImportMod = () => window.DGE.UrlImport;
   const LoadersMod = () => window.DGE.Loaders;
+  const SargaDetectMod = () => window.DGE.SargaDetect;
 
   const DEFAULT_CHUNK_SIZE = 8;
   const DEFAULT_OCR_BATCH_SIZE = 5;
@@ -26,6 +27,13 @@ window.DGE.App = (function () {
   let cancelRequested = false;
   let proofreadCancelRequested = false;
   let currentMappedJson = null;
+  // Set instead of currentMappedJson whenever sarga-detect.js finds this
+  // batch actually spans more than one sarga (see PENDING.md's "sarga_10"
+  // entry) -- an array of { slug, title, mappedJson, containerEl } , one
+  // per detected segment, each pushed to its own grantha path in one
+  // commit. null in the normal single-grantha case (the vast majority of
+  // runs), which keeps that path byte-for-byte unchanged.
+  let currentSchemaSegments = null;
   let libraryCatalog = null; // fetched once, cached for the session
   let lastProofreadMissingPages = []; // pages in the current selection with no proofread text — checked before schema build
   let wakeLock = null;
@@ -317,6 +325,7 @@ window.DGE.App = (function () {
     ocrPages = [];
     finalJson = null;
     currentMappedJson = null; // schema range shown in the status bar must reset too
+    currentSchemaSegments = null;
     resetStartingNumberDetection();
     lastProofreadMissingPages = [];
     $('previewArea').innerHTML = '';
@@ -1014,7 +1023,9 @@ window.DGE.App = (function () {
         if (done < saved.totalChunks) proofreadText += ` — ${saved.totalChunks - done} pending`;
       }
     } catch (e) { /* ignore */ }
-    if (currentMappedJson && currentMappedJson.shlokas && Object.keys(currentMappedJson.shlokas).length) {
+    if (currentSchemaSegments && currentSchemaSegments.length) {
+      proofreadText += ` — schema built: split into ${currentSchemaSegments.length} sarga(s) (${currentSchemaSegments.map(s => s.slug.split('/').pop()).join(', ')})`;
+    } else if (currentMappedJson && currentMappedJson.shlokas && Object.keys(currentMappedJson.shlokas).length) {
       // Prefer the actually-built schema's keys once one exists -- these
       // reflect any "Starting shloka/unit number" offset applied at build
       // time, unlike finalJson's raw 1-based merge index below.
@@ -1030,6 +1041,53 @@ window.DGE.App = (function () {
 
     const slug = getTargetSlug();
     $('fileStatusTarget').textContent = slug || '(not chosen yet)';
+  }
+
+  // The trailing "sarga_<N>" (or similar "<word>_<N>") segment of the
+  // chosen target slug, if any -- used as sarga-detect.js's weak starting
+  // guess for whatever comes before its first detected anchor. Returns
+  // null when the slug doesn't end in a number (nothing to guess from,
+  // which is fine -- detectSegments() degrades safely to unconfident
+  // ranges rather than a wrong guess).
+  function parseFallbackSargaNumber(slug) {
+    const m = String(slug || '').match(/(\d+)$/);
+    return m ? parseInt(m[1], 10) : null;
+  }
+
+  // Machine-safe label used in file/slug paths -- reuses sarga-detect.js's
+  // own vocabulary verbatim ("15", "12_to_14", "10_onward"...) so the slug
+  // and the detection evidence never drift out of sync.
+  function segmentSlugLabel(segment) {
+    return segment.confident ? String(segment.sargaNumber) : (segment.rangeLabel || 'unknown');
+  }
+
+  // Human-readable version of the same label, for the grantha title only
+  // ("12–14" instead of "12_to_14").
+  function formatSegmentLabel(segment) {
+    if (segment.confident) return String(segment.sargaNumber);
+    const rl = segment.rangeLabel || 'unknown';
+    const toMatch = rl.match(/^(\d+)_to_(\d+)$/);
+    if (toMatch) return `${toMatch[1]}–${toMatch[2]}`;
+    const onwardMatch = rl.match(/^(\d+)_onward$/);
+    if (onwardMatch) return `${onwardMatch[1]}+`;
+    const throughMatch = rl.match(/^through_(\d+)$/);
+    if (throughMatch) return `through ${throughMatch[1]}`;
+    return rl;
+  }
+
+  function deriveSegmentSlug(baseSlug, segment) {
+    const label = segmentSlugLabel(segment);
+    const m = String(baseSlug || '').match(/^(.*[_/-])\d+$/);
+    if (m) return m[1] + label;
+    return String(baseSlug || '').replace(/\/+$/, '') + '_sarga_' + label;
+  }
+
+  function deriveSegmentTitle(baseTitle, segment) {
+    // Strips any single trailing "सर्गः <token>" the base title might
+    // already carry (e.g. if it was typed for one specific sarga) before
+    // appending the segment's own -- avoids stacking "सर्गः 10 सर्गः 15".
+    const cleaned = String(baseTitle || '').replace(/\s*सर्गः?\s*[\d–_a-zA-Z+]*\s*$/, '').trim();
+    return `${cleaned || baseTitle} सर्गः ${formatSegmentLabel(segment)}`;
   }
 
   function buildSchemaPreview() {
@@ -1086,27 +1144,110 @@ window.DGE.App = (function () {
       ? { shlokas: finalJson.shlokas.map(s => Object.assign({}, s, { index: (s.index != null ? s.index : s.number) + startingOffset })) }
       : finalJson;
 
-    currentMappedJson = MapperMod().buildGranthaJson(numberedJson, profile);
-    RendererMod().renderSchemaMapEditable(currentMappedJson, $('schemaPreviewArea'));
-    log(`Schema preview built for "${slug}" — ${Object.keys(currentMappedJson.shlokas).length} shloka(s). Review and edit below before pushing.`);
+    const schemaArea = $('schemaPreviewArea');
+    const segments = SargaDetectMod()
+      ? SargaDetectMod().detectSegments(numberedJson.shlokas, parseFallbackSargaNumber(slug))
+      : [];
+
+    if (segments.length <= 1) {
+      // The overwhelming common case (no boundary markers found, or the
+      // whole batch cleanly matches a single sarga) -- unchanged from
+      // before this feature existed.
+      currentSchemaSegments = null;
+      currentMappedJson = MapperMod().buildGranthaJson(numberedJson, profile);
+      RendererMod().renderSchemaMapEditable(currentMappedJson, schemaArea);
+      log(`Schema preview built for "${slug}" — ${Object.keys(currentMappedJson.shlokas).length} shloka(s). Review and edit below before pushing.`);
+    } else {
+      // This batch actually spans multiple sargas -- per the admin's own
+      // choice, split silently (no blocking confirm screen) into one file
+      // per detected segment, rather than repeating the sarga_10 mistake
+      // of concatenating them all under one number.
+      currentMappedJson = null;
+      currentSchemaSegments = segments.map(seg => {
+        const segShlokas = numberedJson.shlokas.slice(seg.startIdx, seg.endIdx + 1);
+        const segSlug = deriveSegmentSlug(slug, seg);
+        const segProfile = Object.assign({}, profile, {
+          slug: segSlug,
+          title: deriveSegmentTitle(profile.title, seg)
+        });
+        return {
+          slug: segSlug,
+          title: segProfile.title,
+          segment: seg,
+          mappedJson: MapperMod().buildGranthaJson({ shlokas: segShlokas }, segProfile)
+        };
+      });
+
+      schemaArea.innerHTML = '';
+      const banner = document.createElement('div');
+      banner.className = 'hint';
+      banner.style.cssText = 'background:#fff3cd; border:1px solid #e0c36c; padding:8px; margin-bottom:10px; border-radius:4px;';
+      banner.textContent = `⚠ This batch spans ${currentSchemaSegments.length} sarga(s), not 1 — auto-split into ${currentSchemaSegments.length} files below (detected from "अथ ... सर्गः" / "इति ... सर्गः" markers in the text). Each block is independently editable; Push sends all of them together in one commit.`;
+      schemaArea.appendChild(banner);
+
+      currentSchemaSegments.forEach(seg => {
+        const wrap = document.createElement('div');
+        wrap.className = 'schema-segment-block';
+        wrap.style.cssText = 'border:1px solid #ccc; border-radius:6px; padding:8px; margin-bottom:14px;';
+        const heading = document.createElement('div');
+        heading.style.marginBottom = '6px';
+        heading.innerHTML = `<strong>${escapeHtml(seg.title)}</strong> <span class="hint">— ${escapeHtml(seg.slug)}` +
+          (seg.segment.confident ? '' : ' (⚠ unconfirmed range — markers don\'t confirm both ends, double-check before trusting this split)') +
+          `</span>`;
+        wrap.appendChild(heading);
+        const inner = document.createElement('div');
+        wrap.appendChild(inner);
+        seg.containerEl = inner;
+        RendererMod().renderSchemaMapEditable(seg.mappedJson, inner);
+        schemaArea.appendChild(wrap);
+      });
+
+      const summary = currentSchemaSegments.map(s => {
+        const n = Object.keys(s.mappedJson.shlokas).length;
+        return `${s.slug} (${n} shloka${n === 1 ? '' : 's'}${s.segment.confident ? '' : ', unconfirmed'})`;
+      }).join(', ');
+      log(`Detected ${currentSchemaSegments.length} sarga(s) in this batch, not 1 — auto-split into: ${summary}. Review each block below, then Push once (single commit for all of them).`);
+    }
     renderFileStatusBar();
   }
 
   async function pushToGithub() {
     clearError();
-    if (!currentMappedJson) return setError('Build the schema preview first.');
+    const isMulti = !!(currentSchemaSegments && currentSchemaSegments.length);
+    if (!isMulti && !currentMappedJson) return setError('Build the schema preview first.');
+    if (isMulti && !currentSchemaSegments.every(s => s.containerEl)) return setError('Build the schema preview first.');
     const slug = getTargetSlug();
     if (!slug) return setError('Choose or type a target grantha path first.');
     if (!GitHubMod().getToken()) return setError('Paste your GitHub token above first.');
 
     const commentaryKey = $('commentaryKeyInput').value.trim();
-    const editedShlokas = RendererMod().collectEditedShlokas($('schemaPreviewArea'), commentaryKey);
 
-    const granthaJson = {
-      metadata: Object.assign({}, currentMappedJson.metadata, { totalShlokas: Object.keys(editedShlokas).length }),
-      shlokas: editedShlokas
-    };
-    const granthaPath = `dge/data/${slug}/data.json`;
+    // items: [{ path, granthaJson, slug }] -- one per grantha file being
+    // written this push (just one in the common case, several when
+    // sarga-detect.js split this batch).
+    const items = isMulti
+      ? currentSchemaSegments.map(seg => {
+          const editedShlokas = RendererMod().collectEditedShlokas(seg.containerEl, commentaryKey);
+          return {
+            slug: seg.slug,
+            path: `dge/data/${seg.slug}/data.json`,
+            granthaJson: {
+              metadata: Object.assign({}, seg.mappedJson.metadata, { totalShlokas: Object.keys(editedShlokas).length }),
+              shlokas: editedShlokas
+            }
+          };
+        })
+      : [(() => {
+          const editedShlokas = RendererMod().collectEditedShlokas($('schemaPreviewArea'), commentaryKey);
+          return {
+            slug,
+            path: `dge/data/${slug}/data.json`,
+            granthaJson: {
+              metadata: Object.assign({}, currentMappedJson.metadata, { totalShlokas: Object.keys(editedShlokas).length }),
+              shlokas: editedShlokas
+            }
+          };
+        })()];
 
     $('pushStatusText').textContent = 'Checking library catalog…';
     $('pushToGithubBtn').disabled = true;
@@ -1116,34 +1257,47 @@ window.DGE.App = (function () {
       // whatever was cached at page load, in case it changed meanwhile.
       const libText = await GitHubMod().getFileText('dge/data/library.json');
       const lib = JSON.parse(libText);
-      const catalogPath = `dge/${granthaPath.replace(/^dge\//, '')}`;
-      let entry = lib.granthas.find(g => g.path === catalogPath);
 
-      if (entry && entry.populated) {
-        const proceed = confirm(`"${slug}" already has content on GitHub. Push anyway and overwrite it?`);
+      const alreadyPopulated = [];
+      items.forEach(item => {
+        const catalogPath = `dge/${item.path.replace(/^dge\//, '')}`;
+        const entry = lib.granthas.find(g => g.path === catalogPath);
+        if (entry && entry.populated) alreadyPopulated.push(item.slug);
+        if (entry) {
+          entry.title = item.granthaJson.metadata.title;
+          entry.populated = true;
+        } else {
+          lib.granthas.push({ path: catalogPath, title: item.granthaJson.metadata.title, populated: true });
+        }
+      });
+
+      if (alreadyPopulated.length) {
+        const proceed = confirm(
+          (alreadyPopulated.length === 1
+            ? `"${alreadyPopulated[0]}" already has content on GitHub.`
+            : `${alreadyPopulated.length} of these already have content on GitHub: ${alreadyPopulated.join(', ')}.`) +
+          ` Push anyway and overwrite it${alreadyPopulated.length === 1 ? '' : ' them'}?`
+        );
         if (!proceed) { $('pushStatusText').textContent = 'Cancelled.'; return; }
       }
 
-      if (entry) {
-        entry.title = granthaJson.metadata.title;
-        entry.populated = true;
-      } else {
-        lib.granthas.push({ path: catalogPath, title: granthaJson.metadata.title, populated: true });
-      }
-
       $('pushStatusText').textContent = 'Pushing to GitHub…';
-      const result = await GitHubMod().commitFiles(
-        [
-          { path: granthaPath, text: JSON.stringify(granthaJson, null, 2) },
-          { path: 'dge/data/library.json', text: JSON.stringify(lib, null, 2) }
-        ],
-        `Add/update grantha "${slug}" via Convert — ${Object.keys(editedShlokas).length} shloka(s)`
-      );
+      const files = items.map(item => ({ path: item.path, text: JSON.stringify(item.granthaJson, null, 2) }));
+      files.push({ path: 'dge/data/library.json', text: JSON.stringify(lib, null, 2) });
+
+      const totalShlokas = items.reduce((sum, item) => sum + Object.keys(item.granthaJson.shlokas).length, 0);
+      const commitMessage = isMulti
+        ? `Add/update ${items.length} grantha(s) via Convert (auto-split from "${slug}") — ${items.map(i => i.slug.split('/').pop()).join(', ')}, ${totalShlokas} shloka(s) total`
+        : `Add/update grantha "${slug}" via Convert — ${totalShlokas} shloka(s)`;
+
+      const result = await GitHubMod().commitFiles(files, commitMessage);
 
       if (result.uploaded === 0) {
         $('pushStatusText').textContent = 'Nothing to push — content already matched what\'s on GitHub.';
+      } else if (isMulti) {
+        $('pushStatusText').textContent = `Pushed — ${result.uploaded} file(s) committed (${items.length} grantha(s): ${items.map(i => i.slug).join(', ')} + library.json catalog entries). GitHub Pages can take a minute or two to redeploy — if the main app's Library doesn't show it yet, that's why; just wait a bit and reopen it.`;
       } else {
-        $('pushStatusText').textContent = `Pushed — ${result.uploaded} file(s) committed (${granthaPath} + library.json catalog entry). GitHub Pages can take a minute or two to redeploy — if the main app's Library doesn't show it yet, that's why; just wait a bit and reopen it (the app itself doesn't cache this, so it's not something to fix on your end).`;
+        $('pushStatusText').textContent = `Pushed — ${result.uploaded} file(s) committed (${items[0].path} + library.json catalog entry). GitHub Pages can take a minute or two to redeploy — if the main app's Library doesn't show it yet, that's why; just wait a bit and reopen it (the app itself doesn't cache this, so it's not something to fix on your end).`;
       }
       log($('pushStatusText').textContent);
       renderFileStatusBar();
@@ -1179,6 +1333,7 @@ window.DGE.App = (function () {
     ocrPages = [];
     finalJson = null;
     currentMappedJson = null; // schema range shown in the status bar must reset too
+    currentSchemaSegments = null;
     resetStartingNumberDetection();
     lastProofreadMissingPages = [];
     $('previewArea').innerHTML = '';
@@ -1249,6 +1404,7 @@ window.DGE.App = (function () {
       ocrPages = UrlImportMod().splitIntoPages(text);
       finalJson = null;
       currentMappedJson = null; // schema range shown in the status bar must reset too
+    currentSchemaSegments = null;
       resetStartingNumberDetection();
       lastProofreadMissingPages = [];
       $('previewArea').innerHTML = '';
@@ -1761,6 +1917,7 @@ window.DGE.App = (function () {
       await IDB().del(proofreadDataKey());
       finalJson = null;
       currentMappedJson = null; // schema range shown in the status bar must reset too
+    currentSchemaSegments = null;
       resetStartingNumberDetection();
       lastProofreadMissingPages = [];
       $('proofreadResumeNote').textContent = '';
