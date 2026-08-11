@@ -90,10 +90,10 @@
 (function(){
   var PASSKEY="SHRI108";
   var $=function(s){return document.querySelector(s);};
-  if(sessionStorage.getItem("dge.admin.ok")==="1") start();
+  if(sessionStorage.getItem("dge.admin.ok")==="1" || localStorage.getItem("is_superadmin")==="true") start();
   else {
     $("#gate").style.display="flex";
-    var tryK=function(){ if($("#gk").value.trim()===PASSKEY){ sessionStorage.setItem("dge.admin.ok","1"); location.reload(); } else { $("#gk").value=""; $("#gk").placeholder="wrong — try again"; } };
+    var tryK=function(){ if($("#gk").value.trim().toUpperCase()===PASSKEY){ sessionStorage.setItem("dge.admin.ok","1"); location.reload(); } else { $("#gk").value=""; $("#gk").placeholder="wrong — try again"; } };
     $("#gbtn").onclick=tryK; $("#gk").addEventListener("keydown",function(e){ if(e.key==="Enter") tryK(); }); $("#gk").focus();
   }
 
@@ -110,7 +110,7 @@
   var PENDING=[{t:"⚙ प्रक्रिया (derivation engine)", note:"planned — external Vidyut/Vidyullekha engine, not a text layer"}];
 
   function start(){
-    if(sessionStorage.getItem("dge.admin.ok")!=="1") return;
+    if(sessionStorage.getItem("dge.admin.ok")!=="1" && localStorage.getItem("is_superadmin")!=="true") return;
     $("#gate").style.display="none"; $("#hdr").style.display=""; $("#app").style.display="";
     if(localStorage.getItem("dge.ashadmin.dark")==="1") document.body.classList.add("dark");
     $("#theme").onclick=function(){ document.body.classList.toggle("dark"); localStorage.setItem("dge.ashadmin.dark", document.body.classList.contains("dark")?"1":"0"); };
