@@ -598,6 +598,15 @@ window.DGE.App = (function () {
         $('targetSlugCustom').focus();
       });
     }
+    const targetTreeToggleEl = $('targetTreeToggleBtn');
+    if (targetTreeToggleEl) {
+      targetTreeToggleEl.addEventListener('click', () => {
+        const el = $('targetTreeBrowser');
+        const opening = el.style.display === 'none';
+        el.style.display = opening ? 'block' : 'none';
+        if (opening) { currentTreePath = []; renderTreeBrowser(); }
+      });
+    }
     loadLibraryCatalog();
 
     $('openReviewBtn').addEventListener('click', () => {
@@ -630,15 +639,135 @@ window.DGE.App = (function () {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       libraryCatalog = await res.json();
       const granthas = (libraryCatalog && libraryCatalog.granthas) || [];
-      targetSlugEntries = granthas.filter(g => !g.populated).map(g => ({
+      const allEntries = granthas.map(g => ({
         slug: g.path.replace(/^dge\//, '').replace(/^data\//, '').replace(/\/data\.json$/, ''),
-        title: g.title || ''
+        title: g.title || '',
+        populated: !!g.populated
       }));
+      targetSlugEntries = allEntries.filter(e => !e.populated);
+      catalogTreeRoot = buildCatalogTree(allEntries);
       if (searchEl) searchEl.placeholder = `Type to search ${targetSlugEntries.length} unpopulated grantha(s) — e.g. "yajurveda" or "grihyasutra"…`;
     } catch (e) {
       log('Could not load the library catalog: ' + U().formatError(e) + ' — you can still type a path manually.');
       targetSlugEntries = [];
+      catalogTreeRoot = { children: {} };
       if (searchEl) searchEl.placeholder = 'Catalog failed to load — use "Use a path not in the catalog" below.';
+    }
+  }
+
+  // ---------------------------------------------------------------
+  // Folder browser for the target grantha path -- lets an admin adding a
+  // new part of a multi-part work (a sarga, skandha, kanda...) SEE the
+  // real existing siblings at that exact level instead of free-typing a
+  // full path from memory and risking a typo/inconsistent name (e.g.
+  // "Kavya/Foo" vs the corpus's "kavya/foo_bar/sarga_01" convention).
+  // Includes BOTH populated and unpopulated entries, unlike the search
+  // box above (which only searches not-yet-populated ones) -- an already-
+  // populated sibling like an existing sarga_01 is exactly what needs to
+  // be visible here.
+  // ---------------------------------------------------------------
+  let catalogTreeRoot = { children: {} };
+  let currentTreePath = [];
+
+  function buildCatalogTree(allEntries) {
+    const root = { children: {} };
+    allEntries.forEach(entry => {
+      const parts = entry.slug.split('/').filter(Boolean);
+      let node = root;
+      parts.forEach((part, i) => {
+        node.children[part] = node.children[part] || { children: {} };
+        node = node.children[part];
+        if (i === parts.length - 1) node.leaf = entry; // this segment IS a real grantha path
+      });
+    });
+    return root;
+  }
+
+  function treeNodeAt(path) {
+    let node = catalogTreeRoot;
+    for (const seg of path) {
+      if (!node || !node.children || !node.children[seg]) return null;
+      node = node.children[seg];
+    }
+    return node;
+  }
+
+  function sanitizeSegment(raw) {
+    return String(raw || '').trim().toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_-]/g, '');
+  }
+
+  function renderTreeBrowser() {
+    const breadcrumbEl = $('targetTreeBreadcrumb');
+    const listEl = $('targetTreeList');
+    if (!breadcrumbEl || !listEl) return;
+
+    const crumbs = ['<span class="target-tree-crumb" data-depth="0">⌂ Top</span>'];
+    currentTreePath.forEach((seg, i) => {
+      crumbs.push('<span class="target-tree-crumb-sep">›</span>');
+      crumbs.push(`<span class="target-tree-crumb" data-depth="${i + 1}">${escapeHtml(seg)}</span>`);
+    });
+    breadcrumbEl.innerHTML = crumbs.join('');
+    breadcrumbEl.querySelectorAll('.target-tree-crumb').forEach(el => {
+      el.addEventListener('click', () => {
+        currentTreePath = currentTreePath.slice(0, parseInt(el.dataset.depth, 10));
+        renderTreeBrowser();
+      });
+    });
+
+    const node = treeNodeAt(currentTreePath) || { children: {} };
+    const childNames = Object.keys(node.children || {}).sort();
+    let rowsHtml = '';
+    childNames.forEach(name => {
+      const child = node.children[name];
+      const childCount = Object.keys(child.children || {}).length;
+      if (childCount > 0) {
+        // Folder -- has further children beneath it (may ALSO itself be a
+        // leaf grantha in rare cases; drilling in still shows everything).
+        rowsHtml += `<div class="target-tree-row" data-action="drill" data-name="${escapeHtml(name)}">📁 ${escapeHtml(name)}` +
+          `<span class="target-tree-row-count">${childCount} item(s)</span></div>`;
+      } else if (child.leaf) {
+        // Leaf -- an actual grantha at this exact path.
+        const badge = child.leaf.populated
+          ? '<span class="target-tree-row-badge populated">populated</span>'
+          : '<span class="target-tree-row-badge empty">empty</span>';
+        const title = child.leaf.title ? ` — ${escapeHtml(child.leaf.title)}` : '';
+        rowsHtml += `<div class="target-tree-row" data-action="pick" data-name="${escapeHtml(name)}">📄 ${escapeHtml(name)}${title}${badge}</div>`;
+      } else {
+        // Neither -- shouldn't happen (every leaf node in the tree came
+        // from a real path segment), but fall back to a plain folder row
+        // rather than silently dropping it.
+        rowsHtml += `<div class="target-tree-row" data-action="drill" data-name="${escapeHtml(name)}">📁 ${escapeHtml(name)}</div>`;
+      }
+    });
+    const siblingHint = childNames.length
+      ? `Existing here: ${childNames.slice(0, 8).join(', ')}${childNames.length > 8 ? ', …' : ''}`
+      : 'Nothing here yet — this will be a brand new top-level folder.';
+    rowsHtml += `<div class="target-tree-add-row">` +
+      `<div class="hint">＋ Add new here. ${escapeHtml(siblingHint)}</div>` +
+      `<input type="text" id="targetTreeNewSegment" placeholder="e.g. sarga_02">` +
+      `<button type="button" id="targetTreeNewSegmentBtn">Use this</button></div>`;
+    listEl.innerHTML = rowsHtml;
+
+    listEl.querySelectorAll('.target-tree-row[data-action="drill"]').forEach(row => {
+      row.addEventListener('click', () => { currentTreePath = currentTreePath.concat(row.dataset.name); renderTreeBrowser(); });
+    });
+    listEl.querySelectorAll('.target-tree-row[data-action="pick"]').forEach(row => {
+      row.addEventListener('click', () => {
+        pickTargetSlug(currentTreePath.concat(row.dataset.name).join('/'));
+        $('targetTreeBrowser').style.display = 'none';
+      });
+    });
+    const addBtn = $('targetTreeNewSegmentBtn');
+    const addInput = $('targetTreeNewSegment');
+    if (addBtn && addInput) {
+      const commit = () => {
+        const seg = sanitizeSegment(addInput.value);
+        if (!seg) return;
+        pickTargetSlug(currentTreePath.concat(seg).join('/'));
+        $('targetTreeBrowser').style.display = 'none';
+      };
+      addBtn.addEventListener('click', commit);
+      addInput.addEventListener('keydown', e => { if (e.key === 'Enter') commit(); });
     }
   }
 

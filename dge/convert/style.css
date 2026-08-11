@@ -73,3 +73,24 @@ select { width: 100%; box-sizing: border-box; padding: 8px; font-size: 14px; mar
 .output-modal-controls button { padding: 4px 8px; font-size: 12px; margin: 0; }
 .output-modal-body { flex: 1; overflow-y: auto; padding: 10px 14px; min-height: 0; }
 .output-modal-body #previewArea { max-height: none; }
+
+/* Folder browser for picking/creating a target grantha path -- shows the
+   REAL existing sibling names at each level (e.g. sarga_01) so a new part
+   of a multi-sarga work lands as a consistent sibling instead of a
+   guessed, possibly-inconsistent free-typed path. */
+.target-tree-browser { border: 1px solid #ccc; border-radius: 4px; margin: 6px 0 10px; background: #fafafa; }
+.target-tree-breadcrumb { padding: 8px 10px; border-bottom: 1px solid #ddd; font-size: 13px; background: #f0f0f0; }
+.target-tree-crumb { cursor: pointer; color: #1a5fb4; }
+.target-tree-crumb:hover { text-decoration: underline; }
+.target-tree-crumb-sep { color: #999; margin: 0 4px; }
+.target-tree-list { max-height: 280px; overflow-y: auto; }
+.target-tree-row { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 1px solid #eee; cursor: pointer; font-size: 13px; }
+.target-tree-row:last-child { border-bottom: none; }
+.target-tree-row:hover { background: #f0f4ff; }
+.target-tree-row-count { color: #888; font-size: 11px; margin-left: auto; }
+.target-tree-row-badge { font-size: 10px; padding: 1px 6px; border-radius: 999px; margin-left: auto; }
+.target-tree-row-badge.populated { background: #e6f4ea; color: #1e7a34; }
+.target-tree-row-badge.empty { background: #fff4dc; color: #a06a00; }
+.target-tree-add-row { padding: 8px 10px; border-top: 1px dashed #ccc; }
+.target-tree-add-row input { width: 100%; box-sizing: border-box; padding: 6px; font-size: 13px; margin: 4px 0; }
+.target-tree-add-row .hint { margin: 2px 0 6px; }

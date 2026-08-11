@@ -159,6 +159,48 @@ complete record, not just a live queue.
   it covered, per the "check what's being extracted and how it's being
   converted" request, rather than just asserting it's fine.
 
+- **Convert tool: added a folder browser for picking the push target
+  path** (step 5, "📁 Browse existing folders…"), triggered by a real
+  question: adding Sarga 1 of a new 10-sarga mahakavya (Raghavendra
+  Vijaya), what should Sarga 2's path be? Investigated the real catalog
+  before answering rather than guessing: `dge/data/library.json` already
+  has 4 real mahakavyas at `kavya/<name>/mula/data.json`, and (separately)
+  large multi-part works like Bhagavata Purana use one catalog entry per
+  part (`puranas/bhagavata_purana/skandha_01`, `skandha_02`, …) — the
+  second pattern is what actually works with Convert's current schema
+  (flat, one grantha per push, each able to carry its own commentary
+  layer later) without any code change, so the answer given was
+  `kavya/raghavendra_vijaya/sarga_01`, `sarga_02`, etc., not the
+  capitalized, un-suffixed `Kavya/RaghavendraVijaya` about to be typed in
+  the screenshot. Also traced `github.js`'s actual push behavior and
+  confirmed a real risk this surfaced: pushing to the SAME slug a second
+  time is a straight overwrite (skipped only if byte-identical), not a
+  merge — so re-using Sarga 1's exact slug for Sarga 2 would have
+  silently destroyed Sarga 1's content, with only a generic "already has
+  content, overwrite?" confirm as the safety net, no explanation of what
+  "overwrite" actually means here. The folder browser directly addresses
+  this: it shows the REAL existing siblings at whatever level you're
+  adding to (built from every catalog entry, populated and unpopulated
+  alike — the existing search box only searches unpopulated ones, so it
+  can't show an already-populated sibling like an existing sarga_01 at
+  all), with an "Add new here" field that only ever needs ONE new segment
+  typed (auto-sanitized to lowercase/underscore, matching the corpus
+  convention automatically) rather than a whole path retyped from memory
+  each time — structurally preventing the exact mistake above rather than
+  relying on remembering it. Verified against the real live catalog in a
+  real browser: correct top-level folders and counts, drilling into
+  `kavya/` shows the 4 real mahakavyas with correct populated/title
+  badges, and adding a deliberately messy "Raghavendra Vijaya" at that
+  level correctly sanitizes to `kavya/raghavendra_vijaya`.
+  **Separately flagged, not yet decided:** the `itihasa_purana_text`
+  schema (one data.json per whole work, sargas nested as `items[]`) that
+  those 4 existing mahakavyas actually use has NO commentary support at
+  all in `core.js`'s normalization (`commentaries: {}` hardcoded empty) —
+  fine for a mula-only text, but would need a real code change if
+  Raghavendra Vijaya's vṛtti/commentary is meant to be readable per-sarga
+  rather than mula-only. Not resolved; flagging so it isn't silently lost
+  if a commentary shows up on a future page's OCR run.
+
 - **Fixed a real gap: `audio-admin.html` was never linked from the main
   ADMIN dropdown** — built and shipped earlier in the session, but the
   link to it in `index.html` was missed, so a superadmin had no way to
