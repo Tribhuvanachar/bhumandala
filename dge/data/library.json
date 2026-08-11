@@ -2840,6 +2840,11 @@
       "path": "dge/data/kavya/sumadhva_vijaya/sarga_9/data.json",
       "title": "Sumadhva Vijaya सर्गः 9",
       "populated": true
+    },
+    {
+      "path": "dge/data/kavya/sumadhva_vijaya/sarga_10/data.json",
+      "title": "Sumadhva Vijaya",
+      "populated": true
     }
   ]
 }
