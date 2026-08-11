@@ -53,7 +53,30 @@ complete record, not just a live queue.
   doesn't exist yet** — repo creation is blocked by the same GitHub App
   permission restriction hit earlier for `bhumandala-kosha-data`
   (`403 Resource not accessible by integration`); the project lead needs to
-  create it manually (empty repo is fine, the page only uses the Contents API).
+  create it manually (empty repo is fine).
+  **Follow-up round, answering "where does the audio go / can I download it /
+  why does GitHub reject files over 25MB":** (1) added a destination-folder
+  default, auto-filled from the uploaded filename (slugified) the first time
+  a file is picked, still freely editable — GitHub has no separate
+  "create folder" step, any new path just gets created on push; (2) added
+  Download for every clip (per-row ⬇), plus "Download all (.zip)" (a small
+  hand-rolled store-only ZIP writer, no external library) and
+  "Download JSON only" — all work with no GitHub token/repo involved, so
+  they're also the fallback when a file is too big to push; (3) switched the
+  GitHub push from the Contents API (one small base64 PUT per file — this
+  is what was hitting the 25MB-ish ceiling) to the Git Data API
+  (blob → tree → commit → ref, all files in one atomic commit), which
+  reliably handles files close to GitHub's real ~100MB per-file limit and
+  isn't affected by the website's drag-and-drop uploader's separate 25MB
+  cap at all. Verified: the whole blob/tree/commit/ref sequence (including
+  the empty-repo bootstrap path, since `bhumandala-audio-data` doesn't
+  exist yet) against a local mock of the GitHub API — correct call
+  sequence, correct fallback to creating the ref when none exists yet.
+  **Still an open question, not yet built:** Google Drive as a storage
+  target was asked about — a static page can't act as a bridge to the
+  project lead's personal Drive without a Google Cloud OAuth client set up
+  on their end first (one-time task only they can do); not built until
+  they decide if that's worth it over Download + manual placement.
 
 - **`Gita_Studio_Colab.ipynb` uploaded — a genuinely new tool, nothing to
   reconcile against.** Checked: no prior notebook, script, or doc anywhere
