@@ -15,18 +15,29 @@
     window.location.replace('../index.html');
   }
 </script>
-<title>DGE Convert v0.21.0</title>
-<link rel="stylesheet" href="style.css?v=0.21.0">
+<title>DGE Convert v0.22.0</title>
+<link rel="stylesheet" href="style.css?v=0.22.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
 <div><a href="../index.html">🏠 Back to DGE main page</a></div>
-<div>Version: <b id="versionDisplay">0.21.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.22.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF or page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
 
+<div class="tab-bar" id="tabBar">
+  <button type="button" class="tab-btn" data-tab="setup">⚙️ Setup</button>
+  <button type="button" class="tab-btn" data-tab="upload">1. Upload</button>
+  <button type="button" class="tab-btn" data-tab="ocr">2. OCR</button>
+  <button type="button" class="tab-btn" data-tab="proofread">3. Proofread</button>
+  <button type="button" class="tab-btn" data-tab="review">4. Review</button>
+  <button type="button" class="tab-btn" data-tab="push">5. Push</button>
+  <button type="button" class="tab-btn" data-tab="log">📋 Log</button>
+</div>
+
+<div class="tab-panel" data-tab="setup">
 <fieldset>
   <legend>API Keys</legend>
   <label for="visionKey">Vision API Key</label>
@@ -48,7 +59,10 @@
   <p class="hint">A small pause between each Proofread chunk, even when nothing failed — most "quota exceeded" (HTTP 429) errors on a fresh key are a per-minute request-burst limit, not your prepaid balance running out, so spacing requests out avoids tripping it in the first place. Default 3s; raise it if you keep seeing 429s anyway.</p>
   <p class="hint">Stored only in this browser's local storage.</p>
 </fieldset>
+<div class="tab-nav"><span class="tab-nav-spacer"></span><button type="button" class="tab-next-btn" data-next="upload">Next: Upload →</button></div>
+</div>
 
+<div class="tab-panel" data-tab="upload">
 <fieldset>
   <legend>1. Upload PDF, Page Images, or Import from URL</legend>
   <div id="knownFilesHint" class="hint" style="display:none;"></div>
@@ -63,6 +77,25 @@
   <p class="hint">Already-digital text — no OCR needed. Fetches the raw page text and prepares it for Proofread directly.</p>
 </fieldset>
 
+<fieldset>
+  <legend>Danger zone</legend>
+  <div id="dangerZoneFileLabel" class="hint">No file loaded — nothing to clear.</div>
+  <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin:6px 0;">
+    <input type="checkbox" id="clearOcrDataCk" style="width:auto; margin:0;" checked> OCR text (Vision and/or Tesseract results for this file)
+  </label>
+  <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin:6px 0;">
+    <input type="checkbox" id="clearProofreadDataCk" style="width:auto; margin:0;" checked> Proofread (Gemini) results for this file
+  </label>
+  <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin:6px 0;">
+    <input type="checkbox" id="clearOptionsDefaultsCk" style="width:auto; margin:0;"> Reset the options above (chunk size, max output tokens, request delay, language hints, model, engine) to their defaults
+  </label>
+  <button id="clearProgressBtn">Clear the checked item(s) above</button>
+  <p class="hint">Only affects what's checked, only for the file named above — nothing else, no other file's saved progress. Use this if you've replaced the PDF with a corrected version under the same name, or just want to redo one stage.</p>
+</fieldset>
+<div class="tab-nav"><button type="button" class="tab-back-btn" data-back="setup">← Back: Setup</button><span class="tab-nav-spacer"></span><button type="button" class="tab-next-btn" data-next="ocr">Next: OCR →</button></div>
+</div>
+
+<div class="tab-panel" data-tab="ocr">
 <fieldset>
   <legend>2. Run OCR</legend>
   <label for="pageSelectionInput">Pages to process (optional, super admin only tool)</label>
@@ -92,7 +125,10 @@
   </label>
   <p class="hint">Vision groups text into layout blocks and can print a whole page's worth of margin verse-numbers (॥१॥ ॥२॥ …) together at the end instead of after each verse, when they sit in their own visual column. This re-sorts the same words by on-page row position instead of trusting Vision's block order — try it if your output looks like that. Off by default (Vision's own order is usually right for plain running text).</p>
 </fieldset>
+<div class="tab-nav"><button type="button" class="tab-back-btn" data-back="upload">← Back: Upload</button><span class="tab-nav-spacer"></span><button type="button" class="tab-next-btn" data-next="proofread">Next: Proofread →</button></div>
+</div>
 
+<div class="tab-panel" data-tab="proofread">
 <fieldset>
   <legend>3. Proofread</legend>
   <label for="proofreadContextInput">Context anchor (optional)</label>
@@ -113,7 +149,10 @@
   <button type="button" id="viewProofreadOutputBtn">👁 View Proofread Output</button>
   <button id="downloadFinalBtn">Download final.json</button>
 </fieldset>
+<div class="tab-nav"><button type="button" class="tab-back-btn" data-back="ocr">← Back: OCR</button><span class="tab-nav-spacer"></span><button type="button" class="tab-next-btn" data-next="review">Next: Review →</button></div>
+</div>
 
+<div class="tab-panel" data-tab="review">
 <fieldset>
   <legend>4. Review Flagged Units</legend>
   <p class="hint">Every proofread unit gets a review class from comparing OCR candidates and Gemini's own confidence — A/B need no action, C is AI-resolved (optional to check), D/E need a human look. This panel shows only what's actually worth your time, with the original page image and every candidate reading side by side.</p>
@@ -125,7 +164,10 @@
   <button id="openReviewBtn">Open Review Queue</button>
   <div id="reviewDetailArea"></div>
 </fieldset>
+<div class="tab-nav"><button type="button" class="tab-back-btn" data-back="proofread">← Back: Proofread</button><span class="tab-nav-spacer"></span><button type="button" class="tab-next-btn" data-next="push">Next: Push →</button></div>
+</div>
 
+<div class="tab-panel" data-tab="push">
 <fieldset>
   <legend>5. Schema Map &amp; Push to GitHub</legend>
   <label for="githubTokenInput">GitHub Personal Access Token</label>
@@ -163,22 +205,8 @@
   <button id="pushToGithubBtn" class="btn-primary">Push to GitHub</button>
   <div id="pushStatusText" class="progress-text"></div>
 </fieldset>
-
-<fieldset>
-  <legend>Danger zone</legend>
-  <div id="dangerZoneFileLabel" class="hint">No file loaded — nothing to clear.</div>
-  <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin:6px 0;">
-    <input type="checkbox" id="clearOcrDataCk" style="width:auto; margin:0;" checked> OCR text (Vision and/or Tesseract results for this file)
-  </label>
-  <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin:6px 0;">
-    <input type="checkbox" id="clearProofreadDataCk" style="width:auto; margin:0;" checked> Proofread (Gemini) results for this file
-  </label>
-  <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin:6px 0;">
-    <input type="checkbox" id="clearOptionsDefaultsCk" style="width:auto; margin:0;"> Reset the options above (chunk size, max output tokens, request delay, language hints, model, engine) to their defaults
-  </label>
-  <button id="clearProgressBtn">Clear the checked item(s) above</button>
-  <p class="hint">Only affects what's checked, only for the file named above — nothing else, no other file's saved progress. Use this if you've replaced the PDF with a corrected version under the same name, or just want to redo one stage.</p>
-</fieldset>
+<div class="tab-nav"><button type="button" class="tab-back-btn" data-back="review">← Back: Review</button><span class="tab-nav-spacer"></span><button type="button" class="tab-next-btn" data-next="log">Next: Log →</button></div>
+</div>
 
 <div id="outputModal" class="output-modal">
   <div class="output-modal-header">
@@ -198,15 +226,18 @@
   </div>
 </div>
 
+<div class="tab-panel" data-tab="log">
 <fieldset>
   <legend>Log</legend>
   <button id="copyLogBtn">📋 Copy Log</button>
   <pre id="logArea"></pre>
 </fieldset>
+<div class="tab-nav"><button type="button" class="tab-back-btn" data-back="push">← Back: Push</button><span class="tab-nav-spacer"></span></div>
+</div>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.21.0';
-  window.DGE_CONVERT_BUILD = '2026-08-11e';
+  window.DGE_CONVERT_VERSION = '0.22.0';
+  window.DGE_CONVERT_BUILD = '2026-08-11f';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -221,21 +252,64 @@
      harmless to load unconditionally otherwise. Pinned exact version, same
      convention as pdf.js/Sanscript above. -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
-<script src="utils.js?v=0.21.0"></script>
-<script src="idb.js?v=0.21.0"></script>
-<script src="pdf.js?v=0.21.0"></script>
-<script src="image.js?v=0.21.0"></script>
-<script src="loaders.js?v=0.21.0"></script>
-<script src="vision.js?v=0.21.0"></script>
-<script src="tesseract-check.js?v=0.21.0"></script>
-<script src="review-classifier.js?v=0.21.0"></script>
-<script src="../js/gemini.js?v=0.21.0"></script>
-<script src="gemini.js?v=0.21.0"></script>
-<script src="github.js?v=0.21.0"></script>
-<script src="mapper.js?v=0.21.0"></script>
-<script src="urlimport.js?v=0.21.0"></script>
-<script src="renderer.js?v=0.21.0"></script>
-<script src="review-ui.js?v=0.21.0"></script>
-<script src="app.js?v=0.21.0"></script>
+<script src="utils.js?v=0.22.0"></script>
+<script src="idb.js?v=0.22.0"></script>
+<script src="pdf.js?v=0.22.0"></script>
+<script src="image.js?v=0.22.0"></script>
+<script src="loaders.js?v=0.22.0"></script>
+<script src="vision.js?v=0.22.0"></script>
+<script src="tesseract-check.js?v=0.22.0"></script>
+<script src="review-classifier.js?v=0.22.0"></script>
+<script src="../js/gemini.js?v=0.22.0"></script>
+<script src="gemini.js?v=0.22.0"></script>
+<script src="github.js?v=0.22.0"></script>
+<script src="mapper.js?v=0.22.0"></script>
+<script src="urlimport.js?v=0.22.0"></script>
+<script src="renderer.js?v=0.22.0"></script>
+<script src="review-ui.js?v=0.22.0"></script>
+<script src="app.js?v=0.22.0"></script>
+<script>
+  // Tab/wizard navigation -- purely presentational (which panel is
+  // visible), so it's kept separate from app.js's own state/logic and
+  // just shows/hides existing elements by their existing IDs. Tabs are
+  // always directly clickable; Next/Back buttons step through in order
+  // for the common linear flow.
+  (function () {
+    var TAB_ORDER = ['setup', 'upload', 'ocr', 'proofread', 'review', 'push', 'log'];
+    var LAST_TAB_KEY = 'convert_last_tab';
+
+    function showTab(id) {
+      if (TAB_ORDER.indexOf(id) === -1) return;
+      document.querySelectorAll('.tab-panel').forEach(function (el) {
+        el.classList.toggle('active', el.getAttribute('data-tab') === id);
+      });
+      document.querySelectorAll('.tab-btn').forEach(function (el) {
+        el.classList.toggle('active', el.getAttribute('data-tab') === id);
+      });
+      try { localStorage.setItem(LAST_TAB_KEY, id); } catch (e) {}
+      var bar = document.getElementById('tabBar');
+      var activeBtn = bar && bar.querySelector('.tab-btn.active');
+      if (activeBtn && activeBtn.scrollIntoView) activeBtn.scrollIntoView({ block: 'nearest', inline: 'center' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () { showTab(btn.getAttribute('data-tab')); });
+    });
+    document.querySelectorAll('.tab-next-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () { showTab(btn.getAttribute('data-next')); });
+    });
+    document.querySelectorAll('.tab-back-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () { showTab(btn.getAttribute('data-back')); });
+    });
+
+    var startTab = 'setup';
+    try {
+      var saved = localStorage.getItem(LAST_TAB_KEY);
+      if (saved && TAB_ORDER.indexOf(saved) !== -1) startTab = saved;
+    } catch (e) {}
+    showTab(startTab);
+  })();
+</script>
 </body>
 </html>

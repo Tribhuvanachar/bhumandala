@@ -117,6 +117,36 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
+- **Convert tool: revamped the whole page into a horizontal tab/wizard
+  layout (v0.22.0), replacing the single long vertical scroll through
+  every stage at once.** Seven tabs — ⚙️ Setup, 1. Upload, 2. OCR,
+  3. Proofread, 4. Review, 5. Push, 📋 Log — each showing only its own
+  small area below the tab bar; tabs are always directly clickable (jump
+  to any stage), and a "Next →" / "← Back" button pair at the bottom of
+  each panel supports the linear step-through most sessions actually
+  follow, matching the "move next next next... until the entire process
+  is complete" request. The tab bar scrolls horizontally and is sticky at
+  the top of the viewport, since 7 tabs don't all fit on a ~393px phone
+  screen (every screenshot from this project so far has been on a phone).
+  The last-opened tab is remembered (localStorage) so a reload/reopen
+  doesn't dump you back at Setup. Folded the "Danger zone" fieldset into
+  the Upload tab (it's about managing the currently-loaded file, so it
+  belongs next to Upload rather than sitting alone at the very bottom).
+  The error box stays outside all tab panels, always visible regardless
+  of which tab is open, since a background OCR/Proofread run can fail
+  while you're looking at a different tab. This was a pure layout/CSS/JS
+  change — no element IDs were touched, no business logic in
+  app.js/gemini.js/github.js/mapper.js was touched — so every existing
+  feature (model picker, folder browser, granular clear, output modal,
+  progress bars, etc.) keeps working exactly as before, just inside its
+  new tab. Verified in a real headless browser: every tab shows exactly
+  one active panel, Next/Back walks the full sequence forward and back
+  correctly, reload restores the last tab, the folder browser and
+  granular-clear features both still function correctly from inside their
+  new tabs, and no console/page errors. Screenshots taken at both 393px
+  (phone) and 1200px (desktop) confirm it looks intentional, not just
+  functional.
+
 - **Convert tool: "Reconstruct reading order" checkbox investigated against
   real output (gltAvivRti-01.pdf, page 11/12) — not the cause of anything
   wrong; a real finding went the other way.** The project lead asked
