@@ -3,9 +3,9 @@
     "title": "Sumadhva Vijaya सर्गः 9",
     "author": "Narayana Panditacharya",
     "stotraCode": "sarga_9",
-    "archiveBaseUrl": "",
-    "filePrefix": "",
-    "fileExtension": "",
+    "archiveBaseUrl": "data/kavya/sumadhva_vijaya/assets/",
+    "filePrefix": "smv9.",
+    "fileExtension": ".mp3",
     "totalShlokas": 41,
     "availableCommentaries": {}
   },
