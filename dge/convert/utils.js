@@ -115,8 +115,47 @@ window.DGE.Utils = (function () {
     return lines.join('\n').trim();
   }
 
+  // Digit-script ranges actually seen in this project's sources (matches
+  // the language hint chips in the Setup tab) -- each is a contiguous
+  // 0-9 block in Unicode, so a single offset covers the whole script.
+  const INDIC_DIGIT_BASES = [0x0966 /* devanagari */, 0x0ce6 /* kannada */, 0x0c66 /* telugu */,
+    0x0be6 /* tamil */, 0x0d66 /* malayalam */, 0x09e6 /* bengali */];
+  function digitCharToArabic(ch) {
+    if (ch >= '0' && ch <= '9') return ch;
+    const code = ch.codePointAt(0);
+    for (let i = 0; i < INDIC_DIGIT_BASES.length; i++) {
+      const base = INDIC_DIGIT_BASES[i];
+      if (code >= base && code <= base + 9) return String(code - base);
+    }
+    return null;
+  }
+
+  // Looks for the LAST danda-delimited marker in the text (॥, | or ‖ on
+  // both sides, e.g. "॥ १५ ॥") whose inner content is digits only (any
+  // one supported script, not mixed) and converts it to a plain integer
+  // -- this is the verse/shloka number actually printed on the page,
+  // used to suggest where a partial OCR/Proofread batch's numbering
+  // should start instead of always defaulting to 1. A compound marker
+  // like "१.४४" (chapter.verse) is deliberately rejected (contains a
+  // non-digit '.') rather than guessed at, since this project's
+  // per-sarga files expect a single flat number, not a chapter.verse pair.
+  function detectVerseNumber(text) {
+    if (!text) return null;
+    const re = /[॥|‖]\s*([^॥|‖]{1,6}?)\s*[॥|‖]/g;
+    let match, lastNum = null;
+    while ((match = re.exec(text)) !== null) {
+      const inner = match[1].trim();
+      if (!inner) continue;
+      const arabicChars = inner.split('').map(digitCharToArabic);
+      if (arabicChars.some(c => c === null)) continue;
+      const n = parseInt(arabicChars.join(''), 10);
+      if (Number.isFinite(n) && n > 0) lastNum = n;
+    }
+    return lastNum;
+  }
+
   return {
     fileToBase64, downloadJson, saveProgress, loadProgress, clearProgress, parseJsonLoose, formatError,
-    parsePageSelection, reconstructReadingOrder
+    parsePageSelection, reconstructReadingOrder, detectVerseNumber
   };
 })();

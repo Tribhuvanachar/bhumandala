@@ -128,3 +128,14 @@ select { width: 100%; box-sizing: border-box; padding: 9px 10px; font-size: 14px
 .tab-panel fieldset { margin-top: 0; }
 .tab-nav { display: flex; justify-content: space-between; gap: 8px; margin: 4px 0 20px; }
 .tab-nav .tab-nav-spacer { flex: 1; }
+
+/* Always-visible file status dashboard -- same "outside any tab, never
+   hidden" placement as the error box, since knowing what's loaded/done/
+   pending for the current file shouldn't require being on a specific
+   tab or re-selecting the file to find out. */
+.file-status-bar { background: var(--panel2); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 8px 12px; margin-bottom: 10px; font-size: 12px; }
+.file-status-title { font-weight: 700; color: var(--accent); margin-bottom: 4px; word-break: break-word; }
+.file-status-grid { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.file-status-label { color: var(--muted); margin-right: 4px; }
+.file-status-value { font-weight: 600; }

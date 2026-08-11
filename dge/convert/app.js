@@ -18,6 +18,7 @@ window.DGE.App = (function () {
 
   let ocrPages = [];
   let finalJson = null;
+  let lastAutoFilledStartingNumber = null; // see applyDetectedStartingNumber()
   let currentFileKey = null;
   let currentFileDisplayName = '';
   let currentLoader = null; // whichever loader (PDF/Image/…) is handling the current source — see loaders.js
@@ -273,6 +274,8 @@ window.DGE.App = (function () {
     currentLoader = null;
     ocrPages = [];
     finalJson = null;
+    currentMappedJson = null; // schema range shown in the status bar must reset too
+    resetStartingNumberDetection();
     lastProofreadMissingPages = [];
     $('previewArea').innerHTML = '';
     setPreviewLabel('');
@@ -299,6 +302,7 @@ window.DGE.App = (function () {
           `${doneCount} of ${savedProofread.totalChunks || '?'} proofread chunk(s) already saved for this file — tapping Proofread will resume from where it left off.`;
       }
     }
+    renderFileStatusBar();
   }
 
   function getChunkSize() {
@@ -921,6 +925,56 @@ window.DGE.App = (function () {
     return custom ? custom.value.trim().replace(/^\/+|\/+$/g, '') : '';
   }
 
+  // Always-visible "what's loaded, what's done, what's pending for THIS
+  // file" summary — outside every tab (same placement as the error box),
+  // so checking status never requires re-selecting the file or hunting
+  // through OCR/Proofread tabs. Cheap enough to call after every single
+  // page/chunk during a run, not just at start/end.
+  async function renderFileStatusBar() {
+    const bar = $('fileStatusBar');
+    if (!bar) return;
+    if (!currentFileKey) { bar.style.display = 'none'; return; }
+    bar.style.display = 'block';
+    $('fileStatusTitle').textContent = currentFileDisplayName || currentFileKey;
+
+    let totalPages = null;
+    try {
+      const list = JSON.parse(localStorage.getItem(KNOWN_FILES_KEY)) || [];
+      const entry = list.find(f => f.key === currentFileKey);
+      if (entry) totalPages = entry.ocrTotal;
+    } catch (e) { /* ignore — status is informational only */ }
+    const ocrDone = ocrPages.length;
+    let ocrText = totalPages ? `${ocrDone}/${totalPages} page(s)` : `${ocrDone} page(s)`;
+    if (totalPages && ocrDone < totalPages) ocrText += ` — ${totalPages - ocrDone} pending`;
+    $('fileStatusOcr').textContent = ocrText;
+
+    let proofreadText = 'not started';
+    try {
+      const saved = await IDB().get(proofreadDataKey());
+      if (saved && saved.totalChunks) {
+        const done = Object.keys(saved.chunks || {}).length;
+        proofreadText = `${done}/${saved.totalChunks} chunk(s)`;
+        if (done < saved.totalChunks) proofreadText += ` — ${saved.totalChunks - done} pending`;
+      }
+    } catch (e) { /* ignore */ }
+    if (currentMappedJson && currentMappedJson.shlokas && Object.keys(currentMappedJson.shlokas).length) {
+      // Prefer the actually-built schema's keys once one exists -- these
+      // reflect any "Starting shloka/unit number" offset applied at build
+      // time, unlike finalJson's raw 1-based merge index below.
+      const nums = Object.keys(currentMappedJson.shlokas).map(Number);
+      proofreadText += ` — schema built: ${nums.length} shloka(s), numbered ${Math.min.apply(null, nums)}–${Math.max.apply(null, nums)}`;
+    } else if (finalJson && Array.isArray(finalJson.shlokas) && finalJson.shlokas.length) {
+      const nums = finalJson.shlokas.map(s => (s.index != null ? s.index : s.number)).filter(n => n != null);
+      if (nums.length) {
+        proofreadText += ` — ${finalJson.shlokas.length} shloka(s), numbered ${Math.min.apply(null, nums)}–${Math.max.apply(null, nums)}`;
+      }
+    }
+    $('fileStatusProofread').textContent = proofreadText;
+
+    const slug = getTargetSlug();
+    $('fileStatusTarget').textContent = slug || '(not chosen yet)';
+  }
+
   function buildSchemaPreview() {
     clearError();
     if (!finalJson) return setError('No proofread JSON yet — run Proofread first.');
@@ -978,6 +1032,7 @@ window.DGE.App = (function () {
     currentMappedJson = MapperMod().buildGranthaJson(numberedJson, profile);
     RendererMod().renderSchemaMapEditable(currentMappedJson, $('schemaPreviewArea'));
     log(`Schema preview built for "${slug}" — ${Object.keys(currentMappedJson.shlokas).length} shloka(s). Review and edit below before pushing.`);
+    renderFileStatusBar();
   }
 
   async function pushToGithub() {
@@ -1034,6 +1089,7 @@ window.DGE.App = (function () {
         $('pushStatusText').textContent = `Pushed — ${result.uploaded} file(s) committed (${granthaPath} + library.json catalog entry). GitHub Pages can take a minute or two to redeploy — if the main app's Library doesn't show it yet, that's why; just wait a bit and reopen it (the app itself doesn't cache this, so it's not something to fix on your end).`;
       }
       log($('pushStatusText').textContent);
+      renderFileStatusBar();
     } catch (e) {
       setError('Push failed: ' + U().formatError(e));
       $('pushStatusText').textContent = '';
@@ -1065,6 +1121,8 @@ window.DGE.App = (function () {
     updateDangerZoneLabel();
     ocrPages = [];
     finalJson = null;
+    currentMappedJson = null; // schema range shown in the status bar must reset too
+    resetStartingNumberDetection();
     lastProofreadMissingPages = [];
     $('previewArea').innerHTML = '';
     setPreviewLabel('');
@@ -1109,6 +1167,7 @@ window.DGE.App = (function () {
 
       updateKnownFilesManifest(info.name, ocrPages.length, info.numPages);
       renderKnownFilesHint();
+      renderFileStatusBar();
     } catch (e) {
       setError(`Could not read this ${detected.typeLabel}: ` + U().formatError(e));
     }
@@ -1132,6 +1191,8 @@ window.DGE.App = (function () {
       updateDangerZoneLabel();
       ocrPages = UrlImportMod().splitIntoPages(text);
       finalJson = null;
+      currentMappedJson = null; // schema range shown in the status bar must reset too
+      resetStartingNumberDetection();
       lastProofreadMissingPages = [];
       $('previewArea').innerHTML = '';
       setPreviewLabel('');
@@ -1147,6 +1208,7 @@ window.DGE.App = (function () {
       log(`Fetched "${title}" successfully — ${ocrPages.length} chunk(s) prepared. Ready for step 3 (Proofread) — no OCR needed.`);
       RendererMod().renderRawOcr(ocrPages, $('previewArea'));
       setPreviewLabel('Showing fetched page text — untouched, before Gemini proofreading.');
+      renderFileStatusBar();
     } catch (e) {
       setError('Import failed: ' + U().formatError(e));
     } finally {
@@ -1278,12 +1340,14 @@ window.DGE.App = (function () {
         await IDB().set(ocrProgressKey(), { lastPage: p });
         await IDB().set(ocrDataKey(), { pages: ocrPages });
         updateKnownFilesManifest(currentLoader.getDocumentName(), ocrPages.length, total);
+        renderFileStatusBar();
       } catch (e) {
         setError(`Failed on page ${p} after ${RETRY_DELAYS_MS.length + 1} attempts: ${U().formatError(e)} — progress saved through the pages already done. Fix the issue and tap Resume.`);
         $('runOcrBtn').disabled = false;
         $('resumeBtn').disabled = false;
         releaseWakeLock();
         await TesseractCheckMod().terminate();
+        renderFileStatusBar();
         return;
       }
     }
@@ -1296,6 +1360,7 @@ window.DGE.App = (function () {
     if ($('ocrProgressBar')) $('ocrProgressBar').value = 100;
     log('OCR pass complete.');
     renderKnownFilesHint();
+    renderFileStatusBar();
 
     const ocrPageNums = new Set(ocrPages.map(p => p.page));
     const missing = selectedPages.filter(p => !ocrPageNums.has(p));
@@ -1343,6 +1408,45 @@ window.DGE.App = (function () {
       el.textContent = lastProofreadMissingPages.length
         ? `⚠ ${lastProofreadMissingPages.length} selected page(s) will be missing from the proofread result: ${lastProofreadMissingPages.join(', ')}`
         : '';
+    }
+  }
+
+  // Clears any auto-fill state/hint for the "Starting shloka/unit number"
+  // field -- called whenever a different file/URL is loaded or its saved
+  // proofread data is cleared, so a detection from a PREVIOUS file can't
+  // linger and look like it applies to a new one.
+  function resetStartingNumberDetection() {
+    lastAutoFilledStartingNumber = null;
+    const hintEl = $('startingShlokaHint');
+    if (hintEl) hintEl.textContent = '';
+    const inputEl = $('startingShlokaInput');
+    if (inputEl) inputEl.value = '';
+  }
+
+  // Suggests the real starting unit number for THIS batch by reading the
+  // embedded verse marker (e.g. ॥१५॥) off the first merged shloka's own
+  // text, instead of always defaulting to 1 -- see U().detectVerseNumber().
+  // Only fills the field automatically when it's still blank or holds
+  // exactly what we last auto-filled; a value the admin typed themselves
+  // is never silently overwritten.
+  function applyDetectedStartingNumber(mergedShlokas) {
+    const hintEl = $('startingShlokaHint');
+    const inputEl = $('startingShlokaInput');
+    if (!inputEl) return;
+    const firstSa = (mergedShlokas && mergedShlokas[0]) ? mergedShlokas[0].sa : '';
+    const detected = U().detectVerseNumber(firstSa);
+    if (detected == null) {
+      if (hintEl) hintEl.textContent = '';
+      return;
+    }
+    const current = inputEl.value.trim();
+    const currentIsOursOrBlank = current === '' || Number(current) === lastAutoFilledStartingNumber;
+    if (currentIsOursOrBlank) {
+      inputEl.value = String(detected);
+      lastAutoFilledStartingNumber = detected;
+      if (hintEl) hintEl.textContent = `Auto-detected ${detected} from a marker (e.g. ॥${detected}॥) in the first shloka's own text — filled in above, change it if it's wrong.`;
+    } else if (hintEl) {
+      hintEl.textContent = `Detected ${detected} from the first shloka's text, but left your entered ${current} as-is — clear the field above to use the detected value instead.`;
     }
   }
 
@@ -1414,6 +1518,7 @@ window.DGE.App = (function () {
           saved.chunks[i] = chunkResult;
           await IDB().set(proofreadDataKey(), saved);
           log(`Chunk ${i + 1}/${totalChunks} (pages ${first}–${last}) proofread and saved.`);
+          renderFileStatusBar();
           const chunkDelayMs = getChunkDelayMs();
           if (chunkDelayMs > 0 && i < totalChunks - 1 && !proofreadCancelRequested) await sleep(chunkDelayMs);
         } catch (e) {
@@ -1464,12 +1569,14 @@ window.DGE.App = (function () {
       });
 
       finalJson = { shlokas: mergedShlokas };
+      applyDetectedStartingNumber(mergedShlokas);
       RendererMod().renderPreview(finalJson, $('previewArea'));
       setPreviewLabel('Showing Gemini-proofread text.');
       if ($('proofreadProgressBar')) $('proofreadProgressBar').value = 100;
       $('proofreadProgressText').textContent = `Proofreading complete — ${totalChunks} chunk(s), ${mergedShlokas.length} entries (${formatDuration(Date.now() - proofreadStartTime)}).`;
       const classSummary = Object.keys(classCounts).map(k => `${k}:${classCounts[k]}`).join(' ');
       log(`Proofreading complete — all chunks merged. Review classes — ${classSummary} (D+E = ${classCounts.D + classCounts.E} unit(s) needing a human look).` + (lastProofreadMissingPages.length ? ` ⚠ ${lastProofreadMissingPages.length} selected page(s) missing: ${lastProofreadMissingPages.join(', ')}.` : ''));
+      renderFileStatusBar();
       ReviewUIMod().renderSummary($('reviewSummary'));
     } finally {
       $('proofreadBtn').disabled = false;
@@ -1530,6 +1637,8 @@ window.DGE.App = (function () {
     if (clearProofread) {
       await IDB().del(proofreadDataKey());
       finalJson = null;
+      currentMappedJson = null; // schema range shown in the status bar must reset too
+      resetStartingNumberDetection();
       lastProofreadMissingPages = [];
       $('proofreadResumeNote').textContent = '';
       if ($('proofreadGapsText')) $('proofreadGapsText').textContent = '';
@@ -1556,6 +1665,7 @@ window.DGE.App = (function () {
       renderKnownFilesHint();
     }
     log(`Cleared ${parts.join(' + ')} for "${currentFileDisplayName || currentFileKey}".`);
+    renderFileStatusBar();
   }
 
   document.addEventListener('DOMContentLoaded', init);
