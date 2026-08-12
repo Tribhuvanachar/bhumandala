@@ -143,16 +143,18 @@
     },
     "lyricsraaga": {
       "base": "https://lyricsraaga.com",
+      "enabled": false,
       "license_note": "Public lyrics site, Dasara Padagalu tag. Non-commercial educational/research use with attribution.",
-      "post_url_pattern": "/[a-z0-9-]+-lyrics/?$",
-      "_status": "likely-JS-rendered — the tag archive returned no server-side content from the Cowork sandbox; on a real run it may yield few results. Kept so it is covered; verify/adjust post_url_pattern against a real page if needed.",
+      "post_url_pattern": "/(devotional|kannada|bhakti|bhakthi|geethegalu)/[a-z0-9-]+/?$",
+      "_status": "DISABLED — verified 2026-08-12 (real network, WebFetch + Google index). lyricsraaga.com is a fully client-side-rendered SPA: EVERY route (the /tag/dasara-padagalu/ archive, individual song pages, /wp-json/, /sitemap_index.xml) returns only an empty app-shell (meta-viewport, no server-side HTML) to non-browser clients, so the requests-based Fetcher (no JS execution) extracts 0 links and 0 lyrics — this is confirmed, not 'likely'. Real song URLs are /devotional/<slug>/ and /kannada/<slug>/ (e.g. /devotional/purandaradasara-keerthanegalu-purandara-dasa-songs-bhakthi-geethegalu-9/), NOT the old /...-lyrics/ pattern — post_url_pattern above corrected for any future headless-browser run. Left DISABLED because its composers (Purandara/Kanaka/Sripadaraja keerthanegalu) are already fully covered by madhwafestivals + dasasahitya.net, so it is not worth building headless rendering for one heavily-overlapping source. Re-enable only with a JS-capable fetcher (Playwright/Selenium).",
       "indexes": [
         {"axis": "theme", "value": "Dasara Padagalu", "kind": "listing", "form": "pada", "url": "https://lyricsraaga.com/tag/dasara-padagalu/"}
       ]
     },
     "kannada_dasasahitya": {
       "base": "https://kannada.dasasahitya.net",
-      "_status": "needs_fetch_verification — user requested; could not confirm URL structure from the Cowork sandbox (interactive fetch approval timed out). The importer will attempt the homepage as a listing; add verified composer/category index URLs here once the site structure is confirmed.",
+      "enabled": false,
+      "_status": "DISABLED — verified 2026-08-12 (real network). (1) INVALID TLS: kannada.dasasahitya.net serves a certificate that is not valid for this hostname (hostname mismatch), so requests/urllib SSL verification fails outright (CERTIFICATE_VERIFY_FAILED) and the page cannot be fetched safely. (2) DEFUNCT: a quoted web search for the subdomain returns zero pages indexed from it. (3) REDUNDANT: the parent site dasasahitya.net (already crawled here via parser:'dasasahitya', 69 composers) ALREADY serves Kannada-script content directly — its live categories are Kannada-suffixed, e.g. /category/krishna-ಕೃಷ್ಣ/ and /category/hanuma-ಹನುಮ/ — so there is no separate 'Kannada version' left to capture. Left DISABLED. Re-enable only if the user confirms unique content at a valid-cert URL and supplies real category/composer index URLs.",
       "license_note": "Kannada Dasa Sahitya portal. Non-commercial educational/research use with attribution.",
       "post_url_pattern": "/\\d{4}/\\d{2}/\\d{2}/[^/]+/?$",
       "indexes": [

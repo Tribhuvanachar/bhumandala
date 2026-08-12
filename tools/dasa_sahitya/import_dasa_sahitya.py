@@ -531,6 +531,14 @@ def crawl(config, fetcher, limit_per_index=None, verbose=True):
     """Return {url: meta} of every discovered composition + accumulated tags."""
     discovered = {}   # url -> meta dict
     for sname, src in config["sources"].items():
+        # Skip sources explicitly disabled in the config (see each block's
+        # "_status"). A source with no "enabled" key defaults to enabled, so the
+        # working sources are unaffected.
+        if src.get("enabled") is False:
+            if verbose:
+                reason = (src.get("_status", "") or "").split("—")[0].strip() or "disabled"
+                print(f"[skip] {sname}: {reason}")
+            continue
         # site-specific recursive crawler
         if src.get("parser") == "dasasahitya":
             for u, meta in crawl_dasasahitya(sname, src, fetcher,
