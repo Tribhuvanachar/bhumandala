@@ -2849,6 +2849,96 @@
     {
       "path": "dge/data/kavya/sumadhva_vijaya/sarga_10/data.json",
       "populated": false
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_01/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_02/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_03/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_04/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_05/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_06/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_07/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_08/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_09/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_10/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_11/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_12/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_13/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_14/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_15/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_16/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_17/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/bhagavad_gita/adhyaya_18/data.json",
+      "populated": true,
+      "title": null
     }
   ]
 }
