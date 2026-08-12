@@ -1,0 +1,4189 @@
+{
+  "composer": "Pranesha Dasaru",
+  "count": 20,
+  "compositions": [
+    {
+      "id": "pranesha_dasaru__aa4d698e",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Pranesha dasaru compositions",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Pancha BEda by Pranesha dasaru"
+          ],
+          [
+            "Gopichandana mudradarane mahathmya"
+          ],
+          [
+            "Thanthrasaroktha kesavadi chathurvimsadhi murthy lakshana"
+          ],
+          [
+            "beduvaro sukavo"
+          ],
+          [
+            "Sri Parvathi devi sthothra sulaadhi"
+          ],
+          [
+            "Allocation of idols to Yathigalu by Madhwacharyaru"
+          ],
+          [
+            "Grantha malika stothra(Kannada by Pranesha dasaru)"
+          ],
+          [
+            "chandrikAcAryara pAda dvayake"
+          ],
+          [
+            "Dasara pada on Sri Padmanabha thirtharu(Odhagi paaliso bavambudhiya)"
+          ],
+          [
+            "Dasara pada on Sri Madhava thirtharu(Nodide naa dhanyanindige)"
+          ],
+          [
+            "Gurugala pada pankaja"
+          ],
+          [
+            "Gurugala anudina neneve naa"
+          ],
+          [
+            "andhantamasa prapti"
+          ],
+          [
+            "Lambodhara pahi pahi"
+          ],
+          [
+            "Maha deva mahadeva"
+          ],
+          [
+            "palise ni ennanu gauri devi"
+          ],
+          [
+            "Adhadhayithu innadharu olle"
+          ],
+          [
+            "Vandhisuve guru santatige",
+            "(Pranesha dasaru)"
+          ],
+          [
+            "Kaye ninna pada"
+          ],
+          [
+            "Hari Vayu stuti"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.com/2017/03/29/pranesha-dasaru-compositions/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": false,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__e0c916d2",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "palise ni ennanu gauri devi",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "Gowri",
+      "tags": [
+        "composer:Pranesha Dasaru",
+        "deity:Gowri"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಪಾಲಿಸೆ ಶ್ರೀ ಗೌರೀ ಎನ್ನನು ||pa||"
+          ],
+          [
+            "ಪಾಲಿಸೆ ನಿನ್ನಯ ಪಾಲಿಗೆ ಬಂದೆನು |ಬೀಳುವೆ ಸರ್ವದ ಕಾಲಿಗೆ ಕರುಣದೀ|| a.pa||"
+          ],
+          [
+            "ಶರಣೆಂದವರನು ಪೊರೆವಳು ಎಂಬುವ |ಬಿರಿದು ನಿನ್ನದು ಎಂದರಿದೆನು ತ್ವರದಿಂ||"
+          ],
+          [
+            "ಸನ್ಮತಪುರುಷನ ಯಿನ್ನೆಲ್ಲಿ ಕಾಣೆನೋ |ಮನ್ಮಥನೆಂಬುವ ಬನ್ನಬಿಡಿಪ ಬಲು||"
+          ],
+          [
+            "ಕಾಣೆನು ಶಾಂತಿಯ ಏನೆಂಧೇಳಲಿ |ಪ್ರಾಣೇಶ ವಿಠಲನು ತಾನೆಯೇ ಬಲ್ಲನು ||"
+          ]
+        ],
+        "iast": [
+          [
+            "pālisè śrī gaurī ènnanu ||pa||"
+          ],
+          [
+            "pālisè ninnaya pāligè baṃdènu |bīḻuvè sarvada kāligè karuṇadī|| a.pa||"
+          ],
+          [
+            "śaraṇèṃdavaranu pòrèvaḻu èṃbuva |biridu ninnadu èṃdaridènu tvaradiṃ||"
+          ],
+          [
+            "sanmatapuruṣana yinnèlli kāṇèno |manmathanèṃbuva bannabiḍipa balu||"
+          ],
+          [
+            "kāṇènu śāṃtiya enèṃdheḻali |prāṇeśa viṭhalanu tānèye ballanu ||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "पालिसॆ श्री गौरी ऎन्ननु ||pa||"
+          ],
+          [
+            "पालिसॆ निन्नय पालिगॆ बंदॆनु |बीळुवॆ सर्वद कालिगॆ करुणदी|| a.pa||"
+          ],
+          [
+            "शरणॆंदवरनु पॊरॆवळु ऎंबुव |बिरिदु निन्नदु ऎंदरिदॆनु त्वरदिं||"
+          ],
+          [
+            "सन्मतपुरुषन यिन्नॆल्लि काणॆनो |मन्मथनॆंबुव बन्नबिडिप बलु||"
+          ],
+          [
+            "काणॆनु शांतिय एनॆंधेळलि |प्राणेश विठलनु तानॆये बल्लनु ||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "palise ni ennanu gauri devi  | pa |"
+          ],
+          [
+            "palise yennanu ninnaya palige bandenu",
+            "biluve sarvada kalige karunadi | a.pa.|"
+          ],
+          [
+            "saranendavaranu porevalu enbuva",
+            "birudu ninnadendaridenu karunadi || 1 ||"
+          ],
+          [
+            "sannuta purushana innelli kanenu",
+            "manmathanenbuva banna badipa balu || 2 ||"
+          ],
+          [
+            "kanisu santiya enendu helali",
+            "pranesa vithalanu tane ballanu taye| | 3 ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2016/10/06/palise-ni-ennanu-gauri-devi/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__3010b7ce",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Maha deva mahadeva",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "Shiva",
+      "tags": [
+        "composer:Pranesha Dasaru",
+        "deity:Shiva"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಮಹದೇವಾ ಮಹದೇವಾ |ಕಾಯೋ ಮಹದೇವ ಎನ್ನನೀ ||ನೋಯಗೊಡದೆ ತ್ವರ |ಪಾವನ ಮಾಡಿ"
+          ],
+          [
+            "ಅಸಮ ರಕ್ಕಸಗೆ |ವಶವಾಗೆ ವನನುಬಿಸಜಾಕ್ಷಗೆ ಒಪ್ಪಿಸಿ |ಕೊಲಿಸಿದನೇ||1||"
+          ],
+          [
+            "ನಂಜುಂಡರಗಿಸಿ |ದಂಜನೆ ಕುವರ ಪ್ರ ||ಭಂಜನ ಸುತನಾನಂಜುವೆನೀಗಾ ||2||"
+          ],
+          [
+            "ಸೂಸುವ ಭವಶರ |ದೀಸದೆ ಗುರು ಪ್ರಾ ||ಣೇಶ ವಿಠ್ಠಲನ |ದಾಸ ಮುಣುಗುವೆ ||3||"
+          ]
+        ],
+        "iast": [
+          [
+            "mahadevā mahadevā |kāyo mahadeva ènnanī ||noyagòḍadè tvara |pāvana māḍi"
+          ],
+          [
+            "asama rakkasagè |vaśavāgè vananubisajākṣagè òppisi |kòlisidane||1||"
+          ],
+          [
+            "naṃjuṃḍaragisi |daṃjanè kuvara pra ||bhaṃjana sutanānaṃjuvènīgā ||2||"
+          ],
+          [
+            "sūsuva bhavaśara |dīsadè guru prā ||ṇeśa viṭhṭhalana |dāsa muṇuguvè ||3||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "महदेवा महदेवा |कायो महदेव ऎन्ननी ||नोयगॊडदॆ त्वर |पावन माडि"
+          ],
+          [
+            "असम रक्कसगॆ |वशवागॆ वननुबिसजाक्षगॆ ऒप्पिसि |कॊलिसिदने||1||"
+          ],
+          [
+            "नंजुंडरगिसि |दंजनॆ कुवर प्र ||भंजन सुतनानंजुवॆनीगा ||2||"
+          ],
+          [
+            "सूसुव भवशर |दीसदॆ गुरु प्रा ||णेश विठ्ठलन |दास मुणुगुवॆ ||3||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "Mahadeva mahadeva sankaramahadeva mahadeva Sankara ||pa||",
+            "Sankara Sankara Sankara ||a.pa||"
+          ],
+          [
+            "Asama rakkasage vasavagavananu",
+            "Bisajakshake ottisi kollisidane ||mahadeva|| – {1}"
+          ],
+          [
+            "Bunjisi vishava nanjundanenisidi",
+            "Prabanjana priya ninakanjali mugive na ||mahadeva|| – {2}"
+          ],
+          [
+            "Susuva Bava saradhim datiso",
+            "Guru pranesavithalana dasamunugevena ||mahadeva|| – {3}"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2016/10/07/maha-deva-mahadeva/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__43acaa4e",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Lambodhara pahi pahi",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "Ganapathi",
+      "tags": [
+        "composer:Pranesha Dasaru",
+        "deity:Ganapathi"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಲಂಬೋದರ ಪಾಹೀ ಪಾಹೀ ಜಗದ್ಗುರು|",
+            "ಶಂಭುನಂದನ ಸುರಸುತ ಪಾದಾ ||pa||"
+          ],
+          [
+            "ಯೋಗೀಶಾರ್ಚಿತ ಶ್ರೀ ಪಾರ್ವತಿ ಪುತ್ರ ನತಮಿತ್ರಾ |",
+            "ಆಗಸವಾಳ್ದಮೂಷಕರೂಢಾ ||",
+            "ನಾಗಶಯನನಪಾದಧ್ಯಾನದಲ್ಲಿಡು ನಿತ್ಯಾ |",
+            "ಶ್ರೀ ಗಣಪತಿ ನಿನ್ನ ಬಲಗೊಂಬೆ || 1 ||"
+          ]
+        ],
+        "iast": [
+          [
+            "laṃbodara pāhī pāhī jagadguru|",
+            "śaṃbhunaṃdana surasuta pādā ||pa||"
+          ],
+          [
+            "yogīśārcita śrī pārvati putra natamitrā |",
+            "āgasavāḻdamūṣakarūḍhā ||",
+            "nāgaśayananapādadhyānadalliḍu nityā |",
+            "śrī gaṇapati ninna balagòṃbè || 1 ||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "लंबोदर पाही पाही जगद्गुरु|",
+            "शंभुनंदन सुरसुत पादा ||pa||"
+          ],
+          [
+            "योगीशार्चित श्री पार्वति पुत्र नतमित्रा |",
+            "आगसवाळ्दमूषकरूढा ||",
+            "नागशयननपादध्यानदल्लिडु नित्या |",
+            "श्री गणपति निन्न बलगॊंबॆ || 1 ||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "Lambodara pahi pahi jagadguru|sambunamdana surasuta pada ||pa||"
+          ],
+          [
+            "Yogisarchita sri parvati putra natamitra |agasavaldamushakarudha",
+            "|nagasayananapadadhyanadallidu nitya |sri ganapati ninna balagombe ||1||"
+          ],
+          [
+            "Srivara sriramachandra dharmaraya |devemdra ninna pujisidaro ||",
+            "Kevalakaliduryodhana pujisade ketta |sri vignesvara ninna balagombe ||2||"
+          ],
+          [
+            "Danujara mohisuvadake sankata chauti |manisi pujisikombe kalarinda ||",
+            "Muni vyasa kruta grantharthava tilidu bareda |ganaraja ninna pada balagombe ||3||"
+          ],
+          [
+            "Sambu chakrankita pasadharane rakta |ambaradvaya busha nirdosha ||",
+            "Sambararipusara vijatamrudbava gatra |ambaradhipa ninna balagombe||4||"
+          ],
+          [
+            "Ekavimsatipushpana mana modaka priya |ni karunipudu ninnavanemdu ||",
+            "Saku vishaya suka sujanaroladiso |ekadantane ninna balagombe ||5||"
+          ],
+          [
+            "Enu beduvodilla Enu maduvokarma|srinivasane madisuvanembo ||",
+            "J~janave yandendigirali tarasanta- |kanuja ninna balagombe ||6||"
+          ],
+          [
+            "Pranasevaka chamikaravarna gajamuka |pranesa vithalana sukumara ||",
+            "Ninolidemage vignava pariharisuta |ponisu sanmati balagombe ||7||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2016/10/10/lambodhara-pahi-pahi/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__027535ba",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "andhantamasa prapti",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru",
+        "theme:Ekadashi"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "andhantamasa prapti niscaya srutiyinda",
+            "prakara vacharisadavarige || pa ||"
+          ],
+          [
+            "haridinadalli aharabittu mudadi",
+            "jagarava madadalundu varaguvadhamage || 1 ||"
+          ],
+          [
+            "harivasara vinaha saruva dvadasa",
+            "paraniraviyudayakagadiruva durmatige || 2 ||"
+          ],
+          [
+            "nalvattaidu gati myalekasadasiyage",
+            "srilola vyasararelu kalevange || 3 ||"
+          ],
+          [
+            "prathamakalava miryacyutana prasadava",
+            "pratidvadasiyolumba matigedigalige || 4 ||"
+          ],
+          [
+            "dasapancha myalondu dasamisiddhantavodisalu",
+            "srivarana divasa hindaguvage || 5 ||"
+          ],
+          [
+            "vedhilla dasamige dvadasi paradina",
+            "kkodare dvaya nirjaladavennadire || 6 ||"
+          ],
+          [
+            "paladhikaivattelu galige dvadasi udisalu",
+            "sadhanidu endu tiliyadavanige || 7 ||"
+          ],
+          [
+            "dasamiyol hattu dvadasiyolentu",
+            "bidade pasuvinamdadi balu hasagettavanige || 8 ||"
+          ],
+          [
+            "ellaru sandeha ullare marudinadalle",
+            "dasami madadolladiddavage || 9 ||"
+          ],
+          [
+            "atisadhaniralu ahutiyanu bahu",
+            "poshisuta paranege hottu vrutha kalevanige ||10 ||"
+          ],
+          [
+            "anivarya baralu sadhanege tirthava",
+            "kondu anumana myale bojanake maduvage || 11 ||"
+          ],
+          [
+            "mankubuddhiyalinda sankatillade tirtha",
+            "mam komdu sadhaniyanka toruvavage || 12 ||"
+          ],
+          [
+            "satige sraddhava malpa sutagodiyana seve",
+            "ratage sankatavennadati mudhanarage || 13 ||"
+          ],
+          [
+            "iraru dina hadimuru galige vishnu",
+            "taraviddare nirahara madadire || 14 ||"
+          ],
+          [
+            "dvayapakshadali matrupitrusvargavaidalu",
+            "ratiyindopavasavratapatita manavage || 15 ||"
+          ],
+          [
+            "analagahutin sraddha animishadyarige tarpana",
+            "krushnashtami haridinadi maduvage || 17 ||"
+          ],
+          [
+            "samiramatasthanu amaralokaidiralu",
+            "vimatasthanindala kramava madisidare || 18 ||"
+          ],
+          [
+            "dhasami sivaniki dvadasi sadhani sraddha sandhisire",
+            "vishnupavasa esaguvavanige || 19 ||"
+          ],
+          [
+            "aniruddhanigarpisi anudinadalli",
+            "prananigarpisadalumba manujadhamarige || 20 ||"
+          ],
+          [
+            "pranesavithalana dhyanadolirutippa",
+            "pranadevara uktiya nambadavage || 21 ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2016/10/26/andhantamasa-prapti/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": false,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__aa5ecf1d",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Vandhisuve guru santatige",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru",
+        "theme:Guru Parampara"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ವಂದಿಸುವೆ ಗುರು ಸಂತತಿಗೆ ಪ್ರತಿದಿನಾ |ನಂದ ತೀರ್ಥರ ಮತೋದ್ಧಾರರಿವರಹುದೆಂದು ||pa||"
+          ],
+          [
+            "ಶ್ರೀಮದಕ್ಷೋಭ್ಯ ಮುನಿ ತ್ರೈಲೋಕ್ಯ ಭೂಷಣರ |ಧೀಮಂತ ಲೋಕವಂದಿತ ತೀರ್ಥರ |",
+            "ರಾಮಪದ ಜಲಜಾಳಿ ಸುಲಭ ರಘುಪುಂಗವರ |ಶ್ರೀಮಂತ ರಘುನಾಥ ರಘುವರ್ಯ ರಘುಸುತಗೆ ||1||"
+          ],
+          [
+            "ವಿದ್ಯಾನಿಧಿ ಮುನಿ ರಘುಪತಿಯ ನಾರಾಯಣರ |ಮಧ್ವ ಭಕ್ತಾಗ್ರಣಿ ಮುಕುಂದ ತೀರ್ಥರ |",
+            "ಅದ್ವೈತ ಗಿರಿ ಕುಲಿಶ ರಾಮ ರಘುಪತಿ ತೀರ್ಥ |ಸದ್ವೈಷ್ಣವರ ಪಾಲ ರಾಮಚಂದ್ರಾರ್ಯರಿಗೆ ||2||"
+          ],
+          [
+            "ಶ್ರೀ ರಘೋತ್ತಮ ತೀರ್ಥ ರಘುರಾಜ ರಘುಪತಿಯ |ಶ್ರೀರಾಮಚಂದ್ರ ತೀರ್ಥಾರ್ಯರ ಪದ |",
+            "ವಾರಿಜಯುಗಳವ ಭಕ್ತಿಪೂರ್ವಕದಿ ಸ್ಮರಿಸುವೆನು |ಮಾರಮಣ ಪ್ರಾಣೇಶ ವಿಠಲ ಕರುಣಿಸಲೆಂದು ||3||"
+          ]
+        ],
+        "iast": [
+          [
+            "vaṃdisuvè guru saṃtatigè pratidinā |naṃda tīrthara matoddhārarivarahudèṃdu ||pa||"
+          ],
+          [
+            "śrīmadakṣobhya muni trailokya bhūṣaṇara |dhīmaṃta lokavaṃdita tīrthara |",
+            "rāmapada jalajāḻi sulabha raghupuṃgavara |śrīmaṃta raghunātha raghuvarya raghusutagè ||1||"
+          ],
+          [
+            "vidyānidhi muni raghupatiya nārāyaṇara |madhva bhaktāgraṇi mukuṃda tīrthara |",
+            "advaita giri kuliśa rāma raghupati tīrtha |sadvaiṣṇavara pāla rāmacaṃdrāryarigè ||2||"
+          ],
+          [
+            "śrī raghottama tīrtha raghurāja raghupatiya |śrīrāmacaṃdra tīrthāryara pada |",
+            "vārijayugaḻava bhaktipūrvakadi smarisuvènu |māramaṇa prāṇeśa viṭhala karuṇisalèṃdu ||3||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "वंदिसुवॆ गुरु संततिगॆ प्रतिदिना |नंद तीर्थर मतोद्धाररिवरहुदॆंदु ||pa||"
+          ],
+          [
+            "श्रीमदक्षोभ्य मुनि त्रैलोक्य भूषणर |धीमंत लोकवंदित तीर्थर |",
+            "रामपद जलजाळि सुलभ रघुपुंगवर |श्रीमंत रघुनाथ रघुवर्य रघुसुतगॆ ||1||"
+          ],
+          [
+            "विद्यानिधि मुनि रघुपतिय नारायणर |मध्व भक्ताग्रणि मुकुंद तीर्थर |",
+            "अद्वैत गिरि कुलिश राम रघुपति तीर्थ |सद्वैष्णवर पाल रामचंद्रार्यरिगॆ ||2||"
+          ],
+          [
+            "श्री रघोत्तम तीर्थ रघुराज रघुपतिय |श्रीरामचंद्र तीर्थार्यर पद |",
+            "वारिजयुगळव भक्तिपूर्वकदि स्मरिसुवॆनु |मारमण प्राणेश विठल करुणिसलॆंदु ||3||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "Vandisuve guru santatige | pratidina |",
+            "Nandatirthara matoddhararivarahudendu || pa ||"
+          ],
+          [
+            "Sri madakshobyamuni trailokya bushanara |",
+            "Dhimanta lokavandita tirthara |",
+            "Rama pada jalajali sulaba ragupungavara |",
+            "Srimanta raghunatha raghuvarya raghusutage || 1 ||"
+          ],
+          [
+            "Vidyanidhi muni ragupatiya narayanara |",
+            "Madhva baktagrani mukundatirthara |",
+            "Advaita giri kulisa rama ragupati tirtha |",
+            "Sadvaishnavara pala ramachandraryarige || 2 ||"
+          ],
+          [
+            "Sri ragottama tirtha raghuraja raghupatiya |",
+            "Sri ramachandratirtharyara pada |",
+            "Varijayugalada Bhakti purvakadi smarisuvenu |",
+            "Maramana pranesaviththala karunisalendu || 3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2016/12/15/guru-parampara-by-pranesha-dasaru/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__ca69a4e7",
+      "form": "suladi",
+      "title": {
+        "kn": "",
+        "latin": "Sri Parvathi devi sthothra sulaadhi",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru",
+        "suladi_index:Suladi Index"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಧೃವತಾಳ",
+            "ಉಮಾ ಕಾತ್ಯಾಯಿನಿ ಪಾವ೯ತಿ ಕಲ್ಯಾಣಿ|",
+            "ಬೊಮ್ಮ ಭೃಕುಟಿ ಸಂಭೂತ ದೇವನ ರಾಣಿ |",
+            "ಕಮ್ಮಗೋಲನ ಜನನಿ ದಾಕ್ಷಾಯಿಣಿ |",
+            "ಸುಮನಸರಿಗೆ ಗತಿ ಕರುಣಾಪೂರಿತ ಪಾಂಗೆ|",
+            "ಕುಮನಸರಿಗತಿ ವಜ್ರ ಕಠಿಣ ಪಾಂಗೆ |",
+            "ರಮೆಯರಸನ ಪಾದಸುಮನಸ್ವ ಭೃಂಗೆ |",
+            "ಬೊಮ್ಮಭಿನವ ಪ್ರಾಣೇಶ ವಿಠಲನ |",
+            "ಸುಮನ ಚರಣಗಳಲ್ಲಿ ಮನವ ಪ್ರೇರಿಸು ತಾಯೆ"
+          ],
+          [
+            "ಮಟ್ಟತಾಳ",
+            "ಚಂಡಿದುರ್ಗೆ ಭೂತಗಣ ಸಂಸೇವಿತಳೆ |",
+            "ರುಂಡಾಹಿ ಮಾಲಾಧರ ಹೃನ್ಮಂದಿರಳೆ |",
+            "ಉಂಡು ವಿಷವ ನಿನ್ನ ಗಂಡನು ಬಳಲಿ |",
+            "ಕೈಕೊಂಡೌಷಧವೆನಗೆ ಕರುಣದಿ ನೀಡಮ್ಮ ಮಂಡೆ ಬಾಗಿ ಬೇಡ್ವೆ |",
+            "ಕರಗಳ ಜೋಡಿಸುತ | ಪುಂಡರೀಕ ನಯನೆ ಪುಂಡರೀಕ ಗಮನೆ |",
+            "ಪಂಢರ ಅಭಿನವ ಪ್ರಾಣೇಶ ವಿಠಲನ |",
+            "ಪುಂಡರೀಕ ಚರಣ ಬಂಡುಣಿ ಎನಿಸಮ್ಮಾ||"
+          ],
+          [
+            "ತ್ರಿವಿಡಿತಾಳ",
+            "ಆರುಮೊಗನ ಪೆತ್ತ ಚಾರು ಚರಿತ್ರಳೆ |",
+            "ವಾರಣಾರಿ ವೃಷಭಶ್ಯಂದನಳೆ |",
+            "ಶ್ರೀ ರಜಪತಿ ರಾಮನಾಮ ಮಂತ್ರವ ಜಪಿಸಿ |",
+            "ಸರ್ವಮಂಗಳೆಯಾದ ಶರ್ವಾಣಿಯೆ ನಾರಿಯರಾಭಿಷ್ಟ ಪೂರೈಸುತವರಿಗೆ |",
+            "ವೀರ ಪತಿವ್ರತೆ ಧರ್ಮ ಮರ್ಮವ ತೋರ್ದ| ವಾರಿಜನಯನೆ ಮಂಗಳಗೌರಿಯೇ |",
+            "ಮಾರಮಣಭಿನವ ಪ್ರಾಣೇಶ ವಿಠಲನ |",
+            "ಚಾರು ಚರಣಗಳಲ್ಲಿ ಮನವ ಪ್ರೇರಿಸು ತಾಯಿ"
+          ],
+          [
+            "ಅಟ್ಟತಾಳ",
+            "ಹರಿ ಸರ್ವೋತ್ತಮನೆಂಬ ಸ್ಥಿರವಾದ ಜ್ಞಾನವ |",
+            "ಕರುಣಿಸು ಕರುಣಿಸು ಶೆರಗೊಡ್ಡಿ ಬೇಡುವೆ |",
+            "ದುರುಳ ದಾನವರಂತೆ ಪರಮೇಶ ಶಿವನೆಂದು ಪೆರಧರ ಪರನೆಂದು ನುಡಿಸದಿರೆಂದೆಂದು |",
+            "ಸಿರಿಯರಸನ ಪೆದ್ದ ಪರಿಚರ್ಯವನು ಕೊಡು |",
+            "ಮರುಳೊಂದು ಬಯಸೇನು ಖೇಶ ಷಣ್ಮುಖಮಾತೆ |",
+            "ಸಿರಿವರ ಅಭಿನವ ಪ್ರಾಣೇಶ ವಿಠಲನ |",
+            "ಚರಣ ವಾರಿಜ ಭೃಂಗೆ ಸರ್ವಭಕ್ತಾಂತರಂಗೆ ||"
+          ],
+          [
+            "ಆದಿತಾಳ",
+            "ಭಾಸುರ ಚರಿತಳೆ ಭೂಸುರ ವಿನುತಳೆ |",
+            "ಸಾಸಿರ ನಾಮನ ತೋಷದಿ ಭಜಿಪಳೆ |",
+            "ವಾಸವಾದಿ ದಿವಿಜೇಶ ಗಣಾರ್ಚಿತೆ |",
+            "ದಾಶರಥಿ ಹರಿ ವಾಸುದೇವ ಪದ |",
+            "ಸಾಸಿರ ಪತ್ರದಿ ಧೃಢ ಭಕುತಿಯ ಕೊಡು |",
+            "ಮೇಷಾಭಿನವ ಪ್ರಾಣೇಶ ವಿಠಲನ|",
+            "ದಾಸ್ಯತನವನಿತ್ತು ಪೋಷಿಸುವದೆಮ್ಮಾ||"
+          ],
+          [
+            "ಜತೆ",
+            "ಅಜನಾಮಭಿನವ ಪ್ರಾಣೇಶ ವಿಠಲನ|",
+            "ನಿಜ ದಾಸನೆಂದೆನಿಸು ಸುಜನ ಪೋಷಕಳೆ"
+          ]
+        ],
+        "iast": [
+          [
+            "dhṛvatāḻa",
+            "umā kātyāyini pāva9ti kalyāṇi|",
+            "bòmma bhṛkuṭi saṃbhūta devana rāṇi |",
+            "kammagolana janani dākṣāyiṇi |",
+            "sumanasarigè gati karuṇāpūrita pāṃgè|",
+            "kumanasarigati vajra kaṭhiṇa pāṃgè |",
+            "ramèyarasana pādasumanasva bhṛṃgè |",
+            "bòmmabhinava prāṇeśa viṭhalana |",
+            "sumana caraṇagaḻalli manava prerisu tāyè"
+          ],
+          [
+            "maṭṭatāḻa",
+            "caṃḍidurgè bhūtagaṇa saṃsevitaḻè |",
+            "ruṃḍāhi mālādhara hṛnmaṃdiraḻè |",
+            "uṃḍu viṣava ninna gaṃḍanu baḻali |",
+            "kaikòṃḍauṣadhavènagè karuṇadi nīḍamma maṃḍè bāgi beḍvè |",
+            "karagaḻa joḍisuta | puṃḍarīka nayanè puṃḍarīka gamanè |",
+            "paṃḍhara abhinava prāṇeśa viṭhalana |",
+            "puṃḍarīka caraṇa baṃḍuṇi ènisammā||"
+          ],
+          [
+            "triviḍitāḻa",
+            "ārumògana pètta cāru caritraḻè |",
+            "vāraṇāri vṛṣabhaśyaṃdanaḻè |",
+            "śrī rajapati rāmanāma maṃtrava japisi |",
+            "sarvamaṃgaḻèyāda śarvāṇiyè nāriyarābhiṣṭa pūraisutavarigè |",
+            "vīra pativratè dharma marmava torda| vārijanayanè maṃgaḻagauriye |",
+            "māramaṇabhinava prāṇeśa viṭhalana |",
+            "cāru caraṇagaḻalli manava prerisu tāyi"
+          ],
+          [
+            "aṭṭatāḻa",
+            "hari sarvottamanèṃba sthiravāda jñānava |",
+            "karuṇisu karuṇisu śèragòḍḍi beḍuvè |",
+            "duruḻa dānavaraṃtè parameśa śivanèṃdu pèradhara paranèṃdu nuḍisadirèṃdèṃdu |",
+            "siriyarasana pèdda paricaryavanu kòḍu |",
+            "maruḻòṃdu bayasenu kheśa ṣaṇmukhamātè |",
+            "sirivara abhinava prāṇeśa viṭhalana |",
+            "caraṇa vārija bhṛṃgè sarvabhaktāṃtaraṃgè ||"
+          ],
+          [
+            "āditāḻa",
+            "bhāsura caritaḻè bhūsura vinutaḻè |",
+            "sāsira nāmana toṣadi bhajipaḻè |",
+            "vāsavādi divijeśa gaṇārcitè |",
+            "dāśarathi hari vāsudeva pada |",
+            "sāsira patradi dhṛḍha bhakutiya kòḍu |",
+            "meṣābhinava prāṇeśa viṭhalana|",
+            "dāsyatanavanittu poṣisuvadèmmā||"
+          ],
+          [
+            "jatè",
+            "ajanāmabhinava prāṇeśa viṭhalana|",
+            "nija dāsanèṃdènisu sujana poṣakaḻè"
+          ]
+        ],
+        "devanagari": [
+          [
+            "धृवताळ",
+            "उमा कात्यायिनि पाव९ति कल्याणि|",
+            "बॊम्म भृकुटि संभूत देवन राणि |",
+            "कम्मगोलन जननि दाक्षायिणि |",
+            "सुमनसरिगॆ गति करुणापूरित पांगॆ|",
+            "कुमनसरिगति वज्र कठिण पांगॆ |",
+            "रमॆयरसन पादसुमनस्व भृंगॆ |",
+            "बॊम्मभिनव प्राणेश विठलन |",
+            "सुमन चरणगळल्लि मनव प्रेरिसु तायॆ"
+          ],
+          [
+            "मट्टताळ",
+            "चंडिदुर्गॆ भूतगण संसेवितळॆ |",
+            "रुंडाहि मालाधर हृन्मंदिरळॆ |",
+            "उंडु विषव निन्न गंडनु बळलि |",
+            "कैकॊंडौषधवॆनगॆ करुणदि नीडम्म मंडॆ बागि बेड्वॆ |",
+            "करगळ जोडिसुत | पुंडरीक नयनॆ पुंडरीक गमनॆ |",
+            "पंढर अभिनव प्राणेश विठलन |",
+            "पुंडरीक चरण बंडुणि ऎनिसम्मा||"
+          ],
+          [
+            "त्रिविडिताळ",
+            "आरुमॊगन पॆत्त चारु चरित्रळॆ |",
+            "वारणारि वृषभश्यंदनळॆ |",
+            "श्री रजपति रामनाम मंत्रव जपिसि |",
+            "सर्वमंगळॆयाद शर्वाणियॆ नारियराभिष्ट पूरैसुतवरिगॆ |",
+            "वीर पतिव्रतॆ धर्म मर्मव तोर्द| वारिजनयनॆ मंगळगौरिये |",
+            "मारमणभिनव प्राणेश विठलन |",
+            "चारु चरणगळल्लि मनव प्रेरिसु तायि"
+          ],
+          [
+            "अट्टताळ",
+            "हरि सर्वोत्तमनॆंब स्थिरवाद ज्ञानव |",
+            "करुणिसु करुणिसु शॆरगॊड्डि बेडुवॆ |",
+            "दुरुळ दानवरंतॆ परमेश शिवनॆंदु पॆरधर परनॆंदु नुडिसदिरॆंदॆंदु |",
+            "सिरियरसन पॆद्द परिचर्यवनु कॊडु |",
+            "मरुळॊंदु बयसेनु खेश षण्मुखमातॆ |",
+            "सिरिवर अभिनव प्राणेश विठलन |",
+            "चरण वारिज भृंगॆ सर्वभक्तांतरंगॆ ||"
+          ],
+          [
+            "आदिताळ",
+            "भासुर चरितळॆ भूसुर विनुतळॆ |",
+            "सासिर नामन तोषदि भजिपळॆ |",
+            "वासवादि दिविजेश गणार्चितॆ |",
+            "दाशरथि हरि वासुदेव पद |",
+            "सासिर पत्रदि धृढ भकुतिय कॊडु |",
+            "मेषाभिनव प्राणेश विठलन|",
+            "दास्यतनवनित्तु पोषिसुवदॆम्मा||"
+          ],
+          [
+            "जतॆ",
+            "अजनामभिनव प्राणेश विठलन|",
+            "निज दासनॆंदॆनिसु सुजन पोषकळॆ"
+          ]
+        ],
+        "source_roman": [
+          [
+            "dhruvatala",
+            "Uma katyayini pava9ti kalyani|",
+            "bomma brukuti sambuta devana rani |",
+            "kammagolana janani dakshayini |",
+            "sumanasarige gati karunapurita pange|",
+            "kumanasarigati vajra kathina pange |",
+            "rameyarasana padasumanasva brunge |",
+            "bommabinava pranesa vithalana |",
+            "sumana caranagalalli manava prerisu taye"
+          ],
+          [
+            "Mattatala",
+            "Chandidurge butagana samsevitale |",
+            "rundahi maladhara hrunmandirale |",
+            "undu vishava ninna gandanu balali |",
+            "kaikondaushadhavenage karunadi nidamma mande bagi bedve | karagala jodisuta | pundarika nayane pundarika gamane |",
+            "pandhara abinava pranesa vithalana |",
+            "pundarika charana banduni enisamma||"
+          ],
+          [
+            "Trividitala",
+            "Arumogana petta caru caritrale |",
+            "varanari vrushabasyandanale |",
+            "sri rajapati ramanama mantrava japisi |",
+            "sarvamangaleyada sarvaniye nariyarabishta puraisutavarige |",
+            "vira pativrate dharma marmava torda|",
+            "varijanayane mangalagauriye |",
+            "maramanabinava pranesa vithalana |",
+            "charu charanagalalli manava prerisu tayi"
+          ],
+          [
+            "Attatala",
+            "Hari sarvottamanemba sthiravada j~janava |",
+            "karunisu karunisu seragoddi beduve |",
+            "durula danavarante paramesa Sivanendu peradhara paranendu nudisadirendendu |",
+            "siriyarasana pedda paricharyavanu kodu |",
+            "marulondu bayasenu kesa shanmukamate |"
+          ],
+          [
+            "Sirivara abinava pranes vithalana |",
+            "carana varija brunge sarvabaktantarange ||"
+          ],
+          [
+            "Aditala",
+            "Basura caritale busura vinutale |",
+            "sasira namana toshadi bajipale |",
+            "vasavadi divijesa ganarcite |",
+            "dasarathi hari vasudeva pada |",
+            "sasira patradi dhrudha Bakutiya kodu |",
+            "meshabinava pranesa vithalana|",
+            "dasyatanavanittu poshisuvademma||"
+          ],
+          [
+            "Jate",
+            "Ajanamabinava pranesa vithalana|",
+            "Nija dasanendenisu sujana poshakale"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/01/10/sri-parvathi-devi-sthothra-sulaadhi/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__9797f0ad",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Gurugala anudina neneve naa",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru",
+        "theme:Guru Parampara"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಗುರುಗಳನನುದಿನ ನೆನೆವೆ ನಾ",
+            "ದುರಿತ ದಟ್ಟುಳಿ ಸಾರೆ ಬಂದೀತಿನ್ನೇನಾ || ಪ ||"
+          ],
+          [
+            "ಪಾರ್ಥ ರಕ್ಷಕನ ಸೇ  ವಾರ್ಥ ಖಳರ ಕೊಂದು",
+            "ಕೀರ್ತಿ ಪಡೆದ ಸುಖ  ತೀರ್ಥರೆಂತೆಂಬಾ || 1 ||"
+          ],
+          [
+            "ನೀ ಪಾಲೀಸೆಂದೆನಲಾಪತ್ತು ಬಿಡಿಸುವ",
+            "ಮಾಪತಿ ನಿಜದೂತ  ಶ್ರೀ ಪದ್ಮನಾಭ || 2 ||"
+          ],
+          [
+            "ಕರಿಪತಿ ಬಳಿಯಿಂದ  ಧರಿಜ ಪತಿಯ ತಂದು",
+            "ಗುರುಗಳಿಗಿತ್ತೀಹ  ನರಹರಿ ತೀರ್ಥಾ || 3 ||"
+          ],
+          [
+            "ಬಾದರಾಯಣ ದಿವ್ಯ  ಪಾದ ಜಲಜ ಭೃಂಗ",
+            "ಭೂದೇವ ವಂದಿತ  ಮಾಧವ ತೀರ್ಥ || 4 ||"
+          ],
+          [
+            "ಇಕ್ಷುಚಾಪನ ಮ್ಯಾಳ  ಲಕ್ಷ್ಮೀ ಇಲ್ಲದೆ ಬಲು",
+            "ಪೇಕ್ಷೆ ಮಾಡಿದ  ಅಕ್ಷೊಭ್ಯ ಮುನಿಪ || 5 ||"
+          ],
+          [
+            "ದಯಮಾಡಿರೆಂದು ವಿ  ನಯದಿಂದ ಭಜಿಪರ",
+            "ಬಯಕೀ ಪೂರೈಸುವ  ಜಯತೀರ್ಥರೆಂಬ || 6 ||"
+          ],
+          [
+            "ಅದ್ವೈತ ಗಜ ಸಿಂಹ  ಮಧ್ವ ಮತೋದ್ಭವ",
+            "ಸದ್ವೈಷ್ಣವ ಪ್ರೀಯ  ವಿದ್ಯಾಧಿರಾಜ || 7 ||"
+          ],
+          [
+            "ಸಂದೇಹವಿಲ್ಲದೇ  ವಂದೀಪ ಜನರಾಸೆ",
+            "ತಂದುಕೊಡುವ ದಯ  ಸಿಂಧು ಕವೀಂದ್ರಾ || 8 ||"
+          ],
+          [
+            "ರಾಗ ವರ್ಜಿತ ಭಾಗವತರ ಪಾಲ",
+            "ಯೋಗಿ ಶಿರೋಮಣಿ  ವಾಗೀಶ ಮುನಿಪ || 9 ||"
+          ],
+          [
+            "ಸಾರಿದ ಭಕುತರ  ಘೋರಿಪ ಅಘಗಳ",
+            "ದೂರ ಓಡಿಸುತಿಪ್ಪ  ಶ್ರೀ ರಾಮಚಂದ್ರ || 10 ||"
+          ],
+          [
+            "ಕು ಭವದೊಳಿರುವಾರ  ಸೊಬಗಿನಿಂದಲಿ ನೋಡಿ",
+            "ಅಭಯ ಕೊಡುತಿಪ್ಪ  ವಿಬುಧೇಂದ್ರ ತೀರ್ಥ || 11 ||"
+          ],
+          [
+            "ಭ್ರಾಮಕ ಜನ ಶಿಕ್ಷ  ಧೀಮಂತ ಜನ ಪಕ್ಷ",
+            "ಹೇಮ ವರಣಾಂಗ ಜಿ  ತಾಮಿತ್ರ ಮುನಿಪಾ || 12 ||"
+          ],
+          [
+            "ಬಗೆ ಬಗೆ ಭಜಿಸಲು  ಇಗಡ ಜನರನೊಲ್ಲ",
+            "ಬಗಿವಾನು ಸುಜನರ  ರಘುನಂದನಾರ್ಯ || 13 ||"
+          ],
+          [
+            "ಪೊಂದಿದವರ ನೋಯ  ದಂದದಿ ಸಲಹುವ",
+            "ಎಂದೆಂದು ಬಿಡದ ಶ್ರೀ ಸು  ರೇಂದ್ರಾಖ್ಯ ಮುನಿಪ || 14 ||"
+          ],
+          [
+            "ನಿಜಭಕ್ತಿಯಲಿ ಪಾದ  ಭಜಿಸುವ ಅಗಣಿತ",
+            "ಸುಜನರ ಸಲಹುವ  ವಿಜಯಿಂದ್ರ ಮುನಿಪ || 15 ||"
+          ],
+          [
+            "ವೀಂದ್ರ ವಾಹನ ಯಾದ  ವೇಂದ್ರಾಂಘ್ರಿ ಭಜಿಸುವ",
+            "ಸಾಂದ್ರ ಭಕ್ತಿಯಲಿ ಸು  ಧೀಂದ್ರಾಖ್ಯ ಮುನಿಪಾ || 16 ||"
+          ],
+          [
+            "ಧಾರುಣಿಯೊಳಗತಿ  ಚಾರು ವೃಂದಾವನ",
+            "ದೀ ರಾಜಿಸುತಿಪ್ಪ  ಶ್ರೀ ರಾಘವೇಂದ್ರಾ || 17 ||"
+          ],
+          [
+            "ಶ್ಲಾಘೀನ ಗುಣನಿಧಿ  ಮಾಗಧ ರಿಪು ದಾಸ",
+            "ರಾಘವೇಂದ್ರರ ಪುತ್ರ  ಯೋಗೀಂದ್ರ ತೀರ್ಥ || 18 ||"
+          ],
+          [
+            "ವೈರಾಗ್ಯ ಗುಣದಿಂದ  ಮಾರಾರೀಯಂದದಿ",
+            "ತೋರುವರನು ದಿನ  ಸೂರೀಂದ್ರ ತೀರ್ಥ || 19 ||"
+          ],
+          [
+            "ಕುಮತವೆಂಬಗಣೀತ  ತಿಮಿರ ಓಡಿಸುವಲ್ಲಿ",
+            "ಕಮಲಾಪ್ತನಂತೀಹ  ಸುಮತೀಂದ್ರ ತೀರ್ಥ || 20 ||"
+          ],
+          [
+            "ಸಲ್ಲಾದ ಸುಖಗಳ  ನೆಲ್ಲಾವು ಜರಿದು ಶ್ರೀ",
+            "ನಲ್ಲಾನ ಭಜಿಸಲು  ಬಲ್ಲ ಉಪೇಂದ್ರಾ || 21 ||"
+          ],
+          [
+            "ಮೋದ ಮುನಿ ಮತ ಮ  ಹೋದಧಿ ಚಂದ್ರ ವಿ",
+            "ದ್ಯಾದಿ ದಾನಾಸಕ್ತ  ವಾದೀಂದ್ರ ತೀರ್ಥ || 22 ||"
+          ],
+          [
+            "ಬಿಸಜನಾಭನ ದೂತ  ವಸುಧಿಯೊಳಗೆ ಖ್ಯಾತ",
+            "ಕಿಸಲಯೋಪಮ ಪಾದ  ವಸುಧೀಂದ್ರ ತೀರ್ಥ || 23 ||"
+          ],
+          [
+            "ಪರ ಮತೋರಗ ವೀಪ  ಕರುಣಿ ವಿಗತ ಕೋಪ",
+            "ವರ ವೇದ ಸುಕಲಾಪ  ವರದೇಂದ್ರ ಭೂಪ || 24 ||"
+          ],
+          [
+            "ವಿರಕ್ತಿ ಮತಿ ಪಾಲಿಪ  ವಾದಿ ವಿಜಯ ಧೀರ",
+            "ವರದಾ ತೀರಸ್ಥ  ಧೀರೇ೦ದ್ರ ತೀರ್ಥ || 25 ||"
+          ],
+          [
+            "ಸುವಿವೇಕಿಗಳಿಗಿಷ್ಟ  ತವಕದಿಂದಲಿ ಈವ",
+            "ಕವಿಭಿರೀಡಿತ ಪಾದ  ಭುವನೇಂದ್ರ ತೀರ್ಥ || 26 ||"
+          ],
+          [
+            "ಶಬರೀ ವಲ್ಲಭನಂಘ್ರಿ  ಅಬುಜಾಳಿ ಸೂರ್ಯ ಸ",
+            "ನ್ನಿಭ ವಾದಿ ಗಜಸಿಂಹ ಸುಬೋಧೇಂದ್ರ ತೀರ್ಥ || 27 ||"
+          ],
+          [
+            "ಪ್ರಾಣೇಶ ವಿಠಲನ  ಕಾಣಬೇಕಾದರೆ",
+            "ಈ ನಮ್ಮ ಗುರುಗಳ  ಧ್ಯಾನದೊಳಿಹದೂ || 28 ||"
+          ]
+        ],
+        "iast": [
+          [
+            "gurugaḻananudina nènèvè nā",
+            "durita daṭṭuḻi sārè baṃdītinnenā || pa ||"
+          ],
+          [
+            "pārtha rakṣakana se  vārtha khaḻara kòṃdu",
+            "kīrti paḍèda sukha  tīrtharèṃtèṃbā || 1 ||"
+          ],
+          [
+            "nī pālīsèṃdènalāpattu biḍisuva",
+            "māpati nijadūta  śrī padmanābha || 2 ||"
+          ],
+          [
+            "karipati baḻiyiṃda  dharija patiya taṃdu",
+            "gurugaḻigittīha  narahari tīrthā || 3 ||"
+          ],
+          [
+            "bādarāyaṇa divya  pāda jalaja bhṛṃga",
+            "bhūdeva vaṃdita  mādhava tīrtha || 4 ||"
+          ],
+          [
+            "ikṣucāpana myāḻa  lakṣmī illadè balu",
+            "pekṣè māḍida  akṣèūbhya munipa || 5 ||"
+          ],
+          [
+            "dayamāḍirèṃdu vi  nayadiṃda bhajipara",
+            "bayakī pūraisuva  jayatīrtharèṃba || 6 ||"
+          ],
+          [
+            "advaita gaja siṃha  madhva matodbhava",
+            "sadvaiṣṇava prīya  vidyādhirāja || 7 ||"
+          ],
+          [
+            "saṃdehavillade  vaṃdīpa janarāsè",
+            "taṃdukòḍuva daya  siṃdhu kavīṃdrā || 8 ||"
+          ],
+          [
+            "rāga varjita bhāgavatara pāla",
+            "yogi śiromaṇi  vāgīśa munipa || 9 ||"
+          ],
+          [
+            "sārida bhakutara  ghoripa aghagaḻa",
+            "dūra oḍisutippa  śrī rāmacaṃdra || 10 ||"
+          ],
+          [
+            "ku bhavadòḻiruvāra  sòbaginiṃdali noḍi",
+            "abhaya kòḍutippa  vibudheṃdra tīrtha || 11 ||"
+          ],
+          [
+            "bhrāmaka jana śikṣa  dhīmaṃta jana pakṣa",
+            "hema varaṇāṃga ji  tāmitra munipā || 12 ||"
+          ],
+          [
+            "bagè bagè bhajisalu  igaḍa janaranòlla",
+            "bagivānu sujanara  raghunaṃdanārya || 13 ||"
+          ],
+          [
+            "pòṃdidavara noya  daṃdadi salahuva",
+            "èṃdèṃdu biḍada śrī su  reṃdrākhya munipa || 14 ||"
+          ],
+          [
+            "nijabhaktiyali pāda  bhajisuva agaṇita",
+            "sujanara salahuva  vijayiṃdra munipa || 15 ||"
+          ],
+          [
+            "vīṃdra vāhana yāda  veṃdrāṃghri bhajisuva",
+            "sāṃdra bhaktiyali su  dhīṃdrākhya munipā || 16 ||"
+          ],
+          [
+            "dhāruṇiyòḻagati  cāru vṛṃdāvana",
+            "dī rājisutippa  śrī rāghaveṃdrā || 17 ||"
+          ],
+          [
+            "ślāghīna guṇanidhi  māgadha ripu dāsa",
+            "rāghaveṃdrara putra  yogīṃdra tīrtha || 18 ||"
+          ],
+          [
+            "vairāgya guṇadiṃda  mārārīyaṃdadi",
+            "toruvaranu dina  sūrīṃdra tīrtha || 19 ||"
+          ],
+          [
+            "kumatavèṃbagaṇīta  timira oḍisuvalli",
+            "kamalāptanaṃtīha  sumatīṃdra tīrtha || 20 ||"
+          ],
+          [
+            "sallāda sukhagaḻa  nèllāvu jaridu śrī",
+            "nallāna bhajisalu  balla upeṃdrā || 21 ||"
+          ],
+          [
+            "moda muni mata ma  hodadhi caṃdra vi",
+            "dyādi dānāsakta  vādīṃdra tīrtha || 22 ||"
+          ],
+          [
+            "bisajanābhana dūta  vasudhiyòḻagè khyāta",
+            "kisalayopama pāda  vasudhīṃdra tīrtha || 23 ||"
+          ],
+          [
+            "para matoraga vīpa  karuṇi vigata kopa",
+            "vara veda sukalāpa  varadeṃdra bhūpa || 24 ||"
+          ],
+          [
+            "virakti mati pālipa  vādi vijaya dhīra",
+            "varadā tīrastha  dhīre0dra tīrtha || 25 ||"
+          ],
+          [
+            "suvivekigaḻigiṣṭa  tavakadiṃdali īva",
+            "kavibhirīḍita pāda  bhuvaneṃdra tīrtha || 26 ||"
+          ],
+          [
+            "śabarī vallabhanaṃghri  abujāḻi sūrya sa",
+            "nnibha vādi gajasiṃha subodheṃdra tīrtha || 27 ||"
+          ],
+          [
+            "prāṇeśa viṭhalana  kāṇabekādarè",
+            "ī namma gurugaḻa  dhyānadòḻihadū || 28 ||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "गुरुगळननुदिन नॆनॆवॆ ना",
+            "दुरित दट्टुळि सारॆ बंदीतिन्नेना || प ||"
+          ],
+          [
+            "पार्थ रक्षकन से  वार्थ खळर कॊंदु",
+            "कीर्ति पडॆद सुख  तीर्थरॆंतॆंबा || 1 ||"
+          ],
+          [
+            "नी पालीसॆंदॆनलापत्तु बिडिसुव",
+            "मापति निजदूत  श्री पद्मनाभ || 2 ||"
+          ],
+          [
+            "करिपति बळियिंद  धरिज पतिय तंदु",
+            "गुरुगळिगित्तीह  नरहरि तीर्था || 3 ||"
+          ],
+          [
+            "बादरायण दिव्य  पाद जलज भृंग",
+            "भूदेव वंदित  माधव तीर्थ || 4 ||"
+          ],
+          [
+            "इक्षुचापन म्याळ  लक्ष्मी इल्लदॆ बलु",
+            "पेक्षॆ माडिद  अक्षॆूभ्य मुनिप || 5 ||"
+          ],
+          [
+            "दयमाडिरॆंदु वि  नयदिंद भजिपर",
+            "बयकी पूरैसुव  जयतीर्थरॆंब || 6 ||"
+          ],
+          [
+            "अद्वैत गज सिंह  मध्व मतोद्भव",
+            "सद्वैष्णव प्रीय  विद्याधिराज || 7 ||"
+          ],
+          [
+            "संदेहविल्लदे  वंदीप जनरासॆ",
+            "तंदुकॊडुव दय  सिंधु कवींद्रा || 8 ||"
+          ],
+          [
+            "राग वर्जित भागवतर पाल",
+            "योगि शिरोमणि  वागीश मुनिप || 9 ||"
+          ],
+          [
+            "सारिद भकुतर  घोरिप अघगळ",
+            "दूर ओडिसुतिप्प  श्री रामचंद्र || 10 ||"
+          ],
+          [
+            "कु भवदॊळिरुवार  सॊबगिनिंदलि नोडि",
+            "अभय कॊडुतिप्प  विबुधेंद्र तीर्थ || 11 ||"
+          ],
+          [
+            "भ्रामक जन शिक्ष  धीमंत जन पक्ष",
+            "हेम वरणांग जि  तामित्र मुनिपा || 12 ||"
+          ],
+          [
+            "बगॆ बगॆ भजिसलु  इगड जनरनॊल्ल",
+            "बगिवानु सुजनर  रघुनंदनार्य || 13 ||"
+          ],
+          [
+            "पॊंदिदवर नोय  दंददि सलहुव",
+            "ऎंदॆंदु बिडद श्री सु  रेंद्राख्य मुनिप || 14 ||"
+          ],
+          [
+            "निजभक्तियलि पाद  भजिसुव अगणित",
+            "सुजनर सलहुव  विजयिंद्र मुनिप || 15 ||"
+          ],
+          [
+            "वींद्र वाहन याद  वेंद्रांघ्रि भजिसुव",
+            "सांद्र भक्तियलि सु  धींद्राख्य मुनिपा || 16 ||"
+          ],
+          [
+            "धारुणियॊळगति  चारु वृंदावन",
+            "दी राजिसुतिप्प  श्री राघवेंद्रा || 17 ||"
+          ],
+          [
+            "श्लाघीन गुणनिधि  मागध रिपु दास",
+            "राघवेंद्रर पुत्र  योगींद्र तीर्थ || 18 ||"
+          ],
+          [
+            "वैराग्य गुणदिंद  मारारीयंददि",
+            "तोरुवरनु दिन  सूरींद्र तीर्थ || 19 ||"
+          ],
+          [
+            "कुमतवॆंबगणीत  तिमिर ओडिसुवल्लि",
+            "कमलाप्तनंतीह  सुमतींद्र तीर्थ || 20 ||"
+          ],
+          [
+            "सल्लाद सुखगळ  नॆल्लावु जरिदु श्री",
+            "नल्लान भजिसलु  बल्ल उपेंद्रा || 21 ||"
+          ],
+          [
+            "मोद मुनि मत म  होदधि चंद्र वि",
+            "द्यादि दानासक्त  वादींद्र तीर्थ || 22 ||"
+          ],
+          [
+            "बिसजनाभन दूत  वसुधियॊळगॆ ख्यात",
+            "किसलयोपम पाद  वसुधींद्र तीर्थ || 23 ||"
+          ],
+          [
+            "पर मतोरग वीप  करुणि विगत कोप",
+            "वर वेद सुकलाप  वरदेंद्र भूप || 24 ||"
+          ],
+          [
+            "विरक्ति मति पालिप  वादि विजय धीर",
+            "वरदा तीरस्थ  धीरे०द्र तीर्थ || 25 ||"
+          ],
+          [
+            "सुविवेकिगळिगिष्ट  तवकदिंदलि ईव",
+            "कविभिरीडित पाद  भुवनेंद्र तीर्थ || 26 ||"
+          ],
+          [
+            "शबरी वल्लभनंघ्रि  अबुजाळि सूर्य स",
+            "न्निभ वादि गजसिंह सुबोधेंद्र तीर्थ || 27 ||"
+          ],
+          [
+            "प्राणेश विठलन  काणबेकादरॆ",
+            "ई नम्म गुरुगळ  ध्यानदॊळिहदू || 28 ||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "gurugaLananudina neneve nA",
+            "durita daTTuLi sAre bandItinnEnA || pa ||"
+          ],
+          [
+            "pArtha rakShakana sE vArtha KaLara kondu",
+            "kIrti paDeda suKa tIrtharenteMbA || 1 ||"
+          ],
+          [
+            "nI pAlIsendenalApattu biDisuva",
+            "mApati nijadUta SrI padmanABa || 2 ||"
+          ],
+          [
+            "karipati baLiyinda dharija patiya tandu",
+            "gurugaLigittIha narahari tIrthA || 3 ||"
+          ],
+          [
+            "bAdarAyaNa divya pAda jalaja BRunga",
+            "BUdEva vandita mAdhava tIrtha || 4 ||"
+          ],
+          [
+            "ikShucApana myALa lakShmI illade balu",
+            "pEkShe mADida akShoBya munipa || 5 ||"
+          ],
+          [
+            "dayamADirendu vi nayadinda Bajipara",
+            "bayakI pUraisuva jayatIrthareMba || 6 ||"
+          ],
+          [
+            "advaita gaja siMha madhva matOdBava",
+            "sadvaiShNava prIya vidyAdhirAja || 7 ||"
+          ],
+          [
+            "sandEhavilladE vandIpa janarAse",
+            "tandukoDuva daya sindhu kavIndrA || 8 ||"
+          ],
+          [
+            "rAga varjita BAgavatara pAla",
+            "yOgi SirOmaNi vAgISa munipa || 9 ||"
+          ],
+          [
+            "sArida Bakutara GOripa aGagaLa",
+            "dUra ODisutippa SrI rAmachandra || 10 ||"
+          ],
+          [
+            "ku BavadoLiruvAra sobaginindali nODi",
+            "aBaya koDutippa vibudhEndra tIrtha || 11 ||"
+          ],
+          [
+            "BrAmaka jana SikSha dhImanta jana pakSha",
+            "hEma varaNAnga ji tAmitra munipA || 12 ||"
+          ],
+          [
+            "bage bage Bajisalu igaDa janaranolla",
+            "bagivAnu sujanara raGhunandanArya || 13 ||"
+          ],
+          [
+            "pondidavara nOya dandadi salahuva",
+            "endendu biDada SrI surEndrAKya munipa || 14 ||"
+          ],
+          [
+            "nijaBaktiyali pAda Bajisuva agaNita",
+            "sujanara salahuva vijayindra munipa || 15 ||"
+          ],
+          [
+            "vIndra vAhana yAda vEndrAnGri Bajisuva",
+            "sAndra Baktiyali su dhIndrAKya munipA || 16 ||"
+          ],
+          [
+            "dhAruNiyoLagati cAru vRundAvana",
+            "dI rAjisutippa SrI rAGhavEndrA || 17 ||"
+          ],
+          [
+            "SlAGIna guNanidhi mAgadha ripu dAsa",
+            "rAGhavEndrara putra yOgIndra tIrtha || 18 ||"
+          ],
+          [
+            "vairAgya guNadinda mArArIyandadi",
+            "tOruvaranu dina sUrIndra tIrtha || 19 ||"
+          ],
+          [
+            "kumataveMbagaNIta timira ODisuvalli",
+            "kamalAptanantIha sumatIndra tIrtha || 20 ||"
+          ],
+          [
+            "sallAda suKagaLa nellAvu jaridu SrI",
+            "nallAna Bajisalu balla upEndrA || 21 ||"
+          ],
+          [
+            "mOda muni mata ma hOdadhi chandra vi",
+            "dyAdi dAnAsakta vAdIndra tIrtha || 22 ||"
+          ],
+          [
+            "bisajanABana dUta vasudhiyoLage KyAta",
+            "kisalayOpama pAda vasudhIndra tIrtha || 23 ||"
+          ],
+          [
+            "para matOraga vIpa karuNi vigata kOpa",
+            "vara vEda sukalApa varadEndra BUpa || 24 ||"
+          ],
+          [
+            "virakti mati pAlipa vAdi vijaya dhIra",
+            "varadA tIrastha dhIrEndra tIrtha || 25 ||"
+          ],
+          [
+            "suvivEkigaLigiShTa tavakadindali Iva",
+            "kaviBirIDita pAda BuvanEndra tIrtha || 26 ||"
+          ],
+          [
+            "SabarI vallaBananGri abujALi sUrya sa",
+            "nniBa vAdi gajasiMha subOdhEndra tIrtha || 27 ||"
+          ],
+          [
+            "prANESa viThalana kANabEkAdare",
+            "I namma gurugaLa dhyAnadoLihadU || 28 ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/02/14/gurugala-anudina-neneve-naa/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__8a877c27",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Gurugala pada pankaja",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru",
+        "theme:Guru Parampara"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಗುರುಗಳ ಪದ ಪಂಕಜ | ಸ್ಮರಿಸುವೆ ನಿತ್ಯಾ |",
+            "ದುರಿತೌಘಗಳನು | ಓಡಿಸುವನತ್ತತ್ತ ||pa||"
+          ],
+          [
+            "ರಾಜೇಂದ್ರ ತಪೋನಿಧಿ | ಶ್ರೀ ಜಯಧ್ವಜ ತೀರ್ಥ |",
+            "ರಾಜಿತ ಪುರುಷೋತ್ಮ | ಬ್ರಹ್ಮಣ್ಯ ತೀರ್ಥ||1||"
+          ],
+          [
+            "ಮಧ್ವಸಿದ್ಧಾಂತ ಸಂಸ್ಥಾಪಕ ವ್ಯಾಸರಾಯ ಪ್ರ |",
+            "ಸಿದ್ಧ ಶ್ರೀನಿವಾಸ ಶ್ರೀ ಲಕ್ಷ್ಮೀಕಾಂತಾ ||2||"
+          ],
+          [
+            "ಬಲ್ಲೀದ ಶ್ರೀಪತಿ ರಾಮಚಂದ್ರ ಲಕ್ಷ್ಮೀ |",
+            "ವಲ್ಲಭ ಶ್ರೀ ಲಕ್ಷ್ಮೀನಾಥರೆಂತೆಂಬಾ ||3||"
+          ],
+          [
+            "ಶ್ರೀ ಲಕ್ಷ್ಮೀಪತಿ ತೀರ್ಥ ಲಕ್ಷ್ಮೀನಾರಾಯಣ |",
+            "ನೀಲೇಶ ಭಜಕರು ಶ್ರೀನಾಥ ತೀರ್ಥ ||4||"
+          ],
+          [
+            "ರಘುನಾಥ ಜಗನ್ನಾಥ ಕರಜಾತ |",
+            "ಸುಗುಣ ವಿದ್ಯಾನಾಥ ಶ್ರೀ ವಿದ್ಯಾಪತಿಯಾ ||5||"
+          ],
+          [
+            "ಶ್ರೀ ವಿದ್ಯಾನಿಧಿ ರಘುನಾಥ ಶ್ರೀ ರಘುವರ್ಯ |",
+            "ಕೋವಿದ ವಿನುತ ರಘೂತ್ತಮ ತೀರ್ಥ ||6||"
+          ],
+          [
+            "ವ್ಯಾಸ ವಿದ್ಯಾಪತಿ ವಿದ್ಯಾಧೀಶ ತೀರ್ಥ |",
+            "ಶ್ರೀ ಸತ್ಯವ್ರತರ ಶ್ರೀ ಸತ್ಯನಿಧಿಗಳ ||7||",
+            "ಗುರು ಸತ್ಯನಾಥ ಶ್ರೀ ಸತ್ಯಾಭಿನವ ತೀರ್ಥ |",
+            "ವರ ಸತ್ಯಪೂರ್ಣ ಶ್ರೀ ಸತ್ಯ ವಿಜಯರಾ ||8||"
+          ],
+          [
+            "ಸತ್ಯ ಪ್ರೀಯರ ಸತ್ಯಬೋಧ ಸತ್ಯ ಸಂಧ |",
+            "ಸತ್ಯ ವರರ ಸತ್ಯಧರ್ಮಾಖ್ಯ ಮುನಿಪಾ ||9||"
+          ],
+          [
+            "ಈ ನಮ್ಮ ಗುರುಗಳ ಅನುದಿನ ಸ್ಮರಿಸೂತ |",
+            "ಪ್ರಾಣೇಶ ವಿಠಲನ ಕರುಣವ ಪಡೆವೆ||10||"
+          ]
+        ],
+        "iast": [
+          [
+            "gurugaḻa pada paṃkaja | smarisuvè nityā |",
+            "duritaughagaḻanu | oḍisuvanattatta ||pa||"
+          ],
+          [
+            "rājeṃdra taponidhi | śrī jayadhvaja tīrtha |",
+            "rājita puruṣotma | brahmaṇya tīrtha||1||"
+          ],
+          [
+            "madhvasiddhāṃta saṃsthāpaka vyāsarāya pra |",
+            "siddha śrīnivāsa śrī lakṣmīkāṃtā ||2||"
+          ],
+          [
+            "ballīda śrīpati rāmacaṃdra lakṣmī |",
+            "vallabha śrī lakṣmīnātharèṃtèṃbā ||3||"
+          ],
+          [
+            "śrī lakṣmīpati tīrtha lakṣmīnārāyaṇa |",
+            "nīleśa bhajakaru śrīnātha tīrtha ||4||"
+          ],
+          [
+            "raghunātha jagannātha karajāta |",
+            "suguṇa vidyānātha śrī vidyāpatiyā ||5||"
+          ],
+          [
+            "śrī vidyānidhi raghunātha śrī raghuvarya |",
+            "kovida vinuta raghūttama tīrtha ||6||"
+          ],
+          [
+            "vyāsa vidyāpati vidyādhīśa tīrtha |",
+            "śrī satyavratara śrī satyanidhigaḻa ||7||",
+            "guru satyanātha śrī satyābhinava tīrtha |",
+            "vara satyapūrṇa śrī satya vijayarā ||8||"
+          ],
+          [
+            "satya prīyara satyabodha satya saṃdha |",
+            "satya varara satyadharmākhya munipā ||9||"
+          ],
+          [
+            "ī namma gurugaḻa anudina smarisūta |",
+            "prāṇeśa viṭhalana karuṇava paḍèvè||10||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "गुरुगळ पद पंकज | स्मरिसुवॆ नित्या |",
+            "दुरितौघगळनु | ओडिसुवनत्तत्त ||pa||"
+          ],
+          [
+            "राजेंद्र तपोनिधि | श्री जयध्वज तीर्थ |",
+            "राजित पुरुषोत्म | ब्रह्मण्य तीर्थ||1||"
+          ],
+          [
+            "मध्वसिद्धांत संस्थापक व्यासराय प्र |",
+            "सिद्ध श्रीनिवास श्री लक्ष्मीकांता ||2||"
+          ],
+          [
+            "बल्लीद श्रीपति रामचंद्र लक्ष्मी |",
+            "वल्लभ श्री लक्ष्मीनाथरॆंतॆंबा ||3||"
+          ],
+          [
+            "श्री लक्ष्मीपति तीर्थ लक्ष्मीनारायण |",
+            "नीलेश भजकरु श्रीनाथ तीर्थ ||4||"
+          ],
+          [
+            "रघुनाथ जगन्नाथ करजात |",
+            "सुगुण विद्यानाथ श्री विद्यापतिया ||5||"
+          ],
+          [
+            "श्री विद्यानिधि रघुनाथ श्री रघुवर्य |",
+            "कोविद विनुत रघूत्तम तीर्थ ||6||"
+          ],
+          [
+            "व्यास विद्यापति विद्याधीश तीर्थ |",
+            "श्री सत्यव्रतर श्री सत्यनिधिगळ ||7||",
+            "गुरु सत्यनाथ श्री सत्याभिनव तीर्थ |",
+            "वर सत्यपूर्ण श्री सत्य विजयरा ||8||"
+          ],
+          [
+            "सत्य प्रीयर सत्यबोध सत्य संध |",
+            "सत्य वरर सत्यधर्माख्य मुनिपा ||9||"
+          ],
+          [
+            "ई नम्म गुरुगळ अनुदिन स्मरिसूत |",
+            "प्राणेश विठलन करुणव पडॆवॆ||10||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "gurugaLa pada pankaja | smarisuve nityA |",
+            "duritauGagaLanu | ODisuvanattatta ||pa||"
+          ],
+          [
+            "rAjEndra tapOnidhi | SrI jayadhvaja tIrtha |",
+            "rAjita puruShOtma | brahmaNya tIrtha||1||"
+          ],
+          [
+            "madhvasiddhAnta saMsthApaka vyAsarAya pra |",
+            "siddha SrInivAsa SrI lakShmIkAMtA ||2||"
+          ],
+          [
+            "ballIda SrIpati rAmachandra lakShmI |",
+            "vallaBa SrI lakShmInAtharenteMbA ||3||"
+          ],
+          [
+            "SrI lakShmIpati tIrtha lakShmInArAyaNa |",
+            "nIlESa Bajakaru SrInAtha tIrtha ||4||"
+          ],
+          [
+            "raGunAtha jagannAtha karajAta |",
+            "suguNa vidyAnAtha SrI vidyApatiyA ||5||"
+          ],
+          [
+            "SrI vidyAnidhi raGunAtha SrI raGuvarya |",
+            "kOvida vinuta raGUttama tIrtha ||6||"
+          ],
+          [
+            "vyAsa vidyApati vidyAdhISa tIrtha |",
+            "SrI satyavratara SrI satyanidhigaLa ||7||"
+          ],
+          [
+            "guru satyanAtha SrI satyABinava tIrtha |",
+            "vara satyapUrNa SrI satya vijayarA ||8||"
+          ],
+          [
+            "satya prIyara satyabOdha satya sandha |",
+            "satya varara satyadharmAKya munipA ||9||"
+          ],
+          [
+            "I namma gurugaLa anudina smarisUta |",
+            "prANESa viThalana karuNava paDeve||10||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/02/14/gurugala-pada-pankaja/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__01399702",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Pancha BEda by Pranesha dasaru",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಪಂಚಭೇದ ತಿಳಿವದು ಪ್ರತಿದಿನದಲೀ |",
+            "ಮುಂಚಿನಜ ಮಧ್ವಮುನಿ ಮತವನುಸರಿಸಿದವರು || ಪ ||"
+          ],
+          [
+            "ಜೀವೇಶರಿಗೆ ಭೇದ ಜೀವ ಜೀವಕೆ ಭೇದ |",
+            "ದೇವರಿಗು ಜಡಕು, ಜಡಕೆ ಜಡ ಭೇದಾ ||",
+            "ಆವಾಗ ಜೀವರಿಗೆ ಜಡಗಳಿಗೆ ಭೇದುಂಟು |",
+            "ಈ ವಿವರವ ಪೇಳ್ವೆ ಯನ್ನಾಪನಿತು ಕೇಳುವದೂ || 1 ||"
+          ],
+          [
+            "ಈಶ ನಿತ್ಯ ಅನಾದಿ ಸ್ವರತ ಸರ್ವಗ ಸ್ವಪ್ರ- |",
+            "ಕಾಶ ಸರ್ವಜ್ಞ ವಿಶ್ವ ವಿಲಕ್ಷಣಾ ||",
+            "ಮೇಶ ಅಪರಿಚ್ಛಿನ್ನ ಮೂರ್ತಿ ಪ್ರಾಣಿಗಳಿಂದ |",
+            "ತಾ ಸಾಕ್ಷಿಯಾಗಿ ಬಹು ಕರ್ಮಗಳ ಮಾಡಿಸುವ || 2 ||"
+          ],
+          [
+            "ಶ್ರೀ ಮುಖ ಜಗತ್ಯಕುತ್ಪತ್ಯಾದಿ ಕಾರಣ ಮ- |",
+            "ಹಾ ಮಹಿಮ ಸರ್ವತಂತ್ರ ಸ್ವತಂತ್ರಾ ||",
+            "ಆಮಯ ವಿದೂರ ಜ್ಞಾನಾನಂದ ಬಲ ಪೂರ್ಣ |",
+            "ಸೀಮೆಯಿಲ್ಲದ ಸುಗುಣ ಕ್ರಿಯಾತ್ಮಕ ಸ್ವರೂಪ || 3 ||"
+          ],
+          [
+            "ಸುಖ ದುಃಖ ಭೋಗಿ ಜೀವನು ಅಸ್ವತಂತ್ರ ಬಹು |",
+            "ಕಕುಲಾತಿ ಉಳ್ಳವನು ದುರ್ವಿಷಯದೀ ||",
+            "ಲಕುಮೀಶನಲ್ಲಿ ಭಕ್ತಿ ವಿವರ್ಜಿತನು ಪ್ರತಿ ಕ್ಷ- |",
+            "ಣಕೆ ಅನಂತ ಅಪರಾಧಿ ಜನ್ಮ ಮೃತಿ ಉಳ್ಳವನು || 4 ||"
+          ],
+          [
+            "ಆದಿ ವ್ಯಾಧಿಗಳಿಂದ ಪೀಡಿತನು ಅಜ್ಞಾನಿ |",
+            "ಮಾಧವನ ಬಂಧಕ ಶಕುತಿಯೊಳಗಿಹ್ಯಾ ||",
+            "ತಾ ಧರಿಸಿಹನು ಪ್ರಾಕೃತ ಪ್ರಾಕೃತಾವರಣ |",
+            "ಭೇದವೆ ಸಿದ್ಧ ಯಿಂಥ ಜೀವಗೂ ಹರಿಗ್ಯೂ || 5 ||"
+          ],
+          [
+            "ಒಂದಲ್ಲ ಸರ್ವ ಜೀವರು ಸತ್ವ ರಜ ತಮರು |",
+            "ಯಂದು ಭೇದಗಳುಂಟವರ ಲಕ್ಷಣಾ ||",
+            "ಮುಂದಿನ ಪದದಿ ಪೇಳ್ವೆ ಸಜ್ಜನರು ಕೇಳಿಯಾ- |",
+            "ನಂದ ಬಡಲೆಂದು ವಿನಯದಲಿ ಬಿನ್ನೈಸುವೆನು || 6 ||"
+          ],
+          [
+            "ಛಿನ್ನ ಭಕ್ತರು ಯನಿಪರೆಲ್ಲ ದೇವತಿಗಳ |",
+            "ಚ್ಛಿನ್ನ ಭಕ್ತರು ವಿಧೀರವರ್ಹೆಂಡರೂ ||",
+            "ಚನ್ನಾಗಿ ಮುದದಿ ಈ ನಿರ್ಜರರ ತರತಮ್ಯ |",
+            "ವನ್ನು ಕೇಳಿಕೊಬೇಕು ಜ್ಞಾನಿಗಳ ಮುಖದಿಂದ || 7 ||"
+          ],
+          [
+            "ವಿಧಿ ಮೊದಲು ತೃಣ ಜೀವ ಪರಿಯಂತ ಸಾತ್ವಿಕರು |",
+            "ಇದರೊಳಗೆ ದೇವ, ಋಷಿ, ಪಿತೃಪ, ನರರೂ ||",
+            "ಸುಧಿಗೆ ಯೋಗ್ಯ ರಜಾದಿ ಗೀರ್ವಾಣ ಗಂಧರ್ವ |",
+            "ತುದಿಯಾಗಿ ಸಾಂಶರು ನಿರಂಶರುಳಿದವರೆಲ್ಲ || 8 ||"
+          ],
+          [
+            "ಇವರಿಂದ ಭಿನ್ನ ರಾಜಸರು ಗೋ ಭೂ ನರಕ |",
+            "ತ್ರಿವಿಧ ಗತಿ ಉಳ್ಳವರು ಪಂಚಭೇದಾ ||",
+            "ವಿವರ ತರತಮ ದೇವರ ಮಹತ್ಮಿಯನು ಅರಿಯ |",
+            "ದವರು ಲಿಂಗಕಳಿಯರು ಧಾಮತ್ರಯ ಪೊಗದವರೂ || 9 ||"
+          ],
+          [
+            "ಸಂಸಾರಿಗಳಿಗೆ ಭಿನ್ನರು ತಮೋಗುಣದವರು |",
+            "ಕಂಸಾರಿಯಲಿ ದ್ವೇಷವರ ಸ್ವಭಾವಾ ||",
+            "ಆ ಸುರಾರಿಗಳು ನಾಲ್ಕು ಪ್ರಕಾರ ದೈತ್ಯ ರಾ |",
+            "ಕ್ಷಸರು, ಪಿಶಾಚರವರನುಗರು, ನರಾಧಮರು || 10 ||"
+          ],
+          [
+            "ಈ ನಾಲ್ಕು ಬಗೆಯ ಸುರರಿಗೆ ಅರಸು ಕಲಿಯವನಾ |",
+            "ಹೀನತನವೆಷ್ಟುಚ್ಚರಿಸಲಿ ಮಿಥ್ಯಾ ||",
+            "ಜ್ಞಾನಿ ಭೇದವನರಿಯ ಪಂಚ ಮಹಾಪಾತಕಿ ಪು- |",
+            "ರಾಣ ವೇದಗಳಿಗೆ ವಿರುದ್ಧಾರ್ಥ ಕಲ್ಪಿಸುವಾ || 11 ||"
+          ],
+          [
+            "ಸುಜನರಾಚರಣೆ ನಡಿಯಗುಡ ದುಃಖ ಬಡಿಸುವ |",
+            "ಕುಜನರಿಗನೇಕ ಬಗೆ ಸಹಯವಹನೂ ||",
+            "ಪ್ರಜಗಳನ ರೋಗನಾ ವೃಷ್ಟಿಯಿಂ ದಣಿಸುವನು |",
+            "ವೃಜನವನ ವಪು ತಾಯಿ ತಂಗಿಯಂಬರನರಿಯ || 12 ||"
+          ],
+          [
+            "ಬವರ ಬಂಗಾರ ದ್ಯೂತಾ ಪೇಯ ಅನೃತ ನಟ |",
+            "ಯುವತಿಯೀಯಾರು ಸ್ಥಳ ನಿಲಯವವರಿಗೆ ||",
+            "ನವವಿಧ ದ್ವೇಷಿಗಳಿಗಾಕಾರನೆನಿಸುವನು |",
+            "ಅವನ ಸಮ ಪಾಪಿಗಳು ಮೂರು ಲೋಕದಲಿಲ್ಲ || 13 ||"
+          ],
+          [
+            "ಆ ನೀಚನ ಮಲಮೂತ್ರ ವಿಸರ್ಜನದಿ ಘೋರ |",
+            "ಕಾನನದಿ ಕತ್ತಲಿಯೊಳಗೆ ಸ್ಮರಿಪುದೂ ||",
+            "ಕ್ಷೊಣಿಯೊಳವನ ನಿಂದೆ ನಿರುತದಲಿ ಮಾಡುವದೆ |",
+            "ಶ್ರೀನಾಥನರ್ಚನೆ ಮಹಾಯಜ್ಞವೆನಿಸುವದು || 14 ||"
+          ],
+          [
+            "ಈ ವಿಧದಿ ಮೂರು ಗುಣದಿಂದ ಪರಸ್ಪರ ಜೀವ |",
+            "ಜೀವರಿಗೆ ಭೇದ ಯೋಗ್ಯತಿ ಪ್ರಕಾರಾ ||",
+            "ಮೂವರಿಗೆ ಪಾಪಮಿಶ್ರಿತ ಕರ್ಮ ಪುಣ್ಯ ಬಹು |",
+            "ನೋವು ಸ್ವರ್ಗ ನರಕ ಸುಮೋಕ್ಷಾದಿ ಗತಿ ಉಂಟು || 15 ||"
+          ],
+          [
+            "ಈ ಜೀವರಿಗೆ ಉಳ್ಳನುಭವ ಜಡಗಳಿಗಿಲ್ಲ |",
+            "ನೈಜವಾಯಿತು ಭೇದ ಜೀವ ಜಡಕೇ ||",
+            "ಆ ಜಡ ತ್ರಿ, ನಿತ್ಯಾ ಅನಿತ್ಯನಿತ್ಯಾ, ನಿತ್ಯ |",
+            "ಮಾಜದವು ಅವ್ಯಾಕೃತ ನಭಶೃತಿ ವರ್ಣಗಳೂ || 16 ||"
+          ],
+          [
+            "ಪ್ರಾಕೃತ ವಿಕೃತ ವೈಕೃತತ್ರಯ ಅಸ್ಥಿರ ಜಡವು |",
+            "ಪ್ರಾಕೃತವಜಾಂಡ ಧೊರ ಆವರಣವೂ ||",
+            "ಸ್ವೀಕೃತೈವತ್ತು ಕೋಟ್ಯೋಜನ ಸುವರ್ಣಾತ್ಮ |",
+            "ಕಾಕ್ರಮಿಸಿಹದಜಾಂಡಕಿದು ವಿಕೃತ ಜಡವೆಂದು || 17 ||"
+          ],
+          [
+            "ಸರಸಿಜ ಭವಾಂಡದೊಳಿಹ ನೆಲ ಜಲಧಿ ಗಿರಿಗಳು |",
+            "ಎರಡೇಳು ಭುವನ ವೈಕೃತ ಜಡವಿದೂ ||",
+            "ಸ್ಥಿರ ಅಸ್ಥಿರ ಜಡತ್ರಯ ವಿಧ ಪುರಾಣಗಳರ್ಥ |",
+            "ಇರುತಿಹವು ಅಚಲಾಗಿ ಶಬ್ದಗಳ ನಿತ್ಯಾ || 18 ||"
+          ],
+          [
+            "ಮೂಲ ಪ್ರಕೃತಿಗತ ತ್ರಿವಿಧಾನಂತ ಪರಮಾಣು |",
+            "ಜಾಲ ಕಾರಣತ ಸುಸ್ಥಿರವೆನಿಪವೂ ||",
+            "ಮ್ಯಾಲೆ ಅದರಿಂದಾದ ತತ್ವಗಳ ನಿತ್ಯ ಮಹ |",
+            "ಕಾಲವೆಂದಿಗ್ಯು ನಿತ್ಯ ಅಣುಕಾಲಗಳ ನಿತ್ಯಾ || 19 ||"
+          ],
+          [
+            "ಹೀಗೆ ಮೂರು ವಿಧ ಜಡ ಒಂದೊಂದೆ ಮೂರು ಮೂ- |",
+            "ರಾಗಿರಲು ಜಡ ಜಡಕೆ ಭೇದ ಸಿದ್ಧಾ ||",
+            "ಭಾಗಾರ ಮಾಡಿ ಗುಣರೂಪ ಕ್ರಯದಿ ನೋಡೆ |",
+            "ನಾಗಾರಿವಹಗೆ ಜಡಗಳಿಗೆ ಭೇದವೇ ಸತ್ಯಾ || 20 ||"
+          ],
+          [
+            "ಈ ಕಮಲಜಾಂಡವು ಅನಿತ್ಯವಿದರೊಳಗೆ ಎಂ- |",
+            "ದೂ ಕೆಡದೆ ಸುಖಕಾಂತಿ ಯುಕ್ತವಾದಾ ||",
+            "ಶ್ರೀಕಳತ್ರನ ತ್ರಿಧಾಮಗಳು ಕುಕಲಿಗೆ ತಕ್ಕ |",
+            "ಶೋಕಪೂರಿತವಾದ ನಿತ್ಯ ನರಕಗಳಿಹವು || 21 ||"
+          ],
+          [
+            "ಈ ಪಂಚಭೇದ ಜ್ಞಾನಿಲ್ಲದವ ಶ್ರೀ ಮುದ್ರಿ |",
+            "ಗೋಪಿಚಂದನ ಧರಿಸಿದರು ಫಲವೇನೂ ||",
+            "ಈ ಪೊಡವಿಯೊಳು ವೇಷಧಾರಿಗಳು ಜೀವಿಸರೆ |",
+            "ಆ ಪರಿಯ ಭಾಸ ವೈಷ್ಣವನೆಂದರಿಯಬೇಕೂ || 22 ||"
+          ],
+          [
+            "ಹರಿಗುರುಗಳ ದಯ ಪಡೆವರಿಗೆ ರುಚಿ ತೋರ್ವದಿತ |",
+            "ರರಿಗೆ ಈ ಕೃತಿಯು ಕರ್ಣ ಕಠೋರವೂ ||",
+            "ತರಣಿ ಬರೆ ಸರ್ವರಿಗೆ ಘೂಕಗಾದಂತೆ ಇದು |",
+            "ಬರಿಯ ಮಾತಲ್ಲ ಶಾಸ್ತ್ರಕೆ ಸಮ್ಮತಾಗಿಹದು || 23 ||"
+          ],
+          [
+            "ಹೀನರೊಳು ಬೆರಿಯದಲೆ ಪಂಚಭೇದವ ತಿಳಿದು |",
+            "ಸಾನುರಾಗದಲಿ ಹರಿ ಸರ್ವೋತ್ತುಮಾ ||",
+            "ಪ್ರಾಣದೇವರೆ ಗುರುಗಳೆಂದರಿತು ಭಜಿಸುವರು |",
+            "ಕಾಣರು ಕು ಸಂಸಾರ ಧಾಮತ್ರ ವೈದುವರು || 24 ||"
+          ],
+          [
+            "ಇಪ್ಪತ್ತೈದು ಪದಗಳಿಂದ ಸಂಗತಿಯಾಗಿ |",
+            "ಒಪ್ಪುತಿಹ ಈ ಪಂಚಭೇದವನ್ನೂ ||",
+            "ತಪ್ಪದಲೆ ನಿತ್ಯ ಪಠಿಸುವರ ಪೊರವವನು ಬೊಮ್ಮ- |",
+            "ನಪ್ಪ ಶ್ರೀ ಪ್ರಾಣೇಶ ವಿಠಲನಿಹಪರದಲ್ಲಿ || 25 ||"
+          ]
+        ],
+        "iast": [
+          [
+            "paṃcabheda tiḻivadu pratidinadalī |",
+            "muṃcinaja madhvamuni matavanusarisidavaru || pa ||"
+          ],
+          [
+            "jīveśarigè bheda jīva jīvakè bheda |",
+            "devarigu jaḍaku, jaḍakè jaḍa bhedā ||",
+            "āvāga jīvarigè jaḍagaḻigè bheduṃṭu |",
+            "ī vivarava peḻvè yannāpanitu keḻuvadū || 1 ||"
+          ],
+          [
+            "īśa nitya anādi svarata sarvaga svapra- |",
+            "kāśa sarvajña viśva vilakṣaṇā ||",
+            "meśa aparicchinna mūrti prāṇigaḻiṃda |",
+            "tā sākṣiyāgi bahu karmagaḻa māḍisuva || 2 ||"
+          ],
+          [
+            "śrī mukha jagatyakutpatyādi kāraṇa ma- |",
+            "hā mahima sarvataṃtra svataṃtrā ||",
+            "āmaya vidūra jñānānaṃda bala pūrṇa |",
+            "sīmèyillada suguṇa kriyātmaka svarūpa || 3 ||"
+          ],
+          [
+            "sukha duḥkha bhogi jīvanu asvataṃtra bahu |",
+            "kakulāti uḻḻavanu durviṣayadī ||",
+            "lakumīśanalli bhakti vivarjitanu prati kṣa- |",
+            "ṇakè anaṃta aparādhi janma mṛti uḻḻavanu || 4 ||"
+          ],
+          [
+            "ādi vyādhigaḻiṃda pīḍitanu ajñāni |",
+            "mādhavana baṃdhaka śakutiyòḻagihyā ||",
+            "tā dharisihanu prākṛta prākṛtāvaraṇa |",
+            "bhedavè siddha yiṃtha jīvagū harigyū || 5 ||"
+          ],
+          [
+            "òṃdalla sarva jīvaru satva raja tamaru |",
+            "yaṃdu bhedagaḻuṃṭavara lakṣaṇā ||",
+            "muṃdina padadi peḻvè sajjanaru keḻiyā- |",
+            "naṃda baḍalèṃdu vinayadali binnaisuvènu || 6 ||"
+          ],
+          [
+            "chinna bhaktaru yaniparèlla devatigaḻa |",
+            "cchinna bhaktaru vidhīravarhèṃḍarū ||",
+            "cannāgi mudadi ī nirjarara taratamya |",
+            "vannu keḻikòbeku jñānigaḻa mukhadiṃda || 7 ||"
+          ],
+          [
+            "vidhi mòdalu tṛṇa jīva pariyaṃta sātvikaru |",
+            "idaròḻagè deva, ṛṣi, pitṛpa, nararū ||",
+            "sudhigè yogya rajādi gīrvāṇa gaṃdharva |",
+            "tudiyāgi sāṃśaru niraṃśaruḻidavarèlla || 8 ||"
+          ],
+          [
+            "ivariṃda bhinna rājasaru go bhū naraka |",
+            "trividha gati uḻḻavaru paṃcabhedā ||",
+            "vivara taratama devara mahatmiyanu ariya |",
+            "davaru liṃgakaḻiyaru dhāmatraya pògadavarū || 9 ||"
+          ],
+          [
+            "saṃsārigaḻigè bhinnaru tamoguṇadavaru |",
+            "kaṃsāriyali dveṣavara svabhāvā ||",
+            "ā surārigaḻu nālku prakāra daitya rā |",
+            "kṣasaru, piśācaravaranugaru, narādhamaru || 10 ||"
+          ],
+          [
+            "ī nālku bagèya surarigè arasu kaliyavanā |",
+            "hīnatanavèṣṭuccarisali mithyā ||",
+            "jñāni bhedavanariya paṃca mahāpātaki pu- |",
+            "rāṇa vedagaḻigè viruddhārtha kalpisuvā || 11 ||"
+          ],
+          [
+            "sujanarācaraṇè naḍiyaguḍa duḥkha baḍisuva |",
+            "kujanariganeka bagè sahayavahanū ||",
+            "prajagaḻana roganā vṛṣṭiyiṃ daṇisuvanu |",
+            "vṛjanavana vapu tāyi taṃgiyaṃbaranariya || 12 ||"
+          ],
+          [
+            "bavara baṃgāra dyūtā peya anṛta naṭa |",
+            "yuvatiyīyāru sthaḻa nilayavavarigè ||",
+            "navavidha dveṣigaḻigākāranènisuvanu |",
+            "avana sama pāpigaḻu mūru lokadalilla || 13 ||"
+          ],
+          [
+            "ā nīcana malamūtra visarjanadi ghora |",
+            "kānanadi kattaliyòḻagè smaripudū ||",
+            "kṣèūṇiyòḻavana niṃdè nirutadali māḍuvadè |",
+            "śrīnāthanarcanè mahāyajñavènisuvadu || 14 ||"
+          ],
+          [
+            "ī vidhadi mūru guṇadiṃda paraspara jīva |",
+            "jīvarigè bheda yogyati prakārā ||",
+            "mūvarigè pāpamiśrita karma puṇya bahu |",
+            "novu svarga naraka sumokṣādi gati uṃṭu || 15 ||"
+          ],
+          [
+            "ī jīvarigè uḻḻanubhava jaḍagaḻigilla |",
+            "naijavāyitu bheda jīva jaḍake ||",
+            "ā jaḍa tri, nityā anityanityā, nitya |",
+            "mājadavu avyākṛta nabhaśṛti varṇagaḻū || 16 ||"
+          ],
+          [
+            "prākṛta vikṛta vaikṛtatraya asthira jaḍavu |",
+            "prākṛtavajāṃḍa dhòra āvaraṇavū ||",
+            "svīkṛtaivattu koṭyojana suvarṇātma |",
+            "kākramisihadajāṃḍakidu vikṛta jaḍavèṃdu || 17 ||"
+          ],
+          [
+            "sarasija bhavāṃḍadòḻiha nèla jaladhi girigaḻu |",
+            "èraḍeḻu bhuvana vaikṛta jaḍavidū ||",
+            "sthira asthira jaḍatraya vidha purāṇagaḻartha |",
+            "irutihavu acalāgi śabdagaḻa nityā || 18 ||"
+          ],
+          [
+            "mūla prakṛtigata trividhānaṃta paramāṇu |",
+            "jāla kāraṇata susthiravènipavū ||",
+            "myālè adariṃdāda tatvagaḻa nitya maha |",
+            "kālavèṃdigyu nitya aṇukālagaḻa nityā || 19 ||"
+          ],
+          [
+            "hīgè mūru vidha jaḍa òṃdòṃdè mūru mū- |",
+            "rāgiralu jaḍa jaḍakè bheda siddhā ||",
+            "bhāgāra māḍi guṇarūpa krayadi noḍè |",
+            "nāgārivahagè jaḍagaḻigè bhedave satyā || 20 ||"
+          ],
+          [
+            "ī kamalajāṃḍavu anityavidaròḻagè èṃ- |",
+            "dū kèḍadè sukhakāṃti yuktavādā ||",
+            "śrīkaḻatrana tridhāmagaḻu kukaligè takka |",
+            "śokapūritavāda nitya narakagaḻihavu || 21 ||"
+          ],
+          [
+            "ī paṃcabheda jñānilladava śrī mudri |",
+            "gopicaṃdana dharisidaru phalavenū ||",
+            "ī pòḍaviyòḻu veṣadhārigaḻu jīvisarè |",
+            "ā pariya bhāsa vaiṣṇavanèṃdariyabekū || 22 ||"
+          ],
+          [
+            "harigurugaḻa daya paḍèvarigè ruci torvadita |",
+            "rarigè ī kṛtiyu karṇa kaṭhoravū ||",
+            "taraṇi barè sarvarigè ghūkagādaṃtè idu |",
+            "bariya mātalla śāstrakè sammatāgihadu || 23 ||"
+          ],
+          [
+            "hīnaròḻu bèriyadalè paṃcabhedava tiḻidu |",
+            "sānurāgadali hari sarvottumā ||",
+            "prāṇadevarè gurugaḻèṃdaritu bhajisuvaru |",
+            "kāṇaru ku saṃsāra dhāmatra vaiduvaru || 24 ||"
+          ],
+          [
+            "ippattaidu padagaḻiṃda saṃgatiyāgi |",
+            "òpputiha ī paṃcabhedavannū ||",
+            "tappadalè nitya paṭhisuvara pòravavanu bòmma- |",
+            "nappa śrī prāṇeśa viṭhalanihaparadalli || 25 ||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "पंचभेद तिळिवदु प्रतिदिनदली |",
+            "मुंचिनज मध्वमुनि मतवनुसरिसिदवरु || प ||"
+          ],
+          [
+            "जीवेशरिगॆ भेद जीव जीवकॆ भेद |",
+            "देवरिगु जडकु, जडकॆ जड भेदा ||",
+            "आवाग जीवरिगॆ जडगळिगॆ भेदुंटु |",
+            "ई विवरव पेळ्वॆ यन्नापनितु केळुवदू || 1 ||"
+          ],
+          [
+            "ईश नित्य अनादि स्वरत सर्वग स्वप्र- |",
+            "काश सर्वज्ञ विश्व विलक्षणा ||",
+            "मेश अपरिच्छिन्न मूर्ति प्राणिगळिंद |",
+            "ता साक्षियागि बहु कर्मगळ माडिसुव || 2 ||"
+          ],
+          [
+            "श्री मुख जगत्यकुत्पत्यादि कारण म- |",
+            "हा महिम सर्वतंत्र स्वतंत्रा ||",
+            "आमय विदूर ज्ञानानंद बल पूर्ण |",
+            "सीमॆयिल्लद सुगुण क्रियात्मक स्वरूप || 3 ||"
+          ],
+          [
+            "सुख दुःख भोगि जीवनु अस्वतंत्र बहु |",
+            "ककुलाति उळ्ळवनु दुर्विषयदी ||",
+            "लकुमीशनल्लि भक्ति विवर्जितनु प्रति क्ष- |",
+            "णकॆ अनंत अपराधि जन्म मृति उळ्ळवनु || 4 ||"
+          ],
+          [
+            "आदि व्याधिगळिंद पीडितनु अज्ञानि |",
+            "माधवन बंधक शकुतियॊळगिह्या ||",
+            "ता धरिसिहनु प्राकृत प्राकृतावरण |",
+            "भेदवॆ सिद्ध यिंथ जीवगू हरिग्यू || 5 ||"
+          ],
+          [
+            "ऒंदल्ल सर्व जीवरु सत्व रज तमरु |",
+            "यंदु भेदगळुंटवर लक्षणा ||",
+            "मुंदिन पददि पेळ्वॆ सज्जनरु केळिया- |",
+            "नंद बडलॆंदु विनयदलि बिन्नैसुवॆनु || 6 ||"
+          ],
+          [
+            "छिन्न भक्तरु यनिपरॆल्ल देवतिगळ |",
+            "च्छिन्न भक्तरु विधीरवर्हॆंडरू ||",
+            "चन्नागि मुददि ई निर्जरर तरतम्य |",
+            "वन्नु केळिकॊबेकु ज्ञानिगळ मुखदिंद || 7 ||"
+          ],
+          [
+            "विधि मॊदलु तृण जीव परियंत सात्विकरु |",
+            "इदरॊळगॆ देव, ऋषि, पितृप, नररू ||",
+            "सुधिगॆ योग्य रजादि गीर्वाण गंधर्व |",
+            "तुदियागि सांशरु निरंशरुळिदवरॆल्ल || 8 ||"
+          ],
+          [
+            "इवरिंद भिन्न राजसरु गो भू नरक |",
+            "त्रिविध गति उळ्ळवरु पंचभेदा ||",
+            "विवर तरतम देवर महत्मियनु अरिय |",
+            "दवरु लिंगकळियरु धामत्रय पॊगदवरू || 9 ||"
+          ],
+          [
+            "संसारिगळिगॆ भिन्नरु तमोगुणदवरु |",
+            "कंसारियलि द्वेषवर स्वभावा ||",
+            "आ सुरारिगळु नाल्कु प्रकार दैत्य रा |",
+            "क्षसरु, पिशाचरवरनुगरु, नराधमरु || 10 ||"
+          ],
+          [
+            "ई नाल्कु बगॆय सुररिगॆ अरसु कलियवना |",
+            "हीनतनवॆष्टुच्चरिसलि मिथ्या ||",
+            "ज्ञानि भेदवनरिय पंच महापातकि पु- |",
+            "राण वेदगळिगॆ विरुद्धार्थ कल्पिसुवा || 11 ||"
+          ],
+          [
+            "सुजनराचरणॆ नडियगुड दुःख बडिसुव |",
+            "कुजनरिगनेक बगॆ सहयवहनू ||",
+            "प्रजगळन रोगना वृष्टियिं दणिसुवनु |",
+            "वृजनवन वपु तायि तंगियंबरनरिय || 12 ||"
+          ],
+          [
+            "बवर बंगार द्यूता पेय अनृत नट |",
+            "युवतियीयारु स्थळ निलयववरिगॆ ||",
+            "नवविध द्वेषिगळिगाकारनॆनिसुवनु |",
+            "अवन सम पापिगळु मूरु लोकदलिल्ल || 13 ||"
+          ],
+          [
+            "आ नीचन मलमूत्र विसर्जनदि घोर |",
+            "काननदि कत्तलियॊळगॆ स्मरिपुदू ||",
+            "क्षॆूणियॊळवन निंदॆ निरुतदलि माडुवदॆ |",
+            "श्रीनाथनर्चनॆ महायज्ञवॆनिसुवदु || 14 ||"
+          ],
+          [
+            "ई विधदि मूरु गुणदिंद परस्पर जीव |",
+            "जीवरिगॆ भेद योग्यति प्रकारा ||",
+            "मूवरिगॆ पापमिश्रित कर्म पुण्य बहु |",
+            "नोवु स्वर्ग नरक सुमोक्षादि गति उंटु || 15 ||"
+          ],
+          [
+            "ई जीवरिगॆ उळ्ळनुभव जडगळिगिल्ल |",
+            "नैजवायितु भेद जीव जडके ||",
+            "आ जड त्रि, नित्या अनित्यनित्या, नित्य |",
+            "माजदवु अव्याकृत नभशृति वर्णगळू || 16 ||"
+          ],
+          [
+            "प्राकृत विकृत वैकृतत्रय अस्थिर जडवु |",
+            "प्राकृतवजांड धॊर आवरणवू ||",
+            "स्वीकृतैवत्तु कोट्योजन सुवर्णात्म |",
+            "काक्रमिसिहदजांडकिदु विकृत जडवॆंदु || 17 ||"
+          ],
+          [
+            "सरसिज भवांडदॊळिह नॆल जलधि गिरिगळु |",
+            "ऎरडेळु भुवन वैकृत जडविदू ||",
+            "स्थिर अस्थिर जडत्रय विध पुराणगळर्थ |",
+            "इरुतिहवु अचलागि शब्दगळ नित्या || 18 ||"
+          ],
+          [
+            "मूल प्रकृतिगत त्रिविधानंत परमाणु |",
+            "जाल कारणत सुस्थिरवॆनिपवू ||",
+            "म्यालॆ अदरिंदाद तत्वगळ नित्य मह |",
+            "कालवॆंदिग्यु नित्य अणुकालगळ नित्या || 19 ||"
+          ],
+          [
+            "हीगॆ मूरु विध जड ऒंदॊंदॆ मूरु मू- |",
+            "रागिरलु जड जडकॆ भेद सिद्धा ||",
+            "भागार माडि गुणरूप क्रयदि नोडॆ |",
+            "नागारिवहगॆ जडगळिगॆ भेदवे सत्या || 20 ||"
+          ],
+          [
+            "ई कमलजांडवु अनित्यविदरॊळगॆ ऎं- |",
+            "दू कॆडदॆ सुखकांति युक्तवादा ||",
+            "श्रीकळत्रन त्रिधामगळु कुकलिगॆ तक्क |",
+            "शोकपूरितवाद नित्य नरकगळिहवु || 21 ||"
+          ],
+          [
+            "ई पंचभेद ज्ञानिल्लदव श्री मुद्रि |",
+            "गोपिचंदन धरिसिदरु फलवेनू ||",
+            "ई पॊडवियॊळु वेषधारिगळु जीविसरॆ |",
+            "आ परिय भास वैष्णवनॆंदरियबेकू || 22 ||"
+          ],
+          [
+            "हरिगुरुगळ दय पडॆवरिगॆ रुचि तोर्वदित |",
+            "ररिगॆ ई कृतियु कर्ण कठोरवू ||",
+            "तरणि बरॆ सर्वरिगॆ घूकगादंतॆ इदु |",
+            "बरिय मातल्ल शास्त्रकॆ सम्मतागिहदु || 23 ||"
+          ],
+          [
+            "हीनरॊळु बॆरियदलॆ पंचभेदव तिळिदु |",
+            "सानुरागदलि हरि सर्वोत्तुमा ||",
+            "प्राणदेवरॆ गुरुगळॆंदरितु भजिसुवरु |",
+            "काणरु कु संसार धामत्र वैदुवरु || 24 ||"
+          ],
+          [
+            "इप्पत्तैदु पदगळिंद संगतियागि |",
+            "ऒप्पुतिह ई पंचभेदवन्नू ||",
+            "तप्पदलॆ नित्य पठिसुवर पॊरववनु बॊम्म- |",
+            "नप्प श्री प्राणेश विठलनिहपरदल्लि || 25 ||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "pancaBEda tiLivadu pratidinadalI |",
+            "muncinaja madhvamuni matavanusarisidavaru || pa ||"
+          ],
+          [
+            "jIvESarige BEda jIva jIvake BEda |",
+            "dEvarigu jaDaku, jaDake jaDa BEdA ||",
+            "AvAga jIvarige jaDagaLige BEdunTu |",
+            "I vivarava pELve yannApanitu kELuvadU || 1 ||"
+          ],
+          [
+            "ISa nitya anAdi svarata sarvaga svapra- |",
+            "kASa sarvaj~ja viSva vilakShaNA ||",
+            "mESa aparicCinna mUrti prANigaLinda |",
+            "tA sAkShiyAgi bahu karmagaLa mADisuva || 2 ||"
+          ],
+          [
+            "SrI muKa jagatyakutpatyAdi kAraNa ma- |",
+            "hA mahima sarvataMtra svatantrA ||",
+            "Amaya vidUra j~jAnAnanda bala pUrNa |",
+            "sImeyillada suguNa kriyAtmaka svarUpa || 3 ||"
+          ],
+          [
+            "suKa duHKa BOgi jIvanu asvatantra bahu |",
+            "kakulAti uLLavanu durviShayadI ||",
+            "lakumISanalli Bakti vivarjitanu prati kSha- |",
+            "Nake anaMta aparAdhi janma mRuti uLLavanu || 4 ||"
+          ],
+          [
+            "Adi vyAdhigaLinda pIDitanu aj~jAni |",
+            "mAdhavana baMdhaka SakutiyoLagihyA ||",
+            "tA dharisihanu prAkRuta prAkRutAvaraNa |",
+            "BEdave siddha yintha jIvagU harigyU || 5 ||"
+          ],
+          [
+            "oMdalla sarva jIvaru satva raja tamaru |",
+            "yandu BEdagaLunTavara lakShaNA ||",
+            "mundina padadi pELve sajjanaru kELiyA- |",
+            "nanda baDalendu vinayadali binnaisuvenu || 6 ||"
+          ],
+          [
+            "Cinna Baktaru yaniparella dEvatigaLa |",
+            "cCinna Baktaru vidhIravarheMDarU ||",
+            "cannAgi mudadi I nirjarara taratamya |",
+            "vannu kELikobEku j~jAnigaLa muKadinda || 7 ||"
+          ],
+          [
+            "vidhi modalu tRuNa jIva pariyaMta sAtvikaru |",
+            "idaroLage dEva, RuShi, pitRupa, nararU ||",
+            "sudhige yOgya rajAdi gIrvANa gandharva |",
+            "tudiyAgi sAMSaru niraMSaruLidavarella || 8 ||"
+          ],
+          [
+            "ivarinda Binna rAjasaru gO BU naraka |",
+            "trividha gati uLLavaru pancaBEdA ||",
+            "vivara taratama dEvara mahatmiyanu ariya |",
+            "davaru liMgakaLiyaru dhAmatraya pogadavarU || 9 ||"
+          ],
+          [
+            "saMsArigaLige Binnaru tamOguNadavaru |",
+            "kaMsAriyali dvEShavara svaBAvA ||",
+            "A surArigaLu nAlku prakAra daitya rA |",
+            "kShasaru, piSAcaravaranugaru, narAdhamaru || 10 ||"
+          ],
+          [
+            "I nAlku bageya surarige arasu kaliyavanA |",
+            "hInatanaveShTuccarisali mithyA ||",
+            "j~jAni BEdavanariya paMca mahApAtaki pu- |",
+            "rANa vEdagaLige viruddhArtha kalpisuvA || 11 ||"
+          ],
+          [
+            "sujanarAcaraNe naDiyaguDa duHKa baDisuva |",
+            "kujanariganEka bage sahayavahanU ||",
+            "prajagaLana rOganA vRuShTiyiM daNisuvanu |",
+            "vRujanavana vapu tAyi tangiyaMbaranariya || 12 ||"
+          ],
+          [
+            "bavara bangAra dyUtA pEya anRuta naTa |",
+            "yuvatiyIyAru sthaLa nilayavavarige ||",
+            "navavidha dvEShigaLigAkAranenisuvanu |",
+            "avana sama pApigaLu mUru lOkadalilla || 13 ||"
+          ],
+          [
+            "A nIcana malamUtra visarjanadi GOra |",
+            "kAnanadi kattaliyoLage smaripudU ||",
+            "kShoNiyoLavana ninde nirutadali mADuvade |",
+            "SrInAthanarcane mahAyaj~javenisuvadu || 14 ||"
+          ],
+          [
+            "I vidhadi mUru guNadinda paraspara jIva |",
+            "jIvarige BEda yOgyati prakArA ||",
+            "mUvarige pApamiSrita karma puNya bahu |",
+            "nOvu svarga naraka sumOkShAdi gati unTu || 15 ||"
+          ],
+          [
+            "I jIvarige uLLanuBava jaDagaLigilla |",
+            "naijavAyitu BEda jIva jaDakE ||",
+            "A jaDa tri, nityA anityanityA, nitya |",
+            "mAjadavu avyAkRuta naBaSRuti varNagaLU || 16 ||"
+          ],
+          [
+            "prAkRuta vikRuta vaikRutatraya asthira jaDavu |",
+            "prAkRutavajAnDa dhora AvaraNavU ||",
+            "svIkRutaivattu kOTyOjana suvarNAtma |",
+            "kAkramisihadajAnDakidu vikRuta jaDavendu || 17 ||"
+          ],
+          [
+            "sarasija BavAnDadoLiha nela jaladhi girigaLu |",
+            "eraDELu Buvana vaikRuta jaDavidU ||",
+            "sthira asthira jaDatraya vidha purANagaLartha |",
+            "irutihavu acalAgi SabdagaLa nityA || 18 ||"
+          ],
+          [
+            "mUla prakRutigata trividhAnanta paramANu |",
+            "jAla kAraNata susthiravenipavU ||",
+            "myAle adarindAda tatvagaLa nitya maha |",
+            "kAlaveMdigyu nitya aNukAlagaLa nityA || 19 ||"
+          ],
+          [
+            "hIge mUru vidha jaDa ondonde mUru mU- |",
+            "rAgiralu jaDa jaDake BEda siddhA ||",
+            "BAgAra mADi guNarUpa krayadi nODe |",
+            "nAgArivahage jaDagaLige BEdavE satyA || 20 ||"
+          ],
+          [
+            "I kamalajAnDavu anityavidaroLage eM- |",
+            "dU keDade suKakAnti yuktavAdA ||",
+            "SrIkaLatrana tridhAmagaLu kukalige takka |",
+            "SOkapUritavAda nitya narakagaLihavu || 21 ||"
+          ],
+          [
+            "I pancaBEda j~jAnilladava SrI mudri |",
+            "gOpichandana dharisidaru PalavEnU ||",
+            "I poDaviyoLu vEShadhArigaLu jIvisare |",
+            "A pariya BAsa vaiShNavanendariyabEkU || 22 ||"
+          ],
+          [
+            "harigurugaLa daya paDevarige ruci tOrvadita |",
+            "rarige I kRutiyu karNa kaThOravU ||",
+            "taraNi bare sarvarige GUkagAdante idu |",
+            "bariya mAtalla SAstrake sammatAgihadu || 23 ||"
+          ],
+          [
+            "hInaroLu beriyadale pancaBEdava tiLidu |",
+            "sAnurAgadali hari sarvOttumA ||",
+            "prANadEvare gurugaLendaritu Bajisuvaru |",
+            "kANaru ku saMsAra dhAmatra vaiduvaru || 24 ||"
+          ],
+          [
+            "ippattaidu padagaLinda sangatiyAgi |",
+            "opputiha I pancaBEdavannU ||",
+            "tappadale nitya paThisuvara poravavanu bomma- |",
+            "nappa SrI prANESa viThalanihaparadalli || 25 ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/02/17/pancha-beda-by-pranesha-dasaru/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__40035300",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Dasara pada on Sri Madhava thirtharu(Nodide naa dhanyanindige)",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ನೋಡಿದೆ",
+            "ನಾ",
+            "ಧನ್ಯನಿಂದಿಗೆ",
+            "ನೋಡಿದೆ",
+            "ಗುರು",
+            "ಮಾಧವತೀರ್ಥರ",
+            "ವೃಂದಾವನವನು",
+            "ಪ"
+          ],
+          [
+            "ಗಂಗೆಗೇನು",
+            "ಪ್ರಯೋಜನ",
+            "ವಿಳೆಯೊಳಗೆ",
+            "ಬಾಹದಕೆ",
+            "ಪಿಂಗಳಗೇನು",
+            "ಜ್ಞಾನಿಗಳಗೇನು",
+            "ತುಂಗ",
+            "ಮಹಿಮೆಯಿಂದ",
+            "ಅಜ್ಞ",
+            "ಜನರ",
+            "ಪಾಪ",
+            "ಹಿಂಗಿಸಬೇಕೆಂಬುದಲ್ಲದೇ",
+            "ಮನವೇ"
+          ],
+          [
+            "ನರಹರಿ",
+            "ಗುರು",
+            "ಸುತ",
+            "ವರದ",
+            "ಅಕ್ಷೋಭ್ಯಮುನಿ",
+            "ಕರ",
+            "ಪೂಜಿತಾರವಿಂದನಾಭರಲ್ಲಿ",
+            "ಧರಾಧರಜ",
+            "ತೀರದಿ",
+            "ಸತ್ಯ",
+            "ಮುನಿಗಳಿಂದ",
+            "ನಿರುತಾರಾಧನೆ",
+            "ಕೊಳುತಿರ್ಪರು",
+            "ಮನವೇ"
+          ],
+          [
+            "ಏನು",
+            "ಇವರ",
+            "ಬಣ್ಣಿಸಲು",
+            "ಎನ್ನಿಂದೊಶವಲ್ಲ",
+            "ಆನತ",
+            "ಜನರಿಗೆ",
+            "ಕರುಣಿಸಿ",
+            "ಪ್ರಾಣೇಶವಿಠ್ಠಲನ",
+            "ಧಾಮ",
+            "ತೋರಿಸುವರು",
+            "ಕೇಸರಿಯ",
+            "ನೊಲಿಸಿದ",
+            "ಯತೀಶರಿವರೆಂದು"
+          ],
+          [
+            "ನೋಡಿದೆ",
+            "ನಾ",
+            "ಧನ್ಯನಿಂದಿಗೆ",
+            "ನೋಡಿದೆ",
+            "ಗುರು",
+            "ಮಾಧವತೀರ್ಥರ",
+            "ವೃಂದಾವನವನು",
+            "ಪ"
+          ],
+          [
+            "ಗಂಗೆಗೇನು",
+            "ಪ್ರಯೋಜನ",
+            "ವಿಳೆಯೊಳಗೆ",
+            "ಬಾಹದಕೆ",
+            "ಪಿಂಗಳಗೇನು",
+            "ಜ್ಞಾನಿಗಳಗೇನು",
+            "ತುಂಗ",
+            "ಮಹಿಮೆಯಿಂದ",
+            "ಅಜ್ಞ",
+            "ಜನರ",
+            "ಪಾಪ",
+            "ಹಿಂಗಿಸಬೇಕೆಂಬುದಲ್ಲದೇ",
+            "ಮನವೇ"
+          ],
+          [
+            "ನರಹರಿ",
+            "ಗುರು",
+            "ಸುತ",
+            "ವರದ",
+            "ಅಕ್ಷೋಭ್ಯಮುನಿ",
+            "ಕರ",
+            "ಪೂಜಿತಾರವಿಂದನಾಭರಲ್ಲಿ",
+            "ಧರಾಧರಜ",
+            "ತೀರದಿ",
+            "ಸತ್ಯ",
+            "ಮುನಿಗಳಿಂದ",
+            "ನಿರುತಾರಾಧನೆ",
+            "ಕೊಳುತಿರ್ಪರು",
+            "ಮನವೇ"
+          ],
+          [
+            "ಏನು",
+            "ಇವರ",
+            "ಬಣ್ಣಿಸಲು",
+            "ಎನ್ನಿಂದೊಶವಲ್ಲ",
+            "ಆನತ",
+            "ಜನರಿಗೆ",
+            "ಕರುಣಿಸಿ",
+            "ಪ್ರಾಣೇಶವಿಠ್ಠಲನ",
+            "ಧಾಮ",
+            "ತೋರಿಸುವರು",
+            "ಕೇಸರಿಯ",
+            "ನೊಲಿಸಿದ",
+            "ಯತೀಶರಿವರೆಂದು"
+          ]
+        ],
+        "iast": [
+          [
+            "noḍidè",
+            "nā",
+            "dhanyaniṃdigè",
+            "noḍidè",
+            "guru",
+            "mādhavatīrthara",
+            "vṛṃdāvanavanu",
+            "pa"
+          ],
+          [
+            "gaṃgègenu",
+            "prayojana",
+            "viḻèyòḻagè",
+            "bāhadakè",
+            "piṃgaḻagenu",
+            "jñānigaḻagenu",
+            "tuṃga",
+            "mahimèyiṃda",
+            "ajña",
+            "janara",
+            "pāpa",
+            "hiṃgisabekèṃbudallade",
+            "manave"
+          ],
+          [
+            "narahari",
+            "guru",
+            "suta",
+            "varada",
+            "akṣobhyamuni",
+            "kara",
+            "pūjitāraviṃdanābharalli",
+            "dharādharaja",
+            "tīradi",
+            "satya",
+            "munigaḻiṃda",
+            "nirutārādhanè",
+            "kòḻutirparu",
+            "manave"
+          ],
+          [
+            "enu",
+            "ivara",
+            "baṇṇisalu",
+            "ènniṃdòśavalla",
+            "ānata",
+            "janarigè",
+            "karuṇisi",
+            "prāṇeśaviṭhṭhalana",
+            "dhāma",
+            "torisuvaru",
+            "kesariya",
+            "nòlisida",
+            "yatīśarivarèṃdu"
+          ],
+          [
+            "noḍidè",
+            "nā",
+            "dhanyaniṃdigè",
+            "noḍidè",
+            "guru",
+            "mādhavatīrthara",
+            "vṛṃdāvanavanu",
+            "pa"
+          ],
+          [
+            "gaṃgègenu",
+            "prayojana",
+            "viḻèyòḻagè",
+            "bāhadakè",
+            "piṃgaḻagenu",
+            "jñānigaḻagenu",
+            "tuṃga",
+            "mahimèyiṃda",
+            "ajña",
+            "janara",
+            "pāpa",
+            "hiṃgisabekèṃbudallade",
+            "manave"
+          ],
+          [
+            "narahari",
+            "guru",
+            "suta",
+            "varada",
+            "akṣobhyamuni",
+            "kara",
+            "pūjitāraviṃdanābharalli",
+            "dharādharaja",
+            "tīradi",
+            "satya",
+            "munigaḻiṃda",
+            "nirutārādhanè",
+            "kòḻutirparu",
+            "manave"
+          ],
+          [
+            "enu",
+            "ivara",
+            "baṇṇisalu",
+            "ènniṃdòśavalla",
+            "ānata",
+            "janarigè",
+            "karuṇisi",
+            "prāṇeśaviṭhṭhalana",
+            "dhāma",
+            "torisuvaru",
+            "kesariya",
+            "nòlisida",
+            "yatīśarivarèṃdu"
+          ]
+        ],
+        "devanagari": [
+          [
+            "नोडिदॆ",
+            "ना",
+            "धन्यनिंदिगॆ",
+            "नोडिदॆ",
+            "गुरु",
+            "माधवतीर्थर",
+            "वृंदावनवनु",
+            "प"
+          ],
+          [
+            "गंगॆगेनु",
+            "प्रयोजन",
+            "विळॆयॊळगॆ",
+            "बाहदकॆ",
+            "पिंगळगेनु",
+            "ज्ञानिगळगेनु",
+            "तुंग",
+            "महिमॆयिंद",
+            "अज्ञ",
+            "जनर",
+            "पाप",
+            "हिंगिसबेकॆंबुदल्लदे",
+            "मनवे"
+          ],
+          [
+            "नरहरि",
+            "गुरु",
+            "सुत",
+            "वरद",
+            "अक्षोभ्यमुनि",
+            "कर",
+            "पूजितारविंदनाभरल्लि",
+            "धराधरज",
+            "तीरदि",
+            "सत्य",
+            "मुनिगळिंद",
+            "निरुताराधनॆ",
+            "कॊळुतिर्परु",
+            "मनवे"
+          ],
+          [
+            "एनु",
+            "इवर",
+            "बण्णिसलु",
+            "ऎन्निंदॊशवल्ल",
+            "आनत",
+            "जनरिगॆ",
+            "करुणिसि",
+            "प्राणेशविठ्ठलन",
+            "धाम",
+            "तोरिसुवरु",
+            "केसरिय",
+            "नॊलिसिद",
+            "यतीशरिवरॆंदु"
+          ],
+          [
+            "नोडिदॆ",
+            "ना",
+            "धन्यनिंदिगॆ",
+            "नोडिदॆ",
+            "गुरु",
+            "माधवतीर्थर",
+            "वृंदावनवनु",
+            "प"
+          ],
+          [
+            "गंगॆगेनु",
+            "प्रयोजन",
+            "विळॆयॊळगॆ",
+            "बाहदकॆ",
+            "पिंगळगेनु",
+            "ज्ञानिगळगेनु",
+            "तुंग",
+            "महिमॆयिंद",
+            "अज्ञ",
+            "जनर",
+            "पाप",
+            "हिंगिसबेकॆंबुदल्लदे",
+            "मनवे"
+          ],
+          [
+            "नरहरि",
+            "गुरु",
+            "सुत",
+            "वरद",
+            "अक्षोभ्यमुनि",
+            "कर",
+            "पूजितारविंदनाभरल्लि",
+            "धराधरज",
+            "तीरदि",
+            "सत्य",
+            "मुनिगळिंद",
+            "निरुताराधनॆ",
+            "कॊळुतिर्परु",
+            "मनवे"
+          ],
+          [
+            "एनु",
+            "इवर",
+            "बण्णिसलु",
+            "ऎन्निंदॊशवल्ल",
+            "आनत",
+            "जनरिगॆ",
+            "करुणिसि",
+            "प्राणेशविठ्ठलन",
+            "धाम",
+            "तोरिसुवरु",
+            "केसरिय",
+            "नॊलिसिद",
+            "यतीशरिवरॆंदु"
+          ]
+        ],
+        "source_roman": [
+          [
+            "nODide nA dhanyanindige |",
+            "nODide guru mAdhavatIrthara vRundAvanavanu || pa ||",
+            "gangegEnu prayOjana viLeyoLage bAhadake |",
+            "pingaLagEnu j~jAnigaLagEnu |",
+            "tunga mahimeynda aj~ja janara pApa |",
+            "hingisabEkeMbudalladE – manavE || 1 ||",
+            "narahari guru suta varada akShOByamuni |",
+            "kara pUjitAravindanABaralli |",
+            "” dharAdharaja ” tIradi satya munigaLinda |",
+            "nirutArAdhane koLutirparu – manavE || 2 ||",
+            "Enu ivara baNNisalu ennindoSavalla |",
+            "Anata janarige karuNisi |",
+            "prANESaviThThalana dhAma tOrisuvaru |",
+            "kEsariya nolisida yatISarivarendu || 3 ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/04/19/dasara-pada-on-sri-madhava-thirtharunodide-naa-dhanyanindige/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__2ddec9fb",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Dasara pada on Sri Padmanabha thirtharu(Odhagi paaliso bavambudhiya)",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಒದಗಿ ಪಾಲಿಸೊ ಭವಾಂಬುಧಿಯ ದಾಟಿಸೊ ||pa||"
+          ],
+          [
+            "ಮದನ ಜಿತ ಭೂಸುರ ಶರಣ್ಯ |ಪದುಮನಾಭ ಯತಿವರೇಣ್ಯ ||a.pa||"
+          ],
+          [
+            "ಸದ್ಯ ದೊಡ್ಡ ಮಾತು ಅಪ್ರ |ಬುದ್ಧನಾ ನುಡಿಯೆ ಕೇಳು ||",
+            "ಮಧ್ವ ದ್ವೇಷಿಗಳಲಿ ಎನ್ನ |ವಿದ್ಯೆ ತೋರಿ ಬದುಕದಂತೆ||1||"
+          ],
+          [
+            "ಒಡಲಿನಾಸೆಗಾಗಿ ಕಂಡ |ಕಡೆಗೆ ತಿರುಗಿ ಪ್ರಾಪ್ತಿಯೆಂಬು ||",
+            "ದುಡುಗಿ ಪೋಗಿ ಕೊನೆಗೆ ಮನೆಗೆ |ಮಿಡುಕಿಕೊಳುತ ಬರುವಧಮನ ||2||"
+          ],
+          [
+            "ಹಾನಿ ಲಾಭ ಕ್ಲೇಶ ಮೋದ |ವೇನು ಆವ ಕ್ಷಣಕೊದಗಲು ||",
+            "ಪ್ರಾಣೇಶ ವಿಠಲ ಕರುಣೆಯಿಂದ |ತಾನೆ ಕೊಟ್ಟನೆಂಬ ಸುಮತಿ ||3||"
+          ]
+        ],
+        "iast": [
+          [
+            "òdagi pālisò bhavāṃbudhiya dāṭisò ||pa||"
+          ],
+          [
+            "madana jita bhūsura śaraṇya |padumanābha yativareṇya ||a.pa||"
+          ],
+          [
+            "sadya dòḍḍa mātu apra |buddhanā nuḍiyè keḻu ||",
+            "madhva dveṣigaḻali ènna |vidyè tori badukadaṃtè||1||"
+          ],
+          [
+            "òḍalināsègāgi kaṃḍa |kaḍègè tirugi prāptiyèṃbu ||",
+            "duḍugi pogi kònègè manègè |miḍukikòḻuta baruvadhamana ||2||"
+          ],
+          [
+            "hāni lābha kleśa moda |venu āva kṣaṇakòdagalu ||",
+            "prāṇeśa viṭhala karuṇèyiṃda |tānè kòṭṭanèṃba sumati ||3||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "ऒदगि पालिसॊ भवांबुधिय दाटिसॊ ||pa||"
+          ],
+          [
+            "मदन जित भूसुर शरण्य |पदुमनाभ यतिवरेण्य ||a.pa||"
+          ],
+          [
+            "सद्य दॊड्ड मातु अप्र |बुद्धना नुडियॆ केळु ||",
+            "मध्व द्वेषिगळलि ऎन्न |विद्यॆ तोरि बदुकदंतॆ||1||"
+          ],
+          [
+            "ऒडलिनासॆगागि कंड |कडॆगॆ तिरुगि प्राप्तियॆंबु ||",
+            "दुडुगि पोगि कॊनॆगॆ मनॆगॆ |मिडुकिकॊळुत बरुवधमन ||2||"
+          ],
+          [
+            "हानि लाभ क्लेश मोद |वेनु आव क्षणकॊदगलु ||",
+            "प्राणेश विठल करुणॆयिंद |तानॆ कॊट्टनॆंब सुमति ||3||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "odagi pAliso BavAMbudhiya dATiso ||pa||"
+          ],
+          [
+            "madana jita BUsura SaraNya |",
+            "padumanABa yativarENya ||a.pa||"
+          ],
+          [
+            "sadya doDDa mAtu apra |buddhanA nuDiye kELu ||",
+            "madhva dvEShigaLali enna |vidye tOri badukadante||1||"
+          ],
+          [
+            "oDalinAsegAgi kanDa |kaDege tirugi prAptiyeMbu ||",
+            "duDugi pOgi konege manege |miDukikoLuta baruvadhamana ||2||"
+          ],
+          [
+            "hAni lABa klESa mOda |vEnu Ava kShaNakodagalu ||",
+            "prANESa viThala karuNeyinda |tAne koTTaneMba sumati ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/04/19/dasara-pada-on-sri-padmanabha-thirtharuodhagi-paaliso-bavambudhiya/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__31c45ab5",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "chandrikAcAryara pAda dvayake",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru",
+        "on:Vyasarayaru",
+        "yati:Vyasarayaru"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಚಂದ್ರಿಕಾಚಾರ್ಯರ ಪಾದ ದ್ವಯಕೆ",
+            "ಎರುಗುವೆ ಪ್ರತಿವಾಸರಕೆ ||pa||"
+          ],
+          [
+            "ನವ ವೃಂದಾವನ ಮ‌ಧ್ಯದಿ ಶೋಭಿಪ",
+            "ನವವಿಧ ವರಗಳ ನೀಡುತ ಸತತ",
+            "ನವ ಮಣಿ ಮುಕುಟ ಮಸ್ತಕದಿ ಶೋಭಿಪ",
+            "ನವ್ಯ ಜೀವನ ಶುಭಫಲ ಕೋರುತ",
+            "ನಂಬಿದ ಭಕ್ತರ ದೋ‌‌ಷಗಳೆಣಿಸದೆ",
+            "ಸುಂದರ ರಘುಪತಿ ರಾಮನ ತೋರಿದ ||1||"
+          ],
+          [
+            "ವಿಜಯ ಮೂರುತಿ ರಾಮನ ಧ್ಯಾನಿಸಿ",
+            "ವಿಜಯ ನಗರ ಸಾಮ್ರಾಜ್ಯ ವಿಸ್ತರಿಸಿ",
+            "ವಿಜಿಯಿಸಿ ಸ್ಥಾಪಿಸಿ ಮಧ್ವಮತದ",
+            "ದ್ವಿಗವಿಜಯ ತತ್ವ ತಿರುಳನು ಸಾರಿ",
+            "ಅಕಳಂಕ ಚರಿತ ಶ್ರೀರಾಮ ಚಂದಿರನ",
+            "ಮಹಿಮೆಯ ಇಳೆಯೊಳು ಸಾಧಿಸಿ ತೋರಿದ ||2||"
+          ],
+          [
+            "ಯಾಂತ್ರಿಕ ತನದಿ ತಾಪವೆನಿಸುವ",
+            "ಯಂತ್ರೋಧಾರಕ ಮೂರ್ತಿಯ ನಿಲ್ಲಿಸಿ",
+            "ಮಂತ್ರಾಕ್ಷತೆಯ ಮಹಿಮೆಯ ತೋರಿದ",
+            "ಚಿತ್ತದಲಿಟ್ಟು ಚಂದ್ರಿಕಾ ರಚಿಸಿ",
+            "ಪಂಚಮುಖದ ಪ್ರಾಣೇಶ ವಿಠ್ಠಲ",
+            "ಪಂಚಮಂತ್ರದಿಂದ ಪೂಜಿಸಿ ಯತಿಸಿದ ||3||"
+          ]
+        ],
+        "iast": [
+          [
+            "caṃdrikācāryara pāda dvayakè",
+            "èruguvè prativāsarakè ||pa||"
+          ],
+          [
+            "nava vṛṃdāvana ma‌dhyadi śobhipa",
+            "navavidha varagaḻa nīḍuta satata",
+            "nava maṇi mukuṭa mastakadi śobhipa",
+            "navya jīvana śubhaphala koruta",
+            "naṃbida bhaktara do‌‌ṣagaḻèṇisadè",
+            "suṃdara raghupati rāmana torida ||1||"
+          ],
+          [
+            "vijaya mūruti rāmana dhyānisi",
+            "vijaya nagara sāmrājya vistarisi",
+            "vijiyisi sthāpisi madhvamatada",
+            "dvigavijaya tatva tiruḻanu sāri",
+            "akaḻaṃka carita śrīrāma caṃdirana",
+            "mahimèya iḻèyòḻu sādhisi torida ||2||"
+          ],
+          [
+            "yāṃtrika tanadi tāpavènisuva",
+            "yaṃtrodhāraka mūrtiya nillisi",
+            "maṃtrākṣatèya mahimèya torida",
+            "cittadaliṭṭu caṃdrikā racisi",
+            "paṃcamukhada prāṇeśa viṭhṭhala",
+            "paṃcamaṃtradiṃda pūjisi yatisida ||3||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "चंद्रिकाचार्यर पाद द्वयकॆ",
+            "ऎरुगुवॆ प्रतिवासरकॆ ||pa||"
+          ],
+          [
+            "नव वृंदावन म‌ध्यदि शोभिप",
+            "नवविध वरगळ नीडुत सतत",
+            "नव मणि मुकुट मस्तकदि शोभिप",
+            "नव्य जीवन शुभफल कोरुत",
+            "नंबिद भक्तर दो‌‌षगळॆणिसदॆ",
+            "सुंदर रघुपति रामन तोरिद ||1||"
+          ],
+          [
+            "विजय मूरुति रामन ध्यानिसि",
+            "विजय नगर साम्राज्य विस्तरिसि",
+            "विजियिसि स्थापिसि मध्वमतद",
+            "द्विगविजय तत्व तिरुळनु सारि",
+            "अकळंक चरित श्रीराम चंदिरन",
+            "महिमॆय इळॆयॊळु साधिसि तोरिद ||2||"
+          ],
+          [
+            "यांत्रिक तनदि तापवॆनिसुव",
+            "यंत्रोधारक मूर्तिय निल्लिसि",
+            "मंत्राक्षतॆय महिमॆय तोरिद",
+            "चित्तदलिट्टु चंद्रिका रचिसि",
+            "पंचमुखद प्राणेश विठ्ठल",
+            "पंचमंत्रदिंद पूजिसि यतिसिद ||3||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "candrikAcAryara pAda dvayake",
+            "eruguve prativAsarake ||pa||"
+          ],
+          [
+            "nava vRundAvana ma^^dhyadi SOBipa",
+            "navavidha varagaLa nIDuta satata",
+            "nava maNi mukuTa mastakadi SOBipa",
+            "navya jIvana SuBaPala kOruta",
+            "naMbida Baktara dO^^^^ShagaLeNisade",
+            "suMdara raGupati rAmana tOrida ||1||"
+          ],
+          [
+            "vijaya mUruti rAmana dhyAnisi",
+            "vijaya nagara sAmrAjya vistarisi",
+            "vijiyisi sthApisi madhvamatada",
+            "dvigavijaya tatva tiruLanu sAri",
+            "akaLanka carita SrIrAma candirana",
+            "mahimeya iLeyoLu sAdhisi tOrida ||2||"
+          ],
+          [
+            "yAntrika tanadi tApavenisuva",
+            "yantrOdhAraka mUrtiya nillisi",
+            "maMtrAkShateya mahimeya tOrida",
+            "cittadaliTTu caMdrikA racisi",
+            "pancamuKada prANESa viThThala",
+            "pancamantradinda pUjisi yatisida ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/05/15/chandrikacaryara-pada-dvayake/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__d5817157",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Allocation of idols to Yathigalu by Madhwacharyaru",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಸುಖ ತೀರ್ಥರೆದುವರನ ಸ್ಥಾಪಿ-",
+            "ಸ್ಯೊ೦ಭತ್ತೆತಿಗಳನು ಮಾಡಿ ಅವರವರಿಗೆ",
+            "ಅಕಳ೦ಕ ನಾಮಗಳ ಮೂರ್ತಿಗಳ ಕೊಟ್ಟ",
+            "ವಿವಿರ ಬಣ್ಣಿಸುವೆ ಸುಜನರು ಕೇಳಿ || ಪ ||"
+          ],
+          [
+            "ಶ್ರೀ ಪದ್ಮನಾಭ ಹೃಷೀಕೇಶ-",
+            "ನರಹರಿ ಜನಾರ್ಧನ ಯತಿ |",
+            "ಉಪೇ೦ದ್ರ ತೀರ್ಥ ಪಾಪಘ್ನ ವಾಮನ ಮುನಿಪ",
+            "ವಿಷ್ಣು ಯತಿ ರಾಮತೀರ್ಥ ದೋಕ್ಷಜ ತೀರ್ಥರು || 1 ||"
+          ],
+          [
+            "ಈ ಪೆಸರಿಲೊ೦ಭತ್ತು ಮ೦ದಿ ರಘುಪತಿ-",
+            "ಕಾಳೀ ಮಥನ ವಿಠ್ಠನೆರಡೆರಡು |",
+            "ಭೂಪತಿ ನರಸಿ೦ಹ ವಿಠ್ಠಲ ಹೀಗೆ",
+            "ಒ೦ಭತ್ತು ಮೂರ್ತಿಗಳನು ಕೊಟ್ಟು || 2 ||"
+          ],
+          [
+            "ಪದುಮನಾಭರಿಗೆ ರಾಮನ ಕೊಟ್ಟು",
+            "ಸಕಲ ದೇಶವನಾಳಿ ಧನ ತಾ ಎನುತಲೀ |",
+            "ಅದರ ತರುವಾಯ ಹೃಷಿಕೇಶ ತೀರ್ಥರಿ-",
+            "ಗೊ೦ದು ರಾಮ ಮೂರ್ತಿಯನು ಕೊಟ್ಟು || 3 ||"
+          ],
+          [
+            "ಬುಧ ಜನಾರ್ಚಿತ ನೃಸಿ೦ಹಾರ್ಯಾರಿಗೆ",
+            "ಕಾಳಿಯ ಮರ್ಧನನಾದ ಶ್ರೀಕೃಷ್ಣ ಮೂರ್ತಿ |",
+            "ಹೃದಯ ನಿರ್ಮಲ ಜನಾರ್ದನ ತೀರ್ಥರಿಗೆ-",
+            "ಕಾಳೀ ಮಥನ ಶ್ರೀಕೃಷ್ಣ ಮೂರ್ತಿಯನ್ನು ಕೊಟ್ಟು || 4 ||"
+          ],
+          [
+            "ಯತಿವರ ಉಪೇ೦ದ್ರರಾಯರಿಗೆ ವಿಠ್ಠಲನ-",
+            "ವಾಮನ ತೀರ್ಥರಿಗೆ ವಿಠ್ಠಲನಾ |",
+            "ನತ ಸುರದ್ರುಮ ವಿಷ್ಣು ತೀರ್ಥರಿಗೆ ವರಹ-",
+            "ಶ್ರೀರಾಮ ತೀರ್ಥರಿಗೆ ನರಸಿ೦ಹ || 5 ||"
+          ],
+          [
+            "ಅತಿ ಸುಗುಣ ಅಧೋಕ್ಷಜ ತೀರ್ಥರಿಗೆ ವಿಠಲ-",
+            "ನಿ೦ತು ವೊ೦ಭತ್ತು ಮೂರ್ತಿಗಳ ಕೊಟ್ಟು |",
+            "ಕ್ಷಿತಿಯೊಳಗೆ ರೌಪ್ಯ ಪೀಠ ಪುರಸ್ಥ-",
+            "ಪ್ರಾಣೇಶ ವಿಠ್ಠಲನ ಅರ್ಚನೆ ಗಿಟ್ಟರು ಕೇಳಿ ||6 ||"
+          ]
+        ],
+        "iast": [
+          [
+            "sukha tīrtharèduvarana sthāpi-",
+            "syò0bhattètigaḻanu māḍi avaravarigè",
+            "akaḻa0ka nāmagaḻa mūrtigaḻa kòṭṭa",
+            "vivira baṇṇisuvè sujanaru keḻi || pa ||"
+          ],
+          [
+            "śrī padmanābha hṛṣīkeśa-",
+            "narahari janārdhana yati |",
+            "upe0dra tīrtha pāpaghna vāmana munipa",
+            "viṣṇu yati rāmatīrtha dokṣaja tīrtharu || 1 ||"
+          ],
+          [
+            "ī pèsarilò0bhattu ma0di raghupati-",
+            "kāḻī mathana viṭhṭhanèraḍèraḍu |",
+            "bhūpati narasi0ha viṭhṭhala hīgè",
+            "ò0bhattu mūrtigaḻanu kòṭṭu || 2 ||"
+          ],
+          [
+            "padumanābharigè rāmana kòṭṭu",
+            "sakala deśavanāḻi dhana tā ènutalī |",
+            "adara taruvāya hṛṣikeśa tīrthari-",
+            "gò0du rāma mūrtiyanu kòṭṭu || 3 ||"
+          ],
+          [
+            "budha janārcita nṛsi0hāryārigè",
+            "kāḻiya mardhananāda śrīkṛṣṇa mūrti |",
+            "hṛdaya nirmala janārdana tīrtharigè-",
+            "kāḻī mathana śrīkṛṣṇa mūrtiyannu kòṭṭu || 4 ||"
+          ],
+          [
+            "yativara upe0drarāyarigè viṭhṭhalana-",
+            "vāmana tīrtharigè viṭhṭhalanā |",
+            "nata suradruma viṣṇu tīrtharigè varaha-",
+            "śrīrāma tīrtharigè narasi0ha || 5 ||"
+          ],
+          [
+            "ati suguṇa adhokṣaja tīrtharigè viṭhala-",
+            "ni0tu vò0bhattu mūrtigaḻa kòṭṭu |",
+            "kṣitiyòḻagè raupya pīṭha purastha-",
+            "prāṇeśa viṭhṭhalana arcanè giṭṭaru keḻi ||6 ||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "सुख तीर्थरॆदुवरन स्थापि-",
+            "स्यॊ०भत्तॆतिगळनु माडि अवरवरिगॆ",
+            "अकळ०क नामगळ मूर्तिगळ कॊट्ट",
+            "विविर बण्णिसुवॆ सुजनरु केळि || प ||"
+          ],
+          [
+            "श्री पद्मनाभ हृषीकेश-",
+            "नरहरि जनार्धन यति |",
+            "उपे०द्र तीर्थ पापघ्न वामन मुनिप",
+            "विष्णु यति रामतीर्थ दोक्षज तीर्थरु || 1 ||"
+          ],
+          [
+            "ई पॆसरिलॊ०भत्तु म०दि रघुपति-",
+            "काळी मथन विठ्ठनॆरडॆरडु |",
+            "भूपति नरसि०ह विठ्ठल हीगॆ",
+            "ऒ०भत्तु मूर्तिगळनु कॊट्टु || 2 ||"
+          ],
+          [
+            "पदुमनाभरिगॆ रामन कॊट्टु",
+            "सकल देशवनाळि धन ता ऎनुतली |",
+            "अदर तरुवाय हृषिकेश तीर्थरि-",
+            "गॊ०दु राम मूर्तियनु कॊट्टु || 3 ||"
+          ],
+          [
+            "बुध जनार्चित नृसि०हार्यारिगॆ",
+            "काळिय मर्धननाद श्रीकृष्ण मूर्ति |",
+            "हृदय निर्मल जनार्दन तीर्थरिगॆ-",
+            "काळी मथन श्रीकृष्ण मूर्तियन्नु कॊट्टु || 4 ||"
+          ],
+          [
+            "यतिवर उपे०द्ररायरिगॆ विठ्ठलन-",
+            "वामन तीर्थरिगॆ विठ्ठलना |",
+            "नत सुरद्रुम विष्णु तीर्थरिगॆ वरह-",
+            "श्रीराम तीर्थरिगॆ नरसि०ह || 5 ||"
+          ],
+          [
+            "अति सुगुण अधोक्षज तीर्थरिगॆ विठल-",
+            "नि०तु वॊ०भत्तु मूर्तिगळ कॊट्टु |",
+            "क्षितियॊळगॆ रौप्य पीठ पुरस्थ-",
+            "प्राणेश विठ्ठलन अर्चनॆ गिट्टरु केळि ||6 ||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "suKa tIrthareduvarana sthApi-",
+            "syomBattetigaLanu mADi avaravarige",
+            "akaLanka nAmagaLa mUrtigaLa koTTa",
+            "vivira baNNisuve sujanaru kELi || pa ||"
+          ],
+          [
+            "SrI padmanABa hRuShIkESa-",
+            "narahari janArdhana yati |",
+            "upEmdra tIrtha pApaGna vAmana munipa",
+            "viShNu yati rAmatIrtha dOkShaja tIrtharu || 1 ||"
+          ],
+          [
+            "I pesarilomBattu mandi raGupati-",
+            "kALI mathana viThThaneraDeraDu |",
+            "BUpati narasimha viThThala hIge",
+            "o0Battu mUrtigaLanu koTTu || 2 ||"
+          ],
+          [
+            "padumanABarige rAmana koTTu",
+            "sakala dESavanALi dhana tA enutalI |",
+            "adara taruvAya hRuShikESa tIrthari-",
+            "go0du rAma mUrtiyanu koTTu || 3 ||"
+          ],
+          [
+            "budha janArcita nRusimhAryArige",
+            "kALiya mardhananAda SrIkRuShNa mUrti |",
+            "hRudaya nirmala janArdana tIrtharige-",
+            "kALI mathana SrIkRuShNa mUrtiyannu koTTu || 4 ||"
+          ],
+          [
+            "yativara upEndrarAyarige viThThalana-",
+            "vAmana tIrtharige viThThalanA |",
+            "nata suradruma viShNu tIrtharige varaha-",
+            "SrIrAma tIrtharige narasimha || 5 ||"
+          ],
+          [
+            "ati suguNa adhOkShaja tIrtharige viThala-",
+            "nintu vomBattu mUrtigaLa koTTu |",
+            "kShitiyoLage raupya pITha purastha-",
+            "prANESa viThThalana arcane giTTaru kELi ||6 ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/07/30/allocation-of-idols-to-yathigalu-by-madhwacharyaru/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__04d21953",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "beduvaro sukavo",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಬೇಡುವರೋ ಸುಖವ ರಂಗಯ್ಯ ನಿನ್ನ",
+            "ಬೇಡುವರೋ ಸುಖವ|| ಪ ||"
+          ],
+          [
+            "ಬೇಡುವರೋ ಸುಖ ಬೇಡರು ಕಷ್ಟವ",
+            "ಮಾಡಲರಿಯರಿದರುಪಾಯವ ||ಅ ಪ ||"
+          ],
+          [
+            "ಕಿಟ್ಟಾ ತುಳಿದು ಒಮ್ಮನ್ಹಿಟ್ಟಾ ಬೀಸುವರು",
+            "ಕುಟ್ಟರು ರಂಗವಲ್ಲಿಯ ಕುಟ್ಟರು ರಂಗವಲ್ಲಿಯ",
+            "ಸಾಲುಸಾಲೆಮ್ಮೆಯ ಸೋಲದೆ ತೊಳೆವರು",
+            "ಸಾಲಿಗ್ರಾಮಕೆ ನೀರೆರೆಯರೊ ಜನ || 1||"
+          ],
+          [
+            "ಬೀಗರೂಟಕೆ ಅನೇಕ ಭೋಗವು",
+            "ಜೋಳವು ಓಗರ ಬ್ರಾಹ್ಮರೆಲೆಯೊಳು",
+            "ಖಮ್ಮನೆ ತುಪ್ಪ ತಮ್ಮನೆಯವರಿಗೆ",
+            "ಖಮ್ಮಟು ದೇವ ಬ್ರಾಹ್ಮಣರಿಗೆ ||2 ||"
+          ],
+          [
+            "ಇದ್ದ ಪದಾರ್ಥವನ್ನು ಶುದ್ಧ ಭಕುತಿಯಿಂದ",
+            "ಮಧ್ವೇಶಗರ್ಪಿಸಿ ಭುಂಜಿಸರೋ",
+            "ಕೆಟ್ಟದ್ದು ತಾವು ಮಾಡಿ ಬಿಟ್ಟೆಮ್ಮನು ಪ್ರಾಣೇಶ",
+            "ವಿಟ್ಠಲನೆಂದು ಮಿಡುಕುವರೋ ಜನ|| 3||"
+          ]
+        ],
+        "iast": [
+          [
+            "beḍuvaro sukhava raṃgayya ninna",
+            "beḍuvaro sukhava|| pa ||"
+          ],
+          [
+            "beḍuvaro sukha beḍaru kaṣṭava",
+            "māḍalariyaridarupāyava ||a pa ||"
+          ],
+          [
+            "kiṭṭā tuḻidu òmmanhiṭṭā bīsuvaru",
+            "kuṭṭaru raṃgavalliya kuṭṭaru raṃgavalliya",
+            "sālusālèmmèya soladè tòḻèvaru",
+            "sāligrāmakè nīrèrèyarò jana || 1||"
+          ],
+          [
+            "bīgarūṭakè aneka bhogavu",
+            "joḻavu ogara brāhmarèlèyòḻu",
+            "khammanè tuppa tammanèyavarigè",
+            "khammaṭu deva brāhmaṇarigè ||2 ||"
+          ],
+          [
+            "idda padārthavannu śuddha bhakutiyiṃda",
+            "madhveśagarpisi bhuṃjisaro",
+            "kèṭṭaddu tāvu māḍi biṭṭèmmanu prāṇeśa",
+            "viṭṭhalanèṃdu miḍukuvaro jana|| 3||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "बेडुवरो सुखव रंगय्य निन्न",
+            "बेडुवरो सुखव|| प ||"
+          ],
+          [
+            "बेडुवरो सुख बेडरु कष्टव",
+            "माडलरियरिदरुपायव ||अ प ||"
+          ],
+          [
+            "किट्टा तुळिदु ऒम्मन्हिट्टा बीसुवरु",
+            "कुट्टरु रंगवल्लिय कुट्टरु रंगवल्लिय",
+            "सालुसालॆम्मॆय सोलदॆ तॊळॆवरु",
+            "सालिग्रामकॆ नीरॆरॆयरॊ जन || 1||"
+          ],
+          [
+            "बीगरूटकॆ अनेक भोगवु",
+            "जोळवु ओगर ब्राह्मरॆलॆयॊळु",
+            "खम्मनॆ तुप्प तम्मनॆयवरिगॆ",
+            "खम्मटु देव ब्राह्मणरिगॆ ||2 ||"
+          ],
+          [
+            "इद्द पदार्थवन्नु शुद्ध भकुतियिंद",
+            "मध्वेशगर्पिसि भुंजिसरो",
+            "कॆट्टद्दु तावु माडि बिट्टॆम्मनु प्राणेश",
+            "विट्ठलनॆंदु मिडुकुवरो जन|| 3||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "This is one of my Favorite song composed by Sri Pranesha dasaru and audio version sung by Ananta Kulkarni."
+          ],
+          [
+            "You can find audio link:",
+            "Click here"
+          ],
+          [
+            "Bēḍuvarō sukhava raṅgayya ninna",
+            "bēḍuvarō sukhava|| pa ||"
+          ],
+          [
+            "bēḍuvarō sukha bēḍaru kaṣṭava",
+            "māḍalariyaridarupāyava ||a pa ||"
+          ],
+          [
+            "kiṭṭā tuḷidu om’manhiṭṭā bīsuvaru",
+            "kuṭṭaru raṅgavalliya kuṭṭaru raṅgavalliya",
+            "sālusālem’meya sōlade toḷevaru",
+            "sāligrāmake nīrereyaro jana || 1||"
+          ],
+          [
+            "bīgarūṭake anēka bhōgavu",
+            "jōḷavu ōgara brāhmareleyoḷu",
+            "kham’mane tuppa tam’maneyavarige",
+            "kham’maṭu dēva brāhmaṇarige ||2 ||"
+          ],
+          [
+            "idda padārthavannu śud’dha bhakutiyinda",
+            "madhvēśagarpisi bhun̄jisarō",
+            "keṭṭaddu tāvu māḍi biṭṭem’manu prāṇēśa",
+            "viṭṭhalanendu miḍukuvarō jana|| 3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/09/15/beduvaro-sukavo/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__61a164c1",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Adhadhayithu innadharu olle",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಆದದ್ದಾಯ್ತಿನ್ನಾದರು ಒಳ್ಳೆ",
+            "ಹಾದಿ ಹಿಡಿಯೊ ಪ್ರಾಣಿ",
+            "ಈ ದುರ್ನಡತಿಂದೋದರಿಹಪರದಿ",
+            "ಮೋದೆಂದಿಗು ಕಾಣೆ | ಪ |"
+          ],
+          [
+            "ನೆಲಾಸತಿ ಧನದೊಳನಾವರತ",
+            "ಹುಳಾಗಿ ಇರುವೆಲ್ಲೊ",
+            "ಹಲಾಪಿಡಿದು ವಿಧಿ ಕುಲಾಚರಣೇ ಬಿಡೆ-",
+            "ಪಲಾ ತರುವರಲ್ಲೊ",
+            "ಸ್ಥಳಾಸ್ಥಳರಿಯದೆ ಕಲಾಪಮಾಡ್ಯಘ-",
+            "ಕೊಳಾಗುವುದು ಸಲ್ಲೊ",
+            "ಎಲೆ ಕೇಳುವಂತಿಲಾಮಾತ್ರ ನೀ",
+            "ಗೆಲಾಹ ಬಗೆ ಇಲ್ಲೊ | ೧ |"
+          ],
+          [
+            "ಶಿಲಾದಿವಿಗ್ರಹ ಥಳಾಸೆ ಹರಿಯಂ",
+            "ಬೆಲಾ ಕೇವಲ ಸುಳ್ಳೊ",
+            "ಚಲಾ ಪ್ರತಿಮಿ ಪದಗಳಾರ್ಚಿಸದಲೆ",
+            "ಮಲಾ ತಿನುತಿಹೆಲ್ಲೊ",
+            "ಕಳಾವಿಡಿದರೆ ಅನಿಳಾನ ಹರಿಮನೆ",
+            "ಮೊಳಾಗಿಹದಲ್ಲೊ",
+            "ನಳಾ ಭರತ ಮುಖ ಇಳಾಣ್ಮರಂದದಿ",
+            "ಭಲಾಯೆನಿಸಲಿಲ್ಲೊ | ೨ |"
+          ],
+          [
+            "ಬಿಲಾಸೇರಿ ತಲಕೆಳಕಾಗಿ ತಪಿಸಲು",
+            "ಫಲಾಲೇಸಿನಿತಿಲ್ಲೊ",
+            "ಖಳಾರಿ ದಿನ ಬಿಂದ್ಜಲಾಕೊಳ್ಳೆನೆಂದು",
+            "ಛಲಾ ಮಾಡಲಿಲ್ಲೊ",
+            "ಬಲಾದರದಂಲಿಂ ತುಲಾದಿ ಸ್ನಾನ ಮೊ",
+            "ದಲಾದ ವ್ರತವಲ್ಲೊ",
+            "ಬಲಾರಿನುತ ಪ್ರಾಣೇಶವಿಠ್ಠಲನ",
+            "ಬಲಾ ಗಳಿಸಿಕೊಳ್ಳೊ | ೩ |"
+          ]
+        ],
+        "iast": [
+          [
+            "ādaddāytinnādaru òḻḻè",
+            "hādi hiḍiyò prāṇi",
+            "ī durnaḍatiṃdodarihaparadi",
+            "modèṃdigu kāṇè | pa |"
+          ],
+          [
+            "nèlāsati dhanadòḻanāvarata",
+            "huḻāgi iruvèllò",
+            "halāpiḍidu vidhi kulācaraṇe biḍè-",
+            "palā taruvarallò",
+            "sthaḻāsthaḻariyadè kalāpamāḍyagha-",
+            "kòḻāguvudu sallò",
+            "èlè keḻuvaṃtilāmātra nī",
+            "gèlāha bagè illò | 1 |"
+          ],
+          [
+            "śilādivigraha thaḻāsè hariyaṃ",
+            "bèlā kevala suḻḻò",
+            "calā pratimi padagaḻārcisadalè",
+            "malā tinutihèllò",
+            "kaḻāviḍidarè aniḻāna harimanè",
+            "mòḻāgihadallò",
+            "naḻā bharata mukha iḻāṇmaraṃdadi",
+            "bhalāyènisalillò | 2 |"
+          ],
+          [
+            "bilāseri talakèḻakāgi tapisalu",
+            "phalālesinitillò",
+            "khaḻāri dina biṃdjalākòḻḻènèṃdu",
+            "chalā māḍalillò",
+            "balādaradaṃliṃ tulādi snāna mò",
+            "dalāda vratavallò",
+            "balārinuta prāṇeśaviṭhṭhalana",
+            "balā gaḻisikòḻḻò | 3 |"
+          ]
+        ],
+        "devanagari": [
+          [
+            "आदद्दाय्तिन्नादरु ऒळ्ळॆ",
+            "हादि हिडियॊ प्राणि",
+            "ई दुर्नडतिंदोदरिहपरदि",
+            "मोदॆंदिगु काणॆ | प |"
+          ],
+          [
+            "नॆलासति धनदॊळनावरत",
+            "हुळागि इरुवॆल्लॊ",
+            "हलापिडिदु विधि कुलाचरणे बिडॆ-",
+            "पला तरुवरल्लॊ",
+            "स्थळास्थळरियदॆ कलापमाड्यघ-",
+            "कॊळागुवुदु सल्लॊ",
+            "ऎलॆ केळुवंतिलामात्र नी",
+            "गॆलाह बगॆ इल्लॊ | १ |"
+          ],
+          [
+            "शिलादिविग्रह थळासॆ हरियं",
+            "बॆला केवल सुळ्ळॊ",
+            "चला प्रतिमि पदगळार्चिसदलॆ",
+            "मला तिनुतिहॆल्लॊ",
+            "कळाविडिदरॆ अनिळान हरिमनॆ",
+            "मॊळागिहदल्लॊ",
+            "नळा भरत मुख इळाण्मरंददि",
+            "भलायॆनिसलिल्लॊ | २ |"
+          ],
+          [
+            "बिलासेरि तलकॆळकागि तपिसलु",
+            "फलालेसिनितिल्लॊ",
+            "खळारि दिन बिंद्जलाकॊळ्ळॆनॆंदु",
+            "छला माडलिल्लॊ",
+            "बलादरदंलिं तुलादि स्नान मॊ",
+            "दलाद व्रतवल्लॊ",
+            "बलारिनुत प्राणेशविठ्ठलन",
+            "बला गळिसिकॊळ्ळॊ | ३ |"
+          ]
+        ],
+        "source_roman": [
+          [
+            "AdaddAytinnAdaru oLLe",
+            "hAdi hiDiyo prANi",
+            "I durnaDatindOdarihaparadi",
+            "mOdeMdigu kANe | pa |"
+          ],
+          [
+            "nelAsati dhanadoLanAvarata",
+            "huLAgi iruvello",
+            "halApiDidu vidhi kulAcaraNE biDe-",
+            "palA taruvarallo",
+            "sthaLAsthaLariyade kalApamADyaGa-",
+            "koLAguvudu sallo",
+            "ele kELuvnilAmAtra nI",
+            "gelAha bage illo | 1 |"
+          ],
+          [
+            "SilAdivigraha thaLAse hariyaM",
+            "belA kEvala suLLo",
+            "calA pratimi padagaLArcisadale",
+            "malA tinutihello",
+            "kaLAviDidare aniLAna harimane",
+            "moLAgihadallo",
+            "naLA Barata muKa iLANmaraMdadi",
+            "BalAyenisalillo | 2 |"
+          ],
+          [
+            "bilAsEri talakeLakAgi tapisalu",
+            "PalAlEsinitillo",
+            "KaLAri dina bindjalAkoLLenendu",
+            "CalA mADalillo",
+            "balAdaradaMliM tulAdi snAna mo",
+            "dalAda vratavallo",
+            "balArinuta prANESaviThThalana",
+            "balA gaLisikoLLo | 3 |"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/09/17/adhadhayithu-innadharu-olle/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__1d65a91c",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Gopichandana mudradarane mahathmya",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Gopichandana mudradarane",
+            "(Kannada PDF)"
+          ],
+          [
+            "gOpicandana mudradhAraNa mahAtmiyanu |Apanitu barave kELvadu sujanaru||pa||"
+          ],
+          [
+            "pUrvadali kailAsa SiKaradali indrAdi |gIrvANa sakala muni pramatharindA ||",
+            "pArvatISanu sEvegoLutiralu janaka daya |bIrvadake gauri patigintendaLU||1||"
+          ],
+          [
+            "ele dEva nimminda lOkak~hitakaravAda |balu dharma gaupya vRuta kELdenIgA ||",
+            "tiLisuvadu Udhrva punDrada mudri mahime ene mu- |guLu nagiyinda satigintendanU |||2||"
+          ],
+          [
+            "arasi kEL vipranAgali supanDitanAge |dharisadire gOpicandana mudriyA ||",
+            "sura GaTa samAna taddEhadaruSana pApa |taraNi biMbava nODi kaLiyabEkU ||3||"
+          ],
+          [
+            "kOpiyAgaliyanAcAriyAgali sarva- |dA parara nindegaivavanAgalI ||",
+            "gOpicandana lipta gAtranAdana dOSha |lEpavillade muktanahanuBavadiM||4||"
+          ],
+          [
+            "eMtu pELali Udhrva puMDra mahatmiyanu |aMtija lalATadali SOBisalkE ||",
+            "aMtaHkaruNa SuddhanavanE pUjyanu valiva |kaMtupita kulaSIlagaLaneNisadE ||5||"
+          ],
+          [
+            "BAminiyu jnanadiM punDra dharisadale |hOmArthavAgi pAkava mADalU ||",
+            "A mahatpApavEnaMbe viShTasamAnna |I marmavariyadunDuvaga narakA||6||"
+          ],
+          [
+            "hariya cakrAnkita virahita strI puruShAnga |sparuSavAyite daivavaSadindalI ||",
+            "aralava taDiyade Amalka gOmaya snAna |viracisuta SrISanGri pUjisuvadU ||7||"
+          ],
+          [
+            "smaraNe mADade hariya ankitara hita dEha |jariye jAhnaviyalli naraka uMTU ||",
+            "ari SanKa dharisi kIkaTadalli mRutanAge |larivadu, prayAga mRutigatiyavanigE ||8||"
+          ],
+          [
+            "putrahInage lOkavillaveMbuvadyAke |mitra kulajana mudre dharisutiralU ||",
+            "Satru samAnApahyaridu mudriyaniDade sva- |pitRugaLigaidisutiharu durgatI ||9||"
+          ],
+          [
+            "Ava vipranu UdhrvapunDra virahitanAgi |BAvaSuddhadi SrAddha mADalavanA ||",
+            "jIvisuvadyAkeMdu Sapisi dvAdaSa varuSha |tAM vadanadOradhOharu pitRugaLU ||10||"
+          ],
+          [
+            "Siradalli cakravire dEvarenisuvadu Buja |ariyuktavAgiralu dvijanenisuvA ||",
+            "virahithari pratimi pUjisalu viprage dAna |virase randhra kalaSadoLudakadante ||11||"
+          ],
+          [
+            "yAga mADali mahaddAna bahu mADalI |yOga mADali vEda OdutiralI ||",
+            "nAgavaradana lAnCanava dharisadale kunni |BAgIrathiyoLaddi tegida teravU ||12||"
+          ],
+          [
+            "nAmakarNupanayana AShADha kArtIka |SrI mAdhavana dinadi taptamudri ||",
+            "dhImaMtarAda gurugaLa kaiya dharisuvadu |nEmadiM panca saMskAradoLidU ||13||"
+          ],
+          [
+            "eraDAru nAlku eraDU ondu punDragaLu |dharisuvadu nAlku varNavu kramAtU ||",
+            "aripramuKa pancamudriyoLu hinkArAdi |harirUpa pancaridu dharisabEkU ||14||"
+          ],
+          [
+            "Saciye modalAda nirjarara henDaru punDra |Sucimanadi dharisi svapatigaLa sahitA ||",
+            "acalita sumAngalyayaidi sva sthaLadalli |mucukunda varadanArAdhisuvarU ||15||"
+          ],
+          [
+            "I vacanakAva sthaLakAva nAmAva mu- |drAva mitiyAkAra mRudavellidU ||",
+            "Ava varNadalEnu AvaMguladalEnu |Ava mantradakenalu pELvanintU ||16||"
+          ],
+          [
+            "kAminiye gOpicandana mardisuvadintu |vAmahastada madhya jalava dharisI ||",
+            "I mUru pAda gAyitriyiM mantrisuta |A mahA RukkathO dEvatiyiM||17||"
+          ],
+          [
+            "taruvAya dharisuvadu punDragaLu kELelage |varapaNige Adiyali kESavallI ||",
+            "surapa nArAyaNudaradi hRudayadalli mA- |vara kanTha dESadalli gOviMdanU ||18||"
+          ],
+          [
+            "balapASrvadali viShNu Bujadalli madhUsUda |sale balada kanThadali trIvikramA ||",
+            "lalanE kEL vAmapASrvake vAmanA Bujake |KaLaha SrIdhara kanThadali hRuShIkaSa ||19||"
+          ],
+          [
+            "pRuShThadali kaMjanABa Siradi dAmOdaranu |iShTe dvAdaSanAma sitapakShakE ||",
+            "kRuShNapakShadoLivake saMkaruShaNAdi SrI |kRuShNa pariyanta tiLivaru sujanarU||20||"
+          ],
+          [
+            "SailAgra valmISa Sindhu hari kShEtra nadi |kUla dvAraki nelada SrI tulasiyA ||",
+            "mUladalliha mRuttikAgaLintu supavitra |kELadaroLage gOpicandanadhikA ||21||"
+          ],
+          [
+            "SAma SAntavu rakta rAja vaSa pIta SrI |A mahA viShNu priyakaravu SvEtA ||",
+            "I marmagaLa tiLidu punDradhAraNa mADe |BUmiyoLagavaru sajjanaru saKiyE ||22||"
+          ],
+          [
+            "strI puruSharella dharisuvadu vivarava tiLidu |pApi hengasu avaLAdarannA ||",
+            "gOpicandana gadA PaNige dharisadalidda- |rA puruShanaLidu duHKava baDuvaLU||23||"
+          ],
+          [
+            "sakala guNa tarjanadi madhyamadi jaÁna nA- |miSa sadAcAra kaniShThadali mOkShA ||",
+            "suKadi, vidhitilaka dakShiNadi uttaradi Siva |akaLanka hari madhya CidradallI ||24||"
+          ],
+          [
+            "saCidra harimanenisuvadu SvAnAnGri sama |acCidra paNiyu I lOkadallI ||",
+            "tatsamAnadhamarilla punDradAkAra |matsaKiye kELAdaradali pELuvE ||25||"
+          ],
+          [
+            "danDadAkAra haccuvadu PaNiyalli Kara |danDadantedige Bujadali bidirelI ||",
+            "punDarIkAkSha kELanya dIpAkRutiyu |panDitaru dharisuvaru nigamOktiyiM ||26||"
+          ],
+          [
+            "vanitE kEL PaNi kanThadali nAlku pRuShTha tali |initarali pancAngulada parimitI ||",
+            "muni nEtra beraLaShTu kukShiyali mELoMdu |Gana udaradalli bAhugaLiGattU|| 27||"
+          ],
+          [
+            "vakShadali aShTAMgulada pramANava dharisi |akShayAnandadiM nivryAjadiM ||",
+            "pakShivAhanAyudhava nAlkondu vivarava | mumukShugaLu tiLidu dharisuvaru intU ||28||"
+          ],
+          [
+            "vallaBaye kELmudrigaLu Bangara |beLLi tAmravAdaru dorakada kAlakE ||",
+            "kallinavu kAShThadavu kabbiNadavAdarU |ballavaru mudadiMda dharisutiharU ||29||"
+          ],
+          [
+            "udaradali mUru cakradaraDige dara vaMdu |padumadvaya madhyadali nAma nAlkU ||",
+            "idaraMte balakukShi bAhugaLig~haccuvadu |mudadindalari mAtra vaMdu koratI ||30||"
+          ],
+          [
+            "dara eraDaraDi ondu ari eraDu gadi nAma |dharisuvadu nAlku eDakukShi BujakE ||",
+            "koraLige kapOlagaLigoMdoMdu haccuvadu |ari balaka eDaBAgadali SanKavU||31||"
+          ],
+          [
+            "gade paNige hRudayadali ravi padma karadvayaka |madhusUdanAnkitavu sarva sthaLakE ||",
+            "idarante Acaripa sadvaiShNavara suKavu |adaneMtu varNisali vaSavallavU ||32||"
+          ],
+          [
+            "Sara cApagaLanu mUdhrniyali KaDgavu carma |veraDu bala eDa stanadi kaustuBavanU ||uradalli dakShiNada stanadalli SrIvatsa |dharisuvadu Aru cihnagaLu satatA ||33||"
+          ],
+          [
+            "lakShmIramaNana mudra punDra dharisida dvijana |kukShiyoLu kavaLa mAtranna koDalU ||akShayAguvadu Pala hinde mundELu kula |takShaNake SuciyAgi gati koDuvadU ||34||"
+          ],
+          [
+            "hIna punDranu supanDitanAgiralu avana |Ananadi koTTanna aLuvadintU ||",
+            "Enu duShkarma odagito I oDeyaninda |I naShTanige koDisikonDenendu ||35||"
+          ],
+          [
+            "pancaniSi badukuvade lEsUdhrva punDragaLu |pancamudriya dharisi hari BajisutA ||",
+            "vancisi mukuMdana tiraskarisi mudriya vi- |ranci kalpayuta jIvisalu vyarthA ||36||"
+          ],
+          [
+            "elli SrI tulasivana padmavana vaiShNavaru |elli iharallE iha paramAtmanU ||",
+            "sollAlisidu hari nuDidihanA vaikunTha- |dallilla nenavaralliruvanendU ||37||"
+          ],
+          [
+            "yaraDAru punDra SrI mudradhAraNa carita |smarisi kELidare icCArtha paDedU ||",
+            "muravairi lOkavaiduvaru SRuti siddhavidu |girije kELendu dhUrjaTa pELidA ||38||"
+          ],
+          [
+            "Siva sakala SAstragaLa kaliki girijege pELda |vivararitu Acaripa BAgavatarA ||",
+            "BavaSaradhiyinda kaDigetti pAlisutihanu |kavigEya prANESa viThThala jasrA ||39||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/10/12/gopichandana-mudradarane-mahathmya/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": false,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__557bac60",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Grantha malika stothra(Kannada by Pranesha dasaru)",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಸದ್ವೈಷ್ಣವರಾದವರೆಲ್ಲ ಕೇಳಿರಿ ಅದ್ವೈತರುಸರಾಡದಂದದಿ",
+            "ಮಧ್ವಮುನಿ ಬರದಂಥ ಗ್ರಂಥಸಂಖ್ಯವ ಪೇಳ್ವೆನೂ ||ಪ||"
+          ],
+          [
+            "ಪ್ರಥಮ ಗೀತಾಭಾಷ್ಯ ನಂತರ |ಚತುರಮುಖ ಸೂತ್ರಕ್ಕೆ ಭಾಷ್ಯ ಮು- |",
+            "ಕುತಿ ಪ್ರದಣು ಭಾಷ್ಯಾಖ್ಯ ಗ್ರಂಥವು ಅನುವ್ಯಾಖ್ಯಾನಾ ||",
+            "ಚತುರ ಗ್ರಂಥ ಪ್ರಮಾಣ ಲಕ್ಷಣ |ಕ್ಷಿತಿಯೊಳಗೆ ವೈಷ್ಣವ ಜನಕೆ ಸಮ್ಮತಿ |",
+            "ಕಥಾ ಲಕ್ಷಣ ಉಪಾಧೀ ಖಂಡನಾ ಗ್ರಂಥಾ ||1||"
+          ],
+          [
+            "ಸರಸ ಮಾಯಾವಾದ ಖಂಡನ |ವರಮಿತ್ರತ್ವ ಸುಮಾನ ಖಂಡನ |",
+            "ಪರಮ ಮಂಗಳ ಕೊಡುವ ಗ್ರಂಥವು ತತ್ವ ಸಂಖ್ಯಾನಾ ||",
+            "ವರದ ತತ್ವ ವಿವೇಕ ಗ್ರಂಥವು |ಹಿರಿದು ತತ್ವೋದ್ಯೋತ ಗ್ರಂಥ ಸು- |",
+            "ಕರುಮ ನಿರ್ಣಯ ವಿಷ್ಣು ತತ್ವ ನಿರಣಯ ಋಗ್ಭಾಷ್ಯಾ ||2||"
+          ],
+          [
+            "ಐತರೇಯವು ತೈತರೇಯ ಸು- |ಖ್ಯಾತೆ ಬೃಹದಾರಣ್ಯ ಮಹಿಮೀ |",
+            "ವ್ರಾತ ಈಶಾವಾಸ್ಯ ಕಾಠಕ ದಿವ್ಯ ಛಂದೋಗ್ಯಾ ||",
+            "ಭೂತಿದಾಥರ್ವಣ ಸುಮಂಡುಕ |ವೀತಭಯ ಷಟ್ಪ್ರಶ್ನ ಅಭಯದ |",
+            "ಆ ತಳವಕಾರಿಂತು ಹತ್ತುಪನಿಷದಗಳ ಭಾಷ್ಯಾ ||3||"
+          ],
+          [
+            "ಪತಿತಪಾವನ ಗೀತ ತಾತ್ಪ- |ರ್ಯತುಳನ್ಯಾಯ ವಿವರ್ಣ ಹರಿ ನಖ |",
+            "ಸ್ತುತಿ ಯಮಕ ಭಾರತ ಬಿಡದೆ ವಿಶ್ವಾಸ ಮಾಳ್ಪರಿಗೇ ||",
+            "ಗತಿ ದ್ವಾದಶ ಸ್ತೋತ್ರ ಕೃಷ್ಣಾ |ಮೃತ ಮಹರ್ಣವ ತಂತ್ರಸಾರ |",
+            "ಚ್ಯುತ ಪ್ರಿಯ ಸದಾಚಾರ ಸ್ಮøತಿ ಭಾಗವತ ತಾತ್ಪರ್ಯ ||4||"
+          ],
+          [
+            "ಬಾಹ ದುರಿತವ ತಡದು ತ್ವರ ಹೃ- |ದಾಹ ಪರಿಹರಿಸುತಿಹ ಶ್ರೀ ಮ- |",
+            "ನ್ಮಹಾ ಭಾರತ ತಾತ್ಪರ್ಯ ನಿರ್ಣಯ ಪ್ರಣವ ಕಲ್ಪಾ ||",
+            "ಸ್ನೇಹ ಭಕ್ತರ ಪೊರಪ ಮಾತುಳ |ದ್ರೋಹಿ ಜನ್ಮ ಜಯಂತಿ ಕಥಿ ನಡು |",
+            "ಗೇಹ ಸುತ ವಿರಚಿಸಿದ ಮೂವತ್ತೇಳು ಗ್ರಂಥವಿವೂ ||5||"
+          ],
+          [
+            "ಹಲವು ಕ್ಷೇತ್ರ ಸುಯಾತ್ರಿ ದಾನಂ- |ಗಳು ವೃತ ಉಪವಾಸ ಯಜ್ಞ ಮಾಡಿದ |",
+            "ಫಲವು ಈ ಗ್ರಂಥಗಳ ಪಠಿಸುವುದಕ್ಕೆ ಸಮವಲ್ಲಾ ||",
+            "ಇಳಿಯ ಮಧ್ಯದೊಳೆಮ್ಮ ವಚನಂ- |ಗಳಿಗೆ ಸಮಹಿತ ವಸ್ತುವಿಲ್ಲೆಂ- |",
+            "ದಲವ ಬೋಧರು ಶಿಷ್ಯ ಜನರಿಗೆ ತಾವೆ ಪೇಳಿಹರೂ ||6||"
+          ],
+          [
+            "ಕುನರಗೆಂದಿಗ್ಯೂ ಪೇಳದಲೆ ಸ- |ಜ್ಜನರು ಸದ್ಭಕ್ತಿಯಲಿ ಪಠಿಸುವ |",
+            "ದನವರತ ಈ ಗ್ರಂಥಮಾಲಿಕಿ ಶ್ರೀದ ಶುಚಿ ಸದನಾ ||",
+            "ಅನಘ ಶ್ರೀ ಪ್ರಾಣೇಶ ವಿಠಲನು |ಮನದಭೀಷ್ಠಿಯ ಕೊಟ್ಟು ಇಹದಲಿ |",
+            "ಕೊನಿಗೆ ತನ್ನಾಲಯದಿ ಸಂವಿಯದ ಸುಖದೊಳಿರಿಸುವನೂ||7||"
+          ]
+        ],
+        "iast": [
+          [
+            "sadvaiṣṇavarādavarèlla keḻiri advaitarusarāḍadaṃdadi",
+            "madhvamuni baradaṃtha graṃthasaṃkhyava peḻvènū ||pa||"
+          ],
+          [
+            "prathama gītābhāṣya naṃtara |caturamukha sūtrakkè bhāṣya mu- |",
+            "kuti pradaṇu bhāṣyākhya graṃthavu anuvyākhyānā ||",
+            "catura graṃtha pramāṇa lakṣaṇa |kṣitiyòḻagè vaiṣṇava janakè sammati |",
+            "kathā lakṣaṇa upādhī khaṃḍanā graṃthā ||1||"
+          ],
+          [
+            "sarasa māyāvāda khaṃḍana |varamitratva sumāna khaṃḍana |",
+            "parama maṃgaḻa kòḍuva graṃthavu tatva saṃkhyānā ||",
+            "varada tatva viveka graṃthavu |hiridu tatvodyota graṃtha su- |",
+            "karuma nirṇaya viṣṇu tatva niraṇaya ṛgbhāṣyā ||2||"
+          ],
+          [
+            "aitareyavu taitareya su- |khyātè bṛhadāraṇya mahimī |",
+            "vrāta īśāvāsya kāṭhaka divya chaṃdogyā ||",
+            "bhūtidātharvaṇa sumaṃḍuka |vītabhaya ṣaṭpraśna abhayada |",
+            "ā taḻavakāriṃtu hattupaniṣadagaḻa bhāṣyā ||3||"
+          ],
+          [
+            "patitapāvana gīta tātpa- |ryatuḻanyāya vivarṇa hari nakha |",
+            "stuti yamaka bhārata biḍadè viśvāsa māḻparige ||",
+            "gati dvādaśa stotra kṛṣṇā |mṛta maharṇava taṃtrasāra |",
+            "cyuta priya sadācāra smaøti bhāgavata tātparya ||4||"
+          ],
+          [
+            "bāha duritava taḍadu tvara hṛ- |dāha pariharisutiha śrī ma- |",
+            "nmahā bhārata tātparya nirṇaya praṇava kalpā ||",
+            "sneha bhaktara pòrapa mātuḻa |drohi janma jayaṃti kathi naḍu |",
+            "geha suta viracisida mūvatteḻu graṃthavivū ||5||"
+          ],
+          [
+            "halavu kṣetra suyātri dānaṃ- |gaḻu vṛta upavāsa yajña māḍida |",
+            "phalavu ī graṃthagaḻa paṭhisuvudakkè samavallā ||",
+            "iḻiya madhyadòḻèmma vacanaṃ- |gaḻigè samahita vastuvillèṃ- |",
+            "dalava bodharu śiṣya janarigè tāvè peḻiharū ||6||"
+          ],
+          [
+            "kunaragèṃdigyū peḻadalè sa- |jjanaru sadbhaktiyali paṭhisuva |",
+            "danavarata ī graṃthamāliki śrīda śuci sadanā ||",
+            "anagha śrī prāṇeśa viṭhalanu |manadabhīṣṭhiya kòṭṭu ihadali |",
+            "kònigè tannālayadi saṃviyada sukhadòḻirisuvanū||7||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "सद्वैष्णवरादवरॆल्ल केळिरि अद्वैतरुसराडदंददि",
+            "मध्वमुनि बरदंथ ग्रंथसंख्यव पेळ्वॆनू ||प||"
+          ],
+          [
+            "प्रथम गीताभाष्य नंतर |चतुरमुख सूत्रक्कॆ भाष्य मु- |",
+            "कुति प्रदणु भाष्याख्य ग्रंथवु अनुव्याख्याना ||",
+            "चतुर ग्रंथ प्रमाण लक्षण |क्षितियॊळगॆ वैष्णव जनकॆ सम्मति |",
+            "कथा लक्षण उपाधी खंडना ग्रंथा ||1||"
+          ],
+          [
+            "सरस मायावाद खंडन |वरमित्रत्व सुमान खंडन |",
+            "परम मंगळ कॊडुव ग्रंथवु तत्व संख्याना ||",
+            "वरद तत्व विवेक ग्रंथवु |हिरिदु तत्वोद्योत ग्रंथ सु- |",
+            "करुम निर्णय विष्णु तत्व निरणय ऋग्भाष्या ||2||"
+          ],
+          [
+            "ऐतरेयवु तैतरेय सु- |ख्यातॆ बृहदारण्य महिमी |",
+            "व्रात ईशावास्य काठक दिव्य छंदोग्या ||",
+            "भूतिदाथर्वण सुमंडुक |वीतभय षट्प्रश्न अभयद |",
+            "आ तळवकारिंतु हत्तुपनिषदगळ भाष्या ||3||"
+          ],
+          [
+            "पतितपावन गीत तात्प- |र्यतुळन्याय विवर्ण हरि नख |",
+            "स्तुति यमक भारत बिडदॆ विश्वास माळ्परिगे ||",
+            "गति द्वादश स्तोत्र कृष्णा |मृत महर्णव तंत्रसार |",
+            "च्युत प्रिय सदाचार स्मøति भागवत तात्पर्य ||4||"
+          ],
+          [
+            "बाह दुरितव तडदु त्वर हृ- |दाह परिहरिसुतिह श्री म- |",
+            "न्महा भारत तात्पर्य निर्णय प्रणव कल्पा ||",
+            "स्नेह भक्तर पॊरप मातुळ |द्रोहि जन्म जयंति कथि नडु |",
+            "गेह सुत विरचिसिद मूवत्तेळु ग्रंथविवू ||5||"
+          ],
+          [
+            "हलवु क्षेत्र सुयात्रि दानं- |गळु वृत उपवास यज्ञ माडिद |",
+            "फलवु ई ग्रंथगळ पठिसुवुदक्कॆ समवल्ला ||",
+            "इळिय मध्यदॊळॆम्म वचनं- |गळिगॆ समहित वस्तुविल्लॆं- |",
+            "दलव बोधरु शिष्य जनरिगॆ तावॆ पेळिहरू ||6||"
+          ],
+          [
+            "कुनरगॆंदिग्यू पेळदलॆ स- |ज्जनरु सद्भक्तियलि पठिसुव |",
+            "दनवरत ई ग्रंथमालिकि श्रीद शुचि सदना ||",
+            "अनघ श्री प्राणेश विठलनु |मनदभीष्ठिय कॊट्टु इहदलि |",
+            "कॊनिगॆ तन्नालयदि संवियद सुखदॊळिरिसुवनू||7||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "sadvaiShNavarAdavarella kELiri advaitarusarADadandadi",
+            "madhvamuni baradantha granthasanKyava pELvenU ||pa||"
+          ],
+          [
+            "prathama gItABAShya nantara |caturamuKa sUtrakke BAShya mu- |",
+            "kuti pradaNu BAShyAKya granthavu anuvyAKyAnA ||",
+            "catura grantha pramANa lakShaNa |kShitiyoLage vaiShNava janake sammati |",
+            "kathA lakShaNa upAdhI KanDanA granthA ||1||"
+          ],
+          [
+            "sarasa mAyAvAda KanDana |varamitratva sumAna KanDana |",
+            "parama mangaLa koDuva granthavu tatva sanKyAnA ||",
+            "varada tatva vivEka granthavu |hiridu tatvOdyOta grantha su- |",
+            "karuma nirNaya viShNu tatva niraNaya RugBAShyA ||2||"
+          ],
+          [
+            "aitarEyavu taitarEya su- |KyAte bRuhadAraNya mahimI |",
+            "vrAta ISAvAsya kAThaka divya CandOgyA ||",
+            "BUtidAtharvaNa sumanDuka |vItaBaya ShaTpraSna aBayada |",
+            "A taLavakArintu hattupaniShadagaLa BAShyA ||3||"
+          ],
+          [
+            "patitapAvana gIta tAtpa- |ryatuLanyAya vivarNa hari naKa |",
+            "stuti yamaka BArata biDade viSvAsa mALparigE ||",
+            "gati dvAdaSa stOtra kRuShNA |mRuta maharNava tantrasAra |",
+            "cyuta priya sadAcAra smaøti BAgavata tAtparya ||4||"
+          ],
+          [
+            "bAha duritava taDadu tvara hRu- |dAha pariharisutiha SrI ma- |",
+            "nmahA BArata tAtparya nirNaya praNava kalpA ||",
+            "snEha Baktara porapa mAtuLa |drOhi janma jayanti kathi naDu |",
+            "gEha suta viracisida mUvattELu granthavivU ||5||"
+          ],
+          [
+            "halavu kShEtra suyAtri dAnan- |gaLu vRuta upavAsa yaj~ja mADida |",
+            "Palavu I granthagaLa paThisuvudakke samavallA ||",
+            "iLiya madhyadoLemma vacanan- |gaLige samahita vastuvillen- |",
+            "dalava bOdharu SiShya janarige tAve pELiharU ||6||"
+          ],
+          [
+            "kunaragendigyU pELadale sa- |jjanaru sadBaktiyali paThisuva |",
+            "danavarata I granthamAliki SrIda Suci sadanA ||",
+            "anaGa SrI prANESa viThalanu |manadaBIShThiya koTTu ihadali |",
+            "konige tannAlayadi saMviyada suKadoLirisuvanU||7||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/10/12/grantha-malika-stothrakannada-by-pranesha-dasaru/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__20f9fc62",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Thanthrasaroktha kesavadi chathurvimsadhi murthy lakshana",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ತಿಳಿವದು ಸಜ್ಜನರೂ ಶಿರಿ |ನಿಲಿಯ ವಿಧಿಗೆ ತಾ ||",
+            "ವಲಿದು ಸರಿದ ನುಡಿ |ತಿಳಿವದು ಸಜ್ಜನರೂ ||ಪ||"
+          ],
+          [
+            "ಮಾಧವನಿಪ್ಪತ್ನಾಲ್ಕು ಮೂರ್ತಿ ಬಹು |ಬೋಧರ ಉಕ್ತಿ ಮನಕೆ ತಂದೂ ||",
+            "ಶೋಧಿಸಿ ಕ್ರಮ ವ್ಯುತ್ಕ್ರಮ ಪದ್ಮಾದಿ ಗ- |ದಾದಿ ಅರ್ಧ ಸಾಂತರ ಕ್ರಮವೆಂಬುದು||1||"
+          ],
+          [
+            "ಕೇಶವ ವಿಷ್ಣು ಗೋವಿಂದ ವಾಮನ ಕ್ರಮ |ಈಶ ಮಧುರಿಪುರ ಮಾಧವನೂ ||",
+            "ದೋಷಹ ತ್ರಿವಿಕ್ರಮ ನಾರಾಯಣ |ಭಾಸಿಸುತಿಹ ವ್ಯುತ್ಕ್ರಮ ಮೂರುತಿ ಎಂದು ||2||"
+          ],
+          [
+            "ಸಂಕರುಷಣ ಅನಿರುದ್ಧನು ಶ್ರೀಧರ |ಪಂಕಜನಾಭ ಕಂಜಾದಿ ಕ್ರಮಾ ||",
+            "ಬಿಂಕದ ದಾಮೋದರ ಪುರುಷೋತ್ಮ ಕ |ಳಂಕ ಹೃಷೀಕಪುಪೇಂದ್ರ ಗದಾದೆಂದು ||3||"
+          ],
+          [
+            "ಮುನಿನುತ ವಾಸುದೇವ ಅಧೋಕ್ಷಜ |ಮನಸಿಜ ಪಿತ ನರಸಿಂಹ ಹರೀ ||",
+            "ಅನಘರ್ಧಕ್ರಮ ಪ್ರದ್ಯುಮ್ನ ಜನಾ- |ರ್ದನ ಅಚ್ಯುತ ಕೃಷ್ಣನು ಸಾಂತರಕ್ರಮ||4||"
+          ],
+          [
+            "ನೀಲ ಘನಾಂಗನ ರವಿ ನಿಭ ಇಪ್ಪ |ತ್ನಾಲಕು ಮೂರುತಿ ಲಕ್ಷಣವೂ ||",
+            "ಮ್ಯಾಲಿನ ಬಲಗೈ ಮೊದಲು ಕೆಳಗೆ ಕಡಿ |ಕೇಳಿ ಶಂಖ ರವಿಗದ ಕಂಜ ಕೇಶವ ||5||"
+          ],
+          [
+            "ಕಂಜಗದ ರವಿದರ ಧರ ನಾರಾಯಣ |ವೃಜನ ಹರವಿದರ ಪದ್ಮ ಗದಾ ||",
+            "ಭುಜ ಮಾಧವ ಗದ ಕಂಜಧರ ರವಿ ಭೂ |ಮಿಜ ವಲ್ಲಭ ಗೋವಿಂದ ಮೂರುತಿಯಂದು ||6||"
+          ],
+          [
+            "ಪುಂಡರೀಕಧರ ರವಿಗದ ವಿಷ್ಣು ಪ್ರ- |ಚಂಡ ಶಂಖ ಕಂಜ ಗದ ಚಕ್ರಾ ||",
+            "ಅಂಡಜವಹ ಮಧುರಿಪು ಗದ ರವಿದರ |ಮಂಡಿತ ಪದ್ಮ ತ್ರಿವಿಕ್ರಮ ಮೂರುತಿ||7||"
+          ],
+          [
+            "ಅರಿದರ ಕಂಜ ಸು ಕಂಬುವಾಮನ ಶ್ರೀ- |ಧರ ರವಿ ಗದಧರ ಪದ್ಮಯುತಾ ||",
+            "ವರ ಚಕ್ರ ಜಲಜದರ ಗದ ಹೃಷಿಕ ಪ- |ಪರ ಕಂಜ ರವಿಗದ ಶಂಖ ಪದುಮನಾಭಾ ||8||"
+          ],
+          [
+            "ದರಗದ ರವಿ ಕಂಜ ದಾಮೋದರ ಸಂ- |ಕರುಷಣ ಶಂಖ ಕಂಜಾರಿ ಗದಾ ||",
+            "ಶರಧಿಜ ರವಿ ಪಂಕಜ ಗದ ಸಂತತ |ಧರಿಸಿಹ ಮಾಯಪ ವಾಸುದೇವನೆಂದು||9||"
+          ],
+          [
+            "ದರ ಸುಗದ ನಳಿನ ಅರಿ ಪ್ರದ್ಯುಮ್ನನು |ದುರುಳಹ ಗದ ಕಂಬು ಕಂಜಾರೀ ||",
+            "ಸುರಪನಿರುದ್ಧ ಕಮಲದರ ಗದ ರವಿ |ಧರಿಸಿಹ ಸರ್ವದ ಪುರುಷೋತ್ತುಮನೆಂದು||10||"
+          ],
+          [
+            "ಗದ ಕಂಬುಚರಣ ಸರಸಿಜಧೋಕ್ಷಜ |ಪದುಮ ಗದದರ ರವಿ ನರಹರೀ ||",
+            "ಉದಜಾರಿದರ ಗದಾಚ್ಯುತ ರವಿದರ |ಗದ ಕಮಲಾಂಶ ಜನಾರ್ದನ ವಿಭುವೆಂದು ||11||"
+          ],
+          [
+            "ಗದ ಚಕ್ರ ವಿಷಜ ಶಂಖ ಉಪೇಂದ್ರನು |ಸುದರುಶನ ಕಂಜ ಗದದರ ಹರೀ ||",
+            "ಯದುಪತಿ ಕರ ನಾಲ್ಕರೊಳು ಗದ ಕಮಲ |ಸುದರುಶನ ವಿಧುಭ ಪಾಂಚಜನ್ಯವೆಂದು ||12||"
+          ],
+          [
+            "ವರ ಗಾಯತ್ರೀ ವರ್ಣ ಮೂರ್ತಿಗಳಿ- |ವರು ಸಾದರದಲಿ ಧೇನಿಪುದೂ ||",
+            "ನಿರುತ ಸುಕವಿಗಳ ಮತವಿದು ದಕ್ಷಿಣ |ವರ ಪ್ರಾಣೇಶ ವಿಠಲ ಸಂತೈಪನೂ ||13||"
+          ]
+        ],
+        "iast": [
+          [
+            "tiḻivadu sajjanarū śiri |niliya vidhigè tā ||",
+            "validu sarida nuḍi |tiḻivadu sajjanarū ||pa||"
+          ],
+          [
+            "mādhavanippatnālku mūrti bahu |bodhara ukti manakè taṃdū ||",
+            "śodhisi krama vyutkrama padmādi ga- |dādi ardha sāṃtara kramavèṃbudu||1||"
+          ],
+          [
+            "keśava viṣṇu goviṃda vāmana krama |īśa madhuripura mādhavanū ||",
+            "doṣaha trivikrama nārāyaṇa |bhāsisutiha vyutkrama mūruti èṃdu ||2||"
+          ],
+          [
+            "saṃkaruṣaṇa aniruddhanu śrīdhara |paṃkajanābha kaṃjādi kramā ||",
+            "biṃkada dāmodara puruṣotma ka |ḻaṃka hṛṣīkapupeṃdra gadādèṃdu ||3||"
+          ],
+          [
+            "muninuta vāsudeva adhokṣaja |manasija pita narasiṃha harī ||",
+            "anaghardhakrama pradyumna janā- |rdana acyuta kṛṣṇanu sāṃtarakrama||4||"
+          ],
+          [
+            "nīla ghanāṃgana ravi nibha ippa |tnālaku mūruti lakṣaṇavū ||",
+            "myālina balagai mòdalu kèḻagè kaḍi |keḻi śaṃkha ravigada kaṃja keśava ||5||"
+          ],
+          [
+            "kaṃjagada ravidara dhara nārāyaṇa |vṛjana haravidara padma gadā ||",
+            "bhuja mādhava gada kaṃjadhara ravi bhū |mija vallabha goviṃda mūrutiyaṃdu ||6||"
+          ],
+          [
+            "puṃḍarīkadhara ravigada viṣṇu pra- |caṃḍa śaṃkha kaṃja gada cakrā ||",
+            "aṃḍajavaha madhuripu gada ravidara |maṃḍita padma trivikrama mūruti||7||"
+          ],
+          [
+            "aridara kaṃja su kaṃbuvāmana śrī- |dhara ravi gadadhara padmayutā ||",
+            "vara cakra jalajadara gada hṛṣika pa- |para kaṃja ravigada śaṃkha padumanābhā ||8||"
+          ],
+          [
+            "daragada ravi kaṃja dāmodara saṃ- |karuṣaṇa śaṃkha kaṃjāri gadā ||",
+            "śaradhija ravi paṃkaja gada saṃtata |dharisiha māyapa vāsudevanèṃdu||9||"
+          ],
+          [
+            "dara sugada naḻina ari pradyumnanu |duruḻaha gada kaṃbu kaṃjārī ||",
+            "surapaniruddha kamaladara gada ravi |dharisiha sarvada puruṣottumanèṃdu||10||"
+          ],
+          [
+            "gada kaṃbucaraṇa sarasijadhokṣaja |paduma gadadara ravi naraharī ||",
+            "udajāridara gadācyuta ravidara |gada kamalāṃśa janārdana vibhuvèṃdu ||11||"
+          ],
+          [
+            "gada cakra viṣaja śaṃkha upeṃdranu |sudaruśana kaṃja gadadara harī ||",
+            "yadupati kara nālkaròḻu gada kamala |sudaruśana vidhubha pāṃcajanyavèṃdu ||12||"
+          ],
+          [
+            "vara gāyatrī varṇa mūrtigaḻi- |varu sādaradali dhenipudū ||",
+            "niruta sukavigaḻa matavidu dakṣiṇa |vara prāṇeśa viṭhala saṃtaipanū ||13||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "तिळिवदु सज्जनरू शिरि |निलिय विधिगॆ ता ||",
+            "वलिदु सरिद नुडि |तिळिवदु सज्जनरू ||प||"
+          ],
+          [
+            "माधवनिप्पत्नाल्कु मूर्ति बहु |बोधर उक्ति मनकॆ तंदू ||",
+            "शोधिसि क्रम व्युत्क्रम पद्मादि ग- |दादि अर्ध सांतर क्रमवॆंबुदु||1||"
+          ],
+          [
+            "केशव विष्णु गोविंद वामन क्रम |ईश मधुरिपुर माधवनू ||",
+            "दोषह त्रिविक्रम नारायण |भासिसुतिह व्युत्क्रम मूरुति ऎंदु ||2||"
+          ],
+          [
+            "संकरुषण अनिरुद्धनु श्रीधर |पंकजनाभ कंजादि क्रमा ||",
+            "बिंकद दामोदर पुरुषोत्म क |ळंक हृषीकपुपेंद्र गदादॆंदु ||3||"
+          ],
+          [
+            "मुनिनुत वासुदेव अधोक्षज |मनसिज पित नरसिंह हरी ||",
+            "अनघर्धक्रम प्रद्युम्न जना- |र्दन अच्युत कृष्णनु सांतरक्रम||4||"
+          ],
+          [
+            "नील घनांगन रवि निभ इप्प |त्नालकु मूरुति लक्षणवू ||",
+            "म्यालिन बलगै मॊदलु कॆळगॆ कडि |केळि शंख रविगद कंज केशव ||5||"
+          ],
+          [
+            "कंजगद रविदर धर नारायण |वृजन हरविदर पद्म गदा ||",
+            "भुज माधव गद कंजधर रवि भू |मिज वल्लभ गोविंद मूरुतियंदु ||6||"
+          ],
+          [
+            "पुंडरीकधर रविगद विष्णु प्र- |चंड शंख कंज गद चक्रा ||",
+            "अंडजवह मधुरिपु गद रविदर |मंडित पद्म त्रिविक्रम मूरुति||7||"
+          ],
+          [
+            "अरिदर कंज सु कंबुवामन श्री- |धर रवि गदधर पद्मयुता ||",
+            "वर चक्र जलजदर गद हृषिक प- |पर कंज रविगद शंख पदुमनाभा ||8||"
+          ],
+          [
+            "दरगद रवि कंज दामोदर सं- |करुषण शंख कंजारि गदा ||",
+            "शरधिज रवि पंकज गद संतत |धरिसिह मायप वासुदेवनॆंदु||9||"
+          ],
+          [
+            "दर सुगद नळिन अरि प्रद्युम्ननु |दुरुळह गद कंबु कंजारी ||",
+            "सुरपनिरुद्ध कमलदर गद रवि |धरिसिह सर्वद पुरुषोत्तुमनॆंदु||10||"
+          ],
+          [
+            "गद कंबुचरण सरसिजधोक्षज |पदुम गददर रवि नरहरी ||",
+            "उदजारिदर गदाच्युत रविदर |गद कमलांश जनार्दन विभुवॆंदु ||11||"
+          ],
+          [
+            "गद चक्र विषज शंख उपेंद्रनु |सुदरुशन कंज गददर हरी ||",
+            "यदुपति कर नाल्करॊळु गद कमल |सुदरुशन विधुभ पांचजन्यवॆंदु ||12||"
+          ],
+          [
+            "वर गायत्री वर्ण मूर्तिगळि- |वरु सादरदलि धेनिपुदू ||",
+            "निरुत सुकविगळ मतविदु दक्षिण |वर प्राणेश विठल संतैपनू ||13||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "tiLivadu sajjanarU Siri |niliya vidhige tA ||",
+            "validu sarida nuDi |tiLivadu sajjanarU ||pa||"
+          ],
+          [
+            "mAdhavanippatnAlku mUrti bahu |bOdhara ukti manake tandU ||",
+            "SOdhisi krama vyutkrama padmAdi ga- |dAdi ardha sAntara kramaveMbudu||1||"
+          ],
+          [
+            "kESava viShNu gOvinda vAmana krama |ISa madhuripura mAdhavanU ||",
+            "dOShaha trivikrama nArAyaNa |BAsisutiha vyutkrama mUruti endu ||2||"
+          ],
+          [
+            "sankaruShaNa aniruddhanu SrIdhara |pankajanABa kaMjAdi kramA ||",
+            "binkada dAmOdara puruShOtma ka |Lanka hRuShIkapupEMdra gadAdendu ||3||"
+          ],
+          [
+            "muninuta vAsudEva adhOkShaja |manasija pita narasiMha harI ||",
+            "anaGardhakrama pradyumna janA- |rdana acyuta kRuShNanu sAntarakrama||4||"
+          ],
+          [
+            "nIla GanAngana ravi niBa ippa |tnAlaku mUruti lakShaNavU ||",
+            "myAlina balagai modalu keLage kaDi |kELi SanKa ravigada kanja kESava ||5||"
+          ],
+          [
+            "kanjagada ravidara dhara nArAyaNa |vRujana haravidara padma gadA ||",
+            "Buja mAdhava gada kanjadhara ravi BU |mija vallaBa gOviMda mUrutiyaMdu ||6||"
+          ],
+          [
+            "punDarIkadhara ravigada viShNu pra- |canDa SanKa kanja gada cakrA ||",
+            "anDajavaha madhuripu gada ravidara |manDita padma trivikrama mUruti||7||"
+          ],
+          [
+            "aridara kanja su kaMbuvAmana SrI- |dhara ravi gadadhara padmayutA ||",
+            "vara cakra jalajadara gada hRuShika pa- |para kanja ravigada SanKa padumanABA ||8||"
+          ],
+          [
+            "daragada ravi kanja dAmOdara san- |karuShaNa SanKa kanjAri gadA ||",
+            "Saradhija ravi pankaja gada santata |dharisiha mAyapa vAsudEvanendu||9||"
+          ],
+          [
+            "dara sugada naLina ari pradyumnanu |duruLaha gada kaMbu kanjArI ||",
+            "surapaniruddha kamaladara gada ravi |dharisiha sarvada puruShOttumanendu||10||"
+          ],
+          [
+            "gada kaMbucaraNa sarasijadhOkShaja |paduma gadadara ravi naraharI ||",
+            "udajAridara gadAcyuta ravidara |gada kamalAMSa janArdana viBuvendu ||11||"
+          ],
+          [
+            "gada cakra viShaja SanKa upEndranu |sudaruSana kanja gadadara harI ||",
+            "yadupati kara nAlkaroLu gada kamala |sudaruSana vidhuBa pAncajanyavendu ||12||"
+          ],
+          [
+            "vara gAyatrI varNa mUrtigaLi- |varu sAdaradali dhEnipudU ||",
+            "niruta sukavigaLa matavidu dakShiNa |vara prANESa viThala saMtaipanU ||13||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2017/10/12/thanthrasaroktha-kesavadi-chathurvimsadhi-murthy-lakshana/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "pranesha_dasaru__0b91a960",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Kaye ninna pada",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Pranesha Dasaru",
+      "deity": "",
+      "tags": [
+        "composer:Pranesha Dasaru"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಕಾಯೆ ನಿನ್ನ ಪದ ತೋಯಜಕೆರಗುವೆ |ಮಾಯದೇವಿ ಹರಿ ಕಾಯ ನಿವಾಸೇ ||ಕಾಯೇ | ಪ|"
+          ],
+          [
+            "ಬುದ್ಧಿಯ ಪ್ರೇರಿಸೆ | ಪ್ರದ್ಯುಮ್ನನ ಸತಿ ||ಕರ್ದಮಜಾಲಯ | ಭದ್ರ ಶರೀರೆ ||1||"
+          ],
+          [
+            "ಇಂಗಡಲಾತ್ಮಜೆ | ಅಂಗನಾಕುಲ ಮಣಿ ||ರಂಗನ ಪದಕಂಜ | ಭೃಂಗೆ ಕರುಣದಿ ||2||"
+          ],
+          [
+            "ಪ್ರಾಣೇಶ ವಿಠಲನ | ಮಾನಿನೀ ಯನ್ನಯ ||ಹೀನತೆಯೆಣಿಸದೆ | ಪೋಣಿಸಿ ಮತಿಯ ||3||"
+          ]
+        ],
+        "iast": [
+          [
+            "kāyè ninna pada toyajakèraguvè |māyadevi hari kāya nivāse ||kāye | pa|"
+          ],
+          [
+            "buddhiya prerisè | pradyumnana sati ||kardamajālaya | bhadra śarīrè ||1||"
+          ],
+          [
+            "iṃgaḍalātmajè | aṃganākula maṇi ||raṃgana padakaṃja | bhṛṃgè karuṇadi ||2||"
+          ],
+          [
+            "prāṇeśa viṭhalana | māninī yannaya ||hīnatèyèṇisadè | poṇisi matiya ||3||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "कायॆ निन्न पद तोयजकॆरगुवॆ |मायदेवि हरि काय निवासे ||काये | प|"
+          ],
+          [
+            "बुद्धिय प्रेरिसॆ | प्रद्युम्नन सति ||कर्दमजालय | भद्र शरीरॆ ||1||"
+          ],
+          [
+            "इंगडलात्मजॆ | अंगनाकुल मणि ||रंगन पदकंज | भृंगॆ करुणदि ||2||"
+          ],
+          [
+            "प्राणेश विठलन | मानिनी यन्नय ||हीनतॆयॆणिसदॆ | पोणिसि मतिय ||3||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "kAye ninna pada tOyajakeraguve |mAyadEvi hari kAya nivAsE ||kAyE | pa|"
+          ],
+          [
+            "buddhiya prErise | pradyumnana sati ||kardamajAlaya | Badra SarIre ||1||"
+          ],
+          [
+            "iMgaDalAtmaje | aMganAkula maNi ||raMgana padakaMja | BRuMge karuNadi ||2||"
+          ],
+          [
+            "prANESa viThalana | mAninI yannaya ||hInateyeNisade | pONisi matiya ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2019/04/29/kaye-ninna-pada/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    }
+  ]
+}
