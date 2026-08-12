@@ -571,7 +571,7 @@
       "form": {
         "type": "string",
         "required": true,
-        "notes": "pada | suladi | ugabhoga | devaranama | aarati | mangala | kolu | shobhane | laali | dashavatara | sampradaya | kavya"
+        "notes": "pada | suladi | ugabhoga | devaranama | aarati | mangala | kolu | shobhane | laali | dashavatara | sampradaya | kavya | mundige | dandaka | other"
       },
       "title": {
         "type": "object",

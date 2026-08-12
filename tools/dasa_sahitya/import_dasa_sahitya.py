@@ -116,6 +116,10 @@ class Fetcher:
         self.s.headers.update({
             "User-Agent": "DGE-DasaSahitya-Importer/1.0 (non-commercial; dharma-prachara; +https://tribhuvanachar.github.io/bhumandala)"
         })
+        # URLs that never yielded usable HTML -- surfaced in pending_review.json
+        # so a human can open them directly rather than the failure silently
+        # vanishing into stderr.
+        self.failed = []
 
     def get(self, url):
         key = hashlib.sha1(url.encode("utf-8")).hexdigest() + ".html"
@@ -123,6 +127,7 @@ class Fetcher:
         if os.path.exists(path):
             with open(path, "r", encoding="utf-8") as f:
                 return f.read()
+        last_reason = "unknown"
         for attempt in range(4):
             try:
                 r = self.s.get(url, timeout=self.timeout)
@@ -133,10 +138,14 @@ class Fetcher:
                     return r.text
                 if r.status_code in (403, 404, 410):
                     print(f"  ! {r.status_code} {url}", file=sys.stderr)
+                    self.failed.append({"url": url, "reason": f"HTTP {r.status_code}"})
                     return None
+                last_reason = f"HTTP {r.status_code}"
             except requests.RequestException as e:
                 print(f"  ! {e} ({url})", file=sys.stderr)
+                last_reason = str(e)
             time.sleep(self.delay * (attempt + 2))
+        self.failed.append({"url": url, "reason": last_reason})
         return None
 
 
@@ -607,6 +616,7 @@ def main():
 
     print("== Fetching + parsing compositions ==")
     records = []
+    no_text = []
     for i, (url, meta) in enumerate(sorted(discovered.items()), 1):
         html = fetcher.get(url)
         if not html:
@@ -614,6 +624,9 @@ def main():
         comp = parse_composition(html, url)
         # skip pages that turned out to be sub-indexes with no verse text
         if not comp["kn_stanzas"] and not comp["roman_stanzas"]:
+            no_text.append({"url": url, "title_hint": meta.get("title_hint", ""),
+                            "form": meta.get("form", ""), "composer": meta.get("composer", ""),
+                            "site": meta.get("site", "")})
             continue
         rec = build_record(comp, {**meta, "site": meta.get("site", "")}, url, fetch_date)
         records.append(rec)
@@ -627,7 +640,8 @@ def main():
 
     stats = {"fetched": raw_count, "unique": len(records),
              "duplicates_merged": dup_count}
-    write_outputs(records, args.out, fetch_date, stats)
+    write_outputs(records, args.out, fetch_date, stats,
+                  failed_fetch=fetcher.failed, no_text=no_text)
 
 
 # --------------------------------------------------------------------------- #
@@ -689,7 +703,7 @@ def dedupe(records):
     return list(by_key.values()), dups
 
 
-def write_outputs(records, out_dir, fetch_date, stats=None):
+def write_outputs(records, out_dir, fetch_date, stats=None, failed_fetch=None, no_text=None):
     os.makedirs(out_dir, exist_ok=True)
     comp_dir = os.path.join(out_dir, "composers")
     dump_dir = os.path.join(out_dir, "_dump")
@@ -736,8 +750,25 @@ def write_outputs(records, out_dir, fetch_date, stats=None):
         manifest["composers"].append({"slug": slug, "composer": recs[0]["composer"],
                                       "count": len(recs), "file": f"composers/{slug}.json"})
 
+    # untitled_composer_count is derivable from records but cheap to precompute
+    # here so the capture tool doesn't have to load every composer file just
+    # to build the review queue's headline number.
+    manifest["pending"] = {
+        "untitled_composer": sum(1 for r in records if not r.get("composer")),
+        "failed_fetch": len(failed_fetch or []),
+        "no_text": len(no_text or []),
+    }
     with open(os.path.join(out_dir, "index.json"), "w", encoding="utf-8") as f:
         json.dump(manifest, f, ensure_ascii=False, indent=2)
+
+    # Review queue: URLs that never made it into a clean record, so a human
+    # can open them directly and manually capture what the crawler couldn't.
+    with open(os.path.join(dump_dir, "pending_review.json"), "w", encoding="utf-8") as f:
+        json.dump({
+            "generated": fetch_date,
+            "failed_fetch": failed_fetch or [],
+            "no_text": no_text or [],
+        }, f, ensure_ascii=False, indent=2)
 
     # JSONL
     with open(os.path.join(dump_dir, "dasa_sahitya.jsonl"), "w", encoding="utf-8") as f:
@@ -799,7 +830,11 @@ def write_outputs(records, out_dir, fetch_date, stats=None):
             f.write(f"Cross-source dups merged {stats.get('duplicates_merged', 0):>3}\n")
         f.write(f"UNIQUE compositions    {len(records):>5}\n")
         f.write(f"  with verse text      {report['with_text']:>5}\n")
-        f.write(f"  found on >1 site     {report['multi_source']:>5}\n\n")
+        f.write(f"  found on >1 site     {report['multi_source']:>5}\n")
+        p = manifest["pending"]
+        f.write(f"  untitled composer    {p['untitled_composer']:>5}\n")
+        f.write(f"  failed fetch         {p['failed_fetch']:>5}  (see _dump/pending_review.json)\n")
+        f.write(f"  no verse text        {p['no_text']:>5}  (see _dump/pending_review.json)\n\n")
         f.write("BY FORM\n" + _tbl(manifest["counts_by_form"]) + "\n\n")
         f.write("BY SOURCE (primary)\n" + _tbl(manifest["counts_by_source"]) + "\n\n")
         f.write("BY COMPOSER\n" + _tbl(dict(sorted(
