@@ -2460,7 +2460,33 @@ window.DGE.App = (function () {
     for (let i = 0; i < saved.totalChunks; i++) {
       const c = saved.chunks[i];
       if (c && Array.isArray(c.shlokas)) {
-        c.shlokas.forEach(s => mergedShlokas.push(Object.assign({ index: seq++ }, s)));
+        c.shlokas.forEach(s => {
+          const entry = Object.assign({ index: seq++ }, s);
+          // Gemini's own JSON schema doesn't require "number" (see
+          // PROOFREAD_RESPONSE_SCHEMA in gemini.js) -- and it uses that
+          // correctly: confirmed directly against a real run on Sumadhva
+          // Vijaya sarga 10, where it omitted "number" for two pages that
+          // turned out to be a genuine editorial appendix (the printed
+          // verses 48 and 54 re-rendered as sarvatobhadra/chakrabandha
+          // citrakavya, explicitly cross-referencing "[१०.४८]"/"[१०.५४]"),
+          // not new narrative verses -- while giving every real shloka
+          // around them a normal sequential number. The merge step
+          // previously ignored that signal completely and just kept
+          // incrementing the sequential index regardless, which is exactly
+          // how the real "sarga_10 became 513 shlokas"-shaped bug of a
+          // stray 57/58 pair happened on a real run. Still keeps its own
+          // index (everything downstream assumes a plain numeric key,
+          // and dropping the content entirely would lose real information)
+          // but forces it into "review" so it surfaces instead of silently
+          // passing as a normal new shloka, with a note pointing straight
+          // at the fix: the schema editor's own delete-row control.
+          if (entry.number == null) {
+            entry.classification = 'review';
+            entry.note = (entry.note ? entry.note + ' ' : '') +
+              'Gemini did not assign this a verse number -- likely non-sequential editorial/appendix content (e.g. a citrakavya/sarvatobhadra repeat of an earlier verse), not a genuinely new shloka in sequence. Check the text; if confirmed, delete this row in the schema editor below (numbering auto-adjusts) or merge it into the previous shloka.';
+          }
+          mergedShlokas.push(entry);
+        });
       }
     }
 

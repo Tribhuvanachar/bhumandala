@@ -27,8 +27,19 @@
   // Default primary + the single fallback we drop to when the primary is
   // unavailable or quota-limited. Flash is cheaper/higher-free-quota than Pro,
   // so it is the natural one-step fallback. Kept in preference order.
-  var DEFAULT_MODEL = "gemini-2.5-flash";
-  var FALLBACK_MODEL = "gemini-2.5-flash-lite";
+  //
+  // Pinned versioned IDs go stale -- confirmed directly against a real,
+  // freshly-created API key: both "gemini-2.5-flash" AND its own fallback
+  // "gemini-2.5-flash-lite" returned a 404 ("no longer available to new
+  // users"), even though models.list still lists them with generateContent
+  // support (that list apparently doesn't reflect real per-key
+  // availability). With BOTH primary and fallback dead, every AI feature
+  // on the site would fail outright for any newly-issued key, with no
+  // automatic recovery. Switched to Google's own "-latest" rolling aliases,
+  // which stay pointed at whatever's current -- verified working against
+  // the same key that hit the 404s.
+  var DEFAULT_MODEL = "gemini-flash-latest";
+  var FALLBACK_MODEL = "gemini-flash-lite-latest";
 
   // Error "kind" constants so callers can branch if they want to.
   var KIND = {
@@ -133,7 +144,7 @@
       return err(KIND.MODEL_MISSING,
         "That Gemini model isn’t available",
         "The selected model name doesn’t exist or your key can’t access it.",
-        "Pick a different model in settings (e.g. gemini-2.5-flash).",
+        "Pick a different model in settings (e.g. gemini-flash-latest).",
         apiMsg);
     }
     if (status === 503 || status === 500 || apiStatus === "UNAVAILABLE") {

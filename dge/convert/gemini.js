@@ -106,7 +106,16 @@ Raw OCR input follows:
     // Overrides the shared client's own default (8192) -- a dense
     // multi-page commentary chunk's full corrected text plus per-shloka
     // classification/notes can genuinely need more room than that.
-    if (maxOutputTokens) generationConfig.maxOutputTokens = maxOutputTokens;
+    // Confirmed directly against real Gemini output on real classical-kavya
+    // text (Sumadhva Vijaya, 6 dense pages including verse + an editorial
+    // citrakavya appendix): the shared 8192 default hit MAX_TOKENS partway
+    // through, while 32768 completed cleanly. 16384 as Convert's OWN floor
+    // when the admin hasn't typed a value -- still well under what a run
+    // that genuinely needs more can raise it to, but no longer the
+    // conversational-chat-sized default meant for unrelated Gemini features
+    // elsewhere on the site (Kosha, Ashtadhyayi), which this file doesn't
+    // touch.
+    generationConfig.maxOutputTokens = maxOutputTokens || 16384;
 
     const r = await window.DGEGemini.generate({
       prompt: prompt, apiKey: apiKey, model: model,
