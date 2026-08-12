@@ -9,11 +9,21 @@ Covers Shankara's authentic bhashyas on the three canonical pramanas:
 
 SOURCES (licensing-clean-first):
   * Zenodo GRETIL dump (record 6466333) -- the GRETIL corpus as per-file .txt,
-    repackaged CC-BY-4.0. IAST, with reference markers. Primary for the works
-    present in the corpustei set.
-  * GRETIL classic .htm (1_sanskr/...) for the works not in corpustei
-    (Kena / Katha / Mundaka bhashyas, and the Gita bhashya bhgsbh_u).
+    repackaged CC-BY-4.0. IAST, with reference markers. That record only ships
+    a SUBSET of the corpus: of the Shankara set, only Brahmasutra Bhashya and
+    Aitareya Upanishad Bhashya are present as .txt. Used for those two.
+  * GRETIL corpustei HTML transformations
+    (gretil/corpustei/transformations/html/sa_*.htm) for the six Upanishad
+    bhashyas NOT shipped in the Zenodo record (Isha, Prashna, Mandukya+Karika,
+    Taittiriya, Chandogya, Brihadaranyaka). Same IAST text + reference markers,
+    just delivered as HTML instead of .txt, so fmt is iast_htm.
+  * GRETIL classic .htm (1_sanskr/...) for the Gita bhashya (bhgsbh_u).
   * sanskritdocuments.org ITX as an alternate for the Gita bhashya.
+
+  NOTE: Kena / Katha / Mundaka bhashyas are NOT in the GRETIL corpus at all
+  (GRETIL's index marks them "restricted / not available from TITUS"; the old
+  1_veda/4_upa/ classic paths are dead). They are commented out below and left
+  as a follow-up that will need the sanskritdocuments.org ITX path wired in.
 
 The IAST text is transliterated to Devanagari for `sanskrit_text`; the original
 IAST is kept in `transliteration`. Each work is chunked on the source file's own
@@ -37,6 +47,9 @@ except Exception:
 
 ZEN = "https://zenodo.org/records/6466333/files"
 GRETIL = "https://gretil.sub.uni-goettingen.de/gretil"
+# GRETIL corpustei HTML transformations -- where the Upanishad bhashyas that the
+# Zenodo record omits actually live. Same IAST text/markers, HTML wrapper.
+GRC = f"{GRETIL}/corpustei/transformations/html"
 
 # A GRETIL reference marker like  ĪśāUpBh_1  /  BĀU_1,1.1  /  BrSūBhā_1,1.1
 # We split on any run "<letters/underscore>_<digits, dots, commas>".
@@ -47,28 +60,34 @@ WORKS = [
     ("brahmasutra_bhashya","shankara_bhashya/brahmasutra_bhashya",
         f"{ZEN}/sa_bAdarAyaNa-brahmasUtra-comm.txt", "iast_txt", "Shariraka Bhashya"),
 
+    # These six are NOT in the Zenodo record (all returned HTTP 404 there);
+    # they live on GRETIL as corpustei HTML. Same IAST text + reference markers
+    # (e.g. PrUp_1.1 / PrUpBh_1.1, ChUp_1,1.1 / ChUpBh_1,1.1), so fmt=iast_htm.
     ("isha",       "shankara_bhashya/upanishad_bhashya/isha_upanishad",
-        f"{ZEN}/sa_IzopaniSad-or-IzAvAsyopaniSadkANva-recension-comm.txt", "iast_txt", "Isha Upanishad Bhashya"),
+        f"{GRC}/sa_IzopaniSad-or-IzAvAsyopaniSadkANva-recension-comm.htm", "iast_htm", "Isha Upanishad Bhashya"),
     ("prashna",    "shankara_bhashya/upanishad_bhashya/prashna_upanishad",
-        f"{ZEN}/sa_praznopaniSad-comm.txt", "iast_txt", "Prashna Upanishad Bhashya"),
+        f"{GRC}/sa_praznopaniSad-comm.htm", "iast_htm", "Prashna Upanishad Bhashya"),
     ("mandukya",   "shankara_bhashya/upanishad_bhashya/mandukya_upanishad",
-        f"{ZEN}/sa_mANDUkyopaniSad-comm.txt", "iast_txt", "Mandukya Upanishad + Gaudapada Karika Bhashya"),
+        f"{GRC}/sa_mANDUkyopaniSad-comm.htm", "iast_htm", "Mandukya Upanishad + Gaudapada Karika Bhashya"),
     ("taittiriya", "shankara_bhashya/upanishad_bhashya/taittiriya_upanishad",
-        f"{ZEN}/sa_taittirIyopaniSad-zaMkarabhASya.txt", "iast_txt", "Taittiriya Upanishad Bhashya"),
+        f"{GRC}/sa_taittirIyopaniSad-zaMkarabhASya.htm", "iast_htm", "Taittiriya Upanishad Bhashya"),
     ("aitareya",   "shankara_bhashya/upanishad_bhashya/aitareya_upanishad",
         f"{ZEN}/sa_aitareyopaniSad-comm.txt", "iast_txt", "Aitareya Upanishad Bhashya"),
     ("chandogya",  "shankara_bhashya/upanishad_bhashya/chandogya_upanishad",
-        f"{ZEN}/sa_chAndogyopaniSad-comm.txt", "iast_txt", "Chandogya Upanishad Bhashya"),
+        f"{GRC}/sa_chAndogyopaniSad-comm.htm", "iast_htm", "Chandogya Upanishad Bhashya"),
     ("brihadaranyaka","shankara_bhashya/upanishad_bhashya/brihadaranyaka_upanishad",
-        f"{ZEN}/sa_bRhadAraNyakopaniSadkANva-recension-comm.txt", "iast_txt", "Brihadaranyaka Upanishad Bhashya"),
+        f"{GRC}/sa_bRhadAraNyakopaniSadkANva-recension-comm.htm", "iast_htm", "Brihadaranyaka Upanishad Bhashya"),
 
-    # Not in the corpustei/Zenodo set -- GRETIL classic .htm (verify filenames on first run):
-    ("kena",    "shankara_bhashya/upanishad_bhashya/kena_upanishad",
-        f"{GRETIL}/1_sanskr/1_veda/4_upa/kenupsbu.htm", "iast_htm", "Kena Upanishad Bhashya"),
-    ("katha",   "shankara_bhashya/upanishad_bhashya/katha_upanishad",
-        f"{GRETIL}/1_sanskr/1_veda/4_upa/kathupsb_u.htm", "iast_htm", "Katha Upanishad Bhashya"),
-    ("mundaka", "shankara_bhashya/upanishad_bhashya/mundaka_upanishad",
-        f"{GRETIL}/1_sanskr/1_veda/4_upa/mundupsb_u.htm", "iast_htm", "Mundaka Upanishad Bhashya"),
+    # Kena / Katha / Mundaka bhashyas: UNAVAILABLE. Not in GRETIL's corpus
+    # (index says "restricted / not available from TITUS"), and the old classic
+    # 1_veda/4_upa/ paths below are dead (HTTP 404). Left commented out pending a
+    # separate follow-up to wire in the sanskritdocuments.org ITX fallback.
+    # ("kena",    "shankara_bhashya/upanishad_bhashya/kena_upanishad",
+    #     f"{GRETIL}/1_sanskr/1_veda/4_upa/kenupsbu.htm", "iast_htm", "Kena Upanishad Bhashya"),
+    # ("katha",   "shankara_bhashya/upanishad_bhashya/katha_upanishad",
+    #     f"{GRETIL}/1_sanskr/1_veda/4_upa/kathupsb_u.htm", "iast_htm", "Katha Upanishad Bhashya"),
+    # ("mundaka", "shankara_bhashya/upanishad_bhashya/mundaka_upanishad",
+    #     f"{GRETIL}/1_sanskr/1_veda/4_upa/mundupsb_u.htm", "iast_htm", "Mundaka Upanishad Bhashya"),
 
     ("gita_bhashya","shankara_bhashya/gita_bhashya",
         f"{GRETIL}/1_sanskr/6_sastra/3_phil/vedanta/bhgsbh_u.htm", "iast_htm", "Gita Bhashya"),
