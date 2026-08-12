@@ -395,7 +395,22 @@ window.DGE.App = (function () {
     const savedProofread = await IDB().get(proofreadDataKey());
     if (savedProofread && savedProofread.chunks) {
       const doneCount = Object.keys(savedProofread.chunks).length;
-      if (doneCount) {
+      const isComplete = savedProofread.totalChunks && doneCount === savedProofread.totalChunks;
+      if (isComplete) {
+        // Same free, in-browser restore as onFileSelected() -- this resume
+        // path (quick-resume from the known-files hint, without re-picking
+        // the actual file) was missing it, so finalJson stayed null here
+        // even when every chunk was already saved, and Build Schema Preview
+        // failed with "No proofread JSON yet" despite the status bar
+        // correctly showing N/N chunks done.
+        const mergeResult = mergeSavedProofreadChunks(savedProofread);
+        if (mergeResult) {
+          $('proofreadResumeNote').textContent =
+            `${doneCount}/${doneCount} proofread chunk(s) already saved for this file — restored automatically, nothing to re-run.`;
+          log(`Restored a complete Proofread result from this device's storage (${mergeResult.mergedShlokas.length} entries) — Review/Push/Download all work immediately, no re-run needed.`);
+          ReviewUIMod().renderSummary($('reviewSummary'));
+        }
+      } else if (doneCount) {
         $('proofreadResumeNote').textContent =
           `${doneCount} of ${savedProofread.totalChunks || '?'} proofread chunk(s) already saved for this file — tapping Proofread will resume from where it left off.`;
       }
