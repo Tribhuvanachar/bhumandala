@@ -7,6 +7,9 @@ Cross-source dups merged  18
 UNIQUE compositions     1396
   with verse text       1246
   found on >1 site        18
+  untitled composer      453
+  failed fetch             9  (see _dump/pending_review.json)
+  no verse text          252  (see _dump/pending_review.json)
 
 BY FORM
     pada                        1189

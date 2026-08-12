@@ -274,5 +274,10 @@
       "count": 29,
       "file": "composers/vyasarayaru.json"
     }
-  ]
+  ],
+  "pending": {
+    "untitled_composer": 453,
+    "failed_fetch": 9,
+    "no_text": 252
+  }
 }
