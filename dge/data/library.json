@@ -2964,41 +2964,6 @@
       "path": "dge/data/itihasas/ramayana/yuddha_kanda/saartha/data.json",
       "populated": true,
       "title": null
-    },
-    {
-      "path": "dge/data/vyakarana/ashtadhyayi/balamanorama/data.json",
-      "populated": true,
-      "title": null
-    },
-    {
-      "path": "dge/data/vyakarana/ashtadhyayi/kashika/data.json",
-      "populated": true,
-      "title": null
-    },
-    {
-      "path": "dge/data/vyakarana/ashtadhyayi/nyasa/data.json",
-      "populated": true,
-      "title": null
-    },
-    {
-      "path": "dge/data/vyakarana/ashtadhyayi/sutrapatha/data.json",
-      "populated": true,
-      "title": null
-    },
-    {
-      "path": "dge/data/vyakarana/ashtadhyayi/tattvabodhini/data.json",
-      "populated": true,
-      "title": null
-    },
-    {
-      "path": "dge/data/vyakarana/ashtadhyayi/vasu/data.json",
-      "populated": true,
-      "title": null
-    },
-    {
-      "path": "dge/data/vyakarana/dhatupatha/data.json",
-      "populated": true,
-      "title": null
     }
   ]
 }
