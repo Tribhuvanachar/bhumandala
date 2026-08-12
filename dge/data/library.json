@@ -2939,6 +2939,121 @@
       "path": "dge/data/itihasas/bhagavad_gita/adhyaya_18/data.json",
       "populated": true,
       "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/adi_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/ashramavasika_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/ashvamedhika_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/bhishma_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/drona_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/karna_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/mahaprasthanika_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/mausala_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/sabha_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/sauptika_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/shalya_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/stri_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/svargarohana_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/udyoga_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/vana_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/mahabharata/virata_parva/translation_ganguli/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/vyakarana/ashtadhyayi/balamanorama/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/vyakarana/ashtadhyayi/kashika/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/vyakarana/ashtadhyayi/nyasa/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/vyakarana/ashtadhyayi/sutrapatha/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/vyakarana/ashtadhyayi/tattvabodhini/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/vyakarana/ashtadhyayi/vasu/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/vyakarana/dhatupatha/data.json",
+      "populated": true,
+      "title": null
     }
   ]
 }
