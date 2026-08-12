@@ -25,16 +25,17 @@ Rules:
 1. Correct OCR mistakes only (misread characters, broken/merged words, obvious scan artifacts). Do not rewrite, summarize, paraphrase, or "improve" the wording.
 2. When two readings are given for a page: where they agree (even loosely, allowing for the kind of surface variation different OCR engines produce), that agreement is strong evidence — use it directly rather than inventing a third reading. Where they disagree, use context (grammar, known vocabulary, metre, the surrounding sentence) to choose the more plausible one.
 3. Preserve Sanskrit and Kannada text exactly as intended — do not modernize or alter it.
-4. Preserve the original paragraph and page order.
-5. Where distinguishable, identify which portions are the mula shloka (verse) text versus commentary/explanation.
-6. Never invent text that isn't grounded in at least one OCR reading for that page, beyond fixing an obvious small OCR-level error (broken characters, merged words) that context clearly resolves.
-7. For every shloka, self-report a "classification":
+4. Preserve the original paragraph and page order for the actual sentences/lines themselves.
+5. Verse-number markers ("॥ १॥", "॥ २॥", ...) are a known weak point of the OCR layer, not something to trust blindly: when verse numbers are printed in their own visual column/margin on the page, OCR can read that whole column as one separate block and splice it back in slightly offset, landing a marker after the wrong shloka's last line. If this looks like what happened — numbers not incrementing where they visually sit, or a shloka reading oddly short or long compared to its neighbors — use the markers' own strict sequence (they always increase by exactly 1 within one sarga/chapter) together with where each verse's sense, grammar, and metre naturally complete to reattach each marker to its real shloka boundary. This only changes which existing text belongs under which "number" — it never means inventing, dropping, or actually reordering the underlying sentences (rule 4 still applies to those).
+6. Where distinguishable, identify which portions are the mula shloka (verse) text versus commentary/explanation.
+7. Never invent text that isn't grounded in at least one OCR reading for that page, beyond fixing an obvious small OCR-level error (broken characters, merged words) that context clearly resolves.
+8. For every shloka, self-report a "classification":
    - "accept": the two readings agree, or only one reading existed and it's unambiguous and plausible as-is.
-   - "review": readings disagreed and you resolved it using context — likely correct, but a human should still glance at it.
+   - "review": readings disagreed, or a verse-marker boundary needed reattaching per rule 5, and you resolved it using context — likely correct, but a human should still glance at it.
    - "unresolved": you cannot determine confident text (readings are implausible, contradictory, or the source itself looks illegible). Keep your best-guess text in "sa" regardless, but do not invent details neither reading actually shows.
    Add a brief "note" explaining why, but only when classification is not "accept" — omit it (empty string) otherwise.
-8. Also report which page (the number from the "--- Page N ---" marker) each shloka came from, in "page".
-9. Output ONLY valid JSON — no markdown code fences, no explanations before or after, no trailing commentary.
+9. Also report which page (the number from the "--- Page N ---" marker) each shloka came from, in "page".
+10. Output ONLY valid JSON — no markdown code fences, no explanations before or after, no trailing commentary.
 
 Output exactly this JSON shape:
 {
