@@ -16,7 +16,7 @@
   }
 </script>
 <title>DGE Convert v0.30.1</title>
-<link rel="stylesheet" href="style.css?v=0.31.0">
+<link rel="stylesheet" href="style.css?v=0.32.0">
 </head>
 <body>
 
@@ -226,6 +226,16 @@
   <label for="commentaryLabelInput">Commentary display name</label>
   <input type="text" id="commentaryLabelInput" placeholder="e.g. तात्पर्यम्">
 
+  <div id="chapterManifestSection">
+    <button type="button" id="manifestToggleBtn" class="hint-toggle">📋 Chapter/sarga manifest (optional) — tell it what to expect, before checking the output</button>
+    <div id="manifestBody" style="display:none;">
+      <p class="hint">Fill this in with what you already know from the printed source — how many chapters/sub-chapters, how many shlokas each, and a few words from the start/end of each. Every Build Schema Preview (and every edit after) is checked against this automatically, so a wrong split or a missing/extra shloka gets flagged instead of silently going out.</p>
+      <div id="manifestRows"></div>
+      <button type="button" id="manifestAddRowBtn">+ Add chapter</button>
+    </div>
+    <div id="manifestCheckResults"></div>
+  </div>
+
   <button id="buildSchemaBtn" class="btn-primary">Build Schema Preview</button>
   <p class="hint">Builds an editable preview below — nothing is pushed yet. Fix anything before continuing. Each shloka has its own move/insert/split/delete controls — numbering always auto-adjusts.</p>
   <div id="schemaJumpBar" style="display:none;">
@@ -289,8 +299,8 @@
 <button type="button" id="liveLogShowBtn" class="live-log-show-btn" style="display:none;" title="Show log">📋</button>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.31.0';
-  window.DGE_CONVERT_BUILD = '2026-08-13g';
+  window.DGE_CONVERT_VERSION = '0.32.0';
+  window.DGE_CONVERT_BUILD = '2026-08-13h';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -321,7 +331,7 @@
 <script src="urlimport.js?v=0.30.1"></script>
 <script src="renderer.js?v=0.30.1"></script>
 <script src="review-ui.js?v=0.30.1"></script>
-<script src="app.js?v=0.30.3"></script>
+<script src="app.js?v=0.32.0"></script>
 <script>
   // Tab/wizard navigation -- purely presentational (which panel is
   // visible), so it's kept separate from app.js's own state/logic and

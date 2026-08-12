@@ -213,6 +213,8 @@ window.DGE.App = (function () {
   function ocrProgressKey() { return 'ocr_progress:' + currentFileKey; }
   function ocrDataKey() { return 'ocr_data:' + currentFileKey; }
   function proofreadDataKey() { return 'proofread_data:' + currentFileKey; }
+  function schemaEditStateKey() { return 'schema_edit_state:' + currentFileKey; }
+  function manifestKey() { return 'chapter_manifest:' + currentFileKey; }
 
   // Runs fn() with up to RETRY_DELAYS_MS.length extra automatic attempts on
   // failure (4 attempts total by default), waiting a bit longer each time —
@@ -421,6 +423,14 @@ window.DGE.App = (function () {
         $('proofreadResumeNote').textContent =
           `${doneCount} of ${savedProofread.totalChunks || '?'} proofread chunk(s) already saved for this file — tapping Proofread will resume from where it left off.`;
       }
+    }
+
+    const savedManifest = await IDB().get(manifestKey());
+    if (savedManifest && savedManifest.length) restoreManifest(savedManifest);
+    const savedSchemaState = await IDB().get(schemaEditStateKey());
+    if (savedSchemaState) {
+      restoreSchemaEditState(savedSchemaState);
+      log('Restored a previously edited schema preview (moves/deletes/splits/colophon) for this file — no need to rebuild it from scratch.');
     }
     renderFileStatusBar();
   }
@@ -824,7 +834,12 @@ window.DGE.App = (function () {
     $('schemaPreviewArea').addEventListener('dge-split-sarga', (e) => {
       handleSplitSarga(e.detail.afterRow, e.detail.containerEl);
     });
+    $('schemaPreviewArea').addEventListener('dge-schema-changed', () => {
+      scheduleSaveSchemaEditState();
+      scheduleManifestCheck();
+    });
     wireSchemaJumpBar();
+    wireManifestUI();
 
     console.log('DGE Convert');
     console.log('Version', window.DGE_CONVERT_VERSION || '(unknown)');
@@ -1237,6 +1252,67 @@ window.DGE.App = (function () {
     return `${cleaned || baseTitle} सर्गः ${formatSegmentLabel(segment)}`;
   }
 
+  // Persists the CURRENT schema-preview editing state (every delete/move/
+  // insert/split/colophon/title edit, not just the raw Build Schema Preview
+  // output) to IndexedDB, keyed by file -- the same durability the OCR and
+  // Proofread stages already have. Before this, a reload mid-edit (a real,
+  // repeated failure mode for this project on mobile -- see the tab-eviction
+  // entries in PENDING.md) would silently discard all of that editing work,
+  // even though the underlying Proofread data itself survived fine.
+  let schemaSaveTimer = null;
+  function scheduleSaveSchemaEditState() {
+    clearTimeout(schemaSaveTimer);
+    schemaSaveTimer = setTimeout(saveSchemaEditState, 800);
+  }
+  async function saveSchemaEditState() {
+    if (!currentFileKey) return;
+    const commentaryKey = $('commentaryKeyInput').value.trim();
+    let payload;
+    if (currentSchemaSegments && currentSchemaSegments.length) {
+      payload = {
+        isMulti: true,
+        segments: currentSchemaSegments.map(seg => ({
+          slug: seg.slug, title: seg.title, segment: seg.segment, startAt: seg.startAt || 1,
+          metadata: seg.mappedJson.metadata,
+          shlokas: RendererMod().collectEditedShlokas(seg.containerEl, commentaryKey, seg.startAt || 1)
+        }))
+      };
+    } else if (currentMappedJson) {
+      payload = {
+        isMulti: false, startAt: currentMappedJsonStartAt,
+        metadata: currentMappedJson.metadata,
+        shlokas: RendererMod().collectEditedShlokas($('schemaPreviewArea'), commentaryKey, currentMappedJsonStartAt)
+      };
+    } else {
+      return;
+    }
+    try { await IDB().set(schemaEditStateKey(), payload); } catch (e) { /* best-effort -- never blocks editing */ }
+  }
+
+  // Rebuilds currentSchemaSegments/currentMappedJson + the visible editor
+  // straight from a saved payload, bypassing a fresh Build Schema Preview
+  // (which would discard the edits by rebuilding from raw Proofread data).
+  function restoreSchemaEditState(saved) {
+    $('schemaPreviewArea').innerHTML = '';
+    if (saved.isMulti) {
+      currentMappedJson = null;
+      currentMappedJsonStartAt = 1;
+      currentSchemaSegments = saved.segments.map(s => ({
+        slug: s.slug, title: s.title, segment: s.segment, startAt: s.startAt || 1,
+        mappedJson: { metadata: s.metadata, shlokas: s.shlokas }
+      }));
+      currentSchemaSegments.forEach(seg => renderSegmentBlock(seg));
+    } else {
+      currentSchemaSegments = null;
+      currentMappedJson = { metadata: saved.metadata, shlokas: saved.shlokas };
+      currentMappedJsonStartAt = saved.startAt || 1;
+      RendererMod().renderSchemaMapEditable(currentMappedJson, $('schemaPreviewArea'), currentMappedJsonStartAt);
+    }
+    if ($('schemaJumpBar')) $('schemaJumpBar').style.display = 'flex';
+    renderFileStatusBar();
+    runManifestCheck();
+  }
+
   function buildSchemaPreview() {
     clearError();
     if (!finalJson) return setError('No proofread JSON yet — run Proofread first.');
@@ -1352,6 +1428,8 @@ window.DGE.App = (function () {
     }
     if ($('schemaJumpBar')) $('schemaJumpBar').style.display = 'flex';
     renderFileStatusBar();
+    saveSchemaEditState();
+    runManifestCheck();
   }
 
   // Builds one segment's full editable block -- editable title/path
@@ -1384,10 +1462,14 @@ window.DGE.App = (function () {
     titleInput.addEventListener('input', () => {
       seg.title = titleInput.value;
       seg.mappedJson.metadata.title = titleInput.value;
+      scheduleSaveSchemaEditState();
+      scheduleManifestCheck();
     });
     slugInput.addEventListener('input', () => {
       seg.slug = slugInput.value.trim().replace(/^\/+|\/+$/g, '');
       seg.mappedJson.metadata.stotraCode = seg.slug.split('/').pop() || '';
+      scheduleSaveSchemaEditState();
+      scheduleManifestCheck();
     });
 
     const colophonBlock = document.createElement('div');
@@ -1398,6 +1480,8 @@ window.DGE.App = (function () {
     colophonBlock.querySelector('.segment-colophon-input').addEventListener('input', (e) => {
       if (e.target.value) seg.mappedJson.metadata.colophon = e.target.value;
       else delete seg.mappedJson.metadata.colophon;
+      scheduleSaveSchemaEditState();
+      scheduleManifestCheck();
     });
 
     const inner = document.createElement('div');
@@ -1496,6 +1580,8 @@ window.DGE.App = (function () {
 
     log(`Split "${oldSeg.slug}" after shloka ${afterRow.getAttribute('data-key')} — ${afterRows.length} shloka(s) moved into new block "${newSlug}". Both blocks' titles/paths are editable above if the auto-derived numbers are wrong.`);
     newWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    saveSchemaEditState();
+    runManifestCheck();
   }
 
   function wireSchemaJumpBar() {
@@ -1532,6 +1618,167 @@ window.DGE.App = (function () {
     });
     input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); btn.click(); } });
     input.addEventListener('input', search);
+  }
+
+  // ---------------------------------------------------------------
+  // Chapter/sarga manifest -- the content editor's own ground truth
+  // (chapter/sub-chapter count, expected shloka count each, opening/closing
+  // words, colophon), entered BEFORE checking the output, per the project
+  // lead's direct ask ("we can check against the user given inputs and see
+  // whether those many chapters... were actually generated"). Checked
+  // automatically against whatever's currently built/edited -- this is
+  // exactly the independent check that would have caught the real
+  // "sarga_10 became 513 shlokas" mistake before it was ever pushed.
+  function manifestRowHtml(d) {
+    d = d || {};
+    return '<div class="manifest-row">' +
+      '<input class="manifest-label" placeholder="Ch. #" value="' + escapeHtml(d.label || '') + '">' +
+      '<input class="manifest-count" type="number" placeholder="Shlokas" value="' + escapeHtml(d.count != null ? d.count : '') + '">' +
+      '<input class="manifest-start" placeholder="Opening words" value="' + escapeHtml(d.start || '') + '">' +
+      '<input class="manifest-end" placeholder="Closing words" value="' + escapeHtml(d.end || '') + '">' +
+      '<input class="manifest-colophon" placeholder="Colophon (optional)" value="' + escapeHtml(d.colophon || '') + '">' +
+      '<button type="button" class="manifest-remove-row">&#10005;</button>' +
+    '</div>';
+  }
+
+  function wireManifestUI() {
+    const toggleBtn = $('manifestToggleBtn');
+    const body = $('manifestBody');
+    const rowsEl = $('manifestRows');
+    const addBtn = $('manifestAddRowBtn');
+    if (!toggleBtn || !body || !rowsEl || !addBtn) return;
+
+    toggleBtn.addEventListener('click', () => { body.style.display = body.style.display === 'none' ? 'block' : 'none'; });
+    addBtn.addEventListener('click', () => {
+      const wrap = document.createElement('div');
+      wrap.innerHTML = manifestRowHtml();
+      rowsEl.appendChild(wrap.firstElementChild);
+      body.style.display = 'block';
+    });
+    rowsEl.addEventListener('click', (e) => {
+      if (e.target.classList.contains('manifest-remove-row')) {
+        e.target.closest('.manifest-row').remove();
+        scheduleSaveManifest();
+        scheduleManifestCheck();
+      }
+    });
+    rowsEl.addEventListener('input', () => { scheduleSaveManifest(); scheduleManifestCheck(); });
+  }
+
+  function readManifestRows() {
+    return Array.from(document.querySelectorAll('#manifestRows .manifest-row')).map(row => ({
+      label: row.querySelector('.manifest-label').value.trim(),
+      count: (() => { const v = parseInt(row.querySelector('.manifest-count').value, 10); return Number.isFinite(v) ? v : null; })(),
+      start: row.querySelector('.manifest-start').value.trim(),
+      end: row.querySelector('.manifest-end').value.trim(),
+      colophon: row.querySelector('.manifest-colophon').value.trim()
+    }));
+  }
+
+  let manifestSaveTimer = null;
+  function scheduleSaveManifest() { clearTimeout(manifestSaveTimer); manifestSaveTimer = setTimeout(saveManifest, 800); }
+  async function saveManifest() {
+    if (!currentFileKey) return;
+    try { await IDB().set(manifestKey(), readManifestRows()); } catch (e) { /* best-effort */ }
+  }
+  function restoreManifest(rows) {
+    const rowsEl = $('manifestRows');
+    if (!rowsEl || !rows || !rows.length) return;
+    rowsEl.innerHTML = rows.map(manifestRowHtml).join('');
+    if ($('manifestBody')) $('manifestBody').style.display = 'block';
+  }
+
+  // Lenient text matching -- OCR/typed manifest text won't be byte-
+  // identical even when it's plainly "the same" (stray spaces, danda
+  // marks). Collapses both to bare words before comparing.
+  function normalizeForMatch(s) {
+    return String(s || '').replace(/[॥।,.\-‌‍]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  function phraseNearStart(actualText, phrase) {
+    if (!phrase) return true;
+    const a = normalizeForMatch(actualText), p = normalizeForMatch(phrase);
+    const idx = a.indexOf(p);
+    return idx >= 0 && idx <= 10;
+  }
+  function phraseNearEnd(actualText, phrase) {
+    if (!phrase) return true;
+    const a = normalizeForMatch(actualText), p = normalizeForMatch(phrase);
+    const idx = a.indexOf(p);
+    return idx >= 0 && idx >= a.length - p.length - 40;
+  }
+
+  // Unifies the multi-segment and single-file cases into one ordered list
+  // for validation -- the manifest doesn't need to know which mode built
+  // the current preview, only "chapter 1, chapter 2, ..." in order.
+  // Deliberately re-reads the LIVE DOM (via collectEditedShlokas) rather
+  // than seg.mappedJson.shlokas -- that in-memory dict is only ever a
+  // snapshot from whenever the segment was built/split, and row-level
+  // edits (delete/move/insert) only ever touch the DOM, not that object;
+  // reading the stale snapshot here would silently never notice them.
+  function getCurrentSegmentsForValidation() {
+    const commentaryKey = $('commentaryKeyInput').value.trim();
+    if (currentSchemaSegments && currentSchemaSegments.length) {
+      return currentSchemaSegments.map(seg => {
+        const shlokas = RendererMod().collectEditedShlokas(seg.containerEl, commentaryKey, seg.startAt || 1);
+        const keys = Object.keys(shlokas).sort((a, b) => Number(a) - Number(b));
+        return {
+          label: seg.slug, colophon: seg.mappedJson.metadata.colophon || '',
+          shlokas: keys.map(k => shlokas[k])
+        };
+      });
+    }
+    if (currentMappedJson) {
+      const shlokas = RendererMod().collectEditedShlokas($('schemaPreviewArea'), commentaryKey, currentMappedJsonStartAt);
+      const keys = Object.keys(shlokas).sort((a, b) => Number(a) - Number(b));
+      return [{
+        label: currentMappedJson.metadata.title || 'this file',
+        colophon: currentMappedJson.metadata.colophon || '',
+        shlokas: keys.map(k => shlokas[k])
+      }];
+    }
+    return [];
+  }
+
+  let manifestCheckTimer = null;
+  function scheduleManifestCheck() { clearTimeout(manifestCheckTimer); manifestCheckTimer = setTimeout(runManifestCheck, 400); }
+
+  function runManifestCheck() {
+    const resultsEl = $('manifestCheckResults');
+    if (!resultsEl) return;
+    const manifest = readManifestRows().filter(r => r.label || r.count != null || r.start || r.end || r.colophon);
+    if (!manifest.length) { resultsEl.innerHTML = ''; return; }
+    const actual = getCurrentSegmentsForValidation();
+    if (!actual.length) { resultsEl.innerHTML = ''; return; }
+
+    const findings = [];
+    if (manifest.length !== actual.length) {
+      findings.push(`⚠ Manifest lists ${manifest.length} chapter(s), but ${actual.length} were actually built. Check for a missing split or an over-eager merge before pushing.`);
+    }
+    const n = Math.min(manifest.length, actual.length);
+    for (let i = 0; i < n; i++) {
+      const m = manifest[i], a = actual[i];
+      const chLabel = m.label || `chapter ${i + 1}`;
+      if (m.count != null && a.shlokas.length !== m.count) {
+        findings.push(`⚠ ${chLabel} (${a.label}): expected ${m.count} shloka(s), found ${a.shlokas.length}.`);
+      }
+      const firstSa = a.shlokas.length ? a.shlokas[0].sa : '';
+      const lastSa = a.shlokas.length ? a.shlokas[a.shlokas.length - 1].sa : '';
+      if (m.start && !phraseNearStart(firstSa, m.start)) {
+        findings.push(`⚠ ${chLabel} (${a.label}): opening doesn't match manifest ("${m.start}") — first shloka starts "${normalizeForMatch(firstSa).slice(0, 40)}…".`);
+      }
+      if (m.end && !phraseNearEnd(lastSa, m.end)) {
+        findings.push(`⚠ ${chLabel} (${a.label}): closing doesn't match manifest ("${m.end}") — last shloka reads "…${normalizeForMatch(lastSa).slice(-40)}".`);
+      }
+      if (m.colophon && !normalizeForMatch(a.colophon || lastSa).includes(normalizeForMatch(m.colophon))) {
+        findings.push(`⚠ ${chLabel} (${a.label}): expected colophon text not found (checked the colophon field and the last shloka's own text).`);
+      }
+    }
+
+    if (!findings.length) {
+      resultsEl.innerHTML = `<div class="manifest-result-ok">✅ ${actual.length}/${manifest.length} chapter(s) match the manifest — counts, opening/closing words, and colophons all check out.</div>`;
+    } else {
+      resultsEl.innerHTML = findings.map(f => `<div class="manifest-result-warn">${escapeHtml(f)}</div>`).join('');
+    }
   }
 
   function sanitizeBackupKey(key) {
@@ -1777,6 +2024,14 @@ window.DGE.App = (function () {
           $('proofreadResumeNote').textContent =
             `${doneCount} of ${savedProofread.totalChunks || '?'} proofread chunk(s) already saved for this file — tapping Proofread will resume from where it left off.`;
         }
+      }
+
+      const savedManifest = await IDB().get(manifestKey());
+      if (savedManifest && savedManifest.length) restoreManifest(savedManifest);
+      const savedSchemaState = await IDB().get(schemaEditStateKey());
+      if (savedSchemaState) {
+        restoreSchemaEditState(savedSchemaState);
+        log('Restored a previously edited schema preview (moves/deletes/splits/colophon) for this file — no need to rebuild it from scratch.');
       }
 
       updateKnownFilesManifest(info.name, ocrPages.length, info.numPages);

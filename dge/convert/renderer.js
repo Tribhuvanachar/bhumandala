@@ -142,9 +142,18 @@ window.DGE.Renderer = (function () {
   // segment (a new file to push), which is app.js's concern, not this
   // module's -- it's surfaced as a bubbling CustomEvent instead of a direct
   // call, keeping this module ignorant of what a "segment" even is.
+  function notifyChanged(containerEl) {
+    containerEl.dispatchEvent(new CustomEvent('dge-schema-changed', { bubbles: true }));
+  }
+
   function wireRowToolbar(containerEl) {
     if (containerEl._dgeToolbarWired) return;
     containerEl._dgeToolbarWired = true;
+    containerEl.addEventListener('input', function (e) {
+      if (e.target.classList.contains('schema-sa-input') || e.target.classList.contains('schema-commentary-input')) {
+        notifyChanged(containerEl);
+      }
+    });
     containerEl.addEventListener('click', function (e) {
       const row = e.target.closest ? e.target.closest('.schema-row') : null;
       if (!row) return;
@@ -154,6 +163,7 @@ window.DGE.Renderer = (function () {
         if (prev && prev.classList.contains('schema-row')) {
           row.parentNode.insertBefore(row, prev);
           renumberRows(containerEl);
+          notifyChanged(containerEl);
         }
         return;
       }
@@ -162,6 +172,7 @@ window.DGE.Renderer = (function () {
         if (next && next.classList.contains('schema-row')) {
           row.parentNode.insertBefore(next, row);
           renumberRows(containerEl);
+          notifyChanged(containerEl);
         }
         return;
       }
@@ -181,6 +192,7 @@ window.DGE.Renderer = (function () {
         containerEl.insertBefore(row, curIdx < refIdx ? ref.nextElementSibling : ref);
         renumberRows(containerEl);
         if (input) input.value = '';
+        notifyChanged(containerEl);
         return;
       }
       if (e.target.classList.contains('row-insert-after')) {
@@ -188,6 +200,7 @@ window.DGE.Renderer = (function () {
         blank.innerHTML = rowHtml('', '', '');
         row.parentNode.insertBefore(blank.firstElementChild, row.nextSibling);
         renumberRows(containerEl);
+        notifyChanged(containerEl);
         return;
       }
       if (e.target.classList.contains('row-delete')) {
@@ -198,6 +211,7 @@ window.DGE.Renderer = (function () {
         }
         row.parentNode.removeChild(row);
         renumberRows(containerEl);
+        notifyChanged(containerEl);
         return;
       }
       if (e.target.classList.contains('row-split-after')) {
