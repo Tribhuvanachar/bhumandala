@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 655,
-  "loaded": 200,
-  "items": 324082
+  "loaded": 203,
+  "items": 325872
  },
  "sections": {
   "ancillary": {
@@ -53,8 +53,8 @@
   },
   "shankara_bhashya": {
    "total": 12,
-   "loaded": 0,
-   "items": 0
+   "loaded": 3,
+   "items": 1790
   },
   "smritis": {
    "total": 19,
@@ -522,9 +522,9 @@
   "sarvamoola_grantha/upanishad_prasthana/taittiriyopanishad_bhashya/mula": 72,
   "sarvamoola_grantha/upanishad_prasthana/taittiriyopanishad_bhashya/tika_jayatirtha": 0,
   "sarvamoola_grantha/upanishad_prasthana/taittiriyopanishad_bhashya/tippani": 0,
-  "shankara_bhashya/brahmasutra_bhashya/bhashya": 0,
-  "shankara_bhashya/gita_bhashya/bhashya": 0,
-  "shankara_bhashya/upanishad_bhashya/aitareya_upanishad/bhashya": 0,
+  "shankara_bhashya/brahmasutra_bhashya/bhashya": 556,
+  "shankara_bhashya/gita_bhashya/bhashya": 1175,
+  "shankara_bhashya/upanishad_bhashya/aitareya_upanishad/bhashya": 59,
   "shankara_bhashya/upanishad_bhashya/brihadaranyaka_upanishad/bhashya": 0,
   "shankara_bhashya/upanishad_bhashya/chandogya_upanishad/bhashya": 0,
   "shankara_bhashya/upanishad_bhashya/isha_upanishad/bhashya": 0,
