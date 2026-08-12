@@ -559,5 +559,67 @@
       }
     },
     "primaryTextField": "kannada_text"
+  },
+  "dasa_pada_text": {
+    "description": "A single Haridasa devotional composition (pada/suladi/ugabhoga/...) imported from the public Haridasa-sahitya web archives via tools/dasa_sahitya/. Kannada is the primary text; IAST/Devanagari are auto-transliterated.",
+    "item_fields": {
+      "id": {
+        "type": "string",
+        "required": true,
+        "notes": "composer-slug + url-hash"
+      },
+      "form": {
+        "type": "string",
+        "required": true,
+        "notes": "pada | suladi | ugabhoga | devaranama | aarati | mangala | kolu | shobhane | laali | dashavatara | sampradaya | kavya"
+      },
+      "title": {
+        "type": "object",
+        "required": true,
+        "notes": "{kn, latin, iast, devanagari} -- kn is the source title, the rest are auto-transliterated (or source-supplied romanization for 'latin')"
+      },
+      "composer": {
+        "type": "string",
+        "required": true
+      },
+      "deity": {
+        "type": "string",
+        "required": false
+      },
+      "tags": {
+        "type": "string[]",
+        "required": false,
+        "notes": "axis:value tags (composer:, deity:, on:, theme:)"
+      },
+      "raga": {
+        "type": "string",
+        "required": false
+      },
+      "tala": {
+        "type": "string",
+        "required": false
+      },
+      "text": {
+        "type": "object",
+        "required": true,
+        "notes": "{kannada, iast, devanagari, source_roman} -- each a string[][] of stanzas -> lines; kannada is primary, the rest auto-transliterated (source_roman only when the source page supplied its own romanization)"
+      },
+      "meaning": {
+        "type": "string",
+        "required": false,
+        "notes": "word-meaning/artha block, when the source page has one"
+      },
+      "source": {
+        "type": "object",
+        "required": true,
+        "notes": "{site, url, attribution, fetched} -- every record keeps a visible source URL, non-commercial dharma-prachara/education/research use"
+      },
+      "also_at": {
+        "type": "string[]",
+        "required": false,
+        "notes": "other source URLs this same composition (by dedup fingerprint) was also found at"
+      }
+    },
+    "primaryTextField": "text"
   }
 }

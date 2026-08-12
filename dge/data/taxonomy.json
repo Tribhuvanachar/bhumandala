@@ -1344,6 +1344,17 @@
    "_default_author": "Sri Vishnu Tirtha"
   }
  },
+ "dasa_sahitya": {
+  "_schema": "dasa_pada_text",
+  "_note": "Haridasa devotional compositions (padas/suladis/ugabhogas/...) from the public Haridasa-sahitya web archives -- see tools/dasa_sahitya/. Children resolved at runtime from data/dasa_sahitya/index.json (composers[]), not listed statically here. Overlaps in subject with the composer-by-composer 'dasakuta' node above (built earlier, still empty) -- not yet reconciled, flagged in PENDING.md for the project lead.",
+  "label": {
+   "sa": "दाससाहित्यम्",
+   "kn": "ದಾಸ ಸಾಹಿತ್ಯ",
+   "en": "Dasa Sahitya"
+  },
+  "data": "data/dasa_sahitya/index.json",
+  "forms": ["pada", "suladi", "ugabhoga", "devaranama", "aarati", "mangala", "kolu", "shobhane", "laali", "dashavatara", "sampradaya", "kavya"]
+ },
  "kavya": {
   "_schema": "itihasa_purana_text",
   "raghuvamsha": {},
