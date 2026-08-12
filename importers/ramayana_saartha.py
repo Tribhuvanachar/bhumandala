@@ -49,7 +49,18 @@ VERSE_LOCATOR = re.compile(r"verse\s*locator", re.I)
 VID_END  = re.compile(r"\|\|\s*(\d+)-(\d+)-(\d+)\s*(?:\|\|)?")  # || K-S-V [||] ends the sanskrit
 VID_TAIL = re.compile(r"\[\s*(\d+)-(\d+)-(\d+)\s*\]")       # [K-S-V] tail of the translation
 GLOSS    = re.compile(r"\*\s*(.+?)\s*\*\s*=\s*([^;*]+)")    # *word* = meaning
-SARGA_HREF = re.compile(r'href="([^"]*sarga(\d+)[^"]*\.htm)"', re.I)
+# Discovery keys off the per-sarga FRAME filename '<prefix>_<N>_frame.htm',
+# which is uniform across all six kandas (see _sarga_page_url's docstring),
+# instead of the '/sargaN/' path segment. This is deliberate: the Sundara
+# Kanda contents page writes its links with single/loosely quoted hrefs (and,
+# unlike the other five, does not reliably carry the literal 'sargaN' token in
+# a double-quoted href), so the original  href="...sarga\d+...\.htm"  pattern
+# matched zero links there. Matching the frame filename with tolerant quoting
+# (double, single, or none, with optional spaces around '=') recovers Sundara
+# while producing identical results for the five kandas that already worked.
+# The captured groups stay (full_href, sarga_number) so the callers below and
+# _sarga_page_url() are unchanged.
+SARGA_HREF = re.compile(r'href\s*=\s*["\']?([^"\'>\s]*?(\d+)_frame\.htm)', re.I)
 
 
 def _clean_iast(s):
