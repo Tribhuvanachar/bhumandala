@@ -15,14 +15,14 @@
     window.location.replace('../index.html');
   }
 </script>
-<title>DGE Convert v0.28.0</title>
-<link rel="stylesheet" href="style.css?v=0.28.0">
+<title>DGE Convert v0.29.0</title>
+<link rel="stylesheet" href="style.css?v=0.29.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
 <div><a href="../index.html">🏠 Back to DGE main page</a></div>
-<div>Version: <b id="versionDisplay">0.28.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.29.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF or page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -84,6 +84,13 @@
   <input type="text" id="importUrlInput" placeholder="https://anandamakaranda.in/index.php?title=Bhagavadgitabhashya">
   <button id="importUrlBtn">Fetch Page</button>
   <p class="hint">Already-digital text — no OCR needed. Fetches the raw page text and prepares it for Proofread directly.</p>
+</fieldset>
+
+<fieldset>
+  <legend>Backup raw data to GitHub</legend>
+  <p class="hint">OCR and Proofread progress lives only in <em>this browser's</em> storage until it's pushed as a finished grantha — cleared browsing data, a different device, or storage eviction can lose it before that point, forcing an expensive OCR+Proofread re-run. This pushes the raw, unprocessed OCR pages and/or Proofread chunks for the currently-loaded file to <code>dge/convert/backups/</code> in the repo as a safety copy — separate from the Library catalog, not shown or used anywhere in the reader app. Runs automatically after every OCR pass and every completed Proofread run (silently, only when a GitHub token is already pasted below in Setup) — this button is for backing up sooner, or for a token added after the run already finished.</p>
+  <button type="button" id="backupToGithubBtn">☁ Backup this file's raw data now</button>
+  <div id="backupStatusText" class="progress-text"></div>
 </fieldset>
 
 <fieldset>
@@ -149,6 +156,10 @@
   <label for="chunkSizeInput">Pages per Gemini request</label>
   <input type="text" id="chunkSizeInput" inputmode="numeric" style="width:80px;">
   <p class="hint">Large books are sent to Gemini in chunks of this many pages, not all at once — smaller chunks are less likely to hit an output limit or produce malformed JSON. Default 8; lower it if a chunk keeps failing. If you're hitting a per-request quota limit instead, try RAISING this — fewer, bigger requests use up that quota more slowly.</p>
+  <label style="display:flex; align-items:center; gap:6px; font-weight:400; margin:6px 0;">
+    <input type="checkbox" id="alignChunksToMarkersCk" style="width:auto; margin:0;" checked> Align chunk boundaries to chapter markers (sarga/adhyaya/skandha/etc.)
+  </label>
+  <p class="hint">When on (default), a chunk is cut early — before it hits the size above — whenever a page starts a new chapter (detects "अथ &lt;ordinal&gt; सर्गः"-style openers), so one Gemini call never mixes the tail of one chapter with the head of the next. A real, generic contributor to boundary confusion (duplicated/dropped verses right at a chapter transition) that this removes for any chaptered text, whatever the chapter word is. Never produces a WORSE split than plain fixed-size chunking — chunks near a boundary just come out a bit smaller. Turn off only to force literal fixed-size chunking (e.g. while debugging).</p>
   <label for="maxOutputTokensInput">Max output tokens per Gemini response</label>
   <input type="text" id="maxOutputTokensInput" inputmode="numeric" style="width:100px;">
   <p class="hint">Raise this if a chunk fails with "response was cut off before finishing (hit the output token limit)" — a dense commentary page's full corrected text plus per-shloka classification/notes can genuinely need more room than the old fixed default (2048) allowed. Default 8192; try 16000+ if it still gets cut off on the same chunk (or lower the chunk size above instead — either fixes it, pick whichever suits the book).</p>
@@ -253,8 +264,8 @@
 </div>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.28.0';
-  window.DGE_CONVERT_BUILD = '2026-08-13a';
+  window.DGE_CONVERT_VERSION = '0.29.0';
+  window.DGE_CONVERT_BUILD = '2026-08-13b';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -269,23 +280,23 @@
      harmless to load unconditionally otherwise. Pinned exact version, same
      convention as pdf.js/Sanscript above. -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
-<script src="utils.js?v=0.28.0"></script>
-<script src="idb.js?v=0.28.0"></script>
-<script src="pdf.js?v=0.28.0"></script>
-<script src="image.js?v=0.28.0"></script>
-<script src="loaders.js?v=0.28.0"></script>
-<script src="vision.js?v=0.28.0"></script>
-<script src="tesseract-check.js?v=0.28.0"></script>
-<script src="review-classifier.js?v=0.28.0"></script>
-<script src="../js/gemini.js?v=0.28.0"></script>
-<script src="gemini.js?v=0.28.0"></script>
-<script src="github.js?v=0.28.0"></script>
-<script src="mapper.js?v=0.28.0"></script>
-<script src="sarga-detect.js?v=0.28.0"></script>
-<script src="urlimport.js?v=0.28.0"></script>
-<script src="renderer.js?v=0.28.0"></script>
-<script src="review-ui.js?v=0.28.0"></script>
-<script src="app.js?v=0.28.0"></script>
+<script src="utils.js?v=0.29.0"></script>
+<script src="idb.js?v=0.29.0"></script>
+<script src="pdf.js?v=0.29.0"></script>
+<script src="image.js?v=0.29.0"></script>
+<script src="loaders.js?v=0.29.0"></script>
+<script src="vision.js?v=0.29.0"></script>
+<script src="tesseract-check.js?v=0.29.0"></script>
+<script src="review-classifier.js?v=0.29.0"></script>
+<script src="../js/gemini.js?v=0.29.0"></script>
+<script src="gemini.js?v=0.29.0"></script>
+<script src="github.js?v=0.29.0"></script>
+<script src="mapper.js?v=0.29.0"></script>
+<script src="sarga-detect.js?v=0.29.0"></script>
+<script src="urlimport.js?v=0.29.0"></script>
+<script src="renderer.js?v=0.29.0"></script>
+<script src="review-ui.js?v=0.29.0"></script>
+<script src="app.js?v=0.29.0"></script>
 <script>
   // Tab/wizard navigation -- purely presentational (which panel is
   // visible), so it's kept separate from app.js's own state/logic and

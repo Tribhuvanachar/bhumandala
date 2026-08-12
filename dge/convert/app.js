@@ -565,6 +565,11 @@ window.DGE.App = (function () {
     return !!(el && el.checked);
   }
 
+  function getAlignChunksToMarkers() {
+    const el = $('alignChunksToMarkersCk');
+    return !el || el.checked; // default on if the element is somehow missing
+  }
+
   // Returns the full sorted page-number list this run should cover.
   // Blank/unparseable input means "every page" (the existing, unchanged
   // default) — see U().parsePageSelection for exactly how the text is read.
@@ -638,6 +643,11 @@ window.DGE.App = (function () {
       readingOrderEl.checked = localStorage.getItem('convert_reading_order_fix') === 'true';
       readingOrderEl.addEventListener('change', () => localStorage.setItem('convert_reading_order_fix', readingOrderEl.checked));
     }
+    const alignChunksEl = $('alignChunksToMarkersCk');
+    if (alignChunksEl) {
+      alignChunksEl.checked = localStorage.getItem('convert_align_chunks_to_markers') !== 'false'; // default ON
+      alignChunksEl.addEventListener('change', () => localStorage.setItem('convert_align_chunks_to_markers', alignChunksEl.checked));
+    }
     const chunkSizeEl = $('chunkSizeInput');
     if (chunkSizeEl) {
       chunkSizeEl.value = localStorage.getItem('gemini_chunk_size') || String(DEFAULT_CHUNK_SIZE);
@@ -688,6 +698,7 @@ window.DGE.App = (function () {
       log('Cancel requested — will stop after the current chunk finishes.');
     });
     $('clearProgressBtn').addEventListener('click', clearAllProgressForFile);
+    if ($('backupToGithubBtn')) $('backupToGithubBtn').addEventListener('click', () => backupRawDataToGithub(false));
     $('copyLogBtn').addEventListener('click', copyLogToClipboard);
     initOutputModal();
     $('previewRawBtn').addEventListener('click', () => showRawOcrOutput());
@@ -1211,6 +1222,72 @@ window.DGE.App = (function () {
     renderFileStatusBar();
   }
 
+  function sanitizeBackupKey(key) {
+    return String(key || 'unknown').replace(/[^a-zA-Z0-9._-]+/g, '_').slice(0, 120);
+  }
+
+  // Pushes the RAW, unprocessed OCR pages and/or Proofread chunks for the
+  // currently-loaded file to dge/convert/backups/ -- a safety copy, not
+  // part of the Library catalog and never read by the reader app. This is
+  // the project lead's explicit ask: browser storage (IndexedDB) is the
+  // only place this data lives until a finished grantha is pushed, and a
+  // cleared cache/new device/storage eviction before that point currently
+  // means redoing OCR+Proofread from scratch. `silent` is used for the
+  // automatic post-OCR/post-Proofread trigger — failures there are logged
+  // as a warning, never surfaced as a blocking setError, since a backup
+  // failing must not look like the OCR/Proofread run itself failed.
+  async function backupRawDataToGithub(silent) {
+    if (!silent) clearError();
+    if (!currentFileKey) {
+      if (!silent) setError('Load a file first — nothing to back up yet.');
+      return;
+    }
+    if (!GitHubMod().getToken()) {
+      if (!silent) setError('Paste your GitHub token above first.');
+      else log('Skipped automatic backup — no GitHub token pasted yet (paste one in Setup, then use "Backup this file\'s raw data now" in Upload).');
+      return;
+    }
+    if (!ocrPages.length) {
+      if (!silent) setError('No OCR data yet — nothing to back up.');
+      return;
+    }
+
+    const safeKey = sanitizeBackupKey(currentFileKey);
+    const backupPath = `dge/convert/backups/${safeKey}`;
+    const savedAt = new Date().toISOString();
+    const files = [{
+      path: `${backupPath}/ocr.json`,
+      text: JSON.stringify({ fileKey: currentFileKey, fileName: currentFileDisplayName, savedAt, pages: ocrPages }, null, 2)
+    }];
+
+    const savedProofread = await IDB().get(proofreadDataKey());
+    if (savedProofread && savedProofread.chunks && Object.keys(savedProofread.chunks).length) {
+      files.push({
+        path: `${backupPath}/proofread.json`,
+        text: JSON.stringify(Object.assign({ fileKey: currentFileKey, fileName: currentFileDisplayName, savedAt }, savedProofread), null, 2)
+      });
+    }
+
+    if (!silent) { $('backupStatusText').textContent = 'Backing up to GitHub…'; $('backupToGithubBtn').disabled = true; }
+    try {
+      const result = await GitHubMod().commitFiles(
+        files,
+        `Backup raw OCR/Proofread data for "${currentFileDisplayName || currentFileKey}" via Convert (safety copy, not used by the reader app)`
+      );
+      const msg = result.uploaded === 0
+        ? 'Backup skipped — this exact data is already backed up on GitHub, nothing changed.'
+        : `Backed up — ${result.uploaded} file(s) saved under ${backupPath}/ (raw safety copy only, not part of the Library).`;
+      if (!silent) { $('backupStatusText').textContent = msg; }
+      log((silent ? 'Automatic backup: ' : '') + msg);
+    } catch (e) {
+      const msg = 'Backup failed: ' + U().formatError(e);
+      if (!silent) { setError(msg); $('backupStatusText').textContent = ''; }
+      else log('Automatic backup failed (not fatal — OCR/Proofread result itself is fine): ' + U().formatError(e));
+    } finally {
+      if (!silent) $('backupToGithubBtn').disabled = false;
+    }
+  }
+
   async function pushToGithub() {
     clearError();
     const isMulti = !!(currentSchemaSegments && currentSchemaSegments.length);
@@ -1371,7 +1448,20 @@ window.DGE.App = (function () {
       const savedProofread = await IDB().get(proofreadDataKey());
       if (savedProofread && savedProofread.chunks) {
         const doneCount = Object.keys(savedProofread.chunks).length;
-        if (doneCount) {
+        const isComplete = savedProofread.totalChunks && doneCount === savedProofread.totalChunks;
+        if (isComplete) {
+          // Fully done already — rebuild finalJson right now (a pure,
+          // free, in-browser merge of already-saved data, no network
+          // call) instead of making the admin click "Proofread" again
+          // just to re-derive something that was never actually lost.
+          const mergeResult = mergeSavedProofreadChunks(savedProofread);
+          if (mergeResult) {
+            $('proofreadResumeNote').textContent =
+              `${doneCount}/${doneCount} proofread chunk(s) already saved for this file — restored automatically, nothing to re-run.`;
+            log(`Restored a complete Proofread result from this device's storage (${mergeResult.mergedShlokas.length} entries) — Review/Push/Download all work immediately, no re-run needed.`);
+            ReviewUIMod().renderSummary($('reviewSummary'));
+          }
+        } else if (doneCount) {
           $('proofreadResumeNote').textContent =
             `${doneCount} of ${savedProofread.totalChunks || '?'} proofread chunk(s) already saved for this file — tapping Proofread will resume from where it left off.`;
         }
@@ -1650,6 +1740,7 @@ window.DGE.App = (function () {
       RendererMod().renderRawOcr(ocrPages, $('previewArea'));
       setPreviewLabel('Showing raw OCR text — untouched, before Gemini proofreading.');
     }
+    backupRawDataToGithub(true); // best-effort, silent — see its own comment
   }
 
   function buildChunks(pages, chunkSize) {
@@ -1657,6 +1748,41 @@ window.DGE.App = (function () {
     for (let i = 0; i < pages.length; i += chunkSize) {
       chunks.push(pages.slice(i, i + chunkSize));
     }
+    return chunks;
+  }
+
+  // Same job as buildChunks(), but never lets a chunk straddle a detected
+  // chapter-opening marker (e.g. "अथ पञ्चदशः सर्गः") -- reuses
+  // sarga-detect.js's own marker vocabulary against the raw OCR page text
+  // (not shlokas; same detectAnchors() function, just fed {sa: page.text}
+  // views). Real motivation: a chunk that contains the TAIL of one
+  // chapter and the HEAD of the next hands Gemini two chapters' worth of
+  // ambiguous context in one call, a plausible contributor to exactly the
+  // kind of cross-boundary duplication/loss seen in the pushed "sarga_10"
+  // (documented in PENDING.md) -- not proven as the definite cause there
+  // (that file's own Proofread run predates this fix and isn't available
+  // to diff against), but a real, generically-useful risk to remove going
+  // forward for ANY chaptered grantha (sarga/adhyaya/skandha/parva/...),
+  // since the marker regex itself is chapter-word-agnostic.
+  // Strictly safer than fixed-size chunking: a chunk can only end up
+  // SMALLER than chunkSize at a boundary, never larger, and a run with no
+  // detected markers at all produces byte-for-byte the same chunks as
+  // buildChunks() (confirmed via the "no anchors" case in detectAnchors()).
+  function buildAlignedChunks(pages, chunkSize) {
+    const anchors = SargaDetectMod() ? SargaDetectMod().detectAnchors(pages.map(p => ({ sa: (p && p.text) || '' }))) : [];
+    const hardBreakBefore = new Set();
+    anchors.forEach(a => { if (a.type === 'start' && a.pos > 0) hardBreakBefore.add(a.pos); });
+
+    const chunks = [];
+    let current = [];
+    for (let i = 0; i < pages.length; i++) {
+      if (current.length && (hardBreakBefore.has(i) || current.length >= chunkSize)) {
+        chunks.push(current);
+        current = [];
+      }
+      current.push(pages[i]);
+    }
+    if (current.length) chunks.push(current);
     return chunks;
   }
 
@@ -1728,6 +1854,64 @@ window.DGE.App = (function () {
     }
   }
 
+  // Rebuilds finalJson (+ review-class counts) purely from ALREADY-SAVED
+  // Proofread chunks in IndexedDB, with no network call. This is the
+  // exact same merge runProofread() does at the end of a fresh run --
+  // pulled out so it can ALSO run the moment a file with a fully-saved
+  // proofread result is reselected (e.g. after the tab/page reloaded,
+  // which wipes the in-memory finalJson but never touches the per-chunk
+  // IndexedDB data). Without this, reselecting such a file after a
+  // reload showed "N/N chunks" in the status bar yet Download/View/Push
+  // all failed with "run Proofread first" -- confusing, since nothing was
+  // actually lost; the merge step itself just hadn't been redone.
+  // Returns { mergedShlokas, classCounts } on success, or null if the
+  // saved data isn't actually complete (caller's job to decide what to
+  // do then -- e.g. runProofread() itself never calls this until it has
+  // already confirmed completeness, so null there would be a real bug).
+  function mergeSavedProofreadChunks(saved) {
+    if (!saved || !saved.chunks || !saved.totalChunks) return null;
+    if (Object.keys(saved.chunks).length < saved.totalChunks) return null;
+
+    // Gemini re-starts its own "number" field from scratch inside every
+    // chunk (it has no memory of earlier chunks), so that field can
+    // repeat across the merged result — kept as-is (it may reflect a real
+    // verse number printed on the page) alongside a guaranteed-unique,
+    // guaranteed-ordered "index" field for anything downstream that needs
+    // one.
+    const mergedShlokas = [];
+    let seq = 1;
+    for (let i = 0; i < saved.totalChunks; i++) {
+      const c = saved.chunks[i];
+      if (c && Array.isArray(c.shlokas)) {
+        c.shlokas.forEach(s => mergedShlokas.push(Object.assign({ index: seq++ }, s)));
+      }
+    }
+
+    // Review class (A-E): combines Gemini's self-reported classification
+    // with the source page's Vision confidence / Tesseract agreement —
+    // see review-classifier.js. Looked up by the "page" field Gemini now
+    // echoes back per shloka; legacy data without it just gets classified
+    // on classification alone (page-level signals unavailable).
+    const ocrPageByNum = {};
+    ocrPages.forEach(p => { ocrPageByNum[p.page] = p; });
+    const classCounts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+    mergedShlokas.forEach(s => {
+      const srcPage = ocrPageByNum[s.page];
+      s.reviewClass = ReviewClassifierMod().classify({
+        classification: s.classification,
+        avgConfidence: srcPage ? srcPage.avgConfidence : null,
+        crossCheckSimilarity: srcPage && srcPage.crossCheck ? srcPage.crossCheck.similarity : null
+      });
+      classCounts[s.reviewClass]++;
+    });
+
+    finalJson = { shlokas: mergedShlokas };
+    applyDetectedStartingNumber(mergedShlokas);
+    RendererMod().renderPreview(finalJson, $('previewArea'));
+    setPreviewLabel('Showing Gemini-proofread text.');
+    return { mergedShlokas, classCounts };
+  }
+
   async function runProofread() {
     clearError();
     proofreadCancelRequested = false;
@@ -1744,7 +1928,9 @@ window.DGE.App = (function () {
     const ocrGapPages = parsedSelection === null ? [] : parsedSelection.filter(p => !ocrPages.some(op => op.page === p));
 
     const chunkSize = getChunkSize();
-    const chunks = buildChunks(selectedOcrPages, chunkSize);
+    const chunks = getAlignChunksToMarkers()
+      ? buildAlignedChunks(selectedOcrPages, chunkSize)
+      : buildChunks(selectedOcrPages, chunkSize);
     const totalChunks = chunks.length;
 
     let saved = await IDB().get(proofreadDataKey());
@@ -1810,52 +1996,26 @@ window.DGE.App = (function () {
       updateProofreadGaps(chunks, saved.chunks, ocrGapPages);
       if (doneCount < totalChunks) {
         $('proofreadProgressText').textContent = `Proofreading paused — ${doneCount} of ${totalChunks} chunk(s) done so far.`;
+        backupRawDataToGithub(true); // partial progress is exactly the at-risk data — back it up too
         return;
       }
 
-      // All chunks done — merge in chunk order. Gemini re-starts its own
-      // "number" field from scratch inside every chunk (it has no memory
-      // of earlier chunks), so that field can repeat across the merged
-      // result — kept as-is (it may reflect a real verse number printed
-      // on the page) alongside a guaranteed-unique, guaranteed-ordered
-      // "index" field for anything downstream that needs one.
-      const mergedShlokas = [];
-      let seq = 1;
-      for (let i = 0; i < totalChunks; i++) {
-        const c = saved.chunks[i];
-        if (c && Array.isArray(c.shlokas)) {
-          c.shlokas.forEach(s => mergedShlokas.push(Object.assign({ index: seq++ }, s)));
-        }
+      // All chunks done — merge via the shared helper (also used to
+      // restore a completed result on file reselect, see
+      // mergeSavedProofreadChunks()'s own comment).
+      const mergeResult = mergeSavedProofreadChunks(saved);
+      if (!mergeResult) {
+        setError('Internal error: all chunks reported done but the merge found none — please report this.');
+        return;
       }
-
-      // Review class (A-E): combines Gemini's self-reported classification
-      // with the source page's Vision confidence / Tesseract agreement —
-      // see review-classifier.js. Looked up by the "page" field Gemini now
-      // echoes back per shloka; legacy data without it just gets classified
-      // on classification alone (page-level signals unavailable).
-      const ocrPageByNum = {};
-      ocrPages.forEach(p => { ocrPageByNum[p.page] = p; });
-      const classCounts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
-      mergedShlokas.forEach(s => {
-        const srcPage = ocrPageByNum[s.page];
-        s.reviewClass = ReviewClassifierMod().classify({
-          classification: s.classification,
-          avgConfidence: srcPage ? srcPage.avgConfidence : null,
-          crossCheckSimilarity: srcPage && srcPage.crossCheck ? srcPage.crossCheck.similarity : null
-        });
-        classCounts[s.reviewClass]++;
-      });
-
-      finalJson = { shlokas: mergedShlokas };
-      applyDetectedStartingNumber(mergedShlokas);
-      RendererMod().renderPreview(finalJson, $('previewArea'));
-      setPreviewLabel('Showing Gemini-proofread text.');
+      const { mergedShlokas, classCounts } = mergeResult;
       if ($('proofreadProgressBar')) $('proofreadProgressBar').value = 100;
       $('proofreadProgressText').textContent = `Proofreading complete — ${totalChunks} chunk(s), ${mergedShlokas.length} entries (${formatDuration(Date.now() - proofreadStartTime)}).`;
       const classSummary = Object.keys(classCounts).map(k => `${k}:${classCounts[k]}`).join(' ');
       log(`Proofreading complete — all chunks merged. Review classes — ${classSummary} (D+E = ${classCounts.D + classCounts.E} unit(s) needing a human look).` + (lastProofreadMissingPages.length ? ` ⚠ ${lastProofreadMissingPages.length} selected page(s) missing: ${lastProofreadMissingPages.join(', ')}.` : ''));
       renderFileStatusBar();
       ReviewUIMod().renderSummary($('reviewSummary'));
+      backupRawDataToGithub(true); // best-effort, silent — see its own comment
     } finally {
       $('proofreadBtn').disabled = false;
       $('proofreadCancelBtn').style.display = 'none';
@@ -1886,9 +2046,10 @@ window.DGE.App = (function () {
     const sel = $('geminiModelSelect'); if (sel) sel.value = '';
     const engineSel = $('ocrEngineSelect'); if (engineSel) engineSel.value = 'vision';
     const roFix = $('readingOrderFix'); if (roFix) roFix.checked = false;
+    const alignChunks = $('alignChunksToMarkersCk'); if (alignChunks) alignChunks.checked = true;
     ['gemini_chunk_size', 'gemini_max_output_tokens', 'gemini_chunk_delay_sec', 'vision_language_hints',
      'gemini_model_select', 'gemini_model_custom', 'convert_ocr_engine', 'convert_reading_order_fix',
-     'convert_page_selection', 'convert_proofread_context'
+     'convert_page_selection', 'convert_proofread_context', 'convert_align_chunks_to_markers'
     ].forEach(k => localStorage.removeItem(k));
     syncLangChips();
   }
