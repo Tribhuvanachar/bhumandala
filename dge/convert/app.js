@@ -829,7 +829,13 @@ window.DGE.App = (function () {
   // flat hundreds-of-entries <select> (the previous approach) is unusable
   // once the catalog has more than a screenful of grantha slugs in it.
   let targetSlugEntries = [];
+  let allCatalogEntries = [];
   let chosenTargetSlug = '';
+  // Tracks the last value THIS code itself wrote into these two fields, so
+  // a later auto-fill (picking a different sibling slug) can safely
+  // overwrite its own previous guess but never something the admin typed.
+  let lastAutoFilledTitle = '';
+  let lastAutoFilledAuthor = '';
 
   async function loadLibraryCatalog() {
     const searchEl = $('targetSlugSearch');
@@ -844,6 +850,7 @@ window.DGE.App = (function () {
         populated: !!g.populated
       }));
       targetSlugEntries = allEntries.filter(e => !e.populated);
+      allCatalogEntries = allEntries;
       catalogTreeRoot = buildCatalogTree(allEntries);
       if (searchEl) searchEl.placeholder = `Type to search ${targetSlugEntries.length} unpopulated grantha(s) — e.g. "yajurveda" or "grihyasutra"…`;
     } catch (e) {
@@ -1057,6 +1064,61 @@ window.DGE.App = (function () {
       chosenEl.style.display = 'none';
       $('targetSlugSearch').focus();
     });
+    maybeAutoFillFromSibling(slug);
+  }
+
+  // Swaps the trailing number in an already-populated sibling's title for
+  // the new target's number (e.g. "Sumadhva Vijaya सर्गः 9" -> "...सर्गः
+  // 10"), keeping whatever chapter-word the source actually used (सर्गः,
+  // स्कन्धः, काण्डः, ...) instead of assuming one. No trailing number to
+  // swap -> leave the sibling's title untouched, the admin can edit it.
+  function deriveSiblingTitle(siblingTitle, targetNum) {
+    const s = String(siblingTitle || '');
+    return /\d+\s*$/.test(s) ? s.replace(/\d+\s*$/, String(targetNum)) : s;
+  }
+
+  // Picking a target slug that's clearly one part of an already-populated
+  // multi-part work (a new sarga/skandha/kanda sibling of an existing one)
+  // shouldn't require retyping the same title/author every time -- direct
+  // project-lead ask. Only fills a field that's still empty or still holds
+  // our own last guess; never overwrites something the admin actually typed.
+  function maybeAutoFillFromSibling(slug) {
+    const m = String(slug || '').match(/^(.*[_/-])(\d+)$/);
+    if (!m) return;
+    const parentPrefix = m[1];
+    const targetNum = parseInt(m[2], 10);
+    const siblings = allCatalogEntries.filter(e =>
+      e.populated && e.slug !== slug && e.slug.startsWith(parentPrefix) && /^\d+$/.test(e.slug.slice(parentPrefix.length))
+    );
+    if (!siblings.length) return;
+    siblings.sort((a, b) =>
+      Math.abs(parseInt(a.slug.slice(parentPrefix.length), 10) - targetNum) -
+      Math.abs(parseInt(b.slug.slice(parentPrefix.length), 10) - targetNum)
+    );
+    const sibling = siblings[0];
+
+    const titleEl = $('granthaTitleInput');
+    if (titleEl && (!titleEl.value.trim() || titleEl.value === lastAutoFilledTitle)) {
+      const derived = deriveSiblingTitle(sibling.title, targetNum);
+      if (derived && derived !== sibling.title) {
+        titleEl.value = derived;
+        lastAutoFilledTitle = derived;
+        log(`Auto-filled grantha title from sibling "${sibling.slug}": "${derived}".`);
+      }
+    }
+
+    const authorEl = $('granthaAuthorInput');
+    if (authorEl && (!authorEl.value.trim() || authorEl.value === lastAutoFilledAuthor)) {
+      GitHubMod().getFileText(`dge/data/${sibling.slug}/data.json`).then(text => {
+        const data = JSON.parse(text);
+        const author = (data && data.metadata && data.metadata.author) || '';
+        if (author && (!authorEl.value.trim() || authorEl.value === lastAutoFilledAuthor)) {
+          authorEl.value = author;
+          lastAutoFilledAuthor = author;
+          log(`Auto-filled author from sibling "${sibling.slug}": "${author}".`);
+        }
+      }).catch(() => { /* best-effort convenience only -- no token/offline shouldn't block picking a target */ });
+    }
   }
 
   function getTargetSlug() {
