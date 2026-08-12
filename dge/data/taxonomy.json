@@ -363,34 +363,34 @@
  "itihasas": {
   "_schema": "itihasa_purana_text",
   "ramayana": {
-   "bala_kanda": {},
-   "ayodhya_kanda": {},
-   "aranya_kanda": {},
-   "kishkindha_kanda": {},
-   "sundara_kanda": {},
-   "yuddha_kanda": {},
+   "bala_kanda": { "mula": {}, "saartha": {} },
+   "ayodhya_kanda": { "mula": {}, "saartha": {} },
+   "aranya_kanda": { "mula": {}, "saartha": {} },
+   "kishkindha_kanda": { "mula": {}, "saartha": {} },
+   "sundara_kanda": { "mula": {}, "saartha": {} },
+   "yuddha_kanda": { "mula": {}, "saartha": {} },
    "uttara_kanda": {},
    "_default_author": "Maharshi Valmiki"
   },
   "mahabharata": {
-   "adi_parva": {},
-   "sabha_parva": {},
-   "vana_parva": {},
-   "virata_parva": {},
-   "udyoga_parva": {},
-   "bhishma_parva": {},
-   "drona_parva": {},
-   "karna_parva": {},
-   "shalya_parva": {},
-   "sauptika_parva": {},
-   "stri_parva": {},
-   "shanti_parva": {},
-   "anushasana_parva": {},
-   "ashvamedhika_parva": {},
-   "ashramavasika_parva": {},
-   "mausala_parva": {},
-   "mahaprasthanika_parva": {},
-   "svargarohana_parva": {},
+   "adi_parva": { "mula": {}, "translation_ganguli": {} },
+   "sabha_parva": { "mula": {}, "translation_ganguli": {} },
+   "vana_parva": { "mula": {}, "translation_ganguli": {} },
+   "virata_parva": { "mula": {}, "translation_ganguli": {} },
+   "udyoga_parva": { "mula": {}, "translation_ganguli": {} },
+   "bhishma_parva": { "mula": {}, "translation_ganguli": {} },
+   "drona_parva": { "mula": {}, "translation_ganguli": {} },
+   "karna_parva": { "mula": {}, "translation_ganguli": {} },
+   "shalya_parva": { "mula": {}, "translation_ganguli": {} },
+   "sauptika_parva": { "mula": {}, "translation_ganguli": {} },
+   "stri_parva": { "mula": {}, "translation_ganguli": {} },
+   "shanti_parva": { "mula": {}, "translation_ganguli": {} },
+   "anushasana_parva": { "mula": {}, "translation_ganguli": {} },
+   "ashvamedhika_parva": { "mula": {}, "translation_ganguli": {} },
+   "ashramavasika_parva": { "mula": {}, "translation_ganguli": {} },
+   "mausala_parva": { "mula": {}, "translation_ganguli": {} },
+   "mahaprasthanika_parva": { "mula": {}, "translation_ganguli": {} },
+   "svargarohana_parva": { "mula": {}, "translation_ganguli": {} },
    "harivamsha_khila": {
     "harivamsha_parva": {},
     "vishnu_parva": {},
@@ -418,6 +418,29 @@
    "mausala_parva": {},
    "mahaprasthanika_parva": {},
    "svargarohana_parva": {}
+  },
+  "bhagavad_gita": {
+   "_schema": "itihasa_purana_text",
+   "_default_author": "Bhagavan Sri Krishna",
+   "_note": "New dedicated Gita section (mula + word-meaning + all commentaries, from the BhagavadGita.io open dataset) -- the Gita is Bhishma Parva 23-40, so Itihasa is its home. Distinct from sarvamoola_grantha.gita_prasthana below, which is Madhva's own Gita Bhashya specifically.",
+   "adhyaya_01": {},
+   "adhyaya_02": {},
+   "adhyaya_03": {},
+   "adhyaya_04": {},
+   "adhyaya_05": {},
+   "adhyaya_06": {},
+   "adhyaya_07": {},
+   "adhyaya_08": {},
+   "adhyaya_09": {},
+   "adhyaya_10": {},
+   "adhyaya_11": {},
+   "adhyaya_12": {},
+   "adhyaya_13": {},
+   "adhyaya_14": {},
+   "adhyaya_15": {},
+   "adhyaya_16": {},
+   "adhyaya_17": {},
+   "adhyaya_18": {}
   }
  },
  "sarvamoola_grantha": {
@@ -915,6 +938,31 @@
    }
   },
   "_default_author": "Sri Madhvacharya"
+ },
+ "shankara_bhashya": {
+  "_default_author": "Sri Adi Shankaracharya",
+  "_note": "Adi Shankaracharya's Prasthanatrayi bhashya -- Brahmasutra, ten Upanishads, and the Gita. Mirrors how sarvamoola_grantha holds Madhva's corpus above. Default keeps each work whole in a single bhashya leaf (no separate mula split yet) -- see importers/shankara_bhashya.py for why.",
+  "brahmasutra_bhashya": {
+   "_schema": "grantha_tika_text",
+   "bhashya": {}
+  },
+  "upanishad_bhashya": {
+   "_schema": "grantha_tika_text",
+   "isha_upanishad": { "bhashya": {} },
+   "kena_upanishad": { "bhashya": {} },
+   "katha_upanishad": { "bhashya": {} },
+   "prashna_upanishad": { "bhashya": {} },
+   "mundaka_upanishad": { "bhashya": {} },
+   "mandukya_upanishad": { "bhashya": {} },
+   "taittiriya_upanishad": { "bhashya": {} },
+   "aitareya_upanishad": { "bhashya": {} },
+   "chandogya_upanishad": { "bhashya": {} },
+   "brihadaranyaka_upanishad": { "bhashya": {} }
+  },
+  "gita_bhashya": {
+   "_schema": "grantha_tika_text",
+   "bhashya": {}
+  }
  },
  "smritis": {
   "_schema": "smriti_dharmashastra_text",

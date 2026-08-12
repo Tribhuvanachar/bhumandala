@@ -124,6 +124,42 @@
    "url": "GRETIL + Zenodo mirror .txt",
    "format": "IAST->dev",
    "importer": "TODO (clone bhagavata.py)"
+  },
+  {
+   "id": "ramayana_saartha",
+   "title": "Valmiki Ramayana - word-meaning + English",
+   "target": "itihasas/ramayana/<kanda>/saartha",
+   "url": "https://www.valmikiramayan.net/utf8/<kanda>/sarga<N>/<prefix>roman<N>.htm",
+   "format": "HTML (IAST + *word*=meaning gloss + English), transliterated to Devanagari",
+   "importer": "ramayana_saartha.py",
+   "note": "Kandas 1-6 only; Uttara Kanda absent on this site (pull from valmiki.iitk.ac.in). Separate layer alongside /mula (different edition/numbering)."
+  },
+  {
+   "id": "mahabharata_ganguli",
+   "title": "Mahabharata - English (Ganguli, PD)",
+   "target": "itihasas/mahabharata/<parva>_parva/translation_ganguli",
+   "url": "https://sacred-texts.com/hin/m<BB>/m<BB><SSS>.htm",
+   "format": "HTML prose, section-level (generic schema, text field)",
+   "importer": "mahabharata_ganguli.py",
+   "note": "No free per-shloka word-to-word MBh exists; Ganguli prose aligned at section/adhyaya level. Devanagari mula already in /mula."
+  },
+  {
+   "id": "bhagavad_gita",
+   "title": "Srimad Bhagavad Gita - new Itihasa section (mula + word-meaning + all commentaries)",
+   "target": "itihasas/bhagavad_gita/adhyaya_NN",
+   "url": "https://raw.githubusercontent.com/gita/gita/main/data/{verse,translation,commentary}.json",
+   "format": "JSON (BhagavadGita.io open dataset); bhashya[] per shloka",
+   "importer": "bhagavadgita.py",
+   "note": "Reliable base (~20 translations/commentaries). Optional GITA_SUPERSITE=1 appends classical Sanskrit bhashyas via gitasupersite.py (Wayback)."
+  },
+  {
+   "id": "shankara_bhashya",
+   "title": "Adi Shankaracharya Prasthanatrayi Bhashya (Brahmasutra + Upanishads + Gita)",
+   "target": "shankara_bhashya/<work>/bhashya",
+   "url": "Zenodo GRETIL dump 6466333 (CC-BY) + GRETIL classic + sanskritdocuments",
+   "format": "IAST plaintext with reference markers, transliterated to Devanagari",
+   "importer": "shankara_bhashya.py",
+   "note": "Chunked on source reference markers; verify marker regex per work on first run. English (Thibaut/Sitarama Sastri/Mahadeva Sastri, PD) = follow-up."
   }
  ],
  "ocr": [

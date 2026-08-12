@@ -1,9 +1,20 @@
 """Single entry point for the workflow: python importers/dispatch.py <id>"""
 import sys
 
+# id -> (module, run-callable name) for the commentary/word-meaning importers
+COMMENTARY = {
+    "ramayana_saartha": ("ramayana_saartha", "run"),
+    "mahabharata_ganguli": ("mahabharata_ganguli", "run"),
+    "bhagavad_gita": ("bhagavadgita", "run"),
+    "shankara_bhashya": ("shankara_bhashya", "run"),
+}
+
 def main(tid):
     if tid in ("bhagavata", "ramayana", "mahabharata"):
         mod = __import__(tid); mod.run()
+    elif tid in COMMENTARY:
+        modname, fn = COMMENTARY[tid]
+        mod = __import__(modname); getattr(mod, fn)()
     else:
         import gretil, itx
         if tid in gretil.GRETIL: gretil.run(tid)
