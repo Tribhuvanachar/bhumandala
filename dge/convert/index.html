@@ -16,7 +16,7 @@
   }
 </script>
 <title>DGE Convert v0.30.1</title>
-<link rel="stylesheet" href="style.css?v=0.30.1">
+<link rel="stylesheet" href="style.css?v=0.31.0">
 </head>
 <body>
 
@@ -227,7 +227,12 @@
   <input type="text" id="commentaryLabelInput" placeholder="e.g. तात्पर्यम्">
 
   <button id="buildSchemaBtn" class="btn-primary">Build Schema Preview</button>
-  <p class="hint">Builds an editable preview below — nothing is pushed yet. Fix anything before continuing.</p>
+  <p class="hint">Builds an editable preview below — nothing is pushed yet. Fix anything before continuing. Each shloka has its own move/insert/split/delete controls — numbering always auto-adjusts.</p>
+  <div id="schemaJumpBar" style="display:none;">
+    <input type="text" id="schemaJumpInput" placeholder="Find text in any shloka/commentary below…">
+    <button type="button" id="schemaJumpBtn">Jump</button>
+    <span id="schemaJumpStatus"></span>
+  </div>
   <div id="schemaPreviewArea"></div>
 
   <button id="pushToGithubBtn" class="btn-primary">Push to GitHub</button>
@@ -284,8 +289,8 @@
 <button type="button" id="liveLogShowBtn" class="live-log-show-btn" style="display:none;" title="Show log">📋</button>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.30.3';
-  window.DGE_CONVERT_BUILD = '2026-08-13f';
+  window.DGE_CONVERT_VERSION = '0.31.0';
+  window.DGE_CONVERT_BUILD = '2026-08-13g';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>

@@ -37,19 +37,23 @@ window.DGE.Mapper = (function () {
       availableCommentaries[profile.commentaryKey] = profile.commentaryLabel || profile.commentaryKey;
     }
 
-    return {
-      metadata: {
-        title: profile.title || '',
-        author: profile.author || '',
-        stotraCode: (profile.slug || '').split('/').pop() || '',
-        archiveBaseUrl: '',
-        filePrefix: '',
-        fileExtension: '',
-        totalShlokas: Object.keys(shlokas).length,
-        availableCommentaries
-      },
-      shlokas
+    const metadata = {
+      title: profile.title || '',
+      author: profile.author || '',
+      stotraCode: (profile.slug || '').split('/').pop() || '',
+      archiveBaseUrl: '',
+      filePrefix: '',
+      fileExtension: '',
+      totalShlokas: Object.keys(shlokas).length,
+      availableCommentaries
     };
+    // Optional -- the printed closing verse ("इति ... सर्गः"), when the admin
+    // chose to record it separately (matches the existing convention already
+    // used by kavya/sumadhva_vijaya/sarga_1..8's own data.json files). Not
+    // every grantha has one; only added when actually supplied.
+    if (profile.colophon) metadata.colophon = profile.colophon;
+
+    return { metadata, shlokas };
   }
 
   return { buildGranthaJson };

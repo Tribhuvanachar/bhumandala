@@ -36,6 +36,28 @@ window.DGE.SargaDetect = (function () {
   var CHAPTER_OPEN_RE = new RegExp('अथ\\s+(' + ORDINAL_ALTERNATION + ')\\s*सर्गः?', 'g');
   var COLOPHON_RE = new RegExp('इति[\\s\\S]{0,200}?(' + ORDINAL_ALTERNATION + ')\\s*सर्गः?', 'g');
 
+  // Reverse of ORDINALS, for turning a plain sarga number back into its
+  // Sanskrit ordinal word -- used by the manual "split sarga here" editor
+  // control to suggest a colophon/heading for a newly-created segment.
+  var NUMBER_TO_ORDINAL = {};
+  Object.keys(ORDINALS).forEach(function (word) { NUMBER_TO_ORDINAL[ORDINALS[word]] = word; });
+  function ordinalWord(n) { return NUMBER_TO_ORDINAL[n] || null; }
+
+  // Swaps whichever ORDINALS word already appears in an existing colophon
+  // (e.g. a sibling sarga's own metadata.colophon) for the ordinal matching
+  // targetNum -- lets the editor suggest "...आनन्दाङ्किते द्वादशः सर्गः" from
+  // "...आनन्दाङ्किते एकादशः सर्गः" without knowing this work's own lineage/title
+  // wording. Returns null if no ordinal word is found to swap (caller should
+  // fall back to leaving the field blank rather than guessing the wrong text).
+  function suggestColophon(existingColophon, targetNum) {
+    var word = ordinalWord(targetNum);
+    if (!word || !existingColophon) return null;
+    var re = new RegExp('(' + ORDINAL_ALTERNATION + ')(\\s*सर्गः?)', '');
+    var m = re.exec(existingColophon);
+    if (!m) return null;
+    return existingColophon.slice(0, m.index) + word + m[2] + existingColophon.slice(m.index + m[0].length);
+  }
+
   // Finds every boundary marker across the ordered shloka list. Returns
   // anchors sorted by position; 'start' = this shloka begins the named
   // sarga, 'end' = this shloka is the last verse of (or carries the
@@ -112,5 +134,8 @@ window.DGE.SargaDetect = (function () {
     return buildSegments(anchors, (mergedShlokas || []).length, fallbackNumber);
   }
 
-  return { ORDINALS: ORDINALS, detectAnchors: detectAnchors, buildSegments: buildSegments, detectSegments: detectSegments };
+  return {
+    ORDINALS: ORDINALS, detectAnchors: detectAnchors, buildSegments: buildSegments, detectSegments: detectSegments,
+    ordinalWord: ordinalWord, suggestColophon: suggestColophon
+  };
 })();

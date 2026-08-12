@@ -35,7 +35,8 @@ Rules:
    - "unresolved": you cannot determine confident text (readings are implausible, contradictory, or the source itself looks illegible). Keep your best-guess text in "sa" regardless, but do not invent details neither reading actually shows.
    Add a brief "note" explaining why, but only when classification is not "accept" — omit it (empty string) otherwise.
 9. Also report which page (the number from the "--- Page N ---" marker) each shloka came from, in "page".
-10. Output ONLY valid JSON — no markdown code fences, no explanations before or after, no trailing commentary.
+10. Watch for two specific structural problems, since they're easy to miss shloka-by-shloka but matter a lot downstream: (a) a chapter/sarga boundary — a chapter-opening line ("अथ <ordinal> सर्गः") or a closing colophon ("इति ... <ordinal> सर्गः") — that looks incomplete, garbled, or only half-legible, since that's exactly what breaks automatic chapter splitting later; (b) one verse's text that looks like it was actually split into two separate shlokas (or two verses merged into one) by a misplaced verse-number marker, beyond what rule 5 above already resolves. When either happens, still give your best-effort corrected text, but set "classification" to "review" and say specifically what you noticed in "note" (e.g. "possible sarga boundary here — colophon text looks incomplete" or "this may be two verses merged into one shloka"), so a human reviewer sees exactly what to double-check instead of having to re-read everything.
+11. Output ONLY valid JSON — no markdown code fences, no explanations before or after, no trailing commentary.
 
 Output exactly this JSON shape:
 {

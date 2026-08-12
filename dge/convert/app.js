@@ -28,6 +28,13 @@ window.DGE.App = (function () {
   let cancelRequested = false;
   let proofreadCancelRequested = false;
   let currentMappedJson = null;
+  // The real first shloka number for the single-grantha (non-split) case --
+  // usually 1, but can be higher when "Starting shloka/unit number" was set
+  // for a batch that continues an already-partially-pushed work. Needed at
+  // Push time so collectEditedShlokas's renumber-on-collect (added for the
+  // segment editor's move/insert/delete/split controls) doesn't reset a
+  // correctly-offset continuation batch back down to 1.
+  let currentMappedJsonStartAt = 1;
   // Set instead of currentMappedJson whenever sarga-detect.js finds this
   // batch actually spans more than one sarga (see PENDING.md's "sarga_10"
   // entry) -- an array of { slug, title, mappedJson, containerEl } , one
@@ -371,7 +378,7 @@ window.DGE.App = (function () {
     currentLoader = null;
     ocrPages = [];
     finalJson = null;
-    currentMappedJson = null; // schema range shown in the status bar must reset too
+    currentMappedJson = null; currentMappedJsonStartAt = 1; // schema range shown in the status bar must reset too
     currentSchemaSegments = null;
     resetStartingNumberDetection();
     lastProofreadMissingPages = [];
@@ -814,6 +821,10 @@ window.DGE.App = (function () {
 
     $('buildSchemaBtn').addEventListener('click', buildSchemaPreview);
     $('pushToGithubBtn').addEventListener('click', pushToGithub);
+    $('schemaPreviewArea').addEventListener('dge-split-sarga', (e) => {
+      handleSplitSarga(e.detail.afterRow, e.detail.containerEl);
+    });
+    wireSchemaJumpBar();
 
     console.log('DGE Convert');
     console.log('Version', window.DGE_CONVERT_VERSION || '(unknown)');
@@ -1291,6 +1302,9 @@ window.DGE.App = (function () {
       // before this feature existed.
       currentSchemaSegments = null;
       currentMappedJson = MapperMod().buildGranthaJson(numberedJson, profile);
+      currentMappedJsonStartAt = numberedJson.shlokas.length
+        ? (numberedJson.shlokas[0].index != null ? numberedJson.shlokas[0].index : numberedJson.shlokas[0].number)
+        : 1;
       RendererMod().renderSchemaMapEditable(currentMappedJson, schemaArea);
       log(`Schema preview built for "${slug}" — ${Object.keys(currentMappedJson.shlokas).length} shloka(s). Review and edit below before pushing.`);
     } else {
@@ -1300,7 +1314,14 @@ window.DGE.App = (function () {
       // of concatenating them all under one number.
       currentMappedJson = null;
       currentSchemaSegments = segments.map(seg => {
-        const segShlokas = numberedJson.shlokas.slice(seg.startIdx, seg.endIdx + 1);
+        // Renumber LOCALLY (1..N within this sarga) rather than keeping the
+        // batch's global running index -- a real bug the project lead
+        // caught directly ("Ekadasha sarga should have started with one.
+        // Instead it is showing as 59"): every other sarga in this project
+        // uses local per-sarga numbering matching the printed source, and a
+        // split-off segment is exactly one sarga, so it should too.
+        const segShlokas = numberedJson.shlokas.slice(seg.startIdx, seg.endIdx + 1)
+          .map((s, i) => Object.assign({}, s, { index: i + 1 }));
         const segSlug = deriveSegmentSlug(slug, seg);
         const segProfile = Object.assign({}, profile, {
           slug: segSlug,
@@ -1318,25 +1339,10 @@ window.DGE.App = (function () {
       const banner = document.createElement('div');
       banner.className = 'hint';
       banner.style.cssText = 'background:#fff3cd; border:1px solid #e0c36c; padding:8px; margin-bottom:10px; border-radius:4px;';
-      banner.textContent = `⚠ This batch spans ${currentSchemaSegments.length} sarga(s), not 1 — auto-split into ${currentSchemaSegments.length} files below (detected from "अथ ... सर्गः" / "इति ... सर्गः" markers in the text). Each block is independently editable; Push sends all of them together in one commit.`;
+      banner.textContent = `⚠ This batch spans ${currentSchemaSegments.length} sarga(s), not 1 — auto-split into ${currentSchemaSegments.length} files below (detected from "अथ ... सर्गः" / "इति ... सर्गः" markers in the text). Each block is independently editable (including its title/path and, if a split looks wrong, its shloka list) — Push sends all of them together in one commit.`;
       schemaArea.appendChild(banner);
 
-      currentSchemaSegments.forEach(seg => {
-        const wrap = document.createElement('div');
-        wrap.className = 'schema-segment-block';
-        wrap.style.cssText = 'border:1px solid #ccc; border-radius:6px; padding:8px; margin-bottom:14px;';
-        const heading = document.createElement('div');
-        heading.style.marginBottom = '6px';
-        heading.innerHTML = `<strong>${escapeHtml(seg.title)}</strong> <span class="hint">— ${escapeHtml(seg.slug)}` +
-          (seg.segment.confident ? '' : ' (⚠ unconfirmed range — markers don\'t confirm both ends, double-check before trusting this split)') +
-          `</span>`;
-        wrap.appendChild(heading);
-        const inner = document.createElement('div');
-        wrap.appendChild(inner);
-        seg.containerEl = inner;
-        RendererMod().renderSchemaMapEditable(seg.mappedJson, inner);
-        schemaArea.appendChild(wrap);
-      });
+      currentSchemaSegments.forEach(seg => renderSegmentBlock(seg));
 
       const summary = currentSchemaSegments.map(s => {
         const n = Object.keys(s.mappedJson.shlokas).length;
@@ -1344,7 +1350,188 @@ window.DGE.App = (function () {
       }).join(', ');
       log(`Detected ${currentSchemaSegments.length} sarga(s) in this batch, not 1 — auto-split into: ${summary}. Review each block below, then Push once (single commit for all of them).`);
     }
+    if ($('schemaJumpBar')) $('schemaJumpBar').style.display = 'flex';
     renderFileStatusBar();
+  }
+
+  // Builds one segment's full editable block -- editable title/path
+  // (inputs, not static text, since a manual split's auto-derived guess is
+  // often exactly what needs correcting), an optional colophon field, and
+  // the row-editable shloka list. Used both for the initial auto-split
+  // render above and for a segment freshly created by "split sarga after
+  // this" below, so the two look and behave identically.
+  function renderSegmentBlock(seg, insertBeforeEl) {
+    const wrap = document.createElement('div');
+    wrap.className = 'schema-segment-block';
+    wrap.style.cssText = 'border:1px solid #ccc; border-radius:6px; padding:8px; margin-bottom:14px;';
+
+    const titleRow = document.createElement('div');
+    titleRow.className = 'schema-segment-title-row';
+    titleRow.innerHTML =
+      '<label class="hint">Title</label><input type="text" class="segment-title-input" value="' + escapeHtml(seg.title) + '">' +
+      '<label class="hint">Path</label><input type="text" class="segment-slug-input" value="' + escapeHtml(seg.slug) + '">';
+    wrap.appendChild(titleRow);
+
+    if (seg.segment && !seg.segment.confident) {
+      const warn = document.createElement('div');
+      warn.className = 'hint';
+      warn.textContent = '⚠ unconfirmed range — markers don\'t confirm both ends, double-check before trusting this split';
+      wrap.appendChild(warn);
+    }
+
+    const titleInput = titleRow.querySelector('.segment-title-input');
+    const slugInput = titleRow.querySelector('.segment-slug-input');
+    titleInput.addEventListener('input', () => {
+      seg.title = titleInput.value;
+      seg.mappedJson.metadata.title = titleInput.value;
+    });
+    slugInput.addEventListener('input', () => {
+      seg.slug = slugInput.value.trim().replace(/^\/+|\/+$/g, '');
+      seg.mappedJson.metadata.stotraCode = seg.slug.split('/').pop() || '';
+    });
+
+    const colophonBlock = document.createElement('div');
+    colophonBlock.className = 'schema-colophon-block';
+    colophonBlock.innerHTML = '<label class="hint">Closing colophon (optional — stored separately in metadata.colophon; the printed "इति ... सर्गः" text, if you want it recorded in addition to whatever\'s already in the last shloka above)</label>' +
+      '<textarea class="segment-colophon-input" rows="2">' + escapeHtml(seg.mappedJson.metadata.colophon || '') + '</textarea>';
+    wrap.appendChild(colophonBlock);
+    colophonBlock.querySelector('.segment-colophon-input').addEventListener('input', (e) => {
+      if (e.target.value) seg.mappedJson.metadata.colophon = e.target.value;
+      else delete seg.mappedJson.metadata.colophon;
+    });
+
+    const inner = document.createElement('div');
+    wrap.appendChild(inner);
+    seg.containerEl = inner;
+    RendererMod().renderSchemaMapEditable(seg.mappedJson, inner);
+
+    if (insertBeforeEl) $('schemaPreviewArea').insertBefore(wrap, insertBeforeEl);
+    else $('schemaPreviewArea').appendChild(wrap);
+    seg._wrapEl = wrap;
+    return wrap;
+  }
+
+  // "Split sarga after this shloka" -- the manual complement to
+  // sarga-detect.js's automatic boundary detection, for exactly the case
+  // the project lead hit: a real internal boundary that no text marker
+  // survived to confirm (the sarga_11_to_12 "unconfirmed" merge). Works
+  // whether this is the very first split of an ordinary single-file batch
+  // (bootstraps it into a 1-segment list first) or an already-multi-segment
+  // batch (splits just the one segment the click happened in).
+  function handleSplitSarga(afterRow, containerEl) {
+    if (!currentSchemaSegments) {
+      // Bootstrap: wrap the current single schema into a 1-entry segment
+      // list, matching the same shape/rendering the auto-split case uses,
+      // so everything past this point is one code path, not two.
+      const slug = getTargetSlug();
+      const fallbackNum = parseFallbackSargaNumber(slug) || 1;
+      const seg = {
+        slug: slug,
+        title: $('granthaTitleInput').value.trim(),
+        segment: { confident: true, sargaNumber: fallbackNum },
+        mappedJson: currentMappedJson,
+        // Preserves a continuation batch's real starting number (see
+        // currentMappedJsonStartAt) through the single->multi bootstrap --
+        // only this first segment can ever be non-1, any segment split off
+        // from it afterwards is a fresh sarga and correctly starts at 1.
+        startAt: currentMappedJsonStartAt
+      };
+      currentMappedJson = null;
+      currentMappedJsonStartAt = 1;
+      currentSchemaSegments = [seg];
+      $('schemaPreviewArea').innerHTML = '';
+      renderSegmentBlock(seg);
+      containerEl = seg.containerEl; // the click's original container just got replaced -- re-point to the new one
+      afterRow = containerEl.querySelector('.schema-row[data-key="' + afterRow.getAttribute('data-key') + '"]') || afterRow;
+    }
+
+    const segIdx = currentSchemaSegments.findIndex(s => s.containerEl === containerEl);
+    if (segIdx === -1) return;
+    const oldSeg = currentSchemaSegments[segIdx];
+
+    const allRows = Array.from(containerEl.querySelectorAll('.schema-row'));
+    const splitAt = allRows.indexOf(afterRow);
+    const afterRows = allRows.slice(splitAt + 1);
+    if (!afterRows.length) {
+      log('Nothing to split off — that was already the last shloka in this block.');
+      return;
+    }
+
+    const oldNum = oldSeg.segment && oldSeg.segment.confident ? oldSeg.segment.sargaNumber : null;
+    let newNum = oldNum != null ? oldNum + 1 : null;
+    // oldNum+1 is only a safe guess if nothing else in this batch already
+    // claims it -- e.g. splitting "sarga 10" when a real "sarga 11" segment
+    // already follows it right after (a real case caught while testing this
+    // feature: the guess collided and produced two blocks both auto-titled
+    // "सर्गः 11"). Safer to leave the new block's number ambiguous than to
+    // silently duplicate an existing one -- the title/path are editable
+    // either way, so nothing is lost by not guessing here.
+    if (newNum != null && currentSchemaSegments.some(s => s.segment && s.segment.confident && s.segment.sargaNumber === newNum)) {
+      newNum = null;
+    }
+    const newSlug = newNum != null ? deriveSegmentSlug(oldSeg.slug, { confident: true, sargaNumber: newNum })
+      : oldSeg.slug.replace(/(\d+)(\D*)$/, (m, digits, tail) => digits + '_split' + tail);
+    const newTitle = newNum != null ? deriveSegmentTitle(oldSeg.title, { confident: true, sargaNumber: newNum })
+      : oldSeg.title + ' (split — rename me)';
+    const suggestedColophon = (newNum != null && oldSeg.mappedJson.metadata.colophon)
+      ? SargaDetectMod().suggestColophon(oldSeg.mappedJson.metadata.colophon, newNum) : null;
+
+    const newSeg = {
+      slug: newSlug,
+      title: newTitle,
+      segment: newNum != null ? { confident: true, sargaNumber: newNum } : { confident: false, rangeLabel: 'unknown' },
+      mappedJson: {
+        metadata: Object.assign({}, oldSeg.mappedJson.metadata, { title: newTitle, stotraCode: newSlug.split('/').pop() || '' }),
+        shlokas: {}
+      }
+    };
+    delete newSeg.mappedJson.metadata.colophon;
+    if (suggestedColophon) newSeg.mappedJson.metadata.colophon = suggestedColophon;
+
+    const newWrap = renderSegmentBlock(newSeg, oldSeg._wrapEl ? oldSeg._wrapEl.nextSibling : null);
+    afterRows.forEach(row => newSeg.containerEl.appendChild(row)); // moves, doesn't clone
+    RendererMod().renumberRows(containerEl);
+    RendererMod().renumberRows(newSeg.containerEl);
+    currentSchemaSegments.splice(segIdx + 1, 0, newSeg);
+
+    log(`Split "${oldSeg.slug}" after shloka ${afterRow.getAttribute('data-key')} — ${afterRows.length} shloka(s) moved into new block "${newSlug}". Both blocks' titles/paths are editable above if the auto-derived numbers are wrong.`);
+    newWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function wireSchemaJumpBar() {
+    const bar = $('schemaJumpBar');
+    const input = $('schemaJumpInput');
+    const btn = $('schemaJumpBtn');
+    const status = $('schemaJumpStatus');
+    if (!bar || !input || !btn) return;
+    let lastMatches = [];
+    let matchIdx = -1;
+
+    function search() {
+      const q = input.value.trim().toLowerCase();
+      document.querySelectorAll('.schema-row.schema-row-highlight').forEach(r => r.classList.remove('schema-row-highlight'));
+      if (!q) { lastMatches = []; matchIdx = -1; status.textContent = ''; return; }
+      lastMatches = Array.from(document.querySelectorAll('#schemaPreviewArea .schema-row')).filter(row => {
+        const sa = row.querySelector('.schema-sa-input');
+        const c = row.querySelector('.schema-commentary-input');
+        return ((sa && sa.value) || '').toLowerCase().includes(q) || ((c && c.value) || '').toLowerCase().includes(q);
+      });
+      matchIdx = lastMatches.length ? 0 : -1;
+      jumpToCurrent();
+    }
+    function jumpToCurrent() {
+      if (matchIdx < 0 || !lastMatches.length) { status.textContent = lastMatches.length === 0 && input.value.trim() ? 'No match' : ''; return; }
+      const row = lastMatches[matchIdx];
+      row.classList.add('schema-row-highlight');
+      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      status.textContent = `${matchIdx + 1}/${lastMatches.length} — Shloka ${row.getAttribute('data-key')}`;
+    }
+    btn.addEventListener('click', () => {
+      if (lastMatches.length && input.value.trim()) { matchIdx = (matchIdx + 1) % lastMatches.length; jumpToCurrent(); }
+      else search();
+    });
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); btn.click(); } });
+    input.addEventListener('input', search);
   }
 
   function sanitizeBackupKey(key) {
@@ -1429,7 +1616,7 @@ window.DGE.App = (function () {
     // sarga-detect.js split this batch).
     const items = isMulti
       ? currentSchemaSegments.map(seg => {
-          const editedShlokas = RendererMod().collectEditedShlokas(seg.containerEl, commentaryKey);
+          const editedShlokas = RendererMod().collectEditedShlokas(seg.containerEl, commentaryKey, seg.startAt || 1);
           return {
             slug: seg.slug,
             path: `dge/data/${seg.slug}/data.json`,
@@ -1440,7 +1627,7 @@ window.DGE.App = (function () {
           };
         })
       : [(() => {
-          const editedShlokas = RendererMod().collectEditedShlokas($('schemaPreviewArea'), commentaryKey);
+          const editedShlokas = RendererMod().collectEditedShlokas($('schemaPreviewArea'), commentaryKey, currentMappedJsonStartAt);
           return {
             slug,
             path: `dge/data/${slug}/data.json`,
@@ -1534,7 +1721,7 @@ window.DGE.App = (function () {
     updateDangerZoneLabel();
     ocrPages = [];
     finalJson = null;
-    currentMappedJson = null; // schema range shown in the status bar must reset too
+    currentMappedJson = null; currentMappedJsonStartAt = 1; // schema range shown in the status bar must reset too
     currentSchemaSegments = null;
     resetStartingNumberDetection();
     lastProofreadMissingPages = [];
@@ -1618,7 +1805,7 @@ window.DGE.App = (function () {
       updateDangerZoneLabel();
       ocrPages = UrlImportMod().splitIntoPages(text);
       finalJson = null;
-      currentMappedJson = null; // schema range shown in the status bar must reset too
+      currentMappedJson = null; currentMappedJsonStartAt = 1; // schema range shown in the status bar must reset too
     currentSchemaSegments = null;
       resetStartingNumberDetection();
       lastProofreadMissingPages = [];
@@ -2214,7 +2401,7 @@ window.DGE.App = (function () {
     if (clearProofread) {
       await IDB().del(proofreadDataKey());
       finalJson = null;
-      currentMappedJson = null; // schema range shown in the status bar must reset too
+      currentMappedJson = null; currentMappedJsonStartAt = 1; // schema range shown in the status bar must reset too
     currentSchemaSegments = null;
       resetStartingNumberDetection();
       lastProofreadMissingPages = [];
