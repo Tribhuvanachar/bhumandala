@@ -1,0 +1,557 @@
+{
+  "composer": "Helavanakatte Giriyamma",
+  "count": 8,
+  "compositions": [
+    {
+      "id": "helavanakatte_giriyamma__13fa0ee1",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Dasara padagalu composed by Helavanakatte Giriyammanavaru",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Helavanakatte Giriyamma",
+      "deity": "",
+      "tags": [
+        "composer:Helavanakatte Giriyamma"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Baktala banna paraku bagyada nidhiye"
+          ],
+          [
+            "Rama sri ragunandana saranu"
+          ],
+          [
+            "Sriranga syamala komalanga"
+          ],
+          [
+            "Sri narasimhadeva saranagata"
+          ],
+          [
+            "Enidu bayala pasa nodidarilla"
+          ],
+          [
+            "Baranyatake nire ni karatare"
+          ],
+          [
+            "Karedalu tanna magana"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.com/2016/12/20/dasara-padagalu-composed-by-helavanakatte-giriyammanavaru/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": false,
+      "also_at": []
+    },
+    {
+      "id": "helavanakatte_giriyamma__a8aeeb4c",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Baktala banna paraku bagyada nidhiye",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Helavanakatte Giriyamma",
+      "deity": "",
+      "tags": [
+        "composer:Helavanakatte Giriyamma"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Baktala banna paraku bagyada nidhiye || pa ||"
+          ],
+          [
+            "Ninna nambide nirajaksha paraku |",
+            "Ninna ranneya olume beku paraku |",
+            "Anyara sangavanolle paraku |",
+            "Ennapeksheya saliso paraku || 1 ||"
+          ],
+          [
+            "Seshasayana srinivasa paraku |",
+            "Sasiranamada odeya paraku |",
+            "Dosha durita hara svami paraku |",
+            "Bashe palipudenna vasudeva paraku || 2 ||"
+          ],
+          [
+            "Ratipatipita madhavane paraku |",
+            "Atirupane ennayyane paraku |",
+            "Hitavirahitara kayo paraku |",
+            "Karta helavanakatteranga paraku || 3 ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2016/12/20/baktala-banna-paraku-bagyada-nidhiye/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": false,
+      "also_at": []
+    },
+    {
+      "id": "helavanakatte_giriyamma__3fe0ac13",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Baranyatake nire ni karatare",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Helavanakatte Giriyamma",
+      "deity": "Shiva",
+      "tags": [
+        "composer:Helavanakatte Giriyamma",
+        "deity:Shiva"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Baranyatake nire ni karatare sugunagambirana ||pa||"
+          ],
+          [
+            "Muru loka sancara karunasagara tejiyaneri merevana ||a.pa||"
+          ],
+          [
+            "Komalangana kantudahananu somarka sikinetranu",
+            "Vamadevanu vanajabava sambava munistomavinuta enna premana ||1||"
+          ],
+          [
+            "Nilakanthana nigamasarana balasasidhara Bargana",
+            "Silasadguna palanetrana kalantaka enna kayavana ||2||"
+          ],
+          [
+            "Mangalatmana mallaripudallana devottunga helavanakatteya",
+            "Rangagatisakanada nilagiri lingamurutiya ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2016/12/20/baranyatake-nire-ni-karatare/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": false,
+      "also_at": []
+    },
+    {
+      "id": "helavanakatte_giriyamma__97b7a21d",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Enidu bayala pasa nodidarilla",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Helavanakatte Giriyamma",
+      "deity": "",
+      "tags": [
+        "composer:Helavanakatte Giriyamma"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Enidu bayala pasa nodidarilla |",
+            "Enu huruduganeno |",
+            "Nana janmadi bandu hondalareno ninna |",
+            "Dhyanava kodo abimanadodeya ranga || Pa ||"
+          ],
+          [
+            "Nirabobbaliyandadi dehava necci |",
+            "Duru hottenu hariye |",
+            "Yaru enage | sariyillanembahan ||",
+            "Kara prapancada bandhanadolu siluki nondeno |",
+            "Hari nimma namava neniyada |",
+            "Endendigenagittu sadgati toro || A. Pa ||"
+          ],
+          [
+            "Badavaradhari kelo samsarada |",
+            "Maduvinolage dhumuki |",
+            "Kadehayiso kai pididu krupeyolenna |",
+            "Dadava seriso jagadodeya sri rangayya || 1 ||"
+          ],
+          [
+            "Suttella bandhu balaga nava masadi |",
+            "Hottu padeda janani |",
+            "Putra sahodarara galigyagalalarade |",
+            "Matte yamanavaroyvaga yaru sangadayilla || 2 ||"
+          ],
+          [
+            "Aseyembudu bidadu I buvanadol |",
+            "Lesuganenu hariye |",
+            "Basheya kodu munde januma barada hage |",
+            "Isa sannuta helavanakatte rangayya || 3 ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2016/12/20/enidu-bayala-pasa-nodidarilla/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": false,
+      "also_at": []
+    },
+    {
+      "id": "helavanakatte_giriyamma__ba377a7e",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Karedalu tanna magana",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Helavanakatte Giriyamma",
+      "deity": "",
+      "tags": [
+        "composer:Helavanakatte Giriyamma"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Karedalu tanna magana yasodhe",
+            "Karedalu tanna magana ||pa||"
+          ],
+          [
+            "Paramapurusha hari saranara surataru",
+            "Turu turuyemba kolalanuduta barendu ||a.pa||"
+          ],
+          [
+            "Anduge kirugejje galagalukenutali",
+            "Chandadi kuniva mukundane barendu ||1||"
+          ],
+          [
+            "Honnungurudidara rannakanciyadama",
+            "Cennagi holeva mohanane barendu ||2||"
+          ],
+          [
+            "Samaganavilola jalava madade",
+            "Svami helavanakatteranga ni barendu ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2016/12/20/karedalu-tanna-magana/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": false,
+      "also_at": []
+    },
+    {
+      "id": "helavanakatte_giriyamma__f2b616e1",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Rama sri ragunandana saranu",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Helavanakatte Giriyamma",
+      "deity": "Rama",
+      "tags": [
+        "composer:Helavanakatte Giriyamma",
+        "deity:Rama"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ರಾಮ ಶ್ರೀ ರಘುನಂದನ ಶರಣು ಸಾರ್ವ-",
+            "ಭೌಮ ಭೂಸುರವಂದ್ಯ",
+            "ಸೋಮಶೇಖರಮಿತ್ರ ಕಾಮಿತ ಫಲದಾತ್ರ",
+            "ಕಾಮಧೇನು ವಿಶ್ವಭೀಮ ಸನ್ನುತ ಸೀತಾ ||pa||"
+          ],
+          [
+            "ಕ್ರೂರ ದಾನವ ಸಂಹಾರ ಕೌಸಲ್ಯಾಕುಮಾರ ಭೂ-",
+            "ಭಾರಹರ ಭಜಕÀಜನೋದ್ಧಾರ ವೇದಾಂತಸಾರ",
+            "ಚಾರುವದನ ಮಣಿಹಾರ ಕುಂಡಲಧರ",
+            "ವೀರರಾಘವ ವಿಶ್ವಾಧಾರ ಕರುಣಿಸು ಸೀತಾ ||1||"
+          ],
+          [
+            "ಪಾಪರಹಿತ ಪಾವನ ಚರಿತ ಅಹಲ್ಯಾ",
+            "ಶಾಪ ಹರಣ ದಿವ್ಯರೂಪ ರಮಾರಮಣ",
+            "ತಾಪ ವಿಚ್ಛೇದನ ತಾಮಸ ಗುಣಹರಣ ದ-",
+            "ಯಾಪರ ಬ್ರಹ್ಮಸ್ವರೂಪ ಮೂರುತಿ ಸೀತಾ ||2||"
+          ],
+          [
+            "ಮದನಕೋಟಿ ಮೋಹನಾಂಗ ಮಾಧವ ಪುಣ್ಯಚರಿತ",
+            "ಕರುಣಾಪಾಂಗ ಹೆಳವನಕಟ್ಟೆ ರಂಗಯ್ಯ",
+            "ಸದಾನಂದ ಸುಮತೀಂದ್ರ ಹೃದಯ ಪಂಕಜಭೃಂಗ",
+            "ಕದನ ವಿಕ್ರಮ ಬಾಹು ಕೋದಂಡಧೃತ ಸೀತಾ||3||"
+          ]
+        ],
+        "iast": [
+          [
+            "rāma śrī raghunaṃdana śaraṇu sārva-",
+            "bhauma bhūsuravaṃdya",
+            "somaśekharamitra kāmita phaladātra",
+            "kāmadhenu viśvabhīma sannuta sītā ||pa||"
+          ],
+          [
+            "krūra dānava saṃhāra kausalyākumāra bhū-",
+            "bhārahara bhajakaÀjanoddhāra vedāṃtasāra",
+            "cāruvadana maṇihāra kuṃḍaladhara",
+            "vīrarāghava viśvādhāra karuṇisu sītā ||1||"
+          ],
+          [
+            "pāparahita pāvana carita ahalyā",
+            "śāpa haraṇa divyarūpa ramāramaṇa",
+            "tāpa vicchedana tāmasa guṇaharaṇa da-",
+            "yāpara brahmasvarūpa mūruti sītā ||2||"
+          ],
+          [
+            "madanakoṭi mohanāṃga mādhava puṇyacarita",
+            "karuṇāpāṃga hèḻavanakaṭṭè raṃgayya",
+            "sadānaṃda sumatīṃdra hṛdaya paṃkajabhṛṃga",
+            "kadana vikrama bāhu kodaṃḍadhṛta sītā||3||"
+          ]
+        ],
+        "devanagari": [
+          [
+            "राम श्री रघुनंदन शरणु सार्व-",
+            "भौम भूसुरवंद्य",
+            "सोमशेखरमित्र कामित फलदात्र",
+            "कामधेनु विश्वभीम सन्नुत सीता ||pa||"
+          ],
+          [
+            "क्रूर दानव संहार कौसल्याकुमार भू-",
+            "भारहर भजकÀजनोद्धार वेदांतसार",
+            "चारुवदन मणिहार कुंडलधर",
+            "वीरराघव विश्वाधार करुणिसु सीता ||1||"
+          ],
+          [
+            "पापरहित पावन चरित अहल्या",
+            "शाप हरण दिव्यरूप रमारमण",
+            "ताप विच्छेदन तामस गुणहरण द-",
+            "यापर ब्रह्मस्वरूप मूरुति सीता ||2||"
+          ],
+          [
+            "मदनकोटि मोहनांग माधव पुण्यचरित",
+            "करुणापांग हॆळवनकट्टॆ रंगय्य",
+            "सदानंद सुमतींद्र हृदय पंकजभृंग",
+            "कदन विक्रम बाहु कोदंडधृत सीता||3||"
+          ]
+        ],
+        "source_roman": [
+          [
+            "Rama sri ragunandana saranu | sarva |",
+            "Bauma busura vandya || pa ||"
+          ],
+          [
+            "Somasekara mitra kamita paladata |",
+            "Kamadhenu visva bima sannuta sita || A. Pa ||"
+          ],
+          [
+            "Krura danava samhara kausalya kumara | BU |",
+            "Bara hara Bajaka janoddhara vedantasara |",
+            "Caruvadana mani hara kundaladhara |",
+            "Vira ragava visvadhara karunisu sita || 1 ||"
+          ],
+          [
+            "Papa rahita pavana carita ahalya |",
+            "Sapa harana divya rupa ramaramana |",
+            "Tapa viccedana tamasa guna harana | da |",
+            "Ya parabrahma svarupa muruti sita || 2 ||"
+          ],
+          [
+            "Madanakoti mohananga madhava punyacharita |",
+            "Karunapamga helavanakatte rangayya |",
+            "Sadanamda sumatimdra |hrudayabja brunga |",
+            "Kadana vikrama bahu kodandadhruta sita || 3 ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2016/12/20/rama-sri-ragunandana-saranu/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": true,
+      "also_at": []
+    },
+    {
+      "id": "helavanakatte_giriyamma__b1a71718",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Sri narasimhadeva saranagata",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Helavanakatte Giriyamma",
+      "deity": "Narasimha",
+      "tags": [
+        "composer:Helavanakatte Giriyamma",
+        "deity:Narasimha"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Sri narasimhadeva saranagata rakshakane |",
+            "Danavari subaktadhina murutiye || pallavi ||"
+          ],
+          [
+            "Hari tanna daivavendu smarisutiralu bala |",
+            "Nirava kanade dushta hiranyakasuranu |",
+            "Pari pari himsise moredu kopadoleddu |",
+            "Taralagolide bahu karunanidhiye || 1 ||"
+          ],
+          [
+            "Citicitilendarbatisi kambavu sidiye |",
+            "Katikati masedagni nittusirinim halgala |",
+            "Katakata kadivutubbana tori ninda |",
+            "Kathina murutiye || 2 ||"
+          ],
+          [
+            "Kobbida hiranyakanobba murivenendu |",
+            "Hebbagilolu sanje mabbinali danujana |",
+            "Garbava nakadinda ibbagavanu madi |",
+            "Hebbida karulanu harushadi dhariside || 3 ||"
+          ],
+          [
+            "Bitarada suravrata prarthise bahu |",
+            "Pritiya Baktana matanu mannisi | ati |",
+            "Santanagi santosha padisida | A |",
+            "Natha rakshakane kataravalide || 4 ||"
+          ],
+          [
+            "Kalana mardisi bahu ileya paliside |",
+            "Nalina sambavage balu harushavanitte |",
+            "Helavanakatte sri ranga dyaginagatte |",
+            "Nelevasa kambada narasimhadeva || 5 ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2016/12/20/sri-narasimhadeva-saranagata/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": false,
+      "also_at": []
+    },
+    {
+      "id": "helavanakatte_giriyamma__f66e0cbc",
+      "form": "pada",
+      "title": {
+        "kn": "",
+        "latin": "Sriranga syamala komalanga",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Helavanakatte Giriyamma",
+      "deity": "",
+      "tags": [
+        "composer:Helavanakatte Giriyamma"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Sriranga syamala komalanga |",
+            "Krura rakkasa kula nivarana |",
+            "Naradadi vandyane || pa ||"
+          ],
+          [
+            "Manikya mauktika hara dhira |",
+            "Vanipati pita vanaja netrane |",
+            "Vani bahottandadi ||",
+            "Canura mardana cidananda |",
+            "Venunada priya devane |",
+            "Ina kulambudhi chandrane || 1 ||"
+          ],
+          [
+            "Akrura ambarisha varada |",
+            "Nakra bandhana nagastri rakshaka |",
+            "Chakradhara mukundane ||",
+            "Rukmini vallaba vasudeva |",
+            "Sakra sasidhara sesha sannuta |",
+            "Sakala lokotpatyane || 2 ||"
+          ],
+          [
+            "Nityanandane nigamagocarane |",
+            "Satyabame sri manohara |",
+            "Madana sri gopalane ||",
+            "Baktavatsala Baya nivarana |",
+            "Kartu helavanakatte",
+            "Ramgane krupangane || 3 ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.wordpress.com/2016/12/20/sriranga-syamala-komalanga/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-12"
+      },
+      "_has_text": false,
+      "also_at": []
+    }
+  ]
+}
