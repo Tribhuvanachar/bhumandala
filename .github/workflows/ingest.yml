@@ -43,6 +43,8 @@ jobs:
         run: python importers/dispatch.py "$TEXT_ID"
       - name: Refresh library status snapshot
         run: python tools/gen_library_status.py
+      - name: Rebuild global search index
+        run: python dge/build_search_index.py --data dge/data --out dge/search_index
       - name: Open Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
@@ -52,5 +54,10 @@ jobs:
           body: |
             Automated ingest of **${{ inputs.text }}** via GitHub Actions.
             Parser: `importers/`. Spot-check Devanagari fidelity before merging.
+
+            Also re-indexes `dge/search_index/` in this same PR, so the new
+            content is searchable the moment it merges (no separate
+            re-index run needed).
           add-paths: |
             dge/data/**
+            dge/search_index/**

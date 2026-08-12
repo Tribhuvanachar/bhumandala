@@ -17,6 +17,7 @@
   .brand{font-weight:700}.brand small{color:var(--muted);font-weight:400}.spacer{flex:1}
   .icon,.btn{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:7px 12px;cursor:pointer;color:var(--ink);font:inherit;font-size:13px}
   .btn.pri{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn.gh{background:var(--accent2);color:#fff;border-color:var(--accent2)}
   main{max-width:1100px;margin:0 auto;padding:16px 14px 80px}
   .totals{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
   .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;box-shadow:var(--shadow)}
@@ -33,25 +34,45 @@
   .chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
   .tree{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 4px}
   .node{padding:2px 0}
-  .row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:8px}
+  .row{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:8px}
   .row:hover{background:var(--panel2)}
   .tw{width:16px;text-align:center;color:var(--muted);cursor:pointer;user-select:none;flex:none}
   .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .nm .path{color:var(--muted);font-size:11px}
+  .nm .disp{font-size:11px;color:var(--accent2)}
   .dot{width:9px;height:9px;border-radius:50%;flex:none}
   .dot.ok{background:var(--ok)}.dot.pend{background:var(--pend)}.dot.part{background:var(--part)}
   .cnt{font-size:12px;color:var(--muted);flex:none}
   .badge{font-size:11px;border-radius:8px;padding:1px 7px;flex:none}
   .badge.ok{color:var(--ok);border:1px solid var(--ok)}.badge.pend{color:var(--muted);border:1px solid var(--line)}
-  .eye{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:8px;width:30px;height:26px;cursor:pointer;color:var(--ink);font-size:13px}
-  .eye.off{opacity:.5}
+  .ctl{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:8px;width:28px;height:26px;cursor:pointer;color:var(--ink);font-size:12px;padding:0;line-height:1}
+  .ctl:hover{background:var(--panel2)}
+  .ctl.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .ctl.off{opacity:.5}
+  .ctl[disabled]{opacity:.25;cursor:default}
+  .pin{flex:none;font-size:11px;color:var(--gold)}
   .kids{margin-left:18px;border-left:1px dashed var(--line);padding-left:4px;display:none}
   .node.open>.kids{display:block}
-  .hiddenNode>.row .nm{opacity:.45;text-decoration:line-through}
+  .hiddenNode>.row .nm .actual{opacity:.45;text-decoration:line-through}
+  .movedNode>.row{background:color-mix(in srgb,var(--accent2) 8%,transparent)}
   .gate{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:24px;text-align:center}
   .gate input{font:inherit;font-size:18px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink)}
   .muted{color:var(--muted);font-size:13px}
   a{color:var(--accent2)}
+  /* move-picker overlay */
+  .ov{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:80;display:none;align-items:center;justify-content:center;padding:18px}
+  .ov.show{display:flex}
+  .ovbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;max-width:520px;width:100%;max-height:80vh;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+  .ovhd{padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700;display:flex;align-items:center;gap:8px}
+  .ovbody{padding:10px 12px;overflow:auto}
+  .ovbody input[type=search]{width:100%;border:1px solid var(--line);background:var(--panel2);border-radius:10px;padding:9px 12px;font:inherit;color:var(--ink);margin-bottom:8px}
+  .foldopt{padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px}
+  .foldopt:hover{background:var(--panel2)}
+  .foldopt .p{color:var(--muted);font-size:11px}
+  .helpbox{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:14px;font-size:13px}
+  .helpbox b{color:var(--accent)}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+  .legend span{display:inline-flex;align-items:center;gap:4px}
 </style>
 </head>
 <body>
@@ -68,32 +89,66 @@
     <div class="brand"><a href="index.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> 🗂️ Library Manager <small>· super-admin</small></div>
     <span class="spacer"></span>
     <button class="icon" id="theme">◐</button>
+    <button class="btn gh" id="reindex" title="Open the GitHub Actions Re-index workflow">↻ Re-index search</button>
+    <button class="btn" id="reset" title="Discard all local curation edits">⟲ Reset edits</button>
     <button class="btn" id="reload">↻ Refresh</button>
-    <button class="btn pri" id="export">⬇ Export visibility</button>
+    <button class="btn pri" id="export">⬇ Export overrides</button>
   </div>
 </header>
 
 <main id="app" style="display:none">
   <div class="totals" id="totals"></div>
   <div class="secgrid" id="secgrid"></div>
+
+  <div class="helpbox">
+    Curate the <b>public Library</b> without touching the corpus. Every edit here is a
+    <b>non-destructive override</b> — reorder, pin, rename, move between folders, or hide.
+    Changes save in <b>this browser only</b>; click <b>Export overrides</b> to download
+    <code>library-overrides.json</code> and commit it to <code>dge/data/</code>. The live app
+    (<code>js/library.js</code> v3+) reads that file and applies it.
+    <div class="legend">
+      <span>▲▼ reorder</span><span>📌 pin to top</span><span>✏️ rename</span>
+      <span>📁 move to folder</span><span>👁 hide</span>
+      <span><span class="dot ok"></span> loaded</span><span><span class="dot pend"></span> pending</span>
+    </div>
+  </div>
+
   <div class="toolbar">
     <input type="search" id="q" placeholder="Filter by name or path…">
     <button class="chip" id="fAll" data-f="all">All</button>
     <button class="chip" id="fPend" data-f="pending">Pending only</button>
     <button class="chip" id="fLoad" data-f="loaded">Loaded only</button>
     <button class="chip" id="fHid" data-f="hidden">Hidden only</button>
+    <button class="chip" id="fEdit" data-f="edited">Edited only</button>
     <button class="chip" id="expand">⤢ Expand all</button>
     <button class="chip" id="collapse">⤡ Collapse all</button>
   </div>
   <div class="tree" id="tree"></div>
-  <p class="muted" style="margin-top:14px">👁 toggles show/hide for the public library. Changes save in this browser; click <b>Export visibility</b> to download <code>library-visibility.json</code> to commit to the repo. Loaded = a <code>data.json</code> with items; Pending = empty/absent.</p>
+  <p class="muted" style="margin-top:14px">Loaded = a <code>data.json</code> with items; Pending = empty/absent. Reordering &amp; pinning affect how entries appear in the app's Library browser; moves and renames are display-only and never rewrite <code>library.json</code>/<code>taxonomy.json</code>.</p>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.3.3/sanscript.js" onerror=""></script>
+<!-- move-to-folder picker -->
+<div class="ov" id="moveOv">
+  <div class="ovbox">
+    <div class="ovhd">📁 Move <span id="moveWhat" style="color:var(--accent2)"></span> to…<span class="spacer" style="flex:1"></span><button class="ctl" id="moveClose">✕</button></div>
+    <div class="ovbody">
+      <input type="search" id="moveQ" placeholder="Search destination folder…">
+      <div id="moveList"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.3.3/sanscript.js"
+        onerror="this.onerror=null;console.warn('[Sanscript] jsDelivr failed, falling back to unpkg');var s=document.createElement('script');s.src='https://unpkg.com/@indic-transliteration/sanscript@1.3.3/sanscript.js';document.head.appendChild(s);"></script>
 <script>
 (function(){
   var PASSKEY="SHRI108";
+  // Set this to your repo so the "Re-index search" button can deep-link to the
+  // Actions run page. (owner/repo)
+  var REPO="Tribhuvanachar/bhumandala";
+  var REINDEX_WORKFLOW="reindex.yml";
   var $=function(s){return document.querySelector(s);};
+
   // ---- gate ----
   if(sessionStorage.getItem("dge.admin.ok")==="1" || localStorage.getItem("is_superadmin")==="true") start();
   else {
@@ -102,23 +157,62 @@
     $("#gbtn").onclick=tryK; $("#gk").addEventListener("keydown",function(e){ if(e.key==="Enter") tryK(); }); $("#gk").focus();
   }
 
-  var TAX=null, ST=null, HIDDEN, FILTER="all";
-  function loadVis(){ try{ HIDDEN=new Set(JSON.parse(localStorage.getItem("dge.libvis")||"[]")); }catch(e){ HIDDEN=new Set(); } }
-  function saveVis(){ localStorage.setItem("dge.libvis", JSON.stringify([...HIDDEN])); }
+  var TAX=null, ST=null, FILTER="all";
+  // ---- override state (all keyed by EFFECTIVE display path, matching library.js) ----
+  var OV; // {hidden:Set, pinned:[], labels:{}, order:{}, moves:{}}
+  var LS="dge.liboverrides";
+  function blankOV(){ return {hidden:[],pinned:[],labels:{},order:{},moves:{}}; }
+  function loadOV(){
+    try{ var raw=JSON.parse(localStorage.getItem(LS)||"null"); OV = raw && typeof raw==="object" ? raw : blankOV(); }
+    catch(e){ OV=blankOV(); }
+    // migrate the legacy hidden-only key if present and OV is empty
+    if(!OV.hidden||!OV.hidden.length){
+      try{ var legacy=JSON.parse(localStorage.getItem("dge.libvis")||"[]"); if(Array.isArray(legacy)&&legacy.length) OV.hidden=legacy.slice(); }catch(e){}
+    }
+    OV.hidden=OV.hidden||[]; OV.pinned=OV.pinned||[]; OV.labels=OV.labels||{}; OV.order=OV.order||{}; OV.moves=OV.moves||{};
+  }
+  function saveOV(){ localStorage.setItem(LS, JSON.stringify(OV)); }
+  function isHidden(path){ var parts=path.split("/"); for(var i=1;i<=parts.length;i++){ if(OV.hidden.indexOf(parts.slice(0,i).join("/"))>=0) return true;} return false; }
+  function selfHidden(path){ return OV.hidden.indexOf(path)>=0; }
+  function isPinned(path){ return OV.pinned.indexOf(path)>=0; }
+  function pinRank(path){ var i=OV.pinned.indexOf(path); return i<0?Infinity:i; }
+  function hasEdit(path){ return selfHidden(path)||isPinned(path)|| (OV.labels[path]!==undefined) || (OV.moves[path]!==undefined); }
+
+  // ---- transliteration preview (mirror of library.js dgeToActiveScript, Devanagari->active) ----
+  function activeLabelPreview(deva){
+    // Admin always previews in Devanagari source; the app transliterates live.
+    return deva;
+  }
+
+  // ---- rekey helper: when a move changes a subtree's effective path prefix ----
+  function rekeyPrefix(from, to){
+    // hidden
+    OV.hidden = OV.hidden.map(function(p){ return (p===from||p.indexOf(from+"/")===0)? to+p.slice(from.length): p; });
+    // pinned
+    OV.pinned = OV.pinned.map(function(p){ return (p===from||p.indexOf(from+"/")===0)? to+p.slice(from.length): p; });
+    // labels
+    var nl={}; Object.keys(OV.labels).forEach(function(k){ var nk=(k===from||k.indexOf(from+"/")===0)? to+k.slice(from.length): k; nl[nk]=OV.labels[k]; }); OV.labels=nl;
+    // order (keys are parent paths)
+    var no={}; Object.keys(OV.order).forEach(function(k){ var nk=(k===from||k.indexOf(from+"/")===0)? to+k.slice(from.length): k; no[nk]=OV.order[k]; }); OV.order=no;
+  }
 
   function start(){
     if(sessionStorage.getItem("dge.admin.ok")!=="1" && localStorage.getItem("is_superadmin")!=="true") return;
     $("#gate").style.display="none"; $("#hdr").style.display=""; $("#app").style.display="";
-    loadVis();
+    loadOV();
     if(localStorage.getItem("dge.libadmin.dark")==="1") document.body.classList.add("dark");
     $("#theme").onclick=function(){ document.body.classList.toggle("dark"); localStorage.setItem("dge.libadmin.dark", document.body.classList.contains("dark")?"1":"0"); };
     $("#reload").onclick=function(){ location.reload(); };
-    $("#export").onclick=exportVis;
+    $("#export").onclick=exportOV;
+    $("#reset").onclick=function(){ if(confirm("Discard ALL local curation edits (hide/pin/reorder/rename/move)? This only clears this browser — any committed library-overrides.json is untouched until you re-export.")){ OV=blankOV(); saveOV(); render(); } };
+    $("#reindex").onclick=function(){ window.open("https://github.com/"+REPO+"/actions/workflows/"+REINDEX_WORKFLOW, "_blank"); };
     $("#q").addEventListener("input",render);
     document.querySelectorAll(".chip[data-f]").forEach(function(c){ c.onclick=function(){ FILTER=c.dataset.f; document.querySelectorAll(".chip[data-f]").forEach(function(x){x.classList.toggle("on",x===c);}); render(); }; });
     $("#fAll").classList.add("on");
     $("#expand").onclick=function(){ document.querySelectorAll(".node.hasK").forEach(function(n){n.classList.add("open");}); };
     $("#collapse").onclick=function(){ document.querySelectorAll(".node.hasK").forEach(function(n){n.classList.remove("open");}); };
+    $("#moveClose").onclick=closeMove;
+    $("#moveOv").addEventListener("click",function(e){ if(e.target===$("#moveOv")) closeMove(); });
     Promise.all([
       fetch("data/taxonomy.json").then(function(r){return r.json();}),
       fetch("data/library_status.json").then(function(r){return r.json();})
@@ -142,35 +236,84 @@
     el.innerHTML=html;
   }
 
-  // build tree model from taxonomy
+  // ---- build tree model from taxonomy (opath = original identity, path = effective) ----
   function build(node, prefix){
     var kids=Object.keys(node||{}).filter(function(k){return k[0]!=="_";});
-    if(!kids.length){ var path=prefix.join("/"); var items=(ST.leaves[path]||0); return {name:prefix[prefix.length-1],path:path,leaf:true,items:items}; }
+    var p=prefix.join("/");
+    if(!kids.length){ return {name:prefix[prefix.length-1],path:p,opath:p,leaf:true,items:(ST.leaves[p]||0),children:[]}; }
     var children=kids.map(function(k){ return build((typeof node[k]==="object")?node[k]:{}, prefix.concat(k)); });
-    var loaded=0,total=0,items=0;
-    children.forEach(function(c){ if(c.leaf){total++; if(c.items>0){loaded++; items+=c.items;}} else {total+=c.total; loaded+=c.loaded; items+=c.items;} });
-    return {name:prefix[prefix.length-1],path:prefix.join("/"),leaf:false,children:children,loaded:loaded,total:total,items:items};
+    return {name:prefix[prefix.length-1],path:p,opath:p,leaf:false,children:children};
   }
+  function recount(n){
+    if(n.leaf){ n.loaded=n.items>0?1:0; n.total=1; return; }
+    var loaded=0,total=0,items=0;
+    n.children.forEach(function(c){ recount(c); if(c.leaf){ total++; if(c.items>0){loaded++;items+=c.items;} } else { total+=c.total; loaded+=c.loaded; items+=c.items; } });
+    n.loaded=loaded; n.total=total; n.items=items;
+  }
+  // index nodes by opath and by path
+  function indexTree(n, byOp, byP){ byOp[n.opath]=n; byP[n.path]=n; if(!n.leaf) n.children.forEach(function(c){indexTree(c,byOp,byP);}); }
+  // set effective .path for a subtree given a new parent effective path
+  function reparentPaths(n, parentPath){ n.path=parentPath?parentPath+"/"+n.name:n.name; if(!n.leaf) n.children.forEach(function(c){reparentPaths(c,n.path);}); }
+
+  function buildDisplayTree(){
+    var roots=Object.keys(TAX).filter(function(k){return k[0]!=="_";}).map(function(k){ return build((typeof TAX[k]==="object")?TAX[k]:{}, [k]); });
+    var forest={leaf:false,children:roots,path:"",opath:"",name:""};
+    linkParents(forest); // __parent pointers needed to detach nodes during moves
+    // apply moves (by original opath). Longest source first so nested moves are stable.
+    var byOp={}, byP={}; indexTree(forest,byOp,byP);
+    var srcs=Object.keys(OV.moves).sort(function(a,b){return b.length-a.length;});
+    srcs.forEach(function(src){
+      var dest=OV.moves[src];
+      var node=byOp[src]; var destNode=(dest==="")?forest:(byOp[dest]||byP[dest]);
+      if(!node||!destNode||destNode.leaf) return;
+      if(destNode.opath===node.opath || (destNode.opath+"/").indexOf(node.opath+"/")===0) return; // no move into itself/descendant
+      // detach from current parent
+      var cur=node.__parent; if(cur){ cur.children=cur.children.filter(function(c){return c!==node;}); }
+      destNode.children.push(node); node.__parent=destNode;
+      reparentPaths(node, destNode.path);
+      byOp={};byP={};indexTree(forest,byOp,byP);
+    });
+    recount(forest);
+    return forest.children;
+  }
+  // attach parent pointers
+  function linkParents(n){ if(!n.leaf) n.children.forEach(function(c){ c.__parent=n; linkParents(c); }); }
+
   function matchFilter(n){
     if(FILTER==="all") return true;
     if(FILTER==="hidden") return n.leaf? isHidden(n.path): true;
+    if(FILTER==="edited") return hasEdit(n.path) || !n.leaf;
     if(n.leaf){ if(FILTER==="loaded") return n.items>0; if(FILTER==="pending") return n.items===0; }
     return true; // internal nodes shown so children reachable
   }
-  function isHidden(path){ // hidden if itself or any ancestor is hidden
-    var parts=path.split("/");
-    for(var i=1;i<=parts.length;i++){ if(HIDDEN.has(parts.slice(0,i).join("/"))) return true; }
-    return false;
-  }
   function q(){ return ($("#q").value||"").trim().toLowerCase(); }
 
-  function renderNode(n){
+  // sibling comparator: pinned → explicit order[parent] → default name
+  function siblingSort(parentPath, arr){
+    var explicit=OV.order[parentPath]||null;
+    function orank(name){ if(!explicit) return Infinity; var i=explicit.indexOf(name); return i<0?Infinity:i; }
+    function full(name){ return parentPath?parentPath+"/"+name:name; }
+    return arr.slice().sort(function(a,b){
+      var pa=pinRank(full(a.name)), pb=pinRank(full(b.name)); if(pa!==pb) return pa-pb;
+      var oa=orank(a.name), ob=orank(b.name); if(oa!==ob) return oa-ob;
+      // numeric-aware default
+      var x=a.name,y=b.name; var mx=x.match(/^(.*?)(\d+)$/), my=y.match(/^(.*?)(\d+)$/);
+      if(mx&&my&&mx[1]===my[1]) return parseInt(mx[2],10)-parseInt(my[2],10);
+      return x.localeCompare(y);
+    });
+  }
+
+  function renderNode(n, parentPath){
     var query=q();
-    var self=(n.name+" "+n.path).toLowerCase().indexOf(query)>=0;
-    var kidsHtml="", anyKid=false;
-    if(!n.leaf){ n.children.forEach(function(c){ var h=renderNode(c); if(h){kidsHtml+=h; anyKid=true;} }); }
+    var self=(n.name+" "+n.path+" "+(OV.labels[n.path]||"")).toLowerCase().indexOf(query)>=0;
+    var kidsHtml="", anyKid=false, orderedKids=[];
+    if(!n.leaf){
+      orderedKids=siblingSort(n.path, n.children);
+      orderedKids.forEach(function(c){ var h=renderNode(c, n.path); if(h){kidsHtml+=h; anyKid=true;} });
+    }
     if(query && !self && !anyKid) return "";
     if(!matchFilter(n) && !anyKid) return "";
+
     var dot,badge,cnt="";
     if(n.leaf){
       var ok=n.items>0;
@@ -183,32 +326,157 @@
       badge='<span class="badge '+(full?"ok":"pend")+'">'+n.loaded+'/'+n.total+'</span>';
       cnt= n.items?'<span class="cnt">'+n.items.toLocaleString()+'</span>':'';
     }
-    var hid=HIDDEN.has(n.path);
+    var hid=selfHidden(n.path);
     var eff=isHidden(n.path);
+    var pinned=isPinned(n.path);
+    var moved=(n.opath!==n.path);
+    var custom=OV.labels[n.path];
     var tw=n.leaf?'<span class="tw"></span>':'<span class="tw" data-tw="1">▸</span>';
-    var cls="node"+(n.leaf?"":" hasK")+(eff?" hiddenNode":"");
-    var row='<div class="row">'+tw+dot+
-      '<span class="nm">'+esc(n.name.replace(/_/g," "))+' <span class="path">'+esc(n.path)+'</span></span>'+
+    var cls="node"+(n.leaf?"":" hasK")+(eff?" hiddenNode":"")+(moved?" movedNode":"");
+
+    // sibling index for up/down enable/disable
+    var sibs=parentPath!==null? null : null;
+    var nameShown= custom? esc(custom) : esc(n.name.replace(/_/g," "));
+    var pinMark= pinned? '<span class="pin" title="pinned to top">📌</span>':'';
+    var movedMark= moved? '<span class="pin" title="moved here from '+esc(n.opath)+'">➜</span>':'';
+
+    var row='<div class="row" data-path="'+esc(n.path)+'" data-op="'+esc(n.opath)+'" data-parent="'+esc(parentPath||"")+'" data-name="'+esc(n.name)+'" data-leaf="'+(n.leaf?1:0)+'">'+
+      tw+dot+pinMark+movedMark+
+      '<span class="nm"><span class="actual">'+nameShown+'</span>'+(custom?' <span class="disp">✎</span>':'')+' <span class="path">'+esc(n.path)+'</span>'+(moved?' <span class="disp">from '+esc(n.opath)+'</span>':'')+'</span>'+
       cnt+badge+
-      '<button class="eye'+(hid?" off":"")+'" data-h="'+esc(n.path)+'" title="'+(hid?"hidden — click to show":"visible — click to hide")+'">'+(hid?"🚫":"👁")+'</button>'+
+      '<button class="ctl" data-act="up" title="move up">▲</button>'+
+      '<button class="ctl" data-act="down" title="move down">▼</button>'+
+      '<button class="ctl'+(pinned?" on":"")+'" data-act="pin" title="'+(pinned?"unpin":"pin to top of its group")+'">📌</button>'+
+      '<button class="ctl" data-act="label" title="rename (custom display label)">✏️</button>'+
+      '<button class="ctl" data-act="move" title="move to another folder">📁</button>'+
+      '<button class="ctl'+(hid?" off":"")+'" data-act="hide" title="'+(hid?"hidden — click to show":"visible — click to hide")+'">'+(hid?"🚫":"👁")+'</button>'+
       '</div>';
     return '<div class="'+cls+'" data-node="'+esc(n.path)+'">'+row+(n.leaf?"":'<div class="kids">'+kidsHtml+"</div>")+"</div>";
   }
+
+  var DISPLAY_ROOTS=[];
   function render(){
-    var roots=Object.keys(TAX).filter(function(k){return k[0]!=="_";}).map(function(k){ return build((typeof TAX[k]==="object")?TAX[k]:{}, [k]); });
-    var html=roots.map(renderNode).join("");
+    DISPLAY_ROOTS=buildDisplayTree();
+    DISPLAY_ROOTS.forEach(linkParents);
+    var forest={leaf:false,children:DISPLAY_ROOTS,path:"",name:""};
+    var roots=siblingSort("", DISPLAY_ROOTS);
+    var html=roots.map(function(r){return renderNode(r,"");}).join("");
     $("#tree").innerHTML=html||'<div class="muted" style="padding:14px">No nodes match.</div>';
-    // wire twisties + eyes
-    document.querySelectorAll('#tree .tw[data-tw]').forEach(function(t){ t.onclick=function(){ var node=t.closest(".node"); node.classList.toggle("open"); t.textContent=node.classList.contains("open")?"▾":"▸"; }; });
-    document.querySelectorAll('#tree .eye').forEach(function(b){ b.onclick=function(ev){ ev.stopPropagation(); var p=b.dataset.h; if(HIDDEN.has(p)) HIDDEN.delete(p); else HIDDEN.add(p); saveVis(); render(); }; });
+    wire();
     if(q()) document.querySelectorAll('#tree .node.hasK').forEach(function(n){n.classList.add("open");});
   }
+
+  function wire(){
+    document.querySelectorAll('#tree .tw[data-tw]').forEach(function(t){ t.onclick=function(){ var node=t.closest(".node"); node.classList.toggle("open"); t.textContent=node.classList.contains("open")?"▾":"▸"; }; });
+    document.querySelectorAll('#tree .ctl').forEach(function(b){
+      b.onclick=function(ev){
+        ev.stopPropagation();
+        var row=b.closest(".row"); var path=row.dataset.path, parent=row.dataset.parent, name=row.dataset.name, op=row.dataset.op;
+        var act=b.dataset.act;
+        if(act==="hide"){ toggleHide(path); }
+        else if(act==="pin"){ togglePin(path); }
+        else if(act==="label"){ editLabel(path, name); }
+        else if(act==="up"){ reorder(parent, name, -1); }
+        else if(act==="down"){ reorder(parent, name, 1); }
+        else if(act==="move"){ openMove(op, path, name); }
+      };
+    });
+  }
+
+  function toggleHide(path){ var i=OV.hidden.indexOf(path); if(i>=0) OV.hidden.splice(i,1); else OV.hidden.push(path); saveOV(); render(); }
+  function togglePin(path){ var i=OV.pinned.indexOf(path); if(i>=0) OV.pinned.splice(i,1); else OV.pinned.push(path); saveOV(); render(); }
+  function editLabel(path, name){
+    var cur=OV.labels[path]||"";
+    var v=prompt("Custom display label for this entry.\n\n• Enter Devanāgarī to have it transliterate with the app's script selector (e.g. भागवतम्).\n• Leave blank to clear and restore the default.\n\nPath: "+path, cur);
+    if(v===null) return;
+    v=v.trim();
+    if(v==="") delete OV.labels[path]; else OV.labels[path]=v;
+    saveOV(); render();
+  }
+  function reorder(parent, name, dir){
+    // find current sibling order (as displayed), swap, persist full order for parent
+    var siblings;
+    if(parent===""||parent===undefined){ siblings=siblingSort("", DISPLAY_ROOTS); }
+    else{
+      var byOp={},byP={}; var forest={leaf:false,children:DISPLAY_ROOTS,path:"",opath:"",name:""}; indexTree(forest,byOp,byP);
+      var pnode=byP[parent]; if(!pnode) return; siblings=siblingSort(parent, pnode.children);
+    }
+    var names=siblings.map(function(s){return s.name;});
+    var i=names.indexOf(name); var j=i+dir;
+    if(i<0||j<0||j>=names.length) return;
+    names.splice(j,0,names.splice(i,1)[0]);
+    OV.order[parent]=names;
+    // reordering an entry by hand implies it should hold that spot: keep pins as-is
+    saveOV(); render();
+  }
+
+  // ---- move-to-folder picker ----
+  var moveSrcOp=null;
+  function allFolders(){
+    var out=[]; var byOp={},byP={}; var forest={leaf:false,children:DISPLAY_ROOTS,path:"",opath:"",name:""}; indexTree(forest,byOp,byP);
+    Object.keys(byP).forEach(function(p){ var n=byP[p]; if(n&&!n.leaf&&p) out.push({path:p,opath:n.opath,name:n.name}); });
+    out.sort(function(a,b){return a.path.localeCompare(b.path);});
+    return out;
+  }
+  function openMove(op, path, name){
+    moveSrcOp=op;
+    $("#moveWhat").textContent=name.replace(/_/g," ");
+    $("#moveQ").value="";
+    renderMoveList("");
+    $("#moveOv").classList.add("show");
+    setTimeout(function(){$("#moveQ").focus();},30);
+    $("#moveQ").oninput=function(){ renderMoveList($("#moveQ").value.trim().toLowerCase()); };
+  }
+  function closeMove(){ $("#moveOv").classList.remove("show"); moveSrcOp=null; }
+  function renderMoveList(filter){
+    var folders=allFolders().filter(function(f){
+      // can't move into itself or its own descendant
+      if(f.opath===moveSrcOp) return false;
+      if((f.opath+"/").indexOf(moveSrcOp+"/")===0) return false;
+      if(!filter) return true;
+      return (f.path+" "+f.name).toLowerCase().indexOf(filter)>=0;
+    });
+    var html='<div class="foldopt" data-dest=""><b>⌂ Top level</b><div class="p">move out to the root of the library</div></div>';
+    html+=folders.slice(0,300).map(function(f){ return '<div class="foldopt" data-dest="'+esc(f.opath)+'"><b>'+esc(f.name.replace(/_/g," "))+'</b><div class="p">'+esc(f.path)+'</div></div>'; }).join("");
+    $("#moveList").innerHTML=html;
+    document.querySelectorAll('#moveList .foldopt').forEach(function(o){ o.onclick=function(){ doMove(moveSrcOp, o.dataset.dest); }; });
+  }
+  function doMove(srcOp, destOp){
+    if(srcOp===undefined||srcOp===null) return;
+    // compute old effective path (to rekey dependent overrides) then set the move
+    var oldEff=effectivePathOf(srcOp);
+    if(destOp==="") delete OV.moves[srcOp]; else OV.moves[srcOp]=destOp;
+    // recompute new effective path after this move and migrate label/pin/hide/order keys
+    var newEff=effectivePathOf(srcOp);
+    if(oldEff && newEff && oldEff!==newEff) rekeyPrefix(oldEff, newEff);
+    saveOV(); closeMove(); render();
+  }
+  // effective path for an original opath given current OV.moves (mirrors library.js dgeEffectiveSlug for folders too)
+  function effectivePathOf(opath){
+    var best=null; Object.keys(OV.moves).forEach(function(src){ if(opath===src||opath.indexOf(src+"/")===0){ if(!best||src.length>best.length) best=src; } });
+    if(!best) return opath;
+    var dest=OV.moves[best];
+    var srcParent=best.indexOf("/")>=0? best.slice(0,best.lastIndexOf("/")):"";
+    var rel=srcParent? opath.slice(srcParent.length+1): opath;
+    var destEff=dest? effectivePathOf(dest): "";
+    return destEff? destEff+"/"+rel: rel;
+  }
+
   function esc(s){ return (s||"").replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 
-  function exportVis(){
-    var out={ note:"DGE library visibility overrides. hidden = list of taxonomy paths to hide from the public library (a hidden node hides its whole subtree). Commit to dge/data/library-visibility.json and have library.js honor it.", hidden:[...HIDDEN].sort() };
+  function exportOV(){
+    // prune empties for a clean file
+    var out={
+      note:"DGE library curation overrides — a NON-DESTRUCTIVE display layer read by dge/js/library.js (v3+). Keys are effective (post-move) taxonomy paths; move sources/dests are original taxonomy paths. Commit to dge/data/library-overrides.json.",
+      version:1,
+      hidden:(OV.hidden||[]).slice().sort(),
+      pinned:(OV.pinned||[]).slice(),
+      labels:OV.labels||{},
+      order:OV.order||{},
+      moves:OV.moves||{}
+    };
     var blob=new Blob([JSON.stringify(out,null,1)],{type:"application/json"});
-    var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="library-visibility.json"; a.click();
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="library-overrides.json"; a.click();
   }
 })();
 </script>

@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 592,
-  "loaded": 173,
-  "items": 297264
+  "leaves": 601,
+  "loaded": 177,
+  "items": 307731
  },
  "sections": {
   "ancillary": {
@@ -11,10 +11,15 @@
    "loaded": 2,
    "items": 5619
   },
-  "dasakuta": {
-   "total": 42,
+  "dasa_sahitya": {
+   "total": 5,
    "loaded": 0,
    "items": 0
+  },
+  "dasakuta": {
+   "total": 43,
+   "loaded": 1,
+   "items": 947
   },
   "dharmashastra": {
    "total": 7,
@@ -27,14 +32,14 @@
    "items": 195111
   },
   "kavya": {
-   "total": 4,
+   "total": 5,
    "loaded": 4,
    "items": 5434
   },
   "pancharatra_agama": {
-   "total": 17,
-   "loaded": 0,
-   "items": 0
+   "total": 18,
+   "loaded": 1,
+   "items": 1623
   },
   "puranas": {
    "total": 92,
@@ -72,9 +77,9 @@
    "items": 17149
   },
   "vyasakuta": {
-   "total": 18,
-   "loaded": 0,
-   "items": 0
+   "total": 19,
+   "loaded": 2,
+   "items": 7897
   }
  },
  "leaves": {
@@ -133,6 +138,11 @@
   "ancillary/vyakarana/paniniya_vyakarana/siddhanta_kaumudi": 3928,
   "ancillary/vyakarana/sarasvata_vyakarana": 0,
   "ancillary/vyakarana/shakatayana_vyakarana": 0,
+  "dasa_sahitya/data": 0,
+  "dasa_sahitya/forms": 0,
+  "dasa_sahitya/label/en": 0,
+  "dasa_sahitya/label/kn": 0,
+  "dasa_sahitya/label/sa": 0,
   "dasakuta/gopaladasa/dandaka": 0,
   "dasakuta/gopaladasa/mundige": 0,
   "dasakuta/gopaladasa/other_compositions": 0,
@@ -140,6 +150,7 @@
   "dasakuta/gopaladasa/suladi": 0,
   "dasakuta/gopaladasa/ugabhoga": 0,
   "dasakuta/jagannathadasa/dandaka": 0,
+  "dasakuta/jagannathadasa/harikathamrutasara": 947,
   "dasakuta/jagannathadasa/mundige": 0,
   "dasakuta/jagannathadasa/other_compositions": 0,
   "dasakuta/jagannathadasa/pada_kirtane": 0,
@@ -233,6 +244,7 @@
   "kavya/kumarasambhava": 1112,
   "kavya/raghuvamsha": 1637,
   "kavya/shishupalavadha": 1630,
+  "kavya/sumadhva_vijaya": 0,
   "pancharatra_agama/pancharatra_samhitas/ahirbudhnya_samhita": 0,
   "pancharatra_agama/pancharatra_samhitas/hayagriva_samhita": 0,
   "pancharatra_agama/pancharatra_samhitas/ishvara_samhita": 0,
@@ -243,6 +255,7 @@
   "pancharatra_agama/pancharatra_samhitas/parama_samhita": 0,
   "pancharatra_agama/pancharatra_samhitas/parashara_samhita": 0,
   "pancharatra_agama/pancharatra_samhitas/paushkara_samhita": 0,
+  "pancharatra_agama/pancharatra_samhitas/prakasha_samhita": 1623,
   "pancharatra_agama/pancharatra_samhitas/sattvata_samhita": 0,
   "pancharatra_agama/pancharatra_samhitas/vasishtha_samhita": 0,
   "pancharatra_agama/pancharatra_samhitas/vishnu_samhita": 0,
@@ -660,7 +673,8 @@
   "vyasakuta/raghavendra_tirtha/tantradipika": 0,
   "vyasakuta/sripadaraja": 0,
   "vyasakuta/vadiraja_tirtha/rukminisha_vijaya": 0,
-  "vyasakuta/vadiraja_tirtha/yuktimallika": 0,
+  "vyasakuta/vadiraja_tirtha/svapna_vrindavana_akhyana": 2355,
+  "vyasakuta/vadiraja_tirtha/yuktimallika": 5542,
   "vyasakuta/vijayendra_tirtha": 0,
   "vyasakuta/vishnu_tirtha": 0,
   "vyasakuta/vyasatatvajna_tirtha": 0,

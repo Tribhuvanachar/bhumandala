@@ -1,0 +1,9 @@
+{
+  "note": "DGE library curation overrides -- a NON-DESTRUCTIVE display layer read by dge/js/library.js (v3+). Keys are effective (post-move) taxonomy paths; move sources/dests are original taxonomy paths. Exported by dge/library-admin.html.",
+  "version": 1,
+  "hidden": [],
+  "pinned": [],
+  "labels": {},
+  "order": {},
+  "moves": {}
+}

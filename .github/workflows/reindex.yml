@@ -1,0 +1,66 @@
+name: DGE re-index (search + library status)
+
+# Manual "Re-index" button. Run this whenever new content or a new library
+# section has been added/merged, so the corpus-wide global search index and
+# the Library Manager status snapshot both reflect the current data/.
+#
+# The Library Manager page (dge/library-admin.html → "↻ Re-index search")
+# deep-links here so a curator can trigger it without leaving the app.
+#
+# It regenerates two build products (both are generated-from-data artifacts,
+# never hand-edited) and opens a PR so the change can be spot-checked before
+# it goes live:
+#   dge/search_index/**            (build_search_index.py)
+#   dge/data/library_status.json   (tools/gen_library_status.py)
+
+on:
+  workflow_dispatch:
+    inputs:
+      open_pr:
+        description: "Open a PR with the refreshed index (off = commit straight to a branch you can inspect)"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  reindex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Rebuild global search index
+        run: python dge/build_search_index.py --data dge/data --out dge/search_index
+
+      - name: Refresh library status snapshot
+        run: python tools/gen_library_status.py
+
+      - name: Show what changed
+        run: |
+          git status --porcelain dge/search_index dge/data/library_status.json || true
+
+      - name: Open Pull Request
+        if: ${{ fromJSON(inputs.open_pr) }}
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: reindex/search-and-status
+          commit-message: "chore: re-index global search + refresh library status"
+          title: "Re-index: search index + library status"
+          body: |
+            Automated re-index via the **DGE re-index** workflow.
+
+            - `dge/search_index/**` rebuilt by `dge/build_search_index.py`
+            - `dge/data/library_status.json` refreshed by `tools/gen_library_status.py`
+
+            Both are generated build products (not hand-maintained). Merge once
+            a quick spot-check of the search index and the Library Manager
+            dashboard looks right.
+          add-paths: |
+            dge/search_index/**
+            dge/data/library_status.json

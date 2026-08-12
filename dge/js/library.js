@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v2.1 (Library labels and grantha titles now follow the selected script — were mixed IAST/Devanagari and ignored the script selector)';
+window.DGE_VERSIONS['library.js'] = 'v3.0 (Library Manager curation overrides — hide/pin/reorder/rename/move, non-destructive; numeral localization for titles that mix Devanagari + ASCII digits)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -61,6 +61,114 @@ const DGE_NUMBERED_PREFIXES = {
 const DGE_DEVA_DIGITS = ['०','१','२','३','४','५','६','७','८','९'];
 function dgeDevaNum(n) {
   return String(n).split('').map(d => DGE_DEVA_DIGITS[+d]).join('');
+}
+
+// A label/title that mixes Devanagari text with plain ASCII digits (e.g.
+// a custom curator label like "स्कन्धः 1") passes dgeToActiveScript's
+// Devanagari-detection gate as a whole, but the digit run itself is never
+// touched by that gate -- it stays ASCII through a non-Devanagari script
+// selection too, so the digits don't follow the rest of the label into
+// Kannada/Tamil/etc. Converting the digits to Devanagari first lets the
+// later transliteration pass carry them through like everything else.
+function dgeLocalizeNumerals(text) {
+  if (!text || !/[ऀ-ॿ]/.test(text)) return text;
+  return text.replace(/\d+/g, m => dgeDevaNum(parseInt(m, 10)));
+}
+
+// ---------------------------------------------------------------------- //
+// Library Manager curation overrides (dge/library-admin.html exports
+// dge/data/library-overrides.json). A NON-DESTRUCTIVE display layer only:
+// hide/pin/reorder/rename/move all affect how populated granthas group
+// and sort in this tree, never library.json/taxonomy.json or the actual
+// fetch path -- dgeGoToGrantha always navigates on the real slug even
+// after a display-only move. Absent/empty file = identical to before
+// this existed.
+// ---------------------------------------------------------------------- //
+let dgeLibOverrides = { hidden: [], pinned: [], labels: {}, order: {}, moves: {} };
+
+async function dgeLoadLibraryOverrides() {
+  try {
+    const ov = await fetch('data/library-overrides.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
+    if (ov) {
+      dgeLibOverrides = {
+        hidden: Array.isArray(ov.hidden) ? ov.hidden : [],
+        pinned: Array.isArray(ov.pinned) ? ov.pinned : [],
+        labels: (ov.labels && typeof ov.labels === 'object') ? ov.labels : {},
+        order: (ov.order && typeof ov.order === 'object') ? ov.order : {},
+        moves: (ov.moves && typeof ov.moves === 'object') ? ov.moves : {}
+      };
+      return;
+    }
+  } catch (e) { /* no overrides file yet */ }
+  // Legacy fallback: the older hide-only file, still honored when the
+  // newer overrides file doesn't exist yet.
+  try {
+    const vis = await fetch('data/library-visibility.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
+    if (vis && Array.isArray(vis.hidden)) dgeLibOverrides.hidden = vis.hidden;
+  } catch (e) { /* nothing hidden */ }
+}
+
+function dgeIsHiddenPath(path) {
+  const parts = path.split('/');
+  for (let i = 1; i <= parts.length; i++) {
+    if (dgeLibOverrides.hidden.indexOf(parts.slice(0, i).join('/')) >= 0) return true;
+  }
+  return false;
+}
+
+// A 'move' override is keyed by the REAL taxonomy slug and rewrites where
+// a grantha (or, as a side effect, every grantha under that same prefix)
+// GROUPS in the tree -- the longest matching source prefix wins so moving
+// a deep subfolder isn't shadowed by a move of one of its ancestors.
+function dgeEffectiveDisplayPath(realSlug) {
+  const moves = dgeLibOverrides.moves;
+  let best = null;
+  Object.keys(moves).forEach(src => {
+    if (realSlug === src || realSlug.indexOf(src + '/') === 0) {
+      if (!best || src.length > best.length) best = src;
+    }
+  });
+  if (!best) return realSlug;
+  const dest = moves[best];
+  const rel = realSlug.slice(best.length).replace(/^\//, '');
+  return dest ? (rel ? dest + '/' + rel : dest) : rel;
+}
+
+function dgePinRank(path) {
+  const i = dgeLibOverrides.pinned.indexOf(path);
+  return i < 0 ? Infinity : i;
+}
+function dgeOrderRank(parentPath, name) {
+  const explicit = dgeLibOverrides.order[parentPath];
+  if (!explicit) return Infinity;
+  const i = explicit.indexOf(name);
+  return i < 0 ? Infinity : i;
+}
+// Pin/order apply WITHIN each of the two existing sibling groups (folders,
+// then leaves) rather than fully interleaving them — a deliberately
+// smaller scope than the admin tool's own single merged sibling list, to
+// avoid restructuring how folders vs. leaves render. A curator can still
+// pin/reorder subfolders among themselves, or a grantha among its
+// leaf-siblings, just not mix the two groups' order together.
+function dgeSortChildKeys(parentPath, keys) {
+  return keys.slice().sort((a, b) => {
+    const pa = dgePinRank(parentPath ? parentPath + '/' + a : a);
+    const pb = dgePinRank(parentPath ? parentPath + '/' + b : b);
+    if (pa !== pb) return pa - pb;
+    const oa = dgeOrderRank(parentPath, a), ob = dgeOrderRank(parentPath, b);
+    if (oa !== ob) return oa - ob;
+    return dgeCompareSlugs(a, b);
+  });
+}
+function dgeSortLeaves(parentPath, leaves) {
+  return leaves.slice().sort((a, b) => {
+    const pa = dgePinRank(a.slug), pb = dgePinRank(b.slug);
+    if (pa !== pb) return pa - pb;
+    const na = a.slug.split('/').pop(), nb = b.slug.split('/').pop();
+    const oa = dgeOrderRank(parentPath, na), ob = dgeOrderRank(parentPath, nb);
+    if (oa !== ob) return oa - ob;
+    return dgeCompareSlugs(a.slug, b.slug);
+  });
 }
 
 // Converts a Devanagari label into the user's currently selected script,
@@ -128,20 +236,21 @@ let dgeTreeNodeSeq = 0;
 // Collapses single-child chains ("Ṛgveda › Śākala Śākhā › Saṃhitā") into
 // one row instead of three nested taps — the taxonomy is deep and mostly
 // linear, so without this the tree needs four taps to reach any mantra.
-function dgeRenderNode(node, labelPrefix, depth) {
-  const childKeys = Object.keys(node.children).sort(dgeCompareSlugs);
+function dgeRenderNode(node, labelPrefix, depth, nodePath) {
+  const childKeys = dgeSortChildKeys(nodePath, Object.keys(node.children));
   if (childKeys.length === 1 && node.leaves.length === 0) {
     const only = node.children[childKeys[0]];
     const label = (labelPrefix ? labelPrefix + ' › ' : '') + dgeSegLabel(childKeys[0]);
-    return dgeRenderNode(only, label, depth);
+    const onlyPath = nodePath ? nodePath + '/' + childKeys[0] : childKeys[0];
+    return dgeRenderNode(only, label, depth, onlyPath);
   }
 
   const id = 'dgeTree' + (dgeTreeNodeSeq++);
   const inner =
-    childKeys.map(k => dgeRenderNode(node.children[k], dgeSegLabel(k), depth + 1)).join('') +
-    node.leaves.slice().sort((a, b) => dgeCompareSlugs(a.slug, b.slug)).map(leaf =>
+    childKeys.map(k => dgeRenderNode(node.children[k], dgeSegLabel(k), depth + 1, nodePath ? nodePath + '/' + k : k)).join('') +
+    dgeSortLeaves(nodePath, node.leaves).map(leaf =>
       `<div class="pop-item" style="margin-left:${depth * 10}px;"
-            onclick="window.dgeGoToGrantha('${leaf.slug}')">${leaf.title}</div>`
+            onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}</div>`
     ).join('');
 
   if (!labelPrefix) return inner;
@@ -186,21 +295,17 @@ window.openLibraryModal = async function() {
     return;
   }
 
-  // Admin-curated show/hide overrides (see dge/library-admin.html, "Export
-  // visibility") -- optional file, most repos won't have one until the
-  // project lead actually hides something. Hiding a path hides its whole
-  // subtree, so a leaf is hidden if IT or any ancestor segment is listed.
-  let hiddenPaths = [];
-  try {
-    const vis = await fetch('data/library-visibility.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
-    if (vis && Array.isArray(vis.hidden)) hiddenPaths = vis.hidden;
-  } catch (e) { /* no visibility file yet -- nothing hidden */ }
-  const isHiddenSlug = slug => hiddenPaths.some(h => slug === h || slug.startsWith(h + '/'));
+  // Admin-curated overrides — see dge/library-admin.html. Optional; most
+  // repos won't have one until the project lead actually curates something.
+  await dgeLoadLibraryOverrides();
 
   const populated = library.granthas.filter(g => g.populated).map(g => {
-    const slug = window.dgeGranthaSlug(g.path);
-    return { slug, title: dgeToActiveScript(g.title || slug) };
-  }).filter(e => !isHiddenSlug(e.slug));
+    const realSlug = window.dgeGranthaSlug(g.path);
+    const slug = dgeEffectiveDisplayPath(realSlug); // where it GROUPS in the tree
+    const custom = dgeLibOverrides.labels[slug];
+    const rawTitle = custom !== undefined ? custom : (g.title || realSlug);
+    return { slug, realSlug, title: dgeToActiveScript(dgeLocalizeNumerals(rawTitle)) };
+  }).filter(e => !dgeIsHiddenPath(e.slug));
   if (!populated.length) {
     listEl.innerHTML = `<div class="note-preview-box" style="margin:0;">No texts are available yet — check back soon.</div>`;
     return;
@@ -208,12 +313,12 @@ window.openLibraryModal = async function() {
 
   dgeTreeNodeSeq = 0;
   const tree = dgeBuildTree(populated);
-  const topKeys = Object.keys(tree.children).sort(dgeCompareSlugs);
+  const topKeys = dgeSortChildKeys('', Object.keys(tree.children));
   listEl.innerHTML =
     `<div style="font-size:11px; color:var(--muted-text); margin-bottom:8px;">${populated.length} text(s) available</div>` +
-    topKeys.map(k => dgeRenderNode(tree.children[k], dgeSegLabel(k), 0)).join('') +
-    tree.leaves.sort((a, b) => dgeCompareSlugs(a.slug, b.slug)).map(leaf =>
-      `<div class="pop-item" onclick="window.dgeGoToGrantha('${leaf.slug}')">${leaf.title}</div>`
+    topKeys.map(k => dgeRenderNode(tree.children[k], dgeSegLabel(k), 0, k)).join('') +
+    dgeSortLeaves('', tree.leaves).map(leaf =>
+      `<div class="pop-item" onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}</div>`
     ).join('');
 };
 
