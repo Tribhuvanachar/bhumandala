@@ -1912,6 +1912,11 @@
       "populated": false
     },
     {
+      "path": "dge/data/pancharatra_agama/pancharatra_samhitas/prakasha_samhita/data.json",
+      "populated": true,
+      "title": "प्रकाशसंहिता"
+    },
+    {
       "path": "dge/data/pancharatra_agama/pancharatra_samhitas/paushkara_samhita/data.json",
       "populated": false
     },
