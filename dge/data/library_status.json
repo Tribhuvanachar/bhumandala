@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 655,
-  "loaded": 198,
-  "items": 310222
+  "loaded": 203,
+  "items": 325872
  },
  "sections": {
   "ancillary": {
@@ -28,8 +28,8 @@
   },
   "itihasas": {
    "total": 89,
-   "loaded": 62,
-   "items": 195812
+   "loaded": 67,
+   "items": 211462
   },
   "kavya": {
    "total": 5,
@@ -275,18 +275,18 @@
   "itihasas/mahabharata_kannada/vana_parva": 11261,
   "itihasas/mahabharata_kannada/virata_parva": 3660,
   "itihasas/ramayana/aranya_kanda/mula": 2060,
-  "itihasas/ramayana/aranya_kanda/saartha": 0,
+  "itihasas/ramayana/aranya_kanda/saartha": 2222,
   "itihasas/ramayana/ayodhya_kanda/mula": 3160,
-  "itihasas/ramayana/ayodhya_kanda/saartha": 0,
+  "itihasas/ramayana/ayodhya_kanda/saartha": 3981,
   "itihasas/ramayana/bala_kanda/mula": 1941,
-  "itihasas/ramayana/bala_kanda/saartha": 0,
+  "itihasas/ramayana/bala_kanda/saartha": 2017,
   "itihasas/ramayana/kishkindha_kanda/mula": 1987,
-  "itihasas/ramayana/kishkindha_kanda/saartha": 0,
+  "itihasas/ramayana/kishkindha_kanda/saartha": 2217,
   "itihasas/ramayana/sundara_kanda/mula": 2487,
   "itihasas/ramayana/sundara_kanda/saartha": 0,
   "itihasas/ramayana/uttara_kanda": 2690,
   "itihasas/ramayana/yuddha_kanda/mula": 4436,
-  "itihasas/ramayana/yuddha_kanda/saartha": 0,
+  "itihasas/ramayana/yuddha_kanda/saartha": 5213,
   "kavya/kiratarjuniya": 1055,
   "kavya/kumarasambhava": 1112,
   "kavya/raghuvamsha": 1637,

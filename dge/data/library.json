@@ -2954,6 +2954,31 @@
       "path": "dge/data/shankara_bhashya/upanishad_bhashya/aitareya_upanishad/bhashya/data.json",
       "populated": true,
       "title": null
+    },
+    {
+      "path": "dge/data/itihasas/ramayana/aranya_kanda/saartha/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/ramayana/ayodhya_kanda/saartha/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/ramayana/bala_kanda/saartha/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/ramayana/kishkindha_kanda/saartha/data.json",
+      "populated": true,
+      "title": null
+    },
+    {
+      "path": "dge/data/itihasas/ramayana/yuddha_kanda/saartha/data.json",
+      "populated": true,
+      "title": null
     }
   ]
 }
