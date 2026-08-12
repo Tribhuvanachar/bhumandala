@@ -65,7 +65,16 @@ window.DGE.SargaDetect = (function () {
   function detectAnchors(shlokas) {
     var anchors = [];
     (shlokas || []).forEach(function (s, i) {
-      var text = (s && s.sa) || '';
+      // Confirmed directly against two independent real Gemini runs on the
+      // same source content: a chapter-opening/closing line can legitimately
+      // land in EITHER "sa" or "commentary" depending on how that specific
+      // run split mula-verse text from explanatory material -- both are
+      // reasonable readings of the same page, and Gemini isn't consistent
+      // about which one it picks run to run. Checking "sa" alone silently
+      // missed a real sarga 10/11 boundary in one such run (the two sargas
+      // merged into one 133-shloka segment instead of splitting) purely
+      // because that run's colophon happened to land in "commentary".
+      var text = ((s && s.sa) || '') + '\n' + ((s && s.commentary) || '');
       var m;
       CHAPTER_OPEN_RE.lastIndex = 0;
       while ((m = CHAPTER_OPEN_RE.exec(text))) anchors.push({ pos: i, type: 'start', number: ORDINALS[m[1]] });
