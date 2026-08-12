@@ -15,14 +15,14 @@
     window.location.replace('../index.html');
   }
 </script>
-<title>DGE Convert v0.29.0</title>
-<link rel="stylesheet" href="style.css?v=0.29.0">
+<title>DGE Convert v0.30.0</title>
+<link rel="stylesheet" href="style.css?v=0.30.0">
 </head>
 <body>
 
 <h2>DGE Convert</h2>
 <div><a href="../index.html">🏠 Back to DGE main page</a></div>
-<div>Version: <b id="versionDisplay">0.29.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.30.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF or page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -88,7 +88,7 @@
 
 <fieldset>
   <legend>Backup raw data to GitHub</legend>
-  <p class="hint">OCR and Proofread progress lives only in <em>this browser's</em> storage until it's pushed as a finished grantha — cleared browsing data, a different device, or storage eviction can lose it before that point, forcing an expensive OCR+Proofread re-run. This pushes the raw, unprocessed OCR pages and/or Proofread chunks for the currently-loaded file to <code>dge/convert/backups/</code> in the repo as a safety copy — separate from the Library catalog, not shown or used anywhere in the reader app. Runs automatically after every OCR pass and every completed Proofread run (silently, only when a GitHub token is already pasted below in Setup) — this button is for backing up sooner, or for a token added after the run already finished.</p>
+  <p class="hint">OCR and Proofread progress lives only in <em>this browser's</em> storage until it's pushed as a finished grantha — cleared browsing data, a different device, or storage eviction can lose it before that point, forcing an expensive OCR+Proofread re-run. This pushes the raw, unprocessed OCR pages and/or Proofread chunks for the currently-loaded file to <code>dge/convert/backups/</code> in the repo as a safety copy — separate from the Library catalog, not shown or used anywhere in the reader app. Runs automatically (silently, only when a GitHub token is already pasted below in Setup): every few pages/chunks <em>during</em> a run (so a crash or force-quit doesn't lose more than a handful of pages/chunks), plus once more at the end of every OCR pass and every completed or paused Proofread run. This button is for backing up sooner, or for a token added after a run already finished.</p>
   <button type="button" id="backupToGithubBtn">☁ Backup this file's raw data now</button>
   <div id="backupStatusText" class="progress-text"></div>
 </fieldset>
@@ -263,9 +263,29 @@
 <div class="tab-nav"><button type="button" class="tab-back-btn" data-back="push">← Back: Push</button><span class="tab-nav-spacer"></span></div>
 </div>
 
+<!-- Always-visible live log, pinned to the bottom regardless of which tab
+     is active -- switching tabs during a long OCR/Proofread run used to
+     hide all progress feedback, making a run that's working fine look
+     stuck. Collapsed by default (just the newest line); tap to expand the
+     full log, same minimize/copy pattern as the Output modal above. -->
+<div id="liveLogBar" class="live-log-bar">
+  <div class="live-log-header" id="liveLogHeader">
+    <span id="liveLogLatest" class="live-log-latest">Ready.</span>
+    <span class="live-log-controls">
+      <button type="button" id="liveLogExpandBtn" title="Expand/collapse">▲</button>
+      <button type="button" id="liveLogCopyBtn" title="Copy full log">📋</button>
+      <button type="button" id="liveLogHideBtn" title="Hide">✕</button>
+    </span>
+  </div>
+  <div id="liveLogBody" class="live-log-body" style="display:none;">
+    <pre id="liveLogFullText"></pre>
+  </div>
+</div>
+<button type="button" id="liveLogShowBtn" class="live-log-show-btn" style="display:none;" title="Show log">📋</button>
+
 <script>
-  window.DGE_CONVERT_VERSION = '0.29.0';
-  window.DGE_CONVERT_BUILD = '2026-08-13b';
+  window.DGE_CONVERT_VERSION = '0.30.0';
+  window.DGE_CONVERT_BUILD = '2026-08-13c';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -280,23 +300,23 @@
      harmless to load unconditionally otherwise. Pinned exact version, same
      convention as pdf.js/Sanscript above. -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
-<script src="utils.js?v=0.29.0"></script>
-<script src="idb.js?v=0.29.0"></script>
-<script src="pdf.js?v=0.29.0"></script>
-<script src="image.js?v=0.29.0"></script>
-<script src="loaders.js?v=0.29.0"></script>
-<script src="vision.js?v=0.29.0"></script>
-<script src="tesseract-check.js?v=0.29.0"></script>
-<script src="review-classifier.js?v=0.29.0"></script>
-<script src="../js/gemini.js?v=0.29.0"></script>
-<script src="gemini.js?v=0.29.0"></script>
-<script src="github.js?v=0.29.0"></script>
-<script src="mapper.js?v=0.29.0"></script>
-<script src="sarga-detect.js?v=0.29.0"></script>
-<script src="urlimport.js?v=0.29.0"></script>
-<script src="renderer.js?v=0.29.0"></script>
-<script src="review-ui.js?v=0.29.0"></script>
-<script src="app.js?v=0.29.0"></script>
+<script src="utils.js?v=0.30.0"></script>
+<script src="idb.js?v=0.30.0"></script>
+<script src="pdf.js?v=0.30.0"></script>
+<script src="image.js?v=0.30.0"></script>
+<script src="loaders.js?v=0.30.0"></script>
+<script src="vision.js?v=0.30.0"></script>
+<script src="tesseract-check.js?v=0.30.0"></script>
+<script src="review-classifier.js?v=0.30.0"></script>
+<script src="../js/gemini.js?v=0.30.0"></script>
+<script src="gemini.js?v=0.30.0"></script>
+<script src="github.js?v=0.30.0"></script>
+<script src="mapper.js?v=0.30.0"></script>
+<script src="sarga-detect.js?v=0.30.0"></script>
+<script src="urlimport.js?v=0.30.0"></script>
+<script src="renderer.js?v=0.30.0"></script>
+<script src="review-ui.js?v=0.30.0"></script>
+<script src="app.js?v=0.30.0"></script>
 <script>
   // Tab/wizard navigation -- purely presentational (which panel is
   // visible), so it's kept separate from app.js's own state/logic and

@@ -17,6 +17,7 @@ window.DGE.App = (function () {
 
   const DEFAULT_CHUNK_SIZE = 8;
   const DEFAULT_OCR_BATCH_SIZE = 5;
+  const BACKUP_CHECKPOINT_UNITS = 5; // GitHub backup checkpoint cadence during a run — see runOcr()/runProofread()
 
   let ocrPages = [];
   let finalJson = null;
@@ -55,6 +56,19 @@ window.DGE.App = (function () {
     const el = $('logArea');
     if (el) el.textContent += msg + '\n';
     console.log('[DGE Convert]', msg);
+
+    // Mirrors into the always-visible live log bar (see initLiveLogBar())
+    // so a long OCR/Proofread run stays visible from any tab, not just
+    // the dedicated Log tab -- switching tabs used to hide all progress
+    // feedback, making a run that's working fine look stuck.
+    const latestEl = $('liveLogLatest');
+    if (latestEl) latestEl.textContent = msg;
+    const fullEl = $('liveLogFullText');
+    if (fullEl && el) {
+      fullEl.textContent = el.textContent;
+      const body = $('liveLogBody');
+      if (body && body.style.display !== 'none') body.scrollTop = body.scrollHeight;
+    }
   }
 
   function setError(msg) {
@@ -132,6 +146,39 @@ window.DGE.App = (function () {
       if (modal.classList.contains('minimized') && e.target.tagName !== 'BUTTON') {
         modal.classList.remove('minimized');
       }
+    });
+  }
+
+  function initLiveLogBar() {
+    const bar = $('liveLogBar');
+    if (!bar) return;
+    const body = $('liveLogBody');
+    const expandBtn = $('liveLogExpandBtn');
+    const showBtn = $('liveLogShowBtn');
+
+    function setExpanded(expanded) {
+      body.style.display = expanded ? 'block' : 'none';
+      expandBtn.textContent = expanded ? '▼' : '▲';
+      if (expanded) body.scrollTop = body.scrollHeight;
+    }
+    // Tapping anywhere on the header (not just the tiny arrow button)
+    // toggles it — the same "whole bar is the target" reasoning as the
+    // Output modal's minimized header above.
+    $('liveLogHeader').addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON') return; // let the other buttons handle their own clicks
+      setExpanded(body.style.display === 'none');
+    });
+    expandBtn.addEventListener('click', () => setExpanded(body.style.display === 'none'));
+    $('liveLogCopyBtn').addEventListener('click', () => {
+      copyTextToClipboard($('logArea').textContent, $('liveLogCopyBtn'), '📋');
+    });
+    $('liveLogHideBtn').addEventListener('click', () => {
+      bar.style.display = 'none';
+      showBtn.style.display = 'block';
+    });
+    showBtn.addEventListener('click', () => {
+      bar.style.display = 'block';
+      showBtn.style.display = 'none';
     });
   }
   function openOutputModal(title) {
@@ -701,6 +748,7 @@ window.DGE.App = (function () {
     if ($('backupToGithubBtn')) $('backupToGithubBtn').addEventListener('click', () => backupRawDataToGithub(false));
     $('copyLogBtn').addEventListener('click', copyLogToClipboard);
     initOutputModal();
+    initLiveLogBar();
     $('previewRawBtn').addEventListener('click', () => showRawOcrOutput());
     $('previewProofreadBtn').addEventListener('click', () => showProofreadOutput());
     $('viewOcrOutputBtn').addEventListener('click', () => showRawOcrOutput());
@@ -1570,6 +1618,14 @@ window.DGE.App = (function () {
       : engine === 'tesseract' ? 'Tesseract' : 'Vision';
     const ocrBatchSize = engine === 'vision' ? getOcrBatchSize() : 1;
     const ocrStartTime = Date.now();
+    // The GitHub backup at the end of this function only covers a run that
+    // finishes or is cleanly cancelled -- a crash, killed tab, or force-quit
+    // mid-run would miss it even though every page up to that point is
+    // already safe in IndexedDB. This periodic checkpoint closes that gap
+    // by mirroring to GitHub every few units of work too, without pushing
+    // a commit after literally every single page (that would both slow the
+    // run down, since each checkpoint is awaited, and spam the repo).
+    let unitsSinceBackup = 0;
     for (let i = startIdx; i < selectedPages.length; ) {
       if (cancelRequested) {
         log(`Stopped by user after ${i} of ${selectedPages.length} selected page(s). Progress is saved — you can resume later.`);
@@ -1625,6 +1681,7 @@ window.DGE.App = (function () {
           updateKnownFilesManifest(currentLoader.getDocumentName(), ocrPages.length, total);
           renderFileStatusBar();
           log(`Pages ${first}–${last} OCR'd and saved (batch of ${batchPages.length}).`);
+          if (++unitsSinceBackup >= BACKUP_CHECKPOINT_UNITS) { unitsSinceBackup = 0; await backupRawDataToGithub(true); }
         } catch (e) {
           setError(`Failed on pages ${first}–${last} after ${RETRY_DELAYS_MS.length + 1} attempts: ${U().formatError(e)} — progress saved through the pages already done. Fix the issue and tap Resume (try lowering the batch size in Setup if one bad page keeps taking a whole batch down with it).`);
           $('runOcrBtn').disabled = false;
@@ -1708,6 +1765,7 @@ window.DGE.App = (function () {
         await IDB().set(ocrDataKey(), { pages: ocrPages });
         updateKnownFilesManifest(currentLoader.getDocumentName(), ocrPages.length, total);
         renderFileStatusBar();
+        if (++unitsSinceBackup >= BACKUP_CHECKPOINT_UNITS) { unitsSinceBackup = 0; await backupRawDataToGithub(true); }
       } catch (e) {
         setError(`Failed on page ${p} after ${RETRY_DELAYS_MS.length + 1} attempts: ${U().formatError(e)} — progress saved through the pages already done. Fix the issue and tap Resume.`);
         $('runOcrBtn').disabled = false;
@@ -1948,6 +2006,7 @@ window.DGE.App = (function () {
 
     const proofreadStartTime = Date.now();
     const alreadyDoneAtStart = Object.keys(saved.chunks).length;
+    let unitsSinceBackup = 0;
     try {
       for (let i = 0; i < totalChunks; i++) {
         if (proofreadCancelRequested) {
@@ -1983,6 +2042,7 @@ window.DGE.App = (function () {
           await IDB().set(proofreadDataKey(), saved);
           log(`Chunk ${i + 1}/${totalChunks} (pages ${first}–${last}) proofread and saved.`);
           renderFileStatusBar();
+          if (++unitsSinceBackup >= BACKUP_CHECKPOINT_UNITS) { unitsSinceBackup = 0; await backupRawDataToGithub(true); }
           const chunkDelayMs = getChunkDelayMs();
           if (chunkDelayMs > 0 && i < totalChunks - 1 && !proofreadCancelRequested) await sleep(chunkDelayMs);
         } catch (e) {
