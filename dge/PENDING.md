@@ -782,6 +782,26 @@ complete record, not just a live queue.
   needs `torch.hub` access for WavLM+HiFiGAN, same network constraint
   that blocks Demucs model downloads in this sandbox; would need to run
   in the project lead's Codespace, same as Audio Admin.
+  **Update:** project lead tested the fixed Track A on two real sources
+  (their own recording, and a separately-uploaded female-voice
+  `mangalacharana.mp3`) across `slightly`/`male`/`deepmale` presets —
+  verdict: `deepmale` is closest but still "not good" (quality issue,
+  not the earlier crash bug). Confirms Track A's plain DSP re-timbre has
+  a real quality ceiling for this use case. Project lead now wants to
+  try **Track B** (`clone_knn_vc.py`, zero-shot kNN-VC toward a real
+  reference voice) using 5 short clips of their own voice as reference
+  (`NS1/10/11/12/13.mp3`, ~90s combined — comfortably within kNN-VC's
+  recommended 30-60s+). Track B needs `torch.hub.load("bshall/knn-vc", ...)`,
+  which pulls from `github.com` — confirmed blocked in this sandbox
+  (403, same proxy policy as the Demucs/HuggingFace blocks) — so this
+  must run in the project lead's Codespace, same pattern as Audio Admin.
+  Scaffolded `tools/voice_lab/incoming/{ref,source}/` (gitignored, mirrors
+  Audio Admin's `incoming/` convention) for the project lead to upload
+  their reference clips + a source recitation into, ready for them to
+  `pip install torch torchaudio soundfile numpy` (torch itself likely
+  already present from the Audio Admin install) and run `clone_knn_vc.py`.
+  Not yet run for real anywhere — next step once the project lead is
+  back in their Codespace.
 - **Audio Admin (`tools/audio_admin/`) real-world tuning in progress —
   three real defects found across two rounds of actual listening, one
   now understood to be a separation-quality limit rather than a
