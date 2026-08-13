@@ -55,6 +55,9 @@ def file_hash(path: str) -> str:
             h.update(chunk)
     return h.hexdigest()[:16]
 
+def cached_voice_path(src: str, model: str, cache_dir: str) -> str:
+    return os.path.join(cache_dir, f"{file_hash(src)}.{model}.vocals.wav")
+
 # ----------------------------------------------------------------- config
 @dataclass
 class Params:
@@ -104,7 +107,7 @@ def separate_voice(src: str, workdir: str, model: str = "htdemucs",
         cached = None
         if cache_dir:
             os.makedirs(cache_dir, exist_ok=True)
-            cached = os.path.join(cache_dir, f"{file_hash(src)}.{model}.vocals.wav")
+            cached = cached_voice_path(src, model, cache_dir)
             if os.path.exists(cached):
                 _to_16k_mono(cached, voice)
                 return voice, True
@@ -193,8 +196,18 @@ def solve_for_target(duration: float, voice_wav: str, target: int,
 
 # --------------------------------------------------------------- 4. export
 def export(src: str, duration: float, segs: List[List[float]], out: str,
-           p: Params, want_json=True, want_clips=True) -> List[dict]:
+           p: Params, want_json=True, want_clips=True,
+           voice_src: Optional[str] = None) -> List[dict]:
+    """
+    voice_src: if given (the cached full-quality separated vocals file), also
+    cuts the same boundaries out of the voice-only track into out/voice_only/
+    -- so both versions can be compared by ear before picking one for real.
+    """
     os.makedirs(out, exist_ok=True)
+    voice_out = None
+    if voice_src and want_clips:
+        voice_out = os.path.join(out, "voice_only")
+        os.makedirs(voice_out, exist_ok=True)
     chunks = []
     for i, (a, b) in enumerate(segs):
         name = f"{p.prefix}{str(p.start_no + i).zfill(p.width)}"
@@ -204,6 +217,9 @@ def export(src: str, duration: float, segs: List[List[float]], out: str,
         if want_clips:
             _run(["ffmpeg", "-y", "-v", "error", "-ss", f"{a:.3f}", "-to", f"{b:.3f}",
                   "-i", src, "-c:a", "pcm_s16le", os.path.join(out, name + ".wav")])
+            if voice_out:
+                _run(["ffmpeg", "-y", "-v", "error", "-ss", f"{a:.3f}", "-to", f"{b:.3f}",
+                      "-i", voice_src, "-c:a", "pcm_s16le", os.path.join(voice_out, name + ".wav")])
     if want_json:
         with open(os.path.join(out, "chunks_map.json"), "w") as f:
             json.dump({"source": os.path.basename(src), "duration": round(duration, 3),
@@ -233,7 +249,12 @@ def process(src: str, out: str = "out", target: int = 0,
             sil = detect_silences(voice, floor, p.min_gap)
             segs = segments_from_silences(duration, sil, p.min_gap, p.min_len, p.pad)
             p.noise_db = floor
-        chunks = export(src, duration, segs, out, p, want_json, want_clips)
+        full_voice = None
+        if separated and cache_dir:
+            candidate = cached_voice_path(src, p.model, cache_dir)
+            if os.path.exists(candidate):
+                full_voice = candidate
+        chunks = export(src, duration, segs, out, p, want_json, want_clips, voice_src=full_voice)
         return Result(os.path.basename(src), round(duration, 3), len(chunks),
                       asdict(p), separated, chunks, note)
     finally:

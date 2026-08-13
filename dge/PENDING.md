@@ -756,6 +756,45 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **Audio Admin (`tools/audio_admin/`) real-world tuning in progress —
+  two real defects found, mid-fix, not yet re-verified.** Project lead
+  ran `autotune.py` on a real chanting recording (Sumadhva Vijaya sarga 9,
+  62 shlokas) in their own GitHub Codespace (no direct Claude access to
+  that environment; guided the lead through Codespace UI + terminal
+  manually) and hit `62/62` exact count on the first run — but listening
+  to actual clips surfaced two real problems the count alone hid:
+  1. Exported clips still carry the full tabla/veena background
+     throughout (by original design — clips were always cut from the
+     source mix, not the separated voice track, so this isn't a bug so
+     much as an unreviewed design choice), including bleed at clip
+     start/end since the instruments often don't pause when the voice
+     does.
+  2. Some adjacent shlokas (e.g. 5+6) get clubbed into one clip even
+     though the *total* count came out exact — root cause: (a)
+     `segments_from_silences()`'s `min_len` merge (8.0s default) folds
+     any short segment into its predecessor regardless of whether it's
+     really a separate shloka, and (b) `solve_for_target()` only
+     optimizes for hitting the total count, so an under-split here and
+     an over-split there can cancel out and still read as "exact" — a
+     real gap in the tool's own self-check.
+  **Fixed so far (commit pending push):** `engine.py`/`autotune.py` now
+  also export a `voice_only/` sibling folder (clips cut from the cached
+  separated-vocals track, same boundaries) so the full-mix vs.
+  voice-isolated tradeoff can actually be compared by ear instead of
+  guessed at — project lead was unsure which they want for the final
+  archive and asked to see both. Also added a per-shloka duration
+  printout in `autotune.py` flagging outlier-length clips (>1.6x or
+  <0.5x the median) as likely-clubbed/likely-oversplit, so mistakes can
+  be found from the terminal log instead of listening to all N clips.
+  **Not yet done:** re-run on the trimmed ~6.5min/16-shloka sample
+  (`Sarga-9-sample.mp3`, cut from the original for faster iteration) to
+  confirm the diagnostic actually flags the known shloka 5+6 clubbing;
+  decide full-mix vs. voice-only for real once the lead compares both by
+  ear; then lock the winning params into `config.yaml`'s `defaults:`
+  (`min_gap` in particular looked like it wanted to land near 0.5s, well
+  below the current 1.5s default, though that was from one file's
+  autotune run, not confirmed generalizable yet); try a lower `--min-len`
+  than 8.0s specifically to address the clubbing.
 - **VedaVaNi Rigveda text/audio pairing not implemented.** Per-Sukta
   audio is fully downloaded (Kāñchī 1028/1028, Śṛṅgerī ~354/1028 — see
   below), but `rig_veda_multiscript.json`'s "sukta" field is actually a

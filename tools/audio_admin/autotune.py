@@ -77,10 +77,33 @@ def main():
     print(f"\n[autotune] {'PERFECT' if exact else 'CLOSEST'}: "
           f"{len(segs)}/{a.target} shlokas. Saved winning settings → {a.params_out}")
 
+    # Hitting the target COUNT doesn't prove every boundary is right -- two
+    # clubbed shlokas plus one wrongly-split shloka elsewhere can still sum
+    # to the correct total. Flag outlier durations so you know which clips
+    # to actually listen to instead of checking all of them by ear.
+    durs = [b - a_ for a_, b in segs]
+    med = sorted(durs)[len(durs) // 2]
+    print(f"\n[autotune] per-shloka durations (median {med:.1f}s) -- check the flagged ones:")
+    for i, d in enumerate(durs, start=1):
+        flag = ""
+        if d > med * 1.6:
+            flag = "  <-- unusually LONG, possibly two shlokas clubbed together"
+        elif d < med * 0.5:
+            flag = "  <-- unusually SHORT, possibly over-split"
+        print(f"  chunk_{str(i).zfill(2)}: {d:5.1f}s{flag}")
+
     if a.export:
         p = E.Params(**params)
-        chunks = E.export(a.src, duration, segs, a.export, p, True, True)
+        full_voice = None
+        if separated:
+            candidate = E.cached_voice_path(a.src, model, a.cache)
+            if os.path.exists(candidate):
+                full_voice = candidate
+        chunks = E.export(a.src, duration, segs, a.export, p, True, True, voice_src=full_voice)
         print(f"[autotune] exported {len(chunks)} clips + chunks_map.json → {a.export}/")
+        if full_voice:
+            print(f"[autotune] also exported voice-only versions → {a.export}/voice_only/ "
+                  f"(compare by ear against the full-mix clips before deciding which to keep)")
 
     if not exact:
         print("[autotune] Not exact. Options: try more models "
