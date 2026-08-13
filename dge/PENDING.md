@@ -756,45 +756,78 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **`tools/voice_lab/` added — real bug found and fixed before first real
+  use.** Project lead's own uploaded files (`voice_transform.py` Track A —
+  numpy/scipy pitch+formant shift for female→male re-timbre, no AI model;
+  `clone_knn_vc.py` Track B — optional zero-shot kNN-VC voice conversion
+  toward a reference voice, needs `torch.hub` model download; both meant
+  eventually to feed a TTS feature). Ran Track A on a real 20s slice of
+  the project lead's own chanting recording before trusting it (per
+  session convention): the `--preset male` output measured RMS 0.004 vs
+  the original's 0.158 (39x quieter) with 0% of samples carrying real
+  signal (vs 76% in the source) — i.e. the output was silence plus one
+  artificial click, not a deepened voice. Root cause: `phase_vocoder_stretch()`'s
+  overlap-add window-normalization floor (`win[win<1e-6]=1e-6`) let
+  under-covered edge samples explode to ~123x normal amplitude; the
+  driver's peak-based normalize (`x/np.max(np.abs(x))`) then divided the
+  *entire* clip down by that one freak sample. Fixed by flooring `win`
+  relative to its own interior median (zeroing the handful of genuinely
+  under-covered edge samples instead of amplifying them) and switching
+  the final normalize from raw max to a 99.9th-percentile-based clip.
+  Re-tested on the same real audio after the fix: RMS 0.099, 70% signal
+  coverage, peak 0.69 — back in a sane, working range. Sent the project
+  lead the actual fixed output (both `male` and `deepmale` presets) to
+  judge quality by ear; **awaiting their listen-through verdict** before
+  calling Track A done. Track B (`clone_knn_vc.py`) not tested at all yet —
+  needs `torch.hub` access for WavLM+HiFiGAN, same network constraint
+  that blocks Demucs model downloads in this sandbox; would need to run
+  in the project lead's Codespace, same as Audio Admin.
 - **Audio Admin (`tools/audio_admin/`) real-world tuning in progress —
-  two real defects found, mid-fix, not yet re-verified.** Project lead
-  ran `autotune.py` on a real chanting recording (Sumadhva Vijaya sarga 9,
-  62 shlokas) in their own GitHub Codespace (no direct Claude access to
-  that environment; guided the lead through Codespace UI + terminal
-  manually) and hit `62/62` exact count on the first run — but listening
-  to actual clips surfaced two real problems the count alone hid:
-  1. Exported clips still carry the full tabla/veena background
-     throughout (by original design — clips were always cut from the
-     source mix, not the separated voice track, so this isn't a bug so
-     much as an unreviewed design choice), including bleed at clip
-     start/end since the instruments often don't pause when the voice
-     does.
-  2. Some adjacent shlokas (e.g. 5+6) get clubbed into one clip even
-     though the *total* count came out exact — root cause: (a)
-     `segments_from_silences()`'s `min_len` merge (8.0s default) folds
-     any short segment into its predecessor regardless of whether it's
-     really a separate shloka, and (b) `solve_for_target()` only
-     optimizes for hitting the total count, so an under-split here and
-     an over-split there can cancel out and still read as "exact" — a
-     real gap in the tool's own self-check.
-  **Fixed so far (commit pending push):** `engine.py`/`autotune.py` now
-  also export a `voice_only/` sibling folder (clips cut from the cached
-  separated-vocals track, same boundaries) so the full-mix vs.
-  voice-isolated tradeoff can actually be compared by ear instead of
-  guessed at — project lead was unsure which they want for the final
-  archive and asked to see both. Also added a per-shloka duration
-  printout in `autotune.py` flagging outlier-length clips (>1.6x or
-  <0.5x the median) as likely-clubbed/likely-oversplit, so mistakes can
-  be found from the terminal log instead of listening to all N clips.
-  **Not yet done:** re-run on the trimmed ~6.5min/16-shloka sample
-  (`Sarga-9-sample.mp3`, cut from the original for faster iteration) to
-  confirm the diagnostic actually flags the known shloka 5+6 clubbing;
-  decide full-mix vs. voice-only for real once the lead compares both by
-  ear; then lock the winning params into `config.yaml`'s `defaults:`
-  (`min_gap` in particular looked like it wanted to land near 0.5s, well
-  below the current 1.5s default, though that was from one file's
-  autotune run, not confirmed generalizable yet); try a lower `--min-len`
-  than 8.0s specifically to address the clubbing.
+  three real defects found across two rounds of actual listening, one
+  now understood to be a separation-quality limit rather than a
+  threshold-tuning bug.** Project lead ran `autotune.py` on a real
+  chanting recording (Sumadhva Vijaya sarga 9, 62 shlokas) in their own
+  GitHub Codespace (no direct Claude access to that environment; guided
+  the lead through Codespace UI + terminal manually throughout).
+  Round 1 (full 62-shloka file): hit `62/62` exact count, but listening
+  to actual clips surfaced two problems the count alone hid — full-mix
+  clips carry background music throughout by original design, and
+  adjacent shlokas (e.g. 5+6) got clubbed into one clip despite the
+  *total* count coming out exact (root cause: `min_len` merge folding
+  short segments into predecessors regardless of whether they're really
+  separate, plus `solve_for_target()` only optimizing for total count,
+  so an under-split and an over-split elsewhere can cancel out and still
+  read as "exact"). Fixed: `engine.py`/`autotune.py` now also export a
+  `voice_only/` sibling folder (same boundaries, cut from the cached
+  separated-vocals track) for real full-mix-vs-isolated comparison, and
+  `autotune.py` prints per-shloka durations flagging outliers (>1.6x or
+  <0.5x median) as likely-clubbed/likely-oversplit so bad boundaries can
+  be found from the terminal log instead of listening to every clip.
+  Round 2 (trimmed ~6.5min/16-shloka sample, `Sarga-9-sample.mp3`, cut
+  for faster iteration): confirmed the outlier-flagging works — it
+  correctly caught a clubbed pair — but investigating that specific clip
+  revealed a *second*, different cause: the project lead reported an
+  audible, clear ~1.5s pause between the two clubbed shlokas (so it's
+  not a too-short-to-detect pause), yet the tool still merged them.
+  Fixed `solve_for_target()`'s previously-hardcoded 0.30s silence-
+  detection floor into a `--min-sil` flag on the theory it might be a
+  too-short pause elsewhere in the file, but the project lead then
+  directly listened to that specific clip's `voice_only/` version and
+  confirmed veena is *still clearly audible* there and the gap is "barely
+  quieter but not silent" — meaning Demucs' separation itself is leaking
+  real background energy into the "vocals" stem at that point, not a
+  threshold-tuning problem at all. No noise-threshold sweep can find a
+  gap that never actually goes quiet in the track being searched.
+  **Not yet done:** try `htdemucs_ft` (slower, typically cleaner
+  separation) instead of plain `htdemucs` to see if it resolves the
+  leakage; if not, accept that some tightly-chanted shloka pairs may
+  need manual boundary correction rather than fully automatic detection;
+  decide full-mix vs. voice-only for the *final* saved clips once heard
+  side-by-side (project lead asked to see both rather than commit to one
+  sight-unseen — still open); lock winning params into `config.yaml`'s
+  `defaults:` once settled (`min_gap` looked like it wanted to land near
+  0.5s on one file, well below the current 1.5s default, not yet
+  confirmed generalizable across recordings).
 - **VedaVaNi Rigveda text/audio pairing not implemented.** Per-Sukta
   audio is fully downloaded (Kāñchī 1028/1028, Śṛṅgerī ~354/1028 — see
   below), but `rig_veda_multiscript.json`'s "sukta" field is actually a
