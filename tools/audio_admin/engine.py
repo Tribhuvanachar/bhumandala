@@ -168,19 +168,27 @@ def segments_from_silences(duration: float, silences: List[Tuple[float, float]],
 
 # ------------------------------------------------------ 3b. target solver
 def solve_for_target(duration: float, voice_wav: str, target: int,
-                     min_len: float, pad: float, base_floor: float
+                     min_len: float, pad: float, base_floor: float,
+                     min_sil: float = 0.30
                      ) -> Tuple[List[List[float]], float, float, bool, list]:
     """
     Sweep silence threshold + min_gap to land the segment count on `target`.
     Returns (segments, noise_db, min_gap, exact?, trials).
     Cheap: detection is fast, and it never re-separates.
+
+    min_sil: the shortest pause ffmpeg's silencedetect will even register as
+    silence. A real pause between two shlokas shorter than this is invisible
+    to every other knob below -- no amount of noise/min_gap tuning can find
+    a boundary that was never detected in the first place. Lower this (e.g.
+    0.10-0.15) if two shlokas keep getting clubbed together with no fix.
     """
     trials = []
     best = None
     floors = [base_floor + d for d in (0, -3, 3, -6, 6, -9, 9)]
-    gaps = [round(x / 100, 2) for x in range(40, 305, 5)]  # 0.40 .. 3.00 s
+    gap_lo = int(round(min_sil * 100))
+    gaps = [round(x / 100, 2) for x in range(gap_lo, 305, 5)]  # min_sil .. 3.00 s
     for noise in floors:
-        sil = detect_silences(voice_wav, noise, 0.30)
+        sil = detect_silences(voice_wav, noise, min_sil)
         for gap in gaps:
             segs = segments_from_silences(duration, sil, gap, min_len, pad)
             n = len(segs)

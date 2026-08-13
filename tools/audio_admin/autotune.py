@@ -22,6 +22,11 @@ def main():
     ap.add_argument("--target", type=int, required=True, help="known number of shlokas")
     ap.add_argument("--min-len", type=float, default=8.0)
     ap.add_argument("--pad", type=float, default=0.10)
+    ap.add_argument("--min-sil", type=float, default=0.30,
+                    help="shortest pause ffmpeg will register as silence at all (seconds). "
+                         "Lower this (e.g. 0.10-0.15) if two shlokas keep getting clubbed "
+                         "together no matter what else is tried -- the real pause between "
+                         "them may just be shorter than the default floor.")
     ap.add_argument("--models", default="htdemucs",
                     help="comma list of demucs models to try in order, e.g. htdemucs,htdemucs_ft")
     ap.add_argument("--cache", default=".voice_cache")
@@ -47,7 +52,7 @@ def main():
                       file=sys.stderr)
             floor = E.auto_noise_floor(voice)
             segs, noise, gap, exact, trials = E.solve_for_target(
-                duration, voice, a.target, a.min_len, a.pad, floor)
+                duration, voice, a.target, a.min_len, a.pad, floor, a.min_sil)
 
             # show the neighbourhood of the winning setting
             near = sorted({t["count"] for t in trials
