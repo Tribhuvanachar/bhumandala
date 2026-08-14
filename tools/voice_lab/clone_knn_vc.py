@@ -49,6 +49,22 @@ def expand_refs(paths):
             out.append(p)
     return out
 
+def ensure_mono16k(path, tmp_name):
+    """
+    WavLM (via knn-vc's get_features) doesn't downmix stereo input itself --
+    a stereo file's 2 channels get treated as 2 separate batch items, giving
+    a feature tensor an extra leading dim of 2 that crashes match() later
+    with a confusing tensor-shape error far from the real cause. Always
+    downmix + resample before handing anything to knn_vc.
+    """
+    out_path = os.path.join(tempfile.gettempdir(), tmp_name)
+    r = subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", path,
+                        "-ac", "1", "-ar", "16000", out_path],
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        sys.exit(f"Failed to downmix {path} to mono:\n{r.stderr[-1000:]}")
+    return out_path
+
 def concat_refs(paths, out_path):
     """
     Join multiple reference clips into one file. kNN-VC's get_matching_set()
@@ -87,18 +103,22 @@ def main():
         if not os.path.isfile(p):
             sys.exit(f"--ref file not found: {p}")
 
+    source_path = ensure_mono16k(a.source, "knn_vc_source.wav")
+
     if len(ref_paths) > 1:
         combined = os.path.join(tempfile.gettempdir(), "knn_vc_ref_combined.wav")
         print(f"Combining {len(ref_paths)} reference clips into one "
               f"({', '.join(os.path.basename(p) for p in ref_paths)})…")
         concat_refs(ref_paths, combined)
         ref_paths = [combined]
+    else:
+        ref_paths = [ensure_mono16k(ref_paths[0], "knn_vc_ref_single.wav")]
 
     print("Loading kNN-VC (first run downloads WavLM + HiFiGAN)…")
     knn_vc = torch.hub.load("bshall/knn-vc", "knn_vc",
                             prematched=True, trust_repo=True, device=a.device)
     print(f"Extracting features from source: {a.source}")
-    query = knn_vc.get_features(a.source)
+    query = knn_vc.get_features(source_path)
     print(f"Building matching set from {len(ref_paths)} reference clip(s): "
           + ", ".join(os.path.basename(p) for p in ref_paths))
     matching = knn_vc.get_matching_set(ref_paths)
