@@ -7,7 +7,7 @@
 // and confirms, reusing admin-editor.js's existing dgeAdminBatchCommit
 // (same safe "diff, don't blind-overwrite" discipline as Config Editor).
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['content-editor.js'] = 'v1.2';
+window.DGE_VERSIONS['content-editor.js'] = 'v1.3';
 
 window.dgeContentEditMode = false;
 window.dgeContentEditsDirty = false;
@@ -452,7 +452,14 @@ window.dgePushContentEdits = async function () {
     if (result.uploaded === 0) {
       alert('Nothing changed relative to what\'s already on GitHub — no commit made.');
     } else {
-      alert(`Saved. Pushed ${result.uploaded} file(s) in one commit.`);
+      // This site is served through GitHub Pages' CDN, which caches
+      // responses for a few minutes independent of anything this app
+      // does — the commit above is real and immediate (visible on
+      // GitHub right away), but the LIVE site can lag behind it for a
+      // short while. Said explicitly here since a refresh right after
+      // pushing showing the old text looks exactly like a failed save
+      // when it isn't one.
+      alert(`Saved. Pushed ${result.uploaded} file(s) in one commit.\n\nThis site is served through GitHub Pages, which can take a few minutes to catch up on its own end — if a refresh right now still shows the old text, that's this CDN delay, not a failed save. The commit is already on GitHub.`);
     }
     window.dgeContentEditsDirty = false;
     dgeClearContentDraft();

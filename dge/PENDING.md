@@ -818,6 +818,84 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **Three more admin-panel reports, all investigated this session
+  (`dge/js/admin-editor.js` → v1.19, `dge/js/content-editor.js` → v1.3).
+  One fully fixed, one fixed as a real feature gap, one only partially
+  diagnosed — flagged honestly below rather than claimed as solved.**
+  1. **RESOLVED (messaging, not a bug) — "edited PNS, saved, refreshed,
+     still saw old text, but the admin file browser shows the right
+     data.json."** This is almost certainly GitHub Pages' own CDN, not
+     this app's caching: the site is served from
+     `tribhuvanachar.github.io/bhumandala/dge/` (confirmed in
+     `PROJECT_STATUS.md`), and GitHub Pages caches responses at its edge
+     for a few minutes independent of anything the app does — the commit
+     itself is real and immediate (which is exactly why the admin file
+     browser, which reads straight from the GitHub API, already showed
+     the correct text), but the *live* site can lag behind it briefly.
+     Couldn't verify this against the actual production CDN from this
+     sandbox (no reachable deployment here), so this is a strong
+     diagnosis, not a confirmed one. Since there's no way to control GH
+     Pages' Cache-Control headers from a plain Pages site, fixed the
+     part that's actually fixable: `dgePushContentEdits`'s success alert
+     now says this explicitly, so a refresh showing old text right after
+     a push doesn't read as a failed save.
+  2. **PARTIALLY INVESTIGATED, not confirmed fixed — admin file browser:
+     "edited+saved PNS, navigated folders to Raghavendra Vijaya sarga_1,
+     clicked its data.json, still saw PNS's old content until I manually
+     closed the editor and reopened it."** Read through
+     `dgeAdminOpenFile`, `dgeAdminNavigate`, `dgeAdminRowClick`, and
+     `dgeAdminSaveFile` closely — structurally all four look correct
+     (fresh cache-busted fetch every open, textarea cleared synchronously
+     before the fetch, save closes the editor and resets its state,
+     selection is cleared on every navigate, row click handlers get
+     fresh path/name values from the current render with no stale
+     closures). Could not reproduce live to confirm or rule out a
+     specific cause — the repo is private and this session has no GitHub
+     token, so even a read-only `dgeGithubListDir`/`dgeGithubGetFile`
+     call fails here. Added a real hardening fix regardless of exact
+     root cause: `dgeAdminOpenFile` now carries a per-call request ID
+     (`dgeAdminOpenFileRequestId`), so if an earlier file's fetch somehow
+     resolves after a later one has already started, its response is
+     discarded instead of overwriting the textarea — a defensive fix for
+     any race-condition variant of this symptom, not a confirmed cure
+     for this specific report. If it recurs, worth noting whether any
+     checkboxes were selected at the time (the one remaining code path
+     that could plausibly swallow a row click without visibly failing).
+  3. **RESOLVED — admin panel's "Recent Activity" Undo only ever worked
+     on the single most recent commit; undoing anything older forced
+     undoing every commit after it too, even when those were completely
+     unrelated files.** Real, valid complaint — admin-panel commits are
+     frequently unrelated single-file edits, and the project lead was
+     right that they shouldn't have to unwind unrelated later changes
+     just to revert one earlier one. Replaced `dgeAdminUndoLastCommit`
+     (which only worked by resetting the tree to the target commit's own
+     parent — correct only when that commit IS the current tip) with
+     `dgeAdminUndoCommit(commitSha)`, a real per-commit revert: diffs the
+     target commit against its own immediate parent to find exactly
+     which paths IT changed (via two full recursive-tree fetches, not
+     GitHub's Compare API, to avoid relying on its less-precise added/
+     removed/modified semantics), then applies the inverse of just those
+     paths on top of the CURRENT head tree via a partial tree update
+     (`base_tree` + only the changed entries) — any commits before or
+     after that touched OTHER files are left completely alone, which is
+     the actual fix. Also detects genuine conflicts: if some later commit
+     already touched one of the same paths again, that path is skipped
+     (reported by name to the admin) rather than silently clobbering the
+     later edit — matches what `git revert` itself would flag as a
+     conflict rather than silently resolving. Every entry in Recent
+     Activity now gets its own working "↩️ Undo This" button, not just
+     the top one. Verified the core diff/conflict logic with a standalone
+     unit test against synthetic blob-sha maps covering: unrelated
+     commits touching different files (only the target commit's own file
+     reverted, no false conflicts), a real conflict (same path touched
+     again later — correctly skipped, not clobbered), added-file revert
+     (deletes it), removed-file revert (restores it), the original
+     "undo the actual last commit" case (still works), and a multi-file
+     single commit (all its paths revert together) — all pass. Could not
+     test the real GitHub API calls end-to-end for the same reason as #2
+     (private repo, no token here), so this is logic-verified but not
+     live-verified.
+
 - **RESOLVED — Raghavendra Vijaya kavya data, all 10 sargas now published
   and registered.** Sequel to the entry below (which found the problem):
   the project lead confirmed "relabel and register 9 sargas, leave

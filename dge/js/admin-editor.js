@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.18 (Content sanity checks before any upload/save commits — catches wrong-folder content, duplicate chapters, and grantha data pushed without a library.json entry)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.19 (Recent Activity: every commit can be targeted for Undo, not just the most recent — a real per-commit revert that leaves unrelated commits alone, with conflict detection if a later change touched the same file. Also: request-sequencing guard on file-open, so a slow-resolving earlier fetch can never overwrite a faster later one\'s content in the editor.)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -250,15 +250,12 @@ window.dgeAdminToggleRecentActivity = function() {
   if (willShow) dgeAdminRenderRecentActivity();
 };
 
-// Shows the last 5 commits on the branch, with an Undo button on only the
-// most recent one. Undo works by creating a NEW commit whose tree matches
-// the state immediately before that commit — nothing is destroyed or
-// force-pushed, the change is just reversed and the full history
-// (including the undone commit itself) stays intact and visible on
-// GitHub. This is why only the most recent entry can be undone at any
-// moment: reverting an older one cleanly (without also discarding
-// whatever came after it) needs real diff/cherry-pick logic this doesn't
-// attempt. Undoing repeatedly, one step at a time, reaches further back.
+// Shows the last 5 commits on the branch, each with its own Undo button.
+// Undo creates a NEW commit that reverses just THAT commit's changes —
+// nothing is destroyed or force-pushed, the full history (including the
+// undone commit itself) stays intact and visible on GitHub. See
+// dgeAdminUndoCommit below for how it targets an arbitrary commit
+// (not just the most recent one) safely.
 async function dgeAdminRenderRecentActivity() {
   const panel = document.getElementById('adminActivityPanel');
   if (!panel) return;
@@ -277,13 +274,10 @@ async function dgeAdminRenderRecentActivity() {
       commits.map((c, i) => {
         const msg = dgeEscapeHtmlSafe((c.commit.message || '').split('\n')[0]);
         const date = new Date(c.commit.author.date).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
-        const action = i === 0
-          ? `<button class="btn-sm" style="color:var(--accent-red); margin-top:4px;" onclick="window.dgeAdminUndoLastCommit('${c.sha}')">↩️ Undo This</button>`
-          : `<div class="hint" style="font-size:10px; margin-top:4px;">Undo the entry above first to reach this one</div>`;
         return `<div style="padding:8px 0; ${i < commits.length - 1 ? 'border-bottom:1px solid var(--card-border);' : ''}">
           <div style="font-size:12px; font-weight:600;">${msg}</div>
           <div style="font-size:10px; color:var(--muted-text); margin-top:2px;">${date} · ${c.sha.slice(0, 7)}</div>
-          ${action}
+          <button class="btn-sm" style="color:var(--accent-red); margin-top:4px;" onclick="window.dgeAdminUndoCommit('${c.sha}')">↩️ Undo This</button>
         </div>`;
       }).join('');
   } catch (e) {
@@ -291,33 +285,111 @@ async function dgeAdminRenderRecentActivity() {
   }
 }
 
-window.dgeAdminUndoLastCommit = async function(commitSha) {
-  if (!confirm('Undo the most recent change?\n\nThis creates a new commit that reverses it — nothing is erased from history, but the files go back to how they were right before that change.')) return;
+// Fetches the full recursive tree at an arbitrary commit-ish sha (a
+// commit sha works directly with the trees API, same as a tree sha) and
+// returns it as a path -> blob-sha Map, blobs only (submodules/symlinks
+// excluded — not something this admin tool creates). Truncation is
+// surfaced rather than silently producing a partial, wrong-looking diff.
+async function dgeGithubGetBlobMapAt(shaish) {
+  const { owner, repo } = GITHUB_REPO_CONFIG;
+  const url = `${GH_API}/repos/${owner}/${repo}/git/trees/${shaish}?recursive=1&_=${Date.now()}`;
+  const data = await dgeGithubRequest(url, { headers: dgeGithubHeaders(), cache: 'no-store' });
+  if (data.truncated) {
+    console.warn(`[Undo] GitHub truncated the tree listing at ${shaish} — this repo may now be too large for a full-tree revert to see every changed file.`);
+  }
+  const map = new Map();
+  (data.tree || []).forEach(entry => {
+    if (entry.type === 'blob') map.set(entry.path, entry.sha);
+  });
+  return map;
+}
+
+// Reverts exactly ONE commit's changes, regardless of where it sits in
+// history — unlike a plain "reset to parent" (which only works when the
+// commit being undone IS the current tip), this diffs commitSha against
+// its own parent to find what THAT commit actually changed, then applies
+// the inverse of just those paths on top of the CURRENT head tree. Any
+// unrelated commits that happened before or after are left completely
+// alone, which is the whole point: admin-panel commits are frequently
+// unrelated edits to different files, and forcing a full linear undo
+// chain through all of them to reach one older change was needless and
+// risked reverting things nobody wanted touched.
+// Per-path conflict check: if some LATER commit already changed a path
+// that this revert would also touch, reverting it blindly could silently
+// clobber that later, unrelated edit. Detected by comparing the current
+// head's blob sha for that path against what commitSha itself set it
+// to — a mismatch means someone touched it since, so that one path is
+// skipped (reported to the admin) rather than guessed at, the same way
+// `git revert` itself would surface a conflict instead of resolving it.
+window.dgeAdminUndoCommit = async function(commitSha) {
+  if (!confirm('Undo this specific change?\n\nThis creates a new commit that reverses just this one\'s changes — nothing is erased from history, and any unrelated commits before or after it are left untouched.')) return;
 
   dgeAdminShowWorking();
   try {
     const { owner, repo } = GITHUB_REPO_CONFIG;
 
-    // Guard against undoing the wrong thing if something else committed
-    // since this list was loaded (e.g. another tab, or someone else).
-    const head = await dgeGithubGetBranchHead();
-    if (head.commit.sha !== commitSha) {
-      throw new Error('New changes have happened since this list loaded — reopen Recent Activity and try again.');
-    }
-
     const commitDetail = await dgeGithubRequest(`${GH_API}/repos/${owner}/${repo}/git/commits/${commitSha}`, { headers: dgeGithubHeaders(), cache: 'no-store' });
     const parentSha = commitDetail.parents && commitDetail.parents[0] && commitDetail.parents[0].sha;
     if (!parentSha) throw new Error('This is the very first commit in the repo — there\'s nothing before it to undo to.');
-    const parentCommit = await dgeGithubRequest(`${GH_API}/repos/${owner}/${repo}/git/commits/${parentSha}`, { headers: dgeGithubHeaders(), cache: 'no-store' });
 
+    const head = await dgeGithubGetBranchHead();
+    const headCommitSha = head.commit.sha;
+
+    const [parentMap, commitMap, headMap] = await Promise.all([
+      dgeGithubGetBlobMapAt(parentSha),
+      dgeGithubGetBlobMapAt(commitSha),
+      dgeGithubGetBlobMapAt(headCommitSha)
+    ]);
+
+    // Union of every path touched by this commit (added, removed, or
+    // changed), each mapped to what it should become on revert.
+    const allPaths = new Set([...parentMap.keys(), ...commitMap.keys()]);
+    const treeEntries = [];
+    const skippedConflicts = [];
+
+    allPaths.forEach(path => {
+      const beforeSha = parentMap.get(path) || null; // state this commit changed FROM
+      const afterSha = commitMap.get(path) || null;  // state this commit changed TO
+      if (beforeSha === afterSha) return; // untouched by this commit
+
+      const currentSha = headMap.get(path) || null;
+      if (currentSha !== afterSha) {
+        // Someone changed (or deleted/recreated) this path after the
+        // commit being undone — reverting it now would silently discard
+        // that later, unrelated edit instead of just this commit's.
+        skippedConflicts.push(path);
+        return;
+      }
+
+      if (beforeSha === null) {
+        // This commit created the file; revert = remove it.
+        treeEntries.push({ path, mode: '100644', type: 'blob', sha: null });
+      } else {
+        // This commit modified (or deleted) the file; revert = restore
+        // the parent's blob content at this path.
+        treeEntries.push({ path, mode: '100644', type: 'blob', sha: beforeSha });
+      }
+    });
+
+    if (!treeEntries.length) {
+      if (skippedConflicts.length) {
+        throw new Error(`Every path this commit touched (${skippedConflicts.length}) was changed again since — nothing left that could be safely undone without also discarding those later edits.`);
+      }
+      throw new Error('This commit made no file changes that could be found to undo.');
+    }
+
+    const headCommitDetail = await dgeGithubRequest(`${GH_API}/repos/${owner}/${repo}/git/commits/${headCommitSha}`, { headers: dgeGithubHeaders(), cache: 'no-store' });
+    const newTree = await dgeGithubCreateTree(headCommitDetail.tree.sha, treeEntries);
     const newCommit = await dgeGithubCreateCommit(
-      dgeAdminBuildCommitMessage('Undo previous change'),
-      parentCommit.tree.sha,
-      commitSha
+      dgeAdminBuildCommitMessage(`Undo: ${(commitDetail.message || '').split('\n')[0]}`),
+      newTree.sha,
+      headCommitSha
     );
     await dgeGithubUpdateRef(newCommit.sha);
 
-    if (typeof showToast === 'function') showToast('Undone — files restored to how they were before that change.');
+    const summary = `Undone (${treeEntries.length} file(s) reverted)` +
+      (skippedConflicts.length ? `, ${skippedConflicts.length} skipped — changed again since: ${skippedConflicts.join(', ')}` : '') + '.';
+    if (typeof showToast === 'function') showToast(summary);
     dgeAdminNavigate(dgeAdminCurrentPath);
     dgeAdminRenderRecentActivity();
   } catch (e) {
@@ -541,6 +613,15 @@ window.dgeAdminGoUp = function() {
 // ---------------------------------------------------------------
 let dgeAdminOpenFileSha = null;
 let dgeAdminOpenFilePath = null;
+// Bumped on every dgeAdminOpenFile call and captured locally by each one
+// — if a slower earlier fetch resolves AFTER a faster later one (opening
+// file B right after file A, whose GitHub API response is still
+// in-flight), this stops the stale A response from landing in the
+// textarea after B's correct content is already showing. Reported as
+// "clicked a new file, still saw the old one until I closed and
+// reopened it" — this guard removes that possibility regardless of the
+// exact timing that triggers it.
+let dgeAdminOpenFileRequestId = 0;
 
 window.dgeAdminOpenFile = async function(path, name) {
   if (!dgeIsTextFile(name)) {
@@ -552,6 +633,8 @@ window.dgeAdminOpenFile = async function(path, name) {
   const textarea = document.getElementById('adminEditorTextarea');
   if (!editorBox || !textarea) return;
 
+  const myRequestId = ++dgeAdminOpenFileRequestId;
+
   editorBox.style.display = 'block';
   editorBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
   if (nameEl) nameEl.innerText = 'Loading ' + path + '…';
@@ -559,6 +642,7 @@ window.dgeAdminOpenFile = async function(path, name) {
 
   try {
     const file = await dgeGithubGetFile(path);
+    if (myRequestId !== dgeAdminOpenFileRequestId) return; // a newer open has since started — discard this stale result
     dgeAdminOpenFileSha = file.sha;
     dgeAdminOpenFilePath = path;
     textarea.value = dgeBase64ToUtf8(file.content);
@@ -567,6 +651,7 @@ window.dgeAdminOpenFile = async function(path, name) {
       row.classList.toggle('admin-file-row-open', row.dataset.path === path);
     });
   } catch (e) {
+    if (myRequestId !== dgeAdminOpenFileRequestId) return;
     if (nameEl) nameEl.innerText = 'Failed to load: ' + e.message;
   }
 };
@@ -576,6 +661,7 @@ window.dgeAdminCloseFileEditor = function() {
   if (editorBox) editorBox.style.display = 'none';
   dgeAdminOpenFileSha = null;
   dgeAdminOpenFilePath = null;
+  dgeAdminOpenFileRequestId++; // invalidate any still-in-flight open
   document.querySelectorAll('#adminEditorList .admin-file-row-open').forEach(row => row.classList.remove('admin-file-row-open'));
 };
 
