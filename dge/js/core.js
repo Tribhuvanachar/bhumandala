@@ -399,6 +399,13 @@ document.addEventListener('DOMContentLoaded', () => {
         window.stotraDataEditable = !!(data && data.shlokas);
         window.stotraData = dgeNormalizeGranthaData(data, entry ? entry.title : null);
         initApp();
+        // Must run AFTER initApp() (which sets the is-authorized class
+        // used to gate the content editor) but re-renders if it actually
+        // restores a draft, since initApp() already rendered once with
+        // the unedited data.
+        if (typeof dgeRestoreContentDraftIfAny === 'function' && dgeRestoreContentDraftIfAny()) {
+          if (typeof renderList === 'function') renderList();
+        }
         if (typeof dgeMountContentEditorControls === 'function') dgeMountContentEditorControls();
       })
       .catch(err => {

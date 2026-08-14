@@ -818,6 +818,64 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **Content Editor (`dge/js/content-editor.js` → v1.2): edits now
+  survive a page refresh, and there's a real Undo.** Project lead
+  reported doing an inline edit on PNS, seeing it reflected, then
+  refreshing and finding the old text back — with no success indicator
+  to tell the difference between "staged" and "actually gone nowhere."
+  This was working exactly as designed, not a bug: "Save" on an inline
+  edit (or "Apply" in the structural editor) only ever stages the change
+  in `stotraData` in memory — nothing reaches GitHub until "Preview &
+  Save" is explicitly clicked (same intentional two-step design as
+  Config Editor). But a plain in-memory stage has no way to survive a
+  refresh, and the UI gave no indication that's what "Save" meant, so
+  the loss read as a malfunction. Fixed by addressing the actual gap
+  rather than just re-explaining the existing design:
+  - Every staged edit (inline save or structural Apply) now also mirrors
+    into `localStorage`, keyed per grantha file (`dgeContentDraft:<path>`),
+    and is restored automatically on load — before the first render —
+    so a refresh (or an accidental tab close) no longer discards work.
+    Wired into `core.js`'s data-load path right after `initApp()` (needs
+    to run after the `is-authorized` class is set, but re-renders once
+    if a draft was actually found).
+  - A toast now fires on every save/apply ("...saved in this browser —
+    click Preview & Save to publish"), and the persistent save bar's
+    wording now says plainly that edits are local-only and will survive
+    a reload but aren't visible to anyone else yet — plus, when a draft
+    was restored, how long ago it was last saved.
+  - Added a real "↶ Undo" button — a bounded (20-deep) in-memory stack
+    of full pre-edit snapshots, one per inline save or structural Apply,
+    each poppable independently (not just a blanket "Discard all," which
+    already existed and still does). **Found and fixed a real bug in my
+    own first pass at this**: naively treating "undo stack empty" as
+    "back to published" breaks the moment a draft was restored from
+    localStorage, because the restored draft — not the true published
+    file — is what the stack bottoms out at; undoing back to it would
+    have wrongly cleared the dirty flag and deleted the still-unpublished
+    draft. Fixed by capturing a separate pristine snapshot (the state as
+    fetched from the server, before any draft is applied) once per page
+    load, and having Undo compare against *that* — not stack emptiness —
+    to decide whether dirty/draft state actually clears. Caught by a
+    dedicated real-browser test that reproduced exactly this sequence
+    (edit → reload → edit again → undo twice) before it shipped.
+  - `dgeDiscardContentEdits()` and a successful `dgePushContentEdits()`
+    both now clear the localStorage draft and reset the undo stack, so
+    neither leaves a stale draft that would wrongly reappear on the next
+    load.
+  Verified in a real browser end-to-end: edit → refresh → edit still
+  present in both the reading view and the structural editor (the
+  project lead's exact reported sequence); two edits → undo twice →
+  state matches the original fetched data byte-for-byte and dirty/draft
+  both clear; discard → reload → edit is gone and draft is cleared.
+  **Not built**, and explicitly out of scope for this pass: the "revert
+  by two/five seconds" idea from the request was vague even in the
+  request itself ("not sure what feature it could be") — interpreted as
+  covered by the per-edit Undo stack above rather than building a
+  separate time-scrubber, since that's the concrete mechanism a
+  step-backward "revert" actually needs. If the project lead had
+  something more specific in mind (e.g. a visual history timeline), say
+  so and it can be scoped properly.
+
 - **Published Sumadhva Vijaya sarga 15, 16 — this completes the full
   16-sarga work.** sarga_15: 141 verses (pages 179-207 of
   `SumadhvaVijayaMoola.pdf`). sarga_16: 58 verses (pages 208-219) — the

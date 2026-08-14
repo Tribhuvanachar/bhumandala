@@ -7,10 +7,129 @@
 // and confirms, reusing admin-editor.js's existing dgeAdminBatchCommit
 // (same safe "diff, don't blind-overwrite" discipline as Config Editor).
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['content-editor.js'] = 'v1.1';
+window.DGE_VERSIONS['content-editor.js'] = 'v1.2';
 
 window.dgeContentEditMode = false;
 window.dgeContentEditsDirty = false;
+
+// ------------------------------------------------------- draft autosave
+// "Save" on an inline edit (or "Apply" in the structural editor) only
+// ever staged the change in memory — nothing reaches GitHub until
+// "Preview & Save" is clicked. A page refresh before that point silently
+// discarded the edit with no explanation, which read as "it's not
+// actually saving" even though the in-page reflection right after
+// saving was real. Every staged edit now also mirrors into localStorage,
+// keyed per grantha file, and is restored automatically before the first
+// render on reload — so a refresh (or an accidental tab close) no longer
+// loses work, and the save bar says plainly that this is local-only
+// until published.
+function dgeContentDraftKey() {
+  return 'dgeContentDraft:' + (window.jsonFileName || '');
+}
+
+function dgePersistContentDraft() {
+  try {
+    localStorage.setItem(dgeContentDraftKey(), JSON.stringify({
+      shlokas: stotraData.shlokas,
+      totalShlokas: stotraData.metadata.totalShlokas,
+      savedAt: Date.now()
+    }));
+  } catch (e) {
+    console.warn('[content-editor] Could not persist draft to localStorage:', e);
+  }
+}
+
+function dgeClearContentDraft() {
+  try { localStorage.removeItem(dgeContentDraftKey()); } catch (e) { /* ignore */ }
+}
+
+// Called once from core.js right after stotraData is loaded and
+// normalized, before the first render, so a restored draft is what the
+// admin sees from the start instead of flashing the published version
+// first. Returns true if a draft was actually applied, so the caller
+// knows whether an extra render is needed.
+window.dgeRestoreContentDraftIfAny = function () {
+  if (!dgeContentEditorSupported()) return false;
+  // Captured BEFORE any draft is applied, so the undo stack can tell "no
+  // edits left" (matches what the server actually has right now) apart
+  // from "back to the restored draft, which itself still isn't
+  // published" — those are not the same state when a draft exists.
+  window.dgeContentEditPristineSnapshot = {
+    shlokas: JSON.parse(JSON.stringify(stotraData.shlokas)),
+    totalShlokas: stotraData.metadata.totalShlokas
+  };
+
+  let raw;
+  try { raw = localStorage.getItem(dgeContentDraftKey()); } catch (e) { return false; }
+  if (!raw) return false;
+  let draft;
+  try { draft = JSON.parse(raw); } catch (e) { return false; }
+  if (!draft || !draft.shlokas) return false;
+
+  stotraData.shlokas = draft.shlokas;
+  if (draft.totalShlokas) stotraData.metadata.totalShlokas = draft.totalShlokas;
+  window.dgeContentEditsDirty = true;
+  window.dgeContentDraftRestoredAt = draft.savedAt || null;
+  return true;
+};
+
+function dgeMatchesPristineSnapshot() {
+  const p = window.dgeContentEditPristineSnapshot;
+  if (!p) return false; // unknown baseline -- stay conservative, treat as still dirty
+  return stotraData.metadata.totalShlokas === p.totalShlokas
+    && JSON.stringify(stotraData.shlokas) === JSON.stringify(p.shlokas);
+}
+
+function dgeTimeAgo(ms) {
+  const s = Math.max(1, Math.round((Date.now() - ms) / 1000));
+  if (s < 60) return `${s}s ago`;
+  const m = Math.round(s / 60);
+  if (m < 60) return `${m}m ago`;
+  const h = Math.round(m / 60);
+  if (h < 24) return `${h}h ago`;
+  return `${Math.round(h / 24)}d ago`;
+}
+
+// ------------------------------------------------------------ undo stack
+// A bounded stack of full pre-edit snapshots (in memory only, not
+// persisted across reloads) — each inline save or structural Apply
+// pushes the state as it was just before that change, so "Undo" steps
+// back one edit at a time. An empty stack does NOT by itself mean "back
+// to published" — if a draft was restored from localStorage on load,
+// that draft (not the true published data) is where the stack bottoms
+// out, so dgeMatchesPristineSnapshot() (compared against the snapshot
+// taken before any draft was applied) is what actually decides whether
+// dirty/draft state clears.
+window.dgeContentEditUndoStack = [];
+const DGE_UNDO_STACK_MAX = 20;
+
+function dgePushUndoSnapshot() {
+  window.dgeContentEditUndoStack.push({
+    shlokas: JSON.parse(JSON.stringify(stotraData.shlokas)),
+    totalShlokas: stotraData.metadata.totalShlokas
+  });
+  if (window.dgeContentEditUndoStack.length > DGE_UNDO_STACK_MAX) {
+    window.dgeContentEditUndoStack.shift();
+  }
+}
+
+window.dgeUndoContentEdit = function () {
+  const stack = window.dgeContentEditUndoStack;
+  if (!stack.length) return;
+  const prev = stack.pop();
+  stotraData.shlokas = prev.shlokas;
+  stotraData.metadata.totalShlokas = prev.totalShlokas;
+  if (dgeMatchesPristineSnapshot()) {
+    window.dgeContentEditsDirty = false;
+    window.dgeContentDraftRestoredAt = null;
+    dgeClearContentDraft();
+  } else {
+    window.dgeContentEditsDirty = true;
+    dgePersistContentDraft();
+  }
+  if (typeof renderList === 'function') renderList();
+  dgeRenderContentEditorSaveBar();
+};
 
 // Different granthas store pada (line) breaks differently — PNS and most
 // stotras use literal "<br>" tags (rendered via innerHTML in the reading
@@ -103,8 +222,11 @@ window.dgeSaveInlineEdit = function (id) {
   if (!ta) return;
   const newText = dgeEditableTextToSa(ta.value);
   if (newText !== stotraData.shlokas[id].sa) {
+    dgePushUndoSnapshot();
     stotraData.shlokas[id].sa = newText;
     window.dgeContentEditsDirty = true;
+    dgePersistContentDraft();
+    if (typeof window.showToast === 'function') window.showToast(`Shloka ${id} saved in this browser — click "Preview & Save" below to publish it.`);
   }
   if (typeof renderList === 'function') renderList();
   dgeRenderContentEditorSaveBar();
@@ -207,6 +329,7 @@ window.dgeStructuralDelete = function (idx) {
 };
 
 window.dgeApplyStructuralEdits = function () {
+  dgePushUndoSnapshot();
   const start = dgeStructuralStartNumber();
   const newShlokas = {};
   dgeStructuralRows.forEach((r, i) => {
@@ -220,9 +343,11 @@ window.dgeApplyStructuralEdits = function () {
   stotraData.shlokas = newShlokas;
   stotraData.metadata.totalShlokas = dgeStructuralRows.length;
   window.dgeContentEditsDirty = true;
+  dgePersistContentDraft();
   window.dgeCloseStructuralEditor();
   if (typeof renderList === 'function') renderList();
   dgeRenderContentEditorSaveBar();
+  if (typeof window.showToast === 'function') window.showToast('Structural changes saved in this browser — click "Preview & Save" below to publish.');
 };
 
 // ------------------------------------------------------------------ saving
@@ -238,15 +363,22 @@ function dgeRenderContentEditorSaveBar() {
     bar.className = 'content-editor-save-bar';
     document.body.appendChild(bar);
   }
+  const undoCount = (window.dgeContentEditUndoStack || []).length;
+  const restoredNote = window.dgeContentDraftRestoredAt
+    ? ` Restored from this browser's storage, last saved ${dgeTimeAgo(window.dgeContentDraftRestoredAt)}.`
+    : '';
   bar.innerHTML = `
-    <span>You have unsaved shloka edits.</span>
-    <button class="btn-sm" onclick="window.dgeDiscardContentEdits()">Discard</button>
+    <span>Edits are saved in this browser only, not yet published — nobody else sees them, but they'll survive a reload.${restoredNote}</span>
+    <button class="btn-sm" ${undoCount ? '' : 'disabled'} onclick="window.dgeUndoContentEdit()" title="${undoCount ? `Undo the last edit (${undoCount} more after that)` : 'No edits to undo yet'}">↶ Undo</button>
+    <button class="btn-sm" onclick="window.dgeDiscardContentEdits()">Discard all</button>
     <button class="btn-sm btn-primary" onclick="window.dgeOpenSavePreview()">Preview &amp; Save…</button>
   `;
 }
 
 window.dgeDiscardContentEdits = function () {
   if (!confirm('Discard all unsaved shloka edits and reload the original data?')) return;
+  dgeClearContentDraft();
+  window.dgeContentEditUndoStack = [];
   window.location.reload();
 };
 
@@ -323,6 +455,9 @@ window.dgePushContentEdits = async function () {
       alert(`Saved. Pushed ${result.uploaded} file(s) in one commit.`);
     }
     window.dgeContentEditsDirty = false;
+    dgeClearContentDraft();
+    window.dgeContentEditUndoStack = [];
+    window.dgeContentDraftRestoredAt = null;
     document.getElementById('contentSaveModal').style.display = 'none';
     dgeRenderContentEditorSaveBar();
   } catch (e) {
