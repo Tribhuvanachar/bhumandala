@@ -102,6 +102,7 @@ def main():
     print(f"Building matching set from {len(ref_paths)} reference clip(s): "
           + ", ".join(os.path.basename(p) for p in ref_paths))
     matching = knn_vc.get_matching_set(ref_paths)
+    print(f"query shape: {tuple(query.shape)}  matching shape: {tuple(matching.shape)}")
     print(f"Converting (topk={a.topk})… this can take a few minutes on CPU")
     out = knn_vc.match(query, matching, topk=a.topk)
     torchaudio.save(a.out, out[None].cpu(), 16000)
