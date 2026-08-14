@@ -218,7 +218,69 @@ complete record, not just a live queue.
   1. *Auto-detect the starting number instead of always defaulting to 1 or requiring manual entry.* The project lead's exact ask: "why should shloka number always be hardcoded to fifteen... you should be looking at the shloka numbers found in that particular page... or you can optionally ask where should the number begin from, default is one." Added `U().detectVerseNumber(text)` in `utils.js` — scans the first merged shloka's own OCR'd text for the LAST danda-delimited marker (॥, | or ‖ on both sides) whose inner content is digits-only in one script, converts Devanagari/Kannada/Telugu/Tamil/Malayalam/Bengali/ASCII digits to a plain integer, and rejects compound markers like "१.४४" (contains a non-digit '.') rather than guessing at a chapter.verse split. Wired into `runProofread()`'s completion: if a marker is found, the "Starting shloka/unit number" field is auto-filled with a visible hint explaining where the number came from; a value the admin already typed is never silently overwritten (tracked via `lastAutoFilledStartingNumber`, cleared whenever a different file loads or its proofread data is cleared). Verified with real Devanagari/Kannada/ASCII text and a battery of tricky cases (no marker, compound rejected, last-of-multiple-markers, user-override survives) in a real browser — all correct.
   2. *Always-visible file status: pages loaded/OCR'd/proofread/pending, sarga/target, without having to hunt through tabs or re-select the file.* The project lead's exact ask: "how do I know how many pages... are loaded, how many proofread, how many OCRed... it must all be very clear on top of the convert tool page itself... if I again pick up the same file, it should show me that sarga name, shloka numbers which are loaded, etc." Added `#fileStatusBar` — same "outside every tab, never hidden" placement as the error box (so status is visible no matter which tab is open) — showing the filename, `OCR: X/Y page(s) — N pending`, `Proofread: X/Y chunk(s) — N pending — M shloka(s), numbered A–B` (upgrading to the actually-built schema's real numbered range once "Build Schema Preview" has run, since that reflects any starting-number offset), and the chosen target grantha path. Wired into `renderFileStatusBar()`, called after every OCR page, every Proofread chunk, schema build, push, and — critically for the "re-picking the same file" case — at the end of `onFileSelected`/`resumeFromKnownFile`/`handleUrlImport`. Found and fixed a real bug of my own while building this: `currentMappedJson` (the built schema) was never reset when switching files or clearing progress, which would have shown a previous file's stale numbered range in the new status bar — added the reset alongside every existing `finalJson = null` site. Verified in a real browser: hidden with no file loaded, populates correctly on resume with the exact pending counts, updates live through a full OCR→Proofread→Build flow, and correctly resets to a clean state when switching to a different file (no leftover numbers from the previous one).
 
-- **Logged for "next round" (explicitly not being built now — the project lead's own framing): a Grantha content editor.** View/edit/save any already-pushed grantha's shlokas (and commentaries, sutras, Vedic mantras — anywhere the same shape applies) directly, without going through Convert's OCR/Proofread pipeline again. Requested shape: view/edit buttons per grantha, inline editing with a save button; OR the entire shloka set loaded into one big text box for bulk editing; pagination for anything with more than ~10 units, with an adjustable per-page count; and/or a toggle to edit the whole set at once instead of paginated. The project lead's framing: "think in ways that could make content editor's life easy as well as safe for the content" — safety matters here specifically because `github.js`'s push is a straight overwrite (confirmed earlier this session), so an editor that can push back to GitHub needs the same "build a preview, let a human check/edit it, only push what's confirmed" discipline Convert's schema-map step already has, not a live-autosave-on-every-keystroke design. No code written for this — flagged here so it isn't lost, to be scoped properly when it's actually greenlit.
+- **RESOLVED (v1 shipped) — Grantha content editor**, greenlit and built this
+  session. Project lead's exact ask, resolved via `AskUserQuestion`: "Both
+  — inline for quick text fixes, popup for structural changes." Built as
+  `dge/js/content-editor.js`, wired into the main reading page (not
+  Convert):
+  - An `✏️ Edit` toggle appears in the grantha header, gated on
+    `is-authorized` (admin) OR `is_superadmin` (project lead's exact
+    words: "admin, super admin" — both tiers, not superadmin-only like
+    Convert's own gate) AND the grantha actually being safe to edit (see
+    below). Toggling it on shows a pencil icon per shloka.
+  - **Inline edit**: tapping the pencil turns that shloka's text into a
+    textarea in place with Save/Cancel, matching the "editable there
+    itself" half of the ask.
+  - **Structural edit**: a `🔀 Reorder / Insert / Delete` button opens a
+    popup modal — one row per shloka with move-up/down, insert-after,
+    delete controls, renumbering sequentially from the grantha's own
+    existing starting number on Apply (mirrors Convert's schema editor's
+    row model, matching the "similar to our previous schema editing"
+    ask; drag-and-drop specifically not built — up/down arrows achieve
+    the identical reordering outcome and are far more reliable to test).
+  - **Safety**: neither edit mode touches GitHub until a floating "Preview
+    & Save…" bar is explicitly tapped, showing the exact file path and
+    new shloka count before pushing — reuses `admin-editor.js`'s existing
+    `dgeAdminBatchCommit` (the same safe diff-and-skip-unchanged-files
+    commit path Config Editor already uses), so no new GitHub
+    infrastructure was needed at all.
+  - **Real, deliberate scope boundary, not an oversight**: only grantha
+    files whose source `data.json` is the plain legacy `{metadata,
+    shlokas:{n:{...}}}` shape are editable — confirmed via a new
+    `window.stotraDataEditable` flag set in `core.js` from the RAW
+    fetched JSON, before `dgeNormalizeGranthaData()` overwrites it.
+    Granthas that need that normalization to even render (`items:[...]`
+    schemas — Vedic texts, itihasa_purana_text's per-chapter nesting)
+    don't get an Edit button at all, since saving them back would need
+    real denormalization logic that doesn't exist yet and risks
+    corrupting the source file's actual on-disk shape. Sumadhva Vijaya
+    (all of it) and most kavyas/stotras ARE covered by this.
+  - Bumped `index.html`'s `dge-html-version` meta tag + `core.js`'s
+    `DGE_EXPECTED_HTML_VERSION` together to `4.61.1` (the stale-shell
+    detector both must agree on), plus `render.js`/`core.js`/the new
+    file's own `?v=` cache-bust tags.
+  - **Verified end-to-end in a real browser** against the just-published
+    live `sarga_10` data (56 real shlokas): Edit toggle appears for an
+    authorized session and not otherwise; inline edit stages a change and
+    surfaces the save bar; structural modal opens with all 56 rows,
+    insert/move-down both work and the row count updates correctly;
+    Apply renumbers and updates the live shloka count; the save-preview
+    modal shows the correct real target path
+    (`dge/data/kavya/sumadhva_vijaya/sarga_10/data.json`) and shloka
+    count. Deliberately did NOT click through to an actual push during
+    this test (no real edit was intended) — the commit path itself is
+    the same already-proven `dgeAdminBatchCommit` Config Editor uses, not
+    new/unverified code.
+  - **Not built / real remaining gaps, for whenever this comes up again**:
+    denormalization for `items:[...]`-schema granthas (would unlock
+    editing for a large chunk of the corpus currently excluded); editing
+    the `commentaries` sub-object itself (currently only `sa` is
+    editable inline; the structural editor preserves whatever
+    commentaries a row already had but doesn't let you change them);
+    pagination for very large shloka sets in the structural modal (an
+    100+ verse sarga renders every row at once — functional but a long
+    scroll, no perf problem found in testing but not stress-tested
+    beyond ~56 rows either).
 
 - **RESOLVED — taxonomy decision: `guru_charitre` category is retired;
   all "Vijaya" hagiography/mahakavya works fold into `kavya/` alongside

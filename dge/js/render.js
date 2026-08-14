@@ -275,7 +275,8 @@ function renderList() {
       ${cardActionsHtml}
       <div class="shloka-main-row">
         <div class="shloka-num">${i}</div>
-        <div class="shloka-text" onclick="if(typeof playShloka==='function') playShloka(${i})">${mulaHtml}</div>
+        <div class="shloka-text" onclick="if(!window.dgeContentEditMode && typeof playShloka==='function') playShloka(${i})">${mulaHtml}</div>
+        ${window.dgeContentEditMode ? `<button class="btn-icon" title="Edit this shloka's text" onclick="event.stopPropagation(); window.dgeInlineEditShloka(${i})">✏️</button>` : ''}
         <button class="btn-icon copy-shloka-btn" title="Copy shloka text" onclick="event.stopPropagation(); if(typeof copyShlokaText==='function') copyShlokaText(${i})">📋</button>
       </div>
       ${extraFieldsHtml}

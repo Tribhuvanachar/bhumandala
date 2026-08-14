@@ -107,7 +107,7 @@ window.addEventListener('pagehide', function () {});
 // than leaving it to be rediscovered each time, the HTML now stamps its
 // own version and the JS checks it matches. Bump BOTH on any release that
 // changes index.html's structure.
-window.DGE_EXPECTED_HTML_VERSION = '4.60.6';
+window.DGE_EXPECTED_HTML_VERSION = '4.61.1';
 document.addEventListener('DOMContentLoaded', () => {
   const meta = document.querySelector('meta[name="dge-html-version"]');
   const actual = meta ? meta.getAttribute('content') : '(none)';
@@ -389,8 +389,17 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log(`[Data] First item keys: ${JSON.stringify(Object.keys(first))}, ` +
             `commentaries type: ${Array.isArray(first.commentaries) ? 'ARRAY (empty placeholder — not readable as commentaries)' : typeof first.commentaries}`);
         }
+        // Only the plain {metadata, shlokas:{n:{...}}} shape round-trips
+        // losslessly back to its own file on disk — anything that needed
+        // dgeNormalizeGranthaData to flatten it (itihasa_purana_text's
+        // per-chapter nesting, vedic_text's items array) can't be saved
+        // back through content-editor.js without real denormalization
+        // logic that doesn't exist yet. Recorded before normalization
+        // overwrites `data`, so the editor can gate on it honestly.
+        window.stotraDataEditable = !!(data && data.shlokas);
         window.stotraData = dgeNormalizeGranthaData(data, entry ? entry.title : null);
         initApp();
+        if (typeof dgeMountContentEditorControls === 'function') dgeMountContentEditorControls();
       })
       .catch(err => {
         console.error("DGE Fetch Error:", err);
