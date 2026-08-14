@@ -818,6 +818,49 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **Published Sumadhva Vijaya sarga 13, 14 for real (continuing straight
+  on from 10-12 above, pages 153-200 of the source PDF), and found a
+  real, systemic OCR/Proofread pipeline bug in the process, not just a
+  one-off boundary glitch.** sarga_13: 69 verses. sarga_14: 55 verses.
+  Cross-checked against the source's own running-total colophon notes
+  (`683+69=752`, `752+55=807`) — consistent with sarga_12's own ending
+  total, same double-check method as before.
+  **The real bug, worth remembering for any future OCR/Proofread run
+  that resumes mid-document:** when a proofread chunk's first page
+  starts mid-verse (the previous page's OCR wasn't fed into the SAME
+  Gemini call), Gemini has no way to know it's continuing an
+  in-progress verse, and silently starts renumbering from what it sees
+  as its own "verse 1"-equivalent — except it isn't really starting a
+  new verse, it's absorbing the second half of the cut-off one into a
+  new mislabeled entry. The effect cascades: EVERY subsequent verse in
+  that run comes out shifted by half a verse (each entry becomes [tail
+  of true verse N] + [head of true verse N+1], carrying verse N's own
+  number) for as long as the run continues, not just at the seam
+  itself. Caught by actually comparing verse TEXT across the old
+  (pre-resume) and new datasets at the resume point — comparing only
+  verse COUNTS or numbering-sequence wouldn't have caught it, since the
+  shifted numbering was still perfectly sequential (1, 2, 3, ...), just
+  built from the wrong text. Same root issue recurred, in miniature, at
+  ordinary chunk-to-chunk boundaries within the corrected run too (2 of
+  12 four-page chunk boundaries happened to land mid-verse) — fixed by
+  re-proofreading each affected span as one larger combined call
+  spanning both original chunks rather than a narrow patch window (a
+  narrow patch just relocates the same problem to the patch's own
+  edges, confirmed the hard way — first attempt at a 4-page patch
+  window created two NEW seam issues at its own boundaries against
+  still-unpatched neighbouring data). Final systematic check: scan
+  every shloka's `sa` field for one that doesn't end in a proper
+  `॥ N ॥` verse-close marker (allowing for a small number of expected
+  false positives from compound words that happen to contain "सर्ग" as
+  a substring, e.g. निसर्गात्/संसर्ग-लोलैः, not real chapter markers) —
+  confirms zero remaining unresolved splits in the final 152-200 range.
+  **Stops at sarga 15, verse 109 (page 200, the last page of this
+  batch) — NOT published**, no colophon reached yet within this range,
+  so sarga 15's real length is still unknown; continuing needs OCR
+  starting at page 201. 21 verses across sarga_13/14 carry a
+  `reviewNote` (mostly the boundary-fix verses themselves, self-flagged
+  by Gemini during the targeted re-proofreads) for the same
+  spot-check-via-admin-panel workflow as sarga 10-12.
 - **Published Sumadhva Vijaya sarga 10, 11, 12 for real (previously only
   1-9 were live).** Source: real Gemini-proofread OCR output from this
   session's earlier live API test (pages 109-152 of the source PDF,
