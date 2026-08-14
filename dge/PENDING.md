@@ -800,8 +800,56 @@ complete record, not just a live queue.
   their reference clips + a source recitation into, ready for them to
   `pip install torch torchaudio soundfile numpy` (torch itself likely
   already present from the Audio Admin install) and run `clone_knn_vc.py`.
-  Not yet run for real anywhere — next step once the project lead is
-  back in their Codespace.
+  **Update:** Track B (`clone_knn_vc.py`) got a real end-to-end result
+  after three genuine bugs found and fixed via live Codespace testing
+  (all pushed): (1) an invisible zero-width space in browser-uploaded
+  reference filenames that never matched anything typed by hand -- fixed
+  by having `--ref` accept a folder and glob it internally instead of
+  requiring typed filenames; (2) `get_matching_set()` throwing a
+  tensor-shape RuntimeError when given multiple reference clips of
+  different lengths -- worked around by ffmpeg-concatenating all `--ref`
+  clips into one file before handing them to kNN-VC; (3) the real root
+  cause of a `(2, 999, 1024)` malformed feature shape -- kNN-VC's
+  `get_features()` doesn't downmix stereo input itself, so a stereo
+  source/reference clip's 2 channels were being treated as 2 separate
+  batch items; fixed by always downmixing both source and reference
+  audio to mono/16kHz via ffmpeg before either ever reaches the model.
+  **Verdict on the actual output** (project lead's own listening test):
+  technically ran end-to-end, but kNN-VC is a speech-to-speech frame
+  matcher with no pitch/F0 modeling -- applied to melodic chanting
+  (Sumadhva Vijaya-style recitation), it flattened the raga/svara
+  movement and introduced a rough, "unwell"-sounding quality (known
+  artifact of kNN averaging). **Correctly diagnosed as the wrong tool
+  for melodic content, not another bug to chase** -- kNN-VC is
+  fundamentally built for spoken dialogue, not song. Project lead redirected
+  based on this to three concrete next tasks (in progress):
+  1. **Plain-speech TTS test (not chanting)** in the project lead's own
+     voice, English + Sanskrit, since a from-scratch TTS generation has
+     no original melody to lose (unlike kNN-VC's audio-to-audio
+     conversion) -- should hold up much better for straight narration on
+     the DGE site. Built `tools/voice_lab/tts_clone.py` (Coqui XTTS-v2,
+     zero-shot, reuses the same `--ref`-folder pattern as
+     `clone_knn_vc.py`). XTTS-v2 has no native Sanskrit checkpoint (no
+     mainstream open TTS toolkit does) -- testing Sanskrit text through
+     the `hi` (Hindi) language mode as the closest practical
+     approximation, an experiment to judge by ear, not a validated
+     solution. Noted CPML license (non-commercial + attribution) in the
+     script docstring. Not yet run for real -- needs `pip install TTS`
+     (~1.8GB model download) in the Codespace.
+  2. **Zero-background separation** ("only pure human shloka rendering,
+     no vina/tabla") for the Audio Admin splitting tool -- only
+     `htdemucs` (the default) has been tried so far, and it leaves real,
+     audible leakage (confirmed by the project lead listening to
+     `voice_only/chunk_12.wav` directly and still hearing veena). Built
+     `tools/audio_admin/compare_separation.py` to export the SAME
+     region through `htdemucs`, `htdemucs_ft`, and `mdx_extra` side by
+     side so the cleanest can be picked by ear. Not yet run.
+  3. **Reliable shloka splitting on clips with a real ~1.5s gap** --
+     explicitly deferred until task 2 lands, since the earlier
+     mis-detected 1.5s gap (shlokas clubbed despite an audible pause)
+     was actually caused by separation leakage keeping the "silent" gap
+     non-silent in the voice track, not a detector/threshold problem.
+     Should mostly resolve once a cleaner separation model is picked.
 - **Audio Admin (`tools/audio_admin/`) real-world tuning in progress —
   three real defects found across two rounds of actual listening, one
   now understood to be a separation-quality limit rather than a
