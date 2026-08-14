@@ -14,7 +14,7 @@
 // or the in-app note in Settings for details.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['admin-editor.js'] = 'v1.17 (Verifies uploaded files actually landed on GitHub after commit, and warns on truncated tree listings — a file failing to update while everything reported success went unnoticed once)';
+window.DGE_VERSIONS['admin-editor.js'] = 'v1.18 (Content sanity checks before any upload/save commits — catches wrong-folder content, duplicate chapters, and grantha data pushed without a library.json entry)';
 
 const GH_API = 'https://api.github.com';
 let dgeAdminCurrentPath = '';
@@ -596,6 +596,12 @@ window.dgeAdminSaveFile = async function() {
   if (!dgeAdminOpenFilePath) return;
   const textarea = document.getElementById('adminEditorTextarea');
   if (!textarea) return;
+
+  const warnings = await dgeAdminValidateGranthaFileEntries([
+    { path: dgeAdminOpenFilePath, bytes: new TextEncoder().encode(textarea.value) }
+  ]);
+  if (warnings.length && !confirm(`This save looks off:\n\n${warnings.join('\n\n')}\n\nSave anyway?`)) return;
+
   const rawMsg = prompt('Commit message:', `Update ${dgeAdminOpenFilePath}`);
   if (rawMsg === null) return;
   const msg = dgeAdminBuildCommitMessage(rawMsg);
@@ -614,6 +620,105 @@ window.dgeAdminSaveFile = async function() {
 };
 
 // ---------------------------------------------------------------
+// Content sanity checks — run on any batch of files about to be pushed
+// through this admin tool, before the commit happens. This tool is a
+// raw file browser: it diffs bytes and pushes them with zero awareness
+// of what a grantha data.json is supposed to look like. Fine for
+// arbitrary file management, but it means a content mistake — the wrong
+// file in the wrong sarga folder, a whole chapter duplicated under two
+// paths, content pushed to a path nobody registered in library.json so
+// it's unreachable — previously went through with no warning at all.
+// Found exactly this happening to a real upload: "Raghavendra Vijaya"
+// sarga files systematically off by one (folder sarga_1 held sarga 2's
+// content, ... folder sarga_9 held sarga 10's content), sarga 10
+// duplicated under both sarga_9 and sarga_10, no true sarga_1 anywhere
+// in the batch, and the whole grantha never added to library.json so it
+// couldn't show up anywhere regardless. These checks don't block the
+// push — this tool has to stay usable for arbitrary non-grantha files
+// too — but they surface anything that looks wrong before it goes live
+// instead of after, either as a confirm() the admin can override or (for
+// the zip flow, which already has its own preview step) as a warning
+// banner alongside the file list.
+async function dgeAdminValidateGranthaFileEntries(fileEntries) {
+  const warnings = [];
+  const decoder = new TextDecoder('utf-8');
+  const parsed = []; // { path, data, error }
+
+  fileEntries
+    .filter(f => /\/data\.json$/.test(f.path))
+    .forEach(f => {
+      try {
+        parsed.push({ path: f.path, data: JSON.parse(decoder.decode(f.bytes)), error: null });
+      } catch (e) {
+        parsed.push({ path: f.path, data: null, error: e.message });
+      }
+    });
+  if (!parsed.length) return warnings;
+
+  parsed.forEach(({ path, error }) => {
+    if (error) warnings.push(`"${path}" is not valid JSON (${error}) — it will still be uploaded as-is.`);
+  });
+
+  // Every existing grantha folder in the library uses
+  // lowercase_with_underscores. A space or uppercase letter usually
+  // means the folder was named straight from a delivery zip rather than
+  // following the site's own convention, which URL routing and slug
+  // lookups elsewhere assume holds.
+  const badSegs = new Set();
+  parsed.forEach(({ path }) => {
+    path.replace(/^data\//, '').split('/').slice(0, -1).forEach(seg => {
+      if (/[ A-Z]/.test(seg)) badSegs.add(seg);
+    });
+  });
+  badSegs.forEach(seg => {
+    warnings.push(`Folder name "${seg}" has a space or uppercase letter — every other grantha folder here uses lowercase_with_underscores. Consider renaming before this goes live.`);
+  });
+
+  // Self-consistency of the legacy {metadata, shlokas:{...}} shape this
+  // site's grantha pages actually understand.
+  parsed.forEach(({ path, data, error }) => {
+    if (error || !data || !data.metadata || !data.shlokas) return;
+    const folderName = path.split('/').slice(-2, -1)[0];
+    const code = data.metadata.stotraCode;
+    if (code && code !== folderName) {
+      warnings.push(`"${path}": folder is named "${folderName}" but its own metadata.stotraCode says "${code}" — this file may hold the wrong chapter/sarga's content.`);
+    }
+    const declared = data.metadata.totalShlokas;
+    const actual = Object.keys(data.shlokas).length;
+    if (typeof declared === 'number' && declared !== actual) {
+      warnings.push(`"${path}": metadata.totalShlokas says ${declared} but the file actually has ${actual} shloka(s).`);
+    }
+  });
+
+  // Byte-identical shloka content under two different paths in the same
+  // batch almost always means a misplaced/duplicated file, not two
+  // genuinely identical chapters.
+  const bySignature = new Map();
+  parsed.forEach(({ path, data, error }) => {
+    if (error || !data || !data.shlokas) return;
+    const sig = JSON.stringify(data.shlokas);
+    if (!bySignature.has(sig)) bySignature.set(sig, []);
+    bySignature.get(sig).push(path);
+  });
+  bySignature.forEach(paths => {
+    if (paths.length > 1) warnings.push(`Identical shloka content appears under ${paths.length} different paths — likely a misplaced or duplicated file: ${paths.join(', ')}`);
+  });
+
+  // Not registered in library.json yet -- the file will sit on GitHub
+  // but be unreachable: no Library-browser entry and no URL route to it.
+  try {
+    const library = await (window.dgeLibraryCatalogPromise || Promise.resolve(null));
+    const known = new Set((library && library.granthas || []).map(g => g.path));
+    const unregistered = parsed.filter(({ path, data, error }) => !error && data && data.metadata && data.shlokas && !known.has('dge/' + path));
+    if (unregistered.length) {
+      warnings.push(`${unregistered.length} file(s) here look like grantha data but have no entry in data/library.json yet — they will NOT appear in the Library browser or be reachable by a reading-page URL until an entry is added for each one.`);
+    }
+  } catch (e) { /* best effort only */ }
+
+  return warnings;
+}
+
+// ---------------------------------------------------------------
 // Upload (single or multiple) — via file picker or OS drag-drop onto
 // the file list background
 // ---------------------------------------------------------------
@@ -628,6 +733,11 @@ window.dgeAdminUploadFiles = async function(fileList) {
       const bytes = await dgeReadFileAsUint8Array(file);
       const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + file.name;
       fileEntries.push({ path: targetPath, bytes });
+    }
+    const warnings = await dgeAdminValidateGranthaFileEntries(fileEntries);
+    if (warnings.length && !confirm(`This upload looks off:\n\n${warnings.join('\n\n')}\n\nUpload anyway?`)) {
+      dgeAdminHideWorking();
+      return;
     }
     const label = fileEntries.length === 1 ? `Upload ${fileEntries[0].path.split('/').pop()}` : `Upload ${fileEntries.length} file(s)`;
     const result = await dgeAdminBatchCommit(fileEntries, dgeAdminBuildCommitMessage(label));
@@ -671,6 +781,11 @@ window.dgeAdminUploadFolder = async function(fileList) {
       const bytes = await dgeReadFileAsUint8Array(file);
       const targetPath = (dgeAdminCurrentPath ? dgeAdminCurrentPath + '/' : '') + relPath;
       fileEntries.push({ path: targetPath, bytes });
+    }
+    const warnings = await dgeAdminValidateGranthaFileEntries(fileEntries);
+    if (warnings.length && !confirm(`This upload looks off:\n\n${warnings.join('\n\n')}\n\nUpload anyway?`)) {
+      dgeAdminHideWorking();
+      return;
     }
     const result = await dgeAdminBatchCommit(
       fileEntries,
@@ -767,7 +882,8 @@ window.dgeAdminUploadZip = async function(file) {
       }
     }
 
-    dgeAdminPendingZip = { fileEntries, emptyDirCount, sourceName: file.name };
+    const warnings = await dgeAdminValidateGranthaFileEntries(fileEntries);
+    dgeAdminPendingZip = { fileEntries, emptyDirCount, sourceName: file.name, warnings };
     dgeAdminRenderZipPreview();
   } catch (e) {
     if (typeof showToast === 'function') showToast('Reading zip failed: ' + e.message);
@@ -779,17 +895,24 @@ window.dgeAdminUploadZip = async function(file) {
 function dgeAdminRenderZipPreview() {
   const panel = document.getElementById('adminZipPreview');
   if (!panel || !dgeAdminPendingZip) return;
-  const { fileEntries, emptyDirCount, sourceName } = dgeAdminPendingZip;
+  const { fileEntries, emptyDirCount, sourceName, warnings } = dgeAdminPendingZip;
 
   const totalBytes = fileEntries.reduce((sum, f) => sum + (f.bytes ? f.bytes.length : 0), 0);
   const VISIBLE_LIMIT = 50;
   const shown = fileEntries.slice(0, VISIBLE_LIMIT);
   const remaining = fileEntries.length - shown.length;
 
+  const warningsHtml = (warnings && warnings.length) ? `
+    <div style="font-size:12px; margin-bottom:10px; padding:8px; background:#fff3cd; border:1px solid #e0b846; border-radius:6px; color:#5c4500;">
+      <div style="font-weight:800; margin-bottom:4px;">⚠️ ${warnings.length} thing(s) look off — review before confirming:</div>
+      ${warnings.map(w => `<div style="margin-top:4px;">• ${w}</div>`).join('')}
+    </div>` : '';
+
   panel.style.display = 'block';
   panel.innerHTML = `
     <div style="font-weight:800; font-size:13px; margin-bottom:6px;">📦 About to upload from "${sourceName}"</div>
     <div style="font-size:12px; margin-bottom:8px;">${fileEntries.length} file(s), ${dgeFormatBytes(totalBytes)} total${emptyDirCount ? `, including ${emptyDirCount} empty folder(s) via .gitkeep` : ''}</div>
+    ${warningsHtml}
     <div style="max-height:180px; overflow-y:auto; font-size:11px; font-family:monospace; background:var(--bg-main); border-radius:6px; padding:8px; margin-bottom:10px;">
       ${shown.map(f => `<div>${f.path}</div>`).join('')}
       ${remaining > 0 ? `<div style="color:var(--muted-text); margin-top:4px;">…and ${remaining} more</div>` : ''}

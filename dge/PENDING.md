@@ -818,6 +818,77 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **UNRESOLVED, needs project lead's decision — "Raghavendra Vijaya"
+  kavya data (pushed via the admin Zip Upload tool as `rv.zip`, commit
+  `197a524`) is NOT registered in `data/library.json`, and separately,
+  its actual content has a systemic off-by-one/duplicate problem.** Two
+  independent findings, discovered while investigating "why doesn't it
+  show up in the library":
+  1. **Why it's invisible**: the admin Zip Upload tool is a raw file
+     browser — it diffs and pushes bytes with zero awareness of
+     `library.json`. Uploading a grantha's data.json files there was
+     never enough by itself; an entry also has to be added to
+     `data/library.json` (same as every other grantha) before the
+     Library browser or a reading-page URL can reach it. Nothing was
+     broken here — this is how the tool has always worked — but see the
+     new validation checks below, which now say so upfront.
+  2. **A real content problem, found while checking whether it was safe
+     to just add the library.json entries**: every one of the 10
+     uploaded files' own embedded `metadata.stotraCode` doesn't match
+     the folder it's sitting in — folder `sarga_1` actually contains
+     sarga *2*'s verses (title "सर्गः 2", stotraCode `sarga_2`), folder
+     `sarga_2` contains sarga 3's, ... folder `sarga_8` contains sarga
+     9's. Folders `sarga_9` and `sarga_10` are byte-identical
+     duplicates of each other (both really sarga 10's content). **True
+     sarga_1 content is not present anywhere in this 10-file batch at
+     all.** This isn't a guess — confirmed by diffing every file's
+     `metadata.stotraCode`/title against its folder name and comparing
+     shloka content byte-for-byte across siblings. Did not touch this
+     data or register anything in library.json, since doing either
+     without knowing whether the real sarga_1 exists elsewhere (or
+     needs to be sourced/OCR'd fresh) would either publish wrong content
+     under wrong labels or delete a duplicate that might not actually be
+     one. Needs the project lead to say: is the real sarga_1 available
+     to re-upload, and should the existing 9 files just be renamed down
+     by one (sarga_1←old_2, ..., sarga_9←old_10) with the sarga_10
+     duplicate dropped, or was the intent something else entirely (e.g.
+     zip built from the wrong source range)?
+  Also worth fixing regardless of the above: the folder itself is named
+  `"Raghavendra Vijaya"` (space + capital letters) — every other kavya
+  folder in the library (`sumadhva_vijaya`, etc.) uses
+  lowercase_with_underscores. Should be renamed to `raghavendra_vijaya`
+  for consistency once the content itself is sorted out (the new zip
+  uploader validation below already flags this).
+
+- **Added real content-sanity checks to every admin write path**
+  (`dge/js/admin-editor.js` → v1.18), directly prompted by the
+  Raghavendra Vijaya discovery above — project lead asked "can we have
+  checks when something is added/changed in data directly from admin
+  page?" New `dgeAdminValidateGranthaFileEntries(fileEntries)` scans any
+  `.../data.json` files in a pending upload/save and warns on exactly
+  the failure modes just found for real: (a) a file's own
+  `metadata.stotraCode` not matching the folder it's being placed in,
+  (b) `metadata.totalShlokas` not matching the actual shloka count, (c)
+  byte-identical shloka content appearing under two different paths in
+  the same batch (duplicate/misplaced file), (d) a folder name with a
+  space or uppercase letter (breaks from the site's
+  lowercase_with_underscores convention), (e) grantha-shaped data with
+  no matching entry in `data/library.json` yet — pushed but unreachable.
+  Wired into all four write paths that exist: the zip uploader (shown as
+  a non-blocking warning banner in its existing preview-before-confirm
+  panel — that flow already had a checkpoint, so warnings just render
+  there rather than adding a second confirmation), and the single-file
+  upload, folder upload, and file-editor save paths (none of which had
+  any preview step before, so a `confirm()` with the warning text now
+  gates those instead — still overridable, this tool has to stay usable
+  for arbitrary non-grantha files too). Verified for real in a browser:
+  ran the validator against the actual 10 Raghavendra Vijaya files
+  fetched from disk — it reproduced all 12 real problems (9 stotraCode
+  mismatches, 1 duplicate pair, 1 missing-from-library.json count, 1
+  naming-convention flag) with zero false positives against a known-good
+  already-published file (sumadhva_vijaya sarga_9, clean run, zero
+  warnings).
+
 - **Content Editor (`dge/js/content-editor.js` → v1.2): edits now
   survive a page refresh, and there's a real Undo.** Project lead
   reported doing an inline edit on PNS, seeing it reflected, then
