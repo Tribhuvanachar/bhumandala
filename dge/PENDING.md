@@ -756,6 +756,63 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **Published Sumadhva Vijaya sarga 10, 11, 12 for real (previously only
+  1-9 were live).** Source: real Gemini-proofread OCR output from this
+  session's earlier live API test (pages 109-152 of the source PDF,
+  `SumadhvaVijayaMoola.pdf`), recovered from this session's own
+  scratchpad rather than re-run. Verse counts cross-checked two ways —
+  sequential 1..N numbering within each sarga, AND the source text's own
+  running-total colophon annotations (496+56=552 after sarga 10,
+  629+54=683 after sarga 12) landed exactly consistent with the computed
+  552/629/683 totals, a real independent confirmation this is chaptered
+  correctly, not just internally self-consistent.
+  - **sarga_10**: 56 verses (1-56). **sarga_11**: 77 verses (1-77).
+    **sarga_12**: 54 verses (1-54). All three have `metadata.colophon`
+    populated (matching sarga_1/2/8's convention; sarga_9 itself lacks
+    one, pre-existing gap, not touched).
+  - **Stops at sarga 13, verse 4 (incomplete, page 152 cuts off
+    mid-verse) — NOT published.** That's the real edge of what the
+    earlier OCR/Proofread run covered; continuing past sarga 12 needs a
+    fresh OCR/Proofread run starting at page 153.
+  - **Flagged for the project lead's own review pass** (each carries a
+    `reviewNote` field verbatim from Gemini's own proofreading, visible
+    per-verse so discrepancies are easy to find): 7 in sarga_10, 9 in
+    sarga_11, 2 in sarga_12 — mostly confidently-fixed OCR typos/
+    duplicate-line artifacts with the fix explained inline, not
+    necessarily errors, but worth a human glance per the project lead's
+    own stated plan to spot-check via the Convert tool's admin panel.
+  - **Two Sarvatobhadra/Chakrabandha citra-kavya (pattern-poetry) verses**
+    (sarga_10 verses 48 and 54) have real explanatory Sanskrit prose
+    captured in a `note` field, but their source pages (122, 123) also
+    show a visual bandha/grid diagram that isn't captured in plain text
+    at all — a genuine content gap for this verse type specifically, not
+    fixable from text alone.
+  - `library.json`'s pre-existing `sarga_10` stub (`populated: false`,
+    no title) was fixed in place; `sarga_11`/`sarga_12` entries added
+    following the sarga_1-9 pattern exactly (minimal diff, matched the
+    file's existing indentation by hand rather than re-serializing the
+    whole 692-entry array through `json.dump`, which would've produced
+    a spurious ~6000-line diff from an indent-width mismatch — caught
+    and reverted before committing).
+  - **Search index NOT regenerated** — `build_search_index.py` is a
+    known separate, larger backlog item (already noted below: stale
+    relative to many other already-ingested granthas), out of scope for
+    this pass; sarga_10-12 are readable on the site but not yet
+    searchable, same current state as everything else awaiting that
+    reindex.
+  - **Found, but did NOT fix (separate, pre-existing, out of scope):**
+    `tools/gen_library_status.py`'s `item_count()` only handles the
+    newer `{schema, items:[...]}` shape — the legacy `{metadata,
+    shlokas:{n:{...}}}` shape (which ALL of Sumadhva Vijaya uses, 1-12)
+    always counts as 0 items, so the Library Manager dashboard's
+    verse/item totals have been silently undercounting this entire
+    grantha since sarga_1, not something newly broken by sarga_10-12.
+    Confirmed via a no-op diff after running the regenerator. Real
+    site-reading availability is unaffected (`library.json`'s
+    `populated` flag is what `core.js` actually gates on, and that's
+    set correctly) — this only affects the admin dashboard's own count
+    display.
+
 - **`tools/voice_lab/` added — real bug found and fixed before first real
   use.** Project lead's own uploaded files (`voice_transform.py` Track A —
   numpy/scipy pitch+formant shift for female→male re-timbre, no AI model;

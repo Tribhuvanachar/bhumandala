@@ -2848,7 +2848,18 @@
     },
     {
       "path": "dge/data/kavya/sumadhva_vijaya/sarga_10/data.json",
-      "populated": false
+      "title": "Sumadhva Vijaya सर्गः 10",
+      "populated": true
+    },
+    {
+      "path": "dge/data/kavya/sumadhva_vijaya/sarga_11/data.json",
+      "title": "Sumadhva Vijaya सर्गः 11",
+      "populated": true
+    },
+    {
+      "path": "dge/data/kavya/sumadhva_vijaya/sarga_12/data.json",
+      "title": "Sumadhva Vijaya सर्गः 12",
+      "populated": true
     },
     {
       "path": "dge/data/itihasas/bhagavad_gita/adhyaya_01/data.json",
