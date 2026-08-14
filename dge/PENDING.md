@@ -818,6 +818,47 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **Published Sumadhva Vijaya sarga 15, 16 — this completes the full
+  16-sarga work.** sarga_15: 141 verses (pages 179-207 of
+  `SumadhvaVijayaMoola.pdf`). sarga_16: 58 verses (pages 208-219) — the
+  work's final sarga. Cross-checked against the source's own printed
+  running-total colophons: `807+141=948` (sarga 15) and `948+58=1006`
+  (sarga 16, matching the source's closing "समाप्तश्चायं ग्रन्थः ।
+  श्रीकृष्णार्पणमस्तु ।" — "thus this text is complete, offered to Sri
+  Krishna"). 1006 total shlokas across all 16 sargas, consistent with
+  every prior sarga's own running total in this chain (496→552→...→948→
+  1006). Page 220 (the PDF's actual last page) is genuinely blank — Vision
+  returned empty text and visual inspection confirmed a blank page, not
+  an OCR or rendering failure.
+  **How it was resumed and one new colophon-shaped issue found:** the
+  prior session's 152-200 batch had reached sarga 15 verse 109 with no
+  colophon (verse 109 closes cleanly on page 200, so no half-verse risk
+  at the resume seam, but the first new proofread chunk was still
+  anchored on page 200 anyway as cheap insurance, per the lesson from
+  that batch). Pages 201-220 rendered fresh from the source PDF via
+  PyMuPDF at the same effective scale as the existing page_200.png
+  (zoom 3.0), then OCR'd (Vision) and proofread (Gemini) in 4-page
+  chunks the same way as before. The redundant re-proofread of verses
+  105-109 (from the anchor page) matched the already-published text
+  almost exactly (one trivial hyphenation difference, "पञ्चगव्यं" vs
+  "पञ्च-गव्यं" — same word) confirming no drift, so the previously
+  published 1-109 were kept as-is and only 110+ appended. New wrinkle,
+  same root cause family as the half-verse bug: Gemini mislabeled sarga
+  16's trailing colophon-only text (no verse content of its own) as a
+  spurious extra numbered shloka "59" instead of recognizing it as pure
+  colophon — verse 58 already closes cleanly with "॥ ५८ ॥" right before
+  it, and the source's own total (948+58=1006) confirms 58 is the real
+  count. Caught by the same verse-count-vs-colophon-math cross-check
+  used throughout this chain; fixed in the build script by detecting a
+  shloka whose entire `sa` starts with "इति" and contains "सर्गः" as a
+  standalone entry (not just embedded in the tail of the true last
+  verse, which the existing `split_trailing_colophon` regex already
+  handled) and popping it into `metadata.colophon` instead of keeping it
+  as a numbered shloka. Ran the same numbering-gap + verse-close-marker
+  scan used on 13-14 across both new sargas: zero unresolved splits.
+  Verified both sargas load, render, and count correctly in a real
+  browser (141/141 and 58/58 cards).
+
 - **Fixed two real bugs in the v1 Content Editor (`dge/js/content-editor.js`
   → v1.1), found via a live user bug report on PNS** (project lead did an
   inline edit on shloka 1, saw it reflected in the reading view, then

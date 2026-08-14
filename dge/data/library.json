@@ -2872,6 +2872,16 @@
       "populated": true
     },
     {
+      "path": "dge/data/kavya/sumadhva_vijaya/sarga_15/data.json",
+      "title": "Sumadhva Vijaya सर्गः 15",
+      "populated": true
+    },
+    {
+      "path": "dge/data/kavya/sumadhva_vijaya/sarga_16/data.json",
+      "title": "Sumadhva Vijaya सर्गः 16",
+      "populated": true
+    },
+    {
       "path": "dge/data/itihasas/bhagavad_gita/adhyaya_01/data.json",
       "populated": true,
       "title": null
