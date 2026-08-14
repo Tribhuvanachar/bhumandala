@@ -818,47 +818,27 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
-- **UNRESOLVED, needs project lead's decision — "Raghavendra Vijaya"
-  kavya data (pushed via the admin Zip Upload tool as `rv.zip`, commit
-  `197a524`) is NOT registered in `data/library.json`, and separately,
-  its actual content has a systemic off-by-one/duplicate problem.** Two
-  independent findings, discovered while investigating "why doesn't it
-  show up in the library":
-  1. **Why it's invisible**: the admin Zip Upload tool is a raw file
-     browser — it diffs and pushes bytes with zero awareness of
-     `library.json`. Uploading a grantha's data.json files there was
-     never enough by itself; an entry also has to be added to
-     `data/library.json` (same as every other grantha) before the
-     Library browser or a reading-page URL can reach it. Nothing was
-     broken here — this is how the tool has always worked — but see the
-     new validation checks below, which now say so upfront.
-  2. **A real content problem, found while checking whether it was safe
-     to just add the library.json entries**: every one of the 10
-     uploaded files' own embedded `metadata.stotraCode` doesn't match
-     the folder it's sitting in — folder `sarga_1` actually contains
-     sarga *2*'s verses (title "सर्गः 2", stotraCode `sarga_2`), folder
-     `sarga_2` contains sarga 3's, ... folder `sarga_8` contains sarga
-     9's. Folders `sarga_9` and `sarga_10` are byte-identical
-     duplicates of each other (both really sarga 10's content). **True
-     sarga_1 content is not present anywhere in this 10-file batch at
-     all.** This isn't a guess — confirmed by diffing every file's
-     `metadata.stotraCode`/title against its folder name and comparing
-     shloka content byte-for-byte across siblings. Did not touch this
-     data or register anything in library.json, since doing either
-     without knowing whether the real sarga_1 exists elsewhere (or
-     needs to be sourced/OCR'd fresh) would either publish wrong content
-     under wrong labels or delete a duplicate that might not actually be
-     one. Needs the project lead to say: is the real sarga_1 available
-     to re-upload, and should the existing 9 files just be renamed down
-     by one (sarga_1←old_2, ..., sarga_9←old_10) with the sarga_10
-     duplicate dropped, or was the intent something else entirely (e.g.
-     zip built from the wrong source range)?
-  Also worth fixing regardless of the above: the folder itself is named
-  `"Raghavendra Vijaya"` (space + capital letters) — every other kavya
-  folder in the library (`sumadhva_vijaya`, etc.) uses
-  lowercase_with_underscores. Should be renamed to `raghavendra_vijaya`
-  for consistency once the content itself is sorted out (the new zip
-  uploader validation below already flags this).
+- **RESOLVED — Raghavendra Vijaya kavya data, all 10 sargas now published
+  and registered.** Sequel to the entry below (which found the problem):
+  the project lead confirmed "relabel and register 9 sargas, leave
+  sarga_1 pending," then supplied the real sarga_1 content (42 verses,
+  self-consistent `metadata.stotraCode: "sarga_1"`) directly, so all 10
+  could go in at once instead of leaving a gap. Fixed as: moved
+  `dge/data/kavya/"Raghavendra Vijaya"/sarga_N` → lowercase
+  `dge/data/kavya/raghavendra_vijaya/sarga_(N+1)` for N=1..8 (each
+  file's own embedded metadata already correctly said which sarga it
+  actually was — the folder was just wrong), kept only ONE copy of the
+  byte-identical sarga_9/sarga_10 duplicate under `sarga_10`, added the
+  project lead's real sarga_1 as a new file, deleted the old
+  space-and-capitals folder entirely (`git rm -r`, so git recorded the
+  moves as renames), and added `library.json` entries for all 10 sargas.
+  Verified in a real browser: all 10 sargas load with matching
+  title/verse-count/rendered-card-count, and re-ran the new admin
+  validator (see below) against the final corrected set — zero warnings,
+  confirming the fix actually resolved every issue the validator itself
+  had flagged on the original upload. 578 total shlokas across the
+  complete work, no duplicates remaining (checked by hashing every
+  sarga's shloka content pairwise).
 
 - **Added real content-sanity checks to every admin write path**
   (`dge/js/admin-editor.js` → v1.18), directly prompted by the
