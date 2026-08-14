@@ -818,6 +818,50 @@ complete record, not just a live queue.
 
 ## Pending on this session / next Claude session
 
+- **Fixed two real bugs in the v1 Content Editor (`dge/js/content-editor.js`
+  → v1.1), found via a live user bug report on PNS** (project lead did an
+  inline edit on shloka 1, saw it reflected in the reading view, then
+  opened the Structural editor and reported "the old text is still seen,
+  both are not in sync" — with a screenshot showing literal `<br>` tags
+  visible as text in the row textarea).
+  1. **Line-break format mismatch, not a real desync.** Different
+     granthas store pada breaks differently: PNS (and apparently most
+     stotras) use literal `<br>` HTML tags in `sa`, rendered correctly via
+     `innerHTML` in the reading view; Sumadhva Vijaya's sarga files
+     (10-14, built this session) use plain `\n` instead — confirmed by
+     direct browser test that `.shloka-text`'s computed `white-space` is
+     `normal`, so those `\n`s render as nothing at all (no visual line
+     break, just wrapped continuous text) — a pre-existing cosmetic quirk
+     of Sumadhva Vijaya's data, not a regression, and not what was
+     reported, so left alone rather than mass-rewritten. The editor's
+     plain `<textarea>` elements can't interpret either format as HTML,
+     so raw `<br>` text was showing through literally — which read as
+     "wrong"/"old" content even though the underlying data was actually
+     in sync the whole time. Fixed by converting `<br>` (and bare `\n`)
+     to real `\n` for editing (both inline textarea and structural modal
+     rows) and back to `<br>` on save — `<br>` chosen as the canonical
+     stored format since it's the only one of the two that actually
+     renders as a line break, so any verse touched through the editor
+     from now on (Sumadhva Vijaya included) gets working line breaks as a
+     side effect, without touching verses nobody edited.
+  2. **Real data-loss bug, found while fixing #1**: the structural
+     editor's row builder, its Apply handler, and the final GitHub-push
+     reconstruction all hand-picked only `sa` + `commentaries` when
+     rebuilding each shloka object, silently dropping any other field —
+     concretely, `note` (colophon-style text) and `reviewNote` (OCR
+     review-flag text, present on several sarga_13/14 verses from this
+     session's own review-flagged verses). Opening the structural editor
+     and hitting Apply — even with zero edits — plus any push through
+     "Preview & Save" would have stripped these fields from the live
+     file. Fixed by shallow-copying the whole original shloka object at
+     each of these three points instead of hand-picking two fields.
+  Both fixes verified in a real headless-Chromium browser test against
+  the actual PNS and sarga_13 data files: inline edit → structural
+  editor round-trip now shows identical (edited) text with no literal
+  `<br>` and correct row heights; Apply-without-editing on sarga_13
+  preserves `reviewNote` byte-for-byte. Not yet pushed to GitHub by the
+  project lead through the UI itself — only tested locally.
+
 - **Published Sumadhva Vijaya sarga 13, 14 for real (continuing straight
   on from 10-12 above, pages 153-200 of the source PDF), and found a
   real, systemic OCR/Proofread pipeline bug in the process, not just a

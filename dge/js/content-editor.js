@@ -7,10 +7,27 @@
 // and confirms, reusing admin-editor.js's existing dgeAdminBatchCommit
 // (same safe "diff, don't blind-overwrite" discipline as Config Editor).
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['content-editor.js'] = 'v1.0';
+window.DGE_VERSIONS['content-editor.js'] = 'v1.1';
 
 window.dgeContentEditMode = false;
 window.dgeContentEditsDirty = false;
+
+// Different granthas store pada (line) breaks differently — PNS and most
+// stotras use literal "<br>" tags (rendered via innerHTML in the reading
+// view), while Sumadhva Vijaya's sarga files use plain "\n" (which the
+// reading view's CSS doesn't turn into a visual break at all). A plain
+// <textarea> can't interpret either as HTML, so editing raw "<br>" text
+// showed the tag itself as ugly literal characters. Converting to real
+// newlines for editing — and back to "<br>" on save, since that's the
+// only one of the two that actually renders as a line break — fixes the
+// display AND upgrades any touched Sumadhva Vijaya verse to render
+// correctly too, without touching verses nobody edited.
+function dgeSaToEditableText(sa) {
+  return (sa || '').replace(/<br\s*\/?>/gi, '\n');
+}
+function dgeEditableTextToSa(text) {
+  return (text || '').replace(/\r\n/g, '\n').replace(/\n/g, '<br>');
+}
 
 // Only grantha files that fetch as the plain {metadata, shlokas:{n:{...}}}
 // shape are safe to edit here — anything that needed dgeNormalizeGranthaData
@@ -61,7 +78,7 @@ window.dgeInlineEditShloka = function (id) {
   if (!textEl || textEl.querySelector('textarea')) return; // already editing
 
   const shloka = stotraData.shlokas[id];
-  const original = shloka.sa || '';
+  const original = dgeSaToEditableText(shloka.sa || '');
   textEl.innerHTML = '';
   const ta = document.createElement('textarea');
   ta.value = original;
@@ -84,7 +101,7 @@ window.dgeSaveInlineEdit = function (id) {
   const card = document.getElementById(`shloka-${id}`);
   const ta = card && card.querySelector('.content-edit-textarea');
   if (!ta) return;
-  const newText = ta.value;
+  const newText = dgeEditableTextToSa(ta.value);
   if (newText !== stotraData.shlokas[id].sa) {
     stotraData.shlokas[id].sa = newText;
     window.dgeContentEditsDirty = true;
@@ -98,7 +115,13 @@ let dgeStructuralRows = null; // working copy while the modal is open
 
 function dgeBuildStructuralRows() {
   const ids = Object.keys(stotraData.shlokas).map(Number).sort((a, b) => a - b);
-  return ids.map(id => ({ sa: stotraData.shlokas[id].sa || '', commentaries: stotraData.shlokas[id].commentaries || {} }));
+  // Shallow-copy the whole original shloka object (not just sa/commentaries)
+  // so fields like note/reviewNote survive a reorder — only sa's display
+  // format changes here, for editing.
+  return ids.map(id => Object.assign({}, stotraData.shlokas[id], {
+    sa: dgeSaToEditableText(stotraData.shlokas[id].sa || ''),
+    commentaries: stotraData.shlokas[id].commentaries || {}
+  }));
 }
 
 window.dgeOpenStructuralEditor = function () {
@@ -187,7 +210,12 @@ window.dgeApplyStructuralEdits = function () {
   const start = dgeStructuralStartNumber();
   const newShlokas = {};
   dgeStructuralRows.forEach((r, i) => {
-    newShlokas[start + i] = { sa: r.sa, commentaries: r.commentaries || {} };
+    // Keep every original field (note, reviewNote, etc.) — only sa's
+    // display format needs converting back from editable text to storage.
+    newShlokas[start + i] = Object.assign({}, r, {
+      sa: dgeEditableTextToSa(r.sa),
+      commentaries: r.commentaries || {}
+    });
   });
   stotraData.shlokas = newShlokas;
   stotraData.metadata.totalShlokas = dgeStructuralRows.length;
@@ -272,7 +300,10 @@ window.dgePushContentEdits = async function () {
     const outShlokas = {};
     Object.keys(stotraData.shlokas).forEach(id => {
       const s = stotraData.shlokas[id];
-      outShlokas[id] = { sa: s.sa, commentaries: s.commentaries || {} };
+      // Keep every field already on the in-memory shloka (note,
+      // reviewNote, etc.) — previously this hand-picked only sa/
+      // commentaries and silently dropped everything else on every push.
+      outShlokas[id] = Object.assign({}, s, { commentaries: s.commentaries || {} });
     });
     const outData = {
       metadata: Object.assign({}, stotraData.metadata, { totalShlokas: Object.keys(outShlokas).length }),
