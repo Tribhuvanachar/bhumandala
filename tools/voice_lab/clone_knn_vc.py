@@ -31,7 +31,7 @@ Tips:
     that look identical to the eye but never match anything you type by
     hand. Letting the OS list the real filenames sidesteps that entirely.
 """
-import argparse, os, sys
+import argparse, os, subprocess, sys, tempfile
 
 AUDIO_EXTS = (".mp3", ".wav", ".m4a", ".flac", ".ogg")
 
@@ -48,6 +48,25 @@ def expand_refs(paths):
         else:
             out.append(p)
     return out
+
+def concat_refs(paths, out_path):
+    """
+    Join multiple reference clips into one file. kNN-VC's get_matching_set()
+    has shown real tensor-shape mismatches when given several clips of
+    different lengths (e.g. "Expected size 1050 but got size 848") -- rather
+    than depend on that multi-file path, feed it a single combined clip,
+    which is known to work and is functionally the same "more reference
+    audio" the tool wants anyway.
+    """
+    cmd = ["ffmpeg", "-y", "-v", "error"]
+    for p in paths:
+        cmd += ["-i", p]
+    n = len(paths)
+    filt = "".join(f"[{i}:a]" for i in range(n)) + f"concat=n={n}:v=0:a=1[out]"
+    cmd += ["-filter_complex", filt, "-map", "[out]", "-ar", "16000", "-ac", "1", out_path]
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    if r.returncode != 0:
+        sys.exit(f"Failed to combine --ref clips with ffmpeg:\n{r.stderr[-2000:]}")
 
 def main():
     ap = argparse.ArgumentParser()
@@ -67,6 +86,13 @@ def main():
     for p in ref_paths:
         if not os.path.isfile(p):
             sys.exit(f"--ref file not found: {p}")
+
+    if len(ref_paths) > 1:
+        combined = os.path.join(tempfile.gettempdir(), "knn_vc_ref_combined.wav")
+        print(f"Combining {len(ref_paths)} reference clips into one "
+              f"({', '.join(os.path.basename(p) for p in ref_paths)})…")
+        concat_refs(ref_paths, combined)
+        ref_paths = [combined]
 
     print("Loading kNN-VC (first run downloads WavLM + HiFiGAN)…")
     knn_vc = torch.hub.load("bshall/knn-vc", "knn_vc",
