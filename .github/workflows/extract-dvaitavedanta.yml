@@ -1,0 +1,277 @@
+name: Extract DvaitaVedanta
+
+# Pulls the dvaitavedanta.in corpus into dge/data/dvaitavedanta/.
+#
+# Fetching must happen here, not in the Cowork sandbox — that sandbox has no
+# network egress to the source host (see dge/PENDING.md), which is why every DGE
+# import runs on Actions or Colab.
+#
+# Safety rails, in order of importance:
+#   * dry_run defaults to TRUE. Nothing is written until you clear it.
+#   * open_pr defaults to FALSE. Even a write run only produces an artifact
+#     unless you explicitly ask for the PR.
+#   * Never pushes to main. Follows the repo convention: peter-evans PR only.
+#   * Sections fan out as a matrix so one slow grantha (nyaya_sudha) cannot
+#     burn the 6h job limit for everything else.
+#   * The HTTP cache is restored between runs, so a re-run resumes rather than
+#     re-crawling ~15k pages.
+
+on:
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: "What to extract"
+        type: choice
+        default: dasha_prakarana_granthas
+        options:
+          - dasha_prakarana_granthas
+          - sutra_prasthana
+          - gita_prasthana
+          - sruti_prasthana
+          - itihasa_prasthana
+          - purana_prasthana
+          - upanishad_prasthana
+          - later_acharyas
+          - all
+      granthas:
+        description: "Optional: comma-separated grantha slugs to narrow further (e.g. pramana_lakshana)"
+        type: string
+        default: ""
+      limit_per_grantha:
+        description: "Cap leaves per grantha (smoke test). Blank = no cap, 5 = quick check."
+        type: string
+        default: "5"
+      delay:
+        description: "Seconds between requests (be kind; the backend is slow)"
+        type: string
+        default: "1.0"
+      timeout:
+        description: "Per-request timeout in seconds"
+        type: string
+        default: "120"
+      dry_run:
+        description: "Fetch, parse and report — write nothing"
+        type: boolean
+        default: true
+      open_pr:
+        description: "Open a pull request with the results (requires dry_run = false)"
+        type: boolean
+        default: false
+      refresh_cache:
+        description: "Ignore the HTTP cache and refetch everything"
+        type: boolean
+        default: false
+      probe:
+        description: "Also upload raw HTML of a few pages, for selector review"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: extract-dvaitavedanta
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      sections: ${{ steps.build.outputs.sections }}
+    steps:
+      - id: build
+        env:
+          SCOPE: ${{ inputs.scope }}
+        run: |
+          if [ "$SCOPE" = "all" ]; then
+            SECTIONS='["dasha_prakarana_granthas","sutra_prasthana","gita_prasthana","sruti_prasthana","itihasa_prasthana","purana_prasthana","upanishad_prasthana","later_acharyas"]'
+          else
+            SECTIONS=$(printf '["%s"]' "$SCOPE")
+          fi
+          echo "sections=$SECTIONS" >> "$GITHUB_OUTPUT"
+          echo "Matrix: $SECTIONS"
+
+  extract:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 2          # politeness: never more than 2 concurrent crawlers
+      matrix:
+        section: ${{ fromJSON(needs.plan.outputs.sections) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r tools/dvaitavedanta/requirements.txt
+
+      - name: Self-test the parser (no network)
+        run: |
+          python tools/dvaitavedanta/test_dv_parse.py
+          python tools/dvaitavedanta/test_import_offline.py
+
+      - name: Restore HTTP cache
+        uses: actions/cache@v4
+        with:
+          path: .dv_cache
+          key: dv-cache-${{ matrix.section }}-${{ github.run_id }}
+          restore-keys: |
+            dv-cache-${{ matrix.section }}-
+
+      - name: Extract
+        env:
+          SECTION: ${{ matrix.section }}
+          GRANTHAS: ${{ inputs.granthas }}
+          LIMIT: ${{ inputs.limit_per_grantha }}
+          DELAY: ${{ inputs.delay }}
+          TIMEOUT: ${{ inputs.timeout }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          REFRESH: ${{ inputs.refresh_cache }}
+          PROBE: ${{ inputs.probe }}
+        run: |
+          set -euo pipefail
+          ARGS=(
+            --config tools/dvaitavedanta/dv_sources.json
+            --out dge/data/dvaitavedanta
+            --cache .dv_cache
+            --sections "$SECTION"
+            --delay "$DELAY"
+            --timeout "$TIMEOUT"
+            --fetch-date "$(date -u +%F)"
+          )
+          [ -n "$GRANTHAS" ] && ARGS+=(--granthas "$GRANTHAS")
+          [ -n "$LIMIT" ]    && ARGS+=(--limit-per-grantha "$LIMIT")
+          [ "$DRY_RUN" = "true" ] && ARGS+=(--dry-run) || ARGS+=(--write)
+          [ "$REFRESH" = "true" ] && ARGS+=(--refresh-cache)
+          [ "$PROBE" = "true" ]   && ARGS+=(--probe-dir dv_probe --probe-count 5)
+          python tools/dvaitavedanta/import_dvaitavedanta.py "${ARGS[@]}"
+
+      - name: Verify emitted data
+        if: ${{ !fromJSON(inputs.dry_run) }}
+        run: python tools/dvaitavedanta/verify_extract.py --data dge/data/dvaitavedanta
+
+      - name: Stage shard output
+        if: ${{ !fromJSON(inputs.dry_run) }}
+        run: |
+          mkdir -p shard
+          cp -r dge/data/dvaitavedanta shard/dvaitavedanta
+          mv shard/dvaitavedanta/_extract_status.json \
+             "shard/status-${{ matrix.section }}.json" || true
+
+      - name: Upload shard
+        if: ${{ !fromJSON(inputs.dry_run) }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: dv-${{ matrix.section }}
+          path: shard
+          retention-days: 14
+
+      - name: Upload raw HTML probes
+        if: ${{ fromJSON(inputs.probe) }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: dv-probe-${{ matrix.section }}
+          path: dv_probe
+          retention-days: 14
+          if-no-files-found: ignore
+
+  collect:
+    needs: extract
+    if: ${{ !fromJSON(inputs.dry_run) }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Download shards
+        uses: actions/download-artifact@v4
+        with:
+          pattern: dv-*
+          path: shards
+          merge-multiple: false
+
+      - name: Merge shards into dge/data
+        run: |
+          set -euo pipefail
+          mkdir -p dge/data/dvaitavedanta
+          for dir in shards/dv-*/dvaitavedanta; do
+            [ -d "$dir" ] || continue
+            cp -r "$dir/." dge/data/dvaitavedanta/
+          done
+          python tools/dvaitavedanta/merge_status.py \
+            --inputs "shards/dv-*/status-*.json" \
+            --out dge/data/dvaitavedanta/_extract_status.json
+
+      - name: Register in taxonomy + library catalog
+        run: |
+          python tools/dvaitavedanta/sync_catalog.py --data dge/data
+          python tools/validate_data.py || true
+          python tools/gen_library_status.py
+
+      - name: Verify merged tree
+        run: python tools/dvaitavedanta/verify_extract.py --data dge/data/dvaitavedanta --strict
+
+      - name: Report
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+          p = pathlib.Path("dge/data/dvaitavedanta/_extract_status.json")
+          s = json.loads(p.read_text(encoding="utf-8"))
+          t = s.get("totals", {})
+          print("## Merged result\n")
+          print(f"- granthas: **{t.get('complete',0)}/{t.get('granthas',0)} complete**")
+          print(f"- items: **{t.get('items',0):,}**")
+          print(f"- leaf pages with text: {t.get('with_text',0):,}")
+          print(f"- containers skipped: {t.get('containers',0):,}")
+          print(f"- failures: {t.get('failed',0)}")
+          print(f"- on disk: {t.get('bytes',0)/1048576:.1f} MB\n")
+          print("| Section | Granthas | Items | Failed |")
+          print("|---|--:|--:|--:|")
+          for name, c in (s.get("sections") or {}).items():
+              print(f"| {name} | {c.get('complete',0)}/{c.get('granthas',0)} | {c.get('items',0):,} | {c.get('failed',0)} |")
+          PY
+          du -sh dge/data/dvaitavedanta || true
+
+      # Note: dge/build_search_index.py is deliberately NOT run here. The index
+      # is a regenerable build product and dge/search_index is already 162 MB;
+      # reindex.yml can rebuild it once the corpus has landed and been reviewed.
+
+      - name: Open Pull Request
+        if: ${{ fromJSON(inputs.open_pr) }}
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: ingest/dvaitavedanta-${{ inputs.scope }}
+          delete-branch: true
+          commit-message: "data: extract dvaitavedanta.in (${{ inputs.scope }})"
+          title: "Extract: dvaitavedanta.in — ${{ inputs.scope }}"
+          body: |
+            Automated extraction of **${{ inputs.scope }}** from
+            [dvaitavedanta.in](https://dvaitavedanta.in/) via GitHub Actions.
+
+            Source is used with case-by-case permission granted by the project
+            lead for non-commercial, educational use, per the licensing
+            convention in `dge/PROJECT_STATUS.md`. Every record retains its
+            `source_url`.
+
+            - Landed under `dge/data/dvaitavedanta/` (staging tree) — no existing
+              grantha was modified.
+            - Progress tracker: `dge/data/dvaitavedanta/_extract_status.json`
+            - Dashboard: `dge/dvaitavedanta-status.html`
+            - Search index intentionally not rebuilt; run `reindex.yml` after review.
+
+            See the run summary for per-grantha counts and any unmapped
+            commentary layers.
+          add-paths: |
+            dge/data/dvaitavedanta/**
+            dge/data/taxonomy.json
+            dge/data/library.json
+            dge/data/library_status.json
