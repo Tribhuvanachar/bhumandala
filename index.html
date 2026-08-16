@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0B0907">
-<title>श्री विश्वनन्दन तीर्थ — Sarvamoola Digital Library</title>
-<meta name="description" content="Sarvamoola Digital Library. Offer your respects at the feet of Śrī Viśvanandana Tīrtha before entering.">
+<title>Sarvamūla Digital Library</title>
+<meta name="description" content="Sarvamūla Digital Library. Pay your respects at the feet of Śrī Viśvanandana Tīrtha before entering.">
 
 <!-- Link previews (WhatsApp, Telegram, X) show the portrait. -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="श्री विश्वनन्दन तीर्थ — Sarvamoola Digital Library">
-<meta property="og:description" content="With the blessings of Śrī Viśvanandana Tīrtha.">
+<meta property="og:title" content="Sarvamūla Digital Library">
+<meta property="og:description" content="A digital initiative to preserve, organize and present the complete heritage of our Śāstra, Itihāsa, Purāṇa, Stotra and Kāvya.">
 <meta property="og:image" content="https://www.sarvamula.org/dge/images/guru/guruji.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -19,1134 +19,1254 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
 <style>
 /* =========================================================================
-   GURU VANDANA — entry gate for the DGE site.
-   Design notes, so the next person editing this knows what is load-bearing:
-     - Everything reads from the token block below. Recolouring the whole
-       gate is a matter of editing --gv-* variables, nothing else.
-     - Motion is deliberately slow (4s–20s cycles). Anything faster starts
-       to feel like a web banner rather than a darshana. Resist speeding up.
-     - Every animation is switched off under prefers-reduced-motion; the
-       gate must still read correctly as a completely static page.
+   SARVAMŪLA — landing page.
+
+   The vandana fills the first screen: the name of the library, what it is,
+   and his portrait at the centre. Nothing of the library is reachable until
+   respects have been paid.
+
+   Below it, one band per contributor. Each band says who and what; the long
+   detail — the acknowledgements especially — opens in a panel, so the page
+   itself stays readable.
+
+   Motion stays slow, 4s to 20s cycles, and switches off entirely under
+   prefers-reduced-motion.
    ========================================================================= */
 
 :root {
-  /* Ground: warm near-black, never pure #000 — pure black kills the glow. */
-  --gv-bg-deep:    #0B0907;
-  --gv-bg-mid:     #171009;
-  --gv-bg-warm:    #2A1608;
+  --bg-deep:    #0B0907;
+  --bg-mid:     #171009;
+  --bg-warm:    #2A1608;
+  --bg-panel:   #14100C;
 
-  /* Saffron / gold family, taken from the photograph's own palette so the
-     portrait sits inside the frame rather than on top of it. */
-  --gv-saffron:    #F2820C;
-  --gv-saffron-lt: #FFB24D;
-  --gv-ember:      #C4471A;
-  --gv-gold:       #E8B24D;
-  --gv-gold-soft:  #D9B87A;
+  --saffron:    #F2820C;
+  --saffron-lt: #FFB24D;
+  --gold:       #E8B24D;
+  --gold-soft:  #D9B87A;
 
-  --gv-text:       #F3E7D4;
-  --gv-text-dim:   #C0AC90;
-  --gv-text-faint: #8B7A63;
+  --text:       #F3E7D4;
+  --text-dim:   #C0AC90;
+  --text-faint: #8B7A63;
 
-  --gv-hairline:   rgba(232,178,77,0.22);
-  --gv-hairline-2: rgba(232,178,77,0.10);
+  --hairline:   rgba(232,178,77,.22);
+  --hairline-2: rgba(232,178,77,.11);
 
-  --gv-font-sa: 'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', 'Noto Sans Devanagari', serif;
-  --gv-font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --gv-font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sa:    'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', 'Noto Sans Devanagari', serif;
+  --font-ui:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
 
-  --gv-ease:      cubic-bezier(.22,.61,.36,1);
-  --gv-ease-soft: cubic-bezier(.4,0,.2,1);
+  --ease:      cubic-bezier(.22,.61,.36,1);
+  --ease-soft: cubic-bezier(.4,0,.2,1);
 
-  --gv-vh: calc(1 * var(--gv-vh));
+  --vh: 1vh;
 }
-@supports (height: 1dvh) {
-  :root { --gv-vh: 1dvh; }
-}
+@supports (height: 1dvh) { :root { --vh: 1dvh; } }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  background:
+    radial-gradient(120% 60% at 50% 0%, var(--bg-warm) 0%, var(--bg-mid) 38%, var(--bg-deep) 72%),
+    var(--bg-deep);
+  color: var(--text);
+  overflow-x: hidden;
+}
+body.modal-open { overflow: hidden; }
 
-html, body { margin: 0; padding: 0; }
-body { font-family: var(--gv-font-ui); background: #FAF3E6; color: #2B2119; }
-body.gv-locked { overflow: hidden; }
+#veil {
+  position: fixed; inset: 0; z-index: 200; pointer-events: none;
+  background: var(--bg-deep); opacity: 0;
+  transition: opacity .7s var(--ease-soft);
+}
+body.leaving #veil { opacity: 1; }
 
 /* =========================================================================
-   1. THE OVERLAY
+   1. HERO
    ========================================================================= */
 
-.gv-overlay {
-  position: fixed; inset: 0; z-index: 99999;
-  height: 100vh; height: 100dvh;
-  /* Flex column, not a grid: on a short viewport the stage must be allowed
-     to push past the fold and scroll rather than overlap the footer. */
-  display: flex; flex-direction: column;
-  overflow-y: auto; overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  background:
-    radial-gradient(120% 85% at 50% 34%, var(--gv-bg-warm) 0%, var(--gv-bg-mid) 42%, var(--gv-bg-deep) 78%),
-    var(--gv-bg-deep);
-  color: var(--gv-text);
-  /* The dissolve on exit: fade + a breath of upward drift + a soft blur, so
-     the gate feels like it lifts away rather than being switched off. */
-  transition:
-    opacity 1.15s var(--gv-ease-soft),
-    transform 1.15s var(--gv-ease-soft),
-    filter 1.15s var(--gv-ease-soft),
-    visibility 0s linear 1.15s;
-}
-.gv-overlay.gv-leaving {
-  opacity: 0; visibility: hidden;
-  transform: scale(1.06) translateY(-2%);
-  filter: blur(14px) saturate(1.4);
-  pointer-events: none;
+.hero {
+  position: relative;
+  min-height: calc(100 * var(--vh));
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(8px, 1.25 * var(--vh), 15px);
+  padding: calc(20px + env(safe-area-inset-top)) 22px 26px;
+  overflow: hidden; text-align: center;
 }
 
-/* Faint mandala watermark, turning once every two minutes. Present mostly
-   so the dark ground is never a flat dead rectangle on large screens. */
-.gv-mandala {
-  position: fixed; left: 50%; top: 34%;
-  width: min(calc(150 * var(--gv-vh)), 150vw); aspect-ratio: 1;
-  transform: translate(-50%, -50%);
+.mandala {
+  position: absolute; left: 50%; top: 44%;
+  width: min(150 * var(--vh), 150vw); aspect-ratio: 1;
+  transform: translate(-50%,-50%);
   opacity: .055; pointer-events: none;
   -webkit-mask-image: radial-gradient(closest-side, #000 30%, transparent 72%);
           mask-image: radial-gradient(closest-side, #000 30%, transparent 72%);
-  animation: gv-turn 150s linear infinite;
+  animation: turn 150s linear infinite;
 }
-@keyframes gv-turn { to { transform: translate(-50%,-50%) rotate(360deg); } }
+@keyframes turn { to { transform: translate(-50%,-50%) rotate(360deg); } }
 
-/* Vignette, laid over the mandala so its edges fall away into the ground. */
-.gv-vignette {
-  position: fixed; inset: 0; pointer-events: none;
-  background: radial-gradient(115% 78% at 50% 40%, transparent 42%, rgba(0,0,0,.55) 82%, rgba(0,0,0,.82) 100%);
+.vignette {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(115% 78% at 50% 44%, transparent 44%, rgba(0,0,0,.5) 84%, rgba(0,0,0,.8) 100%);
 }
-
-/* Incense drift — two very slow, very faint smoke columns. */
-.gv-smoke {
-  position: fixed; bottom: -10%; width: 34vmin; height: 90vmin;
-  pointer-events: none; opacity: .16;
+.smoke {
+  position: absolute; bottom: -12%; width: 34vmin; height: 90vmin;
+  pointer-events: none; opacity: .15; filter: blur(26px);
   background: radial-gradient(closest-side, rgba(255,214,160,.55), transparent 70%);
-  filter: blur(26px);
-  animation: gv-drift 19s var(--gv-ease-soft) infinite;
+  animation: drift 19s var(--ease-soft) infinite;
 }
-.gv-smoke.gv-smoke-l { left: 6%; }
-.gv-smoke.gv-smoke-r { right: 6%; animation-duration: 23s; animation-delay: -8s; }
-@keyframes gv-drift {
-  0%   { transform: translate3d(0,10%,0) scale(.9);   opacity: 0; }
+.smoke.l { left: 4%; }
+.smoke.r { right: 4%; animation-duration: 23s; animation-delay: -8s; }
+@keyframes drift {
+  0%   { transform: translate3d(0,10%,0) scale(.9);    opacity: 0; }
   30%  { opacity: .18; }
   100% { transform: translate3d(4vmin,-40%,0) scale(1.35); opacity: 0; }
 }
 
-/* =========================================================================
-   2. STAGE — portrait, halo, text
-   ========================================================================= */
-
-.gv-stage {
+.masthead, .hero .om, .portrait-wrap, .guru-block, .hero-actions {
   position: relative; z-index: 2;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: clamp(11px, calc(1.9 * var(--gv-vh)), 22px);
-  padding: clamp(16px, calc(3 * var(--gv-vh)), 40px) 20px 0;
-  padding-top: calc(clamp(16px, calc(3 * var(--gv-vh)), 40px) + env(safe-area-inset-top));
-  text-align: center;
-  flex: 1 0 auto;
 }
 
-/* --- Opening line: ॐ, above everything --- */
-.gv-om {
-  font-family: var(--gv-font-sa);
-  font-size: clamp(24px, calc(3.4 * var(--gv-vh)), 34px);
-  color: var(--gv-gold);
-  line-height: 1;
-  text-shadow: 0 0 26px rgba(232,178,77,.45);
-  animation: gv-pulse 6s var(--gv-ease-soft) infinite;
+/* --- masthead: the one and only place the library is named --- */
+.masthead { display: flex; flex-direction: column; align-items: center; gap: 5px; max-width: 900px; }
+.brand-latin {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.5vw, 46px); font-weight: 500;
+  color: var(--gold); letter-spacing: .04em; line-height: 1.1;
+  text-shadow: 0 0 40px rgba(232,178,77,.32);
 }
-@keyframes gv-pulse {
-  0%, 100% { opacity: .70; text-shadow: 0 0 18px rgba(232,178,77,.30); }
-  50%      { opacity: 1;   text-shadow: 0 0 34px rgba(232,178,77,.60); }
+.brand-tagline {
+  margin: 5px auto 0; max-width: 72ch;
+  font-size: clamp(12px, 1.05vw, 13.5px); line-height: 1.62; color: var(--text-dim);
 }
 
-/* --- Portrait --- */
-.gv-portrait-wrap {
+/* --- portrait --- */
+.om {
+  font-family: var(--font-sa);
+  font-size: clamp(22px, 2.4vw, 30px); line-height: 1; color: var(--gold);
+  animation: pulse 6s var(--ease-soft) infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: .7; text-shadow: 0 0 18px rgba(232,178,77,.3); }
+  50%     { opacity: 1;  text-shadow: 0 0 34px rgba(232,178,77,.6); }
+}
+
+.portrait-wrap {
   position: relative;
-  width: clamp(152px, calc(24 * var(--gv-vh)), 262px);
-  flex: 0 1 auto;
+  width: clamp(150px, 17.5 * var(--vh), 232px);
   display: flex; align-items: flex-end; justify-content: center;
 }
-
-/* The halo: three stacked radial layers breathing out of phase with each
-   other, which reads as light rather than as a drawn circle. */
-.gv-halo {
+.halo {
   position: absolute; left: 50%; top: 46%;
-  width: 190%; aspect-ratio: 1; transform: translate(-50%,-50%);
-  pointer-events: none;
+  width: 180%; aspect-ratio: 1; transform: translate(-50%,-50%);
+  pointer-events: none; filter: blur(6px);
   background:
-    radial-gradient(closest-side, rgba(255,178,77,.34), transparent 66%),
-    radial-gradient(closest-side, rgba(242,130,12,.24), transparent 78%);
-  filter: blur(6px);
-  animation: gv-breathe 7s var(--gv-ease-soft) infinite;
+    radial-gradient(closest-side, rgba(255,178,77,.30), transparent 66%),
+    radial-gradient(closest-side, rgba(242,130,12,.22), transparent 78%);
+  animation: breathe 7s var(--ease-soft) infinite;
 }
-.gv-halo-ring {
+@keyframes breathe {
+  0%,100% { transform: translate(-50%,-50%) scale(1);    opacity: .8; }
+  50%     { transform: translate(-50%,-50%) scale(1.07); opacity: 1; }
+}
+.halo-ring {
   position: absolute; inset: -6% -7% -5%;
   border-radius: 50% 50% 18px 18px / 40% 40% 5% 5%;
   border: 1px solid rgba(232,178,77,.28);
-  box-shadow: 0 0 60px rgba(242,130,12,.22);
+  box-shadow: 0 0 60px rgba(242,130,12,.2);
   pointer-events: none;
-  animation: gv-breathe-ring 9s var(--gv-ease-soft) infinite;
+  animation: breathe-ring 9s var(--ease-soft) infinite;
 }
-@keyframes gv-breathe {
-  0%, 100% { transform: translate(-50%,-50%) scale(1);    opacity: .80; }
-  50%      { transform: translate(-50%,-50%) scale(1.07); opacity: 1; }
-}
-@keyframes gv-breathe-ring {
-  0%, 100% { transform: scale(1);      opacity: .55; }
-  50%      { transform: scale(1.025);  opacity: .95; }
+@keyframes breathe-ring {
+  0%,100% { transform: scale(1);     opacity: .55; }
+  50%     { transform: scale(1.025); opacity: .95; }
 }
 
-/* The frame is a temple arch — a half-dome on top, near-square at the base,
-   sitting on a pedestal. The photo is masked to fade into the pedestal so
-   there is no hard photographic edge at the bottom. */
-.gv-frame {
-  position: relative;
-  width: 100%; aspect-ratio: var(--gv-frame-ratio, 3 / 4);
+.frame {
+  position: relative; width: 100%; aspect-ratio: var(--frame-ratio, 2 / 3);
   border-radius: 50% 50% 14px 14px / 40% 40% 5% 5%;
   overflow: hidden;
   background: linear-gradient(180deg, #241505, #120B04);
   box-shadow:
     0 0 0 1px rgba(232,178,77,.34),
     0 0 0 7px rgba(232,178,77,.07),
-    0 30px 70px rgba(0,0,0,.60),
-    inset 0 0 60px rgba(0,0,0,.55);
+    0 30px 70px rgba(0,0,0,.6),
+    inset 0 0 60px rgba(0,0,0,.5);
 }
-.gv-frame img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center 50%;   /* overridden from config */
-  display: block;
-  /* A touch of warmth so the photograph and the gate share a temperature. */
+.frame img {
+  width: 100%; height: 100%; display: block;
+  object-fit: cover; object-position: center 50%;
   filter: saturate(1.06) contrast(1.04) brightness(1.02);
-  /* Slow Ken Burns. 24s, ~3% travel — felt, not seen. */
-  animation: gv-kenburns 24s var(--gv-ease-soft) infinite alternate;
+  animation: kenburns 24s var(--ease-soft) infinite alternate;
   -webkit-mask-image: linear-gradient(180deg, #000 88%, rgba(0,0,0,.86) 96%, transparent 100%);
           mask-image: linear-gradient(180deg, #000 88%, rgba(0,0,0,.86) 96%, transparent 100%);
 }
-@keyframes gv-kenburns {
+@keyframes kenburns {
   from { transform: scale(1)     translateY(0); }
   to   { transform: scale(1.055) translateY(-1.4%); }
 }
-
-/* Warm light wash over the photo, tying it to the ground colour. */
-.gv-frame::after {
+.frame::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background:
     radial-gradient(70% 46% at 46% 26%, rgba(255,196,120,.16), transparent 70%),
     radial-gradient(95% 78% at 52% 52%, transparent 46%, rgba(11,9,7,.34) 78%, rgba(11,9,7,.72) 100%),
-    linear-gradient(180deg, rgba(11,9,7,.60) 0%, transparent 20%, transparent 88%, rgba(11,9,7,.55) 100%);
+    linear-gradient(180deg, rgba(11,9,7,.6) 0%, transparent 20%, transparent 88%, rgba(11,9,7,.55) 100%);
 }
 
-/* Pedestal the frame stands on, and the target for offerings. */
-.gv-pada {
-  position: absolute; left: var(--gv-pada-x, 50%); bottom: -6px;
-  width: var(--gv-pada-w, 74%); height: 76px;
-  transform: translateX(-50%);
-  cursor: pointer;
-  z-index: 3;
+/* His feet — where the offering lands. */
+.pada {
+  position: absolute; left: var(--pada-x, 70%); bottom: -6px;
+  width: var(--pada-w, 50%); height: 72px;
+  transform: translateX(-50%); cursor: pointer; z-index: 3;
   border-radius: 50%;
-  /* Faint plinth of light rather than a drawn shelf. */
   background: radial-gradient(60% 100% at 50% 50%, rgba(242,130,12,.22), transparent 72%);
-  transition: background .4s var(--gv-ease-soft);
+  transition: background .4s var(--ease-soft);
 }
-.gv-pada:hover { background: radial-gradient(60% 100% at 50% 50%, rgba(255,178,77,.34), transparent 74%); }
-.gv-pada:focus-visible { outline: 2px solid var(--gv-gold); outline-offset: 6px; border-radius: 999px; }
+.pada:hover { background: radial-gradient(60% 100% at 50% 50%, rgba(255,178,77,.34), transparent 74%); }
+.pada:focus-visible { outline: 2px solid var(--gold); outline-offset: 6px; border-radius: 999px; }
 
-/* Ripple that blooms outward from the feet on each offering. */
-.gv-ripple {
-  position: absolute; left: 50%; top: 50%;
-  width: 40px; height: 40px; margin: -20px 0 0 -20px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,196,120,.75);
-  pointer-events: none;
-  animation: gv-ripple-out 1.5s var(--gv-ease) forwards;
+.ripple {
+  position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px;
+  border-radius: 50%; border: 1px solid rgba(255,246,230,.8); pointer-events: none;
+  animation: ripple-out 1.5s var(--ease) forwards;
 }
-@keyframes gv-ripple-out {
+@keyframes ripple-out {
   from { transform: scale(.4);  opacity: .9; }
   to   { transform: scale(6.5); opacity: 0; }
 }
 
-/* --- Names and the vandana --- */
-.gv-names { display: flex; flex-direction: column; gap: 5px; }
-.gv-name-sa {
-  font-family: var(--gv-font-sa);
-  font-size: clamp(19px, calc(2.9 * var(--gv-vh)), 27px);
-  color: var(--gv-saffron-lt);
-  letter-spacing: .01em; line-height: 1.45;
-  text-shadow: 0 0 30px rgba(242,130,12,.35);
+/* Namaskāra: several rise together and dissolve, not one. */
+.pranam-mark {
+  position: absolute; bottom: 8px; left: 50%;
+  font-size: 30px; line-height: 1; pointer-events: none;
+  filter: drop-shadow(0 0 20px rgba(255,196,120,.7));
+  animation: pranam-rise 2.4s var(--ease) forwards;
 }
-.gv-name-en {
-  font-family: var(--gv-font-serif);
-  font-size: clamp(14px, calc(1.9 * var(--gv-vh)), 18px);
-  font-style: italic; font-weight: 400;
-  color: var(--gv-gold-soft); letter-spacing: .07em;
-}
-.gv-title {
-  font-size: clamp(9.5px, calc(1.25 * var(--gv-vh)), 11px);
-  text-transform: uppercase; letter-spacing: .26em;
-  color: var(--gv-text-faint);
+@keyframes pranam-rise {
+  0%   { opacity: 0; transform: translate(-50%, 10px) scale(.55); }
+  18%  { opacity: 1; transform: translate(-50%, -6px) scale(1); }
+  60%  { opacity: .95; transform: translate(-50%, -52px) scale(.98); }
+  100% { opacity: 0; transform: translate(-50%, -116px) scale(.8); }
 }
 
-/* Hairline separator with a diamond at its centre. */
-.gv-rule {
-  display: flex; align-items: center; justify-content: center; gap: 12px;
-  width: min(340px, 74vw); opacity: .85;
+/* --- his name and the verse --- */
+.guru-block { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.guru-sa {
+  font-family: var(--font-sa);
+  font-size: clamp(19px, 1.95vw, 26px); line-height: 1.35;
+  color: var(--saffron-lt); text-shadow: 0 0 30px rgba(242,130,12,.35);
 }
-.gv-rule::before, .gv-rule::after {
-  content: ''; flex: 1; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(232,178,77,.38), transparent);
+.guru-latin {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: clamp(14px, 1.4vw, 19px); color: var(--gold-soft); letter-spacing: .05em;
 }
-.gv-rule i {
-  width: 6px; height: 6px; transform: rotate(45deg); flex: 0 0 auto;
-  background: var(--gv-gold); opacity: .85;
-  box-shadow: 0 0 12px rgba(232,178,77,.6);
+.guru-title {
+  font-size: clamp(9px, .9vw, 11px);
+  letter-spacing: .26em; text-transform: uppercase; color: var(--text-faint);
 }
-
-.gv-shloka {
-  font-family: var(--gv-font-sa);
-  font-size: clamp(13px, calc(1.8 * var(--gv-vh)), 16.5px);
-  line-height: 1.9;
-  color: var(--gv-text);
-  max-width: 46ch;
-  opacity: .93;
+.verse {
+  font-family: var(--font-sa);
+  font-size: clamp(12.5px, 1.1vw, 15px); line-height: 1.8;
+  color: var(--text); max-width: 52ch; opacity: .94;
 }
-.gv-shloka-en {
-  font-size: clamp(11px, calc(1.4 * var(--gv-vh)), 12.5px);
-  color: var(--gv-text-faint);
-  max-width: 54ch; margin: 7px auto 0; line-height: 1.6;
-  opacity: .85;
-}
-.gv-shloka-tr {
-  font-family: var(--gv-font-serif);
-  font-size: clamp(11.5px, calc(1.5 * var(--gv-vh)), 14px);
-  font-style: italic; letter-spacing: .03em;
-  color: var(--gv-text-faint);
-  max-width: 52ch; margin-top: 6px;
+.verse-tr {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: clamp(11px, 1vw, 13.5px); color: var(--text-faint);
+  max-width: 58ch; margin-top: 3px; line-height: 1.5;
 }
 
-/* =========================================================================
-   3. FOOTER — offering, blessing line, entry
-   ========================================================================= */
+.rule { display: flex; align-items: center; justify-content: center; gap: 12px; width: min(300px, 66vw); margin: 3px 0; }
+.rule::before, .rule::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(232,178,77,.4), transparent); }
+.rule i { width: 6px; height: 6px; transform: rotate(45deg); background: var(--gold); opacity: .85; box-shadow: 0 0 12px rgba(232,178,77,.6); }
 
-.gv-foot {
-  position: relative; z-index: 2; flex: 0 0 auto;
-  display: flex; flex-direction: column; align-items: center;
-  gap: clamp(9px, calc(1.3 * var(--gv-vh)), 15px);
-  padding: clamp(12px, calc(2 * var(--gv-vh)), 24px) 20px calc(clamp(16px, calc(2.6 * var(--gv-vh)), 32px) + env(safe-area-inset-bottom));
+/* A quiet text link, used under his name and inside each band. */
+.more-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: none; border: 0; cursor: pointer; padding: 4px 2px;
+  font-family: var(--font-ui); font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gold-soft); border-bottom: 1px solid rgba(232,178,77,.3);
+  transition: color .3s var(--ease-soft), border-color .3s var(--ease-soft);
 }
+.more-link:hover { color: var(--saffron-lt); border-color: rgba(232,178,77,.75); }
+.more-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.more-link .arrow { transition: transform .3s var(--ease); }
+.more-link:hover .arrow { transform: translateX(3px); }
 
-.gv-hint {
-  font-size: clamp(11px, calc(1.45 * var(--gv-vh)), 13px);
-  color: var(--gv-text-faint); letter-spacing: .03em;
-  transition: opacity .5s var(--gv-ease-soft);
-}
+/* --- obeisance and entry --- */
+.hero-actions { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 2px; }
+.hint { font-size: clamp(11px, 1.05vw, 13px); color: var(--text-faint); letter-spacing: .03em; }
+.act-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 
-.gv-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.gv-acts-obeisance { gap: 8px; }
-.gv-acts-obeisance .gv-btn { padding: 11px 15px; gap: 7px; font-size: clamp(11.5px, calc(1.35 * var(--gv-vh)), 13px); }
-
-.gv-btn {
-  font-family: var(--gv-font-ui);
-  display: inline-flex; align-items: center; gap: 9px;
-  padding: 13px 27px;
-  border-radius: 999px;
-  font-size: clamp(12.5px, calc(1.6 * var(--gv-vh)), 14.5px);
-  font-weight: 500; letter-spacing: .045em;
-  cursor: pointer;
-  border: 1px solid var(--gv-hairline);
+.btn {
+  font-family: var(--font-ui);
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 20px; border-radius: 999px;
+  font-size: clamp(11.5px, 1.05vw, 13.5px); font-weight: 500; letter-spacing: .04em;
+  cursor: pointer; color: var(--text);
+  border: 1px solid var(--hairline);
   background: rgba(255,255,255,.035);
-  color: var(--gv-text);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  transition: transform .3s var(--gv-ease), background .3s var(--gv-ease-soft),
-              border-color .3s var(--gv-ease-soft), box-shadow .4s var(--gv-ease-soft),
-              opacity .5s var(--gv-ease-soft), color .3s var(--gv-ease-soft);
+  transition: transform .3s var(--ease), background .3s var(--ease-soft),
+              border-color .3s var(--ease-soft), box-shadow .4s var(--ease-soft),
+              opacity .5s var(--ease-soft), color .3s var(--ease-soft);
 }
-.gv-btn:hover  { transform: translateY(-2px); border-color: rgba(232,178,77,.55); background: rgba(255,255,255,.07); }
-.gv-btn:active { transform: translateY(0) scale(.98); }
-.gv-btn:focus-visible { outline: 2px solid var(--gv-gold); outline-offset: 4px; }
+.btn:hover  { transform: translateY(-2px); border-color: rgba(232,178,77,.55); background: rgba(255,255,255,.07); }
+.btn:active { transform: translateY(0) scale(.98); }
+.btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
 
-/* Offer — the primary action while the gate is locked. */
-.gv-btn-offer {
+.btn-obeisance {
   border-color: rgba(242,130,12,.5);
-  background: linear-gradient(180deg, rgba(242,130,12,.20), rgba(196,71,26,.16));
-  color: #FFE6C4;
-  box-shadow: 0 0 34px rgba(242,130,12,.18);
+  background: linear-gradient(180deg, rgba(242,130,12,.2), rgba(196,71,26,.16));
+  color: #FFE6C4; box-shadow: 0 0 30px rgba(242,130,12,.16);
 }
-.gv-btn-offer:hover { box-shadow: 0 0 46px rgba(242,130,12,.34); }
+.btn-obeisance:hover { box-shadow: 0 0 44px rgba(242,130,12,.32); }
 
-/* Enter — deliberately quiet until an offering has been made, then it
-   takes over as the brightest thing on the screen. */
-.gv-btn-enter { opacity: .34; pointer-events: none; }
-.gv-btn-enter.gv-ready {
+/* Locked, the entry button says what to do rather than sitting mute — which
+   is why there is no separate explanatory line under it. */
+.btn-enter { padding: 14px 30px; font-size: clamp(12.5px, 1.15vw, 14.5px); opacity: .5; pointer-events: none; }
+.btn-enter.ready {
   opacity: 1; pointer-events: auto;
   border-color: rgba(232,178,77,.62);
-  background: linear-gradient(180deg, rgba(232,178,77,.20), rgba(242,130,12,.12));
+  background: linear-gradient(180deg, rgba(232,178,77,.2), rgba(242,130,12,.12));
   color: #FFF1D8;
-  animation: gv-arrive .9s var(--gv-ease) both, gv-glow 3.6s var(--gv-ease-soft) 1s infinite;
+  animation: arrive .9s var(--ease) both, glow 3.6s var(--ease-soft) 1s infinite;
 }
-@keyframes gv-arrive {
-  from { transform: translateY(10px) scale(.96); opacity: 0; }
-  to   { transform: none; opacity: 1; }
+@keyframes arrive { from { transform: translateY(10px) scale(.96); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes glow {
+  0%,100% { box-shadow: 0 0 22px rgba(232,178,77,.18); }
+  50%     { box-shadow: 0 0 46px rgba(232,178,77,.4); }
 }
-@keyframes gv-glow {
-  0%, 100% { box-shadow: 0 0 22px rgba(232,178,77,.18); }
-  50%      { box-shadow: 0 0 46px rgba(232,178,77,.40); }
-}
-.gv-btn-enter .gv-arrow { transition: transform .3s var(--gv-ease); }
-.gv-btn-enter:hover .gv-arrow { transform: translateX(4px); }
+.btn-enter .arrow { transition: transform .3s var(--ease); }
+.btn-enter:hover .arrow { transform: translateX(4px); }
 
-/* "With the blessings of…" — set small and wide, the way a colophon reads. */
-.gv-blessing {
-  font-family: var(--gv-font-serif);
-  font-size: clamp(11.5px, calc(1.5 * var(--gv-vh)), 14px);
-  font-style: italic;
-  color: var(--gv-gold-soft);
-  letter-spacing: .05em;
-  opacity: .9;
-  max-width: 44ch; text-align: center; line-height: 1.6;
+.count { font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-faint); min-height: 13px; }
+
+/* --- the sections popover, reachable from the first screen --- */
+.cue {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  margin-top: 2px; padding: 6px 10px; text-decoration: none;
+  font-family: var(--font-ui); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--text-faint); opacity: .8;
+  transition: opacity .3s var(--ease-soft), color .3s var(--ease-soft);
 }
+.cue:hover { opacity: 1; color: var(--gold-soft); }
+.cue span:last-child { font-size: 14px; animation: nudge 2.6s var(--ease-soft) infinite; }
+@keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
 
-.gv-count.gv-locked-note { color: var(--gv-saffron-lt); opacity: .95; }
-.gv-count {
-  font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--gv-text-faint);
-  min-height: 13px;
-  transition: opacity .4s var(--gv-ease-soft);
-}
-
-/* Namaskara — the folded hands rise from the feet and dissolve. */
-.gv-pranam {
-  position: absolute; left: 50%; top: 0;
-  transform: translateX(-50%);
-  font-size: 40px; line-height: 1; pointer-events: none;
-  filter: drop-shadow(0 0 22px rgba(255,196,120,.75));
-  animation: gv-pranam-rise 2.1s var(--gv-ease) forwards;
-}
-@keyframes gv-pranam-rise {
-  0%   { opacity: 0; transform: translateX(-50%) translateY(14px) scale(.7); }
-  22%  { opacity: 1; transform: translateX(-50%) translateY(-6px) scale(1.08); }
-  55%  { opacity: 1; transform: translateX(-50%) translateY(-30px) scale(1); }
-  100% { opacity: 0; transform: translateX(-50%) translateY(-78px) scale(.92); }
-}
-
-/* =========================================================================
-   4. PETALS
-   ========================================================================= */
-
-.gv-petal-layer { position: fixed; inset: 0; pointer-events: none; z-index: 4; overflow: hidden; }
-.gv-petal { position: absolute; will-change: transform, opacity; }
-.gv-petal svg { display: block; filter: drop-shadow(0 2px 5px rgba(0,0,0,.45)); }
-
-/* Petals that have come to rest at the feet. */
-.gv-settled { position: absolute; z-index: 3; pointer-events: none; opacity: 0; animation: gv-settle .7s var(--gv-ease) forwards; }
-@keyframes gv-settle {
+/* Flowers fall inside the hero, so a settled heap stays on his feet. */
+.petal-layer { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 4; }
+.petal { position: absolute; will-change: transform, opacity; }
+.petal svg, .settled svg { display: block; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+.settled { position: absolute; z-index: 3; pointer-events: none; opacity: 0; animation: settle .7s var(--ease) forwards; }
+@keyframes settle {
   from { opacity: 0; transform: translateY(-8px) scale(.85); }
-  to   { opacity: .88; transform: none; }
+  to   { opacity: .92; transform: none; }
 }
 
 /* =========================================================================
-   5. STAGED ENTRANCE
-   Each piece rises on its own delay so the screen assembles itself
-   top-down over ~2s instead of appearing all at once.
+   2. CONTRIBUTOR BANDS
    ========================================================================= */
-.gv-rise { opacity: 0; transform: translateY(16px); }
-.gv-overlay.gv-ready-in .gv-rise {
-  opacity: 1; transform: none;
-  transition: opacity 1.1s var(--gv-ease), transform 1.1s var(--gv-ease);
-}
-.gv-overlay.gv-ready-in .gv-rise[data-d="1"] { transition-delay: .15s; }
-.gv-overlay.gv-ready-in .gv-rise[data-d="2"] { transition-delay: .40s; }
-.gv-overlay.gv-ready-in .gv-rise[data-d="3"] { transition-delay: .95s; }
-.gv-overlay.gv-ready-in .gv-rise[data-d="4"] { transition-delay: 1.25s; }
-.gv-overlay.gv-ready-in .gv-rise[data-d="5"] { transition-delay: 1.55s; }
-.gv-overlay.gv-ready-in .gv-rise[data-d="6"] { transition-delay: 1.85s; }
 
-/* Portrait gets a slightly different entrance — it scales up as it fades. */
-.gv-overlay .gv-portrait-wrap.gv-rise { transform: translateY(22px) scale(.94); }
-.gv-overlay.gv-ready-in .gv-portrait-wrap.gv-rise {
-  transform: none;
-  transition: opacity 1.6s var(--gv-ease), transform 1.6s var(--gv-ease);
-  transition-delay: .3s;
+.band { position: relative; z-index: 2; padding: clamp(40px, 5.4vw, 72px) 22px; }
+.inner { max-width: 1120px; margin: 0 auto; }
+
+.person { border-top: 1px solid var(--hairline-2); }
+.person:nth-of-type(even) { background: rgba(255,255,255,.014); }
+
+.person-head { display: flex; align-items: flex-start; gap: clamp(14px, 2vw, 22px); }
+.person-icon {
+  flex: 0 0 auto; width: 60px; height: 60px; border-radius: 50%;
+  border: 1px solid rgba(232,178,77,.4);
+  display: grid; place-items: center; color: var(--gold);
+  box-shadow: inset 0 0 24px rgba(242,130,12,.14), 0 0 24px rgba(242,130,12,.1);
+}
+.person-eyebrow {
+  font-size: clamp(10.5px, 1vw, 12px); letter-spacing: .2em; text-transform: uppercase;
+  color: var(--text-faint); margin-bottom: 6px;
+}
+.person-name {
+  font-family: var(--font-serif);
+  font-size: clamp(21px, 2.4vw, 30px); font-weight: 600; color: var(--saffron-lt); line-height: 1.2;
+}
+.person-name span { font-family: var(--font-ui); font-size: .5em; font-weight: 400; color: var(--text-faint); letter-spacing: .04em; }
+.person-meta { margin-top: 7px; font-size: 12.5px; line-height: 1.65; color: var(--text-dim); }
+.person-blurb {
+  margin: 18px 0 0; font-size: clamp(13.5px, 1.25vw, 15px); line-height: 1.8; color: var(--text-dim);
+  max-width: 76ch;
+}
+.person-actions { margin-top: 16px; }
+
+.person-items { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.person-items li {
+  border: 1px solid var(--hairline-2); border-radius: 12px; padding: 14px 16px;
+  font-size: 13.5px; color: var(--text); background: rgba(255,255,255,.02);
+}
+.person-items li small { display: block; margin-top: 4px; font-size: 12px; color: var(--text-faint); line-height: 1.6; }
+
+.person-todo {
+  margin-top: 18px; font-size: 12px; line-height: 1.65; color: var(--text-faint);
+  border: 1px dashed rgba(232,178,77,.28); border-radius: 12px; padding: 12px 15px;
+}
+
+/* --- footer --- */
+.site-foot { position: relative; z-index: 2; padding: 34px 22px calc(40px + env(safe-area-inset-bottom)); text-align: center; }
+.mantra {
+  font-family: var(--font-sa);
+  font-size: clamp(13px, 1.4vw, 18px); color: var(--gold);
+  letter-spacing: .04em; opacity: .92; line-height: 1.9;
+}
+.mantra.second { font-size: clamp(11.5px, 1.15vw, 15px); opacity: .8; margin-top: 9px; }
+.mantra-latin {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: clamp(10.5px, 1vw, 12.5px); color: var(--text-faint);
+  letter-spacing: .06em; margin-top: 4px;
 }
 
 /* =========================================================================
-   6. SHORT-VIEWPORT + REDUCED MOTION
+   3. PANELS
    ========================================================================= */
 
-/* Narrow phones: reclaim the side gutters so the obeisance pair still fits
-   one row. Wrapping it costs a whole row and pushes the entry button under
-   the fold. */
-@media (max-width: 400px) {
-  .gv-stage, .gv-foot { padding-left: 12px; padding-right: 12px; }
+.sheet-wrap {
+  position: fixed; inset: 0; z-index: 150;
+  display: grid; place-items: center; padding: 18px;
+  background: rgba(5,4,3,.8);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  opacity: 0; visibility: hidden;
+  transition: opacity .35s var(--ease-soft), visibility 0s linear .35s;
+}
+.sheet-wrap.open { opacity: 1; visibility: visible; transition-delay: 0s; }
+
+.sheet {
+  width: min(920px, 100%); max-height: calc(100 * var(--vh) - 36px);
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  border: 1px solid rgba(232,178,77,.28); border-radius: 20px;
+  background: linear-gradient(180deg, #1B1410, var(--bg-panel));
+  box-shadow: 0 40px 90px rgba(0,0,0,.7);
+  padding: clamp(20px, 2.8vw, 36px);
+  transform: translateY(18px) scale(.98);
+  transition: transform .4s var(--ease);
+}
+.sheet-wrap.open .sheet { transform: none; }
+
+.sheet-close {
+  position: sticky; top: 0; float: right;
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+  border: 1px solid var(--hairline); background: rgba(20,16,12,.9);
+  color: var(--text-dim); font-size: 17px; line-height: 1;
+  display: grid; place-items: center;
+  transition: border-color .3s var(--ease-soft), color .3s var(--ease-soft);
+}
+.sheet-close:hover { border-color: rgba(232,178,77,.6); color: var(--text); }
+
+.sheet-eyebrow { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 8px; }
+.sheet h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(21px, 2.4vw, 29px); font-weight: 500; color: var(--gold); margin: 0 0 4px;
+}
+.sheet > p { font-size: 13.5px; line-height: 1.78; color: var(--text-dim); max-width: 80ch; }
+
+.reverence {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: clamp(13.5px, 1.35vw, 16.5px); line-height: 1.72; color: var(--gold-soft);
+  border-left: 2px solid rgba(232,178,77,.35); padding: 2px 0 2px 16px;
+  margin: 16px 0 24px; max-width: 80ch;
 }
 
-/* On a short landscape phone the shloka is the first thing to go. */
-/* The prose translation is the most expendable line on a phone — the verse
-   and the way in matter more than a gloss. */
-@media (max-height: 940px) {
-  .gv-shloka-en { display: none; }
+/* One acknowledgement group. */
+.ack { margin-top: 24px; }
+.ack-head { display: flex; align-items: center; gap: 11px; margin-bottom: 12px; }
+.ack-head .ico { color: var(--gold); line-height: 0; flex: 0 0 auto; }
+.ack-head h4 {
+  font-family: var(--font-serif); font-weight: 600;
+  font-size: clamp(15px, 1.5vw, 18px); color: var(--saffron-lt); margin: 0;
 }
-@media (max-height: 760px) {
-  .gv-shloka-tr { display: none; }
+.ack-head .line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(232,178,77,.28), transparent); }
+
+.ack-entries { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; grid-template-columns: repeat(auto-fit, minmax(268px, 1fr)); }
+.ack-entries li {
+  border: 1px solid var(--hairline-2); border-radius: 12px; padding: 12px 15px;
+  background: rgba(255,255,255,.022);
+}
+.ack-entries b { display: block; font-family: var(--font-serif); font-weight: 600; font-size: 15px; color: var(--text); letter-spacing: .01em; }
+.ack-entries small { display: block; margin-top: 4px; font-size: 12px; line-height: 1.6; color: var(--text-faint); }
+.ack-entries small.also {
+  margin-top: 7px; padding-top: 7px;
+  border-top: 1px solid var(--hairline-2);
+  font-size: 11.5px; opacity: .85;
 }
 
-/* Small phone with the address bar showing. The portrait keeps its
-   presence; the divider and some breathing room go, so the colophon still
-   lands on screen rather than under the browser chrome. */
-@media (max-height: 700px) {
-  .gv-portrait-wrap { width: clamp(124px, 22 * var(--gv-vh), 190px); }
-  .gv-stage { gap: clamp(8px, 1.3 * var(--gv-vh), 14px); padding-top: calc(12px + env(safe-area-inset-top)); }
-  .gv-foot { gap: clamp(7px, 1 * var(--gv-vh), 11px); }
-  .gv-rule { display: none; }
-}
-/* Very small phone, portrait. Rare, but the colophon should still land on
-   screen rather than under the browser chrome. */
-@media (max-height: 620px) and (orientation: portrait) {
-  .gv-om, .gv-title { display: none; }
-  .gv-portrait-wrap { width: clamp(104px, 19 * var(--gv-vh), 150px); }
-  .gv-name-sa { font-size: 18px; }
-  .gv-shloka { font-size: 12.5px; line-height: 1.65; }
-  .gv-blessing { font-size: 11px; }
+/* A plain roll of names, where there is nothing to say beside each one. */
+.ack-names { display: flex; flex-wrap: wrap; gap: 8px; }
+.ack-names span {
+  border: 1px solid var(--hairline-2); border-radius: 999px; padding: 8px 15px;
+  font-size: 13px; color: var(--text); background: rgba(255,255,255,.022);
 }
 
-/* Short landscape is a different shape of problem — wide and flat — so
-   these are scoped to it. Unscoped they also caught small portrait phones,
-   where the portrait override made the picture larger, not smaller. */
-@media (max-height: 560px) and (orientation: landscape) {
-  .gv-shloka-tr, .gv-shloka-en, .gv-title { display: none; }
-  .gv-portrait-wrap { width: clamp(130px, 30 * var(--gv-vh), 220px); }
-  .gv-shloka { font-size: 12px; line-height: 1.75; }
+.closing {
+  display: flex; align-items: center; gap: 16px;
+  margin-top: 26px; padding: 18px 22px;
+  border: 1px solid rgba(232,178,77,.26); border-radius: 16px;
+  background: linear-gradient(180deg, rgba(242,130,12,.09), rgba(242,130,12,.03));
 }
-@media (max-height: 430px) {
-  .gv-shloka, .gv-rule, .gv-om { display: none; }
+.closing .ico { color: var(--gold); line-height: 0; flex: 0 0 auto; opacity: .9; }
+.closing p {
+  margin: 0; font-family: var(--font-serif); font-style: italic;
+  font-size: clamp(14px, 1.4vw, 17.5px); line-height: 1.65; color: var(--gold-soft);
+}
+
+.sheet-todo {
+  margin-top: 20px; font-size: 12px; line-height: 1.65; color: var(--text-faint);
+  border: 1px dashed rgba(232,178,77,.28); border-radius: 12px; padding: 12px 15px;
+}
+
+/* =========================================================================
+   4. RESPONSIVE
+   ========================================================================= */
+
+@media (max-width: 900px) {
+  .person-head { flex-direction: column; align-items: center; text-align: center; }
+  .person-blurb { text-align: center; margin-left: auto; margin-right: auto; }
+  .person-actions { text-align: center; }
+  .ack-head { justify-content: center; }
+  .ack-head .line { display: none; }
+  .ack-names { justify-content: center; }
+  .closing { flex-direction: column; text-align: center; gap: 10px; }
+}
+
+@media (max-width: 700px) {
+  .hero { gap: clamp(8px, 1.3 * var(--vh), 16px); padding-bottom: 56px; }
+  .brand-latin { font-size: clamp(24px, 6.4vw, 34px); }
+  .brand-tagline { font-size: 12px; line-height: 1.6; }
+  .verse { font-size: 13px; line-height: 1.85; }
+  .verse-tr { display: none; }
+  .btn { padding: 11px 16px; }
+  .btn-enter { padding: 12px 24px; }
+  .portrait-wrap { width: clamp(150px, 19 * var(--vh), 210px); }
+}
+@media (max-width: 700px) and (max-height: 720px) {
+  .brand-tagline { display: none; }
+  .guru-title { display: none; }
+  .portrait-wrap { width: clamp(126px, 17 * var(--vh), 180px); }
+  .cue { display: none; }
+}
+
+/* A laptop is wide but often short — 1280x720 and the like. The vw-based
+   type stays large there while the height does not, so the entry button
+   slips under the fold unless this tier pulls it back. */
+@media (min-width: 900px) and (max-height: 820px) {
+  .hero { gap: 6px; padding-bottom: 14px; }
+  .brand-latin { font-size: 30px; }
+  .brand-tagline { font-size: 12px; max-width: 84ch; }
+  .portrait-wrap { width: clamp(128px, 15 * var(--vh), 190px); }
+  .verse { font-size: 13px; line-height: 1.7; }
+  .verse-tr { display: none; }
+}
+
+@media (max-width: 700px) and (max-height: 640px) {
+  .om { display: none; }
+  .portrait-wrap { width: clamp(110px, 15 * var(--vh), 150px); }
+  .verse { font-size: 12px; line-height: 1.6; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .gv-mandala, .gv-smoke, .gv-om, .gv-halo, .gv-halo-ring,
-  .gv-frame img, .gv-btn-enter.gv-ready { animation: none !important; }
-  .gv-overlay, .gv-rise, .gv-btn { transition-duration: .01ms !important; transition-delay: 0s !important; }
-  .gv-overlay.gv-leaving { transform: none; filter: none; }
-  .gv-petal, .gv-ripple, .gv-pranam { display: none !important; }
+  html { scroll-behavior: auto; }
+  .mandala, .smoke, .om, .halo, .halo-ring, .frame img,
+  .btn-enter.ready, .cue span { animation: none !important; }
+  .petal, .ripple, .pranam-mark { display: none !important; }
+  .btn, .sheet, .sheet-wrap, .cue-pop, #veil { transition-duration: .01ms !important; }
 }
-
 </style>
 </head>
 <body>
 
+<div id="veil"></div>
+
 <noscript>
-  <div style="padding:28px;text-align:center;font-family:Georgia,serif;">
-    <p>This page needs JavaScript to display the vandana.</p>
-    <p><a href="dge/index.html">Continue to the Sarvamoola Digital Library</a></p>
+  <div style="padding:26px;text-align:center;font-family:Georgia,serif;color:#F3E7D4;">
+    This page needs JavaScript to display the vandana.
+    <a href="dge/index.html" style="color:#E8B24D;">Continue to the library</a>
   </div>
 </noscript>
 
-<!-- ======================================================================
-     THE GATE
-     ====================================================================== -->
-<div class="gv-overlay" id="gvOverlay" role="dialog" aria-modal="true" aria-labelledby="gvNameSa">
-
-  <!-- Ambient layers -->
-  <svg class="gv-mandala" viewBox="0 0 400 400" aria-hidden="true">
+<!-- =====================================================================
+     HERO
+     ===================================================================== -->
+<header class="hero" id="hero">
+  <svg class="mandala" viewBox="0 0 400 400" aria-hidden="true">
     <g fill="none" stroke="#E8B24D" stroke-width=".6">
       <circle cx="200" cy="200" r="60"/><circle cx="200" cy="200" r="96"/>
       <circle cx="200" cy="200" r="132"/><circle cx="200" cy="200" r="168"/>
-      <g id="gvSpokes"></g>
+      <g id="spokes"></g>
     </g>
   </svg>
-  <div class="gv-smoke gv-smoke-l" aria-hidden="true"></div>
-  <div class="gv-smoke gv-smoke-r" aria-hidden="true"></div>
-  <div class="gv-vignette" aria-hidden="true"></div>
-  <div class="gv-petal-layer" id="gvPetals" aria-hidden="true"></div>
+  <div class="smoke l" aria-hidden="true"></div>
+  <div class="smoke r" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="petal-layer" id="petals" aria-hidden="true"></div>
 
-  <!-- Stage -->
-  <div class="gv-stage">
-    <div class="gv-om gv-rise" data-d="1" aria-hidden="true">ॐ</div>
-
-    <div class="gv-portrait-wrap gv-rise" data-d="2">
-      <div class="gv-halo" aria-hidden="true"></div>
-      <div class="gv-halo-ring" aria-hidden="true"></div>
-      <div class="gv-frame">
-        <img id="gvPhoto" src="" alt="">
-      </div>
-      <!-- The feet. Tapping here is the offering gesture. -->
-      <div class="gv-pada" id="gvPada" role="button" tabindex="0"
-           aria-label="Offer flowers at the Guru's feet"></div>
-    </div>
-
-    <div class="gv-names gv-rise" data-d="3">
-      <div class="gv-name-sa" id="gvNameSa"></div>
-      <div class="gv-name-en" id="gvNameEn"></div>
-      <div class="gv-title"  id="gvTitle"></div>
-    </div>
-
-    <div class="gv-rule gv-rise" data-d="4" aria-hidden="true"><i></i></div>
-
-    <div class="gv-rise" data-d="4">
-      <div class="gv-shloka"    id="gvShloka"></div>
-      <div class="gv-shloka-tr" id="gvShlokaTr"></div>
-      <div class="gv-shloka-en" id="gvShlokaEn"></div>
-    </div>
+  <div class="masthead">
+    <h1  class="brand-latin"   id="brandLatin"></h1>
+    <p   class="brand-tagline" id="brandTagline"></p>
   </div>
 
-  <!-- Footer -->
-  <div class="gv-foot">
-    <div class="gv-hint gv-rise" data-d="5" id="gvHint"></div>
+  <div class="om" aria-hidden="true">ॐ</div>
 
-    <!-- The two ways of paying respects. Either one opens the gate; without
-         one of them the entry button stays inert. -->
-    <div class="gv-actions gv-acts-obeisance gv-rise" data-d="5">
-      <button class="gv-btn gv-btn-offer" id="gvOfferBtn" aria-label="Offer flowers at the Guru's feet">
-        <span aria-hidden="true">🌸</span><span id="gvOfferLabel"></span>
-      </button>
-      <button class="gv-btn gv-btn-offer" id="gvPranamBtn" aria-label="Offer namaskara and seek the Guru's blessings">
-        <span aria-hidden="true">🙏</span><span id="gvPranamLabel"></span>
-      </button>
-    </div>
-
-    <div class="gv-actions gv-rise" data-d="5">
-      <button class="gv-btn gv-btn-enter" id="gvEnterBtn" aria-disabled="true">
-        <span id="gvEnterLabel"></span><span class="gv-arrow" aria-hidden="true">→</span>
-      </button>
-    </div>
-
-    <div class="gv-count gv-rise" data-d="5" id="gvCount" aria-live="polite"></div>
-    <div class="gv-blessing gv-rise" data-d="6" id="gvBlessing"></div>
+  <div class="portrait-wrap">
+    <div class="halo" aria-hidden="true"></div>
+    <div class="halo-ring" aria-hidden="true"></div>
+    <div class="frame"><img id="photo" src="" alt=""></div>
+    <div class="pada" id="pada" role="button" tabindex="0"
+         aria-label="Offer flowers at the Guru's feet"></div>
   </div>
+
+  <div class="guru-block">
+    <div class="guru-sa"    id="guruSa"></div>
+    <div class="guru-latin" id="guruLatin"></div>
+    <div class="guru-title" id="guruTitle"></div>
+    <div class="rule" aria-hidden="true"><i></i></div>
+    <div class="verse"    id="verse"></div>
+    <div class="verse-tr" id="verseTr"></div>
+    <button class="more-link" id="guruMore" data-panel="swamiji">
+      <span id="guruMoreLabel"></span><span class="arrow" aria-hidden="true">→</span>
+    </button>
+  </div>
+
+  <div class="hero-actions">
+    <div class="hint" id="hint"></div>
+    <div class="act-row">
+      <button class="btn btn-obeisance" id="offerBtn" aria-label="Offer flowers at the Guru's feet">
+        <span id="offerIcon" aria-hidden="true"></span><span id="offerLabel"></span>
+      </button>
+      <button class="btn btn-obeisance" id="pranamBtn" aria-label="Offer salutations to the Guru">
+        <span aria-hidden="true">🙏</span><span id="pranamLabel"></span>
+      </button>
+    </div>
+    <div class="act-row">
+      <button class="btn btn-enter" id="enterBtn" aria-disabled="true">
+        <span id="enterLabel"></span><span class="arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
+    <div class="count" id="count" aria-live="polite"></div>
+  </div>
+
+  <a class="cue" id="cueBtn" href="#architect">
+    <span id="cueLabel"></span><span aria-hidden="true">⌄</span>
+  </a>
+</header>
+
+<!-- One band per contributor, rendered from SITE_CONFIG.sections -->
+<div id="sections"></div>
+
+<footer class="site-foot">
+  <div class="rule" style="margin:0 auto 16px;" aria-hidden="true"><i></i></div>
+  <div id="mantras"></div>
+</footer>
+
+<div class="sheet-wrap" id="sheetWrap" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet" id="sheet"></div>
 </div>
 
 <script>
 /* =========================================================================
-   GURU_VANDANA_CONFIG
-   Same shape as SPONSOR_CONFIG / WHATS_NEW_CONFIG in js/config.js, so this
-   drops into that file unchanged and becomes editable from Site Settings
-   (data/config-overrides.json) without touching any markup.
+   SITE_CONFIG — every word on this page lives here.
+   Same shape as SPONSOR_CONFIG / WHATS_NEW_CONFIG in dge/js/config.js, so it
+   drops into that file and becomes editable from Site Settings without
+   touching any markup.
    ========================================================================= */
-const GURU_VANDANA_CONFIG = {
-  enabled: true,
+const SITE_CONFIG = {
 
-  // Where paying respects leads. This page is the front door of the site and
-  // holds nothing else, so entering is a real navigation into the library.
-  // Set to '' to make the gate simply dissolve in place instead — that is
-  // what the offline standalone preview does.
+  /* ---- the gate ---- */
   enterUrl: 'dge/index.html',
-
-  // 'always'   — every arrival at the site (default here)
-  // 'session'  — once per browser session, then straight through to enterUrl
-  // 'day'      — once every 24 hours
-  // 'once'     — the first visit ever, then never again
-  // Anything but 'always' means a returning visitor is forwarded to enterUrl
-  // without seeing the gate. Note that also makes the browser's Back button
-  // from the library bounce straight forward again.
-  showOncePer: 'always',
-  storageKey: 'dge_guru_vandana_seen',
-
-  // Written the moment respects are paid, and read by dge/js/vandana-guard.js
-  // on every page under dge/. That guard bounces anyone who arrived by
-  // bookmark or deep link back here, so the vandana cannot be walked past.
-  // Session-scoped: respects last for the visit, and are asked again on a
-  // fresh one. Change this key and the guard's PASS_KEY together.
-  passKey: 'dge_vandana_passed',
-
-  // Soft gate. The Enter button is visible but inert until the visitor has
-  // made at least `minOfferings` offerings. Set requireOffering:false to let
-  // anyone straight through while still showing the vandana.
   requireOffering: true,
   minOfferings: 1,
-
-  // Esc / backdrop escape hatch. Off by default so the gate means something.
-  allowEscape: false,
-
-  // Auto-enter after N ms with no interaction. 0 disables.
-  autoEnterMs: 0,
+  passKey: 'dge_vandana_passed',
 
   photo: {
     src: 'dge/images/guru/guruji.jpg',
     alt: 'Śrī Viśvanandana Tīrtha, seated',
-
-    // The photo is cropped to fill the arch, so these decide the framing.
-    // Tuned for this photograph: a 2:3 arch shows ~84% of its height, and
-    // 'center 50%' centres that window so the head clears the top of the
-    // arch and the feet stay in view — the feet matter, they are what the
-    // flowers are offered at.
     frameRatio: '2 / 3',
     objectPosition: 'center 50%',
-
-    // Where the offering lands. His feet sit right of centre in this frame,
-    // so the tap zone and the heap of petals follow them rather than sitting
-    // dead-centre under the portrait.
     padaCenterX: '70%',
     padaWidth: '50%'
   },
 
-  // Read off the vandana below (विश्वनंदन भिक्षुकम् / विश्वेशकरजं). Correct the
-  // ashrama title here if it should read differently.
+  brand: {
+    latin: 'Sarvamūla Digital Library',
+    tagline: 'A digital initiative to preserve, organize and present the complete heritage of our Śāstra, Itihāsa, Purāṇa, Stotra and Kāvya in one place — with authenticity and devotion.'
+  },
+
   guru: {
     nameSanskrit: 'श्री विश्वनन्दन तीर्थ',
-    nameEnglish: 'Śrī Viśvanandana Tīrtha',
-    titleLine: 'Paramapūjya Ācārya'
+    nameLatin: 'Śrī Viśvanandana Tīrtha',
+    title: 'Paramapūjya Ācārya',
+    moreLabel: 'Know More'
   },
 
   vandana: {
     sanskrit: 'भागण्णार्य कृपापात्रं नित्यं भागवते रतम् ।<br>विश्वेशकरजं वंदे विश्वनंदनभिक्षुकम् ॥',
-    transliteration: 'bhāgaṇṇārya-kṛpāpātraṃ nityaṃ bhāgavate ratam · viśveśakarajaṃ vande viśvanandana-bhikṣukam',
-    // Optional. Set to '' to show the verse alone.
-    translation: 'Recipient of the grace of Śrī Bhāgaṇṇārya, ever devoted to the Bhāgavata, ordained by the hand of Śrī Viśveśa — I bow to the mendicant Śrī Viśvanandana.'
+    transliteration: 'bhāgaṇṇārya-kṛpāpātraṃ nityaṃ bhāgavate ratam · viśveśakarajaṃ vande viśvanandana-bhikṣukam'
   },
-
-  // The obeisance / colophon line under the entry button.
-  blessing: 'With the blessings of Śrī Viśvanandana Tīrtha, this library is offered at his feet.',
 
   labels: {
-    offerHint:   'Tap his feet, or a button below, to pay your respects',
-    offerButton: 'पुष्पाञ्जलि · Flowers',
-    pranamButton: 'नमस्कार · Blessings',
-    enterLocked: 'Enter the Library',
-    enterReady:  'Enter the Library',
-    // Shown under the entry button while it is still locked, so the reason
-    // the button will not respond is never a mystery.
-    lockedNote:  'The library opens once respects have been paid',
-    // {n} is replaced with the number of obeisances made.
-    countOne:    '{n} obeisance offered',
-    countMany:   '{n} obeisances offered',
-    thankYou:    'नमो गुरवे — you may now enter'
+    hint:         'Tap his feet, or a button below, to pay your respects',
+    offerButton:  'पुष्पाञ्जलि · Flowers',
+    pranamButton: 'नमस्काराः · Salutations',
+    // Locked, the button itself carries the instruction — so there is no
+    // separate explanatory line beneath it.
+    enterLocked:  'Pay Respects to Enter the Library',
+    enterReady:   'Enter the Library',
+    countOne:     '{n} obeisance offered',
+    countMany:    '{n} obeisances offered',
+    thankYou:     'नमो गुरवे — you may now enter',
+    sectionsCue:  'About Us'
   },
 
-  petals: {
-    countPerOffering: 16,
-    // Marigold, rose, tulasi-flower white, kumkuma red.
-    colors: ['#F2820C', '#FFB24D', '#E8B24D', '#C4471A', '#FFE0B0', '#D94F2A'],
+  /* Pārijāta — the night-flowering jasmine, which falls of itself and is
+     gathered from the ground for worship. White petals, saffron tube. */
+  flowers: {
+    countPerOffering: 15,
+    petalColors: ['#FFFDF8', '#FFF8EC', '#FBF3E4', '#FFFFFF', '#F7EFE0'],
+    heartColors: ['#F2820C', '#E8720A', '#FF9A2E'],
     maxSettled: 44
+  },
+  pranam: { count: 5 },
+
+  /* ---- the bands ---- */
+  sections: [
+    {
+      id: 'architect',
+      eyebrow: 'Initiated, Architected & Developed by',
+      icon: 'quill',
+      name: 'Tribhuvan',
+      sub: '(3BHU1)',
+      meta: ['Ex-Software Architect, Accenture · Sevak @ Śrīpādarājaru – Narasimha Tīrtha'],
+      blurb: 'Conceptualized and built the Sarvamūla Digital Library — from corpus planning and sourcing to OCR, indexing, search, platform development, and audio recordings — as an offering in the service of Śāstra and the Guru Paramparā.',
+      moreLabel: 'Know More',
+      panel: 'tribhuvan'
+    },
+    {
+      id: 'scholar',
+      eyebrow: 'Content Contribution & Scholarly Lead',
+      icon: 'book',
+      name: 'Vid. Pradeep Simhachar',
+      blurb: 'Content contribution, scholarly review, proofreading and corpus expansion. Ensures the authenticity and accuracy of every text that enters the library, and guides its continuous growth.',
+      moreLabel: 'Know More',
+      panel: 'pradeep'
+    },
+    {
+      id: 'contributors',
+      eyebrow: 'Contributors & Seva Support',
+      icon: 'people',
+      name: 'Aniruddha · Sameer',
+      sub: 'and other sevaks',
+      blurb: 'This library is kept alive by hands that rarely appear on any page. With gratitude to every sevak who has given time to it.',
+      items: [
+        { name: 'Aniruddha', note: 'Audio processing and preparation.' },
+        { name: 'Sameer', note: 'Text preparation and OCR assistance.' },
+        { name: 'And other sevaks', note: 'Data management and the many behind-the-scenes services that keep this library growing and accessible.' }
+      ],
+      todo: 'To fill in: the full list of contributors and the seva each has given.'
+    }
+  ],
+
+  /* ---- panels ---- */
+  panels: {
+
+    swamiji: {
+      eyebrow: 'Paramapūjya Ācārya',
+      title: 'Śrī Viśvanandana Tīrtha',
+      body: 'Recipient of the grace of Śrī Bhāgaṇṇārya, ever devoted to the Bhāgavata, ordained by the hand of Śrī Viśveśa — I bow to the mendicant Śrī Viśvanandana. So the vandana above reads.',
+      todo: 'To fill in: his āśrama lineage, his maṭha, and a short account of his life and teaching.'
+    },
+
+    /* Personal to Tribhuvan, not to the library — which is why it opens from
+       his band and appears nowhere else on the page. */
+    tribhuvan: {
+      eyebrow: 'Initiated, Architected & Developed by Tribhuvan (3BHU1)',
+      title: 'Gurus, Blessers & Inspirers',
+      reverence: 'With gratitude and reverence to my Gurus and well-wishers who guided, inspired and strengthened this journey. I bow to them at whose feet this seva is offered.',
+      groups: [
+        {
+          icon: 'home', heading: 'Parents',
+          entries: [
+            { name: 'Smt. Nalini & Sri Raghavendra Rao', note: 'To whom everything owes its beginning.' }
+          ]
+        },
+        {
+          icon: 'lotus', heading: 'Mantropadeśa',
+          entries: [
+            { name: 'Shri 1008 Vidyādhīśa Tīrtharu', note: 'Mantropadeśa.' },
+            { name: 'Shri Prathoshāchār', note: 'Mantropadeśa; the Ṛg Veda and the Sarvamūla Śāntipāṭha.' }
+          ]
+        },
+        {
+          icon: 'temple', heading: 'Dīkṣā Guru — roots and foundation',
+          entries: [
+            {
+              name: 'Shri Jalihal Sukeshachar',
+              note: 'He steadied my life and my path to dharma, and became family. His teaching and guidance shaped my spiritual journey.',
+              // Kept beneath the personal line rather than in place of it.
+              also: 'Strong roots and the initial foundation — Śabda, Maṇimañjarī, the Sūktas, Tīrtha Prabandha, Guru Paramparā Paricaya and Purāṇa; mārga darśana, and vivāha kārayitṛ.'
+            }
+          ]
+        },
+        {
+          icon: 'book', heading: 'Under whose teaching I have studied',
+          entries: [
+            { name: 'Shri Badari Achar C.H.', note: 'Śrīmad Bhāgavata, with the Vijayadhvajīya.' },
+            { name: 'Shri Raghavendra Achar', note: 'Dāsa Sāhitya and the Prameya granthas.' },
+            { name: 'Shri Nagarajachar', note: 'The Veda Sūktas.' },
+            { name: 'Shri Manojachar', note: 'Māyāvāda Khaṇḍana and Viṣṇu Tattva Vinirṇaya.' },
+            { name: 'Shri Padmanabhacharya Chittuguppa', note: 'Tattva Saṅkhyāna, Tattva Viveka and Upādhi Khaṇḍana.' },
+            { name: 'Shri Tulasi Kumar Joshi & Mayank Pandey', note: 'Vyākaraṇa, through the Pañca Sandhyanta.' },
+            { name: 'Shri Raghunandanachar', note: 'Nyāyabodhinī and Vidyādharī.' },
+            { name: 'Shrinidhi, Tilak Rao & Sachidananda Mishra', note: 'Initiation into Nyāya and Vyākaraṇa.' },
+            { name: 'Shri Gururaj Desai Avaru', note: 'Initiation into the Harikathāmṛtasāra.' },
+            { name: 'Veerasimha & Venkatanatha', note: 'Śāstropakāra — steady help in the study of śāstra.' }
+          ]
+        },
+        {
+          icon: 'seated', heading: 'Mahat Sevā Bhāgya',
+          entries: [
+            { name: 'Shri Vishwanandana Tīrtharu', note: 'The fortune of serving a great soul.' }
+          ]
+        },
+        {
+          icon: 'seed', heading: 'Bīja and inspiration',
+          entries: [
+            { name: 'Shri Balagaru Shrinivasachar', note: 'Awakened my spiritual journey and inspired my dharmic life with his divine blessings.' }
+          ]
+        },
+        {
+          icon: 'anjali', heading: 'Special Blessings',
+          names: [
+            'Shri Gangur Raghavendrachar',
+            'Shri Jalihal Keshavachar',
+            'Shri Vattangad Hayagrivachar',
+            'Shri Dwarakanathachar',
+            'Shri Balagaru Ruchirachar'
+          ]
+        }
+      ],
+      // Closes the panel, set apart from the groups above it.
+      closing: 'Śrī Śrīpādarāja, Śrī Bhūtarāja & Śrī Vādirāja — my life and breath.'
+    },
+
+    pradeep: {
+      eyebrow: 'Content Contribution & Scholarly Lead',
+      title: 'Vid. Pradeep Simhachar',
+      body: 'Content contribution, scholarly review, proofreading and corpus expansion. Ensures the authenticity and accuracy of every text that enters the library, and guides its continuous growth.',
+      groups: [
+        {
+          icon: 'book', heading: 'Seva',
+          entries: [
+            { name: 'Scholarly review', note: 'Verifying texts and commentaries against authoritative sources.' },
+            { name: 'Proofreading', note: 'Correcting OCR output, sandhi and diacritics across the corpus.' },
+            { name: 'Corpus expansion', note: 'Selecting and preparing the next granthas to be digitised.' }
+          ]
+        }
+      ],
+      todo: 'To fill in: a short biography, lineage, and areas of specialisation.'
+    }
+  },
+
+  footer: {
+    lines: [
+      { sa: '॥ हरिः सर्वोत्तमः · वायुः जीवोत्तमः ॥' },
+      { sa: 'प्रीतोऽस्तु कृष्णप्रभुः', latin: 'Prītostu Kṛṣṇa Prabhuḥ' }
+    ]
   }
 };
-window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
+window.SITE_CONFIG = SITE_CONFIG;
 
-/* =========================================================================
-   Gate behaviour.
-   In the real app this becomes js/guru-vandana.js and is included before
-   core.js, since it must paint before anything else does.
-   ========================================================================= */
+/* ========================================================================= */
 (function () {
   'use strict';
 
-  const cfg  = window.GURU_VANDANA_CONFIG;
-  const $    = (id) => document.getElementById(id);
+  const cfg = SITE_CONFIG;
+  const $ = (id) => document.getElementById(id);
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const el = {
-    overlay:  $('gvOverlay'),
-    photo:    $('gvPhoto'),
-    pada:     $('gvPada'),
-    petals:   $('gvPetals'),
-    nameSa:   $('gvNameSa'),
-    nameEn:   $('gvNameEn'),
-    title:    $('gvTitle'),
-    shloka:   $('gvShloka'),
-    shlokaTr: $('gvShlokaTr'),
-    hint:     $('gvHint'),
-    offerBtn: $('gvOfferBtn'),
-    offerLbl: $('gvOfferLabel'),
-    pranamBtn: $('gvPranamBtn'),
-    pranamLbl: $('gvPranamLabel'),
-    shlokaEn: $('gvShlokaEn'),
-    enterBtn: $('gvEnterBtn'),
-    enterLbl: $('gvEnterLabel'),
-    count:    $('gvCount'),
-    blessing: $('gvBlessing')
-  };
+  const esc = (s) => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
 
   let offerings = 0;
-  let autoTimer = null;
 
-  /* --- Placeholder portrait -------------------------------------------
-     Drawn only when cfg.photo.src is missing or fails to load, so the mock
-     is presentable before the real photograph is committed. A seated
-     saffron figure, deliberately abstract — it is a stand-in, not an image
-     of anyone. */
-  const PLACEHOLDER = 'data:image/svg+xml;utf8,' + encodeURIComponent(`
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400">
-      <defs>
-        <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#3A2410"/><stop offset="1" stop-color="#120B04"/>
-        </linearGradient>
-        <linearGradient id="robe" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#F2820C"/><stop offset="1" stop-color="#B4470F"/>
-        </linearGradient>
-        <radialGradient id="lamp" cx=".5" cy=".28" r=".55">
-          <stop offset="0" stop-color="#FFD9A0" stop-opacity=".38"/>
-          <stop offset="1" stop-color="#FFD9A0" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-      <rect width="300" height="400" fill="url(%23bg)"/>
-      <rect width="300" height="400" fill="url(%23lamp)"/>
-      <ellipse cx="150" cy="126" rx="40" ry="46" fill="#8A5A32"/>
-      <path d="M150 176c-58 0-92 44-100 128 0 0 40 20 100 20s100-20 100-20c-8-84-42-128-100-128z" fill="url(%23robe)"/>
-      <path d="M150 176c-20 0-36 5-49 14 10 44 28 70 49 70s39-26 49-70c-13-9-29-14-49-14z" fill="#FFB24D" opacity=".45"/>
-      <circle cx="150" cy="108" r="3.4" fill="#F3E7D4" opacity=".85"/>
-      <text x="150" y="372" text-anchor="middle" fill="#C0AC90" font-size="12"
-            font-family="Georgia, serif" font-style="italic" opacity=".75">portrait placeholder</text>
-    </svg>`);
-
-  /* --- Populate from config -------------------------------------------- */
-  function render() {
-    el.photo.src = cfg.photo.src || PLACEHOLDER;
-    el.photo.alt = cfg.photo.alt || '';
-    el.photo.style.objectPosition = cfg.photo.objectPosition || 'center 50%';
-    document.querySelector('.gv-frame').style.setProperty('--gv-frame-ratio', cfg.photo.frameRatio || '3 / 4');
-    el.pada.style.setProperty('--gv-pada-x', cfg.photo.padaCenterX || '50%');
-    el.pada.style.setProperty('--gv-pada-w', cfg.photo.padaWidth || '74%');
-    el.photo.onerror = function () {
-      // One retry into the placeholder, then stop — otherwise a broken
-      // placeholder would loop onerror forever.
-      this.onerror = null;
-      this.src = PLACEHOLDER;
-    };
-
-    el.nameSa.innerHTML   = cfg.guru.nameSanskrit || '';
-    el.nameEn.textContent = cfg.guru.nameEnglish || '';
-    el.title.textContent  = cfg.guru.titleLine || '';
-    el.shloka.innerHTML   = cfg.vandana.sanskrit || '';
-    el.shlokaTr.textContent = cfg.vandana.transliteration || '';
-    el.shlokaEn.textContent = cfg.vandana.translation || '';
-    el.blessing.textContent = cfg.blessing || '';
-    el.hint.textContent   = cfg.labels.offerHint || '';
-    el.offerLbl.textContent  = cfg.labels.offerButton || 'Offer Flowers';
-    el.pranamLbl.textContent = cfg.labels.pranamButton || 'Seek Blessings';
-    el.enterLbl.textContent  = cfg.labels.enterLocked || 'Enter';
-
-    // Mandala spokes, drawn rather than hand-written into the markup.
-    const spokes = document.getElementById('gvSpokes');
-    if (spokes) {
-      let d = '';
-      for (let i = 0; i < 24; i++) {
-        const a = (i / 24) * Math.PI * 2;
-        d += `M${200 + Math.cos(a) * 60} ${200 + Math.sin(a) * 60}L${200 + Math.cos(a) * 168} ${200 + Math.sin(a) * 168}`;
-      }
-      const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      p.setAttribute('d', d);
-      spokes.appendChild(p);
-    }
-
-    if (!cfg.requireOffering) unlock();
+  /* Line icons, drawn rather than borrowed from the emoji font. Colour emoji
+     bring their own palette and fight the gold line-work; these inherit
+     currentColor and match the hairline weight used everywhere else. */
+  const ICONS = {
+    quill:  '<path d="M4.6 20.4 3.6 16.9 15.4 5.1a1.9 1.9 0 0 1 2.7 0l1.4 1.4a1.9 1.9 0 0 1 0 2.7L7.9 21.2Z"/><path d="m14.3 6.2 4.1 4.1"/>',
+    book:   '<path d="M3 6c3-1.6 6-1.6 9 0 3-1.6 6-1.6 9 0v12c-3-1.6-6-1.6-9 0-3-1.6-6-1.6-9 0Z"/><path d="M12 6v12"/>',
+    people: '<circle cx="9.2" cy="8.8" r="3"/><circle cx="17" cy="10" r="2.2"/><path d="M3.2 19.6c0-3.4 2.7-5.6 6-5.6s6 2.2 6 5.6"/><path d="M17 15.2c2.3 0 3.8 1.7 3.8 4"/>',
+    seated: '<circle cx="12" cy="6.4" r="2.7"/><path d="M6.6 19.4c0-4 2.4-7 5.4-7s5.4 3 5.4 7Z"/><path d="M4 19.4h16"/>',
+    temple: '<path d="M3 9.2 12 4.2l9 5"/><path d="M5 9.6v8.6M9.4 9.6v8.6M14.6 9.6v8.6M19 9.6v8.6"/><path d="M3.4 18.6h17.2"/>',
+    lotus:  '<path d="M12 20.2c-2.5-2.1-3.8-4.4-3.8-6.8 0-2.3 1.2-4.4 3.8-6.3 2.6 1.9 3.8 4 3.8 6.3 0 2.4-1.3 4.7-3.8 6.8Z"/><path d="M12 20.2c-4.2 0-7.3-1.8-9-5.1 2.7-1.6 5.6-1.3 8.2.9"/><path d="M12 20.2c4.2 0 7.3-1.8 9-5.1-2.7-1.6-5.6-1.3-8.2.9"/>',
+    anjali: '<path d="M12 20.4c-2.9 0-4.9-2-4.9-4.7 0-3.1 2-6.8 4.9-10.1v14.8Z"/><path d="M12 20.4c2.9 0 4.9-2 4.9-4.7 0-3.1-2-6.8-4.9-10.1v14.8Z"/><path d="M7.4 13.2 4.6 15.5"/><path d="m16.6 13.2 2.8 2.3"/>',
+    home:   '<path d="M3.4 10.8 12 4.1l8.6 6.7"/><path d="M5.8 10v9.8h12.4V10"/><path d="M9.9 19.8v-5.2h4.2v5.2"/>',
+    seed:   '<path d="M12 21c0-4.6 1.4-7.6 4.2-9 .4 4.8-.9 7.8-4.2 9Z"/><path d="M12 21c0-4.6-1.4-7.6-4.2-9-.4 4.8.9 7.8 4.2 9Z"/><path d="M12 21v-4"/><path d="M12 12.6c0-3.4.9-6 2.6-7.8"/>'
+  };
+  function icon(name, size) {
+    const d = ICONS[name];
+    if (!d) return '';
+    return '<svg viewBox="0 0 24 24" width="' + size + '" height="' + size + '" fill="none" ' +
+           'stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" ' +
+           'aria-hidden="true">' + d + '</svg>';
   }
 
-  /* --- Petals -----------------------------------------------------------
-     One <div> per petal, animated with the Web Animations API so each gets
-     its own randomised drift without generating a keyframe rule per petal.
-     Outer element carries the fall, inner carries sway + spin. */
-  function petalSvg(color, size) {
-    return `<svg width="${size}" height="${size * 1.35}" viewBox="0 0 20 27">
-      <path d="M10 0C4 7 0 13 0 18a10 10 0 0 0 20 0c0-5-4-11-10-18z" fill="${color}"/>
-      <path d="M10 2c-3 5-6 10-6 15a6 6 0 0 0 6 6z" fill="#fff" opacity=".18"/>
+  /* A pārijāta blossom: five white petals around a saffron tube. Drawn rather
+     than a single petal shape, because pārijāta falls whole. */
+  function flowerSvg(size) {
+    const petal = pick(cfg.flowers.petalColors);
+    const heart = pick(cfg.flowers.heartColors);
+    let g = '';
+    for (let i = 0; i < 5; i++) {
+      g += `<ellipse cx="12" cy="7" rx="3.3" ry="5.2" fill="${petal}"
+             transform="rotate(${i * 72} 12 12)"/>`;
+    }
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24">
+      <g opacity=".97">${g}</g>
+      <circle cx="12" cy="12" r="2.5" fill="${heart}"/>
+      <circle cx="12" cy="12" r="1.1" fill="${petal}" opacity=".5"/>
     </svg>`;
   }
 
-  function offer(originX, originY) {
-    const padaRect = el.pada.getBoundingClientRect();
-    const targetX  = padaRect.left + padaRect.width / 2;
-    const targetY  = padaRect.top + padaRect.height / 2;
+  /* ---------------------------------------------------------- render ---- */
+  function render() {
+    $('brandLatin').textContent   = cfg.brand.latin;
+    $('brandTagline').textContent = cfg.brand.tagline;
+
+    const photo = $('photo');
+    photo.src = cfg.photo.src;
+    photo.alt = cfg.photo.alt || '';
+    photo.style.objectPosition = cfg.photo.objectPosition || 'center 50%';
+    document.querySelector('.frame').style.setProperty('--frame-ratio', cfg.photo.frameRatio || '2 / 3');
+    const pada = $('pada');
+    pada.style.setProperty('--pada-x', cfg.photo.padaCenterX || '50%');
+    pada.style.setProperty('--pada-w', cfg.photo.padaWidth || '74%');
+
+    $('guruSa').textContent        = cfg.guru.nameSanskrit;
+    $('guruLatin').textContent     = cfg.guru.nameLatin;
+    $('guruTitle').textContent     = cfg.guru.title;
+    $('guruMoreLabel').textContent = cfg.guru.moreLabel;
+    $('verse').innerHTML           = cfg.vandana.sanskrit;
+    $('verseTr').textContent       = cfg.vandana.transliteration;
+
+    $('hint').textContent        = cfg.labels.hint;
+    $('offerIcon').innerHTML     = flowerSvg(15);
+    $('offerLabel').textContent  = cfg.labels.offerButton;
+    $('pranamLabel').textContent = cfg.labels.pranamButton;
+    $('enterLabel').textContent  = cfg.labels.enterLocked;
+    $('cueLabel').textContent    = cfg.labels.sectionsCue;
+
+    $('mantras').innerHTML = cfg.footer.lines.map(function (l, i) {
+      return `<div class="mantra${i ? ' second' : ''}">${esc(l.sa)}</div>` +
+             (l.latin ? `<div class="mantra-latin">${esc(l.latin)}</div>` : '');
+    }).join('');
+
+    // Mandala spokes, drawn rather than written into the markup.
+    let d = '';
+    for (let i = 0; i < 24; i++) {
+      const a = (i / 24) * Math.PI * 2;
+      d += `M${200 + Math.cos(a) * 60} ${200 + Math.sin(a) * 60}L${200 + Math.cos(a) * 168} ${200 + Math.sin(a) * 168}`;
+    }
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', d);
+    $('spokes').appendChild(path);
+
+    renderSections();
+    if (!cfg.requireOffering) unlock();
+  }
+
+  function renderSections() {
+    $('sections').innerHTML = cfg.sections.map(function (sec) {
+      const meta = (sec.meta || []).map(m => esc(m)).join('<br>');
+
+      let html = `<section class="band person" id="${esc(sec.id)}"><div class="inner">
+        <div class="person-head">
+          <div class="person-icon" aria-hidden="true">${icon(sec.icon, 28)}</div>
+          <div>
+            <div class="person-eyebrow">${esc(sec.eyebrow)}</div>
+            <div class="person-name">${esc(sec.name)}${sec.sub ? ` <span>${esc(sec.sub)}</span>` : ''}</div>
+            ${meta ? `<div class="person-meta">${meta}</div>` : ''}
+          </div>
+        </div>
+        <p class="person-blurb">${esc(sec.blurb)}</p>`;
+
+      if (sec.items) {
+        html += '<ul class="person-items">' + sec.items.map(function (i) {
+          return `<li>${esc(i.name)}${i.note ? `<small>${esc(i.note)}</small>` : ''}</li>`;
+        }).join('') + '</ul>';
+      }
+
+      if (sec.panel) {
+        html += `<div class="person-actions">
+          <button class="more-link" data-panel="${esc(sec.panel)}">
+            ${esc(sec.moreLabel || 'Know More')} <span class="arrow" aria-hidden="true">→</span>
+          </button></div>`;
+      }
+
+      if (sec.todo) html += `<p class="person-todo">${esc(sec.todo)}</p>`;
+      return html + '</div></section>';
+    }).join('');
+  }
+
+  /* ----------------------------------------------------------- panels --- */
+  function panelHtml(key) {
+    const p = cfg.panels[key];
+    if (!p) return '';
+
+    let html = `<button class="sheet-close" data-close aria-label="Close">✕</button>
+      <div class="sheet-eyebrow">${esc(p.eyebrow)}</div>
+      <h3 id="sheetTitle">${esc(p.title)}</h3>`;
+
+    if (p.reverence) html += `<div class="reverence">${esc(p.reverence)}</div>`;
+    if (p.body)      html += `<p>${esc(p.body)}</p>`;
+
+    (p.groups || []).forEach(function (g) {
+      html += `<div class="ack">
+        <div class="ack-head">
+          <span class="ico">${icon(g.icon, 22)}</span>
+          <h4>${esc(g.heading)}</h4>
+          <span class="line" aria-hidden="true"></span>
+        </div>`;
+
+      if (g.entries) {
+        html += '<ul class="ack-entries">' + g.entries.map(function (e) {
+          return `<li><b>${esc(e.name)}</b>` +
+                 (e.note ? `<small>${esc(e.note)}</small>` : '') +
+                 (e.also ? `<small class="also">${esc(e.also)}</small>` : '') +
+                 '</li>';
+        }).join('') + '</ul>';
+      }
+      if (g.names) {
+        html += '<div class="ack-names">' + g.names.map(n => `<span>${esc(n)}</span>`).join('') + '</div>';
+      }
+      html += '</div>';
+    });
+
+    if (p.closing) {
+      html += `<div class="closing">
+        <span class="ico" aria-hidden="true">${icon('lotus', 26)}</span>
+        <p>${esc(p.closing)}</p>
+      </div>`;
+    }
+    if (p.todo) html += `<p class="sheet-todo">${esc(p.todo)}</p>`;
+    return html;
+  }
+
+  let lastFocus = null;
+  function openPanel(key) {
+    const html = panelHtml(key);
+    if (!html) return;
+    lastFocus = document.activeElement;
+    $('sheet').innerHTML = html;
+    $('sheet').scrollTop = 0;
+    $('sheetWrap').classList.add('open');
+    document.body.classList.add('modal-open');
+    const close = $('sheet').querySelector('[data-close]');
+    if (close) close.focus({ preventScroll: true });
+  }
+  function closePanel() {
+    $('sheetWrap').classList.remove('open');
+    document.body.classList.remove('modal-open');
+    if (lastFocus) lastFocus.focus({ preventScroll: true });
+  }
+
+  /* ---------------------------------------------------------- flowers --- */
+  // Coordinates stay relative to the hero, not the viewport, so a settled
+  // heap stays on his feet once the page is scrolled.
+  function heroPoint(clientX, clientY) {
+    const h = $('hero').getBoundingClientRect();
+    return { x: clientX - h.left, y: clientY - h.top };
+  }
+
+  function offer(clientX, clientY) {
+    const r = $('pada').getBoundingClientRect();
+    const target = heroPoint(r.left + r.width / 2, r.top + r.height / 2);
+    const origin = heroPoint(clientX, clientY);
 
     offerings++;
     updateCount();
     ripple();
 
     if (!reduced) {
-      const n = cfg.petals.countPerOffering;
-      for (let i = 0; i < n; i++) rainPetal(originX, originY, targetX, targetY, i, n);
+      const n = cfg.flowers.countPerOffering;
+      for (let i = 0; i < n; i++) rainFlower(origin, target, i, n, r.width);
     }
-
     if (cfg.requireOffering && offerings >= cfg.minOfferings) unlock();
   }
 
-  /* Namaskara. The other way in — folded hands and a ring of light at the
-     feet, no flowers. Counts towards the gate on equal terms. */
   function pranam() {
     offerings++;
     updateCount();
     ripple();
-
     if (!reduced) {
-      const g = document.createElement('div');
-      g.className = 'gv-pranam';
-      g.textContent = '🙏';
-      el.pada.appendChild(g);
-      setTimeout(() => g.remove(), 2200);
+      // Several rise together rather than one — a salutation, not a single
+      // gesture.
+      const n = cfg.pranam.count;
+      for (let i = 0; i < n; i++) {
+        const g = document.createElement('div');
+        g.className = 'pranam-mark';
+        g.textContent = '🙏';
+        g.style.marginLeft = ((i - (n - 1) / 2) * 34 + (Math.random() - 0.5) * 12) + 'px';
+        g.style.fontSize = (22 + Math.random() * 13) + 'px';
+        g.style.animationDelay = (i * 130 + Math.random() * 90) + 'ms';
+        g.style.animationDuration = (2200 + Math.random() * 700) + 'ms';
+        $('pada').appendChild(g);
+        setTimeout(() => g.remove(), 3400);
+      }
     }
-
     if (cfg.requireOffering && offerings >= cfg.minOfferings) unlock();
   }
 
-  function rainPetal(ox, oy, tx, ty, i, n) {
-    const color = cfg.petals.colors[Math.floor(Math.random() * cfg.petals.colors.length)];
-    const size  = 9 + Math.random() * 9;
+  function rainFlower(origin, target, i, n, padaW) {
+    const size = 11 + Math.random() * 10;
 
     const outer = document.createElement('div');
-    outer.className = 'gv-petal';
+    outer.className = 'petal';
     const inner = document.createElement('div');
-    inner.innerHTML = petalSvg(color, size);
+    inner.innerHTML = flowerSvg(size);
     outer.appendChild(inner);
 
-    // Fan out from the origin so a burst reads as a handful of flowers
-    // released together, not as a vertical column.
+    // Fan out, so a burst reads as a handful released together rather than a
+    // vertical column.
     const spread = (i / n - 0.5) * 190;
-    const startX = ox + spread + (Math.random() - 0.5) * 40;
-    const startY = oy - 40 - Math.random() * 90;
-    const endX   = tx + (Math.random() - 0.5) * padaWidth();
-    const endY   = ty + (Math.random() - 0.5) * 26;
+    const sx = origin.x + spread + (Math.random() - 0.5) * 40;
+    const sy = origin.y - 40 - Math.random() * 90;
+    const ex = target.x + (Math.random() - 0.5) * Math.max(80, padaW * 0.8);
+    const ey = target.y + (Math.random() - 0.5) * 26;
 
-    outer.style.left = startX + 'px';
-    outer.style.top  = startY + 'px';
-    el.petals.appendChild(outer);
+    outer.style.left = sx + 'px';
+    outer.style.top  = sy + 'px';
+    $('petals').appendChild(outer);
 
-    const dur   = 1500 + Math.random() * 1400;
-    const delay = i * 42 + Math.random() * 160;
+    const dur = 1500 + Math.random() * 1400;
+    const delay = i * 44 + Math.random() * 170;
 
     outer.animate([
-      { transform: 'translate(0,0)',                                    opacity: 0 },
-      { transform: `translate(${(endX - startX) * .45}px, ${(endY - startY) * .40}px)`, opacity: 1, offset: .30 },
-      { transform: `translate(${(endX - startX) * .82}px, ${(endY - startY) * .80}px)`, opacity: 1, offset: .75 },
-      { transform: `translate(${endX - startX}px, ${endY - startY}px)`,  opacity: .9 }
+      { transform: 'translate(0,0)', opacity: 0 },
+      { transform: `translate(${(ex - sx) * .45}px, ${(ey - sy) * .40}px)`, opacity: 1, offset: .30 },
+      { transform: `translate(${(ex - sx) * .82}px, ${(ey - sy) * .80}px)`, opacity: 1, offset: .75 },
+      { transform: `translate(${ex - sx}px, ${ey - sy}px)`, opacity: .95 }
     ], { duration: dur, delay, easing: 'cubic-bezier(.35,.05,.5,1)', fill: 'forwards' });
 
-    // Sway and tumble, on the inner element so it composes with the fall.
     inner.animate([
       { transform: 'translateX(0) rotate(0deg)' },
-      { transform: `translateX(${(Math.random() > .5 ? 1 : -1) * (14 + Math.random() * 20)}px) rotate(${120 + Math.random() * 160}deg)` },
-      { transform: `translateX(0) rotate(${260 + Math.random() * 260}deg)` }
+      { transform: `translateX(${(Math.random() > .5 ? 1 : -1) * (14 + Math.random() * 20)}px) rotate(${100 + Math.random() * 140}deg)` },
+      { transform: `translateX(0) rotate(${220 + Math.random() * 220}deg)` }
     ], { duration: dur, delay, easing: 'ease-in-out', fill: 'forwards' });
 
     setTimeout(function () {
       outer.remove();
-      settle(endX, endY, color, size);
+      settle(ex, ey, size);
     }, dur + delay);
   }
 
-  function padaWidth() {
-    const r = el.pada.getBoundingClientRect();
-    return Math.max(80, r.width * .8);
-  }
-
-  /* Petals come to rest at the feet and stay there — the heap is the record
-     of what visitors have offered during this darshana. */
-  function settle(x, y, color, size) {
+  function settle(x, y, size) {
     const s = document.createElement('div');
-    s.className = 'gv-settled';
+    s.className = 'settled';
     s.style.left = x + 'px';
     s.style.top  = y + 'px';
-    s.innerHTML  = petalSvg(color, size * .9);
+    s.innerHTML  = flowerSvg(size * .9);
     s.firstChild.style.transform = `rotate(${Math.random() * 360}deg)`;
-    el.petals.appendChild(s);
-
-    const settled = el.petals.querySelectorAll('.gv-settled');
-    if (settled.length > cfg.petals.maxSettled) settled[0].remove();
+    $('petals').appendChild(s);
+    const all = $('petals').querySelectorAll('.settled');
+    if (all.length > cfg.flowers.maxSettled) all[0].remove();
   }
 
   function ripple() {
     if (reduced) return;
     const r = document.createElement('div');
-    r.className = 'gv-ripple';
-    el.pada.appendChild(r);
+    r.className = 'ripple';
+    $('pada').appendChild(r);
     setTimeout(() => r.remove(), 1600);
   }
 
-  /* --- Unlock / enter --------------------------------------------------- */
+  /* ------------------------------------------------------------ gate ---- */
   function unlock() {
-    if (el.enterBtn.classList.contains('gv-ready')) return;
-    el.enterBtn.classList.add('gv-ready');
-    el.enterBtn.setAttribute('aria-disabled', 'false');
-    el.enterLbl.textContent = cfg.labels.enterReady || cfg.labels.enterLocked;
-    if (offerings > 0) el.hint.textContent = cfg.labels.thankYou || '';
-    el.count.classList.remove('gv-locked-note');
+    const btn = $('enterBtn');
+    if (btn.classList.contains('ready')) return;
+    btn.classList.add('ready');
+    btn.setAttribute('aria-disabled', 'false');
+    $('enterLabel').textContent = cfg.labels.enterReady;
+    if (offerings > 0) $('hint').textContent = cfg.labels.thankYou;
   }
 
   function updateCount() {
     const tpl = offerings === 1 ? cfg.labels.countOne : cfg.labels.countMany;
-    el.count.textContent = (tpl || '').replace('{n}', offerings);
+    $('count').textContent = tpl.replace('{n}', offerings);
   }
 
-  function showLockedNote() {
-    if (!cfg.requireOffering || offerings >= cfg.minOfferings) return;
-    el.count.textContent = cfg.labels.lockedNote || '';
-    el.count.classList.add('gv-locked-note');
-  }
-
-  function enter() {
-    if (cfg.requireOffering && offerings < cfg.minOfferings) { showLockedNote(); return; }
-    clearTimeout(autoTimer);
-    el.overlay.classList.add('gv-leaving');
-    document.body.classList.remove('gv-locked');
-    markPassed();
-    remember();
-    // Fully remove after the dissolve so it costs nothing thereafter.
-    document.dispatchEvent(new CustomEvent('dge:vandana-complete', { detail: { offerings } }));
-
-    var target = destination();
-    if (target) {
-      // Navigate part-way through the dissolve rather than after it. Waiting
-      // for the full fade first would show a bare background while the
-      // library loads; starting the load under the fade means the gate lifts
-      // away straight into the site.
-      setTimeout(function () { window.location.href = target; }, 650);
-    } else {
-      setTimeout(() => { el.overlay.style.display = 'none'; }, 1300);
-    }
-  }
-
-  /* --- Where entering leads ---------------------------------------------
-     Normally cfg.enterUrl, but a visitor bounced here by the guard carries
-     ?next=<the page they wanted>, and should land there rather than at the
-     library's front page. */
   function destination() {
-    var fallback = cfg.enterUrl || '';
-    var next;
-    try {
-      next = new URLSearchParams(location.search).get('next');
-    } catch (e) {
-      return fallback;
-    }
+    const fallback = cfg.enterUrl || '';
+    let next;
+    try { next = new URLSearchParams(location.search).get('next'); } catch (e) { return fallback; }
     if (!next) return fallback;
-
-    var url;
-    try {
-      url = new URL(next, location.href);
-    } catch (e) {
-      return fallback;
-    }
-
-    // Only ever follow a same-origin path. An absolute URL to another host,
-    // or a protocol-relative //elsewhere.example, is someone trying to use
-    // the gate as an open redirect — hand those the fallback instead.
+    let url;
+    try { url = new URL(next, location.href); } catch (e) { return fallback; }
+    // Same-origin only. An absolute URL elsewhere, or //elsewhere, is someone
+    // trying to use this page as an open redirect.
     if (url.origin !== location.origin) return fallback;
-    // And never send them back to this page, which would simply bounce.
     if (url.pathname === location.pathname) return fallback;
-
     return url.pathname + url.search + url.hash;
   }
 
-  /* Respects are paid. Record it before navigating, or the guard on the far
-     side will bounce the visitor straight back here. */
   function markPassed() {
-    try {
-      sessionStorage.setItem(cfg.passKey, String(Date.now()));
-    } catch (e) { /* private mode — the guard fails open, so this is fine */ }
+    try { sessionStorage.setItem(cfg.passKey, String(Date.now())); } catch (e) {}
   }
 
-  /* --- "Show once per…" bookkeeping ------------------------------------- */
-  function remember() {
-    try {
-      const now = Date.now();
-      if (cfg.showOncePer === 'session') sessionStorage.setItem(cfg.storageKey, String(now));
-      else if (cfg.showOncePer === 'day' || cfg.showOncePer === 'once') localStorage.setItem(cfg.storageKey, String(now));
-    } catch (e) { /* private mode — the gate simply shows every time */ }
+  function enter() {
+    if (cfg.requireOffering && offerings < cfg.minOfferings) return;
+    markPassed();
+    document.body.classList.add('leaving');
+    const target = destination();
+    if (target) setTimeout(function () { window.location.href = target; }, 620);
   }
 
-  function shouldShow() {
-    if (!cfg.enabled) return false;
-    if (cfg.showOncePer === 'always') return true;
-    try {
-      if (cfg.showOncePer === 'session') return !sessionStorage.getItem(cfg.storageKey);
-      const seen = Number(localStorage.getItem(cfg.storageKey) || 0);
-      if (!seen) return true;
-      if (cfg.showOncePer === 'once') return false;
-      return (Date.now() - seen) > 86400000;   // 'day'
-    } catch (e) { return true; }
-  }
-
-  /* --- Wiring ----------------------------------------------------------- */
+  /* ------------------------------------------------------------ bind ---- */
   function bind() {
-    el.offerBtn.addEventListener('click', function (ev) {
+    $('offerBtn').addEventListener('click', function (ev) {
       const r = ev.currentTarget.getBoundingClientRect();
       offer(r.left + r.width / 2, r.top);
     });
-
-    el.pada.addEventListener('click', function (ev) {
+    $('pranamBtn').addEventListener('click', pranam);
+    $('pada').addEventListener('click', function (ev) {
       offer(ev.clientX || window.innerWidth / 2, (ev.clientY || 0) - 120);
     });
-    el.pada.addEventListener('keydown', function (ev) {
+    $('pada').addEventListener('keydown', function (ev) {
       if (ev.key === 'Enter' || ev.key === ' ') {
         ev.preventDefault();
-        const r = el.pada.getBoundingClientRect();
+        const r = $('pada').getBoundingClientRect();
         offer(r.left + r.width / 2, r.top - 120);
       }
     });
+    $('enterBtn').addEventListener('click', enter);
 
-    el.pranamBtn.addEventListener('click', pranam);
-    el.enterBtn.addEventListener('click', enter);
+    document.addEventListener('click', function (ev) {
+      const opener = ev.target.closest('[data-panel]');
+      if (opener) openPanel(opener.getAttribute('data-panel'));
+    });
 
+    $('sheetWrap').addEventListener('click', function (ev) {
+      if (ev.target === $('sheetWrap') || ev.target.closest('[data-close]')) closePanel();
+    });
     document.addEventListener('keydown', function (ev) {
       if (ev.key !== 'Escape') return;
-      if (cfg.allowEscape) enter();
+      if ($('sheetWrap').classList.contains('open')) closePanel();
     });
-  }
-
-  function show() {
-    document.body.classList.add('gv-locked');
-    el.overlay.style.display = '';
-    el.overlay.classList.remove('gv-leaving');
-    offerings = 0;
-    el.count.textContent = '';
-    el.count.classList.remove('gv-locked-note');
-    el.hint.textContent = cfg.labels.offerHint || '';
-    showLockedNote();
-    el.petals.innerHTML = '';
-    if (cfg.requireOffering) {
-      el.enterBtn.classList.remove('gv-ready');
-      el.enterBtn.setAttribute('aria-disabled', 'true');
-      el.enterLbl.textContent = cfg.labels.enterLocked;
-    }
-    // Double rAF so the initial (pre-transition) state is painted first —
-    // without it the staged entrance is skipped on a fast connection.
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      el.overlay.classList.add('gv-ready-in');
-      el.offerBtn.focus({ preventScroll: true });
-    }));
-
-    if (cfg.autoEnterMs > 0) autoTimer = setTimeout(() => { unlock(); enter(); }, cfg.autoEnterMs);
-  }
-
-  function hide() {
-    el.overlay.style.display = 'none';
-    el.overlay.classList.remove('gv-ready-in');
-    document.body.classList.remove('gv-locked');
   }
 
   render();
   bind();
-  if (shouldShow()) {
-    show();
-  } else if (destination()) {
-    // This page has no content of its own — if the gate is not being shown,
-    // the only correct thing to do is hand the visitor onward. Mark them
-    // passed first: a 'day' or 'once' setting suppresses the gate across
-    // sessions, so without this the guard would bounce them back to a gate
-    // that forwards them again, forever.
-    markPassed();
-    // replace() rather than assign() so the gate does not sit in history.
-    window.location.replace(destination());
-  } else {
-    hide();
-  }
 
-  // Small public surface, mirroring how the other DGE modules expose
-  // themselves on window for the admin tools and for manual testing.
-  window.dgeGuruVandana = {
-    show, hide, enter, offer: () => {
-      const r = el.offerBtn.getBoundingClientRect();
-      offer(r.left + r.width / 2, r.top);
-    }, pranam,
-    replay: function () { el.overlay.classList.remove('gv-ready-in'); show(); },
-    reset: function () {
-      try { sessionStorage.removeItem(cfg.storageKey); localStorage.removeItem(cfg.storageKey); } catch (e) {}
-    },
-    get offerings() { return offerings; }
-  };
+  window.dgeVandana = { openPanel, closePanel, enter, get offerings() { return offerings; } };
 })();
 </script>
 </body>
