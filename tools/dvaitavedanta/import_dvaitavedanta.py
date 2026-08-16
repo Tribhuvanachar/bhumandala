@@ -47,6 +47,7 @@ from dv_parse import (  # noqa: E402
     canonical_url,
     devanagari_count,
     devanagari_ratio,
+    layer_key,
     parse_page,
 )
 
@@ -254,6 +255,32 @@ def discover_leaves(fetcher, grantha, log):
     return list(ids.keys()), record, ancestor
 
 
+def resolve_layer_config(title, layer_config):
+    """Map an observed heading onto a canonical layer.
+
+    The site names each commentary after its own grantha, so Bhavadipa appears
+    as "प्रमाणलक्षणटीकाभावदीपः" on one work and "कथालक्षणटीकाभावदीपः" on
+    another. Match on SUFFIX, longest first, and never on a substring: the
+    canonical "टीका" occurs mid-string in "प्रमाणलक्षणटीकाविवरणम्", and a
+    substring rule would file Keshavacharya's Vivarana into Jayatirtha's tika
+    folder — merging two different authors' works under one name.
+
+    Anything with no suffix match stays unmapped and is reported, which is the
+    safe outcome: a distinct commentary gets its own auto-slugged folder.
+    """
+    exact = layer_config.get(title)
+    if exact is not None:
+        return exact
+    normalised = layer_key(title)
+    if normalised in layer_config:
+        return layer_config[normalised]
+    best, best_len = None, 0
+    for canonical, config in layer_config.items():
+        if normalised.endswith(canonical) and len(canonical) > best_len:
+            best, best_len = config, len(canonical)
+    return best
+
+
 def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
     """Group parsed pages into per-layer item lists.
 
@@ -273,7 +300,7 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
 
         for position, layer in enumerate(record["layers"]):
             title = layer["title"] or ("मूलम्" if position == 0 else f"layer_{position + 1}")
-            config = layer_config.get(title)
+            config = resolve_layer_config(title, layer_config)
             if config is None:
                 folder = slugify_devanagari(title) or f"layer_{position + 1}"
                 if position == 0 and folder not in ("mula",):
@@ -283,7 +310,13 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
                     schema = defaults["tika_schema"]
                     if not folder.startswith("tika_"):
                         folder = f"tika_{folder}"
-                config = {"folder": folder, "schema": schema, "author": None}
+                # An unmapped commentary still carries its own "composed by"
+                # line on the page, so it is attributed rather than anonymous.
+                config = {
+                    "folder": folder,
+                    "schema": schema,
+                    "author": layer.get("author") or None,
+                }
                 warnings["unmapped_layers"][title] += 1
 
             text = layer["text"]
@@ -297,7 +330,10 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
 
             bucket = layers.setdefault(config["folder"], {
                 "schema": config["schema"],
-                "default_author": config.get("author") or "",
+                # Canonical author wins where the tradition fixes it (Jayatirtha's
+                # tika); otherwise fall back to the "composed by" line on the page,
+                # so a commentary whose author varies by grantha is still credited.
+                "default_author": config.get("author") or layer.get("author") or "",
                 "layer_titles": Counter(),
                 "items": [],
             })

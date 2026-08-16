@@ -71,6 +71,30 @@
     "भागवतप्रकाशिका": { "folder": "tika_bhagavataprakashika", "schema": "grantha_tika_text", "author": null },
     "तात्पर्यम्": { "folder": "tika_tatparya", "schema": "grantha_tika_text", "author": null },
     "प्रकाशिका": { "folder": "tika_prakashika", "schema": "grantha_tika_text", "author": null },
+    "वाक्यार्थकौमुदी": {
+      "folder": "tika_vakyarthakaumudi",
+      "schema": "grantha_tika_text",
+      "author": null,
+      "_note": "Observed on Pramanalakshana leaves; the page attributes it to श्रीनिवासतीर्थकृता. Author left null so the per-page attribution is used, in case it differs by grantha."
+    },
+    "विवरणम्": {
+      "folder": "tika_vivarana",
+      "schema": "grantha_tika_text",
+      "author": null,
+      "_note": "Pramanalakshana pages attribute it to श्री पाण्डुरङ्गि केशवाचार्य; taken per-page rather than fixed here."
+    },
+    "विवरणं": {
+      "folder": "tika_vivarana",
+      "schema": "grantha_tika_text",
+      "author": null,
+      "_note": "Anusvara spelling of विवरणम्, as headed on Kathalakshana leaves. Same folder on purpose."
+    },
+    "पञ्चिका": {
+      "folder": "tika_panchika",
+      "schema": "grantha_tika_text",
+      "author": null,
+      "_note": "Observed on Kathalakshana leaves; no attribution line on the page, so none is asserted."
+    },
     "सुरोत्तमटीका": { "folder": "tika_surottama", "schema": "grantha_tika_text", "author": "श्रीसुरोत्तमतीर्थः" },
     "सत्यप्रमोदटीका": { "folder": "tika_satyapramoda", "schema": "grantha_tika_text", "author": "श्रीसत्यप्रमोदतीर्थः" }
   },

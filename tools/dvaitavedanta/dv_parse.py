@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
+from collections import OrderedDict
 
 from bs4 import BeautifulSoup, NavigableString, Tag
 
@@ -43,6 +44,24 @@ CHROME_CLASS_RE = re.compile(
 )
 BREADCRUMB_CLASS_RE = re.compile(r"breadcrumb", re.I)
 HOME_LABELS = ("home", "मुख्यपृष्ठम्", "मुखपृष्ठ", "गृहम्")
+
+# Confirmed against saved probe pages (run 31933375009, 5 leaves across two
+# granthas): inside #article<N> the mula verse sits in <h2 class="shloka"> and
+# every commentary lives in a flat #dynamicContent/.details block delimited by
+# <h3>. Before this was known, the whole block parsed as ONE layer whose "name"
+# was the mula verse text.
+SHLOKA_CLASS_RE = re.compile(r"\bshloka\b", re.I)
+DETAILS_ID = "dynamicContent"
+DETAILS_CLASS_RE = re.compile(r"\bdetails\b", re.I)
+MULA_TITLE = "मूलम्"
+# A short bold line directly before an <h3> attributes the commentary that
+# follows ("श्रीराघवेन्द्रतीर्थयतिकृतः"). Topic labels sit in the same position
+# but carry no attribution verb, so match the verb rather than the position.
+ATTRIBUTION_RE = re.compile(r"(कृत|विरचित|प्रणीत|प्रोक्त|विरचयाम्)")
+ATTRIBUTION_MAX_CHARS = 90
+# The same commentary is headed both "श्री कथालक्षणटीकाभावदीपः" and
+# "कथालक्षणटीकाभावदीपः" on one page; without this they merge as two layers.
+HONORIFIC_RE = re.compile(r"^(श्रीमत्|श्रीमद्|श्री)\s*")
 
 DEVANAGARI_RANGE = (0x0900, 0x097F)
 BLOCK_TAGS = {
@@ -297,11 +316,128 @@ def _content_root(soup: BeautifulSoup) -> Tag | None:
     return best if best_score >= 20 else None
 
 
+def _text_between(start: Tag, stop: Tag | None, within: Tag) -> str:
+    """Text from just after `start` up to `stop`, bounded by `within`.
+
+    Walking `next_elements` rather than siblings keeps nested markup (the site
+    wraps most body text in <span> inside <p>) without assuming a flat shape.
+    """
+    chunks: list[str] = []
+    for node in start.next_elements:
+        if stop is not None and node is stop:
+            break
+        if isinstance(node, Tag):
+            if node.name == "br":
+                chunks.append("\n")
+            elif node.name in BLOCK_TAGS:
+                chunks.append("\n")
+            continue
+        if not isinstance(node, NavigableString):
+            continue
+        parent = node.parent
+        if parent is None or (parent.name or "").lower() in DROP_TAGS:
+            continue
+        # Stop at the end of the details block instead of running on into
+        # page chrome for the final heading.
+        if within is not None and within not in parent.parents and parent is not within:
+            break
+        chunks.append(str(node))
+    return clean_text("".join(chunks))
+
+
+def _layers_from_article(node: Tag) -> list[dict]:
+    """Split one #article<N> block into its real layers.
+
+    Confirmed shape (probe run 31933375009):
+
+        <div id="article13531">
+          <h2 class="shloka">   the mula verse for this leaf
+          <div id="dynamicContent" class="details">
+            <p><strong>topic or attribution</strong></p>
+            <h3>  commentary name
+            <p>   body ...
+            <h3>  next commentary ...
+
+    One leaf carries exactly one mula verse. A single commentary's body may be
+    split across several <h3> passes over that verse (Kathalakshana runs three
+    commentaries through five passes each), so same-named chunks are merged in
+    document order instead of becoming separate layers.
+    """
+    details = node.find(id=DETAILS_ID) or node.find(class_=DETAILS_CLASS_RE)
+    headings = [h for h in details.find_all("h3")] if details else []
+    if not headings:
+        return []
+
+    layers: list[dict] = []
+    shloka = node.find("h2", class_=SHLOKA_CLASS_RE)
+    if shloka is not None:
+        verse = clean_text(shloka.get_text(" "))
+        if devanagari_count(verse) >= 4:
+            layers.append({
+                "title": MULA_TITLE,
+                "text": verse,
+                "anchor": node.get("id", ""),
+                "author": "",
+                "role": "mula",
+            })
+
+    merged: "OrderedDict[str, dict]" = OrderedDict()
+    for index, heading in enumerate(headings):
+        title = clean_text(heading.get_text(" ")).strip(" ।॥:-")
+        if not title:
+            continue
+        stop = headings[index + 1] if index + 1 < len(headings) else None
+        text = _text_between(heading, stop, details)
+        if devanagari_count(text) < 4:
+            continue
+        key = layer_key(title)
+        entry = merged.get(key)
+        if entry is None:
+            merged[key] = {
+                "title": title,
+                "text": text,
+                "anchor": heading.get("id", "") or node.get("id", ""),
+                "author": _attribution_before(heading),
+                "role": "tika",
+            }
+        else:
+            entry["text"] = f"{entry['text']}\n{text}"
+            entry["author"] = entry["author"] or _attribution_before(heading)
+    layers.extend(merged.values())
+    return layers
+
+
+def layer_key(title: str) -> str:
+    """Normalised identity for a layer heading, for merging repeated passes."""
+    return HONORIFIC_RE.sub("", clean_text(title)).strip(" ।॥:-")
+
+
+def _attribution_before(heading: Tag) -> str:
+    """The 'composed by X' line the site places just above a commentary."""
+    node = heading
+    for _ in range(3):
+        node = node.find_previous(["p", "h3", "h2"])
+        if node is None or node.name in ("h3", "h2"):
+            return ""
+        label = clean_text(node.get_text(" "))
+        if not label or len(label) > ATTRIBUTION_MAX_CHARS:
+            continue
+        match = ATTRIBUTION_RE.search(label)
+        if match:
+            # "…केशवाचार्यविरचितम् प्रमाणलक्षणटीकाविवरणम्" — keep the credit,
+            # drop the restated work title that follows it.
+            end = label.find(" ", match.end())
+            return label if end == -1 else label[:end].strip()
+    return ""
+
+
 def extract_layers(soup: BeautifulSoup) -> list[dict]:
     """Return the stacked commentary layers as [{title, text, anchor}].
 
-    Primary path: elements carrying `id="article<N>"`.
-    Fallback: split the densest non-chrome container on its headings.
+    Primary path: the real #article<N> / #dynamicContent shape.
+    Second:      one layer per `id="article<N>"` block (pre-probe assumption,
+                 kept for pages that do not carry a details block).
+    Fallback:    split the densest non-chrome container on its headings.
     """
     layers: list[dict] = []
 
@@ -309,6 +445,11 @@ def extract_layers(soup: BeautifulSoup) -> list[dict]:
         t for t in soup.find_all(id=ARTICLE_ID_RE)
         if isinstance(t, Tag) and not _is_chrome(t)
     ]
+    for node in anchored:
+        layers.extend(_layers_from_article(node))
+    if layers:
+        return _dedupe_layers(layers)
+
     for node in anchored:
         heading = _heading_for(node)
         text = _strip_heading(block_text(node), heading)
@@ -361,12 +502,22 @@ def _dedupe_layers(layers: list[dict]) -> list[dict]:
     """Drop layers whose text is wholly contained in an earlier layer.
 
     Nested `id="article<N>"` wrappers would otherwise emit the same body twice.
+
+    The mula layer is exempt. A tika routinely opens by quoting its verse
+    verbatim (Pramanalakshana 13529 does exactly this), so containment would
+    otherwise delete the mula of every such leaf — the base text, silently.
     """
     kept: list[dict] = []
     for layer in layers:
+        if layer.get("role") == "mula":
+            kept.append(layer)
+            continue
         if any(layer["text"] and layer["text"] in other["text"] for other in kept):
             continue
-        kept = [k for k in kept if not (k["text"] and k["text"] in layer["text"])]
+        kept = [
+            k for k in kept
+            if k.get("role") == "mula" or not (k["text"] and k["text"] in layer["text"])
+        ]
         kept.append(layer)
     return kept
 

@@ -81,6 +81,33 @@ PAGE_CONTAINER = f"""
 """
 
 
+# Transcribed from probe pages (run 31933375009): pramana_lakshana_13533 for
+# the h2.shloka/#dynamicContent frame, katha_lakshana_14031 for the repeated
+# h3 passes and the "श्री"-prefixed variant of one heading.
+PAGE_REAL = f"""
+<html><body>
+{BREADCRUMB}
+<div class="row">{SIDEBAR}
+<div class="col-md-9">
+  <div id="article13700" class="lazy-1">
+    <h2 class="shloka">लक्ष्यमात्रव्यापको धर्मो लक्षणम्</h2>
+    <div id="dynamicContent" class="details">
+      <p class="MsoPlainText"><strong><span>लक्षणलक्षणप्रयोजने</span></strong></p>
+      <h3><strong><span>प्रमाणलक्षणटीका</span></strong></h3>
+      <p class="MsoPlainText"><span>लक्ष्यमात्रव्यापको धर्मो लक्षणम् इति प्रथमः पक्षः ।</span></p>
+      <p class="MsoPlainText"><strong><span>श्रीराघवेन्द्रतीर्थयतिकृतः</span></strong></p>
+      <h3><strong><span>प्रमाणलक्षणटीकाभावदीपः</span></strong></h3>
+      <p class="MsoPlainText"><span>कल्याणगुणपूर्णाय दोषदूराय विष्णवे ।</span></p>
+      <h3><strong><span>श्री प्रमाणलक्षणटीका</span></strong></h3>
+      <p class="MsoPlainText"><span>अत्र द्वितीयः विचारः प्रस्तूयते ।</span></p>
+    </div>
+  </div>
+</div></div>
+<footer>Copyright 2026</footer>
+</body></html>
+"""
+
+
 def check(name, condition, detail=""):
     mark = "ok  " if condition else "FAIL"
     print(f"  [{mark}] {name}" + (f"   {detail}" if detail and not condition else ""))
@@ -146,6 +173,40 @@ def main():
     failures += not check("non-content href ignored",
                           P.parse_content_url("/about") is None)
     failures += not check("devanagari_ratio on latin", P.devanagari_ratio("hello world") == 0.0)
+
+    # The shape the site actually serves, transcribed from probe pages saved by
+    # run 31933375009. Sections A-D above are synthetic, and the original parser
+    # passed all of them while still mis-reading every real page: it emitted one
+    # layer per leaf whose "name" was the mula verse.
+    print("E. real site shape (#article > h2.shloka + #dynamicContent > h3)")
+    rec = P.parse_page(PAGE_REAL, url)
+    titles = [l["title"] for l in rec["layers"]]
+    failures += not check("mula split from commentaries", titles[:1] == ["मूलम्"], titles)
+    failures += not check("mula is the verse, not a commentary",
+                          rec["layers"][0]["text"].startswith("लक्ष्यमात्रव्यापको"),
+                          rec["layers"][0]["text"][:40])
+    failures += not check("verse text is not used as a layer name",
+                          not any("लक्ष्यमात्रव्यापको" in t for t in titles), titles)
+    failures += not check("h3 headings became the layer names",
+                          titles[1:] == ["प्रमाणलक्षणटीका", "प्रमाणलक्षणटीकाभावदीपः"], titles)
+    tika = rec["layers"][1]
+    failures += not check("repeated passes merged into one layer",
+                          "प्रथमः" in tika["text"] and "द्वितीयः" in tika["text"],
+                          tika["text"][:60])
+    failures += not check("honorific variant merged, not duplicated",
+                          len(titles) == len(set(titles)) and len(titles) == 3, titles)
+    failures += not check("attribution captured",
+                          rec["layers"][2]["author"] == "श्रीराघवेन्द्रतीर्थयतिकृतः",
+                          rec["layers"][2]["author"])
+    failures += not check("attribution trimmed of restated work title",
+                          "भावदीपः" not in rec["layers"][2]["author"],
+                          rec["layers"][2]["author"])
+    # A tika routinely opens by quoting its verse verbatim; containment-dedupe
+    # would otherwise delete the mula of every such leaf.
+    failures += not check("mula survives being quoted verbatim by its tika",
+                          any(l.get("role") == "mula" for l in rec["layers"]), titles)
+    failures += not check("no chrome bleed into layers",
+                          all("Copyright" not in l["text"] for l in rec["layers"]))
 
     print()
     if failures:

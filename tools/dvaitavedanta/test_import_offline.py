@@ -167,6 +167,31 @@ def main():
         ])
         failures += not check("dry run wrote nothing", not os.path.exists(out2))
 
+        # The site names each commentary after its own grantha, so canonical
+        # layers have to be matched on suffix. A substring rule would file
+        # Keshavacharya's Vivarana under Jayatirtha's tika — two different
+        # authors' works silently merged into one folder.
+        print("layer name resolution")
+        cfg = json.load(open(os.path.join(HERE, "dv_sources.json"),
+                             encoding="utf-8"))["layers"]
+        resolve = I.resolve_layer_config
+        cases = [
+            ("प्रमाणलक्षणटीका", "tika_jayatirtha"),
+            ("प्रमाणलक्षणटीकाभावदीपः", "tika_bhavadipa"),
+            ("श्री कथालक्षणटीकाभावदीपः", "tika_bhavadipa"),
+            ("प्रमाणलक्षणटीकाविवरणम्", "tika_vivarana"),
+            ("कथालक्षणटीकाविवरणं", "tika_vivarana"),
+            ("प्रमाणलक्षणटीकावाक्यार्थकौमुदी", "tika_vakyarthakaumudi"),
+            ("मूलम्", "mula"),
+        ]
+        for title, expected in cases:
+            got = resolve(title, cfg)
+            failures += not check(f"{title} -> {expected}",
+                                  got is not None and got["folder"] == expected,
+                                  got["folder"] if got else None)
+        failures += not check("an unknown commentary stays unmapped, not guessed",
+                              resolve("कस्यचिदपूर्वव्याख्या", cfg) is None)
+
         print()
         if failures:
             print(f"{failures} check(s) FAILED")
