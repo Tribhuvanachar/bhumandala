@@ -57,6 +57,10 @@ on:
         description: "Open a pull request with the results (requires dry_run = false)"
         type: boolean
         default: false
+      discover_only:
+        description: "Count leaves per grantha and stop (one fetch each; sizes the corpus without crawling it)"
+        type: boolean
+        default: false
       refresh_cache:
         description: "Ignore the HTTP cache and refetch everything"
         type: boolean
@@ -134,6 +138,7 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run }}
           REFRESH: ${{ inputs.refresh_cache }}
           PROBE: ${{ inputs.probe }}
+          DISCOVER_ONLY: ${{ inputs.discover_only }}
         run: |
           set -euo pipefail
           ARGS=(
@@ -149,6 +154,7 @@ jobs:
           [ -n "$LIMIT" ]    && ARGS+=(--limit-per-grantha "$LIMIT")
           [ "$DRY_RUN" = "true" ] && ARGS+=(--dry-run) || ARGS+=(--write)
           [ "$REFRESH" = "true" ] && ARGS+=(--refresh-cache)
+          [ "$DISCOVER_ONLY" = "true" ] && ARGS+=(--discover-only)
           [ "$PROBE" = "true" ]   && ARGS+=(--probe-dir dv_probe --probe-count 5)
           python tools/dvaitavedanta/import_dvaitavedanta.py "${ARGS[@]}"
 

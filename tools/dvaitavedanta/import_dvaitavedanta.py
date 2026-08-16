@@ -526,6 +526,10 @@ def main(argv=None):
     parser.add_argument("--granthas", default="", help="comma-separated grantha slugs; blank = all")
     parser.add_argument("--limit-per-grantha", type=int, default=0,
                         help="cap leaves per grantha (smoke test); 0 = no cap")
+    parser.add_argument("--discover-only", action="store_true",
+                        help="count each grantha's leaves and stop. One fetch per "
+                             "grantha (the sidebar lists them all), so this sizes "
+                             "the corpus without crawling it.")
     parser.add_argument("--delay", type=float, default=None)
     parser.add_argument("--timeout", type=int, default=None)
     parser.add_argument("--retries", type=int, default=None)
@@ -609,9 +613,26 @@ def main(argv=None):
         if not grantha.get("slug"):
             log(f"    resolved slug: {slug}   (title: {discovered_title})")
 
+        # Report the true sidebar total before capping. Logging the capped
+        # figure makes a smoke run look like a complete one and hides the
+        # denominator needed to size the corpus.
+        discovered_total = len(ids)
         if args.limit_per_grantha:
             ids = ids[: args.limit_per_grantha]
-        log(f"    {len(ids)} leaf id(s) discovered")
+        if len(ids) != discovered_total:
+            log(f"    {discovered_total} leaf id(s) discovered · capped to {len(ids)}")
+        else:
+            log(f"    {discovered_total} leaf id(s) discovered")
+
+        if args.discover_only:
+            status["granthas"][key] = {
+                "title": title, "seed_url": grantha["seed_url"],
+                "status": "discovered", "discovered": discovered_total,
+                "fetched": 0, "with_text": 0, "containers": 0, "failed": 0,
+                "items": 0, "bytes": 0, "layers": {},
+                "last_run": status["last_run"],
+            }
+            continue
 
         records, containers, failed = [], 0, 0
         for index, content_id in enumerate(ids, start=1):
