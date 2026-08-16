@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
 """Build a single-file, offline copy of the Guru Vandana entry gate.
 
-dge/guru-vandana.html is the canonical version and loads the portrait from
-dge/images/guru/. That is correct for the site but useless once the page is
-downloaded on its own — the arch comes up empty over file://.
+index.html at the repository root is the canonical version. It is the site's
+front door: it loads the portrait from dge/images/guru/ and, once respects are
+paid, navigates into dge/index.html. Neither of those works once the page is
+downloaded on its own — the arch comes up empty and the entry button leads
+nowhere.
 
-This inlines the photograph as a data URI so the result is one file that can
-be mailed, opened from a Downloads folder, or handed to someone for approval
-with no server and no network.
+This produces a preview copy that does work in isolation: the photograph is
+inlined as a data URI and the entry target is cleared, so the gate dissolves
+in place instead of navigating. The result is one file that can be mailed,
+opened from a Downloads folder, or handed to someone for approval with no
+server and no network.
 
     python3 dge/tools/build_guru_vandana_standalone.py
 
-Re-run it after editing guru-vandana.html; the standalone is generated, never
-edited by hand.
+Re-run it after editing the root index.html; the standalone is generated,
+never edited by hand.
 """
 
 import base64
@@ -21,18 +25,33 @@ import re
 import sys
 
 DGE = pathlib.Path(__file__).resolve().parent.parent
-SRC = DGE / 'guru-vandana.html'
+ROOT = DGE.parent
+SRC = ROOT / 'index.html'
 PHOTO = DGE / 'images' / 'guru' / 'guruji.jpg'
 OUT = DGE / 'guru-vandana-standalone.html'
 
 BANNER = """<!--
   GENERATED FILE — do not edit.
 
-  Single-file copy of guru-vandana.html with the portrait inlined as a data
-  URI, so it renders with no server and no network. Edit guru-vandana.html
-  and re-run dge/tools/build_guru_vandana_standalone.py instead.
+  Offline preview of the entry gate at the repository root. The portrait is
+  inlined as a data URI and enterUrl is cleared, so this renders and runs with
+  no server and no network, and the entry button dissolves the gate in place
+  rather than navigating into the library.
+
+  Edit index.html at the repository root and re-run
+  dge/tools/build_guru_vandana_standalone.py instead.
 -->
 """
+
+
+def substitute(html, pattern, replacement, what):
+    """Apply exactly one rewrite, or fail loudly — a silent miss here ships a
+    preview that looks fine and is quietly broken."""
+    html, count = re.subn(pattern, lambda _m: replacement, html, count=1)
+    if count != 1:
+        print(f'{what} not found in config — did the config change?', file=sys.stderr)
+        return None
+    return html
 
 
 def main() -> int:
@@ -44,21 +63,19 @@ def main() -> int:
     html = SRC.read_text(encoding='utf-8')
     data_uri = 'data:image/jpeg;base64,' + base64.b64encode(PHOTO.read_bytes()).decode('ascii')
 
-    # Only the config's photo.src is rewritten — everything else, including
-    # every other knob in GURU_VANDANA_CONFIG, carries over untouched.
-    html, count = re.subn(
-        r"src: 'images/guru/guruji\.jpg'",
-        "src: '" + data_uri + "'",
-        html,
-        count=1,
-    )
-    if count != 1:
-        print('photo.src not found in config — did the config change?', file=sys.stderr)
+    # Only these two knobs are rewritten; every other setting in
+    # GURU_VANDANA_CONFIG carries over untouched.
+    html = substitute(html, r"src: 'dge/images/guru/guruji\.jpg'",
+                      "src: '" + data_uri + "'", 'photo.src')
+    if html is None:
+        return 1
+    html = substitute(html, r"enterUrl: 'dge/index\.html'", "enterUrl: ''", 'enterUrl')
+    if html is None:
         return 1
 
     html = html.replace('<!DOCTYPE html>\n', '<!DOCTYPE html>\n' + BANNER, 1)
     OUT.write_text(html, encoding='utf-8')
-    print(f'{OUT.relative_to(DGE.parent)}  {OUT.stat().st_size / 1024:.0f} KB')
+    print(f'{OUT.relative_to(ROOT)}  {OUT.stat().st_size / 1024:.0f} KB')
     return 0
 
 

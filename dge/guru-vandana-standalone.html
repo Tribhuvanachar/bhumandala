@@ -2,9 +2,13 @@
 <!--
   GENERATED FILE — do not edit.
 
-  Single-file copy of guru-vandana.html with the portrait inlined as a data
-  URI, so it renders with no server and no network. Edit guru-vandana.html
-  and re-run dge/tools/build_guru_vandana_standalone.py instead.
+  Offline preview of the entry gate at the repository root. The portrait is
+  inlined as a data URI and enterUrl is cleared, so this renders and runs with
+  no server and no network, and the entry button dissolves the gate in place
+  rather than navigating into the library.
+
+  Edit index.html at the repository root and re-run
+  dge/tools/build_guru_vandana_standalone.py instead.
 -->
 <html lang="sa">
 <head>
@@ -12,7 +16,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0B0907">
-<title>Guru Vandana — DGE Entry Gate (Mock)</title>
+<title>श्री विश्वनन्दन तीर्थ — Sarvamoola Digital Library</title>
+<meta name="description" content="Sarvamoola Digital Library. Offer your respects at the feet of Śrī Viśvanandana Tīrtha before entering.">
+
+<!-- Link previews (WhatsApp, Telegram, X) show the portrait. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="श्री विश्वनन्दन तीर्थ — Sarvamoola Digital Library">
+<meta property="og:description" content="With the blessings of Śrī Viśvanandana Tīrtha.">
+<meta property="og:image" content="https://www.sarvamula.org/dge/images/guru/guruji.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preload" as="image" href="dge/images/guru/guruji.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -505,52 +519,16 @@ body.gv-locked { overflow: hidden; }
   .gv-petal, .gv-ripple, .gv-pranam { display: none !important; }
 }
 
-/* =========================================================================
-   7. MOCK SITE UNDERNEATH — not part of the gate.
-   Present only so the dissolve has something real to reveal. Delete this
-   block when the gate is folded into dge/index.html.
-   ========================================================================= */
-.mock-top {
-  position: fixed; top: 0; left: 0; right: 0; height: 60px; z-index: 10;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 18px;
-  background: rgba(255,253,249,.9); backdrop-filter: blur(10px);
-  border-bottom: 1px solid #EEE3CB;
-  font-weight: 600; color: #AE231F;
-}
-.mock-top .mock-actions { display: flex; gap: 10px; font-size: 18px; }
-.mock-body { padding: 84px 18px 40px; max-width: 760px; margin: 0 auto; }
-.mock-body h1 { font-family: var(--gv-font-sa); color: #9A1B1B; font-size: 26px; margin: 0 0 6px; }
-.mock-body p.sub { color: #8a7a63; font-size: 13px; margin: 0 0 26px; }
-.mock-card {
-  background: #fff; border: 1px solid #E9DCC3; border-radius: 16px;
-  padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.05);
-}
-.mock-card b { display: block; color: #2B2119; margin-bottom: 3px; }
-.mock-card span { color: #8a7a63; font-size: 13px; }
-.mock-replay {
-  margin-top: 26px; padding: 11px 20px; border-radius: 999px; cursor: pointer;
-  border: 1px solid #E9DCC3; background: #fff; color: #AE231F; font-weight: 500;
-}
 </style>
 </head>
 <body>
 
-<!-- ======================================================================
-     MOCK SITE (placeholder for the real DGE index)
-     ====================================================================== -->
-<div class="mock-top">
-  <div>❮ Library</div>
-  <div class="mock-actions"><span>💬</span><span>🅰</span><span>🧭</span><span>🔍</span></div>
-</div>
-<div class="mock-body">
-  <h1>सर्वमूल ग्रन्थाः</h1>
-  <p class="sub">Sarvamoola Digital Library — this is placeholder content, only here so the gate has something to dissolve into.</p>
-  <div class="mock-card"><b>Sumadhva Vijaya</b><span>16 sargas · mula + tikas</span></div>
-  <div class="mock-card"><b>Bhagavata Purana</b><span>12 skandhas · with bhashya</span></div>
-  <div class="mock-card"><b>Guru Parampara</b><span>Lineage, brindavanas, holy places</span></div>
-  <button class="mock-replay" onclick="window.dgeGuruVandana.replay()">↺ Replay the vandana</button>
-</div>
+<noscript>
+  <div style="padding:28px;text-align:center;font-family:Georgia,serif;">
+    <p>This page needs JavaScript to display the vandana.</p>
+    <p><a href="dge/index.html">Continue to the Sarvamoola Digital Library</a></p>
+  </div>
+</noscript>
 
 <!-- ======================================================================
      THE GATE
@@ -636,11 +614,20 @@ body.gv-locked { overflow: hidden; }
 const GURU_VANDANA_CONFIG = {
   enabled: true,
 
-  // 'session'  — once per browser session (default; respectful, not naggy)
+  // Where paying respects leads. This page is the front door of the site and
+  // holds nothing else, so entering is a real navigation into the library.
+  // Set to '' to make the gate simply dissolve in place instead — that is
+  // what the offline standalone preview does.
+  enterUrl: '',
+
+  // 'always'   — every arrival at the site (default here)
+  // 'session'  — once per browser session, then straight through to enterUrl
   // 'day'      — once every 24 hours
-  // 'always'   — every single page load
   // 'once'     — the first visit ever, then never again
-  showOncePer: 'session',
+  // Anything but 'always' means a returning visitor is forwarded to enterUrl
+  // without seeing the gate. Note that also makes the browser's Back button
+  // from the library bounce straight forward again.
+  showOncePer: 'always',
   storageKey: 'dge_guru_vandana_seen',
 
   // Soft gate. The Enter button is visible but inert until the visitor has
@@ -972,8 +959,17 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
     document.body.classList.remove('gv-locked');
     remember();
     // Fully remove after the dissolve so it costs nothing thereafter.
-    setTimeout(() => { el.overlay.style.display = 'none'; }, 1300);
     document.dispatchEvent(new CustomEvent('dge:vandana-complete', { detail: { offerings } }));
+
+    if (cfg.enterUrl) {
+      // Navigate part-way through the dissolve rather than after it. Waiting
+      // for the full fade first would show a bare background while the
+      // library loads; starting the load under the fade means the gate lifts
+      // away straight into the site.
+      setTimeout(function () { window.location.href = cfg.enterUrl; }, 650);
+    } else {
+      setTimeout(() => { el.overlay.style.display = 'none'; }, 1300);
+    }
   }
 
   /* --- "Show once per…" bookkeeping ------------------------------------- */
@@ -1057,7 +1053,16 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
 
   render();
   bind();
-  if (shouldShow()) show(); else hide();
+  if (shouldShow()) {
+    show();
+  } else if (cfg.enterUrl) {
+    // This page has no content of its own — if the gate is not being shown,
+    // the only correct thing to do is hand the visitor to the library.
+    // replace() rather than assign() so the gate does not sit in history.
+    window.location.replace(cfg.enterUrl);
+  } else {
+    hide();
+  }
 
   // Small public surface, mirroring how the other DGE modules expose
   // themselves on window for the admin tools and for manual testing.
