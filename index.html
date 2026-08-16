@@ -648,6 +648,13 @@ const GURU_VANDANA_CONFIG = {
   showOncePer: 'always',
   storageKey: 'dge_guru_vandana_seen',
 
+  // Written the moment respects are paid, and read by dge/js/vandana-guard.js
+  // on every page under dge/. That guard bounces anyone who arrived by
+  // bookmark or deep link back here, so the vandana cannot be walked past.
+  // Session-scoped: respects last for the visit, and are asked again on a
+  // fresh one. Change this key and the guard's PASS_KEY together.
+  passKey: 'dge_vandana_passed',
+
   // Soft gate. The Enter button is visible but inert until the visitor has
   // made at least `minOfferings` offerings. Set requireOffering:false to let
   // anyone straight through while still showing the vandana.
@@ -975,19 +982,60 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
     clearTimeout(autoTimer);
     el.overlay.classList.add('gv-leaving');
     document.body.classList.remove('gv-locked');
+    markPassed();
     remember();
     // Fully remove after the dissolve so it costs nothing thereafter.
     document.dispatchEvent(new CustomEvent('dge:vandana-complete', { detail: { offerings } }));
 
-    if (cfg.enterUrl) {
+    var target = destination();
+    if (target) {
       // Navigate part-way through the dissolve rather than after it. Waiting
       // for the full fade first would show a bare background while the
       // library loads; starting the load under the fade means the gate lifts
       // away straight into the site.
-      setTimeout(function () { window.location.href = cfg.enterUrl; }, 650);
+      setTimeout(function () { window.location.href = target; }, 650);
     } else {
       setTimeout(() => { el.overlay.style.display = 'none'; }, 1300);
     }
+  }
+
+  /* --- Where entering leads ---------------------------------------------
+     Normally cfg.enterUrl, but a visitor bounced here by the guard carries
+     ?next=<the page they wanted>, and should land there rather than at the
+     library's front page. */
+  function destination() {
+    var fallback = cfg.enterUrl || '';
+    var next;
+    try {
+      next = new URLSearchParams(location.search).get('next');
+    } catch (e) {
+      return fallback;
+    }
+    if (!next) return fallback;
+
+    var url;
+    try {
+      url = new URL(next, location.href);
+    } catch (e) {
+      return fallback;
+    }
+
+    // Only ever follow a same-origin path. An absolute URL to another host,
+    // or a protocol-relative //elsewhere.example, is someone trying to use
+    // the gate as an open redirect — hand those the fallback instead.
+    if (url.origin !== location.origin) return fallback;
+    // And never send them back to this page, which would simply bounce.
+    if (url.pathname === location.pathname) return fallback;
+
+    return url.pathname + url.search + url.hash;
+  }
+
+  /* Respects are paid. Record it before navigating, or the guard on the far
+     side will bounce the visitor straight back here. */
+  function markPassed() {
+    try {
+      sessionStorage.setItem(cfg.passKey, String(Date.now()));
+    } catch (e) { /* private mode — the guard fails open, so this is fine */ }
   }
 
   /* --- "Show once per…" bookkeeping ------------------------------------- */
@@ -1073,11 +1121,15 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
   bind();
   if (shouldShow()) {
     show();
-  } else if (cfg.enterUrl) {
+  } else if (destination()) {
     // This page has no content of its own — if the gate is not being shown,
-    // the only correct thing to do is hand the visitor to the library.
+    // the only correct thing to do is hand the visitor onward. Mark them
+    // passed first: a 'day' or 'once' setting suppresses the gate across
+    // sessions, so without this the guard would bounce them back to a gate
+    // that forwards them again, forever.
+    markPassed();
     // replace() rather than assign() so the gate does not sit in history.
-    window.location.replace(cfg.enterUrl);
+    window.location.replace(destination());
   } else {
     hide();
   }
