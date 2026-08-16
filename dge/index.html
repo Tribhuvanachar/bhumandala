@@ -573,6 +573,7 @@
 
         <div id="phoneSignInSection" style="display:none; margin-top:16px; border-top:1px solid var(--card-border); padding-top:12px;">
           <label style="display:block; font-size:11px; font-weight:700; text-transform:uppercase; color:var(--muted-text); margin-bottom:4px;">Phone number (with country code)</label>
+          <p id="phoneOtpChannelLabel" style="font-size:11px; color:var(--muted-text); margin:0 0 6px 0;"></p>
           <input type="tel" id="phoneNumberInput" class="modal-input" placeholder="+91XXXXXXXXXX">
           <button class="btn-sm" style="width:100%; margin-top:8px;" onclick="window.dgeSendPhoneOtp(document.getElementById('phoneNumberInput').value.trim()).then(ok => { if (ok) document.getElementById('phoneOtpSection').style.display = 'block'; })">📱 Send Code</button>
           <div id="phoneOtpSection" style="display:none; margin-top:10px;">
@@ -586,6 +587,20 @@
       <div id="accountSignedIn" style="display:none;">
         <p style="font-size:14px; font-weight:700; margin:0 0 4px 0;" id="accountName"></p>
         <p style="font-size:12px; color:var(--muted-text); margin:0 0 16px 0;">Role: <strong id="accountRole"></strong></p>
+
+        <!-- Consent for WhatsApp broadcasts. Shown only to accounts that
+             actually have a phone number, and only where the deployment
+             has broadcasts switched on. Unticked unless the person
+             ticked it — never pre-checked. -->
+        <label id="whatsappOptInRow" style="display:none; align-items:flex-start; gap:8px; margin:0 0 16px 0; cursor:pointer;">
+          <input type="checkbox" id="whatsappOptInCheckbox" style="margin-top:2px; flex:none;"
+                 onchange="window.dgeSetWhatsappOptIn(this.checked)">
+          <span style="font-size:12px; color:var(--muted-text);">
+            Send me updates on WhatsApp. You can stop them any time here, or by replying
+            <strong>STOP</strong> to any message.
+          </span>
+        </label>
+
         <button class="btn-sm" style="width:100%;" onclick="window.dgeSignOut()">Sign Out</button>
       </div>
     </div>
@@ -815,8 +830,11 @@
 <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-compat.js"></script>
-<script src="js/user-auth.js?v=4.60.6"></script>
-<script src="js/user-roles.js?v=4.60.6"></script>
+<!-- Needed only by the 'whatsapp'/'msg91' OTP transports, which call our
+     Cloud Functions. Harmless when unused. -->
+<script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-functions-compat.js"></script>
+<script src="js/user-auth.js?v=4.62.0"></script>
+<script src="js/user-roles.js?v=4.62.0"></script>
 
 <script>
   if (typeof console.log === "function") {

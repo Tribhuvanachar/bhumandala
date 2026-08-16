@@ -1,14 +1,18 @@
 rules_version = '2';
-// DGE User Accounts & Roles — Firestore security rules.
-// Paste this into Firebase Console → Firestore Database → Rules, or
-// deploy via the Firebase CLI. See ../FIREBASE_SETUP.md for the rest of
-// the setup this depends on.
+// DGE User Accounts, Roles & WhatsApp Consent — Firestore security rules.
+// Deploy: cd dge/firebase && firebase deploy --only firestore:rules
+// (or paste into Firebase Console → Firestore Database → Rules).
+// See ../FIREBASE_SETUP.md for the rest of the setup this depends on.
 //
 // This is the REAL enforcement layer. The client-side checks in
 // user-roles.js (is_superadmin in localStorage) are just UI convenience —
 // they decide whether to SHOW the Manage Users screen, not whether a
 // write is allowed. Someone bypassing the UI entirely and calling
 // Firestore directly is still bound by what's written here.
+//
+// Every rule below is exercised by ../tests/rules.test.js against the
+// real Firestore emulator — including the cases that must FAIL. If you
+// edit this file, run `npm run test:rules` in ../tests before deploying.
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -35,23 +39,53 @@ service cloud.firestore {
       return callerRole() == 'superadmin';
     }
 
+    function isAdmin() {
+      return callerRole() in ['admin', 'superadmin'];
+    }
+
+    // The fields a person is allowed to change on their OWN profile.
+    // Deliberately an allowlist, not a denylist: a field added to this
+    // app later is locked by default until someone decides otherwise,
+    // which is the right direction for a mistake to fall.
+    //
+    // Notably absent, and why:
+    //   role                  — elevation; only a superadmin, below.
+    //   whatsappCampaigns     — the record of which broadcasts were
+    //                           already delivered. Client-writable would
+    //                           let someone re-trigger paid messages.
+    //   whatsappUndeliverable — set by the sender after a hard bounce.
+    //   whatsappOptOutAt      — set by the webhook when a user texts
+    //                           STOP; a client that could clear it could
+    //                           undo an opt-out it doesn't own.
+    //   createdAt / lastLoginAt — server timestamps.
+    function selfEditableOnly() {
+      return request.resource.data.diff(resource.data).affectedKeys()
+        .hasOnly(['displayName', 'email', 'phoneNumber', 'whatsappOptIn', 'whatsappOptInAt', 'preferences', 'lastLoginAt']);
+    }
+
     match /users/{uid} {
-      // Any signed-in person can read any profile — needed for the
-      // Manage Users list. Profiles hold only what the user already gave
-      // the app (name/email/phone/role), never payment info or secrets.
-      allow read: if isSignedIn();
+      // Profiles now hold phone numbers, so "any signed-in person can
+      // read any profile" is no longer acceptable — that would make the
+      // whole user base's contact details readable by anyone who signs
+      // in. Reads are the owner's own doc, or an admin's (the Manage
+      // Users screen, which is admin-gated anyway).
+      allow read: if isOwner(uid) || isAdmin();
 
       // A user may create ONLY their own doc, and only with the default
       // role — nobody can hand themselves "superadmin" (or any other
-      // tier) just by writing their own profile document on first sign-in.
+      // tier) just by writing their own profile document on first
+      // sign-in. WhatsApp consent must start false: consent is recorded
+      // by an explicit later action, never assumed at sign-up.
       allow create: if isOwner(uid)
-        && request.resource.data.role == 'basic';
+        && request.resource.data.role == 'basic'
+        && (!('whatsappOptIn' in request.resource.data) || request.resource.data.whatsappOptIn == false);
 
-      // A user may update their own doc, but the role field must stay
-      // exactly what it already was — role changes never come from the
-      // person they apply to.
+      // A user may update their own doc, but only the fields above, and
+      // the role must stay exactly what it already was — role changes
+      // never come from the person they apply to.
       allow update: if isOwner(uid)
-        && request.resource.data.role == resource.data.role;
+        && request.resource.data.role == resource.data.role
+        && selfEditableOnly();
 
       // A superadmin may update anyone ELSE's doc (role changes, from
       // the Manage Users screen). Firestore OR-combines multiple `allow
@@ -63,6 +97,36 @@ service cloud.firestore {
 
       // No client-side deletes in this basic version.
       allow delete: if false;
+    }
+
+    // OTP challenges: salted code hashes, expiry, and attempt counters.
+    //
+    // Totally sealed off from every client, signed in or not. The Admin
+    // SDK inside Cloud Functions bypasses these rules, which is exactly
+    // how it should be — the only code that may read or write a
+    // challenge is the code that owns the OTP lifecycle. A client that
+    // could read this collection could read attempt counts (useful for
+    // timing a brute force); one that could write it could reset its own
+    // attempt counter and guess forever.
+    match /otp_challenges/{docId} {
+      allow read, write: if false;
+    }
+
+    // Broadcast campaigns. Admins compose and schedule them; the
+    // scheduled function (Admin SDK) does the sending and writes back
+    // the stats. No ordinary user has any business here — the audience
+    // and the send counts are operational data.
+    match /broadcasts/{campaignId} {
+      allow read: if isAdmin();
+      allow create, update: if isSuperadmin();
+      allow delete: if isSuperadmin();
+    }
+
+    // Anything not matched above is denied by default. Stated explicitly
+    // so that adding a collection later is a conscious decision rather
+    // than something that silently inherits access from a broad rule.
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }
