@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="sa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0B0907">
+<title>Guru Vandana — DGE Entry Gate (Mock)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================================
+   GURU VANDANA — entry gate for the DGE site.
+   Design notes, so the next person editing this knows what is load-bearing:
+     - Everything reads from the token block below. Recolouring the whole
+       gate is a matter of editing --gv-* variables, nothing else.
+     - Motion is deliberately slow (4s–20s cycles). Anything faster starts
+       to feel like a web banner rather than a darshana. Resist speeding up.
+     - Every animation is switched off under prefers-reduced-motion; the
+       gate must still read correctly as a completely static page.
+   ========================================================================= */
+
+:root {
+  /* Ground: warm near-black, never pure #000 — pure black kills the glow. */
+  --gv-bg-deep:    #0B0907;
+  --gv-bg-mid:     #171009;
+  --gv-bg-warm:    #2A1608;
+
+  /* Saffron / gold family, taken from the photograph's own palette so the
+     portrait sits inside the frame rather than on top of it. */
+  --gv-saffron:    #F2820C;
+  --gv-saffron-lt: #FFB24D;
+  --gv-ember:      #C4471A;
+  --gv-gold:       #E8B24D;
+  --gv-gold-soft:  #D9B87A;
+
+  --gv-text:       #F3E7D4;
+  --gv-text-dim:   #C0AC90;
+  --gv-text-faint: #8B7A63;
+
+  --gv-hairline:   rgba(232,178,77,0.22);
+  --gv-hairline-2: rgba(232,178,77,0.10);
+
+  --gv-font-sa: 'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', 'Noto Sans Devanagari', serif;
+  --gv-font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --gv-font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+
+  --gv-ease:      cubic-bezier(.22,.61,.36,1);
+  --gv-ease-soft: cubic-bezier(.4,0,.2,1);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body { margin: 0; padding: 0; }
+body { font-family: var(--gv-font-ui); background: #FAF3E6; color: #2B2119; }
+body.gv-locked { overflow: hidden; }
+
+/* =========================================================================
+   1. THE OVERLAY
+   ========================================================================= */
+
+.gv-overlay {
+  position: fixed; inset: 0; z-index: 99999;
+  /* Flex column, not a grid: on a short viewport the stage must be allowed
+     to push past the fold and scroll rather than overlap the footer. */
+  display: flex; flex-direction: column;
+  overflow-y: auto; overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background:
+    radial-gradient(120% 85% at 50% 34%, var(--gv-bg-warm) 0%, var(--gv-bg-mid) 42%, var(--gv-bg-deep) 78%),
+    var(--gv-bg-deep);
+  color: var(--gv-text);
+  /* The dissolve on exit: fade + a breath of upward drift + a soft blur, so
+     the gate feels like it lifts away rather than being switched off. */
+  transition:
+    opacity 1.15s var(--gv-ease-soft),
+    transform 1.15s var(--gv-ease-soft),
+    filter 1.15s var(--gv-ease-soft),
+    visibility 0s linear 1.15s;
+}
+.gv-overlay.gv-leaving {
+  opacity: 0; visibility: hidden;
+  transform: scale(1.06) translateY(-2%);
+  filter: blur(14px) saturate(1.4);
+  pointer-events: none;
+}
+
+/* Faint mandala watermark, turning once every two minutes. Present mostly
+   so the dark ground is never a flat dead rectangle on large screens. */
+.gv-mandala {
+  position: fixed; left: 50%; top: 34%;
+  width: min(150vh, 150vw); aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  opacity: .055; pointer-events: none;
+  -webkit-mask-image: radial-gradient(closest-side, #000 30%, transparent 72%);
+          mask-image: radial-gradient(closest-side, #000 30%, transparent 72%);
+  animation: gv-turn 150s linear infinite;
+}
+@keyframes gv-turn { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+/* Vignette, laid over the mandala so its edges fall away into the ground. */
+.gv-vignette {
+  position: fixed; inset: 0; pointer-events: none;
+  background: radial-gradient(115% 78% at 50% 40%, transparent 42%, rgba(0,0,0,.55) 82%, rgba(0,0,0,.82) 100%);
+}
+
+/* Incense drift — two very slow, very faint smoke columns. */
+.gv-smoke {
+  position: fixed; bottom: -10%; width: 34vmin; height: 90vmin;
+  pointer-events: none; opacity: .16;
+  background: radial-gradient(closest-side, rgba(255,214,160,.55), transparent 70%);
+  filter: blur(26px);
+  animation: gv-drift 19s var(--gv-ease-soft) infinite;
+}
+.gv-smoke.gv-smoke-l { left: 6%; }
+.gv-smoke.gv-smoke-r { right: 6%; animation-duration: 23s; animation-delay: -8s; }
+@keyframes gv-drift {
+  0%   { transform: translate3d(0,10%,0) scale(.9);   opacity: 0; }
+  30%  { opacity: .18; }
+  100% { transform: translate3d(4vmin,-40%,0) scale(1.35); opacity: 0; }
+}
+
+/* =========================================================================
+   2. STAGE — portrait, halo, text
+   ========================================================================= */
+
+.gv-stage {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(11px, 1.9vh, 22px);
+  padding: clamp(16px, 3vh, 40px) 20px 0;
+  padding-top: calc(clamp(16px, 3vh, 40px) + env(safe-area-inset-top));
+  text-align: center;
+  flex: 1 0 auto;
+}
+
+/* --- Opening line: ॐ, above everything --- */
+.gv-om {
+  font-family: var(--gv-font-sa);
+  font-size: clamp(24px, 3.4vh, 34px);
+  color: var(--gv-gold);
+  line-height: 1;
+  text-shadow: 0 0 26px rgba(232,178,77,.45);
+  animation: gv-pulse 6s var(--gv-ease-soft) infinite;
+}
+@keyframes gv-pulse {
+  0%, 100% { opacity: .70; text-shadow: 0 0 18px rgba(232,178,77,.30); }
+  50%      { opacity: 1;   text-shadow: 0 0 34px rgba(232,178,77,.60); }
+}
+
+/* --- Portrait --- */
+.gv-portrait-wrap {
+  position: relative;
+  width: clamp(168px, 27vh, 286px);
+  flex: 0 1 auto;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+
+/* The halo: three stacked radial layers breathing out of phase with each
+   other, which reads as light rather than as a drawn circle. */
+.gv-halo {
+  position: absolute; left: 50%; top: 46%;
+  width: 190%; aspect-ratio: 1; transform: translate(-50%,-50%);
+  pointer-events: none;
+  background:
+    radial-gradient(closest-side, rgba(255,178,77,.34), transparent 66%),
+    radial-gradient(closest-side, rgba(242,130,12,.24), transparent 78%);
+  filter: blur(6px);
+  animation: gv-breathe 7s var(--gv-ease-soft) infinite;
+}
+.gv-halo-ring {
+  position: absolute; inset: -6% -7% -5%;
+  border-radius: 50% 50% 18px 18px / 40% 40% 5% 5%;
+  border: 1px solid rgba(232,178,77,.28);
+  box-shadow: 0 0 60px rgba(242,130,12,.22);
+  pointer-events: none;
+  animation: gv-breathe-ring 9s var(--gv-ease-soft) infinite;
+}
+@keyframes gv-breathe {
+  0%, 100% { transform: translate(-50%,-50%) scale(1);    opacity: .80; }
+  50%      { transform: translate(-50%,-50%) scale(1.07); opacity: 1; }
+}
+@keyframes gv-breathe-ring {
+  0%, 100% { transform: scale(1);      opacity: .55; }
+  50%      { transform: scale(1.025);  opacity: .95; }
+}
+
+/* The frame is a temple arch — a half-dome on top, near-square at the base,
+   sitting on a pedestal. The photo is masked to fade into the pedestal so
+   there is no hard photographic edge at the bottom. */
+.gv-frame {
+  position: relative;
+  width: 100%; aspect-ratio: var(--gv-frame-ratio, 3 / 4);
+  border-radius: 50% 50% 14px 14px / 40% 40% 5% 5%;
+  overflow: hidden;
+  background: linear-gradient(180deg, #241505, #120B04);
+  box-shadow:
+    0 0 0 1px rgba(232,178,77,.34),
+    0 0 0 7px rgba(232,178,77,.07),
+    0 30px 70px rgba(0,0,0,.60),
+    inset 0 0 60px rgba(0,0,0,.55);
+}
+.gv-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 20%;   /* overridden from config */
+  display: block;
+  /* Slow Ken Burns. 24s, ~3% travel — felt, not seen. */
+  animation: gv-kenburns 24s var(--gv-ease-soft) infinite alternate;
+  -webkit-mask-image: linear-gradient(180deg, #000 78%, rgba(0,0,0,.80) 93%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 78%, rgba(0,0,0,.80) 93%, transparent 100%);
+}
+@keyframes gv-kenburns {
+  from { transform: scale(1)     translateY(0); }
+  to   { transform: scale(1.055) translateY(-1.4%); }
+}
+
+/* Warm light wash over the photo, tying it to the ground colour. */
+.gv-frame::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(80% 55% at 50% 22%, rgba(255,196,120,.16), transparent 70%),
+    linear-gradient(180deg, transparent 68%, rgba(11,9,7,.80) 100%);
+}
+
+/* Pedestal the frame stands on, and the target for offerings. */
+.gv-pada {
+  position: absolute; left: 50%; bottom: -6px;
+  width: 74%; height: 76px;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 3;
+  border-radius: 50%;
+  /* Faint plinth of light rather than a drawn shelf. */
+  background: radial-gradient(60% 100% at 50% 50%, rgba(242,130,12,.22), transparent 72%);
+  transition: background .4s var(--gv-ease-soft);
+}
+.gv-pada:hover { background: radial-gradient(60% 100% at 50% 50%, rgba(255,178,77,.34), transparent 74%); }
+.gv-pada:focus-visible { outline: 2px solid var(--gv-gold); outline-offset: 6px; border-radius: 999px; }
+
+/* Ripple that blooms outward from the feet on each offering. */
+.gv-ripple {
+  position: absolute; left: 50%; top: 50%;
+  width: 40px; height: 40px; margin: -20px 0 0 -20px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,196,120,.75);
+  pointer-events: none;
+  animation: gv-ripple-out 1.5s var(--gv-ease) forwards;
+}
+@keyframes gv-ripple-out {
+  from { transform: scale(.4);  opacity: .9; }
+  to   { transform: scale(6.5); opacity: 0; }
+}
+
+/* --- Names and the vandana --- */
+.gv-names { display: flex; flex-direction: column; gap: 5px; }
+.gv-name-sa {
+  font-family: var(--gv-font-sa);
+  font-size: clamp(19px, 2.9vh, 27px);
+  color: var(--gv-saffron-lt);
+  letter-spacing: .01em; line-height: 1.45;
+  text-shadow: 0 0 30px rgba(242,130,12,.35);
+}
+.gv-name-en {
+  font-family: var(--gv-font-serif);
+  font-size: clamp(14px, 1.9vh, 18px);
+  font-style: italic; font-weight: 400;
+  color: var(--gv-gold-soft); letter-spacing: .07em;
+}
+.gv-title {
+  font-size: clamp(9.5px, 1.25vh, 11px);
+  text-transform: uppercase; letter-spacing: .26em;
+  color: var(--gv-text-faint);
+}
+
+/* Hairline separator with a diamond at its centre. */
+.gv-rule {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  width: min(340px, 74vw); opacity: .85;
+}
+.gv-rule::before, .gv-rule::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232,178,77,.38), transparent);
+}
+.gv-rule i {
+  width: 6px; height: 6px; transform: rotate(45deg); flex: 0 0 auto;
+  background: var(--gv-gold); opacity: .85;
+  box-shadow: 0 0 12px rgba(232,178,77,.6);
+}
+
+.gv-shloka {
+  font-family: var(--gv-font-sa);
+  font-size: clamp(13px, 1.8vh, 16.5px);
+  line-height: 1.9;
+  color: var(--gv-text);
+  max-width: 46ch;
+  opacity: .93;
+}
+.gv-shloka-tr {
+  font-family: var(--gv-font-serif);
+  font-size: clamp(11.5px, 1.5vh, 14px);
+  font-style: italic; letter-spacing: .03em;
+  color: var(--gv-text-faint);
+  max-width: 52ch; margin-top: 6px;
+}
+
+/* =========================================================================
+   3. FOOTER — offering, blessing line, entry
+   ========================================================================= */
+
+.gv-foot {
+  position: relative; z-index: 2; flex: 0 0 auto;
+  display: flex; flex-direction: column; align-items: center;
+  gap: clamp(9px, 1.3vh, 15px);
+  padding: clamp(12px, 2vh, 24px) 20px calc(clamp(16px, 2.6vh, 32px) + env(safe-area-inset-bottom));
+}
+
+.gv-hint {
+  font-size: clamp(11px, 1.45vh, 13px);
+  color: var(--gv-text-faint); letter-spacing: .03em;
+  transition: opacity .5s var(--gv-ease-soft);
+}
+
+.gv-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+.gv-btn {
+  font-family: var(--gv-font-ui);
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 13px 27px;
+  border-radius: 999px;
+  font-size: clamp(12.5px, 1.6vh, 14.5px);
+  font-weight: 500; letter-spacing: .045em;
+  cursor: pointer;
+  border: 1px solid var(--gv-hairline);
+  background: rgba(255,255,255,.035);
+  color: var(--gv-text);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: transform .3s var(--gv-ease), background .3s var(--gv-ease-soft),
+              border-color .3s var(--gv-ease-soft), box-shadow .4s var(--gv-ease-soft),
+              opacity .5s var(--gv-ease-soft), color .3s var(--gv-ease-soft);
+}
+.gv-btn:hover  { transform: translateY(-2px); border-color: rgba(232,178,77,.55); background: rgba(255,255,255,.07); }
+.gv-btn:active { transform: translateY(0) scale(.98); }
+.gv-btn:focus-visible { outline: 2px solid var(--gv-gold); outline-offset: 4px; }
+
+/* Offer — the primary action while the gate is locked. */
+.gv-btn-offer {
+  border-color: rgba(242,130,12,.5);
+  background: linear-gradient(180deg, rgba(242,130,12,.20), rgba(196,71,26,.16));
+  color: #FFE6C4;
+  box-shadow: 0 0 34px rgba(242,130,12,.18);
+}
+.gv-btn-offer:hover { box-shadow: 0 0 46px rgba(242,130,12,.34); }
+
+/* Enter — deliberately quiet until an offering has been made, then it
+   takes over as the brightest thing on the screen. */
+.gv-btn-enter { opacity: .34; pointer-events: none; }
+.gv-btn-enter.gv-ready {
+  opacity: 1; pointer-events: auto;
+  border-color: rgba(232,178,77,.62);
+  background: linear-gradient(180deg, rgba(232,178,77,.20), rgba(242,130,12,.12));
+  color: #FFF1D8;
+  animation: gv-arrive .9s var(--gv-ease) both, gv-glow 3.6s var(--gv-ease-soft) 1s infinite;
+}
+@keyframes gv-arrive {
+  from { transform: translateY(10px) scale(.96); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+@keyframes gv-glow {
+  0%, 100% { box-shadow: 0 0 22px rgba(232,178,77,.18); }
+  50%      { box-shadow: 0 0 46px rgba(232,178,77,.40); }
+}
+.gv-btn-enter .gv-arrow { transition: transform .3s var(--gv-ease); }
+.gv-btn-enter:hover .gv-arrow { transform: translateX(4px); }
+
+/* "With the blessings of…" — set small and wide, the way a colophon reads. */
+.gv-blessing {
+  font-family: var(--gv-font-serif);
+  font-size: clamp(11.5px, 1.5vh, 14px);
+  font-style: italic;
+  color: var(--gv-gold-soft);
+  letter-spacing: .05em;
+  opacity: .9;
+  max-width: 44ch; text-align: center; line-height: 1.6;
+}
+
+.gv-count {
+  font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--gv-text-faint);
+  min-height: 13px;
+  transition: opacity .4s var(--gv-ease-soft);
+}
+
+/* =========================================================================
+   4. PETALS
+   ========================================================================= */
+
+.gv-petal-layer { position: fixed; inset: 0; pointer-events: none; z-index: 4; overflow: hidden; }
+.gv-petal { position: absolute; will-change: transform, opacity; }
+.gv-petal svg { display: block; filter: drop-shadow(0 2px 5px rgba(0,0,0,.45)); }
+
+/* Petals that have come to rest at the feet. */
+.gv-settled { position: absolute; z-index: 3; pointer-events: none; opacity: 0; animation: gv-settle .7s var(--gv-ease) forwards; }
+@keyframes gv-settle {
+  from { opacity: 0; transform: translateY(-8px) scale(.85); }
+  to   { opacity: .88; transform: none; }
+}
+
+/* =========================================================================
+   5. STAGED ENTRANCE
+   Each piece rises on its own delay so the screen assembles itself
+   top-down over ~2s instead of appearing all at once.
+   ========================================================================= */
+.gv-rise { opacity: 0; transform: translateY(16px); }
+.gv-overlay.gv-ready-in .gv-rise {
+  opacity: 1; transform: none;
+  transition: opacity 1.1s var(--gv-ease), transform 1.1s var(--gv-ease);
+}
+.gv-overlay.gv-ready-in .gv-rise[data-d="1"] { transition-delay: .15s; }
+.gv-overlay.gv-ready-in .gv-rise[data-d="2"] { transition-delay: .40s; }
+.gv-overlay.gv-ready-in .gv-rise[data-d="3"] { transition-delay: .95s; }
+.gv-overlay.gv-ready-in .gv-rise[data-d="4"] { transition-delay: 1.25s; }
+.gv-overlay.gv-ready-in .gv-rise[data-d="5"] { transition-delay: 1.55s; }
+.gv-overlay.gv-ready-in .gv-rise[data-d="6"] { transition-delay: 1.85s; }
+
+/* Portrait gets a slightly different entrance — it scales up as it fades. */
+.gv-overlay .gv-portrait-wrap.gv-rise { transform: translateY(22px) scale(.94); }
+.gv-overlay.gv-ready-in .gv-portrait-wrap.gv-rise {
+  transform: none;
+  transition: opacity 1.6s var(--gv-ease), transform 1.6s var(--gv-ease);
+  transition-delay: .3s;
+}
+
+/* =========================================================================
+   6. SHORT-VIEWPORT + REDUCED MOTION
+   ========================================================================= */
+
+/* On a short landscape phone the shloka is the first thing to go. */
+@media (max-height: 720px) {
+  .gv-shloka-tr { display: none; }
+}
+@media (max-height: 560px) {
+  .gv-shloka-tr, .gv-title { display: none; }
+  .gv-portrait-wrap { width: clamp(150px, 30vh, 220px); }
+  .gv-shloka { font-size: 12px; line-height: 1.75; }
+}
+@media (max-height: 430px) {
+  .gv-shloka, .gv-rule, .gv-om { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gv-mandala, .gv-smoke, .gv-om, .gv-halo, .gv-halo-ring,
+  .gv-frame img, .gv-btn-enter.gv-ready { animation: none !important; }
+  .gv-overlay, .gv-rise, .gv-btn { transition-duration: .01ms !important; transition-delay: 0s !important; }
+  .gv-overlay.gv-leaving { transform: none; filter: none; }
+  .gv-petal, .gv-ripple { display: none !important; }
+}
+
+/* =========================================================================
+   7. MOCK SITE UNDERNEATH — not part of the gate.
+   Present only so the dissolve has something real to reveal. Delete this
+   block when the gate is folded into dge/index.html.
+   ========================================================================= */
+.mock-top {
+  position: fixed; top: 0; left: 0; right: 0; height: 60px; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 18px;
+  background: rgba(255,253,249,.9); backdrop-filter: blur(10px);
+  border-bottom: 1px solid #EEE3CB;
+  font-weight: 600; color: #AE231F;
+}
+.mock-top .mock-actions { display: flex; gap: 10px; font-size: 18px; }
+.mock-body { padding: 84px 18px 40px; max-width: 760px; margin: 0 auto; }
+.mock-body h1 { font-family: var(--gv-font-sa); color: #9A1B1B; font-size: 26px; margin: 0 0 6px; }
+.mock-body p.sub { color: #8a7a63; font-size: 13px; margin: 0 0 26px; }
+.mock-card {
+  background: #fff; border: 1px solid #E9DCC3; border-radius: 16px;
+  padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.05);
+}
+.mock-card b { display: block; color: #2B2119; margin-bottom: 3px; }
+.mock-card span { color: #8a7a63; font-size: 13px; }
+.mock-replay {
+  margin-top: 26px; padding: 11px 20px; border-radius: 999px; cursor: pointer;
+  border: 1px solid #E9DCC3; background: #fff; color: #AE231F; font-weight: 500;
+}
+</style>
+</head>
+<body>
+
+<!-- ======================================================================
+     MOCK SITE (placeholder for the real DGE index)
+     ====================================================================== -->
+<div class="mock-top">
+  <div>❮ Library</div>
+  <div class="mock-actions"><span>💬</span><span>🅰</span><span>🧭</span><span>🔍</span></div>
+</div>
+<div class="mock-body">
+  <h1>सर्वमूल ग्रन्थाः</h1>
+  <p class="sub">Sarvamoola Digital Library — this is placeholder content, only here so the gate has something to dissolve into.</p>
+  <div class="mock-card"><b>Sumadhva Vijaya</b><span>16 sargas · mula + tikas</span></div>
+  <div class="mock-card"><b>Bhagavata Purana</b><span>12 skandhas · with bhashya</span></div>
+  <div class="mock-card"><b>Guru Parampara</b><span>Lineage, brindavanas, holy places</span></div>
+  <button class="mock-replay" onclick="window.dgeGuruVandana.replay()">↺ Replay the vandana</button>
+</div>
+
+<!-- ======================================================================
+     THE GATE
+     ====================================================================== -->
+<div class="gv-overlay" id="gvOverlay" role="dialog" aria-modal="true" aria-labelledby="gvNameSa">
+
+  <!-- Ambient layers -->
+  <svg class="gv-mandala" viewBox="0 0 400 400" aria-hidden="true">
+    <g fill="none" stroke="#E8B24D" stroke-width=".6">
+      <circle cx="200" cy="200" r="60"/><circle cx="200" cy="200" r="96"/>
+      <circle cx="200" cy="200" r="132"/><circle cx="200" cy="200" r="168"/>
+      <g id="gvSpokes"></g>
+    </g>
+  </svg>
+  <div class="gv-smoke gv-smoke-l" aria-hidden="true"></div>
+  <div class="gv-smoke gv-smoke-r" aria-hidden="true"></div>
+  <div class="gv-vignette" aria-hidden="true"></div>
+  <div class="gv-petal-layer" id="gvPetals" aria-hidden="true"></div>
+
+  <!-- Stage -->
+  <div class="gv-stage">
+    <div class="gv-om gv-rise" data-d="1" aria-hidden="true">ॐ</div>
+
+    <div class="gv-portrait-wrap gv-rise" data-d="2">
+      <div class="gv-halo" aria-hidden="true"></div>
+      <div class="gv-halo-ring" aria-hidden="true"></div>
+      <div class="gv-frame">
+        <img id="gvPhoto" src="" alt="">
+      </div>
+      <!-- The feet. Tapping here is the offering gesture. -->
+      <div class="gv-pada" id="gvPada" role="button" tabindex="0"
+           aria-label="Offer flowers at the Guru's feet"></div>
+    </div>
+
+    <div class="gv-names gv-rise" data-d="3">
+      <div class="gv-name-sa" id="gvNameSa"></div>
+      <div class="gv-name-en" id="gvNameEn"></div>
+      <div class="gv-title"  id="gvTitle"></div>
+    </div>
+
+    <div class="gv-rule gv-rise" data-d="4" aria-hidden="true"><i></i></div>
+
+    <div class="gv-rise" data-d="4">
+      <div class="gv-shloka"    id="gvShloka"></div>
+      <div class="gv-shloka-tr" id="gvShlokaTr"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="gv-foot">
+    <div class="gv-hint gv-rise" data-d="5" id="gvHint"></div>
+
+    <div class="gv-actions gv-rise" data-d="5">
+      <button class="gv-btn gv-btn-offer" id="gvOfferBtn">
+        <span aria-hidden="true">🌸</span><span id="gvOfferLabel"></span>
+      </button>
+      <button class="gv-btn gv-btn-enter" id="gvEnterBtn" aria-disabled="true">
+        <span id="gvEnterLabel"></span><span class="gv-arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
+
+    <div class="gv-count gv-rise" data-d="5" id="gvCount" aria-live="polite"></div>
+    <div class="gv-blessing gv-rise" data-d="6" id="gvBlessing"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   GURU_VANDANA_CONFIG
+   Same shape as SPONSOR_CONFIG / WHATS_NEW_CONFIG in js/config.js, so this
+   drops into that file unchanged and becomes editable from Site Settings
+   (data/config-overrides.json) without touching any markup.
+   ========================================================================= */
+const GURU_VANDANA_CONFIG = {
+  enabled: true,
+
+  // 'session'  — once per browser session (default; respectful, not naggy)
+  // 'day'      — once every 24 hours
+  // 'always'   — every single page load
+  // 'once'     — the first visit ever, then never again
+  showOncePer: 'session',
+  storageKey: 'dge_guru_vandana_seen',
+
+  // Soft gate. The Enter button is visible but inert until the visitor has
+  // made at least `minOfferings` offerings. Set requireOffering:false to let
+  // anyone straight through while still showing the vandana.
+  requireOffering: true,
+  minOfferings: 1,
+
+  // Esc / backdrop escape hatch. Off by default so the gate means something.
+  allowEscape: false,
+
+  // Auto-enter after N ms with no interaction. 0 disables.
+  autoEnterMs: 0,
+
+  photo: {
+    // TODO: drop the Guruji's portrait at this path and commit it.
+    // Until then an inline placeholder silhouette is drawn instead.
+    src: 'images/guru/guruji.jpg',
+    alt: 'Portrait of Śrī Gurujī',
+
+    // The photo is cropped to fill the arch, so these two decide the framing
+    // and are worth tuning once against the real photograph:
+    //   frameRatio     — shape of the arch. '3 / 4' is a bust; a tall seated
+    //                    portrait usually wants something nearer '2 / 3'.
+    //   objectPosition — which slice of the photo survives the crop. Lower
+    //                    percentages keep the face; higher ones bring the
+    //                    feet into view, which matters here because the feet
+    //                    are what visitors are offering flowers at.
+    frameRatio: '3 / 4',
+    objectPosition: 'center 30%'
+  },
+
+  guru: {
+    nameSanskrit: 'श्री गुरुभ्यो नमः',
+    nameEnglish: 'Śrī Gurujī',                 // TODO: full name and ashrama title
+    titleLine: 'Paramapūjya Ācārya'            // TODO: e.g. maṭha / pīṭha
+  },
+
+  vandana: {
+    sanskrit: 'गुरुर्ब्रह्मा गुरुर्विष्णुः गुरुर्देवो महेश्वरः ।<br>गुरुः साक्षात् परं ब्रह्म तस्मै श्रीगुरवे नमः ॥',
+    transliteration: 'gururbrahmā gururviṣṇuḥ gururdevo maheśvaraḥ · guruḥ sākṣāt paraṃ brahma tasmai śrī gurave namaḥ'
+  },
+
+  // The obeisance / colophon line under the entry button.
+  blessing: 'With the blessings of Śrī Gurujī, this library is offered at his feet.',
+
+  labels: {
+    offerHint:   'Tap the feet, or the button below, to offer flowers',
+    offerButton: 'पुष्पाञ्जलि · Offer Flowers',
+    enterLocked: 'Enter the Library',
+    enterReady:  'Enter the Library',
+    // {n} is replaced with the number of offerings made.
+    countOne:    '{n} offering made',
+    countMany:   '{n} offerings made',
+    thankYou:    'नमो गुरवे — you may now enter'
+  },
+
+  petals: {
+    countPerOffering: 16,
+    // Marigold, rose, tulasi-flower white, kumkuma red.
+    colors: ['#F2820C', '#FFB24D', '#E8B24D', '#C4471A', '#FFE0B0', '#D94F2A'],
+    maxSettled: 44
+  }
+};
+window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
+
+/* =========================================================================
+   Gate behaviour.
+   In the real app this becomes js/guru-vandana.js and is included before
+   core.js, since it must paint before anything else does.
+   ========================================================================= */
+(function () {
+  'use strict';
+
+  const cfg  = window.GURU_VANDANA_CONFIG;
+  const $    = (id) => document.getElementById(id);
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const el = {
+    overlay:  $('gvOverlay'),
+    photo:    $('gvPhoto'),
+    pada:     $('gvPada'),
+    petals:   $('gvPetals'),
+    nameSa:   $('gvNameSa'),
+    nameEn:   $('gvNameEn'),
+    title:    $('gvTitle'),
+    shloka:   $('gvShloka'),
+    shlokaTr: $('gvShlokaTr'),
+    hint:     $('gvHint'),
+    offerBtn: $('gvOfferBtn'),
+    offerLbl: $('gvOfferLabel'),
+    enterBtn: $('gvEnterBtn'),
+    enterLbl: $('gvEnterLabel'),
+    count:    $('gvCount'),
+    blessing: $('gvBlessing')
+  };
+
+  let offerings = 0;
+  let autoTimer = null;
+
+  /* --- Placeholder portrait -------------------------------------------
+     Drawn only when cfg.photo.src is missing or fails to load, so the mock
+     is presentable before the real photograph is committed. A seated
+     saffron figure, deliberately abstract — it is a stand-in, not an image
+     of anyone. */
+  const PLACEHOLDER = 'data:image/svg+xml;utf8,' + encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3A2410"/><stop offset="1" stop-color="#120B04"/>
+        </linearGradient>
+        <linearGradient id="robe" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#F2820C"/><stop offset="1" stop-color="#B4470F"/>
+        </linearGradient>
+        <radialGradient id="lamp" cx=".5" cy=".28" r=".55">
+          <stop offset="0" stop-color="#FFD9A0" stop-opacity=".38"/>
+          <stop offset="1" stop-color="#FFD9A0" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="300" height="400" fill="url(%23bg)"/>
+      <rect width="300" height="400" fill="url(%23lamp)"/>
+      <ellipse cx="150" cy="126" rx="40" ry="46" fill="#8A5A32"/>
+      <path d="M150 176c-58 0-92 44-100 128 0 0 40 20 100 20s100-20 100-20c-8-84-42-128-100-128z" fill="url(%23robe)"/>
+      <path d="M150 176c-20 0-36 5-49 14 10 44 28 70 49 70s39-26 49-70c-13-9-29-14-49-14z" fill="#FFB24D" opacity=".45"/>
+      <circle cx="150" cy="108" r="3.4" fill="#F3E7D4" opacity=".85"/>
+      <text x="150" y="372" text-anchor="middle" fill="#C0AC90" font-size="12"
+            font-family="Georgia, serif" font-style="italic" opacity=".75">portrait placeholder</text>
+    </svg>`);
+
+  /* --- Populate from config -------------------------------------------- */
+  function render() {
+    el.photo.src = cfg.photo.src || PLACEHOLDER;
+    el.photo.alt = cfg.photo.alt || '';
+    el.photo.style.objectPosition = cfg.photo.objectPosition || 'center 30%';
+    document.querySelector('.gv-frame').style.setProperty('--gv-frame-ratio', cfg.photo.frameRatio || '3 / 4');
+    el.photo.onerror = function () {
+      // One retry into the placeholder, then stop — otherwise a broken
+      // placeholder would loop onerror forever.
+      this.onerror = null;
+      this.src = PLACEHOLDER;
+    };
+
+    el.nameSa.innerHTML   = cfg.guru.nameSanskrit || '';
+    el.nameEn.textContent = cfg.guru.nameEnglish || '';
+    el.title.textContent  = cfg.guru.titleLine || '';
+    el.shloka.innerHTML   = cfg.vandana.sanskrit || '';
+    el.shlokaTr.textContent = cfg.vandana.transliteration || '';
+    el.blessing.textContent = cfg.blessing || '';
+    el.hint.textContent   = cfg.labels.offerHint || '';
+    el.offerLbl.textContent = cfg.labels.offerButton || 'Offer Flowers';
+    el.enterLbl.textContent = cfg.labels.enterLocked || 'Enter';
+
+    // Mandala spokes, drawn rather than hand-written into the markup.
+    const spokes = document.getElementById('gvSpokes');
+    if (spokes) {
+      let d = '';
+      for (let i = 0; i < 24; i++) {
+        const a = (i / 24) * Math.PI * 2;
+        d += `M${200 + Math.cos(a) * 60} ${200 + Math.sin(a) * 60}L${200 + Math.cos(a) * 168} ${200 + Math.sin(a) * 168}`;
+      }
+      const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      p.setAttribute('d', d);
+      spokes.appendChild(p);
+    }
+
+    if (!cfg.requireOffering) unlock();
+  }
+
+  /* --- Petals -----------------------------------------------------------
+     One <div> per petal, animated with the Web Animations API so each gets
+     its own randomised drift without generating a keyframe rule per petal.
+     Outer element carries the fall, inner carries sway + spin. */
+  function petalSvg(color, size) {
+    return `<svg width="${size}" height="${size * 1.35}" viewBox="0 0 20 27">
+      <path d="M10 0C4 7 0 13 0 18a10 10 0 0 0 20 0c0-5-4-11-10-18z" fill="${color}"/>
+      <path d="M10 2c-3 5-6 10-6 15a6 6 0 0 0 6 6z" fill="#fff" opacity=".18"/>
+    </svg>`;
+  }
+
+  function offer(originX, originY) {
+    const padaRect = el.pada.getBoundingClientRect();
+    const targetX  = padaRect.left + padaRect.width / 2;
+    const targetY  = padaRect.top + padaRect.height / 2;
+
+    offerings++;
+    updateCount();
+    ripple();
+
+    if (!reduced) {
+      const n = cfg.petals.countPerOffering;
+      for (let i = 0; i < n; i++) rainPetal(originX, originY, targetX, targetY, i, n);
+    }
+
+    if (cfg.requireOffering && offerings >= cfg.minOfferings) unlock();
+  }
+
+  function rainPetal(ox, oy, tx, ty, i, n) {
+    const color = cfg.petals.colors[Math.floor(Math.random() * cfg.petals.colors.length)];
+    const size  = 9 + Math.random() * 9;
+
+    const outer = document.createElement('div');
+    outer.className = 'gv-petal';
+    const inner = document.createElement('div');
+    inner.innerHTML = petalSvg(color, size);
+    outer.appendChild(inner);
+
+    // Fan out from the origin so a burst reads as a handful of flowers
+    // released together, not as a vertical column.
+    const spread = (i / n - 0.5) * 190;
+    const startX = ox + spread + (Math.random() - 0.5) * 40;
+    const startY = oy - 40 - Math.random() * 90;
+    const endX   = tx + (Math.random() - 0.5) * padaWidth();
+    const endY   = ty + (Math.random() - 0.5) * 26;
+
+    outer.style.left = startX + 'px';
+    outer.style.top  = startY + 'px';
+    el.petals.appendChild(outer);
+
+    const dur   = 1500 + Math.random() * 1400;
+    const delay = i * 42 + Math.random() * 160;
+
+    outer.animate([
+      { transform: 'translate(0,0)',                                    opacity: 0 },
+      { transform: `translate(${(endX - startX) * .45}px, ${(endY - startY) * .40}px)`, opacity: 1, offset: .30 },
+      { transform: `translate(${(endX - startX) * .82}px, ${(endY - startY) * .80}px)`, opacity: 1, offset: .75 },
+      { transform: `translate(${endX - startX}px, ${endY - startY}px)`,  opacity: .9 }
+    ], { duration: dur, delay, easing: 'cubic-bezier(.35,.05,.5,1)', fill: 'forwards' });
+
+    // Sway and tumble, on the inner element so it composes with the fall.
+    inner.animate([
+      { transform: 'translateX(0) rotate(0deg)' },
+      { transform: `translateX(${(Math.random() > .5 ? 1 : -1) * (14 + Math.random() * 20)}px) rotate(${120 + Math.random() * 160}deg)` },
+      { transform: `translateX(0) rotate(${260 + Math.random() * 260}deg)` }
+    ], { duration: dur, delay, easing: 'ease-in-out', fill: 'forwards' });
+
+    setTimeout(function () {
+      outer.remove();
+      settle(endX, endY, color, size);
+    }, dur + delay);
+  }
+
+  function padaWidth() {
+    const r = el.pada.getBoundingClientRect();
+    return Math.max(80, r.width * .8);
+  }
+
+  /* Petals come to rest at the feet and stay there — the heap is the record
+     of what visitors have offered during this darshana. */
+  function settle(x, y, color, size) {
+    const s = document.createElement('div');
+    s.className = 'gv-settled';
+    s.style.left = x + 'px';
+    s.style.top  = y + 'px';
+    s.innerHTML  = petalSvg(color, size * .9);
+    s.firstChild.style.transform = `rotate(${Math.random() * 360}deg)`;
+    el.petals.appendChild(s);
+
+    const settled = el.petals.querySelectorAll('.gv-settled');
+    if (settled.length > cfg.petals.maxSettled) settled[0].remove();
+  }
+
+  function ripple() {
+    if (reduced) return;
+    const r = document.createElement('div');
+    r.className = 'gv-ripple';
+    el.pada.appendChild(r);
+    setTimeout(() => r.remove(), 1600);
+  }
+
+  /* --- Unlock / enter --------------------------------------------------- */
+  function unlock() {
+    if (el.enterBtn.classList.contains('gv-ready')) return;
+    el.enterBtn.classList.add('gv-ready');
+    el.enterBtn.setAttribute('aria-disabled', 'false');
+    el.enterLbl.textContent = cfg.labels.enterReady || cfg.labels.enterLocked;
+    if (offerings > 0) el.hint.textContent = cfg.labels.thankYou || '';
+  }
+
+  function updateCount() {
+    const tpl = offerings === 1 ? cfg.labels.countOne : cfg.labels.countMany;
+    el.count.textContent = (tpl || '').replace('{n}', offerings);
+  }
+
+  function enter() {
+    if (cfg.requireOffering && offerings < cfg.minOfferings) return;
+    clearTimeout(autoTimer);
+    el.overlay.classList.add('gv-leaving');
+    document.body.classList.remove('gv-locked');
+    remember();
+    // Fully remove after the dissolve so it costs nothing thereafter.
+    setTimeout(() => { el.overlay.style.display = 'none'; }, 1300);
+    document.dispatchEvent(new CustomEvent('dge:vandana-complete', { detail: { offerings } }));
+  }
+
+  /* --- "Show once per…" bookkeeping ------------------------------------- */
+  function remember() {
+    try {
+      const now = Date.now();
+      if (cfg.showOncePer === 'session') sessionStorage.setItem(cfg.storageKey, String(now));
+      else if (cfg.showOncePer === 'day' || cfg.showOncePer === 'once') localStorage.setItem(cfg.storageKey, String(now));
+    } catch (e) { /* private mode — the gate simply shows every time */ }
+  }
+
+  function shouldShow() {
+    if (!cfg.enabled) return false;
+    if (cfg.showOncePer === 'always') return true;
+    try {
+      if (cfg.showOncePer === 'session') return !sessionStorage.getItem(cfg.storageKey);
+      const seen = Number(localStorage.getItem(cfg.storageKey) || 0);
+      if (!seen) return true;
+      if (cfg.showOncePer === 'once') return false;
+      return (Date.now() - seen) > 86400000;   // 'day'
+    } catch (e) { return true; }
+  }
+
+  /* --- Wiring ----------------------------------------------------------- */
+  function bind() {
+    el.offerBtn.addEventListener('click', function (ev) {
+      const r = ev.currentTarget.getBoundingClientRect();
+      offer(r.left + r.width / 2, r.top);
+    });
+
+    el.pada.addEventListener('click', function (ev) {
+      offer(ev.clientX || window.innerWidth / 2, (ev.clientY || 0) - 120);
+    });
+    el.pada.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        const r = el.pada.getBoundingClientRect();
+        offer(r.left + r.width / 2, r.top - 120);
+      }
+    });
+
+    el.enterBtn.addEventListener('click', enter);
+
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key !== 'Escape') return;
+      if (cfg.allowEscape) enter();
+    });
+  }
+
+  function show() {
+    document.body.classList.add('gv-locked');
+    el.overlay.style.display = '';
+    el.overlay.classList.remove('gv-leaving');
+    offerings = 0;
+    el.count.textContent = '';
+    el.hint.textContent = cfg.labels.offerHint || '';
+    el.petals.innerHTML = '';
+    if (cfg.requireOffering) {
+      el.enterBtn.classList.remove('gv-ready');
+      el.enterBtn.setAttribute('aria-disabled', 'true');
+      el.enterLbl.textContent = cfg.labels.enterLocked;
+    }
+    // Double rAF so the initial (pre-transition) state is painted first —
+    // without it the staged entrance is skipped on a fast connection.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.overlay.classList.add('gv-ready-in');
+      el.offerBtn.focus({ preventScroll: true });
+    }));
+
+    if (cfg.autoEnterMs > 0) autoTimer = setTimeout(() => { unlock(); enter(); }, cfg.autoEnterMs);
+  }
+
+  function hide() {
+    el.overlay.style.display = 'none';
+    el.overlay.classList.remove('gv-ready-in');
+    document.body.classList.remove('gv-locked');
+  }
+
+  render();
+  bind();
+  if (shouldShow()) show(); else hide();
+
+  // Small public surface, mirroring how the other DGE modules expose
+  // themselves on window for the admin tools and for manual testing.
+  window.dgeGuruVandana = {
+    show, hide, enter,
+    replay: function () { el.overlay.classList.remove('gv-ready-in'); show(); },
+    reset: function () {
+      try { sessionStorage.removeItem(cfg.storageKey); localStorage.removeItem(cfg.storageKey); } catch (e) {}
+    },
+    get offerings() { return offerings; }
+  };
+})();
+</script>
+</body>
+</html>
