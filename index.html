@@ -60,6 +60,11 @@
 
   --gv-ease:      cubic-bezier(.22,.61,.36,1);
   --gv-ease-soft: cubic-bezier(.4,0,.2,1);
+
+  --gv-vh: calc(1 * var(--gv-vh));
+}
+@supports (height: 1dvh) {
+  :root { --gv-vh: 1dvh; }
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -74,6 +79,7 @@ body.gv-locked { overflow: hidden; }
 
 .gv-overlay {
   position: fixed; inset: 0; z-index: 99999;
+  height: 100vh; height: 100dvh;
   /* Flex column, not a grid: on a short viewport the stage must be allowed
      to push past the fold and scroll rather than overlap the footer. */
   display: flex; flex-direction: column;
@@ -102,7 +108,7 @@ body.gv-locked { overflow: hidden; }
    so the dark ground is never a flat dead rectangle on large screens. */
 .gv-mandala {
   position: fixed; left: 50%; top: 34%;
-  width: min(150vh, 150vw); aspect-ratio: 1;
+  width: min(calc(150 * var(--gv-vh)), 150vw); aspect-ratio: 1;
   transform: translate(-50%, -50%);
   opacity: .055; pointer-events: none;
   -webkit-mask-image: radial-gradient(closest-side, #000 30%, transparent 72%);
@@ -140,9 +146,9 @@ body.gv-locked { overflow: hidden; }
 .gv-stage {
   position: relative; z-index: 2;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: clamp(11px, 1.9vh, 22px);
-  padding: clamp(16px, 3vh, 40px) 20px 0;
-  padding-top: calc(clamp(16px, 3vh, 40px) + env(safe-area-inset-top));
+  gap: clamp(11px, calc(1.9 * var(--gv-vh)), 22px);
+  padding: clamp(16px, calc(3 * var(--gv-vh)), 40px) 20px 0;
+  padding-top: calc(clamp(16px, calc(3 * var(--gv-vh)), 40px) + env(safe-area-inset-top));
   text-align: center;
   flex: 1 0 auto;
 }
@@ -150,7 +156,7 @@ body.gv-locked { overflow: hidden; }
 /* --- Opening line: ॐ, above everything --- */
 .gv-om {
   font-family: var(--gv-font-sa);
-  font-size: clamp(24px, 3.4vh, 34px);
+  font-size: clamp(24px, calc(3.4 * var(--gv-vh)), 34px);
   color: var(--gv-gold);
   line-height: 1;
   text-shadow: 0 0 26px rgba(232,178,77,.45);
@@ -164,7 +170,7 @@ body.gv-locked { overflow: hidden; }
 /* --- Portrait --- */
 .gv-portrait-wrap {
   position: relative;
-  width: clamp(152px, 24vh, 262px);
+  width: clamp(152px, calc(24 * var(--gv-vh)), 262px);
   flex: 0 1 auto;
   display: flex; align-items: flex-end; justify-content: center;
 }
@@ -272,19 +278,19 @@ body.gv-locked { overflow: hidden; }
 .gv-names { display: flex; flex-direction: column; gap: 5px; }
 .gv-name-sa {
   font-family: var(--gv-font-sa);
-  font-size: clamp(19px, 2.9vh, 27px);
+  font-size: clamp(19px, calc(2.9 * var(--gv-vh)), 27px);
   color: var(--gv-saffron-lt);
   letter-spacing: .01em; line-height: 1.45;
   text-shadow: 0 0 30px rgba(242,130,12,.35);
 }
 .gv-name-en {
   font-family: var(--gv-font-serif);
-  font-size: clamp(14px, 1.9vh, 18px);
+  font-size: clamp(14px, calc(1.9 * var(--gv-vh)), 18px);
   font-style: italic; font-weight: 400;
   color: var(--gv-gold-soft); letter-spacing: .07em;
 }
 .gv-title {
-  font-size: clamp(9.5px, 1.25vh, 11px);
+  font-size: clamp(9.5px, calc(1.25 * var(--gv-vh)), 11px);
   text-transform: uppercase; letter-spacing: .26em;
   color: var(--gv-text-faint);
 }
@@ -306,21 +312,21 @@ body.gv-locked { overflow: hidden; }
 
 .gv-shloka {
   font-family: var(--gv-font-sa);
-  font-size: clamp(13px, 1.8vh, 16.5px);
+  font-size: clamp(13px, calc(1.8 * var(--gv-vh)), 16.5px);
   line-height: 1.9;
   color: var(--gv-text);
   max-width: 46ch;
   opacity: .93;
 }
 .gv-shloka-en {
-  font-size: clamp(11px, 1.4vh, 12.5px);
+  font-size: clamp(11px, calc(1.4 * var(--gv-vh)), 12.5px);
   color: var(--gv-text-faint);
   max-width: 54ch; margin: 7px auto 0; line-height: 1.6;
   opacity: .85;
 }
 .gv-shloka-tr {
   font-family: var(--gv-font-serif);
-  font-size: clamp(11.5px, 1.5vh, 14px);
+  font-size: clamp(11.5px, calc(1.5 * var(--gv-vh)), 14px);
   font-style: italic; letter-spacing: .03em;
   color: var(--gv-text-faint);
   max-width: 52ch; margin-top: 6px;
@@ -333,26 +339,26 @@ body.gv-locked { overflow: hidden; }
 .gv-foot {
   position: relative; z-index: 2; flex: 0 0 auto;
   display: flex; flex-direction: column; align-items: center;
-  gap: clamp(9px, 1.3vh, 15px);
-  padding: clamp(12px, 2vh, 24px) 20px calc(clamp(16px, 2.6vh, 32px) + env(safe-area-inset-bottom));
+  gap: clamp(9px, calc(1.3 * var(--gv-vh)), 15px);
+  padding: clamp(12px, calc(2 * var(--gv-vh)), 24px) 20px calc(clamp(16px, calc(2.6 * var(--gv-vh)), 32px) + env(safe-area-inset-bottom));
 }
 
 .gv-hint {
-  font-size: clamp(11px, 1.45vh, 13px);
+  font-size: clamp(11px, calc(1.45 * var(--gv-vh)), 13px);
   color: var(--gv-text-faint); letter-spacing: .03em;
   transition: opacity .5s var(--gv-ease-soft);
 }
 
 .gv-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
 .gv-acts-obeisance { gap: 8px; }
-.gv-acts-obeisance .gv-btn { padding: 11px 15px; gap: 7px; font-size: clamp(11.5px, 1.35vh, 13px); }
+.gv-acts-obeisance .gv-btn { padding: 11px 15px; gap: 7px; font-size: clamp(11.5px, calc(1.35 * var(--gv-vh)), 13px); }
 
 .gv-btn {
   font-family: var(--gv-font-ui);
   display: inline-flex; align-items: center; gap: 9px;
   padding: 13px 27px;
   border-radius: 999px;
-  font-size: clamp(12.5px, 1.6vh, 14.5px);
+  font-size: clamp(12.5px, calc(1.6 * var(--gv-vh)), 14.5px);
   font-weight: 500; letter-spacing: .045em;
   cursor: pointer;
   border: 1px solid var(--gv-hairline);
@@ -400,7 +406,7 @@ body.gv-locked { overflow: hidden; }
 /* "With the blessings of…" — set small and wide, the way a colophon reads. */
 .gv-blessing {
   font-family: var(--gv-font-serif);
-  font-size: clamp(11.5px, 1.5vh, 14px);
+  font-size: clamp(11.5px, calc(1.5 * var(--gv-vh)), 14px);
   font-style: italic;
   color: var(--gv-gold-soft);
   letter-spacing: .05em;
@@ -491,9 +497,32 @@ body.gv-locked { overflow: hidden; }
 @media (max-height: 760px) {
   .gv-shloka-tr { display: none; }
 }
-@media (max-height: 560px) {
+
+/* Small phone with the address bar showing. The portrait keeps its
+   presence; the divider and some breathing room go, so the colophon still
+   lands on screen rather than under the browser chrome. */
+@media (max-height: 700px) {
+  .gv-portrait-wrap { width: clamp(124px, 22 * var(--gv-vh), 190px); }
+  .gv-stage { gap: clamp(8px, 1.3 * var(--gv-vh), 14px); padding-top: calc(12px + env(safe-area-inset-top)); }
+  .gv-foot { gap: clamp(7px, 1 * var(--gv-vh), 11px); }
+  .gv-rule { display: none; }
+}
+/* Very small phone, portrait. Rare, but the colophon should still land on
+   screen rather than under the browser chrome. */
+@media (max-height: 620px) and (orientation: portrait) {
+  .gv-om, .gv-title { display: none; }
+  .gv-portrait-wrap { width: clamp(104px, 19 * var(--gv-vh), 150px); }
+  .gv-name-sa { font-size: 18px; }
+  .gv-shloka { font-size: 12.5px; line-height: 1.65; }
+  .gv-blessing { font-size: 11px; }
+}
+
+/* Short landscape is a different shape of problem — wide and flat — so
+   these are scoped to it. Unscoped they also caught small portrait phones,
+   where the portrait override made the picture larger, not smaller. */
+@media (max-height: 560px) and (orientation: landscape) {
   .gv-shloka-tr, .gv-shloka-en, .gv-title { display: none; }
-  .gv-portrait-wrap { width: clamp(150px, 30vh, 220px); }
+  .gv-portrait-wrap { width: clamp(130px, 30 * var(--gv-vh), 220px); }
   .gv-shloka { font-size: 12px; line-height: 1.75; }
 }
 @media (max-height: 430px) {
