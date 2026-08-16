@@ -364,9 +364,7 @@ def _layers_from_article(node: Tag) -> list[dict]:
     document order instead of becoming separate layers.
     """
     details = node.find(id=DETAILS_ID) or node.find(class_=DETAILS_CLASS_RE)
-    headings = [h for h in details.find_all("h3")] if details else []
-    if not headings:
-        return []
+    headings = details.find_all("h3") if details else []
 
     layers: list[dict] = []
     shloka = node.find("h2", class_=SHLOKA_CLASS_RE)
@@ -380,6 +378,23 @@ def _layers_from_article(node: Tag) -> list[dict]:
                 "author": "",
                 "role": "mula",
             })
+
+    if not headings:
+        # A leaf can carry a verse with no commentary at all. Returning nothing
+        # here drops it to the pre-probe path, which labels the single layer
+        # with the verse itself — the original bug, on ~1 leaf per grantha.
+        if not layers:
+            return []
+        body = _text_between(shloka, None, details) if details is not None else ""
+        if devanagari_count(body) >= 4 and body not in layers[0]["text"]:
+            layers.append({
+                "title": "",
+                "text": body,
+                "anchor": node.get("id", ""),
+                "author": "",
+                "role": "tika",
+            })
+        return layers
 
     merged: "OrderedDict[str, dict]" = OrderedDict()
     for index, heading in enumerate(headings):
