@@ -154,7 +154,7 @@ body.gv-locked { overflow: hidden; }
 /* --- Portrait --- */
 .gv-portrait-wrap {
   position: relative;
-  width: clamp(168px, 27vh, 286px);
+  width: clamp(152px, 24vh, 262px);
   flex: 0 1 auto;
   display: flex; align-items: flex-end; justify-content: center;
 }
@@ -206,12 +206,14 @@ body.gv-locked { overflow: hidden; }
 .gv-frame img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center 20%;   /* overridden from config */
+  object-position: center 50%;   /* overridden from config */
   display: block;
+  /* A touch of warmth so the photograph and the gate share a temperature. */
+  filter: saturate(1.06) contrast(1.04) brightness(1.02);
   /* Slow Ken Burns. 24s, ~3% travel — felt, not seen. */
   animation: gv-kenburns 24s var(--gv-ease-soft) infinite alternate;
-  -webkit-mask-image: linear-gradient(180deg, #000 78%, rgba(0,0,0,.80) 93%, transparent 100%);
-          mask-image: linear-gradient(180deg, #000 78%, rgba(0,0,0,.80) 93%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 88%, rgba(0,0,0,.86) 96%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 88%, rgba(0,0,0,.86) 96%, transparent 100%);
 }
 @keyframes gv-kenburns {
   from { transform: scale(1)     translateY(0); }
@@ -222,14 +224,15 @@ body.gv-locked { overflow: hidden; }
 .gv-frame::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(80% 55% at 50% 22%, rgba(255,196,120,.16), transparent 70%),
-    linear-gradient(180deg, transparent 68%, rgba(11,9,7,.80) 100%);
+    radial-gradient(70% 46% at 46% 26%, rgba(255,196,120,.16), transparent 70%),
+    radial-gradient(95% 78% at 52% 52%, transparent 46%, rgba(11,9,7,.34) 78%, rgba(11,9,7,.72) 100%),
+    linear-gradient(180deg, rgba(11,9,7,.60) 0%, transparent 20%, transparent 88%, rgba(11,9,7,.55) 100%);
 }
 
 /* Pedestal the frame stands on, and the target for offerings. */
 .gv-pada {
-  position: absolute; left: 50%; bottom: -6px;
-  width: 74%; height: 76px;
+  position: absolute; left: var(--gv-pada-x, 50%); bottom: -6px;
+  width: var(--gv-pada-w, 74%); height: 76px;
   transform: translateX(-50%);
   cursor: pointer;
   z-index: 3;
@@ -299,6 +302,12 @@ body.gv-locked { overflow: hidden; }
   max-width: 46ch;
   opacity: .93;
 }
+.gv-shloka-en {
+  font-size: clamp(11px, 1.4vh, 12.5px);
+  color: var(--gv-text-faint);
+  max-width: 54ch; margin: 7px auto 0; line-height: 1.6;
+  opacity: .85;
+}
 .gv-shloka-tr {
   font-family: var(--gv-font-serif);
   font-size: clamp(11.5px, 1.5vh, 14px);
@@ -324,7 +333,9 @@ body.gv-locked { overflow: hidden; }
   transition: opacity .5s var(--gv-ease-soft);
 }
 
-.gv-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.gv-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.gv-acts-obeisance { gap: 8px; }
+.gv-acts-obeisance .gv-btn { padding: 11px 15px; gap: 7px; font-size: clamp(11.5px, 1.35vh, 13px); }
 
 .gv-btn {
   font-family: var(--gv-font-ui);
@@ -387,11 +398,27 @@ body.gv-locked { overflow: hidden; }
   max-width: 44ch; text-align: center; line-height: 1.6;
 }
 
+.gv-count.gv-locked-note { color: var(--gv-saffron-lt); opacity: .95; }
 .gv-count {
   font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
   color: var(--gv-text-faint);
   min-height: 13px;
   transition: opacity .4s var(--gv-ease-soft);
+}
+
+/* Namaskara — the folded hands rise from the feet and dissolve. */
+.gv-pranam {
+  position: absolute; left: 50%; top: 0;
+  transform: translateX(-50%);
+  font-size: 40px; line-height: 1; pointer-events: none;
+  filter: drop-shadow(0 0 22px rgba(255,196,120,.75));
+  animation: gv-pranam-rise 2.1s var(--gv-ease) forwards;
+}
+@keyframes gv-pranam-rise {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(14px) scale(.7); }
+  22%  { opacity: 1; transform: translateX(-50%) translateY(-6px) scale(1.08); }
+  55%  { opacity: 1; transform: translateX(-50%) translateY(-30px) scale(1); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-78px) scale(.92); }
 }
 
 /* =========================================================================
@@ -438,12 +465,24 @@ body.gv-locked { overflow: hidden; }
    6. SHORT-VIEWPORT + REDUCED MOTION
    ========================================================================= */
 
+/* Narrow phones: reclaim the side gutters so the obeisance pair still fits
+   one row. Wrapping it costs a whole row and pushes the entry button under
+   the fold. */
+@media (max-width: 400px) {
+  .gv-stage, .gv-foot { padding-left: 12px; padding-right: 12px; }
+}
+
 /* On a short landscape phone the shloka is the first thing to go. */
-@media (max-height: 720px) {
+/* The prose translation is the most expendable line on a phone — the verse
+   and the way in matter more than a gloss. */
+@media (max-height: 940px) {
+  .gv-shloka-en { display: none; }
+}
+@media (max-height: 760px) {
   .gv-shloka-tr { display: none; }
 }
 @media (max-height: 560px) {
-  .gv-shloka-tr, .gv-title { display: none; }
+  .gv-shloka-tr, .gv-shloka-en, .gv-title { display: none; }
   .gv-portrait-wrap { width: clamp(150px, 30vh, 220px); }
   .gv-shloka { font-size: 12px; line-height: 1.75; }
 }
@@ -456,7 +495,7 @@ body.gv-locked { overflow: hidden; }
   .gv-frame img, .gv-btn-enter.gv-ready { animation: none !important; }
   .gv-overlay, .gv-rise, .gv-btn { transition-duration: .01ms !important; transition-delay: 0s !important; }
   .gv-overlay.gv-leaving { transform: none; filter: none; }
-  .gv-petal, .gv-ripple { display: none !important; }
+  .gv-petal, .gv-ripple, .gv-pranam { display: none !important; }
 }
 
 /* =========================================================================
@@ -550,6 +589,7 @@ body.gv-locked { overflow: hidden; }
     <div class="gv-rise" data-d="4">
       <div class="gv-shloka"    id="gvShloka"></div>
       <div class="gv-shloka-tr" id="gvShlokaTr"></div>
+      <div class="gv-shloka-en" id="gvShlokaEn"></div>
     </div>
   </div>
 
@@ -557,10 +597,18 @@ body.gv-locked { overflow: hidden; }
   <div class="gv-foot">
     <div class="gv-hint gv-rise" data-d="5" id="gvHint"></div>
 
-    <div class="gv-actions gv-rise" data-d="5">
-      <button class="gv-btn gv-btn-offer" id="gvOfferBtn">
+    <!-- The two ways of paying respects. Either one opens the gate; without
+         one of them the entry button stays inert. -->
+    <div class="gv-actions gv-acts-obeisance gv-rise" data-d="5">
+      <button class="gv-btn gv-btn-offer" id="gvOfferBtn" aria-label="Offer flowers at the Guru's feet">
         <span aria-hidden="true">🌸</span><span id="gvOfferLabel"></span>
       </button>
+      <button class="gv-btn gv-btn-offer" id="gvPranamBtn" aria-label="Offer namaskara and seek the Guru's blessings">
+        <span aria-hidden="true">🙏</span><span id="gvPranamLabel"></span>
+      </button>
+    </div>
+
+    <div class="gv-actions gv-rise" data-d="5">
       <button class="gv-btn gv-btn-enter" id="gvEnterBtn" aria-disabled="true">
         <span id="gvEnterLabel"></span><span class="gv-arrow" aria-hidden="true">→</span>
       </button>
@@ -601,45 +649,54 @@ const GURU_VANDANA_CONFIG = {
   autoEnterMs: 0,
 
   photo: {
-    // TODO: drop the Guruji's portrait at this path and commit it.
-    // Until then an inline placeholder silhouette is drawn instead.
     src: 'images/guru/guruji.jpg',
-    alt: 'Portrait of Śrī Gurujī',
+    alt: 'Śrī Viśvanandana Tīrtha, seated',
 
-    // The photo is cropped to fill the arch, so these two decide the framing
-    // and are worth tuning once against the real photograph:
-    //   frameRatio     — shape of the arch. '3 / 4' is a bust; a tall seated
-    //                    portrait usually wants something nearer '2 / 3'.
-    //   objectPosition — which slice of the photo survives the crop. Lower
-    //                    percentages keep the face; higher ones bring the
-    //                    feet into view, which matters here because the feet
-    //                    are what visitors are offering flowers at.
-    frameRatio: '3 / 4',
-    objectPosition: 'center 30%'
+    // The photo is cropped to fill the arch, so these decide the framing.
+    // Tuned for this photograph: a 2:3 arch shows ~84% of its height, and
+    // 'center 50%' centres that window so the head clears the top of the
+    // arch and the feet stay in view — the feet matter, they are what the
+    // flowers are offered at.
+    frameRatio: '2 / 3',
+    objectPosition: 'center 50%',
+
+    // Where the offering lands. His feet sit right of centre in this frame,
+    // so the tap zone and the heap of petals follow them rather than sitting
+    // dead-centre under the portrait.
+    padaCenterX: '70%',
+    padaWidth: '50%'
   },
 
+  // Read off the vandana below (विश्वनंदन भिक्षुकम् / विश्वेशकरजं). Correct the
+  // ashrama title here if it should read differently.
   guru: {
-    nameSanskrit: 'श्री गुरुभ्यो नमः',
-    nameEnglish: 'Śrī Gurujī',                 // TODO: full name and ashrama title
-    titleLine: 'Paramapūjya Ācārya'            // TODO: e.g. maṭha / pīṭha
+    nameSanskrit: 'श्री विश्वनन्दन तीर्थ',
+    nameEnglish: 'Śrī Viśvanandana Tīrtha',
+    titleLine: 'Paramapūjya Ācārya'
   },
 
   vandana: {
-    sanskrit: 'गुरुर्ब्रह्मा गुरुर्विष्णुः गुरुर्देवो महेश्वरः ।<br>गुरुः साक्षात् परं ब्रह्म तस्मै श्रीगुरवे नमः ॥',
-    transliteration: 'gururbrahmā gururviṣṇuḥ gururdevo maheśvaraḥ · guruḥ sākṣāt paraṃ brahma tasmai śrī gurave namaḥ'
+    sanskrit: 'भागण्णार्य कृपापात्रं नित्यं भागवते रतम् ।<br>विश्वेशकरजं वंदे विश्वनंदनभिक्षुकम् ॥',
+    transliteration: 'bhāgaṇṇārya-kṛpāpātraṃ nityaṃ bhāgavate ratam · viśveśakarajaṃ vande viśvanandana-bhikṣukam',
+    // Optional. Set to '' to show the verse alone.
+    translation: 'Recipient of the grace of Śrī Bhāgaṇṇārya, ever devoted to the Bhāgavata, ordained by the hand of Śrī Viśveśa — I bow to the mendicant Śrī Viśvanandana.'
   },
 
   // The obeisance / colophon line under the entry button.
-  blessing: 'With the blessings of Śrī Gurujī, this library is offered at his feet.',
+  blessing: 'With the blessings of Śrī Viśvanandana Tīrtha, this library is offered at his feet.',
 
   labels: {
-    offerHint:   'Tap the feet, or the button below, to offer flowers',
-    offerButton: 'पुष्पाञ्जलि · Offer Flowers',
+    offerHint:   'Tap his feet, or a button below, to pay your respects',
+    offerButton: 'पुष्पाञ्जलि · Flowers',
+    pranamButton: 'नमस्कार · Blessings',
     enterLocked: 'Enter the Library',
     enterReady:  'Enter the Library',
-    // {n} is replaced with the number of offerings made.
-    countOne:    '{n} offering made',
-    countMany:   '{n} offerings made',
+    // Shown under the entry button while it is still locked, so the reason
+    // the button will not respond is never a mystery.
+    lockedNote:  'The library opens once respects have been paid',
+    // {n} is replaced with the number of obeisances made.
+    countOne:    '{n} obeisance offered',
+    countMany:   '{n} obeisances offered',
     thankYou:    'नमो गुरवे — you may now enter'
   },
 
@@ -677,6 +734,9 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
     hint:     $('gvHint'),
     offerBtn: $('gvOfferBtn'),
     offerLbl: $('gvOfferLabel'),
+    pranamBtn: $('gvPranamBtn'),
+    pranamLbl: $('gvPranamLabel'),
+    shlokaEn: $('gvShlokaEn'),
     enterBtn: $('gvEnterBtn'),
     enterLbl: $('gvEnterLabel'),
     count:    $('gvCount'),
@@ -719,8 +779,10 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
   function render() {
     el.photo.src = cfg.photo.src || PLACEHOLDER;
     el.photo.alt = cfg.photo.alt || '';
-    el.photo.style.objectPosition = cfg.photo.objectPosition || 'center 30%';
+    el.photo.style.objectPosition = cfg.photo.objectPosition || 'center 50%';
     document.querySelector('.gv-frame').style.setProperty('--gv-frame-ratio', cfg.photo.frameRatio || '3 / 4');
+    el.pada.style.setProperty('--gv-pada-x', cfg.photo.padaCenterX || '50%');
+    el.pada.style.setProperty('--gv-pada-w', cfg.photo.padaWidth || '74%');
     el.photo.onerror = function () {
       // One retry into the placeholder, then stop — otherwise a broken
       // placeholder would loop onerror forever.
@@ -733,10 +795,12 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
     el.title.textContent  = cfg.guru.titleLine || '';
     el.shloka.innerHTML   = cfg.vandana.sanskrit || '';
     el.shlokaTr.textContent = cfg.vandana.transliteration || '';
+    el.shlokaEn.textContent = cfg.vandana.translation || '';
     el.blessing.textContent = cfg.blessing || '';
     el.hint.textContent   = cfg.labels.offerHint || '';
-    el.offerLbl.textContent = cfg.labels.offerButton || 'Offer Flowers';
-    el.enterLbl.textContent = cfg.labels.enterLocked || 'Enter';
+    el.offerLbl.textContent  = cfg.labels.offerButton || 'Offer Flowers';
+    el.pranamLbl.textContent = cfg.labels.pranamButton || 'Seek Blessings';
+    el.enterLbl.textContent  = cfg.labels.enterLocked || 'Enter';
 
     // Mandala spokes, drawn rather than hand-written into the markup.
     const spokes = document.getElementById('gvSpokes');
@@ -777,6 +841,24 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
     if (!reduced) {
       const n = cfg.petals.countPerOffering;
       for (let i = 0; i < n; i++) rainPetal(originX, originY, targetX, targetY, i, n);
+    }
+
+    if (cfg.requireOffering && offerings >= cfg.minOfferings) unlock();
+  }
+
+  /* Namaskara. The other way in — folded hands and a ring of light at the
+     feet, no flowers. Counts towards the gate on equal terms. */
+  function pranam() {
+    offerings++;
+    updateCount();
+    ripple();
+
+    if (!reduced) {
+      const g = document.createElement('div');
+      g.className = 'gv-pranam';
+      g.textContent = '🙏';
+      el.pada.appendChild(g);
+      setTimeout(() => g.remove(), 2200);
     }
 
     if (cfg.requireOffering && offerings >= cfg.minOfferings) unlock();
@@ -862,6 +944,7 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
     el.enterBtn.setAttribute('aria-disabled', 'false');
     el.enterLbl.textContent = cfg.labels.enterReady || cfg.labels.enterLocked;
     if (offerings > 0) el.hint.textContent = cfg.labels.thankYou || '';
+    el.count.classList.remove('gv-locked-note');
   }
 
   function updateCount() {
@@ -869,8 +952,14 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
     el.count.textContent = (tpl || '').replace('{n}', offerings);
   }
 
+  function showLockedNote() {
+    if (!cfg.requireOffering || offerings >= cfg.minOfferings) return;
+    el.count.textContent = cfg.labels.lockedNote || '';
+    el.count.classList.add('gv-locked-note');
+  }
+
   function enter() {
-    if (cfg.requireOffering && offerings < cfg.minOfferings) return;
+    if (cfg.requireOffering && offerings < cfg.minOfferings) { showLockedNote(); return; }
     clearTimeout(autoTimer);
     el.overlay.classList.add('gv-leaving');
     document.body.classList.remove('gv-locked');
@@ -919,6 +1008,7 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
       }
     });
 
+    el.pranamBtn.addEventListener('click', pranam);
     el.enterBtn.addEventListener('click', enter);
 
     document.addEventListener('keydown', function (ev) {
@@ -933,7 +1023,9 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
     el.overlay.classList.remove('gv-leaving');
     offerings = 0;
     el.count.textContent = '';
+    el.count.classList.remove('gv-locked-note');
     el.hint.textContent = cfg.labels.offerHint || '';
+    showLockedNote();
     el.petals.innerHTML = '';
     if (cfg.requireOffering) {
       el.enterBtn.classList.remove('gv-ready');
@@ -963,7 +1055,10 @@ window.GURU_VANDANA_CONFIG = GURU_VANDANA_CONFIG;
   // Small public surface, mirroring how the other DGE modules expose
   // themselves on window for the admin tools and for manual testing.
   window.dgeGuruVandana = {
-    show, hide, enter,
+    show, hide, enter, offer: () => {
+      const r = el.offerBtn.getBoundingClientRect();
+      offer(r.left + r.width / 2, r.top);
+    }, pranam,
     replay: function () { el.overlay.classList.remove('gv-ready-in'); show(); },
     reset: function () {
       try { sessionStorage.removeItem(cfg.storageKey); localStorage.removeItem(cfg.storageKey); } catch (e) {}
