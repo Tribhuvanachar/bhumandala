@@ -634,33 +634,57 @@ def main(argv=None):
             }
             continue
 
+        # The frontier grows as containers are opened. A grantha's sidebar does
+        # not always list text leaves: Upanishad and Sutra granthas list
+        # adhyaya/adhikarana INDEX nodes, which answer 200 with "No record
+        # found!!". Treating those as dead ends silently lost most of the
+        # corpus -- Chandogya reported "1 with text, 149 containers" and still
+        # passed verify as complete. So when a page turns out to be a
+        # container, fold its own sidebar back into the queue and keep going.
+        seen_ids = set(ids)
+        queue = list(ids)
         records, containers, failed = [], 0, 0
-        for index, content_id in enumerate(ids, start=1):
+        index = 0
+        while index < len(queue):
+            content_id = queue[index]
+            index += 1
+            if args.limit_per_grantha and index > args.limit_per_grantha:
+                break
             if content_id == seed_record["content_id"]:
                 # Already fetched during discovery — don't pay for it twice.
-                if not seed_record["is_container"]:
-                    records.append(seed_record)
-                else:
-                    containers += 1
-                continue
-            url = canonical_url(content_id, ancestor)
-            html = fetcher.get(url)
-            if html is None:
-                failed += 1
-                continue
-            if args.probe_dir and probes_saved < args.probe_count:
-                os.makedirs(args.probe_dir, exist_ok=True)
-                with open(os.path.join(args.probe_dir, f"{slug}_{content_id}.html"),
-                          "w", encoding="utf-8") as handle:
-                    handle.write(html)
-                probes_saved += 1
-            record = parse_page(html, url)
+                record = seed_record
+            else:
+                url = canonical_url(content_id, ancestor)
+                html = fetcher.get(url)
+                if html is None:
+                    failed += 1
+                    continue
+                if args.probe_dir and probes_saved < args.probe_count:
+                    os.makedirs(args.probe_dir, exist_ok=True)
+                    with open(os.path.join(args.probe_dir, f"{slug}_{content_id}.html"),
+                              "w", encoding="utf-8") as handle:
+                        handle.write(html)
+                    probes_saved += 1
+                record = parse_page(html, url)
+
             if record["is_container"]:
                 containers += 1
+                added = 0
+                for link in record["sidebar"]:
+                    child = link["content_id"]
+                    if child in seen_ids or link["in_breadcrumb"]:
+                        continue
+                    seen_ids.add(child)
+                    queue.append(child)
+                    added += 1
+                if added:
+                    log(f"    + {added} id(s) from container {content_id}"
+                        f" (queue now {len(queue)})")
                 continue
             records.append(record)
             if index % 25 == 0:
-                log(f"    …{index}/{len(ids)}")
+                log(f"    …{index}/{len(queue)}")
+        discovered_total = len(seen_ids)
 
         warnings = {"unmapped_layers": Counter(), "low_devanagari": []}
         layers = build_items(records, grantha, layer_config, defaults,

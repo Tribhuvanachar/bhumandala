@@ -50,6 +50,33 @@ LEAF_B = page("""
 
 CONTAINER = page("<p>No record found!!</p>")
 
+# A container whose OWN sidebar exposes a deeper id the seed page never listed.
+# This is the real Upanishad/Sutra shape: the grantha's sidebar lists
+# adhyaya/adhikarana index nodes, and the text sits one level below them.
+DEEP_SIDEBAR = """
+<div class="sidebar-menu">
+  <ul>
+    <li><a href="/category-details/13528/937/thasha/1-para/managa/garana">मङ्गलाचरणम्</a></li>
+    <li><a href="/category-details/13777/937/thasha/1-para/deep/deep">गूढार्थः</a></li>
+  </ul>
+</div>
+"""
+CONTAINER_WITH_CHILDREN = f"""<html><body><nav class="navbar"><a href="/">Home</a></nav>
+{BREADCRUMB}
+<div class="row">{DEEP_SIDEBAR}<div class="col-md-9 content"><p>No record found!!</p></div></div>
+<footer>Copyright © 2026 Dvaita Vedanta Studies &amp; Research Foundation.</footer>
+</body></html>"""
+
+LEAF_DEEP = page("""
+  <div id="article13777">
+    <h2 class="shloka">गूढार्थबोधिनी मूलपाठः ।</h2>
+    <div id="dynamicContent" class="details">
+      <h3>प्रमाणलक्षणटीका</h3>
+      <p>गूढार्थोऽत्र विवृतो भवति ।</p>
+    </div>
+  </div>
+""")
+
 
 def prime(cache_dir, url, html):
     os.makedirs(cache_dir, exist_ok=True)
@@ -191,6 +218,44 @@ def main():
                                   got["folder"] if got else None)
         failures += not check("an unknown commentary stays unmapped, not guessed",
                               resolve("कस्यचिदपूर्वव्याख्या", cfg) is None)
+
+        # Discovery must descend THROUGH containers. Run 31958553804 shipped
+        # upanishad_prasthana as "10/10 complete, 0 errors" while extracting 10
+        # items from 730 leaves, because the sidebar listed index nodes and the
+        # crawler treated every one as a dead end.
+        print("container descent")
+        deep_tmp = tempfile.mkdtemp(prefix="dvdeep_")
+        try:
+            deep_cache = os.path.join(deep_tmp, "cache")
+            deep_out = os.path.join(deep_tmp, "out")
+            # Seed lists 13529/13533 only. 13777 is reachable ONLY through
+            # 13533's own sidebar, so this fails unless containers are opened.
+            prime(deep_cache, BASE + "/category-details/13528/937/thasha/1-para/managa/garana",
+                  CONTAINER)
+            prime(deep_cache, BASE + "/category-details/13529/937/x", CONTAINER)
+            prime(deep_cache, BASE + "/category-details/13533/937/x", CONTAINER_WITH_CHILDREN)
+            prime(deep_cache, BASE + "/category-details/13777/937/x", LEAF_DEEP)
+            rc2 = I.main([
+                "--config", os.path.join(HERE, "dv_sources.json"),
+                "--out", deep_out, "--cache", deep_cache,
+                "--granthas", "pramana_lakshana",
+                "--delay", "0", "--write", "--fetch-date", "2026-08-15",
+                "--summary-file", "",
+            ])
+            failures += not check("exit code 0", rc2 == 0, rc2)
+            deep_dir = os.path.join(deep_out, "dasha_prakarana_granthas",
+                                    "pramana_lakshana", "tika_jayatirtha", "data.json")
+            found = os.path.exists(deep_dir)
+            failures += not check("text one level below a container is reached", found)
+            if found:
+                with open(deep_dir, encoding="utf-8") as handle:
+                    deep = json.load(handle)
+                failures += not check("deep leaf emitted its commentary",
+                                      len(deep["items"]) == 1
+                                      and "गूढार्थ" in deep["items"][0]["sanskrit_text"],
+                                      deep["items"][:1])
+        finally:
+            shutil.rmtree(deep_tmp, ignore_errors=True)
 
         print()
         if failures:
