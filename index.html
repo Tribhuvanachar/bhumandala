@@ -142,9 +142,22 @@ body.leaving #veil { opacity: 1; }
   text-shadow: 0 0 40px rgba(232,178,77,.32);
 }
 .brand-tagline {
+  --tag-lines: 2;
   margin: 5px auto 0; max-width: 72ch;
   font-size: clamp(12px, 1.05vw, 13.5px); line-height: 1.62; color: var(--text-dim);
+  max-height: calc(var(--tag-lines) * 1.62em);
+  overflow: hidden;
+  transition: max-height .5s var(--ease);
 }
+.brand-tagline.open { max-height: 20em; }
+.tagline-more {
+  margin-top: 6px; padding: 0; border: 0; background: none; cursor: pointer;
+  font-family: var(--font-ui); font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--gold-soft); border-bottom: 1px solid rgba(232,178,77,.3); opacity: .85;
+  transition: color .3s var(--ease-soft), border-color .3s var(--ease-soft), opacity .3s var(--ease-soft);
+}
+.tagline-more:hover { opacity: 1; color: var(--saffron-lt); border-color: rgba(232,178,77,.75); }
+.tagline-more:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
 /* --- portrait --- */
 .om {
@@ -219,17 +232,19 @@ body.leaving #veil { opacity: 1; }
     linear-gradient(180deg, rgba(11,9,7,.6) 0%, transparent 20%, transparent 88%, rgba(11,9,7,.55) 100%);
 }
 
-/* His feet — where the offering lands. */
-.pada {
-  position: absolute; left: var(--pada-x, 70%); bottom: -6px;
-  width: var(--pada-w, 50%); height: 72px;
-  transform: translateX(-50%); cursor: pointer; z-index: 3;
+/* Where the offering lands — over the crown of his head. Positioned from
+   the top of the frame rather than the bottom, since that is what the
+   coordinates now describe. */
+.offer-zone {
+  position: absolute; left: var(--offer-x, 46%); top: var(--offer-y, 14%);
+  width: var(--offer-w, 52%); height: var(--offer-h, 64px);
+  transform: translate(-50%, -50%); cursor: pointer; z-index: 3;
   border-radius: 50%;
-  background: radial-gradient(60% 100% at 50% 50%, rgba(242,130,12,.22), transparent 72%);
+  background: radial-gradient(60% 100% at 50% 50%, rgba(242,130,12,.20), transparent 72%);
   transition: background .4s var(--ease-soft);
 }
-.pada:hover { background: radial-gradient(60% 100% at 50% 50%, rgba(255,178,77,.34), transparent 74%); }
-.pada:focus-visible { outline: 2px solid var(--gold); outline-offset: 6px; border-radius: 999px; }
+.offer-zone:hover { background: radial-gradient(60% 100% at 50% 50%, rgba(255,178,77,.32), transparent 74%); }
+.offer-zone:focus-visible { outline: 2px solid var(--gold); outline-offset: 6px; border-radius: 999px; }
 
 .ripple {
   position: absolute; left: 50%; top: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px;
@@ -568,7 +583,7 @@ body.leaving #veil { opacity: 1; }
 @media (max-width: 700px) {
   .hero { gap: clamp(8px, 1.3 * var(--vh), 16px); }
   .brand-latin { font-size: clamp(24px, 6.4vw, 34px); }
-  .brand-tagline { font-size: 12px; line-height: 1.6; }
+  .brand-tagline { font-size: 12px; line-height: 1.6; --tag-lines: 3; }
   .verse { font-size: 13px; line-height: 1.85; }
   .verse-tr { display: none; }
   .btn { padding: 11px 16px; }
@@ -576,7 +591,7 @@ body.leaving #veil { opacity: 1; }
   .portrait-wrap { width: clamp(150px, 19 * var(--vh), 210px); }
 }
 @media (max-width: 700px) and (max-height: 720px) {
-  .brand-tagline { display: none; }
+  .brand-tagline, .tagline-more { display: none; }
   .guru-title { display: none; }
   .portrait-wrap { width: clamp(126px, 17 * var(--vh), 180px); }
   .cue { padding: 9px 16px; font-size: 10px; letter-spacing: .14em; gap: 7px; }
@@ -639,6 +654,7 @@ body.leaving #veil { opacity: 1; }
   <div class="masthead">
     <h1  class="brand-latin"   id="brandLatin"></h1>
     <p   class="brand-tagline" id="brandTagline"></p>
+    <button class="tagline-more" id="taglineMore" hidden></button>
   </div>
 
   <div class="om" aria-hidden="true">ॐ</div>
@@ -647,8 +663,8 @@ body.leaving #veil { opacity: 1; }
     <div class="halo" aria-hidden="true"></div>
     <div class="halo-ring" aria-hidden="true"></div>
     <div class="frame"><img id="photo" src="" alt=""></div>
-    <div class="pada" id="pada" role="button" tabindex="0"
-         aria-label="Offer flowers at the Guru's feet"></div>
+    <div class="offer-zone" id="offerZone" role="button" tabindex="0"
+         aria-label="Offer flowers to the Guru"></div>
   </div>
 
   <div class="guru-block">
@@ -666,7 +682,7 @@ body.leaving #veil { opacity: 1; }
   <div class="hero-actions">
     <div class="hint" id="hint"></div>
     <div class="act-row">
-      <button class="btn btn-obeisance" id="offerBtn" aria-label="Offer flowers at the Guru's feet">
+      <button class="btn btn-obeisance" id="offerBtn" aria-label="Offer flowers to the Guru">
         <span id="offerIcon" aria-hidden="true"></span><span id="offerLabel"></span>
       </button>
       <button class="btn btn-obeisance" id="pranamBtn" aria-label="Offer salutations to the Guru">
@@ -717,13 +733,20 @@ const SITE_CONFIG = {
     alt: 'Śrī Viśvanandana Tīrtha, seated',
     frameRatio: '2 / 3',
     objectPosition: 'center 50%',
-    padaCenterX: '70%',
-    padaWidth: '50%'
+    // Where the flowers come to rest, as a fraction of the arch. Tuned to
+    // sit over the crown of his head — above the face, not across it.
+    offerX: '46%',
+    offerY: '5%',
+    offerW: '54%',
+    offerH: '46px'
   },
 
   brand: {
     latin: 'Sarvamūla Digital Library',
-    tagline: 'A digital initiative to preserve, organize and present the complete heritage of our Śāstra, Itihāsa, Purāṇa, Stotra and Kāvya in one place — with authenticity and devotion.'
+    // Describes where the corpus is going, not only what it holds today —
+    // dge/data/ fills out as the work progresses. Clamped to two lines with
+    // a Read more, so the first screen stays a darshana rather than a list.
+    tagline: 'A digital initiative to preserve, organize and present the complete heritage of our Veda, Vedāṅga, Vedānta, Nyāya, Mīmāṃsā, Itihāsa, Purāṇa, Jyotiṣa, Arthaśāstra, Kāmaśāstra, Nāṭyaśāstra, Kāvya, Stotra and Dāsa Sāhitya in one place — with authenticity and devotion.'
   },
 
   guru: {
@@ -739,7 +762,7 @@ const SITE_CONFIG = {
   },
 
   labels: {
-    hint:         'Tap his feet, or a button below, to pay your respects',
+    hint:         'Tap the portrait, or a button below, to pay your respects',
     offerButton:  'पुष्पाञ्जलि · Flowers',
     pranamButton: 'नमस्काराः · Salutations',
     // Locked, the button itself carries the instruction — so there is no
@@ -974,15 +997,28 @@ window.SITE_CONFIG = SITE_CONFIG;
   function render() {
     $('brandLatin').textContent   = cfg.brand.latin;
     $('brandTagline').textContent = cfg.brand.tagline;
+    // Only offer the toggle if the clamp is actually hiding something.
+    requestAnimationFrame(function () {
+      const t = $('brandTagline'), btn = $('taglineMore');
+      if (t.scrollHeight <= t.clientHeight + 2) return;
+      btn.hidden = false;
+      btn.textContent = cfg.labels.readMore;
+      btn.addEventListener('click', function () {
+        const open = t.classList.toggle('open');
+        btn.textContent = open ? cfg.labels.readLess : cfg.labels.readMore;
+      });
+    });
 
     const photo = $('photo');
     photo.src = cfg.photo.src;
     photo.alt = cfg.photo.alt || '';
     photo.style.objectPosition = cfg.photo.objectPosition || 'center 50%';
     document.querySelector('.frame').style.setProperty('--frame-ratio', cfg.photo.frameRatio || '2 / 3');
-    const pada = $('pada');
-    pada.style.setProperty('--pada-x', cfg.photo.padaCenterX || '50%');
-    pada.style.setProperty('--pada-w', cfg.photo.padaWidth || '74%');
+    const zone = $('offerZone');
+    zone.style.setProperty('--offer-x', cfg.photo.offerX || '50%');
+    zone.style.setProperty('--offer-y', cfg.photo.offerY || '14%');
+    zone.style.setProperty('--offer-w', cfg.photo.offerW || '54%');
+    zone.style.setProperty('--offer-h', cfg.photo.offerH || '62px');
 
     $('guruSa').textContent        = cfg.guru.nameSanskrit;
     $('guruLatin').textContent     = cfg.guru.nameLatin;
@@ -1145,10 +1181,12 @@ window.SITE_CONFIG = SITE_CONFIG;
     return { x: clientX - h.left, y: clientY - h.top };
   }
 
-  function offer(clientX, clientY) {
-    const r = $('pada').getBoundingClientRect();
+  function offer() {
+    const r = $('offerZone').getBoundingClientRect();
+    const f = document.querySelector('.frame').getBoundingClientRect();
     const target = heroPoint(r.left + r.width / 2, r.top + r.height / 2);
-    const origin = heroPoint(clientX, clientY);
+    // Always from above the arch, whatever released them.
+    const origin = heroPoint(f.left + f.width / 2, f.top - 40);
 
     offerings++;
     ripple();
@@ -1175,7 +1213,7 @@ window.SITE_CONFIG = SITE_CONFIG;
         g.style.fontSize = (22 + Math.random() * 13) + 'px';
         g.style.animationDelay = (i * 130 + Math.random() * 90) + 'ms';
         g.style.animationDuration = (2200 + Math.random() * 700) + 'ms';
-        $('pada').appendChild(g);
+        $('offerZone').appendChild(g);
         setTimeout(() => g.remove(), 3400);
       }
     }
@@ -1193,11 +1231,11 @@ window.SITE_CONFIG = SITE_CONFIG;
 
     // Fan out, so a burst reads as a handful released together rather than a
     // vertical column.
-    const spread = (i / n - 0.5) * 190;
+    const spread = (i / n - 0.5) * 120;
     const sx = origin.x + spread + (Math.random() - 0.5) * 40;
-    const sy = origin.y - 40 - Math.random() * 90;
+    const sy = origin.y - 20 - Math.random() * 70;
     const ex = target.x + (Math.random() - 0.5) * Math.max(80, padaW * 0.8);
-    const ey = target.y + (Math.random() - 0.5) * 26;
+    const ey = target.y + (Math.random() - 0.5) * 16;
 
     outer.style.left = sx + 'px';
     outer.style.top  = sy + 'px';
@@ -1241,7 +1279,7 @@ window.SITE_CONFIG = SITE_CONFIG;
     if (reduced) return;
     const r = document.createElement('div');
     r.className = 'ripple';
-    $('pada').appendChild(r);
+    $('offerZone').appendChild(r);
     setTimeout(() => r.remove(), 1600);
   }
 
@@ -1282,20 +1320,11 @@ window.SITE_CONFIG = SITE_CONFIG;
 
   /* ------------------------------------------------------------ bind ---- */
   function bind() {
-    $('offerBtn').addEventListener('click', function (ev) {
-      const r = ev.currentTarget.getBoundingClientRect();
-      offer(r.left + r.width / 2, r.top);
-    });
+    $('offerBtn').addEventListener('click', offer);
     $('pranamBtn').addEventListener('click', pranam);
-    $('pada').addEventListener('click', function (ev) {
-      offer(ev.clientX || window.innerWidth / 2, (ev.clientY || 0) - 120);
-    });
-    $('pada').addEventListener('keydown', function (ev) {
-      if (ev.key === 'Enter' || ev.key === ' ') {
-        ev.preventDefault();
-        const r = $('pada').getBoundingClientRect();
-        offer(r.left + r.width / 2, r.top - 120);
-      }
+    $('offerZone').addEventListener('click', offer);
+    $('offerZone').addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); offer(); }
     });
     $('enterBtn').addEventListener('click', enter);
 
