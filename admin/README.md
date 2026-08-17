@@ -29,6 +29,7 @@ where it is, and is still linked from the same admin menu.
 | `config/config-overrides.json` | `dge/js/core.js` at boot, merged over `dge/js/config.js` | Site Settings, in-app (`dge/js/config-editor.js`) |
 | `config/landing.json` | the landing page at the repository root, merged over its `SITE_CONFIG` | hand-edited |
 | `config/menu.json` | `dge/js/menu.js` — which menu items appear, and in what order | hand-edited |
+| `config/intellisense.json` | `dge/js/intellisense.js` — sūtra identification | hand-edited |
 | `config/library-overrides.json` | `dge/js/library.js` | `library.html`, exported and committed by hand |
 | `config/library-status.json` | `library.html` | `tools/gen_library_status.py` — a generated snapshot of what is loaded |
 | `config/site.config.json` | `tools/set_site_url.py` | hand-edited, then applied with that script |
@@ -68,6 +69,7 @@ Asked often enough to be worth stating once:
 | To change | Edit |
 |---|---|
 | Which menu items appear, and their order | `config/menu.json` |
+| Where sūtra citations become tappable | `config/intellisense.json` |
 | Any word on the landing page, or where it leads | `config/landing.json` |
 | Which reading scripts are offered | `SCRIPT_OPTIONS` in `dge/js/config.js` |
 | Feature switches (theme picker, snippet tools, …) | `FEATURE_FLAGS` in `dge/js/config.js` |
