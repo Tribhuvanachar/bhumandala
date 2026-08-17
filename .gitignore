@@ -1,1 +1,11 @@
 __pycache__/
+
+# Firebase tooling: installed locally, never committed.
+node_modules/
+dge/firebase/**/node_modules/
+firestore-debug.log
+firebase-debug.log
+ui-debug.log
+.firebase/
+# Real project ids / aliases stay out of the repo — see .firebaserc.example
+dge/firebase/.firebaserc

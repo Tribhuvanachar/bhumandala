@@ -561,19 +561,41 @@ const AUTH_CONFIG = {
   // and picked a provider below.
   enablePhoneAuth: false,
 
-  // 'firebase' — Firebase's own phone auth. Zero backend code needed
-  //   (Google's infra handles send+verify client-side), but ~5-6x
-  //   costlier per verification than an India-focused SMS gateway
-  //   (roughly $0.01/verification vs MSG91's ~₹0.15 ≈ $0.0018 — verify
-  //   current rates yourself before committing budget; official pricing
-  //   pages were not fully accessible while writing this).
-  // 'msg91' — cheapest mainstream India option found, no forex surcharge
-  //   (INR billing). Requires a small Cloud Function to send/verify the
-  //   OTP and mint a Firebase custom token, since the MSG91 API key must
-  //   stay server-side — NOT built yet (needs your Firebase/MSG91
-  //   credentials to deploy and test), see FIREBASE_SETUP.md for the
-  //   exact shape it needs to have.
+  // Which channel carries the one-time code. All three are built; they
+  // differ in cost, in what has to be set up, and in what the user sees.
+  //
+  // 'firebase' — Firebase's own SMS. Zero backend code (Google's infra
+  //   handles send+verify client-side), and the fastest to turn on, but
+  //   the most expensive per code: roughly $0.01 (~₹0.85) per
+  //   verification in India. Note that Firebase's free allowance here is
+  //   about 10 SMS per DAY, not the 10,000/month figure that circulates
+  //   online — assume you are paying from the first real user.
+  // 'whatsapp' — Meta WhatsApp Cloud API through our own Cloud Functions
+  //   (dge/firebase/functions). Authentication templates run about
+  //   ₹0.145 per message in India, so roughly 6x cheaper than the line
+  //   above, and the code arrives with a one-tap "copy" button. Needs a
+  //   Meta Business account and an approved template — see
+  //   FIREBASE_SETUP.md §7.
+  // 'msg91' — India SMS gateway through the same Cloud Functions.
+  //   Comparable to WhatsApp on price (~₹0.15) and reaches people who
+  //   do not use WhatsApp; needs an MSG91 account and DLT registration.
+  //
+  // 'whatsapp' and 'msg91' share one backend and one client code path —
+  // switching between them is this one string plus the OTP_PROVIDER
+  // value on the deployed functions.
   phoneOtpProvider: 'firebase',
+
+  // Region the Cloud Functions are deployed to. Must match the
+  // setGlobalOptions region in dge/firebase/functions/index.js, or every
+  // callable request lands on a URL that does not exist.
+  functionsRegion: 'asia-south1',
+
+  // Shows the "send me updates on WhatsApp" consent checkbox on the
+  // account screen, and is what the scheduled broadcast function's
+  // audience is drawn from. Independent of phoneOtpProvider: you can
+  // sign people in by SMS and still message them on WhatsApp, or use
+  // WhatsApp for codes and never broadcast at all.
+  enableWhatsappBroadcasts: false,
 
   // Applied to a user's Firestore profile on first sign-in. Changing
   // this later does NOT retroactively change existing users' roles.
