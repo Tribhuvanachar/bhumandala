@@ -10,10 +10,10 @@ sourcing/licence status, and `importers/` holds the actual pipeline.
 ## 1. What is currently live
 
 `js/kosha.js` (self-injecting **कोश** lookup button, wired into `index.html`)
-reads a two-tier sharded dataset from `dge/data/koshas/`:
+reads a two-tier sharded dataset from `dge/data/kosha/`:
 
 ```
-dge/data/koshas/
+dge/data/kosha/
   _index/manifest.json          buckets + dictionary registry
   _index/<2-char>.json          headword lookup shards
   <category>/<slug>/meta.json   per-dictionary source metadata
@@ -25,7 +25,7 @@ dge/data/koshas/
 [`Tribhuvanachar/bhumandala-kosha-data`](https://github.com/Tribhuvanachar/bhumandala-kosha-data)
 repo over jsDelivr (`appConfig.koshaDataBase`), because at **93 dictionaries /
 2,094,525 headwords / 2,436,991 senses / ~1.8 GB** it is well over this repo's
-budget. `dge/data/koshas/` here still holds the original 10-dictionary sample,
+budget. `dge/data/kosha/` here still holds the original 10-dictionary sample,
 which is what a local checkout falls back to when `KOSHA_DATA_BASE` is unset.
 
 The build pipeline lives in that data repo (`kosha_core.py`,
@@ -76,7 +76,7 @@ standalone without it (see §5).
 3. Runtime ▸ Run all. It clones the public dictionary sources, auto-discovers
    every local `.ifo`, builds the two-tier sharded tree, and downloads a
    `dge/`-rooted zip.
-4. Unzip so the tree lands at `dge/data/koshas/**`, replacing the sample.
+4. Unzip so the tree lands at `dge/data/kosha/**`, replacing the sample.
 5. Commit. Bump the `?v=` on `js/kosha.js`'s `<script>` tag in `index.html`
    per the site's cache-busting convention.
 

@@ -96,7 +96,23 @@
     return idxPromise;
   }
 
-  function open() { build(); document.getElementById('dge-gs-overlay').classList.add('open'); ensureIndex(); setTimeout(function () { document.getElementById('dge-gs-input').focus(); }, 30); }
+  // `query` is optional. The word popover in intellisense.js passes the word
+  // the reader tapped, so "where else does this occur" opens already
+  // searching rather than asking them to retype it. Called with nothing, this
+  // behaves exactly as before.
+  function open(query) {
+    build();
+    document.getElementById('dge-gs-overlay').classList.add('open');
+    ensureIndex();
+    var input = document.getElementById('dge-gs-input');
+    if (query) {
+      input.value = query;
+      // onType is debounced against typing; dispatching the event it already
+      // listens for keeps one code path for "the query changed".
+      input.dispatchEvent(new Event('input'));
+    }
+    setTimeout(function () { input.focus(); }, 30);
+  }
   function close() { var o = document.getElementById('dge-gs-overlay'); if (o) o.classList.remove('open'); }
 
   function queryOpts(input) {

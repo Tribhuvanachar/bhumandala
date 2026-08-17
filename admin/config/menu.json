@@ -1,0 +1,75 @@
+{
+  "_readme": [
+    "Which menu items the library shows, and in what order.",
+    "",
+    "Read by dge/js/menu.js at boot. If this file is missing or malformed, the menus",
+    "stay exactly as written in dge/index.html — nothing disappears because a config",
+    "file broke.",
+    "",
+    "Set enabled:false to hide an item. Reorder the arrays to reorder the menu. Items",
+    "listed here but absent from the page are ignored; items on the page but absent",
+    "from these arrays are left alone in place, so adding a new button to the markup",
+    "does not require touching this file first.",
+    "",
+    "  requires   who sees an item. 'all' (default), 'admin' (either tier), or",
+    "             'superadmin'. This is a tidiness gate, not access control — see",
+    "             keys.json for what that means.",
+    "  feature    only show when this is switched on. Currently only 'auth', which",
+    "             follows AUTH_CONFIG.enabled in dge/js/config.js.",
+    "  action     a function on window, called on click.",
+    "  href       a URL, navigated to on click. Relative to dge/.",
+    "",
+    "NOT HERE, ON PURPOSE — one source of truth each:",
+    "  reading scripts      SCRIPT_OPTIONS in dge/js/config.js",
+    "  feature switches     FEATURE_FLAGS in dge/js/config.js",
+    "  passkeys             admin/config/keys.json",
+    "  the landing page     admin/config/landing.json",
+    "  everything else      admin/config/config-overrides.json"
+  ],
+
+  "topBar": [
+    { "id": "commentary", "enabled": true },
+    { "id": "display",    "enabled": true },
+    { "id": "admin",      "enabled": true },
+    { "id": "explore",    "enabled": true },
+    { "id": "about",      "enabled": true },
+    { "id": "account",    "enabled": true },
+    { "id": "access",     "enabled": true }
+  ],
+
+  "explore": {
+    "label": "Explore",
+    "items": [
+      { "id": "guruParampara", "icon": "🪷", "label": "Guru Parampara",   "href": "guru-parampara/index.html", "enabled": true },
+      { "id": "tirtha",        "icon": "🛕", "label": "Tirtha Prabandha", "href": "tirtha/index.html",         "enabled": true },
+      { "id": "ashtadhyayi",   "icon": "📖", "label": "Aṣṭādhyāyī",       "href": "ashtadhyayi.html",          "enabled": true },
+      { "id": "dhatupatha",    "icon": "📚", "label": "Dhātupāṭha",       "href": "dhatu.html",                "enabled": true },
+      { "id": "dasaSahitya",   "icon": "🎶", "label": "Dasa Sahitya",     "href": "dasa_sahitya.html",         "enabled": true }
+    ]
+  },
+
+  "admin": {
+    "label": "Admin",
+    "items": [
+      { "id": "adminKeysItem",               "icon": "⚙️", "label": "AI Keys & Features",   "action": "openKeyModal",       "requires": "admin",      "className": "advanced-feature", "enabled": true },
+      { "id": "adminFilesItem",              "icon": "🗂️", "label": "Repo Files",           "action": "openAdminEditor",    "requires": "superadmin", "enabled": true },
+      { "id": "adminConfigItem",             "icon": "🛠️", "label": "Site Settings",        "action": "openConfigEditor",   "requires": "superadmin", "enabled": true },
+      { "id": "adminConvertItem",            "icon": "🔄", "label": "Convert Tool",         "href": "convert/index.html",   "requires": "superadmin", "enabled": true },
+      { "id": "adminLibraryManagerItem",     "icon": "🗂️", "label": "Library Manager",      "href": "../admin/library.html",      "requires": "superadmin", "enabled": true },
+      { "id": "adminKoshaManagerItem",       "icon": "📖", "label": "Kosha Manager",        "href": "../admin/kosha.html",        "requires": "superadmin", "enabled": true },
+      { "id": "adminAshtadhyayiManagerItem", "icon": "📜", "label": "Ashtadhyayi Manager",  "href": "../admin/ashtadhyayi.html",  "requires": "superadmin", "enabled": true },
+      { "id": "adminDasaCaptureItem",        "icon": "🎶", "label": "Dasa Sahitya Capture", "href": "../admin/dasa-capture.html", "requires": "superadmin", "enabled": true },
+      { "id": "adminHolyPlacesManagerItem",  "icon": "🛕", "label": "Holy Places Curation", "href": "../admin/holy-places.html",  "requires": "superadmin", "enabled": true },
+      { "id": "adminAudioManagerItem",       "icon": "🎙️", "label": "Audio Admin",          "href": "../admin/audio.html",        "requires": "superadmin", "enabled": true },
+      { "id": "adminUserRolesItem",          "icon": "👥", "label": "Manage Users",         "action": "openUserRolesModal", "requires": "superadmin", "feature": "auth", "enabled": true }
+    ]
+  },
+
+  "themes": [
+    { "id": "vandana",     "label": "Vandana",     "enabled": true },
+    { "id": "traditional", "label": "Traditional", "enabled": true },
+    { "id": "minimal",     "label": "Minimal",     "enabled": true },
+    { "id": "vibrant",     "label": "Vibrant",     "enabled": true },
+    { "id": "darkglass",   "label": "Dark Glass",  "enabled": true }
+  ]
+}

@@ -274,7 +274,7 @@
   }
 
   function exportVis(){
-    var out={ note:"DGE Kosha search visibility. hidden = dictionary slugs (from data/koshas/_index/manifest.json) to exclude from कोश search. js/kosha.js reads this list at query time via localStorage key kosha_hidden_dicts.", hidden:[...HIDDEN].sort() };
+    var out={ note:"DGE Kosha search visibility. hidden = dictionary slugs (from data/kosha/_index/manifest.json) to exclude from कोश search. js/kosha.js reads this list at query time via localStorage key kosha_hidden_dicts.", hidden:[...HIDDEN].sort() };
     var blob=new Blob([JSON.stringify(out,null,1)],{type:"application/json"});
     var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="kosha-visibility.json"; a.click();
   }

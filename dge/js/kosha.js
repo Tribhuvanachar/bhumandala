@@ -3,7 +3,7 @@
 // UI, fuzzy SLP1 headword lookup, per-dictionary result cards, per-language
 // grouping, and a cross-language translate pivot (BYOK Gemini, reusing the
 // app's existing 'gemini_api_key'/'gemini_model' localStorage keys).
-// Loads its data from data/koshas/** produced by the importer. Touches no
+// Loads its data from data/kosha/** produced by the importer. Touches no
 // existing file or global beyond reading window.Sanscript.
 (function () {
   'use strict';
@@ -18,10 +18,10 @@
   // a "राम" search instead of looking absent.
   function gkey(s) { s = s || ''; var t = s.replace(/[HM]+$/, ''); return t || s; }
 
-  // Data can live in-repo (data/koshas) or in a separate repo served over a CDN.
+  // Data can live in-repo (data/kosha) or in a separate repo served over a CDN.
   // Set window.KOSHA_DATA_BASE (e.g. a jsDelivr /gh/…/data/koshas URL) to point
   // the app at the full external corpus once it outgrows the Pages repo.
-  var BASE = (window.KOSHA_DATA_BASE || 'data/koshas').replace(/\/+$/, '');
+  var BASE = (window.KOSHA_DATA_BASE || 'data/kosha').replace(/\/+$/, '');
   var V = '?v=1.3';   // bump on every corpus rebuild — jsDelivr caches ~12h
   var PREF_LANG = (localStorage.getItem('app_kosha_pref_lang') || 'kn'); // user's language (Kannada)
   var LANG_NAME = { sa: 'संस्कृतम्', kn: 'ಕನ್ನಡ', en: 'English', hi: 'हिन्दी',
@@ -378,6 +378,27 @@
     document.body.appendChild(fab); document.body.appendChild(ov);
     var input = ov.querySelector('#kosha-q'), res = ov.querySelector('#kosha-res'), detail = ov.querySelector('#kosha-detail');
     fab.onclick = function () { ov.classList.add('open'); input.focus(); };
+
+    /* Everything in this file lives in a closure, which was right while the
+       कोश button was the only way in. The word popover in intellisense.js
+       needs to hand a word straight across, so this is the one door out:
+       open the overlay already looking the word up, rather than making the
+       reader retype what they just tapped. */
+    window.dgeOpenKosha = function (word) {
+      ov.classList.add('open');
+      ov.classList.remove('showdetail');
+      input.value = word || '';
+      if (word) {
+        search(word).then(function (result) {
+          renderResults(result, res, detail);
+          res.querySelectorAll('.kosha-hit').forEach(function (r) {
+            r.addEventListener('click', function () { ov.classList.add('showdetail'); });
+          });
+        });
+      } else {
+        input.focus();
+      }
+    };
     ov.querySelector('#kosha-close').onclick = function () {
       if (ov.classList.contains('showdetail')) ov.classList.remove('showdetail'); else ov.classList.remove('open'); };
     var t;

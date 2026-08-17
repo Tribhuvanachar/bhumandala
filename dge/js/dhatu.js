@@ -8,7 +8,7 @@
  * ========================================================================== */
 (function () {
   "use strict";
-  var URL = "data/vyakarana/dhatupatha/data.json";
+  var URL = "data/vedanga/vyakarana/dhatupatha/data.json";
   var GANA = {1:"भ्वादि",2:"अदादि",3:"जुहोत्यादि",4:"दिवादि",5:"स्वादि",6:"तुदादि",7:"रुधादि",8:"तनादि",9:"क्र्यादि",10:"चुरादि"};
   var CHUNK = 250;
 
@@ -173,7 +173,7 @@
     if(!box || box.dataset.loaded) return;
     var code=box.dataset.vrit; box.dataset.loaded="1";
     box.innerHTML='<div class="mdhv-head">📜 वृत्तयः · dhātuvṛttis <span class="mdhv-lic">GPL · samsaadhanii/scl</span></div><div class="vrit-tabs"></div><div class="mdhv-text">loading…</div>';
-    fetch("data/vyakarana/vritti/"+code+".json").then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
+    fetch("data/vedanga/vyakarana/vritti/"+code+".json").then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
       _vcache[code]=d;
       var tabs=$(".vrit-tabs",box);
       tabs.innerHTML=d.vrittis.map(function(v,i){ return '<button class="vrit-tab'+(i===0?" on":"")+'" data-v="'+v.source+'">'+esc(v.name)+'</button>'; }).join("");
@@ -208,7 +208,7 @@
     var ss=$("#dh-scriptSeg"); if(ss) ss.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on",b.dataset.s===state.script); });
     $("#dh-sort").value=state.sort;
     buildGanaChips(); syncPadaChips(); syncSetChips(); wire(); applyFont();
-    fetch("data/vyakarana/vritti/index.json").then(function(r){return r.ok?r.json():null;}).then(function(idx){
+    fetch("data/vedanga/vyakarana/vritti/index.json").then(function(r){return r.ok?r.json():null;}).then(function(idx){
       state.vset={}; if(idx) (idx.available||[]).forEach(function(c){ state.vset[c]=1; });
       // if a row is already open, re-render its body so the vṛtti toggle appears
       if(state.openId){ var el=$("#d-"+CSS.escape(state.openId)); var it=state.all.find(function(x){return x.id===state.openId;});

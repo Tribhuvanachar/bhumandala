@@ -1,5 +1,5 @@
 """Valmiki Ramayana WITH word-to-word meaning + English translation
-   -> itihasas/ramayana/<kanda>/saartha/data.json  (a NEW layer alongside /mula)
+   -> itihasa/ramayana/<kanda>/saartha/data.json  (a NEW layer alongside /mula)
 
 Source: valmikiramayan.net  (Desiraju Hanumanta Rao / K.M.K. Murthy).
         The famous word-for-word Valmiki Ramayana. Static .htm pages, no robots
@@ -168,7 +168,7 @@ def run():
             })
             print(f"  sarga {sno}: {len(sh)} shlokas")
         if items:
-            write_grantha(f"itihasas/ramayana/{kslug}/saartha",
+            write_grantha(f"itihasa/ramayana/{kslug}/saartha",
                           "itihasa_purana_text", "Maharshi Valmiki", items)
 
 

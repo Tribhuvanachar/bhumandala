@@ -1,7 +1,7 @@
 // dge/convert/mapper.js — Schema Mapper, window.DGE.Mapper namespace.
 // Converts Gemini's generic proofread output
 // ({shlokas:[{number,index,sa,commentary}]}) into the REAL DGE grantha
-// schema the main reader app expects — see dge/data/stotras/pns/data.json
+// schema the main reader app expects — see dge/data/stotra/pns/data.json
 // for the reference shape this targets. Deliberately a separate,
 // deterministic (non-AI) step: Gemini's job stays narrow and reliable
 // (correct OCR text, split shloka/commentary); assembling the exact
@@ -49,7 +49,7 @@ window.DGE.Mapper = (function () {
     };
     // Optional -- the printed closing verse ("इति ... सर्गः"), when the admin
     // chose to record it separately (matches the existing convention already
-    // used by kavya/sumadhva_vijaya/sarga_1..8's own data.json files). Not
+    // used by kavya_alankara/sumadhva_vijaya/sarga_1..8's own data.json files). Not
     // every grantha has one; only added when actually supplied.
     if (profile.colophon) metadata.colophon = profile.colophon;
 

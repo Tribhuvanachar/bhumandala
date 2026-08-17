@@ -198,10 +198,10 @@ def build_items(entry_iter, slug, headword_language, gloss_language):
 
 # ---------- write DGE tree: two-tier sharded layout --------------------------
 # Validated shape (tuned so a mobile lookup fetches only small files):
-#   data/koshas/_index/<2char>.json      headword index: {fold:[{d,h,s,hl,l}]}
-#   data/koshas/_index/manifest.json     buckets + dictionary registry
-#   data/koshas/<cat>/<slug>/meta.json   source_meta + entry-bucket list
-#   data/koshas/<cat>/<slug>/e/<3char>.json  full entries: {fold:[item]}
+#   data/kosha/_index/<2char>.json      headword index: {fold:[{d,h,s,hl,l}]}
+#   data/kosha/_index/manifest.json     buckets + dictionary registry
+#   data/kosha/<cat>/<slug>/meta.json   source_meta + entry-bucket list
+#   data/kosha/<cat>/<slug>/e/<3char>.json  full entries: {fold:[item]}
 def _safe(b):
     return re.sub(r'[^0-9A-Za-z_]', lambda m: '%%%02x' % ord(m.group()), b) or '_'
 
@@ -210,7 +210,7 @@ def _langs_of(item):
 
 def run_import(dicts, dge_root, clone_root=None, local_root=None,
                index_shard_len=2, entry_shard_len=3):
-    koshas = os.path.join(dge_root, 'data', 'koshas')
+    koshas = os.path.join(dge_root, 'data', 'kosha')
     os.makedirs(os.path.join(koshas, '_index'), exist_ok=True)
     registry = {}
     tier1 = collections.defaultdict(lambda: collections.defaultdict(list))  # 2char -> fold -> [rec]
@@ -264,6 +264,6 @@ def run_import(dicts, dge_root, clone_root=None, local_root=None,
     with open(os.path.join(koshas, '_index', 'manifest.json'), 'w', encoding='utf-8') as fo:
         json.dump(manifest, fo, ensure_ascii=False, indent=1)
     with open(os.path.join(koshas, '_taxonomy_koshas.json'), 'w', encoding='utf-8') as fo:
-        json.dump({'koshas': {'_schema': 'kosha_entry',
+        json.dump({'kosha': {'_schema': 'kosha_entry',
                               **{k: dict(v) for k, v in tax.items()}}}, fo, ensure_ascii=False, indent=1)
     return manifest

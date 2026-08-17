@@ -1,4 +1,4 @@
-"""Valmiki Ramayana -> itihasas/ramayana/<kanda>/data.json
+"""Valmiki Ramayana -> itihasa/ramayana/<kanda>/data.json
 Source: bombay.indology.info BORI critical ed. (native Devanagari), coded 'KSSSVVVpada'.
 """
 import re, collections
@@ -34,7 +34,7 @@ def run():
         items = parse(http_get(URL % k), k)
         # /mula -- matches the layer folder already scaffolded in the
         # catalog (leaves room for a commentary layer alongside it later).
-        write_grantha(f"itihasas/ramayana/{KANDA[k]}/mula", "itihasa_purana_text", "Maharshi Valmiki", items)
+        write_grantha(f"itihasa/ramayana/{KANDA[k]}/mula", "itihasa_purana_text", "Maharshi Valmiki", items)
 
 if __name__ == "__main__":
     run()

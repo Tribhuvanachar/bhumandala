@@ -53,7 +53,10 @@
   <div class="top-actions">
 
     <!-- Commentary — content-related, used constantly, stays on its own -->
-    <div style="position:relative;">
+    <!-- data-topbar names each entry for admin/config/menu.json, which decides
+         which of these appear and in what order. Without that file they stay
+         exactly as written here. -->
+    <div style="position:relative;" data-topbar="commentary">
       <button class="btn-top" onclick="window.togglePopup('commentaryPopup')" id="activeCommBtn" title="Commentary Options">💬</button>
       <div class="popup popup-top" id="commentaryPopup">
         <div class="popup-label">View Bhashya</div>
@@ -67,7 +70,7 @@
          separate toolbar icons. On a phone that (plus the admin icons)
          pushed the last buttons off screen entirely. Merged into one
          scrollable popup — same options, one entry point. -->
-    <div style="position:relative;">
+    <div style="position:relative;" data-topbar="display">
       <button class="btn-top" onclick="window.togglePopup('displayPopup')" title="Display: size, script, theme, view">🅰</button>
       <div class="popup popup-top popup-scroll" id="displayPopup">
         <div class="popup-label">Reading Script</div>
@@ -98,7 +101,7 @@
     </div>
 
     <!-- Admin tools, hidden entirely unless authorised -->
-    <div style="position:relative;">
+    <div style="position:relative;" data-topbar="admin">
       <button class="btn-top" id="adminToolsBtn" onclick="window.togglePopup('adminToolsPopup')" title="Admin tools" style="display:none;">🛡️</button>
       <div class="popup popup-top" id="adminToolsPopup">
         <div class="popup-label">Admin</div>
@@ -120,7 +123,7 @@
          entry point rather than a growing row of raw icons, same reasoning
          as the Display popup consolidation above: several separate toolbar
          buttons push the last ones off-screen on a phone. -->
-    <div style="position:relative;">
+    <div style="position:relative;" data-topbar="explore">
       <button class="btn-top" onclick="window.togglePopup('sectionsPopup')" title="More DGE Sections">🧭</button>
       <div class="popup popup-top" id="sectionsPopup">
         <div class="popup-label">Explore</div>
@@ -132,16 +135,16 @@
       </div>
     </div>
 
-    <button class="btn-top" onclick="window.openAboutModal()" title="About / Contact / Report an Issue">ℹ️</button>
+    <button class="btn-top" data-topbar="about" onclick="window.openAboutModal()" title="About / Contact / Report an Issue">ℹ️</button>
 
     <!-- User Accounts (Firebase) — hidden entirely unless AUTH_CONFIG.enabled
          is true (see config.js / FIREBASE_SETUP.md). Opens a modal directly,
          like About, rather than a popup — sidesteps the toolbar-popup
          overflow issues fixed elsewhere in this file, since there's no
          anchor-side positioning to get wrong for a plain modal trigger. -->
-    <button class="btn-top" id="accountBtn" onclick="window.openAccountModal()" title="My Account" style="display:none;">👤</button>
+    <button class="btn-top" id="accountBtn" data-topbar="account" onclick="window.openAccountModal()" title="My Account" style="display:none;">👤</button>
 
-    <div style="position:relative;">
+    <div style="position:relative;" data-topbar="access">
       <button class="btn-top" id="accessKeyBtn" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access">🔑</button>
       <div class="popup popup-top" id="accessPopup">
         <div class="popup-label">Access</div>
@@ -818,6 +821,14 @@
 <script src="js/config-editor.js?v=4.60.6"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
 <script src="js/core.js?v=4.63.0"></script>
+<!-- Reads admin/config/menu.json and rebuilds the top bar, the Explore and
+     Admin popups and the theme list from it. Loaded after core.js so the
+     theme it re-ticks is the one already applied. -->
+<script src="js/menu.js?v=4.64.0"></script>
+<!-- Sūtra intellisense: makes citations in the text tappable and identifies
+     a rule from a half-remembered name. Fetches nothing until a page turns
+     out to cite one. -->
+<script src="js/intellisense.js?v=4.64.0"></script>
 <script src="js/library.js?v=4.61.0"></script>
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
 <script src="js/dge-normalize.js?v=4.60.6"></script>

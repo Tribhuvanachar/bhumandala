@@ -1,5 +1,5 @@
 """Adi Shankaracharya's Prasthanatrayi bhashya corpus
-   -> shankara_bhashya/<work>/bhashya/data.json   (+ /mula where a clean split exists)
+   -> darshana/vedanta/advaita/shankara_bhashya/<work>/bhashya/data.json   (+ /mula where a clean split exists)
 
 Covers Shankara's authentic bhashyas on the three canonical pramanas:
   * Brahmasutra Bhashya (Shariraka Bhashya)
@@ -57,39 +57,39 @@ DEFAULT_MARKER = re.compile(r"([A-Za-zĀĪŪṚṜḶṆṬḌṢŚṄÑṂḤā
 
 WORKS = [
     # slug,                target subtree,                       source url,                                                    fmt
-    ("brahmasutra_bhashya","shankara_bhashya/brahmasutra_bhashya",
+    ("brahmasutra_bhashya","darshana/vedanta/advaita/shankara_bhashya/brahmasutra_bhashya",
         f"{ZEN}/sa_bAdarAyaNa-brahmasUtra-comm.txt", "iast_txt", "Shariraka Bhashya"),
 
     # These six are NOT in the Zenodo record (all returned HTTP 404 there);
     # they live on GRETIL as corpustei HTML. Same IAST text + reference markers
     # (e.g. PrUp_1.1 / PrUpBh_1.1, ChUp_1,1.1 / ChUpBh_1,1.1), so fmt=iast_htm.
-    ("isha",       "shankara_bhashya/upanishad_bhashya/isha_upanishad",
+    ("isha",       "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/isha_upanishad",
         f"{GRC}/sa_IzopaniSad-or-IzAvAsyopaniSadkANva-recension-comm.htm", "iast_htm", "Isha Upanishad Bhashya"),
-    ("prashna",    "shankara_bhashya/upanishad_bhashya/prashna_upanishad",
+    ("prashna",    "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/prashna_upanishad",
         f"{GRC}/sa_praznopaniSad-comm.htm", "iast_htm", "Prashna Upanishad Bhashya"),
-    ("mandukya",   "shankara_bhashya/upanishad_bhashya/mandukya_upanishad",
+    ("mandukya",   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/mandukya_upanishad",
         f"{GRC}/sa_mANDUkyopaniSad-comm.htm", "iast_htm", "Mandukya Upanishad + Gaudapada Karika Bhashya"),
-    ("taittiriya", "shankara_bhashya/upanishad_bhashya/taittiriya_upanishad",
+    ("taittiriya", "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/taittiriya_upanishad",
         f"{GRC}/sa_taittirIyopaniSad-zaMkarabhASya.htm", "iast_htm", "Taittiriya Upanishad Bhashya"),
-    ("aitareya",   "shankara_bhashya/upanishad_bhashya/aitareya_upanishad",
+    ("aitareya",   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/aitareya_upanishad",
         f"{ZEN}/sa_aitareyopaniSad-comm.txt", "iast_txt", "Aitareya Upanishad Bhashya"),
-    ("chandogya",  "shankara_bhashya/upanishad_bhashya/chandogya_upanishad",
+    ("chandogya",  "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/chandogya_upanishad",
         f"{GRC}/sa_chAndogyopaniSad-comm.htm", "iast_htm", "Chandogya Upanishad Bhashya"),
-    ("brihadaranyaka","shankara_bhashya/upanishad_bhashya/brihadaranyaka_upanishad",
+    ("brihadaranyaka","darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/brihadaranyaka_upanishad",
         f"{GRC}/sa_bRhadAraNyakopaniSadkANva-recension-comm.htm", "iast_htm", "Brihadaranyaka Upanishad Bhashya"),
 
     # Kena / Katha / Mundaka bhashyas: UNAVAILABLE. Not in GRETIL's corpus
     # (index says "restricted / not available from TITUS"), and the old classic
     # 1_veda/4_upa/ paths below are dead (HTTP 404). Left commented out pending a
     # separate follow-up to wire in the sanskritdocuments.org ITX fallback.
-    # ("kena",    "shankara_bhashya/upanishad_bhashya/kena_upanishad",
+    # ("kena",    "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/kena_upanishad",
     #     f"{GRETIL}/1_sanskr/1_veda/4_upa/kenupsbu.htm", "iast_htm", "Kena Upanishad Bhashya"),
-    # ("katha",   "shankara_bhashya/upanishad_bhashya/katha_upanishad",
+    # ("katha",   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/katha_upanishad",
     #     f"{GRETIL}/1_sanskr/1_veda/4_upa/kathupsb_u.htm", "iast_htm", "Katha Upanishad Bhashya"),
-    # ("mundaka", "shankara_bhashya/upanishad_bhashya/mundaka_upanishad",
+    # ("mundaka", "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/mundaka_upanishad",
     #     f"{GRETIL}/1_sanskr/1_veda/4_upa/mundupsb_u.htm", "iast_htm", "Mundaka Upanishad Bhashya"),
 
-    ("gita_bhashya","shankara_bhashya/gita_bhashya",
+    ("gita_bhashya","darshana/vedanta/advaita/shankara_bhashya/gita_bhashya",
         f"{GRETIL}/1_sanskr/6_sastra/3_phil/vedanta/bhgsbh_u.htm", "iast_htm", "Gita Bhashya"),
 ]
 

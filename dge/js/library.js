@@ -25,7 +25,32 @@ const DGE_PATH_LABELS = {
   itihasas: 'इतिहासाः', smritis: 'स्मृतयः', sutras: 'सूत्राणि',
   dharmashastra: 'धर्मशास्त्रम्', pancharatra_agama: 'पाञ्चरात्रागमः',
   sarvamoola_grantha: 'सर्वमूलग्रन्थाः', dasakuta: 'दासकूटः',
-  vyasakuta: 'व्यासकूटः',
+  vyasakuta: 'व्यासकूटः', dasa_sahitya: 'दाससाहित्यम्',
+  koshas: 'कोशाः', ancillary: 'अङ्गानि',
+
+  // The branches of the recommended DGE taxonomy (DGE_Shastra_Taxonomy.md).
+  // Listed whether or not the corpus has been moved onto it yet: the Library
+  // Manager can regroup the tree onto these names without the folders moving
+  // (see the "moves" map in admin/config/library-overrides.json, and
+  // tools/restructure_taxonomy.py), and an unlabelled segment falls back to
+  // ASCII, which would leave a Sanskrit tree with English branch headings.
+  vedanga: 'वेदाङ्गानि',
+  shiksha: 'शिक्षा', chandas: 'छन्दः', nirukta: 'निरुक्तम्',
+  jyotisha: 'ज्योतिषम्', kalpa: 'कल्पः', pratishakhya: 'प्रातिशाख्यानि',
+  vyakarana: 'व्याकरणम्',
+  ashtadhyayi: 'अष्टाध्यायी', dhatupatha: 'धातुपाठः', vritti: 'वृत्तिः',
+
+  darshana: 'दर्शनानि', vedanta: 'वेदान्तः',
+  dvaita: 'द्वैतम्', advaita: 'अद्वैतम्', vishishtadvaita: 'विशिष्टाद्वैतम्',
+  nyaya: 'न्यायः', vaisheshika: 'वैशेषिकम्', sankhya: 'साङ्ख्यम्',
+  yoga: 'योगः', mimamsa: 'मीमांसा',
+  sarvamula: 'सर्वमूलग्रन्थाः',
+
+  itihasa: 'इतिहासाः', purana: 'पुराणानि',
+  smriti_dharma: 'स्मृतिधर्मशास्त्राणि', smriti: 'स्मृतयः',
+  kavya_alankara: 'काव्यालङ्कारौ', kavya: 'काव्यम्',
+  kosha: 'कोशाः', stotra: 'स्तोत्राणि',
+  agama: 'आगमाः', pancharatra: 'पाञ्चरात्रम्',
 
   rigveda: 'ऋग्वेदः', yajurveda: 'यजुर्वेदः',
   samaveda: 'सामवेदः', atharvaveda: 'अथर्ववेदः',

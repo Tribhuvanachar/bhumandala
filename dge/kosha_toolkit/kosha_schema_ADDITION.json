@@ -2,13 +2,13 @@
   "_HOW_TO_APPLY": [
     "NON-DESTRUCTIVE. Do not overwrite data/schemas.json. Merge the single key",
     "'kosha_entry' below into the existing top-level object in data/schemas.json,",
-    "and merge the 'koshas' block from kosha_taxonomy_ADDITION.json into",
+    "and merge the 'kosha' block from kosha_taxonomy_ADDITION.json into",
     "data/taxonomy.json (and its mirror data/_taxonomy.json). Everything the",
-    "importer writes lives under data/koshas/** only."
+    "importer writes lives under data/kosha/** only."
   ],
 
   "kosha_entry": {
-    "description": "One dictionary headword (kosha entry) from a lexicon such as Monier-Williams, Apte, Amarakosha, Shabdakalpadruma, Vacaspatyam, or a bilingual dict (sa-kn, sa-en, sa-bn, ...). Headwords are stored in Devanagari; headword_slp1 + fold power fuzzy cross-script lookup consistent with the app's SLP1 search spine. A headword may carry several senses, each glossed in its own language, so the same entry can serve cross-language pivot. Used for every folder under 'koshas'.",
+    "description": "One dictionary headword (kosha entry) from a lexicon such as Monier-Williams, Apte, Amarakosha, Shabdakalpadruma, Vacaspatyam, or a bilingual dict (sa-kn, sa-en, sa-bn, ...). Headwords are stored in Devanagari; headword_slp1 + fold power fuzzy cross-script lookup consistent with the app's SLP1 search spine. A headword may carry several senses, each glossed in its own language, so the same entry can serve cross-language pivot. Used for every folder under 'kosha'.",
     "item_fields": {
       "id": {
         "type": "string",
@@ -68,7 +68,7 @@
       "references": {
         "type": "object[]",
         "required": false,
-        "notes": "[{target, unit_id, note, type}] -- SAME shape as every other schema, plus an optional 'type' ('synonym_of' | 'see_also' | 'comments_on'). target is another folder slug (e.g. 'koshas/amarakosha'), unit_id the pointed-at item id. Powers the library-wide backlinks index."
+        "notes": "[{target, unit_id, note, type}] -- SAME shape as every other schema, plus an optional 'type' ('synonym_of' | 'see_also' | 'comments_on'). target is another folder slug (e.g. 'kosha/amarakosha'), unit_id the pointed-at item id. Powers the library-wide backlinks index."
       },
       "tags": {
         "type": "string[]",

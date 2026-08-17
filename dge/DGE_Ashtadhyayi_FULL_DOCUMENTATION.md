@@ -134,7 +134,7 @@ already uses for Sarvamoola:
 Every commentary item carries a back-reference to its sutra:
 
 ```json
-"references": [{ "target": "vyakarana/ashtadhyayi/sutrapatha",
+"references": [{ "target": "vedanga/vyakarana/ashtadhyayi/sutrapatha",
                  "unit_id": "1.1.1", "note": "comments_on" }]
 ```
 
@@ -211,7 +211,7 @@ conventions and touches no existing logic. To finish wiring it into the app:
   won't need to enter a key twice.
 - **Library browser (optional).** If you want it to appear in the main library
   card grid, add an entry to `library.json` / `config-overrides.json` pointing at
-  `vyakarana/ashtadhyayi` — optional, since the dedicated page already covers it.
+  `vedanga/vyakarana/ashtadhyayi` — optional, since the dedicated page already covers it.
 
 ---
 
