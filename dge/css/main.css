@@ -606,3 +606,42 @@ button.dge-si-go {
   color: var(--accent-gold, #E8B24D);
   border-bottom: 1px dotted currentColor;
 }
+
+/* =========================================================================
+   Backlinks (js/backlinks.js) — how many texts discuss this verse.
+
+   A small count at the end of the verse row rather than a banner: on a sūtra
+   where seven commentaries apply, a banner would outweigh the sūtra itself.
+   ========================================================================= */
+.dge-bl-mark {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-left: 6px; padding: 2px 8px;
+  border: 1px solid var(--card-border, rgba(232,178,77,.2));
+  border-radius: 999px; background: none; cursor: pointer;
+  font-family: var(--font-ui, inherit); font-size: 10.5px; line-height: 1.4;
+  color: var(--muted-text, #8B7A63);
+  transition: color .18s ease, border-color .18s ease;
+  align-self: flex-start;
+}
+.dge-bl-mark:hover, .dge-bl-mark:focus-visible {
+  color: var(--accent-gold, #E8B24D);
+  border-color: var(--accent-gold, #E8B24D);
+  outline: none;
+}
+.dge-bl-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent-gold, #E8B24D); opacity: .75;
+}
+.dge-bl-item {
+  display: flex; align-items: baseline; gap: 8px;
+  padding: 7px 0; text-decoration: none;
+  border-bottom: 1px solid var(--card-border, rgba(232,178,77,.10));
+}
+.dge-bl-item:last-child { border-bottom: 0; }
+.dge-bl-name {
+  font-family: var(--font-sanskrit, serif); font-size: 15px;
+  color: var(--accent-gold, #E8B24D);
+}
+.dge-bl-note { font-size: 11px; color: var(--muted-text, #8B7A63); }
+
+@media (prefers-reduced-motion: reduce) { .dge-bl-mark { transition: none; } }
