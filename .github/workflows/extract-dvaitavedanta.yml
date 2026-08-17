@@ -65,6 +65,10 @@ on:
         description: "Ignore the HTTP cache and refetch everything"
         type: boolean
         default: false
+      refresh_granthas:
+        description: "Comma-separated slugs whose cache to ignore, leaving every other grantha resumable (e.g. rig_bhashya)"
+        type: string
+        default: ""
       probe:
         description: "Also upload raw HTML of a few pages, for selector review"
         type: boolean
@@ -179,6 +183,7 @@ jobs:
           TIMEOUT: ${{ inputs.timeout }}
           DRY_RUN: ${{ inputs.dry_run }}
           REFRESH: ${{ inputs.refresh_cache }}
+          REFRESH_GRANTHAS: ${{ inputs.refresh_granthas }}
           PROBE: ${{ inputs.probe }}
           DISCOVER_ONLY: ${{ inputs.discover_only }}
         run: |
@@ -201,6 +206,7 @@ jobs:
           if [ -n "$LIMIT" ]; then ARGS+=(--limit-per-grantha "$LIMIT"); fi
           if [ "$DRY_RUN" = "true" ]; then ARGS+=(--dry-run); else ARGS+=(--write); fi
           if [ "$REFRESH" = "true" ]; then ARGS+=(--refresh-cache); fi
+          if [ -n "$REFRESH_GRANTHAS" ]; then ARGS+=(--refresh-granthas "$REFRESH_GRANTHAS"); fi
           if [ "$DISCOVER_ONLY" = "true" ]; then ARGS+=(--discover-only); fi
           if [ "$PROBE" = "true" ]; then ARGS+=(--probe-dir dv_probe --probe-count 5); fi
           echo "leaf cap: ${LIMIT:-0} (0 = no cap)"

@@ -577,6 +577,10 @@ def main(argv=None):
     parser.add_argument("--timeout", type=int, default=None)
     parser.add_argument("--retries", type=int, default=None)
     parser.add_argument("--refresh-cache", action="store_true")
+    parser.add_argument("--refresh-granthas", default="",
+                        help="comma-separated slugs whose cache to ignore, leaving "
+                             "every other grantha resumable. A refetch of one "
+                             "grantha should not cost a refetch of 2,891 pages.")
     parser.add_argument("--probe-dir", default="",
                         help="also save raw HTML of the first N pages here for selector review")
     parser.add_argument("--probe-count", type=int, default=3)
@@ -646,10 +650,24 @@ def main(argv=None):
     log(f"dvaitavedanta.in → {out_root}  [{mode}]")
     log(f"{len(selected)} grantha(s) selected\n")
 
+    refresh_slugs = {s.strip() for s in args.refresh_granthas.split(",") if s.strip()}
+
     for grantha in selected:
         started = time.time()
         label = grantha["slug"] or f"id_{grantha['content_id']}"
         log(f"→ {grantha['section_slug']}/{label}")
+
+        # A cache entry can be poisoned — rig_bhashya cached an unusable seed
+        # during the invented-slug era and has reported 1 leaf ever since, on a
+        # page that really lists twenty suktas. Re-fetching just that grantha
+        # costs twenty requests; --refresh-cache would cost the whole corpus.
+        # Set per iteration rather than saved-and-restored: the seed-failure
+        # branch below does `continue`, so a restore at the end of the loop
+        # would be the one path it skips.
+        targeted = label in refresh_slugs or grantha["slug"] in refresh_slugs
+        fetcher.refresh = bool(args.refresh_cache) or targeted
+        if targeted:
+            log("    (ignoring cache for this grantha)")
 
         ids, seed_record, ancestor, url_by_id = discover_leaves(fetcher, grantha, log)
         if seed_record is None:
