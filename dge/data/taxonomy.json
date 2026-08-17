@@ -1062,6 +1062,464 @@
           }
         }
       }
+    },
+    "nyaya": {
+      "bhasha_pariccheda": {
+        "karikavali": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          },
+          "tika_dinakari": {
+            "_schema": "grantha_tika_text"
+          },
+          "tika_kiranavali": {
+            "_schema": "grantha_tika_text"
+          },
+          "tika_ramarudri": {
+            "_schema": "grantha_tippani_text"
+          },
+          "tika_siddhanta_muktavali": {
+            "_schema": "grantha_tika_text"
+          }
+        }
+      },
+      "navya_nyaya": {
+        "badhanta": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "shaktivada": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "tattvacintamani": {
+          "anumana_khanda": {
+            "aloka": {
+              "_schema": "grantha_tika_text"
+            },
+            "didhiti": {
+              "_schema": "grantha_tika_text"
+            },
+            "gadadhari": {
+              "_schema": "grantha_tika_text"
+            },
+            "jagadishi": {
+              "_schema": "grantha_tika_text"
+            },
+            "mathuri": {
+              "_schema": "grantha_tika_text"
+            },
+            "mula": {
+              "_schema": "grantha_mula_text"
+            },
+            "vadas": {
+              "avacchedakata_nirukti": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "gadadhari": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              },
+              "avayava": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "gadadhari": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              },
+              "badha": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "gadadhari": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              },
+              "badha_vibhajaka": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              },
+              "chaturdashalakshani": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "gadadhari": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              },
+              "pakshata": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "gadadhari": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              },
+              "panchalakshani": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "gadadhari": {
+                  "_schema": "grantha_tika_text"
+                },
+                "jagadishi": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              },
+              "samanya_nirukti": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "gadadhari": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              },
+              "satpratipaksha": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "gadadhari": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              },
+              "savyabhichara": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "gadadhari": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              },
+              "siddhanta_lakshana": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "gadadhari": {
+                  "_schema": "grantha_tika_text"
+                },
+                "jagadishi": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              },
+              "vyadhikarana": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "jagadishi": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              },
+              "vyaptyanugama": {
+                "didhiti": {
+                  "_schema": "grantha_tika_text"
+                },
+                "jagadishi": {
+                  "_schema": "grantha_tika_text"
+                },
+                "mula": {
+                  "_schema": "grantha_mula_text"
+                }
+              }
+            }
+          },
+          "pratyaksha_khanda": {
+            "aloka": {
+              "_schema": "grantha_tika_text"
+            },
+            "didhiti": {
+              "_schema": "grantha_tika_text"
+            },
+            "gadadhari": {
+              "_schema": "grantha_tika_text"
+            },
+            "jagadishi": {
+              "_schema": "grantha_tika_text"
+            },
+            "mathuri": {
+              "_schema": "grantha_tika_text"
+            },
+            "mula": {
+              "_schema": "grantha_mula_text"
+            }
+          },
+          "shabda_khanda": {
+            "aloka": {
+              "_schema": "grantha_tika_text"
+            },
+            "didhiti": {
+              "_schema": "grantha_tika_text"
+            },
+            "gadadhari": {
+              "_schema": "grantha_tika_text"
+            },
+            "jagadishi": {
+              "_schema": "grantha_tika_text"
+            },
+            "mathuri": {
+              "_schema": "grantha_tika_text"
+            },
+            "mula": {
+              "_schema": "grantha_mula_text"
+            }
+          },
+          "upamana_khanda": {
+            "aloka": {
+              "_schema": "grantha_tika_text"
+            },
+            "didhiti": {
+              "_schema": "grantha_tika_text"
+            },
+            "gadadhari": {
+              "_schema": "grantha_tika_text"
+            },
+            "jagadishi": {
+              "_schema": "grantha_tika_text"
+            },
+            "mathuri": {
+              "_schema": "grantha_tika_text"
+            },
+            "mula": {
+              "_schema": "grantha_mula_text"
+            }
+          }
+        },
+        "vyutpattivada": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        }
+      },
+      "prachina_nyaya": {
+        "nyaya_bhushana": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "nyaya_manjari": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "nyaya_sutra": {
+          "bhashya_vatsyayana": {
+            "_schema": "grantha_tika_text"
+          },
+          "mula": {
+            "_schema": "grantha_mula_text"
+          },
+          "tatparya_parishuddhi": {
+            "_schema": "grantha_tika_text"
+          },
+          "tatparya_tika": {
+            "_schema": "grantha_tika_text"
+          },
+          "varttika_uddyotakara": {
+            "_schema": "grantha_tika_text"
+          }
+        }
+      },
+      "prakarana": {
+        "tarkabhasha": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "tarkasangraha": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          },
+          "tika_bhaskarodaya": {
+            "_schema": "grantha_tippani_text"
+          },
+          "tika_dipika": {
+            "_schema": "grantha_tika_text"
+          },
+          "tika_nilakanthi": {
+            "_schema": "grantha_tika_text"
+          },
+          "tika_nyayabodhini": {
+            "_schema": "grantha_tika_text"
+          },
+          "tika_padakritya": {
+            "_schema": "grantha_tika_text"
+          },
+          "tika_sarvasva": {
+            "_schema": "grantha_tika_text"
+          }
+        }
+      },
+      "pramukha_prakarana": {
+        "nyaya_kusumanjali": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          },
+          "tika_bodhini": {
+            "_schema": "grantha_tika_text"
+          },
+          "tika_makaranda": {
+            "_schema": "grantha_tika_text"
+          },
+          "tika_prakasha": {
+            "_schema": "grantha_tika_text"
+          }
+        }
+      }
+    },
+    "vaisheshika": {
+      "sutra_and_bhashya": {
+        "prashastapada_bhashya": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          },
+          "tika_kiranavali": {
+            "_schema": "grantha_tika_text"
+          }
+        },
+        "vaisheshika_sutra": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        }
+      }
+    },
+    "mimamsa": {
+      "bhatta": {
+        "shlokavarttika": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          },
+          "tika_kashika": {
+            "_schema": "grantha_tika_text"
+          },
+          "tika_nyayaratnakara": {
+            "_schema": "grantha_tika_text"
+          },
+          "tika_nyayasudha": {
+            "_schema": "grantha_tika_text"
+          }
+        },
+        "tantravarttika": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "tuptika": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        }
+      },
+      "prabhakara": {
+        "brihati": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          },
+          "tika_dipashikha": {
+            "_schema": "grantha_tika_text"
+          },
+          "tika_rijuvimala": {
+            "_schema": "grantha_tika_text"
+          }
+        },
+        "prakarana_panchika": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        }
+      },
+      "prakarana": {
+        "arthasangraha": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "bhatta_dipika": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "bhatta_rahasya": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "jaiminiya_nyayamala": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "mimamsa_nyaya_prakasha": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "mimamsa_paribhasha": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "nyaya_ratnamala": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        },
+        "shastra_dipika": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          }
+        }
+      },
+      "sutra_and_bhashya": {
+        "mimamsa_sutra": {
+          "mula": {
+            "_schema": "grantha_mula_text"
+          },
+          "shabara_bhashya": {
+            "_schema": "grantha_tika_text"
+          }
+        }
+      }
     }
   },
   "smriti_dharma": {

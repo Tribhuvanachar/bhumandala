@@ -3140,6 +3140,571 @@
       "path": "dge/data/itihasa/mahabharata/virata_parva/translation_ganguli/data.json",
       "populated": true,
       "title": null
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prachina_nyaya/nyaya_sutra/mula/data.json",
+      "populated": false,
+      "title": "न्यायसूत्राणि"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prachina_nyaya/nyaya_sutra/bhashya_vatsyayana/data.json",
+      "populated": false,
+      "title": "न्यायसूत्राणि — न्यायभाष्यम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prachina_nyaya/nyaya_sutra/varttika_uddyotakara/data.json",
+      "populated": false,
+      "title": "न्यायसूत्राणि — न्यायवार्त्तिकम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prachina_nyaya/nyaya_sutra/tatparya_tika/data.json",
+      "populated": false,
+      "title": "न्यायसूत्राणि — न्यायवार्त्तिकतात्पर्यटीका"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prachina_nyaya/nyaya_sutra/tatparya_parishuddhi/data.json",
+      "populated": false,
+      "title": "न्यायसूत्राणि — न्यायवार्त्तिकतात्पर्यपरिशुद्धिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prachina_nyaya/nyaya_bhushana/mula/data.json",
+      "populated": false,
+      "title": "न्यायभूषणम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prachina_nyaya/nyaya_manjari/mula/data.json",
+      "populated": false,
+      "title": "न्यायमञ्जरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prakarana/tarkasangraha/mula/data.json",
+      "populated": false,
+      "title": "तर्कसङ्ग्रहः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prakarana/tarkasangraha/tika_dipika/data.json",
+      "populated": false,
+      "title": "तर्कसङ्ग्रहः — तर्कदीपिका"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prakarana/tarkasangraha/tika_nyayabodhini/data.json",
+      "populated": false,
+      "title": "तर्कसङ्ग्रहः — न्यायबोधिनी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prakarana/tarkasangraha/tika_padakritya/data.json",
+      "populated": false,
+      "title": "तर्कसङ्ग्रहः — पदकृत्यम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prakarana/tarkasangraha/tika_sarvasva/data.json",
+      "populated": false,
+      "title": "तर्कसङ्ग्रहः — तर्कसङ्ग्रहसर्वस्वम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prakarana/tarkasangraha/tika_nilakanthi/data.json",
+      "populated": false,
+      "title": "तर्कसङ्ग्रहः — नीलकण्ठी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prakarana/tarkasangraha/tika_bhaskarodaya/data.json",
+      "populated": false,
+      "title": "तर्कसङ्ग्रहः — भास्करोदयः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/prakarana/tarkabhasha/mula/data.json",
+      "populated": false,
+      "title": "तर्कभाषा"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/bhasha_pariccheda/karikavali/mula/data.json",
+      "populated": false,
+      "title": "कारिकावली"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/bhasha_pariccheda/karikavali/tika_siddhanta_muktavali/data.json",
+      "populated": false,
+      "title": "कारिकावली — सिद्धान्तमुक्तावली"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/bhasha_pariccheda/karikavali/tika_dinakari/data.json",
+      "populated": false,
+      "title": "कारिकावली — दिनकरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/bhasha_pariccheda/karikavali/tika_ramarudri/data.json",
+      "populated": false,
+      "title": "कारिकावली — तरङ्गिणी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/bhasha_pariccheda/karikavali/tika_kiranavali/data.json",
+      "populated": false,
+      "title": "कारिकावली — किरणावली"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/pratyaksha_khanda/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/pratyaksha_khanda/aloka/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — आलोकः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/pratyaksha_khanda/mathuri/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — माथुरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/pratyaksha_khanda/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/pratyaksha_khanda/jagadishi/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — जागदीशी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/pratyaksha_khanda/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/aloka/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — आलोकः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/mathuri/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — माथुरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/jagadishi/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — जागदीशी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/panchalakshani/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — पञ्चलक्षणी — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/panchalakshani/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — पञ्चलक्षणी — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/panchalakshani/jagadishi/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — पञ्चलक्षणी — जागदीशी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/panchalakshani/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — पञ्चलक्षणी — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/chaturdashalakshani/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — चतुर्दशलक्षणी — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/chaturdashalakshani/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — चतुर्दशलक्षणी — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/chaturdashalakshani/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — चतुर्दशलक्षणी — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/siddhanta_lakshana/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सिद्धान्तलक्षणम् — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/siddhanta_lakshana/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सिद्धान्तलक्षणम् — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/siddhanta_lakshana/jagadishi/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सिद्धान्तलक्षणम् — जागदीशी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/siddhanta_lakshana/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सिद्धान्तलक्षणम् — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/vyaptyanugama/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — व्याप्त्यनुगमः — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/vyaptyanugama/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — व्याप्त्यनुगमः — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/vyaptyanugama/jagadishi/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — व्याप्त्यनुगमः — जागदीशी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/samanya_nirukti/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सामान्यनिरुक्तिः — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/samanya_nirukti/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सामान्यनिरुक्तिः — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/samanya_nirukti/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सामान्यनिरुक्तिः — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/savyabhichara/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सव्यभिचारः — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/savyabhichara/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सव्यभिचारः — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/savyabhichara/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सव्यभिचारः — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/satpratipaksha/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सत्प्रतिपक्षः — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/satpratipaksha/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सत्प्रतिपक्षः — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/satpratipaksha/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — सत्प्रतिपक्षः — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/badha/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — बाधः — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/badha/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — बाधः — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/badha/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — बाधः — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/badha_vibhajaka/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — बाधविभाजकः — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/badha_vibhajaka/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — बाधविभाजकः — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/avayava/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — अवयवः — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/avayava/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — अवयवः — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/avayava/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — अवयवः — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/pakshata/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — पक्षता — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/pakshata/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — पक्षता — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/pakshata/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — पक्षता — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/avacchedakata_nirukti/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — अवच्छेदकतानिरुक्तिः — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/avacchedakata_nirukti/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — अवच्छेदकतानिरुक्तिः — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/avacchedakata_nirukti/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — अवच्छेदकतानिरुक्तिः — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/vyadhikarana/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — व्यधिकरणम् — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/vyadhikarana/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — व्यधिकरणम् — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/anumana_khanda/vadas/vyadhikarana/jagadishi/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — व्यधिकरणम् — जागदीशी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/upamana_khanda/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/upamana_khanda/aloka/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — आलोकः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/upamana_khanda/mathuri/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — माथुरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/upamana_khanda/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/upamana_khanda/jagadishi/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — जागदीशी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/upamana_khanda/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/shabda_khanda/mula/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — मूलम्"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/shabda_khanda/aloka/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — आलोकः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/shabda_khanda/mathuri/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — माथुरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/shabda_khanda/didhiti/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — दीधितिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/shabda_khanda/jagadishi/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — जागदीशी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/tattvacintamani/shabda_khanda/gadadhari/data.json",
+      "populated": false,
+      "title": "तत्त्वचिन्तामणिः — गादाधरी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/vyutpattivada/mula/data.json",
+      "populated": false,
+      "title": "व्युत्पत्तिवादः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/shaktivada/mula/data.json",
+      "populated": false,
+      "title": "शक्तिवादः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/navya_nyaya/badhanta/mula/data.json",
+      "populated": false,
+      "title": "बाधान्तः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/pramukha_prakarana/nyaya_kusumanjali/mula/data.json",
+      "populated": false,
+      "title": "न्यायकुसुमाञ्जलिः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/pramukha_prakarana/nyaya_kusumanjali/tika_bodhini/data.json",
+      "populated": false,
+      "title": "न्यायकुसुमाञ्जलिः — बोधिनी"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/pramukha_prakarana/nyaya_kusumanjali/tika_prakasha/data.json",
+      "populated": false,
+      "title": "न्यायकुसुमाञ्जलिः — प्रकाशः"
+    },
+    {
+      "path": "dge/data/darshana/nyaya/pramukha_prakarana/nyaya_kusumanjali/tika_makaranda/data.json",
+      "populated": false,
+      "title": "न्यायकुसुमाञ्जलिः — मकरन्दः"
+    },
+    {
+      "path": "dge/data/darshana/vaisheshika/sutra_and_bhashya/vaisheshika_sutra/mula/data.json",
+      "populated": false,
+      "title": "वैशेषिकसूत्राणि"
+    },
+    {
+      "path": "dge/data/darshana/vaisheshika/sutra_and_bhashya/prashastapada_bhashya/mula/data.json",
+      "populated": false,
+      "title": "प्रशस्तपादभाष्यम्"
+    },
+    {
+      "path": "dge/data/darshana/vaisheshika/sutra_and_bhashya/prashastapada_bhashya/tika_kiranavali/data.json",
+      "populated": false,
+      "title": "प्रशस्तपादभाष्यम् — किरणावली"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/sutra_and_bhashya/mimamsa_sutra/mula/data.json",
+      "populated": false,
+      "title": "मीमांसासूत्राणि"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/sutra_and_bhashya/mimamsa_sutra/shabara_bhashya/data.json",
+      "populated": false,
+      "title": "मीमांसासूत्राणि — शाबरभाष्यम्"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/bhatta/shlokavarttika/mula/data.json",
+      "populated": false,
+      "title": "श्लोकवार्त्तिकम्"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/bhatta/shlokavarttika/tika_kashika/data.json",
+      "populated": false,
+      "title": "श्लोकवार्त्तिकम् — काशिका"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/bhatta/shlokavarttika/tika_nyayasudha/data.json",
+      "populated": false,
+      "title": "श्लोकवार्त्तिकम् — न्यायसुधा"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/bhatta/shlokavarttika/tika_nyayaratnakara/data.json",
+      "populated": false,
+      "title": "श्लोकवार्त्तिकम् — न्यायरत्नाकरः"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/bhatta/tantravarttika/mula/data.json",
+      "populated": false,
+      "title": "तन्त्रवार्त्तिकम्"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/bhatta/tuptika/mula/data.json",
+      "populated": false,
+      "title": "टुप्टीका"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/prabhakara/brihati/mula/data.json",
+      "populated": false,
+      "title": "बृहती"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/prabhakara/brihati/tika_rijuvimala/data.json",
+      "populated": false,
+      "title": "बृहती — ऋजुविमला"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/prabhakara/brihati/tika_dipashikha/data.json",
+      "populated": false,
+      "title": "बृहती — दीपशिखा"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/prabhakara/prakarana_panchika/mula/data.json",
+      "populated": false,
+      "title": "प्रकरणपञ्चिका"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/prakarana/arthasangraha/mula/data.json",
+      "populated": false,
+      "title": "अर्थसङ्ग्रहः"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/prakarana/mimamsa_nyaya_prakasha/mula/data.json",
+      "populated": false,
+      "title": "मीमांसान्यायप्रकाशः"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/prakarana/shastra_dipika/mula/data.json",
+      "populated": false,
+      "title": "शास्त्रदीपिका"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/prakarana/nyaya_ratnamala/mula/data.json",
+      "populated": false,
+      "title": "न्यायरत्नमाला"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/prakarana/jaiminiya_nyayamala/mula/data.json",
+      "populated": false,
+      "title": "जैमिनीयन्यायमालाविस्तरः"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/prakarana/bhatta_dipika/mula/data.json",
+      "populated": false,
+      "title": "भाट्टदीपिका"
+    },
+    {
+      "path": "dge/data/darshana/mimamsa/prakarana/bhatta_rahasya/mula/data.json",
+      "populated": false,
+      "title": "भाट्टरहस्यम्"
     }
   ]
 }
