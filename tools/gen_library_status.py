@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Regenerate dge/data/library_status.json -- the snapshot the Library Manager
+# Regenerate admin/config/library-status.json -- the snapshot the Library Manager
 # dashboard reads. Run from the repo root (or dge/) after new data lands, or
 # wire as a GitHub Action step.
 #
@@ -19,6 +19,9 @@ from collections import defaultdict
 
 ROOT = 'dge' if os.path.isdir('dge/data') else '.'
 DATA = os.path.join(ROOT, 'data')
+# The snapshot is an admin artefact, so it lands in admin/config/ while the
+# corpus it describes stays under dge/data/.
+OUT_DIR = 'admin/config' if os.path.isdir('admin/config') else DATA
 tax = json.load(open(os.path.join(DATA, 'taxonomy.json'), encoding='utf-8'))
 lib = json.load(open(os.path.join(DATA, 'library.json'), encoding='utf-8'))
 
@@ -133,6 +136,6 @@ out = {
     'sections': {k: dict(v) for k, v in sorted(sec.items())},
     'leaves': {p: n for p, n in sorted(leaves.items())},
 }
-json.dump(out, open(os.path.join(DATA, 'library_status.json'), 'w', encoding='utf-8'),
+json.dump(out, open(os.path.join(OUT_DIR, 'library-status.json'), 'w', encoding='utf-8'),
            ensure_ascii=False, indent=1)
-print('wrote', os.path.join(DATA, 'library_status.json'), '|', out['totals'])
+print('wrote', os.path.join(OUT_DIR, 'library-status.json'), '|', out['totals'])
