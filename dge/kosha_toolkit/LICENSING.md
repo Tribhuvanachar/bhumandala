@@ -8,6 +8,16 @@ full provenance + attribution into every entry** (`source_meta.attribution`,
 `source_meta.source_url`) and flags the licence in the UI, so nothing is passed
 off as cleared and attribution/ShareAlike obligations are met on the CC sources.
 
+## Sources at a glance
+
+| repo | dicts loaded | repo-level licence |
+|---|---|---|
+| `indic-dict/stardict-sanskrit` | 63 | none at top level; 28 folders carry `LICENSE.xml` (Cologne, CC-BY-SA 4.0) |
+| `indic-dict/stardict-sanskrit-kAvya` | 17 | `LICENSE.md`: CC-BY 4.0 **except** where a 3rd party or book title is named |
+| `indic-dict/stardict-sanskrit-vyAkaraNa` | 13 | no licence file at all |
+
+93 dictionaries in the built corpus: 2,094,525 headwords, 2,436,991 senses.
+
 ## Primary ecosystem: `indic-dict/stardict-sanskrit`
 GitHub, ~65 dictionaries, each stored as a `.babylon` **source** text file
 (headword + HTML body) — cleanly parseable, no binary decoding needed. The
@@ -50,6 +60,66 @@ compilations that may still be in copyright — treat with care.
   licence in the repo.** It is a published Kannada–Sanskrit lexicon; provenance
   is yours to confirm. Also here: `apte-hi`, `samskritam-tamizham`,
   `vedic-rituals-hi`.
+
+## `indic-dict/stardict-sanskrit-kAvya` — encyclopaedias, indices, concordances
+Repo-wide `LICENSE.md`: *"unless otherwise specified and unless a 3rd party or
+book title is explicitly mentioned in the dict name, license may be assumed to
+be CC-BY 4.0."* That carve-out does the real work here — most of this repo's
+value is named third-party books, so most of it is **not** covered by the grant.
+
+### Covered by the repo grant (CC-BY 4.0)
+`buddhist-mahavyutpatti`, `buddhist-pentaglot`, `chandas`, `dcs-frequency`
+(Digital Corpus of Sanskrit frequencies), `rv-padapatha`, `rv-padasvara`,
+`av-padasvara`, `kyv-ts-padasvara`.
+
+### Named books — outside the grant, flagged *Unclear*
+Each carries a `license_note` in its `meta.json` recording the edition and what
+is actually known about its copyright status:
+
+- **`purana-encyclopedia`** — Vettam Mani, *Purāṇic Encyclopaedia* (Motilal
+  Banarsidass, 1975). **Almost certainly still in copyright.** Loaded on the
+  project lead's explicit request and standing non-commercial/educational
+  clearance, stamped Unclear, presented as cleared nowhere. This one is the
+  live decision: if the answer is no, drop it from `dicts_config.json` in the
+  data repo and rebuild.
+- **`purana-index`** — V. R. Ramachandra Dikshitar, *The Purana Index*
+  (University of Madras, 1951–55). Copyright status unverified.
+- **`ncc`** — *New Catalogus Catalogorum* (University of Madras), an in-progress
+  modern publication. Copyright status unverified.
+- **`rkmath-encyclopedia-of-hinduism`** — *A Concise Encyclopaedia of Hinduism*
+  (Ramakrishna Math). Modern, very likely in copyright.
+- **`mahabharata-cultural-index`** — cultural index to the BORI critical
+  edition. Copyright status unverified.
+- Public domain by age, but still outside the repo grant because the name is a
+  book title: **`vedic-index-macdonell-keith`** (Macdonell & Keith 1912 — a
+  fuller digitisation than the Cologne `vedic-index-of-names-and-subjects`
+  already loaded), **`index-names-mahabharata`** (Sörensen 1904),
+  **`bloomfield-vedic-concordance`** (Bloomfield 1906),
+  **`mahabharata-kosha-krishnacharya`** (Nirnaya Sagara Press; the source runs
+  only to the letter *da*).
+
+**Not loaded from this repo:** `rAnADe-vedic-rituals` duplicates the
+`vedic-rituals-hi` already ingested from `stardict-sanskrit`.
+
+## `indic-dict/stardict-sanskrit-vyAkaraNa` — Aṣṭādhyāyī and dhātu literature
+**No licence file anywhere in the repo** → Unclear throughout, under the same
+clearance as the other Unclear sets. Loaded: `ashtadhyayi-anuvritti`,
+`ashtadhyayi-english`, `kashika`, `ganapatha`, `abhyankara-grammar`
+(K. V. Abhyankar, *A Dictionary of Sanskrit Grammar*, 1961 — copyright
+unverified), `bucknell-sanskrit-manual`, `akhyatachandrika`, `dhatupatha-sa`,
+`dhatupatha-krishnacharya`, `dhatupatha-sasvara`, `dhatupradipa`,
+`kshiratarangini`, `madhaviya-dhatu-vritti`.
+
+The Aṣṭādhyāyī sets key on the sūtra *number*; the importer's `head_pick`
+option promotes the sūtra *text* to the headword so the sūtras are reachable by
+word, with the number kept as a synonym.
+
+**Not loaded from this repo** — and this is a deliberate exclusion, not an
+oversight: the `vidyut/**` and `_deprecated/**` trees, plus `kRdanta-rUpa-mAlA`,
+`kRdanta-sa`, `puShpA-ArdhadhAtuka` and `jnu-tiNanta`. These are
+machine-generated subanta/tiṅanta/kṛdanta/taddhitānta paradigm tables — millions
+of derived word-forms that would dwarf the lexicon and bury real headwords in
+the lookup index. They belong behind a morphology service, not in a kosha.
 
 ## Cologne originals (upstream, if you ever want to bypass indic-dict)
 - `sanskrit-lexicon.uni-koeln.de` and **`github.com/sanskrit-lexicon`** —
