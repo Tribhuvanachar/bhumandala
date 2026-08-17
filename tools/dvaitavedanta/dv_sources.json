@@ -538,154 +538,154 @@
           "enabled": true
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "shrimanmadhvasiddhantasaroddhara",
+          "title": "श्रीमन्मध्वसिद्धान्तसारोद्धारः",
           "seed": "/category-details/18411/18411/sharav/sharam",
           "content_id": 18411,
           "ancestor_id": 18411,
           "acharya": "श्रीविजयीन्द्रतीर्थः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 1
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "sarvasiddhantasarasaravivecanam",
+          "title": "सर्वसिद्धान्तसारासारविवेचनम्",
           "seed": "/category-details/18749/18678/sharav/sarava/ramana",
           "content_id": 18749,
           "ancestor_id": 18678,
           "acharya": "श्रीविजयीन्द्रतीर्थः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 13
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "brahmasutranyayasamgraha",
+          "title": "ब्रह्मसूत्रन्यायसंग्रहः",
           "seed": "/category-details/18688/18680/sharav/braham/parath",
           "content_id": 18688,
           "ancestor_id": 18680,
           "acharya": "श्रीविजयीन्द्रतीर्थः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 4
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "shrimannyayasudhamandanam",
+          "title": "श्रीमन्न्यायसुधामण्डनम्",
           "seed": "/category-details/18668/18412/sharas/sharam/sharam/managa",
           "content_id": 18668,
           "ancestor_id": 18412,
           "acharya": "श्रीसत्यप्रमोदतीर्थः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 82
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "bhagavato_nirdoshatvalakshanam",
+          "title": "भगवतो निर्दोषत्वलक्षणम्",
           "seed": "/category-details/18582/18416/sharas/bhagav/managa",
           "content_id": 18582,
           "ancestor_id": 18416,
           "acharya": "श्रीसत्यप्रमोदतीर्थः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 17
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "shrivijayindravijayavaibhavam",
+          "title": "श्रीविजयीन्द्रविजयवैभवम्",
           "seed": "/category-details/18641/18620/sharas/sharav/managa",
           "content_id": 18641,
           "ancestor_id": 18620,
           "acharya": "श्रीसत्यप्रमोदतीर्थः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 21
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "padarthasangraha",
+          "title": "पदार्थसङ्ग्रहः",
           "seed": "/category-details/18485/18481/sharav/pathar/pathar",
           "content_id": 18485,
           "ancestor_id": 18481,
           "acharya": "श्रीवेदगर्भपद्मनाभसूरिः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 6
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "madhvasiddhantasara",
+          "title": "मध्वसिद्धान्तसारः",
           "seed": "/category-details/19565/18484/sharav/mathha/managa",
           "content_id": 19565,
           "ancestor_id": 18484,
           "acharya": "श्रीवेदगर्भपद्मनाभसूरिः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 9
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "bhedaparanyeva_khalu_brahmasutrani",
+          "title": "भेदपराण्येव खलु ब्रह्मसूत्राणि",
           "seed": "/category-details/18733/18710/sharas/bhatha/managa",
           "content_id": 18733,
           "ancestor_id": 18710,
           "acharya": "श्रीसत्यध्यानतीर्थः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 26
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "candrikamandanam",
+          "title": "चन्द्रिकामण्डनम्",
           "seed": "/category-details/18766/18711/sharas/cathar/managa",
           "content_id": 18766,
           "ancestor_id": 18711,
           "acharya": "श्रीसत्यध्यानतीर्थः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 13
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "purushasuktam",
+          "title": "पुरुषसूक्तम्",
           "seed": "/category-details/19141/19140/oms-ga/parash/mal",
           "content_id": 19141,
           "ancestor_id": 19140,
           "note": "ॐ-गायत्री-पुरुषसूक्तम्",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 3
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "madhvamukhalankara",
+          "title": "मध्वमुखालङ्कारः",
           "seed": "/category-details/19151/19150/sharav/mathha/managa",
           "content_id": 19151,
           "ancestor_id": 19150,
           "acharya": "श्रीवनमालिदासः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 8
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "karmavijaya",
+          "title": "कर्मविजयः",
           "seed": "/category-details/19180/19173/sharas/karama/managa",
           "content_id": 19180,
           "ancestor_id": 19173,
           "acharya": "श्रीसत्यात्मतीर्थः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 11
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "tantradipika",
+          "title": "तन्त्रदीपिका",
           "seed": "/category-details/19255/19250/sharar/tanata/managa",
           "content_id": 19255,
           "ancestor_id": 19250,
           "acharya": "श्रीराघवेन्द्रतीर्थः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 17
         },
         {
-          "slug": null,
-          "title": null,
+          "slug": "vagvajra",
+          "title": "वाग्वज्रः",
           "seed": "/category-details/19587/19586/sharap/vagava/managa",
           "content_id": 19587,
           "ancestor_id": 19586,
           "acharya": "श्रीपादराजगुरुसार्वभौमः",
-          "enabled": false,
-          "_note": "Disabled 18 Aug 2026: no slug or title yet, and the slug is the output folder name. Crawling it would emit a folder literally called None. The seed is recorded, so a links probe can read the work's name off its breadcrumb and fill these in properly."
+          "enabled": true,
+          "leaves_seen": 4
         }
       ],
       "_note": "Re-enabled 18 Aug 2026 except nyaya_sudha. The section was never a data problem: probe run 32059840351 shows Nyayamruta at ~155 links (11% navigation) and Tatparyachandrika at 528 (74%), all with their commentaries present in the first response. nyaya_sudha alone carries ~1,655 nav links per page and serves at ~105 s/leaf (run 31989748094: 200 of 1,655 leaves in 5h50m), so it stays disabled and needs its own schedule, one grantha per run."
