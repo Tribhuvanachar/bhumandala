@@ -38,7 +38,7 @@ on:
         type: string
         default: ""
       limit_per_grantha:
-        description: "Cap leaves per grantha (smoke test). Blank = no cap, 5 = quick check."
+        description: "Cap leaves per grantha. 0 = no cap (full corpus), 5 = quick smoke test."
         type: string
         default: "5"
       delay:
@@ -57,6 +57,10 @@ on:
         description: "Open a pull request with the results (requires dry_run = false)"
         type: boolean
         default: false
+      discover_only:
+        description: "Count leaves per grantha and stop (one fetch each; sizes the corpus without crawling it)"
+        type: boolean
+        default: false
       refresh_cache:
         description: "Ignore the HTTP cache and refetch everything"
         type: boolean
@@ -65,6 +69,18 @@ on:
         description: "Also upload raw HTML of a few pages, for selector review"
         type: boolean
         default: false
+      inspect_urls:
+        description: "STRUCTURAL PROBE. Space-separated page URLs to report the shape of. Set any inspect_* field and the run does nothing else — no crawl, no write, no PR."
+        type: string
+        default: ""
+      inspect_links:
+        description: "STRUCTURAL PROBE. Space-separated URLs to list every content child of (for re-pointing a seed that landed on an index node)"
+        type: string
+        default: ""
+      inspect_load_data:
+        description: "STRUCTURAL PROBE. Space-separated book_id:sutra_id pairs to call /load-data with"
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -75,7 +91,37 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # A read-only structural probe, carried by this workflow rather than its own
+  # file because workflow_dispatch only reaches workflows that exist on the
+  # DEFAULT branch — a new workflow file on a feature branch cannot be
+  # dispatched at all (404). Setting any inspect_* input turns the whole run
+  # into a probe: nothing is crawled, written, or opened as a PR.
+  inspect:
+    if: ${{ inputs.inspect_urls != '' || inputs.inspect_links != '' || inputs.inspect_load_data != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r tools/dvaitavedanta/requirements.txt
+      - name: Inspect
+        env:
+          URLS: ${{ inputs.inspect_urls }}
+          LINKS: ${{ inputs.inspect_links }}
+          LOAD_DATA: ${{ inputs.inspect_load_data }}
+        run: |
+          set -euo pipefail
+          ARGS=()
+          if [ -n "$URLS" ]; then ARGS+=(--url $URLS); fi
+          if [ -n "$LINKS" ]; then ARGS+=(--links $LINKS); fi
+          if [ -n "$LOAD_DATA" ]; then ARGS+=(--load-data $LOAD_DATA); fi
+          python tools/dvaitavedanta/dv_inspect.py "${ARGS[@]}"
+
   plan:
+    if: ${{ inputs.inspect_urls == '' && inputs.inspect_links == '' && inputs.inspect_load_data == '' }}
     runs-on: ubuntu-latest
     outputs:
       sections: ${{ steps.build.outputs.sections }}
@@ -134,6 +180,7 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run }}
           REFRESH: ${{ inputs.refresh_cache }}
           PROBE: ${{ inputs.probe }}
+          DISCOVER_ONLY: ${{ inputs.discover_only }}
         run: |
           set -euo pipefail
           ARGS=(
@@ -145,20 +192,33 @@ jobs:
             --timeout "$TIMEOUT"
             --fetch-date "$(date -u +%F)"
           )
-          [ -n "$GRANTHAS" ] && ARGS+=(--granthas "$GRANTHAS")
-          [ -n "$LIMIT" ]    && ARGS+=(--limit-per-grantha "$LIMIT")
-          [ "$DRY_RUN" = "true" ] && ARGS+=(--dry-run) || ARGS+=(--write)
-          [ "$REFRESH" = "true" ] && ARGS+=(--refresh-cache)
-          [ "$PROBE" = "true" ]   && ARGS+=(--probe-dir dv_probe --probe-count 5)
+          # if/fi, not `[ x ] && ...`. Under `set -e` a bare test-and-append
+          # aborts the step the moment the test is false, and GitHub
+          # substitutes an input's default for an empty string anyway — which
+          # is how run 32039180032 silently crawled 5 leaves per grantha while
+          # asking for the whole corpus. Pass limit 0 to mean "no cap".
+          if [ -n "$GRANTHAS" ]; then ARGS+=(--granthas "$GRANTHAS"); fi
+          if [ -n "$LIMIT" ]; then ARGS+=(--limit-per-grantha "$LIMIT"); fi
+          if [ "$DRY_RUN" = "true" ]; then ARGS+=(--dry-run); else ARGS+=(--write); fi
+          if [ "$REFRESH" = "true" ]; then ARGS+=(--refresh-cache); fi
+          if [ "$DISCOVER_ONLY" = "true" ]; then ARGS+=(--discover-only); fi
+          if [ "$PROBE" = "true" ]; then ARGS+=(--probe-dir dv_probe --probe-count 5); fi
+          echo "leaf cap: ${LIMIT:-0} (0 = no cap)"
           python tools/dvaitavedanta/import_dvaitavedanta.py "${ARGS[@]}"
 
       - name: Verify emitted data
         if: ${{ !fromJSON(inputs.dry_run) }}
-        run: python tools/dvaitavedanta/verify_extract.py --data dge/data/dvaitavedanta
+        run: |
+          # A section with every grantha disabled writes nothing and exits 0.
+          # That is a legitimate no-op, not a failure — do not treat the
+          # missing directory as one (run 32036326082 failed exactly here).
+          [ -d dge/data/dvaitavedanta ] || { echo "no output for ${{ matrix.section }} (all granthas disabled)"; exit 0; }
+          python tools/dvaitavedanta/verify_extract.py --data dge/data/dvaitavedanta
 
       - name: Stage shard output
         if: ${{ !fromJSON(inputs.dry_run) }}
         run: |
+          [ -d dge/data/dvaitavedanta ] || { echo "nothing to stage"; exit 0; }
           mkdir -p shard
           cp -r dge/data/dvaitavedanta shard/dvaitavedanta
           mv shard/dvaitavedanta/_extract_status.json \
@@ -171,6 +231,7 @@ jobs:
           name: dv-${{ matrix.section }}
           path: shard
           retention-days: 14
+          if-no-files-found: ignore   # a disabled section stages nothing
 
       - name: Upload raw HTML probes
         if: ${{ fromJSON(inputs.probe) }}
@@ -183,7 +244,13 @@ jobs:
 
   collect:
     needs: extract
-    if: ${{ !fromJSON(inputs.dry_run) }}
+    # `always()` on purpose. With `needs: extract` alone, ONE slow section
+    # blocks the whole delivery: run 31989748094 had seven sections finished
+    # and uploaded, but later_acharyas hit the 350-min cap (nyaya_sudha serves
+    # at ~105 s/leaf, 200 of 1,655 leaves in 5h50m), so collect was skipped and
+    # no PR opened at all. Merge whatever shards exist and name the missing
+    # ones, rather than discarding good work because one shard is slow.
+    if: ${{ always() && !fromJSON(inputs.dry_run) && inputs.inspect_urls == '' && inputs.inspect_links == '' && inputs.inspect_load_data == '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -191,6 +258,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      # merge_status.py imports import_dvaitavedanta (for recompute_totals),
+      # which imports requests at module level. collect had never actually run
+      # before — it was skipped on every dry run and on every run where a shard
+      # was cancelled — so this was latent until collect became always().
+      - name: Install dependencies
+        run: pip install -r tools/dvaitavedanta/requirements.txt
 
       - name: Download shards
         uses: actions/download-artifact@v4
@@ -210,6 +284,22 @@ jobs:
           python tools/dvaitavedanta/merge_status.py \
             --inputs "shards/dv-*/status-*.json" \
             --out dge/data/dvaitavedanta/_extract_status.json
+
+      - name: Name the sections that did NOT arrive
+        run: |
+          # A shard is absent when its job was cancelled at the time cap, so it
+          # never reached "Upload shard". Say so loudly: a partial merge must
+          # never read as a complete corpus.
+          for s in dasha_prakarana_granthas sutra_prasthana gita_prasthana \
+                   sruti_prasthana itihasa_prasthana purana_prasthana \
+                   upanishad_prasthana later_acharyas; do
+            if [ -d "shards/dv-$s" ]; then
+              echo "present: $s"
+            else
+              echo "MISSING: $s  (no shard uploaded — section incomplete)" \
+                | tee -a "$GITHUB_STEP_SUMMARY"
+            fi
+          done
 
       - name: Register in taxonomy + library catalog
         run: |

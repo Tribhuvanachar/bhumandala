@@ -50,6 +50,53 @@ LEAF_B = page("""
 
 CONTAINER = page("<p>No record found!!</p>")
 
+# A container whose OWN sidebar exposes a deeper id the seed page never listed.
+# This is the real Upanishad/Sutra shape: the grantha's sidebar lists
+# adhyaya/adhikarana index nodes, and the text sits one level below them.
+DEEP_SIDEBAR = """
+<div class="sidebar-menu">
+  <ul>
+    <li><a href="/category-details/13528/937/thasha/1-para/managa/garana">मङ्गलाचरणम्</a></li>
+    <li><a href="/category-details/13777/937/thasha/1-para/deep/deep">गूढार्थः</a></li>
+  </ul>
+</div>
+"""
+CONTAINER_WITH_CHILDREN = f"""<html><body><nav class="navbar"><a href="/">Home</a></nav>
+{BREADCRUMB}
+<div class="row">{DEEP_SIDEBAR}<div class="col-md-9 content"><p>No record found!!</p></div></div>
+<footer>Copyright © 2026 Dvaita Vedanta Studies &amp; Research Foundation.</footer>
+</body></html>"""
+
+LEAF_DEEP = page("""
+  <div id="article13777">
+    <h2 class="shloka">गूढार्थबोधिनी मूलपाठः ।</h2>
+    <div id="dynamicContent" class="details">
+      <h3>प्रमाणलक्षणटीका</h3>
+      <p>गूढार्थोऽत्र विवृतो भवति ।</p>
+    </div>
+  </div>
+""")
+
+
+# The real DOM, twice over: one page, two #article blocks, each a verse plus
+# its commentary. This is the shape the probe confirmed on the live site.
+MULTI_SUTRA = page("""
+  <div id="article13800">
+    <h2 class="shloka">प्रथमसूत्रम् इदम् उच्यते ।</h2>
+    <div id="dynamicContent" class="details">
+      <h3>प्रमाणलक्षणटीका</h3>
+      <p>प्रथमसूत्रस्य व्याख्या इयम् ।</p>
+    </div>
+  </div>
+  <div id="article13801">
+    <h2 class="shloka">द्वितीयसूत्रम् अपि निरूप्यते ।</h2>
+    <div id="dynamicContent" class="details">
+      <h3>प्रमाणलक्षणटीका</h3>
+      <p>द्वितीयसूत्रस्य व्याख्या इयम् ।</p>
+    </div>
+  </div>
+""")
+
 
 def prime(cache_dir, url, html):
     os.makedirs(cache_dir, exist_ok=True)
@@ -72,8 +119,8 @@ def main():
 
     try:
         prime(cache, BASE + "/category-details/13528/937/thasha/1-para/managa/garana", LEAF_A)
-        prime(cache, BASE + "/category-details/13529/937/x", LEAF_B)
-        prime(cache, BASE + "/category-details/13533/937/x", CONTAINER)
+        prime(cache, BASE + "/category-details/13529/937/thasha/1-para/managa/naraya", LEAF_B)
+        prime(cache, BASE + "/category-details/13533/937/thasha/1-para/lkashh/lkashh", CONTAINER)
 
         rc = I.main([
             "--config", os.path.join(HERE, "dv_sources.json"),
@@ -166,6 +213,108 @@ def main():
             "--delay", "0", "--dry-run", "--summary-file", "",
         ])
         failures += not check("dry run wrote nothing", not os.path.exists(out2))
+
+        # The site names each commentary after its own grantha, so canonical
+        # layers have to be matched on suffix. A substring rule would file
+        # Keshavacharya's Vivarana under Jayatirtha's tika — two different
+        # authors' works silently merged into one folder.
+        print("layer name resolution")
+        cfg = json.load(open(os.path.join(HERE, "dv_sources.json"),
+                             encoding="utf-8"))["layers"]
+        resolve = I.resolve_layer_config
+        cases = [
+            ("प्रमाणलक्षणटीका", "tika_jayatirtha"),
+            ("प्रमाणलक्षणटीकाभावदीपः", "tika_bhavadipa"),
+            ("श्री कथालक्षणटीकाभावदीपः", "tika_bhavadipa"),
+            ("प्रमाणलक्षणटीकाविवरणम्", "tika_vivarana"),
+            ("कथालक्षणटीकाविवरणं", "tika_vivarana"),
+            ("प्रमाणलक्षणटीकावाक्यार्थकौमुदी", "tika_vakyarthakaumudi"),
+            ("मूलम्", "mula"),
+        ]
+        for title, expected in cases:
+            got = resolve(title, cfg)
+            failures += not check(f"{title} -> {expected}",
+                                  got is not None and got["folder"] == expected,
+                                  got["folder"] if got else None)
+        failures += not check("an unknown commentary stays unmapped, not guessed",
+                              resolve("कस्यचिदपूर्वव्याख्या", cfg) is None)
+
+        # Discovery must descend THROUGH containers. Run 31958553804 shipped
+        # upanishad_prasthana as "10/10 complete, 0 errors" while extracting 10
+        # items from 730 leaves, because the sidebar listed index nodes and the
+        # crawler treated every one as a dead end.
+        print("container descent")
+        deep_tmp = tempfile.mkdtemp(prefix="dvdeep_")
+        try:
+            deep_cache = os.path.join(deep_tmp, "cache")
+            deep_out = os.path.join(deep_tmp, "out")
+            # Seed lists 13529/13533 only. 13777 is reachable ONLY through
+            # 13533's own sidebar, so this fails unless containers are opened.
+            prime(deep_cache, BASE + "/category-details/13528/937/thasha/1-para/managa/garana",
+                  CONTAINER)
+            prime(deep_cache, BASE + "/category-details/13529/937/thasha/1-para/managa/naraya", CONTAINER)
+            prime(deep_cache, BASE + "/category-details/13533/937/thasha/1-para/lkashh/lkashh", CONTAINER_WITH_CHILDREN)
+            prime(deep_cache, BASE + "/category-details/13777/937/thasha/1-para/deep/deep", LEAF_DEEP)
+            rc2 = I.main([
+                "--config", os.path.join(HERE, "dv_sources.json"),
+                "--out", deep_out, "--cache", deep_cache,
+                "--granthas", "pramana_lakshana",
+                "--delay", "0", "--write", "--fetch-date", "2026-08-15",
+                "--summary-file", "",
+            ])
+            failures += not check("exit code 0", rc2 == 0, rc2)
+            deep_dir = os.path.join(deep_out, "dasha_prakarana_granthas",
+                                    "pramana_lakshana", "tika_jayatirtha", "data.json")
+            found = os.path.exists(deep_dir)
+            failures += not check("text one level below a container is reached", found)
+            if found:
+                with open(deep_dir, encoding="utf-8") as handle:
+                    deep = json.load(handle)
+                failures += not check("deep leaf emitted its commentary",
+                                      len(deep["items"]) == 1
+                                      and "गूढार्थ" in deep["items"][0]["sanskrit_text"],
+                                      deep["items"][:1])
+        finally:
+            shutil.rmtree(deep_tmp, ignore_errors=True)
+
+        # One URL, several sutras. An adhikarana covering more than one sutra
+        # serves them all from a single page, so keying items on the page's
+        # content id gave every verse the same id — 11 duplicate-id errors in
+        # run 32036326082, caught only by --strict after the crawl finished.
+        print("multi-sutra leaf: ids come from the article, not the page")
+        multi_tmp = tempfile.mkdtemp(prefix="dvmulti_")
+        try:
+            multi_cache = os.path.join(multi_tmp, "cache")
+            multi_out = os.path.join(multi_tmp, "out")
+            prime(multi_cache, BASE + "/category-details/13528/937/thasha/1-para/managa/garana",
+                  MULTI_SUTRA)
+            for url in ("/category-details/13529/937/thasha/1-para/managa/naraya",
+                        "/category-details/13533/937/thasha/1-para/lkashh/lkashh"):
+                prime(multi_cache, BASE + url, CONTAINER)
+            rc3 = I.main([
+                "--config", os.path.join(HERE, "dv_sources.json"),
+                "--out", multi_out, "--cache", multi_cache,
+                "--granthas", "pramana_lakshana",
+                "--delay", "0", "--write", "--fetch-date", "2026-08-15",
+                "--summary-file", "",
+            ])
+            failures += not check("exit code 0", rc3 == 0, rc3)
+            base = os.path.join(multi_out, "dasha_prakarana_granthas", "pramana_lakshana")
+            with open(os.path.join(base, "mula", "data.json"), encoding="utf-8") as handle:
+                m = json.load(handle)
+            with open(os.path.join(base, "tika_jayatirtha", "data.json"), encoding="utf-8") as handle:
+                t = json.load(handle)
+            m_ids = [i["id"] for i in m["items"]]
+            t_ids = [i["id"] for i in t["items"]]
+            failures += not check("both sutras emitted", len(m_ids) == 2, m_ids)
+            failures += not check("ids are unique inside the layer",
+                                  len(m_ids) == len(set(m_ids)), m_ids)
+            failures += not check("ids follow the article, not the page",
+                                  set(m_ids) == {"DV_13800", "DV_13801"}, m_ids)
+            failures += not check("cross-layer link survives", set(t_ids) == set(m_ids),
+                                  (t_ids, m_ids))
+        finally:
+            shutil.rmtree(multi_tmp, ignore_errors=True)
 
         print()
         if failures:

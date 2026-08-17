@@ -44,9 +44,11 @@ import requests
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from dv_parse import (  # noqa: E402
+    BASE,
     canonical_url,
     devanagari_count,
     devanagari_ratio,
+    layer_key,
     parse_page,
 )
 
@@ -231,10 +233,19 @@ class Fetcher:
 # extraction
 # --------------------------------------------------------------------------- #
 
+def absolute_url(href):
+    """Sidebar hrefs arrive both absolute and root-relative."""
+    if not href:
+        return ""
+    if href.startswith("http://") or href.startswith("https://"):
+        return href
+    return BASE + ("" if href.startswith("/") else "/") + href
+
+
 def discover_leaves(fetcher, grantha, log):
     """Fetch the seed page and harvest every content id in its sidebar.
 
-    Returns (ordered_ids, seed_record, ancestor_id).
+    Returns (ordered_ids, seed_record, ancestor_id, url_by_id).
     """
     seed_url = grantha["seed_url"]
     html = fetcher.get(seed_url)
@@ -247,18 +258,59 @@ def discover_leaves(fetcher, grantha, log):
 
     ids = OrderedDict()
     ids[record["content_id"]] = True
+    urls = {record["content_id"]: seed_url}
     for link in record["sidebar"]:
         if link["in_breadcrumb"]:
             continue
         ids[link["content_id"]] = True
-    return list(ids.keys()), record, ancestor
+        # Keep the site's OWN href. canonical_url has to invent the trailing
+        # slug (".../13528/937/x"), where the real link carries
+        # ".../13528/937/thasha/1-para/managa/garana". Recon assumed only the
+        # contentId is load-bearing; that is an assumption we do not need to
+        # make when the exact URL is right here in the sidebar.
+        urls.setdefault(link["content_id"], absolute_url(link["href"]))
+    return list(ids.keys()), record, ancestor, urls
+
+
+def resolve_layer_config(title, layer_config):
+    """Map an observed heading onto a canonical layer.
+
+    The site names each commentary after its own grantha, so Bhavadipa appears
+    as "प्रमाणलक्षणटीकाभावदीपः" on one work and "कथालक्षणटीकाभावदीपः" on
+    another. Match on SUFFIX, longest first, and never on a substring: the
+    canonical "टीका" occurs mid-string in "प्रमाणलक्षणटीकाविवरणम्", and a
+    substring rule would file Keshavacharya's Vivarana into Jayatirtha's tika
+    folder — merging two different authors' works under one name.
+
+    Anything with no suffix match stays unmapped and is reported, which is the
+    safe outcome: a distinct commentary gets its own auto-slugged folder.
+    """
+    exact = layer_config.get(title)
+    if exact is not None:
+        return exact
+    normalised = layer_key(title)
+    if normalised in layer_config:
+        return layer_config[normalised]
+    best, best_len = None, 0
+    for canonical, config in layer_config.items():
+        if normalised.endswith(canonical) and len(canonical) > best_len:
+            best, best_len = config, len(canonical)
+    return best
 
 
 def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
     """Group parsed pages into per-layer item lists.
 
-    The item id is DV_<contentId> in *every* layer, which satisfies the
-    grantha_tika_text convention that a tika item's id matches its mula item's.
+    The item id is DV_<articleId> in *every* layer, which satisfies the
+    grantha_tika_text convention that a tika item's id matches its mula item's:
+    a verse and its commentaries live inside the same #article<N> block.
+
+    Keying on the page's content id instead (the original rule) collided
+    wherever one leaf stacks several articles — an adhikarana covering more
+    than one sutra serves them all from a single URL, so every verse on that
+    page claimed the same id. That is what --strict caught in run 32036326082
+    with 11 duplicate-id errors. Pages with no article anchor at all still fall
+    back to the content id, where it is unique by construction.
     """
     layers: "OrderedDict[str, dict]" = OrderedDict()
 
@@ -273,7 +325,7 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
 
         for position, layer in enumerate(record["layers"]):
             title = layer["title"] or ("मूलम्" if position == 0 else f"layer_{position + 1}")
-            config = layer_config.get(title)
+            config = resolve_layer_config(title, layer_config)
             if config is None:
                 folder = slugify_devanagari(title) or f"layer_{position + 1}"
                 if position == 0 and folder not in ("mula",):
@@ -283,7 +335,13 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
                     schema = defaults["tika_schema"]
                     if not folder.startswith("tika_"):
                         folder = f"tika_{folder}"
-                config = {"folder": folder, "schema": schema, "author": None}
+                # An unmapped commentary still carries its own "composed by"
+                # line on the page, so it is attributed rather than anonymous.
+                config = {
+                    "folder": folder,
+                    "schema": schema,
+                    "author": layer.get("author") or None,
+                }
                 warnings["unmapped_layers"][title] += 1
 
             text = layer["text"]
@@ -297,14 +355,17 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
 
             bucket = layers.setdefault(config["folder"], {
                 "schema": config["schema"],
-                "default_author": config.get("author") or "",
+                # Canonical author wins where the tradition fixes it (Jayatirtha's
+                # tika); otherwise fall back to the "composed by" line on the page,
+                # so a commentary whose author varies by grantha is still credited.
+                "default_author": config.get("author") or layer.get("author") or "",
                 "layer_titles": Counter(),
                 "items": [],
             })
             bucket["layer_titles"][title] += 1
 
             item = {
-                "id": f"DV_{record['content_id']}",
+                "id": f"DV_{layer.get('article_id') or record['content_id']}",
                 "reference": reference,
                 "section": section,
                 "unit_title": unit_title,
@@ -329,6 +390,21 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
             elif bucket["schema"] == "grantha_tippani_text":
                 item["tippani_title"] = title
                 item["author"] = config.get("author") or ""
+            # Belt and braces. The article id fixes the known collision, but an
+            # id must be unique inside a data.json whatever the page does, so a
+            # residual clash is disambiguated here and reported rather than
+            # left for --strict to reject after a six-hour crawl.
+            seen = bucket.setdefault("seen_ids", {})
+            if item["id"] in seen:
+                if seen[item["id"]]["sanskrit_text"] == item["sanskrit_text"]:
+                    continue          # same verse served twice; keep one
+                warnings["id_collisions"].append(
+                    {"url": record["url"], "id": item["id"], "layer": title})
+                suffix = 2
+                while f"{item['id']}-{suffix}" in seen:
+                    suffix += 1
+                item["id"] = f"{item['id']}-{suffix}"
+            seen[item["id"]] = item
             layers[config["folder"]]["items"].append(item)
 
     return layers
@@ -490,6 +566,10 @@ def main(argv=None):
     parser.add_argument("--granthas", default="", help="comma-separated grantha slugs; blank = all")
     parser.add_argument("--limit-per-grantha", type=int, default=0,
                         help="cap leaves per grantha (smoke test); 0 = no cap")
+    parser.add_argument("--discover-only", action="store_true",
+                        help="count each grantha's leaves and stop. One fetch per "
+                             "grantha (the sidebar lists them all), so this sizes "
+                             "the corpus without crawling it.")
     parser.add_argument("--delay", type=float, default=None)
     parser.add_argument("--timeout", type=int, default=None)
     parser.add_argument("--retries", type=int, default=None)
@@ -517,8 +597,26 @@ def main(argv=None):
         [g for g in args.granthas.split(",") if g.strip()],
     )
     if not selected:
-        print("No granthas selected.", file=sys.stderr)
-        return 2
+        # An explicit filter that matches nothing is a mistake worth failing on
+        # (a typo in --granthas would otherwise look like a clean run). A scope
+        # that is simply switched off in dv_sources.json is NOT an error: the
+        # matrix still spawns a job per section, and failing it would fail the
+        # whole run. later_acharyas is deliberately disabled while its ~105 s
+        # per leaf is dealt with separately.
+        known_sections = {s["slug"] for s in config["sections"]}
+        known_granthas = {g.get("slug") for s in config["sections"]
+                          for g in s["granthas"] if g.get("slug")}
+        asked_sections = [s.strip() for s in args.sections.split(",") if s.strip()]
+        asked_granthas = [g.strip() for g in args.granthas.split(",") if g.strip()]
+        unknown = ([s for s in asked_sections if s not in known_sections]
+                   + [g for g in asked_granthas if g not in known_granthas])
+        if unknown:
+            print(f"No granthas selected; unknown name(s): {', '.join(unknown)}",
+                  file=sys.stderr)
+            return 2
+        print("No granthas selected — everything requested is disabled in "
+              "dv_sources.json. Nothing to do.")
+        return 0
 
     fetcher = Fetcher(
         cache_dir=args.cache,
@@ -550,7 +648,7 @@ def main(argv=None):
         label = grantha["slug"] or f"id_{grantha['content_id']}"
         log(f"→ {grantha['section_slug']}/{label}")
 
-        ids, seed_record, ancestor = discover_leaves(fetcher, grantha, log)
+        ids, seed_record, ancestor, url_by_id = discover_leaves(fetcher, grantha, log)
         if seed_record is None:
             key = f"{grantha['section_slug']}/{label}"
             status["granthas"][key] = {
@@ -573,39 +671,82 @@ def main(argv=None):
         if not grantha.get("slug"):
             log(f"    resolved slug: {slug}   (title: {discovered_title})")
 
+        # Report the true sidebar total before capping. Logging the capped
+        # figure makes a smoke run look like a complete one and hides the
+        # denominator needed to size the corpus.
+        discovered_total = len(ids)
         if args.limit_per_grantha:
             ids = ids[: args.limit_per_grantha]
-        log(f"    {len(ids)} leaf id(s) discovered")
+        if len(ids) != discovered_total:
+            log(f"    {discovered_total} leaf id(s) discovered · capped to {len(ids)}")
+        else:
+            log(f"    {discovered_total} leaf id(s) discovered")
 
+        if args.discover_only:
+            status["granthas"][key] = {
+                "title": title, "seed_url": grantha["seed_url"],
+                "status": "discovered", "discovered": discovered_total,
+                "fetched": 0, "with_text": 0, "containers": 0, "failed": 0,
+                "items": 0, "bytes": 0, "layers": {},
+                "last_run": status["last_run"],
+            }
+            continue
+
+        # The frontier grows as containers are opened. A grantha's sidebar does
+        # not always list text leaves: Upanishad and Sutra granthas list
+        # adhyaya/adhikarana INDEX nodes, which answer 200 with "No record
+        # found!!". Treating those as dead ends silently lost most of the
+        # corpus -- Chandogya reported "1 with text, 149 containers" and still
+        # passed verify as complete. So when a page turns out to be a
+        # container, fold its own sidebar back into the queue and keep going.
+        seen_ids = set(ids)
+        queue = list(ids)
         records, containers, failed = [], 0, 0
-        for index, content_id in enumerate(ids, start=1):
+        index = 0
+        while index < len(queue):
+            content_id = queue[index]
+            index += 1
+            if args.limit_per_grantha and index > args.limit_per_grantha:
+                break
             if content_id == seed_record["content_id"]:
                 # Already fetched during discovery — don't pay for it twice.
-                if not seed_record["is_container"]:
-                    records.append(seed_record)
-                else:
-                    containers += 1
-                continue
-            url = canonical_url(content_id, ancestor)
-            html = fetcher.get(url)
-            if html is None:
-                failed += 1
-                continue
-            if args.probe_dir and probes_saved < args.probe_count:
-                os.makedirs(args.probe_dir, exist_ok=True)
-                with open(os.path.join(args.probe_dir, f"{slug}_{content_id}.html"),
-                          "w", encoding="utf-8") as handle:
-                    handle.write(html)
-                probes_saved += 1
-            record = parse_page(html, url)
+                record = seed_record
+            else:
+                url = url_by_id.get(content_id) or canonical_url(content_id, ancestor)
+                html = fetcher.get(url)
+                if html is None:
+                    failed += 1
+                    continue
+                if args.probe_dir and probes_saved < args.probe_count:
+                    os.makedirs(args.probe_dir, exist_ok=True)
+                    with open(os.path.join(args.probe_dir, f"{slug}_{content_id}.html"),
+                              "w", encoding="utf-8") as handle:
+                        handle.write(html)
+                    probes_saved += 1
+                record = parse_page(html, url)
+
             if record["is_container"]:
                 containers += 1
+                added = 0
+                for link in record["sidebar"]:
+                    child = link["content_id"]
+                    if child in seen_ids or link["in_breadcrumb"]:
+                        continue
+                    seen_ids.add(child)
+                    queue.append(child)
+                    url_by_id.setdefault(child, absolute_url(link["href"]))
+                    added += 1
+                if added:
+                    log(f"    + {added} id(s) from container {content_id}"
+                        f" (queue now {len(queue)})")
                 continue
             records.append(record)
             if index % 25 == 0:
-                log(f"    …{index}/{len(ids)}")
+                log(f"    …{index}/{len(queue)}")
+        discovered_total = len(seen_ids)
 
-        warnings = {"unmapped_layers": Counter(), "low_devanagari": []}
+        warnings = {"unmapped_layers": Counter(), "low_devanagari": [],
+                    "id_collisions": []}
         layers = build_items(records, grantha, layer_config, defaults,
                              args.fetch_date, warnings)
         global_unmapped.update(warnings["unmapped_layers"])
@@ -649,6 +790,7 @@ def main(argv=None):
             "bytes": total_bytes,
             "layers": layer_counts,
             "low_devanagari_warnings": len(warnings["low_devanagari"]),
+            "id_collisions": len(warnings["id_collisions"]),
             "first_run": previous.get("first_run") or status["last_run"],
             "last_run": status["last_run"],
             "duration_s": round(time.time() - started, 1),
@@ -661,6 +803,9 @@ def main(argv=None):
         if warnings["low_devanagari"]:
             log(f"    ! {len(warnings['low_devanagari'])} item(s) below "
                 f"{MIN_DEVANAGARI_RATIO:.0%} Devanagari — check selectors")
+        if warnings["id_collisions"]:
+            log(f"    ! {len(warnings['id_collisions'])} item id(s) disambiguated "
+                f"with a -N suffix; first: {warnings['id_collisions'][0]['url']}")
         log("")
 
     run_failures.extend(fetcher.failed)
