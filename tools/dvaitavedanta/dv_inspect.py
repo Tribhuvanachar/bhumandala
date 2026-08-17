@@ -151,7 +151,20 @@ def report_links(url):
         seen.add(parsed[0])
         rows.append((parsed[0], parsed[1], clean_text(anchor.get_text(" "))[:40],
                      anchor["href"]))
-    print(f"HTTP {response.status_code} · {len(rows)} distinct content links")
+    # Raw anchors vs what the importer's own discovery sees. rig_bhashya
+    # discovered 1 leaf on a page whose sidebar lists 20 suktas, so the two
+    # numbers disagreeing is the bug, and printing both localises it.
+    from dv_parse import parse_page                      # noqa: PLC0415
+    record = parse_page(response.text, url)
+    sidebar = record.get("sidebar") or []
+    print(f"HTTP {response.status_code} · {len(rows)} raw content links · "
+          f"parse_page sidebar: {len(sidebar)} "
+          f"({sum(1 for s in sidebar if s['in_breadcrumb'])} in breadcrumb, "
+          f"so {sum(1 for s in sidebar if not s['in_breadcrumb'])} usable) · "
+          f"layers here: {len(record.get('layers') or [])}")
+    # The breadcrumb names the work — which is how the fifteen later_acharyas
+    # seeds that carry no title in the config get one.
+    print(f"    breadcrumb: {' > '.join(record.get('breadcrumb') or []) or '(none)'}")
     for content_id, ancestor, label, href in rows[:60]:
         print(f"    {content_id:>7} anc={str(ancestor):>6}  {label:42} {short(href, 70)}")
     if len(rows) > 60:
