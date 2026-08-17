@@ -27,16 +27,17 @@ readable, searchable, cross-referenced, and permanently available in a
 form scholars and devotees can actually use.
 
 - **Repository:** `github.com/Tribhuvanachar/bhumandala`
-- **Live site:** `tribhuvanachar.github.io/bhumandala`. A `www.sarvamula.org`
-  custom domain was configured via a `CNAME` file, which was **removed
-  from `main` on 17 Aug 2026** — so GitHub Pages currently serves the
-  `github.io` address only. Anything that hardcodes the custom domain
-  (notably the `og:image` link-preview URL in the root `index.html`)
-  depends on that domain still resolving.
+- **Live site:** `tribhuvanachar.github.io/bhumandala` today. The custom
+  domain `www.sarvamula.org` is expected to go live **29 Aug 2026 (or 18
+  Sep if that slips)**. The canonical origin lives in `site.config.json`
+  and is applied by `tools/set_site_url.py`; see `PENDING.md` for the
+  switchover checklist. Only link-preview metadata needs a fully
+  qualified URL — everything else follows whatever domain served the
+  page.
 - **Reader app:** at `/dge/` — the site root is a Guru Vandana entry page
 - **Sister repository:** `Tribhuvanachar/bhumandala-kosha-data` — the
   dictionary corpus, too large for the main repo, served via jsDelivr CDN
-- **Current app version:** 4.62.0
+- **Current app version:** 4.63.0
 
 ## 2. Scale, as of this writing
 
@@ -117,7 +118,7 @@ no Account button, no network calls, until explicitly enabled.
   enforced by Firestore security rules, not by client-side checks.
 - **Opt-in WhatsApp broadcasts** — scheduled via Cloud Scheduler, with
   STOP replies honoured through a signature-verified webhook.
-- **192 tests** covering the OTP state machine, the security rules
+- **204 tests** covering the OTP state machine, the security rules
   (against the real Firestore emulator), the WhatsApp client, and the
   browser flow — none requiring credentials or costing money.
 

@@ -23,10 +23,28 @@ describe('inertness when the feature is off', () => {
     assert.equal(env.document.getElementById('accountBtn').style.display, undefined, 'must not reveal the Account button');
   });
 
+  test('fetches not one byte of SDK when the feature is off', async () => {
+    // The reason the SDK is loaded lazily at all: it is several hundred
+    // KB, and for every deployment that has not enabled accounts it
+    // would be downloaded on every page view and never run.
+    const env = loadAuth({ authConfig: { enabled: false } });
+    await env.fireReady();
+    assert.deepEqual(env.scripts, [], 'no script should be injected while disabled');
+  });
+
   test('does nothing when the Firebase SDK failed to load', async () => {
     const env = loadAuth({ authConfig: { enabled: true }, withFirebase: false });
     await env.fireReady();
     assert.equal(env.document.getElementById('accountBtn').style.display, undefined);
+  });
+
+  test('leaves the page alone when the SDK network request fails', async () => {
+    // Offline, or gstatic blocked. The reader must carry on working;
+    // accounts are the only thing that should be missing.
+    const env = loadAuth({ authConfig: { enabled: true }, scriptLoadFails: true });
+    await env.fireReady();
+    assert.equal(env.document.getElementById('accountBtn').style.display, undefined);
+    assert.equal(env.fb.hasAuthListener(), false);
   });
 
   test('reports rather than throws when sign-in is attempted while disabled', async () => {
@@ -34,6 +52,99 @@ describe('inertness when the feature is off', () => {
     await env.window.dgeSignInWithGoogle();
     assert.match(env.toasts[0], /not set up/i);
     assert.equal(env.fb.calls.signInWithPopup.length, 0);
+  });
+});
+
+describe('lazy SDK loading', () => {
+  const names = (env) => env.scripts.map(s => s.split('/').pop());
+
+  test('loads app, auth and firestore when enabled', async () => {
+    const env = loadAuth({ authConfig: { enabled: true } });
+    await env.fireReady();
+    assert.deepEqual(names(env), [
+      'firebase-app-compat.js',
+      'firebase-auth-compat.js',
+      'firebase-firestore-compat.js'
+    ]);
+  });
+
+  test('loads firebase-app FIRST — the rest attach themselves to it', async () => {
+    const env = loadAuth({ authConfig: { enabled: true } });
+    await env.fireReady();
+    assert.equal(names(env)[0], 'firebase-app-compat.js');
+  });
+
+  test('does NOT load the functions SDK unless a transport needs it', async () => {
+    // Only the whatsapp/msg91 OTP transports call Cloud Functions.
+    const off = loadAuth({ authConfig: { enabled: true, enablePhoneAuth: false } });
+    await off.fireReady();
+    assert.equal(names(off).includes('firebase-functions-compat.js'), false);
+
+    const sms = loadAuth({ authConfig: { enabled: true, enablePhoneAuth: true, phoneOtpProvider: 'firebase' } });
+    await sms.fireReady();
+    assert.equal(names(sms).includes('firebase-functions-compat.js'), false,
+      'Firebase SMS runs client-side and needs no callable functions');
+  });
+
+  test('loads the functions SDK for the WhatsApp and MSG91 transports', async () => {
+    for (const provider of ['whatsapp', 'msg91']) {
+      const env = loadAuth({ authConfig: { enabled: true, enablePhoneAuth: true, phoneOtpProvider: provider } });
+      await env.fireReady();
+      assert.ok(names(env).includes('firebase-functions-compat.js'), `${provider} needs callable functions`);
+    }
+  });
+
+  test('fetches from the pinned gstatic version', async () => {
+    const env = loadAuth({ authConfig: { enabled: true } });
+    await env.fireReady();
+    for (const src of env.scripts) {
+      assert.match(src, /^https:\/\/www\.gstatic\.com\/firebasejs\/\d+\.\d+\.\d+\//);
+    }
+  });
+
+  test('honours an overridden SDK base', async () => {
+    const env = loadAuth({ authConfig: { enabled: true, sdkBase: 'https://example.test/sdk/' } });
+    await env.fireReady();
+    assert.ok(env.scripts.every(s => s.startsWith('https://example.test/sdk/')));
+  });
+
+  test('loads the SDK once, however many callers ask for it', async () => {
+    // Concurrent callers must share one load rather than racing to
+    // inject duplicate script tags.
+    const env = loadAuth({ authConfig: { enabled: true } });
+    await env.fireReady();
+    const afterStartup = env.scripts.length;
+    await Promise.all([
+      env.window.dgeEnsureFirebaseSdk(),
+      env.window.dgeEnsureFirebaseSdk(),
+      env.window.dgeEnsureFirebaseSdk()
+    ]);
+    assert.equal(env.scripts.length, afterStartup, 'no duplicate script injections');
+  });
+
+  test('a click before the SDK arrives waits instead of failing', async () => {
+    // The button is only revealed after startup finishes, but a click
+    // that lands mid-load must still work.
+    const env = loadAuth({ authConfig: { enabled: true } });
+    await env.window.dgeSignInWithGoogle();
+    assert.equal(env.fb.calls.signInWithPopup.length, 1);
+  });
+
+  test('reports a load failure to the user rather than failing silently', async () => {
+    const env = loadAuth({ authConfig: { enabled: true }, scriptLoadFails: true });
+    await env.window.dgeSignInWithGoogle();
+    assert.match(env.toasts.at(-1), /connection|reach/i);
+    assert.equal(env.fb.calls.signInWithPopup.length, 0);
+  });
+
+  test('a failed load can be retried once the network recovers', async () => {
+    // The promise must not be cached in its rejected state, or the
+    // feature stays dead until a page reload.
+    const env = loadAuth({ authConfig: { enabled: true }, scriptLoadFails: true });
+    await env.window.dgeEnsureFirebaseSdk();
+    const afterFirst = env.scripts.length;
+    await env.window.dgeEnsureFirebaseSdk();
+    assert.ok(env.scripts.length > afterFirst, 'a retry should attempt the fetch again');
   });
 });
 

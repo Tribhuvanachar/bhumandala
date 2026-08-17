@@ -3,7 +3,7 @@
 _Originally written 10 Aug 2026 (Google Sign-In + Firebase phone OTP,
 untested). Substantially revised 16 Aug 2026: added WhatsApp OTP and
 broadcasts, tightened the security rules, and — for the first time —
-tests. 192 of them now run without a Firebase project, credentials, or
+tests. 204 of them now run without a Firebase project, credentials, or
 money. See §10 for what still cannot be tested without live accounts._
 
 ## 1. What this is
@@ -28,7 +28,7 @@ dge/js/config.js             FIREBASE_CONFIG + AUTH_CONFIG switches
 dge/firebase/firestore.rules the real enforcement layer
 dge/firebase/firebase.json   project config (emulators, hosting, functions)
 dge/firebase/functions/      Cloud Functions: OTP, broadcasts, webhook
-dge/firebase/tests/          192 tests — see tests/README.md
+dge/firebase/tests/          204 tests — see tests/README.md
 ```
 
 ## 2. Cost — read this before enabling anything
@@ -75,7 +75,7 @@ Keep `msg91` in reserve for users who don't have WhatsApp.
 3. **Firestore Database** → Create → **production mode** (not test mode — test mode ignores your rules for 30 days and then locks everything out).
 4. **Firestore** → Rules → paste `dge/firebase/firestore.rules` → Publish. Or `cd dge/firebase && firebase deploy --only firestore:rules`.
 5. **Project settings** → General → Your apps → Add app → Web (`</>`) → copy the `firebaseConfig` object.
-6. **Authentication → Settings → Authorized domains** → add whichever domain actually serves the site. As of 17 Aug 2026 the `CNAME` file was removed from `main`, so that is **`tribhuvanachar.github.io`**; add `www.sarvamula.org` and `sarvamula.org` as well if the custom domain is restored. Google Sign-In fails silently from an unauthorized domain, and the failure looks like nothing happening at all. (`localhost` is authorized by default, so local testing works without adding anything.)
+6. **Authentication → Settings → Authorized domains** → add whichever domain actually serves the site. Today that is **`tribhuvanachar.github.io`**. When the custom domain goes live (expected 29 Aug 2026, or 18 Sep — see the checklist in `site.config.json`), **add `www.sarvamula.org` and `sarvamula.org` too**. Google Sign-In fails silently from an unauthorized domain: no error, no popup, nothing happens at all — which makes it one of the harder things to diagnose after a domain move. (`localhost` is authorized by default, so local testing needs nothing added.)
 
 ## 4. What to paste into this repo
 
@@ -205,7 +205,7 @@ registrar. SSL and custom domains are free either way.
 
 ## 10. What is and isn't tested
 
-**Tested — 192 tests, no credentials, no cost** (`cd dge/firebase/tests
+**Tested — 204 tests, no credentials, no cost** (`cd dge/firebase/tests
 && npm install && npm run test:all`):
 
 - The OTP state machine: expiry to the millisecond, attempt caps
