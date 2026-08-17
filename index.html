@@ -503,6 +503,23 @@ body.leaving #veil { opacity: 1; }
   background: rgba(255,255,255,.022);
 }
 .ack-entries b { display: block; font-family: var(--font-serif); font-weight: 600; font-size: 15px; color: var(--text); letter-spacing: .01em; }
+.ack-body {
+  --ack-lines: 3;
+  max-height: calc(var(--ack-lines) * 1.6 * 12px);
+  min-height: calc(2 * 1.6 * 12px);
+  overflow: hidden;
+  transition: max-height .45s var(--ease);
+}
+.ack-body.open { max-height: 60em; }
+.ack-more {
+  margin-top: 8px; padding: 0; border: 0; background: none; cursor: pointer;
+  font-family: var(--font-ui); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--gold-soft); border-bottom: 1px solid rgba(232,178,77,.3);
+  transition: color .3s var(--ease-soft), border-color .3s var(--ease-soft);
+}
+.ack-more:hover { color: var(--saffron-lt); border-color: rgba(232,178,77,.75); }
+.ack-more:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
 .ack-entries small { display: block; margin-top: 4px; font-size: 12px; line-height: 1.6; color: var(--text-faint); }
 .ack-entries small.also {
   margin-top: 7px; padding-top: 7px;
@@ -729,7 +746,9 @@ const SITE_CONFIG = {
     // separate explanatory line beneath it.
     enterLocked:  'Pay Respects to Enter the Library',
     enterReady:   'Enter the Library',
-    sectionsCue:  'About Us'
+    sectionsCue:  'About Us',
+    readMore:     'Read more',
+    readLess:     'Read less'
   },
 
   /* Pārijāta — the night-flowering jasmine, which falls of itself and is
@@ -804,20 +823,28 @@ const SITE_CONFIG = {
           ]
         },
         {
-          icon: 'lotus', heading: 'Mantropadeśa',
+          // Ahead of the Vidyā Guru: the Gāyatrī is the seed from which every
+          // other Vedic study sprouts.
+          icon: 'lotus', heading: 'Brahmopadeṣṭā',
           entries: [
-            { name: 'Shri 1008 Vidyādhīśa Tīrtharu', note: 'Mantropadeśa.' },
-            { name: 'Shri Prathoshāchār', note: 'Mantropadeśa; the Ṛg Veda and the Sarvamūla Śāntipāṭha.' }
+            { name: 'Shri 1008 Vidyādhīśa Tīrtharu', note: 'Gāyatrī Mantra upadeśa — the highest of all.' }
           ]
         },
         {
-          icon: 'temple', heading: 'Dīkṣā Guru — roots and foundation',
+          icon: 'seated', heading: 'Vidyā Guru, Ācārya & Mantropadeṣṭā',
+          entries: [
+            {
+              name: 'Shri Hanasoge Prathoshachar',
+              note: "The central guiding light of my spiritual journey, under whom my ultimate studies take place. He initiated me into the Sarvamūla Granthas — the very core of my life's pursuit and the primary focus of this library. Under his direct, continuous guidance I am studying the entire Sarvamūla and the Ṛg Veda. Through his Mantropadeśa and profound teachings he steers my path, holding the highest and most central importance in my life and my highest calling."
+            }
+          ]
+        },
+        {
+          icon: 'temple', heading: 'Śikṣā Guru & Gṛhastha-Dharma-Upadeṣṭā — roots and foundation',
           entries: [
             {
               name: 'Shri Jalihal Sukeshachar',
-              note: 'He steadied my life and my path to dharma, and became family. His teaching and guidance shaped my spiritual journey.',
-              // Kept beneath the personal line rather than in place of it.
-              also: 'Strong roots and the initial foundation — Śabda, Maṇimañjarī, the Sūktas, Tīrtha Prabandha, Guru Paramparā Paricaya and Purāṇa; mārga darśana, and vivāha kārayitṛ.'
+              note: 'He provided the essential structure to my early spiritual life, teaching the foundational texts — Śabda, Maṇimañjarī, Purāṇa. As my sahadharmacāriṇī-yojaka he took immense pains to orchestrate my marriage, ensuring I found a spouse who supported my strict orthodox practices, and firmly guided my entry into the Gṛhasthāśrama.'
             }
           ]
         },
@@ -837,19 +864,19 @@ const SITE_CONFIG = {
           ]
         },
         {
-          icon: 'seated', heading: 'Mahat Sevā Bhāgya',
+          icon: 'anjali', heading: 'Mahat Sevā Bhāgya & Parama Guru',
           entries: [
-            { name: 'Shri Vishwanandana Tīrtharu', note: 'The fortune of serving a great soul.' }
+            { name: 'Shri Vishwanandana Tīrtharu', note: 'The ultimate fortune of serving a great soul. Through his dharma-dīkṣā my journey found its true elevation and divine refuge.' }
           ]
         },
         {
-          icon: 'seed', heading: 'Bīja and inspiration',
+          icon: 'seed', heading: 'Adhyātma-Jñānonmīlaka — the Awakener & Inspirer',
           entries: [
-            { name: 'Shri Balagaru Shrinivasachar', note: 'Awakened my spiritual journey and inspired my dharmic life with his divine blessings.' }
+            { name: 'Shri Balagaru Shrinivasachar', note: 'He awakened my spiritual journey, blessed my family through the Harivaṃśa Purāṇa, and gave me the conviction to leave the corporate world for my true svadharma. His posthumous grace through a profound svapna-darśana remains the quiet anchor of my daily sevā.' }
           ]
         },
         {
-          icon: 'anjali', heading: 'Special Blessings',
+          icon: 'lamp', heading: 'Special Blessings',
           names: [
             'Shri Gangur Raghavendrachar',
             'Shri Jalihal Keshavachar',
@@ -915,6 +942,7 @@ window.SITE_CONFIG = SITE_CONFIG;
     lotus:  '<path d="M12 20.2c-2.5-2.1-3.8-4.4-3.8-6.8 0-2.3 1.2-4.4 3.8-6.3 2.6 1.9 3.8 4 3.8 6.3 0 2.4-1.3 4.7-3.8 6.8Z"/><path d="M12 20.2c-4.2 0-7.3-1.8-9-5.1 2.7-1.6 5.6-1.3 8.2.9"/><path d="M12 20.2c4.2 0 7.3-1.8 9-5.1-2.7-1.6-5.6-1.3-8.2.9"/>',
     anjali: '<path d="M12 20.4c-2.9 0-4.9-2-4.9-4.7 0-3.1 2-6.8 4.9-10.1v14.8Z"/><path d="M12 20.4c2.9 0 4.9-2 4.9-4.7 0-3.1-2-6.8-4.9-10.1v14.8Z"/><path d="M7.4 13.2 4.6 15.5"/><path d="m16.6 13.2 2.8 2.3"/>',
     home:   '<path d="M3.4 10.8 12 4.1l8.6 6.7"/><path d="M5.8 10v9.8h12.4V10"/><path d="M9.9 19.8v-5.2h4.2v5.2"/>',
+    lamp:   '<path d="M3.8 14.2h16.4c0 3.4-3.7 5.7-8.2 5.7s-8.2-2.3-8.2-5.7Z"/><path d="M12 13.8c-1.7-1.9-2.5-3.4-2.5-4.8 0-1.7 1-3 2.5-4.2 1.5 1.2 2.5 2.5 2.5 4.2 0 1.4-.8 2.9-2.5 4.8Z"/>',
     seed:   '<path d="M12 21c0-4.6 1.4-7.6 4.2-9 .4 4.8-.9 7.8-4.2 9Z"/><path d="M12 21c0-4.6-1.4-7.6-4.2-9-.4 4.8.9 7.8 4.2 9Z"/><path d="M12 21v-4"/><path d="M12 12.6c0-3.4.9-6 2.6-7.8"/>'
   };
   function icon(name, size) {
@@ -1002,7 +1030,7 @@ window.SITE_CONFIG = SITE_CONFIG;
             ${meta ? `<div class="person-meta">${meta}</div>` : ''}
           </div>
         </div>
-        <p class="person-blurb">${esc(sec.blurb)}</p>`;
+        ${[].concat(sec.blurb).map(t => `<p class="person-blurb">${esc(t)}</p>`).join('')}`;
 
       if (sec.items) {
         html += '<ul class="person-items">' + sec.items.map(function (i) {
@@ -1044,10 +1072,10 @@ window.SITE_CONFIG = SITE_CONFIG;
 
       if (g.entries) {
         html += '<ul class="ack-entries">' + g.entries.map(function (e) {
-          return `<li><b>${esc(e.name)}</b>` +
+          return `<li><b>${esc(e.name)}</b><div class="ack-body">` +
                  (e.note ? `<small>${esc(e.note)}</small>` : '') +
                  (e.also ? `<small class="also">${esc(e.also)}</small>` : '') +
-                 '</li>';
+                 '</div></li>';
         }).join('') + '</ul>';
       }
       if (g.names) {
@@ -1056,6 +1084,30 @@ window.SITE_CONFIG = SITE_CONFIG;
       html += '</div>';
     });
 
+    return html;
+  }
+
+  /* These notes vary from four words to a paragraph, which left the cards
+     at wildly different heights. Each is clamped to a few lines and given a
+     "Read more" — but only where there is genuinely something hidden, so a
+     one-line note never grows a pointless control. Measured after the panel
+     is on screen, since a collapsed element has no height to measure. */
+  function applyReadMore(root) {
+    root.querySelectorAll('.ack-body').forEach(function (body) {
+      if (body.scrollHeight <= body.clientHeight + 2) return;
+      const btn = document.createElement('button');
+      btn.className = 'ack-more';
+      btn.type = 'button';
+      btn.textContent = cfg.labels.readMore;
+      btn.addEventListener('click', function () {
+        const open = body.classList.toggle('open');
+        btn.textContent = open ? cfg.labels.readLess : cfg.labels.readMore;
+      });
+      body.after(btn);
+    });
+  }
+
+  function panelTail(p, html) {
     if (p.closing) {
       html += `<div class="closing">
         <span class="ico" aria-hidden="true">${icon('lotus', 26)}</span>
@@ -1068,13 +1120,14 @@ window.SITE_CONFIG = SITE_CONFIG;
 
   let lastFocus = null;
   function openPanel(key) {
-    const html = panelHtml(key);
+    const html = panelTail(cfg.panels[key], panelHtml(key));
     if (!html) return;
     lastFocus = document.activeElement;
     $('sheet').innerHTML = html;
     $('sheet').scrollTop = 0;
     $('sheetWrap').classList.add('open');
     document.body.classList.add('modal-open');
+    applyReadMore($('sheet'));
     const close = $('sheet').querySelector('[data-close]');
     if (close) close.focus({ preventScroll: true });
   }
