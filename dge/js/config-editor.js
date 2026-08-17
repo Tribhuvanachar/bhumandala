@@ -7,7 +7,7 @@
 // comments and API wiring. A UI that rewrote it would risk corrupting
 // working code on a bad edit — which is exactly why a config UI was
 // deferred for so long. Instead this reads and writes a plain data file,
-// dge/data/config-overrides.json, holding ONLY the fields exposed below.
+// admin/config/config-overrides.json, holding ONLY the fields exposed below.
 // core.js merges it over the defaults at load. Consequences:
 //   - a mistake can only ever change a piece of text, never break the app
 //   - deleting the overrides file restores every default instantly
@@ -15,7 +15,7 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
 window.DGE_VERSIONS['config-editor.js'] = 'v1.1 (Collapsible sections, vertically stacked inputs — the flat form overflowed a phone screen)';
 
-const DGE_CONFIG_OVERRIDES_PATH = 'dge/data/config-overrides.json';
+const DGE_CONFIG_OVERRIDES_PATH = 'admin/config/config-overrides.json';
 
 // Only these are editable. Anything not listed here is untouchable from
 // the UI by construction, not by validation — a field that isn't rendered
@@ -321,7 +321,7 @@ function dgeRenderConfigEditor() {
 
   el.innerHTML =
     `<p class="hint" style="margin-top:0;">These settings are saved to
-      <code>data/config-overrides.json</code>, a plain data file — never to
+      <code>admin/config/config-overrides.json</code>, a plain data file — never to
       <code>config.js</code>. A mistake here can only change text, never break
       the app, and "Reset all" restores every default.</p>` +
     dgeSection('General', general, true) +

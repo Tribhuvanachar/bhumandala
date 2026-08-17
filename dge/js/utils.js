@@ -1,8 +1,9 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
 window.DGE_VERSIONS['utils.js'] = 'v2.3 (Actually starts fully closed on load now — was starting minimized-with-header-visible, not the small pill-only closed state that was actually wanted)';
 
-window.DGE_THEMES = ['traditional', 'minimal', 'vibrant', 'darkglass'];
+window.DGE_THEMES = ['vandana', 'traditional', 'minimal', 'vibrant', 'darkglass'];
 window.DGE_THEME_META_COLORS = {
+  vandana: '#0B0907',
   traditional: '#FFFDF9',
   minimal: '#FBFBFA',
   vibrant: '#FFF6E8',
@@ -10,7 +11,7 @@ window.DGE_THEME_META_COLORS = {
 };
 
 window.applyTheme = function(theme) {
-  if (window.DGE_THEMES.indexOf(theme) === -1) theme = 'traditional';
+  if (window.DGE_THEMES.indexOf(theme) === -1) theme = 'vandana';
   window.activeTheme = theme;
 
   window.DGE_THEMES.forEach(t => document.body.classList.remove('theme-' + t));
@@ -18,7 +19,7 @@ window.applyTheme = function(theme) {
 
   // 'dark-mode' is kept as an alias so the couple of legacy selectors that
   // still key off it (search highlight, commentary block tint) stay correct.
-  document.body.classList.toggle('dark-mode', theme === 'darkglass');
+  document.body.classList.toggle('dark-mode', theme === 'darkglass' || theme === 'vandana');
 
   document.querySelectorAll('#displayPopup .pop-item[data-theme]').forEach(el => {
     el.classList.toggle('active', el.dataset.theme === theme);

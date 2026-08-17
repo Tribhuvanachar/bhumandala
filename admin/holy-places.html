@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="../js/vandana-guard.js?v=1"></script>
+<script src="../dge/js/vandana-guard.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Holy Places Curation · DGE Guru Parampara (super-admin)</title>
 <style>
@@ -68,7 +68,7 @@
 
 <header style="display:none" id="hdr">
   <div class="bar">
-    <div class="crumb"><a href="../index.html">⌂ DGE</a> › <a href="index.html">Guru Parampara</a> › Holy Places</div>
+    <div class="crumb"><a href="../dge/index.html">⌂ DGE</a> › <a href="../dge/guru-parampara/index.html">Guru Parampara</a> › Holy Places</div>
     <span class="spacer"></span>
     <button class="icon" id="theme">◐</button>
     <button class="btn" id="addNew">＋ Add place</button>
@@ -289,7 +289,7 @@
     var out={
       note:"DGE shared holy-place registry. Consumed by Guru Parampara + Tirtha Prabandha (Stream 4) 'nearest holy place' finder. Merge Tirtha places with the same shape using sourceDataset:'tirtha-prabandha'.",
       schema:{id:"stable id (parampara node id, or custom_*)",name:"place/brindavana name",lat:"decimal degrees or null",lng:"decimal degrees or null",type:"brindavana|tirtha|temple|matha|place|other",sourceDataset:"guru-parampara|tirtha-prabandha",approved:"boolean — vetted for the public map",hidden:"boolean — excluded from public views",source:"citation",saint:"associated figure (optional)",image:"verified image thumb URL (optional)"},
-      generated_by:"holy-places-admin.html",
+      generated_by:"admin/holy-places.html",
       places:collect()
     };
     dl("holy-places.json",out);

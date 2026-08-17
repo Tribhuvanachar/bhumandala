@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="js/vandana-guard.js?v=1"></script>
+<script src="../dge/js/vandana-guard.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <script>
   // Same super-admin gate as Convert — this page can push straight to
   // GitHub, so a hidden link alone isn't enough.
   if (localStorage.getItem('is_superadmin') !== 'true') {
-    window.location.replace('index.html');
+    window.location.replace('../dge/index.html');
   }
 </script>
 <title>Dasa Sahitya — Capture &amp; Progress — DGE</title>
@@ -80,9 +80,9 @@
   <div class="wrap" style="padding-bottom:10px">
     <h1>Dasa Sahitya — Capture &amp; Progress<small>Track what's crawled, hand-capture what didn't come out well</small></h1>
     <div class="nav">
-      <a href="index.html">🏠 Main site</a>
-      <a href="dasa_sahitya.html">📖 Browse corpus</a>
-      <a href="convert/index.html">🔁 Convert (OCR tool)</a>
+      <a href="../dge/index.html">🏠 Main site</a>
+      <a href="../dge/dasa_sahitya.html">📖 Browse corpus</a>
+      <a href="../dge/convert/index.html">🔁 Convert (OCR tool)</a>
     </div>
   </div>
 </header>
@@ -208,7 +208,7 @@
 </div>
 <div class="toast" id="toast"></div>
 
-<script src="convert/github.js"></script>
+<script src="../dge/convert/github.js"></script>
 <script>
 "use strict";
 const BASE = "data/dasa_sahitya";

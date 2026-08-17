@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.6 (Loads and merges data/config-overrides.json over config.js defaults before first render)';
+window.DGE_VERSIONS['core.js'] = 'v3.7 (Loads and merges admin/config/config-overrides.json over config.js defaults before first render)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -59,7 +59,21 @@ window.dgeForceRefreshContent = function() {
 // per top-level object — so the overrides file only ever needs to hold
 // the fields actually changed, and anything absent falls back to the
 // hardcoded default. config.js itself is never modified by the UI.
-window.dgeConfigOverridesPromise = fetch('data/config-overrides.json?t=' + Date.now(), { cache: 'no-store' })
+/* ---------------------------------------------------------------------- //
+   Admin config lives outside dge/ — see /admin/config/. These files used to
+   sit in dge/data/ and were fetched with a page-relative path, which only
+   worked from pages one level deep. The path is now derived from this
+   script's own URL (always <site>/dge/js/), so it holds at any page depth
+   and whether the site is served from a domain root or a project subpath.
+   ---------------------------------------------------------------------- */
+window.dgeAdminConfigUrl = window.dgeAdminConfigUrl || function (name) {
+  const self = (document.currentScript && document.currentScript.src) ||
+               (window.DGE_SCRIPT_BASE || '');
+  try { return new URL('../../admin/config/' + name, self).href; }
+  catch (e) { return '../admin/config/' + name; }   // fail soft, never throw
+};
+
+window.dgeConfigOverridesPromise = fetch(window.dgeAdminConfigUrl('config-overrides.json') + '?t=' + Date.now(), { cache: 'no-store' })
   .then(res => res.ok ? res.json() : null)
   .catch(() => null)
   .then(ov => {
@@ -575,7 +589,7 @@ function restorePrefs() {
   } else if (typeof applyTheme === 'function') {
     // One-time migration: honor a previously saved plain dark-mode flag.
     const wasDark = localStorage.getItem('app_darkMode') === 'true';
-    applyTheme(wasDark ? 'darkglass' : 'traditional');
+    applyTheme(wasDark ? 'darkglass' : 'vandana');
   }
 
   const savedFont = parseInt(localStorage.getItem('app_fontSize'), 10);

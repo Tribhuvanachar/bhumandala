@@ -76,8 +76,8 @@ function dgeLocalizeNumerals(text) {
 }
 
 // ---------------------------------------------------------------------- //
-// Library Manager curation overrides (dge/library-admin.html exports
-// dge/data/library-overrides.json). A NON-DESTRUCTIVE display layer only:
+// Library Manager curation overrides (admin/library.html exports
+// admin/config/library-overrides.json). A NON-DESTRUCTIVE display layer only:
 // hide/pin/reorder/rename/move all affect how populated granthas group
 // and sort in this tree, never library.json/taxonomy.json or the actual
 // fetch path -- dgeGoToGrantha always navigates on the real slug even
@@ -88,7 +88,9 @@ let dgeLibOverrides = { hidden: [], pinned: [], labels: {}, order: {}, moves: {}
 
 async function dgeLoadLibraryOverrides() {
   try {
-    const ov = await fetch('data/library-overrides.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
+    const url = window.dgeAdminConfigUrl ? window.dgeAdminConfigUrl('library-overrides.json')
+                                        : '../admin/config/library-overrides.json';
+    const ov = await fetch(url, { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
     if (ov) {
       dgeLibOverrides = {
         hidden: Array.isArray(ov.hidden) ? ov.hidden : [],
@@ -295,7 +297,7 @@ window.openLibraryModal = async function() {
     return;
   }
 
-  // Admin-curated overrides — see dge/library-admin.html. Optional; most
+  // Admin-curated overrides — see admin/library.html. Optional; most
   // repos won't have one until the project lead actually curates something.
   await dgeLoadLibraryOverrides();
 

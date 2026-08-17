@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
-<script src="js/vandana-guard.js?v=1"></script>
+<script src="../dge/js/vandana-guard.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Library Manager · DGE (super-admin)</title>
 <style>
@@ -89,7 +89,7 @@
 
 <header style="display:none" id="hdr">
   <div class="bar">
-    <div class="brand"><a href="index.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> 🗂️ Library Manager <small>· super-admin</small></div>
+    <div class="brand"><a href="../dge/index.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> 🗂️ Library Manager <small>· super-admin</small></div>
     <span class="spacer"></span>
     <button class="icon" id="theme">◐</button>
     <button class="btn gh" id="reindex" title="Open the GitHub Actions Re-index workflow">↻ Re-index search</button>
@@ -107,7 +107,7 @@
     Curate the <b>public Library</b> without touching the corpus. Every edit here is a
     <b>non-destructive override</b> — reorder, pin, rename, move between folders, or hide.
     Changes save in <b>this browser only</b>; click <b>Export overrides</b> to download
-    <code>library-overrides.json</code> and commit it to <code>dge/data/</code>. The live app
+    <code>library-overrides.json</code> and commit it to <code>admin/config/</code>. The live app
     (<code>js/library.js</code> v3+) reads that file and applies it.
     <div class="legend">
       <span>▲▼ reorder</span><span>📌 pin to top</span><span>✏️ rename</span>
@@ -470,7 +470,7 @@
   function exportOV(){
     // prune empties for a clean file
     var out={
-      note:"DGE library curation overrides — a NON-DESTRUCTIVE display layer read by dge/js/library.js (v3+). Keys are effective (post-move) taxonomy paths; move sources/dests are original taxonomy paths. Commit to dge/data/library-overrides.json.",
+      note:"DGE library curation overrides — a NON-DESTRUCTIVE display layer read by dge/js/library.js (v3+). Keys are effective (post-move) taxonomy paths; move sources/dests are original taxonomy paths. Commit to admin/config/library-overrides.json.",
       version:1,
       hidden:(OV.hidden||[]).slice().sort(),
       pinned:(OV.pinned||[]).slice(),

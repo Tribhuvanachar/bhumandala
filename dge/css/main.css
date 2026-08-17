@@ -23,14 +23,14 @@
   --font-sanskrit: 'Tiro Devanagari Sanskrit', 'Noto Sans Devanagari', 'Noto Serif Devanagari', serif;
   --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Traditional (default) palette — also the pre-JS fallback so there's no
-     flash of an unstyled theme before restorePrefs() runs. */
-  --bg-main: #FAF3E6; --card-bg: #ffffff; --card-border: #E9DCC3;
-  --card-active: #FCE9DE; --text-primary: #2B2119; --text-sanskrit: #9A1B1B;
-  --accent-red: #AE231F; --accent-gold: #B9821F; --panel-bg: #ffffff;
-  --top-bar-bg: rgba(255,253,249,0.90); --top-bar-border: #EEE3CB;
-  --glass-blur: 10px; --accent-glow: rgba(174,35,31,0.22);
-  --muted-text: #8a7a63;
+  /* Vandana palette — the default, and also the pre-JS fallback so the first
+     paint does not flash cream before restorePrefs() runs. */
+  --bg-main: #0B0907; --card-bg: rgba(32,27,23,0.55); --card-border: rgba(232,178,77,0.14);
+  --card-active: rgba(242,130,12,0.16); --text-primary: #F3E7D4; --text-sanskrit: #FFB24D;
+  --accent-red: #E2664A; --accent-gold: #E8B24D; --panel-bg: rgba(20,16,12,0.92);
+  --top-bar-bg: rgba(11,9,7,0.78); --top-bar-border: rgba(232,178,77,0.16);
+  --glass-blur: 18px; --accent-glow: rgba(232,178,77,0.34);
+  --muted-text: #8B7A63;
 }
 
 /* --- Theme: Traditional (warm, refined) --- */
@@ -73,6 +73,25 @@ body.theme-darkglass, body.dark-mode {
   --muted-text: #b6a892;
 }
 
+/* Vandana comes after Dark Glass deliberately: it also carries the
+   .dark-mode class, so that the component rules keyed off dark-mode
+   apply — but its own variables have to win the cascade. */
+/* --- Theme: Vandana (default) ---
+   The palette of the landing page, so crossing from the vandana into the
+   library is not a change of scenery. Warm near-black ground, saffron and
+   gold from the portrait itself; deliberately never pure black, which kills
+   the glow. The four themes below remain selectable for anyone who prefers
+   to read on cream. */
+body.theme-vandana {
+  --bg-main: #0B0907; --card-bg: rgba(32,27,23,0.55); --card-border: rgba(232,178,77,0.14);
+  --card-active: rgba(242,130,12,0.16); --text-primary: #F3E7D4; --text-sanskrit: #FFB24D;
+  --accent-red: #E2664A; --accent-gold: #E8B24D; --panel-bg: rgba(20,16,12,0.92);
+  --top-bar-bg: rgba(11,9,7,0.78); --top-bar-border: rgba(232,178,77,0.16);
+  --glass-blur: 18px; --accent-glow: rgba(232,178,77,0.34);
+  --muted-text: #8B7A63;
+}
+
+
 * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
 input[type="checkbox"], input[type="range"] { accent-color: var(--accent-red); }
 body { margin: 0; padding-top: calc(60px + env(safe-area-inset-top)); padding-bottom: calc(126px + env(safe-area-inset-bottom)); font-family: var(--font-ui); background: var(--bg-main); color: var(--text-primary); transition: background var(--t-med) var(--ease), color var(--t-med) var(--ease); overflow-anchor: none; }
@@ -112,6 +131,7 @@ body.is-authorized .advanced-feature { display: flex !important; }
 /* Theme picker swatches — fixed, literal colors per theme (independent of
    whichever theme is currently active) so the picker always shows all 4. */
 .theme-swatch { width: 14px; height: 14px; border-radius: 50%; display: inline-block; flex-shrink: 0; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.4); }
+.theme-swatch-vandana { background: linear-gradient(135deg, #0B0907, #E8B24D); }
 .theme-swatch-traditional { background: linear-gradient(135deg, #AE231F, #B9821F); }
 .theme-swatch-minimal { background: linear-gradient(135deg, #4A4A46, #C9C9C3); }
 .theme-swatch-vibrant { background: linear-gradient(135deg, #E0431F, #D9A521); }

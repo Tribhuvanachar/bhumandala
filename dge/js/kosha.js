@@ -29,7 +29,7 @@
   var cache = {}, manifest = null;
 
   // ---- admin-controlled visibility (respected at query time) ----------------
-  // The Kosha admin dashboard (kosha-admin.html) writes a list of dictionary
+  // The Kosha admin dashboard (admin/kosha.html) writes a list of dictionary
   // slugs to hide from search WITHOUT deleting their data. We read it fresh on
   // every query so a change in the admin tab takes effect on the next search.
   function hiddenDicts() {
