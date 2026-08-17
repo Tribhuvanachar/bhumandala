@@ -78,6 +78,26 @@ LEAF_DEEP = page("""
 """)
 
 
+# The real DOM, twice over: one page, two #article blocks, each a verse plus
+# its commentary. This is the shape the probe confirmed on the live site.
+MULTI_SUTRA = page("""
+  <div id="article13800">
+    <h2 class="shloka">प्रथमसूत्रम् इदम् उच्यते ।</h2>
+    <div id="dynamicContent" class="details">
+      <h3>प्रमाणलक्षणटीका</h3>
+      <p>प्रथमसूत्रस्य व्याख्या इयम् ।</p>
+    </div>
+  </div>
+  <div id="article13801">
+    <h2 class="shloka">द्वितीयसूत्रम् अपि निरूप्यते ।</h2>
+    <div id="dynamicContent" class="details">
+      <h3>प्रमाणलक्षणटीका</h3>
+      <p>द्वितीयसूत्रस्य व्याख्या इयम् ।</p>
+    </div>
+  </div>
+""")
+
+
 def prime(cache_dir, url, html):
     os.makedirs(cache_dir, exist_ok=True)
     key = hashlib.sha1(url.encode("utf-8")).hexdigest() + ".html"
@@ -256,6 +276,45 @@ def main():
                                       deep["items"][:1])
         finally:
             shutil.rmtree(deep_tmp, ignore_errors=True)
+
+        # One URL, several sutras. An adhikarana covering more than one sutra
+        # serves them all from a single page, so keying items on the page's
+        # content id gave every verse the same id — 11 duplicate-id errors in
+        # run 32036326082, caught only by --strict after the crawl finished.
+        print("multi-sutra leaf: ids come from the article, not the page")
+        multi_tmp = tempfile.mkdtemp(prefix="dvmulti_")
+        try:
+            multi_cache = os.path.join(multi_tmp, "cache")
+            multi_out = os.path.join(multi_tmp, "out")
+            prime(multi_cache, BASE + "/category-details/13528/937/thasha/1-para/managa/garana",
+                  MULTI_SUTRA)
+            for url in ("/category-details/13529/937/thasha/1-para/managa/naraya",
+                        "/category-details/13533/937/thasha/1-para/lkashh/lkashh"):
+                prime(multi_cache, BASE + url, CONTAINER)
+            rc3 = I.main([
+                "--config", os.path.join(HERE, "dv_sources.json"),
+                "--out", multi_out, "--cache", multi_cache,
+                "--granthas", "pramana_lakshana",
+                "--delay", "0", "--write", "--fetch-date", "2026-08-15",
+                "--summary-file", "",
+            ])
+            failures += not check("exit code 0", rc3 == 0, rc3)
+            base = os.path.join(multi_out, "dasha_prakarana_granthas", "pramana_lakshana")
+            with open(os.path.join(base, "mula", "data.json"), encoding="utf-8") as handle:
+                m = json.load(handle)
+            with open(os.path.join(base, "tika_jayatirtha", "data.json"), encoding="utf-8") as handle:
+                t = json.load(handle)
+            m_ids = [i["id"] for i in m["items"]]
+            t_ids = [i["id"] for i in t["items"]]
+            failures += not check("both sutras emitted", len(m_ids) == 2, m_ids)
+            failures += not check("ids are unique inside the layer",
+                                  len(m_ids) == len(set(m_ids)), m_ids)
+            failures += not check("ids follow the article, not the page",
+                                  set(m_ids) == {"DV_13800", "DV_13801"}, m_ids)
+            failures += not check("cross-layer link survives", set(t_ids) == set(m_ids),
+                                  (t_ids, m_ids))
+        finally:
+            shutil.rmtree(multi_tmp, ignore_errors=True)
 
         print()
         if failures:

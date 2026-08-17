@@ -207,6 +207,31 @@ def main():
                           any(l.get("role") == "mula" for l in rec["layers"]), titles)
     failures += not check("no chrome bleed into layers",
                           all("Copyright" not in l["text"] for l in rec["layers"]))
+    failures += not check("layers carry their article's own id",
+                          {l.get("article_id") for l in rec["layers"]} == {"13700"},
+                          [l.get("article_id") for l in rec["layers"]])
+
+    print()
+    print("F. one page, several sutras (multi-article leaf)")
+    two = PAGE_REAL.replace(
+        "</div></div>\n<footer>",
+        """  <div id="article13701" class="lazy-1">
+    <h2 class="shloka">अव्याप्तिरतिव्याप्तिरसम्भवश्चेति</h2>
+    <div id="dynamicContent" class="details">
+      <h3><strong><span>प्रमाणलक्षणटीका</span></strong></h3>
+      <p><span>दोषत्रयमिह निरूप्यते इति द्वितीयसूत्रार्थः ।</span></p>
+    </div>
+  </div>
+</div></div>
+<footer>""")
+    rec2 = P.parse_page(two, url)
+    ids = [l.get("article_id") for l in rec2["layers"]]
+    # The page has ONE content id but TWO verses. Keying items on the content
+    # id made them collide; the article id keeps them apart.
+    failures += not check("both articles parsed", len(rec2["layers"]) == 5, len(rec2["layers"]))
+    failures += not check("second article keeps its own id", set(ids) == {"13700", "13701"}, ids)
+    failures += not check("mula and its tika share one article id",
+                          ids[0] == ids[1] == "13700", ids[:2])
 
     print()
     if failures:

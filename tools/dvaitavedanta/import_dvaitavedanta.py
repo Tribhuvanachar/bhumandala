@@ -301,8 +301,16 @@ def resolve_layer_config(title, layer_config):
 def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
     """Group parsed pages into per-layer item lists.
 
-    The item id is DV_<contentId> in *every* layer, which satisfies the
-    grantha_tika_text convention that a tika item's id matches its mula item's.
+    The item id is DV_<articleId> in *every* layer, which satisfies the
+    grantha_tika_text convention that a tika item's id matches its mula item's:
+    a verse and its commentaries live inside the same #article<N> block.
+
+    Keying on the page's content id instead (the original rule) collided
+    wherever one leaf stacks several articles — an adhikarana covering more
+    than one sutra serves them all from a single URL, so every verse on that
+    page claimed the same id. That is what --strict caught in run 32036326082
+    with 11 duplicate-id errors. Pages with no article anchor at all still fall
+    back to the content id, where it is unique by construction.
     """
     layers: "OrderedDict[str, dict]" = OrderedDict()
 
@@ -357,7 +365,7 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
             bucket["layer_titles"][title] += 1
 
             item = {
-                "id": f"DV_{record['content_id']}",
+                "id": f"DV_{layer.get('article_id') or record['content_id']}",
                 "reference": reference,
                 "section": section,
                 "unit_title": unit_title,
@@ -382,6 +390,21 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
             elif bucket["schema"] == "grantha_tippani_text":
                 item["tippani_title"] = title
                 item["author"] = config.get("author") or ""
+            # Belt and braces. The article id fixes the known collision, but an
+            # id must be unique inside a data.json whatever the page does, so a
+            # residual clash is disambiguated here and reported rather than
+            # left for --strict to reject after a six-hour crawl.
+            seen = bucket.setdefault("seen_ids", {})
+            if item["id"] in seen:
+                if seen[item["id"]]["sanskrit_text"] == item["sanskrit_text"]:
+                    continue          # same verse served twice; keep one
+                warnings["id_collisions"].append(
+                    {"url": record["url"], "id": item["id"], "layer": title})
+                suffix = 2
+                while f"{item['id']}-{suffix}" in seen:
+                    suffix += 1
+                item["id"] = f"{item['id']}-{suffix}"
+            seen[item["id"]] = item
             layers[config["folder"]]["items"].append(item)
 
     return layers
@@ -722,7 +745,8 @@ def main(argv=None):
                 log(f"    …{index}/{len(queue)}")
         discovered_total = len(seen_ids)
 
-        warnings = {"unmapped_layers": Counter(), "low_devanagari": []}
+        warnings = {"unmapped_layers": Counter(), "low_devanagari": [],
+                    "id_collisions": []}
         layers = build_items(records, grantha, layer_config, defaults,
                              args.fetch_date, warnings)
         global_unmapped.update(warnings["unmapped_layers"])
@@ -766,6 +790,7 @@ def main(argv=None):
             "bytes": total_bytes,
             "layers": layer_counts,
             "low_devanagari_warnings": len(warnings["low_devanagari"]),
+            "id_collisions": len(warnings["id_collisions"]),
             "first_run": previous.get("first_run") or status["last_run"],
             "last_run": status["last_run"],
             "duration_s": round(time.time() - started, 1),
@@ -778,6 +803,9 @@ def main(argv=None):
         if warnings["low_devanagari"]:
             log(f"    ! {len(warnings['low_devanagari'])} item(s) below "
                 f"{MIN_DEVANAGARI_RATIO:.0%} Devanagari — check selectors")
+        if warnings["id_collisions"]:
+            log(f"    ! {len(warnings['id_collisions'])} item id(s) disambiguated "
+                f"with a -N suffix; first: {warnings['id_collisions'][0]['url']}")
         log("")
 
     run_failures.extend(fetcher.failed)

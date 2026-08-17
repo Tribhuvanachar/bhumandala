@@ -160,11 +160,17 @@ jobs:
 
       - name: Verify emitted data
         if: ${{ !fromJSON(inputs.dry_run) }}
-        run: python tools/dvaitavedanta/verify_extract.py --data dge/data/dvaitavedanta
+        run: |
+          # A section with every grantha disabled writes nothing and exits 0.
+          # That is a legitimate no-op, not a failure — do not treat the
+          # missing directory as one (run 32036326082 failed exactly here).
+          [ -d dge/data/dvaitavedanta ] || { echo "no output for ${{ matrix.section }} (all granthas disabled)"; exit 0; }
+          python tools/dvaitavedanta/verify_extract.py --data dge/data/dvaitavedanta
 
       - name: Stage shard output
         if: ${{ !fromJSON(inputs.dry_run) }}
         run: |
+          [ -d dge/data/dvaitavedanta ] || { echo "nothing to stage"; exit 0; }
           mkdir -p shard
           cp -r dge/data/dvaitavedanta shard/dvaitavedanta
           mv shard/dvaitavedanta/_extract_status.json \
@@ -177,6 +183,7 @@ jobs:
           name: dv-${{ matrix.section }}
           path: shard
           retention-days: 14
+          if-no-files-found: ignore   # a disabled section stages nothing
 
       - name: Upload raw HTML probes
         if: ${{ fromJSON(inputs.probe) }}

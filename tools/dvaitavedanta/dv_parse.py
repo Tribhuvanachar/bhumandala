@@ -345,6 +345,19 @@ def _text_between(start: Tag, stop: Tag | None, within: Tag) -> str:
     return clean_text("".join(chunks))
 
 
+def article_id_from(value: str) -> str:
+    """`article13531` -> `13531`. Empty when the id is not an article anchor.
+
+    A leaf page can stack several #article<N> blocks (one per sutra under a
+    multi-sutra adhikarana). The page has ONE content id, so keying items on it
+    made every block collide; the article id is what actually identifies the
+    verse, and mula + its commentaries share one block, so cross-layer ids
+    still line up.
+    """
+    match = ARTICLE_ID_RE.match(value or "")
+    return match.group(1) if match else ""
+
+
 def _layers_from_article(node: Tag) -> list[dict]:
     """Split one #article<N> block into its real layers.
 
@@ -365,6 +378,7 @@ def _layers_from_article(node: Tag) -> list[dict]:
     """
     details = node.find(id=DETAILS_ID) or node.find(class_=DETAILS_CLASS_RE)
     headings = details.find_all("h3") if details else []
+    article_id = article_id_from(node.get("id", ""))
 
     layers: list[dict] = []
     shloka = node.find("h2", class_=SHLOKA_CLASS_RE)
@@ -375,6 +389,7 @@ def _layers_from_article(node: Tag) -> list[dict]:
                 "title": MULA_TITLE,
                 "text": verse,
                 "anchor": node.get("id", ""),
+                "article_id": article_id,
                 "author": "",
                 "role": "mula",
             })
@@ -391,6 +406,7 @@ def _layers_from_article(node: Tag) -> list[dict]:
                 "title": "",
                 "text": body,
                 "anchor": node.get("id", ""),
+                "article_id": article_id,
                 "author": "",
                 "role": "tika",
             })
@@ -412,6 +428,7 @@ def _layers_from_article(node: Tag) -> list[dict]:
                 "title": title,
                 "text": text,
                 "anchor": heading.get("id", "") or node.get("id", ""),
+                "article_id": article_id,
                 "author": _attribution_before(heading),
                 "role": "tika",
             }
@@ -470,6 +487,10 @@ def extract_layers(soup: BeautifulSoup) -> list[dict]:
         text = _strip_heading(block_text(node), heading)
         if devanagari_count(text) < 4:
             continue
+        # Deliberately no article_id here. On this shape each layer is its OWN
+        # #article<N> block, so the mula and its tika have different article
+        # ids; keying items on them would break the cross-layer link. The page
+        # is one verse either way, so the content id is the right key.
         layers.append({
             "title": heading,
             "text": text,
