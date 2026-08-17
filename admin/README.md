@@ -29,6 +29,15 @@ where it is, and is still linked from the same admin menu.
 | `config/config-overrides.json` | `dge/js/core.js` at boot, merged over `dge/js/config.js` | Site Settings, in-app (`dge/js/config-editor.js`) |
 | `config/library-overrides.json` | `dge/js/library.js` | `library.html`, exported and committed by hand |
 | `config/library-status.json` | `library.html` | `tools/gen_library_status.py` — a generated snapshot of what is loaded |
+| `config/site.config.json` | `tools/set_site_url.py` | hand-edited, then applied with that script |
+
+`site.config.json` holds the site's own absolute URL. Almost nothing needs
+it — the reader resolves its links relatively and runtime JavaScript uses
+`location.origin`, both of which follow whatever domain served the page.
+The exception is Open Graph metadata, which link-preview crawlers read
+without executing JavaScript, so it has to be written into the HTML. Change
+`siteOrigin` there and run `python3 tools/set_site_url.py`; never hand-edit
+the tag it manages.
 
 Both are shallow overrides: they hold only the fields actually changed, and
 anything absent falls back to the defaults in `dge/js/config.js`. That file

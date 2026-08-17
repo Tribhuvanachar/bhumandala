@@ -17,12 +17,12 @@ such spot is marked in the HTML:
     <meta property="og:image" content="https://host/dge/images/guru/guruji.jpg">
 
 The marker carries the path *within the site*; this script joins it to
-``siteOrigin`` from site.config.json and rewrites the URL in the tag on
+``siteOrigin`` from admin/config/site.config.json and rewrites the URL in the tag on
 the following line.
 
 Usage
 -----
-    python3 tools/set_site_url.py                 # apply site.config.json
+    python3 tools/set_site_url.py                 # apply admin/config/site.config.json
     python3 tools/set_site_url.py --check         # verify, exit 1 on drift
     python3 tools/set_site_url.py --set https://www.sarvamula.org
     python3 tools/set_site_url.py --dry-run
@@ -35,7 +35,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-CONFIG_PATH = REPO_ROOT / "site.config.json"
+CONFIG_PATH = REPO_ROOT / "admin" / "config" / "site.config.json"
 
 # Files scanned for markers. Deliberately an explicit list rather than a
 # glob over the whole repo: this rewrites URLs, and it should never be
@@ -163,7 +163,7 @@ def main(argv=None):
     parser.add_argument("--dry-run", action="store_true",
                         help="show what would change without writing")
     parser.add_argument("--set", metavar="ORIGIN",
-                        help="set siteOrigin in site.config.json to this, then apply")
+                        help="set siteOrigin in admin/config/site.config.json to this, then apply")
     args = parser.parse_args(argv)
 
     try:
@@ -174,7 +174,7 @@ def main(argv=None):
             cfg["siteOrigin"] = origin
             CONFIG_PATH.write_text(json.dumps(cfg, indent=2, ensure_ascii=False) + "\n",
                                    encoding="utf-8")
-            print(f"site.config.json: siteOrigin set to {origin}")
+            print(f"admin/config/site.config.json: siteOrigin set to {origin}")
         else:
             origin = normalize_origin(cfg["siteOrigin"])
 

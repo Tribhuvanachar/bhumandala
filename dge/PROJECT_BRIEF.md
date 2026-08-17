@@ -29,7 +29,7 @@ form scholars and devotees can actually use.
 - **Repository:** `github.com/Tribhuvanachar/bhumandala`
 - **Live site:** `tribhuvanachar.github.io/bhumandala` today. The custom
   domain `www.sarvamula.org` is expected to go live **29 Aug 2026 (or 18
-  Sep if that slips)**. The canonical origin lives in `site.config.json`
+  Sep if that slips)**. The canonical origin lives in `admin/config/site.config.json`
   and is applied by `tools/set_site_url.py`; see `PENDING.md` for the
   switchover checklist. Only link-preview metadata needs a fully
   qualified URL — everything else follows whatever domain served the
