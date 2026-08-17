@@ -1029,7 +1029,11 @@ window.SITE_CONFIG = SITE_CONFIG;
       const t = $('brandTagline'), btn = $('taglineMore');
       if (t.scrollHeight <= t.clientHeight + 2) return;
       btn.hidden = false;
-      btn.textContent = cfg.labels.readMore;
+      btn.textContent = t.classList.contains('open') ? cfg.labels.readLess : cfg.labels.readMore;
+      // render() runs a second time when admin/config/landing.json lands, so
+      // the listener is attached once and reads cfg fresh on every click.
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = '1';
       btn.addEventListener('click', function () {
         const open = t.classList.toggle('open');
         btn.textContent = open ? cfg.labels.readLess : cfg.labels.readMore;
@@ -1067,7 +1071,9 @@ window.SITE_CONFIG = SITE_CONFIG;
              (l.latin ? `<div class="mantra-latin">${esc(l.latin)}</div>` : '');
     }).join('');
 
-    // Mandala spokes, drawn rather than written into the markup.
+    // Mandala spokes, drawn rather than written into the markup. Cleared
+    // first so a second render() does not stack a duplicate path on top.
+    $('spokes').innerHTML = '';
     let d = '';
     for (let i = 0; i < 24; i++) {
       const a = (i / 24) * Math.PI * 2;
@@ -1368,8 +1374,49 @@ window.SITE_CONFIG = SITE_CONFIG;
     });
   }
 
+  /* --------------------------------------------------------- config ---- */
+  /* The block above is the default wording. admin/config/landing.json may
+     override any part of it, so the page can be reworded without editing
+     markup — the same defaults-plus-overrides arrangement dge/js/config.js
+     has with admin/config/config-overrides.json.
+
+     Objects merge key by key; arrays are replaced whole. Replacing is the
+     right rule for the arrays here (sections, footer.lines, panel groups):
+     merging them index by index would make "drop the middle section" or
+     "reorder these" impossible to express. */
+  function deepMerge(base, over) {
+    Object.keys(over || {}).forEach(function (k) {
+      const v = over[k];
+      if (v && typeof v === 'object' && !Array.isArray(v) &&
+          base[k] && typeof base[k] === 'object' && !Array.isArray(base[k])) {
+        deepMerge(base[k], v);
+      } else if (v !== undefined) {
+        base[k] = v;
+      }
+    });
+    return base;
+  }
+
+  /* Rendered immediately from the defaults so the page never sits blank
+     waiting on a fetch; re-rendered if the overrides turn out to say
+     something. A missing or malformed file leaves the defaults standing —
+     the gate must never fail to draw because a config file is broken. */
   render();
   bind();
+
+  fetch('admin/config/landing.json?t=' + Date.now(), { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .catch(function () { return null; })
+    .then(function (ov) {
+      if (!ov || typeof ov !== 'object') return;
+      // Comment keys, so the file can annotate itself without the values
+      // leaking into the page.
+      delete ov.$schema; delete ov._readme;
+      if (!Object.keys(ov).length) return;
+      deepMerge(cfg, ov);
+      render();
+      console.log('[Landing] Applied overrides for: ' + Object.keys(ov).join(', '));
+    });
 
   window.dgeVandana = { openPanel, closePanel, enter, get offerings() { return offerings; } };
 })();
