@@ -1,0 +1,64 @@
+/* =========================================================================
+   The derivation viewer (js/prakriya.js) — prakriya.html and krdanta.html.
+
+   Sits on top of vyakarana.css, which carries the section's palette. Only
+   what the paradigm grid and the step list need is here.
+   ========================================================================= */
+.pk-lak { display: flex; flex-wrap: wrap; gap: 7px; margin: 4px 2px 14px; }
+.chip.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+.chip.pk-empty { opacity: .35; cursor: default; }
+
+.pk-grid { width: 100%; border-collapse: collapse; margin: 4px 0 18px; }
+.pk-grid th, .pk-grid td {
+  border: 1px solid var(--line); padding: 8px 10px; text-align: center;
+  vertical-align: middle;
+}
+.pk-grid thead th { font-size: 12px; color: var(--muted); font-weight: 500; }
+.pk-pur { font-size: 12px; color: var(--muted); font-weight: 500; text-align: right; white-space: nowrap; }
+.pk-none { color: var(--muted); opacity: .5; }
+
+.pk-form {
+  border: 0; background: none; font: inherit; font-size: 18px;
+  color: var(--accent); cursor: pointer; padding: 2px 6px; border-radius: 8px;
+}
+.pk-form-flat { color: var(--ink); cursor: default; }
+.pk-form:hover, .pk-form.on { background: var(--panel2); }
+.pk-form.on { box-shadow: inset 0 -2px 0 var(--accent); }
+
+.pk-h2 { margin: 20px 0 2px; font-size: clamp(19px, 4.5vw, 25px); color: var(--accent); }
+.pk-sub { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+.pk-note { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 2px 2px 16px; }
+.pk-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+.pk-steps { list-style: none; counter-reset: s; margin: 0 0 18px; padding: 0; }
+.pk-steps li {
+  counter-increment: s;
+  display: grid; grid-template-columns: 26px 84px 1fr; gap: 10px;
+  align-items: baseline; padding: 6px 4px;
+  border-bottom: 1px solid var(--line);
+}
+.pk-steps li::before {
+  content: counter(s); color: var(--muted); font-size: 11px; text-align: right;
+}
+.pk-code { font-size: 12.5px; white-space: nowrap; }
+.pk-code-plain { color: var(--muted); }
+.pk-result { font-size: 16px; word-break: break-word; }
+
+.pk-krt { border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 8px; background: var(--panel); }
+.pk-krt-head {
+  width: 100%; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  border: 0; background: none; font: inherit; cursor: pointer; padding: 12px 14px; text-align: left;
+}
+.pk-krt-name { font-size: 13px; color: var(--muted); }
+.pk-krt-en { font-size: 12px; color: var(--muted); flex: 1; }
+.pk-arrow { color: var(--muted); transition: transform .18s ease; }
+.pk-krt-head.open .pk-arrow { transform: rotate(180deg); }
+.pk-krt-body { padding: 0 14px 6px; }
+
+@media (max-width: 520px) {
+  .pk-grid th, .pk-grid td { padding: 6px 4px; }
+  .pk-pur { font-size: 10.5px; }
+  .pk-form { font-size: 16px; }
+  .pk-steps li { grid-template-columns: 20px 68px 1fr; gap: 6px; }
+}
+@media (prefers-reduced-motion: reduce) { .pk-arrow { transition: none; } }
