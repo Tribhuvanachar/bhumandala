@@ -130,6 +130,29 @@ window.dgeAdminConfigUrl = window.dgeAdminConfigUrl || function (name) {
   catch (e) { return '../admin/config/' + name; }   // fail soft, never throw
 };
 
+/* What's New and Coming Soon are content, not settings — admin/content/, not
+   admin/config/. Loaded here so the Site Settings editor can fill its form
+   from the same source the reader sees; modals.js re-fetches on open so a
+   freshly published update reaches someone who already has the site loaded. */
+window.dgeContentUrl = window.dgeContentUrl || function (name) {
+  const self = (document.currentScript && document.currentScript.src) ||
+               (window.DGE_SCRIPT_BASE || '');
+  try { return new URL('../../admin/content/' + name, self).href; }
+  catch (e) { return '../admin/content/' + name; }
+};
+
+window.dgeWhatsNewPromise = fetch(window.dgeContentUrl('whats-new.json') + '?t=' + Date.now(),
+                                  { cache: 'no-store' })
+  .then(res => (res.ok ? res.json() : null))
+  .catch(() => null)
+  .then(wn => {
+    // _readme is left in place: the Site Settings editor writes this file
+    // back and preserves it from here, and nothing renders it — the panel
+    // reads only enabled/updates/comingSoon.
+    if (wn) window.WHATS_NEW_CONFIG = wn;
+    return wn;
+  });
+
 window.dgeConfigOverridesPromise = fetch(window.dgeAdminConfigUrl('config-overrides.json') + '?t=' + Date.now(), { cache: 'no-store' })
   .then(res => res.ok ? res.json() : null)
   .catch(() => null)
@@ -139,8 +162,9 @@ window.dgeConfigOverridesPromise = fetch(window.dgeAdminConfigUrl('config-overri
       appConfig: window.appConfig,
       SPONSOR_CONFIG: window.SPONSOR_CONFIG,
       CONTRIBUTORS_CONFIG: window.CONTRIBUTORS_CONFIG,
-      KEY_SPONSORS_CONFIG: window.KEY_SPONSORS_CONFIG,
-      WHATS_NEW_CONFIG: window.WHATS_NEW_CONFIG
+      KEY_SPONSORS_CONFIG: window.KEY_SPONSORS_CONFIG
+      // WHATS_NEW_CONFIG is not here: it is admin/content/whats-new.json now,
+      // fetched fresh by modals.js rather than merged once at boot.
     };
     Object.keys(targets).forEach(k => {
       if (ov[k] && targets[k]) Object.assign(targets[k], ov[k]);

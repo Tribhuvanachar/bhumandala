@@ -28,6 +28,7 @@ where it is, and is still linked from the same admin menu.
 |---|---|---|
 | `config/config-overrides.json` | `dge/js/core.js` at boot, merged over `dge/js/config.js` | Site Settings, in-app (`dge/js/config-editor.js`) |
 | `content/home.json` | the landing page — **all of its words** | hand-edited |
+| `content/whats-new.json` | `dge/js/modals.js`, re-read every time the panel opens | Site Settings, or by hand |
 | `config/home.json` | the landing page — where it leads, the photo, the flowers | hand-edited |
 | `config/menu.json` | `dge/js/menu.js` — which menu items appear, and in what order | hand-edited |
 | `config/intellisense.json` | `dge/js/intellisense.js` — sūtra identification | hand-edited |
@@ -81,7 +82,8 @@ Asked often enough to be worth stating once:
 | Which reading scripts are offered | `SCRIPT_OPTIONS` in `dge/js/config.js` |
 | Feature switches (theme picker, snippet tools, …) | `FEATURE_FLAGS` in `dge/js/config.js` |
 | Passkeys | `config/keys.json` |
-| Sponsor, contributors, what's new, contact | `config/config-overrides.json` |
+| What's New and Coming Soon | `content/whats-new.json` |
+| Sponsor, contributors, contact | `config/config-overrides.json` |
 
 ## Config that is not here
 
@@ -90,7 +92,8 @@ Deliberately, because moving it would mean moving the code that owns it:
 - **`dge/js/config.js`** — the defaults themselves: `appConfig`,
   `SPONSOR_CONFIG`, `CONTRIBUTORS_CONFIG`, `WHATS_NEW_CONFIG`,
   `FEATURE_FLAGS`, `AI_PROVIDERS`, `GITHUB_REPO_CONFIG`,
-  `ADMIN_ACCESS_LEVELS`. Loaded by every page in the app.
+  `ADMIN_ACCESS_LEVELS`. Loaded by every page in the app. `WHATS_NEW_CONFIG`
+  used to live here and no longer does — see `content/whats-new.json`.
 - **`dge/data/`** — corpus data rather than settings: `library.json`,
   `taxonomy.json`, `schemas.json`, `tippanikaras.json`.
 

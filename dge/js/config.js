@@ -326,44 +326,9 @@ window.KEY_SPONSORS_CONFIG = KEY_SPONSORS_CONFIG;
 // array order IS the display order — reorder those manually to reflect
 // priority. Empty by default — nothing invented; add real entries as
 // features actually ship or get planned.
-const WHATS_NEW_CONFIG = {
-  enabled: true,
-  updates: [
-    { date: '2026-08-09', title: 'Vishnu Smriti added',
-      description: 'विष्णुस्मृतिः — 97 adhyayas, 2,363 verses, newly live.' },
-    { date: '2026-08-09', title: 'Ramayana, Mahabharata, Bhagavata Purana added',
-      description: 'Valmiki Ramayana (7 kandas), Mahabharata (18 parvas), Srimad Bhagavata Purana (12 skandhas) — all now live, native Devanagari.' },
-    { date: '2026-08-09', title: '4 smritis + 4 kavyas added',
-      description: 'Manu, Parashara, Yajnavalkya, Narada Smriti; Raghuvamsha, Kumarasambhava, Kiratarjuniya, Shishupalavadha.' },
-    { date: '2026-08-08', title: 'Guru Parampara launched',
-      description: '210 figures across 19 Madhva/Dvaita lineages — 2D tree, 3D showcase, data-completeness tracker. Find it under the 🧭 Explore menu.' },
-    { date: '2026-08-08', title: 'Tirtha Prabandha launched',
-      description: "95 holy places from Sri Vadiraja Tirtha's pilgrimage compendium, searchable and verse-referenced." },
-    { date: '2026-08-08', title: 'Ashtadhyayi launched',
-      description: "Panini's 3,962 sutras with 4 commentary layers (Kashika, Nyasa, Balamanorama, Tattvabodhini) and a BYOK AI tutor." },
-    { date: '2026-08-08', title: 'Kosha (dictionary lookup) launched',
-      description: 'Multilingual Sanskrit dictionary search — floating कोश button, sample of 10 dictionaries live.' }
-  ],
-  comingSoon: [
-    { title: 'Harivamsha',
-      description: "Blocked on a GRETIL page-format fix — its source page structure doesn't match the current parser yet." },
-    { title: 'Full Kosha dataset',
-      description: 'Growing from the current ~63 MB sample toward the full ~436 MB / 503,000-headword set.' },
-    { title: 'Missing Ashtadhyayi commentary layers',
-      description: "Siddhanta-Kaumudi, Mahabhashya (Patanjali), and Vasu's English translation — UI slots are already there, waiting on the content." },
-    { title: 'Pada-cheda and anvaya for Ashtadhyayi',
-      description: 'Word-splitting and prose-order display for each sutra.' },
-    { title: 'Images for holy places',
-      description: 'Brindavana photos (Guru Parampara) and tirtha-kshetra photos (Tirtha Prabandha).' },
-    { title: 'Dasa Parampara lineage',
-      description: 'A 20th lineage to add alongside the 19 already tracked in Guru Parampara.' },
-    { title: 'Nearest holy place finder',
-      description: 'Location-based lookup across both Tirtha Prabandha and Guru Parampara brindavanas.' },
-    { title: 'Global corpus search',
-      description: 'Sandhi/spelling-tolerant search across everything in the library, re-indexed to include recent additions.' }
-  ]
-};
-window.WHATS_NEW_CONFIG = WHATS_NEW_CONFIG;
+/* What's New and Coming Soon now live in admin/content/whats-new.json, read
+   by dge/js/modals.js each time the panel opens. Publishing an update should
+   not need a code change, and a constant here could only be updated by one. */
 
 // Multi-provider AI configuration. Each provider is only used if the person
 // has saved a key for it (via the ⚙️ Settings). Model names are left

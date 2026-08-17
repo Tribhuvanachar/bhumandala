@@ -209,12 +209,29 @@ function dgeSortUpdatesNewestFirst(updates) {
     .map(x => x.u);
 }
 
+/* Re-read on every open, uncached. This panel is the one part of the site
+   whose whole purpose is to be current: baking it into a JS constant meant an
+   update could only be published by changing code, and a visitor who left the
+   tab open would never see it. */
 window.openWhatsNewModal = function() {
+  const url = (typeof window.dgeContentUrl === 'function')
+    ? window.dgeContentUrl('whats-new.json') : 'admin/content/whats-new.json';
+  fetch(url + '?t=' + Date.now(), { cache: 'no-store' })
+    .then(r => (r.ok ? r.json() : null))
+    .catch(() => null)
+    .then(function (fresh) {
+      if (fresh) window.WHATS_NEW_CONFIG = fresh;   // _readme kept, see core.js
+      dgeRenderWhatsNew();
+    });
+};
+
+function dgeRenderWhatsNew() {
   const body = document.getElementById('whatsNewBody');
   if (!body) return;
-  const cfg = (typeof WHATS_NEW_CONFIG !== 'undefined') ? WHATS_NEW_CONFIG : null;
+  const cfg = window.WHATS_NEW_CONFIG || null;
 
-  if (!cfg || cfg.enabled === false || (!cfg.updates.length && !cfg.comingSoon.length)) {
+  if (!cfg || cfg.enabled === false ||
+      (!(cfg.updates || []).length && !(cfg.comingSoon || []).length)) {
     body.innerHTML = `<p style="font-size:13px; color:var(--muted-text);">Nothing posted here yet — check back soon.</p>`;
     if (typeof openModal === 'function') openModal('whatsNewModal');
     return;
@@ -222,7 +239,7 @@ window.openWhatsNewModal = function() {
 
   let html = '';
 
-  if (cfg.updates.length) {
+  if ((cfg.updates || []).length) {
     html += `<div class="actions-section-label">✨ What's New</div>`;
     html += `<div style="display:flex; flex-direction:column; gap:12px; margin-bottom:20px;">`;
     dgeSortUpdatesNewestFirst(cfg.updates).forEach(u => {
@@ -236,7 +253,7 @@ window.openWhatsNewModal = function() {
     html += `</div>`;
   }
 
-  if (cfg.comingSoon.length) {
+  if ((cfg.comingSoon || []).length) {
     html += `<div class="actions-section-label">🔭 Coming Soon</div>`;
     html += `<div style="display:flex; flex-direction:column; gap:12px;">`;
     cfg.comingSoon.forEach(c => {
@@ -251,7 +268,7 @@ window.openWhatsNewModal = function() {
 
   body.innerHTML = html;
   if (typeof openModal === 'function') openModal('whatsNewModal');
-};
+}
 
 window.sendTypoReport = function() {
   const shlokaEl = document.getElementById('reportTypoShloka');

@@ -16,6 +16,10 @@ window.DGE_VERSIONS = window.DGE_VERSIONS || {};
 window.DGE_VERSIONS['config-editor.js'] = 'v1.1 (Collapsible sections, vertically stacked inputs — the flat form overflowed a phone screen)';
 
 const DGE_CONFIG_OVERRIDES_PATH = 'admin/config/config-overrides.json';
+// What's New is content rather than a setting, and lives in its own file so
+// the reader can fetch it fresh on every open (see modals.js). The editor
+// still edits it in the same form; it just lands somewhere else on save.
+const DGE_WHATS_NEW_PATH = 'admin/content/whats-new.json';
 
 // Only these are editable. Anything not listed here is untouchable from
 // the UI by construction, not by validation — a field that isn't rendered
@@ -375,16 +379,34 @@ window.dgeSaveConfigOverrides = async function() {
   const btn = document.getElementById('configSaveBtn');
   if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
   try {
-    const json = JSON.stringify(dgeConfigDraft, null, 2);
     // dgeAdminUpsertFile expects base64. btoa() alone breaks on non-Latin1
     // characters, and these fields routinely hold Devanagari and emoji —
     // so encode to UTF-8 bytes first, then base64 those.
-    const bytes = new TextEncoder().encode(json);
-    let binary = '';
-    bytes.forEach(b => { binary += String.fromCharCode(b); });
-    const base64 = btoa(binary);
-    await dgeAdminUpsertFile(DGE_CONFIG_OVERRIDES_PATH, base64,
+    const encode = function (obj) {
+      const bytes = new TextEncoder().encode(JSON.stringify(obj, null, 2));
+      let binary = '';
+      bytes.forEach(b => { binary += String.fromCharCode(b); });
+      return btoa(binary);
+    };
+
+    // Two files, because they are two different things: settings the site
+    // merges over its defaults, and the What's New panel's own content. The
+    // _readme is preserved so saving from the UI does not strip the notes
+    // whoever edits the file by hand relies on.
+    const settings = Object.assign({}, dgeConfigDraft);
+    const whatsNew = settings.WHATS_NEW_CONFIG;
+    delete settings.WHATS_NEW_CONFIG;
+
+    await dgeAdminUpsertFile(DGE_CONFIG_OVERRIDES_PATH, encode(settings),
       dgeAdminBuildCommitMessage('Update site config'));
+
+    if (whatsNew) {
+      const existing = window.WHATS_NEW_CONFIG || {};
+      const merged = Object.assign({}, whatsNew);
+      if (existing._readme) merged._readme = existing._readme;
+      await dgeAdminUpsertFile(DGE_WHATS_NEW_PATH, encode(merged),
+        dgeAdminBuildCommitMessage("Update What's New"));
+    }
     if (typeof showToast === 'function') showToast('Saved. Reloading to apply…');
     setTimeout(() => location.reload(), 900);
   } catch (e) {
