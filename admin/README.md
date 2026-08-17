@@ -27,7 +27,8 @@ where it is, and is still linked from the same admin menu.
 | File | Read by | Written by |
 |---|---|---|
 | `config/config-overrides.json` | `dge/js/core.js` at boot, merged over `dge/js/config.js` | Site Settings, in-app (`dge/js/config-editor.js`) |
-| `config/landing.json` | the landing page at the repository root, merged over its `SITE_CONFIG` | hand-edited |
+| `content/home.json` | the landing page — **all of its words** | hand-edited |
+| `config/home.json` | the landing page — where it leads, the photo, the flowers | hand-edited |
 | `config/menu.json` | `dge/js/menu.js` — which menu items appear, and in what order | hand-edited |
 | `config/intellisense.json` | `dge/js/intellisense.js` — sūtra identification | hand-edited |
 | `config/library-overrides.json` | `dge/js/library.js` | `library.html`, exported and committed by hand |
@@ -46,21 +47,26 @@ without executing JavaScript, so it has to be written into the HTML. Change
 `siteOrigin` there and run `python3 tools/set_site_url.py`; never hand-edit
 the tag it manages.
 
-The override files hold only the fields actually changed; anything absent
-falls back to the defaults in the code. `dge/js/config.js` and the
-`SITE_CONFIG` block in the root `index.html` stay the single source of
-structure, and neither is written by the UI.
+Two different arrangements here, on purpose.
 
-`config-overrides.json` merges one level deep, which is all its flat
-settings need. `landing.json` merges as deep as it has to, because the
-landing page's config is nested — but arrays are replaced whole rather than
-merged item by item, so reordering or dropping a contributor section is
-expressible at all.
+**Overrides.** `config-overrides.json` and the rest hold only the fields
+actually changed; anything absent falls back to a default in the code. These
+fail open — missing, empty or malformed leaves the defaults standing, so the
+menus stay as written in the markup and the gates stay shut. A broken config
+file is never the reason something disappears or springs open.
 
-Every one of these fails open. A file that is missing, empty or malformed
-leaves the defaults standing: the landing page still draws, the menus stay
-as written in the markup, the gates stay shut. A broken config file is never
-the reason something disappears or springs open.
+**Sources.** `content/home.json` and `config/home.json` are not overrides:
+they are the only copy. `index.html` carries no words of its own, so there is
+nothing to fall back to, and that is the point — a second copy of the text is
+a second thing to keep in step, and it is always the stale one that reaches
+the screen. If either file cannot be read the page says so and offers to
+retry, rather than showing a half-drawn gate or letting anyone past a vandana
+it could not display.
+
+That trade is only safe because it is checked. `python3 tools/check_content.py`
+fails if a page's files are missing, unparseable, or short of a key that page
+reads — including a section whose Know More button points at a panel that does
+not exist. Run it before pushing.
 
 ### Which file owns what
 
@@ -70,7 +76,8 @@ Asked often enough to be worth stating once:
 |---|---|
 | Which menu items appear, and their order | `config/menu.json` |
 | Where sūtra citations become tappable, and word analysis | `config/intellisense.json` |
-| Any word on the landing page, or where it leads | `config/landing.json` |
+| Any word on the landing page | `content/home.json` |
+| Where the landing page leads, or how the gate behaves | `config/home.json` |
 | Which reading scripts are offered | `SCRIPT_OPTIONS` in `dge/js/config.js` |
 | Feature switches (theme picker, snippet tools, …) | `FEATURE_FLAGS` in `dge/js/config.js` |
 | Passkeys | `config/keys.json` |
@@ -84,12 +91,6 @@ Deliberately, because moving it would mean moving the code that owns it:
   `SPONSOR_CONFIG`, `CONTRIBUTORS_CONFIG`, `WHATS_NEW_CONFIG`,
   `FEATURE_FLAGS`, `AI_PROVIDERS`, `GITHUB_REPO_CONFIG`,
   `ADMIN_ACCESS_LEVELS`. Loaded by every page in the app.
-- **`index.html`** at the repository root — `SITE_CONFIG`, the *defaults*
-  for every word of the landing page: masthead, tagline, the guru, the
-  vandana, all button labels, flower and namaskāra settings, the three
-  contributor bands, the Know More panels, and the closing lines. To change
-  any of it, put the change in `config/landing.json` rather than editing
-  this block; the block is what remains if that file cannot be read.
 - **`dge/data/`** — corpus data rather than settings: `library.json`,
   `taxonomy.json`, `schemas.json`, `tippanikaras.json`.
 
