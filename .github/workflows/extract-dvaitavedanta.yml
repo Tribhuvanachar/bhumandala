@@ -189,7 +189,13 @@ jobs:
 
   collect:
     needs: extract
-    if: ${{ !fromJSON(inputs.dry_run) }}
+    # `always()` on purpose. With `needs: extract` alone, ONE slow section
+    # blocks the whole delivery: run 31989748094 had seven sections finished
+    # and uploaded, but later_acharyas hit the 350-min cap (nyaya_sudha serves
+    # at ~105 s/leaf, 200 of 1,655 leaves in 5h50m), so collect was skipped and
+    # no PR opened at all. Merge whatever shards exist and name the missing
+    # ones, rather than discarding good work because one shard is slow.
+    if: ${{ always() && !fromJSON(inputs.dry_run) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -216,6 +222,22 @@ jobs:
           python tools/dvaitavedanta/merge_status.py \
             --inputs "shards/dv-*/status-*.json" \
             --out dge/data/dvaitavedanta/_extract_status.json
+
+      - name: Name the sections that did NOT arrive
+        run: |
+          # A shard is absent when its job was cancelled at the time cap, so it
+          # never reached "Upload shard". Say so loudly: a partial merge must
+          # never read as a complete corpus.
+          for s in dasha_prakarana_granthas sutra_prasthana gita_prasthana \
+                   sruti_prasthana itihasa_prasthana purana_prasthana \
+                   upanishad_prasthana later_acharyas; do
+            if [ -d "shards/dv-$s" ]; then
+              echo "present: $s"
+            else
+              echo "MISSING: $s  (no shard uploaded — section incomplete)" \
+                | tee -a "$GITHUB_STEP_SUMMARY"
+            fi
+          done
 
       - name: Register in taxonomy + library catalog
         run: |
