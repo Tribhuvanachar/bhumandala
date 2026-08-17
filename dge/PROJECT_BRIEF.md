@@ -27,7 +27,12 @@ readable, searchable, cross-referenced, and permanently available in a
 form scholars and devotees can actually use.
 
 - **Repository:** `github.com/Tribhuvanachar/bhumandala`
-- **Live site:** `www.sarvamula.org` (also `tribhuvanachar.github.io/bhumandala`)
+- **Live site:** `tribhuvanachar.github.io/bhumandala`. A `www.sarvamula.org`
+  custom domain was configured via a `CNAME` file, which was **removed
+  from `main` on 17 Aug 2026** — so GitHub Pages currently serves the
+  `github.io` address only. Anything that hardcodes the custom domain
+  (notably the `og:image` link-preview URL in the root `index.html`)
+  depends on that domain still resolving.
 - **Reader app:** at `/dge/` — the site root is a Guru Vandana entry page
 - **Sister repository:** `Tribhuvanachar/bhumandala-kosha-data` — the
   dictionary corpus, too large for the main repo, served via jsDelivr CDN

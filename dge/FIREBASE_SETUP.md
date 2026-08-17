@@ -75,7 +75,7 @@ Keep `msg91` in reserve for users who don't have WhatsApp.
 3. **Firestore Database** → Create → **production mode** (not test mode — test mode ignores your rules for 30 days and then locks everything out).
 4. **Firestore** → Rules → paste `dge/firebase/firestore.rules` → Publish. Or `cd dge/firebase && firebase deploy --only firestore:rules`.
 5. **Project settings** → General → Your apps → Add app → Web (`</>`) → copy the `firebaseConfig` object.
-6. **Authentication → Settings → Authorized domains** → add your real domain (e.g. `tribhuvanachar.github.io`). Google Sign-In fails silently from an unauthorized domain.
+6. **Authentication → Settings → Authorized domains** → add whichever domain actually serves the site. As of 17 Aug 2026 the `CNAME` file was removed from `main`, so that is **`tribhuvanachar.github.io`**; add `www.sarvamula.org` and `sarvamula.org` as well if the custom domain is restored. Google Sign-In fails silently from an unauthorized domain, and the failure looks like nothing happening at all. (`localhost` is authorized by default, so local testing works without adding anything.)
 
 ## 4. What to paste into this repo
 
