@@ -1,0 +1,37 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/4818/940/thasha/4-tata/mal",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_5978",
+   "reference": "दशप्रकरणानि > 4. तत्त्वोद्योतः > टीका_टिप्पणि > अध्याय १ > मङ्गलाचरणम् > तत्वोद्योतप्रकरणम्",
+   "section": "मङ्गलाचरणम्",
+   "unit_title": "तत्वोद्योतप्रकरणम्",
+   "sanskrit_text": "द्वैतद्युमणिटिप्पणिसारोद्धारः\nहुलिगियदुपत्याचार्यविरचितः द्वैतद्युमणिटिप्पणिसारोद्धारः\nश्रीमन्तं जगदुदयस्थितिप्रणाशान् कुर्वन्तं गुणगणपूर्णमीशितारम् ।\nमुक्तानामपि सकलैरवद्यगन्धैरस्पृष्टं हरिमनिशं नमामि भक्त्या ।। १ ।।\nश्रीमदानन्दतीर्थार्यान् जयराजमुनीनपि ।\nतद्गुरून् मद्गुरूंश्चापि प्रणमाम्यहमञ्जसा ।। २ ।।\nतत्त्वस्य मुख्यस्वतन्त्रतत्त्वात्मकनारायणस्य उत्कृष्टद्योतः मुक्तामुुक्तसकलनियन्तृत्वादिना ज्ञानं यस्मादिति व्युत्पत्त्या ग्रन्थस्य तत्साधनत्वलाभः ।\nEndFragment",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "दशप्रकरणानि",
+    "4. तत्त्वोद्योतः",
+    "टीका_टिप्पणि",
+    "अध्याय १",
+    "मङ्गलाचरणम्",
+    "तत्वोद्योतप्रकरणम्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/5814/940/thasha/4-tata/taka-t/athhay/managa",
+    "content_id": 5814,
+    "layer": "द्वैतद्युमणिटिप्पणिसारोद्धारः",
+    "anchor": "article5978",
+    "fetched": "2026-08-17"
+   },
+   "tika_title": "द्वैतद्युमणिटिप्पणिसारोद्धारः"
+  }
+ ]
+}

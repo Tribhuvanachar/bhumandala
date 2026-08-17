@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/10778/10775/parana/sharam/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_11260",
+   "reference": "पुराणप्रस्थानम् > श्रीमद्भागवततात्पर्यनिर्णयः > नवमस्कन्धः > चतुर्थोऽध्यायः > शर्यातिर्मानवो राजन् ब्रह्मिष्ठः सम्बभूव ह",
+   "section": "चतुर्थोऽध्यायः",
+   "unit_title": "शर्यातिर्मानवो राजन् ब्रह्मिष्ठः सम्बभूव ह",
+   "sanskrit_text": "सत्यधर्मीया—कुतोऽसोमत्वमश्विनोर्देवयोरपीत्यत आह ।। भिषजाविति ।। पूर्वं च्यवनवचनवितरणतः ।। २६ ।।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "पुराणप्रस्थानम्",
+    "श्रीमद्भागवततात्पर्यनिर्णयः",
+    "नवमस्कन्धः",
+    "चतुर्थोऽध्यायः",
+    "शर्यातिर्मानवो राजन् ब्रह्मिष्ठः सम्बभूव ह"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/11196/10775/parana/sharam/navama/catara",
+    "content_id": 11196,
+    "layer": "सत्यधर्मीया —कुतोऽसोमत्वमश्विनोर्देवयोरपीत्यत आह ।। भिषजाविति ।। पूर्वं च्यवनवचनवितरणतः ।। २६",
+    "anchor": "article11260",
+    "fetched": "2026-08-17"
+   },
+   "tika_title": "सत्यधर्मीया —कुतोऽसोमत्वमश्विनोर्देवयोरपीत्यत आह ।। भिषजाविति ।। पूर्वं च्यवनवचनवितरणतः ।। २६"
+  }
+ ]
+}

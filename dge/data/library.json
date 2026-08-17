@@ -3705,6 +3705,1391 @@
       "path": "dge/data/darshana/mimamsa/prakarana/bhatta_rahasya/mula/data.json",
       "populated": false,
       "title": "भाट्टरहस्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/karma_nirnaya/mula/data.json",
+      "populated": true,
+      "title": "कर्मनिर्णयः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/karma_nirnaya/tika_bhavadipa/data.json",
+      "populated": true,
+      "title": "कर्मनिर्णयः — भावदीपः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/karma_nirnaya/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "कर्मनिर्णयः — टीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/karma_nirnaya/tika_karmaprakasha/data.json",
+      "populated": true,
+      "title": "कर्मनिर्णयः — कर्मप्रकाशः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/karma_nirnaya/tika_panchika/data.json",
+      "populated": true,
+      "title": "कर्मनिर्णयः — गूढवाक्यार्थपञ्चिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/karma_nirnaya/tika_vivarana/data.json",
+      "populated": true,
+      "title": "कर्मनिर्णयः — विवरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/katha_lakshana/mula/data.json",
+      "populated": true,
+      "title": "कथालक्षणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/katha_lakshana/tika_bhavadipa/data.json",
+      "populated": true,
+      "title": "कथालक्षणम् — श्री कथालक्षणटीकाभावदीपः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/katha_lakshana/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "कथालक्षणम् — पद्मनाभतीर्थीया कथालक्षणटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/katha_lakshana/tika_panchika/data.json",
+      "populated": true,
+      "title": "कथालक्षणम् — कथालक्षणपञ्चिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/katha_lakshana/tika_vivarana/data.json",
+      "populated": true,
+      "title": "कथालक्षणम् — कथालक्षणटीकाविवरणं"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/mayavada_khandana/mula/data.json",
+      "populated": true,
+      "title": "मायावादखण्डनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/mayavada_khandana/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "मायावादखण्डनम् — टीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mandaramanjari/data.json",
+      "populated": true,
+      "title": "मायावादखण्डनम् — मन्दारमञ्जरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadaparashu/data.json",
+      "populated": true,
+      "title": "मायावादखण्डनम् — मायावादपरशुः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/mayavada_khandana/tika_shrigururajiyatippani/data.json",
+      "populated": true,
+      "title": "मायावादखण्डनम् — श्रीगुरुराजीयटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/mayavada_khandana/tika_shrinivasatirthatippani/data.json",
+      "populated": true,
+      "title": "मायावादखण्डनम् — श्रीनिवासतीर्थटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/mayavada_khandana/tika_shrinivasatirthiyatippani/data.json",
+      "populated": true,
+      "title": "मायावादखण्डनम् — श्रीनिवासतीर्थीयटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/pramana_lakshana/mula/data.json",
+      "populated": true,
+      "title": "प्रमाणलक्षणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/pramana_lakshana/tika_bhavadipa/data.json",
+      "populated": true,
+      "title": "प्रमाणलक्षणम् — प्रमाणलक्षणटीकाभावदीपः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/pramana_lakshana/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "प्रमाणलक्षणम् — प्रमाणलक्षणटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/pramana_lakshana/tika_vakyarthakaumudi/data.json",
+      "populated": true,
+      "title": "प्रमाणलक्षणम् — प्रमाणलक्षणटीकावाक्यार्थकौमुदी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/pramana_lakshana/tika_vivarana/data.json",
+      "populated": true,
+      "title": "प्रमाणलक्षणम् — प्रमाणलक्षणटीकाविवरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/mula/data.json",
+      "populated": true,
+      "title": "मिथ्यात्वानुमानखण्डनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "मिथ्यात्वानुमानखण्डनम् — टीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mandaramanjari/data.json",
+      "populated": true,
+      "title": "मिथ्यात्वानुमानखण्डनम् — मन्दारमञ्जरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhamdanaparashu/data.json",
+      "populated": true,
+      "title": "मिथ्यात्वानुमानखण्डनम् — मिथ्यात्वानुमानखंडनपरशुः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanaparashu/data.json",
+      "populated": true,
+      "title": "मिथ्यात्वानुमानखण्डनम् — मिथ्यात्वानुमानखण्डनपरशुः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_shrigururajiyatippani/data.json",
+      "populated": true,
+      "title": "मिथ्यात्वानुमानखण्डनम् — श्रीगुरुराजीयटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_shrinivasatirthiyatippani/data.json",
+      "populated": true,
+      "title": "मिथ्यात्वानुमानखण्डनम् — श्रीनिवासतीर्थीयटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_sankhyana/mula/data.json",
+      "populated": true,
+      "title": "तत्त्वसङ्ख्यानम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_sankhyana/tika_bhavacandrika/data.json",
+      "populated": true,
+      "title": "तत्त्वसङ्ख्यानम् — भावचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_sankhyana/tika_bhavadipa/data.json",
+      "populated": true,
+      "title": "तत्त्वसङ्ख्यानम् — तत्वसङ्ख्यानटीकाभावदीपः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_sankhyana/tika_bhavavarnanam/data.json",
+      "populated": true,
+      "title": "तत्त्वसङ्ख्यानम् — भाववर्णनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_sankhyana/tika_kashi_tippani/data.json",
+      "populated": true,
+      "title": "तत्त्वसङ्ख्यानम् — काशी टिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_sankhyana/tika_kashitippani/data.json",
+      "populated": true,
+      "title": "तत्त्वसङ्ख्यानम् — काशीटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_sankhyana/tika_tatvasankhyanatikatippani/data.json",
+      "populated": true,
+      "title": "तत्त्वसङ्ख्यानम् — तत्वसङ्ख्यानटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_sankhyana/tika_tatvasankhyanatippanam/data.json",
+      "populated": true,
+      "title": "तत्त्वसङ्ख्यानम् — तत्वसङ्ख्यानटिप्पणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_sankhyana/tika_vivarana/data.json",
+      "populated": true,
+      "title": "तत्त्वसङ्ख्यानम् — तत्वसङ्ख्यानविवरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/mula/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_dvaitadyumani/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — द्वैतद्युमणि"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_dvaitadyumanitippanisaroddhara/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — द्वैतद्युमणिटिप्पणिसारोद्धारः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_govindiya/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — गोविन्दीया"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_gururajiya/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — गुरुराजीया"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_janardanabhattiya/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — जनार्दनभट्टीया"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — श्रीमज्जयतीर्थ टीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_naropantiya/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — नारोपन्तीया"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_shriraghavendratirtha/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — श्रीराघवेन्द्रतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_shrivedeshatirtha/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — श्रीवेदेशतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_shrivijayindrabhikshu/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — श्रीविजयीन्द्रभिक्षु"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattvodyota/mula/data.json",
+      "populated": true,
+      "title": "तत्त्वविवेकः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattvodyota/tika_mandaramanjari/data.json",
+      "populated": true,
+      "title": "तत्त्वविवेकः — मन्दारमञ्जरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattvodyota/tika_vivarana/data.json",
+      "populated": true,
+      "title": "तत्त्वविवेकः — तत्वविवेकटीकाविवरणं"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/upadhi_khandana/mula/data.json",
+      "populated": true,
+      "title": "उपाधिखण्डनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/upadhi_khandana/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "उपाधिखण्डनम् — टीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/upadhi_khandana/tika_mandaramanjari/data.json",
+      "populated": true,
+      "title": "उपाधिखण्डनम् — मन्दारमञ्जरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/upadhi_khandana/tika_parashunamnitippani/data.json",
+      "populated": true,
+      "title": "उपाधिखण्डनम् — परशुनाम्नीटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/upadhi_khandana/tika_shrinivasatirthiyatippani/data.json",
+      "populated": true,
+      "title": "उपाधिखण्डनम् — श्रीनिवासतीर्थीयटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/mula/data.json",
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_bhavabodha/data.json",
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः — भावबोधः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_bhavadipa/data.json",
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः — भावदीपः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_dvitiya_pariccheda/data.json",
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः — द्वितीयः परिच्छेदः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः — टीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_laghuprabha/data.json",
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः — लघुप्रभा"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_tattvamanjari/data.json",
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः — तत्त्वमञ्जरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_tritiya_pariccheda/data.json",
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः — तृतीयः परिच्छेदः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_vakyarthadipika/data.json",
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः — वाक्यार्थदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_vishamapadavakyarthavivriti/data.json",
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः — विषमपदवाक्यार्थविवृतिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_bhashya/mula/data.json",
+      "populated": true,
+      "title": "गीताभाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_bhashya/tika_bhavabodha/data.json",
+      "populated": true,
+      "title": "गीताभाष्यम् — भावबोधः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_bhashya/tika_bhavadipa/data.json",
+      "populated": true,
+      "title": "गीताभाष्यम् — भावदीपः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_bhashya/tika_bhavadipika/data.json",
+      "populated": true,
+      "title": "गीताभाष्यम् — भावदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_bhashya/tika_bhavapradipika/data.json",
+      "populated": true,
+      "title": "गीताभाष्यम् — भावप्रदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_bhashya/tika_bhavaprakasha/data.json",
+      "populated": true,
+      "title": "गीताभाष्यम् — भावप्रकाशः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_bhashya/tika_bhavaratnakosha/data.json",
+      "populated": true,
+      "title": "गीताभाष्यम् — भावरत्नकोशः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_bhashya/tika_prakashika/data.json",
+      "populated": true,
+      "title": "गीताभाष्यम् — भावप्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_bhashya/tika_prameyadipika/data.json",
+      "populated": true,
+      "title": "गीताभाष्यम् — प्रमेयदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_bhashya/tika_vakyarthapradipa/data.json",
+      "populated": true,
+      "title": "गीताभाष्यम् — वाक्यार्थप्रदीपः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_tatparya_nirnaya/mula/data.json",
+      "populated": true,
+      "title": "गीतातात्पर्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_tatparya_nirnaya/tika_arjuna_uvaca/data.json",
+      "populated": true,
+      "title": "गीतातात्पर्यम् — अर्जुन _ उवाच"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_tatparya_nirnaya/tika_bhavadipa/data.json",
+      "populated": true,
+      "title": "गीतातात्पर्यम् — भावदीपः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_tatparya_nirnaya/tika_bhavaprakasha/data.json",
+      "populated": true,
+      "title": "गीतातात्पर्यम् — भावप्रकाशः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_tatparya_nirnaya/tika_kiranavali/data.json",
+      "populated": true,
+      "title": "गीतातात्पर्यम् — किरणावली"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_tatparya_nirnaya/tika_kiranavalyam/data.json",
+      "populated": true,
+      "title": "गीतातात्पर्यम् — किरणावल्यां"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadeepika/data.json",
+      "populated": true,
+      "title": "गीतातात्पर्यम् — न्यायदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipikabhavaprakasha/data.json",
+      "populated": true,
+      "title": "गीतातात्पर्यम् — न्यायदीपिकाभावप्रकाशः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_tatparya_nirnaya/tika_prakashika/data.json",
+      "populated": true,
+      "title": "गीतातात्पर्यम् — प्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_tatparya_nirnaya/tika_shrimannyayadipakiranavali/data.json",
+      "populated": true,
+      "title": "गीतातात्पर्यम् — श्रीमन्न्यायदीपकिरणावलिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_tatparya_nirnaya/tika_vakyaviveka/data.json",
+      "populated": true,
+      "title": "गीतातात्पर्यम् — वाक्यविवेकः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/itihasa_prasthana/mahabharata_tatparya_nirnaya/mula/data.json",
+      "populated": true,
+      "title": "महाभारततात्पर्यनिर्णयः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/itihasa_prasthana/yamaka_bharata/mula/data.json",
+      "populated": true,
+      "title": "यमकभारतम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/mula/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_bhagavataprakashika/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — भागवतप्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_catti/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — चट्टी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_chalari/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — छलारी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_durghatabhavadipika/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — दुर्घटभावदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_durghatabhavadipika_sahasa_ityasya_sahasa_paralokam_gamayitetyar/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — दुर्घटभावदीपिका — साहस इत्यस्य साहसा परलोकं गमयितेत्यर्थः । सहसेति शब्दो-पृपदण्यन्तात्सृगतावित्यस्माड्डु प्रत्यये टि लोपे छान्दसे सेत्यस्य लोपे सेति हस्वस्य दीर्घे साहसेति रूपं निष्पन्नमित्यभ्युपगमात् ।। ४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_iti_shri_chalari_sheshacaryakritayam_bhagavatatippanyam_navamask/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — इति श्री छलारी शेषाचार्यकृतायां भागवतटिप्पण्यां नवमस्कन्धे प्रथमोऽध्यायः ।। ९–१"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_lingeri/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — लिङ्गेरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_lingheri/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — लिङ्घेरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_mandanandini/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — मन्दनन्दिनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_padaratnavali/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — पदरत्नावली"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_prakashika/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — प्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_prameyacandrika/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — प्रमेयचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_pranatashcasau_vihvalo_bhayagrastashca_pranatavihvala_ityartha_e/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — प्रणतश्चासौ विह्वलो भयग्रस्तश्च प्रणतविह्वल इत्यर्थः । एतेन प्रणतविह्वल इत्येतव्द्यर्थमिति दूषणस्यानवकाशः । धर्मराजस्यातिशयितकृष्णपरिचये विद्यमानेऽपि पूजाकाले तेजोविशेषं दृष्ट्वा भयग्रस्तः सन्नम्रो जात इति वक्तुं प्रणतविह्वल इत्यङ्गीकारात्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_satyadharma/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — सत्यधर्म"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_satyadharmiya/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — सत्यधर्मीया"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_satyadharmiya_kutosomatvamashvinordevayorapityata_aha_bhishajavi/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — सत्यधर्मीया —कुतोऽसोमत्वमश्विनोर्देवयोरपीत्यत आह ।। भिषजाविति ।। पूर्वं च्यवनवचनवितरणतः ।। २६"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_shrimadvijayadhvajatirthaviracita/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — श्रीमद्विजयध्वजतीर्थविरचिता"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_shrinivasatirthiya/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — श्रीनिवासतीर्थीया"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_shrisatyadharma/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — श्रीसत्यधर्म"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_sumanorancini/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — सुमनोरञ्चिनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_sumanoranjini/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — सुमनोरञ्जिनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_sura_ityasya_bhusura_brahmana_ityartha_etena_sura_ityetaddeva_it/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — सुरा इत्यस्य भूसुरा ब्राह्मणा इत्यर्थः । एतेन सुरा इत्येतद्देवा इत्यनेन पुनरुक्तमिति चोद्यस्यानवकाशः । सुरा इत्यस्य भूशब्दाध्याहारेण ब्राह्मणा इत्यर्थ-स्योक्तत्वात् ।। २"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_virodhoddhara/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — विरोधोद्धारः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_virododdhara/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — विरोदोद्धारः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anubhashya/mula/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्राणुभाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anubhashya/tika_tatvamanjari/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्राणुभाष्यम् — तत्वमञ्जरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/mula/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_abhimanyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अभिमान्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_abhyugamadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अभ्युगमाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_adrishyatvadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अदृश्यत्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_akashadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — आकाशाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_aksharadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अक्षराधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_anandamayadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — आनन्दमयाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_antaradhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अन्तरधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_antaryamyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अन्तर्याम्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_antasthatvadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अन्तस्थत्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_antimapranadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अन्तिमप्राणाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_anumanikadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — आनुमानिकाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_anupalabdhyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अनुपलब्ध्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_anvayadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अन्वयाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_anyathanumityadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अन्यथानुमित्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_anyatrabhavadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अन्यत्राभावाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_arambhanadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — आरम्भणाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_asadadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — असदधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_asambhavadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — असम्भवाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_atmadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — आत्माधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_attritvadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — अत्तृत्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_bhoktradhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — भोक्त्रधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_brahmadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — ब्रह्माधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_dehayogadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — देहयोगाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_devatadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — देवताधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_dyubhvadyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — द्युभ्वाद्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_gayatryadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — गायत्र्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_guhadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — गुहाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_ikshatyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — ईक्षत्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_itaravyapadeshadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — इतरव्यपदेशाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_janmadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — जन्माधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_jijnasadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — जिज्ञासाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_jyotirupakramadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — ज्योतिरुपक्रमाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_kamacaradhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — कामचाराधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_matarishvadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — मातरिश्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_na_pratikadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — न प्रतीकाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_na_prayojanadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — न प्रयोजनाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_na_vilakshanatvadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — न विलक्षणत्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_naikasminnadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — नैकस्मिन्नधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_nasthanatopyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — नस्थानतोप्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_navadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — नवाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_paradhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — पराधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_patyuradhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — पत्युरधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_phalashrutyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — फलश्रुत्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_prakrityadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — प्रकृत्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_pranadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — प्राणाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_prathama_pada/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — प्रथमः पादः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_prithagadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — पृथगधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_purushashmadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — पुरुषाश्माधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_racananupapattyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — रचनानुपपत्त्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_samanvayadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — समन्वयाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_sampattyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — सम्पत्त्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_samudayadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — समुदायाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_sandhyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — सन्ध्याधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_sarvadharmopapattyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — सर्वधर्मोपपत्त्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_sarvagatatvadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — सर्वगतत्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_sarvavedantapratyayadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — सर्ववेदान्तप्रत्ययाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_shabdamulatvadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — शब्दमूलत्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_shastrayonitvadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — शास्त्रयोनित्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_sthanavisheshadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — स्थानविशेषाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_tadadhigamadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — तदधिगमाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_upamadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — उपमाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_upasamharadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — उपसंहाराधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_utpattyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — उत्पत्त्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_vaishamyanairghrinyadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — वैषम्यनैर्घृण्याधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_vaisheshikadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — वैशेषिकाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_vamanadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — वामनाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_viyadadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — वियदधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_vyatirekadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — व्यतिरेकाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/mula/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_a_bhinavacandrika/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — अ भिनवचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_abhinavacandrika/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — अभिनवचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhamati/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — भामती"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhavabodha/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — भावबोधः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhavadipa/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — भावदीपः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhinavacandrika/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — भिनवचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_gu_rvartha_dipika/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — गु र्वर्थ दीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_gurvarthadipika/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — गुर्वर्थदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_pandurangi_shrinivasacaryaviracita_tattvasubodhini/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — पाण्डुरङ्गि श्रीनिवासाचार्यविरचिता तत्त्वसुबोधिनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_sattarkadipavali/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — सत्तर्कदीपावली"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_sharkara_shrinivasacaryaviracita_vakyarthamanjari/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — शर्करा श्रीनिवासाचार्यविरचिता वाक्यार्थमञ्जरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_shriraghuttamatirthaviracita_tattvaprakashikabhavabodha/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — श्रीरघूत्तमतीर्थविरचितः तत्त्वप्रकाशिकाभावबोधः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_tamraparni_shrinivasacaryaviracita_vakyarthamuktavali/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — ताम्रपर्णी श्रीनिवासाचार्यविरचिता वाक्यार्थमुक्तावली"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_tattvapradipika/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — तत्त्वप्रदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprakashika/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — तत्त्वप्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprakashikabhavabodha/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — तत्त्वप्रकाशिकाभावबोधः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprakashikavivriti/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — तत्त्वप्रकाशिकाविवृतिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_tattvaprradipika/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — तत्त्वप्र्रदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_tattvasubodhini/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — तत्त्वसुबोधिनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_ttvapradipika/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — त्त्वप्रदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_vakyarthamancari/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — वाक्यार्थमञ्चरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_vakyarthamanjari/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — वाक्यार्थमञ्जरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_vakyarthamuktavali/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — वाक्यार्थमुक्तावली"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_varthamanjari/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — वार्थमञ्जरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_vivarana/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — वाक्यार्थविवरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_vivriti/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — विवृतिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/nyaya_vivarana/mula/data.json",
+      "populated": true,
+      "title": "न्यायविवरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/nyaya_vivarana/tika_bhavabodha/data.json",
+      "populated": true,
+      "title": "न्यायविवरणम् — भावबोध"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/nyaya_vivarana/tika_nigudharthaprabodhini/data.json",
+      "populated": true,
+      "title": "न्यायविवरणम् — निगूढार्थप्रबोधिनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/nyaya_vivarana/tika_panchika/data.json",
+      "populated": true,
+      "title": "न्यायविवरणम् — न्यायविवरणपञ्चिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/nyaya_vivarana/tika_prabodhini/data.json",
+      "populated": true,
+      "title": "न्यायविवरणम् — प्रबोधिनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/omkara_vada/mula/data.json",
+      "populated": true,
+      "title": "ओङ्कारवादः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/aitareyopanishad_bhashya/mula/data.json",
+      "populated": true,
+      "title": "ऐतरेयोपनिषद्भाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/aitareyopanishad_bhashya/tika_bhavapradipa/data.json",
+      "populated": true,
+      "title": "ऐतरेयोपनिषद्भाष्यम् — भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/brihadaranyakopanishadbhashyam/mula/data.json",
+      "populated": true,
+      "title": "बृहदारण्यकोपनिषद्भाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_bhavabodhatippani/data.json",
+      "populated": true,
+      "title": "बृहदारण्यकोपनिषद्भाष्यम् — भावबोधटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_khandartha/data.json",
+      "populated": true,
+      "title": "बृहदारण्यकोपनिषद्भाष्यम् — खण्डार्थः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/chandogyopanishad_bhashya/mula/data.json",
+      "populated": true,
+      "title": "छान्दोग्योपनिषद्भाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/chandogyopanishad_bhashya/tika_chandogyopanishatkhandartha/data.json",
+      "populated": true,
+      "title": "छान्दोग्योपनिषद्भाष्यम् — छान्दोग्योपनिषत्खण्डार्थः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/chandogyopanishad_bhashya/tika_khandartha/data.json",
+      "populated": true,
+      "title": "छान्दोग्योपनिषद्भाष्यम् — खण्डार्थः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/chandogyopanishad_bhashya/tika_padarthakaumudi/data.json",
+      "populated": true,
+      "title": "छान्दोग्योपनिषद्भाष्यम् — पदार्थकौमुदी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/ishavasyopanishad_bhashya/mula/data.json",
+      "populated": true,
+      "title": "ईशावास्योपनिषद्भाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/ishavasyopanishad_bhashya/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "ईशावास्योपनिषद्भाष्यम् — ईशावास्योपनिषद्भाष्यटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/ishavasyopanishad_bhashya/tika_prakashika/data.json",
+      "populated": true,
+      "title": "ईशावास्योपनिषद्भाष्यम् — ईशावास्योपनिषद्भाष्यटीकाप्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/mula/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_shriraghavendratirthakhandartha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीराघवेन्द्रतीर्थखण्डार्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_shrivadirajatirtha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीवादिराजतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_shrivaradatirtha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीवरदतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_shrivaradatirthakhandartha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीवरदतीर्थखण्डार्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_shrivedeshatirtha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीवेदेशतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_shrivedeshatirtha_khandartha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीवेदेशतीर्थ खण्डार्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_shrivedeshatirthakhandartha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीवेदेशतीर्थखण्डार्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_shrivyasatirtha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीव्यासतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_vamanapanditacarya/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — वामनपण्डिताचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kenopanishad_bhashya/mula/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kenopanishad_bhashya/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम् — श्रीवामनपण्डितविरचिताटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kenopanishad_bhashya/tika_prakashika/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम् — श्रीवादिराजतीर्थविरचिताप्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kenopanishad_bhashya/tika_shriraghavendrayativiracitatalavakaropanishatkhandartha/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम् — श्रीराघवेन्द्रयतिविरचितःतलवकारोपनिषत्खण्डार्थः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kenopanishad_bhashya/tika_shrisatyapriyatirthaviracitabhashyavivriti/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम् — श्रीसत्यप्रियतीर्थविरचिताभाष्यविवृतिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kenopanishad_bhashya/tika_shrivedeshatirthaviracitashrutyartha/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम् — श्रीवेदेशतीर्थविरचितश्रुत्यर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kenopanishad_bhashya/tika_vivarana/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम् — श्रीव्यासतीर्थविरचितंविवरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/mandukyopanishadbhashyam/mula/data.json",
+      "populated": true,
+      "title": "माण्डूक्योपनिषद्भाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "माण्डूक्योपनिषद्भाष्यम् — श्रीव्यासतीर्थविरचिताटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_padarthadipika/data.json",
+      "populated": true,
+      "title": "माण्डूक्योपनिषद्भाष्यम् — पदार्थदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_prakashika/data.json",
+      "populated": true,
+      "title": "माण्डूक्योपनिषद्भाष्यम् — श्रीवादिराजीयाप्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_shrinivasatirthaviracitapadarthadipika/data.json",
+      "populated": true,
+      "title": "माण्डूक्योपनिषद्भाष्यम् — श्रीनिवासतीर्थविरचितापदार्थदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/mundakopanishadbhashyam/mula/data.json",
+      "populated": true,
+      "title": "मुण्डकोपनिषद्भाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/mundakopanishadbhashyam/tika_padarthadipika/data.json",
+      "populated": true,
+      "title": "मुण्डकोपनिषद्भाष्यम् — पदार्थदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/mundakopanishadbhashyam/tika_prakashika/data.json",
+      "populated": true,
+      "title": "मुण्डकोपनिषद्भाष्यम् — श्रीवादिराजीयाप्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/mundakopanishadbhashyam/tika_shrinivasatirthaviracitakhandartha/data.json",
+      "populated": true,
+      "title": "मुण्डकोपनिषद्भाष्यम् — श्रीनिवासतीर्थविरचिताखण्डार्थः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/mula/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_anantabhattaviracitashatprashnabhashyatikatippani/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — अनन्तभट्टविरचिताषट्प्रश्नभाष्यटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_gudhakartrikashatprashnabhashyatikatippani/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — गूढकर्तृकाषट्प्रश्नभाष्यटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — श्रीमज्जयतीर्थभिक्षुविरचिताषट्प्रश्नभाष्यटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_mankalidharmarajacaryaviracitashatprashnabhashyatikatippani/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — मङ्कालीधर्मराजाचार्यविरचिताषट्प्रश्नभाष्यटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_panchika/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — उदयगिरिकेशवाचार्यविरचिताषट्प्रश्नपञ्चिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_prakashika/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — श्रीवादिराजतीर्थविरचिताषट्प्रश्नभाष्यटीकाप्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shrinivasatirthaviracitashatprashrabhashyatikatippani/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — श्रीनिवासतीर्थविरचिताषट्प्रश्रभाष्यटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shriraghavendrayativiracitashatprashnopanishatkhandartha/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — श्रीराघवेन्द्रयतिविरचितषट्प्रश्नोपनिषत्खण्डार्थः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shrisatyaprajnatirthaviracitashatprashnabhashyatikatippani/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — श्रीसत्यप्रज्ञतीर्थविरचिताषट्प्रश्नभाष्यटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shrishrinivasatirthaviracitashatprashrabhashyatikatippani/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — श्रीश्रीनिवासतीर्थविरचिताषट्प्रश्रभाष्यटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_tamraparnishrinivasacaryaviracitashatprashrabhashyatikatippani/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — ताम्रपर्णीश्रीनिवासाचार्यविरचिताषट्प्रश्रभाष्यटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_vivarana/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — छलारीनारायणाचार्यविरचितंषट्प्रश्नटीकाविवरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/taittiriyopanishad_bhashya/mula/data.json",
+      "populated": true,
+      "title": "तैत्तिरीयोपनिषद्भाष्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_khandartha/data.json",
+      "populated": true,
+      "title": "तैत्तिरीयोपनिषद्भाष्यम् — खण्डार्थः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_padarthadipika/data.json",
+      "populated": true,
+      "title": "तैत्तिरीयोपनिषद्भाष्यम् — पदार्थदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_padarthadipika_bhashyartha/data.json",
+      "populated": true,
+      "title": "तैत्तिरीयोपनिषद्भाष्यम् — पदार्थदीपिका भाष्यार्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_prakashika/data.json",
+      "populated": true,
+      "title": "तैत्तिरीयोपनिषद्भाष्यम् — भाष्यप्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_shrinivasatirthiya_khandartha/data.json",
+      "populated": true,
+      "title": "तैत्तिरीयोपनिषद्भाष्यम् — श्रीनिवासतीर्थीय खण्डार्थ"
     }
   ]
 }
