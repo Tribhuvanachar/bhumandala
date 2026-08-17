@@ -5,6 +5,8 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="../dge/js/vandana-guard.js?v=1"></script>
+<!-- Passkeys come from admin/config/keys.json, not from this page. -->
+<script src="js/keys.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Holy Places Curation · DGE Guru Parampara (super-admin)</title>
 <style>
@@ -110,13 +112,14 @@
 
 <script>
 (function(){
-  var PASSKEY="SHRI108";
+  // Key comes from admin/config/keys.json via js/keys.js.
+  var GATE="superadmin";
   var $=function(s){return document.querySelector(s);};
   var LSK="dge.holyplaces.edits", LSADD="dge.holyplaces.added", LSHIDE="dge.holyplaces.hidden", LSDARK="dge.holyplaces.dark";
   if(sessionStorage.getItem("dge.admin.ok")==="1" || localStorage.getItem("is_superadmin")==="true") start();
   else {
     $("#gate").style.display="flex";
-    var tryK=function(){ if($("#gk").value.trim().toUpperCase()===PASSKEY){ sessionStorage.setItem("dge.admin.ok","1"); location.reload(); } else { $("#gk").value=""; $("#gk").placeholder="wrong — try again"; } };
+    var tryK=function(){ window.dgeCheckKey(GATE,$("#gk").value).then(function(ok){ if(ok){ sessionStorage.setItem("dge.admin.ok","1"); location.reload(); } else { $("#gk").value=""; $("#gk").placeholder="wrong — try again"; } }); };
     $("#gbtn").onclick=tryK; $("#gk").addEventListener("keydown",function(e){ if(e.key==="Enter") tryK(); }); $("#gk").focus();
   }
 

@@ -30,6 +30,7 @@ where it is, and is still linked from the same admin menu.
 | `config/library-overrides.json` | `dge/js/library.js` | `library.html`, exported and committed by hand |
 | `config/library-status.json` | `library.html` | `tools/gen_library_status.py` — a generated snapshot of what is loaded |
 | `config/site.config.json` | `tools/set_site_url.py` | hand-edited, then applied with that script |
+| `config/keys.json` | `js/keys.js`, used by every gated admin page | hand-edited |
 
 `site.config.json` holds the site's own absolute URL. Almost nothing needs
 it — the reader resolves its links relatively and runtime JavaScript uses
@@ -79,10 +80,13 @@ lives in the library, so the content is not lost — only that URL.
 
 ## Two things worth knowing
 
-**The passkey is not security.** `SHRI108` is still hardcoded in
-`admin/kosha.html`. In a public repository anyone can read it in the page
-source, so it gates convenience, not access, and should not be mistaken for
-the latter. The dead `Config.json` that also carried it has been removed.
+**The passkeys are not security.** They now live in one place —
+`config/keys.json` — instead of being string literals inside the five pages
+they guarded. That makes them changeable; it does not make them secret. The
+file sits in a public repository, and the page source reveals them anyway.
+They stop an admin tool being opened by accident or wandered into. Nothing
+genuinely sensitive belongs behind them. Real protection needs a server, or
+the Firebase accounts being wired up in `dge/js/user-auth.js`.
 
 **Paths here are derived, not written.** `dge/js/core.js` resolves this
 folder from its own script URL rather than from the page's, so the config
