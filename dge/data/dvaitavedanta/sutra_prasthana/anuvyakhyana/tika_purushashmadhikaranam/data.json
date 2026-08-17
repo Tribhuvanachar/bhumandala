@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14494",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > द्वितीयोध्यायः > द्वितीयः पादः > स्मृतियुक्तिश्रुतिगुणयुक्तयो बहुयुक्तयः",
+   "section": "द्वितीयः पादः",
+   "unit_title": "स्मृतियुक्तिश्रुतिगुणयुक्तयो बहुयुक्तयः",
+   "sanskrit_text": "पुरुषाश्माधिकरणम्\nसन्निधानाच्चेतनस्य वर्तते यद्यचेतनम् ॥46॥\nतथाप्यबुद्धिपूर्वत्वादुक्तदोषः समो भवेत् ।\nअङ्गित्वं पुरुषस्यैव सर्वैरप्यनुभूयते ॥47॥\nतदङ्गत्वोक्तितश्चैव स्यात् सर्वस्यापलापकः ।\nकिमु सर्वेश्वरस्यास्य ह्यपलापाद्यतोखलिम् ॥48॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "द्वितीयोध्यायः",
+    "द्वितीयः पादः",
+    "स्मृतियुक्तिश्रुतिगुणयुक्तयो बहुयुक्तयः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14478/563/satara/2-anav/thavat/thavat",
+    "content_id": 14478,
+    "layer": "पुरुषाश्माधिकरणम्",
+    "anchor": "article14494",
+    "fetched": "2026-08-17"
+   },
+   "tika_title": "पुरुषाश्माधिकरणम्"
+  }
+ ]
+}

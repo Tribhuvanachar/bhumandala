@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14495",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > द्वितीयोध्यायः > तृतीयः पादः > अथाशेषसमाम्याविरोधापाकृतिं प्रभुः",
+   "section": "तृतीयः पादः",
+   "unit_title": "अथाशेषसमाम्याविरोधापाकृतिं प्रभुः",
+   "sanskrit_text": "व्यतिरेकाधिकरणम्\nअच्छेद्यस्यापि जीवस्य विभागं बहुधा हरिः ॥25॥\nकृत्वा भोगान् प्रदायैव चैक्यमापादयेत् पुनः ।\nअत ईशवशं सर्वं चेतनाचेतनं जगत् ॥26॥\nअविभागं विभागाय यदा नयति केशवः ।\nकिमशक्यं परेशस्य तदेति ह्यभिधीयते ॥27॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "द्वितीयोध्यायः",
+    "तृतीयः पादः",
+    "अथाशेषसमाम्याविरोधापाकृतिं प्रभुः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14479/563/satara/2-anav/thavat/tataya",
+    "content_id": 14479,
+    "layer": "व्यतिरेकाधिकरणम्",
+    "anchor": "article14495",
+    "fetched": "2026-08-17"
+   },
+   "tika_title": "व्यतिरेकाधिकरणम्"
+  }
+ ]
+}

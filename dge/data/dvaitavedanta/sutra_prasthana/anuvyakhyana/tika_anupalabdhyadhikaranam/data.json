@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "निष्प्रमाणत्वमप्यस्य सूचयामास विश्वकृत्",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14494",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > द्वितीयोध्यायः > द्वितीयः पादः > स्मृतियुक्तिश्रुतिगुणयुक्तयो बहुयुक्तयः",
+   "section": "द्वितीयः पादः",
+   "unit_title": "स्मृतियुक्तिश्रुतिगुणयुक्तयो बहुयुक्तयः",
+   "sanskrit_text": "अनुपलब्ध्यधिकरणम्\nज्ञानमेवैकमखलिज्ञेयाकारं प्रभासते ।\nतत्र सन्ततिभेदश्च स्वभेदो भेद एव च ॥245॥\nकल्पिताः प्रतिभासान्ते नानासंवृतिभूमिषु ।\nइत्येतदपि नो युक्तं न हि ज्ञानतया जगत् ॥246॥\nभासतेनुभस्यैव विरुद्धत्वादपेशलम् ।\nतन्मतं क्षणिकत्वाच्च ज्ञानस्य स्थिररूपतः ॥247॥\nज्ञेयस्योक्तप्रकारेण सर्वश्रुतिविरोधतः ।\nअनुभूतिविरुद्धत्वादपि पक्षा इमेशिवाः ॥248॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "द्वितीयोध्यायः",
+    "द्वितीयः पादः",
+    "स्मृतियुक्तिश्रुतिगुणयुक्तयो बहुयुक्तयः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14478/563/satara/2-anav/thavat/thavat",
+    "content_id": 14478,
+    "layer": "अनुपलब्ध्यधिकरणम्",
+    "anchor": "article14494",
+    "fetched": "2026-08-17"
+   },
+   "tika_title": "अनुपलब्ध्यधिकरणम्"
+  }
+ ]
+}
