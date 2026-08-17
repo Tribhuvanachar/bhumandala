@@ -20,11 +20,17 @@ dge/data/koshas/
   <category>/<slug>/e/<3-char>.json   full entries (etymology, citations)
 ```
 
-**Right now `dge/data/koshas/` holds only the loadable sample** (10
-dictionaries, common-word buckets, ~63 MB unpacked) that shipped with the
-original build — real, working, but a small slice, not the full lexicon. The
-importer that produced it (and that can produce the full ~436 MB / 503K-headword
-dataset) is in `importers/`, proven and ready to re-run — see §3.
+**The live corpus is not in this repo.** `js/kosha.js` and
+`admin/kosha.html` read it from the `dist` branch of the separate
+[`Tribhuvanachar/bhumandala-kosha-data`](https://github.com/Tribhuvanachar/bhumandala-kosha-data)
+repo over jsDelivr (`appConfig.koshaDataBase`), because at **93 dictionaries /
+2,094,525 headwords / 2,436,991 senses / ~1.8 GB** it is well over this repo's
+budget. `dge/data/koshas/` here still holds the original 10-dictionary sample,
+which is what a local checkout falls back to when `KOSHA_DATA_BASE` is unset.
+
+The build pipeline lives in that data repo (`kosha_core.py`,
+`dicts_config.json`, `build_koshas.py`, and a `Build Kosha corpus` Action);
+`importers/` here is the original standalone/Colab version it grew out of.
 
 ---
 
@@ -59,7 +65,8 @@ standalone without it (see §5).
 `importers/DGE_Kosha_import.ipynb` for Google Colab) parses:
 
 - `.babylon` source dictionaries from `github.com/indic-dict/stardict-sanskrit`
-  (cloned automatically — no upload needed for the cleared Cologne set), and
+  and its siblings `-kAvya` (Purāṇic/epic encyclopaedias and indices) and
+  `-vyAkaraNa` (Aṣṭādhyāyī and dhātu literature), cloned automatically, and
 - compiled StarDict binaries (`.ifo`/`.idx`/`.dict.dz`/`.syn`) from a local
   `dict.zip` — this is how the ~2.3 GB personal dictionary collection gets in.
 
@@ -73,10 +80,10 @@ standalone without it (see §5).
 5. Commit. Bump the `?v=` on `js/kosha.js`'s `<script>` tag in `index.html`
    per the site's cache-busting convention.
 
-Last full run (per the original build): **10 dictionaries, 503,171 headwords,
-655,206 senses, ~436 MB across ~24,600 files** — comfortably under GitHub's
-~1 GB soft repo limit on its own, but see `PROJECT_STATUS.md` for the
-repo-size call once combined with everything else.
+Last full run: **93 dictionaries, 2,094,525 headwords, 2,436,991 senses,
+~1.8 GB across ~132,000 files**, ~10 minutes — which is why it lives in the
+separate data repo and is served over jsDelivr rather than committed here.
+(The original in-repo build was 10 dictionaries / 503,171 headwords / ~436 MB.)
 
 To add a dictionary from the local `dict.zip` that isn't already in the
 public repos: add one entry pointing `LOCAL_ROOT` at its extracted `.ifo`
@@ -118,9 +125,14 @@ This is a live decision point, not a settled one — see `PROJECT_STATUS.md`.
 
 ## 6. Known limits
 
-- Bengali and other languages (`sa↔bn`, etc.) aren't in the sample build; add
+- Bengali and other languages (`sa↔bn`, etc.) still aren't in the corpus; add
   via the sibling `indic-dict/stardict-bengali`/`-hindi` repos or the local
-  `dict.zip`.
+  `dict.zip`. Note those repos key on a *non-Sanskrit* headword, so taking them
+  is a corpus decision, not a gap in the Sanskrit koshas.
+- The machine-generated `vidyut/**` inflection tables in
+  `stardict-sanskrit-vyAkaraNa` are deliberately excluded — millions of derived
+  word-forms would bury real headwords in the lookup index. See
+  `LICENSING.md`.
 - Autocomplete on 1-character queries loads several shards — fine in
   practice, shardable further if it's ever felt to be too eager.
 - Translations are machine-generated (BYOK Gemini) and marked `*` — a bridge,

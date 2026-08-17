@@ -98,11 +98,11 @@
   </table>
   <p class="muted" style="margin-top:10px">👁 toggles whether a dictionary is searched in <b>कोश</b>. The flag is read live by <code>kosha.js</code> on the next query (stored per-browser as <code>kosha_hidden_dicts</code>). Click <b>Export visibility</b> to download <code>kosha-visibility.json</code> if you want to bake a default into the repo.</p>
 
-  <h2 class="sect">Known but not yet loaded <span class="muted">— documented in <code>kosha_toolkit/LICENSING.md</code></span></h2>
-  <p class="muted" style="margin:0 0 8px">The <code>indic-dict/stardict-sanskrit</code> ecosystem has ~65 dictionaries; 28 carry a per-folder <code>LICENSE.xml</code> (the cleared Cologne set). The catalogue below lists the ones named in <code>LICENSING.md</code> that are <b>not</b> in the current manifest. Counts are unknown until ingested. This is the documented subset, not a full live scrape of the mirror.</p>
+  <h2 class="sect">Known but not loaded <span class="muted">— and why · see <code>kosha_toolkit/LICENSING.md</code></span></h2>
+  <p class="muted" style="margin:0 0 8px">Every dictionary in <code>indic-dict/stardict-sanskrit</code> is loaded, as are the encyclopaedias and indices of <code>-kAvya</code> and the Aṣṭādhyāyī/dhātu set of <code>-vyAkaraNa</code>. What is left out below is left out <b>on purpose</b>, not for want of ingesting — each row says why. Rows are cross-checked against the live manifest on every load, so anything that does get ingested drops off this list by itself rather than sitting here stale.</p>
   <table id="tbl2">
     <thead><tr>
-      <th>Dictionary</th><th>Direction</th><th>Licence</th><th>Notes</th>
+      <th>Source</th><th>Direction</th><th>Licence</th><th>Why not loaded</th>
     </tr></thead>
     <tbody id="tb2"></tbody>
   </table>
@@ -127,38 +127,28 @@
   function loadVis(){ try{ HIDDEN=new Set(JSON.parse(localStorage.getItem("kosha_hidden_dicts")||"[]")); }catch(e){ HIDDEN=new Set(); } }
   function saveVis(){ localStorage.setItem("kosha_hidden_dicts", JSON.stringify([...HIDDEN])); }
 
-  // Catalogue of documented-but-not-ingested dictionaries (from LICENSING.md).
+  // Catalogue of sources deliberately NOT ingested, with the reason. Anything
+  // listed here that turns up in the live manifest is dropped from the table
+  // by renderNotLoaded() — the previous hardcoded list had gone entirely stale
+  // (all 26 rows had in fact been loaded), so the check is now automatic.
   var NOT_LOADED=[
-    // Cleared Cologne (CC-BY-SA 4.0) not yet in the manifest
-    {name:"Monier-Williams 1872",slug:"mw-1872",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
-    {name:"Apte 1890",slug:"apte-1890",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
-    {name:"Apte English-Sanskrit",slug:"apte-english-sanskrit-cologne",dir:"en→sa",lic:"cc",note:"Cologne reverse — CC-BY-SA 4.0"},
-    {name:"Cappeller",slug:"cappeller",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
-    {name:"Wilson",slug:"wilson",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
-    {name:"Yates",slug:"yates",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
-    {name:"Goldstücker",slug:"goldstucker",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
-    {name:"Lanman",slug:"lanman",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
-    {name:"Shabda-Sagara",slug:"shabda-sagara",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
-    {name:"Edgerton (Buddhist Hybrid)",slug:"edgerton",dir:"sa→en",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
-    {name:"Mayrhofer",slug:"mayrhofer",dir:"sa→de",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
-    {name:"Bopp",slug:"bopp",dir:"sa→de",lic:"cc",note:"Cologne — CC-BY-SA 4.0"},
-    {name:"Böhtlingk-Roth (pw)",slug:"pw",dir:"sa→de",lic:"cc",note:"Cologne German — CC-BY-SA 4.0"},
-    {name:"Böhtlingk-Roth Große (pwg)",slug:"pwg",dir:"sa→de",lic:"cc",note:"Cologne German — CC-BY-SA 4.0"},
-    {name:"Stchoupak",slug:"stchoupak",dir:"sa→fr",lic:"cc",note:"Cologne French — CC-BY-SA 4.0"},
-    {name:"Burnouf",slug:"burnouf",dir:"sa→fr",lic:"cc",note:"Cologne French — CC-BY-SA 4.0"},
-    // Unclear — Sanskrit→Sanskrit koshas (no LICENSE.xml in the mirror)
-    {name:"Amarakosha + Sudhā",slug:"amara-sudhA",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
-    {name:"Abhidhānachintāmaṇi Pariśiṣṭa",slug:"abhidhanachintamani-parishishta",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
-    {name:"Abhidhānaratnamālā",slug:"abhidhanaratnamala",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
-    {name:"Anekārthadhvanimañjarī",slug:"anekarthadhvanimanjari",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
-    {name:"Śaiva-kosha",slug:"shaiva-kosha",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
-    {name:"Vaiṣṇava-kosha",slug:"vaishnava-kosha",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
-    {name:"Nyāya-kosha",slug:"nyaya-kosha",dir:"sa→sa",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
-    // Unclear — other Indic bridges (no LICENSE.xml)
-    {name:"Apte Sanskrit-Hindi",slug:"apte-hi",dir:"sa→hi",lic:"bad",note:"indic-dict — no LICENSE, modern compilation"},
-    {name:"Saṃskṛtam–Tamiḻam",slug:"samskritam-tamizham",dir:"sa→ta",lic:"unclear",note:"indic-dict — no LICENSE.xml"},
-    {name:"Vedic Rituals (Hindi)",slug:"vedic-rituals-hi",dir:"sa→hi",lic:"unclear",note:"indic-dict — no LICENSE.xml"}
+    // Machine-generated inflection tables — millions of derived word-forms.
+    // They belong behind a morphology service; in a dictionary index they
+    // would bury real headwords.
+    {name:"vidyut subanta / tiṅanta / kṛdanta / taddhitānta tables",slug:"vidyut-*",dir:"सं→सं",lic:"unclear",
+     note:"stardict-sanskrit-vyAkaraNa — generated form tables, ~60 files. Deliberate: they would dwarf the lexicon."},
+    {name:"kṛdanta-rūpa-mālā / kṛdanta-sa / puṣpā-ārdhadhātuka / jnu-tiṅanta",slug:"vyakarana-forms",dir:"सं→सं",lic:"unclear",
+     note:"stardict-sanskrit-vyAkaraNa — also generated paradigm tables rather than lexicon entries."},
+    {name:"aShTAdhyAyi_com / dhaval-tiNanta / sanskritabhyas (deprecated)",slug:"vyakarana-deprecated",dir:"सं→सं",lic:"unclear",
+     note:"stardict-sanskrit-vyAkaraNa/_deprecated — upstream superseded these; the live aShTAdhyAyI set is loaded instead."},
+    // Duplicate of something already in the manifest.
+    {name:"Rāṇaḍe Vedic Rituals",slug:"rAnADe-vedic-rituals",dir:"सं→हि",lic:"unclear",
+     note:"stardict-sanskrit-kAvya — the same lexicon already loaded as vedic-rituals-hi, differently segmented."},
+    // Different corpus decision, not a Sanskrit-kosha gap.
+    {name:"indic-dict siblings: stardict-hindi / -kannada / -tamil / -pali / -english",slug:"other-language-repos",dir:"—",lic:"unclear",
+     note:"These key on a non-Sanskrit headword. Loading them is a separate corpus decision, not a missing Sanskrit kosha."}
   ];
+
 
   function start(){
     if(sessionStorage.getItem("dge.admin.ok")!=="1" && localStorage.getItem("is_superadmin")!=="true") return;
@@ -180,8 +170,10 @@
     // covered 10 of ~1046 real buckets, so this page was showing an
     // almost-empty dictionary list.
     var KOSHA_BASE = "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala-kosha-data@dist/data/koshas";
-    fetch(KOSHA_BASE + "/_index/manifest.json?v=1.1").then(function(r){return r.json();})
-      .then(function(m){ MAN=m; buildRows(); renderTotals(); renderLoaded(); })
+    // Bump ?v= whenever the corpus is rebuilt — jsDelivr caches branch files
+    // for ~12h, so without it this page keeps showing the previous manifest.
+    fetch(KOSHA_BASE + "/_index/manifest.json?v=1.2").then(function(r){return r.json();})
+      .then(function(m){ MAN=m; buildRows(); renderTotals(); renderLoaded(); renderNotLoaded(); renderPuranaNote(); })
       .catch(function(e){ $("#tb").innerHTML='<tr><td colspan="6" class="muted">Could not load '+KOSHA_BASE+'/_index/manifest.json ('+e+').</td></tr>'; });
   }
 
@@ -204,7 +196,7 @@
       stat(hw.toLocaleString(),"headwords")+
       stat(se.toLocaleString(),"senses")+
       stat(HIDDEN.size,"hidden from search")+
-      stat(NOT_LOADED.length,"known, not yet loaded");
+      stat(notLoadedRows().length,"known, deliberately not loaded");
   }
   function stat(b,s){ return '<div class="stat"><b>'+b+'</b><span>'+s+'</span></div>'; }
 
@@ -243,8 +235,14 @@
     document.querySelectorAll("#tb .eye").forEach(function(b){ b.onclick=function(){ var s=b.dataset.h; if(HIDDEN.has(s)) HIDDEN.delete(s); else HIDDEN.add(s); saveVis(); renderTotals(); renderLoaded(); }; });
   }
 
+  // A catalogue row survives only while its slug is genuinely absent from the
+  // live manifest — that is what keeps this table from going stale again.
+  function notLoadedRows(){
+    if(!MAN) return NOT_LOADED;
+    return NOT_LOADED.filter(function(r){ return !MAN.dictionaries[r.slug]; });
+  }
   function renderNotLoaded(){
-    $("#tb2").innerHTML=NOT_LOADED.map(function(r){
+    $("#tb2").innerHTML=notLoadedRows().map(function(r){
       var cls=r.lic==="cc"?"ok":(r.lic==="bad"?"bad":"unclear");
       var lab=r.lic==="cc"?"Cleared":(r.lic==="bad"?"Unclear — no licence":"Unclear");
       return '<tr><td class="nm"><b>'+esc(r.name)+'</b><span class="slug">'+esc(r.slug)+'</span></td>'+
@@ -255,17 +253,24 @@
   }
 
   function renderPuranaNote(){
+    var pe = MAN && MAN.dictionaries["purana-encyclopedia"];
+    var pi = MAN && MAN.dictionaries["purana-index"];
     $("#puranaNote").innerHTML=
-      '<b>Sourcing gap — Purāṇic encyclopaedia:</b> No Purāṇa-encyclopaedia / Purāṇa-index dictionary '+
-      '(e.g. Vettam Mani’s <i>Purāṇic Encyclopaedia</i>) is present in the current manifest, and none is '+
-      'documented in <code>kosha_toolkit/LICENSING.md</code>’s inventory of the <code>indic-dict/stardict-sanskrit</code> '+
-      'mirror or the local <code>dict.zip</code>. The nearest subject-koshas the mirror does carry are Śaiva-kosha, '+
-      'Vaiṣṇava-kosha and Nyāya-kosha (all <i>Unclear — no LICENSE.xml</i>), which are not Purāṇic indices. '+
-      'Vettam Mani’s work is a 1975 Motilal Banarsidass publication and is almost certainly still in copyright — '+
-      'per this project’s rule (<i>absence of a licence is not permission</i>) it must not be sourced here. '+
-      'This is a decision for the project lead, not something to fabricate. '+
-      '(Note: the separate <code>purANa-encyclopedia</code> / <code>purANa-index-dev</code> datasets tracked in the '+
-      'corpus/Ashtadhyayi workstream are a different pipeline and are not part of the Kosha dictionary mirror.)';
+      '<b>Purāṇic encyclopaedia — loaded, licence unresolved:</b> the gap is closed. '+
+      '<code>purana-encyclopedia</code>'+(pe?' ('+pe.headwords.toLocaleString()+' headwords)':'')+
+      ' and <code>purana-index</code>'+(pi?' ('+pi.headwords.toLocaleString()+' headwords)':'')+
+      ' now ship in the corpus, from <a href="https://github.com/indic-dict/stardict-sanskrit-kAvya" target="_blank" rel="noopener">'+
+      'indic-dict/stardict-sanskrit-kAvya</a>, alongside Sörensen’s Mahābhārata name index, the Mahābhārata '+
+      'cultural index, the Macdonell–Keith Vedic Index and the Ramakrishna Math encyclopaedia. '+
+      '<b>The copyright question is unchanged and is still the project lead’s to settle.</b> '+
+      '<code>purana-encyclopedia</code> is a digitisation of Vettam Mani’s <i>Purāṇic Encyclopaedia</i> '+
+      '(Motilal Banarsidass, 1975) and is almost certainly still in copyright; <code>purana-index</code> is '+
+      'Dikshitar’s <i>Purana Index</i> (University of Madras, 1951–55). The source repo’s own licence grants '+
+      'CC-BY 4.0 only where no third-party book title is named, so neither is covered by it. Both are stamped '+
+      '<i>Unclear</i> with a <code>license_note</code> in their <code>meta.json</code>, on the same '+
+      'non-commercial/educational basis as the other Unclear dictionaries — nothing here is presented as cleared. '+
+      'To pull either back out: hide it with 👁 above for a soft removal, or drop its entry from '+
+      '<code>dicts_config.json</code> in the data repo and re-run the build for a hard one.';
   }
 
   function exportVis(){

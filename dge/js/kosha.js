@@ -22,7 +22,7 @@
   // Set window.KOSHA_DATA_BASE (e.g. a jsDelivr /gh/…/data/koshas URL) to point
   // the app at the full external corpus once it outgrows the Pages repo.
   var BASE = (window.KOSHA_DATA_BASE || 'data/koshas').replace(/\/+$/, '');
-  var V = '?v=1.2';
+  var V = '?v=1.3';   // bump on every corpus rebuild — jsDelivr caches ~12h
   var PREF_LANG = (localStorage.getItem('app_kosha_pref_lang') || 'kn'); // user's language (Kannada)
   var LANG_NAME = { sa: 'संस्कृतम्', kn: 'ಕನ್ನಡ', en: 'English', hi: 'हिन्दी',
                     bn: 'বাংলা', te: 'తెలుగు', ta: 'தமிழ்', fr: 'Français', de: 'Deutsch' };
