@@ -574,8 +574,26 @@ def main(argv=None):
         [g for g in args.granthas.split(",") if g.strip()],
     )
     if not selected:
-        print("No granthas selected.", file=sys.stderr)
-        return 2
+        # An explicit filter that matches nothing is a mistake worth failing on
+        # (a typo in --granthas would otherwise look like a clean run). A scope
+        # that is simply switched off in dv_sources.json is NOT an error: the
+        # matrix still spawns a job per section, and failing it would fail the
+        # whole run. later_acharyas is deliberately disabled while its ~105 s
+        # per leaf is dealt with separately.
+        known_sections = {s["slug"] for s in config["sections"]}
+        known_granthas = {g.get("slug") for s in config["sections"]
+                          for g in s["granthas"] if g.get("slug")}
+        asked_sections = [s.strip() for s in args.sections.split(",") if s.strip()]
+        asked_granthas = [g.strip() for g in args.granthas.split(",") if g.strip()]
+        unknown = ([s for s in asked_sections if s not in known_sections]
+                   + [g for g in asked_granthas if g not in known_granthas])
+        if unknown:
+            print(f"No granthas selected; unknown name(s): {', '.join(unknown)}",
+                  file=sys.stderr)
+            return 2
+        print("No granthas selected — everything requested is disabled in "
+              "dv_sources.json. Nothing to do.")
+        return 0
 
     fetcher = Fetcher(
         cache_dir=args.cache,

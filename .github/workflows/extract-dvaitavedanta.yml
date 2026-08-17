@@ -204,6 +204,13 @@ jobs:
         with:
           python-version: "3.11"
 
+      # merge_status.py imports import_dvaitavedanta (for recompute_totals),
+      # which imports requests at module level. collect had never actually run
+      # before — it was skipped on every dry run and on every run where a shard
+      # was cancelled — so this was latent until collect became always().
+      - name: Install dependencies
+        run: pip install -r tools/dvaitavedanta/requirements.txt
+
       - name: Download shards
         uses: actions/download-artifact@v4
         with:
