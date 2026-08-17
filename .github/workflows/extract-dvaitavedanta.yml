@@ -364,4 +364,4 @@ jobs:
             dge/data/dvaitavedanta/**
             dge/data/taxonomy.json
             dge/data/library.json
-            dge/data/library_status.json
+            admin/config/library-status.json

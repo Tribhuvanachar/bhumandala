@@ -218,9 +218,9 @@
     $("#moveOv").addEventListener("click",function(e){ if(e.target===$("#moveOv")) closeMove(); });
     Promise.all([
       fetch("data/taxonomy.json").then(function(r){return r.json();}),
-      fetch("data/library_status.json").then(function(r){return r.json();})
+      fetch("config/library-status.json").then(function(r){return r.json();})
     ]).then(function(a){ TAX=a[0]; ST=a[1]; renderTotals(); renderSections(); render(); })
-      .catch(function(e){ $("#tree").innerHTML='<div class="muted" style="padding:14px">Could not load taxonomy.json / library_status.json ('+e+'). Place this page at dge/ and generate data/library_status.json.</div>'; });
+      .catch(function(e){ $("#tree").innerHTML='<div class="muted" style="padding:14px">Could not load taxonomy.json / library-status.json ('+e+'). Regenerate with tools/gen_library_status.py.</div>'; });
   }
 
   function renderTotals(){

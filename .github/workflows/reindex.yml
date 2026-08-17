@@ -11,7 +11,7 @@ name: DGE re-index (search + library status)
 # never hand-edited) and opens a PR so the change can be spot-checked before
 # it goes live:
 #   dge/search_index/**            (build_search_index.py)
-#   dge/data/library_status.json   (tools/gen_library_status.py)
+#   admin/config/library-status.json  (tools/gen_library_status.py)
 
 on:
   workflow_dispatch:
@@ -43,7 +43,7 @@ jobs:
 
       - name: Show what changed
         run: |
-          git status --porcelain dge/search_index dge/data/library_status.json || true
+          git status --porcelain dge/search_index admin/config/library-status.json || true
 
       - name: Open Pull Request
         if: ${{ fromJSON(inputs.open_pr) }}
@@ -56,11 +56,11 @@ jobs:
             Automated re-index via the **DGE re-index** workflow.
 
             - `dge/search_index/**` rebuilt by `dge/build_search_index.py`
-            - `dge/data/library_status.json` refreshed by `tools/gen_library_status.py`
+            - `admin/config/library-status.json` refreshed by `tools/gen_library_status.py`
 
             Both are generated build products (not hand-maintained). Merge once
             a quick spot-check of the search index and the Library Manager
             dashboard looks right.
           add-paths: |
             dge/search_index/**
-            dge/data/library_status.json
+            admin/config/library-status.json

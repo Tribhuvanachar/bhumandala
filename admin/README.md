@@ -28,6 +28,7 @@ where it is, and is still linked from the same admin menu.
 |---|---|---|
 | `config/config-overrides.json` | `dge/js/core.js` at boot, merged over `dge/js/config.js` | Site Settings, in-app (`dge/js/config-editor.js`) |
 | `config/library-overrides.json` | `dge/js/library.js` | `library.html`, exported and committed by hand |
+| `config/library-status.json` | `library.html` | `tools/gen_library_status.py` — a generated snapshot of what is loaded |
 
 Both are shallow overrides: they hold only the fields actually changed, and
 anything absent falls back to the defaults in `dge/js/config.js`. That file
@@ -48,14 +49,31 @@ Deliberately, because moving it would mean moving the code that owns it:
 - **`dge/data/`** — corpus data rather than settings: `library.json`,
   `taxonomy.json`, `schemas.json`, `tippanikaras.json`.
 
+## Removed
+
+Files that no code read, deleted rather than left to mislead. All of them
+remain in git history if any is ever wanted back.
+
+- `Config.json` — dead, and it carried the `SHRI108` passkey.
+- `Claude.html`, `grok.html`, `MegaInteractive.html`, `Sunrise.html` —
+  early prototypes of the reading page, superseded by `dge/`.
+- `PrahladaKrutaNarasimhaStotra.html` and `data_pns.json` — a standalone
+  copy of the Prahlāda-kṛta Nṛsiṃha Stotra, superseded by the live text at
+  `dge/data/stotras/pns/`.
+- `version.json` at the root — read by nothing. `dge/convert/version.json`
+  is a different file and is still in use.
+- `dge/data/tippanikaras.json`, `dge/data/_taxonomy.json` — no reader.
+
+One consequence worth naming: anyone holding a link to
+`PrahladaKrutaNarasimhaStotra.html` will now get a 404. The same stotra
+lives in the library, so the content is not lost — only that URL.
+
 ## Two things worth knowing
 
-**`Config.json` at the repository root is dead.** Nothing reads it. It also
-carries `"secretPasskey": "SHRI108"`, which is the same string hardcoded in
-`admin/kosha.html` and in `PrahladaKrutaNarasimhaStotra.html`. A passkey in
-a public repository protects nothing — anyone can read it in the page
-source. It gates convenience, not access, and should not be mistaken for
-security. Removing the dead file is a one-line change whenever you want it.
+**The passkey is not security.** `SHRI108` is still hardcoded in
+`admin/kosha.html`. In a public repository anyone can read it in the page
+source, so it gates convenience, not access, and should not be mistaken for
+the latter. The dead `Config.json` that also carried it has been removed.
 
 **Paths here are derived, not written.** `dge/js/core.js` resolves this
 folder from its own script URL rather than from the page's, so the config
