@@ -256,18 +256,25 @@ body.leaving #veil { opacity: 1; }
   to   { transform: scale(6.5); opacity: 0; }
 }
 
-/* Namaskāra: several rise together and dissolve, not one. */
-.pranam-mark {
-  position: absolute; bottom: 8px; left: 50%;
-  font-size: 30px; line-height: 1; pointer-events: none;
-  filter: drop-shadow(0 0 20px rgba(255,196,120,.7));
-  animation: pranam-rise 2.4s var(--ease) forwards;
+/* Namaskāra. Several figures come down at the base of the portrait — where
+   one would actually prostrate — rather than rising past his head. They bow
+   in, rest a moment, and fade. */
+.pranam-row {
+  position: absolute; left: 50%; bottom: 2px;
+  transform: translateX(-50%);
+  display: flex; align-items: flex-end; justify-content: center; gap: 8px;
+  pointer-events: none; z-index: 4; min-height: 30px;
 }
-@keyframes pranam-rise {
-  0%   { opacity: 0; transform: translate(-50%, 10px) scale(.55); }
-  18%  { opacity: 1; transform: translate(-50%, -6px) scale(1); }
-  60%  { opacity: .95; transform: translate(-50%, -52px) scale(.98); }
-  100% { opacity: 0; transform: translate(-50%, -116px) scale(.8); }
+.pranam-mark {
+  color: var(--gold); line-height: 0; opacity: 0;
+  filter: drop-shadow(0 0 14px rgba(255,196,120,.65));
+  animation: pranam-bow 2.6s var(--ease) forwards;
+}
+@keyframes pranam-bow {
+  0%   { opacity: 0; transform: translateY(-14px) scaleY(.4); }
+  22%  { opacity: 1; transform: translateY(0) scaleY(1); }
+  70%  { opacity: 1; transform: translateY(0) scaleY(1); }
+  100% { opacity: 0; transform: translateY(3px) scaleY(.96); }
 }
 
 /* --- his name and the verse --- */
@@ -665,6 +672,7 @@ body.leaving #veil { opacity: 1; }
     <div class="frame"><img id="photo" src="" alt=""></div>
     <div class="offer-zone" id="offerZone" role="button" tabindex="0"
          aria-label="Offer flowers to the Guru"></div>
+    <div class="pranam-row" id="pranamRow" aria-hidden="true"></div>
   </div>
 
   <div class="guru-block">
@@ -686,7 +694,7 @@ body.leaving #veil { opacity: 1; }
         <span id="offerIcon" aria-hidden="true"></span><span id="offerLabel"></span>
       </button>
       <button class="btn btn-obeisance" id="pranamBtn" aria-label="Offer salutations to the Guru">
-        <span aria-hidden="true">🙏</span><span id="pranamLabel"></span>
+        <span id="pranamIcon" aria-hidden="true"></span><span id="pranamLabel"></span>
       </button>
     </div>
     <div class="act-row">
@@ -782,7 +790,7 @@ const SITE_CONFIG = {
     heartColors: ['#F2820C', '#E8720A', '#FF9A2E'],
     maxSettled: 44
   },
-  pranam: { count: 5 },
+  pranam: { count: 3 },
 
   /* ---- the bands ---- */
   sections: [
@@ -968,6 +976,20 @@ window.SITE_CONFIG = SITE_CONFIG;
     lamp:   '<path d="M3.8 14.2h16.4c0 3.4-3.7 5.7-8.2 5.7s-8.2-2.3-8.2-5.7Z"/><path d="M12 13.8c-1.7-1.9-2.5-3.4-2.5-4.8 0-1.7 1-3 2.5-4.2 1.5 1.2 2.5 2.5 2.5 4.2 0 1.4-.8 2.9-2.5 4.8Z"/>',
     seed:   '<path d="M12 21c0-4.6 1.4-7.6 4.2-9 .4 4.8-.9 7.8-4.2 9Z"/><path d="M12 21c0-4.6-1.4-7.6-4.2-9-.4 4.8.9 7.8 4.2 9Z"/><path d="M12 21v-4"/><path d="M12 12.6c0-3.4.9-6 2.6-7.8"/>'
   };
+  /* Śāṣṭāṅga namaskāra — the full prostration, eight limbs to the ground,
+     arms reaching past the head with the palms joined. Its own function
+     because it is a wide figure, not a 24x24 glyph like the rest. */
+  function sashtanga(height) {
+    const w = Math.round(height * (120 / 46));
+    return '<svg viewBox="0 0 120 46" width="' + w + '" height="' + height + '" fill="none" ' +
+           'stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" ' +
+           'aria-hidden="true">' +
+           '<path d="M6 36h108"/><path d="M14 32c4-1.6 7.6-1.2 10.8.6"/><path d="M24.8 32.6 40 33"/>' +
+           '<circle cx="48" cy="29.5" r="5"/><path d="M53 31c7 1 13 1.6 20 1.6"/>' +
+           '<path d="M53 27.4c8-2.4 15-2.6 22 1"/><path d="M75 33c8 0 14-1 20-3.4"/>' +
+           '<path d="M95 29.6c5-1.8 9-2 14 .4"/><path d="M109 30v6"/></svg>';
+  }
+
   function icon(name, size) {
     const d = ICONS[name];
     if (!d) return '';
@@ -1030,7 +1052,8 @@ window.SITE_CONFIG = SITE_CONFIG;
     $('hint').textContent        = cfg.labels.hint;
     $('offerIcon').innerHTML     = flowerSvg(15);
     $('offerLabel').textContent  = cfg.labels.offerButton;
-    $('pranamLabel').textContent = cfg.labels.pranamButton;
+    $('pranamIcon').innerHTML     = sashtanga(15);
+    $('pranamLabel').textContent  = cfg.labels.pranamButton;
     $('enterLabel').textContent  = cfg.labels.enterLocked;
     $('cueLabel').textContent    = cfg.labels.sectionsCue;
 
@@ -1202,19 +1225,17 @@ window.SITE_CONFIG = SITE_CONFIG;
     offerings++;
     ripple();
     if (!reduced) {
-      // Several rise together rather than one — a salutation, not a single
-      // gesture.
       const n = cfg.pranam.count;
+      const row = $('pranamRow');
+      const arch = document.querySelector('.frame').getBoundingClientRect().width;
+      const base = Math.max(13, Math.min(22, Math.round(arch / 11)));
       for (let i = 0; i < n; i++) {
         const g = document.createElement('div');
         g.className = 'pranam-mark';
-        g.textContent = '🙏';
-        g.style.marginLeft = ((i - (n - 1) / 2) * 34 + (Math.random() - 0.5) * 12) + 'px';
-        g.style.fontSize = (22 + Math.random() * 13) + 'px';
-        g.style.animationDelay = (i * 130 + Math.random() * 90) + 'ms';
-        g.style.animationDuration = (2200 + Math.random() * 700) + 'ms';
-        $('offerZone').appendChild(g);
-        setTimeout(() => g.remove(), 3400);
+        g.innerHTML = sashtanga(base + (i === 1 ? 2 : 0));
+        g.style.animationDelay = (i * 140) + 'ms';
+        row.appendChild(g);
+        setTimeout(() => g.remove(), 3200 + i * 140);
       }
     }
     if (cfg.requireOffering && offerings >= cfg.minOfferings) unlock();
