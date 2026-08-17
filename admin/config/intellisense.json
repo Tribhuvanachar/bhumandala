@@ -19,6 +19,7 @@
     "  cueWindow        how many characters before the number to look for a cue.",
     "",
     "  identifyFromSearch  offer a matching sūtra when a name is typed into search.",
+    "  analyseWords     false switches off word analysis on double-tap.",
     "",
     "WHAT IT MATCHES BY NAME",
     "",
@@ -30,6 +31,21 @@
     "",
     "  'namah svasti svaha', 'नमः स्वस्ति स्वाहा' and 'ನಮಃ ಸ್ವಸ್ತಿ ಸ್ವಾಹಾ' all reach",
     "  2.3.16, नमःस्वस्तिस्वाहास्वधालंवषड्योगाच्च.",
+    "",
+    "WORD ANALYSIS",
+    "",
+    "  Double-tapping a Sanskrit word says which stem or root it comes from and what",
+    "  case, number, person or tense it stands in, then offers the dictionaries and",
+    "  everywhere else in the library the word occurs.",
+    "",
+    "  The analysis is Vidyut's, precomputed by tools/build_morphology.py into",
+    "  dge/data/_morph/ because Vidyut is a Rust binary over a 75 MB kośa and cannot",
+    "  run in a browser. Coverage is real but partial: Vidyut resolves inflected",
+    "  forms, not sandhi-joined ones, and the manifest records the exact figures.",
+    "  A word with no analysis says so rather than pretending.",
+    "",
+    "  Words are not marked up in the text. A page of Sanskrit with every word",
+    "  underlined is not a reading experience; selection is the affordance.",
     "",
     "THE DATA",
     "",
@@ -47,5 +63,6 @@
     "sutra", "sūtra", "ashtadhyayi", "aṣṭādhyāyī", "panini", "pāṇini"
   ],
   "cueWindow": 24,
-  "identifyFromSearch": true
+  "identifyFromSearch": true,
+  "analyseWords": true
 }

@@ -378,6 +378,27 @@
     document.body.appendChild(fab); document.body.appendChild(ov);
     var input = ov.querySelector('#kosha-q'), res = ov.querySelector('#kosha-res'), detail = ov.querySelector('#kosha-detail');
     fab.onclick = function () { ov.classList.add('open'); input.focus(); };
+
+    /* Everything in this file lives in a closure, which was right while the
+       कोश button was the only way in. The word popover in intellisense.js
+       needs to hand a word straight across, so this is the one door out:
+       open the overlay already looking the word up, rather than making the
+       reader retype what they just tapped. */
+    window.dgeOpenKosha = function (word) {
+      ov.classList.add('open');
+      ov.classList.remove('showdetail');
+      input.value = word || '';
+      if (word) {
+        search(word).then(function (result) {
+          renderResults(result, res, detail);
+          res.querySelectorAll('.kosha-hit').forEach(function (r) {
+            r.addEventListener('click', function () { ov.classList.add('showdetail'); });
+          });
+        });
+      } else {
+        input.focus();
+      }
+    };
     ov.querySelector('#kosha-close').onclick = function () {
       if (ov.classList.contains('showdetail')) ov.classList.remove('showdetail'); else ov.classList.remove('open'); };
     var t;

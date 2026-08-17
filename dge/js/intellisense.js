@@ -1,5 +1,5 @@
 /* =========================================================================
-   Sūtra intellisense.
+   Intellisense — sūtras, and the words themselves.
 
    A commentary says "1.1.3", or names a rule without numbering it, and the
    reader is expected to already know which rule that is. Most don't. This
@@ -22,17 +22,26 @@
                  first. Wired to the search box, so typing a half-remembered
                  name into it offers the rule.
 
-   Data comes from dge/data/vedanga/vyakarana/ashtadhyayi/_index/, built by
-   tools/build_sutra_index.py. The 352 KB index loads once, lazily, the first
-   time a page turns out to mention a rule; the per-adhyāya detail file loads
-   only when a popover opens. A reading page that mentions no sūtra fetches
-   nothing at all.
+   And the words. Double-tap any Sanskrit word in the text and it says what
+   the word IS — which stem or root it comes from, and what case, number,
+   person or tense it is standing in — then offers the dictionaries and every
+   other place in the library it occurs. The analysis is Vidyut's, computed
+   ahead of time by tools/build_morphology.py, because Vidyut is a Rust binary
+   over a 75 MB kośa and could never run in a browser.
+
+   Words are not marked up. A page of Sanskrit with every word underlined is
+   not a reading experience; selection is the affordance instead.
+
+   Nothing is fetched until it is needed. The 352 KB sūtra index loads the
+   first time a page turns out to cite a rule, the per-adhyāya detail only
+   when a popover opens, and a morphology bucket only for the word actually
+   double-tapped. A page nobody interrogates fetches none of it.
    ========================================================================= */
 (function () {
   'use strict';
 
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['intellisense.js'] = 'v1.0 (sūtra identification by number and by name)';
+  window.DGE_VERSIONS['intellisense.js'] = 'v1.1 (sūtra identification by number and by name; word morphology from Vidyut)';
 
   const self = (document.currentScript && document.currentScript.src) || '';
   function dataUrl(rel) {
@@ -49,7 +58,8 @@
     cues: ['सूत्र', 'सूत्रम्', 'सूत्रे', 'अष्टाध्याय', 'पाणिनि', 'पा॰', 'पा.',
            'sutra', 'sūtra', 'ashtadhyayi', 'aṣṭādhyāyī', 'panini', 'pāṇini'],
     cueWindow: 24,
-    identifyFromSearch: true
+    identifyFromSearch: true,
+    analyseWords: true
   };
 
   /* ----------------------------------------------------------- folding ---
@@ -332,6 +342,25 @@
   document.addEventListener('click', function (ev) {
     const ref = ev.target.closest && ev.target.closest('.dge-sutra-ref, .dge-si-from');
     if (ref) { ev.preventDefault(); openPop(ref, ref.dataset.sutra); return; }
+    const kosha = ev.target.closest && ev.target.closest('[data-kosha]');
+    if (kosha) {
+      const w = kosha.getAttribute('data-kosha');
+      closePop();
+      if (typeof window.dgeOpenKosha === 'function') window.dgeOpenKosha(w);
+      return;
+    }
+    const occur = ev.target.closest && ev.target.closest('[data-occur]');
+    if (occur) {
+      const w = occur.getAttribute('data-occur');
+      closePop();
+      // The global search index already knows every grantha a word appears
+      // in; opening it prefilled is the whole "where else does this occur"
+      // feature, rather than a second index that would drift from it.
+      if (window.DGEGlobalSearch && typeof window.DGEGlobalSearch.open === 'function') {
+        window.DGEGlobalSearch.open(w);
+      }
+      return;
+    }
     if (ev.target.closest && ev.target.closest('[data-si-close]')) { closePop(); return; }
     if (pop && !ev.target.closest('.dge-si-pop')) closePop();
   });
@@ -344,6 +373,160 @@
     }
   });
   window.addEventListener('resize', closePop);
+
+  /* ---------------------------------------------------------- morphology ---
+     Precomputed by tools/build_morphology.py from Vidyut and sharded by the
+     first two SLP1 characters, so a lookup fetches one small bucket rather
+     than the 6 MB whole. Vidyut itself is a Rust binary over a 75 MB kośa and
+     could never run here; this is its answer, computed once.
+
+     About half the words a reader taps will have an analysis. Vidyut resolves
+     inflected forms, not sandhi-joined ones, and Sanskrit texts are full of
+     the latter. A word with no analysis says so and still offers the rest. */
+  const SLP = { 'अ':'a','आ':'A','इ':'i','ई':'I','उ':'u','ऊ':'U','ऋ':'f','ॠ':'F',
+    'ऌ':'x','ॡ':'X','ए':'e','ऐ':'E','ओ':'o','औ':'O','क':'k','ख':'K','ग':'g',
+    'घ':'G','ङ':'N','च':'c','छ':'C','ज':'j','झ':'J','ञ':'Y','ट':'w','ठ':'W',
+    'ड':'q','ढ':'Q','ण':'R','त':'t','थ':'T','द':'d','ध':'D','न':'n','प':'p',
+    'फ':'P','ब':'b','भ':'B','म':'m','य':'y','र':'r','ल':'l','व':'v','श':'S',
+    'ष':'z','स':'s','ह':'h','ळ':'L','ं':'M','ः':'H','ँ':'~' };
+  const SLP_M = { 'ा':'A','ि':'i','ी':'I','ु':'u','ू':'U','ृ':'f','ॄ':'F',
+    'ॢ':'x','ॣ':'X','े':'e','ै':'E','ो':'o','ौ':'O' };
+
+  function toSlp(word) {
+    const s = toDeva(String(word).normalize('NFC'));
+    let out = '';
+    for (let i = 0; i < s.length; i++) {
+      const ch = s[i];
+      if (SLP[ch] && !(ch in SLP_M)) {
+        const isCons = ch >= 'क' && ch <= 'ह' || ch === 'ळ';
+        out += SLP[ch];
+        if (isCons) {
+          const nxt = s[i + 1];
+          if (nxt === '्') { i++; continue; }
+          if (SLP_M[nxt]) { out += SLP_M[nxt]; i++; continue; }
+          out += 'a';
+        }
+        continue;
+      }
+      if (SLP_M[ch]) { out += SLP_M[ch]; continue; }
+      if (ch === '्') continue;
+    }
+    return out;
+  }
+
+  function morphUrl(rel) {
+    try { return new URL('../data/_morph/' + rel, self).href; }
+    catch (e) { return 'data/_morph/' + rel; }
+  }
+
+  const morphCache = {};
+  function loadBucket(slp) {
+    const two = (slp + '__').slice(0, 2);
+    const name = two.split('').map(c => (c >= 'A' && c <= 'Z') ? c + '_'
+                                       : (/[a-z0-9]/.test(c) ? c : 'x')).join('');
+    if (morphCache[name]) return morphCache[name];
+    morphCache[name] = fetch(morphUrl(name + '.json'), { cache: 'force-cache' })
+      .then(r => (r.ok ? r.json() : null)).catch(() => null);
+    return morphCache[name];
+  }
+
+  const LINGA = { p: 'पुंलिङ्गम्', s: 'स्त्रीलिङ्गम्', n: 'नपुंसकलिङ्गम्' };
+  const VIBH = { '1': 'प्रथमा', '2': 'द्वितीया', '3': 'तृतीया', '4': 'चतुर्थी',
+                 '5': 'पञ्चमी', '6': 'षष्ठी', '7': 'सप्तमी', '8': 'सम्बोधनम्' };
+  const VAC = { '1': 'एकवचनम्', '2': 'द्विवचनम्', '3': 'बहुवचनम्' };
+  const PUR = { '1': 'उत्तमपुरुषः', '2': 'मध्यमपुरुषः', '3': 'प्रथमपुरुषः' };
+  const LAK = { lat: 'लट्', lit: 'लिट्', lut: 'लुट्', lrt: 'लृट्', let: 'लेट्',
+                lot: 'लोट्', lan: 'लङ्', vlin: 'विधिलिङ्', alin: 'आशीर्लिङ्',
+                lun: 'लुङ्', lrn: 'लृङ्' };
+  const PRA = { k: 'कर्तरि', km: 'कर्मणि', b: 'भावे' };
+  const join = a => a.filter(Boolean).join(' · ');
+
+  function describe(rec) {
+    if (rec[0] === 'a') return { lemma: rec[1], gloss: 'अव्ययम्' };
+    if (rec[0] === 't') {
+      return { lemma: rec[1], gloss: join([LAK[rec[2]], PUR[rec[3]], VAC[rec[4]], PRA[rec[5]]]) };
+    }
+    return { lemma: rec[1], gloss: join([LINGA[rec[2]], VIBH[rec[3]], VAC[rec[4]]]) };
+  }
+
+  window.dgeAnalyseWord = function (word) {
+    const clean = String(word || '').replace(/[^ऀ-ॿa-zA-Zāīūṛṝḷṅñṭḍṇśṣṃṁḥ]/g, '');
+    if (!clean) return Promise.resolve([]);
+    const slp = toSlp(clean);
+    if (!slp) return Promise.resolve([]);
+    return loadBucket(slp).then(function (b) {
+      const recs = (b && (b[clean] || b[toDeva(clean)])) || null;
+      return recs ? recs.map(describe) : [];
+    });
+  };
+
+  /* ------------------------------------------------------- word popover --- */
+  function wordHtml(word, an) {
+    let h = '<div class="dge-si-head"><span class="dge-si-id">' + esc(word) + '</span>' +
+            '<button class="dge-si-x" data-si-close aria-label="Close">✕</button></div>';
+    if (an.length) {
+      const byLemma = {};
+      an.forEach(function (a) { (byLemma[a.lemma] = byLemma[a.lemma] || []).push(a.gloss); });
+      h += '<div class="dge-si-row"><b>व्याकरणम्</b></div>';
+      Object.keys(byLemma).forEach(function (lemma) {
+        h += '<div class="dge-si-morph"><span class="dge-si-lemma">' + esc(lemma) + '</span>' +
+             byLemma[lemma].filter(Boolean).map(function (g) {
+               return '<span class="dge-si-parse">' + esc(tr(g)) + '</span>';
+             }).join('') + '</div>';
+      });
+    } else {
+      h += '<div class="dge-si-none">No analysis — Vidyut resolves inflected words, ' +
+           'not sandhi-joined ones. The dictionaries may still have it.</div>';
+    }
+    h += '<div class="dge-si-actions">' +
+         '<button class="dge-si-go" data-kosha="' + esc(word) + '">कोश — look it up →</button>' +
+         '<button class="dge-si-go" data-occur="' + esc(word) + '">Other occurrences →</button>' +
+         '</div>';
+    return h;
+  }
+
+  function openWord(anchor, word) {
+    closePop();
+    pop = document.createElement('div');
+    pop.className = 'dge-si-pop';
+    pop.innerHTML = '<div class="dge-si-loading">…</div>';
+    document.body.appendChild(pop);
+    place(anchor);
+    window.dgeAnalyseWord(word).then(function (an) {
+      if (!pop) return;
+      pop.innerHTML = wordHtml(word, an);
+      place(anchor);
+    });
+  }
+
+  /* A word is picked out of the text by selecting it — a double-tap on a
+     phone, a double-click on a desktop — rather than by making every word a
+     link. Marking up every word would turn a page of Sanskrit into a page of
+     underlines, which is not a reading experience. */
+  function selectedWord() {
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed) return null;
+    const t = sel.toString().trim();
+    if (!t || t.length > 40 || /\s/.test(t)) return null;
+    if (!/[ऀ-ॿ]/.test(t)) return null;
+    return t.replace(/[।॥,.'"()\[\]]/g, '');
+  }
+
+  function wireWords() {
+    const host = document.getElementById('shlokaList');
+    if (!host) return;
+    host.addEventListener('dblclick', function (ev) {
+      const w = selectedWord();
+      if (!w) return;
+      const sel = window.getSelection();
+      let anchor;
+      try {
+        const r = sel.getRangeAt(0).getBoundingClientRect();
+        anchor = { getBoundingClientRect: () => r };
+      } catch (e) { anchor = ev.target; }
+      openWord(anchor, w);
+    });
+  }
 
   /* ------------------------------------------------------- search hook ---
      Typing a rule's name into the search box finds nothing, because the box
@@ -410,6 +593,7 @@
     });
     scan(list); scan(card);
     if (CFG.identifyFromSearch) wireSearch();
+    if (CFG.analyseWords !== false) wireWords();
     return CFG;
   });
 })();

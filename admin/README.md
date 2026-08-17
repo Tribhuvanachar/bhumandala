@@ -69,7 +69,7 @@ Asked often enough to be worth stating once:
 | To change | Edit |
 |---|---|
 | Which menu items appear, and their order | `config/menu.json` |
-| Where sūtra citations become tappable | `config/intellisense.json` |
+| Where sūtra citations become tappable, and word analysis | `config/intellisense.json` |
 | Any word on the landing page, or where it leads | `config/landing.json` |
 | Which reading scripts are offered | `SCRIPT_OPTIONS` in `dge/js/config.js` |
 | Feature switches (theme picker, snippet tools, …) | `FEATURE_FLAGS` in `dge/js/config.js` |
