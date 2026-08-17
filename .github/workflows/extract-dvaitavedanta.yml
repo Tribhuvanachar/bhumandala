@@ -38,7 +38,7 @@ on:
         type: string
         default: ""
       limit_per_grantha:
-        description: "Cap leaves per grantha (smoke test). Blank = no cap, 5 = quick check."
+        description: "Cap leaves per grantha. 0 = no cap (full corpus), 5 = quick smoke test."
         type: string
         default: "5"
       delay:
@@ -150,12 +150,18 @@ jobs:
             --timeout "$TIMEOUT"
             --fetch-date "$(date -u +%F)"
           )
-          [ -n "$GRANTHAS" ] && ARGS+=(--granthas "$GRANTHAS")
-          [ -n "$LIMIT" ]    && ARGS+=(--limit-per-grantha "$LIMIT")
-          [ "$DRY_RUN" = "true" ] && ARGS+=(--dry-run) || ARGS+=(--write)
-          [ "$REFRESH" = "true" ] && ARGS+=(--refresh-cache)
-          [ "$DISCOVER_ONLY" = "true" ] && ARGS+=(--discover-only)
-          [ "$PROBE" = "true" ]   && ARGS+=(--probe-dir dv_probe --probe-count 5)
+          # if/fi, not `[ x ] && ...`. Under `set -e` a bare test-and-append
+          # aborts the step the moment the test is false, and GitHub
+          # substitutes an input's default for an empty string anyway — which
+          # is how run 32039180032 silently crawled 5 leaves per grantha while
+          # asking for the whole corpus. Pass limit 0 to mean "no cap".
+          if [ -n "$GRANTHAS" ]; then ARGS+=(--granthas "$GRANTHAS"); fi
+          if [ -n "$LIMIT" ]; then ARGS+=(--limit-per-grantha "$LIMIT"); fi
+          if [ "$DRY_RUN" = "true" ]; then ARGS+=(--dry-run); else ARGS+=(--write); fi
+          if [ "$REFRESH" = "true" ]; then ARGS+=(--refresh-cache); fi
+          if [ "$DISCOVER_ONLY" = "true" ]; then ARGS+=(--discover-only); fi
+          if [ "$PROBE" = "true" ]; then ARGS+=(--probe-dir dv_probe --probe-count 5); fi
+          echo "leaf cap: ${LIMIT:-0} (0 = no cap)"
           python tools/dvaitavedanta/import_dvaitavedanta.py "${ARGS[@]}"
 
       - name: Verify emitted data
