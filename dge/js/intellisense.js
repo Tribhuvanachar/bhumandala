@@ -342,6 +342,13 @@
   document.addEventListener('click', function (ev) {
     const ref = ev.target.closest && ev.target.closest('.dge-sutra-ref, .dge-si-from');
     if (ref) { ev.preventDefault(); openPop(ref, ref.dataset.sutra); return; }
+    const chain = ev.target.closest && ev.target.closest('[data-word]');
+    if (chain) {
+      ev.preventDefault();
+      const r = chain.getBoundingClientRect();
+      openWord({ getBoundingClientRect: () => r }, chain.getAttribute('data-word'));
+      return;
+    }
     const kosha = ev.target.closest && ev.target.closest('[data-kosha]');
     if (kosha) {
       const w = kosha.getAttribute('data-kosha');
@@ -449,6 +456,37 @@
     return { lemma: rec[1], gloss: join([LINGA[rec[2]], VIBH[rec[3]], VAC[rec[4]]]) };
   }
 
+  /* Related words, from tools/build_synonyms.py — the English-Sanskrit
+     dictionary read backwards, so a word's entry names the other words used
+     for the same idea. Same bucketing as the morphology, so one rule serves
+     both.
+
+     Called "related", not "synonyms", on purpose. Inverting a bilingual
+     dictionary yields words that share a sense and also words that merely sat
+     in the same gloss; the English sense is shown beside each group so the
+     reader can see which is which rather than being asked to trust it. */
+  const synCache = {};
+  function loadSyn(slp) {
+    const two = (slp + '__').slice(0, 2);
+    const name = two.split('').map(c => (c >= 'A' && c <= 'Z') ? c + '_'
+                                       : (/[a-z0-9]/.test(c) ? c : 'x')).join('');
+    if (synCache[name]) return synCache[name];
+    let url;
+    try { url = new URL('../data/_synonyms/' + name + '.json', self).href; }
+    catch (e) { url = 'data/_synonyms/' + name + '.json'; }
+    synCache[name] = fetch(url, { cache: 'force-cache' })
+      .then(r => (r.ok ? r.json() : null)).catch(() => null);
+    return synCache[name];
+  }
+
+  window.dgeRelatedWords = function (word) {
+    const clean = String(word || '').replace(/[^ऀ-ॿ]/g, '');
+    if (!clean) return Promise.resolve([]);
+    const slp = toSlp(clean);
+    if (!slp) return Promise.resolve([]);
+    return loadSyn(slp).then(b => (b && b[clean]) || []);
+  };
+
   window.dgeAnalyseWord = function (word) {
     const clean = String(word || '').replace(/[^ऀ-ॿa-zA-Zāīūṛṝḷṅñṭḍṇśṣṃṁḥ]/g, '');
     if (!clean) return Promise.resolve([]);
@@ -461,7 +499,7 @@
   };
 
   /* ------------------------------------------------------- word popover --- */
-  function wordHtml(word, an) {
+  function wordHtml(word, an, rel) {
     let h = '<div class="dge-si-head"><span class="dge-si-id">' + esc(word) + '</span>' +
             '<button class="dge-si-x" data-si-close aria-label="Close">✕</button></div>';
     if (an.length) {
@@ -478,6 +516,15 @@
       h += '<div class="dge-si-none">No analysis — Vidyut resolves inflected words, ' +
            'not sandhi-joined ones. The dictionaries may still have it.</div>';
     }
+    if (rel && rel.length) {
+      h += '<div class="dge-si-row"><b>सम्बद्धाः</b></div>';
+      rel.slice(0, 4).forEach(function (g) {
+        h += '<div class="dge-si-rel"><span class="dge-si-sense">' + esc(g[0]) + '</span>' +
+             g[1].slice(0, 8).map(function (w) {
+               return '<span class="dge-si-word" data-word="' + esc(w) + '">' + esc(tr(w)) + '</span>';
+             }).join('') + '</div>';
+      });
+    }
     h += '<div class="dge-si-actions">' +
          '<button class="dge-si-go" data-kosha="' + esc(word) + '">कोश — look it up →</button>' +
          '<button class="dge-si-go" data-occur="' + esc(word) + '">Other occurrences →</button>' +
@@ -492,11 +539,12 @@
     pop.innerHTML = '<div class="dge-si-loading">…</div>';
     document.body.appendChild(pop);
     place(anchor);
-    window.dgeAnalyseWord(word).then(function (an) {
-      if (!pop) return;
-      pop.innerHTML = wordHtml(word, an);
-      place(anchor);
-    });
+    Promise.all([window.dgeAnalyseWord(word), window.dgeRelatedWords(word)])
+      .then(function (r) {
+        if (!pop) return;
+        pop.innerHTML = wordHtml(word, r[0], r[1]);
+        place(anchor);
+      });
   }
 
   /* A word is picked out of the text by selecting it — a double-tap on a

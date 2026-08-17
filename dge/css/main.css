@@ -589,3 +589,20 @@ button.dge-si-go {
   border: 0; background: none; padding: 0; cursor: pointer;
   font-family: inherit;
 }
+
+/* Related words. Each group carries the English sense that binds it, because
+   inverting a bilingual dictionary gives words that share a meaning and words
+   that merely shared a gloss — showing the sense lets the reader tell which. */
+.dge-si-rel { margin-top: 6px; }
+.dge-si-sense {
+  display: block; font-size: 10.5px; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--muted-text, #8B7A63);
+  margin-bottom: 3px;
+}
+.dge-si-word {
+  display: inline-block;
+  font-family: var(--font-sanskrit, serif);
+  font-size: 14px; margin: 2px 8px 2px 0; cursor: pointer;
+  color: var(--accent-gold, #E8B24D);
+  border-bottom: 1px dotted currentColor;
+}
