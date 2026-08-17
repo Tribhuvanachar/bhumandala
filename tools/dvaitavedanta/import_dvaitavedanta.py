@@ -44,6 +44,7 @@ import requests
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from dv_parse import (  # noqa: E402
+    BASE,
     canonical_url,
     devanagari_count,
     devanagari_ratio,
@@ -232,10 +233,19 @@ class Fetcher:
 # extraction
 # --------------------------------------------------------------------------- #
 
+def absolute_url(href):
+    """Sidebar hrefs arrive both absolute and root-relative."""
+    if not href:
+        return ""
+    if href.startswith("http://") or href.startswith("https://"):
+        return href
+    return BASE + ("" if href.startswith("/") else "/") + href
+
+
 def discover_leaves(fetcher, grantha, log):
     """Fetch the seed page and harvest every content id in its sidebar.
 
-    Returns (ordered_ids, seed_record, ancestor_id).
+    Returns (ordered_ids, seed_record, ancestor_id, url_by_id).
     """
     seed_url = grantha["seed_url"]
     html = fetcher.get(seed_url)
@@ -248,11 +258,18 @@ def discover_leaves(fetcher, grantha, log):
 
     ids = OrderedDict()
     ids[record["content_id"]] = True
+    urls = {record["content_id"]: seed_url}
     for link in record["sidebar"]:
         if link["in_breadcrumb"]:
             continue
         ids[link["content_id"]] = True
-    return list(ids.keys()), record, ancestor
+        # Keep the site's OWN href. canonical_url has to invent the trailing
+        # slug (".../13528/937/x"), where the real link carries
+        # ".../13528/937/thasha/1-para/managa/garana". Recon assumed only the
+        # contentId is load-bearing; that is an assumption we do not need to
+        # make when the exact URL is right here in the sidebar.
+        urls.setdefault(link["content_id"], absolute_url(link["href"]))
+    return list(ids.keys()), record, ancestor, urls
 
 
 def resolve_layer_config(title, layer_config):
@@ -590,7 +607,7 @@ def main(argv=None):
         label = grantha["slug"] or f"id_{grantha['content_id']}"
         log(f"→ {grantha['section_slug']}/{label}")
 
-        ids, seed_record, ancestor = discover_leaves(fetcher, grantha, log)
+        ids, seed_record, ancestor, url_by_id = discover_leaves(fetcher, grantha, log)
         if seed_record is None:
             key = f"{grantha['section_slug']}/{label}"
             status["granthas"][key] = {
@@ -654,7 +671,7 @@ def main(argv=None):
                 # Already fetched during discovery — don't pay for it twice.
                 record = seed_record
             else:
-                url = canonical_url(content_id, ancestor)
+                url = url_by_id.get(content_id) or canonical_url(content_id, ancestor)
                 html = fetcher.get(url)
                 if html is None:
                     failed += 1
@@ -676,6 +693,7 @@ def main(argv=None):
                         continue
                     seen_ids.add(child)
                     queue.append(child)
+                    url_by_id.setdefault(child, absolute_url(link["href"]))
                     added += 1
                 if added:
                     log(f"    + {added} id(s) from container {content_id}"

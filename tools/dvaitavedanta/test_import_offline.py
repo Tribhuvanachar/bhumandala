@@ -99,8 +99,8 @@ def main():
 
     try:
         prime(cache, BASE + "/category-details/13528/937/thasha/1-para/managa/garana", LEAF_A)
-        prime(cache, BASE + "/category-details/13529/937/x", LEAF_B)
-        prime(cache, BASE + "/category-details/13533/937/x", CONTAINER)
+        prime(cache, BASE + "/category-details/13529/937/thasha/1-para/managa/naraya", LEAF_B)
+        prime(cache, BASE + "/category-details/13533/937/thasha/1-para/lkashh/lkashh", CONTAINER)
 
         rc = I.main([
             "--config", os.path.join(HERE, "dv_sources.json"),
@@ -232,9 +232,9 @@ def main():
             # 13533's own sidebar, so this fails unless containers are opened.
             prime(deep_cache, BASE + "/category-details/13528/937/thasha/1-para/managa/garana",
                   CONTAINER)
-            prime(deep_cache, BASE + "/category-details/13529/937/x", CONTAINER)
-            prime(deep_cache, BASE + "/category-details/13533/937/x", CONTAINER_WITH_CHILDREN)
-            prime(deep_cache, BASE + "/category-details/13777/937/x", LEAF_DEEP)
+            prime(deep_cache, BASE + "/category-details/13529/937/thasha/1-para/managa/naraya", CONTAINER)
+            prime(deep_cache, BASE + "/category-details/13533/937/thasha/1-para/lkashh/lkashh", CONTAINER_WITH_CHILDREN)
+            prime(deep_cache, BASE + "/category-details/13777/937/thasha/1-para/deep/deep", LEAF_DEEP)
             rc2 = I.main([
                 "--config", os.path.join(HERE, "dv_sources.json"),
                 "--out", deep_out, "--cache", deep_cache,
