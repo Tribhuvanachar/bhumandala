@@ -251,7 +251,10 @@ def discover_leaves(fetcher, grantha, log):
     html = fetcher.get(seed_url)
     if html is None:
         log(f"    ! seed fetch failed: {seed_url}")
-        return [], None, grantha.get("ancestor_id")
+        # Four values, like every other exit. Returning three crashed the
+        # caller's unpacking, turning "one grantha's seed was unreachable"
+        # into "the whole section died".
+        return [], None, grantha.get("ancestor_id"), {}
 
     record = parse_page(html, seed_url)
     ancestor = grantha.get("ancestor_id") or record.get("ancestor_id")
