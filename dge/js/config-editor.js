@@ -20,6 +20,9 @@ const DGE_CONFIG_OVERRIDES_PATH = 'admin/config/config-overrides.json';
 // the reader can fetch it fresh on every open (see modals.js). The editor
 // still edits it in the same form; it just lands somewhere else on save.
 const DGE_WHATS_NEW_PATH = 'admin/content/whats-new.json';
+// The Support and About panels' text, likewise content rather than settings.
+const DGE_READER_CONTENT_PATH = 'admin/content/reader.json';
+const DGE_READER_CONTENT_KEYS = ['SPONSOR_CONFIG', 'CONTRIBUTORS_CONFIG', 'KEY_SPONSORS_CONFIG'];
 
 // Only these are editable. Anything not listed here is untouchable from
 // the UI by construction, not by validation — a field that isn't rendered
@@ -397,6 +400,12 @@ window.dgeSaveConfigOverrides = async function() {
     const whatsNew = settings.WHATS_NEW_CONFIG;
     delete settings.WHATS_NEW_CONFIG;
 
+    // The reader's editorial blocks travel with it, not with the settings.
+    const readerContent = {};
+    DGE_READER_CONTENT_KEYS.forEach(function (k) {
+      if (settings[k]) { readerContent[k] = settings[k]; delete settings[k]; }
+    });
+
     await dgeAdminUpsertFile(DGE_CONFIG_OVERRIDES_PATH, encode(settings),
       dgeAdminBuildCommitMessage('Update site config'));
 
@@ -406,6 +415,20 @@ window.dgeSaveConfigOverrides = async function() {
       if (existing._readme) merged._readme = existing._readme;
       await dgeAdminUpsertFile(DGE_WHATS_NEW_PATH, encode(merged),
         dgeAdminBuildCommitMessage("Update What's New"));
+    }
+
+    if (Object.keys(readerContent).length) {
+      // Re-read rather than reconstruct: this file may hold keys the form does
+      // not show, and its _readme, both of which a blind write would drop.
+      let existing = {};
+      try {
+        const r = await fetch(window.dgeContentUrl('reader.json') + '?t=' + Date.now(),
+                              { cache: 'no-store' });
+        if (r.ok) existing = await r.json();
+      } catch (e) { /* first write, or offline — fall through to a plain write */ }
+      await dgeAdminUpsertFile(DGE_READER_CONTENT_PATH,
+        encode(Object.assign({}, existing, readerContent)),
+        dgeAdminBuildCommitMessage('Update reader content'));
     }
     if (typeof showToast === 'function') showToast('Saved. Reloading to apply…');
     setTimeout(() => location.reload(), 900);

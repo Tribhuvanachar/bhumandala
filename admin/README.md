@@ -29,6 +29,7 @@ where it is, and is still linked from the same admin menu.
 | `config/config-overrides.json` | `dge/js/core.js` at boot, merged over `dge/js/config.js` | Site Settings, in-app (`dge/js/config-editor.js`) |
 | `content/home.json` | the landing page — **all of its words** | hand-edited |
 | `content/whats-new.json` | `dge/js/modals.js`, re-read every time the panel opens | Site Settings, or by hand |
+| `content/reader.json` | `dge/js/core.js` at boot — the Support and About panels' text | in place on the page, Site Settings, or by hand |
 | `config/home.json` | the landing page — where it leads, the photo, the flowers | hand-edited |
 | `config/menu.json` | `dge/js/menu.js` — which menu items appear, and in what order | hand-edited |
 | `config/intellisense.json` | `dge/js/intellisense.js` — sūtra identification | hand-edited |
@@ -83,7 +84,8 @@ Asked often enough to be worth stating once:
 | Feature switches (theme picker, snippet tools, …) | `FEATURE_FLAGS` in `dge/js/config.js` |
 | Passkeys | `config/keys.json` |
 | What's New and Coming Soon | `content/whats-new.json` |
-| Sponsor, contributors, contact | `config/config-overrides.json` |
+| Sponsor, contributors, key sponsors | `content/reader.json` |
+| Contact address, app name, designer credit | `config/config-overrides.json` |
 
 ## Config that is not here
 
@@ -92,8 +94,9 @@ Deliberately, because moving it would mean moving the code that owns it:
 - **`dge/js/config.js`** — the defaults themselves: `appConfig`,
   `SPONSOR_CONFIG`, `CONTRIBUTORS_CONFIG`, `WHATS_NEW_CONFIG`,
   `FEATURE_FLAGS`, `AI_PROVIDERS`, `GITHUB_REPO_CONFIG`,
-  `ADMIN_ACCESS_LEVELS`. Loaded by every page in the app. `WHATS_NEW_CONFIG`
-  used to live here and no longer does — see `content/whats-new.json`.
+  `ADMIN_ACCESS_LEVELS`. Loaded by every page in the app. `WHATS_NEW_CONFIG`,
+  `SPONSOR_CONFIG`, `CONTRIBUTORS_CONFIG` and `KEY_SPONSORS_CONFIG` used to
+  live here and no longer do — they are content, in `admin/content/`.
 - **`dge/data/`** — corpus data rather than settings: `library.json`,
   `taxonomy.json`, `schemas.json`, `tippanikaras.json`.
 
@@ -131,6 +134,22 @@ and `js/keys.js` each resolve this folder from their own script URL rather
 than from the page's, so the config loads correctly from any page depth, and
 whether the site is served from a domain root or from a project subpath such
 as `tribhuvanachar.github.io/bhumandala/`.
+
+## Editing a page's words on the page
+
+Any page with a `data-content-file` on its `<body>` can be edited where it is
+read. Unlock super admin, press **Edit text** in the bar at the bottom, tap a
+highlighted line, change it, **Publish**.
+
+Edits stage in the browser and survive a refresh; nothing reaches GitHub until
+Publish, which writes the whole file in one commit after re-reading it, so a
+change someone else made meanwhile is not overwritten. It uses the same
+personal access token as Repo Files.
+
+To make a new field editable, give the element `data-edit="<path>"` — a path
+into that page's content file, such as `brand.latin`,
+`sections.0.name`, or `SPONSOR_CONFIG.introText`. Nothing else is needed;
+`dge/js/content-inline.js` finds it.
 
 ## The taxonomy restructure
 

@@ -276,48 +276,13 @@ window.AI_ALLOW_EXTERNAL_LINKS = false;
 // informational for now (no payment processing exists yet — that needs
 // auth + a backend, which is a later phase); each category links to a
 // pre-filled contact email.
-const SPONSOR_CONFIG = {
-  enabled: true,
-  introText: "This project runs independently, with no ads, and relies entirely on community support to keep going. Here's exactly where funds go, month to month — and where a contribution would help most.",
-  currency: '₹',
-  recurringExpenses: [
-    { label: 'Claude Pro subscription (development)', amount: 2000, period: 'month' },
-    { label: 'Server hosting (planned)', amount: 5000, period: 'month' },
-    { label: 'Domain & hosting', amount: 1000, period: 'year' },
-    { label: 'Content digitisation & proofreading', amount: 20000, period: 'as needed' }
-  ],
-  sponsorCategories: [
-    { icon: '💻', label: 'Backend / UI Development', description: 'Support ongoing feature work, bug fixes, and infrastructure for this app.', enabled: true },
-    { icon: '🕉️', label: "Acharya's Monthly Support", description: "Contribute toward the Acharya's monthly food and living expenses.", enabled: true },
-    { icon: '🏫', label: 'Gurukula & Goshala', description: 'Support the Gurukula and the upcoming Goshala (cow shelter).', enabled: true },
-    { icon: '📚', label: "Children's Education", description: 'Support educational expenses for children at the Gurukula.', enabled: true },
-    { icon: '🙏', label: 'General Token of Appreciation', description: 'An open contribution, undesignated, used wherever most needed.', enabled: true }
-  ],
-  contactForSponsorship: 'sanatanavidyagurukulam@gmail.com'
-};
-window.SPONSOR_CONFIG = SPONSOR_CONFIG;
-
-// Contributors — admin-configured only, same pattern as SPONSOR_CONFIG.
-// Empty by default; add entries here as real names/roles are confirmed.
-const CONTRIBUTORS_CONFIG = {
-  enabled: true,
-  contributors: [
-    { name: 'Sameer', role: '' },
-    { name: 'Anirudha', role: '' },
-    { name: 'Madhu', role: '' }
-  ]
-};
-window.CONTRIBUTORS_CONFIG = CONTRIBUTORS_CONFIG;
-
-// Key Sponsors — people/orgs covering a specific real cost, with a short
-// note on what exactly. Empty by default, same as CONTRIBUTORS_CONFIG —
-// add real entries here once confirmed, nothing invented. Example shape:
-//   { name: 'Jane Doe', contribution: 'Covers the Google Cloud Vision API billing' }
-const KEY_SPONSORS_CONFIG = {
-  enabled: true,
-  sponsors: []
-};
-window.KEY_SPONSORS_CONFIG = KEY_SPONSORS_CONFIG;
+/* The Support and About panels' text — SPONSOR_CONFIG, CONTRIBUTORS_CONFIG and
+   KEY_SPONSORS_CONFIG — now live in admin/content/reader.json, loaded by
+   core.js before the first render and editable in place on the page. They are
+   content rather than settings: a sentence about what the project spends
+   should not need a code change, and a constant here could only be changed by
+   one. Anything that reads window.SPONSOR_CONFIG still works; it is set from
+   the file instead of from here. */
 
 // What's New / Coming Soon — admin-configured only, same pattern as
 // CONTRIBUTORS_CONFIG. "updates" are rendered newest-first by date

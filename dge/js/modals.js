@@ -148,7 +148,9 @@ window.openSponsorModal = function() {
   const cfg = SPONSOR_CONFIG;
   const cur = cfg.currency || '₹';
 
-  let html = `<p style="font-size:13px; line-height:1.6; margin:0 0 18px 0;">${cfg.introText || ''}</p>`;
+  // data-edit names the path inside admin/content/reader.json, so a super
+  // admin can correct this paragraph on the panel itself (content-inline.js).
+  let html = `<p data-edit="SPONSOR_CONFIG.introText" style="font-size:13px; line-height:1.6; margin:0 0 18px 0;">${cfg.introText || ''}</p>`;
 
   html += `<div class="actions-section-label">📊 Recurring Expenses</div>`;
   html += `<div style="display:flex; flex-direction:column; gap:8px; margin-bottom:20px;">`;

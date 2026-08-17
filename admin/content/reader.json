@@ -1,0 +1,121 @@
+{
+  "_readme": [
+    "The reader's editorial text — what the Support and About panels say.",
+    "",
+    "Read by dge/js/core.js at boot and editable in place on the page itself: unlock",
+    "super admin, press Edit text, tap a line. Site Settings edits the same file.",
+    "",
+    "  SPONSOR_CONFIG        the Support panel — its opening paragraph, what the",
+    "                        project spends month to month, and how to get in touch.",
+    "  CONTRIBUTORS_CONFIG   who has worked on it, and in what capacity.",
+    "  KEY_SPONSORS_CONFIG   who has supported it, and with what.",
+    "",
+    "Each has an \"enabled\" flag; false hides that section entirely.",
+    "",
+    "These were constants in dge/js/config.js, so changing a sentence about the",
+    "project meant editing source. They are content, not settings, which is why they",
+    "sit in admin/content/ rather than admin/config/."
+  ],
+  "SPONSOR_CONFIG": {
+    "enabled": true,
+    "introText": "This project runs independently, with no ads, and relies entirely on community support to keep going. Here's exactly where funds go, month to month — and where a contribution would help most.",
+    "currency": "₹",
+    "recurringExpenses": [
+      {
+        "label": "Claude Pro subscription (development)",
+        "amount": 2000,
+        "period": "month"
+      },
+      {
+        "label": "Server hosting (planned)",
+        "amount": 5000,
+        "period": "month"
+      },
+      {
+        "label": "Domain & hosting",
+        "amount": 1000,
+        "period": "year"
+      },
+      {
+        "label": "Content digitisation & proofreading",
+        "amount": 20000,
+        "period": "as needed"
+      }
+    ],
+    "sponsorCategories": [
+      {
+        "icon": "💻",
+        "label": "Backend / UI Development",
+        "description": "Support ongoing feature work, bug fixes, and infrastructure for this app.",
+        "enabled": true
+      },
+      {
+        "icon": "🕉️",
+        "label": "Acharya's Monthly Support",
+        "description": "Contribute toward the Acharya's monthly food and living expenses.",
+        "enabled": false
+      },
+      {
+        "icon": "🏫",
+        "label": "Gurukula & Goshala",
+        "description": "Support the Gurukula and the upcoming Goshala (cow shelter).",
+        "enabled": true
+      },
+      {
+        "icon": "📚",
+        "label": "Children's Education",
+        "description": "Support educational expenses for children at the Gurukula.",
+        "enabled": true
+      },
+      {
+        "icon": "🙏",
+        "label": "General Token of Appreciation",
+        "description": "An open contribution, undesignated, used wherever most needed.",
+        "enabled": true
+      }
+    ],
+    "contactForSponsorship": "sanatanavidyagurukulam@gmail.com"
+  },
+  "CONTRIBUTORS_CONFIG": {
+    "enabled": true,
+    "contributors": [
+      {
+        "name": "Sameer",
+        "role": "Content"
+      },
+      {
+        "name": "Anirudha",
+        "role": "Content"
+      },
+      {
+        "name": "Madhu",
+        "role": "Content"
+      },
+      {
+        "name": "Aruna",
+        "role": "Content"
+      }
+    ]
+  },
+  "KEY_SPONSORS_CONFIG": {
+    "enabled": true,
+    "sponsors": [
+      {
+        "name": "Adarsh",
+        "contribution": "Site Hosting And Key Subscriptions"
+      },
+      {
+        "name": "Aruna Guru",
+        "contribution": "Misc"
+      },
+      {
+        "name": "Aruna Bharadwaj",
+        "contribution": "TTS"
+      },
+      {
+        "name": "Test",
+        "contribution": "Test "
+      }
+    ]
+  }
+}

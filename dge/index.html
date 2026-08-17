@@ -29,8 +29,10 @@
 <!-- The intellisense and backlink panels, shared with the Vyakarana
      pages, which use a different palette and cannot load main.css. -->
 <link rel="stylesheet" href="css/intellisense.css?v=1">
+<!-- In-place editing of admin/content/reader.json for a super admin. -->
+<link rel="stylesheet" href="css/content-inline.css?v=1">
 </head>
-<body>
+<body data-content-file="admin/content/reader.json">
 
 <div id="toastMsg"></div>
 
@@ -835,6 +837,7 @@
 <!-- Marks each verse that other texts discuss, from the backlinks index.
      Fetches one small index and stops if this grantha is not cited. -->
 <script src="js/backlinks.js?v=4.64.0"></script>
+<script src="js/content-inline.js?v=1"></script>
 <script src="js/library.js?v=4.61.0"></script>
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
 <script src="js/dge-normalize.js?v=4.60.6"></script>
