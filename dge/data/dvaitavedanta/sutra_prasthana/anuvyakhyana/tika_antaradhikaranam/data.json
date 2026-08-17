@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14490",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > प्रथमाध्यायः > द्वितीयः पादः > लिङ्गात्मकानां शब्दानां वृत्तिर्नारायणे परे",
+   "section": "द्वितीयः पादः",
+   "unit_title": "लिङ्गात्मकानां शब्दानां वृत्तिर्नारायणे परे",
+   "sanskrit_text": "अन्तरधिकरणम्\nअन्तःस्थित्वा रमणकृदन्तरः समुदाहृतः ।\nरमणं चात्मशब्देनादेयं मातीति चोच्यते ॥11॥\nविशिष्टसुखवत्वाच्च ब्रह्मत्वं च विशिष्टता ।\nअन्योन्यनियतिश्चेशनियमे नान्यथा भवेत् ॥12॥\nचेतनानां विशेषो यः स्वभावोपीश्वरार्पितः ।\nअन्योन्यनियमे तस्मादनवस्थित्यसम्भवौ ॥13॥\nईश्वरश्चेन्नियन्ता स्यात् स एव प्रथमागतः ।\nकिमित्यपोद्यते कस्मात् वृथावस्थितिकल्पना ॥14॥\nदोषवत्येव तस्मात् सा नैव कार्या कथञ्चन ॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "प्रथमाध्यायः",
+    "द्वितीयः पादः",
+    "लिङ्गात्मकानां शब्दानां वृत्तिर्नारायणे परे"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14474/563/satara/2-anav/parath/thavat",
+    "content_id": 14474,
+    "layer": "अन्तरधिकरणम्",
+    "anchor": "article14490",
+    "fetched": "2026-08-17"
+   },
+   "tika_title": "अन्तरधिकरणम्"
+  }
+ ]
+}

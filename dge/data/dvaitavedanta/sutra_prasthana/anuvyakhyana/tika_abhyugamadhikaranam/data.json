@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14494",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > द्वितीयोध्यायः > द्वितीयः पादः > स्मृतियुक्तिश्रुतिगुणयुक्तयो बहुयुक्तयः",
+   "section": "द्वितीयः पादः",
+   "unit_title": "स्मृतियुक्तिश्रुतिगुणयुक्तयो बहुयुक्तयः",
+   "sanskrit_text": "अभ्युगमाधिकरणम्\nचार्वकैरुच्यते मानमक्षजं नापरं क्वचित् ॥40॥\nदेह आत्मा पुमर्थश्च कामार्थाभ्यां विना न हि ।\nयदैवं दर्शनेनास्य कोर्थः प्रत्यक्षगोचरः ॥41॥\nलब्धस्तेनैव हि नरैः शास्त्रात् किं मोहनं विना ।\nस्वपरार्थविहीनत्वात् स्वमतेनैव निष्फलम् ॥42॥\nकिमित्युन्मत्तवच्छास्त्रं वृथा प्रलपति स्वयम् ।\nदेहादन्योनुभवत आत्मा भाति शरीरिणाम् ॥43॥\nमम देह इति व्यक्तं ममार्थ इतिवत् सदा ।\nप्रत्यक्षस्येव मानत्वमिति केनावसीयते ॥44॥\nयदि तत्साधकं वेदप्रामाण्ये न कथं भवेत् ।\nन चान्यामानता क्वापि प्रमाणेनावसीयते ॥45॥\nस्वमतेनार्थरहित उपेक्ष्यः पक्ष ईदृशः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "द्वितीयोध्यायः",
+    "द्वितीयः पादः",
+    "स्मृतियुक्तिश्रुतिगुणयुक्तयो बहुयुक्तयः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14478/563/satara/2-anav/thavat/thavat",
+    "content_id": 14478,
+    "layer": "अभ्युगमाधिकरणम्",
+    "anchor": "article14494",
+    "fetched": "2026-08-17"
+   },
+   "tika_title": "अभ्युगमाधिकरणम्"
+  }
+ ]
+}

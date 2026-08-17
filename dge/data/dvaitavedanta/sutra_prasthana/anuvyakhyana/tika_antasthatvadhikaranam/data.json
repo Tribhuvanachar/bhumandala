@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "तस्मान्मुख्यार्थता विष्णोरिति कृत्वा",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14489",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > प्रथमाध्यायः > प्रथमः पादः > नारायणं निखिलगुणैकदेहं निर्दोषमाप्यतममप्यखिलैसुवाक्यख्यैः",
+   "section": "प्रथमः पादः",
+   "unit_title": "नारायणं निखिलगुणैकदेहं निर्दोषमाप्यतममप्यखिलैसुवाक्यख्यैः",
+   "sanskrit_text": "अन्तस्थत्वाधिकरणम्\n............ देवानां तत्र शक्तताम् ।\nआशङ्क्य तत्र रूढिं च तच्छब्दानामपि स्वयम् ॥242॥\nसमुद्रान्तस्थितत्वाद्यैस्तद्धर्मैर्विष्णुरूढताम् ।\nसाधयित्वाभिदां तैश्च पुनरेव न्यावारयत् ॥243॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "प्रथमाध्यायः",
+    "प्रथमः पादः",
+    "नारायणं निखिलगुणैकदेहं निर्दोषमाप्यतममप्यखिलैसुवाक्यख्यैः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+    "content_id": 14473,
+    "layer": "अन्तस्थत्वाधिकरणम्",
+    "anchor": "article14489",
+    "fetched": "2026-08-17"
+   },
+   "tika_title": "अन्तस्थत्वाधिकरणम्"
+  }
+ ]
+}

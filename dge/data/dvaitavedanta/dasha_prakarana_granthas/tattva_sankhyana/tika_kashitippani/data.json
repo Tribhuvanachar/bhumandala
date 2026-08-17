@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "इति श्रीमत्सत्यवरचरणौपसदसत्यधर्मयतिकृतं",
+ "source_url": "https://dvaitavedanta.in/category-details/14055/939/thasha/3-tata/malma",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14830",
+   "reference": "दशप्रकरणानि > 3. तत्त्वसङ्ख्यानम् > टीका_टिप्पणि > अस्वतन्त्रजगतः सृष्ट्यादिविषये विष्ण्वायत्तत्वकथनम् > विष्णुनाऽस्य समस्तस्य समासव्यासयोगतः",
+   "section": "अस्वतन्त्रजगतः सृष्ट्यादिविषये विष्ण्वायत्तत्वकथनम्",
+   "unit_title": "विष्णुनाऽस्य समस्तस्य समासव्यासयोगतः",
+   "sanskrit_text": "काशीटिप्पणी\nदुरन्तदुर्मतध्वान्तध्वंसकृन्मध्वभास्करः ।\nबत्थिेत्यादिवेदोक्तगुणः प्रीतोऽस्तु मे सदा ।।\nइति श्रीमदुपाध्यायकृता भगवतः सदा ।\nतत्वसङ्ख्यानतात्पर्यचन्द्रिका सुप्रसत्तये ।।\nइति महामहोपाध्यायकाशीतिम्मण्णाचार्यविरचिता तत्वसङ्ख्यानटीकाविवरणटिप्पणी समाप्ता\nEndFragment",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "दशप्रकरणानि",
+    "3. तत्त्वसङ्ख्यानम्",
+    "टीका_टिप्पणि",
+    "अस्वतन्त्रजगतः सृष्ट्यादिविषये विष्ण्वायत्तत्वकथनम्",
+    "विष्णुनाऽस्य समस्तस्य समासव्यासयोगतः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14771/939/thasha/3-tata/taka-t/asavat",
+    "content_id": 14771,
+    "layer": "काशीटिप्पणी",
+    "anchor": "article14830",
+    "fetched": "2026-08-17"
+   },
+   "tika_title": "काशीटिप्पणी"
+  }
+ ]
+}

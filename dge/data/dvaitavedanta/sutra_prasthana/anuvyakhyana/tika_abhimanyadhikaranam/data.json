@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14493",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > द्वितीयोध्यायः > प्रथमः पादः > उक्तः समन्वयः साक्षादविरोधोत्र साध्यते",
+   "section": "प्रथमः पादः",
+   "unit_title": "उक्तः समन्वयः साक्षादविरोधोत्र साध्यते",
+   "sanskrit_text": "अभिमान्यधिकरणम्\nतथापि मृज्जलादीनां बुद्धिवागादिवाचकः ॥62॥\nदृष्टव्याप्तिविरुद्धत्वात् तत्र मानं कथं भवेत् ।\nततस्तन्नामकः कश्चित् पुमानन्यो भवेदिति ॥63॥\nयुक्त्यागमविरोधेन प्राप्तमत्राभिधीयते ।\nबालरूढिं विनैवापि विद्वद्रूढिसमाश्रयात् ॥64॥\nतत्तन्नामान एवैते तत्तद्वस्त्वभिमानिनः ।\nसन्ति तेषां विशेषेण शक्तिरन्येभ्य उच्यते ॥65॥\nव्याप्तिश्चोक्तानुसारेण दृश्यते चाधिकारिभिः ।\nशास्त्रोक्तवस्तुनश्चैव व्युत्पत्तिः शास्त्रलिङ्गतः ॥66॥\nव्युत्पत्तिः सा बलवती मूर्खव्युत्पत्तितो हि यत् ।\nदृढयुक्तिविरोधे तु सर्वत्र न्याय ईदृशः ॥67॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "द्वितीयोध्यायः",
+    "प्रथमः पादः",
+    "उक्तः समन्वयः साक्षादविरोधोत्र साध्यते"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14477/563/satara/2-anav/thavat/parath",
+    "content_id": 14477,
+    "layer": "अभिमान्यधिकरणम्",
+    "anchor": "article14493",
+    "fetched": "2026-08-17"
+   },
+   "tika_title": "अभिमान्यधिकरणम्"
+  }
+ ]
+}

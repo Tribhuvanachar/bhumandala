@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14493",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > द्वितीयोध्यायः > प्रथमः पादः > उक्तः समन्वयः साक्षादविरोधोत्र साध्यते",
+   "section": "प्रथमः पादः",
+   "unit_title": "उक्तः समन्वयः साक्षादविरोधोत्र साध्यते",
+   "sanskrit_text": "इतरव्यपदेशाधिकरणम्\nअनंशस्यापि जीवस्य किञ्चित् सामर्थ्ययोजनम् ।\nकार्येषु यः करोत्यद्धा नमस्तस्मै स्वयम्भुवे ॥96॥\nयदि भागेन कार्येषु जीवशक्तिं न योजयेत् ।\nहरिस्तदा हि सर्वत्र कृत्स्नयत्नोंशितापि वा ॥97॥\nअंशिनो हि घटाद्या ये भिन्नैरेव परस्परम् ।\nअंशैरंशिन उच्यन्ते नैवमेव हि चेतनाः ॥98॥\nअतोनंशिन इत्येव श्रुतिरेतेषु वर्तते ।\nअप्यनेकस्वरूपेषु विशेषादेव केवलम् ॥99॥\nबहुस्वरूपताख्या तु तेष्वस्त्येव हि सांशता ।\nबहुत्वेनाविनाभावाद्भिन्नता नियमाद्भवेत् ॥100॥\nयदि नैवं नियमकृद्भगवान् पुरुषोत्तमः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "द्वितीयोध्यायः",
+    "प्रथमः पादः",
+    "उक्तः समन्वयः साक्षादविरोधोत्र साध्यते"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14477/563/satara/2-anav/thavat/parath",
+    "content_id": 14477,
+    "layer": "इतरव्यपदेशाधिकरणम्",
+    "anchor": "article14493",
+    "fetched": "2026-08-17"
+   },
+   "tika_title": "इतरव्यपदेशाधिकरणम्"
+  }
+ ]
+}

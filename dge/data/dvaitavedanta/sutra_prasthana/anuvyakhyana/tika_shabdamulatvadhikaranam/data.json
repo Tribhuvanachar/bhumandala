@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14493",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > द्वितीयोध्यायः > प्रथमः पादः > उक्तः समन्वयः साक्षादविरोधोत्र साध्यते",
+   "section": "प्रथमः पादः",
+   "unit_title": "उक्तः समन्वयः साक्षादविरोधोत्र साध्यते",
+   "sanskrit_text": "शब्दमूलत्वाधिकरणम्\nतस्य त्वशेषशक्तित्वाद्युज्यते सर्वमेव च ॥101॥\nविरोधः सर्ववैशिष्ट्ये यो द्वितीये निरस्यते ।\nनारायणस्य त्वध्याये तदन्ये तत्र तत्रगाः ॥102॥\nसृष्टिसंहारवाक्यानां जीवरूपाभिधायिनाम् ।\nअप्यन्योन्याविरोधस्तु द्वितीयाध्यायगोचरः ॥103॥\nमानमेयविशेषेण पुनरुक्तिर्न जायते ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "द्वितीयोध्यायः",
+    "प्रथमः पादः",
+    "उक्तः समन्वयः साक्षादविरोधोत्र साध्यते"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14477/563/satara/2-anav/thavat/parath",
+    "content_id": 14477,
+    "layer": "शब्दमूलत्वाधिकरणम्",
+    "anchor": "article14493",
+    "fetched": "2026-08-17"
+   },
+   "tika_title": "शब्दमूलत्वाधिकरणम्"
+  }
+ ]
+}
