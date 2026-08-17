@@ -3,7 +3,7 @@
 _Originally written 10 Aug 2026 (Google Sign-In + Firebase phone OTP,
 untested). Substantially revised 16 Aug 2026: added WhatsApp OTP and
 broadcasts, tightened the security rules, and — for the first time —
-tests. 192 of them now run without a Firebase project, credentials, or
+tests. 204 of them now run without a Firebase project, credentials, or
 money. See §10 for what still cannot be tested without live accounts._
 
 ## 1. What this is
@@ -28,7 +28,7 @@ dge/js/config.js             FIREBASE_CONFIG + AUTH_CONFIG switches
 dge/firebase/firestore.rules the real enforcement layer
 dge/firebase/firebase.json   project config (emulators, hosting, functions)
 dge/firebase/functions/      Cloud Functions: OTP, broadcasts, webhook
-dge/firebase/tests/          192 tests — see tests/README.md
+dge/firebase/tests/          204 tests — see tests/README.md
 ```
 
 ## 2. Cost — read this before enabling anything
@@ -205,7 +205,7 @@ registrar. SSL and custom domains are free either way.
 
 ## 10. What is and isn't tested
 
-**Tested — 192 tests, no credentials, no cost** (`cd dge/firebase/tests
+**Tested — 204 tests, no credentials, no cost** (`cd dge/firebase/tests
 && npm install && npm run test:all`):
 
 - The OTP state machine: expiry to the millisecond, attempt caps

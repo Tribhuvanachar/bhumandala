@@ -16,7 +16,7 @@
 // The last two share one backend and one code path here; they differ only
 // in which channel the Cloud Function hands the code to.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['user-auth.js'] = 'v2.0 (Google + phone OTP over SMS/WhatsApp/MSG91, WhatsApp consent)';
+window.DGE_VERSIONS['user-auth.js'] = 'v2.1 (Google + phone OTP over SMS/WhatsApp/MSG91, WhatsApp consent, lazy SDK)';
 
 window.dgeCurrentUser = null;      // Firebase Auth user object, or null
 window.dgeCurrentUserRole = null;  // resolved role string, or null
@@ -28,6 +28,68 @@ let dgeFunctions = null;
 let dgeRecaptchaVerifier = null;   // firebase-SMS transport only
 let dgeConfirmationResult = null;  // firebase-SMS transport only
 let dgePendingPhone = null;        // whatsapp/msg91 transports
+let dgeSdkPromise = null;          // in-flight (or settled) SDK load
+
+const DGE_FIREBASE_SDK_VERSION = '12.17.1';
+
+// --- Lazy SDK loading -------------------------------------------------
+// The compat SDK is several hundred KB. It used to load from four static
+// <script> tags in index.html, on every page view, for every visitor —
+// including the overwhelming majority for whom AUTH_CONFIG.enabled is
+// false and none of it ever runs. It is now fetched here, only when the
+// feature is actually switched on, and firestore/functions only when the
+// configuration actually needs them.
+
+function dgeLoadScript(src) {
+  return new Promise((resolve, reject) => {
+    const el = document.createElement('script');
+    el.src = src;
+    // Order matters — firebase-app must finish before the others attach
+    // themselves to it — and these are loaded sequentially below, so
+    // async is off to keep behaviour predictable if that ever changes.
+    el.async = false;
+    el.onload = () => resolve(src);
+    el.onerror = () => reject(new Error('Could not load ' + src));
+    (document.head || document.documentElement).appendChild(el);
+  });
+}
+
+/** Which SDK bundles this deployment's configuration actually needs. */
+function dgeRequiredSdkModules(cfg) {
+  const modules = ['firebase-app-compat.js', 'firebase-auth-compat.js', 'firebase-firestore-compat.js'];
+  // Callable functions are only used by the transports that route an OTP
+  // through our own backend.
+  const provider = cfg && cfg.phoneOtpProvider;
+  if (cfg && cfg.enablePhoneAuth && (provider === 'whatsapp' || provider === 'msg91')) {
+    modules.push('firebase-functions-compat.js');
+  }
+  return modules;
+}
+
+/**
+ * Loads the SDK once and caches the promise, so concurrent callers share
+ * one load rather than racing to inject duplicate script tags.
+ */
+window.dgeEnsureFirebaseSdk = function() {
+  if (dgeSdkPromise) return dgeSdkPromise;
+  if (!window.AUTH_CONFIG || !window.AUTH_CONFIG.enabled) return Promise.resolve(false);
+
+  const base = window.AUTH_CONFIG.sdkBase || `https://www.gstatic.com/firebasejs/${DGE_FIREBASE_SDK_VERSION}/`;
+  const modules = dgeRequiredSdkModules(window.AUTH_CONFIG);
+
+  dgeSdkPromise = (async () => {
+    for (const m of modules) await dgeLoadScript(base + m);
+    return typeof firebase !== 'undefined';
+  })().catch((e) => {
+    console.error('[Auth] Firebase SDK failed to load:', e);
+    // Reset so a later attempt (a click after the network recovers) can
+    // retry rather than being permanently poisoned by one failure.
+    dgeSdkPromise = null;
+    return false;
+  });
+
+  return dgeSdkPromise;
+};
 
 function dgeAuthReady() {
   return !!(window.AUTH_CONFIG && window.AUTH_CONFIG.enabled && typeof firebase !== 'undefined');
@@ -132,7 +194,11 @@ window.openAccountModal = function() {
 };
 
 window.dgeSignInWithGoogle = async function() {
-  if (!dgeAuthReady()) { dgeToast('Accounts are not set up yet on this deployment.'); return; }
+  if (!window.AUTH_CONFIG || !window.AUTH_CONFIG.enabled) { dgeToast('Accounts are not set up yet on this deployment.'); return; }
+  // Normally already loaded by the startup handler; awaited here so a
+  // click that lands mid-load waits rather than failing.
+  await window.dgeEnsureFirebaseSdk();
+  if (!dgeAuthReady()) { dgeToast('Could not reach the sign-in service. Check your connection and try again.'); return; }
   if (!dgeAuth) dgeInitFirebase();
   if (!dgeAuth) return;
   try {
@@ -162,8 +228,13 @@ window.dgeSignOut = async function() {
 // --- Phone OTP -------------------------------------------------------
 
 window.dgeSendPhoneOtp = async function(phoneNumberE164) {
-  if (!dgeAuthReady() || !window.AUTH_CONFIG.enablePhoneAuth) {
+  if (!window.AUTH_CONFIG || !window.AUTH_CONFIG.enabled || !window.AUTH_CONFIG.enablePhoneAuth) {
     dgeToast('Phone sign-in is not enabled on this deployment.');
+    return false;
+  }
+  await window.dgeEnsureFirebaseSdk();
+  if (!dgeAuthReady()) {
+    dgeToast('Could not reach the sign-in service. Check your connection and try again.');
     return false;
   }
   if (!dgeAuth) dgeInitFirebase();
@@ -277,8 +348,14 @@ window.dgeSetWhatsappOptIn = async function(optIn) {
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (!dgeAuthReady()) return; // stays fully inert — no Account button, no network calls
+document.addEventListener('DOMContentLoaded', async () => {
+  // The cheap check first, before any network work: on a deployment that
+  // hasn't done the Firebase setup this returns immediately and not one
+  // byte of SDK is fetched.
+  if (!window.AUTH_CONFIG || !window.AUTH_CONFIG.enabled) return;
+
+  const loaded = await window.dgeEnsureFirebaseSdk();
+  if (!loaded || !dgeAuthReady()) return; // offline or blocked — leave the page as it was
   if (!dgeInitFirebase()) return;
 
   const accountBtn = document.getElementById('accountBtn');

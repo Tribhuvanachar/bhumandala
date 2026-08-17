@@ -36,7 +36,7 @@ form scholars and devotees can actually use.
 - **Reader app:** at `/dge/` — the site root is a Guru Vandana entry page
 - **Sister repository:** `Tribhuvanachar/bhumandala-kosha-data` — the
   dictionary corpus, too large for the main repo, served via jsDelivr CDN
-- **Current app version:** 4.62.0
+- **Current app version:** 4.63.0
 
 ## 2. Scale, as of this writing
 
@@ -117,7 +117,7 @@ no Account button, no network calls, until explicitly enabled.
   enforced by Firestore security rules, not by client-side checks.
 - **Opt-in WhatsApp broadcasts** — scheduled via Cloud Scheduler, with
   STOP replies honoured through a signature-verified webhook.
-- **192 tests** covering the OTP state machine, the security rules
+- **204 tests** covering the OTP state machine, the security rules
   (against the real Firestore emulator), the WhatsApp client, and the
   browser flow — none requiring credentials or costing money.
 

@@ -23,15 +23,47 @@ function fakeElement(id) {
   return { id, style: {}, textContent: '', checked: false, value: '' };
 }
 
-function fakeDocument(ids) {
+/**
+ * Minimal DOM.
+ *
+ * `head.appendChild` simulates the browser fetching an injected <script>:
+ * it records the URL, and then either fires onload (making the fake
+ * `firebase` global appear, as the real SDK would) or fires onerror when
+ * the test asked for a failing network. Without this, the lazy loader
+ * would await an onload that never comes and the test would hang.
+ */
+function fakeDocument(ids, opts = {}) {
   const elements = new Map(ids.map(id => [id, fakeElement(id)]));
   const listeners = {};
+  const loadedScripts = [];
+
+  const head = {
+    appendChild: (node) => {
+      loadedScripts.push(node.src);
+      // Asynchronous, like a real network fetch — so ordering bugs that
+      // depend on the load being synchronous cannot hide.
+      setTimeout(() => {
+        if (opts.scriptLoadFails) node.onerror && node.onerror(new Error('network'));
+        else {
+          if (opts.onScriptLoaded) opts.onScriptLoaded(node.src);
+          node.onload && node.onload();
+        }
+      }, 0);
+      return node;
+    }
+  };
+
   return {
     _elements: elements,
+    _loadedScripts: loadedScripts,
+    head,
+    documentElement: head,
     getElementById: (id) => elements.get(id) || null,
     addEventListener: (evt, fn) => { (listeners[evt] = listeners[evt] || []).push(fn); },
     _fire: async (evt) => { for (const fn of (listeners[evt] || [])) await fn(); },
-    createElement: () => ({ textContent: '', innerHTML: '' })
+    createElement: (tag) => (tag === 'script'
+      ? { tagName: 'SCRIPT', src: '', async: true, onload: null, onerror: null }
+      : { textContent: '', innerHTML: '' })
   };
 }
 
@@ -162,10 +194,17 @@ const DOM_IDS = [
  * Loads user-auth.js into a fresh sandbox.
  * @returns the sandbox's window plus the stub handles and captured toasts.
  */
-function loadAuth({ authConfig = {}, firebaseOpts = {}, withFirebase = true } = {}) {
+function loadAuth({ authConfig = {}, firebaseOpts = {}, withFirebase = true, scriptLoadFails = false } = {}) {
   const fb = fakeFirebase(firebaseOpts);
-  const doc = fakeDocument(DOM_IDS);
   const toasts = [];
+  let sandbox;
+
+  const doc = fakeDocument(DOM_IDS, {
+    scriptLoadFails,
+    // The SDK global only exists once a script has "loaded" — which is
+    // exactly the property the lazy-loading change is about.
+    onScriptLoaded: () => { if (withFirebase) sandbox.firebase = fb.firebase; }
+  });
 
   const windowObj = {
     AUTH_CONFIG: Object.assign({
@@ -182,15 +221,18 @@ function loadAuth({ authConfig = {}, firebaseOpts = {}, withFirebase = true } = 
     DGE_VERSIONS: {}
   };
 
-  const sandbox = {
+  sandbox = {
     window: windowObj,
     document: doc,
     console: { log() {}, error() {}, warn() {} },
     showToast: (m) => toasts.push(m),
     setTimeout,
-    clearTimeout
+    clearTimeout,
+    Promise
   };
-  if (withFirebase) sandbox.firebase = fb.firebase;
+  // NOTE: `firebase` is deliberately NOT pre-set. It appears only when a
+  // script "loads" (see onScriptLoaded above), mirroring the real page,
+  // where nothing defines that global until the SDK is fetched.
 
   // The script assigns to bare `window.x` and reads bare `firebase`, so
   // the sandbox's global object must BE the window-ish object for those
@@ -199,7 +241,14 @@ function loadAuth({ authConfig = {}, firebaseOpts = {}, withFirebase = true } = 
   vm.runInContext('var window = this.window; var document = this.document;', context);
   vm.runInContext(fs.readFileSync(AUTH_JS, 'utf8'), context, { filename: 'user-auth.js' });
 
-  return { window: windowObj, document: doc, fb, toasts, fireReady: () => doc._fire('DOMContentLoaded') };
+  return {
+    window: windowObj,
+    document: doc,
+    fb,
+    toasts,
+    scripts: doc._loadedScripts,
+    fireReady: () => doc._fire('DOMContentLoaded')
+  };
 }
 
 module.exports = { loadAuth, fakeFirebase, fakeDocument, DOM_IDS };

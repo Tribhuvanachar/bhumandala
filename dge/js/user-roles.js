@@ -23,6 +23,11 @@ window.openUserRolesModal = async function() {
     if (typeof showToast === 'function') showToast('Accounts are not set up yet on this deployment.');
     return;
   }
+  // The SDK is loaded on demand (see user-auth.js). Normally it is
+  // already there by the time an admin opens this screen, but awaiting
+  // it keeps this page working if it is ever reached before startup
+  // finished.
+  if (typeof window.dgeEnsureFirebaseSdk === 'function') await window.dgeEnsureFirebaseSdk();
   if (typeof openModal === 'function') openModal('userRolesModal');
   await dgeRenderUserRolesList();
 };

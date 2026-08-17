@@ -47,7 +47,7 @@
 </div>
 
 <!-- Top Bar -->
-<meta name="dge-html-version" content="4.62.0">
+<meta name="dge-html-version" content="4.63.0">
 <div class="top-bar">
   <div class="top-bar-title" onclick="window.openLibraryModal()">❮ Library</div>
   <div class="top-actions">
@@ -816,7 +816,7 @@
 <script src="js/admin-editor.js?v=4.61.5"></script>
 <script src="js/config-editor.js?v=4.60.6"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
-<script src="js/core.js?v=4.62.0"></script>
+<script src="js/core.js?v=4.63.0"></script>
 <script src="js/library.js?v=4.61.0"></script>
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
 <script src="js/dge-normalize.js?v=4.60.6"></script>
@@ -825,16 +825,13 @@
 
 <!-- User Accounts (Firebase, compat build — matches this project's classic-
      script/no-build-step convention rather than the newer ES-module SDK).
-     Loaded unconditionally but inert: user-auth.js checks AUTH_CONFIG.enabled
-     (config.js, default false) before calling any of these. -->
-<script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore-compat.js"></script>
-<!-- Needed only by the 'whatsapp'/'msg91' OTP transports, which call our
-     Cloud Functions. Harmless when unused. -->
-<script src="https://www.gstatic.com/firebasejs/12.17.1/firebase-functions-compat.js"></script>
-<script src="js/user-auth.js?v=4.62.0"></script>
-<script src="js/user-roles.js?v=4.62.0"></script>
+     The SDK itself is NOT loaded here: user-auth.js fetches it from gstatic
+     at runtime, and only when AUTH_CONFIG.enabled is true (config.js,
+     default false). Since the feature is off for every deployment that
+     hasn't done the Firebase setup, static tags here would mean every
+     visitor downloading several hundred KB of SDK that never runs. -->
+<script src="js/user-auth.js?v=4.63.0"></script>
+<script src="js/user-roles.js?v=4.63.0"></script>
 
 <script>
   if (typeof console.log === "function") {
