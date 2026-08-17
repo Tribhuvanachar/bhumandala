@@ -13,7 +13,7 @@
  *   - if window.DGE_SAMPLE = {rows:[{id,sutra,kashika,balamanorama,...}]} is
  *     present (the self-contained preview), data is served from memory;
  *   - otherwise each layer is fetched lazily from
- *     data/vyakarana/ashtadhyayi/<folder>/data.json  (sutrapatha eagerly).
+ *     data/vedanga/vyakarana/ashtadhyayi/<folder>/data.json  (sutrapatha eagerly).
  *
  * Preferences + Gemini key persist to localStorage on the real site; in
  * preview mode (window.DGE_INMEM) they live only in memory.
@@ -22,18 +22,18 @@
  * ========================================================================== */
 (function () {
   "use strict";
-  var BASE = "data/vyakarana/ashtadhyayi/";
+  var BASE = "data/vedanga/vyakarana/ashtadhyayi/";
   var META = {
     kashika:      {t:"काशिकावृत्तिः", sub:"Kāśikā-vṛtti", who:"Vāmana–Jayāditya", tag:"var(--k)", role:"tika"},
     siddhanta_kaumudi:{t:"सिद्धान्तकौमुदी", sub:"Siddhānta-Kaumudī", who:"Bhaṭṭoji Dīkṣita", tag:"var(--sk)", role:"tika",
-                      path:"data/ancillary/vyakarana/paniniya_vyakarana/siddhanta_kaumudi/data.json"},
+                      path:"data/vedanga/vyakarana/paniniya_vyakarana/siddhanta_kaumudi/data.json"},
     mahabhashya:  {t:"महाभाष्यम्", sub:"Mahā-bhāṣya", who:"Patañjali", tag:"var(--mb)", role:"bhashya",
-                      path:"data/ancillary/vyakarana/paniniya_vyakarana/mahabhashya_patanjali/data.json"},
+                      path:"data/vedanga/vyakarana/paniniya_vyakarana/mahabhashya_patanjali/data.json"},
     balamanorama: {t:"बालमनोरमा", sub:"Bāla-manoramā", who:"Vāsudeva Dīkṣita", tag:"var(--b)", role:"tippani"},
     tattvabodhini:{t:"तत्त्वबोधिनी", sub:"Tattva-bodhinī", who:"Jñānendra Sarasvatī", tag:"var(--t)", role:"tippani"},
     nyasa:        {t:"न्यासः", sub:"Kāśikāvivaraṇapañjikā", who:"Jinendrabuddhi", tag:"var(--n)", role:"tippani"},
     vasu:         {t:"Vasu · English", sub:"S.C. Vasu (1891)", who:"Śrīśa Chandra Vasu", tag:"var(--vs)", role:"translation", lang:"en",
-                      path:"data/vyakarana/ashtadhyayi/vasu/data.json"}
+                      path:"data/vedanga/vyakarana/ashtadhyayi/vasu/data.json"}
   };
   var ORDER = ["kashika","siddhanta_kaumudi","mahabhashya","balamanorama","tattvabodhini","nyasa","vasu"];
   var INMEM = !!window.DGE_INMEM || !!window.DGE_SAMPLE;

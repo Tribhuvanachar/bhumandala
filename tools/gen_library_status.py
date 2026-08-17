@@ -55,7 +55,7 @@ SLUG_TO_FILE = {to_slug(g['path']): to_local_path(g['path']) for g in lib.get('g
 def count_leaf(leaf_path):
     # Union of two candidate files, deduped by resolved path:
     #  1) the flat "<leaf>/data.json" guess -- covers every ordinary leaf,
-    #     AND leaves like vyakarana/ashtadhyayi/* that live entirely outside
+    #     AND leaves like vedanga/vyakarana/ashtadhyayi/* that live entirely outside
     #     library.json's catalog (Ashtadhyayi is its own standalone feature,
     #     not part of the main library.json-driven reader).
     #  2) any library.json entry at this exact slug, or exactly one layer

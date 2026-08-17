@@ -892,7 +892,7 @@ window.DGE.App = (function () {
   // new part of a multi-part work (a sarga, skandha, kanda...) SEE the
   // real existing siblings at that exact level instead of free-typing a
   // full path from memory and risking a typo/inconsistent name (e.g.
-  // "Kavya/Foo" vs the corpus's "kavya/foo_bar/sarga_01" convention).
+  // "Kavya/Foo" vs the corpus's "kavya_alankara/foo_bar/sarga_01" convention).
   // Includes BOTH populated and unpopulated entries, unlike the search
   // box above (which only searches not-yet-populated ones) -- an already-
   // populated sibling like an existing sarga_01 is exactly what needs to
@@ -1004,8 +1004,8 @@ window.DGE.App = (function () {
     } else if (childNames.length) {
       // No numbered series -- naming a "kind" here would mean guessing
       // whether this level holds more whole works (kavya/ -> "a new
-      // kavya", a real guess that happens to be right) or text layers of
-      // ONE work (kavya/raghuvamsha/ -> children are "mula"/"tika_x", NOT
+      // kavya_alankara", a real guess that happens to be right) or text layers of
+      // ONE work (kavya_alankara/raghuvamsha/ -> children are "mula"/"tika_x", NOT
       // more raghuvamshas -- a guess that's actively wrong). Can't tell
       // those apart reliably from names alone, so stay generic and let
       // the real sibling list carry the context instead of a wrong label.

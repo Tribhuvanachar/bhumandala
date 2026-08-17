@@ -101,7 +101,7 @@ remain in git history if any is ever wanted back.
   early prototypes of the reading page, superseded by `dge/`.
 - `PrahladaKrutaNarasimhaStotra.html` and `data_pns.json` — a standalone
   copy of the Prahlāda-kṛta Nṛsiṃha Stotra, superseded by the live text at
-  `dge/data/stotras/pns/`.
+  `dge/data/stotra/pns/`.
 - `version.json` at the root — read by nothing. `dge/convert/version.json`
   is a different file and is still in use.
 - `dge/data/tippanikaras.json`, `dge/data/_taxonomy.json` — no reader.
@@ -125,3 +125,40 @@ and `js/keys.js` each resolve this folder from their own script URL rather
 than from the page's, so the config loads correctly from any page depth, and
 whether the site is served from a domain root or from a project subpath such
 as `tribhuvanachar.github.io/bhumandala/`.
+
+## The taxonomy restructure
+
+`dge/data/` was reorganised onto the top level proposed in
+`DGE_Shastra_Taxonomy.md`. What used to be a mix of categories, single works
+and a drawer called `ancillary` now reads as a tree a student would
+recognise:
+
+| Was | Is |
+|---|---|
+| `ancillary/{shiksha,vyakarana,chandas,nirukta,jyotisha}` | `vedanga/…` — it was the Vedāṅgas all along |
+| `ancillary/pratishakhya` | `vedanga/shiksha/pratishakhya` |
+| `sutras/kalpa_sutras` | `vedanga/kalpa` |
+| `vyakarana` | `vedanga/vyakarana` — merged beside the grammatical schools |
+| `sarvamoola_grantha` | `darshana/vedanta/dvaita/sarvamula` |
+| `shankara_bhashya` | `darshana/vedanta/advaita/shankara_bhashya` |
+| `itihasas` / `puranas` / `stotras` / `koshas` | `itihasa` / `purana` / `stotra` / `kosha` |
+| `smritis` / `dharmashastra` | `smriti_dharma/smriti` / `smriti_dharma/dharmashastra` |
+| `kavya` | `kavya_alankara` |
+| `pancharatra_agama` | `agama/pancharatra` |
+| `dasakuta` / `vyasakuta` | `dasa_sahitya/dasakuta` / `dasa_sahitya/vyasakuta` |
+| `vedas` | unchanged |
+
+Two scripts did it, and both still run: `tools/restructure_taxonomy.py`
+(reports by default, `--apply` moves) and `tools/migrate_slugs.py` (the
+cross-references, the backlinks and the search-index shard names).
+
+**Old links still work.** `DGE_LEGACY_SLUGS` in `dge/js/core.js` rewrites an
+old `?path=` on the way in, so a bookmark or a shared link from before the
+move lands on the text rather than on "Not Yet Available". That table is now
+the only copy of the old names left in the codebase — don't delete it
+because it looks redundant.
+
+The search index was rewritten rather than rebuilt. Its postings are keyed
+by grantha index, not by slug, so only the manifest, `backlinks.json` and
+the shard filenames carried the old names. The result is what a rebuild
+would have produced, for a fraction of the work.

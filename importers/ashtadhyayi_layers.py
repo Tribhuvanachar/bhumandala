@@ -143,7 +143,7 @@ def main():
     args = ap.parse_args()
 
     base = data_base()
-    sut_fp = os.path.join(base, "vyakarana/ashtadhyayi/sutrapatha/data.json")
+    sut_fp = os.path.join(base, "vedanga/vyakarana/ashtadhyayi/sutrapatha/data.json")
     sutrapatha = json.load(open(sut_fp, encoding="utf-8"))
     sutras = sutrapatha["items"]
     print(f"sutrapatha: {len(sutras)} sutras (canonical id set)")
@@ -188,7 +188,7 @@ def main():
             enriched += 1
 
         ref_note = [{"note": "comments_on",
-                     "target": "vyakarana/ashtadhyayi/sutrapatha",
+                     "target": "vedanga/vyakarana/ashtadhyayi/sutrapatha",
                      "unit_id": ref}]
 
         # ---- Siddhanta-Kaumudi ----
@@ -225,17 +225,17 @@ def main():
                "non-commercial/educational use (source repo has no formal LICENSE); "
                "keep visible attribution to ashtadhyayi.com; resolve before public launch")
 
-    write_layer("ancillary/vyakarana/paniniya_vyakarana/siddhanta_kaumudi",
+    write_layer("vedanga/vyakarana/paniniya_vyakarana/siddhanta_kaumudi",
                 {"schema": "grantha_tika_text", "default_author": "Bhaṭṭoji Dīkṣita",
                  "title": "Siddhānta-Kaumudī", "title_devanagari": "सिद्धान्तकौमुदी",
                  "source": "ashtadhyayi.com sutraani/kaumudi.txt", "licence": lic_ash},
                 sk_items)
-    write_layer("ancillary/vyakarana/paniniya_vyakarana/mahabhashya_patanjali",
+    write_layer("vedanga/vyakarana/paniniya_vyakarana/mahabhashya_patanjali",
                 {"schema": "grantha_tika_text", "default_author": "Patañjali",
                  "title": "Mahābhāṣya", "title_devanagari": "महाभाष्यम्",
                  "source": "ashtadhyayi.com sutraani/bhashya.txt", "licence": lic_ash},
                 mb_items)
-    write_layer("vyakarana/ashtadhyayi/vasu",
+    write_layer("vedanga/vyakarana/ashtadhyayi/vasu",
                 {"schema": "grantha_tika_text", "default_author": "Śrīśa Chandra Vasu",
                  "title": "Vasu — English translation", "title_devanagari": "Vasu (Eng.)",
                  "language": "en",

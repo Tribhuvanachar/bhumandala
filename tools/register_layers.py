@@ -4,7 +4,7 @@
 The reader (core.js) only fetches content that has an entry in library.json, and
 gen_library_status.py only counts taxonomy leaves that resolve to such an entry.
 New importer output (a fresh layer folder like <kanda>/saartha, the bhagavad_gita
-section, or shankara_bhashya/**) therefore stays invisible until it is listed
+section, or darshana/vedanta/advaita/shankara_bhashya/**) therefore stays invisible until it is listed
 here. This tool scans the data tree and appends any data.json that is missing,
 with populated = (it has content). Safe to run repeatedly; run AFTER an importer.
 """

@@ -1,4 +1,4 @@
-"""Srimad Bhagavata Purana -> puranas/bhagavata_purana/skandha_NN/data.json
+"""Srimad Bhagavata Purana -> purana/bhagavata_purana/skandha_NN/data.json
 Source: GRETIL (IAST), lines coded 'BhP_SS.AA.VVV/pada'. Converts IAST->Devanagari.
 """
 import re, collections
@@ -28,7 +28,7 @@ def run():
     for sk in range(1, 13):
         print(f"skandha {sk} …")
         items = parse(strip_html(http_get(URL % sk)), sk)
-        write_grantha(f"puranas/bhagavata_purana/skandha_{sk:02d}", "itihasa_purana_text", "Maharshi Veda Vyasa", items)
+        write_grantha(f"purana/bhagavata_purana/skandha_{sk:02d}", "itihasa_purana_text", "Maharshi Veda Vyasa", items)
 
 if __name__ == "__main__":
     run()

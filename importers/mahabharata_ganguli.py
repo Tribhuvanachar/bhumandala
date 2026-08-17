@@ -1,5 +1,5 @@
 """Mahabharata -- English translation layer (K.M. Ganguli, public domain)
-   -> itihasas/mahabharata/<parva>_parva/translation_ganguli/data.json
+   -> itihasa/mahabharata/<parva>_parva/translation_ganguli/data.json
 
 IMPORTANT REALITY CHECK (documented in COMMENTARY_IMPORT_HANDOFF.md):
   A free, scrapable, per-SHLOKA word-to-word English Mahabharata does NOT exist
@@ -83,7 +83,7 @@ def run(max_gap=3):
                 print(f"  section {sec}: {len(body)} chars")
             sec += 1
         if items:
-            write_grantha(f"itihasas/mahabharata/{parva}_parva/translation_ganguli",
+            write_grantha(f"itihasa/mahabharata/{parva}_parva/translation_ganguli",
                           "generic", "Kisari Mohan Ganguli (tr.)", items)
             print(f"  -> {len(items)} sections")
 

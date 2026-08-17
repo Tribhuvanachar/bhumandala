@@ -105,13 +105,13 @@
 
   // layer registry — mirrors ashtadhyayi.js META/ORDER + the two ancillary leaves
   var LAYERS=[
-    {key:"kashika",           t:"काशिकावृत्तिः",   sub:"Kāśikā-vṛtti",     who:"Vāmana–Jayāditya",  role:"tika",        tag:"var(--k)",  path:"data/vyakarana/ashtadhyayi/kashika/data.json"},
-    {key:"siddhanta_kaumudi", t:"सिद्धान्तकौमुदी", sub:"Siddhānta-Kaumudī",who:"Bhaṭṭoji Dīkṣita",  role:"tika",        tag:"var(--sk)", path:"data/ancillary/vyakarana/paniniya_vyakarana/siddhanta_kaumudi/data.json"},
-    {key:"mahabhashya",       t:"महाभाष्यम्",      sub:"Mahā-bhāṣya",      who:"Patañjali",         role:"bhāṣya",      tag:"var(--mb)", path:"data/ancillary/vyakarana/paniniya_vyakarana/mahabhashya_patanjali/data.json"},
-    {key:"balamanorama",      t:"बालमनोरमा",       sub:"Bāla-manoramā",    who:"Vāsudeva Dīkṣita",  role:"tippani",     tag:"var(--b)",  path:"data/vyakarana/ashtadhyayi/balamanorama/data.json"},
-    {key:"tattvabodhini",     t:"तत्त्वबोधिनी",    sub:"Tattva-bodhinī",   who:"Jñānendra Sarasvatī",role:"tippani",    tag:"var(--t)",  path:"data/vyakarana/ashtadhyayi/tattvabodhini/data.json"},
-    {key:"nyasa",             t:"न्यासः",          sub:"Nyāsa",            who:"Jinendrabuddhi",    role:"tippani",     tag:"var(--n)",  path:"data/vyakarana/ashtadhyayi/nyasa/data.json"},
-    {key:"vasu",              t:"Vasu · English",  sub:"S.C. Vasu (1891)", who:"Śrīśa Chandra Vasu",role:"translation", tag:"var(--vs)", path:"data/vyakarana/ashtadhyayi/vasu/data.json"}
+    {key:"kashika",           t:"काशिकावृत्तिः",   sub:"Kāśikā-vṛtti",     who:"Vāmana–Jayāditya",  role:"tika",        tag:"var(--k)",  path:"../dge/data/vedanga/vyakarana/ashtadhyayi/kashika/data.json"},
+    {key:"siddhanta_kaumudi", t:"सिद्धान्तकौमुदी", sub:"Siddhānta-Kaumudī",who:"Bhaṭṭoji Dīkṣita",  role:"tika",        tag:"var(--sk)", path:"../dge/data/vedanga/vyakarana/paniniya_vyakarana/siddhanta_kaumudi/data.json"},
+    {key:"mahabhashya",       t:"महाभाष्यम्",      sub:"Mahā-bhāṣya",      who:"Patañjali",         role:"bhāṣya",      tag:"var(--mb)", path:"../dge/data/vedanga/vyakarana/paniniya_vyakarana/mahabhashya_patanjali/data.json"},
+    {key:"balamanorama",      t:"बालमनोरमा",       sub:"Bāla-manoramā",    who:"Vāsudeva Dīkṣita",  role:"tippani",     tag:"var(--b)",  path:"../dge/data/vedanga/vyakarana/ashtadhyayi/balamanorama/data.json"},
+    {key:"tattvabodhini",     t:"तत्त्वबोधिनी",    sub:"Tattva-bodhinī",   who:"Jñānendra Sarasvatī",role:"tippani",    tag:"var(--t)",  path:"../dge/data/vedanga/vyakarana/ashtadhyayi/tattvabodhini/data.json"},
+    {key:"nyasa",             t:"न्यासः",          sub:"Nyāsa",            who:"Jinendrabuddhi",    role:"tippani",     tag:"var(--n)",  path:"../dge/data/vedanga/vyakarana/ashtadhyayi/nyasa/data.json"},
+    {key:"vasu",              t:"Vasu · English",  sub:"S.C. Vasu (1891)", who:"Śrīśa Chandra Vasu",role:"translation", tag:"var(--vs)", path:"../dge/data/vedanga/vyakarana/ashtadhyayi/vasu/data.json"}
   ];
   var PENDING=[{t:"⚙ प्रक्रिया (derivation engine)", note:"planned — external Vidyut/Vidyullekha engine, not a text layer"}];
 
@@ -137,7 +137,7 @@
 
   function load(){
     var total=0;
-    fetchJSON("data/vyakarana/ashtadhyayi/sutrapatha/data.json").then(function(sp){
+    fetchJSON("../dge/data/vedanga/vyakarana/ashtadhyayi/sutrapatha/data.json").then(function(sp){
       var sutras=sp.items||[]; total=sutras.length;
       renderEnrichment(sutras, total);
       return Promise.all(LAYERS.map(function(L){

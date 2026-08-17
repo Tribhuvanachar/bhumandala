@@ -1,4 +1,4 @@
-"""Srimad Bhagavad Gita -> itihasas/bhagavad_gita/adhyaya_NN/data.json
+"""Srimad Bhagavad Gita -> itihasa/bhagavad_gita/adhyaya_NN/data.json
 
 A NEW dedicated Gita section under Itihasas (the Gita is Bhishma Parva 23-40 of
 the Mahabharata, so Itihasa is its correct home). One data.json per adhyaya; each
@@ -101,7 +101,7 @@ def run():
         except Exception as e:
             print(f"  ! GitaSupersite enrichment skipped: {e}")
     for ch, items in items_by_chapter.items():
-        write_grantha(f"itihasas/bhagavad_gita/adhyaya_{ch:02d}",
+        write_grantha(f"itihasa/bhagavad_gita/adhyaya_{ch:02d}",
                       "itihasa_purana_text", "Bhagavan Sri Krishna", items)
 
 

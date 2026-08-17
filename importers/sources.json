@@ -4,7 +4,7 @@
   {
    "id": "bhagavata",
    "title": "Srimad Bhagavata Purana",
-   "target": "puranas/bhagavata_purana/skandha_NN",
+   "target": "purana/bhagavata_purana/skandha_NN",
    "url": "http://gretil.sub.uni-goettingen.de/gretil/1_sanskr/3_purana/bhagp/bhp_01u.htm .. bhp_12u.htm",
    "format": "GRETIL IAST, coded BhP_SS.AA.VVV/pada",
    "importer": "bhagavata.py",
@@ -13,7 +13,7 @@
   {
    "id": "ramayana",
    "title": "Valmiki Ramayana",
-   "target": "itihasas/ramayana/<kanda>/mula",
+   "target": "itihasa/ramayana/<kanda>/mula",
    "url": "https://bombay.indology.info/ramayana/text/UD/Ram01.txt .. Ram07.txt",
    "format": "BORI critical, native Devanagari, coded KSSSVVVpada",
    "importer": "ramayana.py"
@@ -21,7 +21,7 @@
   {
    "id": "mahabharata",
    "title": "Mahabharata",
-   "target": "itihasas/mahabharata/<parva>_parva/mula",
+   "target": "itihasa/mahabharata/<parva>_parva/mula",
    "url": "https://bombay.indology.info/mahabharata/text/UD/MBh01.txt .. MBh18.txt",
    "format": "BORI critical, native Devanagari, coded BBAAAVVVpada",
    "importer": "mahabharata.py",
@@ -30,7 +30,7 @@
   {
    "id": "harivamsha",
    "title": "Harivamsha",
-   "target": "itihasas/harivamsha/mula",
+   "target": "itihasa/harivamsha/mula",
    "url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/html/sa_harivaMza.htm",
    "format": "GRETIL TEI/HTML, IAST, HV_chapter.verse",
    "importer": "gretil.py"
@@ -38,15 +38,15 @@
   {
    "id": "adhyatma_ramayana",
    "title": "Adhyatma Ramayana",
-   "target": "itihasas/adhyatma_ramayana",
+   "target": "itihasa/adhyatma_ramayana",
    "url": "https://sanskritdocuments.org/sanskrit/adhyatmaramayana/",
    "format": "ITX (ITRANS->dev)",
    "importer": "TODO (ITX per-kanda)"
   },
   {
-   "id": "smritis",
+   "id": "smriti_dharma/smriti",
    "title": "Smritis (Manu/Yajnavalkya/Parashara/Narada/Vishnu/Gautama)",
-   "target": "smritis/<name>",
+   "target": "smriti_dharma/smriti/<name>",
    "url": "https://gretil.sub.uni-goettingen.de/gretil/1_sanskr/6_sastra/4_dharma/smrti/",
    "format": "GRETIL IAST, verse-numbered",
    "importer": "gretil.py (manu/yajnavalkya/parashara/narada/vishnu)"
@@ -54,7 +54,7 @@
   {
    "id": "raghuvamsha",
    "title": "Raghuvamsha (mula)",
-   "target": "kavya/raghuvamsha/mula",
+   "target": "kavya_alankara/raghuvamsha/mula",
    "url": "https://ambuda.org/texts/raghuvamsham | GRETIL kragh_pu",
    "format": "Devanagari/IAST, Ragh_S.V",
    "importer": "gretil.py",
@@ -63,7 +63,7 @@
   {
    "id": "kumarasambhava",
    "title": "Kumarasambhava (mula)",
-   "target": "kavya/kumarasambhava/mula",
+   "target": "kavya_alankara/kumarasambhava/mula",
    "url": "https://sanskritdocuments.org/doc_z_misc_major_works/kumArasambhavam.itx",
    "format": "ITX",
    "importer": "itx.py"
@@ -71,7 +71,7 @@
   {
    "id": "kiratarjuniya",
    "title": "Kiratarjuniya (mula)",
-   "target": "kavya/kiratarjuniya/mula",
+   "target": "kavya_alankara/kiratarjuniya/mula",
    "url": "https://sanskritdocuments.org/doc_z_misc_major_works/kirAtArjunIyam.itx",
    "format": "ITX",
    "importer": "itx.py",
@@ -80,7 +80,7 @@
   {
    "id": "shishupalavadha",
    "title": "Shishupalavadha (mula)",
-   "target": "kavya/shishupalavadha/mula",
+   "target": "kavya_alankara/shishupalavadha/mula",
    "url": "https://ambuda.org/texts/shishupalavadham",
    "format": "Devanagari",
    "importer": "gretil.py"
@@ -88,7 +88,7 @@
   {
    "id": "meghaduta",
    "title": "Meghaduta + Mallinatha (bundled)",
-   "target": "kavya/meghaduta",
+   "target": "kavya_alankara/meghaduta",
    "url": "https://sanskritdocuments.org/doc_z_misc_major_works/meghadUtamsavyAkhyA.itx",
    "format": "ITX, mula+commentary",
    "importer": "special (mula+commentary split)"
@@ -96,7 +96,7 @@
   {
    "id": "bhatti_kavya",
    "title": "Bhatti Kavya + Jayamangala",
-   "target": "kavya/bhatti_kavya",
+   "target": "kavya_alankara/bhatti_kavya",
    "url": "https://ambuda.org/proofing/bhtttikaavyn-jymngglyaa-smetm/",
    "format": "Ambuda proofing XML (Devanagari, mula+commentary)",
    "importer": "special (Ambuda XML)"
@@ -104,7 +104,7 @@
   {
    "id": "shakuntala",
    "title": "Abhijnana Shakuntala",
-   "target": "kavya/shakuntala",
+   "target": "kavya_alankara/shakuntala",
    "url": "https://sanskritdocuments.org/doc_z_misc_major_works/shaakuntala.itx",
    "format": "ITX drama (act/prose/verse)",
    "importer": "special (drama)"
@@ -112,7 +112,7 @@
   {
    "id": "sumadhva_vijaya",
    "title": "Sumadhva Vijaya (mula)",
-   "target": "kavya/sumadhva_vijaya",
+   "target": "kavya_alankara/sumadhva_vijaya",
    "url": "https://www.dvaita.net/pdf/smvijaya/smv.pdf",
    "format": "typeset PDF (pdftotext)",
    "importer": "special (PDF pdftotext)"
@@ -120,7 +120,7 @@
   {
    "id": "other_mahapuranas",
    "title": "14 Mahapuranas (Agni,Brahma,Garuda,Kurma,Linga,Markandeya,Matsya,Narada,Siva,Skanda,Vamana,Vishnu, ...)",
-   "target": "puranas/<name>",
+   "target": "purana/<name>",
    "url": "GRETIL + Zenodo mirror .txt",
    "format": "IAST->dev",
    "importer": "TODO (clone bhagavata.py)"
@@ -128,7 +128,7 @@
   {
    "id": "ramayana_saartha",
    "title": "Valmiki Ramayana - word-meaning + English",
-   "target": "itihasas/ramayana/<kanda>/saartha",
+   "target": "itihasa/ramayana/<kanda>/saartha",
    "url": "https://www.valmikiramayan.net/utf8/<kanda>/sarga<N>/<prefix>roman<N>.htm",
    "format": "HTML (IAST + *word*=meaning gloss + English), transliterated to Devanagari",
    "importer": "ramayana_saartha.py",
@@ -137,7 +137,7 @@
   {
    "id": "mahabharata_ganguli",
    "title": "Mahabharata - English (Ganguli, PD)",
-   "target": "itihasas/mahabharata/<parva>_parva/translation_ganguli",
+   "target": "itihasa/mahabharata/<parva>_parva/translation_ganguli",
    "url": "https://sacred-texts.com/hin/m<BB>/m<BB><SSS>.htm",
    "format": "HTML prose, section-level (generic schema, text field)",
    "importer": "mahabharata_ganguli.py",
@@ -146,16 +146,16 @@
   {
    "id": "bhagavad_gita",
    "title": "Srimad Bhagavad Gita - new Itihasa section (mula + word-meaning + all commentaries)",
-   "target": "itihasas/bhagavad_gita/adhyaya_NN",
+   "target": "itihasa/bhagavad_gita/adhyaya_NN",
    "url": "https://raw.githubusercontent.com/gita/gita/main/data/{verse,translation,commentary}.json",
    "format": "JSON (BhagavadGita.io open dataset); bhashya[] per shloka",
    "importer": "bhagavadgita.py",
    "note": "Reliable base (~20 translations/commentaries). Optional GITA_SUPERSITE=1 appends classical Sanskrit bhashyas via gitasupersite.py (Wayback)."
   },
   {
-   "id": "shankara_bhashya",
+   "id": "darshana/vedanta/advaita/shankara_bhashya",
    "title": "Adi Shankaracharya Prasthanatrayi Bhashya (Brahmasutra + Upanishads + Gita)",
-   "target": "shankara_bhashya/<work>/bhashya",
+   "target": "darshana/vedanta/advaita/shankara_bhashya/<work>/bhashya",
    "url": "Zenodo GRETIL dump 6466333 (CC-BY) + GRETIL classic + sanskritdocuments",
    "format": "IAST plaintext with reference markers, transliterated to Devanagari",
    "importer": "shankara_bhashya.py",

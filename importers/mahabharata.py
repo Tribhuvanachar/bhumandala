@@ -1,6 +1,6 @@
-"""Mahabharata -> itihasas/mahabharata/<parva>/data.json
+"""Mahabharata -> itihasa/mahabharata/<parva>/data.json
 Source: bombay.indology.info BORI critical ed. (native Devanagari), coded 'BBAAAVVVpada'.
-NOTE: add the itihasas/mahabharata/<parva> nodes to taxonomy.json so they render.
+NOTE: add the itihasa/mahabharata/<parva> nodes to taxonomy.json so they render.
 Only the constituted text (lowercase pada letters) is taken; capital-letter
 codes = star/interpolated passages and are skipped.
 """
@@ -39,7 +39,7 @@ def run():
         items = parse(http_get(URL % b), b)
         # /mula -- matches the layer folder already scaffolded in the
         # catalog (leaves room for a commentary layer alongside it later).
-        write_grantha(f"itihasas/mahabharata/{PARVA[b]}_parva/mula", "itihasa_purana_text", "Maharshi Veda Vyasa", items)
+        write_grantha(f"itihasa/mahabharata/{PARVA[b]}_parva/mula", "itihasa_purana_text", "Maharshi Veda Vyasa", items)
 
 if __name__ == "__main__":
     run()

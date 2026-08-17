@@ -66,6 +66,63 @@ window.dgeForceRefreshContent = function() {
    script's own URL (always <site>/dge/js/), so it holds at any page depth
    and whether the site is served from a domain root or a project subpath.
    ---------------------------------------------------------------------- */
+/* =========================================================================
+   Links from before the taxonomy restructure.
+
+   dge/data/ was reorganised onto the taxonomy in DGE_Shastra_Taxonomy.md
+   (see tools/restructure_taxonomy.py): "ancillary" turned out to be the
+   Vedangas and became "vedanga", a lone "shankara_bhashya" moved under
+   darshana/vedanta/advaita, and so on. Every ?path= link handed out before
+   that names the old folder.
+
+   GitHub Pages has no redirect layer, so without this a bookmark, a shared
+   link or a search-engine result from before the move lands on "Not Yet
+   Available" — the page looks broken rather than moved. Rewriting the prefix
+   on the way in costs one pass over a 20-entry table and keeps every one of
+   those links working.
+
+   Longest source prefix wins, so the old ancillary/vyakarana is not shadowed
+   by the old top-level vyakarana, which moved to the same place.
+
+   Written out rather than derived: this table is the OLD names, and the only
+   copy of them left in the codebase now that everything else has moved.
+   ========================================================================= */
+const DGE_LEGACY_SLUGS = {
+  'ancillary/shiksha':      'vedanga/shiksha',
+  'ancillary/pratishakhya': 'vedanga/shiksha/pratishakhya',
+  'ancillary/vyakarana':    'vedanga/vyakarana',
+  'ancillary/chandas':      'vedanga/chandas',
+  'ancillary/nirukta':      'vedanga/nirukta',
+  'ancillary/jyotisha':     'vedanga/jyotisha',
+  'sutras/kalpa_sutras':    'vedanga/kalpa',
+  'vyakarana':              'vedanga/vyakarana',
+  'sarvamoola_grantha':     'darshana/vedanta/dvaita/sarvamula',
+  'shankara_bhashya':       'darshana/vedanta/advaita/shankara_bhashya',
+  'itihasas':               'itihasa',
+  'puranas':                'purana',
+  'smritis':                'smriti_dharma/smriti',
+  'dharmashastra':          'smriti_dharma/dharmashastra',
+  'kavya':                  'kavya_alankara',
+  'koshas':                 'kosha',
+  'stotras':                'stotra',
+  'pancharatra_agama':      'agama/pancharatra',
+  'dasakuta':               'dasa_sahitya/dasakuta',
+  'vyasakuta':              'dasa_sahitya/vyasakuta'
+};
+
+window.dgeUpgradeLegacySlug = function (slug) {
+  if (!slug) return slug;
+  let best = null;
+  Object.keys(DGE_LEGACY_SLUGS).forEach(function (src) {
+    if (slug === src || slug.indexOf(src + '/') === 0) {
+      if (!best || src.length > best.length) best = src;
+    }
+  });
+  if (!best) return slug;
+  return DGE_LEGACY_SLUGS[best] + slug.slice(best.length);
+};
+const dgeUpgradeLegacySlug = window.dgeUpgradeLegacySlug;
+
 window.dgeAdminConfigUrl = window.dgeAdminConfigUrl || function (name) {
   const self = (document.currentScript && document.currentScript.src) ||
                (window.DGE_SCRIPT_BASE || '');
@@ -327,23 +384,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 3. RESOLVE WHICH GRANTHA TO LOAD
-  // Any single-level "stotras/<code>" address — whether reached via the
+  // Any single-level "stotra/<code>" address — whether reached via the
   // legacy ?code=<code> param, no params at all (defaults to pns), OR the
-  // newer ?path=stotras/<code> form — has ALWAYS used just <code> as its
+  // newer ?path=stotra/<code> form — has ALWAYS used just <code> as its
   // storage/cache namespace; that convention predates the library catalog
   // entirely. This must hold regardless of how the page was reached: the
-  // Library browser itself links to PNS via ?path=stotras/pns, and if
+  // Library browser itself links to PNS via ?path=stotra/pns, and if
   // that used a different namespace it would silently orphan existing
   // users' marks/notes/audio-cache under a key they'd never see again —
   // not actual data loss (nothing is deleted), but functionally
   // indistinguishable from it. Only deeper category paths (vedas/...,
-  // puranas/..., sarvamoola/..., etc.) use the full slug as the
+  // purana/..., darshana/..., etc.) use the full slug as the
   // namespace, since collision risk there is real (many granthas share a
   // generic last folder segment like "mula").
-  const slug = explicitPath
+  const slug = dgeUpgradeLegacySlug(explicitPath
     ? explicitPath.replace(/^\/+|\/+$/g, '')
-    : `stotras/${explicitCode || 'pns'}`;
-  const stotrasDirectChild = slug.match(/^stotras\/([^/]+)$/);
+    : `stotra/${explicitCode || 'pns'}`);
+  const stotrasDirectChild = slug.match(/^stotra\/([^/]+)$/);
 
   window.stotraCode = stotrasDirectChild ? stotrasDirectChild[1] : slug.replace(/\//g, '__');
   window.currentGranthaSlug = slug;

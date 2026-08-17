@@ -6,13 +6,13 @@ import re, collections
 from common import http_get, itrans_to_dev, write_grantha
 
 # /mula target -- matches the layer-folder convention used for the other
-# itihasas/kavya entries (leaves room for a commentary layer later).
+# itihasa/kavya entries (leaves room for a commentary layer later).
 ITX = {
   "kumarasambhava": dict(name="Kumarasambhava", author="Kalidasa", unit="sarga",
-      schema="itihasa_purana_text", target="kavya/kumarasambhava/mula",
+      schema="itihasa_purana_text", target="kavya_alankara/kumarasambhava/mula",
       url="https://sanskritdocuments.org/doc_z_misc_major_works/kumArasambhavam.itx"),
   "kiratarjuniya":  dict(name="Kiratarjuniya", author="Bharavi", unit="sarga",
-      schema="itihasa_purana_text", target="kavya/kiratarjuniya/mula",
+      schema="itihasa_purana_text", target="kavya_alankara/kiratarjuniya/mula",
       url="https://sanskritdocuments.org/doc_z_misc_major_works/kirAtArjunIyam.itx"),
 }
 

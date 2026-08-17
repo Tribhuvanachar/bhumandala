@@ -3,7 +3,7 @@
 // UI, fuzzy SLP1 headword lookup, per-dictionary result cards, per-language
 // grouping, and a cross-language translate pivot (BYOK Gemini, reusing the
 // app's existing 'gemini_api_key'/'gemini_model' localStorage keys).
-// Loads its data from data/koshas/** produced by the importer. Touches no
+// Loads its data from data/kosha/** produced by the importer. Touches no
 // existing file or global beyond reading window.Sanscript.
 (function () {
   'use strict';
@@ -18,10 +18,10 @@
   // a "राम" search instead of looking absent.
   function gkey(s) { s = s || ''; var t = s.replace(/[HM]+$/, ''); return t || s; }
 
-  // Data can live in-repo (data/koshas) or in a separate repo served over a CDN.
+  // Data can live in-repo (data/kosha) or in a separate repo served over a CDN.
   // Set window.KOSHA_DATA_BASE (e.g. a jsDelivr /gh/…/data/koshas URL) to point
   // the app at the full external corpus once it outgrows the Pages repo.
-  var BASE = (window.KOSHA_DATA_BASE || 'data/koshas').replace(/\/+$/, '');
+  var BASE = (window.KOSHA_DATA_BASE || 'data/kosha').replace(/\/+$/, '');
   var V = '?v=1.2';
   var PREF_LANG = (localStorage.getItem('app_kosha_pref_lang') || 'kn'); // user's language (Kannada)
   var LANG_NAME = { sa: 'संस्कृतम्', kn: 'ಕನ್ನಡ', en: 'English', hi: 'हिन्दी',

@@ -1,12 +1,12 @@
 {
   "_HOW_TO_APPLY": [
-    "Merge the 'koshas' key below into data/taxonomy.json AND data/_taxonomy.json.",
+    "Merge the 'kosha' key below into data/taxonomy.json AND data/_taxonomy.json.",
     "'_schema':'kosha_entry' cascades to every dictionary folder underneath, so",
     "per-folder entries need no _schema of their own. The importer regenerates the",
-    "full folder list into data/koshas/_taxonomy_koshas.json each run -- paste that",
+    "full folder list into data/kosha/_taxonomy_koshas.json each run -- paste that",
     "generated list in place of the illustrative folders shown here."
   ],
-  "koshas": {
+  "kosha": {
     "_schema": "kosha_entry",
     "_default_author": "Cologne Digital Sanskrit Dictionaries / indic-dict (see per-folder source_meta)",
     "sanskrit_english": {
