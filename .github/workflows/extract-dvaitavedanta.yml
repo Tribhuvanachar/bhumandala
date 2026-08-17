@@ -69,6 +69,18 @@ on:
         description: "Also upload raw HTML of a few pages, for selector review"
         type: boolean
         default: false
+      inspect_urls:
+        description: "STRUCTURAL PROBE. Space-separated page URLs to report the shape of. Set any inspect_* field and the run does nothing else — no crawl, no write, no PR."
+        type: string
+        default: ""
+      inspect_links:
+        description: "STRUCTURAL PROBE. Space-separated URLs to list every content child of (for re-pointing a seed that landed on an index node)"
+        type: string
+        default: ""
+      inspect_load_data:
+        description: "STRUCTURAL PROBE. Space-separated book_id:sutra_id pairs to call /load-data with"
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -79,7 +91,37 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # A read-only structural probe, carried by this workflow rather than its own
+  # file because workflow_dispatch only reaches workflows that exist on the
+  # DEFAULT branch — a new workflow file on a feature branch cannot be
+  # dispatched at all (404). Setting any inspect_* input turns the whole run
+  # into a probe: nothing is crawled, written, or opened as a PR.
+  inspect:
+    if: ${{ inputs.inspect_urls != '' || inputs.inspect_links != '' || inputs.inspect_load_data != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r tools/dvaitavedanta/requirements.txt
+      - name: Inspect
+        env:
+          URLS: ${{ inputs.inspect_urls }}
+          LINKS: ${{ inputs.inspect_links }}
+          LOAD_DATA: ${{ inputs.inspect_load_data }}
+        run: |
+          set -euo pipefail
+          ARGS=()
+          if [ -n "$URLS" ]; then ARGS+=(--url $URLS); fi
+          if [ -n "$LINKS" ]; then ARGS+=(--links $LINKS); fi
+          if [ -n "$LOAD_DATA" ]; then ARGS+=(--load-data $LOAD_DATA); fi
+          python tools/dvaitavedanta/dv_inspect.py "${ARGS[@]}"
+
   plan:
+    if: ${{ inputs.inspect_urls == '' && inputs.inspect_links == '' && inputs.inspect_load_data == '' }}
     runs-on: ubuntu-latest
     outputs:
       sections: ${{ steps.build.outputs.sections }}
@@ -208,7 +250,7 @@ jobs:
     # at ~105 s/leaf, 200 of 1,655 leaves in 5h50m), so collect was skipped and
     # no PR opened at all. Merge whatever shards exist and name the missing
     # ones, rather than discarding good work because one shard is slow.
-    if: ${{ always() && !fromJSON(inputs.dry_run) }}
+    if: ${{ always() && !fromJSON(inputs.dry_run) && inputs.inspect_urls == '' && inputs.inspect_links == '' && inputs.inspect_load_data == '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
