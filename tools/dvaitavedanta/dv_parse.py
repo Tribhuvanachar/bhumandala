@@ -444,6 +444,36 @@ def layer_key(title: str) -> str:
     return HONORIFIC_RE.sub("", clean_text(title)).strip(" ।॥:-")
 
 
+def split_attribution(title: str) -> tuple[str, str]:
+    """`श्रीमज्जयतीर्थभिक्षुविरचिताषट्प्रश्नभाष्यटीका` -> (author, work).
+
+    Many headings name their author inside the heading itself rather than in a
+    line above it, and on a grantha whose commentaries are all called
+    "<grantha>भाष्यटीका" that prefix is the ONLY thing telling two authors
+    apart. Returns ("", title) when no attribution verb is present.
+    """
+    text = clean_text(title)
+    match = ATTRIBUTION_RE.search(text)
+    if not match:
+        return "", text
+    author = text[: match.start()].strip(" ।॥:-")
+    # The verb inflects (विरचिता / विरचितः / विरचितम् …); step past its tail.
+    rest = text[match.end():]
+    work = rest.lstrip("ािीःम्ंँ ").strip(" ।॥:-")
+    if not author or not work:
+        return "", text
+    return author, work
+
+
+def author_core(name: str) -> str:
+    """Comparable core of an author name: honorifics and case endings dropped."""
+    core = HONORIFIC_RE.sub("", clean_text(name)).strip(" ।॥:-")
+    for prefix in ("मत्", "मद्", "मज्", "मन्"):        # श्रीमज्जयतीर्थ -> जयतीर्थ
+        if core.startswith(prefix):
+            core = core[len(prefix):]
+    return core.rstrip("ःम्ंाौ")
+
+
 def _attribution_before(heading: Tag) -> str:
     """The 'composed by X' line the site places just above a commentary."""
     node = heading

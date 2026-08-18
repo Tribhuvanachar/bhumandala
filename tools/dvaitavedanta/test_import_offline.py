@@ -230,6 +230,11 @@ def main():
             ("कथालक्षणटीकाविवरणं", "tika_vivarana"),
             ("प्रमाणलक्षणटीकावाक्यार्थकौमुदी", "tika_vakyarthakaumudi"),
             ("मूलम्", "mula"),
+            # Author inside the heading. Both of these end in भाष्यटीका, so the
+            # suffix rule alone filed Vamana Panditacharya's commentary into
+            # Jayatirtha's folder on Shatprashnopanishad — 29 items merged under
+            # the wrong author, visible only as duplicate ids.
+            ("श्रीमज्जयतीर्थभिक्षुविरचिताषट्प्रश्नभाष्यटीका", "tika_jayatirtha"),
         ]
         for title, expected in cases:
             got = resolve(title, cfg)
@@ -238,6 +243,12 @@ def main():
                                   got["folder"] if got else None)
         failures += not check("an unknown commentary stays unmapped, not guessed",
                               resolve("कस्यचिदपूर्वव्याख्या", cfg) is None)
+        failures += not check(
+            "a different author's tika is NOT filed under Jayatirtha",
+            resolve("श्रीवामनपण्डिताचार्यविरचिताषट्प्रश्रभाष्यटीका", cfg) is None)
+        failures += not check(
+            "an unattributed heading still matches on suffix alone",
+            (resolve("षट्प्रश्नभाष्यटीका", cfg) or {}).get("folder") == "tika_jayatirtha")
 
         # Discovery must descend THROUGH containers. Run 31958553804 shipped
         # upanishad_prasthana as "10/10 complete, 0 errors" while extracting 10
