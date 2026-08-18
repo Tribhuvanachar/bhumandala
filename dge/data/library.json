@@ -7622,6 +7622,631 @@
       "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/upanishad/isha_upanishad/data.json",
       "populated": false,
       "title": "Isha Upanishad"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/mayavada_khandana/tika_gururajiyatippani/data.json",
+      "populated": true,
+      "title": "मायावादखण्डनम् — श्रीगुरुराजीयटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/mayavada_khandana/tika_nivasatirthatippani/data.json",
+      "populated": true,
+      "title": "मायावादखण्डनम् — श्रीनिवासतीर्थटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/mayavada_khandana/tika_nivasatirthiyatippani/data.json",
+      "populated": true,
+      "title": "मायावादखण्डनम् — श्रीनिवासतीर्थीयटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_gururajiyatippani/data.json",
+      "populated": true,
+      "title": "मिथ्यात्वानुमानखण्डनम् — श्रीगुरुराजीयटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_nivasatirthiyatippani/data.json",
+      "populated": true,
+      "title": "मिथ्यात्वानुमानखण्डनम् — श्रीनिवासतीर्थीयटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_raghavendratirtha/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — श्रीराघवेन्द्रतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_vedeshatirtha/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — श्रीवेदेशतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/tattva_viveka/tika_vijayindrabhikshu/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — श्रीविजयीन्द्रभिक्षु"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/upadhi_khandana/tika_nivasatirthiyatippani/data.json",
+      "populated": true,
+      "title": "उपाधिखण्डनम् — श्रीनिवासतीर्थीयटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_dvitiyapariccheda/data.json",
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः — द्वितीयः परिच्छेदः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_tritiyapariccheda/data.json",
+      "populated": true,
+      "title": "विष्णुतत्त्वविनिर्णयः — तृतीयः परिच्छेदः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/gita_prasthana/gita_tatparya_nirnaya/tika_mannyayadipakiranavali/data.json",
+      "populated": true,
+      "title": "गीतातात्पर्यम् — श्रीमन्न्यायदीपकिरणावलिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_1010/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १० १ ०"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_1011/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १० १ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_111/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १ १ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_112/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १ १ २"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_113/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १ १ ३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_114/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १ १ ४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_131/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १३ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_141/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १४ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_151/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १५ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_161/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १६ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_171/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १७ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_181/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १८ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_191/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १९ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_201/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ २० १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_221/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ २२ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_81/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ८ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_01_karmanirnaya_tatraikaahuragunambrahmeti_natadyuktamshrutiyukt/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — ( ०१) कर्मनिर्णय:-तत्रैक आहुरगुणं ब्रह्मेति । न तद्युक्तं श्रुतियुक्तिविरोधात्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_adhikyagrastatvaprayapathaparyalocanabhyampratanavyakhyaneshruta/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — आधिक्यग्रस्तत्वप्रायपाठपर्यालोचनाभ्यां प्रतनव्याख्याने श्रुतमूलवाक्यस्य अन्यथाविन्यासापरत्युद्भावनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_anekaipramanairbuddhipurvapravritirupakartritvammukhyamvikararup/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — अनेकैः प्रमाणैर्बुद्धिपूर्वप्रवृतिरूपकर्तृत्वं मुख्यं विकाररूपकर्तृत्वममुख्यमिति प्रतिपाद्य व्यभिचारचोदनस्य तत्परिहारप्रयत्नस्य चायुक्तत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_anushyakhvanadidishagamasyagamatvenaivapramanyamnatulingatveneti/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — अनुष्याख्वानादिदिशाऽऽगमस्यागमत्वेनैव प्रामाण्यं न तु लिङ्गत्वेनेति प्रतिपादनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_anuvyakhyanaprasangataulyat_vipakshebadhakapradarshanapurvakambu/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — अनुव्याख्यानप्रसङ्ग तौ ल्या त् , विपक्षे बाधकप्रदर्शनपूर्वकं बुद्धिघटितत्वस्यैव अङ्गीकार्यत्वप्रतिपादनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_asangatamitianucitatatparyakamitipakshasyadushanam/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — असङ्गतमिति अनुचिततात्पर्यकमिति पक्षस्य दूषणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_ayuktamityasangatarthakamnetivyavasthapayitumanuvyakhyanekshatya/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — अयुक्तमित्यसङ्गतार्थकं नेति व्यवस्थापयितुम् अनुव्याख्याने क्षत्यधिकरणीयपद्मनाभतीर्थटीकासन्दर्भनिरूपणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_bahunamvacanikarthanamekasyaivatatparyarthenanigamanamitikham_ca/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — बहूनां वाचनिकार्थानामेकस्यैव तात्पर्यार्थेन निगमनमिति खं. चं. व्याख्याने शक्यार्थलक्ष्यार्थयोरुभयोरपि तात्पर्यार्थत्वप्रतिपादक मू लविरोधोद्भावनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_buddhighatitakartritvasyamukhyasyaivavivakshitatvepurvoktativyap/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — बुद्धिघटितकर्तृत्वस्य मुख्यस्यैव विवक्षितत्वे पूर्वोक्तातिव्याप्तिशङ्कासमाधानयोरप्रसक्तिमाशङ्क्य तयोरभ्युपेत्यवादेन प्रवृत्तत्वकथनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dala/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — बुद्धिपू र्वं सर्वकर्तृत्वादिति हे तौ दलकृत्यचिन्तापूर्वकं व्यभिचारस्यासम्भवदुक्तिकत्वप्रदर्शनेन बुद्धिपूर्वमित्यस्य टीकोक्तवैयर्थ्यस्थैर्यप्रतिपादनम् | अर्थसङ्कोचे न सार्थक्ये मूलकृतोऽकुशलत्यप्रसङ्गोद्भावनं च"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_buddhipurvamsarvakartritvaditihetoshrutisiddhatvenumeyabhavakath/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — बुद्धिपूर्वं सर्वकर्तृत्वादिति हेतोः श्रुतिसिद्धत्वेऽनुमेयाभावकथनपूर्वकंदार्ढ्याय युक्तिरिति पक्षस्य साध्याविशिष्टतोद्भावनेन निराकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_buddhipurvamsarvakartritvaditipracinabhimatahetughatakavisheshan/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — बुद्धिपू र्वं सर्वकर्तृत्वादिति प्राचीनाभिमत हे तुघटक विशेषणस्य व्यभिचारवारकत्वमेवाश्रयणीयमिति प्रतिपादनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_ekasyaiva_granthasya_naikana/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — एकस्यैव ग्रन्थस्य नैकनामकृतेः शास्त्रवाङ्मयप्रसिद्धत्वप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_gitatatparyodahritamkartritvamgaunam_anuvyakhyanoktamcapradhanam/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — गीतातात्पर्योदाहृतं कर्तृत्वं गौणम् , अनुव्याख्यानोक्तं च प्रधानमिति विषयोपक्षेपपूर्वकं सर्वकर्तृत्वादित्यत्र प्रधानस्यैव बाधकाभावाद् विवक्षेति व्यभिचाराभावसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_granthatra/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — ग्रन्थत्रकृतक्रमनिरूपणेन पूर्वपक्षिणः सगुणत्व एव विवाद इति प्रदर्शनपूर्वकं ब्रह्मणोऽनन्तगुणत्वानुमानस्याप्रसक्तत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnaya_namna_eva_tika/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — “ कर्मनिर्णय\" नाम्न एव टीकाकृता स्वीकारे प्रयोजनकथनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnaya_namnaupasamharopakramavakyabhyamsampradayaccanirnit/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — “ कर्मनिर्णय ” नाम्न उपसंहारोपक्रमवाक्याभ्यां सम्प्रदायाच्च निर्णीतत्त्वकथनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnaya_namnonarayanapanditacaryasucitatvanvarthakatvayosam/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — “ कर्मनिर्णय ” नाम्नो नारायणपण्डिताचार्यसूचितत्वान्व र्थ कत्वयोः समर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnaya_namraacaryopajnattvepramanapratijna/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — \" कर्मनिर्णय\" नाम्र आचा र्यो प ज्ञ त्त्वे प्रमाणप्रतिज्ञा"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnayanamna_acarya/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — कर्मनिर्णयनाम्न आचार्यकृतत्वनिर्णयोपयोगितया नैकमूलकोशवत्त्वसमर्थनपूर्वकं टीकाकृतां मूलकोशानुपलम्भादिनिरास"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnayanamnapradhanyasya_khandarthanirnayanamnaprasangikatv/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — कर्मनिर्णयनाम्नः प्राधान्यस्य , खण्डार्थनिर्णयनाम्नः प्रासङ्गिकत्वस्य च प्रतिपादनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnayebuddhighatitakartritvangikartrimayavadinaevamprativa/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — कर्मनिर्णये बुद्धिघटितकर्तृत्वाङ्गीकर्तृमायावादिन एवं प्रतिवादित्वेनास्य परमतानुसारेण प्रवृत्तेरनाश ङ्कनीयत्व प्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_kartritvamdvividhamitikartritvavibhagapratipadakapaingitishrutes/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — ' कर्तृत्वं द्विविधमिति कर्तृत्वविभागप्रतिपादकपैङ्गितिश्रुतेः सप्रमाणमभिसन्धिनिरूपणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_kartritvasya_buddhighatitatve_pra/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — कर्तृत्वस्य बुद्धिघटितत्वे प्रकृत्यधिकरणानुव्याख्यानविरोधमाशङ्कय समाधानपरसुधाशयवर्णनपूर्वकं कर्मनिर्णयप्रसङ्गस्य वैषम्यप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_kathalakshanadipramananai_kathayamapishruteshshrutitvenaivaprama/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — कथा लक्षणादिप्रमाण णै: कथायामपि श्रुतेश्श्रुतित्वेनैव प्रमाणतयोपन्याससमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_kham_cam_pakshepivirodhadamukhyavrittirvaityatravashabdasyaashay/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — खं .चं.पक्षेपि ' विरोधादमु ख्य वृत्तिर्वा इत्यत्र वाशब्दस्य आशयान्तरेण वैयर्थ्याभावमाशङ्क्य तदाशयान्तरस्य विकल्पपूर्वकं दूषणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_lakshyarthagaunarthayoranumanikatvamacaryairevapratipaditamitipu/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — लक्ष्यार्थगौणार्थयोरानुमानिकत्वमाचार्यैरेव प्रतिपादितमिति पूर्वपक्षिणो मतमुपन्यस्य यथाटीकमेव आचार्याशयस्य सुसङ्गतत्वप्रतिपादनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_lakshyarthagaunarthayoranumeyatvam_natushabdatvamityabhiprayasya/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — लक्ष्यार्थगौणार्थयोरनुमेयत्वं , न तु शाब्दत्वमित्यभिप्रायस्य तयोश्शाब्दत्वप्रत्यायकानु व्या ख्यानविरोधप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_lakshyarthagaunarthayoshabdatvaevavirodhadamukhyavrittirvaitimul/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — लक्ष्यार्थगौणार्थयोः शाब्दत्व एव ' विरोधादमुख्यवृत्तिर्वा ' इतिमूलस्थ ' वा ' शब्दस्य विवक्षितार्थे सङ्गतिसम्भवप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — महाजनपरिगृहीतत्वलिङ्गेन \"कर्मनिर्णय \"ना म्न आचार्यकृतत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_nacavacanikarthastatparyarthaitivisheshaitiacaryavakyasyavacanik/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — नच वाचनिकार्थस्तात्पर्यार्थ इति विशेष इति आचार्यवाक्यस्य वाचनिकपदघटकवचनपदस्य टीकादभिप्रेतार्थवर्णनपूर्वकं खं. चं. काराभिप्रेतार्थस्य दूषणोपक्रमः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_natanmanasilagatiitivikalpanirasa/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — न तन् मनसि लगति इति विकल्पनिरास"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_paramadarashtika/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — परमादरष्टीकाकृतां परमगुरुषु"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_pra/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रकृते कर्तृत्वादित्यनेन विकाररूपकर्तृत्वे गृहीतेऽपि प्रकृतेः सर्वकर्तृत्त्वाभावादेवाव्यभिचार इति प्रतिपादनपूर्वकं टीकोक्तदोषयोः सुस्थिरत्वप्रतिपादनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_prakaranaparyalocanayanayuktamityasyaasangatarthakatvasyaasambha/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रकरणपर्यालोचनया न युक्तमित्यस्य असङ्गतार्थकत्वस्य असम्भवप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_pramanalakshanadivakyodaharanapurvakamsiddhantekartritvasyabuddh/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रमाणलक्षणादिवाक्योदाहरणपूर्वकं सिद्धान्ते कर्तृत्वस्य बुद्धिघटितत्वं प्रतिष्ठाप्य असदधिकरणसुधायाः प्रतिवादिमतेनैव प्रवृत्तत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_prasangadasadadhikaraniyanuvvakhyanasudhaya_kartabuddhimanitishe/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रसङ्गादसदधिकरणीयानुव्वाख्यानसुधायाः \" कर्ता बुद्धिमानिति शेष\" इत्यादिरूपायाः परमतानुसारेण प्रवृत्तिकथनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_prasangadasamanjasashobhanashabdayoraparyayatvamakshipyaparyayat/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रसङ्गादसमञ्जसाशोभनशब्दयोरपर्यायत्वमाक्षिप्य पर्यायत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_prasangat_tika/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रसङ्गात् टीकाकृतां मूलकोशानुपलम्भे तत्त्वनिर्णयटीका स्थं \" प्रक्षिप्तमित्याहुः\" इति वाक्यं प्रमाणयतां मतस्य निरासः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_pratijnadhyaharaprasangadityatrapratijnapadaprayogamarmaprakasha/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रतिज्ञाध्याहारप्रसङ्गादित्यत्र प्रतिज्ञापदप्रयोगमर्मप्रकाशनपूर्वकं ' न तद्युक्तं श्रुतियुक्तिविरोधादि त्यत्र टीकाया अकलङ्कित्वप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_pravrittirupakartritvasyabuddhighatitatvekartritvasyabuddhivyapt/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रवृत्तिरूपकर्तृत्वस्य बुद्धिघटितत्वे कर्तृत्वस्य बुद्धिव्याप्तत्वाभिधायिसुधाविरोधमाशङ्कय प्रतिवाद्यादिमतमनुसृत्यैव कर्तृत्वस्य बुद्धिव्याप्तत्वाभिधानम् , न तु सिद्धान्तेऽपि तत्तथेति प्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_shrimattika/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — श्रीमट्टीकाकृत्पादीयव्याख्यानस्य स्फुटाबाधितसङ्गतिमत्त्वप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_simhavalokananyayenapunavacanikarthashabdasyashakyarthamatrapara/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — सिंहावलोकनन्यायेन पुनः वाचनिकार्थशब्दस्य शक्यार्थमात्रपरत्वे बाधकप्रदर्शनपूर्वकं टीकापक्षे दोषाभावनिरूपणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_uktakham_cam_vyakhyanasyayathashrutamulapadananugunatapradarshan/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — उक्तखं.चं.व्याख्यानस्य यथाश्रुतमूलपदाननुगुण ता प्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_vimarshanasaukaryayasvandaryacandrikayayathagranthamanuvada/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — विमर्शनसौकार्याय स्वण्डार्यचन्द्रिकाया यथाग्रन्थमनुवादः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_yatra_vacanikaryadanya_iti_vakyapataka_laukikavakyeshu_ityasya/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — यत्र वाचनिकार्यादन्यः...इति वाक्यपटक\" लौकिकवाक्येषु\" इत्यस्य कृत्यमु क्त्वा , रूढियो गौ विना कश्चित्... वेदवाक्यस्य तु वाचनिका र्थं ... इति वाक्ययोः भिन्नविषयकत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_yuktatyupetamitisangatyupetamityarthakamitipakshasyanirasa/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — युक्तत्युपेतमिति सङ्गत्युपेतमित्यर्थकमिति पक्षस्य निरास"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_yuktiritivacoyuktiritipakshanirasa/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — युक्तिरिति वाचोयुक्तिरिति पक्षनिरास"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_yuktirityanumaivetipakshesadhyaparishkarapurvakamanumanamvimrish/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — युक्तिरित्यनुमैवेति पक्षे साध्यपरिष्कारपूर्वकमनुमानं विमृश्य पूज्यपरिमळाचार्याशयस्य निर्दुष्टत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_vedeshabhikshu/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — श्रीवेदेशभिक्षु"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_vijayindratirtha/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — श्रीविजयीन्द्रतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_vittalabhatta/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — श्रीविट्टलभट्ट"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/sumadhva_vijaya/tika_iti_shrimadvedangamuni/data.json",
+      "populated": true,
+      "title": "सुमध्वविजयः — इति श्रीमद्वेदाङ्गमुनिविरचितश्रीसुमध्वविजयटीकाविवृत्तौ श्रीविश्वपतितीर्थकृतौ पदार्थदीपिकोद्बोधिकायां द्वितीयः सर्गः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/sumadhva_vijaya/tika_iti_shrinarayanapanditacarya/data.json",
+      "populated": true,
+      "title": "सुमध्वविजयः — इति श्रीनारायणपण्डिताचार्यविरचितायां स्वकृतश्रीमत्सुमध्वविजयस्य भावप्रकाशिका ख्यटीकायां द्वितीयः सर्गः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/sumadhva_vijaya/tika_shrichalarisheshacarya/data.json",
+      "populated": true,
+      "title": "सुमध्वविजयः — श्रीछलारिशेषाचार्यविरचिता मन्दोपाकारिणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tarka_tandava/tika_nyayadipakhyavyakhya/data.json",
+      "populated": true,
+      "title": "तर्कताण्डवम् — न्यायदीपा ख्या व्याख्या"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_durghatabhavadipika_sahasaityasyasahasaparalokamgamayitetyartha_/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — दुर्घटभावदीपिका — साहस इत्यस्य साहसा परलोकं गमयितेत्यर्थः । सहसेति शब्दो-पृपदण्यन्तात्सृगतावित्यस्माड्डु प्रत्यये टि लोपे छान्दसे सेत्यस्य लोपे सेति हस्वस्य दीर्घे साहसेति रूपं निष्पन्नमित्यभ्युपगमात् ।। ४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_iti_shri_chalari_sheshacarya/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — इति श्री छलारी शेषाचार्यकृतायां भागवतटिप्पण्यां नवमस्कन्धे प्रथमोऽध्यायः ।। ९–१"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_nivasatirthiya/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — श्रीनिवासतीर्थीया"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_pranatashcasauvihvalobhayagrastashcapranatavihvalaityartha_etena/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — प्रणतश्चासौ विह्वलो भयग्रस्तश्च प्रणतविह्वल इत्यर्थः । एतेन प्रणतविह्वल इत्येतव्द्यर्थमिति दूषणस्यानवकाशः । धर्मराजस्यातिशयितकृष्णपरिचये विद्यमानेऽपि पूजाकाले तेजोविशेषं दृष्ट्वा भयग्रस्तः सन्नम्रो जात इति वक्तुं प्रणतविह्वल इत्यङ्गीकारात्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_satyadharmiya_kutosomatvamashvinordevayorapityataaha_bhishajavit/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — सत्यधर्मीया —कुतोऽसोमत्वमश्विनोर्देवयोरपीत्यत आह ।। भिषजाविति ।। पूर्वं च्यवनवचनवितरणतः ।। २६"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_suraityasyabhusurabrahmanaityartha_etenasuraityetaddevaityanenap/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — सुरा इत्यस्य भूसुरा ब्राह्मणा इत्यर्थः । एतेन सुरा इत्येतद्देवा इत्यनेन पुनरुक्तमिति चोद्यस्यानवकाशः । सुरा इत्यस्य भूशब्दाध्याहारेण ब्राह्मणा इत्यर्थ-स्योक्तत्वात् ।। २"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_vijayadhvajatirthaviracita/data.json",
+      "populated": true,
+      "title": "भागवततात्पर्यनिर्णयः — श्रीमद्विजयध्वजतीर्थविरचिता"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_napratikadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — न प्रतीकाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_naprayojanadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — न प्रयोजनाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_navilakshanatvadhikaranam/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — न विलक्षणत्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_pra/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — प्रकृत्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/anuvyakhyana/tika_prathamapada/data.json",
+      "populated": true,
+      "title": "अनुव्याख्यानम् — प्रथमः पादः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_pandurangi_shrinivasacarya/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — पाण्डुरङ्गि श्रीनिवासाचार्यविरचिता तत्त्वसुबोधिनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_sharkara_shrinivasacarya/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — शर्करा श्रीनिवासाचार्यविरचिता वाक्यार्थमञ्जरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_shriraghuttamatirtha/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — श्रीरघूत्तमतीर्थविरचितः तत्त्वप्रकाशिकाभावबोधः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_shrivadirajatirtha/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — श्रीवादिराजतीर्थविरचिता गुर्वर्थदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sutra_prasthana/brahma_sutra_bhashya/tika_tamraparni_shrinivasacarya/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — ताम्रपर्णी श्रीनिवासाचार्यविरचिता वाक्यार्थमुक्तावली"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_raghavendratirthakhandartha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीराघवेन्द्रतीर्थखण्डार्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_vadirajatirtha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीवादिराजतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_varadatirtha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीवरदतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_varadatirthakhandartha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीवरदतीर्थखण्डार्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_vedeshatirtha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीवेदेशतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_vedeshatirthakhandartha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीवेदेशतीर्थखण्डार्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kathopanishad_bhashya/tika_vyasatirtha/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — श्रीव्यासतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kenopanishad_bhashya/tika_shriraghavendrayati/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम् — श्रीराघवेन्द्रयतिविरचितःतलवकारोपनिषत्खण्डार्थः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kenopanishad_bhashya/tika_shrisatyapriyatirtha/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम् — श्रीसत्यप्रियतीर्थविरचिताभाष्यविवृतिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kenopanishad_bhashya/tika_shrivamanapandita/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम् — श्रीवामनपण्डितविरचिताटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kenopanishad_bhashya/tika_shrivaradatirthabhikshu/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम् — श्रीवरदतीर्थभिक्षुविरचिताटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/kenopanishad_bhashya/tika_shrivedeshatirtha/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम् — श्रीवेदेशतीर्थविरचितश्रुत्यर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_shrinivasatirtha/data.json",
+      "populated": true,
+      "title": "माण्डूक्योपनिषद्भाष्यम् — श्रीनिवासतीर्थविरचितापदार्थदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_shrivyasatirtha/data.json",
+      "populated": true,
+      "title": "माण्डूक्योपनिषद्भाष्यम् — श्रीव्यासतीर्थविरचिताटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/mundakopanishadbhashyam/tika_shrinivasatirtha/data.json",
+      "populated": true,
+      "title": "मुण्डकोपनिषद्भाष्यम् — श्रीनिवासतीर्थविरचिताखण्डार्थः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_anantabhatta/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — अनन्तभट्टविरचिताषट्प्रश्नभाष्यटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_mankalidharmarajacarya/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — मङ्कालीधर्मराजाचार्यविरचिताषट्प्रश्नभाष्यटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shrinivasatirtha/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — श्रीश्रीनिवासतीर्थविरचिताषट्प्रश्रभाष्यटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shriraghavendrayati/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — श्रीराघवेन्द्रयतिविरचितषट्प्रश्नोपनिषत्खण्डार्थः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shrisatyaprajnatirtha/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — श्रीसत्यप्रज्ञतीर्थविरचिताषट्प्रश्नभाष्यटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_shrivamanapanditacarya/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — श्रीवामनपण्डिताचार्यविरचिताषट्प्रश्रभाष्यटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_tamraparnishrinivasacarya/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — ताम्रपर्णीश्रीनिवासाचार्यविरचिताषट्प्रश्रभाष्यटीकाटिप्पणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_nivasatirthiyakhandartha/data.json",
+      "populated": true,
+      "title": "तैत्तिरीयोपनिषद्भाष्यम् — श्रीनिवासतीर्थीय खण्डार्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_padarthadipikabhashyartha/data.json",
+      "populated": true,
+      "title": "तैत्तिरीयोपनिषद्भाष्यम् — पदार्थदीपिका भाष्यार्थ"
     }
   ]
 }
