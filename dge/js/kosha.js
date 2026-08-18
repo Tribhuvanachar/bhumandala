@@ -22,10 +22,13 @@
   // Set window.KOSHA_DATA_BASE (e.g. a jsDelivr /gh/…/data/koshas URL) to point
   // the app at the full external corpus once it outgrows the Pages repo.
   var BASE = (window.KOSHA_DATA_BASE || 'data/kosha').replace(/\/+$/, '');
-  var V = '?v=1.4';   // bump on every corpus rebuild — jsDelivr caches ~12h
+  var V = '?v=1.5';   // bump on every corpus rebuild — jsDelivr caches ~12h
   var PREF_LANG = (localStorage.getItem('app_kosha_pref_lang') || 'kn'); // user's language (Kannada)
   var LANG_NAME = { sa: 'संस्कृतम्', kn: 'ಕನ್ನಡ', en: 'English', hi: 'हिन्दी',
                     bn: 'বাংলা', te: 'తెలుగు', ta: 'தமிழ்', fr: 'Français', de: 'Deutsch' };
+  // How many "browse" shards a short query may pull. Exact lookups never go
+  // through this cap — see the ancestor/descendant split in search().
+  var BROWSE_SHARDS = 10;
   var cache = {}, manifest = null;
 
   // ---- admin-controlled visibility (respected at query time) ----------------
@@ -170,11 +173,29 @@
         raw.map(fold).forEach(function (f) { if (f && !foldSet[f]) { foldSet[f] = 1; folds.push(f); } });
         if (!folds.length) return { list: [], exact: false, q: query };
         var hidden = {}; hiddenDicts().forEach(function (s) { hidden[s] = 1; });
-        var buckets = {};
+        // Buckets are variable-width now: the importer splits any prefix that
+        // grows too large a character deeper, so the manifest holds a mix of
+        // 1- to 5-character names ("sa" alone had been a 16.8MB shard).
+        // Two kinds of match, and the difference matters:
+        //   ancestors   — the bucket is a prefix of the query. At most one per
+        //                 depth, and the exact headword can only live here, so
+        //                 these are ALWAYS fetched.
+        //   descendants — the query is a prefix of the bucket, i.e. browsing.
+        //                 A one-character query matches 444 of them (59MB), so
+        //                 these are capped; the exact lookup above is what has
+        //                 to stay correct, not the breadth of a browse.
+        var anc = {}, desc = {};
         folds.forEach(function (qf) {
-          var two = qf.slice(0, 2);
-          m.buckets.forEach(function (b) { if (b === two || (qf.length < 2 && b[0] === qf[0])) buckets[b] = 1; });
+          m.buckets.forEach(function (b) {
+            if (qf.indexOf(b) === 0) anc[b] = 1;
+            else if (b.indexOf(qf) === 0) desc[b] = 1;
+          });
         });
+        var descList = Object.keys(desc).sort();
+        var truncated = descList.length > BROWSE_SHARDS;
+        var buckets = {};
+        Object.keys(anc).forEach(function (b) { buckets[b] = 1; });
+        descList.slice(0, BROWSE_SHARDS).forEach(function (b) { buckets[b] = 1; });
         var need = Object.keys(buckets);
         if (!need.length) return { list: [], exact: false, q: query };
         return Promise.all(need.map(function (b) { return j(BASE + '/_index/' + safeBucket(b) + '.json'); }))
@@ -223,6 +244,9 @@
               g.dicts = g.members;                       // for the "N कोश" count
               g.dictCount = Object.keys(g.dictSet).length;
               g.exactSLP1 = Object.keys(g.slps).some(function (s) { return rawSet[s]; });
+              // A group reached only through synonyms ranks below one whose
+              // headword matched, so searching a stem still leads with the stem.
+              g.synOnly = g.members.every(function (mm) { return !!mm.w; });
               g.foldExact = g.members.some(function (m) { return foldSet[m.fold]; });
               return g;
             });
@@ -233,9 +257,12 @@
               if (sa !== sb) return sa - sb;
               var ea = a.foldExact ? 0 : 1, eb = b.foldExact ? 0 : 1;
               if (ea !== eb) return ea - eb;
+              var ya = a.synOnly ? 1 : 0, yb = b.synOnly ? 1 : 0;
+              if (ya !== yb) return ya - yb;
               return a.hw.length - b.hw.length || a.hw.localeCompare(b.hw);
             });
-            return { list: arr.slice(0, 60), exact: arr.some(function (g) { return g.exactSLP1; }), q: query };
+            return { list: arr.slice(0, 60), exact: arr.some(function (g) { return g.exactSLP1; }),
+                     q: query, truncated: truncated };
           });
       });
   }
@@ -251,15 +278,19 @@
     var seen = {}, tasks = [];
     (group.members || []).forEach(function (m) {
       if (hidden[m.d] || !dicts[m.d]) return;
-      var key = m.d + '|' + m.fold + '|' + m.h; if (seen[key]) return; seen[key] = 1;
+      // A synonym record displays the synonym but carries the headword's fold
+      // (m.f) and text (m.w); the entry itself is only ever filed under those.
+      m.efold = m.f || m.fold;
+      m.ehw = m.w || m.h;
+      var key = m.d + '|' + m.efold + '|' + m.ehw; if (seen[key]) return; seen[key] = 1;
       tasks.push(m);
     });
     return Promise.all(tasks.map(function (m) {
-      var cat = dicts[m.d].category, bucket = m.fold.slice(0, eLen);
+      var cat = dicts[m.d].category, bucket = m.efold.slice(0, eLen);
       return j(BASE + '/' + cat + '/' + m.d + '/e/' + safeBucket(bucket) + '.json')
         .then(function (sh) {
-          if (!sh || !sh[m.fold]) return null;
-          var items = sh[m.fold].filter(function (it) { return it.headword === m.h; });
+          if (!sh || !sh[m.efold]) return null;
+          var items = sh[m.efold].filter(function (it) { return it.headword === m.ehw; });
           return items.length ? { slug: m.d, items: items } : null;
         });
     })).then(function (a) {
@@ -334,6 +365,10 @@
     if (!list.length) { resBox.appendChild(el('div', 'kosha-empty', 'No headwords found.')); return; }
     // If nothing matches the exact spelling typed, say so rather than letting a
     // near-neighbour (e.g. रम for राम) look like the answer.
+    if (result.truncated) {
+      resBox.appendChild(el('div', 'kosha-nearest',
+        'Showing the first part of “' + esc(tl(result.q)) + '” — type another letter or two to see the rest.'));
+    }
     if (!result.exact && result.q) {
       resBox.appendChild(el('div', 'kosha-nearest',
         'No exact headword for “' + esc(tl(result.q)) + '”. Showing the nearest matches:'));
