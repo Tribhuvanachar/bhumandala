@@ -278,7 +278,8 @@ let SITE_CONFIG = null;
     // after one is reordered or removed in the JSON.
     $('sections').innerHTML = cfg.sections.map(function (sec, si) {
       const at = (k) => ' data-edit="sections.' + si + '.' + k + '"';
-      const meta = (sec.meta || []).map(m => esc(m)).join('<br>');
+      const meta = (sec.meta || []).map((m, mi) =>
+        `<span data-edit="sections.${si}.meta.${mi}">${esc(m)}</span>`).join('<br>');
 
       let html = `<section class="band person" id="${esc(sec.id)}"><div class="inner">
         <div class="person-head">
@@ -371,11 +372,11 @@ let SITE_CONFIG = null;
     });
   }
 
-  function panelTail(p, html) {
+  function panelTail(key, p, html) {
     if (p.closing) {
       html += `<div class="closing">
         <span class="ico" aria-hidden="true">${icon('lotus', 26)}</span>
-        <p${pt('closing')}>${esc(p.closing)}</p>
+        <p data-edit="panels.${key}.closing">${esc(p.closing)}</p>
       </div>`;
     }
     if (p.todo) html += `<p class="sheet-todo">${esc(p.todo)}</p>`;
@@ -384,7 +385,7 @@ let SITE_CONFIG = null;
 
   let lastFocus = null;
   function openPanel(key) {
-    const html = panelTail(cfg.panels[key], panelHtml(key));
+    const html = panelTail(key, cfg.panels[key], panelHtml(key));
     if (!html) return;
     lastFocus = document.activeElement;
     $('sheet').setAttribute('data-panel-key', key);
