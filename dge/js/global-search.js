@@ -54,7 +54,11 @@
     fab.className = 'dge-gs-fab';
     fab.title = 'Search all texts (Ctrl/Cmd-K)';
     fab.textContent = '🔎';
-    fab.onclick = open;
+    // Not `fab.onclick = open` — the DOM hands onclick the click's
+    // PointerEvent as open()'s first argument, and since open() treats a
+    // truthy `query` as prefill text, that event object landed in the
+    // search box as the literal string "[object PointerEvent]".
+    fab.onclick = function () { open(); };
     document.body.appendChild(fab);
 
     var ov = document.createElement('div');
@@ -105,7 +109,7 @@
     document.getElementById('dge-gs-overlay').classList.add('open');
     ensureIndex();
     var input = document.getElementById('dge-gs-input');
-    if (query) {
+    if (query && typeof query === 'string') {
       input.value = query;
       // onType is debounced against typing; dispatching the event it already
       // listens for keeps one code path for "the query changed".

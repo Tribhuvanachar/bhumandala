@@ -92,34 +92,58 @@
     if (!q.pkey) return Promise.resolve([]);
     var qtris = q.trigrams;
 
-    // 1) candidate generation: union postings for the query's trigrams
+    // Trigram sets to search candidates by: the whole query (handles a
+    // single word, or a short phrase typed correctly) PLUS, for a multi-word
+    // query, each word's own trigrams searched separately. Without this, one
+    // garbled word in an otherwise-correct query sank the whole search —
+    // "kantaya kadhamne" shares almost none of ITS combined trigrams with
+    // the verse it is trying to name (कान्ताय कल्याणगुणैकधाम्ने), because the
+    // second word is wrong, even though "kantaya" alone is an exact match
+    // for the verse's first word. Searching per word lets a candidate earn
+    // its way in on any ONE word it genuinely contains.
+    var trigramSets = [qtris];
+    if (q.words.length > 1) {
+      q.words.forEach(function (w) {
+        if (w.length >= 3) trigramSets.push(N.trigrams(w));
+      });
+    }
+
+    // 1) candidate generation: union postings for every trigram set above
+    var allTris = {};
+    trigramSets.forEach(function (set) { set.forEach(function (tg) { allTris[tg] = 1; }); });
     var buckets = {};
-    qtris.forEach(function (tg) { buckets[bucketOf(tg)] = 1; });
+    Object.keys(allTris).forEach(function (tg) { buckets[bucketOf(tg)] = 1; });
     return Promise.all(Object.keys(buckets).map(function (b) { return self._loadBucket(b); }))
       .then(function () {
-        var cand = {};            // "gi:ui" -> shared-trigram count
-        qtris.forEach(function (tg) {
-          var b = self._bucketCache[bucketOf(tg)] || {};
-          var post = b[tg]; if (!post) return;
-          for (var k = 0; k < post.length; k++) {
-            var key = post[k][0] + ':' + post[k][1];
-            cand[key] = (cand[key] || 0) + 1;
-          }
+        // Rank candidates by how many of a trigram set's members they share,
+        // then stop. Opening a grantha's unit shard is a network round trip,
+        // and a common word shares its trigrams with most of the corpus:
+        // searching "राम" used to open 444 of them and take some ten seconds
+        // on a fast connection, which on a phone reads as no results at all
+        // rather than as slow ones. A unit that really contains a set's text
+        // shares nearly all of its trigrams, so requiring most of them
+        // before its grantha is opened is what keeps a long query from
+        // dragging in half the library on the strength of one shared
+        // fragment — each set (whole query, or one word) is judged against
+        // its OWN 60% bar, independently, so a candidate only has to clear
+        // the bar for the query as typed OR for a single word within it.
+        var cand = {};            // "gi:ui" -> best shared-trigram count, any one set
+        trigramSets.forEach(function (set) {
+          var counts = {};
+          set.forEach(function (tg) {
+            var b = self._bucketCache[bucketOf(tg)] || {};
+            var post = b[tg]; if (!post) return;
+            for (var k = 0; k < post.length; k++) {
+              var key = post[k][0] + ':' + post[k][1];
+              counts[key] = (counts[key] || 0) + 1;
+            }
+          });
+          var need = Math.max(1, Math.ceil(set.length * 0.6));
+          Object.keys(counts).forEach(function (key) {
+            if (counts[key] >= need) cand[key] = Math.max(cand[key] || 0, counts[key]);
+          });
         });
-        // Rank candidates by how many of the query's trigrams they share, then
-        // stop. Opening a grantha's unit shard is a network round trip, and a
-        // common word shares its trigrams with most of the corpus: searching
-        // "राम" used to open 444 of them and take some ten seconds on a fast
-        // connection, which on a phone reads as no results at all rather than
-        // as slow ones. A unit that really contains the query shares every one
-        // of its trigrams, so it is at the head of this list -- the tail is
-        // what the cap gives up, and it was never going to be the answer.
-        // A unit that really contains the query shares nearly all of its
-        // trigrams. Requiring most of them before its grantha is opened is
-        // what keeps a long query from dragging in half the library on the
-        // strength of one shared fragment.
-        var need = Math.max(1, Math.ceil(qtris.length * 0.6));
-        var keys = Object.keys(cand).filter(function (k) { return cand[k] >= need; });
+        var keys = Object.keys(cand);
         keys.sort(function (a, b) { return cand[b] - cand[a]; });
         var giSet = {}, nGi = 0, picked = [], skipped = false;
         for (var i = 0; i < keys.length && picked.length < MAX_UNITS; i++) {
@@ -185,6 +209,44 @@
     if (best < 0.7 && q.ckey && row.ck && row.ck.indexOf(q.ckey) !== -1) {
       var sc = 0.6 + 0.08 * (q.ckey.length / Math.max(row.ck.length, 1));
       if (sc > best) { best = sc; via = 'ckey-substr'; }
+    }
+    // Credit a multi-word query for the words it DOES contain even when the
+    // whole phrase does not line up — every check above compares the full
+    // query string against one span of row.pk, so one wrong or garbled word
+    // ("kadhamne" for guṇaikadhāmne) made the other, correct word ("kantaya",
+    // an exact match) count for nothing. Scored below a real phrase match
+    // (best case 0.8, under word-exact's 0.97) so an exact hit still wins.
+    if (best < 0.8 && q.words && q.words.length > 1 && row.pk) {
+      var rowWords = row.pk.split(' ');
+      // A long unit (a commentary paragraph, not a single verse) has enough
+      // words that a short one will coincidentally sit within edit distance
+      // 1 of almost anything — that is how an unrelated 300-word ṭīkā tied
+      // the real verse for top score during testing. Fuzzy/substring credit
+      // is only trustworthy for a short, verse-sized unit; a long one only
+      // gets credit for a word it contains VERBATIM.
+      var allowFuzzy = rowWords.length <= 25;
+      var matchedLen = 0, totalLen = 0;
+      for (var wi = 0; wi < q.words.length; wi++) {
+        var qw = q.words[wi];
+        totalLen += qw.length;
+        if (qw.length < 4) continue;   // too short to be a signal on its own
+        var hit = false;
+        for (var ri = 0; ri < rowWords.length && !hit; ri++) {
+          var rw = rowWords[ri];
+          if (rw === qw) { hit = true; break; }
+          if (!allowFuzzy || rw.length < 4) continue;
+          if (rw.indexOf(qw) !== -1 || qw.indexOf(rw) !== -1) hit = true;
+          else if (editDist(qw, rw, 1) <= 1) hit = true;
+        }
+        if (hit) matchedLen += qw.length;
+      }
+      // Weighted by matched LENGTH, not word count, so one long distinctive
+      // word landing counts for more than a short common one would.
+      var frac = totalLen ? (matchedLen / totalLen) : 0;
+      if (frac >= 0.5) {
+        var wscore = 0.35 + 0.45 * frac;
+        if (wscore > best) { best = wscore; via = 'word-overlap'; }
+      }
     }
     return { score: best, via: via };
   };
