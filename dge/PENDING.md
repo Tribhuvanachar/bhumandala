@@ -117,34 +117,18 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
-- **The published site is 1,091 MB against GitHub Pages' 1 GB limit — measured with `git ls-files`, not estimated, and there is no build step, so all of it publishes. Here is what can go, what it buys, and what each costs. Nothing has been moved; this needs the project lead's decision, and it needs it before 29 Aug, because hitting the limit fails the whole site rather than part of it.**
+- **~~The published site is 1,091 MB against GitHub Pages' 1 GB limit~~ — down to 999 MB, and every decision below is the project lead's, taken 18 Aug.** Under the limit, but by 1%, so the next few granthas put it back over. What was done:
+  - **Archives deleted (74.5 MB)** — `mahabharata.7z.001/.002`, `smv-assets-audio.7z.001/.002/.003`, `smv-assets-text*.zip`. All in git history. `vedavani-assets.zip` stays: `vedavani-extract.yml` unzips it at CI time.
+  - **`dge/data/kosha` kept (61 MB), by decision** — the site reads the full corpus from `bhumandala-kosha-data`, so what stays in-repo is now a fallback for when that CDN is unreachable rather than dead weight. Worth remembering when the next CDN failure is diagnosed.
+  - **`dge/convert/backups` kept (14 MB)** — not covered by the decision, so not touched.
+  - **Audio moved to `Tribhuvanachar/bhumandala-audio-data` (29 MB)** — 1,041 Sumadhva Vijaya files under `smv_audio/`, served over jsDelivr, foldered by Internet Archive item identifier so the eventual move to archive.org is a host-prefix change in `config.js` and no data edit. The repo already existed and was empty.
+  - **Step B — the generated indexes and `prakriya` — deferred**, by decision. The list and the numbers are in this file's history (commit `98bc8be`) when it is wanted: `search_index/postings` 168.7 MB, `search_index/units` 116.4 MB, `prakriya` 66.9 MB, `_morph` 14.8 MB, `_synonyms` 3.6 MB, ~370 MB in all. The search-index slimming below shrinks the two largest of those rather than relocating them, and is the better next move.
 
-  **A — remove outright. Nothing reads any of these; all stay in git history.** 140 MB, taking the site to **951 MB**.
+- **A regression of my own, found while moving the audio and fixed with it (`72e8fb4`): the Sumadhva Vijaya recordings had been 404ing since the taxonomy restructure.** All 16 sargas stored `archiveBaseUrl: "data/kavya/sumadhva_vijaya/assets/"`, the pre-restructure path. `migrate_slugs.py` rewrote cross-references, backlinks, manifest slugs and shard names, and did not touch `archiveBaseUrl` inside a grantha's `metadata` — so every verse of the Madhva Vijaya asked for audio at a path that no longer existed, and nothing said so, because a missing recording fails quietly. Worth a general lesson: **the restructure's blind spot was URLs inside metadata**, and anything else of that shape is worth a look. Raghavendra Vijaya's ten sargas carried the same stale prefix for audio that exists nowhere at all; repointed to its own identifier so the files work the day they arrive.
 
-  | | Why it can go |
-  |---|---|
-  | `mahabharata.7z.001/.002` — 37.7 MB | The Kannada Mahābhārata was parsed out of these into `dge/data/` in Round 4. `PROJECT_STATUS.md` already called them "a cleanup candidate the project lead should decide on". |
-  | `smv-assets-audio.7z.001/.002/.003` — 26.5 MB | The 1,041 Sumadhva Vijaya mp3s are already extracted and live at `dge/data/kavya_alankara/sumadhva_vijaya/assets`. The archives are a second copy. |
-  | `smv-assets-text.zip`, `smv-assets-text2.zip` — 0.3 MB | Android UI resources only, no text — established in Round 4. |
-  | `dge/data/kosha` — 61.1 MB | The ten-bucket sample, superseded by the full 1.65M-headword corpus in `bhumandala-kosha-data`. `config.js` points `KOSHA_DATA_BASE` at the CDN and `admin/kosha.html` hardcodes it, so the in-repo copy is reached only if that config is cleared. |
-  | `dge/convert/backups` — 14.0 MB | One OCR job's safety copies, written by the Convert tool for the operator. Not something a reader ever fetches. Prune rather than delete the mechanism. |
+- ~~**Should the 7 Ashtadhyayi/Dhatupatha files be exposed in the main Library browser?**~~ **Decided — yes — and they already are.** Checked before changing anything: all seven are in `library.json`, all seven are in `taxonomy.json`, and the Library modal shows वेदाङ्गानि › व्याकरणम् (9) → अष्टाध्यायी (6) plus Dhātupāṭha. A later session registered them and the note here went stale. `register_layers.py` will stop re-surfacing them.
 
-  **Keep `vedavani-assets.zip` (8.2 MB) even though it looks like the same kind of thing** — `.github/workflows/vedavani-extract.yml` unzips it at CI time. It is a build input, not a site asset, and removing it breaks that workflow.
-
-  **B — move to a data repo, served the way the kośa already is.** 398 MB, taking the site to **553 MB**. Every one of these is fetched lazily over XHR and every one is *generated* — rebuildable from the tools in this repo, so a data repo holds output rather than source of truth.
-
-  | | Note |
-  |---|---|
-  | `dge/search_index/postings` — 168.7 MB | Rebuilt by `dge/build_search_index.py`. |
-  | `dge/search_index/units` — 116.4 MB | Same. Worth doing *after* the index slimming below, not before — that work would shrink this substantially, and moving it first would mean moving it twice. |
-  | `dge/data/vedanga/vyakarana/prakriya` — 66.9 MB | Rebuilt by `tools/build_prakriya.py`. This is also what makes all-lakāra derivations a size question rather than a switch. |
-  | `dge/data/_morph` — 14.8 MB | Rebuilt by `tools/build_morphology.py`. |
-  | `dge/data/_synonyms` — 3.6 MB | Rebuilt by `tools/build_synonyms.py`. |
-  | `dge/data/kavya_alankara/sumadhva_vijaya/assets` — 27.2 MB | Audio, not generated — but bulk media, and more is coming: the VedaVaNi extraction has 1,028 Rigveda sūktas with no permanent home yet. An assets repo is the natural place for both. |
-
-  **What B costs, and it is not nothing.** Every move adds a third-party dependency in front of a feature. The kośa is already behind jsDelivr, and this session fixed a fault of exactly that shape — when the Sanscript CDN failed to load, every Devanagari word in the dictionary answered "No headwords found". So: move the bulk, keep the small entry points (`manifest.json`, `backlinks.json`, each feature's index) in-repo, and make each feature fail visibly rather than silently when its CDN is unreachable. Note also that jsDelivr caches a branch aggressively — the kośa repo publishes to a `dist` branch for this reason, and any new data repo should follow that.
-
-  **What I would do.** A now: it is 140 MB for no loss of anything, and it puts the site under the limit today. Then the search-index slimming (below) as its own pass, since it shrinks the largest item in B rather than relocating it. Then B for whatever is still needed, before the acquisition list above lands — those granthas are the reason the headroom matters.
+- **Ananda Ramayana and Adbhuta Ramayana go under `itihasa/ramayana`, and a `misc` node holds what is undecided** (`0ce7a91`) — both the project lead's call. Neither Ramayana is sourced yet, so they are empty leaves; `misc` holds "Ajaya Vijayendra" and the Satyadhyana Tirtha civil suit until what they are is settled, and says so in its own note. **One thing to decide before they are filled:** Valmiki's seven kandas sit directly under `ramayana`, so these two now stand as their siblings — a work beside a chapter. The clean shape is a `valmiki` node holding the kandas, but that renames seven live slugs and everything referencing them, so it wants its own pass with `migrate_slugs.py` rather than being done incidentally.
 
 - **Grantha acquisition list dictated 18 Aug 2026 — 16 lines to source and load, plus a two-way Veda↔saint linking requirement that is half-built. Several titles came through a voice transcription garbled; my readings are recorded beside the raw words rather than silently corrected, and the flagged ones need the project lead's own confirmation before anyone goes hunting for a text. Bṛhatī Sahasra has since been confirmed; two remain open.** Nothing here is sourced yet — this is the wanted-list, not a status report.
 
