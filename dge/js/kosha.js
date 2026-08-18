@@ -531,13 +531,19 @@
         detail.appendChild(el('div', 'kosha-foot',
           '* machine-generated (BYOK Gemini) — verify against the original gloss.'));
 
-        // Sūtra references in the glosses become tappable, using the same
-        // popover the reading view uses (js/intellisense.js); scripture
-        // citations (ऋ.वे. 1.165, भा. IX.22.33) get the floating verse card
-        // from js/kosha-citations.js. Citations run first so the sūtra pass
-        // cannot claim a number that belongs to a Vedic reference.
+        // Scripture citations (ऋ.वे. 1.165, भा. IX.22.33, AV. 7,28,1) get the
+        // floating verse card from js/kosha-citations.js, then sūtra numbers
+        // get the reading view's popover (js/intellisense.js). Citations run
+        // first so the sūtra pass cannot claim a number that belongs to a
+        // Vedic reference.
+        //
+        // Marked per CARD, not over the whole pane, so each dictionary's own
+        // citation conventions apply: "R. 17. 27" is Raghuvaṃśa in Apte but
+        // the Rāmāyaṇa in Böhtlingk, and only the card knows which it is.
         if (typeof window.dgeMarkCitations === 'function') {
-          try { window.dgeMarkCitations(detail); } catch (e) {}
+          detail.querySelectorAll('.kosha-card').forEach(function (c) {
+            try { window.dgeMarkCitations(c, { source: c.dataset.slug }); } catch (e) {}
+          });
         }
         if (typeof window.dgeScanForSutras === 'function') {
           try { window.dgeScanForSutras(detail); } catch (e) {}
