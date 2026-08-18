@@ -349,9 +349,14 @@
 
     var head = el('div', 'kosha-src');
     var lic = d.meta.license && d.meta.license.indexOf('CC-BY') === 0;
+    // Short badge, full text in the tooltip. Spelling the licence out here
+    // ("Unclear (3rd-party book title — repo licence excludes it)") is a long
+    // nowrap run that squeezed the dictionary's own name down to one word per
+    // line — the name is what the reader is actually looking for.
+    var full = [d.meta.license || '', d.meta.license_note || ''].filter(Boolean).join(' — ');
     head.innerHTML = '<span class="kosha-src-name">' + esc(tl(d.meta.name)) + '</span>' +
-      '<span class="kosha-lic' + (lic ? ' ok' : '') + '" title="' + esc(d.meta.license_note || d.meta.license || '') + '">' +
-      esc(d.meta.license || '') + '</span>';
+      '<span class="kosha-lic' + (lic ? ' ok' : '') + '" title="' + esc(full) + '">' +
+      (lic ? 'Cleared' : 'Unclear') + '</span>';
     var hide = el('button', 'kosha-hidebtn', '🚫');
     hide.title = 'Hide ' + (d.meta.name || d.slug) + ' from results';
     hide.onclick = function (ev) { ev.stopPropagation(); toggleUserHidden(d.slug); onHide(); };
@@ -483,7 +488,13 @@
           '* machine-generated (BYOK Gemini) — verify against the original gloss.'));
 
         // Sūtra references in the glosses become tappable, using the same
-        // popover the reading view uses (js/intellisense.js).
+        // popover the reading view uses (js/intellisense.js); scripture
+        // citations (ऋ.वे. 1.165, भा. IX.22.33) get the floating verse card
+        // from js/kosha-citations.js. Citations run first so the sūtra pass
+        // cannot claim a number that belongs to a Vedic reference.
+        if (typeof window.dgeMarkCitations === 'function') {
+          try { window.dgeMarkCitations(detail); } catch (e) {}
+        }
         if (typeof window.dgeScanForSutras === 'function') {
           try { window.dgeScanForSutras(detail); } catch (e) {}
         }
@@ -621,7 +632,7 @@
       // looks like it came from a different app, which is exactly what it did.
       '.kosha-card{border:1px solid var(--card-border,#e6ddcf);border-radius:10px;padding:12px 14px;margin:0 0 14px;background:var(--card-bg,transparent)}',
       '.kosha-src{font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}',
-      '.kosha-src-name{font-size:15px;flex:1;min-width:0}',
+      '.kosha-src-name{font-size:15px;flex:1 1 auto;min-width:8em}',
       '.kosha-hidebtn{background:none;border:none;cursor:pointer;font-size:14px;opacity:.5;padding:2px 4px;line-height:1}',
       '.kosha-hidebtn:hover{opacity:1}',
       '.kosha-altform{font-size:14px;font-weight:600;color:var(--muted-text,#8a5a2b);margin:6px 0 0}',
