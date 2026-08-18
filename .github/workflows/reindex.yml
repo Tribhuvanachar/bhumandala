@@ -21,6 +21,14 @@ on:
         required: true
         default: true
         type: boolean
+      include_kavya:
+        description: "Also index the Kavya corpus from the kavya-dist branch"
+        type: boolean
+        default: true
+      commentaries:
+        description: "Index the commentaries themselves (bhashya/artha) as well as the mula -- larger index"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -35,8 +43,32 @@ jobs:
         with:
           python-version: "3.11"
 
+      # The Kavya corpus is not in dge/data -- it is 50 MB on the kavya-dist
+      # branch, served to the reader over jsDelivr. Checked out here so its
+      # 67,000 verses are searchable; slugs come out relative to the checkout,
+      # so they read kavya_alankara/<work>/<layer> exactly as if the corpus sat
+      # in dge/data, and core.js sends a hit on one of those to the CDN.
+      - name: Fetch the Kavya corpus
+        if: ${{ inputs.include_kavya }}
+        run: |
+          git fetch --depth=1 origin kavya-dist
+          rm -rf _kavya && mkdir -p _kavya
+          git --work-tree=_kavya checkout FETCH_HEAD -- kavya_alankara
+          du -sh _kavya
+
       - name: Rebuild global search index
-        run: python dge/build_search_index.py --data dge/data --out dge/search_index
+        run: |
+          set -euo pipefail
+          ARGS=(--data dge/data --out dge/search_index)
+          [ "${{ inputs.include_kavya }}" = "true" ] && ARGS+=(--extra-data _kavya)
+          [ "${{ inputs.commentaries }}" = "true" ] && ARGS+=(--commentaries)
+          python dge/build_search_index.py "${ARGS[@]}"
+
+      - name: Put the Kavya checkout back
+        if: ${{ always() }}
+        run: |
+          git reset -q HEAD -- kavya_alankara 2>/dev/null || true
+          rm -rf _kavya kavya_alankara
 
       - name: Refresh library status snapshot
         run: python tools/gen_library_status.py

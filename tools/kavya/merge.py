@@ -13,6 +13,8 @@ Two hard rules, enforced here rather than left to each importer:
 """
 from __future__ import annotations
 
+import re
+
 from .common import fingerprint, norm_ws
 from .schema import is_filled, recount
 
@@ -22,7 +24,11 @@ class ShrinkError(RuntimeError):
 
 
 class MergeShapeError(RuntimeError):
-    """The layer on disk is not in a shape this merge understands."""
+    """The layer on disk is not in a shape this merge understands.
+
+    Kept for callers that catch it. Nothing raises it since the id bridge in
+    unit_key()/_index() taught the merge to read the pre-package shape.
+    """
 
 
 class MergeReport:
@@ -64,11 +70,38 @@ class MergeReport:
         )
 
 
+def unit_key(item_id):
+    """`sarga_01`, `01`, `sarga 1`, `1` -> `1`.
+
+    DGE's own granthas name a chapter for what it is and pad the number;
+    this package numbers them bare. They are the same chapter and have to
+    index to the same key, or a merge appends a second copy of the text
+    beside the first instead of updating it.
+    """
+    digits = re.findall(r"\d+", str(item_id or ""))
+    return str(int(digits[-1])) if digits else str(item_id or "")
+
+
 def _index(layer):
+    """Every shloka in the layer, under every key it can be addressed by.
+
+    A shloka written by this package carries `id` ("1.34"). One written
+    before it carries `number` (34) inside an item called `sarga_01`, and
+    nothing else. Both have to resolve to the same entry, so both keys are
+    registered, and a lookup tries the id first and the reconstructed
+    <chapter>.<number> second.
+    """
     idx = {}
     for it in layer.get("items", []):
+        unit = unit_key(it.get("id"))
         for sh in it.get("shlokas", []):
-            idx[sh.get("id")] = sh
+            sid = sh.get("id")
+            if sid:
+                idx.setdefault(str(sid), sh)
+                idx.setdefault("%s.%s" % (unit, str(sid).split(".")[-1]), sh)
+            num = sh.get("number")
+            if num is not None:
+                idx.setdefault("%s.%s" % (unit, num), sh)
     return idx
 
 
@@ -147,19 +180,14 @@ def merge_into_existing(existing, incoming, allow_new=True):
     )
     if existing and "grantha" not in existing:
         # A layer written before this package existed: no grantha block, items
-        # keyed sarga_01 where this writes 1, shlokas keyed by number where
-        # this keys by id. Merging the two would not update the old text, it
-        # would append a second copy of it beside the new one -- 19 sargas
-        # becoming 38, silently, in a grantha that is already published. The
-        # id bridge that would make this safe is not written yet, so this
-        # refuses rather than guesses. See PENDING.md.
-        raise MergeShapeError(
-            "%s already exists in the pre-package shape (no grantha block, "
-            "items %s). Import to a separate data root instead, or write the "
-            "id bridge first." % (
-                (incoming.get("grantha") or {}).get("id", "?"),
-                [i.get("id") for i in existing.get("items", [])][:3])
-        )
+        # named sarga_01 where this writes 1, shlokas carrying number where
+        # this carries id. unit_key() and _index() bridge the two, so the
+        # merge now updates that text rather than appending a second copy of
+        # it; all that is missing is the metadata block, which the incoming
+        # layer supplies. Everything the old file said about itself that this
+        # package has no field for -- default_author, above all -- is kept.
+        existing["grantha"] = dict(incoming.get("grantha") or {})
+        existing.setdefault("schema", incoming.get("schema", "itihasa_purana_text"))
     if not existing:
         recount(incoming)
         report.added_items = len(incoming.get("items", []))
@@ -172,10 +200,14 @@ def merge_into_existing(existing, incoming, allow_new=True):
     before_filled = sum(1 for _, sh in _iter(existing) if is_filled(sh))
 
     dst_idx = _index(existing)
-    items_by_id = {it.get("id"): it for it in existing.get("items", [])}
+    items_by_id = {}
+    for it in existing.get("items", []):
+        items_by_id.setdefault(it.get("id"), it)
+        items_by_id.setdefault(unit_key(it.get("id")), it)
 
     for it in incoming.get("items", []):
-        tgt_item = items_by_id.get(it.get("id"))
+        tgt_item = (items_by_id.get(it.get("id"))
+                    or items_by_id.get(unit_key(it.get("id"))))
         if tgt_item is None:
             if not allow_new:
                 continue
@@ -192,6 +224,10 @@ def merge_into_existing(existing, incoming, allow_new=True):
         for sh in it.get("shlokas", []):
             sid = sh.get("id")
             cur = dst_idx.get(sid)
+            if cur is None:
+                # The same verse as written before this package existed.
+                cur = dst_idx.get("%s.%s" % (unit_key(it.get("id")),
+                                             str(sid).split(".")[-1]))
             if cur is None:
                 if not allow_new:
                     continue
@@ -237,7 +273,26 @@ def _key(uid):
     return out
 
 
+def _shloka_sort_key(item, sh):
+    """Order a verse by its id, or by its number where it has no id.
+
+    A bridged layer holds both kinds at once -- the verses that were already
+    there carry number, the ones this import added carry id -- and sorting on
+    id alone files every pre-existing verse under a blank key, which puts the
+    new arrivals at the top of the sarga and Raghuvamsa 1.3 above 1.1.
+    """
+    sid = sh.get("id")
+    if sid:
+        return _key(sid)
+    num = sh.get("number")
+    if num is not None:
+        return _key("%s.%s" % (unit_key(item.get("id")), num))
+    return _key("")
+
+
 def _sort(layer):
-    layer["items"] = sorted(layer.get("items", []), key=lambda i: _key(i.get("id")))
+    layer["items"] = sorted(layer.get("items", []),
+                            key=lambda i: _key(unit_key(i.get("id"))))
     for it in layer["items"]:
-        it["shlokas"] = sorted(it.get("shlokas", []), key=lambda s: _key(s.get("id")))
+        it["shlokas"] = sorted(it.get("shlokas", []),
+                               key=lambda s: _shloka_sort_key(it, s))
