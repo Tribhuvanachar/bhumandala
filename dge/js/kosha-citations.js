@@ -54,6 +54,45 @@
      returns { ref, text } or null when the verse is not in this library. */
   var SCHEMES = [
     {
+      id: 'atharvaveda',
+      // AV. 7,28,1 — kanda,sukta,mantra, Saunaka recension. NOT AVP.: that is
+      // Paippalada, a different recension with different numbering, and it is
+      // the commoner abbreviation in this corpus (402 vs 63). The negative
+      // lookahead on P is what keeps the two apart.
+      re: /\bAV(?!P)[ŚS]?\.\s*([०-९\d]{1,2})\s*[.,\-]\s*([०-९\d]{1,3})\s*[.,\-]\s*([०-९\d]{1,3})/g,
+      resolve: function (m) {
+        var ka = num(m[1]), su = num(m[2]), mn = num(m[3]);
+        if (!ka || ka < 1 || ka > 20 || !su || !mn) return null;
+        return {
+          label: 'अथर्ववेदः ' + ka + '.' + su + '.' + mn,
+          path: 'vedas/atharvaveda/shaunaka_shakha/samhita/kanda_' + pad2(ka),
+          find: function (d) {
+            var want = ka + '.' + su + '.' + mn;
+            var hit = (d.items || []).filter(function (x) { return x.id === want; })[0];
+            return hit ? { ref: want, text: hit.samhita_patha || hit.text || '' } : null;
+          }
+        };
+      }
+    },
+    {
+      id: 'raghuvamsha-dev',
+      // रघु० ४-४४ / रघु० ८।३७ — sarga, verse. The danda is a separator here.
+      re: /रघु\s*[०॰]?\.?\s*([०-९\d]{1,2})\s*[।\-.,]\s*([०-९\d]{1,3})/g,
+      resolve: function (m) { return raghu(num(m[1]), num(m[2])); }
+    },
+    {
+      id: 'raghuvamsha-apte',
+      // Apte's "R. 17. 27" is Raghuvamsha; Bohtlingk's "R. 1, 15, 11" is the
+      // Ramayana, in an edition whose numbering this library does not match.
+      // Two guards keep them apart: no third number may follow, and the scheme
+      // only runs inside dictionaries that use Apte's convention. Measured over
+      // the corpus, the true two-number form is 193 hits in the Apte family
+      // against 2 in Bohtlingk, and the three-number form is 188 in Bohtlingk.
+      onlyIn: ['apte-1957', 'apte-1890', 'pract'],
+      re: /\bR\.\s*(\d{1,2})\s*[.,]\s*(\d{1,3})(?![\s.,]*\d)/g,
+      resolve: function (m) { return raghu(num(m[1]), num(m[2])); }
+    },
+    {
       id: 'rigveda',
       // ऋ.वे. 1.165 / ऋग्वेद 1.165.3 / RV 1.165.3 — maṇḍala.sūkta[.mantra]
       re: /(ऋ\s*॰?\.?\s*वे\s*॰?\.?|ऋग्वेदे?|RV\.?|ṚV\.?)\s*([०-९\d]{1,2})[.\-,\s]+([०-९\d]{1,3})(?:[.\-,\s]+([०-९\d]{1,3}))?/g,
@@ -126,6 +165,21 @@
       }
     }
   ];
+
+  function raghu(sa, vs) {
+    if (!sa || sa < 1 || sa > 19 || !vs) return null;
+    return {
+      label: 'रघुवंशम् ' + sa + '.' + vs,
+      path: 'kavya_alankara/raghuvamsha/mula',
+      find: function (d) {
+        var s2 = (d.items || []).filter(function (x) {
+          return x.id === 'sarga_' + pad2(sa) || x.id === 'sarga_0' + pad2(sa); })[0];
+        if (!s2) return null;
+        var v = (s2.shlokas || []).filter(function (x) { return num(x.number) === vs; })[0];
+        return v ? { ref: sa + '.' + vs, text: v.sanskrit_text || '' } : null;
+      }
+    };
+  }
 
   /* ------------------------------------------------------------ data --- */
   var cache = {};
@@ -207,8 +261,9 @@
   /* ----------------------------------------------------------- markup --- */
   // Walks text nodes only, so nothing already marked up (sūtra links from
   // intellisense.js, for instance) is touched or double-wrapped.
-  window.dgeMarkCitations = function (root) {
+  window.dgeMarkCitations = function (root, opts) {
     if (!root) return 0;
+    var source = (opts && opts.source) || null;
     injectCSS();
     var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
       acceptNode: function (n) {
@@ -228,6 +283,10 @@
     jobs.forEach(function (node) {
       var text = node.nodeValue, hits = [];
       SCHEMES.forEach(function (sc) {
+        // A scheme restricted to particular dictionaries is skipped elsewhere,
+        // and skipped entirely when the caller did not say which dictionary
+        // this text came from — guessing would defeat the restriction.
+        if (sc.onlyIn && (!source || sc.onlyIn.indexOf(source) < 0)) return;
         sc.re.lastIndex = 0;
         var m;
         while ((m = sc.re.exec(text))) {
