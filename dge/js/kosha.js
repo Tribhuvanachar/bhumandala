@@ -22,7 +22,7 @@
   // Set window.KOSHA_DATA_BASE (e.g. a jsDelivr /gh/…/data/koshas URL) to point
   // the app at the full external corpus once it outgrows the Pages repo.
   var BASE = (window.KOSHA_DATA_BASE || 'data/kosha').replace(/\/+$/, '');
-  var V = '?v=1.5';   // bump on every corpus rebuild — jsDelivr caches ~12h
+  var V = '?v=1.6';   // bump on every corpus rebuild — jsDelivr caches ~12h
   var PREF_LANG = (localStorage.getItem('app_kosha_pref_lang') || 'kn'); // user's language (Kannada)
   var LANG_NAME = { sa: 'संस्कृतम्', kn: 'ಕನ್ನಡ', en: 'English', hi: 'हिन्दी',
                     bn: 'বাংলা', te: 'తెలుగు', ta: 'தமிழ்', fr: 'Français', de: 'Deutsch' };
@@ -299,7 +299,18 @@
       tasks.push(m);
     });
     return Promise.all(tasks.map(function (m) {
+      // Entry shards are variable-width too: a bucket whose serialised size ran
+      // over the cap was split a character deeper (pund-v1's "anu" was 14.87MB,
+      // fetched in full every time a reader opened an entry it held). The
+      // manifest lists only the prefixes that were split, so walk down from the
+      // base length until the prefix is no longer one of them.
       var cat = dicts[m.d].category, bucket = m.efold.slice(0, eLen);
+      var deep = dicts[m.d].deep;
+      if (deep && deep.length) {
+        while (deep.indexOf(bucket) >= 0 && bucket.length < m.efold.length) {
+          bucket = m.efold.slice(0, bucket.length + 1);
+        }
+      }
       return j(BASE + '/' + cat + '/' + m.d + '/e/' + safeBucket(bucket) + '.json')
         .then(function (sh) {
           if (!sh || !sh[m.efold]) return null;
@@ -544,13 +555,19 @@
         detail.appendChild(el('div', 'kosha-foot',
           '* machine-generated (BYOK Gemini) — verify against the original gloss.'));
 
-        // Sūtra references in the glosses become tappable, using the same
-        // popover the reading view uses (js/intellisense.js); scripture
-        // citations (ऋ.वे. 1.165, भा. IX.22.33) get the floating verse card
-        // from js/kosha-citations.js. Citations run first so the sūtra pass
-        // cannot claim a number that belongs to a Vedic reference.
+        // Scripture citations (ऋ.वे. 1.165, भा. IX.22.33, AV. 7,28,1) get the
+        // floating verse card from js/kosha-citations.js, then sūtra numbers
+        // get the reading view's popover (js/intellisense.js). Citations run
+        // first so the sūtra pass cannot claim a number that belongs to a
+        // Vedic reference.
+        //
+        // Marked per CARD, not over the whole pane, so each dictionary's own
+        // citation conventions apply: "R. 17. 27" is Raghuvaṃśa in Apte but
+        // the Rāmāyaṇa in Böhtlingk, and only the card knows which it is.
         if (typeof window.dgeMarkCitations === 'function') {
-          try { window.dgeMarkCitations(detail); } catch (e) {}
+          detail.querySelectorAll('.kosha-card').forEach(function (c) {
+            try { window.dgeMarkCitations(c, { source: c.dataset.slug }); } catch (e) {}
+          });
         }
         if (typeof window.dgeScanForSutras === 'function') {
           try { window.dgeScanForSutras(detail); } catch (e) {}
