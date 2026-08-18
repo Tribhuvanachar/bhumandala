@@ -58,6 +58,7 @@ from dv_parse import (  # noqa: E402
 STATUS_FILENAME = "_extract_status.json"
 MIN_DEVANAGARI_RATIO = 0.55
 MIN_ITEM_CHARS = 4
+PROGRESS_EVERY = 25
 
 
 # --------------------------------------------------------------------------- #
@@ -784,6 +785,17 @@ def main(argv=None):
             index += 1
             if args.limit_per_grantha and index > args.limit_per_grantha:
                 break
+            # A long crawl is otherwise silent until it ends, and Actions
+            # serves no log at all for a running job — so nyaya_sudha's first
+            # pass could not be told apart from a hang. Say where it is, and at
+            # what rate, often enough to be useful and rarely enough to stay
+            # readable.
+            if index > 1 and index % PROGRESS_EVERY == 1:
+                spent = time.time() - started
+                rate = spent / max(index - 1, 1)
+                left = (len(queue) - index + 1) * rate
+                log(f"      … {index - 1}/{len(queue)} leaves · "
+                    f"{rate:.1f}s each · ~{left / 3600:.1f}h to go")
             if content_id == seed_record["content_id"]:
                 # Already fetched during discovery — don't pay for it twice.
                 record = seed_record
