@@ -1494,6 +1494,18 @@ complete record, not just a live queue.
 
 ## Known unresolved bugs
 
+- **`github-advanced-security` fails on every PR, and it is not any PR's diff.**
+  GitHub's Copilot Autofix agent dies against its own backend with
+  `CAPIError: 400 The requested model is not supported`
+  (`COPILOT_AGENT_MODEL: sweagent-capi:claude-opus-4.6`). Confirmed not ours
+  three ways: CodeQL's three real analyses (python, javascript-typescript,
+  actions) pass on the same commits; PR #56 shows the identical failure and was
+  merged anyway; and it failed again on a **documentation-only** commit in #57.
+  Nothing in this repository can fix it — it is GitHub-side, and either it
+  recovers on its own or the check wants disabling in the repo's security
+  settings, which is the project lead's call. **Do not re-run it and do not
+  re-investigate it**; check whether CodeQL is green instead.
+
 - **Six things reported from a real phone on 18 Aug 2026, with two screenshots — noted only, not started, at the project lead's instruction ("just note these, I will give a go ahead shortly"). Each one was grounded in the code before being written down, so the next session starts from a cause and not a symptom. Where a cause is stated below it was read out of the source; where it is a guess it says so.**
 
   1. **Kosha: `अगस्त्य` returns no proper entry — it falls back to listing the top of the dictionary.** The screenshot shows the query `अगस्त्य` answered with `अ`, `आ`, `aa`, `'a'`, `ai`, `AI`, `au`, `ax`, `अक`, `अख`, `अग`, `अघ`, `अङ` — every one of them *shorter* than the query and in alphabetical order, i.e. the head of the index rather than matches. Cause not established here. **Do not touch `dge/js/kosha.js` without checking first:** the parallel session "Load unloaded libraries from public sources" (`session_01JVTFJzQMwCDFF2yTKLcAty`) is blocked on an unmerged `claude/kosha-synonym-search` PR against that very file, and is waiting for the project lead to merge it before rebuilding kosha data. Two sessions editing `kosha.js` at once is how the earlier hand-restored `DGE_LEGACY_SLUGS` clobber happened. Sequence this one after that merge.
