@@ -22,7 +22,7 @@
   // Set window.KOSHA_DATA_BASE (e.g. a jsDelivr /gh/…/data/koshas URL) to point
   // the app at the full external corpus once it outgrows the Pages repo.
   var BASE = (window.KOSHA_DATA_BASE || 'data/kosha').replace(/\/+$/, '');
-  var V = '?v=1.5';   // bump on every corpus rebuild — jsDelivr caches ~12h
+  var V = '?v=1.6';   // bump on every corpus rebuild — jsDelivr caches ~12h
   var PREF_LANG = (localStorage.getItem('app_kosha_pref_lang') || 'kn'); // user's language (Kannada)
   var LANG_NAME = { sa: 'संस्कृतम्', kn: 'ಕನ್ನಡ', en: 'English', hi: 'हिन्दी',
                     bn: 'বাংলা', te: 'తెలుగు', ta: 'தமிழ்', fr: 'Français', de: 'Deutsch' };
@@ -286,7 +286,18 @@
       tasks.push(m);
     });
     return Promise.all(tasks.map(function (m) {
+      // Entry shards are variable-width too: a bucket whose serialised size ran
+      // over the cap was split a character deeper (pund-v1's "anu" was 14.87MB,
+      // fetched in full every time a reader opened an entry it held). The
+      // manifest lists only the prefixes that were split, so walk down from the
+      // base length until the prefix is no longer one of them.
       var cat = dicts[m.d].category, bucket = m.efold.slice(0, eLen);
+      var deep = dicts[m.d].deep;
+      if (deep && deep.length) {
+        while (deep.indexOf(bucket) >= 0 && bucket.length < m.efold.length) {
+          bucket = m.efold.slice(0, bucket.length + 1);
+        }
+      }
       return j(BASE + '/' + cat + '/' + m.d + '/e/' + safeBucket(bucket) + '.json')
         .then(function (sh) {
           if (!sh || !sh[m.efold]) return null;
