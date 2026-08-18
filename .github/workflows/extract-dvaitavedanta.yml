@@ -188,6 +188,14 @@ jobs:
           DISCOVER_ONLY: ${{ inputs.discover_only }}
         run: |
           set -euo pipefail
+          # Start from an empty tree. The checkout brings main's whole
+          # dvaitavedanta corpus with it, the importer writes this section into
+          # that same directory, and "Stage shard output" then copies the LOT —
+          # so every shard was carrying main's other sections, stale folder
+          # names included, and putting them straight back on the collect side
+          # however carefully collect removed them first. A shard must contain
+          # only what this job crawled.
+          rm -rf dge/data/dvaitavedanta
           ARGS=(
             --config tools/dvaitavedanta/dv_sources.json
             --out dge/data/dvaitavedanta
