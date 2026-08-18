@@ -27,8 +27,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/home.css?v=1">
+<!-- In-place editing of admin/content/home.json, for a signed-in super
+     admin. Inert for everyone else — it checks before it draws anything. -->
+<link rel="stylesheet" href="dge/css/content-inline.css?v=1">
 </head>
-<body>
+<body data-content-file="admin/content/home.json">
 
 <div id="veil"></div>
 
@@ -56,8 +59,8 @@
   <div class="petal-layer" id="petals" aria-hidden="true"></div>
 
   <div class="masthead">
-    <h1  class="brand-latin"   id="brandLatin"></h1>
-    <p   class="brand-tagline" id="brandTagline"></p>
+    <h1  class="brand-latin"   id="brandLatin" data-edit="brand.latin"></h1>
+    <p   class="brand-tagline" id="brandTagline" data-edit="brand.tagline"></p>
     <button class="tagline-more" id="taglineMore" hidden></button>
   </div>
 
@@ -73,36 +76,36 @@
   </div>
 
   <div class="guru-block">
-    <div class="guru-sa"    id="guruSa"></div>
-    <div class="guru-latin" id="guruLatin"></div>
-    <div class="guru-title" id="guruTitle"></div>
+    <div class="guru-sa"    id="guruSa" data-edit="guru.nameSanskrit"></div>
+    <div class="guru-latin" id="guruLatin" data-edit="guru.nameLatin"></div>
+    <div class="guru-title" id="guruTitle" data-edit="guru.title"></div>
     <div class="rule" aria-hidden="true"><i></i></div>
-    <div class="verse"    id="verse"></div>
-    <div class="verse-tr" id="verseTr"></div>
+    <div class="verse"    id="verse" data-edit="vandana.sanskrit"></div>
+    <div class="verse-tr" id="verseTr" data-edit="vandana.transliteration"></div>
     <button class="more-link more-link-sm" id="guruMore" data-panel="swamiji">
-      <span id="guruMoreLabel"></span><span class="arrow" aria-hidden="true">→</span>
+      <span id="guruMoreLabel" data-edit="guru.moreLabel"></span><span class="arrow" aria-hidden="true">→</span>
     </button>
   </div>
 
   <div class="hero-actions">
-    <div class="hint" id="hint"></div>
+    <div class="hint" id="hint" data-edit="labels.hint"></div>
     <div class="act-row">
       <button class="btn btn-obeisance" id="offerBtn" aria-label="Offer flowers to the Guru">
-        <span id="offerIcon" aria-hidden="true"></span><span id="offerLabel"></span>
+        <span id="offerIcon" aria-hidden="true"></span><span id="offerLabel" data-edit="labels.offerButton"></span>
       </button>
       <button class="btn btn-obeisance" id="pranamBtn" aria-label="Offer salutations to the Guru">
-        <span id="pranamIcon" aria-hidden="true"></span><span id="pranamLabel"></span>
+        <span id="pranamIcon" aria-hidden="true"></span><span id="pranamLabel" data-edit="labels.pranamButton"></span>
       </button>
     </div>
     <div class="act-row">
       <button class="btn btn-enter" id="enterBtn" aria-disabled="true">
-        <span id="enterLabel"></span><span class="arrow" aria-hidden="true">→</span>
+        <span id="enterLabel" data-edit="labels.enterLocked"></span><span class="arrow" aria-hidden="true">→</span>
       </button>
     </div>
   </div>
 
   <a class="cue" id="cueBtn" href="#architect">
-    <span id="cueLabel"></span><span aria-hidden="true">⌄</span>
+    <span id="cueLabel" data-edit="labels.sectionsCue"></span><span aria-hidden="true">⌄</span>
   </a>
 </header>
 
@@ -250,8 +253,8 @@ let SITE_CONFIG = null;
     $('cueLabel').textContent    = cfg.labels.sectionsCue;
 
     $('mantras').innerHTML = cfg.footer.lines.map(function (l, i) {
-      return `<div class="mantra${i ? ' second' : ''}">${esc(l.sa)}</div>` +
-             (l.latin ? `<div class="mantra-latin">${esc(l.latin)}</div>` : '');
+      return `<div class="mantra${i ? ' second' : ''}" data-edit="footer.lines.${i}.sa">${esc(l.sa)}</div>` +
+             (l.latin ? `<div class="mantra-latin" data-edit="footer.lines.${i}.latin">${esc(l.latin)}</div>` : '');
     }).join('');
 
     // Mandala spokes, drawn rather than written into the markup. Cleared
@@ -271,23 +274,28 @@ let SITE_CONFIG = null;
   }
 
   function renderSections() {
-    $('sections').innerHTML = cfg.sections.map(function (sec) {
+    // The index is part of the path, so an edit lands on the right band even
+    // after one is reordered or removed in the JSON.
+    $('sections').innerHTML = cfg.sections.map(function (sec, si) {
+      const at = (k) => ' data-edit="sections.' + si + '.' + k + '"';
       const meta = (sec.meta || []).map(m => esc(m)).join('<br>');
 
       let html = `<section class="band person" id="${esc(sec.id)}"><div class="inner">
         <div class="person-head">
           <div class="person-icon" aria-hidden="true">${icon(sec.icon, 28)}</div>
           <div>
-            <div class="person-eyebrow">${esc(sec.eyebrow)}</div>
-            <div class="person-name">${esc(sec.name)}${sec.sub ? ` <span>${esc(sec.sub)}</span>` : ''}</div>
+            <div class="person-eyebrow"${at('eyebrow')}>${esc(sec.eyebrow)}</div>
+            <div class="person-name"${at('name')}>${esc(sec.name)}${sec.sub ? ` <span${at('sub')}>${esc(sec.sub)}</span>` : ''}</div>
             ${meta ? `<div class="person-meta">${meta}</div>` : ''}
           </div>
         </div>
-        ${[].concat(sec.blurb).map(t => `<p class="person-blurb">${esc(t)}</p>`).join('')}`;
+        ${[].concat(sec.blurb).map((t, bi) => `<p class="person-blurb" data-edit="sections.${si}.blurb${Array.isArray(sec.blurb) ? '.' + bi : ''}">${esc(t)}</p>`).join('')}`;
 
       if (sec.items) {
-        html += '<ul class="person-items">' + sec.items.map(function (i) {
-          return `<li>${esc(i.name)}${i.note ? `<small>${esc(i.note)}</small>` : ''}</li>`;
+        html += '<ul class="person-items">' + sec.items.map(function (i, ii) {
+          const ip = 'sections.' + si + '.items.' + ii + '.';
+          return `<li><span data-edit="${ip}name">${esc(i.name)}</span>` +
+                 `${i.note ? `<small data-edit="${ip}note">${esc(i.note)}</small>` : ''}</li>`;
         }).join('') + '</ul>';
       }
 
@@ -298,7 +306,7 @@ let SITE_CONFIG = null;
           </button></div>`;
       }
 
-      if (sec.todo) html += `<p class="person-todo">${esc(sec.todo)}</p>`;
+      if (sec.todo) html += `<p class="person-todo"${at('todo')}>${esc(sec.todo)}</p>`;
       return html + '</div></section>';
     }).join('');
   }
@@ -307,27 +315,30 @@ let SITE_CONFIG = null;
   function panelHtml(key) {
     const p = cfg.panels[key];
     if (!p) return '';
+    const pt = (k) => ' data-edit="panels.' + key + '.' + k + '"';
 
     let html = `<button class="sheet-close" data-close aria-label="Close">✕</button>
-      <div class="sheet-eyebrow">${esc(p.eyebrow)}</div>
-      <h3 id="sheetTitle">${esc(p.title)}</h3>`;
+      <div class="sheet-eyebrow"${pt('eyebrow')}>${esc(p.eyebrow)}</div>
+      <h3 id="sheetTitle"${pt('title')}>${esc(p.title)}</h3>`;
 
-    if (p.reverence) html += `<div class="reverence">${esc(p.reverence)}</div>`;
-    if (p.body)      html += `<p>${esc(p.body)}</p>`;
+    if (p.reverence) html += `<div class="reverence"${pt('reverence')}>${esc(p.reverence)}</div>`;
+    if (p.body)      html += `<p${pt('body')}>${esc(p.body)}</p>`;
 
-    (p.groups || []).forEach(function (g) {
+    (p.groups || []).forEach(function (g, gi) {
+      const gp = 'panels.' + key + '.groups.' + gi + '.';
       html += `<div class="ack">
         <div class="ack-head">
           <span class="ico">${icon(g.icon, 22)}</span>
-          <h4>${esc(g.heading)}</h4>
+          <h4 data-edit="${gp}heading">${esc(g.heading)}</h4>
           <span class="line" aria-hidden="true"></span>
         </div>`;
 
       if (g.entries) {
-        html += '<ul class="ack-entries">' + g.entries.map(function (e) {
-          return `<li><b>${esc(e.name)}</b><div class="ack-body">` +
-                 (e.note ? `<small>${esc(e.note)}</small>` : '') +
-                 (e.also ? `<small class="also">${esc(e.also)}</small>` : '') +
+        html += '<ul class="ack-entries">' + g.entries.map(function (e, ei) {
+          const ep = gp + 'entries.' + ei + '.';
+          return `<li><b data-edit="${ep}name">${esc(e.name)}</b><div class="ack-body">` +
+                 (e.note ? `<small data-edit="${ep}note">${esc(e.note)}</small>` : '') +
+                 (e.also ? `<small class="also" data-edit="${ep}also">${esc(e.also)}</small>` : '') +
                  '</div></li>';
         }).join('') + '</ul>';
       }
@@ -364,7 +375,7 @@ let SITE_CONFIG = null;
     if (p.closing) {
       html += `<div class="closing">
         <span class="ico" aria-hidden="true">${icon('lotus', 26)}</span>
-        <p>${esc(p.closing)}</p>
+        <p${pt('closing')}>${esc(p.closing)}</p>
       </div>`;
     }
     if (p.todo) html += `<p class="sheet-todo">${esc(p.todo)}</p>`;
@@ -376,6 +387,7 @@ let SITE_CONFIG = null;
     const html = panelTail(cfg.panels[key], panelHtml(key));
     if (!html) return;
     lastFocus = document.activeElement;
+    $('sheet').setAttribute('data-panel-key', key);
     $('sheet').innerHTML = html;
     $('sheet').scrollTop = 0;
     $('sheetWrap').classList.add('open');
@@ -604,8 +616,20 @@ let SITE_CONFIG = null;
     })
     .catch(function (e) { fail(e && e.message ? e.message : String(e)); });
 
+  /* content-inline.js stages an edit into SITE_CONFIG and calls this, so the
+     change appears in the real layout rather than in a preview pane. */
+  window.dgeContentRerender = function () {
+    if (!cfg) return;
+    render();
+    if ($('sheetWrap').classList.contains('open')) {
+      const open = $('sheet').getAttribute('data-panel-key');
+      if (open) openPanel(open);
+    }
+  };
+
   window.dgeVandana = { openPanel, closePanel, enter, get offerings() { return offerings; } };
 })();
 </script>
+<script src="dge/js/content-inline.js?v=1"></script>
 </body>
 </html>

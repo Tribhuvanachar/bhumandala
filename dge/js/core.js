@@ -153,10 +153,39 @@ window.dgeWhatsNewPromise = fetch(window.dgeContentUrl('whats-new.json') + '?t='
     return wn;
   });
 
-window.dgeConfigOverridesPromise = fetch(window.dgeAdminConfigUrl('config-overrides.json') + '?t=' + Date.now(), { cache: 'no-store' })
-  .then(res => res.ok ? res.json() : null)
+/* The Support and About panels' text. These were constants in config.js; they
+   are content, so they come from admin/content/reader.json. Everything that
+   reads window.SPONSOR_CONFIG and friends is unchanged — the globals are set
+   here instead of there, before the first render. */
+window.dgeReaderContentPromise = fetch(window.dgeContentUrl('reader.json') + '?t=' + Date.now(),
+                                       { cache: 'no-store' })
+  .then(res => (res.ok ? res.json() : null))
   .catch(() => null)
-  .then(ov => {
+  .then(rc => {
+    if (!rc) {
+      // Empty shapes rather than undefined: every reader of these does
+      // `(cfg.list || [])`, and a panel with nothing in it is a better
+      // failure than a page that throws on the way to drawing a verse.
+      window.SPONSOR_CONFIG = window.SPONSOR_CONFIG || { enabled: false };
+      window.CONTRIBUTORS_CONFIG = window.CONTRIBUTORS_CONFIG || { enabled: false, contributors: [] };
+      window.KEY_SPONSORS_CONFIG = window.KEY_SPONSORS_CONFIG || { enabled: false, sponsors: [] };
+      return null;
+    }
+    if (rc.SPONSOR_CONFIG) window.SPONSOR_CONFIG = rc.SPONSOR_CONFIG;
+    if (rc.CONTRIBUTORS_CONFIG) window.CONTRIBUTORS_CONFIG = rc.CONTRIBUTORS_CONFIG;
+    if (rc.KEY_SPONSORS_CONFIG) window.KEY_SPONSORS_CONFIG = rc.KEY_SPONSORS_CONFIG;
+    return rc;
+  });
+
+window.dgeConfigOverridesPromise = Promise.all([
+    window.dgeReaderContentPromise,
+    fetch(window.dgeAdminConfigUrl('config-overrides.json') + '?t=' + Date.now(), { cache: 'no-store' })
+      .then(res => res.ok ? res.json() : null)
+      .catch(() => null)
+  ])
+  // Sequenced deliberately: reader.json REPLACES these globals, so an override
+  // merged before it arrived would be thrown away with the object it landed on.
+  .then(([, ov]) => {
     if (!ov) return null;
     const targets = {
       appConfig: window.appConfig,
