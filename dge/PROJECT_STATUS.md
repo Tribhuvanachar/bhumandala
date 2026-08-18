@@ -134,6 +134,18 @@ items and the decisions waiting on the project lead, this file the narrative.
   `dge/data` — the merge would have appended a second copy of each text rather
   than updating it, and now refuses; `PENDING.md` carries that decision.
 
+- **Corpus search now contains the corpus, and the index left the site.**
+  Rebuilding it with the `extract_text` fix took it from the Vedas-and-little-
+  else it had been to **916 granthas / 94,664 units** — and to 330 MB, which
+  put the published site at 1,013 MB against the 1 GB Pages ceiling. So the
+  index followed the koshas, the WordNet and the Kāvya corpus onto a branch of
+  its own (`search-dist`, read over jsDelivr), and **the site came back to
+  about 685 MB** — more headroom than it has had since the corpus started
+  growing. `window.DGE_SEARCH_INDEX` was already the override the client
+  looked for. Verified in a browser against the published index: मोक्षः
+  answers from the Anuvyākhyāna, Śānti Parva, Viṣṇutattvanirṇaya and the
+  Nyāyāmṛta at once, which nothing in the app could do before.
+
 ## Round 4 (10 Aug 2026) — Kosha full-corpus build, TTS architecture doc, Mahabharata (Kannada), Yukti Mallika, Svapna-Vrindavanakhyana, Sumadhva Vijaya (audio), Harikathamrutasara
 
 - **Harikathamrutasara (Sri Jagannathadasaru)** — new leaf `dasa_sahitya/dasakuta/jagannathadasa/harikathamrutasara` (947 verses, 33 sandhis). **Corrects an earlier finding from this same session**, which concluded the HKS app had no embedded text at all (checked assets/, classes.dex, and a shallow resources.arsc string-pool dump). That was wrong: the text lives in resources.arsc as compiled Android string-array resources (`hks_sandhi_content_list`, `hks_sandhi_title_list`, both with `default`/ITRANS and `kn`/Kannada configs) — a shallow global-string-pool dump doesn't surface these without also walking the per-package key-name pool and the array (complex-entry) structures, and a "check the longest strings" pass (some single entries run past 30,000 characters — a whole sandhi's text) wasn't done the first time. Re-verified independently using `androguard` before merging rather than taking either the original "absent" conclusion or the correction on faith — cross-checked the project lead's own screenshot text against the extracted data and found it verbatim in Sandhi 31. No verse-level meaning exists in this source (the app itself carries a literal "meaning not yet added" placeholder after every verse, stripped as noise). Zero flagged/ambiguous verses.

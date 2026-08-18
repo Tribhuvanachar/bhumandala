@@ -44,6 +44,14 @@ const appConfig = {
   // reason. kavya.html carries the same URL as its own default, since it
   // does not load this file.
   kavyaDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@662718d0f70f2eee14b832086a0da1ddafb86f88",
+  // The corpus-search index js/dge-search.js reads -- 916 granthas, 94,664
+  // units, 330 MB. Rebuilding it with the extract_text fix (the one that made
+  // every shloka-based grantha index its verses rather than nothing) took the
+  // published site from 966 MB to 1,013 MB against a 1 GB Pages ceiling, so
+  // the index moved to the "search-dist" branch and the site came back to
+  // about 685 MB. window.DGE_SEARCH_INDEX was already the override the search
+  // client looks for. search_index/backlinks stays on main -- it is 0.1 MB.
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@1bd5d9a0ab3a31d6084ed216b4e62489b86951c7",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
@@ -72,6 +80,7 @@ window.KOSHA_DATA_BASE = appConfig.koshaDataBase;
 // workflows print the line to paste.
 window.WORDNET_DATA_BASE = appConfig.wordnetDataBase;
 window.KAVYA_DATA_BASE = appConfig.kavyaDataBase;
+window.DGE_SEARCH_INDEX = appConfig.searchIndexBase;
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
 // remove, rename, reorder, or temporarily disable (enabled:false) any of
