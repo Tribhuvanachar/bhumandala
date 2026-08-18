@@ -25,6 +25,35 @@ def _cache_path(url):
     return os.path.join(CACHE, h)
 
 
+def get_bytes(url, retries=3, delay=1.0, timeout=300, use_cache=True):
+    """Same contract as get(), for an archive rather than a document.
+
+    Ambuda publishes its whole library as one 7.7 MB TEI zip rather than a
+    file per text, so a run that imports six of its works should fetch that
+    once and read six members out of it.
+    """
+    cp = _cache_path(url) + ".bin"
+    if use_cache and os.path.exists(cp):
+        with open(cp, "rb") as fh:
+            return fh.read()
+    last = None
+    for attempt in range(retries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                raw = r.read()
+            if use_cache:
+                os.makedirs(CACHE, exist_ok=True)
+                with open(cp, "wb") as fh:
+                    fh.write(raw)
+            return raw
+        except (urllib.error.URLError, urllib.error.HTTPError, OSError) as exc:
+            last = exc
+            log("  fetch failed (%d/%d) %s -- %s" % (attempt + 1, retries, url, exc))
+            time.sleep(delay * (attempt + 2))
+    raise FetchError("%s: %s" % (url, last))
+
+
 def get(url, retries=3, delay=1.0, timeout=60, use_cache=True):
     cp = _cache_path(url)
     if use_cache and os.path.exists(cp):

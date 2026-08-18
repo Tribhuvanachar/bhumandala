@@ -21,7 +21,7 @@ kavya_alankara/_index.json                     works, layers, counts
 kavya_alankara/<work>/<layer>/data.json        one itihasa_purana_text grantha
 ```
 
-**24 works, 49 layers, 67,169 entries.** Every layer is a separate grantha in
+**43 works, 68 layers, 94,949 entries.** Every layer is a separate grantha in
 DGE's existing `itihasa_purana_text` shape, so `core.js` reads it unchanged:
 mūla in `sanskrit_text`, commentary in `bhashya[]`, padaccheda and translations
 in `artha`.
@@ -36,8 +36,10 @@ Svapnavāsavadattā, Kālidāsa's Abhijñānaśākuntala, Harṣa's three nāṭ
 ## Where it comes from
 
 Tier A `sanskritsahitya-com/data` (no LICENSE file; educational/non-commercial
-permission from the curator, attribution kept visible) and tier B GRETIL
-corpusTEI (per-file, non-commercial). `tools/kavya/config/sources.json` on
+permission from the curator, attribution kept visible), tier B GRETIL
+corpusTEI (per-file, non-commercial), tier C **ambuda.org** (proofed TEI, one
+whole-library export; CC0/CC-BY per text) and tier D **sa.wikisource.org**
+(CC BY-SA 4.0, attribution required). `tools/kavya/config/sources.json` on
 `main` records every tier with its licence position.
 
 ## Rebuilding it

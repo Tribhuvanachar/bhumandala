@@ -32,15 +32,18 @@
     "mula",
     "proofed tika"
    ],
-   "licence": "CC0/CC-BY per text; check each."
+   "licence": "CC0/CC-BY per text; check each.",
+   "raw": "https://ambuda.org/texts/downloads/ambuda-xml.zip",
+   "note": "The whole library as one TEI zip (344 texts, 7.7 MB), fetched once and cached; works name a member with `file`. Proofed text, structurally cleaner than GRETIL's."
   },
   "D": {
    "name": "sa.wikisource.org",
-   "raw": "https://sa.wikisource.org/w/api.php?action=parse&page={page}&prop=wikitext&format=json",
+   "raw": "https://sa.wikisource.org/w/api.php?action=parse&page={page}&prop=text&formatversion=2&format=json",
    "gives": [
     "mula"
    ],
-   "licence": "CC-BY-SA 4.0. Attribute."
+   "licence": "CC-BY-SA 4.0. Attribute.",
+   "note": "prop=text, not wikitext: half these works are ProofreadPage transclusions whose wikitext is one <pages index=.../> line with the text in the Page: namespace behind it."
   },
   "Z": {
    "name": "scan-only register",

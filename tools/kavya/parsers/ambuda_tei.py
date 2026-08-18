@@ -14,8 +14,17 @@ from ..common import deva_to_ascii_digits, norm_ws
 from .gretil_tei import _localname, _itertext
 
 
-def split_units(xml_text):
+def split_units(xml_text, section=None):
+    """`section` keeps only one top-level division, renumbered to chapter 1.
+
+    Ambuda files one text per work except where the tradition does not:
+    shatakatrayam is Bhartrhari's three satakas as sections 1, 2 and 3, and
+    DGE holds them as three works, so each takes its own section. Sections are
+    also named rather than numbered in places -- "AmrShtk", "all" -- which is
+    not a chapter number and becomes 1.
+    """
     root = ET.fromstring(xml_text)
+    state = {"verse": "0", "prose": 0}
 
     def walk(el, stack):
         name = _localname(el.tag)
@@ -39,6 +48,22 @@ def split_units(xml_text):
             else:
                 parts = [p for p in stack if p] + ([n] if n else [])
             if parts:
+                if section is not None:
+                    if str(parts[0]) != str(section):
+                        return
+                    parts = ["1"] + parts[1:]
+                elif not str(parts[0]).lstrip("-").isdigit():
+                    parts = ["1"] + parts[1:]
+                # Ambuda numbers a play's prose p1, p2, ... beside verses
+                # 1, 2, ... Left alone those sort after every verse in the
+                # act, because a numeric id sorts before an alphanumeric one,
+                # and the play would read as all its verses followed by all
+                # its prose. <act>.<last verse>.<n> keeps it in order.
+                if not str(parts[-1]).lstrip("-").isdigit():
+                    state["prose"] += 1
+                    parts = [parts[0], state["verse"], str(state["prose"])]
+                else:
+                    state["verse"], state["prose"] = str(parts[-1]), 0
                 yield parts, name == "p", norm_ws(body)
             return
         for child in el:

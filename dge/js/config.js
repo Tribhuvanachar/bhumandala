@@ -43,7 +43,7 @@ const appConfig = {
   // entries, 50 MB -- on this repo's "kavya-dist" branch for the same
   // reason. kavya.html carries the same URL as its own default, since it
   // does not load this file.
-  kavyaDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@662718d0f70f2eee14b832086a0da1ddafb86f88",
+  kavyaDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@75ef2103bc07770ccb861497c32636d706c09fa4",
   // The corpus-search index js/dge-search.js reads -- 916 granthas, 94,664
   // units, 330 MB. Rebuilding it with the extract_text fix (the one that made
   // every shloka-based grantha index its verses rather than nothing) took the
