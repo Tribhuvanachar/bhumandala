@@ -117,6 +117,37 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
+- **Eight `rigveda_ref` values in the Sāmaveda data name the wrong verse** (found
+  18 Aug while propagating Sāyaṇa; `tools/sayana_smriti/SOURCES.md` §7 has the
+  evidence). These are errors in DGE's own Sāmaveda data, not in the
+  propagation. `propagate_samaveda.py` now checks each ref against the mantra
+  text and **skips** these eight rather than repairing them silently, so the
+  commentary is absent rather than wrong — but the refs themselves still want
+  fixing at source, which is a content call:
+  | agreement | SV → RV | |
+  |---|---|---|
+  | 0.11 | 1429 → 9.89.5 | no word in common |
+  | 0.19 | 385 → 4.39.6 | no word in common |
+  | 0.22 | 1420 → 1.93.3 | no word in common |
+  | 0.23 | 469 → 9.65.1 | no word in common |
+  | 0.26 | 345 → 8.24.16 | no word in common |
+  | 0.40 | 891 → 9.61.17 | **890 and 891 appear to name each other's verses** |
+  | 0.52 | 890 → 9.61.18 | |
+  | 0.53 | 1204 → 9.12.8 | |
+  Eight more agree only partially (0.55–0.70) where the Sāmaveda's own reading or
+  verse division differs; those *are* propagated, since every entry already tells
+  the reader it is Sāyaṇa on the parallel Ṛgveda mantra.
+- **150 dangling `library.json` entries, all dvaitavedanta.** Pre-existing on
+  main, not caused by the Sāyaṇa work, and unchanged by it.
+  `tools/audit_library.py --fix` clears them in one command. Left alone across
+  three sessions now because they may belong to an in-flight crawl — **this needs
+  a yes or no from the project lead**, otherwise it will keep being deferred.
+- **Rights on the archive.org Sāyaṇa scan** (`rgveda-with-sayanabhasya`) — the
+  item states no licence. Sāyaṇa's text is long out of copyright; the Vaidika
+  Saṃśodhana Maṇḍala edition's own status is unchecked. Now lower priority: the
+  Wikisource route (CC BY-SA, stated) supplies 98.45% and is what actually
+  shipped, so this only matters if the OCR route is ever published from.
+
 - **~~The published site is 1,091 MB against GitHub Pages' 1 GB limit~~ — down to 999 MB, and every decision below is the project lead's, taken 18 Aug.** Under the limit, but by 1%, so the next few granthas put it back over. What was done:
   - **Archives deleted (74.5 MB)** — `mahabharata.7z.001/.002`, `smv-assets-audio.7z.001/.002/.003`, `smv-assets-text*.zip`. All in git history. `vedavani-assets.zip` stays: `vedavani-extract.yml` unzips it at CI time.
   - **`dge/data/kosha` kept (61 MB), by decision** — the site reads the full corpus from `bhumandala-kosha-data`, so what stays in-repo is now a fallback for when that CDN is unreachable rather than dead weight. Worth remembering when the next CDN failure is diagnosed.
@@ -1432,6 +1463,23 @@ complete record, not just a live queue.
   (standing item, session task list #39).
 
 ## Vedic-specific, still genuinely open
+
+- **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are
+  explained rather than mysterious: the **Vālakhilya** (RV 8.49–8.55, 8.57, 8.59)
+  has no bhāṣya on Wikisource at all — much of the manuscript tradition transmits
+  it apart from Sāyaṇa — and 66 more are the first half of each **dvipadā** pair
+  in RV 1.65–1.70, which the edition glosses jointly and DGE splits in two. The
+  archive.org OCR route (`archive_sayana.py`, kept and unchanged) does cover the
+  Vālakhilya and is the obvious next attempt if that gap matters.
+- **No commentary layer on the Atharvaveda (5,977 items), Śukla Yajurveda
+  (1,975) or Taittirīya Saṃhitā (696)** — all three still at zero.
+  `import_veda_phase2.py` is deployed and tested but has never been run for real;
+  it wants Griffith + Whitney–Lanman, Griffith, and Keith respectively.
+- **142 Sāmaveda mantras have no Ṛgveda parallel to inherit from** (114 carry no
+  `rigveda_ref` at all, 8 have a bad one, 19 point at Ṛgveda mantras that are
+  themselves in the Vālakhilya/dvipadā gaps, 1 unresolvable). There is no other
+  route to a Sāmaveda commentary: Griffith follows Benfey's Rāṇāyanīya numbering,
+  which does not line up with DGE's Kauthuma sequence.
 
 (Full detail in `veda_toolkit/README.md` §7.)
 - Accented padapāṭha, ṛṣi/devatā/chandas for Taittirīya — not present in
