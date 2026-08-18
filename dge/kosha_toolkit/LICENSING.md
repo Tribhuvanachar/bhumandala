@@ -15,8 +15,22 @@ off as cleared and attribution/ShareAlike obligations are met on the CC sources.
 | `indic-dict/stardict-sanskrit` | 63 | none at top level; 28 folders carry `LICENSE.xml` (Cologne, CC-BY-SA 4.0) |
 | `indic-dict/stardict-sanskrit-kAvya` | 17 | `LICENSE.md`: CC-BY 4.0 **except** where a 3rd party or book title is named |
 | `indic-dict/stardict-sanskrit-vyAkaraNa` | 13 | no licence file at all |
+| `sanskrit-lexicon/csl-orig` | 2 | Cologne's canonical sources — CC-BY-SA 4.0 |
 
-93 dictionaries in the built corpus: 2,094,525 headwords, 2,436,991 senses.
+95 dictionaries in the built corpus: 2,111,218 headwords.
+
+## `sanskrit-lexicon/csl-orig` — the canonical Cologne text sources
+A code-by-code diff found 42 of csl-orig's 44 dictionaries already loaded: the
+indic-dict `.babylon` mirror redistributes the same Cologne data under other
+names (`abch` = abhidhanachintamani, `lrv` = vaidya, `nybj` =
+jhalki-bhima-nyaya-koshah, `acph`/`acsj` = the Abhidhānacintāmaṇi pariśiṣṭa and
+śiloñcha). Only two were missing and both are now loaded, CC-BY-SA 4.0:
+
+- **`bohtlingk-kurzere-fassung-nachtrage`** (14,995) — the *Nachträge und
+  Verbesserungen* to Böhtlingk's kürzere Fassung, companion to a dictionary the
+  corpus already carried.
+- **`kridanta-rupamala`** (1,698) — the Cologne digitisation of the text, not
+  the machine-generated paradigm table of the same name in `-vyAkaraNa`.
 
 ## Primary ecosystem: `indic-dict/stardict-sanskrit`
 GitHub, ~65 dictionaries, each stored as a `.babylon` **source** text file

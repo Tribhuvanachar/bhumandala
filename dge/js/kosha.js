@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha.js'] = 'v1.2';
+  window.DGE_VERSIONS['kosha.js'] = 'v1.3 (per-reader kosha order, hide, collapse, filter/sort, Gemini quick actions)';
 
   // Citation-form normalizer: strip a trailing visarga (H) / anusvara (M) from
   // an SLP1 headword so dictionaries that cite the nominative (रामः = rAmaH) or
@@ -22,7 +22,7 @@
   // Set window.KOSHA_DATA_BASE (e.g. a jsDelivr /gh/…/data/koshas URL) to point
   // the app at the full external corpus once it outgrows the Pages repo.
   var BASE = (window.KOSHA_DATA_BASE || 'data/kosha').replace(/\/+$/, '');
-  var V = '?v=1.3';   // bump on every corpus rebuild — jsDelivr caches ~12h
+  var V = '?v=1.4';   // bump on every corpus rebuild — jsDelivr caches ~12h
   var PREF_LANG = (localStorage.getItem('app_kosha_pref_lang') || 'kn'); // user's language (Kannada)
   var LANG_NAME = { sa: 'संस्कृतम्', kn: 'ಕನ್ನಡ', en: 'English', hi: 'हिन्दी',
                     bn: 'বাংলা', te: 'తెలుగు', ta: 'தமிழ்', fr: 'Français', de: 'Deutsch' };
@@ -35,6 +35,58 @@
   function hiddenDicts() {
     try { var a = JSON.parse(localStorage.getItem('kosha_hidden_dicts') || '[]'); return Array.isArray(a) ? a : []; }
     catch (e) { return []; }
+  }
+
+  // ---- reader-controlled preferences ---------------------------------------
+  // Separate from the admin's kosha_hidden_dicts above, deliberately: the admin
+  // flag takes a dictionary out of search for everyone on this browser, whereas
+  // these are one reader's own reading preferences and must not be clobbered by
+  // an admin export. Order puts named dictionaries first (so a Kannada reader
+  // can pin शब्दार्थकौस्तुभः, शब्दकल्पद्रुमः, वाचस्पत्यम् to the top); everything
+  // else keeps its manifest order behind them.
+  function lsList(key) {
+    try { var a = JSON.parse(localStorage.getItem(key) || '[]'); return Array.isArray(a) ? a : []; }
+    catch (e) { return []; }
+  }
+  function userOrder()   { return lsList('kosha_user_order'); }
+  function userHidden()  { return lsList('kosha_user_hidden'); }
+  function setUserOrder(a)  { localStorage.setItem('kosha_user_order', JSON.stringify(a)); }
+  function setUserHidden(a) { localStorage.setItem('kosha_user_hidden', JSON.stringify(a)); }
+  function toggleUserHidden(slug) {
+    var h = userHidden(), i = h.indexOf(slug);
+    if (i < 0) h.push(slug); else h.splice(i, 1);
+    setUserHidden(h); return i < 0;
+  }
+  // Sort a per-dictionary result list by the reader's pinned order, keeping the
+  // manifest order among the unpinned. Stable, so equal ranks never shuffle.
+  function applyUserOrder(perDict) {
+    var ord = userOrder();
+    if (!ord.length) return perDict;
+    var rank = {}; ord.forEach(function (s, i) { rank[s] = i; });
+    return perDict.map(function (d, i) { return { d: d, i: i }; })
+      .sort(function (a, b) {
+        var ra = rank[a.d.slug], rb = rank[b.d.slug];
+        if (ra == null && rb == null) return a.i - b.i;
+        if (ra == null) return 1;
+        if (rb == null) return -1;
+        return ra - rb || a.i - b.i;
+      }).map(function (x) { return x.d; });
+  }
+
+  // ---- Gemini quick actions -------------------------------------------------
+  // Prefilled prompts so the reader never has to type one. {word}/{gloss}/{dict}
+  // /{lang} are substituted at click time; the reader's own list (edited in the
+  // ⚙ panel) overrides these and is stored per-browser.
+  var DEFAULT_ACTIONS = [
+    { id: 'simple',   label: 'Explain simply',   prompt: 'Explain the Sanskrit word "{word}" in simple {lang}, in 3-4 sentences, for a reader who is not a Sanskrit scholar. Base it only on this dictionary gloss and say so if the gloss is unclear:\n\n{gloss}' },
+    { id: 'etymology',label: 'Etymology',        prompt: 'Give the etymology and derivation (व्युत्पत्ति / निष्पत्ति) of the Sanskrit word "{word}" — root, prefixes, suffixes, and how the sense follows from them. Answer in {lang}. Reference gloss from {dict}:\n\n{gloss}' },
+    { id: 'usage',    label: 'Usage in texts',   prompt: 'Where does the Sanskrit word "{word}" occur in the Vedas, Itihasas and Puranas, and in what sense? Give specific citations where you are confident, and say plainly when you are not. Answer in {lang}.' },
+    { id: 'related',  label: 'Related words',    prompt: 'List synonyms (पर्यायाः), near-synonyms and commonly confused words for the Sanskrit word "{word}", with a one-line distinction for each. Answer in {lang}. Reference gloss:\n\n{gloss}' },
+    { id: 'puranic',  label: 'Puranic identity', prompt: 'If "{word}" names a person, deity, sage, place, river or dynasty in the Puranas or Itihasas, identify it: who or what, in which text, and the key episodes. If it is not such a name, say so in one line. Answer in {lang}.' }
+  ];
+  function quickActions() {
+    var custom = lsList('kosha_quick_actions');
+    return custom.length ? custom : DEFAULT_ACTIONS;
   }
 
   // ---- BYOK Gemini credentials (shared with the rest of the app) ------------
@@ -156,11 +208,16 @@
             });
             var arr = Object.keys(groups).map(function (k) {
               var g = groups[k];
-              // Display headword: prefer the bare-stem form (slp1 === gkey), else
-              // the most-cited spelling, else the shortest.
+              // Display headword: prefer the bare-stem form (slp1 === gkey), and
+              // within that prefer a Devanagari spelling — a couple of
+              // dictionaries (mw-english-sanskrit, spokensanskrit) key on ASCII,
+              // and whichever happened to be built first was labelling the whole
+              // group "agastya" instead of अगस्त्य. Falls back to the most-cited
+              // spelling, then the shortest.
               var base = g.members.filter(function (m) { return m.s === g.gkey; });
-              g.hw = base.length ? base[0].h
-                   : Object.keys(g.hwCounts).sort(function (a, b) {
+              var deva = base.filter(function (m) { return /[ऀ-ॿ]/.test(m.h); });
+              g.hw = (deva[0] || base[0] || {}).h
+                   || Object.keys(g.hwCounts).sort(function (a, b) {
                        return g.hwCounts[b] - g.hwCounts[a] || a.length - b.length; })[0];
               g.slp1 = g.gkey;
               g.dicts = g.members;                       // for the "N कोश" count
@@ -234,9 +291,38 @@
       });
   }
 
+  // Run a quick action: the context is assembled here, so the reader clicks a
+  // button and never types a prompt. Same BYOK key and error handling as the
+  // translate pivot above.
+  function runAction(action, ctx) {
+    var key = geminiKey();
+    if (!key) return Promise.reject(new Error(
+      'No Gemini API key found. Add one in the main app under ⚙️ Settings → Gemini (or on the अष्टाध्यायी page), then reopen कोश.'));
+    var prompt = String(action.prompt || '')
+      .replace(/\{word\}/g, ctx.word || '')
+      .replace(/\{gloss\}/g, ctx.gloss || '')
+      .replace(/\{dict\}/g, ctx.dict || '')
+      .replace(/\{lang\}/g, LANG_NAME[PREF_LANG] || PREF_LANG);
+    return window.DGEGemini.generate({ prompt: prompt, apiKey: key, model: geminiModel() || undefined })
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.error.title + ' — ' + r.error.message + ' ' + r.error.action);
+        if (!r.text) throw new Error('No answer returned.');
+        return (r.fellBack ? '[' + r.notice + ']\n' : '') + r.text.trim();
+      });
+  }
+
   // ---- rendering ------------------------------------------------------------
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
-  function esc(s) { return (s || '').replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
+  // Escapes quotes as well as angle brackets, because the output is
+  // interpolated into attributes (title="…") as well as into text. Without the
+  // quotes a licence note containing one would close the attribute early and
+  // whatever followed would be parsed as markup — CodeQL caught exactly that on
+  // the licence tooltip.
+  function esc(s) {
+    return (s == null ? '' : String(s)).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
   function tl(s) { // transliterate Devanagari to the app's active script, if available
     try { return (window.applyTransliteration && window.activeScript && window.activeScript !== 'devanagari')
       ? window.applyTransliteration(s, window.activeScript) : s; } catch (e) { return s; }
@@ -263,60 +349,265 @@
     });
   }
 
+  // A dictionary card. Collapsed to a few lines by default — several of these
+  // dictionaries carry a full page of prose per headword, and a stack of those
+  // buries the short glosses the reader usually wants first.
+  function renderCard(d, g, onHide) {
+    var card = el('div', 'kosha-card');
+    card.dataset.slug = d.slug;
+
+    var head = el('div', 'kosha-src');
+    var lic = d.meta.license && d.meta.license.indexOf('CC-BY') === 0;
+    // Short badge, full text in the tooltip. Spelling the licence out here
+    // ("Unclear (3rd-party book title — repo licence excludes it)") is a long
+    // nowrap run that squeezed the dictionary's own name down to one word per
+    // line — the name is what the reader is actually looking for.
+    var full = [d.meta.license || '', d.meta.license_note || ''].filter(Boolean).join(' — ');
+    head.innerHTML = '<span class="kosha-src-name">' + esc(tl(d.meta.name)) + '</span>' +
+      '<span class="kosha-lic' + (lic ? ' ok' : '') + '" title="' + esc(full) + '">' +
+      (lic ? 'Cleared' : 'Unclear') + '</span>';
+    var hide = el('button', 'kosha-hidebtn', '🚫');
+    hide.title = 'Hide ' + (d.meta.name || d.slug) + ' from results';
+    hide.onclick = function (ev) { ev.stopPropagation(); toggleUserHidden(d.slug); onHide(); };
+    head.appendChild(hide);
+    card.appendChild(head);
+
+    var body = el('div', 'kosha-body-wrap');
+    d.items.forEach(function (it) {
+      if (it.headword && it.headword !== g.hw) body.appendChild(el('div', 'kosha-altform', esc(tl(it.headword))));
+      it.senses.forEach(function (s) {
+        var sd = el('div', 'kosha-sense');
+        var glossLang = s.gloss_language || d.meta.gloss_language;
+        var h = '<span class="kosha-lang">' + (LANG_NAME[glossLang] || glossLang) + '</span>';
+        if (s.pos) h += ' <span class="kosha-pos">' + esc(tl(s.pos)) + '</span>';
+        sd.appendChild(el('div', 'kosha-sense-head', h));
+        sd.appendChild(el('div', 'kosha-gloss', esc(tl(s.gloss || '')).replace(/\n/g, '<br>')));
+        if (s.etymology) sd.appendChild(el('div', 'kosha-field',
+          '<span class="kosha-flabel">व्युत्पत्तिः</span> ' + esc(tl(s.etymology))));
+        if (s.note) sd.appendChild(el('div', 'kosha-field',
+          '<span class="kosha-flabel">टिप्पणी</span> ' + esc(tl(s.note)).replace(/\n/g, '<br>')));
+        (s.citations || []).forEach(function (c) {
+          sd.appendChild(el('div', 'kosha-cite', esc(tl(c.text)))); });
+        sd.appendChild(actionBar(s, d, g, glossLang));
+        body.appendChild(sd);
+      });
+    });
+    card.appendChild(body);
+
+    // "Read more" only where there is actually more to read. Measured after
+    // layout, because how many lines a gloss takes depends on the viewport.
+    var more = el('button', 'kosha-more', 'Read more ▾');
+    more.onclick = function () {
+      var open = card.classList.toggle('open');
+      more.textContent = open ? 'Show less ▴' : 'Read more ▾';
+    };
+    card.appendChild(more);
+    // Clamp FIRST, then measure: with the clamp off, clientHeight always equals
+    // scrollHeight and nothing ever looks overflowing. So put the max-height in
+    // effect, ask whether the content still exceeds it, and unclamp the cards
+    // that fit — the short koshas keep showing whole.
+    card.classList.add('clamped');
+    requestAnimationFrame(function () {
+      if (body.scrollHeight <= body.clientHeight + 4) { card.classList.remove('clamped'); more.remove(); }
+    });
+    return card;
+  }
+
+  // Translate pivots + the prefilled Gemini quick actions, for one sense.
+  function actionBar(s, d, g, glossLang) {
+    var bar = el('div', 'kosha-actions');
+    var out = el('div', 'kosha-ai');
+
+    [PREF_LANG, 'en'].forEach(function (target) {
+      if (glossLang === target || !s.gloss) return;
+      var label = '→ ' + (LANG_NAME[target] || target);
+      var btn = el('button', 'kosha-xl', label);
+      btn.onclick = function () {
+        btn.disabled = true; btn.textContent = '…';
+        translate(s.gloss, glossLang, target).then(function (t) {
+          out.appendChild(el('div', 'kosha-xl-out',
+            '<span class="kosha-lang">' + (LANG_NAME[target] || target) + ' *</span> ' + esc(t)));
+          btn.remove();
+        }).catch(function (e) {
+          btn.disabled = false; btn.textContent = label;
+          out.appendChild(el('div', 'kosha-xl-err', '⚠ ' + esc(e && e.message ? e.message : 'Translation failed.')));
+        });
+      };
+      bar.appendChild(btn);
+    });
+
+    quickActions().forEach(function (a) {
+      var btn = el('button', 'kosha-act', esc(a.label));
+      btn.onclick = function () {
+        btn.disabled = true; var old = btn.textContent; btn.textContent = '…';
+        runAction(a, { word: g.hw, gloss: s.gloss || '', dict: d.meta.name || d.slug })
+          .then(function (t) {
+            var box = el('div', 'kosha-ai-out',
+              '<div class="kosha-ai-head">' + esc(a.label) + ' <span class="kosha-ai-tag">AI *</span></div>' +
+              '<div class="kosha-ai-body">' + esc(t).replace(/\n/g, '<br>') + '</div>');
+            out.appendChild(box); btn.disabled = false; btn.textContent = old;
+          })
+          .catch(function (e) {
+            btn.disabled = false; btn.textContent = old;
+            out.appendChild(el('div', 'kosha-xl-err', '⚠ ' + esc(e && e.message ? e.message : 'Failed.')));
+          });
+      };
+      bar.appendChild(btn);
+    });
+
+    var wrap = el('div', 'kosha-actwrap');
+    wrap.appendChild(bar); wrap.appendChild(out);
+    return wrap;
+  }
+
   function openEntry(g, detail) {
     detail.innerHTML = '<div class="kosha-loading">…</div>';
     loadEntry(g).then(function (perDict) {
-      detail.innerHTML = '';
-      detail.appendChild(el('h2', 'kosha-title', esc(tl(g.hw)) + ' <span class="kosha-slp1">' + esc(g.slp1) + '</span>'));
-      if (!perDict.length) { detail.appendChild(el('div', 'kosha-empty', 'No full entry found.')); return; }
-      perDict.forEach(function (d) {
-        var card = el('div', 'kosha-card');
-        var lic = d.meta.license && d.meta.license.indexOf('CC-BY') === 0;
-        card.appendChild(el('div', 'kosha-src',
-          esc(d.meta.name) + ' <span class="kosha-lic' + (lic ? ' ok' : '') + '">' + esc(d.meta.license || '') + '</span>'));
-        d.items.forEach(function (it) {
-          // when a dict's form differs from the group headword (रामः under राम), label it
-          if (it.headword && it.headword !== g.hw) card.appendChild(el('div', 'kosha-altform', esc(tl(it.headword))));
-          it.senses.forEach(function (s, i) {
-            var sd = el('div', 'kosha-sense');
-            var glossLang = s.gloss_language || d.meta.gloss_language;
-            var head = '<span class="kosha-lang">' + (LANG_NAME[glossLang] || glossLang) + '</span>';
-            if (s.pos) head += ' <span class="kosha-pos">' + esc(s.pos) + '</span>';
-            sd.appendChild(el('div', 'kosha-sense-head', head));
-            var gloss = el('div', 'kosha-gloss', esc(s.gloss || '').replace(/\n/g, '<br>'));
-            sd.appendChild(gloss);
-            if (s.etymology) sd.appendChild(el('div', 'kosha-ety', '<b>व्युत्पत्तिः:</b> ' + esc(tl(s.etymology))));
-            if (s.note) sd.appendChild(el('div', 'kosha-note', esc(tl(s.note)).replace(/\n/g, '<br>')));
-            (s.citations || []).forEach(function (c) {
-              sd.appendChild(el('div', 'kosha-cite', '“' + esc(tl(c.text)) + '”')); });
-            // cross-language pivot: offer translation into the user's language + English
-            [PREF_LANG, 'en'].forEach(function (target) {
-              if (glossLang === target || !s.gloss) return;
-              var label = '→ ' + (LANG_NAME[target] || target);
-              var btn = el('button', 'kosha-xl', label);
-              btn.onclick = function () {
-                var old = sd.querySelector('.kosha-xl-err'); if (old) old.remove();
-                btn.disabled = true; btn.textContent = '…';
-                translate(s.gloss, glossLang, target).then(function (t) {
-                  var out = el('div', 'kosha-xl-out', '<span class="kosha-lang">' + (LANG_NAME[target] || target) + ' *</span> ' + esc(t));
-                  sd.appendChild(out); btn.remove();
-                }).catch(function (e) {
-                  btn.disabled = false; btn.textContent = label;
-                  var err = el('div', 'kosha-xl-err', '⚠ ' + esc(e && e.message ? e.message : 'Translation failed.'));
-                  sd.appendChild(err);
-                });
-              };
-              sd.appendChild(btn);
-            });
-            card.appendChild(sd);
+      var state = { filter: '', sort: 'pinned' };
+
+      function draw() {
+        detail.innerHTML = '';
+        detail.appendChild(el('h2', 'kosha-title',
+          esc(tl(g.hw)) + ' <span class="kosha-slp1">' + esc(g.slp1) + '</span>'));
+
+        var hidden = userHidden();
+        var shown = perDict.filter(function (d) { return hidden.indexOf(d.slug) < 0; });
+        if (state.filter) {
+          var q = state.filter.toLowerCase();
+          shown = shown.filter(function (d) {
+            return ((d.meta.name || '') + ' ' + d.slug + ' ' + (d.meta.gloss_language || '')).toLowerCase().indexOf(q) >= 0;
           });
-        });
-        detail.appendChild(card);
-      });
-      detail.appendChild(el('div', 'kosha-foot', '* machine translation (BYOK Gemini) — verify against the original gloss.'));
+        }
+        if (state.sort === 'pinned') shown = applyUserOrder(shown);
+        else if (state.sort === 'name') shown = shown.slice().sort(function (a, b) {
+          return (a.meta.name || a.slug).localeCompare(b.meta.name || b.slug); });
+        else if (state.sort === 'lang') shown = shown.slice().sort(function (a, b) {
+          return (a.meta.gloss_language || '').localeCompare(b.meta.gloss_language || '')
+              || (a.meta.name || a.slug).localeCompare(b.meta.name || b.slug); });
+
+        detail.appendChild(toolbar(perDict, shown, state, draw));
+
+        if (!shown.length) {
+          detail.appendChild(el('div', 'kosha-empty',
+            perDict.length ? 'Every kosha here is hidden or filtered out.' : 'No full entry found.'));
+          return;
+        }
+        shown.forEach(function (d) { detail.appendChild(renderCard(d, g, draw)); });
+        detail.appendChild(el('div', 'kosha-foot',
+          '* machine-generated (BYOK Gemini) — verify against the original gloss.'));
+
+        // Sūtra references in the glosses become tappable, using the same
+        // popover the reading view uses (js/intellisense.js); scripture
+        // citations (ऋ.वे. 1.165, भा. IX.22.33) get the floating verse card
+        // from js/kosha-citations.js. Citations run first so the sūtra pass
+        // cannot claim a number that belongs to a Vedic reference.
+        if (typeof window.dgeMarkCitations === 'function') {
+          try { window.dgeMarkCitations(detail); } catch (e) {}
+        }
+        if (typeof window.dgeScanForSutras === 'function') {
+          try { window.dgeScanForSutras(detail); } catch (e) {}
+        }
+      }
+      draw();
     });
   }
 
+  // Filter + sort + the pin/unhide panel.
+  function toolbar(perDict, shown, state, redraw) {
+    var bar = el('div', 'kosha-tools');
+
+    var f = document.createElement('input');
+    f.type = 'search'; f.className = 'kosha-filter'; f.placeholder = 'Filter koshas…'; f.value = state.filter;
+    f.oninput = function () { state.filter = f.value; var at = f.selectionStart; redraw();
+      var nf = document.querySelector('.kosha-filter'); if (nf) { nf.focus(); nf.setSelectionRange(at, at); } };
+    bar.appendChild(f);
+
+    var sel = document.createElement('select');
+    sel.className = 'kosha-sort';
+    [['pinned', 'My order'], ['name', 'Name A–Z'], ['lang', 'Language']].forEach(function (o) {
+      var op = document.createElement('option'); op.value = o[0]; op.textContent = o[1];
+      if (state.sort === o[0]) op.selected = true; sel.appendChild(op);
+    });
+    sel.onchange = function () { state.sort = sel.value; redraw(); };
+    bar.appendChild(sel);
+
+    var count = el('span', 'kosha-tcount', shown.length + ' / ' + perDict.length + ' कोश');
+    bar.appendChild(count);
+
+    var gear = el('button', 'kosha-gear', '⚙');
+    gear.title = 'Pin koshas to the top, and unhide';
+    gear.onclick = function () {
+      var p = bar.parentNode.querySelector('.kosha-panel');
+      if (p) { p.remove(); return; }
+      bar.parentNode.insertBefore(orderPanel(perDict, redraw), bar.nextSibling);
+    };
+    bar.appendChild(gear);
+    return bar;
+  }
+
+  // Pin/unpin and unhide. Pinned koshas lead the entry in the order listed —
+  // that is how a Kannada reader gets शब्दार्थकौस्तुभः first, then
+  // शब्दकल्पद्रुमः, then वाचस्पत्यम्, without hiding anything else.
+  function orderPanel(perDict, redraw) {
+    var p = el('div', 'kosha-panel');
+    p.appendChild(el('div', 'kosha-panel-h',
+      'Pinned koshas lead every entry, in this order. ▲▼ to move, ✕ to unpin, 🚫 to hide.'));
+
+    function rows() {
+      var list = el('div', 'kosha-panel-list');
+      var ord = userOrder(), hid = userHidden();
+      var byslug = {}; perDict.forEach(function (d) { byslug[d.slug] = d; });
+      var name = function (s) { return (byslug[s] && byslug[s].meta.name) || s; };
+
+      ord.forEach(function (s, i) {
+        var r = el('div', 'kosha-prow pinned', '<span class="kosha-pnum">' + (i + 1) + '</span><span class="kosha-pname">' + esc(tl(name(s))) + '</span>');
+        [['▲', -1], ['▼', 1]].forEach(function (mv) {
+          var b = el('button', 'kosha-pbtn', mv[0]);
+          b.onclick = function () {
+            var a = userOrder(), t = i + mv[1];
+            if (t < 0 || t >= a.length) return;
+            var x = a[i]; a[i] = a[t]; a[t] = x; setUserOrder(a); refresh();
+          };
+          r.appendChild(b);
+        });
+        var x = el('button', 'kosha-pbtn', '✕');
+        x.onclick = function () { var a = userOrder(); a.splice(i, 1); setUserOrder(a); refresh(); };
+        r.appendChild(x);
+        list.appendChild(r);
+      });
+
+      perDict.forEach(function (d) {
+        if (ord.indexOf(d.slug) >= 0) return;
+        var isHid = hid.indexOf(d.slug) >= 0;
+        var r = el('div', 'kosha-prow' + (isHid ? ' hid' : ''),
+          '<span class="kosha-pname">' + esc(tl(d.meta.name || d.slug)) + '</span>');
+        var pin = el('button', 'kosha-pbtn', '📌');
+        pin.title = 'Pin to the top';
+        pin.onclick = function () { var a = userOrder(); a.push(d.slug); setUserOrder(a); refresh(); };
+        r.appendChild(pin);
+        var h = el('button', 'kosha-pbtn', isHid ? '👁' : '🚫');
+        h.title = isHid ? 'Show again' : 'Hide from results';
+        h.onclick = function () { toggleUserHidden(d.slug); refresh(); };
+        r.appendChild(h);
+        list.appendChild(r);
+      });
+      return list;
+    }
+
+    function refresh() {
+      var old = p.querySelector('.kosha-panel-list');
+      if (old) p.replaceChild(rows(), old);
+      redraw();
+      // redraw() rebuilds the detail pane, so re-attach this panel to the new one
+      var bar = document.querySelector('.kosha-tools');
+      if (bar && bar.parentNode && !bar.parentNode.querySelector('.kosha-panel')) {
+        bar.parentNode.insertBefore(p, bar.nextSibling);
+      }
+    }
+
+    p.appendChild(rows());
+    return p;
+  }
   // ---- overlay + styles -----------------------------------------------------
   function injectCSS() {
     if (document.getElementById('kosha-css')) return;
@@ -344,18 +635,56 @@
       '.kosha-chip{display:inline-block;font-size:11px;background:var(--card-active,#efe7dc);border-radius:10px;padding:1px 7px;margin:1px 2px}',
       '.kosha-title{font-size:26px;margin:0 0 10px}',
       '.kosha-slp1{font-size:14px;color:var(--muted-text,#999);font-weight:400}',
-      '.kosha-card{border:1px solid var(--card-border,#e6ddcf);border-radius:10px;padding:12px;margin:0 0 14px}',
-      '.kosha-src{font-weight:600;margin-bottom:8px}',
+      // One type scale for every dictionary. The corpus mixes 93 sources whose
+      // own markup ranged from bare text to full HTML pages, so the renderer —
+      // not the source — decides size, weight and colour; otherwise each card
+      // looks like it came from a different app, which is exactly what it did.
+      '.kosha-card{border:1px solid var(--card-border,#e6ddcf);border-radius:10px;padding:12px 14px;margin:0 0 14px;background:var(--card-bg,transparent)}',
+      '.kosha-src{font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}',
+      '.kosha-src-name{font-size:15px;flex:1 1 auto;min-width:8em}',
+      '.kosha-hidebtn{background:none;border:none;cursor:pointer;font-size:14px;opacity:.5;padding:2px 4px;line-height:1}',
+      '.kosha-hidebtn:hover{opacity:1}',
       '.kosha-altform{font-size:14px;font-weight:600;color:var(--muted-text,#8a5a2b);margin:6px 0 0}',
-      '.kosha-lic{font-size:11px;color:#a33;border:1px solid #d99;border-radius:8px;padding:0 6px;margin-left:6px;font-weight:400}',
+      '.kosha-lic{font-size:11px;color:#a33;border:1px solid #d99;border-radius:8px;padding:0 6px;font-weight:400;white-space:nowrap}',
       '.kosha-lic.ok{color:#286;border-color:#8c9}',
-      '.kosha-sense{padding:6px 0;border-top:1px dashed var(--card-border,#eee)}',
-      '.kosha-sense-head{margin-bottom:2px}',
+      '.kosha-sense{padding:8px 0;border-top:1px dashed var(--card-border,#eee)}',
+      '.kosha-sense-head{margin-bottom:4px}',
       '.kosha-lang{font-size:11px;background:var(--accent-red,#8a5a2b);color:#fff;border-radius:8px;padding:1px 7px}',
       '.kosha-pos{font-size:12px;color:var(--muted-text,#888);font-style:italic}',
-      '.kosha-gloss{font-size:17px;margin:2px 0}',
-      '.kosha-ety,.kosha-note,.kosha-cite{font-size:14px;color:var(--muted-text,#666);margin:2px 0}',
-      '.kosha-cite{font-style:italic}',
+      '.kosha-gloss{font-size:16.5px;line-height:1.65;margin:4px 0}',
+      '.kosha-field,.kosha-cite{font-size:14px;line-height:1.6;color:var(--muted-text,#666);margin:4px 0}',
+      '.kosha-flabel{font-weight:600;color:var(--accent-red,#8a5a2b)}',
+      '.kosha-cite{font-style:italic;padding-left:10px;border-left:2px solid var(--card-border,#e6ddcf)}',
+      // Collapse: ~7 lines of gloss, which is enough for the short koshas to
+      // show whole and enough of the encyclopaedias to judge relevance.
+      '.kosha-body-wrap{max-height:none;overflow:visible}',
+      '.kosha-card.clamped .kosha-body-wrap{max-height:11.5em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 70%,transparent)}',
+      '.kosha-card.clamped.open .kosha-body-wrap{max-height:none;-webkit-mask-image:none}',
+      '.kosha-more{background:none;border:none;color:var(--accent-red,#8a5a2b);font:inherit;font-size:13px;cursor:pointer;padding:6px 0 0}',
+      '.kosha-card:not(.clamped) .kosha-more{display:none}',
+      // Toolbar + pin panel
+      '.kosha-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px}',
+      '.kosha-filter{flex:1;min-width:120px;font:inherit;font-size:14px;padding:6px 10px;border:1px solid var(--card-border,#ccc);border-radius:8px;background:var(--card-bg,#fff);color:inherit}',
+      '.kosha-sort{font:inherit;font-size:13px;padding:6px 8px;border:1px solid var(--card-border,#ccc);border-radius:8px;background:var(--card-bg,#fff);color:inherit}',
+      '.kosha-tcount{font-size:12px;color:var(--muted-text,#888)}',
+      '.kosha-gear{background:none;border:1px solid var(--card-border,#ccc);border-radius:8px;cursor:pointer;font-size:14px;padding:5px 9px;color:inherit}',
+      '.kosha-panel{border:1px solid var(--card-border,#e6ddcf);border-radius:10px;padding:10px;margin:0 0 14px;background:var(--card-active,#faf6ef)}',
+      '.kosha-panel-h{font-size:12px;color:var(--muted-text,#888);margin-bottom:8px}',
+      '.kosha-prow{display:flex;align-items:center;gap:6px;padding:4px 0;font-size:14px}',
+      '.kosha-prow.pinned{font-weight:600}',
+      '.kosha-prow.hid .kosha-pname{opacity:.45;text-decoration:line-through}',
+      '.kosha-pname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+      '.kosha-pnum{font-size:11px;color:var(--muted-text,#888);width:1.4em}',
+      '.kosha-pbtn{background:none;border:1px solid var(--card-border,#ddd);border-radius:6px;cursor:pointer;font-size:12px;padding:2px 7px;color:inherit}',
+      // Quick actions
+      '.kosha-actwrap{margin-top:6px}',
+      '.kosha-actions{display:flex;gap:6px;flex-wrap:wrap}',
+      '.kosha-act{background:none;border:1px solid var(--card-border,#ddd);border-radius:14px;font:inherit;font-size:12px;padding:3px 10px;cursor:pointer;color:var(--muted-text,#666)}',
+      '.kosha-act:hover{border-color:var(--accent-red,#8a5a2b);color:var(--accent-red,#8a5a2b)}',
+      '.kosha-ai-out{border-left:3px solid var(--accent-red,#8a5a2b);padding:6px 0 6px 10px;margin:8px 0}',
+      '.kosha-ai-head{font-size:12px;font-weight:600;color:var(--accent-red,#8a5a2b)}',
+      '.kosha-ai-tag{font-weight:400;color:var(--muted-text,#999)}',
+      '.kosha-ai-body{font-size:15px;line-height:1.6;margin-top:3px}',
       '.kosha-xl{font-size:12px;margin:4px 6px 0 0;background:var(--card-active,#efe7dc);border:none;border-radius:8px;padding:3px 8px;cursor:pointer;color:inherit}',
       '.kosha-xl-out{font-size:15px;margin:4px 0;padding:6px 8px;background:var(--card-active,#f6f1ea);border-radius:8px}',
       '.kosha-xl-err{font-size:13px;margin:4px 0;padding:6px 8px;background:rgba(170,51,51,.08);border:1px solid #d99;border-radius:8px;color:#a33}',
