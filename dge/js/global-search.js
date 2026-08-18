@@ -154,7 +154,15 @@
   function render(hits) {
     var box = document.getElementById('dge-gs-results');
     if (!hits || !hits.length) { box.innerHTML = '<div class="dge-gs-hint">No matches.</div>'; return; }
-    box.innerHTML = hits.map(function (h) {
+    // A common word matches most of the corpus; the search stops after the
+    // best few dozen granthas rather than opening all of them. Say so, so a
+    // reader does not take a capped list for the whole of it.
+    var note = hits.partial
+      ? '<div class="dge-gs-hint">Best matches — the search stopped after the' +
+        ' strongest few dozen texts rather than opening the whole library.' +
+        ' A longer phrase narrows it.</div>'
+      : '';
+    box.innerHTML = note + hits.map(function (h) {
       return '<div class="dge-gs-row" data-slug="' + esc(h.grantha) + '" data-unit="' + esc(h.unit) + '">' +
         '<div class="dge-gs-meta"><b>' + esc(h.title) + '</b><span>' + esc(h.unit) + '</span><span>' + esc(h.category) + '</span><span>' + h.score.toFixed(2) + '</span></div>' +
         '<div class="dge-gs-snip">' + esc(h.snippet) + '</div></div>';
