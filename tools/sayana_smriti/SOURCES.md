@@ -1,12 +1,16 @@
 # Where Sāyaṇa can actually come from — measured, not assumed
 
 > **TOP LINE, added after checking sa.wikisource directly:** Sanskrit Wikisource
-> carries Sāyaṇa's Ṛgveda-bhāṣya as **clean transcribed text** on **1,022 of the
-> Ṛgveda's 1,028 sūktas (99.4%)**, wrapped in a `{{सायणभाष्यम्|…}}` template, under
+> carries Sāyaṇa's Ṛgveda-bhāṣya as **clean transcribed text** on **1,019 of the
+> Ṛgveda's 1,028 sūktas (99.1%)**, wrapped in a `{{सायणभाष्यम्|…}}` template, under
 > CC BY-SA. This is better than every other route on every axis that matters and
-> **should be the primary source**. The archive.org OCR aligner below still works
+> **is now the primary source**. The archive.org OCR aligner below still works
 > (95.5%, median 0.93) and is worth keeping as a cross-check and a fallback for
-> what Wikisource lacks, but it should not be the main path. See §5.
+> what Wikisource lacks, but it is no longer the main path. See §5 and §6.
+>
+> **DONE.** `wikisource_sayana.py` ran and wrote **10,388 of 10,552 mantras
+> (98.45%)**, median match 1.00, **zero off-by-one**. §6 is the result and the
+> evidence.
 
 
 Everything here was measured from a GitHub Actions runner in August 2026.
@@ -186,3 +190,104 @@ mantra against the page's own, and the commentary beside it is the right one.
 Not as the main path, but two uses remain. It is an independent witness — where
 Wikisource and the scan agree, confidence is high; where they diverge, something
 needs a human. And it covers whatever Wikisource turns out to lack.
+
+---
+
+## 6. The Wikisource import, as run
+
+`wikisource_sayana.py`, run 18 Aug 2026 against all ten maṇḍalas.
+
+| | |
+|---|---|
+| Mantras carrying Sāyaṇa | **10,388 / 10,552 (98.45%)** |
+| Median match against DGE's own mantra | **1.00** (min 0.88) |
+| Cuts whose verse number also agreed | 10,374 (99.9%) |
+| Glosses quoting the **next** mantra | **0** |
+| Cuts refused for quoting the next mantra | 66 |
+
+Per maṇḍala: 1 — 98.3% · 2 — 98.1% · 3 — 98.5% · 4 — 99.7% · 5 — 98.6% ·
+6 — 99.7% · **7 — 100%** · 8 — 95.5% · 9 — 99.0% · 10 — 99.5%.
+
+### Three corrections to §5
+
+**1. Coverage is 1,019 sūktas, not 1,022, and the search alone finds only 990.**
+`totalhits: 1022` counts *hits*, not pages: 29 are duplicates across the
+paginated result set and 3 are Aitareya Brāhmaṇa pages that merely mention the
+template. Deduplicated, the search returns **990** sūktas. But the search index
+lags the wiki — probing the 38 it omits **by title** finds the template on 29 of
+them, so the real figure is **1,019 of 1,028 (99.1%)**. The importer therefore
+searches *and* probes; searching alone would have silently lost 29 sūktas.
+
+**2. The nine sūktas that genuinely lack the bhāṣya are the Vālakhilya.**
+RV 8.49–8.55, 8.57 and 8.59 — the apocryphal appendix to maṇḍala 8, which much
+of the manuscript tradition transmits apart from Sāyaṇa's commentary. That is a
+property of the text, not a gap in the wiki, and no retry will close it. It is
+most of why maṇḍala 8 sits at 95.5% while the rest are above 98%.
+
+**3. Splitting is anchored on the mantra, not on the verse number.**
+§5 expected the `॥N॥` counting to carry over. It does not, and should not: RV
+10.90 prints only 12 of its 16 numbers, pages repeat a number for a quoted
+verse, and sūkta and anuvāka tallies wear the same form. The mantra's own
+text cannot be any of those things. So the aligner matches DGE's saṃhitā- and
+pada-pāṭha and treats the number as a *second* witness, recorded per cut — it
+agreed on 99.9% of them, which is worth knowing precisely because it was not
+required.
+
+### What the page actually looks like
+
+Inside the template, per mantra and in order:
+
+```
+<saṃhitā-pāṭha, accented>   … ॥N
+<pada-pāṭha, accented>      … ॥N
+<pada-pāṭha, plain>         … ॥N
+<Sāyaṇa's gloss on mantra N>
+```
+
+The closing danda after the number is dropped more often than not. A gloss runs
+from the end of its own mantra's printed block to the start of the next
+mantra's — **both ends anchored on text DGE already holds**, which is what makes
+a wrong cut impossible to mistake for a right one.
+
+Each sūkta also opens with a preamble on its viniyoga, ṛṣi and chandas that
+glosses no single mantra. It is kept under its own key, `commentaries.sayana_sukta`,
+on the sūkta's first mantra — 1,018 of them — so that mantra's own commentary
+stays its own. `dge/js/core.js` labels it alongside `sayana`.
+
+### How it was verified, and what the checks caught
+
+Coverage is not evidence, so three independent checks ran:
+
+- **Off-by-one.** Not "does the gloss *start with* the mantra's first words" —
+  that test says *no* for correct pairings, because Sāyaṇa quotes in his own
+  order (RV 1.1.9's comment opens `हे “अग्ने “सः त्वं “नः` against a pada-pāṭha
+  beginning `सः । नः । पिताऽइव`). It measures how much of the mantra's
+  vocabulary the gloss's opening quotes, against how much of the *next*
+  mantra's, in a window scaled to the mantra's length. Final count: **0 late**.
+- **Reading the pairings.** A stratified sample, one mantra per maṇḍala, read
+  against its mantra. All ten correct.
+- **Duplicates.** Two commentaries repeat more than three times. Both are right:
+  RV 2.11.21, 2.15.10, 2.16.9, 2.17.9, 2.18.9, 2.19.9 and 2.20.9 are the
+  *identical* Gṛtsamada refrain, so one comment serves all seven; and
+  `पूर्वं व्याख्याता` — "explained earlier" — is Sāyaṇa's own note on a repeated
+  verse, not a misalignment.
+
+Four real defects were found this way, each invisible to a score:
+
+1. **The next mantra's printed saṃhitā-pāṭha trailing the previous gloss**,
+   because the block's start was taken from the *best-scoring* match rather
+   than the *earliest*. This is the important one: it made correct cuts read as
+   one-late, and reading them was the only way to tell the difference.
+2. **RV 1.65–1.70 are dvipadā** — printed as pairs of half-verses under one
+   combined gloss, which DGE splits into two mantras each. The first of each
+   pair has no gloss of its own, and is refused rather than given its
+   neighbour's.
+3. **Stranded akṣaras and verse tallies** at a cut's edges, trimmed only where
+   the fragment is demonstrably the mantra's own text — Sāyaṇa's genuine
+   three-word glosses on refrain verses must survive, so length cannot decide.
+4. **A fixed 30-character slack in the matcher**, which is a tenth of a long
+   triṣṭubh but three quarters of a short gāyatrī pāda. Scaling it lifted the
+   median match from 0.86 to 1.00 and coverage from 97.2% to 98.45%.
+
+The archive.org route is kept, unchanged, for the reasons §5 gives: it is an
+independent witness, and it covers the Vālakhilya, which Wikisource does not.

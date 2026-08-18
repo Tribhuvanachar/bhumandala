@@ -297,6 +297,10 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
     // above, these are commentary rather than translation -- Sayana is the
     // first traditional commentator to enter the Vedic corpus.
     sayana: 'सायणभाष्यम् — Sāyaṇa (Ṛgveda-bhāṣya)',
+    // Sayana opens each sukta with a note on its viniyoga, rishi and chandas
+    // that glosses no single mantra. It rides on the sukta's first mantra
+    // under its own key so that mantra's commentary stays its own.
+    sayana_sukta: 'सायणभाष्यम् — Sāyaṇa (introduction to the sūkta)',
     wilson: 'Wilson (English Translation, after Sāyaṇa)',
     artha: 'Translation'
   };
