@@ -1,0 +1,127 @@
+name: Probe — can the archive.org Sayana be aligned to DGE's mantras
+
+# Diagnostic only. Writes nothing into dge/, opens no PR.
+#
+# CORRECTING AN EARLIER TEST. probe-sayana-sources.yml searched a slab drawn
+# from 40% into the mandala-1 file for RV 1.1.1's pratika and reported 0 hits.
+# That proved nothing: 40% into mandala 1 lands around RV 1.32, so 1.1.1 was
+# never going to be in it. The test was wrong, not the source.
+#
+# What that slab did show is that the edition prints, for every mantra, in order:
+#
+#     <samhita-patha> ... || N ||
+#     <pada-patha>    ... || N ||
+#     <Sayana's bhashya>
+#
+# The mantra's own text therefore sits immediately before its commentary -- and
+# DGE already holds the samhita-patha for all 10,552 mantras. So alignment does
+# not need the page numbering at all: walk DGE's mantras in order, find each
+# one's opening words in the OCR, and the bhashya is what lies between one match
+# and the next.
+#
+# This job measures whether that works, on real data, before any importer is
+# written around it. The number that matters is the fraction of mandala 1's
+# 2,006 mantras located IN ORDER. A high rate means a Sanskrit Sayana -- the
+# actual bhashya, not Wilson's English rendering of it -- is reachable from
+# Actions with no residential connection needed anywhere.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/probe-sayana-align.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: sanskritebooks.org — reachable, and does it host text?
+        run: |
+          BOT_UA="DGE-import/1.0 (Digital Grantha Engine; non-commercial educational digital library; github.com/Tribhuvanachar/bhumandala)"
+          for u in "https://www.sanskritebooks.org/" "https://www.sanskritebooks.org/robots.txt"; do
+            printf '%-6s %s\n' "$(curl -s -o /dev/null -w '%{http_code}' -m 30 -A "$BOT_UA" -L "$u" || echo ERR)" "$u"
+          done
+          echo "--- what file types does it link to? ---"
+          curl -s -m 40 -A "$BOT_UA" -L "https://www.sanskritebooks.org/?s=veda" \
+            | grep -oiE 'https?://[a-z0-9.:/_%-]+\.(pdf|zip|djvu|txt|epub)' | sed -E 's#(https?://[^/]+).*#\1#' \
+            | sort | uniq -c | sort -rn | head -10
+          echo "(host counts above: if they are archive.org / drive.google.com, this is"
+          echo " an index over scans others already host, not an independent text source)"
+
+      - name: Align mandala 1 against DGE's own mantras
+        run: |
+          python - <<'PY'
+          import json, glob, re, unicodedata, urllib.parse, urllib.request
+
+          UA = {"User-Agent": "DGE-import/1.0 (Digital Grantha Engine; non-commercial "
+                              "educational digital library; github.com/Tribhuvanachar/bhumandala)"}
+          def get(url):
+              return urllib.request.urlopen(urllib.request.Request(url, headers=dict(UA)), timeout=180).read()
+
+          ident = "rgveda-with-sayanabhasya"
+          meta = json.loads(get(f"https://archive.org/metadata/{ident}"))
+          name = next(f["name"] for f in meta["files"]
+                      if f.get("name","").endswith("_djvu.txt") and "1" in f["name"])
+          print(f"downloading {name} ...")
+          ocr = get(f"https://archive.org/download/{ident}/{urllib.parse.quote(name)}").decode("utf-8","replace")
+          print(f"  {len(ocr):,} chars\n")
+
+          # Strip everything that OCR renders unreliably: Vedic accents, the
+          # danda, quotation marks the typesetter uses to flag pratikas, and all
+          # whitespace. What survives is the consonant-vowel skeleton, which OCR
+          # gets right far more often than it gets the diacritics right.
+          ACCENTS = "".join(chr(c) for c in list(range(0x0951, 0x0953)) + [0x1CD0,0x1CD1,0x1CD2,0x1CDA,0x1CDD,0x1CE1])
+          def skel(s):
+              s = unicodedata.normalize("NFC", s)
+              s = re.sub(f"[{ACCENTS}]", "", s)
+              s = re.sub(r"[^ऀ-ॿ]", "", s)
+              return s.replace("ळ","ल").replace("ऴ","ल")
+          ocr_sk = skel(ocr)
+          # index map: position in skeleton -> position in original
+          idx = [i for i,c in enumerate(ocr) if skel(c)]
+
+          # DGE's own mandala 1
+          path = "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_01/data.json"
+          items = json.load(open(path))["items"]
+          print(f"DGE mandala 1: {len(items)} mantras\n")
+
+          found = miss = 0
+          cursor = 0
+          examples, misses = [], []
+          for it in items:
+              text = it.get("samhita_patha_plain") or it.get("samhita_patha") or ""
+              probe = skel(text)[:18]           # ~5-6 aksharas: long enough to be unique
+              if len(probe) < 10:
+                  continue
+              at = ocr_sk.find(probe, cursor)
+              if at == -1:                       # allow a small backward window for reordering
+                  at = ocr_sk.find(probe, max(0, cursor - 4000))
+              if at == -1:
+                  miss += 1
+                  if len(misses) < 5: misses.append((it["id"], probe))
+                  continue
+              found += 1
+              cursor = at + len(probe)
+              if len(examples) < 3:
+                  o = idx[at] if at < len(idx) else 0
+                  examples.append((it["id"], ocr[o:o+150].replace("\n"," ")))
+
+          total = found + miss
+          print(f"=== located in order: {found}/{total}  ({100*found/max(total,1):.1f}%) ===\n")
+          for mid, snip in examples:
+              print(f"  {mid}: {snip}\n")
+          if misses:
+              print("  first misses:", misses)
+          print("\nA high rate means the bhashya can be cut between consecutive matches,")
+          print("and every cut is self-verifying: the mantra DGE already holds is the")
+          print("thing being matched, so a wrong cut cannot look right.")
+          PY
