@@ -1,5 +1,14 @@
 # Where Sāyaṇa can actually come from — measured, not assumed
 
+> **TOP LINE, added after checking sa.wikisource directly:** Sanskrit Wikisource
+> carries Sāyaṇa's Ṛgveda-bhāṣya as **clean transcribed text** on **1,022 of the
+> Ṛgveda's 1,028 sūktas (99.4%)**, wrapped in a `{{सायणभाष्यम्|…}}` template, under
+> CC BY-SA. This is better than every other route on every axis that matters and
+> **should be the primary source**. The archive.org OCR aligner below still works
+> (95.5%, median 0.93) and is worth keeping as a cross-check and a fallback for
+> what Wikisource lacks, but it should not be the main path. See §5.
+
+
 Everything here was measured from a GitHub Actions runner in August 2026.
 `AUDIT.md` remains the survey of what exists; this is the record of what is
 *reachable* and what is *alignable*, both of which turned out differently from
@@ -112,3 +121,68 @@ Suggested as a source; probed but not yet cleanly read back. Every Sāyaṇa res
 from an independent search resolved to archive.org rather than to a file hosted
 there, so the working assumption is that it indexes the same scans. Worth
 confirming before spending effort on it.
+
+---
+
+## 5. Sanskrit Wikisource — the source that supersedes the rest
+
+Checked directly, 18 Aug 2026.
+
+### Coverage
+
+```
+insource:"सायणभाष्यम्" intitle:"ऋग्वेदः"   ->  totalhits: 1022
+```
+
+The Ṛgveda has 1,028 sūktas. So **1,022 of 1,028 carry the bhāṣya — 99.4%**.
+
+### Why it beats the archive.org scan on every axis
+
+**It is transcribed, not OCR'd.** Same passage, both sources:
+
+| Source | RV 1.1 |
+|---|---|
+| archive.org OCR | `हे "अग्ने छे "ये यज्ञ ४विश्वतः सर्वासु दिक्षु "परिभूः परितः प्राप्तवान् "असि` |
+| **sa.wikisource** | `हे “अग्ने “सः त्वं “नः अस्मदर्थं सूपायनः शोभनप्राप्तियुक्तः “भव । तथा नः अस्माकं “स्वस्तये विनाशराहित्यार्थं “सचस्व समवेतो भव` |
+
+The Wikisource text keeps the pratīka quotation marks and renders Pāṇini
+citations correctly (`पा. सू. ८. १. १८`). The OCR mangles both.
+
+**It is structurally marked.** The wikitext wraps the commentary in a template:
+
+```
+{{सायणभाष्यम्|
+‘चित्रो वः' इति ...
+}}
+```
+
+That is a named boundary, so extraction is a parse rather than the block
+segmentation and fuzzy scoring the OCR route needs. No `॥ N ॥` counting, no
+similarity threshold, no apparatus to detect and skip.
+
+**Its licence is stated.** CC BY-SA, versus the archive item's silence. DGE is
+non-commercial and attributes, which satisfies share-alike — but the obligation
+is explicit and must be recorded in `commentary_sources`, not assumed.
+
+**One page per sūkta**, titled `ऋग्वेदः सूक्तं <maṇḍala>.<sūkta>` in Devanagari
+numerals, holding the sūkta's mantras *and* its bhāṣya. The mantras being on the
+page means the same self-verifying alignment is available here: match DGE's
+mantra against the page's own, and the commentary beside it is the right one.
+
+### What still has to be worked out
+
+- **Splitting the bhāṣya per mantra.** The template holds one block per sūkta.
+  Sāyaṇa's per-mantra glosses run in sequence inside it, separated the same way
+  the print edition separates them, so the existing skeleton-matching logic in
+  `archive_sayana.py` is directly reusable on clean input — where it should do
+  considerably better than 95.5%.
+- **The 6 sūktas without the template**, and whether they are gaps or spelling
+  variants of the heading.
+- **Rate limits and attribution.** Use the MediaWiki API with a descriptive
+  User-Agent; Wikimedia asks for one and it is the polite thing regardless.
+
+### Keep the OCR route
+
+Not as the main path, but two uses remain. It is an independent witness — where
+Wikisource and the scan agree, confidence is high; where they diverge, something
+needs a human. And it covers whatever Wikisource turns out to lack.
