@@ -389,7 +389,12 @@
     "mula": {},
     "saartha": {}
    },
-   "uttara_kanda": {}
+   "uttara_kanda": {
+    "mula": {
+     "_schema": "itihasa_purana_text",
+     "_default_author": "Maharshi Valmiki"
+    }
+   }
   },
   "mahabharata": {
    "adi_parva": {
@@ -470,7 +475,12 @@
     "bhavishya_parva": {}
    }
   },
-  "harivamsha": {},
+  "harivamsha": {
+   "mula": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "Maharshi Veda Vyasa"
+   }
+  },
   "mahabharata_kannada": {
    "adi_parva": {},
    "sabha_parva": {},
@@ -1579,7 +1589,13 @@
    "shatatapa_smriti": {
     "_default_author": "Shatatapa"
    },
-   "narada_smriti": {}
+   "narada_smriti": {},
+   "vasistha_smriti": {
+    "_default_author": "Vasishtha"
+   },
+   "baudhayana_smriti": {
+    "_default_author": "Baudhayana"
+   }
   },
   "dharmashastra": {
    "dharma_sindhu": {
@@ -1765,6 +1781,10 @@
     "tattvabodhini": {
      "_schema": "grantha_tippani_text",
      "_default_author": "Jñānendra Sarasvatī"
+    },
+    "vasu": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "Śrīśa Chandra Vasu"
     }
    },
    "aindra_school": {},
@@ -1780,7 +1800,10 @@
    "katantra_vyakarana": {},
    "haima_shabdanushasana": {},
    "sarasvata_vyakarana": {},
-   "mugdhabodha_vyakarana": {}
+   "mugdhabodha_vyakarana": {},
+   "dhatupatha": {
+    "_schema": "vyakarana_dhatupatha"
+   }
   },
   "shiksha": {
    "paniniya_shiksha": {},
@@ -1866,16 +1889,336 @@
    "dashavatara",
    "sampradaya",
    "kavya"
-  ]
+  ],
+  "dasakuta": {
+   "gopaladasa": {
+    "dandaka": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Gopaladasa"
+    },
+    "mundige": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Gopaladasa"
+    },
+    "other_compositions": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Gopaladasa"
+    },
+    "pada_kirtane": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Gopaladasa"
+    },
+    "suladi": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Gopaladasa"
+    },
+    "ugabhoga": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Gopaladasa"
+    }
+   },
+   "jagannathadasa": {
+    "dandaka": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Jagannathadasa"
+    },
+    "harikathamrutasara": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Jagannathadasaru"
+    },
+    "mundige": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Jagannathadasa"
+    },
+    "other_compositions": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Jagannathadasa"
+    },
+    "pada_kirtane": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Jagannathadasa"
+    },
+    "suladi": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Jagannathadasa"
+    },
+    "ugabhoga": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Jagannathadasa"
+    }
+   },
+   "kanakadasa": {
+    "dandaka": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Kanakadasa"
+    },
+    "mundige": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Kanakadasa"
+    },
+    "other_compositions": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Kanakadasa"
+    },
+    "pada_kirtane": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Kanakadasa"
+    },
+    "suladi": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Kanakadasa"
+    },
+    "ugabhoga": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Kanakadasa"
+    }
+   },
+   "mahipatidasa": {
+    "dandaka": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Mahipatidasa"
+    },
+    "mundige": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Mahipatidasa"
+    },
+    "other_compositions": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Mahipatidasa"
+    },
+    "pada_kirtane": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Mahipatidasa"
+    },
+    "suladi": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Mahipatidasa"
+    },
+    "ugabhoga": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Mahipatidasa"
+    }
+   },
+   "prasannavenkatadasa": {
+    "dandaka": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Prasanna Venkatadasa"
+    },
+    "mundige": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Prasanna Venkatadasa"
+    },
+    "other_compositions": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Prasanna Venkatadasa"
+    },
+    "pada_kirtane": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Prasanna Venkatadasa"
+    },
+    "suladi": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Prasanna Venkatadasa"
+    },
+    "ugabhoga": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Prasanna Venkatadasa"
+    }
+   },
+   "purandaradasa": {
+    "dandaka": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Purandaradasa"
+    },
+    "mundige": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Purandaradasa"
+    },
+    "other_compositions": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Purandaradasa"
+    },
+    "pada_kirtane": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Purandaradasa"
+    },
+    "suladi": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Purandaradasa"
+    },
+    "ugabhoga": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Purandaradasa"
+    }
+   },
+   "vijayadasa": {
+    "dandaka": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Vijayadasa"
+    },
+    "mundige": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Vijayadasa"
+    },
+    "other_compositions": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Vijayadasa"
+    },
+    "pada_kirtane": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Vijayadasa"
+    },
+    "suladi": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Vijayadasa"
+    },
+    "ugabhoga": {
+     "_schema": "dasa_sahitya_composition",
+     "_default_author": "Sri Vijayadasa"
+    }
+   }
+  },
+  "vyasakuta": {
+   "raghavendra_tirtha": {
+    "bhattasangraha": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Raghavendra Swami"
+    },
+    "bhavabodha": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Raghavendra Swami"
+    },
+    "gurvarthadipika": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Raghavendra Swami"
+    },
+    "nyayamuktavali": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Raghavendra Swami"
+    },
+    "parimala": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Raghavendra Swami"
+    },
+    "tantradipika": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Raghavendra Swami"
+    }
+   },
+   "sripadaraja": {
+    "_schema": "grantha_prakarana_text",
+    "_default_author": "Sri Sripadaraja"
+   },
+   "vadiraja_tirtha": {
+    "rukminisha_vijaya": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Vadiraja Tirtha"
+    },
+    "svapna_vrindavana_akhyana": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "Sri Vadiraja Tirtha"
+    },
+    "yuktimallika": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Vadiraja Tirtha"
+    }
+   },
+   "vijayendra_tirtha": {
+    "_schema": "grantha_prakarana_text",
+    "_default_author": "Sri Vijayendra Tirtha"
+   },
+   "vishnu_tirtha": {
+    "_schema": "grantha_prakarana_text",
+    "_default_author": "Sri Vishnu Tirtha"
+   },
+   "vyasatatvajna_tirtha": {
+    "_schema": "grantha_prakarana_text",
+    "_default_author": "Sri Vyasatatvajna Tirtha"
+   },
+   "vyasatirtha": {
+    "bhedojjivana": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Vyasatirtha (Vyasaraja)"
+    },
+    "chandrika": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Vyasatirtha (Vyasaraja)"
+    },
+    "mandaramanjari": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Vyasatirtha (Vyasaraja)"
+    },
+    "nyayamrita": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Vyasatirtha (Vyasaraja)"
+    },
+    "tarkatandava": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Vyasatirtha (Vyasaraja)"
+    },
+    "tatparyachandrika": {
+     "_schema": "grantha_prakarana_text",
+     "_default_author": "Sri Vyasatirtha (Vyasaraja)"
+    }
+   }
+  }
  },
  "kavya_alankara": {
   "_schema": "itihasa_purana_text",
-  "raghuvamsha": {},
-  "kumarasambhava": {},
-  "kiratarjuniya": {},
-  "shishupalavadha": {},
+  "raghuvamsha": {
+   "mula": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "Kalidasa"
+   }
+  },
+  "kumarasambhava": {
+   "mula": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "Kalidasa"
+   }
+  },
+  "kiratarjuniya": {
+   "mula": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "Bharavi"
+   }
+  },
+  "shishupalavadha": {
+   "mula": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "Magha"
+   }
+  },
   "sumadhva_vijaya": {
-   "_default_author": "Sri Narayana Panditacharya"
+   "_default_author": "Sri Narayana Panditacharya",
+   "sarga_1": {},
+   "sarga_10": {},
+   "sarga_11": {},
+   "sarga_12": {},
+   "sarga_13": {},
+   "sarga_14": {},
+   "sarga_15": {},
+   "sarga_16": {},
+   "sarga_2": {},
+   "sarga_3": {},
+   "sarga_4": {},
+   "sarga_5": {},
+   "sarga_6": {},
+   "sarga_7": {},
+   "sarga_8": {},
+   "sarga_9": {}
+  },
+  "raghavendra_vijaya": {
+   "sarga_1": {},
+   "sarga_10": {},
+   "sarga_2": {},
+   "sarga_3": {},
+   "sarga_4": {},
+   "sarga_5": {},
+   "sarga_6": {},
+   "sarga_7": {},
+   "sarga_8": {},
+   "sarga_9": {}
   }
  },
  "dvaitavedanta": {

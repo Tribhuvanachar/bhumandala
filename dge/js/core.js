@@ -263,7 +263,9 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
     oldenberg: 'Oldenberg (English Translation)',
     geldner: 'Geldner (German Translation)',
     grassmann: 'Grassmann (German Translation)',
-    elizarenkova: 'Elizarenkova (Russian Translation)'
+    elizarenkova: 'Elizarenkova (Russian Translation)',
+    sayana: 'सायणभाष्यम् — Sāyaṇa (Ṛgveda-bhāṣya)',
+    wilson: 'Wilson (English Translation, after Sāyaṇa)'
   };
 
   // itihasa_purana_text schema (see dge/data/schemas.json): each item is a
@@ -277,14 +279,34 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
   // needing a new one wired through render/audio/filter/etc.
   if (Array.isArray(data.items) && data.items.length && Array.isArray(data.items[0].shlokas)) {
     const shlokas = {};
+    const availableCommentaries = {};
     let n = 0;
     data.items.forEach(chapter => {
       (chapter.shlokas || []).forEach(v => {
         n++;
+        // shlokas[].bhashya[] is [{commentator, text, language, source}] per
+        // schemas.json; artha is the plain translation. Both are folded into
+        // the same flat 'commentaries' dict the branch below builds, so a
+        // Manu shloka with Medhatithi displays exactly like a Rigveda mantra
+        // with Sayana -- no renderer, filter or audio change needed.
+        const commentaries = {};
+        if (v.artha) {
+          commentaries.artha = v.artha;
+          availableCommentaries.artha = 'Translation';
+        }
+        (v.bhashya || []).forEach(b => {
+          if (!b || !b.text) return;
+          // Key derived from the commentator string rather than hard-coded,
+          // so adding Kulluka or Govindaraja later needs no change here.
+          const key = (b.commentator || 'bhashya')
+            .toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+          commentaries[key] = b.text;
+          availableCommentaries[key] = KNOWN_COMMENTARY_LABELS[key] || b.commentator || key;
+        });
         shlokas[n] = {
           sa: dgeSanitizeVedicAccents(v.sanskrit_text || v.sa || ''),
           vedicId: chapter.reference ? (chapter.reference + (v.number != null ? ' · ' + v.number : '')) : '',
-          commentaries: {}
+          commentaries: commentaries
         };
       });
     });
@@ -295,7 +317,7 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         title: granthaTitle || data.schema || 'Untitled',
         author: data.default_author || '',
         totalShlokas: n,
-        availableCommentaries: {}
+        availableCommentaries: availableCommentaries
       },
       shlokas,
       totalShlokas: n
