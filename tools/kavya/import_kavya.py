@@ -167,6 +167,17 @@ def run(args):
             keep = set(args.sources.split(","))
             srcs = {k: v for k, v in srcs.items() if k in keep}
         wrep = {"sources": {}, "layers": {}}
+        # Highest tier first, and a layer id claimed by a higher tier is not
+        # written again by a lower one. Without this, GRETIL's mula merges into
+        # sanskritsahitya's: the tier A text is Devanagari and numbered 1.34,
+        # GRETIL's is romanised and numbers its additional readings 1.34* and
+        # its split verses 3.2a / 3.2b, so a reader scrolling the Raghuvamsa
+        # met 59 starred verses and 8 half-verses IN LATIN LETTERS interleaved
+        # with the Devanagari, saying the same thing the verse above them said.
+        # GRETIL is the fallback for a work tier A does not have, not a second
+        # opinion on one it does.
+        srcs = dict(sorted(srcs.items(), key=lambda kv: IMPORTERS[kv[0]][0]))
+        claimed = set()
         for key in srcs:
             tier_id, fn = IMPORTERS[key]
             tier = tiers.get(tier_id, {})
@@ -182,6 +193,10 @@ def run(args):
                 wrep["sources"][key] = out
                 continue
             for lid, layer in out.items():
+                if lid in claimed:
+                    log("  -- %s/%s: %s already written from a higher tier"
+                        % (wid, key, lid))
+                    continue
                 errs = validate_layer(layer)
                 if errs:
                     report["errors"].append("%s/%s: %s" % (wid, lid, errs[:3]))
@@ -198,6 +213,7 @@ def run(args):
                 recount(merged)
                 if not args.dry_run:
                     write_json(path, merged)
+                claimed.add(lid)
                 wrep["layers"][lid] = dict(
                     mrep.as_dict(), counts=merged["grantha"]["counts"])
                 report["totals"]["layers"] += 1

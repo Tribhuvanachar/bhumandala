@@ -182,3 +182,55 @@ class TestSchemaGuards(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class TestPrePackageShapeBridge(unittest.TestCase):
+    """A layer written before this package existed must UPDATE, not double.
+
+    dge/data's own kavyas carry no grantha block, name a chapter sarga_01 and
+    key a verse by number. Merged naively that is 19 sargas becoming 38 in a
+    published grantha, which is why this is pinned by name.
+    """
+
+    def _existing(self):
+        return {
+            "schema": "itihasa_purana_text",
+            "default_author": "Kalidasa",
+            "items": [{"id": "sarga_01", "reference": "सर्गः १", "shlokas": [
+                {"number": 1, "sanskrit_text": "वागर्थाविव सम्पृक्तौ"},
+                {"number": 2, "sanskrit_text": "क्व सूर्यप्रभवो वंशः"},
+            ]}],
+        }
+
+    def _incoming(self):
+        layer = make_layer(make_grantha("mula", "raghuvamsha", "mula"))
+        it = make_item("1")
+        it["shlokas"] = [
+            make_shloka("1.1"), make_shloka("1.2"), make_shloka("1.3"),
+        ]
+        it["shlokas"][0]["sanskrit_text"] = "वागर्थाविव सम्पृक्तौ वागर्थप्रतिपत्तये"
+        it["shlokas"][1]["sanskrit_text"] = "क्व सूर्यप्रभवो वंशः"
+        it["shlokas"][2]["sanskrit_text"] = "क्व चाल्पविषया मतिः"
+        layer["items"] = [it]
+        return layer
+
+    def test_chapters_are_matched_not_appended(self):
+        merged, _ = merge_into_existing(self._existing(), self._incoming())
+        self.assertEqual(len(merged["items"]), 1, "sarga_01 and 1 are one sarga")
+
+    def test_existing_verses_are_matched_by_number(self):
+        merged, rep = merge_into_existing(self._existing(), self._incoming())
+        shlokas = merged["items"][0]["shlokas"]
+        self.assertEqual(len(shlokas), 3, "two matched, one genuinely new")
+        self.assertEqual(rep.added_shlokas, 1)
+
+    def test_a_truncated_reading_is_repaired_across_the_bridge(self):
+        merged, rep = merge_into_existing(self._existing(), self._incoming())
+        first = merged["items"][0]["shlokas"][0]
+        self.assertIn("वागर्थप्रतिपत्तये", first["sanskrit_text"])
+        self.assertEqual(rep.repaired, ["1.1"], "repaired records which verse")
+
+    def test_what_the_old_file_said_about_itself_survives(self):
+        merged, _ = merge_into_existing(self._existing(), self._incoming())
+        self.assertEqual(merged["default_author"], "Kalidasa")
+        self.assertEqual(merged["grantha"]["work_id"], "raghuvamsha")
