@@ -194,7 +194,35 @@
   /* ---------- Gemini (BYOK) ---------- */
   function getKey(){ return LS.get("gkey",""); }
   function setKey(k){ LS.set("gkey",k); }
-  function getModel(){ return LS.get("gmodel","gemini-2.0-flash"); }
+  // The default and the menu both come from js/gemini.js, which is the one
+  // place model ids live. A model saved by an older build (this page used to
+  // offer gemini-2.0-flash and friends, all of which now 404) is not honoured
+  // -- it would fail every request with no way for the reader to tell why.
+  function models(){
+    var G = window.DGEGemini;
+    return (G && G.MODELS && G.MODELS.length) ? G.MODELS
+         : [{ id: "gemini-flash-latest", label: "Flash — fast, recommended" }];
+  }
+  function defaultModel(){
+    var G = window.DGEGemini;
+    return (G && G.DEFAULT_MODEL) || "gemini-flash-latest";
+  }
+  function getModel(){
+    var m = LS.get("gmodel", "");
+    var list = models();
+    for (var i = 0; i < list.length; i++) if (list[i].id === m) return m;
+    return defaultModel();
+  }
+  function fillModelSel(){
+    var sel = $("#dge-modelSel"); if(!sel) return;
+    var list = models();
+    sel.innerHTML = "";
+    list.forEach(function(m){
+      var o = document.createElement("option");
+      o.value = m.id; o.textContent = m.label || m.id;
+      sel.appendChild(o);
+    });
+  }
   function buildPrompt(question, lang){
     var row=state.sutras[state.idx];
     var open=ORDER.filter(function(k){return state.enabled[k]&&state.layers[k]&&state.layers[k].byId[row.id];});
@@ -247,7 +275,7 @@
   }
 
   /* ---------- settings modal ---------- */
-  function openSettings(){ var m=$("#dge-settings"); if(m){ $("#dge-keyInput").value=getKey(); $("#dge-modelSel").value=getModel(); m.classList.add("open"); $("#dge-backdrop").classList.add("open"); } }
+  function openSettings(){ var m=$("#dge-settings"); if(m){ fillModelSel(); $("#dge-keyInput").value=getKey(); $("#dge-modelSel").value=getModel(); m.classList.add("open"); $("#dge-backdrop").classList.add("open"); } }
   function closeAll(){ $("#dge-drawer").classList.remove("open"); var s=$("#dge-settings"); if(s)s.classList.remove("open"); $("#dge-backdrop").classList.remove("open"); }
 
   /* ---------- wire ---------- */
