@@ -175,7 +175,7 @@
       body.innerHTML = '<div class="dge-cite-ref">' + esc(hit.ref) +
         (hit.note ? ' <span class="dge-cite-note">(' + esc(hit.note) + ')</span>' : '') + '</div>' +
         '<div class="dge-cite-text">' + esc(hit.text) + '</div>' +
-        '<a class="dge-cite-go" href="?path=' + encodeURI(spec.path) + '">Open the full text →</a>';
+        '<a class="dge-cite-go" href="?path=' + esc(encodeURI(spec.path)) + '">Open the full text →</a>';
     });
   }
 

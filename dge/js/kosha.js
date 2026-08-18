@@ -313,7 +313,16 @@
 
   // ---- rendering ------------------------------------------------------------
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
-  function esc(s) { return (s || '').replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
+  // Escapes quotes as well as angle brackets, because the output is
+  // interpolated into attributes (title="…") as well as into text. Without the
+  // quotes a licence note containing one would close the attribute early and
+  // whatever followed would be parsed as markup — CodeQL caught exactly that on
+  // the licence tooltip.
+  function esc(s) {
+    return (s == null ? '' : String(s)).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
   function tl(s) { // transliterate Devanagari to the app's active script, if available
     try { return (window.applyTransliteration && window.activeScript && window.activeScript !== 'devanagari')
       ? window.applyTransliteration(s, window.activeScript) : s; } catch (e) { return s; }
