@@ -38,12 +38,12 @@ const appConfig = {
   // limit left. GitHub Pages serves only main, so a branch is enough to keep
   // it off the site while jsDelivr still serves it. Set this to '' to read a
   // local build from dge/data/_wordnet/ instead.
-  wordnetDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@wordnet-dist/_wordnet",
+  wordnetDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@66c7895fa7b1f30150ebbf74ea67abc28909e550/_wordnet",
   // The Kavya corpus js/kavya.js reads -- 24 works, 49 layers, 67,169
   // entries, 50 MB -- on this repo's "kavya-dist" branch for the same
   // reason. kavya.html carries the same URL as its own default, since it
   // does not load this file.
-  kavyaDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@kavya-dist",
+  kavyaDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@662718d0f70f2eee14b832086a0da1ddafb86f88",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
@@ -62,6 +62,14 @@ window.KOSHA_DATA_BASE = appConfig.koshaDataBase;
 // runs on the four Vyakarana pages, and none of them load this file. This
 // line is what lets the reader's copy be repointed from one place — at a
 // dedicated data repo, say, if the WordNet ever grows the way the koshas did.
+// PINNED TO A COMMIT, NOT A BRANCH, and that is deliberate. jsDelivr caches a
+// @branch URL at the edge for 12 hours, so the first republish of the Kavya
+// corpus left readers on the superseded build -- the one with GRETIL's
+// romanised variant verses in it -- with nothing to show that anything had
+// changed. A commit hash is immutable and served the moment it exists.
+// Republishing therefore has a second step: bump the hash here and in
+// js/kavya.js (and js/intellisense.js for the WordNet). Both publish
+// workflows print the line to paste.
 window.WORDNET_DATA_BASE = appConfig.wordnetDataBase;
 window.KAVYA_DATA_BASE = appConfig.kavyaDataBase;
 

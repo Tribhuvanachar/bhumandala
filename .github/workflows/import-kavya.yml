@@ -143,7 +143,21 @@ jobs:
           git commit -q -m "The built Kavya corpus, rebuilt by import-kavya.yml"
           git push -q --force "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" \
             kavya-dist:refs/heads/kavya-dist
-          echo "published to kavya-dist" >> "$GITHUB_STEP_SUMMARY"
+          SHA=$(git rev-parse HEAD)
+          # The reader pins a COMMIT, not this branch: jsDelivr caches a
+          # @branch URL for 12 hours at the edge, so the first republish left
+          # readers on the superseded build with nothing to say so. A hash is
+          # immutable and served the moment it exists -- at the cost of this
+          # second step.
+          {
+            echo "published to kavya-dist as \`$SHA\`"
+            echo ""
+            echo "**Now bump the pin** in js/config.js (appConfig.kavyaDataBase) and js/kavya.js (CDN):"
+            echo ""
+            echo '```'
+            echo "https://cdn.jsdelivr.net/gh/${{ github.repository }}@$SHA"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
   test:
     runs-on: ubuntu-latest
