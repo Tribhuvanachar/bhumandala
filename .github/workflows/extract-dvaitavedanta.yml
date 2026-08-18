@@ -306,9 +306,14 @@ jobs:
           # crawled this run are left alone, so a narrow scope stays narrow.
           for dir in shards/dv-*/dvaitavedanta; do
             [ -d "$dir" ] || continue
-            for section in "$dir"/*/; do
-              [ -d "$section" ] || continue
-              stale="dge/data/dvaitavedanta/$(basename "$section")"
+            # Replace at GRANTHA level, not section level. A narrow run —
+            # `granthas: nyaya_sudha` — produces a shard holding one grantha,
+            # and wiping its whole section would delete the twenty-three others
+            # that were not crawled this time.
+            for grantha in "$dir"/*/*/; do
+              [ -d "$grantha" ] || continue
+              rel=${grantha#"$dir"/}
+              stale="dge/data/dvaitavedanta/${rel%/}"
               # if/fi, not `[ -d x ] && ...`: under set -e a false test ends the step.
               if [ -d "$stale" ]; then
                 echo "replacing $stale"

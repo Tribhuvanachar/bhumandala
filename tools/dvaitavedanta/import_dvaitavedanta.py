@@ -579,14 +579,25 @@ def render_summary(status, selected_keys):
 # --------------------------------------------------------------------------- #
 
 def select_granthas(config, sections_filter, granthas_filter):
+    """Pick the granthas to crawl.
+
+    Naming a grantha explicitly overrides its `enabled: false`. That flag means
+    "not part of a routine sweep" — nyaya_sudha is held out of `scope=all`
+    because it alone needs some 46 hours — and asking for it by name is not a
+    routine sweep. Without this the only way to crawl it would be to edit the
+    config, run, and remember to put the flag back.
+    """
     selected = []
     for section in config["sections"]:
-        if section.get("enabled") is False:
+        named = set(granthas_filter or ())
+        if section.get("enabled") is False and not named:
             continue
         if sections_filter and section["slug"] not in sections_filter:
             continue
         for grantha in section["granthas"]:
-            if grantha.get("enabled") is False or not grantha.get("seed"):
+            if not grantha.get("seed"):
+                continue
+            if grantha.get("enabled") is False and grantha.get("slug") not in named:
                 continue
             if granthas_filter and grantha.get("slug") not in granthas_filter:
                 continue

@@ -250,6 +250,19 @@ def main():
             "an unattributed heading still matches on suffix alone",
             (resolve("षट्प्रश्नभाष्यटीका", cfg) or {}).get("folder") == "tika_jayatirtha")
 
+        # `enabled: false` keeps a grantha out of a routine sweep; naming it
+        # is not a routine sweep. nyaya_sudha needs ~46h of its own, so it must
+        # be reachable by name without editing the config each time.
+        print("explicit selection overrides enabled: false")
+        full = json.load(open(os.path.join(HERE, "dv_sources.json"), encoding="utf-8"))
+        swept = {g["slug"] for g in I.select_granthas(full, None, None)}
+        failures += not check("scope=all leaves nyaya_sudha out",
+                              "nyaya_sudha" not in swept)
+        named = [g["slug"] for g in I.select_granthas(full, ["later_acharyas"],
+                                                      ["nyaya_sudha"])]
+        failures += not check("naming it selects it anyway", named == ["nyaya_sudha"],
+                              named)
+
         # Discovery must descend THROUGH containers. Run 31958553804 shipped
         # upanishad_prasthana as "10/10 complete, 0 errors" while extracting 10
         # items from 730 leaves, because the sidebar listed index nodes and the
