@@ -118,6 +118,17 @@ class TestAlign(unittest.TestCase):
         self.assertIn("1.1.1", res["aligned"])
         self.assertIn("1.1.2", res["aligned"])
 
+    def test_mantras_far_into_a_shared_volume_still_anchor(self):
+        # One OCR file covers maṇḍalas 2-5 and another 6-8, so a maṇḍala's
+        # mantras can start thousands of blocks in. Simulated here by prefixing
+        # a long run of unrelated blocks: a window measured from position zero
+        # would never reach the real text, and every maṇḍala but the volume's
+        # first would come back empty.
+        filler = "पूर्वं किमपि वाक्यम्‌ ॥ १ ॥\n" * 300
+        res = align(ITEMS, parse_blocks(filler + FIXTURE), threshold=0.5)
+        self.assertIn("1.1.1", res["aligned"])
+        self.assertIn("1.1.2", res["aligned"])
+
     def test_scores_are_recorded_for_every_mantra(self):
         self.assertEqual(len(self.res["scores"]), len(ITEMS))
 

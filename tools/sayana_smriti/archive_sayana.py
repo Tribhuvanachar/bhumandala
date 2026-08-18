@@ -177,6 +177,13 @@ def align(items: list[dict], blocks: list[Block], *,
     """
     out, scores, misses = {}, [], []
     cursor = 0
+    # One OCR file covers several maṇḍalas (2-5 share one, 6-8 another), so a
+    # maṇḍala's mantras may begin thousands of blocks into the file. Until the
+    # first mantra is placed, search the whole block list rather than a window
+    # from position zero -- otherwise every maṇḍala but the volume's first
+    # would look for its mantras among the previous maṇḍala's blocks and find
+    # nothing. After the anchor, the window applies as normal.
+    anchored = False
 
     for it in items:
         mid = it.get("id", "")
@@ -188,7 +195,8 @@ def align(items: list[dict], blocks: list[Block], *,
             continue
 
         best = (0.0, -1)
-        for j in range(cursor, min(cursor + window, len(blocks))):
+        hi = len(blocks) if not anchored else min(cursor + window, len(blocks))
+        for j in range(cursor, hi):
             b = blocks[j]
             if b.num != rk:                     # the number must agree first
                 continue
@@ -217,6 +225,7 @@ def align(items: list[dict], blocks: list[Block], *,
         if bhashya:
             out[mid] = {"text": bhashya, "score": round(score, 3)}
         cursor = end_of_pada + 1
+        anchored = True
 
     return {"aligned": out, "scores": scores, "misses": misses}
 
