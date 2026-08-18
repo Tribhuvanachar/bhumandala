@@ -259,7 +259,15 @@ jobs:
     if: ${{ always() && !fromJSON(inputs.dry_run) && inputs.inspect_urls == '' && inputs.inspect_links == '' && inputs.inspect_load_data == '' }}
     runs-on: ubuntu-latest
     steps:
+      # Pinned to main, not the dispatch ref, for two reasons learned the hard
+      # way in run 32071321753. A branch deleted mid-crawl left create-pull-request
+      # with no base and stranded 108 minutes of successful crawling. And collect
+      # runs sync_catalog + gen_library_status against library.json / taxonomy.json,
+      # so it must read the CURRENT catalog: run it against a stale branch copy and
+      # the PR silently reverts whatever restructuring landed on main meanwhile.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -345,6 +353,7 @@ jobs:
         if: ${{ fromJSON(inputs.open_pr) }}
         uses: peter-evans/create-pull-request@v6
         with:
+          base: main                 # never the dispatch ref; see the checkout above
           branch: ingest/dvaitavedanta-${{ inputs.scope }}
           delete-branch: true
           commit-message: "data: extract dvaitavedanta.in (${{ inputs.scope }})"
