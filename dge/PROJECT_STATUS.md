@@ -77,6 +77,26 @@ items and the decisions waiting on the project lead, this file the narrative.
   not estimated. See `PENDING.md` for what can move and what it buys; the kośa
   corpus already lives in `bhumandala-kosha-data` for exactly this reason, so the
   pattern exists.
+- **The Sanskrit WordNet, imported and wired into the word popover**
+  (`tools/build_wordnet.py`, 37,734 synsets, 80,009 words, 589 buckets, 24 MB).
+  IndoWordNet's Sanskrit half is the only source in the library that defines a
+  Sanskrit word **in Sanskrit** and gives a Sanskrit usage sentence — the koshas
+  gloss into English or Kannada, and the related words from
+  `build_synonyms.py` are bound by an English sense. Double-tapping a word now
+  adds an अर्थः section: definition, example, the rest of the synset, the class
+  it falls under, and the Kannada WordNet's words for the same synset. Kept
+  apart from the related words on purpose: a synset is a lexicographer's claim
+  that these words are one concept, an inverted bilingual entry is an
+  inference, and merging them would hide which is which. Three things the build
+  has to get right are documented in the script: IndoWordNet lists nominal
+  members inflected (अश्वः) where a reader arrives with a stem, so both are
+  indexed; 146 lines carry the part-of-speech twice and disagree with
+  themselves; and the senses are ordered by synset id rather than by size,
+  because the ids run oldest-first — ordering by how many words a synset holds
+  opens अश्वः on the chess piece. **The data is deliberately not committed**: the
+  site measured 1,017 MB with it against a 1 GB limit, so `PENDING.md` carries
+  the hosting decision, and until it is made the popover simply renders without
+  the section.
 
 ## Round 4 (10 Aug 2026) — Kosha full-corpus build, TTS architecture doc, Mahabharata (Kannada), Yukti Mallika, Svapna-Vrindavanakhyana, Sumadhva Vijaya (audio), Harikathamrutasara
 

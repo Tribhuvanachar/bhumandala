@@ -149,6 +149,43 @@ button.dge-si-go {
   font-family: inherit;
 }
 
+/* WordNet senses. A definition, a usage sentence, the rest of the synset and
+   the class it falls under — the one place in the reader where a Sanskrit word
+   is explained in Sanskrit, so the definition is set in the Sanskrit face at
+   reading size and everything else defers to it. The source is credited in the
+   heading: IndoWordNet's licence asks for attribution wherever it is shown. */
+.dge-si-src {
+  margin-left: 8px; font-size: 10px; letter-spacing: .04em;
+  color: var(--muted-text, #8B7A63);
+}
+.dge-si-wn { margin-top: 7px; }
+.dge-si-wn + .dge-si-wn {
+  padding-top: 7px;
+  border-top: 1px solid var(--card-border, rgba(232, 178, 77, .12));
+}
+.dge-si-def {
+  font-family: var(--font-sanskrit, serif);
+  font-size: 14px; line-height: 1.65;
+  color: var(--body-text, #E8DCC8);
+}
+.dge-si-eg {
+  font-family: var(--font-sanskrit, serif);
+  font-size: 12.5px; line-height: 1.6; margin-top: 2px;
+  color: var(--muted-text, #8B7A63);
+}
+.dge-si-wn-meta {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px;
+  margin-top: 3px;
+}
+.dge-si-wn-lab {
+  font-size: 10px; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--muted-text, #8B7A63);
+}
+.dge-si-kn {
+  font-size: 12.5px;
+  color: var(--muted-text, #8B7A63);
+}
+
 /* Related words. Each group carries the English sense that binds it, because
    inverting a bilingual dictionary gives words that share a meaning and words
    that merely shared a gloss — showing the sense lets the reader tell which. */
