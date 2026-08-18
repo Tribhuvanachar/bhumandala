@@ -1,5 +1,11 @@
 __pycache__/
 
+# Sayana/Smriti importer scratch: the HTTP response cache that lets a timed-out
+# run resume, and the standalone JSONL dump it writes beside the merged data.
+tools/sayana_smriti/.httpcache/
+tools/sayana_smriti/dump/
+tools/sayana_smriti/*.log
+
 # Firebase tooling: installed locally, never committed.
 node_modules/
 dge/firebase/**/node_modules/

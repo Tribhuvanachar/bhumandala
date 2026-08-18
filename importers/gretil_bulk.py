@@ -1,0 +1,266 @@
+#!/usr/bin/env python3
+"""Registry-driven GRETIL importer for the Purāṇa and Vedāṅga gaps.
+
+Separate from importers/gretil.py (verse corpora, one marker convention) and
+importers/darshana_gretil.py (śāstra prose, heading-segmented) because these
+texts share neither property: 34 texts across 13 mutually incompatible marker
+grammars — prefix vs suffix, '.' vs ',' separators, and //, ||, (), <> or bare
+delimiters. The grammar is therefore data, not code: importers/gretil_bulk.json
+names a pattern per text and this module applies it.
+
+Run:  python importers/gretil_bulk.py --list
+      python importers/gretil_bulk.py --id vishnu_purana --dry-run
+      python importers/dispatch.py gretil:vishnu_purana
+"""
+
+import argparse
+import json
+import os
+import re
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from common import http_get, to_text, iast_to_dev, data_base  # noqa: E402
+
+BASE = "https://gretil.sub.uni-goettingen.de/gretil/"
+HERE = os.path.dirname(os.path.abspath(__file__))
+REGISTRY = os.path.join(HERE, "gretil_bulk.json")
+
+# Editorial apparatus that must never reach the text. Each was observed in a
+# real file: chapter callouts and line-class prefixes in the Agni-Purāṇa, the
+# ritual-context tag in the Āśvalāyana-Śrautasūtra, GRETIL's own analytic
+# markers, and print-page rules glued onto a verse line.
+NOISE = [
+    (re.compile(r"%\s*chapter\s*\{\d+\}"), " "),      # AP chapter callout
+    (re.compile(r"^:\S+\s*", re.M), ""),               # AP line-class prefix
+    (re.compile(r"\((?:darśa|paurṇamāsa|soma)[^)]*\)"), " "),  # AsvSS ritual tag
+    (re.compile(r"[\\^~]"), ""),                       # GRETIL analytic markers
+    (re.compile(r"_{3,}"), " "),                       # print-page rule
+    (re.compile(r"\[[^\]]*\[[^\]]*\]"), " "),          # ApDS grammatical gloss
+]
+HEADER_END = re.compile(r"^\s*(?:TEXT\s*$|##\s*Revisions?:|\*{3,}\s*$|-{5,}\s*$)", re.M)
+ATTRIB = re.compile(
+    r"^(?:##\s*)?(?:Data entry|Contribution|Input by|Source|Publisher|Licence|License|"
+    r"Based on|Contributed by|Date of this version|Description)\s*:?.*$", re.I | re.M)
+
+
+def load_registry(path=REGISTRY):
+    with open(path, encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def split_header(raw):
+    match = HEADER_END.search(raw)
+    head, body = (raw[:match.start()], raw[match.end():]) if match else (raw[:3000], raw)
+    if not body.strip():
+        head, body = "", raw
+    attribution = " | ".join(
+        re.sub(r"\s+", " ", line).strip() for line in ATTRIB.findall(head)
+    )
+    return attribution[:1500], body
+
+
+def clean(text):
+    for pattern, replacement in NOISE:
+        text = pattern.sub(replacement, text)
+    # Sansknet files mark word boundaries with dots rather than spaces; keep the
+    # dots (they are meaningful for compounds) but never let them run together
+    # with the surrounding whitespace into unreadable blocks.
+    text = re.sub(r"\s+", " ", text)
+    return text.strip(" /|<>-")
+
+
+def parse(raw, spec, patterns):
+    """Split a GRETIL file into (ref_tuple, text) units using this text's marker."""
+    attribution, body = split_header(raw)
+    if "<" in body[:2000] and "htm" in spec.get("_ext", "htm"):
+        body = to_text(body)
+
+    pattern = patterns[spec["marker"]]
+    regex = re.compile(pattern["regex"], re.M | re.UNICODE | re.IGNORECASE)
+    matches = list(regex.finditer(body))
+    if not matches:
+        return [], attribution, 0
+
+    prefix_style = pattern["regex"].lstrip("^").startswith(("\\(", "<", "(?P<sig>")) or \
+        pattern["regex"].startswith("^")
+    units, seen_span = [], 0
+    for index, match in enumerate(matches):
+        groups = match.groupdict()
+        refs = tuple(v for k, v in sorted(groups.items())
+                     if k.startswith("ref") and v is not None)
+        if prefix_style:
+            start = match.end()
+            end = matches[index + 1].start() if index + 1 < len(matches) else len(body)
+        else:
+            start = seen_span
+            end = match.start()
+            seen_span = match.end()
+        text = clean(body[start:end])
+        if len(text) < 3:
+            continue
+        units.append((refs, groups.get("pada"), text))
+    return units, attribution, len(matches)
+
+
+def group_items(units, spec):
+    """Fold units into DGE items — one item per first-level division."""
+    unit_name = spec.get("unit", "section")
+    schema = spec["schema"]
+    buckets = {}
+    order = []
+    for refs, pada, text in units:
+        if not refs:
+            continue
+        top = refs[0] if len(refs) > 1 else "1"
+        verse = refs[-1]
+        key = str(top)
+        if key not in buckets:
+            buckets[key] = []
+            order.append(key)
+        number = f"{verse}{pada}" if pada else verse
+        buckets[key].append({"number": number, "sanskrit_text": iast_to_dev(text),
+                             "iast_text": text})
+
+    items = []
+    for key in order:
+        ident = re.sub(r"[^0-9A-Za-z]+", "_", key)
+        if ident.isdigit():
+            ident = f"{int(ident):02d}"
+        item_id = f"{unit_name}_{ident}"
+        reference = f"{spec['name']}, {unit_name} {key}"
+        if schema in ("itihasa_purana_text", "smriti_dharmashastra_text"):
+            items.append({"id": item_id, "reference": reference, "shlokas": buckets[key]})
+        else:
+            joined = "\n".join(v["iast_text"] for v in buckets[key])
+            items.append({"id": item_id, "reference": reference,
+                          "sanskrit_text": iast_to_dev(joined), "iast_text": joined,
+                          "artha": "", "notes": "", "tags": [], "references": [],
+                          "audio": []})
+    return items
+
+
+def urls_for(spec, registry):
+    out = []
+    if spec.get("tei"):
+        out.append((BASE + registry["tei_plaintext"] + spec["tei"] + ".txt", "txt"))
+    for legacy in spec.get("legacy", []) + spec.get("legacy_extra", []):
+        out.append((BASE + legacy, "htm"))
+    return out
+
+
+def write(spec, items, attribution, source_urls, dry_run):
+    payload = {
+        "schema": spec["schema"],
+        "default_author": spec.get("author", ""),
+        "source_url": source_urls[0] if source_urls else "",
+        "source_note": build_note(spec, attribution),
+        "items": items,
+    }
+    folder = os.path.join(data_base(), spec["target"])
+    verses = sum(len(i.get("shlokas", [])) for i in items) or len(items)
+    print(f"  {spec['id']:<32} {len(items):>4} items / {verses:>6} units -> {spec['target']}"
+          + ("   [dry run]" if dry_run else ""))
+    if dry_run:
+        return payload
+    os.makedirs(folder, exist_ok=True)
+    with open(os.path.join(folder, "data.json"), "w", encoding="utf-8") as handle:
+        json.dump(payload, handle, ensure_ascii=False, indent=1)
+        handle.write("\n")
+    return payload
+
+
+def build_note(spec, attribution):
+    parts = ["GRETIL."]
+    if spec.get("licence") == "cc-by-nc-sa-4.0":
+        parts.append("Distributed under CC BY-NC-SA 4.0 by GRETIL.")
+    else:
+        parts.append("THIS GRETIL TEXT FILE IS FOR REFERENCE PURPOSES ONLY! "
+                     "COPYRIGHT AND TERMS OF USAGE AS FOR SOURCE FILE.")
+    for key in ("source_edition", "extra_copyright", "scope", "quality", "note"):
+        if spec.get(key):
+            parts.append(f"{key}: {spec[key]}")
+    if attribution:
+        parts.append(attribution)
+    return " ".join(parts)[:2000]
+
+
+def run(text_id, dry_run=False, registry=None):
+    registry = registry or load_registry()
+    specs = {t["id"]: t for t in registry["texts"]}
+    if text_id not in specs:
+        raise SystemExit(f"unknown gretil_bulk id: {text_id}")
+    spec = specs[text_id]
+
+    chunks = []
+    used = []
+    for url, ext in urls_for(spec, registry):
+        try:
+            chunks.append((http_get(url), ext))
+            used.append(url)
+        except Exception as exc:                      # noqa: BLE001
+            print(f"  ! {url}: {exc}", file=sys.stderr)
+    if not chunks:
+        raise SystemExit(f"{text_id}: nothing fetched")
+
+    all_units, attribution, matched = [], "", 0
+    for raw, ext in chunks:
+        spec["_ext"] = ext
+        units, attr, count = parse(raw, spec, registry["marker_patterns"])
+        all_units += units
+        matched += count
+        attribution = attribution or attr
+
+    if not all_units:
+        raise SystemExit(f"{text_id}: marker '{spec['marker']}' matched nothing — "
+                         "the file's format has changed; re-check gretil_bulk.json")
+    items = group_items(all_units, spec)
+    write(spec, items, attribution, used, dry_run)
+    return items
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--id", default="")
+    parser.add_argument("--all", action="store_true", help="every CC-licensed text")
+    parser.add_argument("--group", default="", help="only ids whose target starts with this")
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--list", action="store_true")
+    args = parser.parse_args(argv)
+
+    registry = load_registry()
+    texts = registry["texts"]
+
+    if args.list:
+        for spec in texts:
+            flag = "" if spec.get("licence") == "cc-by-nc-sa-4.0" else "  [reference-only]"
+            scope = "" if spec.get("complete") else f"  (partial: {spec.get('scope','')[:60]})"
+            print(f"{spec['id']:<32} {spec['target']}{flag}{scope}")
+        missing = registry["not_in_gretil"]
+        print(f"\nnot in GRETIL: " +
+              ", ".join(f"{k} ({len(v)})" for k, v in missing.items() if k != '_note'))
+        return 0
+
+    selected = [t for t in texts if
+                (args.id and t["id"] == args.id) or
+                (args.group and t["target"].startswith(args.group)) or
+                (args.all and t.get("licence") == "cc-by-nc-sa-4.0")]
+    if not selected:
+        print("nothing selected; use --id, --group or --all", file=sys.stderr)
+        return 2
+
+    failures = 0
+    for spec in selected:
+        try:
+            run(spec["id"], dry_run=args.dry_run, registry=registry)
+        except SystemExit as exc:
+            print(f"  FAILED {spec['id']}: {exc}", file=sys.stderr)
+            failures += 1
+    print(f"\n{len(selected) - failures}/{len(selected)} succeeded")
+    return 1 if failures else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

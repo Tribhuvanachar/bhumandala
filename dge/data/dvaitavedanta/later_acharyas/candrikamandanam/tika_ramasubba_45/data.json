@@ -1,0 +1,35 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/18766/18711/sharas/cathar/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_19081",
+   "reference": "श्रीसत्यध्यानतीर्थ: > चंद्रिकामन्डनम् > आकाशाधिकरणम् > ॐ आकाशस्तल्लिंगात् ॐ",
+   "section": "आकाशाधिकरणम्",
+   "unit_title": "ॐ आकाशस्तल्लिंगात् ॐ",
+   "sanskrit_text": "रामसुब्ब_४५\n(रा.) किं चाव्यवहितपूर्वाधिकरणेनोत्तराधिकरणस्य संगतिर्वक्तव्या तथैव पूर्वतन्त्रे दर्शनात् । इह तथानुक्त्वा एकान्तरितेनानन्दमयाधिकरणेनास्य संगत्युक्तिरयुक्तेति यत्,\nखण्डनं_४५\n(खं) तत्तुच्छम्, चन्द्रिकाग्रन्थादर्शनमूलत्वादेतच्छङ्कयाः । अनन्तरसंगतिस्त्वभ्यधिकां शङ्कां कृत्वा पूर्वन्याय एवातिदिश्यत इति आतिदेशिकी\" इति अव्यवहितपूर्वाधिकरणेन संगतेरुक्तत्वात् । अव्यवहितपूर्वाधिकरणेनैव संगतिर्वक्तव्येति नियमाभावाच्च । पूर्वतन्त्रव्याख्यानकृता तया प्रदर्शनस्य नियामकत्वासम्भवात् । कम्पनाधिकरणे वेदान्तकल्पतरौ \"अस्यानु प्रसक्तेनापशूद विचारेण न संगतिरिति व्यवहितेनोच्यते\" इति व्यवहिताधिकरणेन संगतेरुक्तत्वाच्च ॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीसत्यध्यानतीर्थ:",
+    "चंद्रिकामन्डनम्",
+    "आकाशाधिकरणम्",
+    "ॐ आकाशस्तल्लिंगात् ॐ"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/18774/18711/sharas/cathar/aakash",
+    "content_id": 18774,
+    "layer": "रामसुब्ब_ ४५",
+    "anchor": "article19081",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "रामसुब्ब_ ४५"
+  }
+ ]
+}

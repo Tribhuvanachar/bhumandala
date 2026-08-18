@@ -1,0 +1,35 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_19183",
+   "reference": "श्रीसत्यात्मतीर्थ: > कर्मविजयः > युक्त्युपेतविमर्शः > पृष्टेनागम एवादौ वक्तव्यस्साध्यसिद्धय",
+   "section": "युक्त्युपेतविमर्शः",
+   "unit_title": "पृष्टेनागम एवादौ वक्तव्यस्साध्यसिद्धय",
+   "sanskrit_text": "युक्तिरिति वाचोयुक्तिरिति पक्षनिरास:\n\"युक्तिरिति वाचोयुक्तिः । कयापि वाचोयुक्त्याऽऽगमेन वा तर्केण वा न तत् साधयितुं शक्यमिति तृतीयः पक्षोऽपि न कक्षीकरणयोग्यः । अत्रापि वाच इत्यध्याहारहारो गलमलङ्करोति तेषाम् । एतावताप्यनुपादेयमिति परमसाध्याध्याहारस्त्वसाध्यपरिहारः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीसत्यात्मतीर्थ:",
+    "कर्मविजयः",
+    "युक्त्युपेतविमर्शः",
+    "पृष्टेनागम एवादौ वक्तव्यस्साध्यसिद्धय"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/19175/19173/sharas/karama/yakata",
+    "content_id": 19175,
+    "layer": "युक्तिरिति वाचोयुक्तिरिति पक्षनिरास",
+    "anchor": "article19183",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "युक्तिरिति वाचोयुक्तिरिति पक्षनिरास"
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_19183",
+   "reference": "श्रीसत्यात्मतीर्थ: > कर्मविजयः > युक्त्युपेतविमर्शः > पृष्टेनागम एवादौ वक्तव्यस्साध्यसिद्धय",
+   "section": "युक्त्युपेतविमर्शः",
+   "unit_title": "पृष्टेनागम एवादौ वक्तव्यस्साध्यसिद्धय",
+   "sanskrit_text": "न तन् मनसि लगति इति विकल्पनिरास:\nनापि \" न तद्युक्तमित्यस्य न तन्मनसि लगतीत्यर्थो मनसि लगति । युक्तिर्योगस्सम्बन्धो लगनमित्येव लभ्यते । न तु मनसीति । योग्यतयाऽध्याहार इति न व्याहर्तव्यम् । कृतमध्याहारमध्यविहारेण । न तच्छोभनमित्येव शोभनम् । नासावार्थिकार्थ इति व्यजिज्ञपाम ।\n……………………………………………………………………………………………………………………………………………………………\n१ पर्यायौ\n…………………………………………………………………………………………………………………………………………………………..",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीसत्यात्मतीर्थ:",
+    "कर्मविजयः",
+    "युक्त्युपेतविमर्शः",
+    "पृष्टेनागम एवादौ वक्तव्यस्साध्यसिद्धय"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/19175/19173/sharas/karama/yakata",
+    "content_id": 19175,
+    "layer": "न तन् मनसि लगति इति विकल्पनिरास",
+    "anchor": "article19183",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "न तन् मनसि लगति इति विकल्पनिरास"
+  }
+ ]
+}

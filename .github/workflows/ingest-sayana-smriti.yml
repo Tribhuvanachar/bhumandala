@@ -1,0 +1,114 @@
+name: Ingest — Sāyaṇa Bhāṣya & Smṛti commentaries
+
+# Runs the two importers in this package inside Actions (which has open egress;
+# the Cowork sandbox does not) and opens a PR with the result. Never pushes to
+# main directly — every commentary layer lands as a reviewable diff.
+#
+# Copy this file to .github/workflows/ in the bhumandala repo, and the rest of
+# the package to tools/sayana_smriti/.
+
+on:
+  workflow_dispatch:
+    inputs:
+      job:
+        description: "Which importer to run"
+        type: choice
+        default: sayana
+        options: [sayana, smriti, both]
+      mandalas:
+        description: "Sāyaṇa: maṇḍalas to fetch, e.g. '1 2 3' (blank = all ten)"
+        default: ""
+      limit:
+        description: "Sāyaṇa: stop after N mantras (0 = no cap). Use 50 for a smoke test."
+        default: "0"
+      only:
+        description: "Smṛti: slug filter, e.g. manu_smriti (blank = all)"
+        default: ""
+      include_encumbered:
+        description: "Smṛti: also import layers flagged rights-encumbered"
+        type: boolean
+        default: false
+      dry_run:
+        description: "Produce the dump but do not modify dge/data"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350          # ~10.5k pages at 1.2 s ≈ 3.5 h for a full Sāyaṇa run
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r tools/sayana_smriti/requirements.txt
+
+      - name: Unit tests (parsers)
+        run: python tools/sayana_smriti/tests/test_parsers.py
+
+      # A partial run is resumable: the HTTP cache is keyed by URL, so a re-run
+      # after a timeout picks up where it stopped instead of refetching 10k pages.
+      - name: Restore HTTP cache
+        uses: actions/cache@v4
+        with:
+          path: tools/sayana_smriti/.httpcache
+          key: sayana-httpcache-${{ github.run_id }}
+          restore-keys: sayana-httpcache-
+
+      - name: Import Sāyaṇa Bhāṣya (Rigveda)
+        if: inputs.job == 'sayana' || inputs.job == 'both'
+        working-directory: tools/sayana_smriti
+        run: |
+          set -o pipefail
+          ARGS="--dge-root ${{ github.workspace }}/dge --limit ${{ inputs.limit }}"
+          for m in ${{ inputs.mandalas }}; do ARGS="$ARGS --mandala $m"; done
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          python import_sayana_rigveda.py $ARGS 2>&1 | tee sayana.log
+
+      - name: Import Smṛti commentaries
+        if: inputs.job == 'smriti' || inputs.job == 'both'
+        working-directory: tools/sayana_smriti
+        run: |
+          set -o pipefail
+          ARGS="--dge-root ${{ github.workspace }}/dge --discover-gdocs"
+          if [ -n "${{ inputs.only }}" ]; then ARGS="$ARGS --only ${{ inputs.only }}"; fi
+          if [ "${{ inputs.include_encumbered }}" = "true" ]; then ARGS="$ARGS --include-encumbered"; fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          python import_smriti.py $ARGS 2>&1 | tee smriti.log
+
+      - name: Validate DGE data
+        if: inputs.dry_run != true
+        run: python tools/validate_data.py || echo "::warning::validate_data.py reported issues — check before merging"
+
+      - name: Rebuild search index
+        if: inputs.dry_run != true
+        run: python dge/build_search_index.py || echo "::warning::search index rebuild failed"
+
+      - name: Upload dump + counts as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sayana-smriti-dump
+          path: |
+            tools/sayana_smriti/dump/**
+            tools/sayana_smriti/*.log
+          retention-days: 30
+
+      - name: Open pull request
+        if: inputs.dry_run != true
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: ingest/sayana-smriti-${{ github.run_id }}
+          title: "Ingest: Sāyaṇa Bhāṣya / Smṛti commentaries (run ${{ github.run_id }})"
+          body-path: tools/sayana_smriti/dump/COUNTS_sayana.json
+          add-paths: |
+            dge/data/**
+            dge/search_index/**
+          commit-message: "data: Sāyaṇa Bhāṣya + Smṛti commentary layers"

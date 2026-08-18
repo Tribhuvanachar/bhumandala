@@ -1,0 +1,35 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/12781/12778/sharav/bhatha/bhatha/bhatha",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_12846",
+   "reference": "श्रीव्यासतीर्थ: > भेदोज्जीवनम् > (२८) भेदोज्जीवनम् > यद्वा, तत्त्वमसीति श्रुत्यर्थापरिज्ञानादद्वैतप्राप्तिरस्तु",
+   "section": "(२८) भेदोज्जीवनम्",
+   "unit_title": "यद्वा, तत्त्वमसीति श्रुत्यर्थापरिज्ञानादद्वैतप्राप्तिरस्तु",
+   "sanskrit_text": "(२८)भेदचन्द्रिका\n॥ श्रुत्यन्तरेणेति ॥ इष्टापूर्तं मन्यमाना वरिष्ठं नान्यच्छ्रेयो वेदयन्ते प्रमूढा इत्यादिनेत्यर्थः ॥ मुक्त्यनन्तरमिति ॥ आविद्यकस्य मुक्तावनुवृत्त्ययोगादित्यर्थः ॥ सुलभमेवेति ॥ धर्मप्रतियोगिनोर्योग्यत्वादित्यर्थः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीव्यासतीर्थ:",
+    "भेदोज्जीवनम्",
+    "(२८) भेदोज्जीवनम्",
+    "यद्वा, तत्त्वमसीति श्रुत्यर्थापरिज्ञानादद्वैतप्राप्तिरस्तु"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/12808/12778/sharav/bhatha/bhatha/bhatha",
+    "content_id": 12808,
+    "layer": "( २८) भेदचन्द्रिका",
+    "anchor": "article12846",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "( २८) भेदचन्द्रिका"
+  }
+ ]
+}

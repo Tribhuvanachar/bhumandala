@@ -27,6 +27,7 @@ on:
         type: choice
         default: tarkasangraha_dipika
         options:
+          - all
           - tarkasangraha_dipika
           - nyayasutra_bhashya
           - nyayasutra_tatparyatika
@@ -84,7 +85,12 @@ jobs:
         if: ${{ inputs.action != 'scaffold' && !fromJSON(inputs.dry_run) }}
         env:
           TEXT_ID: ${{ inputs.text }}
-        run: python importers/dispatch.py "$TEXT_ID"
+        run: |
+          if [ "$TEXT_ID" = "all" ]; then
+            python importers/dispatch.py darshana_all
+          else
+            python importers/dispatch.py "$TEXT_ID"
+          fi
 
       - name: Ingest — dry run (list targets only)
         if: ${{ inputs.action != 'scaffold' && fromJSON(inputs.dry_run) }}
@@ -96,6 +102,7 @@ jobs:
           python tools/validate_data.py || true
           python tools/darshanas/scaffold_darshanas.py --data dge/data --no-catalog >/dev/null
           python tools/darshanas/scaffold_darshanas.py --data dge/data
+          python tools/audit_library.py --data dge/data --fix
           python tools/gen_library_status.py
 
       - name: Report
@@ -120,7 +127,7 @@ jobs:
               print("\n| Populated layer | Items |")
               print("|---|--:|")
               for l in sorted(filled, key=lambda x: -x["items"]):
-                  print(f"| `{l['path'].replace('darshanas/', '')}` | {l['items']:,} |")
+                  print(f"| `{l['path'].replace('darshana/', '')}` | {l['items']:,} |")
           PY
           du -sh dge/data/darshana || true
 
