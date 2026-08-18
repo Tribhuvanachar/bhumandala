@@ -1,7 +1,7 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1647,
+  "leaves": 1651,
   "loaded": 920,
   "items": 353850
  },
@@ -27,7 +27,7 @@
    "items": 20210
   },
   "itihasa": {
-   "total": 89,
+   "total": 91,
    "loaded": 83,
    "items": 213039
   },
@@ -35,6 +35,11 @@
    "total": 30,
    "loaded": 4,
    "items": 5434
+  },
+  "misc": {
+   "total": 2,
+   "loaded": 0,
+   "items": 0
   },
   "purana": {
    "total": 92,
@@ -1319,6 +1324,8 @@
   "itihasa/mahabharata_kannada/udyoga_parva": 6999,
   "itihasa/mahabharata_kannada/vana_parva": 11261,
   "itihasa/mahabharata_kannada/virata_parva": 3660,
+  "itihasa/ramayana/adbhuta_ramayana/mula": 0,
+  "itihasa/ramayana/ananda_ramayana/mula": 0,
   "itihasa/ramayana/aranya_kanda/mula": 2060,
   "itihasa/ramayana/aranya_kanda/saartha": 2222,
   "itihasa/ramayana/ayodhya_kanda/mula": 3160,
@@ -1362,6 +1369,8 @@
   "kavya_alankara/sumadhva_vijaya/sarga_7": 0,
   "kavya_alankara/sumadhva_vijaya/sarga_8": 0,
   "kavya_alankara/sumadhva_vijaya/sarga_9": 0,
+  "misc/ajaya_vijayendra": 0,
+  "misc/satyadhyana_tirtha_civil_suit": 0,
   "purana/agni_purana": 0,
   "purana/bhagavata_purana/skandha_01": 813,
   "purana/bhagavata_purana/skandha_02": 391,
