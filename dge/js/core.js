@@ -293,8 +293,12 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
     geldner: 'Geldner (German Translation)',
     grassmann: 'Grassmann (German Translation)',
     elizarenkova: 'Elizarenkova (Russian Translation)',
+    // Traditional bhashya layers (see tools/sayana_smriti/). Unlike the six
+    // above, these are commentary rather than translation -- Sayana is the
+    // first traditional commentator to enter the Vedic corpus.
     sayana: 'सायणभाष्यम् — Sāyaṇa (Ṛgveda-bhāṣya)',
-    wilson: 'Wilson (English Translation, after Sāyaṇa)'
+    wilson: 'Wilson (English Translation, after Sāyaṇa)',
+    artha: 'Translation'
   };
 
   // itihasa_purana_text schema (see dge/data/schemas.json): each item is a
@@ -310,6 +314,7 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
     const shlokas = {};
     const availableCommentaries = {};
     let n = 0;
+    let shlokasWithCommentaries = 0;
     data.items.forEach(chapter => {
       (chapter.shlokas || []).forEach(v => {
         n++;
@@ -321,17 +326,30 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         const commentaries = {};
         if (v.artha) {
           commentaries.artha = v.artha;
-          availableCommentaries.artha = 'Translation';
+          availableCommentaries.artha = KNOWN_COMMENTARY_LABELS.artha || 'Translation';
         }
         (v.bhashya || []).forEach(b => {
           if (!b || !b.text) return;
           // Key derived from the commentator string rather than hard-coded,
           // so adding Kulluka or Govindaraja later needs no change here.
-          const key = (b.commentator || 'bhashya')
-            .toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+          // Fold IAST diacritics FIRST -- without this "Medhātithi (Manubhāṣya)"
+          // slugs to "medh_tithi_manubh_ya", because every accented letter falls
+          // outside [a-z0-9] and is treated as a separator. NFD strips the
+          // combining marks; the explicit pairs below catch the precomposed
+          // Indological letters (ṛ ṣ ṭ ḍ ṇ ṃ ḥ) that have no ASCII decomposition.
+          const key = String(b.commentator || 'bhashya')
+            .toLowerCase()
+            .normalize('NFD').replace(/[̀-ͯ]/g, '')
+            .replace(/[āàáâä]/g, 'a').replace(/[īìíîï]/g, 'i').replace(/[ūùúûü]/g, 'u')
+            .replace(/[ṛṝ]/g, 'r').replace(/[ḷḹ]/g, 'l').replace(/[ṃṁ]/g, 'm')
+            .replace(/[ḥ]/g, 'h').replace(/[ñṅṇ]/g, 'n').replace(/[śṣ]/g, 's')
+            .replace(/[ṭ]/g, 't').replace(/[ḍ]/g, 'd')
+            .replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '') || 'bhashya';
           commentaries[key] = b.text;
-          availableCommentaries[key] = KNOWN_COMMENTARY_LABELS[key] || b.commentator || key;
+          availableCommentaries[key] = b.commentator || KNOWN_COMMENTARY_LABELS[key] ||
+            (key.charAt(0).toUpperCase() + key.slice(1));
         });
+        if (Object.keys(commentaries).length) shlokasWithCommentaries++;
         shlokas[n] = {
           sa: dgeSanitizeVedicAccents(v.sanskrit_text || v.sa || ''),
           vedicId: chapter.reference ? (chapter.reference + (v.number != null ? ' · ' + v.number : '')) : '',
@@ -340,7 +358,9 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
       });
     });
     console.log(`[Data] Normalized "${granthaTitle || 'untitled'}" (itihasa_purana_text): ` +
-      `${data.items.length} chapter(s), ${n} shloka(s) total.`);
+      `${data.items.length} chapter(s), ${n} shloka(s) total, ` +
+      `${shlokasWithCommentaries} with commentaries, ` +
+      `commentary keys found: ${JSON.stringify(Object.keys(availableCommentaries))}`);
     return {
       metadata: {
         title: granthaTitle || data.schema || 'Untitled',

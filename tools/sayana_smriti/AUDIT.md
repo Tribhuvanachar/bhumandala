@@ -76,22 +76,30 @@ wired into the smṛti importer. Two different Sāyaṇa layers, one import run.
 
 ## 2. Do Manu, Parāśara and the other Smṛtis have their commentaries?
 
-**No — and most of them barely have their mūla text either.** This section is closer
-to empty than it looks from the folder listing:
+**Correction, issued after the first audit pass:** I originally counted *items*
+in these files — which are adhyāyas, not verses — and reported the mūla as
+missing. It isn't. Count the ślokas nested inside `items[].shlokas[]` and five
+smṛtis turn out to hold **complete mūla Sanskrit, 7,444 verses in all**. What is
+missing is every layer on top of it.
 
-| Folder | Items | Should be | Commentaries |
-|---|---|---|---|
-| `manu_smriti` | 12 | ~2,685 verses | 0 |
-| `parashara_smriti` | 12 | ~592 verses | 0 |
-| `yajnavalkya_smriti` | 3 | ~1,010 verses | 0 |
-| `vishnu_smriti` | 97 | 100 chapters | 0 |
-| `narada_smriti` | 19 | ~1,028 verses | 0 |
-| `angiras`, `apastamba`, `atri`, `brihaspati`, `daksha`, `gautama`, `harita`, `likhita`, `pracetas`, `samvarta`, `shankha`, `shatatapa`, `ushanas`, `yama` | **0** | — | 0 |
-| `mitakshara`, `dayabhaga`, `dharma_sindhu`, `nirnaya_sindhu`, `smriti_chandrika`, `kalpataru`, `chaturvarga_chintamani` | **0** | — | 0 |
+| Folder | Adhyāyas | Verses | With Sanskrit | Translation | Commentary |
+|---|---|---|---|---|---|
+| `manu_smriti` | 12 | **2,685** | 2,685 | 0 | 0 |
+| `vishnu_smriti` | 97 | **2,363** | 2,363 | 0 | 0 |
+| `yajnavalkya_smriti` | 3 | **1,011** | 1,011 | 0 | 0 |
+| `narada_smriti` | 19 | **805** | 805 | 0 | 0 |
+| `parashara_smriti` | 12 | **580** | 580 | 0 | 0 |
+| `angiras`, `apastamba`, `atri`, `brihaspati`, `daksha`, `gautama`, `harita`, `likhita`, `pracetas`, `samvarta`, `shankha`, `shatatapa`, `ushanas`, `yama` | 0 | **0** | — | — | — |
+| `mitakshara`, `dayabhaga`, `dharma_sindhu`, `nirnaya_sindhu`, `smriti_chandrika`, `kalpataru`, `chaturvarga_chintamani` | 0 | **0** | — | — | — |
 
-The 12 Manu items are whole adhyāyas holding a handful of ślokas each — a scaffold
-someone laid down, not a text. No `bhashya[]` array is populated anywhere in
-`smriti_dharma/`, though the schema has supported it from the start.
+So the smṛti job splits in two. For those five: **translation and commentary
+only — do not touch the mūla.** For the other twenty-one: everything, from
+nothing. `import_smriti.py` writes through `merge_into_existing()`, which never
+replaces an existing `sanskrit_text` and refuses to write at all if a grantha's
+verse count would drop.
+
+Not one `bhashya[]` array is populated anywhere in `smriti_dharma/`, and not one
+`artha`, though the schema has supported both from the start.
 
 ### What the importer can fill, and from where
 
