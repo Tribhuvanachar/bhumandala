@@ -58,6 +58,7 @@ from dv_parse import (  # noqa: E402
 STATUS_FILENAME = "_extract_status.json"
 MIN_DEVANAGARI_RATIO = 0.55
 MIN_ITEM_CHARS = 4
+PROGRESS_EVERY = 25
 
 
 # --------------------------------------------------------------------------- #
@@ -579,14 +580,25 @@ def render_summary(status, selected_keys):
 # --------------------------------------------------------------------------- #
 
 def select_granthas(config, sections_filter, granthas_filter):
+    """Pick the granthas to crawl.
+
+    Naming a grantha explicitly overrides its `enabled: false`. That flag means
+    "not part of a routine sweep" — nyaya_sudha is held out of `scope=all`
+    because it alone needs some 46 hours — and asking for it by name is not a
+    routine sweep. Without this the only way to crawl it would be to edit the
+    config, run, and remember to put the flag back.
+    """
     selected = []
     for section in config["sections"]:
-        if section.get("enabled") is False:
+        named = set(granthas_filter or ())
+        if section.get("enabled") is False and not named:
             continue
         if sections_filter and section["slug"] not in sections_filter:
             continue
         for grantha in section["granthas"]:
-            if grantha.get("enabled") is False or not grantha.get("seed"):
+            if not grantha.get("seed"):
+                continue
+            if grantha.get("enabled") is False and grantha.get("slug") not in named:
                 continue
             if granthas_filter and grantha.get("slug") not in granthas_filter:
                 continue
@@ -773,6 +785,17 @@ def main(argv=None):
             index += 1
             if args.limit_per_grantha and index > args.limit_per_grantha:
                 break
+            # A long crawl is otherwise silent until it ends, and Actions
+            # serves no log at all for a running job — so nyaya_sudha's first
+            # pass could not be told apart from a hang. Say where it is, and at
+            # what rate, often enough to be useful and rarely enough to stay
+            # readable.
+            if index > 1 and index % PROGRESS_EVERY == 1:
+                spent = time.time() - started
+                rate = spent / max(index - 1, 1)
+                left = (len(queue) - index + 1) * rate
+                log(f"      … {index - 1}/{len(queue)} leaves · "
+                    f"{rate:.1f}s each · ~{left / 3600:.1f}h to go")
             if content_id == seed_record["content_id"]:
                 # Already fetched during discovery — don't pay for it twice.
                 record = seed_record
