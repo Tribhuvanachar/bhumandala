@@ -1,0 +1,35 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/12781/12778/sharav/bhatha/bhatha/bhatha",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_12824",
+   "reference": "श्रीव्यासतीर्थ: > भेदोज्जीवनम् > (६) भेदोज्जीवनम् > किञ्च विमतानि शरीराणि देवदत्तस्यैव भोगायतनानि शरीरत्वाद्देवदत्तशरीरवत्",
+   "section": "(६) भेदोज्जीवनम्",
+   "unit_title": "किञ्च विमतानि शरीराणि देवदत्तस्यैव भोगायतनानि शरीरत्वाद्देवदत्तशरीरवत्",
+   "sanskrit_text": "(६)भेदचिन्तारत्नम्\nविमतानीति ॥ यज्ञदत्तादिशरीराणीत्यर्थः । पक्षधर्मताबलादभेदसिद्धिरिति भावः । देवदत्तस्य परकायप्रवेशेनार्थान्तरवारणायैवकारः ॥ न बाधो नापि व्यभिचार इति ॥ पक्षत्वे बाधो न चेद्व्यभिचारश्च नेत्यर्थः । एवकारप्रयोगेऽप्यनुमानं दूषयति — नन्विति ॥ आत्मान्तरसिद्धिरिति ॥ अन्यथा स्वतो व्यावृत्ततद्व्यावर्तकैवकारायोगादिति भावः । निषेधप्राप्तिरेव तन्त्रं न स्वरूपसत्त्वमिति भावः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीव्यासतीर्थ:",
+    "भेदोज्जीवनम्",
+    "(६) भेदोज्जीवनम्",
+    "किञ्च विमतानि शरीराणि देवदत्तस्यैव भोगायतनानि शरीरत्वाद्देवदत्तशरीरवत्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/12786/12778/sharav/bhatha/bhatha/bhatha",
+    "content_id": 12786,
+    "layer": "( ६) भेदचिन्तारत्नम्",
+    "anchor": "article12824",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "( ६) भेदचिन्तारत्नम्"
+  }
+ ]
+}

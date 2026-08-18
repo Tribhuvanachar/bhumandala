@@ -1,0 +1,35 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/12781/12778/sharav/bhatha/bhatha/bhatha",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_12837",
+   "reference": "श्रीव्यासतीर्थ: > भेदोज्जीवनम् > (१९) भेदोज्जीवनम् > अपि च पृथिवीत्वं ..",
+   "section": "(१९) भेदोज्जीवनम्",
+   "unit_title": "अपि च पृथिवीत्वं ..",
+   "sanskrit_text": "(१९)भेदचन्द्रिका\nआत्मत्वजातिसाधनेनात्मनानात्वं सेत्स्यतीत्याशयेनाह — अपि चेति ॥ दृष्टान्ते पृथिवीत्वमादाय साध्यं बोध्यम् । पक्षे चात्मत्वजातिमादायेत्यात्मनानात्वसिद्धिः । न च कालत्वादिभेदमादायार्थान्तरता । धर्मिग्राहकमानेन लाघवतर्कसनाथेन तदैक्यसिद्धेः । जलत्वादीतरत्वविशेषणं तु तद्भेदमादाय सिद्धसाधनतावारणाय । सत्ताभेदमादाय तद्वारणाय द्रव्यत्वव्याप्येति । घटत्वादिभेदमादाय तद्वारणाय साक्षादिति । नन्वनुकूलतर्काभावे पक्षेतरत्वस्यापि सत्प्रतिपक्षोन्नायकतया दूषणत्वं स्यादेवेत्यत आह — अनुकूलतर्काणामिति ॥ एवमिति ॥ तदा पृथिवीत्वान्यत्वं साध्ये देयम् । जलत्वादि च पक्षी कर्तव्यम् । पृथिवीत्वादि दृष्टान्तीकर्तव्यमिति भावः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीव्यासतीर्थ:",
+    "भेदोज्जीवनम्",
+    "(१९) भेदोज्जीवनम्",
+    "अपि च पृथिवीत्वं .."
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/12799/12778/sharav/bhatha/bhatha/bhatha",
+    "content_id": 12799,
+    "layer": "( १९) भेदचन्द्रिका",
+    "anchor": "article12837",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "( १९) भेदचन्द्रिका"
+  }
+ ]
+}

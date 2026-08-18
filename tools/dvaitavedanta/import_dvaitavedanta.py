@@ -45,11 +45,14 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from dv_parse import (  # noqa: E402
     BASE,
+    author_core,
+    author_name,
     canonical_url,
     devanagari_count,
     devanagari_ratio,
     layer_key,
     parse_page,
+    split_attribution,
 )
 
 STATUS_FILENAME = "_extract_status.json"
@@ -275,6 +278,20 @@ def discover_leaves(fetcher, grantha, log):
     return list(ids.keys()), record, ancestor, urls
 
 
+def _author_agrees(embedded: str, canonical: str) -> bool:
+    """Do a heading's own attribution and a canonical layer's author match?
+
+    Absence of either is not disagreement — most headings carry no attribution
+    at all, and those keep behaving exactly as before.
+    """
+    if not embedded or not canonical:
+        return True
+    one, two = author_core(embedded), author_core(canonical)
+    if not one or not two:
+        return True
+    return one in two or two in one
+
+
 def resolve_layer_config(title, layer_config):
     """Map an observed heading onto a canonical layer.
 
@@ -285,20 +302,38 @@ def resolve_layer_config(title, layer_config):
     substring rule would file Keshavacharya's Vivarana into Jayatirtha's tika
     folder — merging two different authors' works under one name.
 
+    Suffix alone is not enough when the author sits INSIDE the heading. On
+    Shatprashnopanishad both of these end in भाष्यटीका:
+
+        श्रीमज्जयतीर्थभिक्षुविरचिता षट्प्रश्नभाष्यटीका
+        श्रीवामनपण्डिताचार्यविरचिता षट्प्रश्रभाष्यटीका
+
+    and the suffix rule filed Vamana Panditacharya's commentary into
+    Jayatirtha's folder — 29 items on that grantha alone, showing up only as
+    duplicate ids needing a -N suffix. So the heading's own attribution, where
+    it has one, must agree with the canonical layer's author or the match is
+    refused and the commentary keeps its own folder.
+
     Anything with no suffix match stays unmapped and is reported, which is the
     safe outcome: a distinct commentary gets its own auto-slugged folder.
     """
+    attributed_to, work = split_attribution(title)
+
+    def _ok(config):
+        return config if _author_agrees(attributed_to, config.get("author") or "") else None
+
     exact = layer_config.get(title)
     if exact is not None:
-        return exact
-    normalised = layer_key(title)
-    if normalised in layer_config:
-        return layer_config[normalised]
+        return _ok(exact)
+    for candidate in (layer_key(title), layer_key(work)):
+        if candidate in layer_config:
+            return _ok(layer_config[candidate])
+    normalised = layer_key(work)
     best, best_len = None, 0
     for canonical, config in layer_config.items():
         if normalised.endswith(canonical) and len(canonical) > best_len:
             best, best_len = config, len(canonical)
-    return best
+    return _ok(best) if best is not None else None
 
 
 def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
@@ -330,7 +365,16 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
             title = layer["title"] or ("मूलम्" if position == 0 else f"layer_{position + 1}")
             config = resolve_layer_config(title, layer_config)
             if config is None:
-                folder = slugify_devanagari(title) or f"layer_{position + 1}"
+                # Where the heading names its own author, the author IS the
+                # discriminator — every commentary on this grantha shares the
+                # work name, so slugging the whole title would just produce
+                # near-identical folders.
+                attributed_to, _work = split_attribution(title)
+                # Slug from the NORMALISED key, not the raw heading, or a
+                # stray space produces a second folder for the same work.
+                folder = (f"tika_{slugify_devanagari(author_name(attributed_to))}"
+                          if attributed_to else
+                          slugify_devanagari(layer_key(title)) or f"layer_{position + 1}")
                 if position == 0 and folder not in ("mula",):
                     schema = defaults["mula_schema"]
                     folder = folder if folder else "mula"
@@ -343,7 +387,7 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
                 config = {
                     "folder": folder,
                     "schema": schema,
-                    "author": layer.get("author") or None,
+                    "author": attributed_to or layer.get("author") or None,
                 }
                 warnings["unmapped_layers"][title] += 1
 

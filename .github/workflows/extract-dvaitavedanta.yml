@@ -291,8 +291,22 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p dge/data/dvaitavedanta
+          # Replace each arriving section outright instead of copying over it.
+          # A plain copy only ever ADDS: when a commentary is refiled under a
+          # better folder name, the old folder survives in main and the work is
+          # published twice, once under each name. Sections that were not
+          # crawled this run are left alone, so a narrow scope stays narrow.
           for dir in shards/dv-*/dvaitavedanta; do
             [ -d "$dir" ] || continue
+            for section in "$dir"/*/; do
+              [ -d "$section" ] || continue
+              stale="dge/data/dvaitavedanta/$(basename "$section")"
+              # if/fi, not `[ -d x ] && ...`: under set -e a false test ends the step.
+              if [ -d "$stale" ]; then
+                echo "replacing $stale"
+                rm -rf "$stale"
+              fi
+            done
             cp -r "$dir/." dge/data/dvaitavedanta/
           done
           python tools/dvaitavedanta/merge_status.py \
@@ -376,7 +390,7 @@ jobs:
             See the run summary for per-grantha counts and any unmapped
             commentary layers.
           add-paths: |
-            dge/data/dvaitavedanta/**
+            dge/data/dvaitavedanta
             dge/data/taxonomy.json
             dge/data/library.json
             admin/config/library-status.json

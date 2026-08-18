@@ -440,8 +440,72 @@ def _layers_from_article(node: Tag) -> list[dict]:
 
 
 def layer_key(title: str) -> str:
-    """Normalised identity for a layer heading, for merging repeated passes."""
-    return HONORIFIC_RE.sub("", clean_text(title)).strip(" ।॥:-")
+    """Normalised identity for a layer heading, for merging repeated passes.
+
+    Internal spacing is dropped as well as honorifics. The site's headings are
+    typed by hand, so the same commentary arrives as both "काशीटिप्पणी" and
+    "काशी टिप्पणी", and "अभिनवचन्द्रिका" picks up a stray space as
+    "अ भिनवचन्द्रिका" — 29 heading forms across the corpus differ from another
+    form by whitespace alone, and each one was opening a second folder for a
+    work that already had one. Devanagari compound spacing is not meaningful
+    here, so squashing it merges the variants and separates nothing real.
+    """
+    core = HONORIFIC_RE.sub("", clean_text(title))
+    return re.sub(r"\s+", "", core).strip(" ।॥:-")
+
+
+def split_attribution(title: str) -> tuple[str, str]:
+    """`श्रीमज्जयतीर्थभिक्षुविरचिताषट्प्रश्नभाष्यटीका` -> (author, work).
+
+    Many headings name their author inside the heading itself rather than in a
+    line above it, and on a grantha whose commentaries are all called
+    "<grantha>भाष्यटीका" that prefix is the ONLY thing telling two authors
+    apart. Returns ("", title) when no attribution verb is present.
+    """
+    text = clean_text(title)
+    match = ATTRIBUTION_RE.search(text)
+    if not match:
+        return "", text
+    author = text[: match.start()].strip(" ।॥:-")
+    # The verb inflects (विरचिता / विरचितः / विरचितम् …); step past its tail.
+    rest = text[match.end():]
+    work = rest.lstrip("ािीःम्ंँ ").strip(" ।॥:-")
+    if not author or not work:
+        return "", text
+    return author, work
+
+
+def author_name(name: str) -> str:
+    """An author's name as it should be filed, with only the unambiguous
+    honorifics removed.
+
+    श्रीमत् / श्रीमद् / श्रीमज् / श्रीमन् are always honorific, so they go. A
+    bare श्री does NOT: it opens Shrinivasatirtha's, Shripadaraja's and
+    Shridhara's actual names, and stripping it filed one Shrinivasatirtha under
+    `tika_shrinivasatirtha` and another under `tika_nivasatirtha` — the same
+    acharya, split in two.
+    """
+    core = clean_text(name).strip(" ।॥:-")
+    # A doubled श्री is an honorific stacked on a name that already starts with
+    # one: श्रीश्रीनिवासतीर्थ is Shrinivasatirtha, and keeping both opened a
+    # second folder beside his own.
+    while core.startswith("श्रीश्री"):
+        core = core[len("श्री"):]
+    for prefix in ("श्रीमत्", "श्रीमद्", "श्रीमज्", "श्रीमन्"):
+        if core.startswith(prefix):
+            core = core[len(prefix):]
+            break
+    return core.rstrip("ःम्ंाौ")
+
+
+def author_core(name: str) -> str:
+    """Comparable core for deciding whether two attributions mean one person.
+
+    Honorific-insensitive, bare श्री included, because the canonical author is
+    recorded as श्रीजयतीर्थः while the heading says श्रीमज्जयतीर्थभिक्षु.
+    Never use this for a folder name — see author_name.
+    """
+    return HONORIFIC_RE.sub("", author_name(name)).strip(" ।॥:-")
 
 
 def _attribution_before(heading: Tag) -> str:

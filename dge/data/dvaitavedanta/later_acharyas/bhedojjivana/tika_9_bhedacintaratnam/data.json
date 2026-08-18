@@ -1,0 +1,35 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/12781/12778/sharav/bhatha/bhatha/bhatha",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_12827",
+   "reference": "श्रीव्यासतीर्थ: > भेदोज्जीवनम् > (९) भेदोज्जीवनम् > ननु कथमाकाशभेदे प्रमाणाभावः",
+   "section": "(९) भेदोज्जीवनम्",
+   "unit_title": "ननु कथमाकाशभेदे प्रमाणाभावः",
+   "sanskrit_text": "(९)भेदचिन्तारत्नम्\n॥ तस्या इहेति प्रतीतेरित्यर्थः । यद्यप्यौपाधिकविषयत्वादित्येव वक्तव्यम् । परेण पक्षितदभावोपलक्षितयोरुपाधित्वाङ्गीकारात् । तथाऽप्यप्रत्यक्षत्वस्यापि घटनाय केषाञ्चिदुत्प्रेक्षावादोऽयमित्यदोषः ॥ इहाऽलोक इति ॥ अत्र पूर्ववदालोकप्रवेशे आत्माश्रयादिति भावः । नन्विहाऽलोकावयव इत्यत्रानुपपत्तिरित्यस्वरसादाह — इहेति ॥ औपचारिकीति । इदं च स्वरीत्या वस्तुत'स्त्वीशो दिशश्च कालश्च स्वगता एव सर्वदे'ति वचनात्सा प्रतीतिर्मृख्यैवेति ज्ञातव्यम् ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीव्यासतीर्थ:",
+    "भेदोज्जीवनम्",
+    "(९) भेदोज्जीवनम्",
+    "ननु कथमाकाशभेदे प्रमाणाभावः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/12789/12778/sharav/bhatha/bhatha/bhatha",
+    "content_id": 12789,
+    "layer": "( ९) भेदचिन्तारत्नम्",
+    "anchor": "article12827",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "( ९) भेदचिन्तारत्नम्"
+  }
+ ]
+}

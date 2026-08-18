@@ -1,0 +1,35 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/18766/18711/sharas/cathar/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_19081",
+   "reference": "श्रीसत्यध्यानतीर्थ: > चंद्रिकामन्डनम् > आकाशाधिकरणम् > ॐ आकाशस्तल्लिंगात् ॐ",
+   "section": "आकाशाधिकरणम्",
+   "unit_title": "ॐ आकाशस्तल्लिंगात् ॐ",
+   "sanskrit_text": "रामसुब्ब_४२\n(रा.) तन्न, रूढयनुग्रहरूपपूर्वपक्ष हेतोनिरवकाश लिङ्गबाध्यत्वरूपसिद्धान्तहेतोश्च भौतिकमात्रविषयत्वे नियामकाभावादिति यत्परेणोक्तं,\nखण्डनं_४२\n(खं.) तत्तुच्छं, त्वदुक्तमाशंक्य चंद्रिकायां समाधानस्योक्तत्वात् । तथा हि-“यद्यपि भूतेतरवाचिनामप्येतन्न्यायविषयाणा मनेन समन्वयः सिध्यति, तथापि सजातीये भूतशब्दे प्रथमं बुद्धयवतारात् आधिदैवि केन्द्रादिशब्देष्वाध्यात्मिकप्राणादिशब्देषु च स्वभावप्रवृत्तिनिमित्तकत्वाभावेनेतरत्रैतन्न्यायाप्रवृत्तेश्च टीकायामाधिभौतिकोपलक्षकतोक्ति:” इति वाक्येन आधिदैविकादिव्यावृत्त्यर्थमेवाधिभौतिकोपलक्षक तोक्तिर्न तु एतन्यायविषयाणां अन्येषामसमन्वेतव्यत्वाभिप्रायेणेति ॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीसत्यध्यानतीर्थ:",
+    "चंद्रिकामन्डनम्",
+    "आकाशाधिकरणम्",
+    "ॐ आकाशस्तल्लिंगात् ॐ"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/18774/18711/sharas/cathar/aakash",
+    "content_id": 18774,
+    "layer": "रामसुब्ब_ ४२",
+    "anchor": "article19081",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "रामसुब्ब_ ४२"
+  }
+ ]
+}

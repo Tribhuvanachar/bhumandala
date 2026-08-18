@@ -141,7 +141,15 @@
     }, 140);
   }
 
-  function esc(s) { return (s || '').replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
+  // Escapes quotes too: the output goes into attributes (data-slug="…") as
+  // well as text, and a value containing a quote would close the attribute
+  // early and let what follows parse as markup. Same defect CodeQL found on
+  // kosha.js's licence tooltip.
+  function esc(s) {
+    return (s == null ? '' : String(s)).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
 
   function render(hits) {
     var box = document.getElementById('dge-gs-results');

@@ -1,0 +1,35 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/18766/18711/sharas/cathar/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_19077",
+   "reference": "श्रीसत्यध्यानतीर्थ: > चंद्रिकामन्डनम् > ज्योतिरधिकरणम् > ॐ ज्योतिश्चरणाभिधानात् ॐ",
+   "section": "ज्योतिरधिकरणम्",
+   "unit_title": "ॐ ज्योतिश्चरणाभिधानात् ॐ",
+   "sanskrit_text": "रामसुब्ब_०५\n(रा.) यत्तु निश्चिते ज्योतिषोरैक्ये आकारभेदनिश्चयः, आकारभेदे च तदैक्यनिश्चय इत्यन्योन्याश्रय इति यदुक्तं,\nखण्डनं_०५\n(खं.) तत्तुच्छं, इतर लिंगेन उभयोः विष्णुपरत्वे निश्चिते विरुद्वत्वेन भासमानयोर्धर्मयोः आकारभेदेनाविरुद्धतायाः नीतत्वेन परस्परज्ञप्त्यधीनज्ञप्तिकत्वरूपान्योन्यायाश्रयानवकाशात् ॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीसत्यध्यानतीर्थ:",
+    "चंद्रिकामन्डनम्",
+    "ज्योतिरधिकरणम्",
+    "ॐ ज्योतिश्चरणाभिधानात् ॐ"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/18776/18711/sharas/cathar/jayata",
+    "content_id": 18776,
+    "layer": "रामसुब्ब_० ५",
+    "anchor": "article19077",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "रामसुब्ब_० ५"
+  }
+ ]
+}
