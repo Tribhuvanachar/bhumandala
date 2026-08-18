@@ -1,30 +1,32 @@
-name: Probe — can the archive.org Sayana be aligned to DGE's mantras
+name: Probe — archive.org Sayana alignment coverage
 
-# Diagnostic only. Writes nothing into dge/, opens no PR.
+# Diagnostic only while --dry-run is set: reports coverage, writes nothing into
+# dge/, opens no PR.
 #
-# ROUND 2. Round 1 located 151/2006 (7.5%) and the failure was in the matcher,
-# not the source. It demanded an exact 18-character substring, which needs six
-# consecutive aksharas all OCR'd correctly; at this scan's error rate that
-# almost never holds. The 7.5% that did match are simply the passages where it
-# happened to hold -- and every one of them landed exactly on the mantra, which
-# is what confirms the structure.
+# Runs tools/sayana_smriti/archive_sayana.py, whose logic is unit-tested against
+# a fixture that reproduces the edition's real defects (OCR damage inside a
+# mantra, a sukta-end marker that is not a mantra, a mantra the scan drops).
+# Those tests run first here, so a logic regression fails before any network
+# work rather than being mistaken for a coverage change.
 #
-# Structure confirmed by round 1, per mantra and in order:
-#     <samhita-patha> ... || N ||      <- the mantra itself
-#     <pada-patha>    ... || N ||      <- word-split, same number
-#     <Sayana's bhashya>               <- runs until the next || N ||
-#
-# So this round segments on the || N || markers instead of hunting substrings,
-# then scores each candidate block against the mantra DGE already holds with a
-# similarity ratio. Fuzzy scoring is the point: it tolerates the OCR damage that
-# exact matching cannot, while still being decisive -- an unrelated mantra
-# scores near zero, so a wrong alignment cannot masquerade as a right one.
+# Coverage history on mandala 1, so a change is read against something:
+#   exact 18-char substring                    151/2006   7.5%
+#   || N || segmentation + similarity          709/2006  35.3%
+#   + number agreement, two keys, danda fix       ?
 
 on:
   workflow_dispatch:
+    inputs:
+      mandalas:
+        description: "which mandalas, e.g. '1 2' (blank = all ten)"
+        default: "1"
+      threshold:
+        description: "minimum similarity to accept an alignment"
+        default: "0.55"
   push:
     paths:
       - '.github/workflows/probe-sayana-align.yml'
+      - 'tools/sayana_smriti/archive_sayana.py'
 
 permissions:
   contents: read
@@ -32,101 +34,18 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: sanskritebooks.org — reachable, and does it host text?
+      - name: Unit tests (alignment logic)
+        run: python tools/sayana_smriti/tests/test_archive_sayana.py
+
+      - name: Measure coverage against the real scan
         run: |
-          BOT_UA="DGE-import/1.0 (Digital Grantha Engine; non-commercial educational digital library; github.com/Tribhuvanachar/bhumandala)"
-          echo "### sanskritebooks.org ###"
-          for u in "https://www.sanskritebooks.org/" "https://www.sanskritebooks.org/robots.txt"; do
-            printf 'HTTP %-6s %s\n' "$(curl -s -o /dev/null -w '%{http_code}' -m 30 -A "$BOT_UA" -L "$u" || echo ERR)" "$u"
-          done
-          echo "hosts it links downloads to:"
-          curl -s -m 40 -A "$BOT_UA" -L "https://www.sanskritebooks.org/?s=veda" \
-            | grep -oiE 'https?://[a-z0-9.:/_%-]+\.(pdf|zip|djvu|txt|epub)' \
-            | sed -E 's#(https?://[^/]+).*#  \1#' | sort | uniq -c | sort -rn | head -8
-          echo "(archive.org / drive.google.com would mean it indexes scans others host)"
-
-      - name: Align mandala 1 against DGE's own mantras
-        run: |
-          python - <<'PY'
-          import json, re, unicodedata, urllib.parse, urllib.request
-          from difflib import SequenceMatcher
-
-          UA = {"User-Agent": "DGE-import/1.0 (Digital Grantha Engine; non-commercial "
-                              "educational digital library; github.com/Tribhuvanachar/bhumandala)"}
-          def get(url):
-              return urllib.request.urlopen(urllib.request.Request(url, headers=dict(UA)), timeout=180).read()
-
-          ident = "rgveda-with-sayanabhasya"
-          meta = json.loads(get(f"https://archive.org/metadata/{ident}"))
-          name = next(f["name"] for f in meta["files"]
-                      if f.get("name","").endswith("_djvu.txt") and "1" in f["name"])
-          ocr = get(f"https://archive.org/download/{ident}/{urllib.parse.quote(name)}").decode("utf-8","replace")
-          print(f"{name}: {len(ocr):,} chars")
-
-          ACC = "".join(chr(c) for c in list(range(0x0951,0x0953))+[0x1CD0,0x1CD1,0x1CD2,0x1CDA,0x1CDD,0x1CE1])
-          def skel(s):
-              s = unicodedata.normalize("NFC", s)
-              s = re.sub(f"[{ACC}]", "", s)
-              s = re.sub(r"[^ऀ-ॿ]", "", s)
-              # fold the pairs this scan confuses most
-              for a, b in (("ळ","ल"),("ऴ","ल"),("ॠ","ऋ"),("ॄ","ृ"),("ँ","ं")):
-                  s = s.replace(a, b)
-              return s
-
-          # Segment on the || N || markers the edition prints after every
-          # samhita-patha and every pada-patha.
-          marks = [m.end() for m in re.finditer(r"॥\s*[०-९0-9]+\s*॥", ocr)]
-          print(f"|| N || markers found: {len(marks):,}")
-          blocks = [(marks[i], ocr[marks[i]:marks[i+1]]) for i in range(len(marks)-1)]
-          bskel = [skel(b) for _, b in blocks]
-
-          items = json.load(open(
-              "dge/data/vedas/rigveda/shakala_shakha/samhita/mandala_01/data.json"))["items"]
-          print(f"DGE mandala 1: {len(items)} mantras\n")
-
-          WINDOW = 8          # how many blocks ahead to consider
-          THRESH = 0.55       # similarity below this is treated as "not found"
-          bi = 0
-          hits = []
-          scores = []
-          for it in items:
-              want = skel(it.get("samhita_patha_plain") or it.get("samhita_patha") or "")
-              if len(want) < 12:
-                  continue
-              best, best_j = 0.0, -1
-              for j in range(bi, min(bi + WINDOW, len(bskel))):
-                  cand = bskel[j][:len(want) + 40]
-                  if not cand:
-                      continue
-                  r = SequenceMatcher(None, want, cand).ratio()
-                  if r > best:
-                      best, best_j = r, j
-              scores.append(best)
-              if best >= THRESH:
-                  hits.append((it["id"], best, best_j))
-                  bi = best_j + 1
-
-          n = len(scores)
-          print(f"=== located: {len(hits)}/{n}  ({100*len(hits)/max(n,1):.1f}%) ===")
-          if scores:
-              srt = sorted(scores)
-              print(f"    similarity  median={srt[len(srt)//2]:.2f}  "
-                    f"p25={srt[len(srt)//4]:.2f}  p75={srt[3*len(srt)//4]:.2f}")
-          print("\n  sample matches (id, similarity):")
-          for mid, sc, j in hits[:8]:
-              print(f"    {mid}  {sc:.2f}")
-          print("\n  === a matched block, showing what the bhashya cut would be ===")
-          if hits:
-              _, _, j = hits[3] if len(hits) > 3 else hits[0]
-              print("   ", blocks[j][1][:400].replace("\n", " "))
-          print("\nRead the median: high similarity across the board means the OCR is")
-          print("good enough to align on, and the bhashya is whatever sits between")
-          print("one matched block and the next.")
-          PY
+          ARGS="--dge-root dge --dry-run --min-coverage 0 --threshold ${{ inputs.threshold || '0.55' }}"
+          for m in ${{ inputs.mandalas || '1' }}; do ARGS="$ARGS --mandala $m"; done
+          python tools/sayana_smriti/archive_sayana.py $ARGS
