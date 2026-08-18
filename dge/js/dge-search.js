@@ -79,6 +79,11 @@
     });
   };
 
+  // How much of the corpus one query may open. Both are round trips, not
+  // memory: each grantha is a separate file.
+  var MAX_SHARDS = 40;      // distinct granthas opened per search
+  var MAX_UNITS = 6000;     // candidate units scored
+
   Index.prototype.search = function (query, opts) {
     opts = opts || {};
     var self = this;
@@ -101,14 +106,34 @@
             cand[key] = (cand[key] || 0) + 1;
           }
         });
-        // rank candidates by shared trigrams, cap how many shards we open
-        var keys = Object.keys(cand);
+        // Rank candidates by how many of the query's trigrams they share, then
+        // stop. Opening a grantha's unit shard is a network round trip, and a
+        // common word shares its trigrams with most of the corpus: searching
+        // "राम" used to open 444 of them and take some ten seconds on a fast
+        // connection, which on a phone reads as no results at all rather than
+        // as slow ones. A unit that really contains the query shares every one
+        // of its trigrams, so it is at the head of this list -- the tail is
+        // what the cap gives up, and it was never going to be the answer.
+        // A unit that really contains the query shares nearly all of its
+        // trigrams. Requiring most of them before its grantha is opened is
+        // what keeps a long query from dragging in half the library on the
+        // strength of one shared fragment.
+        var need = Math.max(1, Math.ceil(qtris.length * 0.6));
+        var keys = Object.keys(cand).filter(function (k) { return cand[k] >= need; });
         keys.sort(function (a, b) { return cand[b] - cand[a]; });
-        var giSet = {};
-        keys.slice(0, 4000).forEach(function (key) { giSet[key.split(':')[0]] = 1; });
+        var giSet = {}, nGi = 0, picked = [], skipped = false;
+        for (var i = 0; i < keys.length && picked.length < MAX_UNITS; i++) {
+          var gik = keys[i].split(':')[0];
+          if (!giSet[gik]) {
+            if (nGi >= MAX_SHARDS) { skipped = true; continue; }
+            giSet[gik] = 1; nGi++;
+          }
+          picked.push(keys[i]);
+        }
+        if (picked.length >= MAX_UNITS) skipped = true;
         return Promise.all(Object.keys(giSet).map(function (gi) {
           return self._loadShard(+gi);
-        })).then(function () { return { cand: cand, keys: keys }; });
+        })).then(function () { return { cand: cand, keys: picked, skipped: skipped }; });
       })
       .then(function (bag) {
         // 2) score each candidate unit with the fold + edit distance
@@ -125,7 +150,10 @@
           }
         });
         hits.sort(function (a, b) { return b.score - a.score; });
-        return hits.slice(0, limit);
+        var out = hits.slice(0, limit);
+        // so the UI can say the corpus was not swept end to end
+        out.partial = !!bag.skipped && hits.length > 0;
+        return out;
       });
   };
 
@@ -133,10 +161,20 @@
     var best = 0, via = 'trigram';
     if (q.pkey && row.pk) {
       if (q.pkey === row.pk) return { score: 1.0, via: 'pkey-exact' };
-      if (row.pk.indexOf(q.pkey) !== -1) {
-        var s = 0.8 + 0.1 * (q.pkey.length / Math.max(row.pk.length, 1));
+      // A whole word beats a fragment. Without this the score was
+      // 0.8 + a bonus for the unit being SHORT, so searching "राम" put
+      // विरमति (viramati, which merely contains the same letters once nasals
+      // are folded together) above every verse that actually says राम.
+      var padded = ' ' + row.pk + ' ';
+      if (padded.indexOf(' ' + q.pkey + ' ') !== -1) {
+        best = 0.97; via = 'word-exact';
+      } else if (padded.indexOf(' ' + q.pkey) !== -1) {
+        best = 0.9; via = 'word-start';
+      } else if (row.pk.indexOf(q.pkey) !== -1) {
+        var s = 0.6 + 0.1 * (q.pkey.length / Math.max(row.pk.length, 1));
         if (s > best) { best = s; via = 'pkey-substr'; }
-      } else {
+      }
+      if (best < 0.7 && row.pk.indexOf(q.pkey) === -1) {
         var words = row.pk.split(' ');
         for (var i = 0; i < words.length; i++) {
           var d = editDist(q.pkey, words[i], 2);
