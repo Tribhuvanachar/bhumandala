@@ -103,8 +103,12 @@
     $("#dge-htotal").textContent = state.sutras.length.toLocaleString();
     var hs=$("#dge-hsutra"); hs.textContent=tl(row.sanskrit_text); hs.className="sutra "+(state.script==="iast"?"":"deva");
     $("#dge-hsutraIt").textContent = iast(row.sanskrit_text);
-    $("#dge-prevT").textContent = state.idx>0?tl(state.sutras[state.idx-1].sanskrit_text):"—";
-    $("#dge-nextT").textContent = state.idx<state.sutras.length-1?tl(state.sutras[state.idx+1].sanskrit_text):"—";
+    var prevTxt = state.idx>0?tl(state.sutras[state.idx-1].sanskrit_text):"—";
+    var nextTxt = state.idx<state.sutras.length-1?tl(state.sutras[state.idx+1].sanskrit_text):"—";
+    $("#dge-prevT").textContent = prevTxt;
+    $("#dge-nextT").textContent = nextTxt;
+    $("#dge-prevTTop").textContent = prevTxt;
+    $("#dge-nextTTop").textContent = nextTxt;
     renderAnalysis(row);
   }
   /* ---------- padaccheda / anvaya / anuvritti (sutra analysis) ---------- */
@@ -287,7 +291,19 @@
   function closeAll(){ $("#dge-drawer").classList.remove("open"); var s=$("#dge-settings"); if(s)s.classList.remove("open"); $("#dge-backdrop").classList.remove("open"); }
 
   /* ---------- wire ---------- */
+  // The sticky header wraps onto 2-3 rows on a narrow phone (its many
+  // script/mode/font buttons), so its height ranges from ~59px on desktop
+  // to ~190px on a small phone — a fixed CSS offset for .nav-top left it
+  // either floating with a gap or hidden half under the header depending on
+  // viewport. Measured and kept in sync instead.
+  function syncHeaderOffset(){
+    var h = $("header"); if(!h) return;
+    document.documentElement.style.setProperty("--dge-header-h", h.getBoundingClientRect().height+"px");
+  }
+
   function wire(){
+    syncHeaderOffset();
+    window.addEventListener("resize", syncHeaderOffset);
     $("#dge-chips").addEventListener("click",function(e){
       var c=e.target.closest(".dge-chip"); if(!c||c.classList.contains("pending"))return;
       var k=c.dataset.c; state.enabled[k]=!state.enabled[k]; LS.set("enabled",state.enabled);
@@ -307,6 +323,8 @@
     $("#dge-collapse").addEventListener("click",function(){ if(state.mode!=="compare"){ORDER.forEach(function(k){state.collapsed[k]=true;}); renderLayers();} });
     $("#dge-prevBtn").addEventListener("click",function(){ go(state.idx-1); });
     $("#dge-nextBtn").addEventListener("click",function(){ go(state.idx+1); });
+    $("#dge-prevBtnTop").addEventListener("click",function(){ go(state.idx-1); });
+    $("#dge-nextBtnTop").addEventListener("click",function(){ go(state.idx+1); });
     var pc=$("#dge-pcBtn"); if(pc) pc.addEventListener("click",function(){
       var pn=$("#dge-analysis"); if(!pn) return;
       var open=pn.classList.toggle("open"); pc.classList.toggle("on",open); });
