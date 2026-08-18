@@ -195,6 +195,15 @@
   // prose: it rejects most numbers that merely look like a citation.
   const REF = /(?<![\d.०-९])([1-8१-८])[.।॰]([1-4१-४])[.।॰](\d{1,3}|[०-९]{1,3})(?![\d०-९.])/g;
 
+  // The reader sets window.currentGranthaSlug as it navigates. A standalone
+  // page has no such navigation, so it states once what it is showing:
+  // <body data-grantha-slug="vedanga/vyakarana/ashtadhyayi">. That is what
+  // decides whether a bare "1.1.3" is a sutra or somebody's verse number.
+  function currentSlug() {
+    return window.currentGranthaSlug ||
+           (document.body && document.body.dataset.granthaSlug) || '';
+  }
+
   function shouldLink(slug) {
     if (!CFG.linkNumbers) return { always: false, cued: true };
     const always = (CFG.alwaysLinkIn || []).some(p => (slug || '').indexOf(p) === 0);
@@ -210,7 +219,7 @@
   const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'BUTTON', 'A', 'SELECT']);
 
   function markUp(root, ix) {
-    const mode = shouldLink(window.currentGranthaSlug || '');
+    const mode = shouldLink(currentSlug());
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
       acceptNode: n => {
         if (!n.nodeValue || n.nodeValue.length < 5) return NodeFilter.FILTER_REJECT;
@@ -584,9 +593,15 @@
      to, which opens the same popover. Nothing about handleSearch() changes,
      so a query that IS in this text behaves exactly as before. */
   function wireSearch() {
-    const input = document.getElementById('searchInput');
-    const group = input && input.closest('.search-box-group');
-    if (!input || !group) return;
+    // The reader's own search box by default; a standalone page names its
+    // own with <body data-intellisense-search="#dh-search">. The hint goes
+    // after whatever wraps the box, or after the box itself if nothing does.
+    const sel = (document.body && document.body.dataset.intellisenseSearch || '').trim();
+    const input = sel ? document.querySelector(sel)
+                      : document.getElementById('searchInput');
+    if (!input) return;
+    const group = input.closest('.search-box-group') || input.parentNode;
+    if (!group) return;
 
     const hint = document.createElement('div');
     hint.className = 'dge-si-hint';
@@ -626,20 +641,27 @@
     }
     if (!CFG.enabled) return CFG;
 
-    const list = document.getElementById('shlokaList');
-    const card = document.getElementById('readingCard');
+    // Which parts of the page get scanned. The reader's own two containers by
+    // default; any other page names its own with
+    // <body data-intellisense-roots="#a,#b">. Without this the script could
+    // be added to a page and quietly do nothing, which is how the Ashtadhyayi
+    // and Dhatupatha pages came to look as though intellisense was off.
+    const sel = (document.body && document.body.dataset.intellisenseRoots || '').trim();
+    const roots = sel
+      ? sel.split(',').map(s => document.querySelector(s.trim())).filter(Boolean)
+      : [document.getElementById('shlokaList'), document.getElementById('readingCard')];
     // renderList() rebuilds the list wholesale on every script change, theme
     // change and navigation, so a one-off pass would only ever mark up the
     // first render. Debounced because a rebuild fires many mutations.
     let t = null;
     const obs = new MutationObserver(function () {
       clearTimeout(t);
-      t = setTimeout(function () { scan(list); scan(card); }, 120);
+      t = setTimeout(function () { roots.forEach(scan); }, 120);
     });
-    [list, card].forEach(function (el) {
+    roots.forEach(function (el) {
       if (el) obs.observe(el, { childList: true, subtree: true });
     });
-    scan(list); scan(card);
+    roots.forEach(scan);
     if (CFG.identifyFromSearch) wireSearch();
     if (CFG.analyseWords !== false) wireWords();
     return CFG;

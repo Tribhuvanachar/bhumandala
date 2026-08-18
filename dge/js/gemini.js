@@ -41,6 +41,23 @@
   var DEFAULT_MODEL = "gemini-flash-latest";
   var FALLBACK_MODEL = "gemini-flash-lite-latest";
 
+  // The models a page may offer, in one place and exported, so a settings
+  // <select> is built from this list instead of keeping its own copy of it.
+  // The Ashtadhyayi page kept its own copy and was still offering four dead
+  // ids -- gemini-2.0-flash, -flash-lite, gemini-1.5-flash, -1.5-pro -- long
+  // after this file had moved off pinned ids for exactly that reason, and
+  // defaulted to one of them, so its AI was broken for any new key. A page
+  // that builds its menu from here cannot drift again.
+  //
+  // Only aliases actually confirmed working against a real key are listed. A
+  // "pro" tier alias very likely exists too, but adding an id nobody here has
+  // exercised is the precise mistake this list exists to prevent -- add it
+  // once someone has seen it answer.
+  var MODELS = [
+    { id: "gemini-flash-latest",      label: "Flash — fast, recommended" },
+    { id: "gemini-flash-lite-latest", label: "Flash Lite — cheapest" }
+  ];
+
   // Error "kind" constants so callers can branch if they want to.
   var KIND = {
     NO_KEY: "no_key",
@@ -305,6 +322,13 @@
     KIND: KIND,
     DEFAULT_MODEL: DEFAULT_MODEL,
     FALLBACK_MODEL: FALLBACK_MODEL,
+    MODELS: MODELS,
+    // true if `m` is one of the ids above; a page uses this to spot a model
+    // saved by an older build and quietly fall back rather than 404 forever.
+    isKnownModel: function (m) {
+      for (var i = 0; i < MODELS.length; i++) if (MODELS[i].id === m) return true;
+      return false;
+    },
     // let a page override storage keys if it uses different ones
     configure: function (o) {
       o = o || {};

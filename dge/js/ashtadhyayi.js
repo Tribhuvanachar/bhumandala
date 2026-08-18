@@ -194,7 +194,35 @@
   /* ---------- Gemini (BYOK) ---------- */
   function getKey(){ return LS.get("gkey",""); }
   function setKey(k){ LS.set("gkey",k); }
-  function getModel(){ return LS.get("gmodel","gemini-2.0-flash"); }
+  // The default and the menu both come from js/gemini.js, which is the one
+  // place model ids live. A model saved by an older build (this page used to
+  // offer gemini-2.0-flash and friends, all of which now 404) is not honoured
+  // -- it would fail every request with no way for the reader to tell why.
+  function models(){
+    var G = window.DGEGemini;
+    return (G && G.MODELS && G.MODELS.length) ? G.MODELS
+         : [{ id: "gemini-flash-latest", label: "Flash — fast, recommended" }];
+  }
+  function defaultModel(){
+    var G = window.DGEGemini;
+    return (G && G.DEFAULT_MODEL) || "gemini-flash-latest";
+  }
+  function getModel(){
+    var m = LS.get("gmodel", "");
+    var list = models();
+    for (var i = 0; i < list.length; i++) if (list[i].id === m) return m;
+    return defaultModel();
+  }
+  function fillModelSel(){
+    var sel = $("#dge-modelSel"); if(!sel) return;
+    var list = models();
+    sel.innerHTML = "";
+    list.forEach(function(m){
+      var o = document.createElement("option");
+      o.value = m.id; o.textContent = m.label || m.id;
+      sel.appendChild(o);
+    });
+  }
   function buildPrompt(question, lang){
     var row=state.sutras[state.idx];
     var open=ORDER.filter(function(k){return state.enabled[k]&&state.layers[k]&&state.layers[k].byId[row.id];});
@@ -247,7 +275,7 @@
   }
 
   /* ---------- settings modal ---------- */
-  function openSettings(){ var m=$("#dge-settings"); if(m){ $("#dge-keyInput").value=getKey(); $("#dge-modelSel").value=getModel(); m.classList.add("open"); $("#dge-backdrop").classList.add("open"); } }
+  function openSettings(){ var m=$("#dge-settings"); if(m){ fillModelSel(); $("#dge-keyInput").value=getKey(); $("#dge-modelSel").value=getModel(); m.classList.add("open"); $("#dge-backdrop").classList.add("open"); } }
   function closeAll(){ $("#dge-drawer").classList.remove("open"); var s=$("#dge-settings"); if(s)s.classList.remove("open"); $("#dge-backdrop").classList.remove("open"); }
 
   /* ---------- wire ---------- */
@@ -276,8 +304,37 @@
       var open=pn.classList.toggle("open"); pc.classList.toggle("on",open); });
     var wex=$("#dge-whatBtn"); if(wex) wex.addEventListener("click",function(){
       var el=$("#dge-chips"); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); });
+    // Jump box. It used to accept an exact "1.1.1" and nothing else, and to
+    // do nothing at all -- no message, no shake -- for anything it did not
+    // recognise, which reads as a dead control rather than a rejected input.
+    // Now any separator works (1-1-1, 1 1 1, 1,1,1), a partial reference goes
+    // to the start of that adhyaya or pada, and a miss says so.
     var jump=$("#dge-jump");
-    if(jump) jump.addEventListener("change",function(){ var v=jump.value.trim(); if(state.byId[v]) go(state.sutras.indexOf(state.byId[v])); });
+    function jumpTo(){
+      var raw=(jump.value||"").trim();
+      if(!raw) return;
+      var parts=raw.replace(/[\s,\-\u2013\u2014\u0964|]+/g,".").split(".").filter(Boolean);
+      var bad=parts.some(function(x){ return !/^\d+$/.test(x); });
+      var id=parts.join(".");
+      var hit=null;
+      if(!bad&&parts.length){
+        if(state.byId[id]) hit=state.byId[id];
+        else {
+          // a prefix: first sutra of that adhyaya (1) or pada (1.1)
+          var pre=id+".";
+          for(var i=0;i<state.sutras.length;i++){
+            if(state.sutras[i].id.indexOf(pre)===0){ hit=state.sutras[i]; break; }
+          }
+        }
+      }
+      if(hit){ jump.classList.remove("miss"); jump.value=hit.id; go(state.sutras.indexOf(hit)); }
+      else { jump.classList.add("miss"); jump.title="No sutra "+raw; setTimeout(function(){ jump.classList.remove("miss"); },1200); }
+    }
+    if(jump){
+      jump.addEventListener("change",jumpTo);
+      // change alone does not fire when someone retypes the same reference
+      jump.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); jumpTo(); } });
+    }
     document.addEventListener("keydown",function(e){
       if(/INPUT|TEXTAREA/.test((e.target.tagName||""))) return;
       if(e.key==="ArrowRight") go(state.idx+1);
