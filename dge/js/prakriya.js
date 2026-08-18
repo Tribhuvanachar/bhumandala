@@ -52,21 +52,35 @@
 
   /* Steps are delta-encoded — a rule that changes nothing stores only its code
      (see steps_of in tools/build_prakriya.py). Carry the last result forward so
-     every step shows the state of the derivation at that point. */
+     every step shows the state of the derivation at that point.
+
+     A rule that only assigns a designation (an इत्संज्ञा, say) is a real step
+     of the derivation but never changes the visible string — carrying the
+     result forward means it renders identically to the step before it,
+     which read as a UI bug ("the sutra changed but the form didn't") rather
+     than as what it actually is. Marked (not hidden) here; the Main/All
+     toggle below decides whether the reader sees it by default. */
   function stepsHtml(steps) {
     let last = '';
-    return '<ol class="pk-steps">' + steps.map(function (st) {
+    const items = steps.map(function (st) {
       const code = st[0];
-      if (st.length > 1) last = st[1];
+      const changed = st.length > 1;
+      if (changed) last = st[1];
       // A sutra code is what intellisense.js already knows how to open; an
       // ordinary rule reference (a paribhasha, a vartika) is shown plainly.
       const isSutra = /^[1-8]\.[1-4]\.\d{1,3}$/.test(code);
-      return '<li>' +
+      return '<li class="' + (changed ? 'pk-step-changed' : 'pk-step-same') + '">' +
         (isSutra
           ? '<span class="dge-sutra-ref pk-code" data-sutra="' + esc(code) + '" role="button" tabindex="0">' + esc(code) + '</span>'
           : '<span class="pk-code pk-code-plain">' + esc(code) + '</span>') +
-        '<span class="pk-result deva">' + esc(last) + '</span></li>';
-    }).join('') + '</ol>';
+        '<span class="pk-result deva">' + esc(last) + '</span>' +
+        (changed ? '' : '<span class="pk-step-note">no visible change — this rule marks the form for a later step</span>') +
+        '</li>';
+    }).join('');
+    const anySame = steps.some(st => st.length <= 1);
+    return '<div class="pk-steps-block">' +
+      (anySame ? '<label class="pk-steps-toggle"><input type="checkbox" class="pk-all-steps"> Show every step, including ones with no visible change</label>' : '') +
+      '<ol class="pk-steps pk-main-only">' + items + '</ol></div>';
   }
 
   // Which lakaras carry derivations is the build's decision, not this page's —
@@ -97,10 +111,16 @@
     }
     h += '</tbody></table>';
     if (!stepped) {
-      h += '<p class="pk-note">The forms of ' + esc(LAKARA[lakara]) +
-           ' are shown, but not their derivations. ' + esc(steppedNames().join(', ')) +
-           ' carry the step-by-step derivation — deriving all eight for every ' +
-           'root would add about 116 MB to the site.</p>';
+      // Build/storage tradeoffs (why only two lakāras get full derivations
+      // yet) belong in tools/build_prakriya.py's comments, not here — a
+      // reader isn't asking about the site's disk budget, and "116 MB"
+      // read like an error rather than an explanation of what they're
+      // looking at. Say only what is actually true from where they stand:
+      // these forms are real and complete, the step-by-step view just
+      // isn't built for this lakāra yet.
+      h += '<p class="pk-note">' + esc(LAKARA[lakara]) +
+           "'s forms above are complete. Step-by-step derivation is available for " +
+           esc(steppedNames().join(', ')) + ' — tap a form there to see it worked out sūtra by sūtra.</p>';
     }
     return h;
   }
@@ -139,6 +159,15 @@
   function render(d) {
     const view = document.body.dataset.view === 'krdanta' ? 'krdanta' : 'tinanta';
     const root = document.getElementById('root');
+    // Shared by both views below: the "show every step" toggle a stepsHtml()
+    // block carries. Delegated on root (survives root.innerHTML being
+    // replaced wholesale on every view/lakāra switch) rather than bound per
+    // checkbox, which would need re-wiring after each redraw.
+    root.addEventListener('change', function (ev) {
+      if (!ev.target.classList.contains('pk-all-steps')) return;
+      const ol = ev.target.closest('.pk-steps-block').querySelector('.pk-steps');
+      if (ol) ol.classList.toggle('pk-main-only', !ev.target.checked);
+    });
     if (view === 'krdanta') {
       root.innerHTML = headerHtml(d) + '<h2 class="pk-h2 deva">कृदन्तरूपाणि</h2>' + krtHtml(d);
       root.addEventListener('click', function (ev) {
