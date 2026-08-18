@@ -30,6 +30,7 @@ where it is, and is still linked from the same admin menu.
 | `content/home.json` | the landing page — **all of its words** | hand-edited |
 | `content/whats-new.json` | `dge/js/modals.js`, re-read every time the panel opens | Site Settings, or by hand |
 | `content/reader.json` | `dge/js/core.js` at boot — the Support and About panels' text | in place on the page, Site Settings, or by hand |
+| `content/tour.json` | `dge/js/tour.js` — the guided walkthrough's steps | in place on the page, or by hand |
 | `config/home.json` | the landing page — where it leads, the photo, the flowers | hand-edited |
 | `config/menu.json` | `dge/js/menu.js` — which menu items appear, and in what order | hand-edited |
 | `config/intellisense.json` | `dge/js/intellisense.js` — sūtra identification | hand-edited |
@@ -85,6 +86,7 @@ Asked often enough to be worth stating once:
 | Passkeys | `config/keys.json` |
 | What's New and Coming Soon | `content/whats-new.json` |
 | Sponsor, contributors, key sponsors | `content/reader.json` |
+| The walkthrough's steps and wording | `content/tour.json` |
 | Contact address, app name, designer credit | `config/config-overrides.json` |
 
 ## Config that is not here

@@ -31,6 +31,9 @@
 <link rel="stylesheet" href="css/intellisense.css?v=1">
 <!-- In-place editing of admin/content/reader.json for a super admin. -->
 <link rel="stylesheet" href="css/content-inline.css?v=1">
+<!-- The guided walkthrough, offered once on a first visit and reopenable
+     from About. Steps live in admin/content/tour.json. -->
+<link rel="stylesheet" href="css/tour.css?v=1">
 </head>
 <body data-content-file="admin/content/reader.json">
 
@@ -528,6 +531,7 @@
     <div class="modal-body">
       <p style="font-size:13px; line-height:1.6; margin:0 0 16px 0;">This is part of the <strong>Sarvamoola Digitisation & Educational Project</strong> — a free, ad-free digital library of Sanskrit devotional and philosophical texts in the Madhva Sampradaya (Dvaita Vedanta) tradition, with transliteration, audio, and AI-assisted study tools, built for personal and community learning.</p>
 
+      <button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.closeModal('aboutModal'); window.dgeStartTour && window.dgeStartTour();">🧭 Take the Walkthrough</button>
       <button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.closeModal('aboutModal'); window.openWhatsNewModal();">🆕 What's New &amp; Coming Soon</button>
       <button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.closeModal('aboutModal'); window.openReadingHistory();">📜 View Reading History</button>
       <button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.dgeForceRefreshContent()">🔄 Force Refresh Content</button>
@@ -839,6 +843,7 @@
      Fetches one small index and stops if this grantha is not cited. -->
 <script src="js/backlinks.js?v=4.64.0"></script>
 <script src="js/content-inline.js?v=1"></script>
+<script src="js/tour.js?v=1"></script>
 <script src="js/library.js?v=4.61.0"></script>
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
 <script src="js/dge-normalize.js?v=4.60.6"></script>
