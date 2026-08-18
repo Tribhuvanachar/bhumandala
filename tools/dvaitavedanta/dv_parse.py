@@ -440,8 +440,18 @@ def _layers_from_article(node: Tag) -> list[dict]:
 
 
 def layer_key(title: str) -> str:
-    """Normalised identity for a layer heading, for merging repeated passes."""
-    return HONORIFIC_RE.sub("", clean_text(title)).strip(" ।॥:-")
+    """Normalised identity for a layer heading, for merging repeated passes.
+
+    Internal spacing is dropped as well as honorifics. The site's headings are
+    typed by hand, so the same commentary arrives as both "काशीटिप्पणी" and
+    "काशी टिप्पणी", and "अभिनवचन्द्रिका" picks up a stray space as
+    "अ भिनवचन्द्रिका" — 29 heading forms across the corpus differ from another
+    form by whitespace alone, and each one was opening a second folder for a
+    work that already had one. Devanagari compound spacing is not meaningful
+    here, so squashing it merges the variants and separates nothing real.
+    """
+    core = HONORIFIC_RE.sub("", clean_text(title))
+    return re.sub(r"\s+", "", core).strip(" ।॥:-")
 
 
 def split_attribution(title: str) -> tuple[str, str]:

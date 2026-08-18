@@ -369,9 +369,11 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
                 # work name, so slugging the whole title would just produce
                 # near-identical folders.
                 attributed_to, _work = split_attribution(title)
+                # Slug from the NORMALISED key, not the raw heading, or a
+                # stray space produces a second folder for the same work.
                 folder = (f"tika_{slugify_devanagari(author_core(attributed_to))}"
                           if attributed_to else
-                          slugify_devanagari(title) or f"layer_{position + 1}")
+                          slugify_devanagari(layer_key(title)) or f"layer_{position + 1}")
                 if position == 0 and folder not in ("mula",):
                     schema = defaults["mula_schema"]
                     folder = folder if folder else "mula"

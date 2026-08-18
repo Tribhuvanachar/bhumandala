@@ -172,6 +172,10 @@ def main():
         "/category-details/13528/937/a/b") == (13528, 937))
     failures += not check("non-content href ignored",
                           P.parse_content_url("/about") is None)
+    failures += not check("layer_key squashes stray internal spaces",
+                          P.layer_key("अ भिनवचन्द्रिका") == P.layer_key("अभिनवचन्द्रिका"))
+    failures += not check("layer_key still strips honorifics",
+                          P.layer_key("श्री कथालक्षणटीका") == P.layer_key("कथालक्षणटीका"))
     failures += not check("devanagari_ratio on latin", P.devanagari_ratio("hello world") == 0.0)
 
     # The shape the site actually serves, transcribed from probe pages saved by
