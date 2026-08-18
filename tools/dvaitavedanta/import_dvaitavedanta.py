@@ -46,6 +46,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from dv_parse import (  # noqa: E402
     BASE,
     author_core,
+    author_name,
     canonical_url,
     devanagari_count,
     devanagari_ratio,
@@ -371,7 +372,7 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
                 attributed_to, _work = split_attribution(title)
                 # Slug from the NORMALISED key, not the raw heading, or a
                 # stray space produces a second folder for the same work.
-                folder = (f"tika_{slugify_devanagari(author_core(attributed_to))}"
+                folder = (f"tika_{slugify_devanagari(author_name(attributed_to))}"
                           if attributed_to else
                           slugify_devanagari(layer_key(title)) or f"layer_{position + 1}")
                 if position == 0 and folder not in ("mula",):

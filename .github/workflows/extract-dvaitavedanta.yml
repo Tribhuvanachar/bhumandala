@@ -291,8 +291,17 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p dge/data/dvaitavedanta
+          # Replace each arriving section outright instead of copying over it.
+          # A plain copy only ever ADDS: when a commentary is refiled under a
+          # better folder name, the old folder survives in main and the work is
+          # published twice, once under each name. Sections that were not
+          # crawled this run are left alone, so a narrow scope stays narrow.
           for dir in shards/dv-*/dvaitavedanta; do
             [ -d "$dir" ] || continue
+            for section in "$dir"/*/; do
+              [ -d "$section" ] || continue
+              rm -rf "dge/data/dvaitavedanta/$(basename "$section")"
+            done
             cp -r "$dir/." dge/data/dvaitavedanta/
           done
           python tools/dvaitavedanta/merge_status.py \

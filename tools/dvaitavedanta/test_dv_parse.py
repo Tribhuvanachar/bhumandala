@@ -172,6 +172,14 @@ def main():
         "/category-details/13528/937/a/b") == (13528, 937))
     failures += not check("non-content href ignored",
                           P.parse_content_url("/about") is None)
+    failures += not check("bare श्री kept — it opens Shrinivasatirtha's name",
+                          P.author_name("श्रीनिवासतीर्थ") == "श्रीनिवासतीर्थ",
+                          P.author_name("श्रीनिवासतीर्थ"))
+    failures += not check("श्रीमज् is honorific and goes",
+                          P.author_name("श्रीमज्जयतीर्थभिक्षु") == "जयतीर्थभिक्षु",
+                          P.author_name("श्रीमज्जयतीर्थभिक्षु"))
+    failures += not check("matching stays honorific-insensitive",
+                          P.author_core("श्रीजयतीर्थः") in P.author_core("श्रीमज्जयतीर्थभिक्षु"))
     failures += not check("layer_key squashes stray internal spaces",
                           P.layer_key("अ भिनवचन्द्रिका") == P.layer_key("अभिनवचन्द्रिका"))
     failures += not check("layer_key still strips honorifics",

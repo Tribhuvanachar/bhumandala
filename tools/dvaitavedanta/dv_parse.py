@@ -475,13 +475,32 @@ def split_attribution(title: str) -> tuple[str, str]:
     return author, work
 
 
-def author_core(name: str) -> str:
-    """Comparable core of an author name: honorifics and case endings dropped."""
-    core = HONORIFIC_RE.sub("", clean_text(name)).strip(" ।॥:-")
-    for prefix in ("मत्", "मद्", "मज्", "मन्"):        # श्रीमज्जयतीर्थ -> जयतीर्थ
+def author_name(name: str) -> str:
+    """An author's name as it should be filed, with only the unambiguous
+    honorifics removed.
+
+    श्रीमत् / श्रीमद् / श्रीमज् / श्रीमन् are always honorific, so they go. A
+    bare श्री does NOT: it opens Shrinivasatirtha's, Shripadaraja's and
+    Shridhara's actual names, and stripping it filed one Shrinivasatirtha under
+    `tika_shrinivasatirtha` and another under `tika_nivasatirtha` — the same
+    acharya, split in two.
+    """
+    core = clean_text(name).strip(" ।॥:-")
+    for prefix in ("श्रीमत्", "श्रीमद्", "श्रीमज्", "श्रीमन्"):
         if core.startswith(prefix):
             core = core[len(prefix):]
+            break
     return core.rstrip("ःम्ंाौ")
+
+
+def author_core(name: str) -> str:
+    """Comparable core for deciding whether two attributions mean one person.
+
+    Honorific-insensitive, bare श्री included, because the canonical author is
+    recorded as श्रीजयतीर्थः while the heading says श्रीमज्जयतीर्थभिक्षु.
+    Never use this for a folder name — see author_name.
+    """
+    return HONORIFIC_RE.sub("", author_name(name)).strip(" ।॥:-")
 
 
 def _attribution_before(heading: Tag) -> str:
