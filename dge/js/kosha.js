@@ -137,7 +137,20 @@
   function toSLP1list(q) {
     q = (q || '').trim(); if (!q) return [];
     var S = window.Sanscript, out = [];
-    if (!S) return [q];
+    if (!S) {
+      // Sanscript is fetched from a CDN, and when it does not arrive -- a
+      // blocked network, a bad connection, an offline phone -- Devanagari
+      // input used to fall through as itself, match no shard, and answer
+      // "No headwords found" for every word in the dictionary. The app's own
+      // dge-normalize.js carries a Devanagari table needing nothing external,
+      // so use it rather than fail. Other scripts still need Sanscript.
+      var N = window.DGENorm;
+      if (/[ऀ-ॿ]/.test(q) && N && N.devaToSlp1) {
+        var slp = N.devaToSlp1(q);
+        return slp ? [slp] : [q];
+      }
+      return [q];
+    }
     try {
       if (/[ऀ-ॿ]/.test(q)) out.push(S.t(q, 'devanagari', 'slp1'));
       else if (/[ಀ-೿]/.test(q)) out.push(S.t(q, 'kannada', 'slp1'));
@@ -743,6 +756,22 @@
     var input = ov.querySelector('#kosha-q'), res = ov.querySelector('#kosha-res'), detail = ov.querySelector('#kosha-detail');
     fab.onclick = function () { ov.classList.add('open'); input.focus(); };
 
+    // Every keystroke past the debounce starts its own lookup, and they do not
+    // come back in the order they were sent: a one-character query browses
+    // hundreds of shards and takes seconds, while the whole word hits one
+    // shard and answers at once. Without a guard the slow early query lands
+    // last and overwrites the right answer -- which is what searching अगस्त्य
+    // on a phone actually showed: the box said अगस्त्य and the list underneath
+    // was अ, आ, aa, ai, अक, अख…, the answer to its own first letter. Only the
+    // most recent query is allowed to paint.
+    var seq = 0;
+    function show(result, mine) {
+      if (mine !== seq) return;
+      renderResults(result, res, detail);
+      // on mobile, reveal detail pane when a hit is chosen
+      res.querySelectorAll('.kosha-hit').forEach(function (r) {
+        r.addEventListener('click', function () { ov.classList.add('showdetail'); }); });
+    }
     /* Everything in this file lives in a closure, which was right while the
        कोश button was the only way in. The word popover in intellisense.js
        needs to hand a word straight across, so this is the one door out:
@@ -753,12 +782,8 @@
       ov.classList.remove('showdetail');
       input.value = word || '';
       if (word) {
-        search(word).then(function (result) {
-          renderResults(result, res, detail);
-          res.querySelectorAll('.kosha-hit').forEach(function (r) {
-            r.addEventListener('click', function () { ov.classList.add('showdetail'); });
-          });
-        });
+        var mine = ++seq;
+        search(word).then(function (result) { show(result, mine); });
       } else {
         input.focus();
       }
@@ -768,14 +793,10 @@
     var t;
     input.oninput = function () {
       clearTimeout(t); var q = input.value;
+      var mine = ++seq;
       t = setTimeout(function () {
-        if (!q.trim()) { res.innerHTML = ''; return; }
-        search(q).then(function (result) {
-          renderResults(result, res, detail);
-          // on mobile, reveal detail pane when a hit is chosen
-          res.querySelectorAll('.kosha-hit').forEach(function (r) {
-            r.addEventListener('click', function () { ov.classList.add('showdetail'); }); });
-        });
+        if (!q.trim()) { if (mine === seq) res.innerHTML = ''; return; }
+        search(q).then(function (result) { show(result, mine); });
       }, 160);
     };
   }
