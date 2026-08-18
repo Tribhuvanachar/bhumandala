@@ -304,8 +304,37 @@
       var open=pn.classList.toggle("open"); pc.classList.toggle("on",open); });
     var wex=$("#dge-whatBtn"); if(wex) wex.addEventListener("click",function(){
       var el=$("#dge-chips"); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); });
+    // Jump box. It used to accept an exact "1.1.1" and nothing else, and to
+    // do nothing at all -- no message, no shake -- for anything it did not
+    // recognise, which reads as a dead control rather than a rejected input.
+    // Now any separator works (1-1-1, 1 1 1, 1,1,1), a partial reference goes
+    // to the start of that adhyaya or pada, and a miss says so.
     var jump=$("#dge-jump");
-    if(jump) jump.addEventListener("change",function(){ var v=jump.value.trim(); if(state.byId[v]) go(state.sutras.indexOf(state.byId[v])); });
+    function jumpTo(){
+      var raw=(jump.value||"").trim();
+      if(!raw) return;
+      var parts=raw.replace(/[\s,\-\u2013\u2014\u0964|]+/g,".").split(".").filter(Boolean);
+      var bad=parts.some(function(x){ return !/^\d+$/.test(x); });
+      var id=parts.join(".");
+      var hit=null;
+      if(!bad&&parts.length){
+        if(state.byId[id]) hit=state.byId[id];
+        else {
+          // a prefix: first sutra of that adhyaya (1) or pada (1.1)
+          var pre=id+".";
+          for(var i=0;i<state.sutras.length;i++){
+            if(state.sutras[i].id.indexOf(pre)===0){ hit=state.sutras[i]; break; }
+          }
+        }
+      }
+      if(hit){ jump.classList.remove("miss"); jump.value=hit.id; go(state.sutras.indexOf(hit)); }
+      else { jump.classList.add("miss"); jump.title="No sutra "+raw; setTimeout(function(){ jump.classList.remove("miss"); },1200); }
+    }
+    if(jump){
+      jump.addEventListener("change",jumpTo);
+      // change alone does not fire when someone retypes the same reference
+      jump.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); jumpTo(); } });
+    }
     document.addEventListener("keydown",function(e){
       if(/INPUT|TEXTAREA/.test((e.target.tagName||""))) return;
       if(e.key==="ArrowRight") go(state.idx+1);

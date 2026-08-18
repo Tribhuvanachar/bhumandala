@@ -23,6 +23,9 @@
   .ctl button.on{background:var(--panel);color:var(--ink);box-shadow:var(--shadow)}
   .icon{border:1px solid var(--line);background:var(--panel);border-radius:10px;min-width:36px;height:34px;padding:0 8px;cursor:pointer;color:var(--ink);font-size:14px}
   .jump{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:6px 10px;color:var(--ink);font:inherit;font-size:13px;width:88px}
+  /* a reference the sutrapatha does not have: say so for a moment rather
+     than sit there looking broken */
+  .jump.miss{border-color:#b3462f;color:#b3462f}
   main{max-width:1200px;margin:0 auto;padding:16px 14px 130px}
   .crumbs{color:var(--muted);font-size:13px;margin:4px 2px 12px}.crumbs b{color:var(--accent)}
   .hero{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
