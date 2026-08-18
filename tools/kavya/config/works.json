@@ -137,10 +137,16 @@
     "mahakavya",
     "pancha_mahakavya"
    ],
-   "sources": {},
-   "register": {
-    "jivatu": "scan only (Nārāyaṇa's Jīvātu) — not machine readable",
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "नैषधीयचरितम् सर्गाः १-५",
+      "नैषधीयचरितम् सर्गाः ६-१०",
+      "नैषधीयचरितम् सर्गाः ११-१५",
+      "नैषधीयचरितम् सर्गाः १६-२०",
+      "नैषधीयचरितम् सर्गाः २०-२२"
+     ]
+    }
    }
   },
   {
@@ -203,9 +209,19 @@
     "shravya",
     "gadya"
    ],
-   "sources": {},
-   "register": {
-    "status": "GRETIL file carries no reference markers in any convention the parser knows, so it parsed to an empty layer and is left out rather than published empty (checked 18 Aug 2026)"
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "हर्षचरितम्/प्रथमोच्छ्वासः",
+      "हर्षचरितम्/द्वितीयोच्छ्वासः",
+      "हर्षचरितम्/तृतीयोच्छ्वासः",
+      "हर्षचरितम्/चतुर्योच्छ्वासः",
+      "हर्षचरितम्/पञ्चमोच्छ्वासः",
+      "हर्षचरितम्/षष्ठोच्छ्वासः",
+      "हर्षचरितम्/सप्तमोच्छ्वासः",
+      "हर्षचरितम्/अष्टमोच्छ्वासः"
+     ]
+    }
    }
   },
   {
@@ -219,9 +235,13 @@
     "shravya",
     "gadya"
    ],
-   "sources": {},
-   "register": {
-    "status": "no machine-readable source declared -- GRETIL indexes sa_bANa-kAdambarI-1.xml but the file 404s (checked against GRETIL's own index, 18 Aug 2026)"
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "कादम्बरी पूर्वभागः",
+      "कादम्बरी-उत्तरभागः"
+     ]
+    }
    }
   },
   {
@@ -293,7 +313,7 @@
    ],
    "sources": {},
    "register": {
-    "status": "scan only"
+    "status": "sa.wikisource has it, but as a raw djvu transclusion whose text carries the English introduction, the errata table and page headers inline -- not publishable as it stands (checked 18 Aug 2026)"
    }
   },
   {
@@ -310,7 +330,7 @@
    ],
    "sources": {},
    "register": {
-    "status": "scan only"
+    "status": "scan only; not on sa.wikisource or in Ambuda's export"
    }
   },
   {
@@ -325,9 +345,12 @@
     "mahakavya",
     "anya"
    ],
-   "sources": {},
-   "register": {
-    "status": "scan only"
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "जानकीहरणम्"
+     ]
+    }
    }
   },
   {
@@ -408,7 +431,7 @@
    ],
    "sources": {},
    "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+    "status": "not on sa.wikisource or in Ambuda's export"
    }
   },
   {
@@ -422,9 +445,11 @@
     "shravya",
     "shataka"
    ],
-   "sources": {},
-   "register": {
-    "status": "no machine-readable source declared -- GRETIL has only the combined satakatraya; needs a per-sataka split (checked against GRETIL's own index, 18 Aug 2026)"
+   "sources": {
+    "ambuda": {
+     "file": "shatakatrayam.xml",
+     "section": "1"
+    }
    }
   },
   {
@@ -438,9 +463,11 @@
     "shravya",
     "shataka"
    ],
-   "sources": {},
-   "register": {
-    "status": "no machine-readable source declared -- GRETIL has only the combined satakatraya; needs a per-sataka split (checked against GRETIL's own index, 18 Aug 2026)"
+   "sources": {
+    "ambuda": {
+     "file": "shatakatrayam.xml",
+     "section": "2"
+    }
    }
   },
   {
@@ -454,9 +481,11 @@
     "shravya",
     "shataka"
    ],
-   "sources": {},
-   "register": {
-    "status": "no machine-readable source declared -- GRETIL has only the combined satakatraya; needs a per-sataka split (checked against GRETIL's own index, 18 Aug 2026)"
+   "sources": {
+    "ambuda": {
+     "file": "shatakatrayam.xml",
+     "section": "3"
+    }
    }
   },
   {
@@ -470,9 +499,10 @@
     "shravya",
     "shataka"
    ],
-   "sources": {},
-   "register": {
-    "status": "GRETIL file carries no reference markers in any convention the parser knows, so it parsed to an empty layer and is left out rather than published empty (checked 18 Aug 2026)"
+   "sources": {
+    "ambuda": {
+     "file": "amarushatakam.xml"
+    }
    }
   },
   {
@@ -506,7 +536,7 @@
    ],
    "sources": {},
    "register": {
-    "status": "scan only"
+    "status": "scan only; not on sa.wikisource or in Ambuda's export"
    }
   },
   {
@@ -522,7 +552,7 @@
    ],
    "sources": {},
    "register": {
-    "status": "scan only"
+    "status": "scan only; not on sa.wikisource or in Ambuda's export"
    }
   },
   {
@@ -572,7 +602,7 @@
    ],
    "sources": {},
    "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+    "status": "only the first act on sa.wikisource in a usable form; the Kalpalata edition's subpages are titled inconsistently"
    }
   },
   {
@@ -586,9 +616,16 @@
     "drishya",
     "nataka"
    ],
-   "sources": {},
-   "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "मालविकाग्निमित्रम्/प्रथमोऽङ्कः",
+      "मालविकाग्निमित्रम्/द्वितीयोऽङ्कः",
+      "मालविकाग्निमित्रम्/तृतीयोऽङ्कः",
+      "मालविकाग्निमित्रम्/चतुर्थोऽङ्कः",
+      "मालविकाग्निमित्रम्/पञ्चमोऽङ्कः"
+     ]
+    }
    }
   },
   {
@@ -620,9 +657,15 @@
     "drishya",
     "nataka"
    ],
-   "sources": {},
-   "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "प्रतिज्ञायौगन्धरायणम्/प्रथमोऽङ्कः",
+      "प्रतिज्ञायौगन्धरायणम्/द्वितीयोऽङ्कः",
+      "प्रतिज्ञायौगन्धरायणम्/तृतीयोऽङ्कः",
+      "प्रतिज्ञायौगन्धरायणम्/चतुर्थोऽङ्कः"
+     ]
+    }
    }
   },
   {
@@ -636,9 +679,15 @@
     "drishya",
     "prakarana"
    ],
-   "sources": {},
-   "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "चारुदत्तम्/प्रथमोऽङ्कः",
+      "चारुदत्तम्/द्वितीयोऽङ्कः",
+      "चारुदत्तम्/तृतीयोऽङ्कः",
+      "चारुदत्तम्/चतुर्थोऽङ्कः"
+     ]
+    }
    }
   },
   {
@@ -652,9 +701,10 @@
     "drishya",
     "utsrishtikanka"
    ],
-   "sources": {},
-   "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+   "sources": {
+    "ambuda": {
+     "file": "urubhangam.xml"
+    }
    }
   },
   {
@@ -668,9 +718,10 @@
     "drishya",
     "vyayoga"
    ],
-   "sources": {},
-   "register": {
-    "status": "GRETIL file carries no reference markers in any convention the parser knows, so it parsed to an empty layer and is left out rather than published empty (checked 18 Aug 2026)"
+   "sources": {
+    "ambuda": {
+     "file": "dutavakyam.xml"
+    }
    }
   },
   {
@@ -684,9 +735,12 @@
     "drishya",
     "vyayoga"
    ],
-   "sources": {},
-   "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "मध्यमव्यायोगः"
+     ]
+    }
    }
   },
   {
@@ -700,9 +754,24 @@
     "drishya",
     "prakarana"
    ],
-   "sources": {},
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "मृच्छकटिकम्/प्रथमोऽङ्कः",
+      "मृच्छकटिकम्/द्वितीयोऽङ्कः",
+      "मृच्छकटिकम्/तृतीयोऽङ्कः",
+      "मृच्छकटिकम्/चतुर्थोऽङ्कः",
+      "मृच्छकटिकम्/पञ्चमोऽङ्कः",
+      "मृच्छकटिकम्/षष्ठोऽङ्कः",
+      "मृच्छकटिकम्/सप्तमोऽङ्कः",
+      "मृच्छकटिकम्/अष्टमोऽङ्कः",
+      "मृच्छकटिकम्/नवमोऽङ्कः",
+      "मृच्छकटिकम्/दशमोऽङ्कः"
+     ]
+    }
+   },
    "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+    "note": "The sa.wikisource edition prints a tika in the same flow as the mula, so about 1% of units carry commentary mixed into the verse. Separating them needs edition-specific work; recorded rather than silently kept or silently dropped (18 Aug 2026)."
    }
   },
   {
@@ -716,9 +785,21 @@
     "drishya",
     "nataka"
    ],
-   "sources": {},
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "मुद्राराक्षसम्/प्रथमोऽङ्कः",
+      "मुद्राराक्षसम्/द्वितीयोऽङ्कः",
+      "मुद्राराक्षसम्/तृतीयोऽङ्कः",
+      "मुद्राराक्षसम्/चतुर्थोऽङ्कः",
+      "मुद्राराक्षसम्/पञ्चमोऽङ्कः",
+      "मुद्राराक्षसम्/षष्ठोऽङ्कः",
+      "मुद्राराक्षसम्/सप्तमोऽङ्कः"
+     ]
+    }
+   },
    "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+    "note": "The sa.wikisource edition prints a tika in the same flow as the mula, so about 4% of units carry commentary mixed into the verse. Separating them needs edition-specific work; recorded rather than silently kept or silently dropped (18 Aug 2026)."
    }
   },
   {
@@ -732,9 +813,18 @@
     "drishya",
     "nataka"
    ],
-   "sources": {},
-   "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "उत्तररामचरितम् /प्रथमोऽङ्कः",
+      "उत्तररामचरितम् /द्वितीयोऽङ्कः",
+      "उत्तररामचरितम् /तृतीयोऽङ्कः",
+      "उत्तररामचरितम् /चतुर्थोऽङ्कः",
+      "उत्तररामचरितम् /पञ्चमोऽङ्कः",
+      "उत्तररामचरितम् /षष्ठोऽङ्कः",
+      "उत्तररामचरितम् /सप्तमोऽङ्कः"
+     ]
+    }
    }
   },
   {
@@ -750,7 +840,7 @@
    ],
    "sources": {},
    "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+    "status": "not on sa.wikisource or in Ambuda's export"
    }
   },
   {
@@ -766,7 +856,7 @@
    ],
    "sources": {},
    "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+    "status": "not on sa.wikisource or in Ambuda's export"
    }
   },
   {
@@ -854,7 +944,7 @@
    ],
    "sources": {},
    "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+    "status": "sa.wikisource page holds 19 verses of a five-act play"
    }
   },
   {
@@ -870,7 +960,7 @@
    ],
    "sources": {},
    "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+    "status": "not on sa.wikisource or in Ambuda's export"
    }
   },
   {
@@ -968,9 +1058,21 @@
     "kavyani",
     "kavyashastra"
    ],
-   "sources": {},
-   "register": {
-    "status": "GRETIL file carries no reference markers in any convention the parser knows, so it parsed to an empty layer and is left out rather than published empty (checked 18 Aug 2026)"
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "काव्यप्रकाशः/प्रथमः उल्लासः",
+      "काव्यप्रकाशः/द्वितीयः उल्लासः",
+      "काव्यप्रकाशः/तृतीय उल्लासः",
+      "काव्यप्रकाशः/चतुर्थः उल्लासः",
+      "काव्यप्रकाशः/पञ्चमः उल्लासः",
+      "काव्यप्रकाशः/षष्ठः उल्लासः",
+      "काव्यप्रकाशः/सप्तमः उल्लासः",
+      "काव्यप्रकाशः/अष्टमः उल्लासः",
+      "काव्यप्रकाशः/नवम उल्लासः",
+      "काव्यप्रकाशः/दशमः उल्लासः"
+     ]
+    }
    }
   },
   {
@@ -1019,7 +1121,7 @@
    ],
    "sources": {},
    "register": {
-    "status": "GRETIL file carries no reference markers in any convention the parser knows, so it parsed to an empty layer and is left out rather than published empty (checked 18 Aug 2026)"
+    "status": "sa.wikisource has two of its ananas as continuous prose with no verse or section numbering; would import as two enormous units"
    }
   },
   {
@@ -1035,7 +1137,7 @@
    "sources": {},
    "heavy": true,
    "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+    "status": "sa.wikisource has nine prakashas, but as unsegmented blocks -- 680,000 characters in 72 units"
    }
   },
   {
@@ -1048,9 +1150,12 @@
     "kavyani",
     "kavyashastra"
    ],
-   "sources": {},
-   "register": {
-    "status": "no machine-readable source declared -- not on GRETIL (checked against GRETIL's own index, 18 Aug 2026)"
+   "sources": {
+    "wikisource": {
+     "pages": [
+      "छन्दोमञ्जरी"
+     ]
+    }
    }
   }
  ]

@@ -146,6 +146,23 @@ items and the decisions waiting on the project lead, this file the narrative.
   answers from the Anuvyākhyāna, Śānti Parva, Viṣṇutattvanirṇaya and the
   Nyāyāmṛta at once, which nothing in the app could do before.
 
+- **The Kāvya corpus goes from 24 works to 43** (68 layers, **94,949 entries**)
+  by taking the two sources the register had never been asked: **ambuda.org**,
+  whose whole library is one proofed TEI export and whose `shatakatrayam` is
+  Bhartṛhari's three śatakas as three sections — the thing that unblocked the
+  works GRETIL could only offer undivided — and **sa.wikisource.org**, which
+  has the plays GRETIL does not carry at all: Mṛcchakaṭika, Mudrārākṣasa,
+  Mālavikāgnimitra, Uttararāmacarita and the rest, plus Naiṣadhīyacarita and
+  a Jānakīharaṇa the register had written off as *scan only*. Three things the
+  Wikisource path needed first: rendered HTML rather than wikitext (half these
+  works are ProofreadPage transclusions whose wikitext is one `<pages/>` line),
+  a verse marker of one bare number (`।। ६ ।।`, where the shared matcher wanted
+  two components — the parser's own single-number branch could never run), and
+  prose kept in document order, since a Sanskrit play is prose with verses set
+  into it. A script filter drops what these editions carry inline: Kādambarī
+  arrived with 193 blocks of English introduction and corrigenda. Fourteen
+  works still have nothing usable, each with its reason recorded.
+
 ## Round 4 (10 Aug 2026) — Kosha full-corpus build, TTS architecture doc, Mahabharata (Kannada), Yukti Mallika, Svapna-Vrindavanakhyana, Sumadhva Vijaya (audio), Harikathamrutasara
 
 - **Harikathamrutasara (Sri Jagannathadasaru)** — new leaf `dasa_sahitya/dasakuta/jagannathadasa/harikathamrutasara` (947 verses, 33 sandhis). **Corrects an earlier finding from this same session**, which concluded the HKS app had no embedded text at all (checked assets/, classes.dex, and a shallow resources.arsc string-pool dump). That was wrong: the text lives in resources.arsc as compiled Android string-array resources (`hks_sandhi_content_list`, `hks_sandhi_title_list`, both with `default`/ITRANS and `kn`/Kannada configs) — a shallow global-string-pool dump doesn't surface these without also walking the per-package key-name pool and the array (complex-entry) structures, and a "check the longest strings" pass (some single entries run past 30,000 characters — a whole sandhi's text) wasn't done the first time. Re-verified independently using `androguard` before merging rather than taking either the original "absent" conclusion or the correction on faith — cross-checked the project lead's own screenshot text against the extracted data and found it verbatim in Sandhi 31. No verse-level meaning exists in this source (the app itself carries a literal "meaning not yet added" placeholder after every verse, stripped as noise). Zero flagged/ambiguous verses.
