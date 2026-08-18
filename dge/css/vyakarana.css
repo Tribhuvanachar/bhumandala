@@ -64,6 +64,7 @@
   .mdhv-head{font-weight:700;color:var(--accent2);font-size:14px;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .mdhv-lic{font-size:10.5px;color:var(--muted);font-weight:400;border:1px solid var(--line);border-radius:6px;padding:1px 6px}
   .mdhv-text{max-height:340px;overflow:auto;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;line-height:1.85;font-size:15px;white-space:pre-wrap}
+  .mdhv-author{font-size:11.5px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.03em}
   .vrit-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
   .vrit-tab{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
   .vrit-tab.on{background:var(--accent);color:#fff;border-color:var(--accent)}

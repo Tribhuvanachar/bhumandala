@@ -180,13 +180,31 @@
       showVritti(box, d.vrittis[0].source);
     }).catch(function(){ $(".mdhv-text",box).textContent="(could not load vṛtti text)"; });
   }
+  // The source text is one continuous run with no line breaks at all —
+  // confirmed against माधवीयधातुवृत्तिः on भू, 93,758 characters and not a
+  // single \n — so it rendered as one dense, "incomprehensible" slab no
+  // matter how short or long the excerpt actually was. Break after every
+  // sentence-ending danda/double-danda into its own paragraph; .mdhv-text
+  // already has white-space:pre-wrap; scrolling in its fixed-height box
+  // handles a genuinely long excerpt (भू's) without needing to truncate or
+  // guess at which part of the commentary is "relevant".
+  function paragraphize(text){
+    // [।॥]+ (not a single character) so "। ।" / "।।" — a double daṇḍa spelled
+    // as two singles, common in this OCR'd source — breaks once, not into a
+    // sentence followed by an orphan line holding just a lone daṇḍa.
+    return String(text||"").replace(/([।॥][।॥\s]*)/g, "$1\n\n").trim();
+  }
   function showVritti(box, source){
     var code=box.dataset.vrit, d=_vcache[code]; if(!d) return;
     var v=d.vrittis.filter(function(x){return x.source===source;})[0]; if(!v) return;
     box.querySelectorAll(".vrit-tab").forEach(function(t){ t.classList.toggle("on",t.dataset.v===source); });
     var devCls = state.script==="iast"?"":"deva";
     var el=$(".mdhv-text",box); el.className="mdhv-text "+devCls;
-    el.textContent = (v.author?("["+v.author+"] "):"")+tl(v.text||"");
+    var body = paragraphize(tl(v.text||""));
+    el.innerHTML = (v.author?('<div class="mdhv-author">['+esc(v.author)+']</div>'):"") + esc(body);
+    if (typeof window.dgeScanForSutras === "function") {
+      try { window.dgeScanForSutras(el); } catch (e) {}
+    }
   }
 
   function openById(id){
