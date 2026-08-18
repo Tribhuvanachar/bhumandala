@@ -14,7 +14,7 @@ on:
         description: "Which importer to run"
         type: choice
         default: sayana
-        options: [sayana, smriti, veda-phase2, samaveda-propagate, minor-smritis-probe, minor-smritis, both, everything]
+        options: [sayana, smriti, veda-phase2, samaveda-propagate, upanishads, minor-smritis-probe, minor-smritis, both, everything]
       mandalas:
         description: "Sāyaṇa: maṇḍalas to fetch, e.g. '1 2 3' (blank = all ten)"
         default: ""
@@ -62,15 +62,12 @@ jobs:
       - name: Unit tests (patched core.js normaliser)
         run: node tools/sayana_smriti/tests/test_core_patch.js
 
-      # Commentary that lands in the data but is discarded by the normaliser
-      # looks finished and renders nothing. Put the patched core.js in place
-      # BEFORE the smriti job so verify_import.py's render check can pass.
-      # The core.js edits are no longer applied at run time: they are committed
-      # in dge/js/core.js, and the packaged snapshot + diff have been dropped so
-      # nothing can re-apply a stale copy over a file main has moved on from.
-      # test_core_patch.js above reads the shipping dge/js/core.js directly, so
-      # the normaliser is verified rather than assumed. Only the taxonomy nodes
-      # still have to be added before an importer can write into those folders.
+      # The core.js edits are committed in dge/js/core.js, and the packaged
+      # snapshot and diff are dropped on deployment, so nothing here can apply a
+      # stale copy over a file main has moved on from. test_core_patch.js above
+      # reads the shipping dge/js/core.js directly, so the normaliser is verified
+      # rather than assumed. Only the taxonomy nodes still need adding before an
+      # importer can write into those folders.
       - name: Add the new taxonomy folders
         if: inputs.job == 'smriti' || inputs.job == 'both'
         run: |
@@ -132,6 +129,18 @@ jobs:
           ARGS="--dge-root ${{ github.workspace }}/dge"
           if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
           python propagate_samaveda.py $ARGS 2>&1 | tee samaveda.log
+
+      # Thirteen principal-Upanishad folders, all empty today. GRETIL supplies
+      # the mula (and Shankara's bhashya from the same fetch); Muller's SBE 1
+      # and 15 supply the English.
+      - name: Import the Upaniṣads
+        if: inputs.job == 'upanishads' || inputs.job == 'everything'
+        working-directory: tools/sayana_smriti
+        run: |
+          set -o pipefail
+          ARGS="--dge-root ${{ github.workspace }}/dge"
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          python import_upanishads.py $ARGS 2>&1 | tee upanishads.log
 
       # sa.wikisource is the last lead for the eleven minor smrtis. Probe first:
       # it prints a table of what actually exists there and writes nothing, so a
