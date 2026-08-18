@@ -5090,6 +5090,2241 @@
       "path": "dge/data/dvaitavedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_shrinivasatirthiya_khandartha/data.json",
       "populated": true,
       "title": "तैत्तिरीयोपनिषद्भाष्यम् — श्रीनिवासतीर्थीय खण्डार्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhagavato_nirdoshatvalakshanam/mula/data.json",
+      "populated": true,
+      "title": "भगवतो निर्दोषत्वलक्षणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedaparanyeva_khalu_brahmasutrani/mula/data.json",
+      "populated": true,
+      "title": "भेदपराण्येव खलु ब्रह्मसूत्राणि"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/mula/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_10_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १०) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_10_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १०) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_10_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १०) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_10_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १०) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_10_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १०) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_10_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १०) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_11_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ११) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_11_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ११) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_11_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ११) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_11_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ११) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_11_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ११) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_11_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ११) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_12_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १२) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_12_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १२) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_12_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १२) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_12_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १२) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_12_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १२) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_12_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १२) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_13_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १३) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_13_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १३) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_13_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १३) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_13_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १३) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_13_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १३) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_13_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १३) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_14_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १४) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_14_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १४) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_14_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १४) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_14_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १४) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_14_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १४) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_14_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १४) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_15_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १५) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_15_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १५) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_15_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १५) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_15_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १५) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_15_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १५) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_15_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १५) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_16_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १६) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_16_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १६) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_16_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १६) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_16_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १६) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_16_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १६) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_16_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १६) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_17_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १७) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_17_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १७) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_17_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १७) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_17_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १७) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_17_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १७) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_17_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १७) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_18_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १८) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_18_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १८) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_18_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १८) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_18_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १८) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_18_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १८) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_18_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १८) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_19_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १९) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_19_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १९) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_19_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १९) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_19_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १९) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_19_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १९) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_19_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १९) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_1_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १) भावप्रदीपः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_1_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_1_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_1_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_1_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — (१ )काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_1_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( १)शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_20_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २०) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_20_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २०) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_20_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २०) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_20_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २०) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_20_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २०) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_20_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २०) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_21_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २१) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_21_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २१) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_21_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २१) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_21_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २१) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_21_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २१) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_21_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २१) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_22_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २२) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_22_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २२) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_22_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २२) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_22_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २२) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_22_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २२) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_22_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २२) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_23_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २३) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_23_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २३) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_23_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २३) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_23_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २३) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_23_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २३) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_23_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २३) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_24_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २४) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_24_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २४) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_24_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २४) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_24_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २४) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_24_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २४) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_24_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २४) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_25_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २५) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_25_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २५) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_25_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २५) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_25_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २५) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_25_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २५) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_25_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २५) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_26_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २६) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_26_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २६) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_26_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २६) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_26_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २६) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_26_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २६) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_26_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २६) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_27_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २७) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_27_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २७) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_27_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २७) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_27_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २७) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_27_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २७) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_27_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २७) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_28_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २८) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_28_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २८) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_28_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २८) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_28_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २८) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_28_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २८) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_28_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २८) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_29_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २९) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_29_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २९) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_29_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २९) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_29_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २९) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_29_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २९) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_29_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २९) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_2_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २)भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_2_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_2_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_2_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_2_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_2_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( २) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_30_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३०) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_30_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३०) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_30_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३०) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_30_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३०) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_30_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३०) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_30_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३०) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_31_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३१) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_31_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३१) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_31_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३१) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_31_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३१) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_31_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३१) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_31_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३१) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_32_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३२) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_32_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३२) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_32_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३२) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_32_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३२) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_32_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३२) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_32_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३२) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_33_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३३) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_33_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३३) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_33_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३३) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_33_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३३) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_33_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३३) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_33_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३३) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_34_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३४) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_34_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३४) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_34_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३४) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_34_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३४) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_34_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३४) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_34_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३४) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_35_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३५) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_35_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३५) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_35_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३५) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_35_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३५) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_35_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३५) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_35_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३५) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_36_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३६) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_36_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३६) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_36_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३६) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_36_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३६) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_36_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३६) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_36_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३६) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_3_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_3_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_3_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_3_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_3_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_3_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ३) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_4_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ४) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_4_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ४) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_4_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ४) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_4_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ४) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_4_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ४) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_4_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ४) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_5_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ५) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_5_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ५) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_5_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ५) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_5_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ५) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_5_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ५) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_5_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ५) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_6_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ६) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_6_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ६) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_6_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ६) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_6_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ६) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_6_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ६) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_6_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ६) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_7_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ७) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_7_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ७) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_7_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ७) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_7_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ७) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_7_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ७) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_7_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ७) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_8_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ८) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_8_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ८) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_8_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ८) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_8_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ८) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_8_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ८) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_8_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ८) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_9_bhavapradipa/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ९) भावप्रदीप"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_9_bhedacandrika/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ९) भेदचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_9_bhedacintaratnam/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ९) भेदचिन्तारत्नम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_9_bhedasanjivini/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ९) भेदसञ्जीविनी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_9_kashitimmannacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ९) काशीतिम्मण्णाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/bhedojjivana/tika_9_sharkarashrinivasacarya/data.json",
+      "populated": true,
+      "title": "भेदोज्जीवनम् — ( ९) शर्कराश्रीनिवासाचार्य"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/brahmasutranyayasamgraha/mula/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रन्यायसंग्रहः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/mula/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_01/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_०१"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_02/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_०२"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_03/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ ०३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_04/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ ०४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_05/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ ०५"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_06/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ ०६"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_07/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ ०७"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_08/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ ०८"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_09/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ ०९"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_0_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ० १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_0_2/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_० २"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_0_3/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_० ३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_0_4/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_० ४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_0_5/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_० ५"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_0_6/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_० ६"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_0_7/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_० ७"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_0_8/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_० ८"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_10/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ १०"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_101/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १०१"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_102/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १०२"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_103/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १०३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_104/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १०४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_105/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १०५"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_106/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १०६"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_107/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १०७"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_108/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १०८"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_109/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १०९"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_10_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १० १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_10_1_0/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १० १ ०"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_10_1_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १० १ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_11/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ ११"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_11_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ११ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_12/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १२"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_121/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १२१"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_122/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १२२"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_123/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १२३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_124/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १२४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_125/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १२५"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_126/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १२६"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_127/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १२७"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_12_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १२ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_13/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_132/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १३२"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_13_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १३ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_14/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_14_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १४ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_15/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १५"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_15_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १५ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_16/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ १६"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_16_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १६ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_17/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ १७"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_17_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १७ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_18/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ १८"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_18_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १८ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_19/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ १९"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_19_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १९ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_1_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_1_1_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १ १ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_1_1_2/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १ १ २"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_1_1_3/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १ १ ३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_1_1_4/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ १ १ ४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_1_3/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_१ ३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_20/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ २०"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_20_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ २० १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_21/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ २१"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_211/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ २११"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_22/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ २२"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_222/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ २२२"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_223/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ २२३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_224/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ २२४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_22_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ २२ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_23/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ २३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_24/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ २४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_25/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ २५"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_26/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ २६"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_27/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ २७"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_28/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ २८"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_29/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ २९"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_2_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ २ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_30/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब _ ३०"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_31/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ३१"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_32/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ३२"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_3_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ३ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_41/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ४१"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_42/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ४२"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_43/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ४३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_44/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ४४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_45/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ४५"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_46/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ४६"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_4_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ४ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_4_2/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ४ २"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_51/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ५१"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_52/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ५२"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_53/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ५३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_54/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ५४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_5_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ५ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_61/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ६१"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_6_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ६ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_71/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ७१"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_72/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ७२"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_7_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ७ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_8_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ८ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_91/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ९१"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_92/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ९२"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_93/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ९३"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_94/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ९४"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_95/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ९५"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/candrikamandanam/tika_ramasubba_9_1/data.json",
+      "populated": true,
+      "title": "चन्द्रिकामण्डनम् — रामसुब्ब_ ९ १"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/dvaita_dyumani/mula/data.json",
+      "populated": true,
+      "title": "द्वैतद्युमणिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/dvaita_dyumani/tika_dvaitadyumani/data.json",
+      "populated": true,
+      "title": "द्वैतद्युमणिः — द्वैतद्युमणिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/dvaita_dyumani/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "द्वैतद्युमणिः — श्रीमज्जयतीर्थटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/mula/data.json",
+      "populated": true,
+      "title": "कर्मविजयः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_01_karmanirnaya_tatraika_ahuragunam_brahmeti_na_tadyuktam_shruti/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — ( ०१) कर्मनिर्णय:-तत्रैक आहुरगुणं ब्रह्मेति । न तद्युक्तं श्रुतियुक्तिविरोधात्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_adhikyagrastatvaprayapathaparyalocanabhyam_pratanavyakhyane_shru/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — आधिक्यग्रस्तत्वप्रायपाठपर्यालोचनाभ्यां प्रतनव्याख्याने श्रुतमूलवाक्यस्य अन्यथाविन्यासापरत्युद्भावनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_anekai_pramanairbuddhipurvapravritirupakartritvam_mukhyam_vikara/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — अनेकैः प्रमाणैर्बुद्धिपूर्वप्रवृतिरूपकर्तृत्वं मुख्यं विकाररूपकर्तृत्वममुख्यमिति प्रतिपाद्य व्यभिचारचोदनस्य तत्परिहारप्रयत्नस्य चायुक्तत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_anushyakhvanadidishagamasyagamatvenaiva_pramanyam_na_tu_lingatve/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — अनुष्याख्वानादिदिशाऽऽगमस्यागमत्वेनैव प्रामाण्यं न तु लिङ्गत्वेनेति प्रतिपादनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_anuvyakhyanaprasanga_tau_lya_t_vipakshe_badhakapradarshanapurvak/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — अनुव्याख्यानप्रसङ्ग तौ ल्या त् , विपक्षे बाधकप्रदर्शनपूर्वकं बुद्धिघटितत्वस्यैव अङ्गीकार्यत्वप्रतिपादनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_asangatamiti_anucitatatparyakamiti_pakshasya_dushanam/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — असङ्गतमिति अनुचिततात्पर्यकमिति पक्षस्य दूषणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_ayuktamityasangatarthakam_neti_vyavasthapayitum_anuvyakhyane_ksh/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — अयुक्तमित्यसङ्गतार्थकं नेति व्यवस्थापयितुम् अनुव्याख्याने क्षत्यधिकरणीयपद्मनाभतीर्थटीकासन्दर्भनिरूपणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_bahunam_vacanikarthanam_tatparyarthena_nigamanamiti_kham_cam_mat/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — बहूनां वाचनिकार्थानां तात्पर्यार्थेन निगमनमिति खं. चं. मतमनू द्य अप्रसक्तशङ्कासमाधनरूपत्वं तस्य दर्शयितुं प्रकृतपूर्वपक्षिमतमुक्त्वा तर्केण त द्दू षणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_bahunam_vacanikarthanamekasyaiva_tatparyarthena_nigamanamiti_kha/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — बहूनां वाचनिकार्थानामेकस्यैव तात्पर्यार्थेन निगमनमिति खं. चं. व्याख्याने शक्यार्थलक्ष्यार्थयोरुभयोरपि तात्पर्यार्थत्वप्रतिपादक मू लविरोधोद्भावनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_buddhighatitakartritvasya_mukhyasyaiva_vivakshitatve_purvoktativ/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — बुद्धिघटितकर्तृत्वस्य मुख्यस्यैव विवक्षितत्वे पूर्वोक्तातिव्याप्तिशङ्कासमाधानयोरप्रसक्तिमाशङ्क्य तयोरभ्युपेत्यवादेन प्रवृत्तत्वकथनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — बुद्धिपू र्वं सर्वकर्तृत्वादिति हे तौ दलकृत्यचिन्तापूर्वकं व्यभिचारस्यासम्भवदुक्तिकत्वप्रदर्शनेन बुद्धिपूर्वमित्यस्य टीकोक्तवैयर्थ्यस्थैर्यप्रतिपादनम् | अर्थसङ्कोचे न सार्थक्ये मूलकृतोऽकुशलत्यप्रसङ्गोद्भावनं च"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_pracinabhimata_he_tughataka_vis/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — बुद्धिपू र्वं सर्वकर्तृत्वादिति प्राचीनाभिमत हे तुघटक विशेषणस्य व्यभिचारवारकत्वमेवाश्रयणीयमिति प्रतिपादनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_buddhipurvam_sarvakartritvaditi_heto_shrutisiddhatvenumeyabhavak/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — बुद्धिपूर्वं सर्वकर्तृत्वादिति हेतोः श्रुतिसिद्धत्वेऽनुमेयाभावकथनपूर्वकंदार्ढ्याय युक्तिरिति पक्षस्य साध्याविशिष्टतोद्भावनेन निराकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_ekasyaiva_granthasya_naikanamakrite_shastravanmayaprasiddhatvapr/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — एकस्यैव ग्रन्थस्य नैकनामकृतेः शास्त्रवाङ्मयप्रसिद्धत्वप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_gaunilakshanasthalayo_rvai_shamyena_vyakhyane_bijabhavapradarsha/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — गौणीलक्षणास्थलयो र्वै षम्येन व्याख्याने बीजाभावप्रदर्शनपूर्वकं टीकाकृत्पादीयव्याख्यानमेव वचनभ न्ग्य न्तरेण आश्रितं भवतीति कथनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_gitatatparyodahritam_kartritvam_gaunam_anuvyakhyanoktam_ca_pradh/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — गीतातात्पर्योदाहृतं कर्तृत्वं गौणम् , अनुव्याख्यानोक्तं च प्रधानमिति विषयोपक्षेपपूर्वकं सर्वकर्तृत्वादित्यत्र प्रधानस्यैव बाधकाभावाद् विवक्षेति व्यभिचाराभावसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_granthatrakritakramanirupanena_purvapakshina_sagunatva_eva_vivad/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — ग्रन्थत्रकृतक्रमनिरूपणेन पूर्वपक्षिणः सगुणत्व एव विवाद इति प्रदर्शनपूर्वकं ब्रह्मणोऽनन्तगुणत्वानुमानस्याप्रसक्तत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_jagadatmana_vikarasya_kartritvarupatvepi_tasya_kartrishabdamukhy/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — जगदात्मना विकारस्य कर्तृत्वरूपत्वेऽपि तस्य कर्तृशब्दमुख्यार्थत्वेऽपि गीतातात्पर्यवचनविरोधादेव प्रकृते तस्य ग्रहणासम्भवप्रतिपादनपूर्वकं टीकोक्तविशेषणवैयर्थ्यस्य सुस्थिरत्वप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnaya_namna_eva_tikakrita_svikare_prayojanakathanam/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — “ कर्मनिर्णय\" नाम्न एव टीकाकृता स्वीकारे प्रयोजनकथनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnaya_namna_upasamharopakramavakyabhyam_sampradayacca_nir/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — “ कर्मनिर्णय ” नाम्न उपसंहारोपक्रमवाक्याभ्यां सम्प्रदायाच्च निर्णीतत्त्वकथनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnaya_namno_narayanapanditacaryasucitatvanva_rtha_katvayo/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — “ कर्मनिर्णय ” नाम्नो नारायणपण्डिताचार्यसूचितत्वान्व र्थ कत्वयोः समर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnaya_namra_aca_ryo_pa_jna_ttve_pramanapratijna/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — \" कर्मनिर्णय\" नाम्र आचा र्यो प ज्ञ त्त्वे प्रमाणप्रतिज्ञा"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnayanamna_acaryakritatvanirnayopayogitaya_naikamulakosha/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — कर्मनिर्णयनाम्न आचार्यकृतत्वनिर्णयोपयोगितया नैकमूलकोशवत्त्वसमर्थनपूर्वकं टीकाकृतां मूलकोशानुपलम्भादिनिरास"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnayanamna_pradhanyasya_khandarthanirnayanamna_prasangika/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — कर्मनिर्णयनाम्नः प्राधान्यस्य , खण्डार्थनिर्णयनाम्नः प्रासङ्गिकत्वस्य च प्रतिपादनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmanirnaye_buddhighatitakartritvangikartrimayavadina_evam_prat/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — कर्मनिर्णये बुद्धिघटितकर्तृत्वाङ्गीकर्तृमायावादिन एवं प्रतिवादित्वेनास्य परमतानुसारेण प्रवृत्तेरनाश ङ्कनीयत्व प्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_karmavijaya/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — कर्मविजयः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_kartritvam_dvividhamiti_kartritvavibhagapratipadakapaingitishrut/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — ' कर्तृत्वं द्विविधमिति कर्तृत्वविभागप्रतिपादकपैङ्गितिश्रुतेः सप्रमाणमभिसन्धिनिरूपणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_kartritvasya_buddhighatitatve_prakrityadhikarananuvyakhyanavirod/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — कर्तृत्वस्य बुद्धिघटितत्वे प्रकृत्यधिकरणानुव्याख्यानविरोधमाशङ्कय समाधानपरसुधाशयवर्णनपूर्वकं कर्मनिर्णयप्रसङ्गस्य वैषम्यप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_katha_lakshanadipramana_nai_kathayamapi_shruteshshrutitvenaiva_p/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — कथा लक्षणादिप्रमाण णै: कथायामपि श्रुतेश्श्रुतित्वेनैव प्रमाणतयोपन्याससमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_kham_cam_pakshepi_virodhadamu_khya_vrittirva_ityatra_vashabdasya/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — खं .चं.पक्षेपि ' विरोधादमु ख्य वृत्तिर्वा इत्यत्र वाशब्दस्य आशयान्तरेण वैयर्थ्याभावमाशङ्क्य तदाशयान्तरस्य विकल्पपूर्वकं दूषणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_lakshyarthagaunarthayo_shabdatva_eva_virodhadamukhyavrittirva_it/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — लक्ष्यार्थगौणार्थयोः शाब्दत्व एव ' विरोधादमुख्यवृत्तिर्वा ' इतिमूलस्थ ' वा ' शब्दस्य विवक्षितार्थे सङ्गतिसम्भवप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_lakshyarthagaunarthayoranumanikatvamacaryaireva_pratipaditamiti_/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — लक्ष्यार्थगौणार्थयोरानुमानिकत्वमाचार्यैरेव प्रतिपादितमिति पूर्वपक्षिणो मतमुपन्यस्य यथाटीकमेव आचार्याशयस्य सुसङ्गतत्वप्रतिपादनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_lakshyarthagaunarthayoranumeyatvam_na_tu_shabdatvamityabhiprayas/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — लक्ष्यार्थगौणार्थयोरनुमेयत्वं , न तु शाब्दत्वमित्यभिप्रायस्य तयोश्शाब्दत्वप्रत्यायकानु व्या ख्यानविरोधप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acaryakritatva/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — महाजनपरिगृहीतत्वलिङ्गेन \"कर्मनिर्णय \"ना म्न आचार्यकृतत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_na_tan_manasi_lagati_iti_vikalpanirasa/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — न तन् मनसि लगति इति विकल्पनिरास"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_naca_vacanikarthastatparyartha_iti_vishesha_iti_acaryavakyasya_v/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — नच वाचनिकार्थस्तात्पर्यार्थ इति विशेष इति आचार्यवाक्यस्य वाचनिकपदघटकवचनपदस्य टीकादभिप्रेतार्थवर्णनपूर्वकं खं. चं. काराभिप्रेतार्थस्य दूषणोपक्रमः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_paramadarashtikakritam_paramagurushu/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — परमादरष्टीकाकृतां परमगुरुषु"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_prakaranaparyalocanaya_na_yuktamityasya_asangatarthakatvasya_asa/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रकरणपर्यालोचनया न युक्तमित्यस्य असङ्गतार्थकत्वस्य असम्भवप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_prakritasandarbhocitataya_vedavakyasya_tu_ityatra_vakya_padapray/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रकृतसन्दर्भोचिततया वेदवाक्यस्य तु . इत्यत्र “ वाक्य ” पदप्रयोगाभिसन्ध्युद्घाटनपूर्वकं टीकाकृत्पादाशयदूषणासम्भवप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_prakrite_kartritvadityanena_vikararupakartritve_grihitepi_prakri/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रकृते कर्तृत्वादित्यनेन विकाररूपकर्तृत्वे गृहीतेऽपि प्रकृतेः सर्वकर्तृत्त्वाभावादेवाव्यभिचार इति प्रतिपादनपूर्वकं टीकोक्तदोषयोः सुस्थिरत्वप्रतिपादनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_pramanalakshanadivakyodaharanapurvakam_siddhante_kartritvasya_bu/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रमाणलक्षणादिवाक्योदाहरणपूर्वकं सिद्धान्ते कर्तृत्वस्य बुद्धिघटितत्वं प्रतिष्ठाप्य असदधिकरणसुधायाः प्रतिवादिमतेनैव प्रवृत्तत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_prasangadasadadhikaraniyanuvvakhyanasudhaya_karta_buddhimaniti_s/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रसङ्गादसदधिकरणीयानुव्वाख्यानसुधायाः \" कर्ता बुद्धिमानिति शेष\" इत्यादिरूपायाः परमतानुसारेण प्रवृत्तिकथनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_prasangadasamanjasashobhanashabdayoraparyayatvamakshipya_paryaya/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रसङ्गादसमञ्जसाशोभनशब्दयोरपर्यायत्वमाक्षिप्य पर्यायत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_prasangat_tikakritam_mulakoshanupalambhe_tattvanirnayatika_stham/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रसङ्गात् टीकाकृतां मूलकोशानुपलम्भे तत्त्वनिर्णयटीका स्थं \" प्रक्षिप्तमित्याहुः\" इति वाक्यं प्रमाणयतां मतस्य निरासः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_pratijnadhyaharaprasangadityatra_pratijnapadaprayogamarmaprakash/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रतिज्ञाध्याहारप्रसङ्गादित्यत्र प्रतिज्ञापदप्रयोगमर्मप्रकाशनपूर्वकं ' न तद्युक्तं श्रुतियुक्तिविरोधादि त्यत्र टीकाया अकलङ्कित्वप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_pravrittirupakartritvasya_buddhighatitatve_kartritvasya_buddhivy/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — प्रवृत्तिरूपकर्तृत्वस्य बुद्धिघटितत्वे कर्तृत्वस्य बुद्धिव्याप्तत्वाभिधायिसुधाविरोधमाशङ्कय प्रतिवाद्यादिमतमनुसृत्यैव कर्तृत्वस्य बुद्धिव्याप्तत्वाभिधानम् , न तु सिद्धान्तेऽपि तत्तथेति प्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_shrimattikakritpadiyavyakhyanasya_sphutabadhitasangatimattvaprad/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — श्रीमट्टीकाकृत्पादीयव्याख्यानस्य स्फुटाबाधितसङ्गतिमत्त्वप्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_siddhantedushanasyapyaprasiddhavisheshanatvasyasiddhisankirnatad/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — सिद्धान्तेऽदूषणस्याप्यप्रसिद्धविशेषणत्वस्यासिद्धिसङ्कीर्णतादशायां दोषत्वोपपत्तिरिति उपपादनपूर्वकं प्रकृते तदुद्भावनाभिसन्ध्युद्घाटनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_simhavalokananyayena_puna_vacanikarthashabdasya_shakyarthamatrap/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — सिंहावलोकनन्यायेन पुनः वाचनिकार्थशब्दस्य शक्यार्थमात्रपरत्वे बाधकप्रदर्शनपूर्वकं टीकापक्षे दोषाभावनिरूपणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_svoktarthe_eva_sakridu_cca_rita_iti_nyayasya_pravrittim_tasya_sh/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — स्वोक्तार्थे एव सकृदु च्च रितः... इति न्यायस्य प्रवृत्तिं , तस्य शास्त्रविषयत्वाभावं चाभिप्रयत : खं .चं.कारस्य व्याख्यानं प्रकृते शास्त्र प्र स्तावादसङ्गतमिति दूषणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_uktakham_cam_vyakhyanasya_yathashrutamulapadananuguna_ta_pradars/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — उक्तखं.चं.व्याख्यानस्य यथाश्रुतमूलपदाननुगुण ता प्रदर्शनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_uktasadhyavishishtataya_samanyavisheshabhavenasambhavamashakya_s/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — उक्तसाध्याविशिष्टताया: सामान्यविशेषभावेनासम्भवमाशक्य सत्यपि तस्मिन् , \" वृक्ष: शिंशुपात्वादित्यस्मात् प्रकृतहेतोर्विलक्षणतया साध्याविशिष्टताया दुर्वारत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_vimarshanasaukaryaya_svandaryacandrikaya_yathagranthamanuvada/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — विमर्शनसौकार्याय स्वण्डार्यचन्द्रिकाया यथाग्रन्थमनुवादः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_yatra_vacanikaryadanya_iti_vakyapataka_laukikavakyeshu_ityasya_k/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — यत्र वाचनिकार्यादन्यः...इति वाक्यपटक\" लौकिकवाक्येषु\" इत्यस्य कृत्यमु क्त्वा , रूढियो गौ विना कश्चित्... वेदवाक्यस्य तु वाचनिका र्थं ... इति वाक्ययोः भिन्नविषयकत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_yuktatyupetamiti_sangatyupetamityarthakamiti_pakshasya_nirasa/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — युक्तत्युपेतमिति सङ्गत्युपेतमित्यर्थकमिति पक्षस्य निरास"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_yuktiriti_vacoyuktiriti_pakshanirasa/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — युक्तिरिति वाचोयुक्तिरिति पक्षनिरास"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/karmavijaya/tika_yuktirityanumaiveti_pakshe_sadhyaparishkarapurvakamanumanam_vimr/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — युक्तिरित्यनुमैवेति पक्षे साध्यपरिष्कारपूर्वकमनुमानं विमृश्य पूज्यपरिमळाचार्याशयस्य निर्दुष्टत्वसमर्थनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/madhvamukhalankara/mula/data.json",
+      "populated": true,
+      "title": "मध्वमुखालङ्कारः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/madhvasiddhantasara/mula/data.json",
+      "populated": true,
+      "title": "मध्वसिद्धान्तसारः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyayamrita/mula/data.json",
+      "populated": true,
+      "title": "न्यायामृतम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyayamrita/tika_nyayakalpalata/data.json",
+      "populated": true,
+      "title": "न्यायामृतम् — न्यायकल्पलता"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyayamrita/tika_nyayamritakantakoddhara/data.json",
+      "populated": true,
+      "title": "न्यायामृतम् — न्यायामृतकण्टकोद्धारः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyayamrita/tika_nyayamritamadhuri/data.json",
+      "populated": true,
+      "title": "न्यायामृतम् — न्यायामृतमाधुरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyayamrita/tika_nyayamritaprakasha/data.json",
+      "populated": true,
+      "title": "न्यायामृतम् — न्यायामृतप्रकाशः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyayamrita/tika_nyayamritasaugandhyam/data.json",
+      "populated": true,
+      "title": "न्यायामृतम् — न्यायामृतसौगन्ध्यम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyayamrita/tika_nyayamritatarangini/data.json",
+      "populated": true,
+      "title": "न्यायामृतम् — न्यायामृततरङ्गिणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/padarthasangraha/mula/data.json",
+      "populated": true,
+      "title": "पदार्थसङ्ग्रहः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/mula/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_2_jayatirthavijaya/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — ( २) जयतीर्थविजय"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_3_jayatirthavijaya/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — ( ३) जयतीर्थविजय"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_abhinavamritam/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — अभिनवामृतम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_adarsha/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — आदर्शः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_bhavadipa/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — भावदीपः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_jayatirthavijaya/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — जयतीर्थविजय"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_shrivedeshabhikshu/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — श्रीवेदेशभिक्षु"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_shrivijayindratirtha/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — श्रीविजयीन्द्रतीर्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_shrivittalabhatta/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — श्रीविट्टलभट्ट"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/pramana_paddhati/tika_vakyarthamanjari/data.json",
+      "populated": true,
+      "title": "प्रमाणपद्धतिः — वाक्यार्थमञ्जरी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/purushasuktam/mula/data.json",
+      "populated": true,
+      "title": "पुरुषसूक्तम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/purushasuktam/tika_satyapramoda/data.json",
+      "populated": true,
+      "title": "पुरुषसूक्तम् — सत्यप्रमोदटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/purushasuktam/tika_surottama/data.json",
+      "populated": true,
+      "title": "पुरुषसूक्तम् — सुरोत्तमटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/sarvasiddhantasarasaravivecanam/mula/data.json",
+      "populated": true,
+      "title": "सर्वसिद्धान्तसारासारविवेचनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/shrimanmadhvasiddhantasaroddhara/mula/data.json",
+      "populated": true,
+      "title": "श्रीमन्मध्वसिद्धान्तसारोद्धारः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/shrimannyayasudhamandanam/mula/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधामण्डनम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/shrimannyayasudhamandanam/tika_advaitatatvasudhabhumika/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधामण्डनम् — अद्वैततत्वसुधाभूमिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/shrivijayindravijayavaibhavam/mula/data.json",
+      "populated": true,
+      "title": "श्रीविजयीन्द्रविजयवैभवम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/sumadhva_vijaya/mula/data.json",
+      "populated": true,
+      "title": "सुमध्वविजयः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/sumadhva_vijaya/tika_iti_shrimadvedangamuniviracitashrisumadhvavijayatikavivrittau_sh/data.json",
+      "populated": true,
+      "title": "सुमध्वविजयः — इति श्रीमद्वेदाङ्गमुनिविरचितश्रीसुमध्वविजयटीकाविवृत्तौ श्रीविश्वपतितीर्थकृतौ पदार्थदीपिकोद्बोधिकायां द्वितीयः सर्गः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/sumadhva_vijaya/tika_iti_shrinarayanapanditacaryaviracitayam_svakritashrimatsumadhvav/data.json",
+      "populated": true,
+      "title": "सुमध्वविजयः — इति श्रीनारायणपण्डिताचार्यविरचितायां स्वकृतश्रीमत्सुमध्वविजयस्य भावप्रकाशिका ख्यटीकायां द्वितीयः सर्गः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/sumadhva_vijaya/tika_mandopakarini/data.json",
+      "populated": true,
+      "title": "सुमध्वविजयः — मन्दोपाकारिणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/sumadhva_vijaya/tika_padarthadipikodbodhika/data.json",
+      "populated": true,
+      "title": "सुमध्वविजयः — पदार्थदीपिकोद्बोधिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/sumadhva_vijaya/tika_prakashika/data.json",
+      "populated": true,
+      "title": "सुमध्वविजयः — भावप्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/sumadhva_vijaya/tika_shrichalarisheshacaryaviracita_mandopakarini/data.json",
+      "populated": true,
+      "title": "सुमध्वविजयः — श्रीछलारिशेषाचार्यविरचिता मन्दोपाकारिणी"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tantradipika/mula/data.json",
+      "populated": true,
+      "title": "तन्त्रदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tarka_tandava/mula/data.json",
+      "populated": true,
+      "title": "तर्कताण्डवम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tarka_tandava/tika_jayatirtha/data.json",
+      "populated": true,
+      "title": "तर्कताण्डवम् — तर्कताण्डवटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tarka_tandava/tika_nyayadipa/data.json",
+      "populated": true,
+      "title": "तर्कताण्डवम् — न्यायदीपः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tarka_tandava/tika_nyayadipa_khya_vyakhya/data.json",
+      "populated": true,
+      "title": "तर्कताण्डवम् — न्यायदीपा ख्या व्याख्या"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tarka_tandava/tika_prabhakarastu/data.json",
+      "populated": true,
+      "title": "तर्कताण्डवम् — प्राभाकरास्तु"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tarka_tandava/tika_yuktiratnakara/data.json",
+      "populated": true,
+      "title": "तर्कताण्डवम् — युक्तिरत्नाकरः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tatparya_chandrika/mula/data.json",
+      "populated": true,
+      "title": "तात्पर्यचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tatparya_chandrika/tika_candrikabindu/data.json",
+      "populated": true,
+      "title": "तात्पर्यचन्द्रिका — चन्द्रिकाबिन्दु"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tatparya_chandrika/tika_candrikavivriti/data.json",
+      "populated": true,
+      "title": "तात्पर्यचन्द्रिका — चन्द्रिकाविवृतिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tatparya_chandrika/tika_pandurangi/data.json",
+      "populated": true,
+      "title": "तात्पर्यचन्द्रिका — पाण्डुरङ्गि"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/tatparya_chandrika/tika_prakashika/data.json",
+      "populated": true,
+      "title": "तात्पर्यचन्द्रिका — प्रकाशिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/vadavali/mula/data.json",
+      "populated": true,
+      "title": "वादावली"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/vadavali/tika_vadavalibhavadipika/data.json",
+      "populated": true,
+      "title": "वादावली — वादावलीभावदीपिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/vadavali/tika_vadavaliprakasha/data.json",
+      "populated": true,
+      "title": "वादावली — वादावलीप्रकाशः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/vadavali/tika_vivarana/data.json",
+      "populated": true,
+      "title": "वादावली — वादावलीविवरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/vagvajra/mula/data.json",
+      "populated": true,
+      "title": "वाग्वज्रः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/yukti_mallika/mula/data.json",
+      "populated": true,
+      "title": "युक्तिमल्लिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/yukti_mallika/tika_satyapramoda/data.json",
+      "populated": true,
+      "title": "युक्तिमल्लिका — सत्यप्रमोदटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/yukti_mallika/tika_surottama/data.json",
+      "populated": true,
+      "title": "युक्तिमल्लिका — सुरोत्तमटीका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/sruti_prasthana/rig_bhashya/mula/data.json",
+      "populated": true,
+      "title": "ऋग्भाष्यम्"
     }
   ]
 }
