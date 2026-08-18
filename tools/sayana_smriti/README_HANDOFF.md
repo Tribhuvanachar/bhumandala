@@ -1,3 +1,58 @@
+# Handoff — Veda & Smṛti commentary import  (v4)
+
+## New in v4 — the Upaniṣads, and two corrections
+
+### `import_upanishads.py`
+
+Thirteen principal-Upaniṣad folders exist in `taxonomy.json` and **every one holds
+zero items** — the most-read texts in the corpus, and the shelf is bare. This fills
+them from two sources whose references ARE the ids, so nothing is inferred:
+
+* **GRETIL corpustei** — `ChUp_1,1.1` is prapāṭhaka 1, khaṇḍa 1, verse 1, and
+  `ChUpBh_1,1.1` is Śaṅkara on it, in the same file. One fetch yields mūla *and*
+  bhāṣya. Available for Chāndogya, Bṛhadāraṇyaka, Īśā, Kaṭha, Māṇḍūkya, Praśna,
+  Śvetāśvatara, Taittirīya, Aitareya.
+* **Müller, SBE 1 and 15** — one file per khaṇḍa, in order. The section counts are
+  fixed and known (Chāndogya's eight prapāṭhakas run 13, 24, 19, 17, 24, 16, 26, 15
+  = 154 khaṇḍas = exactly the 154 files SBE 1 gives it), so file → id is arithmetic.
+
+Two traps found and handled, both of which would have produced plausible-looking
+scripture at the wrong references:
+
+* **`sbe15054` holds two sections** — the second *and* third brāhmaṇa of
+  Bṛhadāraṇyaka I. Count files instead of sections and every later id shifts by
+  one. The parser splits on headings and the importer counts sections.
+* **`sbe15098` is Hume's translation, not Müller's** — a duplicate of VI,4. It is
+  skipped explicitly.
+
+If a range's section count does not match the declared structure, that Upaniṣad is
+**skipped rather than written**. A unit test asserts every shipped range matches,
+so the config is right and not merely safe.
+
+No GRETIL mūla exists for Kena, Muṇḍaka, Kauṣītaki or Maitrāyaṇīya (GRETIL lists
+them, hosts nothing) — those get the English layer only.
+
+### Correction 1 — Śaṅkara's bhāṣya is NOT missing
+
+My deployables list said the `shankara_bhashya` job never ran. Wrong: it ran, and
+landed under `data/darshana/vedanta/advaita/shankara_bhashya/`, not the top-level
+path I checked. **Brahmasūtra-bhāṣya (556 units, 864k chars) and Gītā-bhāṣya (1,175
+units) are already in the repo.** What is actually missing is nine of the ten
+Upaniṣad bhāṣyas — only Aitareya (59 units) landed, though the six other GRETIL
+URLs in `importers/shankara_bhashya.py` are live (I fetched
+`sa_chAndogyopaniSad-comm.htm` and it is there, with the tags the importer
+expects). So that job wants a **re-run**, not a rewrite. And v4's Upaniṣad importer
+picks up the same bhāṣya text as a by-product.
+
+### Correction 2 — the empty shelves are much bigger than the Vedas
+
+While auditing I counted the rest of the corpus. Empty grantha folders:
+`darshana` 187 of 237 · `vedanga` 93 of 102 · `purana` 90 of 114 · `agama` 17 of 18
+· `kavya_alankara` 26 of 30, plus 79 empty folders under `vedas`. The Upaniṣads are
+the first slice of that, not the whole of it.
+
+---
+
 # Handoff — Veda & Smṛti commentary import  (v3)
 
 ## Also new in v3 — the last empty shelf: `import_minor_smritis.py`
@@ -95,18 +150,9 @@ exists but is off by default. Verified against the live repo — a Manu run repo
 `import_sayana_rigveda.py` was never affected: it merges per mantra and never
 rebuilds a file.
 
-Also new in v2: `tests/test_core_patch.js` (10 tests over the normaliser) and
-`verify_import.py` (post-run QA — run it before merging the PR).
-
-**On the core.js edits, as deployed in this repo:** the package shipped them
-three ways — a whole patched `patches/core.js`, a `patches/core.js.patch` diff,
-and the prose in `patches/core-js-labels.md`. Both the snapshot and the diff
-have been dropped here, and the edits live in `dge/js/core.js` itself. The
-snapshot was cut from main on 17 Aug and main has moved on since (kosha
-citations, the tour, inline content), so keeping a stale full copy of core.js in
-the tree is a loaded gun: anything that applies it reverts unrelated work.
-`tests/test_core_patch.js` now reads `dge/js/core.js` directly, so it guards the
-file the browser actually loads rather than a copy that can drift from it.
+Also new in v2: `patches/core.js` (a drop-in patched file, not a diff to apply by
+hand), `tests/test_core_patch.js` (10 tests over it), and `verify_import.py`
+(post-run QA — run it before merging the PR).
 
 ## Why the dump isn't in this zip
 
@@ -213,9 +259,9 @@ parsers/gdocs.py             UT-Austin / Olivelle Google Doc transcriptions
 import_sayana_rigveda.py     the headline: Sāyaṇa into all ten maṇḍalas
 import_smriti.py             mūla + commentaries for 13 smṛti/dharmaśāstra granthas
 sources.json                 source registry with per-layer rights triage
-patches/core-js-labels.md    what the core.js edits are and why (already applied
-                             in dge/js/core.js; the packaged snapshot and diff
-                             were dropped so neither can revert newer work)
+patches/core.js              drop-in patched core.js (both edits already applied)
+patches/core.js.patch        the same, as a unified diff against current main
+patches/core-js-labels.md    what the edits are and why
 patches/taxonomy_patch.py    adds the two new Dharmasutra folders
 tests/test_parsers.py        15 tests: wisdomlib, sacred-texts, GRETIL, Google Docs
 tests/test_core_patch.js     10 tests: the patched normaliser, incl. regressions

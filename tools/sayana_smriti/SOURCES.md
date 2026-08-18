@@ -1,0 +1,188 @@
+# Where Sāyaṇa can actually come from — measured, not assumed
+
+> **TOP LINE, added after checking sa.wikisource directly:** Sanskrit Wikisource
+> carries Sāyaṇa's Ṛgveda-bhāṣya as **clean transcribed text** on **1,022 of the
+> Ṛgveda's 1,028 sūktas (99.4%)**, wrapped in a `{{सायणभाष्यम्|…}}` template, under
+> CC BY-SA. This is better than every other route on every axis that matters and
+> **should be the primary source**. The archive.org OCR aligner below still works
+> (95.5%, median 0.93) and is worth keeping as a cross-check and a fallback for
+> what Wikisource lacks, but it should not be the main path. See §5.
+
+
+Everything here was measured from a GitHub Actions runner in August 2026.
+`AUDIT.md` remains the survey of what exists; this is the record of what is
+*reachable* and what is *alignable*, both of which turned out differently from
+the assumptions the importer was built on.
+
+## 1. Reachability
+
+| Source | bot UA | curl default | |
+|---|---|---|---|
+| wisdomlib.org — mantra page | 403 | 403 | refused |
+| wisdomlib.org — **`/robots.txt`** | 403 | 403 | refused |
+| sacred-texts.com | 403 | 403 | refused |
+| archive.org (details / metadata / search API) | 200 | 200 | **open** |
+| sanskritdocuments.org | 200 | 200 | **open** |
+| sa.wikisource / en.wikisource API | 200 | 200 | **open** |
+| GRETIL | 404 | 404 | host up; probe URL was stale |
+| TITUS Frankfurt | 200 | 200 | **open** |
+| VedaWeb (Cologne) | 418 | 418 | host up, refuses programmatic access |
+
+The premise the package was built on — "Actions has open egress; the authoring
+sandbox does not" — is false for wisdomlib and sacred-texts, and true for
+everything else. A 50-mantra wisdomlib run returned **50 pages fetched, 0
+imported, 250 consecutive 403s**.
+
+**wisdomlib refuses `/robots.txt` itself.** A site cannot state a crawler policy
+to an address it will not talk to, so this is an edge rule against datacenter IP
+ranges, not a decision about crawlers. Codespaces, Colab and any VPS sit in the
+same ranges. A consumer connection does not — hence `run_on_phone.sh` and
+`PHONE.md`. Nothing there disguises a request; the User-Agent stays honest.
+
+## 2. The archive.org scans are alignable — a correction to AUDIT.md
+
+`AUDIT.md` ruled the scans out on the grounds that Devanagari OCR "is not good
+enough to ingest unreviewed". That judgement was made on the reputation of
+Devanagari OCR rather than on this scan, and it is too pessimistic.
+
+`archive.org/details/rgveda-with-sayanabhasya` carries a full OCR text layer —
+four files, ~25 MB, one per maṇḍala group. The maṇḍala-1 file is 2.9 M
+characters, 119,646 Devanagari to 112 Latin in a sampled slab. It is **readable
+Sanskrit**, citing Yāska (`निरु. ६.१४`) and Pāṇini (`पा. सू. २.४.८०`), with
+recognisable errors — `ऐश्वयवन्तं` for `ऐश्वर्यवन्तं`, `तुवेणिः` for `तुर्वणिः` —
+rather than noise.
+
+Crucially, the edition prints, per mantra and in order:
+
+```
+<saṃhitā-pāṭha>  … ॥ N ॥
+<pada-pāṭha>     … ॥ N ॥
+<Sāyaṇa's bhāṣya>
+```
+
+**4,242 `॥ N ॥` markers for 2,006 mantras** — 2.1 per mantra, exactly as that
+structure predicts. So the mantra's own text sits immediately before its
+commentary, and DGE already holds the saṃhitā-pāṭha for all 10,552 mantras.
+Alignment therefore needs no page map: walk DGE's mantras in order, score each
+against the OCR blocks, and the bhāṣya is what lies between one match and the
+next. Every cut is self-verifying — the thing matched is the mantra DGE already
+has, so a wrong cut cannot look right.
+
+### Measured so far
+
+| Attempt | Method | Located |
+|---|---|---|
+| Round 1 | exact 18-char substring | 151/2006 (7.5%) |
+| Round 2 | `॥ N ॥` segmentation + similarity ratio | **709/2006 (35.3%)** |
+
+Round 1's failure was the matcher, not the source: an exact 18-character
+substring needs six consecutive akṣaras all OCR'd correctly, which at this error
+rate rarely holds. Every one of its 151 hits landed exactly on its mantra.
+
+Round 2 finds **all eight mantras of sūkta 1.1**, at similarities 0.63–0.89. But
+the overall distribution is bimodal — median 0.27, p75 0.72 — which means it
+matches well or not at all, and loses sync partway.
+
+### What is not yet done
+
+35% is not shippable, and the remaining work is ordinary engineering, not a
+research question:
+
+- **Sync recovery.** The cursor only advances on a hit, so once the 8-block
+  window drifts past a mantra it stays lost. It needs re-anchoring on the
+  `॥ N ॥` numbering, which is readable independently of the text.
+- **Match on the pada-pāṭha too.** DGE holds `pada_patha_plain`, and the
+  word-separated form is more distinctive than the sandhi-joined saṃhitā text.
+  Two independent keys per mantra would also make a wrong match far less likely.
+- **False markers.** Some of the 4,242 are sūkta and anuvāka ends, not mantra
+  ends; they should be classified rather than counted.
+- **Attribution and rights.** The item states no licence. The 1930s–50s Vaidika
+  Saṃśodhana Maṇḍala edition's own status needs checking before publishing, even
+  though Sāyaṇa's text is long out of copyright.
+- **Label it as OCR.** Whatever lands should be marked as uncorrected OCR of a
+  scan, not presented as a critical edition.
+
+## 3. What this changes
+
+If the alignment is finished, Sāyaṇa becomes obtainable **from Actions**, with no
+residential connection anywhere, and in **Sanskrit** — Sāyaṇa's own words rather
+than Wilson's 1850s English rendering of him, which is all the wisdomlib route
+would ever have given.
+
+Until then `run_on_phone.sh` remains the working route, and it delivers Wilson's
+Sāyaṇa complete for all 10,552 mantras in about 3.5 hours.
+
+The two are not exclusive. `commentaries.sayana` and `commentaries.wilson` are
+separate keys, and `dge/js/core.js` already labels both.
+
+## 4. sanskritebooks.org
+
+Suggested as a source; probed but not yet cleanly read back. Every Sāyaṇa result
+from an independent search resolved to archive.org rather than to a file hosted
+there, so the working assumption is that it indexes the same scans. Worth
+confirming before spending effort on it.
+
+---
+
+## 5. Sanskrit Wikisource — the source that supersedes the rest
+
+Checked directly, 18 Aug 2026.
+
+### Coverage
+
+```
+insource:"सायणभाष्यम्" intitle:"ऋग्वेदः"   ->  totalhits: 1022
+```
+
+The Ṛgveda has 1,028 sūktas. So **1,022 of 1,028 carry the bhāṣya — 99.4%**.
+
+### Why it beats the archive.org scan on every axis
+
+**It is transcribed, not OCR'd.** Same passage, both sources:
+
+| Source | RV 1.1 |
+|---|---|
+| archive.org OCR | `हे "अग्ने छे "ये यज्ञ ४विश्वतः सर्वासु दिक्षु "परिभूः परितः प्राप्तवान् "असि` |
+| **sa.wikisource** | `हे “अग्ने “सः त्वं “नः अस्मदर्थं सूपायनः शोभनप्राप्तियुक्तः “भव । तथा नः अस्माकं “स्वस्तये विनाशराहित्यार्थं “सचस्व समवेतो भव` |
+
+The Wikisource text keeps the pratīka quotation marks and renders Pāṇini
+citations correctly (`पा. सू. ८. १. १८`). The OCR mangles both.
+
+**It is structurally marked.** The wikitext wraps the commentary in a template:
+
+```
+{{सायणभाष्यम्|
+‘चित्रो वः' इति ...
+}}
+```
+
+That is a named boundary, so extraction is a parse rather than the block
+segmentation and fuzzy scoring the OCR route needs. No `॥ N ॥` counting, no
+similarity threshold, no apparatus to detect and skip.
+
+**Its licence is stated.** CC BY-SA, versus the archive item's silence. DGE is
+non-commercial and attributes, which satisfies share-alike — but the obligation
+is explicit and must be recorded in `commentary_sources`, not assumed.
+
+**One page per sūkta**, titled `ऋग्वेदः सूक्तं <maṇḍala>.<sūkta>` in Devanagari
+numerals, holding the sūkta's mantras *and* its bhāṣya. The mantras being on the
+page means the same self-verifying alignment is available here: match DGE's
+mantra against the page's own, and the commentary beside it is the right one.
+
+### What still has to be worked out
+
+- **Splitting the bhāṣya per mantra.** The template holds one block per sūkta.
+  Sāyaṇa's per-mantra glosses run in sequence inside it, separated the same way
+  the print edition separates them, so the existing skeleton-matching logic in
+  `archive_sayana.py` is directly reusable on clean input — where it should do
+  considerably better than 95.5%.
+- **The 6 sūktas without the template**, and whether they are gaps or spelling
+  variants of the heading.
+- **Rate limits and attribution.** Use the MediaWiki API with a descriptive
+  User-Agent; Wikimedia asks for one and it is the polite thing regardless.
+
+### Keep the OCR route
+
+Not as the main path, but two uses remain. It is an independent witness — where
+Wikisource and the scan agree, confidence is high; where they diverge, something
+needs a human. And it covers whatever Wikisource turns out to lack.
