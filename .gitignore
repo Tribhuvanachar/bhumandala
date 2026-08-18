@@ -26,3 +26,7 @@ dge/data/_wordnet/
 
 # Where tools/build_wordnet.py --download parks the IndoWordNet dump.
 .cache/
+
+# Kavya import scratch: the report the importer writes when --report is left
+# at its default. A build artifact, like the corpus itself.
+_dump/

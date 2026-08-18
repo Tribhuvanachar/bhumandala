@@ -105,6 +105,35 @@ items and the decisions waiting on the project lead, this file the narrative.
   the transport substituted, since this sandbox's browser has no route to the
   CDN, so a spot-check on the live site is still worth doing.
 
+- **The Kāvya corpus, deployed from a Cowork zip — and four faults in it found
+  and fixed before it could reach a reader.** `tools/kavya/**` plus a layered
+  reader at `dge/kavya.html`; the corpus itself (**24 works, 49 layers, 67,169
+  entries, 50 MB**) is on the `kavya-dist` branch and served over jsDelivr, not
+  on `main`, where it would put the site back over the 1 GB Pages limit its own
+  DEPLOY.md assumed was far away. The package's own probe step is what surfaced
+  the first fault and its README predicted the second; the rest came out of
+  running it. **34 of 50 declared GRETIL filenames 404** — they were declared
+  from a build spec and never checked — and of the 16 that answered, **10
+  parsed to zero units**, because GRETIL's TEI only sometimes carries `xml:id`
+  on a verse and the parser had no fallback for the files where the reference
+  sits inside the text instead. Adding that fallback needed a second fix: in
+  those files the marker CLOSES its verse rather than opening it, and the
+  splitter assumed the opposite, which does not fail loudly — it shifts an
+  entire text by one verse, so every reading sits under its neighbour's number.
+  A third: GRETIL gives each PĀDA its own id, so Raghuvaṃśa parsed as 8,185
+  "verses" of which 6,545 were fragments sharing three ids, and a fourth: a
+  duplicate id made `validate_layer` drop the whole layer, which is why the
+  Nāṭyaśāstra's 4,303 verses vanished on the first run rather than the nine
+  repeated references. The declared commentary keys were wrong too — all four
+  mahākāvyas asked for the commentary's title (`sj`, `gp`, `sk`) where the data
+  keys it by Mallinātha's own name — so **Mallinātha's ṭīkā on all four, the
+  package's headline feature, was being silently dropped**. Verified in a real
+  browser against the published bytes: 24 works in the picker, Raghuvaṃśa 1.1
+  with the Sañjīvinī, padaccheda chips, anvaya and translations. The corpus is
+  deliberately NOT merged into the four kāvyas already published from
+  `dge/data` — the merge would have appended a second copy of each text rather
+  than updating it, and now refuses; `PENDING.md` carries that decision.
+
 ## Round 4 (10 Aug 2026) — Kosha full-corpus build, TTS architecture doc, Mahabharata (Kannada), Yukti Mallika, Svapna-Vrindavanakhyana, Sumadhva Vijaya (audio), Harikathamrutasara
 
 - **Harikathamrutasara (Sri Jagannathadasaru)** — new leaf `dasa_sahitya/dasakuta/jagannathadasa/harikathamrutasara` (947 verses, 33 sandhis). **Corrects an earlier finding from this same session**, which concluded the HKS app had no embedded text at all (checked assets/, classes.dex, and a shallow resources.arsc string-pool dump). That was wrong: the text lives in resources.arsc as compiled Android string-array resources (`hks_sandhi_content_list`, `hks_sandhi_title_list`, both with `default`/ITRANS and `kn`/Kannada configs) — a shallow global-string-pool dump doesn't surface these without also walking the per-package key-name pool and the array (complex-entry) structures, and a "check the longest strings" pass (some single entries run past 30,000 characters — a whole sandhi's text) wasn't done the first time. Re-verified independently using `androguard` before merging rather than taking either the original "absent" conclusion or the correction on faith — cross-checked the project lead's own screenshot text against the extracted data and found it verbatim in Sandhi 31. No verse-level meaning exists in this source (the app itself carries a literal "meaning not yet added" placeholder after every verse, stripped as noise). Zero flagged/ambiguous verses.

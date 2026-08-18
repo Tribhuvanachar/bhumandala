@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="sa" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>काव्यानि — DGE</title>
+<meta name="description" content="Layered Sanskrit kavya reader: mula, traditional tika, padaccheda, anvaya and translation, side by side.">
+<link rel="stylesheet" href="css/kavya.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="row">
+    <div class="brand">काव्यानि <small id="totals">…</small></div>
+
+    <nav class="seg" aria-label="Section">
+      <a class="btn" href="index.html" style="border:0;border-radius:0">DGE</a>
+      <a class="btn" href="ashtadhyayi.html" style="border:0;border-radius:0">सूत्राणि</a>
+      <a class="btn" href="dhatupatha.html" style="border:0;border-radius:0">धातु</a>
+      <a class="btn" href="kosha.html" style="border:0;border-radius:0">कोश</a>
+    </nav>
+
+    <div class="seg" role="group" aria-label="Script">
+      <button type="button" data-script="deva">देव</button>
+      <button type="button" data-script="iast">IAST</button>
+      <button type="button" data-script="kn">ಕನ್ನಡ</button>
+    </div>
+
+    <div class="seg" role="group" aria-label="Mode">
+      <button type="button" data-mode="read">पठनम् · Read</button>
+      <button type="button" data-mode="compare">तुलना · Compare</button>
+    </div>
+
+    <button class="btn" id="smaller" type="button" aria-label="Smaller text">A−</button>
+    <button class="btn" id="bigger"  type="button" aria-label="Larger text">A+</button>
+    <button class="btn" id="theme"   type="button" aria-label="Toggle dark mode">◐</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="pickers">
+    <label class="sr" for="workSel">Work</label>
+    <select class="btn" id="workSel" style="max-width:min(60vw,380px)"></select>
+
+    <label class="sr" for="unitSel">Sarga / Anka / Ullasa</label>
+    <select class="btn" id="unitSel" style="max-width:min(45vw,300px)"></select>
+
+    <form class="jump" id="jumpForm">
+      <label class="sr" for="jumpInput">Jump to verse</label>
+      <input id="jumpInput" placeholder="1.17  ( / )" inputmode="decimal">
+      <button class="btn" type="submit">→</button>
+    </form>
+  </div>
+
+  <div class="layerbar" id="layerBar" role="group" aria-label="Layers"></div>
+
+  <section id="verses"></section>
+</main>
+
+<footer class="pager">
+  <button class="btn" id="prev" type="button">← पूर्वम्</button>
+  <span class="unit" id="unitNow"></span>
+  <button class="btn" id="next" type="button">अग्रिमम् →</button>
+</footer>
+
+<script src="js/kavya.js"></script>
+</body>
+</html>

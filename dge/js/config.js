@@ -39,6 +39,11 @@ const appConfig = {
   // it off the site while jsDelivr still serves it. Set this to '' to read a
   // local build from dge/data/_wordnet/ instead.
   wordnetDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@wordnet-dist/_wordnet",
+  // The Kavya corpus js/kavya.js reads -- 24 works, 49 layers, 67,169
+  // entries, 50 MB -- on this repo's "kavya-dist" branch for the same
+  // reason. kavya.html carries the same URL as its own default, since it
+  // does not load this file.
+  kavyaDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@kavya-dist",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
@@ -58,6 +63,7 @@ window.KOSHA_DATA_BASE = appConfig.koshaDataBase;
 // line is what lets the reader's copy be repointed from one place — at a
 // dedicated data repo, say, if the WordNet ever grows the way the koshas did.
 window.WORDNET_DATA_BASE = appConfig.wordnetDataBase;
+window.KAVYA_DATA_BASE = appConfig.kavyaDataBase;
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
 // remove, rename, reorder, or temporarily disable (enabled:false) any of
