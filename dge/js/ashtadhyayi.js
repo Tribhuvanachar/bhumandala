@@ -167,6 +167,14 @@
     var active=ORDER.filter(function(k){return state.enabled[k];});
     if(!active.length){ box.innerHTML='<div class="dge-empty">No layers selected — tap a chip above.</div>'; return; }
     box.innerHTML=active.map(cardHTML).join("");
+    // Kashika/Siddhanta-Kaumudi/etc. text cites other sutras constantly
+    // ("कण्ड्वादिभ्यो यक् ३।१।२७"), and intellisense.js already knows how
+    // to turn those into tappable links with a popover — it was just never
+    // asked to scan this page's cards, so every citation rendered as inert
+    // text no matter how many the commentary named.
+    if (typeof window.dgeScanForSutras === 'function') {
+      try { window.dgeScanForSutras(box); } catch (e) {}
+    }
     box.querySelectorAll(".dge-head").forEach(function(h){
       h.addEventListener("click",function(e){
         if(e.target.classList.contains("dge-copy")) return;
