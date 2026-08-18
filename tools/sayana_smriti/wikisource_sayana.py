@@ -51,6 +51,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from difflib import SequenceMatcher  # noqa: E402
 from archive_sayana import skeleton, similarity, to_int  # noqa: E402
+from common import sniff_indent  # noqa: E402
 
 API = "https://sa.wikisource.org/w/api.php"
 UA = ("DGE-import/1.0 (Digital Grantha Engine; non-commercial educational "
@@ -736,21 +737,6 @@ def check_offbyone(cuts: list[Cut], items: list[dict], *,
 
 
 # ------------------------------------------------------------------ the import
-
-def sniff_indent(raw: str, default: int = 1) -> int:
-    """The indent width the file is already written at.
-
-    These maṇḍala files are written at 2, while the rest of this toolchain
-    writes at 1. Guessing wrong does not corrupt anything, but it reformats
-    every line of a 10,000-mantra file to add one key per mantra, which buries
-    the real change under a quarter of a million whitespace edits.
-    """
-    for line in raw.split("\n", 40)[1:]:
-        stripped = line.lstrip(" ")
-        if stripped.startswith('"') and stripped != line:
-            return len(line) - len(stripped)
-    return default
-
 
 def import_mandala(wiki: Wiki, dge: Path, mandala: int, suktas: dict, *,
                    threshold: float, dry_run: bool, overwrite: bool,

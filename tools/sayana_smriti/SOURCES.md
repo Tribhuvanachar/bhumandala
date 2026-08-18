@@ -291,3 +291,58 @@ Four real defects were found this way, each invisible to a score:
 
 The archive.org route is kept, unchanged, for the reasons §5 gives: it is an
 independent witness, and it covers the Vālakhilya, which Wikisource does not.
+
+---
+
+## 7. The Sāmaveda, for free
+
+`propagate_samaveda.py`, run straight after §6. No network at all.
+
+Most Sāmaveda mantras *are* Ṛgveda mantras, and DGE's data already records which
+in a `rigveda_ref` field. So Sāyaṇa reaches **1,733 of 1,875 Kauthuma mantras
+(92%)** by copying, and there is no other route: Sāyaṇa's Sāmaveda-bhāṣya has
+never been digitised, and Griffith follows Benfey's Rāṇāyanīya numbering, which
+does not line up with DGE's Kauthuma sequence.
+
+Every propagated entry says so in its own text — *"Sāyaṇa on the parallel
+Ṛgveda mantra, Ṛgveda 6.16.10"* — and the item records `commentary_via`, so a
+reader is never told this is a Sāmaveda bhāṣya and the provenance survives in
+the data.
+
+### The refs needed checking
+
+The importer trusted `rigveda_ref` outright. It should not have: **eight of the
+1,760 refs name a verse that is not the Sāmaveda mantra's own.** Following one
+hands the reader Sāyaṇa on a different hymn, and it reads perfectly plausibly —
+the same failure this whole toolchain is built to refuse.
+
+So the ref is now checked against the mantra text on both sides before it is
+trusted, by the kinder of a sequence ratio and a word-overlap share. The second
+measure earns its place: the Sāmaveda reorders words to fit the chant, and a
+sequence ratio alone reads that as a different verse.
+
+| agreement | SV → RV | |
+|---|---|---|
+| 0.11 | 1429 → 9.89.5 | no word in common |
+| 0.19 | 385 → 4.39.6 | no word in common |
+| 0.22 | 1420 → 1.93.3 | no word in common |
+| 0.23 | 469 → 9.65.1 | no word in common |
+| 0.26 | 345 → 8.24.16 | no word in common |
+| 0.40 | 891 → 9.61.17 | **890 and 891 name each other's verses** |
+| 0.52 | 890 → 9.61.18 | |
+| 0.53 | 1204 → 9.12.8 | |
+
+These are errors in DGE's own Sāmaveda data, not in the propagation, and they
+want fixing at the source — the tool only declines to act on them. A further
+eight agree partially (0.55–0.70) because the Sāmaveda's reading or verse
+division differs; those are propagated, since the entry already tells the reader
+it is Sāyaṇa on the parallel Ṛgveda mantra.
+
+### One more trap, met twice
+
+`save_json` wrote at indent 1 while the Ṛgveda and Sāmaveda saṃhitā files are
+written at 2. Left alone it reformatted every line of a 10,000-mantra file to
+add one key per mantra — 233,667 changed lines for a 21,949-line change. This is
+trap 2 from the handoff, in a new place. `common.sniff_indent` now reads the
+width off the file and `save_json` preserves it, which fixes the whole toolchain
+rather than this one importer.
