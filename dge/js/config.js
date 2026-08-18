@@ -29,6 +29,16 @@ const appConfig = {
   // on demand (never the whole corpus at once), so pointing this at the
   // full remote build doesn't add any real page-load cost.
   koshaDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala-kosha-data@dist/data/koshas",
+  // The Sanskrit WordNet lookup tree that js/intellisense.js reads for the
+  // अर्थः section of the word popover, built by tools/build_wordnet.py and
+  // published to this repo's own "wordnet-dist" branch — data only, no
+  // history in common with main. Same reasoning as the koshas above, one
+  // size down: 24 MB is small enough not to need its own repository and far
+  // too large for a published site with about 1% of the GitHub Pages 1 GB
+  // limit left. GitHub Pages serves only main, so a branch is enough to keep
+  // it off the site while jsDelivr still serves it. Set this to '' to read a
+  // local build from dge/data/_wordnet/ instead.
+  wordnetDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@wordnet-dist/_wordnet",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
@@ -42,6 +52,12 @@ window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConf
 // data/config-overrides.json merge below -- that merge lands too late to
 // affect a value kosha.js has already captured into a local var.
 window.KOSHA_DATA_BASE = appConfig.koshaDataBase;
+
+// intellisense.js carries the same URL as its own default, because it also
+// runs on the four Vyakarana pages, and none of them load this file. This
+// line is what lets the reader's copy be repointed from one place — at a
+// dedicated data repo, say, if the WordNet ever grows the way the koshas did.
+window.WORDNET_DATA_BASE = appConfig.wordnetDataBase;
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
 // remove, rename, reorder, or temporarily disable (enabled:false) any of

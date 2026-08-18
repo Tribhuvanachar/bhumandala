@@ -518,16 +518,20 @@
     const name = two.split('').map(c => (c >= 'A' && c <= 'Z') ? c + '_'
                                        : (/[a-z0-9]/.test(c) ? c : 'x')).join('');
     if (wnCache[name]) return wnCache[name];
-    // Unset — as it is on the Vyakarana pages, which do not load config.js —
-    // the tree is read from beside the site's own data, like the morphology
-    // and the related words. window.WORDNET_DATA_BASE points it at a CDN copy
-    // instead, which is the arrangement the koshas already use: the built
-    // tree is 24 MB and this repo has about 1% of the GitHub Pages 1 GB limit
-    // left, so where it is published is the project lead's call. Until it is
-    // published somewhere the fetch 404s, this resolves to null, and the
-    // popover simply has no अर्थः section — the analysis and the related words
-    // are unaffected.
-    const cdn = (window.WORDNET_DATA_BASE || '').replace(/\/+$/, '');
+    // The tree is 24 MB and lives on this repo's own "wordnet-dist" branch
+    // rather than in the site, because the site has about 1% of the GitHub
+    // Pages 1 GB limit left and Pages serves only main. jsDelivr serves any
+    // branch, so the same arrangement the koshas use costs one URL here.
+    // config.js sets window.WORDNET_DATA_BASE from appConfig; the constant
+    // below is the same value, and is what the four Vyakarana pages use,
+    // since none of them load config.js. Set the variable to '' to read a
+    // local build from dge/data/_wordnet/ instead — and if that build is not
+    // there either, the fetch 404s, this resolves to null, and the popover
+    // simply has no अर्थः section, with the analysis and the related words
+    // unaffected.
+    const CDN = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@wordnet-dist/_wordnet';
+    const set = window.WORDNET_DATA_BASE;
+    const cdn = (set === undefined ? CDN : (set || '')).replace(/\/+$/, '');
     let url;
     if (cdn) url = cdn + '/' + name + '.json';
     else {

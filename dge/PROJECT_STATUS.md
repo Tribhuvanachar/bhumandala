@@ -93,10 +93,17 @@ items and the decisions waiting on the project lead, this file the narrative.
   indexed; 146 lines carry the part-of-speech twice and disagree with
   themselves; and the senses are ordered by synset id rather than by size,
   because the ids run oldest-first — ordering by how many words a synset holds
-  opens अश्वः on the chess piece. **The data is deliberately not committed**: the
-  site measured 1,017 MB with it against a 1 GB limit, so `PENDING.md` carries
-  the hosting decision, and until it is made the popover simply renders without
-  the section.
+  opens अश्वः on the chess piece. **The 24 MB tree is not on `main`**: the site
+  measured 1,017 MB with it against a 1 GB Pages limit, so it is published to
+  this repo's own `wordnet-dist` branch — data only, which Pages never serves —
+  and read over jsDelivr from `appConfig.wordnetDataBase`, the arrangement the
+  kośa corpus already uses one size up. A dedicated data repo was tried first
+  and the GitHub App still cannot create repositories, the same block as Round
+  4; at 24 MB a branch is the better answer regardless, and moving to a repo
+  later is a URL change. `.github/workflows/publish-wordnet.yml` rebuilds and
+  republishes it. Verified against the published bytes in a real browser — with
+  the transport substituted, since this sandbox's browser has no route to the
+  CDN, so a spot-check on the live site is still worth doing.
 
 ## Round 4 (10 Aug 2026) — Kosha full-corpus build, TTS architecture doc, Mahabharata (Kannada), Yukti Mallika, Svapna-Vrindavanakhyana, Sumadhva Vijaya (audio), Harikathamrutasara
 

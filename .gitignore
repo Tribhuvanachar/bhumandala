@@ -17,10 +17,11 @@ ui-debug.log
 dge/firebase/.firebaserc
 
 # The built Sanskrit WordNet tree (tools/build_wordnet.py, 24 MB). Deliberately
-# NOT committed: the published site sits about 1% under the GitHub Pages 1 GB
-# limit, and this would put it back over. Rebuild it locally to develop against,
-# or publish it to a data repo and point window.WORDNET_DATA_BASE at it the way
-# the koshas are served — see PENDING.md, where that decision is open.
+# NOT on main: the published site sits about 1% under the GitHub Pages 1 GB
+# limit and this would put it back over. It is published instead to this repo's
+# own "wordnet-dist" branch — data only, which Pages never serves — and read
+# from there over jsDelivr (appConfig.wordnetDataBase). Rebuild it here to
+# develop against; .github/workflows/publish-wordnet.yml republishes the branch.
 dge/data/_wordnet/
 
 # Where tools/build_wordnet.py --download parks the IndoWordNet dump.
