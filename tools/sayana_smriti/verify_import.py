@@ -277,6 +277,10 @@ PHASE2 = [
      ["keith"]),
 ]
 
+UPANISHAD_GLOBS = [
+    "data/vedas/*/*/upanishad*", "data/vedas/*/*/*/upanishad*",
+]
+
 
 def check_phase2(dge: Path):
     """The four corpora outside the Ṛgveda. Reported, never failed: these are
@@ -314,6 +318,37 @@ def check_phase2(dge: Path):
                        "(expected until import_veda_phase2.py / propagate_samaveda.py run)")
 
 
+def check_upanishads(dge: Path):
+    import glob as _glob
+    seen, filled, empty = set(), [], []
+    for pat in UPANISHAD_GLOBS:
+        for d in _glob.glob(str(dge / pat)):
+            for p in Path(d).rglob("data.json"):
+                if p in seen:
+                    continue
+                seen.add(p)
+                items = json.loads(p.read_text(encoding="utf-8")).get("items", [])
+                name = p.parent.name
+                if items:
+                    keys = Counter()
+                    for it in items:
+                        for k in (it.get("commentaries") or {}):
+                            keys[k] += 1
+                    filled.append((name, len(items), dict(keys)))
+                else:
+                    empty.append(name)
+    for name, n, keys in sorted(filled):
+        layers = ", ".join(f"{k} {v}" for k, v in sorted(keys.items())) or "mūla only"
+        print(f"    {name:44} {n:5} units · {layers}")
+    if empty:
+        print(f"    still empty: {', '.join(sorted(empty))}")
+    if filled:
+        ok("upanishads", f"{len(filled)} Upaniṣad folder(s) populated, {len(empty)} still empty")
+    else:
+        warn("upanishads", "every Upaniṣad folder is still empty "
+                           "(expected until import_upanishads.py runs)")
+
+
 # --------------------------------------------------------------------- main
 
 def main() -> int:
@@ -348,6 +383,9 @@ def main() -> int:
 
     print("\nOTHER VEDAS (phase 2)")
     check_phase2(dge)
+
+    print("\nUPANIṢADS")
+    check_upanishads(dge)
 
     print("\nSMṚTI / DHARMAŚĀSTRA")
     check_smriti(dge)

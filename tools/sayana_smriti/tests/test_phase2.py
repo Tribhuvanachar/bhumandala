@@ -236,5 +236,92 @@ class TestMinorSmritis(unittest.TestCase):
                                 f"{slug}: {v} is not Devanagari")
 
 
+class TestUpanishads(unittest.TestCase):
+    def setUp(self):
+        from parsers import upanishad as up
+        self.up = up
+
+    def test_gretil_tags_become_ids(self):
+        g = self.up.parse_gretil_upanishad(fx("gretil_chandogya.htm"))
+        self.assertEqual([r for r, _ in g["mula"]], ["1.1.1", "1.1.2", "1.1.3"])
+        self.assertEqual([r for r, _ in g["bhashya"]], ["1.1.1", "1.1.2"])
+
+    def test_mula_and_bhashya_are_separated(self):
+        g = self.up.parse_gretil_upanishad(fx("gretil_chandogya.htm"))
+        mula = dict(g["mula"])
+        bh = dict(g["bhashya"])
+        self.assertIn("om ity etad", mula["1.1.1"])
+        self.assertIn("avadhāraṇārthaḥ", bh["1.1.1"])
+        self.assertNotIn("avadhāraṇārthaḥ", mula["1.1.1"])
+
+    def test_gretil_header_is_not_swallowed_by_verse_one(self):
+        g = self.up.parse_gretil_upanishad(fx("gretil_chandogya.htm"))
+        first = dict(g["mula"])["1.1.1"]
+        self.assertNotIn("GRETIL-Version", first)
+        self.assertNotIn("title:", first)
+
+    def test_squash_folds_diacritics_rather_than_dropping_them(self):
+        # Dropping Â turns BRÂHMANA into BRHMANA, which matches no unit word,
+        # and every Brihadaranyaka section heading goes unrecognised.
+        self.assertEqual(self.up.squash("SECOND BRÂHMAN A."), "SECONDBRAHMANA")
+        self.assertEqual(self.up.squash("FIRST KHAN D A."), "FIRSTKHANDA")
+
+    def test_sbe_page_yields_one_section(self):
+        g = self.up.parse_sbe_sections(fx("sbe_chandogya.htm"))
+        self.assertEqual(len(g), 1)
+        self.assertEqual((g[0]["ordinal"], g[0]["unit"]), (1, "KHANDA"))
+        self.assertEqual(sorted(g[0]["verses"]), [1, 2, 3])
+
+    def test_sbe_footnote_is_not_read_as_a_verse(self):
+        g = self.up.parse_sbe_sections(fx("sbe_chandogya.htm"))
+        self.assertNotIn("begins here", " ".join(g[0]["verses"].values()))
+
+    def test_a_page_holding_two_sections_splits(self):
+        # sbe15054 really does carry both the second and third brahmana of
+        # Brihadaranyaka I. Counting files instead of sections shifts every
+        # later id by one.
+        html = ("<html><body><h1>BRIHADARANYAKA-UPANISHAD.</h1>"
+                "<h3>SECOND BR&Acirc;HMAN A<sup><a href=\"#fn_255\">6</a></sup>.</h3>"
+                "<p>1. Verily there was nothing here in the beginning.</p>"
+                "<p>2. He desired, let a second body be born of me.</p>"
+                "<h3>THIRD BR&Acirc;HMAN A.</h3>"
+                "<p>1. There were two kinds of descendants of Pragapati.</p>"
+                "<div class=\"footnotes\"><a name=\"fn_255\"></a><p>6. A footnote.</p></div>"
+                "</body></html>")
+        g = self.up.parse_sbe_sections(html)
+        self.assertEqual([(x["ordinal"], x["unit"]) for x in g],
+                         [(2, "BRAHMANA"), (3, "BRAHMANA")])
+        self.assertEqual(sorted(g[0]["verses"]), [1, 2])
+        self.assertEqual(sorted(g[1]["verses"]), [1])
+
+    def test_every_sbe_range_matches_its_declared_structure(self):
+        # The importer refuses to write on a mismatch, so this is the check
+        # that the shipped config is actually right rather than merely safe.
+        from import_upanishads import UPANISHADS, section_ids
+        for slug, cfg in UPANISHADS.items():
+            sbe = cfg.get("sbe")
+            if not sbe:
+                continue
+            skip = set(sbe.get("skip", []))
+            pages = len([p for p in range(sbe["first"], sbe["last"] + 1) if p not in skip])
+            sections = len(section_ids(cfg["structure"], cfg["levels"]))
+            # Brihadaranyaka is one page short because sbe15054 holds two sections.
+            expected_pages = sections - (1 if slug == "brihadaranyaka" else 0)
+            self.assertEqual(pages, expected_pages,
+                             f"{slug}: {pages} pages vs {sections} sections")
+
+    def test_section_ids_shape(self):
+        from import_upanishads import section_ids
+        self.assertEqual(section_ids([2, 3], 3), ["1.1", "1.2", "2.1", "2.2", "2.3"])
+        self.assertEqual(section_ids([1, 1, 1], 2), ["1", "2", "3"])
+        self.assertEqual(section_ids([1], 1), [""])
+
+    def test_sbe_url(self):
+        self.assertEqual(self.up.sbe_url(1, 22),
+                         "https://sacred-texts.com/hin/sbe01/sbe01022.htm")
+        self.assertEqual(self.up.sbe_url(15, 100),
+                         "https://sacred-texts.com/hin/sbe15/sbe15100.htm")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

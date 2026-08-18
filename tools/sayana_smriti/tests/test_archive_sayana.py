@@ -14,8 +14,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from archive_sayana import (Block, align, parse_blocks,  # noqa: E402
-                            similarity, skeleton, to_int)
+from archive_sayana import (Block, align, looks_like_apparatus,  # noqa: E402
+                            parse_blocks, similarity, skeleton, to_int)
 
 # RV 1.1.1-1.1.3, laid out as the edition prints them. Mantra 2's samhita line
 # carries deliberate OCR damage (अग्नि: -> अग्नि;, ऋषिभि -> रुषिभि) of the kind
@@ -160,6 +160,44 @@ class TestAlign(unittest.TestCase):
         res = align(alien, parse_blocks(FIXTURE), threshold=0.55)
         self.assertEqual(res["aligned"], {})
         self.assertLess(max(res["scores"]), 0.55)
+
+
+class TestApparatus(unittest.TestCase):
+    """The edition's critical apparatus, verbatim from RV 5.1.2's alignment.
+
+    This was caught by reading a pairing, not by any score: an apparatus block
+    scores exactly as well as a real one, because the score measures the mantra
+    printed ABOVE it and says nothing about what follows.
+    """
+
+    REAL = ("१. ख-च-फ-' आत्रेये ' नास्ति। २. ख-ग-च-ण-भ-ल-स-' प्रातरनुवाके ' नास्ति। "
+            "३. ख- ग-च-ण-न-भ-ल-स-प्रवृद्धोऽभूत् ।")
+    PROSE = ("अयं \"अग्निः \"जनानाम् अध्वर्य्वादीनां समिधा समिद्भिः अबोधि "
+             "प्रबुद्धोऽभूत् ।")
+
+    def test_apparatus_is_recognised(self):
+        self.assertTrue(looks_like_apparatus(self.REAL))
+
+    def test_commentary_prose_is_not(self):
+        self.assertFalse(looks_like_apparatus(self.PROSE))
+
+    def test_empty_is_not(self):
+        self.assertFalse(looks_like_apparatus(""))
+
+    def test_a_bare_number_alone_is_not_enough(self):
+        # Sayana himself numbers things. Both marks must be present, or ordinary
+        # commentary that opens with a numeral would be thrown away.
+        self.assertFalse(looks_like_apparatus("१. अयं अग्निः जनानाम् समिधा अबोधि"))
+
+    def test_apparatus_is_skipped_in_favour_of_the_commentary(self):
+        doc = ("अग्निमीळे पुरोहितं यज्ञस्य ॥ १ ॥\n"
+               "अग्निम् । ईळे । पुरःऽहितम् ॥ १ ॥\n"
+               + self.REAL + " ॥ २ ॥\n"
+               + self.PROSE + " ॥ ३ ॥\n")
+        res = align([ITEMS[0]], parse_blocks(doc), threshold=0.5)
+        got = res["aligned"]["1.1.1"]["text"]
+        self.assertIn("जनानाम्", got)
+        self.assertNotIn("नास्ति", got)
 
 
 class TestSimilarity(unittest.TestCase):

@@ -14,11 +14,11 @@ const path = require('path');
 const assert = require('assert');
 
 // Points at the shipping dge/js/core.js rather than a bundled copy under
-// patches/. The package carried its own snapshot of core.js, but core.js has
-// moved on in main (kosha citations, the tour, inline content), so applying
-// that snapshot wholesale would revert unrelated work. The normaliser change
-// was instead applied to the real file -- and this test now guards the file
-// the browser actually loads, which is the only copy whose behaviour matters.
+// patches/. The package keeps re-shipping its own snapshot of core.js, but
+// core.js has moved on in main (kosha citations, the tour, inline content), so
+// applying that snapshot wholesale would revert unrelated work. The normaliser
+// change lives in the real file -- and this test guards the copy the browser
+// actually loads, which is the only one whose behaviour matters.
 const src = fs.readFileSync(
   path.join(__dirname, '..', '..', '..', 'dge', 'js', 'core.js'), 'utf8');
 const start = src.indexOf('function dgeSanitizeVedicAccents');

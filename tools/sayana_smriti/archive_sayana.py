@@ -112,6 +112,27 @@ def skeleton(s: str) -> str:
     return s
 
 
+# The edition carries a critical apparatus at the foot of many pages: numbered
+# variant readings keyed to manuscript sigla, e.g.
+#     १. ख-च-फ-'आत्रेये' नास्ति। २. ख-ग-च-ण-भ-ल-स-'प्रातरनुवाके' नास्ति।
+# The OCR interleaves these with the body, so the block following a pada-patha is
+# sometimes apparatus rather than commentary. Found by reading RV 5.1.2's
+# alignment, not by any score -- an apparatus block scores exactly as well as a
+# real one, because the score measures the MANTRA above it, not what follows.
+_SIGLA = re.compile(r"[क-हा-ौ]-[क-हा-ौ]-[क-हा-ौ]-")
+_NUMBERED_NOTE = re.compile(r"^\s*[०-९]+\s*[.।]")
+
+
+def looks_like_apparatus(text: str) -> bool:
+    """True if this block is variant readings rather than Sāyaṇa's prose."""
+    if not text:
+        return False
+    head = text.strip()[:400]
+    # Two independent marks, both required: an opening note number, and the
+    # hyphenated manuscript sigla that only ever appear in the apparatus.
+    return bool(_NUMBERED_NOTE.match(head)) and bool(_SIGLA.search(head))
+
+
 def similarity(a: str, b: str) -> float:
     if not a or not b:
         return 0.0
@@ -216,10 +237,15 @@ def align(items: list[dict], blocks: list[Block], *,
         end_of_pada = j
         if j + 1 < len(blocks) and blocks[j + 1].num == rk:
             end_of_pada = j + 1
-        if end_of_pada + 1 < len(blocks):
-            bhashya = blocks[end_of_pada + 1].text
-        else:
-            bhashya = ""
+        # Step past any apparatus blocks sitting between the pada-pāṭha and the
+        # commentary, rather than handing the reader a page of variant readings
+        # labelled as Sāyaṇa.
+        bhashya = ""
+        for k in range(end_of_pada + 1, min(end_of_pada + 4, len(blocks))):
+            if looks_like_apparatus(blocks[k].text):
+                continue
+            bhashya = blocks[k].text
+            break
 
         bhashya = re.sub(r"\s+", " ", bhashya).strip()
         if bhashya:
