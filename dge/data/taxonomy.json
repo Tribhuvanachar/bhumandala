@@ -394,6 +394,16 @@
      "_schema": "itihasa_purana_text",
      "_default_author": "Maharshi Valmiki"
     }
+   },
+   "ananda_ramayana": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "Maharshi Valmiki (traditionally ascribed)",
+    "mula": {}
+   },
+   "adbhuta_ramayana": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "Maharshi Valmiki (traditionally ascribed)",
+    "mula": {}
    }
   },
   "mahabharata": {
@@ -4723,5 +4733,11 @@
     }
    }
   }
+ },
+ "misc": {
+  "_schema": "grantha_mula_text",
+  "_note": "Holding place for material whose home in the taxonomy is not settled yet. Nothing is meant to stay here; each item moves once it is decided.",
+  "ajaya_vijayendra": {},
+  "satyadhyana_tirtha_civil_suit": {}
  }
 }

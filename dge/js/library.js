@@ -47,6 +47,11 @@ const DGE_PATH_LABELS = {
   sarvamula: 'सर्वमूलग्रन्थाः',
 
   itihasa: 'इतिहासाः', purana: 'पुराणानि',
+  ramayana: 'रामायणम्', ananda_ramayana: 'आनन्दरामायणम्',
+  adbhuta_ramayana: 'अद्भुतरामायणम्',
+  // Not a category anyone would claim: a holding place for material whose
+  // home is not settled. Named plainly so it reads as temporary.
+  misc: 'अन्यत्',
   smriti_dharma: 'स्मृतिधर्मशास्त्राणि', smriti: 'स्मृतयः',
   kavya_alankara: 'काव्यालङ्कारौ', kavya: 'काव्यम्',
   kosha: 'कोशाः', stotra: 'स्तोत्राणि',
