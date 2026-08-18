@@ -486,6 +486,11 @@ def author_name(name: str) -> str:
     acharya, split in two.
     """
     core = clean_text(name).strip(" ।॥:-")
+    # A doubled श्री is an honorific stacked on a name that already starts with
+    # one: श्रीश्रीनिवासतीर्थ is Shrinivasatirtha, and keeping both opened a
+    # second folder beside his own.
+    while core.startswith("श्रीश्री"):
+        core = core[len("श्री"):]
     for prefix in ("श्रीमत्", "श्रीमद्", "श्रीमज्", "श्रीमन्"):
         if core.startswith(prefix):
             core = core[len(prefix):]

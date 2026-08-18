@@ -175,6 +175,9 @@ def main():
     failures += not check("bare श्री kept — it opens Shrinivasatirtha's name",
                           P.author_name("श्रीनिवासतीर्थ") == "श्रीनिवासतीर्थ",
                           P.author_name("श्रीनिवासतीर्थ"))
+    failures += not check("a doubled श्रीश्री collapses to one",
+                          P.author_name("श्रीश्रीनिवासतीर्थ") == "श्रीनिवासतीर्थ",
+                          P.author_name("श्रीश्रीनिवासतीर्थ"))
     failures += not check("श्रीमज् is honorific and goes",
                           P.author_name("श्रीमज्जयतीर्थभिक्षु") == "जयतीर्थभिक्षु",
                           P.author_name("श्रीमज्जयतीर्थभिक्षु"))
