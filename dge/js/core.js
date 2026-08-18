@@ -461,14 +461,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. PARSE URL PARAMETERS
   const urlParams = new URLSearchParams(window.location.search);
-  const explicitPath = urlParams.get('path'); // new general addressing, e.g. "vedas/rigveda/mandala_01"
+
+  // Global short-URL abbreviations (js/text-abbreviations.js, loaded before
+  // this file, is the one place these are configured) — ?SMV=1.1 means the
+  // same as ?path=kavya_alankara/sumadhva_vijaya/sarga_1&jumpShloka=1, just
+  // short enough to type or share. Resolved to plain path/jumpShloka values
+  // BEFORE those are read below, so everything downstream — including the
+  // legacy-slug upgrade and the namespace logic — behaves exactly as if the
+  // reader had typed the long form themselves.
+  let abbrevPath = null, abbrevShloka = null;
+  const DGE_ABBR = window.DGE_TEXT_ABBREVIATIONS || {};
+  for (const key of Object.keys(DGE_ABBR)) {
+    if (!urlParams.has(key)) continue;
+    const raw = urlParams.get(key) || '';
+    const cfg = DGE_ABBR[key];
+    if (cfg.path.indexOf('{ch}') !== -1) {
+      const parts = raw.split('.');
+      if (parts[0]) { abbrevPath = cfg.path.replace('{ch}', parts[0]); if (parts[1]) abbrevShloka = parts[1]; }
+    } else {
+      abbrevPath = cfg.path;
+      if (raw) abbrevShloka = raw;
+    }
+    break; // first matching abbreviation wins — a URL isn't expected to carry two
+  }
+
+  const explicitPath = urlParams.get('path') || abbrevPath; // new general addressing, e.g. "vedas/rigveda/mandala_01"
   const explicitCode = urlParams.get('code'); // legacy addressing — always resolves under stotras/, unchanged behaviour
 
   // Quick Search jump target (see dgeQuickJump in library.js) — resolved
   // against this grantha's actual shlokas object once it's loaded and
   // normalized, at the end of initApp() below.
   const jumpVedicId = urlParams.get('jumpVedicId');
-  const jumpShloka = urlParams.get('jumpShloka');
+  const jumpShloka = urlParams.get('jumpShloka') || abbrevShloka;
   window._dgeJumpTarget = jumpVedicId ? { vedicId: jumpVedicId } : (jumpShloka ? { shlokaNumber: parseInt(jumpShloka, 10) } : null);
 
   const providedPass = urlParams.get('pass');
