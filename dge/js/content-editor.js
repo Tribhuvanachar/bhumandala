@@ -6,6 +6,17 @@
 // keystroke — edits stay staged in memory until a human reviews a preview
 // and confirms, reusing admin-editor.js's existing dgeAdminBatchCommit
 // (same safe "diff, don't blind-overwrite" discipline as Config Editor).
+//
+// This is deliberately a SEPARATE tool from content-inline.js, not a mode
+// of it: this one edits the corpus (shloka text, in admin/content/*.json
+// grantha files, with reorder/insert/delete), while content-inline.js
+// edits page chrome (titles, panel copy, labels — small JSON page-content
+// files unrelated to any grantha). Merging them would let one wrong click
+// send a UI-copy edit through the shloka save path or vice versa. Kept
+// visually distinct instead: content-inline.js floats as a collapsed
+// "EDIT" tab on the left edge, while this one's toggle (✏️ Edit) sits
+// inline, directly under the shloka it edits — so which tool is which is
+// obvious from where its control lives, not from a label alone.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
 window.DGE_VERSIONS['content-editor.js'] = 'v1.3';
 
