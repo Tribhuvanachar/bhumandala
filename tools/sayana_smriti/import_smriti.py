@@ -5,12 +5,20 @@ it is currently a stub, and the classical commentaries on top of it.
 
 STATE THIS FIXES (measured against the repo on 17 Aug 2026)
 
-    manu_smriti          12 items, 0 commentaries   (should be ~2,685 verses)
-    parashara_smriti     12 items, 0 commentaries
-    yajnavalkya_smriti    3 items, 0 commentaries
-    vishnu_smriti        97 items, 0 commentaries
-    narada_smriti        19 items, 0 commentaries
-    …every other smṛti and every dharmaśāstra nibandha: 0 items.
+Five smṛtis already hold COMPLETE mūla Sanskrit — count the ślokas nested inside
+items[], not the items themselves, or you will badly misread this section:
+
+    manu_smriti           12 adhyāyas · 2,685 verses · 0 artha · 0 bhāṣya
+    vishnu_smriti         97 adhyāyas · 2,363 verses · 0 artha · 0 bhāṣya
+    yajnavalkya_smriti     3 adhyāyas · 1,011 verses · 0 artha · 0 bhāṣya
+    narada_smriti         19 adhyāyas ·   805 verses · 0 artha · 0 bhāṣya
+    parashara_smriti      12 adhyāyas ·   580 verses · 0 artha · 0 bhāṣya
+
+    …the other 14 smṛtis and all 7 dharmaśāstra nibandhas: genuinely 0 items.
+
+So for those five the job is TRANSLATION AND COMMENTARY ONLY. Writing is done
+through merge_into_existing(), which never replaces an existing sanskrit_text
+and refuses to write at all if the verse count would drop.
 
 OUTPUT SHAPE — the existing `smriti_dharmashastra_text` schema, unchanged:
 
@@ -39,7 +47,7 @@ import argparse
 import json
 import re
 import sys
-from collections import OrderedDict, defaultdict
+from collections import Counter, OrderedDict, defaultdict
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -116,6 +124,80 @@ class Grantha:
             "commentary_sources": self.sources,
             "items": items,
         }
+
+
+def merge_into_existing(existing: dict, incoming: dict, allow_mula_overwrite=False):
+    """Fold `incoming` into the data.json already in the repo, non-destructively.
+
+    THIS IS THE IMPORTANT FUNCTION. Five smṛtis (Manu 2,685 verses, Viṣṇu 2,363,
+    Yājñavalkya 1,011, Nārada 805, Parāśara 580 — 7,444 in all) already carry
+    COMPLETE mūla Sanskrit nested inside items[].shlokas[]. They look empty if
+    you count items instead of ślokas, and an importer that rebuilds the file
+    from a GRETIL parse would quietly replace real text with a worse copy.
+
+    So: existing sanskrit_text always wins. We only ever ADD — a missing artha,
+    a bhāṣya from a commentator not already present, a verse or chapter the file
+    does not have. Returns (merged, stats).
+    """
+    stats = Counter()
+    merged = dict(existing)
+    merged.setdefault("schema", incoming.get("schema", "smriti_dharmashastra_text"))
+    if incoming.get("default_author") and not merged.get("default_author"):
+        merged["default_author"] = incoming["default_author"]
+    merged.setdefault("commentary_sources", {})
+    merged["commentary_sources"].update(incoming.get("commentary_sources", {}))
+
+    items = list(existing.get("items", []))
+    by_id = {it.get("id"): it for it in items}
+
+    for inc_ch in incoming.get("items", []):
+        cur = by_id.get(inc_ch["id"])
+        if cur is None:
+            items.append(inc_ch)
+            by_id[inc_ch["id"]] = inc_ch
+            stats["chapters_added"] += 1
+            stats["verses_added"] += len(inc_ch.get("shlokas", []))
+            stats["bhashya_added"] += sum(len(s.get("bhashya", [])) for s in inc_ch.get("shlokas", []))
+            continue
+
+        cur.setdefault("shlokas", [])
+        by_num = {s.get("number"): s for s in cur["shlokas"]}
+        for inc_s in inc_ch.get("shlokas", []):
+            tgt = by_num.get(inc_s.get("number"))
+            if tgt is None:
+                cur["shlokas"].append(inc_s)
+                by_num[inc_s.get("number")] = inc_s
+                stats["verses_added"] += 1
+                stats["bhashya_added"] += len(inc_s.get("bhashya", []))
+                continue
+
+            if inc_s.get("sanskrit_text"):
+                if not tgt.get("sanskrit_text"):
+                    tgt["sanskrit_text"] = inc_s["sanskrit_text"]
+                    stats["mula_filled"] += 1
+                elif allow_mula_overwrite and tgt["sanskrit_text"] != inc_s["sanskrit_text"]:
+                    tgt["sanskrit_text"] = inc_s["sanskrit_text"]
+                    stats["mula_overwritten"] += 1
+                else:
+                    stats["mula_preserved"] += 1
+
+            if inc_s.get("artha") and not tgt.get("artha"):
+                tgt["artha"] = inc_s["artha"]
+                stats["artha_added"] += 1
+
+            if inc_s.get("bhashya"):
+                tgt.setdefault("bhashya", [])
+                have = {b.get("commentator") for b in tgt["bhashya"]}
+                for b in inc_s["bhashya"]:
+                    if b.get("commentator") not in have:
+                        tgt["bhashya"].append(b)
+                        have.add(b.get("commentator"))
+                        stats["bhashya_added"] += 1
+
+        cur["shlokas"].sort(key=lambda s: (s.get("number") or 0))
+
+    merged["items"] = items
+    return merged, stats
 
 
 # ---------------------------------------------------------------- layer types
@@ -287,6 +369,9 @@ def main() -> int:
     ap.add_argument("--discover-gdocs", action="store_true")
     ap.add_argument("--max-pages", type=int, default=0, help="cap wisdomlib pages per layer (smoke test)")
     ap.add_argument("--delay", type=float, default=1.5)
+    ap.add_argument("--allow-mula-overwrite", action="store_true",
+                    help="let a fetched mula verse replace one already in the repo. "
+                         "OFF by default: five smrtis already hold complete mula text.")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--offline", action="store_true")
     args = ap.parse_args()
@@ -343,13 +428,32 @@ def main() -> int:
 
         stem = gcfg["slug"].replace("/", "__")
         save_json(out / f"{stem}.json", data)
-        if not args.dry_run and n_verses:
-            target = dge / "data" / gcfg["slug"] / "data.json"
-            if target.exists() or gcfg.get("create_if_missing"):
-                save_json(target, data)
+
+        target = dge / "data" / gcfg["slug"] / "data.json"
+        existing = load_json(target) if target.exists() else None
+        if existing is not None:
+            merged, stats = merge_into_existing(existing, data, args.allow_mula_overwrite)
+            before = sum(len(i.get("shlokas", [])) for i in existing.get("items", []))
+            after = sum(len(i.get("shlokas", [])) for i in merged.get("items", []))
+            print(f"   merge: {before:,} existing verses -> {after:,}; "
+                  f"+{stats['verses_added']} verses, +{stats['artha_added']} artha, "
+                  f"+{stats['bhashya_added']} bhāṣya, {stats['mula_preserved']} mūla preserved"
+                  + (f", {stats['mula_overwritten']} OVERWRITTEN" if stats["mula_overwritten"] else ""))
+            report[-1]["merge"] = dict(stats)
+            # Hard stop: an import must never shrink a grantha.
+            if after < before:
+                print(f"   !! REFUSING TO WRITE {target}: verse count would drop "
+                      f"{before:,} -> {after:,}", file=sys.stderr)
+                continue
+            if not args.dry_run:
+                save_json(target, merged)
                 print(f"   -> wrote {target}")
-            else:
-                print(f"   -- {target} does not exist and create_if_missing is false; dump only")
+        elif gcfg.get("create_if_missing"):
+            if not args.dry_run and n_verses:
+                save_json(target, data)
+                print(f"   -> created {target}")
+        else:
+            print(f"   -- {target} does not exist and create_if_missing is false; dump only")
 
     save_json(out / "COUNTS_smriti.json",
               {"granthas": report, "http": fetch.stats,

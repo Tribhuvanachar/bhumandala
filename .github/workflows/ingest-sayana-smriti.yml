@@ -14,7 +14,7 @@ on:
         description: "Which importer to run"
         type: choice
         default: sayana
-        options: [sayana, smriti, both]
+        options: [sayana, smriti, veda-phase2, samaveda-propagate, minor-smritis-probe, minor-smritis, both, everything]
       mandalas:
         description: "Sāyaṇa: maṇḍalas to fetch, e.g. '1 2 3' (blank = all ten)"
         default: ""
@@ -23,6 +23,9 @@ on:
         default: "0"
       only:
         description: "Smṛti: slug filter, e.g. manu_smriti (blank = all)"
+        default: ""
+      corpora:
+        description: "veda-phase2: which corpora — av, av-whitney, syv, ts (space separated; blank = all)"
         default: ""
       include_encumbered:
         description: "Smṛti: also import layers flagged rights-encumbered"
@@ -52,7 +55,28 @@ jobs:
         run: pip install -r tools/sayana_smriti/requirements.txt
 
       - name: Unit tests (parsers)
-        run: python tools/sayana_smriti/tests/test_parsers.py
+        run: |
+          python tools/sayana_smriti/tests/test_parsers.py
+          python tools/sayana_smriti/tests/test_phase2.py
+
+      - name: Unit tests (patched core.js normaliser)
+        run: node tools/sayana_smriti/tests/test_core_patch.js
+
+      # Commentary that lands in the data but is discarded by the normaliser
+      # looks finished and renders nothing. Put the patched core.js in place
+      # BEFORE the smriti job so verify_import.py's render check can pass.
+      # The core.js edits are no longer applied at run time: they are committed
+      # in dge/js/core.js, and the packaged snapshot + diff have been dropped so
+      # nothing can re-apply a stale copy over a file main has moved on from.
+      # test_core_patch.js above reads the shipping dge/js/core.js directly, so
+      # the normaliser is verified rather than assumed. Only the taxonomy nodes
+      # still have to be added before an importer can write into those folders.
+      - name: Add the new taxonomy folders
+        if: inputs.job == 'smriti' || inputs.job == 'both'
+        run: |
+          set -e
+          node --check dge/js/core.js
+          python tools/sayana_smriti/patches/taxonomy_patch.py --dge-root dge
 
       # A partial run is resumable: the HTTP cache is keyed by URL, so a re-run
       # after a timeout picks up where it stopped instead of refetching 10k pages.
@@ -84,6 +108,53 @@ jobs:
           if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
           python import_smriti.py $ARGS 2>&1 | tee smriti.log
 
+      # The other four Vedas. Griffith (AV, Śukla YV), Whitney & Lanman (AV —
+      # the layer that reports Sāyaṇa's readings), Keith (Taittirīya Saṃhitā).
+      - name: Import phase-2 Veda layers
+        if: inputs.job == 'veda-phase2' || inputs.job == 'everything'
+        working-directory: tools/sayana_smriti
+        run: |
+          set -o pipefail
+          ARGS="--dge-root ${{ github.workspace }}/dge"
+          for c in ${{ inputs.corpora }}; do ARGS="$ARGS --corpus $c"; done
+          if [ -z "${{ inputs.corpora }}" ]; then ARGS="$ARGS --corpus all"; fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          python import_veda_phase2.py $ARGS 2>&1 | tee phase2.log
+
+      # No network at all: the Sāmaveda inherits Sāyaṇa and Wilson from the
+      # Ṛgveda parallels its own data already records (94% coverage). Must run
+      # AFTER the Sāyaṇa job, which is why it sits here and not earlier.
+      - name: Propagate Sāyaṇa to the Sāmaveda
+        if: inputs.job == 'samaveda-propagate' || inputs.job == 'everything'
+        working-directory: tools/sayana_smriti
+        run: |
+          set -o pipefail
+          ARGS="--dge-root ${{ github.workspace }}/dge"
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          python propagate_samaveda.py $ARGS 2>&1 | tee samaveda.log
+
+      # sa.wikisource is the last lead for the eleven minor smrtis. Probe first:
+      # it prints a table of what actually exists there and writes nothing, so a
+      # source that turns out to be empty is visible rather than silent.
+      - name: Probe sa.wikisource (minor smṛtis)
+        if: inputs.job == 'minor-smritis-probe' || inputs.job == 'minor-smritis' || inputs.job == 'everything'
+        working-directory: tools/sayana_smriti
+        run: python import_minor_smritis.py --probe-only 2>&1 | tee probe.log
+
+      - name: Import minor smṛtis + nibandhas
+        if: inputs.job == 'minor-smritis' || inputs.job == 'everything'
+        working-directory: tools/sayana_smriti
+        run: |
+          set -o pipefail
+          ARGS="--dge-root ${{ github.workspace }}/dge"
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          python import_minor_smritis.py $ARGS 2>&1 | tee minor.log
+
+      - name: Verify the import
+        if: inputs.dry_run != true
+        working-directory: tools/sayana_smriti
+        run: python verify_import.py --dge-root ${{ github.workspace }}/dge
+
       - name: Validate DGE data
         if: inputs.dry_run != true
         run: python tools/validate_data.py || echo "::warning::validate_data.py reported issues — check before merging"
@@ -110,5 +181,6 @@ jobs:
           body-path: tools/sayana_smriti/dump/COUNTS_sayana.json
           add-paths: |
             dge/data/**
+            dge/js/core.js
             dge/search_index/**
           commit-message: "data: Sāyaṇa Bhāṣya + Smṛti commentary layers"

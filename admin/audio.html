@@ -5,6 +5,7 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="../dge/js/vandana-guard.js?v=1"></script>
+<script src="../dge/js/audio-detect.js?v=1"></script>
 <!-- Passkeys come from admin/config/keys.json, not from this page. -->
 <script src="js/keys.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,34 +40,78 @@
     <div class="muted" id="fileInfo" style="margin-top:8px"></div>
   </div>
 
-  <h2 class="sect">2. Options</h2>
+  <h2 class="sect">2. How should we split it?</h2>
   <div class="card">
     <div class="row">
-      <label style="display:flex;align-items:center;gap:6px;font-weight:400;margin:0;min-width:auto">
-        <input type="checkbox" id="optAutoDetect" checked> Auto-detect boundaries from silence gaps (recommended — no tuning needed)
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;margin:0;min-width:auto">
+        <input type="checkbox" id="optHasBackground" checked>
+        <span><b>There's background music</b> — tabla, veena, tanpura, anything playing under the chanting</span>
       </label>
     </div>
-    <div class="row">
-      <div class="field"><label for="optMinLen">Minimum shloka length (sec)</label><input type="number" id="optMinLen" value="10" step="0.5"></div>
-      <div class="field"><label for="optMinGap">Minimum gap between shlokas (sec)</label><input type="number" id="optMinGap" value="1.5" step="0.1"></div>
-      <div class="field"><label for="optSilenceDb">Silence threshold override (dB, optional — blank = auto)</label><input type="number" id="optSilenceDb" placeholder="auto" step="0.5"></div>
+    <div class="muted">Leave this on unless the recording is a bare voice. It listens for the <i>voice</i> rather than for silence, which is what lets it find the gaps even while the accompaniment keeps playing. Turning it off uses the old plain-silence method — faster, but a recording with continuous accompaniment will come back as one single piece.</div>
+
+    <div class="row" style="margin-top:12px">
+      <div class="field">
+        <label for="optExpected">How many shlokas do you expect? (optional)</label>
+        <input type="number" id="optExpected" placeholder="e.g. 62" min="1">
+      </div>
+      <div class="field">
+        <label for="optMinLen">Shortest a shloka can be (seconds)</label>
+        <input type="number" id="optMinLen" value="10" step="0.5">
+      </div>
+      <div class="field">
+        <label for="optMinGap">Shortest pause that means "new shloka" (seconds)</label>
+        <input type="number" id="optMinGap" value="1.5" step="0.1">
+      </div>
     </div>
-    <div class="muted">A chanted shloka follows a vṛtta (metrical pattern), so it's rarely shorter than ~10–15 seconds — anything shorter than "Minimum shloka length" gets merged into its neighbour instead of kept as its own clip. "Minimum gap" is a floor: a detected silence shorter than this is treated as an in-verse breath, not a real boundary between shlokas, even if auto-detect would otherwise have used a shorter value. If auto-detect still splits badly on a real recording (background noise can make its threshold too permissive), set an explicit dB override above and re-run — no need to wait on us to retune it.</div>
+    <div class="muted">If you fill in the expected count we'll tell you whether we hit it — nothing is forced to match. A chanted shloka follows a vṛtta, so it's rarely shorter than 10–15 seconds; anything shorter gets joined to its neighbour. A pause shorter than the second figure is treated as a breath inside a verse, not a boundary.</div>
+
+    <details style="margin-top:12px">
+      <summary style="cursor:pointer;font-weight:600">Know more — fine tuning</summary>
+      <div class="muted" style="margin-top:8px">You shouldn't need any of this. It's here for the case where a particular recording splits badly and you'd rather fix it yourself than wait.</div>
+      <div class="row" style="margin-top:10px">
+        <div class="field">
+          <label for="optSilenceDb">Loudness cut-off (dB) — blank means "work it out"</label>
+          <input type="number" id="optSilenceDb" placeholder="automatic" step="0.5">
+        </div>
+        <div class="field">
+          <label for="optEdgePad">Extra breathing room kept at each end (seconds)</label>
+          <input type="number" id="optEdgePad" value="0.10" step="0.01">
+        </div>
+        <div class="field">
+          <label for="optNoisePct">How much of the recording is pause (%)</label>
+          <input type="number" id="optNoisePct" value="5" step="1" min="1" max="40">
+        </div>
+      </div>
+      <div class="muted">
+        <b>Loudness cut-off</b> — anything quieter than this counts as a gap. Left blank, it's chosen from the recording itself, which is usually better than a guess.<br>
+        <b>Breathing room</b> — each clip is extended by this much at both ends so nothing is clipped mid-syllable. It applies to the timestamps and the WAV clips alike, so both play the same audio.<br>
+        <b>How much is pause</b> — used to work out what the background music sounds like on its own. If the recording has unusually long gaps, raise it; if it's almost wall-to-wall chanting, lower it.
+      </div>
+      <div class="row" style="margin-top:10px">
+        <label style="display:flex;align-items:center;gap:6px;font-weight:400;margin:0;min-width:auto">
+          <input type="checkbox" id="optAutoDetect" checked> Work the cut-off out from this recording
+        </label>
+      </div>
+    </details>
+  </div>
+
+  <h2 class="sect">3. Naming and output</h2>
+  <div class="card">
     <div class="row">
-      <div class="field"><label for="optEdgePad">Edge cushion (sec)</label><input type="number" id="optEdgePad" value="0.10" step="0.01"></div>
       <div class="field"><label for="optPrefix">Filename prefix</label><input type="text" id="optPrefix" value="chunk_"></div>
       <div class="field"><label for="optStart">Start number</label><input type="number" id="optStart" value="1"></div>
-      <div class="field"><label for="optDigits">Digit padding</label><input type="number" id="optDigits" value="2"></div>
+      <div class="field"><label for="optDigits">Digits in the number</label><input type="number" id="optDigits" value="2"></div>
     </div>
     <div class="row">
       <label style="display:flex;align-items:center;gap:6px;font-weight:400;margin:0;min-width:auto">
-        <input type="checkbox" id="optExportJson" checked> Export JSON timestamp map (single audio file stays whole)
+        <input type="checkbox" id="optExportJson" checked> A JSON list of timestamps (the audio file stays whole)
       </label>
       <label style="display:flex;align-items:center;gap:6px;font-weight:400;margin:0;min-width:auto">
-        <input type="checkbox" id="optExportClips" checked> Export individual trimmed clips (WAV)
+        <input type="checkbox" id="optExportClips" checked> One trimmed WAV per shloka
       </label>
     </div>
-    <div class="muted">At least one of the two above should stay checked, or there's nothing to produce. The edge cushion applies to both, so a clip and a JSON-seek of the same chunk always play the same audio.</div>
+    <div class="muted">Keep at least one ticked or there's nothing to produce.</div>
   </div>
 
   <div class="row">
@@ -233,145 +278,38 @@
   // same 5ms boundary refinement window, same overlap resolution. Ported
   // so the web tool and the notebook produce comparable results on the
   // same recording, not two independently-tuned algorithms.
+  // Boundary detection now lives in dge/js/audio-detect.js so it can be tested
+  // in Node instead of by reloading this page and squinting at the result --
+  // see tests/test-audio-detect.js, which reproduces the one-segment bug on a
+  // synthetic recording with continuous accompaniment and then asserts the fix.
+  //
+  // The old inline implementation measured BROADBAND energy on the raw mix.
+  // That is unfixable by tuning when the accompaniment never stops: there is no
+  // loudness cut-off that separates "voice + tabla" from "tabla", because the
+  // tabla is equally loud in both. The shared module listens in the vocal band
+  // and subtracts whatever is playing continuously underneath, so the pauses
+  // become visible again. Setting "There's background music" off restores the
+  // old behaviour exactly, for a bare-voice recording where it is cheaper.
   function detectSegments(mono, sr, opts){
-    var frame = Math.round(sr * 0.03), hop = Math.round(sr * 0.01);
-    var n = 1 + Math.floor((mono.length - frame) / hop);
-    var xs = new Float64Array(mono.length + 1);
-    for (var i = 0; i < mono.length; i++) xs[i + 1] = xs[i] + mono[i] * mono[i];
-    var db = new Float32Array(n);
-    for (var k = 0; k < n; k++) {
-      var idx = k * hop;
-      var power = (xs[idx + frame] - xs[idx]) / frame;
-      db[k] = 10 * Math.log10(power + 1e-12);
-    }
-    var total = mono.length / sr;
-
-    // An explicit dB override always wins, in either mode -- auto-detect's
-    // computed threshold can be too permissive on real recordings (room
-    // tone/background noise never reads as true digital silence the way a
-    // clean synthetic test file does), so the end user can override it
-    // without needing the algorithm itself retuned.
-    var thr;
-    if (opts.silenceDbOverride != null) {
-      thr = opts.silenceDbOverride;
-    } else if (opts.autoDetect) {
-      var sortedDb = Array.prototype.slice.call(db).sort(function(a, b){ return a - b; });
-      var floorDb = percentile(sortedDb, 10), peakDb = percentile(sortedDb, 90);
-      thr = Math.max(floorDb + 6.0, floorDb + 0.35 * (peakDb - floorDb));
-      thr = Math.min(thr, peakDb - 3.0);
-    } else {
-      thr = -40;
-    }
-    var active = new Uint8Array(n);
-    for (k = 0; k < n; k++) active[k] = db[k] > thr ? 1 : 0;
-
-    var gaps = [];
-    i = 0;
-    while (i < n) {
-      if (!active[i]) {
-        var j = i; while (j < n && !active[j]) j++;
-        if (i > 0 && j < n) gaps.push((j - i) * hop / sr);
-        i = j;
-      } else i++;
-    }
-
-    // minLen (a shloka follows a vṛtta, so it has a real physical minimum
-    // duration) and minGap (a real inter-shloka pause vs. an in-verse
-    // breath) are both user-set floors now, applied in both auto and manual
-    // mode -- auto-detect only ever raises minGap above the user's floor
-    // (via Otsu splitting of the actual gap-length distribution on this
-    // recording), never lowers it below what the user asked for.
-    var minLen = opts.minLenSec;
-    var minGap;
-    if (opts.autoDetect) {
-      var og = gaps.length >= 3 ? otsuSplit(gaps) : null;
-      minGap = Math.max(opts.minGapSec, og || opts.minGapSec);
-    } else {
-      minGap = opts.minGapSec;
-    }
-
-    var merged = active.slice();
-    var minGapFr = Math.round(minGap / (hop / sr));
-    i = 0;
-    while (i < n) {
-      if (!merged[i]) {
-        j = i; while (j < n && !merged[j]) j++;
-        if (i > 0 && j < n && (j - i) < minGapFr) for (var f = i; f < j; f++) merged[f] = 1;
-        i = j;
-      } else i++;
-    }
-
-    var segs = [];
-    i = 0;
-    while (i < n) {
-      if (merged[i]) {
-        j = i; while (j < n && merged[j]) j++;
-        var a = i * hop / sr, b = Math.min(total, j * hop / sr);
-        if (b - a >= minLen) segs.push([a, b]);
-        i = j;
-      } else i++;
-    }
-
-    var w = Math.round(sr * 0.005);
-    var pth = Math.pow(10, thr / 10);
-    function refine(t, forward){
-      var c = Math.round(t * sr);
-      var lo = Math.max(0, c - Math.round(0.03 * sr));
-      var hi = Math.min(mono.length - w, c + Math.round(0.03 * sr));
-      if (forward) {
-        for (var s = lo; s < hi; s++) { if ((xs[s + w] - xs[s]) / w > pth) return s / sr; }
-      } else {
-        for (var s2 = hi; s2 > lo; s2--) { if ((xs[s2 + w] - xs[s2]) / w > pth) return s2 / sr; }
-      }
-      return t;
-    }
-    segs.forEach(function(seg){
-      seg[0] = Math.max(0, refine(seg[0], true) - opts.edgePad);
-      seg[1] = Math.min(total, refine(seg[1], false) + opts.edgePad);
+    if (!window.DGEAudioDetect) throw new Error(
+      "audio-detect.js did not load — check the <script> tag at the top of this page.");
+    var r = window.DGEAudioDetect.detect(mono, sr, {
+      method: opts.hasBackground === false ? 'broadband' : 'voice',
+      minLenSec: opts.minLenSec,
+      minGapSec: opts.minGapSec,
+      padSec: opts.edgePad,
+      noisePercentile: opts.noisePercentile,
+      silenceDbOverride: opts.autoDetect === false && opts.silenceDbOverride == null
+        ? -40 : opts.silenceDbOverride
     });
-    for (k = 1; k < segs.length; k++) {
-      if (segs[k][0] < segs[k - 1][1]) {
-        var mid = (segs[k][0] + segs[k - 1][1]) / 2;
-        segs[k - 1][1] = mid; segs[k][0] = mid;
-      }
-    }
-    return { segs: segs, total: total, thr: thr, minGap: minGap, minLen: minLen };
-  }
-
-  // ---------------------------------------------------------------
-  // WAV encoding (16-bit PCM) -- slices the ORIGINAL decoded buffer
-  // (native sample rate, all channels) for the actual clip, even though
-  // detection ran on a mono mixdown -- same split as the Colab notebook
-  // (analysis vs. extraction use different signals).
-  // ---------------------------------------------------------------
-  function sliceToWavBlob(buffer, startSec, endSec){
-    var sr = buffer.sampleRate, ch = buffer.numberOfChannels;
-    var startSample = Math.max(0, Math.floor(startSec * sr));
-    var endSample = Math.min(buffer.length, Math.ceil(endSec * sr));
-    var frames = Math.max(0, endSample - startSample);
-    var bytesPerSample = 2;
-    var blockAlign = ch * bytesPerSample;
-    var dataSize = frames * blockAlign;
-    var headerSize = 44;
-    var out = new ArrayBuffer(headerSize + dataSize);
-    var view = new DataView(out);
-    function writeStr(off, s){ for (var i = 0; i < s.length; i++) view.setUint8(off + i, s.charCodeAt(i)); }
-    writeStr(0, "RIFF"); view.setUint32(4, 36 + dataSize, true); writeStr(8, "WAVE");
-    writeStr(12, "fmt "); view.setUint32(16, 16, true); view.setUint16(20, 1, true);
-    view.setUint16(22, ch, true); view.setUint32(24, sr, true);
-    view.setUint32(28, sr * blockAlign, true); view.setUint16(32, blockAlign, true); view.setUint16(34, 16, true);
-    writeStr(36, "data"); view.setUint32(40, dataSize, true);
-    var channelData = []; for (var c = 0; c < ch; c++) channelData.push(buffer.getChannelData(c));
-    var off = headerSize;
-    for (var i = 0; i < frames; i++) {
-      for (c = 0; c < ch; c++) {
-        var s = channelData[c][startSample + i] || 0;
-        s = Math.max(-1, Math.min(1, s));
-        view.setInt16(off, s < 0 ? s * 0x8000 : s * 0x7fff, true);
-        off += 2;
-      }
-    }
-    return new Blob([out], { type: "audio/wav" });
+    return {
+      segs: r.segments.map(function(s){ return [s.start, s.end]; }),
+      method: r.method,
+      total: r.totalSec,
+      thr: r.threshold,
+      minGap: r.minGap,
+      minLen: opts.minLenSec
+    };
   }
 
   // ---------------------------------------------------------------
@@ -386,6 +324,8 @@
         var dbOverrideRaw = parseFloat($("#optSilenceDb").value);
         var opts = {
           autoDetect: $("#optAutoDetect").checked,
+          hasBackground: $("#optHasBackground").checked,
+          noisePercentile: parseFloat($("#optNoisePct").value) || 5,
           silenceDbOverride: isNaN(dbOverrideRaw) ? null : dbOverrideRaw,
           minGapSec: parseFloat($("#optMinGap").value) || 1.5,
           minLenSec: parseFloat($("#optMinLen").value) || 10,
@@ -416,8 +356,23 @@
         };
 
         renderReview(result);
-        $("#processStatus").textContent = "Done — " + lastSegments.length + " segment(s) found (threshold " +
-          result.thr.toFixed(1) + " dB, min gap " + result.minGap.toFixed(2) + "s, min length " + result.minLen.toFixed(1) + "s).";
+        var expected = parseInt($("#optExpected").value, 10);
+        var msg = "Found " + lastSegments.length + " shloka" +
+          (lastSegments.length === 1 ? "" : "s") + ".";
+        if (expected > 0) {
+          if (expected === lastSegments.length) msg += " That matches what you expected.";
+          else if (lastSegments.length === 1 && result.method === "broadband")
+            msg += " You expected " + expected + ". One single piece almost always means " +
+                   "there is background music playing throughout — tick \u201cThere\u2019s " +
+                   "background music\u201d and run it again.";
+          else msg += " You expected " + expected + ". Try nudging \u201cshortest pause\u201d " +
+                      (lastSegments.length < expected ? "down" : "up") + " a little and re-running.";
+        }
+        msg += "  (" + (result.method === "voice" ? "listening for the voice" : "plain silence") +
+               ", shortest pause " + result.minGap.toFixed(2) + "s, shortest shloka " +
+               result.minLen.toFixed(1) + "s" +
+               (result.thr == null ? "" : ", cut-off " + result.thr.toFixed(1) + " dB") + ")";
+        $("#processStatus").textContent = msg;
         $("#pushBtn").disabled = lastSegments.length === 0;
       } catch (e) {
         $("#processStatus").textContent = "Processing failed: " + e.message;

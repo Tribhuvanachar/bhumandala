@@ -1,7 +1,112 @@
-# Handoff — Sāyaṇa Bhāṣya & Smṛti commentary import
+# Handoff — Veda & Smṛti commentary import  (v3)
+
+## Also new in v3 — the last empty shelf: `import_minor_smritis.py`
+
+Fourteen smṛti folders and all seven nibandha folders hold **zero items**. The
+earlier survey found no e-text for the eleven minor smṛtis anywhere; the one
+remaining lead was sa.wikisource.org, which is CC BY-SA, has a clean API, and
+carries a category `वर्गः:स्मृतयः` that a search confirmed exists. What could not
+be confirmed is *which* of these works it holds — Wikimedia domains are cache-only
+from the authoring sandbox.
+
+So the script leads with a probe, and that is the point of its design:
+
+```bash
+python import_minor_smritis.py --probe-only     # ~2 min, writes nothing
+```
+
+It walks the category tree (following subcategories), probes each expected title
+plus its spelling variants — Wikisource is inconsistent about visarga-compounds,
+so `अङ्गिरःस्मृतिः`, `अङ्गिरस्स्मृतिः` and `अङ्गिरसस्मृतिः` are all tried — falls
+back to full-text search, and prints a table of what exists. **Decide from that
+table whether the full run is worth it.** An importer that silently writes nothing
+when a source turns out to be empty is indistinguishable from a broken one.
+
+One thing the survey had wrong and the search corrected: the Sanskrit
+**Vīramitrodaya** was written off as scan-only, but `वीरमित्रोदयः - श्राद्धप्रकाशः`
+is on sa.wikisource. It is in the target list.
+
+Writing goes through the same `merge_into_existing()` as the smṛti importer, so
+an empty folder gets created and a populated one is never shrunk. The CC BY-SA
+obligation is written into each file's `commentary_sources` — share-alike, not
+public domain; DGE is non-commercial and attributes, which satisfies it, but the
+obligation is recorded rather than assumed.
+
+## New in v3 — the other four Vedas
+
+v1 and v2 covered the Ṛgveda and the smṛtis. v3 adds the rest of the Vedic corpus,
+which today carries **no commentary and no translation at all** — 12,927 items:
+
+| Corpus | Items | What v3 adds |
+|---|---|---|
+| Atharvaveda Śaunaka | 5,977 | Griffith 1895–6, **and Whitney & Lanman 1905** — Whitney's apparatus is the layer that reports Sāyaṇa's readings |
+| Sāmaveda Kauthuma | 1,875 | Sāyaṇa + Wilson **propagated from the Ṛgveda, no network** |
+| Śukla Yajurveda Mādhyandina | 1,975 | Griffith 1899 |
+| Taittirīya Saṃhitā | 696 | Keith 1914 (HOS 18–19) |
+
+**The Sāmaveda trick is the nice one.** DGE's Sāmaveda data already records, per
+mantra, which Ṛgveda mantra it reuses (`rigveda_ref`, in Devanagari numerals).
+Measured against the live repo: 1,761 of 1,875 mantras carry a ref and **1,760 of
+those resolve** once the numerals are converted (99.9%). So `propagate_samaveda.py`
+copies Sāyaṇa and Wilson across for 94% of the Sāmaveda with zero fetching. Every
+propagated entry is labelled in its own text — the reader is told they are reading
+Sāyaṇa on the parallel Ṛgveda mantra, not a Sāmaveda bhāṣya — and each item records
+`commentary_via: "rigveda:6.16.10"`.
+
+Deliberately **not** done: Griffith's Sāmaveda. He follows Benfey's Rāṇāyanīya
+arrangement (585 verses against DGE's 650 in the Pūrvārcika, because Benfey omits
+the Āraṇyaka-gāna and the Mahānāmnī ārcika). Rather than guess an offset onto a
+94%-covered corpus, it is left alone.
+
+Still nothing for the Taittirīya Brāhmaṇa (1,768) and Āraṇyaka (636): no
+public-domain English translation of either exists. And no Sanskrit Sāyaṇa for any
+of these four — scans only, exactly as with the Ṛgveda.
+
+```bash
+python import_veda_phase2.py --dge-root dge --corpus av      # or syv, ts, av-whitney, all
+python propagate_samaveda.py --dge-root dge                  # AFTER the Sāyaṇa job
+```
+
+`import_veda_phase2.py` fails a corpus whose match rate falls below `--min-match`
+(default 50%) — the signature of a parser that quietly stopped working.
+
+---
+
+# Handoff — Sāyaṇa Bhāṣya & Smṛti commentary import  (v2)
 
 For Claude Code, to run in the `bhumandala` repo. Read `AUDIT.md` first: it is the
 answer to "is Sāyaṇa loaded, and do the smṛtis have their commentaries" (no, and no).
+
+## What changed in v2 — read this before running the smṛti job
+
+**A correction, and a safety fix that came out of it.** The v1 audit counted
+*items* in the smṛti files. Items are adhyāyas. Counting the ślokas nested inside
+them shows five smṛtis already hold **complete mūla Sanskrit — 7,444 verses**
+(Manu 2,685, Viṣṇu 2,363, Yājñavalkya 1,011, Nārada 805, Parāśara 580). The v1
+`import_smriti.py` rebuilt each `data.json` from scratch and wrote it over the
+target, so a thin GRETIL parse could have replaced real text with a worse copy.
+
+v2 writes through `merge_into_existing()`: existing `sanskrit_text` always wins,
+only missing `artha` and new commentators are added, and the run **refuses to
+write at all** if a grantha's verse count would drop. `--allow-mula-overwrite`
+exists but is off by default. Verified against the live repo — a Manu run reports
+`2,685 existing verses -> 2,685; +0 verses, +3 artha, 6 mūla preserved`.
+
+`import_sayana_rigveda.py` was never affected: it merges per mantra and never
+rebuilds a file.
+
+Also new in v2: `tests/test_core_patch.js` (10 tests over the normaliser) and
+`verify_import.py` (post-run QA — run it before merging the PR).
+
+**On the core.js edits, as deployed in this repo:** the package shipped them
+three ways — a whole patched `patches/core.js`, a `patches/core.js.patch` diff,
+and the prose in `patches/core-js-labels.md`. Both the snapshot and the diff
+have been dropped here, and the edits live in `dge/js/core.js` itself. The
+snapshot was cut from main on 17 Aug and main has moved on since (kosha
+citations, the tour, inline content), so keeping a stale full copy of core.js in
+the tree is a loaded gun: anything that applies it reverts unrelated work.
+`tests/test_core_patch.js` now reads `dge/js/core.js` directly, so it guards the
+file the browser actually loads rather than a copy that can drift from it.
 
 ## Why the dump isn't in this zip
 
@@ -49,6 +154,23 @@ python dge/build_search_index.py
 The workflow caches HTTP responses by URL, so a timeout-and-rerun resumes rather than
 refetching. It opens a PR; it never pushes to main.
 
+## Verify before merging
+
+```bash
+python tools/sayana_smriti/verify_import.py --dge-root dge                  # structural
+python tools/sayana_smriti/verify_import.py --dge-root dge --spot-check 25  # + refetch 25 random pages
+```
+
+It reports Sāyaṇa coverage per maṇḍala, re-checks every dump row against the doc
+map independently of the importer's own guard, looks for heading text that leaked
+into a commentary, flags duplicate commentary (the signature of an off-by-one),
+and — the one people miss — **fails if `core.js` is still unpatched while smṛti
+bhāṣya is present in the data**, because that combination looks finished and
+renders nothing. Non-zero exit on any FAIL, so it can gate the workflow.
+
+Run against the current unmerged repo it correctly reports
+`FAIL [coverage] NO Sāyaṇa commentary found in any maṇḍala`.
+
 ## The one thing that will bite you
 
 `import_sayana_rigveda.py` writes commentary keyed by mantra id. If wisdomlib's page
@@ -81,6 +203,7 @@ side by side. Do not disable it.
 
 ```
 AUDIT.md                     what's loaded, what's missing, and from where it can come
+verify_import.py             post-run QA: coverage, misalignment, contamination, renderability
 rigveda_docmap.json          10,552 mantra id -> wisdomlib doc id (verified, no crawl needed)
 common.py                    throttled+cached+retrying fetcher, atomic JSON writes
 wisdomlib.py                 heading-driven page parser (survives a reskin; selectors wouldn't)
@@ -90,8 +213,12 @@ parsers/gdocs.py             UT-Austin / Olivelle Google Doc transcriptions
 import_sayana_rigveda.py     the headline: Sāyaṇa into all ten maṇḍalas
 import_smriti.py             mūla + commentaries for 13 smṛti/dharmaśāstra granthas
 sources.json                 source registry with per-layer rights triage
-patches/                     core.js edits + taxonomy patch
-tests/                       15 unit tests over fixtures matching the live markup
+patches/core-js-labels.md    what the core.js edits are and why (already applied
+                             in dge/js/core.js; the packaged snapshot and diff
+                             were dropped so neither can revert newer work)
+patches/taxonomy_patch.py    adds the two new Dharmasutra folders
+tests/test_parsers.py        15 tests: wisdomlib, sacred-texts, GRETIL, Google Docs
+tests/test_core_patch.js     10 tests: the patched normaliser, incl. regressions
 .github/workflows/           the Actions runner
 ```
 
