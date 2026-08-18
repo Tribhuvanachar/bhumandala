@@ -51,7 +51,15 @@
     try { var a = JSON.parse(localStorage.getItem(key) || '[]'); return Array.isArray(a) ? a : []; }
     catch (e) { return []; }
   }
-  function userOrder()   { return lsList('kosha_user_order'); }
+  // The project lead's explicit pick for a reader who has never touched the
+  // ⚙ panel: these four pinned first rather than whatever order the
+  // manifest happens to list dictionaries in — Shabdarthakaustubha and
+  // Shabdakalpadruma/Vacaspatyam are exactly the three the comment above
+  // already named as the intended default, plus Monier-Williams (Cologne,
+  // the sanskrit→english direction — not mw-english-sanskrit, which is the
+  // reverse). A reader's own saved order, once they set one, wins outright.
+  var DEFAULT_KOSHA_ORDER = ['shabdArtha_kaustubha', 'shabdakalpadruma', 'vachaspatyam', 'mw-cologne'];
+  function userOrder()   { var a = lsList('kosha_user_order'); return a.length ? a : DEFAULT_KOSHA_ORDER; }
   function userHidden()  { return lsList('kosha_user_hidden'); }
   function setUserOrder(a)  { localStorage.setItem('kosha_user_order', JSON.stringify(a)); }
   function setUserHidden(a) { localStorage.setItem('kosha_user_hidden', JSON.stringify(a)); }
@@ -483,13 +491,17 @@
       var btn = el('button', 'kosha-xl', label);
       btn.onclick = function () {
         btn.disabled = true; btn.textContent = '…';
+        var loading = el('div', 'kosha-xl-out kosha-ai-loading',
+          '<div class="kosha-ai-progress"><i></i></div><div class="kosha-ai-loading-label">Translating…</div>');
+        out.appendChild(loading);
         translate(s.gloss, glossLang, target).then(function (t) {
-          out.appendChild(el('div', 'kosha-xl-out',
-            '<span class="kosha-lang">' + (LANG_NAME[target] || target) + ' *</span> ' + esc(t)));
+          loading.className = 'kosha-xl-out';
+          loading.innerHTML = '<span class="kosha-lang">' + (LANG_NAME[target] || target) + ' *</span> ' + esc(t);
           btn.remove();
         }).catch(function (e) {
           btn.disabled = false; btn.textContent = label;
-          out.appendChild(el('div', 'kosha-xl-err', '⚠ ' + esc(e && e.message ? e.message : 'Translation failed.')));
+          loading.className = 'kosha-xl-err';
+          loading.textContent = '⚠ ' + (e && e.message ? e.message : 'Translation failed.');
         });
       };
       bar.appendChild(btn);
@@ -499,16 +511,27 @@
       var btn = el('button', 'kosha-act', esc(a.label));
       btn.onclick = function () {
         btn.disabled = true; var old = btn.textContent; btn.textContent = '…';
+        // A disabled button alone was easy to miss — a Gemini call can take
+        // several seconds, and the result area stayed completely blank the
+        // whole time, which read as "did my click even register?". A
+        // visible progress bar in the result area itself fixes that.
+        var loading = el('div', 'kosha-ai-out kosha-ai-loading',
+          '<div class="kosha-ai-head">' + esc(a.label) + ' <span class="kosha-ai-tag">AI *</span></div>' +
+          '<div class="kosha-ai-progress"><i></i></div>' +
+          '<div class="kosha-ai-loading-label">Asking Gemini…</div>');
+        out.appendChild(loading);
         runAction(a, { word: g.hw, gloss: s.gloss || '', dict: d.meta.name || d.slug })
           .then(function (t) {
-            var box = el('div', 'kosha-ai-out',
+            loading.className = 'kosha-ai-out';
+            loading.innerHTML =
               '<div class="kosha-ai-head">' + esc(a.label) + ' <span class="kosha-ai-tag">AI *</span></div>' +
-              '<div class="kosha-ai-body">' + esc(t).replace(/\n/g, '<br>') + '</div>');
-            out.appendChild(box); btn.disabled = false; btn.textContent = old;
+              '<div class="kosha-ai-body">' + (typeof parseMarkdown === 'function' ? parseMarkdown(t) : esc(t).replace(/\n/g, '<br>')) + '</div>';
+            btn.disabled = false; btn.textContent = old;
           })
           .catch(function (e) {
             btn.disabled = false; btn.textContent = old;
-            out.appendChild(el('div', 'kosha-xl-err', '⚠ ' + esc(e && e.message ? e.message : 'Failed.')));
+            loading.className = 'kosha-xl-err';
+            loading.textContent = '⚠ ' + (e && e.message ? e.message : 'Failed.');
           });
       };
       bar.appendChild(btn);
@@ -750,6 +773,15 @@
       '.kosha-ai-head{font-size:12px;font-weight:600;color:var(--accent-red,#8a5a2b)}',
       '.kosha-ai-tag{font-weight:400;color:var(--muted-text,#999)}',
       '.kosha-ai-body{font-size:15px;line-height:1.6;margin-top:3px}',
+      '.kosha-ai-body .md-p:first-child{margin-top:0}',
+      // Indeterminate bar (width unknown — Gemini gives no progress
+      // events) rather than a spinner, so it reads clearly next to the
+      // "Asking Gemini…" label instead of competing with it for attention.
+      '.kosha-ai-progress{height:4px;border-radius:999px;background:var(--card-border,#e6ddcf);overflow:hidden;margin:6px 0 4px;width:140px}',
+      '.kosha-ai-progress i{display:block;height:100%;width:40%;border-radius:999px;background:var(--accent-red,#8a5a2b);animation:koshaAiProgress 1.1s ease-in-out infinite}',
+      '@keyframes koshaAiProgress{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}',
+      '.kosha-ai-loading-label{font-size:12px;color:var(--muted-text,#999)}',
+      '@media(prefers-reduced-motion:reduce){.kosha-ai-progress i{animation:none;width:100%}}',
       '.kosha-xl{font-size:12px;margin:4px 6px 0 0;background:var(--card-active,#efe7dc);border:none;border-radius:8px;padding:3px 8px;cursor:pointer;color:inherit}',
       '.kosha-xl-out{font-size:15px;margin:4px 0;padding:6px 8px;background:var(--card-active,#f6f1ea);border-radius:8px}',
       '.kosha-xl-err{font-size:13px;margin:4px 0;padding:6px 8px;background:rgba(170,51,51,.08);border:1px solid #d99;border-radius:8px;color:#a33}',

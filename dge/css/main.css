@@ -426,10 +426,14 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 .project-banner a { color: var(--accent-red); font-weight: 700; text-decoration: none; border-bottom: 1px dashed var(--accent-red); padding-bottom: 1px; }
 
 /* Markdown Rendering Classes */
+.md-h1 { color: var(--accent-red); font-size: 18px; font-weight: 800; margin: 18px 0 10px; border-bottom: 1px solid var(--card-border); padding-bottom: 6px; }
 .md-h2 { color: var(--accent-red); font-size: 16px; font-weight: 800; margin: 16px 0 8px; border-bottom: 1px solid var(--card-border); padding-bottom: 6px; }
 .md-h3 { color: var(--accent-gold); font-size: 14px; font-weight: 700; margin: 14px 0 6px; }
 .md-list { margin: 6px 0 6px 20px; padding: 0; line-height: 1.7; }
+.md-list li { margin: 2px 0; }
 .md-strong { font-weight: 700; color: var(--text-primary); }
+.md-p { margin: 8px 0; line-height: 1.6; }
+.md-p:first-child { margin-top: 0; }
 
 @keyframes spin { 100% { transform: rotate(360deg); } }
 @keyframes micPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
