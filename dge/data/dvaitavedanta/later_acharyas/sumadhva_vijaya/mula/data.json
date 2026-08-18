@@ -1,0 +1,392 @@
+{
+ "schema": "grantha_mula_text",
+ "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+ "source_url": "https://dvaitavedanta.in/category-details/10498/10497/samath/samath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_10499",
+   "reference": "सुमध्वविजयः > प्रथमः सर्गः",
+   "section": "प्रथमः सर्गः",
+   "unit_title": "प्रथमः सर्गः",
+   "sanskrit_text": "प्रथमः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "प्रथमः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10498/10497/samath/samath/parath",
+    "content_id": 10498,
+    "layer": "मूलम्",
+    "anchor": "article10499",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10503",
+   "reference": "सुमध्वविजयः > द्वितीयः सर्गः",
+   "section": "द्वितीयः सर्गः",
+   "unit_title": "द्वितीयः सर्गः",
+   "sanskrit_text": "द्वितीयः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "द्वितीयः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10502/10497/samath/samath/thavat",
+    "content_id": 10502,
+    "layer": "मूलम्",
+    "anchor": "article10503",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10505",
+   "reference": "सुमध्वविजयः > तृतीयः सर्गः",
+   "section": "तृतीयः सर्गः",
+   "unit_title": "तृतीयः सर्गः",
+   "sanskrit_text": "तृतीयः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "तृतीयः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10504/10497/samath/samath/tataya",
+    "content_id": 10504,
+    "layer": "मूलम्",
+    "anchor": "article10505",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10507",
+   "reference": "सुमध्वविजयः > चतुर्थः सर्गः",
+   "section": "चतुर्थः सर्गः",
+   "unit_title": "चतुर्थः सर्गः",
+   "sanskrit_text": "चतुर्थः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "चतुर्थः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10506/10497/samath/samath/catara",
+    "content_id": 10506,
+    "layer": "मूलम्",
+    "anchor": "article10507",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10510",
+   "reference": "सुमध्वविजयः > पञ्चमः सर्गः",
+   "section": "पञ्चमः सर्गः",
+   "unit_title": "पञ्चमः सर्गः",
+   "sanskrit_text": "पञ्चमः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "पञ्चमः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10508/10497/samath/samath/paniac",
+    "content_id": 10508,
+    "layer": "मूलम्",
+    "anchor": "article10510",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10512",
+   "reference": "सुमध्वविजयः > षष्ठः सर्गः",
+   "section": "षष्ठः सर्गः",
+   "unit_title": "षष्ठः सर्गः",
+   "sanskrit_text": "षष्ठः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "षष्ठः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10509/10497/samath/samath/shhash",
+    "content_id": 10509,
+    "layer": "मूलम्",
+    "anchor": "article10512",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10514",
+   "reference": "सुमध्वविजयः > सप्तमः सर्गः",
+   "section": "सप्तमः सर्गः",
+   "unit_title": "सप्तमः सर्गः",
+   "sanskrit_text": "सप्तमः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "सप्तमः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10511/10497/samath/samath/sapata",
+    "content_id": 10511,
+    "layer": "मूलम्",
+    "anchor": "article10514",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10515",
+   "reference": "सुमध्वविजयः > अष्टमः सर्गः",
+   "section": "अष्टमः सर्गः",
+   "unit_title": "अष्टमः सर्गः",
+   "sanskrit_text": "अष्टमः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "अष्टमः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10513/10497/samath/samath/ashhat",
+    "content_id": 10513,
+    "layer": "मूलम्",
+    "anchor": "article10515",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10518",
+   "reference": "सुमध्वविजयः > नवमः सर्गः",
+   "section": "नवमः सर्गः",
+   "unit_title": "नवमः सर्गः",
+   "sanskrit_text": "नवमः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "नवमः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10516/10497/samath/samath/navama",
+    "content_id": 10516,
+    "layer": "मूलम्",
+    "anchor": "article10518",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10520",
+   "reference": "सुमध्वविजयः > दशमः सर्गः",
+   "section": "दशमः सर्गः",
+   "unit_title": "दशमः सर्गः",
+   "sanskrit_text": "दशमः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "दशमः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10517/10497/samath/samath/thasha",
+    "content_id": 10517,
+    "layer": "मूलम्",
+    "anchor": "article10520",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10522",
+   "reference": "सुमध्वविजयः > एकादशः सर्गः",
+   "section": "एकादशः सर्गः",
+   "unit_title": "एकादशः सर्गः",
+   "sanskrit_text": "एकादशः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "एकादशः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10519/10497/samath/samath/ekatha",
+    "content_id": 10519,
+    "layer": "मूलम्",
+    "anchor": "article10522",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10524",
+   "reference": "सुमध्वविजयः > द्वादशः सर्गः",
+   "section": "द्वादशः सर्गः",
+   "unit_title": "द्वादशः सर्गः",
+   "sanskrit_text": "द्वादशः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "द्वादशः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10521/10497/samath/samath/thavat",
+    "content_id": 10521,
+    "layer": "मूलम्",
+    "anchor": "article10524",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10525",
+   "reference": "सुमध्वविजयः > त्रयोदशः सर्गः",
+   "section": "त्रयोदशः सर्गः",
+   "unit_title": "त्रयोदशः सर्गः",
+   "sanskrit_text": "त्रयोदशः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "त्रयोदशः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10523/10497/samath/samath/taraya",
+    "content_id": 10523,
+    "layer": "मूलम्",
+    "anchor": "article10525",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10527",
+   "reference": "सुमध्वविजयः > चतुर्दशः सर्गः",
+   "section": "चतुर्दशः सर्गः",
+   "unit_title": "चतुर्दशः सर्गः",
+   "sanskrit_text": "चतुर्दशः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "चतुर्दशः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10526/10497/samath/samath/catara",
+    "content_id": 10526,
+    "layer": "मूलम्",
+    "anchor": "article10527",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10530",
+   "reference": "सुमध्वविजयः > पञ्चदशः सर्गः",
+   "section": "पञ्चदशः सर्गः",
+   "unit_title": "पञ्चदशः सर्गः",
+   "sanskrit_text": "पञ्चदशः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "पञ्चदशः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10528/10497/samath/samath/paniac",
+    "content_id": 10528,
+    "layer": "मूलम्",
+    "anchor": "article10530",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_10531",
+   "reference": "सुमध्वविजयः > षोडशः सर्गः",
+   "section": "षोडशः सर्गः",
+   "unit_title": "षोडशः सर्गः",
+   "sanskrit_text": "षोडशः सर्गः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सुमध्वविजयः",
+    "षोडशः सर्गः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/10529/10497/samath/samath/shhada",
+    "content_id": 10529,
+    "layer": "मूलम्",
+    "anchor": "article10531",
+    "fetched": "2026-08-18"
+   }
+  }
+ ]
+}

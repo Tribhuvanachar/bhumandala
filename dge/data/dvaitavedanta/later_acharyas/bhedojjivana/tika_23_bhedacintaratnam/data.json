@@ -1,0 +1,35 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/12781/12778/sharav/bhatha/bhatha/bhatha",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_12841",
+   "reference": "श्रीव्यासतीर्थ: > भेदोज्जीवनम् > (२३) भेदोज्जीवनम् > नन्वेतावताऽऽत्मत्वस्य जातित्वमात्रं सिध्यति नात्मभेदः",
+   "section": "(२३) भेदोज्जीवनम्",
+   "unit_title": "नन्वेतावताऽऽत्मत्वस्य जातित्वमात्रं सिध्यति नात्मभेदः",
+   "sanskrit_text": "(२३)भेदचिन्तारत्नम्\n॥ एतावतेति ॥ निर्बाधेन लाघवानुगृहीतेनोक्तानुमानजातेनेत्यर्थः ॥ व्यक्तिभेदो बाधक इति ॥ एवं स्वयं सिध्यतो जातिः स्वबाधकव्यक्त्यभेदं बाधत एव । यावता विना न पक्षे साध्यपर्यवसानं तत्सर्वं पक्षधर्मताबललभ्यमिति न्यायादिति भावः । अनुगतव्यवहारप्रामाण्यकजातावेव तद्बाधो नान्यत्रेत्यत आह — स हीति । एकस्मिन्ननुगतव्यवहारायोगादिति भावः । अनुगतव्यवहार इति प्रमाणीकृत इति शेषः ॥ त्वदुक्तेति ॥ पृथिवीत्वमित्याद्यैरनुमानैरेवानुगतव्यवहारं विना जातिसिद्धौ व्यक्तिभेदस्य कुत्रोपयोग इति भावः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीव्यासतीर्थ:",
+    "भेदोज्जीवनम्",
+    "(२३) भेदोज्जीवनम्",
+    "नन्वेतावताऽऽत्मत्वस्य जातित्वमात्रं सिध्यति नात्मभेदः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/12803/12778/sharav/bhatha/bhatha/bhatha",
+    "content_id": 12803,
+    "layer": "( २३) भेदचिन्तारत्नम्",
+    "anchor": "article12841",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "( २३) भेदचिन्तारत्नम्"
+  }
+ ]
+}

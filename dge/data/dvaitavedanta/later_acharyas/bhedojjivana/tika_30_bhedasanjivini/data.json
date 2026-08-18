@@ -1,0 +1,35 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/12781/12778/sharav/bhatha/bhatha/bhatha",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_12848",
+   "reference": "श्रीव्यासतीर्थ: > भेदोज्जीवनम् > (३०) भेदोज्जीवनम् > ननु तथाऽपि (नन्वथापि) घटपटयोरपारमार्थिकभेदं वदता..",
+   "section": "(३०) भेदोज्जीवनम्",
+   "unit_title": "ननु तथाऽपि (नन्वथापि) घटपटयोरपारमार्थिकभेदं वदता..",
+   "sanskrit_text": "(३०)भेदसञ्जीविनी\n॥ तथ्यमिति ॥ अत्रेदं पारमार्थिकमिति प्रामाणिकव्यवहारगोचरीभूतं न वेत्यर्थः ॥ मृषात्मतेतीति । मृषात्वं मतमित्यर्थः । मृषात्मेति पाठः साधुः ॥ सुप्रसिद्धमिति ॥ घटत्वं नास्तीति त्वदीयव्यवहारबलादागतस्य कथमनङ्गीकार इत्यर्थः ॥ असिद्धिरिति ॥ स्वपदेन घटत्वात्यन्ताभावस्य ग्रहणे स्वप्रतियोगिभूतघटत्वाश्रयाप्रसिद्ध्या तद्धटितसाधनाप्रसिद्धिः । अत्यन्ताभावस्यासत्प्रतियोगिकत्वादुक्तावच्छिन्नत्वाभावघटितसाधनप्रसिद्ध्यङ्गीकारे तादृशधर्मवत्त्वं पटे नास्तीति स्वरूपासिद्धिरित्यर्थः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीव्यासतीर्थ:",
+    "भेदोज्जीवनम्",
+    "(३०) भेदोज्जीवनम्",
+    "ननु तथाऽपि (नन्वथापि) घटपटयोरपारमार्थिकभेदं वदता.."
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/12810/12778/sharav/bhatha/bhatha/bhatha",
+    "content_id": 12810,
+    "layer": "( ३०) भेदसञ्जीविनी",
+    "anchor": "article12848",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "( ३०) भेदसञ्जीविनी"
+  }
+ ]
+}
