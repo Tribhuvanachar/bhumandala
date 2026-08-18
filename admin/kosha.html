@@ -99,7 +99,7 @@
   <p class="muted" style="margin-top:10px">👁 toggles whether a dictionary is searched in <b>कोश</b>. The flag is read live by <code>kosha.js</code> on the next query (stored per-browser as <code>kosha_hidden_dicts</code>). Click <b>Export visibility</b> to download <code>kosha-visibility.json</code> if you want to bake a default into the repo.</p>
 
   <h2 class="sect">Known but not loaded <span class="muted">— and why · see <code>kosha_toolkit/LICENSING.md</code></span></h2>
-  <p class="muted" style="margin:0 0 8px">Every dictionary in <code>indic-dict/stardict-sanskrit</code> is loaded, as are the encyclopaedias and indices of <code>-kAvya</code> and the Aṣṭādhyāyī/dhātu set of <code>-vyAkaraNa</code>. What is left out below is left out <b>on purpose</b>, not for want of ingesting — each row says why. Rows are cross-checked against the live manifest on every load, so anything that does get ingested drops off this list by itself rather than sitting here stale.</p>
+  <p class="muted" style="margin:0 0 8px">Every dictionary in <code>indic-dict/stardict-sanskrit</code> is loaded, as are the encyclopaedias and indices of <code>-kAvya</code>, the Aṣṭādhyāyī/dhātu set of <code>-vyAkaraNa</code>, and the two Cologne dictionaries (<code>pwkvn</code>, <code>krm</code>) that the indic-dict mirror lacks — a code-by-code diff found the other 42 of <code>sanskrit-lexicon/csl-orig</code> already present under different names. What is left out below is left out <b>on purpose</b>, not for want of ingesting — each row says why. Rows are cross-checked against the live manifest on every load, so anything that does get ingested drops off this list by itself rather than sitting here stale.</p>
   <table id="tbl2">
     <thead><tr>
       <th>Source</th><th>Direction</th><th>Licence</th><th>Why not loaded</th>
@@ -146,7 +146,7 @@
      note:"stardict-sanskrit-kAvya — the same lexicon already loaded as vedic-rituals-hi, differently segmented."},
     // Different corpus decision, not a Sanskrit-kosha gap.
     {name:"indic-dict siblings: stardict-hindi / -kannada / -tamil / -pali / -english",slug:"other-language-repos",dir:"—",lic:"unclear",
-     note:"These key on a non-Sanskrit headword. Loading them is a separate corpus decision, not a missing Sanskrit kosha."}
+     note:"Checked: these key on a regional headword (te-head, ml-head, bn-head), not Sanskrit — there is no sa→te/ml/bn bridge in them. A separate corpus decision, not a missing Sanskrit kosha."}
   ];
 
 
@@ -172,7 +172,7 @@
     var KOSHA_BASE = "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala-kosha-data@dist/data/koshas";
     // Bump ?v= whenever the corpus is rebuilt — jsDelivr caches branch files
     // for ~12h, so without it this page keeps showing the previous manifest.
-    fetch(KOSHA_BASE + "/_index/manifest.json?v=1.2").then(function(r){return r.json();})
+    fetch(KOSHA_BASE + "/_index/manifest.json?v=1.4").then(function(r){return r.json();})
       .then(function(m){ MAN=m; buildRows(); renderTotals(); renderLoaded(); renderNotLoaded(); renderPuranaNote(); })
       .catch(function(e){ $("#tb").innerHTML='<tr><td colspan="6" class="muted">Could not load '+KOSHA_BASE+'/_index/manifest.json ('+e+').</td></tr>'; });
   }

@@ -23,8 +23,8 @@ dge/data/kosha/
 **The live corpus is not in this repo.** `js/kosha.js` and
 `admin/kosha.html` read it from the `dist` branch of the separate
 [`Tribhuvanachar/bhumandala-kosha-data`](https://github.com/Tribhuvanachar/bhumandala-kosha-data)
-repo over jsDelivr (`appConfig.koshaDataBase`), because at **93 dictionaries /
-2,094,525 headwords / 2,436,991 senses / ~1.8 GB** it is well over this repo's
+repo over jsDelivr (`appConfig.koshaDataBase`), because at **95 dictionaries /
+2,111,218 headwords / ~1.8 GB** it is well over this repo's
 budget. `dge/data/kosha/` here still holds the original 10-dictionary sample,
 which is what a local checkout falls back to when `KOSHA_DATA_BASE` is unset.
 
@@ -80,7 +80,7 @@ standalone without it (see §5).
 5. Commit. Bump the `?v=` on `js/kosha.js`'s `<script>` tag in `index.html`
    per the site's cache-busting convention.
 
-Last full run: **93 dictionaries, 2,094,525 headwords, 2,436,991 senses,
+Last full run: **95 dictionaries, 2,111,218 headwords,
 ~1.8 GB across ~132,000 files**, ~10 minutes — which is why it lives in the
 separate data repo and is served over jsDelivr rather than committed here.
 (The original in-repo build was 10 dictionaries / 503,171 headwords / ~436 MB.)
