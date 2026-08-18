@@ -1,0 +1,34 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/18766/18711/sharas/cathar/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_19128",
+   "reference": "श्रीसत्यध्यानतीर्थ: > चंद्रिकामन्डनम् > परिशिष्टप्रकरणम्",
+   "section": "परिशिष्टप्रकरणम्",
+   "unit_title": "परिशिष्टप्रकरणम्",
+   "sanskrit_text": "रामसुब्ब_११\n( रा.) स्रष्टृत्वस्याभिव्यक्त्यात्मना आगंतुकत्वं शक्त्यात्मना ब्रह्मस्वरूपत्वामित्याशंक्याभिव्यक्त्यात्मकस्य स्रष्टृत्वस्य ब्रह्मभिन्नत्वे 'एवं धर्मानि\" ति श्रुतिविरोधापत्या तदभिन्नत्वस्यावश्यकतया आगंतुकत्वोक्तिविरोधतादवस्थ्यात् आगंतुक व्यक्त्यात्मकस्रष्टृत्वात्यंताभिन्न तया ब्रह्मणोप्यागंतुकत्वापत्तेश्चेति तद्दूषणमुक्तम् ।\nखण्डनं_११\nखं.) तन्न अभिव्यक्त्यात्मकस्यापि स्रष्टृत्वस्य अनागंतुकत्वाभ्युपगमात् अभिन्नस्यापि विशेषबलेन शक्तिव्यक्तिरूपत्वोपपत्तेः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीसत्यध्यानतीर्थ:",
+    "चंद्रिकामन्डनम्",
+    "परिशिष्टप्रकरणम्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/18778/18711/sharas/cathar/parash",
+    "content_id": 18778,
+    "layer": "रामसुब्ब _ ११",
+    "anchor": "article19128",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "रामसुब्ब _ ११"
+  }
+ ]
+}
