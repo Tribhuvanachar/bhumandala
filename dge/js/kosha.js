@@ -649,8 +649,9 @@
 
       ord.forEach(function (s, i) {
         var r = el('div', 'kosha-prow pinned', '<span class="kosha-pnum">' + (i + 1) + '</span><span class="kosha-pname">' + esc(tl(name(s))) + '</span>');
-        [['▲', -1], ['▼', 1]].forEach(function (mv) {
+        [['▲', -1, 'Move up'], ['▼', 1, 'Move down']].forEach(function (mv) {
           var b = el('button', 'kosha-pbtn', mv[0]);
+          b.title = mv[2];
           b.onclick = function () {
             var a = userOrder(), t = i + mv[1];
             if (t < 0 || t >= a.length) return;
@@ -659,6 +660,7 @@
           r.appendChild(b);
         });
         var x = el('button', 'kosha-pbtn', '✕');
+        x.title = 'Unpin ' + tl(name(s)) + ' (stays in results, just no longer pinned to the top)';
         x.onclick = function () { var a = userOrder(); a.splice(i, 1); setUserOrder(a); refresh(); };
         r.appendChild(x);
         list.appendChild(r);
