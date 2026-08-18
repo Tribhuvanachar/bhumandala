@@ -1,6 +1,83 @@
 # DGE Project Status
 _Last updated: 9 Aug 2026 (Claude Code session) — integrated a Library Manager admin dashboard and a GitHub Actions content-ingestion pipeline (delivered as zips by a parallel Cowork session), then actually ran the pipeline for real against 13 texts. **All 13 are now live** — Harivamsha and Vishnu Smriti, the two that were stuck at 0 verses, are both solved. Vishnu Smriti (2,363 verses, confirmed correct against the text's known opening line) via a parser rewrite adopted (with a caught-and-fixed regression) from a second Cowork session's dedicated fix patch; a duplicate/stale zip claiming the same fix was reviewed and discarded instead of applied. Harivamsha (119 adhyayas, 6,070 verses) took three rounds to actually land: round 1 wrongly assumed the blocker was network access; round 2 (an uploaded fix patch) correctly diagnosed the real cause — a genuinely different GRETIL marker convention and the wrong source URL — but the first real CI run of it surfaced a second bug (GRETIL's own English metadata header got transliterated into the mangala verse), caught by pulling and inspecting the actual generated file rather than trusting the "success" CI status, and fixed with a targeted anchor before merging. One known, openly-documented limitation remains: an unmarked ~20-verse invocatory block landed as one merged entry rather than split per-verse, since the source itself carries no per-verse marker there — content is correct, just coarser-grained in that one spot. Parashara Smriti was also re-ingested and improved (recovered a dropped verse, removed two mis-glued heading lines). Both Sarvamoola (all 120 entries) and Harivamsha were separately found missing their `title` field, causing the reader to display the raw schema string instead of the work's name — fixed and verified live in-browser for both. `tools/gen_library_status.py` now self-heals `library.json`'s `populated` flag directly off real verse counts, closing a gap that had already required a manual follow-up commit twice in one day. Earlier the same day: implemented Phases 1-4 of the project lead's OCR-verification-guidance spec (`DGE_OCR_Verification_Guidance_LipiGnani_Vision_Tesseract_Gemini.docx`) and fixed a data-loss bug in the Convert tool's Schema Mapper (see "Convert tool" below). Previous update (8 Aug 2026) folded in five feature drops built by a parallel Cowork session (Tirtha, Guru Parampara, Kosha, Ashtadhyayi, and a not-yet-merged Sarvamoola+Search branch) — unchanged since, see git history. This file should be re-saved every time a significant phase completes — don't let it drift again. If starting a fresh Claude conversation, paste this whole file as the first message for full context recovery._
 
+## Round 5 (16-18 Aug 2026) — configurable landing page and menus, taxonomy restructure, intellisense, backlinks, inline editing, a guided walkthrough, and six reported faults traced to cause
+
+Written up in the same commits as the work; `dge/PENDING.md` carries the open
+items and the decisions waiting on the project lead, this file the narrative.
+
+- **Nothing on a page is written in the page any more.** `index.html` went from
+  1,425 lines to about 600: every word it shows comes from
+  `admin/content/home.json`, every mechanism from `admin/config/home.json`, and
+  all its CSS from `css/home.css`. Same for the reader's Support and About
+  panels (`admin/content/reader.json`), What's New (`admin/content/whats-new.json`)
+  and the walkthrough (`admin/content/tour.json`). These are **sources, not
+  overrides** — one copy, no fallback — so `tools/check_content.py` fails the
+  build if a page's file is missing a key that page reads. A near-miss caught on
+  the way: `config-overrides.json` held live edits (4 contributors where the code
+  had 3), so lifting the constants out would have silently reverted real Site
+  Settings changes.
+- **Which menu items appear, and in what order, is now `admin/config/menu.json`**
+  (`dge/js/menu.js`), with the distinction that matters kept explicit: an item
+  switched off is not rendered; an item above the reader's tier is rendered and
+  hidden. Fails open — a broken config leaves the markup's own menu standing.
+- **`dge/data/` restructured onto the taxonomy in `DGE_Shastra_Taxonomy.md`.**
+  `ancillary/*` was the Vedāṅgas all along; `sarvamoola_grantha` and
+  `shankara_bhashya` are schools of Vedānta; plurals went singular. Two scripts
+  did it and both still run. Old links still work: `DGE_LEGACY_SLUGS` in
+  `core.js` rewrites an old `?path=` on the way in, and is now the only copy of
+  the old names left in the codebase.
+- **Intellisense** (`dge/js/intellisense.js`) — a sūtra citation in running text
+  becomes tappable, a half-remembered name resolves to its rule from Devanagari,
+  IAST, Kannada, Telugu, Malayalam or a rough romanisation, and double-tapping
+  any word says what it is: which stem or root, what case, number, person or
+  tense. The morphology is Vidyut's, computed ahead of time by
+  `tools/build_morphology.py` (93,143 forms, 620 buckets, 16 MB) because Vidyut
+  is a Rust binary over a 75 MB kośa and can never run in a browser. Four
+  folding bugs were found and fixed before it was trusted — no inherent 'a'
+  (नमः folded to `nmh`), no Kannada or Telugu at all, Latin aspiration digraphs
+  uncollapsed, `ai`/`au` diphthongs — and one silent enum bug that wrote every
+  grammatical code empty, caught only because a popover rendered "गम्:" with
+  nothing after it.
+- **Backlinks** — which commentaries discuss a verse, inverted out of
+  `references[].target` by `tools/shard_backlinks.py` and shown on the verse row.
+  Three cited texts have shards today; no Vedic saṃhitā is a target yet, which
+  is why a Rigveda verse still shows nothing.
+- **Inline editing** (`dge/js/content-inline.js`) — any page carrying a
+  `data-content-file` can be edited where it is read: unlock super admin, press
+  Edit text, tap a line, Publish. Edits stage in the browser and survive a
+  refresh; the file is re-read before writing so a change someone else made
+  meanwhile is not overwritten.
+- **A guided walkthrough** (`dge/js/tour.js`, 14 steps) — spotlights one feature
+  at a time with the rest dimmed. It waits for a clear screen before starting,
+  because the first version raced the About modal and whichever won silenced the
+  other permanently, on the one visit that mattered.
+- **Six faults reported from a phone on 18 Aug, each traced into the source
+  before being touched.** The Aṣṭādhyāyī page kept its own copy of the Gemini
+  model list and still offered four dead ids — the same bug already fixed once in
+  `gemini.js`; the list now lives in one place and the page builds its menu from
+  it. Intellisense was loaded by three pages and by neither `ashtadhyayi.html`
+  nor `dhatu.html`, so there was nothing to enable; pages now declare their own
+  scan roots and slug. The sūtra jump box worked only for an exact `1.1.1` and
+  failed silently otherwise. Corpus search opened 444 files for "राम" (about ten
+  seconds) and then ranked विरमति above every verse that says राम, because
+  scoring rewarded short units; both fixed, now under a second with the right
+  verse first. Kosha answered "No headwords found" for every Devanagari word
+  whenever the Sanscript CDN failed, and now falls back to the app's own table.
+- **A bug nobody reported, found while wiring intellisense in: 1,019 sūtras — a
+  quarter of the Aṣṭādhyāyī — carried their neighbour's analysis.** The
+  ashtadhyayi.com enrichment was joined to our mūla by id, and the two number the
+  text differently: ours reads उञ ऊँ as one sūtra where the source counts two, so
+  from there to the end of the pāda every gloss sat one late, resetting at each
+  pāda boundary. `tools/realign_sutra_enrichment.py` aligns the sequences by
+  their own text instead, pāda by pāda; 2,198 anuvṛtti references were in source
+  numbering and were remapped with it. This was the reader's padaccheda panel as
+  much as intellisense.
+- **The published site is over the GitHub Pages 1 GB limit** — 1,090 MB measured,
+  not estimated. See `PENDING.md` for what can move and what it buys; the kośa
+  corpus already lives in `bhumandala-kosha-data` for exactly this reason, so the
+  pattern exists.
+
 ## Round 4 (10 Aug 2026) — Kosha full-corpus build, TTS architecture doc, Mahabharata (Kannada), Yukti Mallika, Svapna-Vrindavanakhyana, Sumadhva Vijaya (audio), Harikathamrutasara
 
 - **Harikathamrutasara (Sri Jagannathadasaru)** — new leaf `dasa_sahitya/dasakuta/jagannathadasa/harikathamrutasara` (947 verses, 33 sandhis). **Corrects an earlier finding from this same session**, which concluded the HKS app had no embedded text at all (checked assets/, classes.dex, and a shallow resources.arsc string-pool dump). That was wrong: the text lives in resources.arsc as compiled Android string-array resources (`hks_sandhi_content_list`, `hks_sandhi_title_list`, both with `default`/ITRANS and `kn`/Kannada configs) — a shallow global-string-pool dump doesn't surface these without also walking the per-package key-name pool and the array (complex-entry) structures, and a "check the longest strings" pass (some single entries run past 30,000 characters — a whole sandhi's text) wasn't done the first time. Re-verified independently using `androguard` before merging rather than taking either the original "absent" conclusion or the correction on faith — cross-checked the project lead's own screenshot text against the extracted data and found it verbatim in Sandhi 31. No verse-level meaning exists in this source (the app itself carries a literal "meaning not yet added" placeholder after every verse, stripped as noise). Zero flagged/ambiguous verses.

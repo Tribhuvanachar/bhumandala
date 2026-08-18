@@ -117,7 +117,34 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
-- **The published site is 1,090 MB, and GitHub Pages' limit is 1 GB. Measured 18 Aug, not estimated: `git ls-files` totals 1.09 GB of tracked files, all of which Pages publishes since there is no build step.** `dge/data` is 703 MB and `dge/search_index` 288 MB, which is the library itself and hard to argue with. What is easy to argue with is **72.6 MB of archives that no page can open** — `mahabharata.7z.001/.002` (37.7 MB), `smv-assets-audio.7z.001/.002/.003` (26.5 MB), `vedavani-assets.zip` (8.2 MB), and two small `smv-assets-text*.zip`. A browser cannot read a `.7z`; these are shipped to every visitor's CDN edge and used by nothing. Removing them from the working tree — they stay in git history, and can live in a release or a data repo — brings the site to about 1,017 MB, which is still over. The next-cheapest cut is the search index, most of whose weight is the per-grantha unit shards that the corpus search opens to rank results; keeping the rankable fields in the postings instead would shrink both the index and every search (see the search entry below). Not touched: deleting tracked files is the project lead's call, and this needs deciding before the 29 Aug launch rather than after, since Pages enforcing the limit is a whole-site failure, not a degraded one.
+- **The published site is 1,091 MB against GitHub Pages' 1 GB limit — measured with `git ls-files`, not estimated, and there is no build step, so all of it publishes. Here is what can go, what it buys, and what each costs. Nothing has been moved; this needs the project lead's decision, and it needs it before 29 Aug, because hitting the limit fails the whole site rather than part of it.**
+
+  **A — remove outright. Nothing reads any of these; all stay in git history.** 140 MB, taking the site to **951 MB**.
+
+  | | Why it can go |
+  |---|---|
+  | `mahabharata.7z.001/.002` — 37.7 MB | The Kannada Mahābhārata was parsed out of these into `dge/data/` in Round 4. `PROJECT_STATUS.md` already called them "a cleanup candidate the project lead should decide on". |
+  | `smv-assets-audio.7z.001/.002/.003` — 26.5 MB | The 1,041 Sumadhva Vijaya mp3s are already extracted and live at `dge/data/kavya_alankara/sumadhva_vijaya/assets`. The archives are a second copy. |
+  | `smv-assets-text.zip`, `smv-assets-text2.zip` — 0.3 MB | Android UI resources only, no text — established in Round 4. |
+  | `dge/data/kosha` — 61.1 MB | The ten-bucket sample, superseded by the full 1.65M-headword corpus in `bhumandala-kosha-data`. `config.js` points `KOSHA_DATA_BASE` at the CDN and `admin/kosha.html` hardcodes it, so the in-repo copy is reached only if that config is cleared. |
+  | `dge/convert/backups` — 14.0 MB | One OCR job's safety copies, written by the Convert tool for the operator. Not something a reader ever fetches. Prune rather than delete the mechanism. |
+
+  **Keep `vedavani-assets.zip` (8.2 MB) even though it looks like the same kind of thing** — `.github/workflows/vedavani-extract.yml` unzips it at CI time. It is a build input, not a site asset, and removing it breaks that workflow.
+
+  **B — move to a data repo, served the way the kośa already is.** 398 MB, taking the site to **553 MB**. Every one of these is fetched lazily over XHR and every one is *generated* — rebuildable from the tools in this repo, so a data repo holds output rather than source of truth.
+
+  | | Note |
+  |---|---|
+  | `dge/search_index/postings` — 168.7 MB | Rebuilt by `dge/build_search_index.py`. |
+  | `dge/search_index/units` — 116.4 MB | Same. Worth doing *after* the index slimming below, not before — that work would shrink this substantially, and moving it first would mean moving it twice. |
+  | `dge/data/vedanga/vyakarana/prakriya` — 66.9 MB | Rebuilt by `tools/build_prakriya.py`. This is also what makes all-lakāra derivations a size question rather than a switch. |
+  | `dge/data/_morph` — 14.8 MB | Rebuilt by `tools/build_morphology.py`. |
+  | `dge/data/_synonyms` — 3.6 MB | Rebuilt by `tools/build_synonyms.py`. |
+  | `dge/data/kavya_alankara/sumadhva_vijaya/assets` — 27.2 MB | Audio, not generated — but bulk media, and more is coming: the VedaVaNi extraction has 1,028 Rigveda sūktas with no permanent home yet. An assets repo is the natural place for both. |
+
+  **What B costs, and it is not nothing.** Every move adds a third-party dependency in front of a feature. The kośa is already behind jsDelivr, and this session fixed a fault of exactly that shape — when the Sanscript CDN failed to load, every Devanagari word in the dictionary answered "No headwords found". So: move the bulk, keep the small entry points (`manifest.json`, `backlinks.json`, each feature's index) in-repo, and make each feature fail visibly rather than silently when its CDN is unreachable. Note also that jsDelivr caches a branch aggressively — the kośa repo publishes to a `dist` branch for this reason, and any new data repo should follow that.
+
+  **What I would do.** A now: it is 140 MB for no loss of anything, and it puts the site under the limit today. Then the search-index slimming (below) as its own pass, since it shrinks the largest item in B rather than relocating it. Then B for whatever is still needed, before the acquisition list above lands — those granthas are the reason the headroom matters.
 
 - **Grantha acquisition list dictated 18 Aug 2026 — 16 lines to source and load, plus a two-way Veda↔saint linking requirement that is half-built. Several titles came through a voice transcription garbled; my readings are recorded beside the raw words rather than silently corrected, and the flagged ones need the project lead's own confirmation before anyone goes hunting for a text. Bṛhatī Sahasra has since been confirmed; two remain open.** Nothing here is sourced yet — this is the wanted-list, not a status report.
 
