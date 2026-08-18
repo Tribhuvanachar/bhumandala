@@ -3,7 +3,7 @@
 _Originally written 10 Aug 2026 (Google Sign-In + Firebase phone OTP,
 untested). Substantially revised 16 Aug 2026: added WhatsApp OTP and
 broadcasts, tightened the security rules, and — for the first time —
-tests. 204 of them now run without a Firebase project, credentials, or
+tests. 219 of them now run without a Firebase project, credentials, or
 money. See §10 for what still cannot be tested without live accounts._
 
 ## 1. What this is
@@ -28,7 +28,7 @@ dge/js/config.js             FIREBASE_CONFIG + AUTH_CONFIG switches
 dge/firebase/firestore.rules the real enforcement layer
 dge/firebase/firebase.json   project config (emulators, hosting, functions)
 dge/firebase/functions/      Cloud Functions: OTP, broadcasts, webhook
-dge/firebase/tests/          204 tests — see tests/README.md
+dge/firebase/tests/          219 tests — see tests/README.md
 ```
 
 ## 2. Cost — read this before enabling anything
@@ -205,7 +205,7 @@ registrar. SSL and custom domains are free either way.
 
 ## 10. What is and isn't tested
 
-**Tested — 204 tests, no credentials, no cost** (`cd dge/firebase/tests
+**Tested — 219 tests, no credentials, no cost** (`cd dge/firebase/tests
 && npm install && npm run test:all`):
 
 - The OTP state machine: expiry to the millisecond, attempt caps
@@ -232,9 +232,21 @@ registrar. SSL and custom domains are free either way.
 - reCAPTCHA behaviour for the `firebase` SMS channel.
 - Real billing. Set a budget cap before the first real send.
 - The `console` OTP provider refuses to run outside an emulator by
-  design, so the end-to-end flow can be walked through locally without
-  spending anything: `firebase emulators:start`, `OTP_PROVIDER=console`,
-  and read the code from the function logs.
+  design, so the whole flow runs locally without spending anything. This
+  is now automated: `cd dge/firebase/functions && npm install`, then
+  `cd ../tests && npm run test:e2e` starts the emulators, drives
+  send → verify → custom token → profile creation through the real
+  `index.js`, and shuts them down.
+
+  Worth knowing why that suite exists: `index.js` was written, reviewed
+  and committed without ever being executed, because it is the one file
+  here that unit tests cannot reach. The first time it ran it failed
+  immediately — `admin.firestore.FieldValue` reads back as `undefined`
+  through the emulator's proxy of the `firebase-admin` root export, so
+  every `serverTimestamp()` threw a bare `INTERNAL`, in `verifyOtp`, in
+  the opt-out webhook, and throughout the broadcast sender. It is fixed
+  (modular `firebase-admin/firestore` imports), but the lesson holds:
+  code that has never been run is not code that works.
 
 ## 11. Deliberately not built
 

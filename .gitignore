@@ -15,3 +15,8 @@ ui-debug.log
 .firebase/
 # Real project ids / aliases stay out of the repo — see .firebaserc.example
 dge/firebase/.firebaserc
+
+# Firebase emulator-only env/secret files — never committed.
+dge/firebase/functions/.env.local
+dge/firebase/functions/.secret.local
+dge/firebase/functions/.env

@@ -102,6 +102,21 @@ const providers = {
     requiresSecrets: [],
     async send({ phone, code }) {
       console.log(`[otp:console] code for ${phone} is ${code}`);
+      // Test seam: with DGE_OTP_ECHO_FILE set, also append the code to
+      // that file so an automated end-to-end test can read it back
+      // deterministically instead of scraping (and racing) the emulator's
+      // log output. Guarded twice over — this provider is already
+      // emulator-only via assertProviderAllowed, and the env var has to
+      // be set deliberately — because a file full of live OTPs is exactly
+      // the sort of convenience that must never reach a real deployment.
+      const echoPath = process.env.DGE_OTP_ECHO_FILE;
+      if (echoPath) {
+        try {
+          require('fs').appendFileSync(echoPath, `${phone} ${code}\n`);
+        } catch (e) {
+          console.warn('[otp:console] could not write echo file:', e.message);
+        }
+      }
       return { ok: true, messageId: 'console-' + Date.now() };
     }
   }

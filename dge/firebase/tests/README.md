@@ -1,6 +1,6 @@
 # Firebase layer — tests
 
-204 tests, none of which need a Firebase project, credentials, a phone
+219 tests, none of which need a Firebase project, credentials, a phone
 number, or money.
 
 ```bash
@@ -8,12 +8,14 @@ cd dge/firebase/tests
 npm install          # once
 npm test             # 164 unit tests, no emulator needed
 npm run test:rules   # 40 security-rules tests against the real emulator
-npm run test:all     # both
+npm run test:e2e     # 15 end-to-end tests against the real emulators
+npm run test:all     # all three
 ```
 
-`test:rules` starts the Firestore emulator (Java 11+ required), runs the
-rules against it, and shuts it down. It is the one suite that exercises
-real Firebase behaviour rather than a stub.
+`test:rules` and `test:e2e` start the emulators (Java 11+ required), run
+against them, and shut them down. They are the suites that exercise real
+Firebase behaviour rather than a stub — `test:e2e` additionally needs the
+Cloud Functions dependencies installed (`cd ../functions && npm install`).
 
 ## What each file covers
 
@@ -24,10 +26,28 @@ real Firebase behaviour rather than a stub.
 | `broadcast-core.test.js` | 25 | Who receives a broadcast and — mostly — who must not. |
 | `user-auth.test.js` | 52 | The browser half: transport routing, profile defaults, OTP flows, consent, inertness when disabled. |
 | `rules.spec.js` | 40 | Firestore security rules, against the emulator. |
+| `e2e.spec.js` | 15 | The whole OTP flow through the real `index.js`: send → store hashed → verify → custom token → profile created, plus the webhook's signature and handshake checks. |
 
 Most assertions are that something **fails**. A suite that only checked
 happy paths would pass just as happily against `allow read, write: if
 true`.
+
+## Why the end-to-end suite exists
+
+`index.js` is the one file here that unit tests cannot reach: it is the
+Firebase-shaped shell (secrets, transactions, custom tokens) wrapped
+around logic that is tested in isolation. It was written, reviewed, and
+committed without ever being executed.
+
+The first time it ran, it failed immediately. `admin.firestore.FieldValue`
+reads back as `undefined` through the functions emulator's proxy of the
+`firebase-admin` root export, so every `serverTimestamp()` threw a bare
+`INTERNAL` — in `verifyOtp`, in the opt-out webhook, and throughout the
+broadcast sender. The code looked correct in review and passed every unit
+test. Only running it found this.
+
+It uses the `console` OTP provider, which prints the code instead of
+sending it and refuses to run outside an emulator.
 
 ## Naming
 

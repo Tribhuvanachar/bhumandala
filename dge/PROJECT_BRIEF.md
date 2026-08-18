@@ -118,7 +118,7 @@ no Account button, no network calls, until explicitly enabled.
   enforced by Firestore security rules, not by client-side checks.
 - **Opt-in WhatsApp broadcasts** — scheduled via Cloud Scheduler, with
   STOP replies honoured through a signature-verified webhook.
-- **204 tests** covering the OTP state machine, the security rules
+- **219 tests** covering the OTP state machine, the security rules
   (against the real Firestore emulator), the WhatsApp client, and the
   browser flow — none requiring credentials or costing money.
 
