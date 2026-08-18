@@ -117,6 +117,81 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
+- **New content acquisition — Chandas, Nirukta, Śikṣā/Prātiśākhya, Ayurveda, Kāmaśāstra and Nītiśāstra, each work zeroed in on ONE verified source (18 Aug 2026).** A wide sweep of candidate sites (Ambuda, GRETIL, Sanskrit Documents, SARIT, NIIMH/CCRAS, TITUS, Cologne Lexicon, wisdomlib, subhashita.com, DSBC) was proposed for these categories. Rather than storing that as a shopping list, every candidate site and specific text below was actually fetched and read before being written down here — this project has already been burned twice by declaring GRETIL filenames that turned out not to exist (see `works.json`'s Naiṣadhīyacarita/Mṛcchakaṭika/Kāvyaprakāśa entries above), so "checked" below means a real HTTP 200 and an inspected passage, not a guessed URL pattern. **One correction to the original brief first: Alaṅkāraśāstra (Kāvyādarśa, Kāvyālaṅkāra, Dhvanyāloka, Vakroktijīvita, Kāvyaprakāśa, Daśarūpaka, Sāhityadarpaṇa, Rasagaṅgādhara, Śṛṅgāraprakāśa, Chandomañjarī, Nāṭyaśāstra) is not a gap — every one of those titles is already registered in `tools/kavya/config/works.json` with its source checked the same day this note was written, several already correctly marked "no machine-readable source" rather than left unverified. Nothing below duplicates that.**
+
+  **Reachability, checked directly by curl from this sandbox, not assumed:** `ambuda.org`, `gretil.sub.uni-goettingen.de`, `sanskritdocuments.org`, `titus.fkidg1.uni-frankfurt.de`, `sanskrit-lexicon.uni-koeln.de`, `wisdomlib.org` (root only — see Ayurveda caveat below), `subhashita.com` and `dsbcproject.org` are all reachable (HTTP 200). **`sarit.indology.info` times out (curl exit 28) and `niimh.nic.in` fails TLS outright on every path (curl exit 35, no HTTP response at all)** — not a 403/407 policy block (the proxy's own status endpoint shows no relay failure recorded), a genuine connection-level failure, the same class this project has already met with wisdomlib/sacred-texts/madhwakart et al.: reachable from GitHub Actions or a residential/phone connection, not from here. So neither SARIT nor NIIMH — the two sources the original brief was most enthusiastic about — could be used directly; every recommendation below is a real alternative that **is** reachable now.
+
+  **Chandas** (`vedanga/chandas`, currently empty) — Piṅgala's own Chandaḥsūtra and Hemacandra's Chandonuśāsana are dead ends: not on GRETIL (checked the full catalogue), and the one HTML mirror sanskritdocuments points to for Piṅgala now sits behind a JS bot-wall with no Wayback fallback reachable from here. "Gaṇaratnamahodadhi" and "Kavikaṇṭhābharaṇa Chandas" in the original brief both look like misattributions — the first is a Pāṇinian gaṇapāṭha work, the second is Nānyadeva's Bharata-bhāṣya (music/dance), neither is actually a Chandas treatise, and neither exists machine-readably regardless.
+
+    | Work | Source | URL | Format | Licence |
+    |---|---|---|---|---|
+    | Kedārabhaṭṭa — Vṛttaratnākara (mūla) | GRETIL | `gretil.sub.uni-goettingen.de/gretil/corpustei/sa_kedArabhaTTa-vRttaratnAkara.xml` (+ plaintext transform) | TEI-XML + plaintext | CC BY-NC-SA 4.0 |
+    | Vṛttaratnākara + Sulhaṇa's *Sukavihṛdayānandinī* | GRETIL | `.../sa_kedArabhaTTa-vRttaratnAkara-comm.xml` | TEI-XML + plaintext | CC BY-NC-SA 4.0 |
+    | Chandoratnākara (Ratnākaraśānti, w/ svopajña vṛtti) | Digital Sanskrit Buddhist Canon | `dsbcproject.org/canon-text/content/108/801` | HTML/IAST | site copyright, no open licence stated |
+    | Structured metre data (metre→gaṇa→lakṣaṇa→akṣara-count→mātrā→yati, with example verses) | GitHub `hrishikeshrt/chanda` ("Chandojñānam") | `raw.githubusercontent.com/hrishikeshrt/chanda/main/chanda/data/*.csv` + `examples.json` | CSV/JSON | **AGPL-3.0 — check licence compatibility before ingesting**, this is a stronger copyleft than anything else this project currently pulls from |
+
+  **Nirukta** (`vedanga/nirukta`, currently empty) — Yāska's own text is solid; the standalone Nighaṇṭu and Durga's vṛtti on the Nirukta are not available cleanly anywhere and would need real OCR cleanup, not straight ingestion.
+
+    | Work | Source | URL | Format | Licence |
+    |---|---|---|---|---|
+    | Yāska — Nirukta | GRETIL | `gretil.sub.uni-goettingen.de/gretil/corpustei/sa_yAska-nirukta.xml` (+ `.../1_sanskr/1_veda/5_vedang/3_pratis/niruktau.htm`) | TEI-XML + IAST HTML | GRETIL standard (reference use) |
+    | Nighaṇṭu (standalone) | archive.org OCR | `archive.org/download/nighantu-and-nirukta-mool-sanskrit/...djvu.txt` | OCR plaintext, clean for the Nighaṇṭu portion, degrades in the Nirukta bhāṣya portion | "educational purpose only" (via vedicreserve.miu.edu) |
+    | Durga's vṛtti on the Nirukta | archive.org (eGangotri scan, Bhadkamkar ed. 1942) | `archive.org/download/yXam_yaskas-nirukta-with-durgas-commentary-1942-.../...djvu.txt` | OCR plaintext, noisy (script-mixing artifacts) | CC0 / public domain, stated on page |
+
+    TITUS holds a Nirukta transcription but gated to registered members — not usable as "reachable." Not found anywhere machine-readable and open: nothing beyond the two OCR items above.
+
+  **Śikṣā + Prātiśākhya** (`vedanga/shiksha` / `vedanga/shiksha/pratishakhya` — the taxonomy already names 29 specific empty leaf nodes for these; none renamed or added here, only sourced). GRETIL turned out to have **nothing** in this area at all despite being the default first guess — its "Pratiśākhyas" heading under Vedāṅga contains only the Nirukta and Ṛgvidhāna. The single biggest find: one archive.org anthology, **Śikṣāsaṃgraha** (ed. Rāmaprasād Tripāṭhī, Sampūrṇānanda Sanskrit University, 1989, `archive.org/details/shikshasamgraha`, PDF scan + OCR text, licence unstated), supplies real verified text for **24 of the 29 named nodes in one file** — its actual table of contents (with page ranges) was read to confirm each item rather than trusting the title alone:
+
+    Pāṇinīya, Svarāṅkuśa, Ṣoḍaśaślokī (Ṛgveda); Yājñavalkya, Vāsiṣṭhī, Kātyāyanī, Pārāśarī, Māṇḍavya, Amoghānandinī, Laghu-Amoghānandinī, Mādhyandinī, Varṇaratnapradīpikā, Keśavī, Hastasvaraprakriyā, Avasānanirṇaya, Svarabhaktilakṣaṇapariśiṣṭa, Kramasandhāna, Manaḥsvara, Yajurvidhāna, Svarāṣṭaka, Kramakārikā (Yajurveda); Gautamī, Lomaśī, Nāradīya (Sāmaveda); Māṇḍūkī (Atharvaveda).
+
+    Beyond that anthology:
+
+    | Work | Source | URL | Format | Licence |
+    |---|---|---|---|---|
+    | Pāṇinīya Śikṣā (alt., cross-check) | Sanskrit Documents | `sanskritdocuments.org/doc_z_misc_major_works/pANinIyashikShA.html` | Devanagari HTML + ITX + PDF | site's personal/non-commercial norm |
+    | Nāradīya Śikṣā (dedicated ed., w/ Śobhākara's *Śikṣāvivaraṇa*) | archive.org | `archive.org/details/Naradiyasiksa1990` | PDF scan + OCR | not stated |
+    | Ṛgveda Prātiśākhya (Śaunaka, w/ Uvaṭa's comm., Benares 1894) | archive.org (UW-Madison/Google scan) | `archive.org/details/pratisakhyarigv00sarmgoog` | searchable PDF | public domain, marked "not in copyright" |
+    | Taittirīya Prātiśākhya (after Whitney 1868, ed. Gippert) | TITUS | `titus.fkidg1.uni-frankfurt.de/texte/etcs/ind/aind/ved/yvs/tp/tp.htm` | HTML frameset, transliterated + English gloss | TITUS copyright — republication needs permission |
+    | Vājasaneyī Prātiśākhya (Kātyāyana, ed. Venkatarama Sharma 1934) | archive.org | `archive.org/details/VajasaneyiPratisakhyaOfKatyayanaVVenkataramaSharma1934` | searchable PDF | not stated |
+    | Ṛktantra (ed. Surya Kanta Shastri 1933, w/ Ṛktantravivṛti) | archive.org (Digital Library of India scan) | `archive.org/details/in.ernet.dli.2015.61686` | searchable PDF | not stated |
+    | Śaunakīyā Caturādhyāyikā (Atharvaveda Prātiśākhya, ed./tr. Whitney, *JAOS* vol. 7, 1862) | archive.org | `archive.org/details/jstor-592161` | full text, transliterated sūtras + translation | JSTOR Early Journal Content — free non-commercial redistribution |
+
+    **10 named nodes have no digitized edition anywhere checked** (bare bibliographic names only): Śaiśirīya, Āpiśali (Ṛgveda); Bhāradvāja, Vyāsa, Śambhu, Kauhalīya, Sarvasammata, Āraṇya, Siddhānta Śikṣā (Kṛṣṇa Yajurveda); Puṣpasūtra (Sāmaveda Prātiśākhya). Likely genuinely unpublished or lost as independent texts, not a search failure.
+
+  **Ayurveda — a wholly new category, no taxonomy node exists yet.** The best single find: **Sanskrit Wikisource carries clean transcribed (not OCR) full text of Caraka, Suśruta, Śārṅgadhara and Mādhava Nidāna**, the same pattern already proven for Sāyaṇa's Ṛgveda-bhāṣya (`tools/sayana_smriti/SOURCES.md` §5) — beats GRETIL (only selected chapters for most of these) and beats every scan checked. One live NIIMH-software mirror, `vedotpatti.in` (same FRLHT/I-AIM team), was found holding Vāgbhaṭa's text — **its `robots.txt` sets `Disallow: /` for `ClaudeBot` and `Content-Signal: ai-train=no`, so it is recorded here as a fact and explicitly NOT recommended as an ingest source**, reachable or not.
+
+    | Work | Source | URL | Format | Licence | NIIMH URL (unreachable from here) |
+    |---|---|---|---|---|---|
+    | Caraka Saṃhitā (all 8 sthānas, w/ Cakrapāṇidatta's Āyurvedadīpikā) | Sanskrit Wikisource | `sa.wikisource.org/wiki/चरकसंहिता` + sthāna subpages | clean transcribed wikitext | CC BY-SA | `niimh.nic.in/ebooks/ecaraka/` |
+    | Suśruta Saṃhitā (all sthānas incl. Uttaratantra) | Sanskrit Wikisource | `sa.wikisource.org/wiki/सुश्रुतसंहिता` (13 subpages) | clean transcribed | CC BY-SA | `niimh.nic.in/ebooks/esushruta/` |
+    | Aṣṭāṅgahṛdaya (Vāgbhaṭa, Das & Emmerick ed.) | GRETIL | `.../transformations/plaintext/sa_vAgbhaTa-aSTAGgahRdayasUtra.txt` | TEI-XML/HTML/txt | CC BY-NC-SA 4.0 |  |
+    | Mādhava Nidāna | Sanskrit Wikisource | `sa.wikisource.org/wiki/माधवनिदानम्` | clean transcribed, single page | CC BY-SA | `niimh.nic.in/ebooks/madhavanidana/?mod=read` |
+    | Śārṅgadhara Saṃhitā (4 khaṇḍas) | Sanskrit Wikisource | `sa.wikisource.org/wiki/शार्ङ्गधरसंहिता` + subpages | clean transcribed | CC BY-SA | not located |
+    | Bhāvaprakāśa (full, Vidyotini Hindi comm. ed.) | archive.org | `archive.org/details/eRXi_bhav-prakash-with-vidyotini-explanation-of-brahmashankar-shastri-by-rupalal-vais` | OCR, moderate errors | CC0 stated | not located |
+    | Dhanvantari Nighaṇṭu (bundled w/ Rāja Nighaṇṭu, Anandashram 1896) | archive.org | `archive.org/details/rajanighantuanddhanvantarinighantu...` | OCR | CC0 stated | `niimh.nic.in/ebooks/e-Nighantu/dhanvantarinighantu/?mod=read` |
+    | Bhāvaprakāśa Nighaṇṭu (first 3 vargas only — GRETIL header says "to be continued") | GRETIL | `.../transformations/plaintext/sa_bhAvamizra-bhAvaprakAza.txt` | TEI/HTML/txt | CC BY-NC-SA 4.0 | `niimh.nic.in/ebooks/eNighantu/bhavaprakashanighantu/?mod=read` |
+    | Rāja Nighaṇṭu (full, Narahari Paṇḍita) | GRETIL | `.../transformations/plaintext/sa_narahari-rAjanighaNTu.txt` | TEI/HTML/txt | CC BY-NC-SA 4.0 | not located |
+    | Vāhaṭa's Aṣṭāṅganighaṇṭu (bonus, found in the same GRETIL section) | GRETIL | `sa_vAhaTa-aSTAGganighaNTu` | TEI/HTML/txt | CC BY-NC-SA 4.0 |  |
+
+    `vedicreserve.mum.edu`, which the "Texts Elsewhere"-style listings point to for a huge sthāna-by-sthāna Ayurveda collection, no longer resolves at all — a dead link despite looking perfect on paper, not used.
+
+  **Kāmaśāstra and Nītiśāstra/Subhāṣita — also wholly new categories**, except the three Bhartṛhari śatakas which stay exactly as already logged in `works.json` (no per-śataka split has appeared anywhere; re-checked). **Vidura Nīti needs no acquisition at all** — it's already sitting in this repo's ingested Mahābhārata, `dge/data/itihasa/mahabharata/udyoga_parva/mula/data.json`, adhyāyas 33–40 (the Prajāgara/Vidura-Nīti section), spot-checked against the known opening verse.
+
+    | Work | Source | URL | Format | Licence |
+    |---|---|---|---|---|
+    | Vātsyāyana — Kāmasūtra (mūla; footnotes paraphrase Jayamaṅgalā but don't carry its full text) | GRETIL (Fezas ed.) | `.../sa_vAtsyAyana-kAmasUtra.xml` (Sugita ed. `...-ednirnaya.xml` as cross-check) | TEI-XML | CC BY-NC-SA 4.0 |
+    | Jyotirīśvara — Pañcaśāyaka | GRETIL | `.../sa_jyotirIzvarakavizekhara-paJcasAyaka.xml` | TEI-XML | CC BY-NC-SA 4.0 |
+    | Mīnanātha — Smaradīpikā | GRETIL | `.../sa_mInanAtha-smaradIpikA.xml` | TEI-XML | CC BY-NC-SA 4.0 |
+    | Cāṇakya Nīti (popular verse collection) | Sanskrit Documents | `sanskritdocuments.org/doc_z_misc_major_works/chANakyanItisort.itx` (+ `.html`, + alphabetical variant `chANakyanItikrama.*`) | ITX + clean HTML | site's personal/non-commercial norm |
+    | Cāṇakya/Kauṭilīya Nīti-sūtras (a genuinely distinct text from the above — confirmed both exist separately) | Sanskrit Documents | `sanskritdocuments.org/doc_z_misc_major_works/chANakyasUtra.itx` (+ `.html`) | ITX + clean HTML | same |
+    | Kāmandakīya Nītisāra (Gaṇapati Śāstrī ed., refined for the Murty Classical Library, Harvard UP 2021) | UT Austin South Asia Institute (Knutson/Olivelle) | Google Doc export: append `/export?format=txt` to `docs.google.com/document/d/1OFWLyjXMqqiHTBg3WqvFJsWuDhlEQgE62k_7Ik2BTYQ` | plain text, IAST, verse/sarga-numbered | **CC BY 4.0, explicitly stated** — not on GRETIL or Sanskrit Documents at all, a genuinely new find |
+    | Pañcatantra (confirms existing `works.json` entry, unchanged) | GRETIL | `.../sa_viSNuzarman-paJcatantra.xml` | TEI-XML | CC BY-NC-SA 4.0 |
+    | Hitopadeśa (Nārāyaṇa) | GRETIL | `.../sa_nArAyaNa-hitopadeza.xml` | TEI-XML | CC BY-NC-SA 4.0 |
+
+    Dead ends, checked and confirmed absent everywhere machine-readable: Kokkoka's *Ratirahasya* (Koka Śāstra — only an English translation OCR exists), Ānaṅgaraṅga, Śukranīti. `subhashita.com`'s homepage is a bare JS-SPA shell with no server-rendered text — not usable as a scrape source despite being reachable.
+
+  **Decisions needed, not made here:** (1) new top-level taxonomy placement for Ayurveda and Kāmaśāstra — traditionally Upavedas, alongside Nītiśāstra which has no obvious home (`kavya_alankara` already holds the śatakas, but Cāṇakya/Kāmandakīya/Hitopadeśa/Pañcatantra sit oddly there too); (2) whether GRETIL's blanket CC BY-NC-SA 4.0 (the single largest source across every category above) clears the same non-commercial bar the project already treats sanskritsahitya-com's unlicensed grant as clearing, or needs its own explicit note per the `LICENSING.md` pattern; (3) whether the `hrishikeshrt/chanda` structured-metre CSVs are worth ingesting despite their AGPL-3.0 licence, given nothing else this project currently pulls from carries copyleft terms that strong.
+
 - **~~The published site is 1,091 MB against GitHub Pages' 1 GB limit~~ — down to 999 MB, and every decision below is the project lead's, taken 18 Aug.** Under the limit, but by 1%, so the next few granthas put it back over. What was done:
   - **Archives deleted (74.5 MB)** — `mahabharata.7z.001/.002`, `smv-assets-audio.7z.001/.002/.003`, `smv-assets-text*.zip`. All in git history. `vedavani-assets.zip` stays: `vedavani-extract.yml` unzips it at CI time.
   - **`dge/data/kosha` kept (61 MB), by decision** — the site reads the full corpus from `bhumandala-kosha-data`, so what stays in-repo is now a fallback for when that CDN is unreachable rather than dead weight. Worth remembering when the next CDN failure is diagnosed.
