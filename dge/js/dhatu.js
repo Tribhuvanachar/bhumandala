@@ -94,8 +94,8 @@
       +'<a class="btn ai" href="prakriya.html#'+it.id+'">⚙ प्रक्रिया · तिङन्त</a>'
       +'<a class="btn" href="krdanta.html#'+it.id+'">कृदन्त forms</a>'
       +'<a class="btn" href="ashtadhyayi.html" title="open the sūtra reader">↔ अष्टाध्यायी</a>'
-      +'</div>'
-      +'<div class="stage2" id="s2-'+it.id+'">प्रक्रिया opens the derivation viewer: the tiṅanta paradigm, and each form’s step-by-step derivation with every sūtra linked into the reader (Vidyut engine · run the generator to populate all roots).</div>';
+      +'<button class="btn" data-corpus-search="'+esc(it.dhatu)+'" title="Find every place this root appears across the DGE corpus">🔍 corpus occurrences</button>'
+      +'</div>';
     if(state.vset && state.vset[it.id]){
       h+='<div class="vrit" data-vrit="'+it.id+'"><button class="btn vrit-btn">📜 वृत्तयः · Mādhavīya · Kṣīra · Dhātupradīpa ›</button></div>';
     }
@@ -149,6 +149,14 @@
       if(mb){ e.stopPropagation(); loadVrittis(mb.closest(".vrit")); return; }
       var vt=e.target.closest(".vrit-tab");
       if(vt){ e.stopPropagation(); showVritti(vt.closest(".vrit"), vt.dataset.v); return; }
+      var cs=e.target.closest("[data-corpus-search]");
+      // "Where else does this occur" is exactly what the reader's own global
+      // search already answers for any word — reused rather than building a
+      // second occurrence index that would drift from it (same reasoning as
+      // the [data-occur] popover in intellisense.js).
+      if(cs){ e.stopPropagation();
+        if(typeof window.DGEGlobalSearch === "object" && window.DGEGlobalSearch.open) window.DGEGlobalSearch.open(cs.dataset.corpusSearch);
+        return; }
       if(e.target.closest(".acts")) return; // let derivation/reader links navigate
       var h=e.target.closest(".rhead"); if(h) toggleRow(h.parentElement.dataset.id);
     });
