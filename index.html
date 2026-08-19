@@ -80,8 +80,8 @@
     <div class="guru-latin" id="guruLatin" data-edit="guru.nameLatin"></div>
     <div class="guru-title" id="guruTitle" data-edit="guru.title"></div>
     <div class="rule" aria-hidden="true"><i></i></div>
-    <div class="verse"    id="verse" data-edit="vandana.sanskrit"></div>
-    <div class="verse-tr" id="verseTr" data-edit="vandana.transliteration"></div>
+    <div class="verse"    id="verse" data-edit="vandana.sanskrit" data-edit-quiet="1"></div>
+    <div class="verse-tr" id="verseTr" data-edit="vandana.transliteration" data-edit-quiet="1"></div>
     <button class="more-link more-link-sm" id="guruMore" data-panel="swamiji">
       <span id="guruMoreLabel" data-edit="guru.moreLabel"></span><span class="arrow" aria-hidden="true">→</span>
     </button>
@@ -253,8 +253,8 @@ let SITE_CONFIG = null;
     $('cueLabel').textContent    = cfg.labels.sectionsCue;
 
     $('mantras').innerHTML = cfg.footer.lines.map(function (l, i) {
-      return `<div class="mantra${i ? ' second' : ''}" data-edit="footer.lines.${i}.sa">${esc(l.sa)}</div>` +
-             (l.latin ? `<div class="mantra-latin" data-edit="footer.lines.${i}.latin">${esc(l.latin)}</div>` : '');
+      return `<div class="mantra${i ? ' second' : ''}" data-edit="footer.lines.${i}.sa" data-edit-quiet="1">${esc(l.sa)}</div>` +
+             (l.latin ? `<div class="mantra-latin" data-edit="footer.lines.${i}.latin" data-edit-quiet="1">${esc(l.latin)}</div>` : '');
     }).join('');
 
     // Mandala spokes, drawn rather than written into the markup. Cleared
