@@ -5153,6 +5153,159 @@
      "_schema": "grantha_tika_text",
      "_default_author": "श्रीसुरोत्तमतीर्थः"
     }
+   },
+   "nyaya_sudha": {
+    "mula": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
+    "tika_abhimanyadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_adyasutrapavyakhyanasya_pranunirasadavashishtasutrapavyakhyanama": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "आद्यसूत्रापव्याख्यानस्य प्राङूनिरासादवशिष्टसूत्रापव्याख्यानमनुवदति भावे चेत्यादिना अत्र सूत्रेति पर्यन्तेन । भावपदस्य कारणं कार्यं चार्थमुपेत्य व्याख्यानान्तरं किञ्चेति । भाव इत्यनुवादः ।। सुवर्णादिकमिति । उपलभ्यत इत्यन्वयः ।। अवरकालीनस्येति । पश्चाद्भाविनः अग्रे उत्पत्तेः प्राक् इदं कार्यजातं सदेवासीदिति सत्त्वावधारणादित्यर्थः ।। न चेदिति । कार्यं प्राक् सन्नेतिचेदित्यर्थः ।। अकुरुतेतीति । निर्दिशतीत्यनुषङ्गः ।। असदकरणादित्यादिकेति । ‘असद-करणादुपादानग्रहणात्सर्वसम्भवाभावात् । शक्तस्य शक्यकरणात्कारणभावाच्च सत्यार्यमि’ति साङ्ख्योक्तेत्यर्थः । असतः"
+    },
+    "tika_akashadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_anandamayadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_antasthatvadhikaranam": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "तस्मान्मुख्यार्थता विष्णोरिति कृत्वा"
+    },
+    "tika_antimapranadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_anumanikadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_anuvyakhyanam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_arambhanadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_asadadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_atmadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_bhoktradhikaranam": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "क्वचिज्जीवाकृतं"
+    },
+    "tika_brahmadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_gayatryadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_ikshatyadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_itaravyapadeshadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_janmadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_jijnasadhikaranam": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "स्वयङ्कृतापि"
+    },
+    "tika_napratikadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_naprayojanadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_navilakshanatvadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_nivasatirthiya": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_nivasatirthiyam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_nyayasudha": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्रीजयतीर्थः"
+    },
+    "tika_nyayasudhaparima_a": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्री राघवेन्द्रतीर्थविरचितः"
+    },
+    "tika_nyayasudhaparimala": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्री राघवेन्द्रतीर्थविरचितः"
+    },
+    "tika_om_na_prayojanavattvat_om_prayojanavattvahetoriti_sutre_prayojan": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "ॐ न प्रयोजनवत्त्वात् ॐ ।। प्रयोजनवत्त्वहेतोरिति । सूत्रे प्रयोजनवत्त्वादित्यस्य हि"
+    },
+    "tika_parima_a": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_pranadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_samanvayadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_sarvadharmopapattyadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_sasheshavakyarthacandrika": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_shabdamulatvadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_shastrayonitvadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_sheshavakyarthacandrika": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्री पाण्डुरङ्गीकेशवाचार्यविरचिता"
+    },
+    "tika_sudha": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_sudhavivriti": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्री यदुपत्याचार्यविरचिता"
+    },
+    "tika_tadadhigamadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_tippanipancakopeta": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_vaishamyanairghrinyadhikaranam": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_vakyarthacandrika": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_vakyartharatnamala": {
+     "_schema": "grantha_tika_text"
+    },
+    "tika_vivarana": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्री श्रीनिवासतीर्थविरचितं"
+    },
+    "tika_vivriti": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "श्री यदुपत्याचार्यविरचिता"
+    },
+    "tika_yadupatyam": {
+     "_schema": "grantha_tika_text"
+    }
    }
   },
   "sruti_prasthana": {

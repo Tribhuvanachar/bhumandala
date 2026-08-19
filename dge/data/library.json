@@ -595,7 +595,7 @@
     },
     {
       "path": "dge/data/darshana/nyaya/prakarana/tarkasangraha/mula/data.json",
-      "populated": false,
+      "populated": true,
       "title": "तर्कसङ्ग्रहः"
     },
     {
@@ -605,7 +605,7 @@
     },
     {
       "path": "dge/data/darshana/nyaya/prakarana/tarkasangraha/tika_dipika/data.json",
-      "populated": false,
+      "populated": true,
       "title": "तर्कसङ्ग्रहः — तर्कदीपिका"
     },
     {
@@ -8247,6 +8247,236 @@
       "path": "dge/data/dvaitavedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_padarthadipikabhashyartha/data.json",
       "populated": true,
       "title": "तैत्तिरीयोपनिषद्भाष्यम् — पदार्थदीपिका भाष्यार्थ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/mula/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_abhimanyadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — अभिमान्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasya_pranunirasadavashishtasutrapavyakhyanama/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — आद्यसूत्रापव्याख्यानस्य प्राङूनिरासादवशिष्टसूत्रापव्याख्यानमनुवदति भावे चेत्यादिना अत्र सूत्रेति पर्यन्तेन । भावपदस्य कारणं कार्यं चार्थमुपेत्य व्याख्यानान्तरं किञ्चेति । भाव इत्यनुवादः ।। सुवर्णादिकमिति । उपलभ्यत इत्यन्वयः ।। अवरकालीनस्येति । पश्चाद्भाविनः अग्रे उत्पत्तेः प्राक् इदं कार्यजातं सदेवासीदिति सत्त्वावधारणादित्यर्थः ।। न चेदिति । कार्यं प्राक् सन्नेतिचेदित्यर्थः ।। अकुरुतेतीति । निर्दिशतीत्यनुषङ्गः ।। असदकरणादित्यादिकेति । ‘असद-करणादुपादानग्रहणात्सर्वसम्भवाभावात् । शक्तस्य शक्यकरणात्कारणभावाच्च सत्यार्यमि’ति साङ्ख्योक्तेत्यर्थः । असतः कृतिविषयत्वाभावात्प्रागपि कार्यं सदेवेत्यन्वयः । समग्रश्लोकार्थः साङ्ख्यनये सुधायां व्यक्तः । वैभाषिकनये वक्ष्यमाणां युक्तिमाह वृत्तिविकल्पेति । स्थितिविषयविकल्पेषु सर्वकल्पानामनुपपन्नत्वादिकेत्यर्थः । कार्यकारणयोर्भेदेन कार्यं कारणाश्रितं चेत्किं कार्यं कारणेषु तन्त्वादिकेष्वेकदेशेन वृत्तिमदुत कार्त्स्न्येन । आद्ये कारणीभूतावयवा(न्यैक)नामेकदेशाभावात् । अन्त्ये तु एकैकतन्तुषु कार्स्न्येनावस्थाने कार्यस्यानेकत्वप्रसङ्गः । एकतन्तुचलने सति चलनं तन्त्वन्तरस्या-चलनादचलत्वमिति विरुद्धधर्मवत्त्वमित्यादियुक्तिरिति भावः ।। संवेष्टितेति । यथा संवेष्टनदशाया-मव्यक्तः पटः प्रसारितो व्यक्तः तथा प्रागुत्पत्तेरव्यक्ततया सदेव कार्यं कर्तृव्यापारेण पश्चाव्द्यज्यत इति कारणादनन्यत्वं कार्यस्येत्यर्थः । एतेन प्राणादिदृष्टान्तोपि व्याख्यातः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_akashadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — आकाशाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_anandamayadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — आनन्दमयाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_antasthatvadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — अन्तस्थत्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_antimapranadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — अन्तिमप्राणाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_anumanikadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — आनुमानिकाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_anuvyakhyanam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — अनुव्याख्यानम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_arambhanadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — आरम्भणाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_asadadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — असदधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_atmadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — आत्माधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_bhoktradhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — भोक्त्रधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_brahmadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — ब्रह्माधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_gayatryadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — गायत्र्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_ikshatyadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — ईक्षत्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_itaravyapadeshadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — इतरव्यपदेशाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_janmadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — जन्माधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_jijnasadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — जिज्ञासाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_napratikadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — न प्रतीकाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_naprayojanadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — न प्रयोजनाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_navilakshanatvadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — न विलक्षणत्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_nivasatirthiya/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — श्रीनिवासतीर्थीया"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_nivasatirthiyam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — श्रीनिवासतीर्थीयम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_nyayasudha/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — श्री जयतीर्थयतिकृता श्रीमन्न्यायसुधा"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_nyayasudhaparima_a/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — न्यायसुधापरिम ळ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_nyayasudhaparimala/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — न्यायसुधापरिमलः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_om_na_prayojanavattvat_om_prayojanavattvahetoriti_sutre_prayojan/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — ॐ न प्रयोजनवत्त्वात् ॐ ।। प्रयोजनवत्त्वहेतोरिति । सूत्रे प्रयोजनवत्त्वादित्यस्य हि कृतकृत्यत्वादित्यर्थो विवक्षितः सिद्धान्तिनस्तस्यासिद्धत्वादित्यर्थः । अत्र सूत्रगतमेव प्रयोजनवत्पदं कृतकृत्यपरम् । प्रयोजनवत्त्वं प्रसाध्येत्यादि सुधा गतं यत्तत्प्रसिद्धार्थकमेवेति द्रष्टव्यम् ।। गर्भस्रावेणैवेति । हेतोरसिद्धत्वादिति भावः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_parima_a/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — परिमळ"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_pranadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — प्राणाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_samanvayadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — समन्वयाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_sarvadharmopapattyadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — सर्वधर्मोपपत्त्यधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_sasheshavakyarthacandrika/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — सशेषवाक्यार्थचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_shabdamulatvadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — शब्दमूलत्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_shastrayonitvadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — शास्त्रयोनित्वाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_sheshavakyarthacandrika/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — शेषवाक्यार्थचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_sudha/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — सुधा"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_sudhavivriti/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — सुधाविवृतिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_tadadhigamadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — तदधिगमाधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_tippanipancakopeta/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — टिप्पणीपञ्चकोपेता"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_vaishamyanairghrinyadhikaranam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — वैषम्यनैर्घृण्याधिकरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_vakyarthacandrika/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — वाक्यार्थचन्द्रिका"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_vakyartharatnamala/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — वाक्यार्थरत्नमाला"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_vivarana/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — सुधाविवरणम्"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_vivriti/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — विवृतिः"
+    },
+    {
+      "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_yadupatyam/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — यादुपत्यम्"
     }
   ]
 }
