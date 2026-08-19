@@ -430,9 +430,14 @@
     // nowrap run that squeezed the dictionary's own name down to one word per
     // line — the name is what the reader is actually looking for.
     var full = [d.meta.license || '', d.meta.license_note || ''].filter(Boolean).join(' — ');
+    // The Cleared/Unclear badge is a licensing-curation detail for whoever
+    // is vetting dictionary sources, not something a reader looking up a
+    // word needs on screen — gated the same way as every other admin-only
+    // indicator in this app (localStorage.acharyaAuthorized/is_superadmin).
+    var isAdmin = (function(){ try { return localStorage.getItem('acharyaAuthorized')==='true' || localStorage.getItem('is_superadmin')==='true'; } catch(e){ return false; } })();
     head.innerHTML = '<span class="kosha-src-name">' + esc(tl(d.meta.name)) + '</span>' +
-      '<span class="kosha-lic' + (lic ? ' ok' : '') + '" title="' + esc(full) + '">' +
-      (lic ? 'Cleared' : 'Unclear') + '</span>';
+      (isAdmin ? '<span class="kosha-lic' + (lic ? ' ok' : '') + '" title="' + esc(full) + '">' +
+      (lic ? 'Cleared' : 'Unclear') + '</span>' : '');
     var hide = el('button', 'kosha-hidebtn', '🚫');
     hide.title = 'Hide ' + (d.meta.name || d.slug) + ' from results';
     hide.onclick = function (ev) { ev.stopPropagation(); toggleUserHidden(d.slug); onHide(); };
