@@ -152,10 +152,22 @@ that is still tens of megabytes, which is a branch, not a repository.
 
 ## 4. What to do, in order
 
-1. **Per-trigram postings + a document-frequency table**, and a client that
-   fetches the rarest trigrams. The 150× win, and it touches
-   `build_search_index.py` and `dge-search.js` only. Nothing about the corpus
-   or the repositories changes.
+1. ✅ **Per-trigram postings + a document-frequency table**, and a client that
+   fetches the rarest trigrams. Done — `build_search_index.py` writes one
+   file per trigram (filename percent-encoded) plus `manifest.df`;
+   `dge-search.js` fetches only the rarest `MAX_TRIS_PER_SET` (3) trigrams of
+   each query/word set instead of every trigram in it, then scores fetched
+   candidates exactly as before (unchanged edit-distance pass, so this only
+   changes which candidates get looked at, not how they're judged). Validated
+   19 Aug 2026 against a locally-rebuilt index over the real corpus (912
+   granthas, 94,773 units, 58,112 distinct trigrams): राम **16.08 MB → 549 KB**
+   (matches this doc's original estimate almost exactly), कृष्ण **6.90 MB →
+   80 KB**, धर्म **10.03 MB → 181 KB** — and correctness held: all four test
+   queries (राम, कृष्ण, धर्म, agnimILe) returned correct top hits at 0.97
+   confidence, including the Rigveda's opening verse for "agnimILe". Not yet
+   published — the built index still needs a real run of `reindex.yml`
+   (`main`'s corpus + `kavya-dist`) and the `search-dist` pin bump; what's
+   validated here was built from `dge/data` alone, without the Kāvya corpus.
 2. **Partition the postings by section** in the same pass. Scoped search
    becomes proportional, and a Kāvya import stops republishing the Vedas.
 3. **Scoped search in the UI**, once (1) and (2) are in: a section selector on
@@ -163,6 +175,7 @@ that is still tens of megabytes, which is a branch, not a repository.
 4. **Leave the repository layout as it is.** Branches for derived corpora,
    repositories only for the kośa and the audio.
 
-Until (1) is done, the honest statement about corpus search is that it works
-and it is expensive: every query pays megabytes. That is worth saying out loud
-rather than discovering on a phone.
+(1) is done in code; until it is published, the honest statement about live
+corpus search is still that it works and it is expensive — every query pays
+megabytes. That stops being true once `reindex.yml` runs and the pin is
+bumped.

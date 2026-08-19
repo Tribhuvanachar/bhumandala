@@ -21,10 +21,17 @@ they are 0.1 MB, and `js/backlinks.js` reads them from beside the app.
 ## What is in it
 
 ```
-manifest.json          916 granthas, their categories, unit counts and shards
-units/<slug>.json      per-grantha units: {u, pk, ck, s}
-postings/<bucket>.json trigram -> [[granthaIdx, unitIdx], ...]
+manifest.json           granthas (categories, unit counts, shards) + df: {trigram -> posting count}
+units/<slug>.json       per-grantha units: {u, pk, ck, s}
+postings/<trigram>.json one file PER TRIGRAM (filename percent-encoded): [[granthaIdx, unitIdx], ...]
 ```
+
+Postings used to be filed by a trigram's first 2 characters, so every
+"ram"/"ran"/"raj"/... trigram shared one file — up to 7 MB, downloaded whole
+for a query touching any one of them (a राम search pulled 16 MB). Now each
+trigram is its own small file, and `dge-search.js` fetches only the 2-3
+*rarest* trigrams of a query (by `manifest.df`) instead of every trigram in
+it — a राम query is ~549 KB now, not 16 MB. See `SEARCH_ARCHITECTURE.md`.
 
 **916 granthas, 94,664 units** — including the 36 Kāvya layers, which are read
 from `kavya-dist` rather than from the site.
