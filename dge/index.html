@@ -666,6 +666,24 @@
   </div>
 </div>
 
+<!-- Generic viewer for a home.json "Know More" panel (Tribhuvan/Pradeep/
+     Swamiji) -- e.g. Our Story's "Meet the Founder" link. Opened in place
+     (window.openProfilePanel(key), js/modals.js) rather than navigating to
+     home-panel.html: a same-page modal swap has nothing to flash and
+     nowhere wrong for a "Back" button to send you, since there is no
+     navigation to begin with. -->
+<div class="modal-overlay" id="profileSheetModal">
+  <div class="modal-content fullscreen">
+    <div class="modal-header-sticky">
+      <h3 id="profileSheetTitle" style="margin:0; color:var(--accent-red); font-size: 16px;"></h3>
+      <button class="btn-sm" onclick="window.closeModal('profileSheetModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body" style="max-width:640px; margin:0 auto;">
+      <div id="profileSheetBody"></div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="whatsNewModal">
   <div class="modal-content">
     <div class="modal-header-sticky">

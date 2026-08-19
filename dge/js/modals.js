@@ -163,6 +163,62 @@ function dgeAboutEsc(s) {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+// admin/content/home.json, fetched lazily and only once -- most visitors
+// never open a profile panel, so this shouldn't cost a request at boot.
+let dgeHomeContentPromise = null;
+function dgeFetchHomeContent() {
+  if (!dgeHomeContentPromise) {
+    dgeHomeContentPromise = fetch('../admin/content/home.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(r => (r.ok ? r.json() : null))
+      .catch(() => null);
+  }
+  return dgeHomeContentPromise;
+}
+
+// Same shape as home.json's panels{} (eyebrow/title/reverence/body/
+// groups[]/closing/todo) that the landing page's own "Know More" sheet
+// renders -- view-only here, since editing that file already happens
+// there (or on the reader app's own reader.json-backed panels).
+function dgeProfilePanelHtml(p) {
+  let html = '';
+  if (p.eyebrow) html += `<div style="font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted-text); margin-bottom:8px;">${dgeAboutEsc(p.eyebrow)}</div>`;
+  if (p.reverence) html += `<div style="font-style:italic; font-size:13px; color:var(--muted-text); margin-bottom:16px;">${dgeAboutEsc(p.reverence)}</div>`;
+  if (p.body) html += `<p style="font-size:13.5px; line-height:1.7; margin:0 0 16px;">${dgeAboutEsc(p.body)}</p>`;
+  (p.groups || []).forEach(g => {
+    if (g.heading) html += `<div style="margin:20px 0 10px; font-weight:700; font-size:13px; color:var(--accent-red);">${dgeAboutEsc(g.heading)}</div>`;
+    (g.entries || []).forEach(e => {
+      html += `<div style="margin-bottom:12px;"><b style="font-size:13px;">${dgeAboutEsc(e.name || '')}</b>`;
+      if (e.note) html += `<div style="font-size:12.5px; color:var(--muted-text); line-height:1.55; margin-top:2px;">${dgeAboutEsc(e.note)}</div>`;
+      if (e.also) html += `<div style="font-size:12px; color:var(--muted-text); font-style:italic; margin-top:2px;">${dgeAboutEsc(e.also)}</div>`;
+      html += '</div>';
+    });
+    if (g.names && g.names.length) {
+      html += `<div style="font-size:12.5px; color:var(--muted-text); margin-bottom:8px;">${g.names.map(n => dgeAboutEsc(n)).join(' · ')}</div>`;
+    }
+  });
+  if (p.closing) html += `<p style="font-size:13px; font-style:italic; margin-top:18px; color:var(--muted-text);">${dgeAboutEsc(p.closing)}</p>`;
+  if (p.todo) html += `<p style="font-size:12px; color:var(--muted-text); font-style:italic; margin-top:12px;">${dgeAboutEsc(p.todo)}</p>`;
+  return html;
+}
+
+window.openProfilePanel = function(key) {
+  const title = document.getElementById('profileSheetTitle');
+  const body = document.getElementById('profileSheetBody');
+  if (!title || !body) return;
+  title.textContent = '';
+  body.innerHTML = '<p style="color:var(--muted-text); font-size:13px;">Loading…</p>';
+  window.openModal('profileSheetModal');
+  dgeFetchHomeContent().then(function(cfg) {
+    const p = cfg && cfg.panels && cfg.panels[key];
+    if (!p) {
+      body.innerHTML = '<p style="color:var(--muted-text); font-size:13px;">Could not load this page.</p>';
+      return;
+    }
+    title.textContent = p.title || '';
+    body.innerHTML = dgeProfilePanelHtml(p);
+  });
+};
+
 // About This Project's opening paragraph and "Designed By" line, and Our
 // Story's full bio — admin/content/reader.json's `about`/`ourStory` keys.
 // Rendered into these two functions (not baked into dge/index.html) so a
@@ -185,10 +241,11 @@ function dgeRenderAboutIntro() {
 
 // Why -> Beginning -> Growth -> How it's built -> Vision -> Founder ->
 // Guru/Ācārya gratitude -> Our hope. Sarvamūla's own story first, in full;
-// the founder gets a short closing mention with a link out to his own,
-// much more personal Gurus/Blessers/Inspirers material (home.json's
-// `panels.tribhuvan`, reachable standalone at home-panel.html?panel=
-// tribhuvan) rather than repeating that biography here a second time.
+// the founder gets a short closing mention with a link to his own, much
+// more personal Gurus/Blessers/Inspirers material (home.json's
+// `panels.tribhuvan`) via openProfilePanel() -- a same-page modal swap,
+// not a navigation, so there is nothing to flash and no "Back" link that
+// can send you somewhere other than back to what you were reading.
 function dgeRenderOurStory() {
   const cfg = window.SITE_CONFIG;
   const story = (cfg && cfg.ourStory) || {};
@@ -213,7 +270,7 @@ function dgeRenderOurStory() {
   (founder.paragraphs || []).forEach((p, pi) => {
     html += `<p data-edit="ourStory.founder.paragraphs.${pi}" style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">${dgeAboutEsc(p)}</p>`;
   });
-  html += `<button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.closeModal('ourStoryModal'); window.location.href='${dgeAboutEsc(founder.meetFounderHref || '')}'">
+  html += `<button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.closeModal('ourStoryModal'); window.openProfilePanel('${dgeAboutEsc(founder.meetFounderPanel || 'tribhuvan')}')">
       <span data-edit="ourStory.founder.meetFounderLabel">${dgeAboutEsc(founder.meetFounderLabel || 'Meet the Founder →')}</span>
     </button>`;
   if (founder.gratitude) {
