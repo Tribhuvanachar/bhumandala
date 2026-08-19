@@ -47,6 +47,15 @@
   .chip.aon{background:var(--a);color:#fff;border-color:var(--a)}
   .chip.uon{background:var(--u);color:#fff;border-color:var(--u)}
   .sel{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:6px 10px;font:inherit;font-size:13px}
+  /* Base look for any text box that doesn't already carry its own class —
+     without this it falls back to raw OS-default input/select chrome.
+     Bare tag selectors, deliberately low specificity: .search/.sel above
+     keep winning for the elements that already use them. */
+  input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]),
+  textarea,select{font:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--line);
+    border-radius:10px;background:var(--panel);color:var(--ink)}
+  input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]):focus,
+  textarea:focus,select:focus{outline:none;border-color:var(--accent)}
   .count{color:var(--muted);font-size:13px;margin-left:auto}
   .list{display:flex;flex-direction:column;gap:8px}
   .row{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;border-left:4px solid var(--tag,var(--line))}
