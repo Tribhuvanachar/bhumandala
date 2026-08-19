@@ -233,6 +233,11 @@
   }
 
   /* -------------------------------------------------------------- bar ---- */
+  // Collapsed by default: a slim tab on the left edge showing just "EDIT",
+  // so the tool does not sit permanently over page content or the bottom
+  // "Enter" button. A right arrow expands it into the full toolbar.
+  let expanded = false;
+
   function bar() {
     let el = document.getElementById('ciBar');
     const n = Object.keys(draft).length;
@@ -241,16 +246,35 @@
     if (!el) {
       el = document.createElement('div');
       el.id = 'ciBar';
-      el.className = 'ci-bar';
       document.body.appendChild(el);
       document.body.classList.add('ci-active');
     }
+    el.className = 'ci-bar ' + (expanded ? 'ci-expanded' : 'ci-collapsed');
+
+    if (!expanded) {
+      el.innerHTML =
+        '<button class="ci-pill" aria-expanded="false" aria-label="Open the edit tool">' +
+          (n ? '<span class="ci-badge">' + n + '</span>' : '') +
+          '<span class="ci-shine">EDIT</span>' +
+          '<span class="ci-chevron" aria-hidden="true">›</span>' +
+        '</button>';
+      el.querySelector('.ci-pill').addEventListener('click', function () {
+        expanded = true; bar();
+      });
+      return;
+    }
+
     el.innerHTML =
+      '<button class="ci-chevron-btn" aria-label="Collapse the edit tool">‹</button>' +
       '<span class="ci-count">' + (n ? n + ' unpublished edit' + (n === 1 ? '' : 's') +
-        ' — in this browser only' : 'Edit text: tap any highlighted line') + '</span>' +
+        ' — in this browser only' : 'Click on the highlighted text to edit and save.') + '</span>' +
       (n ? '<button class="ci-btn ci-publish">Publish</button>' +
            '<button class="ci-btn ci-discard">Discard</button>' : '') +
       '<button class="ci-btn ci-done">' + (editing ? 'Done' : 'Edit text') + '</button>';
+
+    el.querySelector('.ci-chevron-btn').addEventListener('click', function () {
+      expanded = false; bar();
+    });
 
     const pub = el.querySelector('.ci-publish');
     if (pub) pub.addEventListener('click', function () {

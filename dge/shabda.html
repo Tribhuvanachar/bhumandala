@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="sa">
+<head>
+<meta charset="UTF-8">
+<!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
+     back to the vandana at the site root. Must stay the first script here. -->
+<script src="js/vandana-guard.js?v=1"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>शब्दपाठः · DGE व्याकरणम्</title>
+<script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.3.3/sanscript.js"
+ onerror="this.onerror=null;var s=document.createElement('script');s.src='https://unpkg.com/@indic-transliteration/sanscript@1.3.3/sanscript.js';document.head.appendChild(s);"></script>
+<link rel="stylesheet" href="css/vyakarana.css?v=1">
+<link rel="stylesheet" href="css/dhatuforms.css?v=1">
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div class="brand"><a href="index.html" title="DGE Home">⌂ DGE</a><span>›</span><span class="deva">शब्दपाठः</span></div>
+    <div class="spacer"></div>
+    <input class="search" id="sh-search" placeholder="search शब्द / artha / roman…" autocomplete="off">
+    <div class="ctl" id="sh-scriptSeg">
+      <button data-s="devanagari" class="on">देव</button><button data-s="iast">IAST</button>
+    </div>
+    <button class="icon" id="sh-theme" title="Light / Dark">◐</button>
+  </div>
+</header>
+
+<main>
+  <div class="crumbs deva">DGE › व्याकरणम् › <b>शब्दपाठः</b></div>
+  <section class="hero">
+    <h1 class="deva">शब्दपाठः</h1>
+    <div class="sub">Nominal declension browser · <span id="sh-total">…</span> words · source: <a href="https://github.com/ashtadhyayi-com/data" target="_blank" rel="noopener">ashtadhyayi-com/data</a></div>
+  </section>
+
+  <div class="filters">
+    <div class="frow"><span class="flab">लिङ्ग</span>
+      <button class="chip" data-l="">सर्वे · all</button>
+      <button class="chip" data-l="P">पुंल्लिङ्गम्</button>
+      <button class="chip" data-l="S">स्त्रीलिङ्गम्</button>
+      <button class="chip" data-l="N">नपुंसकलिङ्गम्</button>
+      <button class="chip" data-l="A">अव्ययम्</button>
+      <span class="count" id="sh-count"></span>
+    </div>
+  </div>
+
+  <div class="list" id="sh-list"></div>
+  <button class="more" id="sh-more" style="display:none">show more ▾</button>
+  <p class="note">शब्दपाठः · DGE · click a शब्द to expand its full 8×3 (विभक्ति × वचन) declension table.</p>
+</main>
+
+<script src="js/shabda.js?v=1"></script>
+</body>
+</html>

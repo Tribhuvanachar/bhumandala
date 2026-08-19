@@ -5,6 +5,7 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="js/vandana-guard.js?v=1"></script>
+<script src="js/admin-gate.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>अष्टाध्यायी · DGE व्याकरणम्</title>
 <script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.3.3/sanscript.js"
@@ -34,6 +35,15 @@
     <button class="icon" id="dge-gear" title="AI settings">⚙</button>
   </div>
 </header>
+
+<!-- Pinned just below the header rather than only at the very bottom of the
+     page, after every commentary layer — a reader had to scroll past all of
+     them to find Next/Previous, which on a long sutra with several layers
+     open meant scrolling past a lot of text just to move on. -->
+<nav class="nav nav-top">
+  <button id="dge-prevBtnTop"><small>‹ previous (←)</small><span class="deva" id="dge-prevTTop"></span></button>
+  <button class="next" id="dge-nextBtnTop"><small>next (→) ›</small><span class="deva" id="dge-nextTTop"></span></button>
+</nav>
 
 <main>
   <div class="crumbs deva">अध्याय <span id="dge-a"></span> · पाद <span id="dge-p"></span> · सूत्र <span id="dge-s"></span> &nbsp;›&nbsp; <b>पाणिनीयम्</b></div>
@@ -69,7 +79,7 @@
   </div>
 
   <div class="dge-layers read" id="dge-layers"></div>
-  <p class="note">Ashtadhyayi corpus · DGE · 7 layers (Kāśikā · Siddhānta-Kaumudī · Mahābhāṣya · Bālamanoramā · Tattvabodhinī · Nyāsa · Vasu Eng). Layers load on demand. Licence: verify before public launch — see admin.</p>
+  <p class="note">Ashtadhyayi corpus · DGE · 7 layers (Kāśikā · Siddhānta-Kaumudī · Mahābhāṣya · Bālamanoramā · Tattvabodhinī · Nyāsa · Vasu Eng). Layers load on demand.<span data-admin-only> Licence: verify before public launch — see admin.</span></p>
 
   <nav class="nav">
     <button id="dge-prevBtn"><small>‹ previous (←)</small><span class="deva" id="dge-prevT"></span></button>

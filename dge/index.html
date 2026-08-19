@@ -139,6 +139,7 @@
         <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='tirtha/index.html'">🛕 Tirtha Prabandha</div>
         <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='ashtadhyayi.html'">📖 Aṣṭādhyāyī</div>
         <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dhatu.html'">📚 Dhātupāṭha</div>
+        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='shabda.html'">🔤 Śabdapāṭha</div>
         <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='kavya.html'">🪶 Kāvyāni</div>
         <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dasa_sahitya.html'">🎶 Dasa Sahitya</div>
       </div>
@@ -170,7 +171,6 @@
     <h1 id="stotraTitle">Loading...</h1>
     <div class="author" id="stotraAuthor">...</div>
     <button id="supportProjectBtn" class="support-project-btn" onclick="window.openSponsorModal()" style="display:none;">💝 Support This Project</button>
-    <div id="contentEditorMount" class="content-editor-mount"></div>
     <div class="rule"></div>
   </div>
 
@@ -207,6 +207,9 @@
       <div id="readingCard">श्लोकं चिनोतु (Select a shloka)</div>
     </div>
   </div>
+  <!-- Just below the shloka display, not up in the page header, so the
+       toggle sits next to the content it edits. -->
+  <div id="contentEditorMount" class="content-editor-mount"></div>
   <div class="shloka-list" id="shlokaList"></div>
 
   <!-- Contribution & Support Banner -->
@@ -532,6 +535,8 @@
     <div class="modal-body">
       <p style="font-size:13px; line-height:1.6; margin:0 0 16px 0;">This is part of the <strong>Sarvamoola Digitisation & Educational Project</strong> — a free, ad-free digital library of Sanskrit devotional and philosophical texts in the Madhva Sampradaya (Dvaita Vedanta) tradition, with transliteration, audio, and AI-assisted study tools, built for personal and community learning.</p>
 
+      <button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.closeModal('aboutModal'); window.openModal('ourStoryModal');">📖 Our Story — How DGE Began</button>
+
       <button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.closeModal('aboutModal'); window.dgeStartTour && window.dgeStartTour();">🧭 Take the Walkthrough</button>
       <button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.closeModal('aboutModal'); window.openWhatsNewModal();">🆕 What's New &amp; Coming Soon</button>
       <button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.closeModal('aboutModal'); window.openReadingHistory();">📜 View Reading History</button>
@@ -558,6 +563,46 @@
 
       <div class="actions-section-label" style="margin-top:20px;">🕉️ Designed By</div>
       <p style="font-size:12px; color:var(--muted-text); margin:0;">- 3BU1 -</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="ourStoryModal">
+  <div class="modal-content fullscreen">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">📖 Our Story — How DGE Began</h3>
+      <button class="btn-sm" onclick="window.closeModal('ourStoryModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body" style="max-width:640px; margin:0 auto;">
+      <div style="text-align:center; margin:4px 0 20px;">
+        <div style="font-weight:700; font-size:16px;">Tribhuvan Achar (3BHU1)</div>
+        <div style="font-size:12.5px; color:var(--muted-text); margin-top:2px;">Sevak @ Śrīpādarājaru – Narasimha Tīrtha</div>
+        <div style="font-size:11.5px; color:var(--muted-text); font-style:italic; margin-top:1px;">Ex-Technical Architect, Accenture</div>
+      </div>
+
+      <p style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">I am, first and foremost, an orthodox Madhva and a Sevak at Śrīpādarājaru Sannidhāna (Narasimha Tīrtha)—the divine grace that gave me a new chapter in life, alongside the eternal blessings of Śrī Bhūtarāja and Śrī Vādirāja.</p>
+
+      <p style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">In late 2014, I did not leave the corporate software industry to take up a specific profession. I left to embrace Svadharma as defined in the Bhāgavata: Adhyayana, Adhyāpana, Yajana, Yājana, Dāna, and Pratigraha. My paramount goal was to raise my children in a traditional environment so our sacred lineage and Dharmic principles continue generation after generation.</p>
+
+      <p style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">The journey began by taking my young son on pilgrimages across sacred Tīrthakṣetras—seeking divine grace for his Śāstric studies. Today, by that grace, he has byhearted the Ṛgveda Saṃhitā and is pursuing Nyāya, Vyākaraṇa, and Vedānta. My daughters are being brought up in a traditional Gurukula lifestyle, observing traditional vows.</p>
+
+      <p style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">My own path was one of Śāstric study driven by deep curiosity and voluntary teaching. During a 48-day sevā amid the 2021 lockdown, fate unexpectedly blessed me to serve as an Archaka for Śrī Yoga Narasiṃha Swāmy and Śrīpādarāja for a year. However, my desire to focus more on Adhyayana eventually led me to step down and move to Bengaluru, dedicating my time to studying in my own limited capacity and voluntarily teaching to those interested.</p>
+
+      <p style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">It was from this very devotion to Adhyayana and Adhyāpana that the vision for the Digital Granth Engine (DGE) took root in December 2021. The goal was to give students of Dvaita Vedanta and Dasa Sahitya a unified ecosystem where the Sarvamūla Granthas, Vedas, and Puranas are seamlessly interlinked with Vyakarana, Koshas, and other darshanas.</p>
+
+      <p style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">After years of relying on external teams who failed to deliver, I realized that fate had placed me in the role of a Technical Architect at Accenture (2005–2014) precisely so I would have the enterprise-grade skills to build this myself. In August 2026, after a nearly 12-year complete hiatus from programming, I used a ₹12,000 Android smartphone, mobile data, and modern development tools to architect this platform.</p>
+
+      <p style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">I want to be completely transparent: my role was that of an orchestrator. The technical foundation relies on advanced software utilities, open-source resources, and publicly available APIs developed by various academic institutions.</p>
+
+      <p style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">The vast text corpus was assembled through relentless effort. First came the aggregation of available digitized texts from open sources, which were then carefully restructured with proper indentation and deep cross-referencing. In parallel, I inspired volunteers to digitize and OCR physical books. To ensure accuracy, I have engaged scholars—currently Sri Pradeep Simhachar, who has happily volunteered to meticulously proofread and refine the texts, build on the existing corpus, and contribute in all possible ways. I also have plans to involve more scholars and volunteers to take this repository to the next level.</p>
+
+      <p style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">For complex subjects—such as the Bhūmaṇḍala and Sūrya Sañcāra in the Bhāgavata Purāṇa, or astronomical concepts like Tithi and Grahaṇa—I utilized modern modeling tools to conceptualize and generate original illustrative 3D diagrams, bringing ancient cosmology to life. Moving forward, the platform will also expand to include dedicated Grahaṇa (eclipse) and Pañcāṅga calculators.</p>
+
+      <p style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">Dharmo Rakṣati Rakṣitaḥ. I do not claim to be a perfect practitioner, but DGE is my humble attempt to protect this Vidyā. Throughout history, sacred knowledge has evolved from manuscripts to printed books. Today, this knowledge does not belong to any single publisher; it belongs to the Guru Paramparā. DGE is simply the next evolutionary step—tying these digital threads together into one place.</p>
+
+      <p style="font-size:13.5px; line-height:1.7; margin:0 0 20px 0;">My ultimate personal aspiration is to eventually settle on the banks of the Gaṅgā, perform quiet sādhana, and spend my final days contemplating and listening to the Śāstras, as inspired by our scriptures. Until then, DGE is my offering to the scholars, the students, and the <a href="guru-parampara/index.html" onclick="window.closeModal('ourStoryModal')" style="color:var(--accent-red); font-weight:700;">Guru Paramparā</a>.</p>
+
+      <button class="btn-sm" style="width:100%; margin-bottom:8px;" onclick="window.closeModal('ourStoryModal'); window.location.href='guru-parampara/index.html'">🪷 Visit the Guru Paramparā</button>
     </div>
   </div>
 </div>
@@ -831,6 +876,7 @@
 <script src="js/admin-editor.js?v=4.61.5"></script>
 <script src="js/config-editor.js?v=4.60.6"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
+<script src="js/text-abbreviations.js?v=1"></script>
 <script src="js/core.js?v=4.63.0"></script>
 <!-- Reads admin/config/menu.json and rebuilds the top bar, the Explore and
      Admin popups and the theme list from it. Loaded after core.js so the
