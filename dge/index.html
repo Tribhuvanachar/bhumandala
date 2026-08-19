@@ -872,7 +872,17 @@
 <script src="js/screenshot.js?v=4.60.6"></script>
 <script src="js/ai.js?v=4.60.6"></script>
 <script src="js/render.js?v=4.61.1"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<!-- async: JSZip is only used on demand (admin-editor.js's zip export/extract,
+     gated behind typeof JSZip==='undefined' checks), never at boot -- a
+     blocking, synchronous tag here meant a slow or stalled connection to
+     this CDN (not merely a failed one; onerror doesn't fire on a hang)
+     could leave the whole page's HTML parser waiting on it forever,
+     visible as a page that never finishes loading at all -- a real,
+     reproducible failure mode, confirmed directly by forcing a hang on
+     this exact resource and watching document.readyState never leave
+     "loading" and core.js's later boot code (including the ?SMV= query
+     abbreviation routing it was first noticed against) never run. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" async></script>
 <script src="js/admin-editor.js?v=4.61.5"></script>
 <script src="js/config-editor.js?v=4.60.6"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
