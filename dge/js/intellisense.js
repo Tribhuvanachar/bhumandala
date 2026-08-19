@@ -193,7 +193,12 @@
   const asciiNum = s => s.replace(/[०-९]/g, d => String(DEVA_DIGITS.indexOf(d)));
   // Adhyaya 1-8, pada 1-4. The bound is what makes this safe to run over
   // prose: it rejects most numbers that merely look like a citation.
-  const REF = /(?<![\d.०-९])([1-8१-८])[.।॰]([1-4१-४])[.।॰](\d{1,3}|[०-९]{1,3})(?![\d०-९.])/g;
+  // Separator accepts a comma too, not just . / । / ॰ -- Kāśikā's own
+  // cross-references write it "adhyaya,pada।sutra" (e.g. "७,२।१"), a comma
+  // between the first two groups where the sutra's own citation of itself
+  // uses dandas throughout ("१।१।१"). Both conventions point at the same
+  // kind of reference and should link the same way.
+  const REF = /(?<![\d.०-९])([1-8१-८])[.।॰,]([1-4१-४])[.।॰,](\d{1,3}|[०-९]{1,3})(?![\d०-९.])/g;
 
   // The reader sets window.currentGranthaSlug as it navigates. A standalone
   // page has no such navigation, so it states once what it is showing:

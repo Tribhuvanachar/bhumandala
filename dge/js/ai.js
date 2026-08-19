@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.7 (Ask Acharya honors the onboarding language preference)';
+window.DGE_VERSIONS['ai.js'] = 'v3.8 (word-selection tooltip no longer requires an AI key to appear)';
 
 // Appends a language directive read from onboarding.js's saved preference
 // (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
@@ -17,9 +17,16 @@ function dgeLangInstruction() {
 }
 
 // 1. Text Selection & Tooltip Event Listener
+//
+// No longer gated on is-authorized (admin AI-key unlock): the Shabda/Dhātu/
+// Where-else word tools (#wordToolsRow) need no AI at all and are this
+// app's own structured-data lookups, and askAcharya() already handles the
+// no-key-configured case on its own (a friendly "configure a key" message,
+// not a crash) -- so there was never a reason a plain reader couldn't even
+// SEE this tooltip. Previously this returned before the tooltip could ever
+// show for anyone without acharyaAuthorized set, which silently hid the
+// word tools from every ordinary visitor, not just Ask Acharya.
 document.addEventListener('selectionchange', () => {
-  if (!document.body.classList.contains('is-authorized')) return;
-
   const activeTag = document.activeElement ? document.activeElement.tagName : '';
   if (['INPUT', 'TEXTAREA'].includes(activeTag)) {
      const tooltip = document.getElementById('actionTooltip');
