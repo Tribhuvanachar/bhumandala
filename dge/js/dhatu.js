@@ -101,6 +101,7 @@
     h+='<div class="acts">'
       +'<a class="btn ai" href="prakriya.html#'+it.id+'">⚙ प्रक्रिया · तिङन्त</a>'
       +'<a class="btn" href="krdanta.html#'+it.id+'">कृदन्त forms</a>'
+      +'<a class="btn" href="dhatuforms.html#'+it.id+'" title="सन्/णिच्/यङ्/यङ्लुक् व शुद्ध कर्मणि — full lakara tables">रूपाणि · सन्/णिच्/यङ्</a>'
       +'<a class="btn" href="ashtadhyayi.html" title="open the sūtra reader">↔ अष्टाध्यायी</a>'
       +'<button class="btn" data-corpus-search="'+esc(it.dhatu)+'" title="Find every place this root appears across the DGE corpus">🔍 corpus occurrences</button>'
       +'</div>';
