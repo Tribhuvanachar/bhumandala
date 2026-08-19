@@ -1,0 +1,1033 @@
+{
+  "asset": "dasa1",
+  "source_db": "46111a43-dasa1.db",
+  "generated": "2026-08-19",
+  "count_total": 10165,
+  "count_dasaru": 123,
+  "category_form_guess": {
+    "0": "pada",
+    "1": "ugabhoga",
+    "2": "mundige",
+    "3": "pada",
+    "4": "devaranama",
+    "5": "suladi"
+  },
+  "category_confidence": {
+    "0": "default bucket, not a positive signal",
+    "1": "sampled, consistent header keyword",
+    "2": "sampled, consistent header keyword; 'mundige' is not in the existing dasa_pada_text form enum",
+    "3": "sampled, NO consistent header keyword found — least confident mapping",
+    "4": "sampled, consistent structured header (song/singer/raga/tala/style)",
+    "5": "sampled, consistent header keyword"
+  },
+  "counts_by_category_raw": {
+    "0": 11876,
+    "1": 547,
+    "5": 563,
+    "4": 412,
+    "3": 112,
+    "2": 30
+  },
+  "counts_by_dasaru": {
+    "ಪುರಂದರದಾಸರು": 983,
+    "ವಿಜಯದಾಸರು": 890,
+    "ಕಾಖಂಡಕಿ ಶ್ರೀ ಕೃಷ್ಣದಾಸರು": 752,
+    "ರಾಮದಾಸರು": 696,
+    "ಗುರುಗೋವಿಂದವಿಠಲರು": 691,
+    "ಕಾಖಂಡಕಿ ಶ್ರೀ ಮಹಿಪತಿರಾಯರು": 641,
+    "ತುಪಾಕಿ ವೆಂಕಟರಮಣಾಚಾರ್ಯ": 491,
+    "ಅಸೂರಿ ರಾಮಸ್ವಾಮಿಅಯ್ಯಂಗಾರ್": 468,
+    "ಚಿದಾನಂದ ಅವಧೂತರು": 426,
+    "ಪ್ರಸನ್ನವೆಂಕಟದಾಸರು": 376,
+    "ಗುರುರಾಮವಿಠಲ": 326,
+    "ಕನಕದಾಸರು": 286,
+    "ಅಂಬಾಬಾಯಿ": 228,
+    "ಪಾವಂಜೆ ಲಕ್ಷ್ಮೀನಾರ್ಣಪ್ಪಯ್ಯ": 204,
+    "ಶಾಮಸುಂದರ ವಿಠಲ": 201,
+    "ಪ್ರಾಣೇಶದಾಸರು": 195,
+    "ವಿದ್ಯಾಪ್ರಸನ್ನತೀರ್ಥರು": 179,
+    "ಹೆನ್ನೆರಂಗದಾಸರು": 174,
+    "ಜಗನ್ನಾಥದಾಸರು": 170,
+    "ನಂಜನಗೂಡು ತಿರುಮಲಾಂಬಾ": 169,
+    "ಇಂದಿರೇಶರು": 164,
+    "ವಾದಿರಾಜ": 159,
+    "ಕವಿ ಪರಮದೇವದಾಸರು": 150,
+    "ತಿಮ್ಮಪ್ಪದಾಸರು": 144,
+    "ಗೋವಿಂದದಾಸ": 133,
+    "ಚನ್ನಪಟ್ಟಣದ ಅಹೋಬಲದಾಸರು": 125,
+    "ಗಲಗಲಿಅವ್ವನವರು": 120,
+    "ಸರಸ್ವತಿ ಬಾಯಿ": 118,
+    "ಪ್ರಸನ್ನ ಶ್ರೀನಿವಾಸದಾಸರು": 116,
+    "ಶಾಮಶರ್ಮರು": 111,
+    "ನರಸಿಂಹವಿಠಲರು": 106,
+    "ಸರಗೂರು ವೆಂಕಟವರದಾರ್ಯರು": 104,
+    "ರಂಗೇಶವಿಠಲದಾಸರು": 103,
+    "ಕೃಷ್ಣವಿಠಲದಾಸರು": 102,
+    "ವೀರನಾರಾಯಣ": 99,
+    "ವೆಂಕಟವರದಾರ್ಯರು": 97,
+    "ವ್ಯಾಸರಾಯರು": 93,
+    "ಶಂಕರಭಟ್ಟ ಅಗ್ನಿಹೋತ್ರಿ": 92,
+    "ತಂದೆವರದಗೋಪಾಲವಿಠಲರು": 91,
+    "ಕಾರ್ಪರ ನರಹರಿದಾಸರು": 88,
+    "ಕರ್ಕಿ ಕೇಶವದಾಸ": 84,
+    "ಬೇಟೆರಾಯ ದೀಕ್ಷಿತರು": 83,
+    "ಭಾವತರಕರು": 80,
+    "ನಿಡಗುರುಕಿ ಜೀವೂಬಾಯಿ": 80,
+    "ಗುರುಜಗನ್ನಾಥದಾಸರು": 78,
+    "ವರಾವಾಣಿರಾಮರಾಯದಾಸರು": 77,
+    "ಲಕ್ಷ್ಮೀನಾರಯಣರಾಯರು": 74,
+    "ಶ್ರೀಪಾದರಾಜರು": 71,
+    "ಹನುಮೇಶವಿಠಲ": 70,
+    "ಬೆಳ್ಳೆ ದಾಸಪ್ಪಯ್ಯ": 68,
+    "ಸದಾನಂದರು": 67,
+    "ಉರಗಾದ್ರಿವಾಸವಿಠಲದಾಸರು": 67,
+    "ಬೇಲೂರು ವೈಕುಂಠದಾಸರು": 65,
+    "ವರಹತಿಮ್ಮಪ್ಪ": 65,
+    "ಶ್ರೀದವಿಠಲರು": 61,
+    "ಮೋಹನದಾಸರು": 57,
+    "ಗೋಪಾಲದಾಸರು": 53,
+    "ಕೆಳದಿ ವೆಂಕಣ್ಣ ಕವಿ": 53,
+    "ವ್ಯಾಸತತ್ವಜ್ಞದಾಸರು": 52,
+    "ಜಯೇಶವಿಠಲ": 51,
+    "ಜಕ್ಕಪ್ಪಯ್ಯನವರು": 50,
+    "ಗುರುವಿಜಯವಿಠ್ಠಲರು": 50,
+    "ಭೂಪತಿ ವಿಠಲರು": 50,
+    "ಯದುಗಿರಿಯಮ್ಮ": 44,
+    "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ": 42,
+    "ಅಚಲಾನಂದದಾಸ": 42,
+    "ಭಟಕಳ ಅಪ್ಪಯ್ಯ": 41,
+    "ವೆಂಕಟ್ರಾವ್": 39,
+    "ರಾಧಾಬಾಯಿ": 37,
+    "ವಿಶ್ವೆಂದ್ರತೀರ್ಥ": 37,
+    "ನಾರಾಯಣದಾಸರು": 37,
+    "ಕಳಸದ ಸುಂದರಮ್ಮ": 34,
+    "ರುಕ್ಮಾಂಗದರು": 33,
+    "ವಿಜಯ ರಾಮಚಂದ್ರವಿಠಲ": 31,
+    "ಸಿರಿಗುರುತಂದೆವರದವಿಠಲರು": 30,
+    "ಭೀಮಾಶಂಕರ": 28,
+    "ಶ್ರೀಶಪ್ರಾಣೇಶವಿಠಲರು": 28,
+    "ಬಾಗೇಪಲ್ಲಿ ಶೇಷದಾಸರು": 28,
+    "ಕವಿ ಲಕ್ಷ್ಮೀಶ": 27,
+    "ಅಸ್ಕಿಹಾಳ ಗೋವಿಂದ": 27,
+    "ಶಾಂತಿಬಾಯಿ": 27,
+    "ಪ್ರದ್ಯುಮ್ನತೀರ್ಥರು": 26,
+    "ವೇಣುಗೋಪಾಲದಾಸರು": 25,
+    "ತುಳಸೀರಾಮದಾಸರು": 24,
+    "ಅನ್ಯದಾಸರು": 24,
+    "ವ್ಯಾಸವಿಠ್ಠಲರು": 23,
+    "ಸಿರಿವತ್ಸಾಂಕಿತರು": 22,
+    "ಗೋಪಾಲಾರ್ಯರು": 22,
+    "ಓರಬಾಯಿ ಲಕ್ಷ್ಮೀದೇವಮ್ಮ": 20,
+    "ಗುರುಪ್ರಾಣೇಶವಿಠಲರು": 19,
+    "ವರದೇಶವಿಠಲ": 19,
+    "ವೆಂಕಟದಾಸರು": 18,
+    "ರಂಗದಾಸರು": 17,
+    "ವಿದ್ಯಾರತ್ನಾಕರತೀರ್ಥರು": 16,
+    "ಜ್ಞಾನಬೋದಕರು": 16,
+    "ಮಳಿಗೆ ರಂಗಸ್ವಾಮಿದಾಸರು": 16,
+    "ರಘುರಾಮವಿಠಲದಾಸರು": 15,
+    "ಶ್ರೀಶ ಕೇಶವದಾಸರು": 15,
+    "ತಂದೆ ಮುದ್ದುಮೋಹನ ವಿಠಲರು": 15,
+    "ಕೋಸಲ ಪುರೀಶರ": 14,
+    "ಸರಸಾಬಾಯಿ": 13,
+    "ಕದರುಂಡಲಗಿ ಹನುಮಯ್ಯ": 12,
+    "ಗುರುತಂದೆವರದಗೋಪಾಲವಿಠಲರು": 12,
+    "ಸಂಪತ್ತಯ್ಯಂಗಾರ್": 10,
+    "ವೆಂಕಟೇಶವಿಟ್ಠಲ": 10,
+    "ಸಿರಿಗೋವಿಂದವಿಠಲ": 9,
+    "ಐಹೊಳೆ ವೆಂಕಟೇಶ": 9,
+    "ಮಹಾನಿಥಿವಿಠಲ": 9,
+    "ಗುಂಡಮ್ಮ": 8,
+    "ವಿಜಯೀಂದ್ರತೀರ್ಥರು": 7,
+    "ತಂದೆ ಶ್ರೀನರಹರಿ": 7,
+    "ಹೊಸಕೆರೆ ಚಿದಂಬರಯ್ಯನವರು": 7,
+    "ಮುದ್ದುಮೋಹನವಿಠಲದಾಸರು": 6,
+    "ಅನಂತಾದ್ರೀಶರು": 6,
+    "ಗೋಪತಿವಿಠಲರು": 6,
+    "ಕದರುಂಡಲಗೀಶರು": 6,
+    "ರಮಾಪತಿವಿಠಲರು": 5,
+    "ನರಸಿಂಹ": 5,
+    "ಕಮಲಪತಿವಿಠ್ಠಲರು": 5,
+    "ಕೇಶವವಿಠ್ಠಲರು": 5,
+    "ಸಿರಿವಿಠಲರು": 5,
+    "ಬಡಣ್ಣಯ್ಯಾಚಾರ್ಯರು": 5,
+    "ಶ್ರೀನಿಧಿವಿಠಲರು": 4,
+    "ಶಿವರಾಮರು": 4,
+    "ರಾಜಗೋಪಾಲದಾಸರು": 3,
+    "ಗುರುರಾಮಲಿಂಗ": 3,
+    "ಸಿದ್ಧಗುರುತ್ರಿಪುರಾಂತಕ": 2,
+    "ಗುರುಇಂದಿರೇಶರು": 2,
+    "ಬೋಳಾರಾ ವಾಸುದೇವಯ್ಯ": 2,
+    "ವಿದ್ಯಾಕಾಂತಯತಿಗಳು": 2,
+    "ಹಸನ್ಮುಖ ವಿಠಲರು": 2,
+    "ಶ್ರೀಪತಿ": 1,
+    "ವಿಶ್ವಪತಿ": 1,
+    "ಪಾಂಡುರಂಗ": 1,
+    "ಪರಿಶಿಷ್ಟಂ": 1
+  },
+  "needs_review_count": 154,
+  "dasaru": [
+    {
+      "slug": "kakhamdaki_sri_krsnadasaru",
+      "dasaru_id": 17,
+      "composer": "ಕಾಖಂಡಕಿ ಶ್ರೀ ಕೃಷ್ಣದಾಸರು",
+      "count": 752,
+      "file": "dasaru/kakhamdaki_sri_krsnadasaru.json"
+    },
+    {
+      "slug": "ramadasaru",
+      "dasaru_id": 86,
+      "composer": "ರಾಮದಾಸರು",
+      "count": 696,
+      "file": "dasaru/ramadasaru.json"
+    },
+    {
+      "slug": "gurugovimdavithalaru",
+      "dasaru_id": 127,
+      "composer": "ಗುರುಗೋವಿಂದವಿಠಲರು",
+      "count": 691,
+      "file": "dasaru/gurugovimdavithalaru.json"
+    },
+    {
+      "slug": "kakhamdaki_sri_mahipatirayaru",
+      "dasaru_id": 21,
+      "composer": "ಕಾಖಂಡಕಿ ಶ್ರೀ ಮಹಿಪತಿರಾಯರು",
+      "count": 641,
+      "file": "dasaru/kakhamdaki_sri_mahipatirayaru.json"
+    },
+    {
+      "slug": "tupaki_vemkataramanacarya",
+      "dasaru_id": 48,
+      "composer": "ತುಪಾಕಿ ವೆಂಕಟರಮಣಾಚಾರ್ಯ",
+      "count": 491,
+      "file": "dasaru/tupaki_vemkataramanacarya.json"
+    },
+    {
+      "slug": "asuri_ramasvamiayyamgar",
+      "dasaru_id": 107,
+      "composer": "ಅಸೂರಿ ರಾಮಸ್ವಾಮಿಅಯ್ಯಂಗಾರ್",
+      "count": 468,
+      "file": "dasaru/asuri_ramasvamiayyamgar.json"
+    },
+    {
+      "slug": "cidanamda_avadhutaru",
+      "dasaru_id": 125,
+      "composer": "ಚಿದಾನಂದ ಅವಧೂತರು",
+      "count": 426,
+      "file": "dasaru/cidanamda_avadhutaru.json"
+    },
+    {
+      "slug": "gururamavithala",
+      "dasaru_id": 47,
+      "composer": "ಗುರುರಾಮವಿಠಲ",
+      "count": 326,
+      "file": "dasaru/gururamavithala.json"
+    },
+    {
+      "slug": "ambabayi",
+      "dasaru_id": 31,
+      "composer": "ಅಂಬಾಬಾಯಿ",
+      "count": 228,
+      "file": "dasaru/ambabayi.json"
+    },
+    {
+      "slug": "pavamje_laksminarnappayya",
+      "dasaru_id": 49,
+      "composer": "ಪಾವಂಜೆ ಲಕ್ಷ್ಮೀನಾರ್ಣಪ್ಪಯ್ಯ",
+      "count": 204,
+      "file": "dasaru/pavamje_laksminarnappayya.json"
+    },
+    {
+      "slug": "samasumdara_vithala",
+      "dasaru_id": 178,
+      "composer": "ಶಾಮಸುಂದರ ವಿಠಲ",
+      "count": 201,
+      "file": "dasaru/samasumdara_vithala.json"
+    },
+    {
+      "slug": "vidyaprasannatirtharu",
+      "dasaru_id": 149,
+      "composer": "ವಿದ್ಯಾಪ್ರಸನ್ನತೀರ್ಥರು",
+      "count": 179,
+      "file": "dasaru/vidyaprasannatirtharu.json"
+    },
+    {
+      "slug": "henneramgadasaru",
+      "dasaru_id": 37,
+      "composer": "ಹೆನ್ನೆರಂಗದಾಸರು",
+      "count": 174,
+      "file": "dasaru/henneramgadasaru.json"
+    },
+    {
+      "slug": "namjanagudu_tirumalamba",
+      "dasaru_id": 192,
+      "composer": "ನಂಜನಗೂಡು ತಿರುಮಲಾಂಬಾ",
+      "count": 169,
+      "file": "dasaru/namjanagudu_tirumalamba.json"
+    },
+    {
+      "slug": "imdiresaru",
+      "dasaru_id": 78,
+      "composer": "ಇಂದಿರೇಶರು",
+      "count": 164,
+      "file": "dasaru/imdiresaru.json"
+    },
+    {
+      "slug": "kavi_paramadevadasaru",
+      "dasaru_id": 43,
+      "composer": "ಕವಿ ಪರಮದೇವದಾಸರು",
+      "count": 150,
+      "file": "dasaru/kavi_paramadevadasaru.json"
+    },
+    {
+      "slug": "timmappadasaru",
+      "dasaru_id": 208,
+      "composer": "ತಿಮ್ಮಪ್ಪದಾಸರು",
+      "count": 144,
+      "file": "dasaru/timmappadasaru.json"
+    },
+    {
+      "slug": "govimdadasa",
+      "dasaru_id": 40,
+      "composer": "ಗೋವಿಂದದಾಸ",
+      "count": 133,
+      "file": "dasaru/govimdadasa.json"
+    },
+    {
+      "slug": "cannapattanada_ahobaladasaru",
+      "dasaru_id": 23,
+      "composer": "ಚನ್ನಪಟ್ಟಣದ ಅಹೋಬಲದಾಸರು",
+      "count": 125,
+      "file": "dasaru/cannapattanada_ahobaladasaru.json"
+    },
+    {
+      "slug": "galagaliavvanavaru",
+      "dasaru_id": 29,
+      "composer": "ಗಲಗಲಿಅವ್ವನವರು",
+      "count": 120,
+      "file": "dasaru/galagaliavvanavaru.json"
+    },
+    {
+      "slug": "sarasvati_bayi",
+      "dasaru_id": 194,
+      "composer": "ಸರಸ್ವತಿ ಬಾಯಿ",
+      "count": 118,
+      "file": "dasaru/sarasvati_bayi.json"
+    },
+    {
+      "slug": "prasanna_srinivasadasaru",
+      "dasaru_id": 123,
+      "composer": "ಪ್ರಸನ್ನ ಶ್ರೀನಿವಾಸದಾಸರು",
+      "count": 116,
+      "file": "dasaru/prasanna_srinivasadasaru.json"
+    },
+    {
+      "slug": "samasarmaru",
+      "dasaru_id": 55,
+      "composer": "ಶಾಮಶರ್ಮರು",
+      "count": 111,
+      "file": "dasaru/samasarmaru.json"
+    },
+    {
+      "slug": "narasimhavithalaru",
+      "dasaru_id": 104,
+      "composer": "ನರಸಿಂಹವಿಠಲರು",
+      "count": 106,
+      "file": "dasaru/narasimhavithalaru.json"
+    },
+    {
+      "slug": "saraguru_vemkatavaradaryaru",
+      "dasaru_id": 167,
+      "composer": "ಸರಗೂರು ವೆಂಕಟವರದಾರ್ಯರು",
+      "count": 104,
+      "file": "dasaru/saraguru_vemkatavaradaryaru.json"
+    },
+    {
+      "slug": "ramgesavithaladasaru",
+      "dasaru_id": 39,
+      "composer": "ರಂಗೇಶವಿಠಲದಾಸರು",
+      "count": 103,
+      "file": "dasaru/ramgesavithaladasaru.json"
+    },
+    {
+      "slug": "krsnavithaladasaru",
+      "dasaru_id": 166,
+      "composer": "ಕೃಷ್ಣವಿಠಲದಾಸರು",
+      "count": 102,
+      "file": "dasaru/krsnavithaladasaru.json"
+    },
+    {
+      "slug": "viranarayana",
+      "dasaru_id": 98,
+      "composer": "ವೀರನಾರಾಯಣ",
+      "count": 99,
+      "file": "dasaru/viranarayana.json"
+    },
+    {
+      "slug": "vemkatavaradaryaru",
+      "dasaru_id": 186,
+      "composer": "ವೆಂಕಟವರದಾರ್ಯರು",
+      "count": 97,
+      "file": "dasaru/vemkatavaradaryaru.json"
+    },
+    {
+      "slug": "samkarabhatta_agnihotri",
+      "dasaru_id": 41,
+      "composer": "ಶಂಕರಭಟ್ಟ ಅಗ್ನಿಹೋತ್ರಿ",
+      "count": 92,
+      "file": "dasaru/samkarabhatta_agnihotri.json"
+    },
+    {
+      "slug": "tamdevaradagopalavithalaru",
+      "dasaru_id": 77,
+      "composer": "ತಂದೆವರದಗೋಪಾಲವಿಠಲರು",
+      "count": 91,
+      "file": "dasaru/tamdevaradagopalavithalaru.json"
+    },
+    {
+      "slug": "karpara_naraharidasaru",
+      "dasaru_id": 64,
+      "composer": "ಕಾರ್ಪರ ನರಹರಿದಾಸರು",
+      "count": 88,
+      "file": "dasaru/karpara_naraharidasaru.json"
+    },
+    {
+      "slug": "karki_kesavadasa",
+      "dasaru_id": 73,
+      "composer": "ಕರ್ಕಿ ಕೇಶವದಾಸ",
+      "count": 84,
+      "file": "dasaru/karki_kesavadasa.json"
+    },
+    {
+      "slug": "beteraya_diksitaru",
+      "dasaru_id": 42,
+      "composer": "ಬೇಟೆರಾಯ ದೀಕ್ಷಿತರು",
+      "count": 83,
+      "file": "dasaru/beteraya_diksitaru.json"
+    },
+    {
+      "slug": "bhavatarakaru",
+      "dasaru_id": 20,
+      "composer": "ಭಾವತರಕರು",
+      "count": 80,
+      "file": "dasaru/bhavatarakaru.json"
+    },
+    {
+      "slug": "nidaguruki_jivubayi",
+      "dasaru_id": 118,
+      "composer": "ನಿಡಗುರುಕಿ ಜೀವೂಬಾಯಿ",
+      "count": 80,
+      "file": "dasaru/nidaguruki_jivubayi.json"
+    },
+    {
+      "slug": "gurujagannathadasaru",
+      "dasaru_id": 34,
+      "composer": "ಗುರುಜಗನ್ನಾಥದಾಸರು",
+      "count": 78,
+      "file": "dasaru/gurujagannathadasaru.json"
+    },
+    {
+      "slug": "varavaniramarayadasaru",
+      "dasaru_id": 71,
+      "composer": "ವರಾವಾಣಿರಾಮರಾಯದಾಸರು",
+      "count": 77,
+      "file": "dasaru/varavaniramarayadasaru.json"
+    },
+    {
+      "slug": "laksminarayanarayaru",
+      "dasaru_id": 70,
+      "composer": "ಲಕ್ಷ್ಮೀನಾರಯಣರಾಯರು",
+      "count": 74,
+      "file": "dasaru/laksminarayanarayaru.json"
+    },
+    {
+      "slug": "hanumesavithala",
+      "dasaru_id": 176,
+      "composer": "ಹನುಮೇಶವಿಠಲ",
+      "count": 70,
+      "file": "dasaru/hanumesavithala.json"
+    },
+    {
+      "slug": "belle_dasappayya",
+      "dasaru_id": 126,
+      "composer": "ಬೆಳ್ಳೆ ದಾಸಪ್ಪಯ್ಯ",
+      "count": 68,
+      "file": "dasaru/belle_dasappayya.json"
+    },
+    {
+      "slug": "sadanamdaru",
+      "dasaru_id": 66,
+      "composer": "ಸದಾನಂದರು",
+      "count": 67,
+      "file": "dasaru/sadanamdaru.json"
+    },
+    {
+      "slug": "uragadrivasavithaladasaru",
+      "dasaru_id": 137,
+      "composer": "ಉರಗಾದ್ರಿವಾಸವಿಠಲದಾಸರು",
+      "count": 67,
+      "file": "dasaru/uragadrivasavithaladasaru.json"
+    },
+    {
+      "slug": "beluru_vaikumthadasaru",
+      "dasaru_id": 54,
+      "composer": "ಬೇಲೂರು ವೈಕುಂಠದಾಸರು",
+      "count": 65,
+      "file": "dasaru/beluru_vaikumthadasaru.json"
+    },
+    {
+      "slug": "varahatimmappa",
+      "dasaru_id": 75,
+      "composer": "ವರಹತಿಮ್ಮಪ್ಪ",
+      "count": 65,
+      "file": "dasaru/varahatimmappa.json"
+    },
+    {
+      "slug": "sridavithalaru",
+      "dasaru_id": 79,
+      "composer": "ಶ್ರೀದವಿಠಲರು",
+      "count": 61,
+      "file": "dasaru/sridavithalaru.json"
+    },
+    {
+      "slug": "keladi_vemkanna_kavi",
+      "dasaru_id": 172,
+      "composer": "ಕೆಳದಿ ವೆಂಕಣ್ಣ ಕವಿ",
+      "count": 53,
+      "file": "dasaru/keladi_vemkanna_kavi.json"
+    },
+    {
+      "slug": "vyasatatvajnadasaru",
+      "dasaru_id": 63,
+      "composer": "ವ್ಯಾಸತತ್ವಜ್ಞದಾಸರು",
+      "count": 52,
+      "file": "dasaru/vyasatatvajnadasaru.json"
+    },
+    {
+      "slug": "jayesavithala",
+      "dasaru_id": 69,
+      "composer": "ಜಯೇಶವಿಠಲ",
+      "count": 51,
+      "file": "dasaru/jayesavithala.json"
+    },
+    {
+      "slug": "jakkappayyanavaru",
+      "dasaru_id": 111,
+      "composer": "ಜಕ್ಕಪ್ಪಯ್ಯನವರು",
+      "count": 50,
+      "file": "dasaru/jakkappayyanavaru.json"
+    },
+    {
+      "slug": "guruvijayaviththalaru",
+      "dasaru_id": 144,
+      "composer": "ಗುರುವಿಜಯವಿಠ್ಠಲರು",
+      "count": 50,
+      "file": "dasaru/guruvijayaviththalaru.json"
+    },
+    {
+      "slug": "bhupati_vithalaru",
+      "dasaru_id": 212,
+      "composer": "ಭೂಪತಿ ವಿಠಲರು",
+      "count": 50,
+      "file": "dasaru/bhupati_vithalaru.json"
+    },
+    {
+      "slug": "yadugiriyamma",
+      "dasaru_id": 108,
+      "composer": "ಯದುಗಿರಿಯಮ್ಮ",
+      "count": 44,
+      "file": "dasaru/yadugiriyamma.json"
+    },
+    {
+      "slug": "acalanamdadasa",
+      "dasaru_id": 148,
+      "composer": "ಅಚಲಾನಂದದಾಸ",
+      "count": 42,
+      "file": "dasaru/acalanamdadasa.json"
+    },
+    {
+      "slug": "bhatakala_appayya",
+      "dasaru_id": 171,
+      "composer": "ಭಟಕಳ ಅಪ್ಪಯ್ಯ",
+      "count": 41,
+      "file": "dasaru/bhatakala_appayya.json"
+    },
+    {
+      "slug": "vemkatrav",
+      "dasaru_id": 145,
+      "composer": "ವೆಂಕಟ್ರಾವ್",
+      "count": 39,
+      "file": "dasaru/vemkatrav.json"
+    },
+    {
+      "slug": "radhabayi",
+      "dasaru_id": 85,
+      "composer": "ರಾಧಾಬಾಯಿ",
+      "count": 37,
+      "file": "dasaru/radhabayi.json"
+    },
+    {
+      "slug": "visvemdratirtha",
+      "dasaru_id": 169,
+      "composer": "ವಿಶ್ವೆಂದ್ರತೀರ್ಥ",
+      "count": 37,
+      "file": "dasaru/visvemdratirtha.json"
+    },
+    {
+      "slug": "narayanadasaru",
+      "dasaru_id": 209,
+      "composer": "ನಾರಾಯಣದಾಸರು",
+      "count": 37,
+      "file": "dasaru/narayanadasaru.json"
+    },
+    {
+      "slug": "kalasada_sumdaramma",
+      "dasaru_id": 191,
+      "composer": "ಕಳಸದ ಸುಂದರಮ್ಮ",
+      "count": 34,
+      "file": "dasaru/kalasada_sumdaramma.json"
+    },
+    {
+      "slug": "rukmamgadaru",
+      "dasaru_id": 27,
+      "composer": "ರುಕ್ಮಾಂಗದರು",
+      "count": 33,
+      "file": "dasaru/rukmamgadaru.json"
+    },
+    {
+      "slug": "vijaya_ramacamdravithala",
+      "dasaru_id": 35,
+      "composer": "ವಿಜಯ ರಾಮಚಂದ್ರವಿಠಲ",
+      "count": 31,
+      "file": "dasaru/vijaya_ramacamdravithala.json"
+    },
+    {
+      "slug": "sirigurutamdevaradavithalaru",
+      "dasaru_id": 94,
+      "composer": "ಸಿರಿಗುರುತಂದೆವರದವಿಠಲರು",
+      "count": 30,
+      "file": "dasaru/sirigurutamdevaradavithalaru.json"
+    },
+    {
+      "slug": "bhimasamkara",
+      "dasaru_id": 109,
+      "composer": "ಭೀಮಾಶಂಕರ",
+      "count": 28,
+      "file": "dasaru/bhimasamkara.json"
+    },
+    {
+      "slug": "srisapranesavithalaru",
+      "dasaru_id": 122,
+      "composer": "ಶ್ರೀಶಪ್ರಾಣೇಶವಿಠಲರು",
+      "count": 28,
+      "file": "dasaru/srisapranesavithalaru.json"
+    },
+    {
+      "slug": "bagepalli_sesadasaru",
+      "dasaru_id": 165,
+      "composer": "ಬಾಗೇಪಲ್ಲಿ ಶೇಷದಾಸರು",
+      "count": 28,
+      "file": "dasaru/bagepalli_sesadasaru.json"
+    },
+    {
+      "slug": "kavi_laksmisa",
+      "dasaru_id": 26,
+      "composer": "ಕವಿ ಲಕ್ಷ್ಮೀಶ",
+      "count": 27,
+      "file": "dasaru/kavi_laksmisa.json"
+    },
+    {
+      "slug": "askihala_govimda",
+      "dasaru_id": 38,
+      "composer": "ಅಸ್ಕಿಹಾಳ ಗೋವಿಂದ",
+      "count": 27,
+      "file": "dasaru/askihala_govimda.json"
+    },
+    {
+      "slug": "samtibayi",
+      "dasaru_id": 188,
+      "composer": "ಶಾಂತಿಬಾಯಿ",
+      "count": 27,
+      "file": "dasaru/samtibayi.json"
+    },
+    {
+      "slug": "pradyumnatirtharu",
+      "dasaru_id": 68,
+      "composer": "ಪ್ರದ್ಯುಮ್ನತೀರ್ಥರು",
+      "count": 26,
+      "file": "dasaru/pradyumnatirtharu.json"
+    },
+    {
+      "slug": "venugopaladasaru",
+      "dasaru_id": 139,
+      "composer": "ವೇಣುಗೋಪಾಲದಾಸರು",
+      "count": 25,
+      "file": "dasaru/venugopaladasaru.json"
+    },
+    {
+      "slug": "tulasiramadasaru",
+      "dasaru_id": 25,
+      "composer": "ತುಳಸೀರಾಮದಾಸರು",
+      "count": 24,
+      "file": "dasaru/tulasiramadasaru.json"
+    },
+    {
+      "slug": "anyadasaru",
+      "dasaru_id": 185,
+      "composer": "ಅನ್ಯದಾಸರು",
+      "count": 24,
+      "file": "dasaru/anyadasaru.json"
+    },
+    {
+      "slug": "vyasaviththalaru",
+      "dasaru_id": 140,
+      "composer": "ವ್ಯಾಸವಿಠ್ಠಲರು",
+      "count": 23,
+      "file": "dasaru/vyasaviththalaru.json"
+    },
+    {
+      "slug": "sirivatsamkitaru",
+      "dasaru_id": 90,
+      "composer": "ಸಿರಿವತ್ಸಾಂಕಿತರು",
+      "count": 22,
+      "file": "dasaru/sirivatsamkitaru.json"
+    },
+    {
+      "slug": "gopalaryaru",
+      "dasaru_id": 206,
+      "composer": "ಗೋಪಾಲಾರ್ಯರು",
+      "count": 22,
+      "file": "dasaru/gopalaryaru.json"
+    },
+    {
+      "slug": "orabayi_laksmidevamma",
+      "dasaru_id": 84,
+      "composer": "ಓರಬಾಯಿ ಲಕ್ಷ್ಮೀದೇವಮ್ಮ",
+      "count": 20,
+      "file": "dasaru/orabayi_laksmidevamma.json"
+    },
+    {
+      "slug": "gurupranesavithalaru",
+      "dasaru_id": 121,
+      "composer": "ಗುರುಪ್ರಾಣೇಶವಿಠಲರು",
+      "count": 19,
+      "file": "dasaru/gurupranesavithalaru.json"
+    },
+    {
+      "slug": "varadesavithala",
+      "dasaru_id": 129,
+      "composer": "ವರದೇಶವಿಠಲ",
+      "count": 19,
+      "file": "dasaru/varadesavithala.json"
+    },
+    {
+      "slug": "vemkatadasaru",
+      "dasaru_id": 207,
+      "composer": "ವೆಂಕಟದಾಸರು",
+      "count": 18,
+      "file": "dasaru/vemkatadasaru.json"
+    },
+    {
+      "slug": "ramgadasaru",
+      "dasaru_id": 24,
+      "composer": "ರಂಗದಾಸರು",
+      "count": 17,
+      "file": "dasaru/ramgadasaru.json"
+    },
+    {
+      "slug": "vidyaratnakaratirtharu",
+      "dasaru_id": 36,
+      "composer": "ವಿದ್ಯಾರತ್ನಾಕರತೀರ್ಥರು",
+      "count": 16,
+      "file": "dasaru/vidyaratnakaratirtharu.json"
+    },
+    {
+      "slug": "jnanabodakaru",
+      "dasaru_id": 135,
+      "composer": "ಜ್ಞಾನಬೋದಕರು",
+      "count": 16,
+      "file": "dasaru/jnanabodakaru.json"
+    },
+    {
+      "slug": "malige_ramgasvamidasaru",
+      "dasaru_id": 210,
+      "composer": "ಮಳಿಗೆ ರಂಗಸ್ವಾಮಿದಾಸರು",
+      "count": 16,
+      "file": "dasaru/malige_ramgasvamidasaru.json"
+    },
+    {
+      "slug": "raghuramavithaladasaru",
+      "dasaru_id": 141,
+      "composer": "ರಘುರಾಮವಿಠಲದಾಸರು",
+      "count": 15,
+      "file": "dasaru/raghuramavithaladasaru.json"
+    },
+    {
+      "slug": "srisa_kesavadasaru",
+      "dasaru_id": 142,
+      "composer": "ಶ್ರೀಶ ಕೇಶವದಾಸರು",
+      "count": 15,
+      "file": "dasaru/srisa_kesavadasaru.json"
+    },
+    {
+      "slug": "tamde_muddumohana_vithalaru",
+      "dasaru_id": 168,
+      "composer": "ತಂದೆ ಮುದ್ದುಮೋಹನ ವಿಠಲರು",
+      "count": 15,
+      "file": "dasaru/tamde_muddumohana_vithalaru.json"
+    },
+    {
+      "slug": "kosala_purisara",
+      "dasaru_id": 198,
+      "composer": "ಕೋಸಲ ಪುರೀಶರ",
+      "count": 14,
+      "file": "dasaru/kosala_purisara.json"
+    },
+    {
+      "slug": "sarasabayi",
+      "dasaru_id": 190,
+      "composer": "ಸರಸಾಬಾಯಿ",
+      "count": 13,
+      "file": "dasaru/sarasabayi.json"
+    },
+    {
+      "slug": "kadarumdalagi_hanumayya",
+      "dasaru_id": 91,
+      "composer": "ಕದರುಂಡಲಗಿ ಹನುಮಯ್ಯ",
+      "count": 12,
+      "file": "dasaru/kadarumdalagi_hanumayya.json"
+    },
+    {
+      "slug": "gurutamdevaradagopalavithalaru",
+      "dasaru_id": 97,
+      "composer": "ಗುರುತಂದೆವರದಗೋಪಾಲವಿಠಲರು",
+      "count": 12,
+      "file": "dasaru/gurutamdevaradagopalavithalaru.json"
+    },
+    {
+      "slug": "sampattayyamgar",
+      "dasaru_id": 114,
+      "composer": "ಸಂಪತ್ತಯ್ಯಂಗಾರ್",
+      "count": 10,
+      "file": "dasaru/sampattayyamgar.json"
+    },
+    {
+      "slug": "vemkatesavitthala",
+      "dasaru_id": 147,
+      "composer": "ವೆಂಕಟೇಶವಿಟ್ಠಲ",
+      "count": 10,
+      "file": "dasaru/vemkatesavitthala.json"
+    },
+    {
+      "slug": "sirigovimdavithala",
+      "dasaru_id": 103,
+      "composer": "ಸಿರಿಗೋವಿಂದವಿಠಲ",
+      "count": 9,
+      "file": "dasaru/sirigovimdavithala.json"
+    },
+    {
+      "slug": "aihole_vemkatesa",
+      "dasaru_id": 105,
+      "composer": "ಐಹೊಳೆ ವೆಂಕಟೇಶ",
+      "count": 9,
+      "file": "dasaru/aihole_vemkatesa.json"
+    },
+    {
+      "slug": "mahanithivithala",
+      "dasaru_id": 174,
+      "composer": "ಮಹಾನಿಥಿವಿಠಲ",
+      "count": 9,
+      "file": "dasaru/mahanithivithala.json"
+    },
+    {
+      "slug": "gumdamma",
+      "dasaru_id": 193,
+      "composer": "ಗುಂಡಮ್ಮ",
+      "count": 8,
+      "file": "dasaru/gumdamma.json"
+    },
+    {
+      "slug": "vijayimdratirtharu",
+      "dasaru_id": 62,
+      "composer": "ವಿಜಯೀಂದ್ರತೀರ್ಥರು",
+      "count": 7,
+      "file": "dasaru/vijayimdratirtharu.json"
+    },
+    {
+      "slug": "tamde_srinarahari",
+      "dasaru_id": 179,
+      "composer": "ತಂದೆ ಶ್ರೀನರಹರಿ",
+      "count": 7,
+      "file": "dasaru/tamde_srinarahari.json"
+    },
+    {
+      "slug": "hosakere_cidambarayyanavaru",
+      "dasaru_id": 211,
+      "composer": "ಹೊಸಕೆರೆ ಚಿದಂಬರಯ್ಯನವರು",
+      "count": 7,
+      "file": "dasaru/hosakere_cidambarayyanavaru.json"
+    },
+    {
+      "slug": "muddumohanavithaladasaru",
+      "dasaru_id": 33,
+      "composer": "ಮುದ್ದುಮೋಹನವಿಠಲದಾಸರು",
+      "count": 6,
+      "file": "dasaru/muddumohanavithaladasaru.json"
+    },
+    {
+      "slug": "anamtadrisaru",
+      "dasaru_id": 65,
+      "composer": "ಅನಂತಾದ್ರೀಶರು",
+      "count": 6,
+      "file": "dasaru/anamtadrisaru.json"
+    },
+    {
+      "slug": "gopativithalaru",
+      "dasaru_id": 100,
+      "composer": "ಗೋಪತಿವಿಠಲರು",
+      "count": 6,
+      "file": "dasaru/gopativithalaru.json"
+    },
+    {
+      "slug": "kadarumdalagisaru",
+      "dasaru_id": 173,
+      "composer": "ಕದರುಂಡಲಗೀಶರು",
+      "count": 6,
+      "file": "dasaru/kadarumdalagisaru.json"
+    },
+    {
+      "slug": "ramapativithalaru",
+      "dasaru_id": 106,
+      "composer": "ರಮಾಪತಿವಿಠಲರು",
+      "count": 5,
+      "file": "dasaru/ramapativithalaru.json"
+    },
+    {
+      "slug": "narasimha",
+      "dasaru_id": 132,
+      "composer": "ನರಸಿಂಹ",
+      "count": 5,
+      "file": "dasaru/narasimha.json"
+    },
+    {
+      "slug": "kamalapativiththalaru",
+      "dasaru_id": 146,
+      "composer": "ಕಮಲಪತಿವಿಠ್ಠಲರು",
+      "count": 5,
+      "file": "dasaru/kamalapativiththalaru.json"
+    },
+    {
+      "slug": "kesavaviththalaru",
+      "dasaru_id": 164,
+      "composer": "ಕೇಶವವಿಠ್ಠಲರು",
+      "count": 5,
+      "file": "dasaru/kesavaviththalaru.json"
+    },
+    {
+      "slug": "sirivithalaru",
+      "dasaru_id": 180,
+      "composer": "ಸಿರಿವಿಠಲರು",
+      "count": 5,
+      "file": "dasaru/sirivithalaru.json"
+    },
+    {
+      "slug": "badannayyacaryaru",
+      "dasaru_id": 199,
+      "composer": "ಬಡಣ್ಣಯ್ಯಾಚಾರ್ಯರು",
+      "count": 5,
+      "file": "dasaru/badannayyacaryaru.json"
+    },
+    {
+      "slug": "srinidhivithalaru",
+      "dasaru_id": 89,
+      "composer": "ಶ್ರೀನಿಧಿವಿಠಲರು",
+      "count": 4,
+      "file": "dasaru/srinidhivithalaru.json"
+    },
+    {
+      "slug": "sivaramaru",
+      "dasaru_id": 110,
+      "composer": "ಶಿವರಾಮರು",
+      "count": 4,
+      "file": "dasaru/sivaramaru.json"
+    },
+    {
+      "slug": "rajagopaladasaru",
+      "dasaru_id": 101,
+      "composer": "ರಾಜಗೋಪಾಲದಾಸರು",
+      "count": 3,
+      "file": "dasaru/rajagopaladasaru.json"
+    },
+    {
+      "slug": "gururamalimga",
+      "dasaru_id": 130,
+      "composer": "ಗುರುರಾಮಲಿಂಗ",
+      "count": 3,
+      "file": "dasaru/gururamalimga.json"
+    },
+    {
+      "slug": "siddhagurutripuramtaka",
+      "dasaru_id": 134,
+      "composer": "ಸಿದ್ಧಗುರುತ್ರಿಪುರಾಂತಕ",
+      "count": 2,
+      "file": "dasaru/siddhagurutripuramtaka.json"
+    },
+    {
+      "slug": "guruimdiresaru",
+      "dasaru_id": 175,
+      "composer": "ಗುರುಇಂದಿರೇಶರು",
+      "count": 2,
+      "file": "dasaru/guruimdiresaru.json"
+    },
+    {
+      "slug": "bolara_vasudevayya",
+      "dasaru_id": 217,
+      "composer": "ಬೋಳಾರಾ ವಾಸುದೇವಯ್ಯ",
+      "count": 2,
+      "file": "dasaru/bolara_vasudevayya.json"
+    },
+    {
+      "slug": "vidyakamtayatigalu",
+      "dasaru_id": 218,
+      "composer": "ವಿದ್ಯಾಕಾಂತಯತಿಗಳು",
+      "count": 2,
+      "file": "dasaru/vidyakamtayatigalu.json"
+    },
+    {
+      "slug": "hasanmukha_vithalaru",
+      "dasaru_id": 219,
+      "composer": "ಹಸನ್ಮುಖ ವಿಠಲರು",
+      "count": 2,
+      "file": "dasaru/hasanmukha_vithalaru.json"
+    },
+    {
+      "slug": "sripati",
+      "dasaru_id": 131,
+      "composer": "ಶ್ರೀಪತಿ",
+      "count": 1,
+      "file": "dasaru/sripati.json"
+    },
+    {
+      "slug": "visvapati",
+      "dasaru_id": 133,
+      "composer": "ವಿಶ್ವಪತಿ",
+      "count": 1,
+      "file": "dasaru/visvapati.json"
+    },
+    {
+      "slug": "pamduramga",
+      "dasaru_id": 184,
+      "composer": "ಪಾಂಡುರಂಗ",
+      "count": 1,
+      "file": "dasaru/pamduramga.json"
+    },
+    {
+      "slug": "parisistam",
+      "dasaru_id": 200,
+      "composer": "ಪರಿಶಿಷ್ಟಂ",
+      "count": 1,
+      "file": "dasaru/parisistam.json"
+    }
+  ],
+  "note_confirmed_composers_merged_out": "Composers confirmed as duplicates of the web corpus were merged into dge/data/dasa_sahitya/composers/ and removed from here by merge_confirmed_composers.py on 2026-08-19; see that folder's file for the merged record, and ALL_SOURCES_composer_registry.json for which composers those were."
+}
