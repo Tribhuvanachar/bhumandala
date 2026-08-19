@@ -319,6 +319,7 @@ let SITE_CONFIG = null;
     const pt = (k) => ' data-edit="panels.' + key + '.' + k + '"';
 
     let html = `<button class="sheet-close" data-close aria-label="Close">✕</button>
+      <a class="sheet-fullpage-link" href="home-panel.html?panel=${esc(key)}" title="Open this panel as its own page">↗ Full page</a>
       <div class="sheet-eyebrow"${pt('eyebrow')}>${esc(p.eyebrow)}</div>
       <h3 id="sheetTitle"${pt('title')}>${esc(p.title)}</h3>`;
 

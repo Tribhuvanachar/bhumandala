@@ -479,6 +479,16 @@ body.leaving #veil { opacity: 1; }
 }
 .sheet-close:hover { border-color: rgba(232,178,77,.6); color: var(--text); }
 
+.sheet-fullpage-link {
+  position: sticky; top: 0; float: right; margin-right: 44px;
+  height: 34px; padding: 0 12px; border-radius: 999px; box-sizing: border-box;
+  border: 1px solid var(--hairline); background: rgba(20,16,12,.9);
+  color: var(--text-dim); font-size: 12px; text-decoration: none;
+  display: grid; place-items: center;
+  transition: border-color .3s var(--ease-soft), color .3s var(--ease-soft);
+}
+.sheet-fullpage-link:hover { border-color: rgba(232,178,77,.6); color: var(--text); }
+
 .sheet-eyebrow { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 8px; }
 .sheet h3 {
   font-family: var(--font-serif);
