@@ -274,6 +274,8 @@
         return it;
       });
       $("#dh-total").textContent = state.all.length.toLocaleString();
+      var q0=new URLSearchParams(location.search).get("q");
+      if(q0){ state.q=q0; $("#dh-search").value=q0; }
       recompute();
       var h0=hashId();
       if(h0 && state.all.some(function(x){return x.id===h0;})){ openById(h0); }

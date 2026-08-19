@@ -960,3 +960,46 @@ function renderAcharyaQueryButtons() {
   }
 }
 document.addEventListener('DOMContentLoaded', renderAcharyaQueryButtons);
+
+// Word-level tools on the selection tooltip: unlike the AI "Word" button
+// above (which asks an LLM), these navigate to this app's own real,
+// structured data for the selected word rather than generating an answer.
+function dgeSelectedWordText() {
+  try { return (window.getSelection().toString() || '').trim(); }
+  catch (e) { return ''; }
+}
+function dgeHideActionTooltip() {
+  const tooltip = document.getElementById('actionTooltip');
+  if (tooltip) tooltip.style.display = 'none';
+}
+
+// Opens in a new tab, deliberately: the reader is mid-verse on this page,
+// and losing that position to look up one word's declension would cost
+// more than the lookup is worth.
+window.dgeOpenShabdaForSelection = function(e) {
+  if (e) e.preventDefault();
+  const word = dgeSelectedWordText();
+  if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
+  dgeHideActionTooltip();
+  window.open('shabda.html?q=' + encodeURIComponent(word), '_blank');
+};
+
+window.dgeOpenDhatuForSelection = function(e) {
+  if (e) e.preventDefault();
+  const word = dgeSelectedWordText();
+  if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
+  dgeHideActionTooltip();
+  window.open('dhatu.html?q=' + encodeURIComponent(word), '_blank');
+};
+
+// "Intelligence mapping" -- where else the word appears in the corpus
+// (including which section, e.g. Vedanga), reusing the same corpus-wide
+// search dhatu.js's own "corpus occurrences" button already opens rather
+// than building a second index that would drift from it.
+window.dgeOpenCorpusSearchForSelection = function(e) {
+  if (e) e.preventDefault();
+  const word = dgeSelectedWordText();
+  if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
+  dgeHideActionTooltip();
+  if (typeof window.DGEGlobalSearch === 'object' && window.DGEGlobalSearch.open) window.DGEGlobalSearch.open(word);
+};

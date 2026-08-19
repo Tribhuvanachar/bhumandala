@@ -125,10 +125,15 @@
     syncLingaChips(); wire();
     fetch(URL).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(d){
       state.all=(d.items||[]).map(function(it){
-        it._hay=((it.word||"")+" "+(it.artha||"")+" "+(it.artha_hin||"")+" "+(it.artha_eng||"")).toLowerCase();
+        // forms included so a search for an inflected word (e.g. परस्य,
+        // pasted in from the reader's "Shabda" word-tool) finds the
+        // headword it declines from, not just an exact headword match.
+        it._hay=((it.word||"")+" "+(it.artha||"")+" "+(it.artha_hin||"")+" "+(it.artha_eng||"")+" "+(it.forms||"")).toLowerCase();
         return it;
       });
       $("#sh-total").textContent = state.all.length.toLocaleString();
+      var q0=new URLSearchParams(location.search).get("q");
+      if(q0){ state.q=q0; $("#sh-search").value=q0; }
       recompute();
       var h0=hashId();
       if(h0 && state.all.some(function(x){return x.id===h0;})){ openById(h0); }
