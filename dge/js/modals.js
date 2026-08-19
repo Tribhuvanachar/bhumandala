@@ -154,6 +154,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// menu.js's config-driven popup items only ever call a named window
+// function with no arguments (item.action -> window.<action>()), so
+// opening a specific modal by id from menu.json needs its own zero-arg
+// wrapper rather than menu.json trying to pass openModal an argument.
+window.dgeOpenOurStory = function() { window.openModal('ourStoryModal'); };
+
 window.openSponsorModal = function() {
   const body = document.getElementById('sponsorModalBody');
   if (!body || typeof SPONSOR_CONFIG === 'undefined' || !SPONSOR_CONFIG) return;

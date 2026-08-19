@@ -887,9 +887,6 @@ window.sendAcharyaFollowUp = async function() {
 
 // Follow-up mic input (independent tiny SpeechRecognition instance so it
 // doesn't collide with the search box's listener in voice.js).
-const DGE_SCRIPT_TO_SPEECH_LANG_AI = {
-  devanagari: 'hi-IN', iast: 'en-IN', kannada: 'kn-IN', telugu: 'te-IN', tamil: 'ta-IN', malayalam: 'ml-IN'
-};
 let dgeFollowUpRecognition = null;
 window.startFollowUpVoiceInput = function() {
   const Ctor = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -897,7 +894,9 @@ window.startFollowUpVoiceInput = function() {
   if (!Ctor || !input) return;
 
   dgeFollowUpRecognition = new Ctor();
-  dgeFollowUpRecognition.lang = DGE_SCRIPT_TO_SPEECH_LANG_AI[window.activeScript] || 'en-IN';
+  // Always English — see the identical fix and its reasoning in voice.js's
+  // startSearchVoiceInput.
+  dgeFollowUpRecognition.lang = 'en-IN';
   dgeFollowUpRecognition.interimResults = true;
   dgeFollowUpRecognition.onresult = (event) => {
     let transcript = '';
