@@ -1,0 +1,4446 @@
+{
+  "_readme": [
+    "A partial correspondence between the standard Ashtadhyayi sutra numbering",
+    "(1.1.1, 1.1.2, ...) and Siddhanta Kaumudi's own reading order",
+    "(kaumudiIndex, 1-6481), for sutras where this repo's sutrapatha text and",
+    "Kaumudi's own citation of that sutra match exactly after normalizing",
+    "spacing/punctuation.",
+    "",
+    "Source: ashtadhyayi-com/data (github.com/ashtadhyayi-com/data, commit 24109f7, ska/data.txt -- \"ska_sutrapath\"); its README: \"free to use ... provided that appropriate credits are mentioned\".",
+    "which is Siddhanta Kaumudi's own text in ITS reading order -- the same",
+    "sutra can appear at multiple Kaumudi positions (it is cited wherever it is",
+    "topically relevant); kaumudiIndex here is its FIRST such position.",
+    "",
+    "DELIBERATELY INCOMPLETE, on purpose, not an oversight: only 1105 of 3962 sutras are covered -- see this script's",
+    "own module docstring (tools/build_kaumudi_order.py) for why, and why a",
+    "looser fuzzy match was not used instead.",
+    "",
+    "Regenerate with tools/build_kaumudi_order.py if either source updates.",
+    "Do not hand-edit -- fix the matching/normalization in that script instead."
+  ],
+  "source": "https://github.com/ashtadhyayi-com/data (ska/data.txt)",
+  "totalSutras": 3962,
+  "matchedCount": 1105,
+  "items": [
+    {
+      "id": "1.2.45",
+      "kaumudiIndex": 5
+    },
+    {
+      "id": "1.1.25",
+      "kaumudiIndex": 14
+    },
+    {
+      "id": "1.1.21",
+      "kaumudiIndex": 16
+    },
+    {
+      "id": "1.4.101",
+      "kaumudiIndex": 22
+    },
+    {
+      "id": "1.2.42",
+      "kaumudiIndex": 29
+    },
+    {
+      "id": "1.4.49",
+      "kaumudiIndex": 38
+    },
+    {
+      "id": "1.4.51",
+      "kaumudiIndex": 40
+    },
+    {
+      "id": "1.4.48",
+      "kaumudiIndex": 49
+    },
+    {
+      "id": "1.4.42",
+      "kaumudiIndex": 55
+    },
+    {
+      "id": "1.4.33",
+      "kaumudiIndex": 57
+    },
+    {
+      "id": "1.4.34",
+      "kaumudiIndex": 58
+    },
+    {
+      "id": "1.4.35",
+      "kaumudiIndex": 59
+    },
+    {
+      "id": "1.4.37",
+      "kaumudiIndex": 61
+    },
+    {
+      "id": "1.4.39",
+      "kaumudiIndex": 62
+    },
+    {
+      "id": "1.4.40",
+      "kaumudiIndex": 63
+    },
+    {
+      "id": "1.4.41",
+      "kaumudiIndex": 64
+    },
+    {
+      "id": "1.4.24",
+      "kaumudiIndex": 65
+    },
+    {
+      "id": "1.4.25",
+      "kaumudiIndex": 67
+    },
+    {
+      "id": "1.4.26",
+      "kaumudiIndex": 68
+    },
+    {
+      "id": "1.4.29",
+      "kaumudiIndex": 71
+    },
+    {
+      "id": "1.4.31",
+      "kaumudiIndex": 73
+    },
+    {
+      "id": "1.1.44",
+      "kaumudiIndex": 80
+    },
+    {
+      "id": "1.1.2",
+      "kaumudiIndex": 81
+    },
+    {
+      "id": "1.1.1",
+      "kaumudiIndex": 82
+    },
+    {
+      "id": "1.1.72",
+      "kaumudiIndex": 83
+    },
+    {
+      "id": "1.1.64",
+      "kaumudiIndex": 85
+    },
+    {
+      "id": "1.1.59",
+      "kaumudiIndex": 88
+    },
+    {
+      "id": "1.1.60",
+      "kaumudiIndex": 89
+    },
+    {
+      "id": "1.2.29",
+      "kaumudiIndex": 93
+    },
+    {
+      "id": "1.2.30",
+      "kaumudiIndex": 94
+    },
+    {
+      "id": "1.2.31",
+      "kaumudiIndex": 95
+    },
+    {
+      "id": "1.2.32",
+      "kaumudiIndex": 96
+    },
+    {
+      "id": "1.4.12",
+      "kaumudiIndex": 99
+    },
+    {
+      "id": "1.1.8",
+      "kaumudiIndex": 100
+    },
+    {
+      "id": "1.1.10",
+      "kaumudiIndex": 102
+    },
+    {
+      "id": "1.1.11",
+      "kaumudiIndex": 105
+    },
+    {
+      "id": "1.1.15",
+      "kaumudiIndex": 108
+    },
+    {
+      "id": "1.1.34",
+      "kaumudiIndex": 115
+    },
+    {
+      "id": "1.4.56",
+      "kaumudiIndex": 117
+    },
+    {
+      "id": "1.4.61",
+      "kaumudiIndex": 141
+    },
+    {
+      "id": "1.4.62",
+      "kaumudiIndex": 142
+    },
+    {
+      "id": "1.4.63",
+      "kaumudiIndex": 143
+    },
+    {
+      "id": "1.4.64",
+      "kaumudiIndex": 144
+    },
+    {
+      "id": "1.4.69",
+      "kaumudiIndex": 148
+    },
+    {
+      "id": "1.4.76",
+      "kaumudiIndex": 155
+    },
+    {
+      "id": "1.4.78",
+      "kaumudiIndex": 157
+    },
+    {
+      "id": "1.4.79",
+      "kaumudiIndex": 158
+    },
+    {
+      "id": "1.4.82",
+      "kaumudiIndex": 159
+    },
+    {
+      "id": "1.4.85",
+      "kaumudiIndex": 162
+    },
+    {
+      "id": "1.4.86",
+      "kaumudiIndex": 163
+    },
+    {
+      "id": "1.4.87",
+      "kaumudiIndex": 164
+    },
+    {
+      "id": "2.1.12",
+      "kaumudiIndex": 165
+    },
+    {
+      "id": "1.4.89",
+      "kaumudiIndex": 166
+    },
+    {
+      "id": "1.4.90",
+      "kaumudiIndex": 167
+    },
+    {
+      "id": "1.4.91",
+      "kaumudiIndex": 168
+    },
+    {
+      "id": "1.4.92",
+      "kaumudiIndex": 169
+    },
+    {
+      "id": "1.4.93",
+      "kaumudiIndex": 170
+    },
+    {
+      "id": "1.4.94",
+      "kaumudiIndex": 171
+    },
+    {
+      "id": "1.4.95",
+      "kaumudiIndex": 172
+    },
+    {
+      "id": "1.4.96",
+      "kaumudiIndex": 173
+    },
+    {
+      "id": "1.1.38",
+      "kaumudiIndex": 181
+    },
+    {
+      "id": "1.1.39",
+      "kaumudiIndex": 182
+    },
+    {
+      "id": "3.4.114",
+      "kaumudiIndex": 210
+    },
+    {
+      "id": "3.4.116",
+      "kaumudiIndex": 212
+    },
+    {
+      "id": "1.3.3",
+      "kaumudiIndex": 220
+    },
+    {
+      "id": "1.3.5",
+      "kaumudiIndex": 224
+    },
+    {
+      "id": "1.3.6",
+      "kaumudiIndex": 225
+    },
+    {
+      "id": "1.3.7",
+      "kaumudiIndex": 226
+    },
+    {
+      "id": "1.3.8",
+      "kaumudiIndex": 227
+    },
+    {
+      "id": "1.1.67",
+      "kaumudiIndex": 230
+    },
+    {
+      "id": "1.1.71",
+      "kaumudiIndex": 231
+    },
+    {
+      "id": "1.1.46",
+      "kaumudiIndex": 248
+    },
+    {
+      "id": "1.1.49",
+      "kaumudiIndex": 251
+    },
+    {
+      "id": "1.1.47",
+      "kaumudiIndex": 252
+    },
+    {
+      "id": "1.1.3",
+      "kaumudiIndex": 253
+    },
+    {
+      "id": "1.1.55",
+      "kaumudiIndex": 255
+    },
+    {
+      "id": "1.1.56",
+      "kaumudiIndex": 256
+    },
+    {
+      "id": "1.1.58",
+      "kaumudiIndex": 262
+    },
+    {
+      "id": "1.1.20",
+      "kaumudiIndex": 264
+    },
+    {
+      "id": "1.1.61",
+      "kaumudiIndex": 270
+    },
+    {
+      "id": "2.1.1",
+      "kaumudiIndex": 285
+    },
+    {
+      "id": "1.4.2",
+      "kaumudiIndex": 332
+    },
+    {
+      "id": "3.1.24",
+      "kaumudiIndex": 382
+    },
+    {
+      "id": "3.1.29",
+      "kaumudiIndex": 413
+    },
+    {
+      "id": "3.1.30",
+      "kaumudiIndex": 414
+    },
+    {
+      "id": "3.1.39",
+      "kaumudiIndex": 420
+    },
+    {
+      "id": "3.1.33",
+      "kaumudiIndex": 423
+    },
+    {
+      "id": "2.4.79",
+      "kaumudiIndex": 428
+    },
+    {
+      "id": "3.1.62",
+      "kaumudiIndex": 443
+    },
+    {
+      "id": "3.1.63",
+      "kaumudiIndex": 444
+    },
+    {
+      "id": "1.3.13",
+      "kaumudiIndex": 448
+    },
+    {
+      "id": "3.1.67",
+      "kaumudiIndex": 450
+    },
+    {
+      "id": "3.1.68",
+      "kaumudiIndex": 455
+    },
+    {
+      "id": "2.4.75",
+      "kaumudiIndex": 457
+    },
+    {
+      "id": "3.1.69",
+      "kaumudiIndex": 458
+    },
+    {
+      "id": "3.1.71",
+      "kaumudiIndex": 461
+    },
+    {
+      "id": "3.1.72",
+      "kaumudiIndex": 462
+    },
+    {
+      "id": "3.1.77",
+      "kaumudiIndex": 464
+    },
+    {
+      "id": "3.1.73",
+      "kaumudiIndex": 467
+    },
+    {
+      "id": "3.1.76",
+      "kaumudiIndex": 470
+    },
+    {
+      "id": "3.1.97",
+      "kaumudiIndex": 484
+    },
+    {
+      "id": "3.1.98",
+      "kaumudiIndex": 487
+    },
+    {
+      "id": "3.1.102",
+      "kaumudiIndex": 492
+    },
+    {
+      "id": "3.1.103",
+      "kaumudiIndex": 493
+    },
+    {
+      "id": "3.1.104",
+      "kaumudiIndex": 494
+    },
+    {
+      "id": "3.1.106",
+      "kaumudiIndex": 496
+    },
+    {
+      "id": "3.1.112",
+      "kaumudiIndex": 503
+    },
+    {
+      "id": "3.1.115",
+      "kaumudiIndex": 509
+    },
+    {
+      "id": "3.1.124",
+      "kaumudiIndex": 517
+    },
+    {
+      "id": "3.1.125",
+      "kaumudiIndex": 520
+    },
+    {
+      "id": "3.1.132",
+      "kaumudiIndex": 530
+    },
+    {
+      "id": "3.1.136",
+      "kaumudiIndex": 556
+    },
+    {
+      "id": "3.1.144",
+      "kaumudiIndex": 572
+    },
+    {
+      "id": "3.1.146",
+      "kaumudiIndex": 573
+    },
+    {
+      "id": "3.1.147",
+      "kaumudiIndex": 574
+    },
+    {
+      "id": "3.1.150",
+      "kaumudiIndex": 578
+    },
+    {
+      "id": "3.2.1",
+      "kaumudiIndex": 579
+    },
+    {
+      "id": "3.2.2",
+      "kaumudiIndex": 580
+    },
+    {
+      "id": "3.2.12",
+      "kaumudiIndex": 592
+    },
+    {
+      "id": "3.2.14",
+      "kaumudiIndex": 597
+    },
+    {
+      "id": "3.2.16",
+      "kaumudiIndex": 604
+    },
+    {
+      "id": "3.2.19",
+      "kaumudiIndex": 607
+    },
+    {
+      "id": "3.2.25",
+      "kaumudiIndex": 612
+    },
+    {
+      "id": "3.2.28",
+      "kaumudiIndex": 616
+    },
+    {
+      "id": "3.2.49",
+      "kaumudiIndex": 648
+    },
+    {
+      "id": "3.2.51",
+      "kaumudiIndex": 654
+    },
+    {
+      "id": "3.2.55",
+      "kaumudiIndex": 663
+    },
+    {
+      "id": "3.2.58",
+      "kaumudiIndex": 669
+    },
+    {
+      "id": "3.2.62",
+      "kaumudiIndex": 675
+    },
+    {
+      "id": "3.2.75",
+      "kaumudiIndex": 677
+    },
+    {
+      "id": "3.2.76",
+      "kaumudiIndex": 678
+    },
+    {
+      "id": "3.2.68",
+      "kaumudiIndex": 680
+    },
+    {
+      "id": "3.3.170",
+      "kaumudiIndex": 683
+    },
+    {
+      "id": "3.2.79",
+      "kaumudiIndex": 688
+    },
+    {
+      "id": "3.2.82",
+      "kaumudiIndex": 690
+    },
+    {
+      "id": "3.2.84",
+      "kaumudiIndex": 692
+    },
+    {
+      "id": "3.2.85",
+      "kaumudiIndex": 693
+    },
+    {
+      "id": "3.2.90",
+      "kaumudiIndex": 697
+    },
+    {
+      "id": "3.2.92",
+      "kaumudiIndex": 699
+    },
+    {
+      "id": "3.2.94",
+      "kaumudiIndex": 702
+    },
+    {
+      "id": "3.2.96",
+      "kaumudiIndex": 704
+    },
+    {
+      "id": "3.2.97",
+      "kaumudiIndex": 706
+    },
+    {
+      "id": "3.2.98",
+      "kaumudiIndex": 707
+    },
+    {
+      "id": "3.2.99",
+      "kaumudiIndex": 709
+    },
+    {
+      "id": "3.2.104",
+      "kaumudiIndex": 720
+    },
+    {
+      "id": "3.2.110",
+      "kaumudiIndex": 724
+    },
+    {
+      "id": "3.2.111",
+      "kaumudiIndex": 728
+    },
+    {
+      "id": "3.2.115",
+      "kaumudiIndex": 733
+    },
+    {
+      "id": "3.2.116",
+      "kaumudiIndex": 736
+    },
+    {
+      "id": "3.2.118",
+      "kaumudiIndex": 738
+    },
+    {
+      "id": "3.2.119",
+      "kaumudiIndex": 739
+    },
+    {
+      "id": "3.2.120",
+      "kaumudiIndex": 740
+    },
+    {
+      "id": "3.2.122",
+      "kaumudiIndex": 742
+    },
+    {
+      "id": "2.3.47",
+      "kaumudiIndex": 750
+    },
+    {
+      "id": "3.2.126",
+      "kaumudiIndex": 751
+    },
+    {
+      "id": "3.2.135",
+      "kaumudiIndex": 767
+    },
+    {
+      "id": "3.2.144",
+      "kaumudiIndex": 783
+    },
+    {
+      "id": "3.2.147",
+      "kaumudiIndex": 796
+    },
+    {
+      "id": "3.2.154",
+      "kaumudiIndex": 802
+    },
+    {
+      "id": "3.2.155",
+      "kaumudiIndex": 803
+    },
+    {
+      "id": "3.2.159",
+      "kaumudiIndex": 807
+    },
+    {
+      "id": "3.2.160",
+      "kaumudiIndex": 808
+    },
+    {
+      "id": "3.2.165",
+      "kaumudiIndex": 815
+    },
+    {
+      "id": "3.2.175",
+      "kaumudiIndex": 826
+    },
+    {
+      "id": "3.2.181",
+      "kaumudiIndex": 838
+    },
+    {
+      "id": "3.2.185",
+      "kaumudiIndex": 843
+    },
+    {
+      "id": "3.2.186",
+      "kaumudiIndex": 844
+    },
+    {
+      "id": "3.2.138",
+      "kaumudiIndex": 1143
+    },
+    {
+      "id": "3.3.3",
+      "kaumudiIndex": 1653
+    },
+    {
+      "id": "3.3.4",
+      "kaumudiIndex": 1654
+    },
+    {
+      "id": "3.3.6",
+      "kaumudiIndex": 1656
+    },
+    {
+      "id": "3.3.7",
+      "kaumudiIndex": 1657
+    },
+    {
+      "id": "3.3.8",
+      "kaumudiIndex": 1658
+    },
+    {
+      "id": "3.3.175",
+      "kaumudiIndex": 1660
+    },
+    {
+      "id": "3.3.15",
+      "kaumudiIndex": 1662
+    },
+    {
+      "id": "3.3.11",
+      "kaumudiIndex": 1671
+    },
+    {
+      "id": "2.4.48",
+      "kaumudiIndex": 1679
+    },
+    {
+      "id": "3.3.22",
+      "kaumudiIndex": 1683
+    },
+    {
+      "id": "3.3.25",
+      "kaumudiIndex": 1684
+    },
+    {
+      "id": "1.3.43",
+      "kaumudiIndex": 1686
+    },
+    {
+      "id": "3.3.29",
+      "kaumudiIndex": 1696
+    },
+    {
+      "id": "3.3.31",
+      "kaumudiIndex": 1699
+    },
+    {
+      "id": "3.3.33",
+      "kaumudiIndex": 1701
+    },
+    {
+      "id": "3.3.34",
+      "kaumudiIndex": 1702
+    },
+    {
+      "id": "3.3.36",
+      "kaumudiIndex": 1716
+    },
+    {
+      "id": "3.3.47",
+      "kaumudiIndex": 1717
+    },
+    {
+      "id": "3.3.46",
+      "kaumudiIndex": 1718
+    },
+    {
+      "id": "3.3.53",
+      "kaumudiIndex": 1720
+    },
+    {
+      "id": "3.3.55",
+      "kaumudiIndex": 1723
+    },
+    {
+      "id": "3.3.54",
+      "kaumudiIndex": 1724
+    },
+    {
+      "id": "3.3.56",
+      "kaumudiIndex": 1727
+    },
+    {
+      "id": "3.3.70",
+      "kaumudiIndex": 1731
+    },
+    {
+      "id": "3.3.60",
+      "kaumudiIndex": 1733
+    },
+    {
+      "id": "3.3.66",
+      "kaumudiIndex": 1740
+    },
+    {
+      "id": "3.3.69",
+      "kaumudiIndex": 1743
+    },
+    {
+      "id": "3.3.73",
+      "kaumudiIndex": 1746
+    },
+    {
+      "id": "3.3.75",
+      "kaumudiIndex": 1750
+    },
+    {
+      "id": "3.3.83",
+      "kaumudiIndex": 1758
+    },
+    {
+      "id": "3.3.85",
+      "kaumudiIndex": 1759
+    },
+    {
+      "id": "3.3.88",
+      "kaumudiIndex": 1763
+    },
+    {
+      "id": "3.3.89",
+      "kaumudiIndex": 1764
+    },
+    {
+      "id": "3.3.91",
+      "kaumudiIndex": 1767
+    },
+    {
+      "id": "3.3.94",
+      "kaumudiIndex": 1772
+    },
+    {
+      "id": "3.3.100",
+      "kaumudiIndex": 1783
+    },
+    {
+      "id": "3.3.112",
+      "kaumudiIndex": 1808
+    },
+    {
+      "id": "2.1.43",
+      "kaumudiIndex": 1811
+    },
+    {
+      "id": "3.3.114",
+      "kaumudiIndex": 1816
+    },
+    {
+      "id": "3.3.115",
+      "kaumudiIndex": 1817
+    },
+    {
+      "id": "3.3.117",
+      "kaumudiIndex": 1819
+    },
+    {
+      "id": "3.3.123",
+      "kaumudiIndex": 1830
+    },
+    {
+      "id": "3.3.124",
+      "kaumudiIndex": 1831
+    },
+    {
+      "id": "3.3.125",
+      "kaumudiIndex": 1832
+    },
+    {
+      "id": "3.3.128",
+      "kaumudiIndex": 1838
+    },
+    {
+      "id": "3.3.132",
+      "kaumudiIndex": 1841
+    },
+    {
+      "id": "3.3.133",
+      "kaumudiIndex": 1842
+    },
+    {
+      "id": "3.3.134",
+      "kaumudiIndex": 1843
+    },
+    {
+      "id": "3.3.135",
+      "kaumudiIndex": 1846
+    },
+    {
+      "id": "3.3.140",
+      "kaumudiIndex": 1851
+    },
+    {
+      "id": "3.3.142",
+      "kaumudiIndex": 1853
+    },
+    {
+      "id": "3.3.144",
+      "kaumudiIndex": 1855
+    },
+    {
+      "id": "3.3.146",
+      "kaumudiIndex": 1857
+    },
+    {
+      "id": "3.3.151",
+      "kaumudiIndex": 1861
+    },
+    {
+      "id": "3.3.153",
+      "kaumudiIndex": 1863
+    },
+    {
+      "id": "3.3.162",
+      "kaumudiIndex": 1870
+    },
+    {
+      "id": "3.3.9",
+      "kaumudiIndex": 1872
+    },
+    {
+      "id": "3.3.165",
+      "kaumudiIndex": 1873
+    },
+    {
+      "id": "3.4.1",
+      "kaumudiIndex": 1877
+    },
+    {
+      "id": "3.4.4",
+      "kaumudiIndex": 1881
+    },
+    {
+      "id": "3.4.5",
+      "kaumudiIndex": 1882
+    },
+    {
+      "id": "3.4.20",
+      "kaumudiIndex": 1885
+    },
+    {
+      "id": "3.4.22",
+      "kaumudiIndex": 1888
+    },
+    {
+      "id": "3.4.23",
+      "kaumudiIndex": 1889
+    },
+    {
+      "id": "3.4.25",
+      "kaumudiIndex": 1891
+    },
+    {
+      "id": "3.4.28",
+      "kaumudiIndex": 1894
+    },
+    {
+      "id": "3.4.31",
+      "kaumudiIndex": 1897
+    },
+    {
+      "id": "3.4.34",
+      "kaumudiIndex": 1901
+    },
+    {
+      "id": "3.4.35",
+      "kaumudiIndex": 1902
+    },
+    {
+      "id": "3.4.38",
+      "kaumudiIndex": 1907
+    },
+    {
+      "id": "3.4.44",
+      "kaumudiIndex": 1913
+    },
+    {
+      "id": "3.4.46",
+      "kaumudiIndex": 1915
+    },
+    {
+      "id": "3.4.49",
+      "kaumudiIndex": 1919
+    },
+    {
+      "id": "3.4.55",
+      "kaumudiIndex": 1925
+    },
+    {
+      "id": "3.4.60",
+      "kaumudiIndex": 1930
+    },
+    {
+      "id": "3.4.64",
+      "kaumudiIndex": 1933
+    },
+    {
+      "id": "7.1.3",
+      "kaumudiIndex": 1941
+    },
+    {
+      "id": "7.1.4",
+      "kaumudiIndex": 1942
+    },
+    {
+      "id": "7.1.34",
+      "kaumudiIndex": 1951
+    },
+    {
+      "id": "3.4.90",
+      "kaumudiIndex": 1959
+    },
+    {
+      "id": "3.4.91",
+      "kaumudiIndex": 1960
+    },
+    {
+      "id": "3.4.105",
+      "kaumudiIndex": 1970
+    },
+    {
+      "id": "3.4.106",
+      "kaumudiIndex": 1971
+    },
+    {
+      "id": "3.4.108",
+      "kaumudiIndex": 1975
+    },
+    {
+      "id": "1.3.17",
+      "kaumudiIndex": 1987
+    },
+    {
+      "id": "1.3.18",
+      "kaumudiIndex": 1988
+    },
+    {
+      "id": "1.3.19",
+      "kaumudiIndex": 1989
+    },
+    {
+      "id": "2.3.55",
+      "kaumudiIndex": 1999
+    },
+    {
+      "id": "1.3.27",
+      "kaumudiIndex": 2012
+    },
+    {
+      "id": "1.3.31",
+      "kaumudiIndex": 2015
+    },
+    {
+      "id": "1.3.33",
+      "kaumudiIndex": 2017
+    },
+    {
+      "id": "1.3.34",
+      "kaumudiIndex": 2018
+    },
+    {
+      "id": "1.3.39",
+      "kaumudiIndex": 2023
+    },
+    {
+      "id": "1.3.41",
+      "kaumudiIndex": 2025
+    },
+    {
+      "id": "1.3.44",
+      "kaumudiIndex": 2028
+    },
+    {
+      "id": "1.3.26",
+      "kaumudiIndex": 2029
+    },
+    {
+      "id": "1.3.46",
+      "kaumudiIndex": 2030
+    },
+    {
+      "id": "1.3.53",
+      "kaumudiIndex": 2039
+    },
+    {
+      "id": "1.3.54",
+      "kaumudiIndex": 2040
+    },
+    {
+      "id": "1.3.55",
+      "kaumudiIndex": 2041
+    },
+    {
+      "id": "1.3.65",
+      "kaumudiIndex": 2051
+    },
+    {
+      "id": "1.3.67",
+      "kaumudiIndex": 2053
+    },
+    {
+      "id": "1.3.69",
+      "kaumudiIndex": 2055
+    },
+    {
+      "id": "1.3.71",
+      "kaumudiIndex": 2057
+    },
+    {
+      "id": "1.3.76",
+      "kaumudiIndex": 2063
+    },
+    {
+      "id": "1.3.79",
+      "kaumudiIndex": 2068
+    },
+    {
+      "id": "1.3.80",
+      "kaumudiIndex": 2069
+    },
+    {
+      "id": "1.3.81",
+      "kaumudiIndex": 2070
+    },
+    {
+      "id": "1.3.90",
+      "kaumudiIndex": 2079
+    },
+    {
+      "id": "1.3.91",
+      "kaumudiIndex": 2080
+    },
+    {
+      "id": "1.3.92",
+      "kaumudiIndex": 2081
+    },
+    {
+      "id": "1.3.93",
+      "kaumudiIndex": 2082
+    },
+    {
+      "id": "1.4.106",
+      "kaumudiIndex": 2087
+    },
+    {
+      "id": "1.4.107",
+      "kaumudiIndex": 2088
+    },
+    {
+      "id": "3.2.178",
+      "kaumudiIndex": 2094
+    },
+    {
+      "id": "7.1.9",
+      "kaumudiIndex": 2098
+    },
+    {
+      "id": "7.1.17",
+      "kaumudiIndex": 2104
+    },
+    {
+      "id": "1.1.30",
+      "kaumudiIndex": 2108
+    },
+    {
+      "id": "7.1.21",
+      "kaumudiIndex": 2116
+    },
+    {
+      "id": "7.1.23",
+      "kaumudiIndex": 2119
+    },
+    {
+      "id": "7.1.24",
+      "kaumudiIndex": 2120
+    },
+    {
+      "id": "7.1.27",
+      "kaumudiIndex": 2122
+    },
+    {
+      "id": "7.1.31",
+      "kaumudiIndex": 2126
+    },
+    {
+      "id": "2.3.2",
+      "kaumudiIndex": 2140
+    },
+    {
+      "id": "2.3.6",
+      "kaumudiIndex": 2152
+    },
+    {
+      "id": "2.3.23",
+      "kaumudiIndex": 2165
+    },
+    {
+      "id": "2.3.13",
+      "kaumudiIndex": 2172
+    },
+    {
+      "id": "2.3.15",
+      "kaumudiIndex": 2177
+    },
+    {
+      "id": "2.3.28",
+      "kaumudiIndex": 2183
+    },
+    {
+      "id": "2.3.37",
+      "kaumudiIndex": 2206
+    },
+    {
+      "id": "2.3.38",
+      "kaumudiIndex": 2207
+    },
+    {
+      "id": "2.3.39",
+      "kaumudiIndex": 2208
+    },
+    {
+      "id": "2.3.50",
+      "kaumudiIndex": 2218
+    },
+    {
+      "id": "2.3.53",
+      "kaumudiIndex": 2220
+    },
+    {
+      "id": "2.3.58",
+      "kaumudiIndex": 2228
+    },
+    {
+      "id": "2.3.51",
+      "kaumudiIndex": 2230
+    },
+    {
+      "id": "2.3.65",
+      "kaumudiIndex": 2232
+    },
+    {
+      "id": "2.1.5",
+      "kaumudiIndex": 2253
+    },
+    {
+      "id": "2.1.7",
+      "kaumudiIndex": 2260
+    },
+    {
+      "id": "2.1.21",
+      "kaumudiIndex": 2278
+    },
+    {
+      "id": "2.1.25",
+      "kaumudiIndex": 2282
+    },
+    {
+      "id": "2.1.27",
+      "kaumudiIndex": 2283
+    },
+    {
+      "id": "2.1.31",
+      "kaumudiIndex": 2289
+    },
+    {
+      "id": "2.1.32",
+      "kaumudiIndex": 2290
+    },
+    {
+      "id": "2.1.38",
+      "kaumudiIndex": 2299
+    },
+    {
+      "id": "2.1.45",
+      "kaumudiIndex": 2309
+    },
+    {
+      "id": "2.1.49",
+      "kaumudiIndex": 2323
+    },
+    {
+      "id": "2.1.50",
+      "kaumudiIndex": 2324
+    },
+    {
+      "id": "2.1.54",
+      "kaumudiIndex": 2326
+    },
+    {
+      "id": "2.1.70",
+      "kaumudiIndex": 2334
+    },
+    {
+      "id": "2.1.68",
+      "kaumudiIndex": 2338
+    },
+    {
+      "id": "2.1.59",
+      "kaumudiIndex": 2340
+    },
+    {
+      "id": "2.1.62",
+      "kaumudiIndex": 2342
+    },
+    {
+      "id": "2.1.63",
+      "kaumudiIndex": 2343
+    },
+    {
+      "id": "2.2.5",
+      "kaumudiIndex": 2370
+    },
+    {
+      "id": "2.2.6",
+      "kaumudiIndex": 2371
+    },
+    {
+      "id": "2.2.8",
+      "kaumudiIndex": 2375
+    },
+    {
+      "id": "2.2.10",
+      "kaumudiIndex": 2382
+    },
+    {
+      "id": "2.2.11",
+      "kaumudiIndex": 2384
+    },
+    {
+      "id": "2.2.17",
+      "kaumudiIndex": 2389
+    },
+    {
+      "id": "2.2.19",
+      "kaumudiIndex": 2403
+    },
+    {
+      "id": "2.2.23",
+      "kaumudiIndex": 2408
+    },
+    {
+      "id": "2.2.26",
+      "kaumudiIndex": 2422
+    },
+    {
+      "id": "2.4.8",
+      "kaumudiIndex": 2450
+    },
+    {
+      "id": "2.2.30",
+      "kaumudiIndex": 2465
+    },
+    {
+      "id": "2.2.33",
+      "kaumudiIndex": 2476
+    },
+    {
+      "id": "2.2.34",
+      "kaumudiIndex": 2479
+    },
+    {
+      "id": "1.2.66",
+      "kaumudiIndex": 2514
+    },
+    {
+      "id": "1.2.67",
+      "kaumudiIndex": 2515
+    },
+    {
+      "id": "1.2.68",
+      "kaumudiIndex": 2519
+    },
+    {
+      "id": "1.2.72",
+      "kaumudiIndex": 2520
+    },
+    {
+      "id": "2.1.22",
+      "kaumudiIndex": 2527
+    },
+    {
+      "id": "1.2.47",
+      "kaumudiIndex": 2548
+    },
+    {
+      "id": "1.2.52",
+      "kaumudiIndex": 2553
+    },
+    {
+      "id": "4.1.3",
+      "kaumudiIndex": 2558
+    },
+    {
+      "id": "4.1.21",
+      "kaumudiIndex": 2596
+    },
+    {
+      "id": "5.4.133",
+      "kaumudiIndex": 2630
+    },
+    {
+      "id": "4.1.58",
+      "kaumudiIndex": 2661
+    },
+    {
+      "id": "4.1.65",
+      "kaumudiIndex": 2665
+    },
+    {
+      "id": "4.1.66",
+      "kaumudiIndex": 2667
+    },
+    {
+      "id": "4.1.74",
+      "kaumudiIndex": 2683
+    },
+    {
+      "id": "4.1.77",
+      "kaumudiIndex": 2685
+    },
+    {
+      "id": "4.1.92",
+      "kaumudiIndex": 2714
+    },
+    {
+      "id": "4.1.95",
+      "kaumudiIndex": 2717
+    },
+    {
+      "id": "4.1.111",
+      "kaumudiIndex": 2760
+    },
+    {
+      "id": "4.1.100",
+      "kaumudiIndex": 2771
+    },
+    {
+      "id": "4.1.116",
+      "kaumudiIndex": 2790
+    },
+    {
+      "id": "4.1.121",
+      "kaumudiIndex": 2795
+    },
+    {
+      "id": "4.1.124",
+      "kaumudiIndex": 2804
+    },
+    {
+      "id": "4.1.125",
+      "kaumudiIndex": 2805
+    },
+    {
+      "id": "4.1.127",
+      "kaumudiIndex": 2807
+    },
+    {
+      "id": "4.1.109",
+      "kaumudiIndex": 2809
+    },
+    {
+      "id": "4.1.145",
+      "kaumudiIndex": 2814
+    },
+    {
+      "id": "4.1.141",
+      "kaumudiIndex": 2825
+    },
+    {
+      "id": "4.1.135",
+      "kaumudiIndex": 2826
+    },
+    {
+      "id": "4.1.167",
+      "kaumudiIndex": 2863
+    },
+    {
+      "id": "4.1.169",
+      "kaumudiIndex": 2864
+    },
+    {
+      "id": "4.2.1",
+      "kaumudiIndex": 2906
+    },
+    {
+      "id": "4.2.5",
+      "kaumudiIndex": 2914
+    },
+    {
+      "id": "4.2.8",
+      "kaumudiIndex": 2917
+    },
+    {
+      "id": "4.3.80",
+      "kaumudiIndex": 2918
+    },
+    {
+      "id": "4.2.9",
+      "kaumudiIndex": 2919
+    },
+    {
+      "id": "4.2.10",
+      "kaumudiIndex": 2920
+    },
+    {
+      "id": "4.2.17",
+      "kaumudiIndex": 2927
+    },
+    {
+      "id": "4.2.19",
+      "kaumudiIndex": 2929
+    },
+    {
+      "id": "4.2.25",
+      "kaumudiIndex": 2935
+    },
+    {
+      "id": "4.2.29",
+      "kaumudiIndex": 2940
+    },
+    {
+      "id": "4.2.30",
+      "kaumudiIndex": 2941
+    },
+    {
+      "id": "4.2.33",
+      "kaumudiIndex": 2943
+    },
+    {
+      "id": "4.2.58",
+      "kaumudiIndex": 2949
+    },
+    {
+      "id": "4.2.61",
+      "kaumudiIndex": 2960
+    },
+    {
+      "id": "4.2.36",
+      "kaumudiIndex": 2965
+    },
+    {
+      "id": "4.2.39",
+      "kaumudiIndex": 2970
+    },
+    {
+      "id": "4.2.70",
+      "kaumudiIndex": 3004
+    },
+    {
+      "id": "4.2.72",
+      "kaumudiIndex": 3006
+    },
+    {
+      "id": "4.2.73",
+      "kaumudiIndex": 3007
+    },
+    {
+      "id": "4.2.75",
+      "kaumudiIndex": 3013
+    },
+    {
+      "id": "4.2.78",
+      "kaumudiIndex": 3017
+    },
+    {
+      "id": "4.3.29",
+      "kaumudiIndex": 3036
+    },
+    {
+      "id": "4.2.88",
+      "kaumudiIndex": 3050
+    },
+    {
+      "id": "4.2.82",
+      "kaumudiIndex": 3054
+    },
+    {
+      "id": "4.2.91",
+      "kaumudiIndex": 3058
+    },
+    {
+      "id": "4.2.93",
+      "kaumudiIndex": 3062
+    },
+    {
+      "id": "4.2.101",
+      "kaumudiIndex": 3072
+    },
+    {
+      "id": "4.2.102",
+      "kaumudiIndex": 3073
+    },
+    {
+      "id": "4.2.107",
+      "kaumudiIndex": 3084
+    },
+    {
+      "id": "4.2.111",
+      "kaumudiIndex": 3092
+    },
+    {
+      "id": "4.2.113",
+      "kaumudiIndex": 3094
+    },
+    {
+      "id": "4.2.131",
+      "kaumudiIndex": 3127
+    },
+    {
+      "id": "4.2.133",
+      "kaumudiIndex": 3129
+    },
+    {
+      "id": "5.2.102",
+      "kaumudiIndex": 3152
+    },
+    {
+      "id": "4.3.4",
+      "kaumudiIndex": 3155
+    },
+    {
+      "id": "4.3.25",
+      "kaumudiIndex": 3179
+    },
+    {
+      "id": "4.3.26",
+      "kaumudiIndex": 3180
+    },
+    {
+      "id": "4.3.27",
+      "kaumudiIndex": 3181
+    },
+    {
+      "id": "4.3.43",
+      "kaumudiIndex": 3195
+    },
+    {
+      "id": "4.3.44",
+      "kaumudiIndex": 3196
+    },
+    {
+      "id": "4.3.45",
+      "kaumudiIndex": 3197
+    },
+    {
+      "id": "4.3.50",
+      "kaumudiIndex": 3202
+    },
+    {
+      "id": "4.3.51",
+      "kaumudiIndex": 3203
+    },
+    {
+      "id": "4.3.52",
+      "kaumudiIndex": 3204
+    },
+    {
+      "id": "4.3.53",
+      "kaumudiIndex": 3205
+    },
+    {
+      "id": "4.3.60",
+      "kaumudiIndex": 3219
+    },
+    {
+      "id": "4.3.62",
+      "kaumudiIndex": 3225
+    },
+    {
+      "id": "4.3.67",
+      "kaumudiIndex": 3238
+    },
+    {
+      "id": "4.3.69",
+      "kaumudiIndex": 3240
+    },
+    {
+      "id": "4.3.70",
+      "kaumudiIndex": 3241
+    },
+    {
+      "id": "4.3.71",
+      "kaumudiIndex": 3242
+    },
+    {
+      "id": "4.3.74",
+      "kaumudiIndex": 3248
+    },
+    {
+      "id": "4.3.82",
+      "kaumudiIndex": 3255
+    },
+    {
+      "id": "4.3.83",
+      "kaumudiIndex": 3257
+    },
+    {
+      "id": "4.3.85",
+      "kaumudiIndex": 3259
+    },
+    {
+      "id": "4.3.86",
+      "kaumudiIndex": 3260
+    },
+    {
+      "id": "4.3.87",
+      "kaumudiIndex": 3261
+    },
+    {
+      "id": "4.3.89",
+      "kaumudiIndex": 3265
+    },
+    {
+      "id": "4.3.90",
+      "kaumudiIndex": 3266
+    },
+    {
+      "id": "4.3.95",
+      "kaumudiIndex": 3274
+    },
+    {
+      "id": "4.3.98",
+      "kaumudiIndex": 3277
+    },
+    {
+      "id": "4.3.101",
+      "kaumudiIndex": 3281
+    },
+    {
+      "id": "4.3.102",
+      "kaumudiIndex": 3286
+    },
+    {
+      "id": "4.3.107",
+      "kaumudiIndex": 3290
+    },
+    {
+      "id": "4.3.108",
+      "kaumudiIndex": 3291
+    },
+    {
+      "id": "4.3.109",
+      "kaumudiIndex": 3292
+    },
+    {
+      "id": "4.3.112",
+      "kaumudiIndex": 3300
+    },
+    {
+      "id": "4.3.113",
+      "kaumudiIndex": 3301
+    },
+    {
+      "id": "4.3.114",
+      "kaumudiIndex": 3302
+    },
+    {
+      "id": "4.3.115",
+      "kaumudiIndex": 3303
+    },
+    {
+      "id": "4.3.116",
+      "kaumudiIndex": 3304
+    },
+    {
+      "id": "4.3.119",
+      "kaumudiIndex": 3306
+    },
+    {
+      "id": "4.3.120",
+      "kaumudiIndex": 3309
+    },
+    {
+      "id": "5.2.86",
+      "kaumudiIndex": 3311
+    },
+    {
+      "id": "4.3.124",
+      "kaumudiIndex": 3316
+    },
+    {
+      "id": "4.3.128",
+      "kaumudiIndex": 3327
+    },
+    {
+      "id": "4.3.132",
+      "kaumudiIndex": 3331
+    },
+    {
+      "id": "4.3.146",
+      "kaumudiIndex": 3348
+    },
+    {
+      "id": "4.3.145",
+      "kaumudiIndex": 3351
+    },
+    {
+      "id": "4.3.154",
+      "kaumudiIndex": 3352
+    },
+    {
+      "id": "4.3.140",
+      "kaumudiIndex": 3353
+    },
+    {
+      "id": "4.3.155",
+      "kaumudiIndex": 3354
+    },
+    {
+      "id": "4.3.159",
+      "kaumudiIndex": 3361
+    },
+    {
+      "id": "4.3.160",
+      "kaumudiIndex": 3362
+    },
+    {
+      "id": "4.3.161",
+      "kaumudiIndex": 3363
+    },
+    {
+      "id": "4.3.163",
+      "kaumudiIndex": 3365
+    },
+    {
+      "id": "4.3.164",
+      "kaumudiIndex": 3366
+    },
+    {
+      "id": "4.3.166",
+      "kaumudiIndex": 3373
+    },
+    {
+      "id": "4.4.1",
+      "kaumudiIndex": 3375
+    },
+    {
+      "id": "4.4.3",
+      "kaumudiIndex": 3378
+    },
+    {
+      "id": "4.4.5",
+      "kaumudiIndex": 3380
+    },
+    {
+      "id": "4.4.6",
+      "kaumudiIndex": 3381
+    },
+    {
+      "id": "4.4.8",
+      "kaumudiIndex": 3383
+    },
+    {
+      "id": "4.4.9",
+      "kaumudiIndex": 3384
+    },
+    {
+      "id": "4.4.11",
+      "kaumudiIndex": 3386
+    },
+    {
+      "id": "4.4.14",
+      "kaumudiIndex": 3392
+    },
+    {
+      "id": "4.4.18",
+      "kaumudiIndex": 3397
+    },
+    {
+      "id": "4.4.23",
+      "kaumudiIndex": 3405
+    },
+    {
+      "id": "4.4.24",
+      "kaumudiIndex": 3406
+    },
+    {
+      "id": "4.4.25",
+      "kaumudiIndex": 3407
+    },
+    {
+      "id": "4.4.32",
+      "kaumudiIndex": 3412
+    },
+    {
+      "id": "4.4.33",
+      "kaumudiIndex": 3413
+    },
+    {
+      "id": "4.4.34",
+      "kaumudiIndex": 3414
+    },
+    {
+      "id": "4.4.42",
+      "kaumudiIndex": 3423
+    },
+    {
+      "id": "4.4.43",
+      "kaumudiIndex": 3424
+    },
+    {
+      "id": "4.4.44",
+      "kaumudiIndex": 3425
+    },
+    {
+      "id": "4.4.45",
+      "kaumudiIndex": 3426
+    },
+    {
+      "id": "4.4.47",
+      "kaumudiIndex": 3432
+    },
+    {
+      "id": "4.4.49",
+      "kaumudiIndex": 3433
+    },
+    {
+      "id": "4.4.50",
+      "kaumudiIndex": 3437
+    },
+    {
+      "id": "4.4.51",
+      "kaumudiIndex": 3438
+    },
+    {
+      "id": "4.4.52",
+      "kaumudiIndex": 3439
+    },
+    {
+      "id": "4.4.57",
+      "kaumudiIndex": 3444
+    },
+    {
+      "id": "4.4.58",
+      "kaumudiIndex": 3445
+    },
+    {
+      "id": "4.4.63",
+      "kaumudiIndex": 3452
+    },
+    {
+      "id": "4.4.64",
+      "kaumudiIndex": 3453
+    },
+    {
+      "id": "4.4.69",
+      "kaumudiIndex": 3458
+    },
+    {
+      "id": "4.4.70",
+      "kaumudiIndex": 3459
+    },
+    {
+      "id": "4.4.74",
+      "kaumudiIndex": 3463
+    },
+    {
+      "id": "4.4.75",
+      "kaumudiIndex": 3465
+    },
+    {
+      "id": "4.4.80",
+      "kaumudiIndex": 3470
+    },
+    {
+      "id": "4.4.82",
+      "kaumudiIndex": 3472
+    },
+    {
+      "id": "4.4.84",
+      "kaumudiIndex": 3474
+    },
+    {
+      "id": "4.4.85",
+      "kaumudiIndex": 3475
+    },
+    {
+      "id": "4.4.86",
+      "kaumudiIndex": 3476
+    },
+    {
+      "id": "4.4.89",
+      "kaumudiIndex": 3479
+    },
+    {
+      "id": "4.4.90",
+      "kaumudiIndex": 3480
+    },
+    {
+      "id": "4.4.94",
+      "kaumudiIndex": 3489
+    },
+    {
+      "id": "4.4.95",
+      "kaumudiIndex": 3490
+    },
+    {
+      "id": "4.4.96",
+      "kaumudiIndex": 3491
+    },
+    {
+      "id": "4.4.98",
+      "kaumudiIndex": 3496
+    },
+    {
+      "id": "4.4.104",
+      "kaumudiIndex": 3497
+    },
+    {
+      "id": "4.4.100",
+      "kaumudiIndex": 3501
+    },
+    {
+      "id": "5.1.1",
+      "kaumudiIndex": 3512
+    },
+    {
+      "id": "5.1.5",
+      "kaumudiIndex": 3520
+    },
+    {
+      "id": "5.1.6",
+      "kaumudiIndex": 3522
+    },
+    {
+      "id": "5.1.8",
+      "kaumudiIndex": 3524
+    },
+    {
+      "id": "5.1.11",
+      "kaumudiIndex": 3531
+    },
+    {
+      "id": "5.1.17",
+      "kaumudiIndex": 3538
+    },
+    {
+      "id": "5.1.18",
+      "kaumudiIndex": 3539
+    },
+    {
+      "id": "5.1.32",
+      "kaumudiIndex": 3556
+    },
+    {
+      "id": "5.1.44",
+      "kaumudiIndex": 3563
+    },
+    {
+      "id": "5.1.45",
+      "kaumudiIndex": 3564
+    },
+    {
+      "id": "5.1.37",
+      "kaumudiIndex": 3566
+    },
+    {
+      "id": "5.1.39",
+      "kaumudiIndex": 3569
+    },
+    {
+      "id": "5.1.47",
+      "kaumudiIndex": 3575
+    },
+    {
+      "id": "5.1.48",
+      "kaumudiIndex": 3576
+    },
+    {
+      "id": "5.1.56",
+      "kaumudiIndex": 3577
+    },
+    {
+      "id": "5.3.97",
+      "kaumudiIndex": 3580
+    },
+    {
+      "id": "5.1.59",
+      "kaumudiIndex": 3584
+    },
+    {
+      "id": "5.1.64",
+      "kaumudiIndex": 3599
+    },
+    {
+      "id": "5.1.77",
+      "kaumudiIndex": 3615
+    },
+    {
+      "id": "4.2.67",
+      "kaumudiIndex": 3616
+    },
+    {
+      "id": "5.1.80",
+      "kaumudiIndex": 3619
+    },
+    {
+      "id": "5.1.81",
+      "kaumudiIndex": 3620
+    },
+    {
+      "id": "5.1.83",
+      "kaumudiIndex": 3622
+    },
+    {
+      "id": "5.1.84",
+      "kaumudiIndex": 3623
+    },
+    {
+      "id": "5.1.85",
+      "kaumudiIndex": 3624
+    },
+    {
+      "id": "5.1.86",
+      "kaumudiIndex": 3625
+    },
+    {
+      "id": "5.1.87",
+      "kaumudiIndex": 3626
+    },
+    {
+      "id": "5.1.88",
+      "kaumudiIndex": 3627
+    },
+    {
+      "id": "5.1.93",
+      "kaumudiIndex": 3630
+    },
+    {
+      "id": "5.1.101",
+      "kaumudiIndex": 3650
+    },
+    {
+      "id": "5.1.102",
+      "kaumudiIndex": 3651
+    },
+    {
+      "id": "5.1.106",
+      "kaumudiIndex": 3654
+    },
+    {
+      "id": "5.1.108",
+      "kaumudiIndex": 3656
+    },
+    {
+      "id": "5.1.114",
+      "kaumudiIndex": 3668
+    },
+    {
+      "id": "5.1.115",
+      "kaumudiIndex": 3669
+    },
+    {
+      "id": "5.1.116",
+      "kaumudiIndex": 3670
+    },
+    {
+      "id": "5.1.118",
+      "kaumudiIndex": 3671
+    },
+    {
+      "id": "5.1.124",
+      "kaumudiIndex": 3701
+    },
+    {
+      "id": "5.1.135",
+      "kaumudiIndex": 3720
+    },
+    {
+      "id": "5.2.8",
+      "kaumudiIndex": 3731
+    },
+    {
+      "id": "5.2.10",
+      "kaumudiIndex": 3735
+    },
+    {
+      "id": "5.2.17",
+      "kaumudiIndex": 3740
+    },
+    {
+      "id": "5.2.25",
+      "kaumudiIndex": 3748
+    },
+    {
+      "id": "5.2.26",
+      "kaumudiIndex": 3749
+    },
+    {
+      "id": "5.2.27",
+      "kaumudiIndex": 3750
+    },
+    {
+      "id": "5.2.40",
+      "kaumudiIndex": 3787
+    },
+    {
+      "id": "5.2.48",
+      "kaumudiIndex": 3795
+    },
+    {
+      "id": "5.2.53",
+      "kaumudiIndex": 3802
+    },
+    {
+      "id": "5.3.52",
+      "kaumudiIndex": 3812
+    },
+    {
+      "id": "5.2.67",
+      "kaumudiIndex": 3819
+    },
+    {
+      "id": "5.2.68",
+      "kaumudiIndex": 3820
+    },
+    {
+      "id": "5.2.74",
+      "kaumudiIndex": 3828
+    },
+    {
+      "id": "5.2.79",
+      "kaumudiIndex": 3832
+    },
+    {
+      "id": "5.2.82",
+      "kaumudiIndex": 3835
+    },
+    {
+      "id": "5.2.85",
+      "kaumudiIndex": 3839
+    },
+    {
+      "id": "5.2.89",
+      "kaumudiIndex": 3843
+    },
+    {
+      "id": "5.2.91",
+      "kaumudiIndex": 3844
+    },
+    {
+      "id": "5.2.83",
+      "kaumudiIndex": 3845
+    },
+    {
+      "id": "5.2.93",
+      "kaumudiIndex": 3847
+    },
+    {
+      "id": "5.2.107",
+      "kaumudiIndex": 3878
+    },
+    {
+      "id": "5.2.133",
+      "kaumudiIndex": 3912
+    },
+    {
+      "id": "5.2.120",
+      "kaumudiIndex": 3920
+    },
+    {
+      "id": "5.2.123",
+      "kaumudiIndex": 3928
+    },
+    {
+      "id": "5.2.138",
+      "kaumudiIndex": 3933
+    },
+    {
+      "id": "5.3.10",
+      "kaumudiIndex": 3958
+    },
+    {
+      "id": "5.3.11",
+      "kaumudiIndex": 3959
+    },
+    {
+      "id": "5.3.12",
+      "kaumudiIndex": 3960
+    },
+    {
+      "id": "5.3.5",
+      "kaumudiIndex": 3963
+    },
+    {
+      "id": "7.2.105",
+      "kaumudiIndex": 3965
+    },
+    {
+      "id": "5.3.43",
+      "kaumudiIndex": 3986
+    },
+    {
+      "id": "5.3.46",
+      "kaumudiIndex": 3990
+    },
+    {
+      "id": "5.3.37",
+      "kaumudiIndex": 4019
+    },
+    {
+      "id": "5.3.47",
+      "kaumudiIndex": 4021
+    },
+    {
+      "id": "5.3.53",
+      "kaumudiIndex": 4022
+    },
+    {
+      "id": "5.3.54",
+      "kaumudiIndex": 4023
+    },
+    {
+      "id": "5.3.60",
+      "kaumudiIndex": 4033
+    },
+    {
+      "id": "5.3.63",
+      "kaumudiIndex": 4035
+    },
+    {
+      "id": "5.3.66",
+      "kaumudiIndex": 4037
+    },
+    {
+      "id": "5.3.56",
+      "kaumudiIndex": 4038
+    },
+    {
+      "id": "5.3.73",
+      "kaumudiIndex": 4047
+    },
+    {
+      "id": "5.3.74",
+      "kaumudiIndex": 4048
+    },
+    {
+      "id": "5.3.76",
+      "kaumudiIndex": 4051
+    },
+    {
+      "id": "5.3.81",
+      "kaumudiIndex": 4055
+    },
+    {
+      "id": "5.3.85",
+      "kaumudiIndex": 4066
+    },
+    {
+      "id": "5.3.86",
+      "kaumudiIndex": 4067
+    },
+    {
+      "id": "5.3.88",
+      "kaumudiIndex": 4069
+    },
+    {
+      "id": "5.3.89",
+      "kaumudiIndex": 4070
+    },
+    {
+      "id": "5.3.90",
+      "kaumudiIndex": 4071
+    },
+    {
+      "id": "5.3.98",
+      "kaumudiIndex": 4078
+    },
+    {
+      "id": "5.3.101",
+      "kaumudiIndex": 4083
+    },
+    {
+      "id": "5.3.115",
+      "kaumudiIndex": 4098
+    },
+    {
+      "id": "5.4.18",
+      "kaumudiIndex": 4111
+    },
+    {
+      "id": "5.4.19",
+      "kaumudiIndex": 4112
+    },
+    {
+      "id": "5.4.22",
+      "kaumudiIndex": 4115
+    },
+    {
+      "id": "5.4.6",
+      "kaumudiIndex": 4128
+    },
+    {
+      "id": "5.4.156",
+      "kaumudiIndex": 4131
+    },
+    {
+      "id": "5.4.30",
+      "kaumudiIndex": 4132
+    },
+    {
+      "id": "5.4.32",
+      "kaumudiIndex": 4133
+    },
+    {
+      "id": "5.4.9",
+      "kaumudiIndex": 4138
+    },
+    {
+      "id": "5.4.36",
+      "kaumudiIndex": 4144
+    },
+    {
+      "id": "5.4.37",
+      "kaumudiIndex": 4145
+    },
+    {
+      "id": "5.4.16",
+      "kaumudiIndex": 4151
+    },
+    {
+      "id": "5.4.39",
+      "kaumudiIndex": 4152
+    },
+    {
+      "id": "5.4.40",
+      "kaumudiIndex": 4153
+    },
+    {
+      "id": "5.4.27",
+      "kaumudiIndex": 4163
+    },
+    {
+      "id": "5.4.25",
+      "kaumudiIndex": 4165
+    },
+    {
+      "id": "5.4.26",
+      "kaumudiIndex": 4166
+    },
+    {
+      "id": "5.4.51",
+      "kaumudiIndex": 4169
+    },
+    {
+      "id": "5.4.55",
+      "kaumudiIndex": 4172
+    },
+    {
+      "id": "5.4.58",
+      "kaumudiIndex": 4175
+    },
+    {
+      "id": "5.4.62",
+      "kaumudiIndex": 4179
+    },
+    {
+      "id": "5.4.65",
+      "kaumudiIndex": 4182
+    },
+    {
+      "id": "5.4.68",
+      "kaumudiIndex": 4185
+    },
+    {
+      "id": "5.4.82",
+      "kaumudiIndex": 4202
+    },
+    {
+      "id": "5.4.83",
+      "kaumudiIndex": 4203
+    },
+    {
+      "id": "5.4.84",
+      "kaumudiIndex": 4204
+    },
+    {
+      "id": "5.4.92",
+      "kaumudiIndex": 4212
+    },
+    {
+      "id": "5.4.96",
+      "kaumudiIndex": 4216
+    },
+    {
+      "id": "5.4.99",
+      "kaumudiIndex": 4219
+    },
+    {
+      "id": "5.4.100",
+      "kaumudiIndex": 4220
+    },
+    {
+      "id": "5.4.102",
+      "kaumudiIndex": 4222
+    },
+    {
+      "id": "5.4.111",
+      "kaumudiIndex": 4232
+    },
+    {
+      "id": "5.4.114",
+      "kaumudiIndex": 4236
+    },
+    {
+      "id": "5.4.119",
+      "kaumudiIndex": 4250
+    },
+    {
+      "id": "5.4.126",
+      "kaumudiIndex": 4255
+    },
+    {
+      "id": "5.4.134",
+      "kaumudiIndex": 4267
+    },
+    {
+      "id": "5.4.141",
+      "kaumudiIndex": 4276
+    },
+    {
+      "id": "5.4.143",
+      "kaumudiIndex": 4278
+    },
+    {
+      "id": "5.4.147",
+      "kaumudiIndex": 4281
+    },
+    {
+      "id": "5.4.150",
+      "kaumudiIndex": 4284
+    },
+    {
+      "id": "5.4.152",
+      "kaumudiIndex": 4288
+    },
+    {
+      "id": "5.4.159",
+      "kaumudiIndex": 4296
+    },
+    {
+      "id": "6.1.12",
+      "kaumudiIndex": 4309
+    },
+    {
+      "id": "6.1.14",
+      "kaumudiIndex": 4316
+    },
+    {
+      "id": "6.1.18",
+      "kaumudiIndex": 4328
+    },
+    {
+      "id": "6.1.19",
+      "kaumudiIndex": 4329
+    },
+    {
+      "id": "6.1.21",
+      "kaumudiIndex": 4330
+    },
+    {
+      "id": "6.1.37",
+      "kaumudiIndex": 4346
+    },
+    {
+      "id": "6.1.39",
+      "kaumudiIndex": 4347
+    },
+    {
+      "id": "6.1.40",
+      "kaumudiIndex": 4357
+    },
+    {
+      "id": "6.1.52",
+      "kaumudiIndex": 4361
+    },
+    {
+      "id": "6.1.53",
+      "kaumudiIndex": 4362
+    },
+    {
+      "id": "6.1.48",
+      "kaumudiIndex": 4368
+    },
+    {
+      "id": "6.1.63",
+      "kaumudiIndex": 4371
+    },
+    {
+      "id": "6.1.69",
+      "kaumudiIndex": 4379
+    },
+    {
+      "id": "6.1.74",
+      "kaumudiIndex": 4384
+    },
+    {
+      "id": "6.1.75",
+      "kaumudiIndex": 4385
+    },
+    {
+      "id": "6.1.77",
+      "kaumudiIndex": 4387
+    },
+    {
+      "id": "6.1.81",
+      "kaumudiIndex": 4391
+    },
+    {
+      "id": "6.1.82",
+      "kaumudiIndex": 4392
+    },
+    {
+      "id": "6.1.83",
+      "kaumudiIndex": 4394
+    },
+    {
+      "id": "6.1.84",
+      "kaumudiIndex": 4396
+    },
+    {
+      "id": "6.1.91",
+      "kaumudiIndex": 4408
+    },
+    {
+      "id": "6.1.94",
+      "kaumudiIndex": 4415
+    },
+    {
+      "id": "6.1.97",
+      "kaumudiIndex": 4421
+    },
+    {
+      "id": "6.1.107",
+      "kaumudiIndex": 4432
+    },
+    {
+      "id": "6.1.108",
+      "kaumudiIndex": 4433
+    },
+    {
+      "id": "6.1.135",
+      "kaumudiIndex": 4450
+    },
+    {
+      "id": "6.1.136",
+      "kaumudiIndex": 4451
+    },
+    {
+      "id": "6.1.139",
+      "kaumudiIndex": 4453
+    },
+    {
+      "id": "6.1.140",
+      "kaumudiIndex": 4460
+    },
+    {
+      "id": "6.1.141",
+      "kaumudiIndex": 4461
+    },
+    {
+      "id": "6.1.149",
+      "kaumudiIndex": 4465
+    },
+    {
+      "id": "6.1.148",
+      "kaumudiIndex": 4466
+    },
+    {
+      "id": "6.3.1",
+      "kaumudiIndex": 4476
+    },
+    {
+      "id": "6.3.4",
+      "kaumudiIndex": 4481
+    },
+    {
+      "id": "6.3.11",
+      "kaumudiIndex": 4490
+    },
+    {
+      "id": "6.3.20",
+      "kaumudiIndex": 4498
+    },
+    {
+      "id": "6.3.28",
+      "kaumudiIndex": 4513
+    },
+    {
+      "id": "6.3.30",
+      "kaumudiIndex": 4515
+    },
+    {
+      "id": "6.3.41",
+      "kaumudiIndex": 4527
+    },
+    {
+      "id": "6.3.124",
+      "kaumudiIndex": 4540
+    },
+    {
+      "id": "6.3.56",
+      "kaumudiIndex": 4558
+    },
+    {
+      "id": "6.3.63",
+      "kaumudiIndex": 4566
+    },
+    {
+      "id": "6.3.65",
+      "kaumudiIndex": 4568
+    },
+    {
+      "id": "6.3.73",
+      "kaumudiIndex": 4587
+    },
+    {
+      "id": "6.3.80",
+      "kaumudiIndex": 4594
+    },
+    {
+      "id": "6.3.85",
+      "kaumudiIndex": 4598
+    },
+    {
+      "id": "6.3.86",
+      "kaumudiIndex": 4599
+    },
+    {
+      "id": "6.3.90",
+      "kaumudiIndex": 4604
+    },
+    {
+      "id": "6.3.94",
+      "kaumudiIndex": 4607
+    },
+    {
+      "id": "6.3.97",
+      "kaumudiIndex": 4610
+    },
+    {
+      "id": "6.3.100",
+      "kaumudiIndex": 4615
+    },
+    {
+      "id": "6.3.103",
+      "kaumudiIndex": 4618
+    },
+    {
+      "id": "6.3.104",
+      "kaumudiIndex": 4619
+    },
+    {
+      "id": "6.3.106",
+      "kaumudiIndex": 4621
+    },
+    {
+      "id": "6.3.128",
+      "kaumudiIndex": 4642
+    },
+    {
+      "id": "6.3.111",
+      "kaumudiIndex": 4651
+    },
+    {
+      "id": "6.3.115",
+      "kaumudiIndex": 4653
+    },
+    {
+      "id": "6.3.122",
+      "kaumudiIndex": 4655
+    },
+    {
+      "id": "6.3.123",
+      "kaumudiIndex": 4656
+    },
+    {
+      "id": "6.3.136",
+      "kaumudiIndex": 4658
+    },
+    {
+      "id": "6.1.216",
+      "kaumudiIndex": 4659
+    },
+    {
+      "id": "6.3.138",
+      "kaumudiIndex": 4660
+    },
+    {
+      "id": "6.4.21",
+      "kaumudiIndex": 4678
+    },
+    {
+      "id": "6.4.28",
+      "kaumudiIndex": 4689
+    },
+    {
+      "id": "6.4.44",
+      "kaumudiIndex": 4699
+    },
+    {
+      "id": "6.4.30",
+      "kaumudiIndex": 4708
+    },
+    {
+      "id": "6.4.35",
+      "kaumudiIndex": 4718
+    },
+    {
+      "id": "6.4.46",
+      "kaumudiIndex": 4720
+    },
+    {
+      "id": "6.4.49",
+      "kaumudiIndex": 4724
+    },
+    {
+      "id": "6.4.51",
+      "kaumudiIndex": 4726
+    },
+    {
+      "id": "6.4.52",
+      "kaumudiIndex": 4727
+    },
+    {
+      "id": "6.4.56",
+      "kaumudiIndex": 4729
+    },
+    {
+      "id": "6.4.65",
+      "kaumudiIndex": 4735
+    },
+    {
+      "id": "6.4.69",
+      "kaumudiIndex": 4739
+    },
+    {
+      "id": "6.4.78",
+      "kaumudiIndex": 4743
+    },
+    {
+      "id": "6.4.79",
+      "kaumudiIndex": 4744
+    },
+    {
+      "id": "6.4.81",
+      "kaumudiIndex": 4746
+    },
+    {
+      "id": "6.4.88",
+      "kaumudiIndex": 4751
+    },
+    {
+      "id": "6.4.118",
+      "kaumudiIndex": 4770
+    },
+    {
+      "id": "6.4.121",
+      "kaumudiIndex": 4776
+    },
+    {
+      "id": "6.4.123",
+      "kaumudiIndex": 4778
+    },
+    {
+      "id": "6.4.124",
+      "kaumudiIndex": 4779
+    },
+    {
+      "id": "6.4.126",
+      "kaumudiIndex": 4784
+    },
+    {
+      "id": "6.4.127",
+      "kaumudiIndex": 4785
+    },
+    {
+      "id": "6.4.130",
+      "kaumudiIndex": 4788
+    },
+    {
+      "id": "6.4.133",
+      "kaumudiIndex": 4790
+    },
+    {
+      "id": "6.4.134",
+      "kaumudiIndex": 4791
+    },
+    {
+      "id": "6.4.135",
+      "kaumudiIndex": 4792
+    },
+    {
+      "id": "6.4.139",
+      "kaumudiIndex": 4796
+    },
+    {
+      "id": "6.4.144",
+      "kaumudiIndex": 4800
+    },
+    {
+      "id": "6.4.150",
+      "kaumudiIndex": 4817
+    },
+    {
+      "id": "6.4.160",
+      "kaumudiIndex": 4827
+    },
+    {
+      "id": "7.3.50",
+      "kaumudiIndex": 4845
+    },
+    {
+      "id": "7.1.100",
+      "kaumudiIndex": 4849
+    },
+    {
+      "id": "7.1.101",
+      "kaumudiIndex": 4850
+    },
+    {
+      "id": "7.1.102",
+      "kaumudiIndex": 4851
+    },
+    {
+      "id": "7.1.61",
+      "kaumudiIndex": 4856
+    },
+    {
+      "id": "7.1.63",
+      "kaumudiIndex": 4858
+    },
+    {
+      "id": "7.1.64",
+      "kaumudiIndex": 4859
+    },
+    {
+      "id": "7.1.65",
+      "kaumudiIndex": 4860
+    },
+    {
+      "id": "7.1.66",
+      "kaumudiIndex": 4861
+    },
+    {
+      "id": "7.1.67",
+      "kaumudiIndex": 4862
+    },
+    {
+      "id": "7.1.68",
+      "kaumudiIndex": 4863
+    },
+    {
+      "id": "7.1.71",
+      "kaumudiIndex": 4867
+    },
+    {
+      "id": "7.1.78",
+      "kaumudiIndex": 4873
+    },
+    {
+      "id": "7.1.81",
+      "kaumudiIndex": 4876
+    },
+    {
+      "id": "7.1.82",
+      "kaumudiIndex": 4877
+    },
+    {
+      "id": "7.1.84",
+      "kaumudiIndex": 4878
+    },
+    {
+      "id": "7.1.85",
+      "kaumudiIndex": 4879
+    },
+    {
+      "id": "7.1.87",
+      "kaumudiIndex": 4881
+    },
+    {
+      "id": "7.1.89",
+      "kaumudiIndex": 4883
+    },
+    {
+      "id": "7.1.99",
+      "kaumudiIndex": 4894
+    },
+    {
+      "id": "7.2.85",
+      "kaumudiIndex": 4896
+    },
+    {
+      "id": "7.2.86",
+      "kaumudiIndex": 4897
+    },
+    {
+      "id": "7.2.89",
+      "kaumudiIndex": 4899
+    },
+    {
+      "id": "7.2.90",
+      "kaumudiIndex": 4900
+    },
+    {
+      "id": "7.2.93",
+      "kaumudiIndex": 4902
+    },
+    {
+      "id": "7.2.94",
+      "kaumudiIndex": 4903
+    },
+    {
+      "id": "7.2.95",
+      "kaumudiIndex": 4904
+    },
+    {
+      "id": "7.2.96",
+      "kaumudiIndex": 4905
+    },
+    {
+      "id": "7.2.99",
+      "kaumudiIndex": 4908
+    },
+    {
+      "id": "7.2.103",
+      "kaumudiIndex": 4913
+    },
+    {
+      "id": "2.4.52",
+      "kaumudiIndex": 4926
+    },
+    {
+      "id": "2.4.53",
+      "kaumudiIndex": 4927
+    },
+    {
+      "id": "2.4.55",
+      "kaumudiIndex": 4929
+    },
+    {
+      "id": "2.4.41",
+      "kaumudiIndex": 4936
+    },
+    {
+      "id": "2.4.42",
+      "kaumudiIndex": 4937
+    },
+    {
+      "id": "2.4.43",
+      "kaumudiIndex": 4938
+    },
+    {
+      "id": "2.4.49",
+      "kaumudiIndex": 4944
+    },
+    {
+      "id": "7.2.39",
+      "kaumudiIndex": 4950
+    },
+    {
+      "id": "7.2.42",
+      "kaumudiIndex": 4953
+    },
+    {
+      "id": "7.2.46",
+      "kaumudiIndex": 4957
+    },
+    {
+      "id": "7.2.56",
+      "kaumudiIndex": 4965
+    },
+    {
+      "id": "7.2.21",
+      "kaumudiIndex": 5005
+    },
+    {
+      "id": "7.2.22",
+      "kaumudiIndex": 5006
+    },
+    {
+      "id": "7.2.27",
+      "kaumudiIndex": 5011
+    },
+    {
+      "id": "7.2.72",
+      "kaumudiIndex": 5028
+    },
+    {
+      "id": "7.2.114",
+      "kaumudiIndex": 5035
+    },
+    {
+      "id": "7.2.4",
+      "kaumudiIndex": 5039
+    },
+    {
+      "id": "6.4.138",
+      "kaumudiIndex": 5044
+    },
+    {
+      "id": "7.3.14",
+      "kaumudiIndex": 5062
+    },
+    {
+      "id": "7.3.22",
+      "kaumudiIndex": 5078
+    },
+    {
+      "id": "7.3.26",
+      "kaumudiIndex": 5081
+    },
+    {
+      "id": "7.3.31",
+      "kaumudiIndex": 5086
+    },
+    {
+      "id": "7.3.32",
+      "kaumudiIndex": 5087
+    },
+    {
+      "id": "7.3.33",
+      "kaumudiIndex": 5088
+    },
+    {
+      "id": "7.3.37",
+      "kaumudiIndex": 5095
+    },
+    {
+      "id": "7.3.38",
+      "kaumudiIndex": 5096
+    },
+    {
+      "id": "7.3.40",
+      "kaumudiIndex": 5101
+    },
+    {
+      "id": "7.3.41",
+      "kaumudiIndex": 5102
+    },
+    {
+      "id": "7.3.42",
+      "kaumudiIndex": 5103
+    },
+    {
+      "id": "6.4.92",
+      "kaumudiIndex": 5105
+    },
+    {
+      "id": "7.4.2",
+      "kaumudiIndex": 5111
+    },
+    {
+      "id": "7.4.7",
+      "kaumudiIndex": 5114
+    },
+    {
+      "id": "7.3.44",
+      "kaumudiIndex": 5120
+    },
+    {
+      "id": "7.3.52",
+      "kaumudiIndex": 5134
+    },
+    {
+      "id": "7.3.56",
+      "kaumudiIndex": 5150
+    },
+    {
+      "id": "7.3.57",
+      "kaumudiIndex": 5151
+    },
+    {
+      "id": "7.3.63",
+      "kaumudiIndex": 5155
+    },
+    {
+      "id": "7.3.65",
+      "kaumudiIndex": 5157
+    },
+    {
+      "id": "7.3.67",
+      "kaumudiIndex": 5159
+    },
+    {
+      "id": "7.3.72",
+      "kaumudiIndex": 5164
+    },
+    {
+      "id": "7.3.76",
+      "kaumudiIndex": 5168
+    },
+    {
+      "id": "7.3.77",
+      "kaumudiIndex": 5169
+    },
+    {
+      "id": "7.3.79",
+      "kaumudiIndex": 5172
+    },
+    {
+      "id": "7.3.80",
+      "kaumudiIndex": 5173
+    },
+    {
+      "id": "1.2.12",
+      "kaumudiIndex": 5199
+    },
+    {
+      "id": "7.3.92",
+      "kaumudiIndex": 5206
+    },
+    {
+      "id": "7.3.102",
+      "kaumudiIndex": 5213
+    },
+    {
+      "id": "7.3.103",
+      "kaumudiIndex": 5214
+    },
+    {
+      "id": "7.3.104",
+      "kaumudiIndex": 5215
+    },
+    {
+      "id": "7.3.109",
+      "kaumudiIndex": 5223
+    },
+    {
+      "id": "7.3.113",
+      "kaumudiIndex": 5229
+    },
+    {
+      "id": "7.4.14",
+      "kaumudiIndex": 5245
+    },
+    {
+      "id": "7.4.22",
+      "kaumudiIndex": 5248
+    },
+    {
+      "id": "7.4.26",
+      "kaumudiIndex": 5252
+    },
+    {
+      "id": "7.4.27",
+      "kaumudiIndex": 5253
+    },
+    {
+      "id": "7.4.30",
+      "kaumudiIndex": 5257
+    },
+    {
+      "id": "7.4.31",
+      "kaumudiIndex": 5259
+    },
+    {
+      "id": "7.4.33",
+      "kaumudiIndex": 5261
+    },
+    {
+      "id": "7.4.48",
+      "kaumudiIndex": 5277
+    },
+    {
+      "id": "7.4.53",
+      "kaumudiIndex": 5283
+    },
+    {
+      "id": "7.4.56",
+      "kaumudiIndex": 5289
+    },
+    {
+      "id": "7.4.62",
+      "kaumudiIndex": 5296
+    },
+    {
+      "id": "7.4.63",
+      "kaumudiIndex": 5297
+    },
+    {
+      "id": "7.4.66",
+      "kaumudiIndex": 5298
+    },
+    {
+      "id": "7.4.59",
+      "kaumudiIndex": 5299
+    },
+    {
+      "id": "7.4.68",
+      "kaumudiIndex": 5301
+    },
+    {
+      "id": "7.4.79",
+      "kaumudiIndex": 5309
+    },
+    {
+      "id": "7.4.80",
+      "kaumudiIndex": 5310
+    },
+    {
+      "id": "7.4.82",
+      "kaumudiIndex": 5312
+    },
+    {
+      "id": "7.4.88",
+      "kaumudiIndex": 5318
+    },
+    {
+      "id": "7.4.89",
+      "kaumudiIndex": 5319
+    },
+    {
+      "id": "7.4.91",
+      "kaumudiIndex": 5321
+    },
+    {
+      "id": "7.4.94",
+      "kaumudiIndex": 5324
+    },
+    {
+      "id": "7.4.97",
+      "kaumudiIndex": 5327
+    },
+    {
+      "id": "8.1.8",
+      "kaumudiIndex": 5339
+    },
+    {
+      "id": "8.1.14",
+      "kaumudiIndex": 5348
+    },
+    {
+      "id": "8.1.22",
+      "kaumudiIndex": 5356
+    },
+    {
+      "id": "8.1.23",
+      "kaumudiIndex": 5357
+    },
+    {
+      "id": "8.2.1",
+      "kaumudiIndex": 5365
+    },
+    {
+      "id": "8.2.13",
+      "kaumudiIndex": 5377
+    },
+    {
+      "id": "8.2.14",
+      "kaumudiIndex": 5378
+    },
+    {
+      "id": "8.2.19",
+      "kaumudiIndex": 5382
+    },
+    {
+      "id": "8.2.20",
+      "kaumudiIndex": 5383
+    },
+    {
+      "id": "8.2.28",
+      "kaumudiIndex": 5399
+    },
+    {
+      "id": "8.2.26",
+      "kaumudiIndex": 5400
+    },
+    {
+      "id": "8.2.29",
+      "kaumudiIndex": 5402
+    },
+    {
+      "id": "8.2.30",
+      "kaumudiIndex": 5403
+    },
+    {
+      "id": "8.2.31",
+      "kaumudiIndex": 5404
+    },
+    {
+      "id": "8.2.32",
+      "kaumudiIndex": 5405
+    },
+    {
+      "id": "8.2.33",
+      "kaumudiIndex": 5406
+    },
+    {
+      "id": "8.2.40",
+      "kaumudiIndex": 5411
+    },
+    {
+      "id": "8.2.41",
+      "kaumudiIndex": 5412
+    },
+    {
+      "id": "8.2.47",
+      "kaumudiIndex": 5423
+    },
+    {
+      "id": "8.2.48",
+      "kaumudiIndex": 5424
+    },
+    {
+      "id": "8.2.49",
+      "kaumudiIndex": 5425
+    },
+    {
+      "id": "8.2.60",
+      "kaumudiIndex": 5427
+    },
+    {
+      "id": "8.2.51",
+      "kaumudiIndex": 5431
+    },
+    {
+      "id": "8.2.52",
+      "kaumudiIndex": 5432
+    },
+    {
+      "id": "8.2.59",
+      "kaumudiIndex": 5438
+    },
+    {
+      "id": "8.2.39",
+      "kaumudiIndex": 5439
+    },
+    {
+      "id": "8.2.63",
+      "kaumudiIndex": 5442
+    },
+    {
+      "id": "8.2.66",
+      "kaumudiIndex": 5444
+    },
+    {
+      "id": "8.2.81",
+      "kaumudiIndex": 5460
+    },
+    {
+      "id": "8.2.85",
+      "kaumudiIndex": 5463
+    },
+    {
+      "id": "8.2.105",
+      "kaumudiIndex": 5477
+    },
+    {
+      "id": "8.2.106",
+      "kaumudiIndex": 5478
+    },
+    {
+      "id": "8.2.108",
+      "kaumudiIndex": 5480
+    },
+    {
+      "id": "8.3.24",
+      "kaumudiIndex": 5490
+    },
+    {
+      "id": "8.3.30",
+      "kaumudiIndex": 5495
+    },
+    {
+      "id": "8.3.31",
+      "kaumudiIndex": 5496
+    },
+    {
+      "id": "8.3.14",
+      "kaumudiIndex": 5500
+    },
+    {
+      "id": "8.3.16",
+      "kaumudiIndex": 5505
+    },
+    {
+      "id": "8.3.36",
+      "kaumudiIndex": 5512
+    },
+    {
+      "id": "8.3.45",
+      "kaumudiIndex": 5522
+    },
+    {
+      "id": "8.3.46",
+      "kaumudiIndex": 5523
+    },
+    {
+      "id": "8.3.40",
+      "kaumudiIndex": 5525
+    },
+    {
+      "id": "8.3.58",
+      "kaumudiIndex": 5530
+    },
+    {
+      "id": "8.3.60",
+      "kaumudiIndex": 5531
+    },
+    {
+      "id": "8.3.67",
+      "kaumudiIndex": 5536
+    },
+    {
+      "id": "8.3.69",
+      "kaumudiIndex": 5538
+    },
+    {
+      "id": "8.3.73",
+      "kaumudiIndex": 5545
+    },
+    {
+      "id": "8.3.74",
+      "kaumudiIndex": 5546
+    },
+    {
+      "id": "8.3.77",
+      "kaumudiIndex": 5549
+    },
+    {
+      "id": "8.3.92",
+      "kaumudiIndex": 5563
+    },
+    {
+      "id": "8.3.93",
+      "kaumudiIndex": 5564
+    },
+    {
+      "id": "8.3.112",
+      "kaumudiIndex": 5580
+    },
+    {
+      "id": "8.3.113",
+      "kaumudiIndex": 5581
+    },
+    {
+      "id": "8.3.117",
+      "kaumudiIndex": 5585
+    },
+    {
+      "id": "8.4.10",
+      "kaumudiIndex": 5600
+    },
+    {
+      "id": "8.4.13",
+      "kaumudiIndex": 5605
+    },
+    {
+      "id": "8.4.22",
+      "kaumudiIndex": 5614
+    },
+    {
+      "id": "8.4.32",
+      "kaumudiIndex": 5622
+    },
+    {
+      "id": "8.4.36",
+      "kaumudiIndex": 5626
+    },
+    {
+      "id": "8.4.42",
+      "kaumudiIndex": 5635
+    },
+    {
+      "id": "8.4.43",
+      "kaumudiIndex": 5636
+    },
+    {
+      "id": "8.4.45",
+      "kaumudiIndex": 5639
+    },
+    {
+      "id": "8.4.52",
+      "kaumudiIndex": 5645
+    },
+    {
+      "id": "8.4.56",
+      "kaumudiIndex": 5648
+    },
+    {
+      "id": "8.4.59",
+      "kaumudiIndex": 5651
+    },
+    {
+      "id": "2.4.39",
+      "kaumudiIndex": 5660
+    },
+    {
+      "id": "1.4.81",
+      "kaumudiIndex": 5664
+    },
+    {
+      "id": "3.1.51",
+      "kaumudiIndex": 5674
+    },
+    {
+      "id": "3.2.64",
+      "kaumudiIndex": 5685
+    },
+    {
+      "id": "3.2.65",
+      "kaumudiIndex": 5686
+    },
+    {
+      "id": "3.2.66",
+      "kaumudiIndex": 5687
+    },
+    {
+      "id": "3.2.67",
+      "kaumudiIndex": 5688
+    },
+    {
+      "id": "3.2.106",
+      "kaumudiIndex": 5693
+    },
+    {
+      "id": "3.2.107",
+      "kaumudiIndex": 5694
+    },
+    {
+      "id": "3.4.7",
+      "kaumudiIndex": 5703
+    },
+    {
+      "id": "3.4.8",
+      "kaumudiIndex": 5704
+    },
+    {
+      "id": "3.4.14",
+      "kaumudiIndex": 5705
+    },
+    {
+      "id": "3.4.12",
+      "kaumudiIndex": 5710
+    },
+    {
+      "id": "3.4.13",
+      "kaumudiIndex": 5711
+    },
+    {
+      "id": "3.4.16",
+      "kaumudiIndex": 5712
+    },
+    {
+      "id": "3.4.17",
+      "kaumudiIndex": 5713
+    },
+    {
+      "id": "3.4.94",
+      "kaumudiIndex": 5714
+    },
+    {
+      "id": "3.4.95",
+      "kaumudiIndex": 5715
+    },
+    {
+      "id": "3.4.96",
+      "kaumudiIndex": 5716
+    },
+    {
+      "id": "3.4.98",
+      "kaumudiIndex": 5718
+    },
+    {
+      "id": "7.1.40",
+      "kaumudiIndex": 5719
+    },
+    {
+      "id": "7.1.41",
+      "kaumudiIndex": 5720
+    },
+    {
+      "id": "7.1.57",
+      "kaumudiIndex": 5731
+    },
+    {
+      "id": "7.1.50",
+      "kaumudiIndex": 5732
+    },
+    {
+      "id": "1.2.62",
+      "kaumudiIndex": 5744
+    },
+    {
+      "id": "4.1.61",
+      "kaumudiIndex": 5754
+    },
+    {
+      "id": "4.3.149",
+      "kaumudiIndex": 5764
+    },
+    {
+      "id": "4.4.110",
+      "kaumudiIndex": 5768
+    },
+    {
+      "id": "4.4.113",
+      "kaumudiIndex": 5770
+    },
+    {
+      "id": "4.4.114",
+      "kaumudiIndex": 5771
+    },
+    {
+      "id": "4.4.117",
+      "kaumudiIndex": 5773
+    },
+    {
+      "id": "4.4.118",
+      "kaumudiIndex": 5774
+    },
+    {
+      "id": "4.4.119",
+      "kaumudiIndex": 5775
+    },
+    {
+      "id": "4.4.120",
+      "kaumudiIndex": 5776
+    },
+    {
+      "id": "4.4.121",
+      "kaumudiIndex": 5777
+    },
+    {
+      "id": "4.4.122",
+      "kaumudiIndex": 5778
+    },
+    {
+      "id": "4.4.123",
+      "kaumudiIndex": 5779
+    },
+    {
+      "id": "4.4.124",
+      "kaumudiIndex": 5780
+    },
+    {
+      "id": "4.4.125",
+      "kaumudiIndex": 5781
+    },
+    {
+      "id": "4.4.127",
+      "kaumudiIndex": 5783
+    },
+    {
+      "id": "4.4.128",
+      "kaumudiIndex": 5785
+    },
+    {
+      "id": "4.4.129",
+      "kaumudiIndex": 5787
+    },
+    {
+      "id": "4.4.130",
+      "kaumudiIndex": 5788
+    },
+    {
+      "id": "4.4.131",
+      "kaumudiIndex": 5789
+    },
+    {
+      "id": "4.4.133",
+      "kaumudiIndex": 5791
+    },
+    {
+      "id": "4.4.134",
+      "kaumudiIndex": 5792
+    },
+    {
+      "id": "4.4.135",
+      "kaumudiIndex": 5793
+    },
+    {
+      "id": "4.4.137",
+      "kaumudiIndex": 5796
+    },
+    {
+      "id": "4.4.138",
+      "kaumudiIndex": 5797
+    },
+    {
+      "id": "4.4.139",
+      "kaumudiIndex": 5798
+    },
+    {
+      "id": "4.4.140",
+      "kaumudiIndex": 5800
+    },
+    {
+      "id": "6.1.7",
+      "kaumudiIndex": 5837
+    },
+    {
+      "id": "6.1.112",
+      "kaumudiIndex": 5855
+    },
+    {
+      "id": "6.1.115",
+      "kaumudiIndex": 5859
+    },
+    {
+      "id": "6.1.116",
+      "kaumudiIndex": 5860
+    },
+    {
+      "id": "6.1.117",
+      "kaumudiIndex": 5861
+    },
+    {
+      "id": "6.3.130",
+      "kaumudiIndex": 5873
+    },
+    {
+      "id": "6.1.70",
+      "kaumudiIndex": 5875
+    },
+    {
+      "id": "6.3.132",
+      "kaumudiIndex": 5876
+    },
+    {
+      "id": "6.3.133",
+      "kaumudiIndex": 5877
+    },
+    {
+      "id": "6.3.134",
+      "kaumudiIndex": 5878
+    },
+    {
+      "id": "6.3.135",
+      "kaumudiIndex": 5879
+    },
+    {
+      "id": "6.4.41",
+      "kaumudiIndex": 5882
+    },
+    {
+      "id": "6.4.53",
+      "kaumudiIndex": 5883
+    },
+    {
+      "id": "6.4.54",
+      "kaumudiIndex": 5884
+    },
+    {
+      "id": "6.4.76",
+      "kaumudiIndex": 5889
+    },
+    {
+      "id": "6.4.100",
+      "kaumudiIndex": 5893
+    },
+    {
+      "id": "6.4.141",
+      "kaumudiIndex": 5900
+    },
+    {
+      "id": "7.1.47",
+      "kaumudiIndex": 5904
+    },
+    {
+      "id": "7.1.77",
+      "kaumudiIndex": 5908
+    },
+    {
+      "id": "7.2.32",
+      "kaumudiIndex": 5913
+    },
+    {
+      "id": "7.2.33",
+      "kaumudiIndex": 5914
+    },
+    {
+      "id": "7.2.69",
+      "kaumudiIndex": 5917
+    },
+    {
+      "id": "7.4.36",
+      "kaumudiIndex": 5930
+    },
+    {
+      "id": "7.4.38",
+      "kaumudiIndex": 5932
+    },
+    {
+      "id": "7.4.39",
+      "kaumudiIndex": 5933
+    },
+    {
+      "id": "8.2.16",
+      "kaumudiIndex": 5945
+    },
+    {
+      "id": "8.2.17",
+      "kaumudiIndex": 5946
+    },
+    {
+      "id": "8.2.71",
+      "kaumudiIndex": 5952
+    },
+    {
+      "id": "8.2.87",
+      "kaumudiIndex": 5955
+    },
+    {
+      "id": "8.2.89",
+      "kaumudiIndex": 5958
+    },
+    {
+      "id": "8.3.11",
+      "kaumudiIndex": 5964
+    },
+    {
+      "id": "8.3.50",
+      "kaumudiIndex": 5966
+    },
+    {
+      "id": "8.3.51",
+      "kaumudiIndex": 5967
+    },
+    {
+      "id": "8.3.53",
+      "kaumudiIndex": 5969
+    },
+    {
+      "id": "8.3.54",
+      "kaumudiIndex": 5970
+    },
+    {
+      "id": "8.3.107",
+      "kaumudiIndex": 5975
+    },
+    {
+      "id": "8.3.108",
+      "kaumudiIndex": 5976
+    },
+    {
+      "id": "6.1.152",
+      "kaumudiIndex": 5989
+    },
+    {
+      "id": "6.1.157",
+      "kaumudiIndex": 6013
+    },
+    {
+      "id": "6.1.161",
+      "kaumudiIndex": 6020
+    },
+    {
+      "id": "6.1.168",
+      "kaumudiIndex": 6030
+    },
+    {
+      "id": "6.1.169",
+      "kaumudiIndex": 6031
+    },
+    {
+      "id": "6.1.172",
+      "kaumudiIndex": 6035
+    },
+    {
+      "id": "6.1.174",
+      "kaumudiIndex": 6037
+    },
+    {
+      "id": "6.1.177",
+      "kaumudiIndex": 6040
+    },
+    {
+      "id": "6.1.179",
+      "kaumudiIndex": 6042
+    },
+    {
+      "id": "6.1.184",
+      "kaumudiIndex": 6049
+    },
+    {
+      "id": "6.1.187",
+      "kaumudiIndex": 6051
+    },
+    {
+      "id": "6.1.194",
+      "kaumudiIndex": 6062
+    },
+    {
+      "id": "6.1.195",
+      "kaumudiIndex": 6063
+    },
+    {
+      "id": "6.1.198",
+      "kaumudiIndex": 6067
+    },
+    {
+      "id": "6.1.200",
+      "kaumudiIndex": 6070
+    },
+    {
+      "id": "6.1.201",
+      "kaumudiIndex": 6071
+    },
+    {
+      "id": "6.1.204",
+      "kaumudiIndex": 6074
+    },
+    {
+      "id": "6.1.205",
+      "kaumudiIndex": 6075
+    },
+    {
+      "id": "6.1.206",
+      "kaumudiIndex": 6076
+    },
+    {
+      "id": "6.1.210",
+      "kaumudiIndex": 6080
+    },
+    {
+      "id": "5.1.66",
+      "kaumudiIndex": 6149
+    },
+    {
+      "id": "8.1.29",
+      "kaumudiIndex": 6185
+    },
+    {
+      "id": "8.1.31",
+      "kaumudiIndex": 6187
+    },
+    {
+      "id": "8.1.32",
+      "kaumudiIndex": 6188
+    },
+    {
+      "id": "8.1.34",
+      "kaumudiIndex": 6190
+    },
+    {
+      "id": "8.1.35",
+      "kaumudiIndex": 6191
+    },
+    {
+      "id": "8.1.40",
+      "kaumudiIndex": 6193
+    },
+    {
+      "id": "8.1.47",
+      "kaumudiIndex": 6199
+    },
+    {
+      "id": "8.1.46",
+      "kaumudiIndex": 6207
+    },
+    {
+      "id": "8.1.51",
+      "kaumudiIndex": 6208
+    },
+    {
+      "id": "8.1.54",
+      "kaumudiIndex": 6211
+    },
+    {
+      "id": "8.1.55",
+      "kaumudiIndex": 6212
+    },
+    {
+      "id": "8.1.56",
+      "kaumudiIndex": 6213
+    },
+    {
+      "id": "8.1.70",
+      "kaumudiIndex": 6227
+    },
+    {
+      "id": "1.2.34",
+      "kaumudiIndex": 6235
+    },
+    {
+      "id": "1.2.39",
+      "kaumudiIndex": 6238
+    },
+    {
+      "id": "6.2.1",
+      "kaumudiIndex": 6246
+    },
+    {
+      "id": "6.2.4",
+      "kaumudiIndex": 6250
+    },
+    {
+      "id": "6.2.6",
+      "kaumudiIndex": 6253
+    },
+    {
+      "id": "6.2.7",
+      "kaumudiIndex": 6254
+    },
+    {
+      "id": "6.2.8",
+      "kaumudiIndex": 6255
+    },
+    {
+      "id": "6.2.10",
+      "kaumudiIndex": 6257
+    },
+    {
+      "id": "6.2.11",
+      "kaumudiIndex": 6258
+    },
+    {
+      "id": "6.2.13",
+      "kaumudiIndex": 6259
+    },
+    {
+      "id": "6.2.14",
+      "kaumudiIndex": 6260
+    },
+    {
+      "id": "6.2.15",
+      "kaumudiIndex": 6261
+    },
+    {
+      "id": "6.2.16",
+      "kaumudiIndex": 6262
+    },
+    {
+      "id": "6.2.20",
+      "kaumudiIndex": 6265
+    },
+    {
+      "id": "6.2.21",
+      "kaumudiIndex": 6266
+    },
+    {
+      "id": "6.2.22",
+      "kaumudiIndex": 6267
+    },
+    {
+      "id": "6.2.23",
+      "kaumudiIndex": 6268
+    },
+    {
+      "id": "6.2.29",
+      "kaumudiIndex": 6270
+    },
+    {
+      "id": "6.2.31",
+      "kaumudiIndex": 6272
+    },
+    {
+      "id": "6.2.27",
+      "kaumudiIndex": 6275
+    },
+    {
+      "id": "6.2.38",
+      "kaumudiIndex": 6277
+    },
+    {
+      "id": "6.2.39",
+      "kaumudiIndex": 6278
+    },
+    {
+      "id": "6.2.58",
+      "kaumudiIndex": 6280
+    },
+    {
+      "id": "6.2.59",
+      "kaumudiIndex": 6281
+    },
+    {
+      "id": "6.2.60",
+      "kaumudiIndex": 6282
+    },
+    {
+      "id": "6.2.63",
+      "kaumudiIndex": 6284
+    },
+    {
+      "id": "6.2.61",
+      "kaumudiIndex": 6285
+    },
+    {
+      "id": "6.2.48",
+      "kaumudiIndex": 6288
+    },
+    {
+      "id": "6.2.49",
+      "kaumudiIndex": 6289
+    },
+    {
+      "id": "6.2.50",
+      "kaumudiIndex": 6290
+    },
+    {
+      "id": "6.2.52",
+      "kaumudiIndex": 6292
+    },
+    {
+      "id": "6.2.53",
+      "kaumudiIndex": 6293
+    },
+    {
+      "id": "6.2.55",
+      "kaumudiIndex": 6295
+    },
+    {
+      "id": "6.2.40",
+      "kaumudiIndex": 6297
+    },
+    {
+      "id": "6.2.41",
+      "kaumudiIndex": 6298
+    },
+    {
+      "id": "6.2.44",
+      "kaumudiIndex": 6305
+    },
+    {
+      "id": "6.2.45",
+      "kaumudiIndex": 6306
+    },
+    {
+      "id": "6.2.33",
+      "kaumudiIndex": 6307
+    },
+    {
+      "id": "6.2.35",
+      "kaumudiIndex": 6309
+    },
+    {
+      "id": "6.2.32",
+      "kaumudiIndex": 6316
+    },
+    {
+      "id": "6.2.69",
+      "kaumudiIndex": 6322
+    },
+    {
+      "id": "6.2.70",
+      "kaumudiIndex": 6323
+    },
+    {
+      "id": "6.2.71",
+      "kaumudiIndex": 6324
+    },
+    {
+      "id": "6.2.74",
+      "kaumudiIndex": 6327
+    },
+    {
+      "id": "6.2.75",
+      "kaumudiIndex": 6328
+    },
+    {
+      "id": "6.2.76",
+      "kaumudiIndex": 6329
+    },
+    {
+      "id": "6.2.78",
+      "kaumudiIndex": 6331
+    },
+    {
+      "id": "6.2.79",
+      "kaumudiIndex": 6332
+    },
+    {
+      "id": "6.2.82",
+      "kaumudiIndex": 6341
+    },
+    {
+      "id": "6.2.83",
+      "kaumudiIndex": 6342
+    },
+    {
+      "id": "6.2.92",
+      "kaumudiIndex": 6352
+    },
+    {
+      "id": "6.2.94",
+      "kaumudiIndex": 6354
+    },
+    {
+      "id": "6.2.95",
+      "kaumudiIndex": 6355
+    },
+    {
+      "id": "6.2.97",
+      "kaumudiIndex": 6357
+    },
+    {
+      "id": "6.2.99",
+      "kaumudiIndex": 6359
+    },
+    {
+      "id": "6.2.101",
+      "kaumudiIndex": 6361
+    },
+    {
+      "id": "6.2.102",
+      "kaumudiIndex": 6362
+    },
+    {
+      "id": "6.2.105",
+      "kaumudiIndex": 6365
+    },
+    {
+      "id": "6.2.110",
+      "kaumudiIndex": 6371
+    },
+    {
+      "id": "6.2.111",
+      "kaumudiIndex": 6372
+    },
+    {
+      "id": "6.2.114",
+      "kaumudiIndex": 6375
+    },
+    {
+      "id": "6.2.116",
+      "kaumudiIndex": 6377
+    },
+    {
+      "id": "6.2.118",
+      "kaumudiIndex": 6379
+    },
+    {
+      "id": "6.2.119",
+      "kaumudiIndex": 6380
+    },
+    {
+      "id": "6.2.126",
+      "kaumudiIndex": 6387
+    },
+    {
+      "id": "6.2.128",
+      "kaumudiIndex": 6389
+    },
+    {
+      "id": "6.2.129",
+      "kaumudiIndex": 6390
+    },
+    {
+      "id": "6.2.135",
+      "kaumudiIndex": 6396
+    },
+    {
+      "id": "6.2.136",
+      "kaumudiIndex": 6397
+    },
+    {
+      "id": "6.2.137",
+      "kaumudiIndex": 6398
+    },
+    {
+      "id": "6.2.147",
+      "kaumudiIndex": 6408
+    },
+    {
+      "id": "6.2.150",
+      "kaumudiIndex": 6415
+    },
+    {
+      "id": "6.2.151",
+      "kaumudiIndex": 6416
+    },
+    {
+      "id": "6.2.156",
+      "kaumudiIndex": 6421
+    },
+    {
+      "id": "6.2.157",
+      "kaumudiIndex": 6422
+    },
+    {
+      "id": "6.2.162",
+      "kaumudiIndex": 6431
+    },
+    {
+      "id": "6.2.165",
+      "kaumudiIndex": 6435
+    },
+    {
+      "id": "6.2.166",
+      "kaumudiIndex": 6436
+    },
+    {
+      "id": "6.2.169",
+      "kaumudiIndex": 6439
+    },
+    {
+      "id": "6.2.171",
+      "kaumudiIndex": 6445
+    },
+    {
+      "id": "6.2.172",
+      "kaumudiIndex": 6446
+    },
+    {
+      "id": "6.2.173",
+      "kaumudiIndex": 6447
+    },
+    {
+      "id": "6.2.176",
+      "kaumudiIndex": 6450
+    },
+    {
+      "id": "6.2.177",
+      "kaumudiIndex": 6451
+    },
+    {
+      "id": "6.2.182",
+      "kaumudiIndex": 6455
+    },
+    {
+      "id": "6.2.184",
+      "kaumudiIndex": 6460
+    },
+    {
+      "id": "6.2.185",
+      "kaumudiIndex": 6461
+    },
+    {
+      "id": "6.2.187",
+      "kaumudiIndex": 6463
+    },
+    {
+      "id": "6.2.188",
+      "kaumudiIndex": 6464
+    },
+    {
+      "id": "6.2.189",
+      "kaumudiIndex": 6465
+    },
+    {
+      "id": "6.2.191",
+      "kaumudiIndex": 6467
+    },
+    {
+      "id": "8.2.5",
+      "kaumudiIndex": 6479
+    }
+  ]
+}

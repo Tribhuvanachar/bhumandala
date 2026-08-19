@@ -200,6 +200,33 @@
     }, 140);
   }
 
+  // build_search_index.py now stores each unit's text up to 2000 chars
+  // (was a fixed 140-char prefix), specifically so a match deeper into a
+  // long commentary paragraph is actually IN the stored text somewhere —
+  // but showing up to 2000 raw characters in one result row would be
+  // unreadable. This slices a short, readable excerpt CENTERED on the
+  // first place the query's own words actually appear, so what's shown is
+  // the same text that gets highlighted, not an unrelated prefix. Falls
+  // back to the plain prefix (today's behaviour) when no word is found in
+  // this script — e.g. an IAST query against a Devanagari-only snippet,
+  // a real but separate limitation this doesn't attempt to fix.
+  function centerSnippet(text, q, radius) {
+    radius = radius || 90;
+    var words = (q || '').trim().split(/\s+/).filter(function (w) { return w.length >= 2; });
+    var at = -1, matchLen = 0;
+    for (var i = 0; i < words.length; i++) {
+      var idx = text.toLowerCase().indexOf(words[i].toLowerCase());
+      if (idx !== -1 && (at === -1 || idx < at)) { at = idx; matchLen = words[i].length; }
+    }
+    if (at === -1) return text.slice(0, radius * 2);
+    var start = Math.max(0, at - radius);
+    var end = Math.min(text.length, at + matchLen + radius);
+    var out = text.slice(start, end);
+    if (start > 0) out = '…' + out;
+    if (end < text.length) out = out + '…';
+    return out;
+  }
+
   // Wraps whole-word, case-insensitive matches of the query's own words
   // (>=2 chars, so a stray single letter doesn't highlight half the
   // snippet) in <mark> — deliberately literal-substring, not aware of the
@@ -240,7 +267,7 @@
     box.innerHTML = note + hits.map(function (h) {
       return '<div class="dge-gs-row" data-slug="' + esc(h.grantha) + '" data-unit="' + esc(h.unit) + '">' +
         '<div class="dge-gs-meta"><b>' + esc(h.title) + '</b><span>' + esc(h.unit) + '</span><span>' + esc(h.category) + '</span><span>' + h.score.toFixed(2) + '</span></div>' +
-        '<div class="dge-gs-snip">' + highlightSnippet(esc(h.snippet), q) + '</div></div>';
+        '<div class="dge-gs-snip">' + highlightSnippet(esc(centerSnippet(h.snippet, q)), q) + '</div></div>';
     }).join('');
     Array.prototype.forEach.call(box.querySelectorAll('.dge-gs-row'), function (row) {
       row.onclick = function (ev) {

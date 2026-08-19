@@ -67,7 +67,20 @@ def clean_devanagari(text: str) -> str:
     return re.sub(r"\s+", " ", t).strip()
 
 
-def snippet(text: str, n: int = 140) -> str:
+def snippet(text: str, n: int = 2000) -> str:
+    """Stored verbatim (Devanagari, not the pk/ck folded keys) so the CLIENT
+    can locate the actual match and center a short excerpt on it at render
+    time — impossible to do here, since the query hasn't been typed yet. A
+    fixed-position prefix (this used to be text[:140]) only ever highlighted
+    a match that happened to fall in a unit's first 140 characters; most
+    units are short verses where that was true by luck, but any longer
+    commentary/tika paragraph with its match further in silently showed an
+    unrelated, unhighlighted prefix instead — confirmed directly: a real,
+    exact match at character 758 of a 797-character unit. n=2000 is a
+    generous cap against the rare pathologically long unit, not a normal
+    ceiling — the overwhelming majority of units are far shorter and are
+    now stored in full.
+    """
     t = clean_devanagari(text)
     return t[:n]
 

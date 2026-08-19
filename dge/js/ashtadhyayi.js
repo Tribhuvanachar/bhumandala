@@ -1,11 +1,15 @@
 /* ==========================================================================
- * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.2.2
+ * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.3.0
  *   v1.2.0 — Stream 5: +Siddhānta-Kaumudī, +Mahābhāṣya, +Vasu(Eng) layers;
  *            padaccheda / anvaya / anuvṛtti / adhikāra / sūtra-type analysis panel.
  *   v1.2.1 — re-applied the shared DGEGemini client to askGemini() (Stream 5's
  *            delivery predated it and had reverted to a raw fetch call).
  *   v1.2.2 — aiLang now defaults from the main reader's onboarding language
  *            preference (dge_lang_pref) instead of always starting at "en".
+ *   v1.3.0 — Siddhānta-Kaumudī reading-order navigation (partial: only the
+ *            ~28% of sutras whose Kaumudi citation matches this repo's own
+ *            sutrapatha text exactly, see kaumudi_order/data.json), plus a
+ *            per-sutra "cited as Kaumudi #N" badge whenever it's known.
  *
  * Blended Read⇄Compare UI for the Paninian sutrapatha + commentary layers
  * (Kashika / Balamanorama / Tattvabodhini / Nyasa), with a REAL Gemini
@@ -52,7 +56,15 @@
     script: LS.get("script", "devanagari"),
     mode: LS.get("mode", "read"),
     font: LS.get("font", 17),
-    collapsed: {}
+    collapsed: {},
+    // Siddhanta Kaumudi's own reading order -- byId maps a sutra id to its
+    // Kaumudi sequence number (kaumudi_order/data.json), list is those ids
+    // sorted by that number. Deliberately partial (see that file's own
+    // _readme): only sutras where Kaumudi restates the exact same words are
+    // in here, so navMode:"kaumudi" walks a real but incomplete sequence,
+    // not a guess at the ~63% this data doesn't confirm.
+    kaumudi: { byId: {}, list: [] },
+    navMode: LS.get("navMode", "ashtadhyayi")
   };
 
   function $(s, r){ return (r||document).querySelector(s); }
@@ -81,6 +93,16 @@
       state.sutras.forEach(function(it){ state.byId[it.id]=it; });
     });
   }
+  // Non-fatal, fire-and-forget: a reader browsing in plain Ashtadhyayi
+  // order (the default) never needs this file, and its own absence
+  // shouldn't hold up the sutra that DID load.
+  function loadKaumudiOrder(){
+    return fetchJSON(BASE+"kaumudi_order/data.json").then(function(d){
+      (d.items||[]).forEach(function(it){ state.kaumudi.byId[it.id]=it.kaumudiIndex; });
+      state.kaumudi.list = (d.items||[]).slice().sort(function(a,b){ return a.kaumudiIndex-b.kaumudiIndex; }).map(function(it){ return it.id; });
+      renderHero();
+    }).catch(function(){ /* fine without it */ });
+  }
   function ensureLayer(folder){
     var L = state.layers[folder];
     if (L && (L.loaded||L.loading)) return L.promise||Promise.resolve(L);
@@ -101,12 +123,33 @@
     $("#dge-p").textContent = tl(devnum(p[1]));
     $("#dge-s").textContent = tl(devnum(p[2]));
     $("#dge-hnum").textContent = row.id;
-    $("#dge-hpos").textContent = "#"+(state.idx+1);
-    $("#dge-htotal").textContent = state.sutras.length.toLocaleString();
+    if(state.navMode==="kaumudi" && state.kaumudi.list.length){
+      var kpos = state.kaumudi.list.indexOf(row.id);
+      $("#dge-hpos").textContent = kpos>=0 ? ("सिद्धान्तकौमुद्याम् #"+(kpos+1)) : "अद्यापि अनिश्चितम्";
+      $("#dge-htotal").textContent = state.kaumudi.list.length.toLocaleString()+" (आंशिकम्)";
+    } else {
+      $("#dge-hpos").textContent = "#"+(state.idx+1);
+      $("#dge-htotal").textContent = state.sutras.length.toLocaleString();
+    }
+    var kb=$("#dge-kaumudiBadge");
+    if(kb){
+      var ki = state.kaumudi.byId[row.id];
+      kb.textContent = ki ? ("सिद्धान्तकौमुद्याम् क्रमः #"+ki) : "";
+      kb.style.display = ki ? "" : "none";
+    }
     var hs=$("#dge-hsutra"); hs.textContent=tl(row.sanskrit_text); hs.className="sutra "+(state.script==="iast"?"":"deva");
     $("#dge-hsutraIt").textContent = iast(row.sanskrit_text);
-    var prevTxt = state.idx>0?tl(state.sutras[state.idx-1].sanskrit_text):"—";
-    var nextTxt = state.idx<state.sutras.length-1?tl(state.sutras[state.idx+1].sanskrit_text):"—";
+    var prevTxt, nextTxt;
+    if(state.navMode==="kaumudi" && state.kaumudi.list.length){
+      var kl=state.kaumudi.list, kpos2=kl.indexOf(row.id);
+      var prevRow = kpos2>0 ? state.byId[kl[kpos2-1]] : (kpos2===-1 ? state.byId[kl[kl.length-1]] : null);
+      var nextRow = (kpos2>=0 && kpos2<kl.length-1) ? state.byId[kl[kpos2+1]] : (kpos2===-1 ? state.byId[kl[0]] : null);
+      prevTxt = prevRow ? tl(prevRow.sanskrit_text) : "—";
+      nextTxt = nextRow ? tl(nextRow.sanskrit_text) : "—";
+    } else {
+      prevTxt = state.idx>0?tl(state.sutras[state.idx-1].sanskrit_text):"—";
+      nextTxt = state.idx<state.sutras.length-1?tl(state.sutras[state.idx+1].sanskrit_text):"—";
+    }
     $("#dge-prevT").textContent = prevTxt;
     $("#dge-nextT").textContent = nextTxt;
     $("#dge-prevTTop").textContent = prevTxt;
@@ -204,6 +247,23 @@
     });
   }
   function go(i){ if(i<0||i>=state.sutras.length) return; state.idx=i; renderAll(); window.scrollTo({top:0,behavior:"smooth"}); }
+  // Steps through state.kaumudi.list (only the sutras with a confirmed
+  // Kaumudi position) rather than state.sutras -- "next" here means "next
+  // in Kaumudi's own reading order", which is not the same sutra state.idx+1
+  // would give. Landing on a sutra with no confirmed position (most of
+  // them) and pressing this jumps to the nearest end of the known list
+  // rather than silently doing nothing.
+  function goKaumudi(dir){
+    var list=state.kaumudi.list; if(!list.length) return;
+    var row=state.sutras[state.idx];
+    var pos=row?list.indexOf(row.id):-1;
+    var target;
+    if(pos===-1) target = dir>0 ? list[0] : list[list.length-1];
+    else { var ni=pos+dir; if(ni<0||ni>=list.length) return; target=list[ni]; }
+    var it=state.byId[target]; if(!it) return;
+    go(state.sutras.indexOf(it));
+  }
+  function goNav(dir){ if(state.navMode==="kaumudi") goKaumudi(dir); else go(state.idx+dir); }
 
   /* ---------- Gemini (BYOK) ---------- */
   function getKey(){ return LS.get("gkey",""); }
@@ -330,10 +390,20 @@
     $("#dge-fontDn").addEventListener("click",function(){ state.font=Math.max(13,state.font-1); LS.set("font",state.font); renderLayers(); });
     $("#dge-expand").addEventListener("click",function(){ ORDER.forEach(function(k){state.collapsed[k]=false;}); renderLayers(); });
     $("#dge-collapse").addEventListener("click",function(){ if(state.mode!=="compare"){ORDER.forEach(function(k){state.collapsed[k]=true;}); renderLayers();} });
-    $("#dge-prevBtn").addEventListener("click",function(){ go(state.idx-1); });
-    $("#dge-nextBtn").addEventListener("click",function(){ go(state.idx+1); });
-    $("#dge-prevBtnTop").addEventListener("click",function(){ go(state.idx-1); });
-    $("#dge-nextBtnTop").addEventListener("click",function(){ go(state.idx+1); });
+    $("#dge-prevBtn").addEventListener("click",function(){ goNav(-1); });
+    $("#dge-nextBtn").addEventListener("click",function(){ goNav(1); });
+    $("#dge-prevBtnTop").addEventListener("click",function(){ goNav(-1); });
+    $("#dge-nextBtnTop").addEventListener("click",function(){ goNav(1); });
+    var navBtn=$("#dge-navModeBtn");
+    if(navBtn){
+      navBtn.classList.toggle("on", state.navMode==="kaumudi");
+      navBtn.addEventListener("click",function(){
+        state.navMode = state.navMode==="kaumudi" ? "ashtadhyayi" : "kaumudi";
+        LS.set("navMode", state.navMode);
+        navBtn.classList.toggle("on", state.navMode==="kaumudi");
+        renderHero();
+      });
+    }
     var pc=$("#dge-pcBtn"); if(pc) pc.addEventListener("click",function(){
       var pn=$("#dge-analysis"); if(!pn) return;
       var open=pn.classList.toggle("open"); pc.classList.toggle("on",open); });
@@ -393,8 +463,8 @@
     }
     document.addEventListener("keydown",function(e){
       if(/INPUT|TEXTAREA/.test((e.target.tagName||""))) return;
-      if(e.key==="ArrowRight") go(state.idx+1);
-      else if(e.key==="ArrowLeft") go(state.idx-1);
+      if(e.key==="ArrowRight") goNav(1);
+      else if(e.key==="ArrowLeft") goNav(-1);
     });
     // AI
     $("#dge-aiBtn").addEventListener("click",function(){ $("#dge-drawer").classList.add("open"); $("#dge-backdrop").classList.add("open"); });
@@ -440,6 +510,7 @@
       renderAll();
       ORDER.forEach(function(k){ if(state.enabled[k]) ensureLayer(k).then(renderLayers); });
       window.addEventListener("hashchange",goToHash);
+      loadKaumudiOrder();
     }).catch(function(e){ $("#dge-hsutra").textContent="Failed to load sutrapatha data."; console.error("[ashtadhyayi]",e); });
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot); else boot();
