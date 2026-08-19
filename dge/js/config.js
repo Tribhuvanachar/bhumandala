@@ -51,7 +51,11 @@ const appConfig = {
   // the index moved to the "search-dist" branch and the site came back to
   // about 685 MB. window.DGE_SEARCH_INDEX was already the override the search
   // client looks for. search_index/backlinks stays on main -- it is 0.1 MB.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@0195c115a77f196e616ab4745906b4c3730727a1",
+  // 19 Aug 2026: rebuilt with the per-trigram-postings fix (one file per
+  // trigram + a document-frequency table, instead of one file per 2-char
+  // prefix) -- see SEARCH_ARCHITECTURE.md. राम went from a 16 MB download to
+  // 549 KB; scoring itself is unchanged.
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@f11a2e3b3156568d1a884d959575f5a09a02a1a3",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
