@@ -127,29 +127,76 @@
         // fragment — each set (whole query, or one word) is judged against
         // its OWN 60% bar, independently, so a candidate only has to clear
         // the bar for the query as typed OR for a single word within it.
-        var cand = {};            // "gi:ui" -> best shared-trigram count, any one set
+        var cand = {};            // "gi:ui" -> { count: best total shared trigrams, complete: every non-boundary trigram of some set matched }
         trigramSets.forEach(function (set) {
-          var counts = {};
+          // A trigram containing ^ or $ only appears in the index at the
+          // true start/end of a UNIT'S WHOLE indexed text, not at each
+          // word's own boundary within it -- so a query word sitting in
+          // the middle of a verse/line (the overwhelmingly common case)
+          // can never match its own ^xy/yz$ trigrams, even on an exact
+          // literal hit. Requiring 60% of ALL trigrams including these
+          // meant a real match could permanently fall short of the bar
+          // (this is exactly how कान्ताय, an exact match in the middle of
+          // Sumadhva Vijaya's opening line, never became a candidate at
+          // all). Only the interior trigrams are required; boundary ones
+          // still count toward `count` as a bonus when they DO match (a
+          // genuine signal for a query that really is at a unit's edge).
+          var boundary = {}, requiredCount = 0;
+          set.forEach(function (tg) {
+            if (tg.indexOf('^') !== -1 || tg.indexOf('$') !== -1) boundary[tg] = 1; else requiredCount++;
+          });
+          var counts = {}, reqCounts = {};
           set.forEach(function (tg) {
             var b = self._bucketCache[bucketOf(tg)] || {};
             var post = b[tg]; if (!post) return;
+            var isBoundary = !!boundary[tg];
             for (var k = 0; k < post.length; k++) {
               var key = post[k][0] + ':' + post[k][1];
               counts[key] = (counts[key] || 0) + 1;
+              if (!isBoundary) reqCounts[key] = (reqCounts[key] || 0) + 1;
             }
           });
-          var need = Math.max(1, Math.ceil(set.length * 0.6));
-          Object.keys(counts).forEach(function (key) {
-            if (counts[key] >= need) cand[key] = Math.max(cand[key] || 0, counts[key]);
+          var need = Math.max(1, Math.ceil(Math.max(requiredCount, 1) * 0.6));
+          Object.keys(reqCounts).forEach(function (key) {
+            if (reqCounts[key] < need) return;
+            var complete = requiredCount > 0 && reqCounts[key] === requiredCount;
+            var total = counts[key];
+            var prev = cand[key];
+            if (!prev || (complete && !prev.complete) || (complete === prev.complete && total > prev.count)) {
+              cand[key] = { count: total, complete: complete };
+            }
           });
         });
         var keys = Object.keys(cand);
-        keys.sort(function (a, b) { return cand[b] - cand[a]; });
+        // Complete matches (every trigram that could possibly match, did)
+        // rank first, THEN by raw shared count. Sorting by raw count alone
+        // favoured a long query's partial match (many shared trigrams
+        // simply because the query is long) over a short query's COMPLETE
+        // match (fewer trigrams only because the word itself is short) --
+        // backwards, and part of why a short exact query could lose its
+        // shard slot to a longer, weaker one below.
+        keys.sort(function (a, b) {
+          if (cand[a].complete !== cand[b].complete) return (cand[b].complete ? 1 : 0) - (cand[a].complete ? 1 : 0);
+          return cand[b].count - cand[a].count;
+        });
         var giSet = {}, nGi = 0, picked = [], skipped = false;
+        // A genuinely complete match always gets its grantha opened, past
+        // the normal MAX_SHARDS budget -- up to a much higher ceiling so a
+        // pathological query (present in most of the corpus) still can't
+        // drag in everything. A common word/epithet can tie dozens of
+        // granthas at "every possible trigram present," and admitting only
+        // the first MAX_SHARDS of them by arbitrary sort-stability order
+        // (not by which is actually right) is exactly how an exact match --
+        // कान्ताय opening Sumadhva Vijaya -- went missing while a bunch of
+        // equally-complete but less relevant granthas filled the budget
+        // first. Partial (need-clearing but not complete) matches still
+        // respect the original MAX_SHARDS budget unchanged.
+        var MAX_EXACT_SHARDS = MAX_SHARDS * 3;
         for (var i = 0; i < keys.length && picked.length < MAX_UNITS; i++) {
           var gik = keys[i].split(':')[0];
+          var isExact = cand[keys[i]].complete;
           if (!giSet[gik]) {
-            if (nGi >= MAX_SHARDS) { skipped = true; continue; }
+            if (isExact ? nGi >= MAX_EXACT_SHARDS : nGi >= MAX_SHARDS) { skipped = true; continue; }
             giSet[gik] = 1; nGi++;
           }
           picked.push(keys[i]);

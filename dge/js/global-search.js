@@ -22,6 +22,7 @@
   var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@0195c115a77f196e616ab4745906b4c3730727a1';
   var INDEX_BASE = window.DGE_SEARCH_INDEX || CDN_INDEX;
   var idxPromise = null, debounce = null;
+  var currentScheme = 'auto'; // set by the scheme popup, read by queryOpts()
 
   function css() {
     if (document.getElementById('dge-gs-css')) return;
@@ -41,8 +42,19 @@
       '.dge-gs-panel{max-width:720px;margin:6vh auto 0;background:var(--card-bg,#fff);color:var(--text-primary,#1a1a1a);border:1px solid var(--card-border,rgba(0,0,0,.12));border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);overflow:hidden;font-family:inherit}',
       '.dge-gs-top{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--card-border,rgba(0,0,0,.12));align-items:center}',
       '.dge-gs-input{flex:1;font-size:17px;padding:10px 12px;border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,transparent);color:inherit}',
-      '.dge-gs-scheme{border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,#fff) ' + ARROW + ' no-repeat right 8px center;background-size:10px;color:var(--text-primary,inherit);padding:0 26px 0 10px;height:40px;font:inherit;font-size:14px;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none}',
-      '.dge-gs-scheme:focus{outline:none;border-color:var(--accent-red,#7a3b1d)}',
+      // A custom popup (trigger button + a dropped-down option list), not a
+      // native <select> -- a <select>'s OPEN list is drawn by the OS on
+      // mobile and cannot be restyled, which is exactly what made this look
+      // inconsistent with every other dropdown in the app (all of which are
+      // this same button+popup-list shape; see #displayPopup in index.html).
+      '.dge-gs-schemewrap{position:relative;flex:none}',
+      '.dge-gs-schemebtn{border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,#fff);color:var(--text-primary,inherit);padding:0 12px;height:40px;font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}',
+      '.dge-gs-schemebtn:focus{outline:none;border-color:var(--accent-red,#7a3b1d)}',
+      '.dge-gs-scheme-pop{position:absolute;top:calc(100% + 6px);right:0;background:var(--card-bg,#fff);border:1px solid var(--card-border,rgba(0,0,0,.15));border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.25);padding:6px;display:flex;flex-direction:column;gap:2px;min-width:110px;z-index:1;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .12s ease,transform .12s ease,visibility .12s ease}',
+      '.dge-gs-scheme-pop.show{opacity:1;visibility:visible;transform:translateY(0)}',
+      '.dge-gs-scheme-opt{padding:8px 10px;font-size:13px;font-weight:600;border-radius:6px;cursor:pointer;color:var(--text-primary,inherit)}',
+      '.dge-gs-scheme-opt:hover{background:var(--card-border,rgba(0,0,0,.08))}',
+      '.dge-gs-scheme-opt.active{background:var(--card-active,rgba(122,59,29,.12));color:var(--accent-red,#7a3b1d)}',
       '.dge-gs-x{border:1px solid var(--card-border,rgba(0,0,0,.2));background:var(--card-bg,#fff);color:var(--muted-text,#8a7a63);border-radius:8px;width:40px;height:40px;font-size:16px;cursor:pointer;flex:none}',
       '.dge-gs-x:hover{color:var(--accent-red,#7a3b1d);border-color:var(--accent-red,#7a3b1d)}',
       '.dge-gs-results{max-height:64vh;overflow:auto;padding:6px 0}',
@@ -57,6 +69,12 @@
   }
 
   function build() {
+    // open() calls build() on every single open, not just the first --
+    // without this guard each call appended a whole second FAB/overlay/
+    // input/scheme-popup (duplicate ids and all), and re-wired every
+    // listener a second time, growing without bound across a session. Only
+    // ever needs to run once; already-built means already-there.
+    if (document.getElementById('dge-gs-overlay')) return;
     css();
     var fab = document.createElement('button');
     fab.className = 'dge-gs-fab';
@@ -76,10 +94,16 @@
       '<div class="dge-gs-panel" role="dialog" aria-label="Global search">' +
         '<div class="dge-gs-top">' +
           '<input class="dge-gs-input" id="dge-gs-input" placeholder="Search all texts — Devanagari, IAST, HK, or SLP1…" autocomplete="off">' +
-          '<select class="dge-gs-scheme" id="dge-gs-scheme" title="Input script">' +
-            '<option value="auto">auto</option><option value="devanagari">देव</option>' +
-            '<option value="iast">IAST</option><option value="hk">HK</option><option value="slp1">SLP1</option>' +
-          '</select>' +
+          '<div class="dge-gs-schemewrap">' +
+            '<button type="button" class="dge-gs-schemebtn" id="dge-gs-scheme-btn" title="Input script">auto ▾</button>' +
+            '<div class="dge-gs-scheme-pop" id="dge-gs-scheme-pop">' +
+              '<div class="dge-gs-scheme-opt active" data-scheme="auto">auto</div>' +
+              '<div class="dge-gs-scheme-opt" data-scheme="devanagari">देव</div>' +
+              '<div class="dge-gs-scheme-opt" data-scheme="iast">IAST</div>' +
+              '<div class="dge-gs-scheme-opt" data-scheme="hk">HK</div>' +
+              '<div class="dge-gs-scheme-opt" data-scheme="slp1">SLP1</div>' +
+            '</div>' +
+          '</div>' +
           '<button class="dge-gs-x" id="dge-gs-x" title="Close (Esc)" aria-label="Close">✕</button>' +
         '</div>' +
         '<div class="dge-gs-results" id="dge-gs-results"><div class="dge-gs-hint">Type a word or phrase in any script. Matching is sandhi/spelling tolerant.</div></div>' +
@@ -92,6 +116,29 @@
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }
       if (e.key === 'Escape') close();
+    });
+
+    var schemeBtn = document.getElementById('dge-gs-scheme-btn');
+    var schemePop = document.getElementById('dge-gs-scheme-pop');
+    schemeBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      schemePop.classList.toggle('show');
+    });
+    schemePop.addEventListener('click', function (e) {
+      var opt = e.target.closest('.dge-gs-scheme-opt');
+      if (!opt) return;
+      currentScheme = opt.dataset.scheme;
+      schemeBtn.textContent = (opt.textContent || currentScheme) + ' ▾';
+      schemePop.querySelectorAll('.dge-gs-scheme-opt').forEach(function (o) { o.classList.toggle('active', o === opt); });
+      schemePop.classList.remove('show');
+      if (document.getElementById('dge-gs-input').value.trim()) onType();
+    });
+    // Same click-outside-closes convention as the overlay itself (line
+    // above: `if (e.target === ov) close()`).
+    document.addEventListener('click', function (e) {
+      if (schemePop.classList.contains('show') && !e.target.closest('.dge-gs-schemewrap')) {
+        schemePop.classList.remove('show');
+      }
     });
   }
 
@@ -129,7 +176,7 @@
 
   function queryOpts(input) {
     if (/[ऀ-ॿ]/.test(input)) return { scheme: 'devanagari' };
-    var scheme = document.getElementById('dge-gs-scheme').value;
+    var scheme = currentScheme;
     if (scheme === 'auto') scheme = /[āīūṛṝḷṁṃḥśṣṅñṭḍṇ]/i.test(input) ? 'iast' : 'slp1';
     if (scheme === 'slp1' || scheme === 'devanagari') return { scheme: scheme };
     try { if (window.Sanscript) return { slp1: window.Sanscript.t(input, scheme, 'slp1') }; } catch (e) {}
