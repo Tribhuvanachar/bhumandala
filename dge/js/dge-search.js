@@ -36,10 +36,21 @@
   // put every "ram"/"ran"/"raj"/... trigram in one multi-MB file a query for
   // any of them had to download whole; this fetches exactly the trigram it
   // asked for.
+  //
+  // The file is named with the trigram's LITERAL characters (real trigrams
+  // are always {A-Za-z^$}, all filesystem-safe as-is -- see
+  // safe_trigram_filename()'s docstring). encodeURIComponent here only
+  // percent-encodes ^/$ for the URL itself, the normal way any URL
+  // references a file whose name has characters special to URLs but not to
+  // filesystems. Do NOT bake a custom "%XX" escape into the filename on
+  // either side instead of this: fetch() percent-DEcodes "%XX" in a URL
+  // before requesting it, so a filename already containing a literal "%"
+  // silently 404s -- that was a real bug here, caught by checking the
+  // published index over the network rather than trusting a Node-local
+  // filesystem read (which never goes through URL parsing at all).
   function safeTrigram(tg) {
-    return tg.replace(/[^0-9A-Za-z_]/g, function (c) {
-      return '%' + c.charCodeAt(0).toString(16).padStart(2, '0');
-    }) || '_';
+    var safe = tg.replace(/[^0-9A-Za-z^$]/g, '_') || '_';
+    return encodeURIComponent(safe);
   }
 
   // How many of a trigram set's members to actually fetch, rarest first (by

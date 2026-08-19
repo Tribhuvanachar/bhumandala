@@ -163,18 +163,31 @@ def category_of(slug: str) -> str:
     return slug.split("/", 1)[0] if slug else "unknown"
 
 
-_SAFE_TG_CHARS = re.compile(r"[^0-9A-Za-z_]")
+_UNSAFE_TG_CHARS = re.compile(r"[^0-9A-Za-z^$]")
 
 
 def safe_trigram_filename(tg: str) -> str:
-    """Percent-encode a trigram into a filesystem/URL-safe filename (mirrors
-    kosha.js's safeBucket()). One file per TRIGRAM, not per 2-char prefix --
-    see the "one file per trigram" note in dge/SEARCH_ARCHITECTURE.md: filing
-    by the first two characters put every "ram"/"ran"/"raj"/... trigram in one
-    multi-MB file that a query for any of them had to download whole (16 MB
-    for a राम search, 40 MB for a rarer word with a common prefix). A query
-    now fetches exactly the trigram files it needs."""
-    return _SAFE_TG_CHARS.sub(lambda m: "%%%02x" % ord(m.group(0)), tg) or "_"
+    """The literal on-disk/in-git filename for one trigram's postings file.
+    One file per TRIGRAM, not per 2-char prefix -- see the "one file per
+    trigram" note in dge/SEARCH_ARCHITECTURE.md: filing by the first two
+    characters put every "ram"/"ran"/"raj"/... trigram in one multi-MB file
+    that a query for any of them had to download whole (16 MB for a राम
+    search). A query now fetches exactly the trigram files it needs.
+
+    Real trigrams are always drawn from {A-Za-z^$} (search_toolkit_pkg
+    .normalize.trigrams pads with ^/$ at word boundaries) -- every one of
+    those is already a safe literal filename on any filesystem/git, so they
+    are used as-is, NOT percent-encoded here. The client (dge-search.js
+    safeTrigram()) percent-encodes ^ and $ only when building the fetch URL,
+    the same way any URL references a file whose name contains characters
+    special to URLs but not to filesystems; the CDN decodes that back to
+    this exact literal name. Baking a custom "%XX" escape into the filename
+    ITSELF, instead, was tried first and was a real bug: a browser's fetch()
+    percent-DEcodes "%XX" sequences in a URL before requesting it, so a
+    filename already containing a literal "%" was requested as something
+    else entirely and 404'd. Only a genuinely unexpected character (none
+    should occur) falls back to '_', same spirit as the old bucket_of()."""
+    return _UNSAFE_TG_CHARS.sub("_", tg) or "_"
 
 
 def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dict:
