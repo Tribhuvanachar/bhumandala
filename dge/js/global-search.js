@@ -196,8 +196,20 @@
         '<div class="dge-gs-snip">' + highlightSnippet(esc(h.snippet), q) + '</div></div>';
     }).join('');
     Array.prototype.forEach.call(box.querySelectorAll('.dge-gs-row'), function (row) {
-      row.onclick = function () { go(row.getAttribute('data-slug'), row.getAttribute('data-unit')); };
+      row.onclick = function (ev) {
+        // A sutra reference inside the snippet (wired below) opens its own
+        // popover on click; without this the row's own click-to-navigate
+        // would also fire on the same tap, jumping to the grantha instead.
+        if (ev.target.closest && ev.target.closest('.dge-sutra-ref')) return;
+        go(row.getAttribute('data-slug'), row.getAttribute('data-unit'));
+      };
     });
+    // Sutra numbers appearing in a snippet get the same tappable popover
+    // the reading view and Kosha already give them (js/intellisense.js) —
+    // was Kosha-only; global corpus search snippets never got this.
+    if (typeof window.dgeScanForSutras === 'function') {
+      try { window.dgeScanForSutras(box); } catch (e) {}
+    }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
