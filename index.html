@@ -301,7 +301,20 @@ let SITE_CONFIG = null;
         </div>
         ${[].concat(sec.blurb).map((t, bi) => `<p class="person-blurb" data-edit="sections.${si}.blurb${Array.isArray(sec.blurb) ? '.' + bi : ''}">${esc(t)}</p>`).join('')}`;
 
-      if (sec.items) {
+      if (sec.panel === 'contributors') {
+        // Sourced live from admin/content/reader.json's CONTRIBUTORS_CONFIG
+        // (see the boot fetch) rather than a second copy in this file —
+        // view-only here since that file's own edit tool already covers it
+        // (dge/index.html's About panel).
+        const rc = window.READER_CONTENT;
+        const contrib = (rc && rc.CONTRIBUTORS_CONFIG && rc.CONTRIBUTORS_CONFIG.enabled &&
+                          rc.CONTRIBUTORS_CONFIG.contributors) || [];
+        if (contrib.length) {
+          html += '<ul class="person-items">' + contrib.map(function (c) {
+            return `<li><span>${esc(c.name)}</span>${c.role ? `<small>${esc(c.role)}</small>` : ''}</li>`;
+          }).join('') + '</ul>';
+        }
+      } else if (sec.items) {
         html += '<ul class="person-items">' + sec.items.map(function (i, ii) {
           const ip = 'sections.' + si + '.items.' + ii + '.';
           return `<li><span data-edit="${ip}name">${esc(i.name)}</span>` +
@@ -328,7 +341,6 @@ let SITE_CONFIG = null;
     const pt = (k) => ' data-edit="panels.' + key + '.' + k + '"';
 
     let html = `<button class="sheet-close" data-close aria-label="Close">✕</button>
-      <a class="sheet-fullpage-link" href="home-panel.html?panel=${esc(key)}" title="Open this panel as its own page">↗ Full page</a>
       <div class="sheet-eyebrow"${pt('eyebrow')}>${esc(p.eyebrow)}</div>
       <h3 id="sheetTitle"${pt('title')}>${esc(p.title)}</h3>`;
 
@@ -359,6 +371,35 @@ let SITE_CONFIG = null;
       html += '</div>';
     });
 
+    return html;
+  }
+
+  /* The "Contributors & Seva Support" Know More sheet — same visual shape
+     as panelHtml()'s groups/entries, but sourced from admin/content/
+     reader.json (window.READER_CONTENT, see the boot fetch) rather than
+     home.json's panels{}, and view-only here: that file's own edit tool
+     already lives on the reader app's About panel, so this is not a
+     second, independently-editable copy of the same list. */
+  function contributorsPanelHtml() {
+    const rc = window.READER_CONTENT;
+    let html = '<button class="sheet-close" data-close aria-label="Close">✕</button>';
+    if (!rc) {
+      html += '<p style="padding:30px 0; color:var(--text-dim);">Could not load contributor data.</p>';
+      return html;
+    }
+    html += `<div class="sheet-eyebrow">Seva &amp; Support</div><h3 id="sheetTitle">Contributors &amp; Sponsors</h3>`;
+    const contrib = (rc.CONTRIBUTORS_CONFIG && rc.CONTRIBUTORS_CONFIG.enabled && rc.CONTRIBUTORS_CONFIG.contributors) || [];
+    const sponsors = (rc.KEY_SPONSORS_CONFIG && rc.KEY_SPONSORS_CONFIG.enabled && rc.KEY_SPONSORS_CONFIG.sponsors) || [];
+    function group(heading, iconName, entries) {
+      if (!entries.length) return '';
+      return `<div class="ack"><div class="ack-head"><span class="ico">${icon(iconName, 22)}</span>` +
+        `<h4>${esc(heading)}</h4><span class="line" aria-hidden="true"></span></div>` +
+        '<ul class="ack-entries">' + entries.map(function (e) {
+          return `<li><b>${esc(e.name)}</b>${e.note ? `<div class="ack-body"><small>${esc(e.note)}</small></div>` : ''}</li>`;
+        }).join('') + '</ul></div>';
+    }
+    html += group('Contributors', 'people', contrib.map(c => ({ name: c.name, note: c.role })));
+    html += group('Key Sponsors', 'lamp', sponsors.map(s => ({ name: s.name, note: s.contribution })));
     return html;
   }
 
@@ -395,7 +436,9 @@ let SITE_CONFIG = null;
 
   let lastFocus = null;
   function openPanel(key) {
-    const html = panelTail(key, cfg.panels[key], panelHtml(key));
+    // 'contributors' has no home.json panels{} entry -- its sheet is built
+    // straight from reader.json instead (see contributorsPanelHtml()).
+    const html = key === 'contributors' ? contributorsPanelHtml() : panelTail(key, cfg.panels[key], panelHtml(key));
     if (!html) return;
     lastFocus = document.activeElement;
     $('sheet').setAttribute('data-panel-key', key);
@@ -638,9 +681,20 @@ let SITE_CONFIG = null;
       });
   }
 
-  Promise.all([get('admin/content/home.json'), get('admin/config/home.json')])
-    .then(function (both) {
-      const content = both[0], conf = both[1];
+  Promise.all([
+      get('admin/content/home.json'),
+      get('admin/config/home.json'),
+      // The Contributors & Seva Support section reads its list from here —
+      // the SAME file the reader app's own About panel already edits —
+      // rather than home.json keeping a second, separately hand-maintained
+      // copy that can silently drift out of sync with it. Non-fatal: a
+      // missing/unreachable reader.json just means that one section's list
+      // stays empty, not that the whole vandana gate fails to load.
+      get('admin/content/reader.json').catch(function () { return null; })
+    ])
+    .then(function (all) {
+      const content = all[0], conf = all[1];
+      window.READER_CONTENT = all[2];
       // The _readme keys are for whoever edits the files; they are not page data.
       delete content._readme; delete conf._readme;
       cfg = Object.assign({}, conf, content);

@@ -207,7 +207,7 @@
         "What began as an individual effort is intended to grow beyond its founder — into a repository that can be strengthened by scholars, students, volunteers, and future generations."
       ],
       "meetFounderLabel": "Meet the Founder →",
-      "meetFounderHref": "../home-panel.html?panel=tribhuvan",
+      "meetFounderPanel": "tribhuvan",
       "gratitude": "To the Gurus, Ācāryas, teachers, family, well-wishers, and great souls whose grace and guidance have shaped this journey, this work is offered with gratitude and reverence.",
       "names": "Śrī Śrīpādarāja · Śrī Bhūtarāja · Śrī Vādirāja"
     },
