@@ -17,32 +17,49 @@ because a merge done now would silently commit to guesses that haven't been
 checked by a human yet (composer identity, category→form mapping). Everything
 new lives under its own folder, tagged `pending`, until that review happens.
 
-## Why "local" isn't one file
+## Why "local" isn't one file — four sources now, a fifth expected next month
 
-The Android app reportedly ships 4-5 SQLite assets, not one. The importer
-takes `--asset-name` so each one lands in its own subfolder
-(`dasa_sahitya_local/<asset-name>/...`) without overwriting a sibling asset's
-data:
+Turned out "local Android app assets" was one of **four independently-shaped
+sources**, not one: an Android SQLite DB, a Firestore-style personal-
+collection export, and a plain flat-JSON text dump, each needing its own
+importer since none share a schema. Every source lands in its own subfolder
+(`dasa_sahitya_local/<asset-name>/...`) so nothing overwrites a sibling:
 
 ```
 dge/data/dasa_sahitya_local/
-  dasa1/
+  dasa1/                       -- Android SQLite asset (dasa1.db): 135 dasaru, 13540 keerthanas
     index.json                          -- manifest: counts, category guess, per-dasaru file list
-    cross_source_duplicate_review.json  -- composer-level overlap vs dasa_sahitya/, tagged pending
-    dasaru/<slug>.json                  -- one file per dasaru, ASCII-transliterated slug
-  dasa2/            (next asset, once provided)
-  ...
-  ARCHITECTURE.md    -- this file
+    cross_source_duplicate_review.json  -- composer-level overlap vs dasa_sahitya/ (web crawl), tagged pending
+    dasaru/<slug>.json
+  collection_padagalu/         -- Firestore-style personal-collection export: 4 dasaru, 145 compositions
+    index.json                          -- only source with genuine parallel Kannada + English-transliteration text
+    dasaru/<slug>.json
+  raw_dump/                    -- flat JSON arrays, no titles/metadata: 4 files, 1043 items
+    index.json                          -- includes one unattributed genre-only file (ugabhoga.json, 278 items)
+    dasaru/<slug>.json
+  ALL_SOURCES_composer_registry.json    -- composer-level counts across all 4 sources, for the 5 composers appearing in 3+
+  ARCHITECTURE.md              -- this file
 ```
 
-To add the next asset once it's provided:
+Each importer takes `--asset-name` so the next batch (one more source
+expected next month) lands in its own subfolder the same way:
 ```
+# SQLite asset (Android app DB)
 python3 tools/dasa_sahitya/import_dasa_sahitya_local_db.py \
     --db /path/to/dasaN.db --out dge/data/dasa_sahitya_local --asset-name dasaN
+
+# Firestore-style {index.json + one <slug>.json per dasaru} export
+python3 tools/dasa_sahitya/import_dasa_sahitya_collection_json.py \
+    --src-dir /path/to/export --out dge/data/dasa_sahitya_local --asset-name <name>
+
+# Flat JSON-array-per-file dump, no per-record composer/metadata
+python3 tools/dasa_sahitya/import_dasa_sahitya_flat_json.py \
+    --src-dir /path/to/files --out dge/data/dasa_sahitya_local --asset-name <name> \
+    --composer-map file.json=ಕನ್ನಡಹೆಸರು ... --no-composer-files genre_dump.json --no-composer-form ugabhoga
 ```
-The raw `.db` file itself is **not** committed (it's a 30MB+ binary asset
-dump, not source); only the generated JSON is. Re-run the importer whenever
-a fresher copy of an asset shows up — it's a full regenerate, not additive.
+Raw source files themselves are **not** committed (they're asset dumps, not
+source code); only the generated JSON is. Re-run an importer whenever a
+fresher copy of that asset shows up — it's a full regenerate, not additive.
 
 ## What "pending" means here, concretely
 
@@ -63,6 +80,22 @@ a fresher copy of an asset shows up — it's a full regenerate, not additive.
      on the web side as a concrete merge opportunity: cross-matching their
      Kannada verse text against dasa1's fully-attributed 13540 keerthanas
      could recover a real composer name for a chunk of that 453-item pile.
+   - `ALL_SOURCES_composer_registry.json` extends this across all four
+     sources: **5 composers (Purandara, Kanaka, Vyasarayaru, Sripadarajaru,
+     Gopala) now each appear in 3-4 sources independently**, with counts
+     that don't obviously nest inside one another (e.g. Purandara: 306 web /
+     983 dasa1 / 54 collection_padagalu / 305 raw_dump) — meaning composer
+     identity is settled for these 5, but composition-level overlap isn't:
+     the same fingerprint-based `dedupe()` already in
+     `tools/dasa_sahitya/import_dasa_sahitya.py` needs to run across all
+     four sources' records for these 5 names before merging, since a close
+     count (raw_dump's 305 vs web's 306) could mean near-total overlap or
+     two mostly-disjoint sets that happen to be similarly sized.
+   - `raw_dump/ugabhoga.json` (278 items) is a **genre-only dump with no
+     composer attribution at all** — imported with `composer:""` rather
+     than guessed, specifically so it doesn't get silently mis-attributed
+     to Purandara Dasaru just because ugabhogas are historically associated
+     with him.
 
 2. **Category → form mapping** — the app DB's `category` int (0-5) was
    reverse-engineered from ~30 sampled rows per bucket, not documented

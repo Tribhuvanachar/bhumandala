@@ -1,0 +1,37 @@
+{
+  "asset": "raw_dump",
+  "generated": "2026-08-19",
+  "count_total": 1043,
+  "needs_review_count": 0,
+  "bio_notes": 1,
+  "dasaru": [
+    {
+      "slug": "gopaladasaru",
+      "composer": "ಗೋಪಾಲದಾಸರು",
+      "source_file": "gopaladasa.json",
+      "count": 142,
+      "file": "dasaru/gopaladasaru.json"
+    },
+    {
+      "slug": "kanakadasaru",
+      "composer": "ಕನಕದಾಸರು",
+      "source_file": "kanakadasa.json",
+      "count": 318,
+      "file": "dasaru/kanakadasaru.json"
+    },
+    {
+      "slug": "puramdaradasaru",
+      "composer": "ಪುರಂದರದಾಸರು",
+      "source_file": "purandara.json",
+      "count": 305,
+      "file": "dasaru/puramdaradasaru.json"
+    },
+    {
+      "slug": "ugabhoga",
+      "composer": "",
+      "source_file": "ugabhoga.json",
+      "count": 278,
+      "file": "dasaru/ugabhoga.json"
+    }
+  ]
+}

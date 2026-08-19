@@ -1,0 +1,43 @@
+{
+  "asset": "collection_padagalu",
+  "generated": "2026-08-19",
+  "count_total": 145,
+  "counts_by_collection": {
+    "padagalu": 145
+  },
+  "needs_review_count": 2,
+  "dasaru": [
+    {
+      "slug": "kanakadasa",
+      "dasaru_id": "kanakadasaru",
+      "composer": "ಕನಕದಾಸ",
+      "composer_latin": "K A N A K A D A S A R U",
+      "count": 71,
+      "file": "dasaru/kanakadasa.json"
+    },
+    {
+      "slug": "vyasarayaru",
+      "dasaru_id": "vyasarayaru",
+      "composer": "ವ್ಯಾಸರಾಯರು",
+      "composer_latin": "V Y A S A R A Y A R U",
+      "count": 10,
+      "file": "dasaru/vyasarayaru.json"
+    },
+    {
+      "slug": "puramdaradasa",
+      "dasaru_id": "purandaradasa",
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "count": 54,
+      "file": "dasaru/puramdaradasa.json"
+    },
+    {
+      "slug": "sripadarajaru",
+      "dasaru_id": "sripadaraja",
+      "composer": "ಶ್ರೀಪಾದರಾಜರು",
+      "composer_latin": "S R I P A D A R A J A R U",
+      "count": 10,
+      "file": "dasaru/sripadarajaru.json"
+    }
+  ]
+}

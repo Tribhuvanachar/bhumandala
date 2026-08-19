@@ -1,0 +1,6205 @@
+{
+  "composer": "ಪುರಂದರದಾಸ",
+  "composer_latin": "P U R A N D A R A  D A S A R U",
+  "dasaru_id": "purandaradasa",
+  "count": 54,
+  "compositions": [
+    {
+      "id": "puramdaradasa__collection_padagalu_2APUobKIpsApQpOb1iID",
+      "form": "pada",
+      "title": {
+        "kn": "ಸಹಿಸಲಾರೆನೆ ಗೋಪಿ ನಿನ್ನ ಮಗನ ಲೂಟಿ",
+        "latin": "ಸಹಿಸಲಾರೆನೆ ಗೋಪಿ ನಿನ್ನ ಮಗನ ಲೂಟಿ",
+        "iast": "sahisalārènè gopi ninna magana lūṭi",
+        "devanagari": "सहिसलारॆनॆ गोपि निन्न मगन लूटि"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಸಹಿಸಲಾರೆನೆ ಗೋಪಿ ನಿನ್ನ ಮಗನ ಲೂಟಿ,",
+            "ಏನೆಂದು ಪೇಳಮ್ಮ ||ಪ ||",
+            "ವಾಸುದೇವನು ಬಂದು ಮೋಸದಿಂದಲಿ ಎನ್ನ",
+            "ವಾಸವ ಸೆಳಕೊಂಡು ಓಡಿ ಪೋದನಮ್ಮ ||ಅ ||"
+          ],
+          [
+            "ದೇವರ ಪೆಟ್ಟಿಗೆ ತೆಗೆದು ಸಾಲಿಗ್ರಾಮ",
+            "ಸಾವಿರ ನುಂಗುವನೆ",
+            "ಭಾವಜನಯ್ಯ ಇದೇನೆಂದರೆ ನಿಮ್ಮ",
+            "ಕಾವ ದೇವರು ನಾ ಕೇಳಿಕೋ ಎಂಬನೆ ||"
+          ],
+          [
+            "ಅಗ್ರೋದಕ ತಂದು ಜಗಲಿ ಮೇಲಿಟ್ಟರೆ",
+            "ವೆಗ್ಗಳದಲಿ ಕುಡಿವ",
+            "ಮಂಗಳಮಹಿಮನ ಮೀಸಲೆಂದರೆ ನಿಮ್ಮ",
+            "ಮಂಗಳಮಹಿಮನ ಅಪ್ಪ ನಾನೆಂಬನೆ ||"
+          ],
+          [
+            "ಅಟ್ಟಡುಗೆಯನೆಲ್ಲ ಉಚ್ಚಿಷ್ಟ ಮಾಡಿ",
+            "ಅಷ್ಟು ತಾ ಬಳಿದುಂಬನೆ",
+            "ಕೃಷ್ಣದೇವರ ನೈವೇದ್ಯವೆಂದರೆ ನಿಮ್ಮ",
+            "ಇಷ್ಟ ದೇವರು ತೃಪ್ತನಾದನೆಂತೆಂಬನೆ ||"
+          ],
+          [
+            "ಋತುವಾದ ಬಾಲೆಯರು ಪತಿಯೊಡೆಗೆ ಪೋಪಾಗ",
+            "ಪಥದೊಳಗಡಗಿರುವ",
+            "ಮತಿಗೆಟ್ಟ ಹೆಣ್ಣೆ ಸುಂಕವ ಕೊಡು ಎನುತಲಿ",
+            "ರತಿಯಿಂದ ಮಾನವ ಸೂರೆಗೊಂಬುವನೆ ||"
+          ],
+          [
+            "ಅಚ್ಚ ಪಾಲ್ಮೊಸರು ನವನೀತವು ಮಜ್ಜಿಗೆ",
+            "ರಚ್ಚೆ ಮಾಡಿ ಕುಡಿವ",
+            "ಸ್ವಚ್ಛ ಶ್ರೀಪುರಂದರವಿಟ್ಠಲರಾಯನ",
+            "ಇಚ್ಛೆಯಿಂದಲಿ ನಿನ್ನ ಮನೆಗೆ ಕರೆದು ಕೊಳ್ಳೆ ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Sahisalarene gopi ninna magana luti,Enendu pelamma ||pa ||"
+          ],
+          [
+            "Vasudevanu bandu mosadindali enna",
+            "Vasava selakondu odi podanamma ||a ||"
+          ],
+          [
+            "Devara pettige tegedu saligrama",
+            "Savira nunguvane",
+            "Bavajanayya idenendare nimma",
+            "Kava devaru na keliko embane ||1||"
+          ],
+          [
+            "Agrodaka tandu jagali melittare",
+            "Veggaladali kudiva",
+            "Mangalamahimana misalendare nimma",
+            "Mangalamahimana appa nanembane ||2||"
+          ],
+          [
+            "Attadugeyanella uccishta madi",
+            "Ashtu ta balidumbane",
+            "Krushnadevara naivedyavendare nimma",
+            "Ishta devaru truptanadanentembane ||3||"
+          ],
+          [
+            "Rutuvada baleyaru patiyodege popaga",
+            "Pathadolagadagiruva",
+            "Matigetta henne sunkava kodu enutali",
+            "Ratiyinda manava suregombuvane ||4||"
+          ],
+          [
+            "Acca palmosaru navanitavu majjige",
+            "Racce madi kudiva",
+            "Svacca sripurandaravitthalarayana",
+            "Icceyindali ninna manege karedu kolle ||5||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "2APUobKIpsApQpOb1iID",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_3bXb9mMeLx9L6hohlFye",
+      "form": "pada",
+      "title": {
+        "kn": "ನೋಡು ನೋಡು ನೋಡು ಕೃಷ್ಣ ",
+        "latin": "ನೋಡು ನೋಡು ನೋಡು ಕೃಷ್ಣ ",
+        "iast": "noḍu noḍu noḍu kṛṣṇa ",
+        "devanagari": "नोडु नोडु नोडु कृष्ण "
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ನೋಡು ನೋಡು ನೋಡು ಕೃಷ್ಣ ಹೇಗೆ ಮಾಡುತಾನೆ",
+            "ಬೇಡಿಕೊಂಡರೆ ಬಾರ ಕೃಷ್ಣ, ಓಡಿ ಹೋಗುತಾನೆ ||ಪ||"
+          ],
+          [
+            "ಕಂಡಕಂಡವರ ಮೇಲೆ ಕಣ್ಣ ಹಾಕುತಾನೆ",
+            "ಉಂಡು ಉಂಡು ಮುಸುಕನಿಟ್ಟು ಮಲಗಿಕೊಳ್ಳುತಾನೆ",
+            "ಲಂಡತನವ ಮಾಡಿ ಮಾಡಿ ಮಣ್ಣ ಗೋರುತಾನೆ",
+            "ಭಂಡು ಮಾಡಿ ಬಾಗಿಲೊಳಗೆ ಚೀರಿಕೊಳ್ಳುತಾನೆ ||೨||"
+          ],
+          [
+            "ಕರುಣವಿಲ್ಲದಲೆ ಬಂದು ಕಾಲಲೊದೆಯುತಾನೆ",
+            "ಶರಣು ಹೊಕ್ಕರೆಯು ತಾನೆ ಕೊಡಲಿ ಮಸೆಯುತಾನೆ",
+            "ಹರಿಯುವ ವಾನರರ ಕೂಡ ಹಾರಾಡುತಾನೆ",
+            "ಸಿರಿಕೃಷ್ಣ ಹಾಲು-ತುಪ್ಪ ಸೂರೆಮಾಡುತಾನೆ ||೩||"
+          ],
+          [
+            "ಬಾಲೆಯರಿಗೆ ವರವನಿತ್ತು ಪುರವ ಕೆಡಿಸುತಾನೆ",
+            "ನೀಲಗುದುರೆಯನೇರಿ ಹಾರಿಸಾಡುತಾನೆ",
+            "ಬಾಲಕರ ಕೂಡಿಕೊಂದು ಕುಣಿದಾಡುತಾನೆ",
+            "ಲೋಲಪುರಂದರವಿಠಲ ತಾನು ಕುಣಿಯುತಾನೆ||೪||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Nodu nodu nodu krushna |hege madutane |",
+            "Bedikondare bara krushna |odi hogutane ||pa||"
+          ],
+          [
+            "Kanda kandavara mele kannu hakutane |",
+            "Undu undu musukanittu malagikollutane ||",
+            "Landatanava madi madi manna gorutane |",
+            "Bandu madi bagilolage cirikollutane ||1||"
+          ],
+          [
+            "Karunavilladale bandu kalalodeyutane |",
+            "Saranu hokkareyu tanu kodali maseyutane ||",
+            "Hariyuva vanarara koda haradutane |",
+            "Sirikrushna halu – tuppa suremadutane ||2||"
+          ],
+          [
+            "Baleyarige varavanittu purava kedisutane |",
+            "Nilagudureyaneri harisadutane ||",
+            "Balakara kudikondu kunidadutane |",
+            "Lolapurandara vithala tanu kuniyutane ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "3bXb9mMeLx9L6hohlFye",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_3ixkRuoZEJRJfNruVScf",
+      "form": "pada",
+      "title": {
+        "kn": "ಪೋಗದಿರೆಲೊ ರಂಗ ಬಾಗಿಲಿಂದಾಚೆಗೆ",
+        "latin": "ಪೋಗದಿರೆಲೊ ರಂಗ ಬಾಗಿಲಿಂದಾಚೆಗೆ",
+        "iast": "pogadirèlò raṃga bāgiliṃdācègè",
+        "devanagari": "पोगदिरॆलॊ रंग बागिलिंदाचॆगॆ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಪೋಗದಿರೆಲೊ ರಂಗ ಬಾಗಿಲಿಂದಾಚೆಗೆ",
+            "ಭಾಗವತರು ಕಂಡರೆತ್ತಿಕೊಂಡೊಯ್ವರೊ"
+          ],
+          [
+            "ಸುರಮುನಿಗಳು ತಮ್ಮ ಹೃದಯಗಹ್ವರದಲ್ಲಿ",
+            "ಪರಮಾತ್ಮನ ಕಾಣದರಸುವರೊ",
+            "ದೊರಕದ ವಸ್ತುವು ದೊರಕಿತು ತಮಗೆಂದು",
+            "ಹರುಷದಿಂದಲಿ ನಿನ್ನ ಕರೆದೆತ್ತಿಕೊಂಬರೊ",
+            "ಅಗಣಿತಗುಣ ನಿನ್ನ ಜಗದ ನಾರಿಯರೆಲ್ಲ",
+            "ಹಗೆಯಾಗಿ ನುಡಿವರೊ ಗೋಪಾಲನೆ",
+            "ಮಗುಗಳ ಮಾಣಿಕ್ಯ ತಗುಲಿತು ಕರಕೆಂದು",
+            "ಬೇಗದಿಂದಲಿ ಬಂದು ಬಿಗಿದಪ್ಪಿಕೊಂಬರೊ",
+            "ಧಿಟ್ಟ ನಾರಿಯರೆಲ್ಲ ಇಷ್ಟವ ಸಲಿಸೆಂದು",
+            "ಅಟ್ಟಟ್ಟಿ ಬೆನ್ಹಿಂದೆ ತಿರುಗುವರೊ",
+            "ಸೃಷ್ಟೀಶ ಪುರಂದರವಿಠಲರಾಯನೆ",
+            "ಇಷ್ಟಿಷ್ಟು ಬೆಣ್ಣೆಯ ಕೊಟ್ಟೇನೊ ರಂಗಯ್ಯ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Hogadiralo Ranga Bagilindacege |",
+            "Bagavataru Kandu Etti Kondoyvaru ||",
+            "Suramunigalu Tamma Hrudaya Kamala Dalli",
+            "Paramatmana Kanade Arasuvaru",
+            "Dorakada Vastuvu Dorakitu Tamagendu",
+            "Harushadindali Ninna Karedetii Kombaru ||1||"
+          ],
+          [
+            "Aganitaguna Ninna Jagada Nariyarella",
+            "Hageyagi Nudivaro Gopalane",
+            "Magugala Manikya Tagulitu Karakendu",
+            "Vegadindali Bandu Bigidappikombuvaru ||2||",
+            "Ditta Nariyarella Istava Salisendu",
+            "Attatti Bennat/Pti Tiruguvaro",
+            "Srshtisha Purandara Vittala Rayane",
+            "Istishtu Benneya Kotteno Rangayya ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "3ixkRuoZEJRJfNruVScf",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:37:44.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_3op3NuV7suraxrNBmk8y",
+      "form": "pada",
+      "title": {
+        "kn": "ಕಂದನೇಕೆ ಮಲಗನೆ",
+        "latin": "ಕಂದನೇಕೆ ಮಲಗನೆ",
+        "iast": "kaṃdanekè malaganè",
+        "devanagari": "कंदनेकॆ मलगनॆ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಕಂದನೇಕೆ ಮಲಗನೆ , ಕೇಳೆಲೆ ಸಖಿ ||ಪ||",
+            "ಕಾಯಜಜನಕಗೇನಾಯಿತು ಇವಗೆ",
+            "ಯಾವಳ ದೃಷ್ಟಿ ತಾಗಿತೆ ||ಅ||"
+          ],
+          [
+            "ಕಂದನೇಕೆ ಕಣ್ಣ ಮುಚ್ಚನೆ",
+            "ಇಂದು ನೀರದಡದಲ್ಲಿರುವನೆ , ಏ-",
+            "ನೆಂದರು ಮುಖವೆತ್ತಿ ನೋಡನೆ , ಗೋ-",
+            "ವಿಂದ ಬಾ ಎಂದರೆ ಬಾಯ ತೆರೆವನೆ ||"
+          ],
+          [
+            "ತನಯನಾಗಿ ಧರೆ ಅಳೆದನೆ , ತನ್ನ",
+            "ಜನನಿಯ ಕಂಡರೆ ಸೇರನೆ",
+            "ಮುನಿಗಳಂತೆ ಮೌನ ಪಿಡಿದನೆ",
+            "ಘನ ಗೋವು ಕಾಯ್ವಾಗ ಗಾಳಿ ಸೋಕಿತೇನೆ ||"
+          ],
+          [
+            "ಸುಮ್ಮನೇತಕೆ ವ್ರತ ಕೆಡಿಸಿದನೆ",
+            "ಹಮ್ಮಿನಿಂದಲಿ ಖಡ್ಗ ಪಿಡಿದನೆ",
+            "ಜನ್ಮಜನ್ಮಗಳಲ್ಲಿ ಬಿಡದಲಿರುವ ನೀ ಬಾರೊ",
+            "ಬೊಮ್ಮ ಶ್ರೀ ಪುರಂದರವಿಠಲ ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Kandaneke malagane , kelele saki ||pa||"
+          ],
+          [
+            "Kayajajanakagenayitu ivage",
+            "Yavala drushti tagite ||a||"
+          ],
+          [
+            "Kandaneke kanna muccane",
+            "Indu niradadadalliruvane , E-",
+            "Nendaru mukavetti nodane , go-",
+            "Vinda ba endare baya terevane ||1||"
+          ],
+          [
+            "Tanayanagi dhare aledane , tanna",
+            "Jananiya kandare serane",
+            "Munigalante mauna pididane",
+            "Gana govu kayvaga gali sokitene ||2||"
+          ],
+          [
+            "Summanetake vrata kedisidane",
+            "Hamminindali kadga pididane",
+            "Janmajanmagalalli bidadaliruva ni baro",
+            "Bomma sri purandaravithala ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "3op3NuV7suraxrNBmk8y",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_6KmJIgTB8Jn2cMrgBQLY",
+      "form": "pada",
+      "title": {
+        "kn": "ಜೋ ಜೋ ಯಶೋದೆಯ ನಂದ",
+        "latin": "ಜೋ ಜೋ ಯಶೋದೆಯ ನಂದ",
+        "iast": "jo jo yaśodèya naṃda",
+        "devanagari": "जो जो यशोदॆय नंद"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಜೋ ಜೋ ಯಶೋದೆಯ ನಂದ ಮುಕುಂದನೆ",
+            "ಜೋ ಜೋ ಕಂಸಕುಠಾರಿ",
+            "ಜೋ ಜೋ ಮುನಿಗಳ ಹೃದಯಮಂದಿರ",
+            "ಜೋ ಜೋ ಲಕುಮಿಯ ರಮಣ ||ಪ||"
+          ],
+          [
+            "ಹೊಕ್ಕಳಹೂವಿನ ತಾವರೆಗಣ್ಣಿನ , ಇಕ್ಕಿದ್ದ ಮಕರಕುಂಡಲದ",
+            "ಜಕ್ಕರಿಸುವ ಕದಪಿನ ಸುಳಿಗುರುಳಿನ , ಚಿಕ್ಕ ಬಾಯ ಮುದ್ದುಮೊಗದ",
+            "ಸೊಕ್ಕಿದ ಮದಕರಿಯಂದದಿ ನೊಸಲಲಿ ಇಕ್ಕಿದ ಕಸ್ತೂರಿತಿಲಕ",
+            "ರಕ್ಕಸರೆದೆದಲ್ಲಣ ಮುರವೈರಿಯೆ ಮಕ್ಕಳ ಮಾಣಿಕ ಜೋ ಜೋ ||"
+          ],
+          [
+            "ಕಣ್ಣು ಬೆಳಗು ಪಸರಿಸಿ ನೋಡುವ ಅರೆಗಣ್ಣ ಮುಚ್ಚಿ ನಸುನಗುತ",
+            "ಸಣ್ಣ ಬೆರಳು ಬಾಯೊಳು ಢವಳಿಸುತ ಪನ್ನಂಗಶಯನ ನಾಟಕದಿ",
+            "ನಿನ್ನ ಮಗನ ಮುದ್ದು ನೋಡೆನುತ ಗೋಪಿ ತನ್ನ ಪತಿಗೆ ತೋರಿದಳು",
+            "ಚಿನ್ನತನದ ಸೊಬಗಿನ ಖಣಿಯೇ ಹೊಸ ರನ್ನ ಮುತ್ತಿನ ಬೊಂಬೆ ಜೋ ಜೋ ||"
+          ],
+          [
+            "ನಿಡಿತೋಳ್ಗಳ ಪಸರಿಸುತಲಿ ಗೋಪಿಯ ತೊಡೆ ಮೇಲೆ ಮಲಗಿ ಬಾಯ ತೆರೆಯೆ",
+            "ಒಡಲೊಳು ಚತುರ್ದಶಭುವನವಿರಲು ಕಂಡು ನಡುನಡುಗಿ ಕಣ್ಣ ಮುಚ್ಚಿದಳು",
+            "ತಡೆಯದೆ ಅಡಿಗಳನಿಡುತಲಿ ಬಂದು ಮಡದೇರ ಮುಖವ ನೋಡುತ ನಿಂದು",
+            "ಕಡುದಯಾಸಾಗರ ಬಿಡದೆ ರಕ್ಶಿಸು ಎನ ಸಲಹಬೇಕೆಂದು ಜೋ ಜೋ ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Jo jo yasodeya kanda mukundane jo jo kamsa kutharijo",
+            "Jo munigala hrudayamandira jo jo lakumiya ramana |pa.|"
+          ],
+          [
+            "Hokkala huvina tavaregannina ikkidda makarakundalada",
+            "Jakkarisuva kadapina suligurulina cikka bayi muddu mogada",
+            "Sokkida madakariyamdadi nosalali ikkida kasturi tilaka",
+            "Rakkasarededallana muravairiye makkala manika jo jo || 1||"
+          ],
+          [
+            "Kanna belagu pasarisi noduta areganna mucci nasunaguta",
+            "Sanna beralu bayolu dhavalisuta pannagasayana natakadi",
+            "Ninna magana muddu nodenuta gopi tanna patige toridalu",
+            "Cinnatanada sobagina kaniye hosa ranna muttina bombe jo jo ||2||"
+          ],
+          [
+            "Niditolgala pasarisutali gopiya tode mel malagi baya tereye",
+            "Odalolu chaturdasa Buvanaviralu kandu nadunadugi kanna muccidalu",
+            "Tadeyade adigalanidutali bandu madadera mukava noduta nindu",
+            "Kadu dayasagara purandara vithala bidade rakshisu enna salahabekendu jo jo ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "6KmJIgTB8Jn2cMrgBQLY",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_9WkEtqHozBE0KXJDWKoy",
+      "form": "pada",
+      "title": {
+        "kn": "ಹಣ್ಣು ಬಂದಿದೆ ಕೊಳ್ಳಿರಿ ನೀವೀಗ",
+        "latin": "ಹಣ್ಣು ಬಂದಿದೆ ಕೊಳ್ಳಿರಿ ನೀವೀಗ",
+        "iast": "haṇṇu baṃdidè kòḻḻiri nīvīga",
+        "devanagari": "हण्णु बंदिदॆ कॊळ्ळिरि नीवीग"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಹಣ್ಣು ಬಂದಿದೆ ಕೊಳ್ಳಿರಿ ನೀವೀಗ"
+          ],
+          [
+            "ಚೆನ್ನಬಾಲಕೃಷ್ಣನೆಂಬೊ ಚೆನ್ನಾದ ಬಾಳೆಯಹಣ್ಣು ||ಪ||"
+          ],
+          [
+            "ಹವ್ಯಕವ್ಯದ ಹಣ್ಣು ಸವಿವ ಸಕ್ಕರೆಹಣ್ಣು"
+          ],
+          [
+            "ಭವರೋಗಗಳನೆಲ್ಲ ಕಳೆವ ಹಣ್ಣು"
+          ],
+          [
+            "ನವನೀತ ಚೋರನೆಂಬ ಯಮನ ಅಂಜಿಪ ಹಣ್ಣು"
+          ],
+          [
+            "ಅವನಿಯೊಳು ಶ್ರೀರಾಮನೆಂಬೊ ಹಣ್ಣು ||೧||"
+          ],
+          [
+            "ಕೊಳೆತು ಹೋಗುವುದಲ್ಲ ಹುಳಿತು ಹೋಗುವುದಲ್ಲ"
+          ],
+          [
+            "ಕಳೆದು ಬಿಸಾಡಿಸಿ ಕೊಳ್ಳುವುದಲ್ಲ"
+          ],
+          [
+            "ಅಳೆದು ಕೊಂಬುವುದಲ್ಲ ಗಿಳಿ ಕಚ್ಚಿ ತಿಂಬೊದಲ್ಲ"
+          ],
+          [
+            "ಒಳಿತಾದ ಹರಿಯೆಂಬೊ ಮಾವಿನಹಣ್ಣು ||೨||"
+          ],
+          [
+            "ಕೆಟ್ಟು ನಾರುವುದಲ್ಲ ಬಿತ್ತಿ ಬೆಳೆಯೋದಲ್ಲ"
+          ],
+          [
+            "ಕಷ್ಟದಿ ಹಣಕೊಟ್ಟು ಕೊಂಬುವುದಲ್ಲ"
+          ],
+          [
+            "ಸೃಷ್ಟಿಯೊಳಗೆ ನಮ್ಮ ಪುರಂದರವಿಠಲ"
+          ],
+          [
+            "ಕೃಷ್ಣರಾಯನೆಂಬೊ ಶ್ರೇಷ್ಠವಾದ ಹಣ್ಣು ||೩||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Hannu bandide kolliri niviga"
+          ],
+          [
+            "Chenna balakrushnanembo cennada baleyahannu ||pa||"
+          ],
+          [
+            "Havyakavyada hannu saviva sakkarehannu"
+          ],
+          [
+            "Bavarogagalanella kaleva hannu"
+          ],
+          [
+            "Navanita choranemba yamana amjipa hannu"
+          ],
+          [
+            "Avaniyolu sriramanembo hannu ||1||"
+          ],
+          [
+            "Koletu hoguvudalla hulitu hoguvudalla"
+          ],
+          [
+            "Kaledu bisadisi kolluvudalla"
+          ],
+          [
+            "Aledu kombuvudalla gili kacci timbodalla"
+          ],
+          [
+            "Olitada hariyembo mavinahannu ||2||"
+          ],
+          [
+            "Kettu naruvudalla bitti beleyodalla"
+          ],
+          [
+            "Kashtadi hanakottu kombuvudalla"
+          ],
+          [
+            "Srushtiyolage namma purandaravithala"
+          ],
+          [
+            "Krushnarayanembo sreshthavada hannu ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "9WkEtqHozBE0KXJDWKoy",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_A0MkTlEvYzoRi7uowKhG",
+      "form": "pada",
+      "title": {
+        "kn": "ಅಮ್ಮ ನಿಮ್ಮ ಮನೆಗಳಲ್ಲಿ",
+        "latin": "ಅಮ್ಮ ನಿಮ್ಮ ಮನೆಗಳಲ್ಲಿ",
+        "iast": "amma nimma manègaḻalli",
+        "devanagari": "अम्म निम्म मनॆगळल्लि"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಅಮ್ಮ ನಿಮ್ಮ ಮನೆಗಳಲ್ಲಿ ನಮ್ಮ ರಂಗನ ಕಂಡಿರೇನಮ್ಮ ||ಪಲ್ಲವಿ||"
+          ],
+          [
+            "ಬ್ರಹ್ಮ ಮೂರುತಿ ನಮ್ಮ ಕೃಷ್ಣನು ನಿಮ್ಮ ಕೇರಿಯೊಳಿಲ್ಲವೆ ||ಅನುಪಲ್ಲವಿ ||"
+          ],
+          [
+            "ಕಾಶಿ ಪೀತಾಂಬರ ಕೈಯಲ್ಲಿ ಕೊಳಲು ಪೂಸಿದ ಶ್ರೀ ಗಂಧ ಮೈಯೊಳಗಮ್ಮ"
+          ],
+          [
+            "ಲೇಸಾಗಿ ತುಲಸಿಯ ಮಾಲೆಯ ಧರಿಸಿದ ವಾಸುದೇವನು ಬಂದ ಕಾಣಿರೇನೆ ||೧||"
+          ],
+          [
+            "ಕರದಲ್ಲಿ ಕಂಕಣ ಬೆರಳಲ್ಲಿ ಉಂಗುರ ಕೊರಳಲ್ಲಿ ಹಾಕಿದ ಹುಲಿಯುಗುರಮ್ಮ"
+          ],
+          [
+            "ಅರಳೆಲೆ ಕನಕ ಕುಂಡಲ ಕಾಲಲನುಗೆ ಉರಗ ಶಯನ ಬಂದ ಕಂಡಿರೇನೆ ||೨||"
+          ],
+          [
+            "ಕುಂಕುಮ ಕಸ್ತೂರಿ ಕರಿ ನಾಮ ತಿದ್ದಿ ಶಂಖ ಚಕ್ರಗಳ ಧರಿಸಿಹನಮ್ಮ"
+          ],
+          [
+            "ಬಿಂಕದಿಂದಲಿ ಕೊಳಲೂದುತ್ತ ಪಾಡುತ್ತ ಪಂಕಜಾಕ್ಷನು ಬಂದ ಕಾಣಿರೇನೆ ||೩||"
+          ],
+          [
+            "ಮಾವನ ಮಡುಹಿದ ಶಕಟನ ಕೆಡಹಿದ ಗೋವರ್ಧನ ಗಿರಿ ಎತ್ತಿದನಮ್ಮ"
+          ],
+          [
+            "ಆವ ತಾಯಿಗೆ ಈರೇಳು ಜಗ ತೋರಿದ ಕಾವನಯ್ಯ ಬಂದ ಕಾಣಿರೇನೆ ||೪||"
+          ],
+          [
+            "ಕಾಲಲಿ ಕಿರು ಗೆಜ್ಜೆ ನೀಲದ ಬಾವುಲಿ ನೀಲ ವರ್ಣನು ನಾಟ್ಯವಾಡುತಲಿ"
+          ],
+          [
+            "ಮೇಲಾಗಿ ಬಾಯಲ್ಲಿ ಜಗವನ್ನು ತೋರಿದ ಮೂಲೋಕದೊಡೆಯನ ಕಂಡಿರೇನೆ ||೫||"
+          ],
+          [
+            "ಹದಿನಾರು ಸಾವಿರ ಗೋಪಿಯರ ಕೂಡಿ ಚತುರಂಗ ಪಗಡೆಯನಾಡುವನಮ್ಮ"
+          ],
+          [
+            "ಮದನ ಮೋಹನ ರೂಪ ಎದೆಯಲ್ಲಿ ಕೌಸ್ತುಭ ಮಧುಸೂದನ ಬಂದ ಕಾಣಿರೇನೆ ||೬||"
+          ],
+          [
+            "ತೆತ್ತೀಸ ಕೋಟಿ ದೇವರ್ಗಳ ಒಡಗೂಡಿ ಹತ್ತಾವತಾರವನೆತ್ತಿದನಮ್ಮ"
+          ],
+          [
+            "ಸತ್ಯಭಾಮಾ ಪ್ರಿಯ ಪುರಂದರ ವಿಟ್ಠಲ ನಿತ್ಯೋತ್ಸವ ಬಂದ ಕಾಣಿರೇನೆ ||೭||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Amma Nimma Manegalalli Namma Rangana Kandirenamma"
+          ],
+          [
+            "Brahma Muruti Namma Krsnanu Nimma Keriyolillave"
+          ],
+          [
+            "Kashi Pitambara Kaiyalli Kolalu Pusida Shri Gandha Maiyolagamma"
+          ],
+          [
+            "Lesagi Tulasiya Maleya Dharisida Vasudevanu Banda Kanirenamma ||1||"
+          ],
+          [
+            "Karadalli Kankana Beralalli Ungura Koralalli Hakida Huliyuguramma"
+          ],
+          [
+            "Aralele Kanaka Kundala Kalalalanduge Uraga Shayana Banda Kandirene||2||"
+          ],
+          [
+            "Kumkuma Kasturi Hari Nama Tiddi Shankha Cakragala Dharisihanamma"
+          ],
+          [
+            "Binkadinda Kolaludutta Padutta Pankajaksanu Banda Kanirene||3||"
+          ],
+          [
+            "Mavana Maduhida Shakatana Kedahida Govardhana Giri Ettidanamma"
+          ],
+          [
+            "Ava Tayige Irelu Jaga Torida Kavanayya Banda Kanirene||4||"
+          ],
+          [
+            "Kalali Kiru Gejje Nilada Bavuli Nila Varnanu Natyavadutali"
+          ],
+          [
+            "Melagi Bayalli Jagavannu Torida Mukokadodeyana Kandirene||5||"
+          ],
+          [
+            "Hadinaru Savira Gopiyara Kudi Caturanga Pagadiyanaduvanamma"
+          ],
+          [
+            "Madana Mohana Rupa Edeyalli Kaustubha Madhusudana Banda Kanirene||6||"
+          ],
+          [
+            "Tettisa Koti Devargala Oda Gudi Hattavataravanettittadamma"
+          ],
+          [
+            "Satyabhama Priya Purandara Vittala Nityotsava Banda Kanirene||7||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "A0MkTlEvYzoRi7uowKhG",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:30:43.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_DF5shbU4B7s34sTiB7z9",
+      "form": "pada",
+      "title": {
+        "kn": "ಕಂಡು ಕಂಡು ನೀ ಎನ್ನ ಕೈ ಬಿಡುವರೇ ಕೃಷ್ಣಾ",
+        "latin": "ಕಂಡು ಕಂಡು ನೀ ಎನ್ನ ಕೈ ಬಿಡುವರೇ ಕೃಷ್ಣಾ",
+        "iast": "kaṃḍu kaṃḍu nī ènna kai biḍuvare kṛṣṇā",
+        "devanagari": "कंडु कंडु नी ऎन्न कै बिडुवरे कृष्णा"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಕಂಡು ಕಂಡು ನೀ ಎನ್ನ ಕೈ ಬಿಡುವರೇ ಕೃಷ್ಣಾ ।।ಪ॥"
+          ],
+          [
+            "ಪುಂಡರೀಕಾಕ್ಷ ಶ್ರೀ ಪುರುಷೋತ್ತಮ ಹರಿ ।।ಅ.ಪ॥"
+          ],
+          [
+            "ಬಂಧುಗಳು ಎನಗಿಲ್ಲ ಬದುಕಿನಲಿ ಸುಖವಿಲ್ಲ"
+          ],
+          [
+            "ನಿಂದೆಯಲಿ ನೊಂದೆನೈ ನೀರಜಾಕ್ಷ"
+          ],
+          [
+            "ತಂದೆತಾಯಿಯು ನೀನೆ ಬಂಧುಬಳಗವು ನೀನೆ"
+          ],
+          [
+            "ಎಂದೆಂದಿಗೂ ನಿನ್ನ ನಂಬಿದೆನೋ ಕೃಷ್ಣಾ ।।೧।।"
+          ],
+          [
+            "ಕ್ಷಣವೊಂದು ಯುಗವಾಗಿ ತೃಣಕಿಂತ ಕಡೆಯಾಗಿ"
+          ],
+          [
+            "ಎಣಿಸಲಾರದ ಭವದಿ ಕಡುನೊಂದೆ ನಾನು"
+          ],
+          [
+            "ಸನಕಾದಿ ಮುನಿವಂದ್ಯ ವನಜಸಂಭವ ಜನಕ"
+          ],
+          [
+            "ಫಣಿಶಾಯಿ ಪ್ರಹ್ಲಾದಗೊಲಿದ ಶ್ರೀಕೃಷ್ಣಾ ।।೨।।"
+          ],
+          [
+            "ಭಕ್ತವತ್ಸಲನೆಂಬೊ ಬಿರುದು ಪೊತ್ತಮೇಲೆ"
+          ],
+          [
+            "ಭಕ್ತರಾಧೀನನಾಗಿರಬೇಡವೆ"
+          ],
+          [
+            "ಮುಕ್ತಿದಾಯಕ ದೇವ ಪುರಂದರವಿಠಲನೆ"
+          ],
+          [
+            "ಶಕ್ತ ನೀನಹುದೆಂದು ನಂಬಿದೆನೊ ಶ್ರೀಕೃಷ್ಣಾ ।।೩।।"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Kandu kandu ni enna kai biduvare krushna ||pa||"
+          ],
+          [
+            "Pundarikaksha sri purushottama hari ||a.pa||"
+          ],
+          [
+            "Bandhugalu enagilla badukinali sukavilla"
+          ],
+          [
+            "Nindeyali nondenai nirajaksha"
+          ],
+          [
+            "Tandetayiyu nine bandhubalagavu nine"
+          ],
+          [
+            "Endemdigu ninna nambideno krushna ||1||"
+          ],
+          [
+            "Kshanavomdu yugavagi trunakinta kadeyagi"
+          ],
+          [
+            "Enisalarada Bavadi kadunonde nanu"
+          ],
+          [
+            "Sanakadi munivandya vanajasambava janaka"
+          ],
+          [
+            "Panisayi prahladagolida srikrushna ||2||"
+          ],
+          [
+            "Baktavatsalanembo birudu pottamele"
+          ],
+          [
+            "Baktaradhinanagirabedave"
+          ],
+          [
+            "Muktidayaka deva purandaravithalane"
+          ],
+          [
+            "Sakta ninahudendu nambideno srikrushna ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "DF5shbU4B7s34sTiB7z9",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_F4JcbxWtTF7z6c25NKQw",
+      "form": "pada",
+      "title": {
+        "kn": "ಕಡಗೋಲ ತಾರೆನ್ನ ಚಿನ್ನವೆ",
+        "latin": "ಕಡಗೋಲ ತಾರೆನ್ನ ಚಿನ್ನವೆ",
+        "iast": "kaḍagola tārènna cinnavè",
+        "devanagari": "कडगोल तारॆन्न चिन्नवॆ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಕಡಗೋಲ ತಾರೆನ್ನ ಚಿನ್ನವೆ",
+            "ಮೊಸರೊಡೆದರೆ ಬೆಣ್ಣೆ ಬಾರದು ರನ್ನವೆ ||ಪ.||"
+          ],
+          [
+            "ಅಣ್ಣನ ಒಡಗೊಂಡು ಬಾರಯ್ಯ ಸವಿ ಸವಿ",
+            "ಬೆಣ್ಣೆಯ ಮುದ್ದೆಯ ಮೆಲುವಿರಂತೆ",
+            "ಬಣ್ಣ ಸರವ ನಿನ್ನ ಕೊರಳಿಗೆ ಹಾಕುವೆ",
+            "ಚಿಣ್ಣರೊಡನೆ ಆಡಕಳುಹುವೆ ರಂಗ ||೧||"
+          ],
+          [
+            "ಪುಟ್ಟ ಬೂಚಿಯ ತಂದು ನಿನ್ನಯ",
+            "ತೊಟ್ಟಿಲ ಕಾಲಿಗೆ ಕಟ್ಟಿಡುವೆ",
+            "ಬಟ್ಟಲು ತುಂಬಿದ ಸಕ್ಕರೆ ನಿನಗೀವೆ",
+            "ಕಟ್ಟಾಣಿ ಮುತ್ತಿನ ಕಣಿಯೇ ಬಾ ರಾಮ ||೨||"
+          ],
+          [
+            "ಬಡವರ ಭಾಗ್ಯದ ನಿಧಿಯೇ ಗೋಕುಲದ",
+            "ಎನ್ನೊಡೆಯ ಮಕ್ಕಳ ಮಾಣಿಕವೇ",
+            "ಕೊಡು ಮುದ್ದು ಪುರಂದರವಿಠಲ ಕೃಷ್ಣಯ್ಯ ನೀ",
+            "ಪೆಂಗಡಲೊಳು ದುಡುಕು ಮಾಡುವರೇನೋ ರಂಗ ||೩||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Kadagola Tarenna Cinnave"
+          ],
+          [
+            "Mosarodedare Benne Baradu Rannave",
+            "Annanavoda Gudi Barayya Nitya Meluvinante"
+          ],
+          [
+            "Puttabuchiya Tandu Ninnaya Tottila Kalige Kattisuve Battalu",
+            "Tumbida Sakkare Ninagive Kattadi Muddina Giniye Ba Rama||1||"
+          ],
+          [
+            "Badavara Bhagyada Nidhiye Gokulada Vodeya Purandara Vithala",
+            "Krsnayya Kadalolu Duduku Maduvarenu Rangayya Ranga Ba Rama||2||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "F4JcbxWtTF7z6c25NKQw",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:39:08.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_GLh77fgu9vEd5FOzM0nf",
+      "form": "pada",
+      "title": {
+        "kn": "ಮಲಗಿ ಎದ್ದನು ರಂಗ",
+        "latin": "ಮಲಗಿ ಎದ್ದನು ರಂಗ",
+        "iast": "malagi èddanu raṃga",
+        "devanagari": "मलगि ऎद्दनु रंग"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಮಲಗಿ ಎದ್ದನು ರಂಗ, ಮಕ್ಕಳ ಮಾಣಿಕ ಕೃಷ್ಣ |"
+          ],
+          [
+            "ಛಲ ಹಿಡಿದನು ನೋಡೆ ಮೊಲೆಕೊಡೆ ಕೃಷ್ಣಗೆ ||"
+          ],
+          [
+            "ಜಲದೊಳು ತಮನ ಮರ್ದಿಸಿ ಅಂದು ಮತ್ಸ್ಯನಾಗಿ |ಬಲುಗಿರಿಯ ನೆಗಹಿ ಮರೆಮಾಡಿ ಕೂರ್ಮನಾಗಿ ||"
+          ],
+          [
+            "ನೆಲನ ಒಯ್ದವನ ಕೊಲುವೆನೆಂದು ವರಹನಾಗಿ |ಬಲುಭಕ್ತಿಗಾಗಿ ಕಂಬದಿ ನಾರಸಿಂಹನಾಗಿ||"
+          ],
+          [
+            "ಚಿಕ್ಕ ರೂಪದಿಂದ ಬಲಿಯ ದಾನವ ಬೇಡಿ |ಉಕ್ಕಿನ ಕೊಡಲಿಯ ಪಿಡಿದ ಪರಶುರಾಮ ||"
+          ],
+          [
+            "ಮಿಕ್ಕಿದ ತಲೆಯ ಚೆಂಡಾಡಿದ ಶ್ರೀರಾಮ |ಸೊಕ್ಕಿದ ಕಂಸನ ಕೊಲುವೆನೆಂದ ಕೃಷ್ಣ ||"
+          ],
+          [
+            "ಬಲು ಪತಿವ್ರತೆಯರ ವ್ರತವನಳಿದಬುದ್ಧ|ಕಲಿಯಾಗಿ ಖಡಗುವ ಪಿಡಿದು ಕುದುರೆ ಏರಿ ||"
+          ],
+          [
+            "ಒಲಿದು ಭಕ್ತರನೆಲ್ಲ ಸಲಹುವೆನೆಂತೆಂದು |ಚೆಲುವ ಪುರಂದರವಿಠಲ ತೊಟ್ಟಿಲೊಳು ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Malagi eddanu ranga, makkala manika krushna |"
+          ],
+          [
+            "Chala hididanu node molekode krushnage ||pa||"
+          ],
+          [
+            "Jaladolu tamana mardisi andu matsyanagi |"
+          ],
+          [
+            "Balugiriya negahi maremadi kurmanagi ||"
+          ],
+          [
+            "Nelana oydavana koluvenemdu varahanagi |"
+          ],
+          [
+            "Balubaktigagi kambadi narasimhanagi ||1||"
+          ],
+          [
+            "Cikka rupadinda baliya danava bedi |"
+          ],
+          [
+            "Ukkina kodaliya pidida parasurama ||"
+          ],
+          [
+            "Mikkida taleya chendadida srirama |"
+          ],
+          [
+            "Sokkida kamsana koluvenemda krushna ||2||"
+          ],
+          [
+            "Balu pativrateyara vratavanalidabuddha|"
+          ],
+          [
+            "Kaliyagi kadaguva pididu kudure Eri ||"
+          ],
+          [
+            "Olidu Baktaranella salahuvenemtemdu |"
+          ],
+          [
+            "Cheluva purandaravithala tottilolu ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "GLh77fgu9vEd5FOzM0nf",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:14:03.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_GdQO0w1QmcixXhP5qF3q",
+      "form": "pada",
+      "title": {
+        "kn": "ಮಲಗಿ ಎದ್ದನು ರಂಗ",
+        "latin": "ಮಲಗಿ ಎದ್ದನು ರಂಗ",
+        "iast": "malagi èddanu raṃga",
+        "devanagari": "मलगि ऎद्दनु रंग"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಮಲಗಿ ಎದ್ದನು ರಂಗ, ಮಕ್ಕಳ ಮಾಣಿಕ ಕೃಷ್ಣ |"
+          ],
+          [
+            "ಛಲ ಹಿಡಿದನು ನೋಡೆ ಮೊಲೆಕೊಡೆ ಕೃಷ್ಣಗೆ ||"
+          ],
+          [
+            "ಜಲದೊಳು ತಮನ ಮರ್ದಿಸಿ ಅಂದು ಮತ್ಸ್ಯನಾಗಿ |ಬಲುಗಿರಿಯ ನೆಗಹಿ ಮರೆಮಾಡಿ ಕೂರ್ಮನಾಗಿ ||"
+          ],
+          [
+            "ನೆಲನ ಒಯ್ದವನ ಕೊಲುವೆನೆಂದು ವರಹನಾಗಿ |ಬಲುಭಕ್ತಿಗಾಗಿ ಕಂಬದಿ ನಾರಸಿಂಹನಾಗಿ||"
+          ],
+          [
+            "ಚಿಕ್ಕ ರೂಪದಿಂದ ಬಲಿಯ ದಾನವ ಬೇಡಿ |ಉಕ್ಕಿನ ಕೊಡಲಿಯ ಪಿಡಿದ ಪರಶುರಾಮ ||"
+          ],
+          [
+            "ಮಿಕ್ಕಿದ ತಲೆಯ ಚೆಂಡಾಡಿದ ಶ್ರೀರಾಮ |ಸೊಕ್ಕಿದ ಕಂಸನ ಕೊಲುವೆನೆಂದ ಕೃಷ್ಣ ||"
+          ],
+          [
+            "ಬಲು ಪತಿವ್ರತೆಯರ ವ್ರತವನಳಿದಬುದ್ಧ|ಕಲಿಯಾಗಿ ಖಡಗುವ ಪಿಡಿದು ಕುದುರೆ ಏರಿ ||"
+          ],
+          [
+            "ಒಲಿದು ಭಕ್ತರನೆಲ್ಲ ಸಲಹುವೆನೆಂತೆಂದು |ಚೆಲುವ ಪುರಂದರವಿಠಲ ತೊಟ್ಟಿಲೊಳು ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Malagi eddanu ranga, makkala manika krushna |"
+          ],
+          [
+            "Chala hididanu node molekode krushnage ||pa||"
+          ],
+          [
+            "Jaladolu tamana mardisi andu matsyanagi |"
+          ],
+          [
+            "Balugiriya negahi maremadi kurmanagi ||"
+          ],
+          [
+            "Nelana oydavana koluvenemdu varahanagi |"
+          ],
+          [
+            "Balubaktigagi kambadi narasimhanagi ||1||"
+          ],
+          [
+            "Cikka rupadinda baliya danava bedi |"
+          ],
+          [
+            "Ukkina kodaliya pidida parasurama ||"
+          ],
+          [
+            "Mikkida taleya chendadida srirama |"
+          ],
+          [
+            "Sokkida kamsana koluvenemda krushna ||2||"
+          ],
+          [
+            "Balu pativrateyara vratavanalidabuddha|"
+          ],
+          [
+            "Kaliyagi kadaguva pididu kudure Eri ||"
+          ],
+          [
+            "Olidu Baktaranella salahuvenemtemdu |"
+          ],
+          [
+            "Cheluva purandaravithala tottilolu ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "GdQO0w1QmcixXhP5qF3q",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:22:48.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_Gt48t6PxfZoK0n7AT3BM",
+      "form": "pada",
+      "title": {
+        "kn": "ಕಾಯಲಾರೆನು ಕೃಷ್ಣ",
+        "latin": "ಕಾಯಲಾರೆನು ಕೃಷ್ಣ",
+        "iast": "kāyalārènu kṛṣṇa",
+        "devanagari": "कायलारॆनु कृष्ण"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಕಾಯಲಾರೆನು ಕೃಷ್ಣ ಕಂಡವರ ಬಾಗಿಲನು",
+            "ನಾಯಿಕುನ್ನಿಗಳಂತೆ ಪರರ ಪೀಡಿಸುತ ||ಪ||"
+          ],
+          [
+            "ಉದಯಕಾಲದಲೆದ್ದು ಸಂಧ್ಯಾವಿಧಿಯ ಬಿಟ್ಟು",
+            "ಪದುಮನಾಭನ ಸ್ಮರಣೆ ಮೊದಲಿಲ್ಲದೆ",
+            "ಮುದದಿ ನಿನ್ನರ್ಚಿಸದೆ ನರರ ಸದನವ ಪೊಕ್ಕು",
+            "ಒದಗಿ ಸೇವೆಯ ಮಾಡಿ ಅವರ ಬಾಗಿಲನು ||"
+          ],
+          [
+            "ಕಲ್ಲ ಕರಗಿಸಬಹುದು , ಹುರಿಗಡಲೆಯೊಳು ಅದರ",
+            "ತೈಲವನು ತೆಗೆದಾದರುಣಲುಬಹುದು",
+            "ಬಲ್ಲಿದವರ ಮನಸು ಮೆಚ್ಚಿಸಲರಿಯೆನೈ",
+            "ಹಲ್ಲು ಕಿರಿಯುತೆ ಹಂಬಲಿಸಿ ಬಾಯಿಬಿಡುತ ||",
+            "ಇಂತು ನಾನಾ ಚಿಂತೆಯಲಿ ನಿನ್ನ ನೆನೆಯದೆ",
+            "ಭ್ರಾಂತಿಯೆಂತೆಂಬ ಹೆಬ್ಬಲೆಯೊಳು ಸಿಲುಕಿ",
+            "ಅಂತ್ಯವನು ನಾ ಕಾಣೆ ಆದರಿಸುವವರಿಲ್ಲ",
+            "ಚಿಂತೆಯ ಬಿಡಿಸಯ್ಯ ಪುರಂದರವಿಠಲ ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Kayalarenu krushna kandavara bagilanu",
+            "nayikunnigalante parara pidisuta ||pa||"
+          ],
+          [
+            "Udayakaladaleddu sandhyavidhiya bittu",
+            "Padumanabana smarane modalillade",
+            "Mudadi ninnarchisade narara sadanava pokku",
+            "Odagi seveya madi avara bagilanu ||1||"
+          ],
+          [
+            "Kalla karagisabahudu , hurigadaleyolu adara",
+            "Tailavanu tegedadarunalubahudu",
+            "Ballidavara manasu meccisalariyenai",
+            "Hallu kiriyute hambalisi bayibiduta ||2||"
+          ],
+          [
+            "Intu nana chinteyali ninna neneyade",
+            "Brantiyentemba hebbaleyolu siluki",
+            "Antyavanu na kane Adarisuvavarilla",
+            "Chinteya bidisayya purandaravithala ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "Gt48t6PxfZoK0n7AT3BM",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_HElhpxManNWqTOPnBMQI",
+      "form": "pada",
+      "title": {
+        "kn": "ಏನ ಪೇಳಲೆ ಗೋಪಿ ನಿನ್ನ ಮಗನ",
+        "latin": "ಏನ ಪೇಳಲೆ ಗೋಪಿ ನಿನ್ನ ಮಗನ",
+        "iast": "ena peḻalè gopi ninna magana",
+        "devanagari": "एन पेळलॆ गोपि निन्न मगन"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಏನ ಪೇಳಲೆ ಗೋಪಿ ನಿನ್ನ ಮಗನ ಜಾಲ",
+            "ಮಾನ ತಪ್ಪಿ ಬಂದ ಮನೆಯೊಳಗೆ ||pa||"
+          ],
+          [
+            "ಕೊಡ ಹಾಲು ಕುಡಿದನೆ ಗಡಿಗೆಯ ಒಡೆದನೆ",
+            "ಅಡಗಿದ್ದನೆ ದೊಡ್ಡ ಕೊಡದೊಳಗೆ",
+            "ಹುಡುಗ ಸಿಕ್ಕಿದನೆಂದು ಹೊಡೆಯ ಹೋದರೆ",
+            "ಬಡವರ ಮಗನೇನೆ ಹೊಡೆಯಲಿಕ್ಕೆ ||1||"
+          ],
+          [
+            "ಅಳಿಯನ ವೇಷದಿ ಮಗಳ ಕರೆಯ ಬಂದ",
+            "ಕಲಹ ಮಾಡಿ ತಾ ಕಳಿಸೆಂದ",
+            "ಒಲುಮೆಯಿಂದಲಿ ತಿಂಗಲೆರಡಿಟ್ಟುಕೊಂಡರೆ",
+            "ಗಿಳಿಯಂಥ ಹೆಣ್ಣಿನ ಕೆಡಿಸಿದನೆ ಗೋಪಿ ||2||"
+          ],
+          [
+            "ಇಷ್ಟೊಂದು ಸಿಟ್ಟೇಕೆ ಚಿಣ್ಣ ಕೃಷ್ಣನ ಮೇಲೆ",
+            "ಪುಟ್ಟಿಸಬೇಡಿರೆ ಅನ್ಯಾಯವ",
+            "ಸೃಷ್ಟಿಗೊಡೆಯ ನಮ್ಮ ಪುರಂದರವಿಠಲನ್ನ",
+            "ದೃಷ್ಟಿಸಿ ನೋಡಿರೆ ತೊಟ್ಟಿಲಿನೊಳಗೆ ||3||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Ena pelale gopi ninna magana jala",
+            "Mana tappi banda maneyolage ||pa||"
+          ],
+          [
+            "Koda halu kudidane gadigeya odedane",
+            "Adagiddane dodda kodadolage",
+            "Huduga sikkidanendu hodeya hodare",
+            "Badavara maganene hodeyalikke ||1||"
+          ],
+          [
+            "Aliyana veshadi magala kareya banda",
+            "Kalaha madi ta kalisemda",
+            "Olumeyindali timgaleradittukondare",
+            "Giliyantha hennina kedisidane gopi ||2||"
+          ],
+          [
+            "Ishtondu sitteke cinna krushnana mele",
+            "Puttisabedire anyayava",
+            "Srushtigodeya namma purandaravithalanna",
+            "Drushtisi nodire tottilinolage ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "HElhpxManNWqTOPnBMQI",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:43:50.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_HnwNSxvWFJiyAWUEUD8H",
+      "form": "pada",
+      "title": {
+        "kn": "ಜಗನ್ಮೋಹನನೇ ಕೃಷ್ಣ",
+        "latin": "ಜಗನ್ಮೋಹನನೇ ಕೃಷ್ಣ",
+        "iast": "jaganmohanane kṛṣṇa",
+        "devanagari": "जगन्मोहनने कृष्ण"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಜಗನ್ಮೋಹನನೇ ಕೃಷ್ಣ ಜಗವಂ ಪಾಲಿಪನೆ ॥ಪ॥"
+          ],
+          [
+            "ಒಬ್ಬಳ ಬಸುರಿಂದಲಿ ಬಂದೆ ಮ"
+          ],
+          [
+            "ತ್ತೊಬ್ಬಳ ಕೈಯಲಿ ನೀ ಬೆಳೆದೆ"
+          ],
+          [
+            "ಕೊಬ್ಬಿದ ದೈತ್ಯರ ಒಡಲ ಸೀಳಿದೆ ಇಂಥ"
+          ],
+          [
+            "ತಬ್ಬಿಬ್ಬಾಟವನೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೧॥"
+          ],
+          [
+            "ಲೋಕದೊಳಗೆ ನೀ ಶಿಶುವಾಗಿ ಮೂ"
+          ],
+          [
+            "ರ್ಲೋಕವನೆಲ್ಲ ಬಾಯಲಿ ತೋರಿದೆ"
+          ],
+          [
+            "ಆಕಳ ಕಾಯುವ ಚಿಣ್ಣನೆಂದೆನಿಸಿದೆ"
+          ],
+          [
+            "ಈ ಕುಟಿಲವನೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೨॥"
+          ],
+          [
+            "ಮಗುವಾಗಿ ಪೂತನಿಯ ಮೊಲೆಯನುಂಡೆ ಅವಳು"
+          ],
+          [
+            "ಜಗದಗಲಕೆ ಬೀಳಲು ಕೆಡಹಿ"
+          ],
+          [
+            "ನಗುತ ನಗುತ ಗೋಪಿ ಮೊಲೆಯುಂಡೆ ಇಂಥ"
+          ],
+          [
+            "ತಗಿಬಿಗಿಯಾಟಗಳೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೩॥"
+          ],
+          [
+            "ಮಾಡುವ ಧುಮುಕಿ ಕಾಳಿಂಗನ ಶಿರದಲ್ಲಿ"
+          ],
+          [
+            "ಮೃಡಸುರಪಾದ್ಯರು ಪೊಗಳುತಿರೆ"
+          ],
+          [
+            "ಹೆಡೆಯ ಮೇಲೆ ಕುಣಿದಾಡುತ ಆಡುತ"
+          ],
+          [
+            "ಕಡೆ ಸಾರೆಂಬುದನೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೪॥"
+          ],
+          [
+            "ಒಂದು ಪಾದವ ಭೂಮಿಯಲೂರಿ ಮ-"
+          ],
+          [
+            "ತ್ತೊಂದು ಪಾದವ ಗಗನವನಳೆದು"
+          ],
+          [
+            "ಒಂದು ಪಾದವ ಬಲಿ ಶಿರದಲಿಟ್ಟೆ ಇಂತ"
+          ],
+          [
+            "ಚೆಂದದ ವಿದ್ಯೆಯನೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೫॥"
+          ],
+          [
+            "ನಂಬಿದ ಪ್ರಹ್ಲಾದನು ಸ್ತುತಿಸೆ ನೀ"
+          ],
+          [
+            "ಕಂಭವನೊಡೆದು ಬಂದಾಕ್ಷಣದಿ"
+          ],
+          [
+            "ದೊಂಬಿಲಿ ದೈತ್ಯನ ಒಡಲ ಸೀಳಿದೆ ಇಂಥ"
+          ],
+          [
+            "ಡಂಬರಾಟವನೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೬॥"
+          ],
+          [
+            "ಅಂಬರೀಷ ದ್ವಾದಶಿ ಸಾಧಿಸುತಿರೆ ಅಗ"
+          ],
+          [
+            "ಬಂದು ದುರ್ವಾಸರು ಶಾಪ ಕೊಡಲು"
+          ],
+          [
+            "ಮುಂದಕೆ ಸಾಧನವಹುದೆಂದು ಚಕ್ರವ"
+          ],
+          [
+            "ಹಿಂದಟ್ಟಿಸುವುದನೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೭॥"
+          ],
+          [
+            "ವರಬಲದಿಂದಲಿ ಭಸ್ಮಾಸುರನು"
+          ],
+          [
+            "ಹರಣ ಶಿರಡಿ ಕರವಿಡೆ ಬರಲು"
+          ],
+          [
+            "ತರುಣಿಯ ರೂಪವ ತಾಳಿ ಆ ದೈತ್ಯನ"
+          ],
+          [
+            "ಹರಣವನಳಿದುದನೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೮॥"
+          ],
+          [
+            "ವೇದಗಳರಸಿ ಕಾಣದ ಪರಬ್ರಹ್ಮ ನೀ"
+          ],
+          [
+            "ಮೋದದಿಂದ ವಿದುರನ ಮನೆಯೈದಿ"
+          ],
+          [
+            "ಆದರದಿ ಪಾಲ ಕುಡಿದುಳಿದುದ ನೀ"
+          ],
+          [
+            "ಮೇದಿನಿಗಿಳಿಸುವುದೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೯॥"
+          ],
+          [
+            "ದುರ್ಯೋಧನ ತನ್ನೊಡ್ಡೋಲಗದೊಳು"
+          ],
+          [
+            "ಹರಿಯನು ಕರೆಸೆಂದರುಹಲು ಬಂದು"
+          ],
+          [
+            "ಧರಣಿಯುಂಗುಷ್ಟದೊಲೊತ್ತುತ ಅವನನು"
+          ],
+          [
+            "ಉರುಳಿಸಿದಾಟವನೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೧೦॥"
+          ],
+          [
+            "ಆ ಸಭೆಯಲ್ಲಿ ಖಳ ದುರ್ಯೋಧನನಾಗ"
+          ],
+          [
+            "ಮೋಸದಿ ಕೃಷ್ಣನ ಕಟ್ಟೆನಲು"
+          ],
+          [
+            "ಸಾಸಿರರೂಪಿನ ಕೃಷ್ಣನೆಂದೆನಿಸಿದ"
+          ],
+          [
+            "ವೇಷವನೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೧೧॥"
+          ],
+          [
+            "ಸರ್ಪಬಾಣ ಮೊರೆಯುತ ಬರಲು ಕಂ-"
+          ],
+          [
+            "ದರ್ಪ ಪಿತನೆ ಕರುಣದಿ ನೀನು"
+          ],
+          [
+            "ಒಪ್ಪುವ ಪಾರ್ಥನ ರಥವ ನೆಲಕೆ ಒತ್ತಿ"
+          ],
+          [
+            "ತಪ್ಪಿಸಿದಾಟವನೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೧೨॥"
+          ],
+          [
+            "ದ್ರೋಣನ ಸಂಗ್ರಾಮದಿ ಹರಿಚಕ್ರವ"
+          ],
+          [
+            "ಮಾಣದೆ ಸೂರ್ಯಗೆ ಮರೆಮಾಡಿ"
+          ],
+          [
+            "ಕಾಣಿಸಿ ಸೈಂಧವನನು ಕೊಲಿಸಲಾದೆ ಇಂಥ"
+          ],
+          [
+            "ಜಾಣತನವ ನೀನೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೧೩॥"
+          ],
+          [
+            "ಆ ಶಿರವಾತನ ತಂದೆಯು ಕರದಲಿ"
+          ],
+          [
+            "ಸೂಸುತ ರಕುತವು ಬೀಳಲು ಅದನು"
+          ],
+          [
+            "ಬೀಸಿ ಬಿಸಾಡಲು ಅವನ ಶಿರವನಾಗ"
+          ],
+          [
+            "ಸಾಸಿರ ಮಾಡಿದುದೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೧೪॥"
+          ],
+          [
+            "ಅಡಿ ಮೂಲನೆ ಎಂದು ಕರಿರಾಜ ಕರೆಯಲು"
+          ],
+          [
+            "ಯಾದವರಾಯ ನೀ ನಗುತಲಿ ಬಂದು"
+          ],
+          [
+            "ಆದರದಿಂದ ಗಜೇಂದ್ರನ ಸಲಹಿದೆ"
+          ],
+          [
+            "ಆ ದಿವ್ಯಾಟಗಳೆಲ್ಲಿ ಕಲಿತೆಯೊ ರಂಗ ॥೧೫॥"
+          ],
+          [
+            "ಎಂದೆಂದಿಗು ನಿಮ್ಮ ಗುಣಗಳ ಪೊಗಳಲು"
+          ],
+          [
+            "ಇಂದ್ರಾದಿಗಳಿಗೆ ಅಳವಲ್ಲ"
+          ],
+          [
+            "ಮಂದರಧರ ಶ್ರೀ ಪುರಂದರವಿಠಲನೆ"
+          ],
+          [
+            "ಒಂದೊಂದಾಟವನೆಲ್ಲಿ ಕಲಿತೆಯೋ ರಂಗ ॥೧೬॥"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Jaganmohanane krushna jagavam palipane ||pa||"
+          ],
+          [
+            "Obbala basurindali bande ma"
+          ],
+          [
+            "Ttobbala kaiyali ni belede"
+          ],
+          [
+            "Kobbida daityara odala silide intha"
+          ],
+          [
+            "Tabbibbatavanelli kaliteyo ranga ||1||"
+          ],
+          [
+            "Lokadolage ni sisuvagi mu"
+          ],
+          [
+            "Rlokavanella bayali toride"
+          ],
+          [
+            "Akala kayuva cinnanemdeniside"
+          ],
+          [
+            "I kutilavanelli kaliteyo ranmga ||2||"
+          ],
+          [
+            "Maguvagi putaniya moleyanunde avalu"
+          ],
+          [
+            "Jagadagalake bilalu kedahi"
+          ],
+          [
+            "Naguta naguta gopi moleyunde intha"
+          ],
+          [
+            "Tagibigiyatagalelli kaliteyo ranga ||3||"
+          ],
+          [
+            "Maduva dhumuki kalingana Siradalli"
+          ],
+          [
+            "Mrudasurapadyaru pogalutire"
+          ],
+          [
+            "Hedeya mele kunidaduta aduta"
+          ],
+          [
+            "Kade sarembudanelli kaliteyo ranga ||4||"
+          ],
+          [
+            "Ondu padava bumiyaluri ma-"
+          ],
+          [
+            "Ttondu padava gaganavanaledu"
+          ],
+          [
+            "Ondu padava bali siradalitte inta"
+          ],
+          [
+            "Chendada vidyeyanelli kaliteyo ranga ||5||"
+          ],
+          [
+            "Nambida prahladanu stutise ni"
+          ],
+          [
+            "Kambavanodedu bandakshanadi"
+          ],
+          [
+            "Dombili daityana odala silide intha"
+          ],
+          [
+            "Dambaratavanelli kaliteyo ranga ||6||"
+          ],
+          [
+            "Ambarisha dvadasi sadhisutire aga"
+          ],
+          [
+            "Bandu durvasaru sapa kodalu"
+          ],
+          [
+            "Mundake sadhanavahudendu chakrava"
+          ],
+          [
+            "Hindattisuvudanelli kaliteyo ranga ||7||"
+          ],
+          [
+            "Varabaladindali basmasuranu"
+          ],
+          [
+            "Harana siradi karavide baralu"
+          ],
+          [
+            "Taruniya rupava tali A daityana"
+          ],
+          [
+            "Haranavanalidudanelli kaliteyo ranga ||8||"
+          ],
+          [
+            "Vedagalarasi kanada parabrahma ni"
+          ],
+          [
+            "Modadinda vidurana maneyaidi"
+          ],
+          [
+            "Adaradi pala kudiduliduda ni"
+          ],
+          [
+            "Medinigilisuvudelli kaliteyo ranga ||9||"
+          ],
+          [
+            "Duryodhana tannoddolagadolu"
+          ],
+          [
+            "Hariyanu karesendaruhalu bandu"
+          ],
+          [
+            "Dharaniyungushtadolottuta avananu"
+          ],
+          [
+            "Urulisidatavanelli kaliteyo ranga ||10||"
+          ],
+          [
+            "A sabeyalli kala duryodhananaga"
+          ],
+          [
+            "Mosadi krushnana kattenalu"
+          ],
+          [
+            "Sasirarupina krushnanendenisida"
+          ],
+          [
+            "Veshavanelli kaliteyo ranga ||11||"
+          ],
+          [
+            "Sarpabana moreyuta baralu kan-"
+          ],
+          [
+            "Darpa pitane karunadi ninu"
+          ],
+          [
+            "Oppuva parthana rathava nelake otti"
+          ],
+          [
+            "Tappisidatavanelli kaliteyo ranga ||12||"
+          ],
+          [
+            "Dronana sangramadi harichakrava"
+          ],
+          [
+            "Manade suryage maremadi"
+          ],
+          [
+            "Kanisi saindhavananu kolisalade intha"
+          ],
+          [
+            "Janatanava ninelli kaliteyo ranga ||13||"
+          ],
+          [
+            "A siravatana tandeyu karadali"
+          ],
+          [
+            "Susuta rakutavu bilalu adanu"
+          ],
+          [
+            "Bisi bisadalu avana siravanaga"
+          ],
+          [
+            "Sasira madidudelli kaliteyo ranga ||14||"
+          ],
+          [
+            "Adi mulane endu kariraja kareyalu"
+          ],
+          [
+            "Yadavaraya ni nagutali bandu"
+          ],
+          [
+            "Adaradinda gajendrana salahide"
+          ],
+          [
+            "A divyatagalelli kaliteyo ranga ||15||"
+          ],
+          [
+            "Endendigu nimma gunagala pogalalu"
+          ],
+          [
+            "Indradigalige alavalla"
+          ],
+          [
+            "Mandaradhara sri purandaravithalane"
+          ],
+          [
+            "Ondondatavanelli kaliteyo ranga ||16||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "HnwNSxvWFJiyAWUEUD8H",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:24:10.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_IgYRFse7j5Z2xUjdYfhj",
+      "form": "pada",
+      "title": {
+        "kn": "ಬಣ್ಣಿಸಿ ಗೋಪಿ ಹರಸಿದಳು",
+        "latin": "ಬಣ್ಣಿಸಿ ಗೋಪಿ ಹರಸಿದಳು",
+        "iast": "baṇṇisi gopi harasidaḻu",
+        "devanagari": "बण्णिसि गोपि हरसिदळु"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಬಣ್ಣಿಸಿ ಗೋಪಿ ಹರಸಿದಳು"
+          ],
+          [
+            "ಎಣ್ಣೆಯನೊತ್ತುತ ಯದುಕುಲ ತಿಲಕಗೆ"
+          ],
+          [
+            "ಆಯುಷ್ಯವಂತನಾಗು ಅತಿ ಬಲ್ಲಿದನಾಗು"
+          ],
+          [
+            "ಮಾಯದ ಖಳರ ಮರ್ದನನಾಗು"
+          ],
+          [
+            "ರಾಯರ ಪಾಲಿಸು ರಕ್ಕಸರ ಸೋಲಿಸು"
+          ],
+          [
+            "ವಾಯುಸುತಗೆ ನೀನೊಡೆಯನಾಗೆನುತ"
+          ],
+          [
+            "ಧೀರನು ನೀನಾಗು ದಯಾಂಬುಧಿಯಾಗು"
+          ],
+          [
+            "ಆ ರುಕ್ಮಿಣಿಗೆ ನೀನರಸನಾಗು"
+          ],
+          [
+            "ಮಾರನ ಪಿತನಾಗು ಮಧುಸೂದನನಾಗು"
+          ],
+          [
+            "ದ್ವಾರಾವತಿಗೆ ನೀ ಧೊರೆಯಾಗೆನುತ"
+          ],
+          [
+            "ಆನಂದ ನೀನಾಗು ಅಚ್ಯುತ ನೀನಾಗು"
+          ],
+          [
+            "ದಾನವಾಂತಕನಾಗು ದಯವಾಗು"
+          ],
+          [
+            "ಶ್ರೀನಿವಾಸನಾಗು ಶ್ರೀನಿಧಿ ನೀನಾಗು"
+          ],
+          [
+            "ಜ್ಞಾನಿ ಪುರಂದರವಿಠಲನಾಗೆನುತ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Bannisi gopi ta harasidalu ||pa||"
+          ],
+          [
+            "Enneyanottuta yadukula tilakage || a.pa.||"
+          ],
+          [
+            "Ayushyavantanagu ati ballidanagu |"
+          ],
+          [
+            "Mayavikalara mardananagu|"
+          ],
+          [
+            "Rayara palisu rakkasara solisu |"
+          ],
+          [
+            "Vayasutage ni odeyanagenutali ||1||"
+          ],
+          [
+            "Dhiranu ninagu dayambudhiyagu |"
+          ],
+          [
+            "A rukminige ninarasanagu |"
+          ],
+          [
+            "Maranapitanagu madhusudananagu |"
+          ],
+          [
+            "Dvaravatige ni doreyagenutali ||2||"
+          ],
+          [
+            "Ananda ninagu acyuta ninagu |"
+          ],
+          [
+            "Danavantakanagu dayavagu |"
+          ],
+          [
+            "Srinivasanagu srinidhi ninagu |"
+          ],
+          [
+            "Jjani purandara vithalanagenutali ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "IgYRFse7j5Z2xUjdYfhj",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:12:12.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_JES07tMEyZ43HWdUsU9n",
+      "form": "pada",
+      "title": {
+        "kn": "ಯಾರೆ ರಂಗನ ಯಾರೆ ಕೃಷ್ಣನ",
+        "latin": "ಯಾರೆ ರಂಗನ ಯಾರೆ ಕೃಷ್ಣನ",
+        "iast": "yārè raṃgana yārè kṛṣṇana",
+        "devanagari": "यारॆ रंगन यारॆ कृष्णन"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಯಾರೆ ರಂಗನ ಯಾರೆ ಕೃಷ್ಣನ",
+            "ಯಾರೆ ರಂಗನ ಕರೆಯ ಬಂದವರು"
+          ],
+          [
+            "ಗೋಪಾಲಕೃಷ್ಣನ ಪಾಪವಿನಾಶನ",
+            "ಈ ಪರಿಯಿಂದಲಿ ಕರೆಯ ಬಂದವರು"
+          ],
+          [
+            "ವೇಣುವಿನೋದನ ಪ್ರಾಣಪ್ರಿಯನ",
+            "ಜಾಣೆಯರರಸನ ಕರೆಯ ಬಂದವರು"
+          ],
+          [
+            "ಕರಿರಾಜವರದನ ಪರಮಪುರುಷನ",
+            "ಪುರಂದರವಿಠಲನ ಕರೆಯ ಬಂದವರು"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Yaare rangana yaare krishnanaa |",
+            "yaare rangana kareya bhandhavanaa ||"
+          ],
+          [
+            "gopaala krishnanaa paapa vinaashanaa |",
+            "eepari indhali kareya bhandavanaa || 1||"
+          ],
+          [
+            "venu vinodhana praana priyanaa |",
+            "jaaneyara rasana kareya bhandhavanaa || 2||"
+          ],
+          [
+            "kari raaja varadhana parama purushanaa |",
+            "purandhara vitalanaa kareya bhandhavanaa ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "JES07tMEyZ43HWdUsU9n",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:41:29.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_LRd6nu4VhN8g7ktNgKbh",
+      "form": "pada",
+      "title": {
+        "kn": "ಏನು ಸವಿಯೋ",
+        "latin": "ಏನು ಸವಿಯೋ",
+        "iast": "enu saviyo",
+        "devanagari": "एनु सवियो"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಏನು ಸವಿಯೋ ನಿನ್ನ ಕೊಳಲು"
+          ],
+          [
+            "ಗೊಲ್ಲ ಮಾನಿನಿಯರಿಗೆಲ್ಲ ಮಾಡಿತು ಮರುಳು ||ಪ.||"
+          ],
+          [
+            "ಬರೆಗಡಿಗೆಯ ಕಡೆಯುವರೋ"
+          ],
+          [
+            "ಗೋ-ಕರು ಎಂದು ಗೂಳಿಯ ಬಿಟ್ಟು ಎತ್ತಾನ್ಹಿಂಡುವರೋ"
+          ],
+          [
+            "ತಿರುಗಿ ಕನ್ನಡಿಯ ನೋಡುವರೋ"
+          ],
+          [
+            "ಹಿರಿಹಿರಿ ಹಿಗ್ಗಿ ಕಣ್ಣಿಗೆ ಕುಂಕುಮ ತೀಡುವರೋ ||೧|"
+          ],
+          [
+            "ಮಕ್ಕಳ ಬಡಿದಳಿಸುವರೋ"
+          ],
+          [
+            "ಬೆಕ್ಕು ಮರಿಯಾನೆತ್ತಿ ಮುದ್ದಾನಿಕ್ಕುವರೋ"
+          ],
+          [
+            "ಉಕ್ಕುವ ಹಾಲು ಲೆಕ್ಕಿಸರೋ"
+          ],
+          [
+            "ಬೋರಲಿಕ್ಕಿದ ಮಡಿಕೆಗೆ ನೀರ ಚೆಲ್ಲುವರೋ ||೨||"
+          ],
+          [
+            "ಆ ನಾದಾ ಇನ್ನೊಮ್ಮೆ ಮಾಡೋ"
+          ],
+          [
+            "ನಿನ್ನಾಧೀನವಾಗಿಹುದಯ್ಯ ಈ ಜಗ ನೋಡೋ"
+          ],
+          [
+            "ಭಕ್ತವತ್ಸಲ ದಯ ಮಾಡೋ"
+          ],
+          [
+            "ಪುರಂದರವಿಠಲ ನೀ ಎನ್ನ ಕೈಯ ಬಿಡದಿರೋ ||೩||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Enu saviyo ninna kolalu"
+          ],
+          [
+            "golla maniniyarigella maditu marulu ||pa.||"
+          ],
+          [
+            "Baregadigeya kadeyuvaro"
+          ],
+          [
+            "go-karu emdu guliya bittu ettan hinduvaro"
+          ],
+          [
+            "tirugi kannadiya noduvaro"
+          ],
+          [
+            "hirihiri higgi kannige kumkuma tiduvaro ||1|"
+          ],
+          [
+            "Makkala badidalisuvaro"
+          ],
+          [
+            "bekku mariyanetti muddanikkuvaro"
+          ],
+          [
+            "ukkuva halu lekkisaro"
+          ],
+          [
+            "boralikkida madikege nira celluvaro ||2||"
+          ],
+          [
+            "Aa nada innomme mado"
+          ],
+          [
+            "ninnadhinavagihudayya I jaga nodo"
+          ],
+          [
+            "bhaktavatsala daya mado"
+          ],
+          [
+            "purandaravithala ni enna kaiya bidadiro ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "LRd6nu4VhN8g7ktNgKbh",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:32:05.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_Lth6tLUiXbne6RcrLDd5",
+      "form": "pada",
+      "title": {
+        "kn": "ಬವ್ವು ಬಂದಿತಲ್ಲ, ರಂಗಯ್ಯ",
+        "latin": "ಬವ್ವು ಬಂದಿತಲ್ಲ, ರಂಗಯ್ಯ",
+        "iast": "bavvu baṃditalla, raṃgayya",
+        "devanagari": "बव्वु बंदितल्ल, रंगय्य"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಬವ್ವು ಬಂದಿತಲ್ಲ, ರಂಗಯ್ಯ, ಬವ್ವು ಬಂದಿತಲ್ಲ ||ಪ||",
+            "ಬವ್ವು ನಿನ್ನ ಕಾಲು ಕಚ್ಚಿತೋ ಕೃಷ್ಣ ||ಅ||"
+          ],
+          [
+            "ಸೆರಗು ಪಿಡಿದು ನೀ ಹೇಳದೆ ಮಲಗೊ",
+            "ತಿರುಗಿದರೆ ನೋಡು ಮತ್ತಿಲ್ಲೆ",
+            "ಬೂದಿಯ ಹಚ್ಚಿದೆ ಕೂದಲು ಬಿಚ್ಚಿದೆ",
+            "ಸ್ವಾದವ ಕಂಡು ಬಂದಿತಿಲ್ಲಿ ||"
+          ],
+          [
+            "ಹಿಡಿದ ತ್ರಿಶೂಲ ಪಿಡಿದ ಕಪಾಲ",
+            "ಮುಕ್ಕಣ್ಣಲಿ ಕಿಡಿಯುದುರಿಸುತ",
+            "ಹಾವು ಕೊರಳಲಿಟ್ಟು ಹುಲಿಯ ಚರ್ಮವ ಹೊದ್ದು",
+            "ಸುತ್ತಲಿ ಬರುತಿದೆ ಬವ್ವುತನ ದಂಡು ||"
+          ],
+          [
+            "ಕಪ್ಪುಗೊರಳ ಬವ್ವು ಒಪ್ಪುವ ಎತ್ತನೇರಿ",
+            "ತಪ್ಪದೆ ಬಂದೀತು ಬಿಡು ಮುನ್ನೆ",
+            "ಅಪ್ಪ ಕೃಷ್ಣರಾಯ ಪುರಂದರವಿಠಲನೆ",
+            "ಒಪ್ಪಿಸಿ ಕೊಡುವೆನು ಈಗಲೆ ನಿನ್ನ ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "bavvu banditalla, rangayya, bavvu banditalla ||pa||"
+          ],
+          [
+            "Bavvu ninna kalu kaccito krushna ||a||"
+          ],
+          [
+            "Seragu pididu ni helade malago",
+            "Tirugidare nodu mattille",
+            "Budiya haccide kudalu biccide",
+            "Svadava kandu banditilli ||1||"
+          ],
+          [
+            "Hidida trisula pidida kapala",
+            "Mukkannali kidiyudurisuta",
+            "Havu koralalittu huliya carmava hoddu",
+            "Suttali barutide bavvutana dandu ||2||"
+          ],
+          [
+            "Kappugorala bavvu oppuva ettaneri",
+            "Tappade banditu bidu munne",
+            "Appa krushnaraya purandaravithalane",
+            "Oppisi koduvenu Igale ninna ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "Lth6tLUiXbne6RcrLDd5",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_MPxY3JoiWmokh9hsWglZ",
+      "form": "pada",
+      "title": {
+        "kn": "ಕಂಡೆ ನಾ ಉಡುಪಿಯ ಕೃಷ್ಣರಾಯನ್ನ",
+        "latin": "ಕಂಡೆ ನಾ ಉಡುಪಿಯ ಕೃಷ್ಣರಾಯನ್ನ",
+        "iast": "kaṃḍè nā uḍupiya kṛṣṇarāyanna",
+        "devanagari": "कंडॆ ना उडुपिय कृष्णरायन्न"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಕಂಡೆ ನಾ ಉಡುಪಿಯ ಕೃಷ್ಣರಾಯನ್ನ ,",
+            "ಭೂ-ಮಂಡಲದೊಳಗೆ ಉ-",
+            "ದ್ದಂಡ ಮೋಹಿಪನ ||ಪ||"
+          ],
+          [
+            "ಸಮುದ್ರವ ನಾ ಕಂಡು ಸ್ನಾನಾದಿಗಳ ಮಾಡಿ",
+            "ಚಂದ್ರಮೌಳೀಶ್ವರನ ಚರಣಕೆರಗಿ",
+            "ಆಮೇಲೆ ನಾಬಂದು ಅನಂತೇಶ್ವರನ್ನ ಕಂಡು",
+            "ಹನುಮಂತನ ಪಾಡಿ ಮನದಿ ನಿಲಿಸಿ ||"
+          ],
+          [
+            "ಸುತ್ತು ನದಿಯ ಕಂಡೆ ಸೂರ್ಯನ ಪ್ರಭೆ ಕಂಡೆ",
+            "ಅಲ್ಲಿದ್ದ ಮಧ್ವಸರೋವರವ ಕಂಡೆ",
+            "ಮಧ್ವಮತದ ಅಷ್ಟಮುನಿಗಳ ಕಂಡೆ",
+            "ಪ್ರಸಿದ್ಧವಾಗಿರುವ ಶ್ರೀ ಉಡುಪಿಯ ಕೃಷ್ಣನ ಕಂಡೆ ||"
+          ],
+          [
+            "ಉಂಗುರ ಉಡಿದಾರ ಉಡಿ ಘಂಟೆ ನಾ ಕಂಡೆ , ನಾನು",
+            "ರಂಗು ಮಾಣಿಕ್ಯದ ನವರತ್ನ ಮಾಲೆ ಕಂಡೆ",
+            "ದಿಂ ಧಿಮಿ ಧಿಮಿಕೆಂದು ಕುಣಿವ ಕೃಷ್ಣನ ಕಂಡೆ , ನಾನು",
+            "ಪುರಂದರವಿಠಲನ್ನ ಪದಕಮಲವ ಕಂಡೆ ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Kande na udupiya krishnana"
+          ],
+          [
+            "Bhumandaladosage uddanda mohipana |"
+          ],
+          [
+            "Suttu nadiyu kande, surya prabheyu kande",
+            "allidda madhwa sarovarava kande",
+            "madhvamatada astamunigala kande",
+            "prasiddavagiruva sri udupiya Krishnana kande||1||"
+          ],
+          [
+            "samudrava na kandu snanadigala madi",
+            "candramaulisvarana caranakeragi",
+            "a mele na bandu anantesvarana kandu",
+            "hanumantana padi manadi nillisi||2||"
+          ],
+          [
+            "ungura ududara udigejje(gala) na kande",
+            "rangu manikyada navaratna(da) male kande",
+            "dhimi dhimi dhimikendu kuniva Krishnana kande nanu",
+            "Purandara Vittalana pada kamala kande||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "MPxY3JoiWmokh9hsWglZ",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:40:58.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_NExWx7F4Ec4uJSeeFuzH",
+      "form": "pada",
+      "title": {
+        "kn": "ಕೇಳಲೊಲ್ಲನೆ ಎನ್ನ ಮಾತನು ರಂಗ",
+        "latin": "ಕೇಳಲೊಲ್ಲನೆ ಎನ್ನ ಮಾತನು ರಂಗ",
+        "iast": "keḻalòllanè ènna mātanu raṃga",
+        "devanagari": "केळलॊल्लनॆ ऎन्न मातनु रंग"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಕೇಳಲೊಲ್ಲನೆ ಎನ್ನ ಮಾತನು ರಂಗ   ॥ಪ॥"
+          ],
+          [
+            "ಕಾಳಿಯಮರ್ದನ ಕೃಷ್ಣಗೆ"
+          ],
+          [
+            "ಪೇಳೆ ಗೋಪ್ಯಮ್ಮ ಬುದ್ಧಿ        ॥ಅ.ಪ॥"
+          ],
+          [
+            "ಬಿಟ್ಟ ಕಂಗಳ ಮುಚ್ಚಲೊಲ್ಲನೆ ಬೇಗ"
+          ],
+          [
+            "ಬೆಟ್ಟಕ್ಕೆ ಬೆನ್ನೊಡ್ಡಿ ನಿಂತನೆ"
+          ],
+          [
+            "ಸಿಟ್ಟಿಸಿ ಕೋರೆ ಹಲ್ಲ ತೋರ್ದನೆ ಅತಿ"
+          ],
+          [
+            "ಗಟ್ಟಿ ಉಕ್ಕಿನ ಕಂಭವನೊಡೆದು ಬಂದನೆ ॥೧॥"
+          ],
+          [
+            "ಮೂರಡಿ ಭೂಮಿಯ ಬೇಡಿದನೆ ಅರಸರ"
+          ],
+          [
+            "ಬೇರ ಕಡಿಯೆ ಕೊಡಲಿ ತಂದನೆ"
+          ],
+          [
+            "ನಾರ ಸೀರೆಯನಿಟ್ಟುಕೊಂಡನೆ ಬೇಗ"
+          ],
+          [
+            "ಚೋರತನದಿ ಹರವಿ ಹಾಲ ಕುಡಿದನಮ್ಮ  ॥೨॥"
+          ],
+          [
+            "ಬತ್ತಲೆ ನಾರಿಯರನಪ್ಪಿದ ಬೇಗ"
+          ],
+          [
+            "ಉತ್ತಮ ಅಶ್ವವ ಹತ್ತಿದ"
+          ],
+          [
+            "ಹತ್ತವತಾರವ ತಾಳಿದ ನಮ್ಮ"
+          ],
+          [
+            "ದಿಟ್ಟ ಮೂರುತಿ ಪುರಂದರ ವಿಠಲ   ॥೩॥"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Kelalollane enna matanu ranga ||pa||"
+          ],
+          [
+            "Kaliyamardana krushnage"
+          ],
+          [
+            "Pele gopyamma buddhi ||a.pa||"
+          ],
+          [
+            "Bitta kangala muccalollane bega"
+          ],
+          [
+            "Bettakke bennoddi nintane"
+          ],
+          [
+            "Sittisi kore halla tordane ati"
+          ],
+          [
+            "Gatti ukkina kambavanodedu bandane ||1||"
+          ],
+          [
+            "Muradi bumiya bedidane arasara"
+          ],
+          [
+            "Bera kadiye kodali tandane"
+          ],
+          [
+            "Nara sireyanittukondane bega"
+          ],
+          [
+            "Choratanadi haravi hala kudidanamma ||2||"
+          ],
+          [
+            "Battale nariyaranappida bega"
+          ],
+          [
+            "Uttama asvava hattida"
+          ],
+          [
+            "Hattavatarava talida namma"
+          ],
+          [
+            "Ditta muruti purandara vithala ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "NExWx7F4Ec4uJSeeFuzH",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_NMMnf2PskZZI0Yu7vaeV",
+      "form": "pada",
+      "title": {
+        "kn": "ಅಳುವದ್ಯಾತಕೊ ರಂಗ ಅತ್ತರಂಜಿಪ ಗುಮ್ಮ",
+        "latin": "ಅಳುವದ್ಯಾತಕೊ ರಂಗ ಅತ್ತರಂಜಿಪ ಗುಮ್ಮ",
+        "iast": "aḻuvadyātakò raṃga attaraṃjipa gumma",
+        "devanagari": "अळुवद्यातकॊ रंग अत्तरंजिप गुम्म"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಅಳುವದ್ಯಾತಕೊ ರಂಗ ಅತ್ತರಂಜಿಪ ಗುಮ್ಮ||pa||"
+          ],
+          [
+            "ಪುಟ್ಟಿದೇಳು ದಿವಸದಲಿ  ದುಷ್ಟ ಪೂತನಿಯ ಕೊಂದೆ",
+            "ಮುಟ್ಟಿ ವಿಷದ ಮೊಲೆಯುಂಡ ಕಾರಣ",
+            "ದೃಷ್ಟಿ ತಾಕಿತೆ ನಿನಗೆ ರಂಗಯ್ಯ||1||"
+          ],
+          [
+            "ಬಾಲಕತನದಿ ಗೋಪಾಲಕರೊಡಗೂಡಿ",
+            "ಕಾಳಿಂದಿ ಮಾಡುವನು ಕಲಕಿದ ಕಾರಣ",
+            "ಕಾಲು ಉಳುಕಿತೆ ನಿನಗೆ ರಂಗಯ್ಯ||2||"
+          ],
+          [
+            "ತುರುವ ಕಾಯಲು ಪೋಗೆ ಭರದಿ ಇಂದ್ರ ಮಳೆಗರೆಯೆ",
+            "ಬೆರಳಲಿ ಬೆಟ್ಟವನೆತ್ತಿದ ಕಾರಣ",
+            "ಬೆರಳು ಉಳುಕಿತೆ ನಿನಗೆ ರಂಗಯ್ಯ||3||"
+          ],
+          [
+            "ವಾಸುದೇವ ಸುತನಾಗಿ ಅಸುರರೆಲ್ಲರ ಮಡುಹಿ",
+            "ಹೆಸರಿನ ಮಲ್ಲರ ಮಡುಹಿದ ಕಾರಣ",
+            "ಕಿಸಿರು ತಾಕಿತೆ ನಿನಗೆ ರಂಗಯ್ಯ||4||"
+          ],
+          [
+            "ಶರಣು ವೇಲಾಪುರದ ಚೆಲುವ ಚೆನ್ನಿಗರಾಯ",
+            "ಪರಿಪರಿ ವಿಧದಿಂದ ಶರಣರ ಪೊರೆಯುವ",
+            "ವರದ ಪುರಂದರವಿಠಲರಾಯ ||5||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Aluvadyatako ranga attaranjipa gumma||pa||"
+          ],
+          [
+            "Puttidelu divasadali dushta putaniya konde",
+            "Mutti vishada moleyunda karana",
+            "Drushti takite ninage rangayya||1||"
+          ],
+          [
+            "Balakatanadi gopalakarodagudi",
+            "Kalindi maduvanu kalakida karana",
+            "Kalu ulukite ninage rangayya||2||"
+          ],
+          [
+            "Turuva kayalu poge Baradi indra malegareye",
+            "Beralali bettavanettida karana",
+            "Beralu ulukite ninage rangayya||3||"
+          ],
+          [
+            "Vasudeva sutanagi asurarellara maduhi",
+            "Hesarina mallara maduhida karana",
+            "Kisiru takite ninage rangayya||4||"
+          ],
+          [
+            "Saranu velapurada celuva cennigaraya",
+            "Paripari vidhadinda saranara poreyuva",
+            "Varada purandaravithalaraya ||5||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "NMMnf2PskZZI0Yu7vaeV",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:43:12.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_OI1nNxuUejLu0pTdm3Qh",
+      "form": "pada",
+      "title": {
+        "kn": "ಬೂಚಿ ಬಂದಿದೆ, ರಂಗ ಬೂಚಿ ಬಂದಿದೆ",
+        "latin": "ಬೂಚಿ ಬಂದಿದೆ, ರಂಗ ಬೂಚಿ ಬಂದಿದೆ",
+        "iast": "būci baṃdidè, raṃga būci baṃdidè",
+        "devanagari": "बूचि बंदिदॆ, रंग बूचि बंदिदॆ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಬೂಚಿ ಬಂದಿದೆ, ರಂಗ ಬೂಚಿ ಬಂದಿದೆ ||ಪ||"
+          ],
+          [
+            "ಚಾಚಿ ಕುಡಿದು ಸುಮ್ಮನೆ ನೀ ಪಾಚಿಕೊಳ್ಳೊ ಕೃಷ್ಣಯ್ಯ ||ಅ||"
+          ],
+          [
+            "ನಾಲ್ಕು ಮುಖದ ಬೂಚಿಯೊಂದು",
+            "ಗೋಕುಲಕ್ಕೆ ಓಡಿ ಬಂದು",
+            "ಲೋಕರನ್ನು ಎಳೆದುಕೊಂಡು",
+            "ಕಾಕು ಮಾಡಿ ಒಯ್ಯುವುದಕೆ ||"
+          ],
+          [
+            "ಮೂರು ಕಣ್ಣಿನ ಬೂಚಿಯೊಂದು",
+            "ಊರೂರ ಸುತ್ತಿ ಬಂದು",
+            "ದ್ವಾರದಲ್ಲಿ ನಿಂತಿದೆ ನೋಡೊ",
+            "ಪೋರರನ್ನು ಒಯ್ಯುವುದಕೆ ||"
+          ],
+          [
+            "ಅಂಗವೆಲ್ಲ ಕಂಗಳುಳ್ಳ",
+            "ಶೃಂಗಾರ ಮುಖದ ಬೂಚಿ",
+            "ಬಂಗಾರದಂಥ ಮಕ್ಕಳನೆಲ್ಲ",
+            "ಕಂಗೆಡಿಸಿ ಒಯ್ಯುವುದಕೆ ||"
+          ],
+          [
+            "ಆರು ಮುಖದ ಬೂಚಿಯೊಂದು",
+            "ಈರಾರು ಕಂಗಳದಕೆ",
+            "ವಾರು ವಾರು ಅಳುವ ಮಕ್ಕಳ",
+            "ದೂರ ಸೆಳೆದು ಒಯ್ಯುವುದಕೆ ||"
+          ],
+          [
+            "ಮರದ ಮೇಲೆ ಇರುವುದೊಂದು",
+            "ಕರಾಳ ಮುಖದ ಬೂಚಿ",
+            "ತರಳರನ್ನು ಎಳೆದುಕೊಂಡು",
+            "ಪುರಂದರವಿಠಲಗೊಪ್ಪಿಸಲಿಕೆ ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Buchi bandide, ranga buchi bandide ||pa||"
+          ],
+          [
+            "Chaci kudidu summane ni pachikollo krushnayya ||a||"
+          ],
+          [
+            "Nalku mukada buciyondu",
+            "Gokulakke odi bandu",
+            "Lokarannu eledukondu",
+            "Kaku madi oyyuvudake ||1||"
+          ],
+          [
+            "Muru kannina buciyondu",
+            "Urura sutti bandu",
+            "Dvaradalli nintide nodo",
+            "Porarannu oyyuvudake ||2||"
+          ],
+          [
+            "Angavella kangalulla",
+            "Srungara mukada buci",
+            "Bangaradantha makkalanella",
+            "Kangedisi oyyuvudake ||3||"
+          ],
+          [
+            "Aru mukada buchiyondu",
+            "Iraru kamngaladake",
+            "Varu varu aluva makkala",
+            "Dura seledu oyyuvudake ||4||"
+          ],
+          [
+            "Marada mele iruvudondu",
+            "Karala mukada buci",
+            "Taralarannu eledukondu",
+            "Purandara vithala goppisalike ||5||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "OI1nNxuUejLu0pTdm3Qh",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_PU0B1OJcggIoUB7NXPDS",
+      "form": "pada",
+      "title": {
+        "kn": "ಅಂಬೆಗಾಲಿಕ್ಕುತಲಿ ಬಂದ ಗೋವಿಂದ",
+        "latin": "ಅಂಬೆಗಾಲಿಕ್ಕುತಲಿ ಬಂದ ಗೋವಿಂದ",
+        "iast": "aṃbègālikkutali baṃda goviṃda",
+        "devanagari": "अंबॆगालिक्कुतलि बंद गोविंद"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಅಂಬೆಗಾಲಿಕ್ಕುತಲಿ ಬಂದ ಗೋವಿಂದ ||pa||"
+          ],
+          [
+            "ಅಂಬುಜನಾಭ ದಯದಿಂದ ಎನ್ನ ಮನೆಗೆ||a.pa||"
+          ],
+          [
+            "ಜಲಚರ ಜಲವಾಸ ಧರಣಿಧರ ಮೃಗರೂಪ ನೆಲನಳೆದು ಮೂರಡಿ ಮಾಡಿಬಂದ"
+          ],
+          [
+            "ಕುಲನಾಶ ವನವಾಸ ನವನೀತಚೋರನಿವ ಲಲನೆಯರ ವ್ರತಭಂಗ ವಾಹನ ತುರಂಗ || 1||"
+          ],
+          [
+            "ಕಣ್ಣ ಬಿಡುವನು ತನ್ನ ಬೆನ್ನ ತಗ್ಗಿಸುವನು ಮಣ್ಣು ಕೆದರಿ ಕೋರೆ ಬಾಯ ತೆರೆದು"
+          ],
+          [
+            "ಚಿಣ್ಣ ಭಾರ್ಗವ ಲಕ್ಷ್ಮಣನಣ್ಣ ಬೆಣ್ಣೆಯ ಕಳ್ಳ ಮನೆಯ ಬಿಟ್ಟು ಕುದುರೆಯನೇರಿದ || 2||"
+          ],
+          [
+            "ನೀರ ಪೊಕ್ಕನು ಗಿರಿಯ ನೆಗಹಿ ಧರಣಿಯ ತಂದು ನರಮೃಗ ಬಲಿಬಂಧ ಕೊರಳುಗೊಯಿಕ"
+          ],
+          [
+            "ಶೂರ ಮುರಿದೊರಳೆಳೆದು ನಿರವಾಣಿ ಹಯಹತ್ತಿ ಪುರಂದರ ವಿಟ್ಠಲ ಮನೆಗೆ ತಾ ಬಂದ ಚರಣ || 3 ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Ambe kalikkuthalli bandha"
+          ],
+          [
+            "Anbuja nabha dayadinda ennamanege ||"
+          ],
+          [
+            "Jalacara jalavasa dharanidhara mrugarupa"
+          ],
+          [
+            "Nelanaledu muradi madi banda"
+          ],
+          [
+            "Kulanasha vanavasa navanita coraniva"
+          ],
+          [
+            "Lalaneyara vrata bhanga vahana turanga ||1||"
+          ],
+          [
+            "Kannabiduvanu tanna benna taggisuvanu"
+          ],
+          [
+            "Mannu kedari kore baya taredu"
+          ],
+          [
+            "Cinna bhargava lakshmanananna benneya kalla"
+          ],
+          [
+            "Manava bittu kudureyanerida ||2||"
+          ],
+          [
+            "Nira pokkanu giriyanegehi dharaniya tandu"
+          ],
+          [
+            "Naramruga balibanda koralugoyika"
+          ],
+          [
+            "Sharamuridoraleledu niravani haya hatti"
+          ],
+          [
+            "Purandara vitthala manege ta banda ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "PU0B1OJcggIoUB7NXPDS",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:28:15.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_Pif7KCYRUIECt64ckQ8Y",
+      "form": "pada",
+      "title": {
+        "kn": "ಜಗದೋದ್ಧಾರನ ಆಡಿಸಿದಳೆಶೋದಾ",
+        "latin": "ಜಗದೋದ್ಧಾರನ ಆಡಿಸಿದಳೆಶೋದಾ",
+        "iast": "jagadoddhārana āḍisidaḻèśodā",
+        "devanagari": "जगदोद्धारन आडिसिदळॆशोदा"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಜಗದೋದ್ಧಾರನ ಆಡಿಸಿದಳೆಶೋದಾ ||ಪ||"
+          ],
+          [
+            "ಜಗದೋದ್ಧಾರನ ಮಗನೆಂದು ತಿಳಿಯುತ"
+          ],
+          [
+            "ಸುಗುಣಾಂತ ರಂಗನ ಆಡಿಸಿದಳೆಶೋದೆ ||ಅ.ಪ||"
+          ],
+          [
+            "ನಿಗಮಕೆ ಸಿಲುಕದ ಅಗಣಿತ ಮಹಿಮನ"
+          ],
+          [
+            "ಮಗುಗಳ ಮಾಣಿಕ್ಯನ ಆಡಿಸಿದಳೆ ಯಶೋದೆ ||೧||"
+          ],
+          [
+            "ಅಣೋರಣೀಯನ ಮಹತೋ ಮಹಿಮನ"
+          ],
+          [
+            "ಅಪ್ರಮೇಯನ ಆಡಿಸಿದಳೆಶೋದಾ ||೨||"
+          ],
+          [
+            "ಪರಮ ಪುರುಷನ ಪರವಾಸುದೇವನ"
+          ],
+          [
+            "ಪುರಂದರ ವಿಠಲನ ಆಡಿಸಿದಳೆಶೋದಾ ||೩||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Jagadoddharana adisidale yashode"
+          ],
+          [
+            "Jagadoddharana maganendu tiliyuta"
+          ],
+          [
+            "sugunanta rangana adisidale yashode||"
+          ],
+          [
+            "Nigamake silukada aganita mahimana"
+          ],
+          [
+            "magugale manikyana adisidale yashode||1||"
+          ],
+          [
+            "Anoraniyana mahato mahimana"
+          ],
+          [
+            "aprameyana na adisidale yashode||2||"
+          ],
+          [
+            "Parama purusana paravasudevana"
+          ],
+          [
+            "purandara vithalana adisidale yashode||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "Pif7KCYRUIECt64ckQ8Y",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:27:32.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_Qkma0aCqjeB9GXgjJyGX",
+      "form": "pada",
+      "title": {
+        "kn": "ಯಾದವ ನೀ ಬಾ ಯದುಕುಲನಂದನ",
+        "latin": "ಯಾದವ ನೀ ಬಾ ಯದುಕುಲನಂದನ",
+        "iast": "yādava nī bā yadukulanaṃdana",
+        "devanagari": "यादव नी बा यदुकुलनंदन"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಯಾದವ ನೀ ಬಾ ಯದುಕುಲನಂದನ"
+          ],
+          [
+            "ಮಾಧವ ಮಧುಸೂಧನ ಬಾರೋ ।।ಪ॥"
+          ],
+          [
+            "ಸೋದರ ಮಾವನ ಮಧುರೆಲಿ ಮಡುಹಿದ"
+          ],
+          [
+            "ಯಶೋದೆ ಕಂದ ನೀ ಬಾರೋ ।।ಅ.ಪ।।"
+          ],
+          [
+            "ಶಂಖಚಕ್ರವು ಕೈಯಲಿ ಹೊಳೆಯುತ"
+          ],
+          [
+            "ಬಿಂಕದ ಗೋವಳ ನೀ ಬಾರೋ"
+          ],
+          [
+            "ಅಕಳಂಕ ಮಹಿಮನೆ ಆದಿನಾರಾಯಣ"
+          ],
+          [
+            "ಬೇಕೆಂಬ ಭಕುತರಿಗೊಲಿಬಾರೋ ।।೧।।"
+          ],
+          [
+            "ಕಣಕಾಲಂದುಗೆ ಘಲುಘಲುರೆನುತಲಿ"
+          ],
+          [
+            "ಝಣಝಣ ವೇಣುನಾದದಲಿ"
+          ],
+          [
+            "ಚಿಣಿಕೋಲು ಚೆಂಡು ಬುಗುರಿಯನಾಡುತ"
+          ],
+          [
+            "ಸಣ್ಣ ಸಣ್ಣ ಗೋವಳರೊಡಗೂಡಿ ಬಾರೋ ।।೨।।"
+          ],
+          [
+            "ಖಗವಾಹನನೇ ಬಗೆಬಗೆ ರೂಪನೇ"
+          ],
+          [
+            "ನಗುಮೊಗದರಸನೇ ನೀ ಬಾರೋ"
+          ],
+          [
+            "ಜಗದೊಳು ನಿನ್ನಯ ಮಹಿಮೆಯ ಪೊಗಳುವೆ"
+          ],
+          [
+            "ಪುರಂದರವಿಠಲ ನೀ ಬಾರೋ ।।೩।।"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Yadava ni ba yadukula nandana madhava madhusudana baro"
+          ],
+          [
+            "Sodara mavana madhureli maduhida yashode kandane ni baro"
+          ],
+          [
+            "Shankha chakravu kayyali holeyuta binkada govala ni baro"
+          ],
+          [
+            "akalanka mahimane Adi narayana bekemba bhaktarigoli baro||1||"
+          ],
+          [
+            "Kanakaladuge gejje ghulu ghulurenutali jhana jhana venu nadadali"
+          ],
+          [
+            "cinikola cendu bugariyanaduta sanna sanna govalarodagudi||2||"
+          ],
+          [
+            "Khaga vahanane bage bage rupane nagumogadarasane ni baro"
+          ],
+          [
+            "jagadolu ninnaya mahimeya pogaluve purandara vittala ni baro||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "Qkma0aCqjeB9GXgjJyGX",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:29:04.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_RFBNMfR5uxYjpFJlHwlB",
+      "form": "pada",
+      "title": {
+        "kn": "ಏನು ಮರುಳಾದೆಮ್ಮ ಎಲೆ ರುಕ್ಮಿಣಿ",
+        "latin": "ಏನು ಮರುಳಾದೆಮ್ಮ ಎಲೆ ರುಕ್ಮಿಣಿ",
+        "iast": "enu maruḻādèmma èlè rukmiṇi",
+        "devanagari": "एनु मरुळादॆम्म ऎलॆ रुक्मिणि"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಏನು ಮರುಳಾದೆಮ್ಮ ಎಲೆ ರುಕ್ಮಿಣಿ"
+          ],
+          [
+            "ಹೀನಕುಲ ಗೊಲ್ಲ ಶ್ರೀ ಗೋಪಾಲಕೃಷ್ಣಗೆ"
+          ],
+          [
+            "ಹಾಸಿಕಿಲ್ಲದೆ ಹಾವಿನ ಮೇಲೆ ಒರಗಿದವ"
+          ],
+          [
+            "ಹೇಸಿಕಿಲ್ಲದೆ ಕರಡಿಯ ಕೂಡಿದ"
+          ],
+          [
+            "ಗ್ರಾಸಕಿಲ್ಲದೆ ತೊತ್ತಿನ ಮಗನ ಮನೆಲುಂಡ"
+          ],
+          [
+            "ದೋಷಕಂಜದೆ ಮಾವನ ಸಿರವ ತರಿದವಗೆ"
+          ],
+          [
+            "ಕುಂಡಗೋಳಕರ ಮನೆ ಕುಲದೈವವೆನಿಸಿದಗೆ"
+          ],
+          [
+            "ಮಂಡೆ ಬೋಳರ ಮನಕೆ ಮನದೈವವ"
+          ],
+          [
+            "ಹಿಂಡು ಗೊಲ್ಲರ ಮನೆ ಹಿರಿಯನೆಂದೆನಿಸುವ"
+          ],
+          [
+            "ಭಂಡಾಟದ ಗೊಲ್ಲ ಈ ಬಳಗದೊಳಗೆಲ್ಲ"
+          ],
+          [
+            "ಒಬ್ಬರಲ್ಲಿ ಹುಟ್ಟಿ ಒಬ್ಬರಲ್ಲಿ ಬೆಳೆದ"
+          ],
+          [
+            "ಒಬ್ಬರಿಗೆ ಮಗನಲ್ಲ ಜಗದೊಳಗೆಲ್ಲ"
+          ],
+          [
+            "ಅಬ್ಬರದ ದೈವ ಶ್ರೀ ಪುರಂದರವಿಟ್ಠಲನ"
+          ],
+          [
+            "ಉಬ್ಬುಬ್ಬಿ ಮದುವ್ಯಾದೆ ಉತ್ಸಾಹದಿಂದ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Yenu Marulatheyama ele rukmani||"
+          ],
+          [
+            "Heenakula kolla sri gopala krishnanige ||"
+          ],
+          [
+            "Hasigilladha haavina mele oragidhava"
+          ],
+          [
+            "hesikilladhe karaidya kooditha"
+          ],
+          [
+            "kraasagilladhe thotthina magana maneloonta"
+          ],
+          [
+            "dhosaganjane mavena sira tharidhavage||1||"
+          ],
+          [
+            "kundakolakara mane kula dhaiva venisidhage"
+          ],
+          [
+            "mande polara manage manaithavava"
+          ],
+          [
+            "hindu kollara maneya hariya nendhenisuva"
+          ],
+          [
+            "pandadadha kolla ee balagatholagella ||2||"
+          ],
+          [
+            "obbaralli hutti obbaralli beledha"
+          ],
+          [
+            "obbarige maganalla jagothalagella"
+          ],
+          [
+            "apparatha deiva sri purandara vittalana"
+          ],
+          [
+            "ubbuuppi madhu vyadhe uthsahadhindha||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "RFBNMfR5uxYjpFJlHwlB",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:32:41.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_RFeJxVSajgKgDQ8lCQxX",
+      "form": "pada",
+      "title": {
+        "kn": "ರಂಗನ ನೋಡಿರೆ",
+        "latin": "ರಂಗನ ನೋಡಿರೆ",
+        "iast": "raṃgana noḍirè",
+        "devanagari": "रंगन नोडिरॆ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ರಂಗನ ನೋಡಿರೆ ರಾಜಕುವರ ನರ",
+            "ಸಿಂಗ ದೇವ ನಮ್ಮ ದೇವಕಿ ಸುತನ ||ಪ||"
+          ],
+          [
+            "ಹಮ್ಮಿನ ತಾಯಿತ ತೋಳ ಭಾಪುರಿಯೊ",
+            "ಘಮ್ಮನೆ ಘಲ್ಲೆಂಬ ಗೆಜ್ಜೆಯ ಧ್ವನಿಯೊ",
+            "ಸುಮ್ಮಹಿಮನ ಕಿವಿಯಲ್ಲಿ ಚೌಕುಲಿಯೊ",
+            "ತಿಮ್ಮರಾಯ ನಿಟ್ಟ ಸೊಬಗಿನ ಬಗೆಯೊ  ||೧||"
+          ],
+          [
+            "ಶುಕ್ರವಾರದ ಪೂಜೆಗೊಂಬವನ",
+            "ಸಕ್ಕರೆ ಪಾಲ್ ಮೊಸರು ಬೆಣ್ಣೆ ಮೆಲ್ಲುವನ",
+            "ಘಕ್ಕನೆ ಸುರರಿಗೆ ಅಮೃತವಿತ್ತವನ",
+            "ರಕ್ಕಸ ಕುಲವೈರಿ ರಾವಣಾಂತಕನ  ||೨||"
+          ],
+          [
+            "ಪಾಪವಿನಾಶಿನಿ ಸ್ನಾನವ ಮಾಡಿ",
+            "ಪಾಪಗಳೆಲ್ಲವು ಬೇಗಬಿಟ್ಟೋಡಿ",
+            "ಈ ಪರಿ ದಿನ ದಿನ ಮೂರುತಿ ನೋಡಿ",
+            "ಶ್ರೀಪತಿ ಪುರಂದರ ವಿಠಲನ ಪಾಡಿ  ||೩||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Rangana nodire rajakuvara nara",
+            "Singa deva namma devaki sutana ||pa||"
+          ],
+          [
+            "Hammina tayita tola bapuriyo",
+            "Gammane gallemba gejjeya dhvaniyo",
+            "Summahimana kiviyalli caukuliyo",
+            "Timmaraya nitta sobagina bageyo ||1||"
+          ],
+          [
+            "Sukravarada pujegombavana",
+            "Sakkare pal mosaru benne melluvana",
+            "Gakkane surarige amrutavittavana",
+            "Rakkasa kulavairi ravanantakana ||2||"
+          ],
+          [
+            "Papavinasini snanava madi",
+            "Papagalellavu begabittodi",
+            "I pari dina dina muruti nodi",
+            "Sripati purandara vithalana padi ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "RFeJxVSajgKgDQ8lCQxX",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:42:08.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_SC6Xp9oEf0Io9SEKEgVQ",
+      "form": "pada",
+      "title": {
+        "kn": "ಕೃಷ್ಣಮೂರ್ತಿ ಕಣ್ಣ ಮುಂದೆ ನಿಂತಿದಂತಿದೆ",
+        "latin": "ಕೃಷ್ಣಮೂರ್ತಿ ಕಣ್ಣ ಮುಂದೆ ನಿಂತಿದಂತಿದೆ",
+        "iast": "kṛṣṇamūrti kaṇṇa muṃdè niṃtidaṃtidè",
+        "devanagari": "कृष्णमूर्ति कण्ण मुंदॆ निंतिदंतिदॆ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಕೃಷ್ಣಮೂರ್ತಿ ಕಣ್ಣ ಮುಂದೆ ನಿಂತಿದಂತಿದೆ ||ಪ||"
+          ],
+          [
+            "ಕಷ್ಟಗಳೆಲ್ಲಾ ಪರಿಹರಿಸಿ ಮನ-",
+            "ದಿಷ್ಟಾರ್ಥಗಳನೆಲ್ಲಾ ಕೊಟ್ಟು ರಕ್ಷಿಸುವಂಥ || ಅ||"
+          ],
+          [
+            "ಮಸ್ತಕದಲಿ ಮಾಣಿಕ್ಯದ ಕಿರೀಟ",
+            "ಕಸ್ತೂರಿ ತಿಲಕದಿಂದೆಸೆವ ಲಲಾಟ",
+            "ಶಿಸ್ತಿಲಿ ಕೊಳಲನೂದುವ ಓರೆ ನೋಟ",
+            "ಕೌಸ್ತುಭ ಎಡಬಲದಲಿ ಓಲಾಟ || ೧||"
+          ],
+          [
+            "ಮಘಮಘಿಸುವ ಸೊಬಗಿನ ಸುಳಿಗುರುಳು",
+            "ಚಿಗುರು ತುಳಸಿ ವನಮಾಲೆಯ ಕೊರಳು",
+            "ಬಗೆ ಬಗೆ ಹೊನ್ನುಂಗುರವಿಟ್ಟ ಬೆರಳು",
+            "ಸೊಬಗಿನ ನಾಭಿಯ ತಾವರೆ ಯರಳು ||೨||"
+          ],
+          [
+            "ಉಡುದಾರ ವಡ್ಡ್ಯಾಣ ನಿಖಿಲಾಭರಣ",
+            "ಉಡುಗೆ ಪೀತಾಂಬರ ರವಿಶತ ಕಿರಣ",
+            "ಕಡಗ ನೂಪುರ ಗೆಜ್ಜೆಗಳನಿಟ್ಟ ಚರಣ",
+            "ಒಡೆಯ ಶ್ರೀಪುರಂದರ ವಿಠಲನ ಕರುಣ || ೩||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Krushnamurti kanna munde nintidantide ||pa||"
+          ],
+          [
+            "Kashtagalella pariharisi mana-",
+            "Dishtarthagalanella kottu rakshisuvantha || a||"
+          ],
+          [
+            "Mastakadali manikyada kirita",
+            "Kasturi tilakadindeseva lalata",
+            "Sistili kolalanuduva Ore nota",
+            "Kaustuba edabaladali olata || 1||"
+          ],
+          [
+            "Magamagisuva sobagina suligurulu",
+            "Ciguru tulasi vanamaleya koralu",
+            "Bage bage honnunguravitta beralu",
+            "Sobagina nabiya tavare yaralu ||2||"
+          ],
+          [
+            "Ududara vaddyana nikilabarana",
+            "Uduge pitambara ravisata kirana",
+            "Kadaga nupura gejjegalanitta carana",
+            "Odeya sripurandara vithalana karuna || 3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "SC6Xp9oEf0Io9SEKEgVQ",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:44:26.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_U08WGdSuoil260ie9h0E",
+      "form": "pada",
+      "title": {
+        "kn": "ಈ ಪರಿಯ ಸೊಬಗಾವ ದೇವರಲಿ ಕಾಣೆ",
+        "latin": "ಈ ಪರಿಯ ಸೊಬಗಾವ ದೇವರಲಿ ಕಾಣೆ",
+        "iast": "ī pariya sòbagāva devarali kāṇè",
+        "devanagari": "ई परिय सॊबगाव देवरलि काणॆ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಈ ಪರಿಯ ಸೊಬಗಾವ ದೇವರಲಿ ಕಾಣೆ ।।ಪ।।"
+          ],
+          [
+            "ಗೋಪೀಜನಪ್ರಿಯ ಗೋಪಾಲಗಲ್ಲದೆ ।।ಅ.ಪ।।"
+          ],
+          [
+            "ದೊರೆಯತನದಲ್ಲಿ ನೋಡೆ ಧರಣಿದೇವಿಗೆ ರಮಣ"
+          ],
+          [
+            "ಸಿರಿಯತನದಲಿ ನೋಡೆ ಶ್ರೀಕಾಂತನು"
+          ],
+          [
+            "ಹಿರಿಯತನದಲಿ ನೋಡೆ ಸರಸಿಜೋದ್ಭವನಯ್ಯ"
+          ],
+          [
+            "ಗುರುವುತನದಲಿ ನೋಡೆ ಜಗದಾದಿಗುರುವು ।।೧।।"
+          ],
+          [
+            "ಪಾವನತ್ವದಿ ನೋಡೆ ಅಮರಗಂಗಾಜನಕ"
+          ],
+          [
+            "ದೇವತ್ವದಲಿ ನೋಡೆ ದಿವಿಜರೊಡೆಯ"
+          ],
+          [
+            "ಲಾವಣ್ಯದಲಿ ನೋಡೆ ಲೋಕಮೋಹಕನಯ್ಯ"
+          ],
+          [
+            "ಆವಾ ಧೈರ್ಯದಿ ನೋಡೆ ಲೋಕಮೋಹಕನಯ್ಯ ।।೨।।"
+          ],
+          [
+            "ಗಗನದಲಿ ಸಂಚರಿಪ ಗರುಡದೇವನೆ ತುರುಗ"
+          ],
+          [
+            "ಜಗತೀಧರ ಶೇಷ ಪರಿಯಂಕ ಶಯನ"
+          ],
+          [
+            "ನಿಗಮಗೋಚರ ಪುರಂದರವಿಠಲಗಲ್ಲದೆ"
+          ],
+          [
+            "ಮಿಗಿಲಾದ ದೈವಗಳಿಗೀ ಭಾಗ್ಯವುಂಟೆ ।।೩।।"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "I pariya sobagava devarali kane ||pa||"
+          ],
+          [
+            "Gopijanapriya gopalagallade ||a.pa||"
+          ],
+          [
+            "Doreyatanadalli node dharanidevige ramana"
+          ],
+          [
+            "Siriyatanadali node srikantanu"
+          ],
+          [
+            "Hiriyatanadali node sarasijodbavanayya"
+          ],
+          [
+            "Guruvutanadali node jagadadiguruvu ||1||"
+          ],
+          [
+            "Pavanatvadi node amaragangajanaka"
+          ],
+          [
+            "Devatvadali node divijarodeya"
+          ],
+          [
+            "Lavanyadali node lokamohakanayya"
+          ],
+          [
+            "Ava dhairyadi node lokamohakanayya ||2||"
+          ],
+          [
+            "Gaganadali samcaripa garudadevane turuga"
+          ],
+          [
+            "Jagatidhara sesha pariyanka Sayana"
+          ],
+          [
+            "Nigamagocara purandaravithalagallade"
+          ],
+          [
+            "Migilada daivagaligi bagyavunte ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "U08WGdSuoil260ie9h0E",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_USyVGfaNO1PpA3vIwMLT",
+      "form": "pada",
+      "title": {
+        "kn": "ಕೊಳಲನೂದುತ ಬಂದ  ನಮ್ಮ ಗೋಪಿಯ ಕಂದ",
+        "latin": "ಕೊಳಲನೂದುತ ಬಂದ  ನಮ್ಮ ಗೋಪಿಯ ಕಂದ",
+        "iast": "kòḻalanūduta baṃda  namma gopiya kaṃda",
+        "devanagari": "कॊळलनूदुत बंद  नम्म गोपिय कंद"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಕೊಳಲನೂದುತ ಬಂದ  ನಮ್ಮ ಗೋಪಿಯ ಕಂದ"
+          ],
+          [
+            "ಕೊಳಲನೂದುವದು ಬಲು ಚಂದ",
+            "ಆ ವಸುದೇವನ ಕಂದ ಇವ ನೋಡೆ",
+            "ದೇವಕಿ ಬಸಿರೊಳು ಬಂದ",
+            "ಮಾವ ಕಂಸನ ಕೊಂದ",
+            "ಭಾವಜನಯ್ಯ ಮುಕುಂದ",
+            "ಮುತ್ತಿನಾಭರಣ ತೊಟ್ಟು",
+            "ಹಸ್ತದಿ ಕೊಳಲನಿಟ್ಟು",
+            "ಕಸ್ತೂರಿ ತಿಲಕವನಿಟ್ಟು",
+            "ತುತ್ತುರ ತುರರೆಂಬ ನಾದವ ಪಿಡಿಯೆ",
+            "ಹಿಂದೆ ಗೋವುಗಳ ಹಿಂಡು",
+            "ಮುಂದೆ ಗೋಪಾಲರ ದಂಡು",
+            "ಹಿಂದಕ್ಕೆ ದೈತ್ಯರ ಕೊಂದ ಪು-",
+            "ರಂದರವಿಠಲನ ಚಂದ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Kolalanudhutha bandha namma gopiya kandha"
+          ],
+          [
+            "kolalanuduvudu balu chenda"
+          ],
+          [
+            "Aa vasudevana kandha||",
+            "devaki basirolu banda",
+            "mava kamsana konda bhavajanayya mukunda||1||"
+          ],
+          [
+            "Muttina bharanava tottu hastadi kolala kottu",
+            "kasturi tilaka vittu tutturu turuvemba nadava pidiyo||2||"
+          ],
+          [
+            "Hinde govugala hindu munde gopalara dandu",
+            "hindake daityara konda Purandara Vithala Chanda||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "USyVGfaNO1PpA3vIwMLT",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:39:45.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_VJhAWntJB8xFVqpfA1B5",
+      "form": "pada",
+      "title": {
+        "kn": "ಜೋ ಜೋ ಶ್ರೀಕೃಷ್ಣ ಪರಮಾನಂದ",
+        "latin": "ಜೋ ಜೋ ಶ್ರೀಕೃಷ್ಣ ಪರಮಾನಂದ",
+        "iast": "jo jo śrīkṛṣṇa paramānaṃda",
+        "devanagari": "जो जो श्रीकृष्ण परमानंद"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಜೋ ಜೋ ಶ್ರೀಕೃಷ್ಣ ಪರಮಾನಂದ",
+            "ಜೋ ಜೋ ಗೋಪಿಯ ಕಂದ ಮುಕುಂದ ಜೋಜೋ       ||ಪ||"
+          ],
+          [
+            "ಪಾಲಗಡಲೊಳು ಪವಡಿಸಿದವನೆ",
+            "ಆಲದೆಲೆಯ ಮೇಲೆ ಮಲಗಿದ ಶಿಶುವೆ",
+            "ಶ್ರೀಲತಾಂಗಿಯರ ಚಿತ್ತದೊಲ್ಲಭನೆ",
+            "ಬಾಲ ನಿನ್ನನು ಪಾಡಿ ತೂಗುವೆನಯ್ಯ ಜೋಜೋ            ||೧||"
+          ],
+          [
+            "ಹೊಳೆವಂಥ ರನ್ನದ ತೊಟ್ಟಿಲ ಮೇಲೆ",
+            "ಥಳಥಳಿಸುವ ಗುಲಗಂಜಿಯ ಮಾಲೆ",
+            "ಅಳದೆ ನೀ ಪಿಡಿದಾಡೆನ್ನಯ ಮುದ್ದು ಬಾಲ",
+            "ನಳಿನನಾಭನೆ ನಿನ್ನ ಪಾಡಿ ತೂಗುವೆನು ಜೋಜೋ         ||೨||"
+          ],
+          [
+            "ಯಾರ ಕಂದ ನೀನಾರ ನಿಧಾನಿ",
+            "ಆರ ರತ್ನವೊ ನೀನಾರ ಮಾಣಿಕವೊ",
+            "ಸೇರಿತು ಎನಗೊಂದು ಚಿಂತಾಮಣಿ ಎಂದು",
+            "ಪೋರ ನಿನ್ನನು ಪಾಡಿ ತೂಗುವೆನಯ್ಯ ಜೋಜೋ           ||೩||"
+          ],
+          [
+            "ಗುಣನಿಧಿಯೆ ನಿನ್ನ ಎತ್ತಿಕೊಂಡಿದ್ದರೆ",
+            "ಮನೆಯ ಕೆಲಸವಾರು ಮಾಡುವರಯ್ಯ",
+            "ಮನಕೆ ಸುಖನಿದ್ರೆಯ ತಂದುಕೋ ಬೇಗ",
+            "ಫಣಿಶಯನನೆ ನಿನ್ನ ಪಾಡಿ ತೂಗುವೆನು ಜೋಜೋ         ||೪||"
+          ],
+          [
+            "ಅಂಡಜವಾಹನ ಅನಂತಮಹಿಮ",
+            "ಪುಂಡರೀಕಾಕ್ಷ ಶ್ರೀ ಪರಮಪಾವನ",
+            "ಹಿಂಡು ದೈವದ ಗಂಡ ಉದ್ದಂಡನೆ",
+            "ಪಾಂಡುರಂಗ ಶ್ರೀ ಪುರಂದರ ವಿಠಲ ಜೋಜೋ          ||೫||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Jo Jo Shri Krsna Paramananda Jo Jo Gopiya Kanda Mukunda Jo Jo"
+          ],
+          [
+            "Palukadalolu Pavadisidavane Ondaladeleya Mele Malagida Shishuve",
+            "Shri Lalitangiyara Cittadollabhane Bala Ninnanu Padi Tuguvenayya||1||"
+          ],
+          [
+            "Holevantha Rannada Tottila Mele Thala Thalisuva Gurugunjiya Male",
+            "Alade Ni Pididadennaya Muddu Bala Nalina Nabhane Ninna Padi Tuguvenu||2||"
+          ],
+          [
+            "Yara Kanda Ninara Nidhani Yara Ratnavo Ninara Manikavo",
+            "Seridu Enagondu Cintamani Endu Pora Ninnanu Padi Tuguvenayya||3||"
+          ],
+          [
+            "Gunanidhiye Ninna Etti Kondiddare Maneya Kelasavyaru Maduvarayya",
+            "Maneke Sukha Nidre Tanduko Bega Phani Shayanane Ninna Padi Tuguvenu||4||"
+          ],
+          [
+            "Andaja Vahana Ananta Mahima Pundarikaksa Shri Parama Pavananna",
+            "Hindu Daivata Ganda Uddandane Panduranga Shri Purandara Vittala ||5||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "VJhAWntJB8xFVqpfA1B5",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:38:23.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_VgJLAuh0J3Ju7U8uhXrz",
+      "form": "pada",
+      "title": {
+        "kn": "ಲಾಲಿಸಿದಳು ಮಗನ ಯಶೋದೆ",
+        "latin": "ಲಾಲಿಸಿದಳು ಮಗನ ಯಶೋದೆ",
+        "iast": "lālisidaḻu magana yaśodè",
+        "devanagari": "लालिसिदळु मगन यशोदॆ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಲಾಲಿಸಿದಳು ಮಗನ ಯಶೋದೆ"
+          ],
+          [
+            "ಲಾಲಿಸಿದಳು ಮಗನ     ||ಪ||"
+          ],
+          [
+            "ಅರಳೆಲೆ ಮಾಗಾಯಿ ಬೆರಳಿಗುಂಗುರವಿಟ್ಟು"
+          ],
+          [
+            "ತರಳನ ಮೈಸಿರಿ ತರುಣಿ ನೋಡುತ ಹಿಗ್ಗಿ              ||೧||"
+          ],
+          [
+            "ಬಾಲಕನೆ ಕೆನೆ ಹಾಲು ಮೊಸರನೀವೇ"
+          ],
+          [
+            "ಲೀಲೆಯಿಂದಲಿ ಎನ್ನ ತೋಳ ಮೇಲೆ ಮಲಗೆಂದು     ||೨||"
+          ],
+          [
+            "ಮುಗುಳುನಗೆಯಿಂದ ಮುದ್ದು ತಾತಾರೆಂದು"
+          ],
+          [
+            "ಜಗದೊಡೆಯನೇ ಶ್ರೀಪುರಂದರವಿಠಲನ               ||೩||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Lalisidhalu Magana yashoda lalisidhalu magana"
+          ],
+          [
+            "Aralele magayi beraligunguravittu"
+          ],
+          [
+            "Taralana maisiri taruni noduta higgi |1|"
+          ],
+          [
+            "Balakage kene halu mosara nidi"
+          ],
+          [
+            "Lileyindali tola mele malagendu |2|"
+          ],
+          [
+            "Mugulu nageyinda mudduta tarendu"
+          ],
+          [
+            "Jagadodeyana shriPurandara vitthalana |3|"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "VgJLAuh0J3Ju7U8uhXrz",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:25:47.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_aOaF2bx9IYlwMd4qJ4eX",
+      "form": "pada",
+      "title": {
+        "kn": "ಸಿಕ್ಕಿದನೆಲೆ ಜಾಣೆ ಶ್ರೀ ವೇಣುಗೋಪಾಲ",
+        "latin": "ಸಿಕ್ಕಿದನೆಲೆ ಜಾಣೆ ಶ್ರೀ ವೇಣುಗೋಪಾಲ",
+        "iast": "sikkidanèlè jāṇè śrī veṇugopāla",
+        "devanagari": "सिक्किदनॆलॆ जाणॆ श्री वेणुगोपाल"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಸಿಕ್ಕಿದನೆಲೆ ಜಾಣೆ ಶ್ರೀ ವೇಣುಗೋಪಾಲ",
+            "ಭಕ್ತವತ್ಸಲ ದೇವನು ||ಪ ||",
+            "ಮಕ್ಕಳ ಚಂಡಿಕೆ ಮರದ ಕೊನೆಗೆ ಕಟ್ಟಿ",
+            "ಘಕ್ಕನ ಚಪ್ಪಾಳೆಯಿಕ್ಕಿ ನಲಿವ ನಮ್ಮ ||ಅ ||"
+          ],
+          [
+            "ಹೆಣ್ಣು ಮಕ್ಕಳು ಬಚ್ಚಲೊಳಗೆಣ್ಣೆ ಹಚ್ಚಿಕೊಂಡು",
+            "ಬಣ್ಣ ವಸ್ತ್ರವ ಬಿಚ್ಚಿ ಬತ್ತಲಿರೆ",
+            "ಕಣ್ಣಿಗೆ ಬಿಸಿನೀರು ಚೆಲ್ಲಿ ಸೀರೆಯನೊಯ್ದು",
+            "ಉನ್ನತವಾದ ವೃಕ್ಷವನೇರಿ ಇಹನಮ್ಮ ||"
+          ],
+          [
+            "ಪಟ್ಟೆ ಮಂಚದ ಮೇಲೆ ಪತಿಯಂತೆ ಕುಳ್ಳಿರೆ",
+            "ಎಷ್ಟು ಸ್ವತಂತ್ರ ಇವಗೆ ಗೋಪಿ",
+            "ಉಟ್ಟ ಸೀರೆಯನೊಯ್ದು ಬಟ್ಟಕುಚವ ಪಿಡಿವ-",
+            "ನೆಷ್ಟೆಂದ ಹೇಳೆ ಭ್ರಷ್ಟ ಮಾಡಿದನಮ್ಮ ||"
+          ],
+          [
+            "ಸಡಗರದಿ ಷೋಡಶ ಸಹಸ್ರ ಸ್ತ್ರೀಯರ",
+            "ಒಡಗೂಡಿ ಕೊಳಲನೂದುತ ಬಂದು",
+            "ಕಡೆವ ಗೋಪಿಯ ಜಡೆ ಪಿಡಿದೆಳೆವ ಎ-",
+            "ನ್ನೊಡೆಯ ಪುರಂದರವಿಠಲರಾಯನೆ ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Sikkidanele jane sri venugopalabaktavatsala devanu ||pa ||"
+          ],
+          [
+            "Makkala chandike marada konege katti",
+            "Gakkana chappaleyikki naliva namma ||a ||"
+          ],
+          [
+            "Hennu makkalu baccalolagenne haccikondu",
+            "Banna vastrava bicci battalire",
+            "Kannige bisiniru celli sireyanoydu",
+            "Unnatavada vrukshavaneri ihanamma ||1||"
+          ],
+          [
+            "Patte manchada mele patiyante kullire",
+            "Eshtu svatantra ivage gopi",
+            "Utta sireyanoydu battakucava pidiva-",
+            "Neshtenda hele brashta madidanamma ||2||"
+          ],
+          [
+            "Sadagaradi shodasa sahasra striyara",
+            "Odagudi kolalanuduta bandu",
+            "Kadeva gopiya jade pidideleva e-",
+            "Nnodeya purandaravithalarayane ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "aOaF2bx9IYlwMd4qJ4eX",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_ag5EK83WDDM85xG0CESA",
+      "form": "pada",
+      "title": {
+        "kn": "ಮೆಲ್ಲಮೆಲ್ಲನೆ ಬಂದನೆ ",
+        "latin": "ಮೆಲ್ಲಮೆಲ್ಲನೆ ಬಂದನೆ ",
+        "iast": "mèllamèllanè baṃdanè ",
+        "devanagari": "मॆल्लमॆल्लनॆ बंदनॆ "
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಮೆಲ್ಲಮೆಲ್ಲನೆ ಬಂದನೆ ಗೋಪ್ಯಮ್ಮ ಕೇಳೆ"
+          ],
+          [
+            "ಮೆಲ್ಲಮೆಲ್ಲನೆ ಬಂದನೆ"
+          ],
+          [
+            "ಮೆಲ್ಲಮೆಲ್ಲನೆ ಬಂದು ಗಲ್ಲಕೆ ಮುದ್ದು ಕೊಟ್ಟು"
+          ],
+          [
+            "ನಿಲ್ಲದೆ ಓಡಿ ಪೋದ ಕಳ್ಳಗೆ ಬುದ್ಧಿ ಪೇಳೆ"
+          ],
+          [
+            "ಹಾಲು ಮಾರಲು ಪೋದರೆ ನಿನ್ನಯ ಕಂದ"
+          ],
+          [
+            "ಕಾಲಿಗಡ್ಡವ ಕಟ್ಟಿದ"
+          ],
+          [
+            "ಹಾಲ ಸುಂಕವ ಬೇಡಿ ಕೋಲನ್ನೆ ಅಡ್ಡಗಟ್ಟಿ"
+          ],
+          [
+            "ಶಾಲೆಯ ಸೆಳಕೊಂಡು ಹೇಳದೋಡಿದ ಕೃಷ್ಣ"
+          ],
+          [
+            "ಮೊಸರು ಮಾರಲು ಪೋದರೆ ನಿನ್ನಯ ಕಂದ"
+          ],
+          [
+            "ಹೆಸರೇನೆಂದೆಲೆ ಕೇಳಿದ"
+          ],
+          [
+            "ಹಸನಾದ ಹೆಣ್ಣಿನ ಮೇಲೆ ಕುಸುಮವ ತಂದಿಕ್ಕಿ"
+          ],
+          [
+            "ಶಶಿಮುಖಿಯರಿಗೆಲ್ಲ ಬಸಿರು ಮಾಡಿದನೀತ"
+          ],
+          [
+            "ಹೋಗಿರೆ ರಂಗಯ್ಯನ ಮೇಲೆ ನೀವು"
+          ],
+          [
+            "ದೂರೇನು ಕೊಂಡುಬಂದಿರೆ"
+          ],
+          [
+            "ಯೋಗೀಶ ಪುರಂದರವಿಠಲರಾಯನ"
+          ],
+          [
+            "ತೂಗಿ ಪಾಡಿರೆ ಬೇಗ ನಾಗವೇಣಿಯರೆಲ್ಲ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Mella mellane bandane"
+          ],
+          [
+            "Goppamma kele"
+          ],
+          [
+            "Mella mellane bandu gallakke muddu kottu"
+          ],
+          [
+            "Nillade odi poda kallage buddhi hele"
+          ],
+          [
+            "Halu maralu podare ninnaya kanda"
+          ],
+          [
+            "Kalikattava kattida hala sungava bedi"
+          ],
+          [
+            "Kolanne adda katti"
+          ],
+          [
+            "Shaleya sela kondu heladodida krsna ||1||"
+          ],
+          [
+            "Mosara maralu podare ninnaya kanda"
+          ],
+          [
+            "Hesare nendele kelida"
+          ],
+          [
+            "Hasanada henna mele kusumava tandikki"
+          ],
+          [
+            "Shashi mukhiyari gella basiru madi Danita ||2||"
+          ],
+          [
+            "Hogire rangayyana mele nivu"
+          ],
+          [
+            "Durenu kondu bandire"
+          ],
+          [
+            "Yogisha purandara vittala rayana"
+          ],
+          [
+            "Tugi padire bega nagaveni yarella ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "ag5EK83WDDM85xG0CESA",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:30:08.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_dJOOXf54zbmLAZ10ZpuJ",
+      "form": "pada",
+      "title": {
+        "kn": "ಬಾರಮ್ಮ, ಎಲೆ ಮುದ್ದು ಗೋಪ್ಯಮ್ಮ",
+        "latin": "ಬಾರಮ್ಮ, ಎಲೆ ಮುದ್ದು ಗೋಪ್ಯಮ್ಮ",
+        "iast": "bāramma, èlè muddu gopyamma",
+        "devanagari": "बारम्म, ऎलॆ मुद्दु गोप्यम्म"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಬಾರಮ್ಮ, ಎಲೆ ಮುದ್ದು ಗೋಪ್ಯಮ್ಮ ||ಪ||",
+            "ನಿಮ್ಮ , ಬಾಲಕೃಷ್ಣಯ್ಯಗೆ ಬುದ್ಧಿ ಹೇಳಮ್ಮ",
+            "ಬಾಲಕರನು ಬಡೆವನಮ್ಮ",
+            "ಮುದ್ದು, ನೀಲವರ್ಣಗೆ ಬುದ್ಧಿ ಹೇಳಮ್ಮ ||ಅ||"
+          ],
+          [
+            "ಸಣ್ಣವನಾಗಿ ತೋರುವನಮ್ಮ, ಪಾಲ್-",
+            "ಬೆಣ್ಣೆ ಮೊಸರು ಕದಿವನಮ್ಮ",
+            "ಕಣ್ಣಾರೆ ಕಂಡವು ಮಗ ನಿಮ್ಮ , ಮುದ್ದು",
+            "ಚಿಣ್ಣಗೆ ಬುದ್ಧಿಯ ಪೇಳಮ್ಮ ||"
+          ],
+          [
+            "ಇಟ್ಟ ಕಸ್ತೂರಿ ನಾಮದವನಮ್ಮ, ಅವ",
+            "ಹೊಟ್ಟೆಯೊಳಿಡಬಲ್ಲನೀ ಜಗವಮ್ಮ",
+            "ದುಷ್ಟ ಹಾವನು ತುಳಿದವನಮ್ಮ, ಗೋಪಿ",
+            "ಗಟ್ಟ್ಯಾಗಿ ಬುದ್ಧಿಯ ಪೇಳಮ್ಮ ||"
+          ],
+          [
+            "ಅರಳೆಲೆ ಮಾಗಾಯಿಯವನಮ್ಮ, ಹೊನ್ನ",
+            "ಬೆರಳ ರನ್ನದ ಮುದ್ರಿಕೆಯವನಮ್ಮ",
+            "ಇರುಳುಹಗಲು ನಮ್ಮ ಮರುಳು ಮಾಡಿ ಪೋದ",
+            "ತರಳಗೆ ಬುದ್ಧಿಯ ಪೇಳಮ್ಮ ||"
+          ],
+          [
+            "ಮಾಯಾರೂಪಿಲಿ ಬರುವನಮ್ಮ, ಕದ್ದು",
+            "ಆವಿನ ಮೊಲೆ ಉಂಬುವನಮ್ಮ",
+            "ಮಾವನ ಕೊಂದನಿವನಮ್ಮ, ಚೆಲ್ವ",
+            "ದೇವರ ದೇವಗೆ ಬುದ್ಧಿ ಪೇಳಮ್ಮ ||"
+          ],
+          [
+            "ಕಡಹದ ಮರನೇರಿದವನಮ್ಮ, ಬೆಟ್ಟ",
+            "ಕೊಡೆ ಮಾಡಿ ಹಿಡಿದು ಕಾಯ್ದವನಮ್ಮ",
+            "ಮಡದೇರಂದದಿ ರಮಿಸುವನಮ್ಮ, ಘುಡು",
+            "ಘುಡಿಸಿ ಕಂಬದಲೊಡೆವನಮ್ಮ ||"
+          ],
+          [
+            "ಒಮ್ಮೆಗೆ ಈವರಿಗೊಲಿದವನಮ್ಮ, ಚೆಲ್ವ",
+            "ಬ್ರಹ್ಮದೇವರ ಪಡೆದವನಮ್ಮ",
+            "ನಮ್ಮೆಲ್ಲರ ಪೊರೆವ ಪುರಂದರ-ವಿಠಲಗೆ",
+            "ಘಮ್ಮನೆ ಬುದ್ಧಿಯ ಪೇಳಮ್ಮ ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Baramma, ele muddu gopyamma ||pa||"
+          ],
+          [
+            "Nimma , balakrushnayyage buddhi helamma",
+            "Balakaranu badevanamma",
+            "Muddu, nilavarnage buddhi helamma ||a||"
+          ],
+          [
+            "Sannavanagi toruvanamma, pal-",
+            "Benne mosaru kadivanamma",
+            "Kannare kandavu maga nimma , muddu",
+            "Cinnage buddhiya pelamma ||1||"
+          ],
+          [
+            "Itta kasturi namadavanamma, ava",
+            "Hotteyolidaballani jagavamma",
+            "Dushta havanu tulidavanamma, gopi",
+            "Gattyagi buddhiya pelamma ||2||"
+          ],
+          [
+            "Aralele magayiyavanamma, honna",
+            "Berala rannada mudrikeyavanamma",
+            "Iruluhagalu namma marulu madi poda",
+            "Taralage buddhiya pelamma ||3||"
+          ],
+          [
+            "Mayarupili baruvanamma, kaddu",
+            "Avina mole umbuvanamma",
+            "Mavana kondanivanamma, celva",
+            "Devara devage buddhi pelamma ||4||"
+          ],
+          [
+            "Kadahada maraneridavanamma, betta",
+            "Kode madi hididu kaydavanamma",
+            "Madaderandadi ramisuvanamma, gudu",
+            "Gudisi kambadalodevanamma ||5||"
+          ],
+          [
+            "Ommege Ivarigolidavanamma, celva",
+            "Brahmadevara padedavanamma",
+            "Nammellara poreva purandara-vithalage",
+            "Gammane buddhiya pelamma ||6||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "dJOOXf54zbmLAZ10ZpuJ",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_dtk0dVQIIunojlyFE9QC",
+      "form": "pada",
+      "title": {
+        "kn": "ಪಿಳ್ಳಂಗೋವಿಯ ಚೆಲುವ",
+        "latin": "ಪಿಳ್ಳಂಗೋವಿಯ ಚೆಲುವ",
+        "iast": "piḻḻaṃgoviya cèluva",
+        "devanagari": "पिळ्ळंगोविय चॆलुव"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಪಿಳ್ಳಂಗೋವಿಯ ಚೆಲುವ ಕೃಷ್ಣನ"
+          ],
+          [
+            "ಎಲ್ಲಿ ನೋಡಿದಿರಿ ರಂಗನ ಎಲ್ಲಿ ನೋಡಿದಿರಿ ||ಪ||"
+          ],
+          [
+            "ಎಲ್ಲಿ ನೋಡಿದರಲ್ಲಿ ತನಿಲ್ಲದಿಲ್ಲವೆಂದು ಬಲ್ಲ ಜಾಣರು ||ಅ.ಪ||"
+          ],
+          [
+            "ನಂದಗೋಪನ ಮಂದಿರಗಳ ಸಂದುಗೊಂದಿನಲಿ"
+          ],
+          [
+            "ಚಂದ ಚಂದದ ಗೋಪಬಾಲರ ವೃಂದ್ವೃಂದದಲಿ"
+          ],
+          [
+            "ಸುಂದರಾಂಗದ ಸುಂದರಿಯರ ಹಿಂದುಮುಂದಿನಲಿ"
+          ],
+          [
+            "ಅಂದದಾಕಳ ಕಂದ ಕರುಗಳ ಮಂದೆ ಮಂದೆಯಲಿ ||೧||"
+          ],
+          [
+            "ಶ್ರೀ ಗುರುಕ್ತ ಸದಾ ಸುಮಂಗಳ ಯೋಗ ಯೋಗದಲಿ"
+          ],
+          [
+            "ಅಗಮಾರ್ಥದೊಳಗೆ ಮಾಡುವ ಯಾಗ ಯಾಗದಲಿ"
+          ],
+          [
+            "ಶ್ರೀಗೆ ಭಾಗ್ಯನಾಗಿ ವರ್ತಿಪ ಭೋಗ ಭೋಗದಲಿ"
+          ],
+          [
+            "ಭಾಗವತರು ಸದಾ ಬಾಗಿ ಪಡುವ ರಾಗ ರಾಗದಲಿ ||೨||"
+          ],
+          [
+            "ಈ ಚರಾಚರದೊಳಗೆ ಜನಂಗಳಾಚೆ ಈಚೆಯಲಿ"
+          ],
+          [
+            "ಖೇಚರೇಂದ್ರನ ಸುತನ ರಥದ ಚೌಕ ಪೀಠದಲಿ"
+          ],
+          [
+            "ನಾಚದೆ ಮಾಧವ ಎಂಬ ಭಕ್ತರ ವಾಚಕಂಗಳಲಿ"
+          ],
+          [
+            "ವೀಚುಕೊಂಡದ ಪುರಂದರವಿಠಲನ ಲೋಚನಾಗ್ರದಲಿ ||೩||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "pillangoviya cheluva krshnana elli nodidiri rangana elli nodidiri"
+          ],
+          [
+            "elli nodidaralli tanilla dillavendu balla janaru"
+          ],
+          [
+            "nandagopana mandiragala sandugondinali"
+          ],
+          [
+            "chanda chandada gopa balara vrnda vrnadadali"
+          ],
+          [
+            "sundarangada sundariyara hindu mundinali"
+          ],
+          [
+            "andadakala kanda karugala manda mandeyali||1||"
+          ],
+          [
+            "shri gurukta sada sumangala yoga yogadali"
+          ],
+          [
+            "agamartadolage maduva yaga yagadali"
+          ],
+          [
+            "Shrige bhagyanagi vartipa bhoga bhogadali"
+          ],
+          [
+            "bhagavataru sada bagi paduva raga ragadali||2||"
+          ],
+          [
+            "ee characharadolage janangala Ache Icheyali"
+          ],
+          [
+            "kesarendrana sutana rathada chauka pithadali"
+          ],
+          [
+            "nacade madhava emba bhaktara vacakangalali"
+          ],
+          [
+            "vicukondada purandara vittalana locanagradali ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "dtk0dVQIIunojlyFE9QC",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:25:01.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_ekBwz2P1KAtFeFgVVh95",
+      "form": "pada",
+      "title": {
+        "kn": "ಬಾರೋ ಬ್ರಹ್ಮಾದಿವಂದ್ಯಾ",
+        "latin": "ಬಾರೋ ಬ್ರಹ್ಮಾದಿವಂದ್ಯಾ",
+        "iast": "bāro brahmādivaṃdyā",
+        "devanagari": "बारो ब्रह्मादिवंद्या"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಬಾರೋ ಬ್ರಹ್ಮಾದಿವಂದ್ಯಾ",
+            "ಬಾರೋ ವಸುದೇವ ಕಂದ"
+          ],
+          [
+            "ಧಿಗಿಧಿಗಿ ನೀ ಕುಣಿದಾಡುತ ಬಾರೋ ದೀನರಕ್ಷಕನೇ",
+            "ಜಗದೀಶಾ ಕುಣಿದಾಡುತ ಬಾರೋ ಚೆನ್ನಕೇಶವನೇ"
+          ],
+          [
+            "ಗೊಲ್ಲರ ಮನೆಗೆ ಪೋಗಲು ಬೇಡ ಗೋವಿಂದಾ ಕೇಳೋ",
+            "ಹಾಲು ಬೆಣ್ಣೆ ಮೊಸರಿಕ್ಕುವೆ ನೀನುಣ್ಣಬಾರೋ"
+          ],
+          [
+            "ದೊಡ್ಡ ದೊಡ್ಡ ಮುತ್ತಿನ ಹಾರವ ಹಾಕಿ ನೋಡುವೆ ಬಾರೋ",
+            "ದೊಡ್ಡಪುರದ ದ್ವಾರಕಿವಾಸ ಪುರಂದರವಿಟ್ಠಲ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Baro brahmadivandyabaro brahmadivandya",
+            "Baro vasudeva kanda||Pa||"
+          ],
+          [
+            "Dhigidhigi ni kunidaduta baro dinarakshakane",
+            "Jagadisa kunidaduta baro chennakesavane||1||"
+          ],
+          [
+            "Gollara manege pogalu beda govinda kelo",
+            "Halu benne mosarikkuve ninunnabaro||2||"
+          ],
+          [
+            "Dodda dodda muttina harava haki noduve baro",
+            "Doddapurada dvarakivasa purandaravitthala||3|",
+            "|"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "ekBwz2P1KAtFeFgVVh95",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_fIdNj7vl6P64xIkD8U0u",
+      "form": "pada",
+      "title": {
+        "kn": "ಹೇಳಿದರೆ ನಮ್ಮ ಮೇಲೆ ಯಾಕಮ್ಮ ಸಿಟ್",
+        "latin": "ಹೇಳಿದರೆ ನಮ್ಮ ಮೇಲೆ ಯಾಕಮ್ಮ ಸಿಟ್",
+        "iast": "heḻidarè namma melè yākamma siṭ",
+        "devanagari": "हेळिदरॆ नम्म मेलॆ याकम्म सिट्"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಹೇಳಿದರೆ ನಮ್ಮ ಮೇಲೆ ಯಾಕಮ್ಮ ಸಿಟ್ಟು, ಇಂಥ"
+          ],
+          [
+            "ಗಾಳಿಗಾರ ಮಗನ ಪಡೆದ ಮೇಲೆ ನೀವಿಷ್ಟು ||ಪ||"
+          ],
+          [
+            "ಸಣ್ಣ ರುಮಾಲು ಕಟ್ಟಿ ಚುಂಗ ಬಿಟ್ಟು , ಪಣೆಗೆ"
+          ],
+          [
+            "ಬಣ್ಣಿಸಿ ಕಸ್ತೂರಿ ತಿಲಕವನಿಟ್ಟು"
+          ],
+          [
+            "ಚಿಣ್ಣಿಕೋಲು ಚೆಂಡು ಬುಗುರಿ ಕೈಯಲಿಟ್ಟು, ಪೊಸ"
+          ],
+          [
+            "ಬೆಣ್ಣೆಯ ಮೆಲ್ಲು ಹೋಗೆಂದು ಕಳುಹಿಬಿಟ್ಟು ||"
+          ],
+          [
+            "ಕರೆದು ಕೈಯಲ್ಲಿ ಚಿಟ್ಟೆಬೆಲ್ಲ ಕೊಟ್ಟು, ಚಿಕ್ಕ"
+          ],
+          [
+            "ಹರಳುಕಲ್ಲುಗಳನ್ನೆ ಅರಿಸಿ ಕೊಟ್ಟು"
+          ],
+          [
+            "ವಾರಿಗೆಯ ಪುಂಡರನ್ನು ಮಾಡಿಕೊಟ್ಟು, ಗೋಪಿ"
+          ],
+          [
+            "ಊರನೆಲ್ಲ ಸುಲಿಯೆಂದು ಕಳುಹಿಕೊಟ್ಟು ||"
+          ],
+          [
+            "ಹೋಗೆಂದು ರಂಗನ ಕಳುಹಿಕೊಟ್ಟು, ಗೋಪಿ"
+          ],
+          [
+            "ಆಗ ಭೋಗಂಗಳೆಲ್ಲ ತುಂಬಿಕೊಟ್ಟು"
+          ],
+          [
+            "ನಿಗಮಗೋಚರನೆಂಬ ಪೆಸರನಿಟ್ಟು, ಗೋಪಿ"
+          ],
+          [
+            "ಪುರಂದರವಿಠಲನ್ನ ಬೆಳೆಸಿಬಿಟ್ಟು ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Not available"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "fIdNj7vl6P64xIkD8U0u",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_iI12kpsMnlJwNFjFaBVK",
+      "form": "pada",
+      "title": {
+        "kn": "ಬಂದನೇನೆ ರಂಗ ಬಂದನೇನೆ",
+        "latin": "ಬಂದನೇನೆ ರಂಗ ಬಂದನೇನೆ",
+        "iast": "baṃdanenè raṃga baṃdanenè",
+        "devanagari": "बंदनेनॆ रंग बंदनेनॆ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಬಂದನೇನೆ ರಂಗ ಬಂದನೇನೆ ।।ಪ।।"
+          ],
+          [
+            "ಎನ್ನ ತಂದೆ ಬಾಲಕೃಷ್ಣ ನವನೀತಚೋರ ।।ಅ.ಪ।।"
+          ],
+          [
+            "ಘಿಲುಘಿಲುಘಿಲುರೆಂಬ ಪೊನ್ನಂದುಗೆ ಗೆಜ್ಜೆ"
+          ],
+          [
+            "ಹೊಳೆಹೊಳೆಯುವ ಪಾದವನೂರುತ"
+          ],
+          [
+            "ನಲಿನಲಿದಾಡುವ ಉಂಗುರ ಅರಳೆಲೆ"
+          ],
+          [
+            "ಥಳಥಳಥಳ ಹೊಳೆಯುತ ಶ್ರೀಕೃಷ್ಣ ।।೧।।"
+          ],
+          [
+            "ಕಿಣಿಕಿಣಿಕಿಣಿರೆಂಬ ಕರದ ಕಂಕಣ ಬಳೆ"
+          ],
+          [
+            "ಝಣಝಣಝಣರೆಂಬ ನಡುವಿನ ಗಂಟೆ"
+          ],
+          [
+            "ಧಣಧಣಧಣರೆಂಬ ಪಾದದ ತೊಡವಿನ"
+          ],
+          [
+            "ಮಿಣಿಮಿಣಿ ಕುಣಿದಾಡುತ ಶ್ರೀಕೃಷ್ಣ ।।೨।।"
+          ],
+          [
+            "ಹಿಡಿಹಿಡಿ ಹಿಡಿಯೆಂದು ಪುರಂದರವಿಠಲನ"
+          ],
+          [
+            "ದುಡುದುಡುದುಡು ದುಡನೇ ಓಡುತ"
+          ],
+          [
+            "ನಡೆನಡೆ ನಡೆಯೆಂದು ಮೆಲ್ಲನೆ ಪಿಡಿಯಲು"
+          ],
+          [
+            "ಬಿಡಿಬಿಡಿಬಿಡಿ ದಮ್ಮಯ್ಯ ಎನ್ನುತ ।।೩।।"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Bandanene ranga bandanene ||pa||"
+          ],
+          [
+            "Enna tande balakrushna navanitacora ||a.pa||"
+          ],
+          [
+            "Gilugilugiluremba ponnanduge gejje"
+          ],
+          [
+            "Holeholeyuva padavanuruta"
+          ],
+          [
+            "Nalinalidaduva ungura aralele"
+          ],
+          [
+            "Thalathalathala holeyuta srikrushna ||1||"
+          ],
+          [
+            "Kinikinikiniremba karada kankana bale"
+          ],
+          [
+            "Janajanajanaremba naduvina gante"
+          ],
+          [
+            "Dhanadhanadhanaremba padada todavina"
+          ],
+          [
+            "Minimini kunidaduta srikrushna ||2||"
+          ],
+          [
+            "Hidihidi hidiyendu purandaravithalana"
+          ],
+          [
+            "Dudududududu dudane oduta"
+          ],
+          [
+            "Nadenade nadeyendu mellane pidiyalu"
+          ],
+          [
+            "Bidibidibidi dammayya ennuta ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "iI12kpsMnlJwNFjFaBVK",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_iXxNbUqK6vU4ClKw8Wgj",
+      "form": "pada",
+      "title": {
+        "kn": "ತೋಳು ತೋಳು ತೋಳು ಕೃಷ್ಣ",
+        "latin": "ತೋಳು ತೋಳು ತೋಳು ಕೃಷ್ಣ",
+        "iast": "toḻu toḻu toḻu kṛṣṇa",
+        "devanagari": "तोळु तोळु तोळु कृष्ण"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ತೋಳು ತೋಳು ತೋಳು ಕೃಷ್ಣ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ನೀಲಮೇಘಶ್ಯಾಮ ಕೃಷ್ಣ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಗಲಿಕೆಂಬಂದುಗೆ ಉಲಿಯುವ ಗೆಜ್ಜೆಯ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಅಲುಗುವ ಅರಳೆಲೆ ಮಾಗಾಯ್ಮಿನುಗಲು ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ನೆಲುವು ನಿಲುಕದೆಂದೊರಳ ತಂದಿಡುವನೆ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಚೆಲುವ ಮಕ್ಕಳ ಮಾಣಿಕ್ಯವೆ ನೀ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ದಟ್ಟಡಿಯಿಡುತಲಿ ಬೆಣ್ಣೆಯ ಮೆಲುವನೆ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಕಟ್ಟಿದ ಕರಡೆಯ ಕರುವೆಂದೆಳೆವನೆ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಬೊಟ್ಟಿನಲ್ಲಿ ತಾಯ್ಗಣಕಿಸಿ ನಗುವನೆ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಬಟ್ಟಲ ಹಾಲನು ಕುಡಿದು ಕುಣಿವನೇ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಅಂಬೆಗಾಲಿಲೊಂದೊರಳನ್ನೆಳೆವನೆ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ತುಂಬಿದ ಬಂಡಿಯ ಮುರಿಯಲೊದ್ದವನೆ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಕಂಬದಿಂದಲವತರಿಸಿದವನೆ ನೀ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ನಂಬಿದವರನು ಹೊರೆವ ಕೃಷ್ಣ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಕಾಲಕೂಟದ ವಿಷವ ಕಲಕಿದ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಕಾಳಿಂಗನ ಹೆಡೆಯನು ತುಳಿದ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಕಾಳೆಗದಲಿ ದಶಕಂಠನ ಮಡುಹಿದ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಶಾಲಕ ವೈರಿಯೆ ಕರುಣಿಗಳರಸನೆ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ನಖದಿಂದಲಿ ಹಿರಣ್ಯಕನನು ಸೀಳಿದ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ಸುಖವನಿತ್ತು ಪ್ರಹ್ಲಾದನ ಕಾಯ್ಡವ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ವಿಕಳಗೊಳಿಸಿದೆ ಗೋಪಿಯರೆಲ್ಲರ ತೋಳನ್ನಾಡೈ"
+          ],
+          [
+            "ರುಕುಮಿಣಿಪತಿ ಸಿರಿಪುರಂದರವಿಟ್ಠಲ ತೋಳನ್ನಾಡೈ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Tholu tholu tholu ranga tholannadai"
+          ],
+          [
+            "Nila varnada bala krishnane tholannadai"
+          ],
+          [
+            "Huluguraralelle magaigalanitta tholannadai"
+          ],
+          [
+            "Swami galiru galiruemba gejjegalinda naliyuta tholanadai||1||"
+          ],
+          [
+            "Niluvige silukada/nilukhada oralatanditta tholanadai"
+          ],
+          [
+            "Swami cheluva makkala muttu manikyane tholannadai||2||"
+          ],
+          [
+            "Putaniyembavala asuvane hiridavane tholanada"
+          ],
+          [
+            "Swami mateya pitana anugana maduhida tholanadai||3||"
+          ],
+          [
+            "Matige shishupalana shiravanu kadida tholanadai"
+          ],
+          [
+            "Swami shree tulasiya priya nitya vinoda tholanadai||4||"
+          ],
+          [
+            "Nakhadinda hiranyakana udarava seelida tholanadai"
+          ],
+          [
+            "Swami sukhavanittu prahladana kayda tholannadai||5||"
+          ],
+          [
+            "Vikhalita ghalisida gopiyarellara tholannadai"
+          ],
+          [
+            "Swami sukhatheerthara pati purandaravittalane tholanadai||6||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "iXxNbUqK6vU4ClKw8Wgj",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:31:31.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_jh2NIyk4hLB1idmzksYf",
+      "form": "pada",
+      "title": {
+        "kn": "ಊಟಕ್ಕೆ ಬಂದೆವು",
+        "latin": "ಊಟಕ್ಕೆ ಬಂದೆವು",
+        "iast": "ūṭakkè baṃdèvu",
+        "devanagari": "ऊटक्कॆ बंदॆवु"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಊಟಕ್ಕೆ ಬಂದೆವು ನಾವು ನಿಮ್ಮ",
+            "ಆಟ ಪಾಟವ ಬಿಟ್ಟು ಅಡುಗೆ ಮಾಡಮ್ಮ ||ಪ||"
+          ],
+          [
+            "ಕತ್ತಲಿಟ್ಟಾವಮ್ಮ ಕಣ್ಣು ಬಾಯಿ",
+            "ಬತ್ತಿ ಬರುತಲಿದೆ ಕೈಕಾಲು ಝುಮ್ಮ",
+            "ಹೊತ್ತ ಹೋಗಿಸಬೇಡವಮ್ಮ",
+            "ಒಂದು ತುತ್ತಾದರು ಇತ್ತು ಸಲಹು ನಮ್ಮಮ್ಮ ।।೧।।"
+          ],
+          [
+            "ಒಡಲೊಳಗೆ ಉಸಿರಿಲ್ಲ ಒಂದು",
+            "ಕ್ಷಣವಾದರೆ ಜೀವ ನಿಲ್ಲುವುದಿಲ್ಲ",
+            "ಮಡಿದರೆ ದೋಷ ತಟ್ಟುವುದು ಒಂದು",
+            "ಹಿಡಿ ಅಕ್ಕಿಯಿಂದಲೆ ಕೀರ್ತಿ ಬಾಹೋದು ।।೨।।"
+          ],
+          [
+            "ಹೊನ್ನರಾಶಿಯ ತಂದು ಸುರಿಯೆ ಕೋಟಿ",
+            "ಕನ್ನಿಕೆಯರ ತಂದು ಧಾರೆಯನೆರೆಯೆ",
+            "ಅನ್ನದಾನಕ್ಕಿನ್ನು ಸರಿಯೆ ಪ್ರ",
+            "ಸನ್ನ ಪುರಂದರ ವಿಠಲ ದೊರೆಯೆ ।।೩।।"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Utakke bandevu navu nimma ata patava bittu aduge madamma ||pa||"
+          ],
+          [
+            "Kattalittavamma kannu bayi",
+            "Batti barutalide kaikalu Jumma",
+            "Hotta hogisabedavamma",
+            "Ondu tuttadaru ittu salahu nammamma ||1||"
+          ],
+          [
+            "Odalolage usirilla ondu",
+            "Kshanavadare jiva nilluvudilla",
+            "Madidare dosha tattuvudu ondu",
+            "Hidi akkiyindale kirti bahodu ||2||"
+          ],
+          [
+            "Honnarasiya tandu suriye koti",
+            "Kannikeyara tandu dhareyanereye",
+            "Annadanakkinnu sariye pra",
+            "Sanna purandara vithala doreye ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "jh2NIyk4hLB1idmzksYf",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_k4svsqaTN0UqlLk7lmy0",
+      "form": "pada",
+      "title": {
+        "kn": "ಎಂಥಾ ಪುಣ್ಯವೇ ಗೋಪಿ",
+        "latin": "ಎಂಥಾ ಪುಣ್ಯವೇ ಗೋಪಿ",
+        "iast": "èṃthā puṇyave gopi",
+        "devanagari": "ऎंथा पुण्यवे गोपि"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಎಂಥಾ ಪುಣ್ಯವೇ ಗೋಪಿ ಎಂಥಾ ಭಾಗ್ಯವೆ ನಿನ್ನ"
+          ],
+          [
+            "ಇಂಥಾ ಮಗನ ಕಾಣೆವೆ"
+          ],
+          [
+            "ಚಿಂತಿಸಿದರು ದೊರಕ ಚೆಲುವ ರಾಜಗೋಪಾಲ"
+          ],
+          [
+            "ಚಿಂತೆಯಲ್ಲವು ಪೋಪುದೇ ಕೇಳೆ ಯಶೋದೆ"
+          ],
+          [
+            "ಸರಸಿಜನಾಭನ ಸುಮ್ಮನೆ ಕಂಡರೆ"
+          ],
+          [
+            "ದುರಿತವೆಲ್ಲವು ಪೋಪುದೇ"
+          ],
+          [
+            "ಸರಸವಾಡುತ ಬಂದು ಸವಿ ಮಾತನಾಡಿದರೆ"
+          ],
+          [
+            "ಹರುಷ ಕೈಗೂಡುವುದೇ ಕೇಳೆ ಯಶೋದೆ"
+          ],
+          [
+            "ಊರೊಳಗೆ ಇವ ನೆರೆಹೊರೆಯರಂಜಿಕೆ"
+          ],
+          [
+            "ದೂರಿಕೊಂಬುವರಲ್ಲವೆ"
+          ],
+          [
+            "ಅರಣ್ಯದಲಿ ನಾವು ಆಡುವ ಆಟಗಳು"
+          ],
+          [
+            "ಆರಿಗಾದರು ಉಂಟೇನೆ ಕೇಳೆ ಯಶೋದೆ"
+          ],
+          [
+            "ನಿನ್ನ ಮಗನ ಕರೆಯೆ ಎಮ್ಮ ಪ್ರಾಣದ ದೊರೆಯ"
+          ],
+          [
+            "ಘನ್ನನು ಪರಬ್ರಹ್ಮನೆ"
+          ],
+          [
+            "ಚನ್ನ ಶ್ರೀ ಪುರಂದರವಿಟ್ಠಲರಾಯನ"
+          ],
+          [
+            "ನಿನ್ನಾಣೆ ಬಿಡಲಾರೆವೇ ಕೇಳೆ ಯಶೋದೆ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Entha Punyave Gopi Entha Bhagyave Ninna"
+          ],
+          [
+            "Intha Magana Kaneve"
+          ],
+          [
+            "Achintisidaru Doraka Cheluva Rajagopala"
+          ],
+          [
+            "Chinteyellavu Popude Kele Yashode||1||"
+          ],
+          [
+            "Ninna Magana Kareye Emma Pranada"
+          ],
+          [
+            "Doreya Ghannanu Parabhrhmane||2||"
+          ],
+          [
+            "Chenna Shri Purandaravitharayana"
+          ],
+          [
+            "Ninnane Bidalareve Kele Yashode||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "k4svsqaTN0UqlLk7lmy0",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:29:28.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_kCBbwSVfMVHvITdNyCLL",
+      "form": "pada",
+      "title": {
+        "kn": "ದೇವಕಿ ಕಂದ ಮುಕುಂದ",
+        "latin": "ದೇವಕಿ ಕಂದ ಮುಕುಂದ",
+        "iast": "devaki kaṃda mukuṃda",
+        "devanagari": "देवकि कंद मुकुंद"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ದೇವಕಿ ಕಂದ ಮುಕುಂದ",
+            "ನಿಗಮೋದ್ಧಾರ ನವನೀತ ಚೋರ",
+            "ಖಗಪತಿ ವಾಹನ ಜಗದೋದ್ಧಾರ",
+            "ಶಂಖ ಚಕ್ರಧರ ಶ್ರೀ ಗೋವಿಂದ",
+            "ಪಂಕಜಲೋಚನ ಪರಮಾನಂದ",
+            "ಮಕರಕುಂಡಲಧರ ಮೋಹನವೇಷ",
+            "ರುಕುಮಿಣಿ ವಲ್ಲಭ ಪಾಂಡವ ಪೋಷ",
+            "ಕಂಸಮರ್ದನ ಕೌಸ್ತುಭಾಭರಣ",
+            "ಹಂಸವಾಹನ ಪೂಜಿತ ಚರಣ",
+            "ವರ ವೇಲಾಪುರ ಚೆನ್ನ ಪ್ರಸನ್ನ",
+            "ಪುರಂದರವಿಠಲ ಸಕಲ ಗುಣಪೂರ್ಣ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Devaki Kanda Mukunda"
+          ],
+          [
+            "Nigamoddhara Navanita Chora",
+            "Khagapati Vahana Jagadoddhara ||1||"
+          ],
+          [
+            "Shankha Chakradhara Shri Govinda",
+            "Pankaja Locana Paramananda||2||"
+          ],
+          [
+            "Makara Kundaladhara Mohana Vesa",
+            "Rukumini Vallabha Pandava Posa||3||"
+          ],
+          [
+            "Kamsa Mardana Kaustubhabharana",
+            "Hamsa Vahana Pujita Charana||4||"
+          ],
+          [
+            "Vara Velapura Cenna Prasanna",
+            "Puranda Vittala Sakala Guna Purna||5||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "kCBbwSVfMVHvITdNyCLL",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:36:14.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_kNXJ37vGStLlDBlihpMg",
+      "form": "pada",
+      "title": {
+        "kn": "ಗೋಕುಲದೊಳು ನಿನ್ನ ಮಗನ ಹಾವಳಿ ಘನವಾಯಿತಮ್ಮ",
+        "latin": "ಗೋಕುಲದೊಳು ನಿನ್ನ ಮಗನ ಹಾವಳಿ ಘನವಾಯಿತಮ್ಮ",
+        "iast": "gokuladòḻu ninna magana hāvaḻi ghanavāyitamma",
+        "devanagari": "गोकुलदॊळु निन्न मगन हावळि घनवायितम्म"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಗೋಕುಲದೊಳು ನಿನ್ನ ಮಗನ ಹಾವಳಿ ಘನವಾಯಿತಮ್ಮ",
+            "ಜೋಕೆ ಮಾಡಿಕೊ ಇಂಥ ದುರುಳತನಕೆ ನಾವು ನಿಲ್ಲೆವಮ್ಮ ||ಪ||"
+          ],
+          [
+            "ಬಾಲರ ಒಡಗೂಡಿ ಬಂದೆಮ್ಮ ಮನೆಗಳ ಪೊಗುವನಮ್ಮ , ಒರಳ",
+            "ಮೇಲೇರಿ ನೆಲುವಿನ ಮೇಲಿದ್ದ ಬೆಣ್ಣೆಯ ಮೆಲುವನಮ್ಮ",
+            "ಜಾಲವ ಮಾಡಿ ಎಲ್ಲರಿಗಿಂದ ತಾ ಮುನ್ನೆ ಜಾರ್ವನಮ್ಮ,",
+            "ಗೋಪಾಲ ಬೇಡೆಂದು ಹೇಳಿದರೆ ಇವಗೆ ಬುದ್ಧಿ ಸಾಲದಮ್ಮ ||"
+          ],
+          [
+            "ಗಂಡನುಳ್ಳವಳೆಂದು ಬೇಡಿಕೊಂಡರೆ ಮಾತ ಕೇಳನಮ್ಮ, ಈ",
+            "ಪುಂಡುಗಾರ ನಮ್ಮ ಪುರವನೆಲ್ಲ ಸೂರೆಗೊಂಡನಮ್ಮ",
+            "ಗಂಡರೆಲ್ಲರು ಇವನ ನೋಡಿ ತಮ್ಹೆಂಡಿರ ಬಿಡುವರಮ್ಮ, ಕಂಡ-",
+            "ಕಂಡ ವೇಳೆಯಲ್ಲಿ ಚಿಕ್ಕ ಚೆಲುವೆಯರ ಕೂಡ್ವನಮ್ಮ ||"
+          ],
+          [
+            "ಮಾರಲೀಸನು ಹಾಲು ಮೊಸರ ಕಂಡರೆ ಬಿಟ್ಟು ಬಾರನಮ್ಮ , ತನ್ನ",
+            "ವಾರಿಗೆ ಸತಿಯರ ಒಲಿಸಿಕೊಂಬ ಮಾಯಗಾರನಮ್ಮ",
+            "ನಾರಿ ಕೇಳಿವನ ನಡತೆ ಯಾರಿಗೂ ಸರಿ ಬಾರದಮ್ಮ, ನಮ್ಮ",
+            "ಮಾರಜನಕ ಪುರಂದರವಿಠಲರಾಯ ಜಾರನಮ್ಮ ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Gokuladolu ninna magana havali ganavayitammajoke",
+            "Madiko intha durulatanake navu nillevamma ||pa||"
+          ],
+          [
+            "Balara odagudi bandemma manegala poguvanamma , orala",
+            "Meleri neluvina melidda benneya meluvanamma",
+            "Jalava madi ellariginda ta munne jarvanamma,",
+            "goPala bedendu helidare ivage buddhi saladamma ||1||"
+          ],
+          [
+            "Gandanullavalendu bedikondare mata kelanamma, I",
+            "Pundugara namma puravanella suregondanamma",
+            "Gandarellaru ivana nodi tamhendira biduvaramma, kanda-",
+            "Kanda veleyalli cikka celuveyara kudvanamma ||2||"
+          ],
+          [
+            "Maralisanu halu mosara kandare bittu baranamma , tanna",
+            "Varige satiyara olisikomba mayagaranamma",
+            "Nari kelivana nadate yarigu sari baradamma, namma",
+            "Marajanaka purandaravithalaraya jaranamma ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "kNXJ37vGStLlDBlihpMg",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_llSyztbd8cvRDZrpcIsT",
+      "form": "pada",
+      "title": {
+        "kn": "ಕೃಷ್ಣ ಎನಬಾರದೆ",
+        "latin": "ಕೃಷ್ಣ ಎನಬಾರದೆ",
+        "iast": "kṛṣṇa ènabāradè",
+        "devanagari": "कृष्ण ऎनबारदॆ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ನರಜನ್ಮ ಬಂದಾಗ ನಾಲಿಗೆ ಇರುವಾಗ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ",
+            "ಕೃಷ್ಣನ ನೆನೆದರೆ ಕಷ್ಟ ಒಂದಿಷ್ಟಿಲ್ಲ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ"
+          ],
+          [
+            "ಮಲಗೆದ್ದು ಮೈಮುರಿದು ಏಳುತಲೊಮ್ಮೆ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ",
+            "ನಿತ್ಯ ಸುಳಿದಾಡುತ ಮನೆಯೊಳಗಾದರು ಒಮ್ಮೆ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ"
+          ],
+          [
+            "ಸ್ನಾನ ಪಾನ ಜಪ ತಪಗಳ ಮಾಡುತ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ",
+            "ಶಾಲ್ಯಾನ್ನ ಷಡ್ರಸ ತಿಂದು ತೃಪ್ತನಾಗಿ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ"
+          ],
+          [
+            "ಮೇರೆ ತಪ್ಪಿ ಮಾತನಾಡುವಗಲೊಮ್ಮೆ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ",
+            "ದೊಡ್ಡ ದಾರಿಯ ನಡೆವಾಗ ಭಾರವ ಹೊರುವಾಗ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ"
+          ],
+          [
+            "ಗಂಧವ ಪೂಸಿ ತಾಂಬೂಲವ ಮೆಲುವಾಗ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ ತನ್ನ",
+            "ಮಂದಗಮನೆ ಕೂಡ ಸರಸವಾಡುತಲೊಮ್ಮೆ",
+            "ಕೃಷ್ಣಎನಬಾರದೆ"
+          ],
+          [
+            "ಪರಿಹಾಸ್ಯದ ಮಾತನಾಡುತಲೊಮ್ಮೆ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ",
+            "ಪರಿ ಪರಿ ಕೆಲಸದೊಳೊಂದು ಕೆಲಸವೆಂದು",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ"
+          ],
+          [
+            "ಕಂದನ ಬಿಗಿದಪ್ಪಿ ಮುದ್ದಾಡುತಲೊಮ್ಮೆ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ",
+            "ಬಹು ಚಂದುಳ್ಳ ಹಾಸಿಗೆ ಮೇಲೆ ಕುಳಿತೊಮ್ಮೆ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ"
+          ],
+          [
+            "ನೀಗದಾಲೋಚನೆ ರೋಗೋಪದ್ರವದಲೊಮ್ಮೆ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ",
+            "ಒಳ್ಳೆ ಭೋಗ ಪಡೆದು ಅನುರಾಗದಿಂದಿರುವಾಗ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ"
+          ],
+          [
+            "ದುರಿತರಾಶಿಗಳನು ತರಿದು ಬಿಸಾಡುವ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ",
+            "ಸದಾ ಗರುಡವಾಹನ ಸಿರಿಪುರಂದರ ವಿಠಲನ್ನೇ",
+            "ಕೃಷ್ಣ ಎನಬಾರದೆ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Nara janma bandaga, nalige iruvaga Krishna enabarade"
+          ],
+          [
+            "Krishnana nenedare kasta ondistilla",
+            "Krishna enabarade"
+          ],
+          [
+            "Malagiddu maimuri-delutalomme",
+            "Krishna enabarade, nitya",
+            "Sulidaduta maneyolagadaru omme",
+            "Krishna enabarade||1||"
+          ],
+          [
+            "Snana pana japa tapagala maduta",
+            "Krishna enabarade",
+            "Salyanna sadrasa tindu trptanagi",
+            "Krishna enabarade||2||"
+          ],
+          [
+            "Mere tappi matanaduvagalomme",
+            "Krishna enabarade, dodda",
+            "Dariya nadevaga bharava horuvaga",
+            "Krishna enabarade||3||"
+          ],
+          [
+            "Gandhava pusi tambula meluvaga",
+            "Krishna enabarade, tanna",
+            "Mandagamane kuda sarasavadutalomme",
+            "Krishna enabarade||4||"
+          ],
+          [
+            "Parihasyada matanadutalomme",
+            "Krishna enabarade, paripari",
+            "Kelasadolondu kelasavendu",
+            "Krishna enabarade||5||"
+          ],
+          [
+            "Durita rasigalanu taridu bisaduva",
+            "Krishna enabarade, sada",
+            "Garuda gamana namma purandara vithalana",
+            "Krishna enabarade||6||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "llSyztbd8cvRDZrpcIsT",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:40:25.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_nXjqjlsAudbK0E6a5Yaj",
+      "form": "pada",
+      "title": {
+        "kn": "ಮನ್ನಾರು ಕೃಷ್ಣಗೆ ಮಂಗಳ",
+        "latin": "ಮನ್ನಾರು ಕೃಷ್ಣಗೆ ಮಂಗಳ",
+        "iast": "mannāru kṛṣṇagè maṃgaḻa",
+        "devanagari": "मन्नारु कृष्णगॆ मंगळ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಮನ್ನಾರು ಕೃಷ್ಣಗೆ ಮಂಗಳ"
+          ],
+          [
+            "ಜಗವ ಮನ್ನಿಸಿದೊಡೆಯಗೆ ಮಂಗಳ ||ಪ||"
+          ],
+          [
+            "ಬೊಮ್ಮನ ಪಡೆದಗೆ ಭಕ್ತರುದ್ಧಾರಿಗೆ"
+          ],
+          [
+            "ಕಮ್ಮಗೋಲನಯ್ಯಗೆ ಮಂಗಳ"
+          ],
+          [
+            "ಧರ್ಮರಕ್ಷಕನಿಗೆ ದಾನವಶಿಕ್ಷಗೆ"
+          ],
+          [
+            "ನಮ್ಮ ರಕ್ಷಕನಿಗೆ ಮಂಗಳ ||೧||"
+          ],
+          [
+            "ತುರುಗಳ ಕಾಯ್ದಗೆ ಕರುಣಾಕರನಿಗೆ"
+          ],
+          [
+            "ಗಿರಿಯನೆತ್ತಿದವಗೆ ಮಂಗಳ"
+          ],
+          [
+            "ವರದ ತಿಮ್ಮಪ್ಪಗೆ ವಾರಿಜನಾಭಗೆ"
+          ],
+          [
+            "ಹರಿ ಸರ್ವೋತ್ತಮನಿಗೆ ಮಂಗಳ ||೨||"
+          ],
+          [
+            "ದೇವಕಿದೇವಿಯ ತನಯಗೆ ಮಂಗಳ"
+          ],
+          [
+            "ದೇವ ತಿಮ್ಮಪ್ಪಗೆ ಮಂಗಳ"
+          ],
+          [
+            "ಮಾವನ ಕೊಂದು ಮಲ್ಲರ ಮಡುಹಿದ"
+          ],
+          [
+            "ಪುರಂದರವಿಠಲಗೆ ಮಂಗಳ ||೩||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Mannaru krushnage mangala"
+          ],
+          [
+            "Jagava mannisidodeyage mangala ||pa||"
+          ],
+          [
+            "Bommana padedage baktaruddharige"
+          ],
+          [
+            "Kammagolanayyage mangala"
+          ],
+          [
+            "Dharmarakshakanige danavasikshage"
+          ],
+          [
+            "Namma rakshakanige mangala ||1||"
+          ],
+          [
+            "Turugala kaydage karunakaranige"
+          ],
+          [
+            "Giriyanettidavage mangala"
+          ],
+          [
+            "Varada timmappage varijanabage"
+          ],
+          [
+            "Hari sarvottamanige mangala ||2||"
+          ],
+          [
+            "Devakideviya tanayage mangala"
+          ],
+          [
+            "Deva timmappage mangala"
+          ],
+          [
+            "Mavana kondu mallara maduhida"
+          ],
+          [
+            "Purandaravithalage mangala ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "nXjqjlsAudbK0E6a5Yaj",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_oOR3ZFRYntKqJ5XLJE12",
+      "form": "pada",
+      "title": {
+        "kn": "ಗುಮ್ಮನ ಕರೆಯದಿರೆ ಅಮ್ಮ ನೀನು",
+        "latin": "ಗುಮ್ಮನ ಕರೆಯದಿರೆ ಅಮ್ಮ ನೀನು",
+        "iast": "gummana karèyadirè amma nīnu",
+        "devanagari": "गुम्मन करॆयदिरॆ अम्म नीनु"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಗುಮ್ಮನ ಕರೆಯದಿರೆ ಅಮ್ಮ ನೀನು",
+            "ಸುಮ್ಮನೆ ಇದ್ದೇನು ಅಮ್ಮಿಯ ಬೇಡೆನು",
+            "ಮಮ್ಮು ಉಣ್ಣುತೇನೆ ಅಮ್ಮ ಅಳುವುದಿಲ್ಲ",
+            "ಹೆಣ್ಣುಗಳಿರುವಲ್ಲಿ ಪೋಗಿ ಅವರ",
+            "ಕಣ್ಣು ಮುಚ್ಚುವದಿಲ್ಲವೆ",
+            "ಚಿಣ್ಣರ ಬಡಿಯೆನು, ಅಣ್ಣನ ಬೈಯೆನು",
+            "ಬೆಣ್ಣೆಯ ಬೇಡೆನು ಮಣ್ಣು ತಿನ್ನುವುದಿಲ್ಲ",
+            "ಬಾವಿಗೆ ಪೋಗೆ ಕಾಣೆ ಅಮ್ಮ ನಾನು",
+            "ಹಾವಿನೊಳಾಡೆ ಕಾಣೆ",
+            "ಆವಿನ ಮೊಲೆಯೂಡೆ ಕರುಗಳ ಬಿಡೆ ನೋಡೆ",
+            "ದೇವರಂತೆ ಒಂದು ಠಾವಿಲಿ ಕೂಡುವೆ",
+            "ಮಗನ ಮಾತ ಕೇಳಿ ಗೋಪಿದೇವಿ",
+            "ಮುಗುಳು ನಗೆ ನಗುತ",
+            "ಜಗದೊಡೆಯನ ಶ್ರೀ ಪುರಂದರವಿಠಲನ",
+            "ಬಿಗಿದಪ್ಪಿಕೊಂಡಳು ಮೋಹದಿಂದಲಾಗ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Gummana karayadire amma neenu|"
+          ],
+          [
+            "Summane Iddenu Ammiya Bedenu",
+            "Mammu Unnutene Amma Aluvudilla||"
+          ],
+          [
+            "Hennugaliruvallige Avara",
+            "Kannu Mucchuvudillave",
+            "Cinnara Badiyenu Annana Baiyenu",
+            "Benneya Bedenu Mannu Tinnuvudilla||1||"
+          ],
+          [
+            "Bavige Poge Kane Amma Nanu",
+            "Havinolade Kane",
+            "Avina Moleyude Karugala Bide Node",
+            "Devaramte Omdu Thavili Kuduve||2||"
+          ],
+          [
+            "Magana Matanu Keli Gopidevi",
+            "Mugulu Nage Naguta",
+            "Jagadodeyana Shri Purandara Vithalana",
+            "Bigidappikomdalu Mohadimdalaga||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "oOR3ZFRYntKqJ5XLJE12",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:37:08.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_ozwC8YyJN0v1HcjnHLvF",
+      "form": "pada",
+      "title": {
+        "kn": "ಹೇಗೆ ಮಾಡಲಿ ಮಗುವಿಗೆ ",
+        "latin": "ಹೇಗೆ ಮಾಡಲಿ ಮಗುವಿಗೆ ",
+        "iast": "hegè māḍali maguvigè ",
+        "devanagari": "हेगॆ माडलि मगुविगॆ "
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಹೇಗೆ ಮಾಡಲಿ ಮಗುವಿಗೆ ಏನಾಯಿತೆ , ಇದ- ರಾಗಮವ ಬಲ್ಲವರು ತಿಳಿದು ಪೇಳಿ ||ಪ||"
+          ],
+          [
+            "ಕಣ್ಣಮುಚ್ಚಲೊಲ್ಲನು ತೂಗಿ ಮಲಗಿಸಿದರೆ",
+            "ಬೆನ್ನ ಮೇಲಿನ ಬುಕಟಿ ಕಲ್ಲ ಅರಿಯಾಗಿದೆ ||",
+            "ರೋಗವಿದೇನು ದಾಡೆಯಲಿ ನೀರು ಇಳಿವುತದೆ",
+            "ಕೂಗುವ ಧ್ವನಿ ಒಮ್ಮೆ ಕುಂದಿದುದು ||"
+          ],
+          [
+            "ಖಂಡ ಸಕ್ಕರೆ ಹಾಲು ಉಣಕೊಟ್ಟರೊಲ್ಲದೆ",
+            "ಮಣ್ಣು ಹೇಂಟೆ ಬೇಡಿದ ಕೈಯಾಗೆ ಏನು ಕೊಡಲಿ",
+            "ಮಂಡೆ ಜಡೆಕಟ್ಟಿತಿನ್ನೇನು ಮಾಡಲಿ ಇದಕೆ",
+            "ಹಿಂಡು ಸತಿಯರ ಸಂಗ ಘನವಾಯಿತು ||"
+          ],
+          [
+            "ಮಾಲೆಯನು ತೆಗೆದು ಮೈಮುರಿದುಟ್ಟು ನಗುತಿದೆ",
+            "ಕಲಕಿತನದಲ್ಲಿ ಎಮ್ಮ ಕಾಡುತಾನೆ",
+            "ನೆಲೆಯ ಬಲ್ಲವರು ಕಾಣೆ ಧರೆಯೊಳಗೆ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Hege madali maguvige enayite , ida- Ragamava ballavaru tilidu peli ||pa||"
+          ],
+          [
+            "Kannamuccalollanu tugi malagisidare",
+            "Benna melina bukati kalla ariyagide ||",
+            "Rogavidenu dadeyali niru ilivutade",
+            "Kuguva dhvani omme kundidudu ||"
+          ],
+          [
+            "Kanda sakkare halu unakottarollade",
+            "Mannu hente bedida kaiyage Enu kodali",
+            "Mande jadekattitinnenu madali idake",
+            "Hindu satiyara sanga ganavayitu ||"
+          ],
+          [
+            "Maleyanu tegedu maimuriduttu nagutide",
+            "Kalakitanadalli emma kadutane",
+            "Neleya ballavaru kane dhareyolage",
+            "Celuva sripurandaravithala obbane balla ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "ozwC8YyJN0v1HcjnHLvF",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_psif4oKj7dv7AyeO9o66",
+      "form": "pada",
+      "title": {
+        "kn": "ಆಡಿದನೋ ರಂಗ ಅದ್ಭುತದಿಂದಲಿ",
+        "latin": "ಆಡಿದನೋ ರಂಗ ಅದ್ಭುತದಿಂದಲಿ",
+        "iast": "āḍidano raṃga adbhutadiṃdali",
+        "devanagari": "आडिदनो रंग अद्भुतदिंदलि"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಆಡಿದನೋ ರಂಗ ಅದ್ಭುತದಿಂದಲಿ",
+            "ಕಾಳಿಂಗನ ಫಣೆಯಲಿ ||ಪ||"
+          ],
+          [
+            "ಪಾಡಿದವರಿಗೆ ಬೇಡಿದ ವರಗಳ",
+            "ನೀಡುತಲಿ ದಯ ಮಾಡುತಲಿ",
+            "ನಲಿದಾಡುತಲಿ ಬೆಣ್ಣೆ ಬೇಡುತಲಿ ಕೃಷ್ಣ ||ಅ.ಪ||"
+          ],
+          [
+            "ಅಂಬುರುಹೋದ್ಭವ ಅಖಿಳ ಸುರರು ಕೂಡಿ",
+            "ಅಂಬರದಲಿ ನಿಂತು ಅವರ ಸ್ತುತಿಸೆ",
+            "ರಂಭೆ ಊರ್ವಶಿ ರಮಣಿಯರೆಲ್ಲರು",
+            "ಚಂದದಿಂ ಭರತನಾಟ್ಯವ ನಟಿಸೆ",
+            "ಝಂತಟ ತಕಧಿಮಿ ತಧಿಗಿಣಿ ತೋಂ ಎಂದು",
+            "ಝಂಪೆ ತಾಳದಿ ತುಂಬುರುನೊಪ್ಪಿಸೆ",
+            "ಧಾ ಮ ಪ ಧ ಸ ರೀ ಎಂದು ಧ್ವನಿಯಿಂದ ನಾರದ",
+            "ತುಂಬುರು ಗಾನವ ಮಾಡಲು ನಂದಿಯು ಮದ್ದಲೆ",
+            "ಚೆಂದದಿ ಹಾಕಲು ||೧||"
+          ],
+          [
+            "ಫಣವ ಮೆಟ್ಟಿ ಬಾಲವ ಕೈಯಲಿ ಪಿಡಿದು",
+            "ಫಳಫಳಿಸುತ್ತ ನಾಟ್ಯವನಾಡೆ",
+            "ಚಂದ್ರಮಂಡಲದಂತೆ ಪೊಳೆಯುವ",
+            "ಮುಖದೊಳು ಚಲಿಸುವ ನೀಲಕೇಶಗಳಾಡೆ",
+            "ಕಾಲಲಂದುಗೆ ಗೆಜ್ಜೆ ಘಲು ಘಲು ಘಲುರೆನುತ",
+            "ಉಡಿಗೆಜ್ಜೆ ಘಂಟೆಗಳಾಡೆ",
+            "ದುಷ್ಟ ಕಾಳಿಂಗನ ಮೆಟ್ಟಿ ಭರದಿಂದ",
+            "ಪುಟ್ಟ ಪಾದವ ಇಟ್ಟು ಶ್ರೀ ಕೃಷ್ಣನು",
+            "ಮೆಟ್ಟಿದನು ತಕ ಧಿಮಿ ತಧಿಕೆನುತ ||೨||"
+          ],
+          [
+            "ಸುರರು ಪುಷ್ಪದ ವೃಷ್ಟಿಯ ಕರೆಯಲು",
+            "ಸುದತಿಯರೆಲ್ಲರು ಪಾಡಲು",
+            "ನಾಗಕನ್ನಿಕೆಯರು ನಾಥನ ಬೇಡಲು",
+            "ನಾನಾ ವಿಧದಿ ಸ್ತುತಿ ಮಾಡಲು",
+            "ರಕ್ಕಸರೆಲ್ಲರು ಕಕ್ಕಸವನೆ ಕಂಡು",
+            "ದಿಕ್ಕು ದಿಕ್ಕುಗಳಿಗೆ ಓಡಲು",
+            "ಚಿಕ್ಕವನಿವನಲ್ಲ ಪುರಂದರವಿಠ್ಠಲ",
+            "ವೆಂಕಟರಮಣ ಬೇಗ ಯಶೋದೆ",
+            "ಬಿಂಕದೊಳೆತ್ತಿ ಮುದ್ದಾಡೆ ಶ್ರೀ ಕೃಷ್ಣನ ||೩||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Adidano ranga adbutadindali",
+            "Kalingana paneyali ||pa||"
+          ],
+          [
+            "Padidavarige bedida varagala",
+            "Nidutali daya madutali",
+            "Nalidadutali benne bedutali krushna ||a.pa||"
+          ],
+          [
+            "Amburuhodbava akila suraru kudi",
+            "Ambaradali nintu avara stutise",
+            "Rambe urvasi ramaniyarellaru",
+            "Chandadim baratanatyava natise",
+            "Jantata takadhimi tadhigini tom endu",
+            "Jampe taladi tumburunoppise",
+            "Dha ma pa dha sa ri endu dhvaniyinda narada",
+            "Tumburu ganava madalu nandiyu maddale",
+            "Chendadi hakalu ||1||"
+          ],
+          [
+            "Panava metti balava kaiyali pididu",
+            "Palapalisutta natyavanade",
+            "Chandramandaladante poleyuva",
+            "Mukadolu chalisuva nilakesagalade",
+            "Kalalanduge gejje Galu Galu Galurenuta",
+            "Udigejje gantegalade",
+            "Dushta kalingana metti Baradinda",
+            "Putta padava ittu sri krushnanu",
+            "Mettidanu taka dhimi tadhikenuta ||2||"
+          ],
+          [
+            "Suraru pushpada vrushtiya kareyalu",
+            "Sudatiyarellaru padalu",
+            "Nagakannikeyaru nathana bedalu",
+            "Nana vidhadi stuti madalu",
+            "Rakkasarellaru kakkasavane kandu",
+            "Dikku dikkugalige odalu",
+            "Cikkavanivanalla purandaraviththala",
+            "Venkataramana bega yasode",
+            "Binkadoletti muddade sri krushnana ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "psif4oKj7dv7AyeO9o66",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.242Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_qnNXPnqaRZgIdvTRZobC",
+      "form": "pada",
+      "title": {
+        "kn": "ಆಡ ಹೋದಲ್ಲೆ ಮಕ್ಕಳು",
+        "latin": "ಆಡ ಹೋದಲ್ಲೆ ಮಕ್ಕಳು",
+        "iast": "āḍa hodallè makkaḻu",
+        "devanagari": "आड होदल्लॆ मक्कळु"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಆಡ ಹೋದಲ್ಲೆ ಮಕ್ಕಳು",
+            "ಆಡಿಇ ಕೊಂಬುವರು ನೋಡಮ್ಮ ||ಪ||",
+            "ನೋಡಿ ನೋಡಿ ಎನ್ನ ಮುಖವ",
+            "ನೋಡಿ ಕಣ್ಣು ಮೀಟುವರಮ್ಮ ||ಅ.ಪ||"
+          ],
+          [
+            "ದೇವಕಿ ಹೆತ್ತಳಂತೆ ವಸು-",
+            "ದೇವನೆಂಬವ ಪಿತನಂತೆ",
+            "ಕಾವಲಲ್ಲಿ ಹುಟ್ಟಿದೆನಂತೆ",
+            "ಮಾವಗಂಜಿಲ್ಲಿ ತಂದರಂತೆ ||"
+          ],
+          [
+            "ವಿಷವು ತುಂಬಿದ ಮೊಲೆಯನುಂಡು",
+            "ಅಸುರೆಯ ನಾ ಕೊಂದೆನಂತೆ",
+            "ನಿಶಿಚರ ಶಕಟಾಸುರನ",
+            "ಶಿಶುಗಾಲಿಲೊರಸಿದೆನಂತೆ ||"
+          ],
+          [
+            "ನೀನೆನ್ನ ಹಡೆದಿಲ್ಲವಂತೆ",
+            "ನಾ ನಿನ್ನ ಮಗನಲ್ಲವಂತೆ",
+            "ಧೇನು ಕಾಯುವರಿಲ್ಲವೆಂದು",
+            "ಸಾನುರಾಗದಿ ಸಲಹಿದೆಯಂತೆ ||"
+          ],
+          [
+            "ಕಿಚ್ಚ ನಾ ಗಡ ನುಂಗಿದೆನಂತೆ",
+            "ವತ್ಸಾಸುರನ ಕೆಡಹಿದೆನಂತೆ",
+            "ಕಚ್ಚ ಬಂದ ಕಾಳಿಂಗನ",
+            "ಕೊಚ್ಚಲು ಮಡುವ ಧುಮುಕಿದೆನಂತೆ ||"
+          ],
+          [
+            "ಹದ್ದು ಎನ್ನ ವಾಹನನಂತೆ",
+            "ಹಾವು ಎನ್ನ ಹಾಸಿಗೆಯಂತೆ",
+            "ಕದ್ದು ಬೆಣ್ಣೆಯ ನಾ ತಿಂದೆನಂತೆ",
+            "ಮುದ್ದು ಪುರಂದರ ವಿಠಲನಂತೆ ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Ada hodalli makkalu-ennanu-|adikombaru nodamma ||pa||"
+          ],
+          [
+            "Nodi nodi itta mukava |madi kanna Tuvaramma ||a.pa||"
+          ],
+          [
+            "Devaki pettalante-vasu-|devanembava pitanante |",
+            "Kavalinolu puttidenamte |mava kamsaganji bandenante|| 1||"
+          ],
+          [
+            "Ninenna pettillavante-amma |naninna maganallavante |",
+            "Dhenu kayuvarillavendu ninu |sanuragadi salahideyante || 2||"
+          ],
+          [
+            "Vishavu tumbida moleya-kotta |asureya samharisidenante |",
+            "Asuranada sakatananakshanadali |sisuvagale oresidenante|| 3||"
+          ],
+          [
+            "Vatsasurananu kedahidenante |kiccanellavanu nungidenante |",
+            "Kaccabanda kalingana hede-|cacci tulidu odidenante ||4||"
+          ],
+          [
+            "Kusumagandhiyaraduva |vasana kaddu odidenante |",
+            "Hasugusu alla iva |asura maganu entembuvare ||5||"
+          ],
+          [
+            "Oralaneletandu matti-|marava muridodidenante |",
+            "Taraleyara vastrava kaddu |taruvaneridenante|| 6||"
+          ],
+          [
+            "Parama gadikaraniva |purandara vithalaraya |",
+            "Taruniyara vanchisutta |Thakkisi podanentembuvaru||7||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "qnNXPnqaRZgIdvTRZobC",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.243Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_rsAxhbCDvWSTSRXFAG59",
+      "form": "pada",
+      "title": {
+        "kn": "ಆಡ ಹೋಗೋಣ ಬಾರೋ ರಂಗ",
+        "latin": "ಆಡ ಹೋಗೋಣ ಬಾರೋ ರಂಗ",
+        "iast": "āḍa hogoṇa bāro raṃga",
+        "devanagari": "आड होगोण बारो रंग"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಆಡ ಹೋಗೋಣ ಬಾರೋ ರಂಗ",
+            "ಓಡಿ ಹೋಗಲು ಬೇಡೋ ಕೃಷ್ಣ ||pa||"
+          ],
+          [
+            "ಅಣ್ಣೆಕಲ್ಲು ಗೋಲಿ ಗಾಜುಗ",
+            "ಚಿಣ್ಣಿಕೋಲು ಚೆಂಡು ಬುಗುರಿ",
+            "ಕಣ್ಣುಮುಚ್ಚಾಲೆ ಹಲವು ಕೂಟ",
+            "ಬಣ್ಣದಾಟಗಳನೆಲ್ಲ||1||"
+          ],
+          [
+            "ಸೋಲು-ಗೆಲುವಿಗೆಲ್ಲ ನೀನು",
+            "ಬಾಲಕರೊಳು ಕೂಡಿಕೊಂಡು",
+            "ಮೇಲೆ ಮಮತೆಯಿಂದ ಸಾನು-",
+            "ಕೂಲವಾಗಿ ನಡಸುವಂತೆ ||2||"
+          ],
+          [
+            "ಪುಟ್ಟ ಪುಟ್ಟ ಕೊಳಲು ಕಂಬಳಿ",
+            "ಕಟ್ಟಿ ಬುತ್ತಿ ಕೈಯಲಿ ಕೋಲು",
+            "ದಿಟ್ಟ ಚೆಲುವನಾದ ಪುರಂದರ",
+            "ವಿಠಲ ಗೋವಳರ ರಾಯ ||3||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Ada hogona baro ranga",
+            "Odi hogalu bedo krushna ||pa||"
+          ],
+          [
+            "Annekallu goli gajuga",
+            "Cinnikolu cemdu buguri",
+            "Kannumuccale halavu kuta",
+            "Bannadatagalanella||1||"
+          ],
+          [
+            "Solu-geluvigella ninu",
+            "Balakarolu kudikondu",
+            "Mele mamateyinda sanu-",
+            "Kulavagi nadasuvante ||2||"
+          ],
+          [
+            "Putta putta kolalu kambali",
+            "Katti butti kaiyali kolu",
+            "Ditta celuvanada purandara",
+            "Vithala govalara raya ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "rsAxhbCDvWSTSRXFAG59",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-11-14T17:42:39.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_sDulAC3BChG12k7seT3p",
+      "form": "pada",
+      "title": {
+        "kn": "ಏನು ಮಾಡಲೊ ಮಗನೆ",
+        "latin": "ಏನು ಮಾಡಲೊ ಮಗನೆ",
+        "iast": "enu māḍalò maganè",
+        "devanagari": "एनु माडलॊ मगनॆ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಏನು ಮಾಡಲೊ ಮಗನೆ ಯಾಕೆ ಬೆಳಗಾಯಿತೊ ಏನು ಮಾಡಲೊ ಕೃಷ್ಣಯ್ಯ"
+          ],
+          [
+            "ಏನು ಮಾಡಲಿ ಇನ್ನು ಮಾನಿನಿಯರು ಎನ್ನ",
+            "ಮಾನವ ಕಳೆಯುವರೊ ರಂಗಯ್ಯ",
+            "ಹಾಲು ಮೊಸರು ಬೆಣ್ಣೆ ಕದ್ದನೆಂಬುವರೊ",
+            "ಮೇಲಿನ ಕೆನೆಗಳ ಮೆದ್ದನೆಂಬುವರೊ",
+            "ಬಾಲಕರೆಲ್ಲರ ಬಡಿದನೆಂಬರೊ ಎಂಥ",
+            "ಕಾಳ ಹೆಂಗಸು ಇವನ ಹಡೆದಳೆಂಬುವರೊ",
+            "ಕಟ್ಟೆದ್ದ ಕರುಗಳ ಬಿಟ್ಟನೆಂತೆಂಬರೊ",
+            "ಮೆಟ್ಟೆ ಸರ್ಪನ ಮೇಲೆ ಕುಣಿದನೆಂಬುವರೊ",
+            "ಪುಟ್ಟ ಬಾಲೆಯರ ಮೋಹಿಸಿದನೆಂಬರೊ ಎಂಥ",
+            "ದುಷ್ಟ ಹೆಂಗಸು ಇವನ ಹಡೆದಳೆಂಬುವರೊ",
+            "ಗಂಗಾಜನಕ ನಿನ್ನ ಜಾರನೆಂತೆಂಬರೊ",
+            "ಶೃಂಗಾರಮುಖ ನಿನ್ನ ಬರಿದೆ ದೂರುವರೊ",
+            "ಮಂಗಳಮಹಿಮ ಶೀಪುರಂದರವಿಟ್ಠಲ",
+            "ಹಿಂಗದೆ ಎಮ್ಮನು ಸಲಹೆಂತೆಂಬರೊ"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Enu madalo magane yake belagayito^^Enu madalo krushnayya ||pa.||"
+          ],
+          [
+            "Enu madali innu maniniyaru enna",
+            "Manava kaleyuvaro rangayya ||a.pa.||"
+          ],
+          [
+            "Halu mosaru benne kaddanembuvaro",
+            "Melina kenegala meddanembuvaro",
+            "Balakarellara badidanembaro entha",
+            "Kala hengasu ivana hadedalembuvaro ||1||"
+          ],
+          [
+            "Kattidda karugala bittanentembaro",
+            "Metti sarpana mele kunidanembuvaro",
+            "Putta baleyara mohisidanembaro entha",
+            "Dushta hengasu ivana hadedalembuvaro ||2||"
+          ],
+          [
+            "Gangajanaka ninna jaranentembaro",
+            "Srungaramuka ninna baride duruvaro",
+            "Mangalamahima sri purandaraviththala",
+            "Hingade emmanu salahentembaro ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "sDulAC3BChG12k7seT3p",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.243Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_sR8sZYtwNcMl4sE0sH2G",
+      "form": "pada",
+      "title": {
+        "kn": "ಕೃಷ್ಣ ಬಾರೊ ಕೃಷ್ಣ ಬಾರೋ",
+        "latin": "ಕೃಷ್ಣ ಬಾರೊ ಕೃಷ್ಣ ಬಾರೋ",
+        "iast": "kṛṣṇa bārò kṛṣṇa bāro",
+        "devanagari": "कृष्ण बारॊ कृष्ण बारो"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "Krishna",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu",
+        "deity:Krishna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಕೃಷ್ಣ ಬಾರೊ ಕೃಷ್ಣ ಬಾರೋ",
+            "ಕೃಷ್ಣಯ್ಯ ನೀ ಬಾರಯ್ಯ ||ಪ||"
+          ],
+          [
+            "ಸಣ್ಣ ಹೆಜ್ಜೆಯನಿಟ್ಟು ಗೆಜ್ಜೆನಾದಗಳಿಂದ ||ಅ||"
+          ],
+          [
+            "ಮನ್ಮಥಜನಕನೆ ಬೇಗನೆ ಬಾರೊ",
+            "ಕಮಲಾಪತಿ ನೀ ಬಾರೊ",
+            "ಅಮಿತಪರಾಕ್ರಮ ಶಂಕರ ಬಾರೊ",
+            "ಕಮನೀಯ ಗಾತ್ರನೆ ಬಾರಯ್ಯ ದೊರೆಯೆ ।।೧।।"
+          ],
+          [
+            "ಸುರುಳು ಕೇಶಗಳ ಒಲಿವ ಅಂದ",
+            "ಭರದ ಕಸ್ತೂರಿ ತಿಲಕದ ಚಂದ",
+            "ಶಿರದಿ ಒಪ್ಪುವ ನವಿಲುಕಣ್ಗಳಿಂದ",
+            "ತರತರದ ಆಭರಣಗಳ ಧರಿಸಿ ನೀ ಬಾರೊ ।।೨।।"
+          ],
+          [
+            "ಹಾಲುಬೆಣ್ಣೆಗಳ ಕೈಯಲಿ ಕೊಡುವೆ",
+            "ಮೇಲಾಗಿ ಭಕ್ಷ್ಯಗಳ ಮುಚ್ಚಿಟ್ಟು ತರುವೆ",
+            "ಜಾಲ ಮಾಡದೆ ಬಾರಯ್ಯ ಮರಿಯೆ",
+            "ಬಾಲ ಎನ್ನ ತಂದೆ ಪುರಂದರವಿಠಲ ।।೩।।"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Krushna baro krushna baro",
+            "Krushnayya ni barayya ||pa||"
+          ],
+          [
+            "Sanna hejjeyanittu gejjenadagalinda ||a||"
+          ],
+          [
+            "Manmathajanakane begane baro",
+            "Kamalapati ni baro",
+            "Amitaparakrama Sankara baro",
+            "Kamaniya gatrane barayya doreye ||1||"
+          ],
+          [
+            "Surulu kesagala oliva anda",
+            "Barada kasturi tilakada chanda",
+            "Siradi oppuva navilukangalinda",
+            "Taratarada abaranagala dharisi ni baro ||2||"
+          ],
+          [
+            "Halubennegala kaiyali koduve",
+            "Melagi bakshyagala mucchittu taruve",
+            "Jala madade barayya mariye",
+            "Bala enna tande purandaravithala ||3||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "sR8sZYtwNcMl4sE0sH2G",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2022-08-20T11:05:52.000Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    },
+    {
+      "id": "puramdaradasa__collection_padagalu_xlxhgydKcx6gayqE3MsO",
+      "form": "pada",
+      "title": {
+        "kn": "ಕಂದಾ ಬೇಡವೊ",
+        "latin": "ಕಂದಾ ಬೇಡವೊ",
+        "iast": "kaṃdā beḍavò",
+        "devanagari": "कंदा बेडवॊ"
+      },
+      "composer": "ಪುರಂದರದಾಸ",
+      "composer_latin": "P U R A N D A R A  D A S A R U",
+      "deity": "",
+      "tags": [
+        "composer:ಪುರಂದರದಾಸ",
+        "source:personal_collection_export:collection_padagalu",
+        "collection:padagalu"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [
+          [
+            "ಕಂದಾ ಬೇಡವೊ ಮಣ್ಣು ತಿನ್ನ ಬೇಡವೊ ||ಪ||",
+            "ಕಂದಾ ಬೇಡವೊ ಮಣ್ಣು ತಿನ್ನಲಿ ಬೇಡವೊ",
+            "ಸುಂದರಾಂಗನೆ ನಿನಗೆ ಹೊಟ್ಟೆ ನೋಯುವುದಯ್ಯ ||ಅ||"
+          ],
+          [
+            "ಬೇಗನೆ ಏಳಯ್ಯ , ಮಣ್ಣಾಟ ಬಿಡೊ ನೀನು",
+            "ಜೋಗಿ ಬರುತಾನಲ್ಲಿ ಅಂಜಿಸುವುದಕೀಗ ||"
+          ],
+          [
+            "ತಾಯಿ ಮಾತನು ಒತ್ತಿ ಕರದಲಿ ಮಣ್ಣೊತ್ತಿ",
+            "ಬಾಯಲಿ ಇಟ್ಟನು ಬಾಲಕೃಷ್ಣಯ್ಯನು ||"
+          ],
+          [
+            "ಪೆಟ್ಟು ಕೊಡುವೆ ನಿನಗೆ , ಸಿಟ್ಟು ಬಹಳ ಇದೆ",
+            "ಮುಟ್ಟಬೇಡೊ ಮಣ್ಣು , ಬೆಣ್ಣೆ ತರುವೆನಯ್ಯ ||"
+          ],
+          [
+            "ಅಮ್ಮಯ್ಯ ಕೇಳೆಲೆ , ಬಾಯಲಿ ಮಣ್ಣಿಲ್ಲ",
+            "ಗುಮ್ಮನ ಕರೆಬೇಡ , ಸುಮ್ಮನೆ ಇರುತೇನೆ ||"
+          ],
+          [
+            "ಮಗುವೆ ಬಾ ಬಾ ಎಂದು ಬಣ್ಣಿಸಿ ಕರೆದಳು",
+            "ಮಗುವಿನ ಬಾಯ ಶೋಧಿಸಿದಳು ಬೇಗನೆ ||"
+          ],
+          [
+            "ಬಾಯಲಿ ಕಂಡಳು ಹದಿನಾಲ್ಕು ಲೋಕವ",
+            "ಕಾಯ ಮರೆತಳಯ್ಯ ಮರುಳಿಗೆ ವಶವಾಗಿ ||"
+          ],
+          [
+            "ಮತ್ತು ಕಂಡಳು ಅವಳು ಗೋಕುಲವೆಲ್ಲವ",
+            "ಅತ್ತ ಕಂಡಳು ತನ್ನ ಕೃಷ್ಣನ ಬಗಲಲಿ ||"
+          ],
+          [
+            "ಗೋಪ್ಯೇರ ಮನೆಗಳಲಿ ಗೋಪಾಲಕೃಷ್ಣನು",
+            "ಗೋಪ್ಯೇರ ಮನೆಗಳಂತೆ ದುಡುಕು ಮಾಡುತಲಿರ್ದ ||"
+          ],
+          [
+            "ಬಾಲನು ಬೀದಿಯ ಮಣ್ಣೆತ್ತಿ ಉಣುತಿರ್ದ",
+            "ಬಾಲೆ ಗೋಪ್ಯಮ್ಮನು ಮಣ್ಣ ತೆಗೆತಿರ್ದಳು ||"
+          ],
+          [
+            "ಕಂದನು ನೀನಲ್ಲ ಕಂದರ್ಪ ಜನಕನೆ",
+            "ಕಂದನೆ ನಿನ್ನ ಬಾಯ ಮುಚ್ಚಿಕೊಳ್ಳಯ್ಯ ಈಗ ||"
+          ],
+          [
+            "ದೇವದಿದೇವನೆ ದೇವಕಿತನಯನೆ",
+            "ಭಾವಜನಯ್ಯನೆ ಬಾರಯ್ಯ ದೊರೆಯೆ ||"
+          ],
+          [
+            "ಜಯಗಳಾಗಲಿ ನಮ್ಮ ಕೃಷ್ಣರಾಯಗೆ ಬಹಳ",
+            "ಜಯಗಳಾಗಲಿ ಅವನ ಭಕ್ತರ ವೃಂದಕೆ ||"
+          ],
+          [
+            "ಲೀಲಾವಿನೋದನು ರುಕ್ಮಿಣೀಲೋಲನು",
+            "ಲೀಲೆ ತೋರಿದನಂದು ತಂದೆ ಪುರಂದರವಿಠಲ ||"
+          ]
+        ],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Kanda bedavo mannu tinna bedavo ||pa||"
+          ],
+          [
+            "Kanda bedavo mannu tinnali bedavo",
+            "Sundarangane ninage hotte noyuvudayya ||a||"
+          ],
+          [
+            "Begane elayya , mannata bido ninu",
+            "Jogi barutanalli anjisuvudakiga ||"
+          ],
+          [
+            "Tayi matanu otti karadali mannotti",
+            "Bayali ittanu balakrushnayyanu ||"
+          ],
+          [
+            "Pettu koduve ninage , sittu bahala ide",
+            "Muttabedo mannu , benne taruvenayya ||"
+          ],
+          [
+            "Ammayya kelele , bayali mannilla",
+            "Gummana karebeda , summane irutene ||"
+          ],
+          [
+            "Maguve ba ba endu bannisi karedalu",
+            "Maguvina baya sodhisidalu begane ||"
+          ],
+          [
+            "Bayali kandalu hadinalku lokava",
+            "Kaya maretalayya marulige vasavagi ||"
+          ],
+          [
+            "Mattu kandalu avalu gokulavellava",
+            "Atta kandalu tanna krushnana bagalali ||"
+          ],
+          [
+            "Gopyera manegalali gopalakrushnanu",
+            "Gopyera manegalante duduku madutalirda ||"
+          ],
+          [
+            "Balanu bidiya mannetti unutirda",
+            "Bale gopyammanu manna tegetirdalu ||"
+          ],
+          [
+            "Kandanu ninalla kandarpa janakane",
+            "Kandane ninna baya muccikollayya Iga ||"
+          ],
+          [
+            "Devadidevane devakitanayane",
+            "Bavajanayyane barayya doreye ||"
+          ],
+          [
+            "Jayagalagali namma krushnarayage bahala",
+            "Jayagalagali avana Baktara vrundake ||"
+          ],
+          [
+            "Lilavinodanu rukminilolanu",
+            "Lile toridanandu tamde purandaravithala ||"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "personal_collection_export:collection_padagalu",
+        "url": "",
+        "attribution": "Imported from a local personal-collection export (collection_padagalu); non-commercial dharma-prachara / education / research.",
+        "fetched": "2026-08-19"
+      },
+      "app_meta": {
+        "asset": "collection_padagalu",
+        "doc_id": "xlxhgydKcx6gayqE3MsO",
+        "collection": "padagalu",
+        "subcategory": null,
+        "added_on": "2025-02-01T09:31:07.243Z",
+        "favorite": false
+      },
+      "_needs_review": false
+    }
+  ]
+}
