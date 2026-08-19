@@ -40,7 +40,7 @@
   "explore": {
     "label": "Explore",
     "items": [
-      { "id": "ourStory",      "icon": "📖", "label": "About the Project — Our Story", "action": "dgeOpenOurStory", "enabled": true },
+      { "id": "ourStory",      "icon": "📖", "label": "Our Story", "action": "dgeOpenOurStory", "enabled": true },
       { "id": "guruParampara", "icon": "🪷", "label": "Guru Parampara",   "href": "guru-parampara/index.html", "enabled": true },
       { "id": "tirtha",        "icon": "🛕", "label": "Tirtha Prabandha", "href": "tirtha/index.html",         "enabled": true },
       { "id": "ashtadhyayi",   "icon": "📖", "label": "Aṣṭādhyāyī",       "href": "ashtadhyayi.html",          "enabled": true },

@@ -169,11 +169,19 @@ window.dgeReaderContentPromise = fetch(window.dgeContentUrl('reader.json') + '?t
       window.SPONSOR_CONFIG = window.SPONSOR_CONFIG || { enabled: false };
       window.CONTRIBUTORS_CONFIG = window.CONTRIBUTORS_CONFIG || { enabled: false, contributors: [] };
       window.KEY_SPONSORS_CONFIG = window.KEY_SPONSORS_CONFIG || { enabled: false, sponsors: [] };
+      window.SITE_CONFIG = window.SITE_CONFIG || {};
       return null;
     }
     if (rc.SPONSOR_CONFIG) window.SPONSOR_CONFIG = rc.SPONSOR_CONFIG;
     if (rc.CONTRIBUTORS_CONFIG) window.CONTRIBUTORS_CONFIG = rc.CONTRIBUTORS_CONFIG;
     if (rc.KEY_SPONSORS_CONFIG) window.KEY_SPONSORS_CONFIG = rc.KEY_SPONSORS_CONFIG;
+    // content-inline.js (loaded on this page via <body data-content-file=
+    // "admin/content/reader.json">) stages every edit into window.SITE_CONFIG
+    // by dotted path and expects the live page to already be reading off
+    // that same object -- rc IS this file, so pointing SITE_CONFIG at it
+    // directly means an edit to e.g. "SPONSOR_CONFIG.introText" lands on the
+    // exact object window.SPONSOR_CONFIG already references, no copying.
+    window.SITE_CONFIG = rc;
     return rc;
   });
 

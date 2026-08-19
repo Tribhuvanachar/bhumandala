@@ -97,6 +97,14 @@
   cursor: pointer; padding: 4px 2px 4px 8px; align-self: center;
 }
 
+/* Own line (width:100% inside the wrapping flex bar) so the file name never
+   crowds out the count/buttons on a narrow phone screen. */
+.ci-file {
+  flex-basis: 100%; order: -1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px; letter-spacing: .02em; color: #8B7A63;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 .ci-count { color: #D9B87A; }
 .ci-publish { border-color: #6FBF8B; background: rgba(111, 191, 139, .2); }
 .ci-discard { border-color: rgba(226, 102, 74, .6); background: rgba(226, 102, 74, .14); }
