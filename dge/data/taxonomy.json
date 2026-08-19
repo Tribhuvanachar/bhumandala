@@ -1873,7 +1873,9 @@
     "shaunakiya_chaturadhyayika": {}
    }
   },
-  "chandas": {},
+  "chandas": {
+   "_schema": "vedanga_chandas_vrutta_database"
+  },
   "nirukta": {},
   "jyotisha": {}
  },
