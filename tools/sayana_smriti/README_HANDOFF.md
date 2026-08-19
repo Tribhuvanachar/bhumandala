@@ -1,5 +1,96 @@
 # Handoff — Veda & Smṛti commentary import  (v4)
 
+## STATE, as of 18 Aug 2026 — read this before the rest of the file
+
+The sections below were written before any of this ran, and their "suggested
+order" is now **stale**: it points at the wisdomlib route, which is dead
+(wisdomlib 403s every datacenter IP, `/robots.txt` included). Sāyaṇa came from
+Sanskrit Wikisource instead. `SOURCES.md` §5–§7 is the current, evidenced record.
+
+### Done
+
+| | |
+|---|---|
+| **Sāyaṇa on the Ṛgveda** | **10,388 / 10,552 (98.45%)**, from sa.wikisource, CC BY-SA. `wikisource_sayana.py`, 42 tests. |
+| **Sāyaṇa on the Sāmaveda** | **1,733 / 1,875 (92%)** by propagation, no network. `propagate_samaveda.py`. |
+| `core.js` Gītā `bhashya[]` patch | already in the repo — `core.js:331` iterates `v.bhashya[]`. Do **not** re-apply any patch snapshot. |
+| Audio admin fix | already in the repo — `dge/js/audio-detect.js` + a 10-test Node suite. |
+
+Both landed in PR #57 on branch `claude/new-session-65y87b`.
+
+### Not done, in rough order of value
+
+1. **`import_veda_phase2.py`** — Atharvaveda (5,977 items), Śukla Yajurveda
+   (1,975) and Taittirīya Saṃhitā (696) all carry **zero** commentary layers.
+   Deployed and tested, never run for real.
+2. **`import_upanishads.py`** — all 29 Upaniṣad folders hold zero items. Same:
+   deployed, tested, never run.
+3. **Darśana Nyāya (91 files) and Mīmāṃsā (20)** — every one empty.
+   `darshanas.yml` is wired and has never been dispatched.
+4. **Smṛti bhāṣya** — Manu (2,685 ślokas), Viṣṇu (2,363), Yājñavalkya (1,011),
+   Nārada (805) and Parāśara (580) hold complete **mūla** and **no bhāṣya**. The
+   other 15 minor smṛtis are empty. Run `import_minor_smritis.py --probe-only`
+   before writing anything.
+5. **Wikisource Purāṇas — BLOCKED, not merely undone.** An older handoff sends
+   you to `importers/wikisource.py` and `importers/test_wikisource.py`. **Neither
+   file exists in this repo**; that package was never deployed. Nothing to run
+   until it is.
+
+### Traps, with the count of times each has now bitten
+
+1. **Never apply `patches/core.js` or `core.js.patch`.** Snapshots of main from
+   17 Aug; applying one reverts the kosha citations, the tour and the inline
+   editor. The edits live in `dge/js/core.js`. **Four times.**
+2. **Indent width.** `taxonomy.json` is indent 1; the Ṛgveda and Sāmaveda
+   saṃhitā files are indent **2**. Guessing reformats 233,667 lines to make a
+   21,949-line change. `common.sniff_indent` now reads it off the file and
+   `save_json` preserves it — use `save_json` and don't hand-roll a writer.
+   **Five times.**
+3. **Never raise a threshold or drift guard to get past it.** They exist because
+   a misaligned import looks completely plausible.
+4. **A green run that imported nothing is the failure mode.** Check counts, not
+   the exit code.
+5. **`main` moves fast.** Merge before starting and again before pushing.
+   `library.json` is generated — take main's copy, re-derive with
+   `audit_library.py --fix`.
+
+### How to verify an alignment, since coverage is not evidence
+
+A systematic off-by-one leaves every score untouched: each mantra still sits
+above *some* commentary. Two checks that do work, and both found real defects:
+
+- **Ask which mantra the gloss quotes** — its own, or the next one. Not "does it
+  *start with* the mantra's first words": that answers *no* for correct pairings,
+  because Sāyaṇa quotes in his own order. Measure how much of the mantra's
+  vocabulary the opening quotes, against the next mantra's, in a window scaled to
+  the mantra's length. `wikisource_sayana.check_offbyone` does this.
+- **Read the pairings.** Every one of the four real defects in the Wikisource run
+  was found this way, and the worst of them — the next mantra's printed text
+  trailing the previous gloss — made *correct* cuts look one-late. No score
+  distinguishes those two cases.
+
+### The full test sweep
+
+```
+python tools/sayana_smriti/tests/test_parsers.py          # 15
+python tools/sayana_smriti/tests/test_phase2.py           # 49
+python tools/sayana_smriti/tests/test_archive_sayana.py   # 28
+python tools/sayana_smriti/tests/test_wikisource_sayana.py # 42
+node   tools/sayana_smriti/tests/test_core_patch.js       # 10
+node   tools/audio_admin/test-audio-detect.js             # 10
+python importers/test_gretil_bulk.py
+python tools/darshanas/test_darshanas.py
+python tools/dvaitavedanta/test_import_offline.py
+python tools/validate_data.py
+python tools/sayana_smriti/verify_import.py --dge-root dge
+python tools/audit_library.py
+```
+
+`test_parsers.py` and `test_phase2.py` need `pip install beautifulsoup4`, which
+is not in the sandbox by default.
+
+---
+
 ## New in v4 — the Upaniṣads, and two corrections
 
 ### `import_upanishads.py`
@@ -267,18 +358,6 @@ tests/test_parsers.py        15 tests: wisdomlib, sacred-texts, GRETIL, Google D
 tests/test_core_patch.js     10 tests: the patched normaliser, incl. regressions
 .github/workflows/           the Actions runner
 ```
-
-## Suggested order
-
-1. Run the Sāyaṇa smoke test, eyeball five mantras against wisdomlib in a browser.
-2. Full Sāyaṇa run → PR → merge. That alone gives every Ṛgveda mantra a traditional
-   bhāṣya for the first time.
-3. Apply the `core.js` patches.
-4. Run the smṛti importer with `--only manu_smriti` first — Medhātithi is the biggest
-   and best-attested layer, and it validates the wisdomlib TOC walk before you turn
-   the other twelve granthas loose.
-5. Try `sa.wikisource.org` from Actions for the eleven minor smṛtis. It is the only
-   remaining lead for that gap, and it could not be tested from the sandbox.
 
 ## Phase 2 (not in this package)
 

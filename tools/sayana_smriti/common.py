@@ -159,10 +159,35 @@ def load_json(path) -> dict:
         return json.load(fh)
 
 
-def save_json(path, obj, indent=1):
+def sniff_indent(raw, default=1):
+    """The indent width a JSON file is already written at.
+
+    Read off the first indented key rather than assumed. The corpus is not
+    uniform -- the Ṛgveda and Sāmaveda saṃhitā files are written at 2 while most
+    of this toolchain writes at 1 -- and guessing wrong corrupts nothing but
+    reformats every line of a 10,000-item file to add one key per item, burying
+    the real change under a quarter of a million whitespace edits.
+    """
+    for line in raw.split("\n", 40)[1:]:
+        stripped = line.lstrip(" ")
+        if stripped.startswith('"') and stripped != line:
+            return len(line) - len(stripped)
+    return default
+
+
+def save_json(path, obj, indent=None):
     """Atomic write — a killed job never leaves a half-written data.json in the
-    tree (which is how you get a grantha that 404s silently in the browser)."""
+    tree (which is how you get a grantha that 404s silently in the browser).
+
+    With no ``indent`` given, an existing file keeps the width it already has
+    and a new one is written at 1.
+    """
     path = Path(path)
+    if indent is None:
+        try:
+            indent = sniff_indent(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError):
+            indent = 1
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(path.suffix + ".tmp")
     with open(tmp, "w", encoding="utf-8") as fh:

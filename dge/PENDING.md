@@ -117,6 +117,36 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
+- **Eight `rigveda_ref` values in the Sāmaveda data name the wrong verse** (found
+  18 Aug while propagating Sāyaṇa; `tools/sayana_smriti/SOURCES.md` §7 has the
+  evidence). These are errors in DGE's own Sāmaveda data, not in the
+  propagation. `propagate_samaveda.py` now checks each ref against the mantra
+  text and **skips** these eight rather than repairing them silently, so the
+  commentary is absent rather than wrong — but the refs themselves still want
+  fixing at source, which is a content call:
+  | agreement | SV → RV | |
+  |---|---|---|
+  | 0.11 | 1429 → 9.89.5 | no word in common |
+  | 0.19 | 385 → 4.39.6 | no word in common |
+  | 0.22 | 1420 → 1.93.3 | no word in common |
+  | 0.23 | 469 → 9.65.1 | no word in common |
+  | 0.26 | 345 → 8.24.16 | no word in common |
+  | 0.40 | 891 → 9.61.17 | **890 and 891 appear to name each other's verses** |
+  | 0.52 | 890 → 9.61.18 | |
+  | 0.53 | 1204 → 9.12.8 | |
+  Eight more agree only partially (0.55–0.70) where the Sāmaveda's own reading or
+  verse division differs; those *are* propagated, since every entry already tells
+  the reader it is Sāyaṇa on the parallel Ṛgveda mantra.
+- **150 dangling `library.json` entries, all dvaitavedanta.** Pre-existing on
+  main, not caused by the Sāyaṇa work, and unchanged by it.
+  `tools/audit_library.py --fix` clears them in one command. Left alone across
+  three sessions now because they may belong to an in-flight crawl — **this needs
+  a yes or no from the project lead**, otherwise it will keep being deferred.
+- **Rights on the archive.org Sāyaṇa scan** (`rgveda-with-sayanabhasya`) — the
+  item states no licence. Sāyaṇa's text is long out of copyright; the Vaidika
+  Saṃśodhana Maṇḍala edition's own status is unchecked. Now lower priority: the
+  Wikisource route (CC BY-SA, stated) supplies 98.45% and is what actually
+  shipped, so this only matters if the OCR route is ever published from.
 - **New content acquisition — Chandas, Nirukta, Śikṣā/Prātiśākhya, Ayurveda, Kāmaśāstra and Nītiśāstra, each work zeroed in on ONE verified source (18 Aug 2026).** A wide sweep of candidate sites (Ambuda, GRETIL, Sanskrit Documents, SARIT, NIIMH/CCRAS, TITUS, Cologne Lexicon, wisdomlib, subhashita.com, DSBC) was proposed for these categories. Rather than storing that as a shopping list, every candidate site and specific text below was actually fetched and read before being written down here — this project has already been burned twice by declaring GRETIL filenames that turned out not to exist (see `works.json`'s Naiṣadhīyacarita/Mṛcchakaṭika/Kāvyaprakāśa entries above), so "checked" below means a real HTTP 200 and an inspected passage, not a guessed URL pattern. **One correction to the original brief first: Alaṅkāraśāstra (Kāvyādarśa, Kāvyālaṅkāra, Dhvanyāloka, Vakroktijīvita, Kāvyaprakāśa, Daśarūpaka, Sāhityadarpaṇa, Rasagaṅgādhara, Śṛṅgāraprakāśa, Chandomañjarī, Nāṭyaśāstra) is not a gap — every one of those titles is already registered in `tools/kavya/config/works.json` with its source checked the same day this note was written, several already correctly marked "no machine-readable source" rather than left unverified. Nothing below duplicates that.**
 
   **Reachability, checked directly by curl from this sandbox, not assumed:** `ambuda.org`, `gretil.sub.uni-goettingen.de`, `sanskritdocuments.org`, `titus.fkidg1.uni-frankfurt.de`, `sanskrit-lexicon.uni-koeln.de`, `wisdomlib.org` (root only — see Ayurveda caveat below), `subhashita.com` and `dsbcproject.org` are all reachable (HTTP 200). **`sarit.indology.info` times out (curl exit 28) and `niimh.nic.in` fails TLS outright on every path (curl exit 35, no HTTP response at all)** — not a 403/407 policy block (the proxy's own status endpoint shows no relay failure recorded), a genuine connection-level failure, the same class this project has already met with wisdomlib/sacred-texts/madhwakart et al.: reachable from GitHub Actions or a residential/phone connection, not from here. So neither SARIT nor NIIMH — the two sources the original brief was most enthusiastic about — could be used directly; every recommendation below is a real alternative that **is** reachable now.
@@ -1558,6 +1588,23 @@ complete record, not just a live queue.
 
 ## Vedic-specific, still genuinely open
 
+- **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are
+  explained rather than mysterious: the **Vālakhilya** (RV 8.49–8.55, 8.57, 8.59)
+  has no bhāṣya on Wikisource at all — much of the manuscript tradition transmits
+  it apart from Sāyaṇa — and 66 more are the first half of each **dvipadā** pair
+  in RV 1.65–1.70, which the edition glosses jointly and DGE splits in two. The
+  archive.org OCR route (`archive_sayana.py`, kept and unchanged) does cover the
+  Vālakhilya and is the obvious next attempt if that gap matters.
+- **No commentary layer on the Atharvaveda (5,977 items), Śukla Yajurveda
+  (1,975) or Taittirīya Saṃhitā (696)** — all three still at zero.
+  `import_veda_phase2.py` is deployed and tested but has never been run for real;
+  it wants Griffith + Whitney–Lanman, Griffith, and Keith respectively.
+- **142 Sāmaveda mantras have no Ṛgveda parallel to inherit from** (114 carry no
+  `rigveda_ref` at all, 8 have a bad one, 19 point at Ṛgveda mantras that are
+  themselves in the Vālakhilya/dvipadā gaps, 1 unresolvable). There is no other
+  route to a Sāmaveda commentary: Griffith follows Benfey's Rāṇāyanīya numbering,
+  which does not line up with DGE's Kauthuma sequence.
+
 (Full detail in `veda_toolkit/README.md` §7.)
 - Accented padapāṭha, ṛṣi/devatā/chandas for Taittirīya — not present in
   its ITRANS source.
@@ -1570,6 +1617,18 @@ complete record, not just a live queue.
   text/audio pairing still open.
 
 ## Known unresolved bugs
+
+- **`github-advanced-security` fails on every PR, and it is not any PR's diff.**
+  GitHub's Copilot Autofix agent dies against its own backend with
+  `CAPIError: 400 The requested model is not supported`
+  (`COPILOT_AGENT_MODEL: sweagent-capi:claude-opus-4.6`). Confirmed not ours
+  three ways: CodeQL's three real analyses (python, javascript-typescript,
+  actions) pass on the same commits; PR #56 shows the identical failure and was
+  merged anyway; and it failed again on a **documentation-only** commit in #57.
+  Nothing in this repository can fix it — it is GitHub-side, and either it
+  recovers on its own or the check wants disabling in the repo's security
+  settings, which is the project lead's call. **Do not re-run it and do not
+  re-investigate it**; check whether CodeQL is green instead.
 
 - **Six things reported from a real phone on 18 Aug 2026, with two screenshots — noted only, not started, at the project lead's instruction ("just note these, I will give a go ahead shortly"). Each one was grounded in the code before being written down, so the next session starts from a cause and not a symptom. Where a cause is stated below it was read out of the source; where it is a guess it says so.**
 

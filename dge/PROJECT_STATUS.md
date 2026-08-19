@@ -311,6 +311,74 @@ A third delivery (`HARIVAMSA_FIX.md` + `parse_harivamsa.py`) correctly identifie
 ### Data footprint / multi-repo planning
 Every text in this batch is plain UTF-8 Sanskrit verse text — no images, no audio. Even the two largest (Mahābhārata, ~100K verses; Rāmāyaṇa, ~24K) land in the single-digit MB range fully ingested, negligible against the ~610 MB projected total in the repo-splitting table below. Confirmed this stays true going forward for anything ingested through this pipeline: the automation's own design deliberately keeps text-only corpora in-repo and only pushes to a **separate data repo** (not yet created — see proposal below) once a *specific* addition would cross roughly 1 GB, which today means the Kosha full dataset and the Sarvamoola search index, not this batch. No new repo is needed for today's work; the trigger point for actually creating one remains the same as already documented below.
 
+## Round 6 (18 Aug 2026) — Sāyaṇa lands on the Ṛgveda, and the Sāmaveda inherits it
+
+PR #57, branch `claude/new-session-65y87b`. Before this the Ṛgveda carried six
+European translations and **no traditional commentary at all**; Sāyaṇa is the
+first bhāṣya to enter the Vedic corpus.
+
+- **Sāyaṇa on 10,388 of 10,552 Ṛgveda mantras (98.45%)**, from **Sanskrit
+  Wikisource** — transcribed text, not OCR, wrapped in a `{{सायणभाष्यम्|…}}`
+  template, one page per sūkta, CC BY-SA with the share-alike obligation written
+  into each file's `commentary_sources` rather than assumed. Per maṇḍala 95.5%
+  (8) to 100% (7). `tools/sayana_smriti/wikisource_sayana.py`, 42 tests.
+- **Sāyaṇa on 1,733 of 1,875 Sāmaveda mantras (92%)** by propagation, no network:
+  DGE already recorded which Ṛgveda mantra each one reuses. Every propagated
+  entry says so in its own text and records `commentary_via`, so no reader is
+  told this is a Sāmaveda bhāṣya — Sāyaṇa's own Sāmaveda-bhāṣya has never been
+  digitised.
+- **The alignment anchors on the mantra, not the verse number.** Each page prints
+  the saṃhitā-pāṭha, the pada-pāṭha twice, then the gloss, so a gloss is cut
+  between one mantra's printed text and the next — both ends matched against text
+  DGE already holds, which is what makes a wrong cut impossible to mistake for a
+  right one. The number is kept as a *second* witness and recorded per cut; it
+  agreed on 99.9%, which is worth knowing precisely because it was not required.
+  RV 10.90 prints only 12 of its 16 numbers, so requiring them would have cost
+  mantras outright.
+
+**Four defects found by reading pairings, none by any score.** This is the point
+worth carrying forward: coverage and a similarity median are both untouched by a
+systematic off-by-one, because every mantra still sits above *some* commentary.
+
+1. The next mantra's printed saṃhitā-pāṭha trailed the previous gloss, because a
+   block's start came from the best-scoring match rather than the earliest. It
+   made *correct* cuts read as one-late; reading them was the only way to tell.
+2. RV 1.65–1.70 are dvipadā — printed as pairs of half-verses under one combined
+   gloss that DGE splits into two mantras. The first of each pair has no gloss of
+   its own and is refused rather than given its neighbour's (66 cuts).
+3. Stranded akṣaras and varga tallies at cut edges, trimmed only where the
+   fragment is demonstrably the mantra's own text: Sāyaṇa disposes of a repeated
+   refrain in three words (`पूर्वं व्याख्याता`), so length alone cannot decide.
+4. A flat 30-character slack in the matcher is a tenth of a long triṣṭubh but
+   three quarters of a short gāyatrī pāda. Scaling it took the median match from
+   0.86 to 1.00 and coverage from 97.2% to 98.45%.
+
+**`propagate_samaveda.py` trusted `rigveda_ref` outright, and should not have.**
+Eight of the 1,760 refs name a verse that is not the Sāmaveda mantra's own — SV
+890 and 891 name each other's. Following one hands the reader Sāyaṇa on a
+different hymn and reads perfectly plausibly. The ref is now checked against the
+mantra text on both sides before it is trusted. **The eight are errors in DGE's
+own Sāmaveda data and want fixing at source — logged in `PENDING.md`.**
+
+**Two corrections to `tools/sayana_smriti/SOURCES.md`,** which now carries the
+full evidence in §6 and §7. Coverage is 1,019 of 1,028 sūktas, not the 1,022
+recorded: that counted search *hits*, of which 29 were pagination duplicates and
+3 were Aitareya Brāhmaṇa pages. Deduplicated the search returns 990 — but the
+search index lags the wiki, and probing the 38 it omits **by title** finds the
+template on 29 more. The nine that genuinely lack it are the **Vālakhilya** (RV
+8.49–8.55, 8.57, 8.59), which much of the manuscript tradition transmits apart
+from Sāyaṇa; that is most of why maṇḍala 8 trails the rest.
+
+**The indent trap, met twice in one session.** `save_json` wrote at indent 1
+while the Ṛgveda and Sāmaveda saṃhitā files are written at 2 — reformatting every
+line of a 10,000-mantra file to add one key per mantra, 233,667 changed lines for
+a 21,949-line change. The fix is `common.sniff_indent`, and `save_json` now
+preserves whatever width a file already has, so the whole toolchain is covered
+rather than the one importer that hit it.
+
+The archive.org OCR route is kept unchanged: an independent witness, and it
+covers the Vālakhilya, which Wikisource does not.
+
 ## Kosha full-scale ingestion (project lead's ~2.3 GB dictionary collection)
 The import pipeline already exists and is proven (`kosha_toolkit/importers/`) — it produced the current sample from the same kind of source. What's needed to go from sample to full dataset:
 1. Run `kosha_toolkit/importers/DGE_Kosha_import.ipynb` in Google Colab, pointed at the extracted 2.3 GB `dict.zip`.

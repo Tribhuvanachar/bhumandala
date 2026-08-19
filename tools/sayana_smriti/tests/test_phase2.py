@@ -14,7 +14,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from parsers import sacredtexts_veda as stv     # noqa: E402
 from parsers import wikisource as wk            # noqa: E402
-from propagate_samaveda import normalise_ref    # noqa: E402
+from propagate_samaveda import normalise_ref, ref_agreement  # noqa: E402
+from common import sniff_indent               # noqa: E402
 
 HERE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fixtures")
 
@@ -165,6 +166,60 @@ class FakeFetcher:
     def get(self, url, allow_missing=False):
         self.asked.append(url)
         return self.pages.get(url)
+
+
+class TestSamavedaRefVerification(unittest.TestCase):
+    """rigveda_ref is source data, and eight of the corpus's 1,760 are wrong."""
+
+    RV_616_10 = "अग्न आ याहि वीतये गृणानो हव्यदातये । नि होता सत्सि बर्हिषि ॥"
+
+    def test_the_same_verse_agrees(self):
+        self.assertGreater(ref_agreement(self.RV_616_10, self.RV_616_10), 0.95)
+
+    def test_a_samaveda_variant_reading_still_agrees(self):
+        # SV keeps its own readings: 'भुवो' where the Ṛgveda has 'भवा'.
+        sv = "अग्ने त्वं नो अन्तम उत त्राता शिवो भुवो वरूथ्यः ॥"
+        rv = "अग्ने त्वं नो अन्तम उत त्राता शिवो भवा वरूथ्यः ॥"
+        self.assertGreater(ref_agreement(sv, rv), 0.55)
+
+    def test_reordering_for_the_chant_is_not_read_as_disagreement(self):
+        # The word-overlap half of the measure exists for this: the Sāmaveda
+        # rearranges words to fit the melody, which a sequence ratio alone
+        # scores as a different verse.
+        rv = "अभि प्रिया दिवस्पदा सोमो हिन्वानो अर्षति । विप्रस्य धारया कविः ॥"
+        sv = "विप्रस्य धारया कविः अभि प्रिया दिवस्पदा सोमो हिन्वानो अर्षति ॥"
+        self.assertGreater(ref_agreement(sv, rv), 0.8)
+
+    def test_a_wrong_ref_is_caught(self):
+        # SV 385's ref names RV 4.39.6, which shares no word with it. Following
+        # it would hand the reader Sāyaṇa on an unrelated verse, and it would
+        # read perfectly plausibly.
+        sv = "एदु मधोर्मदिन्तरꣳ सिञ्चाध्वर्यो अन्धसः ॥"
+        rv = "दधिक्राव्णो अकारिषं जिष्णोरश्वस्य वाजिनः । सुरभि नो मुखा करत् ॥"
+        self.assertLess(ref_agreement(sv, rv), 0.55)
+
+    def test_empty_text_never_looks_like_agreement(self):
+        self.assertEqual(ref_agreement("", self.RV_616_10), 0.0)
+        self.assertEqual(ref_agreement(self.RV_616_10, ""), 0.0)
+
+
+class TestIndentSniffing(unittest.TestCase):
+    """The corpus is not written at one indent width, and reformatting a
+    10,000-item file to add one key per item buries the real change."""
+
+    def test_reads_two(self):
+        self.assertEqual(sniff_indent('{\n  "schema": "vedic_text",\n  "items": []\n}'), 2)
+
+    def test_reads_one(self):
+        self.assertEqual(sniff_indent('{\n "schema": "smriti",\n "items": []\n}'), 1)
+
+    def test_falls_back_when_there_is_nothing_to_read(self):
+        self.assertEqual(sniff_indent("{}"), 1)
+        self.assertEqual(sniff_indent(""), 1)
+
+    def test_ignores_the_opening_brace_line(self):
+        # The first line carries no indent and must not be measured.
+        self.assertEqual(sniff_indent('{\n    "a": 1\n}'), 4)
 
 
 class TestMinorSmritis(unittest.TestCase):
