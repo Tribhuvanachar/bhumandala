@@ -22,7 +22,8 @@
     font: LS.get("font",18),
     gana: LS.get("gana",0),      // 0 = all
     pada: LS.get("pada",""),     // "" = all
-    set: LS.get("set",""),       // "" = all | "seṭ" | "aniṭ"
+    set: LS.get("set",""),       // "" = all | "seṭ" | "aniṭ" | "veṭ"
+    karma: LS.get("karma",""),   // "" = all | "सकर्मक" | "अकर्मक" | "द्विकर्मक"
     sort: LS.get("sort","code"),
     q:"", openId: LS.get("open",null),
     vset: null   // map of codes that have dhātuvṛtti entries (Mādhavīya/Kṣīra/Dhātupradīpa)
@@ -44,6 +45,7 @@
       if(state.gana && it.gana!==state.gana) return false;
       if(state.pada && it.pada_code!==state.pada) return false;
       if(state.set && it.set!==state.set) return false;
+      if(state.karma && it.karma!==state.karma) return false;
       if(q && it._hay.indexOf(q)<0) return false;
       return true;
     });
@@ -88,7 +90,13 @@
     }
     h+=kv("गणः · class", it.gana+" — "+esc(tl(GANA[it.gana]||"")));
     h+=kv("पदम् · voice", esc(tl(it.pada))+" ("+it.pada_iast+")"+(it.pada_trad?' · <span class="'+devCls+'">'+esc(tl(it.pada_trad))+'</span>':''));
-    if(it.set) h+=kv("सेट्/अनिट् · iṭ", '<b>'+(it.set==="seṭ"?"सेट् (seṭ)":it.set==="aniṭ"?"अनिट् (aniṭ)":esc(it.set))+'</b>');
+    if(it.set) h+=kv("सेट्/अनिट् · iṭ", '<b>'+(it.set==="seṭ"?"सेट् (seṭ)":it.set==="aniṭ"?"अनिट् (aniṭ)":it.set==="veṭ"?"वेट् (veṭ)":esc(it.set))+'</b>');
+    if(it.karma) h+=kv("कर्म · transitivity", '<b>'+esc(it.karma)+'</b>');
+    if(it.artha_extra && (it.artha_extra.hi||it.artha_extra.en)){
+      h+=kv("अर्थः · gloss", (it.artha_extra.hi?('<span class="deva">'+esc(it.artha_extra.hi)+'</span>'):'')
+        +(it.artha_extra.hi&&it.artha_extra.en?' &nbsp;·&nbsp; ':'')
+        +(it.artha_extra.en?esc(it.artha_extra.en):''));
+    }
     if(it.anunasika_it) h+=kv("इत् · marker", "anunāsika it (nasal marker present in upadeśa)");
     h+='<div class="acts">'
       +'<a class="btn ai" href="prakriya.html#'+it.id+'">⚙ प्रक्रिया · तिङन्त</a>'
@@ -135,6 +143,7 @@
   }
   function syncGanaChips(){ document.querySelectorAll("#dh-ganaChips .chip").forEach(function(c){ c.classList.toggle("on", parseInt(c.dataset.g,10)===state.gana); }); }
   function syncSetChips(){ document.querySelectorAll("[data-set]").forEach(function(c){ c.classList.toggle("on", c.dataset.set===state.set); }); }
+  function syncKarmaChips(){ document.querySelectorAll("[data-karma]").forEach(function(c){ c.classList.toggle("on", c.dataset.karma===state.karma); }); }
   function syncPadaChips(){ document.querySelectorAll("[data-p]").forEach(function(c){
     var on=(c.dataset.p===state.pada);
     c.classList.toggle("on", on && c.dataset.p==="");
@@ -166,6 +175,8 @@
       state.pada=c.dataset.p; LS.set("pada",state.pada); syncPadaChips(); rerender(); }); });
     document.querySelectorAll("[data-set]").forEach(function(c){ c.addEventListener("click",function(){
       state.set=c.dataset.set; LS.set("set",state.set); syncSetChips(); rerender(); }); });
+    document.querySelectorAll("[data-karma]").forEach(function(c){ c.addEventListener("click",function(){
+      state.karma=c.dataset.karma; LS.set("karma",state.karma); syncKarmaChips(); rerender(); }); });
     $("#dh-sort").addEventListener("change",function(e){ state.sort=e.target.value; LS.set("sort",state.sort); rerender(); });
     $("#dh-scriptSeg").addEventListener("click",function(e){ var b=e.target.closest("button"); if(!b)return;
       [].forEach.call(e.currentTarget.children,function(x){x.classList.remove("on");}); b.classList.add("on");
@@ -233,7 +244,7 @@
     if(LS.get("dark",false)) document.body.classList.add("dark");
     var ss=$("#dh-scriptSeg"); if(ss) ss.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on",b.dataset.s===state.script); });
     $("#dh-sort").value=state.sort;
-    buildGanaChips(); syncPadaChips(); syncSetChips(); wire(); applyFont();
+    buildGanaChips(); syncPadaChips(); syncSetChips(); syncKarmaChips(); wire(); applyFont();
     fetch("data/vedanga/vyakarana/vritti/index.json").then(function(r){return r.ok?r.json():null;}).then(function(idx){
       state.vset={}; if(idx) (idx.available||[]).forEach(function(c){ state.vset[c]=1; });
       // if a row is already open, re-render its body so the vṛtti toggle appears
