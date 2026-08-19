@@ -160,6 +160,15 @@
    "format": "IAST plaintext with reference markers, transliterated to Devanagari",
    "importer": "shankara_bhashya.py",
    "note": "Chunked on source reference markers; verify marker regex per work on first run. English (Thibaut/Sitarama Sastri/Mahadeva Sastri, PD) = follow-up."
+  },
+  {
+   "id": "darshana/nyaya/prakarana/tarkasangraha",
+   "title": "Annambhatta, Tarkasangraha (mula + Dipika)",
+   "target": "darshana/nyaya/prakarana/tarkasangraha/{mula,tika_dipika}",
+   "url": "GRETIL corpustei TEI transformation (mula) + antsdi_u.htm (Dipika/Prakasika/Balapriya, bundled)",
+   "format": "GRETIL UTF-8 IAST, AnTs_N sutra markers",
+   "importer": "darshana_gretil.py (tarkasangraha_mula, tarkasangraha_dipika)",
+   "note": "tarkasangraha.com is a JS-rendered SPA with no static/API text endpoint found -- not usable for bulk import. mula covers all 81 padartha-nirupana sutras cleanly (AnTs_1..81); the antsdi_u.htm dipika source only carries AnTs_ markers for that same 81-sutra span -- the pramana-nirupana portion (pratyaksa/anumana/upamana/sabda) that follows in that file is unmarked and lands in one final item tagged 'unsegmented'. The _r.txt 'raw' variant looked cleaner but is actually 8-bit REE-encoded, not IAST -- use antsdi_u.htm, not antsdi_r.txt."
   }
  ],
  "ocr": [

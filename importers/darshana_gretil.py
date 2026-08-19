@@ -20,6 +20,7 @@ Run:  python importers/dispatch.py <id>
       python importers/darshana_gretil.py --list
 """
 
+import html
 import re
 import sys
 
@@ -47,6 +48,21 @@ DARSHANA_GRETIL = {
         unit="adhyaya",
         urls=[BASE + "1_sanskr/6_sastra/3_phil/nyaya/nystik_u.htm"]),
 
+    "tarkasangraha_mula": dict(
+        name="Annambhaṭṭa, Tarkasaṅgraha (mūla)",
+        author="अन्नम्भट्टः",
+        schema="grantha_mula_text",
+        target="darshana/nyaya/prakarana/tarkasangraha/mula",
+        unit="sutra",
+        # TEI transformation: one clean <p id="AnTs_N"> per sutra, no
+        # commentary mixed in. Only covers the padartha-nirupana portion
+        # (sutras 1-81, i.e. up to and including the "sapta padarthah"
+        # summary sutra) -- the pramana-nirupana portion (pratyaksa /
+        # anumana / upamana / sabda) that traditionally follows isn't
+        # marked up with AnTs_ ids in this GRETIL file at all.
+        urls=["https://gretil.sub.uni-goettingen.de/gretil/corpustei/"
+              "transformations/html/sa_annaMbhatta-tarkasaMgraha.htm"]),
+
     "tarkasangraha_dipika": dict(
         name="Annambhaṭṭa, Tarkasaṅgraha with Dīpikā",
         author="अन्नम्भट्टः",
@@ -54,8 +70,16 @@ DARSHANA_GRETIL = {
         tika_title="तर्कदीपिका",
         target="darshana/nyaya/prakarana/tarkasangraha/tika_dipika",
         unit="prakarana",
-        # the _r.txt raw variant is cleaner than the _u.htm rendering
-        urls=[BASE + "1_sanskr/6_sastra/3_phil/nyaya/antsdi_r.txt"]),
+        # The _r.txt "raw" variant is NOT plain IAST -- it's Ronald
+        # Emmerick's 8-bit WordPerfect encoding (diacritics live in the
+        # 160-255 byte range per a table in its own header) and http_get's
+        # forced UTF-8 decode mangles every accented character into U+FFFD.
+        # _u.htm is the same content pre-converted to real UTF-8 by GRETIL
+        # -- use that instead. Bundles Dipika (Annambhatta's own
+        # auto-commentary) with Nilakantha's Prakasika and Balapriya mixed
+        # in per-sutra; a cleaner per-tika split would need separate
+        # sources for those layers.
+        urls=[BASE + "1_sanskr/6_sastra/3_phil/nyaya/antsdi_u.htm"]),
 
     "tattvacintamani_shabda": dict(
         name="Gaṅgeśa, Tattvacintāmaṇi — Śabdakhaṇḍa",
@@ -202,6 +226,76 @@ def parse(raw, spec):
     return items, attribution
 
 
+# --- Tarkasangraha: dedicated parsers -----------------------------------
+# Neither source uses the "// ABBR_n.n //" / heading-driven conventions
+# SECTION_PATTERNS targets, so they get their own marker regexes instead
+# of going through find_sections().
+
+_TEI_SUTRA = re.compile(r'<p id="AnTs_(\d+)">(.*?)</p>', re.S)
+
+
+def _tei_clean(inner):
+    inner = re.sub(r'<span class="ref">.*?</span>', "", inner, flags=re.S)
+    inner = re.sub(r"<[^>]+>", " ", inner)
+    inner = html.unescape(inner)
+    return clean(inner)
+
+
+def parse_tarkasangraha_mula(raw, spec):
+    items = []
+    for match in _TEI_SUTRA.finditer(raw):
+        num, inner = match.groups()
+        text = _tei_clean(inner)
+        if not text:
+            continue
+        items.append(build_item(spec, f"sutra_{num}", f"AnTs_{num}", text, "",
+                                 section="sutra"))
+    return items, ""
+
+
+# AnTs_1ab / AnTs_1cd (pada-split mangala verse), AnTs_10[1] / AnTs_10[2]
+# (a long sutra split into sub-parts), AnTs_2 .. AnTs_81 (the common case).
+_DIPIKA_MARKER = re.compile(r"AnTs_(?P<num>\d+)(?:\[\d+\])?[a-z]{0,4}")
+_DIPIKA_START = "maṅgalavādaḥ"  # first heading of the actual text, past the Balapriya preface
+
+
+def parse_tarkasangraha_dipika(raw, spec):
+    start = raw.find(_DIPIKA_START)
+    text = to_text(raw[start:] if start >= 0 else raw)
+    matches = list(_DIPIKA_MARKER.finditer(text))
+
+    # A marker only starts a new item the first time its number is reached
+    # in sequence -- ab/cd pairs and [1]/[2] sub-parts share their sutra's
+    # number and fold into that same item instead of starting new ones.
+    boundaries, expected = [], 1
+    for match in matches:
+        if int(match.group("num")) == expected:
+            boundaries.append(match)
+            expected += 1
+
+    items = []
+    for index, match in enumerate(boundaries):
+        num = match.group("num")
+        chunk_start = match.end()
+        chunk_end = boundaries[index + 1].start() if index + 1 < len(boundaries) else len(text)
+        chunk = _DIPIKA_MARKER.sub(" ", text[chunk_start:chunk_end])
+        body = clean(chunk)
+        if not body:
+            continue
+        # The source only tags the padartha-nirupana portion (sutras
+        # 1-81) with AnTs_ markers; everything past the last boundary is
+        # the pramana-nirupana portion (pratyaksa/anumana/upamana/sabda
+        # khandas) running on with no per-sutra markers at all. Flag it
+        # rather than silently mislabel that whole remainder as sutra
+        # 81's own commentary.
+        is_tail = index == len(boundaries) - 1
+        reference = (f"AnTs_{num} onward (unsegmented — no further AnTs_ "
+                      "markers in source)" if is_tail else f"AnTs_{num}")
+        items.append(build_item(spec, f"prakarana_{num}", reference, body, "",
+                                 section="prakarana", unsegmented=is_tail))
+    return items, ""
+
+
 def build_item(spec, item_id, reference, iast_text, attribution, section="",
                unsegmented=False):
     item = {
@@ -222,6 +316,13 @@ def build_item(spec, item_id, reference, iast_text, attribution, section="",
     return item
 
 
+# ids with a dedicated parser instead of the generic heading-driven one
+_CUSTOM_PARSERS = {
+    "tarkasangraha_mula": parse_tarkasangraha_mula,
+    "tarkasangraha_dipika": parse_tarkasangraha_dipika,
+}
+
+
 def run(tid):
     spec = DARSHANA_GRETIL[tid]
     chunks = []
@@ -235,9 +336,10 @@ def run(tid):
     if not chunks:
         raise SystemExit(f"{tid}: no source fetched")
 
+    parse_fn = _CUSTOM_PARSERS.get(tid, parse)
     items, attribution = [], ""
     for raw in chunks:
-        part, attr = parse(raw, spec)
+        part, attr = parse_fn(raw, spec)
         items.extend(part)
         attribution = attribution or attr
 
