@@ -248,6 +248,22 @@ def main():
     failures += not check("mula and its tika share one article id",
                           ids[0] == ids[1] == "13700", ids[:2])
 
+    # Clipboard chrome. A pasted-from-Word selection leaves StartFragment /
+    # EndFragment behind, and on this source the comment delimiters are gone,
+    # so the bare words sit in the text -- 1,590 of Nyaya Sudha's 9,929
+    # entries carried one. On short entries it dragged the Devanagari ratio
+    # under the verifier's floor and failed the whole merged tree.
+    failures += not check("bare EndFragment stripped",
+                          P.clean_text("संज्ञानं भोगः ।\nEndFragment") == "संज्ञानं भोगः ।",
+                          P.clean_text("संज्ञानं भोगः ।\nEndFragment"))
+    failures += not check("commented form stripped",
+                          P.clean_text("<!--StartFragment-->अथ<!--EndFragment-->") == "अथ",
+                          P.clean_text("<!--StartFragment-->अथ<!--EndFragment-->"))
+    # A word that merely begins with the token is not chrome.
+    failures += not check("word boundary respected",
+                          P.clean_text("StartFragmentation") == "StartFragmentation",
+                          P.clean_text("StartFragmentation"))
+
     print()
     if failures:
         print(f"{failures} check(s) FAILED")
