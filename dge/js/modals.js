@@ -308,3 +308,37 @@ window.sendTypoReport = function() {
 
   window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
 };
+
+// Contact Us — same mailto pattern as sendTypoReport above: no backend on
+// a static site to actually receive a POST, so this opens the visitor's
+// own email app with everything pre-filled instead of pretending to
+// submit a form that goes nowhere.
+window.sendContactMessage = function() {
+  const nameEl = document.getElementById('contactName');
+  const emailEl = document.getElementById('contactEmail');
+  const phoneEl = document.getElementById('contactPhone');
+  const subjectEl = document.getElementById('contactSubject');
+  const messageEl = document.getElementById('contactMessage');
+  const name = nameEl && nameEl.value ? nameEl.value.trim() : '';
+  const fromEmail = emailEl && emailEl.value ? emailEl.value.trim() : '';
+  const phone = phoneEl && phoneEl.value ? phoneEl.value.trim() : '';
+  const subjectText = subjectEl && subjectEl.value ? subjectEl.value.trim() : '';
+  const message = messageEl && messageEl.value ? messageEl.value.trim() : '';
+
+  if (!message) {
+    if (typeof showToast === 'function') showToast('Please write a message first.');
+    return;
+  }
+
+  const toEmail = (typeof appConfig !== 'undefined' && appConfig.contactEmail) ? appConfig.contactEmail : 'sanatanavidyagurukulam@gmail.com';
+  const subject = encodeURIComponent(subjectText || `DGE Contact — ${name || 'website visitor'}`);
+  const bodyLines = [
+    `Name: ${name || '(not given)'}`,
+    `Reply-to email: ${fromEmail || '(not given)'}`,
+    `Phone: ${phone || '(not given)'}`,
+    '',
+    message
+  ];
+  const body = encodeURIComponent(bodyLines.join('\n'));
+  window.location.href = `mailto:${toEmail}?subject=${subject}&body=${body}`;
+};

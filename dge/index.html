@@ -220,7 +220,61 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
+  <div class="site-footer-links" id="siteFooterLinks">
+    <button class="footer-link" onclick="window.openAboutModal()">About Us</button>
+    <span class="footer-sep">·</span>
+    <button class="footer-link" onclick="window.openModal('contactModal')">Contact Us</button>
+    <span class="footer-sep">·</span>
+    <button class="footer-link" onclick="window.openAboutModal()">Credits</button>
+    <span class="footer-sep">·</span>
+    <button class="footer-link" onclick="window.openModal('licenseModal')">License</button>
+    <span class="footer-sep">·</span>
+    <button class="footer-link" onclick="window.openModal('termsModal')">Terms &amp; Conditions</button>
+  </div>
   <div class="app-footer" id="appFooter">v4.57.0 (Modular)</div>
+</div>
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size:16px;">✉️ Contact Us</h3>
+      <button class="btn-sm" onclick="window.closeModal('contactModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12.5px; color:var(--muted-text); margin:0 0 14px;">This opens your email app with the message pre-filled — the site itself sends nothing and stores nothing you type here.</p>
+      <div class="provider-key-row"><label>Name</label><input type="text" id="contactName" class="modal-input" style="margin-top:4px;"></div>
+      <div class="provider-key-row"><label>Email</label><input type="email" id="contactEmail" class="modal-input" style="margin-top:4px;"></div>
+      <div class="provider-key-row"><label>Phone <span style="font-weight:400; color:var(--muted-text);">(optional)</span></label><input type="tel" id="contactPhone" class="modal-input" style="margin-top:4px;"></div>
+      <div class="provider-key-row"><label>Subject</label><input type="text" id="contactSubject" class="modal-input" style="margin-top:4px;"></div>
+      <div class="provider-key-row"><label>Message</label><textarea id="contactMessage" class="modal-input" style="height:100px; margin-top:4px;"></textarea></div>
+      <button class="btn-sm" style="width:100%; background:var(--accent-red); color:#fff; border:none; margin-top:6px;" onclick="window.sendContactMessage()">✉️ Open Email to Send</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="licenseModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size:16px;">📄 License</h3>
+      <button class="btn-sm" onclick="window.closeModal('licenseModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body" style="font-size:13px; line-height:1.6;">
+      <p>The software running this site is open source, under the <a href="https://github.com/Tribhuvanachar/bhumandala/blob/main/LICENSE" target="_blank" rel="noopener" style="color:var(--accent-red); font-weight:700;">Apache License 2.0</a>.</p>
+      <p>The texts themselves come from many different sources — public domain editions, individually credited open-licence digitisation projects, and original work by this project's own scholars and volunteers. Each text's specific source and licence, where applicable, is recorded with that text rather than repeated here, since it differs work to work.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="termsModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size:16px;">📜 Terms &amp; Conditions</h3>
+      <button class="btn-sm" onclick="window.closeModal('termsModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body" style="font-size:13px; line-height:1.6;">
+      <p style="color:var(--muted-text); font-style:italic;">Not yet written. This site is a free, ad-free educational and devotional resource; a full terms-of-use page for it hasn't been drafted yet. Contact us if you have a question in the meantime.</p>
+    </div>
+  </div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -917,6 +971,7 @@
      visitor downloading several hundred KB of SDK that never runs. -->
 <script src="js/user-auth.js?v=4.63.0"></script>
 <script src="js/user-roles.js?v=4.63.0"></script>
+<script src="js/copy-guard.js?v=1"></script>
 
 <script>
   if (typeof console.log === "function") {
