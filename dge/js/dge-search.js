@@ -21,13 +21,25 @@
   if (isNode) {
     var fs = require('fs'), path = require('path');
     fetchJSON = function (base, rel) {
+      // rel is a literal filesystem path (e.g. from safeTrigram()) -- joined
+      // as-is, no URL decoding involved.
       var p = path.join(base, rel);
       if (!fs.existsSync(p)) return Promise.resolve(null);
       return Promise.resolve(JSON.parse(fs.readFileSync(p, 'utf8')));
     };
   } else {
     fetchJSON = function (base, rel) {
-      return fetch(base + '/' + rel).then(function (r) { return r.ok ? r.json() : null; });
+      // rel is a literal filename (e.g. from safeTrigram()); percent-encode
+      // each path SEGMENT (not the whole rel, which would also escape the
+      // '/' separators) so a literal '^'/'$' in a trigram's filename reaches
+      // the server as the same byte it is on disk. Every caller of
+      // fetchJSON hands it a literal path, never a pre-encoded one -- this
+      // is the one place that turns literal into URL, so the two can't drift
+      // out of sync the way a per-caller "%XX" escape once did (a browser's
+      // fetch() percent-DEcodes "%XX" in a URL before requesting it, so a
+      // filename that already contained a literal "%" 404'd).
+      var url = base + '/' + rel.split('/').map(encodeURIComponent).join('/');
+      return fetch(url).then(function (r) { return r.ok ? r.json() : null; });
     };
   }
 
@@ -37,20 +49,16 @@
   // any of them had to download whole; this fetches exactly the trigram it
   // asked for.
   //
-  // The file is named with the trigram's LITERAL characters (real trigrams
-  // are always {A-Za-z^$}, all filesystem-safe as-is -- see
-  // safe_trigram_filename()'s docstring). encodeURIComponent here only
-  // percent-encodes ^/$ for the URL itself, the normal way any URL
-  // references a file whose name has characters special to URLs but not to
-  // filesystems. Do NOT bake a custom "%XX" escape into the filename on
-  // either side instead of this: fetch() percent-DEcodes "%XX" in a URL
-  // before requesting it, so a filename already containing a literal "%"
-  // silently 404s -- that was a real bug here, caught by checking the
-  // published index over the network rather than trusting a Node-local
-  // filesystem read (which never goes through URL parsing at all).
+  // Returns the trigram's LITERAL filename (real trigrams are always
+  // {A-Za-z^$}, all filesystem-safe as-is -- see safe_trigram_filename()'s
+  // docstring) -- NOT URL-encoded here. Percent-encoding ^/$ for the URL is
+  // fetchJSON's job (its browser branch encodes each path segment), because
+  // its Node branch needs this same literal string as a real filesystem
+  // path instead. Encoding it here once, for only one of the two branches
+  // fetchJSON can take, was a real bug: it made the Node-local test (used to
+  // validate this fix) pass while the browser path was silently broken.
   function safeTrigram(tg) {
-    var safe = tg.replace(/[^0-9A-Za-z^$]/g, '_') || '_';
-    return encodeURIComponent(safe);
+    return tg.replace(/[^0-9A-Za-z^$]/g, '_') || '_';
   }
 
   // How many of a trigram set's members to actually fetch, rarest first (by
