@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 1651,
-  "loaded": 920,
-  "items": 353850
+  "loaded": 922,
+  "items": 354056
  },
  "sections": {
   "agama": {
@@ -13,8 +13,8 @@
   },
   "darshana": {
    "total": 246,
-   "loaded": 50,
-   "items": 16121
+   "loaded": 52,
+   "items": 16327
   },
   "dasa_sahitya": {
    "total": 67,
@@ -186,9 +186,9 @@
   "darshana/nyaya/prachina_nyaya/nyaya_sutra/tatparya_tika": 0,
   "darshana/nyaya/prachina_nyaya/nyaya_sutra/varttika_uddyotakara": 0,
   "darshana/nyaya/prakarana/tarkabhasha/mula": 0,
-  "darshana/nyaya/prakarana/tarkasangraha/mula": 0,
+  "darshana/nyaya/prakarana/tarkasangraha/mula": 81,
   "darshana/nyaya/prakarana/tarkasangraha/tika_bhaskarodaya": 0,
-  "darshana/nyaya/prakarana/tarkasangraha/tika_dipika": 0,
+  "darshana/nyaya/prakarana/tarkasangraha/tika_dipika": 125,
   "darshana/nyaya/prakarana/tarkasangraha/tika_nilakanthi": 0,
   "darshana/nyaya/prakarana/tarkasangraha/tika_nyayabodhini": 0,
   "darshana/nyaya/prakarana/tarkasangraha/tika_padakritya": 0,
