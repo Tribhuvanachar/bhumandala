@@ -133,13 +133,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Shows/hides the "💝 Support This Project" button based on admin
-// config (SPONSOR_CONFIG.enabled in config.js) — not an end-user toggle.
+// Shows/hides the "💝 Support This Project" button based on admin config
+// (SPONSOR_CONFIG.enabled, from admin/content/reader.json) — not an
+// end-user toggle. window.SPONSOR_CONFIG is set asynchronously by
+// core.js's fetch of reader.json, a promise that does not resolve before
+// DOMContentLoaded fires — checking it right on DOMContentLoaded always
+// read `undefined` and left the button hidden regardless of the admin
+// setting. Wait on the same promise core.js exposes instead. This must
+// stay inside the DOMContentLoaded callback, not run at parse time:
+// modals.js's own <script> tag loads before core.js's, so
+// window.dgeConfigOverridesPromise does not exist yet at parse time —
+// only by DOMContentLoaded, once every synchronous <script> including
+// core.js has already run, is it guaranteed to be the real promise.
 document.addEventListener('DOMContentLoaded', () => {
-  const btn = document.getElementById('supportProjectBtn');
-  if (btn && typeof SPONSOR_CONFIG !== 'undefined' && SPONSOR_CONFIG && SPONSOR_CONFIG.enabled) {
-    btn.style.display = 'block';
-  }
+  (window.dgeConfigOverridesPromise || Promise.resolve()).then(() => {
+    const btn = document.getElementById('supportProjectBtn');
+    if (btn && typeof SPONSOR_CONFIG !== 'undefined' && SPONSOR_CONFIG && SPONSOR_CONFIG.enabled) {
+      btn.style.display = 'block';
+    }
+  });
 });
 
 window.openSponsorModal = function() {
