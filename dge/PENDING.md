@@ -1641,6 +1641,75 @@ complete record, not just a live queue.
   verified (see above); Yajurveda Samhita/Brahmanam and full
   text/audio pairing still open.
 
+## Dvaita Vedānta extraction — what Nyāya Sudhā left behind
+
+Nyāya Sudhā is **in** (PR #80, merge `307d45f4`): 1,655 of 1,655 leaves,
+0 failed, 46 layers, 9,929 entries, 43.6 MB. It had been shelved on 17 Aug
+on a recon figure of ~105 s per leaf — about 46 hours. Measured against the
+live site it is ~26 s per leaf when the site is quick and ~39 s at night, so
+the real cost was ~14 hours, taken in five four-hour rounds against the
+resumable HTTP cache. Concurrency does not help: four parallel requests took
+70.9 s wall against 104 s serial, because the backend serialises. The
+`_note` on `nyaya_sudha` in `dv_sources.json` has been corrected; the
+grantha stays `enabled: false` because it is done, not because it is
+impossible.
+
+Fixed on the way, so nobody re-investigates it: **`EndFragment` clipboard
+chrome**. Word brackets a pasted selection in `<!--StartFragment-->` /
+`<!--EndFragment-->` comments, and upstream of dvaitavedanta.in the comment
+delimiters were lost, leaving the bare words in the stored text — 1,590 of
+Nyāya Sudhā's 9,929 entries carried one. On two short entries it dragged the
+Devanagari ratio under the verifier's floor and failed the whole merged
+tree, which is why a completed crawl produced no PR. `clean_text()` now
+strips it (`d8075db3`); zero remain in the landed data.
+
+Still open, in the order I would take them:
+
+- **One layer per heading — the extraction's biggest structural problem.**
+  The importer mints a layer from whatever heading string it finds, so
+  section headings become "commentaries". Under `nyaya_sudha` the
+  Nyāyasudhā-parimaḷa is split across **three** directories —
+  `tika_nyayasudhaparimala`, `tika_nyayasudhaparima_a` and `tika_parima_a` —
+  the last two from an OCR-broken `न्यायसुधापरिम ळ` carrying a stray space.
+  Under `later_acharyas/karmavijaya` there are ~60 directories named from
+  truncated summary *sentences*
+  (`tika_prasangadasadadhikaraniyanuvvakhyanasudhaya_kartabuddhimanitishe`,
+  `tika_om_na_prayojanavattvat_om_prayojanavattvahetoriti_sutre_prayojan`).
+  Under `sutra_prasthana/anuvyakhyana`, 68 of its 70 layers are
+  `tika_<adhikaraṇa-name>` holding one item each, and the text inside them is
+  Anuvyākhyāna verse (numbered ॥244॥, ॥245॥), not commentary. The fix belongs
+  in `resolve_layer_config` / the heading classifier — distinguish a
+  commentator's name from a section heading, and fold OCR variants of the
+  same name together. Nothing here is a fetching problem.
+- **The window on cheap re-runs is open but closing.** Every one of the 1,655
+  pages is in the Actions cache (`dv-cache-later_acharyas-*`, ~43 MB, scoped
+  to branch `claude/task-review-completion-wqog9g`). A full re-run with
+  `limit_per_grantha: 0` replays from it in **11 minutes** instead of 14
+  hours, so the layer-naming fix above costs almost nothing *while the cache
+  lives*. GitHub evicts caches unused for 7 days, and deleting the branch
+  drops the scope with it — that is the one action that turns this back into
+  a day of crawling.
+- **Anuvyākhyāna looks under-crawled and is marked `complete` anyway.** Its
+  grantha record reports `discovered: 16, items: 88` for a text of roughly
+  1,900 verses. Sixteen pages is about one pāda. Worth re-checking its seed
+  before trusting the `complete`.
+- **94,829 units across 631 unmapped layer names are being discarded**,
+  against 30,139 items actually written — roughly three times as much
+  dropped as kept. The largest are the major ṭīkā corpus: भावरत्नकोशः 6,787,
+  भावबोधः 6,358, भावप्रकाशः 5,500, भावप्रदीपिका 3,652, भावदीपिका 3,652. Some
+  of that is commentary on works not yet mapped and is legitimately out of
+  scope, but the volume deserves a deliberate decision rather than a silent
+  default, and `failures: []` with all 56 granthas `complete` reads as
+  fuller coverage than it is.
+- **The two verify gates disagree, and the looser one runs first.** The
+  extract job runs `verify_extract.py` without `--strict`; the collect job
+  runs it with. So a shard's own errors print and pass, and the failure
+  surfaces only on the merged tree — after the crawl, in a job that cannot
+  say which shard caused it. Running the extract-side check with `--strict`
+  too would fail it where the cause is still visible.
+- **`sutra_prasthana/brahma_sutrani` remains disabled** — "homepage href is
+  empty on the source site". Untouched by this work.
+
 ## Known unresolved bugs
 
 - **`github-advanced-security` fails on every PR, and it is not any PR's diff.**

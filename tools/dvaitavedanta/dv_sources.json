@@ -461,9 +461,9 @@
           "seed": "/category-details/977/975/sharam/sathha/managa",
           "content_id": 977,
           "ancestor_id": 975,
-          "note": "largest grantha; timed out 3/3 during recon. Run alone with a long timeout.",
+          "note": "largest grantha; 1,655 leaves. Complete as of 19 Aug 2026 — 46 layers, 9,929 entries.",
           "enabled": false,
-          "_note": "Disabled 17 Aug 2026. A rate problem, not a data problem: ~1,655 navigation links per page at ~105 s/leaf, so ~46h of crawling. Needs its own run."
+          "_note": "Done 19 Aug 2026, and left disabled because it is finished, not because it is impossible. The 17 Aug estimate of ~46h came from a recon figure of ~105 s/leaf; measured against the live site it is ~26 s/leaf by day and ~39 s at night, so it took ~14h across five 4-hour Actions rounds against the resumable cache. Concurrency does not help — 4 parallel requests took 70.9 s wall against 104 s serial, the backend serialises. Re-enable only to re-crawl; a re-run off a warm cache takes ~11 minutes."
         },
         {
           "slug": "pramana_paddhati",
