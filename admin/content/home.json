@@ -57,12 +57,13 @@
       "id": "architect",
       "eyebrow": "Initiated, Architected & Developed by",
       "icon": "quill",
-      "name": "Tribhuvan",
+      "name": "Tribhuvan Achar",
       "sub": "(3BHU1)",
       "meta": [
-        "Ex-Software Architect, Accenture · Sevak @ Śrīpādarājaru – Narasimha Tīrtha"
+        "Sevak @ Śrīpādarājaru – Narasimha Tīrtha",
+        "Ex-Technical Architect, Accenture"
       ],
-      "blurb": "Conceptualized and built the Sarvamūla Digital Library — from corpus planning and sourcing to OCR, indexing, search, platform development, and audio recordings — as an offering in the service of Śāstra and the Guru Paramparā.",
+      "blurb": "I am, first and foremost, an orthodox Madhva and a Sevak. The Digital Granth Engine (DGE) is a humble offering born from a devotion to Adhyayana and Adhyāpana—architected from scratch to seamlessly interlink the Sarvamūla Granthas, Vedas, Vyākaraṇa, and Purāṇas to protect this Vidyā for future generations.",
       "moreLabel": "Know More",
       "panel": "tribhuvan"
     },
@@ -142,18 +143,8 @@
           ]
         },
         {
-          "icon": "temple",
-          "heading": "Śikṣā Guru & Gṛhastha-Dharma-Upadeṣṭā — roots and foundation",
-          "entries": [
-            {
-              "name": "Shri Jalihal Sukeshachar",
-              "note": "He provided the essential structure to my early spiritual life, teaching the foundational texts — Śabda, Maṇimañjarī, Purāṇa. As my sahadharmacāriṇī-yojaka he took immense pains to orchestrate my marriage, ensuring I found a spouse who supported my strict orthodox practices, and firmly guided my entry into the Gṛhasthāśrama."
-            }
-          ]
-        },
-        {
           "icon": "book",
-          "heading": "Under whose teaching I have studied",
+          "heading": "Currently Studying Under",
           "entries": [
             {
               "name": "Shri Badari Achar C.H.",
@@ -161,8 +152,14 @@
             },
             {
               "name": "Shri Raghavendra Achar",
-              "note": "Dāsa Sāhitya and the Prameya granthas."
-            },
+              "note": "Dāsa Sāhitya, the Prameya granthas, and Purāṇas."
+            }
+          ]
+        },
+        {
+          "icon": "book",
+          "heading": "Under whose teaching I have studied",
+          "entries": [
             {
               "name": "Shri Nagarajachar",
               "note": "The Veda Sūktas."
@@ -204,6 +201,16 @@
             {
               "name": "Shri Vishwanandana Tīrtharu",
               "note": "The ultimate fortune of serving a great soul. Through his dharma-dīkṣā my journey found its true elevation and divine refuge."
+            }
+          ]
+        },
+        {
+          "icon": "temple",
+          "heading": "Śikṣā Guru & Gṛhastha-Dharma-Upadeṣṭā — roots and foundation",
+          "entries": [
+            {
+              "name": "Shri Jalihal Sukeshachar",
+              "note": "He provided the essential structure to my early spiritual life, teaching the foundational texts — Śabda, Maṇimañjarī, Purāṇa. As my sahadharmacāriṇī-yojaka he took immense pains to orchestrate my marriage, ensuring I found a spouse who supported my strict orthodox practices, and firmly guided my entry into the Gṛhasthāśrama."
             }
           ]
         },

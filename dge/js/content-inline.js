@@ -224,8 +224,17 @@
     if (editing) mark();
   }
 
+  // data-edit-quiet marks fields that are technically editable content (a
+  // devotional verse, a mantra) but not what this tool's dashed-outline
+  // affordance is for — it's meant to invite fixing template/label wording
+  // ("designed by Tribhuvan"), not to make sacred verse text look like a
+  // form field. Skipped from both the highlight and the click-to-edit
+  // trigger below, not just the highlight: a highlighted line that did
+  // nothing on click would be its own, different bug.
+  var EDITABLE_SEL = '[data-edit]:not([data-edit-quiet])';
+
   function mark() {
-    document.querySelectorAll('[data-edit]').forEach(function (el) {
+    document.querySelectorAll(EDITABLE_SEL).forEach(function (el) {
       el.classList.toggle('ci-on', editing);
       el.classList.toggle('ci-dirty',
         editing && Object.prototype.hasOwnProperty.call(draft, el.getAttribute('data-edit')));
@@ -238,29 +247,129 @@
   // "Enter" button. A right arrow expands it into the full toolbar.
   let expanded = false;
 
+  // Draggable position: which edge it's docked to, and how far down the
+  // viewport (0-1, of the vertical center). Was fixed at left/50% with no
+  // way to move it out from behind page content it happened to sit over
+  // (e.g. the bottom Enter button on some viewport heights). Persisted per
+  // device so it doesn't reset to center every visit.
+  var POS_KEY = 'dge.ciBarPos';
+  function loadPos() {
+    try {
+      var p = JSON.parse(localStorage.getItem(POS_KEY) || 'null');
+      if (p && (p.side === 'left' || p.side === 'right') && typeof p.topFrac === 'number') return p;
+    } catch (e) { /* fall through to default */ }
+    return { side: 'left', topFrac: 0.5 };
+  }
+  function savePos(p) { try { localStorage.setItem(POS_KEY, JSON.stringify(p)); } catch (e) { /* ignore */ } }
+  var pos = loadPos();
+
+  function applyPos(el) {
+    el.classList.toggle('ci-right', pos.side === 'right');
+    var h = el.getBoundingClientRect().height || 60;
+    var half = h / 2;
+    var top = Math.min(Math.max(pos.topFrac * window.innerHeight, half + 4), window.innerHeight - half - 4);
+    el.style.top = top + 'px';
+    el.style.transform = 'none'; // the CSS translateY(-50%) default is only for pre-JS/no-saved-position paint
+  }
+
+  // Pointer-drag wiring, attached once per element (bar() itself can be
+  // called many times per second while dirty-count updates). A short
+  // movement threshold keeps a plain tap on the collapsed pill (which
+  // toggles expand/collapse) from being swallowed as an accidental drag.
+  function wireDrag(el) {
+    var dragging = false, moved = false, justDragged = false, startX = 0, startY = 0, startTop = 0;
+    // Movement is tracked via listeners on `document`, not on `el` itself,
+    // and setPointerCapture is deliberately never used here. The collapsed
+    // pill is only ~28px wide, so a normal-speed drag leaves its bounds
+    // between one pointermove event and the next — an el-scoped listener
+    // (without capture) would miss every event after the first, and
+    // setPointerCapture, tried first, turned out to fix that at the cost of
+    // a worse bug: it redirects the click that follows ANY pointerdown+
+    // pointerup pair (moved or not) from its real target (e.g. the .ci-pill
+    // button) to the capturing element, silently breaking the pill's own
+    // click-to-expand handler on every plain tap, not just drags.
+    // document-level tracking needs no capture at all: the actual target
+    // element only matters for the click that follows, which document
+    // listeners never touch.
+    el.addEventListener('click', function (ev) {
+      // A real drag still fires a native click on release (same element,
+      // pointerdown+pointerup with no intervening navigation) — without
+      // this it would also toggle expand/collapse as an unwanted side
+      // effect of just repositioning the tool.
+      if (justDragged) { ev.stopImmediatePropagation(); ev.preventDefault(); }
+    }, true);
+    el.addEventListener('pointerdown', function (ev) {
+      if (ev.target.closest('button') && !ev.target.closest('.ci-pill')) return; // let toolbar buttons work untouched
+      dragging = true; moved = false;
+      startX = ev.clientX; startY = ev.clientY;
+      startTop = el.getBoundingClientRect().top;
+      document.addEventListener('pointermove', onMove);
+      document.addEventListener('pointerup', onUp);
+      document.addEventListener('pointercancel', onUp);
+    });
+    function onMove(ev) {
+      if (!dragging) return;
+      var dx = ev.clientX - startX, dy = ev.clientY - startY;
+      if (!moved && Math.hypot(dx, dy) < 6) return; // still within click tolerance
+      moved = true;
+      el.classList.add('ci-dragging');
+      var h = el.getBoundingClientRect().height;
+      var half = h / 2;
+      var newTop = Math.min(Math.max(startTop + dy, 4), window.innerHeight - h - 4);
+      el.style.top = (newTop + half) + 'px';
+      el.style.left = ''; el.style.right = '';
+      // Live-preview which edge it would dock to on release, purely visual.
+      el.classList.toggle('ci-right', ev.clientX > window.innerWidth / 2);
+    }
+    function onUp(ev) {
+      if (!dragging) return;
+      dragging = false;
+      document.removeEventListener('pointermove', onMove);
+      document.removeEventListener('pointerup', onUp);
+      document.removeEventListener('pointercancel', onUp);
+      el.classList.remove('ci-dragging');
+      if (!moved) return; // a plain click/tap — let the pill's own click handler run
+      moved = false;
+      justDragged = true;
+      setTimeout(function () { justDragged = false; }, 0); // cleared after this tick's click, if any, is swallowed
+      var h = el.getBoundingClientRect().height;
+      var topCenter = el.getBoundingClientRect().top + h / 2;
+      pos = {
+        side: ev.clientX > window.innerWidth / 2 ? 'right' : 'left',
+        topFrac: Math.min(Math.max(topCenter / window.innerHeight, 0), 1)
+      };
+      savePos(pos);
+      applyPos(el);
+    }
+  }
+
   function bar() {
     let el = document.getElementById('ciBar');
     const n = Object.keys(draft).length;
     // Always present for a super-admin: the bar carries the only control that
     // turns editing on, so hiding it when nothing is staged left no way in.
+    let isNew = false;
     if (!el) {
       el = document.createElement('div');
       el.id = 'ciBar';
       document.body.appendChild(el);
       document.body.classList.add('ci-active');
+      isNew = true;
     }
-    el.className = 'ci-bar ' + (expanded ? 'ci-expanded' : 'ci-collapsed');
+    el.className = 'ci-bar ' + (expanded ? 'ci-expanded' : 'ci-collapsed') + (pos.side === 'right' ? ' ci-right' : '');
+    if (isNew) wireDrag(el);
 
     if (!expanded) {
       el.innerHTML =
         '<button class="ci-pill" aria-expanded="false" aria-label="Open the edit tool">' +
           (n ? '<span class="ci-badge">' + n + '</span>' : '') +
           '<span class="ci-shine">EDIT</span>' +
-          '<span class="ci-chevron" aria-hidden="true">›</span>' +
+          '<span class="ci-chevron" aria-hidden="true">' + (pos.side === 'right' ? '‹' : '›') + '</span>' +
         '</button>';
       el.querySelector('.ci-pill').addEventListener('click', function () {
         expanded = true; bar();
       });
+      applyPos(el);
       return;
     }
 
@@ -300,11 +409,12 @@
     el.querySelector('.ci-done').addEventListener('click', function () {
       editing = !editing; mark(); bar();
     });
+    applyPos(el);
   }
 
   document.addEventListener('click', function (ev) {
     if (!editing) return;
-    const el = ev.target.closest && ev.target.closest('[data-edit]');
+    const el = ev.target.closest && ev.target.closest(EDITABLE_SEL);
     if (!el || el.querySelector('.ci-box')) return;
     ev.preventDefault(); ev.stopPropagation();
     openEditor(el);

@@ -133,14 +133,32 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Shows/hides the "💝 Support This Project" button based on admin
-// config (SPONSOR_CONFIG.enabled in config.js) — not an end-user toggle.
+// Shows/hides the "💝 Support This Project" button based on admin config
+// (SPONSOR_CONFIG.enabled, from admin/content/reader.json) — not an
+// end-user toggle. window.SPONSOR_CONFIG is set asynchronously by
+// core.js's fetch of reader.json, a promise that does not resolve before
+// DOMContentLoaded fires — checking it right on DOMContentLoaded always
+// read `undefined` and left the button hidden regardless of the admin
+// setting. Wait on the same promise core.js exposes instead. This must
+// stay inside the DOMContentLoaded callback, not run at parse time:
+// modals.js's own <script> tag loads before core.js's, so
+// window.dgeConfigOverridesPromise does not exist yet at parse time —
+// only by DOMContentLoaded, once every synchronous <script> including
+// core.js has already run, is it guaranteed to be the real promise.
 document.addEventListener('DOMContentLoaded', () => {
-  const btn = document.getElementById('supportProjectBtn');
-  if (btn && typeof SPONSOR_CONFIG !== 'undefined' && SPONSOR_CONFIG && SPONSOR_CONFIG.enabled) {
-    btn.style.display = 'block';
-  }
+  (window.dgeConfigOverridesPromise || Promise.resolve()).then(() => {
+    const btn = document.getElementById('supportProjectBtn');
+    if (btn && typeof SPONSOR_CONFIG !== 'undefined' && SPONSOR_CONFIG && SPONSOR_CONFIG.enabled) {
+      btn.style.display = 'block';
+    }
+  });
 });
+
+// menu.js's config-driven popup items only ever call a named window
+// function with no arguments (item.action -> window.<action>()), so
+// opening a specific modal by id from menu.json needs its own zero-arg
+// wrapper rather than menu.json trying to pass openModal an argument.
+window.dgeOpenOurStory = function() { window.openModal('ourStoryModal'); };
 
 window.openSponsorModal = function() {
   const body = document.getElementById('sponsorModalBody');
@@ -289,4 +307,38 @@ window.sendTypoReport = function() {
   const body = encodeURIComponent(`Text: ${title}\nShloka: ${shloka}\nPage: ${window.location.href}\n\nIssue:\n${details}`);
 
   window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+};
+
+// Contact Us — same mailto pattern as sendTypoReport above: no backend on
+// a static site to actually receive a POST, so this opens the visitor's
+// own email app with everything pre-filled instead of pretending to
+// submit a form that goes nowhere.
+window.sendContactMessage = function() {
+  const nameEl = document.getElementById('contactName');
+  const emailEl = document.getElementById('contactEmail');
+  const phoneEl = document.getElementById('contactPhone');
+  const subjectEl = document.getElementById('contactSubject');
+  const messageEl = document.getElementById('contactMessage');
+  const name = nameEl && nameEl.value ? nameEl.value.trim() : '';
+  const fromEmail = emailEl && emailEl.value ? emailEl.value.trim() : '';
+  const phone = phoneEl && phoneEl.value ? phoneEl.value.trim() : '';
+  const subjectText = subjectEl && subjectEl.value ? subjectEl.value.trim() : '';
+  const message = messageEl && messageEl.value ? messageEl.value.trim() : '';
+
+  if (!message) {
+    if (typeof showToast === 'function') showToast('Please write a message first.');
+    return;
+  }
+
+  const toEmail = (typeof appConfig !== 'undefined' && appConfig.contactEmail) ? appConfig.contactEmail : 'sanatanavidyagurukulam@gmail.com';
+  const subject = encodeURIComponent(subjectText || `DGE Contact — ${name || 'website visitor'}`);
+  const bodyLines = [
+    `Name: ${name || '(not given)'}`,
+    `Reply-to email: ${fromEmail || '(not given)'}`,
+    `Phone: ${phone || '(not given)'}`,
+    '',
+    message
+  ];
+  const body = encodeURIComponent(bodyLines.join('\n'));
+  window.location.href = `mailto:${toEmail}?subject=${subject}&body=${body}`;
 };

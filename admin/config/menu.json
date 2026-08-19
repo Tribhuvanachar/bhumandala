@@ -40,10 +40,12 @@
   "explore": {
     "label": "Explore",
     "items": [
+      { "id": "ourStory",      "icon": "📖", "label": "About the Project — Our Story", "action": "dgeOpenOurStory", "enabled": true },
       { "id": "guruParampara", "icon": "🪷", "label": "Guru Parampara",   "href": "guru-parampara/index.html", "enabled": true },
       { "id": "tirtha",        "icon": "🛕", "label": "Tirtha Prabandha", "href": "tirtha/index.html",         "enabled": true },
       { "id": "ashtadhyayi",   "icon": "📖", "label": "Aṣṭādhyāyī",       "href": "ashtadhyayi.html",          "enabled": true },
       { "id": "dhatupatha",    "icon": "📚", "label": "Dhātupāṭha",       "href": "dhatu.html",                "enabled": true },
+      { "id": "shabda",        "icon": "🔤", "label": "Śabdapāṭha",       "href": "shabda.html",                "enabled": true },
       { "id": "kavya",         "icon": "🪶", "label": "Kāvyāni",          "href": "kavya.html",                "enabled": true },
       { "id": "dasaSahitya",   "icon": "🎶", "label": "Dasa Sahitya",     "href": "dasa_sahitya.html",         "enabled": true }
     ]

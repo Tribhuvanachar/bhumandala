@@ -112,7 +112,9 @@ window.jumpToTocEntry = function(id) {
   if (typeof closeModal === 'function') closeModal('tocModal');
   if (window.viewMode === 'single' && typeof window.dgeSetSingleViewId === 'function') {
     window.dgeSetSingleViewId(id);
-  } else if (typeof playShloka === 'function') {
-    playShloka(id);
+  } else if (typeof loadShloka === 'function') {
+    // Select and scroll to it; jumping from the table of contents should
+    // not start audio any more than clicking a shloka's text does.
+    loadShloka(id);
   }
 };

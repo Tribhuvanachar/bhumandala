@@ -46,6 +46,11 @@
   <div class="tooltip-header">🕉️ Ask Acharya</div>
   <div class="tooltip-row" id="acharyaQueryButtonsRow"></div>
   <div id="acharyaFullWidthButtons"></div>
+  <div class="tooltip-row" id="wordToolsRow">
+    <button class="tooltip-btn" onpointerdown="window.dgeOpenShabdaForSelection(event)" title="Search this word's own declension table">🔤 Shabda</button>
+    <button class="tooltip-btn" onpointerdown="window.dgeOpenDhatuForSelection(event)" title="Search the Dhatupatha for a matching root">📚 Dhātu</button>
+    <button class="tooltip-btn" onpointerdown="window.dgeOpenCorpusSearchForSelection(event)" title="Find every other place this word appears in the library">🔍 Where else</button>
+  </div>
 </div>
 
 <!-- Floating Append-to-Notes Selection Button for Modal -->
@@ -136,6 +141,7 @@
       <button class="btn-top" onclick="window.togglePopup('sectionsPopup')" title="More DGE Sections">🧭</button>
       <div class="popup popup-top" id="sectionsPopup">
         <div class="popup-label">Explore</div>
+        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.openModal('ourStoryModal');">📖 About the Project — Our Story</div>
         <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='guru-parampara/index.html'">🪷 Guru Parampara</div>
         <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='tirtha/index.html'">🛕 Tirtha Prabandha</div>
         <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='ashtadhyayi.html'">📖 Aṣṭādhyāyī</div>
@@ -220,7 +226,88 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
+  <div class="site-footer-links" id="siteFooterLinks">
+    <button class="footer-link" onclick="window.openAboutModal()">About Us</button>
+    <span class="footer-sep">·</span>
+    <button class="footer-link" onclick="window.openModal('contactModal')">Contact Us</button>
+    <span class="footer-sep">·</span>
+    <button class="footer-link" onclick="window.openAboutModal()">Credits</button>
+    <span class="footer-sep">·</span>
+    <button class="footer-link" onclick="window.openModal('licenseModal')">License</button>
+    <span class="footer-sep">·</span>
+    <button class="footer-link" onclick="window.openModal('termsModal')">Terms &amp; Conditions</button>
+  </div>
   <div class="app-footer" id="appFooter">v4.57.0 (Modular)</div>
+</div>
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size:16px;">✉️ Contact Us</h3>
+      <button class="btn-sm" onclick="window.closeModal('contactModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12.5px; color:var(--muted-text); margin:0 0 14px;">This opens your email app with the message pre-filled — the site itself sends nothing and stores nothing you type here.</p>
+      <div class="provider-key-row"><label>Name</label><input type="text" id="contactName" class="modal-input" style="margin-top:4px;"></div>
+      <div class="provider-key-row"><label>Email</label><input type="email" id="contactEmail" class="modal-input" style="margin-top:4px;"></div>
+      <div class="provider-key-row"><label>Phone <span style="font-weight:400; color:var(--muted-text);">(optional)</span></label><input type="tel" id="contactPhone" class="modal-input" style="margin-top:4px;"></div>
+      <div class="provider-key-row"><label>Subject</label><input type="text" id="contactSubject" class="modal-input" style="margin-top:4px;"></div>
+      <div class="provider-key-row"><label>Message</label><textarea id="contactMessage" class="modal-input" style="height:100px; margin-top:4px;"></textarea></div>
+      <button class="btn-sm" style="width:100%; background:var(--accent-red); color:#fff; border:none; margin-top:6px;" onclick="window.sendContactMessage()">✉️ Open Email to Send</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="licenseModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size:16px;">📄 License</h3>
+      <button class="btn-sm" onclick="window.closeModal('licenseModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body" style="font-size:13px; line-height:1.6;">
+      <p>The software running this site is open source, under the <a href="https://github.com/Tribhuvanachar/bhumandala/blob/main/LICENSE" target="_blank" rel="noopener" style="color:var(--accent-red); font-weight:700;">Apache License 2.0</a>.</p>
+      <p>The texts themselves come from many different sources — public domain editions, individually credited open-licence digitisation projects, and original work by this project's own scholars and volunteers. Each text's specific source and licence, where applicable, is recorded with that text rather than repeated here, since it differs work to work.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="termsModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size:16px;">📜 Terms &amp; Conditions</h3>
+      <button class="btn-sm" onclick="window.closeModal('termsModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body" style="font-size:13px; line-height:1.6;">
+      <p style="color:var(--muted-text); font-style:italic;">Not yet written. This site is a free, ad-free educational and devotional resource; a full terms-of-use page for it hasn't been drafted yet. Contact us if you have a question in the meantime.</p>
+    </div>
+  </div>
+</div>
+
+<!-- First-visit name + language preference. Shown once (dge_onboarded in
+     localStorage); "Skip" is always available so this never blocks entry.
+     The language choice sets the display script (transliteration.js) and
+     is read by ai.js/ashtadhyayi.js to answer Acharya/Ashtadhyayi
+     questions in that language. -->
+<div class="modal-overlay" id="onboardingModal">
+  <div class="modal-content" style="max-width:380px;">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size:16px;">🙏 Namaste</h3>
+      <button class="btn-sm" onclick="window.dgeSkipOnboarding()" style="font-size:11px;">Skip</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12.5px; color:var(--muted-text); margin:0 0 14px;">A couple of quick preferences before you begin — you can change either later from the display menu.</p>
+      <div class="provider-key-row"><label>Your name <span style="font-weight:400; color:var(--muted-text);">(optional)</span></label><input type="text" id="onboardName" class="modal-input" style="margin-top:4px;" placeholder="e.g. Krishna"></div>
+      <div class="provider-key-row" style="margin-top:12px;">
+        <label>Preferred language</label>
+        <div id="onboardLangSeg" style="display:flex; gap:6px; margin-top:6px;">
+          <button type="button" class="btn-sm" data-onboard-lang="en" style="flex:1;">English</button>
+          <button type="button" class="btn-sm" data-onboard-lang="kn" style="flex:1;">ಕನ್ನಡ</button>
+          <button type="button" class="btn-sm" data-onboard-lang="sa" style="flex:1;">संस्कृतम्</button>
+        </div>
+      </div>
+      <button class="btn-sm" style="width:100%; background:var(--accent-red); color:#fff; border:none; margin-top:16px;" onclick="window.dgeSaveOnboarding()">Continue</button>
+    </div>
+  </div>
 </div>
 
 <!-- Search Navigator Floating Pill -->
@@ -857,6 +944,7 @@
 <script src="js/utils.js?v=4.60.6"></script>
 <script src="js/modals.js?v=4.60.6"></script>
 <script src="js/transliteration.js?v=4.60.6"></script>
+<script src="js/onboarding.js?v=1"></script>
 <script src="js/gemini.js?v=4.60.6"></script>
 <script src="js/kosha.js?v=4.65.0"></script>
 <script src="js/kosha-citations.js?v=4.65.0"></script>
@@ -873,7 +961,17 @@
 <script src="js/screenshot.js?v=4.60.6"></script>
 <script src="js/ai.js?v=4.60.6"></script>
 <script src="js/render.js?v=4.61.1"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<!-- async: JSZip is only used on demand (admin-editor.js's zip export/extract,
+     gated behind typeof JSZip==='undefined' checks), never at boot -- a
+     blocking, synchronous tag here meant a slow or stalled connection to
+     this CDN (not merely a failed one; onerror doesn't fire on a hang)
+     could leave the whole page's HTML parser waiting on it forever,
+     visible as a page that never finishes loading at all -- a real,
+     reproducible failure mode, confirmed directly by forcing a hang on
+     this exact resource and watching document.readyState never leave
+     "loading" and core.js's later boot code (including the ?SMV= query
+     abbreviation routing it was first noticed against) never run. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" async></script>
 <script src="js/admin-editor.js?v=4.61.5"></script>
 <script src="js/config-editor.js?v=4.60.6"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
@@ -907,6 +1005,7 @@
      visitor downloading several hundred KB of SDK that never runs. -->
 <script src="js/user-auth.js?v=4.63.0"></script>
 <script src="js/user-roles.js?v=4.63.0"></script>
+<script src="js/copy-guard.js?v=1"></script>
 
 <script>
   if (typeof console.log === "function") {

@@ -210,64 +210,85 @@ window.dgeRestoreLastVerse = dgeRestoreLastVerse;
   });
 })();
 
-async function playShloka(id) {
+// Selects a shloka as the active track — updates activeId, the reading
+// card, the track counter, scroll position and history — without ever
+// starting playback. This is what clicking a shloka's text or landing on
+// one via a filter should do: bring it into view and make it the track
+// Play would act on next, nothing more. Split out of playShloka() so
+// "select" and "start audio" are two different calls a caller can make on
+// purpose, rather than always both happening together — clicking a
+// shloka's text or applying a mark/range filter used to call playShloka()
+// directly and start audio as an unwanted side effect of just looking at
+// or filtering the text.
+async function loadShloka(id) {
   if (!stotraData) return;
-  if (activeId === id && isPlaying) { 
-    currentAudio.pause(); 
-    return; 
-  }
-  
-  activeId = id; 
-  contextShlokaId = id; 
-  currentLoopCount = 0; 
-  audioRetryDone = false; 
+
+  activeId = id;
+  contextShlokaId = id;
+  currentLoopCount = 0;
+  audioRetryDone = false;
 
   if (typeof nsKey === 'function') localStorage.setItem(nsKey('lastVerse'), String(id));
   if (typeof dgeLogReadingHistory === 'function') dgeLogReadingHistory(id);
-  
-  updateRepeatDisplay(); 
+
+  updateRepeatDisplay();
   if (typeof renderList === 'function') renderList();
-  
-  const ac = document.getElementById(`shloka-${id}`); 
+
+  const ac = document.getElementById(`shloka-${id}`);
   if (ac) ac.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  
+
   const total = stotraData.metadata.totalShlokas || Object.keys(stotraData.shlokas).length;
   const trackLabel = document.getElementById('trackLabel');
   const readingCard = document.getElementById('readingCard');
   const timeDisplay = document.getElementById('timeDisplay');
-  
-  if (trackLabel) trackLabel.innerText = `${id}/${total}`; 
+
+  if (trackLabel) trackLabel.innerText = `${id}/${total}`;
   if (typeof dgeUpdateProgressIndicator === 'function') dgeUpdateProgressIndicator(id, total);
   if (readingCard && typeof getText === 'function') {
     readingCard.innerHTML = getText(id);
     if (typeof wrapReadingCardWordsForSync === 'function') wrapReadingCardWordsForSync();
   }
   if (timeDisplay) timeDisplay.innerText = "0:00.000 / 0:00.000";
-  
+
   currentAudio.src = await resolveAudioSrc(id);
-  
+
   const speedInput = document.getElementById('speedInput');
   currentAudio.playbackRate = speedInput ? (parseFloat(speedInput.value) || 1.0) : 1.0;
-  
+
   const loopA = document.getElementById('loopA');
   const loopB = document.getElementById('loopB');
   const enableAB = document.getElementById('enableAB');
-  
-  if (loopA) loopA.value = ""; 
-  if (loopB) loopB.value = ""; 
+
+  if (loopA) loopA.value = "";
+  if (loopB) loopB.value = "";
   if (enableAB) enableAB.checked = false;
-  
-  currentAudio.play().catch(err => { 
-    if(err.name !== 'AbortError') console.error("Playback error:", err); 
+}
+window.loadShloka = loadShloka;
+
+async function playShloka(id) {
+  if (!stotraData) return;
+  if (activeId === id && isPlaying) {
+    currentAudio.pause();
+    return;
+  }
+  await loadShloka(id);
+  currentAudio.play().catch(err => {
+    if(err.name !== 'AbortError') console.error("Playback error:", err);
   });
 }
 
 function togglePlay() {
   if (!stotraData) return;
   
-  if (!activeId) { 
-    const aIds = typeof getFilteredIds === 'function' ? getFilteredIds() : []; 
-    if (aIds.length) playShloka(aIds[0]); 
+  if (!activeId) {
+    const aIds = typeof getFilteredIds === 'function' ? getFilteredIds() : [];
+    // Prefer whatever shloka is actually on screen (single-view Prev/Next,
+    // or a TOC jump, tracked separately in window.currentReadingId) over
+    // always the first filtered id — pressing Play with nothing yet
+    // selected should start the verse the reader is looking at, not
+    // silently jump back to the top of the filtered list.
+    const startId = (aIds.includes(window.currentReadingId) ? window.currentReadingId : null) || aIds[0];
+    if (startId) playShloka(startId);
   }
   else if (isPlaying) {
     currentAudio.pause();

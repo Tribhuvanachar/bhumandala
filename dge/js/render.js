@@ -275,7 +275,7 @@ function renderList() {
       ${cardActionsHtml}
       <div class="shloka-main-row">
         <div class="shloka-num">${i}</div>
-        <div class="shloka-text" onclick="if(!window.dgeContentEditMode && typeof playShloka==='function') playShloka(${i})">${mulaHtml}</div>
+        <div class="shloka-text" onclick="if(!window.dgeContentEditMode && typeof loadShloka==='function') loadShloka(${i})">${mulaHtml}</div>
         ${window.dgeContentEditMode ? `<button class="btn-icon" title="Edit this shloka's text" onclick="event.stopPropagation(); window.dgeInlineEditShloka(${i})">✏️</button>` : ''}
         <button class="btn-icon copy-shloka-btn" title="Copy shloka text" onclick="event.stopPropagation(); if(typeof copyShlokaText==='function') copyShlokaText(${i})">📋</button>
       </div>
@@ -300,8 +300,10 @@ function renderList() {
 // Single-shloka "one at a time" view mode — a separate reading position
 // (currentReadingId) from the audio-playback position (activeId), so
 // paging through verses to READ never jumps the currently playing audio
-// around. Tapping a shloka's text still starts its audio as always
-// (playShloka is unchanged); this only controls which card(s) renderList
+// around while it's actually playing. Tapping a shloka's text or paging
+// with Prev/Next both call loadShloka() (select + sync the player's own
+// track counter, never start playback) — audio only ever starts via an
+// explicit Play tap; this only controls which card(s) renderList
 // actually builds.
 // ---------------------------------------------------------------
 function dgeUpdateSingleViewNav(fIds) {
@@ -359,6 +361,10 @@ window.dgeSingleViewStep = function(direction) {
   const newIdx = idx + direction;
   if (newIdx < 0 || newIdx >= fIds.length) return;
   window.currentReadingId = fIds[newIdx];
+  // Keep the audio player's own track counter following the reader's
+  // position too — but only when nothing is actually playing, so paging
+  // to read never interrupts or retargets audio already underway.
+  if (!(typeof isPlaying !== 'undefined' && isPlaying) && typeof loadShloka === 'function') loadShloka(window.currentReadingId);
   renderList();
   // Deferred a frame: reading layout (getBoundingClientRect) immediately
   // after renderList's DOM rebuild can catch the browser mid-reflow and

@@ -73,7 +73,9 @@ window.setRangeMode = function(mode, btnEl) {
 function dgeJumpToFirstFiltered() {
   const aIds = getFilteredIds();
   if (aIds.length) {
-    if (typeof playShloka === 'function') playShloka(aIds[0]);
+    // Select and scroll to the first filtered shloka; do not start audio
+    // as a side effect of toggling a mark filter.
+    if (typeof loadShloka === 'function') loadShloka(aIds[0]);
   } else {
     if (typeof currentAudio !== 'undefined' && currentAudio) currentAudio.pause();
     if (typeof activeId !== 'undefined') activeId = null;
@@ -124,10 +126,11 @@ function setFilter(type) {
   window.toggleFilterCriterion(type);
 }
 
-function applyRangeFilter() { 
-  if (typeof renderList === 'function') renderList(); 
-  const aIds = getFilteredIds(); 
+function applyRangeFilter() {
+  if (typeof renderList === 'function') renderList();
+  const aIds = getFilteredIds();
   if (aIds.length && (typeof currentFilter === 'undefined' || currentFilter !== 'none')) {
-      if (typeof playShloka === 'function') playShloka(aIds[0]); 
+      // Select, don't play — changing the range should not start audio.
+      if (typeof loadShloka === 'function') loadShloka(aIds[0]);
   }
 }

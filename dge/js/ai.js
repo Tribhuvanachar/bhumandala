@@ -1,7 +1,20 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.6 (Settings sections collapsed-by-default with pin)';
+window.DGE_VERSIONS['ai.js'] = 'v3.7 (Ask Acharya honors the onboarding language preference)';
+
+// Appends a language directive read from onboarding.js's saved preference
+// (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
+// language the visitor picked, without the visitor having to ask for it
+// every time. Empty string (no line added) when unset or English, since
+// English is the model's natural default anyway.
+function dgeLangInstruction() {
+  var lang;
+  try { lang = localStorage.getItem('dge_lang_pref'); } catch (e) { lang = null; }
+  var line = { kn: 'Answer in Kannada (ಕನ್ನಡ) unless the user writes in a different language.',
+               sa: 'Answer in simple Sanskrit (संस्कृतम्) unless the user writes in a different language.' }[lang];
+  return line ? (' ' + line) : '';
+}
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -846,7 +859,7 @@ ${extraFieldsPrompt}Format using clean markdown.${externalLinksNote}`;
   window.acharyaHistory = [];
   const staleFollowUpInput = document.getElementById('acharyaFollowUpInput');
   if (staleFollowUpInput) staleFollowUpInput.value = '';
-  window.acharyaSystemPrompt = "You are Acharya, embedded in a Vedic text reading app. If the user asks a follow-up question, continue this conversation naturally and stay consistent with your earlier answers, in the philosophical tradition of Sri Madhvacharya (Dvaita Vedanta) unless asked otherwise. IMPORTANT FORMATTING RULE: never use LaTeX or math notation of any kind (no $...$, \\sqrt{}, \\text{}, \\rightarrow, or similar). This app only renders plain text and basic markdown (headings, bold, italic, lists) — LaTeX shows up as broken literal text. Write all derivations in plain prose instead: e.g. write 'root labh (bhvādi-gaṇa, 1st class)' instead of '$\\sqrt{\\text{labh}}$', and 'X + Y becomes Z' instead of an arrow/equation.";
+  window.acharyaSystemPrompt = "You are Acharya, embedded in a Vedic text reading app. If the user asks a follow-up question, continue this conversation naturally and stay consistent with your earlier answers, in the philosophical tradition of Sri Madhvacharya (Dvaita Vedanta) unless asked otherwise. IMPORTANT FORMATTING RULE: never use LaTeX or math notation of any kind (no $...$, \\sqrt{}, \\text{}, \\rightarrow, or similar). This app only renders plain text and basic markdown (headings, bold, italic, lists) — LaTeX shows up as broken literal text. Write all derivations in plain prose instead: e.g. write 'root labh (bhvādi-gaṇa, 1st class)' instead of '$\\sqrt{\\text{labh}}$', and 'X + Y becomes Z' instead of an arrow/equation." + dgeLangInstruction();
 
   await dgeRunAcharyaQuery(promptText);
 };
@@ -887,9 +900,6 @@ window.sendAcharyaFollowUp = async function() {
 
 // Follow-up mic input (independent tiny SpeechRecognition instance so it
 // doesn't collide with the search box's listener in voice.js).
-const DGE_SCRIPT_TO_SPEECH_LANG_AI = {
-  devanagari: 'hi-IN', iast: 'en-IN', kannada: 'kn-IN', telugu: 'te-IN', tamil: 'ta-IN', malayalam: 'ml-IN'
-};
 let dgeFollowUpRecognition = null;
 window.startFollowUpVoiceInput = function() {
   const Ctor = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -897,7 +907,9 @@ window.startFollowUpVoiceInput = function() {
   if (!Ctor || !input) return;
 
   dgeFollowUpRecognition = new Ctor();
-  dgeFollowUpRecognition.lang = DGE_SCRIPT_TO_SPEECH_LANG_AI[window.activeScript] || 'en-IN';
+  // Always English — see the identical fix and its reasoning in voice.js's
+  // startSearchVoiceInput.
+  dgeFollowUpRecognition.lang = 'en-IN';
   dgeFollowUpRecognition.interimResults = true;
   dgeFollowUpRecognition.onresult = (event) => {
     let transcript = '';
@@ -961,3 +973,46 @@ function renderAcharyaQueryButtons() {
   }
 }
 document.addEventListener('DOMContentLoaded', renderAcharyaQueryButtons);
+
+// Word-level tools on the selection tooltip: unlike the AI "Word" button
+// above (which asks an LLM), these navigate to this app's own real,
+// structured data for the selected word rather than generating an answer.
+function dgeSelectedWordText() {
+  try { return (window.getSelection().toString() || '').trim(); }
+  catch (e) { return ''; }
+}
+function dgeHideActionTooltip() {
+  const tooltip = document.getElementById('actionTooltip');
+  if (tooltip) tooltip.style.display = 'none';
+}
+
+// Opens in a new tab, deliberately: the reader is mid-verse on this page,
+// and losing that position to look up one word's declension would cost
+// more than the lookup is worth.
+window.dgeOpenShabdaForSelection = function(e) {
+  if (e) e.preventDefault();
+  const word = dgeSelectedWordText();
+  if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
+  dgeHideActionTooltip();
+  window.open('shabda.html?q=' + encodeURIComponent(word), '_blank');
+};
+
+window.dgeOpenDhatuForSelection = function(e) {
+  if (e) e.preventDefault();
+  const word = dgeSelectedWordText();
+  if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
+  dgeHideActionTooltip();
+  window.open('dhatu.html?q=' + encodeURIComponent(word), '_blank');
+};
+
+// "Intelligence mapping" -- where else the word appears in the corpus
+// (including which section, e.g. Vedanga), reusing the same corpus-wide
+// search dhatu.js's own "corpus occurrences" button already opens rather
+// than building a second index that would drift from it.
+window.dgeOpenCorpusSearchForSelection = function(e) {
+  if (e) e.preventDefault();
+  const word = dgeSelectedWordText();
+  if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
+  dgeHideActionTooltip();
+  if (typeof window.DGEGlobalSearch === 'object' && window.DGEGlobalSearch.open) window.DGEGlobalSearch.open(word);
+};
