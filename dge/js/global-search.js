@@ -13,7 +13,14 @@
  */
 (function () {
   'use strict';
-  var INDEX_BASE = window.DGE_SEARCH_INDEX || 'search_index';
+  // The index is 330 MB and lives on the "search-dist" branch, not in the
+  // site: rebuilding it with the extract_text fix took the published site to
+  // 1,013 MB against a 1 GB Pages ceiling. config.js sets
+  // window.DGE_SEARCH_INDEX from appConfig; this constant is the same URL, so
+  // a page that does not load config.js still finds it. Set the variable to
+  // 'search_index' to read a local build instead.
+  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@0195c115a77f196e616ab4745906b4c3730727a1';
+  var INDEX_BASE = window.DGE_SEARCH_INDEX || CDN_INDEX;
   var idxPromise = null, debounce = null;
 
   function css() {
@@ -54,7 +61,11 @@
     fab.className = 'dge-gs-fab';
     fab.title = 'Search all texts (Ctrl/Cmd-K)';
     fab.textContent = '🔎';
-    fab.onclick = open;
+    // Not `fab.onclick = open` — the DOM hands onclick the click's
+    // PointerEvent as open()'s first argument, and since open() treats a
+    // truthy `query` as prefill text, that event object landed in the
+    // search box as the literal string "[object PointerEvent]".
+    fab.onclick = function () { open(); };
     document.body.appendChild(fab);
 
     var ov = document.createElement('div');
@@ -105,7 +116,7 @@
     document.getElementById('dge-gs-overlay').classList.add('open');
     ensureIndex();
     var input = document.getElementById('dge-gs-input');
-    if (query) {
+    if (query && typeof query === 'string') {
       input.value = query;
       // onType is debounced against typing; dispatching the event it already
       // listens for keeps one code path for "the query changed".

@@ -61,6 +61,10 @@ on:
         description: "Count leaves per grantha and stop (one fetch each; sizes the corpus without crawling it)"
         type: boolean
         default: false
+      job_timeout:
+        description: "Hard cap in minutes on each crawl job. 240 = a four-hour round; the 6h ceiling is GitHub's."
+        type: string
+        default: "240"
       refresh_cache:
         description: "Ignore the HTTP cache and refetch everything"
         type: boolean
@@ -145,7 +149,7 @@ jobs:
   extract:
     needs: plan
     runs-on: ubuntu-latest
-    timeout-minutes: 350
+    timeout-minutes: ${{ fromJSON(inputs.job_timeout) }}
     strategy:
       fail-fast: false
       max-parallel: 2          # politeness: never more than 2 concurrent crawlers
@@ -167,7 +171,7 @@ jobs:
           python tools/dvaitavedanta/test_import_offline.py
 
       - name: Restore HTTP cache
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: .dv_cache
           key: dv-cache-${{ matrix.section }}-${{ github.run_id }}
@@ -228,6 +232,17 @@ jobs:
           # missing directory as one (run 32036326082 failed exactly here).
           [ -d dge/data/dvaitavedanta ] || { echo "no output for ${{ matrix.section }} (all granthas disabled)"; exit 0; }
           python tools/dvaitavedanta/verify_extract.py --data dge/data/dvaitavedanta
+
+      # Runs even if the round is cancelled at the timeout, so a killed job
+      # still hands its crawled pages to the next round instead of losing
+      # hours of fetching. The crawl itself is sized to finish well inside
+      # the cap; this is the belt behind that brace.
+      - name: Save HTTP cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .dv_cache
+          key: dv-cache-${{ matrix.section }}-${{ github.run_id }}
 
       - name: Stage shard output
         if: ${{ !fromJSON(inputs.dry_run) }}

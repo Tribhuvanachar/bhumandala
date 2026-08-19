@@ -44,6 +44,7 @@
       { "id": "tirtha",        "icon": "🛕", "label": "Tirtha Prabandha", "href": "tirtha/index.html",         "enabled": true },
       { "id": "ashtadhyayi",   "icon": "📖", "label": "Aṣṭādhyāyī",       "href": "ashtadhyayi.html",          "enabled": true },
       { "id": "dhatupatha",    "icon": "📚", "label": "Dhātupāṭha",       "href": "dhatu.html",                "enabled": true },
+      { "id": "kavya",         "icon": "🪶", "label": "Kāvyāni",          "href": "kavya.html",                "enabled": true },
       { "id": "dasaSahitya",   "icon": "🎶", "label": "Dasa Sahitya",     "href": "dasa_sahitya.html",         "enabled": true }
     ]
   },

@@ -10,7 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.3.3/sanscript.js"
  onerror="this.onerror=null;var s=document.createElement('script');s.src='https://unpkg.com/@indic-transliteration/sanscript@1.3.3/sanscript.js';document.head.appendChild(s);"></script>
 <link rel="stylesheet" href="css/vyakarana.css?v=1">
-<link rel="stylesheet" href="css/intellisense.css?v=1">
+<link rel="stylesheet" href="css/intellisense.css?v=2">
 </head>
 <!-- The vrttis quote sutras by number; those become tappable here for the
      same reason they do on the Ashtadhyayi page. Double-tapping a word in a
@@ -37,7 +37,7 @@
   <div class="crumbs deva">DGE › व्याकरणम् › <b>पाणिनीय धातुपाठः</b></div>
   <section class="hero">
     <h1 class="deva">धातुपाठः</h1>
-    <div class="sub">Pāṇinīya Dhātupāṭha · <span id="dh-total">…</span> roots across 10 gaṇas · source: Vidyut (MIT) · pada from aupadeśika accent (1.3.12 / 1.3.72 / 1.3.78)</div>
+    <div class="sub">Pāṇinīya Dhātupāṭha · <span id="dh-total">…</span> roots across 10 gaṇas · source: Vidyut (MIT) · pada from aupadeśika accent (1.3.12 / 1.3.72 / 1.3.78) · seṭ/aniṭ/वेट्, कर्म व Hindi/English glosses: <a href="https://github.com/ashtadhyayi-com/data" target="_blank" rel="noopener">ashtadhyayi-com/data</a></div>
   </section>
 
   <div class="filters">
@@ -59,16 +59,26 @@
       <button class="chip" data-set="">सर्वे · all</button>
       <button class="chip" data-set="seṭ">सेट् (seṭ)</button>
       <button class="chip" data-set="aniṭ">अनिट् (aniṭ)</button>
-      <span class="flab" style="margin-left:10px;color:var(--muted);text-transform:none;letter-spacing:0">meanings + seṭ/aniṭ from the traditional dhātupāṭha (drdhaval2785) where matched</span>
+      <button class="chip" data-set="veṭ">वेट् (veṭ)</button>
+    </div>
+    <div class="frow"><span class="flab">कर्म</span>
+      <button class="chip" data-karma="">सर्वे · all</button>
+      <button class="chip" data-karma="सकर्मक">सकर्मक</button>
+      <button class="chip" data-karma="अकर्मक">अकर्मक</button>
+      <button class="chip" data-karma="द्विकर्मक">द्विकर्मक</button>
+      <span class="flab" style="margin-left:10px;color:var(--muted);text-transform:none;letter-spacing:0" title="ashtadhyayi-com/data, github.com/ashtadhyayi-com/data — used with credit per its README">सेट्/अनिट्/वेट् व कर्म · source: ashtadhyayi-com/data</span>
     </div>
   </div>
 
   <div class="list" id="dh-list"></div>
   <button class="more" id="dh-more" style="display:none">show more ▾</button>
-  <p class="note">धातुपाठः · DGE · derivations (प्रक्रिया) arrive in Stage 2 (Vidyut engine). Click a root to expand; each root is deep-linkable via <code>#code</code>.</p>
+  <p class="note">धातुपाठः · DGE · click a root to expand — प्रक्रिया opens its step-by-step derivation (Vidyut engine), and 🔍 corpus occurrences finds every place it appears in the library. Each root is deep-linkable via <code>#code</code>.</p>
 </main>
 
+<script src="js/dge-normalize.js?v=1"></script>
+<script src="js/dge-search.js?v=1"></script>
+<script src="js/global-search.js?v=1"></script>
 <script src="js/dhatu.js?v=1.0.0"></script>
-<script src="js/intellisense.js?v=4.64.0"></script>
+<script src="js/intellisense.js?v=4.65.0"></script>
 </body>
 </html>

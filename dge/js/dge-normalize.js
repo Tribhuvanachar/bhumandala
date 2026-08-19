@@ -118,7 +118,8 @@
       slp1 = opts.slp1 || input; // caller converts via Sanscript for other schemes
     }
     var pk = phoneticKey(slp1);
-    return { slp1: slp1, pkey: pk, ckey: coarseKey(slp1), trigrams: trigrams(pk) };
+    return { slp1: slp1, pkey: pk, ckey: coarseKey(slp1), trigrams: trigrams(pk),
+      words: pk.split(' ').filter(Boolean) };
   }
 
   var API = { devaToSlp1: devaToSlp1, cleanDeva: cleanDeva,

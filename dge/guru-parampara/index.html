@@ -5,6 +5,7 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="../js/vandana-guard.js?v=1"></script>
+<script src="../js/admin-gate.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Guru Parampara — Madhva (Dvaita) Lineage · DGE</title>
 <link rel="stylesheet" href="../css/guru-parampara.css?v=1">
@@ -29,13 +30,16 @@
       <div class="ic">🪷</div><h3>3D Showcase</h3>
       <p>Rotating 3D view where each matha sweeps out as its own coloured tendril. Drag to rotate, pinch to zoom, search to fly to a saint.</p>
     </a>
-    <a class="card" href="tracker.html">
+    <a class="card" href="tracker.html" data-admin-only>
       <div class="ic">📊</div><h3>Completeness Tracker</h3>
       <p>What's filled and what's missing — per field, per matha, per saint — with fill percentages. The live to-do list for extending the data.</p>
     </a>
   </div>
 
-  <div class="meta">
+  <!-- Data-source path, developer handoff notes, and curation links are
+       operational notes for whoever maintains this page, not for a reader —
+       confined to admins (see js/admin-gate.js). -->
+  <div class="meta" data-admin-only>
     Data: <code>data/parampara.json</code> (single source). Views are self-contained (no external libraries / CDNs).
     <div class="links" style="margin-top:8px">
       <a href="reference.md">Reference (tables &amp; caveats)</a>

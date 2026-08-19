@@ -73,16 +73,46 @@ document.addEventListener('selectionchange', () => {
 });
 
 // 2. Markdown Parser
+// Line-based rather than the old chained-regex version, which only handled
+// ##/### headers and single-* bullets, left numbered lists as plain text,
+// and joined every line with <br> instead of real paragraph spacing — a
+// Gemini reply with a numbered list or a top-level # heading rendered as a
+// wall of text with literal "1." and "#" characters in it. Shared by every
+// AI surface that renders a model reply (Ask Acharya here, and the Kosha
+// quick actions in kosha.js), so the fix applies everywhere at once.
 function parseMarkdown(md) {
   if (!md) return '';
-  return md
-    .replace(/^### (.*$)/gim, '<div class="md-h3">$1</div>')
-    .replace(/^## (.*$)/gim, '<div class="md-h2">$1</div>')
-    .replace(/^\* (.*$)/gim, '<ul class="md-list"><li>$1</li></ul>')
-    .replace(/\*\*(.*?)\*\*/g, '<strong class="md-strong">$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/<\/ul>\n<ul class="md-list">/gim, '')
-    .replace(/\n/g, '<br>');
+  function inline(s) {
+    return s
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="md-strong">$1</strong>')
+      .replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, '$1<em>$2</em>');
+  }
+  var lines = String(md).replace(/\r\n/g, '\n').split('\n');
+  var html = '', listTag = null;
+  function closeList() { if (listTag) { html += '</' + listTag + '>'; listTag = null; } }
+  lines.forEach(function (line) {
+    var h = line.match(/^(#{1,3})\s+(.*)$/);
+    var ol = line.match(/^\s*\d+[.)]\s+(.*)$/);
+    var ul = line.match(/^\s*[*\-]\s+(.*)$/);
+    if (h) {
+      closeList();
+      var cls = h[1].length === 1 ? 'md-h1' : h[1].length === 2 ? 'md-h2' : 'md-h3';
+      html += '<div class="' + cls + '">' + inline(h[2]) + '</div>';
+    } else if (ol) {
+      if (listTag !== 'ol') { closeList(); html += '<ol class="md-list">'; listTag = 'ol'; }
+      html += '<li>' + inline(ol[1]) + '</li>';
+    } else if (ul) {
+      if (listTag !== 'ul') { closeList(); html += '<ul class="md-list">'; listTag = 'ul'; }
+      html += '<li>' + inline(ul[1]) + '</li>';
+    } else if (!line.trim()) {
+      closeList();
+    } else {
+      closeList();
+      html += '<p class="md-p">' + inline(line) + '</p>';
+    }
+  });
+  closeList();
+  return html;
 }
 
 // 3. Multi-Provider AI Key Settings

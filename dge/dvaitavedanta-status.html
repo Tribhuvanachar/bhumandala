@@ -5,6 +5,7 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="js/vandana-guard.js?v=1"></script>
+<script src="js/admin-gate.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DvaitaVedanta Extraction · DGE</title>
 <!--
@@ -81,6 +82,7 @@
 <body>
 <header>
   <div class="bar">
+    <div class="crumb" style="font-size:13px;color:var(--muted)"><a href="index.html" title="DGE Home" style="color:var(--accent);text-decoration:none;font-weight:700">⌂ DGE</a><span style="opacity:.6;margin:0 6px">›</span><b style="color:var(--ink)">DvaitaVedanta Extraction</b></div>
     <div class="brand">DvaitaVedanta Extraction <small>· DGE progress tracker</small></div>
     <div class="spacer"></div>
     <span id="stamp" class="slug"></span>
@@ -89,9 +91,17 @@
   </div>
 </header>
 
-<main>
+<!-- This whole page is an ingestion-progress dashboard for whoever is
+     running the dvaitavedanta.in import — not linked from anywhere a
+     reader would land, but a direct URL should not hand a visitor an
+     internal tracker either (see js/admin-gate.js). -->
+<main data-admin-only>
   <div id="app"><div class="empty">Loading <code>data/dvaitavedanta/_extract_status.json</code>…</div></div>
 </main>
+<div class="empty" style="max-width:1100px;margin:40px auto;padding:0 14px;" id="publicNotice">
+  This is an internal content-pipeline dashboard, visible only to a signed-in admin.
+</div>
+<style>body.dge-is-admin #publicNotice{display:none}</style>
 
 <script>
 const STATUS_URL = "data/dvaitavedanta/_extract_status.json";

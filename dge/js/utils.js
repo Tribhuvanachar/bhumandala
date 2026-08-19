@@ -238,16 +238,32 @@ document.addEventListener('DOMContentLoaded', () => {
     reopenBtn.innerText = '🐞 Logs';
     reopenBtn.style.cssText = 'display:block; position: fixed; top: 8px; background: #111; color: #0f0; border: 1px solid #0f0; padding: 6px 10px; font-size: 11px; font-weight: bold; border-radius: 20px; z-index: 999999; cursor: pointer;';
 
-    // Pinned top-center by default (rather than a corner) so it can't sit
-    // on top of whatever the user just opened. Recentered on every popup
-    // open (see togglePopup in modals.js) — manual drags are honoured
-    // until the next popup open snaps it back.
+    // Docked next to the "‹ Library" title rather than top-center — centering
+    // put it right on top of the commentary selector and other action-row
+    // popups, which is what a reader mistook for the tool being broken.
+    // Recentered on every popup open (see togglePopup in modals.js) — manual
+    // drags are honoured until the next popup open snaps it back. Pages with
+    // no top-bar title fall back to the old top-center placement.
     function dgeRecenterLogPill() {
-        reopenBtn.style.left = Math.max(8, (window.innerWidth - reopenBtn.offsetWidth) / 2) + 'px';
-        reopenBtn.style.top = '8px';
+        const titleEl = document.querySelector('.top-bar-title');
+        const titleRect = titleEl && titleEl.getBoundingClientRect();
+        if (titleRect && titleRect.width) {
+            reopenBtn.style.left = Math.min(
+                window.innerWidth - reopenBtn.offsetWidth - 8,
+                titleRect.right + 8
+            ) + 'px';
+            reopenBtn.style.top = Math.max(4,
+                titleRect.top + (titleRect.height - reopenBtn.offsetHeight) / 2) + 'px';
+        } else {
+            reopenBtn.style.left = Math.max(8, (window.innerWidth - reopenBtn.offsetWidth) / 2) + 'px';
+            reopenBtn.style.top = '8px';
+        }
         reopenBtn.style.right = 'auto';
         reopenBtn.style.bottom = 'auto';
-        try { localStorage.setItem('dgeLogReopenPos_v3', JSON.stringify({ left: reopenBtn.getBoundingClientRect().left, top: 8 })); } catch (e) { /* ignore */ }
+        try {
+            const r = reopenBtn.getBoundingClientRect();
+            localStorage.setItem('dgeLogReopenPos_v3', JSON.stringify({ left: r.left, top: r.top }));
+        } catch (e) { /* ignore */ }
     }
 
     // Text container to isolate content for copying

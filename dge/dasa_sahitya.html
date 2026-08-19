@@ -5,19 +5,34 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="js/vandana-guard.js?v=1"></script>
+<script src="js/admin-gate.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ದಾಸ ಸಾಹಿತ್ಯ · Dāsa Sāhitya — DGE</title>
 <link rel="stylesheet" href="css/dasa-sahitya.css?v=1">
 </head>
 <body>
+<!-- Only the search/group/sort/script controls stay pinned while scrolling
+     (below) — the title, stats and form chips used to be sticky too, which
+     pinned ~150px of chrome across the top of every phone screen before a
+     single dasarapada was visible. Those now scroll away normally, inside
+     .intro, so the actual content starts much higher up. -->
+<div class="wrap">
+  <div class="crumb"><a href="index.html" title="DGE Home">⌂ DGE</a><span aria-hidden="true">›</span><b>Dāsa Sāhitya</b></div>
+</div>
+<div class="wrap intro">
+  <div class="titrow">
+    <h1>ದಾಸ ಸಾಹಿತ್ಯ <small>Dāsa Sāhitya · Dasara Padagalu</small></h1>
+  </div>
+  <p class="sub">Haridasa padas, suladis &amp; ugabhogas · non-commercial · dharma-prachara / education / research</p>
+  <div class="stats" id="stats"></div>
+  <!-- Names the external sites this corpus was compiled from — admin-only
+       (licenses are procured) and collapsed by default even for an admin. -->
+  <details class="sources-detail" id="sourcesDetail" data-admin-only></details>
+  <div class="forms" id="forms"></div>
+</div>
+
 <header>
   <div class="wrap">
-    <div class="titrow">
-      <h1>ದಾಸ ಸಾಹಿತ್ಯ <small>Dāsa Sāhitya · Dasara Padagalu</small></h1>
-    </div>
-    <p class="sub">Haridasa padas, suladis &amp; ugabhogas · non-commercial · dharma-prachara / education / research</p>
-    <div class="stats" id="stats"></div>
-    <div class="forms" id="forms"></div>
     <div class="controls">
       <input type="search" id="q" placeholder="Search title, composer, deity, first line…" autocomplete="off">
       <select id="groupby" title="Group by">
@@ -98,9 +113,17 @@ function renderStats(){
     `<span class="stat"><b>${(m.composers||[]).length}</b> composers</span>`];
   if(m.dedup && m.dedup.duplicates_merged)
     parts.push(`<span class="stat" title="cross-source duplicates merged">deduped −<b>${m.dedup.duplicates_merged}</b></span>`);
-  Object.entries(bySrc).forEach(([s,n])=>
-    parts.push(`<span class="stat">${s.replace(/\.(com|net|org)$/,'')}: <b>${n}</b></span>`));
   document.getElementById('stats').innerHTML=parts.join("");
+
+  // Per-source breakdown names the external sites this was compiled from —
+  // kept out of #stats itself so it stays behind admin-gate.js's hiding
+  // rule, and left collapsed (a <details>) even for an admin who does see it.
+  const srcParts=Object.entries(bySrc).map(([s,n])=>
+    `<span class="stat">${s.replace(/\.(com|net|org)$/,'')}: <b>${n}</b></span>`);
+  const detail=document.getElementById('sourcesDetail');
+  detail.innerHTML = srcParts.length
+    ? '<summary>Sources (' + srcParts.length + ')</summary><div class="stats" style="margin-top:6px">' + srcParts.join('') + '</div>'
+    : '';
   window._byFormManifest=byForm;
 }
 
@@ -236,7 +259,13 @@ function cardHtml(r){
   });
   if(r.meaning) body+='<div class="meaning"><b>ಅರ್ಥ / Meaning</b><br>'+esc(r.meaning)+'</div>';
   const src=r.source||{};
-  if(src.url) body+='<div class="src">Source: <a href="'+src.url+'" target="_blank" rel="noopener">'+
+  // Licenses are procured, so the raw external link is admin-only curation
+  // detail, not something a reader needs per composition. Cards render
+  // long after admin-gate.js's one-time DOMContentLoaded pass, so checking
+  // isAdmin() directly here (rather than relying on its attribute-removal)
+  // is what actually applies to content created this late.
+  const isAdminCard = window.DGEAdminGate && window.DGEAdminGate.isAdmin();
+  if(src.url && isAdminCard) body+='<div class="src">Source: <a href="'+src.url+'" target="_blank" rel="noopener">'+
     (src.site||src.url)+'</a></div>';
   return `<details class="card"><summary>`+
     `<span class="badge form">${FORM_LABELS[r.form]||r.form}</span>`+

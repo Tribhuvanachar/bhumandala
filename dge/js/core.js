@@ -465,14 +465,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. PARSE URL PARAMETERS
   const urlParams = new URLSearchParams(window.location.search);
-  const explicitPath = urlParams.get('path'); // new general addressing, e.g. "vedas/rigveda/mandala_01"
+
+  // Global short-URL abbreviations (js/text-abbreviations.js, loaded before
+  // this file, is the one place these are configured) — ?SMV=1.1 means the
+  // same as ?path=kavya_alankara/sumadhva_vijaya/sarga_1&jumpShloka=1, just
+  // short enough to type or share. Resolved to plain path/jumpShloka values
+  // BEFORE those are read below, so everything downstream — including the
+  // legacy-slug upgrade and the namespace logic — behaves exactly as if the
+  // reader had typed the long form themselves.
+  let abbrevPath = null, abbrevShloka = null;
+  const DGE_ABBR = window.DGE_TEXT_ABBREVIATIONS || {};
+  for (const key of Object.keys(DGE_ABBR)) {
+    if (!urlParams.has(key)) continue;
+    const raw = urlParams.get(key) || '';
+    const cfg = DGE_ABBR[key];
+    if (cfg.path.indexOf('{ch}') !== -1) {
+      const parts = raw.split('.');
+      if (parts[0]) { abbrevPath = cfg.path.replace('{ch}', parts[0]); if (parts[1]) abbrevShloka = parts[1]; }
+    } else {
+      abbrevPath = cfg.path;
+      if (raw) abbrevShloka = raw;
+    }
+    break; // first matching abbreviation wins — a URL isn't expected to carry two
+  }
+
+  const explicitPath = urlParams.get('path') || abbrevPath; // new general addressing, e.g. "vedas/rigveda/mandala_01"
   const explicitCode = urlParams.get('code'); // legacy addressing — always resolves under stotras/, unchanged behaviour
 
   // Quick Search jump target (see dgeQuickJump in library.js) — resolved
   // against this grantha's actual shlokas object once it's loaded and
   // normalized, at the end of initApp() below.
   const jumpVedicId = urlParams.get('jumpVedicId');
-  const jumpShloka = urlParams.get('jumpShloka');
+  const jumpShloka = urlParams.get('jumpShloka') || abbrevShloka;
   window._dgeJumpTarget = jumpVedicId ? { vedicId: jumpVedicId } : (jumpShloka ? { shlokaNumber: parseInt(jumpShloka, 10) } : null);
 
   const providedPass = urlParams.get('pass');
@@ -496,6 +520,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // purana/..., darshana/..., etc.) use the full slug as the
   // namespace, since collision risk there is real (many granthas share a
   // generic last folder segment like "mula").
+  // The Kavya corpus is 50 MB and lives on the kavya-dist branch, not in the
+  // site, so a grantha under kavya_alankara/ is fetched from the CDN the Kavya
+  // reader already uses. Everything else is read from beside the app as before.
+  // Without this, a corpus-search hit on a kavya verse would open a reader that
+  // asks for a file the site does not have.
+  function dgeGranthaFetchUrl(s) {
+    if (/^kavya_alankara\//.test(s) && window.KAVYA_DATA_BASE) {
+      return `${String(window.KAVYA_DATA_BASE).replace(/\/+$/, '')}/${s}/data.json`;
+    }
+    return `data/${s}/data.json`;
+  }
+
   const slug = dgeUpgradeLegacySlug(explicitPath
     ? explicitPath.replace(/^\/+|\/+$/g, '')
     : `stotra/${explicitCode || 'pns'}`);
@@ -503,7 +539,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.stotraCode = stotrasDirectChild ? stotrasDirectChild[1] : slug.replace(/\//g, '__');
   window.currentGranthaSlug = slug;
-  window.jsonFileName = `data/${slug}/data.json`; // overwritten below if the catalog has a more specific real path
+  window.jsonFileName = dgeGranthaFetchUrl(slug); // overwritten below if the catalog has a more specific real path
   window.AUDIO_CACHE_NAME = `narasimha-audio-${window.stotraCode}`;
 
   // 4. RESOLVE VIA THE LIBRARY CATALOG, THEN FETCH THE GRANTHA DATASET

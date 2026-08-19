@@ -22,7 +22,8 @@
     font: LS.get("font",18),
     gana: LS.get("gana",0),      // 0 = all
     pada: LS.get("pada",""),     // "" = all
-    set: LS.get("set",""),       // "" = all | "seṭ" | "aniṭ"
+    set: LS.get("set",""),       // "" = all | "seṭ" | "aniṭ" | "veṭ"
+    karma: LS.get("karma",""),   // "" = all | "सकर्मक" | "अकर्मक" | "द्विकर्मक"
     sort: LS.get("sort","code"),
     q:"", openId: LS.get("open",null),
     vset: null   // map of codes that have dhātuvṛtti entries (Mādhavīya/Kṣīra/Dhātupradīpa)
@@ -44,6 +45,7 @@
       if(state.gana && it.gana!==state.gana) return false;
       if(state.pada && it.pada_code!==state.pada) return false;
       if(state.set && it.set!==state.set) return false;
+      if(state.karma && it.karma!==state.karma) return false;
       if(q && it._hay.indexOf(q)<0) return false;
       return true;
     });
@@ -88,14 +90,21 @@
     }
     h+=kv("गणः · class", it.gana+" — "+esc(tl(GANA[it.gana]||"")));
     h+=kv("पदम् · voice", esc(tl(it.pada))+" ("+it.pada_iast+")"+(it.pada_trad?' · <span class="'+devCls+'">'+esc(tl(it.pada_trad))+'</span>':''));
-    if(it.set) h+=kv("सेट्/अनिट् · iṭ", '<b>'+(it.set==="seṭ"?"सेट् (seṭ)":it.set==="aniṭ"?"अनिट् (aniṭ)":esc(it.set))+'</b>');
+    if(it.set) h+=kv("सेट्/अनिट् · iṭ", '<b>'+(it.set==="seṭ"?"सेट् (seṭ)":it.set==="aniṭ"?"अनिट् (aniṭ)":it.set==="veṭ"?"वेट् (veṭ)":esc(it.set))+'</b>');
+    if(it.karma) h+=kv("कर्म · transitivity", '<b>'+esc(it.karma)+'</b>');
+    if(it.artha_extra && (it.artha_extra.hi||it.artha_extra.en)){
+      h+=kv("अर्थः · gloss", (it.artha_extra.hi?('<span class="deva">'+esc(it.artha_extra.hi)+'</span>'):'')
+        +(it.artha_extra.hi&&it.artha_extra.en?' &nbsp;·&nbsp; ':'')
+        +(it.artha_extra.en?esc(it.artha_extra.en):''));
+    }
     if(it.anunasika_it) h+=kv("इत् · marker", "anunāsika it (nasal marker present in upadeśa)");
     h+='<div class="acts">'
       +'<a class="btn ai" href="prakriya.html#'+it.id+'">⚙ प्रक्रिया · तिङन्त</a>'
       +'<a class="btn" href="krdanta.html#'+it.id+'">कृदन्त forms</a>'
+      +'<a class="btn" href="dhatuforms.html#'+it.id+'" title="सन्/णिच्/यङ्/यङ्लुक् व शुद्ध कर्मणि — full lakara tables">रूपाणि · सन्/णिच्/यङ्</a>'
       +'<a class="btn" href="ashtadhyayi.html" title="open the sūtra reader">↔ अष्टाध्यायी</a>'
-      +'</div>'
-      +'<div class="stage2" id="s2-'+it.id+'">प्रक्रिया opens the derivation viewer: the tiṅanta paradigm, and each form’s step-by-step derivation with every sūtra linked into the reader (Vidyut engine · run the generator to populate all roots).</div>';
+      +'<button class="btn" data-corpus-search="'+esc(it.dhatu)+'" title="Find every place this root appears across the DGE corpus">🔍 corpus occurrences</button>'
+      +'</div>';
     if(state.vset && state.vset[it.id]){
       h+='<div class="vrit" data-vrit="'+it.id+'"><button class="btn vrit-btn">📜 वृत्तयः · Mādhavīya · Kṣīra · Dhātupradīpa ›</button></div>';
     }
@@ -135,6 +144,7 @@
   }
   function syncGanaChips(){ document.querySelectorAll("#dh-ganaChips .chip").forEach(function(c){ c.classList.toggle("on", parseInt(c.dataset.g,10)===state.gana); }); }
   function syncSetChips(){ document.querySelectorAll("[data-set]").forEach(function(c){ c.classList.toggle("on", c.dataset.set===state.set); }); }
+  function syncKarmaChips(){ document.querySelectorAll("[data-karma]").forEach(function(c){ c.classList.toggle("on", c.dataset.karma===state.karma); }); }
   function syncPadaChips(){ document.querySelectorAll("[data-p]").forEach(function(c){
     var on=(c.dataset.p===state.pada);
     c.classList.toggle("on", on && c.dataset.p==="");
@@ -149,6 +159,14 @@
       if(mb){ e.stopPropagation(); loadVrittis(mb.closest(".vrit")); return; }
       var vt=e.target.closest(".vrit-tab");
       if(vt){ e.stopPropagation(); showVritti(vt.closest(".vrit"), vt.dataset.v); return; }
+      var cs=e.target.closest("[data-corpus-search]");
+      // "Where else does this occur" is exactly what the reader's own global
+      // search already answers for any word — reused rather than building a
+      // second occurrence index that would drift from it (same reasoning as
+      // the [data-occur] popover in intellisense.js).
+      if(cs){ e.stopPropagation();
+        if(typeof window.DGEGlobalSearch === "object" && window.DGEGlobalSearch.open) window.DGEGlobalSearch.open(cs.dataset.corpusSearch);
+        return; }
       if(e.target.closest(".acts")) return; // let derivation/reader links navigate
       var h=e.target.closest(".rhead"); if(h) toggleRow(h.parentElement.dataset.id);
     });
@@ -158,6 +176,8 @@
       state.pada=c.dataset.p; LS.set("pada",state.pada); syncPadaChips(); rerender(); }); });
     document.querySelectorAll("[data-set]").forEach(function(c){ c.addEventListener("click",function(){
       state.set=c.dataset.set; LS.set("set",state.set); syncSetChips(); rerender(); }); });
+    document.querySelectorAll("[data-karma]").forEach(function(c){ c.addEventListener("click",function(){
+      state.karma=c.dataset.karma; LS.set("karma",state.karma); syncKarmaChips(); rerender(); }); });
     $("#dh-sort").addEventListener("change",function(e){ state.sort=e.target.value; LS.set("sort",state.sort); rerender(); });
     $("#dh-scriptSeg").addEventListener("click",function(e){ var b=e.target.closest("button"); if(!b)return;
       [].forEach.call(e.currentTarget.children,function(x){x.classList.remove("on");}); b.classList.add("on");
@@ -180,13 +200,31 @@
       showVritti(box, d.vrittis[0].source);
     }).catch(function(){ $(".mdhv-text",box).textContent="(could not load vṛtti text)"; });
   }
+  // The source text is one continuous run with no line breaks at all —
+  // confirmed against माधवीयधातुवृत्तिः on भू, 93,758 characters and not a
+  // single \n — so it rendered as one dense, "incomprehensible" slab no
+  // matter how short or long the excerpt actually was. Break after every
+  // sentence-ending danda/double-danda into its own paragraph; .mdhv-text
+  // already has white-space:pre-wrap; scrolling in its fixed-height box
+  // handles a genuinely long excerpt (भू's) without needing to truncate or
+  // guess at which part of the commentary is "relevant".
+  function paragraphize(text){
+    // [।॥]+ (not a single character) so "। ।" / "।।" — a double daṇḍa spelled
+    // as two singles, common in this OCR'd source — breaks once, not into a
+    // sentence followed by an orphan line holding just a lone daṇḍa.
+    return String(text||"").replace(/([।॥][।॥\s]*)/g, "$1\n\n").trim();
+  }
   function showVritti(box, source){
     var code=box.dataset.vrit, d=_vcache[code]; if(!d) return;
     var v=d.vrittis.filter(function(x){return x.source===source;})[0]; if(!v) return;
     box.querySelectorAll(".vrit-tab").forEach(function(t){ t.classList.toggle("on",t.dataset.v===source); });
     var devCls = state.script==="iast"?"":"deva";
     var el=$(".mdhv-text",box); el.className="mdhv-text "+devCls;
-    el.textContent = (v.author?("["+v.author+"] "):"")+tl(v.text||"");
+    var body = paragraphize(tl(v.text||""));
+    el.innerHTML = (v.author?('<div class="mdhv-author">['+esc(v.author)+']</div>'):"") + esc(body);
+    if (typeof window.dgeScanForSutras === "function") {
+      try { window.dgeScanForSutras(el); } catch (e) {}
+    }
   }
 
   function openById(id){
@@ -207,7 +245,7 @@
     if(LS.get("dark",false)) document.body.classList.add("dark");
     var ss=$("#dh-scriptSeg"); if(ss) ss.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on",b.dataset.s===state.script); });
     $("#dh-sort").value=state.sort;
-    buildGanaChips(); syncPadaChips(); syncSetChips(); wire(); applyFont();
+    buildGanaChips(); syncPadaChips(); syncSetChips(); syncKarmaChips(); wire(); applyFont();
     fetch("data/vedanga/vyakarana/vritti/index.json").then(function(r){return r.ok?r.json():null;}).then(function(idx){
       state.vset={}; if(idx) (idx.available||[]).forEach(function(c){ state.vset[c]=1; });
       // if a row is already open, re-render its body so the vṛtti toggle appears

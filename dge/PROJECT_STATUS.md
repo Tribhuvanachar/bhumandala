@@ -77,6 +77,91 @@ items and the decisions waiting on the project lead, this file the narrative.
   not estimated. See `PENDING.md` for what can move and what it buys; the kośa
   corpus already lives in `bhumandala-kosha-data` for exactly this reason, so the
   pattern exists.
+- **The Sanskrit WordNet, imported and wired into the word popover**
+  (`tools/build_wordnet.py`, 37,734 synsets, 80,009 words, 589 buckets, 24 MB).
+  IndoWordNet's Sanskrit half is the only source in the library that defines a
+  Sanskrit word **in Sanskrit** and gives a Sanskrit usage sentence — the koshas
+  gloss into English or Kannada, and the related words from
+  `build_synonyms.py` are bound by an English sense. Double-tapping a word now
+  adds an अर्थः section: definition, example, the rest of the synset, the class
+  it falls under, and the Kannada WordNet's words for the same synset. Kept
+  apart from the related words on purpose: a synset is a lexicographer's claim
+  that these words are one concept, an inverted bilingual entry is an
+  inference, and merging them would hide which is which. Three things the build
+  has to get right are documented in the script: IndoWordNet lists nominal
+  members inflected (अश्वः) where a reader arrives with a stem, so both are
+  indexed; 146 lines carry the part-of-speech twice and disagree with
+  themselves; and the senses are ordered by synset id rather than by size,
+  because the ids run oldest-first — ordering by how many words a synset holds
+  opens अश्वः on the chess piece. **The 24 MB tree is not on `main`**: the site
+  measured 1,017 MB with it against a 1 GB Pages limit, so it is published to
+  this repo's own `wordnet-dist` branch — data only, which Pages never serves —
+  and read over jsDelivr from `appConfig.wordnetDataBase`, the arrangement the
+  kośa corpus already uses one size up. A dedicated data repo was tried first
+  and the GitHub App still cannot create repositories, the same block as Round
+  4; at 24 MB a branch is the better answer regardless, and moving to a repo
+  later is a URL change. `.github/workflows/publish-wordnet.yml` rebuilds and
+  republishes it. Verified against the published bytes in a real browser — with
+  the transport substituted, since this sandbox's browser has no route to the
+  CDN, so a spot-check on the live site is still worth doing.
+
+- **The Kāvya corpus, deployed from a Cowork zip — and four faults in it found
+  and fixed before it could reach a reader.** `tools/kavya/**` plus a layered
+  reader at `dge/kavya.html`; the corpus itself (**24 works, 49 layers, 67,169
+  entries, 50 MB**) is on the `kavya-dist` branch and served over jsDelivr, not
+  on `main`, where it would put the site back over the 1 GB Pages limit its own
+  DEPLOY.md assumed was far away. The package's own probe step is what surfaced
+  the first fault and its README predicted the second; the rest came out of
+  running it. **34 of 50 declared GRETIL filenames 404** — they were declared
+  from a build spec and never checked — and of the 16 that answered, **10
+  parsed to zero units**, because GRETIL's TEI only sometimes carries `xml:id`
+  on a verse and the parser had no fallback for the files where the reference
+  sits inside the text instead. Adding that fallback needed a second fix: in
+  those files the marker CLOSES its verse rather than opening it, and the
+  splitter assumed the opposite, which does not fail loudly — it shifts an
+  entire text by one verse, so every reading sits under its neighbour's number.
+  A third: GRETIL gives each PĀDA its own id, so Raghuvaṃśa parsed as 8,185
+  "verses" of which 6,545 were fragments sharing three ids, and a fourth: a
+  duplicate id made `validate_layer` drop the whole layer, which is why the
+  Nāṭyaśāstra's 4,303 verses vanished on the first run rather than the nine
+  repeated references. The declared commentary keys were wrong too — all four
+  mahākāvyas asked for the commentary's title (`sj`, `gp`, `sk`) where the data
+  keys it by Mallinātha's own name — so **Mallinātha's ṭīkā on all four, the
+  package's headline feature, was being silently dropped**. Verified in a real
+  browser against the published bytes: 24 works in the picker, Raghuvaṃśa 1.1
+  with the Sañjīvinī, padaccheda chips, anvaya and translations. The corpus is
+  deliberately NOT merged into the four kāvyas already published from
+  `dge/data` — the merge would have appended a second copy of each text rather
+  than updating it, and now refuses; `PENDING.md` carries that decision.
+
+- **Corpus search now contains the corpus, and the index left the site.**
+  Rebuilding it with the `extract_text` fix took it from the Vedas-and-little-
+  else it had been to **916 granthas / 94,664 units** — and to 330 MB, which
+  put the published site at 1,013 MB against the 1 GB Pages ceiling. So the
+  index followed the koshas, the WordNet and the Kāvya corpus onto a branch of
+  its own (`search-dist`, read over jsDelivr), and **the site came back to
+  about 685 MB** — more headroom than it has had since the corpus started
+  growing. `window.DGE_SEARCH_INDEX` was already the override the client
+  looked for. Verified in a browser against the published index: मोक्षः
+  answers from the Anuvyākhyāna, Śānti Parva, Viṣṇutattvanirṇaya and the
+  Nyāyāmṛta at once, which nothing in the app could do before.
+
+- **The Kāvya corpus goes from 24 works to 43** (68 layers, **94,949 entries**)
+  by taking the two sources the register had never been asked: **ambuda.org**,
+  whose whole library is one proofed TEI export and whose `shatakatrayam` is
+  Bhartṛhari's three śatakas as three sections — the thing that unblocked the
+  works GRETIL could only offer undivided — and **sa.wikisource.org**, which
+  has the plays GRETIL does not carry at all: Mṛcchakaṭika, Mudrārākṣasa,
+  Mālavikāgnimitra, Uttararāmacarita and the rest, plus Naiṣadhīyacarita and
+  a Jānakīharaṇa the register had written off as *scan only*. Three things the
+  Wikisource path needed first: rendered HTML rather than wikitext (half these
+  works are ProofreadPage transclusions whose wikitext is one `<pages/>` line),
+  a verse marker of one bare number (`।। ६ ।।`, where the shared matcher wanted
+  two components — the parser's own single-number branch could never run), and
+  prose kept in document order, since a Sanskrit play is prose with verses set
+  into it. A script filter drops what these editions carry inline: Kādambarī
+  arrived with 193 blocks of English introduction and corrigenda. Fourteen
+  works still have nothing usable, each with its reason recorded.
 
 ## Round 4 (10 Aug 2026) — Kosha full-corpus build, TTS architecture doc, Mahabharata (Kannada), Yukti Mallika, Svapna-Vrindavanakhyana, Sumadhva Vijaya (audio), Harikathamrutasara
 

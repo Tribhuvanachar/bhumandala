@@ -41,7 +41,7 @@
   'use strict';
 
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['intellisense.js'] = 'v1.1 (sūtra identification by number and by name; word morphology from Vidyut)';
+  window.DGE_VERSIONS['intellisense.js'] = 'v1.2 (sūtra identification by number and by name; word morphology from Vidyut; Sanskrit WordNet senses)';
 
   const self = (document.currentScript && document.currentScript.src) || '';
   function dataUrl(rel) {
@@ -496,6 +496,88 @@
     return loadSyn(slp).then(b => (b && b[clean]) || []);
   };
 
+  /* Senses, from tools/build_wordnet.py — IndoWordNet's Sanskrit synsets.
+     This is the only source in the library that defines a Sanskrit word IN
+     SANSKRIT: the koshas gloss into English or Kannada, and the related words
+     above are bound by an English sense. It is also the only one where the
+     synonym set is a lexicographer's claim rather than something inferred by
+     inverting a bilingual dictionary, which is why the two are shown as
+     separate sections under their own names instead of being merged.
+
+     A bucket is {s: [synset, ...], w: {word: [indices into s]}}. The synset is
+     stored once and its members point at it; inlined under every member the
+     tree came to 40 MB instead of 24.
+
+     Looked up by the word as tapped and then by the stems Vidyut found for
+     it. IndoWordNet lists nominal members inflected — अश्वः, not अश्व — and the
+     build indexes the stem alongside, but a reader taps a word in a sentence
+     (अश्वेन), and only the analysis connects that to either. */
+  const wnCache = {};
+  function loadWn(slp) {
+    const two = (slp + '__').slice(0, 2);
+    const name = two.split('').map(c => (c >= 'A' && c <= 'Z') ? c + '_'
+                                       : (/[a-z0-9]/.test(c) ? c : 'x')).join('');
+    if (wnCache[name]) return wnCache[name];
+    // The tree is 24 MB and lives on this repo's own "wordnet-dist" branch
+    // rather than in the site, because the site has about 1% of the GitHub
+    // Pages 1 GB limit left and Pages serves only main. jsDelivr serves any
+    // branch, so the same arrangement the koshas use costs one URL here.
+    // config.js sets window.WORDNET_DATA_BASE from appConfig; the constant
+    // below is the same value, and is what the four Vyakarana pages use,
+    // since none of them load config.js. Set the variable to '' to read a
+    // local build from dge/data/_wordnet/ instead — and if that build is not
+    // there either, the fetch 404s, this resolves to null, and the popover
+    // simply has no अर्थः section, with the analysis and the related words
+    // unaffected.
+    const CDN = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@66c7895fa7b1f30150ebbf74ea67abc28909e550/_wordnet';
+    const set = window.WORDNET_DATA_BASE;
+    const cdn = (set === undefined ? CDN : (set || '')).replace(/\/+$/, '');
+    let url;
+    if (cdn) url = cdn + '/' + name + '.json';
+    else {
+      try { url = new URL('../data/_wordnet/' + name + '.json', self).href; }
+      catch (e) { url = 'data/_wordnet/' + name + '.json'; }
+    }
+    wnCache[name] = fetch(url, { cache: 'force-cache' })
+      .then(r => (r.ok ? r.json() : null)).catch(() => null);
+    return wnCache[name];
+  }
+
+  // अश्वः and अश्व are one word listed two ways, and a synset that names both
+  // must not offer the reader the word they are already looking at.
+  function wnStem(w) {
+    return w.replace(/ः$/, '').replace(/म्$/, '');
+  }
+
+  window.dgeWordNet = function (word, lemmas) {
+    const keys = [];
+    [word].concat(lemmas || []).forEach(function (w) {
+      const clean = String(w || '').replace(/[^ऀ-ॿ]/g, '');
+      if (clean && keys.indexOf(clean) < 0) keys.push(clean);
+    });
+    if (!keys.length) return Promise.resolve([]);
+    return Promise.all(keys.map(function (k) {
+      const slp = toSlp(k);
+      return slp ? loadWn(slp).then(b => [k, b]) : Promise.resolve([k, null]);
+    })).then(function (pairs) {
+      const out = [], seen = {};
+      pairs.forEach(function (pair) {
+        const key = pair[0], b = pair[1];
+        if (!b || !b.w || !b.w[key]) return;
+        b.w[key].forEach(function (i) {
+          const r = b.s[i];
+          if (!r || seen[r[1]]) return;
+          seen[r[1]] = 1;
+          const self_ = wnStem(key);
+          out.push({ pos: r[0], gloss: r[1], example: r[2],
+                     words: (r[3] || []).filter(w => wnStem(w) !== self_),
+                     hyper: r[4] || '', other: r[5] || [] });
+        });
+      });
+      return out;
+    });
+  };
+
   window.dgeAnalyseWord = function (word) {
     const clean = String(word || '').replace(/[^ऀ-ॿa-zA-Zāīūṛṝḷṅñṭḍṇśṣṃṁḥ]/g, '');
     if (!clean) return Promise.resolve([]);
@@ -508,7 +590,7 @@
   };
 
   /* ------------------------------------------------------- word popover --- */
-  function wordHtml(word, an, rel) {
+  function wordHtml(word, an, rel, wn) {
     let h = '<div class="dge-si-head"><span class="dge-si-id">' + esc(word) + '</span>' +
             '<button class="dge-si-x" data-si-close aria-label="Close">✕</button></div>';
     if (an.length) {
@@ -524,6 +606,33 @@
     } else {
       h += '<div class="dge-si-none">No analysis — Vidyut resolves inflected words, ' +
            'not sandhi-joined ones. The dictionaries may still have it.</div>';
+    }
+    if (wn && wn.length) {
+      // The source is named in the heading because a Sanskrit definition of a
+      // Sanskrit word is unusual enough that a reader will want to know where
+      // it came from, and because IndoWordNet's licence asks for attribution
+      // wherever its data is shown.
+      h += '<div class="dge-si-row"><b>अर्थः</b>' +
+           '<span class="dge-si-src">IndoWordNet · CFILT, IIT Bombay</span></div>';
+      wn.slice(0, 3).forEach(function (s) {
+        h += '<div class="dge-si-wn"><div class="dge-si-def">' + esc(tr(s.gloss)) + '</div>' +
+             (s.example ? '<div class="dge-si-eg">' + esc(tr(s.example)) + '</div>' : '') +
+             (s.words.length ? '<div>' + s.words.slice(0, 8).map(function (w) {
+                return '<span class="dge-si-word" data-word="' + esc(w) + '">' +
+                       esc(tr(w)) + '</span>';
+              }).join('') + '</div>' : '') +
+             ((s.hyper || s.other.length) ? '<div class="dge-si-wn-meta">' +
+                (s.hyper ? '<span class="dge-si-wn-lab">सामान्यम्</span>' +
+                           '<span class="dge-si-word" data-word="' + esc(s.hyper) + '">' +
+                           esc(tr(s.hyper)) + '</span>' : '') +
+                // Kannada is a language here, not a script, so it is shown as
+                // it stands rather than transliterated into the reader's.
+                (s.other.length ? '<span class="dge-si-wn-lab">ಕನ್ನಡ</span>' +
+                                  '<span class="dge-si-kn">' +
+                                  esc(s.other.slice(0, 3).join(', ')) + '</span>' : '') +
+              '</div>' : '') +
+             '</div>';
+      });
     }
     if (rel && rel.length) {
       h += '<div class="dge-si-row"><b>सम्बद्धाः</b></div>';
@@ -548,10 +657,18 @@
     pop.innerHTML = '<div class="dge-si-loading">…</div>';
     document.body.appendChild(pop);
     place(anchor);
+    // The WordNet lookup waits on the analysis rather than running beside it:
+    // its best key is often the stem the analysis returns, not the inflected
+    // word that was tapped. Both bucket fetches are cached, so the wait costs
+    // one round trip on the first word in a bucket and nothing after.
     Promise.all([window.dgeAnalyseWord(word), window.dgeRelatedWords(word)])
       .then(function (r) {
+        return window.dgeWordNet(word, r[0].map(a => a.lemma))
+          .then(function (wn) { return [r[0], r[1], wn]; });
+      })
+      .then(function (r) {
         if (!pop) return;
-        pop.innerHTML = wordHtml(word, r[0], r[1]);
+        pop.innerHTML = wordHtml(word, r[0], r[1], r[2]);
         place(anchor);
       });
   }
