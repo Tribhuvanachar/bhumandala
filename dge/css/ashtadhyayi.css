@@ -52,6 +52,7 @@
   .toolrow{display:flex;align-items:center;gap:8px;margin:18px 2px 6px;flex-wrap:wrap}
   .toolrow .lab{font-size:12.5px;color:var(--muted)}.toolrow .lab b{color:var(--accent2)}
   .mini{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:5px 9px;cursor:pointer;color:var(--muted);font:inherit;font-size:13px}
+  .mini.on{background:var(--sk,var(--accent2));color:#fff;border-color:var(--sk,var(--accent2))}
   .dge-chips{display:flex;gap:8px;flex-wrap:wrap}
   .dge-chip{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:999px;padding:7px 13px;font:inherit;font-size:14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:.15s}
   .dge-chip .dot{width:8px;height:8px;border-radius:50%;background:#2f9e6f}
