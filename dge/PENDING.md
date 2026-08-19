@@ -1721,6 +1721,24 @@ Still open, in the order I would take them:
   surfaces only on the merged tree — after the crawl, in a job that cannot
   say which shard caused it. Running the extract-side check with `--strict`
   too would fail it where the cause is still visible.
+- **Headings are stored as verses, which is what a reader sees as a blank
+  entry.** Nyāya Sudhā mūla item 4 of 1,655 (`DV_4849`) has
+  `sanskrit_text: "प्रथमः पादः"` — a pāda heading occupying a verse slot, so
+  the reader shows a card with a reference and nothing to read. 1,063 of the
+  1,655 mūla items are under 40 characters; many of those are genuine short
+  pratīkas, but the navigation headings among them are not text at all.
+  Corpus-wide, 3,317 of 30,139 items are under 40 characters. The importer
+  needs to distinguish a heading row from a content row and drop the former.
+- **The adhikaraṇa structure was never captured, and this is the deeper gap.**
+  The breadcrumb goes `work > layer > adhyāya > pāda` and stops. There is no
+  adhikaraṇa level, no link from an adhikaraṇa to the mūla sūtra/śloka it
+  expounds, and no grouping of which commentaries belong to it — the
+  adhikaraṇa names survive only as directory names invented from headings.
+  So the corpus can be read page by page but cannot answer "how many
+  adhikaraṇas are there, which verses does each cover, and which ṭīkās
+  comment on it", which is the question a Dvaita scholar will ask first.
+  Fixing this is a modelling job on top of the layer-naming fix, not a
+  re-crawl: the pages are cached.
 - **`sutra_prasthana/brahma_sutrani` remains disabled** — "homepage href is
   empty on the source site". Untouched by this work.
 
