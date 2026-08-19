@@ -1,6 +1,6 @@
 {
  "_readme": "Written by tools/check_sources.py. Fingerprints only -- no content. Delete an entry to force a first-look report.",
- "checked_at_utc": "2026-08-19T10:31:08Z",
+ "checked_at_utc": "2026-08-19T10:39:48Z",
  "sources": {
   "gretil": {
    "fingerprint": "8e2b0a6826694bfb",
@@ -22,10 +22,10 @@
    }
   },
   "dvaitavedanta": {
-   "fingerprint": "19fd62a5537aa8c2",
+   "fingerprint": "409ed3fd85c57a7d",
    "detail": {
     "seeds": 8,
-    "linked": 2578
+    "linked": 3078
    }
   },
   "madhwafestivals": {
@@ -66,6 +66,13 @@
    "fingerprint": "be7971ae0f71809b",
    "detail": {
     "items": 34
+   }
+  },
+  "indic_dict_stardict": {
+   "fingerprint": "59f7941465d7b7d3",
+   "detail": {
+    "commit": "5523e20c6ad2",
+    "date": "2026-08-04T13:30:24Z"
    }
   }
  }
