@@ -47,8 +47,12 @@ try:
     from indic_transliteration.sanscript import transliterate as _trx
     def itrans_to_dev(s):
         return _trx(s, _sc.ITRANS, _sc.DEVANAGARI)
+    def itrans_to_iast(s):
+        return _trx(s, _sc.ITRANS, _sc.IAST)
 except Exception:
     def itrans_to_dev(s):
+        raise RuntimeError("pip install indic-transliteration (see importers/requirements.txt)")
+    def itrans_to_iast(s):
         raise RuntimeError("pip install indic-transliteration (see importers/requirements.txt)")
 
 def to_text(doc):
