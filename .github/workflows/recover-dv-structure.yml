@@ -86,7 +86,10 @@ jobs:
           # shares no history with main, so main's size is untouched.
           git checkout --orphan dv-cache-dist
           git rm -rf --cached . >/dev/null 2>&1 || true
-          find . -maxdepth 1 -mindepth 1 ! -name '.git' ! -name 'dv-cache-raw.tar.zst' -exec rm -rf {} +
+          # Keep .dv_cache: this rm is clearing the orphan branch's working
+          # tree, and sweeping the cache away with it left the recovery step
+          # below with nothing to read on the first run.
+          find . -maxdepth 1 -mindepth 1 ! -name '.git' ! -name '.dv_cache' ! -name 'dv-cache-raw.tar.zst' -exec rm -rf {} +
           printf '%s\n' \
             "# dvaitavedanta.in raw pages" "" \
             "The HTTP cache from the crawl, exactly as fetched, so anything the" \
@@ -104,8 +107,10 @@ jobs:
       - name: Recover the navigation tree
         run: |
           set -euo pipefail
-          git checkout -- . 2>/dev/null || true
-          git checkout "${GITHUB_REF_NAME}" -- . 2>/dev/null || true
+          # Come back to the dispatched ref; the preserve step left us on the
+          # orphan branch with its one-file tree.
+          git checkout -f "${GITHUB_REF_NAME}" 2>/dev/null || git checkout -f "${GITHUB_SHA}"
+          ls .dv_cache/*.html | wc -l
           ARGS=(--cache .dv_cache --out dge/data/dvaitavedanta/_structure.json)
           [ "${{ inputs.limit }}" != "0" ] && ARGS+=(--limit "${{ inputs.limit }}")
           python tools/dvaitavedanta/recover_structure.py "${ARGS[@]}"
