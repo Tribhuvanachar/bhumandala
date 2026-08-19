@@ -44,14 +44,18 @@ const appConfig = {
   // reason. kavya.html carries the same URL as its own default, since it
   // does not load this file.
   kavyaDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@75ef2103bc07770ccb861497c32636d706c09fa4",
-  // The corpus-search index js/dge-search.js reads -- 916 granthas, 94,664
-  // units, 330 MB. Rebuilding it with the extract_text fix (the one that made
+  // The corpus-search index js/dge-search.js reads -- 983 granthas, 104,870
+  // units. Rebuilding it with the extract_text fix (the one that made
   // every shloka-based grantha index its verses rather than nothing) took the
   // published site from 966 MB to 1,013 MB against a 1 GB Pages ceiling, so
   // the index moved to the "search-dist" branch and the site came back to
   // about 685 MB. window.DGE_SEARCH_INDEX was already the override the search
   // client looks for. search_index/backlinks stays on main -- it is 0.1 MB.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@0195c115a77f196e616ab4745906b4c3730727a1",
+  // NOTE: this is pinned to a commit, not to @search-dist, so jsDelivr cannot
+  // serve a half-written index -- which means reindex.yml publishing a new one
+  // changes nothing for readers until this line is bumped to that commit. If a
+  // freshly merged grantha browses but does not search, this is why.
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@b726b5ec44131f73710038f04f6100db985af54e",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
