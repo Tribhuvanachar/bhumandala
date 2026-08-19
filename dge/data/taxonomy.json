@@ -1081,7 +1081,12 @@
       "bhashya": {}
      }
     }
-   }
+   },
+   "vishishtadvaita": {},
+   "bhedabheda": {},
+   "shuddhadvaita": {},
+   "dvaitadvaita": {},
+   "acintya_bhedabheda": {}
   },
   "nyaya": {
    "bhasha_pariccheda": {
@@ -5169,5 +5174,60 @@
   "_note": "Holding place for material whose home in the taxonomy is not settled yet. Nothing is meant to stay here; each item moves once it is decided.",
   "ajaya_vijayendra": {},
   "satyadhyana_tirtha_civil_suit": {}
+ },
+ "jyotisha": {
+  "_note": "Extended classical Jyotisha, kept separate from vedanga.jyotisha (the Vedanga proper) per the DGE Shastra Taxonomy note (18 Aug 2026): the six-Vedanga placement is real but the later classical corpus grew far past it. A text belongs primarily here or there, not both -- cross-link with a secondary tag rather than duplicating the node.",
+  "vedanga_jyotisha": {},
+  "siddhanta": {},
+  "ganita": {},
+  "hora": {
+   "jataka": {},
+   "prashna": {},
+   "dasha": {}
+  },
+  "samhita": {
+   "muhurta": {},
+   "varshaphala": {}
+  }
+ },
+ "upaveda": {
+  "_note": "Ayurveda, Dhanurveda and Gandharvaveda per the DGE Shastra Taxonomy note (18 Aug 2026). Arthashastra is deliberately NOT nested here -- it lives at the top-level artha_rajaniti branch instead, since the source doc lists it in both places and its own classification decisions (#3, #5) only argue for Ayurveda/Dhanurveda/Gandharvaveda belonging under Upaveda.",
+  "ayurveda": {
+   "brihattrayi": {
+    "charaka_samhita": {},
+    "sushruta_samhita": {},
+    "ashtanga_hridaya": {}
+   },
+   "laghutrayi": {
+    "madhava_nidana": {},
+    "sharngadhara_samhita": {},
+    "bhavaprakasha": {}
+   },
+   "nighantu": {
+    "dhanvantari_nighantu": {},
+    "bhavaprakasha_nighantu": {},
+    "raja_nighantu": {}
+   }
+  },
+  "dhanurveda": {},
+  "gandharvaveda": {
+   "sangita": {},
+   "natya": {}
+  }
+ },
+ "artha_rajaniti": {
+  "_note": "Kautilya's Arthashastra and statecraft literature per the DGE Shastra Taxonomy note (18 Aug 2026). Where general Nitishastra (Canakya Niti, Kamandakiya Nitisara, Panchatantra, Hitopadesha -- sourced in PENDING.md 18 Aug 2026 but not yet given a taxonomy home) belongs is NOT decided by that note and is left open here rather than guessed.",
+  "arthashastra": {}
+ },
+ "kamashastra": {
+  "_note": "Per the DGE Shastra Taxonomy note (18 Aug 2026); sources for these already checked in PENDING.md 18 Aug 2026.",
+  "kamasutra": {},
+  "panchashayaka": {},
+  "smaradipika": {}
+ },
+ "vastu_shilpa": {
+  "_note": "Per the DGE Shastra Taxonomy note (18 Aug 2026). No sources checked yet -- an empty placeholder, not a claim anything is sourced.",
+  "vastushastra": {},
+  "shilpashastra": {}
  }
 }

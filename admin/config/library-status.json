@@ -1,7 +1,7 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1651,
+  "leaves": 1682,
   "loaded": 920,
   "items": 353850
  },
@@ -11,8 +11,13 @@
    "loaded": 1,
    "items": 1623
   },
+  "artha_rajaniti": {
+   "total": 1,
+   "loaded": 0,
+   "items": 0
+  },
   "darshana": {
-   "total": 246,
+   "total": 251,
    "loaded": 50,
    "items": 16121
   },
@@ -30,6 +35,16 @@
    "total": 91,
    "loaded": 83,
    "items": 213039
+  },
+  "jyotisha": {
+   "total": 8,
+   "loaded": 0,
+   "items": 0
+  },
+  "kamashastra": {
+   "total": 3,
+   "loaded": 0,
+   "items": 0
   },
   "kavya_alankara": {
    "total": 30,
@@ -53,6 +68,16 @@
   },
   "stotra": {
    "total": 3,
+   "loaded": 0,
+   "items": 0
+  },
+  "upaveda": {
+   "total": 12,
+   "loaded": 0,
+   "items": 0
+  },
+  "vastu_shilpa": {
+   "total": 2,
    "loaded": 0,
    "items": 0
   },
@@ -86,6 +111,7 @@
   "agama/pancharatra/shaiva_agama": 0,
   "agama/pancharatra/shakta_agama": 0,
   "agama/pancharatra/vaikhanasa_agama": 0,
+  "artha_rajaniti/arthashastra": 0,
   "darshana/mimamsa/bhatta/shlokavarttika/mula": 0,
   "darshana/mimamsa/bhatta/shlokavarttika/tika_kashika": 0,
   "darshana/mimamsa/bhatta/shlokavarttika/tika_nyayaratnakara": 0,
@@ -200,6 +226,7 @@
   "darshana/vaisheshika/sutra_and_bhashya/prashastapada_bhashya/mula": 0,
   "darshana/vaisheshika/sutra_and_bhashya/prashastapada_bhashya/tika_kiranavali": 0,
   "darshana/vaisheshika/sutra_and_bhashya/vaisheshika_sutra/mula": 0,
+  "darshana/vedanta/acintya_bhedabheda": 0,
   "darshana/vedanta/advaita/shankara_bhashya/brahmasutra_bhashya/bhashya": 556,
   "darshana/vedanta/advaita/shankara_bhashya/gita_bhashya/bhashya": 1175,
   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/aitareya_upanishad/bhashya": 59,
@@ -212,6 +239,7 @@
   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/mundaka_upanishad/bhashya": 0,
   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/prashna_upanishad/bhashya": 0,
   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/taittiriya_upanishad/bhashya": 0,
+  "darshana/vedanta/bhedabheda": 0,
   "darshana/vedanta/dvaita/sarvamula/achara_and_ancillary_granthas/jayanti_nirnaya/mula": 16,
   "darshana/vedanta/dvaita/sarvamula/achara_and_ancillary_granthas/jayanti_nirnaya/tika_jayatirtha": 0,
   "darshana/vedanta/dvaita/sarvamula/achara_and_ancillary_granthas/jayanti_nirnaya/tippani": 0,
@@ -332,6 +360,9 @@
   "darshana/vedanta/dvaita/sarvamula/upanishad_prasthana/taittiriyopanishad_bhashya/mula": 72,
   "darshana/vedanta/dvaita/sarvamula/upanishad_prasthana/taittiriyopanishad_bhashya/tika_jayatirtha": 0,
   "darshana/vedanta/dvaita/sarvamula/upanishad_prasthana/taittiriyopanishad_bhashya/tippani": 0,
+  "darshana/vedanta/dvaitadvaita": 0,
+  "darshana/vedanta/shuddhadvaita": 0,
+  "darshana/vedanta/vishishtadvaita": 0,
   "dasa_sahitya/dasakuta/gopaladasa/dandaka": 0,
   "dasa_sahitya/dasakuta/gopaladasa/mundige": 0,
   "dasa_sahitya/dasakuta/gopaladasa/other_compositions": 0,
@@ -1339,6 +1370,17 @@
   "itihasa/ramayana/uttara_kanda/mula": 2690,
   "itihasa/ramayana/yuddha_kanda/mula": 4436,
   "itihasa/ramayana/yuddha_kanda/saartha": 5213,
+  "jyotisha/ganita": 0,
+  "jyotisha/hora/dasha": 0,
+  "jyotisha/hora/jataka": 0,
+  "jyotisha/hora/prashna": 0,
+  "jyotisha/samhita/muhurta": 0,
+  "jyotisha/samhita/varshaphala": 0,
+  "jyotisha/siddhanta": 0,
+  "jyotisha/vedanga_jyotisha": 0,
+  "kamashastra/kamasutra": 0,
+  "kamashastra/panchashayaka": 0,
+  "kamashastra/smaradipika": 0,
   "kavya_alankara/kiratarjuniya/mula": 1055,
   "kavya_alankara/kumarasambhava/mula": 1112,
   "kavya_alankara/raghavendra_vijaya/sarga_1": 0,
@@ -1494,6 +1536,20 @@
   "stotra/gajendra_moksha": 0,
   "stotra/pns": 0,
   "stotra/vishnu_sahasranama": 0,
+  "upaveda/ayurveda/brihattrayi/ashtanga_hridaya": 0,
+  "upaveda/ayurveda/brihattrayi/charaka_samhita": 0,
+  "upaveda/ayurveda/brihattrayi/sushruta_samhita": 0,
+  "upaveda/ayurveda/laghutrayi/bhavaprakasha": 0,
+  "upaveda/ayurveda/laghutrayi/madhava_nidana": 0,
+  "upaveda/ayurveda/laghutrayi/sharngadhara_samhita": 0,
+  "upaveda/ayurveda/nighantu/bhavaprakasha_nighantu": 0,
+  "upaveda/ayurveda/nighantu/dhanvantari_nighantu": 0,
+  "upaveda/ayurveda/nighantu/raja_nighantu": 0,
+  "upaveda/dhanurveda": 0,
+  "upaveda/gandharvaveda/natya": 0,
+  "upaveda/gandharvaveda/sangita": 0,
+  "vastu_shilpa/shilpashastra": 0,
+  "vastu_shilpa/vastushastra": 0,
   "vedanga/chandas": 0,
   "vedanga/jyotisha": 0,
   "vedanga/kalpa/atharvaveda/kaushika/grihyasutra": 0,
