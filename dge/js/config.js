@@ -51,7 +51,7 @@ const appConfig = {
   // the index moved to the "search-dist" branch and the site came back to
   // about 685 MB. window.DGE_SEARCH_INDEX was already the override the search
   // client looks for. search_index/backlinks stays on main -- it is 0.1 MB.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@1bd5d9a0ab3a31d6084ed216b4e62489b86951c7",
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@0195c115a77f196e616ab4745906b4c3730727a1",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
