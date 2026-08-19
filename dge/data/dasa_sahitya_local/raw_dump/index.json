@@ -1,31 +1,10 @@
 {
   "asset": "raw_dump",
   "generated": "2026-08-19",
-  "count_total": 1043,
+  "count_total": 278,
   "needs_review_count": 0,
   "bio_notes": 1,
   "dasaru": [
-    {
-      "slug": "gopaladasaru",
-      "composer": "ಗೋಪಾಲದಾಸರು",
-      "source_file": "gopaladasa.json",
-      "count": 142,
-      "file": "dasaru/gopaladasaru.json"
-    },
-    {
-      "slug": "kanakadasaru",
-      "composer": "ಕನಕದಾಸರು",
-      "source_file": "kanakadasa.json",
-      "count": 318,
-      "file": "dasaru/kanakadasaru.json"
-    },
-    {
-      "slug": "puramdaradasaru",
-      "composer": "ಪುರಂದರದಾಸರು",
-      "source_file": "purandara.json",
-      "count": 305,
-      "file": "dasaru/puramdaradasaru.json"
-    },
     {
       "slug": "ugabhoga",
       "composer": "",
@@ -33,5 +12,7 @@
       "count": 278,
       "file": "dasaru/ugabhoga.json"
     }
-  ]
+  ],
+  "count_dasaru": 1,
+  "note_confirmed_composers_merged_out": "Composers confirmed as duplicates of the web corpus were merged into dge/data/dasa_sahitya/composers/ and removed from here by merge_confirmed_composers.py on 2026-08-19; see that folder's file for the merged record, and ALL_SOURCES_composer_registry.json for which composers those were."
 }

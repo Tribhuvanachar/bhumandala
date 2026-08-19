@@ -2,8 +2,8 @@
   "asset": "dasa1",
   "source_db": "46111a43-dasa1.db",
   "generated": "2026-08-19",
-  "count_total": 13540,
-  "count_dasaru": 135,
+  "count_total": 10165,
+  "count_dasaru": 123,
   "category_form_guess": {
     "0": "pada",
     "1": "ugabhoga",
@@ -168,20 +168,6 @@
   "needs_review_count": 154,
   "dasaru": [
     {
-      "slug": "puramdaradasaru",
-      "dasaru_id": 1,
-      "composer": "ಪುರಂದರದಾಸರು",
-      "count": 983,
-      "file": "dasaru/puramdaradasaru.json"
-    },
-    {
-      "slug": "vijayadasaru",
-      "dasaru_id": 6,
-      "composer": "ವಿಜಯದಾಸರು",
-      "count": 890,
-      "file": "dasaru/vijayadasaru.json"
-    },
-    {
       "slug": "kakhamdaki_sri_krsnadasaru",
       "dasaru_id": 17,
       "composer": "ಕಾಖಂಡಕಿ ಶ್ರೀ ಕೃಷ್ಣದಾಸರು",
@@ -231,25 +217,11 @@
       "file": "dasaru/cidanamda_avadhutaru.json"
     },
     {
-      "slug": "prasannavemkatadasaru",
-      "dasaru_id": 51,
-      "composer": "ಪ್ರಸನ್ನವೆಂಕಟದಾಸರು",
-      "count": 376,
-      "file": "dasaru/prasannavemkatadasaru.json"
-    },
-    {
       "slug": "gururamavithala",
       "dasaru_id": 47,
       "composer": "ಗುರುರಾಮವಿಠಲ",
       "count": 326,
       "file": "dasaru/gururamavithala.json"
-    },
-    {
-      "slug": "kanakadasaru",
-      "dasaru_id": 2,
-      "composer": "ಕನಕದಾಸರು",
-      "count": 286,
-      "file": "dasaru/kanakadasaru.json"
     },
     {
       "slug": "ambabayi",
@@ -273,13 +245,6 @@
       "file": "dasaru/samasumdara_vithala.json"
     },
     {
-      "slug": "pranesadasaru",
-      "dasaru_id": 8,
-      "composer": "ಪ್ರಾಣೇಶದಾಸರು",
-      "count": 195,
-      "file": "dasaru/pranesadasaru.json"
-    },
-    {
       "slug": "vidyaprasannatirtharu",
       "dasaru_id": 149,
       "composer": "ವಿದ್ಯಾಪ್ರಸನ್ನತೀರ್ಥರು",
@@ -294,13 +259,6 @@
       "file": "dasaru/henneramgadasaru.json"
     },
     {
-      "slug": "jagannathadasaru",
-      "dasaru_id": 30,
-      "composer": "ಜಗನ್ನಾಥದಾಸರು",
-      "count": 170,
-      "file": "dasaru/jagannathadasaru.json"
-    },
-    {
       "slug": "namjanagudu_tirumalamba",
       "dasaru_id": 192,
       "composer": "ನಂಜನಗೂಡು ತಿರುಮಲಾಂಬಾ",
@@ -313,13 +271,6 @@
       "composer": "ಇಂದಿರೇಶರು",
       "count": 164,
       "file": "dasaru/imdiresaru.json"
-    },
-    {
-      "slug": "vadiraja",
-      "dasaru_id": 116,
-      "composer": "ವಾದಿರಾಜ",
-      "count": 159,
-      "file": "dasaru/vadiraja.json"
     },
     {
       "slug": "kavi_paramadevadasaru",
@@ -420,13 +371,6 @@
       "file": "dasaru/vemkatavaradaryaru.json"
     },
     {
-      "slug": "vyasarayaru",
-      "dasaru_id": 120,
-      "composer": "ವ್ಯಾಸರಾಯರು",
-      "count": 93,
-      "file": "dasaru/vyasarayaru.json"
-    },
-    {
       "slug": "samkarabhatta_agnihotri",
       "dasaru_id": 41,
       "composer": "ಶಂಕರಭಟ್ಟ ಅಗ್ನಿಹೋತ್ರಿ",
@@ -497,13 +441,6 @@
       "file": "dasaru/laksminarayanarayaru.json"
     },
     {
-      "slug": "sripadarajaru",
-      "dasaru_id": 115,
-      "composer": "ಶ್ರೀಪಾದರಾಜರು",
-      "count": 71,
-      "file": "dasaru/sripadarajaru.json"
-    },
-    {
       "slug": "hanumesavithala",
       "dasaru_id": 176,
       "composer": "ಹನುಮೇಶವಿಠಲ",
@@ -553,20 +490,6 @@
       "file": "dasaru/sridavithalaru.json"
     },
     {
-      "slug": "mohanadasaru",
-      "dasaru_id": 138,
-      "composer": "ಮೋಹನದಾಸರು",
-      "count": 57,
-      "file": "dasaru/mohanadasaru.json"
-    },
-    {
-      "slug": "gopaladasaru",
-      "dasaru_id": 7,
-      "composer": "ಗೋಪಾಲದಾಸರು",
-      "count": 53,
-      "file": "dasaru/gopaladasaru.json"
-    },
-    {
       "slug": "keladi_vemkanna_kavi",
       "dasaru_id": 172,
       "composer": "ಕೆಳದಿ ವೆಂಕಣ್ಣ ಕವಿ",
@@ -614,13 +537,6 @@
       "composer": "ಯದುಗಿರಿಯಮ್ಮ",
       "count": 44,
       "file": "dasaru/yadugiriyamma.json"
-    },
-    {
-      "slug": "helavanakatte_giriyamma",
-      "dasaru_id": 32,
-      "composer": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
-      "count": 42,
-      "file": "dasaru/helavanakatte_giriyamma.json"
     },
     {
       "slug": "acalanamdadasa",
@@ -1112,5 +1028,6 @@
       "count": 1,
       "file": "dasaru/parisistam.json"
     }
-  ]
+  ],
+  "note_confirmed_composers_merged_out": "Composers confirmed as duplicates of the web corpus were merged into dge/data/dasa_sahitya/composers/ and removed from here by merge_confirmed_composers.py on 2026-08-19; see that folder's file for the merged record, and ALL_SOURCES_composer_registry.json for which composers those were."
 }
