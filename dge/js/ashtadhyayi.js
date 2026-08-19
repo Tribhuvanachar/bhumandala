@@ -336,23 +336,31 @@
     // Now any separator works (1-1-1, 1 1 1, 1,1,1), a partial reference goes
     // to the start of that adhyaya or pada, and a miss says so.
     var jump=$("#dge-jump");
+    function findSutraMatch(raw){
+      raw=(raw||"").trim();
+      if(!raw) return null;
+      var parts=raw.replace(/[\s,\-\u2013\u2014\u0964|]+/g,".").split(".").filter(Boolean);
+      var bad=parts.some(function(x){ return !/^\d+$/.test(x); });
+      if(bad||!parts.length) return null;
+      var id=parts.join(".");
+      if(state.byId[id]) return state.byId[id];
+      // a prefix: first sutra of that adhyaya (1) or pada (1.1) -- but ONLY
+      // if what's typed so far can't still become a longer valid id (e.g.
+      // typing "1" toward "10" shouldn't jump to adhyaya 1's first sutra
+      // and have that value fight the next keystroke; typing "1." toward
+      // "1.1.1" is unambiguous, since a trailing separator means the
+      // segment just typed is deliberately finished).
+      if(!/[.\s,\-\u2013\u2014\u0964|]$/.test(raw)) return null;
+      var pre=id+".";
+      for(var i=0;i<state.sutras.length;i++){
+        if(state.sutras[i].id.indexOf(pre)===0) return state.sutras[i];
+      }
+      return null;
+    }
     function jumpTo(){
       var raw=(jump.value||"").trim();
       if(!raw) return;
-      var parts=raw.replace(/[\s,\-\u2013\u2014\u0964|]+/g,".").split(".").filter(Boolean);
-      var bad=parts.some(function(x){ return !/^\d+$/.test(x); });
-      var id=parts.join(".");
-      var hit=null;
-      if(!bad&&parts.length){
-        if(state.byId[id]) hit=state.byId[id];
-        else {
-          // a prefix: first sutra of that adhyaya (1) or pada (1.1)
-          var pre=id+".";
-          for(var i=0;i<state.sutras.length;i++){
-            if(state.sutras[i].id.indexOf(pre)===0){ hit=state.sutras[i]; break; }
-          }
-        }
-      }
+      var hit=findSutraMatch(raw);
       if(hit){ jump.classList.remove("miss"); jump.value=hit.id; go(state.sutras.indexOf(hit)); }
       else { jump.classList.add("miss"); jump.title="No sutra "+raw; setTimeout(function(){ jump.classList.remove("miss"); },1200); }
     }
@@ -360,6 +368,19 @@
       jump.addEventListener("change",jumpTo);
       // change alone does not fire when someone retypes the same reference
       jump.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); jumpTo(); } });
+      // Live navigation as a complete reference is typed, not only on
+      // Enter/blur -- deliberately does NOT rewrite jump.value or flag
+      // ".miss" the way explicit jumpTo() does: while still typing, "no
+      // match yet" is normal, not an error, and normalizing the box's text
+      // mid-keystroke would fight whatever the reader types next.
+      var jumpDebounce = null;
+      jump.addEventListener("input",function(){
+        clearTimeout(jumpDebounce);
+        jumpDebounce = setTimeout(function(){
+          var hit=findSutraMatch(jump.value);
+          if(hit) go(state.sutras.indexOf(hit));
+        }, 220);
+      });
     }
     document.addEventListener("keydown",function(e){
       if(/INPUT|TEXTAREA/.test((e.target.tagName||""))) return;
@@ -387,14 +408,27 @@
     var ms=$("#dge-modeSeg"); if(ms) ms.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on",b.dataset.m===state.mode); });
     var ss=$("#dge-scriptSeg"); if(ss) ss.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on",b.dataset.s===state.script); });
   }
+  // Deep-linking a specific sutra via #<code> (e.g. "1.1.1") — the target
+  // every other page's "open this sutra in Ashtadhyayi" link already
+  // builds (js/intellisense.js's per-step sutra popover), but this page
+  // never read location.hash at all, so every such link landed on the
+  // default first sutra regardless of which one was actually clicked.
+  function hashId(){ return decodeURIComponent((location.hash||"").replace(/^#/,"").trim()); }
+  function goToHash(){
+    var h=hashId();
+    if(h && state.byId[h]) go(state.sutras.indexOf(state.byId[h]));
+  }
   function boot(){
     wire(); applyPrefs();
     loadSutrapatha().then(function(){
       if(!state.sutras.length){ $("#dge-hsutra").textContent="(no sutra data found)"; return; }
       var dl=$("#dge-sutralist");
       if(dl) dl.innerHTML = state.sutras.map(function(s){ return '<option value="'+s.id+'">'; }).join("");
+      var h=hashId();
+      if(h && state.byId[h]) state.idx=state.sutras.indexOf(state.byId[h]);
       renderAll();
       ORDER.forEach(function(k){ if(state.enabled[k]) ensureLayer(k).then(renderLayers); });
+      window.addEventListener("hashchange",goToHash);
     }).catch(function(e){ $("#dge-hsutra").textContent="Failed to load sutrapatha data."; console.error("[ashtadhyayi]",e); });
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot); else boot();
