@@ -91,11 +91,21 @@ def devanagari_count(text: str) -> int:
     return sum(1 for c in text if DEVANAGARI_RANGE[0] <= ord(c) <= DEVANAGARI_RANGE[1])
 
 
+# Word and other rich-text editors bracket a pasted selection with
+# <!--StartFragment--> / <!--EndFragment--> comments. Somewhere upstream of
+# dvaitavedanta.in those markers lost their delimiters, so the bare words
+# survive in the stored HTML and read as part of the text: 1,590 of Nyaya
+# Sudha's 9,929 entries carry a stray "EndFragment". It is never Sanskrit
+# and never the editor's words, so it goes before anything measures the text.
+CLIPBOARD_CHROME = re.compile(r"<!--\s*(?:Start|End)Fragment\s*-->|\b(?:Start|End)Fragment\b")
+
+
 def clean_text(value: str) -> str:
     """Normalise whitespace while preserving intentional line breaks."""
     if not value:
         return ""
     value = unicodedata.normalize("NFC", value)
+    value = CLIPBOARD_CHROME.sub("", value)
     value = value.replace(" ", " ").replace("​", "")
     lines = [re.sub(r"[ \t\f\v]+", " ", ln).strip() for ln in value.split("\n")]
     lines = [ln for ln in lines if ln]

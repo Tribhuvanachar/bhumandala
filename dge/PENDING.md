@@ -1056,7 +1056,7 @@ complete record, not just a live queue.
   2. **आदिवर्ण/अन्त्यवर्ण (initial/final letter classification) — not merged; not needed as an import.** Neither this source nor vidyut's own data carries it as an explicit field, but it doesn't need to be: it's mechanically derivable from each root's own `dhatu_slp` (already in `data.json`) once real SLP1 anubandha-stripping rules exist — see next item. Not implemented this pass because that stripping logic is the actual blocker, not missing data.
   3. **अनुबन्ध (IT-marker) classification — not merged, genuinely blocked.** Not an explicit field anywhere checked (this source's `krut/pratyay.txt` has `it1`/`it2`/`it3` columns for kṛt-pratyayas specifically, not dhātu upadeśa anubandhas). Doing this correctly needs real Paninian anubandha-stripping rules applied to the SLP1 upadeśa string (e.g. `eDa~\\` → strip the trailing accent+anunāsika markers to get the bare root) — naive string-slicing was already flagged elsewhere in this project as unsafe for exactly this reason. Worth a dedicated pass, ideally reusing vidyut-prakriya's own internal rules (it already parses these upadeśas correctly to run derivations) rather than reimplementing them.
   4. **उदात्त/अनुदात्त (accent) — partial signal only, not merged.** `dhatu/data.txt`'s free-text `tags` field sometimes includes "उदात्तोपदेशः" but isn't a clean enum and isn't populated for every root — lower confidence than `settva`/`karma`, deferred rather than shipped as an unreliable filter.
-  5. ~~**Verb-form tables (लुङन्त, यङ्लुङन्त, सन्नन्त, णिजन्त, कर्मणि, कर्तरि — Issue 15's "Dhātu Bodha" ask) — available, deliberately deferred.**~~ **Done — imported, the project lead explicitly lifted the 1 GB caution ("let any import whatever size, may be done... we will later on push it to another repository if performance issue arises... 1GB is just a recommendation, 5GB[+] is the real ceiling").** `tools/build_dhatu_forms.py` builds one JSON per root (`data/vedanga/vyakarana/dhatuforms/<code>.json`, 2229 files, 105 MB) from 9 of the 10 `dhatuforms_vidyut_*.txt` tables — shuddha karmani, san/nich/yang/yangluk × kartari/karmani. **shuddha kartari is deliberately excluded**: `data/vedanga/vyakarana/prakriya/<gana>/<code>.json` (built by `tools/build_prakriya.py` from vidyut-prakriya itself, no external dependency) already derives that exact table with its full step-by-step derivation, and `prakriya.html` already shows it — importing a second, independently-generated copy would risk the two silently disagreeing on some root with no way for a reader to tell which is right, not just cost bytes. New page `dhatuforms.html`/`js/dhatuforms.js` (linked from a dhatu row's "रूपाणि · सन्/णिच्/यङ्" button) renders voice tabs × 10-lakāra buttons × a 3×3 person/number table; degrades cleanly to 5 tabs for the 447 roots without yaṅ/yaṅluk forms (checked against source counts: yaṅ/yaṅluk 1782/2229, everything else 2229/2229). Verified in a real headless browser: bhū (01.0001, has all 9 tabs) and 01.0002 (5 tabs, no yaṅ) both render correct tables across voice and lakāra switches. Site working tree now ~1.1 GB (was 992 MB) — over the documented GitHub Pages "published site may be no larger than 1 GB" line, a real ceiling stated in Pages' own docs, not just the general repo-size recommendation; the project lead was told this explicitly and chose to proceed, with a split-to-another-repo fallback already agreed if it causes real problems. Worth watching the next Pages deploy to confirm it actually builds past 1 GB rather than assuming it will.
+  5. ~~**Verb-form tables (लुङन्त, यङ्लुङन्त, सन्नन्त, णिजन्त, कर्मणि, कर्तरि — Issue 15's "Dhātu Bodha" ask) — available, deliberately deferred.**~~ **Done — imported, the project lead explicitly lifted the 1 GB caution ("let any import whatever size, may be done... we will later on push it to another repository if performance issue arises... 1GB is just a recommendation, 5GB[+] is the real ceiling").** `tools/build_dhatu_forms.py` builds one JSON per root (`data/vedanga/vyakarana/dhatuforms/<code>.json`, 2229 files, 105 MB) from 9 of the 10 `dhatuforms_vidyut_*.txt` tables — shuddha karmani, san/nich/yang/yangluk × kartari/karmani. **shuddha kartari is deliberately excluded**: `data/vedanga/vyakarana/prakriya/<gana>/<code>.json` (built by `tools/build_prakriya.py` from vidyut-prakriya itself, no external dependency) already derives that exact table with its full step-by-step derivation, and `prakriya.html` already shows it — importing a second, independently-generated copy would risk the two silently disagreeing on some root with no way for a reader to tell which is right, not just cost bytes. New page `dhatuforms.html`/`js/dhatuforms.js` (linked from a dhatu row's "रूपाणि · सन्/णिच्/यङ्" button) renders voice tabs × 10-lakāra buttons × a 3×3 person/number table; degrades cleanly to 5 tabs for the 447 roots without yaṅ/yaṅluk forms (checked against source counts: yaṅ/yaṅluk 1782/2229, everything else 2229/2229). Verified in a real headless browser: bhū (01.0001, has all 9 tabs) and 01.0002 (5 tabs, no yaṅ) both render correct tables across voice and lakāra switches. Site working tree now ~1.1 GB (was 992 MB) — over the documented GitHub Pages "published site may be no larger than 1 GB" line, a real ceiling stated in Pages' own docs, not just the general repo-size recommendation; the project lead was told this explicitly and chose to proceed, with a split-to-another-repo fallback already agreed if it causes real problems. Worth watching the next Pages deploy to confirm it actually builds past 1 GB rather than assuming it will. **Confirmed 19 Aug 2026: it does.** With the working tree at 1,080 MB, the published site serves `dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/mula/data.json` (2.68 MB) and a `library.json` carrying all 46 of its entries, both HTTP 200 from `tribhuvanachar.github.io/bhumandala`. So the 1 GB line is a recommendation Pages does not enforce at this size, exactly as the project lead judged.
   6. ~~**Śabda-side data (declension tables, meanings — the other half of Issue 15/19's ask) — available, not evaluated for import yet.**~~ **Done — declension tables imported; the meanings blob deliberately left out.** `tools/build_shabdapatha.py` builds `data/vedanga/vyakarana/shabdapatha/data.json` (one combined file, 9007 words, 7.96 MB) from `shabda/data2.txt` — word, liṅga, three short glosses (Sanskrit/Hindi/English), and the 24-cell (8 vibhakti × 3 vacana) declension table. New `shabda.html`/`js/shabda.js` (mirrors `dhatu.js`'s list/filter/expand shape) browse/search/filter-by-gender and expand a word into its full declension table; linked from the homepage's Explore popup as "🔤 Śabdapāṭha". `shabda/shabda_meanings.txt` (15 MB, a bundled multi-dictionary gloss blob — Apte Hindi/English, MW, Bhargava, several headwords stacked under one key) was deliberately **not** merged: it overlaps in purpose with this repo's own Kosha module (`js/kosha.js`, `data/kosha/*`, already shipping Shabdakalpadruma etc.), and folding a second, differently-shaped dictionary source into Kosha wants its own scoping pass against Kosha's existing schema, not a rushed merge here. Verified in a real headless browser: gender-filter counts match the source (स्त्री 2108/9007), search narrows correctly, and two different words' (अकूपार, पुं; अकरणि, स्त्री) declension tables render with the right forms including multi-option cells (e.g. पञ्चमी twin forms). Caught and fixed a real bug of my own while testing: the row's DOM `id` attribute was built with `CSS.escape()` (meant only for building a *selector* string, not a literal attribute value) instead of plain text, so any word whose `urlid` needed escaping (e.g. `@akUpAra1`) got a mismatched id/selector pair and its row silently failed to expand — first caught because clicking a real search result produced an empty body, not because of a code read.
   7. **kṛt-pratyaya IT-marker/prakṛti data** — `krut/pratyay.txt` (24 KB) and `krut/prakruti.txt` (56 KB) exist and are small, but nothing in the current 23-issue list names a kṛt-pratyaya catalog feature this would feed — noted for whenever that's actually asked for, not built speculatively.
 
@@ -1654,6 +1654,75 @@ complete record, not just a live queue.
   resolved: VedaVaNi Rigveda + Yajurveda-Aranyaka audio sourced and
   verified (see above); Yajurveda Samhita/Brahmanam and full
   text/audio pairing still open.
+
+## Dvaita Vedānta extraction — what Nyāya Sudhā left behind
+
+Nyāya Sudhā is **in** (PR #80, merge `307d45f4`): 1,655 of 1,655 leaves,
+0 failed, 46 layers, 9,929 entries, 43.6 MB. It had been shelved on 17 Aug
+on a recon figure of ~105 s per leaf — about 46 hours. Measured against the
+live site it is ~26 s per leaf when the site is quick and ~39 s at night, so
+the real cost was ~14 hours, taken in five four-hour rounds against the
+resumable HTTP cache. Concurrency does not help: four parallel requests took
+70.9 s wall against 104 s serial, because the backend serialises. The
+`_note` on `nyaya_sudha` in `dv_sources.json` has been corrected; the
+grantha stays `enabled: false` because it is done, not because it is
+impossible.
+
+Fixed on the way, so nobody re-investigates it: **`EndFragment` clipboard
+chrome**. Word brackets a pasted selection in `<!--StartFragment-->` /
+`<!--EndFragment-->` comments, and upstream of dvaitavedanta.in the comment
+delimiters were lost, leaving the bare words in the stored text — 1,590 of
+Nyāya Sudhā's 9,929 entries carried one. On two short entries it dragged the
+Devanagari ratio under the verifier's floor and failed the whole merged
+tree, which is why a completed crawl produced no PR. `clean_text()` now
+strips it (`d8075db3`); zero remain in the landed data.
+
+Still open, in the order I would take them:
+
+- **One layer per heading — the extraction's biggest structural problem.**
+  The importer mints a layer from whatever heading string it finds, so
+  section headings become "commentaries". Under `nyaya_sudha` the
+  Nyāyasudhā-parimaḷa is split across **three** directories —
+  `tika_nyayasudhaparimala`, `tika_nyayasudhaparima_a` and `tika_parima_a` —
+  the last two from an OCR-broken `न्यायसुधापरिम ळ` carrying a stray space.
+  Under `later_acharyas/karmavijaya` there are ~60 directories named from
+  truncated summary *sentences*
+  (`tika_prasangadasadadhikaraniyanuvvakhyanasudhaya_kartabuddhimanitishe`,
+  `tika_om_na_prayojanavattvat_om_prayojanavattvahetoriti_sutre_prayojan`).
+  Under `sutra_prasthana/anuvyakhyana`, 68 of its 70 layers are
+  `tika_<adhikaraṇa-name>` holding one item each, and the text inside them is
+  Anuvyākhyāna verse (numbered ॥244॥, ॥245॥), not commentary. The fix belongs
+  in `resolve_layer_config` / the heading classifier — distinguish a
+  commentator's name from a section heading, and fold OCR variants of the
+  same name together. Nothing here is a fetching problem.
+- **The window on cheap re-runs is open but closing.** Every one of the 1,655
+  pages is in the Actions cache (`dv-cache-later_acharyas-*`, ~43 MB, scoped
+  to branch `claude/task-review-completion-wqog9g`). A full re-run with
+  `limit_per_grantha: 0` replays from it in **11 minutes** instead of 14
+  hours, so the layer-naming fix above costs almost nothing *while the cache
+  lives*. GitHub evicts caches unused for 7 days, and deleting the branch
+  drops the scope with it — that is the one action that turns this back into
+  a day of crawling.
+- **Anuvyākhyāna looks under-crawled and is marked `complete` anyway.** Its
+  grantha record reports `discovered: 16, items: 88` for a text of roughly
+  1,900 verses. Sixteen pages is about one pāda. Worth re-checking its seed
+  before trusting the `complete`.
+- **94,829 units across 631 unmapped layer names are being discarded**,
+  against 30,139 items actually written — roughly three times as much
+  dropped as kept. The largest are the major ṭīkā corpus: भावरत्नकोशः 6,787,
+  भावबोधः 6,358, भावप्रकाशः 5,500, भावप्रदीपिका 3,652, भावदीपिका 3,652. Some
+  of that is commentary on works not yet mapped and is legitimately out of
+  scope, but the volume deserves a deliberate decision rather than a silent
+  default, and `failures: []` with all 56 granthas `complete` reads as
+  fuller coverage than it is.
+- **The two verify gates disagree, and the looser one runs first.** The
+  extract job runs `verify_extract.py` without `--strict`; the collect job
+  runs it with. So a shard's own errors print and pass, and the failure
+  surfaces only on the merged tree — after the crawl, in a job that cannot
+  say which shard caused it. Running the extract-side check with `--strict`
+  too would fail it where the cause is still visible.
+- **`sutra_prasthana/brahma_sutrani` remains disabled** — "homepage href is
+  empty on the source site". Untouched by this work.
 
 ## Known unresolved bugs
 
