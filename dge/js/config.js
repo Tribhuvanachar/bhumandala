@@ -55,7 +55,7 @@ const appConfig = {
   // trigram + a document-frequency table, instead of one file per 2-char
   // prefix) -- see SEARCH_ARCHITECTURE.md. राम went from a 16 MB download to
   // 549 KB; scoring itself is unchanged.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@f11a2e3b3156568d1a884d959575f5a09a02a1a3",
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@cedcc73b1e7c6335346d0408a158ef69108fa883",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read

@@ -19,9 +19,24 @@
   // window.DGE_SEARCH_INDEX from appConfig; this constant is the same URL, so
   // a page that does not load config.js still finds it. Set the variable to
   // 'search_index' to read a local build instead.
-  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@f11a2e3b3156568d1a884d959575f5a09a02a1a3';
+  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@cedcc73b1e7c6335346d0408a158ef69108fa883';
   var INDEX_BASE = window.DGE_SEARCH_INDEX || CDN_INDEX;
   var idxPromise = null, debounce = null;
+
+  // Section slug -> display label, for the scope <select>. Falls back to a
+  // title-cased, underscore-stripped version of the slug for anything not
+  // listed here (see sectionLabel()), so a new section in the taxonomy shows
+  // up usably without this map needing to be kept in lockstep.
+  var SECTION_LABELS = {
+    vedas: 'Vedas', vedanga: 'Vedāṅga', itihasa: 'Itihāsa', purana: 'Purāṇa',
+    darshana: 'Darśana', dvaitavedanta: 'Dvaita Vedānta',
+    kavya_alankara: 'Kāvya', smriti_dharma: 'Smṛti / Dharma',
+    agama: 'Āgama', stotra: 'Stotra', dasa_sahitya: 'Dasa Sāhitya'
+  };
+  function sectionLabel(slug) {
+    return SECTION_LABELS[slug] ||
+      slug.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
 
   function css() {
     if (document.getElementById('dge-gs-css')) return;
@@ -55,7 +70,13 @@
     document.head.appendChild(s);
   }
 
+  // Guards against open() rebuilding the whole panel on every call: harmless
+  // when there was nothing to populate post-load (the scheme <select> was
+  // static markup), but the section <select> IS populated post-load from
+  // the index's manifest, and a rebuilt duplicate got only "Everything" --
+  // found by testing a second open() in the same page, not by inspection.
   function build() {
+    if (document.getElementById('dge-gs-overlay')) return;
     css();
     var fab = document.createElement('button');
     fab.className = 'dge-gs-fab';
@@ -79,6 +100,9 @@
             '<option value="auto">auto</option><option value="devanagari">देव</option>' +
             '<option value="iast">IAST</option><option value="hk">HK</option><option value="slp1">SLP1</option>' +
           '</select>' +
+          '<select class="dge-gs-scheme" id="dge-gs-section" title="Search scope">' +
+            '<option value="">Everything</option>' +
+          '</select>' +
           '<button class="dge-gs-x" id="dge-gs-x" title="Close (Esc)" aria-label="Close">✕</button>' +
         '</div>' +
         '<div class="dge-gs-results" id="dge-gs-results"><div class="dge-gs-hint">Type a word or phrase in any script. Matching is sandhi/spelling tolerant.</div></div>' +
@@ -88,6 +112,11 @@
 
     document.getElementById('dge-gs-x').addEventListener('click', close);
     document.getElementById('dge-gs-input').addEventListener('input', onType);
+    // Changing scope re-runs the current query immediately -- no need to
+    // retype for the search to reflect the new "Everything"/section choice.
+    document.getElementById('dge-gs-section').addEventListener('change', function () {
+      document.getElementById('dge-gs-input').dispatchEvent(new Event('input'));
+    });
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }
       if (e.key === 'Escape') close();
@@ -97,7 +126,10 @@
   function ensureIndex() {
     if (!idxPromise) {
       if (!window.DGESearch) { alert('Search scripts not loaded (need dge-search.js).'); return null; }
-      idxPromise = window.DGESearch.create(INDEX_BASE).catch(function (e) {
+      idxPromise = window.DGESearch.create(INDEX_BASE).then(function (idx) {
+        populateSections(idx.sections || []);
+        return idx;
+      }).catch(function (e) {
         idxPromise = null;
         document.getElementById('dge-gs-results').innerHTML =
           '<div class="dge-gs-hint">Could not load the search index at "' + INDEX_BASE + '". Generate it with build_search_index.py and commit dge/search_index/.</div>';
@@ -105,6 +137,24 @@
       });
     }
     return idxPromise;
+  }
+
+  // The section list only comes from the index's own manifest (it's not
+  // known ahead of a fetch), so the <select> starts as just "Everything" and
+  // fills in once ensureIndex() resolves. Guarded so a second open() in the
+  // same page load doesn't duplicate the options.
+  function populateSections(sections) {
+    var sel = document.getElementById('dge-gs-section');
+    if (!sel || sel.getAttribute('data-populated') || !sections.length) return;
+    sel.setAttribute('data-populated', '1');
+    sections.slice().sort(function (a, b) {
+      return sectionLabel(a).localeCompare(sectionLabel(b));
+    }).forEach(function (sec) {
+      var opt = document.createElement('option');
+      opt.value = sec;
+      opt.textContent = sectionLabel(sec);
+      sel.appendChild(opt);
+    });
   }
 
   // `query` is optional. The word popover in intellisense.js passes the word
@@ -147,7 +197,8 @@
     if (!q) { document.getElementById('dge-gs-results').innerHTML = '<div class="dge-gs-hint">Type a word or phrase in any script.</div>'; return; }
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
-      p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30 }, queryOpts(q))); })
+      var section = (document.getElementById('dge-gs-section') || {}).value || undefined;
+      p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30, section: section }, queryOpts(q))); })
        .then(render).catch(function () {});
     }, 140);
   }

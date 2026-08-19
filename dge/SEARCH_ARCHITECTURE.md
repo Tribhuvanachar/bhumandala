@@ -181,16 +181,28 @@ that is still tens of megabytes, which is a branch, not a repository.
    search to `itihasa` returned only `itihasa/`-prefixed hits and covered
    proportionally more of that section than the unscoped, MAX_SHARDS-capped
    search did, and both scoped and unscoped queries were re-verified against
-   a real HTTP server forcing the browser `fetch()` code path. Not yet
-   published to `search-dist` — needs a `reindex.yml` run once this reaches
-   `main`.
-3. **Scoped search in the UI**, now that (1) and (2) are in: a section
-   selector on the corpus-search panel, defaulting to everything.
+   a real HTTP server forcing the browser `fetch()` code path. **Published
+   and live** — `search-dist` at `cedcc73b`, pin bumped in `js/config.js`
+   and `js/global-search.js`, re-verified over the real CDN before bumping
+   (937 granthas including Kāvya, both a scoped and an unscoped posting file
+   fetched at their real paths).
+3. ✅ **Scoped search in the UI.** Done — a "Search scope" `<select>` next
+   to the script picker on the corpus-search panel, defaulting to
+   "Everything," populated from `manifest.sections` once the index loads
+   (the list isn't known ahead of a fetch) and passed through as
+   `idx.search(q, {section})`. Changing it re-runs the current query
+   immediately. Verified end-to-end in a real headless Chromium session
+   (Playwright, not just a Node harness): the dropdown populated with all
+   11 real sections, scoping to Itihāsa returned only `itihasa/`-prefixed
+   results, and switching back to "Everything" worked. That testing pass
+   also caught and fixed a real pre-existing bug it happened to expose —
+   `open()` rebuilt the entire panel (FAB, overlay, and now the section
+   `<select>`) on every call with no guard, harmless while there was
+   nothing to populate post-load, but producing duplicate-ID `<select>`
+   elements (and a second stacked FAB button) the moment something needed
+   to fill in live data after the fact. `build()` now no-ops if the panel
+   already exists.
 4. **Leave the repository layout as it is.** Branches for derived corpora,
    repositories only for the kośa and the audio.
 
-(1) is live. (2) is done in code, not yet published — until `reindex.yml`
-runs again and the pin is bumped, the live index is still the flat
-(pre-partition) one from (1), which is already the fast version; partitioning
-adds proportional scoped search, not a further speed change to what's live
-today.
+(1), (2) and (3) are all live as of 19 Aug 2026.
