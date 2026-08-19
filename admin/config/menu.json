@@ -40,10 +40,12 @@
   "explore": {
     "label": "Explore",
     "items": [
+      { "id": "ourStory",      "icon": "📖", "label": "Our Story", "action": "dgeOpenOurStory", "enabled": true },
       { "id": "guruParampara", "icon": "🪷", "label": "Guru Parampara",   "href": "guru-parampara/index.html", "enabled": true },
       { "id": "tirtha",        "icon": "🛕", "label": "Tirtha Prabandha", "href": "tirtha/index.html",         "enabled": true },
       { "id": "ashtadhyayi",   "icon": "📖", "label": "Aṣṭādhyāyī",       "href": "ashtadhyayi.html",          "enabled": true },
       { "id": "dhatupatha",    "icon": "📚", "label": "Dhātupāṭha",       "href": "dhatu.html",                "enabled": true },
+      { "id": "shabda",        "icon": "🔤", "label": "Śabdapāṭha",       "href": "shabda.html",                "enabled": true },
       { "id": "kavya",         "icon": "🪶", "label": "Kāvyāni",          "href": "kavya.html",                "enabled": true },
       { "id": "dasaSahitya",   "icon": "🎶", "label": "Dasa Sahitya",     "href": "dasa_sahitya.html",         "enabled": true }
     ]
@@ -62,6 +64,7 @@
       { "id": "adminDasaCaptureItem",        "icon": "🎶", "label": "Dasa Sahitya Capture", "href": "../admin/dasa-capture.html", "requires": "superadmin", "enabled": true },
       { "id": "adminHolyPlacesManagerItem",  "icon": "🛕", "label": "Holy Places Curation", "href": "../admin/holy-places.html",  "requires": "superadmin", "enabled": true },
       { "id": "adminAudioManagerItem",       "icon": "🎙️", "label": "Audio Admin",          "href": "../admin/audio.html",        "requires": "superadmin", "enabled": true },
+      { "id": "adminWorkflowsItem",          "icon": "⚙️", "label": "Run a Workflow",       "href": "../admin/workflows.html",    "requires": "superadmin", "enabled": true },
       { "id": "adminUserRolesItem",          "icon": "👥", "label": "Manage Users",         "action": "openUserRolesModal", "requires": "superadmin", "feature": "auth", "enabled": true }
     ]
   },

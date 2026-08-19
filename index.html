@@ -75,13 +75,22 @@
     <div class="pranam-row" id="pranamRow" aria-hidden="true"></div>
   </div>
 
+  <!-- Shown only on a Namaskāra click (see showPranamGif() below) — no src
+       is set in this markup, so nothing loads or plays until then. -->
+  <div class="pranam-gif-wrap" id="pranamGifWrap" aria-hidden="true">
+    <div class="pranam-gif-box">
+      <button class="sheet-close" id="pranamGifClose" aria-label="Close">✕</button>
+      <img id="pranamGifImg" alt="Namaskāra — a devotee's salutations at the Guru's feet">
+    </div>
+  </div>
+
   <div class="guru-block">
     <div class="guru-sa"    id="guruSa" data-edit="guru.nameSanskrit"></div>
     <div class="guru-latin" id="guruLatin" data-edit="guru.nameLatin"></div>
     <div class="guru-title" id="guruTitle" data-edit="guru.title"></div>
     <div class="rule" aria-hidden="true"><i></i></div>
-    <div class="verse"    id="verse" data-edit="vandana.sanskrit"></div>
-    <div class="verse-tr" id="verseTr" data-edit="vandana.transliteration"></div>
+    <div class="verse"    id="verse" data-edit="vandana.sanskrit" data-edit-quiet="1"></div>
+    <div class="verse-tr" id="verseTr" data-edit="vandana.transliteration" data-edit-quiet="1"></div>
     <button class="more-link more-link-sm" id="guruMore" data-panel="swamiji">
       <span id="guruMoreLabel" data-edit="guru.moreLabel"></span><span class="arrow" aria-hidden="true">→</span>
     </button>
@@ -253,8 +262,8 @@ let SITE_CONFIG = null;
     $('cueLabel').textContent    = cfg.labels.sectionsCue;
 
     $('mantras').innerHTML = cfg.footer.lines.map(function (l, i) {
-      return `<div class="mantra${i ? ' second' : ''}" data-edit="footer.lines.${i}.sa">${esc(l.sa)}</div>` +
-             (l.latin ? `<div class="mantra-latin" data-edit="footer.lines.${i}.latin">${esc(l.latin)}</div>` : '');
+      return `<div class="mantra${i ? ' second' : ''}" data-edit="footer.lines.${i}.sa" data-edit-quiet="1">${esc(l.sa)}</div>` +
+             (l.latin ? `<div class="mantra-latin" data-edit="footer.lines.${i}.latin" data-edit-quiet="1">${esc(l.latin)}</div>` : '');
     }).join('');
 
     // Mandala spokes, drawn rather than written into the markup. Cleared
@@ -319,6 +328,7 @@ let SITE_CONFIG = null;
     const pt = (k) => ' data-edit="panels.' + key + '.' + k + '"';
 
     let html = `<button class="sheet-close" data-close aria-label="Close">✕</button>
+      <a class="sheet-fullpage-link" href="home-panel.html?panel=${esc(key)}" title="Open this panel as its own page">↗ Full page</a>
       <div class="sheet-eyebrow"${pt('eyebrow')}>${esc(p.eyebrow)}</div>
       <h3 id="sheetTitle"${pt('title')}>${esc(p.title)}</h3>`;
 
@@ -428,9 +438,36 @@ let SITE_CONFIG = null;
     if (cfg.requireOffering && offerings >= cfg.minOfferings) unlock();
   }
 
+  // Namaskāra's blessing gif. Deliberately not eager-loaded (no src in the
+  // markup) — it only fetches and plays once a click actually asks for it.
+  let pranamGifTimer = null;
+  function showPranamGif() {
+    const wrap = $('pranamGifWrap'), img = $('pranamGifImg');
+    if (pranamGifTimer) clearTimeout(pranamGifTimer);
+    // Cache-busted so a second click restarts the animation from frame one
+    // instead of the browser just re-showing the gif already paused on its
+    // last frame from a prior view.
+    img.src = 'dge/images/guru/pranam-blessing.gif?t=' + Date.now();
+    wrap.classList.add('open');
+    wrap.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    pranamGifTimer = setTimeout(hidePranamGif, 6400); // one loop (36 frames @170ms) + a beat
+  }
+  function hidePranamGif() {
+    if (pranamGifTimer) { clearTimeout(pranamGifTimer); pranamGifTimer = null; }
+    const wrap = $('pranamGifWrap');
+    wrap.classList.remove('open');
+    wrap.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    // Clearing src after the fade stops any background decoding and
+    // guarantees the next open starts clean rather than mid-loop.
+    setTimeout(() => { $('pranamGifImg').src = ''; }, 400);
+  }
+
   function pranam() {
     offerings++;
     ripple();
+    showPranamGif();
     if (!reduced) {
       const n = cfg.pranam.count;
       const row = $('pranamRow');
@@ -540,6 +577,7 @@ let SITE_CONFIG = null;
 
   function enter() {
     if (cfg.requireOffering && offerings < cfg.minOfferings) return;
+    hidePranamGif();
     markPassed();
     document.body.classList.add('leaving');
     const target = destination();
@@ -564,9 +602,13 @@ let SITE_CONFIG = null;
     $('sheetWrap').addEventListener('click', function (ev) {
       if (ev.target === $('sheetWrap') || ev.target.closest('[data-close]')) closePanel();
     });
+    $('pranamGifWrap').addEventListener('click', function (ev) {
+      if (ev.target === $('pranamGifWrap') || ev.target.closest('#pranamGifClose')) hidePranamGif();
+    });
     document.addEventListener('keydown', function (ev) {
       if (ev.key !== 'Escape') return;
       if ($('sheetWrap').classList.contains('open')) closePanel();
+      if ($('pranamGifWrap').classList.contains('open')) hidePranamGif();
     });
   }
 

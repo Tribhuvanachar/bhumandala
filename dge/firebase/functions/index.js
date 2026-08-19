@@ -22,6 +22,7 @@ const otpCore = require('./lib/otp-core');
 const waLib = require('./lib/whatsapp');
 const { getProvider, assertProviderAllowed } = require('./lib/providers');
 const broadcastCore = require('./lib/broadcast-core');
+const wf = require('./lib/workflows-core');
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -53,8 +54,16 @@ const OTP_TEMPLATE_LANG = defineString('OTP_TEMPLATE_LANG', { default: 'en' });
 const OTP_DEFAULT_COUNTRY = defineString('OTP_DEFAULT_COUNTRY', { default: '91' });
 const MSG91_TEMPLATE_ID = defineString('MSG91_TEMPLATE_ID', { default: '' });
 
+// The token the workflow buttons run on. It must be a FINE-GRAINED personal
+// access token, scoped to this one repository, with Actions: read and write
+// and nothing else. A classic PAT with `repo` scope would hand whoever
+// reaches this function the whole account -- see FIREBASE_SETUP.md SS12.
+const GITHUB_DISPATCH_TOKEN = defineSecret('GITHUB_DISPATCH_TOKEN');
+const GITHUB_REPO = defineString('GITHUB_REPO', { default: 'Tribhuvanachar/bhumandala' });
+
 const CHALLENGES = 'otp_challenges';
 const USERS = 'users';
+const DISPATCHES = 'workflow_dispatches';
 
 function providerConfig(providerId) {
   return {
@@ -409,6 +418,156 @@ async function runOneCampaign(campaignDoc, now) {
 
   logger.info('Broadcast complete', { id: campaign.id, sent, failed, deferred: deferred.length });
 }
+
+// =====================================================================
+// The workflow buttons — listWorkflows / runWorkflow.
+//
+// The site is static on GitHub Pages, so a page cannot start a job by
+// itself, and it must never hold a token that could: anything shipped to a
+// browser is readable by whoever opens it. These two functions are the one
+// server-side hop in between. They hold the token, check the caller is an
+// admin against Firestore (not against anything the client claims), and
+// will only ever ask GitHub for one of the five workflows named in
+// lib/workflows-core.js.
+//
+// The equivalent with no token to protect is the GitHub Actions page
+// itself, which is what admin/workflows.html falls back to when this is
+// not deployed. Neither is more capable than the other; this one is just
+// inside the site.
+// =====================================================================
+
+/** The caller's role, read from their own profile document. Never from the
+ *  client: `is_superadmin` in localStorage decides what the UI shows, and a
+ *  browser can set it to anything. */
+async function callerRole(request) {
+  const uid = request.auth && request.auth.uid;
+  if (!uid) throw new HttpsError('unauthenticated', 'Sign in first.');
+  const snap = await db.collection(USERS).doc(uid).get();
+  return { uid, role: (snap.exists && snap.data().role) || 'basic' };
+}
+
+function githubHeaders(token) {
+  return {
+    Authorization: `Bearer ${token}`,
+    Accept: 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+    'User-Agent': 'dge-admin-panel'
+  };
+}
+
+/** Maps a WorkflowError onto the HttpsError the client sees. Anything else
+ *  is logged and reported as a generic failure — a GitHub error body can
+ *  carry the token's own scopes, which is not something to hand a browser. */
+function asHttpsError(e, where) {
+  if (e instanceof wf.WorkflowError) return new HttpsError(e.code, e.message);
+  logger.error(`${where} failed`, { message: e && e.message });
+  return new HttpsError('internal', 'GitHub could not be reached. Try the Actions page directly.');
+}
+
+exports.listWorkflows = onCall(
+  { secrets: [GITHUB_DISPATCH_TOKEN], cors: true },
+  async (request) => {
+    const { role } = await callerRole(request);
+    wf.assertRole(role, 'admin');
+
+    const catalogue = wf.catalogue();
+    let runs = {};
+    try {
+      // One call for the whole panel: the 30 newest runs across every
+      // workflow, reduced to the newest of each one we know about. Asking
+      // per workflow would be five round trips for the same five lines.
+      const res = await fetch(
+        `https://api.github.com/repos/${GITHUB_REPO.value()}/actions/runs?per_page=30`,
+        { headers: githubHeaders(GITHUB_DISPATCH_TOKEN.value()) }
+      );
+      if (res.ok) runs = wf.latestRuns(await res.json());
+      else logger.warn('Could not list runs', { status: res.status });
+    } catch (e) {
+      // A panel that lists the buttons but not their last run is still
+      // usable; one that fails outright because the status lookup did is
+      // not. Status is decoration, the buttons are the point.
+      logger.warn('Could not list runs', { message: e && e.message });
+    }
+
+    return { ok: true, role, repo: GITHUB_REPO.value(), ref: wf.REF, workflows: catalogue, runs };
+  }
+);
+
+exports.runWorkflow = onCall(
+  { secrets: [GITHUB_DISPATCH_TOKEN], cors: true },
+  async (request) => {
+    const { uid, role } = await callerRole(request);
+
+    let job, inputs;
+    try {
+      job = wf.findWorkflow(String(request.data && request.data.workflow || ''));
+      if (!job) throw new wf.WorkflowError('invalid-argument', 'That is not one of the workflows this panel runs.');
+      wf.assertRole(role, wf.minRoleFor(job));
+      inputs = wf.buildInputs(job, request.data && request.data.inputs);
+    } catch (e) {
+      throw asHttpsError(e, 'runWorkflow');
+    }
+
+    // The audit row is written BEFORE the dispatch and updated after, so a
+    // dispatch that succeeded at GitHub and then failed on the way back is
+    // still recorded. "Who republished the corpus, and when" must not
+    // depend on the happy path.
+    const ref = db.collection(DISPATCHES).doc();
+    const last = await db.collection(DISPATCHES)
+      .where('uid', '==', uid).where('workflow', '==', job.id)
+      .orderBy('at', 'desc').limit(1).get()
+      .catch(() => null);
+    try {
+      const at = last && !last.empty ? last.docs[0].data().at : null;
+      wf.checkCooldown(at && at.toMillis ? at.toMillis() : null, Date.now());
+    } catch (e) {
+      throw asHttpsError(e, 'runWorkflow');
+    }
+
+    await ref.set({
+      uid, role, workflow: job.id, file: job.file, inputs,
+      at: admin.firestore.FieldValue.serverTimestamp(),
+      result: 'pending'
+    });
+
+    let res;
+    try {
+      res = await fetch(
+        `https://api.github.com/repos/${GITHUB_REPO.value()}/actions/workflows/${job.file}/dispatches`,
+        {
+          method: 'POST',
+          headers: { ...githubHeaders(GITHUB_DISPATCH_TOKEN.value()), 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ref: wf.REF, inputs })
+        }
+      );
+    } catch (e) {
+      await ref.update({ result: 'unreachable' }).catch(() => {});
+      throw asHttpsError(e, 'runWorkflow');
+    }
+
+    // 204 is the whole of a successful dispatch: GitHub queues the run and
+    // returns no body, so there is no run id to hand back here. The panel
+    // finds it by polling listWorkflows, which is why the run row carries
+    // its start time.
+    if (res.status !== 204) {
+      const body = await res.text().catch(() => '');
+      logger.error('Dispatch rejected', { status: res.status, workflow: job.id, body: body.slice(0, 300) });
+      await ref.update({ result: `http_${res.status}` }).catch(() => {});
+      throw new HttpsError(
+        res.status === 401 || res.status === 403
+          ? 'failed-precondition'
+          : 'internal',
+        res.status === 401 || res.status === 403
+          ? 'GitHub refused the token. It may have expired, or lost its Actions permission.'
+          : 'GitHub would not start that run. Try the Actions page directly.'
+      );
+    }
+
+    await ref.update({ result: 'dispatched' }).catch(() => {});
+    logger.info('Workflow dispatched', { uid, workflow: job.id, inputs });
+    return { ok: true, workflow: job.id, name: job.name, inputs };
+  }
+);
 
 // Exported for tests that need the internals without a live project.
 // (The signature check itself lives in lib/whatsapp.js, where it is

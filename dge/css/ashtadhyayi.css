@@ -26,6 +26,17 @@
   /* a reference the sutrapatha does not have: say so for a moment rather
      than sit there looking broken */
   .jump.miss{border-color:#b3462f;color:#b3462f}
+  /* Base look for any text box on this page that doesn't already carry its
+     own class (e.g. #dge-aiInput, #dge-keyInput, #dge-modelSel) — without
+     this they fall back to the raw OS-default input/select chrome, jarring
+     against everything else on the page. Low specificity (bare tag
+     selectors) on purpose: an element with its own class (.jump, .ctl
+     button) keeps that more specific styling untouched. */
+  input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]),
+  textarea,select{font:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--line);
+    border-radius:10px;background:var(--panel);color:var(--ink)}
+  input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]):focus,
+  textarea:focus,select:focus{outline:none;border-color:var(--accent)}
   main{max-width:1200px;margin:0 auto;padding:16px 14px 130px}
   .crumbs{color:var(--muted);font-size:13px;margin:4px 2px 12px}.crumbs b{color:var(--accent)}
   .hero{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}

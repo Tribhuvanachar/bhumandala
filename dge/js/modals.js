@@ -79,6 +79,7 @@ document.addEventListener('click', (e) => {
 });
 
 window.openAboutModal = function() {
+  dgeRenderAboutIntro();
   const contribEl = document.getElementById('contributorsSection');
   if (contribEl) {
     const cfg = (typeof CONTRIBUTORS_CONFIG !== 'undefined') ? CONTRIBUTORS_CONFIG : null;
@@ -133,14 +134,135 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Shows/hides the "💝 Support This Project" button based on admin
-// config (SPONSOR_CONFIG.enabled in config.js) — not an end-user toggle.
+// Shows/hides the "💝 Support This Project" button based on admin config
+// (SPONSOR_CONFIG.enabled, from admin/content/reader.json) — not an
+// end-user toggle. window.SPONSOR_CONFIG is set asynchronously by
+// core.js's fetch of reader.json, a promise that does not resolve before
+// DOMContentLoaded fires — checking it right on DOMContentLoaded always
+// read `undefined` and left the button hidden regardless of the admin
+// setting. Wait on the same promise core.js exposes instead. This must
+// stay inside the DOMContentLoaded callback, not run at parse time:
+// modals.js's own <script> tag loads before core.js's, so
+// window.dgeConfigOverridesPromise does not exist yet at parse time —
+// only by DOMContentLoaded, once every synchronous <script> including
+// core.js has already run, is it guaranteed to be the real promise.
 document.addEventListener('DOMContentLoaded', () => {
-  const btn = document.getElementById('supportProjectBtn');
-  if (btn && typeof SPONSOR_CONFIG !== 'undefined' && SPONSOR_CONFIG && SPONSOR_CONFIG.enabled) {
-    btn.style.display = 'block';
-  }
+  (window.dgeConfigOverridesPromise || Promise.resolve()).then(() => {
+    const btn = document.getElementById('supportProjectBtn');
+    if (btn && typeof SPONSOR_CONFIG !== 'undefined' && SPONSOR_CONFIG && SPONSOR_CONFIG.enabled) {
+      btn.style.display = 'block';
+    }
+  });
 });
+
+// Local escape helper for the functions below — dgeModalsEsc (further down
+// this file) does the same job but is defined after these, and hoisting a
+// function declaration is more reliable here than relying on load order.
+function dgeAboutEsc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// About This Project's opening paragraph and "Designed By" line, and Our
+// Story's full bio — admin/content/reader.json's `about`/`ourStory` keys.
+// Rendered into these two functions (not baked into dge/index.html) so a
+// super admin's content-inline.js edit here actually has a data-edit path
+// pointing somewhere: what "which file, which field" the edit tool's own
+// ci-path label already shows the moment you click the text to change it.
+function dgeRenderAboutIntro() {
+  const cfg = window.SITE_CONFIG;
+  const about = (cfg && cfg.about) || {};
+  const intro = document.getElementById('aboutIntroSection');
+  if (intro) {
+    intro.innerHTML = `<p data-edit="about.intro" style="font-size:13px; line-height:1.6; margin:0 0 16px 0;">${dgeAboutEsc(about.intro || '')}</p>`;
+  }
+  const designed = document.getElementById('aboutDesignedBySection');
+  if (designed) {
+    designed.innerHTML = `<div class="actions-section-label" style="margin-top:20px;">🕉️ Designed By</div>
+      <p data-edit="about.designedBy" style="font-size:12px; color:var(--muted-text); margin:0;">${dgeAboutEsc(about.designedBy || '')}</p>`;
+  }
+}
+
+// Why -> Beginning -> Growth -> How it's built -> Vision -> Founder ->
+// Guru/Ācārya gratitude -> Our hope. Sarvamūla's own story first, in full;
+// the founder gets a short closing mention with a link out to his own,
+// much more personal Gurus/Blessers/Inspirers material (home.json's
+// `panels.tribhuvan`, reachable standalone at home-panel.html?panel=
+// tribhuvan) rather than repeating that biography here a second time.
+function dgeRenderOurStory() {
+  const cfg = window.SITE_CONFIG;
+  const story = (cfg && cfg.ourStory) || {};
+  const el = document.getElementById('ourStorySection');
+  if (!el) return;
+
+  let html = `<div data-edit="ourStory.subtitle" style="text-align:center; font-size:13px; color:var(--muted-text); font-style:italic; margin:4px 0 22px;">${dgeAboutEsc(story.subtitle || '')}</div>`;
+
+  (story.sections || []).forEach((sec, si) => {
+    if (sec.heading) {
+      html += `<h4 data-edit="ourStory.sections.${si}.heading" style="margin:26px 0 10px; font-size:14.5px; color:var(--accent-red);">${dgeAboutEsc(sec.heading)}</h4>`;
+    }
+    (sec.paragraphs || []).forEach((p, pi) => {
+      html += `<p data-edit="ourStory.sections.${si}.paragraphs.${pi}" style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">${dgeAboutEsc(p)}</p>`;
+    });
+  });
+
+  const founder = story.founder || {};
+  if (founder.heading) {
+    html += `<h4 data-edit="ourStory.founder.heading" style="margin:26px 0 10px; font-size:14.5px; color:var(--accent-red);">${dgeAboutEsc(founder.heading)}</h4>`;
+  }
+  (founder.paragraphs || []).forEach((p, pi) => {
+    html += `<p data-edit="ourStory.founder.paragraphs.${pi}" style="font-size:13.5px; line-height:1.7; margin:0 0 14px 0;">${dgeAboutEsc(p)}</p>`;
+  });
+  html += `<button class="btn-sm" style="width:100%; margin-bottom:16px;" onclick="window.closeModal('ourStoryModal'); window.location.href='${dgeAboutEsc(founder.meetFounderHref || '')}'">
+      <span data-edit="ourStory.founder.meetFounderLabel">${dgeAboutEsc(founder.meetFounderLabel || 'Meet the Founder →')}</span>
+    </button>`;
+  if (founder.gratitude) {
+    html += `<p data-edit="ourStory.founder.gratitude" style="font-size:13px; line-height:1.7; margin:0 0 8px 0; color:var(--muted-text);">${dgeAboutEsc(founder.gratitude)}</p>`;
+  }
+  if (founder.names) {
+    html += `<p data-edit="ourStory.founder.names" style="font-size:13px; text-align:center; margin:0 0 20px 0;">${dgeAboutEsc(founder.names)}</p>`;
+  }
+
+  const hope = story.hope || {};
+  if (hope.heading) {
+    html += `<h4 data-edit="ourStory.hope.heading" style="margin:26px 0 10px; font-size:14.5px; color:var(--accent-red);">${dgeAboutEsc(hope.heading)}</h4>`;
+  }
+  (hope.lines || []).forEach((line, li) => {
+    html += `<p data-edit="ourStory.hope.lines.${li}" style="font-size:13.5px; line-height:1.7; margin:0 0 10px 0; font-style:italic;">${dgeAboutEsc(line)}</p>`;
+  });
+
+  if (story.mantra) {
+    html += `<p data-edit="ourStory.mantra" style="text-align:center; font-size:14px; font-weight:700; margin:22px 0 4px;">${dgeAboutEsc(story.mantra)}</p>`;
+  }
+
+  el.innerHTML = html;
+}
+
+window.openOurStoryModal = function() {
+  dgeRenderOurStory();
+  window.openModal('ourStoryModal');
+};
+
+// menu.js's config-driven popup items only ever call a named window
+// function with no arguments (item.action -> window.<action>()), so
+// opening a specific modal by id from menu.json needs its own zero-arg
+// wrapper rather than menu.json trying to pass openModal an argument.
+window.dgeOpenOurStory = function() { window.openOurStoryModal(); };
+
+// content-inline.js stages an edit into window.SITE_CONFIG and calls this
+// (see dge/js/content-inline.js) so the change appears in the real layout
+// immediately rather than only after Publish + a refresh. Re-runs whichever
+// of this page's own render functions actually draw from admin/content/
+// reader.json; each one is cheap and safe to call even while its modal is
+// closed, since they just repopulate an offscreen container.
+window.dgeContentRerender = function() {
+  dgeRenderAboutIntro();
+  dgeRenderOurStory();
+  const sponsorModal = document.getElementById('sponsorModal');
+  if (sponsorModal && sponsorModal.style.display === 'flex' && typeof window.openSponsorModal === 'function') {
+    window.openSponsorModal();
+  }
+};
 
 window.openSponsorModal = function() {
   const body = document.getElementById('sponsorModalBody');
@@ -289,4 +411,38 @@ window.sendTypoReport = function() {
   const body = encodeURIComponent(`Text: ${title}\nShloka: ${shloka}\nPage: ${window.location.href}\n\nIssue:\n${details}`);
 
   window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+};
+
+// Contact Us — same mailto pattern as sendTypoReport above: no backend on
+// a static site to actually receive a POST, so this opens the visitor's
+// own email app with everything pre-filled instead of pretending to
+// submit a form that goes nowhere.
+window.sendContactMessage = function() {
+  const nameEl = document.getElementById('contactName');
+  const emailEl = document.getElementById('contactEmail');
+  const phoneEl = document.getElementById('contactPhone');
+  const subjectEl = document.getElementById('contactSubject');
+  const messageEl = document.getElementById('contactMessage');
+  const name = nameEl && nameEl.value ? nameEl.value.trim() : '';
+  const fromEmail = emailEl && emailEl.value ? emailEl.value.trim() : '';
+  const phone = phoneEl && phoneEl.value ? phoneEl.value.trim() : '';
+  const subjectText = subjectEl && subjectEl.value ? subjectEl.value.trim() : '';
+  const message = messageEl && messageEl.value ? messageEl.value.trim() : '';
+
+  if (!message) {
+    if (typeof showToast === 'function') showToast('Please write a message first.');
+    return;
+  }
+
+  const toEmail = (typeof appConfig !== 'undefined' && appConfig.contactEmail) ? appConfig.contactEmail : 'sanatanavidyagurukulam@gmail.com';
+  const subject = encodeURIComponent(subjectText || `DGE Contact — ${name || 'website visitor'}`);
+  const bodyLines = [
+    `Name: ${name || '(not given)'}`,
+    `Reply-to email: ${fromEmail || '(not given)'}`,
+    `Phone: ${phone || '(not given)'}`,
+    '',
+    message
+  ];
+  const body = encodeURIComponent(bodyLines.join('\n'));
+  window.location.href = `mailto:${toEmail}?subject=${subject}&body=${body}`;
 };

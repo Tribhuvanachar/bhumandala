@@ -43,7 +43,7 @@
    there (on the landing page, the Enter button). Collapsed by default to a
    slim "EDIT" tab; a chevron expands it into the full toolbar. */
 .ci-bar {
-  position: fixed; left: 0; top: 50%; transform: translateY(-50%);
+  position: fixed; left: 0; top: 50%;
   z-index: 12000;
   display: flex; align-items: center; gap: 10px;
   max-width: calc(100vw - 20px);
@@ -52,8 +52,24 @@
   border: 1px solid rgba(232, 178, 77, .35); border-left: none;
   box-shadow: 0 8px 30px rgba(0, 0, 0, .45);
   font-family: 'Inter', system-ui, sans-serif; font-size: 12px;
+  /* top is set inline in px by the drag logic below (falls back to this
+     transform's centering only before JS has run/restored a saved
+     position); touch-action:none so a vertical drag on mobile doesn't
+     also scroll the page underneath it. */
+  transform: translateY(-50%);
+  touch-action: none;
+}
+.ci-bar.ci-dragging { transition: none; box-shadow: 0 12px 40px rgba(0, 0, 0, .6); }
+/* Docked to the right edge — a mirror of the default left dock (rounded
+   corners and border flip sides) so it reads as "attached to this edge"
+   from either side. */
+.ci-bar.ci-right {
+  left: auto; right: 0;
+  border-radius: 14px 0 0 14px;
+  border-left: 1px solid rgba(232, 178, 77, .35); border-right: none;
 }
 .ci-bar.ci-expanded { flex-wrap: wrap; padding: 9px 14px 9px 6px; }
+.ci-bar.ci-right.ci-expanded { flex-direction: row-reverse; }
 
 .ci-pill {
   position: relative;
@@ -81,6 +97,14 @@
   cursor: pointer; padding: 4px 2px 4px 8px; align-self: center;
 }
 
+/* Own line (width:100% inside the wrapping flex bar) so the file name never
+   crowds out the count/buttons on a narrow phone screen. */
+.ci-file {
+  flex-basis: 100%; order: -1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px; letter-spacing: .02em; color: #8B7A63;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 .ci-count { color: #D9B87A; }
 .ci-publish { border-color: #6FBF8B; background: rgba(111, 191, 139, .2); }
 .ci-discard { border-color: rgba(226, 102, 74, .6); background: rgba(226, 102, 74, .14); }

@@ -469,4 +469,8 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 
 .content-editor-save-bar { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); background: var(--panel-bg); border: 1px solid var(--accent-red); border-radius: var(--radius-pill); padding: 8px 14px; display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; box-shadow: 0 4px 18px rgba(0,0,0,0.25); z-index: 11500; }
 
-.app-footer { text-align: center; padding: 24px 10px 40px; font-size: 10px; font-weight: 600; color: var(--muted-text); border-top: 1px solid var(--card-border); margin-top: 24px; text-transform: uppercase; letter-spacing: 0.5px; }
+.site-footer-links { text-align: center; padding: 20px 10px 0; margin-top: 20px; border-top: 1px solid var(--card-border); }
+.footer-link { background: none; border: none; font: inherit; font-size: 12px; color: var(--muted-text); cursor: pointer; padding: 4px 2px; text-decoration: underline; text-underline-offset: 2px; }
+.footer-link:hover { color: var(--accent-red); }
+.footer-sep { color: var(--card-border); font-size: 12px; }
+.app-footer { text-align: center; padding: 8px 10px 40px; font-size: 10px; font-weight: 600; color: var(--muted-text); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }

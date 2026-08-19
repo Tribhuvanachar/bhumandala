@@ -479,6 +479,43 @@ body.leaving #veil { opacity: 1; }
 }
 .sheet-close:hover { border-color: rgba(232,178,77,.6); color: var(--text); }
 
+/* Namaskāra's blessing gif — same fixed-overlay/fade shape as .sheet-wrap,
+   but its own rule set since the content is one portrait image, not a
+   scrolling panel. z-index sits below #veil (200) so the leaving-page fade
+   still wins if the visitor hits Enter while this is open. */
+.pranam-gif-wrap {
+  position: fixed; inset: 0; z-index: 190;
+  display: grid; place-items: center; padding: 18px;
+  background: rgba(5,4,3,.82);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  opacity: 0; visibility: hidden;
+  transition: opacity .35s var(--ease-soft), visibility 0s linear .35s;
+}
+.pranam-gif-wrap.open { opacity: 1; visibility: visible; transition-delay: 0s; }
+
+.pranam-gif-box {
+  position: relative; width: min(300px, 82vw);
+  border-radius: 18px; overflow: hidden;
+  border: 1px solid rgba(232,178,77,.28);
+  background: var(--bg-panel);
+  box-shadow: 0 40px 90px rgba(0,0,0,.7);
+  transform: translateY(18px) scale(.98);
+  transition: transform .4s var(--ease);
+}
+.pranam-gif-wrap.open .pranam-gif-box { transform: none; }
+.pranam-gif-box img { display: block; width: 100%; height: auto; }
+.pranam-gif-box .sheet-close { position: absolute; top: 8px; right: 8px; float: none; }
+
+.sheet-fullpage-link {
+  position: sticky; top: 0; float: right; margin-right: 44px;
+  height: 34px; padding: 0 12px; border-radius: 999px; box-sizing: border-box;
+  border: 1px solid var(--hairline); background: rgba(20,16,12,.9);
+  color: var(--text-dim); font-size: 12px; text-decoration: none;
+  display: grid; place-items: center;
+  transition: border-color .3s var(--ease-soft), color .3s var(--ease-soft);
+}
+.sheet-fullpage-link:hover { border-color: rgba(232,178,77,.6); color: var(--text); }
+
 .sheet-eyebrow { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 8px; }
 .sheet h3 {
   font-family: var(--font-serif);
@@ -611,7 +648,7 @@ body.leaving #veil { opacity: 1; }
   .mandala, .smoke, .om, .halo, .halo-ring, .frame img,
   .btn-enter.ready, .cue span { animation: none !important; }
   .petal, .ripple, .pranam-mark { display: none !important; }
-  .btn, .sheet, .sheet-wrap, .cue-pop, #veil { transition-duration: .01ms !important; }
+  .btn, .sheet, .sheet-wrap, .cue-pop, #veil, .pranam-gif-wrap, .pranam-gif-box { transition-duration: .01ms !important; }
 }
 
 /* =========================================================================

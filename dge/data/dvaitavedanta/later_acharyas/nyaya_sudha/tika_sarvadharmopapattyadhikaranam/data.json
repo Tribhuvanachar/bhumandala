@@ -1,0 +1,37 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_4845",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > अनुव्याख्यानम् > मूलम् > द्वितीयाध्यायः > प्रथमः पादः",
+   "section": "द्वितीयाध्यायः",
+   "unit_title": "प्रथमः पादः",
+   "sanskrit_text": "सर्वधर्मोपपत्त्यधिकरणम्\nयदधीना गुणाश्चैव दोषा अपि हि सर्वशः ॥113॥\nगुणास्तस्य कथं न स्युः स्युर्दोषाश्च कथं पुनः ।\nसर्वधर्मोपपत्तेस्तद्वाक्यैरपि हि तादृशैः ॥114॥\nनिर्दोषाशेषगुणको निर्णीतो भगवान् हरिः ।\nइति श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचिते ब्रह्मसूत्रानुव्याख्याने द्वितीयाध्यायस्य प्रथमः पादः ॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "अनुव्याख्यानम्",
+    "मूलम्",
+    "द्वितीयाध्यायः",
+    "प्रथमः पादः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/4836/975/sharam/sathha/anavay/malma/thavat",
+    "content_id": 4836,
+    "layer": "सर्वधर्मोपपत्त्यधिकरणम्",
+    "anchor": "article4845",
+    "fetched": "2026-08-19"
+   },
+   "tika_title": "सर्वधर्मोपपत्त्यधिकरणम्"
+  }
+ ]
+}
