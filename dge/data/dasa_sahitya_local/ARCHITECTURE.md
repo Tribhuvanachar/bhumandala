@@ -126,23 +126,26 @@ fresher copy of that asset shows up — it's a full regenerate, not additive.
    `_needs_review: true` — either genuinely empty verse text or leftover
    punctuation-only artifacts from the source.
 
-## Publishing-size flag — decide before this reaches `main`
+## Publishing-size flag — resolved: mirrors the wordnet pattern
 
-`dasa1/` alone is ~46MB of JSON (comparable to the existing `dasa_sahitya/`
-folder's ~45MB). This repo's `.gitignore` already documents that the
-published GitHub Pages site sits "about 1% under the GitHub Pages 1GB
-limit" — that's why `dge/data/_wordnet/` is kept out of `main` and published
-to a separate `wordnet-dist` branch instead, fetched over jsDelivr. Adding
-this folder (and the 3-4 more assets still to come) directly into `main` the
-same way `dasa_sahitya/` is tracked would eat further into that margin, and
-this data isn't ready for the live site yet anyway (it's still `pending`
-review, not merged into the browsable corpus). This is currently only on
-this feature branch, not `main` — flagging so whoever merges makes an
-explicit call rather than finding out at the 1GB ceiling: either mirror the
-wordnet pattern (separate branch + jsDelivr) once this is ready to publish,
-or keep it `.gitignore`d from `main` until the merge in step 4 below
-actually happens and it folds into `dasa_sahitya/`'s existing footprint
-instead of adding a parallel one.
+Decided and implemented (19 Aug 2026): `dasa1/`, `collection_padagalu/` and
+`raw_dump/` are `.gitignore`d from `main` and published instead to this
+repo's own `dasa-sahitya-local-dist` branch — same reasoning and mechanism
+as `dge/data/_wordnet/` → `wordnet-dist`, and the same repo's own
+`SEARCH_ARCHITECTURE.md` rule ("a data branch of the same repository," not a
+new repo, for something this size class). `.github/workflows/
+publish-dasa-sahitya-local.yml` republishes it; `tools/dasa_sahitya/
+dasa_sahitya_local_dist_README.md` (mirrored onto the dist branch as its own
+README) documents what's on it and how a new asset flows through, since —
+unlike wordnet/kavya/search-dist — there's no live external source this can
+rebuild from on each CI run: each asset is a one-off upload imported once in
+a session, so the flow is import locally → commit to a branch → run the
+publish workflow to move it off `main`.
+
+This file (`ARCHITECTURE.md`) and `ALL_SOURCES_composer_registry.json` stay
+on `main` regardless — small, human-authored, and worth reading without a
+checkout of the dist branch, same as `dge/search_index_dist_README.md` stays
+on `main` while the 330MB it describes doesn't.
 
 ## Path to one folder
 
