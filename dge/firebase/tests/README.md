@@ -1,12 +1,12 @@
 # Firebase layer — tests
 
-204 tests, none of which need a Firebase project, credentials, a phone
+234 tests, none of which need a Firebase project, credentials, a phone
 number, or money.
 
 ```bash
 cd dge/firebase/tests
 npm install          # once
-npm test             # 164 unit tests, no emulator needed
+npm test             # 194 unit tests, no emulator needed
 npm run test:rules   # 40 security-rules tests against the real emulator
 npm run test:all     # both
 ```
@@ -23,6 +23,7 @@ real Firebase behaviour rather than a stub.
 | `whatsapp.test.js` | 38 | Cloud API payload shapes, error classification, webhook signature verification, opt-out intent detection. |
 | `broadcast-core.test.js` | 25 | Who receives a broadcast and — mostly — who must not. |
 | `user-auth.test.js` | 52 | The browser half: transport routing, profile defaults, OTP flows, consent, inertness when disabled. |
+| `workflows-core.test.js` | 30 | Which GitHub Actions the admin panel may start, what inputs it accepts, and who may press which. |
 | `rules.spec.js` | 40 | Firestore security rules, against the emulator. |
 
 Most assertions are that something **fails**. A suite that only checked

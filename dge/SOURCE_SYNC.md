@@ -87,29 +87,38 @@ That is the one click. Everything in this project already works this way:
 *DGE re-index*, *Publish the Sanskrit WordNet*. Each shows its result in the
 run summary — counts, what changed, what to do next — so you never read a log.
 
-**From the site's own admin panel** — worth building, and here is the honest
-shape of it. The site is static on GitHub Pages: a page cannot start a job by
-itself, and it must never hold a token that could (anyone could read it out of
-the browser). So it needs one small server-side hop, and this project already
-has the pieces:
+**From the site's own admin panel** — `admin/workflows.html`, built, and
+running today in its fallback form. The site is static on GitHub Pages: a page
+cannot start a job by itself, and it must never hold a token that could
+(anyone could read it out of the browser). So it goes through one small
+server-side hop:
 
 ```
-admin page  ──▶  Firebase Function  ──▶  GitHub API
-(super-admin     (holds a fine-grained    (workflow_dispatch)
- unlock +         token as a secret;
- Firebase Auth)   checks the caller
-                  is an admin first)
+admin/workflows.html  ──▶  Firebase Function  ──▶  GitHub API
+(admin latch +            (holds a fine-grained    (workflow_dispatch;
+ Firebase Auth)            token as a secret;       ref is always main,
+                           reads the caller's       never caller-supplied)
+                           role from Firestore)
 ```
 
-`dge/firebase/functions/` already exists and already does this class of thing
-(OTP, broadcast). The additions are one function of about thirty lines, one
-repository-scoped token in Firebase config, and a panel in `admin/` that lists
-the workflows and shows the last run's status. Two constraints to know before
-committing to it: outbound calls from a Function need the **Blaze** plan, and
-the token must be **fine-grained, this repository only, Actions-write only** —
-a classic PAT with repo scope in a Function is how a project loses its
-repository. Until that is deployed, the GitHub button is the same capability
-with no new secret to protect.
+The page lists the same five workflows either way. **Until the Function is
+deployed every button opens the GitHub Actions page instead** — one tab away,
+exactly as capable, and with no new secret to protect. The page says which of
+the two it is doing, on its face, rather than looking the same in both.
+
+Deploying it needs two things that are the project lead's to create, both
+described in `FIREBASE_SETUP.md` §12: the **Blaze** plan (a Function on the
+free plan cannot reach `api.github.com` at all) and a **fine-grained token,
+this repository only, Actions read-and-write only**. A classic PAT with `repo`
+scope in a Function is how a project loses its repository.
+
+What the Function will and will not do, since it is the thing holding a token:
+only the five workflows in `functions/workflows.json`, only their declared
+inputs, only from `main`, only for a caller whose **Firestore** role is high
+enough — `superadmin` for anything that republishes text a reader will see,
+`admin` for the reporting and tracker jobs — one press a minute per account,
+and every press recorded in `workflow_dispatches` with who, what, and whether
+GitHub accepted it.
 
 ---
 
@@ -126,8 +135,9 @@ with no new secret to protect.
 3. **A one-work import path.** Today the Kāvya importer runs over everything;
    `--works <id>` exists but no workflow input exposes it. A change to one
    Wikisource page should be re-importable on its own.
-4. **Then the admin panel**, once the Function is deployed — the same buttons,
-   inside the site, for whoever is not going to open GitHub.
+4. **Deploy the admin panel's Function.** The panel itself is built; what is
+   missing is the Blaze plan and the fine-grained token, above. Until then it
+   is the same five buttons, opening GitHub.
 
 ---
 

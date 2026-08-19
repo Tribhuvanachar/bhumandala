@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
+     back to the vandana at the site root. Must stay the first script here. -->
+<script src="../dge/js/vandana-guard.js?v=1"></script>
+<!-- Passkeys come from admin/config/keys.json, not from this page. -->
+<script src="js/keys.js?v=1"></script>
+<!-- FIREBASE_CONFIG and AUTH_CONFIG. This page reads them to decide whether
+     one-click is even possible on this deployment; it never assumes it is. -->
+<script src="../dge/js/config.js?v=1"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Run a workflow · DGE (admin)</title>
+<link rel="stylesheet" href="css/workflows.css?v=1">
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div style="font-size:22px;font-weight:700">🔐 DGE — run a workflow</div>
+  <div class="muted">Enter the super-admin passkey. What you can actually run is decided afterwards, by your account's role.</div>
+  <input id="gk" type="password" placeholder="passkey" autocomplete="off">
+  <button class="btn pri" id="gbtn">Enter</button>
+  <div class="muted" style="max-width:440px">A client-side latch for convenience, not access control — this page and the repo are public. What actually decides whether a job may start is the Cloud Function, which checks your account's role server-side.</div>
+</div>
+
+<header style="display:none" id="hdr">
+  <div class="bar">
+    <div class="brand"><a href="../dge/index.html" title="DGE Home" style="color:var(--accent);text-decoration:none">⌂ DGE</a> <span style="color:var(--muted)">›</span> ⚙️ Run a workflow</div>
+    <span class="spacer"></span>
+    <button class="icon" id="theme" title="Light / dark">◐</button>
+    <button class="btn" id="refresh" title="Re-read the last run of each workflow">↻ Refresh</button>
+    <button class="btn gh" id="allruns" title="Open the Actions tab on GitHub">Actions on GitHub ↗</button>
+  </div>
+</header>
+
+<main id="app" style="display:none">
+  <div id="mode"></div>
+  <div class="cards" id="cards"></div>
+</main>
+
+<footer id="foot" style="display:none">
+  Each job reports what it did in its own run summary on GitHub — counts, what
+  changed, what to do next. Nothing here reads a log.
+  <br>What every job actually does, and why checking and importing are separate:
+  <a href="../dge/SOURCE_SYNC.md">SOURCE_SYNC.md</a>.
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  var REPO = "Tribhuvanachar/bhumandala";
+  var GATE = "superadmin";
+  var $ = function(s){ return document.querySelector(s); };
+
+  // ---- gate ---------------------------------------------------------
+  if (sessionStorage.getItem("dge.admin.ok") === "1" || localStorage.getItem("is_superadmin") === "true") start();
+  else {
+    $("#gate").style.display = "flex";
+    var tryK = function(){
+      window.dgeCheckKey(GATE, $("#gk").value).then(function(ok){
+        if (ok) { sessionStorage.setItem("dge.admin.ok", "1"); location.reload(); }
+        else { $("#gk").value = ""; $("#gk").placeholder = "wrong — try again"; }
+      });
+    };
+    $("#gbtn").onclick = tryK;
+    $("#gk").addEventListener("keydown", function(e){ if (e.key === "Enter") tryK(); });
+    $("#gk").focus();
+  }
+
+  // ---- state --------------------------------------------------------
+  // MODE is the honest answer to "can this page actually press a button".
+  //   'live'     — the Function answered; the buttons dispatch.
+  //   'fallback' — no Function on this deployment; the buttons open GitHub.
+  // The page never pretends: a button that will open a new tab says so on
+  // its face, rather than looking identical to one that starts a job.
+  var MODE = 'fallback', ROLE = null, CATALOGUE = [], RUNS = {}, FN = null, REASON = '';
+
+  var RANK = { basic: 0, admin: 1, superadmin: 2 };
+
+  function esc(s){ var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+
+  function ghUrl(file){ return "https://github.com/" + REPO + "/actions/workflows/" + file; }
+
+  function firebaseUsable(){
+    var c = window.FIREBASE_CONFIG || {};
+    return !!(window.AUTH_CONFIG && window.AUTH_CONFIG.enabled &&
+              c.projectId && String(c.projectId).indexOf("REPLACE_WITH") !== 0);
+  }
+
+  function loadScript(src){
+    return new Promise(function(res, rej){
+      var el = document.createElement('script');
+      el.src = src; el.async = false;
+      el.onload = function(){ res(src); };
+      el.onerror = function(){ rej(new Error("Could not load " + src)); };
+      document.head.appendChild(el);
+    });
+  }
+
+  // ---- start --------------------------------------------------------
+  async function start(){
+    if (sessionStorage.getItem("dge.admin.ok") !== "1" && localStorage.getItem("is_superadmin") !== "true") return;
+    $("#gate").style.display = "none";
+    $("#hdr").style.display = ""; $("#app").style.display = ""; $("#foot").style.display = "";
+
+    if (localStorage.getItem("dge.wfadmin.dark") === "1") document.body.classList.add("dark");
+    $("#theme").onclick = function(){
+      document.body.classList.toggle("dark");
+      localStorage.setItem("dge.wfadmin.dark", document.body.classList.contains("dark") ? "1" : "0");
+    };
+    $("#refresh").onclick = function(){ load(); };
+    $("#allruns").onclick = function(){ window.open("https://github.com/" + REPO + "/actions", "_blank"); };
+
+    await load();
+  }
+
+  async function load(){
+    $("#cards").innerHTML = '<p class="muted">Loading…</p>';
+
+    // The list of buttons comes from the same file the Cloud Function
+    // dispatches from, so the panel cannot offer something the Function
+    // would refuse — or miss something it would accept.
+    try {
+      var r = await fetch("../dge/firebase/functions/workflows.json", { cache: "no-store" });
+      CATALOGUE = (await r.json()).workflows || [];
+    } catch (e) {
+      CATALOGUE = [];
+      REASON = "Could not read the workflow list.";
+    }
+
+    MODE = 'fallback'; RUNS = {}; ROLE = null; FN = null;
+
+    if (!firebaseUsable()) {
+      REASON = "Accounts are not switched on for this deployment, so there is no server to hold the token. Every button below opens GitHub instead.";
+    } else {
+      try {
+        await connect();
+        var res = await FN.httpsCallable('listWorkflows')({});
+        var d = res.data || {};
+        ROLE = d.role || null;
+        RUNS = d.runs || {};
+        if (Array.isArray(d.workflows) && d.workflows.length) CATALOGUE = d.workflows;
+        MODE = 'live';
+      } catch (e) {
+        REASON = friendly(e);
+      }
+    }
+
+    render();
+  }
+
+  async function connect(){
+    var base = (window.AUTH_CONFIG && window.AUTH_CONFIG.sdkBase) || "https://www.gstatic.com/firebasejs/12.17.1/";
+    if (typeof firebase === 'undefined') {
+      await loadScript(base + "firebase-app-compat.js");
+      await loadScript(base + "firebase-auth-compat.js");
+      await loadScript(base + "firebase-functions-compat.js");
+    }
+    if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
+
+    // Whoever is signed in in this browser is who the Function will check.
+    // Waiting for the first auth state avoids calling as nobody purely
+    // because the SDK had not finished restoring the session yet.
+    var user = await new Promise(function(res){
+      var off = firebase.auth().onAuthStateChanged(function(u){ off(); res(u); });
+    });
+    if (!user) { var e = new Error("not-signed-in"); e.code = "functions/unauthenticated"; throw e; }
+
+    var region = (window.AUTH_CONFIG && window.AUTH_CONFIG.functionsRegion) || 'asia-south1';
+    FN = firebase.app().functions(region);
+  }
+
+  function friendly(e){
+    var code = String((e && e.code) || "").replace(/^functions\//, "");
+    if (code === "unauthenticated") return "Sign in to the site first, in this browser, with an account that has admin rights.";
+    if (code === "permission-denied") return (e && e.message) || "That account is not an admin.";
+    if (code === "not-found" || code === "internal") return "The workflow Function is not deployed on this project yet (see FIREBASE_SETUP.md §12).";
+    return (e && e.message) || "Could not reach the workflow Function.";
+  }
+
+  // ---- render -------------------------------------------------------
+  function render(){
+    var m = $("#mode");
+    if (MODE === 'live') {
+      m.className = "mode live";
+      m.innerHTML = "<b>One click, from here.</b>" +
+        "<p>Signed in as <code>" + esc(ROLE) + "</code>. A button starts the job on GitHub's machines and it reports back in its own run summary.</p>";
+    } else {
+      m.className = "mode fallback";
+      m.innerHTML = "<b>These buttons open GitHub.</b>" +
+        "<p>" + esc(REASON) + " On GitHub the click path is the same: pick the workflow, then <em>Run workflow</em>. Nothing is lost — the fallback is exactly as capable, it is just one tab away.</p>";
+    }
+
+    var wrap = $("#cards");
+    wrap.innerHTML = "";
+    if (!CATALOGUE.length) {
+      wrap.innerHTML = '<p class="muted">No workflow list to show.</p>';
+      return;
+    }
+    CATALOGUE.forEach(function(w){ wrap.appendChild(card(w)); });
+  }
+
+  function minRole(w){ return w.minRole || (w.writes === 'corpus' ? 'superadmin' : 'admin'); }
+
+  function card(w){
+    var el = document.createElement('div');
+    el.className = "card " + esc(w.writes || 'nothing');
+
+    var writesLabel = w.writes === 'corpus' ? 'rewrites the corpus'
+                    : w.writes === 'metadata' ? 'rewrites generated files'
+                    : 'reports only';
+
+    var head = '<h2>' + esc(w.name) + ' <span class="tag">' + writesLabel + '</span>' +
+               (minRole(w) === 'superadmin' ? ' <span class="tag">super-admin</span>' : '') + '</h2>' +
+               '<p class="blurb">' + esc(w.blurb) + '</p>';
+
+    el.innerHTML = head + '<div class="last"></div>' +
+      '<div class="opts"></div>' +
+      '<div class="actions"></div>';
+
+    el.querySelector('.last').innerHTML = lastRunHtml(w);
+
+    // --- options ---
+    var opts = el.querySelector('.opts');
+    (w.inputs || []).forEach(function(spec){
+      var row = document.createElement('div');
+      row.className = "opt";
+      var id = "in_" + w.id + "_" + spec.name;
+      if (spec.type === 'boolean') {
+        row.innerHTML = '<input type="checkbox" id="' + id + '"' + (spec.default ? ' checked' : '') + '>' +
+                        '<label for="' + id + '">' + esc(spec.label) + '</label>';
+      } else {
+        row.innerHTML = '<label for="' + id + '">' + esc(spec.label) + '</label>' +
+                        '<input type="text" id="' + id + '" value="' + esc(spec.default == null ? '' : spec.default) + '">';
+      }
+      row.dataset.name = spec.name;
+      row.dataset.type = spec.type;
+      opts.appendChild(row);
+    });
+
+    // --- actions ---
+    var actions = el.querySelector('.actions');
+    var say = document.createElement('span');
+    say.className = "say";
+
+    if (MODE === 'live') {
+      var allowed = (RANK[ROLE] || 0) >= (RANK[minRole(w)] || 0);
+      var run = document.createElement('button');
+      run.className = "btn pri";
+      run.textContent = "▶ Run";
+      if (!allowed) { run.disabled = true; say.textContent = "Needs a super-admin."; }
+      run.onclick = function(){ dispatch(w, el, run, say); };
+      actions.appendChild(run);
+
+      if ((w.inputs || []).length) {
+        var toggle = document.createElement('button');
+        toggle.className = "btn";
+        toggle.textContent = "Options";
+        toggle.onclick = function(){ opts.classList.toggle('open'); };
+        actions.appendChild(toggle);
+      }
+    } else {
+      var open = document.createElement('button');
+      open.className = "btn gh";
+      open.textContent = "Open on GitHub ↗";
+      open.onclick = function(){ window.open(ghUrl(w.file), "_blank"); };
+      actions.appendChild(open);
+    }
+
+    var link = document.createElement('a');
+    link.href = ghUrl(w.file); link.target = "_blank";
+    link.className = "say"; link.style.marginLeft = "auto";
+    link.textContent = w.file;
+    actions.appendChild(say);
+    actions.appendChild(link);
+    return el;
+  }
+
+  function lastRunHtml(w){
+    var r = RUNS[w.id];
+    if (MODE !== 'live') return '<span class="dot none"></span><span class="say">Last run shows here once the Function is deployed.</span>';
+    if (!r) return '<span class="dot none"></span><span class="say">No run recorded in the last 30.</span>';
+    var cls = r.status !== 'completed' ? 'run' : (r.conclusion === 'success' ? 'ok' : 'bad');
+    var what = r.status !== 'completed'
+             ? 'Running now, started ' + whenIST(r.startedAt)
+             : 'Last run ' + concluded(r.conclusion) + ', ' + whenIST(r.startedAt);
+    return '<span class="dot ' + cls + '"></span>' +
+           '<span class="say">' + esc(what) + (r.by ? ' · by ' + esc(r.by) : '') + '</span>' +
+           (r.url ? ' <a href="' + esc(r.url) + '" target="_blank">open the run ↗</a>' : '');
+  }
+
+  /* GitHub's conclusion strings are for machines. "Last run failure" is not
+     a sentence; this page is read by a person deciding whether to press again. */
+  function concluded(c){
+    return { success: 'succeeded', failure: 'failed', cancelled: 'was cancelled',
+             timed_out: 'timed out', skipped: 'was skipped',
+             startup_failure: 'could not start' }[c] || ('ended ' + (c || 'unclearly'));
+  }
+
+  /* GitHub timestamps are UTC. Nobody here reads UTC — this is Bangalore. */
+  function whenIST(iso){
+    if (!iso) return "date unknown";
+    var d = new Date(iso);
+    if (isNaN(d)) return "date unknown";
+    return d.toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata", day: "numeric", month: "short",
+      hour: "numeric", minute: "2-digit", hour12: true
+    }) + " IST";
+  }
+
+  function collect(el){
+    var out = {};
+    el.querySelectorAll('.opt').forEach(function(row){
+      var input = row.querySelector('input');
+      out[row.dataset.name] = row.dataset.type === 'boolean' ? input.checked : input.value;
+    });
+    return out;
+  }
+
+  async function dispatch(w, el, btn, say){
+    var inputs = collect(el);
+
+    // Confirmation only where it earns its keep. A job that republishes
+    // text people read is worth one deliberate pause; a job that writes a
+    // report is not, and a confirm on everything is a confirm nobody reads.
+    if (w.writes === 'corpus' && inputs.probe_only !== true) {
+      if (!confirm(w.name + " will rewrite corpus data on main.\n\nGo ahead?")) return;
+    }
+
+    btn.disabled = true;
+    say.className = "say"; say.textContent = "Starting…";
+    try {
+      await FN.httpsCallable('runWorkflow')({ workflow: w.id, inputs: inputs });
+      say.className = "say ok";
+      say.textContent = "Started. It reports on GitHub when it finishes.";
+      // The dispatch returns before GitHub has a run id, so the status line
+      // is refreshed a few seconds later rather than guessed at now.
+      setTimeout(load, 6000);
+    } catch (e) {
+      say.className = "say bad";
+      say.textContent = friendly(e);
+      btn.disabled = false;
+    }
+  }
+})();
+</script>
+</body>
+</html>
