@@ -23,11 +23,18 @@ into a phonetic key (pkey) and coarse key (ckey) by the shared normalizer
 browser at query time (js/dge-normalize.js), so index and query always agree.
 
 Emitted artifacts (all under --out):
-  manifest.json                catalog: granthas, categories, unit counts, per-trigram
-                                document frequency (manifest.df)
+  manifest.json                catalog: granthas, categories, unit counts, the
+                                section list (manifest.sections), and per-trigram
+                                GLOBAL document frequency (manifest.df)
   units/<slug>.json            per-grantha units: {u, pk, ck, s(nippet)}
-  postings/<trigram>.json      one file per trigram: [ [granthaIdx, unitIdx], ... ]
-                                (filename is the trigram, percent-encoded --
+  postings/<trigram>/<section>.json
+                                one file per (trigram, section) pair:
+                                [ [granthaIdx, unitIdx], ... ], holding only
+                                that trigram's postings within that section.
+                                An unscoped query fans out across every
+                                section's file for a trigram in parallel; a
+                                scoped query reads only its own section.
+                                (trigram directory name is percent-safe --
                                 see safe_trigram_filename())
   backlinks.json               target#unit_id -> [ {from, note}, ... ]
 
@@ -196,7 +203,7 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
     os.makedirs(os.path.join(out_dir, "postings"), exist_ok=True)
 
     granthas = []                       # manifest rows
-    postings = defaultdict(list)        # trigram -> [[gi,ui], ...]
+    postings = defaultdict(lambda: defaultdict(list))  # trigram -> section -> [[gi,ui], ...]
     backlinks = defaultdict(list)       # "target#unit_id" -> [{from, note}]
     stats = {"granthas": 0, "populated": 0, "units": 0, "unit_chars": 0,
              "refs": 0, "skipped_stub_units": 0, "skipped_stub_granthas": 0,
@@ -227,6 +234,7 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
             print(f"  ! skip {path}: {e}", file=sys.stderr)
             continue
         slug = grantha_slug(base, path)
+        category = category_of(slug)
         schema_name = data.get("schema") or (
             "stotra_text" if "shlokas" in data else "generic")
         pfield = primary_field(schemas, schema_name)
@@ -252,9 +260,14 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
             ui = len(unit_rows)
             unit_rows.append({"u": uid, "pk": pk, "ck": ck, "s": snippet(dev_text)})
             stats["unit_chars"] += len(pk)
-            # global postings on pkey trigrams (candidate generation)
+            # postings on pkey trigrams (candidate generation), partitioned
+            # by section (see the "Partition the postings tree" note in
+            # dge/SEARCH_ARCHITECTURE.md): an unscoped/global query fans out
+            # across every section's file for a trigram in parallel, and a
+            # section-scoped query reads only its own partition -- neither
+            # has to download postings for sections it doesn't care about.
             for tg in trigrams(pk):
-                postings[tg].append([gi, ui])
+                postings[tg][category].append([gi, ui])
             # cross-references -> backlinks
             for r in refs:
                 if isinstance(r, dict) and r.get("target"):
@@ -284,25 +297,35 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
         stats["units"] += len(unit_rows)
         stats["populated"] += 1
 
-    # write one postings file PER TRIGRAM (not per 2-char bucket) -- see
-    # safe_trigram_filename(). Each file is just the [[gi,ui],...] list; the
-    # filename already identifies the trigram, so there is no wrapping dict.
-    df = {}   # trigram -> posting count, i.e. document frequency
-    for tg, rows in postings.items():
-        fname = safe_trigram_filename(tg)
-        with open(os.path.join(out_dir, "postings", f"{fname}.json"),
-                  "w", encoding="utf-8") as f:
-            json.dump(rows, f, ensure_ascii=False, separators=(",", ":"))
-        df[tg] = len(rows)
+    # write one postings file per (TRIGRAM, SECTION) pair -- see
+    # safe_trigram_filename() for the trigram-as-filename half, and the
+    # "Partition the postings tree" comment above for the section half. Each
+    # file is just the [[gi,ui],...] list for that trigram within that one
+    # section; the path already identifies both, so there is no wrapping dict.
+    df = {}       # trigram -> GLOBAL posting count (all sections), i.e. document frequency
+    sections = set()
+    for tg, by_section in postings.items():
+        tg_dir = os.path.join(out_dir, "postings", safe_trigram_filename(tg))
+        os.makedirs(tg_dir, exist_ok=True)
+        total = 0
+        for section, rows in by_section.items():
+            sections.add(section)
+            with open(os.path.join(tg_dir, f"{section}.json"),
+                      "w", encoding="utf-8") as f:
+                json.dump(rows, f, ensure_ascii=False, separators=(",", ":"))
+            total += len(rows)
+        df[tg] = total
     stats["distinct_trigrams"] = len(df)
 
-    # df lets the client pick the RAREST trigrams of a query instead of
-    # fetching all of them -- a common trigram like the "na" class matches
-    # half the corpus and is expensive to fetch for what it discriminates;
-    # a rare one narrows the candidate set just as correctly for a fraction
-    # of the bytes. See SEARCH_ARCHITECTURE.md "What does fix it".
+    # df is the GLOBAL (cross-section) posting count -- still what decides
+    # which trigrams are rarest and therefore worth fetching (see
+    # SEARCH_ARCHITECTURE.md "What does fix it"); the section partition only
+    # changes WHICH FILES answer a chosen trigram, not which trigrams get
+    # chosen, so an unscoped search still needs just the df table, and a
+    # scoped one already knows its one section without ranking across them.
     with open(os.path.join(out_dir, "manifest.json"), "w", encoding="utf-8") as f:
-        json.dump({"granthas": granthas, "df": df, "stats": stats},
+        json.dump({"granthas": granthas, "df": df,
+                   "sections": sorted(sections), "stats": stats},
                    f, ensure_ascii=False, separators=(",", ":"))
     with open(os.path.join(out_dir, "backlinks.json"), "w", encoding="utf-8") as f:
         json.dump(backlinks, f, ensure_ascii=False, separators=(",", ":"))

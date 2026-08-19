@@ -41,3 +41,13 @@ from `kavya-dist` rather than from the site.
 `.github/workflows/reindex.yml` on `main`, which builds from `dge/data` plus a
 `kavya-dist` checkout and publishes here. Then bump the pin in `js/config.js`:
 the job summary prints the line.
+
+## Coming in the next publish: postings partitioned by section
+
+`postings/<trigram>.json` is about to become `postings/<trigram>/<section>.json`
+— one file per (trigram, section) pair instead of per trigram, so a
+section-scoped search reads only its own partition and a Kāvya-only import
+stops republishing the Vedas' postings too. `manifest.df` (and everything
+above) stays accurate for what's live right now; this section is a heads-up
+for the next `reindex.yml` run, not a description of the current commit.
+See `SEARCH_ARCHITECTURE.md` §4 step 2.

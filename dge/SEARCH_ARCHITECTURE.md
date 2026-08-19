@@ -153,29 +153,44 @@ that is still tens of megabytes, which is a branch, not a repository.
 ## 4. What to do, in order
 
 1. ✅ **Per-trigram postings + a document-frequency table**, and a client that
-   fetches the rarest trigrams. Done — `build_search_index.py` writes one
-   file per trigram (filename percent-encoded) plus `manifest.df`;
-   `dge-search.js` fetches only the rarest `MAX_TRIS_PER_SET` (3) trigrams of
-   each query/word set instead of every trigram in it, then scores fetched
-   candidates exactly as before (unchanged edit-distance pass, so this only
-   changes which candidates get looked at, not how they're judged). Validated
-   19 Aug 2026 against a locally-rebuilt index over the real corpus (912
-   granthas, 94,773 units, 58,112 distinct trigrams): राम **16.08 MB → 549 KB**
-   (matches this doc's original estimate almost exactly), कृष्ण **6.90 MB →
-   80 KB**, धर्म **10.03 MB → 181 KB** — and correctness held: all four test
-   queries (राम, कृष्ण, धर्म, agnimILe) returned correct top hits at 0.97
-   confidence, including the Rigveda's opening verse for "agnimILe". Not yet
-   published — the built index still needs a real run of `reindex.yml`
-   (`main`'s corpus + `kavya-dist`) and the `search-dist` pin bump; what's
-   validated here was built from `dge/data` alone, without the Kāvya corpus.
-2. **Partition the postings by section** in the same pass. Scoped search
-   becomes proportional, and a Kāvya import stops republishing the Vedas.
-3. **Scoped search in the UI**, once (1) and (2) are in: a section selector on
-   the corpus-search panel, defaulting to everything.
+   fetches the rarest trigrams. **Published and live** as of 19 Aug 2026 —
+   `search-dist` at commit `f11a2e3b`, pinned in `js/config.js` and
+   `js/global-search.js`. Measured against the real corpus after publishing
+   (937 granthas, including Kāvya): राम **16.1 MB → 549 KB**, कृष्ण **6.9 MB
+   → 80 KB**, धर्म **10.0 MB → 181 KB** — matching this doc's original
+   estimate almost exactly, with correctness verified (all four test queries
+   return correct top hits at 0.97 confidence, including the Rigveda's
+   actual opening verse for "agnimILe"). The first published version had a
+   real bug — baking a `%XX` escape into filenames, which a browser's
+   `fetch()` silently mis-requests since it percent-*decodes* `%XX` in a URL
+   before sending it — caught by checking the *live* published index over
+   the CDN rather than trusting a Node-only test (which never touches URL
+   parsing), fixed, and re-verified the same way before pinning.
+2. ✅ **Partition the postings by section.** Done — `build_search_index.py`
+   writes `postings/<trigram>/<section>.json` (one file per trigram per
+   section) instead of one file per trigram; `dge-search.js`'s
+   `_loadPosting(tg, scope)` fetches just that one section's file when
+   scoped, or fans out across every section in parallel and unions the
+   results when not (`opts.section` on `.search()`). `manifest.df` stays a
+   GLOBAL count across sections — it decides which trigrams are worth
+   fetching, not which files answer them, so it didn't need to change.
+   Validated the same way as (1): real rebuild (912 granthas, 58,112
+   trigrams, 11 sections), unscoped fan-out totals came out byte-identical
+   to the pre-partition numbers above (549 KB / 80 KB / 181 KB — the
+   underlying posting data didn't grow, only the file count did), a scoped
+   search to `itihasa` returned only `itihasa/`-prefixed hits and covered
+   proportionally more of that section than the unscoped, MAX_SHARDS-capped
+   search did, and both scoped and unscoped queries were re-verified against
+   a real HTTP server forcing the browser `fetch()` code path. Not yet
+   published to `search-dist` — needs a `reindex.yml` run once this reaches
+   `main`.
+3. **Scoped search in the UI**, now that (1) and (2) are in: a section
+   selector on the corpus-search panel, defaulting to everything.
 4. **Leave the repository layout as it is.** Branches for derived corpora,
    repositories only for the kośa and the audio.
 
-(1) is done in code; until it is published, the honest statement about live
-corpus search is still that it works and it is expensive — every query pays
-megabytes. That stops being true once `reindex.yml` runs and the pin is
-bumped.
+(1) is live. (2) is done in code, not yet published — until `reindex.yml`
+runs again and the pin is bumped, the live index is still the flat
+(pre-partition) one from (1), which is already the fast version; partitioning
+adds proportional scoped search, not a further speed change to what's live
+today.

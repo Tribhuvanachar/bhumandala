@@ -105,16 +105,45 @@
     this.manifest = manifest;
     this.granthas = manifest.granthas;
     this.df = manifest.df || {};
+    this.sections = manifest.sections || [];
     this._shardCache = {};
     this._postingCache = {};
   }
 
-  Index.prototype._loadPosting = function (tg) {
+  // Postings are partitioned by section (postings/<trigram>/<section>.json --
+  // see build_search_index.py). A scoped search (opts.section set) fetches
+  // just that one section's file for the trigram; an unscoped/global search
+  // fans out across every section IN PARALLEL and unions the results -- the
+  // same total postings a single unpartitioned file used to hold, just as
+  // several small requests instead of one that pays for sections the query
+  // never asked about. Cached per (trigram, scope) since the same trigram
+  // can be looked up both ways in one session.
+  Index.prototype._loadPosting = function (tg, scope) {
     var self = this;
-    if (this._postingCache[tg]) return Promise.resolve(this._postingCache[tg]);
-    return fetchJSON(this.base, 'postings/' + safeTrigram(tg) + '.json').then(function (d) {
-      self._postingCache[tg] = d || []; return self._postingCache[tg];
-    });
+    var key = tg + '::' + (scope || '*');
+    if (this._postingCache[key]) return Promise.resolve(this._postingCache[key]);
+    var safe = safeTrigram(tg);
+    // Each argument here is a LITERAL path segment, same rule as safeTrigram()
+    // -- fetchJSON alone decides how (or whether) to URL-encode it, for
+    // whichever of its two branches actually runs. Encoding a segment here
+    // too, on top of that, is exactly the double-encoding bug documented on
+    // fetchJSON above; section names happen to be plain lowercase words with
+    // nothing for encodeURIComponent to change, which is why that mistake
+    // would have gone unnoticed here rather than 404ing outright.
+    var p;
+    if (scope) {
+      p = fetchJSON(this.base, 'postings/' + safe + '/' + scope + '.json')
+        .then(function (d) { return d || []; });
+    } else {
+      p = Promise.all(this.sections.map(function (sec) {
+        return fetchJSON(self.base, 'postings/' + safe + '/' + sec + '.json');
+      })).then(function (parts) {
+        var out = [];
+        parts.forEach(function (d) { if (d) out.push.apply(out, d); });
+        return out;
+      });
+    }
+    return p.then(function (rows) { self._postingCache[key] = rows; return rows; });
   };
 
   Index.prototype._loadShard = function (gi) {
@@ -134,6 +163,10 @@
     opts = opts || {};
     var self = this;
     var limit = opts.limit || 20;
+    // A falsy/omitted section means unscoped -- every section, fanned out
+    // in parallel by _loadPosting. See "Partition the postings tree" in
+    // SEARCH_ARCHITECTURE.md.
+    var section = opts.section || null;
     var q = N.normalizeQuery(query, opts);
     if (!q.pkey) return Promise.resolve([]);
     var qtris = q.trigrams;
@@ -164,7 +197,8 @@
     var fetchedSets = trigramSets.map(function (set) { return rarestOf(set, self.df); });
     var allFetch = {};
     fetchedSets.forEach(function (set) { set.forEach(function (tg) { allFetch[tg] = 1; }); });
-    return Promise.all(Object.keys(allFetch).map(function (tg) { return self._loadPosting(tg); }))
+    var postingKey = function (tg) { return tg + '::' + (section || '*'); };
+    return Promise.all(Object.keys(allFetch).map(function (tg) { return self._loadPosting(tg, section); }))
       .then(function () {
         // Rank candidates by how many of a (rarest-trimmed) trigram set's
         // members they share, then stop. Opening a grantha's unit shard is a
@@ -186,7 +220,7 @@
           if (!set.length) return;
           var counts = {};
           set.forEach(function (tg) {
-            var post = self._postingCache[tg]; if (!post) return;
+            var post = self._postingCache[postingKey(tg)]; if (!post) return;
             for (var k = 0; k < post.length; k++) {
               var key = post[k][0] + ':' + post[k][1];
               counts[key] = (counts[key] || 0) + 1;
