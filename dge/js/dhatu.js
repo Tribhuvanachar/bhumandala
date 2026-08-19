@@ -186,6 +186,22 @@
     $("#dh-fontDn").addEventListener("click",function(){ state.font=Math.max(14,state.font-1); LS.set("font",state.font); applyFont(); });
     $("#dh-theme").addEventListener("click",function(){ var d=document.body.classList.toggle("dark"); LS.set("dark",d); });
     window.addEventListener("hashchange",function(){ var id=hashId(); if(id && id!==state.openId) openById(id); });
+
+    var srcT=$("#dh-srcToggle"), srcD=$("#dh-srcDetails");
+    if(srcT&&srcD) srcT.addEventListener("click",function(){
+      var open=srcD.hidden; srcD.hidden=!open; srcT.setAttribute("aria-expanded",String(open));
+    });
+    var fT=$("#dh-filtersToggle"), fBox=$("#dh-filters");
+    if(fT&&fBox){
+      var collapsed=LS.get("filtersCollapsed",false);
+      fBox.classList.toggle("collapsed",collapsed);
+      fT.textContent=collapsed?"▸":"▾"; fT.setAttribute("aria-expanded",String(!collapsed));
+      fT.addEventListener("click",function(){
+        collapsed=!collapsed; LS.set("filtersCollapsed",collapsed);
+        fBox.classList.toggle("collapsed",collapsed);
+        fT.textContent=collapsed?"▸":"▾"; fT.setAttribute("aria-expanded",String(!collapsed));
+      });
+    }
   }
   function applyFont(){ $("#dh-list").style.setProperty("font-size", state.font+"px"); }
   var _vcache={};
