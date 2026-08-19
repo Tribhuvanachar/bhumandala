@@ -50,6 +50,7 @@
       '.dge-gs-row:hover{background:var(--card-active,rgba(122,59,29,.08))}',
       '.dge-gs-meta{font-size:12px;opacity:.7;display:flex;gap:8px;flex-wrap:wrap}',
       '.dge-gs-snip{font-size:16px;margin-top:2px;line-height:1.5}',
+      '.dge-gs-hl{background:rgba(232,178,77,.4);color:inherit;border-radius:3px;padding:0 1px;font-weight:700}',
       '.dge-gs-hint{padding:14px;opacity:.6;font-size:13px}'
     ].join('\n');
     document.head.appendChild(s);
@@ -148,8 +149,24 @@
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
       p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30 }, queryOpts(q))); })
-       .then(render).catch(function () {});
+       .then(function (hits) { render(hits, q); }).catch(function () {});
     }, 140);
+  }
+
+  // Wraps whole-word, case-insensitive matches of the query's own words
+  // (>=2 chars, so a stray single letter doesn't highlight half the
+  // snippet) in <mark> — deliberately literal-substring, not aware of the
+  // scheme normalization queryOpts() does for the search itself, since a
+  // reader mainly wants to see the words they typed picked out of the
+  // snippet they're already reading in that same script, not every
+  // possible transliteration of a match found some other way.
+  function highlightSnippet(escapedText, q) {
+    var words = (q || '').trim().split(/\s+/).filter(function (w) { return w.length >= 2; });
+    if (!words.length) return escapedText;
+    var pattern = words.map(function (w) {
+      return esc(w).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }).join('|');
+    return escapedText.replace(new RegExp('(' + pattern + ')', 'gi'), '<mark class="dge-gs-hl">$1</mark>');
   }
 
   // Escapes quotes too: the output goes into attributes (data-slug="…") as
@@ -162,7 +179,7 @@
     });
   }
 
-  function render(hits) {
+  function render(hits, q) {
     var box = document.getElementById('dge-gs-results');
     if (!hits || !hits.length) { box.innerHTML = '<div class="dge-gs-hint">No matches.</div>'; return; }
     // A common word matches most of the corpus; the search stops after the
@@ -176,7 +193,7 @@
     box.innerHTML = note + hits.map(function (h) {
       return '<div class="dge-gs-row" data-slug="' + esc(h.grantha) + '" data-unit="' + esc(h.unit) + '">' +
         '<div class="dge-gs-meta"><b>' + esc(h.title) + '</b><span>' + esc(h.unit) + '</span><span>' + esc(h.category) + '</span><span>' + h.score.toFixed(2) + '</span></div>' +
-        '<div class="dge-gs-snip">' + esc(h.snippet) + '</div></div>';
+        '<div class="dge-gs-snip">' + highlightSnippet(esc(h.snippet), q) + '</div></div>';
     }).join('');
     Array.prototype.forEach.call(box.querySelectorAll('.dge-gs-row'), function (row) {
       row.onclick = function () { go(row.getAttribute('data-slug'), row.getAttribute('data-unit')); };

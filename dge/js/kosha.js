@@ -390,6 +390,18 @@
     try { return (window.applyTransliteration && window.activeScript && window.activeScript !== 'devanagari')
       ? window.applyTransliteration(s, window.activeScript) : s; } catch (e) { return s; }
   }
+  // Wraps occurrences of the searched headword inside a gloss's own text in
+  // <mark> — the searched word appearing again inside its definition (a
+  // self-reference, or the word used in an example) was otherwise
+  // indistinguishable from the surrounding prose. hw must already be in the
+  // same script as escapedText (i.e. already run through tl()) or nothing
+  // will match.
+  function highlightHw(escapedText, hw) {
+    hw = (hw || '').trim();
+    if (!hw) return escapedText;
+    var pattern = esc(hw).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return escapedText.replace(new RegExp('(' + pattern + ')', 'gi'), '<mark class="kosha-hl">$1</mark>');
+  }
 
   function renderResults(result, resBox, detail) {
     var list = result.list || [];
@@ -453,7 +465,7 @@
         var h = '<span class="kosha-lang">' + (LANG_NAME[glossLang] || glossLang) + '</span>';
         if (s.pos) h += ' <span class="kosha-pos">' + esc(tl(s.pos)) + '</span>';
         sd.appendChild(el('div', 'kosha-sense-head', h));
-        sd.appendChild(el('div', 'kosha-gloss', esc(tl(s.gloss || '')).replace(/\n/g, '<br>')));
+        sd.appendChild(el('div', 'kosha-gloss', highlightHw(esc(tl(s.gloss || '')), tl(g.hw)).replace(/\n/g, '<br>')));
         if (s.etymology) sd.appendChild(el('div', 'kosha-field',
           '<span class="kosha-flabel">व्युत्पत्तिः</span> ' + esc(tl(s.etymology))));
         if (s.note) sd.appendChild(el('div', 'kosha-field',
@@ -747,6 +759,7 @@
       '.kosha-lang{font-size:11px;background:var(--accent-red,#8a5a2b);color:#fff;border-radius:8px;padding:1px 7px}',
       '.kosha-pos{font-size:12px;color:var(--muted-text,#888);font-style:italic}',
       '.kosha-gloss{font-size:16.5px;line-height:1.65;margin:4px 0}',
+      '.kosha-hl{background:rgba(232,178,77,.4);color:inherit;border-radius:3px;padding:0 1px;font-weight:700}',
       '.kosha-field,.kosha-cite{font-size:14px;line-height:1.6;color:var(--muted-text,#666);margin:4px 0}',
       '.kosha-flabel{font-weight:600;color:var(--accent-red,#8a5a2b)}',
       '.kosha-cite{font-style:italic;padding-left:10px;border-left:2px solid var(--card-border,#e6ddcf)}',
