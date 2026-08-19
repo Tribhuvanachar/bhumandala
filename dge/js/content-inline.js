@@ -373,8 +373,12 @@
       return;
     }
 
+    // The file name up front, always -- so "where does this text live" has
+    // an answer on screen before an admin even clicks anything, rather than
+    // only implicitly via the per-field ci-path label once editing starts.
     el.innerHTML =
       '<button class="ci-chevron-btn" aria-label="Collapse the edit tool">‹</button>' +
+      '<span class="ci-file" title="Editing this file">' + esc(FILE) + '</span>' +
       '<span class="ci-count">' + (n ? n + ' unpublished edit' + (n === 1 ? '' : 's') +
         ' — in this browser only' : 'Click on the highlighted text to edit and save.') + '</span>' +
       (n ? '<button class="ci-btn ci-publish">Publish</button>' +
