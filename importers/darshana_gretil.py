@@ -20,10 +20,11 @@ Run:  python importers/dispatch.py <id>
       python importers/darshana_gretil.py --list
 """
 
+import html
 import re
 import sys
 
-from common import http_get, to_text, iast_to_dev, write_grantha
+from common import http_get, to_text, iast_to_dev, itrans_to_iast, write_grantha
 
 BASE = "https://gretil.sub.uni-goettingen.de/gretil/"
 
@@ -47,6 +48,21 @@ DARSHANA_GRETIL = {
         unit="adhyaya",
         urls=[BASE + "1_sanskr/6_sastra/3_phil/nyaya/nystik_u.htm"]),
 
+    "tarkasangraha_mula": dict(
+        name="Annambhaṭṭa, Tarkasaṅgraha (mūla)",
+        author="अन्नम्भट्टः",
+        schema="grantha_mula_text",
+        target="darshana/nyaya/prakarana/tarkasangraha/mula",
+        unit="sutra",
+        # TEI transformation: one clean <p id="AnTs_N"> per sutra, no
+        # commentary mixed in. Only covers the padartha-nirupana portion
+        # (sutras 1-81, i.e. up to and including the "sapta padarthah"
+        # summary sutra) -- the pramana-nirupana portion (pratyaksa /
+        # anumana / upamana / sabda) that traditionally follows isn't
+        # marked up with AnTs_ ids in this GRETIL file at all.
+        urls=["https://gretil.sub.uni-goettingen.de/gretil/corpustei/"
+              "transformations/html/sa_annaMbhatta-tarkasaMgraha.htm"]),
+
     "tarkasangraha_dipika": dict(
         name="Annambhaṭṭa, Tarkasaṅgraha with Dīpikā",
         author="अन्नम्भट्टः",
@@ -54,8 +70,27 @@ DARSHANA_GRETIL = {
         tika_title="तर्कदीपिका",
         target="darshana/nyaya/prakarana/tarkasangraha/tika_dipika",
         unit="prakarana",
-        # the _r.txt raw variant is cleaner than the _u.htm rendering
-        urls=[BASE + "1_sanskr/6_sastra/3_phil/nyaya/antsdi_r.txt"]),
+        # The _r.txt "raw" variant is NOT plain IAST -- it's Ronald
+        # Emmerick's 8-bit WordPerfect encoding (diacritics live in the
+        # 160-255 byte range per a table in its own header) and http_get's
+        # forced UTF-8 decode mangles every accented character into U+FFFD.
+        # _u.htm is the same content pre-converted to real UTF-8 by GRETIL
+        # -- use that instead. Bundles Dipika (Annambhatta's own
+        # auto-commentary) with Nilakantha's Prakasika and Balapriya mixed
+        # in per-sutra; a cleaner per-tika split would need separate
+        # sources for those layers.
+        #
+        # antsdi_u.htm only marks the padartha-nirupana span (AnTs_1..81,
+        # same as tarkasangraha_mula above). The second URL is a different
+        # edition (sanskritdocuments.org, ITRANS, Dipika only -- no
+        # Prakasika/Balapriya) that covers the whole work across 8
+        # adhyayas; its chapters 4-8 (pratyaksa/anumana/upamana/sabda +
+        # the closing pramanya-vada discussion) fill the span the GRETIL
+        # source doesn't reach. Chapters 1-3 of this second source
+        # duplicate the padartha portion already covered more richly by
+        # antsdi_u.htm, so the ITX-branch parser below skips them.
+        urls=[BASE + "1_sanskr/6_sastra/3_phil/nyaya/antsdi_u.htm",
+              "https://sanskritdocuments.org/doc_z_misc_major_works/tarkasangraha.itx"]),
 
     "tattvacintamani_shabda": dict(
         name="Gaṅgeśa, Tattvacintāmaṇi — Śabdakhaṇḍa",
@@ -202,6 +237,170 @@ def parse(raw, spec):
     return items, attribution
 
 
+# --- Tarkasangraha: dedicated parsers -----------------------------------
+# Neither source uses the "// ABBR_n.n //" / heading-driven conventions
+# SECTION_PATTERNS targets, so they get their own marker regexes instead
+# of going through find_sections().
+
+_TEI_SUTRA = re.compile(r'<p id="AnTs_(\d+)">(.*?)</p>', re.S)
+
+
+def _tei_clean(inner):
+    inner = re.sub(r'<span class="ref">.*?</span>', "", inner, flags=re.S)
+    inner = re.sub(r"<[^>]+>", " ", inner)
+    inner = html.unescape(inner)
+    return clean(inner)
+
+
+def parse_tarkasangraha_mula(raw, spec):
+    items = []
+    for match in _TEI_SUTRA.finditer(raw):
+        num, inner = match.groups()
+        text = _tei_clean(inner)
+        if not text:
+            continue
+        items.append(build_item(spec, f"sutra_{num}", f"AnTs_{num}", text, "",
+                                 section="sutra"))
+    return items, ""
+
+
+# AnTs_1ab / AnTs_1cd (pada-split mangala verse), AnTs_10[1] / AnTs_10[2]
+# (a long sutra split into sub-parts), AnTs_2 .. AnTs_81 (the common case).
+_DIPIKA_MARKER = re.compile(r"AnTs_(?P<num>\d+)(?:\[\d+\])?[a-z]{0,4}")
+_DIPIKA_START = "maṅgalavādaḥ"  # first heading of the actual text, past the Balapriya preface
+# A single sutra's own commentary runs a few thousand characters at most
+# (see the longest *bounded* item, ~59k for a dense one); past this a
+# "no next marker found" tail is swallowing unrelated later material
+# rather than legitimately belonging to the last marked sutra.
+_TAIL_CAP = 60_000
+
+
+def parse_tarkasangraha_dipika(raw, spec):
+    # Two different editions share this spec's urls list (see the comment
+    # on tarkasangraha_dipika above) -- route by a marker only the ITX one has.
+    if "\\begin{document}" in raw[:4000]:
+        return _parse_dipika_itx(raw, spec)
+    return _parse_dipika_html(raw, spec)
+
+
+def _parse_dipika_html(raw, spec):
+    start = raw.find(_DIPIKA_START)
+    text = to_text(raw[start:] if start >= 0 else raw)
+    matches = list(_DIPIKA_MARKER.finditer(text))
+
+    # A marker only starts a new item the first time its number is reached
+    # in sequence -- ab/cd pairs and [1]/[2] sub-parts share their sutra's
+    # number and fold into that same item instead of starting new ones.
+    boundaries, expected = [], 1
+    for match in matches:
+        if int(match.group("num")) == expected:
+            boundaries.append(match)
+            expected += 1
+
+    items = []
+    for index, match in enumerate(boundaries):
+        num = match.group("num")
+        chunk_start = match.end()
+        chunk_end = boundaries[index + 1].start() if index + 1 < len(boundaries) else len(text)
+        chunk = _DIPIKA_MARKER.sub(" ", text[chunk_start:chunk_end])
+        body = clean(chunk)
+        if not body:
+            continue
+        # The source only tags the padartha-nirupana portion (sutras
+        # 1-81) with AnTs_ markers; everything past the last boundary is
+        # the pramana-nirupana portion (pratyaksa/anumana/upamana/sabda
+        # khandas) running on with no per-sutra markers at all. That
+        # remainder is covered properly, chapter by chapter, by
+        # _parse_dipika_itx below -- cap this tail rather than dump it
+        # (previously ~440k chars) wholesale under sutra 81.
+        is_tail = index == len(boundaries) - 1
+        if is_tail:
+            body = body[:_TAIL_CAP]
+        reference = (f"AnTs_{num} onward (unsegmented, truncated -- see "
+                      "the adhyaya-numbered items below for the rest)"
+                      if is_tail else f"AnTs_{num}")
+        items.append(build_item(spec, f"prakarana_{num}", reference, body, "",
+                                 section="prakarana", unsegmented=is_tail))
+    return items, ""
+
+
+# sanskritdocuments.org edition: \section{atha <ordinal>o.adhyAya} per
+# chapter, "-|| N ||"-style verse-end markers whose numbering sometimes
+# restarts per chapter and sometimes continues across a chapter boundary
+# (e.g. adhyaya 3 ends at 30, adhyaya 4 continues 31..40) -- always use
+# each marker's own printed number rather than assuming a restart.
+_ITX_SECTION = re.compile(r"\\section\{([^}]*)\}")
+_ITX_VEND = re.compile(r"\|\|\s*(\d+)\s*\|\|")
+_ITX_NOISE = re.compile(r"##\(##|##\)##|##|\\-")
+_ITX_QUOTE = re.compile(r"\\[lr]dq\{\}")  # itrans package's left/right curly-quote macros
+
+
+def _itx_clean(chunk):
+    chunk = _ITX_QUOTE.sub('"', chunk)
+    chunk = _ITX_NOISE.sub("", chunk)
+    chunk = chunk.replace("\\,", ",")  # itrans escaped-comma (avoids ITRANS reparsing the comma)
+    # Any other stray \command{...} or \command is layout markup (itrans
+    # package macros), never real Sanskrit -- confirmed for real: without
+    # this, "Encoded by ashish\_{}chandr70..." and similar credits-block
+    # noise near the footer survive into transliterated output as garbage.
+    chunk = re.sub(r"\\[a-zA-Z]+\{[^}]*\}", " ", chunk)
+    chunk = re.sub(r"\\[a-zA-Z]+", " ", chunk)
+    chunk = re.sub(r"\s+", " ", chunk).strip(" |")
+    return chunk.strip()
+
+
+def _parse_dipika_itx(raw, spec):
+    sections = list(_ITX_SECTION.finditer(raw))
+    # The credits footer ("Encoded by ...") precedes \end{document} and
+    # isn't real text -- stop there, not at \end{document} itself.
+    end_doc = raw.find("Encoded by")
+    if end_doc < 0:
+        end_doc = raw.find("\\end{document}")
+    if end_doc < 0:
+        end_doc = len(raw)
+
+    items = []
+    # Chapters 1-3 (padartha-nirupana) duplicate what antsdi_u.htm already
+    # covers, with a richer Dipika+Prakasika+Balapriya commentary -- only
+    # take chapters 4 onward (pratyaksa/anumana/upamana/sabda + the
+    # closing epistemology discussion), which antsdi_u.htm's tail doesn't
+    # reach with any real segmentation.
+    for chapter_index in range(3, len(sections)):
+        chapter_num = chapter_index + 1
+        body_start = sections[chapter_index].end()
+        body_end = sections[chapter_index + 1].start() if chapter_index + 1 < len(sections) else end_doc
+        body = raw[body_start:body_end]
+        marks = list(_ITX_VEND.finditer(body))
+
+        if not marks:
+            # Chapter 8 (pramanya-vada discussion) has no verse markers at
+            # all -- keep it as one item rather than dropping it.
+            text = itrans_to_iast(_itx_clean(body))
+            if text:
+                items.append(build_item(
+                    spec, f"adhyaya_{chapter_num}", f"Tarkasaṅgraha {chapter_num} (no sutra markers in source)",
+                    text, "", section="adhyaya", unsegmented=True))
+            continue
+
+        prev_end = 0
+        for mark_index, mark in enumerate(marks):
+            num = mark.group(1)
+            chunk = body[prev_end:mark.end()]
+            prev_end = mark.end()
+            text = itrans_to_iast(_itx_clean(chunk))
+            if not text:
+                continue
+            # Only the first marker in a chapter is a clean sutra-only
+            # boundary; later ones open with the tail of the previous
+            # sutra's commentary before this one's own root text, for the
+            # same reason as the antsdi_u.htm parser above (no typographic
+            # break between running commentary and the next root verse).
+            items.append(build_item(
+                spec, f"adhyaya_{chapter_num}_{num}", f"Tarkasaṅgraha {chapter_num}.{num}",
+                text, "", section="adhyaya"))
+    return items, ""
+
+
 def build_item(spec, item_id, reference, iast_text, attribution, section="",
                unsegmented=False):
     item = {
@@ -222,6 +421,13 @@ def build_item(spec, item_id, reference, iast_text, attribution, section="",
     return item
 
 
+# ids with a dedicated parser instead of the generic heading-driven one
+_CUSTOM_PARSERS = {
+    "tarkasangraha_mula": parse_tarkasangraha_mula,
+    "tarkasangraha_dipika": parse_tarkasangraha_dipika,
+}
+
+
 def run(tid):
     spec = DARSHANA_GRETIL[tid]
     chunks = []
@@ -235,9 +441,10 @@ def run(tid):
     if not chunks:
         raise SystemExit(f"{tid}: no source fetched")
 
+    parse_fn = _CUSTOM_PARSERS.get(tid, parse)
     items, attribution = [], ""
     for raw in chunks:
-        part, attr = parse(raw, spec)
+        part, attr = parse_fn(raw, spec)
         items.extend(part)
         attribution = attribution or attr
 

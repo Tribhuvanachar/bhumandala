@@ -122,6 +122,19 @@ service cloud.firestore {
       allow delete: if isSuperadmin();
     }
 
+    // Who pressed which workflow button, when, and with what inputs.
+    //
+    // Written only by runWorkflow through the Admin SDK, which bypasses
+    // these rules. Readable by an admin because the panel shows nothing
+    // from it today but an audit trail nobody can read is not an audit
+    // trail; unwritable by every client, because a record of who
+    // republished the corpus is worth exactly as much as the fact that
+    // its subject could not have edited it.
+    match /workflow_dispatches/{dispatchId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
     // Anything not matched above is denied by default. Stated explicitly
     // so that adding a collection later is a conscious decision rather
     // than something that silently inherits access from a broad rule.

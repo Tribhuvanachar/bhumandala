@@ -28,7 +28,7 @@ dge/js/config.js             FIREBASE_CONFIG + AUTH_CONFIG switches
 dge/firebase/firestore.rules the real enforcement layer
 dge/firebase/firebase.json   project config (emulators, hosting, functions)
 dge/firebase/functions/      Cloud Functions: OTP, broadcasts, webhook
-dge/firebase/tests/          204 tests — see tests/README.md
+dge/firebase/tests/          234 tests — see tests/README.md
 ```
 
 ## 2. Cost — read this before enabling anything
@@ -205,7 +205,7 @@ registrar. SSL and custom domains are free either way.
 
 ## 10. What is and isn't tested
 
-**Tested — 204 tests, no credentials, no cost** (`cd dge/firebase/tests
+**Tested — 234 tests, no credentials, no cost** (`cd dge/firebase/tests
 && npm install && npm run test:all`):
 
 - The OTP state machine: expiry to the millisecond, attempt caps
@@ -220,6 +220,9 @@ registrar. SSL and custom domains are free either way.
 - WhatsApp payload shapes, webhook signature forgery, and opt-out
   detection (including that "please don't stop sending these" does *not*
   unsubscribe someone).
+- The workflow buttons' allowlist: that a workflow not on the list, an
+  input the workflow does not declare, a caller-supplied branch, or an
+  admin reaching for a super-admin job are all refused.
 - The browser flow with a stubbed SDK: transport routing, that a new
   profile is always created as `basic` with consent off even if
   `config.js` is tampered with, and that the whole feature stays inert
@@ -249,3 +252,78 @@ registrar. SSL and custom domains are free either way.
 - **Delivery-status tracking.** The webhook parses inbound messages for
   opt-outs but ignores `statuses` callbacks; per-message delivery
   receipts are not recorded.
+
+## 12. The workflow buttons (`admin/workflows.html`)
+
+The site is static on GitHub Pages: a page cannot start a job by itself, and
+it must never hold a token that could — anything shipped to a browser is
+readable by whoever opens it. So the panel talks to two Cloud Functions,
+`listWorkflows` and `runWorkflow`, which hold the token and check the caller.
+
+```
+admin/workflows.html  ──▶  runWorkflow  ──▶  GitHub API
+(admin latch +             (holds the token as     (workflow_dispatch,
+ Firebase Auth)             a secret; reads the     ref: main, always)
+                            caller's role from
+                            Firestore, not from
+                            anything the browser said)
+```
+
+**Until this is deployed the panel still works** — it lists the same five
+workflows and every button opens the GitHub Actions page instead. That is not
+a degraded mode so much as the same capability one tab away, and it is what
+the page shows today, because `AUTH_CONFIG.enabled` is still `false`.
+
+### What has to be true before it can be deployed
+
+1. **The Blaze plan.** A Function on the free Spark plan cannot make an
+   outbound call to a non-Google host, and `api.github.com` is one. Set a
+   budget cap at the same time; these two functions cost effectively nothing
+   (a handful of invocations a month), but a cap is what stops a mistake
+   elsewhere from becoming a bill.
+2. **A fine-grained token.** GitHub → Settings → Developer settings →
+   Personal access tokens → **Fine-grained tokens**:
+   - Repository access: **Only select repositories** → `bhumandala`, and
+     nothing else.
+   - Permissions: **Actions: Read and write**. Nothing else. Not `contents`,
+     not `workflows`, not organisation permissions.
+   - An expiry you will actually notice — 90 days, with a reminder.
+
+   A classic PAT with `repo` scope would work and must not be used: it can
+   read and write every repository the account can reach, and it would be
+   sitting in a service whose whole job is to accept requests from a browser.
+   If the token below is ever leaked, the worst it can do is start one of
+   five workflows in one repository.
+
+### Deploying it
+
+```bash
+cd dge/firebase
+firebase functions:secrets:set GITHUB_DISPATCH_TOKEN     # paste the token
+firebase deploy --only functions:listWorkflows,functions:runWorkflow
+firebase deploy --only firestore:indexes,firestore:rules
+```
+
+The repository defaults to `Tribhuvanachar/bhumandala`; override it with the
+`GITHUB_REPO` env param if that ever changes.
+
+### What the panel can and cannot do
+
+- **Only the five workflows in `functions/workflows.json`.** A caller cannot
+  name a workflow file, invent an input, or choose a branch: `ref` is always
+  `main`, set in code, because a caller-supplied ref is arbitrary code
+  execution by another name.
+- **Roles are read server-side.** `is_superadmin` in localStorage decides
+  what the UI *shows*; the Function reads `users/{uid}.role` from Firestore
+  and decides what actually runs. Jobs that republish text a reader will see
+  (`import-kavya`, `publish-wordnet`) need `superadmin`; the reporting and
+  tracker jobs accept `admin`.
+- **Every press is recorded** in the `workflow_dispatches` collection — who,
+  which workflow, which inputs, and whether GitHub accepted it. Written by
+  the Admin SDK, readable by admins, writable by no client.
+- **One minute between presses** of the same workflow by the same account, so
+  a double-click cannot open two pull requests.
+
+The allowlist, the role rules and the input validation are all in
+`functions/lib/workflows-core.js`, with 30 tests in
+`tests/workflows-core.test.js` that run with no credentials and no cost.

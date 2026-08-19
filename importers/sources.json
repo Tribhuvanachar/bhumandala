@@ -160,9 +160,43 @@
    "format": "IAST plaintext with reference markers, transliterated to Devanagari",
    "importer": "shankara_bhashya.py",
    "note": "Chunked on source reference markers; verify marker regex per work on first run. English (Thibaut/Sitarama Sastri/Mahadeva Sastri, PD) = follow-up."
+  },
+  {
+   "id": "darshana/nyaya/prakarana/tarkasangraha",
+   "title": "Annambhatta, Tarkasangraha (mula + Dipika, all 8 adhyayas)",
+   "target": "darshana/nyaya/prakarana/tarkasangraha/{mula,tika_dipika}",
+   "url": "GRETIL corpustei TEI transformation (mula, padartha-nirupana only) + antsdi_u.htm (Dipika/Prakasika/Balapriya, padartha-nirupana) + sanskritdocuments.org tarkasangraha.itx (Dipika only, all 8 adhyayas)",
+   "format": "GRETIL UTF-8 IAST (AnTs_N markers) + sanskritdocuments ITRANS (\\section{} adhyaya headers, || N || verse markers)",
+   "importer": "darshana_gretil.py (tarkasangraha_mula, tarkasangraha_dipika)",
+   "note": "tarkasangraha.com is a JS-rendered SPA with no static/API text endpoint found -- not usable for bulk import. mula covers the 81 padartha-nirupana sutras cleanly (AnTs_1..81) from GRETIL's TEI transformation; no clean mula-only source was found for the remaining pratyaksa/anumana/upamana/sabda adhyayas (sanskritdocuments' bare tarka2.itx stops at the same padartha-nirupana boundary under a different, coarser 70-sutra numbering). tika_dipika combines both GRETIL (81 items, richer Dipika+Prakasika+Balapriya, padartha-nirupana) and sanskritdocuments (44 items across adhyayas 4-8, Dipika only) -- chapters 1-3 of the sanskritdocuments source are skipped as duplicates of the richer GRETIL coverage. Neither source types its markers cleanly relative to running commentary (the marker always sits at one end of the verse, so about half of each chapter's items open or close with a stray tail of the neighbouring sutra's commentary) -- acceptable for a running mula+tika layer, not for a pure-mula extraction. The GRETIL _r.txt 'raw' variant looked cleaner but is actually 8-bit REE-encoded, not IAST -- use antsdi_u.htm, not antsdi_r.txt."
   }
  ],
  "ocr": [
+  {
+   "id": "darshana/nyaya/prakarana/tarkasangraha/tika_nilakanthi",
+   "title": "Tarkasangraha Dipika with Nilakanthi (Nilakantha Bhatta)",
+   "url": "archive.org tarkasangrahadipikanilakanthinilakanthabhattapanditsivadattavenkateswarasteampress_202003_640_O"
+  },
+  {
+   "id": "darshana/nyaya/prakarana/tarkasangraha/tika_bhaskarodaya",
+   "title": "Bhaskarodaya commentary on Tarkasangraha Dipika Prakasha (Lakshmi Nrisimha Shastri, 1926 Nirnaya Sagar Press)",
+   "url": "archive.org yFpU_bhaskarodaya-commentary-on-tarka-sangrah-dipika-prakash-by-lakshmi-nrisimha-shas"
+  },
+  {
+   "id": "darshana/nyaya/prakarana/tarkasangraha/tika_padakritya",
+   "title": "Tarkasangraha with Nyayabodhini, Padakritya and Bala Manorama tika (Sitarama Shastri, 1950)",
+   "url": "archive.org qmDV_tarka-sangraha-with-nyayabodhini-padakritya-and-bala-manorama-tika-by-acharya-sh"
+  },
+  {
+   "id": "darshana/nyaya/prakarana/tarkasangraha/tika_nyayabodhini",
+   "title": "Tarkasangraha with Nyayabodhini (Govardhana) and Padakriya (Chandrasimha), Khemraj edition",
+   "url": "archive.org TarkasangrahaKhemrajEd"
+  },
+  {
+   "id": "darshana/nyaya/prakarana/tarkasangraha/tika_sarvasva",
+   "title": "Tarkasangraha Dipika Sarvasva (Kuganti Sri Rama Shastri)",
+   "url": "archive.org tarkasangrahadipikasarvasvakugantisriramashastrikugantisriramashastri_202003_668_n"
+  },
   {
    "id": "mani_manjari",
    "title": "Mani Manjari",

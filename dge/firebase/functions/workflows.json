@@ -1,0 +1,145 @@
+{
+  "_readme": [
+    "The workflows the admin panel may start, and what each one accepts.",
+    "",
+    "Read by TWO things, which is the whole reason it is a file and not a",
+    "literal: dge/firebase/functions/lib/workflows-core.js requires it (so the",
+    "Cloud Function will dispatch nothing that is not named here), and",
+    "admin/workflows.html fetches it (so the panel can list the buttons even",
+    "when the Function is not deployed and every button is a GitHub link).",
+    "Two copies of this list would drift, and the copy that drifted would be",
+    "the one deciding what a token is allowed to start.",
+    "",
+    "It lives inside functions/ because `firebase deploy` uploads that",
+    "directory and nothing above it; a copy in admin/config/ could not be",
+    "required at runtime.",
+    "",
+    "Adding an entry here makes a workflow clickable. That is a deliberate",
+    "act: the ref is always main and is never caller-supplied, and only the",
+    "inputs listed here are accepted.",
+    "",
+    "  writes: 'nothing'  — reads the outside world, writes a report",
+    "          'metadata' — rewrites generated status/tracker files",
+    "          'corpus'   — rewrites or republishes text people read",
+    "                       (superadmin only; see minRoleFor in workflows-core.js)"
+  ],
+  "workflows": [
+    {
+      "id": "check-sources",
+      "file": "check-sources.yml",
+      "name": "Check sources for updates",
+      "blurb": "Looks at all 17 outside sources and reports what moved. Opens an issue if anything did. Imports nothing.",
+      "writes": "nothing",
+      "inputs": [
+        {
+          "name": "only",
+          "type": "string",
+          "label": "Only these source ids (comma-separated; blank = all)",
+          "default": ""
+        },
+        {
+          "name": "remember",
+          "type": "boolean",
+          "label": "Record what was seen, so the next run reports only what is new",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "kavya-tracker",
+      "file": "kavya-tracker.yml",
+      "name": "Kāvya tracker — refresh",
+      "blurb": "Re-counts every kāvya on disk and rewrites KAVYA_TRACKER.md and kavya-status.json.",
+      "writes": "metadata",
+      "inputs": []
+    },
+    {
+      "id": "reindex",
+      "file": "reindex.yml",
+      "name": "DGE re-index (search + library status)",
+      "blurb": "Rebuilds the search index and publishes it to the search-dist branch.",
+      "writes": "metadata",
+      "inputs": [
+        {
+          "name": "open_pr",
+          "type": "boolean",
+          "label": "Open a pull request with the refreshed index",
+          "default": true
+        },
+        {
+          "name": "include_kavya",
+          "type": "boolean",
+          "label": "Also index the Kāvya corpus",
+          "default": true
+        },
+        {
+          "name": "commentaries",
+          "type": "boolean",
+          "label": "Index the commentaries too (larger index)",
+          "default": false
+        }
+      ]
+    },
+    {
+      "id": "import-kavya",
+      "file": "import-kavya.yml",
+      "name": "Import Kāvya corpus",
+      "blurb": "Fetches kāvya from GRETIL, Ambuda and Wikisource and republishes the corpus. Rewrites text people read — leave \"Probe only\" on unless you mean it.",
+      "writes": "corpus",
+      "inputs": [
+        {
+          "name": "works",
+          "type": "string",
+          "label": "Work ids, comma-separated, or \"all\"",
+          "default": "all",
+          "required": true
+        },
+        {
+          "name": "sources",
+          "type": "string",
+          "label": "Source keys (blank = every declared source)",
+          "default": ""
+        },
+        {
+          "name": "probe_only",
+          "type": "boolean",
+          "label": "Probe and report only — writes no data",
+          "default": true
+        },
+        {
+          "name": "open_pr",
+          "type": "boolean",
+          "label": "Open a pull request with the result",
+          "default": true
+        }
+      ]
+    },
+    {
+      "id": "publish-wordnet",
+      "file": "publish-wordnet.yml",
+      "name": "Publish the Sanskrit WordNet",
+      "blurb": "Rebuilds the WordNet from the IndoWordNet dump and publishes it to the wordnet-dist branch.",
+      "writes": "corpus",
+      "inputs": [
+        {
+          "name": "languages",
+          "type": "string",
+          "label": "Other languages to carry equivalents from",
+          "default": "kannada"
+        },
+        {
+          "name": "examples",
+          "type": "boolean",
+          "label": "Include the usage sentences (24 MB with, 17 without)",
+          "default": true
+        },
+        {
+          "name": "dry_run",
+          "type": "boolean",
+          "label": "Build and report only — publish nothing",
+          "default": true
+        }
+      ]
+    }
+  ]
+}

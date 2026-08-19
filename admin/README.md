@@ -14,6 +14,7 @@ the one place to look.
 | `audio.html` | Audio catalogue and playback metadata. |
 | `dasa-capture.html` | Dāsa Sāhitya capture and entry. |
 | `holy-places.html` | Holy places and brindāvana curation for Guru Paramparā. |
+| `workflows.html` | Runs the five GitHub Actions jobs — source check, kāvya tracker, re-index, kāvya import, WordNet. Falls back to opening GitHub until the Cloud Function is deployed (`dge/FIREBASE_SETUP.md` §12). |
 
 Reached from the shield icon in the library's top bar, which appears only
 for authorised users.

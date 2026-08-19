@@ -64,6 +64,7 @@
       { "id": "adminDasaCaptureItem",        "icon": "🎶", "label": "Dasa Sahitya Capture", "href": "../admin/dasa-capture.html", "requires": "superadmin", "enabled": true },
       { "id": "adminHolyPlacesManagerItem",  "icon": "🛕", "label": "Holy Places Curation", "href": "../admin/holy-places.html",  "requires": "superadmin", "enabled": true },
       { "id": "adminAudioManagerItem",       "icon": "🎙️", "label": "Audio Admin",          "href": "../admin/audio.html",        "requires": "superadmin", "enabled": true },
+      { "id": "adminWorkflowsItem",          "icon": "⚙️", "label": "Run a Workflow",       "href": "../admin/workflows.html",    "requires": "superadmin", "enabled": true },
       { "id": "adminUserRolesItem",          "icon": "👥", "label": "Manage Users",         "action": "openUserRolesModal", "requires": "superadmin", "feature": "auth", "enabled": true }
     ]
   },
