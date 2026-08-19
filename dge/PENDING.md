@@ -117,6 +117,113 @@ complete record, not just a live queue.
 
 ## Awaiting a decision or action from the project lead
 
+- **Eight `rigveda_ref` values in the Sāmaveda data name the wrong verse** (found
+  18 Aug while propagating Sāyaṇa; `tools/sayana_smriti/SOURCES.md` §7 has the
+  evidence). These are errors in DGE's own Sāmaveda data, not in the
+  propagation. `propagate_samaveda.py` now checks each ref against the mantra
+  text and **skips** these eight rather than repairing them silently, so the
+  commentary is absent rather than wrong — but the refs themselves still want
+  fixing at source, which is a content call:
+  | agreement | SV → RV | |
+  |---|---|---|
+  | 0.11 | 1429 → 9.89.5 | no word in common |
+  | 0.19 | 385 → 4.39.6 | no word in common |
+  | 0.22 | 1420 → 1.93.3 | no word in common |
+  | 0.23 | 469 → 9.65.1 | no word in common |
+  | 0.26 | 345 → 8.24.16 | no word in common |
+  | 0.40 | 891 → 9.61.17 | **890 and 891 appear to name each other's verses** |
+  | 0.52 | 890 → 9.61.18 | |
+  | 0.53 | 1204 → 9.12.8 | |
+  Eight more agree only partially (0.55–0.70) where the Sāmaveda's own reading or
+  verse division differs; those *are* propagated, since every entry already tells
+  the reader it is Sāyaṇa on the parallel Ṛgveda mantra.
+- **150 dangling `library.json` entries, all dvaitavedanta.** Pre-existing on
+  main, not caused by the Sāyaṇa work, and unchanged by it.
+  `tools/audit_library.py --fix` clears them in one command. Left alone across
+  three sessions now because they may belong to an in-flight crawl — **this needs
+  a yes or no from the project lead**, otherwise it will keep being deferred.
+- **Rights on the archive.org Sāyaṇa scan** (`rgveda-with-sayanabhasya`) — the
+  item states no licence. Sāyaṇa's text is long out of copyright; the Vaidika
+  Saṃśodhana Maṇḍala edition's own status is unchecked. Now lower priority: the
+  Wikisource route (CC BY-SA, stated) supplies 98.45% and is what actually
+  shipped, so this only matters if the OCR route is ever published from.
+- **New content acquisition — Chandas, Nirukta, Śikṣā/Prātiśākhya, Ayurveda, Kāmaśāstra and Nītiśāstra, each work zeroed in on ONE verified source (18 Aug 2026).** A wide sweep of candidate sites (Ambuda, GRETIL, Sanskrit Documents, SARIT, NIIMH/CCRAS, TITUS, Cologne Lexicon, wisdomlib, subhashita.com, DSBC) was proposed for these categories. Rather than storing that as a shopping list, every candidate site and specific text below was actually fetched and read before being written down here — this project has already been burned twice by declaring GRETIL filenames that turned out not to exist (see `works.json`'s Naiṣadhīyacarita/Mṛcchakaṭika/Kāvyaprakāśa entries above), so "checked" below means a real HTTP 200 and an inspected passage, not a guessed URL pattern. **One correction to the original brief first: Alaṅkāraśāstra (Kāvyādarśa, Kāvyālaṅkāra, Dhvanyāloka, Vakroktijīvita, Kāvyaprakāśa, Daśarūpaka, Sāhityadarpaṇa, Rasagaṅgādhara, Śṛṅgāraprakāśa, Chandomañjarī, Nāṭyaśāstra) is not a gap — every one of those titles is already registered in `tools/kavya/config/works.json` with its source checked the same day this note was written, several already correctly marked "no machine-readable source" rather than left unverified. Nothing below duplicates that.**
+
+  **Reachability, checked directly by curl from this sandbox, not assumed:** `ambuda.org`, `gretil.sub.uni-goettingen.de`, `sanskritdocuments.org`, `titus.fkidg1.uni-frankfurt.de`, `sanskrit-lexicon.uni-koeln.de`, `wisdomlib.org` (root only — see Ayurveda caveat below), `subhashita.com` and `dsbcproject.org` are all reachable (HTTP 200). **`sarit.indology.info` times out (curl exit 28) and `niimh.nic.in` fails TLS outright on every path (curl exit 35, no HTTP response at all)** — not a 403/407 policy block (the proxy's own status endpoint shows no relay failure recorded), a genuine connection-level failure, the same class this project has already met with wisdomlib/sacred-texts/madhwakart et al.: reachable from GitHub Actions or a residential/phone connection, not from here. So neither SARIT nor NIIMH — the two sources the original brief was most enthusiastic about — could be used directly; every recommendation below is a real alternative that **is** reachable now.
+
+  **Chandas** (`vedanga/chandas`, currently empty) — Piṅgala's own Chandaḥsūtra and Hemacandra's Chandonuśāsana are dead ends: not on GRETIL (checked the full catalogue), and the one HTML mirror sanskritdocuments points to for Piṅgala now sits behind a JS bot-wall with no Wayback fallback reachable from here. "Gaṇaratnamahodadhi" and "Kavikaṇṭhābharaṇa Chandas" in the original brief both look like misattributions — the first is a Pāṇinian gaṇapāṭha work, the second is Nānyadeva's Bharata-bhāṣya (music/dance), neither is actually a Chandas treatise, and neither exists machine-readably regardless.
+
+    | Work | Source | URL | Format | Licence |
+    |---|---|---|---|---|
+    | Kedārabhaṭṭa — Vṛttaratnākara (mūla) | GRETIL | `gretil.sub.uni-goettingen.de/gretil/corpustei/sa_kedArabhaTTa-vRttaratnAkara.xml` (+ plaintext transform) | TEI-XML + plaintext | CC BY-NC-SA 4.0 |
+    | Vṛttaratnākara + Sulhaṇa's *Sukavihṛdayānandinī* | GRETIL | `.../sa_kedArabhaTTa-vRttaratnAkara-comm.xml` | TEI-XML + plaintext | CC BY-NC-SA 4.0 |
+    | Chandoratnākara (Ratnākaraśānti, w/ svopajña vṛtti) | Digital Sanskrit Buddhist Canon | `dsbcproject.org/canon-text/content/108/801` | HTML/IAST | site copyright, no open licence stated |
+    | Structured metre data (metre→gaṇa→lakṣaṇa→akṣara-count→mātrā→yati, with example verses) | GitHub `hrishikeshrt/chanda` ("Chandojñānam") | `raw.githubusercontent.com/hrishikeshrt/chanda/main/chanda/data/*.csv` + `examples.json` | CSV/JSON | **AGPL-3.0 — check licence compatibility before ingesting**, this is a stronger copyleft than anything else this project currently pulls from |
+
+  **Nirukta** (`vedanga/nirukta`, currently empty) — Yāska's own text is solid; the standalone Nighaṇṭu and Durga's vṛtti on the Nirukta are not available cleanly anywhere and would need real OCR cleanup, not straight ingestion.
+
+    | Work | Source | URL | Format | Licence |
+    |---|---|---|---|---|
+    | Yāska — Nirukta | GRETIL | `gretil.sub.uni-goettingen.de/gretil/corpustei/sa_yAska-nirukta.xml` (+ `.../1_sanskr/1_veda/5_vedang/3_pratis/niruktau.htm`) | TEI-XML + IAST HTML | GRETIL standard (reference use) |
+    | Nighaṇṭu (standalone) | archive.org OCR | `archive.org/download/nighantu-and-nirukta-mool-sanskrit/...djvu.txt` | OCR plaintext, clean for the Nighaṇṭu portion, degrades in the Nirukta bhāṣya portion | "educational purpose only" (via vedicreserve.miu.edu) |
+    | Durga's vṛtti on the Nirukta | archive.org (eGangotri scan, Bhadkamkar ed. 1942) | `archive.org/download/yXam_yaskas-nirukta-with-durgas-commentary-1942-.../...djvu.txt` | OCR plaintext, noisy (script-mixing artifacts) | CC0 / public domain, stated on page |
+
+    TITUS holds a Nirukta transcription but gated to registered members — not usable as "reachable." Not found anywhere machine-readable and open: nothing beyond the two OCR items above.
+
+  **Śikṣā + Prātiśākhya** (`vedanga/shiksha` / `vedanga/shiksha/pratishakhya` — the taxonomy already names 29 specific empty leaf nodes for these; none renamed or added here, only sourced). GRETIL turned out to have **nothing** in this area at all despite being the default first guess — its "Pratiśākhyas" heading under Vedāṅga contains only the Nirukta and Ṛgvidhāna. The single biggest find: one archive.org anthology, **Śikṣāsaṃgraha** (ed. Rāmaprasād Tripāṭhī, Sampūrṇānanda Sanskrit University, 1989, `archive.org/details/shikshasamgraha`, PDF scan + OCR text, licence unstated), supplies real verified text for **24 of the 29 named nodes in one file** — its actual table of contents (with page ranges) was read to confirm each item rather than trusting the title alone:
+
+    Pāṇinīya, Svarāṅkuśa, Ṣoḍaśaślokī (Ṛgveda); Yājñavalkya, Vāsiṣṭhī, Kātyāyanī, Pārāśarī, Māṇḍavya, Amoghānandinī, Laghu-Amoghānandinī, Mādhyandinī, Varṇaratnapradīpikā, Keśavī, Hastasvaraprakriyā, Avasānanirṇaya, Svarabhaktilakṣaṇapariśiṣṭa, Kramasandhāna, Manaḥsvara, Yajurvidhāna, Svarāṣṭaka, Kramakārikā (Yajurveda); Gautamī, Lomaśī, Nāradīya (Sāmaveda); Māṇḍūkī (Atharvaveda).
+
+    Beyond that anthology:
+
+    | Work | Source | URL | Format | Licence |
+    |---|---|---|---|---|
+    | Pāṇinīya Śikṣā (alt., cross-check) | Sanskrit Documents | `sanskritdocuments.org/doc_z_misc_major_works/pANinIyashikShA.html` | Devanagari HTML + ITX + PDF | site's personal/non-commercial norm |
+    | Nāradīya Śikṣā (dedicated ed., w/ Śobhākara's *Śikṣāvivaraṇa*) | archive.org | `archive.org/details/Naradiyasiksa1990` | PDF scan + OCR | not stated |
+    | Ṛgveda Prātiśākhya (Śaunaka, w/ Uvaṭa's comm., Benares 1894) | archive.org (UW-Madison/Google scan) | `archive.org/details/pratisakhyarigv00sarmgoog` | searchable PDF | public domain, marked "not in copyright" |
+    | Taittirīya Prātiśākhya (after Whitney 1868, ed. Gippert) | TITUS | `titus.fkidg1.uni-frankfurt.de/texte/etcs/ind/aind/ved/yvs/tp/tp.htm` | HTML frameset, transliterated + English gloss | TITUS copyright — republication needs permission |
+    | Vājasaneyī Prātiśākhya (Kātyāyana, ed. Venkatarama Sharma 1934) | archive.org | `archive.org/details/VajasaneyiPratisakhyaOfKatyayanaVVenkataramaSharma1934` | searchable PDF | not stated |
+    | Ṛktantra (ed. Surya Kanta Shastri 1933, w/ Ṛktantravivṛti) | archive.org (Digital Library of India scan) | `archive.org/details/in.ernet.dli.2015.61686` | searchable PDF | not stated |
+    | Śaunakīyā Caturādhyāyikā (Atharvaveda Prātiśākhya, ed./tr. Whitney, *JAOS* vol. 7, 1862) | archive.org | `archive.org/details/jstor-592161` | full text, transliterated sūtras + translation | JSTOR Early Journal Content — free non-commercial redistribution |
+
+    **10 named nodes have no digitized edition anywhere checked** (bare bibliographic names only): Śaiśirīya, Āpiśali (Ṛgveda); Bhāradvāja, Vyāsa, Śambhu, Kauhalīya, Sarvasammata, Āraṇya, Siddhānta Śikṣā (Kṛṣṇa Yajurveda); Puṣpasūtra (Sāmaveda Prātiśākhya). Likely genuinely unpublished or lost as independent texts, not a search failure.
+
+  **Ayurveda — a wholly new category, no taxonomy node exists yet.** The best single find: **Sanskrit Wikisource carries clean transcribed (not OCR) full text of Caraka, Suśruta, Śārṅgadhara and Mādhava Nidāna**, the same pattern already proven for Sāyaṇa's Ṛgveda-bhāṣya (`tools/sayana_smriti/SOURCES.md` §5) — beats GRETIL (only selected chapters for most of these) and beats every scan checked. One live NIIMH-software mirror, `vedotpatti.in` (same FRLHT/I-AIM team), was found holding Vāgbhaṭa's text — **its `robots.txt` sets `Disallow: /` for `ClaudeBot` and `Content-Signal: ai-train=no`, so it is recorded here as a fact and explicitly NOT recommended as an ingest source**, reachable or not.
+
+    | Work | Source | URL | Format | Licence | NIIMH URL (unreachable from here) |
+    |---|---|---|---|---|---|
+    | Caraka Saṃhitā (all 8 sthānas, w/ Cakrapāṇidatta's Āyurvedadīpikā) | Sanskrit Wikisource | `sa.wikisource.org/wiki/चरकसंहिता` + sthāna subpages | clean transcribed wikitext | CC BY-SA | `niimh.nic.in/ebooks/ecaraka/` |
+    | Suśruta Saṃhitā (all sthānas incl. Uttaratantra) | Sanskrit Wikisource | `sa.wikisource.org/wiki/सुश्रुतसंहिता` (13 subpages) | clean transcribed | CC BY-SA | `niimh.nic.in/ebooks/esushruta/` |
+    | Aṣṭāṅgahṛdaya (Vāgbhaṭa, Das & Emmerick ed.) | GRETIL | `.../transformations/plaintext/sa_vAgbhaTa-aSTAGgahRdayasUtra.txt` | TEI-XML/HTML/txt | CC BY-NC-SA 4.0 |  |
+    | Mādhava Nidāna | Sanskrit Wikisource | `sa.wikisource.org/wiki/माधवनिदानम्` | clean transcribed, single page | CC BY-SA | `niimh.nic.in/ebooks/madhavanidana/?mod=read` |
+    | Śārṅgadhara Saṃhitā (4 khaṇḍas) | Sanskrit Wikisource | `sa.wikisource.org/wiki/शार्ङ्गधरसंहिता` + subpages | clean transcribed | CC BY-SA | not located |
+    | Bhāvaprakāśa (full, Vidyotini Hindi comm. ed.) | archive.org | `archive.org/details/eRXi_bhav-prakash-with-vidyotini-explanation-of-brahmashankar-shastri-by-rupalal-vais` | OCR, moderate errors | CC0 stated | not located |
+    | Dhanvantari Nighaṇṭu (bundled w/ Rāja Nighaṇṭu, Anandashram 1896) | archive.org | `archive.org/details/rajanighantuanddhanvantarinighantu...` | OCR | CC0 stated | `niimh.nic.in/ebooks/e-Nighantu/dhanvantarinighantu/?mod=read` |
+    | Bhāvaprakāśa Nighaṇṭu (first 3 vargas only — GRETIL header says "to be continued") | GRETIL | `.../transformations/plaintext/sa_bhAvamizra-bhAvaprakAza.txt` | TEI/HTML/txt | CC BY-NC-SA 4.0 | `niimh.nic.in/ebooks/eNighantu/bhavaprakashanighantu/?mod=read` |
+    | Rāja Nighaṇṭu (full, Narahari Paṇḍita) | GRETIL | `.../transformations/plaintext/sa_narahari-rAjanighaNTu.txt` | TEI/HTML/txt | CC BY-NC-SA 4.0 | not located |
+    | Vāhaṭa's Aṣṭāṅganighaṇṭu (bonus, found in the same GRETIL section) | GRETIL | `sa_vAhaTa-aSTAGganighaNTu` | TEI/HTML/txt | CC BY-NC-SA 4.0 |  |
+
+    `vedicreserve.mum.edu`, which the "Texts Elsewhere"-style listings point to for a huge sthāna-by-sthāna Ayurveda collection, no longer resolves at all — a dead link despite looking perfect on paper, not used.
+
+  **Kāmaśāstra and Nītiśāstra/Subhāṣita — also wholly new categories**, except the three Bhartṛhari śatakas which stay exactly as already logged in `works.json` (no per-śataka split has appeared anywhere; re-checked). **Vidura Nīti needs no acquisition at all** — it's already sitting in this repo's ingested Mahābhārata, `dge/data/itihasa/mahabharata/udyoga_parva/mula/data.json`, adhyāyas 33–40 (the Prajāgara/Vidura-Nīti section), spot-checked against the known opening verse.
+
+    | Work | Source | URL | Format | Licence |
+    |---|---|---|---|---|
+    | Vātsyāyana — Kāmasūtra (mūla; footnotes paraphrase Jayamaṅgalā but don't carry its full text) | GRETIL (Fezas ed.) | `.../sa_vAtsyAyana-kAmasUtra.xml` (Sugita ed. `...-ednirnaya.xml` as cross-check) | TEI-XML | CC BY-NC-SA 4.0 |
+    | Jyotirīśvara — Pañcaśāyaka | GRETIL | `.../sa_jyotirIzvarakavizekhara-paJcasAyaka.xml` | TEI-XML | CC BY-NC-SA 4.0 |
+    | Mīnanātha — Smaradīpikā | GRETIL | `.../sa_mInanAtha-smaradIpikA.xml` | TEI-XML | CC BY-NC-SA 4.0 |
+    | Cāṇakya Nīti (popular verse collection) | Sanskrit Documents | `sanskritdocuments.org/doc_z_misc_major_works/chANakyanItisort.itx` (+ `.html`, + alphabetical variant `chANakyanItikrama.*`) | ITX + clean HTML | site's personal/non-commercial norm |
+    | Cāṇakya/Kauṭilīya Nīti-sūtras (a genuinely distinct text from the above — confirmed both exist separately) | Sanskrit Documents | `sanskritdocuments.org/doc_z_misc_major_works/chANakyasUtra.itx` (+ `.html`) | ITX + clean HTML | same |
+    | Kāmandakīya Nītisāra (Gaṇapati Śāstrī ed., refined for the Murty Classical Library, Harvard UP 2021) | UT Austin South Asia Institute (Knutson/Olivelle) | Google Doc export: append `/export?format=txt` to `docs.google.com/document/d/1OFWLyjXMqqiHTBg3WqvFJsWuDhlEQgE62k_7Ik2BTYQ` | plain text, IAST, verse/sarga-numbered | **CC BY 4.0, explicitly stated** — not on GRETIL or Sanskrit Documents at all, a genuinely new find |
+    | Pañcatantra (confirms existing `works.json` entry, unchanged) | GRETIL | `.../sa_viSNuzarman-paJcatantra.xml` | TEI-XML | CC BY-NC-SA 4.0 |
+    | Hitopadeśa (Nārāyaṇa) | GRETIL | `.../sa_nArAyaNa-hitopadeza.xml` | TEI-XML | CC BY-NC-SA 4.0 |
+
+    Dead ends, checked and confirmed absent everywhere machine-readable: Kokkoka's *Ratirahasya* (Koka Śāstra — only an English translation OCR exists), Ānaṅgaraṅga, Śukranīti. `subhashita.com`'s homepage is a bare JS-SPA shell with no server-rendered text — not usable as a scrape source despite being reachable.
+
+  **Decisions needed, not made here:** (1) new top-level taxonomy placement for Ayurveda and Kāmaśāstra — traditionally Upavedas, alongside Nītiśāstra which has no obvious home (`kavya_alankara` already holds the śatakas, but Cāṇakya/Kāmandakīya/Hitopadeśa/Pañcatantra sit oddly there too); (2) whether GRETIL's blanket CC BY-NC-SA 4.0 (the single largest source across every category above) clears the same non-commercial bar the project already treats sanskritsahitya-com's unlicensed grant as clearing, or needs its own explicit note per the `LICENSING.md` pattern.
+
+  **~~(3) whether the `hrishikeshrt/chanda` structured-metre CSVs are worth ingesting despite their AGPL-3.0 licence~~ — approved by the project lead (case-by-case) and done, same day.** `dge/data/vedanga/chandas/data.json` now holds the full 282-entry vrutta database (190 sama, 8 ardhasama, 5 vishama, 42 upajāti, 10 mātrā-vṛtta, 27 akṣara-jāti names), built by `tools/chandas/build_vrutta_db.py` from a pinned vendor copy (`tools/chandas/vendor/`, commit `3a9607c`) — the first AGPL-3.0 content this project carries, clearly marked as such (`vendor/NOTICE.md`, SPDX headers on both new `.py` files, everything else in the repo stays Apache-2.0). `tools/chandas/identify_vrutta.py` wraps the upstream `chanda` PyPI package for actual metre identification, not just lookup, and was verified against real verses, not assumed: the Gītā's opening pada (धर्मक्षेत्रे कुरुक्षेत्रे...) correctly identifies as अनुष्टुभ्, a Bhartṛhari verse correctly identifies as शार्दूलविक्रीडित. This is classical (laukika) vṛtta only — it does not resolve the earlier, harder, still-open Vedic-chandas problem in `05_chandas_autodetect_FAILED.py`, which is a different kind of metre entirely. **Not done:** batch-tagging the ~67,000-entry Kāvya corpus with detected metre per śloka — a natural next use of this tool, scoped separately since that corpus lives on a different branch/CDN than `main`.
+
 - **~~The published site is 1,091 MB against GitHub Pages' 1 GB limit~~ — down to 999 MB, and every decision below is the project lead's, taken 18 Aug.** Under the limit, but by 1%, so the next few granthas put it back over. What was done:
   - **Archives deleted (74.5 MB)** — `mahabharata.7z.001/.002`, `smv-assets-audio.7z.001/.002/.003`, `smv-assets-text*.zip`. All in git history. `vedavani-assets.zip` stays: `vedavani-extract.yml` unzips it at CI time.
   - **`dge/data/kosha` kept (61 MB), by decision** — the site reads the full corpus from `bhumandala-kosha-data`, so what stays in-repo is now a fallback for when that CDN is unreachable rather than dead weight. Worth remembering when the next CDN failure is diagnosed.
@@ -133,6 +240,28 @@ complete record, not just a live queue.
 - **Two open questions about the WordNet data itself, both for the project lead rather than for code.**
   - **Licence.** The dump is the one distributed with `pyiwn` (CFILT, IIT Bombay), whose repository carries CC BY-SA 4.0; IndoWordNet's own pages frame the data as for research use. The attribution CC BY-SA asks for is in the manifest and on screen in the popover heading. Whether those two statements agree is the same kind of question the koshas' `LICENSING.md` already leaves open, and it is answered the same way — recorded, not decided here.
   - **The Kannada column is the Kannada WordNet's own words for a synset, not a translation of the Sanskrit one, and the two occasionally disagree.** Synset 117 is भक्तिः "ईश्वरं प्रति अनुरागः" in Sanskrit and ಭಕ್ತ — the devotee, not the devotion — in Kannada. Spot checks put it in a small minority (जल/ನೀರು, मोक्षः/ಮೋಕ್ಷ, गुरुः/ಗುರು, ज्ञानम्/ಜ್ಞಾನ all line up), and nothing in the data marks the bad rows, so a script cannot filter them. `--languages ""` drops the column outright if that trade is not wanted.
+
+- **A search that costs 16 MB a query, and what to do about it — `dge/SEARCH_ARCHITECTURE.md`.** Asked whether each section should have its own index, the measurement said the section question is not the urgent one. **A single query downloads 5 to 40 MB**: राम is 16.1 MB, तपःस्वाध्यायनिरतं is 40.4 MB, because a trigram is filed by its first TWO characters, so `na` — the commonest sequence in Sanskrit — is one 7.0 MB file that almost every query touches. Splitting by section does not help the global search, which is the one a reader uses. **One file per trigram plus a document-frequency table, and fetching only the two or three rarest trigrams of a query, takes 40.4 MB to 241 KB — about 150×**, measured against the live index, and touches only `build_search_index.py` and `dge-search.js`. The document also recommends **one index partitioned by section rather than per-section indexes plus a global one** (a separate global index duplicates every posting; scope is already a filter, since the manifest carries a category per grantha and a posting is `[granthaIdx, unitIdx]`), and **against a repository per section** — a branch does everything a repository does here, and the GitHub App cannot create repositories, which blocked this twice already. Nothing is built yet; it is a decision document with the numbers in it.
+
+- **A kāvya tracker — `dge/KAVYA_TRACKER.md`, generated by `tools/build_kavya_tracker.py`.** It reads what is published from `dge/data`, what the Kāvya corpus holds, what `works.json` was asked for, and a curated list of the Mādhva-lineage kāvyas the project lead named, and reports: **69 works tracked, 70,041 verses held, 6 complete (8.7%), 39 mūla with the commentary still missing, 14 with no usable source, 10 named and nothing yet.** The distinction it exists to make is Raghavendra Vijaya's: ten sargas of mūla published, every shloka carrying an empty `commentaries` block — finished by verse count, half done by what a reader needs. The Vijaya kāvyas the project lead listed are in `tools/kavya/config/tracker_wanted.json` with the dictated form kept beside the reading, and **one is unresolved: "kushaharana"**, which this session could not match to any title and has deliberately not guessed into Devanagari.
+
+- **~~26 of the 58 kāvya works have no machine-readable source~~ — nineteen of them now do, from Ambuda and Wikisource; fourteen remain.** The corpus is **43 works / 68 layers / 94,949 entries**, up from 24 / 49 / 66,977.
+  - **ambuda.org (tier C), six works.** Ambuda publishes its whole library as one 7.7 MB TEI export rather than a file per text, so the importer fetches that once and reads members out of it. Its text is proofed and structured, and it is the only source for **Ūrubhaṅga**, and for **Bhartṛhari's three śatakas** — `shatakatrayam.xml` holds all three as sections 1, 2 and 3, which is what unblocks the works GRETIL could only offer as one undivided file. Also Amaruśataka and Bhāsa's Dūtavākya.
+  - **sa.wikisource.org (tier D), thirteen works** — including the plays GRETIL does not carry at all: Mṛcchakaṭika, Mudrārākṣasa, Mālavikāgnimitra, Uttararāmacarita, Cārudatta, Pratijñāyaugandharāyaṇa, Madhyamavyāyoga; and Naiṣadhīyacarita (8,974 units), Jānakīharaṇa (5,344 — the register had it as *scan only*), Kādambarī, Harṣacarita, Kāvyaprakāśa, Chandomañjarī.
+  - **Three things the tier-D path needed.** Half these works are ProofreadPage transclusions whose wikitext is a header and one `<pages index=.../>` line, with the 60,000 words in the Page: namespace behind it — so it reads the RENDERED html, not the wikitext. Wikisource closes a verse with `।। ६ ।।`, one bare number, where the shared GRETIL matcher demands two components; the parser's own single-number branch could never fire. And a Sanskrit play is prose with verses set into it, so every block is kept in document order — a numbered verse is `<act>.<n>`, the prose after it `<act>.<n>.<k>`, three numeric parts so it sorts between verse n and n+1.
+  - **A script filter, because these editions carry their apparatus inline.** Kādambarī arrived with 193 blocks of English introduction, editor's name and corrigenda; a block whose letters are mostly not Devanagari is not part of a Devanagari corpus. Prakrit in the dramas is unaffected.
+  - **Two known impurities, recorded in `works.json` rather than hidden:** the Wikisource editions of **Mudrārākṣasa (~4% of units)** and **Mṛcchakaṭika (~1%)** print a ṭīkā in the same flow as the mūla, so those units carry commentary mixed into the verse.
+  - **Fourteen still have nothing usable.** Five are scan-only or have no digital text at all (Haravijaya, Yādavābhyudaya, Nalacampū, Yaśastilaka, Ānandavṛndāvanacampū). Four are on neither site (Mālatīmādhava, Mahāvīracarita, Prabodhacandrodaya, Haṃsasandeśa). Five are on Wikisource in a state not worth publishing, each with its reason in `works.json`: Vikramāṅkadevacarita (raw djvu with the English introduction and errata inline), Rasagaṅgādhara and Śṛṅgāraprakāśa (unsegmented — 680,000 characters in 72 units), Vikramorvaśīya and Anargharāghava (a single act, or 19 verses of a five-act play).
+
+- **~~Corpus search could never find a verse in a shloka-based grantha~~ — reindexed, and the index moved off the site.** The run rebuilt it with the `extract_text` fix and the result was **916 granthas / 94,664 units** where the committed index had the Vedas and little else. It also weighed **330 MB** and took the published site from 966 MB to **1,013 MB**, past the ceiling this file spent Round 5 getting under — so the index is now on a `search-dist` branch, read over jsDelivr from `appConfig.searchIndexBase`, and **the site is back to about 685 MB**, its most headroom since the corpus started growing. `window.DGE_SEARCH_INDEX` was already the override the client looked for; `global-search.js` carries the same URL as its default for pages that do not load `config.js`. `search_index/backlinks/` stays on main at 0.1 MB. Verified in a real browser against the published index: वागर्थाविव finds Raghuvaṃśa, तपःस्वाध्यायनिरतं finds the Rāmāyaṇa's opening, मोक्षः finds the Anuvyākhyāna, Śānti Parva, Viṣṇutattvanirṇaya and the Nyāyāmṛta. **Item 6 of the six phone-reported faults — "the magnifying glass returns no library results" — was almost certainly this**, and is worth re-checking on the phone now rather than investigated further.
+
+- **The reader pins a commit, not a branch, and a republish now has a second step.** jsDelivr caches a `@branch` URL for **12 hours** at the edge. The first Kāvya republish proved what that costs: the corrected corpus was live at origin within seconds and readers stayed on the superseded build — the one with GRETIL's romanised variant verses in it — with nothing on either side to say so, and an explicit purge of all 50 files did not shift it within the time I watched. `appConfig.kavyaDataBase`, `appConfig.wordnetDataBase`, `js/kavya.js` and `js/intellisense.js` therefore name a commit hash, which jsDelivr treats as immutable and serves immediately. The cost is that **republishing is now two steps** — publish, then bump the hash — and both workflows print the exact line to paste into their job summary. Worth revisiting if a rebuild ever becomes frequent enough for that to chafe.
+
+- **The four kāvyas that exist twice — resolved as far as code can take it; the last step is an editorial call.** `merge.py` now carries the id bridge: `unit_key()` reads `sarga_01`, `01` and `1` as one chapter, `_index()` registers every shloka under both its `id` and its reconstructed `<chapter>.<number>`, and `_sort()` orders a bridged layer correctly rather than filing the pre-existing verses under a blank key and putting the new arrivals above them. Proved on the live file, not just in tests: merging the branch's Raghuvaṃśa mūla into `dge/data`'s **leaves 19 sargas as 19** where the naive merge made 38, keeps `default_author`, and adds 73 verses. Four tests pin it by name. **What is left is not mechanical:** the same merge reports **1,463 conflicts**, because the two copies are the same text in different orthography — main writes संपृक्तौ where tier A writes सम्पृक्तौ — and the rule is that the repo copy wins a disagreement. So nothing was merged into `dge/data`. The question for the project lead is which orthography is the house one; the machinery to act on the answer now exists either way. Correcting an earlier note in this file: **main's copies are not partial** — Raghuvaṃśa there has 1,637 verses against tier A's 1,569, and is complete in three of the four.
+
+- **Two faults the project lead's own screenshot surfaced, both fixed and republished.** GRETIL was merging its romanised mūla into one sanskritsahitya had already supplied in Devanagari, so the Raghuvaṃśa carried **59 starred variant verses and 8 half-verses in Latin letters**, interleaved with the Devanagari and repeating what the verse above them said. A higher tier now claims a layer id and a lower one does not write it — GRETIL is the fallback for a work tier A lacks, not a second opinion on one it has. And the shared layers had no Sanskrit name, so the chip row read `सञ्जीविनी | Padaccheda | Anvaya | Translation En` in a UI that is Devanagari-first everywhere else; they are now पदच्छेदः, अन्वयः, आङ्ग्लानुवादः, हिन्द्यनुवादः. The corpus is 24 works / 49 layers / **66,977 entries** after the cleanup.
+
+- **Corpus search could never find a verse in a shloka-based grantha, and still cannot until someone runs the reindex.** `build_search_index.py`'s `extract_text` read `text` or `sanskrit` from a nested shloka; every DGE grantha writes `sanskrit_text`. So the Rāmāyaṇa, the Mahābhārata, the Purāṇas and the stotras all indexed as **empty stubs** — which is the real reason the committed index looked stale. Fixed, and verified: Bāla Kāṇḍa goes from 0 to 76 units with text. Two additions came with it: `--extra-data`, which indexes a corpus rooted elsewhere with slugs relative to that root (so the Kāvya corpus is searchable while its 50 MB stays on `kavya-dist`), and `--commentaries`, off by default, which folds each shloka's `bhashya[]` and `artha` in — that is what makes Mallinātha searchable, at a size cost. `core.js` sends a hit on a `kavya_alankara/` grantha to the CDN, so opening it works. `reindex.yml` takes both switches. **Not run here**: `dge/search_index` is 286 MB on main and a rebuild changes all of it, so what it grows to — and whether the commentaries go in — is the project lead's call. Verified on a subset: वागर्थाविव finds the Raghuvaṃśa mūla and the Sañjīvinī; कश्चित्कान्ता finds the Meghadūta.
 
 - **The Kāvya corpus is deployed and live, and five things about it are open.** The package that arrived as `dgekavyacorpus.zip` is in: `tools/kavya/**`, `dge/kavya.html` + `js/kavya.js` + `css/kavya.css`, `patches/`, `tests/` (58 tests, all passing), and `.github/workflows/import-kavya.yml`. The built corpus — **24 works, 49 layers, 67,169 entries, 50 MB** — is on this repo's `kavya-dist` branch and served over jsDelivr from `appConfig.kavyaDataBase`, the same arrangement as the koshas and the WordNet, and for the same reason: it never goes on `main`, where it would put the site back over the GitHub Pages 1 GB limit. Its own DEPLOY.md said it "can live in the app repo" — that was written against an older size picture and is not true today.
   - **Four works now exist twice, and that needs a decision.** `raghuvamsha`, `kumarasambhava`, `kiratarjuniya` and `shishupalavadha` are already published from `dge/data/kavya_alankara/` in the pre-package shape (items keyed `sarga_01`, shlokas keyed by `number`), and the corpus branch carries a far fuller copy of each — mūla plus **Mallinātha** (Sañjīvinī, Ghaṇṭāpatha, Sarvaṅkaṣā), padaccheda, anvaya and translations, 1,569 verses for Raghuvaṃśa against the 19-sarga copy on main. They are not merged: `merge_into_existing` matches items by id and shlokas by id, so merging would have **appended a second copy of each text rather than updating it** — 19 sargas becoming 38, silently, in a live grantha. It now raises `MergeShapeError` and refuses instead of crashing on a missing `grantha` block, which is what it did the first time it met a real repo file. Writing the id bridge (`sarga_01` ↔ `1`, `number` ↔ `id`) and deciding which copy is canonical is the follow-up.
@@ -1459,6 +1588,23 @@ complete record, not just a live queue.
 
 ## Vedic-specific, still genuinely open
 
+- **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are
+  explained rather than mysterious: the **Vālakhilya** (RV 8.49–8.55, 8.57, 8.59)
+  has no bhāṣya on Wikisource at all — much of the manuscript tradition transmits
+  it apart from Sāyaṇa — and 66 more are the first half of each **dvipadā** pair
+  in RV 1.65–1.70, which the edition glosses jointly and DGE splits in two. The
+  archive.org OCR route (`archive_sayana.py`, kept and unchanged) does cover the
+  Vālakhilya and is the obvious next attempt if that gap matters.
+- **No commentary layer on the Atharvaveda (5,977 items), Śukla Yajurveda
+  (1,975) or Taittirīya Saṃhitā (696)** — all three still at zero.
+  `import_veda_phase2.py` is deployed and tested but has never been run for real;
+  it wants Griffith + Whitney–Lanman, Griffith, and Keith respectively.
+- **142 Sāmaveda mantras have no Ṛgveda parallel to inherit from** (114 carry no
+  `rigveda_ref` at all, 8 have a bad one, 19 point at Ṛgveda mantras that are
+  themselves in the Vālakhilya/dvipadā gaps, 1 unresolvable). There is no other
+  route to a Sāmaveda commentary: Griffith follows Benfey's Rāṇāyanīya numbering,
+  which does not line up with DGE's Kauthuma sequence.
+
 (Full detail in `veda_toolkit/README.md` §7.)
 - Accented padapāṭha, ṛṣi/devatā/chandas for Taittirīya — not present in
   its ITRANS source.
@@ -1471,6 +1617,18 @@ complete record, not just a live queue.
   text/audio pairing still open.
 
 ## Known unresolved bugs
+
+- **`github-advanced-security` fails on every PR, and it is not any PR's diff.**
+  GitHub's Copilot Autofix agent dies against its own backend with
+  `CAPIError: 400 The requested model is not supported`
+  (`COPILOT_AGENT_MODEL: sweagent-capi:claude-opus-4.6`). Confirmed not ours
+  three ways: CodeQL's three real analyses (python, javascript-typescript,
+  actions) pass on the same commits; PR #56 shows the identical failure and was
+  merged anyway; and it failed again on a **documentation-only** commit in #57.
+  Nothing in this repository can fix it — it is GitHub-side, and either it
+  recovers on its own or the check wants disabling in the repo's security
+  settings, which is the project lead's call. **Do not re-run it and do not
+  re-investigate it**; check whether CodeQL is green instead.
 
 - **Six things reported from a real phone on 18 Aug 2026, with two screenshots — noted only, not started, at the project lead's instruction ("just note these, I will give a go ahead shortly"). Each one was grounded in the code before being written down, so the next session starts from a cause and not a symptom. Where a cause is stated below it was read out of the source; where it is a guess it says so.**
 

@@ -156,11 +156,11 @@ class TestPipeline(unittest.TestCase):
         self.assertIn("yashastilaka", ids)
         # Has a GRETIL mula even though its commentary is scan-only, so it is
         # NOT a scan-only work.
-        # Naishadhiyacarita was declared with a GRETIL file that 404s, and
-        # GRETIL's own index has no Naishadhiya at all -- so it now sits in
-        # the register with the scan-only works rather than erroring on
-        # every run. Checked against the index on 18 Aug 2026.
-        self.assertIn("naishadhiyacharita", ids)
+        # Anandavrindavanacampu is the stable example: no digital text of it
+        # exists anywhere, so it will be in the register whatever a later
+        # source hunt turns up. Naishadhiyacarita used to stand here and no
+        # longer belongs -- sa.wikisource has all 22 sargas, in five pages.
+        self.assertIn("anandavrindavanachampu", ids)
         note = [w for w in rep["skipped_scan_only"]
                 if w["id"] == "anandavrindavanachampu"][0]
         self.assertIn("NO digital text", note["register"]["status"])

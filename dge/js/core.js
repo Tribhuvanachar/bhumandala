@@ -297,6 +297,10 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
     // above, these are commentary rather than translation -- Sayana is the
     // first traditional commentator to enter the Vedic corpus.
     sayana: 'सायणभाष्यम् — Sāyaṇa (Ṛgveda-bhāṣya)',
+    // Sayana opens each sukta with a note on its viniyoga, rishi and chandas
+    // that glosses no single mantra. It rides on the sukta's first mantra
+    // under its own key so that mantra's commentary stays its own.
+    sayana_sukta: 'सायणभाष्यम् — Sāyaṇa (introduction to the sūkta)',
     wilson: 'Wilson (English Translation, after Sāyaṇa)',
     artha: 'Translation'
   };
@@ -516,6 +520,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // purana/..., darshana/..., etc.) use the full slug as the
   // namespace, since collision risk there is real (many granthas share a
   // generic last folder segment like "mula").
+  // The Kavya corpus is 50 MB and lives on the kavya-dist branch, not in the
+  // site, so a grantha under kavya_alankara/ is fetched from the CDN the Kavya
+  // reader already uses. Everything else is read from beside the app as before.
+  // Without this, a corpus-search hit on a kavya verse would open a reader that
+  // asks for a file the site does not have.
+  function dgeGranthaFetchUrl(s) {
+    if (/^kavya_alankara\//.test(s) && window.KAVYA_DATA_BASE) {
+      return `${String(window.KAVYA_DATA_BASE).replace(/\/+$/, '')}/${s}/data.json`;
+    }
+    return `data/${s}/data.json`;
+  }
+
   const slug = dgeUpgradeLegacySlug(explicitPath
     ? explicitPath.replace(/^\/+|\/+$/g, '')
     : `stotra/${explicitCode || 'pns'}`);
@@ -523,7 +539,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.stotraCode = stotrasDirectChild ? stotrasDirectChild[1] : slug.replace(/\//g, '__');
   window.currentGranthaSlug = slug;
-  window.jsonFileName = `data/${slug}/data.json`; // overwritten below if the catalog has a more specific real path
+  window.jsonFileName = dgeGranthaFetchUrl(slug); // overwritten below if the catalog has a more specific real path
   window.AUDIO_CACHE_NAME = `narasimha-audio-${window.stotraCode}`;
 
   // 4. RESOLVE VIA THE LIBRARY CATALOG, THEN FETCH THE GRANTHA DATASET

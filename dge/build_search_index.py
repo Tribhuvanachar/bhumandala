@@ -82,8 +82,14 @@ def primary_field(schemas: dict, schema_name: str):
     return s.get("primaryTextField")
 
 
-def extract_text(item: dict, pfield, schema_name: str) -> str:
-    """Return the best searchable Devanagari text for one unit."""
+def extract_text(item: dict, pfield, schema_name: str, commentaries=False) -> str:
+    """Return the best searchable Devanagari text for one unit.
+
+    `commentaries` also folds in what each shloka's bhashya[] carries. Off by
+    default: that is where the Sanjivini, Sayana and Medhatithi live, so it is
+    the difference between finding a verse and finding what was said about it,
+    and it costs index size in proportion.
+    """
     # prefer an explicit unaccented *_plain variant of the primary field
     if pfield:
         plain = f"{pfield}_plain"
@@ -92,6 +98,17 @@ def extract_text(item: dict, pfield, schema_name: str) -> str:
         if item.get(pfield):
             return item[pfield]
     # primaryTextField is null -> nested-array schemas; try common holders
+    bhashya = []
+    if commentaries:
+        for e in item.get("shlokas") or []:
+            if not isinstance(e, dict):
+                continue
+            for b in e.get("bhashya") or []:
+                if isinstance(b, dict) and b.get("text"):
+                    bhashya.append(b["text"])
+            if e.get("artha"):
+                bhashya.append(e["artha"])
+
     for key in ("shlokas", "verses", "lines", "text", "sanskrit_text",
                 "mula_text", "samhita_patha", "sa"):
         v = item.get(key)
@@ -103,20 +120,28 @@ def extract_text(item: dict, pfield, schema_name: str) -> str:
                 if isinstance(e, str):
                     parts.append(e)
                 elif isinstance(e, dict):
-                    parts.append(e.get("text") or e.get("sanskrit") or "")
-            if any(parts):
-                return " ".join(parts)
-    return ""
+                    # sanskrit_text and sa are what DGE's own granthas use --
+                    # every shloka of every itihasa, purana, kavya and stotra.
+                    # Without them this returned "" for each one, so a chapter
+                    # of the Ramayana indexed as an empty stub and corpus
+                    # search could never have found a verse in it. The two
+                    # names above stay first so nothing that works today
+                    # changes.
+                    parts.append(e.get("text") or e.get("sanskrit")
+                                 or e.get("sanskrit_text") or e.get("sa") or "")
+            if any(parts) or bhashya:
+                return " ".join(parts + bhashya)
+    return " ".join(bhashya)
 
 
-def iter_units(data: dict, pfield, schema_name: str):
+def iter_units(data: dict, pfield, schema_name: str, commentaries=False):
     """Yield (unit_id, devanagari_text, references) for BOTH data shapes."""
     if isinstance(data.get("items"), list):                 # new shape
         for it in data["items"]:
             if not isinstance(it, dict):
                 continue
             uid = str(it.get("id", ""))
-            txt = extract_text(it, pfield, schema_name)
+            txt = extract_text(it, pfield, schema_name, commentaries)
             yield uid, txt, it.get("references") or []
     elif isinstance(data.get("shlokas"), dict):             # legacy shape
         for uid, it in data["shlokas"].items():
@@ -141,7 +166,7 @@ def bucket_of(tg: str) -> str:
     return re.sub(r"[^a-zA-Z0-9]", "_", key[:2]) or "misc"
 
 
-def build(data_dir: str, out_dir: str) -> dict:
+def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dict:
     schemas = load_schemas(data_dir)
     os.makedirs(os.path.join(out_dir, "units"), exist_ok=True)
     os.makedirs(os.path.join(out_dir, "postings"), exist_ok=True)
@@ -152,25 +177,36 @@ def build(data_dir: str, out_dir: str) -> dict:
     stats = {"granthas": 0, "populated": 0, "units": 0, "unit_chars": 0,
              "refs": 0, "skipped_stub_units": 0, "skipped_stub_granthas": 0}
 
+    # (root, path) pairs: the slug is relative to the root the file came from,
+    # so a corpus indexed from elsewhere still slugs as though it sat in
+    # dge/data. That is what lets the Kavya corpus be searchable while its 50 MB
+    # stays on the kavya-dist branch: pass the checkout with --extra-data, and
+    # core.js resolves a kavya_alankara/ grantha to the CDN when the hit is
+    # opened.
     data_files = []
-    for root, _dirs, files in os.walk(data_dir):
-        if "data.json" in files:
-            data_files.append(os.path.join(root, "data.json"))
-    data_files.sort()
+    for base in [data_dir, *extra_dirs]:
+        found = []
+        for root, _dirs, files in os.walk(base):
+            if "data.json" in files:
+                found.append((base, os.path.join(root, "data.json")))
+        found.sort()
+        if base is not data_dir:
+            print(f"  + {len(found)} granthas from {base}")
+        data_files.extend(found)
 
-    for path in data_files:
+    for base, path in data_files:
         try:
             with open(path, encoding="utf-8") as f:
                 data = json.load(f)
         except Exception as e:
             print(f"  ! skip {path}: {e}", file=sys.stderr)
             continue
-        slug = grantha_slug(data_dir, path)
+        slug = grantha_slug(base, path)
         schema_name = data.get("schema") or (
             "stotra_text" if "shlokas" in data else "generic")
         pfield = primary_field(schemas, schema_name)
 
-        units = list(iter_units(data, pfield, schema_name))
+        units = list(iter_units(data, pfield, schema_name, commentaries))
         if not units:
             continue
         gi = len(granthas)
@@ -243,8 +279,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", default="bhumandala/dge/data")
     ap.add_argument("--out", default="search_index_out")
+    ap.add_argument("--commentaries", action="store_true",
+                    help="also index each shloka's bhashya[] and artha -- the "
+                         "commentaries themselves, at a size cost")
+    ap.add_argument("--extra-data", action="append", default=[],
+                    metavar="DIR",
+                    help="another data root to index, slugged relative to "
+                         "itself (e.g. a kavya-dist checkout)")
     args = ap.parse_args()
-    stats = build(args.data, args.out)
+    stats = build(args.data, args.out, args.extra_data, args.commentaries)
     print("Index built. Stats:")
     for k, v in stats.items():
         print(f"  {k:18} {v}")

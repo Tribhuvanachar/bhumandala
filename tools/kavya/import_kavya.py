@@ -16,10 +16,16 @@ first whenever a new work or source is added.
 from __future__ import annotations
 
 import argparse
+import io
+import zipfile
 import json
+import re
+import urllib.parse
 import os
 import sys
 
+from . import fetch
+from .fetch import FetchError
 from .common import log, read_json, write_json
 from .merge import ShrinkError, merge_into_existing
 from .parsers import ambuda_tei, gretil_tei, sanskritsahitya, wikisource
@@ -108,29 +114,93 @@ def import_gretil(work, tier, key="gretil", offline_dir=None, probe=False):
 
 
 def import_wikisource(work, tier, offline_dir=None, probe=False):
+    """Tier D. One page, an explicit list, or every subpage of a title.
+
+    A Wikisource work is as often a tree as a page -- Mrcchakatika is ten
+    subpages, one per act -- and the acts are the chapters, so each page
+    becomes an item. `pages` names them in reading order; `page` is the single
+    page case; the ORDER is what carries the act numbers, since a title reads
+    "प्रथमोऽङ्कः" rather than "1".
+    """
     cfg = work["sources"]["wikisource"]
-    url = tier["raw"].format(page=cfg["page"])
-    doc = json.loads(_fetch(url, offline_dir))
-    wt = doc["parse"]["wikitext"]["*"]
-    units = list(wikisource.split_units(wt))
+    pages = cfg.get("pages") or [cfg["page"]]
+    units = []
+    for i, page in enumerate(pages, 1):
+        url = tier["raw"].format(page=urllib.parse.quote(page, safe=""))
+        doc = json.loads(_fetch(url, offline_dir))
+        if "error" in doc or "parse" not in doc:
+            raise FetchError("sa.wikisource has no page %r (%s)" % (
+                page, (doc.get("error") or {}).get("info", "no parse in response")))
+        parse = doc["parse"]
+        if "text" in parse:
+            html = parse["text"]
+            text = wikisource.from_html(
+                html if isinstance(html, str) else html.get("*", ""))
+            raw = False
+        else:                       # the offline fixtures carry wikitext
+            text = parse["wikitext"]["*"]
+            raw = True
+        chapter = str(cfg["chapter_from_title"] and _chapter_of(page) or i) \
+            if cfg.get("chapter_from_title") else str(i)
+        units.extend(wikisource.split_units(
+            text, default_chapter=chapter, wikitext=raw,
+            keep_prose=cfg.get("prose", True)))
     if probe:
-        return {"units": len(units), "first": units[0] if units else None}
+        return {"units": len(units), "pages": len(pages),
+                "first": units[0] if units else None}
     return {"mula": gretil_tei.build_layer(
         units, work["id"], "mula", "mula", name_sa="मूलम्",
-        source={"tier": "D", "url": url}, license_note=tier["licence"])}
+        source={"tier": "D", "url": tier["raw"].format(page=pages[0]),
+                "pages": pages},
+        license_note=tier["licence"],
+        # The item is the act or the sarga, never the verse: a prose unit id
+        # is <act>.<verse>.<n>, and the default depth would read that as a
+        # chapter of its own.
+        item_depth=1)}
+
+
+def _chapter_of(title):
+    d = re.findall(r"[\d०-९]+", title)
+    return d[-1] if d else "1"
 
 
 def import_ambuda(work, tier, offline_dir=None, probe=False):
+    """Tier C. One member of Ambuda's whole-library TEI zip.
+
+    Ambuda publishes 344 texts as a single 7.7 MB export rather than a file
+    per text, so `file` names the member and the archive is fetched once and
+    cached. `section` takes one division of a file that holds several works --
+    shatakatrayam is Bhartrhari's three satakas, which DGE holds as three.
+    """
     cfg = work["sources"]["ambuda"]
-    url = cfg["url"]
-    units = list(ambuda_tei.split_units(_fetch(url, offline_dir)))
+    if cfg.get("url"):                      # a direct TEI URL still works
+        xml = _fetch(cfg["url"], offline_dir)
+        src_url = cfg["url"]
+    else:
+        src_url = tier["raw"]
+        if offline_dir:
+            xml = _fetch(src_url + "#" + cfg["file"], offline_dir)
+        else:
+            blob = fetch.get_bytes(src_url)
+            with zipfile.ZipFile(io.BytesIO(blob)) as z:
+                name = cfg["file"]
+                if name not in z.namelist():
+                    hits = [n for n in z.namelist() if n.endswith("/" + name)]
+                    if not hits:
+                        raise FileNotFoundError("%s not in the Ambuda export" % name)
+                    name = hits[0]
+                xml = z.read(name).decode("utf-8")
+    units = list(ambuda_tei.split_units(xml, section=cfg.get("section")))
     if probe:
         return {"units": len(units), "first": units[0] if units else None}
     meta = cfg.get("layer") or {"id": "mula", "kind": "mula"}
     return {meta["id"]: gretil_tei.build_layer(
         units, work["id"], meta["id"], meta["kind"],
         commentator=meta.get("commentator", ""),
-        source={"tier": "C", "url": url}, license_note=tier["licence"])}
+        name_sa=meta.get("name_sa", "मूलम्"),
+        source={"tier": "C", "url": src_url, "file": cfg.get("file"),
+                "section": cfg.get("section")},
+        license_note=tier["licence"], item_depth=1)}
 
 
 IMPORTERS = {
@@ -167,6 +237,17 @@ def run(args):
             keep = set(args.sources.split(","))
             srcs = {k: v for k, v in srcs.items() if k in keep}
         wrep = {"sources": {}, "layers": {}}
+        # Highest tier first, and a layer id claimed by a higher tier is not
+        # written again by a lower one. Without this, GRETIL's mula merges into
+        # sanskritsahitya's: the tier A text is Devanagari and numbered 1.34,
+        # GRETIL's is romanised and numbers its additional readings 1.34* and
+        # its split verses 3.2a / 3.2b, so a reader scrolling the Raghuvamsa
+        # met 59 starred verses and 8 half-verses IN LATIN LETTERS interleaved
+        # with the Devanagari, saying the same thing the verse above them said.
+        # GRETIL is the fallback for a work tier A does not have, not a second
+        # opinion on one it does.
+        srcs = dict(sorted(srcs.items(), key=lambda kv: IMPORTERS[kv[0]][0]))
+        claimed = set()
         for key in srcs:
             tier_id, fn = IMPORTERS[key]
             tier = tiers.get(tier_id, {})
@@ -182,6 +263,10 @@ def run(args):
                 wrep["sources"][key] = out
                 continue
             for lid, layer in out.items():
+                if lid in claimed:
+                    log("  -- %s/%s: %s already written from a higher tier"
+                        % (wid, key, lid))
+                    continue
                 errs = validate_layer(layer)
                 if errs:
                     report["errors"].append("%s/%s: %s" % (wid, lid, errs[:3]))
@@ -198,6 +283,7 @@ def run(args):
                 recount(merged)
                 if not args.dry_run:
                     write_json(path, merged)
+                claimed.add(lid)
                 wrep["layers"][lid] = dict(
                     mrep.as_dict(), counts=merged["grantha"]["counts"])
                 report["totals"]["layers"] += 1

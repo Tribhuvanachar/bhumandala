@@ -21,6 +21,14 @@ on:
         required: true
         default: true
         type: boolean
+      include_kavya:
+        description: "Also index the Kavya corpus from the kavya-dist branch"
+        type: boolean
+        default: true
+      commentaries:
+        description: "Index the commentaries themselves (bhashya/artha) as well as the mula -- larger index"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -35,8 +43,32 @@ jobs:
         with:
           python-version: "3.11"
 
+      # The Kavya corpus is not in dge/data -- it is 50 MB on the kavya-dist
+      # branch, served to the reader over jsDelivr. Checked out here so its
+      # 67,000 verses are searchable; slugs come out relative to the checkout,
+      # so they read kavya_alankara/<work>/<layer> exactly as if the corpus sat
+      # in dge/data, and core.js sends a hit on one of those to the CDN.
+      - name: Fetch the Kavya corpus
+        if: ${{ inputs.include_kavya }}
+        run: |
+          git fetch --depth=1 origin kavya-dist
+          rm -rf _kavya && mkdir -p _kavya
+          git --work-tree=_kavya checkout FETCH_HEAD -- kavya_alankara
+          du -sh _kavya
+
       - name: Rebuild global search index
-        run: python dge/build_search_index.py --data dge/data --out dge/search_index
+        run: |
+          set -euo pipefail
+          ARGS=(--data dge/data --out dge/search_index)
+          [ "${{ inputs.include_kavya }}" = "true" ] && ARGS+=(--extra-data _kavya)
+          [ "${{ inputs.commentaries }}" = "true" ] && ARGS+=(--commentaries)
+          python dge/build_search_index.py "${ARGS[@]}"
+
+      - name: Put the Kavya checkout back
+        if: ${{ always() }}
+        run: |
+          git reset -q HEAD -- kavya_alankara 2>/dev/null || true
+          rm -rf _kavya kavya_alankara
 
       - name: Refresh library status snapshot
         run: python tools/gen_library_status.py
@@ -45,22 +77,57 @@ jobs:
         run: |
           git status --porcelain dge/search_index admin/config/library-status.json || true
 
-      - name: Open Pull Request
+      - name: Publish the index to search-dist
+        env:
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: github-actions[bot]@users.noreply.github.com
+        run: |
+          set -euo pipefail
+          # The index is 330 MB. Committed to main it took the published site
+          # from 966 MB to 1,013 MB against a 1 GB Pages ceiling, so it is
+          # published like the Kavya and WordNet corpora and read over
+          # jsDelivr. backlinks/ stays in the repo -- it is 0.1 MB and
+          # js/backlinks.js reads it from beside the app.
+          rm -rf /tmp/search-dist
+          mkdir -p /tmp/search-dist
+          cp -r dge/search_index/manifest.json dge/search_index/postings \
+                dge/search_index/units /tmp/search-dist/
+          cp dge/search_index_dist_README.md /tmp/search-dist/README.md
+          cd /tmp/search-dist
+          git init -q -b search-dist
+          git add -A
+          git commit -q -m "The built corpus-search index, rebuilt by reindex.yml"
+          git push -q --force "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" \
+            search-dist:refs/heads/search-dist
+          SHA=$(git rev-parse HEAD)
+          {
+            echo "published to search-dist as \`$SHA\`"
+            echo ""
+            echo "**Now bump the pin** in js/config.js (appConfig.searchIndexBase) and js/global-search.js (CDN_INDEX):"
+            echo ""
+            echo '```'
+            echo "https://cdn.jsdelivr.net/gh/${{ github.repository }}@$SHA"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open a PR for what does belong on main
         if: ${{ fromJSON(inputs.open_pr) }}
         uses: peter-evans/create-pull-request@v6
         with:
-          branch: reindex/search-and-status
-          commit-message: "chore: re-index global search + refresh library status"
-          title: "Re-index: search index + library status"
+          branch: reindex/status-and-backlinks
+          title: "Re-index: library status and backlinks"
+          commit-message: "Re-index: refresh library status and backlinks"
           body: |
-            Automated re-index via the **DGE re-index** workflow.
+            The search index itself is NOT here -- it is 330 MB and was
+            published to the `search-dist` branch by the same run; bump
+            `appConfig.searchIndexBase` to the hash in the job summary.
 
-            - `dge/search_index/**` rebuilt by `dge/build_search_index.py`
-            - `admin/config/library-status.json` refreshed by `tools/gen_library_status.py`
-
-            Both are generated build products (not hand-maintained). Merge once
-            a quick spot-check of the search index and the Library Manager
-            dashboard looks right.
+            What this PR carries is the part that belongs on main:
+            `admin/config/library-status.json` and
+            `dge/search_index/backlinks/**`.
           add-paths: |
-            dge/search_index/**
             admin/config/library-status.json
+            dge/search_index/backlinks/**
+            dge/search_index/backlinks.json

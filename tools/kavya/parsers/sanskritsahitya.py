@@ -46,6 +46,20 @@ STANDARD_LAYERS = {
     "pc": ("padaccheda", "padaccheda", "sa"),
 }
 
+#: The reader labels a layer by its name_sa and falls back to the English, so
+#: without these the chip row reads "सञ्जीविनी | Padaccheda | Anvaya |
+#: Translation En" -- one Devanagari name and three Latin ones, in a UI that is
+#: Devanagari-first everywhere else. The commentaries carry their own names
+#: from works.json; these are the four every work shares.
+STANDARD_NAMES = {
+    "anvaya":         {"name_sa": "अन्वयः", "name_iast": "Anvaya", "name_en": "Anvaya"},
+    "padaccheda":     {"name_sa": "पदच्छेदः", "name_iast": "Padaccheda", "name_en": "Padaccheda"},
+    "translation_en": {"name_sa": "आङ्ग्लानुवादः", "name_iast": "Āṅglānuvāda",
+                       "name_en": "English translation"},
+    "translation_hi": {"name_sa": "हिन्द्यनुवादः", "name_iast": "Hindyanuvāda",
+                       "name_en": "Hindi translation"},
+}
+
 
 def probe(doc):
     """Report the keys present in a work's data, so an unknown commentary code
@@ -146,7 +160,9 @@ def parse(doc, work_id, commentary_keys=None, source=None, license_note=""):
             val = unit.get(key)
             if not val:
                 continue
-            layer_for(lid, kind, lang, name_en=lid.replace("_", " ").title())
+            layer_for(lid, kind, lang,
+                      **STANDARD_NAMES.get(lid,
+                                           {"name_en": lid.replace("_", " ").title()}))
             sh = shloka_for(lid, chapter, uid)
             if key == "pc":
                 sh["padaccheda"] = _clean_pc(val)

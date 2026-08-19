@@ -8,13 +8,16 @@ aligner is safe, and none of them can be exercised against a clean fixture.
 
     python tools/sayana_smriti/tests/test_archive_sayana.py
 """
+import io
 import sys
 import unittest
+import urllib.error
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from archive_sayana import (Block, align, looks_like_apparatus,  # noqa: E402
+import archive_sayana  # noqa: E402
+from archive_sayana import (Block, align, fetch, looks_like_apparatus,  # noqa: E402
                             parse_blocks, similarity, skeleton, to_int)
 
 # RV 1.1.1-1.1.3, laid out as the edition prints them. Mantra 2's samhita line
@@ -210,6 +213,67 @@ class TestSimilarity(unittest.TestCase):
     def test_unrelated_scores_low(self):
         self.assertLess(similarity(skeleton("अग्निमीळे पुरोहितं"),
                                    skeleton("इषे त्वोर्जे त्वा")), 0.4)
+
+
+class TestFetch(unittest.TestCase):
+    """A dropped connection should cost a few seconds, not the whole run.
+
+    archive.org timed out once mid-probe and ended a job that had already done
+    its work. What the retry must NOT do is hammer a server that has answered
+    plainly: a 404 is an answer, and asking again cannot change it.
+    """
+
+    def setUp(self):
+        self.slept = []
+        self._sleep, archive_sayana.time.sleep = archive_sayana.time.sleep, self.slept.append
+        self._urlopen = archive_sayana.urllib.request.urlopen
+        self.addCleanup(self.restore)
+
+    def restore(self):
+        archive_sayana.time.sleep = self._sleep
+        archive_sayana.urllib.request.urlopen = self._urlopen
+
+    def serve(self, *outcomes):
+        """Answer successive calls with the given exceptions or payloads."""
+        self.calls = []
+
+        def urlopen(req, timeout=None):
+            self.calls.append(req.full_url)
+            out = outcomes[len(self.calls) - 1]
+            if isinstance(out, Exception):
+                raise out
+            return io.BytesIO(out)
+
+        archive_sayana.urllib.request.urlopen = urlopen
+
+    def test_transient_timeout_is_retried(self):
+        self.serve(TimeoutError(110, "Connection timed out"), b"ok")
+        self.assertEqual(fetch("https://archive.org/metadata/x"), b"ok")
+        self.assertEqual(len(self.calls), 2)
+        self.assertEqual(self.slept, [2])
+
+    def test_gives_up_after_the_last_attempt(self):
+        boom = urllib.error.URLError("timed out")
+        self.serve(boom, boom, boom, boom)
+        with self.assertRaises(urllib.error.URLError):
+            fetch("https://archive.org/metadata/x", attempts=4)
+        self.assertEqual(len(self.calls), 4)
+        self.assertEqual(self.slept, [2, 4, 8])
+
+    def test_404_is_an_answer_and_is_not_retried(self):
+        gone = urllib.error.HTTPError("u", 404, "Not Found", {}, None)
+        self.serve(gone, b"never reached")
+        with self.assertRaises(urllib.error.HTTPError):
+            fetch("https://archive.org/metadata/x")
+        self.assertEqual(len(self.calls), 1)
+        self.assertEqual(self.slept, [])
+
+    def test_server_saying_not_now_is_retried(self):
+        for code in (429, 503):
+            with self.subTest(code=code):
+                self.serve(urllib.error.HTTPError("u", code, "", {}, None), b"ok")
+                self.assertEqual(fetch("https://archive.org/download/x"), b"ok")
+                self.assertEqual(len(self.calls), 2)
 
 
 if __name__ == "__main__":

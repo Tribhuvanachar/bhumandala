@@ -128,4 +128,18 @@ jobs:
           git commit -q -m "The built Sanskrit WordNet, rebuilt by publish-wordnet.yml"
           git push -q --force "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" \
             wordnet-dist:refs/heads/wordnet-dist
-          echo "published to wordnet-dist" >> "$GITHUB_STEP_SUMMARY"
+          SHA=$(git rev-parse HEAD)
+          # The reader pins a COMMIT, not this branch: jsDelivr caches a
+          # @branch URL for 12 hours at the edge, so the first republish left
+          # readers on the superseded build with nothing to say so. A hash is
+          # immutable and served the moment it exists -- at the cost of this
+          # second step.
+          {
+            echo "published to wordnet-dist as \`$SHA\`"
+            echo ""
+            echo "**Now bump the pin** in js/config.js (appConfig.wordnetDataBase) and js/intellisense.js (CDN):"
+            echo ""
+            echo '```'
+            echo "https://cdn.jsdelivr.net/gh/${{ github.repository }}@$SHA"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -46,10 +46,13 @@ are left alone rather than filled with a best guess.
 from __future__ import annotations
 
 import argparse
+import http.client
 import json
 import re
 import sys
+import time
 import unicodedata
+import urllib.error
 import urllib.parse
 import urllib.request
 from difflib import SequenceMatcher
@@ -258,9 +261,31 @@ def align(items: list[dict], blocks: list[Block], *,
 
 # -------------------------------------------------------------------- fetching
 
-def fetch(url: str, timeout: int = 180) -> bytes:
-    return urllib.request.urlopen(
-        urllib.request.Request(url, headers={"User-Agent": UA}), timeout=timeout).read()
+def fetch(url: str, timeout: int = 180, attempts: int = 4) -> bytes:
+    """GET a URL, retrying the failures that are the network's fault and not ours.
+
+    archive.org drops a connection now and then -- a SYN that never gets
+    answered, which the kernel gives up on after about two minutes. One such
+    drop used to end the whole run, which is a poor trade when the fix is to
+    ask again a few seconds later. So transport failures are retried; an
+    answer from the server is not, because a 404 says the same thing however
+    often it is asked. 5xx and 429 are the exception: those are the server
+    saying "not now", which is worth waiting out.
+    """
+    for attempt in range(1, attempts + 1):
+        try:
+            return urllib.request.urlopen(
+                urllib.request.Request(url, headers={"User-Agent": UA}),
+                timeout=timeout).read()
+        except (urllib.error.URLError, http.client.HTTPException, OSError) as e:
+            retryable = not (isinstance(e, urllib.error.HTTPError)
+                             and e.code < 500 and e.code != 429)
+            if attempt == attempts or not retryable:
+                raise
+            pause = 2 ** attempt
+            print(f"  .. {url}\n     {e}; retrying in {pause}s "
+                  f"({attempt} of {attempts - 1})", file=sys.stderr, flush=True)
+            time.sleep(pause)
 
 
 def volume_for(mandala: int, cache: Path | None = None) -> str:
