@@ -11,15 +11,23 @@ For every root in the Dhātupāṭha:
 
   forms   the tiṅanta paradigm — 8 lakāras × 3 puruṣa × 3 vacana, the word
           only. Cheap, so it is complete.
-  steps   the full derivation of each form in the four lakāras a student
-          meets first, every step naming the Aṣṭādhyāyī sūtra that fired.
+  steps   the full derivation of each form, every step naming the
+          Aṣṭādhyāyī sūtra that fired. All 8 lakāras, since 19 Aug 2026
+          (see below) — was 2 (Lat/Lot) before that.
   krt     the common kṛdanta forms, likewise derived step by step.
 
-WHY NOT EVERY LAKĀRA STEP BY STEP. Steps are written in Devanagari, which is
-three bytes a character, so all eight lakāras came to 116 MB across the 2,229
-roots — on a site already about 640 MB against GitHub Pages' 1 GB ceiling,
-with the dvaitavedanta corpus still to import. Two lakāras is 64 MB and
-leaves ~300 MB of room. --lakaras widens it when there is space.
+WHY THIS ONCE SHIPPED ONLY TWO LAKĀRAS STEP BY STEP, AND WHY THAT CHANGED.
+Steps are written in Devanagari, three bytes a character, so all eight
+lakāras run 256 MB across the 2,229 roots (measured directly, not the
+116 MB once estimated for a lighter --lakaras run) -- against a site that
+was already about 640 MB toward GitHub Pages' documented "recommended"
+1 GB. Two lakāras (64 MB) was the size-conscious default; --lakaras always
+existed to widen it when there was room. The project lead explicitly
+authorized importing at whatever size is needed (with a later
+split-to-another-repo fallback if it becomes a real problem, and after
+confirming 1 GB is GitHub's own recommendation rather than a hard block),
+so the shipped data now runs --lakaras with all 8 lakāras. Rerun with the
+narrower default if the space is needed back.
 
 Each root is its own file, so the reader fetches ~29 KB for the root in front
 of it and nothing else.
