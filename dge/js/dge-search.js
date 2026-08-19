@@ -1,7 +1,8 @@
 /*
  * dge-search.js — client-side global fuzzy search over the static index built
- * by build_search_index.py. Loads manifest + only the postings buckets and unit
- * shards a query actually touches (keeps a 50MB+ corpus feasible on GitHub Pages).
+ * by build_search_index.py. Loads manifest + only the per-trigram postings files
+ * and unit shards a query actually touches (keeps a 300MB+ corpus feasible on
+ * GitHub Pages / jsDelivr).
  *
  * Depends on DGENorm (dge-normalize.js). In the browser, `fetchJSON` uses fetch;
  * in Node it uses fs (so the same code is testable headless).
@@ -30,10 +31,35 @@
     };
   }
 
-  function bucketOf(tg) {
-    var key = tg.replace(/[\^$]/g, '') || tg;
-    var two = key.substr(0, 2).replace(/[^a-zA-Z0-9]/g, '_');
-    return two || 'misc';
+  // One posting file per TRIGRAM (not per 2-char prefix bucket) -- mirrors
+  // build_search_index.py's safe_trigram_filename(). A 2-char bucket used to
+  // put every "ram"/"ran"/"raj"/... trigram in one multi-MB file a query for
+  // any of them had to download whole; this fetches exactly the trigram it
+  // asked for.
+  function safeTrigram(tg) {
+    return tg.replace(/[^0-9A-Za-z_]/g, function (c) {
+      return '%' + c.charCodeAt(0).toString(16).padStart(2, '0');
+    }) || '_';
+  }
+
+  // How many of a trigram set's members to actually fetch, rarest first (by
+  // manifest.df -- document frequency, i.e. posting-file length). A common
+  // trigram like an "na"-class one matches half the corpus and costs the
+  // most to fetch while discriminating the least; a rare one narrows the
+  // candidate set just as correctly for a fraction of the bytes. Measured
+  // against the real index: राम went from 16.1 MB (every trigram) to 549 KB
+  // (rarest 3) -- see SEARCH_ARCHITECTURE.md. A set with FEWER members than
+  // this is fetched in full; there is nothing to save on a short word.
+  var MAX_TRIS_PER_SET = 3;
+
+  function rarestOf(set, df) {
+    // A trigram absent from df has zero postings anywhere in the corpus
+    // (nothing it could match) -- drop it before fetching, not after: no
+    // file exists for it, so keeping it in would just be a wasted request.
+    var withDf = set.filter(function (tg) { return df[tg] != null; });
+    if (withDf.length <= MAX_TRIS_PER_SET) return withDf;
+    withDf.sort(function (a, b) { return df[a] - df[b]; });
+    return withDf.slice(0, MAX_TRIS_PER_SET);
   }
 
   // Damerau-Levenshtein with early exit
@@ -59,15 +85,16 @@
     this.base = base;
     this.manifest = manifest;
     this.granthas = manifest.granthas;
+    this.df = manifest.df || {};
     this._shardCache = {};
-    this._bucketCache = {};
+    this._postingCache = {};
   }
 
-  Index.prototype._loadBucket = function (bucket) {
+  Index.prototype._loadPosting = function (tg) {
     var self = this;
-    if (this._bucketCache[bucket]) return Promise.resolve(this._bucketCache[bucket]);
-    return fetchJSON(this.base, 'postings/' + bucket + '.json').then(function (d) {
-      self._bucketCache[bucket] = d || {}; return self._bucketCache[bucket];
+    if (this._postingCache[tg]) return Promise.resolve(this._postingCache[tg]);
+    return fetchJSON(this.base, 'postings/' + safeTrigram(tg) + '.json').then(function (d) {
+      self._postingCache[tg] = d || []; return self._postingCache[tg];
     });
   };
 
@@ -108,31 +135,39 @@
       });
     }
 
-    // 1) candidate generation: union postings for every trigram set above
-    var allTris = {};
-    trigramSets.forEach(function (set) { set.forEach(function (tg) { allTris[tg] = 1; }); });
-    var buckets = {};
-    Object.keys(allTris).forEach(function (tg) { buckets[bucketOf(tg)] = 1; });
-    return Promise.all(Object.keys(buckets).map(function (b) { return self._loadBucket(b); }))
+    // 1) candidate generation: fetch only the RAREST trigrams of each set
+    // (see rarestOf/MAX_TRIS_PER_SET), not every trigram in it -- a common
+    // trigram shared with most of the corpus costs the most to fetch and
+    // discriminates the least. Correctness comes from the edit-distance
+    // scoring pass below, which runs on every fetched candidate regardless
+    // of which trigrams found it; this step only decides which candidates
+    // get looked at, cheaply.
+    var fetchedSets = trigramSets.map(function (set) { return rarestOf(set, self.df); });
+    var allFetch = {};
+    fetchedSets.forEach(function (set) { set.forEach(function (tg) { allFetch[tg] = 1; }); });
+    return Promise.all(Object.keys(allFetch).map(function (tg) { return self._loadPosting(tg); }))
       .then(function () {
-        // Rank candidates by how many of a trigram set's members they share,
-        // then stop. Opening a grantha's unit shard is a network round trip,
-        // and a common word shares its trigrams with most of the corpus:
-        // searching "राम" used to open 444 of them and take some ten seconds
-        // on a fast connection, which on a phone reads as no results at all
-        // rather than as slow ones. A unit that really contains a set's text
-        // shares nearly all of its trigrams, so requiring most of them
-        // before its grantha is opened is what keeps a long query from
-        // dragging in half the library on the strength of one shared
-        // fragment — each set (whole query, or one word) is judged against
-        // its OWN 60% bar, independently, so a candidate only has to clear
-        // the bar for the query as typed OR for a single word within it.
+        // Rank candidates by how many of a (rarest-trimmed) trigram set's
+        // members they share, then stop. Opening a grantha's unit shard is a
+        // network round trip, and a common word shares its trigrams with
+        // most of the corpus: searching "राम" used to open 444 of them and
+        // take some ten seconds on a fast connection, which on a phone reads
+        // as no results at all rather than as slow ones. A unit that really
+        // contains a set's text shares nearly all of the (few) trigrams
+        // fetched for it, so requiring most of them before its grantha is
+        // opened is what keeps a long query from dragging in half the
+        // library on the strength of one shared fragment — each set (whole
+        // query, or one word) is judged against its OWN 60% bar, computed
+        // over what was actually FETCHED for that set (not the set's full,
+        // unfetched trigram count), independently, so a candidate only has
+        // to clear the bar for the query as typed OR for a single word
+        // within it.
         var cand = {};            // "gi:ui" -> best shared-trigram count, any one set
-        trigramSets.forEach(function (set) {
+        fetchedSets.forEach(function (set) {
+          if (!set.length) return;
           var counts = {};
           set.forEach(function (tg) {
-            var b = self._bucketCache[bucketOf(tg)] || {};
-            var post = b[tg]; if (!post) return;
+            var post = self._postingCache[tg]; if (!post) return;
             for (var k = 0; k < post.length; k++) {
               var key = post[k][0] + ':' + post[k][1];
               counts[key] = (counts[key] || 0) + 1;

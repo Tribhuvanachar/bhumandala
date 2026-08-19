@@ -23,9 +23,12 @@ into a phonetic key (pkey) and coarse key (ckey) by the shared normalizer
 browser at query time (js/dge-normalize.js), so index and query always agree.
 
 Emitted artifacts (all under --out):
-  manifest.json                catalog: granthas, categories, unit counts, shards
+  manifest.json                catalog: granthas, categories, unit counts, per-trigram
+                                document frequency (manifest.df)
   units/<slug>.json            per-grantha units: {u, pk, ck, s(nippet)}
-  postings/<bucket>.json       global trigram -> [ [granthaIdx, unitIdx], ... ]
+  postings/<trigram>.json      one file per trigram: [ [granthaIdx, unitIdx], ... ]
+                                (filename is the trigram, percent-encoded --
+                                see safe_trigram_filename())
   backlinks.json               target#unit_id -> [ {from, note}, ... ]
 
 Usage:  python3 build_search_index.py --data dge/data --out dge/search_index
@@ -160,10 +163,18 @@ def category_of(slug: str) -> str:
     return slug.split("/", 1)[0] if slug else "unknown"
 
 
-def bucket_of(tg: str) -> str:
-    """Map a trigram to a posting-file bucket; keep files small + many."""
-    key = tg.strip("^$") or tg
-    return re.sub(r"[^a-zA-Z0-9]", "_", key[:2]) or "misc"
+_SAFE_TG_CHARS = re.compile(r"[^0-9A-Za-z_]")
+
+
+def safe_trigram_filename(tg: str) -> str:
+    """Percent-encode a trigram into a filesystem/URL-safe filename (mirrors
+    kosha.js's safeBucket()). One file per TRIGRAM, not per 2-char prefix --
+    see the "one file per trigram" note in dge/SEARCH_ARCHITECTURE.md: filing
+    by the first two characters put every "ram"/"ran"/"raj"/... trigram in one
+    multi-MB file that a query for any of them had to download whole (16 MB
+    for a राम search, 40 MB for a rarer word with a common prefix). A query
+    now fetches exactly the trigram files it needs."""
+    return _SAFE_TG_CHARS.sub(lambda m: "%%%02x" % ord(m.group(0)), tg) or "_"
 
 
 def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dict:
@@ -172,10 +183,11 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
     os.makedirs(os.path.join(out_dir, "postings"), exist_ok=True)
 
     granthas = []                       # manifest rows
-    postings = defaultdict(lambda: defaultdict(list))  # bucket -> trigram -> [[gi,ui]]
+    postings = defaultdict(list)        # trigram -> [[gi,ui], ...]
     backlinks = defaultdict(list)       # "target#unit_id" -> [{from, note}]
     stats = {"granthas": 0, "populated": 0, "units": 0, "unit_chars": 0,
-             "refs": 0, "skipped_stub_units": 0, "skipped_stub_granthas": 0}
+             "refs": 0, "skipped_stub_units": 0, "skipped_stub_granthas": 0,
+             "distinct_trigrams": 0}
 
     # (root, path) pairs: the slug is relative to the root the file came from,
     # so a corpus indexed from elsewhere still slugs as though it sat in
@@ -229,7 +241,7 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
             stats["unit_chars"] += len(pk)
             # global postings on pkey trigrams (candidate generation)
             for tg in trigrams(pk):
-                postings[bucket_of(tg)][tg].append([gi, ui])
+                postings[tg].append([gi, ui])
             # cross-references -> backlinks
             for r in refs:
                 if isinstance(r, dict) and r.get("target"):
@@ -259,16 +271,26 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
         stats["units"] += len(unit_rows)
         stats["populated"] += 1
 
-    # write postings buckets
-    for bucket, tgmap in postings.items():
-        with open(os.path.join(out_dir, "postings", f"{bucket}.json"),
+    # write one postings file PER TRIGRAM (not per 2-char bucket) -- see
+    # safe_trigram_filename(). Each file is just the [[gi,ui],...] list; the
+    # filename already identifies the trigram, so there is no wrapping dict.
+    df = {}   # trigram -> posting count, i.e. document frequency
+    for tg, rows in postings.items():
+        fname = safe_trigram_filename(tg)
+        with open(os.path.join(out_dir, "postings", f"{fname}.json"),
                   "w", encoding="utf-8") as f:
-            json.dump(tgmap, f, ensure_ascii=False, separators=(",", ":"))
+            json.dump(rows, f, ensure_ascii=False, separators=(",", ":"))
+        df[tg] = len(rows)
+    stats["distinct_trigrams"] = len(df)
 
+    # df lets the client pick the RAREST trigrams of a query instead of
+    # fetching all of them -- a common trigram like the "na" class matches
+    # half the corpus and is expensive to fetch for what it discriminates;
+    # a rare one narrows the candidate set just as correctly for a fraction
+    # of the bytes. See SEARCH_ARCHITECTURE.md "What does fix it".
     with open(os.path.join(out_dir, "manifest.json"), "w", encoding="utf-8") as f:
-        json.dump({"granthas": granthas,
-                   "postingBuckets": sorted(postings.keys()),
-                   "stats": stats}, f, ensure_ascii=False, separators=(",", ":"))
+        json.dump({"granthas": granthas, "df": df, "stats": stats},
+                   f, ensure_ascii=False, separators=(",", ":"))
     with open(os.path.join(out_dir, "backlinks.json"), "w", encoding="utf-8") as f:
         json.dump(backlinks, f, ensure_ascii=False, separators=(",", ":"))
 
