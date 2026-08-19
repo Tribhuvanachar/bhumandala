@@ -1,7 +1,20 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.6 (Settings sections collapsed-by-default with pin)';
+window.DGE_VERSIONS['ai.js'] = 'v3.7 (Ask Acharya honors the onboarding language preference)';
+
+// Appends a language directive read from onboarding.js's saved preference
+// (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
+// language the visitor picked, without the visitor having to ask for it
+// every time. Empty string (no line added) when unset or English, since
+// English is the model's natural default anyway.
+function dgeLangInstruction() {
+  var lang;
+  try { lang = localStorage.getItem('dge_lang_pref'); } catch (e) { lang = null; }
+  var line = { kn: 'Answer in Kannada (ಕನ್ನಡ) unless the user writes in a different language.',
+               sa: 'Answer in simple Sanskrit (संस्कृतम्) unless the user writes in a different language.' }[lang];
+  return line ? (' ' + line) : '';
+}
 
 // 1. Text Selection & Tooltip Event Listener
 document.addEventListener('selectionchange', () => {
@@ -846,7 +859,7 @@ ${extraFieldsPrompt}Format using clean markdown.${externalLinksNote}`;
   window.acharyaHistory = [];
   const staleFollowUpInput = document.getElementById('acharyaFollowUpInput');
   if (staleFollowUpInput) staleFollowUpInput.value = '';
-  window.acharyaSystemPrompt = "You are Acharya, embedded in a Vedic text reading app. If the user asks a follow-up question, continue this conversation naturally and stay consistent with your earlier answers, in the philosophical tradition of Sri Madhvacharya (Dvaita Vedanta) unless asked otherwise. IMPORTANT FORMATTING RULE: never use LaTeX or math notation of any kind (no $...$, \\sqrt{}, \\text{}, \\rightarrow, or similar). This app only renders plain text and basic markdown (headings, bold, italic, lists) — LaTeX shows up as broken literal text. Write all derivations in plain prose instead: e.g. write 'root labh (bhvādi-gaṇa, 1st class)' instead of '$\\sqrt{\\text{labh}}$', and 'X + Y becomes Z' instead of an arrow/equation.";
+  window.acharyaSystemPrompt = "You are Acharya, embedded in a Vedic text reading app. If the user asks a follow-up question, continue this conversation naturally and stay consistent with your earlier answers, in the philosophical tradition of Sri Madhvacharya (Dvaita Vedanta) unless asked otherwise. IMPORTANT FORMATTING RULE: never use LaTeX or math notation of any kind (no $...$, \\sqrt{}, \\text{}, \\rightarrow, or similar). This app only renders plain text and basic markdown (headings, bold, italic, lists) — LaTeX shows up as broken literal text. Write all derivations in plain prose instead: e.g. write 'root labh (bhvādi-gaṇa, 1st class)' instead of '$\\sqrt{\\text{labh}}$', and 'X + Y becomes Z' instead of an arrow/equation." + dgeLangInstruction();
 
   await dgeRunAcharyaQuery(promptText);
 };

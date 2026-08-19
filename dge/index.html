@@ -282,6 +282,33 @@
   </div>
 </div>
 
+<!-- First-visit name + language preference. Shown once (dge_onboarded in
+     localStorage); "Skip" is always available so this never blocks entry.
+     The language choice sets the display script (transliteration.js) and
+     is read by ai.js/ashtadhyayi.js to answer Acharya/Ashtadhyayi
+     questions in that language. -->
+<div class="modal-overlay" id="onboardingModal">
+  <div class="modal-content" style="max-width:380px;">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size:16px;">🙏 Namaste</h3>
+      <button class="btn-sm" onclick="window.dgeSkipOnboarding()" style="font-size:11px;">Skip</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12.5px; color:var(--muted-text); margin:0 0 14px;">A couple of quick preferences before you begin — you can change either later from the display menu.</p>
+      <div class="provider-key-row"><label>Your name <span style="font-weight:400; color:var(--muted-text);">(optional)</span></label><input type="text" id="onboardName" class="modal-input" style="margin-top:4px;" placeholder="e.g. Krishna"></div>
+      <div class="provider-key-row" style="margin-top:12px;">
+        <label>Preferred language</label>
+        <div id="onboardLangSeg" style="display:flex; gap:6px; margin-top:6px;">
+          <button type="button" class="btn-sm" data-onboard-lang="en" style="flex:1;">English</button>
+          <button type="button" class="btn-sm" data-onboard-lang="kn" style="flex:1;">ಕನ್ನಡ</button>
+          <button type="button" class="btn-sm" data-onboard-lang="sa" style="flex:1;">संस्कृतम्</button>
+        </div>
+      </div>
+      <button class="btn-sm" style="width:100%; background:var(--accent-red); color:#fff; border:none; margin-top:16px;" onclick="window.dgeSaveOnboarding()">Continue</button>
+    </div>
+  </div>
+</div>
+
 <!-- Search Navigator Floating Pill -->
 <div class="search-navigator" id="searchNavigator">
   <span id="searchMatchCount">0/0</span>
@@ -916,6 +943,7 @@
 <script src="js/utils.js?v=4.60.6"></script>
 <script src="js/modals.js?v=4.60.6"></script>
 <script src="js/transliteration.js?v=4.60.6"></script>
+<script src="js/onboarding.js?v=1"></script>
 <script src="js/gemini.js?v=4.60.6"></script>
 <script src="js/kosha.js?v=4.65.0"></script>
 <script src="js/kosha-citations.js?v=4.65.0"></script>

@@ -1,9 +1,11 @@
 /* ==========================================================================
- * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.2.1
+ * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.2.2
  *   v1.2.0 — Stream 5: +Siddhānta-Kaumudī, +Mahābhāṣya, +Vasu(Eng) layers;
  *            padaccheda / anvaya / anuvṛtti / adhikāra / sūtra-type analysis panel.
  *   v1.2.1 — re-applied the shared DGEGemini client to askGemini() (Stream 5's
  *            delivery predated it and had reverted to a raw fetch call).
+ *   v1.2.2 — aiLang now defaults from the main reader's onboarding language
+ *            preference (dge_lang_pref) instead of always starting at "en".
  *
  * Blended Read⇄Compare UI for the Paninian sutrapatha + commentary layers
  * (Kashika / Balamanorama / Tattvabodhini / Nyasa), with a REAL Gemini
@@ -272,7 +274,14 @@
       return r.fellBack ? ("["+r.notice+"]\n\n"+text) : text;
     });
   }
-  var aiLang="en";
+  // Defaults to the language chosen in the main reader's onboarding popup
+  // (dge/js/onboarding.js) so a visitor doesn't have to re-pick it here;
+  // still freely overridable via the buttons below, which is why this is
+  // only an initial value, not re-read on every question.
+  var aiLang=(function(){
+    var v; try{ v=localStorage.getItem("dge_lang_pref"); }catch(e){ v=null; }
+    return (v==="kn"||v==="sa") ? v : "en";
+  })();
   function runAI(question){
     var out=$("#dge-aiAns");
     out.className="dge-ans"; out.textContent="Thinking…";
@@ -394,7 +403,9 @@
     $("#dge-aiSend").addEventListener("click",function(){ var q=$("#dge-aiInput").value.trim(); if(q) runAI(q); });
     $("#dge-aiInput").addEventListener("keydown",function(e){ if(e.key==="Enter"){ var q=e.target.value.trim(); if(q) runAI(q);} });
     document.querySelectorAll("#dge-drawer [data-preset]").forEach(function(b){ b.addEventListener("click",function(){ runAI(b.dataset.preset); }); });
-    document.querySelectorAll("#dge-drawer [data-lang]").forEach(function(b){ b.addEventListener("click",function(){
+    document.querySelectorAll("#dge-drawer [data-lang]").forEach(function(b){
+      b.classList.toggle("on", b.dataset.lang===aiLang);
+      b.addEventListener("click",function(){
       aiLang=b.dataset.lang; document.querySelectorAll("#dge-drawer [data-lang]").forEach(function(x){x.classList.remove("on");}); b.classList.add("on"); }); });
     // settings
     var gear=$("#dge-gear"); if(gear) gear.addEventListener("click",openSettings);
