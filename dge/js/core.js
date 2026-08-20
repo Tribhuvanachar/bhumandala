@@ -701,6 +701,7 @@ function dgeNoticeCommentaryAvailable() {
 }
 
 function initApp() {
+  window.dgeListPage = 0; // fresh grantha starts list-mode pagination (see render.js) on its own page 1
   if (typeof loadPersistedState === 'function') loadPersistedState();
   if (typeof restorePrefs === 'function') restorePrefs();
   if (typeof initAuthAndBranding === 'function') initAuthAndBranding();
