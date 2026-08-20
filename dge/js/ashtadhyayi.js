@@ -541,6 +541,27 @@
     });
     var wex=$("#dge-whatBtn"); if(wex) wex.addEventListener("click",function(){
       var el=$("#dge-chips"); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); });
+    // Corpus usage: search the whole library for this sutra's own words —
+    // citations in commentaries far beyond this page's layers.
+    var usage=$("#dge-usageBtn"); if(usage) usage.addEventListener("click",function(){
+      var row=state.sutras[state.idx]; if(!row) return;
+      if(window.DGEGlobalSearch && window.DGEGlobalSearch.open) window.DGEGlobalSearch.open(row.sanskrit_text);
+      else alert("Search is still loading — try again in a moment.");
+    });
+    // ✏️ report a text error — the same [DGE-CONTENT-GAP] template
+    // shabda.js/modals.js already emit, so the planned triage pipeline
+    // reads one shape (Type/Surface/Context/Page/Timestamp).
+    var fix=$("#dge-fixBtn"); if(fix) fix.addEventListener("click",function(){
+      var row=state.sutras[state.idx]; if(!row) return;
+      var email="sanatanavidyagurukulam@gmail.com";
+      var subject=encodeURIComponent("[DGE-CONTENT-GAP] sutra-correction — "+row.id);
+      var lines=["Type: sutra-correction","Surface: "+row.id,
+        "Context: "+row.sanskrit_text,
+        "Page: "+location.href.split("#")[0]+"#"+row.id,
+        "Timestamp: "+new Date().toISOString(),
+        "", "What is wrong (please describe, or paste the corrected text):", ""];
+      location.href="mailto:"+email+"?subject="+subject+"&body="+encodeURIComponent(lines.join("\n"));
+    });
     // Jump box. It used to accept an exact "1.1.1" and nothing else, and to
     // do nothing at all -- no message, no shake -- for anything it did not
     // recognise, which reads as a dead control rather than a rejected input.
