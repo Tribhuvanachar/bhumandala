@@ -1001,11 +1001,21 @@ window.dgeOpenShabdaForSelection = function(e) {
   const word = dgeSelectedWordText();
   if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
   dgeHideActionTooltip();
-  // shabda.js's own boot() tries ?form= as an exact-cell deep link first
-  // (falling back to a plain ?q= search itself when the surface form isn't
-  // found in any declension table), so passing the raw selection through
-  // as `form` covers both cases with one URL.
-  window.open('shabda.html?form=' + encodeURIComponent(word), '_blank');
+  const fallback = function () {
+    // shabda.js's own boot() tries ?form= as an exact-cell deep link first
+    // (falling back to a plain ?q= search itself when the surface form isn't
+    // found in any declension table), so passing the raw selection through
+    // as `form` covers both cases with one URL. Kridanta forms not in the
+    // Shabdapatha resolve there too, via its reverse indexes.
+    window.open('shabda.html?form=' + encodeURIComponent(word), '_blank');
+  };
+  // Instant path first: the in-page declension modal (js/shabda-modal.js)
+  // answers from one small shard without leaving the verse. Only a miss
+  // (or the modal script not being loaded) falls back to the tab.
+  if (typeof window.dgeShabdaQuick === 'function') {
+    window.dgeShabdaQuick(word).then(function (shown) { if (!shown) fallback(); })
+      .catch(fallback);
+  } else fallback();
 };
 
 // Which lakara/purusha/vacana cell a surface form (e.g. उवाच) belongs to
