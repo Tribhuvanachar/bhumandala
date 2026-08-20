@@ -1,5 +1,5 @@
 /* ==========================================================================
- * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.3.0
+ * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.3.1
  *   v1.2.0 — Stream 5: +Siddhānta-Kaumudī, +Mahābhāṣya, +Vasu(Eng) layers;
  *            padaccheda / anvaya / anuvṛtti / adhikāra / sūtra-type analysis panel.
  *   v1.2.1 — re-applied the shared DGEGemini client to askGemini() (Stream 5's
@@ -10,6 +10,10 @@
  *            ~28% of sutras whose Kaumudi citation matches this repo's own
  *            sutrapatha text exactly, see kaumudi_order/data.json), plus a
  *            per-sutra "cited as Kaumudi #N" badge whenever it's known.
+ *   v1.3.1 — resolveSkRefs(): Siddhānta-Kaumudī's own text carries raw,
+ *            unresolved "<{SK###}>" internal cross-reference markers (1373
+ *            of them); now rendered as a readable parenthetical citation
+ *            instead of leaking the template syntax into visible text.
  *
  * Blended Read⇄Compare UI for the Paninian sutrapatha + commentary layers
  * (Kashika / Balamanorama / Tattvabodhini / Nyasa), with a REAL Gemini
@@ -71,6 +75,22 @@
   function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
   function devnum(n){ var m={0:"०",1:"१",2:"२",3:"३",4:"४",5:"५",6:"६",7:"७",8:"८",9:"९"};
     return String(n).split("").map(function(d){return m[d]||d;}).join(""); }
+  // Siddhanta Kaumudi's own text carries internal cross-references to its
+  // own serial rule numbering as raw "<{SK354}>" markers -- an unresolved
+  // import-template artifact (1373 of them in that data.json), not a
+  // rendering choice. This is the same bug reported live as "the 4th
+  // item's text is incorrect": that IS what a reader sees, bracket-and-
+  // number junk sitting mid-sentence. kaumudi_order/data.json's own
+  // concordance only confirms ~28% of sutras (see loadKaumudiOrder's own
+  // comment on why it's deliberately partial), not enough to make some
+  // citations clickable and others not without that inconsistency itself
+  // reading as broken -- so every one of these renders as the conventional
+  // Sanskrit-commentary parenthetical citation abbreviation instead,
+  // consistently, rather than either the raw template syntax or silently
+  // dropping real cross-reference information.
+  function resolveSkRefs(t){
+    return String(t||"").replace(/<\{SK(\d+)\}>/g, function(_, num){ return "(सि.कौ."+devnum(num)+")"; });
+  }
   function tl(t){ if(state.script==="devanagari"||!window.Sanscript) return t;
     try{ return window.Sanscript.t(t,"devanagari",state.script);}catch(e){return t;} }
   function iast(t){ try{ return window.Sanscript?window.Sanscript.t(t,"devanagari","iast"):"";}catch(e){return "";} }
@@ -198,7 +218,7 @@
     if(!L||(!L.loaded&&L.loading)) body='<span class="dge-skel"></span><span class="dge-skel"></span><span class="dge-skel" style="width:70%"></span>';
     else if(L&&L.error) body='<span class="dge-more">could not load '+folder+'</span>';
     else { var it=L&&L.byId[row.id];
-      if(it){ body=nl2br(esc(isEn ? it.sanskrit_text : tl(it.sanskrit_text))); hasText=true; }
+      if(it){ var raw=resolveSkRefs(it.sanskrit_text); body=nl2br(esc(isEn ? raw : tl(raw))); hasText=true; }
       else body='<span class="dge-more">— no '+m.sub+' on this sutra —</span>'; }
     var lic = (L&&L.byId[row.id])?('layer: '+m.sub+' · '+m.role+' · ref → sutrapatha/'+row.id):'';
     return '<article class="dge-card '+(col?'collapsed':'')+'" data-c="'+folder+'" style="--tag:'+m.tag+'">'

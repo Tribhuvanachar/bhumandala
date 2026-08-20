@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.9 (dgeNormalizeGranthaData: flat items fall back through samhita_patha -> sanskrit_text -> text for `sa`, and prefer item.reference for vedicId over a bare id -- needed for grantha_mula_text/grantha_tika_text/generic-schema and English-only (Ganguli) items alike; passes through item.gemini_enrichment as shloka.geminiEnrichment for footnote-engine.js)';
+window.DGE_VERSIONS['core.js'] = 'v3.10 (dgeSanitizeVedicAccents now also resolves Siddhanta Kaumudi\'s unresolved internal "<{SK###}>" cross-reference markers into a readable parenthetical citation -- was leaking raw template syntax into visible text)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -291,11 +291,30 @@ document.addEventListener('DOMContentLoaded', () => {
 // marks — confirmed by checking the actual codepoints against real
 // rendered output, not guessed. Remapped here, as early as possible, so
 // every downstream use (display, copy, search, share) benefits uniformly.
+function dgeToDevanagariDigits(s) {
+  const map = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
+  return String(s).replace(/[0-9]/g, (d) => map[d]);
+}
+
 function dgeSanitizeVedicAccents(text) {
   if (!text) return text;
   return text
     .replace(/\u1CD3/g, '\u0951') // VEDIC SIGN NIHSHVASA (used for acute/udātta) -> DEVANAGARI STRESS SIGN UDATTA
-    .replace(/\u1CD9/g, '\u0952'); // VEDIC TONE ... INDEPENDENT SVARITA (used for grave) -> DEVANAGARI STRESS SIGN ANUDATTA
+    .replace(/\u1CD9/g, '\u0952') // VEDIC TONE ... INDEPENDENT SVARITA (used for grave) -> DEVANAGARI STRESS SIGN ANUDATTA
+    // Siddhanta Kaumudi's own text carries internal cross-references to its
+    // own serial rule numbering as raw "<{SK354}>" markers -- an unresolved
+    // import-template artifact (1373 of them in that one file), not a
+    // rendering choice. Reported live as "the 4th item's text is incorrect"
+    // because that IS what a reader sees: bracket-and-number junk sitting
+    // mid-sentence in an otherwise normal commentary. No authoritative
+    // SK-number -> sutra concordance exists in this corpus to turn these
+    // into real links (this data.json's own item order is Ashtadhyayi
+    // adhyaya.pada.sutra order, not Siddhanta Kaumudi's own reordered
+    // sequence, so the number can't be resolved from position either) --
+    // rendered as the conventional Sanskrit-commentary parenthetical
+    // citation abbreviation instead of either the raw template syntax or
+    // silently deleting real cross-reference information.
+    .replace(/<\{SK(\d+)\}>/g, (_, num) => '(सि.कौ.' + dgeToDevanagariDigits(num) + ')');
 }
 
 function dgeNormalizeGranthaData(data, granthaTitle) {
