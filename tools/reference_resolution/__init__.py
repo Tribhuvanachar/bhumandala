@@ -59,6 +59,20 @@ def _load_json(path: Path) -> dict:
         return json.load(f)
 
 
+# Quote-mark and stray edge punctuation a caller's "verbatim quoted span"
+# may include (e.g. a real Gemini run returning `'कर्तृकरणयोस्तृतीया'`
+# rather than just the sutra text) -- none of this appears in the corpus's
+# own stored text, so left in, it only dilutes the match against a clean
+# corpus string. Observed directly in a real (non-mock) enrichment run: an
+# exact sutra quote wrapped in quote marks scored 0.517 ("possible")
+# instead of 1.0 ("verified") until this stripping was added.
+_EDGE_PUNCT = "‘’“”'\"।॥.,;:!? \t\n"
+
+
+def _normalize_query(s: str) -> str:
+    return s.strip(_EDGE_PUNCT)
+
+
 def _iter_units(data: dict):
     """Yield (unit_id, primary_text) pairs, covering both corpus data shapes:
     catalog ({schema, items:[...]}, flat or with nested per-verse `shlokas`)
@@ -229,11 +243,25 @@ class ReferenceResolver:
         hint_slugs: Optional[Iterable[str]] = None,
         min_verified_score: float = 0.85,
         min_possible_score: float = 0.4,
+        min_verified_length: int = 8,
     ) -> ResolvedReference:
         """Priorities 2/3/5: search for `quoted_text` verbatim or fuzzily.
         `hint_slugs` (e.g. from a title match on Gemini's free-text guess) is
         searched first; the resolver stops at the first verified hit rather
-        than scanning the whole scope."""
+        than scanning the whole scope.
+
+        `quoted_text` is normalized (edge quote marks/punctuation stripped)
+        before searching -- see `_normalize_query`. A normalized query
+        shorter than `min_verified_length` can never resolve as "verified",
+        only "possible" at best, however high its score: a single short
+        word (a term the commentator is glossing, not quoting -- this
+        commentary style repeats one before explaining it) will coincidentally
+        substring-match SOMETHING in almost any reasonably sized search scope,
+        so a short match is not real evidence of a genuine citation the way a
+        longer one is. Observed directly in a real enrichment run (single
+        words like 'सदिति'/'नच'/'अत' resolving "verified" against essentially
+        unrelated Gita verses that merely happen to contain that substring)."""
+        query = _normalize_query(quoted_text)
         scopes = list(hint_slugs) if hint_slugs else []
         scopes += [s for s in self.search_scope if s not in scopes]
 
@@ -244,13 +272,14 @@ class ReferenceResolver:
             searched.append(slug)
             if idx is None:
                 continue
-            hits = idx.search(quoted_text, limit=1, min_score=min_possible_score)
+            hits = idx.search(query, limit=1, min_score=min_possible_score)
             if not hits:
                 continue
             hit = hits[0]
             info = self.registry.get(slug)
+            can_verify = len(query) >= min_verified_length
             candidate = ResolvedReference(
-                status="verified" if hit.score >= min_verified_score else "possible",
+                status="verified" if (can_verify and hit.score >= min_verified_score) else "possible",
                 confidence=round(hit.score, 3),
                 resolution_method="lexical_search" if hit.matched_field in ("slp1", "pkey") else "fuzzy_search",
                 target_slug=slug,
