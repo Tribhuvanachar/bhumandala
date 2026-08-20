@@ -1,0 +1,95 @@
+name: DGE Gemini reference enrichment
+
+# Batch-runs tools/gemini_enrich.py against one grantha's data.json: Gemini
+# flags candidate quotations/citations in its commentary prose, and
+# tools/reference_resolution (the local corpus, no network) decides whether
+# each one is verified/possible/unresolved before anything is written back.
+# See dge/PENDING.md, "Reference Resolution Engine", for why this two-step
+# shape exists instead of trusting Gemini's proposed source directly.
+#
+# Requires a GEMINI_API_KEY repository secret (Settings -> Secrets and
+# variables -> Actions). This is a deliberate, explicit exception to this
+# project's usual BYOK-only / no-server-side-key convention (see
+# dge/PROJECT_BRIEF.md) -- signed off on specifically for this batch job,
+# which runs as a one-off GitHub Action rather than something every visitor's
+# browser calls. No other part of the app uses a key stored this way.
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Path to the grantha data.json to enrich"
+        required: true
+        default: dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_jayatirtha/data.json
+      limit:
+        description: "Enrich at most N not-yet-enriched items (blank = all)"
+        required: false
+        default: ""
+      model:
+        description: "Gemini model to use"
+        required: true
+        default: gemini-flash-latest
+        type: choice
+        options:
+          - gemini-flash-latest
+          - gemini-flash-lite-latest
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      # No pip install step: tools/gemini_enrich.py and
+      # tools/reference_resolution use only the standard library.
+      - name: Run Gemini enrichment (${{ inputs.target }})
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TARGET: ${{ inputs.target }}
+          LIMIT: ${{ inputs.limit }}
+          MODEL: ${{ inputs.model }}
+        run: |
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "::error::GEMINI_API_KEY repository secret is not set. Add it under" \
+                 "Settings -> Secrets and variables -> Actions before running this workflow."
+            exit 1
+          fi
+          ARGS=(--target "$TARGET" --model "$MODEL")
+          if [ -n "$LIMIT" ]; then ARGS+=(--limit "$LIMIT"); fi
+          python3 tools/gemini_enrich.py "${ARGS[@]}"
+      - name: Validate corpus data
+        run: python3 tools/validate_data.py
+      - name: Open Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: gemini-enrich/${{ github.run_id }}
+          commit-message: "data: gemini-enrich ${{ inputs.target }}"
+          title: "Gemini reference enrichment: ${{ inputs.target }}"
+          body: |
+            Automated citation/quotation enrichment of `${{ inputs.target }}`
+            via `tools/gemini_enrich.py` (model: `${{ inputs.model }}`).
+
+            Every proposed reference was cross-checked against the local
+            corpus by `tools/reference_resolution` before being written --
+            look for `"status"` on each entry under `gemini_enrichment.references`:
+
+            - `verified` — the exact quote was found in the corpus at the
+              given location. Spot-check a few, but these are the reliable ones.
+            - `possible` — a fuzzy/partial match was found; worth a human look.
+            - `unresolved` — Gemini flagged a quotation/citation but the
+              corpus (within this job's search scope) has no matching text.
+              Not necessarily wrong -- may just be outside today's curated
+              search scope (see `DEFAULT_SEARCH_SCOPE` in
+              `tools/reference_resolution/__init__.py`) or a source this
+              library doesn't hold yet.
+
+            Please review before merging -- this is a machine-generated first
+            pass, not a scholarly-verified one.
+          add-paths: |
+            ${{ inputs.target }}
