@@ -17,6 +17,113 @@ complete record, not just a live queue.
 
 ## Future feature ideas — designed but not yet greenlit
 
+- **Gemini-enrichment pipeline: local Reference Resolution Engine +
+  confidence-tiered footnotes — IMPLEMENTED (2026-08-20).** A Gemini
+  architecture proposal was reviewed (external analysis of how to enrich
+  the ~3 GB corpus with Gemini without either (a) re-sending everything DGE
+  already knows, or (b) trusting Gemini's claimed sources on faith). Its
+  central point — *"Do not ask Gemini to rediscover knowledge that DGE
+  already possesses"* — matched two things already true of this codebase:
+  `dge/convert/mapper.js`'s existing design comment ("Gemini's job stays
+  narrow and reliable... assembling the exact schema happens here in code,
+  where it can be validated") and `dge/convert/review-classifier.js`'s
+  confidence-tiered trust classes (A-E). This item builds the same shape
+  for corpus-wide citation/quotation detection, and **supersedes the
+  execution-model question in the "Batch Gemini-generated padaccheda" item
+  below** (point 3 there) for this class of job — decided as a GitHub
+  Action with a `GEMINI_API_KEY` repository secret, not a browser BYOK tool.
+  That is a deliberate, explicit exception to this project's usual
+  BYOK-only / no-server-side-key rule (`PROJECT_BRIEF.md` §7's guardrail
+  against server-side keys) — signed off on specifically for this one-off
+  batch job, not a general policy change; nothing else in the app stores or
+  uses a key this way.
+
+  **What was built:**
+  - `tools/reference_resolution/` — a local-first, network-free resolver.
+    Implements the proposal's priority ladder: (1) exact `{target_slug,
+    unit_id}` match, reusing the corpus's own existing `references[]`
+    convention; (2/3) lexical/fuzzy text search of a quoted span against a
+    curated `DEFAULT_SEARCH_SCOPE` (today: all 18 Bhagavad Gita chapters +
+    the 3962-sūtra Ashtadhyayi sutrapatha), built in-memory per grantha
+    using `dge/search_toolkit_pkg`'s existing phonetic-key/trigram
+    machinery; (5) "search DGE using Gemini's proposal" via a
+    `source_guess` → title-matched slug hint. Returns
+    `verified`/`possible`/`unresolved` with a `resolution_method` and
+    `confidence`, never fabricating a source that isn't actually there.
+  - `tools/gemini_enrich.py` — the batch job itself. Mirrors
+    `dge/js/gemini.js`'s request shape (model + `gemini-flash-lite-latest`
+    fallback, same status→error-kind classification) using only the
+    standard library (`urllib`), no new dependency. Asks Gemini for a
+    narrow thing only — quoted/cited spans in one item's commentary prose —
+    then **discards any span that isn't an exact verbatim substring** of
+    the input before doing anything else with it (this project's
+    "don't fabricate" rule, `PROJECT_BRIEF.md` §6, applied to Gemini's own
+    claimed quotation, not just to the source it guesses). Surviving spans
+    go through the resolver above and get written back as an additive
+    `gemini_enrichment: {generated_at, model, segments, references}` block
+    (documented in `dge/data/schemas.json` on the four `sanskrit_text`-
+    primary schemas) — original fields untouched, safe to re-run (skips
+    already-enriched items unless `--force`). `--dry-run` swaps in a
+    deterministic, network-free mock citation-detector for testing.
+  - `dge/js/footnote-engine.js` + `dge/css/footnotes.css` — renders
+    `segments`/`references` as inline superscript markers + a footnote list
+    (verified/possible/unresolved get distinct at-a-glance styling), linking
+    to the target via the same `index.html?path=...&jumpVedicId=...`
+    convention `dge/js/backlinks.js` already uses. Wired into
+    `dge/js/render.js`'s `renderList()`, gated to the Devanagari display
+    script (enrichment text is stored verbatim in Devanagari, so other
+    scripts fall back to plain highlighted text rather than risk mismatched
+    markers — a known scope limit, not yet solved).
+  - `dge/js/core.js`: `dgeNormalizeGranthaData`'s flat-items branch now
+    falls back to `item.sanskrit_text` for `sa` (it previously only checked
+    `samhita_patha`/`sa`, which meant `grantha_mula_text`/`grantha_tika_text`
+    content — e.g. every Sarvamoola tika — rendered with **empty main text**
+    in this reader; found while wiring footnotes in, fixed since the
+    footnote feature is undemonstrable without it). Also passes through
+    `item.gemini_enrichment` as `shloka.geminiEnrichment`.
+  - `tests/test_reference_resolution.py`, `tests/test_gemini_enrich.py` —
+    26 new tests (synthetic corpora + one real-corpus check of the
+    proposal's own worked example, "dharma-kṣetre kuru-kṣetre" → Bhagavad
+    Gītā 1.1.). All 88 repo tests pass (`./run_tests.sh`).
+
+  **Proof run** (`--dry-run`, mock detector, real resolver, against a copy
+  of `dge/data/dvaitavedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/
+  tika_jayatirtha/data.json`, Jayatīrtha's ṭīkā on Viṣṇutattvavinirṇaya — 158
+  items): found 158 quoted spans across the file; resolved **24 verified**
+  (exact/near-exact matches, including real Aṣṭādhyāyī sūtras like
+  `कर्तृकरणयोस्तृतीया` → `2.3.18` and Gītā quotations like `क्षेत्रज्ञं चापि
+  मां विद्धि` → BG 13.3, both at correct locations), **5 possible** (lower-
+  confidence fuzzy matches worth a human look), **251 unresolved** (mostly
+  Vedic/other citations outside today's small curated search scope — an
+  honest result, not a failure: nothing was invented for them). This was
+  **not** committed into the live corpus file — the mock detector's output
+  is for pipeline validation, not production content; the file on disk is
+  unchanged by this work. Run it for real via the GitHub Action below.
+
+  **To run for real:** add a `GEMINI_API_KEY` repository secret (Settings →
+  Secrets and variables → Actions), then dispatch `.github/workflows/
+  gemini-enrich.yml` with a target `data.json` path. It runs the enrichment,
+  validates the result (`tools/validate_data.py`), and opens a PR scoped to
+  just that one file for review — never merges automatically.
+
+  **Known limitations / follow-ups, not solved here:**
+  - `DEFAULT_SEARCH_SCOPE` is small and curated (Gita + Ashtadhyayi
+    sutrapatha), not the full ~1.1 GB corpus. Building an in-memory index
+    over everything on every run doesn't scale; a corpus-wide version
+    should reuse the *prebuilt* static trigram index under
+    `dge/search_index/` (today queried only from `dge/js/dge-search.js` —
+    see `SEARCH_ARCHITECTURE.md`) instead of re-indexing from scratch in
+    Python. Expanding the scope in the meantime is just adding slugs to the
+    tuple in `tools/reference_resolution/__init__.py`.
+  - Padaccheda/anvaya generation (the *other* batch-Gemini idea, below) is
+    a separate scope this item does not cover.
+  - Footnotes only render on the Devanagari display script (see above).
+  - The dry-run mock detector's "must contain a space" heuristic (to avoid
+    treating this commentary style's single-word term-glosses in quotes as
+    citations) is a crude stand-in for real Gemini judgment — expected to
+    need no equivalent once real Gemini calls are wired in, but worth
+    re-checking against real output rather than assuming.
+
 - **"Intelligence" mode — an opt-in, per-source-toggleable reading overlay
   that auto-detects cross-references live in the text being read, marks
   them with a subtle blinking underline, and shows the reference(s) on
@@ -113,7 +220,13 @@ complete record, not just a live queue.
   vs. a GitHub Action (matches VedaVaNi's scheduled/dispatched pattern) —
   each has tradeoffs (browser tool = easier human review before commit,
   more manual; Action = scales unattended, harder to eyeball each result
-  before it lands). Not started — noted for future discussion.
+  before it lands). Padaccheda generation itself: not started — noted for
+  future discussion. **The execution-model question in point (3) is now
+  decided *for the reference/citation-enrichment job above* (GitHub Action
+  + repo secret, not browser BYOK)** — see the "Gemini-enrichment pipeline"
+  item just above this one. Whether padaccheda generation should reuse that
+  same Action-based shape or go the browser-tool route instead is still
+  open; nothing about padaccheda generation itself has been built.
 
 ## Awaiting a decision or action from the project lead
 

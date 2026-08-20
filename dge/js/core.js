@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.7 (Loads and merges admin/config/config-overrides.json over config.js defaults before first render)';
+window.DGE_VERSIONS['core.js'] = 'v3.8 (dgeNormalizeGranthaData: flat items now fall back to sanskrit_text for `sa` and prefer item.reference for vedicId, not just samhita_patha/id -- needed for grantha_mula_text/grantha_tika_text/generic schemas; passes through item.gemini_enrichment as shloka.geminiEnrichment for footnote-engine.js)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -377,7 +377,8 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         shlokas[n] = {
           sa: dgeSanitizeVedicAccents(v.sanskrit_text || v.sa || ''),
           vedicId: chapter.reference ? (chapter.reference + (v.number != null ? ' · ' + v.number : '')) : '',
-          commentaries: commentaries
+          commentaries: commentaries,
+          geminiEnrichment: v.gemini_enrichment || null
         };
       });
     });
@@ -439,7 +440,8 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         devata: item.devata || '',
         chandas: item.chandas || '',
         padapatha: dgeSanitizeVedicAccents(item.pada_patha || ''),
-        commentaries: commentaries
+        commentaries: commentaries,
+        geminiEnrichment: item.gemini_enrichment || null
       };
     });
 

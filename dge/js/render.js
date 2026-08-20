@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v4.0 (Single-view Prev/Next: scroll position is measured a frame after the DOM rebuild settles, not immediately after — and the scroll itself is now instant, not animated-smooth, since the visible motion of a smooth scroll can itself look like reload-style jank on a quick tap)';
+window.DGE_VERSIONS['render.js'] = 'v4.1 (renderList: renders shloka.geminiEnrichment as footnotes via footnote-engine.js when present and the display script is Devanagari, falling back to plain highlighted text otherwise — see Single-view Prev/Next note below for the v4.0 change)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -266,10 +266,23 @@ function renderList() {
     // or any other text that might use "/" for something else. Applied
     // AFTER highlightText() so a search match spanning a pada boundary
     // still highlights correctly first.
-    let mulaHtml = highlightText(mulaDisplayText, pattern);
+    // Gemini-enrichment footnotes (see dge/js/footnote-engine.js) are only
+    // meaningful against the Devanagari the enrichment was computed from —
+    // quoted_text/segments are stored verbatim in Devanagari, so on any
+    // other display script this falls back to plain highlighted text rather
+    // than risk mismatched markers.
+    let footnoteResult = null;
+    if (shloka.geminiEnrichment && (!window.activeScript || window.activeScript === 'devanagari') &&
+        typeof window.DGEFootnotes !== 'undefined') {
+      footnoteResult = window.DGEFootnotes.render(shloka.geminiEnrichment);
+    }
+
+    let mulaHtml = highlightText(footnoteResult ? footnoteResult.html : mulaDisplayText, pattern);
     if (shloka.vedicId) {
       mulaHtml = mulaHtml.replace(/\s*\/\s*/g, '<br>');
     }
+    const footnoteListHtml = footnoteResult
+      ? `<div class="dge-fn-block">${footnoteResult.footnotesHtml}</div>` : '';
 
     c.innerHTML = `
       ${cardActionsHtml}
@@ -279,6 +292,7 @@ function renderList() {
         ${window.dgeContentEditMode ? `<button class="btn-icon" title="Edit this shloka's text" onclick="event.stopPropagation(); window.dgeInlineEditShloka(${i})">✏️</button>` : ''}
         <button class="btn-icon copy-shloka-btn" title="Copy shloka text" onclick="event.stopPropagation(); if(typeof copyShlokaText==='function') copyShlokaText(${i})">📋</button>
       </div>
+      ${footnoteListHtml}
       ${extraFieldsHtml}
       ${commentaryHtml}`;
     listEl.appendChild(c);
