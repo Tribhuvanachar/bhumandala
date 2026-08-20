@@ -189,14 +189,37 @@
     window.location.href = p;
   }
 
+  // A real query against this index is a manifest fetch plus several
+  // postings-bucket and grantha-shard round trips through jsdelivr --
+  // measured at 10+ seconds for a common word on a cold cache, not the
+  // sub-second feel the debounce below implies. With no state shown while
+  // that runs, the reader stares at the same "Type a word..." placeholder
+  // the whole time, which reads as "this button does nothing" -- exactly
+  // the bug report this responds to -- rather than as a slow search. The
+  // "Searching..." line below is the fix; render()'s own "No matches."
+  // already covers the empty-result end of this, so only the WAITING gap
+  // was silent.
   function onType(e) {
     var q = e.target.value.trim();
     clearTimeout(debounce);
-    if (!q) { document.getElementById('dge-gs-results').innerHTML = '<div class="dge-gs-hint">Type a word or phrase in any script.</div>'; return; }
+    var results = document.getElementById('dge-gs-results');
+    if (!q) { results.innerHTML = '<div class="dge-gs-hint">Type a word or phrase in any script.</div>'; return; }
+    results.innerHTML = '<div class="dge-gs-hint">Searching…</div>';
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
       p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30 }, queryOpts(q))); })
-       .then(function (hits) { render(hits, q); }).catch(function () {});
+       .then(function (hits) { render(hits, q); })
+       .catch(function () {
+         // ensureIndex()'s own catch already writes a specific "could not
+         // load the index" message and only fires on that one failure --
+         // this covers every OTHER way the chain can reject (a bucket or
+         // shard fetch dying mid-search) so "Searching..." never just sits
+         // there forever on a query that silently failed.
+         var el = document.getElementById('dge-gs-results');
+         if (el && el.innerHTML.indexOf('Searching') !== -1) {
+           el.innerHTML = '<div class="dge-gs-hint">Search failed — check your connection and try again.</div>';
+         }
+       });
     }, 140);
   }
 
