@@ -592,7 +592,8 @@
       "complete": true,
       "licence": "cc-by-nc-sa-4.0",
       "source_edition": "ed. Lakshman Sarup",
-      "note": "The same ref repeats across many consecutive lines — group lines by ref instead of assuming one line per ref. '(x.ṛ)' marks a variant reading. GRETIL has NO separate Nighaṇṭu."
+      "note": "The same ref repeats across many consecutive lines — group lines by ref instead of assuming one line per ref. '(x.ṛ)' marks a variant reading. GRETIL has NO separate Nighaṇṭu. The marker ALSO repeats before every sentence within one giant physical line (confirmed against the raw source: only 18 true line-start matches in the whole file, one per adhyaya) — strip_inline below removes the leftover inline repeats after extraction.",
+      "strip_inline": "\\d+,\\d+:"
     },
     {
       "id": "vedanga_jyotisha_arca",

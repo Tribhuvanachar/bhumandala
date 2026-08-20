@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 1697,
-  "loaded": 968,
-  "items": 363985
+  "loaded": 969,
+  "items": 363999
  },
  "sections": {
   "agama": {
@@ -58,8 +58,8 @@
   },
   "vedanga": {
    "total": 104,
-   "loaded": 9,
-   "items": 28959
+   "loaded": 10,
+   "items": 28973
   },
   "vedas": {
    "total": 121,
@@ -1584,7 +1584,7 @@
   "vedanga/kalpa/shukla_yajurveda/katyayana/shrautasutra": 0,
   "vedanga/kalpa/shukla_yajurveda/katyayana/shulbasutra": 0,
   "vedanga/kalpa/shukla_yajurveda/paraskara/grihyasutra": 0,
-  "vedanga/nirukta": 0,
+  "vedanga/nirukta": 14,
   "vedanga/shiksha/atharvaveda_shiksha/manduki_shiksha": 0,
   "vedanga/shiksha/paniniya_shiksha": 0,
   "vedanga/shiksha/pratishakhya/rigveda_pratishakhya": 0,

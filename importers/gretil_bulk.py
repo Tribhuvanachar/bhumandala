@@ -98,6 +98,21 @@ def parse(raw, spec, patterns):
             end = match.start()
             seen_span = match.end()
         text = clean(body[start:end])
+        # Some markers repeat before every sentence within one giant physical
+        # line rather than once per actual line break -- confirmed directly
+        # against nirukta's own source: only 18 real "^"-anchored matches in
+        # the whole file (one per adhyaya, since each adhyaya is a single
+        # unbroken line), yet the SAME ref recurs dozens of times inline
+        # within that line. re.MULTILINE's "^" only ever matches the first
+        # such occurrence per physical line, so every later inline repeat
+        # passes straight through into the extracted text instead of being
+        # consumed as a boundary. spec["strip_inline"] is the escape hatch
+        # for exactly that: an optional regex removed from the text AFTER
+        # extraction, opt-in per text so it changes nothing for the other
+        # 33 registry entries.
+        if spec.get("strip_inline"):
+            text = re.sub(spec["strip_inline"], " ", text)
+            text = re.sub(r"\s+", " ", text).strip()
         if len(text) < 3:
             continue
         units.append((refs, groups.get("pada"), text))
