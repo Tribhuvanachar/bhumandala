@@ -426,7 +426,13 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         // so every one of those would have rendered a blank verse the
         // first time it was actually run. Caught before any such text
         // shipped, not after.
-        sa: dgeSanitizeVedicAccents(item.samhita_patha || item.sanskrit_text || item.sa || ''),
+        // "text" too, for English-only items (e.g. the Ganguli Mahabharata
+        // translation's own "generic" schema, {id, title, author, text},
+        // no sanskrit_text field at all since there IS no Sanskrit line) --
+        // found the same way as sanskrit_text above: confirmed live, 16
+        // already-shipped translation_ganguli files (1,577 items) all
+        // rendering blank against this exact gap.
+        sa: dgeSanitizeVedicAccents(item.samhita_patha || item.sanskrit_text || item.text || item.sa || ''),
         // Same importer's items carry a human-readable "reference" (e.g.
         // "Yāska — Nirukta, adhyaya 1") alongside the bare slug id --
         // prefer it, matching the itihasa_purana_text branch above which

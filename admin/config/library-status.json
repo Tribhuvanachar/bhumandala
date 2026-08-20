@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1705,
-  "loaded": 977,
-  "items": 364060
+  "leaves": 1706,
+  "loaded": 979,
+  "items": 373349
  },
  "sections": {
   "agama": {
@@ -67,9 +67,9 @@
    "items": 50
   },
   "vedanga": {
-   "total": 105,
-   "loaded": 11,
-   "items": 28979
+   "total": 106,
+   "loaded": 13,
+   "items": 38268
   },
   "vedas": {
    "total": 121,
@@ -1557,7 +1557,7 @@
   "upaveda/kamashastra/kamasutra": 7,
   "upaveda/kamashastra/pancashayaka": 5,
   "upaveda/kamashastra/smaradipika": 1,
-  "vedanga/chandas": 0,
+  "vedanga/chandas": 282,
   "vedanga/jyotisha": 0,
   "vedanga/kalpa/atharvaveda/kaushika/grihyasutra": 0,
   "vedanga/kalpa/atharvaveda/vaitana/shrautasutra": 0,
@@ -1661,6 +1661,7 @@
   "vedanga/vyakarana/paniniya_vyakarana/mahabhashya_patanjali": 1691,
   "vedanga/vyakarana/paniniya_vyakarana/siddhanta_kaumudi": 3928,
   "vedanga/vyakarana/sarasvata_vyakarana": 0,
+  "vedanga/vyakarana/shabdapatha": 9007,
   "vedanga/vyakarana/shakatayana_vyakarana": 0,
   "vedas/atharvaveda/paippalada_shakha/samhita/kanda_01": 0,
   "vedas/atharvaveda/paippalada_shakha/samhita/kanda_02": 0,

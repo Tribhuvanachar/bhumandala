@@ -1813,6 +1813,10 @@
    "mugdhabodha_vyakarana": {},
    "dhatupatha": {
     "_schema": "vyakarana_dhatupatha"
+   },
+   "shabdapatha": {
+    "_schema": "vyakarana_shabdapatha",
+    "_note": "Not shloka-shaped, same as dhatupatha above -- opens dge/shabda.html directly (see DGE_SPECIAL_PAGES in js/library.js), never the general reader. Added to the library tree 20 Aug -- it existed as real, populated data (9007 words) and its own page, but had no taxonomy/library.json entry at all, so it was unreachable by browsing the library, only by a direct URL or the Explore popup."
    }
   },
   "shiksha": {

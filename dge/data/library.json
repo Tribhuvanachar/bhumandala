@@ -6510,7 +6510,7 @@
     },
     {
       "path": "dge/data/vedanga/chandas/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Chandas"
     },
     {
@@ -8517,6 +8517,11 @@
       "path": "dge/data/upaveda/ayurveda/nighantu/vahata_ashtanganighantu/data.json",
       "populated": true,
       "title": "Vahata Ashtanganighantu"
+    },
+    {
+      "path": "dge/data/vedanga/vyakarana/shabdapatha/data.json",
+      "populated": true,
+      "title": "Shabdapatha"
     }
   ]
 }
