@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.10 (dgeSanitizeVedicAccents now also resolves Siddhanta Kaumudi\'s unresolved internal "<{SK###}>" cross-reference markers into a readable parenthetical citation -- was leaking raw template syntax into visible text)';
+window.DGE_VERSIONS['core.js'] = 'v3.11 (one-time toast, gated per grantha via nsKey, tells a reader commentary/bhashya is available for a text -- selectedCommentaryView defaults to none, so it was otherwise fully invisible unless the reader happened to tap the 💬 icon)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -684,6 +684,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Commentary/bhashya display is opt-in and hidden by default
+// (selectedCommentaryView starts at 'none', see state.js) -- a reader who
+// never notices the small 💬 "Commentary Options" icon in the top bar can
+// read an entire Stotra or Veda text and never discover real bhashya
+// content sits right there for it. One-time toast, gated per grantha (not
+// per visit) via nsKey so it never nags on a text the reader has already
+// been shown this for.
+function dgeNoticeCommentaryAvailable() {
+  const available = window.stotraData && window.stotraData.metadata && window.stotraData.metadata.availableCommentaries;
+  if (!available || !Object.keys(available).length) return;
+  const seenKey = (typeof nsKey === 'function') ? nsKey('commentaryNoticeSeen') : null;
+  if (!seenKey || localStorage.getItem(seenKey) === 'true') return;
+  localStorage.setItem(seenKey, 'true');
+  if (typeof showToast === 'function') showToast('📖 Commentary is available for this text — tap 💬 above to view it.');
+}
+
 function initApp() {
   if (typeof loadPersistedState === 'function') loadPersistedState();
   if (typeof restorePrefs === 'function') restorePrefs();
@@ -704,6 +720,8 @@ function initApp() {
 
   // Pass control to the rendering pipeline
   if (typeof renderList === 'function') renderList();
+
+  dgeNoticeCommentaryAvailable();
 
   if (typeof dgeRestoreLastVerse === 'function') dgeRestoreLastVerse();
 
