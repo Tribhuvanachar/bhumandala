@@ -1812,10 +1812,20 @@ Still open, in the order I would take them:
   - `session_01BPDUCk8X9w2eSedhHQ23zt` "Dvaitavedanta crawler" — review-ready, reporting "17 orphaned folders from incomplete renames". Worth a look from this side too: this session moved the whole taxonomy, and orphaned folders from renames is precisely the failure mode that migration could have left behind.
   - `session_01PdaPRixnw1DeZv5kLia587` "Firebase auth" — review-ready, domain switchover tooling; overlaps the 29 Aug go-live checklist above but nothing here.
 
-- `index.html` caching — a stale cached app shell can persist through
-  what most users think of as a hard refresh. The version-check banner
-  (`DGE_EXPECTED_HTML_VERSION`) detects it but can't rescue a tab stuck
-  on a snapshot from before that mechanism existed. No fix implemented.
+- ~~`index.html` caching — the version-check banner detects a stale
+  cached app shell but can't rescue a tab stuck on one~~ **Fixed, 20
+  Aug.** The banner's "Tap here to reload" called `location.reload(true)`
+  — the boolean "force" argument is a Netscape-era relic no current
+  browser honours; it behaves identically to a plain `reload()`, which is
+  exactly the reload that got the reader stuck on the stale page in the
+  first place (a normal reload can still be answered from cache — that's
+  the whole bug this banner exists to catch). It now navigates to the
+  same page plus a cache-busting query param instead — a URL that has
+  never been requested before has no existing cache entry to be answered
+  from, so it's guaranteed to reach the network. Verified in a real
+  headless browser: forced a version mismatch, confirmed the banner
+  appears, and confirmed clicking it navigates to `...?_dgev=<timestamp>`
+  rather than silently re-serving the same cached document.
 
 ## Longstanding backlog, still not started
 
