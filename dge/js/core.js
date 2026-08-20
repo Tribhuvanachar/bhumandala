@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.8 (dgeNormalizeGranthaData: flat items now fall back to sanskrit_text for `sa` and prefer item.reference for vedicId, not just samhita_patha/id -- needed for grantha_mula_text/grantha_tika_text/generic schemas; passes through item.gemini_enrichment as shloka.geminiEnrichment for footnote-engine.js)';
+window.DGE_VERSIONS['core.js'] = 'v3.9 (dgeNormalizeGranthaData: flat items fall back through samhita_patha -> sanskrit_text -> text for `sa`, and prefer item.reference for vedicId over a bare id -- needed for grantha_mula_text/grantha_tika_text/generic-schema and English-only (Ganguli) items alike; passes through item.gemini_enrichment as shloka.geminiEnrichment for footnote-engine.js)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
