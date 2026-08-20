@@ -55,7 +55,16 @@ const appConfig = {
   // serve a half-written index -- which means reindex.yml publishing a new one
   // changes nothing for readers until this line is bumped to that commit. If a
   // freshly merged grantha browses but does not search, this is why.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@b726b5ec44131f73710038f04f6100db985af54e",
+  // Bumped for build_search_index.py's snippet() fix (2000-char stored
+  // snippets instead of a 140-char prefix, so global search can actually
+  // highlight a match that falls deeper into a long passage). NOTE for
+  // whoever merges PR #78 (dge-search.js's one-file-per-trigram rewrite,
+  // still open): its own already-published search-dist state was a
+  // SEPARATE reindex.yml run from this one and this run's publish
+  // overwrote it (search-dist keeps one squashed commit, not history) --
+  // the improved code is safe in that PR's branch, just re-run reindex.yml
+  // once it merges so this pin picks up both fixes together.
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@3775f74b4ac3d18919d08719eef6eae5c8f69a7b",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
