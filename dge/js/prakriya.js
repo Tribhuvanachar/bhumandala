@@ -104,8 +104,8 @@
         if (!forms || !forms.length) { h += '<td class="pk-none">—</td>'; continue; }
         const text = forms.map(esc).join(' / ');
         h += stepped
-          ? '<td><button class="pk-form deva" data-key="' + esc(key) + '">' + text + '</button></td>'
-          : '<td><span class="pk-form pk-form-flat deva">' + text + '</span></td>';
+          ? '<td><button class="pk-form deva" id="pk-cell-' + esc(key) + '" data-key="' + esc(key) + '">' + text + '</button></td>'
+          : '<td><span class="pk-form pk-form-flat deva" id="pk-cell-' + esc(key) + '">' + text + '</span></td>';
       }
       h += '</tr>';
     }
@@ -156,7 +156,7 @@
       '</div></div>';
   }
 
-  function render(d) {
+  function render(d, wantKey) {
     const view = document.body.dataset.view === 'krdanta' ? 'krdanta' : 'tinanta';
     const root = document.getElementById('root');
     // Shared by both views below: the "show every step" toggle a stepsHtml()
@@ -183,7 +183,10 @@
       return;
     }
 
-    let lakara = 'Lat';
+    // A deep link (from ai.js's Dhatu word-tool, via
+    // tools/build_prakriya_form_index.py's reverse index) names the exact
+    // cell to open — start on its lakara instead of लट्.
+    let lakara = (wantKey && d.forms[wantKey] && d.forms[wantKey].length) ? wantKey.split('.')[0] : 'Lat';
     function draw() {
       root.innerHTML = headerHtml(d) +
         '<div class="pk-lak">' + Object.keys(LAKARA).map(function (l) {
@@ -198,24 +201,42 @@
     }
     draw();
 
+    // Shared by the click handler and the deep-link opener below, so a
+    // programmatic open (a word-tool click landing here) shows exactly the
+    // same derivation-panel state a manual tap would.
+    function openFormCell(cell, key) {
+      root.querySelectorAll('.pk-form').forEach(el => el.classList.remove('on'));
+      cell.classList.add('on');
+      const derivs = d.steps[key];
+      const panel = document.getElementById('pk-deriv');
+      if (!panel) return;
+      if (!derivs) { panel.innerHTML = ''; return; }
+      const p = +key.split('.')[1][0], v = +key.split('.')[1][1];
+      panel.innerHTML = '<h2 class="pk-h2 deva">' + esc(derivs.map(x => x.t).join(' / ')) +
+        '</h2><div class="pk-sub deva">' + esc(LAKARA[lakara]) + ' · ' +
+        esc(PURUSHA[p]) + ' · ' + esc(VACANA[v]) + '</div>' +
+        derivs.map(x => stepsHtml(x.s)).join('');
+    }
+
     root.addEventListener('click', function (ev) {
       const lak = ev.target.closest('[data-lak]');
       if (lak && !lak.disabled) { lakara = lak.getAttribute('data-lak'); draw(); return; }
       const form = ev.target.closest('[data-key]');
       if (!form) return;
       const key = form.getAttribute('data-key');
-      const derivs = d.steps[key];
-      const panel = document.getElementById('pk-deriv');
-      if (!derivs || !panel) return;
-      const p = +key.split('.')[1][0], v = +key.split('.')[1][1];
-      panel.innerHTML = '<h2 class="pk-h2 deva">' + esc(derivs.map(x => x.t).join(' / ')) +
-        '</h2><div class="pk-sub deva">' + esc(LAKARA[lakara]) + ' · ' +
-        esc(PURUSHA[p]) + ' · ' + esc(VACANA[v]) + '</div>' +
-        derivs.map(x => stepsHtml(x.s)).join('');
-      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      root.querySelectorAll('.pk-form').forEach(el => el.classList.remove('on'));
-      form.classList.add('on');
+      openFormCell(form, key);
+      document.getElementById('pk-deriv').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+
+    if (wantKey && d.forms[wantKey] && d.forms[wantKey].length) {
+      const cell = document.getElementById('pk-cell-' + wantKey);
+      if (cell) {
+        cell.classList.add('pk-deep-hl');
+        if (cell.tagName === 'BUTTON') openFormCell(cell, wantKey);
+        cell.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function () { cell.classList.remove('pk-deep-hl'); }, 2600);
+      }
+    }
   }
 
   function fail(msg) {
@@ -225,14 +246,21 @@
   }
 
   function load() {
-    const code = (location.hash || '').replace(/^#/, '').trim();
+    // A plain "#01.0008" opens the root at लट्, as always. A word-tool deep
+    // link adds ":<key>" — "#02.0058:Lit.00" — naming the exact
+    // lakāra.puruṣa.vacana cell to open and highlight (see ai.js's
+    // dgeResolveDhatuFormLink and tools/build_prakriya_form_index.py).
+    const raw = (location.hash || '').replace(/^#/, '').trim();
+    const sep = raw.indexOf(':');
+    const code = sep === -1 ? raw : raw.slice(0, sep);
+    const wantKey = sep === -1 ? null : raw.slice(sep + 1);
     if (!/^\d{2}\.\d{4}$/.test(code)) {
       fail('Open this from a root in the Dhātupāṭha — it needs a root code such as 01.0008.');
       return;
     }
     fetch(dataUrl(code.split('.')[0] + '/' + code + '.json'), { cache: 'force-cache' })
       .then(r => (r.ok ? r.json() : null))
-      .then(d => d ? render(d)
+      .then(d => d ? render(d, wantKey)
                    : fail('No derivation has been generated for root ' + code + ' yet.'))
       .catch(() => fail('Could not load the derivation for root ' + code + '.'));
   }
