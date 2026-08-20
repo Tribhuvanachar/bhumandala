@@ -1001,15 +1001,42 @@ window.dgeOpenShabdaForSelection = function(e) {
   const word = dgeSelectedWordText();
   if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
   dgeHideActionTooltip();
-  window.open('shabda.html?q=' + encodeURIComponent(word), '_blank');
+  // shabda.js's own boot() tries ?form= as an exact-cell deep link first
+  // (falling back to a plain ?q= search itself when the surface form isn't
+  // found in any declension table), so passing the raw selection through
+  // as `form` covers both cases with one URL.
+  window.open('shabda.html?form=' + encodeURIComponent(word), '_blank');
 };
+
+// Which lakara/purusha/vacana cell a surface form (e.g. उवाच) belongs to
+// isn't decidable client-side without scanning all ~2200 per-root prakriya
+// files (262 MB total), so tools/build_prakriya_form_index.py precomputes
+// a reverse index, sharded by the form's first Devanagari codepoint so a
+// single click only fetches one small shard. window.open() runs
+// synchronously in the click handler (so it isn't blocked as a popup) and
+// the tab's location is pointed at the resolved URL once the shard lookup
+// (or its fallback) resolves.
+function dgeResolveDhatuFormLink(word) {
+  const w = String(word || '').trim();
+  const fallback = 'dhatu.html?q=' + encodeURIComponent(word);
+  if (!w) return Promise.resolve(fallback);
+  const cp = w.codePointAt(0).toString(16).toLowerCase().padStart(4, '0');
+  return fetch('data/vedanga/vyakarana/prakriya/formindex/' + cp + '.json')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (m) {
+      const hit = m && m[w];
+      return hit ? ('prakriya.html#' + hit.c + ':' + hit.k) : fallback;
+    })
+    .catch(function () { return fallback; });
+}
 
 window.dgeOpenDhatuForSelection = function(e) {
   if (e) e.preventDefault();
   const word = dgeSelectedWordText();
   if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
   dgeHideActionTooltip();
-  window.open('dhatu.html?q=' + encodeURIComponent(word), '_blank');
+  const tab = window.open('', '_blank');
+  dgeResolveDhatuFormLink(word).then(function (url) { if (tab) tab.location.href = url; });
 };
 
 // "Intelligence mapping" -- where else the word appears in the corpus
