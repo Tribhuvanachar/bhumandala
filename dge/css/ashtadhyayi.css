@@ -139,3 +139,21 @@
   .modal .x{position:absolute;right:14px;top:12px;border:0;background:transparent;font-size:20px;color:var(--muted);cursor:pointer}
   .modal .acts{display:flex;gap:8px;margin-top:16px}
   @media(max-width:720px){.dge-layers.compare{flex-direction:column}}
+
+/* ---- dual navigation (Ashtadhyayi order · Kaumudi order) + prakarana drawer ---- */
+.dualnav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 2px}
+.dn-cluster{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
+.dn-cluster.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.dn-cluster.dn-none{opacity:.55}
+.dn-arrow{border:0;background:transparent;color:var(--ink);font-size:17px;line-height:1;padding:8px 11px;cursor:pointer;min-width:44px;min-height:44px}
+.dn-arrow:active{background:var(--panel2)}
+.dn-label{border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;font-size:13.5px;padding:8px 10px;cursor:pointer;min-height:44px;white-space:nowrap}
+.dn-cluster.on .dn-label{background:var(--accent);color:#fff}
+.dn-chapters{border:1px solid var(--line);background:var(--panel);border-radius:10px;color:var(--ink);font:inherit;font-size:13.5px;padding:8px 12px;cursor:pointer;min-height:44px}
+.chp-list{max-height:min(62vh,560px);overflow:auto;margin-top:8px;display:flex;flex-direction:column;gap:4px;-webkit-overflow-scrolling:touch}
+.chp-row{display:flex;gap:10px;align-items:center;border:1px solid var(--line);background:var(--panel2);border-radius:10px;padding:9px 12px;cursor:pointer;font:inherit;color:var(--ink);text-align:left;min-height:44px}
+.chp-row.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.chp-n{color:var(--muted);font-size:12px;min-width:2.2em}
+.chp-name{flex:1}
+.chp-range{color:var(--muted);font-size:12px;white-space:nowrap}
+#dge-chaptersModal .box{max-width:520px}

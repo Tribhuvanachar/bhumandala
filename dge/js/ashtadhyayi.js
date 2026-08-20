@@ -57,13 +57,11 @@
     mode: LS.get("mode", "read"),
     font: LS.get("font", 17),
     collapsed: {},
-    // Siddhanta Kaumudi's own reading order -- byId maps a sutra id to its
-    // Kaumudi sequence number (kaumudi_order/data.json), list is those ids
-    // sorted by that number. Deliberately partial (see that file's own
-    // _readme): only sutras where Kaumudi restates the exact same words are
-    // in here, so navMode:"kaumudi" walks a real but incomplete sequence,
-    // not a guess at the ~63% this data doesn't confirm.
-    kaumudi: { byId: {}, list: [] },
+    // Siddhanta Kaumudi's reading order -- byId maps a sutra id to its
+    // entry {kaumudiIndex, laghu?, chapter?} (kaumudi_order/data.json v2,
+    // essentially complete: 3961 of 3962 sutras), list is those ids sorted
+    // by kaumudiIndex, chapters the 70 traditional prakaranas.
+    kaumudi: { byId: {}, list: [], chapters: [] },
     navMode: LS.get("navMode", "ashtadhyayi")
   };
 
@@ -98,10 +96,16 @@
   // shouldn't hold up the sutra that DID load.
   function loadKaumudiOrder(){
     return fetchJSON(BASE+"kaumudi_order/data.json").then(function(d){
-      (d.items||[]).forEach(function(it){ state.kaumudi.byId[it.id]=it.kaumudiIndex; });
+      (d.items||[]).forEach(function(it){ state.kaumudi.byId[it.id]=it; });
       state.kaumudi.list = (d.items||[]).slice().sort(function(a,b){ return a.kaumudiIndex-b.kaumudiIndex; }).map(function(it){ return it.id; });
+      state.kaumudi.chapters = d.chapters||[];
       renderHero();
     }).catch(function(){ /* fine without it */ });
+  }
+  function kaumudiOf(id){ return state.kaumudi.byId[id] || null; }
+  function chapterOf(entry){
+    if(!entry || !entry.chapter) return null;
+    return state.kaumudi.chapters[entry.chapter-1] || null;
   }
   function ensureLayer(folder){
     var L = state.layers[folder];
@@ -124,18 +128,23 @@
     $("#dge-s").textContent = tl(devnum(p[2]));
     $("#dge-hnum").textContent = row.id;
     if(state.navMode==="kaumudi" && state.kaumudi.list.length){
-      var kpos = state.kaumudi.list.indexOf(row.id);
-      $("#dge-hpos").textContent = kpos>=0 ? ("सिद्धान्तकौमुद्याम् #"+(kpos+1)) : "अद्यापि अनिश्चितम्";
-      $("#dge-htotal").textContent = state.kaumudi.list.length.toLocaleString()+" (आंशिकम्)";
+      var kent = kaumudiOf(row.id);
+      $("#dge-hpos").textContent = kent ? ("कौमुदी #"+kent.kaumudiIndex) : "कौमुद्यां नास्ति";
+      $("#dge-htotal").textContent = state.kaumudi.list.length.toLocaleString();
     } else {
       $("#dge-hpos").textContent = "#"+(state.idx+1);
       $("#dge-htotal").textContent = state.sutras.length.toLocaleString();
     }
+    renderDualNav(row);
     var kb=$("#dge-kaumudiBadge");
     if(kb){
-      var ki = state.kaumudi.byId[row.id];
-      kb.textContent = ki ? ("सिद्धान्तकौमुद्याम् क्रमः #"+ki) : "";
-      kb.style.display = ki ? "" : "none";
+      var ke = kaumudiOf(row.id);
+      var kch = chapterOf(ke);
+      var t = ke ? ("सिद्धान्तकौमुद्याम् #"+ke.kaumudiIndex
+                    +(kch?(" · "+kch.name):"")
+                    +(ke.laghu?(" · लघुकौमुद्याम् #"+ke.laghu):"")) : "";
+      kb.textContent = t ? tl(t) : "";
+      kb.style.display = t ? "" : "none";
     }
     var hs=$("#dge-hsutra"); hs.textContent=tl(row.sanskrit_text); hs.className="sutra "+(state.script==="iast"?"":"deva");
     $("#dge-hsutraIt").textContent = iast(row.sanskrit_text);
@@ -155,6 +164,63 @@
     $("#dge-prevTTop").textContent = prevTxt;
     $("#dge-nextTTop").textContent = nextTxt;
     renderAnalysis(row);
+  }
+  /* ---------- dual navigation: Ashtadhyayi order · Kaumudi order ---------- */
+  // Two always-visible clusters, each stepping its own order; tapping a
+  // cluster's label also makes that order the one Previous/Next and the
+  // arrow keys follow. Replaces the old single toggle button, which hid
+  // the Kaumudi position unless you switched modes.
+  function renderDualNav(row){
+    var box=$("#dge-dualnav"); if(!box) return;
+    var ke = kaumudiOf(row.id);
+    var akOn = state.navMode!=="kaumudi", skOn = !akOn;
+    box.innerHTML =
+      '<span class="dn-cluster'+(akOn?' on':'')+'" data-order="ashtadhyayi">'
+      +'<button class="dn-arrow" data-nav="ak-prev" title="previous sutra (Ashtadhyayi order)">‹</button>'
+      +'<button class="dn-label" data-nav="ak-mode" title="browse in Ashtadhyayi order"><span class="deva">'+tl("अष्टाध्यायी")+'</span> '+esc(row.id)+'</button>'
+      +'<button class="dn-arrow" data-nav="ak-next" title="next sutra (Ashtadhyayi order)">›</button>'
+      +'</span>'
+      +'<span class="dn-cluster'+(skOn?' on':'')+(ke?'':' dn-none')+'" data-order="kaumudi">'
+      +'<button class="dn-arrow" data-nav="sk-prev" title="previous in Siddhanta Kaumudi order">‹</button>'
+      +'<button class="dn-label" data-nav="sk-mode" title="browse in Siddhanta Kaumudi reading order"><span class="deva">'+tl("कौमुदी")+'</span> '+(ke?devnum(ke.kaumudiIndex):"—")+'</button>'
+      +'<button class="dn-arrow" data-nav="sk-next" title="next in Siddhanta Kaumudi order">›</button>'
+      +'</span>'
+      +'<button class="dn-chapters" data-nav="chapters" title="Siddhanta Kaumudi prakarana list"><span class="deva">'+tl("प्रकरणानि")+'</span> ☰</button>';
+  }
+  function setNavMode(m){
+    state.navMode = m; LS.set("navMode", m);
+    renderHero();
+  }
+  function stepOrder(order, dir){
+    if(order==="kaumudi"){ if(state.navMode!=="kaumudi") setNavMode("kaumudi"); goKaumudi(dir); }
+    else { if(state.navMode!=="ashtadhyayi") setNavMode("ashtadhyayi"); go(state.idx+dir); }
+  }
+  /* ---------- Kaumudi prakarana drawer ---------- */
+  function openChapters(){
+    var m=$("#dge-chaptersModal"); if(!m) return;
+    var row=state.sutras[state.idx];
+    var cur = kaumudiOf(row&&row.id);
+    var curCh = cur && cur.chapter;
+    var firstIdOf = {};
+    // items are sorted by kaumudiIndex, so the first id seen per chapter is
+    // that prakarana's opening sutra.
+    state.kaumudi.list.forEach(function(id){
+      var e=state.kaumudi.byId[id];
+      if(e && e.chapter && firstIdOf[e.chapter]===undefined) firstIdOf[e.chapter]=id;
+    });
+    var h='<h4 class="deva">'+tl("सिद्धान्तकौमुदी — प्रकरणानि")+'</h4><div class="chp-list">';
+    state.kaumudi.chapters.forEach(function(c){
+      if(!c.count) return;
+      h+='<button class="chp-row'+(c.n===curCh?' on':'')+'" data-ch="'+c.n+'" data-first="'+esc(firstIdOf[c.n]||"")+'">'
+        +'<span class="chp-n">'+devnum(c.n)+'</span>'
+        +'<span class="chp-name deva">'+tl(c.name)+'</span>'
+        +'<span class="chp-range">'+devnum(c.from)+'–'+devnum(c.to)+'</span>'
+        +'</button>';
+    });
+    h+='</div>';
+    $("#dge-chaptersBody").innerHTML=h;
+    m.classList.add("open"); $("#dge-backdrop").classList.add("open");
+    var on=m.querySelector(".chp-row.on"); if(on) on.scrollIntoView({block:"center"});
   }
   /* ---------- padaccheda / anvaya / anuvritti (sutra analysis) ---------- */
   function renderAnalysis(row){
@@ -357,7 +423,7 @@
 
   /* ---------- settings modal ---------- */
   function openSettings(){ var m=$("#dge-settings"); if(m){ fillModelSel(); $("#dge-keyInput").value=getKey(); $("#dge-modelSel").value=getModel(); m.classList.add("open"); $("#dge-backdrop").classList.add("open"); } }
-  function closeAll(){ $("#dge-drawer").classList.remove("open"); var s=$("#dge-settings"); if(s)s.classList.remove("open"); $("#dge-backdrop").classList.remove("open"); }
+  function closeAll(){ $("#dge-drawer").classList.remove("open"); var s=$("#dge-settings"); if(s)s.classList.remove("open"); var c=$("#dge-chaptersModal"); if(c)c.classList.remove("open"); $("#dge-backdrop").classList.remove("open"); }
 
   /* ---------- wire ---------- */
   // The sticky header wraps onto 2-3 rows on a narrow phone (its many
@@ -394,16 +460,30 @@
     $("#dge-nextBtn").addEventListener("click",function(){ goNav(1); });
     $("#dge-prevBtnTop").addEventListener("click",function(){ goNav(-1); });
     $("#dge-nextBtnTop").addEventListener("click",function(){ goNav(1); });
-    var navBtn=$("#dge-navModeBtn");
-    if(navBtn){
-      navBtn.classList.toggle("on", state.navMode==="kaumudi");
-      navBtn.addEventListener("click",function(){
-        state.navMode = state.navMode==="kaumudi" ? "ashtadhyayi" : "kaumudi";
-        LS.set("navMode", state.navMode);
-        navBtn.classList.toggle("on", state.navMode==="kaumudi");
-        renderHero();
-      });
-    }
+    var dn=$("#dge-dualnav");
+    if(dn) dn.addEventListener("click",function(e){
+      var b=e.target.closest("[data-nav]"); if(!b) return;
+      switch(b.dataset.nav){
+        case "ak-prev": stepOrder("ashtadhyayi",-1); break;
+        case "ak-next": stepOrder("ashtadhyayi",1); break;
+        case "ak-mode": setNavMode("ashtadhyayi"); break;
+        case "sk-prev": stepOrder("kaumudi",-1); break;
+        case "sk-next": stepOrder("kaumudi",1); break;
+        case "sk-mode": setNavMode("kaumudi"); break;
+        case "chapters": openChapters(); break;
+      }
+    });
+    var chm=$("#dge-chaptersModal");
+    if(chm) chm.addEventListener("click",function(e){
+      if(e.target.id==="dge-chaptersClose"){ closeAll(); return; }
+      var r=e.target.closest(".chp-row"); if(!r) return;
+      var id=r.dataset.first;
+      if(id && state.byId[id]){
+        closeAll();
+        if(state.navMode!=="kaumudi") setNavMode("kaumudi");
+        go(state.sutras.indexOf(state.byId[id]));
+      }
+    });
     var pc=$("#dge-pcBtn"); if(pc) pc.addEventListener("click",function(){
       var pn=$("#dge-analysis"); if(!pn) return;
       var open=pn.classList.toggle("open"); pc.classList.toggle("on",open); });
@@ -415,9 +495,32 @@
     // Now any separator works (1-1-1, 1 1 1, 1,1,1), a partial reference goes
     // to the start of that adhyaya or pada, and a miss says so.
     var jump=$("#dge-jump");
+    // Devanagari digits are typed here too (the datalist is in Devanagari on
+    // some keyboards); normalize both directions once.
+    function asciiDigits(s){ return s.replace(/[\u0966-\u096f]/g,function(d){ return "\u0966\u0967\u0968\u0969\u096a\u096b\u096c\u096d\u096e\u096f".indexOf(d); }); }
     function findSutraMatch(raw){
-      raw=(raw||"").trim();
+      raw=asciiDigits((raw||"").trim());
       if(!raw) return null;
+      // "sk 350" / "k350" / "\u0915 \u0969\u096b\u0966" / "\u0915\u094c\u092e\u0941\u0926\u0940 350" jumps by Siddhanta
+      // Kaumudi position; "lsk 32"/"\u0932\u0918\u0941 32" by Laghu-Kaumudi position.
+      var m=raw.match(/^(?:lsk|\u0932\u0918\u0941(?:\u0915\u094c\u092e\u0941\u0926\u0940)?)\s*[\.\-#]?\s*(\d{1,4})$/i);
+      if(m){
+        var ln=+m[1];
+        for(var li=0;li<state.kaumudi.list.length;li++){
+          var le=state.kaumudi.byId[state.kaumudi.list[li]];
+          if(le && le.laghu===ln) return state.byId[state.kaumudi.list[li]];
+        }
+        return null;
+      }
+      m=raw.match(/^(?:sk|k|\u0915|\u0915\u094c\u092e\u0941\u0926\u0940)\s*[\.\-#]?\s*(\d{1,4})$/i);
+      if(m){
+        var kn=+m[1];
+        for(var ki=0;ki<state.kaumudi.list.length;ki++){
+          var keid=state.kaumudi.list[ki];
+          if(state.kaumudi.byId[keid].kaumudiIndex===kn) return state.byId[keid];
+        }
+        return null;
+      }
       var parts=raw.replace(/[\s,\-\u2013\u2014\u0964|]+/g,".").split(".").filter(Boolean);
       var bad=parts.some(function(x){ return !/^\d+$/.test(x); });
       if(bad||!parts.length) return null;
