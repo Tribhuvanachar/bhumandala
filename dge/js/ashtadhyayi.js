@@ -1,15 +1,19 @@
 /* ==========================================================================
- * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.3.0
+ * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.5.0
  *   v1.2.0 — Stream 5: +Siddhānta-Kaumudī, +Mahābhāṣya, +Vasu(Eng) layers;
  *            padaccheda / anvaya / anuvṛtti / adhikāra / sūtra-type analysis panel.
  *   v1.2.1 — re-applied the shared DGEGemini client to askGemini() (Stream 5's
  *            delivery predated it and had reverted to a raw fetch call).
  *   v1.2.2 — aiLang now defaults from the main reader's onboarding language
  *            preference (dge_lang_pref) instead of always starting at "en".
- *   v1.3.0 — Siddhānta-Kaumudī reading-order navigation (partial: only the
- *            ~28% of sutras whose Kaumudi citation matches this repo's own
- *            sutrapatha text exactly, see kaumudi_order/data.json), plus a
- *            per-sutra "cited as Kaumudi #N" badge whenever it's known.
+ *   v1.3.0 — Siddhānta-Kaumudī reading-order navigation (was partial, ~28%).
+ *   v1.4.0 — full SK mapping (3961/3962, kaumudi_order v2): dual-order
+ *            header (AK ‹› | कौमुदी ‹›), 70-prakarana drawer, LSK badge,
+ *            jump box takes "sk 350"/"lsk 32".
+ *   v1.5.0 — anuvritti/adhikara as tappable jumps + forward traces
+ *            (governs-through / carried-into); SK self-citations
+ *            (<{SK354}> raw markup) rendered as live कौमुदी links;
+ *            corpus-usage search button; ✏️ sutra-correction report.
  *
  * Blended Read⇄Compare UI for the Paninian sutrapatha + commentary layers
  * (Kashika / Balamanorama / Tattvabodhini / Nyasa), with a REAL Gemini
@@ -300,6 +304,28 @@
   }
   function arow(label, val){ return '<div class="an-row"><div class="an-k">'+label+'</div><div class="an-v">'+val+'</div></div>'; }
   function nl2br(s){ return s.replace(/\n/g,"<br>"); }
+  // The Siddhanta-Kaumudi text cites itself as raw <{SK354}> markers (and
+  // Unadi as <{उ...}>) — 748 sutras' worth rendered as literal markup
+  // until now. With the full SK mapping in hand they become live jumps:
+  // कौमुदी-३५४ opens the sutra holding that Kaumudi position. Runs on the
+  // ALREADY-ESCAPED text, so the pattern matches &lt;{SK354}&gt;.
+  function idByKaumudi(n){
+    for(var i=0;i<state.kaumudi.list.length;i++){
+      var id=state.kaumudi.list[i];
+      if(state.kaumudi.byId[id].kaumudiIndex===n) return id;
+    }
+    return null;
+  }
+  function linkSkRefs(escaped){
+    return escaped
+      .replace(/&lt;\{SK(\d+)\}(?:&gt;|>)/g, function(_, n){
+        var target=idByKaumudi(+n);
+        return target
+          ? '<button class="sk-ref" data-goto="'+esc(target)+'" title="सिद्धान्तकौमुद्याम् #'+n+' — '+esc(target)+'">कौमुदी-'+devnum(n)+'</button>'
+          : '<span class="sk-ref sk-ref-plain">कौमुदी-'+devnum(n)+'</span>';
+      })
+      .replace(/&lt;\{(उ[^}]*)\}(?:&gt;|>)/g, '<span class="sk-ref sk-ref-plain">$1</span>');
+  }
   function cardHTML(folder){
     var m=META[folder], row=state.sutras[state.idx], L=state.layers[folder];
     var isEn = m.lang==="en";
@@ -309,7 +335,7 @@
     if(!L||(!L.loaded&&L.loading)) body='<span class="dge-skel"></span><span class="dge-skel"></span><span class="dge-skel" style="width:70%"></span>';
     else if(L&&L.error) body='<span class="dge-more">could not load '+folder+'</span>';
     else { var it=L&&L.byId[row.id];
-      if(it){ body=nl2br(esc(isEn ? it.sanskrit_text : tl(it.sanskrit_text))); hasText=true; }
+      if(it){ body=linkSkRefs(nl2br(esc(isEn ? it.sanskrit_text : tl(it.sanskrit_text)))); hasText=true; }
       else body='<span class="dge-more">— no '+m.sub+' on this sutra —</span>'; }
     var lic = (L&&L.byId[row.id])?('layer: '+m.sub+' · '+m.role+' · ref → sutrapatha/'+row.id):'';
     return '<article class="dge-card '+(col?'collapsed':'')+'" data-c="'+folder+'" style="--tag:'+m.tag+'">'
@@ -538,6 +564,12 @@
       var b=e.target.closest(".an-ref"); if(!b) return;
       var id=b.dataset.id;
       if(id && state.byId[id]){ $("#dge-analysis").classList.add("open"); go(state.sutras.indexOf(state.byId[id])); }
+    });
+    // Kaumudi self-citations inside the SK layer's text (linkSkRefs).
+    var lay=$("#dge-layers"); if(lay) lay.addEventListener("click",function(e){
+      var b=e.target.closest(".sk-ref[data-goto]"); if(!b) return;
+      var id=b.dataset.goto;
+      if(state.byId[id]) go(state.sutras.indexOf(state.byId[id]));
     });
     var wex=$("#dge-whatBtn"); if(wex) wex.addEventListener("click",function(){
       var el=$("#dge-chips"); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); });

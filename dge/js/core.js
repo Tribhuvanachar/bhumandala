@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.9 (dgeNormalizeGranthaData: flat items fall back through samhita_patha -> sanskrit_text -> text for `sa`, and prefer item.reference for vedicId over a bare id -- needed for grantha_mula_text/grantha_tika_text/generic-schema and English-only (Ganguli) items alike; passes through item.gemini_enrichment as shloka.geminiEnrichment for footnote-engine.js)';
+window.DGE_VERSIONS['core.js'] = 'v3.10 (dgeStripEditionMarkers: GRETIL page markers -- transliterated \"(I,1, p. 37)\" parentheticals, 357 of them, all in smriti_dharma -- stripped at render time; previous: v3.9 flat-items sa fallback)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -298,6 +298,19 @@ function dgeSanitizeVedicAccents(text) {
     .replace(/\u1CD9/g, '\u0952'); // VEDIC TONE ... INDEPENDENT SVARITA (used for grave) -> DEVANAGARI STRESS SIGN ANUDATTA
 }
 
+// The GRETIL smriti imports carry the source edition's own page markers,
+// transliterated wholesale into Devanagari -- "(\u0907,\u0967, \u092A\u094D. \u0969\u096D)" is "(I,1,
+// p. 37)" -- 357 of them, every one confined to dge/data/smriti_dharma
+// (measured across the whole corpus before writing this, so the pattern
+// can afford to be narrow: a parenthesis containing p+virama+dot and
+// digits, the page abbreviation no verse ever contains). Stripped at
+// render time so the stored data keeps mirroring its source.
+function dgeStripEditionMarkers(text) {
+  if (!text || text.indexOf('\u092A\u094D.') === -1) return text;
+  return text.replace(/\s*\([^()]{0,40}\u092A\u094D\.\s*[\u0966-\u096F0-9]+[^()]{0,25}\)/g, '')
+             .replace(/[ \t]+([\u0964\u0965])/g, ' $1').replace(/\s{2,}/g, ' ').trim();
+}
+
 function dgeNormalizeGranthaData(data, granthaTitle) {
   if (!data) return data;
   if (data.shlokas) return data; // already the expected shape (e.g. PNS) -- nothing to do
@@ -375,7 +388,7 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         });
         if (Object.keys(commentaries).length) shlokasWithCommentaries++;
         shlokas[n] = {
-          sa: dgeSanitizeVedicAccents(v.sanskrit_text || v.sa || ''),
+          sa: dgeStripEditionMarkers(dgeSanitizeVedicAccents(v.sanskrit_text || v.sa || '')),
           vedicId: chapter.reference ? (chapter.reference + (v.number != null ? ' · ' + v.number : '')) : '',
           commentaries: commentaries,
           geminiEnrichment: v.gemini_enrichment || null
@@ -433,7 +446,7 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         // found the same way as sanskrit_text above: confirmed live, 16
         // already-shipped translation_ganguli files (1,577 items) all
         // rendering blank against this exact gap.
-        sa: dgeSanitizeVedicAccents(item.samhita_patha || item.sanskrit_text || item.text || item.sa || ''),
+        sa: dgeStripEditionMarkers(dgeSanitizeVedicAccents(item.samhita_patha || item.sanskrit_text || item.text || item.sa || '')),
         // Same importer's items carry a human-readable "reference" (e.g.
         // "Yāska — Nirukta, adhyaya 1") alongside the bare slug id --
         // prefer it, matching the itihasa_purana_text branch above which
