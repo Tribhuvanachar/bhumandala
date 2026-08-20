@@ -451,6 +451,36 @@ function dgeRenderWhatsNew() {
   if (typeof openModal === 'function') openModal('whatsNewModal');
 }
 
+// Structured, machine-parseable feedback report — same "open the visitor's
+// own email app" pattern as sendTypoReport below (no backend on a static
+// site to receive anything else), but with a fixed subject TAG and a
+// strict key:value body instead of free text. The tag is what lets a
+// future scheduled process tell "one of our own auto-generated reports"
+// apart from an ordinary email in the same inbox and safely ignore
+// everything else — see dge/PENDING.md's automated-triage design note for
+// the full reasoning (only CONTENT corrections matching this exact shape
+// are ever eligible for unattended handling; anything else, including any
+// request that reads as changing behavior rather than fixing a data gap,
+// is routed to a human-reviewed GitHub issue instead, never auto-merged).
+window.DGE_FEEDBACK_TAG = '[DGE-CONTENT-GAP]';
+window.dgeReportMissingForm = function(surface, context) {
+  const email = (typeof appConfig !== 'undefined' && appConfig.contactEmail) ? appConfig.contactEmail : 'sanatanavidyagurukulam@gmail.com';
+  const subject = encodeURIComponent(`${window.DGE_FEEDBACK_TAG} missing-form — ${surface}`);
+  const lines = [
+    `Type: missing-form`,
+    `Surface: ${surface}`,
+    `Context: ${context || '(unspecified)'}`,
+    `Page: ${window.location.href}`,
+    `Timestamp: ${new Date().toISOString()}`,
+    ``,
+    `(Auto-filled by the DGE word-tool's "report this as missing" link —`,
+    ` edit this body if you want to add more detail, but keep the`,
+    ` Type/Surface/Context/Page lines above intact so it can still be`,
+    ` matched automatically.)`
+  ];
+  window.location.href = `mailto:${email}?subject=${subject}&body=${encodeURIComponent(lines.join('\n'))}`;
+};
+
 window.sendTypoReport = function() {
   const shlokaEl = document.getElementById('reportTypoShloka');
   const detailsEl = document.getElementById('reportTypoDetails');

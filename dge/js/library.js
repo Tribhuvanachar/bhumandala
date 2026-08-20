@@ -375,7 +375,28 @@ window.dgeQuickJump = function(text) {
   return true;
 };
 
+// A handful of taxonomy leaves are not shloka-shaped at all (a root/word
+// list, not verses) and have their own dedicated browser/search page
+// instead of being readable through the general reader. Opening one of
+// these via the normal ?path= route fed dge/index.html data it has no
+// renderer for — the library entry existed and looked clickable, but
+// nothing ever appeared ("Dhatu Patha... is not loading"). Keyed by the
+// realSlug PREFIX so a future sibling under the same folder is covered
+// without a new entry.
+const DGE_SPECIAL_PAGES = [
+  { prefix: 'vedanga/vyakarana/dhatupatha', page: 'dhatu.html' },
+  { prefix: 'vedanga/vyakarana/shabdapatha', page: 'shabda.html' }
+];
+function dgeSpecialPageFor(realSlug) {
+  const hit = DGE_SPECIAL_PAGES.find(function (e) {
+    return realSlug === e.prefix || realSlug.indexOf(e.prefix + '/') === 0;
+  });
+  return hit ? hit.page : null;
+}
+
 window.dgeGoToGrantha = function(slug) {
+  const special = dgeSpecialPageFor(slug);
+  if (special) { window.location.href = special; return; }
   // Grantha slugs are always plain lowercase letters, digits, underscores,
   // and slashes by design (see taxonomy.json) — none of that needs
   // percent-encoding, and encodeURIComponent turning every "/" into

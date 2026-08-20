@@ -170,16 +170,35 @@
     });
     if (view === 'krdanta') {
       root.innerHTML = headerHtml(d) + '<h2 class="pk-h2 deva">कृदन्तरूपाणि</h2>' + krtHtml(d);
+      function openKrt(i) {
+        const b = root.querySelector('[data-krt="' + i + '"]');
+        const body = document.getElementById('pk-krt-' + i);
+        if (!b || !body) return;
+        if (body.hidden) { body.innerHTML = stepsHtml(d.krt[i].s); body.hidden = false; }
+        b.classList.add('open');
+      }
       root.addEventListener('click', function (ev) {
         const b = ev.target.closest('[data-krt]');
         if (!b) return;
         const i = +b.getAttribute('data-krt');
         const body = document.getElementById('pk-krt-' + i);
         if (!body) return;
-        if (body.hidden) { body.innerHTML = stepsHtml(d.krt[i].s); body.hidden = false; }
-        else body.hidden = true;
-        b.classList.toggle('open', !body.hidden);
+        if (body.hidden) { openKrt(i); }
+        else { body.hidden = true; b.classList.remove('open'); }
       });
+      // A deep link (from shabda.js's kṛt-form fallback, via
+      // tools/build_krt_form_index.py's reverse index) names the exact
+      // kṛt pratyaya to open — e.g. लभ्यः resolves to "yat".
+      if (wantKey) {
+        const i = d.krt.findIndex(function (k) { return k.k === wantKey; });
+        if (i !== -1) {
+          openKrt(i);
+          const b = root.querySelector('[data-krt="' + i + '"]');
+          b.classList.add('pk-deep-hl');
+          b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setTimeout(function () { b.classList.remove('pk-deep-hl'); }, 2600);
+        }
+      }
       return;
     }
 

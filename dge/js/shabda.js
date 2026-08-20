@@ -156,6 +156,63 @@
     return true;
   }
 
+  // A form the Śabdapāṭha (fixed nominal stems) genuinely has no entry for
+  // may still be a kṛdanta — a word DERIVED from a verb root (लभ्यः, from
+  // लभ्+यत्) that is grammatically correct but lives in a different
+  // database (tools/build_krt_form_index.py's reverse index over every
+  // root's kṛt-pratyaya forms). Checked before giving up entirely; a
+  // match redirects straight to the actual right page (krdanta.html)
+  // instead of leaving the reader on a nominal-stem browser that was
+  // never going to have this word.
+  function tryKrtFallback(surface){
+    var w=(surface||"").trim();
+    if(!w){ showNotFound(surface); return; }
+    var cp=w.codePointAt(0).toString(16).toLowerCase().padStart(4,"0");
+    fetch("data/vedanga/vyakarana/prakriya/krtindex/"+cp+".json").then(function(r){
+      return r.ok ? r.json() : null;
+    }).then(function(m){
+      var hit=m && m[w];
+      if(hit){ location.href="krdanta.html#"+hit.c+":"+hit.k; }
+      else { showNotFound(surface); }
+    }).catch(function(){ showNotFound(surface); });
+  }
+
+  // Previously this silently fell back to a plain substring search on the
+  // unmatched text, which could (and did — reported live, with a
+  // screenshot) match the query as a raw substring INSIDE an unrelated
+  // word's own declension table and open THAT as if it were the answer.
+  // An honest "not found" beats a confident-looking wrong one; the search
+  // box is left populated so the reader can still search manually if they
+  // want to, rather than being force-fed a guess.
+  function showNotFound(surface){
+    $("#sh-search").value=surface||"";
+    recompute();
+    render(true);
+    var box=$("#sh-list");
+    box.insertAdjacentHTML("afterbegin",
+      '<div class="empty">No exact form found for "'+esc(surface||"")+'". '+
+      'Showing the ordinary word list below — search manually, or '+
+      '<a href="#" id="sh-report-missing">report this as missing</a>.</div>');
+    var rep=$("#sh-report-missing");
+    if(rep) rep.addEventListener("click",function(e){
+      e.preventDefault();
+      // shabda.html is deliberately minimal (no modals.js/config.js) so
+      // this doesn't depend on window.dgeReportMissingForm (modals.js's
+      // version, for pages that already load it) — same template tag and
+      // field shape either way, kept in sync by hand since it's only a
+      // few lines. See modals.js's own copy for the full reasoning on why
+      // the shape matters (a future scheduled process matching only this
+      // exact tag+field format, everything else ignored or routed to a
+      // human).
+      if(typeof window.dgeReportMissingForm==="function"){ window.dgeReportMissingForm(surface,"shabda"); return; }
+      var email="sanatanavidyagurukulam@gmail.com";
+      var subject=encodeURIComponent("[DGE-CONTENT-GAP] missing-form — "+surface);
+      var lines=["Type: missing-form","Surface: "+surface,"Context: shabda","Page: "+location.href,
+        "Timestamp: "+new Date().toISOString()];
+      location.href="mailto:"+email+"?subject="+subject+"&body="+encodeURIComponent(lines.join("\n"));
+    });
+  }
+
   function boot(){
     if(LS.get("dark",false)) document.body.classList.add("dark");
     var ss=$("#sh-scriptSeg"); if(ss) ss.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on",b.dataset.s===state.script); });
@@ -172,7 +229,7 @@
       var sp=new URLSearchParams(location.search);
       var form0=sp.get("form"), q0=sp.get("q");
       if(form0 && openByForm(form0)) return; // exact-form deep link resolved; opened above
-      if(form0 && !q0) q0=form0; // no exact cell match — fall back to a plain search on the same text
+      if(form0){ tryKrtFallback(form0); return; } // may itself be async; renders its own state either way
       if(q0){ state.q=q0; $("#sh-search").value=q0; }
       recompute();
       var h0=hashId();
