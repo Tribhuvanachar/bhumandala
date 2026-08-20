@@ -6730,7 +6730,7 @@
     },
     {
       "path": "dge/data/vedanga/nirukta/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Nirukta"
     },
     {
@@ -8477,6 +8477,46 @@
       "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_yadupatyam/data.json",
       "populated": true,
       "title": "श्रीमन्न्यायसुधा — यादुपत्यम्"
+    },
+    {
+      "path": "dge/data/vedanga/vrittaratnakara/data.json",
+      "populated": true,
+      "title": "Vrittaratnakara"
+    },
+    {
+      "path": "dge/data/upaveda/kamashastra/kamasutra/data.json",
+      "populated": true,
+      "title": "Kamasutra"
+    },
+    {
+      "path": "dge/data/upaveda/kamashastra/pancashayaka/data.json",
+      "populated": true,
+      "title": "Pancashayaka"
+    },
+    {
+      "path": "dge/data/upaveda/kamashastra/smaradipika/data.json",
+      "populated": true,
+      "title": "Smaradipika"
+    },
+    {
+      "path": "dge/data/nitishastra/hitopadesha/data.json",
+      "populated": true,
+      "title": "Hitopadesha"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/bhavaprakasha_nighantu/data.json",
+      "populated": true,
+      "title": "Bhavaprakasha Nighantu"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/raja_nighantu/data.json",
+      "populated": true,
+      "title": "Raja Nighantu"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/vahata_ashtanganighantu/data.json",
+      "populated": true,
+      "title": "Vahata Ashtanganighantu"
     }
   ]
 }

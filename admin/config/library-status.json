@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1697,
-  "loaded": 968,
-  "items": 363985
+  "leaves": 1705,
+  "loaded": 977,
+  "items": 364060
  },
  "sections": {
   "agama": {
@@ -41,6 +41,11 @@
    "loaded": 0,
    "items": 0
   },
+  "nitishastra": {
+   "total": 1,
+   "loaded": 1,
+   "items": 5
+  },
   "purana": {
    "total": 92,
    "loaded": 24,
@@ -56,10 +61,15 @@
    "loaded": 0,
    "items": 0
   },
+  "upaveda": {
+   "total": 6,
+   "loaded": 6,
+   "items": 50
+  },
   "vedanga": {
-   "total": 104,
-   "loaded": 9,
-   "items": 28959
+   "total": 105,
+   "loaded": 11,
+   "items": 28979
   },
   "vedas": {
    "total": 121,
@@ -1417,6 +1427,7 @@
   "kavya_alankara/sumadhva_vijaya/sarga_9": 0,
   "misc/ajaya_vijayendra": 0,
   "misc/satyadhyana_tirtha_civil_suit": 0,
+  "nitishastra/hitopadesha": 5,
   "purana/agni_purana": 0,
   "purana/bhagavata_purana/skandha_01": 813,
   "purana/bhagavata_purana/skandha_02": 391,
@@ -1540,6 +1551,12 @@
   "stotra/gajendra_moksha": 0,
   "stotra/pns": 0,
   "stotra/vishnu_sahasranama": 0,
+  "upaveda/ayurveda/nighantu/bhavaprakasha_nighantu": 1,
+  "upaveda/ayurveda/nighantu/raja_nighantu": 35,
+  "upaveda/ayurveda/nighantu/vahata_ashtanganighantu": 1,
+  "upaveda/kamashastra/kamasutra": 7,
+  "upaveda/kamashastra/pancashayaka": 5,
+  "upaveda/kamashastra/smaradipika": 1,
   "vedanga/chandas": 0,
   "vedanga/jyotisha": 0,
   "vedanga/kalpa/atharvaveda/kaushika/grihyasutra": 0,
@@ -1584,7 +1601,7 @@
   "vedanga/kalpa/shukla_yajurveda/katyayana/shrautasutra": 0,
   "vedanga/kalpa/shukla_yajurveda/katyayana/shulbasutra": 0,
   "vedanga/kalpa/shukla_yajurveda/paraskara/grihyasutra": 0,
-  "vedanga/nirukta": 0,
+  "vedanga/nirukta": 14,
   "vedanga/shiksha/atharvaveda_shiksha/manduki_shiksha": 0,
   "vedanga/shiksha/paniniya_shiksha": 0,
   "vedanga/shiksha/pratishakhya/rigveda_pratishakhya": 0,
@@ -1625,6 +1642,7 @@
   "vedanga/shiksha/yajurveda_shikshas/shukla_yajurveda_shikshas/vasishthi_shiksha": 0,
   "vedanga/shiksha/yajurveda_shikshas/shukla_yajurveda_shikshas/yajnavalkya_shiksha": 0,
   "vedanga/shiksha/yajurveda_shikshas/shukla_yajurveda_shikshas/yajurvidhana_shiksha": 0,
+  "vedanga/vrittaratnakara": 6,
   "vedanga/vyakarana/aindra_school": 0,
   "vedanga/vyakarana/ashtadhyayi/balamanorama": 2944,
   "vedanga/vyakarana/ashtadhyayi/kashika": 3962,

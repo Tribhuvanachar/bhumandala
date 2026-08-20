@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.8 (dgeNormalizeGranthaData: flat items now fall back to sanskrit_text for `sa`, not just samhita_patha -- needed for grantha_mula_text/grantha_tika_text schemas; passes through item.gemini_enrichment as shloka.geminiEnrichment for footnote-engine.js)';
+window.DGE_VERSIONS['core.js'] = 'v3.8 (dgeNormalizeGranthaData: flat items now fall back to sanskrit_text for `sa` and prefer item.reference for vedicId, not just samhita_patha/id -- needed for grantha_mula_text/grantha_tika_text/generic schemas; passes through item.gemini_enrichment as shloka.geminiEnrichment for footnote-engine.js)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -418,12 +418,21 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         }
       });
       shlokas[n] = {
-        // samhita_patha/sa cover the vedic_text schema; sanskrit_text covers
-        // grantha_mula_text/grantha_tika_text/grantha_tippani_text (e.g. the
-        // dvaitavedanta/darshana commentary corpus), whose primary field
-        // this branch previously had no fallback for at all.
+        // schemas.json declares a different primaryTextField per schema --
+        // samhita_patha for vedic_text, sanskrit_text for generic and
+        // several others (see its own "primaryTextField" entries) -- but
+        // this branch only ever checked samhita_patha/sa. Any "generic"
+        // schema import (importers/gretil_bulk.py's group_items(), used by
+        // every sutra/vedanga entry in its registry) writes sanskrit_text,
+        // so every one of those would have rendered a blank verse the
+        // first time it was actually run. Caught before any such text
+        // shipped, not after.
         sa: dgeSanitizeVedicAccents(item.samhita_patha || item.sanskrit_text || item.sa || ''),
-        vedicId: item.id || '',
+        // Same importer's items carry a human-readable "reference" (e.g.
+        // "Yāska — Nirukta, adhyaya 1") alongside the bare slug id --
+        // prefer it, matching the itihasa_purana_text branch above which
+        // already prefers chapter.reference over a raw id.
+        vedicId: item.reference || item.id || '',
         // Traditional Ashtaka.Adhyaya.Varga.Rik reference — present only for
         // Rigveda Samhita data so far (see ashtaka_ref in the source data.json).
         ashtakaId: item.ashtaka_ref || '',
