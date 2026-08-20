@@ -28,12 +28,12 @@
   "tei_xml": "corpustei/",
   "marker_patterns": {
     "slash_book_chapter_verse": {
-      "regex": "//\\s*(?P<sig>[^\\s_]+)_(?P<ref1>[^,\\s]+),(?P<ref2>[^.\\s]+)\\.(?P<ref3>\\d+)(?P<pada>[a-d]{1,2})?\\s*//?",
+      "regex": "//\\s*(?P<sig>[^\\s_]+)_(?P<ref1>[^,\\s]+),(?P<ref2>[^.\\s]+)\\.(?P<ref3>\\d+)(?P<pada>[a-d]{1,2})?\\s*(?://)?",
       "example": "// ViP_1,1.2 //",
       "note": "book,chapter.verse wrapped in slashes; closing // is dropped in some plaintext transformations, so it is optional"
     },
     "slash_chapter_verse": {
-      "regex": "//\\s*(?P<sig>[^\\s_]+)_(?P<ref1>[^.\\s]+)\\.(?P<ref2>\\d+)(?P<pada>[a-d]{1,2})?\\s*//?",
+      "regex": "//\\s*(?P<sig>[^\\s_]+)_(?P<ref1>[^.\\s]+)\\.(?P<ref2>\\d+)(?P<pada>[a-d]{1,2})?\\s*(?://)?",
       "example": "// MarkP_7.69 //",
       "note": "flat chapter.verse, no book level"
     },
@@ -91,6 +91,22 @@
       "regex": "//\\s*(?P<ref1>\\d+)\\s*$",
       "example": "// 1",
       "note": "no siglum at all; flat verse numbering"
+    },
+    "bare_prefix_three_level": {
+      "regex": "(?<!\\d)(?P<ref1>\\d+)\\.(?P<ref2>\\d+)\\.(?P<ref3>\\d+)\\s+",
+      "style": "prefix",
+      "example": "1.1.1 dharmārtha-kāmebhyo namaḥ.",
+      "note": "no siglum, no slashes; adhikaraṇa.adhyāya.sūtra repeated inline within one giant physical line (Kāmasūtra: 1609 total occurrences, only 63 true ^-anchored), so \"style\": \"prefix\" forces prefix extraction without relying on ^ at all"
+    },
+    "slash_verse_only": {
+      "regex": "//\\s*(?P<sig>[^\\s_]+)_(?P<ref1>\\d+)\\s*(?://)?",
+      "example": "// minsd_1 //",
+      "note": "siglum + flat verse number, no chapter level; closing // optional (dropped in some transforms, e.g. VAnigh)"
+    },
+    "pipe_chapter_verse": {
+      "regex": "\\|\\|(?P<sig>[^\\s_]+)_(?P<ref1>\\d+)\\.(?P<ref2>\\d+)\\|\\|",
+      "example": "||panc_0.1||",
+      "note": "Pañcatantra's own convention: double PIPE, not double slash, no internal spaces"
     }
   },
   "texts": [
@@ -608,6 +624,112 @@
       "licence": "cc-by-nc-sa-4.0",
       "source_edition": "K. V. Sarma, Indian National Science Academy; input Oliver Hellwig",
       "note": "36 verses, ārca recension. The yājuṣa recension is NOT in GRETIL."
+    },
+    {
+      "id": "vrittaratnakara",
+      "name": "Kedārabhaṭṭa — Vṛttaratnākara",
+      "target": "vedanga/vrittaratnakara",
+      "unit": "adhyaya",
+      "schema": "generic",
+      "author": "केदारभट्टः",
+      "tei": "sa_kedArabhaTTa-vRttaratnAkara",
+      "marker": "slash_chapter_verse",
+      "complete": true,
+      "licence": "cc-by-nc-sa-4.0",
+      "source_edition": "ed. Kedāra Nātha Śarmā (Chaukhambha Sanskrit Sansthan, 1980)",
+      "note": "6 adhyāyas, 212 sūtra verses (mūla only, no commentary)."
+    },
+    {
+      "id": "kamasutra",
+      "name": "Vātsyāyana — Kāmasūtra",
+      "target": "upaveda/kamashastra/kamasutra",
+      "unit": "adhikarana",
+      "schema": "generic",
+      "author": "वात्स्यायनः",
+      "tei": "sa_vAtsyAyana-kAmasUtra",
+      "marker": "bare_prefix_three_level",
+      "complete": true,
+      "licence": "cc-by-nc-sa-4.0",
+      "source_edition": "ed. Fezas",
+      "note": "7 adhikaraṇas (mūla sūtras only). Grouped at adhikaraṇa level, not adhyāya -- the marker carries all three (adhikaraṇa.adhyāya.sūtra) but group_items() only splits on the first component."
+    },
+    {
+      "id": "pancashayaka",
+      "name": "Jyotirīśvara — Pañcaśāyaka",
+      "target": "upaveda/kamashastra/pancashayaka",
+      "unit": "sayaka",
+      "schema": "generic",
+      "author": "ज्योतिरीश्वरः",
+      "tei": "sa_jyotirIzvarakavizekhara-paJcasAyaka",
+      "marker": "slash_chapter_verse",
+      "complete": true,
+      "licence": "cc-by-nc-sa-4.0",
+      "note": "5 sāyakas (chapters)."
+    },
+    {
+      "id": "smaradipika",
+      "name": "Mīnanātha — Smaradīpikā",
+      "target": "upaveda/kamashastra/smaradipika",
+      "unit": "text",
+      "schema": "generic",
+      "author": "मीननाथः",
+      "tei": "sa_mInanAtha-smaradIpikA",
+      "marker": "slash_verse_only",
+      "complete": true,
+      "licence": "cc-by-nc-sa-4.0",
+      "note": "Flat verse numbering only, no chapter division -- one item for the whole text."
+    },
+    {
+      "id": "hitopadesha",
+      "name": "Nārāyaṇa — Hitopadeśa",
+      "target": "nitishastra/hitopadesha",
+      "unit": "section",
+      "schema": "generic",
+      "author": "नारायणः",
+      "tei": "sa_nArAyaNa-hitopadeza",
+      "marker": "slash_chapter_verse",
+      "complete": true,
+      "licence": "cc-by-nc-sa-4.0",
+      "note": "hit_0 (maṅgalācaraṇa/vidyāpraśaṃsā) through the four main sections."
+    },
+    {
+      "id": "bhavaprakasha_nighantu",
+      "name": "Bhāvamiśra — Bhāvaprakāśa Nighaṇṭu",
+      "target": "upaveda/ayurveda/nighantu/bhavaprakasha_nighantu",
+      "unit": "text",
+      "schema": "generic",
+      "author": "भावमिश्रः",
+      "tei": "sa_bhAvamizra-bhAvaprakAza",
+      "marker": "bare_verse_number",
+      "complete": false,
+      "licence": "cc-by-nc-sa-4.0",
+      "note": "GRETIL's own header says \"to be continued\" -- first vargas only (harītakyādi etc.), not the complete Nighaṇṭu. Flat verse numbering, no chapter marker -- one item for what GRETIL carries."
+    },
+    {
+      "id": "raja_nighantu",
+      "name": "Narahari — Rāja Nighaṇṭu",
+      "target": "upaveda/ayurveda/nighantu/raja_nighantu",
+      "unit": "varga",
+      "schema": "generic",
+      "author": "नरहरिः",
+      "tei": "sa_narahari-rAjanighaNTu",
+      "marker": "slash_chapter_verse",
+      "complete": true,
+      "licence": "cc-by-nc-sa-4.0",
+      "note": "rajni_m (maṅgalācaraṇa, alphabetic ref) then rajni_1 through rajni_27 (27 vargas) -- slash_chapter_verse's ref1 pattern accepts both."
+    },
+    {
+      "id": "vahata_ashtanganighantu",
+      "name": "Vāhaṭa — Aṣṭāṅganighaṇṭu",
+      "target": "upaveda/ayurveda/nighantu/vahata_ashtanganighantu",
+      "unit": "text",
+      "schema": "generic",
+      "author": "वाहटः",
+      "tei": "sa_vAhaTa-aSTAGganighaNTu",
+      "marker": "slash_verse_only",
+      "complete": true,
+      "licence": "cc-by-nc-sa-4.0",
+      "note": "Flat verse numbering (VAnigh_1, VAnigh_2, ...), no chapter division -- one item for the whole text. Closing // absent in this file; slash_verse_only's is optional."
     }
   ],
   "not_in_gretil": {

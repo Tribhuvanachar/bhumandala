@@ -1877,7 +1877,8 @@
    "_schema": "vedanga_chandas_vrutta_database"
   },
   "nirukta": {},
-  "jyotisha": {}
+  "jyotisha": {},
+  "vrittaratnakara": {}
  },
  "dasa_sahitya": {
   "_schema": "dasa_pada_text",
@@ -5316,6 +5317,25 @@
     }
    }
   }
+ },
+ "upaveda": {
+  "_note": "Traditional Upaveda (subsidiary Veda) subjects, distinct from the four Vedas proper and from vedanga. Placement decision made 20 Aug 2026 (was an open question in PENDING.md) -- Ayurveda and Kamashastra grouped here as their traditional classification; Nitishastra kept as its own separate top-level section below since it is not traditionally an Upaveda.",
+  "kamashastra": {
+   "kamasutra": {},
+   "pancashayaka": {},
+   "smaradipika": {}
+  },
+  "ayurveda": {
+   "nighantu": {
+    "bhavaprakasha_nighantu": {},
+    "raja_nighantu": {},
+    "vahata_ashtanganighantu": {}
+   }
+  }
+ },
+ "nitishastra": {
+  "_note": "Worldly-wisdom/statecraft texts -- deliberately its own section rather than folded into kavya_alankara (which already held the Bhartrihari shatakas somewhat awkwardly, per the same 20 Aug placement decision noted under upaveda above).",
+  "hitopadesha": {}
  },
  "misc": {
   "_schema": "grantha_mula_text",
