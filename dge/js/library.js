@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.0 (Library Manager curation overrides — hide/pin/reorder/rename/move, non-destructive; numeral localization for titles that mix Devanagari + ASCII digits)';
+window.DGE_VERSIONS['library.js'] = 'v3.1 (dgeQuickJump falls back to fuzzy folder/section-name matching against the library catalog when the abbreviation-pattern parser misses -- e.g. "mahabharata sabha parva" or "kamasutra" -- instead of just failing silently)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -361,18 +361,65 @@ window.openLibraryModal = async function() {
 // data (see the jumpVedicId/jumpShloka handling in core.js) — a full
 // navigation is unavoidable here since the target grantha's data isn't
 // loaded yet at the point this runs.
+// Folder/section-name fallback for Quick Jump — e.g. typing "mahabharata
+// sabha parva" or "chandas" with no verse number at all. Titles in
+// library.json are NOT reliably searchable text: many are Devanagari
+// (महाभारतम् आदिपर्व), some are plain English (Ganguli's own titles),
+// depending on which importer wrote them — but every grantha's realSlug
+// (its taxonomy path, e.g. "itihasa/mahabharata/adi_parva/mula") is
+// always plain ASCII, underscore-separated. Matching against a
+// normalized form of THAT, not the display title, is what makes this
+// work regardless of which script the title happens to be in.
+function dgeNormalizeForMatch(s) {
+  return String(s || '').toLowerCase().replace(/[_/]+/g, ' ').replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ').trim();
+}
+async function dgeFuzzyMatchGrantha(text) {
+  const q = dgeNormalizeForMatch(text);
+  if (!q) return null;
+  const library = await (window.dgeLibraryCatalogPromise || Promise.resolve(null));
+  if (!library || !Array.isArray(library.granthas)) return null;
+  const qWords = q.split(' ').filter(Boolean);
+  let best = null, bestScore = -1;
+  library.granthas.forEach(function (g) {
+    if (!g.populated) return;
+    const realSlug = window.dgeGranthaSlug(g.path);
+    const hay = dgeNormalizeForMatch(realSlug + ' ' + (g.title || ''));
+    if (!hay) return;
+    // Every query word must appear somewhere in the slug/title text —
+    // "mahabharata sabha" should not match a grantha whose path only
+    // mentions one of the two words. Score favors an exact whole-slug
+    // match, then a shorter/more-specific matching slug (a leaf beats a
+    // whole section sharing the same prefix).
+    const allWordsPresent = qWords.every(function (w) { return hay.indexOf(w) !== -1; });
+    if (!allWordsPresent) return;
+    let score = 100 - Math.min(99, hay.length - q.length);
+    if (hay === q) score += 1000;
+    else if (hay.indexOf(q) === 0) score += 200;
+    if (score > bestScore) { bestScore = score; best = realSlug; }
+  });
+  return best;
+}
+
 window.dgeQuickJump = function(text) {
   const target = (typeof window.dgeParseQuickSearchQuery === 'function') ? window.dgeParseQuickSearchQuery(text) : null;
-  if (!target) {
-    if (typeof showToast === 'function') showToast('Not recognized — try e.g. "rv1.1.3" or "pns5".');
-    return false;
+  if (target) {
+    const readableSlug = /^[a-z0-9_/]+$/i.test(target.granthaPath) ? target.granthaPath : encodeURIComponent(target.granthaPath);
+    let url = window.location.pathname + '?path=' + readableSlug;
+    if (target.vedicId) url += '&jumpVedicId=' + encodeURIComponent(target.vedicId);
+    else if (target.shlokaNumber) url += '&jumpShloka=' + target.shlokaNumber;
+    window.location.href = url;
+    return true;
   }
-  const readableSlug = /^[a-z0-9_/]+$/i.test(target.granthaPath) ? target.granthaPath : encodeURIComponent(target.granthaPath);
-  let url = window.location.pathname + '?path=' + readableSlug;
-  if (target.vedicId) url += '&jumpVedicId=' + encodeURIComponent(target.vedicId);
-  else if (target.shlokaNumber) url += '&jumpShloka=' + target.shlokaNumber;
-  window.location.href = url;
-  return true;
+  // Not a recognized "abbrev + verse number" pattern (e.g. "rv1.1.3") —
+  // try matching it as a folder/section/grantha name instead before
+  // giving up. Async, so this path can't return true/false synchronously
+  // the way the pattern-match path above does; it resolves the
+  // navigation (or the "not recognized" toast) itself.
+  dgeFuzzyMatchGrantha(text).then(function (slug) {
+    if (slug) { window.dgeGoToGrantha(slug); return; }
+    if (typeof showToast === 'function') showToast('Not recognized — try e.g. "rv1.1.3", "pns5", or a section name like "mahabharata sabha parva".');
+  });
+  return false;
 };
 
 // A handful of taxonomy leaves are not shloka-shaped at all (a root/word
