@@ -6730,7 +6730,7 @@
     },
     {
       "path": "dge/data/vedanga/nirukta/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Nirukta"
     },
     {
