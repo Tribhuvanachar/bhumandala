@@ -121,6 +121,7 @@
     // search box as the literal string "[object PointerEvent]".
     fab.onclick = function () { open(); };
     document.body.appendChild(fab);
+    if (typeof window.dgeMakeFloatingDraggable === 'function') window.dgeMakeFloatingDraggable(fab, 'globalSearch');
 
     var ov = document.createElement('div');
     ov.className = 'dge-gs-overlay';
