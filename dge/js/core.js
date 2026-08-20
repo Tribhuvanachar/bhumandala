@@ -252,7 +252,19 @@ document.addEventListener('DOMContentLoaded', () => {
       'font-size:12px; padding:10px 14px; text-align:center; line-height:1.4;';
     bar.innerHTML = 'Cached page detected — some features will misbehave.<br>' +
       '<b style="text-decoration:underline;">Tap here to reload</b>';
-    bar.onclick = () => location.reload(true);
+    // location.reload(true)'s "force" argument is a Netscape-era relic no
+    // current browser honours — it behaves identically to a plain reload(),
+    // which is exactly the reload that got the reader stuck on this stale
+    // page in the first place (a normal reload can still be answered from
+    // cache; that's the whole bug this banner exists to catch). Navigating
+    // to a URL that has never been requested before — this same page plus a
+    // cache-busting query param — has no existing cache entry to be
+    // answered from, so it is guaranteed to reach the network.
+    bar.onclick = () => {
+      const url = new URL(location.href);
+      url.searchParams.set('_dgev', Date.now().toString());
+      location.href = url.toString();
+    };
     document.body.appendChild(bar);
   }
 });
