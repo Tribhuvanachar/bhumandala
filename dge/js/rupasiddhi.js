@@ -197,9 +197,10 @@
       var codeHtml = isSutra
         ? '<span class="dge-sutra-ref rs-code" data-sutra="' + esc(code) + '" role="button" tabindex="0">' + esc(code) + '</span>'
         : '<span class="rs-code rs-code-plain">' + esc((RULE_SRC[src] || src) + ' ' + code) + '</span>';
-      var terms = st.result.map(function (t) {
-        return '<span class="' + (t.wasChanged ? 'rs-t-chg' : 'rs-t') + ' deva">' + esc(deva(t.text)) + '</span>';
-      }).join('<span class="rs-plus">+</span>');
+      var terms = st.result.filter(function (t) { return t.text; })
+        .map(function (t) {
+          return '<span class="' + (t.wasChanged ? 'rs-t-chg' : 'rs-t') + ' deva">' + esc(deva(t.text)) + '</span>';
+        }).join('<span class="rs-plus">+</span>');
       return '<li>' + codeHtml + '<span class="rs-terms">' + terms + '</span></li>';
     }).join('');
     return '<ol class="rs-steps">' + rows + '</ol>';
