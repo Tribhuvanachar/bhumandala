@@ -63,7 +63,13 @@
       '.dge-gs-meta{font-size:12px;opacity:.7;display:flex;gap:8px;flex-wrap:wrap}',
       '.dge-gs-snip{font-size:16px;margin-top:2px;line-height:1.5}',
       '.dge-gs-hl{background:rgba(232,178,77,.4);color:inherit;border-radius:3px;padding:0 1px;font-weight:700}',
-      '.dge-gs-hint{padding:14px;opacity:.6;font-size:13px}'
+      '.dge-gs-hint{padding:14px;opacity:.6;font-size:13px}',
+      '.dge-gs-pills{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 14px 4px;border-bottom:1px dashed var(--card-border,rgba(0,0,0,.08))}',
+      '.dge-gs-pill{border:1px solid var(--card-border,rgba(0,0,0,.2));background:var(--card-bg,#fff);color:var(--text-primary,inherit);border-radius:999px;padding:5px 11px;font:inherit;font-size:12.5px;cursor:pointer;min-height:32px}',
+      '.dge-gs-pill.on{background:var(--accent-red,#7a3b1d);border-color:var(--accent-red,#7a3b1d);color:#fff}',
+      '.dge-gs-pill small{opacity:.7;font-size:10.5px}',
+      '.dge-gs-pillsep{width:1px;align-self:stretch;background:var(--card-border,rgba(0,0,0,.15));margin:2px 2px}',
+      '.dge-gs-kw{flex:1;min-width:120px;border:1px solid var(--card-border,rgba(0,0,0,.2));background:var(--card-bg,#fff);color:var(--text-primary,inherit);border-radius:999px;padding:6px 12px;font:inherit;font-size:12.5px}'
     ].join('\n');
     document.head.appendChild(s);
   }
@@ -184,7 +190,15 @@
   }
 
   function go(slug, unit) {
-    var p = window.location.pathname + '?path=' + slug;
+    // ?path= is the READER's contract. From any other page carrying this
+    // search (ashtadhyayi.html since the corpus-usage button), the result
+    // must open in the reader — page-relative navigation would produce
+    // ashtadhyayi.html?path=..., which that page ignores.
+    var path = window.location.pathname;
+    if (!/\/(index\.html)?$/.test(path)) {
+      path = path.replace(/[^/]*$/, 'index.html');
+    }
+    var p = path + '?path=' + slug;
     if (unit) p += '&jumpShloka=' + encodeURIComponent(unit);
     window.location.href = p;
   }
@@ -196,7 +210,12 @@
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
       p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30 }, queryOpts(q))); })
-       .then(function (hits) { render(hits, q); }).catch(function () {});
+       .then(function (hits) {
+         // a fresh query starts unfiltered; the keyword box's own value
+         // survives (the reader typed it deliberately)
+         filt.kind = ''; filt.cat = '';
+         render(hits, q);
+       }).catch(function () {});
     }, 140);
   }
 
@@ -253,9 +272,49 @@
     });
   }
 
+  // Post-search filters (the pills row): results already in hand are
+  // narrowed client-side — by kind (mula text vs commentary, told apart by
+  // the grantha slug's own naming), by category, and by extra
+  // comma-separated keywords the reader types. Nothing re-queries.
+  var lastHits = null, lastQ = '';
+  var filt = { kind: '', cat: '', kw: '' };
+  var COMMENTARY_SLUG = /(tika|bhashya|bhasya|vyakhya|tippani|vritti|vivriti|anuvada|translation|panjika)/i;
+  function applyFilters(hits) {
+    return hits.filter(function (h) {
+      if (filt.kind === 'mula' && COMMENTARY_SLUG.test(h.grantha)) return false;
+      if (filt.kind === 'vyakhya' && !COMMENTARY_SLUG.test(h.grantha)) return false;
+      if (filt.cat && (h.category || (h.grantha || '').split('/')[0]) !== filt.cat) return false;
+      if (filt.kw) {
+        var hay = ((h.title || '') + ' ' + (h.snippet || '') + ' ' + h.grantha).toLowerCase();
+        var terms = filt.kw.toLowerCase().split(',').map(function (t) { return t.trim(); }).filter(Boolean);
+        for (var i = 0; i < terms.length; i++) if (hay.indexOf(terms[i]) === -1) return false;
+      }
+      return true;
+    });
+  }
+  function pillsHtml(hits) {
+    var cats = {};
+    hits.forEach(function (h) {
+      var c = h.category || (h.grantha || '').split('/')[0];
+      if (c) cats[c] = (cats[c] || 0) + 1;
+    });
+    var catBtns = Object.keys(cats).sort(function (a, b) { return cats[b] - cats[a]; })
+      .slice(0, 8).map(function (c) {
+        return '<button class="dge-gs-pill' + (filt.cat === c ? ' on' : '') + '" data-f="cat" data-v="' + esc(c) + '">' + esc(c) + ' <small>' + cats[c] + '</small></button>';
+      }).join('');
+    return '<div class="dge-gs-pills">' +
+      '<button class="dge-gs-pill' + (!filt.kind ? ' on' : '') + '" data-f="kind" data-v="">All</button>' +
+      '<button class="dge-gs-pill' + (filt.kind === 'mula' ? ' on' : '') + '" data-f="kind" data-v="mula">मूलग्रन्थाः</button>' +
+      '<button class="dge-gs-pill' + (filt.kind === 'vyakhya' ? ' on' : '') + '" data-f="kind" data-v="vyakhya">व्याख्याः</button>' +
+      '<span class="dge-gs-pillsep"></span>' + catBtns +
+      '<input class="dge-gs-kw" id="dge-gs-kw" placeholder="narrow: word, word…" value="' + esc(filt.kw) + '">' +
+      '</div>';
+  }
   function render(hits, q) {
     var box = document.getElementById('dge-gs-results');
-    if (!hits || !hits.length) { box.innerHTML = '<div class="dge-gs-hint">No matches.</div>'; return; }
+    if (!hits || !hits.length) { box.innerHTML = '<div class="dge-gs-hint">No matches.</div>'; lastHits = null; return; }
+    lastHits = hits; lastQ = q;
+    var shown = applyFilters(hits);
     // A common word matches most of the corpus; the search stops after the
     // best few dozen granthas rather than opening all of them. Say so, so a
     // reader does not take a capped list for the whole of it.
@@ -264,11 +323,18 @@
         ' strongest few dozen texts rather than opening the whole library.' +
         ' A longer phrase narrows it.</div>'
       : '';
-    box.innerHTML = note + hits.map(function (h) {
+    if (!shown.length) {
+      box.innerHTML = pillsHtml(hits) + note +
+        '<div class="dge-gs-hint">Nothing left after the filters — clear a pill above.</div>';
+      wirePills(box);
+      return;
+    }
+    box.innerHTML = pillsHtml(hits) + note + shown.map(function (h) {
       return '<div class="dge-gs-row" data-slug="' + esc(h.grantha) + '" data-unit="' + esc(h.unit) + '">' +
         '<div class="dge-gs-meta"><b>' + esc(h.title) + '</b><span>' + esc(h.unit) + '</span><span>' + esc(h.category) + '</span><span>' + h.score.toFixed(2) + '</span></div>' +
         '<div class="dge-gs-snip">' + highlightSnippet(esc(centerSnippet(h.snippet, q)), q) + '</div></div>';
     }).join('');
+    wirePills(box);
     Array.prototype.forEach.call(box.querySelectorAll('.dge-gs-row'), function (row) {
       row.onclick = function (ev) {
         // A sutra reference inside the snippet (wired below) opens its own
@@ -283,6 +349,33 @@
     // was Kosha-only; global corpus search snippets never got this.
     if (typeof window.dgeScanForSutras === 'function') {
       try { window.dgeScanForSutras(box); } catch (e) {}
+    }
+  }
+
+  function wirePills(box) {
+    Array.prototype.forEach.call(box.querySelectorAll('.dge-gs-pill'), function (b) {
+      b.onclick = function () {
+        var f = b.getAttribute('data-f'), v = b.getAttribute('data-v');
+        if (f === 'cat') filt.cat = (filt.cat === v ? '' : v);
+        else filt[f] = v;
+        if (lastHits) render(lastHits, lastQ);
+      };
+    });
+    var kw = box.querySelector('#dge-gs-kw');
+    if (kw) {
+      var t = null;
+      kw.oninput = function () {
+        clearTimeout(t);
+        t = setTimeout(function () {
+          filt.kw = kw.value;
+          if (lastHits) {
+            var pos = kw.selectionStart;
+            render(lastHits, lastQ);
+            var kw2 = box.querySelector('#dge-gs-kw');
+            if (kw2) { kw2.focus(); try { kw2.setSelectionRange(pos, pos); } catch (e) {} }
+          }
+        }, 250);
+      };
     }
   }
 
