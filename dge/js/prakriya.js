@@ -153,6 +153,7 @@
         (document.body.dataset.view === 'krdanta'
           ? '<a class="chip" href="prakriya.html#' + esc(d.code) + '">प्रक्रिया · तिङन्त</a>'
           : '<a class="chip" href="krdanta.html#' + esc(d.code) + '">कृदन्त forms</a>') +
+        '<a class="chip" href="rupasiddhi.html#' + esc(d.code) + '" title="उपसर्ग-योजना, सनादि, सर्वे लकाराः — live derivation workbench">✨ रूपसिद्धिः</a>' +
       '</div></div>';
   }
 
