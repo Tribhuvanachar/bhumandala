@@ -417,8 +417,21 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         }
       });
       shlokas[n] = {
-        sa: dgeSanitizeVedicAccents(item.samhita_patha || item.sa || ''),
-        vedicId: item.id || '',
+        // schemas.json declares a different primaryTextField per schema --
+        // samhita_patha for vedic_text, sanskrit_text for generic and
+        // several others (see its own "primaryTextField" entries) -- but
+        // this branch only ever checked samhita_patha/sa. Any "generic"
+        // schema import (importers/gretil_bulk.py's group_items(), used by
+        // every sutra/vedanga entry in its registry) writes sanskrit_text,
+        // so every one of those would have rendered a blank verse the
+        // first time it was actually run. Caught before any such text
+        // shipped, not after.
+        sa: dgeSanitizeVedicAccents(item.samhita_patha || item.sanskrit_text || item.sa || ''),
+        // Same importer's items carry a human-readable "reference" (e.g.
+        // "Yāska — Nirukta, adhyaya 1") alongside the bare slug id --
+        // prefer it, matching the itihasa_purana_text branch above which
+        // already prefers chapter.reference over a raw id.
+        vedicId: item.reference || item.id || '',
         // Traditional Ashtaka.Adhyaya.Varga.Rik reference — present only for
         // Rigveda Samhita data so far (see ashtaka_ref in the source data.json).
         ashtakaId: item.ashtaka_ref || '',
