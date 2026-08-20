@@ -1,0 +1,17 @@
+/* छन्दोविश्लेषणम् — builds on vyakarana.css + rs-box from rupasiddhi.css. */
+#ch-input{width:100%;border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:12px;padding:12px 14px;font:inherit;font-size:17px;line-height:1.8;resize:vertical}
+.ch-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
+.ch-actions .btn{min-height:44px}
+.ch-id h2{margin:4px 0 6px;font-size:clamp(20px,5vw,26px);color:var(--accent)}
+.ch-kind{color:var(--muted);font-size:13px}
+.ch-kind small{font-size:11px}
+.ch-meta{color:var(--muted);font-size:13.5px;margin-top:4px}
+.ch-lak{margin-top:10px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--panel2);border-radius:0 10px 10px 0;font-size:15.5px;line-height:1.9}
+.ch-padah{color:var(--muted);font-size:13px;margin-bottom:8px}
+.ch-pat{letter-spacing:2px}
+.ch-grid{display:grid;gap:2px 0;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.ch-n{color:var(--muted);font-size:11px;text-align:center;padding:2px 4px}
+.ch-s{text-align:center;font-size:18px;padding:6px 4px;border-radius:8px}
+.ch-s.ch-guru{color:var(--accent);font-weight:700;background:var(--panel2)}
+.ch-m{text-align:center;color:var(--muted);font-size:15px;padding:2px 4px}
+.ch-yati{box-shadow:inset -2px 0 0 var(--accent)}
