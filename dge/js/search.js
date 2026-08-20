@@ -6,10 +6,16 @@ window.DGE_VERSIONS['search.js'] = 'v1.1 (Removed duplicate highlightText/navSea
 function handleSearch() {
   const searchInput = document.getElementById('searchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
-  
+
   if (clearSearchBtn && searchInput) {
     clearSearchBtn.style.display = searchInput.value ? 'block' : 'none';
   }
+
+  // A new search narrows (or widens) which shlokas match, so whatever list-
+  // mode page the reader was on before no longer means the same thing --
+  // start back at page 1 rather than landing wherever the old page number
+  // happens to still clamp to in the new result set (see render.js).
+  window.dgeListPage = 0;
   
   if (typeof searchDebounceTimer !== 'undefined') {
     clearTimeout(searchDebounceTimer);

@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v4.1 (renderList: renders shloka.geminiEnrichment as footnotes via footnote-engine.js when present and the display script is Devanagari, falling back to plain highlighted text otherwise — see Single-view Prev/Next note below for the v4.0 change)';
+window.DGE_VERSIONS['render.js'] = 'v4.2 (list ("Full List") mode now paginates at 50 shlokas/page with its own Prev/Next nav instead of building one DOM card per shloka unconditionally -- was the actual crash/freeze on a large grantha\'s Full List view, e.g. a 2000-shloka Rigveda mandala)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -11,6 +11,17 @@ function getText(id) {
     ? applyTransliteration(stotraData.shlokas[id].sa, activeScript)
     : stotraData.shlokas[id].sa;
 }
+
+// renderList() in "Full List" (📜) mode used to build one full DOM card per
+// matching shloka with no limit at all -- fine for something PNS-sized (43),
+// but genuinely froze/crashed a phone on a large grantha (a 2000-shloka
+// Rigveda maṇḍala's "Full List" view being the reported case). core.js
+// already forces single-view as the DEFAULT for anything over 150 shlokas,
+// but that is only a nudge: the reader can still tap "📜 Full List" in the
+// Display menu and get the exact same unbounded render. This is the actual
+// safety net -- list mode never builds more than LIST_PAGE_SIZE cards at
+// once, with Prev/Next paging through the rest.
+const LIST_PAGE_SIZE = 50;
 
 window.currentSearchScope = 'all';
 window.setSearchScope = function(scope, label, el) {
@@ -155,8 +166,20 @@ function renderList() {
 
   const singleMode = window.viewMode === 'single';
 
+  // See the LIST_PAGE_SIZE comment above -- only paginate list mode, and
+  // only once there's actually more than one page's worth to show.
+  const needsPaging = !singleMode && fIds.length > LIST_PAGE_SIZE;
+  let pageIdSet = null;
+  if (needsPaging) {
+    const maxPage = Math.max(0, Math.ceil(fIds.length / LIST_PAGE_SIZE) - 1);
+    window.dgeListPage = Math.min(Math.max(window.dgeListPage || 0, 0), maxPage);
+    const start = window.dgeListPage * LIST_PAGE_SIZE;
+    pageIdSet = new Set(fIds.slice(start, start + LIST_PAGE_SIZE));
+  }
+
   for (let i = 1; i <= total; i++) {
     if (!fIds.includes(i)) continue;
+    if (pageIdSet && !pageIdSet.has(i)) continue;
     if (singleMode && i !== window.currentReadingId) continue;
     const shloka = stotraData.shlokas[i];
     if (!shloka) continue;
@@ -308,7 +331,32 @@ function renderList() {
   }
 
   dgeUpdateSingleViewNav(fIds);
+  dgeUpdateListViewNav(fIds, needsPaging);
 }
+
+function dgeUpdateListViewNav(fIds, needsPaging) {
+  const nav = document.getElementById('listViewNav');
+  if (!nav) return;
+  if (!needsPaging) { nav.style.display = 'none'; return; }
+  const total = fIds.length;
+  const maxPage = Math.max(0, Math.ceil(total / LIST_PAGE_SIZE) - 1);
+  const page = window.dgeListPage || 0;
+  const startN = page * LIST_PAGE_SIZE + 1;
+  const endN = Math.min((page + 1) * LIST_PAGE_SIZE, total);
+  nav.style.display = 'flex';
+  nav.innerHTML = `
+    <button class="btn-sm" onclick="window.dgeListViewStep(-1)" ${page <= 0 ? 'disabled' : ''}>⟨ Prev</button>
+    <span style="font-weight:700; font-size:13px;">${startN}–${endN} of ${total.toLocaleString()} (page ${page + 1}/${maxPage + 1})</span>
+    <button class="btn-sm" onclick="window.dgeListViewStep(1)" ${page >= maxPage ? 'disabled' : ''}>Next ⟩</button>
+  `;
+}
+
+window.dgeListViewStep = function(dir) {
+  window.dgeListPage = (window.dgeListPage || 0) + dir;
+  renderList();
+  const nav = document.getElementById('listViewNav');
+  if (nav) nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
 // ---------------------------------------------------------------
 // Single-shloka "one at a time" view mode — a separate reading position
