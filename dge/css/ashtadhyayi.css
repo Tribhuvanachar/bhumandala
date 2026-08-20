@@ -157,3 +157,9 @@
 .chp-name{flex:1}
 .chp-range{color:var(--muted);font-size:12px;white-space:nowrap}
 #dge-chaptersModal .box{max-width:520px}
+
+/* tappable anuvritti/adhikara source references in the analysis panel */
+button.an-ref{border:0;background:transparent;padding:2px 4px;margin:0;font:inherit;cursor:pointer;color:var(--accent);text-decoration:underline dotted;text-underline-offset:3px;border-radius:6px}
+button.an-ref:active{background:var(--panel2)}
+.anu-cnt{color:var(--muted);font-size:12px}
+.adhi-item{white-space:nowrap}

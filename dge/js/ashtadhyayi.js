@@ -62,6 +62,11 @@
     // essentially complete: 3961 of 3962 sutras), list is those ids sorted
     // by kaumudiIndex, chapters the 70 traditional prakaranas.
     kaumudi: { byId: {}, list: [], chapters: [] },
+    // id -> [ids] whose anuvritti names this sutra as a source; the forward
+    // half of the anuvritti trace, inverted once at boot. adhikaraInto is
+    // the same for adhikara headings: how far this sutra's rule governs.
+    anuvrittiInto: {},
+    adhikaraInto: {},
     navMode: LS.get("navMode", "ashtadhyayi")
   };
 
@@ -89,6 +94,18 @@
     return fetchJSON(BASE+"sutrapatha/data.json").then(function(d){
       state.sutras = d.items||[];
       state.sutras.forEach(function(it){ state.byId[it.id]=it; });
+      // Invert anuvritti and adhikara once: which sutras carry THIS one's
+      // words forward, and how far THIS sutra's adhikara governs.
+      state.sutras.forEach(function(it){
+        (it.anuvritti||[]).forEach(function(a){
+          if(!a.from) return;
+          (state.anuvrittiInto[a.from]=state.anuvrittiInto[a.from]||[]).push(it.id);
+        });
+        (it.adhikara_refs||[]).forEach(function(r){
+          if(!r[1] || r[1]===it.id) return;
+          (state.adhikaraInto[r[1]]=state.adhikaraInto[r[1]]||[]).push(it.id);
+        });
+      });
     });
   }
   // Non-fatal, fire-and-forget: a reader browsing in plain Ashtadhyayi
@@ -239,15 +256,43 @@
         +esc(row.sutra_type.label||"")+'</span>';
     }
     strip.innerHTML=s;
-    // toggle panel: anvaya, anuvritti, adhikara, English
+    // toggle panel: anvaya, anuvritti (backward + forward), adhikara, English
     var rows="";
     if(row.anvaya) rows+=arow("अन्वयः · anvaya (prose order)", '<span class="'+devCls+'">'+esc(tl(row.anvaya))+'</span>');
     if(row.anuvritti&&row.anuvritti.length){
       var av=row.anuvritti.map(function(a){
-        return '<span class="anu-w '+devCls+'">'+esc(tl(a.word))+'</span>'+(a.from?'<span class="anu-src">‹ '+a.from+'</span>':''); }).join(", ");
+        return '<span class="anu-w '+devCls+'">'+esc(tl(a.word))+'</span>'
+          +(a.from?'<button class="anu-src an-ref" data-id="'+esc(a.from)+'" title="open the sutra these words carry over from">‹ '+a.from+'</button>':''); }).join(", ");
       rows+=arow("अनुवृत्तिः · anuvṛtti (carried-over words)", av);
     }
-    if(row.adhikara) rows+=arow("अधिकारः · adhikāra (governing rule)", '<span class="'+devCls+'">'+esc(tl(row.adhikara))+'</span>');
+    // The inverse trace: which later sutras inherit THIS sutra's words.
+    // Computed once at boot from the same anuvritti data (see boot()).
+    var fwd = state.anuvrittiInto[row.id];
+    if(fwd && fwd.length){
+      var span = fwd.length<=4
+        ? fwd.map(function(id){ return '<button class="an-ref" data-id="'+esc(id)+'">'+id+'</button>'; }).join(", ")
+        : '<button class="an-ref" data-id="'+esc(fwd[0])+'">'+fwd[0]+'</button> … '
+          +'<button class="an-ref" data-id="'+esc(fwd[fwd.length-1])+'">'+fwd[fwd.length-1]+'</button>'
+          +' <span class="anu-cnt">('+fwd.length+' sūtras)</span>';
+      rows+=arow("अनुवर्तते · carried forward into", span);
+    }
+    // This sutra as an adhikara head: the span of sutras it governs.
+    var gov = state.adhikaraInto[row.id];
+    if(gov && gov.length){
+      var gspan = '<button class="an-ref" data-id="'+esc(gov[0])+'">'+gov[0]+'</button> … '
+        +'<button class="an-ref" data-id="'+esc(gov[gov.length-1])+'">'+gov[gov.length-1]+'</button>'
+        +' <span class="anu-cnt">('+gov.length+' sūtras)</span>';
+      rows+=arow("अधिकारविस्तारः · governs through", gspan);
+    }
+    if(row.adhikara_refs&&row.adhikara_refs.length){
+      var ad=row.adhikara_refs.map(function(r){
+        var t='<span class="'+devCls+'">'+esc(tl(r[0]))+'</span>';
+        return r[1] ? '<span class="adhi-item">'+t+'<button class="anu-src an-ref" data-id="'+esc(r[1])+'" title="open the sutra where this adhikara begins">‹ '+r[1]+'</button></span>' : t;
+      }).join(" · ");
+      rows+=arow("अधिकारः · adhikāra (governing rule)", ad);
+    } else if(row.adhikara){
+      rows+=arow("अधिकारः · adhikāra (governing rule)", '<span class="'+devCls+'">'+esc(tl(row.adhikara))+'</span>');
+    }
     if(row.english) rows+=arow("English gloss", esc(row.english));
     panel.innerHTML=rows||'<div class="an-empty">No structured analysis on record for this sūtra.</div>';
     var hasStrip=!!s, hasPanel=!!rows;
@@ -487,6 +532,13 @@
     var pc=$("#dge-pcBtn"); if(pc) pc.addEventListener("click",function(){
       var pn=$("#dge-analysis"); if(!pn) return;
       var open=pn.classList.toggle("open"); pc.classList.toggle("on",open); });
+    // Anuvritti / adhikara source references in the analysis panel jump to
+    // the sutra they name. The panel is re-rendered per sutra, so delegate.
+    var an=$("#dge-analysis"); if(an) an.addEventListener("click",function(e){
+      var b=e.target.closest(".an-ref"); if(!b) return;
+      var id=b.dataset.id;
+      if(id && state.byId[id]){ $("#dge-analysis").classList.add("open"); go(state.sutras.indexOf(state.byId[id])); }
+    });
     var wex=$("#dge-whatBtn"); if(wex) wex.addEventListener("click",function(){
       var el=$("#dge-chips"); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); });
     // Jump box. It used to accept an exact "1.1.1" and nothing else, and to
