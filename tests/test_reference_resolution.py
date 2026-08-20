@@ -119,6 +119,29 @@ class TestSyntheticCorpus(unittest.TestCase):
         self.assertEqual(result.status, "verified")
         self.assertEqual(result.scope_searched[0], "darshana/sutrapatha")
 
+    def test_a_short_exact_match_is_capped_at_possible_not_verified(self):
+        # single short words are the actual failure mode a real (non-mock)
+        # Gemini run hit: this commentary style repeats one term from the
+        # base text before explaining it, which Gemini sometimes flags as a
+        # "quotation" -- and a short string coincidentally substring-matches
+        # almost anything in a nontrivial search scope. "अदेङ्" is 5 chars,
+        # under the default min_verified_length of 8.
+        result = self.resolver.resolve_text("अदेङ्", hint_slugs=["darshana/sutrapatha"])
+        self.assertIn(result.status, ("possible", "unresolved"))
+        self.assertNotEqual(result.status, "verified")
+
+    def test_a_long_exact_match_wrapped_in_quote_marks_still_verifies(self):
+        # the actual bug found in the real run: quoted_text came back WITH
+        # the surrounding quote punctuation Gemini saw in the source prose
+        # (e.g. "'अदेङ् गुणः'" rather than "अदेङ् गुणः") -- the corpus's own
+        # text never has that punctuation, so left unstripped this diluted
+        # an otherwise-exact match down to "possible" (0.517 in the real
+        # run) instead of "verified". Must still resolve "verified" once
+        # the marks are stripped before searching.
+        result = self.resolver.resolve_text("‘अदेङ् गुणः’", hint_slugs=["darshana/sutrapatha"])
+        self.assertEqual(result.status, "verified")
+        self.assertEqual(result.target_unit_id, "1.1.2")
+
     # -- resolve(): the full priority ladder ----------------------------------
 
     def test_resolve_prefers_a_verified_exact_hint_over_text_search(self):
