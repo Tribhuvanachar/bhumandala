@@ -148,8 +148,15 @@ def run_concurrency_sweep(verses: list[dict], model: str, batch_size: int, api_k
 
 
 def _cost(usage: dict, price_in: float, price_out: float) -> float:
+    """A thinking-capable model bills `thoughtsTokenCount` (internal
+    reasoning, not part of the visible completion) at the output rate too
+    -- confirmed by a real run where it was LARGER than the visible output
+    for gemini-flash-latest (see gemini_client._accumulate_usage's
+    docstring). Must be added to output_tokens here or cost is understated,
+    sometimes by more than half."""
+    billed_output = usage.get("output_tokens", 0) + usage.get("thoughts_tokens", 0)
     return (usage.get("prompt_tokens", 0) / 1_000_000 * price_in
-            + usage.get("output_tokens", 0) / 1_000_000 * price_out)
+            + billed_output / 1_000_000 * price_out)
 
 
 def main(argv=None) -> int:
@@ -189,10 +196,14 @@ def main(argv=None) -> int:
             report["estimated_cost_usd"] = round(cost, 6)
             report["estimated_cost_usd_per_1000_verses"] = round(per_verse * 1000, 4)
             grid_results.append(report)
+            thoughts_note = f", {usage['thoughts_tokens']:,} thinking tokens" if usage.get("thoughts_tokens") else ""
             print(f"    {usage.get('calls', 0)} call(s), "
-                  f"{usage.get('total_tokens', 0):,} tokens, "
+                  f"{usage.get('prompt_tokens', 0):,} prompt + {usage.get('output_tokens', 0):,} output tokens"
+                  f"{thoughts_note} = {usage.get('total_tokens', 0):,} total, "
                   f"{report['elapsed_seconds']}s, "
-                  f"${report['estimated_cost_usd_per_1000_verses']}/1000 verses, "
+                  f"${report['estimated_cost_usd_per_1000_verses']}/1000 verses "
+                  f"(at --price-per-m-in/out {args.price_per_m_in}/{args.price_per_m_out} -- "
+                  f"pass this model's OWN real price if comparing against a different model), "
                   f"{len(report['errors'])} error(s), model_version={usage.get('model_version')}")
 
     print(f"\n=== Phase 2: concurrency sweep (model={args.sweep_model}, "

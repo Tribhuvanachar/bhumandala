@@ -370,9 +370,11 @@ def run(sarga_dir: Path, cantos, model: str, dry_run: bool, force: bool,
     print(f"Total: {total_changed}/{total_considered} verse(s) analyzed across {len(cantos)} canto(s)")
     if usage_totals:
         model_used = usage_totals.get("model_version") or model
+        thoughts = usage_totals.get("thoughts_tokens", 0)
+        thoughts_note = f", {thoughts:,} thinking tokens (billed at the output rate, not shown above)" if thoughts else ""
         print(f"Gemini usage: {usage_totals['calls']} call(s), "
               f"{usage_totals['prompt_tokens']:,} prompt tokens, "
-              f"{usage_totals['output_tokens']:,} output tokens, "
+              f"{usage_totals['output_tokens']:,} output tokens{thoughts_note}, "
               f"{usage_totals['total_tokens']:,} total tokens "
               f"(model={model_used}, batch_size={batch_size}, concurrency={concurrency}; "
               f"a fallback-model call inside a single attempt is included in these totals)")

@@ -79,12 +79,26 @@ class TestAccumulateUsage(unittest.TestCase):
         totals = {}
         gc._accumulate_usage(totals, {"promptTokenCount": 100, "candidatesTokenCount": 40, "totalTokenCount": 140})
         gc._accumulate_usage(totals, {"promptTokenCount": 50, "candidatesTokenCount": 10, "totalTokenCount": 60})
-        self.assertEqual(totals, {"calls": 2, "prompt_tokens": 150, "output_tokens": 50, "total_tokens": 200})
+        self.assertEqual(totals, {"calls": 2, "prompt_tokens": 150, "output_tokens": 50,
+                                   "thoughts_tokens": 0, "total_tokens": 200})
 
     def test_missing_fields_default_to_zero(self):
         totals = {}
         gc._accumulate_usage(totals, {})
-        self.assertEqual(totals, {"calls": 1, "prompt_tokens": 0, "output_tokens": 0, "total_tokens": 0})
+        self.assertEqual(totals, {"calls": 1, "prompt_tokens": 0, "output_tokens": 0,
+                                   "thoughts_tokens": 0, "total_tokens": 0})
+
+    def test_thinking_model_thoughts_tokens_tracked_separately_from_output(self):
+        # observed for real with gemini-3.7-flash: totalTokenCount can be
+        # far larger than promptTokenCount + candidatesTokenCount alone --
+        # the gap is thoughtsTokenCount, billed at the output rate but not
+        # part of the visible completion (see tools/gemini_bench.py)
+        totals = {}
+        gc._accumulate_usage(totals, {"promptTokenCount": 4856, "candidatesTokenCount": 2105,
+                                       "thoughtsTokenCount": 7175, "totalTokenCount": 14136})
+        self.assertEqual(totals["thoughts_tokens"], 7175)
+        self.assertEqual(totals["output_tokens"], 2105)
+        self.assertEqual(totals["total_tokens"], 14136)
 
     def test_call_gemini_populates_usage_totals_when_given(self):
         def fake_post(model, body, api_key, usage_totals=None):

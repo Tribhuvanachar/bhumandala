@@ -37,17 +37,17 @@ on:
         required: false
         default: ""
       model:
-        description: "Gemini model to use"
+        description: "Gemini model to use. Default is gemini-flash-lite-latest: a real gemini-bench.yml run (see dge/PENDING.md) found gemini-flash-latest resolves to a thinking-capable model that spends MORE tokens on invisible internal reasoning than on the visible answer, making it 4-6x costlier for this task with no measured quality gain -- flash-lite does not do this."
         required: true
-        default: gemini-flash-latest
+        default: gemini-flash-lite-latest
         type: choice
         options:
-          - gemini-flash-latest
           - gemini-flash-lite-latest
+          - gemini-flash-latest
       batch_size:
-        description: "Verses per Gemini request -- the cost lever (amortizes fixed prompt overhead across more verses; see tools/gemini_bench.py and dge/PENDING.md for the benchmark behind a given value). 1 = old one-verse-per-call behaviour."
+        description: "Verses per Gemini request -- the cost lever (amortizes fixed prompt overhead across more verses). Default 10 per the gemini-bench.yml run in dge/PENDING.md. 1 = old one-verse-per-call behaviour."
         required: true
-        default: "1"
+        default: "10"
       concurrency:
         description: "Parallel in-flight requests -- the time lever (does not change total tokens billed). 1 = sequential. Stay at/below whatever tools/gemini_bench.py's concurrency sweep found safe for your Gemini tier."
         required: true
