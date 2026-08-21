@@ -54,7 +54,20 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def _post(model: str, body: dict, api_key: str) -> dict:
+def _accumulate_usage(usage_totals: dict, usage_metadata: dict) -> None:
+    """Adds one call's usageMetadata (Gemini's own token accounting, as
+    returned alongside the response) into a running totals dict, so a batch
+    script can report real consumption instead of an estimate. Only called
+    on a successful response -- a failed attempt (e.g. quota/overloaded)
+    isn't billed output tokens and Gemini doesn't return usageMetadata for
+    it, so it is correctly left uncounted here."""
+    usage_totals["calls"] = usage_totals.get("calls", 0) + 1
+    usage_totals["prompt_tokens"] = usage_totals.get("prompt_tokens", 0) + usage_metadata.get("promptTokenCount", 0)
+    usage_totals["output_tokens"] = usage_totals.get("output_tokens", 0) + usage_metadata.get("candidatesTokenCount", 0)
+    usage_totals["total_tokens"] = usage_totals.get("total_tokens", 0) + usage_metadata.get("totalTokenCount", 0)
+
+
+def _post(model: str, body: dict, api_key: str, usage_totals: dict | None = None) -> dict:
     url = API_URL_TMPL.format(model=model, key=api_key)
     req = urllib.request.Request(
         url, data=json.dumps(body).encode("utf-8"),
@@ -70,9 +83,12 @@ def _post(model: str, body: dict, api_key: str) -> dict:
         raise GeminiError("network", str(e.reason))
     try:
         text = payload["candidates"][0]["content"]["parts"][0]["text"]
-        return json.loads(text)
+        result = json.loads(text)
     except (KeyError, IndexError, json.JSONDecodeError) as e:
         raise GeminiError("bad_response", f"could not parse Gemini response: {e}")
+    if usage_totals is not None:
+        _accumulate_usage(usage_totals, payload.get("usageMetadata") or {})
+    return result
 
 
 def call_gemini(
@@ -83,11 +99,16 @@ def call_gemini(
     model: str = DEFAULT_MODEL,
     temperature: float = 0.2,
     max_output_tokens: int = 4096,
+    usage_totals: dict | None = None,
 ) -> dict:
     """One attempt against `model`; one fallback attempt against
     FALLBACK_MODEL only for quota/model_missing/overloaded -- deliberately no
     retry/backoff loop beyond that, matching dge/js/gemini.js's generate().
-    Returns the parsed JSON object Gemini's structured output produced."""
+    Returns the parsed JSON object Gemini's structured output produced.
+
+    Pass a `usage_totals` dict (e.g. {}) to have this call's real token
+    consumption added into it in place -- see _accumulate_usage. Omit it
+    (the default) for zero behaviour change."""
     body = {
         "systemInstruction": {"parts": [{"text": system_instruction}]},
         "contents": [{"role": "user", "parts": [{"text": prompt}]}],
@@ -99,8 +120,8 @@ def call_gemini(
         },
     }
     try:
-        return _post(model, body, api_key)
+        return _post(model, body, api_key, usage_totals)
     except GeminiError as e:
         if e.kind in FALLBACK_ELIGIBLE and model != FALLBACK_MODEL:
-            return _post(FALLBACK_MODEL, body, api_key)
+            return _post(FALLBACK_MODEL, body, api_key, usage_totals)
         raise

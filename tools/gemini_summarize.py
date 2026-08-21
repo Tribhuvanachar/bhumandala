@@ -81,7 +81,8 @@ def build_prompt(sanskrit_text: str, english_translation: str | None) -> str:
     return "\n".join(parts)
 
 
-def call_gemini_for_verse(sanskrit_text: str, english_translation, api_key: str, model: str) -> dict:
+def call_gemini_for_verse(sanskrit_text: str, english_translation, api_key: str, model: str,
+                           usage_totals: dict | None = None) -> dict:
     return call_gemini(
         SYSTEM_INSTRUCTION,
         build_prompt(sanskrit_text, english_translation),
@@ -90,6 +91,7 @@ def call_gemini_for_verse(sanskrit_text: str, english_translation, api_key: str,
         model,
         temperature=0.2,
         max_output_tokens=2048,
+        usage_totals=usage_totals,
     )
 
 
@@ -107,7 +109,7 @@ def mock_analyze_verse(sanskrit_text: str, english_translation) -> dict:
 
 
 def analyze_shloka(shloka: dict, api_key, model: str, dry_run: bool, force: bool,
-                    fields) -> bool:
+                    fields, usage_totals: dict | None = None) -> bool:
     """Mutates `shloka["commentaries"]` in place. Returns True if changed."""
     commentaries = shloka.setdefault("commentaries", {})
     missing = [f for f in fields if force or FIELD_TO_KEY[f] not in commentaries]
@@ -122,7 +124,7 @@ def analyze_shloka(shloka: dict, api_key, model: str, dry_run: bool, force: bool
     if dry_run:
         result = mock_analyze_verse(sanskrit_text, english_translation)
     else:
-        result = call_gemini_for_verse(sanskrit_text, english_translation, api_key, model)
+        result = call_gemini_for_verse(sanskrit_text, english_translation, api_key, model, usage_totals)
 
     changed = False
     for field in missing:
@@ -143,6 +145,7 @@ def run(sarga_dir: Path, cantos, model: str, dry_run: bool, force: bool,
 
     total_changed = 0
     total_considered = 0
+    usage_totals: dict = {}
     for n in cantos:
         sarga_path = sarga_dir / f"sarga_{n}" / "data.json"
         if not sarga_path.exists():
@@ -160,7 +163,7 @@ def run(sarga_dir: Path, cantos, model: str, dry_run: bool, force: bool,
                 break
             shloka = shlokas[n_str]
             try:
-                if analyze_shloka(shloka, api_key, model, dry_run, force, fields):
+                if analyze_shloka(shloka, api_key, model, dry_run, force, fields, usage_totals):
                     canto_changed += 1
                 total_considered += 1
             except GeminiError as e:
@@ -182,6 +185,13 @@ def run(sarga_dir: Path, cantos, model: str, dry_run: bool, force: bool,
         print(f"canto {n}: analyzed {canto_changed} verse(s)")
 
     print(f"Total: {total_changed}/{total_considered} verse(s) analyzed across {len(cantos)} canto(s)")
+    if usage_totals:
+        print(f"Gemini usage: {usage_totals['calls']} call(s), "
+              f"{usage_totals['prompt_tokens']:,} prompt tokens, "
+              f"{usage_totals['output_tokens']:,} output tokens, "
+              f"{usage_totals['total_tokens']:,} total tokens "
+              f"(model={model}; a fallback-model call inside a single verse's "
+              f"attempt is included in these totals)")
     return 0
 
 
