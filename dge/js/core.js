@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.10 (dgeStripEditionMarkers: GRETIL page markers -- transliterated \"(I,1, p. 37)\" parentheticals, 357 of them, all in smriti_dharma -- stripped at render time; previous: v3.9 flat-items sa fallback)';
+window.DGE_VERSIONS['core.js'] = 'v3.13 (merge: v3.12 dgeVisibleCommentaries -- gates the unlicensed Mahabharata Kannada translation/Tatparya Nirnaya commentary out of every normalized grantha object by default, window.appConfig.showCopyrightGatedCommentaries toggles it -- plus v3.10 dgeStripEditionMarkers: GRETIL page markers, transliterated \"(I,1, p. 37)\" parentheticals, 357 of them in smriti_dharma, stripped at render time; plus unitId on normalized shlokas + jumpVedicId unit matching)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -291,11 +291,66 @@ document.addEventListener('DOMContentLoaded', () => {
 // marks — confirmed by checking the actual codepoints against real
 // rendered output, not guessed. Remapped here, as early as possible, so
 // every downstream use (display, copy, search, share) benefits uniformly.
+function dgeToDevanagariDigits(s) {
+  const map = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
+  return String(s).replace(/[0-9]/g, (d) => map[d]);
+}
+
 function dgeSanitizeVedicAccents(text) {
   if (!text) return text;
   return text
     .replace(/\u1CD3/g, '\u0951') // VEDIC SIGN NIHSHVASA (used for acute/udātta) -> DEVANAGARI STRESS SIGN UDATTA
-    .replace(/\u1CD9/g, '\u0952'); // VEDIC TONE ... INDEPENDENT SVARITA (used for grave) -> DEVANAGARI STRESS SIGN ANUDATTA
+    .replace(/\u1CD9/g, '\u0952') // VEDIC TONE ... INDEPENDENT SVARITA (used for grave) -> DEVANAGARI STRESS SIGN ANUDATTA
+    // Siddhanta Kaumudi's own text carries internal cross-references to its
+    // own serial rule numbering as raw "<{SK354}>" markers -- an unresolved
+    // import-template artifact (1373 of them in that one file), not a
+    // rendering choice. Reported live as "the 4th item's text is incorrect"
+    // because that IS what a reader sees: bracket-and-number junk sitting
+    // mid-sentence in an otherwise normal commentary. No authoritative
+    // SK-number -> sutra concordance exists in this corpus to turn these
+    // into real links (this data.json's own item order is Ashtadhyayi
+    // adhyaya.pada.sutra order, not Siddhanta Kaumudi's own reordered
+    // sequence, so the number can't be resolved from position either) --
+    // rendered as the conventional Sanskrit-commentary parenthetical
+    // citation abbreviation instead of either the raw template syntax or
+    // silently deleting real cross-reference information.
+    .replace(/<\{SK(\d+)\}>/g, (_, num) => '(सि.कौ.' + dgeToDevanagariDigits(num) + ')');
+}
+
+// Copyright gate (Category 4 platform issue): the Mahabharata Kannada
+// translation + Madhvacharya's own Tatparya Nirnaya excerpts interleaved in
+// it (dge/data/itihasa/mahabharata_kannada/, ~98,500 verses) were extracted
+// from a Pejawar Matha Android app's asset bundle -- no license field
+// anywhere, only a foreword/blessing as attribution, not a rights grant.
+// This project's own standing rule (PROJECT_BRIEF.md) is "absence of a
+// licence is not permission." "kannada" as a commentary key is unique to
+// this one source across the whole corpus (checked: no other data.json
+// uses it), so gating by key name alone is safe -- it cannot accidentally
+// hide some unrelated, properly-licensed Kannada text elsewhere.
+//
+// Filtered here, at the single point every shloka's commentaries object is
+// built, rather than in render.js -- render.js is not the only consumer
+// (ai.js reads shloka.commentaries directly to feed AI features, and the
+// availableCommentaries picker/search-scope dropdown are built from this
+// same normalization pass), so gating downstream would need to be repeated
+// at every call site with no guarantee of catching them all. The data
+// itself is untouched on disk (reversible, no loss); this only decides
+// what a NORMALIZED grantha object exposes to the rest of the app.
+// window.appConfig.showCopyrightGatedCommentaries is the reader-facing
+// toggle this backlog item asked for (default off/hidden) -- flipping it
+// takes effect on the next grantha load (this function reruns whenever a
+// grantha's data is (re)fetched), not instantly on an already-open page,
+// which is an acceptable cost for what should be a rare, deliberate
+// research toggle rather than a startup-time architecture change.
+const DGE_COPYRIGHT_GATED_COMMENTARY_KEYS = { kannada: true };
+function dgeVisibleCommentaries(commentaries) {
+  if (!commentaries) return commentaries;
+  if (window.appConfig && window.appConfig.showCopyrightGatedCommentaries) return commentaries;
+  const out = {};
+  Object.keys(commentaries).forEach((k) => {
+    if (!DGE_COPYRIGHT_GATED_COMMENTARY_KEYS[k]) out[k] = commentaries[k];
+  });
+  return out;
 }
 
 // The GRETIL smriti imports carry the source edition's own page markers,
@@ -382,6 +437,12 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
             .replace(/[ḥ]/g, 'h').replace(/[ñṅṇ]/g, 'n').replace(/[śṣ]/g, 's')
             .replace(/[ṭ]/g, 't').replace(/[ḍ]/g, 'd')
             .replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '') || 'bhashya';
+          // See dgeVisibleCommentaries's own comment: not currently exercised
+          // by any real data in this shape (the actual gated content uses
+          // the flat-items branch below), kept here defensively so a future
+          // bhashya[] source naming a commentator this key would slugify to
+          // "kannada" can't slip through un-gated.
+          if (DGE_COPYRIGHT_GATED_COMMENTARY_KEYS[key] && !(window.appConfig && window.appConfig.showCopyrightGatedCommentaries)) return;
           commentaries[key] = b.text;
           availableCommentaries[key] = b.commentator || KNOWN_COMMENTARY_LABELS[key] ||
             (key.charAt(0).toUpperCase() + key.slice(1));
@@ -422,9 +483,11 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
       // as a visible field (see the 'vedicId' extra field in config.js)
       // rather than used as the internal key.
       const n = idx + 1;
-      const commentaries = (item.commentaries && typeof item.commentaries === 'object' && !Array.isArray(item.commentaries))
-        ? item.commentaries
-        : {};
+      const commentaries = dgeVisibleCommentaries(
+        (item.commentaries && typeof item.commentaries === 'object' && !Array.isArray(item.commentaries))
+          ? item.commentaries
+          : {}
+      );
       if (Object.keys(commentaries).length) itemsWithCommentaries++;
       Object.keys(commentaries).forEach(key => {
         if (!availableCommentaries[key]) {
@@ -684,7 +747,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Commentary/bhashya display is opt-in and hidden by default
+// (selectedCommentaryView starts at 'none', see state.js) -- a reader who
+// never notices the small 💬 "Commentary Options" icon in the top bar can
+// read an entire Stotra or Veda text and never discover real bhashya
+// content sits right there for it. One-time toast, gated per grantha (not
+// per visit) via nsKey so it never nags on a text the reader has already
+// been shown this for.
+function dgeNoticeCommentaryAvailable() {
+  const available = window.stotraData && window.stotraData.metadata && window.stotraData.metadata.availableCommentaries;
+  if (!available || !Object.keys(available).length) return;
+  const seenKey = (typeof nsKey === 'function') ? nsKey('commentaryNoticeSeen') : null;
+  if (!seenKey || localStorage.getItem(seenKey) === 'true') return;
+  localStorage.setItem(seenKey, 'true');
+  if (typeof showToast === 'function') showToast('📖 Commentary is available for this text — tap 💬 above to view it.');
+}
+
 function initApp() {
+  window.dgeListPage = 0; // fresh grantha starts list-mode pagination (see render.js) on its own page 1
   if (typeof loadPersistedState === 'function') loadPersistedState();
   if (typeof restorePrefs === 'function') restorePrefs();
   if (typeof initAuthAndBranding === 'function') initAuthAndBranding();
@@ -704,6 +784,8 @@ function initApp() {
 
   // Pass control to the rendering pipeline
   if (typeof renderList === 'function') renderList();
+
+  dgeNoticeCommentaryAvailable();
 
   if (typeof dgeRestoreLastVerse === 'function') dgeRestoreLastVerse();
 

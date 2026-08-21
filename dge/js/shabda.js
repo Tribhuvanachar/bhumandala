@@ -7,14 +7,15 @@
 (function () {
   "use strict";
   var URL = "data/vedanga/vyakarana/shabdapatha/data.json";
-  var CHUNK = 250;
+  var PAGE_SIZE = 20;
   var VIBHAKTI = ["प्रथमा","द्वितीया","तृतीया","चतुर्थी","पञ्चमी","षष्ठी","सप्तमी","सम्बोधनम्"];
 
   var LS = {
     get:function(k,d){ try{ var v=localStorage.getItem("dge.shabda."+k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
     set:function(k,v){ try{ localStorage.setItem("dge.shabda."+k, JSON.stringify(v)); }catch(e){} }
   };
-  var state = { all:[], view:[], shown:0, script: LS.get("script","devanagari"), linga: LS.get("linga",""), q:"", openId: LS.get("open",null), highlightCell:null };
+  var state = { all:[], view:[], page:0, script: LS.get("script","devanagari"), linga: LS.get("linga",""), q:"", openId: LS.get("open",null), highlightCell:null };
+  function totalPages(){ return Math.max(1, Math.ceil(state.view.length / PAGE_SIZE)); }
 
   function $(s,r){ return (r||document).querySelector(s); }
   function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
@@ -31,7 +32,6 @@
       return true;
     });
     state.view.sort(function(a,b){ return a.word.localeCompare(b.word,"sa"); });
-    state.shown=0;
     $("#sh-count").textContent = state.view.length.toLocaleString()+" / "+state.all.length.toLocaleString();
   }
 
@@ -91,18 +91,29 @@
       +'<div class="rbody">'+(open?bodyHTML(it):"")+'</div>'
     +'</article>';
   }
-  function render(reset){
+  // Real Prev/Next pagination (20 words a page) rather than the old
+  // infinite-"show more" chunking -- easier to reason about on a phone
+  // ("where am I, how many pages left") and cheaper to paint per tap,
+  // since only one page's worth of rows (and their collapsed bodies) is
+  // ever in the DOM at once.
+  function setBtnDisabled(btn, disabled){ btn.disabled=disabled; btn.style.opacity=disabled?"0.4":"1"; btn.style.cursor=disabled?"default":"pointer"; }
+  function render(){
     var box=$("#sh-list");
-    if(reset){ box.innerHTML=""; state.shown=0; }
-    if(!state.view.length){ box.innerHTML='<div class="empty">No words match these filters.</div>'; $("#sh-more").style.display="none"; return; }
-    var end=Math.min(state.shown+CHUNK, state.view.length), html="";
-    for(var i=state.shown;i<end;i++) html+=rowHTML(state.view[i]);
+    box.innerHTML="";
+    if(!state.view.length){
+      box.innerHTML='<div class="empty">No words match these filters.</div>';
+      $("#sh-pager").style.display="none";
+      return;
+    }
+    var start=state.page*PAGE_SIZE, end=Math.min(start+PAGE_SIZE, state.view.length), html="";
+    for(var i=start;i<end;i++) html+=rowHTML(state.view[i]);
     box.insertAdjacentHTML("beforeend", html);
-    state.shown=end;
-    $("#sh-more").style.display = state.shown<state.view.length ? "block" : "none";
-    $("#sh-more").textContent = "show more ▾  ("+(state.view.length-state.shown).toLocaleString()+" left)";
+    $("#sh-pager").style.display="flex";
+    $("#sh-pageInfo").textContent = "Page "+(state.page+1)+" / "+totalPages()+" · "+state.view.length.toLocaleString()+" words";
+    setBtnDisabled($("#sh-prev"), state.page<=0);
+    setBtnDisabled($("#sh-next"), state.page>=totalPages()-1);
   }
-  function rerender(){ recompute(); render(true); }
+  function rerender(){ recompute(); state.page=0; render(); }
 
   function toggleRow(id){
     var it=state.all.find(function(x){return x.id===id;}); if(!it) return;
@@ -119,7 +130,10 @@
     $("#sh-list").addEventListener("click",function(e){
       var h=e.target.closest(".rhead"); if(h) toggleRow(h.parentElement.dataset.id);
     });
-    $("#sh-more").addEventListener("click",function(){ render(false); });
+    $("#sh-prev").addEventListener("click",function(){ if(state.page>0){ state.page--; render(); window.scrollTo({top:0,behavior:"smooth"}); } });
+    $("#sh-next").addEventListener("click",function(){ if(state.page<totalPages()-1){ state.page++; render(); window.scrollTo({top:0,behavior:"smooth"}); } });
+    $("#sh-toTop").addEventListener("click",function(){ window.scrollTo({top:0,behavior:"smooth"}); });
+    $("#sh-toBottom").addEventListener("click",function(){ $("#sh-pager").scrollIntoView({behavior:"smooth",block:"end"}); });
     $("#sh-search").addEventListener("input",function(e){ state.q=e.target.value; rerender(); });
     document.querySelectorAll("[data-l]").forEach(function(c){ c.addEventListener("click",function(){
       state.linga=c.dataset.l; LS.set("linga",state.linga); syncLingaChips(); rerender(); }); });
@@ -134,8 +148,8 @@
     state.openId=id; LS.set("open",id); state.linga=""; state.q=""; $("#sh-search").value=""; LS.set("linga","");
     syncLingaChips(); recompute();
     var pos=state.view.findIndex(function(x){return x.id===id;});
-    render(true);
-    while(state.shown<=pos && state.shown<state.view.length) render(false);
+    state.page = pos>=0 ? Math.floor(pos/PAGE_SIZE) : 0;
+    render();
     var el=$("#s-"+CSS.escape(id));
     if(el){ el.scrollIntoView({behavior:"smooth",block:"center"}); setHash(id); }
     if(state.highlightCell!=null){
@@ -187,7 +201,8 @@
   function showNotFound(surface){
     $("#sh-search").value=surface||"";
     recompute();
-    render(true);
+    state.page=0;
+    render();
     var box=$("#sh-list");
     box.insertAdjacentHTML("afterbegin",
       '<div class="empty">No exact form found for "'+esc(surface||"")+'". '+
@@ -234,7 +249,7 @@
       recompute();
       var h0=hashId();
       if(h0 && state.all.some(function(x){return x.id===h0;})){ openById(h0); }
-      else { render(true); }
+      else { state.page=0; render(); }
     }).catch(function(e){ $("#sh-list").innerHTML='<div class="empty">Failed to load shabdapatha data ('+e+'). Serve from the dge/ folder.</div>'; });
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot); else boot();

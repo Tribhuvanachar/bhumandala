@@ -36,28 +36,9 @@
   <div class="totals" id="totals"></div>
   <div class="secgrid" id="secgrid"></div>
 
-  <div class="helpbox">
-    Curate the <b>public Library</b> without touching the corpus. Every edit here is a
-    <b>non-destructive override</b> — reorder, pin, rename, move between folders, or hide.
-    Changes save in <b>this browser only</b>; click <b>Export overrides</b> to download
-    <code>library-overrides.json</code> and commit it to <code>admin/config/</code>. The live app
-    (<code>js/library.js</code> v3+) reads that file and applies it.
-    <div class="legend">
-      <span>▲▼ reorder</span><span>📌 pin to top</span><span>✏️ rename</span>
-      <span>📁 move to folder</span><span>👁 hide</span>
-      <span><span class="dot ok"></span> loaded</span><span><span class="dot pend"></span> pending</span>
-    </div>
-  </div>
-
-  <div class="toolbar">
-    <input type="search" id="q" placeholder="Filter by name or path…">
-    <button class="chip" id="fAll" data-f="all">All</button>
-    <button class="chip" id="fPend" data-f="pending">Pending only</button>
-    <button class="chip" id="fLoad" data-f="loaded">Loaded only</button>
-    <button class="chip" id="fHid" data-f="hidden">Hidden only</button>
-    <button class="chip" id="fEdit" data-f="edited">Edited only</button>
-    <button class="chip" id="expand">⤢ Expand all</button>
-    <button class="chip" id="collapse">⤡ Collapse all</button>
+  <div class="mbar">
+    <button class="btn" id="helpBtn">ℹ️ Legend &amp; Help</button>
+    <button class="btn" id="filterBtn">⚙ Filters<span class="fcount" id="fcount" style="display:none"></span></button>
   </div>
   <div class="tree" id="tree"></div>
   <p class="muted" style="margin-top:14px">Loaded = a <code>data.json</code> with items; Pending = empty/absent. Reordering &amp; pinning affect how entries appear in the app's Library browser; moves and renames are display-only and never rewrite <code>library.json</code>/<code>taxonomy.json</code>.</p>
@@ -70,6 +51,60 @@
     <div class="ovbody">
       <input type="search" id="moveQ" placeholder="Search destination folder…">
       <div id="moveList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- legend & help -->
+<div class="ov" id="helpOv">
+  <div class="ovbox">
+    <div class="ovhd">ℹ️ Legend &amp; Help<span class="spacer" style="flex:1"></span><button class="ctl" id="helpClose">✕</button></div>
+    <div class="ovbody">
+      <div class="helpbox" style="margin-bottom:0">
+        Curate the <b>public Library</b> without touching the corpus. Every edit here is a
+        <b>non-destructive override</b> — reorder, pin, rename, move between folders, or hide.
+        Changes save in <b>this browser only</b>; click <b>Export overrides</b> to download
+        <code>library-overrides.json</code> and commit it to <code>admin/config/</code>. The live app
+        (<code>js/library.js</code> v3+) reads that file and applies it.
+        <div class="legend">
+          <span>▲▼ reorder</span><span>⋮ more actions (pin / rename / move / hide)</span>
+          <span><span class="dot ok"></span> loaded</span><span><span class="dot pend"></span> pending</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- search + filters -->
+<div class="ov" id="filterOv">
+  <div class="ovbox">
+    <div class="ovhd">⚙ Filters<span class="spacer" style="flex:1"></span><button class="ctl" id="filterClose">✕</button></div>
+    <div class="ovbody">
+      <input type="search" id="q" placeholder="Filter by name or path…">
+      <div class="toolbar">
+        <button class="chip" id="fAll" data-f="all">All</button>
+        <button class="chip" id="fPend" data-f="pending">Pending only</button>
+        <button class="chip" id="fLoad" data-f="loaded">Loaded only</button>
+        <button class="chip" id="fHid" data-f="hidden">Hidden only</button>
+        <button class="chip" id="fEdit" data-f="edited">Edited only</button>
+      </div>
+      <div class="toolbar">
+        <button class="chip" id="expand">⤢ Expand all</button>
+        <button class="chip" id="collapse">⤡ Collapse all</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- per-row action menu (pin / rename / move / hide) -->
+<div class="ov" id="actOv">
+  <div class="ovbox" style="max-width:340px">
+    <div class="ovhd"><span id="actWhat" style="color:var(--accent2)"></span><span class="spacer" style="flex:1"></span><button class="ctl" id="actClose">✕</button></div>
+    <div class="ovbody" style="display:flex; flex-direction:column; gap:8px">
+      <button class="btn" id="actPin" style="text-align:left">📌 <span id="actPinLabel">Pin to top</span></button>
+      <button class="btn" id="actLabel" style="text-align:left">✏️ Rename (custom display label)</button>
+      <button class="btn" id="actMove" style="text-align:left">📁 Move to another folder</button>
+      <button class="btn" id="actHide" style="text-align:left">👁 <span id="actHideLabel">Hide</span></button>
     </div>
   </div>
 </div>
@@ -144,12 +179,47 @@
     $("#reset").onclick=function(){ if(confirm("Discard ALL local curation edits (hide/pin/reorder/rename/move)? This only clears this browser — any committed library-overrides.json is untouched until you re-export.")){ OV=blankOV(); saveOV(); render(); } };
     $("#reindex").onclick=function(){ window.open("https://github.com/"+REPO+"/actions/workflows/"+REINDEX_WORKFLOW, "_blank"); };
     $("#q").addEventListener("input",render);
-    document.querySelectorAll(".chip[data-f]").forEach(function(c){ c.onclick=function(){ FILTER=c.dataset.f; document.querySelectorAll(".chip[data-f]").forEach(function(x){x.classList.toggle("on",x===c);}); render(); }; });
+    var FILTER_LABELS={pending:"Pending only",loaded:"Loaded only",hidden:"Hidden only",edited:"Edited only"};
+    document.querySelectorAll(".chip[data-f]").forEach(function(c){ c.onclick=function(){ FILTER=c.dataset.f; document.querySelectorAll(".chip[data-f]").forEach(function(x){x.classList.toggle("on",x===c);}); updateFilterCount(); render(); }; });
     $("#fAll").classList.add("on");
+    function updateFilterCount(){
+      var fc=$("#fcount");
+      if(FILTER==="all" && !q()){ fc.style.display="none"; return; }
+      fc.style.display=""; fc.textContent=FILTER!=="all"? FILTER_LABELS[FILTER] : "filtered";
+    }
+    $("#q").addEventListener("input",updateFilterCount);
     $("#expand").onclick=function(){ document.querySelectorAll(".node.hasK").forEach(function(n){n.classList.add("open");}); };
     $("#collapse").onclick=function(){ document.querySelectorAll(".node.hasK").forEach(function(n){n.classList.remove("open");}); };
     $("#moveClose").onclick=closeMove;
     $("#moveOv").addEventListener("click",function(e){ if(e.target===$("#moveOv")) closeMove(); });
+
+    // Legend/help and search/filters: collapsed behind one button each (see
+    // the .mbar comment in library.css) rather than sitting permanently
+    // above the tree.
+    $("#helpBtn").onclick=function(){ $("#helpOv").classList.add("show"); };
+    $("#helpClose").onclick=function(){ $("#helpOv").classList.remove("show"); };
+    $("#helpOv").addEventListener("click",function(e){ if(e.target===$("#helpOv")) $("#helpOv").classList.remove("show"); });
+    $("#filterBtn").onclick=function(){ $("#filterOv").classList.add("show"); setTimeout(function(){$("#q").focus();},30); };
+    $("#filterClose").onclick=function(){ $("#filterOv").classList.remove("show"); };
+    $("#filterOv").addEventListener("click",function(e){ if(e.target===$("#filterOv")) $("#filterOv").classList.remove("show"); });
+
+    // Per-row "⋮" action menu (pin/rename/move/hide) -- see the renderNode
+    // comment on why these four moved off the row itself.
+    var actCtx=null; // {path, parent, name, op}
+    function closeAct(){ $("#actOv").classList.remove("show"); actCtx=null; }
+    $("#actClose").onclick=closeAct;
+    $("#actOv").addEventListener("click",function(e){ if(e.target===$("#actOv")) closeAct(); });
+    $("#actPin").onclick=function(){ if(actCtx) togglePin(actCtx.path); closeAct(); };
+    $("#actLabel").onclick=function(){ if(actCtx) editLabel(actCtx.path, actCtx.name); closeAct(); };
+    $("#actMove").onclick=function(){ if(actCtx){ var c=actCtx; closeAct(); openMove(c.op, c.path, c.name); } };
+    $("#actHide").onclick=function(){ if(actCtx) toggleHide(actCtx.path); closeAct(); };
+    window.dgeOpenRowActions=function(ctx){
+      actCtx=ctx;
+      $("#actWhat").textContent=ctx.name.replace(/_/g," ");
+      $("#actPinLabel").textContent=isPinned(ctx.path)?"Unpin":"Pin to top";
+      $("#actHideLabel").textContent=selfHidden(ctx.path)?"Unhide (show again)":"Hide";
+      $("#actOv").classList.add("show");
+    };
     Promise.all([
       fetch("../dge/data/taxonomy.json").then(function(r){return r.json();}),
       fetch("config/library-status.json").then(function(r){return r.json();})
@@ -277,16 +347,22 @@
     var pinMark= pinned? '<span class="pin" title="pinned to top">📌</span>':'';
     var movedMark= moved? '<span class="pin" title="moved here from '+esc(n.opath)+'">➜</span>':'';
 
+    // Pin/rename/move/hide used to be four always-visible buttons on every
+    // single row. On a narrow phone that left barely any width for .nm
+    // (the actual folder name) to render before its own ellipsis kicked
+    // in -- names were showing as a single character. Collapsed into one
+    // "⋮" button opening a small action menu (#actOv) instead; ▲▼ stay
+    // inline since reordering is the most frequent action here. A quiet
+    // dot on the ⋮ button itself (not a whole extra badge) still signals
+    // "something here has a custom edit" without costing any more width.
+    var anyEdit = pinned || hid || custom || moved;
     var row='<div class="row" data-path="'+esc(n.path)+'" data-op="'+esc(n.opath)+'" data-parent="'+esc(parentPath||"")+'" data-name="'+esc(n.name)+'" data-leaf="'+(n.leaf?1:0)+'">'+
       tw+dot+pinMark+movedMark+
       '<span class="nm"><span class="actual">'+nameShown+'</span>'+(custom?' <span class="disp">✎</span>':'')+' <span class="path">'+esc(n.path)+'</span>'+(moved?' <span class="disp">from '+esc(n.opath)+'</span>':'')+'</span>'+
       cnt+badge+
       '<button class="ctl" data-act="up" title="move up">▲</button>'+
       '<button class="ctl" data-act="down" title="move down">▼</button>'+
-      '<button class="ctl'+(pinned?" on":"")+'" data-act="pin" title="'+(pinned?"unpin":"pin to top of its group")+'">📌</button>'+
-      '<button class="ctl" data-act="label" title="rename (custom display label)">✏️</button>'+
-      '<button class="ctl" data-act="move" title="move to another folder">📁</button>'+
-      '<button class="ctl'+(hid?" off":"")+'" data-act="hide" title="'+(hid?"hidden — click to show":"visible — click to hide")+'">'+(hid?"🚫":"👁")+'</button>'+
+      '<button class="ctl'+(anyEdit?" on":"")+'" data-act="more" title="pin / rename / move / hide">⋮</button>'+
       '</div>';
     return '<div class="'+cls+'" data-node="'+esc(n.path)+'">'+row+(n.leaf?"":'<div class="kids">'+kidsHtml+"</div>")+"</div>";
   }
@@ -310,12 +386,9 @@
         ev.stopPropagation();
         var row=b.closest(".row"); var path=row.dataset.path, parent=row.dataset.parent, name=row.dataset.name, op=row.dataset.op;
         var act=b.dataset.act;
-        if(act==="hide"){ toggleHide(path); }
-        else if(act==="pin"){ togglePin(path); }
-        else if(act==="label"){ editLabel(path, name); }
-        else if(act==="up"){ reorder(parent, name, -1); }
+        if(act==="up"){ reorder(parent, name, -1); }
         else if(act==="down"){ reorder(parent, name, 1); }
-        else if(act==="move"){ openMove(op, path, name); }
+        else if(act==="more"){ window.dgeOpenRowActions({path:path, parent:parent, name:name, op:op}); }
       };
     });
   }

@@ -6,7 +6,9 @@
  *            delivery predated it and had reverted to a raw fetch call).
  *   v1.2.2 — aiLang now defaults from the main reader's onboarding language
  *            preference (dge_lang_pref) instead of always starting at "en".
- *   v1.3.0 — Siddhānta-Kaumudī reading-order navigation (was partial, ~28%).
+ *   v1.3.0 — Siddhānta-Kaumudī reading-order navigation (partial, ~28%).
+ *   v1.3.1 — resolveSkRefs(): "<{SK###}>" markers rendered as plain
+ *            parenthetical citations (superseded by linkSkRefs in v1.5.0).
  *   v1.4.0 — full SK mapping (3961/3962, kaumudi_order v2): dual-order
  *            header (AK ‹› | कौमुदी ‹›), 70-prakarana drawer, LSK badge,
  *            jump box takes "sk 350"/"lsk 32".

@@ -1,12 +1,20 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v6.0 (Extra shloka fields for Vedic content: vedicId/rishi/devata/chandas/padapatha)';
+window.DGE_VERSIONS['config.js'] = 'v6.1 (new appConfig.showCopyrightGatedCommentaries, default false -- gates the unlicensed Mahabharata Kannada translation/Tatparya Nirnaya text; see core.js\'s dgeVisibleCommentaries)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
   designedBy: "- 3BU1 -",
   showDesignedBy: true, // set false to hide the credit line entirely instead of just changing its text
+  // The Mahabharata Kannada translation + Madhvacharya's Tatparya Nirnaya
+  // excerpts interleaved in it carry no license anywhere (extracted from a
+  // Pejawar Matha Android app's asset bundle) -- see core.js's
+  // dgeVisibleCommentaries for the full reasoning. Default false: readers
+  // do not see this content until licensing is confirmed one way or
+  // another. A super-admin can flip this in Settings if that confirmation
+  // ever comes through, or to review the actual text while chasing it down.
+  showCopyrightGatedCommentaries: false,
   contactEmail: "sanatanavidyagurukulam@gmail.com",
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",

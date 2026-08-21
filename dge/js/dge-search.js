@@ -30,6 +30,20 @@
     };
   }
 
+  // Root/verse schemas vs. commentary schemas vs. genuinely ambiguous
+  // independent-prose schemas (dge/data/schemas.json's own _description for
+  // each name is the source of truth here, not a guess) -- lets the global
+  // search UI offer an honest "shlokas only / commentary only" filter
+  // without re-deriving schema semantics itself or guessing from a title.
+  var SHLOKA_SCHEMAS = { vedic_text:1, itihasa_purana_text:1, smriti_dharmashastra_text:1,
+    stotra_text:1, grantha_mula_text:1, dasa_sahitya_composition:1, dasa_pada_text:1 };
+  var COMMENTARY_SCHEMAS = { grantha_tika_text:1, grantha_tippani_text:1 };
+  function classifyContentType(schema) {
+    if (SHLOKA_SCHEMAS[schema]) return 'shloka';
+    if (COMMENTARY_SCHEMAS[schema]) return 'commentary';
+    return 'prose'; // generic / grantha_prakarana_text -- independent treatises, neither a root verse nor a commentary on one
+  }
+
   function bucketOf(tg) {
     var key = tg.replace(/[\^$]/g, '') || tg;
     var two = key.substr(0, 2).replace(/[^a-zA-Z0-9]/g, '_');
@@ -217,6 +231,7 @@
           if (sc.score >= (opts.minScore || 0.18)) {
             var g = self.granthas[gi];
             hits.push({ grantha: g.slug, title: g.title, category: g.category,
+              contentType: classifyContentType(g.schema),
               unit: row.u, snippet: row.s, score: sc.score, via: sc.via });
           }
         });

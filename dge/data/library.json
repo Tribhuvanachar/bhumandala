@@ -8522,6 +8522,18 @@
       "path": "dge/data/vedanga/vyakarana/shabdapatha/data.json",
       "populated": true,
       "title": "Shabdapatha"
+    },
+    {
+      "path": "dge/data/nitishastra/chanakya_niti/data.json",
+      "populated": true,
+      "title": "Chanakya Niti",
+      "addedAt": "2026-08-21"
+    },
+    {
+      "path": "dge/data/nitishastra/chanakya_sutra/data.json",
+      "populated": true,
+      "title": "Chanakya Niti Sutra",
+      "addedAt": "2026-08-21"
     }
   ]
 }

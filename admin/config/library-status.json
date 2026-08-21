@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1706,
-  "loaded": 979,
-  "items": 373349
+  "leaves": 1708,
+  "loaded": 981,
+  "items": 374262
  },
  "sections": {
   "agama": {
@@ -42,9 +42,9 @@
    "items": 0
   },
   "nitishastra": {
-   "total": 1,
-   "loaded": 1,
-   "items": 5
+   "total": 3,
+   "loaded": 3,
+   "items": 918
   },
   "purana": {
    "total": 92,
@@ -1427,6 +1427,8 @@
   "kavya_alankara/sumadhva_vijaya/sarga_9": 0,
   "misc/ajaya_vijayendra": 0,
   "misc/satyadhyana_tirtha_civil_suit": 0,
+  "nitishastra/chanakya_niti": 339,
+  "nitishastra/chanakya_sutra": 574,
   "nitishastra/hitopadesha": 5,
   "purana/agni_purana": 0,
   "purana/bhagavata_purana/skandha_01": 813,

@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha.js'] = 'v1.3 (per-reader kosha order, hide, collapse, filter/sort, Gemini quick actions)';
+  window.DGE_VERSIONS['kosha.js'] = 'v1.4 (the floating कोश button is now draggable to reposition and collapsible to a small dot, via the new shared window.dgeMakeFloatingDraggable in utils.js)';
 
   // Citation-form normalizer: strip a trailing visarga (H) / anusvara (M) from
   // an SLP1 headword so dictionaries that cite the nominative (रामः = rAmaH) or
@@ -822,6 +822,7 @@
       '<div class="kosha-body"><div class="kosha-res" id="kosha-res"></div><div class="kosha-detail" id="kosha-detail">' +
       '<div class="kosha-empty">Type a headword to look it up across every dictionary.</div></div></div>';
     document.body.appendChild(fab); document.body.appendChild(ov);
+    if (typeof window.dgeMakeFloatingDraggable === 'function') window.dgeMakeFloatingDraggable(fab, 'kosha');
     var input = ov.querySelector('#kosha-q'), res = ov.querySelector('#kosha-res'), detail = ov.querySelector('#kosha-detail');
     fab.onclick = function () { ov.classList.add('open'); input.focus(); };
 

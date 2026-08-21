@@ -26,7 +26,7 @@
   'use strict';
 
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['content-inline.js'] = 'v1.0 (in-place editing of admin/content/*.json)';
+  window.DGE_VERSIONS['content-inline.js'] = 'v1.1 (wireDrag: fixed the laggy touch drag -- was calling getBoundingClientRect() on every single pointermove, forcing a synchronous layout flush on every one of a touch drag\'s many events; now measured once per drag and the style write is batched to one per animation frame)';
 
   const FILE = document.body && document.body.dataset.contentFile;
   if (!FILE) return;                       // page has not opted in
@@ -278,6 +278,24 @@
   // toggles expand/collapse) from being swallowed as an accidental drag.
   function wireDrag(el) {
     var dragging = false, moved = false, justDragged = false, startX = 0, startY = 0, startTop = 0;
+    // Measured once per drag (in pointerdown) rather than read fresh on
+    // every single pointermove -- it was the actual cause of the reported
+    // "laggy" touch drag. getBoundingClientRect() forces the browser to
+    // flush layout synchronously, and immediately after every previous
+    // pointermove had just written a new el.style.top, that flush was
+    // real, unavoidable work — not free. On a phone, doing that on every
+    // one of a touch drag's many pointermove events (far more than 60/sec
+    // on some devices) is exactly what shows up as jank a finger can feel
+    // trailing behind. The bar's height cannot change mid-drag (expand/
+    // collapse is a separate action, never triggered while dragging), so
+    // there is nothing to re-measure.
+    var dragHeight = 0;
+    // Also batches the actual style write to one per animation frame via
+    // requestAnimationFrame, rather than one write (and the paint it can
+    // trigger) per pointermove — a touchscreen can report move events
+    // faster than the display refreshes, and only the latest position
+    // before the next paint is ever going to be visible anyway.
+    var rafPending = false, pendingDy = 0, pendingClientX = 0;
     // Movement is tracked via listeners on `document`, not on `el` itself,
     // and setPointerCapture is deliberately never used here. The collapsed
     // pill is only ~28px wide, so a normal-speed drag leaves its bounds
@@ -302,24 +320,30 @@
       if (ev.target.closest('button') && !ev.target.closest('.ci-pill')) return; // let toolbar buttons work untouched
       dragging = true; moved = false;
       startX = ev.clientX; startY = ev.clientY;
-      startTop = el.getBoundingClientRect().top;
+      var rect = el.getBoundingClientRect();
+      startTop = rect.top; dragHeight = rect.height; // the only reads for the whole drag
       document.addEventListener('pointermove', onMove);
       document.addEventListener('pointerup', onUp);
       document.addEventListener('pointercancel', onUp);
     });
+    function applyPendingMove() {
+      rafPending = false;
+      if (!dragging) return;
+      var half = dragHeight / 2;
+      var newTop = Math.min(Math.max(startTop + pendingDy, 4), window.innerHeight - dragHeight - 4);
+      el.style.top = (newTop + half) + 'px';
+      el.style.left = ''; el.style.right = '';
+      // Live-preview which edge it would dock to on release, purely visual.
+      el.classList.toggle('ci-right', pendingClientX > window.innerWidth / 2);
+    }
     function onMove(ev) {
       if (!dragging) return;
       var dx = ev.clientX - startX, dy = ev.clientY - startY;
       if (!moved && Math.hypot(dx, dy) < 6) return; // still within click tolerance
       moved = true;
       el.classList.add('ci-dragging');
-      var h = el.getBoundingClientRect().height;
-      var half = h / 2;
-      var newTop = Math.min(Math.max(startTop + dy, 4), window.innerHeight - h - 4);
-      el.style.top = (newTop + half) + 'px';
-      el.style.left = ''; el.style.right = '';
-      // Live-preview which edge it would dock to on release, purely visual.
-      el.classList.toggle('ci-right', ev.clientX > window.innerWidth / 2);
+      pendingDy = dy; pendingClientX = ev.clientX;
+      if (!rafPending) { rafPending = true; requestAnimationFrame(applyPendingMove); }
     }
     function onUp(ev) {
       if (!dragging) return;
@@ -332,8 +356,9 @@
       moved = false;
       justDragged = true;
       setTimeout(function () { justDragged = false; }, 0); // cleared after this tick's click, if any, is swallowed
-      var h = el.getBoundingClientRect().height;
-      var topCenter = el.getBoundingClientRect().top + h / 2;
+      // dragHeight is still accurate here -- nothing can have resized the
+      // bar mid-drag -- so this is the one real read needed on release.
+      var topCenter = el.getBoundingClientRect().top + dragHeight / 2;
       pos = {
         side: ev.clientX > window.innerWidth / 2 ? 'right' : 'left',
         topFrac: Math.min(Math.max(topCenter / window.innerHeight, 0), 1)
