@@ -1050,13 +1050,33 @@ function dgeEnsureShabdaModal() {
   return document.getElementById(DGE_SHABDA_MODAL_ID);
 }
 
-function dgeFetchShabdaData() {
+function dgeFetchShabdaData(word) {
+  // Sharded by the word's first character (tools/build_shabda_shards.py):
+  // declension is suffixal, so a form's first akshara is its stem's --
+  // one ~100 KB shard answers instead of the whole 7.6 MB file. The full
+  // file remains the fallback for a missing shard (and for callers that
+  // pass no word).
+  const ch = String(word || '').trim()[0];
+  if (ch) {
+    const name = 'u' + ch.codePointAt(0).toString(16).padStart(4, '0') + '.json';
+    DGE_SHABDA_SHARDS = DGE_SHABDA_SHARDS || {};
+    if (!DGE_SHABDA_SHARDS[name]) {
+      DGE_SHABDA_SHARDS[name] =
+        fetch('data/vedanga/vyakarana/shabdapatha/by_akshara/' + name)
+          .then(r => r.ok ? r.json() : null)
+          .then(d => d ? (d.items || []) : null)
+          .catch(() => null);
+    }
+    return DGE_SHABDA_SHARDS[name].then(items =>
+      items !== null ? items : dgeFetchShabdaData());
+  }
   if (DGE_SHABDA_CACHE) return Promise.resolve(DGE_SHABDA_CACHE);
   return fetch('data/vedanga/vyakarana/shabdapatha/data.json')
     .then(r => r.ok ? r.json() : { items: [] })
     .then(d => { DGE_SHABDA_CACHE = d.items || []; return DGE_SHABDA_CACHE; })
     .catch(() => { DGE_SHABDA_CACHE = []; return DGE_SHABDA_CACHE; });
 }
+let DGE_SHABDA_SHARDS = null;
 
 // Same exact-cell reverse lookup as shabda.js's findFormLocation, kept as
 // its own small copy since shabda.js's version lives inside that page's
@@ -1144,7 +1164,7 @@ window.dgeOpenShabdaForSelection = function(e) {
   window.openModal(DGE_SHABDA_MODAL_ID);
   const body = document.getElementById('dgeShabdaModalBody');
   body.innerHTML = '<div class="dsm-loading">खोजयति… searching “' + dgeShabdaEsc(word) + '”…</div>';
-  dgeFetchShabdaData().then(function (items) {
+  dgeFetchShabdaData(word).then(function (items) {
     const loc = dgeFindShabdaForm(items, word);
     if (loc) {
       const it = loc.item;

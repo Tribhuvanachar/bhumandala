@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.12 (dgeVisibleCommentaries: gates the unlicensed Mahabharata Kannada translation/Tatparya Nirnaya commentary out of every normalized grantha object by default -- window.appConfig.showCopyrightGatedCommentaries, off by default, is the reader-facing toggle)';
+window.DGE_VERSIONS['core.js'] = 'v3.13 (merge: v3.12 dgeVisibleCommentaries -- gates the unlicensed Mahabharata Kannada translation/Tatparya Nirnaya commentary out of every normalized grantha object by default, window.appConfig.showCopyrightGatedCommentaries toggles it -- plus v3.10 dgeStripEditionMarkers: GRETIL page markers, transliterated \"(I,1, p. 37)\" parentheticals, 357 of them in smriti_dharma, stripped at render time; plus unitId on normalized shlokas + jumpVedicId unit matching)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -353,6 +353,19 @@ function dgeVisibleCommentaries(commentaries) {
   return out;
 }
 
+// The GRETIL smriti imports carry the source edition's own page markers,
+// transliterated wholesale into Devanagari -- "(\u0907,\u0967, \u092A\u094D. \u0969\u096D)" is "(I,1,
+// p. 37)" -- 357 of them, every one confined to dge/data/smriti_dharma
+// (measured across the whole corpus before writing this, so the pattern
+// can afford to be narrow: a parenthesis containing p+virama+dot and
+// digits, the page abbreviation no verse ever contains). Stripped at
+// render time so the stored data keeps mirroring its source.
+function dgeStripEditionMarkers(text) {
+  if (!text || text.indexOf('\u092A\u094D.') === -1) return text;
+  return text.replace(/\s*\([^()]{0,40}\u092A\u094D\.\s*[\u0966-\u096F0-9]+[^()]{0,25}\)/g, '')
+             .replace(/[ \t]+([\u0964\u0965])/g, ' $1').replace(/\s{2,}/g, ' ').trim();
+}
+
 function dgeNormalizeGranthaData(data, granthaTitle) {
   if (!data) return data;
   if (data.shlokas) return data; // already the expected shape (e.g. PNS) -- nothing to do
@@ -436,8 +449,9 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         });
         if (Object.keys(commentaries).length) shlokasWithCommentaries++;
         shlokas[n] = {
-          sa: dgeSanitizeVedicAccents(v.sanskrit_text || v.sa || ''),
+          sa: dgeStripEditionMarkers(dgeSanitizeVedicAccents(v.sanskrit_text || v.sa || '')),
           vedicId: chapter.reference ? (chapter.reference + (v.number != null ? ' · ' + v.number : '')) : '',
+          unitId: chapter.id || '',
           commentaries: commentaries,
           geminiEnrichment: v.gemini_enrichment || null
         };
@@ -496,12 +510,17 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         // found the same way as sanskrit_text above: confirmed live, 16
         // already-shipped translation_ganguli files (1,577 items) all
         // rendering blank against this exact gap.
-        sa: dgeSanitizeVedicAccents(item.samhita_patha || item.sanskrit_text || item.text || item.sa || ''),
+        sa: dgeStripEditionMarkers(dgeSanitizeVedicAccents(item.samhita_patha || item.sanskrit_text || item.text || item.sa || '')),
         // Same importer's items carry a human-readable "reference" (e.g.
         // "Yāska — Nirukta, adhyaya 1") alongside the bare slug id --
         // prefer it, matching the itihasa_purana_text branch above which
         // already prefers chapter.reference over a raw id.
         vedicId: item.reference || item.id || '',
+        // The item's raw id too (DV_6001, AV_C01_S01_I01, ...): deep links
+        // built from data-side indexes (prayoga index, backlinks) address
+        // units by this id, while vedicId above is the human-facing
+        // reference string when one exists.
+        unitId: item.id || '',
         // Traditional Ashtaka.Adhyaya.Varga.Rik reference — present only for
         // Rigveda Samhita data so far (see ashtaka_ref in the source data.json).
         ashtakaId: item.ashtaka_ref || '',
@@ -799,6 +818,14 @@ function dgeResolveQuickJumpTarget(target) {
       const vid = stotraData.shlokas[k].vedicId;
       return vid && normalize(vid) === wanted;
     });
+    // Data-side unit ids (DV_6001 ...) aren't dotted numbers and aren't the
+    // display reference -- match them exactly against the id each shloka
+    // now carries. For a nested grantha this lands on the chapter's first
+    // shloka, which is the honest resolution of a chapter-level id.
+    if (!targetId) {
+      targetId = Object.keys(stotraData.shlokas).find(k =>
+        stotraData.shlokas[k].unitId === target.vedicId);
+    }
   }
 
   if (targetId && typeof playShloka === 'function') {

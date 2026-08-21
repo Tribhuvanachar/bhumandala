@@ -221,7 +221,15 @@
   }
 
   function go(slug, unit) {
-    var p = window.location.pathname + '?path=' + slug;
+    // ?path= is the READER's contract. From any other page carrying this
+    // search (ashtadhyayi.html since the corpus-usage button), the result
+    // must open in the reader — page-relative navigation would produce
+    // ashtadhyayi.html?path=..., which that page ignores.
+    var path = window.location.pathname;
+    if (!/\/(index\.html)?$/.test(path)) {
+      path = path.replace(/[^/]*$/, 'index.html');
+    }
+    var p = path + '?path=' + slug;
     if (unit) p += '&jumpShloka=' + encodeURIComponent(unit);
     window.location.href = p;
   }

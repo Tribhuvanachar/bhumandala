@@ -128,11 +128,31 @@
   function krtHtml(d) {
     if (!d.krt || !d.krt.length) return '<p class="pk-note">No kṛdanta forms derived for this root.</p>';
     return d.krt.map(function (k, i) {
+      // The sutra that introduces the pratyaya is read off the derivation
+      // itself — the first step whose result actually contains the
+      // pratyaya's name (a participle's derivation passes through the
+      // lakara rule first, so "first changed step" alone points one rule
+      // early for शतृ/शानच्). Data-driven either way, never a
+      // hand-maintained list.
+      var intro = null, firstChanged = null;
+      var kname = KRT[k.k] || '';
+      for (var s = 1; s < (k.s || []).length; s++) {
+        if (k.s[s].length <= 1) continue;
+        if (!firstChanged) firstChanged = k.s[s][0];
+        if (kname && k.s[s][1].indexOf(kname) !== -1) { intro = k.s[s][0]; break; }
+      }
+      intro = intro || firstChanged;
+      var introHtml = (intro && /^[1-8]\.[1-4]\.\d{1,3}$/.test(intro))
+        ? '<a class="pk-krt-sutra" href="ashtadhyayi.html#' + esc(intro) + '" ' +
+          'title="the sutra that provides this pratyaya — open it in the Ashtadhyayi reader" ' +
+          'onclick="event.stopPropagation()">ℹ️ ' + esc(intro) + '</a>'
+        : '';
       return '<section class="pk-krt">' +
         '<button class="pk-krt-head" data-krt="' + i + '">' +
           '<span class="pk-form deva">' + esc(k.t) + '</span>' +
           '<span class="pk-krt-name deva">' + esc(KRT[k.k] || k.k) + '</span>' +
           '<span class="pk-krt-en">' + esc(KRT_EN[k.k] || '') + '</span>' +
+          introHtml +
           '<span class="pk-arrow" aria-hidden="true">▾</span>' +
         '</button>' +
         '<div class="pk-krt-body" id="pk-krt-' + i + '" hidden></div>' +
@@ -153,6 +173,7 @@
         (document.body.dataset.view === 'krdanta'
           ? '<a class="chip" href="prakriya.html#' + esc(d.code) + '">प्रक्रिया · तिङन्त</a>'
           : '<a class="chip" href="krdanta.html#' + esc(d.code) + '">कृदन्त forms</a>') +
+        '<a class="chip" href="rupasiddhi.html#' + esc(d.code) + '" title="उपसर्ग-योजना, सनादि, सर्वे लकाराः — live derivation workbench">✨ रूपसिद्धिः</a>' +
       '</div></div>';
   }
 

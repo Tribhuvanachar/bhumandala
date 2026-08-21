@@ -102,6 +102,7 @@
       +'<a class="btn ai" href="prakriya.html#'+it.id+'">⚙ प्रक्रिया · तिङन्त</a>'
       +'<a class="btn" href="krdanta.html#'+it.id+'">कृदन्त forms</a>'
       +'<a class="btn" href="dhatuforms.html#'+it.id+'" title="सन्/णिच्/यङ्/यङ्लुक् व शुद्ध कर्मणि — full lakara tables">रूपाणि · सन्/णिच्/यङ्</a>'
+      +'<a class="btn ai" href="rupasiddhi.html#'+it.id+'" title="उपसर्ग-योजना, सनादि, सर्वे 11 लकाराः, कृदन्त-declensions — every form derived live, step by step">✨ रूपसिद्धिः · उपसर्गैः</a>'
       +'<a class="btn" href="ashtadhyayi.html" title="open the sūtra reader">↔ अष्टाध्यायी</a>'
       +'<button class="btn" data-corpus-search="'+esc(it.dhatu)+'" title="Find every place this root appears across the DGE corpus">🔍 corpus occurrences</button>'
       +'</div>';
@@ -230,14 +231,52 @@
     // sentence followed by an orphan line holding just a lone daṇḍa.
     return String(text||"").replace(/([।॥][।॥\s]*)/g, "$1\n\n").trim();
   }
+  // Node category letters (tools/build_vritti_nodes.py): r = this dhatu's
+  // own forms present, s = sutra citations, m = named acharya opinions,
+  // g = general discussion. "Relevant" for the default filter = contains r.
+  var VCAT = { r:"रूपाणि", s:"सूत्रनिर्देशः", m:"आचार्यमतम्", g:"सामान्यचर्चा" };
   function showVritti(box, source){
     var code=box.dataset.vrit, d=_vcache[code]; if(!d) return;
     var v=d.vrittis.filter(function(x){return x.source===source;})[0]; if(!v) return;
     box.querySelectorAll(".vrit-tab").forEach(function(t){ t.classList.toggle("on",t.dataset.v===source); });
     var devCls = state.script==="iast"?"":"deva";
     var el=$(".mdhv-text",box); el.className="mdhv-text "+devCls;
-    var body = paragraphize(tl(v.text||""));
-    el.innerHTML = (v.author?('<div class="mdhv-author">['+esc(v.author)+']</div>'):"") + esc(body);
+    var author = v.author?('<div class="mdhv-author">['+esc(v.author)+']</div>'):"";
+    if(!(v.nodes&&v.nodes.length)){
+      el.innerHTML = author + esc(paragraphize(tl(v.text||"")));
+    } else {
+      // Long vrittis arrive pre-noded: offset-bounded chunks of the
+      // untouched original text, each classified. Default to the
+      // dhatu-relevant sections when the full text is genuinely long
+      // (भू's Madhaviya entry is 94 KB, much of it general shastra
+      // digression); सर्वम् is one tap away and says what it adds.
+      var mode = box.dataset.vmode || ((v.text||"").length>5000 ? "rel" : "all");
+      box.dataset.vmode = mode;
+      var shown=0;
+      var cards = v.nodes.map(function(n){
+        var cats=n[2]||"g";
+        if(mode==="rel" && cats.indexOf("r")===-1) return "";
+        shown++;
+        var tags=cats.split("").map(function(c){ return VCAT[c]?'<span class="vrit-tag vrit-tag-'+c+'">'+VCAT[c]+'</span>':""; }).join("");
+        return '<div class="vrit-node">'+
+          '<div class="vrit-tags">'+tags+'</div>'+
+          esc(paragraphize(tl(v.text.slice(n[0],n[1]))))+'</div>';
+      }).join("");
+      var hidden = v.nodes.length - shown;
+      el.innerHTML = author +
+        '<div class="vrit-modes">'+
+        '<button class="vrit-mode'+(mode==="rel"?" on":"")+'" data-vmode="rel">धातुविशिष्टम्</button>'+
+        '<button class="vrit-mode'+(mode==="all"?" on":"")+'" data-vmode="all">सर्वम् · full text</button>'+
+        (mode==="rel"&&hidden>0?'<span class="vrit-hidden">'+hidden+' general sections folded</span>':"")+
+        '</div>' + cards;
+      el.querySelectorAll(".vrit-mode").forEach(function(b){
+        b.addEventListener("click",function(e){
+          e.stopPropagation();
+          box.dataset.vmode=b.dataset.vmode;
+          showVritti(box, source);
+        });
+      });
+    }
     if (typeof window.dgeScanForSutras === "function") {
       try { window.dgeScanForSutras(el); } catch (e) {}
     }
