@@ -8,7 +8,10 @@
   "fileExtension": ".mp3",
   "totalShlokas": 42,
   "availableCommentaries": {
-   "pavamanacharya_english": "Huli V. Pavamanacharya (English Translation)"
+   "pavamanacharya_english": "Huli V. Pavamanacharya (English Translation)",
+   "gemini_padaccheda": "AI Padaccheda (Gemini, unreviewed)",
+   "gemini_anvaya": "AI Anvaya (Gemini, unreviewed)",
+   "gemini_summary": "AI Summary (Gemini, unreviewed)"
   },
   "colophon": "इति प्रथमसर्गः"
  },
@@ -16,61 +19,91 @@
   "1": {
    "sa": "श्रीमल्लक्ष्मीनृसिंहस्य श्रियं दिशतु मे नखः । स्वभक्ताभीष्टदानाय समुपात्तदशाकृतेः ॥ १ ॥",
    "commentaries": {
-    "pavamanacharya_english": "Let the claws of Lord Sri Narasimha who has taken ten different incarnations for the purpose of bestowing the deserving men and women who are devoted to Him with the four objects of a soul viz Dharma - Artha - Kama - Moksha bless me with prosperity."
+    "pavamanacharya_english": "Let the claws of Lord Sri Narasimha who has taken ten different incarnations for the purpose of bestowing the deserving men and women who are devoted to Him with the four objects of a soul viz Dharma - Artha - Kama - Moksha bless me with prosperity.",
+    "gemini_padaccheda": "श्रीमल्लक्ष्मीनृसिंहस्य श्रियम् दिशतु मे नखः स्वभक्ताभीष्टदानाय समुपात्तदशाकृतेः",
+    "gemini_anvaya": "स्वभक्ताभीष्टदानाय समुपात्तदशाकृतेः श्रीमल्लक्ष्मीनृसिंहस्य नखः मे श्रियम् दिशतु ।",
+    "gemini_summary": "May the claw of Lord Lakshmi-Narasimha, who assumed the ten divine incarnations to fulfill the cherished desires of His devotees, bestow auspicious prosperity upon me."
    }
   },
   "2": {
    "sa": "वस्तु स्तुतं सुरस्तोमैरस्तु शस्तं मया स्तुतम् । मस्तुहस्तं प्रस्तुताय श्रुतिमस्तकविश्रुतम् ॥ २ ॥",
    "commentaries": {
-    "pavamanacharya_english": "I extol and pray Lord Sri Krishna who is crawling holding butter in one hand and who is expounded by the Vedas and Brahmameemamsa and whom Sri Lakshmi and all the devatas eulogise constantly, to bestow his blessings on me in the onerous task of successful completion of this literary work."
+    "pavamanacharya_english": "I extol and pray Lord Sri Krishna who is crawling holding butter in one hand and who is expounded by the Vedas and Brahmameemamsa and whom Sri Lakshmi and all the devatas eulogise constantly, to bestow his blessings on me in the onerous task of successful completion of this literary work.",
+    "gemini_padaccheda": "वस्तु स्तुतम् सुरस्तोमैः अस्तु शस्तम् मया स्तुतम् मस्तुहस्तम् प्रस्तुताय श्रुतिमस्तकविश्रुतम्",
+    "gemini_anvaya": "सुरस्तोमैः स्तुतं श्रुतिमस्तकविश्रुतं मस्तुहस्तं वस्तु मया स्तुतं प्रस्तुताय शस्तम् अस्तु",
+    "gemini_summary": "May the Supreme Being (Lord Krishna), who holds butter in His hand, is celebrated in the Upanishads, and is praised by hosts of gods, grant auspicious success to this undertaking as I praise Him."
    }
   },
   "3": {
    "sa": "श्रीमदानन्दतीर्थेन्दुभासनं मम मानसे । आशासे साधुशब्दार्थसरिदीशाभिवृद्धये ॥ ३ ॥",
    "commentaries": {
-    "pavamanacharya_english": "The sea swells at the sight of full moon rising. Likewise I wish that refined and meaningful rhetoric words which inspire me to complete the noble task of writing this literary work flash on my mind at the reminiscence of Sri Madhwacharya who is the embodiment of great erudition and a treasure of complete knowledge."
+    "pavamanacharya_english": "The sea swells at the sight of full moon rising. Likewise I wish that refined and meaningful rhetoric words which inspire me to complete the noble task of writing this literary work flash on my mind at the reminiscence of Sri Madhwacharya who is the embodiment of great erudition and a treasure of complete knowledge.",
+    "gemini_padaccheda": "श्रीमत्-आनन्दतीर्थ-इन्दु-भासनम् मम मानसे आशासे साधु-शब्द-अर्थ-सरित्-ईश-अभिवृद्धये",
+    "gemini_anvaya": "साधुशब्दार्थसरिदीशाभिवृद्धये मम मानसे श्रीमदानन्दतीर्थेन्दुभासनम् आशासे ।",
+    "gemini_summary": "The poet prays for the luminous presence of Sri Anandatirtha (Madhwacharya), who is like the moon, to shine within his mind, so that his ocean of noble words and meanings may swell with inspiration."
    }
   },
   "4": {
    "sa": "श्रीराघवेन्द्ररत्नानां रसनारङ्गनर्तकी । शब्दाम्बुधिशरज्ज्योत्स्ना शरणं मम शारदा ॥ ४ ॥",
    "commentaries": {
-    "pavamanacharya_english": "The tongue of Sri Raghavendra on whose face the resplendence of a gem is constantly manifested serves as the stage for Sri Vidyadevi to performs dance, where she merrily dances and transform into meaningful and resourceful words resulting from the discourses and commentaries by the great saint. Let that Sri Vidyadevi infuse me with waves of meaningful words as the moon light of an autumn swells the ocean."
+    "pavamanacharya_english": "The tongue of Sri Raghavendra on whose face the resplendence of a gem is constantly manifested serves as the stage for Sri Vidyadevi to performs dance, where she merrily dances and transform into meaningful and resourceful words resulting from the discourses and commentaries by the great saint. Let that Sri Vidyadevi infuse me with waves of meaningful words as the moon light of an autumn swells the ocean.",
+    "gemini_padaccheda": "श्रीराघवेन्द्ररत्नानाम् रसनारङ्गनर्तकी शब्दाम्बुधिशरज्ज्योत्स्ना शरणम् मम शारदा",
+    "gemini_anvaya": "श्रीराघवेन्द्ररत्नानाम् रसनारङ्गनर्तकी शब्दाम्बुधिशरज्ज्योत्स्ना शारदा मम शरणम् (अस्तु)",
+    "gemini_summary": "May Goddess Sharada (Sarasvati), who dances upon the stage of the tongue of the jewel-like Sri Raghavendra and acts like autumnal moonlight causing the ocean of speech to swell, be my refuge."
    }
   },
   "5": {
    "sa": "कठिनापि कविश्लाघ्या त्रिविक्रमसरस्वती । सुवर्णयोगसन्दृश्या वरा वज्रमणिर्यथा ॥ ५ ॥",
    "commentaries": {
-    "pavamanacharya_english": "Diamond though very hard gets appreciation from the experts when they scrutinise the gold ornaments studded with diamonds. Only then one can appraise it. Likewise, though the points of view of Trivikramapanditacharya in his literary masterpieces like Ushaharna, Harivayustuti, Vishnustuti, Tattvadeepa and others cannot be easily apprehended, those views receive adoration from the scholarly poets as they are composed with rhetoric and rhyming words. Let those words inspire me in my task of writing this book."
+    "pavamanacharya_english": "Diamond though very hard gets appreciation from the experts when they scrutinise the gold ornaments studded with diamonds. Only then one can appraise it. Likewise, though the points of view of Trivikramapanditacharya in his literary masterpieces like Ushaharna, Harivayustuti, Vishnustuti, Tattvadeepa and others cannot be easily apprehended, those views receive adoration from the scholarly poets as they are composed with rhetoric and rhyming words. Let those words inspire me in my task of writing this book.",
+    "gemini_padaccheda": "कठिना अपि कविश्लाघ्या त्रिविक्रमसरस्वती सुवर्णयोगसन्दृश्या वरा वज्रमणिः यथा",
+    "gemini_anvaya": "यथा कठिना अपि सुवर्णयोगसन्दृश्या वरा वज्रमणिः (भवति), तथा कठिना अपि सुवर्णयोगसन्दृश्या त्रिविक्रमसरस्वती कविश्लाघ्या वरा (भवति) ।",
+    "gemini_summary": "Just as an uncut diamond, though extremely hard, becomes splendid and admired when set in gold, the profound poetic speech of Trivikrama Pandita, though dense and challenging, is supreme and praised by poets for its masterful phrasing and elegance."
    }
   },
   "6": {
    "sa": "वाणी पाणितलासक्तवीणारवविडम्बिनी । नानाप्रबन्धचतुरा भाति नारायणार्यगीः ॥ ६ ॥",
    "commentaries": {
-    "pavamanacharya_english": "The words of Narayanapanditacharya which are dexterously glowing in his literary gems in different genrs like Sri Sumadhwavijaya, Sangraha Ramayana, Shubodaya, Parijataharana and others resemble the mellifluous sound of the veena adorning the hands of Sri Vidyadevi."
+    "pavamanacharya_english": "The words of Narayanapanditacharya which are dexterously glowing in his literary gems in different genrs like Sri Sumadhwavijaya, Sangraha Ramayana, Shubodaya, Parijataharana and others resemble the mellifluous sound of the veena adorning the hands of Sri Vidyadevi.",
+    "gemini_padaccheda": "वाणी पाणितल-आसक्त-वीणा-रव-विडम्बिनी नाना-प्रबन्ध-चतुरा भाति नारायण-आर्य-गीः",
+    "gemini_anvaya": "पाणितलासक्तवीणारवविडम्बिनी नानाप्रबन्धचतुरा वाणी नारायणार्यगीः भाति ।",
+    "gemini_summary": "The speech of Narayanarya, which is adept at creating diverse literary works and rivals the sweet melodies of the veena resting in the hand of Sarasvati, shines resplendently."
    }
   },
   "7": {
    "sa": "वृन्दारवनमन्दारमकरन्दसहोदरी । विश्रुता विजयं दद्याद्व्यासतीर्थार्यभारती ॥ ७ ॥",
    "commentaries": {
-    "pavamanacharya_english": "The words of Sri Vyasaraja which are splendidly shining like a coral tree in the garden of the doctrine of Sri Madhwacharya taste very sweet like the sap of flowers in the coral tree of the devathas. Let those words bring me success prays the author."
+    "pavamanacharya_english": "The words of Sri Vyasaraja which are splendidly shining like a coral tree in the garden of the doctrine of Sri Madhwacharya taste very sweet like the sap of flowers in the coral tree of the devathas. Let those words bring me success prays the author.",
+    "gemini_padaccheda": "वृन्दार-वन-मन्दार-मकरन्द-सहोदरी विश्रुता विजयम् दद्यात् व्यासतीर्थ-आर्य-भारती",
+    "gemini_anvaya": "वृन्दारवनमन्दारमकरन्दसहोदरी विश्रुता व्यासतीर्थार्यभारती विजयम् दद्यात्।",
+    "gemini_summary": "May the renowned speech of the venerable Sri Vyasatirtha, sweet like the nectar flowing from the celestial Mandara flowers, bestow success and victory."
    }
   },
   "8": {
    "sa": "व्याससूत्रपदार्थोपन्यासमाकर्ण्य मान्यपि । व्यासराजस्य भजते दासतां को न कोविदः ॥ ८ ॥",
    "commentaries": {
-    "pavamanacharya_english": "Any scholar though full of pride and egoism is sure to go into a state of ecstasy when he listens to and ruminates the views expressed by Sri Vyasaraja in 'Chandrika', his magnum opus while explicating the incomprehensible meanings of Sri Vedavyasa's Brahmasutras. All such scholars are sure to eschew their pride and become the disciples of the great saint."
+    "pavamanacharya_english": "Any scholar though full of pride and egoism is sure to go into a state of ecstasy when he listens to and ruminates the views expressed by Sri Vyasaraja in 'Chandrika', his magnum opus while explicating the incomprehensible meanings of Sri Vedavyasa's Brahmasutras. All such scholars are sure to eschew their pride and become the disciples of the great saint.",
+    "gemini_padaccheda": "व्याससूत्रपदार्थोपन्यासम् आकर्ण्य मानी अपि व्यासराजस्य भजते दासताम् कः न कोविदः",
+    "gemini_anvaya": "व्यासराजस्य व्याससूत्रपदार्थोपन्यासम् आकर्ण्य मानी अपि कः कोविदः दासतां न भजते",
+    "gemini_summary": "Upon hearing Vyāsarāja's profound exposition on the meanings of the aphorisms of the Vyāsa-sūtras, which scholar—even if full of pride—would not willingly embrace servitude to him?"
    }
   },
   "9": {
    "sa": "चतुःषष्टिकलाविद्याजुषे विद्वन्महोजुषे । जयीन्द्रज्योतिषे कुर्या वन्दनानि यशोमुषे ॥ ९ ॥",
    "commentaries": {
-    "pavamanacharya_english": "I reverentially pay my obeisance to the scholarly radiance of Sri Vijayeendra Theertha who is well versed in all the Sixty four arts and who has his fame spread all over for his sagacity in destroying the lustre of the rival scholars in disputations."
+    "pavamanacharya_english": "I reverentially pay my obeisance to the scholarly radiance of Sri Vijayeendra Theertha who is well versed in all the Sixty four arts and who has his fame spread all over for his sagacity in destroying the lustre of the rival scholars in disputations.",
+    "gemini_padaccheda": "चतुःषष्टिकलाविद्याजुषे विद्वन्महोजुषे जयीन्द्रज्योतिषे कुर्याम् वन्दनानि यशोमुषे",
+    "gemini_anvaya": "चतुःषष्टिकलाविद्याजुषे विद्वन्महोजुषे यशोमुषे जयीन्द्रज्योतिषे वन्दनानि कुर्याम्",
+    "gemini_summary": "The poet offers his reverential prostrations to the radiant scholar-saint Sri Vijayindra Tirtha, who is deeply proficient in the sixty-four arts, abounds in immense intellectual brilliance, and eclipses the fame of rival scholars."
    }
   },
   "10": {
    "sa": "सुधीन्द्रयोगिनं सेवे साधुसत्कृतसंपदम् । स गद्यपद्यनिर्माणविद्यायाः प्रथमं पदम् ॥ १० ॥",
    "commentaries": {
-    "pavamanacharya_english": "I adore with profound devotion Sri Sudheendra Theertha who has his affluence distributed amongst the virtuous and who is in the forefront of the group of scholars by virtue of his extraordinary competence in writing scholarly literary works whether in the form of prose or poetry."
+    "pavamanacharya_english": "I adore with profound devotion Sri Sudheendra Theertha who has his affluence distributed amongst the virtuous and who is in the forefront of the group of scholars by virtue of his extraordinary competence in writing scholarly literary works whether in the form of prose or poetry.",
+    "gemini_padaccheda": "सुधीन्द्रयोगिनम् सेवे साधुसत्कृतसंपदम् सः गद्यपद्यनिर्माणविद्यायाः प्रथमम् पदम्",
+    "gemini_anvaya": "साधुसत्कृतसंपदम् सुधीन्द्रयोगिनम् [अहम्] सेवे, सः गद्यपद्यनिर्माणविद्यायाः प्रथमम् पदम् [अस्ति] ।",
+    "gemini_summary": "I pay homage to the ascetic Sri Sudhindra Tirtha, whose wealth is devoted to honoring the virtuous, and who occupies the foremost place in the art of composing prose and poetry."
    }
   },
   "11": {
