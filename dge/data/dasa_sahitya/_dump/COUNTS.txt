@@ -1,55 +1,55 @@
 DGE — DASA SAHITYA · COUNTS REPORT
-Generated 2026-08-12
+Generated 2026-08-21
 ==================================================
 
-Fetched (raw)           1414
-Cross-source dups merged  18
-UNIQUE compositions     1396
-  with verse text       1246
-  found on >1 site        18
-  untitled composer      453
-  failed fetch             9  (see _dump/pending_review.json)
-  no verse text          252  (see _dump/pending_review.json)
+Fetched (raw)           1363
+Cross-source dups merged   9
+UNIQUE compositions     1354
+  with verse text       1239
+  found on >1 site         9
+  untitled composer      424
+  failed fetch             8  (see _dump/pending_review.json)
+  no verse text            4  (see _dump/pending_review.json)
 
 BY FORM
-    pada                        1189
-    suladi                        75
-    sampradaya                    33
+    pada                        1155
+    suladi                        74
+    sampradaya                    31
     mangala                       27
     aarati                        18
     laali                         16
-    kavya                         11
+    kavya                          9
     ugabhoga                       8
-    shobhane                       7
-    dashavatara                    6
-    kolu                           5
+    shobhane                       6
+    dashavatara                    5
+    kolu                           4
     mixed                          1
 
 BY SOURCE (primary)
-    madhwafestivals.wordpress.com  1210
+    madhwafestivals.wordpress.com  1219
     dasasahithyamahithi.com       97
-    madhwafestivals.com           77
+    madhwafestivals.com           26
     dasasahitya.net               10
     meerasubbarao.wordpress.com     2
 
 BY COMPOSER
-    untitled                     453
-    Purandara Dasaru             306
-    Vijaya Dasaru                165
-    Vadirajaru                    70
-    Kanaka Dasaru                 69
-    Jagannatha Dasaru             63
+    untitled                     424
+    Purandara Dasaru             305
+    Vijaya Dasaru                164
+    Vadirajaru                    69
+    Kanaka Dasaru                 68
+    Jagannatha Dasaru             62
     Sripadarajaru                 44
-    Gopala Dasaru                 43
+    Gopala Dasaru                 42
     Prasanna Venkata Dasaru       41
-    Vyasarayaru                   29
-    Harapanahalli Bheemavva       27
-    Pranesha Dasaru               20
-    Mohana Dasaru                 13
-    Shyama Sundara Dasaru         11
+    Vyasarayaru                   28
+    Harapanahalli Bheemavva       26
+    Pranesha Dasaru               19
+    Mohana Dasaru                 12
+    Shyama Sundara Dasaru         10
     Gopala Dasa                    9
-    Helavanakatte Giriyamma        8
-    Mahipathi Dasaru               8
+    Helavanakatte Giriyamma        7
+    Mahipathi Dasaru               7
     Dhanvanthri                    1
     Durga                          1
     Kankanaa Kaara                 1

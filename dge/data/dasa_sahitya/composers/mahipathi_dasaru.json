@@ -1,65 +1,7 @@
 {
   "composer": "Mahipathi Dasaru",
-  "count": 8,
+  "count": 7,
   "compositions": [
-    {
-      "id": "mahipathi_dasaru__4ec19943",
-      "form": "pada",
-      "title": {
-        "kn": "",
-        "latin": "Dasara padagalu composed by Mahipathi dasaru",
-        "iast": "",
-        "devanagari": ""
-      },
-      "composer": "Mahipathi Dasaru",
-      "deity": "",
-      "tags": [
-        "composer:Mahipathi Dasaru"
-      ],
-      "raga": "",
-      "tala": "",
-      "language": "kn",
-      "text": {
-        "kannada": [],
-        "iast": [],
-        "devanagari": [],
-        "source_roman": [
-          [
-            "Kolu Kolenna Kole"
-          ],
-          [
-            "Nine parama pavani niranjani"
-          ],
-          [
-            "Krishna enikyakaiyya"
-          ],
-          [
-            "Artariyadd hange irabeku"
-          ],
-          [
-            "Jaya devi jaya devi"
-          ],
-          [
-            "Jaya ramaa devi"
-          ],
-          [
-            "song on Ganga devi"
-          ],
-          [
-            "Kesava nama – Mahipathi dasaru"
-          ]
-        ]
-      },
-      "meaning": "",
-      "source": {
-        "site": "https://madhwafestivals.com",
-        "url": "https://madhwafestivals.com/2016/11/30/dasara-padagalu-composed-by-mahipathi-dasaru/",
-        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
-      },
-      "_has_text": false,
-      "also_at": []
-    },
     {
       "id": "mahipathi_dasaru__3e331e67",
       "form": "kolu",
@@ -166,7 +108,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/09/20/kolu-kolenna-kole/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": false,
       "also_at": []
@@ -295,7 +237,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/11/30/artariyadd-hange-irabeku/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -453,7 +395,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/11/30/krishna-enikyakaiyya/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -586,7 +528,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/11/30/nine-parama-pavani-niranjani/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -642,7 +584,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/12/07/jaya-devi-jaya-devi/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": false,
       "also_at": []
@@ -697,7 +639,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/12/07/jaya-ramaa-devi/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": false,
       "also_at": []
@@ -864,7 +806,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2017/07/31/kesava-nama-mahipathi-dasaru/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []

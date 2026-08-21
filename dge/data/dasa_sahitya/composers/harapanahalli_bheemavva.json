@@ -1,119 +1,7 @@
 {
   "composer": "Harapanahalli Bheemavva",
-  "count": 27,
+  "count": 26,
   "compositions": [
-    {
-      "id": "harapanahalli_bheemavva__ad7e138d",
-      "form": "pada",
-      "title": {
-        "kn": "",
-        "latin": "Dasara padagalu composed by Harapanahalli Bheemavvanavaru",
-        "iast": "",
-        "devanagari": ""
-      },
-      "composer": "Harapanahalli Bheemavva",
-      "deity": "",
-      "tags": [
-        "composer:Harapanahalli Bheemavva"
-      ],
-      "raga": "",
-      "tala": "",
-      "language": "kn",
-      "text": {
-        "kannada": [],
-        "iast": [],
-        "devanagari": [],
-        "source_roman": [
-          [
-            "Aroghane madamma mangala gowri"
-          ],
-          [
-            "Indu vadhane paarvathiye"
-          ],
-          [
-            "Arathi belega bannire"
-          ],
-          [
-            "enanti kamalanabana"
-          ],
-          [
-            "Nandana kanda sundara"
-          ],
-          [
-            "hari hari ennade"
-          ],
-          [
-            "Managlarathi tandu belagire"
-          ],
-          [
-            "kalavu kalisidaryaro"
-          ],
-          [
-            "kallu nayeno kaivalyadayakane"
-          ],
-          [
-            "buma idubare"
-          ],
-          [
-            "idu enesoda dadhiya damodara"
-          ],
-          [
-            "Srinivasa Kalyana composed by Harapana halli bheemavva"
-          ],
-          [
-            "Hoova kode taayi varava kode"
-          ],
-          [
-            "Kashi vishweshwara gangadara"
-          ],
-          [
-            "sankshepa Raamayanam"
-          ],
-          [
-            "Nille nille kolhaapuradevi"
-          ],
-          [
-            "Chelveraratiya tandettire -Lakshmi arathi"
-          ],
-          [
-            "Sravana aidu sukravara haadu"
-          ],
-          [
-            "Sravana Shanivaara haadu"
-          ],
-          [
-            "Sravana sampathu sukravara haadu"
-          ],
-          [
-            "Traditional arati song of Jyeshta Gouri"
-          ],
-          [
-            "dEvEndrana sose dEvakki tanayaLu"
-          ],
-          [
-            "Udiya tumbire namma"
-          ],
-          [
-            "hUva muDisida svAmi"
-          ],
-          [
-            "Amba ni huva paalise vara"
-          ],
-          [
-            "Mangalaarathiya belage madhusudhanage"
-          ]
-        ]
-      },
-      "meaning": "",
-      "source": {
-        "site": "https://madhwafestivals.com",
-        "url": "https://madhwafestivals.com/2016/12/21/dasara-padagalu-composed-by-harapanahalli-bheemavvanavaru/",
-        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
-      },
-      "_has_text": false,
-      "also_at": []
-    },
     {
       "id": "harapanahalli_bheemavva__ddd97cab",
       "form": "pada",
@@ -283,7 +171,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/09/19/hoova-kode-taayi-varava-kode/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -405,7 +293,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/09/19/mangalaaruti-tandu-belagire/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -578,7 +466,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/09/19/nille-nille-kolhaapuradevi/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -720,7 +608,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/10/07/arathi-belega-bannire/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -929,7 +817,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/10/07/aroghane-madamma-gowri/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -1367,7 +1255,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/10/14/indu-vadhane-paarvathiye/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -1562,7 +1450,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/10/31/chelveraratiya-tandettire-lakshmi-arathi/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -2007,7 +1895,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/12/15/srinivasa-kalyana-composed-by-harapana-halli-bheemavva/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -2113,7 +2001,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/12/21/buma-idubare/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -2238,7 +2126,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/12/21/enanti-kamalanabana/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -2372,7 +2260,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/12/21/hari-hari-ennade/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -2606,7 +2494,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/12/21/idi-enesoda-dadhiya-damodara/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -2800,7 +2688,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/12/21/kalavu-kalisidaryaro/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -2926,7 +2814,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/12/21/kallu-nayeno-kaivalyadayakane/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -3024,7 +2912,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2016/12/21/nandana-kanda-sundara/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -3180,7 +3068,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2017/01/12/mangalaarathiya-belage/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -3589,7 +3477,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2017/02/02/sankshepa-raamayanam/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -3675,7 +3563,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2017/02/16/kashi-vishweshwara-gangadara/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -3817,7 +3705,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2017/03/13/amba-ni-huva-paalise-vara/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -4087,7 +3975,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2017/03/15/devendrana-sose-devakki-tanayalu/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -4237,7 +4125,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2017/03/15/huva-mudisida-svami/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -4347,7 +4235,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2017/03/15/udiya-tumbire-namma/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -7277,7 +7165,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2017/03/18/sravana-aidu-sukravara-haadu/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -7740,7 +7628,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2017/03/18/sravana-sampathu-sukravara-haadu/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -8077,7 +7965,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2017/03/18/sravana-shanivaara-haadu/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []
@@ -8235,7 +8123,7 @@
         "site": "https://madhwafestivals.com",
         "url": "https://madhwafestivals.wordpress.com/2017/03/18/traditional-arati-song-of-jyeshta-gouri/",
         "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
-        "fetched": "2026-08-12"
+        "fetched": "2026-08-21"
       },
       "_has_text": true,
       "also_at": []

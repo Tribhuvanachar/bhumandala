@@ -1,0 +1,47 @@
+{
+  "composer": "Vijayadasaru Pancha Rathna",
+  "count": 1,
+  "compositions": [
+    {
+      "id": "vijayadasaru_pancha_rathna__4dd55b05",
+      "form": "suladi",
+      "title": {
+        "kn": "",
+        "latin": "Vijayadasaru’s Pancha rathna suladhi",
+        "iast": "",
+        "devanagari": ""
+      },
+      "composer": "Vijayadasaru Pancha Rathna",
+      "deity": "",
+      "tags": [
+        "suladi:Vijayadasaru Pancha Rathna"
+      ],
+      "raga": "",
+      "tala": "",
+      "language": "kn",
+      "text": {
+        "kannada": [],
+        "iast": [],
+        "devanagari": [],
+        "source_roman": [
+          [
+            "Vijayadasaru’s famous pancha ratna suladhi compilation:"
+          ],
+          [
+            "pancharatna-suladhigalu",
+            "(Kannada lyrics)"
+          ]
+        ]
+      },
+      "meaning": "",
+      "source": {
+        "site": "https://madhwafestivals.com",
+        "url": "https://madhwafestivals.com/2016/10/31/vijayadasarus-pancha-rathna-suladhi/",
+        "attribution": "Public devotional archive. Reproduced for non-commercial educational/research use with attribution.",
+        "fetched": "2026-08-21"
+      },
+      "_has_text": false,
+      "also_at": []
+    }
+  ]
+}
