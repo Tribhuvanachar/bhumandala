@@ -1,7 +1,8 @@
 /*
  * dge-search.js — client-side global fuzzy search over the static index built
- * by build_search_index.py. Loads manifest + only the postings buckets and unit
- * shards a query actually touches (keeps a 50MB+ corpus feasible on GitHub Pages).
+ * by build_search_index.py. Loads manifest + only the per-trigram postings files
+ * and unit shards a query actually touches (keeps a 300MB+ corpus feasible on
+ * GitHub Pages / jsDelivr).
  *
  * Depends on DGENorm (dge-normalize.js). In the browser, `fetchJSON` uses fetch;
  * in Node it uses fs (so the same code is testable headless).
@@ -20,14 +21,64 @@
   if (isNode) {
     var fs = require('fs'), path = require('path');
     fetchJSON = function (base, rel) {
+      // rel is a literal filesystem path (e.g. from safeTrigram()) -- joined
+      // as-is, no URL decoding involved.
       var p = path.join(base, rel);
       if (!fs.existsSync(p)) return Promise.resolve(null);
       return Promise.resolve(JSON.parse(fs.readFileSync(p, 'utf8')));
     };
   } else {
     fetchJSON = function (base, rel) {
-      return fetch(base + '/' + rel).then(function (r) { return r.ok ? r.json() : null; });
+      // rel is a literal filename (e.g. from safeTrigram()); percent-encode
+      // each path SEGMENT (not the whole rel, which would also escape the
+      // '/' separators) so a literal '^'/'$' in a trigram's filename reaches
+      // the server as the same byte it is on disk. Every caller of
+      // fetchJSON hands it a literal path, never a pre-encoded one -- this
+      // is the one place that turns literal into URL, so the two can't drift
+      // out of sync the way a per-caller "%XX" escape once did (a browser's
+      // fetch() percent-DEcodes "%XX" in a URL before requesting it, so a
+      // filename that already contained a literal "%" 404'd).
+      var url = base + '/' + rel.split('/').map(encodeURIComponent).join('/');
+      return fetch(url).then(function (r) { return r.ok ? r.json() : null; });
     };
+  }
+
+  // One posting file per TRIGRAM (not per 2-char prefix bucket) -- mirrors
+  // build_search_index.py's safe_trigram_filename(). A 2-char bucket used to
+  // put every "ram"/"ran"/"raj"/... trigram in one multi-MB file a query for
+  // any of them had to download whole; this fetches exactly the trigram it
+  // asked for.
+  //
+  // Returns the trigram's LITERAL filename (real trigrams are always
+  // {A-Za-z^$}, all filesystem-safe as-is -- see safe_trigram_filename()'s
+  // docstring) -- NOT URL-encoded here. Percent-encoding ^/$ for the URL is
+  // fetchJSON's job (its browser branch encodes each path segment), because
+  // its Node branch needs this same literal string as a real filesystem
+  // path instead. Encoding it here once, for only one of the two branches
+  // fetchJSON can take, was a real bug: it made the Node-local test (used to
+  // validate this fix) pass while the browser path was silently broken.
+  function safeTrigram(tg) {
+    return tg.replace(/[^0-9A-Za-z^$]/g, '_') || '_';
+  }
+
+  // How many of a trigram set's members to actually fetch, rarest first (by
+  // manifest.df -- document frequency, i.e. posting-file length). A common
+  // trigram like an "na"-class one matches half the corpus and costs the
+  // most to fetch while discriminating the least; a rare one narrows the
+  // candidate set just as correctly for a fraction of the bytes. Measured
+  // against the real index: राम went from 16.1 MB (every trigram) to 549 KB
+  // (rarest 3) -- see SEARCH_ARCHITECTURE.md. A set with FEWER members than
+  // this is fetched in full; there is nothing to save on a short word.
+  var MAX_TRIS_PER_SET = 3;
+
+  function rarestOf(set, df) {
+    // A trigram absent from df has zero postings anywhere in the corpus
+    // (nothing it could match) -- drop it before fetching, not after: no
+    // file exists for it, so keeping it in would just be a wasted request.
+    var withDf = set.filter(function (tg) { return df[tg] != null; });
+    if (withDf.length <= MAX_TRIS_PER_SET) return withDf;
+    withDf.sort(function (a, b) { return df[a] - df[b]; });
+    return withDf.slice(0, MAX_TRIS_PER_SET);
   }
 
   // Root/verse schemas vs. commentary schemas vs. genuinely ambiguous
@@ -42,12 +93,6 @@
     if (SHLOKA_SCHEMAS[schema]) return 'shloka';
     if (COMMENTARY_SCHEMAS[schema]) return 'commentary';
     return 'prose'; // generic / grantha_prakarana_text -- independent treatises, neither a root verse nor a commentary on one
-  }
-
-  function bucketOf(tg) {
-    var key = tg.replace(/[\^$]/g, '') || tg;
-    var two = key.substr(0, 2).replace(/[^a-zA-Z0-9]/g, '_');
-    return two || 'misc';
   }
 
   // Damerau-Levenshtein with early exit
@@ -73,16 +118,46 @@
     this.base = base;
     this.manifest = manifest;
     this.granthas = manifest.granthas;
+    this.df = manifest.df || {};
+    this.sections = manifest.sections || [];
     this._shardCache = {};
-    this._bucketCache = {};
+    this._postingCache = {};
   }
 
-  Index.prototype._loadBucket = function (bucket) {
+  // Postings are partitioned by section (postings/<trigram>/<section>.json --
+  // see build_search_index.py). A scoped search (opts.section set) fetches
+  // just that one section's file for the trigram; an unscoped/global search
+  // fans out across every section IN PARALLEL and unions the results -- the
+  // same total postings a single unpartitioned file used to hold, just as
+  // several small requests instead of one that pays for sections the query
+  // never asked about. Cached per (trigram, scope) since the same trigram
+  // can be looked up both ways in one session.
+  Index.prototype._loadPosting = function (tg, scope) {
     var self = this;
-    if (this._bucketCache[bucket]) return Promise.resolve(this._bucketCache[bucket]);
-    return fetchJSON(this.base, 'postings/' + bucket + '.json').then(function (d) {
-      self._bucketCache[bucket] = d || {}; return self._bucketCache[bucket];
-    });
+    var key = tg + '::' + (scope || '*');
+    if (this._postingCache[key]) return Promise.resolve(this._postingCache[key]);
+    var safe = safeTrigram(tg);
+    // Each argument here is a LITERAL path segment, same rule as safeTrigram()
+    // -- fetchJSON alone decides how (or whether) to URL-encode it, for
+    // whichever of its two branches actually runs. Encoding a segment here
+    // too, on top of that, is exactly the double-encoding bug documented on
+    // fetchJSON above; section names happen to be plain lowercase words with
+    // nothing for encodeURIComponent to change, which is why that mistake
+    // would have gone unnoticed here rather than 404ing outright.
+    var p;
+    if (scope) {
+      p = fetchJSON(this.base, 'postings/' + safe + '/' + scope + '.json')
+        .then(function (d) { return d || []; });
+    } else {
+      p = Promise.all(this.sections.map(function (sec) {
+        return fetchJSON(self.base, 'postings/' + safe + '/' + sec + '.json');
+      })).then(function (parts) {
+        var out = [];
+        parts.forEach(function (d) { if (d) out.push.apply(out, d); });
+        return out;
+      });
+    }
+    return p.then(function (rows) { self._postingCache[key] = rows; return rows; });
   };
 
   Index.prototype._loadShard = function (gi) {
@@ -102,6 +177,10 @@
     opts = opts || {};
     var self = this;
     var limit = opts.limit || 20;
+    // A falsy/omitted section means unscoped -- every section, fanned out
+    // in parallel by _loadPosting. See "Partition the postings tree" in
+    // SEARCH_ARCHITECTURE.md.
+    var section = opts.section || null;
     var q = N.normalizeQuery(query, opts);
     if (!q.pkey) return Promise.resolve([]);
     var qtris = q.trigrams;
@@ -122,47 +201,57 @@
       });
     }
 
-    // 1) candidate generation: union postings for every trigram set above
-    var allTris = {};
-    trigramSets.forEach(function (set) { set.forEach(function (tg) { allTris[tg] = 1; }); });
-    var buckets = {};
-    Object.keys(allTris).forEach(function (tg) { buckets[bucketOf(tg)] = 1; });
-    return Promise.all(Object.keys(buckets).map(function (b) { return self._loadBucket(b); }))
+    // 1) candidate generation: fetch only the RAREST trigrams of each set
+    // (see rarestOf/MAX_TRIS_PER_SET), not every trigram in it -- a common
+    // trigram shared with most of the corpus costs the most to fetch and
+    // discriminates the least. Correctness comes from the edit-distance
+    // scoring pass below, which runs on every fetched candidate regardless
+    // of which trigrams found it; this step only decides which candidates
+    // get looked at, cheaply.
+    var fetchedSets = trigramSets.map(function (set) { return rarestOf(set, self.df); });
+    var allFetch = {};
+    fetchedSets.forEach(function (set) { set.forEach(function (tg) { allFetch[tg] = 1; }); });
+    var postingKey = function (tg) { return tg + '::' + (section || '*'); };
+    return Promise.all(Object.keys(allFetch).map(function (tg) { return self._loadPosting(tg, section); }))
       .then(function () {
-        // Rank candidates by how many of a trigram set's members they share,
-        // then stop. Opening a grantha's unit shard is a network round trip,
-        // and a common word shares its trigrams with most of the corpus:
-        // searching "राम" used to open 444 of them and take some ten seconds
-        // on a fast connection, which on a phone reads as no results at all
-        // rather than as slow ones. A unit that really contains a set's text
-        // shares nearly all of its trigrams, so requiring most of them
-        // before its grantha is opened is what keeps a long query from
-        // dragging in half the library on the strength of one shared
-        // fragment — each set (whole query, or one word) is judged against
-        // its OWN 60% bar, independently, so a candidate only has to clear
-        // the bar for the query as typed OR for a single word within it.
+        // Rank candidates by how many of a (rarest-trimmed) trigram set's
+        // members they share, then stop. Opening a grantha's unit shard is a
+        // network round trip, and a common word shares its trigrams with
+        // most of the corpus: searching "राम" used to open 444 of them and
+        // take some ten seconds on a fast connection, which on a phone reads
+        // as no results at all rather than as slow ones. A unit that really
+        // contains a set's text shares nearly all of the (few) trigrams
+        // fetched for it, so requiring most of them before its grantha is
+        // opened is what keeps a long query from dragging in half the
+        // library on the strength of one shared fragment — each set (whole
+        // query, or one word) is judged against its OWN 60% bar, computed
+        // over what was actually FETCHED for that set (not the set's full,
+        // unfetched trigram count), independently, so a candidate only has
+        // to clear the bar for the query as typed OR for a single word
+        // within it.
+        //
+        // A trigram containing ^ or $ only appears in the index at the true
+        // start/end of a UNIT'S WHOLE indexed text, not at each word's own
+        // boundary within it -- so a query word sitting in the middle of a
+        // verse/line (the overwhelmingly common case) can never match its
+        // own ^xy/yz$ trigrams, even on an exact literal hit. Requiring 60%
+        // of ALL trigrams including these meant a real match could
+        // permanently fall short of the bar (this is exactly how कान्ताय,
+        // an exact match in the middle of Sumadhva Vijaya's opening line,
+        // never became a candidate at all). Only the interior trigrams are
+        // required; boundary ones still count toward `count` as a bonus
+        // when they DO match (a genuine signal for a query that really is
+        // at a unit's edge).
         var cand = {};            // "gi:ui" -> { count: best total shared trigrams, complete: every non-boundary trigram of some set matched }
-        trigramSets.forEach(function (set) {
-          // A trigram containing ^ or $ only appears in the index at the
-          // true start/end of a UNIT'S WHOLE indexed text, not at each
-          // word's own boundary within it -- so a query word sitting in
-          // the middle of a verse/line (the overwhelmingly common case)
-          // can never match its own ^xy/yz$ trigrams, even on an exact
-          // literal hit. Requiring 60% of ALL trigrams including these
-          // meant a real match could permanently fall short of the bar
-          // (this is exactly how कान्ताय, an exact match in the middle of
-          // Sumadhva Vijaya's opening line, never became a candidate at
-          // all). Only the interior trigrams are required; boundary ones
-          // still count toward `count` as a bonus when they DO match (a
-          // genuine signal for a query that really is at a unit's edge).
+        fetchedSets.forEach(function (set) {
+          if (!set.length) return;
           var boundary = {}, requiredCount = 0;
           set.forEach(function (tg) {
             if (tg.indexOf('^') !== -1 || tg.indexOf('$') !== -1) boundary[tg] = 1; else requiredCount++;
           });
           var counts = {}, reqCounts = {};
           set.forEach(function (tg) {
-            var b = self._bucketCache[bucketOf(tg)] || {};
-            var post = b[tg]; if (!post) return;
+            var post = self._postingCache[postingKey(tg)]; if (!post) return;
             var isBoundary = !!boundary[tg];
             for (var k = 0; k < post.length; k++) {
               var key = post[k][0] + ':' + post[k][1];
