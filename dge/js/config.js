@@ -63,11 +63,14 @@ const appConfig = {
   // serve a half-written index -- which means reindex.yml publishing a new one
   // changes nothing for readers until this line is bumped to that commit. If a
   // freshly merged grantha browses but does not search, this is why.
-  // TEMP: still main's pre-merge pin (snippet() fix only, old posting layout).
-  // Re-running reindex.yml from this branch to fold in the one-file-per-
-  // trigram + section-partitioned postings rewrite -- see this commit's
-  // follow-up for the real pin.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@60091fb1d84d2dbca3224b6ee7d1b78834a63c81",
+  // 21 Aug 2026: re-ran reindex.yml from this branch to combine the
+  // one-file-per-trigram + section-partitioned postings rewrite with main's
+  // independent boundary-trigram ranking fix and the snippet() length
+  // increase -- 998 granthas, 105,138 units, 59,557 trigrams. Verified live
+  // over this exact commit before pinning: राम/कृष्ण/धर्म all return correct
+  // 0.97-confidence hits, and section-scoped queries (itihasa, darshana)
+  // return only that section's granthas.
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@71b7c27bbda6060e3706ab2bd6ca57d72c91877b",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
