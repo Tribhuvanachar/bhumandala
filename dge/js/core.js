@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.11 (one-time toast, gated per grantha via nsKey, tells a reader commentary/bhashya is available for a text -- selectedCommentaryView defaults to none, so it was otherwise fully invisible unless the reader happened to tap the 💬 icon)';
+window.DGE_VERSIONS['core.js'] = 'v3.12 (dgeVisibleCommentaries: gates the unlicensed Mahabharata Kannada translation/Tatparya Nirnaya commentary out of every normalized grantha object by default -- window.appConfig.showCopyrightGatedCommentaries, off by default, is the reader-facing toggle)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -317,6 +317,42 @@ function dgeSanitizeVedicAccents(text) {
     .replace(/<\{SK(\d+)\}>/g, (_, num) => '(सि.कौ.' + dgeToDevanagariDigits(num) + ')');
 }
 
+// Copyright gate (Category 4 platform issue): the Mahabharata Kannada
+// translation + Madhvacharya's own Tatparya Nirnaya excerpts interleaved in
+// it (dge/data/itihasa/mahabharata_kannada/, ~98,500 verses) were extracted
+// from a Pejawar Matha Android app's asset bundle -- no license field
+// anywhere, only a foreword/blessing as attribution, not a rights grant.
+// This project's own standing rule (PROJECT_BRIEF.md) is "absence of a
+// licence is not permission." "kannada" as a commentary key is unique to
+// this one source across the whole corpus (checked: no other data.json
+// uses it), so gating by key name alone is safe -- it cannot accidentally
+// hide some unrelated, properly-licensed Kannada text elsewhere.
+//
+// Filtered here, at the single point every shloka's commentaries object is
+// built, rather than in render.js -- render.js is not the only consumer
+// (ai.js reads shloka.commentaries directly to feed AI features, and the
+// availableCommentaries picker/search-scope dropdown are built from this
+// same normalization pass), so gating downstream would need to be repeated
+// at every call site with no guarantee of catching them all. The data
+// itself is untouched on disk (reversible, no loss); this only decides
+// what a NORMALIZED grantha object exposes to the rest of the app.
+// window.appConfig.showCopyrightGatedCommentaries is the reader-facing
+// toggle this backlog item asked for (default off/hidden) -- flipping it
+// takes effect on the next grantha load (this function reruns whenever a
+// grantha's data is (re)fetched), not instantly on an already-open page,
+// which is an acceptable cost for what should be a rare, deliberate
+// research toggle rather than a startup-time architecture change.
+const DGE_COPYRIGHT_GATED_COMMENTARY_KEYS = { kannada: true };
+function dgeVisibleCommentaries(commentaries) {
+  if (!commentaries) return commentaries;
+  if (window.appConfig && window.appConfig.showCopyrightGatedCommentaries) return commentaries;
+  const out = {};
+  Object.keys(commentaries).forEach((k) => {
+    if (!DGE_COPYRIGHT_GATED_COMMENTARY_KEYS[k]) out[k] = commentaries[k];
+  });
+  return out;
+}
+
 function dgeNormalizeGranthaData(data, granthaTitle) {
   if (!data) return data;
   if (data.shlokas) return data; // already the expected shape (e.g. PNS) -- nothing to do
@@ -388,6 +424,12 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
             .replace(/[ḥ]/g, 'h').replace(/[ñṅṇ]/g, 'n').replace(/[śṣ]/g, 's')
             .replace(/[ṭ]/g, 't').replace(/[ḍ]/g, 'd')
             .replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '') || 'bhashya';
+          // See dgeVisibleCommentaries's own comment: not currently exercised
+          // by any real data in this shape (the actual gated content uses
+          // the flat-items branch below), kept here defensively so a future
+          // bhashya[] source naming a commentator this key would slugify to
+          // "kannada" can't slip through un-gated.
+          if (DGE_COPYRIGHT_GATED_COMMENTARY_KEYS[key] && !(window.appConfig && window.appConfig.showCopyrightGatedCommentaries)) return;
           commentaries[key] = b.text;
           availableCommentaries[key] = b.commentator || KNOWN_COMMENTARY_LABELS[key] ||
             (key.charAt(0).toUpperCase() + key.slice(1));
@@ -427,9 +469,11 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
       // as a visible field (see the 'vedicId' extra field in config.js)
       // rather than used as the internal key.
       const n = idx + 1;
-      const commentaries = (item.commentaries && typeof item.commentaries === 'object' && !Array.isArray(item.commentaries))
-        ? item.commentaries
-        : {};
+      const commentaries = dgeVisibleCommentaries(
+        (item.commentaries && typeof item.commentaries === 'object' && !Array.isArray(item.commentaries))
+          ? item.commentaries
+          : {}
+      );
       if (Object.keys(commentaries).length) itemsWithCommentaries++;
       Object.keys(commentaries).forEach(key => {
         if (!availableCommentaries[key]) {
