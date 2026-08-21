@@ -23,6 +23,9 @@ def main(tid):
     elif tid == "kamandaki":
         import kamandaki
         kamandaki.run(tid)
+    elif tid.startswith("wikisource_"):
+        import wikisource_ayurveda
+        wikisource_ayurveda.run(tid)
     elif tid == "darshana_all":
         import darshana_gretil as D
         for key in D.DARSHANA_GRETIL:

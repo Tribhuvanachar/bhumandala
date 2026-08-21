@@ -8540,6 +8540,24 @@
       "populated": true,
       "title": "Kamandakiya Nitisara",
       "addedAt": "2026-08-21"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/madhava_nidana/data.json",
+      "populated": true,
+      "title": "Madhava Nidana",
+      "addedAt": "2026-08-21"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/sharngadhara_samhita/data.json",
+      "populated": true,
+      "title": "Sharngadhara Samhita",
+      "addedAt": "2026-08-21"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/susruta_samhita_sutrasthana/data.json",
+      "populated": true,
+      "title": "Susruta Samhita (Sutrasthana)",
+      "addedAt": "2026-08-21"
     }
   ]
 }
