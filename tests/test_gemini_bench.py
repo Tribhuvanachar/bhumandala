@@ -63,6 +63,13 @@ class TestCost(unittest.TestCase):
     def test_missing_usage_fields_default_to_zero(self):
         self.assertEqual(gb._cost({}, 1.0, 1.0), 0.0)
 
+    def test_thinking_tokens_are_billed_at_the_output_rate(self):
+        # real observed shape for gemini-flash-latest: thoughts_tokens can
+        # exceed output_tokens and must not be left out of the cost
+        usage = {"prompt_tokens": 1_000_000, "output_tokens": 200_000, "thoughts_tokens": 300_000}
+        cost = gb._cost(usage, price_in=0.75, price_out=3.75)
+        self.assertAlmostEqual(cost, 0.75 + (200_000 + 300_000) / 1_000_000 * 3.75)
+
 
 if __name__ == "__main__":
     unittest.main()

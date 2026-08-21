@@ -241,9 +241,11 @@ def run(target: Path, limit, model: str, dry_run: bool, force: bool) -> int:
     else:
         print(f"No changes ({considered} item(s) considered).")
     if usage_totals:
+        thoughts = usage_totals.get("thoughts_tokens", 0)
+        thoughts_note = f", {thoughts:,} thinking tokens (billed at the output rate, not shown above)" if thoughts else ""
         print(f"Gemini usage: {usage_totals['calls']} call(s), "
               f"{usage_totals['prompt_tokens']:,} prompt tokens, "
-              f"{usage_totals['output_tokens']:,} output tokens, "
+              f"{usage_totals['output_tokens']:,} output tokens{thoughts_note}, "
               f"{usage_totals['total_tokens']:,} total tokens (model={model})")
     return 0
 

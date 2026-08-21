@@ -67,11 +67,24 @@ def _accumulate_usage(usage_totals: dict, usage_metadata: dict, model_version: s
     script can report real consumption instead of an estimate. Only called
     on a successful response -- a failed attempt (e.g. quota/overloaded)
     isn't billed output tokens and Gemini doesn't return usageMetadata for
-    it, so it is correctly left uncounted here. Thread-safe."""
+    it, so it is correctly left uncounted here. Thread-safe.
+
+    `output_tokens` is candidatesTokenCount only (the visible completion).
+    A thinking-capable model (observed: gemini-flash-latest resolving to
+    gemini-3.7-flash) also bills a `thoughtsTokenCount` -- internal
+    reasoning tokens, which tools/gemini_bench.py found can be *larger*
+    than the visible output and is not optional/toggleable via this API.
+    That's tracked separately in `thoughts_tokens` rather than folded into
+    `output_tokens`, since the two may have different names/behaviour
+    across models -- but both are billed at the output token rate, so a
+    cost calculation must add them together (see gemini_bench.py's
+    _cost()). `total_tokens` always comes straight from Gemini's own
+    totalTokenCount and needs no reconciliation."""
     with _usage_lock:
         usage_totals["calls"] = usage_totals.get("calls", 0) + 1
         usage_totals["prompt_tokens"] = usage_totals.get("prompt_tokens", 0) + usage_metadata.get("promptTokenCount", 0)
         usage_totals["output_tokens"] = usage_totals.get("output_tokens", 0) + usage_metadata.get("candidatesTokenCount", 0)
+        usage_totals["thoughts_tokens"] = usage_totals.get("thoughts_tokens", 0) + usage_metadata.get("thoughtsTokenCount", 0)
         usage_totals["total_tokens"] = usage_totals.get("total_tokens", 0) + usage_metadata.get("totalTokenCount", 0)
         if model_version:
             # the concrete model an alias like "gemini-flash-latest" resolved
