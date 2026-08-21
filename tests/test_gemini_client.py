@@ -35,7 +35,7 @@ class TestCallGeminiFallback(unittest.TestCase):
         gc._post = self._real_post
 
     def test_success_on_first_attempt_never_calls_fallback(self):
-        def fake_post(model, body, api_key):
+        def fake_post(model, body, api_key, usage_totals=None):
             self.calls.append(model)
             return {"ok": True}
         gc._post = fake_post
@@ -44,7 +44,7 @@ class TestCallGeminiFallback(unittest.TestCase):
         self.assertEqual(self.calls, ["gemini-flash-latest"])
 
     def test_quota_error_falls_back_once_to_the_lite_model(self):
-        def fake_post(model, body, api_key):
+        def fake_post(model, body, api_key, usage_totals=None):
             self.calls.append(model)
             if model == "gemini-flash-latest":
                 raise gc.GeminiError("quota", "429")
@@ -55,7 +55,7 @@ class TestCallGeminiFallback(unittest.TestCase):
         self.assertEqual(self.calls, ["gemini-flash-latest", "gemini-flash-lite-latest"])
 
     def test_bad_request_does_not_trigger_a_fallback_attempt(self):
-        def fake_post(model, body, api_key):
+        def fake_post(model, body, api_key, usage_totals=None):
             self.calls.append(model)
             raise gc.GeminiError("bad_request", "400")
         gc._post = fake_post
@@ -65,13 +65,40 @@ class TestCallGeminiFallback(unittest.TestCase):
         self.assertEqual(self.calls, ["gemini-flash-latest"])
 
     def test_fallback_attempt_failing_too_still_raises(self):
-        def fake_post(model, body, api_key):
+        def fake_post(model, body, api_key, usage_totals=None):
             self.calls.append(model)
             raise gc.GeminiError("overloaded", "503")
         gc._post = fake_post
         with self.assertRaises(gc.GeminiError):
             gc.call_gemini("sys", "prompt", {"type": "object"}, "key", model="gemini-flash-latest")
         self.assertEqual(self.calls, ["gemini-flash-latest", "gemini-flash-lite-latest"])
+
+
+class TestAccumulateUsage(unittest.TestCase):
+    def test_sums_across_multiple_calls(self):
+        totals = {}
+        gc._accumulate_usage(totals, {"promptTokenCount": 100, "candidatesTokenCount": 40, "totalTokenCount": 140})
+        gc._accumulate_usage(totals, {"promptTokenCount": 50, "candidatesTokenCount": 10, "totalTokenCount": 60})
+        self.assertEqual(totals, {"calls": 2, "prompt_tokens": 150, "output_tokens": 50, "total_tokens": 200})
+
+    def test_missing_fields_default_to_zero(self):
+        totals = {}
+        gc._accumulate_usage(totals, {})
+        self.assertEqual(totals, {"calls": 1, "prompt_tokens": 0, "output_tokens": 0, "total_tokens": 0})
+
+    def test_call_gemini_populates_usage_totals_when_given(self):
+        def fake_post(model, body, api_key, usage_totals=None):
+            if usage_totals is not None:
+                gc._accumulate_usage(usage_totals, {"promptTokenCount": 5, "candidatesTokenCount": 2, "totalTokenCount": 7})
+            return {"ok": True}
+        real_post = gc._post
+        gc._post = fake_post
+        try:
+            totals = {}
+            gc.call_gemini("sys", "prompt", {"type": "object"}, "key", usage_totals=totals)
+            self.assertEqual(totals["total_tokens"], 7)
+        finally:
+            gc._post = real_post
 
 
 if __name__ == "__main__":

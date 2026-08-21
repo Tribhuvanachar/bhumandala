@@ -89,11 +89,13 @@ def build_prompt(text: str) -> str:
     )
 
 
-def call_gemini(text: str, api_key: str, model: str = DEFAULT_MODEL) -> dict:
+def call_gemini(text: str, api_key: str, model: str = DEFAULT_MODEL,
+                 usage_totals: dict | None = None) -> dict:
     """Thin wrapper over gemini_client.call_gemini with this task's own
     system instruction/response schema -- see tools/gemini_client.py for the
     shared HTTP/retry/error-classification mechanics."""
-    return _client_call_gemini(SYSTEM_INSTRUCTION, build_prompt(text), RESPONSE_SCHEMA, api_key, model)
+    return _client_call_gemini(SYSTEM_INSTRUCTION, build_prompt(text), RESPONSE_SCHEMA, api_key, model,
+                                usage_totals=usage_totals)
 
 
 _MOCK_QUOTE_RE = re.compile(r"[‘']([^’']{8,300})[’']")
@@ -126,7 +128,7 @@ def _primary_text(item: dict) -> str:
 
 
 def enrich_item(item: dict, resolver: ReferenceResolver, api_key, model: str,
-                 dry_run: bool, ref_counter: list[int]) -> bool:
+                 dry_run: bool, ref_counter: list[int], usage_totals: dict | None = None) -> bool:
     """Mutates `item` in place, adding a `gemini_enrichment` block. Returns
     True if the item was changed (false for empty/blank items, left alone)."""
     text = _primary_text(item)
@@ -137,7 +139,7 @@ def enrich_item(item: dict, resolver: ReferenceResolver, api_key, model: str,
         gemini_result = mock_detect_citations(text)
         model_used = "dry-run-mock"
     else:
-        gemini_result = call_gemini(text, api_key, model)
+        gemini_result = call_gemini(text, api_key, model, usage_totals)
         model_used = model
 
     citations = gemini_result.get("citations") or []
@@ -218,6 +220,7 @@ def run(target: Path, limit, model: str, dry_run: bool, force: bool) -> int:
     ref_counter = [0]
     changed = 0
     considered = 0
+    usage_totals: dict = {}
     for item in items:
         if limit is not None and considered >= limit:
             break
@@ -225,7 +228,7 @@ def run(target: Path, limit, model: str, dry_run: bool, force: bool) -> int:
             continue
         considered += 1
         try:
-            if enrich_item(item, resolver, api_key, model, dry_run, ref_counter):
+            if enrich_item(item, resolver, api_key, model, dry_run, ref_counter, usage_totals):
                 changed += 1
         except GeminiError as e:
             print(f"warning: {item.get('id')}: Gemini call failed ({e.kind}): {e}",
@@ -237,6 +240,11 @@ def run(target: Path, limit, model: str, dry_run: bool, force: bool) -> int:
         print(f"Enriched {changed}/{considered} considered item(s) in {target}")
     else:
         print(f"No changes ({considered} item(s) considered).")
+    if usage_totals:
+        print(f"Gemini usage: {usage_totals['calls']} call(s), "
+              f"{usage_totals['prompt_tokens']:,} prompt tokens, "
+              f"{usage_totals['output_tokens']:,} output tokens, "
+              f"{usage_totals['total_tokens']:,} total tokens (model={model})")
     return 0
 
 
