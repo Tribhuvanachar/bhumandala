@@ -29,7 +29,7 @@
 <!-- The intellisense and backlink panels, shared with the Vyakarana
      pages, which use a different palette and cannot load main.css. -->
 <link rel="stylesheet" href="css/intellisense.css?v=2">
-<link rel="stylesheet" href="css/footnotes.css?v=1">
+<link rel="stylesheet" href="css/footnotes.css?v=2">
 <!-- In-place editing of admin/content/reader.json for a super admin. -->
 <link rel="stylesheet" href="css/content-inline.css?v=1">
 <!-- The guided walkthrough, offered once on a first visit and reopenable
@@ -962,8 +962,8 @@
 <!-- Renders Gemini-enrichment references (see tools/gemini_enrich.py) as
      inline footnote markers + a footnote list. Loaded before render.js,
      which calls into it. Additive: absent enrichment data, nothing changes. -->
-<script src="js/footnote-engine.js?v=1"></script>
-<script src="js/render.js?v=4.61.2"></script>
+<script src="js/footnote-engine.js?v=2"></script>
+<script src="js/render.js?v=4.61.3"></script>
 <!-- async: JSZip is only used on demand (admin-editor.js's zip export/extract,
      gated behind typeof JSZip==='undefined' checks), never at boot -- a
      blocking, synchronous tag here meant a slow or stalled connection to
@@ -979,7 +979,7 @@
 <script src="js/config-editor.js?v=4.60.6"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
 <script src="js/text-abbreviations.js?v=1"></script>
-<script src="js/core.js?v=4.63.3"></script>
+<script src="js/core.js?v=4.63.4"></script>
 <!-- Reads admin/config/menu.json and rebuilds the top bar, the Explore and
      Admin popups and the theme list from it. Loaded after core.js so the
      theme it re-ticks is the one already applied. -->
