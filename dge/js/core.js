@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.13 (merge: v3.12 dgeVisibleCommentaries -- gates the unlicensed Mahabharata Kannada translation/Tatparya Nirnaya commentary out of every normalized grantha object by default, window.appConfig.showCopyrightGatedCommentaries toggles it -- plus v3.10 dgeStripEditionMarkers: GRETIL page markers, transliterated \"(I,1, p. 37)\" parentheticals, 357 of them in smriti_dharma, stripped at render time; plus unitId on normalized shlokas + jumpVedicId unit matching)';
+window.DGE_VERSIONS['core.js'] = 'v3.14 (KNOWN_COMMENTARY_LABELS: added pavamanacharya_english + gemini_padaccheda/gemini_anvaya/gemini_summary labels for the Raghavendra Vijaya OCR+Gemini enrichment pipeline -- on top of v3.13\'s merge: v3.12 dgeVisibleCommentaries copyright gating, v3.10 dgeStripEditionMarkers, unitId/jumpVedicId matching)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -390,7 +390,18 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
     // under its own key so that mantra's commentary stays its own.
     sayana_sukta: 'सायणभाष्यम् — Sāyaṇa (introduction to the sūkta)',
     wilson: 'Wilson (English Translation, after Sāyaṇa)',
-    artha: 'Translation'
+    artha: 'Translation',
+    // OCR'd from a published book (tools/link_english_commentary.py), not
+    // hand-typed -- attributed to its actual translator like griffith/wilson
+    // above, not a generic "English Translation" label.
+    pavamanacharya_english: 'Huli V. Pavamanacharya (English Translation)',
+    // Gemini-generated, unreviewed -- label says so explicitly rather than
+    // implying scholarly authority, per this project's "don't fabricate"
+    // rule (PROJECT_BRIEF.md): the reader should never mistake an AI
+    // first-pass for a vetted commentary.
+    gemini_padaccheda: 'AI Padaccheda (Gemini, unreviewed)',
+    gemini_anvaya: 'AI Anvaya (Gemini, unreviewed)',
+    gemini_summary: 'AI Summary (Gemini, unreviewed)'
   };
 
   // itihasa_purana_text schema (see dge/data/schemas.json): each item is a

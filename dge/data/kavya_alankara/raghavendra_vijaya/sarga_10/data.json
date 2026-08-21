@@ -7,273 +7,407 @@
   "filePrefix": "rv10.",
   "fileExtension": ".mp3",
   "totalShlokas": 66,
-  "availableCommentaries": {},
+  "availableCommentaries": {
+   "pavamanacharya_english": "Huli V. Pavamanacharya (English Translation)"
+  },
   "colophon": "इति दशमस्सर्गः"
  },
  "shlokas": {
   "1": {
    "sa": "उत्तरामखतया बलमाने सायमर्यमरथेऽभिसुमेरु । तन्मुखोल्लसितसारथिभासा पाटला स्फुरति पाशभृदाशा ॥ १ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When the evening was approaching the chariot of the sun which was slightly tilted northwards was moving towards the mountain, driven by the charioteer Aruna. The tawnish radiance of Aruna, the elder brother of Garuda had created a distinctive splendour in the west by spreading all over. As a result of this, the west looked splendidly unique."
+   }
   },
   "2": {
    "sa": "सायमन्तिकचरन्मुनिपालीगीतसामनिनदेन शताङ्गे । विद्रुतारुणमणीजलसेकाल्लोहितायति सरोरुहबन्धुः ॥ २ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The saints Valakhilyas are the sons of the saint Krathu and Kriyadevi born in Swayambhuva Manvanthara. Those saints, sixty thousand in number always move with the sun's chariot. They offer Arghya to the sun with water and gems, singing the ruks of Samaveda every evening. The mellifluence of their music liquefies the gems in their hands along with those gems in the sea into a reddish liquid. The poet has exaggeratedly described that when this liquid is sprinkled on the sun and the chariot through offer of Arghya, in the evening, the sun appears red."
+   }
   },
   "3": {
    "sa": "निर्धुताखिलतमा निजजन्मारभ्य विष्णुपदसेवनशीलः । स्वस्वरूपमगमत्परमाविर्भूतमेष मिहिरोरुणभावम् ॥ ३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The sun who always stays under the protection of Vishnupada (the sky) drove away all the darkness while he was rising. When the redness manifested in the sky, the sun shone splendidly and obtained his own visage of redness in the evening."
+   }
   },
   "4": {
    "sa": "रागिणं स्वमवलोक्य निकामं रागिणां च विषमां गतिमीक्ष्य । वस्तुमापदपरागसमीपं मन्दमन्दमरविन्दकुटुम्बी ॥ ४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The sun who nourishes the lotus was passionately attached to it. When he witnessed the agony experienced by sensualists, he apprehended that he too may have to experience that agony. Therefore, he decided to lead his life in the company of a man of renunciation and started moving towards the western mountain."
+   }
   },
   "5": {
    "sa": "विप्लवं व्रजति कान्तिकलत्रे पद्मिनीमपरवारिधिजाताम् । उद्विविक्षुहृदयो हरिदश्वो याचितुं तमगमत्तटिनीशम् ॥ ५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When Kanthi, the sun's consort died, he decided to marry Padmini (the lotus garden) born in the western ocean. Therefore he went to her father, the western ocean to seek his daughter from him."
+   }
   },
   "6": {
    "sa": "सान्ध्यरागमयपावकदीप्तं लोकमीक्ष्य शकुनाभयमूढाः । प्राद्रवन् झडिति शावकवर्गं वीक्षितुं विहितभूरिनिनादाः ॥ ६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When the birds saw the redness of the evening, they thought that the earth was burning. Apprehending that the fire may engulf their nests too, they flew very fast towards their nests, chirping very loudly to confirm their younger ones were safe."
+   }
   },
   "7": {
    "sa": "पद्मिनी परिचिता सततं नः साबतात्मपतिना वियुतेति । सद्य एव वियुतानि बभूवुश्चक्रवाकपततां मिथुनानि ॥ ७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Bewailing that their acquaintance Kamalini (the group of lotus) was disunited from her consort, the sun, the ruddy geese separated from each other, the very next moment."
+   }
   },
   "8": {
    "sa": "एकचक्रमवलम्ब्य शताङ्गं बाधते विरहिणो मिहिरोसौ । इत्यवेत्य मदनः स्वयमाधादेकचक्रमयमाशु शताङ्गम् ॥ ८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thinking that the sun, riding the chariot which had only one wheel, afflicts, those men and women who are separated from their sweethearts, Manmatha immediately transformed the only ruddy goose (the wheel of the sun's chariot) into one having hundreds of limbs."
+   }
   },
   "9": {
    "sa": "अम्बराभिधहरिन्मणिपात्रे शङ्खविष्णुपदवारि दधानम् । हेमभाजनयुगं शशिभान्वोर्मण्डलद्वयमिदं कलयामः ॥ ९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When the sun sets in the west and the moon rises in the east on a full moon evening, the sun-disc and the moon-disc appear like two golden cups containing the holy theertha. The sky looks like a plate made of sapphire. Thus when one beholds the Moon disc and the Sun-disc he feels as though they are two golden cups containing Shankhatheertha and Sri Vishnupadodaka placed in a plate made of Sapphire (Sky)."
+   }
   },
   "10": {
    "sa": "पूर्वभूमिधरगाधिसुतेन प्रेरितं रविमयाब्जभवास्त्रम् । तद्ग्रसत्यपरशैलवशिष्टं कोपवह्निरिव सान्ध्यमरीचिः ॥ १० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The sages Vasista and Vishvamitra had a tiff in the past over the possession of Kamadhenu. Vasista then had made the Brahmastra shot by Vishvamitra ineffectual with his danda (pole) which had resulted in the fire of the latter's fury. Thus runs a story in purana. The poet keeping this in mind has said that Udayaparvatha (Vishvamithra) shot Brahmastra (the sun) at Astamayaparvatha (Vasista). When the latter swallowed it, the reddish sun rays in the evening looked splendid like the fire of Vishwamitra's fury."
+   }
   },
   "11": {
    "sa": "अम्बुजेष्वरयुतेषु वियोक्तुं सायशाणकषणेन सुतीक्ष्णम् । किं चकार निजकञ्जकलम्बं तादृगेव यदभून्मुकुलं तत् ॥ ११ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The lotus is an arrow of flower of Manmatha. The petals of its bud looked like short legs. Then it appeared that Manmatha, with the purpose of shooting it on those who were bereft of their lovers, had sharpened his arrow of lotus by rubbing it against the grinding wheel of evening. Then the lotus bud looked like a sharpened arrow."
+   }
   },
   "12": {
    "sa": "वीक्ष्य पद्मविपिनेषु पुरा यत्केसरिश्रियमदुद्रवदारात् । तां विलोक्य शिथिलां पुनरागात्तत्तथैव तिमिरद्विपवृन्दम् ॥ १२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The darkness fled the place when it saw the saffronish radiance in lotus gardens (the moment the sun rose) just like the herd of elephants runs away at the sight of lions. But when the sun set and the lotus buds lost their radiance, the darkness once again spread everywhere just like those elephants return when the lion becomes old and fragile."
+   }
   },
   "13": {
    "sa": "अर्चयन्मधुकरच्छलशालिग्राममेष समयाभिधयोगी । सायमम्बुजसमुद्गममध्ये सन्निधाय विदधेऽस्य च मुद्राम् ॥ १३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The saint Kalapurusha kept the Saligramas (the bees) in caskets (the lotus) after worshipping them and locked those caskets in the evening. Explanation: The poet has dexterously described that those who saw the bees hovering around the lotus getting trapped in them when those flowers closed their petals in the evening felt as though the saint Kalapurusha was keeping those bees in the lotus and locking them as a saint worships Saligramas and locks those Saligramas in caskets."
+   }
   },
   "14": {
    "sa": "पद्मिनी पतिशुचा अमरालीकङ्कणे निरसितुं कृतचेतः । अब्जपाणिमनिलेन विलोलं हन्त हन्त समकोचयदाशु ॥ १४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Padmini (the lotus) who could not bear with the agony of separation from her consort, the sun, in the evening shrivelled her hand (the lotus swinging to and fro due to the force of the wind) in her effort to remove the bangles (the rows of bees). Explanation: Just as a woman shrivels her hand while removing bangles, the lotus shrivelled her hand in the evening. This is how the poet has described the act of lotus shriveling into a bud when the sun sets."
+   }
   },
   "15": {
    "sa": "रश्मिजालमधिकं भुवनाब्धेः कालधीवरवरः परिकृष्य । पङ्कशैवललुठज्झषसंघं ध्वान्ततारनिभतो गगनेऽधात् ॥ १५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The fisherman Kalapurusha desired to catch fish in the ocean (the world). It appeared as though he caught the fish which were feeling disturbed in the slush using the sun rays as net and kept them in the sky. It is the feeling of the poet that those shining stars in the sky are the fish caught by the fisherman, Kalapurusha."
+   }
   },
   "16": {
    "sa": "चन्द्रदीधितिनटीं दिवसान्तः सादरं नटयितुं भुवनान्तः । संविकीर्य किमु तारसुमौघं ध्वान्तनीलयवनीं पुरतोऽधात् ॥ १६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Before a danseuse commences her programme, the organiser prays to the devatha and performs pooja to the stage by spreading flowers in front of it. Then the stage remains covered with a black screen. Afterwards the danseuse enters the stage by moving the screen aside. Then they move the screen upwards. Keeping this in mind, the poet has described that when it became dark in the evening, it looked like that black screen. It appeared as if white jasmine and other flowers were showered on the stage when stars became visible in the sky. Finally, when the moon rose, the moonlight (the danseuse) started dancing on the stage."
+   }
   },
   "17": {
    "sa": "वर्षके सति तमिस्रजलौघं व्योमनामनि घनाघनसंधे । दीपिकास्तत इतो वलमानाः शक्रगोपनिकरा इव रेजुः ॥ १७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When the sky (clouds) was showering darkness (heavy rains), when the flames of lamps lit in the houses were wavering due to the force of the blowing wind and when the people were moving here and there holding those lamps in their hands, those lamps looked splendid like fire flies."
+   }
   },
   "18": {
    "sa": "दग्धतामुपगतेषु मनोभूर्वह्निनायुगपदेषु निकामम् । भज्जिते सति हि शार्वरधूमे रेजुरग्निकणिका इव दीपाः ॥ १८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The fire (Manmatha) incinerated the houses of those who were bereft of their sweethearts. The smoke (darkness) disappeared. Then those burning lamps looked beautiful like sparks of fire."
+   }
   },
   "19": {
    "sa": "भानुकार्तयुगधर्मविलोपाज्जृम्भिते जगति शार्वरपापे । अस्फुरंस्तत इतः किल दीपा रक्षिता इव तपोङ्कुररेखाः ॥ १९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "All the four feet of Dharma would be in perfect condition in Krithayuga, whereas Dharma would be having three feet in Trethayuga, two feet in Dwaparayuga and only one foot in Kaliyuga. That single foot too would disappear as a result of the ill influence of sin and only a fraction of Dharma would exist in Kaliyuga. When the sun who is the Dharma of Krithayuga disappeared, the sin of darkness triumphed like it did in Kaliyuga. Those lamps lit here and there sparkled like the rows of sprouts of Varnashrama Dharma protected and preserved for Krithayuga."
+   }
   },
   "20": {
    "sa": "कालनामनिजनाटकमध्ये दीपिकावलिनिभेन विधात्रा । उद्यदिन्दुमयदीपवरस्य प्रागतानि किमु सूचनभङ्गी ॥ २० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "It appeared as if Brahma was indicating the arrival of the bright moon light by getting those lamps lit during the intermission of his play \"Kalapurusha charitha\". Explanation: The Sootradhara (stage manager) gives prior information about the role before the actor in that role appears on the stage. Likewise, people look at the moon after lighting the lamps in the evening daily."
+   }
   },
   "21": {
    "sa": "चन्द्रिकापि यदि संघटिताशा ध्वान्तदीपततिसंगतिकाले । किं त्रिवेणिकथयास्ति कवीनां स्वल्पतोपि जहतां पुनरुक्तिम् ॥ २१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When the pitch darkness, the light emitted by the rows of lamps and the moon light meet each other, it becomes the confluence of the three. Hence where is the necessity of describing the confluence of the rivers Ganga, Yamuna and Saraswathi for the poets who avoid even the slightest degree of tautology. Explanation: The colours of the Ganges, the Yamuna and the Saraswathi are dazzling white, black and red respectively, and it is customary to term their confluence as \"Triveni Sangama\". Therefore it is the feeling of the poet that it becomes tautological to describe their confluence when he has already given description of the confluence of moon light, pitch darkness and the light from the rows of lamps representing dazzling white, black and red respectively."
+   }
   },
   "22": {
    "sa": "व्योमगुग्गुलुतरोर्धवला निर्यासपङ्किरिव तारकराजिः । शार्वरेभकषणा लुलिताः किं तत्कणा भुवि तमोमणिदम्भात् ॥ २२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The sky itself is a timber tree yielding olibanum. The rows of stars in the sky appeared like the path covered by the white essence of olibanum. When the darkness (elephant) rubbed its body against the sky (olibanum tree) patches of darkness which looked like chips of timber spread on the ground in the form of gems of darkness."
+   }
   },
   "23": {
    "sa": "शर्वरीशशरदा परिसृष्टः शार्वरव्रजघनाघनसंधः । दृश्यते स्म शनकैर्धवलश्रीश्चन्द्रिकालहरिकामपदिश्य ॥ २३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The clouds look whitish during the autumn. The poet has described that the moon of the autumn pervading through those clouds (darkness) has made them to appear whitish like moon light."
+   }
   },
   "24": {
    "sa": "कालकालवदनेन तमिस्रैः श्मश्रुलेन शरदेन च तारैः । अम्बरेण वियुजां ग्रसनार्थं सान्ध्यरागरसना प्रसृता नु ॥ २४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The stars of the autumn look like the moustache of Akashapurusha (The sky). The evening appeared like the reddish tongue stretched out of the mouth of such Akashapurusha who had his face covered by darkness resembling that of Yama, the god of death, in order to swallow and destroy those who were separated from their sweethearts."
+   }
   },
   "25": {
    "sa": "विप्रयुक्तसुदृशां विनयार्थं ध्वान्तकल्पजलधावभिवृद्धे । बिभ्रन्नश्रियमवापुरुडूनां ज्योतिरिङ्गणगणस्फुरणानि ॥ २५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Those girls disunited from their sweethearts experience more grief during the night. The darkness during the night causes anguish of separation in them. The darkness gradually becomes more and more intense in the evening like the ocean does at the time of universal destruction, as though to cause their death. This sea of darkness pervades upto the starry region. The glow worms glow in groups then. Those glow worms were looking like the reflection of those stars which were hiding behind the curtain of darkness."
+   }
   },
   "26": {
    "sa": "मारकारुकृताधतमिस्रं गोलमब्धिनलिनीविरहाग्नेः । ऊर्मिभस्त्रपवनैरतितप्तं शीतरश्म्युदयरागमिषेण ॥ २६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The darkness spread densely as the sun set in the evening. The blacksmith Manmatha intensely heated an iron ball in the fire of separation experienced by the lotus grown in sea. Then he blew air through the pair of bellows of sea tides to blaze up that fire of separation. The red iron ball heated intensely in that fire is now moving up the horizon as the hue of moon rise."
+   }
   },
   "27": {
    "sa": "निर्यतो भुवि निलिम्पतटिन्याः कौमुदीमिषपयःप्रकरस्य । मौक्तिकभ्रम इव प्रवकाशे पूर्वशैलशिखरे शशिबिम्बम् ॥ २७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The water current of moon-light (Current of milk) started showering down on earth from Akashaganga. The moon disc rising above the eastern mountain scintillated like the swirl accompanied by torrent of pearls."
+   }
   },
   "28": {
    "sa": "पूर्वसिन्धुसलिलेन निषेक्तुं तारकाङ्कुरततिं ततरश्मि । इन्दुबिम्बपिटकं किमु दने दक्षिणोत्तरहरित्परिणीभ्याम् ॥ २८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The moon disc appears like the basket of bamboo tied by the rope of rays spread in the directions of north and south and being swung by two devathas who are the rulers of north and south, in order to supply water to the sprouts of stars, from the eastern sea."
+   }
   },
   "29": {
    "sa": "उक्षिपन्त्युदयरक्तिममौलिप्रावृतिं हरिदिशा हरिणाक्षी । मन्दमिन्दुवदनं किमुदञ्चत्याहृता नटितुमम्बररङ्गे ॥ २९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When the moon rose, the redness of the moon rise disappeared. The poet has exaggeratedly described that the atmosphere then appeared as if the danseuse (the east) who came to dance on the stage (the sky) has moved aside the red curtain above her head to show her moon like face to the audience."
+   }
   },
   "30": {
    "sa": "पान्थसंहतिकृते कृतचेता यष्टुमादितहविर्नवनीतम् । द्रौतमेष विषमेषुरुदन्वन्मौलिगोलविधुबिम्बनिभेन ॥ ३० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Those who perform yaga for a malevolent purpose use butter for homa. Now Manmatha decided to conduct Abhicharayaga to cause affliction as intense as the agony of death, to those men who were bereft of their sweethearts. The poet has exaggerated that the moon disc which was moving whimsically above the sea at the time of moon rise served as melted butter for Manmatha to conduct Abhicharayaga."
+   }
   },
   "31": {
    "sa": "चक्रवाकमिथुनच्छलुनीरक्षीरयोरकृत हन्त विभागम् । व्योमनामसरसीकृतकेलिः सायमेषसितरश्मिमरालः ॥ ३१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The blue sky is a big lake. The moon roaming in the sky is the swan. The swan separates the milk from water and drinks it. Likewise the rising moon separated the pair of ruddy geese from each other which were intimately close like milk and water. Alas! this is really regrettable."
+   }
   },
   "32": {
    "sa": "पूर्वभूमिधरवेदिगतोद्यद्रागवह्नुपरिरश्मिघृताक्ताम् । संपचन् विधुवपां समयोऽधाद्योजिताम्बरवपाश्रपणीकाम् ॥ ३२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "After sacrificing the animal during yaga, they would take out \"vapa\" (diaphragm) from its heart, rinse it in ghee, burn it in fire and take it before the sun on \"Shrapani\" a thorny device. Likewise when the sun set in the evening and redness of moon rise appeared in the sky, the evening (performer of yajna) poured the rays (ghee) on the soft moon-disc (diaphragm) and cooked it in the redness of moon rise (fire) in Poorvadri (the altar of Yajna). Then he kept it in the sky (thorny device)."
+   }
   },
   "33": {
    "sa": "अन्धकारनिभकल्पविरामे विप्लुतं जगदिदं विधुवेधाः । किं ससर्ज तदिदं यदमुष्मिन्नुद्यते सति परं विललास ॥ ३३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The world appeared destroyed in dense darkness of the night just as it did during the era of extinction of all life. But when the moon rose, the world which appeared to have perished, once again looked splendid as if getting created again. The poet who saw the world which was invisible in the darkness, regaining its splendour in the moonlight, has exaggeratedly described that the moon as Brahma must have recreated this world which appeared destroyed in darkness."
+   }
   },
   "34": {
    "sa": "संयमीन्द्रविविधोक्तिविलासं श्रोतुमुत्सुकमना दिवसान्ते । उन्ममज्ज जलधेर्विधुदम्भाद्दर्शयन् फणगणान् फणिराजः ॥ ३४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When the moon was rising above the horizon in the evening, he was spreading reddish golden rays all over. Those who saw those rays felt as though Sesha who was yearning to listen to the distinctive style of delivery of discourse by Sri Raghavendra, was emerging above the sea, disguised as moon and stretching out his hoods in the form of rays."
+   }
   },
   "35": {
    "sa": "रक्तयोरभिमुखं स्थिथिभाजोः पद्मिनीकुमुदिनीपरिणेन्नोः । कः करोतु बत बिम्बविवेकं नापरत्र यदि लक्ष्मविलासः ॥ ३५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Who would be able to differentiate between the sun disc and the moon disc, if the distinctive stain in the moon disc becomes invisible, when the sun, the sweetheart of Kamalini (Lotus) and the moon, the sweetheart of Kumudini (water lily) both reddish in colour, face each other at the time of sunset and moon-rise taking place simultaneously in west and east respectively?"
+   }
   },
   "36": {
    "sa": "पूर्वशैलवृषभाचलदृशयं देवतीर्थमधिगम्य सुधांशुम् । हृष्यतोस्य भुवनस्य न मोघं चन्द्रिकात्मसुकृतत्वमयासीत् ॥ ३६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Those who visit a holy place and worship the God gets punya. Similarly those people who had Devatheertha in the form of ambrosial rays of moon which looked like cataract of Vrishabhadri were elated. As a result of this, they secured punya in the form of moon light."
+   }
   },
   "37": {
    "sa": "विष्टपे विधुरुचा विद्धाने क्षीरसागरनिमज्जनकेलिम् । पाठकर्म स समाप्य सरस्यां मङ्गुमन्त उदयुङ्क्त यतीन्द्रः ॥ ३७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "While the whole world was rejoicing in the ocean of moon light, Sri Raghavendra, the great saint got up to take a plunge in the lake behind the Mutt after completing his daily routine of teaching and delivering discourse."
+   }
   },
   "38": {
    "sa": "स्नानकर्म विरचय्य वसानो वाससी त्रिपदया सवितारम् । वन्दते स्म तदनु त्रिदशेशं विष्णुमैहत समर्हितुमर्हम् ॥ ३८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "After his bath, the great saint enclothed himself with two ochry reddish clothes and worshipped Savthiru namaka Lord Sri Narayana chanting Gayathri Manthra. Then after completing Pranava and Gayathri Japas, he started the pooja of that Lord of Lords Sri Moolaramachandra."
+   }
   },
   "39": {
    "sa": "अर्पयन्भगवते सुममाल्यं प्रीणयन् सपयसा च फलेन । हेमपात्रविलसद्धनसारारार्तिकेण कलयंस्तमहृष्यन् ॥ ३९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Then Sri Raghavendra decorated Lord Sri Moolarama with garlands of fresh flowers, offered oblation of milk and fruits to the Lord and also mangalarati in a golden plate. Thus the great saint forgot himself getting immersed in an emotionally delightful world after worshipping Lord Sri Moolarama in profound devotion."
+   }
   },
   "40": {
    "sa": "मन्त्रपुष्पमधिमौलि दधानो यन्त्रितान्यविषयो रघुनेतुः । सादरं दरनिमीलितनेत्रः स्तोतुमारभत संयमिधुर्यः ॥ ४० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra, the great saint put flowers consecrated with mantra on his head. Then forgetting this world, he sat with eyes closed and started extolling the Lord Sri Moolarama with profound devotion meditating on the Lord in his lotus heart."
+   }
   },
   "41": {
    "sa": "वेदसिद्धमणुतोप्यणुभावं मोददायि महतोपि महत्त्वम् । बिभ्रतं प्रथयितुं मनवे त्वां मीनतां शरणयामि भवन्तम् ॥ ४१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "We are in Vyvasvatha Manvantara now which is the seventh one. Six Manvantaras namely Swayabhuva, Swarachisha, Uttama, Tapasa, Ryvatha and Chakshusha have already passed off. At the end of Chakshusha Manvantara there was a king by name Sathyavratha. One day, when he was offering Tarpana after taking bath in the river Krithamala, he saw a fish in the water held by him in his hands. That fish was as minutely small as an atom. Within one or two days it grew gigantically and attained the proportions of one lakh yojanas. Thus the Lord in the guise of fish inculcated knowledge about his unique visage in the non plussed minds of the king and blessed the king with the position of Vyvasvatha Manu in his next birth and also bestowed him with salvation. This incarnation of Lord Sri Narayana is Matsyavathara. \"Oh Lord! to be the minutest amongst the minutest and at the same time most gigantic amongst the biggest is the uniqueness of your visage which is ever blissful, which has not come from the soul and which is acclaimed by the Vedas. You have bestowed your special blessings on Vyvasvatha Manu by manifesting this feature of yours before him in your Matsyavathara (incarnation in the form of fish). Oh Lord Sri Moolamachandra!! I surrender myself at your Lotus feet\". Sri Raghavendra has thus eulogised the Matsyavathara of Lord Sri Hari."
+   }
   },
   "42": {
    "sa": "वेदविप्लुतिकृतिं विधिजाड्यं हन्त हन्तुमदधाज्जलजन्म । मीनभावनभरेण ततो मे विस्तृणीहि विमलं प्रतिबोधम् ॥ ४२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"On another occasion at the end of the existence of the world, the giant Hayagreeva stole the Vedas emerging from the face of Brahma who was still sleeping. After waking up, Brahma who was puzzled as how to take up the task of creation of the world without the Vedas, was under a strange state of perplexity. Then you once again incarnated as Matsya and brought him out of his ignorance. Oh Lord of such prowess!! kindly bestow me with more and more knowledge\". Sri Raghavendra has thus prayed the Lord."
+   }
   },
   "43": {
    "sa": "आत्मनैव कमठेन वितन्वन्मन्दरेण च भवानरणी द्वे । मथनतोत्थितहलाहलवह्निं होतुमिन्द्ररिपुवृन्दहवींषि ॥ ४३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Oh Lord Koormavathari! (incarnation in the form of turtle) when the devathas and the asuras were churning the ocean of milk with Mandaraparvatha as churning rod, that mountain started sinking in the ocean. You incarnated as Koorma to keep it afloat. Then you were like the lower Arani (the wood of the ficus religiosa used for kindling fire by attrition) and the Mandaraparvatha acted as the upper Arani. By the attrition of these two, you produced the fire of deadly poison to offer those asuras as havis (oblation) to that fire. Oh Lord of such wonderful feats!!! You are the one who bestows those men and women of devotion with prosperity and who destroys the asuras. I surrender myself at your lotus feet\". Sri Raghavendra has thus offered his prayers to the Lord."
+   }
   },
   "44": {
    "sa": "आदिसूकरधरोद्धरणं ते सिन्धुबन्धुजठरात् श्रुतिगीतम् । मादृशां भवपयोधिगतानां रक्षणे परिचयं तदवैमः ॥ ४४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Oh Ahi Varahamurthy (incarnation in the form of boar)! The Vedas and Puranas have acclaimed your stupendous feat of lifting Dharanidevi (the earth) from the ocean. It is my opinion that your feat is an act of rehearsal of uplift of people like me who are sunk deep in the ocean of the whirl and maze of mundane affairs\". Sri Raghavendra has thus extolled the Lord Vishnu in the incarnation of Varaha."
+   }
   },
   "45": {
    "sa": "पूर्णचन्द्रगतलक्षणरेखा लक्षिता यदि तदैङ्ककलायाम् । संश्रितेन्दुमणिदंष्ट्रधरं स्यात्सोपमा भवति सूकररूप ॥ ४५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Oh Varaharoopi Lord! if the lineament of stain which is in the middle of the moon, who is shining with sixteen parts, is separated and the stainless part of the moon is placed on it, it looks splendid. Likewise, at the time of you lifting Bhoodevi from the ocean, she, who is like the lineament of stain in the moon, shines brightly on your curved horn which appears like a stain on a new moon day."
+   }
   },
   "46": {
    "sa": "तावकं नरहरेऽतिविरुद्धं वेषधारणमिदं तनुते नः । अत्यसंघाटितकर्म च कृत्वा पालये प्रणतमित्युपदेशम् ॥ ४६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Oh Lord Sri Lakshminarasimha! it is popularly known that a protector always remains in a state of tranquility whereas a killer appears dreadfully frightening. But the reverse cannot be possible. Though you killed Hiranyakashipu, donning a dreadful form, you also protected Prahlada in the same form. Thus your killer form served as the protector too which is quite contradictory. Similarly the guise of a lion for a man and the guise of a man to a lion are also contradictory. You are both man as well as lion. Thus your form too looks strange. Therefore it is my opinion that by donning a form which is incomprehensible, you have proved that you can do things which others can't do in assuring those men and women of devotion that you always protect them by destroying their sins\"."
+   }
   },
   "47": {
    "sa": "दारितोदरहिरण्यकशत्रोरान्त्रमाल्यकलितं तव रूपम् । नारसिंह कलयेऽननुभूतं शारदं जलधरं सहशम्पम् ॥ ४७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Oh Lord Sri Narasimha! it is my opinion that you must have looked splendid like the cloud of an autumn, when you ripped open the stomach of Hiranyakashipu and wore his intestines as a garland around your neck which had no precedence\"."
+   }
   },
   "48": {
    "sa": "जानतां निजमनः परमाणौ मातुमेव बलिनिग्रहदम्भात् । वामनं यदभवत्तव रूपं तत्सुखेन भगवन्हृदि कुर्मः ॥ ४८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Oh Lord of infinite virtues! on the pretext of restraining the emperor Bali, you incarnated as Vamana. But your real intention was to enable the men of knowledge to firmly establish you in their minds which are as small as an atom. Otherwise how is it possible for them to concentrate their atom sized minds on your gigantic form of Trivikrama. Therefore, you donned the form of Vamana for the convenience of those men! I would strive to achieve a sense of fulfilment by meditating on this form of yours\". Sri Raghavendra has thus extolled the incarnation of Vamana, who is not different from Lord Sri Moolaramachandra."
+   }
   },
   "49": {
    "sa": "चन्द्रमा इव भुवो रचयन्नक्षत्रयोगमपि यस्त्वमलासीः । तेन शात्रवयशोम्बुजराजीमुद्रणं तव कृतिं बहु मन्ये ॥ ४९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Oh Lord Sri Hari! the moon sparkles brightly by causing relationship between the stars and earth. Likewise, you looked splendid by depriving all the Kshatriyas of their relationship with this world incarnating as Parashurama of such prowess. You caused the flowers of fame and reputation of your enemies (Kshatriyas) to shrink and transformed the group of those lotus flowers into buds. I salute and worship your marvellous feat."
+   }
   },
   "50": {
    "sa": "तारणे दुरितनीरनिधेर्नः सेतुभावमचिरेण यियासोः । भासते तव विभो करुणायाः पूर्वरङ्ग इव दक्षिणसेतुः ॥ ५0 ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Oh Lord Sri Moolarama! your kindness facilitates us to cross the ocean of our sins like a bridge. The bridge you built across the southern sea stands looking splendid as a prelude in this context\"."
+   }
   },
   "51": {
    "sa": "बन्धनाय कृतमात्मजनन्या तादृशं च गुणमङ्गचकरोर्यत् । तेन निर्गुणमतानि निरस्यन्दर्शयस्यपि निजां गुणवत्ताम् ॥ ५१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Oh Lord Sri Krishna! your mother Yashoda bound you with an ordinary rope used for tying cows and calves and you too accepted it. Thus you exhibited before the men and women of devotion that you were an embodiment of infinite qualities dispelling the philosophy which advocated that the Brahman was devoid of any physical form and also qualities."
+   }
   },
   "52": {
    "sa": "सर्वदेवरथचेष्टनमङ्गीकुर्वतस्तव सदैव जगत्याम् । अर्जुनैकरथसारथिभावो विस्मयाय विदुषां न कथंचित् ॥ ५२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Oh Lord! Your act of accepting the task of driving Arjuna's chariot does not surprise the men of knowledge, because it is you who controls the actions of the bodies of all living beings\". Explanation: The Shrutis proclaim that the bodies of all the living beings are the chariots of Lord Sri Hari. Oh Lord! as the bodies of living beings are your chariots, you have taken up the responsibility of driving those chariots. Therefore it is not surprising that you drove the chariot of Arjuna. As per the quote, Lord Sri Krishna acts as the charioteer of the chariots (bodies) of all the virtuous living beings as well as the chariot of Arjuna. The Lord of such prowess is divinely great."
+   }
   },
   "53": {
    "sa": "त्वं कुचेलमुनिमीश कुचेलाद्यर्पणेन कृतवान्कुचेलम् । सोभवत्तदपि चारुकुचेलालंकृतस्तदिदमद्भुतमासीत् ॥ ५३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Oh Lord Sri Krishna! when the saintly Kuchela offered you beaten rice packed in torn out cloth, you blessed him by gifting new silk clothes (Peethambara). Therefore it is really surprising that Kuchela who was not attached to earthly life continued to wear torn out clothes in spite of you blessing him with new clothes."
+   }
   },
   "54": {
    "sa": "एवमादिविविधैरवतारैः पालिताखिलजनौघ ममाघम् । सन्निरस्य कमलास्य नमस्यां स्वीकुरुष्व रघुवंशवतंस ॥ ५४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Oh Lord Sri Moolarama! You are blessing all those virtuous men and women by incarnating as Matsya, Koorma, and other such forms. You are the greatest in the lineage of Raghu! the lotus appears pale in comparison with your beautiful face!! Oh Lord!! kindly destroy all my sins and accept my obeisance."
+   }
   },
   "55": {
    "sa": "इत्युदीर्य विनतोपि नयेन प्रार्थितस्तदनु संसदमागात् । सत्पथं विशदयन् समुदीतः पूर्वशैलमिव कैरवबन्धुः ॥ ५५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thus extolling Lord Sri Narayana, Sri Raghavendra paid his obeisance to the Lord. Then he went to the conference hall as requested by his attendants. The moon rises above Udayaparvatha spreading his light all over the sky on which the devatas and stars tread. The water lilies get elated and bloom when the moon rises. Likewise Sri Raghavendra reached Udayashyla (Conference Hall) spreading the light of knowledge all over the path of the virtuous and delighting the flowers of water lily (noble men of knowledge, on his way)."
+   }
   },
   "56": {
    "sa": "प्रांशुयन्मणिगवाक्षविनिर्यद्घ्योसरिज्जलवशात्समुपेत्य । अङ्गमा इव लुठन्ति यतीन्दुच्छन्नचामरमिषेण मरालाः ॥ ५६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The conference hall which Sri Raghavendra entered was heavenly and divinely affluent. It was provided with ventilators at the top of its walls. Those ventilators which were studded with fabulous gems were made of moon stones. When the flood waters of the celestial Ganges rushed towards the earth through those ventilators the force of the flood waters pushed the milky white swans towards the earth. Being unable to return, those swans are now limping and wallowing as white umbrellas and chamaras of Sri Raghavendra."
+   }
   },
   "57": {
    "sa": "व्योमलङ्घनगदेन समुद्यन् यन्निरुद्धगतयो दिवि ताराः । तत्प्रभुं शरणयन्ति यतीन्दुं मौक्तिकासनगमौक्तिकदम्भात् ॥ ५७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The stars in the sky above the earth intended to move still upwards and enter the heaven. But some saints who were moving still more upwards prevented those stars from moving upwards and advised them not to compete with them. Then those stars decided to pray Sri Raghavendra, the king of saints to advise those saints to desist from becoming hurdles in their path. The poet has exaggerated that those stars appeared to have surrendered at the lotus feet of Sri Raghavendra on the pretext of serving him as the pearls of his throne."
+   }
   },
   "58": {
    "sa": "नाहुतं श्रितवतां सततं यस्तम्भदुर्गणलयो भवितेति । संनियच्छति निगृह्य समस्तं स्तम्भमप्यतिमहान्तमसौ यत् ॥ ५८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra with his divine power cures all the physical and mental maladies such as laziness, ignorance, however serious they may be. When that is the case, it is not surprising that he destroys all the hurdles in the path of those men and women who surrender before him. The great saint and the king of saints Sri Raghavendra destroys all kinds of impediments. Therefore it is not necessary to say that the great saint destroys all the hurdles in the path of those stars as quoted in the previous stanza."
+   }
   },
   "59": {
    "sa": "संचरन् क्वचन यत्र दिदृक्षुश्चन्द्रकान्तमणिमण्टपतौघः । आहतः शशिरुचा बत सिद्धः पर्यहास्यत परन्नगतेन ॥ ५९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Once two demigods descended on the earth to have a glimpse of Sri Raghavendra. They came near the mantap made of moonstone where the great saint was shining splendidly. One of them came below the mantap to have a close look and the other one stayed at the top of the mantap. Both who were shining brilliantly in the lustre of the moon stone, looked like Moon. The demi god at the top thought that it was only he who was shining, because he was unaware of the fact that the bottom of the mantap too was made of moon stone. He ridiculed the one at the bottom of the mantap thinking that the latter has missed the opportunity of shining like him. Thus he cut a sorry figure with his ignorance. The great saint Sri Raghavendra was seated in the mantap of such marvel made of moon stone. This is the summary of this stanza."
+   }
   },
   "60": {
    "sa": "संचरन् शिखिमुखोरगपीतस्वाश्वयानिललयातत्सघनेषु । सम्पतत्सु पतितो भुवि सिद्धा विस्मयं दधति हन्त यदन्तः॥ ६० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Some peacocks which were holding snakes, their food, in their beaks were flying near the spheres of clouds in the sky above the moon stone mantap in which Sri Raghavendra was sitting. Those snakes were swallowing the wind which was holding the clouds, even when they were at the threshold of death. Those clouds which were devoid of wind started showering rains on the earth. Some demi gods who were moving about in the sky during that time too fell on the earth along with showers. When those demi gods beheld the beauty of that moon stone mantap in which the great saint was sitting, they were astonished at its unprecedented marvel and started showering praises on it."
+   }
   },
   "61": {
    "sa": "न त्यजन्ति मिहिरं तव यात्राङ्गारचर्वणचणा हि चकोराः । पक्षिभाषणकृते यदि नामावालिखिल्यनिगमाध्ययनानि ॥ ६१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "There are two types of Greek partridge, those who survive on fire and those who survive on moonbeam. The birds which swallow fire never separate from the sun and they sparkle in moon light. Therefore the birds in sleep too begin to twitter under the illusion that the sun has already risen. Before the sun rises, sixty thousand thumb sized Valakhilyas praise the sun chanting many quotes from the Vedas. Since the moon is shining like sun now, I consider the twittering of those birds as the quotes of the Vedas chanted by Valakhilyas."
+   }
   },
   "62": {
    "sa": "तत्र चन्द्रमणिकुट्टिमसिन्धौ मौक्तिकासनमये भुजगेन्द्रे । राजते रघुपुरन्दरनामा पाटलाम्बरधरः परमात्मा ॥ ६२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The place where that ineffable moon-stone mantap was situated looked splendid like the ocean of milk. Sri Raghavendra, the great saint wearing ochre coloured clothes seated on the throne of pearls there coruscated like Lord Sri Narayana reclining on Sesha in the ocean of milk. Those who have profound devotion in the God coruscate like God with his special blessings. This is known as the state of assimilation to the deity in salvation. Therefore this comparative description by the poet is in conformity with the established truth. Sri Raghavendra wears ochre coloured clothes, whereas Lord Sri Hari wears yellow coloured silk clothes. The dissimilitude between them is indicated by the quote here. The words also indicate this dissimilarity, meaning Sri Raghavendra always meditates through his heart and mind on Lord Sri Narayana, the supreme, and on Sri Lakshmidevi, the supreme amongst those who are not independent."
+   }
   },
   "63": {
    "sa": "केचन प्रतिपुरन्दरमेनं पर्युपासत बुधाः प्रतिमान्तैः । कुर्वतेत्र पदपूर्वसमस्यापूरणं च कवयः पुरतोस्य ॥ ६३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Some men of knowledge offered their services to Sri Raghavendra who was like or equal to Devendra in the form of discussions on those literary works which depict the true meanings of the Vedas like Upanishads and Bramhasootras. The poet amongst them solved puzzles in the presence of the great saint in the assembly of scholars. Explanation: The Devathas in different guises came to the assembly of scholars and offered their services to Sri Raghavendra, the great Saint in the form of discussions on Upanishads and Brahmasootras which depict the true meanings of the Vedas."
+   }
   },
   "64": {
    "sa": "श्रियः पतिः श्रीमति शासितुं जगन्निपीय यस्य क्षितिरक्षिणः कलाः । श्रियः कुरूणामधिपस्य पालनीः श्रियः स दत्तान्विह ते पुरःस्थितः ॥ ६४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Lord Sri Narayana incarnated as Sri Krishna in order to protect this world and to engage the souls of infinite numbers in their duties. When Duryodhana was behaving insolently after deceivably usurping all the wealth of the Pandavas, Sri Krishna got him killed by Bheemasena and returned their wealth to the Pandavas. Thus the Lord Sri Hari with his \"Poornamsha\" has incarnated as Matsya, Koorma, Rama, Krishna and other forms on this earth. He also protects this world with his \"aveshas\" in Balarama, Prithu, Sanatkumara and others. The Lord of such prowess in His infinite incarnations is present in the idol of Sri Moolarama accompanied by his consort Sri Seethadevi, the nithyaviyogini (always would be with her consort) who is not different from Sri Laxmidevi. Sri Chaturmukha Brahma himself has worshipped this idol known as \"Chaturyuga moorthi\" which is the presiding deity of the Mutt, the throne of knowledge of which is adorned by none other than that great saint auspiciously named as Sri Raghavendratheertha. \"Let this Lord Moolarama being pleased with your worship, prayer and meditation bestow prosperity and success related to both worlds on those who have profound devotion in guru, Pranadeva and Lord Sri Hari\". Thus praying, the poet Sri Narayanacharya has concluded this great epic."
+   }
   },
   "65": {
    "sa": "सन्तं श्रीरमणं प्रियं यतिवरं व्यासस्य भावे भृशं दुर्वारामितमायिभिक्षुतिमिरे पर्वस्थचन्द्रं भुवि । सत्संघस्तुतमिष्टदक्षितिरुहं वन्दारुविप्राश्रयं तं नत्वा सकलो दुरूहसुदृशं संयाति विद्यादिकम् ॥ ६५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra is dearest to Lord Sri Narayana, the consort of Sri Lakshmi. He is always engaged in writing books and teaching the meanings of the Geetha, Upanishads and Brahmasootras in conformity with the views of Lord Sri Vedavyasa. He is the greatest among all the saints on earth. He is like the moon of a full moon day in destroying the darkness caused by the views of those who advocate Mayavada. He is like Kalpavruksha, for those who adore him. He bestows prosperity and success on those virtuous brahmins who constantly prostrate at his lotus feet. Those who prostrate before him and those who eulogise him constantly, acquire spiritual knowledge which is beyond one's imagination and which cannot be described in words. Profound knowledge, opulence, expertise in music and sculpture, begetting children and other such wishes of those who worship Sri Raghavendra with profound devotion are sure to be fulfilled."
+   }
   },
   "66": {
    "sa": "श्रीमत्कश्यपवंशवार्धिशशिनः षड्दर्शनीवल्लभ- श्रीलक्ष्मीनरसिंहवित्तविदुषः श्रीवेङ्कटाम्बामणौ । जातेनार्यदयासुधामयगिरा नारायणेनोदिते काव्ये चारुणि राघवेन्द्रविजये सर्गोन्तिमोभूदिह ॥ ६६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thus concludes the tenth and final canto of the epic \"Sri Raghavendra Vijaya\" enchanting with nectareous words composed by Narayanacharya with the blessings of his father. Narayanacharya who had his education from his father was the son of the couple Venkatamba and Lakshminarasimhacharya who was an erudite scholar in all the six shastras and who was born and shone like a moon in the ocean of Kashyapagothra named after that virtuous and scholarly sage Kashyapa. English translation of the tenth and final canto of the epic \"Sri Raghavendra Vijaya\" composed by Sri Narayanacharya concluded."
+   }
   }
  }
 }

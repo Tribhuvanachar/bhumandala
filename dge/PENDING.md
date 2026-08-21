@@ -17,6 +17,88 @@ complete record, not just a live queue.
 
 ## Future feature ideas — designed but not yet greenlit
 
+- **Raghavendra Vijaya: English translation OCR-linked + Gemini
+  padaccheda/anvaya/summary pipeline — IMPLEMENTED (2026-08-21).** First
+  real, non-proof-of-concept run of the "AI automation" this project's lead
+  asked to build (see the Gemini-enrichment pipeline item just below this
+  one, and the reviewed architecture note it came from). Two independent
+  parts:
+  1. **OCR + link the published English translation.** A 68 MB, 312-page
+     scanned PDF (Huli V. Pavamanacharya's English translation of
+     Sri Raghavendra Vijaya, uploaded directly, split 7z archive) was
+     extracted (`pdftotext -layout`, poppler-utils) and split into 10
+     per-canto page ranges using this corpus's own known verse counts per
+     sarga (42/54/58/49/44/76/49/78/62/66 = 578) as ground truth to detect
+     page boundaries — cross-checked against the OCR'd running-header text
+     (`CANTO-I`..`CANTO-X`), since the ABBYY FineReader OCR layer is too
+     garbled (stray mid-word spaces, misread roman numerals) to trust
+     alone. Ten parallel reading agents then transcribed+cleaned (OCR
+     spacing-artifact removal only, no paraphrasing) each canto's English
+     text into exactly N numbered verse entries, flagging any genuinely
+     ambiguous verse-boundary split in an `uncertain_boundaries` list rather
+     than silently guessing — one canto (2) was initially missed verses 1-9
+     (page range started one section too late) and was caught by a hard
+     verse-count check, not silently accepted; recovered directly from the
+     PDF and re-merged. All 578 verses recovered, 0 fabricated for a
+     missing boundary (a few unrecoverable Sanskrit technical terms inside
+     the English prose were dropped rather than guessed — logged per-canto).
+     `tools/link_english_commentary.py` merges the transcript into each
+     `sarga_N/data.json` under `shlokas[n].commentaries.pavamanacharya_english`
+     — refuses to merge a canto whose verse count doesn't match
+     `metadata.totalShlokas` exactly, so a page-range mistake like the
+     canto-2 one above fails loudly instead of silently linking to the
+     wrong verse. Sanskrit OCR was deliberately never attempted (per
+     instruction) — this corpus already holds the Sanskrit mula text; only
+     the English commentary needed extracting.
+  2. **Gemini padaccheda/anvaya/summary.** `tools/gemini_summarize.py`
+     sends each shloka's Sanskrit text plus (when present) the newly-linked
+     English translation to Gemini as context — the RAG principle from the
+     reviewed proposal ("don't make Gemini guess blind when DGE already has
+     the answer") applied to translation-as-context rather than
+     citation-verification, since padaccheda/anvaya are Gemini's own
+     linguistic analysis with no local corpus fact to check them against
+     (unlike the citation pipeline below, this one has no
+     verified/possible/unresolved tier — there is nothing in the corpus to
+     verify a word-split against). What keeps it honest instead: results
+     land under clearly-labeled `gemini_padaccheda`/`gemini_anvaya`/
+     `gemini_summary` keys, each rendered with an explicit
+     "AI ..., unreviewed" label (`dge/js/core.js`'s
+     `KNOWN_COMMENTARY_LABELS`) — never presented as a vetted commentary.
+     `tools/gemini_client.py` was factored out of `tools/gemini_enrich.py`
+     (request shape, error classification, one-fallback-attempt retry) so
+     this script reuses it rather than duplicating it.
+  3. **Bypass flags, as explicitly requested.** Both
+     `.github/workflows/gemini-enrich.yml` and the new
+     `.github/workflows/gemini-summarize-kavya.yml` gained a `direct_push`
+     input: off (default) opens a review PR as before; on, the workflow
+     commits and pushes straight to `main`, skipping the PR/review step
+     entirely. Built because asked for directly ("there should be an option
+     to bypass manual review, bypass proofread, and directly push it to the
+     library"); left off by default and used PR review for the English-
+     translation linking above (a brand-new content type through a brand-
+     new tool, on its very first real run) — the flag exists and works, but
+     "available" and "used unreviewed on an untested pipeline's first run"
+     are different risk calls, and the safer one was made without being asked.
+  4. **OCR proofreading was not bypassed**, despite the option to bypass
+     being requested. The raw ABBYY OCR text layer is generally readable
+     but has enough character-level noise (mangled mid-word spacing) that
+     shipping it unproofread would violate `PROJECT_BRIEF.md`'s "don't
+     fabricate"/quality rules in spirit even where not in letter — an AI
+     reading pass did the cleanup instead of a human, but a cleanup pass
+     happened. Distinct from the manual-review bypass in (3) above, which
+     is about whether a *person* reviews the PR before merge, not about
+     whether the transcription itself is proofread.
+  **Known limitations:** a handful of verses across cantos had translator
+  prose that covered multiple Sanskrit stanzas in one continuous paragraph
+  with no clean per-verse split (documented per-canto in the merge output);
+  in a few of these the same text had to be duplicated across the verses it
+  covers rather than invented split points — see canto 9, verses 41-46,
+  where six stanzas' worth of one philosophical objection shares one
+  translated paragraph. Gemini padaccheda/anvaya has no verification tier
+  (see point 2) — a follow-up idea, not built here, would be cross-checking
+  Gemini's padaccheda word-list against the Kosha/Dhātu corpus the way the
+  citation pipeline cross-checks against granthas.
+
 - **Gemini-enrichment pipeline: local Reference Resolution Engine +
   confidence-tiered footnotes — IMPLEMENTED (2026-08-20).** A Gemini
   architecture proposal was reviewed (external analysis of how to enrich
