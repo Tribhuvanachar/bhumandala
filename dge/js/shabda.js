@@ -14,7 +14,17 @@
     get:function(k,d){ try{ var v=localStorage.getItem("dge.shabda."+k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
     set:function(k,v){ try{ localStorage.setItem("dge.shabda."+k, JSON.stringify(v)); }catch(e){} }
   };
-  var state = { all:[], view:[], page:0, script: LS.get("script","devanagari"), linga: LS.get("linga",""), anta: LS.get("anta",""), q:"", openId: LS.get("open",null), highlightCell:null };
+  var state = { all:[], view:[], page:0, script: LS.get("script","devanagari"), linga: LS.get("linga",""), anta: LS.get("anta",""),
+                adi:"", upadha:"", krt:"", vac:"", q:"", openId: LS.get("open",null), highlightCell:null };
+
+  // Kṛt pratyaya display names for the प्रत्ययान्तः filter — keys are the
+  // vidyut pratyaya identifiers tools/tag_shabda_pratyaya.py wrote into the
+  // data's `krt` field.
+  var KRT_NAME = { kta:"क्त", ktavatu:"क्तवतु", Satf:"शतृ", SAnac:"शानच्",
+                   tavya:"तव्य", anIyar:"अनीयर्", yat:"यत्", Rvul:"ण्वुल्",
+                   tfc:"तृच्", lyuw:"ल्युट्" };
+  // Canonical varṇa order for the आदिः/उपधा dropdowns (SLP1 phonemes).
+  var VARNA_ORDER = "aAiIuUfFxXeEoOkKgGNcCjJYwWqQRtTdDnpPbBmyrlvSzsh";
 
   // Stem-ending class of a headword (the "advanced filter" axis): the
   // written final sound — a matra, an explicit virama (halanta), or the
@@ -46,11 +56,34 @@
     state.view = state.all.filter(function(it){
       if(state.linga && it.linga!==state.linga) return false;
       if(state.anta && it._anta!==state.anta) return false;
+      if(state.adi && it._adi!==state.adi) return false;
+      if(state.upadha && it._up!==state.upadha) return false;
+      if(state.krt && (","+(it.krt||"")+",").indexOf(","+state.krt+",")<0) return false;
+      if(state.vac && it._vac!==state.vac) return false;
       if(q && it._hay.indexOf(q)<0) return false;
       return true;
     });
-    state.view.sort(function(a,b){ return a.word.localeCompare(b.word,"sa"); });
+    // With a live query, an exact hit must come FIRST, not wherever the
+    // alphabet happens to put it 100 pages in (the reported bug: searching
+    // राम buried राम itself behind every -रा compound). Rank: the headword
+    // itself (0) < headword prefix (1) < an exact inflected form (2) <
+    // anywhere-in-text match (3); alphabetical within a rank.
+    if(q){
+      state.view.sort(function(a,b){
+        var ra=qRank(a,q), rb=qRank(b,q);
+        return ra!==rb ? ra-rb : a.word.localeCompare(b.word,"sa");
+      });
+    } else {
+      state.view.sort(function(a,b){ return a.word.localeCompare(b.word,"sa"); });
+    }
     $("#sh-count").textContent = state.view.length.toLocaleString()+" / "+state.all.length.toLocaleString();
+  }
+  function qRank(it,q){
+    var w=(it.word||"").toLowerCase();
+    if(w===q) return 0;
+    if(w.indexOf(q)===0) return 1;
+    if(it._fx.indexOf(";"+q+";")>=0) return 2;
+    return 3;
   }
 
   function declTable(forms, highlightIdx){
@@ -156,6 +189,54 @@
   }
   function syncLingaChips(){ document.querySelectorAll("[data-l]").forEach(function(c){ c.classList.toggle("on", c.dataset.l===state.linga); }); }
   function syncAntaChips(){ document.querySelectorAll("[data-a]").forEach(function(c){ c.classList.toggle("on", c.dataset.a===state.anta); }); }
+  function syncKrtChips(){ document.querySelectorAll("[data-k]").forEach(function(c){ c.classList.toggle("on", c.dataset.k===state.krt); }); }
+  function syncVacChips(){ document.querySelectorAll("[data-v]").forEach(function(c){ c.classList.toggle("on", c.dataset.v===state.vac); }); }
+
+  // Advanced filter rows built from the loaded data itself (आदिः/उपधा
+  // dropdowns list only phonemes that actually begin/underlie some word;
+  // प्रत्ययान्तः chips only pratyayas the tagger actually found), so no
+  // option is ever a dead end.
+  function buildAdvancedFilters(){
+    var host=$("#sh-adv"); if(!host) return;
+    var S=window.DGESubantaSteps;
+    var adis={}, ups={}, krts={};
+    state.all.forEach(function(it){
+      if(it._adi) adis[it._adi]=1;
+      if(it._up) ups[it._up]=1;
+      (it.krt||"").split(",").forEach(function(k){ if(k) krts[k]=1; });
+    });
+    function opts(set){
+      return Object.keys(set).sort(function(a,b){ return VARNA_ORDER.indexOf(a)-VARNA_ORDER.indexOf(b); })
+        .map(function(ph){ var d=S?S.deva(ph):ph; return '<option value="'+ph+'">'+d+'</option>'; }).join("");
+    }
+    var h='';
+    if(S && Object.keys(adis).length){
+      h+='<div class="frow"><span class="flab deva">आदिः</span>'
+        +'<select class="chip" id="sh-adi"><option value="">सर्वे</option>'+opts(adis)+'</select>'
+        +'<span class="flab deva" style="margin-left:10px">उपधा</span>'
+        +'<select class="chip" id="sh-upadha"><option value="">सर्वे</option>'+opts(ups)+'</select></div>';
+    }
+    var kk=Object.keys(krts).sort();
+    if(kk.length){
+      h+='<div class="frow"><span class="flab deva">प्रत्ययान्तः</span>'
+        +'<button class="chip" data-k="">सर्वे</button>'
+        +kk.map(function(k){ return '<button class="chip deva" data-k="'+k+'">'+(KRT_NAME[k]||k)+'</button>'; }).join("")
+        +'</div>';
+    }
+    h+='<div class="frow"><span class="flab deva">वचनम्</span>'
+      +'<button class="chip" data-v="">सर्वे</button>'
+      +'<button class="chip deva" data-v="ND">नित्यद्विवचनम्</button>'
+      +'<button class="chip deva" data-v="NB">नित्यबहुवचनम्</button></div>';
+    host.innerHTML=h;
+    var adi=$("#sh-adi"), up=$("#sh-upadha");
+    if(adi) adi.addEventListener("change",function(){ state.adi=adi.value; rerender(); });
+    if(up) up.addEventListener("change",function(){ state.upadha=up.value; rerender(); });
+    document.querySelectorAll("[data-k]").forEach(function(c){ c.addEventListener("click",function(){
+      state.krt=c.dataset.k; syncKrtChips(); rerender(); }); });
+    document.querySelectorAll("[data-v]").forEach(function(c){ c.addEventListener("click",function(){
+      state.vac=c.dataset.v; syncVacChips(); rerender(); }); });
+    syncKrtChips(); syncVacChips();
+  }
 
   // Tap a declension cell -> its step-by-step subanta prakriyā, rendered by
   // js/subanta-steps.js (the same vidyut WASM engine rupasiddhi.html uses,
@@ -214,7 +295,9 @@
   function openById(id){
     var it=state.all.find(function(x){return x.id===id;}); if(!it) return;
     state.openId=id; LS.set("open",id); state.linga=""; state.anta=""; state.q=""; $("#sh-search").value=""; LS.set("linga",""); LS.set("anta","");
-    syncLingaChips(); syncAntaChips(); recompute();
+    state.adi=""; state.upadha=""; state.krt=""; state.vac="";
+    var _adi=$("#sh-adi"), _up=$("#sh-upadha"); if(_adi)_adi.value=""; if(_up)_up.value="";
+    syncLingaChips(); syncAntaChips(); syncKrtChips(); syncVacChips(); recompute();
     var pos=state.view.findIndex(function(x){return x.id===id;});
     state.page = pos>=0 ? Math.floor(pos/PAGE_SIZE) : 0;
     render();
@@ -307,9 +390,34 @@
         // headword it declines from, not just an exact headword match.
         it._hay=((it.word||"")+" "+(it.artha||"")+" "+(it.artha_hin||"")+" "+(it.artha_eng||"")+" "+(it.forms||"")).toLowerCase();
         it._anta=antaOf(it.word);
+        // ";"-bounded list of every exact inflected variant, for the exact-
+        // form rank in qRank() ("रामस्य" typed should surface राम first).
+        it._fx=";"+String(it.forms||"").split(/[;-]/).map(function(x){return x.trim().toLowerCase();}).join(";")+";";
+        // Phoneme-level facets (SLP1 via subanta-steps.js's converter):
+        // आदिः = first phoneme, उपधा = penultimate phoneme (1.1.65
+        // अलोऽन्त्यात् पूर्व उपधा). Empty when the converter isn't loaded.
+        var S=window.DGESubantaSteps;
+        if(S){
+          var slp=S.slp(it.word||"");
+          it._adi=slp[0]||"";
+          it._up=slp.length>1?slp[slp.length-2]:"";
+          if(VARNA_ORDER.indexOf(it._adi)<0) it._adi="";
+          if(VARNA_ORDER.indexOf(it._up)<0) it._up="";
+        } else { it._adi=""; it._up=""; }
+        // नित्य-वचन class from which columns of the 8×3 grid actually carry
+        // forms: dual-only (उभ, दम्पति…) and plural-only (अप्, अष्टन्…).
+        var cells=String(it.forms||"").split(";"); while(cells.length<24) cells.push("");
+        var eka=false,dvi=false,bahu=false;
+        for(var v=0;v<8;v++){
+          if(cells[v*3].trim()) eka=true;
+          if(cells[v*3+1].trim()) dvi=true;
+          if(cells[v*3+2].trim()) bahu=true;
+        }
+        it._vac = (!eka&&!bahu&&dvi) ? "ND" : (!eka&&!dvi&&bahu) ? "NB" : "";
         return it;
       });
       $("#sh-total").textContent = state.all.length.toLocaleString();
+      buildAdvancedFilters();
       var sp=new URLSearchParams(location.search);
       var form0=sp.get("form"), q0=sp.get("q");
       if(form0 && openByForm(form0)) return; // exact-form deep link resolved; opened above
