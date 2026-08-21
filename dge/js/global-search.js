@@ -19,9 +19,37 @@
   // window.DGE_SEARCH_INDEX from appConfig; this constant is the same URL, so
   // a page that does not load config.js still finds it. Set the variable to
   // 'search_index' to read a local build instead.
-  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@cedcc73b1e7c6335346d0408a158ef69108fa883';
+  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@60091fb1d84d2dbca3224b6ee7d1b78834a63c81';
   var INDEX_BASE = window.DGE_SEARCH_INDEX || CDN_INDEX;
   var idxPromise = null, debounce = null;
+  var currentScheme = 'auto'; // set by the scheme popup, read by queryOpts()
+
+  // Post-search filters: narrow the results ALREADY fetched (never a new
+  // network round trip -- a fresh query is already a 10+ second multi-shard
+  // fetch through jsdelivr, see onType()'s own note; re-querying per filter
+  // toggle would only make that worse). lastHits/lastQuery hold the most
+  // recent completed search so filters + renderRows() can re-slice it.
+  var lastHits = null, lastQuery = '';
+  var filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '' };
+  var CATEGORY_LABELS = {
+    vedas: 'वेदाः', purana: 'पुराणानि', itihasa: 'इतिहासाः', darshana: 'दर्शनानि',
+    smriti_dharma: 'स्मृतिधर्मशास्त्राणि', agama: 'आगमः', stotra: 'स्तोत्राणि',
+    vedanga: 'वेदाङ्गानि', dasa_sahitya: 'दासस्ताहित्यम्', kavya_alankara: 'काव्यालङ्कारौ',
+    dvaitavedanta: 'Dvaitavedanta', upaveda: 'उपवेदाः', nitishastra: 'नीतिशास्त्रम्', misc: 'अन्ये'
+  };
+  // Advaita/Dvaita/Vishishtadvaita aren't their own field on a hit (the
+  // search index doesn't carry one) but this project's own taxonomy paths
+  // already encode it unambiguously in the slug for anything under
+  // darshana/vedanta/* or the separate top-level dvaitavedanta/* tree --
+  // real signal, not a guess, just read from where it already lives rather
+  // than duplicated into a new field.
+  function siddhantaOf(slug) {
+    if (/(^|\/)advaita(\/|$)/.test(slug)) return 'advaita';
+    if (/(^|\/)vishishtadvaita(\/|$)/.test(slug)) return 'vishishtadvaita';
+    if (/(^|\/)dvaita(\/|$)/.test(slug) || slug.indexOf('dvaitavedanta') === 0) return 'dvaita';
+    return null;
+  }
+  var SIDDHANTA_LABELS = { advaita: 'अद्वैतम्', dvaita: 'द्वैतम्', vishishtadvaita: 'विशिष्टाद्वैतम्' };
 
   // Section slug -> display label, for the scope <select>. Falls back to a
   // title-cased, underscore-stripped version of the slug for anything not
@@ -56,8 +84,19 @@
       '.dge-gs-panel{max-width:720px;margin:6vh auto 0;background:var(--card-bg,#fff);color:var(--text-primary,#1a1a1a);border:1px solid var(--card-border,rgba(0,0,0,.12));border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);overflow:hidden;font-family:inherit}',
       '.dge-gs-top{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--card-border,rgba(0,0,0,.12));align-items:center}',
       '.dge-gs-input{flex:1;font-size:17px;padding:10px 12px;border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,transparent);color:inherit}',
-      '.dge-gs-scheme{border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,#fff) ' + ARROW + ' no-repeat right 8px center;background-size:10px;color:var(--text-primary,inherit);padding:0 26px 0 10px;height:40px;font:inherit;font-size:14px;cursor:pointer;-webkit-appearance:none;-moz-appearance:none;appearance:none}',
-      '.dge-gs-scheme:focus{outline:none;border-color:var(--accent-red,#7a3b1d)}',
+      // A custom popup (trigger button + a dropped-down option list), not a
+      // native <select> -- a <select>'s OPEN list is drawn by the OS on
+      // mobile and cannot be restyled, which is exactly what made this look
+      // inconsistent with every other dropdown in the app (all of which are
+      // this same button+popup-list shape; see #displayPopup in index.html).
+      '.dge-gs-schemewrap{position:relative;flex:none}',
+      '.dge-gs-schemebtn{border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,#fff);color:var(--text-primary,inherit);padding:0 12px;height:40px;font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}',
+      '.dge-gs-schemebtn:focus{outline:none;border-color:var(--accent-red,#7a3b1d)}',
+      '.dge-gs-scheme-pop{position:absolute;top:calc(100% + 6px);right:0;background:var(--card-bg,#fff);border:1px solid var(--card-border,rgba(0,0,0,.15));border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.25);padding:6px;display:flex;flex-direction:column;gap:2px;min-width:110px;z-index:1;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .12s ease,transform .12s ease,visibility .12s ease}',
+      '.dge-gs-scheme-pop.show{opacity:1;visibility:visible;transform:translateY(0)}',
+      '.dge-gs-scheme-opt{padding:8px 10px;font-size:13px;font-weight:600;border-radius:6px;cursor:pointer;color:var(--text-primary,inherit)}',
+      '.dge-gs-scheme-opt:hover{background:var(--card-border,rgba(0,0,0,.08))}',
+      '.dge-gs-scheme-opt.active{background:var(--card-active,rgba(122,59,29,.12));color:var(--accent-red,#7a3b1d)}',
       '.dge-gs-x{border:1px solid var(--card-border,rgba(0,0,0,.2));background:var(--card-bg,#fff);color:var(--muted-text,#8a7a63);border-radius:8px;width:40px;height:40px;font-size:16px;cursor:pointer;flex:none}',
       '.dge-gs-x:hover{color:var(--accent-red,#7a3b1d);border-color:var(--accent-red,#7a3b1d)}',
       '.dge-gs-results{max-height:64vh;overflow:auto;padding:6px 0}',
@@ -66,7 +105,15 @@
       '.dge-gs-meta{font-size:12px;opacity:.7;display:flex;gap:8px;flex-wrap:wrap}',
       '.dge-gs-snip{font-size:16px;margin-top:2px;line-height:1.5}',
       '.dge-gs-hl{background:rgba(232,178,77,.4);color:inherit;border-radius:3px;padding:0 1px;font-weight:700}',
-      '.dge-gs-hint{padding:14px;opacity:.6;font-size:13px}'
+      '.dge-gs-hint{padding:14px;opacity:.6;font-size:13px}',
+      '.dge-gs-filterbar{padding:8px 12px;border-bottom:1px solid var(--card-border,rgba(0,0,0,.12));display:flex;flex-direction:column;gap:6px;}',
+      '.dge-gs-frow{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}',
+      '.dge-gs-flabel{font-size:10.5px;opacity:.55;text-transform:uppercase;letter-spacing:.4px;flex:0 0 100%;margin-top:2px;}',
+      '.dge-gs-flabel:first-child{margin-top:0;}',
+      '.dge-gs-chip{border:1px solid var(--card-border,rgba(0,0,0,.2));background:var(--card-bg,#fff);color:var(--text-primary,inherit);border-radius:999px;padding:4px 11px;font-size:12px;cursor:pointer;white-space:nowrap;}',
+      '.dge-gs-chip.active{background:var(--accent-red,#7a3b1d);border-color:var(--accent-red,#7a3b1d);color:#fff;}',
+      '.dge-gs-kwbox{flex:1;min-width:120px;font-size:12px;padding:5px 9px;border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,transparent);color:inherit;}',
+      '.dge-gs-fcount{font-size:11px;opacity:.55;padding:0 4px;}'
     ].join('\n');
     document.head.appendChild(s);
   }
@@ -89,6 +136,7 @@
     // search box as the literal string "[object PointerEvent]".
     fab.onclick = function () { open(); };
     document.body.appendChild(fab);
+    if (typeof window.dgeMakeFloatingDraggable === 'function') window.dgeMakeFloatingDraggable(fab, 'globalSearch');
 
     var ov = document.createElement('div');
     ov.className = 'dge-gs-overlay';
@@ -97,15 +145,22 @@
       '<div class="dge-gs-panel" role="dialog" aria-label="Global search">' +
         '<div class="dge-gs-top">' +
           '<input class="dge-gs-input" id="dge-gs-input" placeholder="Search all texts — Devanagari, IAST, HK, or SLP1…" autocomplete="off">' +
-          '<select class="dge-gs-scheme" id="dge-gs-scheme" title="Input script">' +
-            '<option value="auto">auto</option><option value="devanagari">देव</option>' +
-            '<option value="iast">IAST</option><option value="hk">HK</option><option value="slp1">SLP1</option>' +
-          '</select>' +
+          '<div class="dge-gs-schemewrap">' +
+            '<button type="button" class="dge-gs-schemebtn" id="dge-gs-scheme-btn" title="Input script">auto ▾</button>' +
+            '<div class="dge-gs-scheme-pop" id="dge-gs-scheme-pop">' +
+              '<div class="dge-gs-scheme-opt active" data-scheme="auto">auto</div>' +
+              '<div class="dge-gs-scheme-opt" data-scheme="devanagari">देव</div>' +
+              '<div class="dge-gs-scheme-opt" data-scheme="iast">IAST</div>' +
+              '<div class="dge-gs-scheme-opt" data-scheme="hk">HK</div>' +
+              '<div class="dge-gs-scheme-opt" data-scheme="slp1">SLP1</div>' +
+            '</div>' +
+          '</div>' +
           '<select class="dge-gs-scheme" id="dge-gs-section" title="Search scope">' +
             '<option value="">Everything</option>' +
           '</select>' +
           '<button class="dge-gs-x" id="dge-gs-x" title="Close (Esc)" aria-label="Close">✕</button>' +
         '</div>' +
+        '<div class="dge-gs-filterbar" id="dge-gs-filterbar" style="display:none;"></div>' +
         '<div class="dge-gs-results" id="dge-gs-results"><div class="dge-gs-hint">Type a word or phrase in any script. Matching is sandhi/spelling tolerant.</div></div>' +
       '</div>';
     ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
@@ -121,6 +176,29 @@
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }
       if (e.key === 'Escape') close();
+    });
+
+    var schemeBtn = document.getElementById('dge-gs-scheme-btn');
+    var schemePop = document.getElementById('dge-gs-scheme-pop');
+    schemeBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      schemePop.classList.toggle('show');
+    });
+    schemePop.addEventListener('click', function (e) {
+      var opt = e.target.closest('.dge-gs-scheme-opt');
+      if (!opt) return;
+      currentScheme = opt.dataset.scheme;
+      schemeBtn.textContent = (opt.textContent || currentScheme) + ' ▾';
+      schemePop.querySelectorAll('.dge-gs-scheme-opt').forEach(function (o) { o.classList.toggle('active', o === opt); });
+      schemePop.classList.remove('show');
+      if (document.getElementById('dge-gs-input').value.trim()) onType();
+    });
+    // Same click-outside-closes convention as the overlay itself (line
+    // above: `if (e.target === ov) close()`).
+    document.addEventListener('click', function (e) {
+      if (schemePop.classList.contains('show') && !e.target.closest('.dge-gs-schemewrap')) {
+        schemePop.classList.remove('show');
+      }
     });
   }
 
@@ -179,7 +257,7 @@
 
   function queryOpts(input) {
     if (/[ऀ-ॿ]/.test(input)) return { scheme: 'devanagari' };
-    var scheme = document.getElementById('dge-gs-scheme').value;
+    var scheme = currentScheme;
     if (scheme === 'auto') scheme = /[āīūṛṝḷṁṃḥśṣṅñṭḍṇ]/i.test(input) ? 'iast' : 'slp1';
     if (scheme === 'slp1' || scheme === 'devanagari') return { scheme: scheme };
     try { if (window.Sanscript) return { slp1: window.Sanscript.t(input, scheme, 'slp1') }; } catch (e) {}
@@ -187,21 +265,79 @@
   }
 
   function go(slug, unit) {
-    var p = window.location.pathname + '?path=' + slug;
+    // ?path= is the READER's contract. From any other page carrying this
+    // search (ashtadhyayi.html since the corpus-usage button), the result
+    // must open in the reader — page-relative navigation would produce
+    // ashtadhyayi.html?path=..., which that page ignores.
+    var path = window.location.pathname;
+    if (!/\/(index\.html)?$/.test(path)) {
+      path = path.replace(/[^/]*$/, 'index.html');
+    }
+    var p = path + '?path=' + slug;
     if (unit) p += '&jumpShloka=' + encodeURIComponent(unit);
     window.location.href = p;
   }
 
+  // A real query against this index is a manifest fetch plus several
+  // postings-bucket and grantha-shard round trips through jsdelivr --
+  // measured at 10+ seconds for a common word on a cold cache, not the
+  // sub-second feel the debounce below implies. With no state shown while
+  // that runs, the reader stares at the same "Type a word..." placeholder
+  // the whole time, which reads as "this button does nothing" -- exactly
+  // the bug report this responds to -- rather than as a slow search. The
+  // "Searching..." line below is the fix; render()'s own "No matches."
+  // already covers the empty-result end of this, so only the WAITING gap
+  // was silent.
   function onType(e) {
     var q = e.target.value.trim();
     clearTimeout(debounce);
-    if (!q) { document.getElementById('dge-gs-results').innerHTML = '<div class="dge-gs-hint">Type a word or phrase in any script.</div>'; return; }
+    var results = document.getElementById('dge-gs-results');
+    if (!q) { results.innerHTML = '<div class="dge-gs-hint">Type a word or phrase in any script.</div>'; return; }
+    results.innerHTML = '<div class="dge-gs-hint">Searching…</div>';
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
       var section = (document.getElementById('dge-gs-section') || {}).value || undefined;
       p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30, section: section }, queryOpts(q))); })
-       .then(function (hits) { render(hits, q); }).catch(function () {});
+       .then(function (hits) { render(hits, q); })
+       .catch(function () {
+         // ensureIndex()'s own catch already writes a specific "could not
+         // load the index" message and only fires on that one failure --
+         // this covers every OTHER way the chain can reject (a posting or
+         // shard fetch dying mid-search) so "Searching..." never just sits
+         // there forever on a query that silently failed.
+         var el = document.getElementById('dge-gs-results');
+         if (el && el.innerHTML.indexOf('Searching') !== -1) {
+           el.innerHTML = '<div class="dge-gs-hint">Search failed — check your connection and try again.</div>';
+         }
+       });
     }, 140);
+  }
+
+  // build_search_index.py now stores each unit's text up to 2000 chars
+  // (was a fixed 140-char prefix), specifically so a match deeper into a
+  // long commentary paragraph is actually IN the stored text somewhere —
+  // but showing up to 2000 raw characters in one result row would be
+  // unreadable. This slices a short, readable excerpt CENTERED on the
+  // first place the query's own words actually appear, so what's shown is
+  // the same text that gets highlighted, not an unrelated prefix. Falls
+  // back to the plain prefix (today's behaviour) when no word is found in
+  // this script — e.g. an IAST query against a Devanagari-only snippet,
+  // a real but separate limitation this doesn't attempt to fix.
+  function centerSnippet(text, q, radius) {
+    radius = radius || 90;
+    var words = (q || '').trim().split(/\s+/).filter(function (w) { return w.length >= 2; });
+    var at = -1, matchLen = 0;
+    for (var i = 0; i < words.length; i++) {
+      var idx = text.toLowerCase().indexOf(words[i].toLowerCase());
+      if (idx !== -1 && (at === -1 || idx < at)) { at = idx; matchLen = words[i].length; }
+    }
+    if (at === -1) return text.slice(0, radius * 2);
+    var start = Math.max(0, at - radius);
+    var end = Math.min(text.length, at + matchLen + radius);
+    var out = text.slice(start, end);
+    if (start > 0) out = '…' + out;
+    if (end < text.length) out = out + '…';
+    return out;
   }
 
   // Wraps whole-word, case-insensitive matches of the query's own words
@@ -230,13 +366,28 @@
     });
   }
 
-  function render(hits, q) {
+  // Draws just the result rows for whatever hit list is passed (the full
+  // search result, or a filtered slice of it) -- split out of render() so
+  // the filter chips below can re-slice lastHits and redraw without a new
+  // search.
+  function renderRows(hits, q, emptyMessage) {
     var box = document.getElementById('dge-gs-results');
-    if (!hits || !hits.length) { box.innerHTML = '<div class="dge-gs-hint">No matches.</div>'; return; }
+    if (!hits || !hits.length) {
+      // Zero hits on a capped sweep is not proof of absence: one long word
+      // whose trigrams are all common can crowd its true source out of the
+      // shard budget entirely (see dge-search.js's note on `partial`), and
+      // adding a second word genuinely fixes that — so say it.
+      var msg = esc(emptyMessage || 'No matches.');
+      if (lastHits && lastHits.partial && !emptyMessage) {
+        msg += ' The search could not sweep the whole library for this — a single long word matches too much of it faintly. Adding one more word from the same line usually finds it.';
+      }
+      box.innerHTML = '<div class="dge-gs-hint">' + msg + '</div>';
+      return;
+    }
     // A common word matches most of the corpus; the search stops after the
     // best few dozen granthas rather than opening all of them. Say so, so a
     // reader does not take a capped list for the whole of it.
-    var note = hits.partial
+    var note = lastHits && lastHits.partial
       ? '<div class="dge-gs-hint">Best matches — the search stopped after the' +
         ' strongest few dozen texts rather than opening the whole library.' +
         ' A longer phrase narrows it.</div>'
@@ -244,7 +395,7 @@
     box.innerHTML = note + hits.map(function (h) {
       return '<div class="dge-gs-row" data-slug="' + esc(h.grantha) + '" data-unit="' + esc(h.unit) + '">' +
         '<div class="dge-gs-meta"><b>' + esc(h.title) + '</b><span>' + esc(h.unit) + '</span><span>' + esc(h.category) + '</span><span>' + h.score.toFixed(2) + '</span></div>' +
-        '<div class="dge-gs-snip">' + highlightSnippet(esc(h.snippet), q) + '</div></div>';
+        '<div class="dge-gs-snip">' + highlightSnippet(esc(centerSnippet(h.snippet, q)), q) + '</div></div>';
     }).join('');
     Array.prototype.forEach.call(box.querySelectorAll('.dge-gs-row'), function (row) {
       row.onclick = function (ev) {
@@ -261,6 +412,150 @@
     if (typeof window.dgeScanForSutras === 'function') {
       try { window.dgeScanForSutras(box); } catch (e) {}
     }
+  }
+
+  // Applies the current type/category/siddhanta/keyword filter state to
+  // lastHits (never re-fetches -- see the comment on filterState above) and
+  // redraws. Called on every filter chip click and every keystroke in the
+  // refine box.
+  function applyFilters() {
+    if (!lastHits) return;
+    var typeActive = filterState.type !== 'all';
+    var catKeys = Object.keys(filterState.categories);
+    var sidKeys = Object.keys(filterState.siddhanta);
+    var kw = filterState.keyword.trim().toLowerCase();
+    var out = lastHits.filter(function (h) {
+      if (typeActive && h.contentType !== filterState.type) return false;
+      if (catKeys.length && filterState.categories[h.category] !== true) return false;
+      if (sidKeys.length && filterState.siddhanta[siddhantaOf(h.grantha)] !== true) return false;
+      if (kw && (h.title + ' ' + h.snippet).toLowerCase().indexOf(kw) === -1) return false;
+      return true;
+    });
+    var anyFilterActive = typeActive || catKeys.length || sidKeys.length || kw;
+    renderRows(out, lastQuery, anyFilterActive ? 'No results match these filters.' : 'No matches.');
+    var fc = document.getElementById('dge-gs-fcount');
+    if (fc) fc.textContent = anyFilterActive ? (out.length + ' of ' + lastHits.length) : '';
+  }
+
+  function filterChip(label, active, onClick) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'dge-gs-chip' + (active ? ' active' : '');
+    b.textContent = label;
+    b.addEventListener('click', onClick);
+    return b;
+  }
+
+  // Rebuilds the filter bar's chip set from the CURRENT unfiltered result
+  // set every time a new search completes -- a stale chip from the
+  // previous query (a category with zero hits this time) would just be
+  // confusing dead weight, so the bar always reflects what this result set
+  // actually contains rather than every category the corpus could ever have.
+  function buildFilterBar(hits) {
+    var bar = document.getElementById('dge-gs-filterbar');
+    if (!hits || !hits.length) { bar.style.display = 'none'; bar.innerHTML = ''; return; }
+    bar.innerHTML = '';
+    bar.style.display = 'flex';
+
+    var typeCounts = {};
+    var catCounts = {};
+    var sidCounts = {};
+    hits.forEach(function (h) {
+      typeCounts[h.contentType] = (typeCounts[h.contentType] || 0) + 1;
+      catCounts[h.category] = (catCounts[h.category] || 0) + 1;
+      var sid = siddhantaOf(h.grantha);
+      if (sid) sidCounts[sid] = (sidCounts[sid] || 0) + 1;
+    });
+
+    // Row 1: content type (only worth showing when the result set actually
+    // mixes types -- a pure Rigveda search is all "shloka" and the toggle
+    // would have nothing to do).
+    if ((typeCounts.shloka ? 1 : 0) + (typeCounts.commentary ? 1 : 0) + (typeCounts.prose ? 1 : 0) > 1) {
+      var typeRow = document.createElement('div');
+      typeRow.className = 'dge-gs-frow';
+      var typeLabel = document.createElement('span');
+      typeLabel.className = 'dge-gs-flabel'; typeLabel.textContent = 'Type';
+      typeRow.appendChild(typeLabel);
+      [['all', 'All'], ['shloka', 'Shlokas'], ['commentary', 'Commentary']].forEach(function (pair) {
+        if (pair[0] !== 'all' && !typeCounts[pair[0]]) return;
+        typeRow.appendChild(filterChip(pair[1], filterState.type === pair[0], function () {
+          filterState.type = pair[0];
+          buildFilterBar(hits); // re-render so the active chip highlight updates
+          applyFilters();
+        }));
+      });
+      bar.appendChild(typeRow);
+    }
+
+    // Row 2: category (multi-select toggle chips).
+    var catKeys = Object.keys(catCounts).sort(function (a, b) { return catCounts[b] - catCounts[a]; });
+    if (catKeys.length > 1) {
+      var catRow = document.createElement('div');
+      catRow.className = 'dge-gs-frow';
+      var catLabel = document.createElement('span');
+      catLabel.className = 'dge-gs-flabel'; catLabel.textContent = 'Category';
+      catRow.appendChild(catLabel);
+      catKeys.forEach(function (cat) {
+        var label = (CATEGORY_LABELS[cat] || cat) + ' (' + catCounts[cat] + ')';
+        catRow.appendChild(filterChip(label, filterState.categories[cat] === true, function () {
+          if (filterState.categories[cat]) delete filterState.categories[cat];
+          else filterState.categories[cat] = true;
+          buildFilterBar(hits);
+          applyFilters();
+        }));
+      });
+      bar.appendChild(catRow);
+    }
+
+    // Row 3: siddhanta -- only when the result set actually has vedanta
+    // hits carrying one, which most searches (any Veda/Itihasa/Purana/
+    // Stotra text) will not.
+    var sidKeys = Object.keys(sidCounts);
+    if (sidKeys.length > 1 || (sidKeys.length === 1 && sidCounts[sidKeys[0]] < hits.length)) {
+      var sidRow = document.createElement('div');
+      sidRow.className = 'dge-gs-frow';
+      var sidLabel = document.createElement('span');
+      sidLabel.className = 'dge-gs-flabel'; sidLabel.textContent = 'सिद्धान्तः · Siddhānta';
+      sidRow.appendChild(sidLabel);
+      sidKeys.forEach(function (sid) {
+        var label = (SIDDHANTA_LABELS[sid] || sid) + ' (' + sidCounts[sid] + ')';
+        sidRow.appendChild(filterChip(label, filterState.siddhanta[sid] === true, function () {
+          if (filterState.siddhanta[sid]) delete filterState.siddhanta[sid];
+          else filterState.siddhanta[sid] = true;
+          buildFilterBar(hits);
+          applyFilters();
+        }));
+      });
+      bar.appendChild(sidRow);
+    }
+
+    // Row 4: keyword refine + a live "N of M shown" count.
+    var kwRow = document.createElement('div');
+    kwRow.className = 'dge-gs-frow';
+    var kwInput = document.createElement('input');
+    kwInput.type = 'text';
+    kwInput.className = 'dge-gs-kwbox';
+    kwInput.placeholder = 'Refine within these results…';
+    kwInput.value = filterState.keyword;
+    kwInput.addEventListener('input', function (e) { filterState.keyword = e.target.value; applyFilters(); });
+    kwRow.appendChild(kwInput);
+    var fc = document.createElement('span');
+    fc.className = 'dge-gs-fcount'; fc.id = 'dge-gs-fcount';
+    kwRow.appendChild(fc);
+    bar.appendChild(kwRow);
+  }
+
+  function render(hits, q) {
+    lastHits = hits || [];
+    lastQuery = q;
+    filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '' };
+    if (!hits || !hits.length) {
+      document.getElementById('dge-gs-filterbar').style.display = 'none';
+      renderRows([], q);
+      return;
+    }
+    buildFilterBar(hits);
+    applyFilters();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);

@@ -13,7 +13,7 @@
 //   - deleting the overrides file restores every default instantly
 //   - config.js stays the single source of structure, hand-edited as before
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config-editor.js'] = 'v1.1 (Collapsible sections, vertically stacked inputs — the flat form overflowed a phone screen)';
+window.DGE_VERSIONS['config-editor.js'] = 'v1.2 (new toggle for appConfig.showCopyrightGatedCommentaries -- the super-admin control for the Mahabharata Kannada/Tatparya Nirnaya copyright gate)';
 
 const DGE_CONFIG_OVERRIDES_PATH = 'admin/config/config-overrides.json';
 // What's New is content rather than a setting, and lives in its own file so
@@ -57,6 +57,7 @@ function dgeBuildDraft() {
       appName: app.appName || '',
       designedBy: app.designedBy || '',
       showDesignedBy: app.showDesignedBy !== false,
+      showCopyrightGatedCommentaries: app.showCopyrightGatedCommentaries === true,
       contactEmail: app.contactEmail || '',
       sarvamoolaProjectText: app.sarvamoolaProjectText || '',
       audioBaseUrl: app.audioBaseUrl || ''
@@ -209,7 +210,9 @@ function dgeRenderConfigEditor() {
   const general = DGE_EDITABLE_TEXT_FIELDS.map(f =>
     dgeField('appConfig.' + f.key, d.appConfig[f.key], f.label, f.hint,
              f.key === 'sarvamoolaProjectText')
-  ).join('') + dgeToggle('appConfig.showDesignedBy', d.appConfig.showDesignedBy, 'Show the credit line');
+  ).join('') + dgeToggle('appConfig.showDesignedBy', d.appConfig.showDesignedBy, 'Show the credit line')
+    + dgeToggle('appConfig.showCopyrightGatedCommentaries', d.appConfig.showCopyrightGatedCommentaries,
+      'Show the Mahabharata Kannada translation & Tatparya Nirnaya excerpts (unlicensed source -- leave off unless rights are confirmed)');
 
   const sponsorRows = d.SPONSOR_CONFIG.sponsorCategories.map((c, i) => `
     <div style="border-top:1px dashed var(--card-border); padding-top:10px; margin-top:10px;">

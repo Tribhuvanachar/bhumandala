@@ -81,6 +81,20 @@
     return withDf.slice(0, MAX_TRIS_PER_SET);
   }
 
+  // Root/verse schemas vs. commentary schemas vs. genuinely ambiguous
+  // independent-prose schemas (dge/data/schemas.json's own _description for
+  // each name is the source of truth here, not a guess) -- lets the global
+  // search UI offer an honest "shlokas only / commentary only" filter
+  // without re-deriving schema semantics itself or guessing from a title.
+  var SHLOKA_SCHEMAS = { vedic_text:1, itihasa_purana_text:1, smriti_dharmashastra_text:1,
+    stotra_text:1, grantha_mula_text:1, dasa_sahitya_composition:1, dasa_pada_text:1 };
+  var COMMENTARY_SCHEMAS = { grantha_tika_text:1, grantha_tippani_text:1 };
+  function classifyContentType(schema) {
+    if (SHLOKA_SCHEMAS[schema]) return 'shloka';
+    if (COMMENTARY_SCHEMAS[schema]) return 'commentary';
+    return 'prose'; // generic / grantha_prakarana_text -- independent treatises, neither a root verse nor a commentary on one
+  }
+
   // Damerau-Levenshtein with early exit
   function editDist(a, b, maxd) {
     var la = a.length, lb = b.length;
@@ -215,29 +229,77 @@
         // unfetched trigram count), independently, so a candidate only has
         // to clear the bar for the query as typed OR for a single word
         // within it.
-        var cand = {};            // "gi:ui" -> best shared-trigram count, any one set
+        //
+        // A trigram containing ^ or $ only appears in the index at the true
+        // start/end of a UNIT'S WHOLE indexed text, not at each word's own
+        // boundary within it -- so a query word sitting in the middle of a
+        // verse/line (the overwhelmingly common case) can never match its
+        // own ^xy/yz$ trigrams, even on an exact literal hit. Requiring 60%
+        // of ALL trigrams including these meant a real match could
+        // permanently fall short of the bar (this is exactly how कान्ताय,
+        // an exact match in the middle of Sumadhva Vijaya's opening line,
+        // never became a candidate at all). Only the interior trigrams are
+        // required; boundary ones still count toward `count` as a bonus
+        // when they DO match (a genuine signal for a query that really is
+        // at a unit's edge).
+        var cand = {};            // "gi:ui" -> { count: best total shared trigrams, complete: every non-boundary trigram of some set matched }
         fetchedSets.forEach(function (set) {
           if (!set.length) return;
-          var counts = {};
+          var boundary = {}, requiredCount = 0;
+          set.forEach(function (tg) {
+            if (tg.indexOf('^') !== -1 || tg.indexOf('$') !== -1) boundary[tg] = 1; else requiredCount++;
+          });
+          var counts = {}, reqCounts = {};
           set.forEach(function (tg) {
             var post = self._postingCache[postingKey(tg)]; if (!post) return;
+            var isBoundary = !!boundary[tg];
             for (var k = 0; k < post.length; k++) {
               var key = post[k][0] + ':' + post[k][1];
               counts[key] = (counts[key] || 0) + 1;
+              if (!isBoundary) reqCounts[key] = (reqCounts[key] || 0) + 1;
             }
           });
-          var need = Math.max(1, Math.ceil(set.length * 0.6));
-          Object.keys(counts).forEach(function (key) {
-            if (counts[key] >= need) cand[key] = Math.max(cand[key] || 0, counts[key]);
+          var need = Math.max(1, Math.ceil(Math.max(requiredCount, 1) * 0.6));
+          Object.keys(reqCounts).forEach(function (key) {
+            if (reqCounts[key] < need) return;
+            var complete = requiredCount > 0 && reqCounts[key] === requiredCount;
+            var total = counts[key];
+            var prev = cand[key];
+            if (!prev || (complete && !prev.complete) || (complete === prev.complete && total > prev.count)) {
+              cand[key] = { count: total, complete: complete };
+            }
           });
         });
         var keys = Object.keys(cand);
-        keys.sort(function (a, b) { return cand[b] - cand[a]; });
+        // Complete matches (every trigram that could possibly match, did)
+        // rank first, THEN by raw shared count. Sorting by raw count alone
+        // favoured a long query's partial match (many shared trigrams
+        // simply because the query is long) over a short query's COMPLETE
+        // match (fewer trigrams only because the word itself is short) --
+        // backwards, and part of why a short exact query could lose its
+        // shard slot to a longer, weaker one below.
+        keys.sort(function (a, b) {
+          if (cand[a].complete !== cand[b].complete) return (cand[b].complete ? 1 : 0) - (cand[a].complete ? 1 : 0);
+          return cand[b].count - cand[a].count;
+        });
         var giSet = {}, nGi = 0, picked = [], skipped = false;
+        // A genuinely complete match always gets its grantha opened, past
+        // the normal MAX_SHARDS budget -- up to a much higher ceiling so a
+        // pathological query (present in most of the corpus) still can't
+        // drag in everything. A common word/epithet can tie dozens of
+        // granthas at "every possible trigram present," and admitting only
+        // the first MAX_SHARDS of them by arbitrary sort-stability order
+        // (not by which is actually right) is exactly how an exact match --
+        // कान्ताय opening Sumadhva Vijaya -- went missing while a bunch of
+        // equally-complete but less relevant granthas filled the budget
+        // first. Partial (need-clearing but not complete) matches still
+        // respect the original MAX_SHARDS budget unchanged.
+        var MAX_EXACT_SHARDS = MAX_SHARDS * 3;
         for (var i = 0; i < keys.length && picked.length < MAX_UNITS; i++) {
           var gik = keys[i].split(':')[0];
+          var isExact = cand[keys[i]].complete;
           if (!giSet[gik]) {
-            if (nGi >= MAX_SHARDS) { skipped = true; continue; }
+            if (isExact ? nGi >= MAX_EXACT_SHARDS : nGi >= MAX_SHARDS) { skipped = true; continue; }
             giSet[gik] = 1; nGi++;
           }
           picked.push(keys[i]);
@@ -258,13 +320,22 @@
           if (sc.score >= (opts.minScore || 0.18)) {
             var g = self.granthas[gi];
             hits.push({ grantha: g.slug, title: g.title, category: g.category,
+              contentType: classifyContentType(g.schema),
               unit: row.u, snippet: row.s, score: sc.score, via: sc.via });
           }
         });
         hits.sort(function (a, b) { return b.score - a.score; });
         var out = hits.slice(0, limit);
-        // so the UI can say the corpus was not swept end to end
-        out.partial = !!bag.skipped && hits.length > 0;
+        // so the UI can say the corpus was not swept end to end.
+        // `partial` also matters at ZERO hits: a long single word made
+        // entirely of common trigrams (राजनीतिसमुच्चयम्) can have hundreds
+        // of big units "complete" on scattered trigrams, crowding the true
+        // containment out of the shard budget before it is ever opened —
+        // measured live: 469 complete candidates, the real hit ranked 374.
+        // A second word in the query fixes it (each word's own trigram set
+        // is judged independently), so the UI should say so instead of a
+        // bare "No matches."
+        out.partial = !!bag.skipped;
         return out;
       });
   };

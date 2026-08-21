@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.0 (Library Manager curation overrides — hide/pin/reorder/rename/move, non-destructive; numeral localization for titles that mix Devanagari + ASCII digits)';
+window.DGE_VERSIONS['library.js'] = 'v3.2 (lifecycle status badges: folder headers show count/total ("52/237") when a section is only partly filled in, and a leaf gets a NEW badge for ~3 weeks after register_layers.py first stamps its addedAt)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -264,6 +264,22 @@ function dgeBuildTree(entries) {
 }
 
 let dgeTreeNodeSeq = 0;
+// path -> total registered granthas under it (populated or not), rebuilt at
+// the top of every openLibraryModal() call; see the comment there.
+let dgeLibTotalCounts = {};
+// A grantha counts as "New" for this many days after register_layers.py
+// first stamped its addedAt -- existing entries (registered before that
+// tool tracked dates) have no addedAt at all and never show this badge,
+// deliberately: there is no reliable way to backfill a real date for them
+// (this repo's git history is a shallow clone), and guessing would be
+// worse than just not claiming to know.
+const DGE_LIB_NEW_DAYS = 21;
+function dgeIsRecentlyAdded(addedAt) {
+  if (!addedAt) return false;
+  const t = Date.parse(addedAt);
+  if (isNaN(t)) return false;
+  return (Date.now() - t) / 86400000 <= DGE_LIB_NEW_DAYS;
+}
 
 // Collapses single-child chains ("Ṛgveda › Śākala Śākhā › Saṃhitā") into
 // one row instead of three nested taps — the taxonomy is deep and mostly
@@ -282,19 +298,35 @@ function dgeRenderNode(node, labelPrefix, depth, nodePath) {
     childKeys.map(k => dgeRenderNode(node.children[k], dgeSegLabel(k), depth + 1, nodePath ? nodePath + '/' + k : k)).join('') +
     dgeSortLeaves(nodePath, node.leaves).map(leaf =>
       `<div class="pop-item" style="margin-left:${depth * 10}px;"
-            onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}</div>`
+            onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}${
+        dgeIsRecentlyAdded(leaf.addedAt)
+          ? '<span style="margin-left:auto; font-size:9px; font-weight:800; color:#fff; background:var(--accent-red,#7a3b1d); border-radius:999px; padding:2px 6px; letter-spacing:.3px;">NEW</span>'
+          : ''
+      }</div>`
     ).join('');
 
   if (!labelPrefix) return inner;
 
   const count = dgeCountLeaves(node);
+  // "Lifecycle status" for a folder (Category 1's ask): how much of what's
+  // registered under it is actually filled in yet. total comes from EVERY
+  // registered grantha (populated or not, see openLibraryModal), so it
+  // reflects real scaffolding rather than a guess. Falls back to count
+  // itself if the path is missing from the map for any reason (shouldn't
+  // happen -- every populated leaf's own ancestor prefixes are counted --
+  // but a badge silently reading "count/count" is a harmless fallback,
+  // never a broken one).
+  const total = dgeLibTotalCounts[nodePath] || count;
+  const countBadge = total > count
+    ? `<span style="font-size:10px; color:var(--accent-red); font-weight:700;" title="${count} of ${total} texts registered under this section are filled in">${count}/${total}</span>`
+    : `<span style="font-size:10px; color:var(--muted-text); font-weight:400;" title="All texts registered under this section are filled in">${count}</span>`;
   return `<div style="margin-left:${depth * 10}px;">
     <div onclick="window.dgeToggleTreeNode('${id}', this)"
          style="cursor:pointer; padding:7px 4px; font-size:13px; font-weight:600;
                 display:flex; align-items:center; gap:6px;">
       <span style="font-size:10px; width:10px;">▸</span>
       <span style="flex:1;">${labelPrefix}</span>
-      <span style="font-size:10px; color:var(--muted-text); font-weight:400;">${count}</span>
+      ${countBadge}
     </div>
     <div id="${id}" style="display:none;">${inner}</div>
   </div>`;
@@ -336,12 +368,35 @@ window.openLibraryModal = async function() {
     const slug = dgeEffectiveDisplayPath(realSlug); // where it GROUPS in the tree
     const custom = dgeLibOverrides.labels[slug];
     const rawTitle = custom !== undefined ? custom : (g.title || realSlug);
-    return { slug, realSlug, title: dgeToActiveScript(dgeLocalizeNumerals(rawTitle)) };
+    return { slug, realSlug, title: dgeToActiveScript(dgeLocalizeNumerals(rawTitle)), addedAt: g.addedAt || null };
   }).filter(e => !dgeIsHiddenPath(e.slug));
   if (!populated.length) {
     listEl.innerHTML = `<div class="note-preview-box" style="margin:0;">No texts are available yet — check back soon.</div>`;
     return;
   }
+
+  // Folder-level completeness badges ("Category 1"'s lifecycle-status ask)
+  // need to know how many texts COULD eventually live under a branch, not
+  // just how many currently do -- computed from every registered grantha
+  // (populated or not), the same grouping/hidden-path rules as the visible
+  // tree above, so an admin-hidden or moved branch's total lines up with
+  // where its populated count actually renders. Leaves themselves stay
+  // populated-only as before (deliberately not showing ~550 empty
+  // placeholder entries in the everyday reader) -- this only powers each
+  // folder header's own badge.
+  const allForTotals = library.granthas.map(g => {
+    const realSlug = window.dgeGranthaSlug(g.path);
+    return dgeEffectiveDisplayPath(realSlug);
+  }).filter(slug => !dgeIsHiddenPath(slug));
+  dgeLibTotalCounts = {};
+  allForTotals.forEach(slug => {
+    const segs = slug.split('/');
+    let prefix = '';
+    for (let i = 0; i < segs.length - 1; i++) {
+      prefix = prefix ? prefix + '/' + segs[i] : segs[i];
+      dgeLibTotalCounts[prefix] = (dgeLibTotalCounts[prefix] || 0) + 1;
+    }
+  });
 
   dgeTreeNodeSeq = 0;
   const tree = dgeBuildTree(populated);
@@ -350,7 +405,11 @@ window.openLibraryModal = async function() {
     `<div style="font-size:11px; color:var(--muted-text); margin-bottom:8px;">${populated.length} text(s) available</div>` +
     topKeys.map(k => dgeRenderNode(tree.children[k], dgeSegLabel(k), 0, k)).join('') +
     dgeSortLeaves('', tree.leaves).map(leaf =>
-      `<div class="pop-item" onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}</div>`
+      `<div class="pop-item" onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}${
+        dgeIsRecentlyAdded(leaf.addedAt)
+          ? '<span style="margin-left:auto; font-size:9px; font-weight:800; color:#fff; background:var(--accent-red,#7a3b1d); border-radius:999px; padding:2px 6px; letter-spacing:.3px;">NEW</span>'
+          : ''
+      }</div>`
     ).join('');
 };
 
@@ -361,21 +420,89 @@ window.openLibraryModal = async function() {
 // data (see the jumpVedicId/jumpShloka handling in core.js) — a full
 // navigation is unavoidable here since the target grantha's data isn't
 // loaded yet at the point this runs.
+// Folder/section-name fallback for Quick Jump — e.g. typing "mahabharata
+// sabha parva" or "chandas" with no verse number at all. Titles in
+// library.json are NOT reliably searchable text: many are Devanagari
+// (महाभारतम् आदिपर्व), some are plain English (Ganguli's own titles),
+// depending on which importer wrote them — but every grantha's realSlug
+// (its taxonomy path, e.g. "itihasa/mahabharata/adi_parva/mula") is
+// always plain ASCII, underscore-separated. Matching against a
+// normalized form of THAT, not the display title, is what makes this
+// work regardless of which script the title happens to be in.
+function dgeNormalizeForMatch(s) {
+  return String(s || '').toLowerCase().replace(/[_/]+/g, ' ').replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ').trim();
+}
+async function dgeFuzzyMatchGrantha(text) {
+  const q = dgeNormalizeForMatch(text);
+  if (!q) return null;
+  const library = await (window.dgeLibraryCatalogPromise || Promise.resolve(null));
+  if (!library || !Array.isArray(library.granthas)) return null;
+  const qWords = q.split(' ').filter(Boolean);
+  let best = null, bestScore = -1;
+  library.granthas.forEach(function (g) {
+    if (!g.populated) return;
+    const realSlug = window.dgeGranthaSlug(g.path);
+    const hay = dgeNormalizeForMatch(realSlug + ' ' + (g.title || ''));
+    if (!hay) return;
+    // Every query word must appear somewhere in the slug/title text —
+    // "mahabharata sabha" should not match a grantha whose path only
+    // mentions one of the two words. Score favors an exact whole-slug
+    // match, then a shorter/more-specific matching slug (a leaf beats a
+    // whole section sharing the same prefix).
+    const allWordsPresent = qWords.every(function (w) { return hay.indexOf(w) !== -1; });
+    if (!allWordsPresent) return;
+    let score = 100 - Math.min(99, hay.length - q.length);
+    if (hay === q) score += 1000;
+    else if (hay.indexOf(q) === 0) score += 200;
+    if (score > bestScore) { bestScore = score; best = realSlug; }
+  });
+  return best;
+}
+
 window.dgeQuickJump = function(text) {
   const target = (typeof window.dgeParseQuickSearchQuery === 'function') ? window.dgeParseQuickSearchQuery(text) : null;
-  if (!target) {
-    if (typeof showToast === 'function') showToast('Not recognized — try e.g. "rv1.1.3" or "pns5".');
-    return false;
+  if (target) {
+    const readableSlug = /^[a-z0-9_/]+$/i.test(target.granthaPath) ? target.granthaPath : encodeURIComponent(target.granthaPath);
+    let url = window.location.pathname + '?path=' + readableSlug;
+    if (target.vedicId) url += '&jumpVedicId=' + encodeURIComponent(target.vedicId);
+    else if (target.shlokaNumber) url += '&jumpShloka=' + target.shlokaNumber;
+    window.location.href = url;
+    return true;
   }
-  const readableSlug = /^[a-z0-9_/]+$/i.test(target.granthaPath) ? target.granthaPath : encodeURIComponent(target.granthaPath);
-  let url = window.location.pathname + '?path=' + readableSlug;
-  if (target.vedicId) url += '&jumpVedicId=' + encodeURIComponent(target.vedicId);
-  else if (target.shlokaNumber) url += '&jumpShloka=' + target.shlokaNumber;
-  window.location.href = url;
-  return true;
+  // Not a recognized "abbrev + verse number" pattern (e.g. "rv1.1.3") —
+  // try matching it as a folder/section/grantha name instead before
+  // giving up. Async, so this path can't return true/false synchronously
+  // the way the pattern-match path above does; it resolves the
+  // navigation (or the "not recognized" toast) itself.
+  dgeFuzzyMatchGrantha(text).then(function (slug) {
+    if (slug) { window.dgeGoToGrantha(slug); return; }
+    if (typeof showToast === 'function') showToast('Not recognized — try e.g. "rv1.1.3", "pns5", or a section name like "mahabharata sabha parva".');
+  });
+  return false;
 };
 
+// A handful of taxonomy leaves are not shloka-shaped at all (a root/word
+// list, not verses) and have their own dedicated browser/search page
+// instead of being readable through the general reader. Opening one of
+// these via the normal ?path= route fed dge/index.html data it has no
+// renderer for — the library entry existed and looked clickable, but
+// nothing ever appeared ("Dhatu Patha... is not loading"). Keyed by the
+// realSlug PREFIX so a future sibling under the same folder is covered
+// without a new entry.
+const DGE_SPECIAL_PAGES = [
+  { prefix: 'vedanga/vyakarana/dhatupatha', page: 'dhatu.html' },
+  { prefix: 'vedanga/vyakarana/shabdapatha', page: 'shabda.html' }
+];
+function dgeSpecialPageFor(realSlug) {
+  const hit = DGE_SPECIAL_PAGES.find(function (e) {
+    return realSlug === e.prefix || realSlug.indexOf(e.prefix + '/') === 0;
+  });
+  return hit ? hit.page : null;
+}
+
 window.dgeGoToGrantha = function(slug) {
+  const special = dgeSpecialPageFor(slug);
+  if (special) { window.location.href = special; return; }
   // Grantha slugs are always plain lowercase letters, digits, underscores,
   // and slashes by design (see taxonomy.json) — none of that needs
   // percent-encoding, and encodeURIComponent turning every "/" into

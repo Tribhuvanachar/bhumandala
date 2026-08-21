@@ -296,7 +296,13 @@
       var head = el("div", "head");
       head.appendChild(el("span", "ref", trNum(sh.id)));
       var meta = el("div", "meta");
-      if (sh.chandas) meta.appendChild(el("span", null, tr(sh.chandas)));
+      if (sh.chandas) {
+        // the metre tag opens the analyzer with this very verse prefilled
+        var chLink = el("a", "chandas-link", tr(sh.chandas));
+        chLink.href = "chandas.html?q=" + encodeURIComponent(sh.sanskrit_text || "");
+        chLink.title = "छन्दोविश्लेषणम् — laghu/guru breakdown of this verse";
+        meta.appendChild(chLink);
+      }
       if (sh.kind === "prose") meta.appendChild(el("span", null, "गद्यम्"));
       head.appendChild(meta);
       card.appendChild(head);

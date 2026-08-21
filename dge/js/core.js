@@ -1,12 +1,27 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.7 (Loads and merges admin/config/config-overrides.json over config.js defaults before first render)';
+window.DGE_VERSIONS['core.js'] = 'v3.15 (dgeIsAiGeneratedCommentaryKey: gemini_/ai_-prefixed commentary keys are now the standing convention for anything an AI pipeline writes, checked by render.js to show a small "AI" badge -- on top of v3.14\'s KNOWN_COMMENTARY_LABELS additions for the Raghavendra Vijaya pipeline)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
 // fetch-relative path ("data/x/y/data.json", relative to this index.html
 // which itself lives inside dge/). Shared with library.js (the browser
 // modal), so both always agree on the same slug for the same file.
+// AI-generated-content convention, going forward: any commentary/field key
+// an AI pipeline writes (tools/gemini_enrich.py, tools/gemini_summarize.py,
+// or anything added later) MUST be prefixed "gemini_" or "ai_". This is the
+// one place the reader checks to decide whether to show the small "AI"
+// badge (see footnotes.css's .dge-ai-badge, used by render.js's commentary
+// blocks) -- a prefix convention rather than a maintained list, so a new
+// field added by a future pipeline is flagged automatically without
+// anyone having to remember to register it here. Matches this project's
+// "don't fabricate" rule (PROJECT_BRIEF.md): a reader should never mistake
+// unreviewed AI output for a vetted commentary, and a maintained list is
+// exactly the kind of thing that silently goes stale.
+window.dgeIsAiGeneratedCommentaryKey = function(key) {
+  return /^(gemini|ai)_/.test(String(key || ''));
+};
+
 window.dgeLibraryPathToFetchPath = function(catalogPath) {
   return catalogPath.replace(/^dge\//, '');
 };
@@ -252,7 +267,19 @@ document.addEventListener('DOMContentLoaded', () => {
       'font-size:12px; padding:10px 14px; text-align:center; line-height:1.4;';
     bar.innerHTML = 'Cached page detected — some features will misbehave.<br>' +
       '<b style="text-decoration:underline;">Tap here to reload</b>';
-    bar.onclick = () => location.reload(true);
+    // location.reload(true)'s "force" argument is a Netscape-era relic no
+    // current browser honours — it behaves identically to a plain reload(),
+    // which is exactly the reload that got the reader stuck on this stale
+    // page in the first place (a normal reload can still be answered from
+    // cache; that's the whole bug this banner exists to catch). Navigating
+    // to a URL that has never been requested before — this same page plus a
+    // cache-busting query param — has no existing cache entry to be
+    // answered from, so it is guaranteed to reach the network.
+    bar.onclick = () => {
+      const url = new URL(location.href);
+      url.searchParams.set('_dgev', Date.now().toString());
+      location.href = url.toString();
+    };
     document.body.appendChild(bar);
   }
 });
@@ -279,11 +306,79 @@ document.addEventListener('DOMContentLoaded', () => {
 // marks — confirmed by checking the actual codepoints against real
 // rendered output, not guessed. Remapped here, as early as possible, so
 // every downstream use (display, copy, search, share) benefits uniformly.
+function dgeToDevanagariDigits(s) {
+  const map = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
+  return String(s).replace(/[0-9]/g, (d) => map[d]);
+}
+
 function dgeSanitizeVedicAccents(text) {
   if (!text) return text;
   return text
     .replace(/\u1CD3/g, '\u0951') // VEDIC SIGN NIHSHVASA (used for acute/udātta) -> DEVANAGARI STRESS SIGN UDATTA
-    .replace(/\u1CD9/g, '\u0952'); // VEDIC TONE ... INDEPENDENT SVARITA (used for grave) -> DEVANAGARI STRESS SIGN ANUDATTA
+    .replace(/\u1CD9/g, '\u0952') // VEDIC TONE ... INDEPENDENT SVARITA (used for grave) -> DEVANAGARI STRESS SIGN ANUDATTA
+    // Siddhanta Kaumudi's own text carries internal cross-references to its
+    // own serial rule numbering as raw "<{SK354}>" markers -- an unresolved
+    // import-template artifact (1373 of them in that one file), not a
+    // rendering choice. Reported live as "the 4th item's text is incorrect"
+    // because that IS what a reader sees: bracket-and-number junk sitting
+    // mid-sentence in an otherwise normal commentary. No authoritative
+    // SK-number -> sutra concordance exists in this corpus to turn these
+    // into real links (this data.json's own item order is Ashtadhyayi
+    // adhyaya.pada.sutra order, not Siddhanta Kaumudi's own reordered
+    // sequence, so the number can't be resolved from position either) --
+    // rendered as the conventional Sanskrit-commentary parenthetical
+    // citation abbreviation instead of either the raw template syntax or
+    // silently deleting real cross-reference information.
+    .replace(/<\{SK(\d+)\}>/g, (_, num) => '(सि.कौ.' + dgeToDevanagariDigits(num) + ')');
+}
+
+// Copyright gate (Category 4 platform issue): the Mahabharata Kannada
+// translation + Madhvacharya's own Tatparya Nirnaya excerpts interleaved in
+// it (dge/data/itihasa/mahabharata_kannada/, ~98,500 verses) were extracted
+// from a Pejawar Matha Android app's asset bundle -- no license field
+// anywhere, only a foreword/blessing as attribution, not a rights grant.
+// This project's own standing rule (PROJECT_BRIEF.md) is "absence of a
+// licence is not permission." "kannada" as a commentary key is unique to
+// this one source across the whole corpus (checked: no other data.json
+// uses it), so gating by key name alone is safe -- it cannot accidentally
+// hide some unrelated, properly-licensed Kannada text elsewhere.
+//
+// Filtered here, at the single point every shloka's commentaries object is
+// built, rather than in render.js -- render.js is not the only consumer
+// (ai.js reads shloka.commentaries directly to feed AI features, and the
+// availableCommentaries picker/search-scope dropdown are built from this
+// same normalization pass), so gating downstream would need to be repeated
+// at every call site with no guarantee of catching them all. The data
+// itself is untouched on disk (reversible, no loss); this only decides
+// what a NORMALIZED grantha object exposes to the rest of the app.
+// window.appConfig.showCopyrightGatedCommentaries is the reader-facing
+// toggle this backlog item asked for (default off/hidden) -- flipping it
+// takes effect on the next grantha load (this function reruns whenever a
+// grantha's data is (re)fetched), not instantly on an already-open page,
+// which is an acceptable cost for what should be a rare, deliberate
+// research toggle rather than a startup-time architecture change.
+const DGE_COPYRIGHT_GATED_COMMENTARY_KEYS = { kannada: true };
+function dgeVisibleCommentaries(commentaries) {
+  if (!commentaries) return commentaries;
+  if (window.appConfig && window.appConfig.showCopyrightGatedCommentaries) return commentaries;
+  const out = {};
+  Object.keys(commentaries).forEach((k) => {
+    if (!DGE_COPYRIGHT_GATED_COMMENTARY_KEYS[k]) out[k] = commentaries[k];
+  });
+  return out;
+}
+
+// The GRETIL smriti imports carry the source edition's own page markers,
+// transliterated wholesale into Devanagari -- "(\u0907,\u0967, \u092A\u094D. \u0969\u096D)" is "(I,1,
+// p. 37)" -- 357 of them, every one confined to dge/data/smriti_dharma
+// (measured across the whole corpus before writing this, so the pattern
+// can afford to be narrow: a parenthesis containing p+virama+dot and
+// digits, the page abbreviation no verse ever contains). Stripped at
+// render time so the stored data keeps mirroring its source.
+function dgeStripEditionMarkers(text) {
+  if (!text || text.indexOf('\u092A\u094D.') === -1) return text;
+  return text.replace(/\s*\([^()]{0,40}\u092A\u094D\.\s*[\u0966-\u096F0-9]+[^()]{0,25}\)/g, '')
+             .replace(/[ \t]+([\u0964\u0965])/g, ' $1').replace(/\s{2,}/g, ' ').trim();
 }
 
 function dgeNormalizeGranthaData(data, granthaTitle) {
@@ -310,7 +405,18 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
     // under its own key so that mantra's commentary stays its own.
     sayana_sukta: 'सायणभाष्यम् — Sāyaṇa (introduction to the sūkta)',
     wilson: 'Wilson (English Translation, after Sāyaṇa)',
-    artha: 'Translation'
+    artha: 'Translation',
+    // OCR'd from a published book (tools/link_english_commentary.py), not
+    // hand-typed -- attributed to its actual translator like griffith/wilson
+    // above, not a generic "English Translation" label.
+    pavamanacharya_english: 'Huli V. Pavamanacharya (English Translation)',
+    // Gemini-generated, unreviewed -- label says so explicitly rather than
+    // implying scholarly authority, per this project's "don't fabricate"
+    // rule (PROJECT_BRIEF.md): the reader should never mistake an AI
+    // first-pass for a vetted commentary.
+    gemini_padaccheda: 'AI Padaccheda (Gemini, unreviewed)',
+    gemini_anvaya: 'AI Anvaya (Gemini, unreviewed)',
+    gemini_summary: 'AI Summary (Gemini, unreviewed)'
   };
 
   // itihasa_purana_text schema (see dge/data/schemas.json): each item is a
@@ -357,15 +463,23 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
             .replace(/[ḥ]/g, 'h').replace(/[ñṅṇ]/g, 'n').replace(/[śṣ]/g, 's')
             .replace(/[ṭ]/g, 't').replace(/[ḍ]/g, 'd')
             .replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '') || 'bhashya';
+          // See dgeVisibleCommentaries's own comment: not currently exercised
+          // by any real data in this shape (the actual gated content uses
+          // the flat-items branch below), kept here defensively so a future
+          // bhashya[] source naming a commentator this key would slugify to
+          // "kannada" can't slip through un-gated.
+          if (DGE_COPYRIGHT_GATED_COMMENTARY_KEYS[key] && !(window.appConfig && window.appConfig.showCopyrightGatedCommentaries)) return;
           commentaries[key] = b.text;
           availableCommentaries[key] = b.commentator || KNOWN_COMMENTARY_LABELS[key] ||
             (key.charAt(0).toUpperCase() + key.slice(1));
         });
         if (Object.keys(commentaries).length) shlokasWithCommentaries++;
         shlokas[n] = {
-          sa: dgeSanitizeVedicAccents(v.sanskrit_text || v.sa || ''),
+          sa: dgeStripEditionMarkers(dgeSanitizeVedicAccents(v.sanskrit_text || v.sa || '')),
           vedicId: chapter.reference ? (chapter.reference + (v.number != null ? ' · ' + v.number : '')) : '',
-          commentaries: commentaries
+          unitId: chapter.id || '',
+          commentaries: commentaries,
+          geminiEnrichment: v.gemini_enrichment || null
         };
       });
     });
@@ -395,9 +509,11 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
       // as a visible field (see the 'vedicId' extra field in config.js)
       // rather than used as the internal key.
       const n = idx + 1;
-      const commentaries = (item.commentaries && typeof item.commentaries === 'object' && !Array.isArray(item.commentaries))
-        ? item.commentaries
-        : {};
+      const commentaries = dgeVisibleCommentaries(
+        (item.commentaries && typeof item.commentaries === 'object' && !Array.isArray(item.commentaries))
+          ? item.commentaries
+          : {}
+      );
       if (Object.keys(commentaries).length) itemsWithCommentaries++;
       Object.keys(commentaries).forEach(key => {
         if (!availableCommentaries[key]) {
@@ -405,8 +521,32 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         }
       });
       shlokas[n] = {
-        sa: dgeSanitizeVedicAccents(item.samhita_patha || item.sa || ''),
-        vedicId: item.id || '',
+        // schemas.json declares a different primaryTextField per schema --
+        // samhita_patha for vedic_text, sanskrit_text for generic and
+        // several others (see its own "primaryTextField" entries) -- but
+        // this branch only ever checked samhita_patha/sa. Any "generic"
+        // schema import (importers/gretil_bulk.py's group_items(), used by
+        // every sutra/vedanga entry in its registry) writes sanskrit_text,
+        // so every one of those would have rendered a blank verse the
+        // first time it was actually run. Caught before any such text
+        // shipped, not after.
+        // "text" too, for English-only items (e.g. the Ganguli Mahabharata
+        // translation's own "generic" schema, {id, title, author, text},
+        // no sanskrit_text field at all since there IS no Sanskrit line) --
+        // found the same way as sanskrit_text above: confirmed live, 16
+        // already-shipped translation_ganguli files (1,577 items) all
+        // rendering blank against this exact gap.
+        sa: dgeStripEditionMarkers(dgeSanitizeVedicAccents(item.samhita_patha || item.sanskrit_text || item.text || item.sa || '')),
+        // Same importer's items carry a human-readable "reference" (e.g.
+        // "Yāska — Nirukta, adhyaya 1") alongside the bare slug id --
+        // prefer it, matching the itihasa_purana_text branch above which
+        // already prefers chapter.reference over a raw id.
+        vedicId: item.reference || item.id || '',
+        // The item's raw id too (DV_6001, AV_C01_S01_I01, ...): deep links
+        // built from data-side indexes (prayoga index, backlinks) address
+        // units by this id, while vedicId above is the human-facing
+        // reference string when one exists.
+        unitId: item.id || '',
         // Traditional Ashtaka.Adhyaya.Varga.Rik reference — present only for
         // Rigveda Samhita data so far (see ashtaka_ref in the source data.json).
         ashtakaId: item.ashtaka_ref || '',
@@ -414,7 +554,8 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         devata: item.devata || '',
         chandas: item.chandas || '',
         padapatha: dgeSanitizeVedicAccents(item.pada_patha || ''),
-        commentaries: commentaries
+        commentaries: commentaries,
+        geminiEnrichment: item.gemini_enrichment || null
       };
     });
 
@@ -632,7 +773,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Commentary/bhashya display is opt-in and hidden by default
+// (selectedCommentaryView starts at 'none', see state.js) -- a reader who
+// never notices the small 💬 "Commentary Options" icon in the top bar can
+// read an entire Stotra or Veda text and never discover real bhashya
+// content sits right there for it. One-time toast, gated per grantha (not
+// per visit) via nsKey so it never nags on a text the reader has already
+// been shown this for.
+function dgeNoticeCommentaryAvailable() {
+  const available = window.stotraData && window.stotraData.metadata && window.stotraData.metadata.availableCommentaries;
+  if (!available || !Object.keys(available).length) return;
+  const seenKey = (typeof nsKey === 'function') ? nsKey('commentaryNoticeSeen') : null;
+  if (!seenKey || localStorage.getItem(seenKey) === 'true') return;
+  localStorage.setItem(seenKey, 'true');
+  if (typeof showToast === 'function') showToast('📖 Commentary is available for this text — tap 💬 above to view it.');
+}
+
 function initApp() {
+  window.dgeListPage = 0; // fresh grantha starts list-mode pagination (see render.js) on its own page 1
   if (typeof loadPersistedState === 'function') loadPersistedState();
   if (typeof restorePrefs === 'function') restorePrefs();
   if (typeof initAuthAndBranding === 'function') initAuthAndBranding();
@@ -652,6 +810,8 @@ function initApp() {
 
   // Pass control to the rendering pipeline
   if (typeof renderList === 'function') renderList();
+
+  dgeNoticeCommentaryAvailable();
 
   if (typeof dgeRestoreLastVerse === 'function') dgeRestoreLastVerse();
 
@@ -684,6 +844,14 @@ function dgeResolveQuickJumpTarget(target) {
       const vid = stotraData.shlokas[k].vedicId;
       return vid && normalize(vid) === wanted;
     });
+    // Data-side unit ids (DV_6001 ...) aren't dotted numbers and aren't the
+    // display reference -- match them exactly against the id each shloka
+    // now carries. For a nested grantha this lands on the chapter's first
+    // shloka, which is the honest resolution of a chapter-level id.
+    if (!targetId) {
+      targetId = Object.keys(stotraData.shlokas).find(k =>
+        stotraData.shlokas[k].unitId === target.vedicId);
+    }
   }
 
   if (targetId && typeof playShloka === 'function') {

@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['utils.js'] = 'v2.3 (Actually starts fully closed on load now — was starting minimized-with-header-visible, not the small pill-only closed state that was actually wanted)';
+window.DGE_VERSIONS['utils.js'] = 'v2.4 (new window.dgeMakeFloatingDraggable(el, storageKey) -- shared drag-to-reposition + collapse-to-a-dot for position:fixed floating buttons, used by the कोश and global-search FABs)';
 
 window.DGE_THEMES = ['vandana', 'traditional', 'minimal', 'vibrant', 'darkglass'];
 window.DGE_THEME_META_COLORS = {
@@ -421,5 +421,131 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 })();
+
+// Shared drag-to-reposition + collapse-to-a-dot behaviour for every
+// position:fixed floating action button (कोश, global search 🔎) -- was
+// each independently a plain fixed-position button with no way to move it
+// out from behind content it happened to land on, and no way to shrink it
+// out of the way on a small screen. One shared implementation so a fix to
+// the drag logic (see content-inline.js's own wireDrag, which this mirrors
+// for its document-level pointer tracking and click-vs-drag threshold)
+// benefits every floating button at once instead of drifting between
+// separately-maintained copies.
+window.dgeMakeFloatingDraggable = function (el, storageKey) {
+    var POS_KEY = 'dge.fabPos.' + storageKey;
+    var COLLAPSE_KEY = 'dge.fabCollapsed.' + storageKey;
+
+    function loadPos() {
+        try {
+            var p = JSON.parse(localStorage.getItem(POS_KEY) || 'null');
+            if (p && typeof p.xFrac === 'number' && typeof p.yFrac === 'number') return p;
+        } catch (e) { /* fall through to default (the button's own CSS position) */ }
+        return null;
+    }
+    function savePos(p) { try { localStorage.setItem(POS_KEY, JSON.stringify(p)); } catch (e) { /* ignore */ } }
+    function loadCollapsed() { try { return localStorage.getItem(COLLAPSE_KEY) === '1'; } catch (e) { return false; } }
+    function saveCollapsed(v) { try { localStorage.setItem(COLLAPSE_KEY, v ? '1' : '0'); } catch (e) { /* ignore */ } }
+
+    function clampToViewport(left, top) {
+        var r = el.getBoundingClientRect();
+        var w = r.width || 56, h = r.height || 56;
+        return {
+            left: Math.min(Math.max(left, 4), window.innerWidth - w - 4),
+            top: Math.min(Math.max(top, 4), window.innerHeight - h - 4)
+        };
+    }
+
+    var pos = loadPos();
+    if (pos) {
+        var abs = clampToViewport(pos.xFrac * window.innerWidth, pos.yFrac * window.innerHeight);
+        el.style.left = abs.left + 'px'; el.style.top = abs.top + 'px';
+        el.style.right = 'auto'; el.style.bottom = 'auto';
+    }
+    el.style.position = 'fixed';
+
+    // A small always-present corner handle collapses the button to a dot at
+    // its current position -- deliberately a separate element from the fab
+    // itself (rather than, say, a long-press on the fab) so it never
+    // conflicts with the fab's own click-to-open behaviour or the drag
+    // threshold below.
+    var collapseBtn = document.createElement('span');
+    collapseBtn.textContent = '−';
+    collapseBtn.title = 'Collapse';
+    collapseBtn.setAttribute('aria-label', 'Collapse');
+    collapseBtn.style.cssText = 'position:absolute; top:-6px; right:-6px; width:18px; height:18px; ' +
+        'line-height:17px; text-align:center; border-radius:50%; background:var(--card-bg,#fff); ' +
+        'color:var(--text-primary,#333); font-size:14px; font-weight:700; box-shadow:0 1px 4px rgba(0,0,0,.35); ' +
+        'cursor:pointer; z-index:1;';
+    el.appendChild(collapseBtn);
+
+    function setCollapsed(v) {
+        el.classList.toggle('dge-fab-collapsed', v);
+        el.style.transform = v ? 'scale(0.42)' : '';
+        el.style.opacity = v ? '0.5' : '';
+        collapseBtn.style.display = v ? 'none' : '';
+        saveCollapsed(v);
+    }
+    setCollapsed(loadCollapsed());
+    collapseBtn.addEventListener('click', function (ev) {
+        ev.stopPropagation(); ev.preventDefault();
+        setCollapsed(true);
+    });
+
+    // Dragging and collapse-state interact: while collapsed, a tap anywhere
+    // on the (now tiny) button should re-expand it rather than triggering
+    // whatever the button's own click handler normally does -- opening
+    // Kosha/search on a button the reader deliberately shrank out of the
+    // way would be a worse surprise than just needing a second tap.
+    var dragging = false, moved = false, justDragged = false, startX = 0, startY = 0, startLeft = 0, startTop = 0;
+    el.addEventListener('click', function (ev) {
+        if (el.classList.contains('dge-fab-collapsed')) {
+            ev.stopImmediatePropagation(); ev.preventDefault();
+            setCollapsed(false);
+            return;
+        }
+        if (justDragged) { ev.stopImmediatePropagation(); ev.preventDefault(); }
+    }, true);
+    el.addEventListener('pointerdown', function (ev) {
+        if (ev.target === collapseBtn) return;
+        dragging = true; moved = false;
+        startX = ev.clientX; startY = ev.clientY;
+        var r = el.getBoundingClientRect();
+        startLeft = r.left; startTop = r.top;
+        document.addEventListener('pointermove', onMove);
+        document.addEventListener('pointerup', onUp);
+        document.addEventListener('pointercancel', onUp);
+    });
+    function onMove(ev) {
+        if (!dragging) return;
+        var dx = ev.clientX - startX, dy = ev.clientY - startY;
+        if (!moved && Math.hypot(dx, dy) < 6) return; // still within click/tap tolerance
+        moved = true;
+        var clamped = clampToViewport(startLeft + dx, startTop + dy);
+        el.style.left = clamped.left + 'px'; el.style.top = clamped.top + 'px';
+        el.style.right = 'auto'; el.style.bottom = 'auto';
+    }
+    function onUp() {
+        if (!dragging) return;
+        dragging = false;
+        document.removeEventListener('pointermove', onMove);
+        document.removeEventListener('pointerup', onUp);
+        document.removeEventListener('pointercancel', onUp);
+        if (!moved) return; // a plain tap -- let the button's own click handler run
+        moved = false;
+        justDragged = true;
+        setTimeout(function () { justDragged = false; }, 0); // cleared after this tick's click, if any, is swallowed
+        var r = el.getBoundingClientRect();
+        savePos({ xFrac: r.left / window.innerWidth, yFrac: r.top / window.innerHeight });
+    }
+    // A saved position from a wider/taller viewport (rotated phone, resized
+    // window) could otherwise sit off-screen or under the notch.
+    window.addEventListener('resize', function () {
+        var r = el.getBoundingClientRect();
+        var clamped = clampToViewport(r.left, r.top);
+        if (clamped.left !== r.left || clamped.top !== r.top) {
+            el.style.left = clamped.left + 'px'; el.style.top = clamped.top + 'px';
+        }
+    });
+};
 
 console.log("[Init] utils.js loaded successfully.");

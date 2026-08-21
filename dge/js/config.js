@@ -1,12 +1,20 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v6.0 (Extra shloka fields for Vedic content: vedicId/rishi/devata/chandas/padapatha)';
+window.DGE_VERSIONS['config.js'] = 'v6.1 (new appConfig.showCopyrightGatedCommentaries, default false -- gates the unlicensed Mahabharata Kannada translation/Tatparya Nirnaya text; see core.js\'s dgeVisibleCommentaries)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
   designedBy: "- 3BU1 -",
   showDesignedBy: true, // set false to hide the credit line entirely instead of just changing its text
+  // The Mahabharata Kannada translation + Madhvacharya's Tatparya Nirnaya
+  // excerpts interleaved in it carry no license anywhere (extracted from a
+  // Pejawar Matha Android app's asset bundle) -- see core.js's
+  // dgeVisibleCommentaries for the full reasoning. Default false: readers
+  // do not see this content until licensing is confirmed one way or
+  // another. A super-admin can flip this in Settings if that confirmation
+  // ever comes through, or to review the actual text while chasing it down.
+  showCopyrightGatedCommentaries: false,
   contactEmail: "sanatanavidyagurukulam@gmail.com",
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
@@ -44,18 +52,22 @@ const appConfig = {
   // reason. kavya.html carries the same URL as its own default, since it
   // does not load this file.
   kavyaDataBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@75ef2103bc07770ccb861497c32636d706c09fa4",
-  // The corpus-search index js/dge-search.js reads -- 916 granthas, 94,664
-  // units, 330 MB. Rebuilding it with the extract_text fix (the one that made
+  // The corpus-search index js/dge-search.js reads -- 983 granthas, 104,870
+  // units. Rebuilding it with the extract_text fix (the one that made
   // every shloka-based grantha index its verses rather than nothing) took the
   // published site from 966 MB to 1,013 MB against a 1 GB Pages ceiling, so
   // the index moved to the "search-dist" branch and the site came back to
   // about 685 MB. window.DGE_SEARCH_INDEX was already the override the search
   // client looks for. search_index/backlinks stays on main -- it is 0.1 MB.
-  // 19 Aug 2026: rebuilt with the per-trigram-postings fix (one file per
-  // trigram + a document-frequency table, instead of one file per 2-char
-  // prefix) -- see SEARCH_ARCHITECTURE.md. राम went from a 16 MB download to
-  // 549 KB; scoring itself is unchanged.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@cedcc73b1e7c6335346d0408a158ef69108fa883",
+  // NOTE: this is pinned to a commit, not to @search-dist, so jsDelivr cannot
+  // serve a half-written index -- which means reindex.yml publishing a new one
+  // changes nothing for readers until this line is bumped to that commit. If a
+  // freshly merged grantha browses but does not search, this is why.
+  // TEMP: still main's pre-merge pin (snippet() fix only, old posting layout).
+  // Re-running reindex.yml from this branch to fold in the one-file-per-
+  // trigram + section-partitioned postings rewrite -- see this commit's
+  // follow-up for the real pin.
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@60091fb1d84d2dbca3224b6ee7d1b78834a63c81",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read

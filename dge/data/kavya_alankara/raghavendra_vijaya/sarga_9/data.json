@@ -7,257 +7,383 @@
   "filePrefix": "rv9.",
   "fileExtension": ".mp3",
   "totalShlokas": 62,
-  "availableCommentaries": {},
+  "availableCommentaries": {
+   "pavamanacharya_english": "Huli V. Pavamanacharya (English Translation)"
+  },
   "colophon": "इति नवमस्सर्गः"
  },
  "shlokas": {
   "1": {
    "sa": "मागधा मधुभिदङ्घ्रिपङ्कजे जागरूकमपि संयमीश्वरम् । बोधयन्ति वचनैर्बुधोत्तमं काव्यवर्णनविधौ कृतादरैः ॥ १ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Oh the great saint!! kindly bestow prosperity on this world. Behold the beauty of this world with your lotus like eyes. The dawn has spread its radiance everywhere. The chanting of the Vedas is getting reverberated from all directions. Behold the dawn of such beauty. Thus addressing the great saint, the panegyrists woke him up."
+   }
   },
   "2": {
    "sa": "मङ्गलानि कुरु पद्मसोदरेः संयमीन्द्र जगदाहृगञ्चलैः । पश्य दृश्यविभवं दिनागमं दिक्षुदिक्षु मुखरीकृतागमम् ॥ २ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When the doors of the house filled with darkness got opened by the chanting of ruks of the Vedas by Brichaspathyacharya in the heaven, the virtuous woman (the east) who was held up there was delighted. Explanation: The woman (the east) who was held up in the house filled with darkness was unaware where she was. When she heard the chanting of the Vedas by Brihaspathyacharya in the heaven, she was delighted by learning that she was safe in Devendra's heaven."
+   }
   },
   "3": {
    "sa": "पाकशासनपुरे गुरूदितेर्हन्त वेदवचनैरपाकृते । अन्धकारदुरपह्नवगेहे शक्रदिङ्मुखमिदं प्रसीदति ॥ ३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When that woman (The east) learnt that her sweetheart (Master) would come to meet her, she started constructing a canopy of pure white silk cloth (Sunlight) before his arrival. Explanation: When the sunlight spread in the east, it appeared as though the heroine (The east) was preparing to welcome him by getting a canopy of white silk cloth ready."
+   }
   },
   "4": {
    "sa": "शातमन्यवदिशा निजेश्वरे भानुमालिनि समागमोन्मुखे । पूर्वमेव वितनोति पाण्डिमक्षौमनिर्मलवितानमम्बरे ॥ ४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The pitch darkness in the night appears like a large herd of elephants. The dawn (the lion) destroys (rips open) the darkness (the heads of elephants). The red rays of the rising sun appearing in the east then look like the pearls of stars soaked in the blood oozing out from the heads of those elephants. Explanation: There is a belief that pearls exist in the frontal globe on the upper part of the forehead of an elephant. The poet with this in mind has described that the red sunlight in the east along with the stars looked like those pearls soaked in the blood oozing out from the heads of those elephants."
+   }
   },
   "5": {
    "sa": "अन्धकारभरवारणव्रजे काल्यकेसरिविदीर्णमस्तके । शोणितौघ इव शक्रदिङ्मुखे शोणिमा लसति तारमौक्तिकैः ॥ ५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "During the war between Lord SriRama and Ravana, Indrajit the son of Ravana bound everybody with Nagapashastra. Even Sri Rama pretended as though he was bound by that Astra. Then Garuda came there and released all of them by destroying Nagapashastra. With this incident in mind, the poet has described that the darkness (Nagapashastra) which had covered (Had an intention to defeat) the sky (Sri Rama) got itself destroyed by the dawn (Garuda)."
+   }
   },
   "6": {
    "sa": "व्योमरामपरिभाविशार्वरव्या जपत्रगमयास्त्रसन्ततेः । भञ्जनाय पुरतोरुणानुजः प्रादुरस्त्युदयरागकैतवात् ॥ ६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "People collect honey from beehives by driving away the bees with the blaze of fire. It is interestingly explained here that the dawn is driving away the darkness (the bees) from the sky (the beehive) with the shade of glowing redness that has spread in the east (blaze of fire)."
+   }
   },
   "7": {
    "sa": "व्योमदम्भमधुगोलसंचरद्धातसंघसरघा निराकृतिम् । आतनोति समयः पुरा दिशा शोणिमाभिशिखया विदीप्तया ॥ ७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The ocean is also known as Rathnakara. In the past, the sage Agasthya had consumed the entire quantity of water in the ocean. Then those shining rubies which were in the ocean had become clearly visible. Now when the sky (Agasthya) destroyed (drank) the darkness (the ocean) the redness of the dawn shone in the sky like those rubies."
+   }
   },
   "8": {
    "sa": "व्योमनामभृति कुम्भसंभवे वारिधिं पिबति शार्वराभिधम् । औषसारुणिमदम्भतः शनैः पद्मरागनिकरो विजृम्भत् ॥ ८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The blue sky becomes blackish as a result of pitch darkness. When the cloth (sky) was made (became) blackish by dying it (being covered) with more and more blue colour (darkness) its golden coloured border (tawniness of the dawn in the east) glittered like a splendid golden streak."
+   }
   },
   "9": {
    "sa": "अम्बरस्य तिमिरालिनीलिकानीलितस्य हरिदिङ्मुखाञ्चले । काल्यरक्तिमनिभेन काञ्चनीरेखिकातिरुचिरा विराजते ॥ ९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The great pugilist, the dawn intending to kill his rival, the darkness throws the dust of tawniness at him and then shows his iron fists which are reddish like the sun-disc to him. Explanation: The wrestlers or Pugilists intending to over power each other throw red dust at each other and then fight showing their fists to each other. Here the powerful dawn which is capable of killing its rival, the darkness, throws the dust of tawniness at it and then lifts its iron fists (the sun disc) to hit it."
+   }
   },
   "10": {
    "sa": "काल्यमल्लवर एष शार्वरद्वेषिमल्ल्यमभिहन्तुमुद्यतः । क्षिप्तरक्तिमरजा विदर्शयत्यर्कबिम्बनिभमुष्टिमग्रतः ॥ १० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The bridegroom (the dawn) intending to enter into the wedlock with the bride (the east) tied the Mangalasutra (redness with the sun disc shining at its centre) around her neck. Explanation: In this stanza the poet has compared the dawn to a bridegroom, the east to the bride, the act of the dawn in making the east visible with its light to its intention to marry and the golden red along with sun-disc to Mangalasutra."
+   }
   },
   "11": {
    "sa": "उद्रिविक्षुहृदयो निशात्ययः प्राग्दिशं तदुपकण्ठमादधे । काल्यरागमयमादिभूषणं भानुबिम्बमणिरञ्चितान्तरम् ॥ ११ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When that beautiful girl (the east) saw her consort (the sun) with Chayadevi, her rival wife at dawn, she seething with anger kicked him with her foot smeared with the essence of lac. As a result of that kick, the sun, master of the lotus attained redness. Explanation: When a woman sees her husband with her rival wife, she kicks him with her foot adorning with the redness of the essence of lac. Likewise it appeared that the sun looked red at dawn when he was kicked by the east with her foot (the redness at dawn) which seemed to have adorned with redness of the essence of lac."
+   }
   },
   "12": {
    "sa": "हन्त शक्रहरिता दिनागमे यावकारुणपदाभिताडनात् । छायया सह समागमासहात्पाटलोजनि पयोजनिश्रिता ॥ १२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The day at dawn takes a dip in the sea and wears the red Akshata (the sacred sectarian circlet) in the form of the sun disc on its forehead (the east). Explanation: The Brahmins after taking bath and completing their morning rituals wear red Akshatha (Sectarian circlet) on their foreheads. Likewise redness of the sun-disc appeared like the sectarian circlet worn by the day on its forehead (the east) after taking bath in the sea."
+   }
   },
   "13": {
    "sa": "प्रातरम्बुनि निमज्ज नीरधेरुत्थितो हरिदिशा निजालिके । अर्कमण्डलमिषेण वासरः शोणिमाक्षतललाम संदधे ॥ १३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The danseuse Divasalakshmi (the elegance of the day) after moving aside the curtain of darkness has entered the stage (the sky) creating the sound of her anklets (chirping of the birds)."
+   }
   },
   "14": {
    "sa": "अन्धकारयवनीमपाकृतामारचय्य दिवसेन्दिरा नटी । व्योमरङ्गमभजत्प्रभाञ्चितं कुर्वती खगरवेण शिञ्जितम् ॥ १४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "It appeared as if those chirping birds had entered the sky before the sun-rise itself as panegyrists of the sun who had his mind longing to conquer the group of those kings (darkness)."
+   }
   },
   "15": {
    "sa": "अन्धकाररिपुभूमिभृद्दृणं जेतुमुत्कमनसो विभावसोः । वन्दिनो नु बिरुदालिवाचकाः प्रागविशन्ति मुखरा विहङ्गमाः ॥ १५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When dawn set in at the end of the night, the moon who steals the hearts of those girls bereft of their sweethearts (who perturbs their minds) ran away. Then Padmini (heaps of lotus) fearlessly blossomed her lotus like eyes (Started blossoming). Explanation: The Moon disappeared just like the thieves run away, the moment the dawn set in. Padmini (the lotus) the friend of those girls who were bereft of their sweethearts was in grief as she too was separated from the sun in the night. Her grief melted away the moment dawn set in and a wide grin manifested on her face (it blossomed)."
+   }
   },
   "16": {
    "sa": "विप्रयुक्तसखिहृन्मलिम्लुचे विद्रुते सति विधौ निशात्यये । पद्मिनी विगतसाध्वसा शनैः फुल्लमावहति पद्मलोचनम् ॥ १६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The ruddy geese which can't see anything in the dark get separated in the night and unite again, the moment the sun rises. Though they are known as chakravaka Mithuna, they form a conjugal attachment which creates a problem. Therefore the sun assigned the lotus with the task of finding a solution to this problem. The lotus which started thinking about a solution for this problem closed its eyes and remained thus throughout the night. Then it decided that when the sun rises, the problem would automatically get solved. When it saw those birds united after the sun rose, its face blossomed with a smile. This is really astonishing."
+   }
   },
   "17": {
    "sa": "चक्रवाकमिथुनार्धरूपिणीं पूरयेति विहिता समस्यकाम् । मीलिताब्जनयना शुचिस्मिता पूरयत्यहह तां पयोजिनी ॥ १७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Oh Sri Raghavendra, the great saint! the moon was capriciously moving about when you, the king of the brahmins were sleeping in the night. Now when you have woken up from your sleep, the moon who has become just Dvijaraja (Master of the stars) has disappeared frightened of you. Explanation: Oh the great saint! the name Dvijaraja always suits you aptly for you are the real king of the brahmins. But when you were sleeping in contemplation in the night, the moon was whimsically moving about everywhere conjecturing that he was the only Dvijaraja (King of Stars). But now when you, the real Dvijaraja are awake, the moon, just the king of stars has disappeared apprehending that he may face your wrath."
+   }
   },
   "18": {
    "sa": "निद्रिते त्वयि पुरा द्विजाधिपे स्वैरमेव चरति स्म चन्द्रमाः । याति बोधमधुना द्विजाधिभूर्नाममात्रधृदुपैति साध्वसात् ॥ १८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The whole world was plagued by the pitch darkness which was like the smoke of separation of the ruddy geese. Now at dawn being delighted by the destruction of that darkness, it is relieved with cool breeze serving as its sigh of relief. Explanation: The pair of ruddy geese naturally get separated in the night. The smoke that emanates from the fire of their separation forms the pitch-darkness in the night. That smoke causes grief to Bhoodevi (the earth) by asphyxiating her. But when the sun rises at dawn, the earth sighs with relief as that darkness disappears."
+   }
   },
   "19": {
    "sa": "चक्रवाकविरहाग्निधूम्यया शार्वरेण जगती निपीडिता । तन्निवृत्तिसुखिताधुना ततो मन्दमुच्छ्वसति मारुतच्छलात् ॥ १९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra rose up from his bed made of tiger's skin as though he was woken up by the sprinkle of water of such sweetness of words by panegyrists."
+   }
   },
   "20": {
    "sa": "एवमादिमगधोक्तिमाधुरीवारिपूरकृतसेचनदिव । बोधमेत्य यतिराट् समुत्थितो द्वोपिचर्ममयतल्पतल्लजात् ॥ २० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Vishwa, Thaijasa, Prajna and Thureeya, the four forms of the Lord are the guiding forces respectively of the four stages namely Jagrath (wakefulness), Swapna (dreaming), Sushupthi (profound sleep) and Moksha (salvation). The form of Vishwa has nineteen faces and it always exists in the right eye. The Lord as Vishwa had an intention to listen to the discourses on nineteen sacred works comprising Dwadasha sthuti and eighteen puranas, simultaneously from Sri Raghavendra. Therefore it appeared as though the Lord Vishwa settling in the right eye of Sri Raghavendra gifted his nineteen faces to the great saint so that he could peruse all those nineteen literary works simultaneously."
+   }
   },
   "21": {
    "sa": "द्वादशस्तुतिपुराणसंततीः श्रोतुमाननसमूहमेकदा । स्वं दशाधिकनवाननोदिशद्विश्वमूर्तिरिव चक्षुरागत्ः ॥ २१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra, the great saint after waking up in the morning, first paid his obeisance to Lord Sri Hari. Then he profoundly paid his respects to the devathas and the gurus, superior to him in rank and accepted their blessings. Afterwards he accepted the profound respects paid by those inferior to him in rank and blessed them. He also accepted the gifts offered by his disciples."
+   }
   },
   "22": {
    "sa": "आनतो भवदनन्तमग्रतः संयमीन्दुरवलोक्य सञ्जनात् । आदरेण सुजनैः समर्पिताः श्रेयसे सततमाशिषोग्रहीत् ॥ २२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Then Sri Raghavendra went to Tulsi garden and prostrated before Sri Lakshmidevi indwelling in the Tulsi. Then he also prostrated in profound devotion before Sri Pranadevaru who has surrendered himself at the lotus feet of Sri Lakshmidevi and on whom Lord Sri Lakshminarayana, the consort of Sri Lakshmidevi has bestowed his special blessings."
+   }
   },
   "23": {
    "sa": "स प्रणम्य तुलसीवनस्थितामिन्दिरां तदनु तत्पदाश्रितम् । वायुनन्दनमवन्दतादरादिन्दिरेषकरुणैकमन्दिरम् ॥ २३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Then Sri Raghavendra went to the river Cauvery reputedly known as the Ganges of the south for his morning bath sitting in a sedan and chanting the hymn of Gajendramoksha in Bhagavatha."
+   }
   },
   "24": {
    "sa": "सोधिरुह्य शिबिकां गजेन्द्रमुत्तयुक्तिसंस्तुतिकृतादरः शनैः । स्नातुमभ्युपगतस्तरङ्गिणीं दक्षिणापथनिलिम्पनिम्नगात् ॥ २४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The flowers of trees grown on the banks of the Cauvery attained divinity when they fell into the river. The flowers grown at other places also attained that divinity since they also belonged to the same species as that of those flowers which had attained divinity as a result of their contact with the sacred water of the Cauvery."
+   }
   },
   "25": {
    "sa": "तीरभूरुहसुमानि तज्जले संनिपत्य सुमनस्त्वमाप्नुवन् । जातिमात्र इति तद्गताभवद्व्याक्रियातदितरेष्वपि स्फुटम् ॥ २५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "While Samudraraja (the Ocean) was getting united in wedlock with that beautiful Cauvery adorned with coral like tides, the champak flowers grown on those trees on the river banks were looking like the rows of lamps illuminated for the occasion. Explanation: The tides of the Cauvery shine like coral at the place of confluence of the river and the sea, because of the presence of corals there. Then Samudraraja (the sea) gets united with the beautiful Cauvery who is decorated with vermillion and such other auspicious things."
+   }
   },
   "26": {
    "sa": "यां प्रवाललहरीं मनोहरामुद्वहन्त्यधिवसन्तम्बुधौ । तीरचम्पकसुमोत्करा लसन्त्युत्सवाय कृतदीपिका इव ॥ २६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "One need not get surprised as to how the Cauvery gets thrived by Vayu who actually dries up water and other things, the reason being that shining in infinite forms, she always enjoys the privilege of serving the Lord Sri Ranganatha with his blessings. Explanation: The Cauvery is known by a Vedic term meaning one who thrives by Vayu. The Cauvery is like Sesha, the couch of the Lord who has infinite faces, because she flows in infinite forms i.e., in different directions and always enjoys the privilege of serving the Lord Sri Ranganatha. Therefore, it is not surprising that though Vayu dries up water he serves as food of Sesha resulting in his thriving. Hence Vayu also serves Cauvery in her thriving."
+   }
   },
   "27": {
    "sa": "शोषकेण मरुता कथं नु या वर्धिता च कथमित्यविस्मयः । सा यदुल्लसदनन्तरूपिणी याति रङ्गपतिशेषतां सदा ॥ २७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The Cauvery along with her brings the sweet nectar of the heaps of lotus which have grown in Sahyaparvatha. If the water of the Cauvery was not mixed with nectar, then how could the bee (Lord Sri Ranganatha) have diverted there?"
+   }
   },
   "28": {
    "sa": "सह्यभूधरसरस्सरोजिनीसारसश्रितमरन्दसंततिम् । या बिभर्ति परथा रमेत किं तत्र रङ्गपतिभृङ्गतल्लजः ॥ २8 ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "After alighting from the sedan at the river where the atmosphere was very pleasant, Sri Raghavendra attended to nature's call, washed his hands and legs with mrittika (clay) and cleaned his teeth."
+   }
   },
   "29": {
    "sa": "तत्तटोपवनसीम्नि वाहनात्सोवरुह्य यमिधुर्यचन्द्रमाः । क्षालयन् करपदं समृज्जलैर्दन्तपङ्क्तिपरिशोधनं व्यधात् ॥ २९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "After achamana, Sri Raghavendra plunged into the river where he chanted the hymns three times each in profound devotion."
+   }
   },
   "30": {
    "sa": "कल्पिताचमनमत्र सादरं स्नानकर्म कुरुते स्म शास्त्रतः । अष्टषड्द्विपदक्षैरहरेर्मानितैर्मनुवरैस्त्रिधा क्रमात् ॥ ३० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra consecrated the water chanting the sookta prescribed to be chanted during the bath and then sprinkled that water on his head. Then he smeared mrittika all over his body and again plunged into the water chanting the hymn."
+   }
   },
   "31": {
    "sa": "जप्यसूक्तजपशुद्धवारिणा प्रोक्षयन्यतिवरः शिरो निजम् । स्नातवान्विहितमृद्दिलेपनोऽनुच्छ्वसन्निरघमर्षणं जपन् ॥ ३१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Then lifting his head above water and chanting Om, Sri Raghavendra performed ablution to Lord Sri Hari residing in his heart, chanting Om. He then took the sacred Vishnupadodaka and offered Tarpana to devathas with consecrated water."
+   }
   },
   "32": {
    "sa": "उच्चरन्प्रणवमुत्थितोसिचत् स्वात्मगं पुरुषसूक्ततो हरिम् । विष्णुपदसलिलं पिबन् सुरास्तर्पितानकृत मन्त्रवारिभिः ॥ ३२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Then Sri Raghavendra, the great saint, enclothed himself with kaupeena and two Kashaya vastras and wore twelve urdhvapundras and five mudras with Gopichandana."
+   }
   },
   "33": {
    "sa": "सालमलकमवस्तलोहिते वाससी तदनु संयमीश्वरः । ऊर्ध्वपुण्ड्रमतनिष्ट गोपिकाचन्दनेन सहपञ्चमुद्रिकम् ॥ ३३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra of great divine powers then offered arghya to devathas, meditated on Gayathri, the mother of the Vedas, in his heart and silently chanted the pranava mantra, the greatest among the hymns."
+   }
   },
   "34": {
    "sa": "अर्घ्यदानविधिमर्घ्यवैभवः संविधाय हृदि वेदमातरम् । सादरं तदनु तारकं ततो मन्त्ररत्नमपि मौनतोजपत् ॥ ३४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Then Sri Raghavendra went to Tapovana on the banks of the Cauvery where he worshipped Vyasamusthi which was previously worshipped by Sri Madhwacharya, the first guru. Afterwards he listened to the sacred stories of Lord SriHari quoted in Bhagavatha and other Puranas, from Brahmins."
+   }
   },
   "35": {
    "sa": "तत्तटोपवनमेत्य पावनीः सोश्रृणोद् द्विजमुखात्कथां हरेः । आदिदैशिकसमर्चितोपलव्यासूमूर्तिपरिपूजनोत्सुकः ॥ ३५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Then Sri Raghavendra worshipped the lotus eyed Lord SriHari with ablutions of milk and water. Then he decorated the Lord with sandal paste and flowers and then offered the just prepared Huggi (a hodge podge of rice and Bengal gram) with fresh and fragrant ghee, as oblation to the Lord in profound devotion."
+   }
   },
   "36": {
    "sa": "अभ्यषिञ्चदथ पङ्कजेक्षणं वारिभिर्व्यकृतदुग्धधारया । संन्यवेदयदयं मनोहरं मौद्गमन्नमुरुधाधिकं नवम् ॥ ३६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Then Sri Raghavendra offered his respects with profound devotion to the Brindavan of his paramaguru Sri Vijayeendra Theertha and left on his foot wearing gem studded padukas for his Mutt surrounded by many saintly scholars."
+   }
   },
   "37": {
    "sa": "संप्रणम्य विजयीन्द्रयोगिनं तापसोपमबुधव्रजावृतः । सोधिरुह्य मणिरम्यपादुके दैशिको मठमथ प्रतस्थिवान् ॥ ३७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "While Sri Raghavendra was returning to his Mutt, the sounds of musical instruments like conch, kettle, drum, mridanga, trumpet, double drum, horn and chakra played by his servants were reverberating from all directions."
+   }
   },
   "38": {
    "sa": "शङ्खदुन्दुभिमृदङ्गकाहलीमड्डुडिण्डिमसुशृङ्गझर्झरैः । चक्रवाद्यनिनदैश्च तज्जनाः पूरयन्ति पुरतोस्य दिङ्मुखम् ॥ ३८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra who appeared like the embodiment (manifestation) of Devaloka's Kalpavruksha sanctifying the earth with his each step while returning entered his Mutt after paying his obeisance to Kumbheshwara, the consort of Parvathi on his way."
+   }
   },
   "39": {
    "sa": "पावयन्नथ महीं पदेपदे पार्वतींशमभिवन्द्य पङ्क्तौ । प्राविशत्ससुर विष्टपागमो मूर्तिमानिव मठं तथागमः ॥ ३९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The great scholar used to deliver discourses specially on Brahmasutra Bhashya in the assembly of scholars. He also used to refute other systems of Indian philosophy."
+   }
   },
   "40": {
    "sa": "शान्तिवाचनपुरस्सरं वरं भाष्यमेव स विशिष्य संसदि । व्याकरोति विदुषां निराकरोत्यन्यदर्शनकुयुक्तिसंहतिम् ॥ ४० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When Sri Raghavendra said that the soothras have propounded that Sri Narayana whom the learned men worshipped, had unlimited qualities, free from defects, intelligible and cognisible which has been found as the essence of sootras by Sri Anandatheertha, three scholars put forth their points of view before the saint, in an agitated manner."
+   }
   },
   "41": {
    "sa": "ब्रह्म सद्गुणमदोषमीक्षितं गम्यमाहुरिव लक्षणैः क्रमात् । सूत्रभाष्य इति तेन भाषिते तत्र कश्चन सुधीरचोदयत् ॥ ४१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "We are not convinced of your explanation. Who is Narayana? 'I' is the only thing known by experience. It is very difficult to accept any other thing without evidence. Perception or inference does not admit any other thing as real. According to Shruthis, 'Parabrahma' as described in the Vedas is not different from the 'Jeeva' or 'I'. When it is established that both 'Brahma' and 'Jeeva' are same, where is the need for the shastras teaching about Brahma? Then if we talk about difference, high and low ranks are false. Only the experience of 'I' by the 'Jeeva' is true. Even the 'I' disappears as and when it grows further and the experience of intelligence which alone is true remains. If so, where is the question of 'Narayana', the 'Parabrahma' having attributes? It is impossible to worship such a thing. As Maya from which stems the attitude to consider that two things are different, vanishes, one attains salvation. Therefore the belief that one could attain salvation with the aid of other things is an illusion. It is enough if we perform Karma to attain Swargaloka. Therefore this 'Brahma Meemamsa' is meaningless."
+   }
   },
   "42": {
    "sa": "नित्यवाग विषयस्य सर्वथाऽरम्भणं न विषयस्य युज्यते । नामधेयमिह यज्जडं मृषा जातमर्थरहितं स्वचिन्तनन् ॥ ४२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "We are not convinced of your explanation. Who is Narayana? 'I' is the only thing known by experience. It is very difficult to accept any other thing without evidence. Perception or inference does not admit any other thing as real. According to Shruthis, 'Parabrahma' as described in the Vedas is not different from the 'Jeeva' or 'I'. When it is established that both 'Brahma' and 'Jeeva' are same, where is the need for the shastras teaching about Brahma? Then if we talk about difference, high and low ranks are false. Only the experience of 'I' by the 'Jeeva' is true. Even the 'I' disappears as and when it grows further and the experience of intelligence which alone is true remains. If so, where is the question of 'Narayana', the 'Parabrahma' having attributes? It is impossible to worship such a thing. As Maya from which stems the attitude to consider that two things are different, vanishes, one attains salvation. Therefore the belief that one could attain salvation with the aid of other things is an illusion. It is enough if we perform Karma to attain Swargaloka. Therefore this 'Brahma Meemamsa' is meaningless."
+   }
   },
   "43": {
    "sa": "नात्मतत्त्वमपि तत्र नापरश्चेष्टितादिबहुलिङ्गसिद्धितः । जीवभिन्नपरमोप्यमानको न स्वयं च यदहंधिया यतः ॥ ४३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "We are not convinced of your explanation. Who is Narayana? 'I' is the only thing known by experience. It is very difficult to accept any other thing without evidence. Perception or inference does not admit any other thing as real. According to Shruthis, 'Parabrahma' as described in the Vedas is not different from the 'Jeeva' or 'I'. When it is established that both 'Brahma' and 'Jeeva' are same, where is the need for the shastras teaching about Brahma? Then if we talk about difference, high and low ranks are false. Only the experience of 'I' by the 'Jeeva' is true. Even the 'I' disappears as and when it grows further and the experience of intelligence which alone is true remains. If so, where is the question of 'Narayana', the 'Parabrahma' having attributes? It is impossible to worship such a thing. As Maya from which stems the attitude to consider that two things are different, vanishes, one attains salvation. Therefore the belief that one could attain salvation with the aid of other things is an illusion. It is enough if we perform Karma to attain Swargaloka. Therefore this 'Brahma Meemamsa' is meaningless."
+   }
   },
   "44": {
    "sa": "किंच किं फलममुष्य वेदने कर्मणैव भवति स्वरादिकम् । नापि मुक्तिरधुनैव तद्विदां दृश्यते न यदसावपि क्वचित् ॥ ४४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "We are not convinced of your explanation. Who is Narayana? 'I' is the only thing known by experience. It is very difficult to accept any other thing without evidence. Perception or inference does not admit any other thing as real. According to Shruthis, 'Parabrahma' as described in the Vedas is not different from the 'Jeeva' or 'I'. When it is established that both 'Brahma' and 'Jeeva' are same, where is the need for the shastras teaching about Brahma? Then if we talk about difference, high and low ranks are false. Only the experience of 'I' by the 'Jeeva' is true. Even the 'I' disappears as and when it grows further and the experience of intelligence which alone is true remains. If so, where is the question of 'Narayana', the 'Parabrahma' having attributes? It is impossible to worship such a thing. As Maya from which stems the attitude to consider that two things are different, vanishes, one attains salvation. Therefore the belief that one could attain salvation with the aid of other things is an illusion. It is enough if we perform Karma to attain Swargaloka. Therefore this 'Brahma Meemamsa' is meaningless."
+   }
   },
   "45": {
    "sa": "अत्र कश्चिदमभ्यचोदयच्छुद्धमस्य विषयं स्वमानसम् । शुद्धवेदनफलं वदेन्न चेद्धन्धभङ्ग इति किं ततो वद ॥ ४५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "We are not convinced of your explanation. Who is Narayana? 'I' is the only thing known by experience. It is very difficult to accept any other thing without evidence. Perception or inference does not admit any other thing as real. According to Shruthis, 'Parabrahma' as described in the Vedas is not different from the 'Jeeva' or 'I'. When it is established that both 'Brahma' and 'Jeeva' are same, where is the need for the shastras teaching about Brahma? Then if we talk about difference, high and low ranks are false. Only the experience of 'I' by the 'Jeeva' is true. Even the 'I' disappears as and when it grows further and the experience of intelligence which alone is true remains. If so, where is the question of 'Narayana', the 'Parabrahma' having attributes? It is impossible to worship such a thing. As Maya from which stems the attitude to consider that two things are different, vanishes, one attains salvation. Therefore the belief that one could attain salvation with the aid of other things is an illusion. It is enough if we perform Karma to attain Swargaloka. Therefore this 'Brahma Meemamsa' is meaningless."
+   }
   },
   "46": {
    "sa": "इत्युदीरितगिरातिरोषितस्यद्वचः प्रतिवचोन्य आददे । यत्तु शुद्धमुदितं न मानसं तन्नयुक्तमिति हन्त चिन्त्यते ॥ ४६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "We are not convinced of your explanation. Who is Narayana? 'I' is the only thing known by experience. It is very difficult to accept any other thing without evidence. Perception or inference does not admit any other thing as real. According to Shruthis, 'Parabrahma' as described in the Vedas is not different from the 'Jeeva' or 'I'. When it is established that both 'Brahma' and 'Jeeva' are same, where is the need for the shastras teaching about Brahma? Then if we talk about difference, high and low ranks are false. Only the experience of 'I' by the 'Jeeva' is true. Even the 'I' disappears as and when it grows further and the experience of intelligence which alone is true remains. If so, where is the question of 'Narayana', the 'Parabrahma' having attributes? It is impossible to worship such a thing. As Maya from which stems the attitude to consider that two things are different, vanishes, one attains salvation. Therefore the belief that one could attain salvation with the aid of other things is an illusion. It is enough if we perform Karma to attain Swargaloka. Therefore this 'Brahma Meemamsa' is meaningless."
+   }
   },
   "47": {
    "sa": "यन्न भाति जडजीवभेदनं कर्तृतादिविरहोऽद्वितीयता । एकतापि तदसारमात्मनोऽभिन्नमैतदिति चेदसंशयः ॥ ४७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The Swamiji found a great opportunity to preach the real Tattva to his pious disciples when those scholars put forth their queries before him. Then he began replying the scholars."
+   }
   },
   "48": {
    "sa": "अन्यदेतदिति नापि युक्तिमत्संमृषेति हि विकलप्नक्षमम् । तत्स्वरूपमिति चेन्न भासते तत्र नैव तव युज्यते श्रमः ॥ ४८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The Swamiji found a great opportunity to preach the real Tattva to his pious disciples when those scholars put forth their queries before him. Then he began replying the scholars."
+   }
   },
   "49": {
    "sa": "अत्र तद्भ्रमनिरासनोत्सुकः सस्मितं सदयमब्रवीद्गुरुः । अस्ति किंचिद्हमर्थतः परं विष्णुनाम गुणपूर्णम तम् ॥ ४९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Your objections have no validity, because it does not mean that only the things experienced or seen by man in his daily life are true. There are many true things which are beyond his ken. It is only for realising this truth, man is gifted with intelligence which is superior to that of animals. One would be experiencing in his daily life an intuition about the existence of this invisible truth. Things which are invisible to defective eyes could be seen with healthy eyes. Many things which are invisible to the naked eyes could be seen with the help of accessories. A poet or an artist would be immersed in emotions which are beyond the imagination of an ordinary man. Everybody cannot realise that many surprising things in the world are controlled and guided by a power beyond their imagination. It is beyond the abilities of our faculties of understanding to understand such things. It is the nature of the man to approach the source in which he has confidence to understand the things beyond his imagination. The Vedas are such a source. The Intellectuals can realise that the Vedas are Sadagamas. This source is not the creation of modern times. It must have been in existence since eternity. It must be as eternal as eternity itself. At the same time it must have been uncreated. To know its real meaning, a proper reasoning is essential. Then only, one can understand clearly the real meaning of the contradictions in these Shastras. One would not have been yearning to understand such contradictions, if they were as clear as the visible things. That must emerge from cohesive churning of thought. These Sadagamas mainly deal with the subject related to Brahman. Some thoughts propounding the identity of 'Brahma' and the individual soul referred to as 'I' could also be found here and there. But such thoughts should be interpreted by proper reasoning. If the meaning is accepted as it is, then the need of studying the Vedic lore does not arise. If it is accepted that the 'Jeeva' who undergoes misery everyday is 'Brahma' himself, then all the activities of this world would come to stand still. Rather than getting convinced by such vague interpretations, it would be most acceptable and honest if the thoughts that treat the identity are discussed thoroughly taking into consideration the context of the beginning and the end of the passage, the rules of grammar adopted in arriving at their meaning, helpful arguments, etc. and analysing whether such thoughts could be interpreted differently leading to a conclusion which is not detrimental to the supremacy of 'Brahma'. This is the main task of the Brahma Sootras. These Sootras would not have advocated the necessity of the study of the nature of 'Brahma' by the 'Sadhaka', had the identity been the ultimate meaning of the Vedas. Therefore there is no need to declare that 'Brahma Meemamsa Shastra' is most essential for the aspirant of 'Adhyatma Tattva'. Sri Anandatheertha has convincingly proved that this is the real meaning of the Sootras. Only Lord Sri Narayana, the abode of infinite qualities and who is absolutely flawless is 'Parabrahma'. To be always meditating on him is the secret of life. To realise him is the fulfilment of life. Life is full of love, not hollow but tested and found pure on the touchstone of joys and sorrows. The God is the source of such love which results in bliss. This is the essence of Shastras. This is the principle of life\"."
+   }
   },
   "50": {
    "sa": "यद्विचारविषये निगद्यते ब्रह्मनाम परजीवभेदकम् । मुक्तिरेव फलमस्य वेदनात्प्रक्रमोस्य विषयादिमांस्ततः ॥ ५० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra thus concluded his argument. All the disciples of the Swamiji were overwhelmed with joy. The scholars who raised the queries prostrated before the swamiji with a sense of shame about their ignorance."
+   }
   },
   "51": {
    "sa": "एवमादिपरमात्मचिन्तनैरास्त संयमिवरोतिहर्षितः । तत्र सानुभवलिप्सया दिवो मध्यसीमानि रविर्व्यलम्बत ॥ ५१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra, the great saint remained in a state of bliss by discussing such things with regard to the greatness of the Lord. The sun too who had an intention to listen to those scholarly discussions slowed down his pace of movement in the sky. Explanation: Usually the sun appears to move very slowly in the noon. It is exaggerated here that as the sun too had an intention to know more about the greatness of Parabrahma, he slowed down his pace when he saw Sri Raghavendra in discussion with other scholars."
+   }
   },
   "52": {
    "sa": "अस्ते ध्वान्ते समस्ते प्रतिभटसरणीं गत्वरे प्रादुरासी- च्छायारूपं तदेतच्छरणमुपगतं पादमूलं जनानाम् । हन्तामन्दप्रतापे रपि मम किरणैः शक्यते तन्न भेत्तुं धिङ्मामित्याकुलोर्कः प्रतपति कलयन्न्योममध्ये विलम्बम् ॥ ५२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "As the dawn set in and the sun rose, the darkness started getting annihilated. The sun started destroying the darkness, his enemy wherever it was found, with his light. Then that darkness transformed itself into shadow and took refuge under the soles of the people. \"It is really shameful for me, for I have failed to destroy this darkness completely even with my blazing rays!\" thus abusing himself, the sun who was disgusted started moving slowly in the sky tormenting the people with his blazing heat."
+   }
   },
   "53": {
    "sa": "वक्राम्भोजं विधत्ते मम सुहृदमिति प्राप्तरॊषो विवस्वान् म्लानं मीनेक्षणानां नयनयुगमयं क्लपयन्न्लब्णश्रीः । तच्छायाधारिणोस्मानपि तपति मुहुस्तं समाधेहि पाही- त्यारादम्भोजिनीनां शकुलकुलमयादाकुलं पादमूलम् ॥ ५३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"The sun is agitated seeing those fish like eyes of beautiful girls reducing to nothing the splendor of their lotus like faces, which are like his friends. Therefore he is not only causing dimness in those eyes but also is tormenting us constantly with his glaring rays, because we look like those eyes. Kindly console the enraged sun and protect us\" praying thus, the fishes hid under the stems of the lotus."
+   }
   },
   "54": {
    "sa": "माद्यन्दिनस्नानकृते महान्तं मुनीन्द्रमित्थं किल कालशंसी । आगत्य मध्यन्दिनस्नानमस्मै न्यवेदयत्प्राप्तमहत्सचेताः ॥ ५४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "As the noon approached, the timekeeper courteously appealed to Sri Raghavendra to get ready for the noon bath. Explanation: When the noon approached as described in stanzas 52 and 53, the timekeeper requested the saint to get ready for the noon bath."
+   }
   },
   "55": {
    "sa": "व्याख्याय शिष्यनिवहाय चिराय सोय- माम्नायमौलिवचनानि मनोहराणि । माध्याह्निकानि विविधानि विधातुकामः कर्माणि मन्दमुदतिष्ठदुदग्रकीर्तिः ॥ ५५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thus the greatly celebrated saint Sri Raghavendra continued his discourse on Brahma Sootra Bhashya giving heart stirring quotes from Upanishads as illustrated for his disciples till noon. Then he rose up from his seat to perform different religious rituals pertaining to noon."
+   }
   },
   "56": {
    "sa": "निष्कुटविलसत्पुष्करवत्यां पुष्कलकीर्तिर्मस्करिधुर्यः । साधु निमज्ज्य सुधीजनमान्यो माधवमङ्गलगेहमयासीत् ॥ ५६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra, the great saint who had an unmatched fame and who was revered by those men of knowledge took bath in that splendid lake situated in the garden at the backyard of the Mutt and came to the sacred pooja hall of Sri Moolarama."
+   }
   },
   "57": {
    "sa": "डम्भासोढा काममम्भोरुहाख्यैरम्भःपूर्णं कुम्भमादौ समर्च्य । आत्मन्नान्तर्मातृकादीनशेषान् देवान् देवैः पीठगैः पार्श्वगैश्च ॥ ५७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra who was intolerant towards dishonesty and fraudulence first worshipped the Kalasha (Jar) filled with pure water, with flowers like lotus, which lasted for a long time. Then after invoking the presence of Matrika devathas and other devathas along with Peethabhimani devathas and Parivara devathas in that water, he offered ablution to the Saligramas and the idol of the lotus eyed Sri Moolarama with that consecrated water."
+   }
   },
   "58": {
    "sa": "शालिग्रामानम्बुजाक्षस्य मूर्तिं मन्त्राम्भोभिः संयमीन्द्रोभिषिच्य । नव्यैः पुष्पैरातनिष्टातिरम्यै रत्नैरर्ध्यं रामचन्द्रस्य पूजाम् ॥ ५८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Then he decorated the idol of Sri Moolarama with all the nine glittering gems and worshipped the Lord with fresh flowers and offer of Arghya and other services with profound devotion."
+   }
   },
   "59": {
    "sa": "वाजिमेधयजिना विकल्पितं शङ्खवारि शिरसा स धारयन् । राजसूययजिनापि सम्मतं विष्णुपादसलिलं पिबत्यसौ ॥ ५९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Then Sri Raghavendra sprinkled Shankodaka (Consecrated water from the conch) which was considered equal to Ashwamedhayaga on his head and also had Sri Vishnupadodaka which was considered more sacred than Rajasuyayaga. Explanation: It is customary to sprinkle Shankodaka on the head before taking theertha after worshipping Lord Sri Hari. It is believed that the sprinkling of Shankhodaka is equal to Avabrithasnana (Bath taken at the conclusion) after Ashwamedhayaga. The scholars also opine that consumption of theertha in the form of Sri Haripadodaka is more sacred than Avabrithasnana after Rajasuyayaga."
+   }
   },
   "60": {
    "sa": "स्वत कवेरजापयोनघं हि किं पुनर्हरेः । पदं समाश्रितं चतुःपुमर्थदं भवेदिति ॥ ६० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The water of the river Cauvery is renowned as naturally most sacred. Then, is it necessary to declare that the Cauvery water getting into contact with the lotus feet of Lord Sri Hari at the time of ablution is capable of bestowing all the four objects of a soul!!"
+   }
   },
   "61": {
    "sa": "पश्चात्कृत्वा हरिपादनतिं संयमीन्द्रोथ भुक्त्वा पुण्यं भैक्ष्यं तदनुरचयन् तर्कशब्दादिशास्त्रैः । विद्वद्वपूर्वाविधनगरात्प्राप्तवद्भिर्विनोदं ध्यायन्विष्णुं समयमनयत्सोयमासायमेवम् ॥ ६१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Raghavendra, the emperor of the family of saints prostrated at the lotus feet of Lord Sri Hari after taking Theertha. Then he had the sacred lunch prepared for him and offered to Lord Sri Hari as oblation. Afterwards he spent his time till evening by discussing Tarka and Vyakarana with the scholars who had come there from different places, in a spirit of entertainment and enlightenment which he ultimately dedicated to Lord Sri Narayana."
+   }
   },
   "62": {
    "sa": "श्रीमत्कश्यपवंशवार्धिशशिनः षड्दर्शनीवल्लभ श्रीलक्ष्मीनरसिंहवित्तविदुषः श्रीवेङ्कटाम्बामणौ । जातेनार्यदयासुधामयगिरा नारायणेनोदिते काव्ये चारुणि राघवेन्द्रविजये सर्गोभवन्नवमः ॥ ६२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thus concludes the ninth canto of the epic \"Sri Raghavendra Vijaya\" enchanting with amrosial words composed by Narayanacharya with the blessings of his father. Narayanacharya who had his education from his father was the son of the couple Venkatamba and Lakshminarasimhacharya who was an erudite scholar in all the six Shastras and who was born and shone like a moon in the ocean of Kashyapa gothra named after that virtuous and scholarly sage Kashyapa. English translation of the ninth canto of the epic \"Sri Raghavendra Vijaya\" composed by Sri Narayanacharya concluded."
+   }
   }
  }
 }

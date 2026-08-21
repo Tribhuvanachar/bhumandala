@@ -78,6 +78,21 @@ def parse_anuvritti(an):
             out.append({"word": w, "from": ref} if ref else {"word": w})
     return out
 
+def parse_adhikara(ad):
+    """'आकडारात् एका संज्ञा$1$4$1' -> 'आकडारात् एका संज्ञा' (a bare adhikara
+    with no $-suffix, e.g. 'अनभिहिते', passes through unchanged). The
+    trailing $adhyaya$pada$sutra is the source's own reference to the
+    sutra that first states this adhikara -- same $-delimited convention
+    'pc'/'an'/'type' already use -- but this field was being stored
+    unparsed, so the literal "$2$3$1" rendered straight into the reader.
+    A sutra can sit under more than one adhikara at once, "##"-joined
+    ('आकडारात् एका संज्ञा$1$4$1##कारके$1$4$23'); each segment gets the
+    same $-suffix stripped, then they're rejoined for display."""
+    if not ad:
+        return ""
+    parts = [tok.split("$")[0].strip() for tok in ad.split("##")]
+    return " · ".join(p for p in parts if p)
+
 TYPE_LABELS = {  # ashtadhyayi.com sutra-type code -> (english, devanagari)
     "S":  ("Definition (saṃjñā)", "संज्ञा"),
     "P":  ("Meta-rule (paribhāṣā)", "परिभाषा"),
@@ -175,7 +190,7 @@ def main():
             anu = parse_anuvritti(meta.get("an", ""))
             if anu:
                 row["anuvritti"] = anu
-            ad = (meta.get("ad") or "").strip()
+            ad = parse_adhikara(meta.get("ad") or "")
             if ad:
                 row["adhikara"] = ad
             st = parse_type(meta.get("type", ""))

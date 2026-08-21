@@ -7,241 +7,359 @@
   "filePrefix": "rv3.",
   "fileExtension": ".mp3",
   "totalShlokas": 58,
-  "availableCommentaries": {},
+  "availableCommentaries": {
+   "pavamanacharya_english": "Huli V. Pavamanacharya (English Translation)"
+  },
   "colophon": "इति तृतीयस्सर्गः"
  },
  "shlokas": {
   "1": {
    "sa": "अवनं सवनादिसत्क्रियाणामवनीदानववैरिणां निदानम् । भवति स्म मुनीशितागुणानामवलम्बो भुवि गौतमाभिदानः ॥ १ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "In the past, there was a great sage by name Gouthama on this earth. He was not only a protector of virtuous rites like study of Vedas, performance of Japa and Yajna but also a strict performer himself of those rites. Being the originator of the Brahmin lineage, he was most kind and helpful to others. He was also an embodiment of virtues like tranquillity, self restraint and refrainment from sensual pleasures which were the essential features of a sage."
+   }
   },
   "2": {
    "sa": "प्रकृतिः परदेवताप्रपत्तिप्रभृतीनां करणेन सद्गुणानाम् । प्रथितव्रततापसन्न्रजानां विकृतीनां सगुणेव निर्गुणेष्ट्याः ॥ २ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The Vedas have prescribed two kinds of yaga namely Prakritiyaga and Vikritiyaga. A yaga in which the instruction about all the constituents are found is Prakritiyaga, otherwise it is Vikritiyaga. In Vikrityaga, the essential constituents are to be construed from prakritiyaga. Among these two Prakratiyaga is superior. Likewise the sage Gouthama who was an embodiment of such noble qualities as profound devotion towards that supreme Soul Lord Sri Narayana was more superior like Prakrithiyaga in comparison with those sages who were like Vikritiyaga."
+   }
   },
   "3": {
    "sa": "अकृतासुरसार्थमोहनार्थं नयशास्त्रं स तु पञ्चलक्षणात्मा । मुहुरागमभेदकृन्मुनीन्दोरवतारस्य निमित्ततामयासीत् ॥ ३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Intending to stupefy those in whom the viciousness of the asuras was inherent i.e to bring about nescience in those who were not worthy of achievement of salvation, the sage Gouthama wrote 'Nyayasutra', a literary work on logic which comprised five chapters. The composition of this book resulted in sage Gouthama becoming instrumental in the incarnation of the patriarchal sage Lord Sri Vedavyasa who segregated the Vedas into different branches and sub branches. Explanation: There are two categories of people on this earth namely those who deserve salvation and those who do not. The sage Gouthama wrote 'Nyayasutra' with the intention of stupefying those who were not worthy of achievement of salvation. Study of that literary work by those vicious souls deprived them of achievement of salvation. When the virtuous who studied that book too were in a state of perplexity, Lord Sri Narayana incarnated as Sri Vedavyasa and segregated the Vedas. Then Sri Vedavyasa wrote Brahmasutras depicting the true meaning of the Vedas and inculcated it to those virtuous souls. Thus the sage Gouthama became instrumental in the incarnation of Sri Vedavyasa."
+   }
   },
   "4": {
    "sa": "अधरीकृतलेखपाललोके बहुमुक्ताफलभाजि साधुवृत्ते । अभवन्नविभाविताग्रभागे मुनिवंशे वसुधासुधाशनेशाः ॥ ४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The lineage of Gouthamagothra whose grandeur and glory dispised even those of Devendra's Amaravathi was endowed with men and women of noble qualities and good deportment. Many virtuous Brahmins took birth in that gothra which continued uninterruptedly."
+   }
   },
   "5": {
    "sa": "जनकोपमकन्यकेन्वयेस्मिन्निजताताधिकनन्दने गुणौघैः । अनुजातसमानपूर्वजातेऽभवदेको भुवि कृष्णनामधामा ॥ ५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Krishnacharya, a great soul took his birth in Gouthamagothra in which lineage the countenance of the girls resembled that of their fathers, the boys with their virtuous dispositions were sources of delight for their fathers and the eldest sons had great love and affection for their younger brothers."
+   }
   },
   "6": {
    "sa": "स दधार धरोदरे प्रसिद्धा निरवद्या विविधा द्विजातिविद्याः । स बभूव च वैणिको यथार्थं निजविद्याधरतां विधातुकामः ॥ ६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Krishnacharya acquired a flawless knowledge renowned as most suitable for Brahmins. Intending to learn the art of playing veena in which his ancestors had great expertise, he strove hard to reach that goal and ultimately emerged as a great exponent of veena."
+   }
   },
   "7": {
    "sa": "उपदिश्य स कृष्णभूपलारेर्निजगान्धर्वकलां कलामगृह्णात् । घनमौक्तिकगुच्छहारपूर्वां बिरुदालीं गुरुदक्षिणापदेशात् ॥ ७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When Krishnadevaraya, the emperor of Vijayanagar placed his request before Krishnacharya to teach him the art of playing veena, Krishnacharya imparted only a portion of his knowledge of music and of his expertise in playing veena to Krishnadevaraya. The emperor paid his gurudakshina to Krishnacharya by felicitating him with gifts of large garlands of pearls in bunches and a bracelet studded with gems along with a title and a citation befitting his scholarship."
+   }
   },
   "8": {
    "sa": "गुणवारिधिराविरास विद्याचणकृष्णार्यमहीसुराधिनेतुः । कनकाचलनामपुण्यनामा कनकोर्वीभृदिवापरोतिधीरः ॥ ८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Krishnacharya, the nonpareil who had his fame spread to all the corners for his learning of the highest repute begot a virtuous son sacredly named as Kanakachala. Being embodiment of virtues like an ocean and also being possessed with qualities like courage and firmness, Kanakachala was shining like the golden Meruparvatha."
+   }
   },
   "9": {
    "sa": "उदभूदभिमूतले द्विजेन्द्रादधिभूरागममौलितन्त्रभाजाम् । अवदन् किल तिम्मणार्यमार्यास्सुहृदो वेङ्कटशैलनाथनाथम् ॥ ९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "A son by name Thimmannabhatta was born to Kanakachalabhatta, a Brahmin of pre-eminence. Thimmannabhatta received acclamation from his intimate associates and other men of learning as the greatest among the scholars of Vedanta and also as a man of profound devotion in Lord Sri Srinivasa."
+   }
   },
   "10": {
    "sa": "अधिकृत्य स बाल्य एव शास्त्राण्यधिकं वैणिकवर्णगानविद्याम् । नगरं विजयाख्यमध्यतिष्ठज्जननीतातसुहृज्जनाधिवासम् ॥ १० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thimmannabhatta adorned with such great qualities learnt Vyakarana and other Shastras in his boyhood itself. He also mastered all the genres of art of playing veena and also of the music by studying under the experienced exponents of veena which received allround acclamation. He resided at Vijayanagar itself where his parents and relatives lived."
+   }
   },
   "11": {
    "sa": "स्मृतिवन्निगमस्य पद्मिनीवद्दिननाथस्य मुनेररुन्धतीव । रजनीसुहृदः कुमुद्वतीव महिला तस्य ललास गोपिकाम्बा ॥ ११ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "As Smrities were to the Vedas, lotus to the sun, Arundhathi to Vasistha, water lilies to the moon, so was Gopikamba who shone splendidly as the wife of Thimmannabhatta. Explanation: Gopikamba who was always in agreement in all the matters with her husband like smrities were always in conformity with the Vedas; Who constantly rejoiced at the sight of her husband like the blooming lotus did when it saw the sun rising in the horizon; Who had the chastity of Arundathi, the wife of Vasistha; and who was like water lilies which blossomed when the moon appeared in the sky, shone splendidly as the wife of Thimmannabhatta."
+   }
   },
   "12": {
    "sa": "अभजन्नृपतेर्दिनप्रदीप्तं स तु विश्वक्प्रबलं प्रतापरश्मिम् । दिनमप्यनुवर्तितस्य शान्त्यै स्वसमानेतरवाक्तमिस्रराशेः ॥ १२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Many scholars whose scholarship could not match the erudition of Thimmannacharya used to come to the royal court of the Vijayanagar King. Thimmannacharya triumphed over such scholars in the debates and received the honour of carrying a torch with him wherever he went in the day time by the king. It appeared as though he held that torch which emitted rays of blaze around it to vanquish the darkness of the words of those scholars which could not be destroyed even by the sun and which existed even during the day time and also at the places embellished by the splendour of the gems."
+   }
   },
   "13": {
    "sa": "ध्रुवमेष दिनप्रदीपमागाद्दयिताकीर्तितमो गुणप्रमायै । गुणिनः सकलस्य बाह्यतेजोयुतचक्षुर्विषयत्वमादधानः ॥ १३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "It is an established fact that the assistance of the light of sun, moon, fire and other such things is essential to see an object. The ignominy of the antagonists of Thimmannabhatta who were defeated in debates had spread like darkness to some places. It appeared as though Thimmannabhatta was searching for that ignominy in the darkness with the help of that torch."
+   }
   },
   "14": {
    "sa": "यजनादिमनैजकर्म कुर्वन् द्विजवर्यो नगरे चिरं न्यवात्सीत् । रमणीमणिगोपिकाम्बयासौ सहितश्चन्द्रिकया सहेव चन्द्रः ॥ १४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Performing the virtuous rites which were customary to his religious order, the eminent Brahmin Thimmannacharya lived with his lovely wife Gopikamba like a full moon in moonlight in Vijayanagar for a long time."
+   }
   },
   "15": {
    "sa": "नगरान्निरगान्नरेन्द्रयोग्यात् सहजायः ससुहृज्जनोऽसुती सः । अखिलाथिंतदानदक्षशेषाचलभूषामणिदेवतां दिदृक्षुः ॥ १५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The happy Thimmannacharya was aspiring for long to have the darshan of Lord Sri Srinivasa who adorned Seshachala and who bestowed all who had given themselves to Him with the four goals of a soul like salvation, etc. With the purpose of getting his wish accomplished he, accompanied by his wife and close associates left Vijayanagar which had earned the reputation as a city most suited for the emperors and the kings to live in."
+   }
   },
   "16": {
    "sa": "तनुजानतुलानवाप्तुकामौ तपसा तोषयतःस्म दम्पती तौ । निजवंशजवन्दनीयदेवं परथापत्यसुखं कथं जनानाम् ॥ १६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The couple Thimmannacharya and Gopikamba who had an inordinate desire to get noble sons performed the vows like Krichra and Chandrayana invoking their family deity Lord Sri Srinivasa. The Lord was pleased by their devotedness. How could one get children if he does not worship with such devotion and perform such vows?"
+   }
   },
   "17": {
    "sa": "अथ तुण्डिरमण्डलेऽग्रहारे लसिते पट्टणनाम्नि वासयोग्ये । कमलारमणं प्रसाद्य कान्तामिलितः कानपि वत्सराननैषीत् ॥ १७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "After returning as ordained by Lord Sri Srinivasa who was gratified by the devotedness of the couple, Thimmannacharya spent some years with his wife Gopikamba worshipping Lord Sri Lakshminarayana at a temple in an agrahara at Kaveripatna, a place most suitable to reside in Kanchi Province."
+   }
   },
   "18": {
    "sa": "सुषुवे सुगुणां सुतां सुवेषां गुणसिन्धुं तनयं च गोपिकाम्बा । अचिरेण जनिष्यमाणसूनोरतुलां कीर्तिमिव क्रमात्प्रतापम् ॥ १८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "After some time Gopikamba gave birth to a virtuous and beautiful baby girl. Then she gave birth to a noble baby boy. The baby girl and the baby boy respectively shone as the exceptional fame and the prowess of another baby boy to be born in future."
+   }
   },
   "19": {
    "sa": "कुलदैवतदैशिकप्रसादात्प्रभवापत्यपुरस्सरोऽतुलश्रीः । स चकार च वेङ्कटांबिकाख्यां स्वसुताया गुरुराजनाम सूनोः ॥ १९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thimmannacharya who got such noble children with the blessings of Lord Sri Srinivasa, his family deity and of his Kulaguru (The preceptor of his family) named his daughter as Venkatamba and his son as Gururaja."
+   }
   },
   "20": {
    "sa": "मिलितौ खलु दर्शपूर्णमासौ फलदौ तद्वदसौ सुतोऽसहायः । न सुखाय भवेदितीव सोऽयं प्रभुमन्यं सुतमर्थयांबभूवे ॥ २० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Is it not a fact that the two yagas Darsha and Poornamasa in co-ordination with each other would lead one who conducts those yagas to heaven? Likewise Thimmannacharya who had an opinion that his son Gururaja alone might not be able to bring happiness to them without the association of a helpful younger brother prayed Lord Sri Srinivasa to bless them with another son."
+   }
   },
   "21": {
    "sa": "महिदासमिवेतरा महान्तं हरिदिन्दुं च यथेव पौरुहूती । उरुशेवधिमुर्वरेव तस्मादुदरेऽधत्त कुमारमुत्पलाक्षी ॥ २१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "After some days, Gopikamba whose eyes resembled the petals of blue lotus saddled Thimmannacharya's son in her womb in the same manner as Itharadevi carried the Lord in his incarnation as Mahidasa, in her womb; the full moon shining in the east; and the fertile land containing abundant treasure beneath."
+   }
   },
   "22": {
    "sa": "शशिनाथकला किमब्धिवेला निजभर्तुः फलिता नु पुण्यरेखा । किमु साकृतिरागतस्य कीर्तिर्धृतमूर्तिः किमु कौमुदी किमेषा ॥ २२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The people used to wonder exaggeratedly whether the pregnant Gopikamba was the bower of the enchanting moonlight or the seacoast abundant with heaps of white sand or the pile of matured moral merit of Thimmannacharya or the embodiment of her husband's fame or of the child in her womb or the personification of moonlight?"
+   }
   },
   "23": {
    "sa": "उदरस्थसुतेन्दुचन्द्रिकायां विततायामखिलाङ्गपाण्डुतायाम् । सहितौ सुतनोरुरोजचक्राविति चक्रं न तपोनिधिर्यदन्तः ॥ २३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The body of the pregnant Gopikamba had turned creamy white. The poet has exaggeratedly narrated that the resplendence of the baby saddled in her womb resembling the moonlight has permeated her entire body resulting it to turn creamy white. Further comparing the bosoms of Gopikamba to a pair of Brahmany ducks, the poet has described that though it is natural for those ducks to get separated in the moonlight, her plumpy bosoms have remained closely intact even in that moonlight which has permeated her body, because of the presence of that ascetic baby in her womb."
+   }
   },
   "24": {
    "sa": "तनुशायिशिशोर्विरागता किं वितताऽङ्गेषु विशाललोचनायाः । परथा सततं हिते तरुण्या रुचিতে वस्तुनि किंतरां विरागः ॥ २४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The pregnant Gopikamba had developed a sort of detachment from relishing her favourite dishes and also from taking bath and wearing ornament. The poet has justified that it is natural that she had developed such detachment as the renunciation of that ascetic baby saddled in her womb had permeated all over her body."
+   }
   },
   "25": {
    "sa": "न परं सदृशं प्रसन्नतायैर्धवलिम्नाऽपि तदाननं सुधांशोः । अकलङ्कतयाऽवनौ प्रसिद्धं सकलङ्केन कथं समत्वमेति ॥ २५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Though the moon is splendidly shining with qualities like tranquility and pellucidness, he cannot resemble that beautiful face of Gopikamba, because the face of that devoted and virtuous Gopikamba which has received laudation as taintless all over the world cannot be compared with the moon who is not blemishless. Therefore Gopikamba's face can be compared with Gopikamba's face only."
+   }
   },
   "26": {
    "sa": "कृशताऽजनि याऽवलग्नदेशे ववृधेऽङ्गे कतिचिद्दिनान्यशेषे । वशतां नहि याति मध्यसंस्थाप्युपचारेण विना घनाश्रिताल्पा ॥ २६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The emaciation that occurred initially in the hip region of the pregnant Gopikamba spread gradually to her whole body as the days passed on. Wicked men turn out to be vexatious even for their patrons if they are not appeased with money and gifts. Likewise though Gopikamba's haunch rested on her plumpy posteriors, that plumpness did not spread to her body as it lacked proper nourishment resulting from her refusal to have sufficient food."
+   }
   },
   "27": {
    "sa": "सभयो विधुरेष सह्यकेयात्स्वमपहृत्य निगूहितुं प्रवृत्तः । निजलक्ष्म निरस्य रोमराजिं निभृतोगर्भमुपेयिवानमुष्याः ॥ २७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The fascinating bosoms of Gopikamba were very hard and her teats had turned blackish as was natural for a woman in her pregnancy. It appeared as though those bosoms of Gopikamba had accepted the quality of blackness to enamour her husband."
+   }
   },
   "28": {
    "sa": "कमितुः किमु मोहनाय कामोऽकृत कामं कठिनौ कुचौ तदीयौ । निजचुचुकनीलिमापदेशादचिरोपात्तमोगुणावभूताम् ॥ २८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The moon who was scared of Rahu, the son of Simhike must have decided to hide somewhere. Therefore he must have entered and disappeared into the womb of Gopikamba leaving his distinctive stain outside on the pretext of staying in the form of bunch of hairs on her abdomen."
+   }
   },
   "29": {
    "sa": "ततनामिनिभालबालमध्यादुदयद्रोमलताऽऽस्य कल्पशाखी । फलितोऽजनि किं पयोधराभ्यामुदयच्चुचुकनैल्य भृङ्गभाभ्याम् ॥ २९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When the sapling of Palmyra tree is planted and fed with water through a long basin round its foot, it produces fruits which are black in colour. When those fruits become ripe, black bees sit at the top of those fruits. Keeping that comparison in mind, the poet has interestingly described the bunch of black hairs on the abdomen of the pregnant Gopikamba originating from her broad navel as palmyra tree, the bosoms above that as the fruits and the teats of those bosoms as the bees sitting at the top of the fruits."
+   }
   },
   "30": {
    "sa": "कुचयोर्युगलं कुलाद्रिसारं कथमेषा तु बभार गर्भकाले । इति विस्मयता कुतः कवीनां फलिनीं चिन्तयतां सुरद्रुशाखाम् ॥ ३० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "A pregnant woman would be very weak naturally. One need not get astonished as to how the weak body of Gopikamba could bear the weight of such plumpy bosoms, because though the branch of Kalpavruksha is very small, it holds fruits of great significance. Neither the men of knowledge nor the poets get astonished by the fact that Gopikamba's fragile body has endured the weight of such plumpy bosoms. The baby in her womb like the fruits of Kalpavruksha fulfils the wishes of the virtuous. Gopikamba who is saddled with such a fruit (baby) in her womb resembles Kalpavruksha. This is the idea of the poet in this stanza."
+   }
   },
   "31": {
    "sa": "तनयाभ्युदयादृणत्रयस्याप्यपनोदं कमितुर्विधातुमस्याः । पुरतोऽकृत तस्य लक्ष्मरेखात्रिवलीरूजभवो निरस्तररूपाः ॥ ३१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The Shruti proclaims that the three obligations accompany a brahmin at the time of his birth. It is his duty to clear the first obligation by studying the Vedas under a guru in his celibacy, and the second by performing yajnas after his marriage. Thimmannacharya has already got himself freed of these two obligations. He is yet to clear the third obligation by producing children which he is sure to accomplish with the birth of a virtuous son. Hence Brahma must have wiped out this triad deciding that there is no need of it when all the three obligations have been cleared."
+   }
   },
   "32": {
    "sa": "विमतं निखिलं च दृश्यभावाद्भवित सत्यमितीदृशानुमाने । अधिमध्यमपास्य हेत्वसिद्धिं प्रथिमा क्रोऽपि शनैःशनै र्जृजृम्भे ॥ ३२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The poets while representing the features of the women have portrayed their hip region as invisible because of its frailness. As the hip region is invisible in the views of the poets and when the existence of the whole world is proved by logical reasoning with the example of a visible object, that reasoning with regard to the visibility of the hip region which is a part of this world has failed to prove its visibility from the world's perspective. But as Gopikamba's haunch grew more and more corpulent as was natural for those women in their pregnancy, it gained the feature of visibility thus getting rid of the refutation that the logical reasoning of visibility is absent there."
+   }
   },
   "33": {
    "sa": "उदरे सुतनोरचाक्षुषत्वं शुभरूपे महति प्रवेशहीनम् । विहितं त्रिवलाविवेतदङ्गे पशुयूपे यदरत्निसाप्तदश्यम् ॥ ३३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Though the yupastambha (a post to which the sacrificial victim is fastened) of a length of seventeen Aratni (a cubit of the middle length from the elbow to the tip of the little finger) is imperative for Vajapeyayaga, the yupa would find no place during the yaga. Hence that precept would be regarded as yupastambha in connection with the sacrifice of an animal which is a constituent of that yaga. Likewise the invisibility of the hip region of that beautiful Gopikamba who was in her pregnancy having failed to enter her large belly entered the triad in her belly."
+   }
   },
   "34": {
    "sa": "उदरस्थशिशोरुदेष्यतोऽस्य वसने लोहितमृत्तिकाऽनुरागः । इति तद्घटनाय किं नु शोणां मृदमासेवत सादरं मृगाक्षी ॥ ३४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Gopikamba whose eyes resembled those of an antelope must have been eating red soil wishing that the attire of the child in her womb gets its redness. Explanation: It is natural that the women in their pregnancy relish red earth and Gopikamba was no exception. The poet has dexterously described that Gopikamba must have been eating red soil expecting that its redness spreads to the raiment of the child saddled in her womb so that he could wear it after his birth when he attains sanyasa in his youth."
+   }
   },
   "35": {
    "sa": "द्युनदीं यमुना विजेतुकामा कुरलालिच्छलतो नु कोमलाङ्ग्याः । कुचमेरुयुगान्निपत्य रोमावलिदम्भादगमच्च मध्यदेशम् ॥ ३५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The river Yamuna desirous of conquering the Ganga must have reached the hip region of the beautiful Gopikamba flowing through the bunch of her blackish hairs tingled into curls and descending from the pair of her plumpy bosoms which resembled Meruparvatha and must have transformed herself into the bunch of hairs adorning the abdomen of Gopikamba."
+   }
   },
   "36": {
    "sa": "वसुधासुखवासस्य गर्भे कृतवासस्य नतभ्रुवोर्मकस्य । अजनिष्ट मनोरथोनुरूपः क्रमशः प्राप्तवति द्वितीयमासे ॥ ३६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When that distinguished Brahmin child saddled in the womb of Gopikamba, that beautiful woman with curved eyebrows, became two month old, she began to have desires suited to that stage of pregnancy."
+   }
   },
   "37": {
    "sa": "भवने भुवनं कृशानुसप्तं परिक्लृप्तं नवशातकुम्भकुम्भैः । अपहाय नदीपयो हिमानीधवलं केवलमैच्छदच्छबुद्धिः ॥ ३७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Gopikamba who had a pure mind never liked water which was pasteurised and stored in golden pots at home. Instead she had a liking for river water which was very pure and was as cold as ice. Explanation: It signifies the fact that the child saddled in the womb would renounce the worldly pleasures after his birth and would live on the banks of the river."
+   }
   },
   "38": {
    "sa": "रसनानयनान्तरङ्गरम्यं भवने भोजनसाधनं विसृज्य । परकीयगृहादुपाहृतं तद्रुचिरं वारुचि वाप्यभुङ्क्त सैषा ॥ ३८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Gopikamba refused to eat the enticing and sumptuous food prepared delectably at home but relished the dishes brought from the houses of others irrespective of their taste. Explanation: Alms brought from the houses of others serves a sanyasi well. Thus the fact that Gopikamba had a liking for the food brought from other houses signifies that the child saddled in her womb becomes a sanyasi in future."
+   }
   },
   "39": {
    "sa": "विदुषी विविधाः कथा वितेने विहगाधीश्वरवाहनाह्वयाङ्काः । वदति स्म वदावदावलीनां वसति स्मासन एव संततं सा ॥ ३९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The scholarly Gopikamba who was unable to move freely because of the weight of the foetus in her womb used to sit most of the time on clothes and mats spread on the ground. She wrote and composed many essays, stories, poems and songs under the pen name 'Garudavahana'. Being a good orator, she used to explain well the contents of her writings to her friends. Explanation: The idea that her to be born child would in future adorn the religious throne of that Jagadguru Sri Madhwacharya and would also write many scholarly great literary works and impart Tattvajnana to his disciples is sounded here."
+   }
   },
   "40": {
    "sa": "पदमेकमलक्तकेन हीनं पदमेषा विदधाति नाङ्गणेपु । विविधानि विसृज्यपूर्णसंध्या समरागाणि सदाम्बराणि वष्टि ॥ ४० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Gopikamba seldom placed her foot in the courtyard of her house without applying the essence of lac to her feet. Though she had attires of different colours and shades in her wardrobe, she used to wear only attires whose colour resembled the morning twilight. Explanation: It is an indication of the fact that the child saddled in her womb would become a saint who always wears red clothes."
+   }
   },
   "41": {
    "sa": "स कदाचन शोभनेऽह्नि सूनोर्विदधे पुंसवनच्छलेन भुक्तिम् । पटपक्कफलेन गर्भभाजो जनिशिष्टोस्य अवेदितीव धर्मः ॥ ४१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "On an auspicious day, Thimmannacharya celebrated the pumsavana function (religious rite held on the mother's perceiving the first signs of a living conception) by squeezing the juice of ashwagandhi (physalis flexuosa) fruit tied in cloth into the nostrils of the pregnant Gopikamba and inducing the effects of enjoyment of eating and contentment in the child saddled in her womb. Vedas and shastras have prescribed this rite for the child."
+   }
   },
   "42": {
    "sa": "असविष्ट सुतं द्विजेन्द्रपत्नी शुभलग्ने परिपूर्णदृष्टिभाजि । अखिलद्विजराजवन्दनीयं द्विजराजं दिगिवामराधिपस्य ॥ ४२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Gopikamba, the wife of that virtuous Brahmin Thimmannacharya gave birth to a baby boy adorable and laudable by all the Brahmins of pre-eminence. The baby was born at the most auspicious time beheld by the planets of full moon and Guru on a morning which was reminiscent of the birth of the moon on a full moon day in the east which is known as belonging to the sun."
+   }
   },
   "43": {
    "sa": "सहितात्मजजन्मवाक्सुधाब्धेस्सरितोसौ सलिले ममज्ज विप्रः । द्विजवन्द्यमहोदये पितॄणामृणपङ्काम्बुनिधेस्तदोन्ममज्ज ॥ ४३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The news of birth of a baby boy reverable by all the Brahmins itself was like an ocean of nectar for Thimmannacharya. Hence the moment he learnt the news, he took a holy dip by jubilantly jumping into the sacred river and also drowned in that ocean of nectar thus extricating himself from the slush of"
+   }
   },
   "44": {
    "sa": "भुवनेस्य समोर्भकस्य दृष्टो न मयेतीव वदन् स्वहेतिहस्तात् । परितो वलतस्तुरीयधर्मे हविरादाज्जनकार्पितं हुताशः ॥ ४४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thimmannacharya, the father of the baby boy performed the birth celebration rite (celebrations in connection with the birth of a child) along with homa. When he offered ahuti (oblation) during the homa, it appeared as though Agni (god of fire) who received that ahuti with his hands which were in the form of wantoning blaze was indicating that he had never seen one who was equal to that child in practicing the sanyasa dharma so rigidly."
+   }
   },
   "45": {
    "sa": "प्रददौ बहुकर्मधारयेण स्वबहुव्रीहिमुपादे द्वयाग्न्यान् । स तु तत्पुरुषैः पुनर्वितीर्णान्रचितद्वन्द्वफलान् धृताव्ययित्वात् ॥ ४५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Before performing that rite, Thimmannacharya generously donated gifts of grains like rice, paddy, etc to the deserving brahmins and in turn accepted their blessings in the form of consecrated rice which had the power to bestow temporal as well as heavenly benefits."
+   }
   },
   "46": {
    "sa": "अचिरात्कृतमज्जनोतिशुभ्रः सहसाऽप्राप्तरजस्तमोगुणोयम् । कथमिन्दुसमोन्मथेति कान्तानिकरो वर्णयति स्म सूतिकान्तः ॥ ४६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When the child was given the sacred oil bath it began to dazzle like the stainless moon without any contact with rajas and tamas (dirt and darkness). All the women who had assembled in the room of the puerperal woman collectively extolled the baby as equal to the moon glowing spectacularly in the horizon."
+   }
   },
   "47": {
    "sa": "सहजो हि गुणो मदीयमज्जुद्विजसंसेवनमस्य मे पदस्य । इति दर्शयता पदं निजास्ये मणिडोलामधिशायिना कृतं किम् ॥ ४७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The child which was lying in the cradle studded with gems keeping its foot in its mouth and sucking the toe seemed to indicate that it was the inherent nature of its feet to be served by its tender teeth. Or, it appeared as though that the child was lying in the cradle studded with gems sucking its toe to signify that it was the inherent quality of its feet to get served by the pious vaishnavas."
+   }
   },
   "48": {
    "sa": "उदयास्तपटीरहेमपृथ्वीधरपर्यन्तधराचरैर्जनौघैः । अभिवन्द्य इतीव बालकस्य व्यतनोद्वेङ्कटनाथनाम तातः ॥ ४८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The people throughout this earth from Malayaparvata to Meruparvata, from Udayaparvata to Astaparvata eulogize the Lord Sri Srinivasa venerably. Likewise as an act of signifying that this child too would be venerated by all the people, the father of the child aptly named it Venkatanatha."
+   }
   },
   "49": {
    "sa": "घटते तनयेऽभिधा तदंशे गुणवृद्धयर्थमनुक्तिसिद्धये च । अतिदेशकृते हरेर्गुणानां विवदन्ते खलु जैमिनीयशौण्डाः ॥ ४९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Some scholars of Meemamsa who were present at the naming ceremony function opined that the child was named Venkatanatha to signify that he possessed the qualities inherent in that name. Some others were of the view that the child was named Venkatanatha so that he too could get those qualities, though they did not specifically say that the child had such qualities. Still some others thought that the purpose of naming the child thus was to convey that he too possessed the qualities as Lord Sri Harivenkatanatha possessed. It was the opinion of the rest that the name Venkatanatha perfectly suited the boy who had the full blessings of the Lord by virtue of being considered as a manifestation of the Lord."
+   }
   },
   "50": {
    "sa": "अधिसद्मतलं सुतस्य मूर्त्या स्फुटमङ्गीकृतजानुचंकमस्य । चतुरंघ्रिवृषाकृतेः कदाचित्सुरभेराकृतिरेकदाऽन्वकारि ॥ ५० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When the child began to crawl, it appeared as though he imitated Kamadhenu whose shape resembled that of the four legged Dharma. The adjectives used respectively denote that in future the child protects the four legged Dharma and fulfils the wishes of all the disciples as the Kamadhenu of Kaliyuga."
+   }
   },
   "51": {
    "sa": "तनयस्य नवप्रवालवल्लीलसदङ्गुष्ठविराजिताननाब्जम् । हृदयाम्बुजमन्तरात्मगर्भं प्रकटं दर्शयतीव सज्जनानाम् ॥ ५१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "It is quoted in the shastras that the Lord exists in the heart of a Jeeva in the size of his thumb and in his body in the size of his toe. The sight of the child sucking his pinkish thumb which was shining like a coralline creeper made one to feel as though it indicated that the Lord indwelling in the heart of a jeeva existed there in the size of the thumb of that Jeeva."
+   }
   },
   "52": {
    "sa": "विदधन्नवनौ निसर्गरक्तं प्रतिलीलं मुहुुरुत्पतन्पतन्सः । लसतिस्म करिष्यमाणलक्ष्मीपतिपादानतिशीलनाय वैषः ॥ ५२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When one witnessed the child falling and getting up in the course of his playful acts which was natural for the children, it seemed that he must be rehearsing the act of humble prostration that he would be doing at the lotus feet of Lord Sri Lakshminarayana in the coming days."
+   }
   },
   "53": {
    "sa": "बहिरङ्गणसीम्नि केलिभाजः तनुलग्ना रजसां रराज राजिः । जगदात्मविकारसूक्ष्मरूपप्रकृतिर्विष्णुगतेव दृष्टियोग्या ॥ ५३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The inanimate nature which has a subtle form and which is under the protection of God results in the form of this world with his blessings. This inanimate nature would never be perceptible. But for the eyes of those who saw the body of this child smeared with dirt while he was playing in the dust outside his house, it appeared as though that inanimate nature had become perceptibly visible in the form of those specs of dust."
+   }
   },
   "54": {
    "sa": "महनीयगुणस्य मासि षष्ठे सुतमन्नाशननामधर्मवन्तम् । अतनिष्ट ततस्तृतीयवर्षे चतुरस्यास्य चकार चौलकर्म ॥ ५४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The pious Thimmannacharya performed Annaprashana (the ritual of the first morsel) and choula (tonsure ceremony) to his virtuous son of dexterity in his third month and sixth year respectively."
+   }
   },
   "55": {
    "sa": "विलिख्य भूमौ प्रथमं कुमारं रेखामिमामोमिति संपठेति । पित्रा नियुक्तः पुनरब्रवीत्तमलपे कथं सा गुणपूर्णसंज्ञा ॥ ५५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When Thimmannacharya who decided to teach alphabets to the child, wrote the letter Om on the ground and asked him to pronounce that letter correctly as Om, the boy questioned his father as to how such a small letter could expound the Lord Sri Narayana who is the embodiment of infinite qualities and who has his divine presence pervading all over the universe."
+   }
   },
   "56": {
    "sa": "इति वदन्तमवेक्ष्य सुहृज्जनाः श्रुतिशिरोदृढवासनमानसन् । कथमयं शिशुदीदृशवाक्पिता सुकृतवानिति विस्मयिनोऽभवन् ॥ ५६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Those who had assembled there were astonished by the ingrained maturity of the boy who had his mind firmly focussed on the Upanishads. They wondered as to how a small boy like him could talk like a great scholar. They also felt that the father of such a child was really very fortunate."
+   }
   },
   "57": {
    "sa": "तनुजामष्टाब्दां ससहजयुगां काव्यकुशलां सुभद्रां भद्राङ्गीमिव मुसलिकंसारिसहिताम् । स दद्यां कस्मैचद्विदितकुलसंजातविदुषे चकारेत्थं बुद्धिं तनयवदनालोकमुदितः ॥ ५७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thimmannacharya was highly elated when he saw the face of Venkatanatha raising that question. By that time his eldest daughter eight year old beautiful Venkatamba had attained good knowledge in Kavyashastra. She looked like Subhadra amidst Balarama and Krishna in the company of her brothers Gururaja and Venkatanatha. Thimmannacharya decided to search for a suitable match for her from a noble family of scholars."
+   }
   },
   "58": {
    "sa": "श्रीमत्कश्यपवंशवार्धिशशिनः षड्दर्शनीवल्लभ- श्रीलक्ष्मीनरसिंहवित्तविदुषः श्रीवेङ्कटाम्बामणौ । जातेनार्यदयासुधामयगिरा नारायणेनोदिते काव्ये चारुणि राघवेन्द्रविजये सर्गस्तृतीयोऽभवत् ॥ ५८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thus concludes the third canto of the epic \"Sri Raghavendravijaya\" enchanting with nectareous words composed by Narayanacharya with the blessings of his father. Narayanacharya who had his education from his father was the Son of the couple Venkatamba and Lakshminarashimhacharya who was an erudite scholar in all the six shastras and who was born and shone like a moon in the ocean of Kashyapa gothra named after that virtuous and scholarly sage Kashyapa. English translation of the third canto of the epic \"Sri Raghavendravijaya\" composed by Sri Narayanacharya concluded."
+   }
   }
  }
 }

@@ -17,6 +17,15 @@ def main(tid):
         mod = __import__(modname); getattr(mod, fn)()
     elif tid.startswith("bulk:"):
         import gretil_bulk; gretil_bulk.run(tid.split(":", 1)[1])
+    elif tid.startswith("chanakya_"):
+        import chanakya
+        chanakya.run(tid)
+    elif tid == "kamandaki":
+        import kamandaki
+        kamandaki.run(tid)
+    elif tid.startswith("wikisource_"):
+        import wikisource_ayurveda
+        wikisource_ayurveda.run(tid)
     elif tid == "darshana_all":
         import darshana_gretil as D
         for key in D.DARSHANA_GRETIL:

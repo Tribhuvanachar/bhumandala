@@ -13,9 +13,16 @@
     "  labels             every button and hint on the first screen",
     "  sections           the contributor bands, in the order they appear. Each has",
     "                     id, icon, eyebrow, name, sub, meta[], blurb, items[],",
-    "                     panel (which Know More sheet it opens), moreLabel, todo",
+    "                     panel (which Know More sheet it opens), moreLabel, todo.",
+    "                     ONE EXCEPTION: the section with panel:\"contributors\" has",
+    "                     no items[] here on purpose -- its list is read live from",
+    "                     admin/content/reader.json's CONTRIBUTORS_CONFIG instead,",
+    "                     so there is one editable contributor list, not two that",
+    "                     can drift apart. Edit that list from the reader app's own",
+    "                     About panel, not here.",
     "  panels             the Know More sheets, keyed by the name a section's",
-    "                     `panel` gives. Each has eyebrow, title, reverence, body,",
+    "                     `panel` gives (except \"contributors\", see above). Each",
+    "                     has eyebrow, title, reverence, body,",
     "                     groups[] (heading, icon, entries[] of name + note), closing",
     "  footer.lines       the closing lines, each { sa, latin }",
     "",
@@ -83,20 +90,8 @@
       "name": "Aniruddha · Sameer",
       "sub": "and other sevaks",
       "blurb": "This library is kept alive by hands that rarely appear on any page. With gratitude to every sevak who has given time to it.",
-      "items": [
-        {
-          "name": "Aniruddha",
-          "note": "Audio processing and preparation."
-        },
-        {
-          "name": "Sameer",
-          "note": "Text preparation and OCR assistance."
-        },
-        {
-          "name": "And other sevaks",
-          "note": "Data management and the many behind-the-scenes services that keep this library growing and accessible."
-        }
-      ],
+      "moreLabel": "Know More",
+      "panel": "contributors",
       "todo": ""
     }
   ],
@@ -108,9 +103,9 @@
       "todo": "To fill in: his āśrama lineage, his maṭha, and a short account of his life and teaching."
     },
     "tribhuvan": {
-      "eyebrow": "Initiated, Architected & Developed by Tribhuvan (3BHU1)",
+      "eyebrow": "I owe everything to..",
       "title": "My Gurus, Blessers & Inspirers",
-      "reverence": "With gratitude and reverence to my Gurus and well-wishers who guided, inspired and strengthened this journey. I bow to them at whose feet this seva is offered.",
+      "reverence": "With gratitude and reverence to my Gurus and well-wishers who guided, inspired and strengthened my spiritual journey. I bow to them at whose feet this seva is offered.",
       "groups": [
         {
           "icon": "home",

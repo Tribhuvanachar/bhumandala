@@ -7,185 +7,275 @@
   "filePrefix": "rv5.",
   "fileExtension": ".mp3",
   "totalShlokas": 44,
-  "availableCommentaries": {},
+  "availableCommentaries": {
+   "pavamanacharya_english": "Huli V. Pavamanacharya (English Translation)"
+  },
   "colophon": "इति पञ्चमस्सर्गः"
  },
  "shlokas": {
   "1": {
    "sa": "अथ विवाहसमुत्सुककन्यकागुणमणी पितरौ निजमन्दिरात् । अगमतामभिवीक्षतुमादराद्दूरमुपागतमात्मपुरोदरम् ॥ १ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Venkatanathacharya who came to the bride's village along with his mother and his kin entered the house which was meant for their stay. The parents of Saraswathi, that virtuous bride who were longing to conduct her marriage were elated when they learnt that the bride groom had arrived at their village. They immediately left for the house where he stayed."
+   }
   },
   "2": {
    "sa": "द्रुतमुपेत्य वरं पितरौ चिरान्मुहुरवेक्ष्य मुदं समवापतुः । पदयुगप्रणतस्य यवीयसोऽस्य चतुरस्य समाशिषमूचतुः ॥ २ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The parents of the bride who expeditely reached the house where the bridegroom stayed were highly elated when they saw him. When Venkanathacharya, a man of dexterity and perspicacity prostrated at their feet, they blessed him befitting that moment."
+   }
   },
   "3": {
    "sa": "समसमाः परिषस्वजिरे मुदाऽधिकसमान्पृथुकाः प्रणमन्ति च । बहुवयोभिरिता बहुलाशिषं जगदिरे विविषेष्वपि बन्धुषु ॥ ३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Among the near and dear ones who had assembled there, those who were of the same age hugged each other. The younger ones paid their obeisance to the elders. The aged blessed the youngsters who paid their respects to them. Thus everybody felicitated each other with mutual affection and respect befitting their status."
+   }
   },
   "4": {
    "sa": "निजगृहोपमनैजनिकेतनं जितविशालपुरं निजसंपदा । अनयतां विनयावनतं वरं ससुहृदं सुहृदा सह दम्पती ॥ ४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The parents of the bride took the unpretentious bridegroom and his kin to another house of their own before whose grandeur even the splendour of Ujjain appeared pale."
+   }
   },
   "5": {
    "sa": "बहुविधं परमान्नरसायनं वरनरोभ्यवहृत्य तदाहृतम् । निबिडपट्टवितानकशीतलेप्यहह तुष्टुवुरातपभोजनम् ॥ ५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The relatives and the friends of Venkatanathacharya who were seated in the cool shadow of the marriage pandal which had a canopy made of thick cloth of silk and plant fibre, were treated to a sumptuous hot meal constituted with dishes of all the six savours like sweet pudding and many other sweets. The gratified guests contentedly exclaimed \"Aahaha\" in appreciation of the bride's parents."
+   }
   },
   "6": {
    "sa": "अभिदिदृक्षुजने वरमादरादुपगते भवनं तदनुज्ञया । कृतपरस्परसंक्थनो जनः सुखमुवास निशामिह वेश्मनि ॥ ६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The people who were eager to see the bridegroom who had come to their Agrahara came to the house where he stayed with the consent of the bride's parents. Then they mutually exchanged pleasantries and greetings with his people and happily spent that night there only."
+   }
   },
   "7": {
    "sa": "त्रिदशदेवदिशाधरकंधरे समुदिते नलिनीपरिणेतरि । त्रिपदया सवितारमृचा वरं परिणुवन्तमुपासत सज्जनाः ॥ ७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Next day when Venkatanathacharya was paying his obeisance with \"Gayatri Mantra\" to the Sun god in the course of his Sandhyavandana at dawn when the sun was just rising in the valley of the eastern mountain, all the men of worthiness came near him and recited the hymn of invocation of blessings."
+   }
   },
   "8": {
    "sa": "वसनवाहनकुङ्कुमचन्दनै र्विविधरम्यरसैः परिपूज्यतम् । त्वरितमारभताभ्युदयोत्सवं द्विजवरैः पितरौ सह सद्मनि ॥ ८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "At the time of the ritual of Kashiyatra, the parents of the bride gifted new clothes, vehicles like palanquin, as well as many gold ornaments to the bridegroom. They also respectfully saluted him by offering vermilion, sandal paste, sweet milk and other such sacred drinks. Then they along with other virtuous Brahmins started the prosperous ritual of Ashtavarga at their house."
+   }
   },
   "9": {
    "sa": "स्रगन्नवस्तूनि नवग्रहेभ्योप्यनुग्रहार्थं निरवग्रहार्थम् । कुतूहलात्तौ कुलदेवतायै समर्पयामासतुरादरेण ॥ ९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The parents of the bride with profound devotion, offered poornaphala (coconut) and other fruits to their family deity and grains like wheat, rice, etc. to Navagrahas (Nine planets) invoking their blessings to get rid off the possible future hindrances for successful conduct of the marriage."
+   }
   },
   "10": {
    "sa": "विरचय्य तु दीक्षितः प्रयाजं तनुते हन्त यथा प्रधानयागम् । अतनोत्किल कन्यकाप्रदानं मधुपर्कैरभिपूज्य तज्जनस्तम् ॥ १० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The bride's father worshipped the bridegroom by respectfully offering honey blent with milk prior to gifting him with the bride in conformity with the procedure as enjoined by the Shastras. All those who were part of the celebrations were highly delighted. It was like the master of a house engaged in deeksha conducting the main yajna after performing the Prayajahoma."
+   }
   },
   "11": {
    "sa": "वरमुखेन्दुविलोकनसंकुचल्लपनफुल्लसरोरुहकन्यकाम् । अयमपश्यदियं च वराननद्विजसखं ससितोत्पललोचना ॥ ११ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Then Venkatarya saw the face of Saraswathi which was blushed coyly as a result of her beholding his moon like face. Saraswathi too whose eyes resembled the blooming lily saw the moon like face of the bridegroom."
+   }
   },
   "12": {
    "sa": "इन्दुवदनाकलितमन्दहसनानां कुन्दरदनाहसितहंसगमनानाम् । कन्दुकसमाकृतिपयोधरयुगानां कन्तुनिजजङ्गमजयध्वजलतानाम् ॥ १२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "A young girl, the functional parts of whose beautiful body resembled the flowers of lotus and Ashoka (Jonesia Ashoka), the arrows of Manmatha; on whose face manifested a broad smile; whose body had the complexion of gold, exhibited her extreme gladness when she saw many virtuous married women coming to attend the wedding. Then she herself came forward and honoured those women by offering vermilion, turmeric, sandal paste, flowers, betel leaves and nuts to them."
+   }
   },
   "13": {
    "sa": "आगत्य द्रुतमबलाप्रहर्षणीकाप्यालोक्यागमनमनङ्गसायकाङ्गी । नारीणामुचिततराङ्गरागपुष्पैरानर्च स्मितलपनातिरोहितासु ॥ १३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Another girl whose face had the shine of moon saw some beautiful women coming there walking slowly. She came forward and honoured those women with sandalpaste and flowers. Yet another girl whose teeth resembled the jasmine buds voluntarily came forward to pay honours with turmeric, vermilion, sandalpaste etc. to many girls whose plumpy bosoms were like round balls; who looked like the moving victory flag of Manmatha; and whose grace in and pace of walking put even the swan to shame."
+   }
   },
   "14": {
    "sa": "जितनीलकण्ठशुकमञ्जुभाषिणी परपुष्टसद्युवतिगीतगीतितः । सदनप्रियालकुसुमालयो वधूवरवीक्षणागतसुरार्पिता इव ॥ १४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When those beautiful girls who had assembled there started singing melodiously with their sweet and mellifluent voices which put even the voices of the peacock, the parrot, the humble bee, the kinnara women and the cuckoo to shame, the priyala trees (Bhuchanania latifolia) strewed flowers all over the courtyard outside the marriage hall. Those who saw those flowers felt as though the devatas themselves who had descended on the earth to have a look at the bride and the groom must have showered them."
+   }
   },
   "15": {
    "sa": "प्रमिताक्षरामुचमनूद्य सुहृत्समुपाहृतान्यभिनवानि मुहुः । विविधानि पुरोहितजनावनयो र्वसनानि संसदि समर्पयताम् ॥ १५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Chanting short verses from the Vedas, the family priests of the bride and the groom handed over to the couple gifts like new clothes, etc. which were brought for them by their near and dear ones."
+   }
   },
   "16": {
    "sa": "मथनसंस्कृतिसंततसंभ्रमत्सितगुरूज्ज्वलदीपकभाजनम् । अनयतः स्म वधूवरसन्मुखं द्रुतविलम्बितमेत्य वराङ्गने ॥ १६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Two pious women holding a silver platter on which were placed two silver lamps which had the dazzle of Shukra and Guru rotating constantly as a result of the momentum caused by the churning of the ocean of milk, came near the newly married couple, and waved the platter and the lamps around that couple rapidly first and then slowly."
+   }
   },
   "17": {
    "sa": "नानाविद्याशालिनीवृद्घिभाजां भूदेवानां भूषणै राजमाना । वेदानुच्चैरुच्चरन्ती किरन्ती दम्पत्योरित्याशिषः संसदूचे ॥ १७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Loudly chanting Vedic hymns, the aged scholarly Brahmins who were adorned with new clothes as well as ornaments like earrings and rings showered consecrated rice on the heads of the couple and blessed them with words like...."
+   }
   },
   "18": {
    "sa": "बालावैतावाप्नुतां दीर्घमायुर्नित्यां प्रीतिं चाष्टपुत्रान्गुणाढ्यान् । शस्तं वित्तं संततिं शोभमानां सौख्यं धन्यौ धान्यभूगोसमृद्धिम् ॥ १८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Let this couple live long, let them have unhindered love and affection for each other, let them beget eight virtuous sons, let them earn sufficient wealth in a just and fair manner, let them beget children and grandchildren bestowed with constant fame and repute, let them always remain happy, let them plentifully get wealth in the form of grains, lands and estates and cows, let them become blest and righteous\". It was thus those aged Brahmins blessed the couple."
+   }
   },
   "19": {
    "sa": "इन्द्राणी बलरिपुवैरिणीव वाणी लोकेशे कलशपयोधिन्यकेव । गोविन्दे गरलगले गिरीन्द्रकन्या कन्या स्याद्दयितमनःप्रहर्षणीयम् ॥ १९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "\"Let this bride always bring happiness to her sweetheart like Shachidevi does to Devendra who hates 'Bala' his enemy; Saraswathi does to Brahma the master of this mankind; Lakshmidevi who emerged from the ocean of milk does to Lord Sri Govinda; and Parvathi, the daughter of Himaraja, the king of mountains does to Shiva who holds poison in his throat\". Thus those aged Brahmins blessed the bride too."
+   }
   },
   "20": {
    "sa": "नत्वा हरिं गुरुमनन्तरमार्यनारीसेवारतावसितवारिजलोचनाभिः । दृष्टौ वसन्ततिलकाविव तावभातां तत्रान्तरे सुकुतुकं सुमनःपरीतौ ॥ २० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The newly married couple paid their obeisance to Lord Sri Hari and Guru. Then they engaged themselves in extending their regardful hospitality to the elder Brahmins and women. When they stood there being curiously watched by those beautiful women whose eyes resembled the blue lily flower, they appeared splendid like two tilak trees (a species of tree with beautiful flowers) covered with beautiful flowers during the spring."
+   }
   },
   "21": {
    "sa": "नियुज्य वंशस्थनितम्बिनीवधूपिता वरीयार्यजनार्चनाकृते । वधूवरौ वारिजलोचनाभुभौ परस्परं भोजयितुं प्रचक्रमे ॥ २१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Many people who were related to the bride had come to attend the marriage. After the conclusion of all the rituals with regard to the marriage, the bride's father assigned the work of serving them food to some women who were born in noble families and who were well versed with customs and traditions. The bride and the groom whose eyes were as beautiful as lotus were shining with comeliness amongst these people. The bride's father himself came forward to assist the couple in having their food in a ritual known as 'Bhooma' when the couple relish their food from the same plantain leaf or silver plate."
+   }
   },
   "22": {
    "sa": "भूदेवान्मोजयित्वा तदनु तदुचितैरम्बरैर्दक्षिणाभि- स्ताम्बूलैस्तोषयित्वा विरचितनियमक्षीणहान्येवमेषः । विद्वत्सङ्घं निकामं विनयमुखगुणैर्नन्दयन्वेङ्कटार्यो दीक्षां प्राप्येव यज्वातदनु निशि मुदा शेषहोमं व्यतानीत् ॥ २२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The marriage celebrations of Sri Venkatarya lasted for three days. All the Brahmins were contented with sumptuous feast arranged on the occasion. Sri Venkatarya delighted those Brahmins by offering gifts in the form of clothes, money (dakshina) along with betel leaves and nuts befitting their stature. The scholars who were present there were highly impressed with the witty intellect, humility and magnanimity exhibited by Venkatarya. He finished Seshahoma after midnight on the fourth day like a performer of yaga engaged in deeksha does."
+   }
   },
   "23": {
    "sa": "आगच्छन्पथि वध्वा साकं सर्वैः समं निजग्रामम् । काननभूषु वधूनां दोहललक्ष्मीरपश्यदुरुमेधाः ॥ २३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thus after the successful conclusion of his marriage celebrations, Sri Venkatarya, a man of great intellect left for his place accompanied by his wife and the kin. On his way back, he interestingly watched some women who were accompanying them engage themselves in Dohalotsava in a garden."
+   }
   },
   "24": {
    "sa": "चकितहरिणशावकेक्षणस्त्रीचरणहतोपि पुनः पुनर्यदीयः । ननु हसितरामशोकशाखी प्रकटयितुं नितरामशोकभावम् ॥ २४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "There were many jungles which were full of Ashoka (jonesia asoka) trees on the return route of Sri Venkatarya. A beautiful girl whose eyes resembled those of a frightened calf of a deer kicked one of those trees. But that tree did not ventilate its grief. It remained smiling continuously even when it was being repeatedly kicked probably to justify its appellation which meant one without grief. Those who saw flowers in abundance adorning the tree felt as though it was smiling (there is a belief that Ashoka tree yields flowers when it is kicked by beautiful women)."
+   }
   },
   "25": {
    "sa": "कुरबकविटपे कृशेशयाक्ष्याः कुचयुगलस्तबकेन कोमलाङ्ग्याः । किमुकृत समवायिना वसन्तस्तबककुलानि तदाकृतीनि यस्मिन् ॥ २५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "There is a belief that the tree of Amaranth yields flowers when beautiful women embrace it according to Dohashastra which is also confirmed by the opinion of the poets. The poet, with this belief in mind, has described that when a beautiful woman with lotus like eyes embraced the Amaranth tree, bunches of flowers in the shape of the bosom of a girl covered the entire tree. It appeared as though that the spring (Vasantha) must have skilfully created those bunches of flowers in plenty in the shape of the bosoms of that beautiful girl who embraced the tree."
+   }
   },
   "26": {
    "sa": "बकुलतरुरवाप्य वारिजाक्ष्या मुखरससेवनमुन्नतोऽबलायाः । प्रतिकृतिमकृतेव पक्ष्मलाक्ष्याः प्रसवपरंपरया तदङ्गभाजा ॥ २६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Keeping in mind the belief that the Bakula (Nagakesari - Mimusops elengi) tree yields flowers when a beautiful girl puts some vinous drink in her mouth, rinses and sprinkles it on that tree, the poet has given this description. There were number of Bakula trees along the route through which Venkatanathacharya and his wife were passing. When a beautiful girl from their group sprinkled some vinous drink on one of the trees from her mouth, flowers in large numbers instantaneously appeared on its branches. For an onlooker, it looked like the image of that beautiful girl who too was decorated with flowers."
+   }
   },
   "27": {
    "sa": "कुवलयदलनीललोचनाभिस्तिलकतरुष्ववलोकितेषु नूनम् । प्रतिफलितविलोचनानि नो चेत्समरुचिभाञ्जि कथं सुमानि तेषाम् ॥ २७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When those beautiful girls who had eyes like blue lily, set their eyes on tilak tree (a species of trees with beautiful flowers) which were abundantly present all along their way, those trees started sparkling yielding thousands of flowers. But the men of passion thought that they were not flowers but the images of the eyes of those beautiful girls permeating the entire tree. If they were flowers, why did they appear like the beautiful black eyes of those pretty girls?"
+   }
   },
   "28": {
    "sa": "परिहसनपराः पयोरुहाक्ष्यः सुमकपटेन हसन्तमाबबन्धुः । व्रततिततिभिरञ्जना नमेरुं परिहसतीति विलोक्य किं मदीयम् ॥ २८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When those pretty girls with lotus like eyes were smiling while walking in the jungle, they saw a Nameru (the Alexandrian laurel) tree with full of flowers. They mistook those flowers as the smile of the tree. Misapprehending that the tree must be imitating them, they got enraged and tied it up with creepers."
+   }
   },
   "29": {
    "sa": "करपरिमलनात्कुशेशयाक्ष्याः प्रतिविटपं विकचप्रसूनशाली । सभयमभिनिरीक्षितावकाशो व्यपगतनिद्र इवास यत्र चूतः ॥ २९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The mango tree started shining elegantly even with its smallest branch covered with flowers, by the mere touch of those beautiful girls who had lotus like eyes. When those girls set their sights on those branches which had no flowers, the tree looked like on gazing astonishingly frightened after getting up from his sleep."
+   }
   },
   "30": {
    "sa": "कुवलयदलनीललोचनानां तनुरुचिमीक्षितुमीक्षितोऽङ्गनाभिः । तिलकतरुरुदग्रसूनजालैर्दशतलोचनतामवाप नूनम् ॥ ३० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When those beautiful girls set their sights on the tilak tree, it yielded flowers in abundance so much so that those flowers covered the entire tree. One who saw those flowers felt as though that the tree must have gained thousands of eyes to take pleasure in beholding the loveliness of the bodies of those girls whose black eyes resembled the petals of lily."
+   }
   },
   "31": {
    "sa": "शुकपिककलकण्ठकिन्नरस्त्रीस्मयहरविस्मयगानमानताङ्ग्याः । सकुतुकमुपकर्ण्य संमुदेन प्रसवकुलं प्रववर्ष किं प्रियालः ॥ ३१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Those girls who had beautiful eyes and slightly curved bodies sang astonishingly so as to destroy the pride of the parrot, the cuckoo, the pigeon and the kinnara women. The Priyala (Bhuchanania latifolia) tree which became oblivious of its surroundings in the melody of their music yielded flowers in abundance and showered those flowers on the girls. It appeared as though that the tree yielded flowers only to shower those flower on the girls."
+   }
   },
   "32": {
    "sa": "अशोकवृक्षाः कमलेक्षणानां मनोज्ञपादांबुजताडनेन । उल्लासमापुस्सहसा तदानीं यथैव लीलाकमलैर्युवानः ॥ ३२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When beautiful girls amusingly hit their sweethearts with lotus, they experience a feeling of exhilaration of their spirits. Likewise, when those girls with lotus like eyes smilingly struck and kicked the Ashoka trees, those trees too were extremely exulted."
+   }
   },
   "33": {
    "sa": "भुजालताभिस्तरुणीजनानां मदान्वितानां परिरम्भणेन । अगाद्विकासं कुरवोपि पश्चान्नदद् द्विरेफैः सुरवो बभूव ॥ ३३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When those charming girls who were intoxicated by their juvenility happily embraced the henna trees with their creeper like arms, those trees began to look splendid with abundant beautiful flowers. Though those trees had hoarse voices initially, that hoarseness turned mellifluous when the buzzing bees which were attracted by the flowers started to fly around them."
+   }
   },
   "34": {
    "sa": "चन्द्राननानां शफरेक्षणानां कुम्भस्तनीनां कुटिलालकानाम् । विलासिनीनां द्युतिमाललम्बे गण्डूषशीधोर्बकुलोवसेकात् ॥ ३४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The moment those pretty girls whose faces shone like moon, long coquettish eyes gleamed like fish, plumpy bosoms put the pot to shame, and who had their hairs twisted into ringlets, put some vinous drink into their mouths, rinsed and sprinkled it on Bakula (Nagakesara) trees, those trees started to yield flowers in large numbers and looked splendid covered by those flowers."
+   }
   },
   "35": {
    "sa": "आलोकनादायतलोचनानां मदोद्धतानां प्रकटानुरागम् । दधार शोभां तिलकद्रुमाणां पाली सभृङ्गैस्तबकैस्तदानीम् ॥ ३५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When those beautiful girls who had large eyes and who were intoxicated by their juvenility passionately set their oblique sights on the rows of tilak trees, the entire rows of trees looked comely being instantaneously adorned with plenteous bunches of flowers which were surrounded by thousands of buzzing bees."
+   }
   },
   "36": {
    "sa": "गीत्या महत्या कलकण्ठकण्ठ्या विकासमाधत्त तदा प्रियालः । तन्मञ्जरीषट्चरणादिगीत्या वियोगिनीचित्तमिदं विषादम् ॥ ३६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When a beautiful girl rendered a melodious song with her sweet voice, the priyala tree which was fascinated by the mellifluence of that voice blossomed with full of flowers. But when thousands of buzzing bees surrounded those bunches of flowers, those trees became melancholic as they could not put up with the din caused by constant whizz of those bees. This is really astonishing!"
+   }
   },
   "37": {
    "sa": "पद्माननानां वदनानिलेन श्रियं विवव्रे खलु सिन्धुवारः । बाहालतास्पर्शनतो रसालस्तदाङ्कुरैः कण्टकितो व्यलासीत् ॥ ३७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The Sindhuvara tree (Vitex negundo) looked splendid with yield of flowers in large numbers, just when those charming girls with lotus like faces blew air at it through their mouths. On the other hand, when those pretty girls embraced the mango tree with their creeper like arms, it appeared beautiful when it yielded sprouts of flowers."
+   }
   },
   "38": {
    "sa": "वार्ताविशेषैर्वनजेक्षणानां पिकप्रियानिःस्वनलालनीयैः । उदङ्कुरोभूदथ कर्णिकारो रागश्च यूनां हृदये तदानीम् ॥ ३८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The Karnickara (red water-lily) tree shone splendidly with sprouts of flowers when it heard those women with lotus like eyes talking passionately with sweet voices which resembled the mellifluous voice of the female cuckoo. It was then that the hearts of young boys too experienced impassionate feelings of love."
+   }
   },
   "39": {
    "sa": "मुखानुरागान्महिलाजनानां चाम्पेयशाखी नवपल्लवौघैः । समुत्थितैस्तत्क्षणजातशोभैस्तदाऽनुरागी समभूद्विचित्रम् ॥ ३९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "It is surprising that as soon as those pretty girls sprayed the reddish spittle of the chewed pungent and aromatic blend of betel leaf and its ingredients like betel nut, spices and caustic lime on the champak tree, it too turned red and shone splendidly with new shoots of leaves!"
+   }
   },
   "40": {
    "sa": "यासां नमेरुः कुचगौरवेण तुलायितो नाजनि हासपात्रम् । नकारयुक्तत्पदवाच्यभूरुहो जहास हासैः कुसुमैश्च तासाम् ॥ ४० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When some people compared the heavy plumpy bosoms of those beautiful girls to Meruparvata, the latter became a target for derision. When some other people said that as those bosoms are weightier than Meruparvata, they cannot be compared with the latter, then also it became a target for ironical contempt. Those girls too laughed at it sarcastically. Incited by their sarcastic laugh, its enemy Nameru tree (Alaxandrian laurel) too appeared to laugh on the pretext of yielding flowers."
+   }
   },
   "41": {
    "sa": "षडङ्घ्रिसंघारवकैतवेन गायन्मुदा माधवकीर्तिमुच्चैः । द्विजप्रवेकैर्यरुचत्प्रवीतः शुको यथा तत्र हि किंशुकद्रुः ॥ ४१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The sage Shukacharya while singing and reading the Vedas along with Vedangas explains their meaning to the virtuous Brahmins sitting around him so that they clearly apprehend everything about the greatness of Lord Sri Lakshminarayana, the consort of Goddess Lakshmi. Likewise the parrot surrounded by many birds sings the significance of the spring and the month of Vaishakha in a voice more audible than that of the bees. Similarly it appeared as though that the Kimshuka (Butea frondosa) tree itself sang the greatness of Vasantha Madhava and Vasantha Madhusudana more audibly than the commotion caused by the group of bees. Thus that tree which was surrounded by many birds looked splendid like the sage Shukacharya and the parrot in that garden."
+   }
   },
   "42": {
    "sa": "किंशुकः कुसुममालया वने फुल्लया च नितरां विदिद्युते । दानवारिमसुरान्त्रमालया मण्डितं खलु विडम्बयन्निव ॥ ४२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The Kimshuka tree adorned with bunches of blooming flowers shone splendidly in that garden as though it was imitating Lord Sri Narasimha decorated with the garland of intestines of that demon Hiranyakashipu whom he had killed. Or it can also be said that it appeared as though it was deriding the Lord."
+   }
   },
   "43": {
    "sa": "स इत्थमालोक्य वनं गतानां विलासिनीनां विहृतिप्रभेदान् । उपेन्द्रवज्रायितकायसारो गृहं प्रविश्याब्दगणान्मुमोद ॥ ४३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thus Venkatanathacharya, whose sturdy physical frame resembled Vajrayudha, the weapon of Devendra reached his village after watching different games played by those wanton women in the garden on his way back. Thereafter he led his life happily with his wife for many years in his house. As Venkatanathacharya's mind and body were as strong as Devendra's Vajrayudha, his act of witnessing different games of those coquettish girls did not arouse any feelings of perturbation either in his mind or his body."
+   }
   },
   "44": {
    "sa": "श्रीमत्कश्यपवंशवार्धिशशिनः षड्दर्शनीवल्लभ- श्रीलक्ष्मीनरसिंहवित्तविदुषः श्रीवेङ्कटाम्बामणौ । जातेनार्यदयासुधामयगिरा नारायणेनोदिते काव्ये चारुणि राघवेन्द्रविजये सर्गोऽभवत्पञ्चमः ॥ ४४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thus concludes the fifth canto of the epic \"Sri Raghavendravijaya\" enchanting with ambrosial words composed by Narayanacharya with the blessings of his father. Narayanacharya who had his education from his father was the son of the couple Venkatamba and Lakshminarasimhacharya who was an erudite scholar in all the six Shastras and who was born and shone like a moon in the ocean of Kashyapagothra named after that virtuous and scholarly sage Kashyapa."
+   }
   }
  }
 }

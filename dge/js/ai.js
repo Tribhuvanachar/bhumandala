@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.7 (Ask Acharya honors the onboarding language preference)';
+window.DGE_VERSIONS['ai.js'] = 'v3.11 (merge of two v3.10 lines: shabda modal returns the prakriya -- the matched declension cell renders its sutra-by-sutra subanta derivation automatically via js/subanta-steps.js, every cell tappable, plus a "where else in the library" corpus-search link; AND the Dhatu word-tool instant in-page modal with the root\'s step-by-step derivation, plus Sandhi/Samasa word-tool buttons running a focused Ask Acharya (AI) query with an on-screen AI-only note)';
 
 // Appends a language directive read from onboarding.js's saved preference
 // (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
@@ -17,9 +17,16 @@ function dgeLangInstruction() {
 }
 
 // 1. Text Selection & Tooltip Event Listener
+//
+// No longer gated on is-authorized (admin AI-key unlock): the Shabda/Dhātu/
+// Where-else word tools (#wordToolsRow) need no AI at all and are this
+// app's own structured-data lookups, and askAcharya() already handles the
+// no-key-configured case on its own (a friendly "configure a key" message,
+// not a crash) -- so there was never a reason a plain reader couldn't even
+// SEE this tooltip. Previously this returned before the tooltip could ever
+// show for anyone without acharyaAuthorized set, which silently hid the
+// word tools from every ordinary visitor, not just Ask Acharya.
 document.addEventListener('selectionchange', () => {
-  if (!document.body.classList.contains('is-authorized')) return;
-
   const activeTag = document.activeElement ? document.activeElement.tagName : '';
   if (['INPUT', 'TEXTAREA'].includes(activeTag)) {
      const tooltip = document.getElementById('actionTooltip');
@@ -756,6 +763,15 @@ window.askAcharya = async function(e, type, payload) {
 
   window.currentAcharyaShlokaId = window.contextShlokaId || window.activeId;
 
+  // Sandhi/Samasa have no Vidyut-precomputed data behind them (unlike
+  // Shabda/Dhātu) -- this is a plain LLM call, so say so up front rather
+  // than let it look like the same kind of structured lookup. Set before
+  // the no-providers check below so it still shows on the "configure a
+  // key" message, which is exactly where a Sandhi/Samasa visitor most
+  // needs the explanation of why a key is required at all.
+  const aiOnlyNote = document.getElementById('acharyaAiOnlyNote');
+  if (aiOnlyNote) aiOnlyNote.style.display = (type === 'sandhi' || type === 'samasa') ? 'block' : 'none';
+
   const providers = dgeGetConfiguredProviders();
   if (providers.length === 0) {
     if (document.body.classList.contains('is-authorized')) { window.openKeyModal(); return; }
@@ -778,8 +794,9 @@ window.askAcharya = async function(e, type, payload) {
     text = getText(window.currentAcharyaShlokaId).replace(/<[^>]*>/g, '');
   }
 
-  // "Word" genuinely needs a specific selection — can't run without one.
-  if (type === 'grammar' && !text) {
+  // "Word", "Sandhi" and "Samasa" genuinely need a specific selection —
+  // can't run without one.
+  if ((type === 'grammar' || type === 'sandhi' || type === 'samasa') && !text) {
     if (typeof closeModal === 'function') closeModal('acharyaModal');
     if (typeof showToast === 'function') showToast('Select a specific word first to ask for word-level analysis.');
     return;
@@ -851,6 +868,17 @@ ${extraFieldsPrompt}Format using clean markdown.${externalLinksNote}`;
       const fieldsList = dgeBuildFieldsForType(typeConfig || {});
       const fieldsPrompt = (fieldsList.length ? fieldsList : ['A natural translation']).map((f, i) => `${i + 1}. ${f}`).join('\n');
       promptText = `For this Sanskrit text: "${text}" (target language: ${targetLang} where relevant), provide:\n${fieldsPrompt}\nFormat cleanly using markdown.${externalLinksNote}`;
+  } else if (type === 'sandhi' || type === 'samasa') {
+      // Dedicated word-tool buttons (wordToolsRow), not one of the
+      // configurable Ask Acharya categories -- fixed instruction, no
+      // preset/customNotes layering. Vidyut has no precomputed sandhi or
+      // samasa data (see intellisense.js's own note that it "resolves
+      // inflected forms, not sandhi-joined ones"), so this is the LLM's
+      // own analysis; askAcharya() above shows acharyaAiOnlyNote to say so.
+      const instruction = type === 'sandhi'
+        ? 'Provide its Sandhi-vichcheda (sandhi split) into the original constituent words, naming the sandhi rule(s) involved and citing the Ashtadhyayi sutra number if you can identify one confidently. If no sandhi applies here, say so plainly.'
+        : 'Determine whether this is a Samasa (compound). If so, provide the Samasa-Vigraha: the Vigrahavakya (expanded phrase), the Samasta-pada, and the type of samasa (Tatpurusha, Dvandva, Bahuvrihi, Karmadharaya, Avyayibhava, Dvigu, etc). If it is not a compound, say so plainly.';
+      promptText = `You are a traditional Vyakarana Acharya. For this Sanskrit word: "${text}", ${instruction} Format using clean markdown.${externalLinksNote}`;
   }
 
   // Fresh top-level question — start a new conversation thread. Also
@@ -986,23 +1014,364 @@ function dgeHideActionTooltip() {
   if (tooltip) tooltip.style.display = 'none';
 }
 
-// Opens in a new tab, deliberately: the reader is mid-verse on this page,
-// and losing that position to look up one word's declension would cost
-// more than the lookup is worth.
+// Instant Śabda lookup modal: this used to open shabda.html in a new tab --
+// a full page navigation (blank paint, the whole declension-browser UI,
+// then a scroll-into-view) just to answer "what does this inflected form
+// decline from?". The reader never needed the browser UI for that, only
+// the one answer, so this fetches the same data directly and renders it
+// in a modal without leaving the page. A kṛdanta (verb-derived) match now
+// renders its real step-by-step derivation inline too, not just a link to
+// go read it elsewhere -- see dgeRenderShabdaKrt below.
+const DGE_SHABDA_MODAL_ID = 'dgeShabdaModal';
+let DGE_SHABDA_CACHE = null; // the parsed shabdapatha item list, fetched once per page load
+const DGE_KRT_NAME = { kta:'क्त', ktavatu:'क्तवतु', ktvA:'क्त्वा', tumun:'तुमुन्', Satf:'शतृ', SAnac:'शानच्', tavya:'तव्य', anIyar:'अनीयर्', yat:'यत्', Rvul:'ण्वुल्', tfc:'तृच्', lyuw:'ल्युट्' };
+const DGE_KRT_NAME_EN = { kta:'past passive participle', ktavatu:'past active participle', ktvA:'absolutive', tumun:'infinitive', Satf:'present participle, parasmaipada', SAnac:'present participle, ātmanepada', tavya:'gerundive', anIyar:'gerundive', yat:'gerundive', Rvul:'agent noun', tfc:'agent noun', lyuw:'action noun' };
+const DGE_VIBHAKTI = ["प्रथमा","द्वितीया","तृतीया","चतुर्थी","पञ्चमी","षष्ठी","सप्तमी","सम्बोधनम्"];
+
+function dgeShabdaEsc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+// Shared by every "instant word-tool" modal (Śabda, Dhātu, and any future
+// one) -- a single class-scoped stylesheet rather than one copy per modal
+// ID, so a second modal (dgeDhatuModal) built the same way gets the same
+// look for free instead of duplicating this block.
+function dgeEnsureWordModalStyle() {
+  if (document.getElementById('dgeWordModalStyle')) return;
+  const style = document.createElement('style');
+  style.id = 'dgeWordModalStyle';
+  style.textContent = [
+    '.dge-word-modal .dsm-word{font-size:22px;font-weight:700;color:var(--accent-red);margin:0 0 2px;}',
+    '.dge-word-modal .dsm-sub{font-size:12px;color:var(--muted-text);margin-bottom:14px;}',
+    '.dge-word-modal .dsm-kv{display:flex;gap:8px;padding:4px 0;font-size:13px;border-bottom:1px dashed var(--card-border);}',
+    '.dge-word-modal .dsm-kk{flex:0 0 100px;color:var(--muted-text);font-size:11px;text-transform:uppercase;letter-spacing:.4px;padding-top:2px;}',
+    '.dge-word-modal .dsm-kvv{flex:1;}',
+    '.dge-word-modal table.dsm-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px;}',
+    '.dge-word-modal table.dsm-table th,.dge-word-modal table.dsm-table td{padding:6px 8px;text-align:center;border-bottom:1px dashed var(--card-border);}',
+    '.dge-word-modal table.dsm-table th{color:var(--muted-text);font-size:10.5px;font-weight:700;}',
+    '.dge-word-modal table.dsm-table td:first-child,.dge-word-modal table.dsm-table th:first-child{text-align:left;color:var(--muted-text);}',
+    '.dge-word-modal table.dsm-table td.dsm-hl{background:rgba(226,102,74,.28);font-weight:700;border-radius:6px;}',
+    '.dge-word-modal .dsm-steps{list-style:none;margin:8px 0 0;padding:0;}',
+    '.dge-word-modal .dsm-steps li{display:flex;gap:10px;align-items:baseline;padding:5px 0;border-bottom:1px dashed var(--card-border);font-size:13px;}',
+    '.dge-word-modal .dsm-code{flex:0 0 62px;font-family:monospace;color:var(--muted-text);font-size:11px;}',
+    '.dge-word-modal .dsm-result{flex:1;font-size:15px;}',
+    '.dge-word-modal .dsm-loading{padding:24px 0;text-align:center;color:var(--muted-text);}',
+    '.dge-word-modal .dsm-empty{padding:12px 0;color:var(--muted-text);font-size:13px;line-height:1.6;}',
+    '.dge-word-modal .dsm-empty a{color:var(--accent-red);}',
+    '.dge-word-modal .dsm-full-link{display:block;text-align:center;margin-top:14px;font-size:12px;color:var(--muted-text);}'
+  ].join('\n');
+  document.head.appendChild(style);
+}
+
+// Builds (once) a modal-overlay/modal-content/modal-body shell in the
+// shared word-modal shape, and returns its body element for the caller to
+// fill in. `id` is the overlay's element id, `bodyId` the id given to its
+// body element, `headerHtml` the header <h3> content.
+function dgeEnsureWordModalShell(id, bodyId, headerHtml) {
+  if (document.getElementById(id)) return document.getElementById(bodyId);
+  dgeEnsureWordModalStyle();
+  document.body.insertAdjacentHTML('beforeend',
+    '<div class="modal-overlay" id="' + id + '">' +
+      '<div class="modal-content dge-word-modal" style="max-width:420px;">' +
+        '<div class="modal-header-sticky">' +
+          '<h3 style="margin:0; color:var(--accent-red); font-size:16px;">' + headerHtml + '</h3>' +
+          '<button class="btn-sm" onclick="window.closeModal(\'' + id + '\')" style="font-size:11px;">✖ Close</button>' +
+        '</div>' +
+        '<div class="modal-body" id="' + bodyId + '"></div>' +
+      '</div>' +
+    '</div>');
+  return document.getElementById(bodyId);
+}
+
+function dgeEnsureShabdaModal() {
+  dgeEnsureWordModalShell(DGE_SHABDA_MODAL_ID, 'dgeShabdaModalBody', '🔤 शब्दः · Śabda');
+  return document.getElementById(DGE_SHABDA_MODAL_ID);
+}
+
+function dgeFetchShabdaData(word) {
+  // Sharded by the word's first character (tools/build_shabda_shards.py):
+  // declension is suffixal, so a form's first akshara is its stem's --
+  // one ~100 KB shard answers instead of the whole 7.6 MB file. The full
+  // file remains the fallback for a missing shard (and for callers that
+  // pass no word).
+  const ch = String(word || '').trim()[0];
+  if (ch) {
+    const name = 'u' + ch.codePointAt(0).toString(16).padStart(4, '0') + '.json';
+    DGE_SHABDA_SHARDS = DGE_SHABDA_SHARDS || {};
+    if (!DGE_SHABDA_SHARDS[name]) {
+      DGE_SHABDA_SHARDS[name] =
+        fetch('data/vedanga/vyakarana/shabdapatha/by_akshara/' + name)
+          .then(r => r.ok ? r.json() : null)
+          .then(d => d ? (d.items || []) : null)
+          .catch(() => null);
+    }
+    return DGE_SHABDA_SHARDS[name].then(items =>
+      items !== null ? items : dgeFetchShabdaData());
+  }
+  if (DGE_SHABDA_CACHE) return Promise.resolve(DGE_SHABDA_CACHE);
+  return fetch('data/vedanga/vyakarana/shabdapatha/data.json')
+    .then(r => r.ok ? r.json() : { items: [] })
+    .then(d => { DGE_SHABDA_CACHE = d.items || []; return DGE_SHABDA_CACHE; })
+    .catch(() => { DGE_SHABDA_CACHE = []; return DGE_SHABDA_CACHE; });
+}
+let DGE_SHABDA_SHARDS = null;
+
+// Same exact-cell reverse lookup as shabda.js's findFormLocation, kept as
+// its own small copy since shabda.js's version lives inside that page's
+// own closure and this page (index.html) doesn't load shabda.js at all.
+function dgeFindShabdaForm(items, surface) {
+  const target = String(surface || '').trim();
+  for (let i = 0; i < items.length; i++) {
+    const cells = String(items[i].forms || '').split(';');
+    for (let c = 0; c < cells.length && c < 24; c++) {
+      const variants = (cells[c] || '').split('-');
+      for (let v = 0; v < variants.length; v++) {
+        if (variants[v].trim() === target) return { item: items[i], cellIndex: c };
+      }
+    }
+  }
+  return null;
+}
+
+function dgeShabdaDeclTable(forms, hlIdx) {
+  const cells = String(forms || '').split(';');
+  while (cells.length < 24) cells.push('');
+  let h = '<table class="dsm-table"><thead><tr><th></th><th class="deva">एक.</th><th class="deva">द्वि.</th><th class="deva">बहु.</th></tr></thead><tbody>';
+  for (let vb = 0; vb < 8; vb++) {
+    h += '<tr><th class="deva">' + DGE_VIBHAKTI[vb] + '</th>';
+    for (let n = 0; n < 3; n++) {
+      const idx = vb * 3 + n;
+      const hl = (hlIdx != null && idx === hlIdx);
+      const has = !!(cells[idx] || '').trim();
+      h += '<td class="deva' + (hl ? ' dsm-hl' : '') + (has ? ' sst-cell-hint' : '') + '"' +
+        (has ? ' data-ci="' + idx + '" title="रूपसिद्धिः — tap for the derivation"' : '') + '>' +
+        dgeShabdaEsc((cells[idx] || '').split('-').join(', ')) + '</td>';
+    }
+    h += '</tr>';
+  }
+  h += '</tbody></table>';
+  return h;
+}
+
+function dgeShabdaStepsHtml(steps) {
+  let last = '';
+  return '<ol class="dsm-steps">' + steps.map(function (st) {
+    const code = st[0];
+    if (st.length > 1) last = st[1];
+    return '<li><span class="dsm-code">' + dgeShabdaEsc(code) + '</span><span class="dsm-result deva">' + dgeShabdaEsc(last) + '</span></li>';
+  }).join('') + '</ol>';
+}
+
+// "Where else does this word occur" (§5.2): closes the shabda modal and
+// opens the global corpus search already searching for the surface form the
+// reader looked up. Rendered only when global-search.js is actually loaded
+// on this page, so the link can never be a dead end.
+function dgeShabdaWhereElseLink(surface) {
+  if (!(window.DGEGlobalSearch && window.DGEGlobalSearch.open)) return '';
+  return '<a class="dsm-full-link" href="#" data-dsm-where="' + dgeShabdaEsc(surface) + '">🔍 साहित्ये अन्यत्र — where else in the library ↗</a>';
+}
+function dgeShabdaWireWhereElse(body) {
+  const a = body.querySelector('[data-dsm-where]');
+  if (!a) return;
+  a.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (typeof closeModal === 'function') closeModal(DGE_SHABDA_MODAL_ID);
+    window.DGEGlobalSearch.open(a.getAttribute('data-dsm-where'));
+  });
+}
+
+// The matched (or tapped) declension cell's step-by-step subanta prakriyā,
+// via js/subanta-steps.js — the "Shabda must return the prakriyā" ask.
+// Degrades silently to the plain table when that script isn't loaded or the
+// engine can't load: the lookup's own answer never depends on it.
+function dgeShabdaSubantaSteps(body, item, ci) {
+  const S = window.DGESubantaSteps, box = body.querySelector('#dsmSteps');
+  if (!S || !box || ci == null || ci < 0) return;
+  const vb = Math.floor(ci / 3), vc = ci % 3;
+  S.css();
+  body.querySelectorAll('td.sst-cell-on').forEach(td => td.classList.remove('sst-cell-on'));
+  const cell = body.querySelector('td[data-ci="' + ci + '"]');
+  if (cell) cell.classList.add('sst-cell-on');
+  box.className = 'sst-panel';
+  box.innerHTML = '<div class="sst-loading">रूपसिद्धिः सज्जीक्रियते…</div>';
+  const expected = String(item.forms || '').split(';')[ci] || '';
+  S.derive(item.word, item.linga, vb, vc).then(function (results) {
+    if (!box.isConnected) return;
+    box.innerHTML = S.panelHtml(item.word, item.linga, vb, vc, results, expected);
+  }).catch(function () {
+    if (!box.isConnected) return;
+    box.innerHTML = '<p class="sst-note">Could not load the derivation engine — the forms above are unaffected.</p>';
+  });
+}
+
+function dgeShowShabdaNotFound(body, surface) {
+  body.innerHTML = '<div class="dsm-empty">No exact form found for "' + dgeShabdaEsc(surface) + '". ' +
+    'It may still be findable in the full word list — <a href="shabda.html?q=' + encodeURIComponent(surface) + '" target="_blank">search the full शब्दपाठः ↗</a>, or ' +
+    '<a href="#" id="dsmReportMissing">report this as missing</a>.</div>' +
+    dgeShabdaWhereElseLink(surface);
+  dgeShabdaWireWhereElse(body);
+  const rep = document.getElementById('dsmReportMissing');
+  if (rep) rep.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (typeof window.dgeReportMissingForm === 'function') window.dgeReportMissingForm(surface, 'shabda-modal');
+  });
+}
+
+// A form the Śabdapāṭha (fixed nominal stems) genuinely has no entry for
+// may still be a kṛdanta -- a word derived from a verb root (लभ्यः, from
+// लभ्+यत्) via tools/build_krt_form_index.py's reverse index. Renders the
+// real step-by-step derivation right here (Category 5's "Prakriya
+// integration in the modal"), fetched from the same per-root JSON
+// prakriya.js's krdanta.html view uses, not just a link to go read it on
+// another page.
+function dgeRenderShabdaKrt(body, surface, hit) {
+  const code = hit.c, krtKey = hit.k, rootPart = code.split('.')[0];
+  fetch('data/vedanga/vyakarana/prakriya/' + rootPart + '/' + code + '.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(function (d) {
+      const k = d && d.krt && d.krt.find(x => x.k === krtKey);
+      if (!k) { dgeShowShabdaNotFound(body, surface); return; }
+      body.innerHTML =
+        '<div class="dsm-word deva">' + dgeShabdaEsc(surface) + '</div>' +
+        '<div class="dsm-sub">कृदन्तः · ' + dgeShabdaEsc(DGE_KRT_NAME[krtKey] || krtKey) + ' (' + dgeShabdaEsc(DGE_KRT_NAME_EN[krtKey] || '') + ') · from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '"</div>' +
+        dgeShabdaStepsHtml(k.s) +
+        '<a class="dsm-full-link" href="krdanta.html#' + dgeShabdaEsc(code) + ':' + dgeShabdaEsc(krtKey) + '" target="_blank">View in full कृदन्त browser ↗</a>' +
+        dgeShabdaWhereElseLink(surface);
+      dgeShabdaWireWhereElse(body);
+    })
+    .catch(() => dgeShowShabdaNotFound(body, surface));
+}
+
 window.dgeOpenShabdaForSelection = function(e) {
   if (e) e.preventDefault();
   const word = dgeSelectedWordText();
   if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
   dgeHideActionTooltip();
-  window.open('shabda.html?q=' + encodeURIComponent(word), '_blank');
+  dgeEnsureShabdaModal();
+  window.openModal(DGE_SHABDA_MODAL_ID);
+  const body = document.getElementById('dgeShabdaModalBody');
+  body.innerHTML = '<div class="dsm-loading">खोजयति… searching “' + dgeShabdaEsc(word) + '”…</div>';
+  dgeFetchShabdaData(word).then(function (items) {
+    const loc = dgeFindShabdaForm(items, word);
+    if (loc) {
+      const it = loc.item;
+      const krtTag = (it.krt || '').split(',').filter(Boolean)
+        .map(k => DGE_KRT_NAME[k] || k).join(', ');
+      let h = '<div class="dsm-word deva">' + dgeShabdaEsc(it.word) + '</div>' +
+        '<div class="dsm-sub">' + dgeShabdaEsc(it.linga_iast || '') +
+        (krtTag ? ' · <span class="deva">' + dgeShabdaEsc(krtTag) + 'प्रत्ययान्तः</span>' : '') + '</div>';
+      if (it.artha) h += '<div class="dsm-kv"><div class="dsm-kk">अर्थः</div><div class="dsm-kvv deva">' + dgeShabdaEsc(it.artha) + '</div></div>';
+      if (it.artha_hin) h += '<div class="dsm-kv"><div class="dsm-kk">हिन्दी</div><div class="dsm-kvv">' + dgeShabdaEsc(it.artha_hin) + '</div></div>';
+      if (it.artha_eng) h += '<div class="dsm-kv"><div class="dsm-kk">English</div><div class="dsm-kvv">' + dgeShabdaEsc(it.artha_eng) + '</div></div>';
+      h += dgeShabdaDeclTable(it.forms, loc.cellIndex);
+      h += '<div id="dsmSteps"></div>';
+      h += '<a class="dsm-full-link" href="shabda.html#' + dgeShabdaEsc(it.id) + '" target="_blank">View in full शब्दपाठः browser ↗</a>';
+      h += dgeShabdaWhereElseLink(word);
+      body.innerHTML = h;
+      dgeShabdaWireWhereElse(body);
+      // The looked-up form's own step-by-step prakriyā renders right away
+      // (js/subanta-steps.js, the rupasiddhi WASM engine loaded lazily);
+      // any other cell in the table is tappable for its derivation too.
+      dgeShabdaSubantaSteps(body, it, loc.cellIndex);
+      body.querySelectorAll('td[data-ci]').forEach(function (td) {
+        td.addEventListener('click', function () {
+          dgeShabdaSubantaSteps(body, it, parseInt(td.dataset.ci, 10));
+        });
+      });
+      return;
+    }
+    const cp = word.codePointAt(0).toString(16).toLowerCase().padStart(4, '0');
+    fetch('data/vedanga/vyakarana/prakriya/krtindex/' + cp + '.json')
+      .then(r => r.ok ? r.json() : null)
+      .then(function (m) {
+        const hit = m && m[word];
+        if (hit) dgeRenderShabdaKrt(body, word, hit);
+        else dgeShowShabdaNotFound(body, word);
+      })
+      .catch(() => dgeShowShabdaNotFound(body, word));
+  }).catch(() => dgeShowShabdaNotFound(body, word));
 };
+
+// Instant Dhātu lookup modal, same reasoning as the Śabda one above: this
+// used to open dhatu.html/prakriya.html in a new tab for what is usually
+// just "which root, which form is this" -- now answered in a modal without
+// leaving the page, real step-by-step derivation included, not a link to
+// go read it elsewhere.
+//
+// Which lakara/purusha/vacana cell a surface form (e.g. उवाच) belongs to
+// isn't decidable client-side without scanning all ~2200 per-root prakriya
+// files (262 MB total), so tools/build_prakriya_form_index.py precomputes
+// a reverse index, sharded by the form's first Devanagari codepoint so a
+// single word-click only fetches one small shard.
+function dgeFindDhatuFormHit(word) {
+  const w = String(word || '').trim();
+  if (!w) return Promise.resolve(null);
+  const cp = w.codePointAt(0).toString(16).toLowerCase().padStart(4, '0');
+  return fetch('data/vedanga/vyakarana/prakriya/formindex/' + cp + '.json')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (m) { return (m && m[w]) || null; })
+    .catch(function () { return null; });
+}
+
+const DGE_DHATU_MODAL_ID = 'dgeDhatuModal';
+// Same lakara/puruṣa/vacana naming as prakriya.js's own LAKARA/PURUSHA/
+// VACANA -- duplicated rather than shared because that file's copies live
+// inside its own closure and this page doesn't load prakriya.js at all
+// (same reasoning as DGE_KRT_NAME above). Key order (0/1/2 for
+// prathama/madhyama/uttama puruṣa) matches tools/build_prakriya.py's own
+// "<lakara>.<purusha><vacana>" cell-key convention.
+const DGE_LAKARA = { Lat:'लट्', Lit:'लिट्', Lut:'लुट्', Lrt:'लृट्', Lot:'लोट्', Lan:'लङ्', VidhiLin:'विधिलिङ्', Lun:'लुङ्' };
+const DGE_LAKARA_EN = { Lat:'present', Lit:'perfect', Lut:'periphrastic future', Lrt:'future', Lot:'imperative', Lan:'imperfect', VidhiLin:'optative', Lun:'aorist' };
+const DGE_PURUSHA = ['प्रथमपुरुषः', 'मध्यमपुरुषः', 'उत्तमपुरुषः'];
+const DGE_VACANA = ['एकवचनम्', 'द्विवचनम्', 'बहुवचनम्'];
+
+function dgeEnsureDhatuModal() {
+  dgeEnsureWordModalShell(DGE_DHATU_MODAL_ID, 'dgeDhatuModalBody', '📚 धातुः · Dhātu');
+  return document.getElementById(DGE_DHATU_MODAL_ID);
+}
+
+function dgeShowDhatuNotFound(body, surface) {
+  body.innerHTML = '<div class="dsm-empty">No exact verb form found for "' + dgeShabdaEsc(surface) + '". ' +
+    'It may still be findable in the full धातुपाठः browser — <a href="dhatu.html?q=' + encodeURIComponent(surface) + '" target="_blank">search धातुपाठः ↗</a>, or ' +
+    '<a href="#" id="ddmReportMissing">report this as missing</a>.</div>';
+  const rep = document.getElementById('ddmReportMissing');
+  if (rep) rep.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (typeof window.dgeReportMissingForm === 'function') window.dgeReportMissingForm(surface, 'dhatu-modal');
+  });
+}
 
 window.dgeOpenDhatuForSelection = function(e) {
   if (e) e.preventDefault();
   const word = dgeSelectedWordText();
   if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
   dgeHideActionTooltip();
-  window.open('dhatu.html?q=' + encodeURIComponent(word), '_blank');
+  dgeEnsureDhatuModal();
+  window.openModal(DGE_DHATU_MODAL_ID);
+  const body = document.getElementById('dgeDhatuModalBody');
+  body.innerHTML = '<div class="dsm-loading">खोजयति… searching “' + dgeShabdaEsc(word) + '”…</div>';
+
+  dgeFindDhatuFormHit(word).then(function (hit) {
+    if (!hit) { dgeShowDhatuNotFound(body, word); return; }
+    const rootPart = hit.c.split('.')[0];
+    fetch('data/vedanga/vyakarana/prakriya/' + rootPart + '/' + hit.c + '.json')
+      .then(r => r.ok ? r.json() : null)
+      .then(function (d) {
+        const step = d && d.steps && d.steps[hit.k] && d.steps[hit.k][0];
+        if (!d || !step) { dgeShowDhatuNotFound(body, word); return; }
+        const parts = hit.k.split('.');
+        const lakara = parts[0];
+        const purusha = parseInt(parts[1][0], 10);
+        const vacana = parseInt(parts[1][1], 10);
+        body.innerHTML =
+          '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
+          '<div class="dsm-sub">from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '" · गणः ' + dgeShabdaEsc(d.gana != null ? d.gana : '') + ' · ' + dgeShabdaEsc(d.pada || '') + '</div>' +
+          '<div class="dsm-kv"><div class="dsm-kk">रूपम्</div><div class="dsm-kvv deva">' +
+            dgeShabdaEsc(DGE_LAKARA[lakara] || lakara) + ' (' + dgeShabdaEsc(DGE_LAKARA_EN[lakara] || '') + ') · ' +
+            dgeShabdaEsc(DGE_PURUSHA[purusha] || '') + ' · ' + dgeShabdaEsc(DGE_VACANA[vacana] || '') + '</div></div>' +
+          dgeShabdaStepsHtml(step.s) +
+          '<a class="dsm-full-link" href="prakriya.html#' + dgeShabdaEsc(hit.c) + ':' + dgeShabdaEsc(hit.k) + '" target="_blank">View in full प्रक्रिया browser ↗</a>';
+      })
+      .catch(() => dgeShowDhatuNotFound(body, word));
+  });
 };
 
 // "Intelligence mapping" -- where else the word appears in the corpus

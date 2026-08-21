@@ -6510,7 +6510,7 @@
     },
     {
       "path": "dge/data/vedanga/chandas/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Chandas"
     },
     {
@@ -6730,7 +6730,7 @@
     },
     {
       "path": "dge/data/vedanga/nirukta/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Nirukta"
     },
     {
@@ -8477,6 +8477,87 @@
       "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_yadupatyam/data.json",
       "populated": true,
       "title": "श्रीमन्न्यायसुधा — यादुपत्यम्"
+    },
+    {
+      "path": "dge/data/vedanga/vrittaratnakara/data.json",
+      "populated": true,
+      "title": "Vrittaratnakara"
+    },
+    {
+      "path": "dge/data/upaveda/kamashastra/kamasutra/data.json",
+      "populated": true,
+      "title": "Kamasutra"
+    },
+    {
+      "path": "dge/data/upaveda/kamashastra/pancashayaka/data.json",
+      "populated": true,
+      "title": "Pancashayaka"
+    },
+    {
+      "path": "dge/data/upaveda/kamashastra/smaradipika/data.json",
+      "populated": true,
+      "title": "Smaradipika"
+    },
+    {
+      "path": "dge/data/nitishastra/hitopadesha/data.json",
+      "populated": true,
+      "title": "Hitopadesha"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/bhavaprakasha_nighantu/data.json",
+      "populated": true,
+      "title": "Bhavaprakasha Nighantu"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/raja_nighantu/data.json",
+      "populated": true,
+      "title": "Raja Nighantu"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/vahata_ashtanganighantu/data.json",
+      "populated": true,
+      "title": "Vahata Ashtanganighantu"
+    },
+    {
+      "path": "dge/data/vedanga/vyakarana/shabdapatha/data.json",
+      "populated": true,
+      "title": "Shabdapatha"
+    },
+    {
+      "path": "dge/data/nitishastra/chanakya_niti/data.json",
+      "populated": true,
+      "title": "Chanakya Niti",
+      "addedAt": "2026-08-21"
+    },
+    {
+      "path": "dge/data/nitishastra/chanakya_sutra/data.json",
+      "populated": true,
+      "title": "Chanakya Niti Sutra",
+      "addedAt": "2026-08-21"
+    },
+    {
+      "path": "dge/data/nitishastra/kamandakiya_nitisara/data.json",
+      "populated": true,
+      "title": "Kamandakiya Nitisara",
+      "addedAt": "2026-08-21"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/madhava_nidana/data.json",
+      "populated": true,
+      "title": "Madhava Nidana",
+      "addedAt": "2026-08-21"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/sharngadhara_samhita/data.json",
+      "populated": true,
+      "title": "Sharngadhara Samhita",
+      "addedAt": "2026-08-21"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/susruta_samhita_sutrasthana/data.json",
+      "populated": true,
+      "title": "Susruta Samhita (Sutrasthana)",
+      "addedAt": "2026-08-21"
     }
   ]
 }
