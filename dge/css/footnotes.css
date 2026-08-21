@@ -52,3 +52,29 @@
 .dge-fn-item.dge-fn-verified .dge-fn-status { color: #4a9d5f; }
 .dge-fn-item.dge-fn-possible .dge-fn-status { color: var(--accent-gold, #E8B24D); }
 .dge-fn-item.dge-fn-unresolved .dge-fn-status { color: var(--muted-text, #8B7A63); }
+
+/* =========================================================================
+   AI-generated-content badge — a small, scannable "AI" pill shown next to
+   any commentary block or footnote entry an AI pipeline wrote (see
+   dgeIsAiGeneratedCommentaryKey in core.js for the naming convention this
+   marks). Deliberately terse (an icon-style badge, not prose) so it reads
+   at a glance rather than relying on a reader parsing a label's text —
+   "not author-verified" is the point, and a badge says that faster than
+   words buried in a title.
+   ========================================================================= */
+.dge-ai-badge {
+  display: inline-block;
+  font-family: var(--font-ui, inherit);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .03em;
+  line-height: 1;
+  padding: 2px 5px;
+  margin-left: 6px;
+  border-radius: 4px;
+  vertical-align: middle;
+  color: #fff;
+  background: var(--accent-gold, #E8B24D);
+  opacity: .85;
+  cursor: default;
+}

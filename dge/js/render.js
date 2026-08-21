@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v4.2 (list ("Full List") mode now paginates at 50 shlokas/page with its own Prev/Next nav instead of building one DOM card per shloka unconditionally -- was the actual crash/freeze on a large grantha\'s Full List view, e.g. a 2000-shloka Rigveda mandala)';
+window.DGE_VERSIONS['render.js'] = 'v4.3 (renderList: commentary titles now show a small "AI" badge -- dge-ai-badge, gated by core.js\'s dgeIsAiGeneratedCommentaryKey -- next to any AI-generated commentary, on top of v4.2\'s Full List pagination)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -261,7 +261,14 @@ function renderList() {
           const name = stotraData.metadata.availableCommentaries[cKey] || cKey;
           let convertedText = convertedCommentaries[cKey];
           let convertedName = typeof applyTransliteration === 'function' ? applyTransliteration(name, activeScript) : name;
-          commentaryHtml += `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}</div>${highlightText(convertedText, pattern)}</div>`;
+          // Small "AI" badge -- see dgeIsAiGeneratedCommentaryKey in core.js
+          // for the naming convention this checks. Distinct from (and in
+          // addition to) the "(Gemini, unreviewed)" text already baked into
+          // the label itself, since a badge is far more scannable than
+          // prose buried in a title a reader may not read closely.
+          const aiBadge = (typeof dgeIsAiGeneratedCommentaryKey === 'function' && dgeIsAiGeneratedCommentaryKey(cKey))
+            ? '<span class="dge-ai-badge" title="AI-generated -- not author-verified">AI</span>' : '';
+          commentaryHtml += `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}${aiBadge}</div>${highlightText(convertedText, pattern)}</div>`;
         }
       });
     }

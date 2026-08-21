@@ -1,12 +1,27 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.14 (KNOWN_COMMENTARY_LABELS: added pavamanacharya_english + gemini_padaccheda/gemini_anvaya/gemini_summary labels for the Raghavendra Vijaya OCR+Gemini enrichment pipeline -- on top of v3.13\'s merge: v3.12 dgeVisibleCommentaries copyright gating, v3.10 dgeStripEditionMarkers, unitId/jumpVedicId matching)';
+window.DGE_VERSIONS['core.js'] = 'v3.15 (dgeIsAiGeneratedCommentaryKey: gemini_/ai_-prefixed commentary keys are now the standing convention for anything an AI pipeline writes, checked by render.js to show a small "AI" badge -- on top of v3.14\'s KNOWN_COMMENTARY_LABELS additions for the Raghavendra Vijaya pipeline)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
 // fetch-relative path ("data/x/y/data.json", relative to this index.html
 // which itself lives inside dge/). Shared with library.js (the browser
 // modal), so both always agree on the same slug for the same file.
+// AI-generated-content convention, going forward: any commentary/field key
+// an AI pipeline writes (tools/gemini_enrich.py, tools/gemini_summarize.py,
+// or anything added later) MUST be prefixed "gemini_" or "ai_". This is the
+// one place the reader checks to decide whether to show the small "AI"
+// badge (see footnotes.css's .dge-ai-badge, used by render.js's commentary
+// blocks) -- a prefix convention rather than a maintained list, so a new
+// field added by a future pipeline is flagged automatically without
+// anyone having to remember to register it here. Matches this project's
+// "don't fabricate" rule (PROJECT_BRIEF.md): a reader should never mistake
+// unreviewed AI output for a vetted commentary, and a maintained list is
+// exactly the kind of thing that silently goes stale.
+window.dgeIsAiGeneratedCommentaryKey = function(key) {
+  return /^(gemini|ai)_/.test(String(key || ''));
+};
+
 window.dgeLibraryPathToFetchPath = function(catalogPath) {
   return catalogPath.replace(/^dge\//, '');
 };

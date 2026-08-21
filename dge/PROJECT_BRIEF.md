@@ -164,6 +164,15 @@ in digital form.
    This is scripture; invented content is worse than missing content.
 5. **Repository size budget** — the main repo stays under 1 GB. Corpora
    that exceed it get their own repo and a CDN (as the Kośa data did).
+6. **AI-generated content must be marked as such.** Any commentary/data
+   field an AI pipeline writes (Gemini padaccheda, anvaya, summary,
+   reference-resolution footnotes, etc.) uses a `gemini_`/`ai_`-prefixed
+   key — that prefix is the convention itself, checked by
+   `dgeIsAiGeneratedCommentaryKey()` in `core.js`, not a maintained list.
+   The reader shows a small "AI" badge (`.dge-ai-badge`, wired in
+   `render.js` and `footnote-engine.js`) next to any such content, so it
+   is never mistaken for an author-verified reading. New AI-writing tools
+   must follow the prefix when naming their output keys.
 
 ## 7. Guardrails for an AI assistant reading this
 
