@@ -18,6 +18,7 @@ code with a chance to drift apart.
 from __future__ import annotations
 
 import json
+import threading
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
@@ -54,17 +55,28 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def _accumulate_usage(usage_totals: dict, usage_metadata: dict) -> None:
+# Guards usage_totals dict mutation -- callers may run call_gemini() from a
+# thread pool for concurrency (see gemini_summarize.py's --concurrency), and
+# plain dict increments are not atomic across threads.
+_usage_lock = threading.Lock()
+
+
+def _accumulate_usage(usage_totals: dict, usage_metadata: dict, model_version: str | None = None) -> None:
     """Adds one call's usageMetadata (Gemini's own token accounting, as
     returned alongside the response) into a running totals dict, so a batch
     script can report real consumption instead of an estimate. Only called
     on a successful response -- a failed attempt (e.g. quota/overloaded)
     isn't billed output tokens and Gemini doesn't return usageMetadata for
-    it, so it is correctly left uncounted here."""
-    usage_totals["calls"] = usage_totals.get("calls", 0) + 1
-    usage_totals["prompt_tokens"] = usage_totals.get("prompt_tokens", 0) + usage_metadata.get("promptTokenCount", 0)
-    usage_totals["output_tokens"] = usage_totals.get("output_tokens", 0) + usage_metadata.get("candidatesTokenCount", 0)
-    usage_totals["total_tokens"] = usage_totals.get("total_tokens", 0) + usage_metadata.get("totalTokenCount", 0)
+    it, so it is correctly left uncounted here. Thread-safe."""
+    with _usage_lock:
+        usage_totals["calls"] = usage_totals.get("calls", 0) + 1
+        usage_totals["prompt_tokens"] = usage_totals.get("prompt_tokens", 0) + usage_metadata.get("promptTokenCount", 0)
+        usage_totals["output_tokens"] = usage_totals.get("output_tokens", 0) + usage_metadata.get("candidatesTokenCount", 0)
+        usage_totals["total_tokens"] = usage_totals.get("total_tokens", 0) + usage_metadata.get("totalTokenCount", 0)
+        if model_version:
+            # the concrete model an alias like "gemini-flash-latest" resolved
+            # to -- last call wins, which is fine for a same-alias batch run
+            usage_totals["model_version"] = model_version
 
 
 def _post(model: str, body: dict, api_key: str, usage_totals: dict | None = None) -> dict:
@@ -87,7 +99,7 @@ def _post(model: str, body: dict, api_key: str, usage_totals: dict | None = None
     except (KeyError, IndexError, json.JSONDecodeError) as e:
         raise GeminiError("bad_response", f"could not parse Gemini response: {e}")
     if usage_totals is not None:
-        _accumulate_usage(usage_totals, payload.get("usageMetadata") or {})
+        _accumulate_usage(usage_totals, payload.get("usageMetadata") or {}, payload.get("modelVersion"))
     return result
 
 

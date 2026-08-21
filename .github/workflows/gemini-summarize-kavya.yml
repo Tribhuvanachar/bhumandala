@@ -44,6 +44,14 @@ on:
         options:
           - gemini-flash-latest
           - gemini-flash-lite-latest
+      batch_size:
+        description: "Verses per Gemini request -- the cost lever (amortizes fixed prompt overhead across more verses; see tools/gemini_bench.py and dge/PENDING.md for the benchmark behind a given value). 1 = old one-verse-per-call behaviour."
+        required: true
+        default: "1"
+      concurrency:
+        description: "Parallel in-flight requests -- the time lever (does not change total tokens billed). 1 = sequential. Stay at/below whatever tools/gemini_bench.py's concurrency sweep found safe for your Gemini tier."
+        required: true
+        default: "1"
       direct_push:
         description: "Skip the review PR and push straight to main (bypasses human review -- use deliberately, e.g. once you've already spot-checked a smaller run's output)"
         required: true
@@ -72,13 +80,16 @@ jobs:
           FIELDS: ${{ inputs.fields }}
           LIMIT: ${{ inputs.limit }}
           MODEL: ${{ inputs.model }}
+          BATCH_SIZE: ${{ inputs.batch_size }}
+          CONCURRENCY: ${{ inputs.concurrency }}
         run: |
           if [ -z "$GEMINI_API_KEY" ]; then
             echo "::error::GEMINI_API_KEY repository secret is not set. Add it under" \
                  "Settings -> Secrets and variables -> Actions before running this workflow."
             exit 1
           fi
-          ARGS=(--sarga-dir "$SARGA_DIR" --cantos "$CANTOS" --fields "$FIELDS" --model "$MODEL")
+          ARGS=(--sarga-dir "$SARGA_DIR" --cantos "$CANTOS" --fields "$FIELDS" --model "$MODEL"
+                --batch-size "$BATCH_SIZE" --concurrency "$CONCURRENCY")
           if [ -n "$LIMIT" ]; then ARGS+=(--limit "$LIMIT"); fi
           python3 tools/gemini_summarize.py "${ARGS[@]}"
       - name: Validate corpus data
@@ -113,7 +124,8 @@ jobs:
           body: |
             Automated padaccheda/anvaya/summary generation via
             `tools/gemini_summarize.py` (model: `${{ inputs.model }}`,
-            fields: `${{ inputs.fields }}`).
+            fields: `${{ inputs.fields }}`, batch_size: `${{ inputs.batch_size }}`,
+            concurrency: `${{ inputs.concurrency }}`).
 
             Every output landed under a `gemini_padaccheda`/`gemini_anvaya`/
             `gemini_summary` key and is labeled "AI ..., unreviewed" in the

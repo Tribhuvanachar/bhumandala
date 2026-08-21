@@ -63,6 +63,95 @@ class TestAnalyzeShloka(unittest.TestCase):
         self.assertNotIn("Existing published", prompt)
 
 
+class TestAnalyzeBatch(unittest.TestCase):
+    def test_dry_run_batch_fills_all_verses(self):
+        chunk = [
+            ("1", {"sa": "verse one", "commentaries": {}}),
+            ("2", {"sa": "verse two", "commentaries": {}}),
+        ]
+        changed = gs.analyze_batch(chunk, None, "m", dry_run=True, force=False,
+                                    fields=["padaccheda", "anvaya", "summary"])
+        self.assertEqual(changed, 2)
+        for n_str, shloka in chunk:
+            self.assertIn("gemini_summary", shloka["commentaries"])
+
+    def test_blank_and_already_done_verses_are_skipped(self):
+        chunk = [
+            ("1", {"sa": "  ", "commentaries": {}}),
+            ("2", {"sa": "text", "commentaries": {"gemini_summary": "ORIGINAL"}}),
+        ]
+        changed = gs.analyze_batch(chunk, None, "m", dry_run=True, force=False, fields=["summary"])
+        self.assertEqual(changed, 0)
+        self.assertEqual(chunk[0][1]["commentaries"], {})
+        self.assertEqual(chunk[1][1]["commentaries"]["gemini_summary"], "ORIGINAL")
+
+    def test_results_are_matched_by_index_not_response_order(self):
+        chunk = [
+            ("1", {"sa": "verse one", "commentaries": {}}),
+            ("2", {"sa": "verse two", "commentaries": {}}),
+        ]
+        real_call = gs.call_gemini_for_batch
+
+        def fake_call(verses, api_key, model, usage_totals=None):
+            # deliberately return results out of order, tagged distinctly
+            return {"results": [
+                {"index": "2", "padaccheda": "P2", "anvaya": "A2", "summary": "S2"},
+                {"index": "1", "padaccheda": "P1", "anvaya": "A1", "summary": "S1"},
+            ]}
+        gs.call_gemini_for_batch = fake_call
+        try:
+            changed = gs.analyze_batch(chunk, "key", "m", dry_run=False, force=False,
+                                        fields=["padaccheda", "anvaya", "summary"])
+        finally:
+            gs.call_gemini_for_batch = real_call
+        self.assertEqual(changed, 2)
+        self.assertEqual(chunk[0][1]["commentaries"]["gemini_summary"], "S1")
+        self.assertEqual(chunk[1][1]["commentaries"]["gemini_summary"], "S2")
+
+    def test_verse_missing_from_response_is_left_alone_not_fabricated(self):
+        chunk = [
+            ("1", {"sa": "verse one", "commentaries": {}}),
+            ("2", {"sa": "verse two", "commentaries": {}}),
+        ]
+        real_call = gs.call_gemini_for_batch
+
+        def fake_call(verses, api_key, model, usage_totals=None):
+            return {"results": [{"index": "1", "padaccheda": "P1", "anvaya": "A1", "summary": "S1"}]}
+        gs.call_gemini_for_batch = fake_call
+        try:
+            changed = gs.analyze_batch(chunk, "key", "m", dry_run=False, force=False, fields=["summary"])
+        finally:
+            gs.call_gemini_for_batch = real_call
+        self.assertEqual(changed, 1)
+        self.assertIn("gemini_summary", chunk[0][1]["commentaries"])
+        self.assertNotIn("gemini_summary", chunk[1][1]["commentaries"])
+
+    def test_empty_chunk_after_filtering_makes_no_call(self):
+        chunk = [("1", {"sa": "text", "commentaries": {"gemini_summary": "X"}})]
+        real_call = gs.call_gemini_for_batch
+
+        def fake_call(*a, **k):
+            raise AssertionError("should not call Gemini when nothing is missing")
+        gs.call_gemini_for_batch = fake_call
+        try:
+            changed = gs.analyze_batch(chunk, "key", "m", dry_run=False, force=False, fields=["summary"])
+        finally:
+            gs.call_gemini_for_batch = real_call
+        self.assertEqual(changed, 0)
+
+
+class TestBuildBatchPrompt(unittest.TestCase):
+    def test_includes_every_verse_index_and_text(self):
+        prompt = gs.build_batch_prompt([
+            {"index": "1", "sa": "सा", "en": "translation one"},
+            {"index": "2", "sa": "सा२", "en": None},
+        ])
+        self.assertIn("index: 1", prompt)
+        self.assertIn("index: 2", prompt)
+        self.assertIn("सा", prompt)
+        self.assertIn("translation one", prompt)
+
+
 class TestRun(unittest.TestCase):
     def setUp(self):
         self.tmp = Path(tempfile.mkdtemp(prefix="gs-run-test-"))
@@ -102,6 +191,30 @@ class TestRun(unittest.TestCase):
         rc = gs.run(self.sarga_dir, [1], "m", dry_run=False, force=False, limit=None,
                     fields=["summary"])
         self.assertEqual(rc, 1)
+
+    def test_batch_size_greater_than_one_still_analyzes_every_verse(self):
+        rc = gs.run(self.sarga_dir, [1], "m", dry_run=True, force=False, limit=None,
+                    fields=["summary"], batch_size=10, concurrency=1)
+        self.assertEqual(rc, 0)
+        data = load_json(self.sarga_dir / "sarga_1" / "data.json")
+        self.assertIn("gemini_summary", data["shlokas"]["1"]["commentaries"])
+        self.assertIn("gemini_summary", data["shlokas"]["2"]["commentaries"])
+
+    def test_concurrency_greater_than_one_still_analyzes_every_verse(self):
+        rc = gs.run(self.sarga_dir, [1], "m", dry_run=True, force=False, limit=None,
+                    fields=["summary"], batch_size=1, concurrency=4)
+        self.assertEqual(rc, 0)
+        data = load_json(self.sarga_dir / "sarga_1" / "data.json")
+        self.assertIn("gemini_summary", data["shlokas"]["1"]["commentaries"])
+        self.assertIn("gemini_summary", data["shlokas"]["2"]["commentaries"])
+
+    def test_batched_and_concurrent_together_still_correct(self):
+        rc = gs.run(self.sarga_dir, [1], "m", dry_run=True, force=False, limit=None,
+                    fields=["summary"], batch_size=1, concurrency=4)
+        self.assertEqual(rc, 0)
+        data = load_json(self.sarga_dir / "sarga_1" / "data.json")
+        self.assertEqual(data["metadata"]["availableCommentaries"]["gemini_summary"],
+                          "AI Summary (Gemini, unreviewed)")
 
 
 if __name__ == "__main__":
