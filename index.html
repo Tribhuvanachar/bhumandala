@@ -69,27 +69,24 @@
   <div class="portrait-wrap">
     <div class="halo" aria-hidden="true"></div>
     <div class="halo-ring" aria-hidden="true"></div>
-    <div class="frame"><img id="photo" src="" alt=""></div>
-    <div class="offer-zone" id="offerZone" role="button" tabindex="0"
-         aria-label="Offer flowers to the Guru"></div>
-    <div class="pranam-row" id="pranamRow" aria-hidden="true"></div>
-  </div>
-
-  <!-- Namaskāra's blessing video (see showPranamGif() below). Preloaded
-       from page load — unlike the gif this replaced, which deliberately
-       stayed src-less until clicked — so playback starts the instant
-       "Offer Namaskāra" is tapped, with sound, rather than a beat of
-       buffering. poster reuses the already-preloaded portrait so there is
-       never a blank/black flash before the first frame decodes. -->
-  <div class="pranam-gif-wrap" id="pranamGifWrap" aria-hidden="true">
-    <div class="pranam-gif-box">
-      <button class="sheet-close" id="pranamGifClose" aria-label="Close">✕</button>
+    <div class="frame">
+      <img id="photo" src="" alt="">
+      <!-- Namaskāra's blessing video (see showPranamGif() below) — plays
+           right in the same frame as the photo, not a separate popup, so
+           the portrait itself appears to "come alive" on click. Sits
+           invisibly over the photo (.frame.video-active crossfades it in)
+           until then. Preloaded from page load so playback starts the
+           instant "Offer Namaskāra" is tapped, with sound, rather than a
+           beat of buffering — no poster needed, since the photo beneath
+           it already fills that role. -->
       <video id="pranamGifVideo" preload="auto" playsinline webkit-playsinline="true"
-             poster="dge/images/guru/guruji.jpg"
              aria-label="Namaskāra — a devotee's salutations at the Guru's feet">
         <source src="dge/images/guru/pranam-blessing.mp4" type="video/mp4">
       </video>
     </div>
+    <div class="offer-zone" id="offerZone" role="button" tabindex="0"
+         aria-label="Offer flowers to the Guru"></div>
+    <div class="pranam-row" id="pranamRow" aria-hidden="true"></div>
   </div>
 
   <div class="guru-block">
@@ -489,21 +486,21 @@ let SITE_CONFIG = null;
     if (cfg.requireOffering && offerings >= cfg.minOfferings) unlock();
   }
 
-  // Namaskāra's blessing video. Preloaded from page load (see the markup
-  // comment above), so this just rewinds and plays — no fetch, no
-  // buffering wait. Sound plays too: this call only ever runs from the
-  // pranamBtn click handler, and a real click is the user gesture
-  // browsers require before they'll allow unmuted playback. Hides itself
-  // on the video's own 'ended' event (wired in bind()) rather than a
-  // hand-tuned timer, so it always tracks the real clip length; the
-  // fallback timer here only guards a stalled/broken load.
+  // Namaskāra's blessing video, played right in the portrait frame (not a
+  // popup) so the photo itself appears to come alive. Preloaded from page
+  // load (see the markup comment above), so this just rewinds and plays —
+  // no fetch, no buffering wait. Sound plays too: this call only ever
+  // runs from the pranamBtn click handler, and a real click is the user
+  // gesture browsers require before they'll allow unmuted playback.
+  // Reverts to the static photo on the video's own 'ended' event (wired
+  // in bind()) rather than a hand-tuned timer, so it always tracks the
+  // real clip length; the fallback timer here only guards a
+  // stalled/broken load.
   let pranamVideoFallbackTimer = null;
   function showPranamGif() {
-    const wrap = $('pranamGifWrap'), video = $('pranamGifVideo');
+    const frame = document.querySelector('.frame'), video = $('pranamGifVideo');
     if (pranamVideoFallbackTimer) clearTimeout(pranamVideoFallbackTimer);
-    wrap.classList.add('open');
-    wrap.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('modal-open');
+    frame.classList.add('video-active');
     video.currentTime = 0;
     const playPromise = video.play();
     if (playPromise && playPromise.catch) playPromise.catch(function () {});
@@ -511,12 +508,10 @@ let SITE_CONFIG = null;
   }
   function hidePranamGif() {
     if (pranamVideoFallbackTimer) { clearTimeout(pranamVideoFallbackTimer); pranamVideoFallbackTimer = null; }
-    const wrap = $('pranamGifWrap'), video = $('pranamGifVideo');
-    wrap.classList.remove('open');
-    wrap.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('modal-open');
+    const frame = document.querySelector('.frame'), video = $('pranamGifVideo');
+    frame.classList.remove('video-active');
     video.pause();
-    video.currentTime = 0; // stays preloaded — next open replays from frame one instantly
+    video.currentTime = 0; // stays preloaded — next tap replays from frame one instantly
   }
 
   function pranam() {
@@ -657,14 +652,13 @@ let SITE_CONFIG = null;
     $('sheetWrap').addEventListener('click', function (ev) {
       if (ev.target === $('sheetWrap') || ev.target.closest('[data-close]')) closePanel();
     });
-    $('pranamGifWrap').addEventListener('click', function (ev) {
-      if (ev.target === $('pranamGifWrap') || ev.target.closest('#pranamGifClose')) hidePranamGif();
-    });
     $('pranamGifVideo').addEventListener('ended', hidePranamGif);
     document.addEventListener('keydown', function (ev) {
       if (ev.key !== 'Escape') return;
       if ($('sheetWrap').classList.contains('open')) closePanel();
-      if ($('pranamGifWrap').classList.contains('open')) hidePranamGif();
+      // Lets a visitor skip the blessing video early and return to the
+      // static photo, the same way Escape already closed the old popup.
+      if (document.querySelector('.frame').classList.contains('video-active')) hidePranamGif();
     });
   }
 
