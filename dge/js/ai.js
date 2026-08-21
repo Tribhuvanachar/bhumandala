@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.11 (merge of two v3.10 lines: shabda modal returns the prakriya -- the matched declension cell renders its sutra-by-sutra subanta derivation automatically via js/subanta-steps.js, every cell tappable, plus a "where else in the library" corpus-search link; AND the Dhatu word-tool instant in-page modal with the root\'s step-by-step derivation, plus Sandhi/Samasa word-tool buttons running a focused Ask Acharya (AI) query with an on-screen AI-only note)';
+window.DGE_VERSIONS['ai.js'] = 'v3.12 (merges the subanta-prakriya/where-else Shabda enhancement with a further one: Shabda\'s fallback chain now continues past the fixed shabdapatha/kridanta lists into Vidyut\'s own live morphology, then a real precomputed Vidyut sandhi-split, before an honest not-found, and shows the first 3 कोश dictionary results inline with a see-more link; the Sandhi word-tool checks that same real sandhi-split index first, AI only on a miss; Samasa remains AI-only -- Vidyut genuinely has no compound-analysis capability)';
 
 // Appends a language directive read from onboarding.js's saved preference
 // (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
@@ -1056,7 +1056,13 @@ function dgeEnsureWordModalStyle() {
     '.dge-word-modal .dsm-loading{padding:24px 0;text-align:center;color:var(--muted-text);}',
     '.dge-word-modal .dsm-empty{padding:12px 0;color:var(--muted-text);font-size:13px;line-height:1.6;}',
     '.dge-word-modal .dsm-empty a{color:var(--accent-red);}',
-    '.dge-word-modal .dsm-full-link{display:block;text-align:center;margin-top:14px;font-size:12px;color:var(--muted-text);}'
+    '.dge-word-modal .dsm-full-link{display:block;text-align:center;margin-top:14px;font-size:12px;color:var(--muted-text);}',
+    '.dge-word-modal .dsm-section-label{font-size:11px;font-weight:700;color:var(--muted-text);text-transform:uppercase;letter-spacing:.4px;margin:16px 0 6px;border-top:1px solid var(--card-border);padding-top:12px;}',
+    '.dge-word-modal .dsm-kosha-entry{padding:6px 0;font-size:12.5px;line-height:1.55;border-bottom:1px dashed var(--card-border);}',
+    '.dge-word-modal .dsm-kosha-entry b{color:var(--accent-red);}',
+    '.dge-word-modal .dsm-kosha-more{width:100%;margin-top:8px;}',
+    '.dge-word-modal .dsm-sandhi-row{padding:6px 0;font-size:14px;border-bottom:1px dashed var(--card-border);}',
+    '.dge-word-modal .dsm-sandhi-row .dge-sutra-ref{margin-left:6px;font-size:11px;color:var(--muted-text);cursor:pointer;text-decoration:underline dotted;}'
   ].join('\n');
   document.head.appendChild(style);
 }
@@ -1163,7 +1169,9 @@ function dgeShabdaStepsHtml(steps) {
 // "Where else does this word occur" (§5.2): closes the shabda modal and
 // opens the global corpus search already searching for the surface form the
 // reader looked up. Rendered only when global-search.js is actually loaded
-// on this page, so the link can never be a dead end.
+// on this page, so the link can never be a dead end. Appended to every
+// branch of dgeOpenShabdaForSelection's fallback chain below, not just the
+// exact-match case -- useful regardless of which of them actually answered.
 function dgeShabdaWhereElseLink(surface) {
   if (!(window.DGEGlobalSearch && window.DGEGlobalSearch.open)) return '';
   return '<a class="dsm-full-link" href="#" data-dsm-where="' + dgeShabdaEsc(surface) + '">🔍 साहित्ये अन्यत्र — where else in the library ↗</a>';
@@ -1181,7 +1189,9 @@ function dgeShabdaWireWhereElse(body) {
 // The matched (or tapped) declension cell's step-by-step subanta prakriyā,
 // via js/subanta-steps.js — the "Shabda must return the prakriyā" ask.
 // Degrades silently to the plain table when that script isn't loaded or the
-// engine can't load: the lookup's own answer never depends on it.
+// engine can't load: the lookup's own answer never depends on it. Only the
+// exact-match branch has a cell to derive from -- the other fallbacks below
+// (kṛdanta, morphology, sandhi) never call this.
 function dgeShabdaSubantaSteps(body, item, ci) {
   const S = window.DGESubantaSteps, box = body.querySelector('#dsmSteps');
   if (!S || !box || ci == null || ci < 0) return;
@@ -1201,18 +1211,46 @@ function dgeShabdaSubantaSteps(body, item, ci) {
     box.innerHTML = '<p class="sst-note">Could not load the derivation engine — the forms above are unaffected.</p>';
   });
 }
+// Wires the tap-any-cell-for-its-derivation behaviour once the exact-match
+// HTML (dgeShabdaExactHtml, which lays down the #dsmSteps placeholder and
+// td[data-ci] cells) is actually in the DOM -- called from
+// dgeOpenShabdaForSelection after its one body.innerHTML write, never from
+// dgeShabdaExactHtml itself (which only builds a string, no DOM access).
+function dgeWireShabdaSubantaSteps(body, item, cellIndex) {
+  dgeShabdaSubantaSteps(body, item, cellIndex);
+  body.querySelectorAll('td[data-ci]').forEach(function (td) {
+    td.addEventListener('click', function () {
+      dgeShabdaSubantaSteps(body, item, parseInt(td.dataset.ci, 10));
+    });
+  });
+}
 
-function dgeShowShabdaNotFound(body, surface) {
-  body.innerHTML = '<div class="dsm-empty">No exact form found for "' + dgeShabdaEsc(surface) + '". ' +
+function dgeShabdaNotFoundHtml(surface) {
+  return '<div class="dsm-empty">No exact form found for "' + dgeShabdaEsc(surface) + '", ' +
+    'and it doesn\'t look like a sandhi join Vidyut resolves either. ' +
     'It may still be findable in the full word list — <a href="shabda.html?q=' + encodeURIComponent(surface) + '" target="_blank">search the full शब्दपाठः ↗</a>, or ' +
     '<a href="#" id="dsmReportMissing">report this as missing</a>.</div>' +
     dgeShabdaWhereElseLink(surface);
-  dgeShabdaWireWhereElse(body);
-  const rep = document.getElementById('dsmReportMissing');
-  if (rep) rep.addEventListener('click', function (e) {
-    e.preventDefault();
-    if (typeof window.dgeReportMissingForm === 'function') window.dgeReportMissingForm(surface, 'shabda-modal');
-  });
+}
+
+function dgeShabdaExactHtml(it, cellIndex) {
+  const krtTag = (it.krt || '').split(',').filter(Boolean)
+    .map(k => DGE_KRT_NAME[k] || k).join(', ');
+  let h = '<div class="dsm-word deva">' + dgeShabdaEsc(it.word) + '</div>' +
+    '<div class="dsm-sub">' + dgeShabdaEsc(it.linga_iast || '') +
+    (krtTag ? ' · <span class="deva">' + dgeShabdaEsc(krtTag) + 'प्रत्ययान्तः</span>' : '') + '</div>';
+  if (it.artha) h += '<div class="dsm-kv"><div class="dsm-kk">अर्थः</div><div class="dsm-kvv deva">' + dgeShabdaEsc(it.artha) + '</div></div>';
+  if (it.artha_hin) h += '<div class="dsm-kv"><div class="dsm-kk">हिन्दी</div><div class="dsm-kvv">' + dgeShabdaEsc(it.artha_hin) + '</div></div>';
+  if (it.artha_eng) h += '<div class="dsm-kv"><div class="dsm-kk">English</div><div class="dsm-kvv">' + dgeShabdaEsc(it.artha_eng) + '</div></div>';
+  h += dgeShabdaDeclTable(it.forms, cellIndex);
+  // The looked-up form's own step-by-step prakriyā renders here right away
+  // (js/subanta-steps.js, the rupasiddhi WASM engine loaded lazily); any
+  // other cell in the table is tappable for its derivation too -- see
+  // dgeWireShabdaSubantaSteps, called once this string is actually in the DOM.
+  h += '<div id="dsmSteps"></div>';
+  h += '<a class="dsm-full-link" href="shabda.html#' + dgeShabdaEsc(it.id) + '" target="_blank">View in full शब्दपाठः browser ↗</a>';
+  h += dgeShabdaWhereElseLink(it.word);
+  return h;
 }
 
 // A form the Śabdapāṭha (fixed nominal stems) genuinely has no entry for
@@ -1221,23 +1259,158 @@ function dgeShowShabdaNotFound(body, surface) {
 // real step-by-step derivation right here (Category 5's "Prakriya
 // integration in the modal"), fetched from the same per-root JSON
 // prakriya.js's krdanta.html view uses, not just a link to go read it on
-// another page.
-function dgeRenderShabdaKrt(body, surface, hit) {
+// another page. Resolves to null (not a fallback message) on a miss --
+// dgeOpenShabdaForSelection's fallback chain decides what happens next.
+function dgeShabdaKrtHtml(surface, hit) {
   const code = hit.c, krtKey = hit.k, rootPart = code.split('.')[0];
-  fetch('data/vedanga/vyakarana/prakriya/' + rootPart + '/' + code + '.json')
+  return fetch('data/vedanga/vyakarana/prakriya/' + rootPart + '/' + code + '.json')
     .then(r => r.ok ? r.json() : null)
     .then(function (d) {
       const k = d && d.krt && d.krt.find(x => x.k === krtKey);
-      if (!k) { dgeShowShabdaNotFound(body, surface); return; }
-      body.innerHTML =
-        '<div class="dsm-word deva">' + dgeShabdaEsc(surface) + '</div>' +
+      if (!k) return null;
+      return '<div class="dsm-word deva">' + dgeShabdaEsc(surface) + '</div>' +
         '<div class="dsm-sub">कृदन्तः · ' + dgeShabdaEsc(DGE_KRT_NAME[krtKey] || krtKey) + ' (' + dgeShabdaEsc(DGE_KRT_NAME_EN[krtKey] || '') + ') · from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '"</div>' +
         dgeShabdaStepsHtml(k.s) +
         '<a class="dsm-full-link" href="krdanta.html#' + dgeShabdaEsc(code) + ':' + dgeShabdaEsc(krtKey) + '" target="_blank">View in full कृदन्त browser ↗</a>' +
         dgeShabdaWhereElseLink(surface);
-      dgeShabdaWireWhereElse(body);
     })
-    .catch(() => dgeShowShabdaNotFound(body, surface));
+    .catch(() => null);
+}
+
+// Neither the fixed शब्दपाठः nor the kṛdanta index has every word (they are
+// both curated, finite lists) -- Vidyut's own precomputed morphology
+// (dge/data/_morph/, built by tools/build_morphology.py, exposed publicly
+// as window.dgeAnalyseWord by intellisense.js) resolves inflected forms
+// well beyond either list. Not every miss has an entry here either --
+// Vidyut resolves inflected forms, not sandhi-joined ones, which is
+// exactly what dgeSandhiFallbackHtml below tries next.
+function dgeMorphFallbackHtml(word) {
+  if (typeof window.dgeAnalyseWord !== 'function') return Promise.resolve(null);
+  return window.dgeAnalyseWord(word).then(function (an) {
+    if (!an || !an.length) return null;
+    const byLemma = {};
+    an.forEach(function (a) { (byLemma[a.lemma] = byLemma[a.lemma] || []).push(a.gloss); });
+    let h = '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
+      '<div class="dsm-sub">व्याकरणम् · not in the fixed शब्दपाठः list, but Vidyut resolves this form directly</div>';
+    Object.keys(byLemma).forEach(function (lemma) {
+      h += '<div class="dsm-kv"><div class="dsm-kk deva">' + dgeShabdaEsc(lemma) + '</div><div class="dsm-kvv">' +
+        byLemma[lemma].filter(Boolean).map(g => dgeShabdaEsc(g)).join(' · ') + '</div></div>';
+    });
+    return h + dgeShabdaWhereElseLink(word);
+  }).catch(() => null);
+}
+
+// Real, precomputed sandhi-vicheda from Vidyut (dge/data/_sandhi/, built by
+// tools/build_sandhi_index.py -- see that file's own docstring for exactly
+// what it covers and why). Shared between two callers: this Shabda-modal
+// fallback (word looks like a compound the fixed lists don't carry on its
+// own) and the dedicated Sandhi word-tool button below, which shows the
+// identical rows in its own modal when there's no Shabda context at all.
+// Caps how long any one external-data promise is allowed to keep a UI
+// surface waiting -- `fallback` is returned instead once `ms` elapses,
+// without cancelling the original promise (it may still resolve later and
+// populate a cache for next time, it just stops blocking THIS caller).
+// Used for anything that can reach out to a CDN the reader's own network
+// might be slow to, or briefly unable to, reach: a hung fetch there should
+// degrade to "no result yet" or an AI fallback, never a stuck spinner.
+function dgeWithTimeout(promise, ms, fallback) {
+  return Promise.race([promise, new Promise(res => setTimeout(() => res(fallback), ms))]);
+}
+
+const DGE_SANDHI_CDN = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@2a255c3dd7f357364c75a72afa664a6588c8ff44/_sandhi';
+const DGE_SANDHI_BUCKET_CACHE = {};
+function dgeSandhiBucketOf(slp) {
+  const two = (slp + '__').slice(0, 2);
+  return two.split('').map(c => (c >= 'A' && c <= 'Z') ? c + '_'
+                                : (/[a-z0-9]/.test(c) ? c : 'x')).join('');
+}
+function dgeFetchSandhiBucket(name) {
+  if (DGE_SANDHI_BUCKET_CACHE[name]) return DGE_SANDHI_BUCKET_CACHE[name];
+  // window.SANDHI_DATA_BASE overrides the CDN, same convention as
+  // WORDNET_DATA_BASE in intellisense.js -- set it to '' to read a local
+  // build from dge/data/_sandhi/ instead (never committed to main, see
+  // tools/build_sandhi_index.py's own manifest note on repo size).
+  const set = window.SANDHI_DATA_BASE;
+  const cdn = (set === undefined ? DGE_SANDHI_CDN : (set || '')).replace(/\/+$/, '');
+  const url = cdn ? (cdn + '/' + name + '.json') : ('data/_sandhi/' + name + '.json');
+  DGE_SANDHI_BUCKET_CACHE[name] = fetch(url, { cache: 'force-cache' })
+    .then(r => (r.ok ? r.json() : null)).catch(() => null);
+  return DGE_SANDHI_BUCKET_CACHE[name];
+}
+function dgeFindSandhiSplits(word) {
+  const clean = String(word || '').trim();
+  if (!clean || typeof window.Sanscript === 'undefined') return Promise.resolve(null);
+  let slp;
+  try { slp = window.Sanscript.t(clean, 'devanagari', 'slp1'); } catch (e) { return Promise.resolve(null); }
+  if (!slp) return Promise.resolve(null);
+  // Capped at 5s: a hung fetch to the CDN must not keep the Sandhi
+  // word-tool (or the Shabda modal's fallback chain, which also calls
+  // this) waiting indefinitely -- both fall back to the AI path on a
+  // timeout exactly as they would on a genuine miss.
+  return dgeWithTimeout(dgeFetchSandhiBucket(dgeSandhiBucketOf(slp)), 5000, null)
+    .then(b => (b && b[clean]) || null);
+}
+function dgeSandhiRowsHtml(splits) {
+  return splits.map(function (s) {
+    return '<div class="dsm-sandhi-row deva">' + dgeShabdaEsc(s.first) + ' + ' + dgeShabdaEsc(s.second) +
+      (s.sutra ? ' <span class="dge-sutra-ref" data-sutra="' + dgeShabdaEsc(s.sutra) + '" role="button" tabindex="0">' +
+        dgeShabdaEsc(s.name) + ' · ' + dgeShabdaEsc(s.sutra) + '</span>' : '') +
+      '</div>';
+  }).join('');
+}
+function dgeSandhiFallbackHtml(word) {
+  return dgeFindSandhiSplits(word).then(function (splits) {
+    if (!splits || !splits.length) return null;
+    return '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
+      '<div class="dsm-sub">सन्धिविच्छेदः · not in the fixed शब्दपाठः list, but Vidyut resolves this as a sandhi join</div>' +
+      dgeSandhiRowsHtml(splits) + dgeShabdaWhereElseLink(word);
+  }).catch(() => null);
+}
+
+// कोश (dictionary) results, first 3 dictionaries with a "see more" link to
+// the full कोश overlay for the rest -- shown alongside whichever of the
+// above resolves, or alongside the not-found message, since a dictionary
+// gloss is useful regardless of whether Vidyut has a grammatical parse.
+function dgeKoshaPanelHtml(word) {
+  if (typeof window.dgeKoshaQuick !== 'function') return Promise.resolve('');
+  return window.dgeKoshaQuick(word).then(function (q) {
+    if (!q || !q.perDict.length) return '';
+    const shown = q.perDict.slice(0, 3);
+    let h = '<div class="dsm-section-label">कोशः · Dictionaries</div>';
+    shown.forEach(function (d) {
+      const name = (d.meta && d.meta.name) || d.slug;
+      const item0 = d.items && d.items[0];
+      const sense0 = item0 && item0.senses && item0.senses[0];
+      const gloss = sense0 ? String(sense0.gloss || '') : '';
+      const trimmed = gloss.length > 160 ? (gloss.slice(0, 160) + '…') : gloss;
+      h += '<div class="dsm-kosha-entry"><b>' + dgeShabdaEsc(name) + '</b> — ' + dgeShabdaEsc(trimmed) + '</div>';
+    });
+    if (q.perDict.length > shown.length) {
+      h += '<button class="btn-sm dsm-kosha-more" id="dsmKoshaMore" data-word="' + dgeShabdaEsc(word) + '">See ' +
+        (q.perDict.length - shown.length) + ' more कोश (' + q.perDict.length + ' total) →</button>';
+    }
+    return h;
+  }).catch(() => '');
+}
+
+// Wires the interactive bits of whatever dgeOpenShabdaForSelection just
+// wrote into `body`. Split into two (rather than one "wire everything"
+// function called after each of the two separate writes below) so neither
+// listener gets bound twice -- the primary content and the कोश panel land
+// in the DOM at different times, dsmReportMissing only ever in the former,
+// dsmKoshaMore only ever in the latter.
+function dgeWireShabdaReportMissing(body, word) {
+  const rep = body.querySelector('#dsmReportMissing');
+  if (rep) rep.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (typeof window.dgeReportMissingForm === 'function') window.dgeReportMissingForm(word, 'shabda-modal');
+  });
+}
+function dgeWireShabdaKoshaMore(body) {
+  const more = body.querySelector('#dsmKoshaMore');
+  if (more) more.addEventListener('click', function () {
+    if (typeof window.dgeOpenKosha === 'function') window.dgeOpenKosha(more.dataset.word);
+  });
 }
 
 window.dgeOpenShabdaForSelection = function(e) {
@@ -1249,45 +1422,82 @@ window.dgeOpenShabdaForSelection = function(e) {
   window.openModal(DGE_SHABDA_MODAL_ID);
   const body = document.getElementById('dgeShabdaModalBody');
   body.innerHTML = '<div class="dsm-loading">खोजयति… searching “' + dgeShabdaEsc(word) + '”…</div>';
+
+  // Fallback chain, each step Promise<string|null>: the fixed शब्दपाठः
+  // declension table (curated) -> a kṛdanta derivation (curated) -> Vidyut's
+  // own live morphology analysis (real, but not a curated table) -> a
+  // Vidyut sandhi split (real) if the word looks like an unlisted compound
+  // -> only then an honest not-found. `exactMatch` is set only by the first
+  // branch (the only one with a declension cell/item to derive from) so the
+  // final .then() below knows whether to wire the tap-a-cell-for-its-
+  // derivation behaviour once the string it built is actually in the DOM.
+  let exactMatch = null;
   dgeFetchShabdaData(word).then(function (items) {
     const loc = dgeFindShabdaForm(items, word);
-    if (loc) {
-      const it = loc.item;
-      const krtTag = (it.krt || '').split(',').filter(Boolean)
-        .map(k => DGE_KRT_NAME[k] || k).join(', ');
-      let h = '<div class="dsm-word deva">' + dgeShabdaEsc(it.word) + '</div>' +
-        '<div class="dsm-sub">' + dgeShabdaEsc(it.linga_iast || '') +
-        (krtTag ? ' · <span class="deva">' + dgeShabdaEsc(krtTag) + 'प्रत्ययान्तः</span>' : '') + '</div>';
-      if (it.artha) h += '<div class="dsm-kv"><div class="dsm-kk">अर्थः</div><div class="dsm-kvv deva">' + dgeShabdaEsc(it.artha) + '</div></div>';
-      if (it.artha_hin) h += '<div class="dsm-kv"><div class="dsm-kk">हिन्दी</div><div class="dsm-kvv">' + dgeShabdaEsc(it.artha_hin) + '</div></div>';
-      if (it.artha_eng) h += '<div class="dsm-kv"><div class="dsm-kk">English</div><div class="dsm-kvv">' + dgeShabdaEsc(it.artha_eng) + '</div></div>';
-      h += dgeShabdaDeclTable(it.forms, loc.cellIndex);
-      h += '<div id="dsmSteps"></div>';
-      h += '<a class="dsm-full-link" href="shabda.html#' + dgeShabdaEsc(it.id) + '" target="_blank">View in full शब्दपाठः browser ↗</a>';
-      h += dgeShabdaWhereElseLink(word);
-      body.innerHTML = h;
-      dgeShabdaWireWhereElse(body);
-      // The looked-up form's own step-by-step prakriyā renders right away
-      // (js/subanta-steps.js, the rupasiddhi WASM engine loaded lazily);
-      // any other cell in the table is tappable for its derivation too.
-      dgeShabdaSubantaSteps(body, it, loc.cellIndex);
-      body.querySelectorAll('td[data-ci]').forEach(function (td) {
-        td.addEventListener('click', function () {
-          dgeShabdaSubantaSteps(body, it, parseInt(td.dataset.ci, 10));
-        });
-      });
-      return;
-    }
+    if (loc) { exactMatch = loc; return dgeShabdaExactHtml(loc.item, loc.cellIndex); }
     const cp = word.codePointAt(0).toString(16).toLowerCase().padStart(4, '0');
-    fetch('data/vedanga/vyakarana/prakriya/krtindex/' + cp + '.json')
+    return fetch('data/vedanga/vyakarana/prakriya/krtindex/' + cp + '.json')
       .then(r => r.ok ? r.json() : null)
       .then(function (m) {
         const hit = m && m[word];
-        if (hit) dgeRenderShabdaKrt(body, word, hit);
-        else dgeShowShabdaNotFound(body, word);
+        return hit ? dgeShabdaKrtHtml(word, hit) : null;
       })
-      .catch(() => dgeShowShabdaNotFound(body, word));
-  }).catch(() => dgeShowShabdaNotFound(body, word));
+      .catch(() => null);
+  }).catch(() => null)
+    .then(function (html) { return html || dgeMorphFallbackHtml(word); })
+    .then(function (html) { return html || dgeSandhiFallbackHtml(word); })
+    .then(function (html) { return html || dgeShabdaNotFoundHtml(word); })
+    .then(function (mainHtml) {
+      body.innerHTML = mainHtml;
+      dgeWireShabdaReportMissing(body, word);
+      dgeShabdaWireWhereElse(body);
+      if (exactMatch) dgeWireShabdaSubantaSteps(body, exactMatch.item, exactMatch.cellIndex);
+      // कोश (dictionary results, from a separate CDN-hosted repo) loads
+      // independently and appends itself once ready -- never blocks the
+      // primary content above, which a reader wants to see immediately
+      // even when कोश itself is slow or briefly unreachable. A hung
+      // fetch there is a real possibility (CDN hiccup, offline reader),
+      // not just a test artifact, so it is capped rather than left to
+      // run indefinitely.
+      dgeWithTimeout(dgeKoshaPanelHtml(word), 8000, '').then(function (koshaHtml) {
+        if (!koshaHtml || !body.isConnected) return;
+        body.insertAdjacentHTML('beforeend', koshaHtml);
+        dgeWireShabdaKoshaMore(body);
+      });
+    });
+};
+
+// Dedicated Sandhi word-tool: real Vidyut split first (own modal, sutra
+// citations linking through to the existing Ashtadhyayi popover/page), and
+// only when Vidyut has nothing for this word does it fall back to the
+// AI-based Ask Acharya Sandhi path (askAcharya's 'sandhi' type, unchanged).
+const DGE_SANDHI_MODAL_ID = 'dgeSandhiModal';
+function dgeEnsureSandhiModal() {
+  dgeEnsureWordModalShell(DGE_SANDHI_MODAL_ID, 'dgeSandhiModalBody', '🔗 सन्धिः · Sandhi');
+  return document.getElementById(DGE_SANDHI_MODAL_ID);
+}
+window.dgeOpenSandhiForSelection = function (e) {
+  if (e) e.preventDefault();
+  const word = dgeSelectedWordText();
+  if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
+  dgeHideActionTooltip();
+  function fallbackToAi() {
+    // Captured `word` explicitly rather than trusting a re-read of the live
+    // selection -- by the time this async fallback runs the browser may
+    // already have cleared it (see the identical reasoning in ai.js's
+    // other async selection-driven word-tools).
+    window.lastSelectedText = word;
+    window.askAcharya(null, 'sandhi');
+  }
+  dgeFindSandhiSplits(word).then(function (splits) {
+    if (!splits || !splits.length) { fallbackToAi(); return; }
+    dgeEnsureSandhiModal();
+    window.openModal(DGE_SANDHI_MODAL_ID);
+    document.getElementById('dgeSandhiModalBody').innerHTML =
+      '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
+      '<div class="dsm-sub">सन्धिविच्छेदः · from Vidyut (real, not AI-generated)</div>' +
+      dgeSandhiRowsHtml(splits);
+  }).catch(fallbackToAi);
 };
 
 // Instant Dhātu lookup modal, same reasoning as the Śabda one above: this

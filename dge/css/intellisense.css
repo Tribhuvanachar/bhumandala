@@ -33,7 +33,14 @@
 
 .dge-si-pop {
   position: fixed;
-  z-index: 4000;
+  /* Above .modal-overlay's 11000 (main.css), not just above ordinary page
+     content -- a sutra ref can now live inside a word-tool modal (the new
+     Sandhi split rows in ai.js), and at the old 4000 the popover opened
+     behind that modal's backdrop, mostly hidden. This is the one place in
+     the app a sutra-ref popover is triggered from within another modal;
+     nothing else needs to sit above it, so there is no ordering to
+     preserve by staying below 11000. */
+  z-index: 12000;
   /* A fixed width, not a max: place() runs while the popover still holds its
      loading placeholder, and anything derived from offsetWidth at that moment
      would lock the popover to the width of an ellipsis. */
