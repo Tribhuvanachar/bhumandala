@@ -8534,6 +8534,12 @@
       "populated": true,
       "title": "Chanakya Niti Sutra",
       "addedAt": "2026-08-21"
+    },
+    {
+      "path": "dge/data/nitishastra/kamandakiya_nitisara/data.json",
+      "populated": true,
+      "title": "Kamandakiya Nitisara",
+      "addedAt": "2026-08-21"
     }
   ]
 }

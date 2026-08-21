@@ -20,6 +20,9 @@ def main(tid):
     elif tid.startswith("chanakya_"):
         import chanakya
         chanakya.run(tid)
+    elif tid == "kamandaki":
+        import kamandaki
+        kamandaki.run(tid)
     elif tid == "darshana_all":
         import darshana_gretil as D
         for key in D.DARSHANA_GRETIL:
