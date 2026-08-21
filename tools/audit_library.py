@@ -51,6 +51,12 @@ def item_count(payload):
             return len(value)
         if isinstance(value, dict):
             return len(value)
+    # vedanga_chandas_vrutta_database is a lookup table, not an items[] list.
+    # gen_library_status.py already knows this; without the same case here the
+    # two tools fight over the populated flag — audit flips the live Chandas
+    # entry to false, gen flips it back — on every reconcile pass.
+    if payload.get("schema") == "vedanga_chandas_vrutta_database":
+        return sum(len(v) for v in payload.values() if isinstance(v, list))
     return 0
 
 

@@ -73,7 +73,10 @@ def to_text(doc):
     content specifically (not just their tags) for the same reason
     strip_html() does -- belt and suspenders with gretil.py's own
     stray-line-drop logic below."""
-    doc = re.sub(r"(?i)<(script|style)\b[^>]*>.*?</\1>", "", doc)
+    doc = re.sub(r"(?i)<(script|style)\b[^>]*>.*?</\1>", "", doc, flags=re.S)
+    # The whole <head> too, not just style/script: legacy 1_sanskr pages put
+    # the work's name in <title>, which otherwise leaks into the first verse.
+    doc = re.sub(r"(?is)<head\b[^>]*>.*?</head>", "", doc)
     doc = re.sub(r"(?i)<br\s*/?>", "\n", doc)
     doc = re.sub(r"(?i)</(p|div|lg|l|tr|li|h[1-6])\s*>", "\n", doc)
     doc = re.sub(r"<[^>]+>", "", doc)

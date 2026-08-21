@@ -49,16 +49,21 @@ devīṃ sarasvatīṃ vyāsaṃ BrP_1.1c
 tato jayam udīrayet BrP_1.1d
 munayaḥ śaunakādyāś ca BrP_1.3
 """,
-    # /AP_1.001ab/ — half-verse, zero-padded, single slashes, plus apparatus
+    # /AP_1.001ab/ — half-verse, zero-padded, single slashes, plus apparatus,
+    # plus the edition's anukramaṇikā (TOC with page numbers) before chapter 1
     "agni_halfverse": HEAD + """
+athāgnipurāṇānukramaṇikā adhyāye viṣayaḥ pṛṣṭhe 1 purāṇapraśnaḥ 1 2 matsyāvatāraḥ 2
+
 % chapter {1}
 :ś śriyaṃ(1) sarasvatīṃ gaurīṃ gaṇeśaṃ skandam īśvaram /AP_1.001ab/
 brahmāṇaṃ vahnim indrādīn vāsudevaṃ namāmyaham /AP_1.002cd/
 """,
-    # RKV_1.1 // — marker at LINE START
-    "line_start": HEAD + """
-RKV_1.1 // oṃ namaḥ śivāya
-RKV_1.2 // sūta uvāca
+    # // rkv_1.1 // — flat chapter.verse (real lines from the Revākhaṇḍa
+    # plaintext, whose 'rkv adhyāya N' chapter labels strip_inline removes)
+    "slash_chapter_verse": HEAD + """
+rkv adhyāya 1 śrīgaṇeśāya namaḥ // rkv_1.1 //
+sāyaṃ prātarmunīnāṃ kusumacayasamācchannatīrasthavṛkṣam // rkv_1.2 //
+rkv adhyāya 2 devamunimanujavandyā haratu sadā narmadā duritam // rkv_2.1 //
 """,
     # AsvSS_1.1/1:  — prefix, dots for word boundaries, trailing ritual tag
     "colon_prefix_sutra": HEAD + """
@@ -189,15 +194,90 @@ def main():
                           [u[1] for u in units] == ["ab", "cd"], [u[1] for u in units])
     failures += not check("AP: ':ś' line prefix stripped",
                           all(":ś" not in u[2] for u in units), [u[2][:20] for u in units])
+    failures += not check("AP: anukramaṇikā cut by strip_before",
+                          all("anukramaṇikā" not in u[2] for u in units),
+                          [u[2][:40] for u in units])
+    failures += not check("AP: inline footnote digits stripped",
+                          all("(1)" not in u[2] for u in units), [u[2][:40] for u in units])
+
+    units, _, _ = G.parse(FIXTURES["slash_chapter_verse"],
+                          dict(specs["vayu_purana_revakhanda"], _ext="txt"), patterns)
+    failures += not check("RKV: suffix marker parses (registry drift fix)",
+                          [u[0] for u in units] == [("1", "1"), ("1", "2"), ("2", "1")],
+                          [u[0] for u in units])
+    failures += not check("RKV: 'rkv adhyāya N' labels stripped",
+                          all("adhyāya" not in u[2] for u in units),
+                          [u[2][:30] for u in units])
+
+    print("\nC2. routing")
+    routed = G.route_units(G.parse(FIXTURES["slash_book_chapter_verse"],
+                                   dict(specs["vishnu_purana"], _ext="txt"), patterns)[0],
+                           specs["vishnu_purana"])
+    failures += not check("ViP: one folder per aṃśa",
+                          sorted(routed) == ["purana/vishnu_purana/amsha_01",
+                                             "purana/vishnu_purana/amsha_02"],
+                          sorted(routed))
+    failures += not check("ViP: book ref consumed after routing",
+                          all(len(u[0]) == 2 for us in routed.values() for u in us),
+                          [u[0] for us in routed.values() for u in us])
+
+    shiva_raw = HEAD + """
+oṃ namaḥ śivāya prathamavākyam // ŚivP_1,1.1 //
+vāyavīyapūrvavākyam idam // ŚivP_7.1,2.3 //
+vāyavīyottaravākyam idam // ŚivP_7.2,4.5 //
+"""
+    units, _, _ = G.parse(shiva_raw, dict(specs["shiva_purana"], _ext="txt"), patterns)
+    routed = G.route_units(units, specs["shiva_purana"])
+    failures += not check("ŚivP: books 1 and 7 route to their saṃhitās",
+                          sorted(routed) == ["purana/shiva_purana/vayaviya_samhita",
+                                             "purana/shiva_purana/vidyeshvara_samhita"],
+                          sorted(routed))
+    vayaviya = routed.get("purana/shiva_purana/vayaviya_samhita", [])
+    failures += not check("ŚivP: book-7 part level survives as a residue ref",
+                          [u[0] for u in vayaviya] == [("1", "2", "3"), ("2", "4", "5")],
+                          [u[0] for u in vayaviya])
+    v_items = G.group_items(vayaviya, specs["shiva_purana"])
+    failures += not check("ŚivP: part+chapter compound into the item id",
+                          [i["id"] for i in v_items] == ["adhyaya_1_2", "adhyaya_2_4"],
+                          [i["id"] for i in v_items])
+
+    vamana_raw = HEAD + """
+mukhyagranthavākyam idam // vamp_1.1 //
+saromāhātmyavākyam idam // VamPSm_1.1 //
+"""
+    units, _, _ = G.parse(vamana_raw, dict(specs["vamana_purana"], _ext="txt"), patterns)
+    routed = G.route_units(units, specs["vamana_purana"])
+    failures += not check("VamP: Saromāhātmya routed by its own siglum",
+                          sorted(routed) == ["purana/vamana_purana",
+                                             "purana/vamana_purana/saromahatmya"],
+                          sorted(routed))
+    failures += not check("VamP: main text stays at the base target",
+                          len(routed.get("purana/vamana_purana", [])) == 1
+                          and len(routed.get("purana/vamana_purana/saromahatmya", [])) == 1)
+
+    sliced = G.derived_slice(
+        [{"id": f"adhyaya_{n}"} for n in ("mang", "77", "78", "90", "91")],
+        "adhyaya 78-90")
+    failures += not check("MarkP: Durgāsaptaśatī slice picks adhy. 78-90 only",
+                          [i["id"] for i in sliced] == ["adhyaya_78", "adhyaya_90"],
+                          [i["id"] for i in sliced])
 
     print("\nD. item shaping")
     units, _, _ = G.parse(FIXTURES["slash_book_chapter_verse"],
                           dict(specs["vishnu_purana"], _ext="txt"), patterns)
-    items = G.group_items(units, specs["vishnu_purana"])
+    routed = G.route_units(units, specs["vishnu_purana"])
+    items = G.group_items(routed["purana/vishnu_purana/amsha_01"],
+                          specs["vishnu_purana"], label="Amsha 01")
     failures += not check("purana schema nests shlokas",
                           all("shlokas" in i for i in items), items[0].keys())
-    failures += not check("two aṃśas produced", len(items) == 2, [i["id"] for i in items])
-    failures += not check("ids zero-padded", items[0]["id"] == "amsha_01", items[0]["id"])
+    failures += not check("one item per adhyāya inside the aṃśa folder",
+                          [i["id"] for i in items] == ["adhyaya_01"],
+                          [i["id"] for i in items])
+    failures += not check("maṅgala verse and both ślokas inside adhyāya 1",
+                          [s["number"] for s in items[0]["shlokas"]] == ["0", "1", "2"],
+                          [s["number"] for s in items[0]["shlokas"]])
+    failures += not check("folder label lands in the reference",
+                          "Amsha 01" in items[0]["reference"], items[0]["reference"])
 
     units, _, _ = G.parse(FIXTURES["bare_verse_number"],
                           dict(specs["vedanga_jyotisha_arca"], _ext="txt"), patterns)

@@ -3,10 +3,14 @@
 
 Separate from importers/gretil.py (verse corpora, one marker convention) and
 importers/darshana_gretil.py (śāstra prose, heading-segmented) because these
-texts share neither property: 34 texts across 13 mutually incompatible marker
+texts share neither property: 34+ texts across mutually incompatible marker
 grammars — prefix vs suffix, '.' vs ',' separators, and //, ||, (), <> or bare
 delimiters. The grammar is therefore data, not code: importers/gretil_bulk.json
 names a pattern per text and this module applies it.
+
+Multi-book texts are routed to one folder per book (the catalog's
+one-entry-per-part convention, same as Bhāgavata's skandha_NN) via the
+registry's split_targets / sig_targets / derived fields — see route_units().
 
 Run:  python importers/gretil_bulk.py --list
       python importers/gretil_bulk.py --id vishnu_purana --dry-run
@@ -35,6 +39,7 @@ NOISE = [
     (re.compile(r"%\s*chapter\s*\{\d+\}"), " "),      # AP chapter callout
     (re.compile(r"^:\S+\s*", re.M), ""),               # AP line-class prefix
     (re.compile(r"\((?:darśa|paurṇamāsa|soma)[^)]*\)"), " "),  # AsvSS ritual tag
+    (re.compile(r"\(\d{1,3}\)"), " "),                 # inline footnote refs (1),(2)
     (re.compile(r"[\\^~]"), ""),                       # GRETIL analytic markers
     (re.compile(r"_{3,}"), " "),                       # print-page rule
     (re.compile(r"\[[^\]]*\[[^\]]*\]"), " "),          # ApDS grammatical gloss
@@ -56,6 +61,7 @@ HEADER_END = re.compile(r"^\s*(?:TEXT\s*$|##\s*Revisions?:|\*{3,}\s*$|-{5,}\s*$)
 # preference pass is the only way to make "# Text" win over an earlier,
 # weaker signal.
 TEXT_MARKER = re.compile(r"^#+\s*Text\s*$", re.M)
+LEGACY_END = re.compile(r"gretil\.sub\.uni-goettingen\.de/gretil\.htm\S*[ \t]*$", re.M)
 ATTRIB = re.compile(
     r"^(?:##\s*)?(?:Data entry|Contribution|Input by|Source|Publisher|Licence|License|"
     r"Based on|Contributed by|Date of this version|Description)\s*:?.*$", re.I | re.M)
@@ -70,6 +76,15 @@ def split_header(raw):
     match = None
     for match in TEXT_MARKER.finditer(raw):
         pass  # take the LAST "# Text" heading, in case an earlier one is quoted inside the header itself
+    if match is None:
+        # Legacy 1_sanskr pages have no "# Text" heading at all; their long
+        # English preamble (edition, SANSKNET notice, the whole diacritics
+        # table) reliably ends with GRETIL's own boilerplate pointer to
+        # gretil.htm. Without this cut the preamble lands in the first verse
+        # and gets transliterated into Devanagari gibberish — seen for real
+        # on lip_2__u.htm and vampsm_u.htm.
+        for match in LEGACY_END.finditer(raw):
+            pass
     if match is None:
         match = HEADER_END.search(raw)
     head, body = (raw[:match.start()], raw[match.end():]) if match else (raw[:3000], raw)
@@ -92,10 +107,29 @@ def clean(text):
 
 
 def parse(raw, spec, patterns):
-    """Split a GRETIL file into (ref_tuple, text) units using this text's marker."""
+    """Split a GRETIL file into (ref_tuple, pada, text, sig) units using this
+    text's marker."""
+    # Legacy 1_sanskr pages must lose their markup BEFORE the header split:
+    # split_header can cut between <style> and </style>, after which to_text's
+    # element-content regex no longer sees a complete element and the raw CSS
+    # text leaks into the first extracted unit (seen for real on both
+    # lip_2__u.htm and vampsm_u.htm).
+    if "htm" in spec.get("_ext", "") and "<" in raw[:2000]:
+        raw = to_text(raw)
     attribution, body = split_header(raw)
     if "<" in body[:2000] and "htm" in spec.get("_ext", "htm"):
         body = to_text(body)
+
+    # Editorial front matter between the header and the first real chapter —
+    # the Agni-Purāṇa carries its edition's full anukramaṇikā (a table of
+    # contents with print page numbers) there, which would otherwise be glued
+    # onto the first verse. Opt-in per text: everything before the first match
+    # of this regex is dropped (the match itself is kept, so the ordinary
+    # NOISE pass still sees it).
+    if spec.get("strip_before"):
+        cut = re.search(spec["strip_before"], body)
+        if cut:
+            body = body[cut.start():]
 
     pattern = patterns[spec["marker"]]
     regex = re.compile(pattern["regex"], re.M | re.UNICODE | re.IGNORECASE)
@@ -143,25 +177,82 @@ def parse(raw, spec, patterns):
             text = re.sub(r"\s+", " ", text).strip()
         if len(text) < 3:
             continue
-        units.append((refs, groups.get("pada"), text))
+        units.append((refs, groups.get("pada"), text, groups.get("sig") or ""))
     return units, attribution, len(matches)
 
 
-def group_items(units, spec):
-    """Fold units into DGE items — one item per first-level division."""
+def leaf_label(target):
+    """'purana/garuda_purana/uttara_khanda_pretakalpa' -> 'Uttara Khanda Pretakalpa'."""
+    return target.rstrip("/").rsplit("/", 1)[-1].replace("_", " ").title()
+
+
+def route_units(units, spec):
+    """Assign every unit to its output folder.
+
+    Two registry-declared mechanisms, applied in this order:
+
+    sig_targets   {siglum(lowercase): target} — a supplementary source file
+                  with its own siglum sequence (the Vāmana-Purāṇa's
+                  Saromāhātmya) whose refs would otherwise collide with the
+                  main text's adhyāya numbering. Routed by siglum, refs kept.
+
+    split_targets a multi-book text whose first ref level is the book. Either
+                  a dict {ref1: target} or a '{ref1:02d}' format string. The
+                  book component is consumed so the remaining refs group by
+                  chapter inside each book's folder. A dict key matches the
+                  FIRST dot-component of ref1, keeping any residue — the
+                  Śiva-Purāṇa writes book 7's part level as 'ŚivP_7.1,c.v',
+                  so '7.1' routes on '7' and keeps '1' as a part ref.
+
+    Returns an ordered {target: [units]}; units nothing claims stay at
+    spec['target'].
+    """
+    sig_map = {k.lower(): v for k, v in spec.get("sig_targets", {}).items()}
+    split = spec.get("split_targets")
+    out = {}
+
+    def bucket(target):
+        return out.setdefault(target, [])
+
+    for refs, pada, text, sig in units:
+        if sig_map and sig.lower() in sig_map:
+            bucket(sig_map[sig.lower()]).append((refs, pada, text, sig))
+            continue
+        if split and refs:
+            head, _, residue = refs[0].partition(".")
+            if isinstance(split, dict):
+                target = split.get(head)
+            else:
+                target = split.format(ref1=int(head)) if head.isdigit() else None
+            if target:
+                rest = ((residue,) if residue else ()) + refs[1:]
+                bucket(target).append((rest or refs, pada, text, sig))
+                continue
+        bucket(spec["target"]).append((refs, pada, text, sig))
+    return out
+
+
+def group_items(units, spec, label=""):
+    """Fold units into DGE items — one item per chapter-level division.
+
+    Two-level refs group on the first; three or more (a split residue such as
+    the Vāyavīya-saṃhitā's part level) compound everything above the verse
+    into one key ('1.12') so no level is silently flattened away.
+    """
     unit_name = spec.get("unit", "section")
     schema = spec["schema"]
     buckets = {}
     order = []
-    for refs, pada, text in units:
+    for refs, pada, text, _sig in units:
         if not refs:
             continue
-        top = refs[0] if len(refs) > 1 else "1"
+        key = ".".join(refs[:-1]) if len(refs) > 1 else "1"
         verse = refs[-1]
-        key = str(top)
         if key not in buckets:
             buckets[key] = []
             order.append(key)
+        if verse.isdigit():                    # '001' (AP zero-pads) -> '1'
+            verse = str(int(verse))
         number = f"{verse}{pada}" if pada else verse
         buckets[key].append({"number": number, "sanskrit_text": iast_to_dev(text),
                              "iast_text": text})
@@ -172,7 +263,8 @@ def group_items(units, spec):
         if ident.isdigit():
             ident = f"{int(ident):02d}"
         item_id = f"{unit_name}_{ident}"
-        reference = f"{spec['name']}, {unit_name} {key}"
+        where = f"{spec['name']}, {label}, " if label else f"{spec['name']}, "
+        reference = f"{where}{unit_name} {key}"
         if schema in ("itihasa_purana_text", "smriti_dharmashastra_text"):
             items.append({"id": item_id, "reference": reference, "shlokas": buckets[key]})
         else:
@@ -193,17 +285,18 @@ def urls_for(spec, registry):
     return out
 
 
-def write(spec, items, attribution, source_urls, dry_run):
+def write(spec, items, attribution, source_urls, dry_run, target=None, extra_note=""):
+    target = target or spec["target"]
     payload = {
         "schema": spec["schema"],
         "default_author": spec.get("author", ""),
         "source_url": source_urls[0] if source_urls else "",
-        "source_note": build_note(spec, attribution),
+        "source_note": (build_note(spec, attribution) + (" " + extra_note if extra_note else ""))[:2000],
         "items": items,
     }
-    folder = os.path.join(data_base(), spec["target"])
+    folder = os.path.join(data_base(), target)
     verses = sum(len(i.get("shlokas", [])) for i in items) or len(items)
-    print(f"  {spec['id']:<32} {len(items):>4} items / {verses:>6} units -> {spec['target']}"
+    print(f"  {spec['id']:<32} {len(items):>4} items / {verses:>6} units -> {target}"
           + ("   [dry run]" if dry_run else ""))
     if dry_run:
         return payload
@@ -258,9 +351,38 @@ def run(text_id, dry_run=False, registry=None):
     if not all_units:
         raise SystemExit(f"{text_id}: marker '{spec['marker']}' matched nothing — "
                          "the file's format has changed; re-check gretil_bulk.json")
-    items = group_items(all_units, spec)
-    write(spec, items, attribution, used, dry_run)
-    return items
+
+    written = {}
+    for target, part in sorted(route_units(all_units, spec).items()):
+        label = leaf_label(target) if target != spec["target"] else ""
+        items = group_items(part, spec, label=label)
+        write(spec, items, attribution, used, dry_run, target=target)
+        written[target] = items
+
+    # A derived slice republishes a span of the base text under its own
+    # folder (GRETIL has no standalone Durgāsaptaśatī; the registry slices it
+    # out of the Mārkaṇḍeya file). The base keeps the full run either way.
+    for derived in spec.get("derived", []):
+        sliced = derived_slice(written.get(spec["target"], []), derived.get("slice", ""))
+        if not sliced:
+            print(f"  ! derived target {derived['target']}: no usable slice", file=sys.stderr)
+            continue
+        note = f"Derived slice: {derived['slice']}. {derived.get('note', '')}".strip()
+        write(spec, sliced, attribution, used, dry_run,
+              target=derived["target"], extra_note=note)
+        written[derived["target"]] = sliced
+    return written
+
+
+def derived_slice(items, slice_spec):
+    """Items whose numeric id suffix falls inside 'adhyaya LO-HI'."""
+    span = re.search(r"(\d+)\s*-\s*(\d+)", slice_spec or "")
+    if not span:
+        return []
+    lo, hi = int(span.group(1)), int(span.group(2))
+    digits = re.compile(r"_(\d+)$")
+    return [i for i in items
+            if (m := digits.search(i["id"])) and lo <= int(m.group(1)) <= hi]
 
 
 def main(argv=None):
@@ -286,9 +408,13 @@ def main(argv=None):
               ", ".join(f"{k} ({len(v)})" for k, v in missing.items() if k != '_note'))
         return 0
 
+    # --group, like --all, is a bulk run: reference-only (legacy-licence)
+    # entries stay out of it per the registry's own policy and only run when
+    # named explicitly with --id.
     selected = [t for t in texts if
                 (args.id and t["id"] == args.id) or
-                (args.group and t["target"].startswith(args.group)) or
+                (args.group and t["target"].startswith(args.group)
+                 and t.get("licence") == "cc-by-nc-sa-4.0") or
                 (args.all and t.get("licence") == "cc-by-nc-sa-4.0")]
     if not selected:
         print("nothing selected; use --id, --group or --all", file=sys.stderr)

@@ -328,7 +328,11 @@
    "kashi_khanda": {},
    "avantya_khanda": {},
    "nagara_khanda": {},
-   "prabhasa_khanda": {}
+   "prabhasa_khanda": {},
+   "revakhanda": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "महर्षिवेदव्यासः"
+   }
   },
   "vamana_purana": {
    "saromahatmya": {}
@@ -345,7 +349,19 @@
   },
   "brahmanda_purana": {
    "lalitopakhyana_lalita_sahasranama": {},
-   "adhyatma_ramayana": {}
+   "adhyatma_ramayana": {},
+   "madhya_bhaga": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "महर्षिवेदव्यासः"
+   },
+   "purva_bhaga": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "महर्षिवेदव्यासः"
+   },
+   "uttara_bhaga": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "महर्षिवेदव्यासः"
+   }
   },
   "upapuranas": {
    "vishnu_dharmottara_purana": {},
@@ -357,7 +373,11 @@
    "ganesha_purana": {},
    "sanatkumara_purana": {},
    "nandi_purana": {},
-   "adi_purana": {}
+   "adi_purana": {},
+   "vayu_purana_revakhanda": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "महर्षिवेदव्यासः"
+   }
   }
  },
  "itihasa": {
@@ -1795,7 +1815,8 @@
     "vasu": {
      "_schema": "grantha_tika_text",
      "_default_author": "Śrīśa Chandra Vasu"
-    }
+    },
+    "kaumudi_order": {}
    },
    "aindra_school": {},
    "paniniya_vyakarana": {

@@ -21,7 +21,17 @@
     "QUALITY. Sansknet-sourced files state in their own headers: 'word boundaries",
     "are usually not marked by blanks ... The text is not proof-read!'. Those carry",
     "quality: 'unproofed'. Tübingen Purāṇa Project and Hellwig-corrected files are",
-    "the reliable ones."
+    "the reliable ones.",
+    "",
+    "ROUTING. Multi-book texts follow the catalog's one-folder-per-part convention",
+    "(like bhagavata_purana/skandha_NN): 'split_targets' maps ref1 (the book) to a",
+    "folder — a dict keyed by ref1's first dot-component (residue kept as a part",
+    "ref, e.g. ŚivP_7.1), or a '{ref1:02d}' format string. 'sig_targets' routes a",
+    "supplementary file by its own siglum (Vāmana's Saromāhātmya). 'derived'",
+    "republishes an adhyāya span of the base text under its own folder",
+    "(Durgāsaptaśatī out of Mārkaṇḍeya). 'strip_before' cuts editorial front",
+    "matter before the first match (Agni's anukramaṇikā); 'strip_inline' removes",
+    "a per-text label regex from every unit ('rks adhyāya N')."
   ],
   "base": "https://gretil.sub.uni-goettingen.de/gretil/",
   "tei_plaintext": "corpustei/transformations/plaintext/",
@@ -46,11 +56,6 @@
       "regex": "/(?P<sig>AP)_(?P<ref1>\\d+)\\.(?P<ref2>\\d+)(?P<pada>ab|cd)/",
       "example": "/AP_1.001ab/",
       "note": "half-verse markers, zero-padded, single slashes. File also carries '% chapter {N}' markers, ':ś' line prefixes and inline footnote refs (1),(2) that must be stripped"
-    },
-    "line_start": {
-      "regex": "^(?P<sig>RKV)_(?P<ref1>\\d+)\\.(?P<ref2>\\d+)\\s*//",
-      "example": "RKV_1.1 //",
-      "note": "marker at LINE START, inverted relative to every other file"
     },
     "colon_prefix_sutra": {
       "regex": "^(?P<sig>[A-Za-zśṣṅñṇṭḍāīū]+)_(?P<ref1>\\d+)\\.(?P<ref2>\\d+)(?:/(?P<ref3>\\d+))?:",
@@ -102,11 +107,6 @@
       "regex": "//\\s*(?P<sig>[^\\s_]+)_(?P<ref1>\\d+)\\s*(?://)?",
       "example": "// minsd_1 //",
       "note": "siglum + flat verse number, no chapter level; closing // optional (dropped in some transforms, e.g. VAnigh)"
-    },
-    "pipe_chapter_verse": {
-      "regex": "\\|\\|(?P<sig>[^\\s_]+)_(?P<ref1>\\d+)\\.(?P<ref2>\\d+)\\|\\|",
-      "example": "||panc_0.1||",
-      "note": "Pañcatantra's own convention: double PIPE, not double slash, no internal spaces"
     }
   },
   "texts": [
@@ -114,8 +114,7 @@
       "id": "vishnu_purana",
       "name": "Viṣṇupurāṇa",
       "target": "purana/vishnu_purana",
-      "unit": "amsha",
-      "split_by": "ref1",
+      "unit": "adhyaya",
       "split_targets": "purana/vishnu_purana/amsha_{ref1:02d}",
       "schema": "itihasa_purana_text",
       "author": "महर्षिवेदव्यासः",
@@ -126,7 +125,7 @@
       "quality": "unproofed",
       "licence": "cc-by-nc-sa-4.0",
       "source_edition": "Bombay: Venkatesvara Steam Press 1910 (Sansknet Project)",
-      "note": "6 aṃśas. Maṅgala verses use ref3 = 0 (ViP_1,1.0)."
+      "note": "6 aṃśas, one folder each via split_targets. Maṅgala verses use ref3 = 0 (ViP_1,1.0)."
     },
     {
       "id": "brahma_purana",
@@ -149,6 +148,10 @@
       "name": "Nāradapurāṇa",
       "target": "purana/narada_purana",
       "unit": "adhyaya",
+      "split_targets": {
+        "1": "purana/narada_purana/purvabhaga",
+        "2": "purana/narada_purana/uttarabhaga"
+      },
       "schema": "itihasa_purana_text",
       "author": "महर्षिवेदव्यासः",
       "tei": "sa_nAradapurANa",
@@ -157,7 +160,7 @@
       "complete": true,
       "quality": "unproofed",
       "licence": "cc-by-nc-sa-4.0",
-      "note": "ref1 is the BHĀGA (1 pūrva, 2 uttara), NOT the pāda. The four pādas of the pūrvabhāga are not encoded — adhyāyas run continuously, so the repo's purvabhaga/pada_01..04 split must be derived externally. Lands in purvabhaga/ and uttarabhaga/ only."
+      "note": "ref1 is the BHĀGA (1 pūrva, 2 uttara), routed by split_targets. The four pādas of the pūrvabhāga are not encoded — adhyāyas run continuously, so the repo's purvabhaga/pada_01..04 split must be derived externally; content lands in purvabhaga/ and uttarabhaga/ only. The file's own numbering starts at NarP_1,2.1 (no adhyāya-1 markers upstream)."
     },
     {
       "id": "markandeya_purana",
@@ -197,13 +200,18 @@
       "licence": "cc-by-nc-sa-4.0",
       "source_edition": "Rajendralal Mitra, Calcutta: Asiatic Society of Bengal 1870-1879 (Bibliotheca Indica 65,1-3)",
       "extra_copyright": "Database copyright (C) Jun TAKASHIMA 2001 — record this in source_note",
-      "note": "382 adhyāyas. Unique half-verse marker format; needs its own cleanup pass for '% chapter {N}', ':ś' prefixes and inline footnote digits."
+      "note": "382 adhyāyas. Unique half-verse marker format; '% chapter {N}', ':ś' prefixes and inline footnote digits are stripped by the shared NOISE pass, and strip_before drops the edition's anukramaṇikā (a TOC with print page numbers) that sits between the header and chapter 1.",
+      "strip_before": "% chapter \\{1\\}"
     },
     {
       "id": "linga_purana",
       "name": "Liṅgapurāṇa",
       "target": "purana/linga_purana",
       "unit": "adhyaya",
+      "split_targets": {
+        "1": "purana/linga_purana/purva_bhaga",
+        "2": "purana/linga_purana/uttara_bhaga"
+      },
       "schema": "itihasa_purana_text",
       "author": "महर्षिवेदव्यासः",
       "tei": "sa_liGgapurANa1-108",
@@ -216,23 +224,26 @@
       "scope": "TEI covers pūrvabhāga 1-108 only; uttarabhāga 1-55 is legacy-only (lip_2__u.htm)",
       "quality": "good",
       "licence": "cc-by-nc-sa-4.0",
-      "note": "Hellwig-corrected against the Calcutta 1960 ed. Legacy file keeps the trailing //; the TEI plaintext drops it."
+      "note": "Hellwig-corrected against the Calcutta 1960 ed. TEI file is pūrvabhāga (LiP_1,c.v) only; the legacy lip_2__u.htm supplies uttarabhāga 1-55 as LiP_2,c.v, so one split_targets dict routes both files. Legacy file keeps the trailing //; the TEI plaintext drops it."
     },
     {
       "id": "kurma_purana",
       "name": "Kūrmapurāṇa",
       "target": "purana/kurma_purana",
       "unit": "adhyaya",
+      "split_targets": {
+        "1": "purana/kurma_purana/purva_bhaga",
+        "2": "purana/kurma_purana/uttara_bhaga"
+      },
       "schema": "itihasa_purana_text",
       "author": "महर्षिवेदव्यासः",
       "tei": "sa_kUrmapurANa",
       "marker": "slash_book_chapter_verse",
       "sig": "kūrmp",
-      "verify_marker": true,
       "complete": true,
       "quality": "unproofed",
       "licence": "cc-by-nc-sa-4.0",
-      "note": "Both vibhāgas incl. Īśvaragītā. Siglum capitalisation UNVERIFIED — plaintext rendered lowercase 'kūrmp_' but canonical is likely 'KūrmP_'. Match case-insensitively; the siglum itself contains ū (U+016B)."
+      "note": "Both vibhāgas incl. Īśvaragītā, routed by split_targets. Verified against the live plaintext 2026-08-21: siglum really is lowercase 'kūrmp' there (matched case-insensitively; contains ū U+016B). Maṅgala uses ref2 = 'mang'."
     },
     {
       "id": "matsya_purana",
@@ -248,29 +259,39 @@
       "scope": "adhyāyas 1-176 of ~291",
       "quality": "good",
       "licence": "cc-by-nc-sa-4.0",
-      "note": "Opening // but no closing // in this file. Maṅgala token MatsP_Mang.1."
+      "note": "Opening // but no closing // in this file. Maṅgala token MatsP_Mang.1. Every chapter's first unit starts with a 'matsya-purāṇa N' heading label — stripped via strip_inline.",
+      "strip_inline": "matsya-purāṇa \\d+"
     },
     {
       "id": "garuda_purana",
       "name": "Garuḍapurāṇa",
       "target": "purana/garuda_purana",
       "unit": "adhyaya",
+      "split_targets": {
+        "1": "purana/garuda_purana/purva_khanda",
+        "2": "purana/garuda_purana/uttara_khanda_pretakalpa",
+        "3": "purana/garuda_purana/brahma_khanda"
+      },
       "schema": "itihasa_purana_text",
       "author": "महर्षिवेदव्यासः",
       "tei": "sa_garuDapurANa",
       "marker": "slash_book_chapter_verse",
       "sig": "garp",
-      "verify_marker": true,
       "complete": true,
       "quality": "unproofed",
       "licence": "cc-by-nc-sa-4.0",
-      "note": "3 kāṇḍas (Venkaṭeśvara). Siglum capitalisation UNVERIFIED — canonical is almost certainly GarP_."
+      "note": "3 kāṇḍas (Venkaṭeśvara), routed by split_targets. Verified against the live file 2026-08-21: siglum is lowercase 'garp'; kāṇḍa 1 = karma/ācāra (pūrva), 2 = 'pretakāṇḍo dharmakāṇḍanāma' (Pretakalpa), 3 = brahmakāṇḍa per its own 'atha gāruḍe brahmakāṇḍastṛtīya ārabhyate'. Kāṇḍa-level maṅgala markers (garp_2,1.mang) put a non-digit at the verse position and are not matched; that text folds into the following unit."
     },
     {
       "id": "brahmanda_purana",
       "name": "Brahmāṇḍapurāṇa",
       "target": "purana/brahmanda_purana",
       "unit": "adhyaya",
+      "split_targets": {
+        "1": "purana/brahmanda_purana/purva_bhaga",
+        "2": "purana/brahmanda_purana/madhya_bhaga",
+        "3": "purana/brahmanda_purana/uttara_bhaga"
+      },
       "schema": "itihasa_purana_text",
       "author": "महर्षिवेदव्यासः",
       "tei": "sa_brahmANDapurANa",
@@ -278,13 +299,18 @@
       "sig": "BndP",
       "complete": true,
       "quality": "unproofed",
-      "licence": "cc-by-nc-sa-4.0"
+      "licence": "cc-by-nc-sa-4.0",
+      "new_target": true,
+      "note": "ref1 is the bhāga, per the file's own 'atha brahmāṇḍamahāpurāṇaṃ pūrvabhāgaprārambhaḥ' / '...madhyabhāgaprārambhaḥ' headings: 1 pūrva, 2 madhya, 3 uttara. Folders are new (the repo's brahmanda_purana/ previously named only the Adhyātma-Rāmāyaṇa and Lalitopākhyāna, neither of which is in this file)."
     },
     {
       "id": "vamana_purana",
       "name": "Vāmanapurāṇa",
       "target": "purana/vamana_purana",
       "unit": "adhyaya",
+      "sig_targets": {
+        "vampsm": "purana/vamana_purana/saromahatmya"
+      },
       "schema": "itihasa_purana_text",
       "author": "महर्षिवेदव्यासः",
       "tei": "sa_vAmanapurANa1-69",
@@ -297,7 +323,7 @@
       "scope": "adhyāyas 1-69 of 95",
       "quality": "unproofed",
       "licence": "cc-by-nc-sa-4.0",
-      "note": "The Saromāhātmya (inserted after adhy. 23) is a SEPARATE legacy file with its own siglum sequence — import it as a sub-target or it is silently lost."
+      "note": "The Saromāhātmya (inserted after adhy. 23) is a SEPARATE legacy file with its own siglum sequence (VamPSm_c.v) — routed to vamana_purana/saromahatmya by sig_targets so its chapter numbers cannot collide with the main adhyāyas."
     },
     {
       "id": "shiva_purana",
@@ -322,7 +348,7 @@
     {
       "id": "skanda_purana_ce",
       "name": "Skandapurāṇa (critical edition)",
-      "target": "purana/skanda_purana",
+      "target": "purana/skanda_purana/critical_edition",
       "unit": "adhyaya",
       "schema": "itihasa_purana_text",
       "author": "महर्षिवेदव्यासः",
@@ -336,12 +362,12 @@
       "quality": "good",
       "licence": "reference-only",
       "source_edition": "Adriaensen, Bakker & Isaacson, Groningen: Egbert Forsten 1998-",
-      "note": "Legacy-only, so no redistribution grant. The vulgate khaṇḍas (Māheśvara, Vaiṣṇava, Brahma, Kāśī, Āvantya, Nāgara, Prabhāsa) are NOT in GRETIL."
+      "note": "Legacy-only, so no redistribution grant — excluded from --group/--all bulk runs; run explicitly with --id if ever cleared. The vulgate khaṇḍas (Māheśvara, Vaiṣṇava, Brahma, Kāśī, Āvantya, Nāgara, Prabhāsa) are NOT in GRETIL. Target is its own subfolder so it can never collide with the Revākhaṇḍa import."
     },
     {
       "id": "skanda_purana_revakhanda",
       "name": "Skandapurāṇa — Revākhaṇḍa",
-      "target": "purana/skanda_purana",
+      "target": "purana/skanda_purana/revakhanda",
       "unit": "adhyaya",
       "schema": "itihasa_purana_text",
       "author": "महर्षिवेदव्यासः",
@@ -351,7 +377,10 @@
       "complete": false,
       "scope": "Revākhaṇḍa only",
       "quality": "good",
-      "licence": "cc-by-nc-sa-4.0"
+      "licence": "cc-by-nc-sa-4.0",
+      "new_target": true,
+      "strip_inline": "rks adhyāya \\d+|skandapurāṇa: revākhaṇḍa \\(rks\\)",
+      "note": "Own subfolder (not in the taxonomy's vulgate khaṇḍa list; audit_library --fix registers it). 'rks adhyāya N' chapter labels stripped via strip_inline."
     },
     {
       "id": "narasimha_purana",
@@ -376,14 +405,15 @@
       "schema": "itihasa_purana_text",
       "author": "महर्षिवेदव्यासः",
       "tei": "sa_revAkhANDa-of-the-vAyupurANa-rkv",
-      "marker": "line_start",
+      "marker": "slash_chapter_verse",
       "sig": "RKV",
       "complete": false,
       "scope": "Revākhaṇḍa only — the Vāyupurāṇa proper is NOT in GRETIL",
       "quality": "good",
       "licence": "cc-by-nc-sa-4.0",
-      "note": "Marker sits at LINE START, unlike every other purāṇa file. Target folder does not exist yet; the importer creates it (upapuranas/ is the right home — GRETIL has only this khaṇḍa).",
-      "new_target": true
+      "note": "Registry originally recorded a line-start 'RKV_1.1 //' marker read off the TEI XML; the plaintext transformation actually renders '// rkv_1.1 //' suffix markers (verified 2026-08-21, 0 matches with the old pattern, 6,000+ with slash_chapter_verse). 'rkv adhyāya N' chapter labels stripped via strip_inline. Target folder does not exist yet; the importer creates it (upapuranas/ is the right home — GRETIL has only this khaṇḍa).",
+      "new_target": true,
+      "strip_inline": "rkv adhyāya \\d+|revākhaṇḍa of the vāyupurāṇa"
     },
     {
       "id": "ashvalayana_shrautasutra",
@@ -703,7 +733,8 @@
       "marker": "bare_verse_number",
       "complete": false,
       "licence": "cc-by-nc-sa-4.0",
-      "note": "GRETIL's own header says \"to be continued\" -- first vargas only (harītakyādi etc.), not the complete Nighaṇṭu. Flat verse numbering, no chapter marker -- one item for what GRETIL carries."
+      "note": "GRETIL's own header says \"to be continued\" -- first vargas only (harītakyādi etc.), not the complete Nighaṇṭu. Flat verse numbering, no chapter marker -- one item for what GRETIL carries.",
+      "scope": "first 3 vargas only — the GRETIL file's own header says 'to be continued'"
     },
     {
       "id": "raja_nighantu",
