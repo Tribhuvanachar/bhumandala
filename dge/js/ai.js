@@ -1253,8 +1253,11 @@ window.dgeOpenShabdaForSelection = function(e) {
     const loc = dgeFindShabdaForm(items, word);
     if (loc) {
       const it = loc.item;
+      const krtTag = (it.krt || '').split(',').filter(Boolean)
+        .map(k => DGE_KRT_NAME[k] || k).join(', ');
       let h = '<div class="dsm-word deva">' + dgeShabdaEsc(it.word) + '</div>' +
-        '<div class="dsm-sub">' + dgeShabdaEsc(it.linga_iast || '') + '</div>';
+        '<div class="dsm-sub">' + dgeShabdaEsc(it.linga_iast || '') +
+        (krtTag ? ' · <span class="deva">' + dgeShabdaEsc(krtTag) + 'प्रत्ययान्तः</span>' : '') + '</div>';
       if (it.artha) h += '<div class="dsm-kv"><div class="dsm-kk">अर्थः</div><div class="dsm-kvv deva">' + dgeShabdaEsc(it.artha) + '</div></div>';
       if (it.artha_hin) h += '<div class="dsm-kv"><div class="dsm-kk">हिन्दी</div><div class="dsm-kvv">' + dgeShabdaEsc(it.artha_hin) + '</div></div>';
       if (it.artha_eng) h += '<div class="dsm-kv"><div class="dsm-kk">English</div><div class="dsm-kvv">' + dgeShabdaEsc(it.artha_eng) + '</div></div>';
