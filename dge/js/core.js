@@ -390,6 +390,7 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         shlokas[n] = {
           sa: dgeStripEditionMarkers(dgeSanitizeVedicAccents(v.sanskrit_text || v.sa || '')),
           vedicId: chapter.reference ? (chapter.reference + (v.number != null ? ' · ' + v.number : '')) : '',
+          unitId: chapter.id || '',
           commentaries: commentaries,
           geminiEnrichment: v.gemini_enrichment || null
         };
@@ -452,6 +453,11 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         // prefer it, matching the itihasa_purana_text branch above which
         // already prefers chapter.reference over a raw id.
         vedicId: item.reference || item.id || '',
+        // The item's raw id too (DV_6001, AV_C01_S01_I01, ...): deep links
+        // built from data-side indexes (prayoga index, backlinks) address
+        // units by this id, while vedicId above is the human-facing
+        // reference string when one exists.
+        unitId: item.id || '',
         // Traditional Ashtaka.Adhyaya.Varga.Rik reference — present only for
         // Rigveda Samhita data so far (see ashtaka_ref in the source data.json).
         ashtakaId: item.ashtaka_ref || '',
@@ -730,6 +736,14 @@ function dgeResolveQuickJumpTarget(target) {
       const vid = stotraData.shlokas[k].vedicId;
       return vid && normalize(vid) === wanted;
     });
+    // Data-side unit ids (DV_6001 ...) aren't dotted numbers and aren't the
+    // display reference -- match them exactly against the id each shloka
+    // now carries. For a nested grantha this lands on the chapter's first
+    // shloka, which is the honest resolution of a chapter-level id.
+    if (!targetId) {
+      targetId = Object.keys(stotraData.shlokas).find(k =>
+        stotraData.shlokas[k].unitId === target.vedicId);
+    }
   }
 
   if (targetId && typeof playShloka === 'function') {

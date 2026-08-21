@@ -216,6 +216,57 @@
     if(order==="kaumudi"){ if(state.navMode!=="kaumudi") setNavMode("kaumudi"); goKaumudi(dir); }
     else { if(state.navMode!=="ashtadhyayi") setNavMode("ashtadhyayi"); go(state.idx+dir); }
   }
+  /* ---------- साहित्ये प्रयोगाः (corpus usages of this sutra) ---------- */
+  // Built by tools/build_sutra_prayoga_index.py; sharded per adhyaya.
+  // Entry: [slug, unit, kind(quote|ref), rank, snippet, title].
+  var prayogaCache = {};
+  var PRAYOGA_RANKS = ["सर्वमूलम्", "द्वैतवेदान्तग्रन्थाः", "दाससाहित्यम्", "अन्यग्रन्थाः"];
+  function prettySlug(slug){
+    var parts=slug.split("/");
+    return parts.slice(-2).join(" › ").replace(/_/g," ");
+  }
+  function openPrayoga(){
+    var row=state.sutras[state.idx]; if(!row) return;
+    var m=$("#dge-prayogaModal"), body=$("#dge-prayogaBody"); if(!m||!body) return;
+    var adhyaya=row.id.split(".")[0];
+    body.innerHTML='<h4 class="deva">'+tl("साहित्ये प्रयोगाः")+' · '+esc(row.id)+'</h4><div class="an-empty">…</div>';
+    m.classList.add("open"); $("#dge-backdrop").classList.add("open");
+    var p = prayogaCache[adhyaya] ||
+      (prayogaCache[adhyaya]=fetchJSON(BASE+"prayoga_index/a"+adhyaya+".json").catch(function(){ return {}; }));
+    p.then(function(d){
+      var ent=d[row.id];
+      var h='<h4 class="deva">'+tl("साहित्ये प्रयोगाः")+' · '+esc(row.id)
+        +' <span class="deva" style="font-weight:400;color:var(--muted)">'+esc(tl(row.sanskrit_text))+'</span></h4>';
+      if(ent && ent.e && ent.e.length){
+        h+='<div class="pry-count">'+ent.n+' usages across the library'
+          +(ent.n>ent.e.length?' · showing the first '+ent.e.length:'')+'</div>';
+        var byRank={};
+        ent.e.forEach(function(e){ (byRank[e[3]]=byRank[e[3]]||[]).push(e); });
+        [0,1,2,3].forEach(function(rk){
+          var list=byRank[rk]; if(!list) return;
+          h+='<div class="pry-grp deva">'+tl(PRAYOGA_RANKS[rk])+' <small>('+list.length+')</small></div>';
+          list.forEach(function(e){
+            var snip=esc(e[4]);
+            var hl=esc(row.sanskrit_text.trim());
+            if(hl && snip.indexOf(hl)!==-1) snip=snip.split(hl).join('<mark>'+hl+'</mark>');
+            h+='<button class="pry-row" data-slug="'+esc(e[0])+'" data-unit="'+esc(e[1])+'">'
+              +'<span class="pry-title deva">'+esc(e[5]||prettySlug(e[0]))
+              +(e[2]==="ref"?' <span class="pry-kind">पा.सू.</span>':'')
+              +'<span class="pry-unit">'+esc(e[1])+'</span></span>'
+              +'<span class="pry-snip deva">'+snip+'</span>'
+              +'</button>';
+          });
+        });
+      } else {
+        h+='<div class="an-empty">No indexed usages of this sutra in the library yet — '
+          +'the index covers verbatim quotations and explicit पा.सू. citations '
+          +'(rebuilt automatically as granthas are added).</div>';
+      }
+      h+='<button class="btn" id="dge-prayogaSearch" style="margin-top:12px">🔍 search the whole corpus live</button>';
+      body.innerHTML=h;
+    });
+  }
+
   /* ---------- Kaumudi prakarana drawer ---------- */
   function openChapters(){
     var m=$("#dge-chaptersModal"); if(!m) return;
@@ -494,7 +545,7 @@
 
   /* ---------- settings modal ---------- */
   function openSettings(){ var m=$("#dge-settings"); if(m){ fillModelSel(); $("#dge-keyInput").value=getKey(); $("#dge-modelSel").value=getModel(); m.classList.add("open"); $("#dge-backdrop").classList.add("open"); } }
-  function closeAll(){ $("#dge-drawer").classList.remove("open"); var s=$("#dge-settings"); if(s)s.classList.remove("open"); var c=$("#dge-chaptersModal"); if(c)c.classList.remove("open"); $("#dge-backdrop").classList.remove("open"); }
+  function closeAll(){ $("#dge-drawer").classList.remove("open"); var s=$("#dge-settings"); if(s)s.classList.remove("open"); var c=$("#dge-chaptersModal"); if(c)c.classList.remove("open"); var pmm=$("#dge-prayogaModal"); if(pmm)pmm.classList.remove("open"); $("#dge-backdrop").classList.remove("open"); }
 
   /* ---------- wire ---------- */
   // The sticky header wraps onto 2-3 rows on a narrow phone (its many
@@ -573,12 +624,24 @@
     });
     var wex=$("#dge-whatBtn"); if(wex) wex.addEventListener("click",function(){
       var el=$("#dge-chips"); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); });
-    // Corpus usage: search the whole library for this sutra's own words —
-    // citations in commentaries far beyond this page's layers.
-    var usage=$("#dge-usageBtn"); if(usage) usage.addEventListener("click",function(){
-      var row=state.sutras[state.idx]; if(!row) return;
-      if(window.DGEGlobalSearch && window.DGEGlobalSearch.open) window.DGEGlobalSearch.open(row.sanskrit_text);
-      else alert("Search is still loading — try again in a moment.");
+    // साहित्ये प्रयोगाः — where this sutra is actually used across the
+    // library, from the precomputed prayoga index (lineage-ranked:
+    // Sarvamula first, then the Dvaita corpus, then Dasa Sahitya). The
+    // live corpus search stays available as the fallback row.
+    var usage=$("#dge-usageBtn"); if(usage) usage.addEventListener("click",openPrayoga);
+    var pm=$("#dge-prayogaModal");
+    if(pm) pm.addEventListener("click",function(e){
+      if(e.target.id==="dge-prayogaClose"){ closeAll(); return; }
+      if(e.target.id==="dge-prayogaSearch"){
+        closeAll();
+        var row=state.sutras[state.idx];
+        if(row && window.DGEGlobalSearch && window.DGEGlobalSearch.open) window.DGEGlobalSearch.open(row.sanskrit_text);
+        return;
+      }
+      var r=e.target.closest(".pry-row"); if(!r) return;
+      var unit=(r.dataset.unit||"").split("#")[0];
+      location.href="index.html?path="+encodeURIComponent(r.dataset.slug)
+        +(unit?("&jumpVedicId="+encodeURIComponent(unit)):"");
     });
     // ✏️ report a text error — the same [DGE-CONTENT-GAP] template
     // shabda.js/modals.js already emit, so the planned triage pipeline
@@ -705,7 +768,7 @@
   function hashId(){ return decodeURIComponent((location.hash||"").replace(/^#/,"").trim()); }
   function goToHash(){
     var h=hashId();
-    if(h && state.byId[h]) go(state.sutras.indexOf(state.byId[h]));
+    if(h && state.byId[h]){ closeAll(); go(state.sutras.indexOf(state.byId[h])); }
   }
   function boot(){
     wire(); applyPrefs();
