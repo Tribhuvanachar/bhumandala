@@ -7,225 +7,335 @@
   "filePrefix": "rv2.",
   "fileExtension": ".mp3",
   "totalShlokas": 54,
-  "availableCommentaries": {},
+  "availableCommentaries": {
+   "pavamanacharya_english": "Huli V. Pavamanacharya (English Translation)"
+  },
   "colophon": "इति द्वितीयस्सर्गः"
  },
  "shlokas": {
   "1": {
    "sa": "रामावतारस्य हरेरधत्त सेवां हनुमद्रूपुपा समीरः । भीमात्मना यादवभूषणस्य मध्वात्मना व्यासमुनित्वभाजः ॥ १ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Vayu, the 'Jeevottamna' incarnated as Hanumantha in Tretayuga and served Sri Rama who was an incarnation of Lord Sri Hari with profound devotion. Then he incarnated as Bheemasena in Dwaparayuga and devotionally served Lord Sri Krishna, another incarnation of Lord Sri Hari. In Kaliyuga, Sri Vayu in the incarnation of Sri Madhwacharya worshipped Sri Vedavyasa who was none other than Lord Sri Hari and also imparted the knowledge of true Tattva to the virtuous."
+   }
   },
   "2": {
    "sa": "आभाष्य भाष्यं निगमान्तसूत्रव्याख्यात्मकं पूर्णमतिर्गुरुर्नः । संपादयध्वं मतसंप्रदायसमृद्धिमित्यादिदिशेयमीश्वरान् ॥ २ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Poornaprajnacharya wrote Brahmasutra Bhashya and other literary works as commentaries on Brahmasutras in conformity with the true meaning of the Vedas. Before disappearing from this world, he summoned Sri Padmanabhatheertha and his other disciple saints and ordained them to strive for the growth and propagation of his glorious tradition by imparting his teachings to the deserving."
+   }
   },
   "3": {
    "sa": "भाष्यामृतोत्पादकरोऽनुभाष्यश्रीमान्स भाष्यान्तरकल्पशाखी । व्यासं गुरुं संश्रयते बदर्यामानन्दतीर्थाभिधदुग्धसिन्धुः ॥ ३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The churning of the ocean of milk by Suras and Asuras produced ambrosia. Goddess Sri Lakshmi manifested. Kalpavruksha, Kamadhenu and other things were also born. Likewise Sri Madhwacharya coruscated like the ocean of milk by producing the ambrosia in the form of Sutrabhashya and also by writing scholarly books analogical to the manifestation of Sri Lakshmi. Sri Madhwacharya of such greatness has devoted himself to serve and worship his guru Lord Sri Vedavyasa at Badarikashrama."
+   }
   },
   "4": {
    "sa": "सिद्धान्तसंरोहविधौ नियुक्तेष्वेतेष्वनेक्रवतिषु प्रधानः । प्रेमास्पदं स्वीयगुरोः स पद्मनाभार्यवर्योऽकृत दर्शनर्द्धिम् ॥ ४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Padmanabhatheertha, the foremost among those disciples of Sri Madhwacharya who were ordained by Sri Acharya to be diligent in propagating his doctrine through teaching and discourses devoted himself assiduously in the accomplishment of this noble task."
+   }
   },
   "5": {
    "sa": "सत्तर्कदीपावलिमप्युदारां सन्यायरत्नावलिमप्यनिन्द्याम् । भाष्यानुभाष्याशयबोधहेतू ततान यस्तार्किकमौलिरत्नम् ॥ ५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Padmanabhatheertha was instrumental in the allround growth of the doctrine of Dwaita propounded by Sri Acharya with his scholarly commentaries on Sri Madhwacharya's Brahmasutrabhashya and Anuvyakhyana in the form of Sattarkadeepavali and Sannyayaratnavali."
+   }
   },
   "6": {
    "sa": "व्याख्यासु यः पाणिनिसूत्रभाष्यव्याख्यादशां व्यञ्जयति स्म साक्षात् । छन्नो यवन्या प्रतिपादनेन सहस्रधा सूत्रपदाशयानाम् ॥ ६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Patanjali who was an incarnation of Sesha used to sit behind a curtain in an act of concealing the secrecy of his incarnation while interpreting the meaning of the Sutras in one thousand different ways transforming himself into Sesha having one thousand faces. Likewise, Sri Padmanabhatheertha too used to sit behind a curtain in the form of Sesha and teach his disciples by interpreting the meaning of Brahmasutras in one thousand different ways. This act of Sri Padmanabhatheertha indicated that he too was an incarnation of Sesha like the sage Patanjali was."
+   }
   },
   "7": {
    "sa": "गुरोर्नियोगादधिगम्य राज्यं शिष्यस्तदीयो नृहरिव्रतीन्द्रः । गजेशकोशस्थितराममूर्तिं पूर्णप्रबोधाय समर्पयत्ताम् ॥ ७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "(Ikshvaku, the son of Vaivasvata Manu performed penance invoking Chathurmukha Brahma. Brahma who was gratified by the devotion of Ikshvaku gifted the idol of Sri Moolarama, that was being worshipped by him, to Ikshvaku. After being worshipped by the sons, grandsons and others in the lineage of Ikshvaku, that idol ultimately reached the royal treasury of Gajapathi, the king of Kalinga in Kaliyuga. At the time of Gajapathi's death, his son was still an infant. Therefore, his ministers in their quest for a suitable person to take over the reins of administration, decided to assign the job to the royal elephant. Hanging a garland to its trunk, they sent the elephant to find their person. Sri Naraharitheertha, the disciple of Sri Madhwacharya was then residing in Kalinga as ordained by his guru. The royal elephant reached the place where he was residing and garlanded him. All the ministers who witnessed the act of the royal elephant were overwhelmed with joy and unanimously chose Sri Naraharitheertha as the governor of Kalinga. Sri Naraharitheertha who was at the helm of administration of Kalinga for forty years since 1263 A.D. patronised the brahmins by defending Kalinga against the attack of Shabaras who were the enemies of that State. His paradigmatic dispensation finds mention in four stone inscriptions of the period from A.D. 1263 to A.D.1293. While leaving Kalinga he took the idol of Sri Moolarama and offered it to Sri Madhwacharya as ordained by the latter. The poet has narrated this part of the story in this stanza). Sri Naraharitheertha, the disciple of Sri Madhwacharya was ordained by the latter to bring the idol of Sri Moolarama from the royal treasury of Gajapathi, the king of Kalinga. Sri Naraharitheertha in compliance of the orders of his guru took the idol of Sri Moolarama from the royal treasury while leaving Kalinga after functioning as its governor for some time and offered it to Sri Madhwacharya."
+   }
   },
   "8": {
    "sa": "सा यत्र रामप्रतिमास्ति तत्र चतुःपुमर्थी सततं चकास्ति । आदिश्य चैवं गुरुणैव दत्तामानर्चयस्तामनिशं यमीन्द्रः ॥ ८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Proclaiming that the four goals of a soul viz Dharma - Artha - Kama - Moksha always exist where the idol of Sri Moolarama is worshipped, Sri Madhwacharya handed over that idol to his disciple saints. They and their successors constantly worshipped the idol."
+   }
   },
   "9": {
    "sa": "अन्ते वसंतस्य गुरोरनेनासभाजवत्तां प्रतिमां वितीर्णाम् । संवर्धयन्नादिमसंप्रदायमन्योऽभवन्माधवकंसंयमीन्द्रः ॥ ९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Madhavatheertha was the disciple of Sri Naraharitheertha. He worshipped the idol of Sri Moolarama with profound devotion and also devoted himself to the cause of the growth of Sri Acharya's doctrine and also to the task of writing literary works in the tradition set by Sri Madhwacharya, the Adiguru."
+   }
   },
   "10": {
    "sa": "मुनेरमुष्मादनवद्यबोधात्कृतोपदेशः प्रतिमां च गृह्णन् । क्षोभं विधातुं प्रतिवादिवाचमक्षोभ्यनामा मुनिराविरासीत् ॥ १० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Akshobhyatheertha who too had his education from Sri Anandatheertha and who had a perfect knowledge of the Shastras, ascended the throne of Vedantasamrajya after Sri Madhavatheertha. He got the idol of Sri Moolarama into his possession from Sri Madhavatheertha. Sri Akshobhyatheertha's birth was for the very purpose of refutation of the views of his antagonists in disputations."
+   }
   },
   "11": {
    "sa": "दृढासिना तत्त्वमसीतिवाचा सामर्थ्यभाजा परजीवभेदे । अवैदिकाम्यं मुनिरेष विदारण्यं शरण्यं कुदृशां बिभेद ॥ ११ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Akshobhyatheertha with his scimitar 'Tattvamasi' distinguishing between Jeeva and Brahma swished off the forest of Vidyaranya who was in the forefront of the antagonists of the true meaning of the Vedas and the Upanishads and who was also the protector of those who advocated that the world was nothing but an illusion."
+   }
   },
   "12": {
    "sa": "तल्लब्धबोधो विमतैकबाधो जयैकभूर्जयतीर्थनामा । व्याचष्ट पूर्णप्रमतिप्रणीतं सर्वं प्रबन्धं सरसैर्वचोभिः ॥ १२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Jayatheertha who was the disciple of Sri Akshobhyatheertha had his education from his guru in all the Shastras. He had remained a thorn in the flesh for his antagonists and also specially for those scholars who advocated Mayavada by constantly refuting their points of view. None of the rival scholars of Sri Jayatheertha could put forth his arguments convincingly before the great saint. The name 'Jayatheertha' aptly suited him for he had his mind constantly absorbed in meditation of that captivating form of God and also he had many literary works to his credit which proved to be the bestowers of success. Sri Jayatheertha of such virtues wrote absorbing scholarly commentaries on many literary works of Sri Madhwacharya."
+   }
   },
   "13": {
    "sa": "असौ कदाचिद्गृहिभावकाले विधाय धाटीं तुरगाधिरूढः । अक्षोभ्यतीर्थाश्रिततीरसीमामक्षोभ्यतीर्थां तटिनीमयासीत् ॥ १३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Jayatheertha was the son of a feudatory king in his poorvashrama by name Raghunatha nayaka. One day he went for hunting riding a horse with his royal entourage. When he reached the vicinity of river Bheema, he hurriedly rushed towards the banks of the river where Sri Akshobhyatheertha was performing anheeka. The river which was very deep was filled with water to its brim."
+   }
   },
   "14": {
    "sa": "अनुद्धृतं वारि समुद्धतश्रीः पीत्वा मुखेनैव तृषाकुलेन । मुनिं समीपे मननैकतानमसावनंसीदवलोक्य मूर्ध्ना ॥ १४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Raghunathanayaka's face was shining brilliantly with lustre. When he reached the river bank, being very thirsty he began to drink water bending down from the horse back without taking water from the river in his hands. Then he saw Sri Akshobhyatheertha deeply absorbed in meditation of God on the river bank. He immediately climbed down from his horse and prostrated before the saint."
+   }
   },
   "15": {
    "sa": "अभ्यर्थितस्तेन मुनिः सभक्त्या संन्यासमन्यादृशवारिपानात् । अमंस्त तं पूर्णमतिप्रदिष्टं व्याख्यातृभावे वृषमन्यभावे ॥ १५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "(As would behove a saint, Sri Madhwacharya while touring places walked distances along with an ox carrying his literary works on its back. It is needless to say that the ox carrying Acharya's sacred works was most fortunate. Eagerly desiring for such a fortune, the angel Indra guised as ox had always been beside Acharya. Sri Anandatheertha had great affection for the ox. While he was teaching, the ox used to listen very advertently). Once during the course of Sri Anandatheertha teaching Sri Akshobhyatheertha and other disciples one of the students of Acharya wondering how intricate Acharya's works were, asked \"Is there anyone competent enough to render his commentary on them?\" With a smile Acharya pointed at the ox. Then he told that, one who drinks water from the river in the manner an animal does would render commentaries on his works. These words of Acharya flashed in the minds of Sri Akshobhyatheertha when he saw Raghunathanayaka, after drinking the water like an animal coming to him and pleading with him in profound devotion to bestow him with Sanyasa."
+   }
   },
   "16": {
    "sa": "विधाय तं संयमिनं प्रहृष्टे गुरौ तदीयारुषिताः पुनस्तम् । निन्युः पुरीं तत्र भयेन भार्या जनेन दृष्टः स तु शेषवेषः ॥ १६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When Raghunathanayaka imploring in the real sense of detachment sought Sanyasa, Sri Akshobhyatheertha ceremoniously conferred Sanyasa on him and named him \"Jayatheertha\". Ironically, could the rest of the family so readily tread the arduous path of renunciation? They only knew to and angrily reacted to the action of Sri Akshobhyatheertha and took back Jayatheertha home. Back home, when the poorvashrama wife of Jayatheertha went to meet him in his room, she was awestruck by the lustrous brilliance emanating from her husband in his serpentine form, and hastened out of the room in horror. The other members of the family too were flabbergasted by Jayatheertha's extraordinary radiance."
+   }
   },
   "17": {
    "sa": "ततोऽतिविश्वासयुजा नगर्याः पित्रादिना बन्धुजनेन तूर्णम् । आनीय तस्मै मुनये स दत्तः शास्त्राण्यमुष्मादखिलानि लेभे ॥ १७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Jayatheertha's poorvashrama father and other members of the family apologically admitted their blunder and sought his lenience. Filled with a feeling of reverence for Sri Akshobhyatheertha, they returned to the place where he stayed, accompanied by Sri Jayatheertha. Then seeking pardon from Sri Akshobhyatheertha for their shameful act before, they left Sri Jayatheertha to the former's care and returned. Sri Jayatheertha learnt all Shastras exhaustively from Sri Akshobhyatheertha."
+   }
   },
   "18": {
    "sa": "तस्मादुपेता प्रतिमा हरेः सा क्रमेण सिद्धान्तसमृद्धिहेतुः । विद्याधिराजव्रतिनं कवीन्द्रं वागीशमस्मादपि रामचन्द्रम् ॥ १८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The saints who were instrumental in the allround growth and propagation of the doctrine of Sri Madhwacharya drew their strength by worshipping the idol of Sri Moolarama. The idol of Lord Sri Hari of such divinity was successively inherited by Sri Vidyadhirajatheertha, Sri Kaveendratheertha, Sri Vageeshatheertha and Sri Ramachandratheertha."
+   }
   },
   "19": {
    "sa": "अन्ते वसंतस्य नृसिंहदेवोपान्ते वसंतत्कृपया प्रतीतः । विजित्य सर्वान्विबुधेन्द्रयोगी बभौ हरेरर्पितजैत्रपत्रः ॥ १९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Vibudhendratheertha, the disciple of Sri Ramachandratheertha earned the fame as a scholar of greatest erudition by propitiating Lord Sri Narasimha at Ahobala with his penance and profundity of his devotion in worshiping. He emerged victorious in debates with many scholars of great reputation who were opposed to him and received letters conceding their defeat from them. He offered all those letters to Lord Sri Venkatesha, Lord Sri Ranganatha and Lord Sri Narasimha of Ahobala."
+   }
   },
   "20": {
    "sa": "जितारिरस्माद्रघुनन्दनोतस्ततः सुरेन्द्रव्रतिनो बभूवुः । पवित्रिताभूदखिला धरित्री चिरं गृहीतानशनव्रतैस्तैः ॥ २० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Jitamitratheertha was the disciple of Sri Vibudhendratheertha, a saint of such greatness. Sri Raghunandanatheertha received sanyasa from Sri Jitamitratheertha and became his disciple. Sri Surendratheertha who was conferred with sanyasa by Sri Raghunandanatheertha was a saint of spiritual ecstasy and contemplation. He sanctified the land of the entire country by going around the country in the course of his vow of fast thrice."
+   }
   },
   "21": {
    "sa": "विद्वद्धरोस्माद्विजयीन्द्रयोगी विद्यासु हृद्यास्वतुलप्रभावः । रत्नाभिषेकं किल रामराजात् प्राप्याम्ररुक्मीनकृताग्रहारान् ॥ २१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Vijayeendratheertha, a scholar of greatest erudition was conferred with sanyasa and was taught pranavamantra by Sri Surendratheertha. He was honoured with Rathnabhisheka (Ablution with gems) and gifts of wealth by Aliya Ramaraja of Vijayanagar for his matchless competence in all the sixty four arts. He utilised all those wealth for providing houses and agraharas to the virtuous brahmins."
+   }
   },
   "22": {
    "sa": "वाक्ये पदे पादविलोचनोक्तौ व्यासीयशास्त्रे च कृतान्प्रबन्धान् । आस्तां बुधः श्रोतुमशेषमेषामाख्याः समाख्याददि पण्डितोऽसौ ॥ २२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Vijayeendratheertha has written one hundred and four scholarly literary masterpieces dealing with Poorvameemamsa, Vyakarana, Nyaya and Vedanta. Let alone studying them, if one can tell the names of all those works correctly, he may be considered as a great scholar."
+   }
   },
   "23": {
    "sa": "सा रामचन्द्रप्रतिमा जयीन्द्रात्सुधीन्द्रयोगीन्द्रमगात्क्रमेण । विस्तीर्णकीर्तिर्विभावावन्यां विख्यातविद्वज्जनवन्द्यपादः ॥ २३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Vijayeendratheertha conferred Sanyasa on Sri Sudheendratheertha and handed over the idol of Sri Moolarama to him as was the custom. Sri Sudheendratheertha was acclaimed reverentially by many scholars of high repute when he defeated them in debates. Thus he had his fame reach all the corners of the world."
+   }
   },
   "24": {
    "sa": "पवित्रितामेष धरां वितन्वन् सञ्चारतो दिग्विजयपदेशात् । श्रीवेङ्कटक्ष्मापरणीसमक्षे वादेन विद्वेषिबुधान् विजिग्ये ॥ २४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Sudheendratheertha who was touring the places of worship on the pretext of achieving victory over the rival scholars was sanctifying the places wherever he went. In the course of his journey, he reached the royal court of Venkatabhoopala. When some antagonist scholars invited him for debate, he readily accepted their challenge and defeated all those scholars in the presence of the king."
+   }
   },
   "25": {
    "sa": "समेत्य शङ्खादिमजैत्रचिह्नं नृपादमूष्मादपि सह्यजायाः । तटस्थितां तापससेवितां तां पुरीं प्रपेदे पुनरुक्तनाकाम् ॥ २५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The king Venkatabhoopala felicitated Sri Sudheendratheertha with gifts of conch and other such things as tokens of victory. Proceeding from that place Sri Sudheendratheertha reached the city of Kumbhakonam on the banks of the Cauvery which had its origin in Sahyaparvata. The city of Kumbhakonam which was the home for many saints and ascetics was abundantly rich with resources which could not be matched even by the affluence of the heaven."
+   }
   },
   "26": {
    "sa": "सदा परीता परिणाहवारिप्रवाहरीत्या भुवि सह्यपुत्र्याः । पराजिताखण्डलपट्टनश्रीर्या कुम्भघोणाभिधया समिन्धे ॥ २६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The river Cauvery was flowing like a mountain torrent on both sides of Kumbhakonam, a city whose resourcefulness and elegance despised even those of the heaven. Sri Sudheendratheertha reached such a lovely place."
+   }
   },
   "27": {
    "sa": "पातालपर्यन्तनिविष्टमूलां वैरिञ्चगेहव्यतिलङ्घि मौलिम् । पीताम्बरां हाटकहारिशोभां मन्ये स लक्ष्मीं परदेवतां याम् ॥ २७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "(The physical form of infinite proportions of Lord Sri Narayana has pervaded the whole universe with his legs extending upto Patalaloka and his head upto as high as Sathyaloka. Dressed in peetambara (garment of yellow silk) and decorated with ornaments of gold studded with gems, he appears fascinating, in the company of his consort Sri Lakshmi). Likewise, tall buildings with deep foundations have made the city of Kumbhakonam to appear as though it has stretched downwards upto Patalaloka and upwards upto Sathyaloka. As all the people in this city are dressed in peetambara, this city too is being called as \"peetambara\". Copiousness of gold in Kumbhakonam and of the ornaments, its people wear have added to the elegance of the city. Therefore I would like to consider such a resourceful city itself as Lord Narayana. Thus the poet describes the beauty of Kumbhakonam."
+   }
   },
   "28": {
    "sa": "अध्यासिता राजतसालमध्यै आसारसौधच्छलमाधवेन । खेयाम्बुधौ क्षीरमये निविष्टश्वेतादिमद्वीपमयी रमा या ॥ २८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The moat filled with water around the city of Kumbhakonam resembles the ocean of milk. The silver fort around the city looks like the silver wall encircling Shwetadweepa. The row of tall multistoried houses there appears like Lord Sri Narayana lying down in Shwetadweepa."
+   }
   },
   "29": {
    "sa": "स्वयंभुवा या ससृजे पुरस्ताद्ब्रह्माण्डसृष्टेः परिशीलनाय । नो चेदमुष्याः कथमीदृशी स्याद्विशालता विश्वनिवासयोग्या ॥ २९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The city of Kumbhakonam is splendidly shining like the miniature model of this universe designed by Chathurmukha Bramha before creating the universe. Otherwise how could the city be so spacious so as to be enough to accommodate all the people in this world?"
+   }
   },
   "30": {
    "sa": "यत्खेयखेलद्विपदानवारिगन्धे तदम्भोरुहसौरभे च । लोभाद्भ्रमन् कंचन नाप भृङ्गो नैवातिवाञ्छस्य निजेष्टलाभः ॥ ३० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The bee which is attracted by the scent of the juice of rut flowing down the temples of an elephant in rut which is rejoicing in the moat filled with water encircling the city of Kumbhakonam goes near the elephant. Simultaneously it gets attracted by the sweet fragrance of the lotus grown in the water in the moat and rushes towards those flowers. Again it flies back towards the elephant. Thus vacillating between here and there, it fails either to relish the juice of rut and the nectar of lotus or enjoy their sweet fragrance. Is it not true that a person gets nothing by being greedy?"
+   }
   },
   "31": {
    "sa": "दत्तो महादानकृता विधात्रा सरोजसङ्माण्डकटाह एव । या स्वर्गसत्यान्नितलोकयुक्ता नो चेत्स तद्वान्विधिरस्तु केन ॥ ३१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Logs of wood supporting the roofing of the houses in Kumbhakonam had provided shelter to many birds. Those birds by virtue of their residence in tall buildings had transcended even the birds which lived in Nandanavana. By conversing in Sanskrit using wonderful rhyming words apart from their own language those birds had excelled the birds of Nandanavana in all respects. (The houses at Kumbhakonam were very tall. Scholars in all the four Shastras lived in each house. Those scholars daily imparted lessons and gave discourses to their disciples. The birds which lived there had attained competence to converse in Sanskrit by virtue of their constant association with those scholars."
+   }
   },
   "32": {
    "sa": "न केवलं यद्धलभीविहङ्गाः प्रांशुस्थिता नन्दननीडभाजः । गीर्वाणवाण्या विहगान्विवादैर्विजिग्यिरे हन्त विचित्रवाग्भिः ॥ ३२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "It is quoted in the shastras that one in his present birth gets back what he had given in his previous birth. One who gifts land gets land. Similarly one who gives a girl in marriage gets a virtuous wife and one who donates money gets back money. Likewise, Chathurmukha Bramha must have gifted the city of Kumbhakonam which resembled the whole universe along with heaven, Sathyaloka, Patalaloka and other lokas within it. Otherwise how could the very universe be the body of Chaturmukha Brahma as per the quote given in Manimanjari?"
+   }
   },
   "33": {
    "sa": "वर्धिष्णुसौधाग्रविभिन्नपद्मजन्माण्डनिर्यद्बहिरम्बुपूरम् । वदन्ति गङ्गां परता कथं वा स्याद्वामनाङ्घ्रेर्द्रुहिणाण्डभेदः ॥ ३३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The act of the people of Kumbhakonam of constructing floors after floors above their houses had resulted in the peaks of those houses severing the shell of the universe and the water outside gushing in. The people have named it Ganga. When such is the case, how can the shell of the universe of so high get severed by the finger nails of the foot of Namana who is so dwarf?"
+   }
   },
   "34": {
    "sa": "मध्यन्दिने यौवतनर्मकीर्णकस्तूरिकापङ्किलसौधशृङ्गे । रथं नु भग्नं परिकृप्य यस्यां श्रान्तोर्कवाजी समया करोति ॥ ३४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The group of young women of Kumbhakonam were exhibiting their charm and rejoicing on the roofs of their tall houses by strewing musk all over. The musk spilled by them had become a puddle of slush by mixing with water, oil and other such fluids. When the chariot of the sun drawn by horses came there in the noon, weariness was apparent on the faces of those horses as they could not draw the chariot as a result of the wheels of the chariot getting struck in the slush. Thus the poet has dexterously explained that the day becomes longer during summer."
+   }
   },
   "35": {
    "sa": "अगाधपाथःपरिखां यदीयामम्भोनिधिः स्वेन समीचकार । गाम्भीर्यगर्वेण जडाश्रयत्वादेनं रुषागस्त्यमुनिः पपौ किम् ॥ ३५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The ocean is the shelter for water. It is so for the idiots also which had resulted in its stupidity. Being proud of its depth and majesty, it had assumed a wrong notion that it was on par in status with the moat in Kumbhakonam which had more depth and was more abundant in water than it. The Saint Agasthya who was provoked to frenzy by the haughtiness of the ocean emptied it by drinking the entire quantity of water contained in it."
+   }
   },
   "36": {
    "sa": "पद्मात्मभूब्रह्महिरण्यगर्भस्रष्टृत्वहंसाश्रयवाक्प्रियत्वैः । चतुर्मुखत्वेन च धातृभावाच्चकास्ति यस्याश्चतुराननत्वम् ॥ ३६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The poet has skilfully described that the city of Kumbhakonam resembles Chathurmukha Brahma by virtue of many similarities between them.\n(a) Brahma being born to Lord Narayana in the lotus is known accordingly. The city of Kumbhakonam being the abode of Lord Atmanarayana and also being the shelter for the treasure known as Padma and for the lotus too has earned similar names. Thus the same two attributes are found both in Chathurmukha Brahma and in the city of Kumbhakonam.\n(b) Brahma is full of virtues worthy of his status. Likewise Kumbhakonam is also resourcefully rich. Thus this quality is found in both.\n(c) Chathurmukha Brahma has earned his fame by virtue of his birth in this universe composed of gold. Similarly, as gold is found in abundance under the land of Kumbhakonam, it has also become known likewise. Thus this quality is present in both.\n(d) Brahma is the creator of this universe. Likewise children are being born daily in Kumbhakonam. Thus both possess the dharma of creation.\n(e) Brahma depends on Hamsa (Swan), his carrier. This city is the home for many paramahamsas. Thus both have the characteristic of Hamsa.\n(f) Brahma is dearer to Sri Sarswathi. This city has become amiable for words by virtue of its quality of destroying the sins of those who just pronounce its name. The people here find happiness in pronouncing the name Khumbakonam. Thus this quality is found in both.\n(g) Brahma has four faces. This city too has four gates in four directions. Therefore both have the characteristic of four-facedness.\n(h) Brahma is known as the sustainer for he sustains and protects this world. This city too has become the sustainer, as it sustains and protects its people. Thus this quality is found equally in both.\nThus attributed with all the characteristics of Chaturmukha Brahma, this city is shining with such glory."
+   }
   },
   "37": {
    "sa": "दम्भोलिपाणिर्धरणीधरेन्द्रदम्भादपासीदधिभूमि यस्याम् । अम्भोजुचस्तस्य वियोगभीतास्तम्बेरमेन्द्राः परितश्चरन्ति ॥ ३७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "While Indra, the king of heaven by virtue of his authority as the king of this world was living in Kumbhakonam which was as prosperous as heaven, the clouds who could not endure the pain of separation from their master Indra of whom they were the carriers were moving all over the town in the guise of huge elephants in the service of Indra. The practice of comparing the elephants to clouds and the king to Indra is in vogue in the composition of poetry."
+   }
   },
   "38": {
    "sa": "खेये यदीये कलशाम्बुराशौ वैशाखशैलान्मणिजालसालैः । उदारधेनुद्युमणीन्दिराभिर्योगादपां तद्दुहुधेति मन्ये ॥ ३८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The deep moat encircling the city of Kumbhakonam is like the ocean of milk. The tall compound wall studded with rubies and other gems surrounding the place is like Mandaraparvata used for churning the ocean of milk. When this churning stick came in contact with water stored in the moat, Kamadhenu, Chintamani and Mahalakshmi - all are bestowers of wealth - were born in this city. It is my firm opinion that a city of such features has remained most resourceful. The cattle of this city are like Kamadhenu and the gems are like Chintamani. Goddess Lakshmi is perceptibly present in Kumbhakonam. Hence this place has remained most resourceful. This is the summary of this stanza."
+   }
   },
   "39": {
    "sa": "भुञ्जानकञ्जाननसौधसद्ममध्यं समागादिति सूरसूतः । यदीयदोवारिकदारितोरुस्तेनासृजाद्याप्यरुणो ह्यनूरुः ॥ ३९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "When the womenfolk whose faces resembled the lotus were rejoicing on the roof tops of their multistoried houses, the driver of the Sun's chariot came there though men were strictly barred from entering the place of amusement of women. The doorkeepers of those houses chopped off his thighs for his offence and blood flooded out of his severed thighs. As a result he has still remained red and also without thighs. This is how the poet has analysed the reason for the driver of the sun's chariot getting the names Aruna (Red) and Anuru (Without thighs). Thus the poet has explicitly described that the houses in Kumbhakonam were so tall that they appeared to touch the Suryamandala (orbit of the sun)."
+   }
   },
   "40": {
    "sa": "स्त्रीयावनैश्वर्यकलान्यशिक्षाकृते रमेशांशनृपेण यस्याम् । मुक्तरुणेन्द्रोपलसौधदम्भाद्गुणत्रयं किं क्रमशॊ गृहीतम् ॥ ४० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The King of Kumbhakonam had the amsha of Lord Sri Vishnu in him as one could not be a king otherwise, according to the quote. The three essential duties of a king were protection of his subjects, upliftment of the middle class economically and punishment of the wicked. He had to accept the three qualities - Satva, Rajas and Tamas - as his own to execute these duties. It appeared as though, the king of Kumbhakonam on the pretext of acquiring these three qualities had built multistoried houses studded with pearls (their whiteness representing Satva), ruby stones (their red colour representing Rajas) and stones of sapphire (their black colour representing Tamas) in this city."
+   }
   },
   "41": {
    "sa": "रत्नप्रभाबन्धुरजालजालशृङ्गैर्अनेकैरनुयाति सौधः । नीलाकृतिः स्वात्मनि लक्ष्यलोकः श्रीमान्यदीयः पुरुषस्य रूपम् ॥ ४१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The multistoried structures of Kumbhakonam where the people used to rejoice were studded with stones of sapphire and provided with exquisite windows. With the images of those people reflected in their walls and their splendour enhancing their beauty, those structures with their tallest peaks resembled the supreme soul in his form of infinite proportions."
+   }
   },
   "42": {
    "sa": "कानीनजाताः श्रुतयश्चतस्रो विभिद्य सालं व्यतिलङ्घिताभ्रम् । द्वारैरुवापुर्विदुषो यदीयानद्यापि तान्येव तु गोपुराणि ॥ ४२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Sri Vedavyasa was born to Sathyavathidevi when she was still in her virginity. Four Vedas (Daughters) were born to him. Apprehending that their father Sri Vedavyasa being the son of an unmarried girl himself might force them to remain virgins, those daughters rushed towards Kumbhakonam. Then thrusting through the four sides of the wall surrounding the city, which was taller than the clouds above, they reached the place. At Kumbhakonam they secured the shelter of Vedic Scholars residing there by entering into matrimony with them. Those four openings through which they entered the city must have transformed into the four towers now."
+   }
   },
   "43": {
    "sa": "वृत्तं यदीयं चरणैश्चतुर्भिर्द्विरैरुपेत्तं चतुरस्रसालम् । श्रीचक्रबिन्दुं सततं श्रितस्य महीगुहं मन्त्रविदो वदन्ति ॥ ४३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "A Srichakra is constituted with four lines of Srichakra hymn written within and a square outside it. A hexagonal chakra along with a letter and the principal syllable of the hymn on Goddess Lakshmi are written at its centre. Likewise, the land of Kumbhakonam with its four enclosures, four gates resembling the four lines and the junction at the centre looks like a Srichakra."
+   }
   },
   "44": {
    "sa": "गजैर्गिरीन्द्रैर्जवतो विहङ्गैस्तुङ्गैस्तुरङ्गैर्मिलितं तरङ्गैः । चतुःप्रतोलीचतुरास्यसिन्धुं चतुष्पथं सञ्जगदुर्यदीयम् ॥ ४४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Huge mountain like elephants and horses resembling the tides of ocean whose speed was at par with the swiftness of the birds were roaming around the junctions of the four streets of Kumbhakonam. The people of Kumbhakonam felt that the city with those mountain like elephants and tide like horses looked like an ocean with four faces."
+   }
   },
   "45": {
    "sa": "विचित्रयत्पण्यगृहाणि कर्त्रा विस्मृत्य धात्रानुकृतं जनानाम् । समर्पयत्सङ्घनिबोधनार्थं शृङ्गाटकं ज्ञापकहंसपादम् ॥ ४५ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "It was the proposal of Chaturmuka Brahma to build exotic buildings for shops in Kumbhakonam. But forgetting to do so, he built houses there for the people. Then he created a junction which looked like a caret (a sign which resembles the foot of a swan, his carrier) as though to intimate the people that exotic shops like those at Sathyaloka should have existed there. (If the authors while writing forget to write their thoughts at a place, they insert their thoughts in that place by putting a caret, a punctuation which resembles the foot of a swan)."
+   }
   },
   "46": {
    "sa": "पाकाहिते यन्नृपवैभवेन पराजिते हन्त विसृज्य सिन्धुम् । बृहत्कुचा यत्प्रमदाजनानां चरन्ति यस्यां गिरयो निकामम् ॥ ४६ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "All the mountains which were scared by the striking blows of Vajrayudha, the weapon of Indra were lying concealed in the ocean. When Indra, the enemy of the demon Paka was vanquished by the king of Kumbhakonam (implying that when the wealth of the king surpassed the opulence of Indra) those mountains fearlessly came out of the ocean and started moving in the form of plumy bosoms of the pretty women of Kumbhakonam. The poet's description has inferred that the king of Kumbhakonam was richer than Indra and the women there were the prettiest."
+   }
   },
   "47": {
    "sa": "विभाकरेऽस्तेपि विकासभाजां निरन्तरं संसृतहंसकानाम् । घनागमेप्यभ्युदयं गतानां पङ्केरुहैर्यत्प्रमदापदानाम् ॥ ४७ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The lotus like feet of those beautiful women of Kumbhakonam constantly remain in the state of bloom even after the sunset. Those feet decorated with anklets always retain their lustre even during the monsoon. Then how can the poets compare the feet of such women with the lotus that is grown abundantly in lakes?"
+   }
   },
   "48": {
    "sa": "न चन्द्ररेखा नखरेण क्लृप्ता न मोहनं केवलदर्शनेन । न रूक्षता नैव रुचिर्न हारास्तैर्दिभिर्यद्रमणीकुचानाम् ॥ ४८ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The smooth and lustrous bosoms of the beautiful women of Kumbhakonam with half moon shaped marks caused by their fingernails and decorated with garlands appear fascinating for the eyes. But the mountains with rough surfaces which have no such lustre or such marks on them and which are not decorated with garlands fail to appear fascinating for the eyes. Then how can the poets compare such mountains with the plumpy bosoms of the beautiful women of Kumbhakonam?"
+   }
   },
   "49": {
    "sa": "न बन्धकत्वं शकुलेषु दृष्टं न चोत्पले चञ्चलताम्बुजेषु । स्वतो तनोर्बाधकृतानबाणे यदङ्गनानां नयनैरमीषाम् ॥ ४९ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Fish cannot capture anybody, but get captured themselves by the fish hook and die. But women would captivate young men and inflame them with love just with the charm of their eyes. Though lotus and lily vacillate occasionally with the breeze, they are not whimsical naturally, so as to attract young men whereas the women entice them by just casting their straying eyes on them. Even the arrow of the incorporeal Manmatha cannot cause the anguish of separation without the assistance of women, moon, the cool and odoriferous breeze, etc. The beautiful eyes of women can attract young men within moments. Thus the fish, the lotus, the lily and the arrow of the God of love contrast with the eyes of women which inherently have more distinctive features. When such is the case, how can the poet draw comparison between them and other things such as fish etc?"
+   }
   },
   "50": {
    "sa": "न वक्रिमा बर्हिजबर्हिबर्हे न तैजसैकासिकतान्धकारे । न मेघवृन्दे चिरकालनैल्यं यदङ्गनाकेशभरैरतस्तैः ॥ ५० ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The braids of hair of women of Kumbhakonam are twisted into ringlets with those attractive curly hairs capering on their foreheads. But this curliness is not found in the feather of a peacock. The hairs of those pretty women are inherently bright and as black as darkness. Contrarily brightness and darkness are incompatible. The fillets of hair of women retain the blackness of its colour for a long time whereas the clouds appear dark only for a short period during monsoon. Then how can the poets compare these things to each other which have such opposite features?"
+   }
   },
   "51": {
    "sa": "न भ्रूविलासा नतमां स्थिरश्रीर्नारसोक्तिर्नतमां च यस्य । तेनेन्दुना यत्प्रमदामुखानां कथं कवीन्द्राः कथयन्तिसाम्यम् ॥ ५१ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Mischievousness of gentle smile and coquettish gestures of eyebrows are apparent on the pretty faces of the women of Kumbhakonam which cannot be found in the moon. Those faces constantly radiate with effulgence but the moon has no such effulgence which is uniformly constant because of the striking difference between the bright and dark halves of the lunar month. Sweet words of passion of love emanate from the mouths of those women whereas the moon cannot talk. When such features attributed to the faces of those women are not found in the moon, how can the poets portray the beauty of those faces comparing them with moon?"
+   }
   },
   "52": {
    "sa": "तस्यां नगर्यां सुकृते बदर्यां भवाब्धितर्याम्बुधसिंहदर्याम् । विचित्रनाम्नां विजितेन्द्रपुर्यां चिरं न्यवात्सीत्सितसौधगौर्याम् ॥ ५२ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The city of Kumbhakonam is sanctimoniously at par with the holy town of Badari in guiding the virtuous to their goals of accomplishment of moral excellence and achievement of punya. It serves as a ship in enabling one to cross the ocean of the whirl and maze of mundane affairs. It is like a cave in providing refuge to those scholars who are like lions. It is the home for many beautiful girls on whose faces the resplendence of those women of divinity is manifested. It transcends even Amaravathi of Devendra in the matters of grandeur and luxury. Immaculately built mansions have enhanced the beauty of the city. Sri Sudheendratheertha stayed in the place of such virtues for a long time."
+   }
   },
   "53": {
    "sa": "अतुलविविधविद्वन्मण्डलीलाल्यमानः प्रभुमणिरघुनाथप्रौढभूपालकेन । महितनिखिलविद्वन्मौलिपादः सुधीन्द्रः परजनदुरवापं प्राप हेमाभिषेकम् ॥ ५३ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "The erudite scholarship of Sri Sudheendratheertha who had emerged triumphant over all his antagonists in debates had received allround commendation from the world of scholars. The defeated scholars used to pay their obeisance to him placing their heads on his lotus feet. Raghunathabhoopala, the king of Tanjawoor who himself was learned, and who shone elegantly amidst the assembly of great scholars as their patron felicitated Sri Sudheendratheertha with ablution with gold, with profound devotion and admiration for the greatest erudition of the Saint. None in the past had received such a rare honour from the king."
+   }
   },
   "54": {
    "sa": "श्रीमत्कश्यपवंशवार्धिशशिनः षड्दर्शनीवल्लभ श्रीलक्ष्मीनरसिंहवित्तविदुषः श्रीवेङ्कटाम्बामणौ । जातेनार्यदयासुधामयगिरा नारायणेनोदिते काव्ये चारुणि राघवेन्द्रविजये सर्गो द्वितीयोऽभवत् ॥ ५४ ॥",
-   "commentaries": {}
+   "commentaries": {
+    "pavamanacharya_english": "Thus concludes the second Canto of the epic \"Sri Raghavendravijaya\" enchanting with ambrosial words composed by Narayanacharya with the blessings of his father. Narayanacharya who had his education from his father was the son of the couple Venkatamba and Lakshminarsimhacharya who was an erudite scholar in all the six Shastras and who was born and shone like moon in the ocean of Kashyapagothra named after that virtuous and scholarly sage Kashyapa."
+   }
   }
  }
 }

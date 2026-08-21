@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1709,
-  "loaded": 982,
-  "items": 375483
+  "leaves": 1712,
+  "loaded": 985,
+  "items": 381627
  },
  "sections": {
   "agama": {
@@ -62,9 +62,9 @@
    "items": 0
   },
   "upaveda": {
-   "total": 6,
-   "loaded": 6,
-   "items": 50
+   "total": 9,
+   "loaded": 9,
+   "items": 6194
   },
   "vedanga": {
    "total": 106,
@@ -1554,9 +1554,12 @@
   "stotra/gajendra_moksha": 0,
   "stotra/pns": 0,
   "stotra/vishnu_sahasranama": 0,
+  "upaveda/ayurveda/madhava_nidana": 1554,
   "upaveda/ayurveda/nighantu/bhavaprakasha_nighantu": 1,
   "upaveda/ayurveda/nighantu/raja_nighantu": 35,
   "upaveda/ayurveda/nighantu/vahata_ashtanganighantu": 1,
+  "upaveda/ayurveda/sharngadhara_samhita": 2448,
+  "upaveda/ayurveda/susruta_samhita_sutrasthana": 2142,
   "upaveda/kamashastra/kamasutra": 7,
   "upaveda/kamashastra/pancashayaka": 5,
   "upaveda/kamashastra/smaradipika": 1,

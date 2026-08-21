@@ -197,6 +197,7 @@ body.leaving #veil { opacity: 1; }
     inset 0 0 60px rgba(0,0,0,.5);
 }
 .frame img {
+  position: absolute; inset: 0;
   width: 100%; height: 100%; display: block;
   object-fit: cover; object-position: center 50%;
   filter: saturate(1.06) contrast(1.04) brightness(1.02);
@@ -208,6 +209,29 @@ body.leaving #veil { opacity: 1; }
   from { transform: scale(1)     translateY(0); }
   to   { transform: scale(1.055) translateY(-1.4%); }
 }
+/* Namaskāra's blessing video — sits in the exact same box as the photo
+   (not a popup) so a tap on "Offer Namaskāra" makes the portrait itself
+   appear to come alive. object-fit: cover crops it to the frame's own
+   2:3 shape the same way the photo is cropped; the clip's real ratio
+   (400x736) is taller/narrower than that, so a little is trimmed off the
+   top and bottom — the accepted tradeoff of matching the photo's frame
+   rather than showing the clip uncropped in a bigger box of its own.
+   z-index above the photo is deliberate, not decorative: Chromium
+   composites <video> on its own layer, which in practice can paint above
+   a plain sibling regardless of DOM order — being explicit here keeps
+   the crossfade direction correct rather than relying on that quirk by
+   accident. */
+.frame video {
+  position: absolute; inset: 0; z-index: 1;
+  width: 100%; height: 100%; display: block;
+  object-fit: cover; object-position: center 50%;
+  -webkit-mask-image: linear-gradient(180deg, #000 88%, rgba(0,0,0,.86) 96%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 88%, rgba(0,0,0,.86) 96%, transparent 100%);
+  background: #120B04;
+  opacity: 0; pointer-events: none;
+  transition: opacity .6s var(--ease-soft);
+}
+.frame.video-active video { opacity: 1; pointer-events: auto; }
 .frame::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background:
@@ -479,33 +503,6 @@ body.leaving #veil { opacity: 1; }
 }
 .sheet-close:hover { border-color: rgba(232,178,77,.6); color: var(--text); }
 
-/* Namaskāra's blessing gif — same fixed-overlay/fade shape as .sheet-wrap,
-   but its own rule set since the content is one portrait image, not a
-   scrolling panel. z-index sits below #veil (200) so the leaving-page fade
-   still wins if the visitor hits Enter while this is open. */
-.pranam-gif-wrap {
-  position: fixed; inset: 0; z-index: 190;
-  display: grid; place-items: center; padding: 18px;
-  background: rgba(5,4,3,.82);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  opacity: 0; visibility: hidden;
-  transition: opacity .35s var(--ease-soft), visibility 0s linear .35s;
-}
-.pranam-gif-wrap.open { opacity: 1; visibility: visible; transition-delay: 0s; }
-
-.pranam-gif-box {
-  position: relative; width: min(300px, 82vw);
-  border-radius: 18px; overflow: hidden;
-  border: 1px solid rgba(232,178,77,.28);
-  background: var(--bg-panel);
-  box-shadow: 0 40px 90px rgba(0,0,0,.7);
-  transform: translateY(18px) scale(.98);
-  transition: transform .4s var(--ease);
-}
-.pranam-gif-wrap.open .pranam-gif-box { transform: none; }
-.pranam-gif-box img { display: block; width: 100%; height: auto; }
-.pranam-gif-box .sheet-close { position: absolute; top: 8px; right: 8px; float: none; }
-
 .sheet-eyebrow { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 8px; }
 .sheet h3 {
   font-family: var(--font-serif);
@@ -638,7 +635,7 @@ body.leaving #veil { opacity: 1; }
   .mandala, .smoke, .om, .halo, .halo-ring, .frame img,
   .btn-enter.ready, .cue span { animation: none !important; }
   .petal, .ripple, .pranam-mark { display: none !important; }
-  .btn, .sheet, .sheet-wrap, .cue-pop, #veil, .pranam-gif-wrap, .pranam-gif-box { transition-duration: .01ms !important; }
+  .btn, .sheet, .sheet-wrap, .cue-pop, #veil, .frame video { transition-duration: .01ms !important; }
 }
 
 /* =========================================================================

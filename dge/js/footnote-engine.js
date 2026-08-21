@@ -6,7 +6,7 @@
 // superscript footnote markers plus a footnote list, matching the visual
 // pattern of dge/js/backlinks.js's citation popovers/links.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['footnote-engine.js'] = 'v1.0';
+window.DGE_VERSIONS['footnote-engine.js'] = 'v1.1 (footnote list items now show the same dge-ai-badge as commentary blocks, since every reference here started as a Gemini proposal)';
 
 const DGEFootnotes = (function () {
   const STATUS_LABEL = {
@@ -78,8 +78,13 @@ const DGEFootnotes = (function () {
             ? '<span class="dge-fn-target-guess">' + esc(ref.source_guess) +
               ' (not found in this library’s copy)</span>'
             : '');
+      // Every reference here started as a Gemini proposal (see
+      // tools/gemini_enrich.py) -- the "AI" badge marks that origin
+      // regardless of status, same convention as commentary blocks
+      // (core.js's dgeIsAiGeneratedCommentaryKey / render.js).
       return '<li id="fn-' + esc(rid) + '" class="dge-fn-item ' + (STATUS_CLASS[status] || '') + '">' +
              '<span class="dge-fn-num">' + n + '.</span> ' +
+             '<span class="dge-ai-badge" title="AI-proposed -- not author-verified">AI</span> ' +
              '<span class="dge-fn-quote">“' + esc(ref.quoted_text) + '”</span> ' +
              (targetHtml ? ('— ' + targetHtml + ' ') : '') +
              '<span class="dge-fn-status">' + esc(label) + '</span>' +
