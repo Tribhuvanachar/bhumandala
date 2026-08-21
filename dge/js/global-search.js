@@ -19,7 +19,7 @@
   // window.DGE_SEARCH_INDEX from appConfig; this constant is the same URL, so
   // a page that does not load config.js still finds it. Set the variable to
   // 'search_index' to read a local build instead.
-  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@0195c115a77f196e616ab4745906b4c3730727a1';
+  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@60091fb1d84d2dbca3224b6ee7d1b78834a63c81';
   var INDEX_BASE = window.DGE_SEARCH_INDEX || CDN_INDEX;
   var idxPromise = null, debounce = null;
   var currentScheme = 'auto'; // set by the scheme popup, read by queryOpts()
@@ -327,7 +327,18 @@
   // search.
   function renderRows(hits, q, emptyMessage) {
     var box = document.getElementById('dge-gs-results');
-    if (!hits || !hits.length) { box.innerHTML = '<div class="dge-gs-hint">' + esc(emptyMessage || 'No matches.') + '</div>'; return; }
+    if (!hits || !hits.length) {
+      // Zero hits on a capped sweep is not proof of absence: one long word
+      // whose trigrams are all common can crowd its true source out of the
+      // shard budget entirely (see dge-search.js's note on `partial`), and
+      // adding a second word genuinely fixes that — so say it.
+      var msg = esc(emptyMessage || 'No matches.');
+      if (lastHits && lastHits.partial && !emptyMessage) {
+        msg += ' The search could not sweep the whole library for this — a single long word matches too much of it faintly. Adding one more word from the same line usually finds it.';
+      }
+      box.innerHTML = '<div class="dge-gs-hint">' + msg + '</div>';
+      return;
+    }
     // A common word matches most of the corpus; the search stops after the
     // best few dozen granthas rather than opening all of them. Say so, so a
     // reader does not take a capped list for the whole of it.

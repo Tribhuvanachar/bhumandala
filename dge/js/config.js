@@ -72,7 +72,7 @@ const appConfig = {
   // overwrote it (search-dist keeps one squashed commit, not history) --
   // the improved code is safe in that PR's branch, just re-run reindex.yml
   // once it merges so this pin picks up both fixes together.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@3775f74b4ac3d18919d08719eef6eae5c8f69a7b",
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@60091fb1d84d2dbca3224b6ee7d1b78834a63c81",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read

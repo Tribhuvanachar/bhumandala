@@ -14,7 +14,24 @@
     get:function(k,d){ try{ var v=localStorage.getItem("dge.shabda."+k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
     set:function(k,v){ try{ localStorage.setItem("dge.shabda."+k, JSON.stringify(v)); }catch(e){} }
   };
-  var state = { all:[], view:[], page:0, script: LS.get("script","devanagari"), linga: LS.get("linga",""), q:"", openId: LS.get("open",null), highlightCell:null };
+  var state = { all:[], view:[], page:0, script: LS.get("script","devanagari"), linga: LS.get("linga",""), anta: LS.get("anta",""), q:"", openId: LS.get("open",null), highlightCell:null };
+
+  // Stem-ending class of a headword (the "advanced filter" axis): the
+  // written final sound — a matra, an explicit virama (halanta), or the
+  // implicit अ of a bare consonant letter. Derived from the word itself,
+  // no new data needed.
+  var MATRA_ANTA = { "ा":"A","ि":"i","ी":"I","ु":"u","ू":"U","ृ":"f","ॄ":"F","े":"e","ै":"E","ो":"o","ौ":"O" };
+  var INDEP_ANTA = { "अ":"a","आ":"A","इ":"i","ई":"I","उ":"u","ऊ":"U","ऋ":"f","ॠ":"F","ए":"e","ऐ":"E","ओ":"o","औ":"O" };
+  function antaOf(word){
+    var w=String(word||"").normalize("NFC").trim();
+    if(!w) return "";
+    var last=w[w.length-1];
+    if(last==="्") return "H";                       // halanta
+    if(MATRA_ANTA[last]) return MATRA_ANTA[last];
+    if(INDEP_ANTA[last]) return INDEP_ANTA[last];
+    if(last>="क" && last<="ह") return "a";           // bare consonant → implicit अ
+    return "";
+  }
   function totalPages(){ return Math.max(1, Math.ceil(state.view.length / PAGE_SIZE)); }
 
   function $(s,r){ return (r||document).querySelector(s); }
@@ -28,6 +45,7 @@
     var q=state.q.trim().toLowerCase();
     state.view = state.all.filter(function(it){
       if(state.linga && it.linga!==state.linga) return false;
+      if(state.anta && it._anta!==state.anta) return false;
       if(q && it._hay.indexOf(q)<0) return false;
       return true;
     });
@@ -42,7 +60,8 @@
       h+='<tr><th class="deva">'+VIBHAKTI[v]+'</th>';
       for(var n=0;n<3;n++){ var idx=v*3+n;
         var hl = (highlightIdx!=null && idx===highlightIdx);
-        h+='<td class="deva'+(hl?" df-hl":"")+'"'+(hl?' id="df-hl-cell"':'')+'>'+esc((cells[idx]||"").split("-").join(", "))+'</td>'; }
+        var has = !!(cells[idx]||"").trim();
+        h+='<td class="deva'+(hl?" df-hl":"")+(has?" sst-cell-hint":"")+'"'+(has?' data-ci="'+idx+'" title="रूपसिद्धिः — tap for the derivation"':'')+(hl?' id="df-hl-cell"':'')+'>'+esc((cells[idx]||"").split("-").join(", "))+'</td>'; }
       h+='</tr>';
     }
     h+='</tbody></table></div>';
@@ -96,22 +115,33 @@
   // ("where am I, how many pages left") and cheaper to paint per tap,
   // since only one page's worth of rows (and their collapsed bodies) is
   // ever in the DOM at once.
-  function setBtnDisabled(btn, disabled){ btn.disabled=disabled; btn.style.opacity=disabled?"0.4":"1"; btn.style.cursor=disabled?"default":"pointer"; }
+  function setBtnDisabled(btn, disabled){ if(!btn) return; btn.disabled=disabled; btn.style.opacity=disabled?"0.4":"1"; btn.style.cursor=disabled?"default":"pointer"; }
   function render(){
     var box=$("#sh-list");
     box.innerHTML="";
     if(!state.view.length){
       box.innerHTML='<div class="empty">No words match these filters.</div>';
       $("#sh-pager").style.display="none";
+      var pt0=$("#sh-pagerTop"); if(pt0) pt0.style.display="none";
       return;
     }
     var start=state.page*PAGE_SIZE, end=Math.min(start+PAGE_SIZE, state.view.length), html="";
     for(var i=start;i<end;i++) html+=rowHTML(state.view[i]);
     box.insertAdjacentHTML("beforeend", html);
+    // Both pagers (top + bottom) mirror the same state; the top one exists
+    // because on a phone the bottom pager is a full page-length scroll away.
+    var info="Page "+(state.page+1)+" / "+totalPages()+" · "+state.view.length.toLocaleString()+" words";
     $("#sh-pager").style.display="flex";
-    $("#sh-pageInfo").textContent = "Page "+(state.page+1)+" / "+totalPages()+" · "+state.view.length.toLocaleString()+" words";
+    $("#sh-pageInfo").textContent = info;
     setBtnDisabled($("#sh-prev"), state.page<=0);
     setBtnDisabled($("#sh-next"), state.page>=totalPages()-1);
+    var pt=$("#sh-pagerTop");
+    if(pt){
+      pt.style.display="flex";
+      $("#sh-pageInfoTop").textContent = info;
+      setBtnDisabled($("#sh-prevTop"), state.page<=0);
+      setBtnDisabled($("#sh-nextTop"), state.page>=totalPages()-1);
+    }
   }
   function rerender(){ recompute(); state.page=0; render(); }
 
@@ -125,9 +155,42 @@
     else { el.classList.add("open"); el.querySelector(".rbody").innerHTML=bodyHTML(it); state.openId=id; LS.set("open",id); setHash(id); }
   }
   function syncLingaChips(){ document.querySelectorAll("[data-l]").forEach(function(c){ c.classList.toggle("on", c.dataset.l===state.linga); }); }
+  function syncAntaChips(){ document.querySelectorAll("[data-a]").forEach(function(c){ c.classList.toggle("on", c.dataset.a===state.anta); }); }
+
+  // Tap a declension cell -> its step-by-step subanta prakriyā, rendered by
+  // js/subanta-steps.js (the same vidyut WASM engine rupasiddhi.html uses,
+  // loaded lazily on the first tap). Tapping the same cell again closes it.
+  function cellSteps(td){
+    var S=window.DGESubantaSteps; if(!S) return;
+    var row=td.closest("article.row"); if(!row) return;
+    var it=state.all.find(function(x){return x.id===row.dataset.id;}); if(!it) return;
+    var ci=parseInt(td.dataset.ci,10), vb=Math.floor(ci/3), vc=ci%3;
+    var tableWrap=td.closest(".df-table"); if(!tableWrap) return;
+    var panel=tableWrap.nextElementSibling;
+    var already=panel && panel.classList.contains("sst-panel");
+    if(already && panel.dataset.ci===String(ci)){ panel.remove(); td.classList.remove("sst-cell-on"); return; }
+    if(already) panel.remove();
+    tableWrap.querySelectorAll(".sst-cell-on").forEach(function(x){x.classList.remove("sst-cell-on");});
+    td.classList.add("sst-cell-on");
+    S.css();
+    panel=document.createElement("div");
+    panel.className="sst-panel"; panel.dataset.ci=String(ci);
+    panel.innerHTML='<div class="sst-loading">रूपसिद्धिः सज्जीक्रियते… (loading the derivation engine on first use)</div>';
+    tableWrap.insertAdjacentElement("afterend",panel);
+    var expected=String(it.forms||"").split(";")[ci]||"";
+    S.derive(it.word, it.linga, vb, vc).then(function(results){
+      if(!panel.isConnected) return;
+      panel.innerHTML=S.panelHtml(it.word, it.linga, vb, vc, results, expected);
+    }).catch(function(){
+      if(!panel.isConnected) return;
+      panel.innerHTML='<p class="sst-note">Could not load the derivation engine (offline?) — the forms above are unaffected.</p>';
+    });
+  }
 
   function wire(){
     $("#sh-list").addEventListener("click",function(e){
+      var td=e.target.closest("td[data-ci]");
+      if(td){ cellSteps(td); return; }
       var h=e.target.closest(".rhead"); if(h) toggleRow(h.parentElement.dataset.id);
     });
     $("#sh-prev").addEventListener("click",function(){ if(state.page>0){ state.page--; render(); window.scrollTo({top:0,behavior:"smooth"}); } });
@@ -137,6 +200,11 @@
     $("#sh-search").addEventListener("input",function(e){ state.q=e.target.value; rerender(); });
     document.querySelectorAll("[data-l]").forEach(function(c){ c.addEventListener("click",function(){
       state.linga=c.dataset.l; LS.set("linga",state.linga); syncLingaChips(); rerender(); }); });
+    document.querySelectorAll("[data-a]").forEach(function(c){ c.addEventListener("click",function(){
+      state.anta=c.dataset.a; LS.set("anta",state.anta); syncAntaChips(); rerender(); }); });
+    var pv=$("#sh-prevTop"), nx=$("#sh-nextTop");
+    if(pv) pv.addEventListener("click",function(){ if(state.page>0){ state.page--; render(); window.scrollTo({top:0,behavior:"smooth"}); } });
+    if(nx) nx.addEventListener("click",function(){ if(state.page<totalPages()-1){ state.page++; render(); window.scrollTo({top:0,behavior:"smooth"}); } });
     $("#sh-scriptSeg").addEventListener("click",function(e){ var b=e.target.closest("button"); if(!b)return;
       [].forEach.call(e.currentTarget.children,function(x){x.classList.remove("on");}); b.classList.add("on");
       state.script=b.dataset.s; LS.set("script",state.script); rerender(); });
@@ -145,8 +213,8 @@
 
   function openById(id){
     var it=state.all.find(function(x){return x.id===id;}); if(!it) return;
-    state.openId=id; LS.set("open",id); state.linga=""; state.q=""; $("#sh-search").value=""; LS.set("linga","");
-    syncLingaChips(); recompute();
+    state.openId=id; LS.set("open",id); state.linga=""; state.anta=""; state.q=""; $("#sh-search").value=""; LS.set("linga",""); LS.set("anta","");
+    syncLingaChips(); syncAntaChips(); recompute();
     var pos=state.view.findIndex(function(x){return x.id===id;});
     state.page = pos>=0 ? Math.floor(pos/PAGE_SIZE) : 0;
     render();
@@ -231,13 +299,14 @@
   function boot(){
     if(LS.get("dark",false)) document.body.classList.add("dark");
     var ss=$("#sh-scriptSeg"); if(ss) ss.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on",b.dataset.s===state.script); });
-    syncLingaChips(); wire();
+    syncLingaChips(); syncAntaChips(); wire();
     fetch(URL).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(d){
       state.all=(d.items||[]).map(function(it){
         // forms included so a search for an inflected word (e.g. परस्य,
         // pasted in from the reader's "Shabda" word-tool) finds the
         // headword it declines from, not just an exact headword match.
         it._hay=((it.word||"")+" "+(it.artha||"")+" "+(it.artha_hin||"")+" "+(it.artha_eng||"")+" "+(it.forms||"")).toLowerCase();
+        it._anta=antaOf(it.word);
         return it;
       });
       $("#sh-total").textContent = state.all.length.toLocaleString();

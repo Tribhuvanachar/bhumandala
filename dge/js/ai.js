@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.10 (Dhatu word-tool now also opens an instant in-page modal, sharing Shabda\'s style, instead of a new-tab navigation, with the matched root\'s real step-by-step derivation inline; new Sandhi/Samasa word-tool buttons run a focused Ask Acharya (AI) query in the same acharyaModal, since Vidyut has no precomputed sandhi/samasa data the way it does for Shabda/Dhatu -- an on-screen note says so)';
+window.DGE_VERSIONS['ai.js'] = 'v3.11 (merge of two v3.10 lines: shabda modal returns the prakriya -- the matched declension cell renders its sutra-by-sutra subanta derivation automatically via js/subanta-steps.js, every cell tappable, plus a "where else in the library" corpus-search link; AND the Dhatu word-tool instant in-page modal with the root\'s step-by-step derivation, plus Sandhi/Samasa word-tool buttons running a focused Ask Acharya (AI) query with an on-screen AI-only note)';
 
 // Appends a language directive read from onboarding.js's saved preference
 // (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
@@ -1140,7 +1140,10 @@ function dgeShabdaDeclTable(forms, hlIdx) {
     for (let n = 0; n < 3; n++) {
       const idx = vb * 3 + n;
       const hl = (hlIdx != null && idx === hlIdx);
-      h += '<td class="deva' + (hl ? ' dsm-hl' : '') + '">' + dgeShabdaEsc((cells[idx] || '').split('-').join(', ')) + '</td>';
+      const has = !!(cells[idx] || '').trim();
+      h += '<td class="deva' + (hl ? ' dsm-hl' : '') + (has ? ' sst-cell-hint' : '') + '"' +
+        (has ? ' data-ci="' + idx + '" title="रूपसिद्धिः — tap for the derivation"' : '') + '>' +
+        dgeShabdaEsc((cells[idx] || '').split('-').join(', ')) + '</td>';
     }
     h += '</tr>';
   }
@@ -1157,10 +1160,54 @@ function dgeShabdaStepsHtml(steps) {
   }).join('') + '</ol>';
 }
 
+// "Where else does this word occur" (§5.2): closes the shabda modal and
+// opens the global corpus search already searching for the surface form the
+// reader looked up. Rendered only when global-search.js is actually loaded
+// on this page, so the link can never be a dead end.
+function dgeShabdaWhereElseLink(surface) {
+  if (!(window.DGEGlobalSearch && window.DGEGlobalSearch.open)) return '';
+  return '<a class="dsm-full-link" href="#" data-dsm-where="' + dgeShabdaEsc(surface) + '">🔍 साहित्ये अन्यत्र — where else in the library ↗</a>';
+}
+function dgeShabdaWireWhereElse(body) {
+  const a = body.querySelector('[data-dsm-where]');
+  if (!a) return;
+  a.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (typeof closeModal === 'function') closeModal(DGE_SHABDA_MODAL_ID);
+    window.DGEGlobalSearch.open(a.getAttribute('data-dsm-where'));
+  });
+}
+
+// The matched (or tapped) declension cell's step-by-step subanta prakriyā,
+// via js/subanta-steps.js — the "Shabda must return the prakriyā" ask.
+// Degrades silently to the plain table when that script isn't loaded or the
+// engine can't load: the lookup's own answer never depends on it.
+function dgeShabdaSubantaSteps(body, item, ci) {
+  const S = window.DGESubantaSteps, box = body.querySelector('#dsmSteps');
+  if (!S || !box || ci == null || ci < 0) return;
+  const vb = Math.floor(ci / 3), vc = ci % 3;
+  S.css();
+  body.querySelectorAll('td.sst-cell-on').forEach(td => td.classList.remove('sst-cell-on'));
+  const cell = body.querySelector('td[data-ci="' + ci + '"]');
+  if (cell) cell.classList.add('sst-cell-on');
+  box.className = 'sst-panel';
+  box.innerHTML = '<div class="sst-loading">रूपसिद्धिः सज्जीक्रियते…</div>';
+  const expected = String(item.forms || '').split(';')[ci] || '';
+  S.derive(item.word, item.linga, vb, vc).then(function (results) {
+    if (!box.isConnected) return;
+    box.innerHTML = S.panelHtml(item.word, item.linga, vb, vc, results, expected);
+  }).catch(function () {
+    if (!box.isConnected) return;
+    box.innerHTML = '<p class="sst-note">Could not load the derivation engine — the forms above are unaffected.</p>';
+  });
+}
+
 function dgeShowShabdaNotFound(body, surface) {
   body.innerHTML = '<div class="dsm-empty">No exact form found for "' + dgeShabdaEsc(surface) + '". ' +
     'It may still be findable in the full word list — <a href="shabda.html?q=' + encodeURIComponent(surface) + '" target="_blank">search the full शब्दपाठः ↗</a>, or ' +
-    '<a href="#" id="dsmReportMissing">report this as missing</a>.</div>';
+    '<a href="#" id="dsmReportMissing">report this as missing</a>.</div>' +
+    dgeShabdaWhereElseLink(surface);
+  dgeShabdaWireWhereElse(body);
   const rep = document.getElementById('dsmReportMissing');
   if (rep) rep.addEventListener('click', function (e) {
     e.preventDefault();
@@ -1186,7 +1233,9 @@ function dgeRenderShabdaKrt(body, surface, hit) {
         '<div class="dsm-word deva">' + dgeShabdaEsc(surface) + '</div>' +
         '<div class="dsm-sub">कृदन्तः · ' + dgeShabdaEsc(DGE_KRT_NAME[krtKey] || krtKey) + ' (' + dgeShabdaEsc(DGE_KRT_NAME_EN[krtKey] || '') + ') · from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '"</div>' +
         dgeShabdaStepsHtml(k.s) +
-        '<a class="dsm-full-link" href="krdanta.html#' + dgeShabdaEsc(code) + ':' + dgeShabdaEsc(krtKey) + '" target="_blank">View in full कृदन्त browser ↗</a>';
+        '<a class="dsm-full-link" href="krdanta.html#' + dgeShabdaEsc(code) + ':' + dgeShabdaEsc(krtKey) + '" target="_blank">View in full कृदन्त browser ↗</a>' +
+        dgeShabdaWhereElseLink(surface);
+      dgeShabdaWireWhereElse(body);
     })
     .catch(() => dgeShowShabdaNotFound(body, surface));
 }
@@ -1210,8 +1259,20 @@ window.dgeOpenShabdaForSelection = function(e) {
       if (it.artha_hin) h += '<div class="dsm-kv"><div class="dsm-kk">हिन्दी</div><div class="dsm-kvv">' + dgeShabdaEsc(it.artha_hin) + '</div></div>';
       if (it.artha_eng) h += '<div class="dsm-kv"><div class="dsm-kk">English</div><div class="dsm-kvv">' + dgeShabdaEsc(it.artha_eng) + '</div></div>';
       h += dgeShabdaDeclTable(it.forms, loc.cellIndex);
+      h += '<div id="dsmSteps"></div>';
       h += '<a class="dsm-full-link" href="shabda.html#' + dgeShabdaEsc(it.id) + '" target="_blank">View in full शब्दपाठः browser ↗</a>';
+      h += dgeShabdaWhereElseLink(word);
       body.innerHTML = h;
+      dgeShabdaWireWhereElse(body);
+      // The looked-up form's own step-by-step prakriyā renders right away
+      // (js/subanta-steps.js, the rupasiddhi WASM engine loaded lazily);
+      // any other cell in the table is tappable for its derivation too.
+      dgeShabdaSubantaSteps(body, it, loc.cellIndex);
+      body.querySelectorAll('td[data-ci]').forEach(function (td) {
+        td.addEventListener('click', function () {
+          dgeShabdaSubantaSteps(body, it, parseInt(td.dataset.ci, 10));
+        });
+      });
       return;
     }
     const cp = word.codePointAt(0).toString(16).toLowerCase().padStart(4, '0');

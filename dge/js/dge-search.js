@@ -237,8 +237,16 @@
         });
         hits.sort(function (a, b) { return b.score - a.score; });
         var out = hits.slice(0, limit);
-        // so the UI can say the corpus was not swept end to end
-        out.partial = !!bag.skipped && hits.length > 0;
+        // so the UI can say the corpus was not swept end to end.
+        // `partial` also matters at ZERO hits: a long single word made
+        // entirely of common trigrams (राजनीतिसमुच्चयम्) can have hundreds
+        // of big units "complete" on scattered trigrams, crowding the true
+        // containment out of the shard budget before it is ever opened —
+        // measured live: 469 complete candidates, the real hit ranked 374.
+        // A second word in the query fixes it (each word's own trigram set
+        // is judged independently), so the UI should say so instead of a
+        // bare "No matches."
+        out.partial = !!bag.skipped;
         return out;
       });
   };
