@@ -1,5 +1,5 @@
 DGE — DASA SAHITYA (Dasara Padagalu, Suladis, Ugabhogas)
-Generated 2026-08-21 · 1354 compositions
+Generated 2026-08-12 · 1396 compositions
 Non-commercial · dharma-prachara / education / research
 ======================================================================
 
@@ -2732,8 +2732,13 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Gopala Dasaru  (42)
+## Gopala Dasaru  (43)
 ######################################################################
+
+--- [pada] Gopala dasaru compositions
+    tags: composer:Gopala Dasaru
+    source: https://madhwafestivals.com/2016/12/04/gopala-dasaru-compositions/
+
 
 --- [pada] Rathavanerida raghavendra
     tags: composer:Gopala Dasaru, on:Raghavendra Theertharu, yati:Raghavendra Theertharu
@@ -4124,8 +4129,13 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Harapanahalli Bheemavva  (26)
+## Harapanahalli Bheemavva  (27)
 ######################################################################
+
+--- [pada] Dasara padagalu composed by Harapanahalli Bheemavvanavaru
+    tags: composer:Harapanahalli Bheemavva
+    source: https://madhwafestivals.com/2016/12/21/dasara-padagalu-composed-by-harapanahalli-bheemavvanavaru/
+
 
 --- [pada] Hoova kode taayi varava kode
     deity: Mahalakshmi
@@ -6958,8 +6968,13 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Helavanakatte Giriyamma  (7)
+## Helavanakatte Giriyamma  (8)
 ######################################################################
+
+--- [pada] Dasara padagalu composed by Helavanakatte Giriyammanavaru
+    tags: composer:Helavanakatte Giriyamma
+    source: https://madhwafestivals.com/2016/12/20/dasara-padagalu-composed-by-helavanakatte-giriyammanavaru/
+
 
 --- [pada] Baktala banna paraku bagyada nidhiye
     tags: composer:Helavanakatte Giriyamma
@@ -7021,8 +7036,13 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Jagannatha Dasaru  (62)
+## Jagannatha Dasaru  (63)
 ######################################################################
+
+--- [pada] Jagannatha dasaru compositions
+    tags: composer:Jagannatha Dasaru
+    source: https://madhwafestivals.com/2016/12/05/jagannatha-dasaru-compositions/
+
 
 --- [pada] Baaro raghavendra baaro
     tags: composer:Jagannatha Dasaru, on:Raghavendra Theertharu, yati:Raghavendra Theertharu
@@ -9116,8 +9136,15 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Kanaka Dasaru  (68)
+## Kanaka Dasaru  (69)
 ######################################################################
+
+--- [pada] Dasara padagalu composed by Kanaka Dasaru
+    tags: composer:Kanaka Dasaru
+    source: https://madhwafestivals.com/2016/11/09/dasara-padagalu-composed-by-kanaka-dasaru/
+
+    Hari bhakti saara/ಹರಿ ಭಕ್ತಿ ಸಾರ
+
 
 --- [pada] Nammama sharade
     deity: Ganapathi
@@ -11200,8 +11227,13 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Mahipathi Dasaru  (7)
+## Mahipathi Dasaru  (8)
 ######################################################################
+
+--- [pada] Dasara padagalu composed by Mahipathi dasaru
+    tags: composer:Mahipathi Dasaru
+    source: https://madhwafestivals.com/2016/11/30/dasara-padagalu-composed-by-mahipathi-dasaru/
+
 
 --- [kolu] Kolu Kolenna Kole
     tags: composer:Mahipathi Dasaru, theme:Dashavathara, theme:Kolu
@@ -11332,8 +11364,13 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Mohana Dasaru  (12)
+## Mohana Dasaru  (13)
 ######################################################################
+
+--- [pada] Mohana dasaru compositions
+    tags: composer:Mohana Dasaru
+    source: https://madhwafestivals.com/2017/03/29/mohana-dasaru-compositions/
+
 
 --- [pada] Tande Vijaya Raayaa
     tags: composer:Mohana Dasaru, on:Vijayadasaru, yati:Vijayadasaru
@@ -11560,8 +11597,13 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Pranesha Dasaru  (19)
+## Pranesha Dasaru  (20)
 ######################################################################
+
+--- [pada] Pranesha dasaru compositions
+    tags: composer:Pranesha Dasaru
+    source: https://madhwafestivals.com/2017/03/29/pranesha-dasaru-compositions/
+
 
 --- [pada] palise ni ennanu gauri devi
     deity: Gowri
@@ -13818,8 +13860,15 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Purandara Dasaru  (305)
+## Purandara Dasaru  (306)
 ######################################################################
+
+--- [pada] Purandara dasaru compositions
+    tags: composer:Purandara Dasaru
+    source: https://madhwafestivals.com/2016/12/06/purandara-dasaru-compositions/
+
+    Srinivasa devaru betege hodhadhu ಶ್ರೀನಿವಾಸದೇವರು ಬೇಟೆಗೆ ಹೋದುದು
+
 
 --- [pada] Bhagyada Lakshmi baramma
     deity: Mahalakshmi
@@ -23361,8 +23410,13 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Shyama Sundara Dasaru  (10)
+## Shyama Sundara Dasaru  (11)
 ######################################################################
+
+--- [pada] Dasara padagalu by Shyama sundara dasaru
+    tags: composer:Shyama Sundara Dasaru
+    source: https://madhwafestivals.com/2017/05/07/dasara-padagalu-by-shyama-sundara-dasaru/
+
 
 --- [pada] aarambadhali namipe
     deity: Ganapathi
@@ -25202,7 +25256,7 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## untitled  (424)
+## untitled  (453)
 ######################################################################
 
 --- [pada] Haridasa Sahitya information Center
@@ -25884,6 +25938,267 @@ Non-commercial · dharma-prachara / education / research
     ಭೋ ಯತಿವರೇಂದ್ರ ಸದ್ಗುರು ರಾಯ
 
 
+--- [pada] Dasara padagalu on Mahalakshmi
+    deity: Mahalakshmi
+    tags: deity:Mahalakshmi, theme:Bhajana Taratamya
+    source: https://madhwafestivals.com/2016/08/07/dasara-padagalu-on-mahalakshmi/
+
+
+--- [pada] Dasara padagalu on Shri Raghavendra Theertharu
+    tags: on:Raghavendra Theertharu, yati:Raghavendra Theertharu
+    source: https://madhwafestivals.com/2016/08/13/dasara-padagalu-on-shri-raghavendra-theertharu/
+
+
+--- [pada] Dasara padagalu on sri krishna
+    deity: Krishna
+    tags: deity:Krishna
+    source: https://madhwafestivals.com/2016/08/16/dasara-padagalu-on-sri-krishna/
+
+
+--- [pada] Dasara padagalu on Ganapathi
+    deity: Ganapathi
+    tags: deity:Ganapathi, theme:Bhajana Taratamya
+    source: https://madhwafestivals.com/2016/08/17/dasara-padagalu-on-ganapathi/
+
+
+--- [pada] Dasara padagalu on sri Raama
+    deity: Rama
+    tags: deity:Rama
+    source: https://madhwafestivals.com/2016/08/29/dasara-padagalu-on-sri-raama/
+
+
+--- [pada] Dasara padagalu on Hanuma
+    deity: Hanuma
+    tags: deity:Hanuma, theme:Bhajana Taratamya
+    source: https://madhwafestivals.com/2016/08/30/dasara-padagalu-on-hanuma/
+
+
+--- [pada] dasara padagalu on lord shiva
+    deity: Shiva
+    tags: deity:Shiva, theme:Bhajana Taratamya
+    source: https://madhwafestivals.com/2016/08/31/dasara-padagalu-on-lord-shiva/
+
+
+--- [pada] Dasara padagalu on Narasimha devaru
+    deity: Narasimha
+    tags: deity:Narasimha
+    source: https://madhwafestivals.com/2016/09/01/dasara-padagalu-on-narasimma-devaru/
+
+
+--- [pada] dasara padagalu on tulasi
+    deity: Tulasi
+    tags: deity:Tulasi
+    source: https://madhwafestivals.com/2016/09/01/dasara-padagalu-on-tulasi/
+
+
+--- [pada] Dasara Padagalu on Saraswathy
+    deity: Saraswathy
+    tags: deity:Saraswathy, theme:Bhajana Taratamya
+    source: https://madhwafestivals.com/2016/09/20/dasara-padagalu-on-saraswathy/
+
+
+--- [pada] Dasara Padagalu on Srinivasa
+    deity: Srinivasa
+    tags: deity:Srinivasa
+    source: https://madhwafestivals.com/2016/09/21/dasara-padagalu-on-srinivasa/
+
+    Shri venkatesha kalyana / ಶ್ರೀವೆಂಕಟೇಶ ಕಲ್ಯಾಣ
+
+    Srinivasa devaru betege hodhadhu ಶ್ರೀನಿವಾಸದೇವರು ಬೇಟೆಗೆ ಹೋದುದು
+
+
+--- [pada] Dasara padagalu on Sri Jaya theertharu
+    tags: on:Jaya Theertharu, yati:Jaya Theertharu
+    source: https://madhwafestivals.com/2016/09/23/dasara-padagalu-on-sri-jaya-theertharu/
+
+
+--- [pada] Dasara padagalu on Panduranga
+    deity: Panduranga
+    tags: deity:Panduranga
+    source: https://madhwafestivals.com/2016/09/27/dasara-padagalu-on-panduranga/
+
+
+--- [pada] Dasara padagalu on Vijayadasaru
+    tags: on:Vijayadasaru, yati:Vijayadasaru
+    source: https://madhwafestivals.com/2016/09/27/dasara-padagalu-on-vijayadasaru/
+
+
+--- [pada] Dasara padagalu on Bharathi
+    deity: Bharathi
+    tags: deity:Bharathi, theme:Bhajana Taratamya
+    source: https://madhwafestivals.com/2016/09/28/dasara-padagalu-on-bharathi/
+
+
+--- [pada] Dasara padagalu on Sri Jagannatha dasaru
+    tags: on:Jagannatha Dasaru, yati:Jagannatha Dasaru
+    source: https://madhwafestivals.com/2016/10/16/dasara-padagalu-on-jagannatha-dasaru/
+
+    ತಂಗಿ ನೀ ಕೇಳಿದ್ಯಾ ಅಂಗನಾಮಣಿ
+    ರಂಗನೊಲಿದ ಭಾಗವತರ ಮಹಿಮೆಗಳ ||pa||
+
+    ಶ್ರವಣಾದಿ ನವವಿಧ ಸವಿಯ ಭಕುತಿಯಿಂದ
+    ಪ್ರವೀಣನೆನಿಸಿ ಮಾಧವನ ಧ್ಯಾನಿಪ ಖ್ಯಾತಿ ||1||
+
+    ಅಮಲ ಸತ್ಕರ್ಮದಿ ಶಮದಮಪೂರ್ವಕ
+    ಅಮಿತ ಮಹಿಮನಂಘ್ರಿ ಕಮಲಾಖ್ಯಪರ ಖ್ಯಾತಿ ||2||
+
+    ಶ್ರೀದವಿಠಲನ ಪಾದಭಜಕರಾದ
+    ಸಾಧುವರ್ಯರ ಸುಬೋಧ ಬಣ್ಣಿಪರಾರೆ ||3||
+
+    ತೆರಳಿದರು ಶ್ರೀ ಜಗನ್ನಾಥದಾಸಾರ್ಯರು
+    ಸಿರಿಪತಿಯ ಸ್ಮರಿಸಿ ಹರಿಪುರಕೆ ಹರುಷದಲಿ ||pa||
+
+    ವರಶುಕ್ಲವತ್ಸರದ ಭಾದ್ರಪದ ಶಿತಪಕ್ಷ
+    ಹರಿವಾರ ನವಮಿಯಲ್ಲಿ
+    ಸುರಸಿದ್ಧ ಸಾಧ್ಯ ಸನ್ಮುನಿಗಣಾರ್ಚಿತ ಪಾದ
+    ಹರಿಯೆ ಪರನೆಂದೆನುತಲಿ
+    ಧರಣಿಯನು ತ್ಯಜಿಸಿ ಬಹುಮಾನಪೂರ್ವಕವಾಗಿ
+    ಬೆರೆದು ಸುರಸಂದಣಿಯಲಿ
+    ಪರಮಾರ್ಥವೈದಿ ಮನ ಹರಿಯ ಪಾದದಲಿಟ್ಟು
+    ವರವಿಷ್ಣುದೂತ ವೈಮಾನಿಕರ ಒಡಗೂಡಿ ||1||
+
+    ಅತಿಪ್ರೇಮಿಗಳು ಹಸನ್ಮುಖರು ದಯೆ ಬೀರುವರು
+    ಖತಿದೂರರಿವರು ಜಗದೀ
+    ಮಿತಿಮೀರಿ ಶ್ರೀಹರಿಯ ಕಥೆ ನಾನಾ ಪರಿಯಲ್ಲಿ
+    ಅತಿಶಯದಿ ಪೇಳಿ ಇಹಕೆ
+    ಸತತವು ಶರಣರ್ಗೆ ಗತಿಯಾಗುವಂತೆ ಸ
+    ತ್ವಥವಿಡಿಸಿ ಕರುಣದಿಂದ
+    ಹಿತವಂತರೆನಿಸಿ ಸಮ್ಮತವಾಗಿ ಸರ್ವರಿಗೆ
+    ಮತಿದೋರಿ ಕೊಟ್ಟು ಸದ್ಗತಿಯಗೋಸುಗವಾಗಿ 2||
+
+    ಆಚರಣೆಯಲಿ ಒಂದರಘಳಿಗೆ ಬಿಡದೆ ಬಲು
+    ಖೇಚರಾರೂಢ ಹರಿಯಾ
+    ಸೋಚಿತಾರಾಧನೆಯ ಮಾಡಿ ಮರೆಯದಲೆ ಮಹಾ
+    ವೈಚಿತ್ರ್ಯವನು ತೋರಿ ಈ ಚರಾಚರದಿ ಸಂಗೀತ ಸಾಹಿತ್ಯದಲಿ
+    ಪ್ರಾಚಾರ್ಯವಂತರೆನಿಸೀ
+    ಆ ಚತುರ್ದಶಭುವನಪತಿ ಶ್ರೀದವಿಠಲನ
+    ಯೋಚನೆಯ ಬಿಡದೆ ಮಂಗಳ ಶಬ್ದವಾದ್ಯದಿಂ ||3||
+
+    ರಂಗವಲಿದ ದಾಸರಾಯ | ಸಾಧು
+    ಸಂಗವಿಡಿಸಿ ಕರುಣದಿ ಪಿಡಿ ಕೈಯ್ಯ ||pa||
+
+    ಕುಂಭಿಣಿ ಸುರನಾಥ | ನಂಬಿದೆ ನಿನ್ನ ಪಾದ
+    ಬೆಂಬಿಡದಲೆ ಕಾಯೊ ||
+    ಸ್ತಂಭ ಮಂದಿರ | ಕಂಬು ಕಂಧರ
+    ಭಕ್ತಮಂದಾರ ||1||
+
+    ಹರಿಕಥೆ ಸುಧಾಸಾರ | ಸುರಸಗ್ರಂಥವ ಜಗದಿ |
+    ವಿರಚಿಸಿರುವ ನಿನ್ನ ||
+    ವರ ಉಪಕಾರ | ವರ್ಣಿಸಲಪಾರ |
+    ಪರಮೋದಾರ ||2||
+
+    ಸಾಮಗಾನ ವಿಲೋಲ | ಶಾಮಸುಂದರವಿಠಲ
+    ಸ್ವಾಮಿಯ ಭಕುತಿ | ನಿ |
+    ಸ್ಸಿಮ ಪ್ರಹ್ಲಾದ | ಅನುಜ ಸಲ್ಹಾದ
+    ನೀಡೆನಗಲ್ಹಾದ ||3||
+
+    ಶ್ರೀ ಜಗನ್ನಾಥದಾಸ ನಮಿಪೆ ಗುರುರಾಜ ಸಾತ್ವಿಕವಪುಷ ||pa||
+
+    ಈ ಜಗದೊಳು ನಿಮಗೆಣೆಗಾಣೆ ಸತತ ನಿ –
+    ವ್ರ್ಯಾಜದಿ ಹರಿಯ ಗುಣೋಪಾಸನೆ ಮಾಳ್ಪ||a.pa||
+
+    ಹರಿದಾಸ ಕುಲವರ್ಯರೆನಿಸಿ ಕಲ್ಪತರುವಂದದಿ ಚರ್ಯ
+    ಚರಿಸುತ ಧರೆಯೊಳು ಮೆರೆವ ಮಹಾತ್ಮರ
+    ಚರಣೇಂದ್ರೀವರಯುಗ್ಮ ದರುಶನ ಮಾಳ್ಪರ
+    ದುರಿತರಾಶಿಗಳಿರಗೊಡದೆ ನೆರೆ
+    ಪರಮಮುಕ್ತಿಯ ದಾರಿ ತೋರುತ
+    ಸಿರಿಸಹಿತ ಹರಿ ತೋರುವಂದದಿ
+    ಕರುಣ ಮಾಳ್ಪ ಸುಗಣಮಹೋದಧಿ ||1||
+
+    ರವಿಯು ಸಂಚರಿಸುವಂತೆ ಭೂವಲಯದಿ
+    ಕವಿಶ್ರೇಷ್ಠ ಚರಿಸಿದೆಯೋ
+    ಅವಿರುದ್ಧ ತ್ರಯಿಜ್ಞಾನ ಪ್ರವಹಂಗದಲಿ
+    ಭುವನೈಕ ವೇದವದ್ಯನ ಶ್ರವಣಭಕುತಿಯಿಂದ
+    ದಿವಸ ದಿವಸದಿ ಪ್ರೀತಿ ಬಡಿಸುತ
+    ಧ್ರುವವರನಂಘ್ರಿಗಳಿಗರ್ಪಿಸಿ
+    ಭುವನ ಪಾವನ ಮಾಡಲೋಸುಗ
+    ಅವನಿ ತಳದಿ ವಿಹರಿಸುತಿಹ ಗುರು ||2||
+
+    ಅಹೋ ರಾತ್ರಿ ಕ್ಷಣ ಬಿಡದೆ ಸನ್ಮನ ಹೃ –
+    ದ್ಗುಹಾಧೀಶನನು ಬಿಡದೆ
+    ಸಹನ ಗುಣಗಳನ್ನು ಅನುದಿನ ಸ್ಮರಿಸುತ
+    ಸಹನದಿ ಶಮದಮಯತು ನಿಯಮಗಳನ್ನು
+    ವಹಿಸಿ ಶ್ರೀದವಿಠಲನಂಘ್ರಿಯ
+    ಮಹಿಮೆ ತೋರುತ ಪೂಜಿಸುತ ಬಲು
+    ಮಹಿತಪೂರ್ಣಾನಂದತೀರ್ಥರ
+    ವಿಹಿತ ಶಾಸ್ತ್ರಗಳರಿತು ಬೋಧಿಪ ||3||
+
+    ರಕ್ಷಿಸೋ ಜಗನ್ನಾಥ
+    ದಾಸ
+    ರಕ್ಷಿಸೋ ||pa||
+
+    ರಕ್ಷಿಸು ಗುರು ಜಗನ್ನಾಥ
+    ದಾಸ
+    ಪಕ್ಷಿವಾಹನನ ನಿಜ
+    ದಾಸ
+    ಮು
+    ಮುಕ್ಷು ಮಾರ್ಗವ ತೋರ್ದಧೀಶ ನೀನೆ ಪ್ರ
+    ತ್ಯಕ್ಷ ಪ್ರಹ್ಲಾದನನುಜ- ||ಅಹಾ||
+    ಈ ಕ್ಷಿತಿಯೊಳು ಸುರಶ್ರೇಷ್ಠನೆನಿಸಿ ವಿ
+    ಶಿಷ್ಟರ ಮನೋಭೀಷ್ಟವನಿತ್ತ ಹರಿ
+    ದಾಸ
+
+    ವೇದವಂದ್ಯನ ನಿಜತತ್ತ್ವ ನಿಜ
+    ನಿತ್ಯ (ಸತ್ಯ) ಪೂರ್ಣ
+    ಬೋಧರ ಗ್ರಂಥ ತತ್ತ್ವ ನೀತಿ ತ
+    ಪ್ಪದೆ ಪೇಳ್ದೆ ಮಹತ್ವ ||ಅಹಾ||
+    ಮೋದಪಡಿಸಿ ಮೋದತೀರ್ಥರ ಮತ ದು
+    ಗ್ಧಾಬ್ಧಿಸುಧೆಯನಿತ್ತ ಬಾದರಾಯಣನ
+    ದಾಸ
+
+    ಪ್ರಕೃತಿಬಂಧಕರಾದ ಜನರು ನಿನ್ನ
+    ಪ್ರಾಕೃತಗ್ರಂಥನೊಡಿ ಮೋದಿಪರು ಸತತಾ
+    ಪ್ರಾಕೃತನ ತಾ ವಂದಿಪರು ಜನ್ಮ
+    ಸುಕೃತಕ್ಕೆ ತಾವು ಸಾಧಿಪರು ||ಅಹಾ||
+    ಸಂಸ್ಕøತ ಭಾಷೆಯ ಪ್ರಕರಣಗಳನೆಲ್ಲ ಪ
+    ರಿಷ್ಕøತ ಪಡಿಸಿ ನೀ ಪ್ರಾಕೃತದೊಳು ತೋರ್ದೆ||3||
+
+    ವಿಪ್ರವರೇಣ್ಯನೆ ನೀನು ಜಗದಿ
+    ಅಪ್ರಮೇಯನ ಪ್ರಮೇಯವನ್ನೂ ಅದಕ್ಕೆ
+    ಸಪ್ರಮಾಣಗಳೆಲ್ಲವನ್ನೂ ತೋರಿ ದಿ
+    ಕ್ ಪ್ರದರ್ಶನ ಮಾಡಿ ಇನ್ನೂ ||ಅಹಾ||
+    ಸ್ವಪ್ರಯೋಜನ ರಹಿತ ಅಪ್ರಮೇಯನ ಮಹಿಮೆ
+    ಕ್ಷಿಪ್ರ ಭೋಧೆಯಾಗಲ್ ತ್ವತ್ಪ್ರಸಾದವನಿತ್ತೆ||4||
+
+    ನಿನ್ನುಪಕಾರದ ಪರಿಯಾ ನಾನು
+    ಜನ್ಮಜನ್ಮಾಂತರಕೆ ಮರೆಯೆ ನೀನೆ
+    ಘನ್ನ ಶ್ರೀಹರಿ
+    ದಾಸ
+    ಾಗ್ರಣಿಯೇ ಇನ್ನು
+    ನಿನ್ನ ಹರಿಕಥಾಮೃತಸಾರಕ್ಕೆಣೆಯೇ ||ಅಹಾ||
+    ಇನ್ನಿಲ್ಲ ನಿನ್ನಂಥ ಘನ್ನ ಕವಿಗಳ ಕಾಣೆ
+    ಪನ್ನಂಗಶಯನ ಶ್ರೀ ವೆಂಕಟೇಶನ
+    ದಾಸ
+    ಾ ||5||
+
+
+--- [pada] Dasara padagalu on Vadirajaru
+    tags: on:Vadirajaru, yati:Vadirajaru
+    source: https://madhwafestivals.com/2016/10/19/dasara-padagalu-on-vadirajaru/
+
+
+--- [pada] Dasara padagalu on Dhanvanthri
+    deity: Dhanvanthri
+    tags: deity:Dhanvanthri
+    source: https://madhwafestivals.com/2016/10/20/dasara-padagalu-on-dhanvanthri/
+
+
+--- [pada] Dasara padagalu on Ekadashi
+    tags: theme:Ekadashi
+    source: https://madhwafestivals.com/2016/11/09/dasara-padagalu-on-ekadashi/
+
+
+--- [pada] Dasara padagalu on Ranganatha
+    deity: Ranganatha
+    tags: deity:Ranganatha
+    source: https://madhwafestivals.com/2016/11/11/dasara-padagalu-on-ranganatha/
+
+
+--- [pada] Dasara padagalu on sripadarajaru
+    tags: on:Sripadarajaru, yati:Sripadarajaru
+    source: https://madhwafestivals.com/2016/11/29/dasara-padagalu-on-sripadarajaru/
+
+
 --- [pada] Dasara padagalu on Subramanya devaru
     deity: Subramanya
     tags: deity:Subramanya
@@ -25989,6 +26304,11 @@ Non-commercial · dharma-prachara / education / research
 
     ಪನ್ನಗ ನೃಪ ಸುಪನ್ನಗನಗಪ ಪ್ರ
     ಸನ್ನವೆಂಕಟಪತಿ ಚಿನ್ಮಯ ಭಕ್ತಿಂ ||5||
+
+
+--- [pada] Bhajana Taratamya (Order)
+    tags: theme:Bhajana Taratamya
+    source: https://madhwafestivals.com/2016/12/16/bhajana-mandala-songs/
 
 
 --- [pada] Dasara padagalu on Garuda devaru
@@ -26165,6 +26485,26 @@ Non-commercial · dharma-prachara / education / research
     ನಾಥ ಶ್ರೀ  ಕೃಷ್ಣ ವಿಠಲ, ಪ್ರೀತಿ ಯಿಂದ ನಲಿದು  ನಲಿವ ಜೈ ಜೈ ಜೈ ||21||
 
 
+--- [aarati] Aarathi songs
+    tags: theme:Aarathi, theme:Sampradaaya
+    source: https://madhwafestivals.com/2017/01/12/aarathi-songs/
+
+
+--- [pada] Dasara Padagalu on Gopala Dasaru
+    tags: on:Gopala Dasaru, yati:Gopala Dasaru
+    source: https://madhwafestivals.com/2017/01/19/dasara-padagalu-on-gopala-dasaru/
+
+
+--- [pada] Dasara Padagalu on Purandara dasaru
+    tags: on:Purandara Dasaru, yati:Purandara Dasaru
+    source: https://madhwafestivals.com/2017/01/19/dasara-padagalu-on-purandara-dasaru/
+
+
+--- [pada] Guru parampara haadugalu
+    tags: theme:Guru Parampara
+    source: https://madhwafestivals.com/2017/02/14/guru-parampara-haadugalu/
+
+
 --- [aarati] Belagire aruthiya sri tulasige
     deity: Tulasi
     tags: deity:Tulasi, theme:Aarathi
@@ -26281,6 +26621,72 @@ Non-commercial · dharma-prachara / education / research
     ತ್ವರತ ಮೋದ ಪುರನಿರತ ಸದ್ಗುರುವೆ ||3||
 
 
+--- [pada] Dasara padagalu on Vyasarayaru
+    tags: on:Vyasarayaru, yati:Vyasarayaru
+    source: https://madhwafestivals.com/2017/02/21/dasara-padagalu-on-vyasarayaru/
+
+
+--- [laali] Jo Jo / Laali haadugalu
+    tags: theme:Jo Jo / Laali, theme:Sampradaaya
+    source: https://madhwafestivals.com/2017/03/15/jo-jo-laali-haadugalu/
+
+
+--- [mangala] Mangala haadugalu
+    tags: theme:Mangala, theme:Sampradaaya
+    source: https://madhwafestivals.com/2017/03/15/mangala-haadugalu/
+
+
+--- [sampradaya] Sampradaaya Haadugalu/ಸಂಪ್ರದಾಯ ಹಾಡುಗಳು  (Sampradaaya Haadugalu/saṃpradāya hāḍugaḻu)
+    tags: theme:Sampradaaya
+    source: https://madhwafestivals.com/2017/03/15/sampradaaya-haadugalu/
+
+    ವೆಂಕಟೇಶನ ಉರುಟಣೆಯ ಹಾಡು / Venkatesana Urutani Haadu
+
+
+--- [sampradaya] Share on WhatsApp
+    tags: theme:Sampradaaya
+    source: https://madhwafestivals.com/2017/03/15/sampradaaya-haadugalu/?share=jetpack-whatsapp
+
+    Sampradaaya Haadugalu/ಸಂಪ್ರದಾಯ ಹಾಡುಗಳು https://madhwafestivals.com/2017/03/15/sampradaaya-haadugalu/
+
+
+--- [suladi] Index – Sulaadhi
+    tags: suladi_index:Suladi Index
+    source: https://madhwafestivals.com/2017/03/21/index-sulaadhi/
+
+
+--- [kavya] Raghavendra vijaya/ರಾಘವೇಂದ್ರ ವಿಜಯ  (Raghavendra vijaya/rāghaveṃdra vijaya)
+    tags: kavya:Raghavendra Vijaya
+    source: https://madhwafestivals.com/2017/03/22/raghavendra-vijaya/
+
+
+--- [kavya] Share on WhatsApp
+    tags: kavya:Raghavendra Vijaya
+    source: https://madhwafestivals.com/2017/03/22/raghavendra-vijaya/?share=jetpack-whatsapp
+
+    Raghavendra vijaya/ರಾಘವೇಂದ್ರ ವಿಜಯ https://madhwafestivals.com/2017/03/22/raghavendra-vijaya/
+
+
+--- [kolu] Kolu haadugalu
+    tags: theme:Kolu
+    source: https://madhwafestivals.com/2017/03/27/kolu-haadugalu/
+
+
+--- [shobhane] Shobhane haadugalu
+    tags: theme:Shobhane
+    source: https://madhwafestivals.com/2017/03/27/shobhane-haadugalu/
+
+
+--- [pada] Dasara padagalu on vedavyasa devaru
+    tags: on:Vedavyasa, yati:Vedavyasa
+    source: https://madhwafestivals.com/2017/03/29/dasara-padagalu-on-vedavyasa-devaru/
+
+
+--- [dashavatara] Dashavathara songs & Sthothragalu
+    tags: theme:Dashavathara
+    source: https://madhwafestivals.com/2017/04/10/dashavathara-songs-sthothragalu/
+
+
 --- [suladi] Digvijaya Rama suladhi
     tags: suladi_index:Suladi Index
     source: https://madhwafestivals.com/2020/10/19/digvijaya-rama-suladhi/
@@ -26348,11 +26754,6 @@ Non-commercial · dharma-prachara / education / research
     ಜತೆ
     ನರಹರಿತೀರ್ಥರಿಗೆ ಒಲಿದ ವಿಜಯ ವಿಠ್ಠಲ
     ಸ್ಮರಿಸಿದವರ ಕಾವಾ ನಿತ್ಯ ರಘುರಾಮಾ ||6||
-
-
---- [pada] Dasara padagalu on Mahalakshmi
-    tags: theme:Bhajana Taratamya
-    source: https://madhwafestivals.wordpress.com/2016/08/07/dasara-padagalu-on-mahalakshmi/
 
 
 --- [pada] Baare nammanithanaka
@@ -26668,11 +27069,6 @@ Non-commercial · dharma-prachara / education / research
     ಸುಮ್ಮಾನದಿ ಸಿರಿಕೃಷ್ಣ ತನ್ನ ಲೋಕ ಕೊಡುವನೋ||3||
 
 
---- [pada] Dasara padagalu on Ganapathi
-    tags: theme:Bhajana Taratamya
-    source: https://madhwafestivals.wordpress.com/2016/08/17/dasara-padagalu-on-ganapathi/
-
-
 --- [pada] ganapathi yenna paliso
     deity: Ganapathi
     tags: deity:Ganapathi
@@ -26949,20 +27345,10 @@ Non-commercial · dharma-prachara / education / research
     ವಿಠಲ ತಾ ಬಲ್ಲ ||
 
 
---- [pada] Dasara padagalu on Hanuma
-    tags: theme:Bhajana Taratamya
-    source: https://madhwafestivals.wordpress.com/2016/08/30/dasara-padagalu-on-hanuma/
-
-
 --- [pada] Nambide ninna paada guru mukhyapraana
     deity: Hanuma
     tags: deity:Hanuma
     source: https://madhwafestivals.wordpress.com/2016/08/30/nambide-ninna-paada-guru-mukhyapraana/
-
-
---- [pada] dasara padagalu on lord shiva
-    tags: theme:Bhajana Taratamya
-    source: https://madhwafestivals.wordpress.com/2016/08/31/dasara-padagalu-on-lord-shiva/
 
 
 --- [pada] Hanuman ki jai
@@ -27571,11 +27957,6 @@ Non-commercial · dharma-prachara / education / research
     source: https://madhwafestivals.wordpress.com/2016/09/19/varava-koda-taayi-varava/
 
 
---- [pada] Dasara Padagalu on Saraswathy
-    tags: theme:Bhajana Taratamya
-    source: https://madhwafestivals.wordpress.com/2016/09/20/dasara-padagalu-on-saraswathy/
-
-
 --- [pada] Tiliyado ninnata tirupatiya
     deity: Srinivasa
     tags: deity:Srinivasa
@@ -27718,11 +28099,6 @@ Non-commercial · dharma-prachara / education / research
     ಚೆಂದದಿಂದ ಕರವಿಟ್ಟು ಕಟಿಗಳಲ್ಲಿ-ಈ ಸುಕ್ಷೇತ್ರದಲೀ
     ನಿಂದಿಹ ಭೀಮಾತೀರ ಚಂದ್ರಭಾಗಾದಲ್ಲಿಯ ವೈಭೋಗಾ
     ತಂದೆ ಶ್ರೀಪತಿ ವಿಠ್ಠಲ ಸುಖಸಿಂಧೋ-ಅನಾಥ ಬಂಧೋ || ೩ ||
-
-
---- [pada] Dasara padagalu on Bharathi
-    tags: theme:Bhajana Taratamya
-    source: https://madhwafestivals.wordpress.com/2016/09/28/dasara-padagalu-on-bharathi/
 
 
 --- [pada] kuniyuta naliyuta ba sankara
@@ -32185,11 +32561,6 @@ Non-commercial · dharma-prachara / education / research
     ತ೦ದು ಫಲವನೀವುತಿಪ್ಪ                                   || ೩ ||
 
 
---- [aarati] Aarathi songs
-    tags: theme:Sampradaaya
-    source: https://madhwafestivals.wordpress.com/2017/01/12/aarathi-songs/
-
-
 --- [aarati] Araati maduvena krushnamurutige
     tags: theme:Aarathi
     source: https://madhwafestivals.wordpress.com/2017/01/12/araati-maduvena-krushnamurutige/
@@ -33275,11 +33646,6 @@ Non-commercial · dharma-prachara / education / research
     ಈಶೆ ಪಂಚ ಮಹಾದೋಷಿ ಬಿಡದೆ ನಿತ್ಯಾ |ಈ ಶರೀರದೊಳಿಹ್ಯಘಾಸಿಮಾಡುವನನ್ನು||5||
 
 
---- [laali] Jo Jo / Laali haadugalu
-    tags: theme:Sampradaaya
-    source: https://madhwafestivals.wordpress.com/2017/03/15/jo-jo-laali-haadugalu/
-
-
 --- [laali] laali sri hayavadhana
     tags: theme:Jo Jo / Laali
     source: https://madhwafestivals.wordpress.com/2017/03/15/laali-sri-hayavadhana/
@@ -33325,11 +33691,6 @@ Non-commercial · dharma-prachara / education / research
     ವೀತಿಹೋತ್ರನೆನಿಪಗೆ ಮಂಗಳ
     ವಾತಜನುತ ಜಗನ್ನಾಥವಿಠಲನ
     ದೂತರ ಸಲಹುವ ದಾತನಿಗೆ||೩||
-
-
---- [mangala] Mangala haadugalu
-    tags: theme:Sampradaaya
-    source: https://madhwafestivals.wordpress.com/2017/03/15/mangala-haadugalu/
 
 
 --- [pada] Vyasarayara besarade nene
@@ -37330,8 +37691,13 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Vadirajaru  (69)
+## Vadirajaru  (70)
 ######################################################################
+
+--- [pada] Vadirajaru compositions
+    tags: composer:Vadirajaru
+    source: https://madhwafestivals.com/2016/12/02/vadirajaru-compositions/
+
 
 --- [shobhane] Lakshmi Shobhane(Shobhana vennire!!!)
     tags: composer:Vadirajaru, theme:Shobhane
@@ -40320,7 +40686,7 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Vijaya Dasaru  (164)
+## Vijaya Dasaru  (165)
 ######################################################################
 
 --- [ugabhoga] Ugabhogagalu by Vijaya dasaru
@@ -40525,6 +40891,11 @@ Non-commercial · dharma-prachara / education / research
     ಸಿನ್ನವನು ಮಾಡಿ ಕೆರ ಹೊಡಿಸಿದ ಸುಖ
     ವೇನು ಬಾರದು ಕಾಣೊ ಪನ್ನಗಾರಿಗಾದರು
     ಅನ್ಯಥಾ ಬಿಡದಿರು ವಿಜಯವಿಠಲನ್ನ||
+
+
+--- [pada] Vijaya dasaru compositions
+    tags: composer:Vijaya Dasaru
+    source: https://madhwafestivals.com/2016/12/02/vijaya-dasaru-compositions/
 
 
 --- [pada] Sri Pranadevara Parijatha
@@ -49491,8 +49862,13 @@ Non-commercial · dharma-prachara / education / research
 
 
 ######################################################################
-## Vyasarayaru  (28)
+## Vyasarayaru  (29)
 ######################################################################
+
+--- [pada] Vyasarayaru compositions
+    tags: composer:Vyasarayaru
+    source: https://madhwafestivals.com/2016/12/07/vyasarayaru-compositions/
+
 
 --- [pada] Yantrodharaka Hanuman Stothram
     tags: composer:Vyasarayaru

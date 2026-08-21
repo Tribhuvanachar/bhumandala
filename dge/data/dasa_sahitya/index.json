@@ -5,69 +5,66 @@
     "sa": "दाससाहित्यम्",
     "en": "Dasa Sahitya"
   },
-  "generated": "2026-08-21",
-  "count_total": 1354,
+  "generated": "2026-08-19",
+  "count_total": 5423,
   "dedup": {
-    "fetched": 1363,
-    "unique": 1354,
-    "duplicates_merged": 9
+    "fetched": 1414,
+    "unique": 1396,
+    "duplicates_merged": 18
   },
   "counts_by_form": {
-    "pada": 1155,
-    "suladi": 74,
-    "sampradaya": 31,
+    "pada": 4295,
+    "suladi": 553,
+    "ugabhoga": 358,
+    "devaranama": 63,
+    "sampradaya": 33,
+    "mundige": 30,
     "mangala": 27,
     "aarati": 18,
     "laali": 16,
-    "kavya": 9,
-    "ugabhoga": 8,
-    "shobhane": 6,
-    "dashavatara": 5,
-    "kolu": 4,
+    "kavya": 11,
+    "shobhane": 7,
+    "dashavatara": 6,
+    "kolu": 5,
     "mixed": 1
   },
   "counts_by_source": {
-    "madhwafestivals.wordpress.com": 1219,
+    "madhwafestivals.wordpress.com": 1210,
     "dasasahithyamahithi.com": 97,
-    "madhwafestivals.com": 26,
+    "madhwafestivals.com": 77,
     "dasasahitya.net": 10,
     "meerasubbarao.wordpress.com": 2
   },
   "counts_by_composer": {
+    "Purandara Dasaru": 1496,
+    "Vijaya Dasaru": 1054,
+    "Kanaka Dasaru": 674,
+    "untitled.json": 453,
+    "Prasanna Venkata Dasaru": 416,
+    "Gopala Dasaru": 242,
+    "Jagannatha Dasaru": 231,
+    "Vadirajaru": 228,
+    "Pranesha Dasaru": 215,
+    "Vyasarayaru": 122,
+    "Sripadarajaru": 114,
+    "Mohana Dasaru": 69,
+    "Helavanakatte Giriyamma": 50,
+    "Harapanahalli Bheemavva": 27,
+    "Shyama Sundara Dasaru": 11,
+    "Mahipathi Dasaru": 8,
     "Dhanvanthri": 1,
     "Durga": 1,
-    "Gopala Dasa": 9,
-    "Gopala Dasaru": 42,
-    "Harapanahalli Bheemavva": 26,
-    "Helavanakatte Giriyamma": 7,
-    "Jagannatha Dasaru": 62,
-    "Kanaka Dasaru": 68,
     "Kankanaa Kaara": 1,
-    "Mahipathi Dasaru": 7,
-    "Mohana Dasaru": 12,
     "Narasimha (Jagannatha Dasaru)": 1,
-    "Pranesha Dasaru": 19,
-    "Prasanna Venkata Dasaru": 41,
-    "Purandara Dasaru": 305,
-    "Purandara Dasaru Part 1": 1,
-    "Purandara Dasaru Part 2": 1,
     "Raghavendra": 1,
-    "Shyama Sundara Dasaru": 10,
     "Sri Kapila Devara Stotra": 1,
     "Sri Mukhya Prana Devara Stotra": 1,
     "Sri Narasimha Devara": 1,
     "Sri Parvathi Devi Sthothra": 1,
-    "Sripadarajaru": 44,
     "Tulasi Devi (Purandara Dasaru)": 1,
-    "untitled": 424,
-    "Vadirajaru": 69,
     "Vayudevara Avathara Traya": 1,
-    "Vijaya Dasaru": 164,
-    "Vijayadasaru Pancha Rathna": 1,
     "Vivaha": 1,
-    "Vyasaraja Pratishte Anjaneya %E0%B2%B5%E0%B3%8D%E0%B2%Af%E0%B2%Be%E0%B2%B8%E0%B2%B0%E0%B2%Be%E0%B2%9C %E0%B2%Aa%E0%B3%8D%E0%B2%B0%E0%B2%A4%E0%B2%Bf%E0%B2%B7%E0%B3%8D%E0%B2%A0%E0%B3%86 %E0%B2%86": 1,
-    "Vyasarajaru": 1,
-    "Vyasarayaru": 28
+    "Vyasaraja Pratishte Anjaneya %E0%B2%B5%E0%B3%8D%E0%B2%Af%E0%B2%Be%E0%B2%B8%E0%B2%B0%E0%B2%Be%E0%B2%9C %E0%B2%Aa%E0%B3%8D%E0%B2%B0%E0%B2%A4%E0%B2%Bf%E0%B2%B7%E0%B3%8D%E0%B2%A0%E0%B3%86 %E0%B2%86": 1
   },
   "composers": [
     {
@@ -83,39 +80,33 @@
       "file": "composers/durga.json"
     },
     {
-      "slug": "gopala_dasa",
-      "composer": "Gopala Dasa",
-      "count": 9,
-      "file": "composers/gopala_dasa.json"
-    },
-    {
       "slug": "gopala_dasaru",
       "composer": "Gopala Dasaru",
-      "count": 42,
+      "count": 242,
       "file": "composers/gopala_dasaru.json"
     },
     {
       "slug": "harapanahalli_bheemavva",
       "composer": "Harapanahalli Bheemavva",
-      "count": 26,
+      "count": 27,
       "file": "composers/harapanahalli_bheemavva.json"
     },
     {
       "slug": "helavanakatte_giriyamma",
       "composer": "Helavanakatte Giriyamma",
-      "count": 7,
+      "count": 50,
       "file": "composers/helavanakatte_giriyamma.json"
     },
     {
       "slug": "jagannatha_dasaru",
       "composer": "Jagannatha Dasaru",
-      "count": 62,
+      "count": 231,
       "file": "composers/jagannatha_dasaru.json"
     },
     {
       "slug": "kanaka_dasaru",
       "composer": "Kanaka Dasaru",
-      "count": 68,
+      "count": 674,
       "file": "composers/kanaka_dasaru.json"
     },
     {
@@ -127,13 +118,13 @@
     {
       "slug": "mahipathi_dasaru",
       "composer": "Mahipathi Dasaru",
-      "count": 7,
+      "count": 8,
       "file": "composers/mahipathi_dasaru.json"
     },
     {
       "slug": "mohana_dasaru",
       "composer": "Mohana Dasaru",
-      "count": 12,
+      "count": 69,
       "file": "composers/mohana_dasaru.json"
     },
     {
@@ -145,32 +136,20 @@
     {
       "slug": "pranesha_dasaru",
       "composer": "Pranesha Dasaru",
-      "count": 19,
+      "count": 215,
       "file": "composers/pranesha_dasaru.json"
     },
     {
       "slug": "prasanna_venkata_dasaru",
       "composer": "Prasanna Venkata Dasaru",
-      "count": 41,
+      "count": 416,
       "file": "composers/prasanna_venkata_dasaru.json"
     },
     {
       "slug": "purandara_dasaru",
       "composer": "Purandara Dasaru",
-      "count": 305,
+      "count": 1496,
       "file": "composers/purandara_dasaru.json"
-    },
-    {
-      "slug": "purandara_dasaru_part_1",
-      "composer": "Purandara Dasaru Part 1",
-      "count": 1,
-      "file": "composers/purandara_dasaru_part_1.json"
-    },
-    {
-      "slug": "purandara_dasaru_part_2",
-      "composer": "Purandara Dasaru Part 2",
-      "count": 1,
-      "file": "composers/purandara_dasaru_part_2.json"
     },
     {
       "slug": "raghavendra",
@@ -181,7 +160,7 @@
     {
       "slug": "shyama_sundara_dasaru",
       "composer": "Shyama Sundara Dasaru",
-      "count": 10,
+      "count": 11,
       "file": "composers/shyama_sundara_dasaru.json"
     },
     {
@@ -211,7 +190,7 @@
     {
       "slug": "sripadarajaru",
       "composer": "Sripadarajaru",
-      "count": 44,
+      "count": 114,
       "file": "composers/sripadarajaru.json"
     },
     {
@@ -223,13 +202,13 @@
     {
       "slug": "untitled",
       "composer": "",
-      "count": 424,
+      "count": 453,
       "file": "composers/untitled.json"
     },
     {
       "slug": "vadirajaru",
       "composer": "Vadirajaru",
-      "count": 69,
+      "count": 228,
       "file": "composers/vadirajaru.json"
     },
     {
@@ -241,14 +220,8 @@
     {
       "slug": "vijaya_dasaru",
       "composer": "Vijaya Dasaru",
-      "count": 164,
+      "count": 1054,
       "file": "composers/vijaya_dasaru.json"
-    },
-    {
-      "slug": "vijayadasaru_pancha_rathna",
-      "composer": "Vijayadasaru Pancha Rathna",
-      "count": 1,
-      "file": "composers/vijayadasaru_pancha_rathna.json"
     },
     {
       "slug": "vivaha",
@@ -263,21 +236,16 @@
       "file": "composers/vyasaraja_pratishte_anjaneya_e0b2b5e0b38de0b2afe0b2bee0b2b8e0b2b0e0b2bee0b29c_e0b2aae0b38de0b2b0e0b2a4e0b2bfe0b2b7e0b38de0b2a0e0b386_e0b286.json"
     },
     {
-      "slug": "vyasarajaru",
-      "composer": "Vyasarajaru",
-      "count": 1,
-      "file": "composers/vyasarajaru.json"
-    },
-    {
       "slug": "vyasarayaru",
       "composer": "Vyasarayaru",
-      "count": 28,
+      "count": 122,
       "file": "composers/vyasarayaru.json"
     }
   ],
   "pending": {
-    "untitled_composer": 424,
-    "failed_fetch": 8,
-    "no_text": 4
-  }
+    "untitled_composer": 453,
+    "failed_fetch": 9,
+    "no_text": 252
+  },
+  "note_merged_from_local_assets": "12 composers folded in from dasa_sahitya_local via merge_confirmed_composers.py on 2026-08-19; see dge/data/dasa_sahitya_local/ARCHITECTURE.md for the review that confirmed these identities before merging."
 }
