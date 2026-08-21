@@ -336,9 +336,16 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
   display: none; z-index: 10000; box-shadow: var(--shadow-lg);
   transform: translateX(-50%); flex-direction: column; gap: 6px; user-select: none;
   animation: popIn var(--t-fast) var(--ease);
+  /* wordToolsRow has grown past 3 buttons (Shabda/Dhātu/Where else) to 5
+     (+ Sandhi/Samasa) -- without a cap here the row just keeps growing
+     wider than the viewport instead of wrapping, and the tooltip's own
+     centering math in ai.js can't compensate for a tooltip wider than the
+     screen. max-width lets .tooltip-row's flex-wrap (below) actually wrap
+     onto a second line on narrow screens instead of overflowing off-screen. */
+  max-width: min(94vw, 460px);
 }
 .tooltip-header { font-size: 10px; font-weight: 800; color: #a8907a; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; margin-bottom: 2px; }
-.tooltip-row { display: flex; gap: 6px; justify-content: center; }
+.tooltip-row { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
 .tooltip-btn { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.05); padding: 8px 14px; border-radius: var(--radius-xs); cursor: pointer; font-weight: 700; font-size: 12px; white-space: nowrap; transition: background var(--t-fast) var(--ease); }
 .tooltip-btn:hover { background: rgba(255,255,255,0.25); }
 
