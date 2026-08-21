@@ -5339,7 +5339,9 @@
  },
  "nitishastra": {
   "_note": "Worldly-wisdom/statecraft texts -- deliberately its own section rather than folded into kavya_alankara (which already held the Bhartrihari shatakas somewhat awkwardly, per the same 20 Aug placement decision noted under upaveda above).",
-  "hitopadesha": {}
+  "hitopadesha": {},
+  "chanakya_niti": {},
+  "chanakya_sutra": {}
  },
  "misc": {
   "_schema": "grantha_mula_text",

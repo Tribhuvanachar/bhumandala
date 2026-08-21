@@ -14,6 +14,18 @@ ROOT = 'dge' if os.path.isdir('dge/data') else '.'
 DATA = os.path.join(ROOT, 'data')
 LIB = os.path.join(DATA, 'library.json')
 
+# data.json files that are real, but are internal lookup tables rather than
+# browsable grantha content (not {items:[...]} shloka/verse text at all --
+# kaumudi_order/data.json is a kaumudiIndex<->sutra id concordance
+# ashtadhyayi.js reads directly). Registering one of these makes it a
+# clickable Library entry that renders garbage in the generic reader, which
+# only ever expects the shloka-corpus shape. Caught once by hand (20 Aug
+# 2026) when this tool picked it up unprompted; listed here so it isn't
+# re-flagged as "new" on every future run.
+NOT_A_GRANTHA = {
+    'dge/data/vedanga/vyakarana/ashtadhyayi/kaumudi_order/data.json',
+}
+
 
 def item_count(data):
     items = data.get('items', [])
@@ -40,7 +52,7 @@ def main():
         # catalog path convention is always "dge/data/.../data.json"
         rel = os.path.relpath(fp, DATA).replace(os.sep, '/')
         catalog = f"dge/data/{rel}"
-        if catalog in known:
+        if catalog in known or catalog in NOT_A_GRANTHA:
             continue
         try:
             data = json.load(open(fp, encoding='utf-8'))
