@@ -73,9 +73,8 @@ jobs:
           if git diff --cached --quiet; then
             echo "interlink layers already current -- nothing to commit"
           else
-            git commit -m "Interlink rebuild: prayoga index, backlinks, library status
-
-Automatic (interlink.yml) after library content changed in $GITHUB_SHA."
+            git commit -m "Interlink rebuild: prayoga index, backlinks, library status" \
+                       -m "Automatic (interlink.yml) after library content changed in $GITHUB_SHA."
             # someone may have pushed while we built; rebase, ours are
             # generated files nobody else edits between runs
             git pull --rebase origin main
