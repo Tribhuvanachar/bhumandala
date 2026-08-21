@@ -289,7 +289,10 @@
     // A plain "#01.0008" opens the root at लट्, as always. A word-tool deep
     // link adds ":<key>" — "#02.0058:Lit.00" — naming the exact
     // lakāra.puruṣa.vacana cell to open and highlight (see ai.js's
-    // dgeResolveDhatuFormLink and tools/build_prakriya_form_index.py).
+    // dgeOpenDhatuForSelection/dgeFindDhatuFormHit, which also renders
+    // this same cell inline in its own modal, and
+    // tools/build_prakriya_form_index.py which builds the reverse index
+    // both read from).
     const raw = (location.hash || '').replace(/^#/, '').trim();
     const sep = raw.indexOf(':');
     const code = sep === -1 ? raw : raw.slice(0, sep);
