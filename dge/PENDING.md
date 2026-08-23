@@ -1653,6 +1653,54 @@ complete record, not just a live queue.
 - Coordinate with parallel Sarvamoola/search work — avoid conflicts
   (standing item, session task list #39).
 
+- **DCS/skrutable integration, scoped and piloted, 23 Aug.** Asked to
+  incorporate the Digital Corpus of Sanskrit (DCS) and the `skrutable`
+  library (github.com/tylergneill/skrutable) and fill gaps against them,
+  with a sync pipeline. Researched both before building anything:
+  - **DCS is CC-BY 4.0** (attribution only, confirmed directly from the
+    `ambuda-org/dcs` mirror's README, not assumed) — 253 texts, ~1.5 GB in
+    the primary mirror (`OliverHellwig/sanskrit`), word-level
+    morphologically-**disambiguated** CoNLL-U annotation of real running
+    text — genuinely different value from the `vidyut`-based morphology
+    tooling already in `tools/build_morphology.py`, which generates
+    *possible* paradigmatic forms rather than resolving *attested* ones.
+    The live DCS website (`sanskrit-linguistics.org`) was down (503 on
+    every page checked) during this session — not used; the GitHub mirrors
+    are the actual source of truth regardless.
+  - **skrutable is CC BY-SA 4.0** (share-alike) — flagged the same way
+    every copyleft source has been in this project. It directly targets
+    two gaps already logged as open: sandhi/compound splitting
+    (`dge/VEDAWEB_IMPORT_STATUS.md` calls this "a computational-linguistics
+    problem, not a sourcing problem," no candidate chosen) and Vedic-metre
+    identification (explicitly abandoned in
+    `dge/veda_toolkit/superseded/05_chandas_autodetect_FAILED.py` for poor
+    accuracy). **Project lead's decision: use as an unmodified pip
+    dependency only** (`pip install skrutable`), not vendored/adapted code
+    — same relationship the repo already has with `vidyut`. One dead end
+    worth recording: DCS ships `dcs/data/rigveda/Arnold/arnold-vedic-metre-*.txt`,
+    which sounds like it could resolve the abandoned Vedic-chandas problem
+    but on inspection is E.V. Arnold's (1905) lexical dating criteria for
+    old vs. late Rigvedic strata — not per-verse metre data at all. Checked
+    before being written down, not assumed from the filename.
+  - **Project lead's decision on scale: pilot first**, not a full 253-text
+    import. Built at `tools/dcs/`: 139 verses of Sūryasiddhānta (2 of its
+    chapters, all DCS carries of this text) imported into the
+    previously-empty `vedanga/jyotisha` taxonomy leaf
+    (`dge/data/vedanga/jyotisha/data.json`, `library.json`'s `populated`
+    flipped `true`), converted from DCS's CoNLL-U via skrutable's IAST→
+    Devanagari transliterator (the approved pip-dependency use). Chosen
+    over Āyurveda/Tantra texts specifically because `jyotisha` already had
+    a settled taxonomy slot, unlike Āyurveda/Kāmaśāstra placement, which
+    is a separate open question above. Cross-checked against
+    `tools/chandas_native/`: 14/20 of the first 20 verses scan as
+    Anuṣṭubh, the expected metre for a śāstra text — a real correctness
+    check on the transliteration, not just valid-JSON.
+  - **Not done, deliberately:** the other 252 DCS texts, an ongoing sync
+    pipeline (premature before there's a real imported corpus to sync),
+    and any taxonomy placement decision for DCS's Āyurveda/Tantra/Śaiva
+    Āgama texts. `tools/dcs/README.md` records what scaling this further
+    actually requires, so it doesn't need re-deriving.
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are

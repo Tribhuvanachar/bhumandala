@@ -6515,7 +6515,7 @@
     },
     {
       "path": "dge/data/vedanga/jyotisha/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Jyotisha"
     },
     {
