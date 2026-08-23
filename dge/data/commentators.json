@@ -22,7 +22,7 @@
    "works": [
     {
      "key": "tika_1_bhedacintaratnam",
-     "path": "dvaitavedanta.later_acharyas.bhedojjivana.tika_1_bhedacintaratnam",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhedojjivana.tika_1_bhedacintaratnam",
      "schema": "grantha_tika_text"
     }
    ],
@@ -36,7 +36,7 @@
    "works": [
     {
      "key": "tika_anantabhatta",
-     "path": "dvaitavedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_anantabhatta",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_anantabhatta",
      "schema": "grantha_tika_text"
     }
    ]
@@ -102,7 +102,7 @@
    "works": [
     {
      "key": "tika_nigudharthaprabodhini",
-     "path": "dvaitavedanta.sutra_prasthana.nyaya_vivarana.tika_nigudharthaprabodhini",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.nyaya_vivarana.tika_nigudharthaprabodhini",
      "schema": "grantha_tika_text"
     }
    ]
@@ -141,12 +141,12 @@
    "works": [
     {
      "key": "tika_1_bhavapradipa",
-     "path": "dvaitavedanta.later_acharyas.bhedojjivana.tika_1_bhavapradipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhedojjivana.tika_1_bhavapradipa",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_bhavapradipa",
-     "path": "dvaitavedanta.upanishad_prasthana.aitareyopanishad_bhashya.tika_bhavapradipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.aitareyopanishad_bhashya.tika_bhavapradipa",
      "schema": "grantha_tika_text"
     }
    ]
@@ -159,7 +159,7 @@
    "works": [
     {
      "key": "pns",
-     "path": "stotra.pns",
+     "path": "stotra.PrahladaKrutaNarasimha",
      "schema": null
     }
    ]
@@ -185,12 +185,12 @@
    "works": [
     {
      "key": "tika_vivarana",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_vivarana",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_vivarana",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vivarana",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattvodyota.tika_vivarana",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattvodyota.tika_vivarana",
      "schema": "grantha_tika_text"
     }
    ]
@@ -216,27 +216,27 @@
    "works": [
     {
      "key": "tika_mandopakarini",
-     "path": "dvaitavedanta.later_acharyas.sumadhva_vijaya.tika_mandopakarini",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.sumadhva_vijaya.tika_mandopakarini",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrichalarisheshacarya",
-     "path": "dvaitavedanta.later_acharyas.sumadhva_vijaya.tika_shrichalarisheshacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.sumadhva_vijaya.tika_shrichalarisheshacarya",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_chalari",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_chalari",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_chalari",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_iti_shri_chalari_sheshacarya",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_iti_shri_chalari_sheshacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_iti_shri_chalari_sheshacarya",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_lingheri",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_lingheri",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_lingheri",
      "schema": "grantha_tika_text"
     }
    ]
@@ -353,7 +353,7 @@
    "works": [
     {
      "key": "tika_1_bhedasanjivini",
-     "path": "dvaitavedanta.later_acharyas.bhedojjivana.tika_1_bhedasanjivini",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhedojjivana.tika_1_bhedasanjivini",
      "schema": "grantha_tika_text"
     }
    ]
@@ -417,7 +417,7 @@
    "works": [
     {
      "key": "tika_jayatirthavijaya",
-     "path": "dvaitavedanta.later_acharyas.pramana_paddhati.tika_jayatirthavijaya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.tika_jayatirthavijaya",
      "schema": "grantha_tika_text"
     }
    ]
@@ -430,297 +430,297 @@
    "works": [
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.achara_and_ancillary_granthas.jayanti_nirnaya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.achara_and_ancillary_granthas.jayanti_nirnaya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.achara_and_ancillary_granthas.kanduka_stuti.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.achara_and_ancillary_granthas.kanduka_stuti.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.achara_and_ancillary_granthas.krishnamrita_maharnava.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.achara_and_ancillary_granthas.krishnamrita_maharnava.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.achara_and_ancillary_granthas.nakha_stuti.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.achara_and_ancillary_granthas.nakha_stuti.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.achara_and_ancillary_granthas.nyasa_paddhati.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.achara_and_ancillary_granthas.nyasa_paddhati.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.achara_and_ancillary_granthas.sadachara_smriti.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.achara_and_ancillary_granthas.sadachara_smriti.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.achara_and_ancillary_granthas.tantrasara_sangraha.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.achara_and_ancillary_granthas.tantrasara_sangraha.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.achara_and_ancillary_granthas.tithi_nirnaya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.achara_and_ancillary_granthas.tithi_nirnaya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.achara_and_ancillary_granthas.yamaka_bharata.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.achara_and_ancillary_granthas.yamaka_bharata.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.achara_and_ancillary_granthas.yati_pranava_kalpa.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.achara_and_ancillary_granthas.yati_pranava_kalpa.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.dasha_prakarana_granthas.karma_nirnaya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.dasha_prakarana_granthas.karma_nirnaya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.dasha_prakarana_granthas.katha_lakshana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.dasha_prakarana_granthas.katha_lakshana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.dasha_prakarana_granthas.mayavada_khandana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.dasha_prakarana_granthas.mayavada_khandana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.dasha_prakarana_granthas.pramana_lakshana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.dasha_prakarana_granthas.pramana_lakshana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.dasha_prakarana_granthas.tattva_sankhyana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.dasha_prakarana_granthas.tattva_sankhyana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.dasha_prakarana_granthas.tattva_viveka.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.dasha_prakarana_granthas.tattva_viveka.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.dasha_prakarana_granthas.tattvodyota.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.dasha_prakarana_granthas.tattvodyota.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.dasha_prakarana_granthas.upadhi_khandana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.dasha_prakarana_granthas.upadhi_khandana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.dasha_prakarana_granthas.vishnu_tattva_vinirnaya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.dasha_prakarana_granthas.vishnu_tattva_vinirnaya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.dvadasha_stotra.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.dvadasha_stotra.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.gita_prasthana.gita_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.gita_prasthana.gita_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.gita_prasthana.gita_tatparya_nirnaya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.gita_prasthana.gita_tatparya_nirnaya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.itihasa_purana_tatparya_nirnaya.bhagavata_tatparya_nirnaya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.itihasa_purana_tatparya_nirnaya.bhagavata_tatparya_nirnaya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.itihasa_purana_tatparya_nirnaya.mahabharata_tatparya_nirnaya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.itihasa_purana_tatparya_nirnaya.mahabharata_tatparya_nirnaya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.rig_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.rig_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.sutra_prasthana.anubhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.sutra_prasthana.anubhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.sutra_prasthana.anuvyakhyana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.sutra_prasthana.anuvyakhyana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.sutra_prasthana.brahma_sutra_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.sutra_prasthana.brahma_sutra_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.sutra_prasthana.nyaya_vivarana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.sutra_prasthana.nyaya_vivarana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.upanishad_prasthana.aitareyopanishad_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.upanishad_prasthana.aitareyopanishad_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.upanishad_prasthana.brihadaranyakopanishad_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.upanishad_prasthana.brihadaranyakopanishad_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.upanishad_prasthana.chandogyopanishad_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.upanishad_prasthana.chandogyopanishad_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.upanishad_prasthana.ishavasyopanishad_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.upanishad_prasthana.ishavasyopanishad_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.upanishad_prasthana.kathopanishad_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.upanishad_prasthana.kathopanishad_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.upanishad_prasthana.kenopanishad_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.upanishad_prasthana.kenopanishad_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.upanishad_prasthana.mandukyopanishad_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.upanishad_prasthana.mandukyopanishad_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.upanishad_prasthana.mundakopanishad_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.upanishad_prasthana.mundakopanishad_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.upanishad_prasthana.prashnopanishad_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.upanishad_prasthana.prashnopanishad_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "darshana.vedanta.dvaita.sarvamula.upanishad_prasthana.taittiriyopanishad_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.SarvaMula.upanishad_prasthana.taittiriyopanishad_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.karma_nirnaya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.karma_nirnaya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.katha_lakshana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.katha_lakshana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.mayavada_khandana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.mayavada_khandana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.pramana_lakshana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.pramana_lakshana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattva_viveka.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattva_viveka.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.upadhi_khandana.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.upadhi_khandana.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.vishnu_tattva_vinirnaya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.vishnu_tattva_vinirnaya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_prameyadipika",
-     "path": "dvaitavedanta.gita_prasthana.gita_bhashya.tika_prameyadipika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_bhashya.tika_prameyadipika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_nyayadeepika",
-     "path": "dvaitavedanta.gita_prasthana.gita_tatparya_nirnaya.tika_nyayadeepika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_tatparya_nirnaya.tika_nyayadeepika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.later_acharyas.dvaita_dyumani.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.dvaita_dyumani.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_nyayasudha",
-     "path": "dvaitavedanta.later_acharyas.nyaya_sudha.tika_nyayasudha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyaya_sudha.tika_nyayasudha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.later_acharyas.tarka_tandava.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.tarka_tandava.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_tattvaprakashika",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tattvaprakashika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tattvaprakashika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_panchika",
-     "path": "dvaitavedanta.sutra_prasthana.nyaya_vivarana.tika_panchika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.nyaya_vivarana.tika_panchika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.ishavasyopanishad_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.ishavasyopanishad_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.kenopanishad_bhashya.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kenopanishad_bhashya.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.mandukyopanishadbhashyam.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.mandukyopanishadbhashyam.tika_jayatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_jayatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_jayatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_jayatirtha",
      "schema": "grantha_tika_text"
     }
    ],
@@ -842,17 +842,17 @@
    "works": [
     {
      "key": "tika_kashi_tippani",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_kashi_tippani",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_kashi_tippani",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_kashitippani",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_kashitippani",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_kashitippani",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_1_kashitimmannacarya",
-     "path": "dvaitavedanta.later_acharyas.bhedojjivana.tika_1_kashitimmannacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhedojjivana.tika_1_kashitimmannacarya",
      "schema": "grantha_tika_text"
     }
    ]
@@ -879,7 +879,7 @@
    "works": [
     {
      "key": "tika_1_bhedacandrika",
-     "path": "dvaitavedanta.later_acharyas.bhedojjivana.tika_1_bhedacandrika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhedojjivana.tika_1_bhedacandrika",
      "schema": "grantha_tika_text"
     }
    ]
@@ -918,7 +918,7 @@
    "works": [
     {
      "key": "tika_lingeri",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_lingeri",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_lingeri",
      "schema": "grantha_tika_text"
     }
    ]
@@ -931,297 +931,297 @@
    "works": [
     {
      "key": "sarvamula",
-     "path": "darshana.vedanta.dvaita.sarvamula",
+     "path": "darshana.vedanta.dvaita.SarvaMula",
      "schema": "grantha_prakarana_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.karma_nirnaya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.karma_nirnaya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.katha_lakshana.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.katha_lakshana.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.mayavada_khandana.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.mayavada_khandana.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.pramana_lakshana.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.pramana_lakshana.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattva_sankhyana.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattva_sankhyana.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattva_viveka.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattva_viveka.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattvodyota.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattvodyota.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.upadhi_khandana.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.upadhi_khandana.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.vishnu_tattva_vinirnaya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.vishnu_tattva_vinirnaya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.gita_prasthana.gita_bhashya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_bhashya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.gita_prasthana.gita_tatparya_nirnaya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_tatparya_nirnaya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.itihasa_prasthana.mahabharata_tatparya_nirnaya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.itihasa_prasthana.mahabharata_tatparya_nirnaya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.itihasa_prasthana.yamaka_bharata.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.itihasa_prasthana.yamaka_bharata.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.bhagavato_nirdoshatvalakshanam.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhagavato_nirdoshatvalakshanam.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.bhedaparanyeva_khalu_brahmasutrani.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhedaparanyeva_khalu_brahmasutrani.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.bhedojjivana.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhedojjivana.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.brahmasutranyayasamgraha.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.brahmasutranyayasamgraha.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.candrikamandanam.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.candrikamandanam.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.dvaita_dyumani.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.dvaita_dyumani.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.karmavijaya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.karmavijaya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.madhvamukhalankara.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.madhvamukhalankara.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.madhvasiddhantasara.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.madhvasiddhantasara.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.nyaya_sudha.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyaya_sudha.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.nyayamrita.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyayamrita.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.padarthasangraha.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.padarthasangraha.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.pramana_paddhati.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.purushasuktam.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.purushasuktam.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.sarvasiddhantasarasaravivecanam.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.sarvasiddhantasarasaravivecanam.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.shrimanmadhvasiddhantasaroddhara.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.shrimanmadhvasiddhantasaroddhara.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.shrimannyayasudhamandanam.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.shrimannyayasudhamandanam.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.shrivijayindravijayavaibhavam.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.shrivijayindravijayavaibhavam.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.sumadhva_vijaya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.sumadhva_vijaya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.tantradipika.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.tantradipika.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.tarka_tandava.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.tarka_tandava.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.tatparya_chandrika.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.tatparya_chandrika.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.vadavali.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.vadavali.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.vagvajra.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.vagvajra.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.later_acharyas.yukti_mallika.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.yukti_mallika.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.sruti_prasthana.rig_bhashya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sruti_prasthana.rig_bhashya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.sutra_prasthana.anubhashya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.anubhashya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.sutra_prasthana.anuvyakhyana.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.anuvyakhyana.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "tika_tattvaprradipika",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tattvaprradipika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tattvaprradipika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.sutra_prasthana.nyaya_vivarana.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.nyaya_vivarana.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.sutra_prasthana.omkara_vada.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.omkara_vada.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.upanishad_prasthana.aitareyopanishad_bhashya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.aitareyopanishad_bhashya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.upanishad_prasthana.brihadaranyakopanishadbhashyam.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.brihadaranyakopanishadbhashyam.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.upanishad_prasthana.chandogyopanishad_bhashya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.chandogyopanishad_bhashya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.upanishad_prasthana.ishavasyopanishad_bhashya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.ishavasyopanishad_bhashya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.upanishad_prasthana.kathopanishad_bhashya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kathopanishad_bhashya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.upanishad_prasthana.kenopanishad_bhashya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kenopanishad_bhashya.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "tika_vivarana",
-     "path": "dvaitavedanta.upanishad_prasthana.kenopanishad_bhashya.tika_vivarana",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kenopanishad_bhashya.tika_vivarana",
      "schema": "grantha_tika_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.upanishad_prasthana.mandukyopanishadbhashyam.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.mandukyopanishadbhashyam.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.upanishad_prasthana.mundakopanishadbhashyam.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.mundakopanishadbhashyam.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.upanishad_prasthana.shatprashnopanishadbhashyam.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.shatprashnopanishadbhashyam.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "dvaitavedanta.upanishad_prasthana.taittiriyopanishad_bhashya.mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.taittiriyopanishad_bhashya.mula",
      "schema": "grantha_mula_text"
     }
    ],
@@ -1351,7 +1351,7 @@
    "works": [
     {
      "key": "tika_mankalidharmarajacarya",
-     "path": "dvaitavedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_mankalidharmarajacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_mankalidharmarajacarya",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1364,7 +1364,7 @@
    "works": [
     {
      "key": "tika_nyayamritamadhuri",
-     "path": "dvaitavedanta.later_acharyas.nyayamrita.tika_nyayamritamadhuri",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyayamrita.tika_nyayamritamadhuri",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1390,7 +1390,7 @@
    "works": [
     {
      "key": "tika_prakashika",
-     "path": "dvaitavedanta.gita_prasthana.gita_bhashya.tika_prakashika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_bhashya.tika_prakashika",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1403,12 +1403,12 @@
    "works": [
     {
      "key": "tika_iti_shrinarayanapanditacarya",
-     "path": "dvaitavedanta.later_acharyas.sumadhva_vijaya.tika_iti_shrinarayanapanditacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.sumadhva_vijaya.tika_iti_shrinarayanapanditacarya",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_prakashika",
-     "path": "dvaitavedanta.later_acharyas.sumadhva_vijaya.tika_prakashika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.sumadhva_vijaya.tika_prakashika",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1434,12 +1434,12 @@
    "works": [
     {
      "key": "tika_bhavapradipika",
-     "path": "dvaitavedanta.gita_prasthana.gita_bhashya.tika_bhavapradipika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_bhashya.tika_bhavapradipika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_prakashika",
-     "path": "dvaitavedanta.gita_prasthana.gita_tatparya_nirnaya.tika_prakashika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_tatparya_nirnaya.tika_prakashika",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1452,7 +1452,7 @@
    "works": [
     {
      "key": "tika_nyayamritakantakoddhara",
-     "path": "dvaitavedanta.later_acharyas.nyayamrita.tika_nyayamritakantakoddhara",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyayamrita.tika_nyayamritakantakoddhara",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1465,47 +1465,47 @@
    "works": [
     {
      "key": "tika_vivarana",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.pramana_lakshana.tika_vivarana",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.pramana_lakshana.tika_vivarana",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_gururajiyatippani",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_gururajiyatippani",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_gururajiyatippani",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrigururajiyatippani",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_shrigururajiyatippani",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_shrigururajiyatippani",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_bhavacandrika",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_bhavacandrika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_bhavacandrika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_gururajiya",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattva_viveka.tika_gururajiya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattva_viveka.tika_gururajiya",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vakyarthapradipa",
-     "path": "dvaitavedanta.gita_prasthana.gita_bhashya.tika_vakyarthapradipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_bhashya.tika_vakyarthapradipa",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_sheshavakyarthacandrika",
-     "path": "dvaitavedanta.later_acharyas.nyaya_sudha.tika_sheshavakyarthacandrika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyaya_sudha.tika_sheshavakyarthacandrika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_pandurangi",
-     "path": "dvaitavedanta.later_acharyas.tatparya_chandrika.tika_pandurangi",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.tatparya_chandrika.tika_pandurangi",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_tattvaprakashikavivriti",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tattvaprakashikavivriti",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tattvaprakashikavivriti",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1518,7 +1518,7 @@
    "works": [
     {
      "key": "tika_pandurangi_shrinivasacarya",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_pandurangi_shrinivasacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_pandurangi_shrinivasacarya",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1531,12 +1531,12 @@
    "works": [
     {
      "key": "tika_virodhoddhara",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_virodhoddhara",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_virodhoddhara",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_virododdhara",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_virododdhara",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_virododdhara",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1694,92 +1694,92 @@
     },
     {
      "key": "tika_bhavadipa",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.karma_nirnaya.tika_bhavadipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.karma_nirnaya.tika_bhavadipa",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_bhavadipa",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.katha_lakshana.tika_bhavadipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.katha_lakshana.tika_bhavadipa",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_bhavadipa",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.pramana_lakshana.tika_bhavadipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.pramana_lakshana.tika_bhavadipa",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_bhavadipa",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_bhavadipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_bhavadipa",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_bhavadipa",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.vishnu_tattva_vinirnaya.tika_bhavadipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.vishnu_tattva_vinirnaya.tika_bhavadipa",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_bhavadipa",
-     "path": "dvaitavedanta.gita_prasthana.gita_bhashya.tika_bhavadipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_bhashya.tika_bhavadipa",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_bhavadipa",
-     "path": "dvaitavedanta.gita_prasthana.gita_tatparya_nirnaya.tika_bhavadipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_tatparya_nirnaya.tika_bhavadipa",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_nyayasudhaparima_a",
-     "path": "dvaitavedanta.later_acharyas.nyaya_sudha.tika_nyayasudhaparima_a",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyaya_sudha.tika_nyayasudhaparima_a",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_nyayasudhaparimala",
-     "path": "dvaitavedanta.later_acharyas.nyaya_sudha.tika_nyayasudhaparimala",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyaya_sudha.tika_nyayasudhaparimala",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_bhavadipa",
-     "path": "dvaitavedanta.later_acharyas.pramana_paddhati.tika_bhavadipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.tika_bhavadipa",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_nyayadipa",
-     "path": "dvaitavedanta.later_acharyas.tarka_tandava.tika_nyayadipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.tarka_tandava.tika_nyayadipa",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_prakashika",
-     "path": "dvaitavedanta.later_acharyas.tatparya_chandrika.tika_prakashika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.tatparya_chandrika.tika_prakashika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vadavalibhavadipika",
-     "path": "dvaitavedanta.later_acharyas.vadavali.tika_vadavalibhavadipika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.vadavali.tika_vadavalibhavadipika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_bhavadipa",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_bhavadipa",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_bhavadipa",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_gurvarthadipika",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_gurvarthadipika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_gurvarthadipika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shriraghavendrayati",
-     "path": "dvaitavedanta.upanishad_prasthana.kenopanishad_bhashya.tika_shriraghavendrayati",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kenopanishad_bhashya.tika_shriraghavendrayati",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shriraghavendrayati",
-     "path": "dvaitavedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_shriraghavendrayati",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_shriraghavendrayati",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_khandartha",
-     "path": "dvaitavedanta.upanishad_prasthana.taittiriyopanishad_bhashya.tika_khandartha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.taittiriyopanishad_bhashya.tika_khandartha",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1792,17 +1792,17 @@
    "works": [
     {
      "key": "tika_bhavabodha",
-     "path": "dvaitavedanta.gita_prasthana.gita_bhashya.tika_bhavabodha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_bhashya.tika_bhavabodha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shriraghuttamatirtha",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_shriraghuttamatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_shriraghuttamatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_tattvaprakashikabhavabodha",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tattvaprakashikabhavabodha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tattvaprakashikabhavabodha",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1828,7 +1828,7 @@
    "works": [
     {
      "key": "tika_durghatabhavadipika",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_durghatabhavadipika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_durghatabhavadipika",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1841,22 +1841,22 @@
    "works": [
     {
      "key": "tika_tatvasankhyanatippanam",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_tatvasankhyanatippanam",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_tatvasankhyanatippanam",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_satyadharma",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_satyadharma",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_satyadharma",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_satyadharmiya",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_satyadharmiya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_satyadharmiya",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrisatyadharma",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_shrisatyadharma",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_shrisatyadharma",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1869,7 +1869,7 @@
    "works": [
     {
      "key": "tika_candrikavivriti",
-     "path": "dvaitavedanta.later_acharyas.tatparya_chandrika.tika_candrikavivriti",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.tatparya_chandrika.tika_candrikavivriti",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1882,37 +1882,37 @@
    "works": [
     {
      "key": "tika_mayavadaparashu",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.mayavada_khandana.tika_mayavadaparashu",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.mayavada_khandana.tika_mayavadaparashu",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_mithyatvanumanakhandanaparashu",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_mithyatvanumanakhandanaparashu",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_mithyatvanumanakhandanaparashu",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_parashunamnitippani",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.upadhi_khandana.tika_parashunamnitippani",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.upadhi_khandana.tika_parashunamnitippani",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vakyaviveka",
-     "path": "dvaitavedanta.gita_prasthana.gita_tatparya_nirnaya.tika_vakyaviveka",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_tatparya_nirnaya.tika_vakyaviveka",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_abhinavamritam",
-     "path": "dvaitavedanta.later_acharyas.pramana_paddhati.tika_abhinavamritam",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.tika_abhinavamritam",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_a_bhinavacandrika",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_a_bhinavacandrika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_a_bhinavacandrika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_tamraparni_shrinivasacaryaviracita_vakyarthamuktavali",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tamraparni_shrinivasacaryaviracita_vakyarthamuktavali",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tamraparni_shrinivasacaryaviracita_vakyarthamuktavali",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1925,17 +1925,17 @@
    "works": [
     {
      "key": "tika_bhavaprakasha",
-     "path": "dvaitavedanta.gita_prasthana.gita_tatparya_nirnaya.tika_bhavaprakasha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_tatparya_nirnaya.tika_bhavaprakasha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_nyayadipikabhavaprakasha",
-     "path": "dvaitavedanta.gita_prasthana.gita_tatparya_nirnaya.tika_nyayadipikabhavaprakasha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_tatparya_nirnaya.tika_nyayadipikabhavaprakasha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrisatyaprajnatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_shrisatyaprajnatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_shrisatyaprajnatirtha",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1948,12 +1948,12 @@
    "works": [
     {
      "key": "tika_satyapramoda",
-     "path": "dvaitavedanta.later_acharyas.purushasuktam.tika_satyapramoda",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.purushasuktam.tika_satyapramoda",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_satyapramoda",
-     "path": "dvaitavedanta.later_acharyas.yukti_mallika.tika_satyapramoda",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.yukti_mallika.tika_satyapramoda",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1966,12 +1966,12 @@
    "works": [
     {
      "key": "tika_candrikabindu",
-     "path": "dvaitavedanta.later_acharyas.tatparya_chandrika.tika_candrikabindu",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.tatparya_chandrika.tika_candrikabindu",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrisatyapriyatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.kenopanishad_bhashya.tika_shrisatyapriyatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kenopanishad_bhashya.tika_shrisatyapriyatirtha",
      "schema": "grantha_tika_text"
     }
    ]
@@ -1997,17 +1997,17 @@
    "works": [
     {
      "key": "tika_1_sharkarashrinivasacarya",
-     "path": "dvaitavedanta.later_acharyas.bhedojjivana.tika_1_sharkarashrinivasacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhedojjivana.tika_1_sharkarashrinivasacarya",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_sharkara_shrinivasacarya",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_sharkara_shrinivasacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_sharkara_shrinivasacarya",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vakyarthamancari",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_vakyarthamancari",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_vakyarthamancari",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2033,7 +2033,7 @@
    "works": [
     {
      "key": "tika_36_kashitimmannacarya",
-     "path": "dvaitavedanta.later_acharyas.bhedojjivana.tika_36_kashitimmannacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhedojjivana.tika_36_kashitimmannacarya",
      "schema": "grantha_tika_text"
     }
    ],
@@ -2047,57 +2047,57 @@
    "works": [
     {
      "key": "tika_vakyarthakaumudi",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.pramana_lakshana.tika_vakyarthakaumudi",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.pramana_lakshana.tika_vakyarthakaumudi",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_nivasatirthiyatippani",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_nivasatirthiyatippani",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_nivasatirthiyatippani",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrinivasatirthiyatippani",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_shrinivasatirthiyatippani",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.prapancha_mithyatvanumana_khandana.tika_shrinivasatirthiyatippani",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_bhavadipika",
-     "path": "dvaitavedanta.gita_prasthana.gita_bhashya.tika_bhavadipika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_bhashya.tika_bhavadipika",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vivarana",
-     "path": "dvaitavedanta.later_acharyas.nyaya_sudha.tika_vivarana",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyaya_sudha.tika_vivarana",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_nyayamritaprakasha",
-     "path": "dvaitavedanta.later_acharyas.nyayamrita.tika_nyayamritaprakasha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyayamrita.tika_nyayamritaprakasha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vakyarthamanjari",
-     "path": "dvaitavedanta.later_acharyas.pramana_paddhati.tika_vakyarthamanjari",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.tika_vakyarthamanjari",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vadavaliprakasha",
-     "path": "dvaitavedanta.later_acharyas.vadavali.tika_vadavaliprakasha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.vadavali.tika_vadavaliprakasha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrinivasatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.mandukyopanishadbhashyam.tika_shrinivasatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.mandukyopanishadbhashyam.tika_shrinivasatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrinivasatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.mundakopanishadbhashyam.tika_shrinivasatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.mundakopanishadbhashyam.tika_shrinivasatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrinivasatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_shrinivasatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_shrinivasatirtha",
      "schema": "grantha_tika_text"
     }
    ],
@@ -2124,12 +2124,12 @@
    "works": [
     {
      "key": "tika_surottama",
-     "path": "dvaitavedanta.later_acharyas.purushasuktam.tika_surottama",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.purushasuktam.tika_surottama",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_surottama",
-     "path": "dvaitavedanta.later_acharyas.yukti_mallika.tika_surottama",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.yukti_mallika.tika_surottama",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2142,22 +2142,22 @@
    "works": [
     {
      "key": "tika_mannyayadipakiranavali",
-     "path": "dvaitavedanta.gita_prasthana.gita_tatparya_nirnaya.tika_mannyayadipakiranavali",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_tatparya_nirnaya.tika_mannyayadipakiranavali",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrimannyayadipakiranavali",
-     "path": "dvaitavedanta.gita_prasthana.gita_tatparya_nirnaya.tika_shrimannyayadipakiranavali",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_tatparya_nirnaya.tika_shrimannyayadipakiranavali",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_tamraparni_shrinivasacarya",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tamraparni_shrinivasacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tamraparni_shrinivasacarya",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_tamraparnishrinivasacarya",
-     "path": "dvaitavedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_tamraparnishrinivasacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_tamraparnishrinivasacarya",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2183,7 +2183,7 @@
    "works": [
     {
      "key": "tika_tattvapradipika",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tattvapradipika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_tattvapradipika",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2196,12 +2196,12 @@
    "works": [
     {
      "key": "tika_bhavaprakasha",
-     "path": "dvaitavedanta.gita_prasthana.gita_bhashya.tika_bhavaprakasha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.gita_prasthana.gita_bhashya.tika_bhavaprakasha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vivarana",
-     "path": "dvaitavedanta.later_acharyas.vadavali.tika_vivarana",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.vadavali.tika_vivarana",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2214,12 +2214,12 @@
    "works": [
     {
      "key": "tika_nivasatirthiyatippani",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.upadhi_khandana.tika_nivasatirthiyatippani",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.upadhi_khandana.tika_nivasatirthiyatippani",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrinivasatirthiyatippani",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.upadhi_khandana.tika_shrinivasatirthiyatippani",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.upadhi_khandana.tika_shrinivasatirthiyatippani",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2261,7 +2261,7 @@
     },
     {
      "key": "tika_shrivadirajatirtha",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_shrivadirajatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_shrivadirajatirtha",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2274,17 +2274,17 @@
    "works": [
     {
      "key": "tika_vamanapanditacarya",
-     "path": "dvaitavedanta.upanishad_prasthana.kathopanishad_bhashya.tika_vamanapanditacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kathopanishad_bhashya.tika_vamanapanditacarya",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrivamanapandita",
-     "path": "dvaitavedanta.upanishad_prasthana.kenopanishad_bhashya.tika_shrivamanapandita",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kenopanishad_bhashya.tika_shrivamanapandita",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrivamanapanditacarya",
-     "path": "dvaitavedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_shrivamanapanditacarya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.shatprashnopanishadbhashyam.tika_shrivamanapanditacarya",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2297,12 +2297,12 @@
    "works": [
     {
      "key": "tika_nivasatirthiya",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_nivasatirthiya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_nivasatirthiya",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrinivasatirthiya",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_shrinivasatirthiya",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_shrinivasatirthiya",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2315,7 +2315,7 @@
    "works": [
     {
      "key": "tika_nyayamritasaugandhyam",
-     "path": "dvaitavedanta.later_acharyas.nyayamrita.tika_nyayamritasaugandhyam",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyayamrita.tika_nyayamritasaugandhyam",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2328,7 +2328,7 @@
    "works": [
     {
      "key": "tika_shrivaradatirthabhikshu",
-     "path": "dvaitavedanta.upanishad_prasthana.kenopanishad_bhashya.tika_shrivaradatirthabhikshu",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kenopanishad_bhashya.tika_shrivaradatirthabhikshu",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2354,7 +2354,7 @@
    "works": [
     {
      "key": "tika_iti_shrimadvedangamuni",
-     "path": "dvaitavedanta.later_acharyas.sumadhva_vijaya.tika_iti_shrimadvedangamuni",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.sumadhva_vijaya.tika_iti_shrimadvedangamuni",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2367,22 +2367,22 @@
    "works": [
     {
      "key": "tika_shrivedeshabhikshu",
-     "path": "dvaitavedanta.later_acharyas.pramana_paddhati.tika_shrivedeshabhikshu",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.tika_shrivedeshabhikshu",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vedeshabhikshu",
-     "path": "dvaitavedanta.later_acharyas.pramana_paddhati.tika_vedeshabhikshu",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.tika_vedeshabhikshu",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_padarthakaumudi",
-     "path": "dvaitavedanta.upanishad_prasthana.chandogyopanishad_bhashya.tika_padarthakaumudi",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.chandogyopanishad_bhashya.tika_padarthakaumudi",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrivedeshatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.kenopanishad_bhashya.tika_shrivedeshatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kenopanishad_bhashya.tika_shrivedeshatirtha",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2395,12 +2395,12 @@
    "works": [
     {
      "key": "tika_nivasatirthatippani",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.mayavada_khandana.tika_nivasatirthatippani",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.mayavada_khandana.tika_nivasatirthatippani",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrinivasatirthatippani",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.mayavada_khandana.tika_shrinivasatirthatippani",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.mayavada_khandana.tika_shrinivasatirthatippani",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2451,12 +2451,12 @@
    "works": [
     {
      "key": "tika_padaratnavali",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_padaratnavali",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_padaratnavali",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_prakashika",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_prakashika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_prakashika",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2482,17 +2482,17 @@
    "works": [
     {
      "key": "tika_bhavavarnanam",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_bhavavarnanam",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_bhavavarnanam",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrivijayindratirtha",
-     "path": "dvaitavedanta.later_acharyas.pramana_paddhati.tika_shrivijayindratirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.tika_shrivijayindratirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vijayindratirtha",
-     "path": "dvaitavedanta.later_acharyas.pramana_paddhati.tika_vijayindratirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.tika_vijayindratirtha",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2531,7 +2531,7 @@
    "works": [
     {
      "key": "tika_padarthadipikodbodhika",
-     "path": "dvaitavedanta.later_acharyas.sumadhva_vijaya.tika_padarthadipikodbodhika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.sumadhva_vijaya.tika_padarthadipikodbodhika",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2544,12 +2544,12 @@
    "works": [
     {
      "key": "tika_shrivittalabhatta",
-     "path": "dvaitavedanta.later_acharyas.pramana_paddhati.tika_shrivittalabhatta",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.tika_shrivittalabhatta",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vittalabhatta",
-     "path": "dvaitavedanta.later_acharyas.pramana_paddhati.tika_vittalabhatta",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.tika_vittalabhatta",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2588,7 +2588,7 @@
    "works": [
     {
      "key": "tika_adarsha",
-     "path": "dvaitavedanta.later_acharyas.pramana_paddhati.tika_adarsha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.tika_adarsha",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2601,7 +2601,7 @@
    "works": [
     {
      "key": "tika_nyayamritatarangini",
-     "path": "dvaitavedanta.later_acharyas.nyayamrita.tika_nyayamritatarangini",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyayamrita.tika_nyayamritatarangini",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2657,37 +2657,37 @@
     },
     {
      "key": "tika_mandaramanjari",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.mayavada_khandana.tika_mandaramanjari",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.mayavada_khandana.tika_mandaramanjari",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_mandaramanjari",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattvodyota.tika_mandaramanjari",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattvodyota.tika_mandaramanjari",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_mandaramanjari",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.upadhi_khandana.tika_mandaramanjari",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.upadhi_khandana.tika_mandaramanjari",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_sattarkadipavali",
-     "path": "dvaitavedanta.sutra_prasthana.brahma_sutra_bhashya.tika_sattarkadipavali",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.sutra_prasthana.brahma_sutra_bhashya.tika_sattarkadipavali",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrivyasatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.kathopanishad_bhashya.tika_shrivyasatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kathopanishad_bhashya.tika_shrivyasatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vyasatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.kathopanishad_bhashya.tika_vyasatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kathopanishad_bhashya.tika_vyasatirtha",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_shrivyasatirtha",
-     "path": "dvaitavedanta.upanishad_prasthana.mandukyopanishadbhashyam.tika_shrivyasatirtha",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.mandukyopanishadbhashyam.tika_shrivyasatirtha",
      "schema": "grantha_tika_text"
     }
    ],
@@ -2701,7 +2701,7 @@
    "works": [
     {
      "key": "tika_bhagavataprakashika",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_bhagavataprakashika",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_bhagavataprakashika",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2714,17 +2714,17 @@
    "works": [
     {
      "key": "tika_tatvasankhyanatikatippani",
-     "path": "dvaitavedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_tatvasankhyanatikatippani",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.dasha_prakarana_granthas.tattva_sankhyana.tika_tatvasankhyanatikatippani",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_sudhavivriti",
-     "path": "dvaitavedanta.later_acharyas.nyaya_sudha.tika_sudhavivriti",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyaya_sudha.tika_sudhavivriti",
      "schema": "grantha_tika_text"
     },
     {
      "key": "tika_vivriti",
-     "path": "dvaitavedanta.later_acharyas.nyaya_sudha.tika_vivriti",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyaya_sudha.tika_vivriti",
      "schema": "grantha_tika_text"
     }
    ]
@@ -2763,7 +2763,7 @@
    "works": [
     {
      "key": "tika_catti",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_catti",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_catti",
      "schema": "grantha_tika_text"
     }
    ],
@@ -2777,7 +2777,7 @@
    "works": [
     {
      "key": "tika_nyayakalpalata",
-     "path": "dvaitavedanta.later_acharyas.nyayamrita.tika_nyayakalpalata",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.nyayamrita.tika_nyayakalpalata",
      "schema": "grantha_tika_text"
     }
    ],
@@ -2791,7 +2791,7 @@
    "works": [
     {
      "key": "tika_mandanandini",
-     "path": "dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_mandanandini",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_mandanandini",
      "schema": "grantha_tika_text"
     }
    ],

@@ -6,7 +6,7 @@ its own status file. This folds them into a single tracker and recomputes the
 rollups, keeping the newest record for any grantha that appears twice.
 
 Run:  python tools/dvaitavedanta/merge_status.py --inputs a.json b.json \
-          --out dge/data/dvaitavedanta/_extract_status.json
+          --out dge/data/darshana/vedanta/dvaita/DvaitaVedanta/_extract_status.json
 """
 
 from __future__ import annotations

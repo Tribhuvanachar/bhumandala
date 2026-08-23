@@ -492,7 +492,7 @@ const QUICK_SEARCH_ABBREVIATIONS = [
       if (parts.length !== 1 || !/^\d+$/.test(parts[0])) return null;
       const n = parseInt(parts[0], 10);
       if (!n) return null;
-      return { granthaPath: 'stotra/pns', shlokaNumber: n };
+      return { granthaPath: 'stotra/PrahladaKrutaNarasimha', shlokaNumber: n };
     }
   }
 ];

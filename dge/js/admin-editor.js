@@ -748,12 +748,23 @@ async function dgeAdminValidateGranthaFileEntries(fileEntries) {
   // Every existing grantha folder in the library uses
   // lowercase_with_underscores. A space or uppercase letter usually
   // means the folder was named straight from a delivery zip rather than
-  // following the site's own convention, which URL routing and slug
-  // lookups elsewhere assume holds.
+  // following the site's own convention. URL routing itself tolerates
+  // either (library.js falls back to encodeURIComponent for anything
+  // that isn't a plain slug) so this is a style nag, not a functional
+  // requirement.
+  //
+  // 23 Aug 2026: the project lead deliberately chose PascalCase for these
+  // four folders (SarvaMula/DvaitaVedanta/SetuTila under Vedanta/Dvaita,
+  // and stotra/PrahladaKrutaNarasimha) as the new naming standard going
+  // forward, so they're exempted here rather than nagging on every future
+  // load of this editor.
+  const DGE_INTENTIONAL_PASCAL_CASE = new Set([
+    'SarvaMula', 'DvaitaVedanta', 'SetuTila', 'PrahladaKrutaNarasimha'
+  ]);
   const badSegs = new Set();
   parsed.forEach(({ path }) => {
     path.replace(/^data\//, '').split('/').slice(0, -1).forEach(seg => {
-      if (/[ A-Z]/.test(seg)) badSegs.add(seg);
+      if (/[ A-Z]/.test(seg) && !DGE_INTENTIONAL_PASCAL_CASE.has(seg)) badSegs.add(seg);
     });
   });
   badSegs.forEach(seg => {
@@ -765,9 +776,17 @@ async function dgeAdminValidateGranthaFileEntries(fileEntries) {
   parsed.forEach(({ path, data, error }) => {
     if (error || !data || !data.metadata || !data.shlokas) return;
     const folderName = path.split('/').slice(-2, -1)[0];
-    const code = data.metadata.stotraCode;
+    // Prefer the newer metadata.id (23 Aug 2026 standard: matches the
+    // folder name exactly by convention) over metadata.stotraCode, which
+    // can now deliberately diverge from the folder -- e.g. pns/ was
+    // renamed to PrahladaKrutaNarasimha/ but keeps stotraCode: "pns" on
+    // purpose, as the stable localStorage/audio-cache namespace existing
+    // readers' saved progress already lives under (see core.js's
+    // STOTRA_CODE_CONTINUITY). Falls back to stotraCode for older files
+    // that don't have an id field yet.
+    const code = data.metadata.id || data.metadata.stotraCode;
     if (code && code !== folderName) {
-      warnings.push(`"${path}": folder is named "${folderName}" but its own metadata.stotraCode says "${code}" — this file may hold the wrong chapter/sarga's content.`);
+      warnings.push(`"${path}": folder is named "${folderName}" but its own metadata.id/stotraCode says "${code}" — this file may hold the wrong chapter/sarga's content.`);
     }
     const declared = data.metadata.totalShlokas;
     const actual = Object.keys(data.shlokas).length;

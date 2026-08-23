@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Where is each Ashtadhyayi sutra actually used in the library?
 
-Scans the grantha corpus (darshana, dvaitavedanta, kavya, itihasa, purana,
-smriti, stotra, dasa_sahitya, ... -- everything EXCEPT vedanga/vyakarana's
+Scans the grantha corpus (darshana -- which now includes DvaitaVedanta,
+nested under darshana/vedanta/dvaita/ since the 23 Aug 2026 restructure --
+kavya, itihasa, purana, smriti, stotra, dasa_sahitya, ... -- everything
+EXCEPT vedanga/vyakarana's
 own commentary layers, whose citing of sutras is their whole job, and the
 non-text datasets kosha/_morph/_synonyms) for real usages of Panini's
 sutras, two ways:
@@ -34,9 +36,9 @@ sutras, two ways:
 Ranking is this project's own priority, not frequency: the Madhva lineage
 first --
 
-  rank 0  सर्वमूलम् (darshana/vedanta/dvaita/sarvamula)
-  rank 1  the wider Dvaita corpus (dvaitavedanta/**: Sumadhva Vijaya,
-          Yuktimallika, Nyaya Sudha, the later acharyas' works)
+  rank 0  सर्वमूलम् (darshana/vedanta/dvaita/SarvaMula)
+  rank 1  the wider Dvaita corpus (darshana/vedanta/dvaita/DvaitaVedanta/**:
+          Sumadhva Vijaya, Yuktimallika, Nyaya Sudha, the later acharyas' works)
   rank 2  dasa_sahitya (Vyasakuta/Haridasa works)
   rank 3  everything else (itihasa, kavya, purana, smriti, ...)
 
@@ -66,7 +68,7 @@ DATA = REPO / 'dge/data'
 SUTRAPATHA = DATA / 'vedanga/vyakarana/ashtadhyayi/sutrapatha/data.json'
 OUT = DATA / 'vedanga/vyakarana/ashtadhyayi/prayoga_index'
 
-SCAN_TOPDIRS = ['darshana', 'dvaitavedanta', 'dasa_sahitya', 'itihasa',
+SCAN_TOPDIRS = ['darshana', 'dasa_sahitya', 'itihasa',
                 'kavya_alankara', 'purana', 'smriti_dharma', 'stotra',
                 'nitishastra', 'upaveda', 'agama', 'vedas']
 MIN_QUOTE_NORM = 8
@@ -94,9 +96,9 @@ DEVDIG = {ord(a): str(i) for i, a in enumerate('०१२३४५६७८९')
 
 
 def rank_of(slug):
-    if slug.startswith('darshana/vedanta/dvaita/sarvamula'):
+    if slug.startswith('darshana/vedanta/dvaita/SarvaMula'):
         return 0
-    if slug.startswith('dvaitavedanta'):
+    if slug.startswith('darshana/vedanta/dvaita/DvaitaVedanta'):
         return 1
     if slug.startswith('dasa_sahitya'):
         return 2
