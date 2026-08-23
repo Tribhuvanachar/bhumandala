@@ -168,19 +168,33 @@ window.ACHARYA_QUERY_TYPES = ACHARYA_QUERY_TYPES;
 
 // Additional structured per-shloka fields, beyond the existing free-form
 // commentaries — Padaccheda, Anvaya, etc. Purely additive and forward-
-// looking: dataKey is what render.js looks for on each shloka object
-// (e.g. shloka.padaccheda). If a given shloka's data doesn't have that
-// field populated, that section simply doesn't render — nothing breaks
-// for shlokas without this data yet. Toggle individual fields on/off in
+// looking: dataKey is what render.js looks for on each shloka object,
+// either a plain top-level field (e.g. shloka.padaccheda) or a dotted
+// path into a nested object (e.g. shloka.gemini_deep_analysis.bhavartha
+// -- see dgeGetNestedField in render.js). If a given shloka's data
+// doesn't have that field populated, that section simply doesn't render
+// — nothing breaks for shlokas without this data yet. Toggle individual
+// fields on/off in
 // ⚙️ Settings → 🧩 Shloka Fields, or edit `enabled` here for the default.
+// 23 Aug 2026: pratipadartha/tatparya/vyakarana/vrutta/alankara now point
+// into gemini_deep_analysis (tools/gemini_deep_analysis.py's nested
+// output -- a structured object, not a plain string per key like a
+// commentary), not a flat shloka.<name> field. dataKey supports a dotted
+// path (dgeGetNestedField in render.js resolves it); renderType tells
+// render.js how to lay out that field's shape rather than assuming every
+// field is a plain string:
+//   'text'    a plain string (or an array of strings, joined)
+//   'table'   an array of objects -- pratipadartha's word-by-word gloss
+//   'list'    an array of objects rendered as a bulleted list -- alankara
+//   'chandas' the {name, gana_structure, lakshana} object specifically
 const SHLOKA_EXTRA_FIELDS = [
   { id: 'padaccheda', label: 'Padaccheda', icon: '🔤', dataKey: 'padaccheda', enabled: true },
   { id: 'anvaya', label: 'Anvaya', icon: '🔗', dataKey: 'anvaya', enabled: true },
-  { id: 'pratipadartha', label: 'Pratipadartha', icon: '📖', dataKey: 'pratipadartha', enabled: true },
-  { id: 'tatparya', label: 'Tatparya', icon: '🎯', dataKey: 'tatparya', enabled: true },
-  { id: 'vyakarana', label: 'Vyakarana', icon: '⚙️', dataKey: 'vyakarana', enabled: false },
-  { id: 'vrutta', label: 'Vrutta (Meter)', icon: '🎼', dataKey: 'vrutta', enabled: true },
-  { id: 'alankara', label: 'Alankara', icon: '✨', dataKey: 'alankara', enabled: false },
+  { id: 'pratipadartha', label: 'Pratipadartha', icon: '📖', dataKey: 'gemini_deep_analysis.pratipadartha', renderType: 'table', enabled: true },
+  { id: 'tatparya', label: 'Tatparya', icon: '🎯', dataKey: 'gemini_deep_analysis.bhavartha', renderType: 'text', enabled: true },
+  { id: 'vyakarana', label: 'Vyakarana', icon: '⚙️', dataKey: 'gemini_deep_analysis.vyakarana_vishesha', renderType: 'text', enabled: false },
+  { id: 'vrutta', label: 'Vrutta (Meter)', icon: '🎼', dataKey: 'gemini_deep_analysis.chandas', renderType: 'chandas', enabled: true },
+  { id: 'alankara', label: 'Alankara', icon: '✨', dataKey: 'gemini_deep_analysis.alankara', renderType: 'list', enabled: false },
   { id: 'crossReferences', label: 'Cross References', icon: '🔀', dataKey: 'crossReferences', enabled: true },
   // Vedic-content fields (see dgeNormalizeGranthaData in core.js, which is
   // what actually populates these dataKeys for vedic_text-schema granthas)

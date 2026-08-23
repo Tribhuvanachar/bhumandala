@@ -112,6 +112,16 @@ function dgeTextMatchesQuery(text, pattern) {
   }
 }
 
+// Resolves a SHLOKA_EXTRA_FIELDS dataKey against a shloka object -- either
+// a plain top-level key ('padaccheda') or a dotted path into a nested
+// object ('gemini_deep_analysis.pratipadartha'). Returns undefined rather
+// than throwing if an intermediate segment is missing (a shloka with no
+// gemini_deep_analysis yet is the common case, not an error).
+function dgeGetNestedField(shloka, dataKey) {
+  if (!dataKey) return undefined;
+  return String(dataKey).split('.').reduce((node, key) => (node == null ? undefined : node[key]), shloka);
+}
+
 function highlightText(text, pattern) {
   if (!pattern) return text;
   try {
@@ -283,11 +293,65 @@ function renderList() {
     const effectiveExtraFields = (typeof dgeGetEffectiveShlokaFields === 'function') ? dgeGetEffectiveShlokaFields() : (window.SHLOKA_EXTRA_FIELDS || []);
     effectiveExtraFields.forEach(f => {
       if (!f.enabled) return;
-      const raw = shloka[f.dataKey];
+      const raw = dgeGetNestedField(shloka, f.dataKey);
       if (!raw || (Array.isArray(raw) && raw.length === 0)) return;
-      const displayText = Array.isArray(raw) ? raw.join(', ') : raw;
-      const converted = typeof applyTransliteration === 'function' ? applyTransliteration(displayText, activeScript) : displayText;
-      extraFieldsHtml += `<div class="commentary-block" data-field="${f.id}"><div class="commentary-title">${f.icon} ${f.label}</div>${highlightText(converted, pattern)}</div>`;
+      const t = (s) => (typeof applyTransliteration === 'function' ? applyTransliteration(String(s == null ? '' : s), activeScript) : s);
+      const h = (s) => highlightText(t(s), pattern);
+      let bodyHtml;
+      switch (f.renderType) {
+        case 'table': {
+          // pratipadartha: [{order, pada, vigraha, vibhakti_dhatu, artha}]
+          // -- word-by-word gloss table. vigraha (etymology) and
+          // vibhakti_dhatu (case/tense-mood-person) are each skipped as a
+          // column only if EVERY row lacks one, so a verse with no
+          // notable derivations doesn't carry a permanently-empty column.
+          const rows = [...raw].sort((a, b) => (a.order || 0) - (b.order || 0));
+          const hasVigraha = rows.some(r => r.vigraha);
+          const hasGrammar = rows.some(r => r.vibhakti_dhatu);
+          bodyHtml = `<div class="dge-table-scroll"><table class="dge-analysis-table"><thead><tr>` +
+            `<th>${h('पदम्')}</th>` + (hasVigraha ? `<th>${h('विग्रहः')}</th>` : '') +
+            (hasGrammar ? `<th>${h('व्याकरणम्')}</th>` : '') + `<th>Meaning</th></tr></thead><tbody>` +
+            rows.map(r => `<tr><td class="dge-analysis-pada">${h(r.pada || '')}</td>` +
+              (hasVigraha ? `<td>${h(r.vigraha || '')}</td>` : '') +
+              (hasGrammar ? `<td>${h(r.vibhakti_dhatu || '')}</td>` : '') +
+              `<td>${h(r.artha || '')}</td></tr>`).join('') + `</tbody></table></div>`;
+          break;
+        }
+        case 'list': {
+          // alankara: [{name, type, justification}]
+          bodyHtml = `<ul class="dge-analysis-list">` + raw.map(item =>
+            `<li><b>${h(item.name || '')}</b>` + (item.type ? ` <span class="dge-analysis-tag">${h(item.type)}</span>` : '') +
+            (item.justification ? ` — ${h(item.justification)}` : '') + `</li>`
+          ).join('') + `</ul>`;
+          break;
+        }
+        case 'chandas': {
+          // {name, gana_structure, lakshana} -- a single verse's metre.
+          if (!raw.name) return;
+          bodyHtml = `<div class="dge-analysis-chandas"><b>${h(raw.name)}</b>` +
+            (raw.gana_structure ? ` <span class="dge-analysis-tag">${h(raw.gana_structure)}</span>` : '') +
+            (raw.lakshana ? `<div class="dge-analysis-lakshana">${h(raw.lakshana)}</div>` : '') + `</div>`;
+          break;
+        }
+        default: {
+          const displayText = Array.isArray(raw) ? raw.join(', ') : raw;
+          bodyHtml = h(displayText);
+        }
+      }
+      // Gemini-sourced fields (everything under gemini_deep_analysis) get
+      // the same "AI, unreviewed" badge as an AI-generated commentary --
+      // see dgeIsAiGeneratedCommentaryKey's convention in core.js. This
+      // whole block is always Gemini output, so the badge isn't
+      // conditional the way a commentary key's is.
+      const isAiField = typeof f.dataKey === 'string' && f.dataKey.indexOf('gemini_deep_analysis.') === 0;
+      const aiBadge = isAiField ? '<span class="dge-ai-badge" title="AI-generated -- not author-verified">AI</span>' : '';
+      // Open by default for the fields most readers want on sight
+      // (word-by-word gloss, purport); collapsed for the more specialist
+      // ones (figures of speech, metre, extra grammar notes) so the card
+      // doesn't grow long before anyone's asked for them.
+      const openAttr = (f.renderType === 'list' || f.renderType === 'chandas' || f.id === 'vyakarana') ? '' : ' open';
+      extraFieldsHtml += `<details class="commentary-block dge-analysis-field" data-field="${f.id}"${openAttr}>` +
+        `<summary class="commentary-title">${f.icon} ${f.label}${aiBadge}</summary>${bodyHtml}</details>`;
     });
 
     // Vedic content stores padas (quarter-verses) separated by " / " —

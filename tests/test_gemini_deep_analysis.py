@@ -146,5 +146,31 @@ class TestRun(unittest.TestCase):
         self.assertIn(gda.FIELD_KEY, data["shlokas"]["1"])
 
 
+class TestSchemaFieldsForReaderUi(unittest.TestCase):
+    """23 Aug 2026: vigraha (per-word etymology) and vyakarana_vishesha
+    (verse-level grammar notes) were added so dge/js/render.js's
+    Shloka Fields toggles (Pratipadartha/Vyakarana) have something real to
+    show beyond the case/tense-mood-person column that was already there."""
+
+    def test_pratipadartha_item_schema_has_vigraha(self):
+        item_props = gda.RESPONSE_SCHEMA["properties"]["pratipadartha"]["items"]["properties"]
+        self.assertIn("vigraha", item_props)
+
+    def test_top_level_schema_has_vyakarana_vishesha(self):
+        self.assertIn("vyakarana_vishesha", gda.RESPONSE_SCHEMA["properties"])
+        # optional, like confidence_note -- not every verse has a note
+        # beyond what pratipadartha/samasa_vishesha already say
+        self.assertNotIn("vyakarana_vishesha", gda.RESPONSE_SCHEMA["required"])
+
+    def test_batch_schema_inherits_the_same_fields(self):
+        item_props = gda.RESPONSE_SCHEMA_BATCH["properties"]["results"]["items"]["properties"]
+        self.assertIn("vyakarana_vishesha", item_props)
+        self.assertIn("vigraha", item_props["pratipadartha"]["items"]["properties"])
+
+    def test_mock_analyze_verse_carries_the_new_fields(self):
+        mock = gda.mock_analyze_verse()
+        self.assertIn("vyakarana_vishesha", mock)
+
+
 if __name__ == "__main__":
     unittest.main()

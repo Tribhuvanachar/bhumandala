@@ -270,6 +270,28 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 .commentary-title { font-weight: 700; font-family: var(--font-ui); color: var(--accent-red); font-size: 11px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
 
+/* 23 Aug 2026: gemini_deep_analysis fields (Pratipadartha/Tatparya/
+   Vyakarana/Vrutta/Alankara) render as <details>/<summary> for a
+   collapsible accordion, reusing .commentary-block/.commentary-title so
+   they match the look of every other field without a second style
+   system. Only the summary marker/cursor and the table/list bodies
+   inside are new. */
+details.dge-analysis-field > summary.commentary-title { cursor: pointer; list-style-position: outside; margin-bottom: 6px; }
+details.dge-analysis-field > summary.commentary-title::marker { color: var(--accent-red); font-size: 10px; }
+details.dge-analysis-field[open] > summary.commentary-title { margin-bottom: 8px; }
+.dge-ai-badge { display: inline-block; font-family: var(--font-ui); font-size: 9px; font-weight: 800; letter-spacing: 0.3px; color: #fff; background: var(--accent-red, #7a3b1d); border-radius: var(--radius-pill); padding: 1px 6px; margin-left: 6px; text-transform: none; vertical-align: 1px; }
+
+.dge-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.dge-analysis-table { width: 100%; border-collapse: collapse; font-size: calc(var(--font-multiplier) * 0.8); }
+.dge-analysis-table th, .dge-analysis-table td { text-align: left; padding: 4px 10px 4px 0; vertical-align: top; border-bottom: 1px solid var(--card-border); white-space: nowrap; }
+.dge-analysis-table td:last-child, .dge-analysis-table th:last-child { white-space: normal; font-family: var(--font-ui); }
+.dge-analysis-table thead th { font-family: var(--font-ui); font-size: 10px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--accent-red); font-weight: 700; }
+.dge-analysis-pada { font-weight: 700; }
+.dge-analysis-list { margin: 0; padding-left: 18px; }
+.dge-analysis-list li { margin-bottom: 4px; }
+.dge-analysis-tag { font-family: var(--font-ui); font-size: 10px; color: var(--text-secondary, inherit); opacity: 0.75; }
+.dge-analysis-chandas .dge-analysis-lakshana { margin-top: 4px; opacity: 0.85; }
+
 /* Bottom Toolbar — floating frosted panel */
 .bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border-top: 1px solid var(--card-border); border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.10); z-index: 9999; box-sizing: border-box; padding-bottom: env(safe-area-inset-bottom); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease); }
 .player-inner { max-width: 650px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 8px 4px; box-sizing: border-box; gap: 4px; }
