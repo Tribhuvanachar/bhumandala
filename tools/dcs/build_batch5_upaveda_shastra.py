@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
 """
+NOTE (23 Aug, later same session): "upaveda" was moved from a top-level
+taxonomy.json key to nested under "vedas" (vedas.upaveda) after this
+script ran, per the project lead's explicit structural feedback --
+"under Veda you can have Upaveda... Sastra is a different parent folder
+just like itihasa and Purana". The rel_out paths below (dge/data/upaveda/...)
+are historical -- what this script actually wrote at the time -- and are
+NOT the current on-disk location (now dge/data/vedas/upaveda/...). Left
+unedited as a record of what ran; see dge/PENDING.md for the move itself.
+
 build_batch5_upaveda_shastra.py -- Tier B, 23 Aug continued: two brand new
 top-level taxonomy branches, per the project lead's explicit framework
 (not this session's invention): a "shastra" (शास्त्राणि) catch-all for
