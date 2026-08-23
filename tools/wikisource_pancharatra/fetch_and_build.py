@@ -58,7 +58,19 @@ def to_int(s):
     return int(s.translate(DEVA_DIGITS))
 
 
-def wikitext(page_title, retries=6):
+class RateLimited(Exception):
+    """Raised when the API stays 429 past every retry -- deliberately NOT
+    the same outcome as PageMissing. An earlier version of this script
+    returned None for both a real 429-after-retries failure and a
+    genuinely-missing page, so the caller's "no parseable content" SKIP
+    silently covered both -- 23 real chapters were marked skipped during
+    a sustained rate-limit window and would have been imported as if the
+    text just ended at chapter 37, caught only because 23 consecutive
+    skips in a row was implausible enough to go check by hand. A
+    real fetch failure now stops the run instead of being swallowed."""
+
+
+def wikitext(page_title, retries=8):
     url = API + "?" + urllib.parse.urlencode({
         "action": "parse", "page": page_title, "prop": "wikitext", "format": "json",
     })
@@ -69,15 +81,17 @@ def wikitext(page_title, retries=6):
                 data = json.load(r)
         except urllib.error.HTTPError as e:
             if e.code == 429 and attempt < retries - 1:
-                wait = min(5 * (2 ** attempt), 60)
+                wait = min(8 * (2 ** attempt), 120)
                 print(f"    429, retrying in {wait}s...", file=sys.stderr)
                 time.sleep(wait)
                 continue
+            if e.code == 429:
+                raise RateLimited(f"{page_title!r} still 429 after {retries} attempts")
             raise
         if "error" in data:
-            return None
+            return None  # a real "page does not exist" from the API itself
         return data["parse"]["wikitext"]["*"]
-    return None
+    raise RateLimited(f"{page_title!r}: exhausted retries")
 
 
 def subpage_list(index_title):
@@ -174,27 +188,67 @@ def parse_chapter(page_title, is_first_chapter=False):
 
 
 def build(work_title_devanagari, index_page_devanagari, out_rel_path, source_url,
-          repo_root, note_extra=""):
+          repo_root, note_extra="", request_delay=2.0):
+    """Resumable: progress is cached in a sidecar `.progress.json` next to
+    the output file (per source page, not per chapter, since one page can
+    be re-fetched idempotently). A RateLimited failure mid-run saves what's
+    done and stops cleanly -- re-running the same command later picks up
+    only the remaining pages rather than re-fetching everything, and never
+    silently ships a partial text as if it were the whole one (the run
+    only writes the final data.json once every page has been fetched)."""
+    import os
+
+    out_path = repo_root + "/" + out_rel_path
+    cache_path = out_path + ".progress.json"
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+
+    cache = {}
+    if os.path.exists(cache_path):
+        with open(cache_path, encoding="utf-8") as f:
+            cache = json.load(f)
+        print(f"resuming from cache: {len(cache)} pages already fetched")
+
     print(f"fetching index: {index_page_devanagari}")
     pages = subpage_list(index_page_devanagari)
     print(f"  {len(pages)} subpages found")
 
+    try:
+        for i, page in enumerate(pages):
+            if page in cache:
+                continue
+            is_first = (i == 0)
+            title, units = parse_chapter(page, is_first_chapter=is_first)
+            cache[page] = {"title": title, "units": units}
+            with open(cache_path, "w", encoding="utf-8") as f:
+                json.dump(cache, f, ensure_ascii=False)
+            if not units:
+                print(f"  SKIP {page}: page exists but carries no parseable verse content")
+            else:
+                print(f"  {page}: {len(units)} verses")
+            time.sleep(request_delay)
+    except RateLimited as e:
+        done = sum(1 for p in pages if p in cache)
+        print(f"\nRATE LIMITED after {done}/{len(pages)} pages: {e}")
+        print(f"Progress saved to {cache_path} -- re-run this command later to resume.")
+        return None, None
+
+    missing = [p for p in pages if p not in cache]
+    if missing:
+        print(f"\nWARNING: {len(missing)} pages never fetched (not rate-limited, "
+              f"just not yet attempted): {missing}")
+        return None, None
+
     all_units = []
     chapter_titles = {}
-    for i, page in enumerate(pages):
-        m = re.search(r"[\d०-९]+\s*$", page)
-        is_first = (i == 0)
-        title, units = parse_chapter(page, is_first_chapter=is_first)
+    for page in pages:
+        title, units = cache[page]["title"], cache[page]["units"]
         if not units:
-            print(f"  SKIP {page}: no parseable verse content")
             continue
         chapters_seen = sorted(set(u[0] for u in units))
         for c in chapters_seen:
             if c not in chapter_titles and title:
                 chapter_titles[c] = title
         all_units.extend(units)
-        print(f"  {page}: {len(units)} verses")
-        time.sleep(1.0)
 
     by_chapter = {}
     for ch, vs, body in all_units:
@@ -225,12 +279,10 @@ def build(work_title_devanagari, index_page_devanagari, out_rel_path, source_url
                  + (" " + note_extra if note_extra else "")),
         "items": items,
     }
-    out_path = repo_root + "/" + out_rel_path
-    import os
-    os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
         f.write("\n")
+    os.remove(cache_path)
     print(f"WROTE {out_rel_path}: {len(items)} adhyayas, {total_verses} verses")
     return items, total_verses
 
