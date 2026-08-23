@@ -195,6 +195,7 @@ const SHLOKA_EXTRA_FIELDS = [
   { id: 'vyakarana', label: 'Vyakarana', icon: '⚙️', dataKey: 'gemini_deep_analysis.vyakarana_vishesha', renderType: 'text', enabled: false },
   { id: 'vrutta', label: 'Vrutta (Meter)', icon: '🎼', dataKey: 'gemini_deep_analysis.chandas', renderType: 'chandas', enabled: true },
   { id: 'alankara', label: 'Alankara', icon: '✨', dataKey: 'gemini_deep_analysis.alankara', renderType: 'list', enabled: false },
+  { id: 'samasa', label: 'Samasa Vishesha', icon: '🧩', dataKey: 'gemini_deep_analysis.samasa_vishesha', renderType: 'samasa', enabled: false },
   { id: 'crossReferences', label: 'Cross References', icon: '🔀', dataKey: 'crossReferences', enabled: true },
   // Vedic-content fields (see dgeNormalizeGranthaData in core.js, which is
   // what actually populates these dataKeys for vedic_text-schema granthas)

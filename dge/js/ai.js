@@ -329,6 +329,7 @@ const SHLOKA_FIELD_CHECKBOX_IDS = {
   vyakarana: 'fieldVyakarana',
   vrutta: 'fieldVrutta',
   alankara: 'fieldAlankara',
+  samasa: 'fieldSamasa',
   crossReferences: 'fieldCrossReferences'
 };
 

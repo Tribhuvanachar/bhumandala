@@ -290,7 +290,7 @@ details.dge-analysis-field[open] > summary.commentary-title { margin-bottom: 8px
 .dge-analysis-list { margin: 0; padding-left: 18px; }
 .dge-analysis-list li { margin-bottom: 4px; }
 .dge-analysis-tag { font-family: var(--font-ui); font-size: 10px; color: var(--text-secondary, inherit); opacity: 0.75; }
-.dge-analysis-chandas .dge-analysis-lakshana { margin-top: 4px; opacity: 0.85; }
+.dge-analysis-lakshana, .dge-analysis-split { margin-top: 2px; opacity: 0.85; font-size: 0.95em; }
 
 /* Bottom Toolbar — floating frosted panel */
 .bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border-top: 1px solid var(--card-border); border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.10); z-index: 9999; box-sizing: border-box; padding-bottom: env(safe-area-inset-bottom); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease); }

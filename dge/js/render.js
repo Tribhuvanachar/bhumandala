@@ -325,6 +325,17 @@ function renderList() {
           ).join('') + `</ul>`;
           break;
         }
+        case 'samasa': {
+          // samasa_vishesha: [{compound, split, samasa_type, vigraha}] --
+          // one entry per hyphenated compound already named in this
+          // verse's padaccheda.
+          bodyHtml = `<ul class="dge-analysis-list">` + raw.map(item =>
+            `<li><b>${h(item.compound || '')}</b>` + (item.samasa_type ? ` <span class="dge-analysis-tag">${h(item.samasa_type)}</span>` : '') +
+            (item.split ? `<div class="dge-analysis-split">${h(item.split)}</div>` : '') +
+            (item.vigraha ? `<div class="dge-analysis-lakshana">${h(item.vigraha)}</div>` : '') + `</li>`
+          ).join('') + `</ul>`;
+          break;
+        }
         case 'chandas': {
           // {name, gana_structure, lakshana} -- a single verse's metre.
           if (!raw.name) return;
@@ -349,7 +360,7 @@ function renderList() {
       // (word-by-word gloss, purport); collapsed for the more specialist
       // ones (figures of speech, metre, extra grammar notes) so the card
       // doesn't grow long before anyone's asked for them.
-      const openAttr = (f.renderType === 'list' || f.renderType === 'chandas' || f.id === 'vyakarana') ? '' : ' open';
+      const openAttr = (f.renderType === 'list' || f.renderType === 'samasa' || f.renderType === 'chandas' || f.id === 'vyakarana') ? '' : ' open';
       extraFieldsHtml += `<details class="commentary-block dge-analysis-field" data-field="${f.id}"${openAttr}>` +
         `<summary class="commentary-title">${f.icon} ${f.label}${aiBadge}</summary>${bodyHtml}</details>`;
     });
