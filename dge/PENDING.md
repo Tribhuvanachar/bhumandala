@@ -2066,6 +2066,73 @@ complete record, not just a live queue.
   above. Tier D (kāvya-dist routing) remains deliberately deferred per
   this session's instruction.
 
+- **23 Aug (same session): the `DGE_Shastra_Taxonomy.md` question above
+  answered directly by the project lead, not by finding the document.**
+  Instruction, in the lead's own terms rather than this session's
+  invention: a `shastra` folder holds *all* possible śāstras (Nāṭya,
+  Kāma, Nīti, Saṅgīta, Vāstu, "etc."); Āyurveda and similarly-scoped
+  practical sciences fall under **Upavedas**, a separate top-level
+  branch, not under `shastra`; Buddhist literature "can be treated as
+  Śāstra, I guess" — a deliberately loose steer, taken as "fold it under
+  `shastra.bauddha_sahitya` unless something specific needs asking."
+  Tier D stays last, confirmed again.
+
+  Added two new top-level `taxonomy.json` branches accordingly:
+  `upaveda` (`ayurveda` — with `samhita`/`nighantu`/`rasashastra`
+  sub-branches — and `dhanurveda`; `gandharvaveda`/`sthapatyaveda` added
+  as empty stubs, no DCS match found for either) and `shastra`
+  (`natya_shastra`, `kama_shastra`, `niti_shastra`, and
+  `bauddha_sahitya` with `sutra`/`shastra`/`pramana`/`avadana`
+  sub-branches for the doctrinal/scholastic texts only — Buddhacarita
+  and Saundarānanda are kāvya biographies, not śāstra, and were left for
+  Tier D instead of placed here). `dge/js/library.js`'s
+  `DGE_PATH_LABELS` gained Devanagari labels for every new segment name.
+  57 leaves added via `tools/dcs/build_batch5_upaveda_shastra.py`, all
+  57 populated from DCS — the highest single-batch hit rate so far.
+
+  **Every placement was checked against the text's own DCS `##
+  chapter:` line, not trusted from its DCS-given name** — this caught a
+  real near-miss: "Ratnaṭīkā" reads like a rasashastra commentary by
+  name, but its chapter line is `zu GaṇaKar` (a commentary on
+  Gaṇakārikā, a Pāśupata Śaiva text) — excluded entirely, out of scope
+  for this batch. "Āyurvedarasāyana" and "Ratnadīpikā" also looked
+  plausible by name but lacked a clean, unambiguous genre signal in
+  their own headers — excluded rather than guessed in. All three are
+  genuinely unplaced, not silently dropped.
+
+  **A real bug found and fixed while checking Carakasaṃhitā before
+  importing it, not after** (same discipline as every prior batch's
+  parser fixes): a non-numeric SECTION NAME can sit between numeric
+  chapter-path fields — `Ca, Sū., 1` vs `Ca, Cik., 1`, two different
+  sections of the same saṃhitā (Carakasaṃhitā alone has 8). The parser
+  had been dropping non-numeric fields (correct for Maitrāyaṇī
+  Saṃhitā/Aitareya Brāhmaṇa's convention) — here that would have
+  silently collapsed two different sthānas' chapter 1 onto the same id,
+  overwriting one with the other. Fixed in `tools/dcs/dcs_common.py` by
+  keeping non-numeric fields as slugs; re-verified byte-identical
+  against every already-shipped import (pilot through batch 4) before
+  trusting it on new data.
+
+  Content spot-checked, not just validated: Nāṭyaśāstra 1.1 is Bharata's
+  own well-known opening invocation, Hitopadeśa's first unit is its
+  famous "siddhiḥ sādhye satām astu" verse, Abhidharmakośa 1.1 is "oṃ
+  namo buddhāya". **One honest anomaly, not smoothed over**:
+  Mūlamadhyamakakārikā's unit 1.1 has ~30 words that don't match
+  Nāgārjuna prepended to a genuine, verifiable Nāgārjuna verse ("na
+  svato nāpi parato..."), while every other unit checked (1.2 onward) is
+  unambiguously correct — present in DCS's own source file exactly as
+  shown, not a parsing artifact, left open for closer review rather than
+  silently trusted or silently altered.
+
+  DCS running total: **116 texts, 128 taxonomy leaves, 162,136 items.**
+  Still open: Tantra/Śaiva-Śākta naming (deliberately untouched this
+  round — the `Ratnaṭīkā` near-miss above sits right on this cluster's
+  edge), and whatever the project lead meant by "etc." in the śāstra
+  list beyond Nāṭya/Kāma/Nīti/Saṅgīta/Vāstu (Saṅgītaśāstra and
+  Vāstuśāstra/Śilpaśāstra have no DCS match found — no candidate text
+  with that name turned up in the mirror — so `gandharvaveda` and
+  `sthapatyaveda` stay empty stubs rather than force-filled).
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are

@@ -11,7 +11,7 @@ single-leaf imports plus 4 split imports (spanning 16 leaves between
 them), then a third pass (`build_batch3_upanishads.py`, 5 mula-Upaniṣads)
 and a fourth (`build_batch4_samkhya_yoga.py`, see below) that also added
 new taxonomy nodes rather than only filling existing empty leaves.
-**59 DCS texts in now, across 71 taxonomy leaves, 106,140 items
+**116 DCS texts in now, across 128 taxonomy leaves, 162,136 items
 total.** Still well short of DCS's full 253-text corpus;
 see the taxonomy-placement proposal (linked from `dge/PENDING.md`'s 24 Aug
 entries) for what's left and where it likely goes.
@@ -194,10 +194,59 @@ valid JSON: Yogasūtra 1.1 is the universally known opening "अथ
 गुणानां प्रतिप्रसवः...कैवल्यम्", and Yogasūtrabhāṣya's very first unit is
 Vyāsa's own "अथेत्ययमधिकारार्थः" gloss on the word *atha*.
 
+## Fifth import, batch 5 (`build_batch5_upaveda_shastra.py`) — two new top-level branches, and a 5th parser convention
+
+This one came from the project lead directly, not this session's own
+proposal: Ayurveda and Dhanurveda belong under a new `upaveda` top-level
+branch, and Natya/Kama/Niti-shastra plus Buddhist literature belong under
+a new `shastra` catch-all, per the traditional upaveda/shastra
+classification framework -- not something to invent independently.
+Gandharvaveda and Sthapatyaveda are added as empty stub nodes (no DCS
+match found for either).
+
+**57 leaves added, all 57 populated from DCS** -- by far the highest hit
+rate of any batch so far, because Ayurveda/Rasashastra/Nighantu and
+Buddhist scholastic literature are both well represented in DCS. Every
+placement was checked against the text's own `## chapter:` line before
+trusting its DCS-given name, which caught two real near-misses:
+"Ratnaṭīkā" reads like a rasashastra commentary by name, but its chapter
+line is `zu GaṇaKar` (a commentary on Gaṇakārikā, a Pāśupata Śaiva text)
+-- excluded entirely, out of scope (Tantra/Śaiva cluster still deferred).
+"Ayurvedarasāyana" and "Ratnadīpikā" both looked plausible by name but
+neither had a clean, unambiguous genre signal in its own header --
+excluded rather than guessed in.
+
+**A 5th DCS chapter-numbering convention was found and fixed while
+checking Carakasaṃhitā before importing it, not after**: a non-numeric
+SECTION NAME can sit between numeric fields, e.g. `## chapter: Ca, Sū.,
+1` vs `## chapter: Ca, Cik., 1` -- Sūtrasthāna chapter 1 and
+Cikitsāsthāna chapter 1, two different sections of the same saṃhitā.
+The parser had, correctly for MS/AB, been dropping any non-numeric
+field -- here that would have silently collapsed both sthānas' chapter
+1 onto the same `chapter_path`, overwriting one with the other. Checked
+across the whole cluster before trusting the fix: Carakasaṃhitā alone
+has 8 sthānas. Fixed in `dcs_common.py` by keeping a non-numeric field
+as a slug (diacritics preserved, so two sthāna abbreviations can't
+collide by both stripping down to the same bare consonant); re-verified
+byte-identical against every already-shipped import (pilot, batches 1-4)
+before trusting it on new data.
+
+Content sanity-checked against independently known text, not just valid
+JSON: Nāṭyaśāstra 1.1 is Bharata's own well-known opening invocation,
+Hitopadeśa's first unit is its famous "siddhiḥ sādhye satām astu" verse,
+and Abhidharmakośa 1.1 is "oṃ namo buddhāya". One honest anomaly, not
+smoothed over: Mūlamadhyamakakārikā's very first unit (1.1) contains
+~30 words that don't match Nāgārjuna's text prepended to a genuine,
+verifiable Nāgārjuna verse ("na svato nāpi parato..."), while every
+other unit checked (1.2 onward) is unambiguously correct -- present in
+DCS's own source file exactly as shown here, not a parsing artifact, and
+left as an open question for closer philological review rather than
+silently trusted or silently altered.
+
 ## Scaling beyond this batch — not done here
 
-DCS has 253 texts total; 59 are in now, across 71 taxonomy leaves,
-106,140 items. Remaining candidates for a future pass:
+DCS has 253 texts total; 116 are in now, across 128 taxonomy leaves,
+162,136 items. Remaining candidates for a future pass:
 
 - The exact-match pass found everything with a *precisely*-named existing
   leaf. It will have missed real matches with slightly different naming
@@ -214,7 +263,7 @@ DCS has 253 texts total; 59 are in now, across 71 taxonomy leaves,
   for them, which this session cannot see to check.
 - An ongoing sync job (checking `OliverHellwig/sanskrit` for upstream
   updates) is worth building now that there's a real imported corpus
-  (59 texts, ~106,000 items) to keep in sync — the earlier "premature"
+  (116 texts, ~162,000 items) to keep in sync — the earlier "premature"
   call no longer applies at this scale, but it's still not started.
 
 None of this is started; it's scoped here so the next pass doesn't have to

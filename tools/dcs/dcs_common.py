@@ -45,14 +45,44 @@ def _parse_chapter_path(line):
     bug, not a small text. Each comma-field matching digits optionally
     dot-separated is now split on '.' and the pieces flattened in, so
     both conventions -- several single-integer fields, or one
-    already-dotted field -- produce the same joined path."""
+    already-dotted field -- produce the same joined path.
+
+    A 5th convention, found checking Carakasamhita before importing it
+    (23 Aug, batch 5): a comma-field can be a non-numeric SECTION NAME
+    interleaved between numeric fields, e.g. '## chapter: Ca, Sū., 1'
+    vs '## chapter: Ca, Cik., 1' -- Sutrasthana chapter 1 and
+    Cikitsasthana chapter 1, two genuinely different sections of the
+    same samhita. The original version (correctly, for MS/AB) dropped
+    any non-numeric field -- here that would silently collapse both
+    onto the same chapter_path '1', overwriting one sthana's content
+    with the other's. Checked across the whole Ayurveda cluster before
+    trusting this: Carakasamhita, Sushrutasamhita and
+    Ashtangahridayasamhita (plus their commentaries) all carry this
+    convention, 8 sthana names in Caraka alone. Fixed by keeping a
+    non-numeric field too, as a slug (its letters only, diacritics kept
+    so distinct sthana abbreviations can't collide by having their
+    Sanskrit diacritics stripped down to the same bare consonant)."""
     value = line.split(":", 1)[1].strip()
     parts = [p.strip() for p in value.split(",")]
-    numeric_parts = []
+    path_parts = []
     for p in parts[1:]:
         if _NUMERIC_FIELD.fullmatch(p):
-            numeric_parts.extend(p.lstrip("-").split("."))
-    return ".".join(numeric_parts) if numeric_parts else None
+            path_parts.extend(p.lstrip("-").split("."))
+        elif p:
+            slug = re.sub(r"[^\w]+", "", p)
+            if slug:
+                path_parts.append(slug)
+    return ".".join(path_parts) if path_parts else None
+
+
+def _path_sort_key(chapter_path):
+    """Sort key for a chapter_path that may now mix numeric segments with
+    non-numeric section-name slugs (see _parse_chapter_path's 5th
+    convention) -- plain int(p) on every segment, used before this fix,
+    would crash on a slug. Numeric segments sort before non-numeric ones
+    at the same position (arbitrary but stable) and compare by value;
+    non-numeric segments compare as strings."""
+    return [(0, int(p)) if p.isdigit() else (1, p) for p in chapter_path.split(".")]
 
 
 def _parse_int(line):
@@ -144,7 +174,7 @@ def collect_padas(vendor_dir):
 
 def _sort_key(chapter_unit):
     chapter_path, unit = chapter_unit
-    return ([int(p) for p in chapter_path.split(".")], unit)
+    return (_path_sort_key(chapter_path), unit)
 
 
 def _build_items(padas_by_unit, source_name, tag):
@@ -191,8 +221,7 @@ def build_generic_import(
     schema data.json to out_path. Returns (item_count, chapters_seen)."""
     padas_by_unit = collect_padas(vendor_dir)
     items = _build_items(padas_by_unit, source_name, tag)
-    chapters_seen = sorted(set(c for c, u in padas_by_unit),
-                            key=lambda c: [int(p) for p in c.split(".")])
+    chapters_seen = sorted(set(c for c, u in padas_by_unit), key=_path_sort_key)
     _write_data_json(out_path, items, chapters_seen, default_author=default_author,
                       source_name=source_name, source_url=source_url,
                       licence=licence, note=note)
@@ -225,8 +254,7 @@ def build_split_import(
         if not book_padas:
             continue
         items = _build_items(book_padas, source_name, tag)
-        chapters_seen = sorted(set(c for c, u in book_padas),
-                                key=lambda c: [int(p) for p in c.split(".")])
+        chapters_seen = sorted(set(c for c, u in book_padas), key=_path_sort_key)
         _write_data_json(out_path, items, chapters_seen, default_author=default_author,
                           source_name=source_name, source_url=source_url,
                           licence=licence, note=note)

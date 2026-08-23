@@ -46,6 +46,20 @@ const DGE_PATH_LABELS = {
   yoga: 'योगः', mimamsa: 'मीमांसा',
   sarvamula: 'सर्वमूलग्रन्थाः',
 
+  // 23 Aug: upaveda/shastra, added per the project lead's own framework
+  // (not this session's invention) -- Ayurveda and Dhanurveda under the
+  // Upavedas, Natya/Kama/Niti-shastra and Buddhist literature under a
+  // Shastra catch-all. See dge/PENDING.md for what's still open (Tantra,
+  // Gandharvaveda/Sthapatyaveda have no sourced content yet).
+  upaveda: 'उपवेदाः', ayurveda: 'आयुर्वेदः', dhanurveda: 'धनुर्वेदः',
+  gandharvaveda: 'गान्धर्ववेदः', sthapatyaveda: 'स्थापत्यवेदः',
+  nighantu: 'निघण्टवः', rasashastra: 'रसशास्त्रम्',
+  shastra: 'शास्त्राणि', natya_shastra: 'नाट्यशास्त्रम्',
+  kama_shastra: 'कामशास्त्रम्', niti_shastra: 'नीतिशास्त्रम्',
+  artha_shastra: 'अर्थशास्त्रम्', hitopadesha: 'हितोपदेशः',
+  bauddha_sahitya: 'बौद्धसाहित्यम्', sutra: 'सूत्रम्',
+  pramana: 'प्रमाणम्', avadana: 'अवदानम्',
+
   itihasa: 'इतिहासाः', purana: 'पुराणानि',
   ramayana: 'रामायणम्', ananda_ramayana: 'आनन्दरामायणम्',
   adbhuta_ramayana: 'अद्भुतरामायणम्',

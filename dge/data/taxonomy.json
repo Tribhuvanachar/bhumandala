@@ -5384,5 +5384,324 @@
   "_note": "Holding place for material whose home in the taxonomy is not settled yet. Nothing is meant to stay here; each item moves once it is decided.",
   "ajaya_vijayendra": {},
   "satyadhyana_tirtha_civil_suit": {}
+ },
+ "upaveda": {
+  "ayurveda": {
+   "samhita": {
+    "caraka_samhita": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Agnivesha (redacted by Charaka)"
+     },
+     "tika_ayurvedadipika": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Chakrapanidatta"
+     },
+     "tika_tattvapradipika": {
+      "_schema": "grantha_tika_text"
+     }
+    },
+    "sushruta_samhita": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Sushruta"
+     }
+    },
+    "ashtanga_hridaya_samhita": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Vagbhata"
+     },
+     "tika_sarvangasundara": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Arunadatta"
+     },
+     "tika_padarthacandrika": {
+      "_schema": "grantha_tika_text"
+     },
+     "tika_indu": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Indu"
+     }
+    },
+    "ashtanga_sangraha": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Vagbhata"
+     }
+    },
+    "bhavaprakasha": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Bhavamishra"
+     }
+    },
+    "nadi_pariksha": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    }
+   },
+   "nighantu": {
+    "ashtanga_nighantu": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "bija_nighantu": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "dhanvantari_nighantu": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "kaiyadeva_nighantu": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Kaiyadeva"
+     }
+    },
+    "madanapala_nighantu": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Madanapala"
+     }
+    },
+    "raja_nighantu": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Narahari Pandita"
+     }
+    },
+    "nighantushesha": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Hemachandra"
+     }
+    }
+   },
+   "rasashastra": {
+    "rasahridaya_tantra": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Govinda Bhagavatpada"
+     }
+    },
+    "rasakamadhenu": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "rasamanjari": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Shalinatha"
+     }
+    },
+    "rasaprakashasudhakara": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Yashodhara Bhatta"
+     }
+    },
+    "rasaratnasamuccaya": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Vagbhata (rasashastra author)"
+     },
+     "tika_bodhini": {
+      "_schema": "grantha_tika_text"
+     },
+     "tika_dipika": {
+      "_schema": "grantha_tika_text"
+     },
+     "tika": {
+      "_schema": "grantha_tika_text"
+     }
+    },
+    "rasaratnakara": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Nityanatha Siddha"
+     }
+    },
+    "rasasanketakalika": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "rasatarangini": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Sadananda Sharma"
+     }
+    },
+    "rasendracintamani": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Dhundhukanatha"
+     }
+    },
+    "rasendracudamani": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Somadeva"
+     }
+    },
+    "rasendrasarasangraha": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Gopalakrishna Bhatta"
+     }
+    },
+    "rasarnava": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "rasarnavakalpa": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "rasadhyaya": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     },
+     "tika": {
+      "_schema": "grantha_tika_text"
+     }
+    }
+   }
+  },
+  "dhanurveda": {
+   "mula": {
+    "_schema": "grantha_mula_text"
+   }
+  },
+  "gandharvaveda": {},
+  "sthapatyaveda": {}
+ },
+ "shastra": {
+  "natya_shastra": {
+   "mula": {
+    "_schema": "grantha_mula_text",
+    "_default_author": "Bharata Muni"
+   },
+   "tika": {
+    "_schema": "grantha_tika_text"
+   }
+  },
+  "kama_shastra": {
+   "mula": {
+    "_schema": "grantha_mula_text",
+    "_default_author": "Vatsyayana"
+   }
+  },
+  "niti_shastra": {
+   "artha_shastra": {
+    "mula": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "Kautilya"
+    }
+   },
+   "hitopadesha": {
+    "mula": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "Narayana Pandita"
+    }
+   }
+  },
+  "bauddha_sahitya": {
+   "sutra": {
+    "saddharma_pundarika_sutra": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "lankavatara_sutra": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    }
+   },
+   "shastra": {
+    "abhidharma_kosha": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Vasubandhu"
+     },
+     "bhashya": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Vasubandhu"
+     }
+    },
+    "mula_madhyamaka_karika": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Nagarjuna"
+     },
+     "tika_prasannapada": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Chandrakirti"
+     }
+    },
+    "vimshatika": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Vasubandhu"
+     },
+     "vritti": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Vasubandhu"
+     }
+    },
+    "bodhicaryavatara": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Shantideva"
+     }
+    },
+    "shikshasamuccaya": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Shantideva"
+     }
+    },
+    "ashtasahasrika_prajnaparamita": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    }
+   },
+   "pramana": {
+    "nyayabindu": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Dharmakirti"
+     }
+    }
+   },
+   "avadana": {
+    "avadanashataka": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "divyavadana": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "sanghabhedavastu": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    }
+   }
+  }
  }
 }

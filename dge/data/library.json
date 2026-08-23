@@ -8542,6 +8542,291 @@
       "path": "dge/data/darshana/yoga/sutra_and_bhashya/yoga_sutra/tika_rajamartanda/data.json",
       "populated": false,
       "title": "योगसूत्राणि (राजमार्तण्डः)"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/samhita/caraka_samhita/mula/data.json",
+      "populated": true,
+      "title": "चरकसंहिता"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/samhita/caraka_samhita/tika_tattvapradipika/data.json",
+      "populated": true,
+      "title": "चरकसंहिता (तत्त्वप्रदीपिका)"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/samhita/caraka_samhita/tika_ayurvedadipika/data.json",
+      "populated": true,
+      "title": "चरकसंहिता (आयुर्वेददीपिका — चक्रपाणिदत्तः)"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/samhita/sushruta_samhita/mula/data.json",
+      "populated": true,
+      "title": "सुश्रुतसंहिता"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/mula/data.json",
+      "populated": true,
+      "title": "अष्टाङ्गहृदयसंहिता"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_sarvangasundara/data.json",
+      "populated": true,
+      "title": "अष्टाङ्गहृदयसंहिता (सर्वाङ्गसुन्दरा — अरुणदत्तः)"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_padarthacandrika/data.json",
+      "populated": true,
+      "title": "अष्टाङ्गहृदयसंहिता (पदार्थचन्द्रिका)"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_indu/data.json",
+      "populated": true,
+      "title": "अष्टाङ्गहृदयसंहिता (इन्दुटीका)"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/samhita/ashtanga_sangraha/mula/data.json",
+      "populated": true,
+      "title": "अष्टाङ्गसङ्ग्रहः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/samhita/bhavaprakasha/mula/data.json",
+      "populated": true,
+      "title": "भावप्रकाशः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/samhita/nadi_pariksha/mula/data.json",
+      "populated": true,
+      "title": "नाडीपरीक्षा"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/ashtanga_nighantu/mula/data.json",
+      "populated": true,
+      "title": "अष्टाङ्गनिघण्टुः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/bija_nighantu/mula/data.json",
+      "populated": true,
+      "title": "बीजनिघण्टुः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/dhanvantari_nighantu/mula/data.json",
+      "populated": true,
+      "title": "धन्वन्तरिनिघण्टुः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/kaiyadeva_nighantu/mula/data.json",
+      "populated": true,
+      "title": "कैयदेवनिघण्टुः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/madanapala_nighantu/mula/data.json",
+      "populated": true,
+      "title": "मदनपालनिघण्टुः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/raja_nighantu/mula/data.json",
+      "populated": true,
+      "title": "राजनिघण्टुः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/nighantu/nighantushesha/mula/data.json",
+      "populated": true,
+      "title": "निघण्टुशेषः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasahridaya_tantra/mula/data.json",
+      "populated": true,
+      "title": "रसहृदयतन्त्रम्"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasakamadhenu/mula/data.json",
+      "populated": true,
+      "title": "रसकामधेनुः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasamanjari/mula/data.json",
+      "populated": true,
+      "title": "रसमञ्जरी"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasaprakashasudhakara/mula/data.json",
+      "populated": true,
+      "title": "रसप्रकाशसुधाकरः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/mula/data.json",
+      "populated": true,
+      "title": "रसरत्नसमुच्चयः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_bodhini/data.json",
+      "populated": true,
+      "title": "रसरत्नसमुच्चयः (बोधिनी)"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_dipika/data.json",
+      "populated": true,
+      "title": "रसरत्नसमुच्चयः (दीपिका)"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika/data.json",
+      "populated": true,
+      "title": "रसरत्नसमुच्चयः (टीका)"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasaratnakara/mula/data.json",
+      "populated": true,
+      "title": "रसरत्नाकरः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasasanketakalika/mula/data.json",
+      "populated": true,
+      "title": "रससङ्केतकलिका"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasatarangini/mula/data.json",
+      "populated": true,
+      "title": "रसतरङ्गिणी"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasendracintamani/mula/data.json",
+      "populated": true,
+      "title": "रसेन्द्रचिन्तामणिः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasendracudamani/mula/data.json",
+      "populated": true,
+      "title": "रसेन्द्रचूडामणिः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasendrasarasangraha/mula/data.json",
+      "populated": true,
+      "title": "रसेन्द्रसारसङ्ग्रहः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasarnava/mula/data.json",
+      "populated": true,
+      "title": "रसार्णवः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasarnavakalpa/mula/data.json",
+      "populated": true,
+      "title": "रसार्णवकल्पः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasadhyaya/mula/data.json",
+      "populated": true,
+      "title": "रसाध्यायः"
+    },
+    {
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasadhyaya/tika/data.json",
+      "populated": true,
+      "title": "रसाध्यायः (टीका)"
+    },
+    {
+      "path": "dge/data/upaveda/dhanurveda/mula/data.json",
+      "populated": true,
+      "title": "धनुर्वेदः"
+    },
+    {
+      "path": "dge/data/shastra/natya_shastra/mula/data.json",
+      "populated": true,
+      "title": "नाट्यशास्त्रम्"
+    },
+    {
+      "path": "dge/data/shastra/natya_shastra/tika/data.json",
+      "populated": true,
+      "title": "नाट्यशास्त्रम् (विवृतिः)"
+    },
+    {
+      "path": "dge/data/shastra/kama_shastra/mula/data.json",
+      "populated": true,
+      "title": "कामसूत्रम्"
+    },
+    {
+      "path": "dge/data/shastra/niti_shastra/artha_shastra/mula/data.json",
+      "populated": true,
+      "title": "अर्थशास्त्रम्"
+    },
+    {
+      "path": "dge/data/shastra/niti_shastra/hitopadesha/mula/data.json",
+      "populated": true,
+      "title": "हितोपदेशः"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/sutra/saddharma_pundarika_sutra/mula/data.json",
+      "populated": true,
+      "title": "सद्धर्मपुण्डरीकसूत्रम्"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/sutra/lankavatara_sutra/mula/data.json",
+      "populated": true,
+      "title": "लङ्कावतारसूत्रम्"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/shastra/abhidharma_kosha/mula/data.json",
+      "populated": true,
+      "title": "अभिधर्मकोशः"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/shastra/abhidharma_kosha/bhashya/data.json",
+      "populated": true,
+      "title": "अभिधर्मकोशः (भाष्यम्)"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/shastra/mula_madhyamaka_karika/mula/data.json",
+      "populated": true,
+      "title": "मूलमध्यमककारिकाः"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/shastra/mula_madhyamaka_karika/tika_prasannapada/data.json",
+      "populated": true,
+      "title": "मूलमध्यमककारिकाः (प्रसन्नपदा)"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/shastra/vimshatika/mula/data.json",
+      "populated": true,
+      "title": "विंशतिका"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/shastra/vimshatika/vritti/data.json",
+      "populated": true,
+      "title": "विंशतिका (वृत्तिः)"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/shastra/bodhicaryavatara/mula/data.json",
+      "populated": true,
+      "title": "बोधिचर्यावतारः"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/shastra/shikshasamuccaya/mula/data.json",
+      "populated": true,
+      "title": "शिक्षासमुच्चयः"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/shastra/ashtasahasrika_prajnaparamita/mula/data.json",
+      "populated": true,
+      "title": "अष्टसाहस्रिका प्रज्ञापारमिता"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/pramana/nyayabindu/mula/data.json",
+      "populated": true,
+      "title": "न्यायबिन्दुः"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/avadana/avadanashataka/mula/data.json",
+      "populated": true,
+      "title": "अवदानशतकम्"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/avadana/divyavadana/mula/data.json",
+      "populated": true,
+      "title": "दिव्यावदानम्"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/avadana/sanghabhedavastu/mula/data.json",
+      "populated": true,
+      "title": "सङ्घभेदवस्तु"
     }
   ]
 }
