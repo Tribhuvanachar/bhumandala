@@ -80,7 +80,7 @@
     },
     {
       "path": "dge/data/agama/pancharatra/shaiva_agama/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Shaiva Agama"
     },
     {

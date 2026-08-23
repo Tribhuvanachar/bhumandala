@@ -1701,6 +1701,66 @@ complete record, not just a live queue.
     Āgama texts. `tools/dcs/README.md` records what scaling this further
     actually requires, so it doesn't need re-deriving.
 
+- **Same-day follow-up, still 23 Aug: a second DCS import, a real
+  duplication near-miss caught, and a load-bearing discovery about
+  skrutable's sandhi/compound splitter.** Asked to populate more DCS
+  content and wire sandhi/samasa splitting into the reader as a
+  click-a-word feature.
+  - **Checked for duplication before importing more — and it mattered.**
+    `library.json` was scanned for `populated: false` leaves under
+    `purana/` (68), `darshana/` (185), and `agama/` (17), then
+    cross-referenced against DCS's text list, rather than assuming every
+    DCS text is new content. This caught a real near-miss: DCS's
+    Mahābhārata and Rāmāyaṇa would have collided with the genuine mūla
+    text already `populated: true` in `itihasa/` — importing them would
+    have created duplicate/conflicting granthas, not new coverage. Not
+    done, for that reason.
+  - **Second import done: `Śivasūtra`**, all 74 sutras across its 3
+    unmeṣas (DCS's complete text, not an excerpt), into the previously-
+    empty `agama/pancharatra/shaiva_agama/data.json` — same safe pattern
+    as the Sūryasiddhānta pilot, found via the duplication check above.
+    `tools/dcs/dcs_common.py` factors out the CoNLL-U parsing so this and
+    the next import share code; verified byte-identical re-generation of
+    the jyotisha output after the refactor. Content spot-checked
+    correct, not just valid JSON: sutra 1.1 is चैतन्यमात्मा ("caitanyam
+    ātmā"), the actual, well-known opening line of the text.
+  - **A rough keyword pass over DCS's 253 texts against `library.json`**
+    (not a real classification — see `tools/dcs/README.md` for the
+    caveat) found more candidate empty-leaf matches worth checking
+    properly: `Matsyapurāṇa` (but DCS carries the **full 174-chapter
+    text** — a much bigger job than either import so far), several
+    Purāṇa sub-leaves, and a `Vaiśeṣikasūtra`/`Yogasūtra`/`Sāṃkhyakārikā`
+    cluster under `darshana/`. 184/253 stayed unclassified by the rough
+    pass. None of these are imported yet.
+  - **The sandhi/samasa splitting request hit a genuine blocker, surfaced
+    rather than built around.** Tested `skrutable.splitting.Splitter`
+    directly against the specific gap named — visarga sandhi and
+    consonant (hal) sandhi, both said to be missing from the existing
+    Vidyut-based tooling — and it handles both correctly: `rāmo
+    gacchati` → `rāmaḥ gacchati` (visarga), `taddhi` → `tat hi` and
+    `sajjanaḥ` → `sat-janaḥ` (hal sandhi), all verified by direct testing,
+    not assumed from the README. But reading `splitting.py` turned up
+    something that changes what's safe to build on this: **the splitter
+    is not local computation** — both its models are thin wrappers over
+    remote third-party HTTP APIs (`dharmamitra.org`'s tagging endpoint by
+    default, or an older `2018emnlp-sanskrit-splitter-server.duckdns.org`
+    research demo). Every call in the tests above was a live network
+    request to `dharmamitra.org`. This is unlike everything else used
+    from skrutable so far (`transliteration.py`, `meter_identification.py`
+    — both confirmed by grep to be pure local code, no network calls) and
+    unlike `vidyut`, which runs fully offline. Two real consequences,
+    neither resolved here: (1) a "click any word, get its sandhi split"
+    feature would mean every DG site visitor's clicked word gets sent to
+    `dharmamitra.org` in real time — a live third-party dependency and a
+    data-sharing fact about the site that's worth deciding on knowingly,
+    not wiring in silently; (2) precomputing splits across the corpus
+    (the kāvya branch alone has ~95,000 entries) means tens or hundreds of
+    thousands of requests against someone else's server, with no
+    confirmed terms of service for bulk automated use — the kind of load
+    a considerate caller batches and paces, not fires all at once. Neither
+    the live-click feature nor a bulk precompute pass was built pending a
+    decision on this trade-off.
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are

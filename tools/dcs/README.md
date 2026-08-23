@@ -53,24 +53,53 @@ JSON. (The other 6 don't match any pattern in chandas_native's still-small
 21-entry database — not investigated further here, out of scope for this
 pilot.)
 
-## Scaling beyond the pilot — not done here
+## Second import: Sivasutra, 23 Aug — proving the "scan for empty leaves" pattern
 
-DCS has 253 texts total, ~1.5 GB in the primary mirror. This pilot proves
-the mechanics on one; scaling to more means, for each text:
+Before importing more texts, checked `library.json` for `populated: false`
+leaves under `purana/`, `darshana/`, and `agama/` (68, 185, and 17 found,
+respectively) and cross-referenced DCS's text list against them, rather
+than assuming DCS text = new content. This caught a real risk early:
+Mahābhārata and Rāmāyaṇa are already `populated: true` with genuine mūla
+text in `itihasa/` — importing DCS's versions there would have meant
+duplicate/conflicting granthas, not new coverage.
 
-1. Copy its `.conllu` file(s) from the mirror into `vendor/conllu/` (or a
-   per-text subfolder, if importing many at once).
-2. Resolve where it lands in the taxonomy — most of DCS's texts (Āyurveda,
-   Tantra, Jyotiṣa, Śaiva Āgama) don't have an existing empty leaf the way
-   `jyotisha` did; each needs a placement decision first, the way
-   `dge/PENDING.md` already flags for Āyurveda/Kāmaśāstra.
+`Śivasūtra` (74 sutras, all 3 unmeṣas — the complete short text) matched
+an empty `agama/pancharatra/shaiva_agama/data.json` leaf exactly, same
+safe pattern as the Sūryasiddhānta pilot. `build_sivasutra.py` reuses the
+CoNLL-U parsing now factored into `dcs_common.py`.
+
+## Scaling beyond the two imports so far — not done here
+
+DCS has 253 texts total, ~1.5 GB in the primary mirror. Two are in
+(Sūryasiddhānta, Śivasūtra); scaling further means, for each candidate:
+
+1. **Check for an existing empty (`populated: false`) taxonomy leaf
+   first** — the check described above, not optional. A rough one-time
+   pass (keyword-matching DCS's `texts.csv` against `library.json`, done
+   23 Aug, see `dge/PENDING.md`) found real matches worth checking
+   properly and importing the same way:
+   - `Matsyapurāṇa` → `purana/matsya_purana/` (currently empty) — but this
+     is DCS's **full text, 174 chapter files**, a much bigger job than
+     either import so far; deserves its own pass, not a rushed add-on.
+   - Several `Skandapurāṇa`/`Liṅgapurāṇa`/`Kūrmapurāṇa`/etc. sub-leaves
+     (`brahma_khanda`, `purva_bhaga`, etc.) are `populated: false` and may
+     have DCS matches — not individually checked yet.
+   - `Vaiśeṣikasūtra`, `Yogasūtra`-family, `Sāṃkhyakārikā` and its
+     commentaries under `darshana/` — same pattern as Śivasūtra, not
+     checked yet.
+   - The rough keyword pass left 184/253 DCS texts "unclassified" — real
+     classification (not keyword-matching) is needed before knowing what
+     else fits an empty leaf vs. needs a placement decision.
+2. Where there's no empty leaf, resolve taxonomy placement first — most of
+   DCS's Āyurveda/Tantra texts have no home yet, the same open question
+   `dge/PENDING.md` already flags for Āyurveda/Kāmaśāstra generally.
 3. Decide the distribution mechanism once volume grows past what belongs
    in `main` — this project's existing pattern is a CDN-served sibling
    branch (`kavya-dist`, `wordnet-dist`) or a separate hand-created repo
    (`bhumandala-kosha-data`), not committing large corpora directly.
 4. An ongoing sync job (checking `OliverHellwig/sanskrit` for upstream
-   updates) is worth building once there's an actual imported corpus to
-   keep in sync — premature before that.
+   updates) is worth building once there's a large enough imported corpus
+   to keep in sync — premature with two texts in.
 
 None of this is started; it's scoped here so the next pass doesn't have to
 re-derive it.
