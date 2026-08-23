@@ -185,3 +185,31 @@ select { width: 100%; box-sizing: border-box; padding: 9px 10px; font-size: 14px
 .file-status-grid { display: flex; flex-wrap: wrap; gap: 4px 18px; }
 .file-status-label { color: var(--muted); margin-right: 4px; }
 .file-status-value { font-weight: 600; }
+
+/* Server Pipeline tab (server-pipeline.js) -- page-preview thumbnail
+   strip, and the staged-shloka review list, colored by Gemini's own
+   accept/review/unresolved self-classification so a problem verse is
+   visible at a glance without reading the raw JSON. */
+.sp-preview-strip { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 14px; }
+.sp-preview-page { margin: 0; border: 1px solid var(--line); border-radius: var(--radius); padding: 4px;
+  background: var(--panel2); }
+.sp-preview-page img { display: block; max-width: 160px; max-height: 220px; border-radius: 2px; }
+.sp-preview-page figcaption { text-align: center; font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+.sp-shloka-list { display: flex; flex-direction: column; gap: 6px; margin: 8px 0; }
+.sp-shloka-row { border: 1px solid var(--line); border-left-width: 4px; border-radius: var(--radius);
+  padding: 8px 10px; font-size: 13px; background: var(--panel2); }
+.sp-shloka-row.sp-cls-accept { border-left-color: var(--ok); }
+.sp-shloka-row.sp-cls-review { border-left-color: var(--gold); }
+.sp-shloka-row.sp-cls-unresolved { border-left-color: var(--bad); }
+.sp-badge { font-size: 10px; text-transform: uppercase; letter-spacing: .02em; font-weight: 700;
+  padding: 1px 6px; border-radius: 999px; background: var(--panel); color: var(--muted); margin-left: 4px; }
+.sp-cls-accept .sp-badge { color: var(--ok); }
+.sp-cls-review .sp-badge { color: var(--gold); }
+.sp-cls-unresolved .sp-badge { color: var(--bad); }
+.sp-sa { font-family: var(--font-sanskrit, serif); margin-top: 4px; }
+.sp-commentary { margin-top: 2px; color: var(--muted); }
+.sp-raw-json { max-height: 260px; overflow: auto; font-size: 11px; background: var(--panel2);
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 8px; white-space: pre-wrap; word-break: break-word; }
+.sp-log { max-height: 200px; overflow-y: auto; font-size: 11px; background: var(--panel2);
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 8px; white-space: pre-wrap; }
