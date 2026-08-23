@@ -565,12 +565,12 @@
     },
     {
       "path": "dge/data/darshana/nyaya/prachina_nyaya/nyaya_sutra/bhashya_vatsyayana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "न्यायसूत्राणि — न्यायभाष्यम्"
     },
     {
       "path": "dge/data/darshana/nyaya/prachina_nyaya/nyaya_sutra/mula/data.json",
-      "populated": false,
+      "populated": true,
       "title": "न्यायसूत्राणि"
     },
     {
@@ -660,7 +660,7 @@
     },
     {
       "path": "dge/data/darshana/vaisheshika/sutra_and_bhashya/vaisheshika_sutra/mula/data.json",
-      "populated": false,
+      "populated": true,
       "title": "वैशेषिकसूत्राणि"
     },
     {
@@ -6100,7 +6100,7 @@
     },
     {
       "path": "dge/data/purana/garuda_purana/purva_khanda/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Purva Khanda"
     },
     {
@@ -6110,22 +6110,22 @@
     },
     {
       "path": "dge/data/purana/kurma_purana/purva_bhaga/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Purva Bhaga"
     },
     {
       "path": "dge/data/purana/kurma_purana/uttara_bhaga/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Uttara Bhaga"
     },
     {
       "path": "dge/data/purana/linga_purana/purva_bhaga/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Purva Bhaga"
     },
     {
       "path": "dge/data/purana/linga_purana/uttara_bhaga/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Uttara Bhaga"
     },
     {
@@ -6345,32 +6345,32 @@
     },
     {
       "path": "dge/data/purana/vishnu_purana/amsha_01/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Amsha 01"
     },
     {
       "path": "dge/data/purana/vishnu_purana/amsha_02/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Amsha 02"
     },
     {
       "path": "dge/data/purana/vishnu_purana/amsha_03/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Amsha 03"
     },
     {
       "path": "dge/data/purana/vishnu_purana/amsha_04/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Amsha 04"
     },
     {
       "path": "dge/data/purana/vishnu_purana/amsha_05/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Amsha 05"
     },
     {
       "path": "dge/data/purana/vishnu_purana/amsha_06/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Amsha 06"
     },
     {
@@ -6520,12 +6520,12 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/atharvaveda/kaushika/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/atharvaveda/vaitana/shrautasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Shrautasutra"
     },
     {
@@ -6535,22 +6535,22 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/independent_dharmasutras/vasishtha_dharmasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Vasishtha Dharmasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/apastamba/dharmasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Dharmasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/apastamba/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/apastamba/shrautasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Shrautasutra"
     },
     {
@@ -6560,17 +6560,17 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/baudhayana/dharmasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Dharmasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/baudhayana/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/baudhayana/shrautasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Shrautasutra"
     },
     {
@@ -6580,12 +6580,12 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/bharadvaja/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/bharadvaja/shrautasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Shrautasutra"
     },
     {
@@ -6595,7 +6595,7 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/hiranyakeshin/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
@@ -6605,7 +6605,7 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/kathaka/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
@@ -6615,7 +6615,7 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/manava/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
@@ -6640,17 +6640,17 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/vaikhanasa/dharmasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Dharmasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/vaikhanasa/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/krishna_yajurveda/vaikhanasa/shrautasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Shrautasutra"
     },
     {
@@ -6660,37 +6660,37 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/rigveda/ashvalayana/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/rigveda/ashvalayana/shrautasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Shrautasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/rigveda/shankhayana/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/rigveda/shankhayana/shrautasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Shrautasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/samaveda/drahyayana/shrautasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Shrautasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/samaveda/gobhila/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
       "path": "dge/data/vedanga/kalpa/samaveda/jaiminiya/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
@@ -6705,7 +6705,7 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/samaveda/khadira/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
@@ -6715,7 +6715,7 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/shukla_yajurveda/katyayana/shrautasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Shrautasutra"
     },
     {
@@ -6725,7 +6725,7 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/shukla_yajurveda/paraskara/grihyasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Grihyasutra"
     },
     {
@@ -7020,7 +7020,7 @@
     },
     {
       "path": "dge/data/vedas/atharvaveda/paippalada_shakha/samhita/kanda_01/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Kanda 01"
     },
     {
@@ -7035,12 +7035,12 @@
     },
     {
       "path": "dge/data/vedas/atharvaveda/paippalada_shakha/samhita/kanda_04/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Kanda 04"
     },
     {
       "path": "dge/data/vedas/atharvaveda/paippalada_shakha/samhita/kanda_05/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Kanda 05"
     },
     {
@@ -7065,7 +7065,7 @@
     },
     {
       "path": "dge/data/vedas/atharvaveda/paippalada_shakha/samhita/kanda_10/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Kanda 10"
     },
     {
@@ -7075,7 +7075,7 @@
     },
     {
       "path": "dge/data/vedas/atharvaveda/paippalada_shakha/samhita/kanda_12/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Kanda 12"
     },
     {
@@ -7110,7 +7110,7 @@
     },
     {
       "path": "dge/data/vedas/atharvaveda/paippalada_shakha/samhita/kanda_19/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Kanda 19"
     },
     {
@@ -7510,7 +7510,7 @@
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/katha_shakha/samhita/katha_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Katha Samhita"
     },
     {

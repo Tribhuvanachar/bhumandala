@@ -1,12 +1,17 @@
 # DCS import — licence-clean, scale-cautious
 
 Imports from the **Digital Corpus of Sanskrit** (DCS) into DGE's schema.
-Started as a one-text pilot (Sūryasiddhānta) to prove out the CoNLL-U
-conversion, then a second import (Śivasūtra) to prove a safe way to find
-more candidates, then a 24 Aug batch pass that imported everything an
-exact taxonomy match could find — 15 texts, ~35,700 items total. Still
-well short of DCS's full 253-text corpus; see "Scaling beyond this batch"
-below for what that would take.
+Started as a one-text pilot (Sūryasiddhānta), then a second import
+(Śivasūtra), then two 24 Aug batch passes: the first imported every DCS
+text with an exact top-level taxonomy match (13 texts), the second
+(`build_batch2.py`) went a level deeper — matching against the
+fine-grained `vedanga/kalpa` śākhā structure and splitting a few texts
+across several existing leaves by book number — and added 36 more
+single-leaf imports plus 4 split imports (spanning 16 leaves between
+them). **51 DCS texts in now, across 63 taxonomy leaves, 103,442 items
+total.** Still well short of DCS's full 253-text corpus;
+see the taxonomy-placement proposal (linked from `dge/PENDING.md`'s 24 Aug
+entries) for what's left and where it likely goes.
 
 ## Licence — the clean case, unlike chandas/skrutable
 

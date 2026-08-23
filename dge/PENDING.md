@@ -1910,6 +1910,75 @@ complete record, not just a live queue.
   texts / ~35,700 items now in, that's a more defensible next step than
   it was at 2 texts.
 
+- **Same-day follow-up: a taxonomy-placement proposal for the remaining
+  238, published as an artifact, then Tier A of it executed.** Asked
+  "where should the remaining 238 go against our fixed taxonomy." Built a
+  tiered proposal (published to the user as an artifact) after real
+  research, not by guessing from titles: normalized-exact-match against
+  every `populated: false` leaf found ~95 safe matches (Tier A), five
+  genuine taxonomy gaps affecting ~93 texts (Tier B — Āyurveda+Rasaśāstra
+  +nighaṇṭu, Buddhist literature, Sāṃkhya, Yoga, Tantra/Śaiva naming),
+  ~11 duplication risks caught by checking `populated` status directly
+  rather than assumed (Tier C — Bhāgavatapurāṇa, Rāmāyaṇa, Mahābhārata,
+  Ṛgveda, Atharvaveda-Śaunaka, Taittirīyasaṃhitā, plus three kāvya-dist
+  titles already marked "complete" there: Meghadūta, Kumārasambhava,
+  Kirātārjunīya), ~30 that belong on the separate kāvya-dist pipeline
+  (Tier D), and ~14 genuinely unclear without opening the text (Tier E).
+  User picked Tier A to execute now.
+
+  **Tier A turned out deeper than the proposal's own top-level
+  taxonomy.json read suggested** — checking `library.json` directly (not
+  just the 2-level `taxonomy.json` dump) found the fine-grained śākhā
+  structure (`vedanga/kalpa/<veda>/<school>/{shrautasutra,grihyasutra,
+  dharmasutra}`) already exists as ~41 empty leaves, precise enough to
+  match nearly every Vedic ancillary text in Tier A by name. Two more
+  corrections the proposal itself had gotten slightly wrong, caught by
+  checking rather than trusting the earlier pass: Vājasaneyisaṃhitā
+  (Mādhyandina) is *not* a safe Tier A match after all — the Mādhyandina
+  leaf is already 100% populated; only the separate Kāṇva-recension leaf
+  is empty, and DCS's text is explicitly Mādhyandina, so importing it
+  there would misfile a different recension into the wrong śākhā's slot.
+  Left out for that reason. Kāṭhakasaṃhitā, absent from the original
+  scan, does have a precise empty leaf (`krishna_yajurveda/katha_shakha/
+  samhita/katha_samhita`) and was added.
+
+  **A new import shape was needed and built:** four texts — Viṣṇu/Liṅga/
+  Kūrma Purāṇa and Paippalāda Atharvaveda — split across *several*
+  existing empty leaves by book/kāṇḍa number rather than landing in one.
+  Checked DCS's actual chapter-numbering before assuming a mapping:
+  Viṣṇu Purāṇa's DCS chapters carry book numbers 1-6, matching its
+  `amsha_01..06` leaves exactly; Liṅga and Kūrma Purāṇa carry exactly
+  1-2, matching `purva_bhaga`/`uttara_bhaga`; Paippalāda's DCS excerpt
+  only covers kāṇḍas 1, 4, 5, 10, 12, 19 of 20 (a partial source, not a
+  parsing gap — the other 14 kāṇḍas' leaves stay empty because DCS
+  itself doesn't have them). `dcs_common.py` gained `build_split_import()`
+  for this, sharing its underlying parsing with the existing
+  `build_generic_import()` (refactored into `collect_padas()` +
+  `_build_items()` + `_write_data_json()`, re-verified byte-identical on
+  both already-shipped imports after the refactor before trusting it on
+  new data). Garuḍapurāṇa turned out *not* to need splitting — DCS only
+  has its Pūrva Khaṇḍa (book 1), so it landed as a single import.
+
+  **32 single-leaf imports + 4 split imports, ~65,000 items total.**
+  Content spot-checked, not just JSON-validated: Nyāyasūtra 1.1.1 is its
+  exact famous opening line ("pramāṇa-prameya-saṃśaya-prayojana-...");
+  Vaiśeṣikasūtra 1.1.1 is its exact famous opening ("athāto dharmaṃ
+  vyākhyāsyāmaḥ"); Paippalāda 1.1.1 matches the recognizable Vedic
+  water-hymn pattern shared with the Śaunaka Saṃhitā's own well-known
+  opening. `library.json`'s `populated` flipped `true` on all 48 touched
+  leaves; `tools/validate_data.py` clean (0 errors, same 3 pre-existing
+  warnings). Full per-text mapping in `tools/dcs/build_batch2.py`.
+
+  **Not done:** Skandapurāṇa and Śivapurāṇa were in the proposal's Tier A
+  but turned out not to be simple chapter-mappings on inspection — Skanda's
+  DCS chapters are plain sequential numbers with no khaṇḍa name, and
+  Śivapurāṇa's are named by saṃhitā but "Dharmasaṃhitā" doesn't match any
+  of the 7 existing empty saṃhitā leaves (the traditional 7 don't include
+  a Dharma Saṃhitā by that name) — both need an actual scholar's
+  concordance, not a guessed mapping, so left for later. Tier B (the five
+  taxonomy gaps) and Tier D (kāvya-dist routing) are unstarted — the
+  proposal artifact has the detail for whoever picks those up next.
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are

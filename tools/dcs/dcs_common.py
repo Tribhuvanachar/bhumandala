@@ -113,24 +113,25 @@ def parse_conllu_file(path):
         yield chapter_path, counter, subcounter, text
 
 
-def build_generic_import(
-    vendor_dir, out_path, *, source_name, source_url, licence, note, tag,
-    default_author="unspecified",
-):
-    """Parse every .conllu file in vendor_dir and write a DGE 'generic'
-    schema data.json to out_path. Returns (item_count, chapters_seen)."""
-    padas_by_unit = {}  # (chapter_path, unit) -> {subcounter: iast_text}
+def collect_padas(vendor_dir):
+    """Parse every .conllu file in vendor_dir into {(chapter_path, unit):
+    {subcounter: iast_text}}, shared by both single-file and split imports."""
+    padas_by_unit = {}
     for path in sorted(glob.glob(os.path.join(vendor_dir, "*.conllu"))):
         for chapter_path, unit, subcounter, iast in parse_conllu_file(path):
             key = (chapter_path, unit)
             padas_by_unit.setdefault(key, {})[subcounter] = iast
+    return padas_by_unit
 
-    def sort_key(k):
-        chapter_path, unit = k
-        return ([int(p) for p in chapter_path.split(".")], unit)
 
+def _sort_key(chapter_unit):
+    chapter_path, unit = chapter_unit
+    return ([int(p) for p in chapter_path.split(".")], unit)
+
+
+def _build_items(padas_by_unit, source_name, tag):
     items = []
-    for (chapter_path, unit) in sorted(padas_by_unit, key=sort_key):
+    for (chapter_path, unit) in sorted(padas_by_unit, key=_sort_key):
         padas = padas_by_unit[(chapter_path, unit)]
         iast_full = " ".join(padas[k] for k in sorted(padas))
         devanagari = _translit.transliterate(iast_full)
@@ -146,9 +147,11 @@ def build_generic_import(
             ),
             "tags": [tag],
         })
+    return items
 
-    chapters_seen = sorted(set(c for c, u in padas_by_unit),
-                            key=lambda c: [int(p) for p in c.split(".")])
+
+def _write_data_json(out_path, items, chapters_seen, *, default_author,
+                      source_name, source_url, licence, note):
     out = {
         "schema": "generic",
         "default_author": default_author,
@@ -158,8 +161,57 @@ def build_generic_import(
         "note": note.format(count=len(items), chapters=chapters_seen),
         "items": items,
     }
-
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
 
+
+def build_generic_import(
+    vendor_dir, out_path, *, source_name, source_url, licence, note, tag,
+    default_author="unspecified",
+):
+    """Parse every .conllu file in vendor_dir and write a DGE 'generic'
+    schema data.json to out_path. Returns (item_count, chapters_seen)."""
+    padas_by_unit = collect_padas(vendor_dir)
+    items = _build_items(padas_by_unit, source_name, tag)
+    chapters_seen = sorted(set(c for c, u in padas_by_unit),
+                            key=lambda c: [int(p) for p in c.split(".")])
+    _write_data_json(out_path, items, chapters_seen, default_author=default_author,
+                      source_name=source_name, source_url=source_url,
+                      licence=licence, note=note)
     return len(items), chapters_seen
+
+
+def build_split_import(
+    vendor_dir, book_to_path, *, source_name, source_url, licence, note, tag,
+    default_author="unspecified",
+):
+    """Like build_generic_import, but for a text whose DCS chapter_path's
+    FIRST numeric component (the book/kanda/amsha number) already
+    corresponds to separate existing taxonomy leaves -- e.g. Vishnu
+    Purana's 6 amshas, or Paippalada Atharvaveda's kandas. book_to_path
+    maps that leading number (int) to an output data.json path; any book
+    number present in the source but absent from book_to_path is skipped
+    (reported, not silently dropped) rather than guessed into a leaf.
+    Returns {book_number: (item_count, chapters_seen)} for books written,
+    plus a 'skipped' key listing book numbers found but not mapped."""
+    padas_by_unit = collect_padas(vendor_dir)
+    by_book = {}
+    for (chapter_path, unit), padas in padas_by_unit.items():
+        book = int(chapter_path.split(".")[0])
+        by_book.setdefault(book, {})[(chapter_path, unit)] = padas
+
+    results = {}
+    skipped = sorted(b for b in by_book if b not in book_to_path)
+    for book, out_path in book_to_path.items():
+        book_padas = by_book.get(book, {})
+        if not book_padas:
+            continue
+        items = _build_items(book_padas, source_name, tag)
+        chapters_seen = sorted(set(c for c, u in book_padas),
+                                key=lambda c: [int(p) for p in c.split(".")])
+        _write_data_json(out_path, items, chapters_seen, default_author=default_author,
+                          source_name=source_name, source_url=source_url,
+                          licence=licence, note=note)
+        results[book] = (len(items), chapters_seen)
+    results["skipped"] = skipped
+    return results
