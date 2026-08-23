@@ -2361,6 +2361,56 @@ complete record, not just a live queue.
   that's the honest gap left here for whoever can run it from an
   unrestricted browser next.
 
+- **23 Aug (same session): the Pañcarātra Saṃhitā cluster — asked
+  directly to fill in "Sāttvata Saṃhitā and any others available in
+  GRETIL etc."** Checked DCS first (quick, already had the mirror):
+  nothing else Pāñcarātra-shaped there beyond Sāttvatatantra, already
+  imported in batch 8. GRETIL is a *different* source with its own
+  licence to verify per file — not assumed to inherit the one already-
+  imported Pāñcarātra Saṃhitā's terms (Prakāśasaṃhitā, CC BY-NC-SA 4.0)
+  just because both are GRETIL.
+
+  **Checked GRETIL's actual Vaiṣṇava-section catalog directly for all
+  13 still-empty named Saṃhitās (Ahirbudhnya, Hayagrīva, Īśvara,
+  Jayākhya, Lakṣmītantra, Nāradīya, Padma, Parama, Pārāśara, Pauṣkara,
+  Vāsiṣṭha, Viṣṇu, Viśvaksena) — only 2 have a GRETIL e-text at all.**
+  Two near-misses caught and correctly **not** used as substitutes:
+  GRETIL's "Jñānāmṛtasārasaṃhitā" is Nārada-Pāñcarātra-*adjacent* but a
+  different text from the Nāradīyasaṃhitā itself; its
+  "Parāśaradharmasaṃhitā" is Parāśara's *dharmaśāstra* smṛti (already
+  handled — see the batch 7 entry above), not the Pāñcarātra
+  Pārāśarasaṃhitā. The other 9 named Saṃhitās simply aren't on GRETIL —
+  confirmed by reading the catalog, not by a search coming up empty.
+
+  **Imported the 2 real matches, licence verified directly from each
+  file's own TEI `<availability>` element** (both state the same CC
+  BY-NC-SA 4.0 as Prakāśasaṃhitā, confirmed rather than presumed):
+  Viśvaksenasaṃhitā (complete, 39 adhyāyas, 3,796 śloka) and
+  Pauṣkarasaṃhitā (**partial** — GRETIL only carries adhyāyas 27–43 of
+  the printed edition, P.P. Apte's Tirupati 2006 edition; adhyāyas 1–26
+  and beyond 43 are not part of this e-text at all, a real gap in the
+  source, not something introduced here or hidden — noted explicitly in
+  the item's own metadata, not just in this log). Built with a new,
+  purpose-specific parser
+  (`tools/gretil_pancharatra/build_pancharatra.py`) rather than forcing
+  either the DCS pipeline or `tools/kavya/`'s convention-detection
+  parser onto GRETIL's `// Vis_1.1 //`-style bare reference — output
+  matches Prakāśasaṃhitā's own existing on-disk shape exactly, so all 3
+  Pāñcarātra Saṃhitā leaves in this repo now share one internal
+  convention. Content spot-checked, not just validated: Viṣvaksena 1.1
+  opens with the expected topic (*bhūparīkṣā*, site examination before
+  construction) and Pauṣkara 27.1 opens mid-śrāddha-discussion,
+  consistent with its being a partial excerpt starting at chapter 27
+  rather than a text beginning.
+
+  Muktabodha Digital Library was flagged during research as very likely
+  holding several of the remaining 9 (Ahirbudhnya, Jayākhya, Lakṣmītantra
+  are commonly digitized there) under a stated CC BY-NC 4.0 site
+  licence, but its texts sit behind a login-gated access point — could
+  not confirm per-text URLs or licence terms without an account, so
+  nothing was imported from there. **Left as a genuine lead for whoever
+  has Muktabodha access next, not acted on.**
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are

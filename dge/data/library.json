@@ -50,7 +50,7 @@
     },
     {
       "path": "dge/data/agama/pancharatra/pancharatra_samhitas/paushkara_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Paushkara Samhita"
     },
     {
@@ -75,7 +75,7 @@
     },
     {
       "path": "dge/data/agama/pancharatra/pancharatra_samhitas/vishvaksena_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Vishvaksena Samhita"
     },
     {
