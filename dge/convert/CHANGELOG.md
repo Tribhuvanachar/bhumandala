@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.35.0 — 2026-08-23
+- **New "☁️ Server Pipeline" tab** — an alternative to the local Upload/OCR/Proofread/Review/Push flow, for a real book that times out this browser tab. Instead of running Vision/Gemini calls here, it dispatches two new GitHub Actions workflows and brings the result back:
+  1. **Preview** (`ocr-preview-pages.yml`) — free, Gemini/Vision-free: renders just the start/end/extra pages you type so you can visually confirm the range (and see the PDF's real total page count) before spending anything.
+  2. **Send for OCR + Proofread** (`ocr-sanskrit-commentary.yml`) — the real, billed run: same Vision OCR + Gemini proofreading as the local flow (server-side port: `tools/ocr_pipeline.py`), staged as a plain JSON file (never auto-merged into the corpus — that's a deliberate separate step, `tools/merge_staged_commentary.py`). Supports excluding specific pages within the range, and takes either a direct PDF URL or up to 3 split-7z part URLs (downloaded and combined server-side via `7z`) — no file upload needed.
+  Result renders inline (per-shloka accept/review/unresolved coloring, plus raw JSON), with Download and Web-Share (mobile "send to any app," e.g. attach in Gmail) always available, and a separate "Push to `ocr_staging`" action using the same GitHub token as the Push tab.
+  New `actions.js` (`window.DGE.Actions` — dispatch/poll GitHub Actions runs, download artifacts) and `zipread.js` (`window.DGE.ZipRead` — minimal in-browser ZIP reader for artifact downloads, no external library).
+
 ## v0.10.0 — 2026-08-10
 - **Document Loader architecture** — OCR no longer assumes its source is a PDF. `app.js`'s OCR loop now talks to a generic `currentLoader` (`load()` / `getPageCount()` / `getDocumentName()` / `getPageImage(index)`), chosen at file-selection time by a new `loaders.js` factory. `pdf.js` was generalized to expose that same shape (its old `loadPdf`/`renderPageToPngBase64` still work — thin wrappers now, not a second code path) and Vision (`vision.js`) still only ever sees a base64 PNG, unchanged.
 - New **`image.js`** (`window.DGE.ImageLoader`) — upload one or more page-image files (JPG/PNG/WEBP) directly instead of a PDF, in the order you select them. Every page is normalized to PNG via canvas and capped at 3000px on its longest edge (bounds the Vision request payload and matches the resolution the PDF path already renders at — a raw phone photo or full-res scan gains nothing from going in uncapped).
