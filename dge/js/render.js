@@ -34,6 +34,22 @@ window.setSearchScope = function(scope, label, el) {
   if (typeof handleSearch === 'function') handleSearch();
 };
 
+// Per-card commentary tab switching -- distinct from setCommentaryView()
+// above, which is a GLOBAL choice (the 📜 commentary picker) applying to
+// every shloka card at once. This is local to one card: every selected
+// commentary is already rendered in the DOM (setCommentaryView/'all'
+// decided that), this just shows/hides the already-rendered blocks, so
+// switching tabs never re-fetches or re-renders anything.
+window.dgeShowCommentaryTab = function(shlokaIndex, cKey, btnEl) {
+  const container = document.querySelector(`.dge-commentary-tabbed[data-shloka="${shlokaIndex}"]`);
+  if (!container) return;
+  container.querySelectorAll('.commentary-block[data-ckey]').forEach(block => {
+    block.style.display = (cKey === 'all' || block.dataset.ckey === cKey) ? '' : 'none';
+  });
+  container.querySelectorAll('.dge-commentary-tab').forEach(tab => tab.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+};
+
 function setCommentaryView(view, el) {
   selectedCommentaryView = view;
   document.querySelectorAll('#commentaryPopup .pop-item').forEach(item => item.classList.remove('active'));
@@ -263,6 +279,12 @@ function renderList() {
 
     let commentaryHtml = '';
     if (shloka.commentaries) {
+      // Collected first, joined after, so a tab bar can be prepended when
+      // more than one commentary is actually rendering for this card --
+      // stacked blocks stay the default (nothing to click, nothing
+      // changes for a single-commentary view), tabs only appear when
+      // there's something to switch between.
+      const blocks = [];
       Object.entries(shloka.commentaries).forEach(([cKey, cText]) => {
         const isSelected = (selectedCommentaryView === 'all' || selectedCommentaryView === cKey);
         const isForcedBySearch = forceCommentaries.includes(cKey);
@@ -278,9 +300,19 @@ function renderList() {
           // prose buried in a title a reader may not read closely.
           const aiBadge = (typeof dgeIsAiGeneratedCommentaryKey === 'function' && dgeIsAiGeneratedCommentaryKey(cKey))
             ? '<span class="dge-ai-badge" title="AI-generated -- not author-verified">AI</span>' : '';
-          commentaryHtml += `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}${aiBadge}</div>${highlightText(convertedText, pattern)}</div>`;
+          blocks.push({ cKey, name: convertedName,
+            html: `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}${aiBadge}</div>${highlightText(convertedText, pattern)}</div>` });
         }
       });
+      if (blocks.length > 1) {
+        const tabsHtml = `<div class="dge-commentary-tabs" role="tablist">` +
+          `<button type="button" class="dge-commentary-tab active" onclick="dgeShowCommentaryTab(${i}, 'all', this)">All</button>` +
+          blocks.map(b => `<button type="button" class="dge-commentary-tab" onclick="dgeShowCommentaryTab(${i}, '${b.cKey}', this)">${b.name}</button>`).join('') +
+          `</div>`;
+        commentaryHtml = `<div class="dge-commentary-tabbed" data-shloka="${i}">${tabsHtml}${blocks.map(b => b.html).join('')}</div>`;
+      } else {
+        commentaryHtml = blocks.map(b => b.html).join('');
+      }
     }
 
     // Additional structured fields (Padaccheda, Anvaya, Vrutta, etc.) —
