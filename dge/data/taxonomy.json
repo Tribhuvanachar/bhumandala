@@ -1439,6 +1439,9 @@
     "vaisheshika_sutra": {
      "mula": {
       "_schema": "grantha_mula_text"
+     },
+     "vritti": {
+      "_schema": "grantha_tika_text"
      }
     }
    }
@@ -1536,7 +1539,8 @@
       "_schema": "grantha_mula_text"
      },
      "shabara_bhashya": {
-      "_schema": "grantha_tika_text"
+      "_schema": "grantha_tika_text",
+      "_default_author": "Shabarasvami"
      }
     }
    }
@@ -1601,6 +1605,12 @@
       "_default_author": "Bhoja"
      }
     }
+   }
+  },
+  "sarvadarshana_sangraha": {
+   "mula": {
+    "_schema": "grantha_mula_text",
+    "_default_author": "Madhava Vidyaranya"
    }
   }
  },

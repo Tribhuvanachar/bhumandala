@@ -190,7 +190,7 @@
     },
     {
       "path": "dge/data/darshana/mimamsa/sutra_and_bhashya/mimamsa_sutra/shabara_bhashya/data.json",
-      "populated": false,
+      "populated": true,
       "title": "मीमांसासूत्राणि — शाबरभाष्यम्"
     },
     {
@@ -8480,12 +8480,12 @@
     },
     {
       "path": "dge/data/darshana/sankhya/sutra_and_karika/samkhya_karika/mula/data.json",
-      "populated": false,
+      "populated": true,
       "title": "साङ्ख्यकारिका"
     },
     {
       "path": "dge/data/darshana/sankhya/sutra_and_karika/samkhya_karika/tika_gaudapada/data.json",
-      "populated": false,
+      "populated": true,
       "title": "साङ्ख्यकारिका (गौडपादभाष्यम्)"
     },
     {
@@ -8530,7 +8530,7 @@
     },
     {
       "path": "dge/data/darshana/yoga/sutra_and_bhashya/yoga_sutra/tika_tattva_vaisharadi/data.json",
-      "populated": false,
+      "populated": true,
       "title": "योगसूत्राणि (तत्त्ववैशारदी)"
     },
     {
@@ -8827,6 +8827,16 @@
       "path": "dge/data/shastra/bauddha_sahitya/avadana/sanghabhedavastu/mula/data.json",
       "populated": true,
       "title": "सङ्घभेदवस्तु"
+    },
+    {
+      "path": "dge/data/darshana/vaisheshika/sutra_and_bhashya/vaisheshika_sutra/vritti/data.json",
+      "populated": true,
+      "title": "वैशेषिकसूत्राणि (वृत्तिः — DCS-असंपुष्टः कर्तृनिर्देशः)"
+    },
+    {
+      "path": "dge/data/darshana/sarvadarshana_sangraha/mula/data.json",
+      "populated": true,
+      "title": "सर्वदर्शनसङ्ग्रहः"
     }
   ]
 }

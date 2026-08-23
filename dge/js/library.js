@@ -45,6 +45,7 @@ const DGE_PATH_LABELS = {
   nyaya: 'न्यायः', vaisheshika: 'वैशेषिकम्', sankhya: 'साङ्ख्यम्',
   yoga: 'योगः', mimamsa: 'मीमांसा',
   sarvamula: 'सर्वमूलग्रन्थाः',
+  sarvadarshana_sangraha: 'सर्वदर्शनसङ्ग्रहः',
 
   // 23 Aug: upaveda/shastra, added per the project lead's own framework
   // (not this session's invention) -- Ayurveda and Dhanurveda under the

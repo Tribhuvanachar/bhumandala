@@ -11,7 +11,7 @@ single-leaf imports plus 4 split imports (spanning 16 leaves between
 them), then a third pass (`build_batch3_upanishads.py`, 5 mula-Upaniṣads)
 and a fourth (`build_batch4_samkhya_yoga.py`, see below) that also added
 new taxonomy nodes rather than only filling existing empty leaves.
-**116 DCS texts in now, across 128 taxonomy leaves, 162,136 items
+**122 DCS texts in now, across 134 taxonomy leaves, 164,708 items
 total.** Still well short of DCS's full 253-text corpus;
 see the taxonomy-placement proposal (linked from `dge/PENDING.md`'s 24 Aug
 entries) for what's left and where it likely goes.
@@ -172,6 +172,17 @@ present and imported; the other 10 leaves stay `populated: false` stubs,
 same as any other planned-but-unsourced grantha elsewhere in this
 taxonomy.
 
+**Correction (batch 6, below): the claim above about Sāṃkhyakārikā was
+wrong, and the root cause was a diacritic-blind check.** The actual
+check run at the time was an ASCII `grep -i "sankhy\|samkhy"` over the
+mirror's directory listing — which cannot match "Sāṃkhyakārikā" at all,
+since `ā`/`ṃ` are different Unicode codepoints from `a`/`n`, not folded
+by `grep -i`. The directory was there the whole time; the search for it
+wasn't. A full re-scan of DCS's own text-name list (not an ASCII
+substring probe) found "Sāṃkhyakārikā" present after all, alongside its
+own `Sāṃkhyakārikābhāṣya`. Both are imported in batch 6. Sāṃkhyasūtra's
+mūla is still genuinely absent from DCS.
+
 **A 4th DCS chapter-numbering convention was found and fixed while
 running this, not after** (same discipline as the 24 Aug prose-brāhmaṇa
 fix): Sāṃkhyatattvakaumudī's `## chapter:` line is a single already-dotted
@@ -243,10 +254,43 @@ DCS's own source file exactly as shown here, not a parsing artifact, and
 left as an open question for closer philological review rather than
 silently trusted or silently altered.
 
+## Sixth import, batch 6 (`build_batch6_darshana_gaps.py`) — re-checking the classical darshanas, not assuming batches 2/4 were complete
+
+Prompted directly by the project lead ("just check" Nyāya/Mīmāṃsā/
+Vaiśeṣika/Yoga/Sāṃkhya for anything still missing) rather than this
+session's own initiative. A full re-scan of DCS's text-name list for
+darshana-adjacent names — not a repeat of the earlier per-text checks —
+found 6 more matches, one a real correction to batch 4's own claim (see
+above): **Sāṃkhyakārikā's mūla text is in DCS after all**, missed
+earlier because the check that ruled it out was an ASCII `grep` that
+cannot match a name containing `ā`/`ṃ`. The other 5: Sāṃkhyakārikābhāṣya
+(matched to the existing `tika_gaudapada` stub — DCS's own metadata
+doesn't name an author, so this attribution is inferred from
+"Sāṃkhyakārikābhāṣya" being Gauḍapāda's commentary's standard scholarly
+name, not DCS-confirmed, flagged in `dge/PENDING.md`), Mīmāṃsāsūtrabhāṣya
+(→ the existing `shabara_bhashya` stub — Śabara's bhāṣya is *the*
+Mīmāṃsāsūtrabhāṣya by convention, high confidence), Tattvavaiśāradī (→
+the existing `tika_tattva_vaisharadi` stub, exact match via its own `zu
+YS, 4, 1.1` chapter line), Vaiśeṣikasūtravṛtti (a new `vritti` leaf under
+`vaisheshika_sutra` — no `tika`/`vritti` key existed there before;
+author again unconfirmed by DCS), and Sarvadarśanasaṃgraha — Mādhava's
+doxography surveying *every* darśana, whose own chapter names are
+darśana-school names (`SDS, Rāseśvaradarśana`, etc.), so it doesn't
+belong nested under any one darshana; added as its own
+`darshana.sarvadarshana_sangraha` leaf.
+
+Content spot-checked: Sāṃkhyakārikā 1.1 is Īśvarakṛṣṇa's famous opening
+("duḥkhatrayābhighātāj..."), Śabarabhāṣya's first unit is its own
+well-known opening on Mīmāṃsāsūtra 1.1.1, and Sarvadarśanasaṃgraha's
+Rāseśvaradarśana chapter content (mercury/pārada, rasārṇava) matches
+that specific chapter's known subject.
+
+DCS running total: **122 texts, 134 taxonomy leaves, 164,708 items.**
+
 ## Scaling beyond this batch — not done here
 
-DCS has 253 texts total; 116 are in now, across 128 taxonomy leaves,
-162,136 items. Remaining candidates for a future pass:
+DCS has 253 texts total; 122 are in now, across 134 taxonomy leaves,
+164,708 items. Remaining candidates for a future pass:
 
 - The exact-match pass found everything with a *precisely*-named existing
   leaf. It will have missed real matches with slightly different naming

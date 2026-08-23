@@ -2133,6 +2133,53 @@ complete record, not just a live queue.
   with that name turned up in the mirror — so `gandharvaveda` and
   `sthapatyaveda` stay empty stubs rather than force-filled).
 
+- **23 Aug (same session): asked directly to "just check" whether the
+  classical darśanas (Nyāya, Mīmāṃsā, Vaiśeṣika, Yoga, Sāṃkhya) had
+  anything DCS carries that batches 2/4 missed — they did, including a
+  real correction to batch 4's own claim, caught only by re-scanning
+  DCS's full text-name list rather than repeating the per-text checks.**
+
+  **Sāṃkhyakārikā's mūla text is in DCS.** Batch 4 said it wasn't,
+  "checked by listing, not assumed" — but the actual check run was an
+  ASCII `grep -i "sankhy\|samkhy"` over the mirror's directory names,
+  which cannot match "Sāṃkhyakārikā": `ā` and `ṃ` are different Unicode
+  codepoints from `a`/`n`, and `grep -i` folds case, not diacritics.
+  Re-ran the check as `echo "Sāṃkhyakārikā" | grep -i "sankhy\|samkhy"`
+  against the real name to confirm the failure mode before writing this
+  down, not just asserting it. The directory was there the whole time.
+  Imported (73 items); spot-checked against Īśvarakṛṣṇa's genuinely
+  famous opening ("duḥkhatrayābhighātāj jijñāsā...") — exact match.
+
+  Five more matches, all filling *existing* empty stubs rather than
+  needing new taxonomy structure (two exceptions noted below):
+  - **Sāṃkhyakārikābhāṣya** → the `tika_gaudapada` stub from batch 4.
+    DCS's own metadata doesn't name an author for this text — the
+    placement rests on "Sāṃkhyakārikābhāṣya" being the standard
+    scholarly name specifically for Gauḍapāda's commentary, not on
+    anything DCS itself confirms. Flagged, not asserted as fact.
+  - **Mīmāṃsāsūtrabhāṣya** → the `shabara_bhashya` stub (already in
+    `taxonomy.json` before this session, from the original repo).
+    Śabara's bhāṣya is *the* Mīmāṃsāsūtrabhāṣya by convention — high
+    confidence, unlike the Gauḍapāda case above. Spot-checked: its first
+    unit is its own well-known opening on Mīmāṃsāsūtra 1.1.1.
+  - **Tattvavaiśāradī** → the `tika_tattva_vaisharadi` stub from batch
+    4, exact match confirmed via its own `zu YS, 4, 1.1` chapter line
+    (commentary on Yogasūtra 4.1 — Vācaspati Miśra's Tattvavaiśāradī).
+  - **Vaiśeṣikasūtravṛtti** — no commentary leaf existed at all under
+    `vaisheshika_sutra` (only `mula`); added a new `vritti` leaf.
+    Author unconfirmed by DCS's own metadata here too.
+  - **Sarvadarśanasaṃgraha** — Mādhava Vidyāraṇya's doxography
+    surveying *every* darśana, confirmed by its own chapter names being
+    darśana-school names (`SDS, Rāseśvaradarśana`, etc., not numbers) —
+    doesn't belong nested under any single darshana. Added as its own
+    new leaf, `darshana.sarvadarshana_sangraha.mula`. Spot-checked: its
+    Rāseśvaradarśana chapter content (pārada/mercury, rasārṇava) matches
+    that chapter's known subject (the alchemical Rasa-Śaiva school).
+
+  `tools/dcs/build_batch6_darshana_gaps.py`; 6/6 matched and imported,
+  zero misses this round. DCS running total: **122 texts, 134 taxonomy
+  leaves, 164,708 items.**
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are
