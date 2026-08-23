@@ -1979,6 +1979,26 @@ complete record, not just a live queue.
   taxonomy gaps) and Tier D (kāvya-dist routing) are unstarted — the
   proposal artifact has the detail for whoever picks those up next.
 
+- **Same-day: a correction to the proposal itself, caught before starting
+  Tier B.** The proposal's Tier B had listed "Upaniṣad mūla texts" as a
+  taxonomy gap — wrong. Checking `library.json` (not just recalling the
+  earlier `taxonomy.json` read) found precise empty leaves already exist
+  under each Upaniṣad's own Veda/śākhā: Chāndogya (Sāmaveda/Kauthuma),
+  Kaṭha (Kṛṣṇa Yajurveda/Kāṭhaka), Taittirīya (Kṛṣṇa Yajurveda/
+  Taittirīya), Aitareya (Ṛgveda/Śākala), Muṇḍaka (Atharvaveda/Śaunaka),
+  plus Kena, Maitrāyaṇīya, and Īśā (not in the remaining-238 list).
+  Imported the 5 with a clean DCS match (`tools/dcs/
+  build_batch3_upanishads.py`, 1,707 items); content spot-checked, not
+  just validated — Kaṭhopaniṣad 1.1 is its exact opening line (Naciketas
+  frame story). Bṛhadāraṇyakopaniṣad deliberately excluded: the taxonomy
+  has separate Kāṇva and Mādhyandina recension leaves, but DCS's own
+  chapter headers ("BĀU") don't say which recension its text is — guessed
+  differently, this could misattribute a real textual variant, so left
+  for later rather than picked arbitrarily. Śvetāśvatara and Kauṣītaki
+  Upaniṣad, and the minor Upaniṣads (Garbha, Nādabindu, Brahmabindu,
+  Amṛtabindu, Śira), still have no taxonomy leaf — the genuine residual
+  gap, smaller than the proposal originally claimed.
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are

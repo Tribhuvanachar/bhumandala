@@ -7230,7 +7230,7 @@
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/upanishads/mundaka_upanishad/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Mundaka Upanishad"
     },
     {
@@ -7385,7 +7385,7 @@
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/upanishads/aitareya_upanishad/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Aitareya Upanishad"
     },
     {
@@ -7480,7 +7480,7 @@
     },
     {
       "path": "dge/data/vedas/samaveda/kauthuma_shakha/upanishad/chandogya_upanishad/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Chandogya Upanishad"
     },
     {
@@ -7515,7 +7515,7 @@
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/katha_shakha/upanishad/katha_upanishad/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Katha Upanishad"
     },
     {
@@ -7580,7 +7580,7 @@
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/taittiriya_shakha/upanishad/taittiriya_upanishad/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Taittiriya Upanishad"
     },
     {
