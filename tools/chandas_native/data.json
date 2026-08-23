@@ -1,12 +1,13 @@
 {
   "schema": "vedanga_chandas_vrutta_database",
-  "source": "independently compiled from the standard classical gana system (Pingala/Vrittaratnakara/Chandomanjari tradition, public domain); not derived from hrishikeshrt/chanda or any other software project's data",
+  "source": "independently compiled from the standard classical gana system (Pingala/Vrittaratnakara/Chandomanjari tradition, public domain); not derived from hrishikeshrt/chanda or any other software project's data. Upajati proper names sourced from https://ancient-buddhist-texts.net/Textual-Studies/Metre-Tables/Tables-14.htm (citing Vrittaratnakara), 4 of 14 individually verified against its raw laghu/guru symbols -- see PENDING.md, 21 Aug entry.",
   "licence": "Apache-2.0 (matches this repo's default -- no AGPL content)",
-  "note": "Deliberately smaller core than a full classical-metre catalogue: ~15 well-attested sama-vrutta (cross-validated against real verses where test verses were available), a rule-based Anustubh handler, mechanically-generated Indravajra/Upendravajra upajati combinations, a small Arya-family matra-vrutta set, and akshara-jaati names 1-20. Ardhasama/vishama vrutta and the rare long tail of sama-vrutta names are NOT included -- see README for why and what it would take to extend this safely.",
+  "note": "Deliberately smaller core than a full classical-metre catalogue: 21 well-attested sama-vrutta, 3 ardhasama-vrutta, a rule-based Anustubh handler, mechanically-generated Indravajra/Upendravajra upajati combinations with sourced traditional names, a small Arya-family matra-vrutta set (4 entries), and akshara-jaati names 1-20. Vishama vrutta, Vaitaliya/Aupacchandasika (need a richer schema than total matra count), and akshara-jaati 21-26 (three independently-found sources disagreed, none adopted) are NOT included -- see README and PENDING.md for why.",
   "counts": {
-    "sama_vrutta": 13,
+    "sama_vrutta": 21,
+    "ardhasama_vrutta": 3,
     "upajati_vrutta": 16,
-    "matra_vrutta": 2,
+    "matra_vrutta": 4,
     "akshara_jaati": 20
   },
   "sama_vrutta": [
@@ -28,6 +29,36 @@
       "lakshana": "लगलगगललगलगग",
       "akshara_sankhya": 11,
       "matra": 17,
+      "examples": []
+    },
+    {
+      "vrutta_names": [
+        "शालिनी"
+      ],
+      "gana": "मततगग",
+      "lakshana": "गगगगगलगगलगग",
+      "akshara_sankhya": 11,
+      "matra": 20,
+      "examples": []
+    },
+    {
+      "vrutta_names": [
+        "रथोद्धता"
+      ],
+      "gana": "रनरलग",
+      "lakshana": "गलगलललगलगलग",
+      "akshara_sankhya": 11,
+      "matra": 16,
+      "examples": []
+    },
+    {
+      "vrutta_names": [
+        "स्वागता"
+      ],
+      "gana": "रनभगग",
+      "lakshana": "गलगलललगललगग",
+      "akshara_sankhya": 11,
+      "matra": 16,
       "examples": []
     },
     {
@@ -68,6 +99,46 @@
       "lakshana": "ललगललगललगललग",
       "akshara_sankhya": 12,
       "matra": 16,
+      "examples": []
+    },
+    {
+      "vrutta_names": [
+        "भुजङ्गप्रयात"
+      ],
+      "gana": "यययय",
+      "lakshana": "लगगलगगलगगलगग",
+      "akshara_sankhya": 12,
+      "matra": 20,
+      "examples": []
+    },
+    {
+      "vrutta_names": [
+        "स्रग्विणी"
+      ],
+      "gana": "रररर",
+      "lakshana": "गलगगलगगलगगलग",
+      "akshara_sankhya": 12,
+      "matra": 20,
+      "examples": []
+    },
+    {
+      "vrutta_names": [
+        "प्रहर्षिणी"
+      ],
+      "gana": "मनजरग",
+      "lakshana": "गगगललललगलगलगग",
+      "akshara_sankhya": 13,
+      "matra": 20,
+      "examples": []
+    },
+    {
+      "vrutta_names": [
+        "रुचिरा"
+      ],
+      "gana": "जभसजग",
+      "lakshana": "लगलगललललगलगलग",
+      "akshara_sankhya": 13,
+      "matra": 18,
       "examples": []
     },
     {
@@ -122,6 +193,16 @@
     },
     {
       "vrutta_names": [
+        "हरिणी"
+      ],
+      "gana": "नसमरसलग",
+      "lakshana": "लललललगगगगगलगललगलग",
+      "akshara_sankhya": 17,
+      "matra": 25,
+      "examples": []
+    },
+    {
+      "vrutta_names": [
         "शार्दूलविक्रीडित"
       ],
       "gana": "मसजसततग",
@@ -141,12 +222,66 @@
       "examples": []
     }
   ],
+  "ardhasama_vrutta": [
+    {
+      "vrutta_names": [
+        "पुष्पिताग्रा"
+      ],
+      "odd_pada": {
+        "gana": "ननरय",
+        "lakshana": "ललललललगलगलगग",
+        "akshara_sankhya": 12,
+        "matra": 16
+      },
+      "even_pada": {
+        "gana": "नभजरग",
+        "lakshana": "लललगलललगलगलगग",
+        "akshara_sankhya": 13,
+        "matra": 18
+      }
+    },
+    {
+      "vrutta_names": [
+        "वियोगिनी",
+        "सुन्दरी"
+      ],
+      "odd_pada": {
+        "gana": "ससजग",
+        "lakshana": "ललगललगलगलग",
+        "akshara_sankhya": 10,
+        "matra": 14
+      },
+      "even_pada": {
+        "gana": "सभरलग",
+        "lakshana": "ललगगललगलगलग",
+        "akshara_sankhya": 11,
+        "matra": 16
+      }
+    },
+    {
+      "vrutta_names": [
+        "अपरवक्त्र"
+      ],
+      "odd_pada": {
+        "gana": "ननरलग",
+        "lakshana": "ललललललगलगलग",
+        "akshara_sankhya": 11,
+        "matra": 14
+      },
+      "even_pada": {
+        "gana": "नजजर",
+        "lakshana": "ललललगललगलगलग",
+        "akshara_sankhya": 12,
+        "matra": 16
+      }
+    }
+  ],
   "upajati_vrutta": [
     {
       "vrutta_names": [
         "इन्द्रवज्रा (शुद्ध)"
       ],
-      "pada_pattern": "त-त-त-त",
+      "pada_pattern": "I-I-I-I",
       "padas": [
         {
           "pada": 1,
@@ -176,9 +311,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (ज-त-त-त)"
+        "कीर्ति"
       ],
-      "pada_pattern": "ज-त-त-त",
+      "pada_pattern": "U-I-I-I",
       "padas": [
         {
           "pada": 1,
@@ -208,9 +343,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (त-ज-त-त)"
+        "वाणी"
       ],
-      "pada_pattern": "त-ज-त-त",
+      "pada_pattern": "I-U-I-I",
       "padas": [
         {
           "pada": 1,
@@ -240,9 +375,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (ज-ज-त-त)"
+        "माला"
       ],
-      "pada_pattern": "ज-ज-त-त",
+      "pada_pattern": "U-U-I-I",
       "padas": [
         {
           "pada": 1,
@@ -272,9 +407,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (त-त-ज-त)"
+        "शाला"
       ],
-      "pada_pattern": "त-त-ज-त",
+      "pada_pattern": "I-I-U-I",
       "padas": [
         {
           "pada": 1,
@@ -304,9 +439,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (ज-त-ज-त)"
+        "हंसी"
       ],
-      "pada_pattern": "ज-त-ज-त",
+      "pada_pattern": "U-I-U-I",
       "padas": [
         {
           "pada": 1,
@@ -336,9 +471,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (त-ज-ज-त)"
+        "माया"
       ],
-      "pada_pattern": "त-ज-ज-त",
+      "pada_pattern": "I-U-U-I",
       "padas": [
         {
           "pada": 1,
@@ -368,9 +503,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (ज-ज-ज-त)"
+        "छाया"
       ],
-      "pada_pattern": "ज-ज-ज-त",
+      "pada_pattern": "U-U-U-I",
       "padas": [
         {
           "pada": 1,
@@ -400,9 +535,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (त-त-त-ज)"
+        "बाला"
       ],
-      "pada_pattern": "त-त-त-ज",
+      "pada_pattern": "I-I-I-U",
       "padas": [
         {
           "pada": 1,
@@ -432,9 +567,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (ज-त-त-ज)"
+        "आर्द्रा"
       ],
-      "pada_pattern": "ज-त-त-ज",
+      "pada_pattern": "U-I-I-U",
       "padas": [
         {
           "pada": 1,
@@ -464,9 +599,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (त-ज-त-ज)"
+        "भद्रा"
       ],
-      "pada_pattern": "त-ज-त-ज",
+      "pada_pattern": "I-U-I-U",
       "padas": [
         {
           "pada": 1,
@@ -496,9 +631,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (ज-ज-त-ज)"
+        "प्रेमा"
       ],
-      "pada_pattern": "ज-ज-त-ज",
+      "pada_pattern": "U-U-I-U",
       "padas": [
         {
           "pada": 1,
@@ -528,9 +663,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (त-त-ज-ज)"
+        "रामा"
       ],
-      "pada_pattern": "त-त-ज-ज",
+      "pada_pattern": "I-I-U-U",
       "padas": [
         {
           "pada": 1,
@@ -560,9 +695,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (ज-त-ज-ज)"
+        "ऋद्धि"
       ],
-      "pada_pattern": "ज-त-ज-ज",
+      "pada_pattern": "U-I-U-U",
       "padas": [
         {
           "pada": 1,
@@ -592,9 +727,9 @@
     },
     {
       "vrutta_names": [
-        "उपजाति (त-ज-ज-ज)"
+        "बुद्धि"
       ],
-      "pada_pattern": "त-ज-ज-ज",
+      "pada_pattern": "I-U-U-U",
       "padas": [
         {
           "pada": 1,
@@ -626,7 +761,7 @@
       "vrutta_names": [
         "उपेन्द्रवज्रा (शुद्ध)"
       ],
-      "pada_pattern": "ज-ज-ज-ज",
+      "pada_pattern": "U-U-U-U",
       "padas": [
         {
           "pada": 1,
@@ -685,6 +820,28 @@
       "matra_per_pada": [
         12,
         18,
+        12,
+        18
+      ]
+    },
+    {
+      "vrutta_names": [
+        "उपगीति"
+      ],
+      "matra_per_pada": [
+        12,
+        15,
+        12,
+        15
+      ]
+    },
+    {
+      "vrutta_names": [
+        "उद्गीति"
+      ],
+      "matra_per_pada": [
+        12,
+        15,
         12,
         18
       ]

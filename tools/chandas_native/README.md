@@ -29,36 +29,45 @@ data anywhere in it.
 ## Scope — read this before treating it as a drop-in replacement
 
 This is **not** a full replacement for `tools/chandas/`'s AGPL data yet.
-It's a deliberately smaller, honestly-scoped core:
+It's a deliberately smaller, honestly-scoped core, extended once (21 Aug)
+after a fact-checking pass against real sources found several corrections
+and additions worth keeping — see `dge/PENDING.md` for the full trail:
 
 | category | this directory | AGPL vendor (`tools/chandas/`) |
 |---|---|---|
-| sama-vrutta | 13 (the metres that actually recur throughout classical kavya) | 190 |
-| upajati | 16 (all Indravajra/Upendravajra combinations, generated mechanically) | 42 (individually named) |
-| ardhasama / vishama vrutta | none | 8 / 5 |
-| matra-vrutta | 2 (Arya, Giti) | 10 |
-| akshara-jaati names | 20 (syllable counts 1-20) | 27 |
+| sama-vrutta | 21 | 190 |
+| ardhasama-vrutta | 3 (Pushpitagra, Viyogini/Sundari, Aparavaktra) | 8 |
+| vishama-vrutta | none | 5 |
+| upajati | 16 (all Indravajra/Upendravajra combinations; 14 mixed forms carry a sourced traditional name, see below) | 42 |
+| matra-vrutta | 4 (Arya, Giti, Upagiti, Udgiti) | 10 |
+| akshara-jaati names | 20 (syllable counts 1-20; 21-26 deliberately not included) | 27 |
 | yati (caesura position) | not included | included |
 
-Why smaller rather than padded to match: the 13 sama-vrutta and the
-Anustubh rule were each cross-checked — where a real verse was on hand
-(3 cases, see `verify.py`), by scanning the actual verse and confirming
-the identification; for all 13, additionally by comparing the
-independently-derived `lakshana` pattern against the AGPL vendor's own
-values as a pure QA step (all 13 matched exactly, which is expected and
-unremarkable since these are old public-domain facts, not evidence of
-copying — the derivation went gana-table → pattern, never vendor-CSV →
-pattern). The `yati` field was dropped because the vendor's numbers turned
-out to use a segment-length convention that doesn't reproduce from plain
-recall reliably — guessing at it would have been worse than leaving it
-out. Ardhasama/vishama vrutta (alternating-pada families like Vaitaliya,
-Pushpitagra) need primary-source verification before being added with any
-confidence; they simply aren't attempted here.
+Verification methods used, in increasing order of how much they lean on
+an outside source: (1) scanning a real verse and checking the
+identification — Gita 1.1, two Bhartrhari verses, see `verify.py`; (2)
+internal gana/matra arithmetic — every sama/ardhasama entry's syllable
+and matra counts are derived mechanically from the gana table, not typed
+in by hand, so a transcription slip would show up as an inconsistency;
+(3) for the 13 original sama-vrutta, comparing the independently-derived
+`lakshana` against the AGPL vendor's own values as a pure QA step (all
+matched, expected for old public-domain facts, not evidence of copying);
+(4) for the upajati proper names, decoding a cited source's raw
+laghu/guru symbols by hand — see the note in `build_db.py` right above
+`NAMED_UPAJATI` for a concrete case where two "scholarly-looking" sources
+flatly disagreed and had to be resolved this way rather than trusted on
+authority.
 
-Extending this safely means checking each new entry against a real
-primary source (e.g. a public-domain edition of the Vrittaratnakara or
-Chandomanjari) or a real verse, the same way the 13 above were checked —
-not transcribing more of the vendor's CSVs, which would defeat the point.
+Not included, and why: vishama-vrutta and the Vaitaliya/Aupacchandasika
+matra-vrutta family need a richer schema (terminal-gana rules, not just a
+matra-per-pada count) than exists here yet. Akshara-jaati names above 20
+were left out after three independently-found sources gave three
+different, partly self-inconsistent mappings — better absent than wrong.
+
+Extending this further means the same thing each time: check the new
+entry against a real primary source or a real verse, the way everything
+above was checked — not transcribing more of the AGPL vendor's CSVs,
+which would defeat the point.
 
 ## Status relative to `tools/chandas/`
 

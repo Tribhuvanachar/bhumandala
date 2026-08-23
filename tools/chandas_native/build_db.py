@@ -12,17 +12,17 @@ is firmly public domain -- this file is a clean-room re-derivation from
 that shared traditional knowledge, not a copy of anyone's specific
 compilation or code.
 
-SCOPE, STATED HONESTLY: this is a deliberately smaller core than the
-282-entry hrishikeshrt/chanda catalogue -- it covers the ~15 sama-vrutta
-that are genuinely common in classical kavya (each one I can state with
-high confidence and, where a test verse was available, cross-validated
-syllable-for-syllable), plus a rule-based Anustubh handler, a small
-Arya-family matra-vrutta set, and akshara-count jaati names 1-20.
-Ardhasama/vishama vrutta (alternating-pada families like Vaitaliya,
-Pushpitagra) and the obscure long tail of rare sama-vrutta names are
-deliberately NOT included in this pass -- getting those right needs
-verification against a real primary text, not unverified recall, and
-guessing to pad the count would be worse than a smaller, correct table.
+SCOPE, STATED HONESTLY: still a deliberately smaller core than the
+282-entry hrishikeshrt/chanda catalogue, not padded to match it. As of
+21 Aug this covers 21 sama-vrutta and 3 ardhasama-vrutta, each checked
+either against a real verse, by internal gana/matra arithmetic, or (for
+the upajati proper names) against an independent source's raw prosodic
+symbols -- see PENDING.md for the full verification trail, including one
+place where two outside sources flatly disagreed and had to be resolved
+by hand rather than picked on authority. Vishama-vrutta, the
+Vaitaliya/Aupacchandasika family (their rules go beyond a simple
+matra-per-pada count), and akshara-jaati names above 20 (three
+independently-found sources disagreed on these) are still not included.
 """
 import json
 
@@ -82,12 +82,22 @@ def sama(names, units):
 # 11 syllables -- Indravajra/Upendravajra family (base for upajati below)
 sama(["इन्द्रवज्रा"], "ततजगग")
 sama(["उपेन्द्रवज्रा"], "जतजगग")
+sama(["शालिनी"], "मततगग")  # ma-ta-ta-ga-ga; arithmetic independently re-verified,
+# specific Chandomanjari verse/edition citation not independently confirmed -- see PENDING.md, 21 Aug entry
+sama(["रथोद्धता"], "रनरलग")
+sama(["स्वागता"], "रनभगग")
 
 # 12 syllables
 sama(["वंशस्थ"], "जतजर")
 sama(["इन्द्रवंशा"], "ततजर")
 sama(["द्रुतविलम्बित"], "नभभर")
 sama(["तोटक"], "सससस")
+sama(["भुजङ्गप्रयात"], "यययय")
+sama(["स्रग्विणी"], "रररर")
+
+# 13 syllables
+sama(["प्रहर्षिणी"], "मनजरग")
+sama(["रुचिरा"], "जभसजग")
 
 # 14 syllables
 sama(["वसन्ततिलका"], "तभजजगग")
@@ -99,6 +109,7 @@ sama(["मालिनी"], "ननमयय")
 sama(["मन्दाक्रान्ता"], "मभनततगग")
 sama(["शिखरिणी"], "यमनसभलग")
 sama(["पृथ्वी"], "जसजसयलग")
+sama(["हरिणी"], "नसमरसलग")
 
 # 19 syllables
 sama(["शार्दूलविक्रीडित"], "मसजसततग")
@@ -106,22 +117,80 @@ sama(["शार्दूलविक्रीडित"], "मसजसतत�
 # 21 syllables
 sama(["स्रग्धरा"], "मरभनययय")
 
-# --- Upajati: mechanical combination of Indravajra-type (त) and
-# Upendravajra-type (ज) padas across the 4 lines of a verse. Lakshana is
-# correct by construction; only the two pure forms get their well-known
-# names, mixed forms are labelled by pada-type pattern since I can't
-# verify the traditional proper name for each of the specific combinations
-# from memory.
+
+# --- Ardhasama-vrutta: odd and even padas differ. New category, not
+# present in the first pass. Same discipline as sama(): gana formula in,
+# lakshana/counts derived mechanically, not hand-copied from anywhere.
+ARDHASAMA_VRUTTA = []
+
+
+def ardhasama(names, odd_units, even_units):
+    odd_pat = expand(odd_units)
+    even_pat = expand(even_units)
+    ARDHASAMA_VRUTTA.append({
+        "vrutta_names": names,
+        "odd_pada": {
+            "gana": odd_units, "lakshana": to_dev(odd_pat),
+            "akshara_sankhya": len(odd_pat), "matra": matra(odd_pat),
+        },
+        "even_pada": {
+            "gana": even_units, "lakshana": to_dev(even_pat),
+            "akshara_sankhya": len(even_pat), "matra": matra(even_pat),
+        },
+    })
+
+
+ardhasama(["पुष्पिताग्रा"], "नन" + "रय", "नभजरग")
+ardhasama(["वियोगिनी", "सुन्दरी"], "ससजग", "सभरलग")
+ardhasama(["अपरवक्त्र"], "ननरलग", "नजजर")
+
+# --- Upajati: mechanical combination of Indravajra-type (I) and
+# Upendravajra-type (U) padas across the 4 lines of a verse. Lakshana is
+# correct by construction (concatenated known ganas); the pada_pattern
+# string (e.g. "U-I-I-I") is therefore certain regardless of naming.
+#
+# The traditional Sanskrit proper name for each of the 14 mixed
+# combinations is a separate question from the pattern, and this is where
+# two independently-checked sources genuinely disagreed (see PENDING.md,
+# 21 Aug entry, for the full account): a name/pattern table supplied
+# externally gave e.g. Kirti = I-U-U-U, while
+# https://ancient-buddhist-texts.net/Textual-Studies/Metre-Tables/Tables-14.htm
+# (explicitly citing Vrittaratnakara) gives Kirti = U-I-I-I -- the exact
+# complement. Rather than pick one on authority, 4 of the 14 names below
+# (Kirti, Vani, Ardra, Buddhi) were checked by decoding that page's raw
+# laghu/guru symbols by hand against this file's own gana table -- both
+# padas of each matched Indravajra/Upendravajra exactly, unambiguously.
+# The other 10 names are taken from the same page on the strength of that
+# 4/14 agreement, not independently symbol-checked one by one -- treat
+# those 10 as good-confidence, not certain.
+NAMED_UPAJATI = {
+    (1, 0, 0, 0): "कीर्ति",   # symbol-verified
+    (0, 1, 0, 0): "वाणी",     # symbol-verified
+    (1, 1, 0, 0): "माला",
+    (0, 0, 1, 0): "शाला",
+    (1, 0, 1, 0): "हंसी",
+    (0, 1, 1, 0): "माया",
+    (1, 1, 1, 0): "छाया",
+    (0, 0, 0, 1): "बाला",
+    (1, 0, 0, 1): "आर्द्रा",  # symbol-verified
+    (0, 1, 0, 1): "भद्रा",
+    (1, 1, 0, 1): "प्रेमा",
+    (0, 0, 1, 1): "रामा",
+    (1, 0, 1, 1): "ऋद्धि",
+    (0, 1, 1, 1): "बुद्धि",   # symbol-verified
+}
+
 INDRAVAJRA_PADA = expand("ततजगग")
 UPENDRAVAJRA_PADA = expand("जतजगग")
 
 UPAJATI_VRUTTA = []
 for bits in range(16):  # 4 padas, each either Indravajra(0)/Upendravajra(1)
+    key = tuple((bits >> i) & 1 for i in range(4))
     pattern_letters = []
     padas = []
     for i in range(4):
-        is_upendra = (bits >> i) & 1
-        letter = "ज" if is_upendra else "त"
+        is_upendra = key[i]
+        letter = "U" if is_upendra else "I"
         pat = UPENDRAVAJRA_PADA if is_upendra else INDRAVAJRA_PADA
         pattern_letters.append(letter)
         padas.append({
@@ -136,7 +205,7 @@ for bits in range(16):  # 4 padas, each either Indravajra(0)/Upendravajra(1)
     elif bits == 15:
         name = "उपेन्द्रवज्रा (शुद्ध)"
     else:
-        name = f"उपजाति ({label})"
+        name = NAMED_UPAJATI[key]
     UPAJATI_VRUTTA.append({"vrutta_names": [name], "pada_pattern": label, "padas": padas})
 
 
@@ -166,7 +235,14 @@ ANUSHTUBH_RULE = {
 MATRA_VRUTTA = [
     {"vrutta_names": ["आर्या"], "matra_per_pada": [12, 18, 12, 15]},
     {"vrutta_names": ["गीति"], "matra_per_pada": [12, 18, 12, 18]},
+    {"vrutta_names": ["उपगीति"], "matra_per_pada": [12, 15, 12, 15]},
+    {"vrutta_names": ["उद्गीति"], "matra_per_pada": [12, 15, 12, 18]},
 ]
+# Vaitaliya and Aupacchandasika deliberately NOT added here: they involve
+# structural rules on the terminal ganas of each pada, not just a total
+# matra count per pada, so a [matra_per_pada] entry would misrepresent
+# them as simpler than they are. Needs a dedicated schema field
+# (terminal_pattern / special_rules), not attempted this pass.
 
 
 # --- Akshara-count jaati names, 1-20 syllables. Sequence per pada length,
@@ -183,32 +259,40 @@ AKSHARA_JAATI = [
 ]
 
 if __name__ == "__main__":
-    print(f"sama-vrutta: {len(SAMA_VRUTTA)}, upajati: {len(UPAJATI_VRUTTA)}, "
-          f"matra-vrutta: {len(MATRA_VRUTTA)}, akshara-jaati: {len(AKSHARA_JAATI)}")
+    print(f"sama-vrutta: {len(SAMA_VRUTTA)}, ardhasama-vrutta: {len(ARDHASAMA_VRUTTA)}, "
+          f"upajati: {len(UPAJATI_VRUTTA)}, matra-vrutta: {len(MATRA_VRUTTA)}, "
+          f"akshara-jaati: {len(AKSHARA_JAATI)}")
     db = {
         "schema": "vedanga_chandas_vrutta_database",
         "source": "independently compiled from the standard classical gana "
                    "system (Pingala/Vrittaratnakara/Chandomanjari tradition, "
                    "public domain); not derived from hrishikeshrt/chanda or "
-                   "any other software project's data",
+                   "any other software project's data. Upajati proper names "
+                   "sourced from https://ancient-buddhist-texts.net/Textual-"
+                   "Studies/Metre-Tables/Tables-14.htm (citing Vrittaratnakara), "
+                   "4 of 14 individually verified against its raw laghu/guru "
+                   "symbols -- see PENDING.md, 21 Aug entry.",
         "licence": "Apache-2.0 (matches this repo's default -- no AGPL content)",
         "note": (
             "Deliberately smaller core than a full classical-metre catalogue: "
-            "~15 well-attested sama-vrutta (cross-validated against real "
-            "verses where test verses were available), a rule-based Anustubh "
-            "handler, mechanically-generated Indravajra/Upendravajra upajati "
-            "combinations, a small Arya-family matra-vrutta set, and "
-            "akshara-jaati names 1-20. Ardhasama/vishama vrutta and the rare "
-            "long tail of sama-vrutta names are NOT included -- see README "
-            "for why and what it would take to extend this safely."
+            "21 well-attested sama-vrutta, 3 ardhasama-vrutta, a rule-based "
+            "Anustubh handler, mechanically-generated Indravajra/Upendravajra "
+            "upajati combinations with sourced traditional names, a small "
+            "Arya-family matra-vrutta set (4 entries), and akshara-jaati names "
+            "1-20. Vishama vrutta, Vaitaliya/Aupacchandasika (need a richer "
+            "schema than total matra count), and akshara-jaati 21-26 (three "
+            "independently-found sources disagreed, none adopted) are NOT "
+            "included -- see README and PENDING.md for why."
         ),
         "counts": {
             "sama_vrutta": len(SAMA_VRUTTA),
+            "ardhasama_vrutta": len(ARDHASAMA_VRUTTA),
             "upajati_vrutta": len(UPAJATI_VRUTTA),
             "matra_vrutta": len(MATRA_VRUTTA),
             "akshara_jaati": len(AKSHARA_JAATI),
         },
         "sama_vrutta": SAMA_VRUTTA,
+        "ardhasama_vrutta": ARDHASAMA_VRUTTA,
         "upajati_vrutta": UPAJATI_VRUTTA,
         "anushtubh": ANUSHTUBH_RULE,
         "matra_vrutta": MATRA_VRUTTA,
