@@ -1,5 +1,11 @@
 /* ==========================================================================
- * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.5.0
+ * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.6.1
+ *   v1.6.1 — admin/content/ashtadhyayi-layers.json: a site-wide, admin-level
+ *            visibility gate on commentary layers and enrichment fields
+ *            (distinct from each reader's own layer toggle), fetched fresh
+ *            on every load. Ships with the ashtadhyayi.com English gloss
+ *            field turned off (see dge/PENDING.md, 23 Aug) -- its data was
+ *            also stripped from sutrapatha/data.json, not just hidden here.
  *   v1.2.0 — Stream 5: +Siddhānta-Kaumudī, +Mahābhāṣya, +Vasu(Eng) layers;
  *            padaccheda / anvaya / anuvṛtti / adhikāra / sūtra-type analysis panel.
  *   v1.2.1 — re-applied the shared DGEGemini client to askGemini() (Stream 5's
@@ -49,6 +55,28 @@
   };
   var ORDER = ["kashika","siddhanta_kaumudi","mahabhashya","balamanorama","tattvabodhini","nyasa","vasu"];
   var INMEM = !!window.DGE_INMEM || !!window.DGE_SAMPLE;
+
+  // Site-wide, admin-level gate on which commentary layers (and which
+  // per-sutra enrichment fields, e.g. the removed ashtadhyayi.com English
+  // gloss) are even offered to a reader at all -- see
+  // admin/content/ashtadhyayi-layers.json's own _readme for why this is a
+  // separate thing from state.enabled below (that one is each reader's own
+  // preference among whichever layers THIS gate already approved). Fetched
+  // fresh on every load, no caching, so an admin toggle takes effect for
+  // every visitor without a code deploy. Defaults to "everything visible"
+  // if the config can't be reached, so a fetch hiccup never silently hides
+  // real content -- the config is a deny-list applied on top of ORDER, not
+  // the thing that has to succeed for the reader to see anything.
+  var siteVisibleFields = {};
+  function loadLayerVisibility(){
+    return fetchJSON("../admin/content/ashtadhyayi-layers.json?t=" + Date.now()).then(function(cfg){
+      var layers = (cfg && cfg.layers) || {};
+      ORDER = ORDER.filter(function(k){ return !(layers[k] && layers[k].visible === false); });
+      siteVisibleFields = (cfg && cfg.fields) || {};
+    }).catch(function(){ /* unreachable -- leave ORDER/siteVisibleFields at their defaults */ });
+  }
+  // Per-sutra enrichment field (not a layer/data.json), gated the same way.
+  function fieldVisible(key){ return !(siteVisibleFields[key] && siteVisibleFields[key].visible === false); }
 
   var LS = {
     get: function(k, d){ try { if(INMEM) return (mem[k]!==undefined?mem[k]:d); var v=localStorage.getItem("dge.ash."+k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
@@ -350,7 +378,7 @@
     } else if(row.adhikara){
       rows+=arow("अधिकारः · adhikāra (governing rule)", '<span class="'+devCls+'">'+esc(tl(row.adhikara))+'</span>');
     }
-    if(row.english) rows+=arow("English gloss", esc(row.english));
+    if(row.english && fieldVisible("english")) rows+=arow("English gloss", esc(row.english));
     panel.innerHTML=rows||'<div class="an-empty">No structured analysis on record for this sūtra.</div>';
     var hasStrip=!!s, hasPanel=!!rows;
     $("#dge-pcBtn").style.display=(hasStrip||hasPanel)?"":"none";
@@ -774,7 +802,7 @@
   }
   function boot(){
     wire(); applyPrefs();
-    loadSutrapatha().then(function(){
+    loadLayerVisibility().then(loadSutrapatha).then(function(){
       if(!state.sutras.length){ $("#dge-hsutra").textContent="(no sutra data found)"; return; }
       var dl=$("#dge-sutralist");
       if(dl) dl.innerHTML = state.sutras.map(function(s){ return '<option value="'+s.id+'">'; }).join("");
