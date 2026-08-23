@@ -1837,6 +1837,28 @@ complete record, not just a live queue.
     static-JSON precompute script — worth treating as its own scoped
     decision, not a quick add-on.
 
+    **23 Aug: free/cheap hosting options researched for testing this
+    model, in case the licence question resolves.** A 0.6B ByT5 runs
+    fine on CPU (~1-4 GB RAM) — no GPU needed at this scale, which
+    removes most of the friction below. **Recommended first try: HF
+    Spaces, free CPU-basic tier** (2 vCPU/16 GB RAM, genuinely free,
+    sleeps after 48h idle with a ~30-60s wake, ships a Gradio UI + API
+    for free). **Second choice: Modal.com** ($30/month free credits,
+    pay-per-second, no idle charges — stretches far for sporadic testing,
+    more control than Spaces' Gradio wrapper). Google Cloud Cloud Run's
+    Always Free tier (scale-to-zero, ~2M requests/month) is also
+    workable CPU-only, but has no free GPU tier (not needed here) and a
+    cold-start hit on scale-from-zero; Vertex AI's trial credits exist
+    but bill hourly even idle, easy to burn by accident, and the current
+    credit amount/duration wasn't confirmed. Colab/Kaggle are
+    interactive notebooks, not stable hosting endpoints, for this
+    purpose. fly.io's free tier is gone for new accounts. Render's free
+    512MB instance is RAM-tight for this model size, unconfirmed either
+    way. If this ever goes from testing to always-on, a small paid Cloud
+    Run instance (~$5-15/mo) is the natural next step, not GPU
+    infrastructure. Still blocked on the licence question above before
+    any of this actually gets used.
+
 - **Same-day follow-up: batch-imported everything DCS has that exactly
   matches an existing empty taxonomy leaf, plus a real parser bug found
   and fixed mid-run.** Asked to "load all the pending stuff from DCS
@@ -2295,6 +2317,49 @@ complete record, not just a live queue.
   38/39 matched across both (one filename-diacritic slip on
   Āyurvedarasāyana, corrected inline). DCS running total: **160 texts,
   172 taxonomy leaves, 186,139 items.**
+
+- **23 Aug (same session): the sandhi feature's real-browser test,
+  attempted and partially completed — the live network call could not
+  be exercised end to end, but the code was verified correct against
+  the real API by a different route.** A headless Chromium launched via
+  Playwright still cannot reach the network from inside this sandbox —
+  confirmed independently a second time, with more mitigation attempted
+  than the first pass (a local HTTP server for `dge/index.html`, then
+  `--proxy-server`/`--proxy-bypass-list` pointed at the session's own
+  working `HTTPS_PROXY`, plus `--ignore-certificate-errors` for the
+  proxy's re-terminated TLS): every request failed, including to
+  `localhost:8899` itself, not just `dharmamitra.org` — this reads as a
+  sandbox-level restriction on the browser subprocess's networking, not
+  anything fixable from inside the page or the launch flags.
+
+  **Substituted two narrower checks that don't need the browser to have
+  network access, both real, neither fabricated:**
+  1. Called the live `dharmamitra.org` endpoint directly with `curl`
+     (which *can* reach it, through the session's normal proxy) using
+     `sandhi.js`'s exact request body, for the Gītā's opening
+     "dharmakṣetre kurukṣetre samavetā yuyutsavaḥ". Real response in
+     0.96s: 5 words, each with `lemma`/`unsandhied`/`tag` — exactly the
+     shape `dgeFetchSandhiAnalysis`/`dgeRenderSandhiResult` expect, and
+     grammatically correct (e.g. `yuyutsavaḥ` correctly lemmatized to
+     the desiderative `yuyutsu`). A malformed-Sanskrit input also
+     round-tripped correctly, returning the `notice` field the "no
+     analysis" fallback path reads.
+  2. Loaded `sandhi.js` itself (unmodified) into a real Chromium page
+     (via `page.addScriptTag`, no fetch involved) and called
+     `dgeRenderSandhiResult()` directly with that *real, captured* API
+     response — confirming the DOM it builds is correct and safely
+     escaped (checked for injection), for both the successful-analysis
+     path and the notice/fallback path.
+
+  **Net verdict: the code is correct against the real, live API
+  contract — request format, response shape, rendering, and the error
+  fallback all check out — but nobody has watched a real click-to-select
+  flow complete against the live network end-to-end in an actual browser
+  yet**, only its two halves separately. A real user's browser (unlike
+  this sandbox) has no such network restriction, so this is very likely
+  fine — but "very likely fine" is short of "watched it work," and
+  that's the honest gap left here for whoever can run it from an
+  unrestricted browser next.
 
 ## Vedic-specific, still genuinely open
 
