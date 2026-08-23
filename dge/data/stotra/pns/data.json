@@ -1,7 +1,8 @@
 {
   "metadata": {
     "title": "॥ प्रह्लादकृत नृसिंह स्तोत्र ॥",
-    "author": "By Tribhuvan Achar",
+    "author": "Bhakta Prahlada (traditional; per dge/data/taxonomy.json stotra.pns._default_author)",
+    "contributor": "Tribhuvan Achar (source/transcription credit; was previously mislabeled as the stotra's 'author')",
     "stotraCode": "pns",
     "archiveBaseUrl": "https://archive.org/download/svg_3bu1_pns/",
     "filePrefix": "NS",
@@ -13,6 +14,28 @@
       "mandanandini": "मन्दनन्दिनी",
       "tatparyam": "तात्पर्यम्",
       "footnotes": "Footnotes"
+    },
+    "commentaryAuthors": {
+      "padaratnavali": {
+        "commentator": "Vijayadhvaja Tirtha",
+        "confidence": "inferred",
+        "note": "A tika also named 'Padaratnavali' in dge/data/taxonomy.json (dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_padaratnavali) is attributed to Vijayadhvaja Tirtha. Prahlada's Nrsimha Stotra occurs within the Bhagavata (canto 7), so a Bhagavata-Tatparya-Nirnaya sub-tika family plausibly extends to it -- title match only, not independently confirmed for this specific stotra."
+      },
+      "satyadharmiya": {
+        "commentator": "Satyadharma Tirtha",
+        "confidence": "confirmed",
+        "note": "Matches dge/data/commentators.json 'satyadharma_tirtha', cross-referenced from multiple tika_satyadharma*/tika_shrisatyadharma entries under the same Bhagavata Tatparya Nirnaya branch of taxonomy.json, and directly supported by the title 'Satyadharmiya' (= 'of Satyadharma')."
+      },
+      "mandanandini": {
+        "commentator": "Vyasatattvajna",
+        "confidence": "inferred",
+        "note": "A tika also named 'Mandanandini' in taxonomy.json (dvaitavedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_mandanandini) is attributed to 'Sri Vyasatattvajna' -- an epithet, not a common personal name; possibly refers to Sri Vyasatirtha (Vyasaraja) but this is not confirmed. Title match only."
+      },
+      "tatparyam": {
+        "commentator": null,
+        "confidence": "unconfirmed",
+        "note": "No matching tika title found anywhere in dge/data/taxonomy.json. Author not established from available project data -- do not guess."
+      }
     }
   },
   "shlokas": {
