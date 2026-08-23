@@ -6,6 +6,10 @@ tools/sayana_smriti/.httpcache/
 tools/sayana_smriti/dump/
 tools/sayana_smriti/*.log
 
+# Wikisource Pancharatra importer's resume cache -- same idea, deleted
+# automatically once a fetch completes; only ever present mid-run.
+dge/data/**/*.progress.json
+
 # Firebase tooling: installed locally, never committed.
 node_modules/
 dge/firebase/**/node_modules/
