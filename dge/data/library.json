@@ -8477,6 +8477,71 @@
       "path": "dge/data/dvaitavedanta/later_acharyas/nyaya_sudha/tika_yadupatyam/data.json",
       "populated": true,
       "title": "श्रीमन्न्यायसुधा — यादुपत्यम्"
+    },
+    {
+      "path": "dge/data/darshana/sankhya/sutra_and_karika/samkhya_karika/mula/data.json",
+      "populated": false,
+      "title": "साङ्ख्यकारिका"
+    },
+    {
+      "path": "dge/data/darshana/sankhya/sutra_and_karika/samkhya_karika/tika_gaudapada/data.json",
+      "populated": false,
+      "title": "साङ्ख्यकारिका (गौडपादभाष्यम्)"
+    },
+    {
+      "path": "dge/data/darshana/sankhya/sutra_and_karika/samkhya_karika/tika_mathara/data.json",
+      "populated": false,
+      "title": "साङ्ख्यकारिका (माठरवृत्तिः)"
+    },
+    {
+      "path": "dge/data/darshana/sankhya/sutra_and_karika/samkhya_karika/tika_tattva_kaumudi/data.json",
+      "populated": true,
+      "title": "साङ्ख्यकारिका (तत्त्वकौमुदी)"
+    },
+    {
+      "path": "dge/data/darshana/sankhya/sutra_and_karika/samkhya_karika/tika_yuktidipika/data.json",
+      "populated": false,
+      "title": "साङ्ख्यकारिका (युक्तिदीपिका)"
+    },
+    {
+      "path": "dge/data/darshana/sankhya/sutra_and_karika/samkhya_sutra/mula/data.json",
+      "populated": false,
+      "title": "साङ्ख्यसूत्राणि"
+    },
+    {
+      "path": "dge/data/darshana/sankhya/sutra_and_karika/samkhya_sutra/bhashya_vijnanabhikshu/data.json",
+      "populated": false,
+      "title": "साङ्ख्यसूत्राणि (साङ्ख्यप्रवचनभाष्यम्)"
+    },
+    {
+      "path": "dge/data/darshana/sankhya/sutra_and_karika/samkhya_sutra/vritti_aniruddha/data.json",
+      "populated": false,
+      "title": "साङ्ख्यसूत्राणि (अनिरुद्धवृत्तिः)"
+    },
+    {
+      "path": "dge/data/darshana/yoga/sutra_and_bhashya/yoga_sutra/mula/data.json",
+      "populated": true,
+      "title": "योगसूत्राणि"
+    },
+    {
+      "path": "dge/data/darshana/yoga/sutra_and_bhashya/yoga_sutra/bhashya_vyasa/data.json",
+      "populated": true,
+      "title": "योगसूत्राणि (व्यासभाष्यम्)"
+    },
+    {
+      "path": "dge/data/darshana/yoga/sutra_and_bhashya/yoga_sutra/tika_tattva_vaisharadi/data.json",
+      "populated": false,
+      "title": "योगसूत्राणि (तत्त्ववैशारदी)"
+    },
+    {
+      "path": "dge/data/darshana/yoga/sutra_and_bhashya/yoga_sutra/varttika_vijnanabhikshu/data.json",
+      "populated": false,
+      "title": "योगसूत्राणि (योगवार्त्तिकम्)"
+    },
+    {
+      "path": "dge/data/darshana/yoga/sutra_and_bhashya/yoga_sutra/tika_rajamartanda/data.json",
+      "populated": false,
+      "title": "योगसूत्राणि (राजमार्तण्डः)"
     }
   ]
 }

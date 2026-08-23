@@ -1540,6 +1540,68 @@
      }
     }
    }
+  },
+  "sankhya": {
+   "sutra_and_karika": {
+    "samkhya_karika": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Ishvarakrishna"
+     },
+     "tika_gaudapada": {
+      "_schema": "grantha_tika_text"
+     },
+     "tika_mathara": {
+      "_schema": "grantha_tika_text"
+     },
+     "tika_tattva_kaumudi": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Vachaspati Mishra"
+     },
+     "tika_yuktidipika": {
+      "_schema": "grantha_tika_text"
+     }
+    },
+    "samkhya_sutra": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     },
+     "bhashya_vijnanabhikshu": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Vijnanabhikshu"
+     },
+     "vritti_aniruddha": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Aniruddha"
+     }
+    }
+   }
+  },
+  "yoga": {
+   "sutra_and_bhashya": {
+    "yoga_sutra": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Patanjali"
+     },
+     "bhashya_vyasa": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Vyasa"
+     },
+     "tika_tattva_vaisharadi": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Vachaspati Mishra"
+     },
+     "varttika_vijnanabhikshu": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Vijnanabhikshu"
+     },
+     "tika_rajamartanda": {
+      "_schema": "grantha_tippani_text",
+      "_default_author": "Bhoja"
+     }
+    }
+   }
   }
  },
  "smriti_dharma": {

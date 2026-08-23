@@ -23,17 +23,35 @@ single-level texts (Suryasiddhanta, Sivasutra).
 import glob
 import json
 import os
+import re
 
 from skrutable.transliteration import Transliterator
 
 _translit = Transliterator(from_scheme="IAST", to_scheme="DEV")
 
+_NUMERIC_FIELD = re.compile(r"-?\d+(?:\.\d+)*")
+
 
 def _parse_chapter_path(line):
-    """'## chapter: MS, 1, 1, 1' -> '1.1.1'; '## chapter: SūrSiddh, 1' -> '1'."""
+    """'## chapter: MS, 1, 1, 1' -> '1.1.1'; '## chapter: SūrSiddh, 1' -> '1'.
+
+    A 4th convention, found in Sāṃkhyatattvakaumudī (23 Aug, batch 4): a
+    single comma-field can itself already be dot-separated, e.g.
+    '## chapter: STKau zu SāṃKār, 1.2' (kārikā 1, subsection 2) -- one
+    field, not several comma-separated ones. The original version only
+    accepted a bare integer per comma-field and silently produced no
+    chapter_path (and hence 0 items) for this text -- caught by the
+    established discipline of treating an implausible item count as a
+    bug, not a small text. Each comma-field matching digits optionally
+    dot-separated is now split on '.' and the pieces flattened in, so
+    both conventions -- several single-integer fields, or one
+    already-dotted field -- produce the same joined path."""
     value = line.split(":", 1)[1].strip()
     parts = [p.strip() for p in value.split(",")]
-    numeric_parts = [p for p in parts[1:] if p.lstrip("-").isdigit()]
+    numeric_parts = []
+    for p in parts[1:]:
+        if _NUMERIC_FIELD.fullmatch(p):
+            numeric_parts.extend(p.lstrip("-").split("."))
     return ".".join(numeric_parts) if numeric_parts else None
 
 

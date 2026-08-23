@@ -1999,6 +1999,73 @@ complete record, not just a live queue.
   Amṛtabindu, Śira), still have no taxonomy leaf — the genuine residual
   gap, smaller than the proposal originally claimed.
 
+- **23 Aug (next session): started Tier B, and hit an open question
+  before drafting the other four gap clusters.** Instructed to defer
+  Tier D (kāvya-dist routing) and go ahead with Tier B (the genuine
+  taxonomy gaps: Āyurveda+Rasaśāstra+Nighaṇṭu, Buddhist literature,
+  Sāṃkhya, Yoga, Tantra/Śaiva-Śākta naming, Nīti/Nāṭya/Kāma/Alaṃkāra-śāstra).
+  Before drafting new top-level structure from scratch, checked what the
+  codebase itself already assumes: `dge/js/library.js`'s `DGE_PATH_LABELS`
+  dict carries a comment naming "the recommended DGE taxonomy
+  (`DGE_Shastra_Taxonomy.md`)" as the thing it's tracking — and that file
+  **does not exist anywhere in this repo** (confirmed by search, not
+  assumed absent). The dict already has Devanagari labels for `sankhya`
+  and `yoga` under `darshana`, but nothing for `ayurveda`, Buddhist
+  literature, or Tantra. That's a real, load-bearing distinction: Sāṃkhya
+  and Yoga are pre-planned by whatever authored that reference document,
+  the other four Tier B clusters are not confirmed against it at all —
+  building them now would mean inventing structure that might conflict
+  with a document this session cannot see. **Still open: does the project
+  lead have `DGE_Shastra_Taxonomy.md`, or is inventing the remaining four
+  clusters' structure the right call regardless?**
+
+  Proceeded only with the confirmed-safe part: added `darshana.sankhya`
+  (`sutra_and_karika`: `samkhya_karika` with `mula`/`tika_gaudapada`/
+  `tika_mathara`/`tika_tattva_kaumudi`/`tika_yuktidipika`, and
+  `samkhya_sutra` with `mula`/`bhashya_vijnanabhikshu`/`vritti_aniruddha`)
+  and `darshana.yoga` (`sutra_and_bhashya.yoga_sutra` with `mula` plus 4
+  commentary leaves) to `taxonomy.json`, mirroring the sibling
+  `mula`+`tika_*` pattern already used by `nyaya_sutra`/`vaisheshika_sutra`.
+  Note the folder is spelled `sankhya`, matching `DGE_PATH_LABELS`'s key
+  exactly — caught by grepping `library.js` before writing `library.json`,
+  not assumed from the Sanskrit transliteration convention used
+  elsewhere in this session's own file/slug names (which would have
+  produced the wrong, unmatched `samkhya`).
+
+  Of the 13 leaves drafted, checked against the DCS mirror by listing
+  (not assumed): **Sāṃkhyakārikā and Sāṃkhyasūtra's own mūla texts are
+  not in DCS at all** — only Sāṃkhyatattvakaumudī (a commentary) is.
+  Yogasūtra mūla and its Vyāsabhāṣya both are. Imported via
+  `tools/dcs/build_batch4_samkhya_yoga.py`: 20 + 186 + 785 = 991 items
+  across those 3 leaves; the other 10 stay `populated: false` stubs.
+  Content spot-checked against independently known text: Yogasūtra 1.1 is
+  the universally known "अथ योगानुशासनम्", its final sūtra is the equally
+  known "...कैवल्यं स्वरूपप्रतिष्ठा वा चितिशक्तिः", and Yogasūtrabhāṣya's
+  first unit is Vyāsa's own gloss on the word *atha*.
+
+  **A real bug found and fixed while running this, not after** (same
+  discipline as the 24 Aug prose-brāhmaṇa parser fix): Sāṃkhyatattvakaumudī's
+  `## chapter:` line is a single already-dotted field (`STKau zu SāṃKār,
+  1.2`) rather than several comma-separated bare integers — the only DCS
+  text seen so far with this 4th convention. The original
+  `_parse_chapter_path` silently produced `chapter_path = None` for every
+  sentence in it (0 items from 14 files — caught as implausible, the same
+  standard applied to every count in this project, not accepted as "just
+  a short text"). Fixed in `tools/dcs/dcs_common.py` to accept a
+  comma-field that is itself dot-separated digits; re-verified
+  byte-identical against every already-shipped import (pilot, batches
+  1–3) before trusting it on new data. Sāṃkhyatattvakaumudī went 0 → 20
+  items, and — because the same convention turned out to affect
+  Yogasūtrabhāṣya too — that text's first (silently wrong) count of 106
+  corrected to 785.
+
+  DCS running total: **59 texts, 71 taxonomy leaves, 106,140 items.**
+  Tier B's other four clusters (Āyurveda+Rasaśāstra+Nighaṇṭu, Buddhist
+  literature, Tantra/Śaiva-Śākta naming, Nīti/Nāṭya/Kāma/Alaṃkāra-śāstra)
+  remain unstarted, blocked on the `DGE_Shastra_Taxonomy.md` question
+  above. Tier D (kāvya-dist routing) remains deliberately deferred per
+  this session's instruction.
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are

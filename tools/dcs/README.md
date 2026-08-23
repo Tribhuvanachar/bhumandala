@@ -8,7 +8,10 @@ text with an exact top-level taxonomy match (13 texts), the second
 fine-grained `vedanga/kalpa` śākhā structure and splitting a few texts
 across several existing leaves by book number — and added 36 more
 single-leaf imports plus 4 split imports (spanning 16 leaves between
-them). **51 DCS texts in now, across 63 taxonomy leaves, 103,442 items
+them), then a third pass (`build_batch3_upanishads.py`, 5 mula-Upaniṣads)
+and a fourth (`build_batch4_samkhya_yoga.py`, see below) that also added
+new taxonomy nodes rather than only filling existing empty leaves.
+**59 DCS texts in now, across 71 taxonomy leaves, 106,140 items
 total.** Still well short of DCS's full 253-text corpus;
 see the taxonomy-placement proposal (linked from `dge/PENDING.md`'s 24 Aug
 entries) for what's left and where it likely goes.
@@ -130,10 +133,71 @@ provenance, same reasoning as `tools/chandas/vendor`), generated
 the project lead lifted the earlier 1 GB caution (`dge/PENDING.md`: "1GB
 is just a recommendation, 5GB+ is the real ceiling").
 
+## Third import, batch 3 (`build_batch3_upanishads.py`) — a proposal correction
+
+The taxonomy-placement proposal in `dge/PENDING.md` had listed "Upaniṣad
+mūla texts" as a Tier B gap needing new taxonomy structure. Checking
+`library.json` directly (not trusting the proposal) found that precise
+empty leaves already exist per Veda/śākhā — no new structure needed, just
+5 more single-leaf imports: Chāndogya, Kaṭha, Taittirīya, Aitareya,
+Muṇḍaka Upaniṣad. Bṛhadāraṇyakopaniṣad deliberately excluded — DCS's own
+"BĀU" chapter headers don't distinguish the Kāṇva vs Mādhyandina
+recension, and the taxonomy has separate empty leaves for each; guessing
+would risk mislabeling a real textual variant.
+
+## Fourth import, batch 4 (`build_batch4_samkhya_yoga.py`) — new taxonomy nodes, and a fourth parser convention
+
+Unlike every prior batch, this one didn't just fill an existing empty
+leaf — `darshana.sankhya` and `darshana.yoga` didn't exist in
+`taxonomy.json` yet. They were added deliberately narrowly: `dge/js/library.js`'s
+`DGE_PATH_LABELS` dict already carries Devanagari labels for `sankhya`
+and `yoga` (note the spelling — `sankhya`, not `samkhya` — matched
+exactly rather than guessed) under a comment naming an external
+"recommended DGE taxonomy (`DGE_Shastra_Taxonomy.md`)" reference document
+that does **not** actually exist anywhere in this repo (confirmed by
+search). That's the *only* reason Sāṃkhya/Yoga were added here and
+Āyurveda/Buddhist-literature/Tantra were not — no such label precedent
+exists for those. See `dge/PENDING.md` for this open question, unresolved
+as of this batch.
+
+New nodes: `darshana.sankhya.sutra_and_karika` (`samkhya_karika` and
+`samkhya_sutra`, each `mula` + several `tika_*`/`bhashya_*` sibling
+leaves, mirroring the existing `nyaya_sutra`/`vaisheshika_sutra` pattern)
+and `darshana.yoga.sutra_and_bhashya.yoga_sutra` (`mula` + 4 commentary
+leaves). 13 leaves drafted; only 3 have a DCS match — **Sāṃkhyakārikā
+and Sāṃkhyasūtra's own mūla texts are not in the DCS mirror at all**
+(checked by listing, not assumed), only a commentary
+(Sāṃkhyatattvakaumudī) is. Yogasūtra mūla and its Vyāsabhāṣya are both
+present and imported; the other 10 leaves stay `populated: false` stubs,
+same as any other planned-but-unsourced grantha elsewhere in this
+taxonomy.
+
+**A 4th DCS chapter-numbering convention was found and fixed while
+running this, not after** (same discipline as the 24 Aug prose-brāhmaṇa
+fix): Sāṃkhyatattvakaumudī's `## chapter:` line is a single already-dotted
+field (`STKau zu SāṃKār, 1.2`), not several comma-separated bare
+integers like every text seen before it. The original `_parse_chapter_path`
+only accepted a bare integer per comma-field, so this text silently
+produced `chapter_path = None` for every sentence — 0 items from 14
+files, caught as implausible rather than accepted as "this text is just
+short." Fixed in `dcs_common.py` by accepting a comma-field that is
+itself a dot-separated run of digits and splitting it in; re-verified
+byte-identical against every already-shipped import (pilot + batches
+1–3) before trusting the fix on new data. Sāṃkhyatattvakaumudī went from
+0 → 20 items, and — because the same convention turned out to affect
+Yogasūtrabhāṣya too — that text's count went from a first, silently-wrong
+106 items to a correct 785.
+
+Content sanity-checked against independently known text, not just
+valid JSON: Yogasūtra 1.1 is the universally known opening "अथ
+योगानुशासनम्", its last sūtra is the equally well-known "पुरुषार्थशून्यानां
+गुणानां प्रतिप्रसवः...कैवल्यम्", and Yogasūtrabhāṣya's very first unit is
+Vyāsa's own "अथेत्ययमधिकारार्थः" gloss on the word *atha*.
+
 ## Scaling beyond this batch — not done here
 
-DCS has 253 texts total; 15 are in now (Sūryasiddhānta, Śivasūtra, and
-this batch's 13). Remaining candidates for a future pass:
+DCS has 253 texts total; 59 are in now, across 71 taxonomy leaves,
+106,140 items. Remaining candidates for a future pass:
 
 - The exact-match pass found everything with a *precisely*-named existing
   leaf. It will have missed real matches with slightly different naming
@@ -143,11 +207,14 @@ this batch's 13). Remaining candidates for a future pass:
   (`brahma_khanda`, `purva_bhaga`, etc.) are still `populated: false` and
   may have DCS matches under different sub-section naming — not checked.
 - Where there's no empty leaf at all, taxonomy placement needs deciding
-  first — most of DCS's Āyurveda/Tantra texts have no home yet, the same
-  open question `dge/PENDING.md` already flags for Āyurveda/Kāmaśāstra.
+  first — most of DCS's Āyurveda/Tantra/Buddhist texts have no home yet,
+  and (as of batch 4) there's a *specific* open question blocking that:
+  whether `DGE_Shastra_Taxonomy.md` — referenced by name in
+  `dge/js/library.js` but absent from the repo — actually defines homes
+  for them, which this session cannot see to check.
 - An ongoing sync job (checking `OliverHellwig/sanskrit` for upstream
   updates) is worth building now that there's a real imported corpus
-  (15 texts, ~35,700 items) to keep in sync — the earlier "premature"
+  (59 texts, ~106,000 items) to keep in sync — the earlier "premature"
   call no longer applies at this scale, but it's still not started.
 
 None of this is started; it's scoped here so the next pass doesn't have to
