@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.13 (Dhātu modal now renders the full tinanta paradigm -- all 8 lakāras, tap any cell for its step-by-step derivation -- instead of just the one matched form\'s steps; every cell\'s derivation was already sitting in the same prakriya JSON already being fetched, so this is a render-only change, no new data. Everything from v3.12 -- Vidyut fallback chain, real sandhi-split index, inline कोश panel -- unchanged)';
+window.DGE_VERSIONS['ai.js'] = 'v3.14 (Dhātu modal now also shows AI (Gemini) multilingual meanings + pedagogical usage notes, from tools/gemini_dhatu_lexicon.py -- independently composed, not copied from ashtadhyayi.com or any other source, clearly labeled "AI-generated (Gemini), unreviewed", loaded independently of the primary paradigm so a slow/missing lexicon file never blocks it. Everything from v3.13 -- full tinanta paradigm, Vidyut fallback chain, real sandhi-split index, inline कोश panel -- unchanged)';
 
 // Appends a language directive read from onboarding.js's saved preference
 // (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
@@ -1070,7 +1070,16 @@ function dgeEnsureWordModalStyle() {
     '.dge-word-modal .dsm-kosha-entry b{color:var(--accent-red);}',
     '.dge-word-modal .dsm-kosha-more{width:100%;margin-top:8px;}',
     '.dge-word-modal .dsm-sandhi-row{padding:6px 0;font-size:14px;border-bottom:1px dashed var(--card-border);}',
-    '.dge-word-modal .dsm-sandhi-row .dge-sutra-ref{margin-left:6px;font-size:11px;color:var(--muted-text);cursor:pointer;text-decoration:underline dotted;}'
+    '.dge-word-modal .dsm-sandhi-row .dge-sutra-ref{margin-left:6px;font-size:11px;color:var(--muted-text);cursor:pointer;text-decoration:underline dotted;}',
+    '.dge-word-modal .dsm-ai-tag{display:inline-block;margin-left:6px;font-size:9.5px;font-weight:600;color:var(--muted-text);background:var(--card-bg);border:1px solid var(--card-border);border-radius:4px;padding:1px 5px;text-transform:none;letter-spacing:0;}',
+    '.dge-word-modal .dsm-lex-langs{display:grid;grid-template-columns:1fr;gap:2px;margin-bottom:10px;}',
+    '.dge-word-modal .dsm-lex-row{display:flex;gap:8px;padding:4px 0;font-size:12.5px;border-bottom:1px dashed var(--card-border);}',
+    '.dge-word-modal .dsm-lex-row b{flex:0 0 78px;color:var(--muted-text);font-weight:700;}',
+    '.dge-word-modal .dsm-lex-pedagogy{font-size:13px;line-height:1.55;}',
+    '.dge-word-modal .dsm-lex-pedagogy>p{margin:0 0 8px;color:var(--muted-text);}',
+    '.dge-word-modal .dsm-lex-scenario{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:12.5px;}',
+    '.dge-word-modal .dsm-lex-example{margin-top:4px;font-size:14px;}',
+    '.dge-word-modal .dsm-lex-example-en{color:var(--muted-text);font-size:12px;font-style:italic;}'
   ].join('\n');
   document.head.appendChild(style);
 }
@@ -1618,6 +1627,57 @@ function dgeWireDhatuFormsTable(body, d, initialKey) {
   });
 }
 
+// AI (Gemini) multilingual meanings + pedagogical usage notes, from
+// tools/gemini_dhatu_lexicon.py -- independently composed content, not
+// copied from ashtadhyayi.com or any other source (see that script's own
+// docstring and dge/PENDING.md's 23 Aug entry for why this exists).
+// Loaded independently of the primary paradigm render and appended if/when
+// ready, same reasoning as dgeKoshaPanelHtml above: this file can grow to
+// several MB across the whole Dhatupatha, so it must never be allowed to
+// stall the modal's already-ready primary content.
+let DGE_DHATU_LEXICON_CACHE = null;
+function dgeFetchDhatuLexicon() {
+  if (!DGE_DHATU_LEXICON_CACHE) {
+    DGE_DHATU_LEXICON_CACHE = fetch('data/vedanga/vyakarana/dhatu_lexicon/data.json', { cache: 'force-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        const byId = {};
+        (d && d.items || []).forEach(function (it) { byId[it.id] = it; });
+        return byId;
+      })
+      .catch(function () { return null; });
+  }
+  return DGE_DHATU_LEXICON_CACHE;
+}
+const DGE_LEXICON_LANGS = ['English', 'Kannada', 'Telugu', 'Tamil', 'Malayalam', 'Hindi',
+  'Bengali', 'German', 'French', 'Russian', 'Chinese'];
+function dgeDhatuLexiconHtml(entry) {
+  if (!entry) return '';
+  const m = entry.meanings || {};
+  const rows = DGE_LEXICON_LANGS.filter(function (l) { return m[l] && m[l] !== '(uncertain)'; })
+    .map(function (l) {
+      return '<div class="dsm-lex-row"><b>' + dgeShabdaEsc(l) + '</b><span>' + dgeShabdaEsc(m[l]) + '</span></div>';
+    }).join('');
+  if (!rows) return '';
+  let h = '<div class="dsm-section-label">बहुभाषा अर्थाः · Multilingual Meanings' +
+    '<span class="dsm-ai-tag">AI-generated (Gemini), unreviewed</span></div>' +
+    '<div class="dsm-lex-langs">' + rows + '</div>';
+  const ped = entry.pedagogy;
+  if (ped && (ped.concept || (ped.scenarios || []).length)) {
+    h += '<div class="dsm-lex-pedagogy">' + (ped.concept ? '<p>' + dgeShabdaEsc(ped.concept) + '</p>' : '');
+    (ped.scenarios || []).forEach(function (s) {
+      h += '<div class="dsm-lex-scenario"><b class="deva">' + dgeShabdaEsc(s.form) + '</b>' +
+        (s.grammar_trigger ? ' <span style="color:var(--muted-text);">(' + dgeShabdaEsc(s.grammar_trigger) + ')</span>' : '') +
+        ' — ' + dgeShabdaEsc(s.meaning) +
+        (s.example_sanskrit ? '<div class="dsm-lex-example deva">' + dgeShabdaEsc(s.example_sanskrit) + '</div>' : '') +
+        (s.example_english ? '<div class="dsm-lex-example-en">' + dgeShabdaEsc(s.example_english) + '</div>' : '') +
+        '</div>';
+    });
+    h += '</div>';
+  }
+  return h;
+}
+
 window.dgeOpenDhatuForSelection = function(e) {
   if (e) e.preventDefault();
   const word = dgeSelectedWordText();
@@ -1641,8 +1701,15 @@ window.dgeOpenDhatuForSelection = function(e) {
           '<div class="dsm-sub">from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '" · गणः ' + dgeShabdaEsc(d.gana != null ? d.gana : '') + ' · ' + dgeShabdaEsc(d.pada || '') + '</div>' +
           dgeDhatuFormsHtml(d, hit.k) +
           '<div id="ddmSteps"></div>' +
-          '<a class="dsm-full-link" href="prakriya.html#' + dgeShabdaEsc(hit.c) + ':' + dgeShabdaEsc(hit.k) + '" target="_blank">View in full प्रक्रिया browser ↗</a>';
+          '<a class="dsm-full-link" href="prakriya.html#' + dgeShabdaEsc(hit.c) + ':' + dgeShabdaEsc(hit.k) + '" target="_blank">View in full प्रक्रिया browser ↗</a>' +
+          '<div id="ddmLexicon"></div>';
         dgeWireDhatuFormsTable(body, d, hit.k);
+        dgeWithTimeout(dgeFetchDhatuLexicon(), 8000, null).then(function (byId) {
+          const lexHtml = dgeDhatuLexiconHtml(byId && byId[hit.c]);
+          const box = body.querySelector('#ddmLexicon');
+          if (!lexHtml || !box || !box.isConnected) return;
+          box.outerHTML = '<div>' + lexHtml + '</div>';
+        });
       })
       .catch(() => dgeShowDhatuNotFound(body, word));
   });
