@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.12 (merges the subanta-prakriya/where-else Shabda enhancement with a further one: Shabda\'s fallback chain now continues past the fixed shabdapatha/kridanta lists into Vidyut\'s own live morphology, then a real precomputed Vidyut sandhi-split, before an honest not-found, and shows the first 3 कोश dictionary results inline with a see-more link; the Sandhi word-tool checks that same real sandhi-split index first, AI only on a miss; Samasa remains AI-only -- Vidyut genuinely has no compound-analysis capability)';
+window.DGE_VERSIONS['ai.js'] = 'v3.13 (Dhātu modal now renders the full tinanta paradigm -- all 8 lakāras, tap any cell for its step-by-step derivation -- instead of just the one matched form\'s steps; every cell\'s derivation was already sitting in the same prakriya JSON already being fetched, so this is a render-only change, no new data. Everything from v3.12 -- Vidyut fallback chain, real sandhi-split index, inline कोश panel -- unchanged)';
 
 // Appends a language directive read from onboarding.js's saved preference
 // (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
@@ -1049,6 +1049,14 @@ function dgeEnsureWordModalStyle() {
     '.dge-word-modal table.dsm-table th{color:var(--muted-text);font-size:10.5px;font-weight:700;}',
     '.dge-word-modal table.dsm-table td:first-child,.dge-word-modal table.dsm-table th:first-child{text-align:left;color:var(--muted-text);}',
     '.dge-word-modal table.dsm-table td.dsm-hl{background:rgba(226,102,74,.28);font-weight:700;border-radius:6px;}',
+    '.dge-word-modal table.dsm-table td.sst-cell-hint{cursor:pointer;}',
+    '.dge-word-modal table.dsm-table td.sst-cell-on{outline:2px solid var(--accent-red);outline-offset:-2px;border-radius:6px;}',
+    '.dge-word-modal .dsm-lakara-block{margin-top:10px;border:1px solid var(--card-border);border-radius:var(--radius-sm);padding:0 10px 8px;}',
+    '.dge-word-modal .dsm-lakara-block summary{cursor:pointer;padding:9px 0;font-size:14px;font-weight:700;color:var(--accent-red);list-style:none;}',
+    '.dge-word-modal .dsm-lakara-block summary::-webkit-details-marker{display:none;}',
+    '.dge-word-modal .dsm-lakara-block summary::before{content:"▸ ";display:inline-block;transition:transform .15s;}',
+    '.dge-word-modal .dsm-lakara-block[open] summary::before{transform:rotate(90deg);}',
+    '.dge-word-modal .dsm-lakara-en{font-size:11px;font-weight:600;color:var(--muted-text);}',
     '.dge-word-modal .dsm-steps{list-style:none;margin:8px 0 0;padding:0;}',
     '.dge-word-modal .dsm-steps li{display:flex;gap:10px;align-items:baseline;padding:5px 0;border-bottom:1px dashed var(--card-border);font-size:13px;}',
     '.dge-word-modal .dsm-code{flex:0 0 62px;font-family:monospace;color:var(--muted-text);font-size:11px;}',
@@ -1549,6 +1557,67 @@ function dgeShowDhatuNotFound(body, surface) {
   });
 }
 
+// Full tinanta paradigm (all 8 lakāras × 3 puruṣa × 3 vacana), rendered as
+// one collapsible block per lakāra -- the matched lakāra opens expanded, the
+// rest are there to browse without a second lookup. Unlike the Śabda
+// declension table (which needs subanta-steps.js's live WASM engine for a
+// derivation, since not every form is precomputed), a root's prakriya JSON
+// already carries `steps` for all 72 cells alongside `forms` -- the exact
+// same fetch dgeOpenDhatuForSelection already made, just not fully used
+// until now. No extra request, no build-time work.
+function dgeDhatuFormsHtml(d, hlKey) {
+  const lakaras = ['Lat', 'Lit', 'Lut', 'Lrt', 'Lot', 'Lan', 'VidhiLin', 'Lun'];
+  const hlLakara = hlKey ? hlKey.split('.')[0] : null;
+  return lakaras.map(function (lk) {
+    let t = '<table class="dsm-table"><thead><tr><th></th><th class="deva">एक.</th><th class="deva">द्वि.</th><th class="deva">बहु.</th></tr></thead><tbody>';
+    for (let p = 0; p < 3; p++) {
+      t += '<tr><th class="deva">' + DGE_PURUSHA[p] + '</th>';
+      for (let v = 0; v < 3; v++) {
+        const key = lk + '.' + p + v;
+        const forms = (d.forms && d.forms[key]) || [];
+        const hl = (key === hlKey);
+        const has = forms.length > 0;
+        t += '<td class="deva' + (hl ? ' dsm-hl' : '') + (has ? ' sst-cell-hint' : '') + '"' +
+          (has ? ' data-dk="' + dgeShabdaEsc(key) + '" title="रूपसिद्धिः — tap for the derivation"' : '') + '>' +
+          dgeShabdaEsc(forms.join(', ')) + '</td>';
+      }
+      t += '</tr>';
+    }
+    t += '</tbody></table>';
+    return '<details class="dsm-lakara-block"' + (lk === hlLakara ? ' open' : '') + '>' +
+      '<summary class="deva">' + dgeShabdaEsc(DGE_LAKARA[lk]) + ' <span class="dsm-lakara-en">· ' + dgeShabdaEsc(DGE_LAKARA_EN[lk]) + '</span></summary>' +
+      t + '</details>';
+  }).join('');
+}
+
+function dgeDhatuStepsFor(body, d, key) {
+  const box = body.querySelector('#ddmSteps');
+  if (!box) return;
+  body.querySelectorAll('td.sst-cell-on').forEach(function (td) { td.classList.remove('sst-cell-on'); });
+  const cell = body.querySelector('td[data-dk="' + key + '"]');
+  if (cell) cell.classList.add('sst-cell-on');
+  const variants = (d.steps && d.steps[key]) || [];
+  if (!variants.length) { box.innerHTML = ''; return; }
+  box.innerHTML = '<div class="dsm-section-label">रूपसिद्धिः · Derivation</div>' + variants.map(function (v) {
+    return '<div class="dsm-word deva" style="font-size:15px;">' + dgeShabdaEsc(v.t) + '</div>' + dgeShabdaStepsHtml(v.s);
+  }).join('<hr style="border:none;border-top:1px dashed var(--card-border);margin:10px 0;">');
+}
+
+// Wires tap-any-cell-for-its-derivation across the whole paradigm, not just
+// the originally matched cell -- every cell's steps are already sitting in
+// `d.steps`, so there is no async engine call here at all, unlike the Śabda
+// table's subanta-steps.js.
+function dgeWireDhatuFormsTable(body, d, initialKey) {
+  dgeDhatuStepsFor(body, d, initialKey);
+  body.querySelectorAll('td[data-dk]').forEach(function (td) {
+    td.addEventListener('click', function () {
+      dgeDhatuStepsFor(body, d, td.dataset.dk);
+      const box = body.querySelector('#ddmSteps');
+      if (box && box.scrollIntoView) box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+}
+
 window.dgeOpenDhatuForSelection = function(e) {
   if (e) e.preventDefault();
   const word = dgeSelectedWordText();
@@ -1567,18 +1636,13 @@ window.dgeOpenDhatuForSelection = function(e) {
       .then(function (d) {
         const step = d && d.steps && d.steps[hit.k] && d.steps[hit.k][0];
         if (!d || !step) { dgeShowDhatuNotFound(body, word); return; }
-        const parts = hit.k.split('.');
-        const lakara = parts[0];
-        const purusha = parseInt(parts[1][0], 10);
-        const vacana = parseInt(parts[1][1], 10);
         body.innerHTML =
           '<div class="dsm-word deva">' + dgeShabdaEsc(word) + '</div>' +
           '<div class="dsm-sub">from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '" · गणः ' + dgeShabdaEsc(d.gana != null ? d.gana : '') + ' · ' + dgeShabdaEsc(d.pada || '') + '</div>' +
-          '<div class="dsm-kv"><div class="dsm-kk">रूपम्</div><div class="dsm-kvv deva">' +
-            dgeShabdaEsc(DGE_LAKARA[lakara] || lakara) + ' (' + dgeShabdaEsc(DGE_LAKARA_EN[lakara] || '') + ') · ' +
-            dgeShabdaEsc(DGE_PURUSHA[purusha] || '') + ' · ' + dgeShabdaEsc(DGE_VACANA[vacana] || '') + '</div></div>' +
-          dgeShabdaStepsHtml(step.s) +
+          dgeDhatuFormsHtml(d, hit.k) +
+          '<div id="ddmSteps"></div>' +
           '<a class="dsm-full-link" href="prakriya.html#' + dgeShabdaEsc(hit.c) + ':' + dgeShabdaEsc(hit.k) + '" target="_blank">View in full प्रक्रिया browser ↗</a>';
+        dgeWireDhatuFormsTable(body, d, hit.k);
       })
       .catch(() => dgeShowDhatuNotFound(body, word));
   });
