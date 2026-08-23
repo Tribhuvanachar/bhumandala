@@ -1803,6 +1803,113 @@ complete record, not just a live queue.
     browser is a live person's browser completing this exact fetch to
     dharmamitra.org, so it's worth a real check after deploy.
 
+  - **New source flagged, licence checked, not used: ByT5-Sanskrit, the
+    model actually behind dharmamitra.org.** Asked whether "the logic"
+    could be replicated locally. It isn't a rule engine to reimplement —
+    it's a 0.6B-parameter ByT5 transformer (`chronbmm/sanskrit5-multitask`
+    on HuggingFace, base model `buddhist-nlp/byt5-sanskrit`), fine-tuned
+    on DCS data by Sebastian Nehrdich and Oliver Hellwig (DCS's own
+    author) with Kurt Keutzer, published EMNLP 2024 Findings
+    (arXiv:2409.13920, "One Model is All You Need: ByT5-Sanskrit").
+    Inference code is public at `github.com/dharmamitra/byt5-sanskrit-
+    analyzers` (the `applications/` folder runs the model locally, given
+    the weights) — genuinely a better path than a hand-written rule-based
+    splitter would be, since sandhi/compound segmentation is ambiguous
+    enough that this became a trained-model research problem in the first
+    place, not something rules alone solve well.
+    **Licence checked directly, not assumed: unspecified everywhere it
+    could be stated.** The GitHub repo has no LICENSE file (confirmed by
+    listing every file in a full clone, not just checking common
+    filenames) and no licence classifier in any config. The HuggingFace
+    model card for `chronbmm/sanskrit5-multitask` states "[More
+    Information Needed]" for licence. The `buddhist-nlp/byt5-sanskrit`
+    base model card has no licence field at all. Only the *paper itself*
+    carries an explicit licence (CC BY 4.0, on arXiv) — that covers the
+    publication text, not the code or model weights, which is a normal
+    and important distinction (arXiv's CC BY default applies to the
+    submission, not automatically to linked artifacts). Under this
+    project's own "no explicit licence = not cleared" rule
+    (`dge/kosha_toolkit/LICENSING.md`), this is **Unclear**, the same
+    category as several already-loaded kosha sources — not used here,
+    logged for a future case-by-case call. If ever pursued, it's also a
+    real infrastructure step up from anything in this project so far: a
+    Python ML inference environment (transformers/torch), not another
+    static-JSON precompute script — worth treating as its own scoped
+    decision, not a quick add-on.
+
+- **Same-day follow-up: batch-imported everything DCS has that exactly
+  matches an existing empty taxonomy leaf, plus a real parser bug found
+  and fixed mid-run.** Asked to "load all the pending stuff from DCS
+  which our taxonomy folders are missing." Ran a precise match (not the
+  23 Aug rough keyword pass): normalize both DCS's 253 texts.csv names
+  and every `library.json` leaf's title/path segment (strip diacritics,
+  lowercase, alnum-only) and require an exact match — deliberately no
+  fuzzy matching, so nothing lands in the wrong place silently. Found 13:
+
+  | DCS text | items | taxonomy leaf |
+  |---|---|---|
+  | Agnipurāṇa | 610 | `purana/agni_purana/` |
+  | Matsyapurāṇa | 8,341 | `purana/matsya_purana/` (all 175 chapters DCS has) |
+  | Kālikāpurāṇa | 288 | `purana/upapuranas/kalika_purana/` |
+  | Narasiṃhapurāṇa | 35 | `purana/upapuranas/narasimha_purana/` |
+  | Varāhapurāṇa | 39 | `purana/varaha_purana/` |
+  | Gautamadharmasūtra | 891 | `vedanga/kalpa/independent_dharmasutras/gautama_dharmasutra/` |
+  | Nirukta | 610 | `vedanga/nirukta/` |
+  | Gopathabrāhmaṇa | 4,241 | `vedas/atharvaveda/shaunaka_shakha/brahmana/gopatha_brahmana/` |
+  | Aitareya-Āraṇyaka | 862 | `vedas/rigveda/shakala_shakha/aranyakas/aitareya_aranyaka/` |
+  | Aitareyabrāhmaṇa | 3,733 | `vedas/rigveda/shakala_shakha/brahmanas/aitareya_brahmana/` |
+  | Jaiminīyabrāhmaṇa | 7,325 | `vedas/samaveda/jaiminiya_shakha/brahmanas/jaiminiya_brahmana/` |
+  | Sāmavidhānabrāhmaṇa | 330 | `vedas/samaveda/kauthuma_shakha/brahmanas/samavidhana_brahmana/` |
+  | Maitrāyaṇīsaṃhitā | 7,954 | `vedas/yajurveda/krishna_yajurveda/maitrayani_shakha/samhita/maitrayani_samhita/` |
+
+  **~35,300 new items, `library.json`'s `populated` flag flipped `true`
+  on all 13**, `tools/validate_data.py` clean (0 errors, same 3
+  pre-existing warnings). Content spot-checked, not just JSON-validated:
+  Nirukta 1.1.1 is Yāska's own opening line ("समाम्नायः समाम्नातः"),
+  Maitrāyaṇī Saṃhitā 1.1.1.1 is the well-known Yajurveda opening ("इषे
+  त्वा सुभूताय") — both independently recognizable as correct, not just
+  well-formed.
+
+  **A real parser bug surfaced mid-run, caught by checking output
+  plausibility rather than trusting the item count.** `dcs_common.py`
+  only handled DCS's verse-pada convention (`sent_counter`/
+  `sent_subcounter` alternating 1/2). Running it on Aitareya Brāhmaṇa —
+  285 real `.conllu` files — produced 8 items. Eight, from 285 files: an
+  obviously-wrong number, not accepted at face value. Inspecting the raw
+  files directly (not guessing from the item count) found two more
+  conventions DCS actually uses: prose files leave `sent_subcounter`
+  blank on *every* sentence rather than omitting the field, since prose
+  doesn't pair into padas — the fix must not skip these units, but also
+  must not confuse them with the separate case (found earlier, in
+  Matsyapurāṇa) of an isolated genuinely-blank subcounter amid otherwise-
+  numbered verse text. And roughly 20% of Aitareya/Jaiminīya Brāhmaṇa's
+  files have no counter fields at all, only a bare `# sent_id =
+  NNNNNN_M`. For that fallback, consecutive sentences (e.g. `650034_1`,
+  `650034_2`) turned out to be independently complete sentences in the
+  files actually read, not two halves of one verse -- so the fix
+  deliberately gives each its own item via a per-file running index
+  rather than grouping by sent_id's own numbering, which would have
+  risked merging unrelated sentences into one. Fixed, then the two
+  already-shipped imports (Sūryasiddhānta, Śivasūtra) were re-run and
+  diffed byte-for-byte against their pre-fix output to confirm zero
+  regression before trusting the fix on new data. Aitareya Brāhmaṇa then
+  produced 3,733 items; Jaiminīya Brāhmaṇa went from 9 to 7,325.
+  Full account, including which of the three conventions applies to which
+  text, is in `dcs_common.py`'s own docstrings (`_parse_int`,
+  `parse_conllu_file`) — read those before extending this further.
+
+  **Not done, deliberately:** vendor size is now ~54 MB (`.conllu`
+  sources) plus a few MB of generated JSON per large text, committed
+  directly to `main` rather than a CDN branch, per the project lead's
+  already-recorded decision to lift the 1 GB caution. Remaining DCS texts
+  (238 of 253) either didn't match an existing leaf under this
+  conservative exact-match rule (a fuzzier, human-checked pass would
+  likely find more) or have no taxonomy placement decided yet
+  (Āyurveda/Tantra, same open question as before) — `tools/dcs/README.md`
+  has the specifics. No sync pipeline built yet either, though with 15
+  texts / ~35,700 items now in, that's a more defensible next step than
+  it was at 2 texts.
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are

@@ -1,8 +1,12 @@
-# DCS pilot import — licence-clean, scale-cautious
+# DCS import — licence-clean, scale-cautious
 
-A pilot import from the **Digital Corpus of Sanskrit** (DCS), proving out
-the conversion from DCS's CoNLL-U format into DGE's schema on one text
-before deciding whether to scale to the rest of the corpus.
+Imports from the **Digital Corpus of Sanskrit** (DCS) into DGE's schema.
+Started as a one-text pilot (Sūryasiddhānta) to prove out the CoNLL-U
+conversion, then a second import (Śivasūtra) to prove a safe way to find
+more candidates, then a 24 Aug batch pass that imported everything an
+exact taxonomy match could find — 15 texts, ~35,700 items total. Still
+well short of DCS's full 253-text corpus; see "Scaling beyond this batch"
+below for what that would take.
 
 ## Licence — the clean case, unlike chandas/skrutable
 
@@ -21,17 +25,18 @@ way for IAST→Devanagari conversion; no skrutable source lives in this repo.
 
 ## What's here
 
-- `vendor/conllu/` — the two source `.conllu` files for Sūryasiddhānta
-  (chapters 1-2 as excerpted in DCS, 139 verses; the primary DCS mirror
-  carries only these two chapters of this text, not the full classical
-  14-chapter Sūryasiddhānta), copied verbatim from
-  `github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Sūryasiddhānta`.
-- `build_jyotisha_pilot.py` — parses the CoNLL-U (grouping DCS's per-pada
-  "sentences" into whole verses via `sent_counter`/`sent_subcounter`),
-  transliterates to Devanagari, and writes `dge/data/vedanga/jyotisha/data.json`
-  in the `generic` schema (the site's fallback schema for a taxonomy leaf
-  with no bespoke content model — `jyotisha`'s `data.json` already declared
-  `"schema": "generic"` before this pilot, as an empty stub).
+- `dcs_common.py` — shared CoNLL-U → DGE `generic`-schema conversion:
+  `parse_conllu_file()` handles the three DCS sentence-numbering
+  conventions found so far (see the 24 Aug section below), and
+  `build_generic_import()` writes a schema-conformant `data.json`.
+- `vendor/conllu/`, `vendor/conllu_sivasutra/`, and one subdirectory per
+  24-Aug-batch text under `vendor/` — source `.conllu` files copied
+  verbatim from `github.com/OliverHellwig/sanskrit/.../dcs/data/conllu/files/<text>`,
+  kept for provenance.
+- `build_jyotisha_pilot.py`, `build_sivasutra.py`, `build_batch.py` — the
+  three import passes, each writing its target `data.json` in the site's
+  `generic` schema (the fallback schema for a taxonomy leaf with no
+  bespoke content model).
 
 ## Why Sūryasiddhānta, why jyotisha
 
@@ -68,38 +73,77 @@ an empty `agama/pancharatra/shaiva_agama/data.json` leaf exactly, same
 safe pattern as the Sūryasiddhānta pilot. `build_sivasutra.py` reuses the
 CoNLL-U parsing now factored into `dcs_common.py`.
 
-## Scaling beyond the two imports so far — not done here
+## Batch import, 24 Aug — every exact taxonomy match, plus a real parser bug found and fixed
 
-DCS has 253 texts total, ~1.5 GB in the primary mirror. Two are in
-(Sūryasiddhānta, Śivasūtra); scaling further means, for each candidate:
+A proper normalized match (strip diacritics, lowercase, alnum-only; exact
+match required, no fuzzy matching) between all 253 DCS text names and
+every `populated: false` leaf in `library.json` found 13 clean matches
+— see `build_batch.py` for the list and `dge/PENDING.md`'s 24 Aug entry
+for the full match table. All 13 imported:
 
-1. **Check for an existing empty (`populated: false`) taxonomy leaf
-   first** — the check described above, not optional. A rough one-time
-   pass (keyword-matching DCS's `texts.csv` against `library.json`, done
-   23 Aug, see `dge/PENDING.md`) found real matches worth checking
-   properly and importing the same way:
-   - `Matsyapurāṇa` → `purana/matsya_purana/` (currently empty) — but this
-     is DCS's **full text, 174 chapter files**, a much bigger job than
-     either import so far; deserves its own pass, not a rushed add-on.
-   - Several `Skandapurāṇa`/`Liṅgapurāṇa`/`Kūrmapurāṇa`/etc. sub-leaves
-     (`brahma_khanda`, `purva_bhaga`, etc.) are `populated: false` and may
-     have DCS matches — not individually checked yet.
-   - `Vaiśeṣikasūtra`, `Yogasūtra`-family, `Sāṃkhyakārikā` and its
-     commentaries under `darshana/` — same pattern as Śivasūtra, not
-     checked yet.
-   - The rough keyword pass left 184/253 DCS texts "unclassified" — real
-     classification (not keyword-matching) is needed before knowing what
-     else fits an empty leaf vs. needs a placement decision.
-2. Where there's no empty leaf, resolve taxonomy placement first — most of
-   DCS's Āyurveda/Tantra texts have no home yet, the same open question
-   `dge/PENDING.md` already flags for Āyurveda/Kāmaśāstra generally.
-3. Decide the distribution mechanism once volume grows past what belongs
-   in `main` — this project's existing pattern is a CDN-served sibling
-   branch (`kavya-dist`, `wordnet-dist`) or a separate hand-created repo
-   (`bhumandala-kosha-data`), not committing large corpora directly.
-4. An ongoing sync job (checking `OliverHellwig/sanskrit` for upstream
-   updates) is worth building once there's a large enough imported corpus
-   to keep in sync — premature with two texts in.
+| text | items | landed in |
+|---|---|---|
+| Agnipurāṇa | 610 | `purana/agni_purana/` |
+| Matsyapurāṇa | 8,341 | `purana/matsya_purana/` (all 175 chapters DCS carries) |
+| Kālikāpurāṇa | 288 | `purana/upapuranas/kalika_purana/` |
+| Narasiṃhapurāṇa | 35 | `purana/upapuranas/narasimha_purana/` |
+| Varāhapurāṇa | 39 | `purana/varaha_purana/` |
+| Gautamadharmasūtra | 891 | `vedanga/kalpa/independent_dharmasutras/gautama_dharmasutra/` |
+| Nirukta | 610 | `vedanga/nirukta/` |
+| Gopathabrāhmaṇa | 4,241 | `vedas/atharvaveda/shaunaka_shakha/brahmana/gopatha_brahmana/` |
+| Aitareya-Āraṇyaka | 862 | `vedas/rigveda/shakala_shakha/aranyakas/aitareya_aranyaka/` |
+| Aitareyabrāhmaṇa | 3,733 | `vedas/rigveda/shakala_shakha/brahmanas/aitareya_brahmana/` |
+| Jaiminīyabrāhmaṇa | 7,325 | `vedas/samaveda/jaiminiya_shakha/brahmanas/jaiminiya_brahmana/` |
+| Sāmavidhānabrāhmaṇa | 330 | `vedas/samaveda/kauthuma_shakha/brahmanas/samavidhana_brahmana/` |
+| Maitrāyaṇīsaṃhitā | 7,954 | `vedas/yajurveda/krishna_yajurveda/maitrayani_shakha/samhita/maitrayani_samhita/` |
+
+**~35,300 items total**, all cross-checked for content sanity (not just
+valid-JSON) — several land on independently-verifiable famous openings,
+e.g. Nirukta 1.1.1 is Yāska's own "समाम्नायः समाम्नातः" and Maitrāyaṇī
+Saṃhitā 1.1.1.1 is the well-known Yajurveda opening "इषे त्वा सुभूताय".
+
+**A real bug was found and fixed while running this, not after**:
+`dcs_common.py`'s original parser only handled one DCS sentence-numbering
+convention (`sent_counter`/`sent_subcounter`, alternating for verse
+padas). Running it on prose texts surfaced two more it didn't handle:
+Aitareya/Jaiminīya Brāhmaṇa's prose files leave `sent_subcounter` blank
+on *every* sentence (no pada pairing) rather than omitting it, and some
+files (~20% of Aitareya/Jaiminīya Brāhmaṇa) have no counter fields at
+all, only a `sent_id`. The first version of the fix silently dropped
+those units — went from "285 files → 8 items" (obviously wrong) to
+"285 files → 3,733 items" only after actually inspecting raw file content
+rather than trusting the item count. See the docstrings on
+`_parse_int`/`parse_conllu_file` in `dcs_common.py` for the three
+conventions now handled, and why the no-counters fallback deliberately
+never merges consecutive sentences (each gets its own item) rather than
+guessing they pair up.
+
+**Vendor size**: `vendor/` is now ~54 MB of source `.conllu` (kept for
+provenance, same reasoning as `tools/chandas/vendor`), generated
+`data.json` output adds a few more MB per large text (Matsyapurāṇa's is
+4.6 MB). Committed directly to `main`, not routed through a CDN branch —
+the project lead lifted the earlier 1 GB caution (`dge/PENDING.md`: "1GB
+is just a recommendation, 5GB+ is the real ceiling").
+
+## Scaling beyond this batch — not done here
+
+DCS has 253 texts total; 15 are in now (Sūryasiddhānta, Śivasūtra, and
+this batch's 13). Remaining candidates for a future pass:
+
+- The exact-match pass found everything with a *precisely*-named existing
+  leaf. It will have missed real matches with slightly different naming
+  (spelling variants, abbreviations) — a fuzzier pass, checked by a human
+  before importing rather than auto-matched, would find more.
+- Several `Skandapurāṇa`/`Liṅgapurāṇa`/`Kūrmapurāṇa`/etc. sub-leaves
+  (`brahma_khanda`, `purva_bhaga`, etc.) are still `populated: false` and
+  may have DCS matches under different sub-section naming — not checked.
+- Where there's no empty leaf at all, taxonomy placement needs deciding
+  first — most of DCS's Āyurveda/Tantra texts have no home yet, the same
+  open question `dge/PENDING.md` already flags for Āyurveda/Kāmaśāstra.
+- An ongoing sync job (checking `OliverHellwig/sanskrit` for upstream
+  updates) is worth building now that there's a real imported corpus
+  (15 texts, ~35,700 items) to keep in sync — the earlier "premature"
+  call no longer applies at this scale, but it's still not started.
 
 None of this is started; it's scoped here so the next pass doesn't have to
 re-derive it.

@@ -5915,7 +5915,7 @@
     },
     {
       "path": "dge/data/purana/agni_purana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Agni Purana"
     },
     {
@@ -6135,7 +6135,7 @@
     },
     {
       "path": "dge/data/purana/matsya_purana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Matsya Purana"
     },
     {
@@ -6305,7 +6305,7 @@
     },
     {
       "path": "dge/data/purana/upapuranas/kalika_purana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Kalika Purana"
     },
     {
@@ -6315,7 +6315,7 @@
     },
     {
       "path": "dge/data/purana/upapuranas/narasimha_purana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Narasimha Purana"
     },
     {
@@ -6340,7 +6340,7 @@
     },
     {
       "path": "dge/data/purana/varaha_purana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Varaha Purana"
     },
     {
@@ -6530,7 +6530,7 @@
     },
     {
       "path": "dge/data/vedanga/kalpa/independent_dharmasutras/gautama_dharmasutra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Gautama Dharmasutra"
     },
     {
@@ -6730,7 +6730,7 @@
     },
     {
       "path": "dge/data/vedanga/nirukta/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Nirukta"
     },
     {
@@ -7120,7 +7120,7 @@
     },
     {
       "path": "dge/data/vedas/atharvaveda/shaunaka_shakha/brahmana/gopatha_brahmana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Gopatha Brahmana"
     },
     {
@@ -7315,7 +7315,7 @@
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/aranyakas/aitareya_aranyaka/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Aitareya Aranyaka"
     },
     {
@@ -7325,7 +7325,7 @@
     },
     {
       "path": "dge/data/vedas/rigveda/shakala_shakha/brahmanas/aitareya_brahmana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Aitareya Brahmana"
     },
     {
@@ -7405,7 +7405,7 @@
     },
     {
       "path": "dge/data/vedas/samaveda/jaiminiya_shakha/brahmanas/jaiminiya_brahmana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Jaiminiya Brahmana"
     },
     {
@@ -7450,7 +7450,7 @@
     },
     {
       "path": "dge/data/vedas/samaveda/kauthuma_shakha/brahmanas/samavidhana_brahmana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Samavidhana Brahmana"
     },
     {
@@ -7525,7 +7525,7 @@
     },
     {
       "path": "dge/data/vedas/yajurveda/krishna_yajurveda/maitrayani_shakha/samhita/maitrayani_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Maitrayani Samhita"
     },
     {

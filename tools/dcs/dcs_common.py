@@ -8,39 +8,109 @@ or, for prose sutra texts, one whole sutra; `sent_counter` groups a text's
 sentences into verses/units, `sent_subcounter` orders the padas within one
 (sutra texts have exactly one subcounter per unit; verse texts typically
 have two, matching a shloka's two half-verses).
+
+CHAPTER NESTING, fixed after a real near-miss (23 Aug): DCS's "## chapter:"
+line isn't always a single number -- e.g. Maitrayani Samhita uses "MS, 1,
+1, 1" (Kanda.Prapathaka.Anuvaka), Aitareya Brahmana uses "AB, 1, 2"
+(Pancika.Khanda). Extracting only the trailing number, as an earlier
+version of this file did, silently collapsed distinct sections onto the
+same id (e.g. "MS, 1, 1, 5" and "MS, 1, 2, 5" would both become chapter 5)
+and would have overwritten data. Fixed by keeping the FULL numeric path
+after the text abbreviation, joined with '.' -- correct at any nesting
+depth, and identical output to before for the two already-shipped
+single-level texts (Suryasiddhanta, Sivasutra).
 """
 import glob
 import json
 import os
-import re
 
 from skrutable.transliteration import Transliterator
-
-CHAPTER_RE = re.compile(r",\s*(\d+)\s*$|,\s*(\d+)-\d+")
 
 _translit = Transliterator(from_scheme="IAST", to_scheme="DEV")
 
 
+def _parse_chapter_path(line):
+    """'## chapter: MS, 1, 1, 1' -> '1.1.1'; '## chapter: SūrSiddh, 1' -> '1'."""
+    value = line.split(":", 1)[1].strip()
+    parts = [p.strip() for p in value.split(",")]
+    numeric_parts = [p for p in parts[1:] if p.lstrip("-").isdigit()]
+    return ".".join(numeric_parts) if numeric_parts else None
+
+
+def _parse_int(line):
+    """Return the integer after '=', or None if missing/malformed. Two
+    distinct blank-value cases were found, 24 Aug, and are NOT the same
+    thing: (1) prose texts (e.g. Aitareya Brahmana, Jaiminiya Brahmana)
+    leave 'sent_subcounter' blank on EVERY sentence -- there's no pada
+    pairing in prose, so the caller treats a blank subcounter as 1, not
+    missing; (2) a handful of individual sentences (e.g. in Matsyapurana)
+    have a genuinely blank 'sent_subcounter' amid otherwise-numbered
+    verse text -- a real data gap, correctly skipped by the caller when
+    this returns None for something that ISN'T uniformly blank across
+    the file. This function only reports what it sees; the caller
+    decides which case applies."""
+    value = line.split("=", 1)[1].strip()
+    return int(value) if value.isdigit() else None
+
+
 def parse_conllu_file(path):
-    """Yield (chapter_num, sent_counter, sent_subcounter, iast_text)."""
-    chapter_num = None
+    """Yield (chapter_path, sent_counter, sent_subcounter, iast_text).
+    Silently skips units with a missing/malformed counter -- see _parse_int
+    for the two distinct blank-subcounter cases this handles differently."""
     with open(path, encoding="utf-8") as f:
-        text = counter = subcounter = None
-        for line in f:
-            line = line.rstrip("\n")
-            if line.startswith("## chapter:"):
-                m = CHAPTER_RE.search(line)
-                if m:
-                    chapter_num = int(m.group(1) or m.group(2))
-            elif line.startswith("# text = "):
-                text = line[len("# text = "):].strip()
-            elif line.startswith("# sent_counter = "):
-                counter = int(line.split("=")[1].strip())
-            elif line.startswith("# sent_subcounter = "):
-                subcounter = int(line.split("=")[1].strip())
-                if text is not None and counter is not None and chapter_num is not None:
-                    yield chapter_num, counter, subcounter, text
+        lines = [l.rstrip("\n") for l in f]
+
+    # Prose texts leave sent_subcounter blank on every sentence (no pada
+    # pairing); verse texts populate it (1, 2, ...) except for isolated
+    # real data gaps. Decide once per file which situation this is.
+    subcounter_lines = [l for l in lines if l.startswith("# sent_subcounter = ")]
+    file_has_no_subcounters = bool(subcounter_lines) and all(_parse_int(l) is None for l in subcounter_lines)
+
+    # A third convention, found in some Aitareya/Jaiminiya Brahmana files:
+    # no sent_counter/sent_subcounter fields at all, only '# sent_id =
+    # NNNNNN_M' per sentence. Two consecutive sentences here (e.g.
+    # 650034_1, 650034_2) are each grammatically complete on their own in
+    # the files checked, not two halves of one verse -- so this fallback
+    # deliberately does NOT group by sent_id's own numbering (which would
+    # risk merging genuinely separate sentences into one unit). Instead
+    # every sentence in such a file gets its own running index, subcounter
+    # fixed at 1, guaranteeing no merging regardless of what the sent_id
+    # numbers mean.
+    has_counters = any(l.startswith("# sent_counter = ") for l in lines)
+
+    chapter_path = None
+    text = counter = subcounter = None
+    running_index = 0
+
+    def ready():
+        return text is not None and counter is not None and subcounter is not None and chapter_path is not None
+
+    for line in lines:
+        if line.startswith("## chapter:"):
+            chapter_path = _parse_chapter_path(line)
+        elif line.startswith("# text = "):
+            # A new sentence starting means the previous one (if any) is
+            # complete -- matters only for the no-counters fallback, where
+            # there's no explicit "end of unit" marker line like
+            # sent_subcounter to flush on.
+            if not has_counters and ready():
+                yield chapter_path, counter, subcounter, text
+            text = line[len("# text = "):].strip()
+            if not has_counters:
+                running_index += 1
+                counter, subcounter = running_index, 1
+        elif line.startswith("# sent_counter = "):
+            counter = _parse_int(line)
+        elif line.startswith("# sent_subcounter = "):
+            parsed = _parse_int(line)
+            subcounter = 1 if (parsed is None and file_has_no_subcounters) else parsed
+            if has_counters:
+                if ready():
+                    yield chapter_path, counter, subcounter, text
                 text = None
+
+    if not has_counters and ready():
+        yield chapter_path, counter, subcounter, text
 
 
 def build_generic_import(
@@ -49,18 +119,22 @@ def build_generic_import(
 ):
     """Parse every .conllu file in vendor_dir and write a DGE 'generic'
     schema data.json to out_path. Returns (item_count, chapters_seen)."""
-    padas_by_unit = {}  # (chapter, unit) -> {subcounter: iast_text}
+    padas_by_unit = {}  # (chapter_path, unit) -> {subcounter: iast_text}
     for path in sorted(glob.glob(os.path.join(vendor_dir, "*.conllu"))):
-        for chapter, unit, subcounter, iast in parse_conllu_file(path):
-            key = (chapter, unit)
+        for chapter_path, unit, subcounter, iast in parse_conllu_file(path):
+            key = (chapter_path, unit)
             padas_by_unit.setdefault(key, {})[subcounter] = iast
 
+    def sort_key(k):
+        chapter_path, unit = k
+        return ([int(p) for p in chapter_path.split(".")], unit)
+
     items = []
-    for (chapter, unit) in sorted(padas_by_unit):
-        padas = padas_by_unit[(chapter, unit)]
+    for (chapter_path, unit) in sorted(padas_by_unit, key=sort_key):
+        padas = padas_by_unit[(chapter_path, unit)]
         iast_full = " ".join(padas[k] for k in sorted(padas))
         devanagari = _translit.transliterate(iast_full)
-        item_id = f"{chapter}.{unit}"
+        item_id = f"{chapter_path}.{unit}"
         items.append({
             "id": item_id,
             "title": item_id,
@@ -73,17 +147,19 @@ def build_generic_import(
             "tags": [tag],
         })
 
+    chapters_seen = sorted(set(c for c, u in padas_by_unit),
+                            key=lambda c: [int(p) for p in c.split(".")])
     out = {
         "schema": "generic",
         "default_author": default_author,
         "source": source_name,
         "source_url": source_url,
         "licence": licence,
-        "note": note.format(count=len(items), chapters=sorted(set(c for c, u in padas_by_unit))),
+        "note": note.format(count=len(items), chapters=chapters_seen),
         "items": items,
     }
 
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
 
-    return len(items), sorted(set(c for c, u in padas_by_unit))
+    return len(items), chapters_seen
