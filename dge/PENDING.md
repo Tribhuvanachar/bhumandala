@@ -2180,6 +2180,122 @@ complete record, not just a live queue.
   zero misses this round. DCS running total: **122 texts, 134 taxonomy
   leaves, 164,708 items.**
 
+- **23 Aug (same session): structural feedback acted on, then Smriti/
+  Dharmashastra (batch 7) and Tantra/Saiva-Sakta (batch 8) sweeps, plus
+  several loose ends from the same request.**
+
+  **Restructure**: `upaveda` moved from a top-level `taxonomy.json` key
+  to `vedas.upaveda`, per explicit instruction ("under Veda you can have
+  Upaveda... Sastra is a different parent folder just like itihasa and
+  Purana"); `shastra` stayed top-level. **A real staging bug was caught
+  doing this**: the first restructure commit only captured the file
+  renames (`git mv`) — a follow-up multi-path `git add` that included
+  one already-moved (now nonexistent) path failed entirely
+  (`fatal: pathspec ... did not match any files` aborts the *whole*
+  invocation, staging nothing), so `taxonomy.json`/`library.json`'s
+  edits silently never got committed even though the working tree had
+  them right the whole time. Caught because batch 7's own diff came out
+  far larger than a 3-leaf addition should — not assumed clean. Fixed
+  by re-staging everything with a single `git add -A` and verifying
+  `git show HEAD:...` matched the working tree before moving on.
+
+  **Batch 7 (Smriti/Dharmashastra)**: checked `library.json` first —
+  Manusmṛti, Nāradasmṛti, Parāśarasmṛti, Viṣṇusmṛti, Yājñavalkyasmṛti
+  are already `populated: true` with no `source` field (sourced from
+  outside DCS, predating this session) — left untouched to avoid a
+  conflicting duplicate inside an already-filled leaf. Three real
+  matches: Vṛddhayamasmṛti → the empty `yama_smriti` leaf; Kātyāyanasmṛti
+  → a new leaf (no existing match); Nibandhasaṃgraha — looked like a
+  dharmaśāstra digest by name, but its own chapter header
+  (`NiSaṃ zu Su, Cik., 27, 2.1`) shows it's Ḍalhaṇa's commentary ON
+  Suśrutasaṃhitā — filed there instead. Also registered two taxonomy
+  nodes (`vasistha_smriti`, `baudhayana_smriti`) that had no
+  `library.json` catalog entry at all, a gap unrelated to DCS. No DCS
+  match for the dharmaśāstra-nibandha cluster (Dāyabhāga/Mitākṣarā/
+  Kalpataru/Nirṇayasindhu/Dharmasindhu/Smṛticandrikā/Caturvargacintāmaṇi)
+  or for Parāśarasmṛtiṭīkā (DCS has it, but the existing `parashara_smriti`
+  leaf is flat with no mula/tika substructure, and restructuring an
+  already-live leaf just for one commentary was out of scope this round).
+
+  **Batch 8 (Tantra/Śaiva-Śākta, deferred every batch until explicitly
+  green-lit this round)**: `agama.pancharatra.shaiva_agama`/`shakta_agama`
+  reparented to `agama.shaiva_agama`/`shakta_agama` directly — they'd
+  been nested under the Vaiṣṇava-specific "pancharatra" despite holding
+  Śaiva/Śākta content, a mismatch flagged since the original
+  taxonomy-placement proposal. `shaiva_agama` already had real content
+  (Śivasūtra) — moved as a whole leaf rather than restructured
+  internally, to limit disruption to already-live paths. New branches:
+  `agama.pashupata` (Pāśupatasūtra + Pañcārthabhāṣya + Gaṇakārikā +
+  Ratnaṭīkā), `agama.pratyabhijna` (Spandakārikā + Nirṇaya,
+  Śivasūtravārtika, Tantrāloka, Tantrasāra, Saṃvitsiddhi),
+  `agama.shaiva_siddhanta` (Mṛgendratantra + ṭīkā), `agama.shakta_agama`
+  now populated as a container (Mahācīnatantra, Mātṛkābhedatantra,
+  Toḍalatantra, Uḍḍāmareśvaratantra, Devīkālottarāgama, Śāktavijñāna),
+  `agama.natha_sampradaya` for the Haṭha-yoga/Nāth cluster
+  (Amaraughaśāsana + commentary, Gorakṣaśataka, Gheraṇḍasaṃhitā,
+  Haṭhayogapradīpikā, Vātūlanāthasūtras + vṛtti — this last grouping is
+  this session's own organizational judgment, not a scholarly claim
+  about doctrinal affiliation).
+
+  **Every placement checked against its own DCS chapter header, not its
+  name — caught a real one**: "Sātvatatantra" reads Śākta/generic by
+  name, but its content is unambiguously Vaiṣṇava (full daśāvatāra
+  doctrine, "iti śrī Sātvatatantre Śivanāradasaṃvāde", vaikuṇṭhaloka,
+  puruṣottama throughout) — it's the Sāttvata Saṃhitā, one of the three
+  ratna-traya Pāñcarātra āgamas, and fills the *existing* empty
+  `sattvata_samhita` leaf instead of landing anywhere near Śākta. Two
+  more corrections the same way: "Sphuṭārthāvyākhyā" sounds Śaiva/generic
+  but its chapter line is `zu AbhidhKo` — Yaśomitra's sub-commentary on
+  Abhidharmakośa (Buddhist), filed under `shastra.bauddha_sahitya`
+  instead. "Yogaratnākara" sounds like Haṭha-yoga by name, but its
+  content and chapter tag (`YRā, Dh.`) are Āyurvedic (a medical
+  formulary, "yoga" here meaning *formulation* not Patañjali-style
+  discipline) — filed under Āyurveda. Two attributions are inferred from
+  a text's standard scholarly name rather than confirmed by DCS's own
+  metadata (Pañcārthabhāṣya → Kauṇḍinya, Mṛgendraṭīkā → Nārāyaṇakaṇṭha),
+  flagged as such, not asserted as fact.
+
+  **Pañca Mahākāvya**: checked first — Raghuvaṃśa, Kumārasambhava,
+  Kirātārjunīya, Śiśupālavadha are *already* `populated: true`. Only
+  Naiṣadhīyacarita (Śrīharṣa) is missing, and DCS doesn't carry it at
+  all (checked by listing) — a genuine gap needing a non-DCS source
+  (e.g. GRETIL), not filled here. **Still the one open ask from this
+  round with nothing done about it.**
+
+  **Unplaceable singles, re-researched** (wisdomlib + secondary
+  sources): Kṛṣiparāśara (agriculture, high confidence) →
+  `shastra.krishi_shastra`; Śyainikaśāstra (falconry, Rāja Rudradeva of
+  Kumaon, high confidence) → `shastra.shainika_shastra`;
+  Agastīyaratnaparīkṣā (Hindu, not Jain, gemology, medium-high
+  confidence) → new `shastra.ratna_pariksha.agastiya`; Āyurvedarasāyana
+  — resolves the earlier "zu AHS" puzzle: it's Hemādri's own
+  Aṣṭāṅgahṛdaya commentary, not a standalone rasāyana text, high
+  confidence → new tika leaf under `ashtanga_hridaya_samhita`;
+  Gṛhastharatnākara (Caṇḍeśvara's dharmaśāstra nibandha, part of his
+  *Smṛtiratnākara*, high confidence) → new `smriti_dharma.dharmashastra`
+  leaf. Ratnadīpikā stays low-confidence on author/sect (research
+  couldn't settle Jain vs. Hindu from open sources) but genre (gemology)
+  is solid enough to file → `shastra.ratna_pariksha.ratnadipika`, with
+  the uncertainty carried in its own title/notes rather than hidden.
+
+  **Skandapurāṇa/Śivapurāṇa** (separate research pass against wisdomlib/
+  GRETIL/the Skandapurāṇa Project): plain "Skandapurāṇa" (24 bare-numbered
+  chapters) is a different, uncitable recension entirely — not mapped.
+  "Śivapurāṇa" is a single chapter labelled with a saṃhitā name outside
+  the standard 7-saṃhitā scheme, unverifiable and too little content to
+  matter — not mapped. **"Skandapurāṇa (Revākhaṇḍa)" is a clean, citable
+  1:1 whole-text match** — DCS's 232 chapters are wisdomlib's complete
+  Revākhaṇḍa, confirmed independently against GRETIL's e-text of the
+  same material — imported as a new `purana.skanda_purana.revakhanda`
+  leaf (231 files found, 7,894 items). Carried forward honestly, not
+  smoothed over: GRETIL notes the print tradition may have misattributed
+  this material from the Vāyupurāṇa — noted in the item's own title.
+
+  `tools/dcs/build_batch7_smriti.py`, `build_batch8_tantra_and_misc.py`;
+  38/39 matched across both (one filename-diacritic slip on
+  Āyurvedarasāyana, corrected inline). DCS running total: **160 texts,
+  172 taxonomy leaves, 186,139 items.**
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are

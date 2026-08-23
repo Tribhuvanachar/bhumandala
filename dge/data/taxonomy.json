@@ -268,6 +268,10 @@
       "tika_indu": {
        "_schema": "grantha_tika_text",
        "_default_author": "Indu"
+      },
+      "tika_hemadri": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Hemadri"
       }
      },
      "ashtanga_sangraha": {
@@ -283,6 +287,11 @@
       }
      },
      "nadi_pariksha": {
+      "mula": {
+       "_schema": "grantha_mula_text"
+      }
+     },
+     "yogaratnakara": {
       "mula": {
        "_schema": "grantha_mula_text"
       }
@@ -532,7 +541,10 @@
    "kashi_khanda": {},
    "avantya_khanda": {},
    "nagara_khanda": {},
-   "prabhasa_khanda": {}
+   "prabhasa_khanda": {},
+   "revakhanda": {
+    "_schema": "grantha_mula_text"
+   }
   },
   "vamana_purana": {
    "saromahatmya": {}
@@ -1928,9 +1940,139 @@
     "vasishtha_samhita": {},
     "vishvaksena_samhita": {}
    },
-   "vaikhanasa_agama": {},
-   "shaiva_agama": {},
-   "shakta_agama": {}
+   "vaikhanasa_agama": {}
+  },
+  "shaiva_agama": {},
+  "shakta_agama": {
+   "mahacina_tantra": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    }
+   },
+   "matrikabheda_tantra": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    }
+   },
+   "todala_tantra": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    }
+   },
+   "uddamareshvara_tantra": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    }
+   },
+   "devikalottara_agama": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    }
+   },
+   "shakta_vijnana": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    }
+   }
+  },
+  "pashupata": {
+   "pashupata_sutra": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    },
+    "bhashya_kaundinya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "Kaundinya (DCS metadata unconfirmed -- inferred from the text's standard scholarly name)"
+    }
+   },
+   "ganakarika": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    },
+    "tika": {
+     "_schema": "grantha_tika_text"
+    }
+   }
+  },
+  "pratyabhijna": {
+   "spanda_karika": {
+    "mula": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "Vasugupta (or Kallata)"
+    },
+    "tika_nirnaya": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "Kshemaraja"
+    }
+   },
+   "shiva_sutra_vartika": {
+    "mula": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "Bhaskara"
+    }
+   },
+   "tantraloka": {
+    "mula": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "Abhinavagupta"
+    }
+   },
+   "tantrasara": {
+    "mula": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "Abhinavagupta"
+    }
+   },
+   "samvitsiddhi": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    }
+   }
+  },
+  "shaiva_siddhanta": {
+   "mrigendra_tantra": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    },
+    "tika": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "Narayanakantha (DCS metadata unconfirmed -- inferred from the text's standard scholarly name)"
+    }
+   }
+  },
+  "natha_sampradaya": {
+   "amaraughashasana": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    },
+    "tika": {
+     "_schema": "grantha_tika_text"
+    }
+   },
+   "gorakshashataka": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    }
+   },
+   "gheranda_samhita": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    }
+   },
+   "hathayogapradipika": {
+    "mula": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "Svatmarama"
+    }
+   },
+   "vatulanatha_sutras": {
+    "mula": {
+     "_schema": "grantha_mula_text"
+    },
+    "vritti": {
+     "_schema": "grantha_tika_text"
+    }
+   }
   }
  },
  "stotra": {
@@ -5654,6 +5796,10 @@
      "bhashya": {
       "_schema": "grantha_tika_text",
       "_default_author": "Vasubandhu"
+     },
+     "tika_sphutartha": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Yashomitra (DCS metadata unconfirmed -- inferred from the text's standard scholarly name)"
      }
     },
     "mula_madhyamaka_karika": {
@@ -5718,6 +5864,28 @@
       "_schema": "grantha_mula_text"
      }
     }
+   }
+  },
+  "krishi_shastra": {
+   "mula": {
+    "_schema": "grantha_mula_text",
+    "_default_author": "attributed to Parashara (pseudepigraphic)"
+   }
+  },
+  "shainika_shastra": {
+   "mula": {
+    "_schema": "grantha_mula_text",
+    "_default_author": "Raja Rudradeva of Kumaon"
+   }
+  },
+  "ratna_pariksha": {
+   "agastiya": {
+    "_schema": "grantha_mula_text",
+    "_default_author": "attributed to Agastya (pseudepigraphic); Hindu, not Jain -- see dge/PENDING.md"
+   },
+   "ratnadipika": {
+    "_schema": "grantha_mula_text",
+    "_default_author": "author/sect unconfirmed -- see dge/PENDING.md"
    }
   }
  }

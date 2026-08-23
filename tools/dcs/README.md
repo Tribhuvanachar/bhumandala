@@ -11,7 +11,7 @@ single-leaf imports plus 4 split imports (spanning 16 leaves between
 them), then a third pass (`build_batch3_upanishads.py`, 5 mula-Upaniṣads)
 and a fourth (`build_batch4_samkhya_yoga.py`, see below) that also added
 new taxonomy nodes rather than only filling existing empty leaves.
-**122 DCS texts in now, across 134 taxonomy leaves, 164,708 items
+**160 DCS texts in now, across 172 taxonomy leaves, 186,139 items
 total.** Still well short of DCS's full 253-text corpus;
 see the taxonomy-placement proposal (linked from `dge/PENDING.md`'s 24 Aug
 entries) for what's left and where it likely goes.
@@ -287,10 +287,58 @@ that specific chapter's known subject.
 
 DCS running total: **122 texts, 134 taxonomy leaves, 164,708 items.**
 
+## Seventh and eighth imports, batch 7 (Smriti/Dharmashastra) and batch 8 (Tantra/Saiva-Sakta) — plus a caught staging bug
+
+**A restructure first**: `upaveda` moved from a top-level `taxonomy.json`
+key to `vedas.upaveda`, per explicit project-lead feedback, `shastra`
+staying top-level. **Caught a real bug doing it**: the restructure's
+first commit only captured the file renames — a follow-up multi-path
+`git add` silently failed entirely (one already-moved pathspec no
+longer existed, and `git add` aborts the *whole* invocation on a bad
+pathspec, staging nothing), so `taxonomy.json`/`library.json`'s edits
+never actually landed in that commit even though the working tree had
+them right the whole time. Caught because batch 7's own diff came out
+far larger than a 3-leaf addition should be — not assumed clean, then
+fixed with a single `git add -A` and a direct `git show HEAD:...`
+verification against the working tree.
+
+**Batch 7** filled the Smriti/Dharmashastra cluster's real gaps
+(Vṛddhayamasmṛti, Kātyāyanasmṛti, and — checked against its own chapter
+header rather than its dharmashastra-sounding name — Nibandhasaṃgraha,
+which turned out to be Ḍalhaṇa's commentary on Suśrutasaṃhitā, not a
+dharmaśāstra digest at all). Left the 5 already-`populated: true`,
+non-DCS-sourced major smṛtis untouched to avoid conflicting duplicates.
+
+**Batch 8** finally took on the Tantra/Śaiva-Śākta cluster, deferred
+every batch until now. Reparented `agama.shaiva_agama`/`shakta_agama`
+out from under the Vaiṣṇava-specific "pancharatra" (a mismatch flagged
+since the original placement proposal); added Pāśupata, Pratyabhijñā,
+Śaiva Siddhānta, populated Śākta, and Nātha-sampradāya/Haṭha-yoga
+branches. Checking each DCS chapter header caught a real one:
+"Sātvatatantra" reads Śākta by name but its content (full daśāvatāra
+doctrine, "iti śrī Sātvatatantre Śivanāradasaṃvāde") is unambiguously
+Vaiṣṇava — it's the Sāttvata Saṃhitā, filling the *existing* empty
+Pāñcarātra `sattvata_samhita` leaf instead. Two more the same way:
+"Sphuṭārthāvyākhyā" (→ Yaśomitra's Abhidharmakośa sub-commentary,
+Buddhist) and "Yogaratnākara" (→ an Āyurvedic formulary, not Haṭha-yoga
+despite the name). Same pass also: confirmed 4 of the 5 Pañca Mahākāvya
+already live, found DCS doesn't carry the missing 5th (Naiṣadhīyacarita)
+at all; resolved 5 of 6 earlier "unplaceable singles" via web research
+against wisdomlib and filed them; and imported Skandapurāṇa's Revākhaṇḍa
+(a clean, citable 232-chapter whole-text match confirmed against
+wisdomlib/GRETIL) while leaving plain Skandapurāṇa and Śivapurāṇa
+unmapped, per that same research's own verdict.
+
+38/39 texts across both batches matched and imported (one
+filename-diacritic slip, corrected inline). See `dge/PENDING.md`'s 23
+Aug entries for the full detail on every placement and correction.
+
+DCS running total: **160 texts, 172 taxonomy leaves, 186,139 items.**
+
 ## Scaling beyond this batch — not done here
 
-DCS has 253 texts total; 122 are in now, across 134 taxonomy leaves,
-164,708 items. Remaining candidates for a future pass:
+DCS has 253 texts total; 160 are in now, across 172 taxonomy leaves,
+186,139 items. Remaining candidates for a future pass:
 
 - The exact-match pass found everything with a *precisely*-named existing
   leaf. It will have missed real matches with slightly different naming

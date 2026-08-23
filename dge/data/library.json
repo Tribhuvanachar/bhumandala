@@ -60,7 +60,7 @@
     },
     {
       "path": "dge/data/agama/pancharatra/pancharatra_samhitas/sattvata_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Sattvata Samhita"
     },
     {
@@ -79,12 +79,12 @@
       "title": "Vishvaksena Samhita"
     },
     {
-      "path": "dge/data/agama/pancharatra/shaiva_agama/data.json",
+      "path": "dge/data/agama/shaiva_agama/data.json",
       "populated": true,
       "title": "Shaiva Agama"
     },
     {
-      "path": "dge/data/agama/pancharatra/shakta_agama/data.json",
+      "path": "dge/data/agama/shakta_agama/data.json",
       "populated": false,
       "title": "Shakta Agama"
     },
@@ -8857,6 +8857,176 @@
       "path": "dge/data/smriti_dharma/smriti/baudhayana_smriti/data.json",
       "populated": false,
       "title": "बौधायनस्मृतिः"
+    },
+    {
+      "path": "dge/data/vedas/upaveda/ayurveda/samhita/yogaratnakara/mula/data.json",
+      "populated": true,
+      "title": "योगरत्नाकरः"
+    },
+    {
+      "path": "dge/data/vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_hemadri/data.json",
+      "populated": true,
+      "title": "अष्टाङ्गहृदयसंहिता (आयुर्वेदरसायनम् — हेमाद्रिः)"
+    },
+    {
+      "path": "dge/data/shastra/bauddha_sahitya/shastra/abhidharma_kosha/tika_sphutartha/data.json",
+      "populated": true,
+      "title": "अभिधर्मकोशः (स्फुटार्था — यशोमित्रः)"
+    },
+    {
+      "path": "dge/data/agama/pashupata/pashupata_sutra/mula/data.json",
+      "populated": true,
+      "title": "पाशुपतसूत्रम्"
+    },
+    {
+      "path": "dge/data/agama/pashupata/pashupata_sutra/bhashya_kaundinya/data.json",
+      "populated": true,
+      "title": "पाशुपतसूत्रम् (पञ्चार्थभाष्यम्)"
+    },
+    {
+      "path": "dge/data/agama/pashupata/ganakarika/mula/data.json",
+      "populated": true,
+      "title": "गणकारिका"
+    },
+    {
+      "path": "dge/data/agama/pashupata/ganakarika/tika/data.json",
+      "populated": true,
+      "title": "गणकारिका (रत्नटीका)"
+    },
+    {
+      "path": "dge/data/agama/pratyabhijna/spanda_karika/mula/data.json",
+      "populated": true,
+      "title": "स्पन्दकारिका"
+    },
+    {
+      "path": "dge/data/agama/pratyabhijna/spanda_karika/tika_nirnaya/data.json",
+      "populated": true,
+      "title": "स्पन्दकारिका (निर्णयः — क्षेमराजः)"
+    },
+    {
+      "path": "dge/data/agama/pratyabhijna/shiva_sutra_vartika/mula/data.json",
+      "populated": true,
+      "title": "शिवसूत्रवार्त्तिकम् (भास्करः)"
+    },
+    {
+      "path": "dge/data/agama/pratyabhijna/tantraloka/mula/data.json",
+      "populated": true,
+      "title": "तन्त्रालोकः"
+    },
+    {
+      "path": "dge/data/agama/pratyabhijna/tantrasara/mula/data.json",
+      "populated": true,
+      "title": "तन्त्रसारः"
+    },
+    {
+      "path": "dge/data/agama/pratyabhijna/samvitsiddhi/mula/data.json",
+      "populated": true,
+      "title": "संवित्सिद्धिः"
+    },
+    {
+      "path": "dge/data/agama/shaiva_siddhanta/mrigendra_tantra/mula/data.json",
+      "populated": true,
+      "title": "मृगेन्द्रतन्त्रम्"
+    },
+    {
+      "path": "dge/data/agama/shaiva_siddhanta/mrigendra_tantra/tika/data.json",
+      "populated": true,
+      "title": "मृगेन्द्रतन्त्रम् (टीका)"
+    },
+    {
+      "path": "dge/data/agama/pancharatra/shakta_agama/mahacina_tantra/mula/data.json",
+      "populated": true,
+      "title": "महाचीनतन्त्रम्"
+    },
+    {
+      "path": "dge/data/agama/pancharatra/shakta_agama/matrikabheda_tantra/mula/data.json",
+      "populated": true,
+      "title": "मातृकाभेदतन्त्रम्"
+    },
+    {
+      "path": "dge/data/agama/pancharatra/shakta_agama/todala_tantra/mula/data.json",
+      "populated": true,
+      "title": "तोडलतन्त्रम्"
+    },
+    {
+      "path": "dge/data/agama/pancharatra/shakta_agama/uddamareshvara_tantra/mula/data.json",
+      "populated": true,
+      "title": "उड्डामरेश्वरतन्त्रम्"
+    },
+    {
+      "path": "dge/data/agama/pancharatra/shakta_agama/devikalottara_agama/mula/data.json",
+      "populated": true,
+      "title": "देवीकालोत्तरागमः"
+    },
+    {
+      "path": "dge/data/agama/pancharatra/shakta_agama/shakta_vijnana/mula/data.json",
+      "populated": true,
+      "title": "शाक्तविज्ञानम्"
+    },
+    {
+      "path": "dge/data/agama/natha_sampradaya/amaraughashasana/mula/data.json",
+      "populated": true,
+      "title": "अमरौघशासनम्"
+    },
+    {
+      "path": "dge/data/agama/natha_sampradaya/amaraughashasana/tika/data.json",
+      "populated": true,
+      "title": "अमरौघशासनम् (टीका)"
+    },
+    {
+      "path": "dge/data/agama/natha_sampradaya/gorakshashataka/mula/data.json",
+      "populated": true,
+      "title": "गोरक्षशतकम्"
+    },
+    {
+      "path": "dge/data/agama/natha_sampradaya/gheranda_samhita/mula/data.json",
+      "populated": true,
+      "title": "घेरण्डसंहिता"
+    },
+    {
+      "path": "dge/data/agama/natha_sampradaya/hathayogapradipika/mula/data.json",
+      "populated": true,
+      "title": "हठयोगप्रदीपिका"
+    },
+    {
+      "path": "dge/data/agama/natha_sampradaya/vatulanatha_sutras/mula/data.json",
+      "populated": true,
+      "title": "वातूलनाथसूत्राणि"
+    },
+    {
+      "path": "dge/data/agama/natha_sampradaya/vatulanatha_sutras/vritti/data.json",
+      "populated": true,
+      "title": "वातूलनाथसूत्राणि (वृत्तिः)"
+    },
+    {
+      "path": "dge/data/shastra/krishi_shastra/mula/data.json",
+      "populated": true,
+      "title": "कृषिपराशरः"
+    },
+    {
+      "path": "dge/data/shastra/shainika_shastra/mula/data.json",
+      "populated": true,
+      "title": "श्यैनिकशास्त्रम्"
+    },
+    {
+      "path": "dge/data/shastra/ratna_pariksha/agastiya/data.json",
+      "populated": true,
+      "title": "अगस्तीयरत्नपरीक्षा"
+    },
+    {
+      "path": "dge/data/shastra/ratna_pariksha/ratnadipika/data.json",
+      "populated": true,
+      "title": "रत्नदीपिका"
+    },
+    {
+      "path": "dge/data/smriti_dharma/dharmashastra/grihastha_ratnakara/data.json",
+      "populated": true,
+      "title": "गृहस्थरत्नाकरः (चण्डेश्वरः — स्मृतिरत्नाकरान्तर्गतः)"
+    },
+    {
+      "path": "dge/data/purana/skanda_purana/revakhanda/data.json",
+      "populated": true,
+      "title": "स्कन्दपुराणम् (रेवाखण्डः — GRETIL के अनुसार सम्भवतः वायुपुराणस्य पाठः, मुद्रितसंस्करणे स्कन्दपुराणे अन्तर्भूतः)"
     }
   ]
 }

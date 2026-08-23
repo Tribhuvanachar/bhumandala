@@ -60,6 +60,16 @@ const DGE_PATH_LABELS = {
   artha_shastra: 'अर्थशास्त्रम्', hitopadesha: 'हितोपदेशः',
   bauddha_sahitya: 'बौद्धसाहित्यम्', sutra: 'सूत्रम्',
   pramana: 'प्रमाणम्', avadana: 'अवदानम्',
+  krishi_shastra: 'कृषिशास्त्रम्', shainika_shastra: 'श्यैनिकशास्त्रम्',
+  ratna_pariksha: 'रत्नपरीक्षा',
+
+  // 23 Aug: Tantra/Saiva-Sakta cluster, deferred every earlier batch
+  // until explicitly requested. shaiva_agama/shakta_agama moved here
+  // from under agama.pancharatra (a Vaishnava-specific term that never
+  // fit) -- see dge/PENDING.md for that reparenting.
+  pashupata: 'पाशुपतम्', pratyabhijna: 'प्रत्यभिज्ञा',
+  shaiva_siddhanta: 'शैवसिद्धान्तः', shaiva_agama: 'शैवागमः',
+  shakta_agama: 'शाक्तागमः', natha_sampradaya: 'नाथसम्प्रदायः',
 
   itihasa: 'इतिहासाः', purana: 'पुराणानि',
   ramayana: 'रामायणम्', ananda_ramayana: 'आनन्दरामायणम्',
