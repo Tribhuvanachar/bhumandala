@@ -1761,6 +1761,48 @@ complete record, not just a live queue.
     the live-click feature nor a bulk precompute pass was built pending a
     decision on this trade-off.
 
+- **Same-day follow-up: the live click-to-split feature, built.** Project
+  lead chose live click-to-split over precompute or holding off. Built at
+  `dge/js/sandhi.js`, wired to a new "🔗 Sandhi" button alongside the
+  existing 🔤 Shabda / 📚 Dhātu / 🔍 Where else word-tools in
+  `#actionTooltip` (`dge/index.html`) — same "real structured data, not an
+  LLM guess" philosophy as those three. Selected text is transliterated to
+  IAST client-side (Devanagari input isn't reliably recognized by the
+  API — confirmed by testing, see below), sent to `dharmamitra.org`'s
+  `/api-tagging/tagging-parsed/` endpoint, and the `unsandhied` field per
+  word — literally the answer to "give me the sandhi split" — is shown
+  transliterated back to the reader's active script, alongside lemma and
+  grammatical tag. Session-only client-side cache so re-opening the same
+  selection doesn't re-fetch. `dge/index.html`'s version meta and
+  `core.js`'s `DGE_EXPECTED_HTML_VERSION` both bumped to 4.64.0 (structural
+  HTML change), per that file's own stated convention.
+  - **What was actually verified, stated precisely rather than claimed
+    wholesale:** (1) the exact request shape sandhi.js constructs was
+    tested directly against the live API via `curl` and confirmed correct
+    on the specific gap named — `rāmo gacchati` → `rāmaḥ gacchati`
+    (visarga), `taddhi` → `tat hi` and `sajjanaḥ` → `sat-janaḥ` (hal/
+    consonant sandhi) — plus discovered a real precondition: a single word
+    with no sentence context resolves less reliably than a full clause
+    (`rāmo` alone stayed `rāmo`, unresolved), so the feature sends whatever
+    span the user actually selected rather than trying to isolate a single
+    word. (2) The full UI flow was driven end-to-end in a real headless
+    browser (Playwright, since no project-specific run skill exists yet —
+    worth generating one via `/run-skill-generator` next time this app
+    needs driving): text selection, the tooltip, the modal opening,
+    transliteration, and the error-handling path all confirmed working via
+    screenshots. (3) **The live network call itself could not be completed
+    inside this session's sandbox** — Chromium launched via Playwright
+    couldn't reach the public internet at all (`fetch()` to `example.com`
+    failed identically to `dharmamitra.org`, isolating this as the
+    sandboxed browser subprocess's own network access, not anything
+    dharmamitra-specific or a bug in this code) — so the graceful-failure
+    path is what got observed live, not a live success. Given (1) and (2)
+    both check out and the failure mode in (3) is demonstrably
+    environment-specific, this is shipped with high confidence, not
+    unverified — but the one thing not literally watched happen in a
+    browser is a live person's browser completing this exact fetch to
+    dharmamitra.org, so it's worth a real check after deploy.
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are
