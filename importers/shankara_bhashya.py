@@ -95,7 +95,37 @@ WORKS = [
 
 HEADER_JUNK = re.compile(r"(GRETIL|Göttingen|copyright|terms of usage|reference purposes|"
                          r"proofread|e-text|data-entered|analytic|Header|Description of the "
-                         r"file)", re.I)
+                         r"file|structure of references|additional notes|revisions:|"
+                         r"word boundaries|custom devanagari encoding|checked against the ed|"
+                         r"TEI encoding|mass conversion|Sanskrit corpus Text|"
+                         r"recension with the commentary|ascribed to\s+\S+)", re.I)
+
+# A different GRETIL quirk from the header aside above: many corpustei files
+# glue an inline structural marker INTO the middle of a unit's body, with
+# real Sanskrit both before and after it in the SAME body. Unlike HEADER_JUNK
+# this isn't a preamble to truncate to; it's noise to cut out in place. Two
+# independent shapes were confirmed by direct inspection of the fetched text:
+#   * a run of divider punctuation (_, =, -), sometimes immediately followed
+#     by a short label ("____ START MandUp 1", "____ BhG 13")            -- mandukya, brahmasutra_bhashya, gita_bhashya
+#   * a bare "start <ref> <num>" label with NO divider at all, dropped at
+#     nearly every verse boundary ("//1// START ChUp 1,1.2", "//1// start 1,2.2")
+#                                                                          -- prashna, aitareya, chandogya, brihadaranyaka
+# mandukya even mixes the two with genuine Sanskrit in between ("===== atha
+# gauḍapādīyakārikāḥ START MandUpK 1.1 ..." -- a real section title sitting
+# between the divider and its label), so these are stripped as three
+# independent passes rather than one combined pattern, each narrow enough to
+# never touch real content: this corpus is IAST (ā/ī/ṇ/ṭ/ḍ...), which never
+# capitalises mid-word or uses the literal word "start", and divider
+# punctuation never appears in real verse text.
+STRUCTURAL_DIVIDER = re.compile(r"[_=\-]{4,}\s*(?:START\s+)?[A-Z][A-Za-z]*\s+\d+(?:[.,]\d+)*\s*")
+INLINE_START_LABEL = re.compile(r"\bstart\b\s+[A-Za-z]*\.?\s*\d+(?:[.,]\d+)*", re.I)
+BARE_DIVIDER_RUN = re.compile(r"[_=\-]{4,}")
+# GRETIL also drops the occasional bracketed EDITORIAL note inline (e.g.
+# "[*NOTE: BhG 18 not included!]") in gita_bhashya. Only strip notes tagged
+# "*NOTE" -- other bracketed content in this corpus (e.g. brahmasutra_bhashya's
+# "[atrāspaṣṭabrahmaliṅgayuktavākyānām...]") is a genuine Sanskrit section
+# heading, not editorial noise, and must be kept.
+EDITORIAL_NOTE = re.compile(r"\[\*NOTE:[^\]]*\]", re.I)
 
 
 def _strip_gretil_header(text):
@@ -114,7 +144,34 @@ def parse_units(text, marker=DEFAULT_MARKER):
     while i < len(parts) - 1:
         ref = parts[i].strip()
         body = re.sub(r"\s+", " ", parts[i + 1]).strip()
-        if body and not HEADER_JUNK.search(body[:120]):
+        # Checked the real fetched Isha content directly: a GRETIL editorial
+        # aside ("STRUCTURE OF REFERENCES ... GRETIL version has been
+        # converted ... TEI encoding by mass conversion ...") sits
+        # mid-document, immediately before one specific unit's own marker --
+        # not only as a front-of-file preamble, which is the only case
+        # _strip_gretil_header handles. A prior version dropped a whole unit
+        # outright when HEADER_JUNK matched anywhere in its body, but the
+        # junk text and the unit's real verse content are concatenated in
+        # the SAME body here (the aside precedes real content, doesn't
+        # replace it) -- dropping the whole unit would silently lose real
+        # Isha 8 content instead of just the pollution. Strip everything up
+        # through the LAST junk-phrase match instead of discarding the
+        # unit: GRETIL's asides always describe the text (titling it) right
+        # before real content resumes, so keeping only what follows the
+        # last match reliably recovers the real content. (Checking the
+        # whole body, not a fixed prefix window, isn't a false-positive
+        # risk either way -- every phrase below is a specific multi-word
+        # GRETIL editorial phrase that would never occur in genuine, even
+        # transliterated, Sanskrit prose.)
+        junk_matches = list(HEADER_JUNK.finditer(body))
+        if junk_matches:
+            body = body[junk_matches[-1].end():].strip(" .:;-")
+        body = STRUCTURAL_DIVIDER.sub(" ", body)
+        body = INLINE_START_LABEL.sub(" ", body)
+        body = BARE_DIVIDER_RUN.sub(" ", body)
+        body = EDITORIAL_NOTE.sub(" ", body)
+        body = re.sub(r"\s+", " ", body).strip()
+        if body:
             units.append((ref, body))
         i += 2
     return units
