@@ -820,7 +820,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Commentary/bhashya display is opt-in and hidden by default
-// (selectedCommentaryView starts at 'none', see state.js) -- a reader who
+// (selectedCommentaries starts empty, see state.js) -- a reader who
 // never notices the small 💬 "Commentary Options" icon in the top bar can
 // read an entire Stotra or Veda text and never discover real bhashya
 // content sits right there for it. One-time toast, gated per grantha (not
@@ -936,9 +936,17 @@ window.renderStotraChrome = function() {
 
     Object.entries(window.stotraData.metadata.availableCommentaries).forEach(([key, name]) => {
       const transName = doTranslit(name);
-      dynamicList.innerHTML += `<div class="pop-item" onclick="setCommentaryView('${key}', this)">${transName}</div>`;
+      // .filter-checkbox-item -- same ☐/☑ multi-select convention filter.js's
+      // mark-criteria checkboxes already use, so any number can be checked
+      // at once (see window.dgeToggleCommentarySelection in render.js).
+      dynamicList.innerHTML += `<div class="filter-checkbox-item" data-ckey="${key}" onclick="window.dgeToggleCommentarySelection('${key}')">${transName}</div>`;
       searchScopeDynamicList.innerHTML += `<div class="pop-item" data-scope="${key}" onclick="window.setSearchScope('${key}', '${transName} Only', this)">${transName} Only</div>`;
     });
+    // renderStotraChrome() re-runs on every script change (see its own doc
+    // comment above), rebuilding this list from scratch -- resync the
+    // checkmarks against the existing selection so switching script/theme
+    // never silently drops what was already chosen.
+    if (typeof dgeSyncCommentaryPopupState === 'function') dgeSyncCommentaryPopupState();
   }
 };
 

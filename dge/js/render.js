@@ -50,22 +50,60 @@ window.dgeShowCommentaryTab = function(shlokaIndex, cKey, btnEl) {
   if (btnEl) btnEl.classList.add('active');
 };
 
-function setCommentaryView(view, el) {
-  selectedCommentaryView = view;
-  document.querySelectorAll('#commentaryPopup .pop-item').forEach(item => item.classList.remove('active'));
-  if (el) el.classList.add('active');
-  if (typeof togglePopup === 'function') togglePopup('commentaryPopup');
+// Re-anchors the scroll position to the active card after a commentary
+// selection change re-renders the list at a new (shorter or taller)
+// height -- shared by both the quick actions and the per-item toggle
+// below, so collapsing/expanding commentary never strands the viewport
+// wherever the old commentary block used to end.
+function dgeRescrollToActiveCard() {
   renderList();
-
-  // renderList() just rebuilt the list at a new (shorter or taller) height,
-  // so the old scroll position no longer points at the active shloka.
-  // Re-anchor to it so collapsing/expanding commentary doesn't strand the
-  // viewport wherever the old commentary block used to end.
   if (typeof activeId !== 'undefined' && activeId) {
     const ac = document.getElementById(`shloka-${activeId}`);
     if (ac) ac.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
+
+// Keeps the popup's own checkmarks in sync with window.selectedCommentaries
+// -- called after every change, whether from the quick actions or a
+// single checkbox tap, so the UI never drifts from the actual state.
+function dgeSyncCommentaryPopupState() {
+  const available = (typeof stotraData !== 'undefined' && stotraData && stotraData.metadata && stotraData.metadata.availableCommentaries) || {};
+  const total = Object.keys(available).length;
+  document.querySelectorAll('#commentaryDynamicList .filter-checkbox-item').forEach(el => {
+    el.classList.toggle('active', selectedCommentaries.has(el.dataset.ckey));
+  });
+  const noneBtn = document.getElementById('commentaryNoneBtn');
+  const allBtn = document.getElementById('commentaryAllBtn');
+  if (noneBtn) noneBtn.classList.toggle('active', selectedCommentaries.size === 0);
+  if (allBtn) allBtn.classList.toggle('active', total > 0 && selectedCommentaries.size === total);
+}
+
+// The two quick actions -- "None" clears every selection, "All" selects
+// every available commentary at once. Both are one-shot (close the popup);
+// individual commentaries are toggled via dgeToggleCommentarySelection
+// below instead, which deliberately leaves the popup open so several can
+// be picked in one sitting.
+window.setCommentaryView = function(view) {
+  if (view === 'all') {
+    const available = (typeof stotraData !== 'undefined' && stotraData && stotraData.metadata && stotraData.metadata.availableCommentaries) || {};
+    selectedCommentaries = new Set(Object.keys(available));
+  } else {
+    selectedCommentaries = new Set();
+  }
+  dgeSyncCommentaryPopupState();
+  if (typeof togglePopup === 'function') togglePopup('commentaryPopup');
+  dgeRescrollToActiveCard();
+};
+
+// Toggles one commentary in or out of the selection -- any number can be
+// on at once. Matches ashtadhyayi.com's own multi-select filter pattern
+// used elsewhere in this app (see filter.js's cycleFilterCriterion).
+window.dgeToggleCommentarySelection = function(key) {
+  if (selectedCommentaries.has(key)) selectedCommentaries.delete(key);
+  else selectedCommentaries.add(key);
+  dgeSyncCommentaryPopupState();
+  dgeRescrollToActiveCard();
+};
 
 // Builds a case-insensitive regex source from a query. For IAST, this
 // tolerates both plain-letter-for-diacritic typing (a/ā, i/ī, u/ū, r/ṛ,
@@ -286,7 +324,7 @@ function renderList() {
       // there's something to switch between.
       const blocks = [];
       Object.entries(shloka.commentaries).forEach(([cKey, cText]) => {
-        const isSelected = (selectedCommentaryView === 'all' || selectedCommentaryView === cKey);
+        const isSelected = selectedCommentaries.has(cKey);
         const isForcedBySearch = forceCommentaries.includes(cKey);
 
         if (isSelected || isForcedBySearch) {

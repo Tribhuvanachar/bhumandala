@@ -1081,6 +1081,7 @@ function dgeEnsureWordModalStyle() {
     '.dge-word-modal .dsm-steps{list-style:none;margin:8px 0 0;padding:0;}',
     '.dge-word-modal .dsm-steps li{display:flex;gap:10px;align-items:baseline;padding:5px 0;border-bottom:1px dashed var(--card-border);font-size:13px;}',
     '.dge-word-modal .dsm-code{flex:0 0 62px;font-family:monospace;color:var(--muted-text);font-size:11px;}',
+    '.dge-word-modal .dsm-code.dge-sutra-ref{cursor:pointer;text-decoration:underline dotted;color:var(--accent-red);}',
     '.dge-word-modal .dsm-result{flex:1;font-size:15px;}',
     '.dge-word-modal .dsm-loading{padding:24px 0;text-align:center;color:var(--muted-text);}',
     '.dge-word-modal .dsm-empty{padding:12px 0;color:var(--muted-text);font-size:13px;line-height:1.6;}',
@@ -1195,12 +1196,24 @@ function dgeShabdaDeclTable(forms, hlIdx) {
   return h;
 }
 
+// Real gap found via live testing, 24 Aug: these sutra codes rendered as
+// inert plain text -- no onclick, no data-sutra, nothing. The app already
+// has a working in-place sutra popover (intellisense.js's .dge-sutra-ref
+// convention, opened from Prakriyā/Rūpasiddhi/the Sandhi tool via the
+// same document-level click delegate) -- this table's own derivation
+// steps just never adopted it. Same isSutra regex prakriya.js already
+// uses to tell a real sutra citation (clickable) from a paribhasha/
+// vartika reference (shown plainly, nothing to look up).
 function dgeShabdaStepsHtml(steps) {
   let last = '';
   return '<ol class="dsm-steps">' + steps.map(function (st) {
     const code = st[0];
     if (st.length > 1) last = st[1];
-    return '<li><span class="dsm-code">' + dgeShabdaEsc(code) + '</span><span class="dsm-result deva">' + dgeShabdaEsc(last) + '</span></li>';
+    const isSutra = /^[1-8]\.[1-4]\.\d{1,3}$/.test(code);
+    const codeHtml = isSutra
+      ? '<span class="dsm-code dge-sutra-ref" data-sutra="' + dgeShabdaEsc(code) + '" role="button" tabindex="0">' + dgeShabdaEsc(code) + '</span>'
+      : '<span class="dsm-code">' + dgeShabdaEsc(code) + '</span>';
+    return '<li>' + codeHtml + '<span class="dsm-result deva">' + dgeShabdaEsc(last) + '</span></li>';
   }).join('') + '</ol>';
 }
 
@@ -1451,6 +1464,14 @@ function dgeWireShabdaKoshaMore(body) {
   });
 }
 
+// Real bug found via live testing, 24 Aug: tapping word A then quickly
+// word B (before A's slower fetch resolved) let A's response land LAST
+// and silently overwrite B's already-rendered modal with A's stale data
+// -- no request-generation check existed anywhere in this chain. Every
+// async .then() below that touches the DOM now checks its own captured
+// `myReq` against the current window.dgeShabdaReqSeq first, so only the
+// MOST RECENTLY opened word's response is ever allowed to render.
+window.dgeShabdaReqSeq = window.dgeShabdaReqSeq || 0;
 window.dgeOpenShabdaForSelection = function(e) {
   if (e) e.preventDefault();
   const word = dgeSelectedWordText();
@@ -1458,6 +1479,7 @@ window.dgeOpenShabdaForSelection = function(e) {
   dgeHideActionTooltip();
   dgeEnsureShabdaModal();
   window.openModal(DGE_SHABDA_MODAL_ID);
+  const myReq = ++window.dgeShabdaReqSeq;
   const body = document.getElementById('dgeShabdaModalBody');
   body.innerHTML = '<div class="dsm-loading">खोजयति… searching “' + dgeShabdaEsc(word) + '”…</div>';
 
@@ -1486,6 +1508,7 @@ window.dgeOpenShabdaForSelection = function(e) {
     .then(function (html) { return html || dgeSandhiFallbackHtml(word); })
     .then(function (html) { return html || dgeShabdaNotFoundHtml(word); })
     .then(function (mainHtml) {
+      if (myReq !== window.dgeShabdaReqSeq) return; // a newer word was opened meanwhile -- this response is stale
       body.innerHTML = mainHtml;
       dgeWireShabdaReportMissing(body, word);
       dgeShabdaWireWhereElse(body);
@@ -1498,6 +1521,7 @@ window.dgeOpenShabdaForSelection = function(e) {
       // not just a test artifact, so it is capped rather than left to
       // run indefinitely.
       dgeWithTimeout(dgeKoshaPanelHtml(word), 8000, '').then(function (koshaHtml) {
+        if (myReq !== window.dgeShabdaReqSeq) return;
         if (!koshaHtml || !body.isConnected) return;
         body.insertAdjacentHTML('beforeend', koshaHtml);
         dgeWireShabdaKoshaMore(body);
@@ -1699,6 +1723,9 @@ function dgeDhatuLexiconHtml(entry) {
   return h;
 }
 
+// Same stale-response guard as dgeOpenShabdaForSelection above, and for
+// the same real reason: no request-generation check existed here either.
+window.dgeDhatuReqSeq = window.dgeDhatuReqSeq || 0;
 window.dgeOpenDhatuForSelection = function(e) {
   if (e) e.preventDefault();
   const word = dgeSelectedWordText();
@@ -1706,15 +1733,18 @@ window.dgeOpenDhatuForSelection = function(e) {
   dgeHideActionTooltip();
   dgeEnsureDhatuModal();
   window.openModal(DGE_DHATU_MODAL_ID);
+  const myReq = ++window.dgeDhatuReqSeq;
   const body = document.getElementById('dgeDhatuModalBody');
   body.innerHTML = '<div class="dsm-loading">खोजयति… searching “' + dgeShabdaEsc(word) + '”…</div>';
 
   dgeFindDhatuFormHit(word).then(function (hit) {
+    if (myReq !== window.dgeDhatuReqSeq) return; // a newer word was opened meanwhile -- this response is stale
     if (!hit) { dgeShowDhatuNotFound(body, word); return; }
     const rootPart = hit.c.split('.')[0];
     fetch('data/vedanga/vyakarana/prakriya/' + rootPart + '/' + hit.c + '.json')
       .then(r => r.ok ? r.json() : null)
       .then(function (d) {
+        if (myReq !== window.dgeDhatuReqSeq) return;
         const step = d && d.steps && d.steps[hit.k] && d.steps[hit.k][0];
         if (!d || !step) { dgeShowDhatuNotFound(body, word); return; }
         body.innerHTML =
@@ -1726,13 +1756,14 @@ window.dgeOpenDhatuForSelection = function(e) {
           '<div id="ddmLexicon"></div>';
         dgeWireDhatuFormsTable(body, d, hit.k);
         dgeWithTimeout(dgeFetchDhatuLexicon(), 8000, null).then(function (byId) {
+          if (myReq !== window.dgeDhatuReqSeq) return;
           const lexHtml = dgeDhatuLexiconHtml(byId && byId[hit.c]);
           const box = body.querySelector('#ddmLexicon');
           if (!lexHtml || !box || !box.isConnected) return;
           box.outerHTML = '<div>' + lexHtml + '</div>';
         });
       })
-      .catch(() => dgeShowDhatuNotFound(body, word));
+      .catch(() => { if (myReq === window.dgeDhatuReqSeq) dgeShowDhatuNotFound(body, word); });
   });
 };
 
