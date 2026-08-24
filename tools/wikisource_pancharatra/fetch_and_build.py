@@ -132,6 +132,15 @@ def parse_chapter(page_title, is_first_chapter=False):
         return None, []
     poem = m.group(1)
 
+    # Normalize the precomposed double-danda character (U+0965 "॥") to two
+    # single-dandas (U+0964 "।।") up front -- some chapters' transcribers
+    # typed the single Unicode codepoint, others typed the single danda
+    # twice, both rendering identically but only the latter matched every
+    # downstream danda-counting rule until this was found (chapter 50 came
+    # back with real content but zero verses -- checked directly rather
+    # than assumed to be yet another punctuation-pairing variant).
+    poem = poem.replace("॥", "।।")
+
     if is_first_chapter:
         poem = poem.replace(MANGALA_TEXT, "")
 
