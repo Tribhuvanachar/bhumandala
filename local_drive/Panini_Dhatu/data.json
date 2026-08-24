@@ -104805,6 +104805,53 @@
     }
   },
   {
+    "dhatu_id": "14.0054",
+    "aupadeshika": "malla",
+    "stripped_root": "mall",
+    "gana": "Bhvādi (Class 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "dhāraṇe (sampṛktatve)",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'mall' means to hold, sustain, bind tightly, or embrace closely. It describes the physical action of grasping firmly or keeping objects held together.",
+      "scenarios": [
+        {
+          "verb_form": "mallati",
+          "grammar_trigger": "Laṭ (Present Tense, Third Person Singular)",
+          "meaning": "holds / grasps firmly",
+          "example_sanskrit": "vīraḥ krodhena śatruṃ mallati.",
+          "example_english": "The warrior firmly grasps the enemy with anger."
+        },
+        {
+          "verb_form": "amallat",
+          "grammar_trigger": "Laṅ (Past Tense, Third Person Singular)",
+          "meaning": "held / sustained",
+          "example_sanskrit": "bālakaḥ mātṛhastam amallat.",
+          "example_english": "The boy held his mother's hand."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Paninian recensions omit this independent entry; recorded in non-Paninian auxiliary lists such as Vopadeva's Kavikalpadruma in the sense of dhāraṇe (holding/sustaining).",
+      "kshiratarangini": "Not treated in canonical Paninian Kṣīrataraṅgiṇī, but attested across comparative non-Paninian dhātupāṭha traditions under the meaning of holding or binding."
+    },
+    "meanings": {
+      "English": "To hold, sustain, grasp firmly, clasp",
+      "Kannada": "Dharisu, hididukollu, tangu",
+      "Telugu": "Dharincu, pattukonu, nilupukonu",
+      "Tamil": "Tanku, parrippiti, anaikka",
+      "Malayalam": "Dharikkuka, tanguka, pitikkuka",
+      "Hindi": "Dharana karna, pakadna, samhalna",
+      "Bengali": "Dharana kara, akde dhora",
+      "German": "Halten, umfassen, stutzen",
+      "French": "Tenir, soutenir, empoigner",
+      "Russian": "Derzhat, uderzhivat, obnimat",
+      "Chinese": "Chi, wo, zhi cheng"
+    }
+  },
+  {
     "dhatu_id": "14.0055",
     "aupadeshika": "laji~",
     "stripped_root": "lañj",
@@ -104896,6 +104943,53 @@
       "French": "Galoper, bondir, sautiller",
       "Russian": "Skakat', prygat', nestis' galopom",
       "Chinese": "Benchi, tiaoyue, benpao"
+    }
+  },
+  {
+    "dhatu_id": "14.0057",
+    "aupadeshika": "hāṭa",
+    "stripped_root": "hāṭ",
+    "gana": "Bhvādi (Class 1)",
+    "pada": "Parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "dīptau",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'hāṭ' means to shine, glow, or emit bright light. It is used when something looks radiant, lustrous, or brilliant like gold or the morning sun.",
+      "scenarios": [
+        {
+          "verb_form": "hāṭati",
+          "grammar_trigger": "Present tense (laṭ lakāra, prathama puruṣa, ekavacana)",
+          "meaning": "shines or radiates light",
+          "example_sanskrit": "prabhāte divākaraḥ gagane hāṭati.",
+          "example_english": "In the morning, the sun shines brightly in the sky."
+        },
+        {
+          "verb_form": "ahāṭīt",
+          "grammar_trigger": "Aorist past tense (luṅ lakāra, prathama puruṣa, ekavacana)",
+          "meaning": "shone or glistened",
+          "example_sanskrit": "svarṇamaṇiḥ dīpasya prakāśena ahāṭīt.",
+          "example_english": "The golden gem shone brightly under the light of the lamp."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "In the standard Pāṇinian recensions, roots like 'bhrāj' and 'bhā' predominate for the sense of shining; however, comparative lexicons document non-Pāṇinian listings where 'hāṭ' is systematically preserved.",
+      "kshiratarangini": "Kṣīrasvāmin notes variant regional roots expressive of dīpti (illumination). Vopadeva in his Kavikalpadruma explicitly distinguishes 'hāṭa dīptau' as a distinct Class 1 intransitive verbal base signifying gold-like brilliance."
+    },
+    "meanings": {
+      "English": "to shine, to glow, to radiate light",
+      "Kannada": "kāntiyinda hoḻeyu, beḻagu",
+      "Telugu": "prakāśiñcu, dīptimantamavvu",
+      "Tamil": "oḷir, viḷaṅgu, miṉṉu",
+      "Malayalam": "śōbhikkuka, jvalikkuka",
+      "Hindi": "camakanā, dīptimān honā",
+      "Bengali": "ujjvala haoyā, dīpti pāoyā",
+      "German": "glänzen, leuchten, strahlen",
+      "French": "briller, luire, rayonner",
+      "Russian": "siyat', blesket', svetit'sya",
+      "Chinese": "fāguāng, shǎnyào"
     }
   },
   {
@@ -105033,6 +105127,53 @@
     }
   },
   {
+    "dhatu_id": "14.0061",
+    "aupadeshika": "kamala",
+    "stripped_root": "kamal",
+    "gana": "Curādi (10th Class equivalent in Kātantra)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Intransitive",
+    "canonical_dhatvartha": "vikāse (prasāde)",
+    "tradition_tag": "Katantra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kamal' means to bloom, open up, shine, or become radiant and clear, just like a lotus blossom greeting the morning sun. It is specifically cataloged in the Katantra Dhātupāṭha to express the graceful blooming of flowers or the bright expansion of pleasant feelings.",
+      "scenarios": [
+        {
+          "verb_form": "kamalayati",
+          "grammar_trigger": "Laṭ (Present Tense, Third Person Singular)",
+          "meaning": "blooms / expands cheerfully",
+          "example_sanskrit": "prātaḥkāle sarovare padmam ānandena kamalayati.",
+          "example_english": "In the morning, the lotus in the lake blooms with delight."
+        },
+        {
+          "verb_form": "akamalayat",
+          "grammar_trigger": "Laṅ (Imperfect Past Tense, Third Person Singular)",
+          "meaning": "bloomed / expanded",
+          "example_sanskrit": "sūryodayena vikasitam vana-kusumam akamalayat.",
+          "example_english": "With the sunrise, the forest blossom opened and bloomed."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "kamala vikāse iti kātantradhātupāṭhe gaṇitaḥ | ayam adantaḥ curādau vā draṣṭavyaḥ | kamalayati puṣpam |",
+      "kshiratarangini": "kamala vikāse | kātantrānurodhena vikāśārthakaḥ | kamalayate kamalayati vā |"
+    },
+    "meanings": {
+      "English": "To bloom, expand, brighten, become clear or joyful",
+      "Kannada": "Aralu, vikasisu, prasannavāgu",
+      "Telugu": "Vikasincu, viriyūyu, prasannamagu",
+      "Tamil": "Malartal, virital, viḷaṅkutal",
+      "Malayalam": "Viriyuka, vikasikkuka, prasannamāvuka",
+      "Hindi": "Khilnā, vikasita honā, prasanna honā",
+      "Bengali": "Photā, bikāśita haoyā, ujjvala haoyā",
+      "German": "Erblühen, sich entfalten, strahlen",
+      "French": "S'épanouir, fleurir, rayonner",
+      "Russian": "Rascvetat', raspuskat'sja, sijat'",
+      "Chinese": "Kāifàng, zhànfàng, shèngkāi"
+    }
+  },
+  {
     "dhatu_id": "14.0062",
     "aupadeshika": "kusuma",
     "stripped_root": "kusum",
@@ -105080,6 +105221,53 @@
     }
   },
   {
+    "dhatu_id": "14.0063",
+    "aupadeshika": "taruṇa",
+    "stripped_root": "taruṇ",
+    "gana": "curādi (10th class)",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "yauvane",
+    "tradition_tag": "Katantra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'taruṇ' means to be youthful, to act young, or to flourish with youthful vitality. It describes growing young or displaying the energy and beauty of youth.",
+      "scenarios": [
+        {
+          "verb_form": "taruṇayati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "He/she flourishes youthfully or acts young",
+          "example_sanskrit": "vasante vṛkṣaḥ nava-pallavaiḥ taruṇayati.",
+          "example_english": "In spring, the tree flourishes youthfully with fresh leaves."
+        },
+        {
+          "verb_form": "ataruṇayat",
+          "grammar_trigger": "Laṅ (Past Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "He/she became youthful or displayed youthfulness",
+          "example_sanskrit": "auṣadhena vṛddhaḥ punaḥ ataruṇayat.",
+          "example_english": "Through medicine, the elder became youthful again."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "In the Mādhavīya-dhātuvṛtti, this stem is treated predominantly as a nāmadhātu derived from the nominal base 'taruṇa', whereas non-Pāṇinian recensions like the Kātantra directly enumerate it within the curādi class in the meaning of displaying youth (yauvane).",
+      "kshiratarangini": "Kṣīrasvāmin observes that secondary curādi formations such as taruṇa (yauvane) function to denote nominal state-transitions (bhavana-kriyā), preserved systematically in independent non-Pāṇinian verbal lists."
+    },
+    "meanings": {
+      "English": "to be or become youthful, to act young, to rejuvenate",
+      "Kannada": "taruṇanāgiru, yuvabhāvavannu tāḷu, yauvanadindiru",
+      "Telugu": "yavvanamu kaligi yuṇḍu, taruṇatvamu pondhu",
+      "Tamil": "iḷamaiyāka iru, iḷamai aṭai, puthuppikkappaṭu",
+      "Malayalam": "yauvanattilāyirikkuka, yauvanam prāpikkuka",
+      "Hindi": "taruṇa honā, yuvāvastā ko prāpta honā, yauvana dikhānā",
+      "Bengali": "taruṇa haoẏā, yaubana prāpta haoẏā",
+      "German": "jugendlich sein, verjüngen, aufblühen",
+      "French": "être jeune, rajeunir, fleurir de jeunesse",
+      "Russian": "byt molodym, molodet, vozrozhdatsya",
+      "Chinese": "nianqing, huanfa qingchun, bian de nianqing"
+    }
+  },
+  {
     "dhatu_id": "14.0064",
     "aupadeshika": "phena",
     "stripped_root": "phen",
@@ -105124,6 +105312,288 @@
       "French": "écumer, mousser",
       "Russian": "penit'sya, vspenivat'sya",
       "Chinese": "qǐpào, mào pàomò"
+    }
+  },
+  {
+    "dhatu_id": "14.0065",
+    "aupadeshika": "mukula",
+    "stripped_root": "mukul",
+    "gana": "Curadi (Katantra: Dhatukosha)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Akarmaka",
+    "canonical_dhatvartha": "saṃkoce (mukulībhāve)",
+    "tradition_tag": "Katantra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'mukul' means to bud, contract, or close halfway like a flower bud. Imagine a lotus blossom closing its petals in the evening or eyes closing halfway in relaxation.",
+      "scenarios": [
+        {
+          "verb_form": "mukulayati",
+          "grammar_trigger": "Present tense (lat, prathama-purusha, eka-vacana)",
+          "meaning": "buds / closes into a bud / contracts",
+          "example_sanskrit": "sandhyāyāṃ kamalaṃ mukulayati.",
+          "example_english": "In the evening, the lotus closes into a bud."
+        },
+        {
+          "verb_form": "amukulayat",
+          "grammar_trigger": "Past tense (lan, prathama-purusha, eka-vacana)",
+          "meaning": "budded / contracted",
+          "example_sanskrit": "nayanayugaṃ nidrayā amukulayat.",
+          "example_english": "The pair of eyes closed halfway due to sleep."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "mukul saṃkoce iti kavyaprayogeṣu tathā katantradivṛttiṣu namadhatutvena dhatutvena ca nirdiṣṭaḥ | mukulayati kusumam ityadi prayogaḥ |",
+      "kshiratarangini": "mukul saṃkoce | mukulībhavati mukulayati vā saṃkucitakusumavat bhavatītyarthaḥ |"
+    },
+    "meanings": {
+      "English": "to bud, to close into a bud, to contract",
+      "Kannada": "moggāgu, mucciko, mugiyiko",
+      "Telugu": "muggavvu, muducukonu, samkocincu",
+      "Tamil": "mottāku, kuvi, suruṅku",
+      "Malayalam": "mottāyittīruka, kūmbuka, sankocikkuka",
+      "Hindi": "kali khilna ya band hona, sankucita hona, mudana",
+      "Bengali": "kuri howa, sankucita howa, mudita howa",
+      "German": "knospen, sich knospenartig schliessen, zusammenziehen",
+      "French": "bourgeonner, se fermer en bouton, se contracter",
+      "Russian": "pockovat'sja, zakryvat'sja v buton, sžimat'sja",
+      "Chinese": "jie lei, ban bi he, shou suo"
+    }
+  },
+  {
+    "dhatu_id": "14.0066",
+    "aupadeshika": "lavaṇa",
+    "stripped_root": "lavan",
+    "gana": "Bhvādi",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Intransitive",
+    "canonical_dhatvartha": "kṣāre",
+    "tradition_tag": "Sakatayana",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'lavan' means to become salty, to release salt efflorescence, or to exhibit salinity. It is used when an object or soil displays a saline nature or mineral salt taste.",
+      "scenarios": [
+        {
+          "verb_form": "lavanati",
+          "grammar_trigger": "Laṭ-lakāra (Present Tense), Prathama-puruṣa, Ekavacana",
+          "meaning": "becomes saline / releases salt",
+          "example_sanskrit": "mṛttikā jalasekena lavanati.",
+          "example_english": "The soil becomes saline due to waterlogging."
+        },
+        {
+          "verb_form": "alavanīt",
+          "grammar_trigger": "Luṅ-lakāra (Aorist / Past Tense), Prathama-puruṣa, Ekavacana",
+          "meaning": "became saline / acquired a salty taste",
+          "example_sanskrit": "tad vāri kṣārayogāt alavanīt.",
+          "example_english": "That water turned salty because of the alkaline mixture."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Non-Pāṇinian specific inclusion: In the Śākaṭāyana recension, 'lavaṇa kṣāre' is listed as an un-suffixed verbal base signifying the manifestation of salinity (kṣāratva-prakāśanam), whereas standard Pāṇinian grammar often derives such verbal senses via nāmadhātu affixes like Kyaṅ (lavaṇāyate).",
+      "kshiratarangini": "Kṣīrasvāmin notes the variation in non-Pāṇinian lists where roots like 'lavaṇa' are enumerated directly under Bhvādi to express intrinsic saline taste or transformation without mandatory denominal derivation."
+    },
+    "meanings": {
+      "English": "To become saline, to taste salty, or to release salt",
+      "Kannada": "Uppāguvudu, kṣāravāguvudu",
+      "Telugu": "Uppanagā māruṭa, kṣāramaguṭa",
+      "Tamil": "Uvarppādhal, upputtanmai aḍaidal",
+      "Malayalam": "Uppurasa-māyittīruka, kṣāra-svabhāvamāvaṇa",
+      "Hindi": "Khārā honā, namakīna honā",
+      "Bengali": "Lobaṇākta haoẏā, khārā yukta haoẏā",
+      "German": "Salzig werden, versalzen",
+      "French": "Devenir salin, prendre un goût salé",
+      "Russian": "Stanovit'sya solënym, vydelyat' sol'",
+      "Chinese": "Biàn xián, fā chū yán fēn"
+    }
+  },
+  {
+    "dhatu_id": "14.0067",
+    "aupadeshika": "madhura",
+    "stripped_root": "madhur",
+    "gana": "curādi (Sākaṭāyana tradition)",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "mādhurye (svādukriyāyām)",
+    "tradition_tag": "Sakatayana",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'madhur' means to make something sweet, pleasant, or melodious. It is used when describing sweetening food or making speech and sounds delightful to hear.",
+      "scenarios": [
+        {
+          "verb_form": "madhurayati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa, Ekavacana, Parasmaipada",
+          "meaning": "Sweetens / Makes melodious",
+          "example_sanskrit": "gāyakaḥ svareṇa gītaṁ madhurayati.",
+          "example_english": "The singer makes the song melodious with his voice."
+        },
+        {
+          "verb_form": "madhurayate",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa, Ekavacana, Ātmanepada",
+          "meaning": "Sweetens for oneself",
+          "example_sanskrit": "mātā dugdhaṁ madhurayate.",
+          "example_english": "The mother sweetens the milk for herself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "madhura mādhurye curādiḥ. madhuram karoti iti madhurayati.",
+      "kshiratarangini": "madhura mādhuryasaṁyoge. svādutvāpādane vartate."
+    },
+    "meanings": {
+      "English": "to sweeten, to make sweet, to make melodious or pleasant",
+      "Kannada": "sihi māḍu, madhuragoḷisu, impāgisu",
+      "Telugu": "tīyagā cēyu, madhuramu cēyu",
+      "Tamil": "inippākkutal, madhuramākkutal",
+      "Malayalam": "madhuramākkuka, inippikkuka",
+      "Hindi": "mīṭhā karnā, madhur banānā",
+      "Bengali": "miṣṭi karā, madhur karā",
+      "German": "süßen, versüßen, lieblich machen",
+      "French": "adoucir, sucrer, rendre agréable",
+      "Russian": "slastit, uslazhdat, delat priyatnym",
+      "Chinese": "shǐ tián, biàn tián, shǐ yuè'ěr"
+    }
+  },
+  {
+    "dhatu_id": "14.0068",
+    "aupadeshika": "harita",
+    "stripped_root": "harit",
+    "gana": "kandvadigana (kandvadi / sauvrana)",
+    "pada": "parasmaipada",
+    "it_status": "anit",
+    "transitivity": "intransitive",
+    "canonical_dhatvartha": "varne haritibhave",
+    "tradition_tag": "Sakatayana",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'harit' (or 'harita') is used when something turns green, becomes verdant, or takes on a greenish-yellow color. Imagine dry grass turning lush green after the first shower of rain; this transformation is described by this verb.",
+      "scenarios": [
+        {
+          "verb_form": "haritayati",
+          "grammar_trigger": "lat (present tense, 3rd person singular)",
+          "meaning": "becomes green / turns verdant",
+          "example_sanskrit": "varsartau bhumih haritayati.",
+          "example_english": "During the rainy season, the earth turns green."
+        },
+        {
+          "verb_form": "aharitayat",
+          "grammar_trigger": "lan (imperfect past, 3rd person singular)",
+          "meaning": "became green / turned verdant",
+          "example_sanskrit": "vane vrksah aharitayat.",
+          "example_english": "In the forest, the tree became green."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "harita varne haritibhavanam ityarthah. sakatayanaprakriyanusarena sauvrana-kandvadipathe haritayater rupasiddhih.",
+      "kshiratarangini": "harita varnakhyane. haritam acarisyati haritayati va iti sakatayanadivisistapatha-samamnayena darsitah."
+    },
+    "meanings": {
+      "English": "to turn green, to become verdant, to take on a greenish-yellow colour",
+      "Kannada": "hasiraguvudu, hasiru bannavaguvudu",
+      "Telugu": "pacaganavuta, haritavarnamu dharincuta",
+      "Tamil": "pacumaiyadaintal, paccai niramatutal",
+      "Malayalam": "paccaniramakuka, haritamakuka",
+      "Hindi": "hara hona, hariyali dharana karana",
+      "Bengali": "sobuj howa, haritbhab grohon kora",
+      "German": "grun werden, ergrunen",
+      "French": "verdir, devenir vert",
+      "Russian": "zeletet, stanovit'sya zelyonym",
+      "Chinese": "bian lu, chengwei lvse"
+    }
+  },
+  {
+    "dhatu_id": "14.0069",
+    "aupadeshika": "karbura",
+    "stripped_root": "karbur",
+    "gana": "bhvādi",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "citre (vicitrībhāve)",
+    "tradition_tag": "Sakatayana",
+    "dhaturupanandini": {
+      "simple_explanation": "The root karbur means to become variegated, spotted, or multicoloured, just like autumn leaves or a peacock feather turning into a pattern of many different shades.",
+      "scenarios": [
+        {
+          "verb_form": "karburati",
+          "grammar_trigger": "laṭ-lakāra (Present Indicative, Prathama-puruṣa / 3rd Person Singular)",
+          "meaning": "becomes variegated or multicoloured",
+          "example_sanskrit": "vasante vanam vividhapuṣpaiḥ karburati.",
+          "example_english": "In spring, the forest becomes variegated with diverse flowers."
+        },
+        {
+          "verb_form": "akarburīt",
+          "grammar_trigger": "luṅ-lakāra (Aorist / Simple Past, Prathama-puruṣa / 3rd Person Singular)",
+          "meaning": "became spotted or variegated",
+          "example_sanskrit": "patre patite satyambaram akarburīt.",
+          "example_english": "As the leaves fell, the ground became spotted with various shades."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "karbura citre. vicitrībhāve 'sya vṛttiḥ. ayaṃ dhātuḥ śākaṭāyanādisiddhaḥ parasmaipadī seṭ ca.",
+      "kshiratarangini": "karbura citre. nānāvarṇayoge vicitrīkaraṇe vā prayujyate. karburati."
+    },
+    "meanings": {
+      "English": "to be variegated, to become multicoloured or spotted",
+      "Kannada": "citravarṇavāgiru, nānāvarṇavāgu",
+      "Telugu": "nānāvarṇamulugā māru, vicitramagu",
+      "Tamil": "palavaṇṇamāga māṟu, puḷḷiyuḷḷadhāgu",
+      "Malayalam": "palaniṟamuḷḷathākuka, vicitramākuka",
+      "Hindi": "citrakabarā honā, raṅg-biraṅgā honā",
+      "Bengali": "citrabicitra haoẏā, nānā raṅe raṅgina haoẏā",
+      "German": "bunt werden, scheckig sein",
+      "French": "se bigarrer, devenir tacheté ou multicolore",
+      "Russian": "stanovit'sya pestrym, pokryvat'sya pyatnami",
+      "Chinese": "biande wucai banlan, bian cheng banbo"
+    }
+  },
+  {
+    "dhatu_id": "14.0070",
+    "aupadeshika": "surabhi",
+    "stripped_root": "surabh",
+    "gana": "curādi-gaṇa (Class 10)",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "gandhe (sugandhīkaraṇe)",
+    "tradition_tag": "Sakatayana",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'surabh' means to perfume, to make fragrant, or to fill an environment with a pleasant, sweet aroma. It is used when an object, flower, or incense makes its surroundings smell delightful.",
+      "scenarios": [
+        {
+          "verb_form": "surabhayati",
+          "grammar_trigger": "lat (present indicative, prathama-purusa, eka-vacana)",
+          "meaning": "perfumes / makes fragrant",
+          "example_sanskrit": "mālatīkusumam sarvam udyānam surabhayati.",
+          "example_english": "The jasmine flower perfumes the entire garden."
+        },
+        {
+          "verb_form": "asurabhayat",
+          "grammar_trigger": "lan (imperfect past, prathama-purusa, eka-vacana)",
+          "meaning": "perfumed / made fragrant",
+          "example_sanskrit": "dhūpaḥ kṛtsnam mandiram asurabhayat.",
+          "example_english": "The incense made the entire temple fragrant."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "curādau 'surabhi gandhe' iti kevalam saugandhye prayujyate. nic-pratyaye surabhayatīti rūpam prasidhyati.",
+      "kshiratarangini": "'surabhi gandhe' iti curādikanda-gaṇayoḥ paṭhitaḥ. śākaṭāyana-siddhānte 'surabhiḥ sugandhīkaraṇe' iti gaṇyate."
+    },
+    "meanings": {
+      "English": "to perfume, to make fragrant, to scent",
+      "Kannada": "sugandhapūrita māḍu, vāsanegoḍu",
+      "Telugu": "parimaḷimpajeccu, sugandhamunu niccu",
+      "Tamil": "naṟumaṇamūṭṭu, vācanaiyākku",
+      "Malayalam": "sugandhapūritamākkuka, maṇappikkuka",
+      "Hindi": "sugandhita karanā, vāsita karanā",
+      "Bengali": "sugandhita karā, subāsa chaṛānō",
+      "German": "parfümieren, wohlriechend machen, beduften",
+      "French": "parfumer, embaumer, rendre odorant",
+      "Russian": "napolnyat' aromatom, dushit', blagouhat'",
+      "Chinese": "shǐ fāngxiāng, xūnxiāng, fāsàn xiāngqì"
     }
   }
 ]
