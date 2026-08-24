@@ -25,7 +25,7 @@
     },
     {
       "path": "dge/data/agama/pancharatra/pancharatra_samhitas/lakshmi_tantra/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Lakshmi Tantra"
     },
     {
