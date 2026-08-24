@@ -217,34 +217,36 @@
     renderAnalysis(row);
   }
   /* ---------- dual navigation: Ashtadhyayi order · Kaumudi order ---------- */
-  // Two always-visible clusters, each stepping its own order; tapping a
-  // cluster's label also makes that order the one Previous/Next and the
-  // arrow keys follow. Replaces the old single toggle button, which hid
-  // the Kaumudi position unless you switched modes.
+  // Two always-visible clusters, tapping a cluster's label makes that
+  // order the one Previous/Next and the arrow keys follow. Replaces the
+  // old single toggle button, which hid the Kaumudi position unless you
+  // switched modes.
+  // 24 Aug 2026: each cluster used to also carry its own dn-arrow prev/
+  // next pair -- a real 3rd/4th stepping control, functionally parallel
+  // to (not just a mode-switch for) #dge-prevBtnTop/#dge-nextBtnTop and
+  // the bottom #dge-prevBtn/#dge-nextBtn, which already step whichever
+  // order is active. Project lead's direct clutter report ("Kaumudi
+  // navigation, Ashtadhyayi navigation... upper navigation, lot of
+  // unwanted stuff") -- confirmed via investigation these were genuinely
+  // redundant, not just visually busy: removed here, leaving only the
+  // mode-switch labels + chapters button. Stepping itself is unaffected
+  // (nav-top/nav call the same goNav()/go()/goKaumudi() this always did).
   function renderDualNav(row){
     var box=$("#dge-dualnav"); if(!box) return;
     var ke = kaumudiOf(row.id);
     var akOn = state.navMode!=="kaumudi", skOn = !akOn;
     box.innerHTML =
       '<span class="dn-cluster'+(akOn?' on':'')+'" data-order="ashtadhyayi">'
-      +'<button class="dn-arrow" data-nav="ak-prev" title="previous sutra (Ashtadhyayi order)">‹</button>'
       +'<button class="dn-label" data-nav="ak-mode" title="browse in Ashtadhyayi order"><span class="deva">'+tl("अष्टाध्यायी")+'</span> '+esc(row.id)+'</button>'
-      +'<button class="dn-arrow" data-nav="ak-next" title="next sutra (Ashtadhyayi order)">›</button>'
       +'</span>'
       +'<span class="dn-cluster'+(skOn?' on':'')+(ke?'':' dn-none')+'" data-order="kaumudi">'
-      +'<button class="dn-arrow" data-nav="sk-prev" title="previous in Siddhanta Kaumudi order">‹</button>'
       +'<button class="dn-label" data-nav="sk-mode" title="browse in Siddhanta Kaumudi reading order"><span class="deva">'+tl("कौमुदी")+'</span> '+(ke?devnum(ke.kaumudiIndex):"—")+'</button>'
-      +'<button class="dn-arrow" data-nav="sk-next" title="next in Siddhanta Kaumudi order">›</button>'
       +'</span>'
       +'<button class="dn-chapters" data-nav="chapters" title="Siddhanta Kaumudi prakarana list"><span class="deva">'+tl("प्रकरणानि")+'</span> ☰</button>';
   }
   function setNavMode(m){
     state.navMode = m; LS.set("navMode", m);
     renderHero();
-  }
-  function stepOrder(order, dir){
-    if(order==="kaumudi"){ if(state.navMode!=="kaumudi") setNavMode("kaumudi"); goKaumudi(dir); }
-    else { if(state.navMode!=="ashtadhyayi") setNavMode("ashtadhyayi"); go(state.idx+dir); }
   }
   /* ---------- साहित्ये प्रयोगाः (corpus usages of this sutra) ---------- */
   // Built by tools/build_sutra_prayoga_index.py; sharded per adhyaya.
@@ -575,7 +577,7 @@
 
   /* ---------- settings modal ---------- */
   function openSettings(){ var m=$("#dge-settings"); if(m){ fillModelSel(); $("#dge-keyInput").value=getKey(); $("#dge-modelSel").value=getModel(); m.classList.add("open"); $("#dge-backdrop").classList.add("open"); } }
-  function closeAll(){ $("#dge-drawer").classList.remove("open"); var s=$("#dge-settings"); if(s)s.classList.remove("open"); var c=$("#dge-chaptersModal"); if(c)c.classList.remove("open"); var pmm=$("#dge-prayogaModal"); if(pmm)pmm.classList.remove("open"); $("#dge-backdrop").classList.remove("open"); }
+  function closeAll(){ $("#dge-drawer").classList.remove("open"); var s=$("#dge-settings"); if(s)s.classList.remove("open"); var c=$("#dge-chaptersModal"); if(c)c.classList.remove("open"); var pmm=$("#dge-prayogaModal"); if(pmm)pmm.classList.remove("open"); var mn=$("#dge-menuDrawer"); if(mn)mn.classList.remove("open"); $("#dge-backdrop").classList.remove("open"); }
 
   /* ---------- wire ---------- */
   // The sticky header wraps onto 2-3 rows on a narrow phone (its many
@@ -616,11 +618,7 @@
     if(dn) dn.addEventListener("click",function(e){
       var b=e.target.closest("[data-nav]"); if(!b) return;
       switch(b.dataset.nav){
-        case "ak-prev": stepOrder("ashtadhyayi",-1); break;
-        case "ak-next": stepOrder("ashtadhyayi",1); break;
         case "ak-mode": setNavMode("ashtadhyayi"); break;
-        case "sk-prev": stepOrder("kaumudi",-1); break;
-        case "sk-next": stepOrder("kaumudi",1); break;
         case "sk-mode": setNavMode("kaumudi"); break;
         case "chapters": openChapters(); break;
       }
@@ -778,8 +776,13 @@
       b.classList.toggle("on", b.dataset.lang===aiLang);
       b.addEventListener("click",function(){
       aiLang=b.dataset.lang; document.querySelectorAll("#dge-drawer [data-lang]").forEach(function(x){x.classList.remove("on");}); b.classList.add("on"); }); });
+    // menu drawer (view/script/size/theme/search/settings -- consolidated
+    // 24 Aug 2026, see the header comment in ashtadhyayi.html)
+    var menuBtn=$("#dge-menuBtn"); if(menuBtn) menuBtn.addEventListener("click",function(){ $("#dge-menuDrawer").classList.add("open"); $("#dge-backdrop").classList.add("open"); });
+    var menuClose=$("#dge-menuClose"); if(menuClose) menuClose.addEventListener("click",closeAll);
+    var menuSearch=$("#dge-menuSearchBtn"); if(menuSearch) menuSearch.addEventListener("click",function(){ closeAll(); if(window.DGEGlobalSearch) window.DGEGlobalSearch.open(); });
     // settings
-    var gear=$("#dge-gear"); if(gear) gear.addEventListener("click",openSettings);
+    var gear=$("#dge-gear"); if(gear) gear.addEventListener("click",function(){ closeAll(); openSettings(); });
     var sv=$("#dge-keySave"); if(sv) sv.addEventListener("click",function(){ setKey($("#dge-keyInput").value.trim()); LS.set("gmodel",$("#dge-modelSel").value); closeAll(); });
     var cl=$("#dge-keyClear"); if(cl) cl.addEventListener("click",function(){ setKey(""); $("#dge-keyInput").value=""; });
     var sc=$("#dge-setClose"); if(sc) sc.addEventListener("click",closeAll);

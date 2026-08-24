@@ -10,7 +10,7 @@
 <title>अष्टाध्यायी · DGE व्याकरणम्</title>
 <script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.3.3/sanscript.js"
  onerror="this.onerror=null;var s=document.createElement('script');s.src='https://unpkg.com/@indic-transliteration/sanscript@1.3.3/sanscript.js';document.head.appendChild(s);"></script>
-<link rel="stylesheet" href="css/ashtadhyayi.css?v=4">
+<link rel="stylesheet" href="css/ashtadhyayi.css?v=5">
 <link rel="stylesheet" href="css/intellisense.css?v=2">
 </head>
 <!-- The page is the Ashtadhyayi, so a bare "1.1.3" in a commentary is a
@@ -18,23 +18,55 @@
      cue word. It scans the commentary panel and the padaccheda panel. -->
 <body data-grantha-slug="vedanga/vyakarana/ashtadhyayi"
       data-intellisense-roots="#dge-layers,#dge-analysis">
+<!-- 24 Aug 2026: header consolidated per the project lead's direct
+     clutter report ("the Ashtadhyayi page... upper navigation, lot of
+     unwanted stuff appearing... screen should be minimal") -- on a
+     narrow phone the six controls this used to hold (Read/Compare,
+     6-script selector, font +/-, theme, gear) wrapped across 3-4 lines
+     before any sutra content appeared at all. All six are settings a
+     reader sets once and rarely revisits per-sutra, not per-sutra
+     actions -- reusing this exact reasoning and this file's OWN existing
+     .drawer/.backdrop bottom-sheet system (already used for the AI tutor
+     drawer just below) rather than importing index.html's separate
+     drawer-right pattern, since this page has its own established one.
+     Only the jump-to-sutra input (constant, primary navigation) and the
+     new ☰ menu button stay in the header; every id below is unchanged
+     from before, only relocated into #dge-menuDrawer, so none of their
+     own click handlers in ashtadhyayi.js needed touching. -->
 <header>
   <div class="bar">
     <div class="brand"><a href="index.html" title="DGE Home" style="color:var(--accent);text-decoration:none;font-weight:700">⌂ DGE</a><span style="color:var(--muted);margin:0 6px">›</span><span class="deva">अष्टाध्यायी</span></div>
     <div class="spacer"></div>
     <input class="jump" id="dge-jump" placeholder="1.1.1" list="dge-sutralist" title="jump to sutra">
     <datalist id="dge-sutralist"></datalist>
+    <button class="icon" id="dge-menuBtn" title="Menu: view, script, size, theme, search, AI settings">☰</button>
+  </div>
+</header>
+
+<div class="drawer" id="dge-menuDrawer">
+  <div class="inner">
+    <button class="x" id="dge-menuClose">×</button>
+    <h4>☰ Menu</h4>
+    <div style="margin-top:6px;font-size:11px;opacity:.6;text-transform:uppercase;letter-spacing:.4px;">View</div>
     <div class="ctl" id="dge-modeSeg"><button data-m="read" class="on">☰ Read</button><button data-m="compare">▥ Compare</button></div>
+    <div style="margin-top:12px;font-size:11px;opacity:.6;text-transform:uppercase;letter-spacing:.4px;">Script</div>
     <div class="ctl" id="dge-scriptSeg">
       <button data-s="devanagari" class="on">देव</button><button data-s="iast">IAST</button>
       <button data-s="kannada">ಕ</button><button data-s="telugu">తె</button><button data-s="tamil">த</button><button data-s="malayalam">മ</button>
     </div>
-    <button class="icon" id="dge-fontDn" title="smaller">A−</button>
-    <button class="icon" id="dge-fontUp" title="larger">A+</button>
-    <button class="icon" id="dge-themeBtn" title="Light / Dark">◐</button>
-    <button class="icon" id="dge-gear" title="AI settings">⚙</button>
+    <div style="margin-top:12px;font-size:11px;opacity:.6;text-transform:uppercase;letter-spacing:.4px;">Size &amp; theme</div>
+    <div class="q">
+      <button id="dge-fontDn" title="smaller">A−</button>
+      <button id="dge-fontUp" title="larger">A+</button>
+      <button id="dge-themeBtn" title="Light / Dark">◐ Light/Dark</button>
+    </div>
+    <div style="margin-top:12px;font-size:11px;opacity:.6;text-transform:uppercase;letter-spacing:.4px;">Other</div>
+    <div class="q">
+      <button id="dge-menuSearchBtn" title="Search the whole DGE corpus">🔍 Search the corpus</button>
+      <button id="dge-gear" title="AI settings">⚙ AI settings</button>
+    </div>
   </div>
-</header>
+</div>
 
 <!-- Pinned just below the header rather than only at the very bottom of the
      page, after every commentary layer — a reader had to scroll past all of
@@ -154,7 +186,7 @@
 </div>
 
 <script src="js/gemini.js?v=1.2.1"></script>
-<script src="js/ashtadhyayi.js?v=1.6.1"></script>
+<script src="js/ashtadhyayi.js?v=1.7.0"></script>
 <script>
 /* populate the sutra jump datalist once data is present */
 (function(){ function fill(){ var dl=document.getElementById('dge-sutralist'); if(!dl) return;
@@ -166,7 +198,7 @@
 <script src="js/intellisense.js?v=4.65.0"></script>
 <!-- Corpus-wide search, for the 🔍 प्रयोगाः button (where is this sutra
      cited across the whole library) and the floating search button. -->
-<script src="js/dge-search.js?v=4.65.0" defer></script>
-<script src="js/global-search.js?v=4.68.0" defer></script>
+<script src="js/dge-search.js?v=4.65.1" defer></script>
+<script src="js/global-search.js?v=4.68.4" defer></script>
 </body>
 </html>
