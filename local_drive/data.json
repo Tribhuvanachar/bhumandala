@@ -87190,6 +87190,52 @@
     }
   },
   {
+    "dhatu_id": "10.0336",
+    "aupadeshika": "māna",
+    "stripped_root": "man",
+    "gana": "Curadigaṇa (Adanta Curadi)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "pujayam",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'man' (mana) belonging to the 10th conjugation (Curadi gana) carries the meaning of honoring, respecting, or worshiping someone. Because it is inherently conjugated with the nic affix (curadibhyo nic), it takes the forms manayati or manayate. In active constructions, the subject offers respect or hospitality to an honored guest or teacher.",
+      "scenarios": [
+        {
+          "verb_form": "manayati",
+          "grammar_trigger": "Curadi nic, Kartari prayoga, Parasmaipada, Lat lakara, Prathama purusha, Ekavacana",
+          "meaning": "Honors or respects",
+          "example_sanskrit": "Sishyah gurum manayati.",
+          "example_english": "The student honors the teacher."
+        },
+        {
+          "verb_form": "manayate",
+          "grammar_trigger": "Curadi nic, Kartari prayoga, Atmanepada, Lat lakara, Prathama purusha, Ekavacana",
+          "meaning": "Honors or welcomes with devotion for oneself",
+          "example_sanskrit": "Nrpah atithim manayate.",
+          "example_english": "The king welcomes and respects the guest."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Mana pujayam. Curadirubhayapadi set. Svabhavikatvadanityatvadvapi nic-pratyayah. Manayati, manayate. Pujanam satkarah.",
+      "kshiratarangini": "Mana pujayam. Pujartho manayati ityadi rupam sadhayati. Curadigane nityanicpakse dravyasatkara-visesarthah."
+    },
+    "meanings": {
+      "English": "To honor, respect, revere, or venerate",
+      "Kannada": "Gauravisu, pujisu, satkarisu",
+      "Telugu": "Gauravincu, pujincu, satkarincu",
+      "Tamil": "Mariyadhai sei, potru, vanangu",
+      "Malayalam": "Bahumanikkuka, aadarikkuka, poojikkuka",
+      "Hindi": "Adar karna, samman karna, pujna",
+      "Bengali": "Samman kora, puja kora, shraddha kora",
+      "German": "Ehren, verehren, achten",
+      "French": "Honorer, respecter, venerer",
+      "Russian": "Pochitat, uvazhat, chestvovat",
+      "Chinese": "Zunjing, zunzhong, jingyang"
+    }
+  },
+  {
     "dhatu_id": "10.0337",
     "aupadeshika": "tarja",
     "stripped_root": "tarj",
@@ -87509,6 +87555,3088 @@
       "French": "Proteger, garder, nourrir, gouverner",
       "Russian": "Zashchishchat, okhranyat, berech, vskarmlivat",
       "Chinese": "Baohu, shouhu, fuyang"
+    }
+  },
+  {
+    "dhatu_id": "10.0344",
+    "aupadeshika": "dhūpa",
+    "stripped_root": "dhūp",
+    "gana": "Curādi (Gana 10)",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "saṃtāpe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root dhūp belongs to the 10th class (Curādi), which inherently takes the affix 'ṇic' in its basic forms without necessarily implying a causative meaning. In Parasmaipada (dhūpayati) and Ātmanepada (dhūpayate), it expresses the action of fumigating, incensing, perfuming, or heating/burning. When the action's fruit or benefit is directed towards the subject itself, Ātmanepada endings are favored; when directed outwardly, Parasmaipada is commonly employed.",
+      "scenarios": [
+        {
+          "verb_form": "dhūpayati",
+          "grammar_trigger": "Curādi svārthe ṇic, Kartari prayoga, Parasmaipada, Lat lakāra, prathama-puruṣa, eka-vacana",
+          "meaning": "Fumigates / incenses / heats",
+          "example_sanskrit": "pūjārī devālaye sugandhadravyais caityaṃ dhūpayati.",
+          "example_english": "The priest incenses the shrine in the temple with fragrant substances."
+        },
+        {
+          "verb_form": "dhūpayate",
+          "grammar_trigger": "Curādi svārthe ṇic, Kartari prayoga, Ātmanepada (ātmanepada-phala), Lat lakāra, prathama-puruṣa, eka-vacana",
+          "meaning": "Perfumes or warms for oneself",
+          "example_sanskrit": "bhaktaḥ svagṛhaṃ dhūpena dhūpayate.",
+          "example_english": "The devotee perfumes his own house with incense for himself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti notes dhūpa in the sense of saṃtāpa (afflicting with heat, burning) and stuti (praise/perfuming). Since it occurs in Curādi-gaṇa, the affix ṇic is added by default (svārthe ṇic), yielding the base dhūpay-. The root is seṭ with an innate long ū vowel and forms both Parasmaipada and Ātmanepada.",
+      "kshiratarangini": "Kshirasvamin indicates that dhūpa belongs to the group signifying saṃtāpa (tormenting/heating) and sugandha-karaṇa (perfuming with incense). Forms like dhūpayati and dhūpayate are derived by the addition of ṇic suffix, maintaining the long radical vowel."
+    },
+    "meanings": {
+      "English": "to fumigate, to incense, to perfume, to heat or burn",
+      "Kannada": "dhūpa hākuvudu, sugandhavannu harisuvudu, bisi māḍuvudu",
+      "Telugu": "dhūpamu vēyu, vāsana kaligiñcu, veḍi cēyu",
+      "Tamil": "thūpamiṭutal, naṟumaṇamēṟṟutal, veppamākkutal",
+      "Malayalam": "dhūpamiduka, sugandham parathuka, chūḍākkuka",
+      "Hindi": "dhūpa denā, sugandhita karanā, santāpa denā yā tapānā",
+      "Bengali": "dhūpa deoyā, sugandhita karā, santāpita karā",
+      "German": "räuchern, bedampfen, einweihräuchern, erhitzen",
+      "French": "encenser, parfumer avec de l'encens, chauffer",
+      "Russian": "okurivat fimiamom, aromatisat, nagrevat",
+      "Chinese": "xunxiang, fenshang, jiaruo"
+    }
+  },
+  {
+    "dhatu_id": "10.0345",
+    "aupadeshika": "kuth",
+    "stripped_root": "kuth",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "kleshane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kuth' belongs to the 10th conjugation (Curadi gana) and inherently takes the affix 'nic' (-aya-), meaning 'to torment', 'to cause distress/pain', or 'to cause to rot/suffer'. Because it is conjugated in Curadi, it forms 'kothayati' (active) or 'kothayate' (middle) when the action directly affects the subject.",
+      "scenarios": [
+        {
+          "verb_form": "kothayati",
+          "grammar_trigger": "Parasmaipada, Lat lakara, Prathama Purusha, Ekavacana with nic pratyaya and guna vowel strengthening",
+          "meaning": "Torments / causes distress to another",
+          "example_sanskrit": "rogaH shariram kothayati.",
+          "example_english": "The disease torments the body."
+        },
+        {
+          "verb_form": "kothayate",
+          "grammar_trigger": "Atmanepada, Lat lakara, Prathama Purusha, Ekavacana expressing inward or reflexive distress",
+          "meaning": "Torments oneself / suffers inward anguish",
+          "example_sanskrit": "durjanah asuyaya svamanah kothayate.",
+          "example_english": "The wicked person torments his own mind out of jealousy."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Madhaviya Dhatuvritti notes 'kuth kleshane' under the Curadi class. The inherent nic affix induces guna of the medial short vowel 'u' to 'o', yielding the base 'kothaya-', taking Parasmaipada and Atmanepada endings under specific syntactic conditions.",
+      "kshiratarangini": "Kshirasvamin explains that 'kuth' denotes both psychological torment (pida/klesha) and physical disintegration or rotting, conjugated obligatorily with aya-pratyaya in the tenth class without requiring an external causative agent."
+    },
+    "meanings": {
+      "English": "to torment, distress, cause pain or affliction, to cause to rot",
+      "Kannada": "badhisuvudu, santapapadisuvudu, kleshavannuntumaduvudu",
+      "Telugu": "badhincu, kleshapettu, santapamu kaligincu",
+      "Tamil": "thunburuthal, vedhanaipaduthal, klesam undakkudal",
+      "Malayalam": "peedippikkuka, vedanippikkuka, kashtappaduthuka",
+      "Hindi": "klesh pahunchana, peedit karna, dukh dena",
+      "Bengali": "klesh deoa, jontrona deoa, peeron kora",
+      "German": "qualen, peinigen, Leid zufugen",
+      "French": "tourmenter, affliger, faire souffrir",
+      "Russian": "muchit, terzat, prichinyat stradaniya",
+      "Chinese": "zhemo, shi tongku, shi furan"
+    }
+  },
+  {
+    "dhatu_id": "10.0346",
+    "aupadeshika": "chada saṁvaraṇe",
+    "stripped_root": "chad",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "saṁvaraṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'chad' belongs to the 10th class (Curadi gana) and means 'to cover', 'to conceal', or 'to veil'. Because it is a 10th-class root, it always attaches the affix 'ṇic' (making 'chādayati' or 'chādayate'). When using Parasmaipada, the action is directed outwards (e.g., covering an object with a cloth), whereas Atmanepada indicates an action done for oneself or self-covering.",
+      "scenarios": [
+        {
+          "verb_form": "chādayati",
+          "grammar_trigger": "Curādi-svārthe-ṇic, Parasmaipada, Prathama Purusha, Ekavacana, Lat Lakāra",
+          "meaning": "Covers or conceals (something)",
+          "example_sanskrit": "Bālakaḥ vastreṇa mukhaṁ chādayati.",
+          "example_english": "The boy covers his face with a cloth."
+        },
+        {
+          "verb_form": "chādayate",
+          "grammar_trigger": "Curādi-svārthe-ṇic, Ātmanepada, Prathama Purusha, Ekavacana, Lat Lakāra",
+          "meaning": "Covers oneself or covers for one's own sake",
+          "example_sanskrit": "Vṛddhaḥ kambalena vapuḥ chādayate.",
+          "example_english": "The elderly person covers his body with a blanket for himself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'chada' is listed under Curadi gana in the sense of 'saṁvaraṇa' (covering, concealing, or enclosing). In this class, the affix ṇic applies obligatorily in the primary sense without a causal agent. The vowel 'a' undergoes vṛddhi resulting in the stem 'chādi-', yielding forms such as 'chādayati' and 'chādayate'.",
+      "kshiratarangini": "Kshirasvamin defines 'chada saṁvaraṇe' as the act of shielding, wrapping, or covering. He notes that the root generates forms like 'chādayati' and 'chādayate' under the curādi ṇic-prakriyā, with past passive participle forms like 'channa' or 'chādita' depending on derivation."
+    },
+    "meanings": {
+      "English": "To cover, to conceal, to hide, to veil",
+      "Kannada": "Hachisu, mucchu, maremāḍu",
+      "Telugu": "Kappu, musuguveyu, dācu",
+      "Tamil": "Mūḍu, maraikku",
+      "Malayalam": "Mooduka, maraikkuka",
+      "Hindi": "Dhaknā, chipānā, āvṛta karnā",
+      "Bengali": "Dhākā, gopana karā, ābṛta karā",
+      "German": "Bedecken, verhüllen, verbergen",
+      "French": "Couvrir, voiler, cacher",
+      "Russian": "Pokryvat, skryvat, zakryvat",
+      "Chinese": "Zhegai, yincang"
+    }
+  },
+  {
+    "dhatu_id": "10.0347",
+    "aupadeshika": "kṣapa",
+    "stripped_root": "kṣap",
+    "gana": "curādi",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "preraṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root kṣap belongs to the 10th class (Curadi), meaning it naturally takes the -aya- stem affix. It conveys the sense of urging, sending forth, throwing, or spending/destroying time. As an Ubhayapadi verb, it can take Parasmaipada or Atmanepada endings depending on whether the fruit of the action is general or self-directed.",
+      "scenarios": [
+        {
+          "verb_form": "kṣapayati",
+          "grammar_trigger": "Parasmaipada, Kartari prayoga, Lat lakara (3rd person singular)",
+          "meaning": "sends, urges, throws, or spends (time)",
+          "example_sanskrit": "muniḥ tapasaiva kālaṃ kṣapayati.",
+          "example_english": "The sage passes his time solely through penance."
+        },
+        {
+          "verb_form": "kṣapayate",
+          "grammar_trigger": "Atmanepada, Kartari prayoga, Lat lakara (3rd person singular)",
+          "meaning": "urges or casts for oneself",
+          "example_sanskrit": "bālaḥ svātmānaṃ vidyāyāṃ kṣapayate.",
+          "example_english": "The boy applies himself towards knowledge."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'kṣapa' is enumerated under Curadigaṇa with the meaning of 'preraṇa' (driving, urging, propelling, or causing to pass). Because it belongs to the 10th group, it obligatorily receives the ṇic affix (svarita-it), which permits conjugation in both Parasmaipada and Atmanepada (kṣapayati, kṣapayate).",
+      "kshiratarangini": "Kshirasvamin defines 'kṣapa preraṇe' as denoting the act of directing, driving away, or casting forward. The root is sakarmaka (transitive) and seṭ, forming regular curādi derivatives with the characteristic aya-anga."
+    },
+    "meanings": {
+      "English": "to send, to urge, to throw, to spend (time), to destroy",
+      "Kannada": "prerisu, ese, samaya kaleyu, nashisu",
+      "Telugu": "prerana cheyu, visuru, samayamu gadupu, nashimpajeyu",
+      "Tamil": "thundu, eri, neram kalikka, azhikka",
+      "Malayalam": "prerippikkuka, eriyuka, samayam kalayuka, nashippikkuka",
+      "Hindi": "prerit karna, phenkna, samay bitana, nasht karna",
+      "Bengali": "prerita kara, chhonra, samaya katano, binasha kara",
+      "German": "antreiben, schleudern, Zeit verbringen, vernichten",
+      "French": "inciter, lancer, passer le temps, detruire",
+      "Russian": "pobuzhdat', brosat', provodit' vremya, unichtozhat'",
+      "Chinese": "qushi, paozhi, duzhi shiguang, huimie"
+    }
+  },
+  {
+    "dhatu_id": "10.0348",
+    "aupadeshika": "kṣapa",
+    "stripped_root": "kṣap",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapadi",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "prerane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kṣap' belongs to the 10th class (Curadi) and means to send, direct, dispatch, or to pass time. Because it is in the 10th class, it obligatorily takes the 'ṇic' suffix (-ay-). When used in Parasmaipada, it highlights an action directed outward, whereas Atmanepada can denote an action directed toward or for oneself.",
+      "scenarios": [
+        {
+          "verb_form": "kṣapayati",
+          "grammar_trigger": "Curadi ṇic-pratyaya, Kartari Prayoga, Parasmaipada, 3rd Person Singular (prathama-puruṣa ekavacana)",
+          "meaning": "sends / directs / causes to move",
+          "example_sanskrit": "nṛpaḥ dūtaṃ nagaraṃ kṣapayati.",
+          "example_english": "The king sends the messenger to the city."
+        },
+        {
+          "verb_form": "kṣapayate",
+          "grammar_trigger": "Curadi ṇic-pratyaya, Kartari Prayoga, Atmanepada, 3rd Person Singular (prathama-puruṣa ekavacana)",
+          "meaning": "spends (time) / dispatches for oneself",
+          "example_sanskrit": "muniḥ tapasi kālaṃ kṣapayate.",
+          "example_english": "The sage spends his time in penance."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "kṣapa prerane - Curadigane ayampathyate. ṇic-pratyaye kṣapayati kṣapayate iti rupa-dvayam bhavati. Preranarthe vartate.",
+      "kshiratarangini": "kṣapa prerane - preranam codanam nideshanam va. Sarvatra Curadau svarthe nic."
+    },
+    "meanings": {
+      "English": "to send, to direct, to cast away, to spend (time)",
+      "Kannada": "prerisu, kaluhisu, kaleyu",
+      "Telugu": "pampinchuta, prerinchuta, gaduputa",
+      "Tamil": "anupputhal, thunduthal, kazhithal",
+      "Malayalam": "ayakkuka, prerippikkuka, kazhiykkuka",
+      "Hindi": "bhejana, prerita karana, bitana",
+      "Bengali": "pathano, prerana kara, atibahita kara",
+      "German": "senden, antreiben, verbringen",
+      "French": "envoyer, diriger, passer (le temps)",
+      "Russian": "posylat, napravlyat, provodit vremya",
+      "Chinese": "paifa, qianpai, duguo"
+    }
+  },
+  {
+    "dhatu_id": "10.0349",
+    "aupadeshika": "spṛha",
+    "stripped_root": "spṛh",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapadi",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "lipsāyām",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'spṛh' belongs to the 10th conjugation (Curadi) and means to long for, crave, or desire something intensely. Because it belongs to Curadi, it automatically takes the '-aya-' infix to form 'spṛhayati'. A unique grammar rule applies to this verb: the object of strong desire usually takes the fourth case (Chaturthi Vibhakti) instead of the normal second case.",
+      "scenarios": [
+        {
+          "verb_form": "spṛhayati",
+          "grammar_trigger": "Kartari Prayoga, Lat Lakara, Prathama Purusha, Ekavacana (Parasmaipada)",
+          "meaning": "desires or yearns for",
+          "example_sanskrit": "bālakaḥ phalebhyaḥ spṛhayati.",
+          "example_english": "The boy yearns for fruits."
+        },
+        {
+          "verb_form": "spṛhayate",
+          "grammar_trigger": "Kartari Prayoga, Lat Lakara, Prathama Purusha, Ekavacana (Atmanepada)",
+          "meaning": "longs for / desires for oneself",
+          "example_sanskrit": "vidvān jñānāya spṛhayate.",
+          "example_english": "The scholar longs for knowledge."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'spṛha' is listed under the Curadi class in the sense of 'lipsā' (desire, yearning). By standard Curadi rule, the 'ṇic' pratyaya applies intrinsically, yielding the base 'spṛhaya-'. It is noted for triggering the special karaka designation of Sampradana via the Paninian sutra 'spṛhayater īpsitaḥ' (P. 1.4.36), causing the object desired to take the fourth case.",
+      "kshiratarangini": "Kshirasvamin explains 'spṛha lipsāyām' as denoting intense wishing or craving (spṛhā = abhīṣṭa-vastu-grahaṇecchā). As an adanta/curadi element, it forms 'spṛhayati' and governs the dative of interest for the cherished object."
+    },
+    "meanings": {
+      "English": "to desire, to yearn for, to long for, to covet",
+      "Kannada": "bayasu, asexpadu, huduku",
+      "Telugu": "koruta, aasinshuta, vaanchinchuta",
+      "Tamil": "virumbuthal, aasaipadu, naaduthal",
+      "Malayalam": "aagrahikkuka, mohikkuka, aashikkuka",
+      "Hindi": "ichha karna, chahana, lalchana",
+      "Bengali": "ichha kora, kamona kora, akankha kora",
+      "German": "begehren, sich sehnen nach, verlangen",
+      "French": "desirer, convoiter, aspirer a",
+      "Russian": "zhelat, zhazhdat, stremitsya",
+      "Chinese": "kewang, xiwang, tanlian"
+    }
+  },
+  {
+    "dhatu_id": "10.0350",
+    "aupadeshika": "tīra",
+    "stripped_root": "tīr",
+    "gana": "Curādi",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "karmasamāptau",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'tīr' belongs to the 10th class (Curādi gana) and inherently takes the 'nic' affix (-aya-), meaning 'to complete', 'to finish', or 'to settle an action/work'. Because it is Ubhayapada, it can take active endings (Parasmaipada) when the completion is focused generally or for someone else, and middle endings (Atmanepada) when the completion of the task is done for one's own sake.",
+      "scenarios": [
+        {
+          "verb_form": "tīrayati",
+          "grammar_trigger": "Curādi-pratyaya (nic) with Parasmaipada (Active voice)",
+          "meaning": "He/she finishes or completes a task",
+          "example_sanskrit": "bālakaḥ sarvaṁ gṛhakāryaṁ tīrayati.",
+          "example_english": "The boy completes all his homework."
+        },
+        {
+          "verb_form": "tīrayate",
+          "grammar_trigger": "Curādi-pratyaya (nic) with Ātmanepada (Middle voice)",
+          "meaning": "He/she completes or settles a task for oneself",
+          "example_sanskrit": "kāryakartā svīyaṁ karma tīrayate.",
+          "example_english": "The worker finishes his own work."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'tīra' is listed in the Curādi class with the meaning 'karmasamāptau' (bringing an action to an end or fulfillment). Being an adanta root of this class, it takes the svārthe nic affix obligatorily, yielding forms like tīrayati and tīrayate.",
+      "kshiratarangini": "Kshirasvamin notes 'tīra karma-samāptau' as a Curādi root designating full conclusion or settlement of work, forming 'tīrayati' and taking 'iṭ' in relevant non-conjugational tenses."
+    },
+    "meanings": {
+      "English": "to finish, complete, settle, accomplish",
+      "Kannada": "kelasa mugisu, samaptigolishu",
+      "Telugu": "panini mugincu, purticeyu",
+      "Tamil": "mudithu viduthal, theerthal",
+      "Malayalam": "theerkkuka, poorthiyakkuka",
+      "Hindi": "karya pura karna, samapta karna",
+      "Bengali": "kaj sesh kora, somapto kora",
+      "German": "beenden, vollenden, erledigen",
+      "French": "terminer, achever, accomplir",
+      "Russian": "zavershat, okonchat, vypolnyat",
+      "Chinese": "wancheng, jieshu"
+    }
+  },
+  {
+    "dhatu_id": "10.0351",
+    "aupadeshika": "bhāṣa",
+    "stripped_root": "bhāṣ",
+    "gana": "Curādi",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "vyaktāyāṃ vāci",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'bhāṣ' in the Curādi group means to speak clearly, articulate, or explain. Because it belongs to the 10th class, the causative-like suffix 'ṇic' is applied naturally without needing an external causer. It operates in both Parasmaipada (bhāṣayati) and Ātmanepada (bhāṣayate) forms.",
+      "scenarios": [
+        {
+          "verb_form": "bhāṣayati",
+          "grammar_trigger": "Curādi svārthe ṇic, Kartari prayoga, Parasmaipada, Prathama puruṣa, Ekavacana",
+          "meaning": "He/She speaks distinctly or articulates words",
+          "example_sanskrit": "paṇḍitaḥ śāstrārthaṃ sabhāyāṃ bhāṣayati.",
+          "example_english": "The scholar clearly articulates the meaning of the scriptures in the assembly."
+        },
+        {
+          "verb_form": "bhāṣayate",
+          "grammar_trigger": "Curādi svārthe ṇic, Kartari prayoga, Ātmanepada, Prathama puruṣa, Ekavacana",
+          "meaning": "He/She explains or expresses clearly (for self-expression)",
+          "example_sanskrit": "guruḥ śiṣyāya guhyatattvam ādareṇa bhāṣayate.",
+          "example_english": "The teacher gently explains the profound truth to the student."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti identifies 'bhāṣa vyaktāyāṃ vāci' as a 10th class root taking svārthe ṇic. The essence of this root is defined as articulate, distinct vocalization ('vyaktavāṇi'). Because ṇic is added inherently, forms like bhāṣayati and bhāṣayate are formed regularly with guṇa and standard affixes.",
+      "kshiratarangini": "Kshirasvamin notes in the Kshiratarangini that 'bhāṣ' in the Curādi signifies distinct and intelligible linguistic expression. It emphasizes deliberate clarification of spoken words distinct from indistinct sounds, leading to forms with ṇic like bhāṣayati."
+    },
+    "meanings": {
+      "English": "to speak distinctly, to explain, to articulate speech",
+      "Kannada": "spaṣṭavāgi mātanāḍu, vivarisu",
+      "Telugu": "spaṣṭamugā māṭlāḍu, vivarincu",
+      "Tamil": "teḷivāgap pēcu, viḷakku",
+      "Malayalam": "vyaktamāyi sansārikkuka, vivarikkuka",
+      "Hindi": "spaṣṭa bolnā, vyākhyā karnā, bhāṣaṇa denā",
+      "Bengali": "spaṣṭa kathā balā, byākhyā karā",
+      "German": "deutlich sprechen, erläutern, artikulieren",
+      "French": "parler distinctement, expliquer, articuler",
+      "Russian": "yasno govorit, obyasnyat, izlagat",
+      "Chinese": "qīngchǔ shuō, jiǎngjiě, fāyīn"
+    }
+  },
+  {
+    "dhatu_id": "10.0352",
+    "aupadeshika": "dhṛṣa",
+    "stripped_root": "dhṛṣ",
+    "gana": "Curādigana (10th Gana)",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "dharṣaṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'dhṛṣ' means to overpower, dare, disrespect, or assault. Belonging to the tenth group (Curādigana), it naturally takes the causative-like suffix 'ṇic' in basic active usage without needing an external causer, giving the forms 'dharṣayati' or 'dharṣayate'.",
+      "scenarios": [
+        {
+          "verb_form": "dharṣayati",
+          "grammar_trigger": "Kartari prayoga (active voice), Parasmaipada, 3rd person singular present tense (laṭ) with svārthe ṇic",
+          "meaning": "overpowers / insults / assaults",
+          "example_sanskrit": "vīraḥ yuddhe ripūn dharṣayati.",
+          "example_english": "The warrior overpowers the enemies in battle."
+        },
+        {
+          "verb_form": "dharṣyate",
+          "grammar_trigger": "Karmaṇi prayoga (passive voice), 3rd person singular present tense (laṭ)",
+          "meaning": "is overpowered / is assaulted",
+          "example_sanskrit": "durjanaḥ nṛpeṇa dharṣyate.",
+          "example_english": "The wicked person is overpowered by the king."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "dhṛṣa dharṣaṇe. dharṣaṇaṁ prāsahanaṁ parābhavo vā. curādi-antargatatvāt svārthe ṇic. dharṣayati, dharṣayate. dharṣitavān, dharṣaṇaḥ ityādīni rūpāṇi bhavanti.",
+      "kshiratarangini": "dhṛṣa dharṣaṇe. prāsahya ākramaṇaṁ dharṣaṇam. ṇau dharṣayati. adanta-pāṭhāt svārthika-ṇic-prayogaḥ."
+    },
+    "meanings": {
+      "English": "to overpower, to assault, to disrespect, to dare",
+      "Kannada": "dharṣisu, paribhavisu, aḷidele",
+      "Telugu": "dharṣiñcu, paribhavañcu, tiraskariñcu",
+      "Tamil": "aṭakku, parikāsam cey, tākku",
+      "Malayalam": "dharṣikkuka, tiraskarikkuka, paribhavikkuka",
+      "Hindi": "dharṣaṇ karnā, apamān karnā, parābhibhūt karnā",
+      "Bengali": "dharṣaṇ karā, apamān karā, parābhūta karā",
+      "German": "überwältigen, angreifen, missachten",
+      "French": "outrager, assaillir, dompter",
+      "Russian": "oskorblyat', podavlyat', nasilovat'",
+      "Chinese": "qin fan, ya dao, wu ru"
+    }
+  },
+  {
+    "dhatu_id": "10.0353",
+    "aupadeshika": "mārga",
+    "stripped_root": "mārg",
+    "gana": "Curadi (Adanta Curadi)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "anveṣaṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'mārg' belongs to the Curadi class and inherently means to seek, search for, or investigate. Because it takes the svārthe ṇic suffix (-i- / -aya-), it is formed as 'mārgayati' (Parasmaipada) or 'mārgayate' (Atmanepada). Both voices convey the active process of looking for or striving toward an object or truth.",
+      "scenarios": [
+        {
+          "verb_form": "mārgayati",
+          "grammar_trigger": "Curadi svārthe-ṇic affix, Parasmaipada, Prathama Purusha, Ekavacana",
+          "meaning": "He/she searches for or seeks",
+          "example_sanskrit": "muniḥ satyaṃ mārgeti.",
+          "example_english": "The sage seeks the truth."
+        },
+        {
+          "verb_form": "mārgayate",
+          "grammar_trigger": "Curadi svārthe-ṇic affix, Atmanepada, Prathama Purusha, Ekavacana",
+          "meaning": "He/she seeks for oneself",
+          "example_sanskrit": "pathikaḥ mārgaṃ mārgayate.",
+          "example_english": "The traveler seeks the path for himself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti analyzes 'mārga' under the Curadi-gana with the meaning 'anveṣaṇe' (in the sense of searching/seeking). It takes the obligatory svārthe ṇic affix by the rule 'satyāpa-pāśa-rūpa-veṇa-tūla-śloka-senā-loma-tvaca-varma-varṇa-cūrṇa-curādibhyo ṇic', and forms 'mārgayati' and 'mārgayate' as an Ubhayapadi root.",
+      "kshiratarangini": "Kshirasvamin notes 'mārga anveṣaṇe' among the Curadi roots, explaining that it denotes the continuous pursuit, inquiry, or physical quest for an object or person, forming its present stems through the guna and ay-ādeśa mechanisms of the ṇic base."
+    },
+    "meanings": {
+      "English": "to seek, search for, investigate, pursue",
+      "Kannada": "hudukuvudu, anveshisuvudu",
+      "Telugu": "vedakuta, anveshinchuta",
+      "Tamil": "theduthal, aaraaithal",
+      "Malayalam": "anveshikkuka, theduka",
+      "Hindi": "khojana, dhoondhana, anveshana karana",
+      "Bengali": "khoja, anusandhana kara",
+      "German": "suchen, forschen, nachforschen",
+      "French": "chercher, rechercher, enqueter",
+      "Russian": "iskat, razyskivat, issledovat",
+      "Chinese": "xunzhao, tansuo, sousuo"
+    }
+  },
+  {
+    "dhatu_id": "10.0354",
+    "aupadeshika": "parsha",
+    "stripped_root": "parsh",
+    "gana": "Curadi (gana 10)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka (Transitive)",
+    "canonical_dhatvartha": "badhane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'parsh' belongs to the 10th conjugation (Curadi gana) and carries the meaning 'to torment', 'to harm', or 'to cause pain'. Being in Curadi gana, it intrinsically incorporates the affix 'nic' (forming 'parshaya-') and can take either Parasmaipada or Atmanepada endings depending on whether the action's result is general or directed toward oneself.",
+      "scenarios": [
+        {
+          "verb_form": "parshayati",
+          "grammar_trigger": "Curadi gana, Parasmaipada, Lat lakara, prathama purusha, ekavacana",
+          "meaning": "Torments / pains / troubles someone",
+          "example_sanskrit": "rogah shariram parshayati.",
+          "example_english": "Disease torments the physical body."
+        },
+        {
+          "verb_form": "parshayate",
+          "grammar_trigger": "Curadi gana, Atmanepada, Lat lakara, prathama purusha, ekavacana",
+          "meaning": "Torments / distresses (for oneself)",
+          "example_sanskrit": "durjanah svasya cittameva parshayate.",
+          "example_english": "The wicked person distresses his own mind."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Madhaviya Dhatuvritti notes 'parsha badhane' under the Curadi class. Because it is inherently of the tenth conjugation, the affix nic occurs obligatorily in svarthe without modifying the intrinsic causal relationship. It forms parshayati and parshayate taking both active and middle terminations.",
+      "kshiratarangini": "Kshirasvamin analyzes 'parsha badhane' as conveying peerana (affliction/torment) or himsarthaka (harmful/oppressive) activities, noting its inflected forms in the Curadi group with penultimate vowel preservation."
+    },
+    "meanings": {
+      "English": "to torment, harm, distress, or inflict pain",
+      "Kannada": "badhisuvudu, hidhisuvudu, kashtapadisu",
+      "Telugu": "badhincu, baadha kaligincu, himsinchu",
+      "Tamil": "thunburuthal, thunbam vilaivithal",
+      "Malayalam": "peedippikkuka, vedana undakkuka",
+      "Hindi": "peeda pahuncana, dukh dena, satana",
+      "Bengali": "peeron kora, koshto deoya, baadha deoya",
+      "German": "quaelen, peinigen, schaedigen",
+      "French": "tourmenter, affliger, faire souffrir",
+      "Russian": "muchit, terzat, prichinyat bol",
+      "Chinese": "zhemo, shanghai, tongku"
+    }
+  },
+  {
+    "dhatu_id": "10.0355",
+    "aupadeshika": "mrsa~",
+    "stripped_root": "mrs",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "titiksayam",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'mrs' belongs to the 10th group (Curadi gana) and means to endure, tolerate, or bear patiently. Because it belongs to the 10th group, it naturally takes the infix '-aya-' (nic affix), forming 'marsayati' or 'mrsayati'. It can take both Parasmaipada and Atmanepada endings without changing its core meaning of enduring or forgiving.",
+      "scenarios": [
+        {
+          "verb_form": "marsayati",
+          "grammar_trigger": "Active voice (kartari prayoga) with Parasmaipada third-person singular",
+          "meaning": "Endures, bears, or tolerates",
+          "example_sanskrit": "sadhuh durvacanam marsayati.",
+          "example_english": "The virtuous person endures harsh words."
+        },
+        {
+          "verb_form": "marsayate",
+          "grammar_trigger": "Active voice (kartari prayoga) with Atmanepada third-person singular",
+          "meaning": "Bears patiently or forgives within oneself",
+          "example_sanskrit": "dhirah klesam marsayate.",
+          "example_english": "The wise person patiently bears distress."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'mrsa' is taught in the sense of 'titiksa' (forbearance, endurance, forgiveness). As a Curadi root, it receives svarthe nic. The penultimate vowel 'r' undergoes optional guna resulting in the forms 'marsayati' and 'mrsayati' across lakaras.",
+      "kshiratarangini": "Kshirasvamin defines 'mrsa titiksayamp' as bearing unpleasant experiences, insults, or suffering without mental perturbation, equating the semantic application directly to 'ksama' (patience) and 'sahanam' (endurance)."
+    },
+    "meanings": {
+      "English": "to endure, to tolerate, to bear patiently, to forgive",
+      "Kannada": "sahisuvudu, ksamisuvudu, taleyuvudu",
+      "Telugu": "sahincu, ksamincu, orcukonu",
+      "Tamil": "poruttal, mannittal, taangutal",
+      "Malayalam": "sahikkuka, ksamikkuka, porukkuka",
+      "Hindi": "sahan karana, kshama karana, bardasht karana",
+      "Bengali": "sahyo kora, khoma kora",
+      "German": "ertragen, dulden, verzeihen",
+      "French": "endurer, tolerer, pardonner",
+      "Russian": "terpet, vynosit, proshchat",
+      "Chinese": "renshou, baorong, yuanliang"
+    }
+  },
+  {
+    "dhatu_id": "10.0356",
+    "aupadeshika": "kṣala",
+    "stripped_root": "kṣal",
+    "gana": "curādi",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "śaucakarmaṇi",
+    "dhaturupanandini": {
+      "simple_explanation": "The root kṣal belongs to the 10th class (Curadi gana) and means 'to wash', 'cleanse', or 'purify'. Because it takes the essential nic affix in the 10th class, the vowel lengthens to form kṣālayati (Parasmaipada) or kṣālayate (Atmanepada). Both voices mean washing, with Atmanepada emphasizing that the washing or benefit is directed toward oneself.",
+      "scenarios": [
+        {
+          "verb_form": "kṣālayati",
+          "grammar_trigger": "Curādi-ṇic affix, Parasmaipada, Prathama-puruṣa, Ekavacana, Laṭ-lakāra",
+          "meaning": "He or she washes (an external object/person)",
+          "example_sanskrit": "Bālakaḥ hastau jālena kṣālayati.",
+          "example_english": "The boy washes both hands with water."
+        },
+        {
+          "verb_form": "kṣālayate",
+          "grammar_trigger": "Curādi-ṇic affix, Ātmanepada, Prathama-puruṣa, Ekavacana, Laṭ-lakāra",
+          "meaning": "He washes his own limb/self",
+          "example_sanskrit": "Purusaḥ mukhaṃ kṣālayate.",
+          "example_english": "The man washes his own face."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root kṣala is glossed under Curadi with the meaning 'śaucakarmaṇi' (in the sense of cleansing or purification). Since it is in the tenth class, it takes ṇic obligatorily in general usage. It undergoes upadhāvṛddhi to yield the stem kṣāli-, forming kṣālayati and kṣālayate.",
+      "kshiratarangini": "Kshirasvamin notes kṣala in the meaning of purification (śauce). The root is transitive (sakarmaka) and takes it-agama in non-sarvadhatuka environments, behaving as an Ubhayapadi root in the Curadi class."
+    },
+    "meanings": {
+      "English": "to wash, cleanse, purify",
+      "Kannada": "tolyuvudu, shuddhigolisuvudu",
+      "Telugu": "kaduguta, shubhramu cheyuta",
+      "Tamil": "kazhuvudhal, thooimai seithal",
+      "Malayalam": "kazhukuka, shudhiyakkuka",
+      "Hindi": "dhona, shuddha karna, saf karna",
+      "Bengali": "dhowa, parishkar kara",
+      "German": "waschen, reinigen",
+      "French": "laver, nettoyer, purifier",
+      "Russian": "myt, ochishchat",
+      "Chinese": "xidi, qingxi"
+    }
+  },
+  {
+    "dhatu_id": "10.0357",
+    "aupadeshika": "chada",
+    "stripped_root": "chad",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "apavarane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'chad' belongs to the 10th class (Curadi gana) and means to cover, conceal, or veil. Because it is in the Curadi class, it always takes the affix 'nic' (forming chaday-) in its basic conjugations. It can take either Parasmaipada endings when the action affects an external object, or Atmanepada endings when the action reflexively relates to oneself or indicates mutual action.",
+      "scenarios": [
+        {
+          "verb_form": "chādayati",
+          "grammar_trigger": "Curadi nic-pratyaya, Parasmaipada, Lat lakara, Prathama-purusha, Ekavacana",
+          "meaning": "He/she covers (something)",
+          "example_sanskrit": "Meghah suryam chādayati.",
+          "example_english": "The cloud covers the sun."
+        },
+        {
+          "verb_form": "chādayate",
+          "grammar_trigger": "Curadi nic-pratyaya, Atmanepada, Lat lakara, Prathama-purusha, Ekavacana",
+          "meaning": "He/she covers oneself / wraps oneself",
+          "example_sanskrit": "Naravarah vastrena deham chādayate.",
+          "example_english": "The man wraps/covers his body with a garment."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Chada apavarane. Apavaranam samvaranam achadanam iti arthah. Curaditvat svarthanic. Mittvam tu nasya, upadhadirghavidhestatpratishedhat. Chadayati, chadayate. Nic-pratyayantasya sakarmakatvam prasiddham.",
+      "kshiratarangini": "Chada apavarane. Apavaranam achadanam. Atha curadishu vartate chadayatityadi. Padasya ubhayatvat ubhayapaditvam sidhyati."
+    },
+    "meanings": {
+      "English": "to cover, to conceal, to veil, to hide",
+      "Kannada": "mucchuvudu, hodikeyannu haakuvudu",
+      "Telugu": "kapputa, maruguparacuta",
+      "Tamil": "mooduthal, maraithal",
+      "Malayalam": "mooduka, marakkuka",
+      "Hindi": "dhankana, chipana",
+      "Bengali": "dhaka, aaboron kora",
+      "German": "bedecken, verhullen",
+      "French": "couvrir, voiler, cacher",
+      "Russian": "pokryvat, skryvat",
+      "Chinese": "zhegai, yincang"
+    }
+  },
+  {
+    "dhatu_id": "10.0358",
+    "aupadeshika": "bhūṣa",
+    "stripped_root": "bhūṣ",
+    "gana": "Curādi",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "alaṅkāre",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'bhūṣ' belongs to the Curādi group (10th conjugation) and means 'to adorn, embellish, or decorate'. Because it takes the inherent affix 'ṇic' in normal usage, it can be conjugated in both Parasmaipada (bhūṣayati) and Ātmanepada (bhūṣayate) without changing the core meaning of decorating an object or person.",
+      "scenarios": [
+        {
+          "verb_form": "bhūṣayati",
+          "grammar_trigger": "Curādi-ṇic, Parasmaipada, Laṭ, Prathama-puruṣa, Ekavacana",
+          "meaning": "He/she adorns or decorates",
+          "example_sanskrit": "mālākāraḥ devatām mālābhiḥ bhūṣayati.",
+          "example_english": "The garland-maker decorates the deity with garlands."
+        },
+        {
+          "verb_form": "bhūṣayate",
+          "grammar_trigger": "Curādi-ṇic, Ātmanepada, Laṭ, Prathama-puruṣa, Ekavacana",
+          "meaning": "He/she adorns (often reflexive or for oneself)",
+          "example_sanskrit": "kanyā svam ābhūṣaṇaiḥ bhūṣayate.",
+          "example_english": "The maiden adorns herself with ornaments."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root bhūṣa belongs to the Curādi gaṇa in the sense of alaṅkāra (adornment). As an adanta root in this gaṇa, it obligatorily takes the svārthe-ṇic affix, yielding the verbal base bhūṣaya-, conjugated in both Parasmaipada and Ātmanepada.",
+      "kshiratarangini": "Kshirasvamin notes bhūṣa alaṅkāre, explaining that its semantic domain is decorating and beautifying. It yields forms such as bhūṣayati, abhūbhūṣat, and derived nominal forms like bhūṣaṇa and vibhūṣita."
+    },
+    "meanings": {
+      "English": "To adorn, decorate, embellish, beautify",
+      "Kannada": "Alankarisu, shrungarisu",
+      "Telugu": "Alankarinchu, singarinchu",
+      "Tamil": "Alangarikka, singarikkai",
+      "Malayalam": "Alankarikkuka, aniyikkuka",
+      "Hindi": "Sajana, alankrit karna",
+      "Bengali": "Sajano, alankrito kora",
+      "German": "Schmücken, verzieren",
+      "French": "Orner, décorer, embellir",
+      "Russian": "Ukrasat', naryazhat'",
+      "Chinese": "Zhuangshi, meihua"
+    }
+  },
+  {
+    "dhatu_id": "10.0359",
+    "aupadeshika": "masa",
+    "stripped_root": "mas",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "parimane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'mas' belongs to the Curadi (10th) class and carries the primary meaning 'to measure, weigh, or mete out'. By being in Curadi gana, it takes the inherent 'aya' (nic) affix even in simple non-causative statements, conjugating in both active (Parasmaipada) and middle (Atmanepada) voices.",
+      "scenarios": [
+        {
+          "verb_form": "masayati",
+          "grammar_trigger": "Active Voice (Kartari Prayoga, Parasmaipada, Lat Lakara, Prathama Purusha, Ekavacana)",
+          "meaning": "He/she measures or quantifies (an object for someone else).",
+          "example_sanskrit": "Vanik dhanyam masayati.",
+          "example_english": "The merchant measures the grain."
+        },
+        {
+          "verb_form": "masayate",
+          "grammar_trigger": "Middle Voice (Kartari Prayoga, Atmanepada, Lat Lakara, Prathama Purusha, Ekavacana)",
+          "meaning": "He/she measures or quantifies (for one's own assessment/benefit).",
+          "example_sanskrit": "Krishakah svadhanyam masayate.",
+          "example_english": "The farmer measures his own grain."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "masa parimane - curadirubhayapadi set. parimanam dravyader minanam unmeyatva-nirdharanam ca. svarthanici masayati masayate ityadi rupani sidhyanti.",
+      "kshiratarangini": "masa parimane. curadir nic. masayati dhanyadika-dravyadini manena nishcinoti ityarthah."
+    },
+    "meanings": {
+      "English": "to measure, to weigh, to quantify, to mete out",
+      "Kannada": "alate madu, parimanisu",
+      "Telugu": "kolucu, parimanincu",
+      "Tamil": "alavu sei, edai podu",
+      "Malayalam": "alakkuka, parimanikuka",
+      "Hindi": "napana, tolana, pariman nirdharit karna",
+      "Bengali": "mapa, parimap kara",
+      "German": "messen, abmessen, wiegen",
+      "French": "mesurer, peser, quantifier",
+      "Russian": "izmeryat, otmeryat, vzveshivat",
+      "Chinese": "celiang, chengliang, liangdu"
+    }
+  },
+  {
+    "dhatu_id": "10.0360",
+    "aupadeshika": "guphi~",
+    "stripped_root": "gumph",
+    "gana": "curadi",
+    "pada": "ubhayapada",
+    "it_status": "set",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "granthane sandarbhe ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root gumph belongs to the 10th conjugation (Curadi gana). It obligatorily takes the suffix nic in the basic sense itself without requiring a causative trigger, meaning 'to string together', 'to weave', or 'to compose'. When used in Parasmaipada or Atmanepada, it describes the act of threading flowers into a garland or arranging words into text.",
+      "scenarios": [
+        {
+          "verb_form": "gumphayati",
+          "grammar_trigger": "Curadi svarthika-nic, lat-lakara (present tense), prathama-purusha, ekavacana, parasmaipada",
+          "meaning": "He/She weaves, strings together, or composes",
+          "example_sanskrit": "mālikā kusumāni mālāyāṁ gumphayati.",
+          "example_english": "The garland-maker strings flowers into a garland."
+        },
+        {
+          "verb_form": "gumphayate",
+          "grammar_trigger": "Curadi svarthika-nic, lat-lakara (present tense), prathama-purusha, ekavacana, atmanepada",
+          "meaning": "He/She strings together or crafts for oneself",
+          "example_sanskrit": "kaviḥ padyāni gumphayate.",
+          "example_english": "The poet composes verses for himself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root guphi (gumph) is enumerated in Curadi gana with idit marker indicating the insertion of an internal nasal (num-agama). It is defined in the senses of granthana (stringing/arranging) and sandarbha (composition). Taking the svarthika-nic suffix, it yields forms such as gumphayati and gumphayate.",
+      "kshiratarangini": "Kshirasvamin notes that guphi is idit, leading to the penult nasalisation yielding gumph. Its primary semantic scope covers the structured arrangement of parts, such as weaving or literary construction (gumphanam)."
+    },
+    "meanings": {
+      "English": "to string together, to weave, to compose, to tie",
+      "Kannada": "pōṇisu, hāku, rachisu",
+      "Telugu": "guchuta, alluta, rachinchuta",
+      "Tamil": "kōrttal, pinnutal, iyyattutal",
+      "Malayalam": "kōrkkuka, thunpuka, rachikkuka",
+      "Hindi": "gūmphanā, pironā, rachana karanā",
+      "Bengali": "gā̃thā, rachana karā",
+      "German": "aufreihen, verflechten, verfassen",
+      "French": "enfiler, tresser, composer",
+      "Russian": "nanizyvat, spletat, sochinyat",
+      "Chinese": "chuanlian, bianzhi, zhuanxie"
+    }
+  },
+  {
+    "dhatu_id": "10.0361",
+    "aupadeshika": "kṣura",
+    "stripped_root": "kṣur",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapadi",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "chedane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kṣur' means to cut, shave, or scratch. As a 10th class (Curadi) verb, it obligatorily takes the 'nic' (aya) affix in all standard conjugations, forming 'kṣurayati' (when the result is for someone else) or 'kṣurayate' (when acting upon oneself or for self-benefit).",
+      "scenarios": [
+        {
+          "verb_form": "kṣurayati",
+          "grammar_trigger": "Parasmaipada (Kartari Prayoga, action directed externally)",
+          "meaning": "cuts, shaves, or scratches something/someone",
+          "example_sanskrit": "Nāpitaḥ puruṣasya keśān kṣurayati.",
+          "example_english": "The barber shaves the man's hair."
+        },
+        {
+          "verb_form": "kṣurayate",
+          "grammar_trigger": "Atmanepada (Kartari Prayoga, action directed to oneself)",
+          "meaning": "shaves or trims oneself",
+          "example_sanskrit": "Puruṣaḥ svayaṁ kṣurayate.",
+          "example_english": "The man shaves himself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti analyzes 'kṣura chedane' under the Curadi-gana, confirming that it takes the svarthe-nic affix obligatorily, rendering forms like kṣurayati and kṣurayate in the sense of dividing, scraping, or shaving an object.",
+      "kshiratarangini": "Kshirasvamin glosses 'kṣura chedane' noting its primary semantic sense of incision or hair-cutting/shaving, with the formation derived by suffixing nic to the base, resulting in regular Ubhayapadi conjugations."
+    },
+    "meanings": {
+      "English": "to cut, to shave, to scrape, to divide",
+      "Kannada": "kattarisu, kṣauramāḍu, heraḍu",
+      "Telugu": "kattarincu, kṣavaramu ceyu, cīlcu",
+      "Tamil": "veṭṭu, cirai, kīṟu",
+      "Malayalam": "muṟikkuka, kṣauram ceyyuka, kīṟuka",
+      "Hindi": "kāṭnā, kṣaur karnā, mūṁḍnā",
+      "Bengali": "kāṭā, khāmāna, chālā",
+      "German": "schneiden, rasieren, schaben",
+      "French": "couper, raser, égratigner",
+      "Russian": "rezat', brit', skresti",
+      "Chinese": "tī, jiǎn, gē"
+    }
+  },
+  {
+    "dhatu_id": "10.0362",
+    "aupadeshika": "pūja",
+    "stripped_root": "pūj",
+    "gana": "Curadi (10)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "pūjāyām",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'pūj' belongs to the Curadi (10th) class and carries the sense of honoring, respecting, or worshipping. Because it is in Curadi gana, it naturally takes the infix '-i-' (nic) in all its basic conjugations, yielding 'pūjayati' in Parasmaipada and 'pūjayate' in Atmanepada without needing a separate causative context.",
+      "scenarios": [
+        {
+          "verb_form": "pūjayati",
+          "grammar_trigger": "Lat lakara, Prathama purusha, Ekavacana (Parasmaipada)",
+          "meaning": "worships or honors someone/something (action directed outward)",
+          "example_sanskrit": "Bhaktaḥ devatām pūjayati.",
+          "example_english": "The devotee worships the deity."
+        },
+        {
+          "verb_form": "pūjayate",
+          "grammar_trigger": "Lat lakara, Prathama purusha, Ekavacana (Atmanepada)",
+          "meaning": "honors or reveres (with the benefit intended for oneself)",
+          "example_sanskrit": "Śiṣyaḥ gurum pūjayate.",
+          "example_english": "The disciple reverently honors the teacher for his own spiritual growth."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'pūja' in Curadi is assigned the semantic sense 'pūjāyām' (in the act of worshipping or venerating). As a Curadi root, it obligatorily takes the svarthika nic pratyaya by 'satyāpapāśarūpavīṇātūlaślokasenālomattvacavarmavarṇacūrṇacurādibhyo ṇic', resulting in the base 'pūji' and producing 'pūjayati' and 'pūjayate'.",
+      "kshiratarangini": "Kshirasvamin notes 'pūja pūjāyām satkāre ca' signifying veneration, worship, and hospitality. Being set and taking augment it across relevant non-sarvadhatuka affixes, it forms perfect forms like 'pūjayāmāsa' or 'pūjayāñcakre'."
+    },
+    "meanings": {
+      "English": "to worship, honor, revere, respect",
+      "Kannada": "pūjisu, gauravisu",
+      "Telugu": "pūjiñcu, sanmāniñcu",
+      "Tamil": "vaḻipaṭu, pūcittal, mariyādai cey",
+      "Malayalam": "pūjikkuka, ādarikkuka",
+      "Hindi": "pūjanā, pūjā karanā, satkāra karanā",
+      "Bengali": "pūjā karā, sammāna jānānō",
+      "German": "verehren, anbeten, ehren",
+      "French": "vénérer, adorer, honorer",
+      "Russian": "pochitat', poklonyat'sya, uvazhat'",
+      "Chinese": "chongbai, jiba, jingzhong"
+    }
+  },
+  {
+    "dhatu_id": "10.0363",
+    "aupadeshika": "dṝ",
+    "stripped_root": "dṛ",
+    "gana": "Curadigaṇa",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "vidāraṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'dṝ' belongs to the 10th class (Curadigaṇa) and means 'to tear', 'to split', or 'to cleave apart'. Because it is a Curadi root, it naturally takes the affix 'ṇic' (represented by -aya-), forming active base 'dāraya-'. It can take both Parasmaipada and Atmanepada endings depending on whether the fruit of the action goes to another or oneself.",
+      "scenarios": [
+        {
+          "verb_form": "dārayati",
+          "grammar_trigger": "Parasmaipada, Lat lakara (present tense, active voice)",
+          "meaning": "Tears, splits, or cleaves something",
+          "example_sanskrit": "Kāṣṭhabhik kāṣṭhaṃ dārayati.",
+          "example_english": "The woodcutter splits the wood."
+        },
+        {
+          "verb_form": "dārayate",
+          "grammar_trigger": "Atmanepada, Lat lakara (present tense, middle voice)",
+          "meaning": "Splits or tears something for oneself",
+          "example_sanskrit": "Simhaḥ mṛga-śarīraṃ dārayate.",
+          "example_english": "The lion tears apart the deer's body for itself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "dṝ vidāraṇe - Curādi-gaṇa. By default takes the mandatory svārthika ṇic-pratyaya, yielding the base dāraya. Vriddhi occurs on the radical vowel 'ṛ' before ṇic, producing 'ār'. Thus, dārayati, dārayate.",
+      "kshiratarangini": "dṝ vidāraṇe - Cleaving and tearing. The root undergoes vriddhi of r-kara to form dārayati / dārayate. It is considered seṭ and operates transitively."
+    },
+    "meanings": {
+      "English": "to tear, to split, to cleave, to divide",
+      "Kannada": "seeluvudu, vidarisuvudu, hariyuvudu",
+      "Telugu": "cheelchuta, vidarinchuta",
+      "Tamil": "kizhitthal, pilatthal",
+      "Malayalam": "keeruka, pilarkkuka",
+      "Hindi": "phadna, cheerana, vidirna karna",
+      "Bengali": "chhera, biphālitō korā",
+      "German": "zerreißen, spalten",
+      "French": "déchirer, fendre",
+      "Russian": "razryvat', raskalyvat'",
+      "Chinese": "silie, pikai"
+    }
+  },
+  {
+    "dhatu_id": "10.0364",
+    "aupadeshika": "tuṣa",
+    "stripped_root": "tuṣ",
+    "gana": "Curadi (Class 10)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "prīṇane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'tuṣ' in the Curadi group means to satisfy, gladden, or please someone. Unlike its 4th-class form (tuṣyati, which means 'to become pleased' on one's own), this 10th-class form inherently takes the causative-like marker 'nic' (manifested as '-ay-') to mean 'making someone else pleased' or 'gratifying someone'. In Parasmaipada (toṣayati), the action pleases another person, while in Atmanepada (toṣayate), the gratification is centered on or intended for oneself.",
+      "scenarios": [
+        {
+          "verb_form": "toṣayati",
+          "grammar_trigger": "Curadi svārthe-ṇic, Parasmaipada, Laṭ-lakāra, Prathama-puruṣa, Eka-vacana",
+          "meaning": "Pleases or satisfies another",
+          "example_sanskrit": "sadguṇī putro vinayena pitaraṃ toṣayati.",
+          "example_english": "The virtuous son pleases his father through modest conduct."
+        },
+        {
+          "verb_form": "toṣayate",
+          "grammar_trigger": "Curadi svārthe-ṇic, Ātmanepada, Laṭ-lakāra, Prathama-puruṣa, Eka-vacana",
+          "meaning": "Pleases or propitiates for personal benefit/satisfaction",
+          "example_sanskrit": "bhaktaḥ stutyā devamātmanaḥ śāntaye toṣayate.",
+          "example_english": "The devotee propitiates God through hymns for his own inner peace."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Madhava glosses 'tuṣa prīṇane' in the Curadi class, highlighting the svārthika ṇic affix which produces the base 'toṣi-'. The penultimate short vowel 'u' undergoes guṇa strengthening to 'o', yielding the finite present forms 'toṣayati' and 'toṣayate'. Madhava notes the semantic range extending to propitiation and creating content, differing from the intransitive Divadi counterpart.",
+      "kshiratarangini": "Kshirasvamin categorizes 'tuṣa' under the Curadi roots signifying 'prīṇana' (gratification/delighting others). He confirms the presence of the connecting vowel 'i' (seṭ) in non-conjugational tenses and notes that derivatives like 'toṣaṇa' and 'santoṣa' convey the act of providing satisfaction or delight."
+    },
+    "meanings": {
+      "English": "To please, to satisfy, to gratify, to delight someone",
+      "Kannada": "Santruptipadisu, santoshabadisu, mechhisu",
+      "Telugu": "Santoshapettu, truptiparacu, anandimpajeyu",
+      "Tamil": "Magilvikka, thirupthippaduththa, inbuvikka",
+      "Malayalam": "Santhoshippikkuka, thrupthippaduthuka, anandippikkuka",
+      "Hindi": "Prasanna karana, santushta karana, anandita karana",
+      "Bengali": "Santushta kara, khushi kara, anandita kara",
+      "German": "Erfreuen, zufriedenstellen, befriedigen",
+      "French": "Faire plaisir a, contenter, satisfaire",
+      "Russian": "Radovat, udovletvoryat, uslazhdat",
+      "Chinese": "Shi manyi, shi gaoxing, quwei"
+    }
+  },
+  {
+    "dhatu_id": "10.0365",
+    "aupadeshika": "kīrta",
+    "stripped_root": "kīrt",
+    "gana": "Curadi (Adanta)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "saṁśabdane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kīrt' belongs to the 10th class (Curadi gana) and takes the affix 'ṇic' inherently, meaning to narrate, proclaim, or celebrate. Because Curadi roots allow both endings, it can be conjugated in Parasmaipada (kīrtayati) when the action is directed outwardly, or in Atmanepada (kīrtayate) when emphasizing the internal reflection or benefit of recounting.",
+      "scenarios": [
+        {
+          "verb_form": "kīrtayati",
+          "grammar_trigger": "Curadi Parasmaipada, Lat lakara (present tense, 3rd person singular)",
+          "meaning": "He/she recites or proclaims (for others)",
+          "example_sanskrit": "kaviḥ nṛpasya yaśaḥ kīrtayati.",
+          "example_english": "The poet proclaims the fame of the king."
+        },
+        {
+          "verb_form": "kīrtayate",
+          "grammar_trigger": "Curadi Atmanepada, Lat lakara (present tense, 3rd person singular)",
+          "meaning": "He/she praises or recites (as an internal reflection or devotional act)",
+          "example_sanskrit": "bhaktaḥ hariguṇān kīrtayate.",
+          "example_english": "The devotee recites the divine virtues of Hari."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'kīrta saṁśabdane' belongs to the Curadi group. It is intrinsically supplied with the affix ṇic without altering its root-meaning. Being adanta, it drops the final 'a' before ṇic by the application of 'ato lopaḥ', resulting in the base 'kīrtaya-'. It takes both Parasmaipada and Atmanepada affixes.",
+      "kshiratarangini": "Kshirasvamin defines 'kīrt' in the sense of 'saṁśabdana' (speaking aloud, celebrating, or enumerating). It functions transitively, taking an object denoting the glory, name, or story being narrated, conjugated regularly as 'kīrtayati' and 'kīrtayate'."
+    },
+    "meanings": {
+      "English": "to celebrate, mention, praise, proclaim, or recite",
+      "Kannada": "kirtisu, hogalu, smarisu",
+      "Telugu": "kirtintsu, pogadu, prakatinchu",
+      "Tamil": "pukal, kootruthal, sthuthi seythal",
+      "Malayalam": "kirthikkuka, pukazhthuka, prasthavikkuka",
+      "Hindi": "kirtan karna, gunagaan karna, prasiddhi ka varnan karna",
+      "Bengali": "kirtan kora, gunogan kora, proshongsha kora",
+      "German": "preisen, ruhmen, verherrlichen, verkunden",
+      "French": "louer, celebrer, proclamer, glorifier",
+      "Russian": "voskhvalyat, proslavlyat, vozveshchat",
+      "Chinese": "zansong, songyang, xuanbu"
+    }
+  },
+  {
+    "dhatu_id": "10.0366",
+    "aupadeshika": "varṇa",
+    "stripped_root": "varṇ",
+    "gana": "Curadi (Gana 10)",
+    "pada": "Ubhayapadi",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "varṇane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'varn' belongs to the 10th verb class (Curadi), which inherently takes the affix 'nic' (-aya-) in its standard form without needing an external causative trigger. It means to describe, depict, praise, or paint. When used in Parasmaipada (varnayati), it highlights the action directed outward (e.g., describing a scenery to others). When used in Atmanepada (varnayate), it can convey an action undertaken for oneself or deeply internal reflection.",
+      "scenarios": [
+        {
+          "verb_form": "varṇayati",
+          "grammar_trigger": "Curadi svārthe-ṇic, Parasmaipada, Lat-lakara, Prathama-purusha, Ekavacana",
+          "meaning": "He/She describes or portrays",
+          "example_sanskrit": "Kaviḥ prakṛteḥ saundaryaṁ varṇayati.",
+          "example_english": "The poet describes the beauty of nature."
+        },
+        {
+          "verb_form": "varṇayate",
+          "grammar_trigger": "Curadi svārthe-ṇic, Atmanepada, Lat-lakara, Prathama-purusha, Ekavacana",
+          "meaning": "He/She depicts or recounts for oneself",
+          "example_sanskrit": "Bālaḥ svānubhavaṁ varṇayate.",
+          "example_english": "The child recounts his own experience."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "varṇa varṇane. curādiḥ adantaḥ ubhayapadī. guṇakīrtane vistārakathane rūpanirūpaṇe ca ayam pravartate. svārthike ṇici varṇayati, varṇayate iti rūpe bhavataḥ.",
+      "kshiratarangini": "varṇa varṇane. varṇayati varṇaiḥ guṇān kīrtayati prakāśayati vā. adantatvāt svārthe ṇic."
+    },
+    "meanings": {
+      "English": "to describe, to depict, to portray, to praise",
+      "Kannada": "varnisu, vivarisu, bannisu",
+      "Telugu": "varninchu, vivarinchu, pogadu",
+      "Tamil": "varnikka, vivarikka, pugazha",
+      "Malayalam": "varnikkuka, vivarikkuka, pukazhthuka",
+      "Hindi": "varnan karna, chitrit karna, bakhana karna",
+      "Bengali": "barnana kara, chitrita kara, prashangsa kara",
+      "German": "beschreiben, schildern, preisen",
+      "French": "decrire, peindre, faire l'eloge",
+      "Russian": "opisyvat, izobrazhat, voskhvalyat",
+      "Chinese": "miaoshu, miaohui, cizan"
+    }
+  },
+  {
+    "dhatu_id": "10.0367",
+    "aupadeshika": "lakṣa",
+    "stripped_root": "lakṣ",
+    "gana": "Curādi (10th Gaṇa)",
+    "pada": "Ubhayapadī",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "ālocane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'lakṣ' means to perceive, observe, notice, or mark. Belonging to the 10th class (Curādi), it obligatorily takes the affix 'ṇic' (appearing as -aya-), forming 'lakṣayati' in the active voice (Parasmaipada) and 'lakṣayate' in the middle voice (Ātmanepada). Both voices mean observing carefully or characterizing an object.",
+      "scenarios": [
+        {
+          "verb_form": "lakṣayati",
+          "grammar_trigger": "Parasmaipada, Kartari Prayoga (Present tense, 3rd person singular)",
+          "meaning": "observes, notices, or marks",
+          "example_sanskrit": "muniḥ śiṣyasya sadguṇān lakṣayati.",
+          "example_english": "The sage notices the disciple's good virtues."
+        },
+        {
+          "verb_form": "lakṣyate",
+          "grammar_trigger": "Karmaṇi Prayoga (Passive voice, 3rd person singular)",
+          "meaning": "is observed / is marked / appears",
+          "example_sanskrit": "dhūmena vahniḥ lakṣyate.",
+          "example_english": "Fire is indicated/perceived by smoke."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'lakṣa ālocane' is listed under Curādi gaṇa with the sense of looking, examining, and perceiving (ālocana). By virtue of being in Curādi, it takes the svarthika-ṇic suffix without needing an external causative agent, generating forms like lakṣayati and lakṣayate.",
+      "kshiratarangini": "Kshirasvamin interprets 'lakṣa' in the sense of 'ālocana' (keen observation, inspecting, marking). The derived nominals such as 'lakṣaṇa' (attribute, sign, definition) and 'lakṣya' (target, observable mark) emerge directly from this primary semantic core."
+    },
+    "meanings": {
+      "English": "to observe, to perceive, to notice, to mark",
+      "Kannada": "noduvudu, gamanisuvudu, gurutisuvudu",
+      "Telugu": "chuchuta, gamaninchuta, gurtinchuta",
+      "Tamil": "kavanippathu, parkkapaduvathu, kurippiduvathu",
+      "Malayalam": "nirikshikkuka, sreddhikkuka, adaiyalappeduthuka",
+      "Hindi": "dekhna, dhyan dena, lakshit karna",
+      "Bengali": "dekha, lokhyo kora, chinhito kora",
+      "German": "beobachten, bemerken, kennzeichnen",
+      "French": "observer, remarquer, caracteriser",
+      "Russian": "nablyudat, zamechat, oboznachat",
+      "Chinese": "guancha, zhuyi, biaoji"
+    }
+  },
+  {
+    "dhatu_id": "10.0368",
+    "aupadeshika": "bhūṣa",
+    "stripped_root": "bhūṣ",
+    "gana": "curādi",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "alaṅkāre",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'bhūṣ' means to adorn, decorate, or beautify something. Beloging to the Curadi class, it intrinsically receives the affix 'ṇic', creating verb forms that describe enhancing beauty or decorating an object or oneself.",
+      "scenarios": [
+        {
+          "verb_form": "bhūṣayati",
+          "grammar_trigger": "Curādi-ṇic, Parasmaipada, Kartari Prayoga (Present 3rd Person Singular)",
+          "meaning": "Decorates or adorns something",
+          "example_sanskrit": "mātā dīpaiḥ gṛhaṃ bhūṣayati.",
+          "example_english": "The mother decorates the house with lamps."
+        },
+        {
+          "verb_form": "bhūṣayate",
+          "grammar_trigger": "Curādi-ṇic, Ātmanepada, Kartari Prayoga (Action directed toward oneself)",
+          "meaning": "Adorns oneself or decorates for oneself",
+          "example_sanskrit": "bālā kusumaiḥ ātmānaṃ bhūṣayate.",
+          "example_english": "The girl adorns herself with flowers."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'bhūṣa' is listed under the Curādi class in the sense of 'alaṅkāra' (adornment). By 'curādibhyo ṇic', it obligatorily takes the affix 'ṇic', yielding forms like 'bhūṣayati' and 'bhūṣayate', with regular reduplication in aorist producing 'abībhūṣat'.",
+      "kshiratarangini": "Kshirasvamin defines 'bhūṣa alaṅkāre' as the act of beautification and embellishment. It operates as an intrinsic ṇi-ending root in this class, taking ubiquitous guṇa and standard affixes."
+    },
+    "meanings": {
+      "English": "To decorate, to adorn, to embellish",
+      "Kannada": "Alankarisu, singarisu",
+      "Telugu": "Alankarincu, shrungarincu",
+      "Tamil": "Alangarikka, azhagupadutha",
+      "Malayalam": "Alankarikkuka, chanthamakkuka",
+      "Hindi": "Sajana, alankrit karna",
+      "Bengali": "Sajano, alankrita kora",
+      "German": "Schmuecken, verzieren",
+      "French": "Orner, decorer",
+      "Russian": "Ukrashat, naryazhat",
+      "Chinese": "Zhuangshi, zhuangban"
+    }
+  },
+  {
+    "dhatu_id": "10.0369",
+    "aupadeshika": "bhāja",
+    "stripped_root": "bhāj",
+    "gana": "Curadi",
+    "pada": "Ubhayapadi",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "prithakkarane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'bhaj' in the Curadi class means to divide, separate, or apportion. Because it belongs to the tenth conjugation (Curadi), it automatically takes the nic affix (producing bhajaya-), functioning either in Parasmaipada or Atmanepada. Using Parasmaipada describes dividing or sharing something for others or generally, while Atmanepada can convey doing the act for oneself or taking one's share.",
+      "scenarios": [
+        {
+          "verb_form": "bhajayati",
+          "grammar_trigger": "Curadi class with obligatory nic suffix in active voice (Parasmaipada)",
+          "meaning": "divides / separates / distributes",
+          "example_sanskrit": "pita putrebhyah dhanam bhajayati.",
+          "example_english": "The father divides the wealth among his sons."
+        },
+        {
+          "verb_form": "bhajayate",
+          "grammar_trigger": "Curadi class with obligatory nic suffix in middle voice (Atmanepada)",
+          "meaning": "divides for oneself / portions out",
+          "example_sanskrit": "sah svayam bhagam bhajayate.",
+          "example_english": "He apportions his share for himself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root bhaja in the Curadi class is stated in the sense of prithakkarana (separating, partitioning, or dividing). Being a Curadi root, it compulsorily takes the nic pratyaya across all non-san conjugates, yielding the present stem bhajaya- with forms bhajayati and bhajayate.",
+      "kshiratarangini": "Kshirasvamin notes bhaja prithakkarane under the Curadi collection, indicating its primary semantic domain of division and separation (vibhaga), distinguishing it from the Bhvadi root bhaja sevayam (which means to serve or resort to)."
+    },
+    "meanings": {
+      "English": "to divide, separate, partition, or distribute",
+      "Kannada": "vibhagisu, bere madu",
+      "Telugu": "vibhagincu, veru cheyu",
+      "Tamil": "piri, pangu idu",
+      "Malayalam": "vibhajikkuka, panku vekkuka",
+      "Hindi": "bantna, alag karna, vibhajit karna",
+      "Bengali": "bhag kora, prithok kora",
+      "German": "teilen, trennen, absondern",
+      "French": "diviser, separer, partager",
+      "Russian": "delit, razdelyat, raspredelyat",
+      "Chinese": "fenkai, fenpei, huafen"
+    }
+  },
+  {
+    "dhatu_id": "10.0370",
+    "aupadeshika": "mrakṣa",
+    "stripped_root": "mrakṣ",
+    "gana": "Curadi (Adarbhiya)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "saṃghāte mrakṣaṇe ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'mraksh' belongs to the 10th conjugation (Curadi-gana) and means to smear, rub, anoint, or accumulate/mix together. Being in the 10th gana, it obligatorily takes the affix 'nic' (forming mrakshaya-). It can take either Parasmaipada or Atmanepada endings depending on whether the action's benefit is direct or neutral.",
+      "scenarios": [
+        {
+          "verb_form": "mrakṣayati",
+          "grammar_trigger": "Curadi nic-pratyaya, Parasmaipada, Prathama-purusha, Ekavacana",
+          "meaning": "He or she rubs, anoints, or smears (ointment/oil)",
+          "example_sanskrit": "Vaidyaḥ vraṇe tailaṃ mrakṣayati.",
+          "example_english": "The physician smears oil on the wound."
+        },
+        {
+          "verb_form": "mrakṣayate",
+          "grammar_trigger": "Curadi nic-pratyaya, Atmanepada, Prathama-purusha, Ekavacana",
+          "meaning": "He or she anoints or rubs for oneself",
+          "example_sanskrit": "Bhaktah svagātre candanaṃ mrakṣayate.",
+          "example_english": "The devotee rubs sandalwood paste on his own body."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti places 'mrakṣa' in the Curadi class signifying 'saṃghāte' (aggregation, accumulation) and 'mrakṣaṇe' (smearing, anointing, oiling). It takes the svārthe nic affix obligatorily, yielding forms like mrakṣayati and mrakṣayate.",
+      "kshiratarangini": "Kshirasvamin glosses 'mrakṣa' under Curadi with the sense of saṃghāta (heaping or collecting) and lepa/parimardana (rubbing, smearing), producing the dental/retroflex cluster stem mrakṣaya- with set characteristics in non-conjugational tenses."
+    },
+    "meanings": {
+      "English": "To smear, anoint, rub, or accumulate",
+      "Kannada": "Lepisuvudu, thadukuvudu athava sangrahisuvudu",
+      "Telugu": "Pūyuta, lepanamu cheyuta leda kurchuta",
+      "Tamil": "Poosudhal, thadavidhal alladhu serpadhu",
+      "Malayalam": "Thekkuka, lepanam cheyyuka allengil cherkkuka",
+      "Hindi": "Lepan karna, malna ya ikattha karna",
+      "Bengali": "Makhano, lepan kora ba joma kora",
+      "German": "Einschmieren, einreiben oder anhaufen",
+      "French": "Oindre, enduire, frotter ou accumuler",
+      "Russian": "Smazyvat, namazyvat, natirat ili nakaplivat",
+      "Chinese": "Tumo, ca shi, huoji"
+    }
+  },
+  {
+    "dhatu_id": "10.0371",
+    "aupadeshika": "sūca",
+    "stripped_root": "sūc",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "paiśunye bhedane ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'sūc' primarily means to point out, indicate, hint, or reveal a secret. Being a tenth-gana (Curadi) verb, it inherently takes the affix 'nic' (forming sūcayati or sūcayate) and can be used in both Parasmaipada and Atmanepada without a change in basic meaning.",
+      "scenarios": [
+        {
+          "verb_form": "sūcayati",
+          "grammar_trigger": "Curadi nic-affix with Parasmaipada prathama-purusha eka-vacana",
+          "meaning": "Points out or indicates",
+          "example_sanskrit": "mārga-darśakaḥ pathaṃ sūcayati.",
+          "example_english": "The guide points out the path."
+        },
+        {
+          "verb_form": "sūcayate",
+          "grammar_trigger": "Curadi nic-affix with Atmanepada prathama-purusha eka-vacana",
+          "meaning": "Indicates or gestures towards",
+          "example_sanskrit": "meghaḥ vṛṣṭiṃ sūcayate.",
+          "example_english": "The cloud indicates upcoming rain."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'sūca' belongs to the Curadi gana and is glossed in the senses of 'paiśunya' (calumny, betrayal, or malicious disclosure) and 'bhedana' (revealing secrets or causing division). It takes the svārthe nic affix obligatorily, yielding forms like sūcayati and sūcayate.",
+      "kshiratarangini": "Kshirasvamin notes 'sūca paiśunye bhedane ca', indicating that the root signifies making known covert facts, betraying clues, or gesturing/pointing out an intention or impending event."
+    },
+    "meanings": {
+      "English": "to indicate, hint, point out, reveal, or betray",
+      "Kannada": "sūcisu, tilisu",
+      "Telugu": "sūcincu, thelipiyali",
+      "Tamil": "kurippidutal, suttikkattutal",
+      "Malayalam": "soochippikkuka, ariyikkuka",
+      "Hindi": "soochit karnaa, sanket karnaa, bataanaa",
+      "Bengali": "shuchita karaa, ingita karaa",
+      "German": "anzeigen, hinweisen, verraten",
+      "French": "indiquer, reveler, designer",
+      "Russian": "ukazyvat, namekat, obnaruzhivat",
+      "Chinese": "zhishi, biao shi, anshi"
+    }
+  },
+  {
+    "dhatu_id": "10.0372",
+    "aupadeshika": "phala~",
+    "stripped_root": "phal",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "visarane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root phal belongs to the 10th conjugation (Curadi gana). In this group, the causative affix nic is added inherently to express the action of splitting, rending, or tearing apart. It can be used in both Parasmaipada (phalayati) and Atmanepada (phalayate) without changing the core meaning.",
+      "scenarios": [
+        {
+          "verb_form": "phalayati",
+          "grammar_trigger": "Curadi nic-pratyaya with Parasmaipada prathama-purusha eka-vacana",
+          "meaning": "Splits, cleaves, or rends",
+          "example_sanskrit": "kasthakaras kastham phalayati.",
+          "example_english": "The carpenter splits the piece of wood."
+        },
+        {
+          "verb_form": "phalayate",
+          "grammar_trigger": "Curadi nic-pratyaya with Atmanepada prathama-purusha eka-vacana",
+          "meaning": "Cleaves or splits for oneself",
+          "example_sanskrit": "krishakah kshetre mrittikam phalayate.",
+          "example_english": "The farmer cleaves the soil in the field for his own work."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Madhaviya notes that the root 'phala visarane' in the Curadi gana takes compulsory nic (svartha-nic). Visarana implies splitting, rending (vidarana), or disintegration into parts. With vriddhi of the upadha vowel 'a' before nic, it derives forms such as phalayate and phalayati.",
+      "kshiratarangini": "Kshirasvamin specifies 'phala visarane' under Curadigana, explaining visarana as breaking apart or tearing. He notes the formation phalayate and phalayati through the addition of the svarthe nic suffix."
+    },
+    "meanings": {
+      "English": "to split, cleave, tear apart, burst, produce results",
+      "Kannada": "siliyuvudu, bariyuvudu, phalisu",
+      "Telugu": "cheelchuta, baddaluseyuta, phalinchuta",
+      "Tamil": "pilakkuthal, keeruthal, palithal",
+      "Malayalam": "pilarkkuka, keeruka, phalam nalkuka",
+      "Hindi": "phadna, chirna, vibhajit karna",
+      "Bengali": "phala, cira, bidirno kora",
+      "German": "spalten, aufreissen, zerteilen",
+      "French": "fendre, civer, diviser",
+      "Russian": "raskalyvat, rasshcheplyat, rasshevelivat",
+      "Chinese": "pilie, posui, fenlie"
+    }
+  },
+  {
+    "dhatu_id": "10.0373",
+    "aupadeshika": "mārga",
+    "stripped_root": "mārg",
+    "gana": "curādi (10th Gana)",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "anveṣaṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'mārg' belongs to the 10th conjugation (Curadi) and means 'to search', 'to seek', or 'to look for'. Because it belongs to Curadi, it automatically receives the suffix 'nic' (forming 'mārgaya-') even in its basic active usage. In standard Sanskrit, it can take either Parasmaipada endings (e.g., mārgayati) or Atmanepada endings (e.g., mārgayate) with the same fundamental meaning of searching for a desired object.",
+      "scenarios": [
+        {
+          "verb_form": "mārgayati",
+          "grammar_trigger": "Curādi ṇic-pratyaya, Parasmaipada, Prathama Puruṣa, Ekavacana, Laṭ-lakāra",
+          "meaning": "Searches / looks for",
+          "example_sanskrit": "bālakaḥ mārge patitaṃ kandalukam mārgayati.",
+          "example_english": "The boy searches for the fallen ball on the road."
+        },
+        {
+          "verb_form": "mārgayate",
+          "grammar_trigger": "Curādi ṇic-pratyaya, Ātmanepada, Prathama Puruṣa, Ekavacana, Laṭ-lakāra",
+          "meaning": "Seeks / pursues for oneself",
+          "example_sanskrit": "mumukṣuḥ jñānasya mārgaṃ mārgayate.",
+          "example_english": "The seeker of liberation searches for the path of knowledge."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'mārga anveṣaṇe' is listed in the Curādi-gaṇa. It takes the affix ṇic svārthe (in its own sense) without introducing a causative agent. Madhava notes that by taking ṇic, it forms the base 'mārgaya-' and declines in both Padas, expressing diligent search, enquiry, or hunting.",
+      "kshiratarangini": "Kshirasvamin analyzes 'mārga' under anveṣaṇa (gati-jñāna-anveṣaṇārtha), clarifying that the stem is derived from the nominal concept of 'mārga' (path) extended into verbal action denoting tracing or tracking footsteps/clues to find something."
+    },
+    "meanings": {
+      "English": "to search, to seek, to hunt, to inquire",
+      "Kannada": "hudukuvudu, anveshisuvudu",
+      "Telugu": "vedakuta, anveshinchuta",
+      "Tamil": "theduthal, thedi kandupidithal",
+      "Malayalam": "thirayuka, anveshikkuka",
+      "Hindi": "khojna, dhoondhana, anveshan karna",
+      "Bengali": "khonja, anweshan kara",
+      "German": "suchen, nachforschen",
+      "French": "chercher, rechercher",
+      "Russian": "iskat, razyskivat",
+      "Chinese": "xunzhao, sousuo"
+    }
+  },
+  {
+    "dhatu_id": "10.0374",
+    "aupadeshika": "katha",
+    "stripped_root": "kath",
+    "gana": "Curadi (Adanta)",
+    "pada": "Ubhayapadi",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "vakyaprabandhe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root kath means to narrate or tell a story in a structured sequence. Belonging to the 10th conjugation (Curadi gana), it inherently requires the affix aya (svartha-nic). It can take Parasmaipada endings (kathayati) when narrating outwardly or Atmanepada endings (kathayate) to highlight self-engagement in the discourse.",
+      "scenarios": [
+        {
+          "verb_form": "kathayati",
+          "grammar_trigger": "Parasmaipada, Lat lakara (present tense), prathama purusha, ekavacana",
+          "meaning": "He/she narrates or tells a story",
+          "example_sanskrit": "pitamaha balakebhyah katham kathayati.",
+          "example_english": "The grandfather tells a story to the children."
+        },
+        {
+          "verb_form": "kathayate",
+          "grammar_trigger": "Atmanepada, Lat lakara (present tense), prathama purusha, ekavacana",
+          "meaning": "He/she discourses or recounts (for internal/self perspective)",
+          "example_sanskrit": "munihi svatmanubhuti kathayate.",
+          "example_english": "The sage recounts his personal spiritual experience."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root katha belongs to the Curadi class in the sense of vakyaprabandha (connected composition or continuous narrative). Being an adanta curadi root, the affix nic is applied svarthe, and it takes both Parasmaipada and Atmanepada terminations.",
+      "kshiratarangini": "Kshirasvamin notes katha vakyaprabandhe as describing systematic verbal narration. The root forms kathayati and kathayate by regular insertion of the Curadi aya-pratyaya."
+    },
+    "meanings": {
+      "English": "to narrate, tell, recount, describe",
+      "Kannada": "heluvudu, katha roopadalli vivarisuvudu",
+      "Telugu": "chepputa, katha rupana vivarinchuta",
+      "Tamil": "solludal, kathaithal, vivarithal",
+      "Malayalam": "parayuka, kathaparayuka, vivarikka",
+      "Hindi": "kahna, katha sunana, varnan karna",
+      "Bengali": "bala, katha bala, barnana kara",
+      "German": "erzählen, berichten, schildern",
+      "French": "raconter, narrer, relater",
+      "Russian": "rasskazyvat, povestvovat, soobshchat",
+      "Chinese": "jiangshu, xushu, shuohua"
+    }
+  },
+  {
+    "dhatu_id": "10.0375",
+    "aupadeshika": "yuja yojane",
+    "stripped_root": "yuj",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "yojane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root yuj in Curadi gana naturally takes the nic affix (forming the base yojay-) and means to connect, combine, plan, or engage. In Parasmaipada (yojayati), it is used when the action affects someone else or is directed outward. In Atmanepada (yojayate), it emphasizes that the planning or engagement benefits oneself or is done internally.",
+      "scenarios": [
+        {
+          "verb_form": "yojayati",
+          "grammar_trigger": "Curadi nic-pratyaya with Parasmaipada (Kartari prayoga)",
+          "meaning": "connects, employs, or unites something/someone",
+          "example_sanskrit": "Acharyah chatram karye yojayati.",
+          "example_english": "The teacher engages the student in the task."
+        },
+        {
+          "verb_form": "yojayate",
+          "grammar_trigger": "Curadi nic-pratyaya with Atmanepada (Kartari prayoga)",
+          "meaning": "arranges or engages for one's own purpose",
+          "example_sanskrit": "Nrpah svamatena yojanam yojayate.",
+          "example_english": "The king arranges a plan for his own objective."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root yuj belongs to the Curadi class in the sense of yojane (joining, combining, uniting, or employing). Being a Curadi root, the svarthe nic affix is mandatory, yielding the base yojaya-, taking both Parasmaipada and Atmanepada terminations with set characteristics.",
+      "kshiratarangini": "Kshirasvamin notes yuj yojane under the Curadi gana to denote union, preparation, and device. The guna vowel alternation leads to yojayati and yojayate."
+    },
+    "meanings": {
+      "English": "to join, connect, unite, plan, or employ",
+      "Kannada": "jodisu, yojisu, serisu",
+      "Telugu": "jodincu, kalupu, yojincu",
+      "Tamil": "inaikka, sertu vaikka, thittamida",
+      "Malayalam": "yojippikkuka, cherkkuka, thittamiduka",
+      "Hindi": "jodna, yukt karna, niyojit karna",
+      "Bengali": "jukto kora, jora lagano, porikolpona kora",
+      "German": "verbinden, vereinen, planen, anwenden",
+      "French": "joindre, unir, combiner, employer",
+      "Russian": "soedinyat, obedinyat, primenyat, planirovat",
+      "Chinese": "lianjie, jiehe, guihua, yingyong"
+    }
+  },
+  {
+    "dhatu_id": "10.0376",
+    "aupadeshika": "vyaya~",
+    "stripped_root": "vyay",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "vittotsarge",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'vyay' belongs to the 10th verb class (Curadi) and conveys the core meaning of expending, distributing, or spending wealth. In regular usage, it takes the inherent 'aya' (Nic) marker, conjugated in both Parasmaipada (vyayayati) and Atmanepada (vyayayate). It is typically used with an object denoting money, wealth, or resources being disbursed.",
+      "scenarios": [
+        {
+          "verb_form": "vyayayati",
+          "grammar_trigger": "Kartari prayoga, Curadi Nic-pratyaya, Parasmaipada, Prathama-purusha, Ekavacana",
+          "meaning": "Spends or expends wealth (for another or in a general sense)",
+          "example_sanskrit": "Dharmatma satkarye dhanam vyayayati.",
+          "example_english": "The righteous person spends money on good deeds."
+        },
+        {
+          "verb_form": "vyayayate",
+          "grammar_trigger": "Kartari prayoga, Curadi Nic-pratyaya, Atmanepada, Prathama-purusha, Ekavacana",
+          "meaning": "Spends or disburses wealth (for oneself or reflexively)",
+          "example_sanskrit": "Kripana api aushadhe dhanam vyayayate.",
+          "example_english": "Even a miser spends money on medicine."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti identifies 'vyaya vittotsarge' as an adanta root of the Curadi group. 'Vittotsarga' signifies the abandonment or expenditure of financial property. As a member of Curadigana, it obligatorily receives the Nic suffix, forming the bases vyayaya-ti and vyayaya-te in both padas with regular it-agama.",
+      "kshiratarangini": "Kshirasvamin glosses 'vittotsarge' as 'dhanatyage' (relinquishment of wealth). The root takes the customary Curadi thematic stem formations and generates standard transitive verbal forms meaning disbursement."
+    },
+    "meanings": {
+      "English": "To spend, to expend, to disburse wealth",
+      "Kannada": "Hanamannu kharcu maduvudu, vyaya maduvudu",
+      "Telugu": "Dhanamu kharcu ceyuta, vyayamu ceyuta",
+      "Tamil": "Panam selavali, virayam sei",
+      "Malayalam": "Dhanam celavakkuka, vyayam cheyyuka",
+      "Hindi": "Dhana kharca karana, vyaya karana",
+      "Bengali": "Taka khoroc kora, boye kora",
+      "German": "Geld ausgeben, aufwenden",
+      "French": "Depenser de l'argent, debourser",
+      "Russian": "Tratit' den'gi, raskhodovat'",
+      "Chinese": "Huafei, zhichu"
+    }
+  },
+  {
+    "dhatu_id": "10.0377",
+    "aupadeshika": "vrīḍa",
+    "stripped_root": "vrīḍ",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka / Akarmaka",
+    "canonical_dhatvartha": "lajjāyām",
+    "dhaturupanandini": {
+      "simple_explanation": "The root vrid belongs to the 10th class (Curadi gana) and takes the mandatory affix nic (forming vridaya-). It conveys feeling shame, shyness, embarrassment, or making someone feel ashamed. Because it is a Curadi root, it can take either Parasmaipada endings (vridayati) or Atmanepada endings (vridayate) without a change in basic meaning.",
+      "scenarios": [
+        {
+          "verb_form": "vrīḍayati",
+          "grammar_trigger": "Curadi affix nic + Parasmaipada 3rd person singular (lat lakara)",
+          "meaning": "feels embarrassed / shames / causes bashfulness",
+          "example_sanskrit": "aparaadhakarii baalaḥ gurum dṛṣṭvā vrīḍayati.",
+          "example_english": "The boy who made a mistake feels ashamed upon seeing the teacher."
+        },
+        {
+          "verb_form": "vrīḍayate",
+          "grammar_trigger": "Curadi affix nic + Atmanepada 3rd person singular (lat lakara)",
+          "meaning": "feels bashful / exhibits modesty",
+          "example_sanskrit": "navavadhuuḥ sabhaayaam lajjayaa vrīḍayate.",
+          "example_english": "The new bride behaves bashfully in the assembly out of modesty."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root vrid is listed under Curadi gana in the sense of lajja (shame, embarrassment, modesty). Taking the svabhavika nic pratyaya, the penult vowel remains long vrid-nic-sap, yielding vridayati and vridayate in present indicative active and middle voices.",
+      "kshiratarangini": "Kshirasvamin records vrid in the sense of lajjana (experiencing or demonstrating shame/bashfulness). It is treated as set and inherently takes nic by virtue of its placement in the Curadi class, admitting both pada affixes."
+    },
+    "meanings": {
+      "English": "to be ashamed, to blush, to feel bashful, to shame",
+      "Kannada": "naachike padu, lajje hondisu, sankocha padu",
+      "Telugu": "siggupadu, lajjinchu, lajjanu kaliginchu",
+      "Tamil": "vetkappadu, naanam kol, koonippodu",
+      "Malayalam": "naanikkuka, lajjikkuka, lajjita aavuka",
+      "Hindi": "lajjaana, sharmaana, lajjita hona ya karna",
+      "Bengali": "lojja paoa, shorom kora, lojjito kora",
+      "German": "sich schamen, erroten, verlegen sein",
+      "French": "avoir honte, rougir, etre timide",
+      "Russian": "styditsya, smushchatsya, krasnet",
+      "Chinese": "gandao xiukui, lianhong, haihao"
+    }
+  },
+  {
+    "dhatu_id": "10.0378",
+    "aupadeshika": "prajña",
+    "stripped_root": "prajñ",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "vistare",
+    "dhaturupanandini": {
+      "simple_explanation": "The root prajn belongs to the 10th group (Curadi gana) and carries the meaning of expanding, elaborating, or explaining in full detail. Because it belongs to Curadi gana, it naturally takes the affix nic (-aya-), resulting in forms ending in -ayati (active voice) or -ayate (middle voice). When a speaker wishes to indicate describing or spreading a topic comprehensively, this verb is used.",
+      "scenarios": [
+        {
+          "verb_form": "prajnayati",
+          "grammar_trigger": "Curadi nic-pratyaya, Lat-lakara (Present Tense), Prathama-purusha, Ekavacana, Parasmaipada",
+          "meaning": "He/She expands or explains in detail.",
+          "example_sanskrit": "Acaryah shishyebhyah vishayam prajnayati.",
+          "example_english": "The teacher explains the subject in detail to the students."
+        },
+        {
+          "verb_form": "prajnayate",
+          "grammar_trigger": "Curadi nic-pratyaya, Lat-lakara (Present Tense), Prathama-purusha, Ekavacana, Atmanepada",
+          "meaning": "He/She elaborates or expresses comprehensively for oneself.",
+          "example_sanskrit": "Panditah svamatam sabhayam prajnayate.",
+          "example_english": "The scholar expounds his viewpoint in the assembly."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root prajna is listed in the Curadi class under the meaning 'vistare' (expansion, extensive elaboration). Being an adanta root of the tenth gana, it takes the svarita-it marker which permits both Parasmaipada and Atmanepada endings after the compulsory affix nic. Morphological processes yield prajnayati and prajnayate in the present indicative.",
+      "kshiratarangini": "Kshirasvamin interprets prajna vistare as denoting spreading out, detailing, or rendering extensive. Forms are derived with the Curadi formative affix nic giving prajnayati and prajnayate, maintaining the semantic focus on elaboration and broad exposition."
+    },
+    "meanings": {
+      "English": "to expand, elaborate, explain in detail, extend",
+      "Kannada": "vistarisu, vivarisu",
+      "Telugu": "vistarincu, vivarincu",
+      "Tamil": "virivakku, vilakku",
+      "Malayalam": "vistharikkuka, vivarikkuka",
+      "Hindi": "vistar karna, vivaran dena, failana",
+      "Bengali": "bistar kora, bistrito bhabe bola",
+      "German": "ausbreiten, ausfuehrlich erklaeren, erweitern",
+      "French": "developper, exposer en detail, etendre",
+      "Russian": "rasshiryat, podrobno izlagat, rasprostranyat",
+      "Chinese": "kuozhan, xiangxi chanshu, kuoda"
+    }
+  },
+  {
+    "dhatu_id": "10.0379",
+    "aupadeshika": "kratha",
+    "stripped_root": "krath",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "hiṃsāyām",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'krath' belongs to the 10th conjugation class (Curadi-gana) and carries the meaning 'to harm, injure, or kill'. Since it is in the 10th class, it obligatorily takes the 'nic' affix (-aya-) in its standard active conjugations. It can take either Parasmaipada endings (krathayati) or Atmanepada endings (krathayate) to denote striking or eliminating adversaries.",
+      "scenarios": [
+        {
+          "verb_form": "krathayati",
+          "grammar_trigger": "Curadi svarthika nic, Parasmaipada, Lat lakara (present active)",
+          "meaning": "slays or injures (an enemy)",
+          "example_sanskrit": "vīraḥ yuddhe śatrūn krathayati.",
+          "example_english": "The warrior slays the enemies in battle."
+        },
+        {
+          "verb_form": "krathyate",
+          "grammar_trigger": "Karmani prayoga (passive voice) with yak pratyaya",
+          "meaning": "is slain or struck down",
+          "example_sanskrit": "duṣṭaḥ nṛpena krathyate.",
+          "example_english": "The wicked person is slain by the king."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "kratha hiṃsāyām. curādāv adantaḥ. svārthe ṇic. krathayati, krathayate. mit-tvād upadhā-vṛddhy-abhāvaḥ athavā prāptāyāṃ vṛddhau krāthayatīty api kecit.",
+      "kshiratarangini": "kratha hiṃsāyām. krathayati. vadha-karmā. curāditvān ṇyantatvam."
+    },
+    "meanings": {
+      "English": "to kill, to injure, to harm, to slaughter",
+      "Kannada": "kolluvudu, himsā mādudu",
+      "Telugu": "campu, hiṃsiñcu",
+      "Tamil": "kolludal, tunbuṟuttudal",
+      "Malayalam": "kolluka, upadravikkuka",
+      "Hindi": "hiṃsā karnā, vadh karnā, mārnā",
+      "Bengali": "bodh korā, hiṃsā korā",
+      "German": "toeten, verletzen, vernichten",
+      "French": "tuer, blesser, frapper",
+      "Russian": "ubivat, unichtozhat, ranit",
+      "Chinese": "shālù, shānghài"
+    }
+  },
+  {
+    "dhatu_id": "10.0380",
+    "aupadeshika": "sphuṭa~",
+    "stripped_root": "sphut",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "bhedane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'sphut' belongs to the tenth conjugation (Curadi gana), where the causal-like affix 'nic' (giving the affix 'aya') is naturally attached to form its basic present-tense stem. It signifies cracking, splitting, breaking open, or bursting something. In Parasmaipada (active voice) it typically represents splitting an external object, while in Atmanepada (middle voice) it represents actions where the outcome or process reflects inward.",
+      "scenarios": [
+        {
+          "verb_form": "sphotayati",
+          "grammar_trigger": "Curadi 10th class, Parasmaipada, Prathama Purusha, Ekavacana",
+          "meaning": "He/she splits, cracks, or bursts something open.",
+          "example_sanskrit": "krsakah kathinam kastham sphotayati.",
+          "example_english": "The farmer splits the hard wood."
+        },
+        {
+          "verb_form": "sphotayate",
+          "grammar_trigger": "Curadi 10th class, Atmanepada, Prathama Purusha, Ekavacana",
+          "meaning": "He/she breaks or cracks something for oneself.",
+          "example_sanskrit": "balakah svanandaya kandukam sphotayate.",
+          "example_english": "The boy bursts the balloon for his own enjoyment."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti explains 'sphuta bhedane' under Curadi gana as signifying the act of dividing, rending, or bursting an object into parts. Due to the inherent svarthe-nic pratyaya of Curadi, the guna strengthening of the vowel 'u' into 'o' occurs, yielding the base 'sphoti', followed by the standard sarvadhatuka conjugation producing 'sphotayati' and 'sphotayate'.",
+      "kshiratarangini": "Kshirasvamin in Kshiratarangini notes that 'sphuta' in this section conveys splitting (vidarana or bhedana). It is distinguished from the 1st or 6th gana roots meaning blossoming or shining by its explicit transitive semantic value of causing a fracture or rupture in an entity."
+    },
+    "meanings": {
+      "English": "to burst, split, break open, or crack",
+      "Kannada": "odeyuvudu, bhedisuvudu",
+      "Telugu": "pagulagottuta, bhedincuta",
+      "Tamil": "udaittal, pilattal",
+      "Malayalam": "pottikkuka, bhedikkuka",
+      "Hindi": "phodana, phadana, bhedan karna",
+      "Bengali": "phatano, bhed kara",
+      "German": "spalten, aufbrechen, platzen lassen",
+      "French": "fendre, casser, faire eclater",
+      "Russian": "raskalyvat, rasshcheplyat, vzryvat",
+      "Chinese": "pipai, polie, dapo"
+    }
+  },
+  {
+    "dhatu_id": "10.0381",
+    "aupadeshika": "varca",
+    "stripped_root": "varc",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Akarmaka",
+    "canonical_dhatvartha": "diptau",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'varc' belongs to the Curadi (10th) class and denotes shining, glowing, or illuminating. Because it belongs to the Curadi group, it inherently receives the 'nic' (aya) affix. It can take active endings (varcayati) or middle endings (varcayate) without altering the core meaning of radiating or glowing with splendor.",
+      "scenarios": [
+        {
+          "verb_form": "varcayati",
+          "grammar_trigger": "Curadi svarthe-nic affix followed by Parasmaipada third-person singular present tense affix 'tip'",
+          "meaning": "Shines or glows brightly",
+          "example_sanskrit": "surya-kantih gagane varcayati.",
+          "example_english": "The sunlight shines brilliantly across the sky."
+        },
+        {
+          "verb_form": "varcayate",
+          "grammar_trigger": "Curadi svarthe-nic affix followed by Atmanepada third-person singular present tense affix 'ta'",
+          "meaning": "Radiates / displays brilliance for oneself",
+          "example_sanskrit": "ratnam divya-jyotisha varcayate.",
+          "example_english": "The gem radiates with divine luster."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti specifies 'varca diptau' within the Curadi group. Since it belongs to the tenth conjugation, the root takes the inherent nic pratyaya in svartha (its own primary sense), yielding forms such as varcayati and varcayate. It is an intransitive root conveying luminescence and effulgence.",
+      "kshiratarangini": "Kshirasvamin notes under the Curadi section that 'varca' signifies dipti (illumination, brightness). It conjugates with the standard intermediate aya element as a Set dhatu, forming present stems in varcaya-."
+    },
+    "meanings": {
+      "English": "to shine, illuminate, radiate brilliance",
+      "Kannada": "holiyuvudu, prakashisuvudu, belaguvudu",
+      "Telugu": "prakasinchuta, veluguta, tejilluta",
+      "Tamil": "oli veesudhal, piragasithal, jolithal",
+      "Malayalam": "shobhikkuka, prakashikkuka, minnuka",
+      "Hindi": "chamakna, prakashit hona, deepti purna hona",
+      "Bengali": "ujjval haoya, jvaljval kara, prakash pava",
+      "German": "strahlen, leuchten, glanzen",
+      "French": "briller, rayonner, resplendir",
+      "Russian": "siyat, svetitsya, blistat",
+      "Chinese": "faguang, zhaoyao, shanyao"
+    }
+  },
+  {
+    "dhatu_id": "10.0382",
+    "aupadeshika": "kṛpī~",
+    "stripped_root": "kṛp",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "kṛpāyām",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kṛp' belongs to the 10th class (Curadi gana) and inherently takes the 'nic' suffix (forming the stem 'kṛpay-'). It expresses feeling compassion, showing mercy, or pitying someone. Being Ubhayapada, it can take either Parasmaipada endings (kṛpayati) or Atmanepada endings (kṛpayate) with identical core meanings.",
+      "scenarios": [
+        {
+          "verb_form": "kṛpayati",
+          "grammar_trigger": "Curadi-svarthe nic, Lat lakara (present tense), prathama-purusha, ekavacana, Parasmaipada",
+          "meaning": "Shows mercy / pities",
+          "example_sanskrit": "dayāluḥ nṛpaḥ dīnaṃ janam kṛpayati.",
+          "example_english": "The compassionate king shows mercy to the poor person."
+        },
+        {
+          "verb_form": "kṛpayate",
+          "grammar_trigger": "Curadi-svarthe nic, Lat lakara (present tense), prathama-purusha, ekavacana, Atmanepada",
+          "meaning": "Pities / feels compassion (for oneself or inwardly)",
+          "example_sanskrit": "sādhuḥ sarveṣu bhūteṣu kṛpayate.",
+          "example_english": "The holy person feels compassion toward all living beings."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'kṛpī~' is listed in Curadi in the meaning 'kṛpāyām' (in the sense of compassion and mercy). As a Curadi root, it receives the svarthika-nic affix universally. Because of its inherent nature and lack of restrictive markers, it forms both parasmaipada and atmanepada stems yielding kṛpayati and kṛpayate.",
+      "kshiratarangini": "Kshirasvamin notes 'kṛpī kṛpāyām' denoting the emotion of karuṇā (compassion, empathy, or mourning). The affix nic is applied in the primary sense without change of agent, forming kṛpayati."
+    },
+    "meanings": {
+      "English": "to pity, to show mercy, to be compassionate",
+      "Kannada": "daye torisu, karune thoru",
+      "Telugu": "daya chupinchu, karuninchu",
+      "Tamil": "irakkam kattu, karunai kaattu",
+      "Malayalam": "daya kanikkuka, karuna thonuka",
+      "Hindi": "daya karna, kripa karna",
+      "Bengali": "doya kora, koruna kora",
+      "German": "Erbarmen haben, bemitleiden",
+      "French": "avoir de la compassion, prendre en pitie",
+      "Russian": "proyavlyat' miloserdie, sozhalet'",
+      "Chinese": "lianmin, tongqing"
+    }
+  },
+  {
+    "dhatu_id": "10.0383",
+    "aupadeshika": "varṇa",
+    "stripped_root": "varn",
+    "gana": "Curadi",
+    "pada": "Ubhayapadi",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "varnane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'varn' belongs to the tenth conjugation (Curadi gana) and takes the mandatory 'nic' (ay) suffix, meaning 'to describe', 'to paint', or 'to depict'. It can be used in both Parasmaipada (varnayati) and Atmanepada (varnayate) to narrate features, praise qualities, or depict an event.",
+      "scenarios": [
+        {
+          "verb_form": "varnayati",
+          "grammar_trigger": "Curadi-nic pratyaya + Parasmaipada lat-lakara prathama-purusha eka-vacana",
+          "meaning": "describes / depicts (for another)",
+          "example_sanskrit": "kavih prakriteh shobham varnayati.",
+          "example_english": "The poet describes the beauty of nature."
+        },
+        {
+          "verb_form": "varnayate",
+          "grammar_trigger": "Curadi-nic pratyaya + Atmanepada lat-lakara prathama-purusha eka-vacana",
+          "meaning": "describes / depicts (reflexive or middle voice)",
+          "example_sanskrit": "suta-putrah svagunan varnayate.",
+          "example_english": "The charioteer's son describes his own qualities."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'varna' is placed in the Curadi gana with the sense of 'varnane' (delineating, painting, explaining qualities, or narrating). It obligatorily receives the affix 'nic' by the rule 'satyapapasharupavinaatulashlokasenalomattvacavarmavarnacurnacuradibhyo nyak' or general Curadi 'nic'. As a result, it exhibits forms like varnayati and varnayate across all lakaras.",
+      "kshiratarangini": "Kshirasvamin notes 'varna varnane' indicating elaboration of attributes, coloring, or narration of characteristics. The affix 'nic' applies svarthe (in its own fundamental root sense), yielding verbal forms such as varnayati and derived nominals like varnana and varnita."
+    },
+    "meanings": {
+      "English": "to describe, to depict, to narrate, to praise, to paint",
+      "Kannada": "varnisu, vivarisu, banna haku",
+      "Telugu": "varnincu, vivarincu",
+      "Tamil": "varnikka, vivarikka",
+      "Malayalam": "varnikkuka, vivarikkuka",
+      "Hindi": "varnana karna, bakhan karna, chitrita karna",
+      "Bengali": "bornona kora, bakhyan kora",
+      "German": "beschreiben, schildern, darstellen",
+      "French": "decrire, peindre, narrer",
+      "Russian": "opisyvat, izobrazhat, povestvovat",
+      "Chinese": "miaoshu, miaohui, xushu"
+    }
+  },
+  {
+    "dhatu_id": "10.0384",
+    "aupadeshika": "stūpa",
+    "stripped_root": "stūp",
+    "gana": "curādigaṇa",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "samucchraye saṅghāte ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'stūp' belongs to the Curadi class and inherently takes the 'ṇic' suffix, meaning to heap up, accumulate, or raise into a mound. Because it is Ubhayapada, it takes Parasmaipada endings when the action of piling up is directed towards someone or something else, and Atmanepada endings when the action directly benefits or reflects back upon the agent.",
+      "scenarios": [
+        {
+          "verb_form": "stūpayati",
+          "grammar_trigger": "Curādi-pratyaya (ṇic) with Parasmaipada kartari prayoga",
+          "meaning": "Piles up or heaps up (for another)",
+          "example_sanskrit": "kārakaḥ mṛttikāṃ stūpayati.",
+          "example_english": "The worker piles up the clay."
+        },
+        {
+          "verb_form": "stūpayate",
+          "grammar_trigger": "Curādi-pratyaya (ṇic) with Ātmanepada kartari prayoga (svarita-ñit-kartrabhiprāya)",
+          "meaning": "Accumulates or heaps up for oneself",
+          "example_sanskrit": "kṛṣakaḥ dhānyaṃ gṛhe stūpayate.",
+          "example_english": "The farmer heaps up grain in his home for himself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti explains 'stūpa samucchraye saṅghāte ca' as indicating the act of elevating, piling together, or erecting a heap or mound. In accordance with the Curadi rule 'curādibhyo ṇic', it obligatorily receives the ṇic affix in all standard conjugations, forming stems such as stūpayati and stūpayate.",
+      "kshiratarangini": "Kshirasvamin notes in the Kshiratarangini that 'stūp' denotes bringing objects into a raised mass or gathering them into an elevation (samucchraya). It is classified as an adanta or standard Curadi stem with regular seṭ characteristics in non-sarvadhatuka forms."
+    },
+    "meanings": {
+      "English": "to heap up, raise a mound, pile together, accumulate",
+      "Kannada": "rasi maduvudu, gumpu maduvudu, etthisuvudu",
+      "Telugu": "kuppa poyuta, perpatu cheyuta, sthupamuga cheyuta",
+      "Tamil": "kuvittal, kuvaiyakkudhal, serthuvaippadhu",
+      "Malayalam": "kuttikuttuka, koottivekkuka, sthoopamakki mattuka",
+      "Hindi": "dher lagana, uncha karna, ikattha karna",
+      "Bengali": "stupa karā, gādā karā, dhera kariyā rākhā",
+      "German": "aufhaufen, anhaufen, aufschutten",
+      "French": "entasser, amonceler, eriger un tertre",
+      "Russian": "nagromozhdat', nasypat' kurchan, sobirat' v kucu",
+      "Chinese": "duiji, duigao, julei"
+    }
+  },
+  {
+    "dhatu_id": "10.0385",
+    "aupadeshika": "kṣudha",
+    "stripped_root": "kṣudh",
+    "gana": "Curadi (10)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "saṅgrahe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root kṣudh belongs to the Curadi class (10th conjugation), where it inherently takes the affix Nic (forming kṣodhay-). It means 'to gather', 'to collect', or 'to accumulate'. Because it belongs to Curadi, it can take either Parasmaipada or Atmanepada endings depending on whether the benefit of collecting is directed towards others or oneself.",
+      "scenarios": [
+        {
+          "verb_form": "kṣodhayati",
+          "grammar_trigger": "Kartari prayoga, Parasmaipada, Lat lakara (present tense)",
+          "meaning": "He/she gathers or accumulates (for someone else or in general).",
+          "example_sanskrit": "kṛṣakaḥ dhānyaṁ kṣodhayati.",
+          "example_english": "The farmer collects the grain."
+        },
+        {
+          "verb_form": "kṣodhayate",
+          "grammar_trigger": "Kartari prayoga, Atmanepada, Lat lakara (present tense)",
+          "meaning": "He/she accumulates or collects for himself/herself.",
+          "example_sanskrit": "saḥ dhanam kṣodhayate.",
+          "example_english": "He accumulates wealth for himself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root kṣudha is listed in Curadi under the meaning of saṅgraha (gathering, accumulation). By 'satyāpapāśarūpavehatūlaślokasenālomatvacavarmacūrṇacurādibhyo ṇic', it obligatorily takes the suffix ṇic in standard active constructions, undergoing guṇa to yield kṣodhayati and kṣodhayate.",
+      "kshiratarangini": "Kshirasvamin notes kṣudha saṅgrahe in the Curadi section. The thematic base with svārthe ṇic produces the forms kṣodhayati/te in the sense of bringing together, collecting, or compiling objects."
+    },
+    "meanings": {
+      "English": "to collect, to gather, to amass, to accumulate",
+      "Kannada": "sangrahisu, ottugoodisu",
+      "Telugu": "saṅgrahincu, kūrcu",
+      "Tamil": "sekari, serththu vai",
+      "Malayalam": "shekharikkuka, sambharikkuka",
+      "Hindi": "sangraha karna, ikattha karna",
+      "Bengali": "shongroho kora, jomano",
+      "German": "sammeln, anhäufen",
+      "French": "rassembler, accumuler, collectionner",
+      "Russian": "sobirat, nakaplivat",
+      "Chinese": "shouji, jiju"
+    }
+  },
+  {
+    "dhatu_id": "10.0386",
+    "aupadeshika": "pūla",
+    "stripped_root": "pūl",
+    "gana": "Curādi",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "saṅghāte",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'pūl' belongs to the 10th class (Curādi-gaṇa) and means to gather, heap up, or accumulate objects into a pile. Because it is a 10th-class root, it inherently takes the affix 'ṇic' (appearing as 'aya'), conjugated in Parasmaipada ('pūlayati') when the action is directed outward, and in Ātmanepada ('pūlayate') when the accumulation benefits or relates to oneself.",
+      "scenarios": [
+        {
+          "verb_form": "pūlayati",
+          "grammar_trigger": "Curādi-gaṇa svārthe-ṇic, Parasmaipada, Lat-lakāra, Prathama-puruṣa, Ekavacana",
+          "meaning": "He/she heaps up or gathers (objects)",
+          "example_sanskrit": "kṛṣakaḥ dhānyaṃ pūlayati.",
+          "example_english": "The farmer heaps up the grain."
+        },
+        {
+          "verb_form": "pūlayate",
+          "grammar_trigger": "Curādi-gaṇa svārthe-ṇic, Ātmanepada, Lat-lakāra, Prathama-puruṣa, Ekavacana",
+          "meaning": "He/she gathers or piles up (for himself/herself)",
+          "example_sanskrit": "bālakaḥ phalaṃ pūlayate.",
+          "example_english": "The boy collects fruits for himself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'pūla' is classified under Curādi-gaṇa with the semantic sense 'saṅghāte' (gathering, assembling, making into a heap). It forms the base 'pūlaya-' with svārthe ṇic, yielding forms such as pūlayati and pūlayate.",
+      "kshiratarangini": "Kṣīrasvāmin glosses 'pūla saṅghāte' as the act of massing or clustering items together ('saṅghāto rāśīkaraṇam'). It retains the long vowel 'ū' and follows the standard Curādi conjugation."
+    },
+    "meanings": {
+      "English": "to heap up, to accumulate, to gather together",
+      "Kannada": "rāśi māḍuvudu, kūḍisuvudu, ottu māḍuvudu",
+      "Telugu": "rāśi cēyuṭa, kūrcuṭa, pogēyuṭa",
+      "Tamil": "kuvittal, tiraṭṭutal, cērttal",
+      "Malayalam": "kūṭṭi vaykkuka, rāśiyākkuka, saṅgrahikkuka",
+      "Hindi": "ḍhera lagānā, ikaṭṭhā karnā, batornā",
+      "Bengali": "ḍhera karā, ekatrita karā, puñjībhūta karā",
+      "German": "anhäufen, zusammenhäufen, sammeln",
+      "French": "amonceler, entasser, rassembler",
+      "Russian": "skoplyat, sobirat v kuchu, nagromozhdat",
+      "Chinese": "duiji, juji, duijie"
+    }
+  },
+  {
+    "dhatu_id": "10.0387",
+    "aupadeshika": "kṛpa~",
+    "stripped_root": "kṛp",
+    "gana": "Curādi (Adanta Curādi)",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "sāmarthye",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kṛp' belonging to the Curadi class means 'to be capable', 'to enable', or 'to make suitable'. Because it belongs to the tenth conjugation (Curadi), it obligatorily takes the 'ṇic' (aya) affix. As an Ubhayapada verb, it can take either Parasmaipada or Atmanepada endings without changing its core meaning of capacity or ability.",
+      "scenarios": [
+        {
+          "verb_form": "kṛpayati",
+          "grammar_trigger": "Curādi-pratyaya ṇic (aya) in Kartari prayoga (active voice), Parasmaipada third-person singular",
+          "meaning": "He/she enables, empowers, or makes capable",
+          "example_sanskrit": "guruḥ śiṣyaṃ jñānena kṛpayati.",
+          "example_english": "The teacher empowers the student with knowledge."
+        },
+        {
+          "verb_form": "kṛpayate",
+          "grammar_trigger": "Curādi-pratyaya ṇic (aya) in Kartari prayoga (active voice), Ātmanepada third-person singular",
+          "meaning": "He/she makes capable or develops capacity for oneself",
+          "example_sanskrit": "puruṣaḥ svayam abhyāsena kṛpayate.",
+          "example_english": "The person makes himself competent through practice."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti identifies the root 'kṛpa~' with the meaning 'sāmarthye' (in the sense of capacity, fitness, or competence). Being in the Curadi class, it compulsorily receives the svārthe ṇic suffix to form bases in 'kṛpaya-', inflecting as 'kṛpayati' and 'kṛpayate'.",
+      "kshiratarangini": "Kshirasvamin in Kshiratarangini classifies 'kṛpa sāmarthye' under the Curadi adanta roots. It denotes achieving adequacy, competence, or rendering something able and effective."
+    },
+    "meanings": {
+      "English": "to be capable, to empower, to make fit or competent",
+      "Kannada": "samarthagoliso, sakti needu, arhatte hondisu",
+      "Telugu": "samarthuniga cheyu, sakti kaliginchu",
+      "Tamil": "thakuthiyaakkuthal, aatral alithal",
+      "Malayalam": "samarthanakkuka, kazhivu nalkuka",
+      "Hindi": "samarth banana, saksham karna",
+      "Bengali": "samartha kara, shaktishali kara",
+      "German": "befahigen, tauglich machen, verstarken",
+      "French": "rendre capable, habiliter, capaciter",
+      "Russian": "delat sposobnym, udostoveriat, nadelat siloy",
+      "Chinese": "shi neng gou, shi sheng ren, pei yu neng li"
+    }
+  },
+  {
+    "dhatu_id": "10.0388",
+    "aupadeshika": "bhrāja",
+    "stripped_root": "bhrāj",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Akarmaka",
+    "canonical_dhatvartha": "dīptau",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'bhraj' belongs to the 10th class (Curadi gana) and means 'to shine', 'to gleam', or 'to radiate light'. Because it belongs to the 10th class, it obligatorily takes the affix 'nic' (forming the stem 'bhrajaya-') in standard usage and can be conjugated in both Parasmaipada (active voice) and Atmanepada (middle voice) without changing its core meaning of shining brightly.",
+      "scenarios": [
+        {
+          "verb_form": "bhrājayati",
+          "grammar_trigger": "Curadi-gana stem with Parasmaipada present tense third person singular (lat, prathama purusha, ekavacana)",
+          "meaning": "He/she/it shines or gleams",
+          "example_sanskrit": "sūryaḥ gagaṇe bhrājayati.",
+          "example_english": "The sun shines brightly in the sky."
+        },
+        {
+          "verb_form": "bhrājayate",
+          "grammar_trigger": "Curadi-gana stem with Atmanepada present tense third person singular (lat, prathama purusha, ekavacana)",
+          "meaning": "He/she/it radiates or glows for oneself",
+          "example_sanskrit": "maṇiḥ svayaṃ bhrājayate.",
+          "example_english": "The jewel glows by its own radiance."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "bhrāja dīptau - curādāvayaṃ pathyate. svārthe ṇic. dīptiriha prakāśaḥ kāntiśca ucyate. bhrājayati, bhrājayate iti rūpe bhavataḥ. set-tvāt iṭ-āgamaḥ.",
+      "kshiratarangini": "bhrāja dīptau. dīptiḥ prabhā kāntiḥ prakāśanaṃ vā. curāditvān nityaṃ ṇic prayujyate. bhrājayati bhrājayate."
+    },
+    "meanings": {
+      "English": "to shine, to radiate, to gleam",
+      "Kannada": "belaguvudu, holeyuvudu",
+      "Telugu": "veluguta, prakasincu",
+      "Tamil": "olirvadu, piragasikkiradu",
+      "Malayalam": "thilangunnu, prakashikkunnu",
+      "Hindi": "chamakana, prakashita hona, shobhit hona",
+      "Bengali": "jalajala kara, prakashita haoya",
+      "German": "leuchten, glanzen, strahlen",
+      "French": "briller, rayonner, resplendir",
+      "Russian": "svetit', blestet', siyat'",
+      "Chinese": "faguang, shanyao, zhaoyao"
+    }
+  },
+  {
+    "dhatu_id": "10.0389",
+    "aupadeshika": "sūtra",
+    "stripped_root": "sūtra",
+    "gana": "Curādi (Gana 10)",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "veṣṭane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root sūtra belongs to the Curādi gaṇa (10th class) and takes the mandatory nic suffix svārthe, forming sūtrayati or sūtrayate. It literally means to wind, thread, or string together, and metaphorically means to formulate concise rules or aphorisms (sūtras).",
+      "scenarios": [
+        {
+          "verb_form": "sūtrayati",
+          "grammar_trigger": "Kartari prayoga (Active Voice), Parasmaipada, Lat lakara (Present Tense)",
+          "meaning": "threads together, formulates, or composes rules",
+          "example_sanskrit": "muniḥ vyākaraṇa-niyamān sūtrayati.",
+          "example_english": "The sage formulates grammatical rules into concise aphorisms."
+        },
+        {
+          "verb_form": "sūtrayate",
+          "grammar_trigger": "Kartari prayoga (Active Voice), Atmanepada, Lat lakara (Present Tense)",
+          "meaning": "weaves or plans systematically for oneself",
+          "example_sanskrit": "kaviḥ kathanakam sūtrayate.",
+          "example_english": "The poet weaves and structures the storyline for himself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti categorizes sūtra in the sense of veṣṭana (wrapping, stringing together, weaving). As a Curādi root, it takes the inherent nic pratyaya svārthe (without changing basic causative semantics), yielding sūtrayati and sūtrayate across both padas.",
+      "kshiratarangini": "Kshirasvamin interprets the root sūtra veṣṭane as binding or consolidating threads together into a compact form, which serves as the morphological base for derivatives denoting concise rule-making (sūtrita, sūtraka)."
+    },
+    "meanings": {
+      "English": "to string together, to weave, to formulate in aphorisms",
+      "Kannada": "sūtrisu, heṇeyu, sūtrarūpadalli rachisu",
+      "Telugu": "sūtrīkarin̄cu, allu, sūtramulu racin̄cu",
+      "Tamil": "sūthirithal, kōrthal, amaithal",
+      "Malayalam": "sūthrīkarikkuka, kōrthuvekkuka, nirmikkuka",
+      "Hindi": "sūtra bāndhanā, sūtrīkṛt karnā, pironā",
+      "Bengali": "sūtrabaddha karā, gām̐thā, racanā karā",
+      "German": "in Leitsätze fassen, zusammenweben, formulieren",
+      "French": "formuler en aphorismes, tisser, lier ensemble",
+      "Russian": "formulirovat v vide aforizmov, spletat, svyazyvat",
+      "Chinese": "biānzhì, zhìchéng tiáoguī, zhuànxiě"
+    }
+  },
+  {
+    "dhatu_id": "10.0390",
+    "aupadeshika": "mūtra",
+    "stripped_root": "mūtr",
+    "gana": "curādi",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "prasrāve",
+    "dhaturupanandini": {
+      "simple_explanation": "The root mūtr belongs to the 10th conjugation group (Curadi). Roots in this class compulsorily take the affix -aya- before adding verb endings. In simple terms, it means to urinate or discharge urine. It can be used in both Parasmaipada (mūtrayati) and Atmanepada (mūtrayate) with identical core meanings.",
+      "scenarios": [
+        {
+          "verb_form": "mūtrayati",
+          "grammar_trigger": "Lat lakara, prathama purusha, ekavacana (Parasmaipada kartari prayoga)",
+          "meaning": "He/she urinates or discharges urine",
+          "example_sanskrit": "rugṇaḥ bālakaḥ cikitsālaye mūtrayati.",
+          "example_english": "The sick child urinates in the clinic."
+        },
+        {
+          "verb_form": "mūtrayate",
+          "grammar_trigger": "Lat lakara, prathama purusha, ekavacana (Atmanepada kartari prayoga)",
+          "meaning": "He/she urinates",
+          "example_sanskrit": "aśvaḥ mārge mūtrayate.",
+          "example_english": "The horse urinates on the path."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root mūtra is listed under Curadi with the meaning prasrāva (discharge of urine). Under the rule 'satyapāśarūpa...curādibhyo ṇic' (3.1.25), the affix ṇic is added inherently, forming the base mūtraya-. It takes both Parasmaipada and Atmanepada terminations yielding mūtrayati and mūtrayate in the present tense.",
+      "kshiratarangini": "Kshirasvamin notes mūtra prasrāve as an akarmaka (intransitive) root signifying bodily secretion of urine (mūtrotsarga). The base takes the curadi aya affix throughout its conjugation."
+    },
+    "meanings": {
+      "English": "to urinate, to pass water, to discharge urine",
+      "Kannada": "mūtra visarjane māḍu, ucce hoyyi",
+      "Telugu": "mūtramu pōyu, mūtra visarjana cēyu",
+      "Tamil": "ciṟunīr kaḻi, ciṟunīr vidu",
+      "Malayalam": "mūtrotsarjanam ceyyuka, mūtram ozhikkuka",
+      "Hindi": "mūtra tyāganā, peśāb karanā",
+      "Bengali": "mūtra tyāg karā, peśāb karā",
+      "German": "urinieren, Harn lassen",
+      "French": "uriner, passer de l'eau",
+      "Russian": "mochit'sya, ispuskat' mochu",
+      "Chinese": "painiao, xiaobian"
+    }
+  },
+  {
+    "dhatu_id": "10.0391",
+    "aupadeshika": "kūla",
+    "stripped_root": "kūl",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapadi",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka (Transitive)",
+    "canonical_dhatvartha": "āvaraṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kūl' belongs to the 10th conjugation (Curadi Gana) and inherently takes the 'ṇic' affix (forming 'kūlaya-'). It expresses the act of covering, shielding, enclosing, or erecting a boundary or bank. Being an Ubhayapadi root, it can take Parasmaipada endings ('kūlayati') when the action is directed generally, and Atmanepada endings ('kūlayate') when emphasizing personal benefit or reflective enclosing.",
+      "scenarios": [
+        {
+          "verb_form": "kūlayati",
+          "grammar_trigger": "Curadi-svarthe ṇic, Lat lakara (Present Tense), Parasmaipada, Prathama Purusha, Ekavacana",
+          "meaning": "He/She covers or encloses (something).",
+          "example_sanskrit": "kṛṣakaḥ vṛtyā kṣetraṃ kūlayati.",
+          "example_english": "The farmer encloses the field with a hedge."
+        },
+        {
+          "verb_form": "kūlayate",
+          "grammar_trigger": "Curadi-svarthe ṇic, Lat lakara (Present Tense), Atmanepada, Prathama Purusha, Ekavacana",
+          "meaning": "He/She shields or screens (for one's own sake).",
+          "example_sanskrit": "pathikaḥ vāteritaṃ vāsaḥ ātmanaḥ kūlayate.",
+          "example_english": "The traveler wraps the garment around himself to shield against the wind."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti identifies 'kūla āvaraṇe' as an adanta root of the Curadi class that receives the invariable svarthe-nic affix. It denotes 'āvaraṇa' (enclosure, obstruction, or covering). Forms conjugated are kūlayati and kūlayate, with the reduplicated aorist form acikūlat / acikūlata following the standard pūrvavat-sanvat rules.",
+      "kshiratarangini": "Kshirasvamin defines 'kūla āvaraṇe' as an enclosing and obstructing action. He glosses the semantic range with terms of covering and surrounding ('chādanam vestanaṃ ca'), noting standard curadi inflectional paradigms such as kūlayati, kūlayāmāsa, and acikūlat."
+    },
+    "meanings": {
+      "English": "to cover, to enclose, to obstruct, to screen",
+      "Kannada": "mucchuvudu, aavarana maduvudu, gherisu",
+      "Telugu": "kapputa, aavaranamu ceyuta, addamu konaduta",
+      "Tamil": "mooduthal, maraithal, soolnthu kolluthal",
+      "Malayalam": "mooduka, maravakkuka, aavarikkuka",
+      "Hindi": "dhankna, aavaran karna, gherna",
+      "Bengali": "dhaka dewa, aavaran kora, ghera",
+      "German": "bedecken, umhüllen, versperren",
+      "French": "couvrir, envelopper, entourer",
+      "Russian": "pokryvat, okruzhat, ograzhdat",
+      "Chinese": "fagai, baowei, zhedang"
+    }
+  },
+  {
+    "dhatu_id": "10.0392",
+    "aupadeshika": "puñji~",
+    "stripped_root": "puñj",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "rasibhave",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'puñj' belongs to the Curadi class and means to gather into a heap, pile up, or mass together. As a Curadi verb, it mandatorily takes the 'nic' (aya) affix. It can be conjugated in both Parasmaipada (puñjayati) and Atmanepada (puñjayate) to describe collecting or accumulating objects into a pile.",
+      "scenarios": [
+        {
+          "verb_form": "puñjayati",
+          "grammar_trigger": "Kartari prayoga (active voice), Parasmaipada, Lat lakara (present tense)",
+          "meaning": "He/she heaps or collects something into a pile",
+          "example_sanskrit": "krsakah dhanyam ksetre puñjayati.",
+          "example_english": "The farmer heaps the grains in the field."
+        },
+        {
+          "verb_form": "puñjayate",
+          "grammar_trigger": "Kartari prayoga (active voice), Atmanepada, Lat lakara (present tense)",
+          "meaning": "He/she gathers or piles up for himself/herself",
+          "example_sanskrit": "balakah pustakani svapithe puñjayate.",
+          "example_english": "The boy gathers the books on his desk for himself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'puñji' is read in the Curadi gana with the semantic tag 'rasibhave' (forming a mass or collection). Because of the idit nature or Curadi lakshana, the nasal is retained, yielding forms such as puñjayati and puñjayate.",
+      "kshiratarangini": "Kshirasvamin notes 'puñji rasibhave' denotes aggregate formation or clustering together. It forms derivative nominal bases like 'puñja' (a mass, heap, or cluster) and conjugate sets with nic-pratyaya throughout."
+    },
+    "meanings": {
+      "English": "to heap, to pile up, to aggregate, to collect into a mass",
+      "Kannada": "rasi madu, gumpu madu, ottu madu",
+      "Telugu": "kuppa veyuta, rasiga jeyuta, samakurchuta",
+      "Tamil": "kuvikka, kuttamaakka, serkka",
+      "Malayalam": "kootti vekkuka, kuttuka, rasayakki mattuka",
+      "Hindi": "dher lagana, ekatrita karna, rasibhut karna",
+      "Bengali": "stupa kara, jamo kara, rashi kara",
+      "German": "anhaufeln, anhaufen, aufstapeln, sammeln",
+      "French": "entasser, accumuler, amonceler",
+      "Russian": "nagromozhdat, skoplyat, sobirat v kuchu",
+      "Chinese": "tui ji, ju ji, dui die"
+    }
+  },
+  {
+    "dhatu_id": "10.0393",
+    "aupadeshika": "lakṣa",
+    "stripped_root": "lakṣ",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapadi",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "alocane darsanankanayoh ca (to observe, perceive, mark, or characterize)",
+    "dhaturupanandini": {
+      "simple_explanation": "The root laksh belongs to the 10th conjugation (Curadi), which inherently takes the affix 'nic' (forming lakshaya-). It expresses the act of observing, marking, noticing, or aiming. In Parasmaipada (lakshayati), it denotes directing observation or marking towards an external object. In Atmanepada (lakshayate), it is used when the fruit or reflection of the observation relates back to the subject or in reflexive/introspective contexts.",
+      "scenarios": [
+        {
+          "verb_form": "lakṣayati",
+          "grammar_trigger": "Curadi svārthe-ṇic, Parasmaipada, Lat-lakara, Prathama-purusha, Ekavacana",
+          "meaning": "He/she marks, observes, or perceives an object",
+          "example_sanskrit": "citrakarah citre vishesam laksayati.",
+          "example_english": "The painter observes a unique detail in the painting."
+        },
+        {
+          "verb_form": "lakṣayate",
+          "grammar_trigger": "Curadi svārthe-ṇic, Atmanepada, Lat-lakara, Prathama-purusha, Ekavacana",
+          "meaning": "He/she perceives for oneself or marks internally",
+          "example_sanskrit": "buddhiman svasya dosam hrdi laksayate.",
+          "example_english": "The wise person notices his own fault in his heart."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Madhaviya Dhatuvritti notes that 'laksa alocane' is listed in the Curadi group where 'nic' is added universally in the root sense itself (svarthe nic). In addition to 'alocana' (deliberate viewing/observing), the vritti identifies 'ankana' (marking or characterizing) as an inherent semantic scope, forming 'laksayati - laksayate', and in past passive participle 'laksita'.",
+      "kshiratarangini": "Kshirasvamin in Kshiratarangini explains 'laksa darsanankanayoh' indicating two primary nuances: perceptual apprehension (darsana/alocana) and distinguishing by a sign (laksa-cinha-ankana). Being Curadi, it admits both Padas and universally takes the 'it' augment in non-conjugational tenses."
+    },
+    "meanings": {
+      "English": "to perceive, observe, notice, mark, aim, characterize",
+      "Kannada": "noduvudu, laksisuvudu, gurutisuvudu",
+      "Telugu": "cucuta, laksincuta, gurtincuta",
+      "Tamil": "kavanittal, kurippidutal, parppadhu",
+      "Malayalam": "laksyakkuka, nireekshikkuka, adayalappeduthuka",
+      "Hindi": "dekhna, lakshit karna, dhyan dena, nishan lagana",
+      "Bengali": "dekha, lokhyo kora, chinhito kora",
+      "German": "beobachten, bemerken, kennzeichnen",
+      "French": "observer, remarquer, marquer, viser",
+      "Russian": "zamechat, nablyudat, oboznachat",
+      "Chinese": "guancha, zhuyi, biaozhi"
+    }
+  },
+  {
+    "dhatu_id": "10.0394",
+    "aupadeshika": "bhaja~",
+    "stripped_root": "bhaj",
+    "gana": "curadi",
+    "pada": "ubhayapada",
+    "it_status": "set",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "visranane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root bhaj in the tenth conjugation (Curadi gana) means to bestow, give away, or distribute wealth and gifts generously. Taking the nic affix obligatorily by root-class rule, it can be conjugated in both Parasmaipada (bhajayati) and Atmanepada (bhajayate) without changing its active meaning of giving or distributing.",
+      "scenarios": [
+        {
+          "verb_form": "bhajayati",
+          "grammar_trigger": "Curadi nic-pratyaya with Parasmaipada kartari prayoga (present indicative, 3rd person singular)",
+          "meaning": "Gives, gifts, or distributes",
+          "example_sanskrit": "nrpah vipraya dhanam bhajayati.",
+          "example_english": "The king distributes wealth to the learned scholar."
+        },
+        {
+          "verb_form": "bhajayate",
+          "grammar_trigger": "Curadi nic-pratyaya with Atmanepada kartari prayoga (present indicative, 3rd person singular)",
+          "meaning": "Distributes or bestows (for himself or expressing regular Curadi usage)",
+          "example_sanskrit": "danapatir annam arthebhyah bhajayate.",
+          "example_english": "The generous donor bestows food upon the needy."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root bhaj of the Curadi class is designated in the sense of visranana (giving away, bestowing, gifting). As an adanta Curadi root, it receives the formative affix nic naturally, yielding bhajayati and bhajayate.",
+      "kshiratarangini": "Kshirasvamin notes bhaj in Curadi as 'bhaja visranane' indicating danarthata (the sense of giving or charitable distribution), distinguishing it from the Bhvadi class root bhaj denoting seva (service or worship)."
+    },
+    "meanings": {
+      "English": "to distribute, to gift, to bestow, to share",
+      "Kannada": "hanchu, dana madu, kottu bidu",
+      "Telugu": "pancuta, danamu ceyuta, ivvuta",
+      "Tamil": "pankidu, thanam sey, kodu",
+      "Malayalam": "pankiduka, danan cheyyuka, nalkuka",
+      "Hindi": "bantana, dan dena, vitarit karna",
+      "Bengali": "bontona kora, dan kora, bilae deoa",
+      "German": "verteilen, schenken, spenden",
+      "French": "distribuer, donner, faire don de",
+      "Russian": "razdavat, darit, raspredelyat",
+      "Chinese": "fenfa, zengyu, shishe"
+    }
+  },
+  {
+    "dhatu_id": "10.0395",
+    "aupadeshika": "sthūla",
+    "stripped_root": "sthūl",
+    "gana": "Curadi (Gana 10)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "paribṛṃhaṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root sthul belongs to the Curadi class, meaning it inherently takes the affix Nic to form its base sthulaya-. It means to make thick, augment, enlarge, or nourish. As an Ubhayapada root, it can take active (Parasmaipada) endings or middle (Atmanepada) endings when the action's benefit reflects back onto the subject.",
+      "scenarios": [
+        {
+          "verb_form": "sthūlayati",
+          "grammar_trigger": "Curadi svartha Nic + Parasmaipada (Kartari prayoga, 3rd person singular)",
+          "meaning": "Enlarges / fattens / expands something",
+          "example_sanskrit": "kṛṣakaḥ go-pūlaṃ sthūlayati.",
+          "example_english": "The farmer enlarges the bundle of grass."
+        },
+        {
+          "verb_form": "sthūlayate",
+          "grammar_trigger": "Curadi svartha Nic + Atmanepada (Kartari prayoga, 3rd person singular)",
+          "meaning": "Expands or nourishes for oneself",
+          "example_sanskrit": "svakīyaṃ dehaṃ sthūlayate.",
+          "example_english": "He nourishes and thickens his own body."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti glosses 'sthūla paribṛṃhaṇe' as denoting the process of expansion, growth, or increasing dimensions (paribṛṃhaṇaṃ vardhanam puṣṭiḥ). Being in the Curadi group, it takes the svartha Nic suffix obligatorily in non-vedic usage, yielding the Ubhayapada present forms sthūlayati and sthūlayate.",
+      "kshiratarangini": "Kshirasvamin in Kshiratarangini explains 'sthūla paribṛṃhaṇe' as conveying the sense of 'sthūlī-karaṇam' (making thick, voluminous, or stout). The forms follow the standard adanta-curadi inflection with intermediate i-kara in ardhadhatuka environments."
+    },
+    "meanings": {
+      "English": "to make thick, to fatten, to enlarge, to augment",
+      "Kannada": "doddadagisuvudu, sthulavagisuvudu, belesuvudu",
+      "Telugu": "peddadi geyuta, sthulamu cheyuta, balaparachuta",
+      "Tamil": "perithakkuthal, thadimanakkuthal, valarkkuthal",
+      "Malayalam": "valuthakkuka, vannakkuka, pushtippikkuka",
+      "Hindi": "mota karna, sthul banana, badhana",
+      "Bengali": "sthulo kora, mota kora, briddhi kora",
+      "German": "verdicken, vergroessern, maesten",
+      "French": "epaissir, grossir, engraisser",
+      "Russian": "utolshchat', uvelichivat', otrashchivat'",
+      "Chinese": "shi bian hou, shi bian da, peiyang"
+    }
+  },
+  {
+    "dhatu_id": "10.0396",
+    "aupadeshika": "chadi",
+    "stripped_root": "chad",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "samvarane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'chad' belongs to the 10th class (Curadi gana) and means 'to cover', 'to conceal', or 'to hide'. Because it inherently takes the affix 'nic' (forming 'chaday-'), it is conjugated in both Parasmaipada and Atmanepada. In Parasmaipada, it highlights the action of covering something, whereas in Atmanepada, it often implies covering or concealing for one's own sake or covering oneself.",
+      "scenarios": [
+        {
+          "verb_form": "chādayati",
+          "grammar_trigger": "Curadi nic-affix, Parasmaipada, Prathama-purusha, Eka-vacana",
+          "meaning": "He or she covers or conceals something.",
+          "example_sanskrit": "Meghah suryam chādayati.",
+          "example_english": "The cloud covers the sun."
+        },
+        {
+          "verb_form": "chādayate",
+          "grammar_trigger": "Curadi nic-affix, Atmanepada, Prathama-purusha, Eka-vacana",
+          "meaning": "He or she covers himself/herself or conceals for oneself.",
+          "example_sanskrit": "Balakah vastrena mukham chādayate.",
+          "example_english": "The boy covers his face with a cloth."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'chadi' is listed in Curadagana with the semantic marker 'samvarane' (covering, concealing). Being an idit/mit or inherently taking the standard Curadi svarita-it marker, it undergoes vriddhi of the root vowel 'a' to 'a' in the presence of nic, yielding the base 'chadi' -> 'chadayati' and 'chadayate'.",
+      "kshiratarangini": "Kshirasvamin notes 'chadi samvarane' under the Curadi class, highlighting its operation in the sense of covering or obscuring an object. The base is formed by affixing nic by rule 'curadibhyo nic' to denote covering comprehensively."
+    },
+    "meanings": {
+      "English": "to cover, conceal, veil, or hide",
+      "Kannada": "mucchuvudu, maremaduvudu",
+      "Telugu": "kapputa, maruguparacuta",
+      "Tamil": "muduthal, maraithal",
+      "Malayalam": "mooduka, marakkuka",
+      "Hindi": "dhankna, chipana",
+      "Bengali": "dhaka dewa, aporon kora",
+      "German": "bedecken, verhullen, verbergen",
+      "French": "couvrir, cacher, voiler",
+      "Russian": "pokryvat, skryvat, zakryvat",
+      "Chinese": "zhegai, yincang"
+    }
+  },
+  {
+    "dhatu_id": "10.0397",
+    "aupadeshika": "dhṛñ",
+    "stripped_root": "dhr",
+    "gana": "Curadi (Adanta Curadi / Curadigana)",
+    "pada": "Ubhayapadi",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "dharane posane ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'dhr' in the 10th class means to hold, sustain, wear, maintain, or owe. Because it belongs to Curadi gana, it obligatorily takes the affix 'nic' (forming 'dharaya-'). When conjugated in Parasmaipada (dharayati), the emphasis is on the action of holding, wearing, or sustaining an external entity. In Atmanepada (dharayate), it often conveys holding or maintaining something intimately for oneself or in reflexive/debt contexts.",
+      "scenarios": [
+        {
+          "verb_form": "dharayati",
+          "grammar_trigger": "Curadi nic + Parasmaipada (lat, prathama-purusa, eka-vacana)",
+          "meaning": "holds, wears, or sustains",
+          "example_sanskrit": "munihi dandam dharayati.",
+          "example_english": "The sage holds a staff."
+        },
+        {
+          "verb_form": "dharayate",
+          "grammar_trigger": "Curadi nic + Atmanepada (lat, prathama-purusa, eka-vacana)",
+          "meaning": "maintains, bears, or owes",
+          "example_sanskrit": "sajjanaah satyam dharayate.",
+          "example_english": "The noble person upholds the truth."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root dhri is categorized under Curadi gana in the sense of holding, bearing, and nourishing (dharana-posanarthah). Being in the tenth class, it takes the svarthika-nic suffix, leading to vriddhi/guna of the vowel yielding 'dharaya-', conjugate in both padas (ubhayato-bhasa).",
+      "kshiratarangini": "Kshirasvamin specifies dhri as dharane dhyane ca, indicating maintenance, preservation, and carrying. It forms dharayati and dharayate, functioning transitively with an accusative object (sakarmaka)."
+    },
+    "meanings": {
+      "English": "to hold, sustain, bear, wear, maintain",
+      "Kannada": "dharisu, thalu, kapadu",
+      "Telugu": "dharincu, bharincu, posincu",
+      "Tamil": "thangu, sumai, tharikkai",
+      "Malayalam": "dharikkuka, thaanguka, kaathusookshikkuka",
+      "Hindi": "dharan karna, sambhalna, pahanana",
+      "Bengali": "dharan kara, bahon kara, poshon kara",
+      "German": "halten, tragen, stutzen, bewahren",
+      "French": "tenir, porter, soutenir, maintenir",
+      "Russian": "derzhat, nosit, podderzhivat, sokhranyat",
+      "Chinese": "chiyou, peidai, zhichi, weichi"
+    }
+  },
+  {
+    "dhatu_id": "10.0398",
+    "aupadeshika": "bhūṣa",
+    "stripped_root": "bhūṣ",
+    "gana": "curādi",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "alaṅkāre",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'bhūṣ' belongs to the 10th group (Curādi gaṇa) and means 'to decorate' or 'to adorn'. Because it belongs to this group, it inherently takes the affix 'aya' (ṇic), forming 'bhūṣayati' in Parasmaipada and 'bhūṣayate' in Ātmanepada.",
+      "scenarios": [
+        {
+          "verb_form": "bhūṣayati",
+          "grammar_trigger": "curādi-ṇic, Parasmaipada, Lat-lakāra, Prathama-puruṣa, Ekavacana",
+          "meaning": "decorates / adorns (someone or something else)",
+          "example_sanskrit": "mātā bālikāṁ bhūṣayati.",
+          "example_english": "The mother decorates the young girl."
+        },
+        {
+          "verb_form": "bhūṣayate",
+          "grammar_trigger": "curādi-ṇic, Ātmanepada, Lat-lakāra, Prathama-puruṣa, Ekavacana",
+          "meaning": "adorns oneself / decorates for one's own sake",
+          "example_sanskrit": "kanyā mālābhiḥ ātmānaṁ bhūṣayate.",
+          "example_english": "The maiden adorns herself with flower garlands."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'bhūṣa alaṅkāre' is listed in the Curādi gaṇa. Mādhava clarifies that it takes the non-causative intrinsic ṇic affix (svārthe ṇic) to denote the action of decorating, beautifying, or embellishing, operating seamlessly in both Parasmaipada and Ātmanepada.",
+      "kshiratarangini": "Kṣīrasvāmin notes 'bhūṣa alaṅkāre' as the act of embellishment and ornamenting (maṇḍana), generating the standard modern present forms bhūṣayati and bhūṣayate with complete seṭ inflectional behavior."
+    },
+    "meanings": {
+      "English": "to decorate, to adorn, to ornament, to embellish",
+      "Kannada": "alaṅkarisu, śṛṅgārisu",
+      "Telugu": "alaṅkariñcu, śṛṅgāriñcu",
+      "Tamil": "alaṅkarikka, aḻakūṭṭa",
+      "Malayalam": "alaṅkarikkuka, aṇiyikkuka",
+      "Hindi": "sajānā, alaṅkṛta karnā",
+      "Bengali": "sājāno, alaṅkṛta karā",
+      "German": "schmücken, verzieren",
+      "French": "orner, décorer, embellir",
+      "Russian": "ukrašať, narjažať",
+      "Chinese": "zhuāngshì, xiūshì"
+    }
+  },
+  {
+    "dhatu_id": "10.0399",
+    "aupadeshika": "kiti~",
+    "stripped_root": "kit",
+    "gana": "curadi",
+    "pada": "ubhayapada",
+    "it_status": "set",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "nivase roganapane ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root kit belongs to the Curadi (10th) class. Because it is in the 10th class, it naturally takes the nic affix (aya), turning the vowel i into e (guna) to make the stem ketaya-. It has two primary meanings: to dwell/reside and to treat/cure an illness. It can be conjugated in both Parasmaipada (ketayati) and Atmanepada (ketayate).",
+      "scenarios": [
+        {
+          "verb_form": "ketayati",
+          "grammar_trigger": "Lat lakara (present tense), prathama-purusha, eka-vacana, parasmaipada",
+          "meaning": "cures or treats (a disease)",
+          "example_sanskrit": "vaidyah aushadhena rogam ketayati.",
+          "example_english": "The physician cures the disease with medicine."
+        },
+        {
+          "verb_form": "ketayate",
+          "grammar_trigger": "Lat lakara (present tense), prathama-purusha, eka-vacana, atmanepada",
+          "meaning": "dwells or resides",
+          "example_sanskrit": "munih shante ashrama-pade ketayate.",
+          "example_english": "The sage resides in the peaceful hermitage."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The entry kiti nivase roganapane ca specifies that the root belongs to the Curadi group. By the rule hetumati ca and the inherent svarthe-nic for Curadi roots, the affix nic is applied. Guna of the penult vowel (i to e) occurs via puganta-laghupadhasya ca, yielding ketayati and ketayate.",
+      "kshiratarangini": "Kshirasvamin explains that kiti expresses two semantic domains: nivasa (dwelling/living) and roganapana (elimination or medical treatment of diseases). Through the addition of the Curadi nic formative suffix, it denotes actively residing or remedying illness."
+    },
+    "meanings": {
+      "English": "to dwell, to cure, to heal, to treat illness",
+      "Kannada": "vasisu, roga nivaarisu",
+      "Telugu": "nivasincu, rogamunu nivarincu",
+      "Tamil": "vasikka, nooi gunappadutha",
+      "Malayalam": "vasikkuka, rogam cikitsikkuka",
+      "Hindi": "nivas karna, rog door karna ya chikitsa karna",
+      "Bengali": "bash kora, rog upasham kora",
+      "German": "wohnen, heilen, kurieren",
+      "French": "habiter, guerir, soigner",
+      "Russian": "obitat', zhit', lechit', istselyat'",
+      "Chinese": "juzhu, zhiliao"
+    }
+  },
+  {
+    "dhatu_id": "10.0400",
+    "aupadeshika": "varṇa",
+    "stripped_root": "varn",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "varṇane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'varn' belongs to the 10th class (Curadi gana), meaning it inherently takes the 'nic' (aya) affix in normal conjugation. It means to describe, depict, or praise qualities. In Parasmaipada it expresses describing an object for others, while in Atmanepada it can indicate doing so for oneself.",
+      "scenarios": [
+        {
+          "verb_form": "varṇayati",
+          "grammar_trigger": "Curadi nic-pratyaya, Lat lakara (present tense), Parasmaipada, prathama-purusha, eka-vacana",
+          "meaning": "He/she describes or depicts",
+          "example_sanskrit": "kaviḥ prakṛti-śobhāṁ varṇayati.",
+          "example_english": "The poet describes the beauty of nature."
+        },
+        {
+          "verb_form": "varṇayate",
+          "grammar_trigger": "Curadi nic-pratyaya, Lat lakara (present tense), Atmanepada, prathama-purusha, eka-vacana",
+          "meaning": "He/she depicts or describes for oneself",
+          "example_sanskrit": "bālakaḥ svānubhavaṁ varṇayate.",
+          "example_english": "The child describes his own experience."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root varṇa is classified under Curadi adanta roots with the meaning of describing, painting, or detailing attributes (varṇana, guṇākhyāna, kriyāvīstāra). By the rule hetumaṇṇica and curādibhyo ṇic, it takes the obligatory svarthika ṇic affix, yielding the stem varṇaya-.",
+      "kshiratarangini": "Kshirasvamin notes varṇa in the sense of expressing qualities and expansive narration (varṇakriyāvistārārthe). Being an adanta root of the tenth class, it is ubhayapadin with the affix nic."
+    },
+    "meanings": {
+      "English": "to describe, to depict, to praise, to paint",
+      "Kannada": "varnisu, vivarisu",
+      "Telugu": "varninchu, vivarinchu",
+      "Tamil": "varnikka, vivarikka",
+      "Malayalam": "varnikkuka, vivarikkuka",
+      "Hindi": "varnana karna, bakhana karna",
+      "Bengali": "bornona kora, prokash kora",
+      "German": "beschreiben, schildern, preisen",
+      "French": "decrire, peindre, louer",
+      "Russian": "opisyvat, izobrazhat, voskhvalyat",
+      "Chinese": "miaoshu, miaohui, zanmei"
+    }
+  },
+  {
+    "dhatu_id": "10.0401",
+    "aupadeshika": "prastha",
+    "stripped_root": "prasth",
+    "gana": "curadi",
+    "pada": "ubhayapada",
+    "it_status": "set",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "vistare",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'prasth' belongs to the 10th class (Curadi) and naturally incorporates the causative affix 'nic'. It means 'to spread out', 'to extend', or 'to expand'. Because it is Ubhayapada, Parasmaipada forms (prasthayati) are used when the action is directed outwardly or generally, while Atmanepada forms (prasthayate) are used when the benefit or domain of spreading is directed toward oneself.",
+      "scenarios": [
+        {
+          "verb_form": "prasthayati",
+          "grammar_trigger": "Curadi nic, Lat lakara, Prathama purusha, Ekavacana, Parasmaipada",
+          "meaning": "Spreads out / extends (for others/general)",
+          "example_sanskrit": "sevakaḥ bhūmau kaṭam prasthayati.",
+          "example_english": "The attendant spreads out the mat on the floor."
+        },
+        {
+          "verb_form": "prasthayate",
+          "grammar_trigger": "Curadi nic, Lat lakara, Prathama purusha, Ekavacana, Atmanepada",
+          "meaning": "Spreads out / unfolds (for one's own use)",
+          "example_sanskrit": "yogi svayam asanam prasthayate.",
+          "example_english": "The yogi spreads out the seat for himself."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti glosses 'prastha vistare' in the Curadi gana. By virtue of being in Curadi, it obligatorily takes the 'nic' pratyaya ('satyapapasa...curo nica'). Due to 'nicasca', the forms are derived in both Parasmaipada and Atmanepada as 'prasthayati' and 'prasthayate'. It expresses the sense of expansion, broad layout, or spatial unfolding.",
+      "kshiratarangini": "Kshirasvamin notes under 'prastha vistare' that the root conveys elongation, spreading out, or extension of physical articles or space. The adanta nature causes elision of the stem-final 'a' before 'nic' (ato lopaḥ), yielding the verbal stem 'prasthi' which undergoes standard guna to form 'prasthayati' and 'prasthayate'."
+    },
+    "meanings": {
+      "English": "to spread out, to expand, to extend",
+      "Kannada": "vistarisu, haradu",
+      "Telugu": "vistarincu, parachuta",
+      "Tamil": "virivakku, parappu",
+      "Malayalam": "vistarikkuka, parathuka",
+      "Hindi": "phailana, vistar karna",
+      "Bengali": "bistrita kora, chorano",
+      "German": "ausbreiten, erweitern",
+      "French": "etendre, deployer",
+      "Russian": "rasprostranyat, rasshiryat",
+      "Chinese": "zhankai, kuozhan"
+    }
+  },
+  {
+    "dhatu_id": "10.0402",
+    "aupadeshika": "spaji",
+    "stripped_root": "spaj",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "sparshane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'spaji' belongs to the 10th class (Curadi gana) and means 'to touch' or 'to make contact with'. Because it has an 'i' as an indicatory letter (idit), a nasal sound 'n' is inserted into the root, creating the base 'spañj-'. Because it belongs to the Curadi class, it takes the suffix 'nic' intrinsically, forming present-tense forms in both Parasmaipada and Atmanepada.",
+      "scenarios": [
+        {
+          "verb_form": "spañjayati",
+          "grammar_trigger": "Parasmaipada, Kartari prayoga, Lat lakara (3rd person singular)",
+          "meaning": "touches / comes into contact with",
+          "example_sanskrit": "Balah komalam puspam spañjayati.",
+          "example_english": "The child touches the delicate flower."
+        },
+        {
+          "verb_form": "spañjayate",
+          "grammar_trigger": "Atmanepada, Kartari prayoga, Lat lakara (3rd person singular)",
+          "meaning": "touches / makes contact with",
+          "example_sanskrit": "Bhaktah pavitram toyam spañjayate.",
+          "example_english": "The devotee touches the sacred water."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Spaji sparshane. Idittvan num. Spañjayati, spañjayate. Sparshanam samyogo grahanam va.",
+      "kshiratarangini": "Spaji sparshane. Iditvad upadhadirghabhavah num ca. Curadau nic. Spañjayati."
+    },
+    "meanings": {
+      "English": "to touch, to contact, to feel",
+      "Kannada": "sparshisuvudu, muttuvudu",
+      "Telugu": "sparshincu, taku",
+      "Tamil": "thodu, theendu",
+      "Malayalam": "thoduka, sparshikkuka",
+      "Hindi": "sparsh karna, chuna",
+      "Bengali": "sparsho kora, choya",
+      "German": "beruehren, anruehren",
+      "French": "toucher, effleurer",
+      "Russian": "kasat'sya, dotragivat'sya",
+      "Chinese": "chumo, chuji"
+    }
+  },
+  {
+    "dhatu_id": "10.0403",
+    "aupadeshika": "sūtra",
+    "stripped_root": "sūtr",
+    "gana": "Curādi (10th Gana)",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "veṣṭane granthane ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root sūtr belongs to the 10th class (Curādi) and inherently means to string together, formulate concisely, weave, or compose into brief rules (sūtras). Because it is a Curādi root, it takes the nic affix (forming -aya-) in ordinary active use. In Parasmaipada, it highlights an action directed outwards, such as an author composing an aphorism. In Atmanepada, it can indicate the self-contained organization or structural condensation of knowledge.",
+      "scenarios": [
+        {
+          "verb_form": "sūtrayati",
+          "grammar_trigger": "Laṭ (Present Tense), Kartari Prayoga, Parasmaipada, Prathama Puruṣa, Ekavacana",
+          "meaning": "Formulates, composes aphorisms, or strings together",
+          "example_sanskrit": "muniḥ śāstra-niyamān sūtrayati.",
+          "example_english": "The sage formulates the rules of the treatise."
+        },
+        {
+          "verb_form": "sūtrayate",
+          "grammar_trigger": "Laṭ (Present Tense), Kartari Prayoga, Ātmanepada, Prathama Puruṣa, Ekavacana",
+          "meaning": "Threads together or outlines for one's own system",
+          "example_sanskrit": "vidvān svamatam saṅkṣepeṇa sūtrayate.",
+          "example_english": "The scholar outlines his doctrine concisely."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti analyzes sūtra in the sense of veṣṭana (wrapping, stringing together) and granthana (systematic arrangement or composition). Being inherently svārthe ṇic as a Curādi root, it derives forms such as sūtrayati and sūtrayate, forming its perfect as sūtrayāñcakāra or sūtrayāmāsa, signifying the concise summarization of vast knowledge into stringed formulas.",
+      "kshiratarangini": "Kshirasvamin in Kshiratarangini explains the root sūtra as denoting the act of girding, binding, or weaving together conceptual structures. The root is treated as a derivative nominal or Curādi formation that represents methodical condensation into sutra form."
+    },
+    "meanings": {
+      "English": "to string together, weave, formulate, compose concisely into rules",
+      "Kannada": "sūtrarūpadalli racisu, sūtrisu, heṇeyu",
+      "Telugu": "sūtrīkarincu, granthincu, allu",
+      "Tamil": "sūttiram amai, thoguthu uruvākku, kōr",
+      "Malayalam": "sūtrīkarikkuka, saṅkṣipiccu racikkuka, kōrkkuka",
+      "Hindi": "sūtrarūpa meṁ racanā, sūtrīkaraṇa karanā, pironā",
+      "Bengali": "sūtrabaddha karā, sūtrākāre racanā karā, gānthā",
+      "German": "in Leitsätze fassen, zusammenfassen, aneinanderreihen",
+      "French": "formuler en aphorismes, agencer, résumer en règles",
+      "Russian": "formulirovat v vide aforizmov, obobshchat, nanizyvat",
+      "Chinese": "biānzhù, guīnà wèi guīzé, chuànlián"
+    }
+  },
+  {
+    "dhatu_id": "10.0404",
+    "aupadeshika": "dhūpa",
+    "stripped_root": "dhūp",
+    "gana": "Curadi (10th Gana)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmanaka",
+    "canonical_dhatvartha": "santape",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'dhup' belongs to the 10th class (Curadi gana) and inherently takes the suffix 'nic' (forming base 'dhupaya-'). It signifies heating, burning incense, or fumigating. As an Ubhayapadi root, it can be used in Parasmaipada (when the action is directed outwards) or Atmanepada (when the effect is reflexive or self-directed).",
+      "scenarios": [
+        {
+          "verb_form": "dhupayati",
+          "grammar_trigger": "Curadi svarthe nic, Kartari prayoga, Lat lakara, Parasmaipada, 3rd person singular",
+          "meaning": "He/she fumigates or burns incense for someone/generally.",
+          "example_sanskrit": "pujakah mandire sugandhadravyena dhupayati.",
+          "example_english": "The priest burns fragrant incense in the temple."
+        },
+        {
+          "verb_form": "dhupayate",
+          "grammar_trigger": "Curadi svarthe nic, Kartari prayoga, Lat lakara, Atmanepada, 3rd person singular",
+          "meaning": "He/she fumigates or incenses for oneself.",
+          "example_sanskrit": "bhaktah svagrham dhupayate.",
+          "example_english": "The devotee burns incense in his own home."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti explains 'dhupa santape' as indicating intense heating, fumigating, or smoking with aromatics. It enters the Curadi class, optionally operating in both padas (ubhayato bhasha) with the svarthe-nic affix producing forms like dhupayati and dhupayate.",
+      "kshiratarangini": "Kshirasvamin notes in the Kshiratarangini that 'dhupa santape' conveys 'tapana' (heating/tormenting) as well as the application of fragrant smoke (dhupana). It follows regular Curadi morphophonemic rules with guna not blocking the long u."
+    },
+    "meanings": {
+      "English": "to fumigate, incense, or heat",
+      "Kannada": "dhupa hakuvudu, santapisu",
+      "Telugu": "dhupamu veyuta, santapamu kaligincuta",
+      "Tamil": "tupam iduthal, pugaippaduthuthal",
+      "Malayalam": "dhupam iduka, puka kolukkuka",
+      "Hindi": "dhup dikhana, sugandhit dhuam dena, santap dena",
+      "Bengali": "dhup deoya, dhumayita kara",
+      "German": "raukern, einrauchern, erwarmen",
+      "French": "encenser, parfumer par la fumee",
+      "Russian": "okurivat ladanom, nagrevat",
+      "Chinese": "xunxiang, fenshao"
+    }
+  },
+  {
+    "dhatu_id": "10.0405",
+    "aupadeshika": "tūla",
+    "stripped_root": "tūl",
+    "gana": "Curadi",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "niṣkarṣe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'tul' or 'tul' belongs to the 10th class (Curadi gana). It inherently receives the suffix 'nic' (giving the stem 'tūlaya-'), meaning 'to weigh', 'to measure', or 'to pull apart/extract'. It can take endings of both Parasmaipada and Atmanepada without changing its fundamental active meaning.",
+      "scenarios": [
+        {
+          "verb_form": "tūlayati",
+          "grammar_trigger": "Parasmaipada, Lat lakara (present tense), prathama-purusha, ekavacana",
+          "meaning": "Weighs or measures (something)",
+          "example_sanskrit": "Vanik tulaya dravyam tulayati.",
+          "example_english": "The merchant weighs the merchandise on the balance scale."
+        },
+        {
+          "verb_form": "tūlayate",
+          "grammar_trigger": "Atmanepada, Lat lakara (present tense), prathama-purusha, ekavacana",
+          "meaning": "Weighs or teases out for oneself",
+          "example_sanskrit": "Karpasasahaya tulam tulayate.",
+          "example_english": "The worker teases apart and measures cotton."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti glosses 'tūla niṣkarṣe' in the Curadi gana. 'Niṣkarṣa' signifies isolation, separation (pṛthagbhāva), or comparative weighing/measurement (parimāṇam). Adding the svaarthe-ṇic affix produces the forms tūlayati and tūlayate.",
+      "kshiratarangini": "Kshirasvamin defines 'tūla niṣkarṣe', indicating extraction, teasing of fibres, or balancing/measuring, with nominal derivatives such as 'tulā' (scale/balance) and 'tūlam' (cotton)."
+    },
+    "meanings": {
+      "English": "to weigh, to measure, to extract, to tease out",
+      "Kannada": "tooka madu, aleyu, huttu haku",
+      "Telugu": "tookamu veyu, kolucu, tulyamuga juchu",
+      "Tamil": "edai podu, alavidu, pirithu edu",
+      "Malayalam": "tookkam nokkuka, alakkuka, thookuk",
+      "Hindi": "tolna, mapna, prithak karna",
+      "Bengali": "ojon kora, map kora, tulona kora",
+      "German": "wiegen, abmessen, zupfen",
+      "French": "peser, mesurer, effiler",
+      "Russian": "vzveshivat, izmeryat, raschesyvat",
+      "Chinese": "chengliang, celiang, chouci"
+    }
+  },
+  {
+    "dhatu_id": "10.0406",
+    "aupadeshika": "tyaja",
+    "stripped_root": "tyaj",
+    "gana": "curadi",
+    "pada": "ubhayapada",
+    "it_status": "set",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "hanau",
+    "dhaturupanandini": {
+      "simple_explanation": "The root tyaj belongs to the 10th class (Curadi gana) where the suffix nic is applied automatically. It means to cause someone to abandon, relinquish, or discard something. In Parasmaipada, the action is directed outward, while in Atmanepada, the effect of the abandonment relates directly to oneself or self-interest.",
+      "scenarios": [
+        {
+          "verb_form": "tyajayati",
+          "grammar_trigger": "Curadi nic affix, Parasmaipada, Prathama Purusha, Ekavacana",
+          "meaning": "He causes someone to give up or abandon something",
+          "example_sanskrit": "guruh sishyam durabhyasam tyajayati.",
+          "example_english": "The teacher causes the student to give up bad habits."
+        },
+        {
+          "verb_form": "tyajayate",
+          "grammar_trigger": "Curadi nic affix, Atmanepada, Prathama Purusha, Ekavacana",
+          "meaning": "He renounces or gets rid of something for his own benefit",
+          "example_sanskrit": "munih moham tyajayate.",
+          "example_english": "The sage rids himself of delusion."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root tyaja is listed in the Curadi gana with the meaning hanau (abandonment or loss). By the general rule curadibhyo nic, the affix nic is compulsory. The penult vowel undergoes vriddhi (tyaja becomes tyaji), yielding forms such as tyajayati and tyajayate in the present tense.",
+      "kshiratarangini": "Kshirasvamin explains tyaja hanau as denoting intentional abandonment, releasing, or causing departure. It operates transitively with both Parasmaipada and Atmanepada terminations."
+    },
+    "meanings": {
+      "English": "to cause to abandon, to renounce, to relinquish",
+      "Kannada": "tyajisuvante maduvudu, bidisuvudu, bittubiduvudu",
+      "Telugu": "tyajimpajeyuta, vidipinchuta, vadilinchuta",
+      "Tamil": "kaividac ceytal, turakka vaittal, viduvittal",
+      "Malayalam": "tyajippikkuka, upekshippikkuka, vittukalayuka",
+      "Hindi": "tyag karvana, chhudvana, tyagna",
+      "Bengali": "porityag korano, charano, tyag kora",
+      "German": "aufgeben lassen, entsagen, verlassen",
+      "French": "faire abandonner, renoncer, delaisser",
+      "Russian": "zastavlyat otkazatsya, brosat, pokidat",
+      "Chinese": "shi fangqi, shi sheqi, yiqi"
+    }
+  },
+  {
+    "dhatu_id": "10.0407",
+    "aupadeshika": "dhūpa",
+    "stripped_root": "dhūp",
+    "gana": "Curādi",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "samtāpe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'dhūp' belongs to the 10th conjugation (Curādi gaṇa) and inherently takes the 'ṇic' affix (forming dhūpaya-). It means to fumigate, incense, heat, or distress. As an Ubhayapada root in the 10th group, it can take Parasmaipada endings (dhūpayati) when the action is generally directed outward, or Ātmanepada endings (dhūpayate) when emphasizing the internal process or benefit to oneself.",
+      "scenarios": [
+        {
+          "verb_form": "dhūpayati",
+          "grammar_trigger": "Curādi ṇic-pratyaya, Parasmaipada, Lat-lakāra, Prathama-puruṣa, Ekavacana",
+          "meaning": "He/she perfumes or fumigates",
+          "example_sanskrit": "pūjakaḥ mandire sugandhadravyeṇa dhūpayati.",
+          "example_english": "The priest fumigates the temple with fragrant incense."
+        },
+        {
+          "verb_form": "dhūpayate",
+          "grammar_trigger": "Curādi ṇic-pratyaya, Ātmanepada, Lat-lakāra, Prathama-puruṣa, Ekavacana",
+          "meaning": "He/she burns incense for oneself / suffers affliction",
+          "example_sanskrit": "bhaktaḥ gṛhe devatāyai dhūpayate.",
+          "example_english": "The devotee burns incense for the deity in his own home."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root dhūpa is listed in the Curādi gaṇa in the sense of samtāpa (heating, afflicting, or fumigating). It takes the svārthika ṇic suffix by general rule, giving forms like dhūpayati and dhūpayate. In the niṣṭhā (past participle), it yields dhūpitaḥ.",
+      "kshiratarangini": "Kshirasvamin notes dhūpa in the sense of samtāpane (heating or smoking/fumigating). With the svarthika curadi nic-pratyaya, it operates as an ubhayapadi root yielding regular curadi forms such as dhūpayati and adīdhupat in the aorist."
+    },
+    "meanings": {
+      "English": "to perfume, fumigate with incense, heat, or torment",
+      "Kannada": "dhūpa hāku, parimala bīru, santāpagolisu",
+      "Telugu": "dhūpamu veyyu, parimaḷimpajēyu, tāpamondincu",
+      "Tamil": "thūpam pōdu, naṟumaṇamūṭṭu, thunbuṟuthu",
+      "Malayalam": "dhūpam iduka, saugandhyam parathuka, santāpippikkuka",
+      "Hindi": "dhūp denā, sugandhita karnā, santapta karnā",
+      "Bengali": "dhup deoyā, sugandhita karā, santapta karā",
+      "German": "räuchern, mit Weihrauch beduften, quälen",
+      "French": "parfumer à l'encens, encenser, chauffer",
+      "Russian": "okurivat ladanom, blagouhat, goret",
+      "Chinese": "xunxiang, fenshao, shiren fanrao"
+    }
+  },
+  {
+    "dhatu_id": "10.0408",
+    "aupadeshika": "citi~",
+    "stripped_root": "cint",
+    "gana": "curadi",
+    "pada": "ubhayapada",
+    "it_status": "set",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "smrtyam",
+    "dhaturupanandini": {
+      "simple_explanation": "The root cint belongs to the 10th class (Curadi gana). Roots in this class inherently take the affix nic without needing a causative context (svaarthe nic). Thus, it directly forms cintayati (Parasmaipada) or cintayate (Atmanepada), meaning to think, reflect, or contemplate upon something.",
+      "scenarios": [
+        {
+          "verb_form": "cintayati",
+          "grammar_trigger": "Curadi svaarthe nic, Lat lakara, prathama purusha, ekavacana (Parasmaipada)",
+          "meaning": "He/She thinks or contemplates",
+          "example_sanskrit": "chattrah prashnasya uttaram cintayati.",
+          "example_english": "The student thinks about the answer to the question."
+        },
+        {
+          "verb_form": "cintayate",
+          "grammar_trigger": "Curadi svaarthe nic, Lat lakara, prathama purusha, ekavacana (Atmanepada)",
+          "meaning": "He/She reflects or deliberates within oneself",
+          "example_sanskrit": "munihi atmatattvam cintayate.",
+          "example_english": "The sage reflects upon the nature of the self."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "citi smrtyam curadiridit. idittvat num. svaarthe nic. cintayati, cintayate. smaranam cintanam iti ca arthadvaye api prayoga drishyate.",
+      "kshiratarangini": "citi smrtyam. iditvat nup cintayati. dhyane smarane ca vartate."
+    },
+    "meanings": {
+      "English": "to think, to ponder, to remember, to meditate",
+      "Kannada": "yocisuvudu, cintisuvudu, smarisuvudu",
+      "Telugu": "alocincu, cintincu, smarincu",
+      "Tamil": "cintikkavum, ninaikkavum",
+      "Malayalam": "cintikkuka, dhyanikkuka",
+      "Hindi": "socana, cintana karana, smarana karana",
+      "Bengali": "cinta kara, bhabna kara, smarana kara",
+      "German": "denken, nachdenken, sich erinnern",
+      "French": "penser, reflechir, mediter",
+      "Russian": "dumat, razmyshlyat, vspominat",
+      "Chinese": "sikao, chensi, xiangnian"
+    }
+  },
+  {
+    "dhatu_id": "10.0409",
+    "aupadeshika": "klatha",
+    "stripped_root": "klath",
+    "gana": "curadi",
+    "pada": "ubhayapada",
+    "it_status": "set",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "himsayam",
+    "dhaturupanandini": {
+      "simple_explanation": "The root klath belongs to the Curadi group (10th conjugation class), which means it inherently takes the stem-forming suffix nic (ay). It expresses the action of injuring, hurting, or striking down an opponent. When conjugated in Parasmaipada (klathayati), it directly denotes hurting or slaying an object, whereas in Atmanepada (klathayate), the fruit of the aggressive action reflects on the agent.",
+      "scenarios": [
+        {
+          "verb_form": "klathayati",
+          "grammar_trigger": "curadi nic-pratyaya with Parasmaipada prathama-purusha eka-vacana (lat lakara)",
+          "meaning": "hurts, strikes, or slays (someone)",
+          "example_sanskrit": "virah sangrame satrum klathayati.",
+          "example_english": "The warrior strikes down the enemy in battle."
+        },
+        {
+          "verb_form": "klathayate",
+          "grammar_trigger": "curadi nic-pratyaya with Atmanepada prathama-purusha eka-vacana (lat lakara)",
+          "meaning": "hurts or slays for oneself",
+          "example_sanskrit": "yoddha atmarthe durjanam klathayate.",
+          "example_english": "The fighter vanquishes the wicked person for his own protection."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "klatha himsarthah curadir ubhayapadi. klathayati klathayate. himsanam peedanam hananam va iti vrittikarah.",
+      "kshiratarangini": "klatha himsayam. nic curaditvat sarvada pravartate. klathayati klathanam."
+    },
+    "meanings": {
+      "English": "to hurt, to injure, to strike, to kill",
+      "Kannada": "himsisu, gayamadu, kollu",
+      "Telugu": "himsinchu, gayaparachu, champu",
+      "Tamil": "thunburuthu, kaayappaduthu, kollu",
+      "Malayalam": "upadravikkuka, vedanippikkuka, kolluka",
+      "Hindi": "hinsa karna, chot pahunchana, marna",
+      "Bengali": "himsa kora, aghat kora, hotya kora",
+      "German": "verletzen, schaden, toeten",
+      "French": "blesser, nuire, tuer",
+      "Russian": "ranit, vredit, ubivat",
+      "Chinese": "shanghai, shangcan, shasi"
+    }
+  },
+  {
+    "dhatu_id": "10.0410",
+    "aupadeshika": "varṇa",
+    "stripped_root": "varn",
+    "gana": "Curadi",
+    "pada": "Ubhayapadi",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "varṇane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'varn' belongs to the 10th class (Curadi gana) and inherently takes the 'nic' affix (forming the base 'varnaya-'). It means to describe, depict, praise, or portray something. Being Ubhayapadi, it can take either active endings (Parasmaipada) or middle endings (Atmanepada) without shifting its core meaning of detailed description.",
+      "scenarios": [
+        {
+          "verb_form": "varṇayati",
+          "grammar_trigger": "Curadi nic-pratyaya with Parasmaipada prathama-purusha ekavacana in Lat-lakara (present indicative)",
+          "meaning": "describes or paints a verbal picture",
+          "example_sanskrit": "Kaviḥ sundaraṃ prakṛti-dṛśyaṃ varṇayati.",
+          "example_english": "The poet describes the beautiful scenery of nature."
+        },
+        {
+          "verb_form": "varṇayate",
+          "grammar_trigger": "Curadi nic-pratyaya with Atmanepada prathama-purusha ekavacana in Lat-lakara (present indicative)",
+          "meaning": "portrays or narrates (for oneself)",
+          "example_sanskrit": "Śiṣyaḥ svānubhavaṃ guru-samakṣaṃ varṇayate.",
+          "example_english": "The student narrates his own experience in front of the teacher."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'varna' is enumerated in Curadi with the meaning of 'varnana' (description, detailing qualities, or coloring). By the rule 'satyapapasharupanavaturashlokaturanavarnacuranadibhyo nic', the root invariably takes the nic-affix. It forms 'varnayati' and 'varnayate' across both padas, possessing transitive syntactic governance.",
+      "kshiratarangini": "Kshirasvamin notes 'varna varnane', explaining the semantic scope as depicting the attributes of an object or illuminating qualities through speech. The presence of svarithet markers in the Curadi class allows both active and middle inflections without change in transitivity."
+    },
+    "meanings": {
+      "English": "to describe, to depict, to narrate, to praise, to paint",
+      "Kannada": "varnisu, vivarisu, hogalu",
+      "Telugu": "varnincu, vivarincu, pogadu",
+      "Tamil": "varnikka, vivarikka, pugazha",
+      "Malayalam": "varnikkuka, vivarikkuka, pukazhtthuka",
+      "Hindi": "varnan karna, bakhana, vivaran dena",
+      "Bengali": "barnana kara, bibarana deoya, prashamsa kara",
+      "German": "beschreiben, schildern, preisen",
+      "French": "decrire, peindre, narrer, louer",
+      "Russian": "opisyvat, izobrazhat, povestvovat",
+      "Chinese": "miaoshu, miaohui, xianshi"
     }
   }
 ]
