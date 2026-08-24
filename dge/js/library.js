@@ -189,7 +189,9 @@ const DGE_PATH_LABELS = {
   atharvaveda_shiksha: 'अथर्ववेदशिक्षा', rigveda_shikshas: 'ऋग्वेदशिक्षाः', samaveda_shikshas: 'सामवेदशिक्षाः', krishna_yajurveda_shikshas: 'कृष्णयजुर्वेदशिक्षाः',
   shukla_yajurveda_shikshas: 'शुक्लयजुर्वेदशिक्षाः', yajurveda_shikshas: 'यजुर्वेदशिक्षाः', samaveda_pratishakhya: 'सामवेदप्रातिशाख्यम्', purvabhaga: 'पूर्वभागः',
   // Vyakarana
-  paniniya_vyakarana: 'पाणिनीयव्याकरणम्',
+  mahabhashya_patanjali: 'महाभाष्यम् (पतञ्जलिः)', siddhanta_kaumudi: 'सिद्धान्तकौमुदी',
+  // Chandas
+  vrittaratnakara: 'वृत्तरत्नाकरः',
   // Advaita corpus + misc
   shankara_bhashya: 'शङ्करभाष्यम्', badhanta: 'बाधान्तः', brahmasutranyayasamgraha: 'ब्रह्मसूत्रन्यायसंग्रहः',
 };

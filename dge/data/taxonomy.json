@@ -5560,15 +5560,17 @@
      "_schema": "grantha_tika_text",
      "_default_author": "Śrīśa Chandra Vasu"
     },
-    "kaumudi_order": {}
+    "kaumudi_order": {},
+    "mahabhashya_patanjali": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "Patañjali"
+    },
+    "siddhanta_kaumudi": {
+     "_schema": "grantha_tika_text",
+     "_default_author": "Bhaṭṭoji Dīkṣita"
+    }
    },
    "aindra_school": {},
-   "paniniya_vyakarana": {
-    "ashtadhyayi": {},
-    "mahabhashya_patanjali": {},
-    "kashika_vritti": {},
-    "siddhanta_kaumudi": {}
-   },
    "chandra_vyakarana": {},
    "jainendra_vyakarana": {},
    "shakatayana_vyakarana": {},
@@ -5643,11 +5645,11 @@
    }
   },
   "chandas": {
-   "_schema": "vedanga_chandas_vrutta_database"
+   "_schema": "vedanga_chandas_vrutta_database",
+   "vrittaratnakara": {}
   },
   "nirukta": {},
-  "jyotisha": {},
-  "vrittaratnakara": {}
+  "jyotisha": {}
  },
  "dasa_sahitya": {
   "_schema": "dasa_pada_text",

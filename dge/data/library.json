@@ -8076,6 +8076,12 @@
       "title": "Chandas"
     },
     {
+      "path": "dge/data/vedanga/chandas/vrittaratnakara/data.json",
+      "populated": true,
+      "title": "Vrittaratnakara",
+      "addedAt": "2026-08-24"
+    },
+    {
       "path": "dge/data/vedanga/jyotisha/data.json",
       "populated": true,
       "title": "Jyotisha"
@@ -8496,11 +8502,6 @@
       "title": "Yajurvidhana Shiksha"
     },
     {
-      "path": "dge/data/vedanga/vrittaratnakara/data.json",
-      "populated": true,
-      "title": "Vrittaratnakara"
-    },
-    {
       "path": "dge/data/vedanga/vyakarana/aindra_school/data.json",
       "populated": false,
       "title": "Aindra School"
@@ -8521,9 +8522,21 @@
       "title": "Kaumudi Order"
     },
     {
+      "path": "dge/data/vedanga/vyakarana/ashtadhyayi/mahabhashya_patanjali/data.json",
+      "populated": true,
+      "title": "महाभाष्यम्",
+      "addedAt": "2026-08-24"
+    },
+    {
       "path": "dge/data/vedanga/vyakarana/ashtadhyayi/nyasa/data.json",
       "populated": true,
       "title": "न्यासः"
+    },
+    {
+      "path": "dge/data/vedanga/vyakarana/ashtadhyayi/siddhanta_kaumudi/data.json",
+      "populated": true,
+      "title": "सिद्धान्तकौमुदी",
+      "addedAt": "2026-08-24"
     },
     {
       "path": "dge/data/vedanga/vyakarana/ashtadhyayi/sutrapatha/data.json",
@@ -8569,16 +8582,6 @@
       "path": "dge/data/vedanga/vyakarana/mugdhabodha_vyakarana/data.json",
       "populated": false,
       "title": "Mugdhabodha Vyakarana"
-    },
-    {
-      "path": "dge/data/vedanga/vyakarana/paniniya_vyakarana/mahabhashya_patanjali/data.json",
-      "populated": true,
-      "title": "महाभाष्यम् (पतञ्जलि)"
-    },
-    {
-      "path": "dge/data/vedanga/vyakarana/paniniya_vyakarana/siddhanta_kaumudi/data.json",
-      "populated": true,
-      "title": "सिद्धान्तकौमुदी (भट्टोजिदीक्षित)"
     },
     {
       "path": "dge/data/vedanga/vyakarana/sarasvata_vyakarana/data.json",
