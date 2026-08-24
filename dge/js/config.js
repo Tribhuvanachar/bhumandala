@@ -99,7 +99,20 @@ window.KOSHA_DATA_BASE = appConfig.koshaDataBase;
 // workflows print the line to paste.
 window.WORDNET_DATA_BASE = appConfig.wordnetDataBase;
 window.KAVYA_DATA_BASE = appConfig.kavyaDataBase;
-window.DGE_SEARCH_INDEX = appConfig.searchIndexBase;
+// Phase 7 of the mobile UI overhaul: a user-facing "Data source" override
+// for the search index, the same idea as the pre-existing audio CDN
+// override (see userAudioBaseUrlInput in ai.js), and one of the
+// ashtadhyayi.com-inspired preferences the project lead asked to add.
+// global-search.js reads window.DGE_SEARCH_INDEX exactly once, into a
+// module-scope var, the moment its own script tag runs -- unlike the
+// audio override (read fresh from localStorage at each actual use in
+// audio.js), a saved override here has to already be in place before
+// that capture happens. config.js runs first, so this is the one place
+// it can be applied.
+window.DGE_SEARCH_INDEX = (function () {
+  try { return localStorage.getItem('search_index_base_override') || appConfig.searchIndexBase; }
+  catch (e) { return appConfig.searchIndexBase; }
+})();
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
 // remove, rename, reorder, or temporarily disable (enabled:false) any of
@@ -166,19 +179,34 @@ window.ACHARYA_QUERY_TYPES = ACHARYA_QUERY_TYPES;
 
 // Additional structured per-shloka fields, beyond the existing free-form
 // commentaries — Padaccheda, Anvaya, etc. Purely additive and forward-
-// looking: dataKey is what render.js looks for on each shloka object
-// (e.g. shloka.padaccheda). If a given shloka's data doesn't have that
-// field populated, that section simply doesn't render — nothing breaks
-// for shlokas without this data yet. Toggle individual fields on/off in
+// looking: dataKey is what render.js looks for on each shloka object,
+// either a plain top-level field (e.g. shloka.padaccheda) or a dotted
+// path into a nested object (e.g. shloka.gemini_deep_analysis.bhavartha
+// -- see dgeGetNestedField in render.js). If a given shloka's data
+// doesn't have that field populated, that section simply doesn't render
+// — nothing breaks for shlokas without this data yet. Toggle individual
+// fields on/off in
 // ⚙️ Settings → 🧩 Shloka Fields, or edit `enabled` here for the default.
+// 23 Aug 2026: pratipadartha/tatparya/vyakarana/vrutta/alankara now point
+// into gemini_deep_analysis (tools/gemini_deep_analysis.py's nested
+// output -- a structured object, not a plain string per key like a
+// commentary), not a flat shloka.<name> field. dataKey supports a dotted
+// path (dgeGetNestedField in render.js resolves it); renderType tells
+// render.js how to lay out that field's shape rather than assuming every
+// field is a plain string:
+//   'text'    a plain string (or an array of strings, joined)
+//   'table'   an array of objects -- pratipadartha's word-by-word gloss
+//   'list'    an array of objects rendered as a bulleted list -- alankara
+//   'chandas' the {name, gana_structure, lakshana} object specifically
 const SHLOKA_EXTRA_FIELDS = [
   { id: 'padaccheda', label: 'Padaccheda', icon: '🔤', dataKey: 'padaccheda', enabled: true },
   { id: 'anvaya', label: 'Anvaya', icon: '🔗', dataKey: 'anvaya', enabled: true },
-  { id: 'pratipadartha', label: 'Pratipadartha', icon: '📖', dataKey: 'pratipadartha', enabled: true },
-  { id: 'tatparya', label: 'Tatparya', icon: '🎯', dataKey: 'tatparya', enabled: true },
-  { id: 'vyakarana', label: 'Vyakarana', icon: '⚙️', dataKey: 'vyakarana', enabled: false },
-  { id: 'vrutta', label: 'Vrutta (Meter)', icon: '🎼', dataKey: 'vrutta', enabled: true },
-  { id: 'alankara', label: 'Alankara', icon: '✨', dataKey: 'alankara', enabled: false },
+  { id: 'pratipadartha', label: 'Pratipadartha', icon: '📖', dataKey: 'gemini_deep_analysis.pratipadartha', renderType: 'table', enabled: true },
+  { id: 'tatparya', label: 'Tatparya', icon: '🎯', dataKey: 'gemini_deep_analysis.bhavartha', renderType: 'text', enabled: true },
+  { id: 'vyakarana', label: 'Vyakarana', icon: '⚙️', dataKey: 'gemini_deep_analysis.vyakarana_vishesha', renderType: 'text', enabled: false },
+  { id: 'vrutta', label: 'Vrutta (Meter)', icon: '🎼', dataKey: 'gemini_deep_analysis.chandas', renderType: 'chandas', enabled: true },
+  { id: 'alankara', label: 'Alankara', icon: '✨', dataKey: 'gemini_deep_analysis.alankara', renderType: 'list', enabled: false },
+  { id: 'samasa', label: 'Samasa Vishesha', icon: '🧩', dataKey: 'gemini_deep_analysis.samasa_vishesha', renderType: 'samasa', enabled: false },
   { id: 'crossReferences', label: 'Cross References', icon: '🔀', dataKey: 'crossReferences', enabled: true },
   // Vedic-content fields (see dgeNormalizeGranthaData in core.js, which is
   // what actually populates these dataKeys for vedic_text-schema granthas)
@@ -490,7 +518,7 @@ const QUICK_SEARCH_ABBREVIATIONS = [
       if (parts.length !== 1 || !/^\d+$/.test(parts[0])) return null;
       const n = parseInt(parts[0], 10);
       if (!n) return null;
-      return { granthaPath: 'stotra/pns', shlokaNumber: n };
+      return { granthaPath: 'stotra/PrahladaKrutaNarasimha', shlokaNumber: n };
     }
   }
 ];

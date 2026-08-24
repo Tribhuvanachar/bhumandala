@@ -37,7 +37,7 @@
       "because the full sidebar re-renders on every leaf. Use long timeouts."
     ]
   },
-  "output_root": "dge/data/dvaitavedanta",
+  "output_root": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta",
   "defaults": {
     "delay": 1.0,
     "timeout": 120,

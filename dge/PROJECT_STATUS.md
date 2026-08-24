@@ -217,7 +217,7 @@ A GitHub personal-access-token was pasted into the chat during the Guru Parampar
 ## Content currently live (main reader app)
 _Ground truth as of this update — checked directly against `library.json` and sample `data.json` files, not assumed:_ **137 of 605** catalog entries are actually populated (`populated: true`) — up from 90 before today's ingestion pipeline run (see "Library Manager + ingestion pipeline" below). **180,158 total verses/entries** across the library per `data/library_status.json`.
 
-- **Prahlādakṛta Nṛsiṁha Stotra** (`stotra/pns`) — 43 shlokas, 5 commentaries. Fully populated, the original reference text for the whole project.
+- **Prahlādakṛta Nṛsiṁha Stotra** (`stotra/PrahladaKrutaNarasimha`, renamed from `stotra/pns` 23 Aug 2026 — internal `stotraCode` stayed `pns`) — 43 shlokas, 5 commentaries. Fully populated, the original reference text for the whole project.
 - **All four Vedas — 42 populated granthas total**, all carrying accented `samhita_patha`/`pada_patha`, `chandas`, `svara`, `rishi`, `devata`, plus (Ṛgveda) six European-language commentaries. Full detail in `veda_toolkit/README.md`.
   - **Ṛgveda** (Śākala) — all 10 maṇḍalas, 10,552 mantras — **now also carries the traditional Aṣṭaka.Adhyāya.Varga.Ṛcā reference** (`ashtaka_ref` in the data, exposed as `ashtakaId` on each shloka) alongside the standard Maṇḍala.Sūkta.Ṛk addressing. Regenerated from `deeplearningforsanskrit/rigveda-samhita`'s data and independently cross-checked (10,552 total riks, 64 adhyayas, 2,024 vargas — all matched). No UI surfaces this yet (no quick-jump-by-Ashtaka, no display in the reader) — it's data only, waiting on a follow-up feature.
   - **Atharvaveda, Śukla Yajurveda, Sāmaveda, Taittirīya** — see previous entries, unchanged this update.

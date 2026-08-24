@@ -111,7 +111,10 @@ const DGE_LEGACY_SLUGS = {
   'ancillary/jyotisha':     'vedanga/jyotisha',
   'sutras/kalpa_sutras':    'vedanga/kalpa',
   'vyakarana':              'vedanga/vyakarana',
-  'sarvamoola_grantha':     'darshana/vedanta/dvaita/sarvamula',
+  // Resolution is a single pass, not a chain (see dgeUpgradeLegacySlug
+  // below) -- every entry here must point straight at the CURRENT
+  // location, never at an older name that itself needed upgrading.
+  'sarvamoola_grantha':     'darshana/vedanta/dvaita/SarvaMula',
   'shankara_bhashya':       'darshana/vedanta/advaita/shankara_bhashya',
   'itihasas':               'itihasa',
   'puranas':                'purana',
@@ -122,7 +125,15 @@ const DGE_LEGACY_SLUGS = {
   'stotras':                'stotra',
   'pancharatra_agama':      'agama/pancharatra',
   'dasakuta':               'dasa_sahitya/dasakuta',
-  'vyasakuta':              'dasa_sahitya/vyasakuta'
+  'vyasakuta':              'dasa_sahitya/vyasakuta',
+  // 23 Aug 2026 restructure: dvaitavedanta/ (a separate top-level 895-item
+  // tree) moved to sit alongside sarvamula under Vedanta/Dvaita, and
+  // sarvamula itself was renamed SarvaMula for display-name consistency
+  // with the same pass's other renames. stotra/pns became stotra/
+  // PrahladaKrutaNarasimha for the same reason.
+  'dvaitavedanta':                       'darshana/vedanta/dvaita/DvaitaVedanta',
+  'darshana/vedanta/dvaita/sarvamula':   'darshana/vedanta/dvaita/SarvaMula',
+  'stotra/pns':                          'stotra/PrahladaKrutaNarasimha'
 };
 
 window.dgeUpgradeLegacySlug = function (slug) {
@@ -254,7 +265,7 @@ window.addEventListener('pagehide', function () {});
 // than leaving it to be rediscovered each time, the HTML now stamps its
 // own version and the JS checks it matches. Bump BOTH on any release that
 // changes index.html's structure.
-window.DGE_EXPECTED_HTML_VERSION = '4.63.0';
+window.DGE_EXPECTED_HTML_VERSION = '4.64.0';
 document.addEventListener('DOMContentLoaded', () => {
   const meta = document.querySelector('meta[name="dge-html-version"]');
   const actual = meta ? meta.getAttribute('content') : '(none)';
@@ -681,12 +692,28 @@ document.addEventListener('DOMContentLoaded', () => {
     return `data/${s}/data.json`;
   }
 
+  // Single named default rather than a bare 'pns' literal repeated at every
+  // call site -- the one thing every no-param page load actually needs a
+  // hardcoded answer for, kept in exactly one place.
+  const DGE_DEFAULT_STOTRA_SLUG = 'PrahladaKrutaNarasimha';
+
   const slug = dgeUpgradeLegacySlug(explicitPath
     ? explicitPath.replace(/^\/+|\/+$/g, '')
-    : `stotra/${explicitCode || 'pns'}`);
+    : `stotra/${explicitCode || DGE_DEFAULT_STOTRA_SLUG}`);
   const stotrasDirectChild = slug.match(/^stotra\/([^/]+)$/);
 
-  window.stotraCode = stotrasDirectChild ? stotrasDirectChild[1] : slug.replace(/\//g, '__');
+  // 23 Aug 2026: stotra/pns was renamed stotra/PrahladaKrutaNarasimha for
+  // display-name consistency (see DGE_LEGACY_SLUGS above), but this text's
+  // localStorage/audio-cache namespace has always been the bare folder
+  // name (see the comment at dgeGranthaFetchUrl above this block). Without
+  // this map, every existing reader's saved progress/notes/bookmarks/audio
+  // cache on this stotra would silently stop being found -- not deleted,
+  // just orphaned under a key the app no longer looks at. Add an entry
+  // here, not a rename in state.js, whenever a grantha's slug changes.
+  const STOTRA_CODE_CONTINUITY = { PrahladaKrutaNarasimha: 'pns' };
+
+  const rawStotraCode = stotrasDirectChild ? stotrasDirectChild[1] : slug.replace(/\//g, '__');
+  window.stotraCode = STOTRA_CODE_CONTINUITY[rawStotraCode] || rawStotraCode;
   window.currentGranthaSlug = slug;
   window.jsonFileName = dgeGranthaFetchUrl(slug); // overwritten below if the catalog has a more specific real path
   window.AUDIO_CACHE_NAME = `narasimha-audio-${window.stotraCode}`;
@@ -710,6 +737,25 @@ document.addEventListener('DOMContentLoaded', () => {
       if (titleEl) titleEl.innerText = 'Not Yet Available';
       if (cardEl) cardEl.innerText = "This text hasn't been added to the library yet — check back soon.";
       return;
+    }
+
+    // Admin-only content (entry.hidden, see the 23 Aug 2026 restructure --
+    // e.g. darshana/vedanta/dvaita/DvaitaVedanta/*) reached by a direct
+    // ?path= link rather than the nav, which already excludes it. Refuses
+    // to fetch/render for anyone not signed in as admin. Not real access
+    // control -- the underlying data.json is still a public static file on
+    // GitHub Pages, same caveat as admin-gate.js -- but the app itself
+    // won't show it.
+    if (entry && entry.hidden) {
+      const isAdmin = localStorage.getItem('acharyaAuthorized') === 'true' ||
+                       localStorage.getItem('is_superadmin') === 'true';
+      if (!isAdmin) {
+        const titleEl = document.getElementById('stotraTitle');
+        const cardEl = document.getElementById('readingCard');
+        if (titleEl) titleEl.innerText = 'Restricted';
+        if (cardEl) cardEl.innerText = 'This section is not available.';
+        return;
+      }
     }
 
     function fetchGranthaData(attempt) {
@@ -917,7 +963,7 @@ function initAuthAndBranding() {
   const adminItem = document.getElementById('adminAccessItem');
   const superItem = document.getElementById('superAdminAccessItem');
   const logoutItem = document.getElementById('logoutAccessItem');
-  if (keyBtn) keyBtn.innerText = (isAuthorized || isSuperadmin) ? '🔓' : '🔑';
+  if (keyBtn) keyBtn.innerHTML = (isAuthorized || isSuperadmin) ? '🔓 <span class="btn-top-label">Access</span>' : '🔑 <span class="btn-top-label">Access</span>';
   if (adminItem) {
     adminItem.innerHTML = isAuthorized ? '🔓 Admin Access <span style="margin-left:auto; font-size:10px; color:var(--accent-red); font-weight:800;">ACTIVE</span>' : '🔒 Admin Access';
     adminItem.classList.toggle('active', isAuthorized);
@@ -965,6 +1011,11 @@ function restorePrefs() {
 
   const savedScript = localStorage.getItem('app_script');
   if (savedScript && typeof applyScript === 'function') applyScript(savedScript);
+
+  const savedLayoutMode = localStorage.getItem('app_layoutMode');
+  if (savedLayoutMode && typeof window.dgeSetLayoutMode === 'function') window.dgeSetLayoutMode(savedLayoutMode);
+
+  if (localStorage.getItem('app_wakeLock') === '1' && typeof window.dgeSetScreenWakeLock === 'function') window.dgeSetScreenWakeLock(true);
 
   const savedViewMode = localStorage.getItem('app_viewMode');
   // renderList() builds a full DOM card per shloka in "list" mode — fine

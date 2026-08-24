@@ -10,7 +10,7 @@
 <title>DvaitaVedanta Extraction · DGE</title>
 <!--
   Progress dashboard for the dvaitavedanta.in extraction.
-  Reads dge/data/dvaitavedanta/_extract_status.json, which is written by
+  Reads dge/data/darshana/vedanta/dvaita/DvaitaVedanta/_extract_status.json, which is written by
   tools/dvaitavedanta/import_dvaitavedanta.py on every run.
 
   Design tokens are lifted from admin/library.html so this page sits in the
@@ -96,7 +96,7 @@
      reader would land, but a direct URL should not hand a visitor an
      internal tracker either (see js/admin-gate.js). -->
 <main data-admin-only>
-  <div id="app"><div class="empty">Loading <code>data/dvaitavedanta/_extract_status.json</code>…</div></div>
+  <div id="app"><div class="empty">Loading <code>data/darshana/vedanta/dvaita/DvaitaVedanta/_extract_status.json</code>…</div></div>
 </main>
 <div class="empty" style="max-width:1100px;margin:40px auto;padding:0 14px;" id="publicNotice">
   This is an internal content-pipeline dashboard, visible only to a signed-in admin.
@@ -104,7 +104,7 @@
 <style>body.dge-is-admin #publicNotice{display:none}</style>
 
 <script>
-const STATUS_URL = "data/dvaitavedanta/_extract_status.json";
+const STATUS_URL = "data/darshana/vedanta/dvaita/DvaitaVedanta/_extract_status.json";
 const ORDER = ["failed", "partial", "pending", "complete"];
 let DATA = null, filter = "", statusFilter = "";
 

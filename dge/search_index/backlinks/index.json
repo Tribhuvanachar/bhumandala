@@ -2,12 +2,12 @@
  "_readme": "Which granthas have a backlinks shard, and the titles of the granthas that cite them. Built by tools/shard_backlinks.py from search_index/backlinks.json. \"cited\" maps a grantha slug to how many of its units are cited; a slug absent here has no shard and the reader fetches nothing.",
  "v": 1,
  "cited": {
-  "darshana/vedanta/dvaita/sarvamula/sutra_prasthana/anuvyakhyana": 160,
+  "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/anuvyakhyana": 160,
   "vedanga/vyakarana/ashtadhyayi/kashika": 3831,
   "vedanga/vyakarana/ashtadhyayi/sutrapatha": 3962
  },
  "titles": {
-  "darshana/vedanta/dvaita/sarvamula/sutra_prasthana/anuvyakhyana/tika_jayatirtha": "अनुव्याख्यानम् (जयतीर्थटीका)",
+  "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/anuvyakhyana/tika_jayatirtha": "अनुव्याख्यानम् (जयतीर्थटीका)",
   "vedanga/vyakarana/ashtadhyayi/balamanorama": "बालमनोरमा",
   "vedanga/vyakarana/ashtadhyayi/kashika": "काशिकावृत्तिः",
   "vedanga/vyakarana/ashtadhyayi/nyasa": "न्यासः",

@@ -154,6 +154,9 @@ window.openKeyModal = function() {
   const audioBaseUrlDefaultHint = document.getElementById('audioBaseUrlDefaultHint');
   if (audioBaseUrlDefaultHint) audioBaseUrlDefaultHint.textContent = (window.appConfig && window.appConfig.audioBaseUrl) || 'https://archive.org/download/';
 
+  const searchIndexBaseInput = document.getElementById('userSearchIndexBaseInput');
+  if (searchIndexBaseInput) searchIndexBaseInput.value = localStorage.getItem('search_index_base_override') || '';
+
   dgeRenderAcharyaSettingsUI();
   dgeLoadFeatureFlagsIntoUI();
   dgeLoadShlokaFieldsIntoUI();
@@ -222,6 +225,16 @@ window.saveAllApiKeys = function() {
     if (url && !url.endsWith('/')) url += '/'; // must end with / — concatenated directly with each grantha's identifier folder
     if (url) { localStorage.setItem('audio_base_url_override', url); audioBaseUrlInput.value = url; }
     else localStorage.removeItem('audio_base_url_override');
+  }
+
+  const searchIndexBaseInput = document.getElementById('userSearchIndexBaseInput');
+  if (searchIndexBaseInput) {
+    // No trailing slash here, unlike the audio override above -- dge-search.js's
+    // own fetch helper does `base + '/' + rel`, inserting the separator itself,
+    // so a base that already ends in / would produce a double slash.
+    let indexUrl = searchIndexBaseInput.value.trim().replace(/\/+$/, '');
+    if (indexUrl) { localStorage.setItem('search_index_base_override', indexUrl); searchIndexBaseInput.value = indexUrl; }
+    else localStorage.removeItem('search_index_base_override');
   }
 
   dgeSaveAcharyaSettingsFromUI();
@@ -311,6 +324,13 @@ window.resetAudioBaseUrlToDefault = function() {
   if (typeof showToast === 'function') showToast('Audio source reset to the project default.');
 };
 
+window.resetSearchIndexBaseToDefault = function() {
+  localStorage.removeItem('search_index_base_override');
+  const input = document.getElementById('userSearchIndexBaseInput');
+  if (input) input.value = '';
+  if (typeof showToast === 'function') showToast('Search index source reset to the project default — reload the page for it to take effect.');
+};
+
 window.resetFeatureFlagsToDefault = function() {
   localStorage.removeItem('feature_flags_override');
   localStorage.removeItem('script_options_override');
@@ -329,6 +349,7 @@ const SHLOKA_FIELD_CHECKBOX_IDS = {
   vyakarana: 'fieldVyakarana',
   vrutta: 'fieldVrutta',
   alankara: 'fieldAlankara',
+  samasa: 'fieldSamasa',
   crossReferences: 'fieldCrossReferences'
 };
 

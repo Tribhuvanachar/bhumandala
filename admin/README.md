@@ -113,7 +113,9 @@ remain in git history if any is ever wanted back.
   early prototypes of the reading page, superseded by `dge/`.
 - `PrahladaKrutaNarasimhaStotra.html` and `data_pns.json` — a standalone
   copy of the Prahlāda-kṛta Nṛsiṃha Stotra, superseded by the live text at
-  `dge/data/stotra/pns/`.
+  `dge/data/stotra/PrahladaKrutaNarasimha/` (renamed from `pns/` 23 Aug
+  2026; the internal `stotraCode`/localStorage namespace stayed `pns`,
+  see `core.js`'s `STOTRA_CODE_CONTINUITY`).
 - `version.json` at the root — read by nothing. `dge/convert/version.json`
   is a different file and is still in use.
 - `dge/data/tippanikaras.json`, `dge/data/_taxonomy.json` — no reader.
@@ -167,11 +169,14 @@ recognise:
 | `ancillary/pratishakhya` | `vedanga/shiksha/pratishakhya` |
 | `sutras/kalpa_sutras` | `vedanga/kalpa` |
 | `vyakarana` | `vedanga/vyakarana` — merged beside the grammatical schools |
-| `sarvamoola_grantha` | `darshana/vedanta/dvaita/sarvamula` |
+| `sarvamoola_grantha` | `darshana/vedanta/dvaita/SarvaMula` |
 | `shankara_bhashya` | `darshana/vedanta/advaita/shankara_bhashya` |
 | `itihasas` / `puranas` / `stotras` / `koshas` | `itihasa` / `purana` / `stotra` / `kosha` |
 | `smritis` / `dharmashastra` | `smriti_dharma/smriti` / `smriti_dharma/dharmashastra` |
 | `kavya` | `kavya_alankara` |
+| `dvaitavedanta` (23 Aug 2026) | `darshana/vedanta/dvaita/DvaitaVedanta` — admin-only, see `entry.hidden` in `library.json` |
+| `darshana/vedanta/dvaita/sarvamula` (23 Aug 2026) | `darshana/vedanta/dvaita/SarvaMula` |
+| `stotra/pns` (23 Aug 2026) | `stotra/PrahladaKrutaNarasimha` |
 | `pancharatra_agama` | `agama/pancharatra` |
 | `dasakuta` / `vyasakuta` | `dasa_sahitya/dasakuta` / `dasa_sahitya/vyasakuta` |
 | `vedas` | unchanged |

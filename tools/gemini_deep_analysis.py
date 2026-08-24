@@ -35,9 +35,10 @@ since it operates in a different task than gemini_bench.py's target).
 
 Stored per-verse under `gemini_deep_analysis` (a nested object, NOT
 under `commentaries` -- render.js's commentary blocks expect a plain
-string per key, and this is structured data with no reader UI yet; that's
-a real, separate follow-up, documented in dge/PENDING.md, not silently
-skipped).
+string per key, and this is structured data). Rendered via the existing
+Shloka Fields settings toggles (Pratipadartha/Tatparya/Vyakarana/Vrutta/
+Alankara) -- see SHLOKA_EXTRA_FIELDS in dge/js/config.js, whose dataKeys
+point at this object's own field names (23 Aug 2026).
 
 Usage:
   GEMINI_API_KEY=... python3 tools/gemini_deep_analysis.py \
@@ -77,12 +78,19 @@ SYSTEM_INSTRUCTION = (
     "padaccheda (and only those), its split into member words, the samasa "
     "type (e.g. Tatpurusha, Bahuvrihi, Karmadharaya, Dvandva, Avyayibhava), "
     "and its vigraha vakya (analytical paraphrase); (4) pratipadartha -- a "
-    "word-by-word gloss in the anvaya's order: each word's case/tense-mood-"
-    "person (vibhakti for a noun, or dhatu+lakara+purusha+vacana for a "
-    "verb), and its meaning; (5) bhavartha -- the verse's devotional/"
-    "literary import in 1-3 sentences, distinct from a plain factual "
-    "summary: what the verse is DOING (invoking, praising, establishing a "
-    "theme) as much as what it says. If you cannot confidently produce any "
+    "word-by-word gloss in the anvaya's order: each word's derivation/"
+    "etymology if it is not simply its dictionary form (vigraha -- leave "
+    "empty for a plain undeclined/underived word rather than repeating the "
+    "word itself), its case/tense-mood-person (vibhakti for a noun, or "
+    "dhatu+lakara+purusha+vacana for a verb), and its meaning; (5) "
+    "bhavartha -- the verse's devotional/literary import in 1-3 sentences, "
+    "distinct from a plain factual summary: what the verse is DOING "
+    "(invoking, praising, establishing a theme) as much as what it says; "
+    "(6) vyakarana_vishesha -- notable grammatical points about this verse "
+    "as a whole that the pratipadartha table and samasa_vishesha don't "
+    "already cover (an unusual sandhi, a rare verb formation, unusual "
+    "sandhi/vibhakti usage) -- leave empty rather than restating what's "
+    "already in those two fields. If you cannot confidently produce any "
     "one of these for this verse, say so plainly in a 'confidence_note' "
     "field rather than guessing -- do not fabricate a plausible-looking "
     "analysis, especially for chandas/alankara identification, where a "
@@ -133,6 +141,7 @@ RESPONSE_SCHEMA = {
                 "properties": {
                     "order": {"type": "integer"},
                     "pada": {"type": "string"},
+                    "vigraha": {"type": "string"},
                     "vibhakti_dhatu": {"type": "string"},
                     "artha": {"type": "string"},
                 },
@@ -140,6 +149,7 @@ RESPONSE_SCHEMA = {
             },
         },
         "bhavartha": {"type": "string"},
+        "vyakarana_vishesha": {"type": "string"},
         "confidence_note": {"type": "string"},
     },
     "required": ["chandas", "alankara", "samasa_vishesha", "pratipadartha", "bhavartha"],
@@ -215,7 +225,8 @@ def mock_analyze_verse(*args, **kwargs) -> dict:
     return {
         "chandas": {"name": "[dry-run mock]", "gana_structure": "", "lakshana": ""},
         "alankara": [], "samasa_vishesha": [], "pratipadartha": [],
-        "bhavartha": "[dry-run mock] bhavartha placeholder", "confidence_note": "",
+        "bhavartha": "[dry-run mock] bhavartha placeholder",
+        "vyakarana_vishesha": "", "confidence_note": "",
     }
 
 

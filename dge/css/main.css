@@ -270,6 +270,38 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 .commentary-title { font-weight: 700; font-family: var(--font-ui); color: var(--accent-red); font-size: 11px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
 
+/* 23 Aug 2026: gemini_deep_analysis fields (Pratipadartha/Tatparya/
+   Vyakarana/Vrutta/Alankara) render as <details>/<summary> for a
+   collapsible accordion, reusing .commentary-block/.commentary-title so
+   they match the look of every other field without a second style
+   system. Only the summary marker/cursor and the table/list bodies
+   inside are new. */
+details.dge-analysis-field > summary.commentary-title { cursor: pointer; list-style-position: outside; margin-bottom: 6px; }
+details.dge-analysis-field > summary.commentary-title::marker { color: var(--accent-red); font-size: 10px; }
+details.dge-analysis-field[open] > summary.commentary-title { margin-bottom: 8px; }
+.dge-ai-badge { display: inline-block; font-family: var(--font-ui); font-size: 9px; font-weight: 800; letter-spacing: 0.3px; color: #fff; background: var(--accent-red, #7a3b1d); border-radius: var(--radius-pill); padding: 1px 6px; margin-left: 6px; text-transform: none; vertical-align: 1px; }
+
+.dge-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.dge-analysis-table { width: 100%; border-collapse: collapse; font-size: calc(var(--font-multiplier) * 0.8); }
+.dge-analysis-table th, .dge-analysis-table td { text-align: left; padding: 4px 10px 4px 0; vertical-align: top; border-bottom: 1px solid var(--card-border); white-space: nowrap; }
+.dge-analysis-table td:last-child, .dge-analysis-table th:last-child { white-space: normal; font-family: var(--font-ui); }
+.dge-analysis-table thead th { font-family: var(--font-ui); font-size: 10px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--accent-red); font-weight: 700; }
+.dge-analysis-pada { font-weight: 700; }
+.dge-analysis-list { margin: 0; padding-left: 18px; }
+.dge-analysis-list li { margin-bottom: 4px; }
+.dge-analysis-tag { font-family: var(--font-ui); font-size: 10px; color: var(--text-secondary, inherit); opacity: 0.75; }
+.dge-analysis-lakshana, .dge-analysis-split { margin-top: 2px; opacity: 0.85; font-size: 0.95em; }
+
+/* 23 Aug 2026: per-card commentary tab bar, shown only when 2+
+   commentaries render for a shloka. "All" is the default (today's
+   stacked view, unchanged); a tab shows just that one commentary by
+   toggling display on the already-rendered .commentary-block siblings
+   -- see dgeShowCommentaryTab in render.js. */
+.dge-commentary-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px; }
+.dge-commentary-tab { font-family: var(--font-ui); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: var(--radius-pill); border: 1px solid var(--card-border); background: transparent; color: var(--text-primary); cursor: pointer; opacity: 0.7; transition: opacity var(--t-fast) var(--ease), background var(--t-fast) var(--ease); }
+.dge-commentary-tab:hover { opacity: 1; }
+.dge-commentary-tab.active { opacity: 1; background: var(--accent-gold); color: #1a1208; border-color: transparent; }
+
 /* Bottom Toolbar — floating frosted panel */
 .bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border-top: 1px solid var(--card-border); border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.10); z-index: 9999; box-sizing: border-box; padding-bottom: env(safe-area-inset-bottom); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease); }
 .player-inner { max-width: 650px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 8px 4px; box-sizing: border-box; gap: 4px; }
@@ -299,6 +331,59 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 /* The consolidated Display popup holds four sections at once, so it needs
    to scroll rather than run off the bottom of a phone screen. */
 .popup-scroll { max-height: min(70vh, 460px); overflow-y: auto; overscroll-behavior: contain; }
+
+/* 24 Aug 2026: .popup-sheet turns an anchored dropdown into a real bottom
+   sheet -- full width, rises from the bottom edge, room to breathe instead
+   of a 460px box holding 4 merged sections. No JS changes needed: it's
+   still opened/closed via the existing togglePopup()/.show class, and
+   every #displayPopup .pop-item[...] lookup elsewhere (transliteration.js,
+   utils.js, render.js, menu.js) is untouched since the id and children
+   don't change, only this element's own positioning.
+   Important: a .popup-sheet must NOT be nested inside an element that has
+   backdrop-filter/filter/transform/perspective (like .top-bar) -- any of
+   those create a new containing block for position:fixed descendants, so
+   the sheet ends up anchored to that ancestor's small box instead of the
+   real viewport. See index.html: #displayPopup is placed as a sibling of
+   .top-bar for exactly this reason. */
+.popup.popup-sheet {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  width: 100%; max-width: 100%; margin: 0 auto;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-left: none; border-right: none; border-bottom: none;
+  height: auto; max-height: 80vh; padding: 10px 16px calc(16px + env(safe-area-inset-bottom));
+  transform: translateY(100%);
+  transition: transform var(--t-med) var(--ease), opacity var(--t-fast) var(--ease), visibility var(--t-fast) var(--ease);
+  z-index: 10500;
+}
+.popup.popup-sheet.show { transform: translateY(0); }
+/* 24 Aug 2026 -- Phase 6: full-width-from-the-bottom is a mobile pattern
+   (thumb-reachable, no room to spare). On a desktop-width viewport there
+   is room to spare, and a sheet stretched edge-to-edge at 1200px+ would
+   look broken, not native -- so above the tablet breakpoint it becomes a
+   compact floating panel anchored to the bottom-right instead, closer to
+   how the equivalent anchored dropdown behaved there. Still the same
+   element, same .show class, same slide transition -- only its size and
+   corner anchoring change. */
+@media (min-width: 760px) {
+  .popup.popup-sheet {
+    left: auto; right: 20px; bottom: 20px;
+    width: min(360px, 90vw); max-width: min(360px, 90vw);
+    max-height: min(70vh, 560px);
+    border-radius: var(--radius-lg); border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-lg);
+  }
+}
+.popup-sheet-handle { width: 36px; height: 4px; border-radius: var(--radius-pill); background: var(--card-border); margin: 0 auto 6px; flex-shrink: 0; }
+@media (min-width: 760px) { .popup-sheet-handle { display: none; } }
+.popup-sheet-scroll { overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 12px; flex: 1 1 auto; min-height: 0; }
+/* Backdrop: CSS-only via :has(), so opening/closing the sheet needs no JS
+   changes. Degrades gracefully (no dimming, sheet still fully usable) in
+   the rare browser without :has() support. */
+body:has(.popup-sheet.show)::after {
+  content: ''; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  z-index: 10400; animation: dgeSheetFadeIn var(--t-fast) var(--ease);
+}
+@keyframes dgeSheetFadeIn { from { opacity: 0; } to { opacity: 1; } }
 .popup-label { font-size: 10px; color: #8a7a63; text-transform: uppercase; letter-spacing: 0.04em; }
 .popup.show { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
 .popup hr { width: 100%; border: 0; border-top: 1px solid var(--card-border); margin: 0; }
@@ -378,6 +463,107 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 .modal-content.fullscreen { width: 100%; height: 100%; max-width: none; max-height: none; border-radius: 0; border: none; display: flex; flex-direction: column; }
 .modal-content.fullscreen .modal-body { display: flex; flex-direction: column; flex-grow: 1; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
 .modal-content.fullscreen textarea { flex-grow: 1; height: auto; min-height: 50vh; resize: none; margin-bottom: 12px; }
+
+/* 24 Aug 2026 -- Phase 2 of the mobile UI overhaul: off-canvas drawers.
+   .drawer-left/.drawer-right turn an ordinary centered .modal-overlay into
+   a full-height panel that slides in from an edge -- the same navigation
+   pattern used by Gmail, Slack, Spotify and Claude's own app (formalized
+   as Android/Material Design's "Navigation Drawer" component, itself
+   descended from the hamburger icon Norm Cox designed for the 1981 Xerox
+   Star -- not anything specific to one reference site). openModal()/
+   closeModal() (modals.js) special-case these two classes to swap from a
+   plain display:none<->flex toggle to a show/hide class so the slide can
+   transition; every other modal-overlay on the site is untouched by that
+   branch and keeps working exactly as before. */
+.modal-overlay.drawer-left,
+.modal-overlay.drawer-right {
+  align-items: stretch;
+  background: rgba(0,0,0,0);
+  transition: background var(--t-med) var(--ease);
+}
+.modal-overlay.drawer-left { justify-content: flex-start; }
+.modal-overlay.drawer-right { justify-content: flex-end; }
+.modal-overlay.drawer-left.show,
+.modal-overlay.drawer-right.show { background: rgba(0,0,0,0.55); }
+
+.modal-overlay.drawer-left .modal-content,
+.modal-overlay.drawer-right .modal-content {
+  width: min(340px, 86vw); max-width: none;
+  height: 100%; max-height: none;
+  margin: 0; border-radius: 0; border-top: none; border-bottom: none;
+  animation: none; /* the drawer's own slide replaces the centered-modal pop-in */
+  transition: transform var(--t-med) var(--ease);
+}
+.modal-overlay.drawer-left .modal-content { border-left: none; transform: translateX(-100%); }
+.modal-overlay.drawer-right .modal-content { border-right: none; transform: translateX(100%); }
+.modal-overlay.drawer-left.show .modal-content,
+.modal-overlay.drawer-right.show .modal-content { transform: translateX(0); }
+.modal-overlay.drawer-left .modal-body,
+.modal-overlay.drawer-right .modal-body { padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
+
+/* Phase 3: .top-actions, relocated wholesale into #actionsDrawer's body
+   (see index.html), becomes a vertical labelled list instead of the
+   horizontal icon-only row it used to be directly in .top-bar. Scoped to
+   .modal-body so it only affects this one relocated usage. */
+.modal-body .top-actions { display: flex; flex-direction: column; align-items: stretch; gap: 4px; justify-content: flex-start; }
+.modal-body .top-actions > * { width: 100%; }
+.modal-body .top-actions .btn-top {
+  justify-content: flex-start; width: 100%; font-size: 15px; font-weight: 600;
+  padding: 12px 10px; gap: 10px; border-radius: var(--radius-sm);
+}
+.btn-top-label { font-size: 13px; }
+
+/* 24 Aug 2026 -- Phase 4 of the mobile UI overhaul: distraction-free full
+   screen reading. Strips every piece of chrome (top bar, header, search
+   bar, special-character palette, bottom player, the कोश/global-search
+   floating buttons) down to just the shloka + commentary, matching the
+   explicit ask: "the bottom toolbar, upper toolbar, left stuff, right
+   stuff -- everything should go away." Toggled by
+   window.dgeToggleImmersiveMode() (utils.js). One persistent small exit
+   button is the only chrome left, deliberately -- a tap-to-reveal-chrome
+   pattern (as video players use) would risk swallowing taps meant for
+   word lookup/text selection inside the verse itself, and a reading app
+   (Kindle, Apple Books) is the closer reference class here than a video
+   player anyway. */
+body.dge-immersive .top-bar,
+body.dge-immersive .header,
+body.dge-immersive .search-box-group,
+body.dge-immersive .char-palette-panel,
+body.dge-immersive .bottom-player,
+body.dge-immersive .search-navigator,
+body.dge-immersive #kosha-fab,
+body.dge-immersive .dge-gs-fab { display: none !important; }
+body.dge-immersive { padding-top: env(safe-area-inset-top) !important; padding-bottom: env(safe-area-inset-bottom) !important; }
+
+.immersive-exit-btn {
+  display: none; position: fixed; top: calc(10px + env(safe-area-inset-top)); right: 10px; z-index: 10600;
+  width: 38px; height: 38px; border-radius: 50%; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.45); color: #fff; border: none; font-size: 15px; line-height: 1; cursor: pointer;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: var(--shadow-md);
+}
+body.dge-immersive .immersive-exit-btn { display: flex; }
+
+/* 24 Aug 2026 -- Phase 5: App View, a second lower-density layout
+   alongside the existing dense "Scholar" view (see window.dgeSetLayoutMode
+   in render.js and the App Layouts section of the Display sheet in
+   index.html). Purely class/CSS-driven: each card's commentary/analysis
+   is hidden by default and revealed per-card via the .dge-appview-toggle
+   button render.js already emits for every card (present, just display:
+   none, in Scholar view) -- switching modes needs no re-render since both
+   states are already in the DOM either way. */
+.dge-appview-toggle { display: none; }
+body.dge-app-view .shloka-card .dge-appview-toggle {
+  display: flex; align-items: center; justify-content: center; width: 100%;
+  background: transparent; border: 1px dashed var(--card-border); color: var(--muted-text);
+  font-size: 11px; font-weight: 700; padding: 7px; border-radius: var(--radius-xs); cursor: pointer;
+}
+body.dge-app-view .shloka-card .dge-appview-toggle:active { background: var(--card-active); }
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .commentary-block,
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-commentary-tabbed,
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-analysis-field,
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-fn-block { display: none; }
+body.dge-app-view .shloka-card { padding: 16px; gap: 10px; }
+body.dge-app-view .shloka-list { gap: 14px; }
 
 .modal-header-sticky { padding: 16px; background: var(--card-bg); z-index: 10; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
 .modal-body { padding: 16px; overflow-y: auto; flex-grow: 1; }

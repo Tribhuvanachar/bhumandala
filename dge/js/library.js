@@ -44,7 +44,12 @@ const DGE_PATH_LABELS = {
   dvaita: 'द्वैतम्', advaita: 'अद्वैतम्', vishishtadvaita: 'विशिष्टाद्वैतम्',
   nyaya: 'न्यायः', vaisheshika: 'वैशेषिकम्', sankhya: 'साङ्ख्यम्',
   yoga: 'योगः', mimamsa: 'मीमांसा',
-  sarvamula: 'सर्वमूलग्रन्थाः',
+  SarvaMula: 'सर्वमूलग्रन्थाः',
+  // 23 Aug 2026 restructure: the separate top-level dvaitavedanta/ tree
+  // moved to sit beside SarvaMula here (admin-only, see the visibility
+  // flag on its taxonomy/library.json entries -- dgeIsHiddenGrantha below).
+  // SetuTila is an empty placeholder for a second Sarvamula edition.
+  DvaitaVedanta: 'द्वैतवेदान्तः', SetuTila: 'सेतुतिला',
 
   itihasa: 'इतिहासाः', purana: 'पुराणानि',
   ramayana: 'रामायणम्', ananda_ramayana: 'आनन्दरामायणम्',
@@ -138,6 +143,23 @@ async function dgeLoadLibraryOverrides() {
     const vis = await fetch('data/library-visibility.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
     if (vis && Array.isArray(vis.hidden)) dgeLibOverrides.hidden = vis.hidden;
   } catch (e) { /* nothing hidden */ }
+}
+
+// 23 Aug 2026: per-grantha "hidden" flag written directly onto a
+// library.json entry (distinct from dgeLibOverrides.hidden above, which is
+// an admin-curated path-prefix list read from library-overrides.json) --
+// admin-only content like darshana/vedanta/dvaita/DvaitaVedanta/*, gated
+// the same way admin-gate.js gates a standalone page. Not real access
+// control -- see that file's own caveat -- but keeps it out of the reader
+// nav and quick-jump for anyone who isn't signed in as admin.
+function dgeIsAdmin() {
+  try {
+    return localStorage.getItem('acharyaAuthorized') === 'true' ||
+           localStorage.getItem('is_superadmin') === 'true';
+  } catch (e) { return false; }
+}
+function dgeIsAdminOnlyGrantha(g) {
+  return !!(g && g.hidden) && !dgeIsAdmin();
 }
 
 function dgeIsHiddenPath(path) {
@@ -363,7 +385,7 @@ window.openLibraryModal = async function() {
   // repos won't have one until the project lead actually curates something.
   await dgeLoadLibraryOverrides();
 
-  const populated = library.granthas.filter(g => g.populated).map(g => {
+  const populated = library.granthas.filter(g => g.populated && !dgeIsAdminOnlyGrantha(g)).map(g => {
     const realSlug = window.dgeGranthaSlug(g.path);
     const slug = dgeEffectiveDisplayPath(realSlug); // where it GROUPS in the tree
     const custom = dgeLibOverrides.labels[slug];
@@ -384,7 +406,7 @@ window.openLibraryModal = async function() {
   // populated-only as before (deliberately not showing ~550 empty
   // placeholder entries in the everyday reader) -- this only powers each
   // folder header's own badge.
-  const allForTotals = library.granthas.map(g => {
+  const allForTotals = library.granthas.filter(g => !dgeIsAdminOnlyGrantha(g)).map(g => {
     const realSlug = window.dgeGranthaSlug(g.path);
     return dgeEffectiveDisplayPath(realSlug);
   }).filter(slug => !dgeIsHiddenPath(slug));
@@ -440,7 +462,7 @@ async function dgeFuzzyMatchGrantha(text) {
   const qWords = q.split(' ').filter(Boolean);
   let best = null, bestScore = -1;
   library.granthas.forEach(function (g) {
-    if (!g.populated) return;
+    if (!g.populated || dgeIsAdminOnlyGrantha(g)) return;
     const realSlug = window.dgeGranthaSlug(g.path);
     const hay = dgeNormalizeForMatch(realSlug + ' ' + (g.title || ''));
     if (!hay) return;

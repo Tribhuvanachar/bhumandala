@@ -40,9 +40,10 @@
   // Advaita/Dvaita/Vishishtadvaita aren't their own field on a hit (the
   // search index doesn't carry one) but this project's own taxonomy paths
   // already encode it unambiguously in the slug for anything under
-  // darshana/vedanta/* or the separate top-level dvaitavedanta/* tree --
-  // real signal, not a guess, just read from where it already lives rather
-  // than duplicated into a new field.
+  // darshana/vedanta/* -- real signal, not a guess, just read from where
+  // it already lives rather than duplicated into a new field. The
+  // dvaitavedanta prefix check is kept for hits from a not-yet-rebuilt
+  // search index still carrying the pre-23-Aug-2026 top-level path.
   function siddhantaOf(slug) {
     if (/(^|\/)advaita(\/|$)/.test(slug)) return 'advaita';
     if (/(^|\/)vishishtadvaita(\/|$)/.test(slug)) return 'vishishtadvaita';
@@ -545,8 +546,30 @@
     bar.appendChild(kwRow);
   }
 
+  // 23 Aug 2026: DvaitaVedanta (dge/data/darshana/vedanta/dvaita/DvaitaVedanta/)
+  // is admin-only -- not linked in the Library nav, and per the project lead's
+  // explicit ask, should not surface in search results for anyone else
+  // either. The 330 MB CDN search index (see INDEX_BASE above) is a separate,
+  // offline-built artifact this session can't rebuild, so a stale copy may
+  // still carry old-path hits from before this restructure; filtering here,
+  // on every hit this UI ever renders regardless of index freshness, is the
+  // one place that reliably holds regardless of what the index contains.
+  // Not real access control -- same caveat as admin-gate.js: this hides the
+  // hit from the UI, it does not restrict the underlying static JSON file.
+  function dgeSearchIsAdmin() {
+    try {
+      return localStorage.getItem('acharyaAuthorized') === 'true' ||
+             localStorage.getItem('is_superadmin') === 'true';
+    } catch (e) { return false; }
+  }
+  function dgeSearchIsAdminOnlyHit(h) {
+    var g = h && h.grantha || '';
+    return g.indexOf('darshana/vedanta/dvaita/DvaitaVedanta') === 0 || g.indexOf('dvaitavedanta') === 0;
+  }
+
   function render(hits, q) {
-    lastHits = hits || [];
+    hits = (hits || []).filter(function (h) { return dgeSearchIsAdmin() || !dgeSearchIsAdminOnlyHit(h); });
+    lastHits = hits;
     lastQuery = q;
     filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '' };
     if (!hits || !hits.length) {
