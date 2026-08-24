@@ -101263,6 +101263,52 @@
     }
   },
   {
+    "dhatu_id": "13.0166",
+    "aupadeshika": "kaṇḍūñ",
+    "stripped_root": "kaṇḍū",
+    "gana": "kandvādi",
+    "pada": "ubhayapada",
+    "it_status": "aniṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "gātravigharṣaṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kaṇḍū' belongs to the Kandvadi group where the affix 'yak' is added optionally or obligatorily to express itching or the physical action of scratching. When used actively in the present tense, it forms 'kaṇḍūyati' (Parasmaipada) or 'kaṇḍūyate' (Atmanepada).",
+      "scenarios": [
+        {
+          "verb_form": "kaṇḍūyati",
+          "grammar_trigger": "kartari prayoga, lat lakara, prathama purusha, ekavacana (parasmaipada)",
+          "meaning": "He/she scratches or feels itchy",
+          "example_sanskrit": "bālakaḥ svahastena śiraḥ kaṇḍūyati.",
+          "example_english": "The boy scratches his head with his hand."
+        },
+        {
+          "verb_form": "kaṇḍūyate",
+          "grammar_trigger": "kartari prayoga, lat lakara, prathama purusha, ekavacana (atmanepada)",
+          "meaning": "It itches / He scratches himself",
+          "example_sanskrit": "śarīraṃ kaṇḍūyate.",
+          "example_english": "The body itches."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "kaṇḍūñ gātravigharṣaṇe. kandvādibhyo yak iti yak-pratyayaḥ. ubhayapadī. kaṇḍūyati kaṇḍūyate.",
+      "kshiratarangini": "kaṇḍūñ gātravigharṣaṇe. dhātusaṃjñā yak-pratyayāntaḥ. kaṇḍūyati kaṇḍūyate ityādi."
+    },
+    "meanings": {
+      "English": "to scratch, to itch",
+      "Kannada": "tullisuvudu, kerisuvudu",
+      "Telugu": "durada pettu, gokuta",
+      "Tamil": "aripatutal, sorital",
+      "Malayalam": "choriyuka, chorichil undakuka",
+      "Hindi": "khujalana, khujali hona",
+      "Bengali": "chulkana, chulkani howa",
+      "German": "kratzen, jucken",
+      "French": "gratter, demanger",
+      "Russian": "chesat', zudet'",
+      "Chinese": "sao yang, zhua yang"
+    }
+  },
+  {
     "dhatu_id": "13.0167",
     "aupadeshika": "sukha",
     "stripped_root": "sukhāya",
@@ -101398,6 +101444,880 @@
       "French": "envier, jalouser",
       "Russian": "zavidovat, osuzhdat",
       "Chinese": "jidu, yuankai"
+    }
+  },
+  {
+    "dhatu_id": "13.0170",
+    "aupadeshika": "sūtra",
+    "stripped_root": "sūtr",
+    "gana": "kandvādigaṇa",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "veṣṭane granthane ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'sūtr' is a nominal verbal root (namadhatu/kandvadi) meaning to string together, formulate concisely, or compose in the form of an aphorism. When you compose a short rule or connect ideas logically, you use forms like 'sūtrayati'.",
+      "scenarios": [
+        {
+          "verb_form": "sūtrayati",
+          "grammar_trigger": "lat-lakara (present tense), prathama-purusha (third person), ekavacana (singular), kartari prayoga",
+          "meaning": "He or she formulates an aphorism or strings together ideas.",
+          "example_sanskrit": "muniḥ vyākaraṇaniyamaṃ sūtrayati.",
+          "example_english": "The sage formulates a grammatical rule in an aphoristic style."
+        },
+        {
+          "verb_form": "asūtrayat",
+          "grammar_trigger": "lan-lakara (imperfect past tense), prathama-purusha (third person), ekavacana (singular), kartari prayoga",
+          "meaning": "He or she formulated or arranged into a concise rule.",
+          "example_sanskrit": "ācāryaḥ śāstrārtham asūtrayat.",
+          "example_english": "The preceptor codified the essence of the treatise into concise aphorisms."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "sūtra veṣṭane granthane ca. kandvādibhyo yak iti yakpratyayaḥ. sūtrayati, sūtryati ityapi rūpāṇi bhavanti. granthanārthe vyākhyāne cāpi prayujyate.",
+      "kshiratarangini": "sūtra veṣṭane. sūtraṇam granthanam. sūtrayati sūtraṃ karoti ityarthaḥ."
+    },
+    "meanings": {
+      "English": "to string together, weave, formulate concisely into aphorisms",
+      "Kannada": "sūtrarūpadalli racisu, poṇisu",
+      "Telugu": "sūtrīkarincu, granthincu",
+      "Tamil": "sūttiramāka amaittal, kōrttal",
+      "Malayalam": "sūtrarūpathil rachikkuka, korthuveykkuka",
+      "Hindi": "sūtrabaddha karnā, pironā, saṅkṣipta rūp me racnā",
+      "Bengali": "sūtrabaddha karā, gāmthā",
+      "German": "in Lehrsätze fassen, aneinanderreihen, formulieren",
+      "French": "formuler en aphorismes, enfiler, condenser",
+      "Russian": "формулировать в виде сутр, связывать воедино, излагать кратко (formulirovat v vide sutr, svyazyvat voyedino, izlagat kratko)",
+      "Chinese": "biānzhī, zhìdìng guīzé, nǐdìng jīngyào (编制, 制定规则, 拟定精要)"
+    }
+  },
+  {
+    "dhatu_id": "13.0171",
+    "aupadeshika": "sphuṭa~",
+    "stripped_root": "sphuṭ",
+    "gana": "curādi",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "viśadīkaraṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'sphuṭ' means to make clear, to explain clearly, or to manifest. When used in the 10th class (Curādi), it takes the 'ṇic' affix naturally, taking forms like 'sphoṭayati' in the active voice to describe clarifying or illuminating an idea.",
+      "scenarios": [
+        {
+          "verb_form": "sphoṭayati",
+          "grammar_trigger": "kartari prayoga (active voice), curādi-pratyaya (ṇic), laṭ lakāra, prathama puruṣa, ekavacana",
+          "meaning": "clarifies / makes distinct",
+          "example_sanskrit": "guruḥ śiṣyāya gūḍhārthaṃ sphoṭayati.",
+          "example_english": "The teacher clarifies the hidden meaning for the student."
+        },
+        {
+          "verb_form": "sphoṭyate",
+          "grammar_trigger": "karmaṇi prayoga (passive voice), laṭ lakāra, prathama puruṣa, ekavacana",
+          "meaning": "is clarified / is revealed",
+          "example_sanskrit": "sūryaprakāśena sarvaṃ vastu sphoṭyate.",
+          "example_english": "Everything is revealed clearly by the light of the sun."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "sphuṭa viśadīkaraṇe. curādau svārthe ṇic. sphoṭayati, sphoṭayate. viśadīkaraṇaṃ spaṣṭīkaraṇam prakāśanaṃ vā.",
+      "kshiratarangini": "sphuṭa viśadīkaraṇe. sphoṭayati. arthasya sphuṭīkaraṇam spaṣṭakaraṇam ityarthaḥ."
+    },
+    "meanings": {
+      "English": "to make clear, to manifest, to elucidate",
+      "Kannada": "spaṣṭapaḍisu, prakaṭisu",
+      "Telugu": "spaṣṭamu cēyu, prakaṭiñcu",
+      "Tamil": "teḷivākkudal, veḷippaḍuttudal",
+      "Malayalam": "vyaktamākkuka, prakaṭamākkuka",
+      "Hindi": "spaṣṭa karanā, prakaṭa karanā",
+      "Bengali": "spaṣṭa karā, prakāśa karā",
+      "German": "verdeutlichen, offenbaren",
+      "French": "élucider, manifester",
+      "Russian": "razjasnjat, projavljat",
+      "Chinese": "chanming, xianlu"
+    }
+  },
+  {
+    "dhatu_id": "13.0172",
+    "aupadeshika": "tandrīñ",
+    "stripped_root": "tandrī",
+    "gana": "Kaṇḍvādi",
+    "pada": "Ātmanepada",
+    "it_status": "Anit",
+    "transitivity": "Intransitive",
+    "canonical_dhatvartha": "gātrasāde nidrāyāñca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'tandrī' belongs to the Kaṇḍvādi group of verbal roots. It expresses the state of bodily weariness, sluggishness, or drowsiness. According to the rule 'Kaṇḍvādibhyo yak' (Pāṇini 3.1.27), it takes the 'yak' suffix inherently across all tenses, taking Ātmanepada terminations.",
+      "scenarios": [
+        {
+          "verb_form": "tandrāyate",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "feels weary / becomes sluggish",
+          "example_sanskrit": "dīrgha-pariśramāt anantaraṁ śiśuḥ tandrāyate.",
+          "example_english": "After prolonged exertion, the child becomes weary and drowsy."
+        },
+        {
+          "verb_form": "atandrāyiṣṭa",
+          "grammar_trigger": "Luṅ (Aorist Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "felt tired / became sluggish",
+          "example_sanskrit": "pathikaḥ mārga-śrameṇa muhūrtaṁ atandrāyiṣṭa.",
+          "example_english": "The traveler grew sluggish for a moment due to the fatigue of the journey."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "tandrī gātrasāde nidrāyāñca. kaṇḍvādibhyo yak (3.1.27) iti ya-pratyayaḥ. tandrāyate. ātmanepadī.",
+      "kshiratarangini": "tandrī pramāde gātrasāde ca. kaṇḍvādiṣu pāṭhāt nityo ya-pratyayaḥ. tandrāyate puruṣaḥ."
+    },
+    "meanings": {
+      "English": "to become weary, to feel sluggish, to become drowsy",
+      "Kannada": "alasuvudu, sustāgudu, sombāgudu",
+      "Telugu": "baḍalika celangu, somasillu, tūgucuṇḍu",
+      "Tamil": "cōrvu aṭai, aḷasippō, aḷappuṟu",
+      "Malayalam": "aḻasikkuka, thalarcchayāvuka, tūṅṅuka",
+      "Hindi": "sust honā, thaknā, tandrāyit honā",
+      "Bengali": "klānta haoyā, jhimānō, alasatā bōdha karā",
+      "German": "träge werden, ermüden, schläfrig sein",
+      "French": "s'engourdir, devenir somnolent, se fatiguer",
+      "Russian": "utomlyat'sya, stanovitsya vyalym, dremat'",
+      "Chinese": "gǎndào píjuàn, hūnhūyùshuì, dàidù"
+    }
+  },
+  {
+    "dhatu_id": "13.0173",
+    "aupadeshika": "sphāra",
+    "stripped_root": "sphār",
+    "gana": "curādi",
+    "pada": "ubhayapadī",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "sphāraṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root sphār means to expand, open wide, or diffuse. In the tenth class (curādi), it takes the causative-like marker 'ṇic' obligatorily, forming sphārayati (active) or sphārayate (middle).",
+      "scenarios": [
+        {
+          "verb_form": "sphārayati",
+          "grammar_trigger": "lat (present tense), prathama-puruṣa (third person), ekavacana (singular), parasmaipada",
+          "meaning": "expands or opens wide",
+          "example_sanskrit": "bālakaḥ vismayena netre sphārayati.",
+          "example_english": "The boy opens his eyes wide in wonder."
+        },
+        {
+          "verb_form": "sphāryate",
+          "grammar_trigger": "karmaṇi prayoga (passive voice), lat (present tense), ekavacana (singular)",
+          "meaning": "is being expanded or widened",
+          "example_sanskrit": "netra-yugalaṃ sphāryate.",
+          "example_english": "The pair of eyes is widened."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "sphāra sphāraṇe. sphāraṇaṃ vikasanaṃ vistāraṇaṃ vā. curādir adantaḥ ubhayapadī. sphārayati, sphārayate.",
+      "kshiratarangini": "sphāra sphāraṇe. sphārayati. vistārayatīty arthaḥ."
+    },
+    "meanings": {
+      "English": "to expand, open wide, or extend",
+      "Kannada": "agalamāḍu, vistarisu",
+      "Telugu": "vistariñcu, peddadi cēyu",
+      "Tamil": "virivu cey, viri",
+      "Malayalam": "vikasikkuka, vistṛtamākkuka",
+      "Hindi": "phailānā, vistṛta karnā, phaḍānā",
+      "Bengali": "prasārita karā, bistṛta karā",
+      "German": "ausbreiten, weit öffnen",
+      "French": "élargir, écarquiller, étendre",
+      "Russian": "rasshiryat', shiroko otkryvat'",
+      "Chinese": "zhangda, kuozhan"
+    }
+  },
+  {
+    "dhatu_id": "13.0174",
+    "aupadeshika": "artha",
+    "stripped_root": "arth",
+    "gana": "curādi (sautra / kaṇḍvādi-gaṇa)",
+    "pada": "ātmanepada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "yāñcāyām upasaṅkhyāne ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'arth' means to ask for, pray for, or seek something earnestly. It belongs to the nominal and secondary verbal formations where the affix 'ṇic' or 'yak' is applied naturally, taking Atmanepada endings in standard usage.",
+      "scenarios": [
+        {
+          "verb_form": "arthayate",
+          "grammar_trigger": "kartari prayoga (present indicative 3rd person singular with ṇic-pratyaya)",
+          "meaning": "he/she requests or seeks",
+          "example_sanskrit": "śiṣyaḥ gurum vidyām arthayate.",
+          "example_english": "The student requests knowledge from the teacher."
+        },
+        {
+          "verb_form": "samarthayate",
+          "grammar_trigger": "upasarga 'sam' + kartari prayoga",
+          "meaning": "justifies, validates, or endorses",
+          "example_sanskrit": "vidvān svamatam yuktyā samarthayate.",
+          "example_english": "The scholar substantiates his viewpoint with reasoning."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "artha yāñcāyām iti kecit. curāder ākṛtigaṇatvāt ṇic. arthayate. arthanā. prārthanā ityādi rūpāṇi sidhyanti.",
+      "kshiratarangini": "artha yāñcāyām. arthayate. arthanīyaḥ. saṁjñāpūrvakavidheranityatvād vṛddhyabhāvaḥ."
+    },
+    "meanings": {
+      "English": "to request, to seek, to beg, to wish for",
+      "Kannada": "bēḍu, yācisu, prārthisu",
+      "Telugu": "aḍugu, yācincu, prārthincu",
+      "Tamil": "vēṇṭu, kēḷ, ira",
+      "Malayalam": "yācikkuka, prārthikkuka, āvaśyappeṭuka",
+      "Hindi": "yācanā karnā, māngnā, prārthanā karnā",
+      "Bengali": "yācanā karā, prārthanā karā, cāoyā",
+      "German": "bitten, ersuchen, begehren",
+      "French": "demander, solliciter, prier",
+      "Russian": "prosit, khodataystvovat, zhelat",
+      "Chinese": "qǐngqiú, qǐtáo, qídǎo"
+    }
+  },
+  {
+    "dhatu_id": "13.0175",
+    "aupadeshika": "iras",
+    "stripped_root": "iras",
+    "gana": "kaṇḍvādi",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "irasyāyām (asūyāyām krodhe ca)",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'iras' belongs to the Kaṇḍvādi group and takes the affix 'yak' obligatorily, meaning to harbor ill will, feel envy, or display anger towards someone.",
+      "scenarios": [
+        {
+          "verb_form": "irasyati",
+          "grammar_trigger": "kartari prayoga (active voice), laṭ lakāra (present tense), prathama puruṣa, ekavacana",
+          "meaning": "He/she envies or bears malice",
+          "example_sanskrit": "durjanaḥ sajjanebhyo nityam irasyati.",
+          "example_english": "The wicked person is constantly envious of noble people."
+        },
+        {
+          "verb_form": "irasyate",
+          "grammar_trigger": "ātmanepada, kartari prayoga, laṭ lakāra, prathama puruṣa, ekavacana",
+          "meaning": "He/she harbors jealousy",
+          "example_sanskrit": "mūrkhaḥ paṇḍitāya irasyate.",
+          "example_english": "The foolish person harbors jealousy towards the scholar."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "irasa irasyāyām. kaṇḍvādiṣu pāṭhāt kaṇḍvādibhyo yak ityadhikāre yak pratyayaḥ. tena irasyatīti rūpam sidhyati. asūyārthe 'krudhadruhērṣyāsūyārthānāṃ yaṃ prati kopaḥ' iti sampradānatvam.",
+      "kshiratarangini": "irasa irasyāyām asūyāyām. irasyati irasyate. yaṅantasya sarvadhātukavat kramādayaḥ."
+    },
+    "meanings": {
+      "English": "to envy, to bear malice, to display anger",
+      "Kannada": "asūye paḍu, dveṣa mādụ",
+      "Telugu": "asūya paḍu, dveṣiñcu",
+      "Tamil": "porāmai koḷ, veru",
+      "Malayalam": "asūyappeduka, dhrōhikkuka",
+      "Hindi": "īrṣyā karnā, ḍāha karnā",
+      "Bengali": "īrṣā karā, vidveṣa karā",
+      "German": "beneiden, grollen",
+      "French": "envier, jalouser",
+      "Russian": "zavidovat', zlobstvovat'",
+      "Chinese": "jí dù, yuàn hèn"
+    }
+  },
+  {
+    "dhatu_id": "13.0176",
+    "aupadeshika": "irasyá",
+    "stripped_root": "irasya",
+    "gana": "Kandvādi",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "amarṣe asūyāyāñca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'irasya' belongs to the Kandvadi class of roots, which inherently take the suffix yak to form verbal stems expressing envy, ill-will, or finding fault with others.",
+      "scenarios": [
+        {
+          "verb_form": "irasyati",
+          "grammar_trigger": "lat-lakara (present indicative active, prathama-purusa ekavacana)",
+          "meaning": "shows ill-will or envies",
+          "example_sanskrit": "durjanah sajjanaya irasyati.",
+          "example_english": "The wicked person feels ill-will toward the noble person."
+        },
+        {
+          "verb_form": "irasyisyati",
+          "grammar_trigger": "lrt-lakara (simple future active, prathama-purusa ekavacana)",
+          "meaning": "will envy or harbor ill-will",
+          "example_sanskrit": "matsari gunavate nityam irasyisyati.",
+          "example_english": "The envious man will always harbor malice toward the virtuous."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "irasya amarṣe asūyāyām. kandvādibhyo yak iti yak-pratyayaḥ. irasyati. amarṣo krodhaḥ asūyā tu guṇeṣu doṣāviṣkaraṇam.",
+      "kshiratarangini": "irasya amarṣe asūyāyāñca. iras sabdāt asūyāyām yak. irasyati."
+    },
+    "meanings": {
+      "English": "to envy, to bear ill-will, to find fault with",
+      "Kannada": "asuye padu, dvesha madu",
+      "Telugu": "asuyapadu, dveshinchu",
+      "Tamil": "poramai kol, kurodham kol",
+      "Malayalam": "asooyappeduka, vidvesham kanikkuka",
+      "Hindi": "irshya karna, dvesha rakhna",
+      "Bengali": "irsha kora, dvesh kora",
+      "German": "beneiden, grollen, Missgunst hegen",
+      "French": "envier, jalouser, vouloir du mal",
+      "Russian": "zavidovat, pytat nepriyazn",
+      "Chinese": "jidu, huaihen"
+    }
+  },
+  {
+    "dhatu_id": "13.0177",
+    "aupadeshika": "asūya",
+    "stripped_root": "asūy",
+    "gana": "kandvādi",
+    "pada": "parasmaipada",
+    "it_status": "aniṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "upālabhe doṣāviṣkaraṇe ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'asūy' comes under the Kandvadi class of verbal stems, formed directly from nominal or stem bases. It means to find fault, cavil, or express jealousy toward someone's virtues. In practical Sanskrit usage, it takes Parasmaipada endings directly with the intrinsic 'ya' suffix.",
+      "scenarios": [
+        {
+          "verb_form": "asūyati",
+          "grammar_trigger": "lat lakara (present tense), prathama-purusha (third person), ekavacana (singular)",
+          "meaning": "He/she finds fault with or is envious of another",
+          "example_sanskrit": "mūrkhajanaḥ guṇavate asūyati.",
+          "example_english": "The foolish person finds fault with the virtuous one."
+        },
+        {
+          "verb_form": "nāsūyeta",
+          "grammar_trigger": "vidhiling lakara (optative), prathama-purusha (third person), ekavacana (singular)",
+          "meaning": "One should not find fault or be envious",
+          "example_sanskrit": "sadbhiḥ saha vartamānaḥ kadāpi nāsūyeta.",
+          "example_english": "Living among the noble, one should never display fault-finding jealousy."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "asūya upālabhe doṣāviṣkaraṇe ca. kandvādibhyo yak iti yak-pratyayaḥ. asūyati. guṇeṣu doṣāviṣkaraṇam asūyā, tatkartṛke prayoge dvitīyā caturthī vā dṛśyate.",
+      "kshiratarangini": "asūya upālabhe. kandvādir ayam. asūyati, asūyām ācakṣāṇaḥ pravartate ityarthaḥ."
+    },
+    "meanings": {
+      "English": "to find fault, to cavil, to envy",
+      "Kannada": "doṣavannu huḍuku, asūye paḍu",
+      "Telugu": "tappulu vettu, asūyapaḍu",
+      "Tamil": "kuṟṟaṅkāṇ, poṟāmai koḷ",
+      "Malayalam": "kuṟṟam kaṇṭettuka, asūyappeṭuka",
+      "Hindi": "doṣ nikālanā, asūyā yā īrṣyā karanā",
+      "Bengali": "doṣ dharā, īrṣā karā",
+      "German": "tadeln, beneiden, missgönnen",
+      "French": "blâmer, critiquer, envier",
+      "Russian": "kritikovat', zavidovat', iskat' nedostatki",
+      "Chinese": "tiāotī, jīdù, zhǐzé"
+    }
+  },
+  {
+    "dhatu_id": "13.0178",
+    "aupadeshika": "vrata",
+    "stripped_root": "vrata",
+    "gana": "kandvadi",
+    "pada": "ubhayapada",
+    "it_status": "set",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "niyame vrata-carane ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'vrata' means to observe a vow, adhere to a spiritual or ethical discipline, or regulate one's conduct. In Sanskrit grammar, it is a nominal verbal root (kandvadi) that takes the affix 'yak' to function directly as an active or middle verb meaning 'to observe a discipline'.",
+      "scenarios": [
+        {
+          "verb_form": "vratayati",
+          "grammar_trigger": "lat lakara, prathama purusha, eka-vacana, parasmaipada",
+          "meaning": "He or she observes a sacred vow or discipline",
+          "example_sanskrit": "sadhakah satyam vratayati.",
+          "example_english": "The spiritual seeker observes the vow of truth."
+        },
+        {
+          "verb_form": "vratayate",
+          "grammar_trigger": "lat lakara, prathama purusha, eka-vacana, atmanepada",
+          "meaning": "He or she undertakes a spiritual discipline for personal purification",
+          "example_sanskrit": "munihi tapovane niyamam vratayate.",
+          "example_english": "The sage undertakes the spiritual discipline in the sacred grove."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "vrata niyame vratacarane ca. kandvaditvat svarthe yak-pratyayah. ubhayapadatvat vratayati vratayate iti rupadvayam bhavati. anena satyacarana-niyamadayah pratipadyante.",
+      "kshiratarangini": "vrata vratane niyame ca. kandvadi-gane pathitatvad yak-pratyayantasya prayogah. vratayati vratayate va niyama-vishesham svikaroti."
+    },
+    "meanings": {
+      "English": "to observe a vow or discipline",
+      "Kannada": "vratavannu acharisu",
+      "Telugu": "vratamu achirinchu",
+      "Tamil": "viratam anutithal",
+      "Malayalam": "vratham anushthikkuka",
+      "Hindi": "vrata ya niyam ka palan karna",
+      "Bengali": "brata palan kara",
+      "German": "ein Gelubde oder eine Disziplin einhalten",
+      "French": "observer un voeu ou une discipline",
+      "Russian": "soblyudat obet ili distsiplinu",
+      "Chinese": "shoujie huozhe zunshou jieyu"
+    }
+  },
+  {
+    "dhatu_id": "13.0179",
+    "aupadeshika": "irasya",
+    "stripped_root": "irasy",
+    "gana": "Kandvādi",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "asūyāyāṃ krodhe ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'irasy' belongs to the Kandvadi class and is derived directly as a verbal stem meaning 'to envy', 'to hold a grudge against', or 'to display anger and intolerance towards another'. In everyday Sanskrit, it takes standard Parasmaipada endings directly.",
+      "scenarios": [
+        {
+          "verb_form": "irasyati",
+          "grammar_trigger": "lat-lakara, prathama-purusa, eka-vacana (Kartari prayoga)",
+          "meaning": "He/she envies or resents someone",
+          "example_sanskrit": "durjanah parodayam drstva irasyati.",
+          "example_english": "The wicked person feels envious upon seeing another's prosperity."
+        },
+        {
+          "verb_form": "irasyet",
+          "grammar_trigger": "vidhilin-lakara, prathama-purusa, eka-vacana (Kartari prayoga)",
+          "meaning": "One should not bear ill-will or envy",
+          "example_sanskrit": "sadjanah kasyapi unnatau na irasyet.",
+          "example_english": "A noble person should not envy the success of anyone."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "irasya asuyayam. kandvadibhyo yak iti yak-pratyayantasya dhatusanjna. irasyati. anadaradibhavartho drsyate.",
+      "kshiratarangini": "irasya krodhe asuyayam ca. kandvadisu pathitasya dhatorlatyubhayapadamapyanye vadanti, mukhyatah parasmaipadam."
+    },
+    "meanings": {
+      "English": "to envy, to bear ill-will, to resent",
+      "Kannada": "asuye padu, dvesha madu",
+      "Telugu": "asuyapadu, dveshincu",
+      "Tamil": "poramai kollutal, erichal adaital",
+      "Malayalam": "asuyapeduka, vidvesham kanikkuka",
+      "Hindi": "irshya karna, dvesh rakhna",
+      "Bengali": "irsha kora, dvesh kora",
+      "German": "beneiden, grollen",
+      "French": "envier, jalouser",
+      "Russian": "zavidovat', ispytyvat' nepriyazn'",
+      "Chinese": "jidu, yuanhen"
+    }
+  },
+  {
+    "dhatu_id": "13.0180",
+    "aupadeshika": "gavy",
+    "stripped_root": "gavy",
+    "gana": "kandvadi",
+    "pada": "parasmaipada",
+    "it_status": "anit",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "gam icchatityarthe kandvadibhyo yak",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'gavy' is a Kandvadi nominal verbal root meaning 'to desire or seek cows'. In Sanskrit, when someone wants cows, this nominal verb expresses that specific wish directly in the active voice (kartari prayoga) using the yak affix intrinsically present by rule 'kandvadibhyo yak'.",
+      "scenarios": [
+        {
+          "verb_form": "gavyati",
+          "grammar_trigger": "lat-lakara (present indicative), prathama-purusha (third person), ekavacana (singular)",
+          "meaning": "desires cows / seeks cows",
+          "example_sanskrit": "gopalah vane gavyati.",
+          "example_english": "The cowherd desires cows in the forest."
+        },
+        {
+          "verb_form": "agavyat",
+          "grammar_trigger": "lan-lakara (past imperfect), prathama-purusha (third person), ekavacana (singular)",
+          "meaning": "desired cows / sought cows",
+          "example_sanskrit": "nripah godhanartham agavyat.",
+          "example_english": "The king desired cattle for wealth."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "kandvadayah svatantrah dhatavah. gavyati iti gam icchatityarthe dravyetaranirapekshah kandvadipathad yak-pratyayantah.",
+      "kshiratarangini": "gavya gam icchan. kandvadibhyo yak iti svabhavikoyak. gavyati. agavyit va agavyat."
+    },
+    "meanings": {
+      "English": "to desire cows, to search for cattle",
+      "Kannada": "hasugalannu bayasu",
+      "Telugu": "aavulanu koru",
+      "Tamil": "pakkalai virumbu",
+      "Malayalam": "pashukakkale aagrahikkuka",
+      "Hindi": "gaye chahana ya dhoondhna",
+      "Bengali": "goru kamana kora",
+      "German": "Kuhe begehren oder suchen",
+      "French": "desirer ou chercher des vaches",
+      "Russian": "zhelat' korov, iskat' skot",
+      "Chinese": "keqiu niuzhi"
+    }
+  },
+  {
+    "dhatu_id": "13.0181",
+    "aupadeshika": "pāṃsula",
+    "stripped_root": "pāṃsula",
+    "gana": "Kandvādigaṇa",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "pāṃsulīkaraṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'pāṃsula' belongs to the Kandvādi group, which converts a nominal stem (dust/dirt) directly into a verbal root by adding the suffix 'yak'. It means to soil, cover with dust, or defile. It can take either Parasmaipada or Ātmanepada endings.",
+      "scenarios": [
+        {
+          "verb_form": "pāṃsulayati",
+          "grammar_trigger": "Laṭ (Present Indicative), Prathama Puruṣa, Ekavacana, Parasmaipada",
+          "meaning": "He/She soils or covers (something) with dust",
+          "example_sanskrit": "bālakaḥ svavastraṃ pāṃsulayati.",
+          "example_english": "The child soils his own clothes."
+        },
+        {
+          "verb_form": "pāṃsulāyate",
+          "grammar_trigger": "Laṭ (Present Indicative), Prathama Puruṣa, Ekavacana, Ātmanepada",
+          "meaning": "It becomes dusty or behaves like dust",
+          "example_sanskrit": "vāyau pravahati mārgaḥ pāṃsulāyate.",
+          "example_english": "When the wind blows, the path becomes dusty."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "pāṃsula pāṃsulīkaraṇe kandvādiḥ. dhātusaṃjñāyāṃ yak-pratyayaḥ. pāṃsulāyate pāṃsulayati vā.",
+      "kshiratarangini": "pāṃsula dhūlīkaraṇe lepane ca. kandvādibhyo yak iti yak. pāṃsulayati pāṃsulāyate."
+    },
+    "meanings": {
+      "English": "To soil, defile, cover with dust or dirt",
+      "Kannada": "dhūḷu māḍuvudu, hāḷumāḍuvudu, aḷukisuvudu",
+      "Telugu": "dhūḷi cēyuṭa, maḍasi cēyuṭa, dūṣiñcuṭa",
+      "Tamil": "tūciyākkutal, aḻukkākkutal, mācupaduttutal",
+      "Malayalam": "dhūḷimayamākkuka, aḻukkākkuka",
+      "Hindi": "dhūladhūsrita karanā, mailā karanā, dūṣita karanā",
+      "Bengali": "dhūlāmakkhā karā, mayalā karā, dūṣita karā",
+      "German": "verstauben, mit Staub bedecken, beschmutzen",
+      "French": "couvrir de poussière, salir, souiller",
+      "Russian": "pokryvat' pyl'yu, pachkat', zagryaznyat'",
+      "Chinese": "shǐ chényáng, nòngzāng, wūhuì"
+    }
+  },
+  {
+    "dhatu_id": "13.0182",
+    "aupadeshika": "sukha",
+    "stripped_root": "sukha",
+    "gana": "Kandvadi",
+    "pada": "Atmanepada",
+    "it_status": "Anit",
+    "transitivity": "Intransitive",
+    "canonical_dhatvartha": "sukhe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root sukha belongs to the Kandvadi group of nominal verbs. It takes the suffix yak by the rule 'Kandvadibhyo yak' and conjugated in the Atmanepada to express experiencing happiness, acting happily, or enjoying pleasant circumstances.",
+      "scenarios": [
+        {
+          "verb_form": "sukhayate",
+          "grammar_trigger": "Present tense (lat), third person singular (prathama-purusha, eka-vacana), Atmanepada with yak-pratyaya",
+          "meaning": "experiences happiness / feels comfortable",
+          "example_sanskrit": "sadacarena sajjana-cittam sukhayate.",
+          "example_english": "The mind of a virtuous person feels happiness through good conduct."
+        },
+        {
+          "verb_form": "asukhayata",
+          "grammar_trigger": "Past tense (lan), third person singular, Atmanepada",
+          "meaning": "felt happy / was comfortable",
+          "example_sanskrit": "munih tapovane asukhayata.",
+          "example_english": "The sage experienced peaceful happiness in the penance grove."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "sukha tatkriyayam sukhe ca. kandvaditvad yak. sukhayate. atmanepaditvam anudattetvaditvat.",
+      "kshiratarangini": "sukha sukhe. kandvadibhyo yak iti yak. sukhayate. sukhasya anubhavah sukhacaranam va."
+    },
+    "meanings": {
+      "English": "to experience happiness, to feel pleasure, to be comfortable",
+      "Kannada": "sukhapaduvudu, santoshapaduvudu",
+      "Telugu": "sukhimcudu, santoshapadudu",
+      "Tamil": "inbam adaithal, magizhvuruthal",
+      "Malayalam": "sukham anubhavikkuka, santhoshikkuka",
+      "Hindi": "sukhi hona, sukha anubhava karana",
+      "Bengali": "sukhi haoya, sukha anubhava kara",
+      "German": "sich freuen, glucklich sein, Wohlbefinden empfinden",
+      "French": "eprouver du bonheur, etre heureux, etre a l'aise",
+      "Russian": "chuvstvovat schastye, naslazhdatsya, byt schastlivym",
+      "Chinese": "gandao kuailen, xiangshou xingfu"
+    }
+  },
+  {
+    "dhatu_id": "13.0183",
+    "aupadeshika": "ślakṣṇa",
+    "stripped_root": "ślakṣṇa",
+    "gana": "Kandvādi (Yaganta)",
+    "pada": "Ātmanepada",
+    "it_status": "Anit",
+    "transitivity": "Intransitive",
+    "canonical_dhatvartha": "cikkatve ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root ślakṣṇa belongs to the Kandvādi group, which directly forms denominative verbs using the suffix ya (yak/kyan). It describes a surface or substance becoming smooth, glossy, polished, or soft.",
+      "scenarios": [
+        {
+          "verb_form": "ślakṣṇāyate",
+          "grammar_trigger": "Lat lakara (present indicative, prathama-purusha, eka-vacana) via Kandvadibhyo yak",
+          "meaning": "becomes smooth or soft",
+          "example_sanskrit": "tailamardanena tvak ślakṣṇāyate.",
+          "example_english": "The skin becomes soft and smooth by oil massage."
+        },
+        {
+          "verb_form": "aślakṣṇāyata",
+          "grammar_trigger": "Lan lakara (imperfect past, prathama-purusha, eka-vacana)",
+          "meaning": "became smooth or refined",
+          "example_sanskrit": "mṛttikā jalena aślakṣṇāyata.",
+          "example_english": "The clay became smooth with water."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "ślakṣṇa cikkatve. kandvādiṣu pāṭhād yak. ślakṣṇam ācarati ślakṣṇāyate. snigdha-mṛdutvam anubhavatītyarthaḥ.",
+      "kshiratarangini": "ślakṣṇa cikkanībhāve. ślakṣṇāyate vastram. ślakṣṇatvam āpadyata ityarthaḥ."
+    },
+    "meanings": {
+      "English": "to become smooth, fine, soft, or glossy",
+      "Kannada": "mṛduvāguvudu, nunupāguvudu",
+      "Telugu": "medadavuṭa, cikkanaguṭa",
+      "Tamil": "menmaiyādal, valavalappādal",
+      "Malayalam": "mṛduvāyittīruka, minuminukkamākuka",
+      "Hindi": "chiknā honā, komal honā",
+      "Bengali": "chikkan haoā, komal haoā",
+      "German": "glatt oder weich werden",
+      "French": "devenir lisse ou doux",
+      "Russian": "stanovit'sya gladkim ili myagkim",
+      "Chinese": "biande guanghua huo rouruan"
+    }
+  },
+  {
+    "dhatu_id": "13.0184",
+    "aupadeshika": "sūtra",
+    "stripped_root": "sūtr",
+    "gana": "Kandvādi",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "veṣṭane sandarbhe saṅgrahe ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'sūtr' means to weave, connect, or compose concise systematic rules (aphorisms). In language, it expresses formulating ideas into neat, systematic principles or threading things together.",
+      "scenarios": [
+        {
+          "verb_form": "sūtrayati",
+          "grammar_trigger": "Kartari Prayoga (Active voice, Present indicative 3rd person singular with Kandvadi aya/yak suffix)",
+          "meaning": "He/She composes into concise rules or formulates systematically",
+          "example_sanskrit": "muniḥ vyākaraṇa-niyamān sūtrayati.",
+          "example_english": "The sage formulates grammatical rules systematically."
+        },
+        {
+          "verb_form": "sūtryate",
+          "grammar_trigger": "Karmani Prayoga (Passive voice, Present indicative 3rd person singular)",
+          "meaning": "It is threaded together or codified into rules",
+          "example_sanskrit": "śāstrārthaḥ saṅkṣepeṇa sūtryate.",
+          "example_english": "The essence of the doctrine is concisely codified into aphorisms."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "sūtra veṣṭane granthane ca. kandvādibhyaḥ karmavyatihāre vā 'kandvādibhyo yak' iti yak-pratyayaḥ. sūtrayati, sūtrayate vā saṅkṣepeṇa grantham.",
+      "kshiratarangini": "sūtra sandarbhe veṣṭane ca. sūtreṇa badhnāti, saṅkṣepeṇa vākyāni kathayati iti sūtrayati."
+    },
+    "meanings": {
+      "English": "to string together, compose into aphorisms, formulate, thread",
+      "Kannada": "sūtrīkarisu, sūtra racisu, heṇeyu",
+      "Telugu": "sūtrīkarincu, sūtramulu racincu, allu",
+      "Tamil": "cūttiram iyakku, koṟvai cey, kōrttu amei",
+      "Malayalam": "sūtrīkarikkuka, granthikkuka, kōrkkuka",
+      "Hindi": "sūtra banānā, sūtrīkaraṇa karnā, pironā",
+      "Bengali": "sūtra racanā karā, sūtrita karā, gānthā",
+      "German": "in Regeln fassen, formulieren, aneinanderreihen",
+      "French": "formuler en aphorismes, agencer, enfiler",
+      "Russian": "formulirovat kratko, sostavlyat aforizmy, nanizyvat",
+      "Chinese": "biānzuǎn, zhìdìng guīzé, chuànlián"
+    }
+  },
+  {
+    "dhatu_id": "13.0185",
+    "aupadeshika": "citiँ",
+    "stripped_root": "cit",
+    "gana": "bhvādigaṇa",
+    "pada": "parasmaipada",
+    "it_status": "aniṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "smaraṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'cit' means to perceive, remember, or become aware of. In simple active voice (Kartari Prayoga), it describes the subject actively regaining memory, realizing an idea, or perceiving knowledge.",
+      "scenarios": [
+        {
+          "verb_form": "cetati",
+          "grammar_trigger": "Lat-lakara (Present Tense), Prathama-purusha (Third Person), Ekavacana (Singular) in Kartari Prayoga (Active Voice)",
+          "meaning": "He/She perceives or remembers",
+          "example_sanskrit": "muniḥ tattvaṃ cetati.",
+          "example_english": "The sage perceives the ultimate truth."
+        },
+        {
+          "verb_form": "acait",
+          "grammar_trigger": "Lun-lakara (Aorist Past Tense), Prathama-purusha, Ekavacana",
+          "meaning": "He/She became conscious of / remembered",
+          "example_sanskrit": "saḥ purātanīṃ vidyām acait.",
+          "example_english": "He remembered the ancient knowledge."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "citi smaraṇe. ceti cetataḥ cetanti. anudāttetvāt parasmaipadam. cittaḥ, cetanaḥ, cittam iti rūpāṇi bhavanti.",
+      "kshiratarangini": "citi smaraṇe. cetati. cetā. ciketa. anupadhāvṛddhau caititi kecit. sañcetane 'pi prayogaḥ."
+    },
+    "meanings": {
+      "English": "to perceive, to remember, to be conscious of",
+      "Kannada": "nenapisi kollu, arivaagisu",
+      "Telugu": "gurthunchukonu, grahincu",
+      "Tamil": "ninaivu koor, unardhal",
+      "Malayalam": "ormikkuka, ariyuka",
+      "Hindi": "smarana karana, cetana hona",
+      "Bengali": "smorana kora, cetana pawa",
+      "German": "wahrnehmen, sich erinnern",
+      "French": "percevoir, se souvenir de",
+      "Russian": "vosprinimat, pomnit",
+      "Chinese": "jiyi, ganjue"
+    }
+  },
+  {
+    "dhatu_id": "13.0186",
+    "aupadeshika": "asūya",
+    "stripped_root": "asūya",
+    "gana": "kandvādi",
+    "pada": "ubhayapada",
+    "it_status": "aniṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "doṣāviṣkaraṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root asūya belongs to the Kandvadi group, which forms verbal stems primarily through the yak-pratyaya. It means to find fault with someone, envy, or express jealousy toward another person's virtues.",
+      "scenarios": [
+        {
+          "verb_form": "asūyati",
+          "grammar_trigger": "kartari prayoga, laṭ-lakāra, prathama-puruṣa, eka-vacana (Parasmaipada)",
+          "meaning": "He or she finds fault or feels jealous.",
+          "example_sanskrit": "durjanaḥ guṇavataḥ asūyati.",
+          "example_english": "The wicked person finds fault with the virtuous one."
+        },
+        {
+          "verb_form": "asūyate",
+          "grammar_trigger": "kartari prayoga, laṭ-lakāra, prathama-puruṣa, eka-vacana (Ātmanepada)",
+          "meaning": "He or she shows envy or cavils.",
+          "example_sanskrit": "mūrkhaḥ paṇḍitasya vidyām asūyate.",
+          "example_english": "The foolish person cavils at the scholar's learning."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "asūya doṣāviṣkaraṇe. kandvādibhyo yak iti yak-pratyayaḥ. asūyati, asūyate. guṇeṣu doṣāviṣkaraṇam asūyā.",
+      "kshiratarangini": "asūya doṣe. kandvāditvāt svārthe yak. ubhayato bhāṣā bhavati. asūyati asūyate vā."
+    },
+    "meanings": {
+      "English": "to find fault with, to envy, to decry",
+      "Kannada": "dosa hudukuvudu, asuye paduvudu",
+      "Telugu": "doshamulu vetukuta, asuya paduta",
+      "Tamil": "kurai kandupitittal, poramai kollutal",
+      "Malayalam": "kuttam kandethuka, asooyappeduka",
+      "Hindi": "dosh nikalna, asuya karna, irshya karna",
+      "Bengali": "dosh dhora, irsha kora",
+      "German": "tadeln, beneiden, Fehler suchen",
+      "French": "blamer, envier, denigrer",
+      "Russian": "zavidovat, osuzhdat, iskat nedostatki",
+      "Chinese": "jidu, tiaoci, feibang"
+    }
+  },
+  {
+    "dhatu_id": "13.0187",
+    "aupadeshika": "tirasa~",
+    "stripped_root": "tiras",
+    "gana": "kandvadi",
+    "pada": "parasmaipada",
+    "it_status": "set",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "antardhau",
+    "dhaturupanandini": {
+      "simple_explanation": "The root tiras means to conceal oneself, hide, or disappear from view. When used with the kandvadi suffix yak, it forms regular present-tense verbs like tirasyati (he/she disappears or conceals oneself).",
+      "scenarios": [
+        {
+          "verb_form": "tirasyati",
+          "grammar_trigger": "lat lakara (present tense), prathama purusha, ekavacana",
+          "meaning": "disappears / hides",
+          "example_sanskrit": "meghanam madhye suryah tirasyati.",
+          "example_english": "The sun disappears amidst the clouds."
+        },
+        {
+          "verb_form": "atirasya",
+          "grammar_trigger": "lyap pratyaya (indeclinable past participle)",
+          "meaning": "having concealed oneself / having vanished",
+          "example_sanskrit": "mrga vanam praviśya atirasya tisthati.",
+          "example_english": "The deer, having entered the forest and concealed itself, stands still."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "tirasa antardhau. kandvadibhyo yak iti yak-pratyayah. tirasyati. antardhih adarsanam ityarthah.",
+      "kshiratarangini": "tirasa antardhau. yak. tirasyati. tiraskriyate adarsanam gacchati."
+    },
+    "meanings": {
+      "English": "to disappear, to conceal oneself, to become invisible",
+      "Kannada": "mareyagu, adagikollu",
+      "Telugu": "antardhanamagu, dagukonu",
+      "Tamil": "maraintuvidu, maraivu adai",
+      "Malayalam": "marayuka, adangiyirikkkuka",
+      "Hindi": "chhip jana, antardhana hona, adrishya hona",
+      "Bengali": "adrikshya howa, lukiye jawa",
+      "German": "verschwinden, sich verbergen",
+      "French": "disparaitre, se dissimuler",
+      "Russian": "ischezat, skryvatsya",
+      "Chinese": "yincang, xiaoshi"
+    }
+  },
+  {
+    "dhatu_id": "13.0188",
+    "aupadeshika": "mahīṅ",
+    "stripped_root": "mahī",
+    "gana": "Kandvādi",
+    "pada": "Ātmanepada",
+    "it_status": "Anit",
+    "transitivity": "Intransitive",
+    "canonical_dhatvartha": "pūjāyām",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'mahī' belongs to the Kandvadi group and means to be honored, to prosper, or to exult. Due to the Kandvadi affix 'yak' (without passive meaning), it forms present tense stems as 'mahīyate' in the middle voice.",
+      "scenarios": [
+        {
+          "verb_form": "mahīyate",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat lakara (present tense), prathama purusha (third person singular)",
+          "meaning": "He/She is honored or prospers",
+          "example_sanskrit": "vidvān sarvatra mahīyate.",
+          "example_english": "The learned person is honored everywhere."
+        },
+        {
+          "verb_form": "amahīyata",
+          "grammar_trigger": "Kartari prayoga, Lan lakara (past imperfect), prathama purusha singular",
+          "meaning": "He/She was honored or rejoiced",
+          "example_sanskrit": "dhārmiko nṛpo loke samyak amahīyata.",
+          "example_english": "The righteous king was properly revered in the world."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "mahīṅ pūjāyām. kandvādibhyo yak ityadhikāre mahīyate iti rūpam. pūjāyām māne vā vartate.",
+      "kshiratarangini": "mahīṅ pūjāyām. mahīyate. yak-pratyayaḥ svakīyārthe bhavati, pūjitasya satkāra-bhāvaḥ."
+    },
+    "meanings": {
+      "English": "to be honored, to rejoice, to prosper, to be exalted",
+      "Kannada": "pūjisanpaḍu, sanmāna goḷḷu, santōṣapaḍu",
+      "Telugu": "pūjimpadagu, gauravam pondhu, vardhillu",
+      "Tamil": "madippukku uriyadhāgu, sirappu peru, perumaiyadaital",
+      "Malayalam": "bahumānikkappeṭuka, ānandikkuka, aishvaryam prāpikkuka",
+      "Hindi": "pūjita honā, ādara pānā, mahimāvān honā",
+      "Bengali": "pūjita haoā, sammānita haoā, ānandita haoā",
+      "German": "geehrt werden, frohlocken, gedeihen",
+      "French": "être honoré, prospérer, se réjouir",
+      "Russian": "byt pochitayemym, protsvetat, radovatsya",
+      "Chinese": "shou dao zun jing, fan rong, huan xin"
     }
   }
 ]
