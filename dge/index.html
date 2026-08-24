@@ -15,6 +15,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+<!-- 24 Aug 2026: global search's 330MB index (dge/js/global-search.js) is
+     also served from cdn.jsdelivr.net -- the Sanscript <script> tag just
+     below already opens a connection to this exact origin, likely warming
+     it well before search is ever opened, but an explicit preconnect costs
+     nothing (no data, just an early DNS/TCP/TLS handshake) and removes any
+     doubt that the connection is ready the moment a reader's first query
+     needs it. -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
 <!-- Robust Indic Transliteration Engine -->
 <!-- Pinned to 1.3.3 (latest confirmed release) and the exact filename the -->
 <!-- library documents (sanscript.js, not sanscript.min.js). onerror falls -->
@@ -1164,7 +1174,7 @@
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
 <script src="js/dge-normalize.js?v=4.60.6"></script>
 <script src="js/dge-search.js?v=4.65.1"></script>
-<script src="js/global-search.js?v=4.68.1"></script>
+<script src="js/global-search.js?v=4.68.2"></script>
 
 <!-- User Accounts (Firebase, compat build — matches this project's classic-
      script/no-build-step convention rather than the newer ES-module SDK).

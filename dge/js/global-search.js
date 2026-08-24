@@ -250,20 +250,37 @@
     });
   }
 
+  // populateSections is attached on EVERY call, not only the one that
+  // actually creates idxPromise -- 24 Aug 2026, needed once prefetchManifest()
+  // below could call this before build() has ever run (no #dge-gs-section-pop
+  // to populate yet). Splitting "fetch and cache the index" from "populate
+  // the (maybe not-yet-built) DOM" this way means a prefetch's own idle-time
+  // call safely no-ops (populateSections' own data-populated/element-exists
+  // guards handle that), and the LATER real call from open() -- after build()
+  // has created the popup -- still populates it correctly, from the same
+  // already-resolved, cached promise. Before this change populateSections
+  // ran only once, tied to the original .then() chain, so an early prefetch
+  // would have silently left the section popup permanently un-populated.
   function ensureIndex() {
     if (!idxPromise) {
       if (!window.DGESearch) { alert('Search scripts not loaded (need dge-search.js).'); return null; }
-      idxPromise = window.DGESearch.create(INDEX_BASE).then(function (idx) {
-        populateSections(idx.sections || []);
-        return idx;
-      }).catch(function (e) {
+      idxPromise = window.DGESearch.create(INDEX_BASE).catch(function (e) {
         idxPromise = null;
-        document.getElementById('dge-gs-results').innerHTML =
-          '<div class="dge-gs-hint">Could not load the search index at "' + INDEX_BASE + '". Generate it with build_search_index.py and commit dge/search_index/.</div>';
+        // Guarded: a prefetch call (see prefetchManifest()) can reach this
+        // catch before build() has ever run, when #dge-gs-results doesn't
+        // exist yet -- writing to it unconditionally would throw a second,
+        // unrelated error on top of the real one.
+        var el = document.getElementById('dge-gs-results');
+        if (el) {
+          el.innerHTML = '<div class="dge-gs-hint">Could not load the search index at "' + INDEX_BASE + '". Generate it with build_search_index.py and commit dge/search_index/.</div>';
+        }
         throw e;
       });
     }
-    return idxPromise;
+    return idxPromise.then(function (idx) {
+      populateSections(idx.sections || []);
+      return idx;
+    });
   }
 
   // The section list only comes from the index's own manifest (it's not
@@ -629,7 +646,35 @@
     applyFilters();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
-  else build();
+  // Idle-time manifest prefetch (24 Aug 2026, project lead's "make search
+  // lightning fast" directive) -- by the time a reader actually opens
+  // search and types, the index object may already exist, saving a
+  // manifest fetch + parse off the critical path of their FIRST query.
+  // Deliberately NOT an eager/blocking fetch: manifest.json can be several
+  // MB, and most readers on this page never open search at all -- costing
+  // every one of them that bandwidth just to shave a round trip off the
+  // minority who do would be the wrong trade for a mobile-first app that
+  // already goes out of its way to keep data costs down elsewhere (offline
+  // mode, lazy per-query shard/posting fetches). requestIdleCallback
+  // (falling back to a plain timeout on a browser without it, e.g. Safari)
+  // only runs this once the browser has nothing more pressing to do, and
+  // it's skipped outright on a data-saver/slow connection -- exactly the
+  // audience this restraint exists for.
+  function prefetchManifest() {
+    try {
+      var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      if (conn && (conn.saveData || /2g/.test(conn.effectiveType || ''))) return;
+    } catch (e) { /* navigator.connection isn't universally supported -- proceed as normal */ }
+    var run = function () { ensureIndex(); };
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(run, { timeout: 5000 });
+    } else {
+      setTimeout(run, 2000);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { build(); prefetchManifest(); });
+  } else { build(); prefetchManifest(); }
   window.DGEGlobalSearch = { open: open, close: close };
 })();
