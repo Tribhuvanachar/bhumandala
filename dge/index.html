@@ -222,6 +222,7 @@
   <div class="pop-item" data-viewmode="list" onclick="window.dgeSetViewMode('list')">📜 Full List</div>
   <div class="pop-item" data-viewmode="single" onclick="window.dgeSetViewMode('single')">🔎 One at a Time</div>
   <div class="pop-item" onclick="window.togglePopup('displayPopup'); window.dgeToggleImmersiveMode(true)">🖥️ Full Screen Reading</div>
+  <div class="pop-item" data-wakelock="1" onclick="window.dgeSetScreenWakeLock(this.classList.contains('active') ? false : true)">🔆 Keep Screen Awake While Reading</div>
   <hr>
   <div class="popup-label">Appearance</div>
   <div class="pop-item active" data-theme="vandana" onclick="window.setTheme('vandana', this)"><span class="theme-swatch theme-swatch-vandana"></span>Vandana</div>
@@ -595,6 +596,16 @@
           <input type="text" id="userAudioBaseUrlInput" class="modal-input" placeholder="e.g. https://mypersonalwebsite.com/audio/" style="margin-top:4px;">
         </div>
         <button class="btn-sm" style="width:100%; margin-top:4px;" onclick="window.resetAudioBaseUrlToDefault()">↺ Use Project Default</button>
+      </details>
+
+      <details data-section-id="searchIndexSource" style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>🔎 Search Index Source</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
+        <p style="font-size:11px; color:var(--muted-text); margin:8px 0;">Where the full-text search index (used by 🔎 global search) is fetched from, on this device only. Takes effect the next time this page loads. Leave blank to use the project default (a pinned jsDelivr build).</p>
+        <div class="provider-key-row">
+          <label>Custom index base URL (no trailing /)</label>
+          <input type="text" id="userSearchIndexBaseInput" class="modal-input" placeholder="e.g. https://mypersonalwebsite.com/search-index" style="margin-top:4px;">
+        </div>
+        <button class="btn-sm" style="width:100%; margin-top:4px;" onclick="window.resetSearchIndexBaseToDefault()">↺ Use Project Default</button>
       </details>
 
       <details data-section-id="shareTemplate" style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">

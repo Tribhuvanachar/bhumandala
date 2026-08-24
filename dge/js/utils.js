@@ -558,4 +558,37 @@ window.dgeToggleImmersiveMode = function (force) {
     document.body.classList.toggle('dge-immersive', enable);
 };
 
+// Phase 7 of the mobile UI overhaul: Screen Wake Lock, one of the
+// ashtadhyayi.com-inspired preferences the project lead asked to add. A
+// plain manual preference (like ashtadhyayi's own "Preferences" toggle),
+// not tied to audio play/pause state -- reading without audio playing is
+// just as real a use case, and keeping this independent of audio.js's
+// playback logic avoids adding a new failure mode to that already-
+// intricate code path. Browsers release the lock whenever the tab loses
+// visibility (backgrounding, screen lock, app switch), which is not the
+// user turning the preference off -- so it's silently re-acquired on
+// visibilitychange whenever the preference is still on, exactly the way
+// every wake-lock guide describes handling this.
+window.dgeWakeLockSentinel = null;
+window.dgeSetScreenWakeLock = function (enable) {
+    localStorage.setItem('app_wakeLock', enable ? '1' : '0');
+    document.querySelectorAll('.pop-item[data-wakelock]').forEach(function (el) {
+        el.classList.toggle('active', (el.dataset.wakelock === '1') === !!enable);
+    });
+    if (!enable) {
+        if (window.dgeWakeLockSentinel) { window.dgeWakeLockSentinel.release().catch(function () {}); window.dgeWakeLockSentinel = null; }
+        return;
+    }
+    if (!('wakeLock' in navigator)) return; // unsupported browser -- preference is saved, just has no visible effect here
+    navigator.wakeLock.request('screen').then(function (sentinel) {
+        window.dgeWakeLockSentinel = sentinel;
+        sentinel.addEventListener('release', function () { if (window.dgeWakeLockSentinel === sentinel) window.dgeWakeLockSentinel = null; });
+    }).catch(function () { /* denied or unsupported in this context -- non-fatal, reading still works */ });
+};
+document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible' && localStorage.getItem('app_wakeLock') === '1' && !window.dgeWakeLockSentinel) {
+        window.dgeSetScreenWakeLock(true);
+    }
+});
+
 console.log("[Init] utils.js loaded successfully.");

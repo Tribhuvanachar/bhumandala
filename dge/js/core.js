@@ -1015,6 +1015,8 @@ function restorePrefs() {
   const savedLayoutMode = localStorage.getItem('app_layoutMode');
   if (savedLayoutMode && typeof window.dgeSetLayoutMode === 'function') window.dgeSetLayoutMode(savedLayoutMode);
 
+  if (localStorage.getItem('app_wakeLock') === '1' && typeof window.dgeSetScreenWakeLock === 'function') window.dgeSetScreenWakeLock(true);
+
   const savedViewMode = localStorage.getItem('app_viewMode');
   // renderList() builds a full DOM card per shloka in "list" mode — fine
   // for something PNS-sized (43), but genuinely freezes a phone for a

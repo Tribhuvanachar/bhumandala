@@ -101,7 +101,20 @@ window.KOSHA_DATA_BASE = appConfig.koshaDataBase;
 // workflows print the line to paste.
 window.WORDNET_DATA_BASE = appConfig.wordnetDataBase;
 window.KAVYA_DATA_BASE = appConfig.kavyaDataBase;
-window.DGE_SEARCH_INDEX = appConfig.searchIndexBase;
+// Phase 7 of the mobile UI overhaul: a user-facing "Data source" override
+// for the search index, the same idea as the pre-existing audio CDN
+// override (see userAudioBaseUrlInput in ai.js), and one of the
+// ashtadhyayi.com-inspired preferences the project lead asked to add.
+// global-search.js reads window.DGE_SEARCH_INDEX exactly once, into a
+// module-scope var, the moment its own script tag runs -- unlike the
+// audio override (read fresh from localStorage at each actual use in
+// audio.js), a saved override here has to already be in place before
+// that capture happens. config.js runs first, so this is the one place
+// it can be applied.
+window.DGE_SEARCH_INDEX = (function () {
+  try { return localStorage.getItem('search_index_base_override') || appConfig.searchIndexBase; }
+  catch (e) { return appConfig.searchIndexBase; }
+})();
 
 // Globally configurable "Ask Acharya" query types. Edit this list to add,
 // remove, rename, reorder, or temporarily disable (enabled:false) any of
