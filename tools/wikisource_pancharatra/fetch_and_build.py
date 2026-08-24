@@ -266,11 +266,14 @@ def parse_chapter(page_title, is_first_chapter=False, is_appendix=False):
                 # numbered sub-poems back to back on the same page (checked
                 # directly: a 21-verse dhyana/nyasa preamble, then the
                 # sahasranama proper, whose own numbering restarts at 1) --
-                # a numbering *decrease* marks that boundary, so each
+                # a restart to literally 1 marks that boundary, so each
                 # restart starts a fresh sub-item rather than colliding
-                # verse numbers into one.
+                # verse numbers into one. (Not "any decrease" -- see the
+                # same condition's own rationale in parse_chapter_critical,
+                # where a plain decrease turned out to also fire on an
+                # isolated duplicate verse number, not a real restart.)
                 vs = to_int(mm.group(1))
-                if vs <= appendix_last_vs:
+                if vs == 1 and appendix_last_vs > 1:
                     appendix_series += 1
                 appendix_last_vs = vs
                 units.append((("parishishtam", appendix_series), vs, body))
@@ -283,45 +286,59 @@ def parse_chapter(page_title, is_first_chapter=False, is_appendix=False):
 # Jayakhyasamhita (checked directly against its own raw wikitext, not
 # assumed to match Ahirbudhnyasamhita just because both are Wikisource) is
 # a different digitization entirely -- a critical edition with its own
-# apparatus, not an OCR-style plain transcription:
-#   - Verses are numbered per-chapter with a single sequential number
-#     ("।। 1 ।।", "।। 2 ।।", ...), not a chapter.verse pair.
-#   - Variant readings are marked inline with a bare parenthesized digit
-#     ("विषयार्णवमग्नानां (1)समुद्धरणेहतवे", no space, no period) -- also
-#     seen using "*" instead of a digit where the editor ran out of/didn't
-#     want numbers ("(*)पञ्चरात्रस्य...") -- and the actual variant text
-#     sits on a line by itself, shaped "(N. reading. ManuscriptSiglum)" or
-#     "(*. reading. (nested parenthetical) ...)". Checked directly: this
-#     footnote-content line is always the *entire* line, so rather than
-#     matching every marker-character style one at a time, any line whose
-#     whole content (after stripping tabs/spaces) is one bracketed unit --
-#     "(...)" start to finish -- is treated as apparatus and dropped. This
-#     also catches a still plainer case with no marker character at all: a
-#     bracketed alternate-reading of a whole pada given on its own line,
-#     e.g. "(सन्तोषनियमाढ्यं च व्रतचर्यासमन्वितम्)" -- a real verse pada
-#     never stands as a whole line wrapped in a single paren pair (it
-#     always ends in a danda/pipe, not ")"), so this doesn't risk eating
-#     real content.
-#   - A shorter uncertain-reading annotation can also appear *inside* a
-#     verse line rather than as its own line, marked by a trailing "?"
-#     instead of a marker character ("तम्(त्?)", "(तथाऽनेक?)") -- stripped
-#     separately since it isn't its own line.
-#   - Editorial section headings are bracketed and usually (not always)
-#     carry a "chapter-section" tag: "[शास्त्रावतरणम्.] 1-1" or, seen on
-#     a later heading in the same chapter, just "[...]" with no tag at
-#     all -- both forms confirmed directly, so both are handled.
-#   - A recognizable Sanskrit chapter-colophon idiom, "<name> नाम <ordinal>
-#     पटलः।", appears as the true closing colophon (harmless -- it falls
-#     after the last verse ref and is never assigned to any unit) but was
-#     also found duplicated as a *front-matter* line before chapter 1's
-#     own verse 1 -- there it would otherwise leak into verse 1's body
-#     (it carries a danda, so the plain no-danda title-zone heuristic
-#     doesn't catch it), so it is stripped as its own line pattern.
-CRITICAL_BRACKETED_LINE_RX = re.compile(r"^\(.*\)$")
-CRITICAL_INLINE_MARKER_RX = re.compile(r"\(\s*[\d०-९*]+\s*\)")
-CRITICAL_UNCERTAIN_RX = re.compile(r"\([^()]*\?\)")
-CRITICAL_SECTION_HEADER_RX = re.compile(r"^\[.*?\]\s*(?:[\d०-९]+-[\d०-९]+)?\s*$")
+# apparatus, not an OCR-style plain transcription. Verses are numbered
+# per-chapter with a single sequential number ("।। 1 ।।", "।। 2 ।।", ...),
+# not a chapter.verse pair, and its editorial apparatus -- variant
+# readings, uncertain readings, section headings -- turns out to come in
+# far more shapes than first appeared from a first, small sample (checked
+# directly at full scale, not assumed from 2 chapters to hold for all 33):
+# a bare digit or "*" marker attached straight to a word with the actual
+# footnote text on its own line below; a marker-less inline variant
+# spelling attached straight to a word ("घर्मे(र्मो)"); an uncertain
+# reading marked with a trailing "?" instead of a marker character
+# ("तम्(त्?)"); a parenthesized section heading immediately followed by
+# " - " and real verse text *on the same line* ("(प्रधानात्...) -
+# विभक्तं..."); and a bracketed variant of a *whole pada*, in either
+# round parens or square brackets, sometimes standing alone on its own
+# line and sometimes trailing real content on the same line
+# ("...यथावद्वक्तुमर्हसि। [नारदो ब्रह्मणः ...]"). Chasing each shape with
+# its own regex kept missing the next one; the one property genuinely
+# true across all of them, checked directly against a real chapter's
+# paren/bracket counts (always balanced, bar one stray trailing
+# character in dropped tail text past the last verse), is that this
+# source never uses "(...)" or "[...]" for real verse content at all --
+# so instead every bracketed span, wherever it falls and however deep it
+# nests, is apparatus and is stripped outright, inside-out via a
+# fixed-point loop so a nested case like "(*. ... (Adyar Library Ms.)
+# ... नीतः)" fully resolves.
+#
+# A recognizable Sanskrit chapter-colophon idiom, "<name> नाम <ordinal>
+# पटलः।", appears as the true closing colophon (harmless -- it falls
+# after the last verse ref and is never assigned to any unit) but was
+# also found duplicated as a *front-matter* line before chapter 1's own
+# verse 1 -- there it would otherwise leak into verse 1's body (it
+# carries a danda, so the plain no-danda title-zone heuristic doesn't
+# catch it), so it is stripped as its own line pattern, unrelated to the
+# bracket stripping above.
+CRITICAL_PAREN_SPAN_RX = re.compile(r"\([^()]*\)")
+CRITICAL_BRACKET_SPAN_RX = re.compile(r"\[[^\[\]]*\]")
 CRITICAL_COLOPHON_LINE_RX = re.compile(r".*नाम\s+\S+\s*पटलः\s*।\s*$")
+# The bare "20-3" crossref tag doesn't only sit on its own line (handled
+# by CRITICAL_CROSSREF_LINE_RX below) -- checked directly, it also trails
+# a danda directly, on both a colophon-idiom line ("...पटलः। 2-1") and a
+# real verse pada's own closing danda ("...जगत्पते। 3-1"). One rule
+# covers both: strip a trailing "N-M" tag wherever it follows a danda,
+# before any line-shape-based check runs, so those checks always see a
+# clean line ending right at the danda.
+CRITICAL_DANDA_CROSSREF_RX = re.compile(r"।\s*[\d०-९]+-[\d०-९]+")
+# A bare "20-3", "20-4" cross-reference tag (chapter-verse, unbracketed,
+# unpunctuated) recurs on its own line after some verses -- patala 20
+# alone carries 99 of them. Left alone, it isn't itself mistaken for a
+# verse ref (no danda/pipe brackets), but the final bare-digit strip
+# would still eat its digits and leave a bare "-" stitched onto the
+# following verse's body -- stripped as a whole line instead, same
+# treatment as the colophon-idiom line above.
+CRITICAL_CROSSREF_LINE_RX = re.compile(r"^[\d०-९]+-[\d०-९]+$")
 
 
 def parse_chapter_critical(page_title, chapter_num):
@@ -332,21 +349,35 @@ def parse_chapter_critical(page_title, chapter_num):
     if poem is None:
         return None, []
     poem = poem.replace("॥", "।।")
+    poem = CRITICAL_DANDA_CROSSREF_RX.sub("।", poem)
 
     lines = poem.split("\n")
-    kept = []
-    for line in lines:
-        s = line.strip("\t ")
-        if CRITICAL_COLOPHON_LINE_RX.match(s):
-            continue
-        if CRITICAL_BRACKETED_LINE_RX.match(s):
-            continue
-        if CRITICAL_SECTION_HEADER_RX.match(s):
-            continue
-        kept.append(line)
+    kept = [l for l in lines if not CRITICAL_COLOPHON_LINE_RX.match(l.strip("\t "))]
     poem = "\n".join(kept)
-    poem = CRITICAL_INLINE_MARKER_RX.sub("", poem)
-    poem = CRITICAL_UNCERTAIN_RX.sub("", poem)
+
+    prev = None
+    while prev != poem:
+        prev = poem
+        poem = CRITICAL_PAREN_SPAN_RX.sub("", poem)
+        poem = CRITICAL_BRACKET_SPAN_RX.sub("", poem)
+
+    # A paren-wrapped section heading is sometimes followed by " - " and
+    # real verse text on the *same* line ("(प्रधानात्...) - विभक्तं...");
+    # once the heading itself is stripped above, that leaves a bare
+    # "। - " stitched onto the next real pada. A danda is never itself
+    # followed by a hyphen in this text, so this is unambiguous to clean
+    # up -- not a guess at every possible hyphen use (a genuine word-wrap
+    # hyphen, seen elsewhere in this corpus, sits at the end of a word
+    # before a line break, never right after a danda).
+    poem = re.sub(r"।\s*-\s+", "। ", poem)
+
+    # A bracketed section heading's trailing "N-M" tag ("[...] 15-1") only
+    # becomes an isolated bare-tag line -- matchable by
+    # CRITICAL_CROSSREF_LINE_RX -- once the bracket itself is gone, so this
+    # runs after the paren/bracket stripping above, not before it.
+    lines = poem.split("\n")
+    kept = [l for l in lines if not CRITICAL_CROSSREF_LINE_RX.match(l.strip("\t "))]
+    poem = "\n".join(kept)
 
     # Front-matter title line(s): same no-danda/no-trailing-dash heuristic
     # as parse_chapter's own step 3, reused verbatim.
@@ -376,14 +407,20 @@ def parse_chapter_critical(page_title, chapter_num):
     for r in refs:
         poem = poem.replace(SENTINEL, r, 1)
 
-    # A numbering *decrease* here means the same thing it does in the
-    # parishishtam: checked directly against patala 1's own raw wikitext,
-    # its first ~78 verses turn out to be a separately-numbered frame
-    # narrative (the sages' backstory), with the samhita's own text proper
-    # restarting its numbering at 1 right after a section heading -- not a
-    # parsing artifact. A numbering *gap* (e.g. patala 15 skips straight
-    # from 179 to 181) is different and left alone -- that's the source's
-    # own verse numbering, not a restart, and not something to paper over.
+    # A numbering restart to literally 1 here means the same thing it does
+    # in the parishishtam: checked directly against patala 1's own raw
+    # wikitext, its first ~78 verses turn out to be a separately-numbered
+    # frame narrative (the sages' backstory), with the samhita's own text
+    # proper restarting its numbering at 1 right after a section heading --
+    # not a parsing artifact. Two other kinds of non-monotonicity are
+    # different and deliberately NOT treated as a restart: a numbering
+    # *gap* (e.g. patala 15 skips straight from 179 to 181), and an
+    # isolated *duplicate* verse number the source itself repeats mid-
+    # sequence (patala 20 labels two consecutive, different-content verses
+    # both "3", then later both "304") -- checked directly, not assumed;
+    # an earlier version treated any vs <= last_vs as a restart and that
+    # duplicate alone fractured patala 20 into three bogus series. Only
+    # vs == 1 immediately after a genuinely higher number is a restart.
     units = []
     prev_end = 0
     series = 1
@@ -395,7 +432,7 @@ def parse_chapter_critical(page_title, chapter_num):
         body = re.sub(r"\s+", " ", body).strip(" \n\t।|")
         if body:
             vs = to_int(mm.group(1))
-            if vs <= last_vs:
+            if vs == 1 and last_vs > 1:
                 series += 1
             last_vs = vs
             units.append(((chapter_num, series), vs, body))
