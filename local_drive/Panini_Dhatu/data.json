@@ -103489,6 +103489,53 @@
     }
   },
   {
+    "dhatu_id": "14.0026",
+    "aupadeshika": "laḍa",
+    "stripped_root": "laḍ",
+    "gana": "Bhvādi (Class I) / Curādi (Class X)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Transitive / Intransitive",
+    "canonical_dhatvartha": "vilāse (lālane)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'laḍ' describes playful behavior, sporting, dallying, or treating someone with loving fondness and pampering.",
+      "scenarios": [
+        {
+          "verb_form": "laḍati",
+          "grammar_trigger": "Laṭ Lakāra (Present Indicative), Prathama Puruṣa, Ekavacana",
+          "meaning": "Sports, plays, or dallies",
+          "example_sanskrit": "bālakaḥ udyāne laḍati.",
+          "example_english": "The child sports joyfully in the garden."
+        },
+        {
+          "verb_form": "alāḍīt",
+          "grammar_trigger": "Luṅ Lakāra (Aorist), Prathama Puruṣa, Ekavacana",
+          "meaning": "Dallied or sported",
+          "example_sanskrit": "śiśuḥ mātus samīpe alāḍīt.",
+          "example_english": "The infant dallied affectionately near the mother."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "laḍa vilāse. vilāsaḥ śṛṅgāraceṣṭā lālanam ca. laḍati, lālāḍa, laḍitā.",
+      "kshiratarangini": "laḍa vilāse. vilāsanaṁ laḍanam. vilāso harṣaceṣṭā kriyāviśeṣaśca."
+    },
+    "meanings": {
+      "English": "to sport, to play, to dally, to caress, to pamper",
+      "Kannada": "vilāsavāgiru, muddu māḍu, sarasavāḍu",
+      "Telugu": "vilāsamugā uṇḍu, mudduceyu, kelikikonu",
+      "Tamil": "vilaiyāṭu, konju, sellam koñju",
+      "Malayalam": "vilasikkuka, konjikkuka, lāḷikkuka",
+      "Hindi": "vilāsa karnā, lāḍa-pyāra karnā, khelanā",
+      "Bengali": "bilāsa karā, ādara karā, khelā karā",
+      "German": "spielen, schäkern, kosen, verhätscheln",
+      "French": "folâtrer, badiner, choyer, caresser",
+      "Russian": "rezvit'sya, lastit'sya, balovat'",
+      "Chinese": "wánshuǎ, chǒng'ài, fǔyǎng"
+    }
+  },
+  {
     "dhatu_id": "14.0027",
     "aupadeshika": "ṣalla",
     "stripped_root": "sall",
@@ -103580,6 +103627,53 @@
       "French": "inciter, envoyer, jeter",
       "Russian": "pobuzhdat', posylat', brosat'",
       "Chinese": "qūdǐng, fāsòng, tóuzhì"
+    }
+  },
+  {
+    "dhatu_id": "14.0029",
+    "aupadeshika": "pella",
+    "stripped_root": "pell",
+    "gana": "Bhvadi (Class 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "preraṇe",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root pell means to push, drive forward, or propel something. Think of pushing a heavy cart or urging a friend forward.",
+      "scenarios": [
+        {
+          "verb_form": "pellati",
+          "grammar_trigger": "Present Tense (lat, prathama purusha, ekavacana)",
+          "meaning": "Pushes or drives forward",
+          "example_sanskrit": "bālakaḥ kando ratham agre pellati.",
+          "example_english": "The boy pushes the toy chariot forward."
+        },
+        {
+          "verb_form": "apellat",
+          "grammar_trigger": "Past Tense (lan, prathama purusha, ekavacana)",
+          "meaning": "Pushed or propelled",
+          "example_sanskrit": "gopālaḥ dhenuṃ mārge apellat.",
+          "example_english": "The cowherd drove the cow onto the path."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Not included in the core Paninian Astadhyayi canon; accepted in post-Paninian registers such as the Haimacandra tradition under the classification of preraṇartha (driving/propelling).",
+      "kshiratarangini": "Kshirasvamin does not record 'pell' in the classical Paninian Dhatupatha, where synonymous roots like 'nud' or 'tud' are preferred, identifying 'pell' as a typical Desya-influenced development in Jaina lexicography."
+    },
+    "meanings": {
+      "English": "To push, to propel, to urge, to drive forward",
+      "Kannada": "Mundukke tallu, prerisu, todu",
+      "Telugu": "Nettuta, munduku toyuta, prerincuta",
+      "Tamil": "Tallutal, munnetrutal, evutal",
+      "Malayalam": "Talluka, munnottu nayikkuka, prerippikkuka",
+      "Hindi": "Dhakelna, prerita karna, age badhana",
+      "Bengali": "Thela, prerana deoya, age barhana",
+      "German": "Schieben, antreiben, vorwartsdrangen",
+      "French": "Pousser, propulser, inciter",
+      "Russian": "Tolkat, gnat vpered, pobuzhdat",
+      "Chinese": "Tuidong, qushi, cuijin"
     }
   },
   {
@@ -103677,6 +103771,100 @@
     }
   },
   {
+    "dhatu_id": "14.0032",
+    "aupadeshika": "guṭhi",
+    "stripped_root": "guṇṭh",
+    "gana": "curādi (10th class)",
+    "pada": "ubhayapadī",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "saṃrakṣaṇe (āvaraṇe)",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'guṇṭh' means to cover, wrap, veil, or protect something with a layer or cloth so it remains safe or concealed.",
+      "scenarios": [
+        {
+          "verb_form": "guṇṭhayati",
+          "grammar_trigger": "lat (present indicative active, 3rd person singular)",
+          "meaning": "covers or wraps",
+          "example_sanskrit": "bālakaḥ śītena śarīraṃ vastreṇa guṇṭhayati.",
+          "example_english": "The boy wraps his body with a garment due to the cold."
+        },
+        {
+          "verb_form": "guṇṭhita",
+          "grammar_trigger": "kta pratyaya (past passive participle)",
+          "meaning": "veiled or covered",
+          "example_sanskrit": "dhūlena guṇṭhitaṃ yānam adṛśyam abhavat.",
+          "example_english": "The vehicle covered with dust became invisible."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "guṭhi saṃrakṣaṇe. idittvān num. guṇṭhayati, guṇṭhayate. saṃrakṣaṇam āvaraṇam.",
+      "kshiratarangini": "guṭhi saṃrakṣaṇe. idit. guṇṭhayati. āvaraṇārtha ity apare."
+    },
+    "meanings": {
+      "English": "to cover, to veil, to wrap, to protect",
+      "Kannada": "hodeyisu, mucchu, saṃrakṣisu",
+      "Telugu": "kappu, āvarin̄ci rakṣin̄cu",
+      "Tamil": "mūṭu, pōrtti, kāppāṟṟu",
+      "Malayalam": "mūṭuka, pothiyuka, saṃrakṣikkuka",
+      "Hindi": "ḍhakanā, lapeṭanā, āvaraṇa karanā",
+      "Bengali": "ḍhākā deoyā, ghire rākhā, ābaraṇa karā",
+      "German": "verhüllen, bedecken, schützen",
+      "French": "couvrir, voiler, envelopper, protéger",
+      "Russian": "pokryvat', oborachivat', zashchishchat'",
+      "Chinese": "fùgài, zhēgài, bǎohù"
+    }
+  },
+  {
+    "dhatu_id": "14.0033",
+    "aupadeshika": "jabhi",
+    "stripped_root": "jambh",
+    "gana": "Bhvādigaṇa (Cāndra Class 1)",
+    "pada": "Ātmanepada",
+    "it_status": "Seṭ",
+    "transitivity": "Akarmaka",
+    "canonical_dhatvartha": "gātravināme",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'jambh' describes the natural bodily act of yawning or stretching one's limbs when tired, waking up, or feeling drowsy.",
+      "scenarios": [
+        {
+          "verb_form": "jambhate",
+          "grammar_trigger": "Laṭ (Present Indicative), Prathama-puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "yawns or stretches the limbs",
+          "example_sanskrit": "nidrāluḥ bālakaḥ prāteḥ jambhate.",
+          "example_english": "The sleepy child yawns in the morning."
+        },
+        {
+          "verb_form": "ajambhata",
+          "grammar_trigger": "Laṅ (Past Imperfect), Prathama-puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "yawned or stretched out",
+          "example_sanskrit": "śrāntaḥ pathikaḥ vṛkṣatale ajambhata.",
+          "example_english": "The tired traveler stretched under the tree."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "jabhi gātravināme. iditvānnum. jambhate. gātravināmo jṛmbhaṇamucyate.",
+      "kshiratarangini": "jabhi gātravināme. idit num. jambhate śarīra-bhañjane ityarthaḥ."
+    },
+    "meanings": {
+      "English": "to yawn, to stretch the limbs, to gape",
+      "Kannada": "ākaḷisu, aṅga-vikāsa māḍu",
+      "Telugu": "āvulincu, gātra-vināmamu ceyu",
+      "Tamil": "koṭṭāvi viṭu, uṭampai muṟikku",
+      "Malayalam": "koṭṭāvāyiṭuka, meyyozhiyuka",
+      "Hindi": "jamhāī lenā, aṅgāī lenā",
+      "Bengali": "hyām̐i tolā, gā moṛā bhāṅā",
+      "German": "gähnen, sich dehnen",
+      "French": "bâiller, s'étirer",
+      "Russian": "zevat', potyagivat'sya",
+      "Chinese": "dǎhànqian, shēnzhǎn"
+    }
+  },
+  {
     "dhatu_id": "14.0034",
     "aupadeshika": "ḍipa",
     "stripped_root": "ḍip",
@@ -103721,6 +103909,1221 @@
       "French": "jeter, lancer, projeter",
       "Russian": "brosat', kidat', metat'",
       "Chinese": "tóu zhì, fàng chū, pāo"
+    }
+  },
+  {
+    "dhatu_id": "14.0035",
+    "aupadeshika": "dhurvī",
+    "stripped_root": "dhurv",
+    "gana": "Bhvādi (Candra Gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "hiṃsāyām",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'dhurv' means to hurt, injure, or cause harm to someone. It is used in sentences describing an act of physical injury or harm.",
+      "scenarios": [
+        {
+          "verb_form": "dhurvati",
+          "grammar_trigger": "Laṭ (Present Indicative), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "He/She hurts or injures",
+          "example_sanskrit": "vyādhaḥ bāṇena mṛgaṃ dhurvati.",
+          "example_english": "The hunter injures the deer with an arrow."
+        },
+        {
+          "verb_form": "adhurvat",
+          "grammar_trigger": "Laṅ (Imperfect Past), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "He/She injured or harmed",
+          "example_sanskrit": "śatruḥ nagaraṃ adhurvat.",
+          "example_english": "The enemy harmed the city."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "dhurvī hiṃsāyām. iditvat num na bhavati anubandhatvāt. dhurvati, dudhorva, dhurvitā.",
+      "kshiratarangini": "dhurvī hiṃsāyām. mṛdūbhavati hiṃsāyāṃ prayogaḥ. dhurvati ripum."
+    },
+    "meanings": {
+      "English": "to injure, to hurt, to harm, to strike",
+      "Kannada": "hiṃsisu, hāni māḍu, gāya māḍu",
+      "Telugu": "hiṃsiñcu, hāni cēyu, gāyaparacu",
+      "Tamil": "tunpuṟuttu, cētappaṭuttu, kāyappaṭuttu",
+      "Malayalam": "upadravikkuka, hiṃsikkuka, vedanippikkuka",
+      "Hindi": "hiṃsā karnā, choṭ pahuñcānā, hāni karnā",
+      "Bengali": "hiṃsā karā, āghāt karā, khoti karā",
+      "German": "verletzen, schädigen, kränken",
+      "French": "blesser, endommager, nuire",
+      "Russian": "ranit', vredit', prichinyat' bol'",
+      "Chinese": "shānghài, sǔnhài, shāngcán"
+    }
+  },
+  {
+    "dhatu_id": "14.0036",
+    "aupadeshika": "sphāṭa",
+    "stripped_root": "sphāṭ",
+    "gana": "curādi (10th class / adhrīṣīyādi in Cāndra tradition)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "sphoṭane (vidāraṇe)",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'sphāṭ' means to split open, crack, or burst something apart. Think of cracking open a tough nut shell or splitting a piece of wood into two halves.",
+      "scenarios": [
+        {
+          "verb_form": "sphāṭayati",
+          "grammar_trigger": "laṭ-lakāra, prathama-puruṣa, eka-vacana",
+          "meaning": "splits or breaks open",
+          "example_sanskrit": "kāṣṭhabhid kāṣṭhaṃ sphāṭayati.",
+          "example_english": "The woodcutter splits the log."
+        },
+        {
+          "verb_form": "asphāṭayat",
+          "grammar_trigger": "laṅ-lakāra, prathama-puruṣa, eka-vacana",
+          "meaning": "cracked or burst open",
+          "example_sanskrit": "kṛṣakaḥ dṛṣadā phalaṃ asphāṭayat.",
+          "example_english": "The farmer cracked the fruit open with a stone."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Recorded in the Cāndra tradition under sphoṭanārtha, this root acts as a causative/curādi variant corresponding to the act of causing to break or split.",
+      "kshiratarangini": "Kṣīrasvāmin notes the overlap between sphuṭ and allied curādi forms such as sphāṭ in parallel grammatical treatises where vidāraṇa (tearing or cleaving) is the primary sense."
+    },
+    "meanings": {
+      "English": "to split, to burst open, to cleave, to crack",
+      "Kannada": "sīḻuvudu, oḍeyuvudu",
+      "Telugu": "cīlcu, pagalagoṭṭu",
+      "Tamil": "piḷattal, uṭaittal",
+      "Malayalam": "piḷarkkuka, poṭikkuka",
+      "Hindi": "phāṛanā, phoṛanā, vidīrṇa karanā",
+      "Bengali": "phāṭānō, bidīrṇa karā",
+      "German": "spalten, aufbrechen, zerreißen",
+      "French": "fendre, faire éclater, briser",
+      "Russian": "raskalyvat', razryvat', vzryvat'",
+      "Chinese": "pīkāi, pòliè, lièkāi"
+    }
+  },
+  {
+    "dhatu_id": "14.0037",
+    "aupadeshika": "svaji",
+    "stripped_root": "svañj",
+    "gana": "Bhvādi",
+    "pada": "Ātmanepada",
+    "it_status": "aniṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "pariṣvaṅge",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'svañj' expresses the action of holding someone closely in one's arms out of love or affection, meaning 'to embrace' or 'to hug'. In common usage, it frequently takes the prefix 'pari-', forming 'pariṣvajate'.",
+      "scenarios": [
+        {
+          "verb_form": "pariṣvajate",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa, Ekavacana, Ātmanepada",
+          "meaning": "Embraces / hugs",
+          "example_sanskrit": "mātā snehena svaputraṃ pariṣvajate.",
+          "example_english": "The mother affectionately embraces her son."
+        },
+        {
+          "verb_form": "pariṣvaktaḥ",
+          "grammar_trigger": "Kta-pratyaya (Past Passive Participle), Puṃliṅga, Prathamā Ekavacana",
+          "meaning": "Embraced / clasped",
+          "example_sanskrit": "pitrā snehena bālakaḥ pariṣvaktaḥ.",
+          "example_english": "The child was embraced with love by the father."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "svaji pariṣvaṅge | ātmanepadī aniṭ idit | svajate, pariṣvajate | ikāro numartho na tu lopa-nivṛttyarthaḥ | pariṣvañjakaḥ | svaṅktā | asvaṅkta | svāṅkṣīṣṭa | pariṣvaktaḥ iti kti sañjādīnāṃ viśeṣavidhinā nakāralopaḥ.",
+      "kshiratarangini": "svaji pariṣvaṅge | sañjanapariṣvañjanayoḥ sāhacaryāt svajate | upasargasthānnimittāt sasya ṣatvam | pariṣvajate | kta-pratyaye nakāra-lopaḥ pariṣvaktaḥ."
+    },
+    "meanings": {
+      "English": "to embrace, to hug, to clasp affectionately",
+      "Kannada": "āliṅgisu, appiko",
+      "Telugu": "kauṅgilintsunu, āliṅganamu cēyunu",
+      "Tamil": "kaṭṭittaḻuvutal, aṇaittal",
+      "Malayalam": "āliṅganaṁ ceyyuka, keṭṭippiṭikkuka",
+      "Hindi": "gale lagānā, āliṅgana karanā",
+      "Bengali": "jaṛiye dharā, āliṅgana karā",
+      "German": "umarmen, herzen, umschlingen",
+      "French": "embrasser, étreindre, enlacer",
+      "Russian": "obnimat', okhvatyvat'",
+      "Chinese": "yongbao, huanbao"
+    }
+  },
+  {
+    "dhatu_id": "14.0038",
+    "aupadeshika": "huḍa",
+    "stripped_root": "huḍ",
+    "gana": "Bhvādi (Class 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "saṃghāte (nimajjane)",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'huḍ' means to gather, heap up, or to sink/submerge. When people or objects are brought together into a single cluster or when an object is dipped under water, this root is used.",
+      "scenarios": [
+        {
+          "verb_form": "huḍati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa, Ekavacana",
+          "meaning": "gathers / collects together",
+          "example_sanskrit": "kṛṣakaḥ dhānyāni huḍati.",
+          "example_english": "The farmer collects the grains together."
+        },
+        {
+          "verb_form": "ahoḍīt",
+          "grammar_trigger": "Luṅ (Aorist Tense), Prathama Puruṣa, Ekavacana",
+          "meaning": "gathered or sank",
+          "example_sanskrit": "jala-carāḥ jale ahoḍan.",
+          "example_english": "The aquatic creatures submerged into the water."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "huḍa saṃghāte nimajjane ca | candradhātau saṃghātārthe nimajjanārthe cāsya pāṭhaḥ prasiddhaḥ | huḍati, hoḍayati, huḍitaḥ ityādayaḥ prayogāḥ sidhyanti |",
+      "kshiratarangini": "huḍa saṃghāte | 'huḍa nimajjane' iti keṣāñcit pāṭhāntaram | saṃghātaḥ samūhīkaraṇam, nimajjanaṃ jale 'ntardhānam |"
+    },
+    "meanings": {
+      "English": "to collect together, to heap, to sink or submerge",
+      "Kannada": "kūḍisu, saṅgrahisu, muḷugisu",
+      "Telugu": "kūrcu, samūhamugā cērcu, munugu",
+      "Tamil": "onṟutiraṭṭu, kuvikka, mūḻgu",
+      "Malayalam": "kūṭṭiccērkkuka, saṅgrahikkuka, muṅṅuka",
+      "Hindi": "ikaṭṭhā karnā, saṅgraha karnā, ḍūbnā yā ḍubonā",
+      "Bengali": "ekaṭra karā, saṃgraha karā, nimajjita karā",
+      "German": "sammeln, anhäufen, versenken",
+      "French": "amasser, rassembler, plonger",
+      "Russian": "sobirat', nakaplivat', pogruzhat'",
+      "Chinese": "jùjí, shōují, chénmò"
+    }
+  },
+  {
+    "dhatu_id": "14.0039",
+    "aupadeshika": "cuṭi~",
+    "stripped_root": "cuṇṭ",
+    "gana": "Bhvādi (Gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "alpatve",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'cuṇṭ' means to make something small, to curtail, or to diminish. It is used when an object is trimmed, lessened, or reduced in size or amount.",
+      "scenarios": [
+        {
+          "verb_form": "cuṇṭati",
+          "grammar_trigger": "laṭ-lakāra (present tense), prathama-puruṣa (3rd person), eka-vacana (singular)",
+          "meaning": "reduces, shortens, cuts small",
+          "example_sanskrit": "karmakāraḥ tantuṃ cuṇṭati.",
+          "example_english": "The worker trims the thread to shorten it."
+        },
+        {
+          "verb_form": "acuṇṭat",
+          "grammar_trigger": "laṅ-lakāra (imperfect past tense), prathama-puruṣa (3rd person), eka-vacana (singular)",
+          "meaning": "curtailed, diminished",
+          "example_sanskrit": "vardhakiḥ kāṣṭham acuṇṭat.",
+          "example_english": "The carpenter cut down the piece of wood to make it smaller."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "cuṭi alpatve. idittvān num. cuṇṭati. alpatvaṃ hrasvīkaraṇam alpa-parimāṇatāpādanaṃ vā.",
+      "kshiratarangini": "cuṭi alpatve. idit. cuṇṭati. alpaṃ karotītyarthaḥ."
+    },
+    "meanings": {
+      "English": "to make small, to diminish, to curtail, to reduce",
+      "Kannada": "chikkadāgisu, kaḍime māḍu, kattarisu",
+      "Telugu": "cinnamuceyu, taggincu, koṭṭu",
+      "Tamil": "ciṟidākku, kuraikka, tuṇḍi",
+      "Malayalam": "cerutākkuka, kuraṟkkuka, murikkuka",
+      "Hindi": "choṭā karnā, kam karnā, ghaṭānā",
+      "Bengali": "choṭo karā, komāno, kharba karā",
+      "German": "verkleinern, kürzen, vermindern",
+      "French": "rapetisser, diminuer, écourter",
+      "Russian": "umen'shat', sokrashchat', urezat'",
+      "Chinese": "suoxiao, jianxiao, suoduan"
+    }
+  },
+  {
+    "dhatu_id": "14.0040",
+    "aupadeshika": "dhukka",
+    "stripped_root": "dhukk",
+    "gana": "bhvādi-gaṇa",
+    "pada": "ātmanepada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "āveśe",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'dhukk' means to enter, penetrate, or possess. Think of it as walking inside a room, stepping deeply into a forest, or entering a state of full mental absorption.",
+      "scenarios": [
+        {
+          "verb_form": "dhukkate",
+          "grammar_trigger": "Laṭ (Present Indicative), Prathama-puruṣa, Eka-vacana",
+          "meaning": "He/She enters or penetrates",
+          "example_sanskrit": "yuvā gṛhaṁ dhukkate.",
+          "example_english": "The young man enters the house."
+        },
+        {
+          "verb_form": "adhukkata",
+          "grammar_trigger": "Laṅ (Imperfect Past), Prathama-puruṣa, Eka-vacana",
+          "meaning": "He/She entered or penetrated",
+          "example_sanskrit": "viraḥ durgaṁ dhairyeṇa adhukkata.",
+          "example_english": "The brave hero courageously entered the fort."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Non-Pāṇinian verbal entry 'dhukka āveśe' primarily cited in Cāndra-dhātupāṭha. While standard Pāṇinian recensions prioritize roots like 'viś' for entry, comparative lists acknowledge this root in the sense of 'praveśana' (entering/absorbing).",
+      "kshiratarangini": "Kṣīrasvāmin notes variations across non-Pāṇinian systems where 'dhukk' is recognized among verbal roots signifying internal motion, permeation, or possession (āveśa)."
+    },
+    "meanings": {
+      "English": "to enter, to penetrate, to absorb, to possess",
+      "Kannada": "praveśisu, oḷapuggu, āveśagoḷḷu",
+      "Telugu": "praveśiñcu, dūṟu, āveśiñcu",
+      "Tamil": "nuḻai, uṭpuku, āvi piṭikka",
+      "Malayalam": "pravēśikkuka, akattukayṟuka, āvēśikkuka",
+      "Hindi": "praveśa karnā, ghusanā, samānā",
+      "Bengali": "praveśa karā, ḍhukā, ābiṣṭa haoyā",
+      "German": "eintreten, eindringen, ergreifen",
+      "French": "entrer, pénétrer, posséder",
+      "Russian": "vkhodit', pronikat', ovladevat'",
+      "Chinese": "jīnrù, shènrù, fùtǐ"
+    }
+  },
+  {
+    "dhatu_id": "14.0041",
+    "aupadeshika": "lupi~",
+    "stripped_root": "lump",
+    "gana": "Tudādi",
+    "pada": "Parasmaipada",
+    "it_status": "Aniṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "chedane vilopane ca",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'lump' belongs to the Candra school of Sanskrit grammar and means to cut, break, rob, or omit. In everyday terms, it describes actions where something is severed, fragmented, or made to disappear.",
+      "scenarios": [
+        {
+          "verb_form": "lumpati",
+          "grammar_trigger": "laṭ-lakāra (present indicative), prathama-puruṣa, eka-vacana",
+          "meaning": "cuts, breaks, or omits",
+          "example_sanskrit": "bālakaḥ śuṣkāṁ śākhāṁ hastena lumpati.",
+          "example_english": "The boy breaks the dry branch with his hand."
+        },
+        {
+          "verb_form": "alumpat",
+          "grammar_trigger": "laṅ-lakāra (past imperfect), prathama-puruṣa, eka-vacana",
+          "meaning": "cut, broke, or stole",
+          "example_sanskrit": "cauraḥ nṛpasya dhanam alumpat.",
+          "example_english": "The thief plundered the wealth of the king."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "cāndradhātupāṭhe 'lupi~ chedane' iti idid-rūpeṇa paṭhyate. idittvāt num-āgame kṛte 'lumpati' iti rūpaṁ bhavati.",
+      "kshiratarangini": "kṣīrasvāmī tu tudādau 'lupḷ~ chedane' ity atra cāndramatam api udāharati yatra idittvena nityam num-āgamo vidhīyate."
+    },
+    "meanings": {
+      "English": "to cut, break, plunder, or elide",
+      "Kannada": "kandisu, muriyuvudu, lōpisu",
+      "Telugu": "tunchuta, virucuta, lōpimpa-jēyuta",
+      "Tamil": "veṭṭutal, muṟittal, nīkkutal",
+      "Malayalam": "muṟikkuka, thundikkuka, nīkkam ceyyuka",
+      "Hindi": "kāṭnā, toṛnā, vilupta karnā",
+      "Bengali": "kāṭā, bhāṅgā, lop karā",
+      "German": "schneiden, zerbrechen, auslassen",
+      "French": "couper, briser, omettre",
+      "Russian": "rezat', lomat', opuskat'",
+      "Chinese": "jianduan, zheduan, shanluo"
+    }
+  },
+  {
+    "dhatu_id": "14.0042",
+    "aupadeshika": "vraśa",
+    "stripped_root": "vraś",
+    "gana": "Bhvādigaṇa",
+    "pada": "Parasmaipada",
+    "it_status": "Aniṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "chedane bhedane ca",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'vraś' means to cut, sever, or split something into parts. Think of it as using a sharp tool to cut wood or branch.",
+      "scenarios": [
+        {
+          "verb_form": "vraśati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa, Ekavacana",
+          "meaning": "Cuts or severs",
+          "example_sanskrit": "kāṣṭhikaḥ vṛkṣaśākhāṁ vraśati.",
+          "example_english": "The woodcutter cuts the branch of the tree."
+        },
+        {
+          "verb_form": "avraśat",
+          "grammar_trigger": "Laṅ (Past Tense), Prathama Puruṣa, Ekavacana",
+          "meaning": "Cut or severed",
+          "example_sanskrit": "naraḥ rajjum avraśat.",
+          "example_english": "The man cut the rope."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "vraśa chedane - Cāndre dhātupāṭhe chedanārthe paṭhitaḥ, sakarmakaḥ, bhvādigaṇīyaḥ.",
+      "kshiratarangini": "vraśa chedanakriyāyām - vraśc-dhātoḥ tulyārthaḥ cāndradhātuvṛttāv api draṣṭavyaḥ."
+    },
+    "meanings": {
+      "English": "to cut, to sever, to split",
+      "Kannada": "kattarisu, khandiṣu",
+      "Telugu": "kattirincu, chellacenduru cheyu",
+      "Tamil": "veṭṭu, tuṇṭi",
+      "Malayalam": "murikkuka, chethuka",
+      "Hindi": "kāṭanā, chhedan karanā",
+      "Bengali": "kāṭā, chedan karā",
+      "German": "schneiden, spalten, trennen",
+      "French": "couper, fendre, trancher",
+      "Russian": "rezat', rubit', rassekat'",
+      "Chinese": "kanduan, qiege, fenkai"
+    }
+  },
+  {
+    "dhatu_id": "14.0043",
+    "aupadeshika": "skala",
+    "stripped_root": "skal",
+    "gana": "bhvadi",
+    "pada": "parasmaipada",
+    "it_status": "set",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "skhalane",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'skal' is used to describe the action of stumbling, faltering, or slipping while walking or acting.",
+      "scenarios": [
+        {
+          "verb_form": "skalati",
+          "grammar_trigger": "lat-lakara (present tense), prathama-purusha, eka-vacana",
+          "meaning": "he/she/it stumbles or slips",
+          "example_sanskrit": "marge padah skalati.",
+          "example_english": "The foot slips on the road."
+        },
+        {
+          "verb_form": "askalat",
+          "grammar_trigger": "lan-lakara (imperfect past), prathama-purusha, eka-vacana",
+          "meaning": "he/she/it stumbled",
+          "example_sanskrit": "shishuh dhavan askalat.",
+          "example_english": "The child stumbled while running."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Candradhatu-pathe 'skala skhalane' iti dirgha-talavyadi-patha-bhedo 'pi vartate, ayam akarmakah parasmaipadi.",
+      "kshiratarangini": "skala skhalana-calanayo iti candrah. khakara-rahita-rupam aupadeshikam anya-sampradayeshu pragrihyate."
+    },
+    "meanings": {
+      "English": "to stumble, to slip, to falter, to deviate",
+      "Kannada": "jaruvudu, adedatavaguvudu, talatappuvudu",
+      "Telugu": "jaruta, tadabaduta, tottiluta",
+      "Tamil": "idari vizhuthal, sarukuthal, thadumatruthal",
+      "Malayalam": "idaruka, thettuka, veezhuka",
+      "Hindi": "ladkhadana, thokar khana, phisalna",
+      "Bengali": "thokar khaoya, pichle jaoya, khonchot khaoya",
+      "German": "stolpern, straucheln, ausgleiten",
+      "French": "trebucher, glisser, chanceler",
+      "Russian": "spotykat'sya, poskal'zyvat'sya, kolebat'sya",
+      "Chinese": "bandao, huadao, dongyao"
+    }
+  },
+  {
+    "dhatu_id": "14.0044",
+    "aupadeshika": "khapi",
+    "stripped_root": "khamp",
+    "gana": "Bhvadi (First Class)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Intransitive (akarmaka)",
+    "canonical_dhatvartha": "kampane (bhayat)",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'khamp' is used when someone or something shakes, quivers, or trembles intensely due to fear or terror. In simple sentences, it shows a living being shivering with fright.",
+      "scenarios": [
+        {
+          "verb_form": "khampati",
+          "grammar_trigger": "Lat (Present Tense, 3rd Person Singular, Parasmaipada)",
+          "meaning": "He or she trembles (out of fear)",
+          "example_sanskrit": "Simham drstva sisu-mrgah bhayena khampati.",
+          "example_english": "Seeing the lion, the young deer trembles with fear."
+        },
+        {
+          "verb_form": "akhampat",
+          "grammar_trigger": "Lan (Past Tense, 3rd Person Singular, Parasmaipada)",
+          "meaning": "He or she trembled (out of fear)",
+          "example_sanskrit": "Tam tamomayam margam vilokya sa akhampat.",
+          "example_english": "Looking at that pitch-dark path, he trembled."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Not specifically listed in the standard Paninian Madhaviya-dhatuvritti under this exact aupadeshika shape; recognized in the Candradhatupatha as 'khapi gati-kampanayoh / kampane bhayat' where the id-agama and nasalization (num) yield the present stem 'khampati'.",
+      "kshiratarangini": "Kshirasvamin notes parallel variant forms under kamp-varga roots; Candragomin classifies 'khapi' independently under the first gana to express involuntary bodily movement born from sudden fear."
+    },
+    "meanings": {
+      "English": "To tremble with fear, to shiver, to quake",
+      "Kannada": "Bhayadinda nadugu, kampisu",
+      "Telugu": "Bhayanto vanuku, kampincu",
+      "Tamil": "Payattal nadungu, thudithu-poradu",
+      "Malayalam": "Bhayattal viraykkuka, kampanam cheyyuka",
+      "Hindi": "Bhay se kanpana, thartharana",
+      "Bengali": "Bhaye kanpa, tharthar kora",
+      "German": "Vor Angst zittern, beben",
+      "French": "Trembler de peur, frissonner",
+      "Russian": "Drozhat ot strakha, trepetat",
+      "Chinese": "Yin kongju er zhandou, fadou"
+    }
+  },
+  {
+    "dhatu_id": "14.0045",
+    "aupadeshika": "ghuṭi~",
+    "stripped_root": "ghuṇṭ",
+    "gana": "Curādi (Curādigaṇa)",
+    "pada": "Ubhayapada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "āvaraṇe guptau ca",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'ghuṇṭ' means to cover, wrap up, conceal, or protect something from being seen. Imagine wrapping a precious gift with decorative paper or covering a box with a cloth to hide its contents—this action of covering or enclosing is expressed by 'ghuṇṭayati' or 'ghuṇṭayate'.",
+      "scenarios": [
+        {
+          "verb_form": "ghuṇṭayati",
+          "grammar_trigger": "Laṭ-lakāra (Present Tense), Prathama-puruṣa (Third Person), Ekavacana (Singular), Parasmaipada",
+          "meaning": "He/She covers or conceals",
+          "example_sanskrit": "Bālakaḥ vastreṇa mukhaṃ ghuṇṭayati.",
+          "example_english": "The boy covers his face with a cloth."
+        },
+        {
+          "verb_form": "aghuṇṭayat",
+          "grammar_trigger": "Laṅ-lakāra (Imperfect Past Tense), Prathama-puruṣa (Third Person), Ekavacana (Singular), Parasmaipada",
+          "meaning": "He/She covered or hid",
+          "example_sanskrit": "Nṛpaḥ gupta-dhanasya peṭikām aghuṇṭayat.",
+          "example_english": "The king covered the chest of secret wealth."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "ghuṭi āvaraṇe. iditvad num. ghuṇṭayati, ghuṇṭayate. ghuṇṭayati vastreṇa gupta-vastu.",
+      "kshiratarangini": "ghuṭi āvaraṇe 'pi pathyate. iditvena num-āgame ghuṇṭeti rūpam bhavati."
+    },
+    "meanings": {
+      "English": "To cover, enclose, conceal, wrap, protect by hiding",
+      "Kannada": "Muchuvudu, mare māduthade, hoddike hākuvudu",
+      "Telugu": "Kapputa, dāyuta, marugu parucuta",
+      "Tamil": "Mūṭutal, maṟaittal, pōrttutal",
+      "Malayalam": "Mooduka, maraikkuka, pothiyuka",
+      "Hindi": "Dhaknā, chipānā, āvaraṇa karanā, lapetanā",
+      "Bengali": "Dhākā deoyā, gopana karā, ābṛta karā",
+      "German": "Bedecken, verhüllen, verbergen, einwickeln",
+      "French": "Couvrir, voiler, cacher, envelopper",
+      "Russian": "Pokryvat', skryvat', oborachivat', pryatat'",
+      "Chinese": "Zhegai, yincang, baoguo"
+    }
+  },
+  {
+    "dhatu_id": "14.0046",
+    "aupadeshika": "ava",
+    "stripped_root": "av",
+    "gana": "Bhvādigaṇa (Gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "pālanādi-viṃśatyartheṣu",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'av' primarily means to protect, foster, or look after someone. It is also famous across Sanskrit grammars for expressing twenty distinct semantic nuances, including satisfying, moving, knowing, and helping.",
+      "scenarios": [
+        {
+          "verb_form": "avati",
+          "grammar_trigger": "laṭ-lakāra (Present Indicative), prathama-puruṣa (Third Person), eka-vacana (Singular)",
+          "meaning": "protects / fosters",
+          "example_sanskrit": "dharmiṣṭhaḥ rājā nityaṃ prajām avati.",
+          "example_english": "The righteous king always protects the citizens."
+        },
+        {
+          "verb_form": "avatu",
+          "grammar_trigger": "loṭ-lakāra (Imperative Mood), prathama-puruṣa (Third Person), eka-vacana (Singular)",
+          "meaning": "may he protect",
+          "example_sanskrit": "om saha nāvavatu.",
+          "example_english": "May the Supreme protect both of us together."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "ava rakṣaṇa-gati-kānti-prīti-tṛpty-avagama-praveśa-śravaṇa-svāmyartha-yācana-kriyecchā-dīpty-avāpty-āliṅgana-hiṃsādāna-bhāva-vṛddhiṣu. avati, āvīt, avitā.",
+      "kshiratarangini": "ava rakṣaṇādiṣu viṃśatyartheṣu. rakṣaṇaṃ pālanam. avatīti rājā prajām."
+    },
+    "meanings": {
+      "English": "to protect, guard, foster, satisfy, desire, move, please",
+      "Kannada": "rakṣisu, kāpāḍu, tṛptigoḷisu",
+      "Telugu": "rakṣiñcu, kāpāḍu, tṛptiparacu",
+      "Tamil": "kāppāṟṟu, pātukā, tiruptippaṭuttu",
+      "Malayalam": "rakṣikkuka, paripālikkuka, tṛptiyākkuka",
+      "Hindi": "rakṣā karanā, pālan-poṣaṇ karanā, santuṣṭa karanā",
+      "Bengali": "rakṣā karā, pālan karā, tṛpta karā",
+      "German": "beschützen, bewahren, befriedigen, pflegen",
+      "French": "protéger, garder, satisfaire, favoriser",
+      "Russian": "zashchishchat', berech', udovletvoryat'",
+      "Chinese": "bǎohù, hùyòu, mǎnzú, yǎngyù"
+    }
+  },
+  {
+    "dhatu_id": "14.0047",
+    "aupadeshika": "ila",
+    "stripped_root": "il",
+    "gana": "Bhvādi",
+    "pada": "Parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "preraṇe",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'il' describes the action of urging, sending, pushing, or impelling someone or something forward.",
+      "scenarios": [
+        {
+          "verb_form": "ilati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa, Ekavacana",
+          "meaning": "sends / pushes / impels",
+          "example_sanskrit": "vāyuḥ meghān dūram ilati.",
+          "example_english": "The wind pushes the clouds far away."
+        },
+        {
+          "verb_form": "ailat",
+          "grammar_trigger": "Laṅ (Past Tense), Prathama Puruṣa, Ekavacana",
+          "meaning": "sent / pushed",
+          "example_sanskrit": "mātā bālakaṃ vidyālayaṃ prati ailat.",
+          "example_english": "The mother sent the boy towards the school."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "ila preraṇe kṣepe ca. Kavikalpadrumānusāreṇa bhvādau parasmāipadī seṭ ca pathyate.",
+      "kshiratarangini": "ila preraṇārthe vartate. ilati, ailat, eliṣyati iti rūpāṇi bhavanti."
+    },
+    "meanings": {
+      "English": "To send, to impel, to urge, to push forward",
+      "Kannada": "Prērisu, kḷuhisu, nūku",
+      "Telugu": "Prērēpincu, pampu, trōyu",
+      "Tamil": "Ēvu, aṉuppu, taḷḷu",
+      "Malayalam": "Prērippikkuka, ayakkuka, taḷḷuka",
+      "Hindi": "Prērit karnā, bhējnā, dhakēlnā",
+      "Bengali": "Prēraṇ karā, pāṭhānō, ṭhēlā",
+      "German": "Antreiben, senden, vorwärtstreiben",
+      "French": "Pousser, inciter, envoyer",
+      "Russian": "Pobuzhdat', posylat', tolkat' vpered",
+      "Chinese": "Qūdòng, fāsòng, tuīdòng"
+    }
+  },
+  {
+    "dhatu_id": "14.0048",
+    "aupadeshika": "kela",
+    "stripped_root": "kel",
+    "gana": "bhvādi (Class 1)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka (intransitive)",
+    "canonical_dhatvartha": "krīḍāyām (vihāre)",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kel' means to play, frolic, or amuse oneself. It works just like the familiar root 'krīḍ' or 'khel', describing engaging in games, playful movement, or lighthearted recreation.",
+      "scenarios": [
+        {
+          "verb_form": "kelati",
+          "grammar_trigger": "Laṭ (Present Tense, Prathama Puruṣa, Ekavacana)",
+          "meaning": "plays / sports",
+          "example_sanskrit": "bālakaḥ udyāne mitraiḥ saha kelati.",
+          "example_english": "The boy plays with his friends in the garden."
+        },
+        {
+          "verb_form": "akelat",
+          "grammar_trigger": "Laṅ (Past Tense, Prathama Puruṣa, Ekavacana)",
+          "meaning": "played / frolicked",
+          "example_sanskrit": "hariṇaḥ vane svacchandatayā akelat.",
+          "example_english": "The deer frolicked freely in the forest."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'kel' is catalogued in non-Paninian lists such as Vopadeva's Kavikalpadruma under 'kela krīḍāyām' as an un-aspirated counterpart to 'khela' or 'khelṛ', conjugated as kelati, kelitaḥ, etc.",
+      "kshiratarangini": "Kṣīrasvāmin notes the phonetic overlap among the roots 'kel', 'khel', and 'cel' under the umbrella of playful movement ('calana-krīḍanārtheṣu')."
+    },
+    "meanings": {
+      "English": "to play, sport, frolic, amuse oneself",
+      "Kannada": "āḍu, krīḍisu, viharisu",
+      "Telugu": "āḍukonu, krīḍiñcu, vihariñcu",
+      "Tamil": "viḷaiyāṭu, uṟcākamāka iru",
+      "Malayalam": "kaḷikkuka, krīḍikkuka, viharikkuka",
+      "Hindi": "khelanā, krīḍā karanā, vihāra karanā",
+      "Bengali": "khelā karā, krīṛā karā, ānanda karā",
+      "German": "spielen, sich vergnügen, herumtollen",
+      "French": "jouer, s'amuser, folâtrer",
+      "Russian": "igrat', razvlekat'sya, rezvit'sya",
+      "Chinese": "yóuwán, xìshuǎ, wánshuǎ"
+    }
+  },
+  {
+    "dhatu_id": "14.0049",
+    "aupadeshika": "cilla",
+    "stripped_root": "cill",
+    "gana": "bhvādi (parasmaipada)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "śaithilye",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'cill' means to become loose, weak, or relaxed. Imagine a tight knot that slowly loosens up over time or a string that loses its tension; this action of slackening or loosening is expressed by the root 'cill'.",
+      "scenarios": [
+        {
+          "verb_form": "cillati",
+          "grammar_trigger": "lat (present tense, third person singular)",
+          "meaning": "becomes loose / slacks",
+          "example_sanskrit": "bandhanam kālena cillati.",
+          "example_english": "The knot becomes loose over time."
+        },
+        {
+          "verb_form": "acillīt",
+          "grammar_trigger": "luṅ (aorist tense, third person singular)",
+          "meaning": "became loose / loosened",
+          "example_sanskrit": "tantur anilena acillīt.",
+          "example_english": "The thread became slack due to the wind."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "cilla śaithilye. cillati. acillīt. cillitā. śithilībhāve 'yam vartate iti kavikalpadrumānusāreṇa jñeyam.",
+      "kshiratarangini": "cilla śaithilye akarmakaḥ seṭ parasmaipadī. śithilo bhavati ity arthaḥ."
+    },
+    "meanings": {
+      "English": "to become loose, to slacken, to relax",
+      "Kannada": "sithilavāgu, sidilavāgu",
+      "Telugu": "sidhilamagunu, vadalagunu",
+      "Tamil": "thalara, thalarvadaital",
+      "Malayalam": "ayavuka, thalaruka",
+      "Hindi": "dhīlā honā, śithila honā",
+      "Bengali": "dhile howā, śithila howā",
+      "German": "locker werden, erschlaffen",
+      "French": "se détendre, se relâcher, devenir lâche",
+      "Russian": "oslabevat', stanovitsya rykhlym",
+      "Chinese": "songchi, bian song"
+    }
+  },
+  {
+    "dhatu_id": "14.0050",
+    "aupadeshika": "jhāṭa",
+    "stripped_root": "jhāṭ",
+    "gana": "Bhvādi (Class 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "parimārjane",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'jhāṭ' means to cleanse, sweep, or wipe clean. It is used when an object or surface is swept, wiped, or cleared of dust and impurities.",
+      "scenarios": [
+        {
+          "verb_form": "jhāṭati",
+          "grammar_trigger": "Present Tense (Laṭ), 3rd Person Singular, Active Voice",
+          "meaning": "Cleanses or sweeps",
+          "example_sanskrit": "sevakaḥ gṛhāṅgaṇaṁ jhāṭati.",
+          "example_english": "The attendant sweeps the courtyard of the house."
+        },
+        {
+          "verb_form": "ajhāṭīt",
+          "grammar_trigger": "Aorist Tense (Luṅ), 3rd Person Singular, Active Voice",
+          "meaning": "Swept or wiped clean",
+          "example_sanskrit": "bālakaḥ paṭalaṁ samyak ajhāṭīt.",
+          "example_english": "The boy swept the floor thoroughly."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Noted in comparative listings of post-Paninian lexicography as a secondary root denoting 'parimārjana' (cleansing/sweeping), preserving regional onomatopoeic usage systematized by Vopadeva.",
+      "kshiratarangini": "Identified among sporadic cleaning-action roots (saṃśodhana-parimārjana) popularized in late classical and eastern vyākaraṇa traditions."
+    },
+    "meanings": {
+      "English": "to clean, to wipe, to sweep away",
+      "Kannada": "svaccha māḍu, baḍiyu, jhāḍisu",
+      "Telugu": "śubhraṁ cēyu, tuḍucu, cīpurutō tūrcu",
+      "Tamil": "tūymai cey, perukku, tuḍai",
+      "Malayalam": "vrittiyākkuka, aṭiccuvārkuka, tuṭakkuka",
+      "Hindi": "jhāṛanā, sāpha karanā, svaccha karanā",
+      "Bengali": "jhāṛu dēoyā, poriṣkāra korā",
+      "German": "abwischen, fegen, reinigen",
+      "French": "nettoyer, balayer, essuyer",
+      "Russian": "podmetat, ochishchat, smetat",
+      "Chinese": "dasaoweisheng, qingsao, caoshi"
+    }
+  },
+  {
+    "dhatu_id": "14.0051",
+    "aupadeshika": "dasi~",
+    "stripped_root": "daṃś",
+    "gana": "Bhvādi (First Class)",
+    "pada": "Parasmaipada",
+    "it_status": "Aniṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "daṃśane",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'daṃś' means 'to bite' or 'to sting'. It describes the action of teeth or a venomous creature clamping onto someone or something.",
+      "scenarios": [
+        {
+          "verb_form": "daśati",
+          "grammar_trigger": "Laṭ (Present Indicative, Prathama Puruṣa, Ekavacana)",
+          "meaning": "bites / stings",
+          "example_sanskrit": "Kṛṣṇasarpaḥ mārge gacchantaṃ narēna dṛṣṭaḥ san tam daśati.",
+          "example_english": "The black cobra, seen by the man walking on the path, bites him."
+        },
+        {
+          "verb_form": "daṣṭaḥ",
+          "grammar_trigger": "Kta (Past Passive Participle, Puṃliṅga, Prathamā Ekavacana)",
+          "meaning": "bitten / stung",
+          "example_sanskrit": "Vṛścikena daṣṭaḥ bālakaḥ tīvravyayā krandati.",
+          "example_english": "The boy, stung by a scorpion, cries due to severe pain."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "dasi~ daṃśane. iditvat nityam num. śasi-vaśi-ghasīnām ca ityetāvatā anupadhāyā api nakāralopaḥ. daśati, daṅkṣyati, adaṅkṣīt, daṣṭaḥ.",
+      "kshiratarangini": "dasi~ daṃśane. kavikalpadrumādi-vopadevamate dasīti paṭhitaḥ. daśati iti rūpam bhavati. daṣṭam, daṣṭvā."
+    },
+    "meanings": {
+      "English": "to bite, to sting, to seize with teeth",
+      "Kannada": "kaccuvudu, kuṭhukuvudu",
+      "Telugu": "kāṭuvēyu, karacu",
+      "Tamil": "kaṭittal, koṭṭutal",
+      "Malayalam": "kaṭikkuka, kottuka",
+      "Hindi": "ḍasnā, kāṭnā",
+      "Bengali": "daṃśana karā, kāmoṛāno",
+      "German": "beißen, stechen",
+      "French": "mordre, piquer",
+      "Russian": "kusat', zhalit'",
+      "Chinese": "yǎo, zhē"
+    }
+  },
+  {
+    "dhatu_id": "14.0052",
+    "aupadeshika": "phela",
+    "stripped_root": "phel",
+    "gana": "bhvādi (first gana)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "gatau (kṣepe)",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'phel' means to throw, toss, or move swiftly. You can use it in everyday speech whenever someone throws a ball or casts an object away.",
+      "scenarios": [
+        {
+          "verb_form": "phelati",
+          "grammar_trigger": "lat (present indicative), kartari prayoga, prathama puruṣa, ekavacana",
+          "meaning": "He/she/it throws or moves",
+          "example_sanskrit": "bālakaḥ krīḍanāya kandukaṃ phelati.",
+          "example_english": "The boy throws the ball to play."
+        },
+        {
+          "verb_form": "aphelat",
+          "grammar_trigger": "laṅ (imperfect past), kartari prayoga, prathama puruṣa, ekavacana",
+          "meaning": "He/she/it threw",
+          "example_sanskrit": "saḥ dūre aśmānaṃ aphelat.",
+          "example_english": "He threw the stone far away."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "phela gatau kṣepe ca. vopadevīye kavikalpadrumakāreṇa 'phela gatau kṣepe' iti paṭhitam. phelati, phelāñcakāra, aphelīt.",
+      "kshiratarangini": "phela gatau kṣepe ca. asya prayogaḥ kavikalpadrumādiṣu gatikṣepārtheṣu dṛśyate."
+    },
+    "meanings": {
+      "English": "to throw, to cast, to propel, to move",
+      "Kannada": "eseyuvudu, calisuvudu, bīsuvudu",
+      "Telugu": "visuruta, kadaluta, veyuta",
+      "Tamil": "erital, vīcutal, nagartal",
+      "Malayalam": "eriyuka, calikkuka, nikṣēpikkuka",
+      "Hindi": "pheṅkanā, calanā, kṣepaṇa karanā",
+      "Bengali": "phelā, nikṣep karā, calā",
+      "German": "werfen, schleudern, sich bewegen",
+      "French": "jeter, lancer, projeter, bouger",
+      "Russian": "brosat', kidat', peredvigat'sya",
+      "Chinese": "tóudì, rēng, yídòng"
+    }
+  },
+  {
+    "dhatu_id": "14.0053",
+    "aupadeshika": "bhugi~",
+    "stripped_root": "bhuṅg",
+    "gana": "bhvādi",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "kuṭilatve vakragatau",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'bhuṅg' (bhugi) means to be crooked, to bend, or to move in a curved or zig-zag path. In Vopadeva's Kavikalpadruma system, the marker 'i' indicates the insertion of a nasal sound (num-āgama), forming present tense forms like 'bhuṅgati'.",
+      "scenarios": [
+        {
+          "verb_form": "bhuṅgati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "moves crookedly / bends",
+          "example_sanskrit": "mārge sarpaḥ bhuṅgati.",
+          "example_english": "The snake moves in a zig-zag path on the road."
+        },
+        {
+          "verb_form": "abhuṅgīt",
+          "grammar_trigger": "Luṅ (Aorist Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "bent / went crookedly",
+          "example_sanskrit": "nadī vanamadhye abhuṅgīt.",
+          "example_english": "The river curved through the middle of the forest."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Non-standard variant preserved primarily in eastern lexical schools (Vopadeva). Parallel to kuṭilagati roots like bhuja-bhujyate or vṛj-varjate, treated here as an idit root (bhugi) giving penultimate nasal bhuṅgati.",
+      "kshiratarangini": "Identified as a secondary idit root signifying kuṭilatva (crookedness or curvature), where the anubandha 'i' commands the penultimate nasal augment yielding bhuṅgati."
+    },
+    "meanings": {
+      "English": "to be crooked, to bend, to curve, to move zig-zag",
+      "Kannada": "vaṅkriyāgiru, tirugumuṟugāgi calisu, baḷuku",
+      "Telugu": "vaṅkāragā uṇḍu, vakragatilo naḍucu, vaṅgu",
+      "Tamil": "kōṇalāka iru, vaḷainthu cel, vaḷai",
+      "Malayalam": "vaḷaññirikkkuka, vaḷaññu sañcarikkuka, kōṇuka",
+      "Hindi": "ṭeḍhā honā, kuṭil gati karnā, muṛnā",
+      "Bengali": "bān̐kā haoẏā, kuṭil gati karā, bām̐kā",
+      "German": "sich krümmen, krumm sein, im Zickzack bewegen",
+      "French": "être courbé, serpenter, se courber",
+      "Russian": "izgibatsya, byt' krivym, dvigat'sya zigzagoobrazno",
+      "Chinese": "wānqū, wānwānyán'yán"
+    }
+  },
+  {
+    "dhatu_id": "14.0055",
+    "aupadeshika": "laji~",
+    "stripped_root": "lañj",
+    "gana": "Bhvādi",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "bhartsane",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'lañj' means to scold, reproach, or reprimand someone. It is used when an elder, teacher, or authority figures blame or admonish someone for an improper action.",
+      "scenarios": [
+        {
+          "verb_form": "lañjati",
+          "grammar_trigger": "Laṭ-lakāra (Present Indicative, Prathama Puruṣa, Ekavacana)",
+          "meaning": "scolds or reproaches",
+          "example_sanskrit": "guruḥ pramattaṃ śiṣyaṃ lañjati.",
+          "example_english": "The teacher scolds the careless student."
+        },
+        {
+          "verb_form": "alañjat",
+          "grammar_trigger": "Laṅ-lakāra (Past Imperfect, Prathama Puruṣa, Ekavacana)",
+          "meaning": "scolded or reproached",
+          "example_sanskrit": "pitā asatyavādinaṃ putraṃ gṛhe alañjat.",
+          "example_english": "The father scolded the untruthful son at home."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "laji bhartsane. iditvān num. lañjati, lalañja. Vopadevīye Kavikalpadrumagranthe 'laji bhartsane' iti paṭhyate.",
+      "kshiratarangini": "laji bhartsane tarjane ca. idit kṛtanumko lañjati iti rūpaṃ sādhyate."
+    },
+    "meanings": {
+      "English": "to scold, reproach, censure, or reprimand",
+      "Kannada": "baidāḍu, garhisu, dūṣisu",
+      "Telugu": "mandalincu, nindincu, kopaḍu",
+      "Tamil": "kaṭinthukol, thittu, nindikkai sey",
+      "Malayalam": "shāsikkuka, vazhakkuparāyuka, nindikkuka",
+      "Hindi": "ḍā̃ṭanā, phaṭakāranā, tiraskāra karanā",
+      "Bengali": "tiraskāra karā, bokā, nindā karā",
+      "German": "tadeln, schelten, rügen",
+      "French": "réprimander, gronder, blâmer",
+      "Russian": "branit', rugat', delat' vygovor",
+      "Chinese": "zé bèi, chì zé, xùn chì"
+    }
+  },
+  {
+    "dhatu_id": "14.0056",
+    "aupadeshika": "valga",
+    "stripped_root": "valg",
+    "gana": "bhvādi (Vopadeva kavikalpadruma class 1)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "gatau (ullāse plavane)",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'valg' means to leap, gallop, or jump around energetically, just like a joyful deer or a galloping horse in a field.",
+      "scenarios": [
+        {
+          "verb_form": "valgati",
+          "grammar_trigger": "Laṭ (Present Tense, Prathama Puruṣa, Ekavacana)",
+          "meaning": "gallops or leaps",
+          "example_sanskrit": "aśvaḥ vegena kṣetre valgati.",
+          "example_english": "The horse gallops swiftly in the field."
+        },
+        {
+          "verb_form": "avalgan",
+          "grammar_trigger": "Laṅ (Past Tense, Prathama Puruṣa, Bahuvacana)",
+          "meaning": "leaped or pranced",
+          "example_sanskrit": "hariṇāḥ pramodena vane avalgan.",
+          "example_english": "The deer leaped joyfully in the forest."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "valga gatikutsanayoḥ. valgatīti gatau plavane ca prayujyate.",
+      "kshiratarangini": "valga gatau. kutsitāyāṃ gatau ullāse vā valgatirbhavati."
+    },
+    "meanings": {
+      "English": "To gallop, to leap, to jump, to spring exuberantly",
+      "Kannada": "Jigiyuvudu, hāruvudu, kudurēya dāpukālu hāki oḍuvudu",
+      "Telugu": "Dūku, langhincu, parigettu",
+      "Tamil": "Kuthithal, thavuthal, thulluthal",
+      "Malayalam": "Chāduka, thulluka, pānju naḍakkuka",
+      "Hindi": "Kūdanā, chalāṅga lagānā, kudakana",
+      "Bengali": "Lāphāno, kholāse dāpaṭāno, ghoṛāra mata chuṭe calā",
+      "German": "Galoppieren, springen, hüpfen",
+      "French": "Galoper, bondir, sautiller",
+      "Russian": "Skakat', prygat', nestis' galopom",
+      "Chinese": "Benchi, tiaoyue, benpao"
+    }
+  },
+  {
+    "dhatu_id": "14.0058",
+    "aupadeshika": "khurja",
+    "stripped_root": "khurj",
+    "gana": "Curādi",
+    "pada": "Parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "pūjāyām (stutau)",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'khurj' means to worship, revere, or praise someone with deep respect, just like honoring a teacher or offering prayers to the divine.",
+      "scenarios": [
+        {
+          "verb_form": "khurjayati",
+          "grammar_trigger": "Curādi laṭ-lakāra (Present Tense, 3rd Person Singular)",
+          "meaning": "worships or honors",
+          "example_sanskrit": "śiṣyaḥ sadā gurum khurjayati.",
+          "example_english": "The student always honors the teacher."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "khurja pūjāyām - as cited in lexical collations and tradition texts such as Vopadeva's Kavikalpadruma, signifying the act of veneration and laudatory worship.",
+      "kshiratarangini": "khurja iti pūjāstutyartheṣu - recognized in supplementary non-Paninian grammatical recensions denoting worship and respectful adoration."
+    },
+    "meanings": {
+      "English": "to worship, honor, revere, praise",
+      "Kannada": "pūjisu, gauravisu, stutisu",
+      "Telugu": "pūjincu, gouravincu, stutincu",
+      "Tamil": "vaṇaṅku, pōṟṟu, valipaṭu",
+      "Malayalam": "pūjikkuka, ādarikkuka, stutikkuka",
+      "Hindi": "pūjā karanā, sammāna karanā, stuti karanā",
+      "Bengali": "pūjā karā, sammāna karā, stuti karā",
+      "German": "verehren, anbeten, huldigen",
+      "French": "vénérer, honorer, adorer",
+      "Russian": "pochitat, poklonyatsya, voskhvalyat",
+      "Chinese": "chóngbài, jìngbài, zànyáng"
+    }
+  },
+  {
+    "dhatu_id": "14.0059",
+    "aupadeshika": "guji",
+    "stripped_root": "guñj",
+    "gana": "Bhvādi (Class 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Intransitive (akarmaka)",
+    "canonical_dhatvartha": "avyakta-śabde (dhvanau)",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'guñj' means to buzz, hum, or make a low indistinct murmuring sound, just like honeybees buzzing over blooming flowers in a garden.",
+      "scenarios": [
+        {
+          "verb_form": "guñjati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa (3rd Person), Ekavacana (Singular)",
+          "meaning": "Buzzes / Hums",
+          "example_sanskrit": "Bhramaraḥ kusumeṣu madhuram guñjati.",
+          "example_english": "The bumblebee sweetly hums among the blossoms."
+        },
+        {
+          "verb_form": "aguñjan",
+          "grammar_trigger": "Laṅ (Past Tense), Prathama Puruṣa (3rd Person), Bahuvacana (Plural)",
+          "meaning": "Buzzed / Hummed",
+          "example_sanskrit": "Vane sarve bhṛṅgāḥ samam aguñjan.",
+          "example_english": "All the bees buzzed together in the forest."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "In standard traditional dhātupāṭha listings, guja/guji is read under avyakte śabde. Being idit (possessing an 'i' marker in the aupadeśika code), a penult nasal (num-āgama) is inserted, producing the stem guñj- (guñjati, guñjataḥ, guñjanti).",
+      "kshiratarangini": "Kṣīrasvāmin notes guja avyakte śabde as producing inarticulate sonorous reverberations (dhvani-viśeṣa), particularly descriptive of the sweet low humming of bees and resonance of bowstrings."
+    },
+    "meanings": {
+      "English": "To hum, buzz, murmur indistinctly",
+      "Kannada": "Jhumkāra māḍu, gunugu, jhum eṅdu śabda māḍu",
+      "Telugu": "Jhuṅkāramu cēyu, jhuṅkarincu, mūlugu",
+      "Tamil": "Rīṅkāramiṭu, vaṇṭoli eḻuppu, muḻaṅku",
+      "Malayalam": "Mūḷuka, jhumkārikkuka, reeṅkāramuṇṭākkuka",
+      "Hindi": "Guñjanā, gūñjanā, bhinbhinānā",
+      "Bengali": "Guñjana karā, gūñje oṭhā, bhuṅbhuṅ karā",
+      "German": "Summen, schwirren, dumpf tönen",
+      "French": "Bourdonner, vrombir, murmurer",
+      "Russian": "Zhuzhzhat, gudeť, zvenet",
+      "Chinese": "Wēngwēng xiǎng, fāchū dīmíng"
+    }
+  },
+  {
+    "dhatu_id": "14.0060",
+    "aupadeshika": "jharjha",
+    "stripped_root": "jharjh",
+    "gana": "bhvādi (class 1)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "paribhāṣaṇe",
+    "tradition_tag": "Vopadeva",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'jharjh' means to scold, rebuke, or speak harshly to someone in order to warn or reprove them.",
+      "scenarios": [
+        {
+          "verb_form": "jharjhati",
+          "grammar_trigger": "laṭ-lakāra (Present Indicative, 3rd Person Singular)",
+          "meaning": "He/She scolds or reproves",
+          "example_sanskrit": "mātā duṣṭaṃ bālakaṃ jharjhati.",
+          "example_english": "The mother scolds the mischievous boy."
+        },
+        {
+          "verb_form": "ajharjhīt",
+          "grammar_trigger": "luṅ-lakāra (Aorist / Simple Past, 3rd Person Singular)",
+          "meaning": "He/She scolded or threatened",
+          "example_sanskrit": "adhikārī bhrāntaṃ sevakaṃ daṇḍanāya ajharjhīt.",
+          "example_english": "The officer rebuked the mistaken servant with a warning of punishment."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'jharjh' with the semantic marker 'paribhāṣaṇe' is recognized predominantly in non-Paninian compilations such as Vopadeva's Kavikalpadruma to signify vocal reproach or intimidation ('tarjana'). Paninian standard recensions often assimilate such forms under related phonological stems like 'jharjh' or 'jharjhar'.",
+      "kshiratarangini": "Kṣīrasvāmin notes instances of onomatopoeic and expressive roots denoting harsh sound and censure under allied phonetic clusters; 'jharjh paribhāṣaṇe' functions to convey harsh verbal chastisement."
+    },
+    "meanings": {
+      "English": "to reprove, to scold, to threaten, to censure",
+      "Kannada": "bhaisuvudu, bedarisuvudu, baddisuvudu",
+      "Telugu": "bedirincu, civaṭlu peṭṭu, daṇḍincu",
+      "Tamil": "miraṭṭutal, kaṭintukoḷḷutal, eccarittal",
+      "Malayalam": "tarjjikkuka, bhīṣaṇippeṭuttuka, chīttaparayuka",
+      "Hindi": "ḍā̃ṭanā, dhamakānā, jhiḍakanā",
+      "Bengali": "dhamakāno, tiraskāra karā",
+      "German": "tadeln, schelten, bedrohen",
+      "French": "réprimander, tancer, menacer",
+      "Russian": "rugat', osuzhdat', ugrozhat'",
+      "Chinese": "chize, weixie"
+    }
+  },
+  {
+    "dhatu_id": "14.0062",
+    "aupadeshika": "kusuma",
+    "stripped_root": "kusum",
+    "gana": "Curadi (Katantra 4th Dhatupatha / Svaradi/Curadi section)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Intransitive (Akarmaka) / Transitive (Sakarmaka in causative senses)",
+    "canonical_dhatvartha": "prasave (puṣpībhāve)",
+    "tradition_tag": "Katantra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kusum' means to blossom, flower, or bloom. In simple terms, when plants or trees produce flowers in the spring, this verb is used to describe the act of blossoming.",
+      "scenarios": [
+        {
+          "verb_form": "kusumayati",
+          "grammar_trigger": "lat-lakara (present tense), prathama-purusa (3rd person), ekavacana (singular)",
+          "meaning": "blooms / produces flowers",
+          "example_sanskrit": "vasantartau padmini vane kusumayati.",
+          "example_english": "The lotus plant blossoms in the forest lake during springtime."
+        },
+        {
+          "verb_form": "akusumayat",
+          "grammar_trigger": "lan-lakara (past imperfect), prathama-purusa (3rd person), ekavacana (singular)",
+          "meaning": "blossomed / flowered",
+          "example_sanskrit": "udyanasya vrksah sunderam akusumayat.",
+          "example_english": "The tree in the garden blossomed beautifully."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Non-Paninian Curadi enumeration. The root 'kusuma' is taken in the Katantra Dhatupatha with the sense of 'prasave' (yielding flowers or blossoms). Paninian tradition primarily treats 'kusuma' as a nominal stem (pratipadika) giving derived denominative forms (namadhatu kusumayati), whereas the Katantra registers it directly among root inventories in the Curadi class with the obligatory 'nic' (or equivalent Curadi suffix).",
+      "kshiratarangini": "Kshirasvamin notes parallel roots under curadi-gana as svabhavika roots or kandvadi/namadhatu overlaps. In Katantra and Haimacandra, kusuma denotes 'puspodbhede prasave ca' (unfolding of flowers or blossoming)."
+    },
+    "meanings": {
+      "English": "To blossom, to bloom, to bring forth flowers",
+      "Kannada": "Huvaguvudu, hoovannu bittuvudu, araluvudu",
+      "Telugu": "Puyuta, kusuminchuta, vikasinchuta",
+      "Tamil": "Malarthal, pookkalai poothal",
+      "Malayalam": "Pookkuka, viriyuka, kusumikkuka",
+      "Hindi": "Khilna, phoolna, kusumit hona",
+      "Bengali": "Photla, kusumita howa, phula dhora",
+      "German": "Bluhen, aufbluhen, Blumen hervorbringen",
+      "French": "Fleurir, s epanouir, produire des fleurs",
+      "Russian": "Tsvesti, rastsvetat, raskryvat tsvety",
+      "Chinese": "Kaihua, shengkai, fanhua"
+    }
+  },
+  {
+    "dhatu_id": "14.0064",
+    "aupadeshika": "phena",
+    "stripped_root": "phen",
+    "gana": "Bhvādi (Kātantra Class 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Intransitive",
+    "canonical_dhatvartha": "udgame phenāyane ca (in rising, foaming, frothing)",
+    "tradition_tag": "Katantra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'phen' means to foam, froth, or bubble up. Think of ocean waves breaking into white foam on a beach or milk rising and frothing when boiled. In simple terms, it describes the action of forming froth or rising in bubbles.",
+      "scenarios": [
+        {
+          "verb_form": "phenati",
+          "grammar_trigger": "Laṭ (Present tense), Prathama Puruṣa (Third person), Ekavacana (Singular)",
+          "meaning": "It foams / it froths",
+          "example_sanskrit": "Kṣīraṃ tāpena phenati.",
+          "example_english": "The milk froths up due to the heat."
+        },
+        {
+          "verb_form": "aphenat",
+          "grammar_trigger": "Laṅ (Past tense), Prathama Puruṣa (Third person), Ekavacana (Singular)",
+          "meaning": "It foamed / it frothed",
+          "example_sanskrit": "Samudrasya tarangaḥ taṭe aphenat.",
+          "example_english": "The ocean wave foamed at the shore."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Kātantra-pāṭhe 'phena udgame' iti nirdiṣṭam. Pāṇinīya-mate tu phena-śabdāt 'phenāyate' iti kyaci prayogo bahulaḥ, kintu Kātantre dhāturūpeṇaiva paṭhyate.",
+      "kshiratarangini": "Kātantrādi-vaiyākaraṇaiḥ phena-dhātuḥ sākṣāt gaṇe gṛhītaḥ phenana-kriyāyām."
+    },
+    "meanings": {
+      "English": "to foam, to froth, to bubble up",
+      "Kannada": "noreyāgu, nore baruvudu",
+      "Telugu": "nurugu kattu, pongu",
+      "Tamil": "nuraitthal, pongi valithal",
+      "Malayalam": "nurayuka, pongi varika",
+      "Hindi": "jhāga bananā, phena uṭhanā",
+      "Bengali": "phenā haoyā, phēnā oṭhā",
+      "German": "schäumen, aufschäumen",
+      "French": "écumer, mousser",
+      "Russian": "penit'sya, vspenivat'sya",
+      "Chinese": "qǐpào, mào pàomò"
     }
   }
 ]
