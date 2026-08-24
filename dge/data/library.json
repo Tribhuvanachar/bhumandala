@@ -6991,7 +6991,7 @@
     },
     {
       "path": "dge/data/vedanga/chandas/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Chandas"
     },
     {
@@ -8318,6 +8318,42 @@
       "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/upanishad/isha_upanishad/data.json",
       "populated": false,
       "title": "Isha Upanishad"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/brihadaranyaka_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": null,
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/chandogya_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": null,
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/isha_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": null,
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/mandukya_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": null,
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/prashna_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": null,
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/taittiriya_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": null,
+      "addedAt": "2026-08-24"
     }
   ]
 }
