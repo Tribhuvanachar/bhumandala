@@ -574,10 +574,19 @@ def parse_chapter_lakshmi(page_title, chapter_num):
 # fixed-point stripping loop.
 #
 # jnanapada's sampled chapter was also seen dropping the chapter prefix
-# on at least one verse ref ("।। 10 ।।" instead of "।। 1.10 ।।") --
-# handled by a combined ref pattern accepting either form, falling back
-# to the page's own known chapter number when only a bare verse number
-# is given.
+# on at least one verse ref ("।। 10 ।।" instead of "।। 1.10 ।।") -- and,
+# checked directly, found kriyapada adhyaya 16 wasn't the only place a
+# ref's own chapter digit can't be trusted: its own raw wikitext reads
+# "।। 116.56 ।।" sitting directly between two verses correctly marked
+# "16.55" and "16.57" -- a plain source-side typo (an extra "1"), not a
+# real chapter-116-out-of-32. Since the page's own true chapter number
+# is already known externally (this function's own `chapter_num`
+# parameter, taken from the page title, which every convention agrees is
+# reliable), a two-number ref's own captured chapter digit is never used
+# at all -- the ref pattern only needs to recognize *where* a ref sits
+# and pull out its verse number; `chapter_num` supplies the chapter
+# unconditionally, closing this whole class of typo rather than
+# hand-fixing the one instance found.
 PADMA_HEADING_ASTERISK_RX = re.compile(r"^\*.*\*$")
 PADMA_HEADING_PIPE_RX = re.compile(r"^\|\|.*\|\|$")
 PADMA_HEADING_BAREPERIOD_RX = re.compile(r"^[^।|]*[^।|\s]\.$")
@@ -648,11 +657,11 @@ def parse_chapter_padma(page_title, chapter_num):
         body = re.sub(r"\d+", "", body)
         body = re.sub(r"\s+", " ", body).strip(" \n\t।|-")
         if body:
-            if mm.group(1) is not None:
-                ch, vs = to_int(mm.group(1)), to_int(mm.group(2))
-            else:
-                ch, vs = chapter_num, to_int(mm.group(3))
-            units.append((ch, vs, body))
+            # The ref's own chapter digit (group 1, present only for the
+            # two-number form) is never used -- see this function's own
+            # docstring comment on PADMA_REF_RX above.
+            vs = to_int(mm.group(2)) if mm.group(1) is not None else to_int(mm.group(3))
+            units.append((chapter_num, vs, body))
     return chapter_title, units
 
 
