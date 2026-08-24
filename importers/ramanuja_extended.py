@@ -214,6 +214,52 @@ def collect_pada_files(root, subpath):
     return units
 
 
+# Sudarshana Suri's Shruta Prakashika (v1.md/v2.md) carries no Markdown
+# structure at all (checked directly: 2 "### " headers total across both
+# ~2M-character files, 0 of any other level) -- explaining its own
+# "[[TODO: aparishkRtam]]" self-flag. But it DOES carry the original printed
+# edition's own running page-headers: a Devanagari adhyaya-pada-sutra
+# reference ("१-४-३." etc.) followed by a short topic phrase, recurring
+# every page (101 times in v1, 47 in v2) -- found by direct inspection of
+# a middle slice of the file, not assumed from the TODO flag. Splitting on
+# these gives 148 real per-topic units instead of 2 giant blobs, and
+# incidentally drops the English publisher's front-matter block noted as a
+# residual limitation in the first pass: it sits entirely before the first
+# marker, so it falls into the discarded "pre" segment below.
+DEVANAGARI_DIGITS = "०१२३४५६७८९"
+SP_PAGE_NUM_LINE = re.compile(r"^[ \t]*[०-९]{1,4}[ \t]*$", re.M)
+SP_RUNNING_MARKER = re.compile(r"([०-९]+\s*-\s*[०-९]+\s*-\s*[०-९]+)\.\s*([^\n।]{0,80})")
+
+
+def _devanagari_num(s):
+    """'१-४-३' -> '1-4-3' -- Devanagari digits to ASCII, for a readable ref."""
+    return "".join(str(DEVANAGARI_DIGITS.index(c)) if c in DEVANAGARI_DIGITS else c
+                    for c in s)
+
+
+def collect_shruta_prakashika(root, base_subpath, filenames):
+    units = []
+    for fn in filenames:
+        text = open(os.path.join(root, base_subpath, fn), encoding="utf-8").read()
+        _, raw = _frontmatter_and_raw(text)
+        raw = SP_PAGE_NUM_LINE.sub("", raw)
+        parts = SP_RUNNING_MARKER.split(raw)
+        # split() with 2 capturing groups yields [pre, ref1, topic1, body1, ref2, topic2, body2, ...]
+        # "pre" (everything before the first marker) is front matter -- title
+        # page, publisher's notice, sutra index -- not commentary; dropped.
+        i = 1
+        while i < len(parts) - 2:
+            devref, topic, body = parts[i], parts[i + 1], parts[i + 2]
+            i += 3
+            body = strip_markup(SP_PAGE_NUM_LINE.sub("", body))
+            if not body:
+                continue
+            ref = _devanagari_num(devref.replace(" ", ""))
+            topic = topic.strip()
+            units.append((f"{ref}. {topic}" if topic else ref, body))
+    return units
+
+
 def run(only=None):
     root = ensure_clone()
 
@@ -286,9 +332,8 @@ def run(only=None):
 
     if not only or only == "sudarshana_suri_shruta_prakashika":
         base = os.path.join(root, f"{RB}/sudarshana-sUriH/shruta-prakAshikA")
-        units = []
-        for fn in ("v1.md", "v2.md"):
-            units.extend(_single_file_units(os.path.join(base, fn), split_headers=False))
+        units = collect_shruta_prakashika(
+            root, f"{RB}/sudarshana-sUriH/shruta-prakAshikA", ("v1.md", "v2.md"))
         items = to_tika_items(units, "Shruta Prakashika")
         emit("sudarshana_suri_shruta_prakashika", f"{TARGET}/sudarshana_suri/shruta_prakashika/bhashya",
              "grantha_tika_text", "Sudarshana Suri", items)

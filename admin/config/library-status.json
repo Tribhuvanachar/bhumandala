@@ -3,7 +3,7 @@
  "totals": {
   "leaves": 1857,
   "loaded": 1200,
-  "items": 607778
+  "items": 607924
  },
  "sections": {
   "agama": {
@@ -14,7 +14,7 @@
   "darshana": {
    "total": 290,
    "loaded": 100,
-   "items": 25954
+   "items": 26100
   },
   "dasa_sahitya": {
    "total": 67,
@@ -412,7 +412,7 @@
   "darshana/vedanta/vishishtadvaita/rangaramanuja/vishaya_vakya_dipika/bhashya": 50,
   "darshana/vedanta/vishishtadvaita/seneshvara/nyaya_kalapa_sangraha/mula": 153,
   "darshana/vedanta/vishishtadvaita/sudarshana_suri/shruta_pradipika/bhashya": 137,
-  "darshana/vedanta/vishishtadvaita/sudarshana_suri/shruta_prakashika/bhashya": 2,
+  "darshana/vedanta/vishishtadvaita/sudarshana_suri/shruta_prakashika/bhashya": 148,
   "darshana/vedanta/vishishtadvaita/uttamur_viraraghavachariar/bhashyartha_darpana/bhashya": 7,
   "darshana/vedanta/vishishtadvaita/uttamur_viraraghavachariar/shruta_prakashika_edition/bhashya": 2,
   "darshana/vedanta/vishishtadvaita/vedanta_desika/adhikarana_saravali/mula": 166,
