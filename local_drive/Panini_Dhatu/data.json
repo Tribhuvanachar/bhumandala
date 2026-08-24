@@ -65082,52 +65082,6 @@
     }
   },
   {
-    "dhatu_id": "06.0108",
-    "aupadeshika": "vrīñ",
-    "stripped_root": "vrī",
-    "gana": "tudādi",
-    "pada": "ātmanepada",
-    "it_status": "aniṭ",
-    "transitivity": "sakarmaka",
-    "canonical_dhatvartha": "varaṇe",
-    "dhaturupanandini": {
-      "simple_explanation": "The root vrīñ belongs to the Tudadi class and primarily means to choose, select, or cover. When conjugated in Atmanepada in the present tense with the Tudadi class marker -śa-, the root takes the form vriyate. When used in a causative construction (nic), it takes the meaning of causing someone to choose or select.",
-      "scenarios": [
-        {
-          "verb_form": "vriyate",
-          "grammar_trigger": "kartari prayoga (present indicative 3rd person singular with śa-vikaraṇa)",
-          "meaning": "chooses / selects / covers",
-          "example_sanskrit": "kanyā yogyaṃ varaṃ vriyate.",
-          "example_english": "The maiden chooses a suitable groom."
-        },
-        {
-          "verb_form": "vrāyayati",
-          "grammar_trigger": "ṇic-pratyaya (causative present indicative 3rd person singular)",
-          "meaning": "causes to choose / arranges selection",
-          "example_sanskrit": "pitā kanyāṃ varaṃ vrāyayati.",
-          "example_english": "The father makes the daughter choose a groom."
-        }
-      ]
-    },
-    "vritti_extracts": {
-      "madhaviya_dhatuvritti": "vrīñ varaṇe. ātmanepadī tudādiḥ. tudāditvāt śa-pratyayaḥ. rvarṇānta-lakṣaṇa-guṇābhāvaḥ 'riṅ śayag-liṅkṣu' iti riṅ-ādeśaḥ kṛte 'vriyate' iti rūpaṃ bhavati. lyiṭi vivriye, luṭi vretā, ṇici vrāyayati ityādi.",
-      "kshiratarangini": "vrīñ varaṇe. vrīyate iti riṅ-ādeśena siddham. dṛṇībhāvārthe 'pi kecid icchanti. aniṭkārakatvaṃ siddham."
-    },
-    "meanings": {
-      "English": "to choose, select, cover, screen",
-      "Kannada": "ayke māḍu, varisu, muccu",
-      "Telugu": "enkonu, varincu, kappu",
-      "Tamil": "tērnteṭu, varaṇam cey, mūṭu",
-      "Malayalam": "thiranjedukkuka, varikkuka, mooduka",
-      "Hindi": "varana karnā, cunanā, ḍhakanā",
-      "Bengali": "baran karā, pachanda karā, ḍhākā",
-      "German": "wählen, aussuchen, bedecken",
-      "French": "choisir, sélectionner, couvrir",
-      "Russian": "vybirat, izbirat, pokryvat",
-      "Chinese": "xuanze, pingxuan, fugai"
-    }
-  },
-  {
     "dhatu_id": "06.0109",
     "aupadeshika": "kṛṣa",
     "stripped_root": "kṛṣ",
