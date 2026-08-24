@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha.js'] = 'v1.6 (#kosha-fab now the same 48px circular shape/shadow as the global-search FAB beside it, for visual consistency between the app\'s two floating action buttons -- was a differently-shaped pill. Everything from v1.5 -- dgeKoshaQuick -- unchanged)';
+  window.DGE_VERSIONS['kosha.js'] = 'v1.7 (removed #kosha-fab entirely -- build() no longer creates or drags a floating trigger button; index.html\'s new #dge-qa-tab quick-actions tab is the only entry point left, calling window.dgeOpenKosha() directly. Reverses v1.6\'s "keep both FABs" call per the project lead\'s explicit follow-up ask. Everything else from v1.5 -- dgeKoshaQuick -- unchanged)';
 
   // Citation-form normalizer: strip a trailing visarga (H) / anusvara (M) from
   // an SLP1 headword so dictionaries that cite the nominative (रामः = rAmaH) or
@@ -739,21 +739,19 @@
     var css = document.createElement('style'); css.id = 'kosha-css';
     // Fallbacks below map to the app's real design tokens (css/main.css) so
     // the Kosha overlay themes with the rest of the site instead of using
-    // hard-coded colours. FAB sits ABOVE the bottom toolbar (body reserves
-    // 126px for it) and above the toolbar's z-index (9999) so it is never
-    // hidden behind Filter/Tools; the overlay sits at modal level (11000).
-    // Same 48px circular shape/shadow as the global-search FAB right below
-    // it (dge-gs-fab in global-search.js) -- 24 Aug 2026, project lead's
-    // direct report that the two floating buttons "are still standing
-    // there" looking like leftover, uncoordinated clutter. Investigated
-    // rather than assumed a bug: both are legitimate, deliberately
-    // always-one-tap-away actions (not admin-only, not stray) used often
-    // enough that folding them into the Menu drawer would add a real tap
-    // of friction to a frequently-used feature -- so the fix here is
-    // visual coherence (one shared FAB shape/size/shadow so the two read
-    // as one small family of controls), not removing either.
+    // hard-coded colours. Overlay sits at modal level (11000).
+    // 24 Aug 2026: this used to also define a #kosha-fab floating circle
+    // (paired visually with global-search.js's own .dge-gs-fab, per an
+    // earlier pass's fix for the two looking uncoordinated) -- that pass
+    // deliberately kept both FABs, reasoning they were frequent enough
+    // that folding them into a menu would cost real convenience. The
+    // project lead's own direct follow-up overrides that call explicitly
+    // ("let it not sit there... go into some menu item"): the FAB is gone,
+    // #dge-qa-tab (index.html, main.css) is the one remaining entry point
+    // for both कोश and search, and build() below no longer creates a
+    // trigger button of its own -- window.dgeOpenKosha (further down this
+    // file) is the real, already-exported API the tab's popup item calls.
     css.textContent = [
-      '#kosha-fab{position:fixed;right:16px;bottom:calc(192px + env(safe-area-inset-bottom));z-index:10000;width:48px;height:48px;background:var(--accent-red,#7a3b1d);color:#fff;border:none;border-radius:50%;font-size:13px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer}',
       '#kosha-ov{position:fixed;inset:0;z-index:11000;background:var(--bg-main,#fff);color:var(--text-primary,#111);display:none;flex-direction:column}',
       '#kosha-ov.open{display:flex}',
       '.kosha-bar{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--card-border,#ddd);align-items:center}',
@@ -842,17 +840,14 @@
 
   function build() {
     injectCSS();
-    var fab = el('button'); fab.id = 'kosha-fab'; fab.textContent = 'कोश';
     var ov = el('div'); ov.id = 'kosha-ov';
     ov.innerHTML =
       '<div class="kosha-bar"><input id="kosha-q" placeholder="Search a word (Devanagari / IAST / Kannada)…" autocomplete="off">' +
       '<button id="kosha-close" title="Close">✕</button></div>' +
       '<div class="kosha-body"><div class="kosha-res" id="kosha-res"></div><div class="kosha-detail" id="kosha-detail">' +
       '<div class="kosha-empty">Type a headword to look it up across every dictionary.</div></div></div>';
-    document.body.appendChild(fab); document.body.appendChild(ov);
-    if (typeof window.dgeMakeFloatingDraggable === 'function') window.dgeMakeFloatingDraggable(fab, 'kosha');
+    document.body.appendChild(ov);
     var input = ov.querySelector('#kosha-q'), res = ov.querySelector('#kosha-res'), detail = ov.querySelector('#kosha-detail');
-    fab.onclick = function () { ov.classList.add('open'); input.focus(); };
 
     // Every keystroke past the debounce starts its own lookup, and they do not
     // come back in the order they were sent: a one-character query browses

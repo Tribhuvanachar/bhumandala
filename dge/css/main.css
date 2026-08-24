@@ -465,12 +465,38 @@ body:has(.popup-sheet.show)::after {
   max-width: min(94vw, 460px);
   /* A cap on how tall this can grow -- the full stack (Ask Acharya's 4
      query-type buttons + wordToolsRow's up-to-5 word tools) can reach
-     ~300px+ on a single-word selection, tall enough on a short phone
-     screen that ai.js's mobile positioning (stays below the selection,
-     or docks at the top chrome edge) could still run out of room.
-     overflow-y:auto keeps every button reachable by scrolling within the
-     tooltip itself rather than the tooltip growing past its dock point. */
+     ~300px+ on a single-word selection. On desktop (see the media query
+     below, which this rule is the baseline/fallback for) that's still
+     floated near the selection, so the cap plus scroll keeps it from
+     running off either edge of a short screen. */
   max-height: min(60vh, 420px); overflow-y: auto;
+}
+/* 24 Aug 2026 -- below 760px this becomes a real bottom sheet (reusing the
+   same full-width-from-the-bottom language .popup.popup-sheet already
+   established for #displayPopup/#commentaryPopup) instead of a floating
+   box positioned near the selection. Project lead's direct follow-up
+   report: the previous near-selection placement (even after clearing the
+   native OS toolbar's own zone) still read as something "fighting" for
+   space with the rest of the page -- "pop up from beneath... like how the
+   upper menu appears" was the explicit ask. ai.js no longer computes any
+   top/left/bottom for this element on mobile at all (see its own
+   comment) -- everything here is what positions it; JS only adds/removes
+   .dge-tt-show for the slide transition, via the same MutationObserver
+   that already drives body.dge-selecting, so none of the ~7 places in
+   ai.js that set tooltip.style.display needed touching. */
+@media (max-width: 759px) {
+  #actionTooltip {
+    left: 0; right: 0; bottom: 0; top: auto !important;
+    transform: translateY(100%);
+    width: 100%; max-width: 100%;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: 12px 16px calc(16px + env(safe-area-inset-bottom));
+    transition: transform var(--t-med) var(--ease);
+    animation: none;
+    z-index: 11500; /* matches .popup-sheet -- always wins over an open drawer */
+    max-height: min(70vh, 480px);
+  }
+  #actionTooltip.dge-tt-show { transform: translateY(0); }
 }
 .tooltip-header { font-size: 10px; font-weight: 800; color: #a8907a; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; margin-bottom: 2px; }
 .tooltip-row { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
@@ -574,8 +600,7 @@ body.dge-immersive .search-box-group,
 body.dge-immersive .char-palette-panel,
 body.dge-immersive .bottom-player,
 body.dge-immersive .search-navigator,
-body.dge-immersive #kosha-fab,
-body.dge-immersive .dge-gs-fab { display: none !important; }
+body.dge-immersive .dge-qa-tab { display: none !important; }
 body.dge-immersive { padding-top: env(safe-area-inset-top) !important; padding-bottom: env(safe-area-inset-bottom) !important; }
 
 .immersive-exit-btn {
@@ -587,12 +612,32 @@ body.dge-immersive { padding-top: env(safe-area-inset-top) !important; padding-b
 body.dge-immersive .immersive-exit-btn { display: flex; }
 
 /* 24 Aug 2026 -- body.dge-selecting (toggled by ai.js's MutationObserver on
-   #actionTooltip's own style attribute) hides the same two FABs while the
-   selection tooltip is open, so they don't sit visibly behind/around it --
-   the same clutter the immersive rule above already solves for full-screen
-   reading, applied here to a much shorter-lived state. */
-body.dge-selecting #kosha-fab,
-body.dge-selecting .dge-gs-fab { display: none !important; }
+   #actionTooltip's own style attribute) hides the same quick-actions tab
+   while the selection tooltip is open, so it doesn't sit visibly behind/
+   around it -- the same clutter the immersive rule above already solves
+   for full-screen reading, applied here to a much shorter-lived state. */
+body.dge-selecting .dge-qa-tab { display: none !important; }
+
+/* 24 Aug 2026 -- replaces the two separate always-visible floating
+   कोश/global-search circles (#kosha-fab, .dge-gs-fab, both now removed --
+   see kosha.js/global-search.js) with one small edge tab, per the project
+   lead's direct report: "let it not sit there. Let it go into some menu
+   item... screen should be minimal." Docked flush to the right edge
+   (protruding rather than floating free, like content-inline.css's own
+   admin EDIT tab) rather than a free-floating circle; tapping it opens
+   #quickActionsPopup (a .popup-sheet, see index.html) with both actions.
+   Positioned at the old midpoint between the two removed FABs (134px/
+   192px from the bottom) so it lands clear of the bottom player. */
+.dge-qa-tab {
+  position: fixed; right: 0; bottom: calc(160px + env(safe-area-inset-bottom));
+  z-index: 9990; width: 30px; height: 60px;
+  border: none; border-radius: var(--radius-md) 0 0 var(--radius-md);
+  background: var(--accent-red); color: #fff;
+  font-size: 20px; font-weight: 700; line-height: 1;
+  box-shadow: -2px 2px 8px rgba(0,0,0,.25); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.dge-qa-tab:active { filter: brightness(1.12); }
 
 /* 24 Aug 2026 -- Phase 5: App View, a second lower-density layout
    alongside the existing dense "Scholar" view (see window.dgeSetLayoutMode
