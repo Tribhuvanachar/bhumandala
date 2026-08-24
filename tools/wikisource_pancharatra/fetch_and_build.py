@@ -48,13 +48,17 @@ API = "https://sa.wikisource.org/w/api.php"
 UA = "bhumandala-sanskrit-library/1.0 (research/import; nonprofit Sanskrit digital library)"
 
 # Two verse-ref conventions found in the SAME work (Ahirbudhnyasamhita
-# switches from one to the other partway through, apparently different
-# Wikisource contributors transcribing different chapter ranges): Devanagari
-# danda + period ("|| 4.1 ||" written "।। 4.1 ।।") for most chapters, ASCII
-# pipe + hyphen ("|| 43-1 ||") from chapter 43 on. Found by checking WHY
-# those later chapters produced zero verses after the rate-limit bug was
-# already ruled out -- not assumed to be more rate-limiting.
-REF_RX = re.compile(r"(?:।।|\|\|)\s*([\d०-९]+)[.\-]([\d०-९]+)\s*(?:।।|\|\|)")
+# switches conventions repeatedly, apparently different Wikisource
+# contributors transcribing different chapter ranges of the same work, each
+# with their own habits: Devanagari danda + period ("।। 1.1 ।।") for most
+# chapters, ASCII pipe + hyphen ("|| 43-1 ||") from chapter 43 on, and a
+# THIRD variant found checking why chapter 45 also produced zero verses --
+# danda and pipe used interchangeably within the SAME closing pair
+# ("।| ४५-१।|", not a consistent "।।" or "||"). Rather than keep
+# special-casing new pairings as they turn up, danda and pipe are treated
+# as interchangeable: any 2 characters drawn from {।, |} bracket the
+# ref, in any combination.
+REF_RX = re.compile(r"[।|]{2}\s*([\d०-९]+)[.\-]([\d०-९]+)\s*[।|]{2}")
 DEVA_DIGITS = str.maketrans("०१२३४५६७८९", "0123456789")
 DASH_LINE = re.compile(r"-{3,}[ \t]*$")
 PAGE_MARKER_RX = re.compile(r"प[्ृु]?\.\s*[\d०-९]*\)")
