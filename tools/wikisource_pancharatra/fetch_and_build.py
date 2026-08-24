@@ -59,8 +59,11 @@ UA = "bhumandala-sanskrit-library/1.0 (research/import; nonprofit Sanskrit digit
 # as interchangeable: any 2 characters drawn from {।, |} bracket the
 # ref, in any combination.
 REF_RX = re.compile(r"[।|]{2}\s*([\d०-९]+)[.\-]([\d०-९]+)\s*[।|]{2}")
+# The parishishtam appendix numbers verses with a single sequential number
+# instead of a chapter.verse pair -- see parse_chapter's is_appendix path.
+APPENDIX_REF_RX = re.compile(r"[।|]{2}\s*([\d०-९]+)\s*[।|]{2}")
 DEVA_DIGITS = str.maketrans("०१२३४५६७८९", "0123456789")
-DASH_LINE = re.compile(r"-{3,}[ \t]*$")
+DASH_LINE = re.compile(r"[-_]{3,}[ \t]*$")
 PAGE_MARKER_RX = re.compile(r"प[्ृु]?\.\s*[\d०-९]*\)")
 SENTINEL = "@@DGEREFMARKER@@"
 MANGALA_TEXT = "शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम्।\nप्रसन्नवदनं ध्यायेत् सर्वविघ्रोपशान्तये।।"
@@ -123,14 +126,30 @@ def subpage_list(index_title):
     return out
 
 
-def parse_chapter(page_title, is_first_chapter=False):
+def parse_chapter(page_title, is_first_chapter=False, is_appendix=False):
     wt = wikitext(page_title)
     if wt is None:
         return None, []
-    m = re.search(r"<poem>(.*?)</poem>", wt, re.S)
-    if not m:
+    # Chapter 59's own page is missing its closing "</poem>" tag entirely
+    # (checked directly against the raw wikitext, not assumed) -- the whole
+    # chapter sits between the first "<poem>" and a second, empty, stray
+    # "<poem>" tag right at the end of the page instead. A plain
+    # "<poem>(.*?)</poem>" match returns nothing for a page shaped like
+    # this. Handled generally: the verse content ends at whichever comes
+    # first, an actual "</poem>", another "<poem>", or the end of the page.
+    open_m = re.search(r"<poem>", wt)
+    if not open_m:
         return None, []
-    poem = m.group(1)
+    start = open_m.end()
+    close_m = re.search(r"</poem>", wt[start:])
+    next_open_m = re.search(r"<poem>", wt[start:])
+    if close_m and (not next_open_m or close_m.start() < next_open_m.start()):
+        end = start + close_m.start()
+    elif next_open_m:
+        end = start + next_open_m.start()
+    else:
+        end = len(wt)
+    poem = wt[start:end]
 
     # Normalize the precomposed double-danda character (U+0965 "॥") to two
     # single-dandas (U+0964 "।।") up front -- some chapters' transcribers
@@ -148,7 +167,11 @@ def parse_chapter(page_title, is_first_chapter=False):
     # present only in the later, ASCII-pipe-convention chapters.
     poem = PAGE_MARKER_RX.sub("", poem)
 
-    # 1. Strip footnote apparatus blocks (line-based state machine).
+    # 1. Strip footnote apparatus blocks (line-based state machine). Most
+    # chapters delimit these with a dash-line ("---------"); chapter 59
+    # instead uses an underscore-line ("__________________") -- checked
+    # directly against its raw wikitext, not assumed -- so both characters
+    # are accepted as the same paired open/close delimiter.
     lines = poem.split("\n")
     out_lines = []
     in_footnote = False
@@ -202,13 +225,21 @@ def parse_chapter(page_title, is_first_chapter=False):
     chapter_title = " ".join(title_parts)
     poem = "\n".join(rest_lines)
 
+    # The parishishtam (appendix) page -- a sudarshana-sahasranama-stotra,
+    # confirmed by reading its own raw wikitext -- numbers its verses with a
+    # single sequential number ("।। ११९ ।।"), not the chapter.verse pairs
+    # every regular adhyaya uses ("।। ५९-१ ।।"). It isn't itself part of any
+    # numbered adhyaya, so it gets its own ref pattern and its own
+    # (string-keyed) unit shape rather than being forced into REF_RX.
+    ref_rx = APPENDIX_REF_RX if is_appendix else REF_RX
+
     # 4. Protect verse-ref markers, strip remaining bare digits (footnote
     # markers), restore in document order.
     refs = []
     def protect(mm):
         refs.append(mm.group(0))
         return SENTINEL
-    poem = re.sub(REF_RX, protect, poem)
+    poem = re.sub(ref_rx, protect, poem)
     poem = re.sub(r"\d+", "", poem)
     for r in refs:
         poem = poem.replace(SENTINEL, r, 1)
@@ -216,14 +247,30 @@ def parse_chapter(page_title, is_first_chapter=False):
     # 5. Split into (chapter, verse, body) units.
     units = []
     prev_end = 0
-    for mm in REF_RX.finditer(poem):
+    appendix_series = 1
+    appendix_last_vs = 0
+    for mm in ref_rx.finditer(poem):
         body = poem[prev_end:mm.start()]
         prev_end = mm.end()
-        ch, vs = to_int(mm.group(1)), to_int(mm.group(2))
         body = re.sub(r"\d+", "", body)
         body = re.sub(r"\s+", " ", body).strip(" \n\t।|")
         if body:
-            units.append((ch, vs, body))
+            if is_appendix:
+                # The parishishtam turns out to hold two independently-
+                # numbered sub-poems back to back on the same page (checked
+                # directly: a 21-verse dhyana/nyasa preamble, then the
+                # sahasranama proper, whose own numbering restarts at 1) --
+                # a numbering *decrease* marks that boundary, so each
+                # restart starts a fresh sub-item rather than colliding
+                # verse numbers into one.
+                vs = to_int(mm.group(1))
+                if vs <= appendix_last_vs:
+                    appendix_series += 1
+                appendix_last_vs = vs
+                units.append((("parishishtam", appendix_series), vs, body))
+            else:
+                ch, vs = to_int(mm.group(1)), to_int(mm.group(2))
+                units.append((ch, vs, body))
     return chapter_title, units
 
 
@@ -257,7 +304,8 @@ def build(work_title_devanagari, index_page_devanagari, out_rel_path, source_url
             if page in cache:
                 continue
             is_first = (i == 0)
-            title, units = parse_chapter(page, is_first_chapter=is_first)
+            is_appendix = page.endswith("परिशिष्टम्")
+            title, units = parse_chapter(page, is_first_chapter=is_first, is_appendix=is_appendix)
             cache[page] = {"title": title, "units": units}
             with open(cache_path, "w", encoding="utf-8") as f:
                 json.dump(cache, f, ensure_ascii=False)
@@ -290,20 +338,40 @@ def build(work_title_devanagari, index_page_devanagari, out_rel_path, source_url
                 chapter_titles[c] = title
         all_units.extend(units)
 
+    # An appendix chapter key is ("parishishtam", series) -- a tuple, not a
+    # bare int adhyaya number. If this run resumed from an on-disk
+    # `.progress.json` cache, that tuple round-tripped through JSON as a
+    # 2-element list, so it's normalized back to a tuple here too (fresh
+    # runs already have real tuples; this is a no-op for those).
+    def is_appendix_key(ch):
+        return isinstance(ch, (list, tuple)) and len(ch) == 2 and ch[0] == "parishishtam"
+
     by_chapter = {}
     for ch, vs, body in all_units:
+        if is_appendix_key(ch):
+            ch = ("parishishtam", ch[1])
         by_chapter.setdefault(ch, []).append((vs, body))
 
+    # Regular adhyayas sort numerically and come first; the appendix (a
+    # tuple key, not an adhyaya number) always sorts last, in series order,
+    # whatever its magnitude would otherwise suggest.
+    def chapter_sort_key(ch):
+        return (1, ch[1]) if is_appendix_key(ch) else (0, ch)
+
     items = []
-    for ch in sorted(by_chapter):
+    for ch in sorted(by_chapter, key=chapter_sort_key):
         shlokas = []
         for vs, iast_or_deva in sorted(by_chapter[ch]):
             # Wikisource content here is ALREADY Devanagari (unlike GRETIL's
             # IAST) -- no transliteration needed.
             shlokas.append({"number": vs, "sanskrit_text": iast_or_deva})
-        ref = chapter_titles.get(ch, f"Adhyaya {ch}")
+        if is_appendix_key(ch):
+            default_ref = "Parishishtam (Appendix)" if ch[1] == 1 else f"Parishishtam (Appendix), Part {ch[1]}"
+            ref = chapter_titles.get(ch, default_ref)
+        else:
+            ref = chapter_titles.get(ch, f"Adhyaya {ch}")
         items.append({
-            "id": "adhyaya%02d" % ch,
+            "id": ("parishishtam" if ch[1] == 1 else "parishishtam%d" % ch[1]) if is_appendix_key(ch) else "adhyaya%02d" % ch,
             "reference": f"{work_title_devanagari}, {ref}",
             "shlokas": shlokas,
         })
