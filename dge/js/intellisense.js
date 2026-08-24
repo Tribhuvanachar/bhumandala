@@ -41,7 +41,7 @@
   'use strict';
 
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['intellisense.js'] = 'v1.2 (sūtra identification by number and by name; word morphology from Vidyut; Sanskrit WordNet senses)';
+  window.DGE_VERSIONS['intellisense.js'] = 'v1.3 (selectedWord() now resolves the double-tap/double-click selection via ai.js\'s dgeRobustSelectedText() instead of the raw Selection string, for the same word-level tap-to-select fragility fix -- everything from v1.2 -- sūtra identification, word morphology, WordNet senses -- unchanged)';
 
   const self = (document.currentScript && document.currentScript.src) || '';
   function dataUrl(rel) {
@@ -685,7 +685,7 @@
   function selectedWord() {
     const sel = window.getSelection();
     if (!sel || sel.isCollapsed) return null;
-    const t = sel.toString().trim();
+    const t = (typeof window.dgeRobustSelectedText === 'function' ? window.dgeRobustSelectedText() : sel.toString().trim());
     if (!t || t.length > 40 || /\s/.test(t)) return null;
     if (!/[ऀ-ॿ]/.test(t)) return null;
     return t.replace(/[।॥,.'"()\[\]]/g, '');

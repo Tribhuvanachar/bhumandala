@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.14 (Dhātu modal now also shows AI (Gemini) multilingual meanings + pedagogical usage notes, from tools/gemini_dhatu_lexicon.py -- independently composed, not copied from ashtadhyayi.com or any other source, clearly labeled "AI-generated (Gemini), unreviewed", loaded independently of the primary paradigm so a slow/missing lexicon file never blocks it. Everything from v3.13 -- full tinanta paradigm, Vidyut fallback chain, real sandhi-split index, inline कोश panel -- unchanged)';
+window.DGE_VERSIONS['ai.js'] = 'v3.15 (word-level tap-to-select fragility fix: new window.dgeRobustSelectedText() resolves the active selection against render.js\'s per-word .dge-word span boundaries instead of trusting window.getSelection().toString() directly, which could jump to a shared ancestor and yield truncated/empty text on rapid mobile re-selection. dgeSelectedWordText() and the selection-tooltip handler both use it now. Everything from v3.14 -- Gemini dhātu lexicon meanings -- unchanged)';
 
 // Appends a language directive read from onboarding.js's saved preference
 // (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
@@ -39,7 +39,7 @@ document.addEventListener('selectionchange', () => {
   clearTimeout(window.selectionTimeout);
   window.selectionTimeout = setTimeout(() => {
     const selection = window.getSelection();
-    const txt = selection.toString().trim();
+    const txt = (typeof window.dgeRobustSelectedText === 'function' ? window.dgeRobustSelectedText() : selection.toString().trim());
     const tooltip = document.getElementById('actionTooltip');
     const modalAppendBtn = document.getElementById('modalAppendBtn');
 
@@ -1023,11 +1023,52 @@ function renderAcharyaQueryButtons() {
 }
 document.addEventListener('DOMContentLoaded', renderAcharyaQueryButtons);
 
+/// Resolves the current selection against render.js's per-word <span
+// class="dge-word"> boundaries (dgeWrapWordsForTap) rather than trusting
+// window.getSelection().toString() directly -- the confirmed fragility:
+// on mobile, a native drag/double-tap selection can jump to a shared
+// ancestor on rapid re-selection and yield truncated or empty text. When
+// the selection's start/end land inside a .dge-word span, this returns
+// that span's own complete textContent (a single word), or -- for a
+// multi-word drag spanning several spans -- walks the sibling .dge-word
+// spans between them in document order and rejoins their text, which is
+// also more robust than the raw string (immune to odd whitespace/entity
+// handling at the drag's edges). Falls back to the raw selection string
+// when the DOM doesn't have word spans (e.g. selection made outside any
+// .shloka-text) so nothing regresses where the boundary doesn't exist.
+window.dgeRobustSelectedText = function() {
+  let raw = '';
+  try { raw = (window.getSelection().toString() || '').trim(); } catch (e) { return ''; }
+  try {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return raw;
+    const range = sel.getRangeAt(0);
+    const nodeToWord = (node) => {
+      if (!node) return null;
+      const el = node.nodeType === 3 ? node.parentElement : node;
+      return el && el.closest ? el.closest('.dge-word') : null;
+    };
+    const startWord = nodeToWord(range.startContainer);
+    const endWord = nodeToWord(range.endContainer);
+    if (!startWord || !endWord) return raw;
+    if (startWord === endWord) return startWord.textContent.trim() || raw;
+    const container = startWord.closest('.shloka-text');
+    if (!container || !container.contains(endWord)) return raw;
+    const words = Array.from(container.querySelectorAll('.dge-word'));
+    const si = words.indexOf(startWord), ei = words.indexOf(endWord);
+    if (si === -1 || ei === -1) return raw;
+    const lo = Math.min(si, ei), hi = Math.max(si, ei);
+    return words.slice(lo, hi + 1).map(w => w.textContent).join(' ').trim() || raw;
+  } catch (e) {
+    return raw;
+  }
+};
+
 // Word-level tools on the selection tooltip: unlike the AI "Word" button
 // above (which asks an LLM), these navigate to this app's own real,
 // structured data for the selected word rather than generating an answer.
 function dgeSelectedWordText() {
-  try { return (window.getSelection().toString() || '').trim(); }
+  try { return window.dgeRobustSelectedText(); }
   catch (e) { return ''; }
 }
 function dgeHideActionTooltip() {

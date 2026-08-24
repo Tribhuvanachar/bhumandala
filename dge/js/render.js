@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v4.3 (renderList: commentary titles now show a small "AI" badge -- dge-ai-badge, gated by core.js\'s dgeIsAiGeneratedCommentaryKey -- next to any AI-generated commentary, on top of v4.2\'s Full List pagination)';
+window.DGE_VERSIONS['render.js'] = 'v4.4 (each shloka\'s rendered mulaHtml now runs through dgeWrapWordsForTap(), wrapping every word in an unstyled <span class="dge-word"> as a DOM boundary for ai.js\'s new dgeRobustSelectedText() -- part of the word-level tap-to-select fragility fix; purely a tap-target boundary, not a visual change, applied last after highlightText()/footnote markers/Vedic pada breaks so it never disturbs their own offsets. Everything from v4.3 -- AI-commentary badge, Full List pagination -- unchanged)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -184,6 +184,46 @@ function highlightText(text, pattern) {
   } catch (e) {
     return text;
   }
+}
+
+// Word-level tap-to-select fix: gives each word in a shloka's rendered HTML
+// its own DOM boundary (an invisible <span>, no styling of its own -- NOT
+// a "make every word a link" redesign, which intellisense.js's own
+// selectedWord() comment already explains was deliberately rejected as
+// turning a page of Sanskrit into a page of underlines). The actual bug
+// this fixes: with plain unwrapped text, resolving "which word did the
+// reader select" depends entirely on window.getSelection().toString()
+// after a native drag/double-tap gesture, which on mobile can jump to a
+// shared ancestor and yield truncated or empty text on rapid
+// re-selection. With each word's own span as a boundary, ai.js's
+// dgeRobustSelectedText() can resolve the tapped word from the DOM
+// structure itself instead of trusting that fragile string.
+//
+// Applied LAST, after highlightText()/footnote-marker injection/the Vedic
+// pada-<br> substitution, so it only ever walks the final HTML and never
+// has to reason about shifting character offsets those passes depend on.
+// Tag-aware (tracks whether it's inside a `<...>` run), so it wraps only
+// the actual text -- and correctly nests inside already-present <mark>/
+// <sup> tags -- without ever splitting a tag's own markup.
+function dgeWrapWordsForTap(html) {
+  if (!html) return html;
+  let out = '';
+  let i = 0;
+  const len = html.length;
+  while (i < len) {
+    if (html[i] === '<') {
+      const close = html.indexOf('>', i);
+      if (close === -1) { out += html.slice(i); break; }
+      out += html.slice(i, close + 1);
+      i = close + 1;
+    } else {
+      let j = i;
+      while (j < len && html[j] !== '<') j++;
+      out += html.slice(i, j).replace(/(\S+)/g, '<span class="dge-word">$1</span>');
+      i = j;
+    }
+  }
+  return out;
 }
 
 window.copyShlokaText = async function(id) {
@@ -456,6 +496,7 @@ function renderList() {
     if (shloka.vedicId) {
       mulaHtml = mulaHtml.replace(/\s*\/\s*/g, '<br>');
     }
+    mulaHtml = dgeWrapWordsForTap(mulaHtml);
     const footnoteListHtml = footnoteResult
       ? `<div class="dge-fn-block">${footnoteResult.footnotesHtml}</div>` : '';
 
