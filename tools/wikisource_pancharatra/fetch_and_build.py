@@ -126,20 +126,17 @@ def subpage_list(index_title):
     return out
 
 
-def parse_chapter(page_title, is_first_chapter=False, is_appendix=False):
-    wt = wikitext(page_title)
-    if wt is None:
-        return None, []
-    # Chapter 59's own page is missing its closing "</poem>" tag entirely
-    # (checked directly against the raw wikitext, not assumed) -- the whole
-    # chapter sits between the first "<poem>" and a second, empty, stray
-    # "<poem>" tag right at the end of the page instead. A plain
-    # "<poem>(.*?)</poem>" match returns nothing for a page shaped like
-    # this. Handled generally: the verse content ends at whichever comes
-    # first, an actual "</poem>", another "<poem>", or the end of the page.
+def extract_poem_block(wt):
+    """Return the wikitext between "<poem>" and "</poem>", or None if there
+    is no "<poem>" at all. Some pages (Ahirbudhnyasamhita ch. 59, confirmed
+    by reading its own raw wikitext, not assumed) are missing the closing
+    tag entirely -- the real content sits between the first "<poem>" and a
+    second, stray, empty "<poem>" right at the end of the page instead.
+    Handled generally: the block ends at whichever comes first, an actual
+    "</poem>", another "<poem>", or the end of the page."""
     open_m = re.search(r"<poem>", wt)
     if not open_m:
-        return None, []
+        return None
     start = open_m.end()
     close_m = re.search(r"</poem>", wt[start:])
     next_open_m = re.search(r"<poem>", wt[start:])
@@ -149,7 +146,16 @@ def parse_chapter(page_title, is_first_chapter=False, is_appendix=False):
         end = start + next_open_m.start()
     else:
         end = len(wt)
-    poem = wt[start:end]
+    return wt[start:end]
+
+
+def parse_chapter(page_title, is_first_chapter=False, is_appendix=False):
+    wt = wikitext(page_title)
+    if wt is None:
+        return None, []
+    poem = extract_poem_block(wt)
+    if poem is None:
+        return None, []
 
     # Normalize the precomposed double-danda character (U+0965 "॥") to two
     # single-dandas (U+0964 "।।") up front -- some chapters' transcribers
@@ -274,8 +280,133 @@ def parse_chapter(page_title, is_first_chapter=False, is_appendix=False):
     return chapter_title, units
 
 
+# Jayakhyasamhita (checked directly against its own raw wikitext, not
+# assumed to match Ahirbudhnyasamhita just because both are Wikisource) is
+# a different digitization entirely -- a critical edition with its own
+# apparatus, not an OCR-style plain transcription:
+#   - Verses are numbered per-chapter with a single sequential number
+#     ("।। 1 ।।", "।। 2 ।।", ...), not a chapter.verse pair.
+#   - Variant readings are marked inline with a bare parenthesized digit
+#     ("विषयार्णवमग्नानां (1)समुद्धरणेहतवे", no space, no period) -- also
+#     seen using "*" instead of a digit where the editor ran out of/didn't
+#     want numbers ("(*)पञ्चरात्रस्य...") -- and the actual variant text
+#     sits on a line by itself, shaped "(N. reading. ManuscriptSiglum)" or
+#     "(*. reading. (nested parenthetical) ...)". Checked directly: this
+#     footnote-content line is always the *entire* line, so rather than
+#     matching every marker-character style one at a time, any line whose
+#     whole content (after stripping tabs/spaces) is one bracketed unit --
+#     "(...)" start to finish -- is treated as apparatus and dropped. This
+#     also catches a still plainer case with no marker character at all: a
+#     bracketed alternate-reading of a whole pada given on its own line,
+#     e.g. "(सन्तोषनियमाढ्यं च व्रतचर्यासमन्वितम्)" -- a real verse pada
+#     never stands as a whole line wrapped in a single paren pair (it
+#     always ends in a danda/pipe, not ")"), so this doesn't risk eating
+#     real content.
+#   - A shorter uncertain-reading annotation can also appear *inside* a
+#     verse line rather than as its own line, marked by a trailing "?"
+#     instead of a marker character ("तम्(त्?)", "(तथाऽनेक?)") -- stripped
+#     separately since it isn't its own line.
+#   - Editorial section headings are bracketed and usually (not always)
+#     carry a "chapter-section" tag: "[शास्त्रावतरणम्.] 1-1" or, seen on
+#     a later heading in the same chapter, just "[...]" with no tag at
+#     all -- both forms confirmed directly, so both are handled.
+#   - A recognizable Sanskrit chapter-colophon idiom, "<name> नाम <ordinal>
+#     पटलः।", appears as the true closing colophon (harmless -- it falls
+#     after the last verse ref and is never assigned to any unit) but was
+#     also found duplicated as a *front-matter* line before chapter 1's
+#     own verse 1 -- there it would otherwise leak into verse 1's body
+#     (it carries a danda, so the plain no-danda title-zone heuristic
+#     doesn't catch it), so it is stripped as its own line pattern.
+CRITICAL_BRACKETED_LINE_RX = re.compile(r"^\(.*\)$")
+CRITICAL_INLINE_MARKER_RX = re.compile(r"\(\s*[\d०-९*]+\s*\)")
+CRITICAL_UNCERTAIN_RX = re.compile(r"\([^()]*\?\)")
+CRITICAL_SECTION_HEADER_RX = re.compile(r"^\[.*?\]\s*(?:[\d०-९]+-[\d०-९]+)?\s*$")
+CRITICAL_COLOPHON_LINE_RX = re.compile(r".*नाम\s+\S+\s*पटलः\s*।\s*$")
+
+
+def parse_chapter_critical(page_title, chapter_num):
+    wt = wikitext(page_title)
+    if wt is None:
+        return None, []
+    poem = extract_poem_block(wt)
+    if poem is None:
+        return None, []
+    poem = poem.replace("॥", "।।")
+
+    lines = poem.split("\n")
+    kept = []
+    for line in lines:
+        s = line.strip("\t ")
+        if CRITICAL_COLOPHON_LINE_RX.match(s):
+            continue
+        if CRITICAL_BRACKETED_LINE_RX.match(s):
+            continue
+        if CRITICAL_SECTION_HEADER_RX.match(s):
+            continue
+        kept.append(line)
+    poem = "\n".join(kept)
+    poem = CRITICAL_INLINE_MARKER_RX.sub("", poem)
+    poem = CRITICAL_UNCERTAIN_RX.sub("", poem)
+
+    # Front-matter title line(s): same no-danda/no-trailing-dash heuristic
+    # as parse_chapter's own step 3, reused verbatim.
+    lines = poem.split("\n")
+    title_parts, rest_lines, in_title_zone = [], [], True
+    for line in lines:
+        s = line.strip()
+        if in_title_zone and not s:
+            if title_parts:
+                in_title_zone = False
+            continue
+        no_punct = "।" not in s and "|" not in s
+        if in_title_zone and s and no_punct and not re.search(r"-{2,}\s*$", s):
+            title_parts.append(s)
+            continue
+        in_title_zone = False
+        rest_lines.append(line)
+    chapter_title = " ".join(title_parts)
+    poem = "\n".join(rest_lines)
+
+    refs = []
+    def protect(mm):
+        refs.append(mm.group(0))
+        return SENTINEL
+    poem = re.sub(APPENDIX_REF_RX, protect, poem)
+    poem = re.sub(r"\d+", "", poem)
+    for r in refs:
+        poem = poem.replace(SENTINEL, r, 1)
+
+    # A numbering *decrease* here means the same thing it does in the
+    # parishishtam: checked directly against patala 1's own raw wikitext,
+    # its first ~78 verses turn out to be a separately-numbered frame
+    # narrative (the sages' backstory), with the samhita's own text proper
+    # restarting its numbering at 1 right after a section heading -- not a
+    # parsing artifact. A numbering *gap* (e.g. patala 15 skips straight
+    # from 179 to 181) is different and left alone -- that's the source's
+    # own verse numbering, not a restart, and not something to paper over.
+    units = []
+    prev_end = 0
+    series = 1
+    last_vs = 0
+    for mm in APPENDIX_REF_RX.finditer(poem):
+        body = poem[prev_end:mm.start()]
+        prev_end = mm.end()
+        body = re.sub(r"\d+", "", body)
+        body = re.sub(r"\s+", " ", body).strip(" \n\t।|")
+        if body:
+            vs = to_int(mm.group(1))
+            if vs <= last_vs:
+                series += 1
+            last_vs = vs
+            units.append(((chapter_num, series), vs, body))
+    return chapter_title, units
+
+
+CHAPTER_NUM_RX = re.compile(r"([\d०-९]+)\s*$")
+
+
 def build(work_title_devanagari, index_page_devanagari, out_rel_path, source_url,
-          repo_root, note_extra="", request_delay=2.0):
+          repo_root, note_extra="", request_delay=2.0, convention="ocr"):
     """Resumable: progress is cached in a sidecar `.progress.json` next to
     the output file (per source page, not per chapter, since one page can
     be re-fetched idempotently). A RateLimited failure mid-run saves what's
@@ -304,8 +435,13 @@ def build(work_title_devanagari, index_page_devanagari, out_rel_path, source_url
             if page in cache:
                 continue
             is_first = (i == 0)
-            is_appendix = page.endswith("परिशिष्टम्")
-            title, units = parse_chapter(page, is_first_chapter=is_first, is_appendix=is_appendix)
+            if convention == "critical":
+                num_m = CHAPTER_NUM_RX.search(page)
+                chapter_num = to_int(num_m.group(1)) if num_m else i + 1
+                title, units = parse_chapter_critical(page, chapter_num=chapter_num)
+            else:
+                is_appendix = page.endswith("परिशिष्टम्")
+                title, units = parse_chapter(page, is_first_chapter=is_first, is_appendix=is_appendix)
             cache[page] = {"title": title, "units": units}
             with open(cache_path, "w", encoding="utf-8") as f:
                 json.dump(cache, f, ensure_ascii=False)
@@ -326,52 +462,74 @@ def build(work_title_devanagari, index_page_devanagari, out_rel_path, source_url
               f"just not yet attempted): {missing}")
         return None, None
 
+    # A chapter key is either a bare int adhyaya/patala number (the common
+    # case), or a 2-element (base, series) tuple: either ("parishishtam",
+    # series) for the appendix, or (chapter_num, series) for a chapter
+    # whose own numbering restarts mid-chapter (found directly in
+    # Jayakhyasamhita patala 1 -- a frame narrative numbered 1-78, then the
+    # samhita's own text restarting at 1). If this run resumed from an
+    # on-disk `.progress.json` cache, such a tuple round-tripped through
+    # JSON as a 2-element list -- normalized back to a tuple here too
+    # (fresh runs already have real tuples; this is a no-op for those).
+    # `normalize_key` collapses the (base, series=1) case to the bare base
+    # so a series-less chapter's key always matches, whichever of
+    # parse_chapter's or parse_chapter_critical's shape it came from.
+    def chapter_key_parts(ch):
+        if isinstance(ch, (list, tuple)) and len(ch) == 2:
+            base, series = ch
+            return base, series, (base == "parishishtam")
+        return ch, 1, False
+
+    def normalize_key(ch):
+        base, series, is_app = chapter_key_parts(ch)
+        return ("parishishtam", series) if is_app else (base if series == 1 else (base, series))
+
     all_units = []
     chapter_titles = {}
     for page in pages:
         title, units = cache[page]["title"], cache[page]["units"]
         if not units:
             continue
-        chapters_seen = sorted(set(u[0] for u in units))
+        chapters_seen = sorted(set(normalize_key(u[0]) for u in units), key=chapter_key_parts)
         for c in chapters_seen:
             if c not in chapter_titles and title:
                 chapter_titles[c] = title
         all_units.extend(units)
 
-    # An appendix chapter key is ("parishishtam", series) -- a tuple, not a
-    # bare int adhyaya number. If this run resumed from an on-disk
-    # `.progress.json` cache, that tuple round-tripped through JSON as a
-    # 2-element list, so it's normalized back to a tuple here too (fresh
-    # runs already have real tuples; this is a no-op for those).
-    def is_appendix_key(ch):
-        return isinstance(ch, (list, tuple)) and len(ch) == 2 and ch[0] == "parishishtam"
-
     by_chapter = {}
     for ch, vs, body in all_units:
-        if is_appendix_key(ch):
-            ch = ("parishishtam", ch[1])
+        ch = normalize_key(ch)
         by_chapter.setdefault(ch, []).append((vs, body))
 
-    # Regular adhyayas sort numerically and come first; the appendix (a
-    # tuple key, not an adhyaya number) always sorts last, in series order,
-    # whatever its magnitude would otherwise suggest.
+    # Regular adhyayas sort numerically, series in order, and come first;
+    # the appendix (a string-based key, not an adhyaya number) always
+    # sorts last, whatever its magnitude would otherwise suggest.
     def chapter_sort_key(ch):
-        return (1, ch[1]) if is_appendix_key(ch) else (0, ch)
+        base, series, is_app = chapter_key_parts(ch)
+        return (1, 0, series) if is_app else (0, base, series)
 
     items = []
     for ch in sorted(by_chapter, key=chapter_sort_key):
+        base, series, is_app = chapter_key_parts(ch)
         shlokas = []
         for vs, iast_or_deva in sorted(by_chapter[ch]):
             # Wikisource content here is ALREADY Devanagari (unlike GRETIL's
             # IAST) -- no transliteration needed.
             shlokas.append({"number": vs, "sanskrit_text": iast_or_deva})
-        if is_appendix_key(ch):
-            default_ref = "Parishishtam (Appendix)" if ch[1] == 1 else f"Parishishtam (Appendix), Part {ch[1]}"
-            ref = chapter_titles.get(ch, default_ref)
+        # The extracted page title describes the page's own opening
+        # heading, not a mid-page numbering restart -- only used for the
+        # first series, so a "Part 2"+ continuation always gets its own
+        # distinguishing default label instead of the first series' title.
+        if is_app:
+            default_ref = "Parishishtam (Appendix)" if series == 1 else f"Parishishtam (Appendix), Part {series}"
+            ref = chapter_titles.get(ch, default_ref) if series == 1 else default_ref
+            item_id = "parishishtam" if series == 1 else "parishishtam%d" % series
         else:
-            ref = chapter_titles.get(ch, f"Adhyaya {ch}")
+            default_ref = f"Adhyaya {base}" if series == 1 else f"Adhyaya {base}, Part {series}"
+            ref = chapter_titles.get(ch, default_ref) if series == 1 else default_ref
+            item_id = "adhyaya%02d" % base if series == 1 else "adhyaya%02d_part%d" % (base, series)
         items.append({
-            "id": ("parishishtam" if ch[1] == 1 else "parishishtam%d" % ch[1]) if is_appendix_key(ch) else "adhyaya%02d" % ch,
+            "id": item_id,
             "reference": f"{work_title_devanagari}, {ref}",
             "shlokas": shlokas,
         })
@@ -403,6 +561,12 @@ if __name__ == "__main__":
     ap.add_argument("source_url")
     ap.add_argument("--repo-root", default="/home/user/bhumandala")
     ap.add_argument("--note-extra", default="")
+    ap.add_argument("--convention", choices=["ocr", "critical"], default="ocr",
+                     help="'ocr' (default) for a plain-transcription page like "
+                          "Ahirbudhnyasamhita/Vishnusamhita; 'critical' for a "
+                          "critical-edition page with per-chapter verse "
+                          "numbering and a bracket/paren apparatus, like "
+                          "Jayakhyasamhita.")
     args = ap.parse_args()
     build(args.work_title, args.index_page, args.out_rel_path, args.source_url,
-          args.repo_root, args.note_extra)
+          args.repo_root, args.note_extra, convention=args.convention)
