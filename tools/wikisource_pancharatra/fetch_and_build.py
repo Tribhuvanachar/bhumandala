@@ -621,6 +621,20 @@ def parse_chapter_padma(page_title, chapter_num):
         poem = CRITICAL_PAREN_SPAN_RX.sub("", poem)
         poem = CRITICAL_BRACKET_SPAN_RX.sub("", poem)
 
+    # A "*"/"?"-delimited heading can span *several* tab-indented lines,
+    # with the opening delimiter on the first and the closing one only on
+    # the last ("\t* भगवतः मन्दिरे परिचर्यापराणां\n\tक्षेत्रादिप्रदानां
+    # ...फलप्रश्नः.*") -- checked directly, not assumed single-line the
+    # way every other sampled heading was. The per-line check below can't
+    # see that. Real verse text in this source is never itself tab-
+    # indented (same property already relied on for Lakshmitantram), so
+    # any tab-indented line is dropped outright first, subsuming the
+    # multi-line case without needing to pair "*"/"?" characters across
+    # the whole poem -- which would be unsafe here, since a bare "?" is
+    # also used on its own, unpaired, as an inline uncertain-reading
+    # marker (handled separately below).
+    poem = "\n".join(l for l in poem.split("\n") if not l.startswith("\t"))
+
     lines = poem.split("\n")
     kept = []
     for line in lines:
@@ -631,6 +645,18 @@ def parse_chapter_padma(page_title, chapter_num):
             continue
         kept.append(line)
     poem = "\n".join(kept)
+
+    # A bare, unpaired "?" turns up constantly in charyapada/kriyapada
+    # verse lines themselves, mid-sentence, marking an uncertain reading
+    # ("जराया ? वा पञ्चिगव्यं", "विंशच्छतैस्तु विमलेदहं?") -- checked
+    # directly at full-corpus scale, not a rare one-off: over 50 verses
+    # across several charyapada chapters alone. Every heading use of "?"
+    # was already consumed above (as a line-boundary delimiter, or as
+    # part of a tab-indented block), so any "?" still left at this point
+    # is this inline marker and is dropped -- replaced with a space
+    # rather than deleted outright, since it isn't always surrounded by
+    # its own whitespace in the source.
+    poem = poem.replace("?", " ")
 
     # Front-matter title line(s): same no-danda/no-trailing-dash heuristic
     # as parse_chapter's own step 3, reused verbatim.
