@@ -102319,5 +102319,1408 @@
       "Russian": "byt pochitayemym, protsvetat, radovatsya",
       "Chinese": "shou dao zun jing, fan rong, huan xin"
     }
+  },
+  {
+    "dhatu_id": "14.0001",
+    "aupadeshika": "kava",
+    "stripped_root": "kav",
+    "gana": "Bhvādi",
+    "pada": "Parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "varṇane (kavitve)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'kav' means to describe, portray, or compose poetry. Whenever a writer or poet creatively illustrates the beauty of nature or composes poetic verses, this root is applied.",
+      "scenarios": [
+        {
+          "verb_form": "kavati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa, Ekavacana",
+          "meaning": "he/she describes or composes poetry",
+          "example_sanskrit": "kaviḥ prakṛteḥ saundaryaṃ kavati.",
+          "example_english": "The poet describes the beauty of nature."
+        },
+        {
+          "verb_form": "akavat",
+          "grammar_trigger": "Laṅ (Past Imperfect Tense), Prathama Puruṣa, Ekavacana",
+          "meaning": "he/she described or composed",
+          "example_sanskrit": "vidvān sabhāyāṃ nṛpasya yaśaḥ akavat.",
+          "example_english": "The scholar praised the fame of the king in the assembly."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "kava varṇane | haimacāndre dhātupāṭhe kavitve varṇane ceti vyākhyātam | kavati | akavīt | cakāva |",
+      "kshiratarangini": "kava varṇanārthaḥ | kavitva-kriyāyāṃ varṇanāyāṃ ca haimādayaḥ prayuñjate | kavati |"
+    },
+    "meanings": {
+      "English": "to describe, to depict, to compose poetry, to praise poetically",
+      "Kannada": "varnisu, kavite racisu, bannisu",
+      "Telugu": "varnincu, kavitvam allu, stutincu",
+      "Tamil": "varnittuk கூறு, kavithai iyatru, pugazh",
+      "Malayalam": "varnikkuka, kavitha rachikkuka, vazhthuka",
+      "Hindi": "varnan karna, kavita rachna, kavittva karna",
+      "Bengali": "bornona kora, kobita rocona kora",
+      "German": "beschreiben, dichten, poetisch schildern",
+      "French": "décrire, poétiser, composer des vers",
+      "Russian": "opisyvat', slagat' stihi, vospevat'",
+      "Chinese": "miaoshu, zuoshi, yinsong"
+    }
+  },
+  {
+    "dhatu_id": "14.0002",
+    "aupadeshika": "khella",
+    "stripped_root": "khell",
+    "gana": "Bhvadi (Gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "set",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "kridayam",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'khell' means 'to play' or 'to frolic'. In everyday Sanskrit usage, it describes engaging in lighthearted sports, games, or amusement, functioning very similarly to 'krid' and 'khel'.",
+      "scenarios": [
+        {
+          "verb_form": "khellati",
+          "grammar_trigger": "lat (present indicative, third person singular)",
+          "meaning": "plays / sports",
+          "example_sanskrit": "balakah kandukena udyane khellati.",
+          "example_english": "The boy plays with a ball in the garden."
+        },
+        {
+          "verb_form": "akhellat",
+          "grammar_trigger": "lan (imperfect past, third person singular)",
+          "meaning": "played / sported",
+          "example_sanskrit": "sisa-gana-sahito balakah sravana-kale akhellat.",
+          "example_english": "The child played together with his friends during the evening."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "khella kridayam iti haimacandriya-dhatupathe spaṣṭataya nirdisṭaḥ; paninīya-sampradaye tu khel-dhator eva bistarah svikriyate.",
+      "kshiratarangini": "khelrn kridayam ity-atraiva khell-ityasya api prayoga-bhedo vartata iti kecit smaranti."
+    },
+    "meanings": {
+      "English": "To play, to frolic, to sport",
+      "Kannada": "Adu, kridisu",
+      "Telugu": "Adu, viharincu",
+      "Tamil": "Vilaiyadu",
+      "Malayalam": "Kalikkuka",
+      "Hindi": "Khelna, krida karna",
+      "Bengali": "Khela kora",
+      "German": "Spielen, sich vergnugen",
+      "French": "Jouer, s'amuser",
+      "Russian": "Igrat', zabavlyat'sya",
+      "Chinese": "Youwan, xishua"
+    }
+  },
+  {
+    "dhatu_id": "14.0003",
+    "aupadeshika": "ghola",
+    "stripped_root": "ghol",
+    "gana": "Curādi (Class 10)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "vilolane (manthane)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'ghol' means to stir, mix, churn, or dissolve something thoroughly in a liquid, just like stirring sugar in water or churning curd.",
+      "scenarios": [
+        {
+          "verb_form": "gholayati",
+          "grammar_trigger": "Laṭ-lakāra (Present Indicative, 3rd person singular)",
+          "meaning": "Stirs or mixes",
+          "example_sanskrit": "Bālakaḥ dugdhe śarkarāṁ gholayati.",
+          "example_english": "The boy stirs sugar in the milk."
+        },
+        {
+          "verb_form": "agholayat",
+          "grammar_trigger": "Laṅ-lakāra (Past Imperfect, 3rd person singular)",
+          "meaning": "Churned or stirred",
+          "example_sanskrit": "Mātā dadhi ghaṭe agholayat.",
+          "example_english": "The mother churned the curd in the pot."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Paninian lists omit 'ghol'; it is integrated in non-Paninian compilations (Haimacandra, Vopadeva) under the meaning of liquid agitation (vilolana).",
+      "kshiratarangini": "Not tracked in traditional Kshirasvamin recensions; recognized primarily in Western and later medieval Sanskrit lexicons as 'ghol vilolane'."
+    },
+    "meanings": {
+      "English": "to stir, to churn, to agitate, to dissolve",
+      "Kannada": "kalasu, kalaku, goḷisu",
+      "Telugu": "kalapu, chiluku, kalyambettu",
+      "Tamil": "kalakku, kadai, karaikka",
+      "Malayalam": "kalakkuka, kadayuka",
+      "Hindi": "gholanā, milānā, mathanā",
+      "Bengali": "gholā, mātʰā, meśāno",
+      "German": "umrühren, verquirlen, auflösen",
+      "French": "remuer, agiter, dissoudre",
+      "Russian": "razmešivat', vzbaltyvat', rastvorjat'",
+      "Chinese": "jiǎobàn, jiǎodòng, róngjiě"
+    }
+  },
+  {
+    "dhatu_id": "14.0004",
+    "aupadeshika": "caṭṭā",
+    "stripped_root": "caṭṭ",
+    "gana": "Bhvādigaṇa (Gaṇa 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka (Transitive)",
+    "canonical_dhatvartha": "bhaṅge (chedane)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'caṭṭ' means to break, split, or chop into pieces. Whenever someone breaks a twig, cuts wood, or splits something solid, this root is used.",
+      "scenarios": [
+        {
+          "verb_form": "caṭṭati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "breaks / splits",
+          "example_sanskrit": "Kāṣṭhatakṣakaḥ śākhāṃ caṭṭati.",
+          "example_english": "The carpenter breaks the branch."
+        },
+        {
+          "verb_form": "acaṭṭĥt",
+          "grammar_trigger": "Luṅ (Aorist Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "broke / split",
+          "example_sanskrit": "Vātena vṛkṣadaṇḍamasau acaṭṭĥt.",
+          "example_english": "By the wind, he broke the wooden staff."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "A non-Paninian lexical item predominantly found in post-Paninian Jain recensions such as the Haima Dhatupatha; listed under the sense of bhaṅgana (breaking/cutting).",
+      "kshiratarangini": "Not separately recognized in early standard Kśīrataraṅgiṇī core lists, but retained in comparative commentaries under secondary roots meaning chedane/bhedane."
+    },
+    "meanings": {
+      "English": "to break, to split, to chop",
+      "Kannada": "muriyuvudu, sīḷuvudu",
+      "Telugu": "virucuta, chenduta",
+      "Tamil": "uḍattal, piḷattal",
+      "Malayalam": "murikkuka, pottikkuka",
+      "Hindi": "toḍna, phāṝna",
+      "Bengali": "bhaṅgā, khanda-karā",
+      "German": "zerbrechen, spalten",
+      "French": "casser, fendre",
+      "Russian": "lomat', raskalyvat'",
+      "Chinese": "zheduan, pilie"
+    }
+  },
+  {
+    "dhatu_id": "14.0005",
+    "aupadeshika": "cholla",
+    "stripped_root": "choll",
+    "gana": "curādi",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "tvak-karaṇe",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'choll' is used to describe the action of peeling, skinning, paring, or removing the outer bark or rind of something, such as peeling fruit or stripping bark from a tree.",
+      "scenarios": [
+        {
+          "verb_form": "chollayati",
+          "grammar_trigger": "lat-lakāra (present indicative, 3rd person singular, curādi-ṇic)",
+          "meaning": "he/she peels or strips the bark/skin",
+          "example_sanskrit": "bālakaḥ phalasya tvacaṃ chollayati.",
+          "example_english": "The boy peels the skin of the fruit."
+        },
+        {
+          "verb_form": "acachollat",
+          "grammar_trigger": "luṅ-lakāra (aorist, 3rd person singular, caṅ-pratyaya)",
+          "meaning": "he/she peeled or skinned",
+          "example_sanskrit": "kāṣṭhakāraḥ vṛkṣasya tvacam acachollat.",
+          "example_english": "The carpenter stripped the bark of the tree."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Non-Paninian root variant; recorded in comparative lexicography under curādi gaṇa with the sense of 'tvak-karaṇa' (paring/peeling), corresponding functionally to standard roots like chull or kṣur.",
+      "kshiratarangini": "Not explicitly listed in standard Kṣīrasvāmin recension of Pāṇinian Dhātupāṭha; preserved primarily in western traditions including Hemacandra's Dhātu-pārāyaṇa in the sense of 'cholla tvak-karaṇe chedane ca'."
+    },
+    "meanings": {
+      "English": "to peel, to skin, to pare, to strip the bark",
+      "Kannada": "sippeyannu teyiri, sippe tegeyu (peel)",
+      "Telugu": "tolu tīsiyu, chokku tīsiyu",
+      "Tamil": "tōlai urittuk-koḷḷutal, tōl sīvutal",
+      "Malayalam": "tholi kalayuka, tholi chethuka",
+      "Hindi": "chilka utarna, cheelana",
+      "Bengali": "chhola, chhal chhadaano",
+      "German": "schälen, abziehen, entrinden",
+      "French": "éplucher, peler, écorcer",
+      "Russian": "ochishchat ot kozhury, snimat koru, obdirat",
+      "Chinese": "xue pi, bo pi"
+    }
+  },
+  {
+    "dhatu_id": "14.0006",
+    "aupadeshika": "ḍolla",
+    "stripped_root": "ḍoll",
+    "gana": "Bhvādi (Class 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Intransitive (Akarmaka)",
+    "canonical_dhatvartha": "dolane (kampane)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'ḍoll' means to swing, sway, or oscillate back and forth, like a tree branch in a breeze or a cradle rocking.",
+      "scenarios": [
+        {
+          "verb_form": "ḍollati",
+          "grammar_trigger": "Present Indicative (Laṭ lakāra, Prathama-puruṣa, Ekavacana)",
+          "meaning": "swings / sways",
+          "example_sanskrit": "mārutena vṛkṣasya śākhā ḍollati.",
+          "example_english": "The branch of the tree sways due to the wind."
+        },
+        {
+          "verb_form": "aḍollīt",
+          "grammar_trigger": "Aorist / General Past (Luṅ lakāra, Prathama-puruṣa, Ekavacana)",
+          "meaning": "swung / rocked",
+          "example_sanskrit": "śiśoḥ dolā mandam aḍollīt.",
+          "example_english": "The child's swing swayed gently."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "ḍolla dolane. dolanaṃ calanaṃ kampanaṃ vā. aḍollīt, ḍollitā, ḍolliṣyati.",
+      "kshiratarangini": "ḍolla dolane calane ca. ḍollati. ḍollām babhūva."
+    },
+    "meanings": {
+      "English": "to swing, to sway, to shake, to rock",
+      "Kannada": "tūgāḍu, āḍu, alāḍu",
+      "Telugu": "ūgu, tūlu, kampincu",
+      "Tamil": "āṭu, ūsalaru, asai",
+      "Malayalam": "āṭuka, iḷakuka, dōlikkuka",
+      "Hindi": "ḍolnā, jhūlnā, hilnā",
+      "Bengali": "dolā, jholā, kāpā",
+      "German": "schaukeln, wiegen, schwingen",
+      "French": "osciller, se balancer, balancer",
+      "Russian": "kachat'sya, kolykhat'sya, mayat'sya",
+      "Chinese": "yáobǎi, dàngyàng, bǎidòng"
+    }
+  },
+  {
+    "dhatu_id": "14.0007",
+    "aupadeshika": "ḍibhi~",
+    "stripped_root": "ḍimbh",
+    "gana": "Bhvādi (Class 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Intransitive (Akarmaka)",
+    "canonical_dhatvartha": "bhayāt calane bālatve ca",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'ḍimbh' describes shaking or quivering out of intense fear, or behaving in a weak and helpless childish manner. Imagine a timid little creature trembling in a dark forest.",
+      "scenarios": [
+        {
+          "verb_form": "ḍimbhati",
+          "grammar_trigger": "Laṭ lakāra (Present Tense, 3rd Person Singular)",
+          "meaning": "trembles in fear / acts helplessly like a child",
+          "example_sanskrit": "bhītaḥ hariṇaḥ vanamadhye ḍimbhati.",
+          "example_english": "The frightened deer trembles inside the forest."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "ḍibhi bhayācalane. iditvānnum. ḍimbhati. ḍiḍimbha. ḍimbhitā.",
+      "kshiratarangini": "ḍibi bhaye calane ca. ḍimbhati. bālasadṛśakampane vartate."
+    },
+    "meanings": {
+      "English": "To tremble from fear, to act like a child or be helpless",
+      "Kannada": "Bhayadinda naḍugu, makkaḷante vartisu",
+      "Telugu": "Bhayantō vaṇuku, pillalā pravartin̄cu",
+      "Tamil": "Payattāl naṭuṅkutal, kuḻantai pōla naṭattal",
+      "Malayalam": "Bhayattāl viṟakkuka, kuṭṭikaḷeppōle varttikkuka",
+      "Hindi": "Dara se kāṅpanā, bālakpan dikhānā",
+      "Bengali": "Bhaye kā̃pā, śiśur mato ācaraṇa karā",
+      "German": "Vor Angst zittern, sich kindisch oder hilflos verhalten",
+      "French": "Trembler de peur, agir de manière enfantine",
+      "Russian": "Drozhat ot strakha, vesti sebya kak rebyonok",
+      "Chinese": "Yin kongju er fadou, youzhi"
+    }
+  },
+  {
+    "dhatu_id": "14.0008",
+    "aupadeshika": "dhudhi",
+    "stripped_root": "dhundh",
+    "gana": "Bhvadi (Gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "anvesane (margane)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'dhundh' is used when someone is searching, seeking, or looking closely to find something that is lost or hidden.",
+      "scenarios": [
+        {
+          "verb_form": "dhundhati",
+          "grammar_trigger": "Lat (Present Tense, Prathama Purusa / Third Person Singular)",
+          "meaning": "Searches or looks for",
+          "example_sanskrit": "balakah vanam madhye svasya mitram dhundhati.",
+          "example_english": "The boy searches for his friend in the middle of the forest."
+        },
+        {
+          "verb_form": "adhundhat",
+          "grammar_trigger": "Lan (Past Tense, Prathama Purusa / Third Person Singular)",
+          "meaning": "Searched or looked for",
+          "example_sanskrit": "chatrah pustakalaye pracinam grantham adhundhat.",
+          "example_english": "The student searched for the ancient book in the library."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Recognized in comparative non-Paninian dhātu-lists under Hemacandra's Siddhahaima tradition as 'dhudhi anveṣaṇe'; the 'i' marker (idit) requires the insertion of an internal nasal (num-āgama), yielding the active stem 'dhundh-'.",
+      "kshiratarangini": "Kṣīrasvāmin notes peripheral and deśya-derived verbal roots of inquiry; Hemacandra systematically incorporates 'dhundh' into the primary verbal inventory for the specific sense of searching and tracking."
+    },
+    "meanings": {
+      "English": "To search, to seek, to trace, to investigate",
+      "Kannada": "Hudukuvudu, anvesisuvudu",
+      "Telugu": "Vedakuta, anvesincuta",
+      "Tamil": "Tetutal, aravayvu ceytal",
+      "Malayalam": "Tirayuka, anvesikkuka",
+      "Hindi": "Dhundhana, khojana, talasana",
+      "Bengali": "Khonja, anusandhana kara",
+      "German": "Suchen, nachforschen, aufspuren",
+      "French": "Chercher, rechercher, pister",
+      "Russian": "Iskat', razyskivat', issledovat'",
+      "Chinese": "Xunzhao, sousuo, tanqiu"
+    }
+  },
+  {
+    "dhatu_id": "14.0009",
+    "aupadeshika": "bokka",
+    "stripped_root": "bokk",
+    "gana": "Bhvādi (Class 1)",
+    "pada": "Parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "Sakarmaka / Akarmaka",
+    "canonical_dhatvartha": "bhāṣaṇe (garjane)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'bokk' is a descriptive non-Paninian verb that means to speak sharply, bark, or roar loudly. It is typically used when an animal barks or a person shouts loudly in excitement or anger.",
+      "scenarios": [
+        {
+          "verb_form": "bokkati",
+          "grammar_trigger": "Laṭ-lakāra (Present indicative, Prathama puruṣa, Ekavacana)",
+          "meaning": "barks / shouts loudly",
+          "example_sanskrit": "śunakaḥ aparicitaṃ dṛṣṭvā uccaiḥ bokkati.",
+          "example_english": "Seeing a stranger, the dog barks loudly."
+        },
+        {
+          "verb_form": "abokkat",
+          "grammar_trigger": "Laṅ-lakāra (Past imperfect, Prathama puruṣa, Ekavacana)",
+          "meaning": "barked / roared",
+          "example_sanskrit": "vane siṃhaḥ kruddhaḥ san abokkat.",
+          "example_english": "In the forest, the lion roared furiously."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Non-Paninian entry; preserved primarily in the Haimacandra tradition (Siddhahema Dhatupāṭha 1.285) as 'bokka bhāṣaṇe'. It does not occur in the classical Paninian Madhaviya recension.",
+      "kshiratarangini": "Absent in Kṣīrasvāmin's classical Paninian inventory. Categorized under onomatopoeic/descriptive sound-roots in Hemacandra's lexicographical system."
+    },
+    "meanings": {
+      "English": "to bark, to shout loudly, to roar, to speak indistinctly",
+      "Kannada": "bogaḷu, garjisu, gaddarisuvudu",
+      "Telugu": "morugu, arucu, garjincu",
+      "Tamil": "kuraikkavum, kattavum, muzhankavum",
+      "Malayalam": "kurakkuka, nilavilikkuka, garjikkuka",
+      "Hindi": "bhaunkanā, cillānā, garajanā",
+      "Bengali": "gheu gheu korā, garjon korā, chechāno",
+      "German": "bellen, brüllen, laut rufen",
+      "French": "aboyer, rugir, crier fortement",
+      "Russian": "layat', rychat', gromko kričat'",
+      "Chinese": "fèijiào, páoxiāo, dàshēng nàhǎn"
+    }
+  },
+  {
+    "dhatu_id": "14.0010",
+    "aupadeshika": "bolla",
+    "stripped_root": "boll",
+    "gana": "bhvādi (gaṇa 1)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "bhāṣāyām",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'boll' means to speak, talk, or express in speech. In everyday speech, it functions like 'vad' or 'bhāṣ', describing someone uttering words or conversing.",
+      "scenarios": [
+        {
+          "verb_form": "bollati",
+          "grammar_trigger": "laṭ-lakāra (present tense), prathama-puruṣa (third person), eka-vacana (singular)",
+          "meaning": "speaks / talks",
+          "example_sanskrit": "bālakaḥ madhuraṃ bollati.",
+          "example_english": "The boy speaks sweetly."
+        },
+        {
+          "verb_form": "abollat",
+          "grammar_trigger": "laṅ-lakāra (imperfect past tense), prathama-puruṣa (third person), eka-vacana (singular)",
+          "meaning": "spoke / talked",
+          "example_sanskrit": "śiṣyaḥ satyaṃ vacanaṃ abollat.",
+          "example_english": "The student spoke truthful words."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Not listed in classical Pāṇinian Dhātupāṭha; recognized in non-Pāṇinian traditions such as the Haimacandra Dhātupāṭha under 'bolla bhāṣāyām'.",
+      "kshiratarangini": "Omitted in Kṣīrasvāmin's Pāṇinian recension; cataloged in medieval Prakrit-influenced and Jain grammatical lexicons representing vernacular-derived roots."
+    },
+    "meanings": {
+      "English": "to speak, to talk, to utter",
+      "Kannada": "mātāḍu, nuḍi",
+      "Telugu": "māṭlāḍu, paluku",
+      "Tamil": "pēcu, col",
+      "Malayalam": "samsārikkuka, parayuka",
+      "Hindi": "bolnā, kahanā",
+      "Bengali": "balā, kathā balā",
+      "German": "sprechen, reden",
+      "French": "parler, dire",
+      "Russian": "govorit', skazat'",
+      "Chinese": "shuō, jiǎng"
+    }
+  },
+  {
+    "dhatu_id": "14.0011",
+    "aupadeshika": "halla",
+    "stripped_root": "hall",
+    "gana": "bhvadi",
+    "pada": "parasmaipada",
+    "it_status": "set",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "kampane",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'hall' means to shake, tremble, or move back and forth. It is used when an object or living being quivers, vibrates, or moves due to fear, wind, or an earthquake.",
+      "scenarios": [
+        {
+          "verb_form": "hallati",
+          "grammar_trigger": "lat (present tense, third person singular, active voice)",
+          "meaning": "shakes or trembles",
+          "example_sanskrit": "vayu-vegena vriksa-patram hallati.",
+          "example_english": "The leaf of the tree trembles due to the speed of the wind."
+        },
+        {
+          "verb_form": "ahallat",
+          "grammar_trigger": "lan (imperfect past tense, third person singular, active voice)",
+          "meaning": "shook or trembled",
+          "example_sanskrit": "bhu-kampe sati sarvam bhavanam ahallat.",
+          "example_english": "During the earthquake, the entire building shook."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Noted primarily in regional and non-Paninian recensions such as the Siddha-Hema tradition under the sense of kampane (vibration/shaking); shares semantic and phonetic overlap with roots like chal and khal.",
+      "kshiratarangini": "Kshirasvamin records roots of movement and trembling similarly under calana-arthas, corresponding with the Haimacandra categorization of root hall forming hallati."
+    },
+    "meanings": {
+      "English": "to shake, tremble, agitate, or move",
+      "Kannada": "nadvagu, calisu",
+      "Telugu": "vanaku, kadalu",
+      "Tamil": "nadunghu, asaital",
+      "Malayalam": "viraykkuka, ilakuka",
+      "Hindi": "hilna, kaampna",
+      "Bengali": "kaapa, noda",
+      "German": "zittern, beben, sich bewegen",
+      "French": "trembler, s'agiter, vaciller",
+      "Russian": "drozhat, tryastis, kolébat'sya",
+      "Chinese": "yaohuang, zhendong, fadou"
+    }
+  },
+  {
+    "dhatu_id": "14.0012",
+    "aupadeshika": "holla",
+    "stripped_root": "holl",
+    "gana": "Bhvādi (Class 1)",
+    "pada": "Parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "khelane",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'holl' means to play, frolic, or engage in lighthearted sporting and recreation. It describes joyful playfulness of children or animals.",
+      "scenarios": [
+        {
+          "verb_form": "hollati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "plays / frolics",
+          "example_sanskrit": "bālakaḥ mitraiḥ saha udyāne hollati.",
+          "example_english": "The child plays in the garden with friends."
+        },
+        {
+          "verb_form": "ahollat",
+          "grammar_trigger": "Laṅ (Past Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "played / frolicked",
+          "example_sanskrit": "mṛgaśiśuḥ vane svacchandaṃ ahollat.",
+          "example_english": "The young deer frolicked freely in the forest."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Non-Pāṇinian entry: Recorded distinctly in Ācārya Hemacandra's Dhātupāṭha under the arthasūtra 'holla khelane' (vihāre); unlisted in classical Pāṇinian recensions represented by the Mādhavīya-dhātuvṛtti.",
+      "kshiratarangini": "Absent in Kṣīrasvāmin's classical Pāṇinian commentary; retained exclusively within the western non-Pāṇinian lexicographical stream of the Haima system."
+    },
+    "meanings": {
+      "English": "to play, to frolic, to sport",
+      "Kannada": "āḍu, krīḍisu",
+      "Telugu": "āḍukonu, krīḍiñcu",
+      "Tamil": "viḷaiyāṭu",
+      "Malayalam": "kaḷikkuka, viharikkuka",
+      "Hindi": "khelanā, vihāra karanā",
+      "Bengali": "khelā karā, krīṛā karā",
+      "German": "spielen, sich vergnügen, herumtollen",
+      "French": "jouer, s'ébattre, folâtrer",
+      "Russian": "igrat', rezvit'sya",
+      "Chinese": "yóuxì, wánshuǎ"
+    }
+  },
+  {
+    "dhatu_id": "14.0013",
+    "aupadeshika": "saṭṭa",
+    "stripped_root": "saṭṭ",
+    "gana": "bhvādi (Curādi in some recensions)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka / sakarmaka",
+    "canonical_dhatvartha": "viśaraṇe",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'saṭṭ' means to split apart, disintegrate, or scatter. Imagine dry mud or a brittle biscuit falling into tiny pieces when pressed; this process of breaking apart is expressed by this verb.",
+      "scenarios": [
+        {
+          "verb_form": "saṭṭati",
+          "grammar_trigger": "Present tense (laṭ), Third person singular (prathama-puruṣa ekavacana)",
+          "meaning": "disintegrates / splits apart",
+          "example_sanskrit": "śuṣko mṛtpiṇḍaḥ saṭṭati.",
+          "example_english": "The dry lump of clay falls apart."
+        },
+        {
+          "verb_form": "asaṭṭīt",
+          "grammar_trigger": "Aorist past tense (luṅ), Third person singular (prathama-puruṣa ekavacana)",
+          "meaning": "disintegrated / fell to pieces",
+          "example_sanskrit": "kāṣṭhaṃ viśīrṇaṃ sat asaṭṭīt.",
+          "example_english": "The decayed piece of wood broke apart."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Standard Paninian recensions treat saṭṭa / śaṭṭa in bhvādi or curādi with meanings of viśaraṇa (disintegration) or rujo gati (movement in disease/injury), recognized as variant lexical entries.",
+      "kshiratarangini": "Kshirasvamin notes saṭṭa viśaraṇe gatau ca; occurring in the context of splitting, shattering, or scattering apart into components."
+    },
+    "meanings": {
+      "English": "to disintegrate, to break apart, to dissolve into pieces",
+      "Kannada": "chinnabhinnagollu, odedu hogo",
+      "Telugu": "mukkalu mukkalavvu, vishirnamagu",
+      "Tamil": "udainthu sidharuthal, thoolaguthal",
+      "Malayalam": "thakarnnu pokuka, thundu thundavuka",
+      "Hindi": "bikharna, tootkar churna hona",
+      "Bengali": "chhinno-bhinno howa, bhenge jawa",
+      "German": "zerfallen, sich auflösen, zerbröckeln",
+      "French": "se désintégrer, se briser en morceaux",
+      "Russian": "raspadaťsya, razlamyvaťsya na kusočki",
+      "Chinese": "walie, suilie"
+    }
+  },
+  {
+    "dhatu_id": "14.0014",
+    "aupadeshika": "laṭṭa",
+    "stripped_root": "laṭṭ",
+    "gana": "bhvādi (gaṇa 1)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "bālatve vihāre ca",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'laṭṭ' means to behave childishly, play innocently like a child, or frolic. It describes youthful, playful actions.",
+      "scenarios": [
+        {
+          "verb_form": "laṭṭati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "Acts like a child / frolics childishly",
+          "example_sanskrit": "bālakaḥ aṅgaṇe laṭṭati.",
+          "example_english": "The child plays childishly in the courtyard."
+        },
+        {
+          "verb_form": "alaṭṭīt",
+          "grammar_trigger": "Luṅ (Aorist / Past Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "Behaved like a child",
+          "example_sanskrit": "śiśuḥ mātus samīpe alaṭṭīt.",
+          "example_english": "The infant behaved playfully near the mother."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "laṭṭa bālatve vihāre ca. bhvādau parasmaipadī seṭ. laṭṭati, lalaṭṭa, laṭṭitā.",
+      "kshiratarangini": "laṭṭa bālatve. bālacaritracaraṇe ityarthaḥ. laṭṭati śiśuḥ."
+    },
+    "meanings": {
+      "English": "to act childishly, to frolic, to play like a child",
+      "Kannada": "makkalante vartisu, mugdhavagi ata-adu",
+      "Telugu": "pilla-ceṣṭalu ceyu, pillavāḍilā pravartincu",
+      "Tamil": "kuzhandhaithanamaga nadandhukol, vilaiyadu",
+      "Malayalam": "kuttikalepole perumaruka, kalikkuka",
+      "Hindi": "bacchoṁ jaisā vyavahāra karnā, bālacāpalya dikhānā",
+      "Bengali": "shishura moto aacharan kora, chhelemānushi korā",
+      "German": "sich kindisch verhalten, kindlich spielen",
+      "French": "agir comme un enfant, folâtrer",
+      "Russian": "vesti sebya po-detski, rezvit'sya",
+      "Chinese": "xiang haizi ban youxi, youzhi xishua"
+    }
+  },
+  {
+    "dhatu_id": "14.0015",
+    "aupadeshika": "jhapi",
+    "stripped_root": "jhamp",
+    "gana": "Bhvādi (Haimacandra Gaṇapāṭha)",
+    "pada": "Parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "plutagatau (kūrdane)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'jhamp' expresses the action of jumping, bounding, or making a sudden leap forward, just like a frog or a monkey moving swiftly.",
+      "scenarios": [
+        {
+          "verb_form": "jhampati",
+          "grammar_trigger": "Laṭ (Present Tense, Prathama Puruṣa, Ekavacana)",
+          "meaning": "jumps / leaps",
+          "example_sanskrit": "markaṭaḥ śākhāyāḥ śākhāntaraṁ jhampati.",
+          "example_english": "The monkey leaps from one branch to another."
+        },
+        {
+          "verb_form": "jhampiṣyati",
+          "grammar_trigger": "Lṛṭ (Simple Future Tense, Prathama Puruṣa, Ekavacana)",
+          "meaning": "will jump / will leap",
+          "example_sanskrit": "maṇḍūkaḥ taḍāgasya jale jhampiṣyati.",
+          "example_english": "The frog will jump into the water of the pond."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Non-Pāṇinian entry preserved in provincial and later grammatical digests; indexed in comparative lexicons under the sense of kūrdana (plutagati).",
+      "kshiratarangini": "Absent in standard classical Pāṇinian recensions; recorded in Hemacandra's Dhātupāṭha and Kavikalpadruma as an expressive root indicating leaping or jumping."
+    },
+    "meanings": {
+      "English": "to jump, to leap, to plunge",
+      "Kannada": "harivudu, dukkuvudu",
+      "Telugu": "dūkuṭa, gentuṭa",
+      "Tamil": "kutittal, pāytal",
+      "Malayalam": "chāṭuka, kuthikkuka",
+      "Hindi": "kūdanā, jhapaṭanā",
+      "Bengali": "jhā̃p deoyā, lāmpha deoyā",
+      "German": "springen, hüpfen",
+      "French": "sauter, bondir",
+      "Russian": "prygat', skakat'",
+      "Chinese": "tiào, yuè"
+    }
+  },
+  {
+    "dhatu_id": "14.0016",
+    "aupadeshika": "ṭaki",
+    "stripped_root": "ṭaṅk",
+    "gana": "bhvādi",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "bhedane",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'ṭaṅk' means to chisel, split, or pierce an object such as a rock or wood. It describes the physical action of breaking something open with a sharp tool or strike.",
+      "scenarios": [
+        {
+          "verb_form": "ṭaṅkati",
+          "grammar_trigger": "lat_prathama_purusha_ekavacana",
+          "meaning": "He/she splits or chisels (the stone).",
+          "example_sanskrit": "śilpī śilāṃ ṭaṅkati.",
+          "example_english": "The sculptor chisels the stone slab."
+        },
+        {
+          "verb_form": "aṭaṅkīt",
+          "grammar_trigger": "luṅ_prathama_purusha_ekavacana",
+          "meaning": "He/she split or fractured.",
+          "example_sanskrit": "kāṣṭhakaḥ kāsṭhaṃ dāruṇatayā aṭaṅkīt.",
+          "example_english": "The woodcutter split the timber forcefully."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "ṭaki bhedane - idittvānnum, ṭaṅkati. bhedanaṃ dāraṇam. asya prayogaḥ prāyeṇa śilpakarmasu dṛśyate.",
+      "kshiratarangini": "ṭaki bhedane - ṭaṅkati, ṭaṅkayati iti vā pāṭhāntaram. ididbhyo numiti numāgamaḥ."
+    },
+    "meanings": {
+      "English": "to split, to chisel, to crack, to incise",
+      "Kannada": "bhedisu, chellu, odiyuvudu",
+      "Telugu": "bhedincu, pagulagottu, chekku",
+      "Tamil": "pilaittal, vettutal, sedukkutal",
+      "Malayalam": "bhedikkuka, pilarkkuka, kothuka",
+      "Hindi": "chhedan karnā, phāṛnā, ṭāṅkī se toṛnā",
+      "Bengali": "bhedan karā, phātāl karā, chhedan karā",
+      "German": "spalten, meißeln, einritzen",
+      "French": "fendre, ciseler, entailler",
+      "Russian": "raskalyvat, rasshcheplyat, dolbit",
+      "Chinese": "pikai, zaokai"
+    }
+  },
+  {
+    "dhatu_id": "14.0017",
+    "aupadeshika": "chikka",
+    "stripped_root": "chikk",
+    "gana": "bhvādi (Class 1)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "kṣutau (kṣavane)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'chikk' means 'to sneeze'. It is an expressive root describing the involuntary expulsion of air from the nose and mouth caused by irritation, cold, or dust.",
+      "scenarios": [
+        {
+          "verb_form": "chikkati",
+          "grammar_trigger": "laṭ (Present Tense, 3rd Person Singular)",
+          "meaning": "sneezes",
+          "example_sanskrit": "dhūlivātena śiśuḥ punaḥ punaḥ chikkati.",
+          "example_english": "The child sneezes repeatedly due to the dusty wind."
+        },
+        {
+          "verb_form": "achikkat",
+          "grammar_trigger": "laṅ (Imperfect Past, 3rd Person Singular)",
+          "meaning": "sneezed",
+          "example_sanskrit": "tīkṣṇena gandhena saḥ achikkat.",
+          "example_english": "He sneezed because of the pungent smell."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Non-Paninian entry; recognized explicitly in Haimacandra's Dhātupāṭha under the gloss 'chikka kṣutau', indicating the bodily reflex of sneezing.",
+      "kshiratarangini": "Not recorded in standard Pāṇinian recensions; cited in non-Pāṇinian Jain grammars (Hemacandra) as an onomatopoeic root for sneezing (chikkati)."
+    },
+    "meanings": {
+      "English": "to sneeze",
+      "Kannada": "sīnu (sīnumāḍu)",
+      "Telugu": "tummu",
+      "Tamil": "tumpu",
+      "Malayalam": "tumpuka",
+      "Hindi": "chīṅkanā",
+      "Bengali": "hā̃ci deoyā",
+      "German": "niesen",
+      "French": "éternuer",
+      "Russian": "chikhat'",
+      "Chinese": "dǎ pēntì"
+    }
+  },
+  {
+    "dhatu_id": "14.0018",
+    "aupadeshika": "khuḍa",
+    "stripped_root": "khuḍ",
+    "gana": "bhvādi-gaṇa (Non-Paninian Haimacandra Class 1)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "khaṇḍane (troṭane)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'khuḍ' means to break, snap, fracture, or divide something into pieces. It works similarly to the common root 'troṭ' or 'bhañj' and is used when an object is snapped or severed.",
+      "scenarios": [
+        {
+          "verb_form": "khoḍati",
+          "grammar_trigger": "laṭ-lakāra (Present Tense, 3rd Person Singular)",
+          "meaning": "breaks / snaps",
+          "example_sanskrit": "bālakaḥ śuṣka-śākhāṁ khoḍati.",
+          "example_english": "The boy snaps the dry branch."
+        },
+        {
+          "verb_form": "akhoḍīt",
+          "grammar_trigger": "luṅ-lakāra (Aorist / Past Tense, 3rd Person Singular)",
+          "meaning": "broke / snapped",
+          "example_sanskrit": "kṛṣakaḥ daṇḍam akhoḍīt.",
+          "example_english": "The farmer broke the wooden stick."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "In Paninian vrittis, this root occurs in variant recensions alongside khuṭa/khuḍa bhede khaṇḍane ca, taking guṇa to form khoḍati.",
+      "kshiratarangini": "Kṣīrasvāmin notes khuḍa/khuṭa in the sense of splitting (khaṇḍana) or limping/breaking into parts (khoḍati)."
+    },
+    "meanings": {
+      "English": "to break, to snap, to divide into fragments",
+      "Kannada": "muriyuvudu, tuṇḍisu",
+      "Telugu": "virucuta, mukkalu ceyuta",
+      "Tamil": "uṭaittal, tuṇḍittukkoḷḷutal",
+      "Malayalam": "muṟikkuka, oṭikkuka",
+      "Hindi": "toḍanā, khaṇḍit karanā",
+      "Bengali": "bhāṅā, khaṇḍana karā",
+      "German": "brechen, zerbrechen, spalten",
+      "French": "casser, briser, fractionner",
+      "Russian": "lomat', razlamyvat', drobit'",
+      "Chinese": "zheduan, polie, duankai"
+    }
+  },
+  {
+    "dhatu_id": "14.0019",
+    "aupadeshika": "ghuṭṭa",
+    "stripped_root": "ghuṭṭ",
+    "gana": "Bhvādi (Gaṇa 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "pāne",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'ghuṭṭ' means to gulp, drink in a single draft, or swallow liquid greedily. Imagine drinking a full glass of cold water at once after playing under the hot sun.",
+      "scenarios": [
+        {
+          "verb_form": "ghoṭṭati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "He/she gulps or swallows a drink",
+          "example_sanskrit": "pipāsitaḥ bālaḥ jalaṃ ghoṭṭati.",
+          "example_english": "The thirsty boy gulps down the water."
+        },
+        {
+          "verb_form": "aghoṭṭīt",
+          "grammar_trigger": "Luṅ (Aorist / Past Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "He/she swallowed or gulped down",
+          "example_sanskrit": "saḥ ekena grāsena auṣadhaṃ aghoṭṭīt.",
+          "example_english": "He swallowed the medicine in one single gulp."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "ghuṭṭa pāne | hemacandrīye dhātupāṭhe ayaṃ dhātuḥ pāne grasane ceti viśeṣeṇa pathyate | ghoṭṭati, aghoṭṭīt ityādayaḥ prayogāḥ |",
+      "kshiratarangini": "ghuṭṭa pāne ityeke | grasane pānavat pravṛttiḥ | anye tu panīyādike ghuṭṭayati iti curādau gaṇayanti |"
+    },
+    "meanings": {
+      "English": "to gulp, to swallow, to drink avidly",
+      "Kannada": "guṭukisi kuḍiyu, nungu",
+      "Telugu": "guṭakalu vēyu, mrungu",
+      "Tamil": "kuṭittu viluṅku, paruku",
+      "Malayalam": "koṭikkoṭittukoṇṭu kuṭikkuka, viluṅṅuka",
+      "Hindi": "ghūṃṭ lenā, nigalnā, pīnā",
+      "Bengali": "ḍhoko gelā, pān karā",
+      "German": "hinunterschlucken, gierig trinken",
+      "French": "avaler d'un trait, gober, boire",
+      "Russian": "glotat', pit' zalpom",
+      "Chinese": "tūnyān, dàkǒu hē"
+    }
+  },
+  {
+    "dhatu_id": "14.0020",
+    "aupadeshika": "jhola",
+    "stripped_root": "jhol",
+    "gana": "Bhvadi",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Intransitive",
+    "canonical_dhatvartha": "andolane",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'jhol' means to swing, sway, or oscillate back and forth, similar to sitting on a swing or a tree branch moving in the wind.",
+      "scenarios": [
+        {
+          "verb_form": "jholati",
+          "grammar_trigger": "lat-lakara (present tense), prathama-purusha, eka-vacana",
+          "meaning": "swings / sways",
+          "example_sanskrit": "dolayam balakah jholati.",
+          "example_english": "The child swings on the swing."
+        },
+        {
+          "verb_form": "ajholat",
+          "grammar_trigger": "lan-lakara (past tense), prathama-purusha, eka-vacana",
+          "meaning": "swung / swayed",
+          "example_sanskrit": "vrikshasya shakha vayuna ajholat.",
+          "example_english": "The tree branch swayed due to the wind."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Non-Paninian root absent in standard Paninian recensions; recorded in Hemacandra's Dhatupatha under the sense of andolana (swinging, waving, or swaying).",
+      "kshiratarangini": "Omitted in standard Paninian lists like Kshirasvamin's core canon; attested specifically in late medieval and Jain grammatical traditions such as the Haimacandra school as 'jhola andolane'."
+    },
+    "meanings": {
+      "English": "to swing, to sway, to rock back and forth",
+      "Kannada": "tugu, uyyaleyadu, aladu",
+      "Telugu": "ugu, usaladu, andolana chendu",
+      "Tamil": "adu, unjaladu, asaivu kol",
+      "Malayalam": "atuka, unnalatuka, ilakuka",
+      "Hindi": "jhulana, dolana, hilana",
+      "Bengali": "jhola, dhola, dolana",
+      "German": "schaukeln, schwingen, wiegen",
+      "French": "se balancer, osciller",
+      "Russian": "kachat'sya, kolebat'sya",
+      "Chinese": "baidong, yaohuang"
+    }
+  },
+  {
+    "dhatu_id": "14.0021",
+    "aupadeshika": "chūṣa",
+    "stripped_root": "chūṣ",
+    "gana": "Bhvādi-gaṇa",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "ācūṣaṇe (rasagrahaṇe)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'chūṣ' means 'to suck', 'to sip', or 'to absorb liquid/nectar'. It is used when an agent draws in or extracts juice, fluid, or essence.",
+      "scenarios": [
+        {
+          "verb_form": "chūṣati",
+          "grammar_trigger": "kartari prayoga, laṭ lakāra (present tense), prathama puruṣa, eka-vacana",
+          "meaning": "Sucks / extracts juice",
+          "example_sanskrit": "bālaḥ madhuraṃ phalarasaṃ chūṣati.",
+          "example_english": "The child sucks the sweet fruit juice."
+        },
+        {
+          "verb_form": "achūṣat",
+          "grammar_trigger": "kartari prayoga, laṅ lakāra (past tense), prathama puruṣa, eka-vacana",
+          "meaning": "Sucked / drew in",
+          "example_sanskrit": "bhramaraḥ kusumasya rasaṃ sarvam achūṣat.",
+          "example_english": "The bee sucked in all the nectar of the flower."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "In comparative lexicography, this root is recorded in the Haima tradition as an aspirate variant of Paninian cūṣa (ācūṣaṇe), denoting the drawing in of fluids (rasākarṣaṇa).",
+      "kshiratarangini": "Kshirasvamin notes cūṣa prapāṇe; the Haimacandra recension lists chūṣa alongside cūṣa representing the phonological variant in the sense of ācūṣaṇa."
+    },
+    "meanings": {
+      "English": "To suck, to draw out juice, to absorb or sip liquid",
+      "Kannada": "Hīruvudu, rasavannu hireyuvudu",
+      "Telugu": "Pīlcukonu, rasamu trāgu",
+      "Tamil": "Uṟiñcutal, cāṟu kuṭittal",
+      "Malayalam": "Ūṟṟi kuṭikkuka, rasam valicceṭukkuka",
+      "Hindi": "Cūsanā, rasa pīnā",
+      "Bengali": "Cushiyā khāoyā, rasa ṭānā",
+      "German": "Aussaugen, einsaugen, schlürfen",
+      "French": "Sucer, aspirer le suc",
+      "Russian": "Sosat', vsasyvat', vpityvat'",
+      "Chinese": "Xīshǔn, xīqǔ zhīyè"
+    }
+  },
+  {
+    "dhatu_id": "14.0022",
+    "aupadeshika": "ṭalla",
+    "stripped_root": "ṭall",
+    "gana": "Bhvādi (Class 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "apāvāraṇe (dūrīkaraṇe)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'ṭall' means to ward off, evade, push aside, or put off an obstacle or danger. It is the classical root ancestor of common modern Indo-Aryan verbs meaning 'to stall' or 'to defer' (like Hindi ṭālanā).",
+      "scenarios": [
+        {
+          "verb_form": "ṭallati",
+          "grammar_trigger": "Laṭ lakāra (Present indicative), prathama puruṣa, ekavacana",
+          "meaning": "he/she removes or dodges",
+          "example_sanskrit": "bālaḥ saṅkaṭaṃ ṭallati.",
+          "example_english": "The boy evades the danger."
+        },
+        {
+          "verb_form": "aṭallīt",
+          "grammar_trigger": "Luṅ lakāra (Aorist), prathama puruṣa, ekavacana",
+          "meaning": "he/she warded off",
+          "example_sanskrit": "sainikaḥ śatrum aṭallīt.",
+          "example_english": "The soldier warded off the enemy."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "ṭalla apāvāraṇe | apāvāraṇaṃ dūrīkaraṇaṃ nivāraṇaṃ vā | ṭallati | aṭallīt | Haimasaṃpradāye sphuṭatayā paṭhitaḥ |",
+      "kshiratarangini": "ṭalla apāvāraṇe | apavāraṇaṃ dūrīkaraṇam | ṭallati ṭallataḥ ṭallanti |"
+    },
+    "meanings": {
+      "English": "To ward off, to evade, to remove, to push away",
+      "Kannada": "Dūramāḍu, nivārisu, tappisu",
+      "Telugu": "Tappañcukoṇu, dūrañjēyu, nivāriñcu",
+      "Tamil": "Vilakku, taḍu, nīkku",
+      "Malayalam": "Māṟṟuka, ozhivākkuka, taṭayuka",
+      "Hindi": "Ṭālanā, dūra karanā, haṭānā",
+      "Bengali": "Ṭālāno, dūre sarāno, nivāraṇa karā",
+      "German": "Abwenden, beseitigen, ausweichen",
+      "French": "Écarter, esquiver, éloigner",
+      "Russian": "Otklonyat', ustranyat', uklonyat'sya",
+      "Chinese": "Bìkāi, tuīkāi, páiqiǎn"
+    }
+  },
+  {
+    "dhatu_id": "14.0023",
+    "aupadeshika": "ḍakka",
+    "stripped_root": "ḍakk",
+    "gana": "bhvādi-gaṇa",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "saṃharaṇe",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'ḍakk' means to gather, collect, retract, or pull together into one place. For example, when you gather your books together or when a bird gathers twigs for a nest, this root describes that action of bringing things together.",
+      "scenarios": [
+        {
+          "verb_form": "ḍakkati",
+          "grammar_trigger": "kartari prayoga, laṭ-lakāra (present indicative), prathama-puruṣa (third person), ekavacana (singular)",
+          "meaning": "He/she gathers or collects together",
+          "example_sanskrit": "bālakaḥ vikirṇāni pustakāni ḍakkati.",
+          "example_english": "The boy gathers the scattered books together."
+        },
+        {
+          "verb_form": "aḍakkat",
+          "grammar_trigger": "kartari prayoga, laṅ-lakāra (past imperfect), prathama-puruṣa (third person), ekavacana (singular)",
+          "meaning": "He/she gathered or collected",
+          "example_sanskrit": "kṛṣakaḥ kṣetre dhānyaṃ sarvataḥ aḍakkat.",
+          "example_english": "The farmer collected the grain from all over the field."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'ḍakka' is systematically preserved in the Haimacandra tradition with the meaning 'saṃharaṇe' (drawing in, gathering, or retracting). In the standard Pāṇinian recensions represented by Sāyaṇa in the Mādhavīya-dhātuvṛtti, this distinct regional entry is either subsumed under cognate semantic roots of gathering or treated as an extra-systemic non-Pāṇinian variant.",
+      "kshiratarangini": "Kṣīrasvāmin focuses on primary Vedic and classical roots of the Pāṇinian corpus, noting comparable roots of containment and collection. The explicit lexical formulation 'ḍakka saṃharaṇe' serves as a distinguishing marker of the Jain Haima Dhātupāṭha."
+    },
+    "meanings": {
+      "English": "to gather, to collect, to assemble, to draw in, to retract",
+      "Kannada": "saṅgrahisu, oṭṭu gūḍisu",
+      "Telugu": "saṅgrahin̄cu, kūrcu, samētarpaṇa cēyu",
+      "Tamil": "sēkari, onṟuthiraṭṭu, aṭakku",
+      "Malayalam": "sēkharikkuka, kūṭṭiccērkkuka",
+      "Hindi": "saṅgraha karanā, samēṭanā, ikaṭṭhā karanā",
+      "Bengali": "saṅgraha karā, ekaṭra karā, samēṭā",
+      "German": "sammeln, zusammenziehen, einziehen",
+      "French": "rassembler, amasser, rétracter",
+      "Russian": "sobirat', stjagivat', sžimat'",
+      "Chinese": "shǒují, jùjí, shōusuo"
+    }
+  },
+  {
+    "dhatu_id": "14.0024",
+    "aupadeshika": "madda",
+    "stripped_root": "madd",
+    "gana": "Bhvādigaṇa",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "mardane",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'madd' is used when someone crushes, grinds, rubs, or firmly presses something down.",
+      "scenarios": [
+        {
+          "verb_form": "maddati",
+          "grammar_trigger": "Laṭ (Present Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "He or she crushes / grinds",
+          "example_sanskrit": "bhiṣak auṣadham maddati.",
+          "example_english": "The physician crushes the herbal medicine."
+        },
+        {
+          "verb_form": "amaddat",
+          "grammar_trigger": "Laṅ (Past Tense), Prathama Puruṣa (Third Person), Ekavacana (Singular)",
+          "meaning": "He or she crushed / pressed",
+          "example_sanskrit": "kṛṣīvalaḥ bījam amaddat.",
+          "example_english": "The farmer crushed the seed."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "madda mardane - Recorded in non-Paninian traditions such as the Haima Dhātupāṭha as a root denoting sampīḍana (pressing/grinding), closely associated with classical mṛd.",
+      "kshiratarangini": "madda ityeko mardanārthaḥ; listed in western non-Paninian lexical registers (Haimacandra) reflecting secondary and Prakrit-influenced root formations."
+    },
+    "meanings": {
+      "English": "to crush, to grind, to rub, to press down",
+      "Kannada": "arubuvudu, hudi mādāvudu, hidukuvudu",
+      "Telugu": "mardincu, pisuku, nūru",
+      "Tamil": "araippadu, nerukkuvadu, pisivadu",
+      "Malayalam": "arakkuka, ñerukkuka, podikkuka",
+      "Hindi": "masalanā, pīsanā, mardana karanā",
+      "Bengali": "dola kara, gū̃ṛo kara, mardana kara",
+      "German": "zerdrücken, zerreiben, mahlen",
+      "French": "écraser, broyer, presser",
+      "Russian": "razdavlivat', istirat', molot'",
+      "Chinese": "yāsuì, yánmò, cuō"
+    }
+  },
+  {
+    "dhatu_id": "14.0025",
+    "aupadeshika": "rilla~",
+    "stripped_root": "rill",
+    "gana": "bhvādi",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "gatau (saraṇe)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'rill' expresses the action of flowing, gliding smoothly, or moving continuously forward, like a gentle stream or sliding movement.",
+      "scenarios": [
+        {
+          "verb_form": "rillati",
+          "grammar_trigger": "kartari prayoga, laṭ lakāra (present tense), prathama puruṣa, eka-vacana",
+          "meaning": "flows or glides",
+          "example_sanskrit": "vāri parvata-tale nirmalaṃ rillati.",
+          "example_english": "The clear water glides smoothly at the base of the mountain."
+        },
+        {
+          "verb_form": "arillat",
+          "grammar_trigger": "kartari prayoga, laṅ lakāra (past imperfect), prathama puruṣa, eka-vacana",
+          "meaning": "flowed or moved forward",
+          "example_sanskrit": "sarit sahasā samudre arillat.",
+          "example_english": "The stream swiftly flowed into the ocean."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Not listed in the standard Pāṇinian recension of Mādhavīya-dhātuvṛtti; it belongs to the non-Pāṇinian Haima tradition in the sense of gati (motion/trickling).",
+      "kshiratarangini": "This root is specific to the Jaina grammatical system of Hemacandra (Haima Dhātupāṭha) and is omitted in Kṣīrasvāmin's Pāṇinian Kṣīrataraṅgiṇī."
+    },
+    "meanings": {
+      "English": "to move, glide, trickle, or flow",
+      "Kannada": "hariyu, calisu, jhāriyu",
+      "Telugu": "pravahincu, kadalu, jaaru",
+      "Tamil": "paayndhu oodu, nagaru, oluku",
+      "Malayalam": "ozhukuka, chanchalikkuka",
+      "Hindi": "bahana, sarakana, gati karana",
+      "Bengali": "probahitô howa, sorê jawa",
+      "German": "fließen, gleiten, sich vorwärtsbewegen",
+      "French": "couler, glisser, s'écouler",
+      "Russian": "tech', skol'zit', dvigat'sya",
+      "Chinese": "liútǎng, huádòng, qiánjìn"
+    }
+  },
+  {
+    "dhatu_id": "14.0027",
+    "aupadeshika": "ṣalla",
+    "stripped_root": "sall",
+    "gana": "bhvādi (gana 1)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka (intransitive) / sakarmaka (transitive in the sense of approach)",
+    "canonical_dhatvartha": "saṃgamane (gatau ca)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root sall means to come together, unite, or move in company with others. In simple words, it is used whenever people, rivers, or paths join together or proceed in unison.",
+      "scenarios": [
+        {
+          "verb_form": "sallati",
+          "grammar_trigger": "lat (present indicative, prathama purusha, eka-vacana)",
+          "meaning": "He/she/it joins or moves together",
+          "example_sanskrit": "nadyāḥ pravāhaḥ samudreṇa saha sallati.",
+          "example_english": "The stream of the river converges with the ocean."
+        },
+        {
+          "verb_form": "asallat",
+          "grammar_trigger": "lang (imperfect past, prathama purusha, eka-vacana)",
+          "meaning": "He/she/it converged or moved along",
+          "example_sanskrit": "panthāḥ mārgeṇa asallat.",
+          "example_english": "The pathway joined with the main road."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Not primary in Paninian recension; documented in collateral traditions as a variant of moving and mixing (malla-sallādi-varga).",
+      "kshiratarangini": "Recorded under parallel roots denoting saṃhata-gati or bodily/physical aggregation."
+    },
+    "meanings": {
+      "English": "to go together, to unite, to assemble, to converge",
+      "Kannada": "kooduvudu, calisuvudu, seruvudu",
+      "Telugu": "kalisipovuta, naducuta, ekamavuta",
+      "Tamil": "onru kooduthal, selluthal, inainthu selluthal",
+      "Malayalam": "cheruka, koottamaayi yaathra cheyyuka",
+      "Hindi": "milna, sangamana hona, gati karna",
+      "Bengali": "melita haoya, sangama haoya, gamana kara",
+      "German": "zusammengehen, sich vereinigen, zusammenfliessen",
+      "French": "s'unir, aller ensemble, converger",
+      "Russian": "soyedinyat'sya, sobirat'sya vmeste, idti vmeste",
+      "Chinese": "xiangju, hebing, qianwang"
+    }
+  },
+  {
+    "dhatu_id": "14.0028",
+    "aupadeshika": "ghalla",
+    "stripped_root": "ghall",
+    "gana": "Bhvādi (Gaṇa 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "preraṇe",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'ghall' means to drive, send, urge, or throw. Imagine urging a chariot horse forward or sending a messenger on an errand.",
+      "scenarios": [
+        {
+          "verb_form": "ghallati",
+          "grammar_trigger": "laṭ (Present Tense), Prathama Puruṣa, Ejavacana",
+          "meaning": "He/she urges or sends",
+          "example_sanskrit": "nṛpaḥ dūtaṁ nagaraṁ ghallati.",
+          "example_english": "The king sends the messenger to the city."
+        },
+        {
+          "verb_form": "aghallat",
+          "grammar_trigger": "laṅ (Past Tense), Prathama Puruṣa, Ekavacana",
+          "meaning": "He/she urged or threw",
+          "example_sanskrit": "sainikaḥ śatruṁ prati bāṇaṁ aghallat.",
+          "example_english": "The soldier threw an arrow towards the enemy."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "ghalla preraṇe kṣepe ca ityeke. ayam pāṇinīya-pāṭheṣu sārvatrikaḥ na bhavati kintu haima-cāndra-dhātupāṭheṣu preraṇārthespaṣṭaṁ nirdiṣṭaḥ.",
+      "kshiratarangini": "ghalla preraṇārthaḥ. asya gaṇasūtreṣu dākṣiṇātyapāṭheṣu ca deśyatvena saṅgrahaḥ kṛto dṛśyate."
+    },
+    "meanings": {
+      "English": "to drive, urge, send, throw",
+      "Kannada": "prērisu, kaḷuhisu, eseyu",
+      "Telugu": "prēripincu, pampu, visuru",
+      "Tamil": "ēvu, anuppu, eṟi",
+      "Malayalam": "prērippikkuka, ayakkuka, eṟiyuka",
+      "Hindi": "prerita karnā, bhejanā, pheṅkanā",
+      "Bengali": "prerita karā, pāṭhānō, chōnṛā",
+      "German": "antreiben, senden, werfen",
+      "French": "inciter, envoyer, jeter",
+      "Russian": "pobuzhdat', posylat', brosat'",
+      "Chinese": "qūdǐng, fāsòng, tóuzhì"
+    }
+  },
+  {
+    "dhatu_id": "14.0030",
+    "aupadeshika": "khalla",
+    "stripped_root": "khall",
+    "gana": "bhvādi (Class I)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "saṃkoce (patane)",
+    "tradition_tag": "Haimacandra",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'khall' means to contract, shrink, or fall/stumble down. Think of it like a dried leaf shrinking in the sun, or a tired traveler stumbling and collapsing from exhaustion.",
+      "scenarios": [
+        {
+          "verb_form": "khallati",
+          "grammar_trigger": "Laṭ (Present Indicative), Prathama Puruṣa, Ekavacana",
+          "meaning": "shrinks / falls down",
+          "example_sanskrit": "vṛddhaḥ pathi khallati.",
+          "example_english": "The old man stumbles and falters on the road."
+        },
+        {
+          "verb_form": "akhallīt",
+          "grammar_trigger": "Luṅ (Aorist), Prathama Puruṣa, Ekavacana",
+          "meaning": "contracted / collapsed",
+          "example_sanskrit": "śītena patraṃ akhallīt.",
+          "example_english": "Due to the cold, the leaf shrank."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "khalla saṃkocane patane ca | The standard Pāṇinian recension treats parallel forms under variants like 'khal', whereas Hemacandra explicitly isolates 'khall' in the sense of shrinking and dropping.",
+      "kshiratarangini": "Kṣīrasvāmin observes the root among non-Pāṇinian variants noting: khalla gati-saṅkocayoḥ, preserved robustly in the western grammar traditions such as Hemacandra's Dhātupārāyaṇa."
+    },
+    "meanings": {
+      "English": "to contract, shrink, stumble, fall down",
+      "Kannada": "saṅkocagoḷḷu, kuṅgu, bīḻu",
+      "Telugu": "saṅkocincu, kuṅgipovu, paḍipovu",
+      "Tamil": "curuṅku, taḷar, vīḻ",
+      "Malayalam": "curuṅṅuka, saṅkocikkuka, vīḻuka",
+      "Hindi": "sikuḍanā, jhulasanā, gir paḍanā",
+      "Bengali": "saṅkucita haoyā, jhmepe paṛā, patita haoyā",
+      "German": "sich zusammenziehen, schrumpfen, straucheln, hinfallen",
+      "French": "se contracter, rétrécir, trébucher, tomber",
+      "Russian": "szhimat'sya, sokrashchat'sya, spotykat'sya, padat'",
+      "Chinese": "shōusuō, wěisuō, diēdǎo"
+    }
+  },
+  {
+    "dhatu_id": "14.0031",
+    "aupadeshika": "khaja",
+    "stripped_root": "khaj",
+    "gana": "Bhvādi (Prathama Gaṇa)",
+    "pada": "Parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "manthane",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'khaj' means to churn or vigorously stir liquids such as milk or curd in order to make butter.",
+      "scenarios": [
+        {
+          "verb_form": "khajati",
+          "grammar_trigger": "Present tense (laṭ), Third person singular",
+          "meaning": "churns / stirs",
+          "example_sanskrit": "Gopī prātaḥ dadhi khajati.",
+          "example_english": "The milkmaid churns the curd in the morning."
+        },
+        {
+          "verb_form": "akhajat",
+          "grammar_trigger": "Past tense (laṅ), Third person singular",
+          "meaning": "churned / stirred",
+          "example_sanskrit": "Kṛṣṇaḥ daṇḍena sarasīsalilaṃ samakhajat.",
+          "example_english": "Krishna agitated the lake water with a stick."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "khaja manthane. manthanam āloḍanam. khajati. cakheja. khajitā. khajiṣyati.",
+      "kshiratarangini": "khaja manthane. āloḍane vartate. khajati dadhi gopī."
+    },
+    "meanings": {
+      "English": "to churn, agitate, stir",
+      "Kannada": "kaḍeyuvudu, kalakuvudu",
+      "Telugu": "cilukuta, taracuta",
+      "Tamil": "kaḍaidal, kalakkudal",
+      "Malayalam": "kaṭayuka, iḷakkuka",
+      "Hindi": "mathanā, bilonā",
+      "Bengali": "manthan karā, ghõṭā",
+      "German": "buttern, rühren, aufquirlen",
+      "French": "baratter, agiter, remuer",
+      "Russian": "sbivat maslo, vzbaltyvat, peremeshivat",
+      "Chinese": "jiao ban, yao dong"
+    }
+  },
+  {
+    "dhatu_id": "14.0034",
+    "aupadeshika": "ḍipa",
+    "stripped_root": "ḍip",
+    "gana": "bhvādi (Candra-pāṭha)",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "kṣepe (preraṇe)",
+    "tradition_tag": "Candragomin",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'ḍip' means to throw, toss, cast, or send forth. You can use it whenever a person throws a stone, sends an object flying, or propels something away.",
+      "scenarios": [
+        {
+          "verb_form": "ḍepati",
+          "grammar_trigger": "lat (present tense, 3rd person singular / prathama-puruṣa ekavacana)",
+          "meaning": "throws / casts",
+          "example_sanskrit": "bālakaḥ aśmānaṃ dūre ḍepati.",
+          "example_english": "The boy throws the stone far away."
+        },
+        {
+          "verb_form": "aḍipīt",
+          "grammar_trigger": "luṅ (aorist tense, 3rd person singular / prathama-puruṣa ekavacana)",
+          "meaning": "threw / cast",
+          "example_sanskrit": "vīraḥ bāṇaṃ śatrau aḍipīt.",
+          "example_english": "The warrior shot/cast an arrow at the enemy."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "ḍipa kṣepe | cāndra-dhātupāṭhe kṣepe preraṇe ca paṭhitaḥ | ḍepati, ḍiḍepa, ḍipitā, aḍipīt |",
+      "kshiratarangini": "ḍipa kṣepe | kṣepaṇaṃ preraṇaṃ nirākaraṇaṃ vā | kṣipatyarthe cāndrādibhir aṅgīkṛtaḥ |"
+    },
+    "meanings": {
+      "English": "to throw, cast, propel, discharge",
+      "Kannada": "eseyuvudu, hākuvudu, kṣēpisuvudu",
+      "Telugu": "visuruta, trōyuta, kṣēpiñcuta",
+      "Tamil": "eṟital, vīcutal, seluttutal",
+      "Malayalam": "eṟiyuka, kṣēpikkuka, viṭuka",
+      "Hindi": "phenkanā, calānā, kṣepaṇa karanā",
+      "Bengali": "chōn̐ṛā, nikṣepa karā, phelā",
+      "German": "werfen, schleudern, entsenden",
+      "French": "jeter, lancer, projeter",
+      "Russian": "brosat', kidat', metat'",
+      "Chinese": "tóu zhì, fàng chū, pāo"
+    }
   }
 ]
