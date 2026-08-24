@@ -801,11 +801,18 @@
   </div>
 </div>
 
-<div class="modal-overlay" id="libraryModal">
+<!-- 24 Aug 2026: Phase 2 of the mobile UI overhaul -- the Library modal is
+     now a left-edge sliding drawer (see .drawer-left in main.css) rather
+     than a centered popup, so it matches the "left-top icon -> full-height
+     panel from the left" navigation pattern used across mobile apps. Only
+     the outer wrapper changed: openModal()/closeModal() still find it by
+     id, and #libraryModalList / #quickJumpInput are exactly as before, so
+     library.js needed no changes at all. -->
+<div class="modal-overlay drawer-left" id="libraryModal">
   <div class="modal-content">
     <div class="modal-header-sticky">
       <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">📚 Library</h3>
-      <button class="btn-sm" onclick="window.closeModal('libraryModal')" style="font-size:11px;">✖ Close</button>
+      <button class="btn-sm" onclick="window.closeModal('libraryModal')" style="font-size:11px;" title="Close">❮</button>
     </div>
     <div class="modal-body">
       <div style="display:flex; gap:6px; margin-bottom:14px;">

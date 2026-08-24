@@ -446,6 +446,43 @@ body:has(.popup-sheet.show)::after {
 .modal-content.fullscreen .modal-body { display: flex; flex-direction: column; flex-grow: 1; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
 .modal-content.fullscreen textarea { flex-grow: 1; height: auto; min-height: 50vh; resize: none; margin-bottom: 12px; }
 
+/* 24 Aug 2026 -- Phase 2 of the mobile UI overhaul: off-canvas drawers.
+   .drawer-left/.drawer-right turn an ordinary centered .modal-overlay into
+   a full-height panel that slides in from an edge -- the same navigation
+   pattern used by Gmail, Slack, Spotify and Claude's own app (formalized
+   as Android/Material Design's "Navigation Drawer" component, itself
+   descended from the hamburger icon Norm Cox designed for the 1981 Xerox
+   Star -- not anything specific to one reference site). openModal()/
+   closeModal() (modals.js) special-case these two classes to swap from a
+   plain display:none<->flex toggle to a show/hide class so the slide can
+   transition; every other modal-overlay on the site is untouched by that
+   branch and keeps working exactly as before. */
+.modal-overlay.drawer-left,
+.modal-overlay.drawer-right {
+  align-items: stretch;
+  background: rgba(0,0,0,0);
+  transition: background var(--t-med) var(--ease);
+}
+.modal-overlay.drawer-left { justify-content: flex-start; }
+.modal-overlay.drawer-right { justify-content: flex-end; }
+.modal-overlay.drawer-left.show,
+.modal-overlay.drawer-right.show { background: rgba(0,0,0,0.55); }
+
+.modal-overlay.drawer-left .modal-content,
+.modal-overlay.drawer-right .modal-content {
+  width: min(340px, 86vw); max-width: none;
+  height: 100%; max-height: none;
+  margin: 0; border-radius: 0; border-top: none; border-bottom: none;
+  animation: none; /* the drawer's own slide replaces the centered-modal pop-in */
+  transition: transform var(--t-med) var(--ease);
+}
+.modal-overlay.drawer-left .modal-content { border-left: none; transform: translateX(-100%); }
+.modal-overlay.drawer-right .modal-content { border-right: none; transform: translateX(100%); }
+.modal-overlay.drawer-left.show .modal-content,
+.modal-overlay.drawer-right.show .modal-content { transform: translateX(0); }
+.modal-overlay.drawer-left .modal-body,
+.modal-overlay.drawer-right .modal-body { padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
+
 .modal-header-sticky { padding: 16px; background: var(--card-bg); z-index: 10; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
 .modal-body { padding: 16px; overflow-y: auto; flex-grow: 1; }
 
