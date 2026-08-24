@@ -689,10 +689,13 @@ def build(work_title_devanagari, index_page_devanagari, out_rel_path, source_url
             if page in cache:
                 continue
             is_first = (i == 0)
-            if convention == "critical":
+            if convention in ("critical", "lakshmi"):
                 num_m = CHAPTER_NUM_RX.search(page)
                 chapter_num = to_int(num_m.group(1)) if num_m else i + 1
-                title, units = parse_chapter_critical(page, chapter_num=chapter_num)
+                if convention == "lakshmi":
+                    title, units = parse_chapter_lakshmi(page, chapter_num=chapter_num)
+                else:
+                    title, units = parse_chapter_critical(page, chapter_num=chapter_num)
             else:
                 is_appendix = page.endswith("परिशिष्टम्")
                 title, units = parse_chapter(page, is_first_chapter=is_first, is_appendix=is_appendix)
@@ -936,12 +939,13 @@ if __name__ == "__main__":
     ap.add_argument("source_url")
     ap.add_argument("--repo-root", default="/home/user/bhumandala")
     ap.add_argument("--note-extra", default="")
-    ap.add_argument("--convention", choices=["ocr", "critical"], default="ocr",
+    ap.add_argument("--convention", choices=["ocr", "critical", "lakshmi"], default="ocr",
                      help="'ocr' (default) for a plain-transcription page like "
                           "Ahirbudhnyasamhita/Vishnusamhita; 'critical' for a "
                           "critical-edition page with per-chapter verse "
                           "numbering and a bracket/paren apparatus, like "
-                          "Jayakhyasamhita.")
+                          "Jayakhyasamhita; 'lakshmi' for Lakshmitantram's own "
+                          "tab-indented-commentary apparatus.")
     ap.add_argument("--padma", action="store_true",
                      help="Padmasamhita's own 4-pada build path instead of "
                           "the single-work build() -- see build_padma().")
