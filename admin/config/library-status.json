@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 1857,
-  "loaded": 1199,
-  "items": 607773
+  "loaded": 1200,
+  "items": 607778
  },
  "sections": {
   "agama": {
@@ -13,8 +13,8 @@
   },
   "darshana": {
    "total": 290,
-   "loaded": 99,
-   "items": 25949
+   "loaded": 100,
+   "items": 25954
   },
   "dasa_sahitya": {
    "total": 67,
@@ -262,7 +262,7 @@
   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/chandogya_upanishad/bhashya": 1166,
   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/isha_upanishad/bhashya": 37,
   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/katha_upanishad/bhashya": 0,
-  "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/kena_upanishad/bhashya": 0,
+  "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/kena_upanishad/bhashya": 5,
   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/mandukya_upanishad/bhashya": 439,
   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/mundaka_upanishad/bhashya": 0,
   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/prashna_upanishad/bhashya": 134,

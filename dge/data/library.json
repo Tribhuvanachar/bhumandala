@@ -847,6 +847,11 @@
       "addedAt": "2026-08-24"
     },
     {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/kena_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya"
+    },
+    {
       "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/mandukya_upanishad/bhashya/data.json",
       "populated": true,
       "title": "Bhashya",

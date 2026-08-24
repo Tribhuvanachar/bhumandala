@@ -78,16 +78,18 @@ WORKS = [
     ("brihadaranyaka","darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/brihadaranyaka_upanishad",
         f"{GRC}/sa_bRhadAraNyakopaniSadkANva-recension-comm.htm", "iast_htm", "Brihadaranyaka Upanishad Bhashya"),
 
-    # Kena / Katha / Mundaka bhashyas: UNAVAILABLE. Not in GRETIL's corpus
-    # (index says "restricted / not available from TITUS"), and the old classic
-    # 1_veda/4_upa/ paths below are dead (HTTP 404). Left commented out pending a
-    # separate follow-up to wire in the sanskritdocuments.org ITX fallback.
-    # ("kena",    "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/kena_upanishad",
-    #     f"{GRETIL}/1_sanskr/1_veda/4_upa/kenupsbu.htm", "iast_htm", "Kena Upanishad Bhashya"),
-    # ("katha",   "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/katha_upanishad",
-    #     f"{GRETIL}/1_sanskr/1_veda/4_upa/kathupsb_u.htm", "iast_htm", "Katha Upanishad Bhashya"),
-    # ("mundaka", "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/mundaka_upanishad",
-    #     f"{GRETIL}/1_sanskr/1_veda/4_upa/mundupsb_u.htm", "iast_htm", "Mundaka Upanishad Bhashya"),
+    # Kena bhashya: not in GRETIL (index says "restricted / not available from
+    # TITUS"), and the old classic 1_veda/4_upa/ path below is dead (HTTP 404).
+    # Fetched separately below (run_kena()) -- sanskritdocuments.org's copy is
+    # ITX (ITRANS + LaTeX macros), a different source format from every other
+    # work here (GRETIL/Zenodo IAST), not a fit for this WORKS-list/parse_units
+    # pipeline built around GRETIL's own reference-marker convention.
+    #
+    # Katha / Mundaka bhashyas: checked sanskritdocuments.org directly (24 Aug)
+    # -- it hosts only their MULA text, no Shankara bhashya. The only bhashya
+    # copies found are scanned books on archive.org (e.g. "Kathopanishad
+    # Shankar Bhashya" by Swami Siddhipradananda), which would need OCR, not
+    # just a fetch -- a materially bigger job, left as a further follow-up.
 
     ("gita_bhashya","darshana/vedanta/advaita/shankara_bhashya/gita_bhashya",
         f"{GRETIL}/1_sanskr/6_sastra/3_phil/vedanta/bhgsbh_u.htm", "iast_htm", "Gita Bhashya"),
@@ -202,7 +204,112 @@ def fetch_text(url, fmt):
     return raw  # iast_txt
 
 
+KENA_URL = "https://sanskritdocuments.org/doc_upanishhat/kenopaniShadshAnkarabhAShya.itx"
+KENA_TARGET = "darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/kena_upanishad"
+
+KENA_SECTION = re.compile(r"\\section\{([^}]*)\}")
+# sanskritdocuments.org's LaTeX+ITRANS macro conventions, none of which
+# itrans_to_dev() understands on its own (checked directly -- passed through
+# it unclean, "\ldq{}" transliterates letter-by-letter into nonsense
+# Devanagari exactly like the GRETIL header-junk bug above, just a different
+# source and a different markup convention producing the same failure mode).
+KENA_HYPHEN_POINT = re.compile(r"\\-")          # explicit hyphenation point, not a real hyphen
+KENA_ESCAPED_PUNCT = re.compile(r"\\([.|,])")    # "\." "\|" "\," -> unescaped punctuation
+KENA_QUOTE_OPEN = re.compile(r"\\ldq\{\}")
+KENA_QUOTE_CLOSE = re.compile(r"\\rdq\{\}")
+# A single occurrence in the whole file: "abhIkShNa{\m+}sa~NkalpaH" -- an
+# explicit-anusvara macro (the intended reading is "abhIkShNaM sa~NkalpaH").
+# Narrow on purpose (this exact macro, not a general brace-stripper) since
+# it's the only one of its kind found by direct inspection.
+KENA_ANUSVARA_MACRO = re.compile(r"\{\\m\+\}")
+# A LaTeX \chapter{...} heading -- checked directly: this file uses it once,
+# introducing the endnotes appendix after adhyAya 4's own colophon ("iti
+# ...kenopaniShadbhAShyaM sampUrNam ||"). \section{} above already covers
+# the adhyAya-level split; this is the one other LaTeX sectioning command
+# present, kept as a heading-strip (drop the macro, keep the argument as
+# plain text) rather than a further split point, matching how a Markdown
+# header is handled elsewhere in this project's importers.
+KENA_CHAPTER_MACRO = re.compile(r"\\chapter\{([^}]*)\}")
+# The file's own closing watermark/boilerplate ("Prepared by ... Last
+# updated ... \end{document}") -- not Shankara's text. Cut everything from
+# here on, in whichever unit it ends up in (only ever the last one).
+KENA_FOOTER = re.compile(r"##\s*Prepared by.*", re.S)
+# A bare "(N)" is this file's own footnote-reference marker (confirmed by
+# reading the tail of the file, where the referenced footnotes themselves
+# appear as a "(276) <note text>" numbered list) -- distinct from a genuine
+# citation like "(bR^i. 1.4.17)", which always has text/abbreviation inside
+# the parens, never digits alone.
+KENA_FOOTNOTE_MARKER = re.compile(r"\(\d+\)")
+
+
+def _kena_clean_itrans(s):
+    s = KENA_FOOTER.sub(" ", s)
+    s = KENA_QUOTE_OPEN.sub('"', s)
+    s = KENA_QUOTE_CLOSE.sub('"', s)
+    s = KENA_ANUSVARA_MACRO.sub("M", s)
+    s = KENA_CHAPTER_MACRO.sub(r"\1", s)
+    s = KENA_HYPHEN_POINT.sub("", s)
+    s = KENA_ESCAPED_PUNCT.sub(r"\1", s)
+    s = KENA_FOOTNOTE_MARKER.sub(" ", s)
+    return s
+
+
+def parse_kena_itx(raw):
+    """LaTeX-ITX with \\section{...} markers, not GRETIL's Ref_N convention
+    -- split on those instead of parse_units(). The first two sections
+    (a bare root-verse listing, then a topic index / table of contents) are
+    front matter, not commentary; skipped by name. Each remaining section
+    (one per khanda/adhyaya) is cleaned of this file's own LaTeX macros
+    before ITRANS->Devanagari transliteration -- itrans_to_dev() does not
+    understand them and would otherwise transliterate the raw macro text
+    into nonsense Devanagari letter-by-letter (checked directly)."""
+    parts = KENA_SECTION.split(raw)
+    # split() with a capturing group yields [pre, title1, body1, title2, body2, ...]
+    units = []
+    i = 1
+    while i < len(parts) - 1:
+        title, body = parts[i].strip(), parts[i + 1]
+        i += 2
+        title_lc = title.lower()
+        if "mantravivaranam" in title_lc or "anukramanika" in title_lc:
+            continue
+        body = re.sub(r"^%.*$", "", body, flags=re.M)   # stray comment lines, if any survive mid-body
+        body = _kena_clean_itrans(body)
+        body = re.sub(r"##", " ", body)
+        body = re.sub(r"\s+", " ", body).strip()
+        if body:
+            units.append((title, body))
+    return units
+
+
+def run_kena():
+    print(f"kena <- {KENA_URL}")
+    try:
+        raw = http_get(KENA_URL)
+    except Exception as e:
+        print(f"  ! fetch failed: {e}")
+        return
+    units = parse_kena_itx(raw)
+    if not units:
+        print("  ~ no units parsed (check \\section{} markers)")
+        return
+    items = []
+    for n, (ref, body) in enumerate(units, 1):
+        try:
+            sanskrit_text = itrans_to_dev(body)
+        except Exception:
+            sanskrit_text = body
+        items.append({"id": f"unit_{n:04d}", "reference": ref,
+                      "tika_title": "Kena Upanishad Bhashya",
+                      "sanskrit_text": sanskrit_text, "transliteration": body})
+    write_grantha(f"{KENA_TARGET}/bhashya", "grantha_tika_text",
+                  "Sri Adi Shankaracharya", items)
+    print(f"  {len(items)} units -> {KENA_TARGET}/bhashya")
+
+
 def run(only=None):
+    if not only or only == "kena":
+        run_kena()
     for slug, target, url, fmt, title in WORKS:
         if only and slug != only:
             continue
