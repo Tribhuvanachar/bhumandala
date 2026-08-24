@@ -15,7 +15,8 @@
       "composer": "Helavanakatte Giriyamma",
       "deity": "",
       "tags": [
-        "composer:Helavanakatte Giriyamma"
+        "composer:Helavanakatte Giriyamma",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -71,7 +72,8 @@
       "deity": "Shiva",
       "tags": [
         "composer:Helavanakatte Giriyamma",
-        "deity:Shiva"
+        "deity:Shiva",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -123,7 +125,8 @@
       "composer": "Helavanakatte Giriyamma",
       "deity": "",
       "tags": [
-        "composer:Helavanakatte Giriyamma"
+        "composer:Helavanakatte Giriyamma",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -178,7 +181,8 @@
       "composer": "Helavanakatte Giriyamma",
       "deity": "",
       "tags": [
-        "composer:Helavanakatte Giriyamma"
+        "composer:Helavanakatte Giriyamma",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -244,7 +248,8 @@
       "composer": "Helavanakatte Giriyamma",
       "deity": "",
       "tags": [
-        "composer:Helavanakatte Giriyamma"
+        "composer:Helavanakatte Giriyamma",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -299,7 +304,8 @@
       "deity": "Rama",
       "tags": [
         "composer:Helavanakatte Giriyamma",
-        "deity:Rama"
+        "deity:Rama",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -435,7 +441,8 @@
       "deity": "Narasimha",
       "tags": [
         "composer:Helavanakatte Giriyamma",
-        "deity:Narasimha"
+        "deity:Narasimha",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -503,7 +510,8 @@
       "composer": "Helavanakatte Giriyamma",
       "deity": "",
       "tags": [
-        "composer:Helavanakatte Giriyamma"
+        "composer:Helavanakatte Giriyamma",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -569,7 +577,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -625,7 +634,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -646,7 +656,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -696,7 +707,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -717,7 +729,9 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "",
       "tala": "",
@@ -767,7 +781,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -788,7 +803,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -837,7 +853,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -858,7 +875,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -907,7 +925,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -928,7 +947,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -979,7 +999,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1000,7 +1021,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1042,7 +1064,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1063,7 +1086,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1118,7 +1142,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1139,7 +1164,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1186,7 +1212,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1207,7 +1234,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1251,7 +1279,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1272,7 +1301,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1330,7 +1360,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1351,7 +1382,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1407,7 +1439,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1428,7 +1461,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1485,7 +1519,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1506,7 +1541,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1552,7 +1588,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1573,7 +1610,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1615,7 +1653,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1636,7 +1675,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1704,7 +1744,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1725,7 +1766,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1774,7 +1816,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1795,7 +1838,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1840,7 +1884,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1861,7 +1906,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1912,7 +1958,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -1933,7 +1980,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1995,7 +2043,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2016,7 +2065,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2061,7 +2111,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2082,7 +2133,9 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "",
       "tala": "",
@@ -2127,7 +2180,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2148,7 +2202,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2195,7 +2250,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2216,7 +2272,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2276,7 +2333,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2297,7 +2355,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2346,7 +2405,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2367,7 +2427,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2429,7 +2490,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2450,7 +2512,9 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "",
       "tala": "",
@@ -2513,7 +2577,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2534,7 +2599,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2593,7 +2659,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2614,7 +2681,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2665,7 +2733,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2686,7 +2755,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2742,7 +2812,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2763,7 +2834,9 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ಸರಸಾಂಗಿ",
       "tala": "ಆದಿ ತಾಳ",
@@ -2820,7 +2893,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2841,7 +2915,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2886,7 +2961,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2907,7 +2983,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2957,7 +3034,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -2978,7 +3056,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3035,7 +3114,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -3056,7 +3136,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3113,7 +3194,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -3134,7 +3216,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3189,7 +3272,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -3210,7 +3294,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3267,7 +3352,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -3288,7 +3374,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3334,7 +3421,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -3355,7 +3443,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3556,7 +3645,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -3577,7 +3667,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3626,7 +3717,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -3647,7 +3739,9 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ಮಧುಕೌಂಸ್",
       "tala": "ರೂಪಕ ತಾಳ",
@@ -3696,7 +3790,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
@@ -3717,7 +3812,8 @@
       "tags": [
         "composer:ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3765,7 +3861,8 @@
         "header_stripped": [
           "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಹೆಳವನಕಟ್ಟೆ ಗಿರಿಯಮ್ಮ",

@@ -16,7 +16,8 @@
       "deity": "",
       "tags": [
         "composer:Mohana Dasaru",
-        "theme:Sampradaaya"
+        "theme:Sampradaaya",
+        "form:sampradaya"
       ],
       "raga": "",
       "tala": "",
@@ -146,7 +147,8 @@
       "deity": "",
       "tags": [
         "composer:Mohana Dasaru",
-        "theme:Kolu"
+        "theme:Kolu",
+        "form:kolu"
       ],
       "raga": "",
       "tala": "",
@@ -187,7 +189,8 @@
       "composer": "Mohana Dasaru",
       "deity": "",
       "tags": [
-        "composer:Mohana Dasaru"
+        "composer:Mohana Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -262,7 +265,8 @@
       "tags": [
         "composer:Mohana Dasaru",
         "on:Vijayadasaru",
-        "yati:Vijayadasaru"
+        "yati:Vijayadasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -377,7 +381,8 @@
       "tags": [
         "composer:Mohana Dasaru",
         "on:Vijayadasaru",
-        "yati:Vijayadasaru"
+        "yati:Vijayadasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -487,7 +492,8 @@
       "deity": "Rama",
       "tags": [
         "composer:Mohana Dasaru",
-        "deity:Rama"
+        "deity:Rama",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -764,7 +770,8 @@
       "deity": "Hanuma",
       "tags": [
         "composer:Mohana Dasaru",
-        "deity:Hanuma"
+        "deity:Hanuma",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -854,7 +861,8 @@
       "tags": [
         "composer:Mohana Dasaru",
         "on:Vijayadasaru",
-        "yati:Vijayadasaru"
+        "yati:Vijayadasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -968,7 +976,8 @@
       "deity": "Mahalakshmi",
       "tags": [
         "composer:Mohana Dasaru",
-        "deity:Mahalakshmi"
+        "deity:Mahalakshmi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1068,7 +1077,8 @@
       "tags": [
         "composer:Mohana Dasaru",
         "on:Vijayadasaru",
-        "yati:Vijayadasaru"
+        "yati:Vijayadasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1247,7 +1257,8 @@
       "tags": [
         "composer:Mohana Dasaru",
         "on:Vijayadasaru",
-        "yati:Vijayadasaru"
+        "yati:Vijayadasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1382,7 +1393,8 @@
       "tags": [
         "composer:Mohana Dasaru",
         "on:Vedavyasa",
-        "yati:Vedavyasa"
+        "yati:Vedavyasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1496,7 +1508,8 @@
         "composer:ಮೋಹನದಾಸರು",
         "on:Vijayadasaru",
         "source:android_app_local:dasa1",
-        "yati:Vijayadasaru"
+        "yati:Vijayadasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1606,7 +1619,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1745,7 +1759,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -1766,7 +1781,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1808,7 +1824,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -1829,7 +1846,9 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ಭೀಮ್‍ಪಲಾಸ್",
       "tala": "ಮಿಶ್ರಛಾಪು ತಾಳ:",
@@ -1872,7 +1891,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -1893,7 +1913,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1934,7 +1955,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -1955,7 +1977,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -1990,7 +2013,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2011,7 +2035,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2054,7 +2079,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2075,7 +2101,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2113,7 +2140,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2134,7 +2162,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2173,7 +2202,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2194,7 +2224,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2233,7 +2264,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2254,7 +2286,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2293,7 +2326,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2314,7 +2348,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2353,7 +2388,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2374,7 +2410,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2412,7 +2449,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2433,7 +2471,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2528,7 +2567,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2549,7 +2589,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2592,7 +2633,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2613,7 +2655,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2660,7 +2703,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2681,7 +2725,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2721,7 +2766,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2742,7 +2788,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2780,7 +2827,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2801,7 +2849,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2842,7 +2891,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2863,7 +2913,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2902,7 +2953,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2923,7 +2975,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2962,7 +3015,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -2983,7 +3037,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3023,7 +3078,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3044,7 +3100,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3092,7 +3149,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3113,7 +3171,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3152,7 +3211,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3173,7 +3233,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3214,7 +3275,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3235,7 +3297,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3275,7 +3338,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3296,7 +3360,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3335,7 +3400,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3356,7 +3422,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3396,7 +3463,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3417,7 +3485,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3458,7 +3527,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3479,7 +3549,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3517,7 +3588,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3538,7 +3610,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3577,7 +3650,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3598,7 +3672,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3637,7 +3712,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3658,7 +3734,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -3693,7 +3770,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3714,7 +3792,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3752,7 +3831,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3773,7 +3853,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3812,7 +3893,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3833,7 +3915,9 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ಸಿಂಧುಭೈರವಿ",
       "tala": "ಕೆಹರವ ತಾಳ",
@@ -3873,7 +3957,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3894,7 +3979,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3933,7 +4019,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -3954,7 +4041,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3994,7 +4082,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4015,7 +4104,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4054,7 +4144,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4075,7 +4166,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4114,7 +4206,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4135,7 +4228,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4174,7 +4268,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4195,7 +4290,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4233,7 +4329,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4254,7 +4351,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4295,7 +4393,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4316,7 +4415,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4355,7 +4455,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4376,7 +4477,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4415,7 +4517,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4436,7 +4539,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4476,7 +4580,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4497,7 +4602,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4537,7 +4643,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4558,7 +4665,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4600,7 +4708,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4621,7 +4730,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4660,7 +4770,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4681,7 +4792,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4722,7 +4834,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4743,7 +4856,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -4789,7 +4903,8 @@
           "ಮೋಹನದಾಸರು",
           "ಧ್ರುವತಾಳ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4810,7 +4925,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4848,7 +4964,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4869,7 +4986,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4909,7 +5027,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4930,7 +5049,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4970,7 +5090,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -4991,7 +5112,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -5038,7 +5160,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -5059,7 +5182,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -5105,7 +5229,8 @@
           "ಮೋಹನದಾಸರು",
           "ಧ್ರುವತಾಳ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",
@@ -5126,7 +5251,8 @@
       "tags": [
         "composer:ಮೋಹನದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5165,7 +5291,8 @@
         "header_stripped": [
           "ಮೋಹನದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಮೋಹನದಾಸರು",

@@ -19,7 +19,8 @@
         "composer:Vyasarayaru",
         "composer:ವ್ಯಾಸರಾಯರು",
         "deity:Hari/Narayana",
-        "source:personal_collection_export:collection_padagalu"
+        "source:personal_collection_export:collection_padagalu",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -158,7 +159,8 @@
         "composer:Vyasarayaru",
         "composer:ವ್ಯಾಸರಾಯರು",
         "deity:Krishna",
-        "source:personal_collection_export:collection_padagalu"
+        "source:personal_collection_export:collection_padagalu",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -267,7 +269,8 @@
         "collection:padagalu",
         "composer:Vyasarayaru",
         "composer:ವ್ಯಾಸರಾಯರು",
-        "source:personal_collection_export:collection_padagalu"
+        "source:personal_collection_export:collection_padagalu",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -879,7 +882,8 @@
       "tags": [
         "composer:Vyasarayaru",
         "on:Purandara Dasaru",
-        "yati:Purandara Dasaru"
+        "yati:Purandara Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1047,7 +1051,8 @@
         "composer:ವ್ಯಾಸರಾಯರು",
         "deity:Krishna",
         "deity:krishna",
-        "source:personal_collection_export:collection_padagalu"
+        "source:personal_collection_export:collection_padagalu",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1170,7 +1175,8 @@
       "tags": [
         "composer:Vyasarayaru",
         "on:Madhwa",
-        "yati:Madhwa"
+        "yati:Madhwa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1283,7 +1289,8 @@
         "composer:Vyasarayaru",
         "composer:ವ್ಯಾಸರಾಯರು",
         "deity:Ganapathi",
-        "source:personal_collection_export:collection_padagalu"
+        "source:personal_collection_export:collection_padagalu",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1411,7 +1418,8 @@
       "composer": "Vyasarayaru",
       "deity": "",
       "tags": [
-        "composer:Vyasarayaru"
+        "composer:Vyasarayaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1744,7 +1752,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vyasarayaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1801,7 +1810,8 @@
       "deity": "Hanuma",
       "tags": [
         "composer:Vyasarayaru",
-        "deity:Hanuma"
+        "deity:Hanuma",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1938,7 +1948,8 @@
         "composer:Vyasarayaru",
         "composer:ವ್ಯಾಸರಾಯರು",
         "deity:Hanuma",
-        "source:personal_collection_export:collection_padagalu"
+        "source:personal_collection_export:collection_padagalu",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2115,7 +2126,8 @@
       "tags": [
         "composer:Purandara Dasaru",
         "composer:Vyasarayaru",
-        "deity:Krishna"
+        "deity:Krishna",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2234,7 +2246,8 @@
       "deity": "Krishna",
       "tags": [
         "composer:Vyasarayaru",
-        "deity:Krishna"
+        "deity:Krishna",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2354,7 +2367,8 @@
       "deity": "Krishna",
       "tags": [
         "composer:Vyasarayaru",
-        "deity:Krishna"
+        "deity:Krishna",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2465,7 +2479,8 @@
         "composer:Vyasarayaru",
         "composer:ವ್ಯಾಸರಾಯರು",
         "deity:Krishna",
-        "source:personal_collection_export:collection_padagalu"
+        "source:personal_collection_export:collection_padagalu",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2572,7 +2587,8 @@
       "composer": "Vyasarayaru",
       "deity": "",
       "tags": [
-        "composer:Vyasarayaru"
+        "composer:Vyasarayaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2678,7 +2694,8 @@
         "composer:ವ್ಯಾಸರಾಯರು",
         "on:Sripadarajaru",
         "source:personal_collection_export:collection_padagalu",
-        "yati:Sripadarajaru"
+        "yati:Sripadarajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2791,7 +2808,8 @@
       "tags": [
         "composer:Vyasarayaru",
         "deity:Hanuma",
-        "theme:Mangala"
+        "theme:Mangala",
+        "form:mangala"
       ],
       "raga": "",
       "tala": "",
@@ -2904,7 +2922,8 @@
       "composer": "Vyasarayaru",
       "deity": "",
       "tags": [
-        "composer:Vyasarayaru"
+        "composer:Vyasarayaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3022,7 +3041,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vyasarayaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3315,7 +3335,8 @@
       "composer": "Vyasarayaru",
       "deity": "",
       "tags": [
-        "composer:Vyasarayaru"
+        "composer:Vyasarayaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3371,7 +3392,8 @@
       "composer": "Vyasarayaru",
       "deity": "",
       "tags": [
-        "composer:Vyasarayaru"
+        "composer:Vyasarayaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3508,7 +3530,8 @@
       "composer": "Vyasarayaru",
       "deity": "",
       "tags": [
-        "composer:Vyasarayaru"
+        "composer:Vyasarayaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3678,7 +3701,8 @@
       "deity": "Tulasi",
       "tags": [
         "composer:Vyasarayaru",
-        "deity:Tulasi"
+        "deity:Tulasi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3822,7 +3846,8 @@
       "deity": "",
       "tags": [
         "composer:Vyasarayaru",
-        "ugabhoga:Vyasarajaru"
+        "ugabhoga:Vyasarajaru",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -4033,7 +4058,8 @@
       "composer": "Vyasarayaru",
       "deity": "",
       "tags": [
-        "composer:Vyasarayaru"
+        "composer:Vyasarayaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4073,7 +4099,8 @@
       "composer": "Vyasarayaru",
       "deity": "",
       "tags": [
-        "composer:Vyasarayaru"
+        "composer:Vyasarayaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4266,7 +4293,8 @@
         "composer:Vyasarayaru",
         "composer:ವ್ಯಾಸರಾಯರು",
         "deity:Shiva",
-        "source:personal_collection_export:collection_padagalu"
+        "source:personal_collection_export:collection_padagalu",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4398,7 +4426,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4438,7 +4467,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -4459,7 +4489,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4497,7 +4528,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -4518,7 +4550,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4558,7 +4591,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -4579,7 +4613,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -4628,7 +4663,8 @@
           "ವ್ಯಾಸರಾಯರು",
           "ಸುಳಾದಿ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -4649,7 +4685,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4690,7 +4727,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -4711,7 +4749,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4749,7 +4788,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -4770,7 +4810,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -4805,7 +4846,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -4826,7 +4868,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4873,7 +4916,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -4894,7 +4938,9 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ದ್ವಿಜಾವಂತಿ",
       "tala": "ಆದಿ ತಾಳ",
@@ -4940,7 +4986,8 @@
         "category_raw": 4,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -4961,7 +5008,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5004,7 +5052,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5025,7 +5074,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5067,7 +5117,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5088,7 +5139,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5127,7 +5179,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5148,7 +5201,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5189,7 +5243,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5210,7 +5265,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5252,7 +5308,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5273,7 +5330,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5316,7 +5374,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5337,7 +5396,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5376,7 +5436,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5401,7 +5462,8 @@
         "favorite",
         "on:Jaya Theertharu",
         "source:personal_collection_export:collection_padagalu",
-        "yati:Jaya Theertharu"
+        "yati:Jaya Theertharu",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5544,7 +5606,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5584,7 +5647,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5605,7 +5669,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5645,7 +5710,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5666,7 +5732,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -5714,7 +5781,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5735,7 +5803,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5774,7 +5843,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5795,7 +5865,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5842,7 +5913,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5863,7 +5935,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5908,7 +5981,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5929,7 +6003,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5972,7 +6047,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -5993,7 +6069,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6038,7 +6115,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6059,7 +6137,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6099,7 +6178,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6120,7 +6200,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6159,7 +6240,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6180,7 +6262,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6237,7 +6320,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6258,7 +6342,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6297,7 +6382,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6318,7 +6404,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6359,7 +6446,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6380,7 +6468,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6438,7 +6527,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6459,7 +6549,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6496,7 +6587,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6517,7 +6609,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6559,7 +6652,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6580,7 +6674,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6619,7 +6714,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6640,7 +6736,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6679,7 +6776,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6700,7 +6798,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6738,7 +6837,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6759,7 +6859,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6798,7 +6899,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6819,7 +6921,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6857,7 +6960,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6878,7 +6982,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6916,7 +7021,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6937,7 +7043,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6976,7 +7083,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -6997,7 +7105,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7036,7 +7145,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7057,7 +7167,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7096,7 +7207,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7117,7 +7229,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7156,7 +7269,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7177,7 +7291,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -7212,7 +7327,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7233,7 +7349,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -7328,7 +7445,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7349,7 +7467,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7387,7 +7506,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7408,7 +7528,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7449,7 +7570,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7470,7 +7592,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7508,7 +7631,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7529,7 +7653,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7569,7 +7694,8 @@
           "ವ್ಯಾಸರಾಯರು",
           "ಈ ಕೀರ್ತನೆಯಲ್ಲಿ ಒಂದೊಂದು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7590,7 +7716,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7632,7 +7759,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7653,7 +7781,9 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ಕಾಂಭೋದಿ",
       "tala": "ಖಂಡಛಾಪು ತಾಳ",
@@ -7695,7 +7825,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7716,7 +7847,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7759,7 +7891,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7780,7 +7913,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7820,7 +7954,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7841,7 +7976,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7881,7 +8017,8 @@
           "ವ್ಯಾಸರಾಯರು",
           "ಈ ಹಾಡಿನ ಕೊನೆಯ ನುಡಿಯಲ್ಲಿ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7902,7 +8039,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7942,7 +8080,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -7963,7 +8102,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -8011,7 +8151,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8032,7 +8173,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8073,7 +8215,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8094,7 +8237,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8133,7 +8277,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8154,7 +8299,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8194,7 +8340,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8215,7 +8362,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -8250,7 +8398,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8271,7 +8420,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8311,7 +8461,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8332,7 +8483,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8370,7 +8522,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8391,7 +8544,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8429,7 +8583,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8450,7 +8605,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8491,7 +8647,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8512,7 +8669,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8551,7 +8709,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8572,7 +8731,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8611,7 +8771,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8632,7 +8793,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8673,7 +8835,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8694,7 +8857,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8734,7 +8898,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8755,7 +8920,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8796,7 +8962,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8817,7 +8984,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8856,7 +9024,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8877,7 +9046,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8916,7 +9086,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8937,7 +9108,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8975,7 +9147,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -8996,7 +9169,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9036,7 +9210,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9057,7 +9232,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9098,7 +9274,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9119,7 +9296,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9158,7 +9336,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9179,7 +9358,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9218,7 +9398,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9239,7 +9420,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9281,7 +9463,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9302,7 +9485,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9341,7 +9525,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9362,7 +9547,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9401,7 +9587,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9422,7 +9609,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9461,7 +9649,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9482,7 +9671,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9522,7 +9712,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9543,7 +9734,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9582,7 +9774,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9603,7 +9796,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9644,7 +9838,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9665,7 +9860,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9705,7 +9901,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9726,7 +9923,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -9779,7 +9977,8 @@
           "ಸುಳಾದಿ",
           "ಧ್ರುವತಾಳ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9800,7 +9999,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9839,7 +10039,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9860,7 +10061,9 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "",
       "tala": "",
@@ -9900,7 +10103,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9921,7 +10125,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9963,7 +10168,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -9984,7 +10190,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10024,7 +10231,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -10045,7 +10253,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10084,7 +10293,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -10105,7 +10315,9 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "",
       "tala": "",
@@ -10144,7 +10356,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -10165,7 +10378,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10208,7 +10422,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -10229,7 +10444,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10269,7 +10485,8 @@
         "header_stripped": [
           "ವ್ಯಾಸರಾಯರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",
@@ -10290,7 +10507,8 @@
       "tags": [
         "composer:ವ್ಯಾಸರಾಯರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -10353,7 +10571,8 @@
           "ಸುಳಾದಿ",
           "ಧ್ರುವತಾಳ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವ್ಯಾಸರಾಯರು",

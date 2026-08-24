@@ -20,7 +20,8 @@
         "composer:ವಾದಿರಾಜ",
         "deity:Hari/Narayana",
         "source:android_app_local:dasa1",
-        "theme:Aarathi"
+        "theme:Aarathi",
+        "form:aarati"
       ],
       "raga": "",
       "tala": "",
@@ -203,7 +204,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -320,7 +322,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -554,7 +557,8 @@
       "tags": [
         "composer:Vadirajaru",
         "deity:Hari/Narayana",
-        "theme:Aarathi"
+        "theme:Aarathi",
+        "form:aarati"
       ],
       "raga": "",
       "tala": "",
@@ -680,7 +684,8 @@
       "deity": "Hanuma",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hanuma"
+        "deity:Hanuma",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -821,7 +826,8 @@
       "tags": [
         "composer:Vadirajaru",
         "on:Madhwa",
-        "yati:Madhwa"
+        "yati:Madhwa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -918,7 +924,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1112,7 +1119,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1229,7 +1237,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1367,7 +1376,8 @@
       "deity": "Gowri",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Gowri"
+        "deity:Gowri",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1475,7 +1485,8 @@
       "deity": "Krishna",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Krishna"
+        "deity:Krishna",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1574,7 +1585,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1699,7 +1711,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2050,7 +2063,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2442,7 +2456,8 @@
       "deity": "",
       "tags": [
         "composer:Vadirajaru",
-        "theme:Dashavathara"
+        "theme:Dashavathara",
+        "form:dashavatara"
       ],
       "raga": "",
       "tala": "",
@@ -3183,7 +3198,8 @@
       "deity": "",
       "tags": [
         "composer:Vadirajaru",
-        "theme:Dashavathara"
+        "theme:Dashavathara",
+        "form:dashavatara"
       ],
       "raga": "",
       "tala": "",
@@ -3260,7 +3276,8 @@
       "deity": "Shiva",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Shiva"
+        "deity:Shiva",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3385,7 +3402,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3675,7 +3693,8 @@
       "deity": "",
       "tags": [
         "composer:Vadirajaru",
-        "theme:Ekadashi"
+        "theme:Ekadashi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3906,7 +3925,8 @@
       "tags": [
         "composer:Vadirajaru",
         "on:Madhwa",
-        "yati:Madhwa"
+        "yati:Madhwa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4016,7 +4036,8 @@
       "deity": "Hanuma",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hanuma"
+        "deity:Hanuma",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4149,7 +4170,8 @@
       "deity": "Ganapathi",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Ganapathi"
+        "deity:Ganapathi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4245,7 +4267,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5511,7 +5534,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5788,7 +5812,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5904,7 +5929,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6242,7 +6268,8 @@
       "deity": "Krishna",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Krishna"
+        "deity:Krishna",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6361,7 +6388,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6475,7 +6503,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6618,7 +6647,8 @@
       "tags": [
         "composer:Vadirajaru",
         "on:Madhwa",
-        "yati:Madhwa"
+        "yati:Madhwa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6727,7 +6757,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6837,7 +6868,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7823,7 +7855,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8239,7 +8272,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8364,7 +8398,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8643,7 +8678,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8993,7 +9029,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9127,7 +9164,8 @@
       "deity": "",
       "tags": [
         "composer:Vadirajaru",
-        "theme:Shobhane"
+        "theme:Shobhane",
+        "form:shobhane"
       ],
       "raga": "",
       "tala": "",
@@ -9207,7 +9245,8 @@
       "deity": "Krishna",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Krishna"
+        "deity:Krishna",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9349,7 +9388,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9505,7 +9545,8 @@
         "composer:Jagannatha Dasaru",
         "composer:Vadirajaru",
         "on:Vedavyasa",
-        "yati:Vedavyasa"
+        "yati:Vedavyasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9647,7 +9688,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10018,7 +10060,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10204,7 +10247,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10330,7 +10374,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10445,7 +10490,8 @@
       "deity": "Krishna",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Krishna"
+        "deity:Krishna",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10546,7 +10592,8 @@
       "tags": [
         "composer:Vadirajaru",
         "on:Madhwa",
-        "yati:Madhwa"
+        "yati:Madhwa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10645,7 +10692,8 @@
       "tags": [
         "composer:Vadirajaru",
         "on:Madhwa",
-        "yati:Madhwa"
+        "yati:Madhwa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10781,7 +10829,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10976,7 +11025,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11437,7 +11487,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11701,7 +11752,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11973,7 +12025,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12166,7 +12219,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12311,7 +12365,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12448,7 +12503,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12802,7 +12858,8 @@
       "deity": "Srinivasa",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Srinivasa"
+        "deity:Srinivasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13518,7 +13575,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13953,7 +14011,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13994,7 +14053,8 @@
       "deity": "Krishna",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Krishna"
+        "deity:Krishna",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14111,7 +14171,8 @@
       "deity": "Tulasi",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Tulasi"
+        "deity:Tulasi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14318,7 +14379,8 @@
         "composer:Vadirajaru",
         "deity:Hari/Narayana",
         "theme:Aarathi",
-        "theme:Dashavathara"
+        "theme:Dashavathara",
+        "form:mangala"
       ],
       "raga": "",
       "tala": "",
@@ -14534,7 +14596,8 @@
       "deity": "Krishna",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Krishna"
+        "deity:Krishna",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14676,7 +14739,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14810,7 +14874,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14865,7 +14930,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15106,7 +15172,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15251,7 +15318,8 @@
       "composer": "Vadirajaru",
       "deity": "",
       "tags": [
-        "composer:Vadirajaru"
+        "composer:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15461,7 +15529,8 @@
       "deity": "Saraswathy",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Saraswathy"
+        "deity:Saraswathy",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15566,7 +15635,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Vadirajaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15686,7 +15756,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15726,7 +15797,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -15747,7 +15819,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15783,7 +15856,8 @@
           "ವಾದಿರಾಜ",
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -15804,7 +15878,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15862,7 +15937,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -15883,7 +15959,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15919,7 +15996,8 @@
           "ವಾದಿರಾಜ",
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -15940,7 +16018,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15978,7 +16057,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -15999,7 +16079,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16035,7 +16116,8 @@
           "ವಾದಿರಾಜ",
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16056,7 +16138,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16095,7 +16178,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16116,7 +16200,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16172,7 +16257,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16193,7 +16279,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16232,7 +16319,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16253,7 +16341,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16293,7 +16382,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16314,7 +16404,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16362,7 +16453,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16383,7 +16475,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16423,7 +16516,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16444,7 +16538,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16483,7 +16578,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16504,7 +16600,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16543,7 +16640,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16564,7 +16662,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16604,7 +16703,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16625,7 +16725,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16665,7 +16766,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16686,7 +16788,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16729,7 +16832,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16750,7 +16854,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16793,7 +16898,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16814,7 +16920,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16854,7 +16961,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16875,7 +16983,9 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ಷಣ್ಮುಖಪ್ರಿಯ",
       "tala": "",
@@ -16916,7 +17026,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16937,7 +17048,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16976,7 +17088,8 @@
           "ವಾದಿರಾಜ",
           "ಈ ಮುದ್ದು ಕೃಷ್ಣನೀಕ್ಷಣದ ಸುಖವೆ ಸಾಕು ಪ."
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -16997,7 +17110,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17035,7 +17149,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17056,7 +17171,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17095,7 +17211,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17116,7 +17233,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17154,7 +17272,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17175,7 +17294,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17216,7 +17336,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17237,7 +17358,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17285,7 +17407,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17306,7 +17429,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17354,7 +17478,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17375,7 +17500,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17413,7 +17539,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17434,7 +17561,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17473,7 +17601,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17494,7 +17623,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17532,7 +17662,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17553,7 +17684,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17591,7 +17723,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17612,7 +17745,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17651,7 +17785,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17672,7 +17807,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17711,7 +17847,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17732,7 +17869,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17770,7 +17908,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17791,7 +17930,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17835,7 +17975,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17856,7 +17997,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17914,7 +18056,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17935,7 +18078,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17974,7 +18118,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -17995,7 +18140,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18034,7 +18180,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18055,7 +18202,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18093,7 +18241,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18114,7 +18263,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18154,7 +18304,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18175,7 +18326,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18214,7 +18366,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18235,7 +18388,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18276,7 +18430,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18297,7 +18452,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18353,7 +18509,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18374,7 +18531,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18414,7 +18572,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18435,7 +18594,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18474,7 +18634,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18495,7 +18656,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18535,7 +18697,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18556,7 +18719,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18598,7 +18762,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18619,7 +18784,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18657,7 +18823,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18678,7 +18845,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18717,7 +18885,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18738,7 +18907,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18777,7 +18947,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18798,7 +18969,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18836,7 +19008,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18857,7 +19030,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18905,7 +19079,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18926,7 +19101,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18965,7 +19141,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -18986,7 +19163,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19038,7 +19216,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19059,7 +19238,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19097,7 +19277,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19118,7 +19299,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19186,7 +19368,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19207,7 +19390,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19255,7 +19439,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19276,7 +19461,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19314,7 +19500,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19335,7 +19522,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19373,7 +19561,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19394,7 +19583,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19435,7 +19625,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19456,7 +19647,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19494,7 +19686,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19515,7 +19708,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19556,7 +19750,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19577,7 +19772,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19616,7 +19812,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19637,7 +19834,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -19696,7 +19894,8 @@
           "ವಾದಿರಾಜ",
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19717,7 +19916,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19757,7 +19957,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19778,7 +19979,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19817,7 +20019,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19838,7 +20041,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19895,7 +20099,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19916,7 +20121,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19954,7 +20160,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -19975,7 +20182,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20015,7 +20223,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20036,7 +20245,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20100,7 +20310,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20121,7 +20332,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20165,7 +20377,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20186,7 +20399,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20224,7 +20438,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20245,7 +20460,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20293,7 +20509,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20314,7 +20531,9 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "",
       "tala": "",
@@ -20363,7 +20582,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20384,7 +20604,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20422,7 +20643,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20443,7 +20665,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20481,7 +20704,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20502,7 +20726,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20542,7 +20767,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20563,7 +20789,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20603,7 +20830,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20624,7 +20852,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20663,7 +20892,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20684,7 +20914,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20724,7 +20955,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20745,7 +20977,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20784,7 +21017,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20805,7 +21039,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20845,7 +21080,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20866,7 +21102,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20952,7 +21189,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -20973,7 +21211,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21011,7 +21250,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21032,7 +21272,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21082,7 +21323,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21103,7 +21345,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21143,7 +21386,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21164,7 +21408,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21204,7 +21449,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21225,7 +21471,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -21261,7 +21508,8 @@
           "ವಾದಿರಾಜ",
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21282,7 +21530,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21320,7 +21569,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21341,7 +21591,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21379,7 +21630,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21400,7 +21652,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21438,7 +21691,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21459,7 +21713,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -21498,7 +21753,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21519,7 +21775,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21559,7 +21816,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21580,7 +21838,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21638,7 +21897,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21659,7 +21919,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21700,7 +21961,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21721,7 +21983,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21761,7 +22024,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21782,7 +22046,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21830,7 +22095,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21851,7 +22117,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21889,7 +22156,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21910,7 +22178,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21948,7 +22217,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -21969,7 +22239,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22007,7 +22278,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22028,7 +22300,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22066,7 +22339,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22087,7 +22361,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22127,7 +22402,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22148,7 +22424,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22186,7 +22463,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22207,7 +22485,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22246,7 +22525,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22267,7 +22547,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22329,7 +22610,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22350,7 +22632,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22391,7 +22674,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22412,7 +22696,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22450,7 +22735,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22471,7 +22757,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22519,7 +22806,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22540,7 +22828,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -22576,7 +22865,8 @@
           "ವಾದಿರಾಜ",
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22597,7 +22887,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22637,7 +22928,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22658,7 +22950,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22698,7 +22991,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22719,7 +23013,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22759,7 +23054,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22780,7 +23076,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22818,7 +23115,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22839,7 +23137,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22895,7 +23194,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22916,7 +23216,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22964,7 +23265,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -22985,7 +23287,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23023,7 +23326,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23044,7 +23348,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23084,7 +23389,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23105,7 +23411,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23169,7 +23476,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23190,7 +23498,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23228,7 +23537,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23249,7 +23559,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23287,7 +23598,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23308,7 +23620,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23346,7 +23659,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23367,7 +23681,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23406,7 +23721,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23427,7 +23743,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23469,7 +23786,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23490,7 +23808,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23531,7 +23850,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23552,7 +23872,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23594,7 +23915,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23615,7 +23937,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23654,7 +23977,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23675,7 +23999,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23716,7 +24041,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23737,7 +24063,9 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "",
       "tala": "",
@@ -23779,7 +24107,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23800,7 +24129,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23838,7 +24168,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23859,7 +24190,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23900,7 +24232,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23921,7 +24254,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23960,7 +24294,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -23981,7 +24316,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24020,7 +24356,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24041,7 +24378,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24079,7 +24417,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24100,7 +24439,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24145,7 +24485,8 @@
           "ವಾದಿರಾಜ",
           "*"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24166,7 +24507,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24222,7 +24564,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24243,7 +24586,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24286,7 +24630,8 @@
           "ವಾದಿರಾಜ",
           "*"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24307,7 +24652,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24347,7 +24693,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24368,7 +24715,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24409,7 +24757,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24430,7 +24779,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24478,7 +24828,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24499,7 +24850,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24537,7 +24889,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24558,7 +24911,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24597,7 +24951,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24618,7 +24973,9 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "",
       "tala": "",
@@ -24658,7 +25015,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24679,7 +25037,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24720,7 +25079,8 @@
           "ವಾದಿರಾಜ",
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24741,7 +25101,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24914,7 +25275,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24935,7 +25297,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24974,7 +25337,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -24995,7 +25359,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25069,7 +25434,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -25090,7 +25456,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25150,7 +25517,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -25171,7 +25539,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25219,7 +25588,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -25240,7 +25610,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25279,7 +25650,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -25300,7 +25672,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25352,7 +25725,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -25373,7 +25747,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25411,7 +25786,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -25432,7 +25808,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25471,7 +25848,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -25492,7 +25870,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25530,7 +25909,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -25551,7 +25931,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25594,7 +25975,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -25615,7 +25997,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25653,7 +26036,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -25674,7 +26058,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25740,7 +26125,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -25761,7 +26147,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25809,7 +26196,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",
@@ -25830,7 +26218,8 @@
       "tags": [
         "composer:ವಾದಿರಾಜ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25887,7 +26276,8 @@
         "header_stripped": [
           "ವಾದಿರಾಜ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ವಾದಿರಾಜ",

@@ -91,7 +91,8 @@
       "deity": "Dhanvanthri",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Dhanvanthri"
+        "deity:Dhanvanthri",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -211,7 +212,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -361,7 +363,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -480,7 +483,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasa"
+        "composer:Gopala Dasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1263,7 +1267,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasa"
+        "composer:Gopala Dasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1965,7 +1970,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasa"
+        "composer:Gopala Dasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2487,7 +2493,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasa"
+        "composer:Gopala Dasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4197,7 +4204,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasa"
+        "composer:Gopala Dasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4503,7 +4511,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasa"
+        "composer:Gopala Dasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5457,7 +5466,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasa"
+        "composer:Gopala Dasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7029,7 +7039,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasa"
+        "composer:Gopala Dasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11136,7 +11147,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasa"
+        "composer:Gopala Dasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11866,7 +11878,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12114,7 +12127,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12596,7 +12610,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12751,7 +12766,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasaru"
+        "composer:Gopala Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12933,7 +12949,8 @@
       "deity": "Dhanvanthri",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Dhanvanthri"
+        "deity:Dhanvanthri",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13065,7 +13082,8 @@
       "deity": "Ganapathi",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Ganapathi"
+        "deity:Ganapathi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13150,7 +13168,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasaru"
+        "composer:Gopala Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13190,7 +13209,8 @@
         "composer:Gopala Dasaru",
         "composer:ಗೋಪಾಲದಾಸರು",
         "file:gopaladasa.json",
-        "source:flat_text_dump:raw_dump"
+        "source:flat_text_dump:raw_dump",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13466,7 +13486,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13746,7 +13767,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13872,7 +13894,8 @@
       "deity": "Hanuma",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hanuma"
+        "deity:Hanuma",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13994,7 +14017,8 @@
       "deity": "Mahalakshmi",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Mahalakshmi"
+        "deity:Mahalakshmi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14132,7 +14156,8 @@
       "deity": "Narasimha",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Narasimha"
+        "deity:Narasimha",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14281,7 +14306,8 @@
         "composer:ಗೋಪಾಲದಾಸರು",
         "deity:Mahalakshmi",
         "file:gopaladasa.json",
-        "source:flat_text_dump:raw_dump"
+        "source:flat_text_dump:raw_dump",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14404,7 +14430,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasaru"
+        "composer:Gopala Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14515,7 +14542,8 @@
       "tags": [
         "composer:Gopala Dasaru",
         "on:Vijayadasaru",
-        "yati:Vijayadasaru"
+        "yati:Vijayadasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14642,7 +14670,8 @@
       "tags": [
         "composer:Gopala Dasaru",
         "on:Raghavendra Theertharu",
-        "yati:Raghavendra Theertharu"
+        "yati:Raghavendra Theertharu",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14822,7 +14851,8 @@
       "deity": "Mahalakshmi",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Mahalakshmi"
+        "deity:Mahalakshmi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15000,7 +15030,8 @@
       "tags": [
         "composer:Gopala Dasaru",
         "deity:Hari/Narayana",
-        "theme:Mangala"
+        "theme:Mangala",
+        "form:mangala"
       ],
       "raga": "",
       "tala": "",
@@ -15086,7 +15117,8 @@
       "deity": "Srinivasa",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Srinivasa"
+        "deity:Srinivasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15276,7 +15308,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15484,7 +15517,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15665,7 +15699,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasaru"
+        "composer:Gopala Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15791,7 +15826,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15879,7 +15915,8 @@
         "composer:Gopala Dasaru",
         "on:Raghavendra Theertharu",
         "suladi_index:Suladi Index",
-        "yati:Raghavendra Theertharu"
+        "yati:Raghavendra Theertharu",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -16292,7 +16329,8 @@
       "tags": [
         "composer:Gopala Dasaru",
         "on:Raghavendra Theertharu",
-        "yati:Raghavendra Theertharu"
+        "yati:Raghavendra Theertharu",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16427,7 +16465,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasaru"
+        "composer:Gopala Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16482,7 +16521,8 @@
       "tags": [
         "composer:Gopala Dasaru",
         "on:Vadirajaru",
-        "yati:Vadirajaru"
+        "yati:Vadirajaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16703,7 +16743,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16877,7 +16918,8 @@
       "deity": "Srinivasa",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Srinivasa"
+        "deity:Srinivasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17065,7 +17107,8 @@
       "deity": "Bharathi",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Bharathi"
+        "deity:Bharathi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17187,7 +17230,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasaru"
+        "composer:Gopala Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17357,7 +17401,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17499,7 +17544,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17625,7 +17671,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -17990,7 +18037,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasaru"
+        "composer:Gopala Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18115,7 +18163,8 @@
       "composer": "Gopala Dasaru",
       "deity": "",
       "tags": [
-        "composer:Gopala Dasaru"
+        "composer:Gopala Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18242,7 +18291,8 @@
       "tags": [
         "composer:Gopala Dasaru",
         "deity:Hari/Narayana",
-        "theme:Mangala"
+        "theme:Mangala",
+        "form:mangala"
       ],
       "raga": "",
       "tala": "",
@@ -18340,7 +18390,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18514,7 +18565,8 @@
       "deity": "Gowri",
       "tags": [
         "composer:Gopala Dasaru",
-        "deity:Gowri"
+        "deity:Gowri",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18630,7 +18682,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -18679,7 +18732,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -18699,7 +18753,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18834,7 +18889,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -18966,7 +19022,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19027,7 +19084,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19106,7 +19164,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19146,7 +19205,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -19167,7 +19227,9 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "",
       "tala": "",
@@ -19207,7 +19269,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -19227,7 +19290,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19294,7 +19358,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -19342,7 +19407,8 @@
           "ಗೋಪಾಲದಾಸರು",
           "ಈ ಸುಳಾದಿಯಲ್ಲಿ, ಲಕ್ಷ್ಮಿ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -19362,7 +19428,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19416,7 +19483,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19486,7 +19554,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19529,7 +19598,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -19549,7 +19619,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19615,7 +19686,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19681,7 +19753,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19760,7 +19833,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19820,7 +19894,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19879,7 +19954,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19936,7 +20012,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -19995,7 +20072,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20056,7 +20134,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20118,7 +20197,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20173,7 +20253,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20228,7 +20309,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20282,7 +20364,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20334,7 +20417,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20390,7 +20474,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20452,7 +20537,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20506,7 +20592,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20561,7 +20648,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20617,7 +20705,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20677,7 +20766,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20733,7 +20823,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20789,7 +20880,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20840,7 +20932,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -20958,7 +21051,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21064,7 +21158,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21238,7 +21333,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21406,7 +21502,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21604,7 +21701,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21684,7 +21782,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21764,7 +21863,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21864,7 +21964,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -21942,7 +22043,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22008,7 +22110,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22092,7 +22195,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22170,7 +22274,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22249,7 +22354,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -22301,7 +22407,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -22322,7 +22429,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -22374,7 +22482,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -22395,7 +22504,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -22443,7 +22553,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -22464,7 +22575,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -22501,7 +22613,8 @@
           "ಈ ಉಗಾಭೋಗದಲ್ಲಿ ದಾಸರು ಶ್ರೀಹರಿಗೂ",
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -22521,7 +22634,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22584,7 +22698,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -22631,7 +22746,8 @@
           "ಸುಳಾದಿ",
           "ಧ್ರುವತಾಳ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -22652,7 +22768,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22694,7 +22811,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -22715,7 +22833,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22756,7 +22875,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -22777,7 +22897,9 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ಶ್ರೀರಾಗ",
       "tala": "",
@@ -22818,7 +22940,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -22838,7 +22961,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -22902,7 +23026,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -22950,7 +23075,8 @@
           "ಸುಳಾದಿ",
           "ಧ್ರುವತಾಳ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -22970,7 +23096,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23040,7 +23167,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23118,7 +23246,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23158,7 +23287,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -23179,7 +23309,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -23231,7 +23362,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -23251,7 +23383,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23321,7 +23454,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -23369,7 +23503,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -23389,7 +23524,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23450,7 +23586,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23489,7 +23626,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -23510,7 +23648,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23549,7 +23688,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -23569,7 +23709,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23650,7 +23791,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23714,7 +23856,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23752,7 +23895,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -23772,7 +23916,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23846,7 +23991,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -23885,7 +24031,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -23905,7 +24052,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24009,7 +24157,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24082,7 +24231,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -24130,7 +24280,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -24151,7 +24302,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24193,7 +24345,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -24213,7 +24366,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24311,7 +24465,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24455,7 +24610,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -24492,7 +24648,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -24513,7 +24670,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24558,7 +24716,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -24579,7 +24738,9 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ಮಧುವಂತಿ",
       "tala": "",
@@ -24624,7 +24785,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -24644,7 +24806,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24740,7 +24903,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24862,7 +25026,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -24939,7 +25104,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25037,7 +25203,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25130,7 +25297,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25233,7 +25401,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25291,7 +25460,8 @@
           "ಗೋಪಾಲದಾಸರು",
           "ಈ ಕೀರ್ತನೆಯಲ್ಲಿ ಪಂಚಪ್ರಾಣರಿಗೆ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -25311,7 +25481,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25522,7 +25693,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25687,7 +25859,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -25724,7 +25897,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -25744,7 +25918,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25847,7 +26022,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "file:gopaladasa.json",
-        "source:flat_text_dump:raw_dump"
+        "source:flat_text_dump:raw_dump",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25911,7 +26087,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -25972,7 +26149,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -26053,7 +26231,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -26095,7 +26274,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -26115,7 +26295,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -26208,7 +26389,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -26297,7 +26479,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -26344,7 +26527,8 @@
           "ಈ ಸುಳಾದಿ ಒಂದು ನಿಂದಾಸ್ತುತಿ",
           "ಸುಳಾದಿಧ್ರುವತಾಳ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -26365,7 +26549,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -26417,7 +26602,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -26437,7 +26623,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -26504,7 +26691,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -26556,7 +26744,8 @@
           "ಸುಳಾದಿ",
           "ಧ್ರುವತಾಳ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -26577,7 +26766,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -26616,7 +26806,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -26639,7 +26830,8 @@
         "composer:ಗೋಪಾಲದಾಸರು",
         "file:gopaladasa.json",
         "source:android_app_local:dasa1",
-        "source:flat_text_dump:raw_dump"
+        "source:flat_text_dump:raw_dump",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -26675,7 +26867,8 @@
           "ಗೋಪಾಲದಾಸರು",
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -26697,7 +26890,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -26758,7 +26952,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -26838,7 +27033,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -26877,7 +27073,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -26898,7 +27095,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -26950,7 +27148,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -26970,7 +27169,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -27100,7 +27300,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -27252,7 +27453,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -27374,7 +27576,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -27519,7 +27722,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -27699,7 +27903,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -27808,7 +28013,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -27927,7 +28133,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -28116,7 +28323,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -28288,7 +28496,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -28429,7 +28638,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -28549,7 +28759,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -28695,7 +28906,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -28800,7 +29012,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -28848,7 +29061,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -28868,7 +29082,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -28924,7 +29139,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -28968,7 +29184,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -28988,7 +29205,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -29061,7 +29279,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -29101,7 +29320,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -29122,7 +29342,9 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ಸರಸ್ವತಿ",
       "tala": "ಆದಿ ತಾಳ",
@@ -29160,7 +29382,8 @@
         "category_raw": 4,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -29180,7 +29403,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -29245,7 +29469,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -29342,7 +29567,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -29476,7 +29702,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -29608,7 +29835,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -29689,7 +29917,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -29741,7 +29970,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -29761,7 +29991,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -29827,7 +30058,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -29895,7 +30127,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -29934,7 +30167,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -29955,7 +30189,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -29995,7 +30230,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -30015,7 +30251,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -30135,7 +30372,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -30172,7 +30410,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -30193,7 +30432,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -30234,7 +30474,8 @@
           "ಗೋಪಾಲದಾಸರು",
           "ಈ ಕೀರ್ತನೆಯಲ್ಲಿ ಅಣುಮಹತ್ತುಗಳಲ್ಲಿ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -30254,7 +30495,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -30332,7 +30574,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -30400,7 +30643,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -30483,7 +30727,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -30535,7 +30780,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -30555,7 +30801,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -30608,7 +30855,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -30649,7 +30897,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -30669,7 +30918,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -30740,7 +30990,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -30860,7 +31111,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -30936,7 +31188,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -31007,7 +31260,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -31058,7 +31312,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -31078,7 +31333,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -31180,7 +31436,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -31269,7 +31526,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -31355,7 +31613,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -31433,7 +31692,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -31550,7 +31810,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -31646,7 +31907,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -31683,7 +31945,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -31703,7 +31966,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -31806,7 +32070,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -31884,7 +32149,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -31924,7 +32190,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -31944,7 +32211,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -32066,7 +32334,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -32239,7 +32508,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -32359,7 +32629,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -32533,7 +32804,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -32687,7 +32959,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -32791,7 +33064,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -32941,7 +33215,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -33085,7 +33360,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -33154,7 +33430,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -33197,7 +33474,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -33217,7 +33495,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -33287,7 +33566,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -33409,7 +33689,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -33549,7 +33830,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -33669,7 +33951,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -33778,7 +34061,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -33826,7 +34110,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -33846,7 +34131,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -33946,7 +34232,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -34013,7 +34300,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -34187,7 +34475,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -34293,7 +34582,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -34362,7 +34652,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -34589,7 +34880,8 @@
       "tags": [
         "composer:ಗೋಪಾಲದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -34641,7 +34933,8 @@
         "header_stripped": [
           "ಗೋಪಾಲದಾಸರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಗೋಪಾಲದಾಸರು",
@@ -34661,7 +34954,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -34850,7 +35144,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -34980,7 +35275,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -35120,7 +35416,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -35270,7 +35567,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -35422,7 +35720,8 @@
       "tags": [
         "source:flat_text_dump:raw_dump",
         "file:gopaladasa.json",
-        "composer:ಗೋಪಾಲದಾಸರು"
+        "composer:ಗೋಪಾಲದಾಸರು",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",

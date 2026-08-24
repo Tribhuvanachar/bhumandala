@@ -206,9 +206,17 @@ def build_record(row, dasaru_name, asset_name, fetch_date):
     form = CATEGORY_FORM_GUESS.get(category, "pada")
 
     tags = [f"composer:{dasaru_name}", f"source:android_app_local:{asset_name}",
-            f"category_raw:{category}"]
+            f"category_raw:{category}", f"form:{form}"]
     if favorite:
         tags.append("favorite")
+    # Category 4 rows carry a singer/raga/tala/music-director/studio block --
+    # a modern recorded rendition of a song, not the song itself as a piece of
+    # classical literature. Tagged (not filed separately) so it stays part of
+    # the one merged corpus but can be queried, filtered, relabeled or
+    # dropped independently later without re-deriving which rows these were.
+    is_recorded_rendition = category == 4
+    if is_recorded_rendition:
+        tags.append("rendition:studio_recording")
 
     rec = {
         "id": ascii_slug(dasaru_name) + "__" + asset_name + "_" + str(kid),
@@ -251,6 +259,7 @@ def build_record(row, dasaru_name, asset_name, fetch_date):
             "dasaru_id": dasaru_id,
             "keerthana_id": kid,
             "category_raw": category,
+            "is_recorded_rendition": is_recorded_rendition,
             "favorite": bool(favorite),
             "header_stripped": parsed["header_stripped"],
             "unclassified_lines": parsed["other_lines"],

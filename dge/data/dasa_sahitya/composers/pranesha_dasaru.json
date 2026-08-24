@@ -15,7 +15,8 @@
       "composer": "Pranesha Dasaru",
       "deity": "",
       "tags": [
-        "composer:Pranesha Dasaru"
+        "composer:Pranesha Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -196,7 +197,8 @@
       "composer": "Pranesha Dasaru",
       "deity": "",
       "tags": [
-        "composer:Pranesha Dasaru"
+        "composer:Pranesha Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -401,7 +403,8 @@
       "composer": "Pranesha Dasaru",
       "deity": "",
       "tags": [
-        "composer:Pranesha Dasaru"
+        "composer:Pranesha Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -790,7 +793,8 @@
       "composer": "Pranesha Dasaru",
       "deity": "",
       "tags": [
-        "composer:Pranesha Dasaru"
+        "composer:Pranesha Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -900,7 +904,8 @@
       "composer": "Pranesha Dasaru",
       "deity": "",
       "tags": [
-        "composer:Pranesha Dasaru"
+        "composer:Pranesha Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1095,7 +1100,8 @@
       "composer": "Pranesha Dasaru",
       "deity": "",
       "tags": [
-        "composer:Pranesha Dasaru"
+        "composer:Pranesha Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1317,7 +1323,8 @@
       "deity": "",
       "tags": [
         "composer:Pranesha Dasaru",
-        "theme:Guru Parampara"
+        "theme:Guru Parampara",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1819,7 +1826,8 @@
       "deity": "",
       "tags": [
         "composer:Pranesha Dasaru",
-        "theme:Guru Parampara"
+        "theme:Guru Parampara",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2026,7 +2034,8 @@
       "composer": "Pranesha Dasaru",
       "deity": "",
       "tags": [
-        "composer:Pranesha Dasaru"
+        "composer:Pranesha Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2112,7 +2121,8 @@
       "deity": "Ganapathi",
       "tags": [
         "composer:Pranesha Dasaru",
-        "deity:Ganapathi"
+        "deity:Ganapathi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2211,7 +2221,8 @@
       "deity": "Shiva",
       "tags": [
         "composer:Pranesha Dasaru",
-        "deity:Shiva"
+        "deity:Shiva",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2300,7 +2311,8 @@
       "composer": "Pranesha Dasaru",
       "deity": "",
       "tags": [
-        "composer:Pranesha Dasaru"
+        "composer:Pranesha Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2953,7 +2965,8 @@
       "composer": "Pranesha Dasaru",
       "deity": "",
       "tags": [
-        "composer:Pranesha Dasaru"
+        "composer:Pranesha Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3049,7 +3062,8 @@
       "deity": "",
       "tags": [
         "composer:Pranesha Dasaru",
-        "suladi_index:Suladi Index"
+        "suladi_index:Suladi Index",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -3312,7 +3326,8 @@
       "composer": "Pranesha Dasaru",
       "deity": "",
       "tags": [
-        "composer:Pranesha Dasaru"
+        "composer:Pranesha Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3574,7 +3589,8 @@
       "deity": "",
       "tags": [
         "composer:Pranesha Dasaru",
-        "theme:Guru Parampara"
+        "theme:Guru Parampara",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3679,7 +3695,8 @@
       "deity": "",
       "tags": [
         "composer:Pranesha Dasaru",
-        "theme:Ekadashi"
+        "theme:Ekadashi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3797,7 +3814,8 @@
       "composer": "Pranesha Dasaru",
       "deity": "",
       "tags": [
-        "composer:Pranesha Dasaru"
+        "composer:Pranesha Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3947,7 +3965,8 @@
       "tags": [
         "composer:Pranesha Dasaru",
         "on:Vyasarayaru",
-        "yati:Vyasarayaru"
+        "yati:Vyasarayaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4097,7 +4116,8 @@
       "deity": "Gowri",
       "tags": [
         "composer:Pranesha Dasaru",
-        "deity:Gowri"
+        "deity:Gowri",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4201,7 +4221,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4239,7 +4260,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4260,7 +4282,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4297,7 +4320,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4318,7 +4342,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4357,7 +4382,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4378,7 +4404,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4433,7 +4460,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4454,7 +4482,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4494,7 +4523,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4515,7 +4545,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -4550,7 +4581,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4571,7 +4603,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4608,7 +4641,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4629,7 +4663,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -4664,7 +4699,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4685,7 +4721,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -4723,7 +4760,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4744,7 +4782,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4780,7 +4819,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4801,7 +4841,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4845,7 +4886,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4866,7 +4908,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4906,7 +4949,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4927,7 +4971,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -4963,7 +5008,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -4984,7 +5030,9 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "",
       "tala": "",
@@ -5023,7 +5071,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5044,7 +5093,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5080,7 +5130,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5101,7 +5152,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5137,7 +5189,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5158,7 +5211,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5194,7 +5248,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5215,7 +5270,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5251,7 +5307,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5272,7 +5329,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5310,7 +5368,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5331,7 +5390,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5367,7 +5427,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5388,7 +5449,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5428,7 +5490,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5449,7 +5512,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5485,7 +5549,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5506,7 +5571,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5548,7 +5614,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5569,7 +5636,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -5610,7 +5678,8 @@
         "category_raw": 1,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5631,7 +5700,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -5666,7 +5736,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5687,7 +5758,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5725,7 +5797,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5746,7 +5819,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5782,7 +5856,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5803,7 +5878,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -5838,7 +5914,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5859,7 +5936,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5900,7 +5978,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5921,7 +6000,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -5957,7 +6037,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -5978,7 +6059,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6014,7 +6096,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6035,7 +6118,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6071,7 +6155,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6092,7 +6177,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6130,7 +6216,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6151,7 +6238,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6189,7 +6277,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6210,7 +6299,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6246,7 +6336,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6267,7 +6358,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6305,7 +6397,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6326,7 +6419,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6362,7 +6456,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6383,7 +6478,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6424,7 +6520,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6445,7 +6542,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6489,7 +6587,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6510,7 +6609,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6571,7 +6671,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6592,7 +6693,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6630,7 +6732,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6651,7 +6754,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6687,7 +6791,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6708,7 +6813,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6744,7 +6850,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6765,7 +6872,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6803,7 +6911,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6824,7 +6933,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6862,7 +6972,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6883,7 +6994,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -6924,7 +7036,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -6945,7 +7058,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7018,7 +7132,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7039,7 +7154,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7079,7 +7195,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7100,7 +7217,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7139,7 +7257,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7160,7 +7279,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7221,7 +7341,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7242,7 +7363,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7319,7 +7441,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7340,7 +7463,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7386,7 +7510,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7407,7 +7532,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7445,7 +7571,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7466,7 +7593,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7503,7 +7631,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7524,7 +7653,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7560,7 +7690,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7581,7 +7712,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7617,7 +7749,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7638,7 +7771,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -7674,7 +7808,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7695,7 +7830,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7731,7 +7867,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7752,7 +7889,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7799,7 +7937,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7820,7 +7959,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7856,7 +7996,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7877,7 +8018,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7917,7 +8059,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7938,7 +8081,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -7974,7 +8118,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -7995,7 +8140,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8031,7 +8177,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8052,7 +8199,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -8087,7 +8235,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8108,7 +8257,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8146,7 +8296,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8167,7 +8318,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -8216,7 +8368,8 @@
         "header_stripped": [
           "ಸುಳಾದಿ -  ದ್ರುವತಾಳ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8237,7 +8390,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8273,7 +8427,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8294,7 +8449,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8330,7 +8486,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8351,7 +8508,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8389,7 +8547,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8410,7 +8569,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8447,7 +8607,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8468,7 +8629,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8505,7 +8667,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8526,7 +8689,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8562,7 +8726,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8583,7 +8748,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8625,7 +8791,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8646,7 +8813,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8682,7 +8850,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8703,7 +8872,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8740,7 +8910,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8761,7 +8932,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8813,7 +8985,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8834,7 +9007,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8876,7 +9050,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8897,7 +9072,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -8945,7 +9121,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -8966,7 +9143,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9002,7 +9180,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9023,7 +9202,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -9058,7 +9238,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9079,7 +9260,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -9114,7 +9296,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9135,7 +9318,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9173,7 +9357,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9194,7 +9379,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9232,7 +9418,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9253,7 +9440,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9289,7 +9477,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9310,7 +9499,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9347,7 +9537,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9368,7 +9559,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9426,7 +9618,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9447,7 +9640,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -9482,7 +9676,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9503,7 +9698,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9543,7 +9739,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9564,7 +9761,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9602,7 +9800,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9623,7 +9822,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9662,7 +9862,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9683,7 +9884,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9722,7 +9924,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9743,7 +9946,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9780,7 +9984,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9801,7 +10006,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9837,7 +10043,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9858,7 +10065,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9896,7 +10104,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9917,7 +10126,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -9953,7 +10163,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -9974,7 +10185,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10010,7 +10222,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10031,7 +10244,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10067,7 +10281,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10088,7 +10303,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -10123,7 +10339,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10144,7 +10361,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10190,7 +10408,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10211,7 +10430,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10249,7 +10469,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10270,7 +10491,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10308,7 +10530,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10329,7 +10552,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -10367,7 +10591,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10388,7 +10613,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10426,7 +10652,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10447,7 +10674,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10489,7 +10717,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10510,7 +10739,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -10545,7 +10775,8 @@
         "category_raw": 1,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10566,7 +10797,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10602,7 +10834,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10623,7 +10856,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10665,7 +10899,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10686,7 +10921,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10724,7 +10960,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10745,7 +10982,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10781,7 +11019,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10802,7 +11041,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10840,7 +11080,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10861,7 +11102,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10898,7 +11140,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10919,7 +11162,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -10967,7 +11211,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -10988,7 +11233,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11026,7 +11272,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11047,7 +11294,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11086,7 +11334,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11107,7 +11356,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11147,7 +11397,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11168,7 +11419,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11206,7 +11458,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11227,7 +11480,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11264,7 +11518,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11285,7 +11540,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11322,7 +11578,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11343,7 +11600,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11381,7 +11639,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11402,7 +11661,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11440,7 +11700,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11461,7 +11722,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11497,7 +11759,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11518,7 +11781,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11562,7 +11826,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11583,7 +11848,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11619,7 +11885,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11640,7 +11907,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11680,7 +11948,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11701,7 +11970,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11739,7 +12009,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11760,7 +12031,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11816,7 +12088,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11837,7 +12110,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11875,7 +12149,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11896,7 +12171,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11934,7 +12210,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -11955,7 +12232,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -11995,7 +12273,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12016,7 +12295,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12059,7 +12339,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12080,7 +12361,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12118,7 +12400,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12139,7 +12422,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12182,7 +12466,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12203,7 +12488,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12242,7 +12528,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12263,7 +12550,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12301,7 +12589,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12322,7 +12611,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12361,7 +12651,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12382,7 +12673,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12426,7 +12718,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12447,7 +12740,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12495,7 +12789,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12516,7 +12811,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12558,7 +12854,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12579,7 +12876,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -12614,7 +12912,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12635,7 +12934,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12674,7 +12974,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12695,7 +12996,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12736,7 +13038,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12757,7 +13060,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -12805,7 +13109,8 @@
           "ಸುಳಾದಿ",
           "ಧ್ರುವತಾಳ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12826,7 +13131,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12862,7 +13168,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12883,7 +13190,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -12919,7 +13227,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -12940,7 +13249,9 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ಗೋರಖ್ ಕಲ್ಯಾಣ್",
       "tala": "ಭಜನ್ ಠೇಕಾ",
@@ -12979,7 +13290,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13000,7 +13312,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13036,7 +13349,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13057,7 +13371,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13093,7 +13408,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13114,7 +13430,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13151,7 +13468,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13172,7 +13490,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13208,7 +13527,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13229,7 +13549,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13266,7 +13587,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13287,7 +13609,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13325,7 +13648,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13346,7 +13670,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13382,7 +13707,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13403,7 +13729,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13442,7 +13769,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13463,7 +13791,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13502,7 +13831,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13523,7 +13853,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13561,7 +13892,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13582,7 +13914,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13620,7 +13953,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13641,7 +13975,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13677,7 +14012,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13698,7 +14034,9 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ದಾನಿ ಮಿಶ್ರ",
       "tala": "ಭಜನ್ ಠೇಕಾ",
@@ -13737,7 +14075,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13758,7 +14097,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13797,7 +14137,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13818,7 +14159,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13855,7 +14197,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13876,7 +14219,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13916,7 +14260,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13937,7 +14282,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -13973,7 +14319,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -13994,7 +14341,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14030,7 +14378,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14051,7 +14400,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14089,7 +14439,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14110,7 +14461,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:1"
+        "category_raw:1",
+        "form:ugabhoga"
       ],
       "raga": "",
       "tala": "",
@@ -14146,7 +14498,8 @@
         "header_stripped": [
           "ಉಗಾಭೋಗ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14167,7 +14520,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14218,7 +14572,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14239,7 +14594,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14282,7 +14638,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14303,7 +14660,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14339,7 +14697,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14360,7 +14719,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -14406,7 +14766,8 @@
         "header_stripped": [
           "ಸುಳಾದಿ -"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14427,7 +14788,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14463,7 +14825,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14484,7 +14847,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14568,7 +14932,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14589,7 +14954,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14627,7 +14993,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14648,7 +15015,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14689,7 +15057,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14710,7 +15079,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14749,7 +15119,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14770,7 +15141,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14807,7 +15179,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14828,7 +15201,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14864,7 +15238,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14885,7 +15260,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14922,7 +15298,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -14943,7 +15320,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -14981,7 +15359,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15002,7 +15381,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15038,7 +15418,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15059,7 +15440,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15107,7 +15489,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15128,7 +15511,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15164,7 +15548,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15185,7 +15570,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15223,7 +15609,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15244,7 +15631,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15284,7 +15672,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15305,7 +15694,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15341,7 +15731,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15362,7 +15753,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15398,7 +15790,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15419,7 +15812,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15455,7 +15849,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15476,7 +15871,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15512,7 +15908,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15533,7 +15930,9 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "",
       "tala": "",
@@ -15572,7 +15971,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15593,7 +15993,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15629,7 +16030,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15650,7 +16052,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15687,7 +16090,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15708,7 +16112,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15744,7 +16149,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15765,7 +16171,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15801,7 +16208,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15822,7 +16230,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15885,7 +16294,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15906,7 +16316,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -15943,7 +16354,8 @@
         "category_raw": 0,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
@@ -15964,7 +16376,8 @@
       "tags": [
         "composer:ಪ್ರಾಣೇಶದಾಸರು",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -16008,7 +16421,8 @@
         "category_raw": 3,
         "favorite": false,
         "header_stripped": [],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false,
       "composer_local": "ಪ್ರಾಣೇಶದಾಸರು",
