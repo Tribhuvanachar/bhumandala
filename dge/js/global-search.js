@@ -19,7 +19,7 @@
   // window.DGE_SEARCH_INDEX from appConfig; this constant is the same URL, so
   // a page that does not load config.js still finds it. Set the variable to
   // 'search_index' to read a local build instead.
-  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@60091fb1d84d2dbca3224b6ee7d1b78834a63c81';
+  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@71b7c27bbda6060e3706ab2bd6ca57d72c91877b';
   var INDEX_BASE = window.DGE_SEARCH_INDEX || CDN_INDEX;
   var idxPromise = null, debounce = null;
   var currentScheme = 'auto'; // set by the scheme popup, read by queryOpts()
@@ -51,6 +51,21 @@
     return null;
   }
   var SIDDHANTA_LABELS = { advaita: 'अद्वैतम्', dvaita: 'द्वैतम्', vishishtadvaita: 'विशिष्टाद्वैतम्' };
+
+  // Section slug -> display label, for the scope <select>. Falls back to a
+  // title-cased, underscore-stripped version of the slug for anything not
+  // listed here (see sectionLabel()), so a new section in the taxonomy shows
+  // up usably without this map needing to be kept in lockstep.
+  var SECTION_LABELS = {
+    vedas: 'Vedas', vedanga: 'Vedāṅga', itihasa: 'Itihāsa', purana: 'Purāṇa',
+    darshana: 'Darśana', dvaitavedanta: 'Dvaita Vedānta',
+    kavya_alankara: 'Kāvya', smriti_dharma: 'Smṛti / Dharma',
+    agama: 'Āgama', stotra: 'Stotra', dasa_sahitya: 'Dasa Sāhitya'
+  };
+  function sectionLabel(slug) {
+    return SECTION_LABELS[slug] ||
+      slug.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
 
   function css() {
     if (document.getElementById('dge-gs-css')) return;
@@ -104,12 +119,12 @@
     document.head.appendChild(s);
   }
 
+  // Guards against open() rebuilding the whole panel on every call: harmless
+  // when there was nothing to populate post-load (the scheme <select> was
+  // static markup), but the section <select> IS populated post-load from
+  // the index's manifest, and a rebuilt duplicate got only "Everything" --
+  // found by testing a second open() in the same page, not by inspection.
   function build() {
-    // open() calls build() on every single open, not just the first --
-    // without this guard each call appended a whole second FAB/overlay/
-    // input/scheme-popup (duplicate ids and all), and re-wired every
-    // listener a second time, growing without bound across a session. Only
-    // ever needs to run once; already-built means already-there.
     if (document.getElementById('dge-gs-overlay')) return;
     css();
     var fab = document.createElement('button');
@@ -141,6 +156,9 @@
               '<div class="dge-gs-scheme-opt" data-scheme="slp1">SLP1</div>' +
             '</div>' +
           '</div>' +
+          '<select class="dge-gs-scheme" id="dge-gs-section" title="Search scope">' +
+            '<option value="">Everything</option>' +
+          '</select>' +
           '<button class="dge-gs-x" id="dge-gs-x" title="Close (Esc)" aria-label="Close">✕</button>' +
         '</div>' +
         '<div class="dge-gs-filterbar" id="dge-gs-filterbar" style="display:none;"></div>' +
@@ -151,6 +169,11 @@
 
     document.getElementById('dge-gs-x').addEventListener('click', close);
     document.getElementById('dge-gs-input').addEventListener('input', onType);
+    // Changing scope re-runs the current query immediately -- no need to
+    // retype for the search to reflect the new "Everything"/section choice.
+    document.getElementById('dge-gs-section').addEventListener('change', function () {
+      document.getElementById('dge-gs-input').dispatchEvent(new Event('input'));
+    });
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }
       if (e.key === 'Escape') close();
@@ -183,7 +206,10 @@
   function ensureIndex() {
     if (!idxPromise) {
       if (!window.DGESearch) { alert('Search scripts not loaded (need dge-search.js).'); return null; }
-      idxPromise = window.DGESearch.create(INDEX_BASE).catch(function (e) {
+      idxPromise = window.DGESearch.create(INDEX_BASE).then(function (idx) {
+        populateSections(idx.sections || []);
+        return idx;
+      }).catch(function (e) {
         idxPromise = null;
         document.getElementById('dge-gs-results').innerHTML =
           '<div class="dge-gs-hint">Could not load the search index at "' + INDEX_BASE + '". Generate it with build_search_index.py and commit dge/search_index/.</div>';
@@ -191,6 +217,24 @@
       });
     }
     return idxPromise;
+  }
+
+  // The section list only comes from the index's own manifest (it's not
+  // known ahead of a fetch), so the <select> starts as just "Everything" and
+  // fills in once ensureIndex() resolves. Guarded so a second open() in the
+  // same page load doesn't duplicate the options.
+  function populateSections(sections) {
+    var sel = document.getElementById('dge-gs-section');
+    if (!sel || sel.getAttribute('data-populated') || !sections.length) return;
+    sel.setAttribute('data-populated', '1');
+    sections.slice().sort(function (a, b) {
+      return sectionLabel(a).localeCompare(sectionLabel(b));
+    }).forEach(function (sec) {
+      var opt = document.createElement('option');
+      opt.value = sec;
+      opt.textContent = sectionLabel(sec);
+      sel.appendChild(opt);
+    });
   }
 
   // `query` is optional. The word popover in intellisense.js passes the word
@@ -253,12 +297,13 @@
     results.innerHTML = '<div class="dge-gs-hint">Searching…</div>';
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
-      p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30 }, queryOpts(q))); })
+      var section = (document.getElementById('dge-gs-section') || {}).value || undefined;
+      p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30, section: section }, queryOpts(q))); })
        .then(function (hits) { render(hits, q); })
        .catch(function () {
          // ensureIndex()'s own catch already writes a specific "could not
          // load the index" message and only fires on that one failure --
-         // this covers every OTHER way the chain can reject (a bucket or
+         // this covers every OTHER way the chain can reject (a posting or
          // shard fetch dying mid-search) so "Searching..." never just sits
          // there forever on a query that silently failed.
          var el = document.getElementById('dge-gs-results');

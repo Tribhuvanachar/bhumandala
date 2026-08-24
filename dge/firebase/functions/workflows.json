@@ -115,6 +115,54 @@
       ]
     },
     {
+      "id": "dhatu-lexicon",
+      "file": "gemini-dhatu-lexicon.yml",
+      "name": "Gemini dhātu lexicon — multilingual meanings",
+      "blurb": "AI-generated meanings (11 languages) + usage notes per dhātu, independently composed by Gemini — not copied from ashtadhyayi.com or any other source. Checkpointed: re-running only fills in roots without an entry yet.",
+      "writes": "corpus",
+      "inputs": [
+        {
+          "name": "dhatus",
+          "type": "string",
+          "label": "'all', a comma list of dhatu ids, or an id range 'lo-hi'",
+          "default": "all",
+          "required": true
+        },
+        {
+          "name": "model",
+          "type": "string",
+          "label": "Gemini model — gemini-flash-lite-latest (default, cheaper) or gemini-flash-latest",
+          "default": "gemini-flash-lite-latest",
+          "required": true
+        },
+        {
+          "name": "concurrency",
+          "type": "string",
+          "label": "Parallel in-flight requests",
+          "default": "5",
+          "required": true
+        },
+        {
+          "name": "limit",
+          "type": "string",
+          "label": "Generate at most N roots this run (blank = no limit) — start small",
+          "default": "50"
+        },
+        {
+          "name": "force",
+          "type": "boolean",
+          "label": "Re-generate roots that already have an entry",
+          "default": false
+        },
+        {
+          "name": "direct_push",
+          "type": "boolean",
+          "label": "Skip the review PR and push straight to main",
+          "default": false
+        }
+      ]
+    },
+    {
       "id": "publish-wordnet",
       "file": "publish-wordnet.yml",
       "name": "Publish the Sanskrit WordNet",
