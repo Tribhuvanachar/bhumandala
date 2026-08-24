@@ -361,6 +361,17 @@ def parse_chapter_critical(page_title, chapter_num):
         poem = CRITICAL_PAREN_SPAN_RX.sub("", poem)
         poem = CRITICAL_BRACKET_SPAN_RX.sub("", poem)
 
+    # Checked directly at full 33-patala scale: a bare "?" (not wrapped in
+    # parens, unlike "(तथाऽनेक?)") also turns up on its own as an
+    # uncertain-reading/illegible-text marker, and a handful of "(" / ")"
+    # survive unpaired -- genuine source typos (an opening or closing
+    # paren with no partner at all, not a nesting case the fixed-point
+    # loop above would resolve). Neither character is ever legitimate in
+    # this corpus's verse text, so both are simply removed outright,
+    # wherever they still stand once the paired stripping above is done.
+    poem = poem.replace("?", "")
+    poem = re.sub(r"[()\[\]]", "", poem)
+
     # A paren-wrapped section heading is sometimes followed by " - " and
     # real verse text on the *same* line ("(प्रधानात्...) - विभक्तं...");
     # once the heading itself is stripped above, that leaves a bare
@@ -429,7 +440,12 @@ def parse_chapter_critical(page_title, chapter_num):
         body = poem[prev_end:mm.start()]
         prev_end = mm.end()
         body = re.sub(r"\d+", "", body)
-        body = re.sub(r"\s+", " ", body).strip(" \n\t।|")
+        # A stray leading "-" can still remain here specifically -- when a
+        # removed bracket/paren sat right at the very start of this
+        # verse's own body slice, not after a danda inside it (the
+        # danda-adjacent case is already cleaned up above) -- trimmed like
+        # the other leftover punctuation rather than kept as real text.
+        body = re.sub(r"\s+", " ", body).strip(" \n\t।|-")
         if body:
             vs = to_int(mm.group(1))
             if vs == 1 and last_vs > 1:
