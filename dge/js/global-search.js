@@ -30,8 +30,11 @@
   // fetch through jsdelivr, see onType()'s own note; re-querying per filter
   // toggle would only make that worse). lastHits/lastQuery hold the most
   // recent completed search so filters + renderRows() can re-slice it.
-  var lastHits = null, lastQuery = '';
-  var filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '' };
+  // lastQueryDeva is the SAME query converted to Devanagari (see
+  // queryToDevanagari() below) rather than folded to SLP1 -- computed once
+  // per search, read by applyFilters()'s "Exact spelling only" toggle.
+  var lastHits = null, lastQuery = '', lastQueryDeva = '';
+  var filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '', exact: false };
   var CATEGORY_LABELS = {
     vedas: 'वेदाः', purana: 'पुराणानि', itihasa: 'इतिहासाः', darshana: 'दर्शनानि',
     smriti_dharma: 'स्मृतिधर्मशास्त्राणि', agama: 'आगमः', stotra: 'स्तोत्राणि',
@@ -330,6 +333,30 @@
     return { scheme: 'slp1' };
   }
 
+  // "Exact spelling only" (24 Aug 2026, the backlog item deferred when the
+  // rest of this session's search work shipped -- the project lead's
+  // go-ahead: "Sure. Go ahead. No problem."). The index itself only ever
+  // stores trigrams over the PHONETICALLY FOLDED key (see
+  // SEARCH_ARCHITECTURE.md/dge-normalize.js) -- there is no separate
+  // literal-spelling index to query, and building one would mean
+  // rebuilding the 330MB artifact, exactly the architecture change this
+  // whole pass was told not to make. What the index DOES already store,
+  // per unit, is the real Devanagari snippet text (row.s / h.snippet) --
+  // so "exact" is implemented as a client-side POST-filter on the results
+  // a normal fuzzy search already fetched, same as every other filter chip
+  // in this file (type/category/siddhanta/keyword), never a new query.
+  // Converts the query to Devanagari the same way queryOpts() above
+  // detects its script, but to 'devanagari' instead of 'slp1' -- the
+  // snippet's own stored script -- so the comparison is a literal
+  // character-for-character containment check, not a folded one.
+  function queryToDevanagari(input) {
+    if (/[ऀ-ॿ]/.test(input)) return input.trim();
+    var scheme = currentScheme;
+    if (scheme === 'auto') scheme = /[āīūṛṝḷṁṃḥśṣṅñṭḍṇ]/i.test(input) ? 'iast' : 'slp1';
+    try { if (window.Sanscript) return window.Sanscript.t(input, scheme, 'devanagari').trim(); } catch (e) {}
+    return input.trim();
+  }
+
   function go(slug, unit) {
     // ?path= is the READER's contract. From any other page carrying this
     // search (ashtadhyayi.html since the corpus-usage button), the result
@@ -363,6 +390,7 @@
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
       var section = currentSection || undefined;
+      lastQueryDeva = queryToDevanagari(q);
       p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30, section: section }, queryOpts(q))); })
        .then(function (hits) { render(hits, q); })
        .catch(function () {
@@ -490,15 +518,26 @@
     var catKeys = Object.keys(filterState.categories);
     var sidKeys = Object.keys(filterState.siddhanta);
     var kw = filterState.keyword.trim().toLowerCase();
+    // Only actually filters when there's a real Devanagari string to check
+    // against (lastQueryDeva) -- guards the edge case where conversion
+    // failed and fell back to empty, which would otherwise hide everything.
+    var exactActive = filterState.exact && !!lastQueryDeva;
     var out = lastHits.filter(function (h) {
       if (typeActive && h.contentType !== filterState.type) return false;
       if (catKeys.length && filterState.categories[h.category] !== true) return false;
       if (sidKeys.length && filterState.siddhanta[siddhantaOf(h.grantha)] !== true) return false;
       if (kw && (h.title + ' ' + h.snippet).toLowerCase().indexOf(kw) === -1) return false;
+      if (exactActive && (!h.snippet || h.snippet.indexOf(lastQueryDeva) === -1)) return false;
       return true;
     });
-    var anyFilterActive = typeActive || catKeys.length || sidKeys.length || kw;
-    renderRows(out, lastQuery, anyFilterActive ? 'No results match these filters.' : 'No matches.');
+    var anyFilterActive = typeActive || catKeys.length || sidKeys.length || kw || exactActive;
+    var emptyMsg = 'No matches.';
+    if (anyFilterActive) {
+      emptyMsg = exactActive
+        ? 'No exact spelling matches among these results — try turning off "Exact spelling only" to see near matches too.'
+        : 'No results match these filters.';
+    }
+    renderRows(out, lastQuery, emptyMsg);
     var fc = document.getElementById('dge-gs-fcount');
     if (fc) fc.textContent = anyFilterActive ? (out.length + ' of ' + lastHits.length) : '';
   }
@@ -595,7 +634,24 @@
       bar.appendChild(sidRow);
     }
 
-    // Row 4: keyword refine + a live "N of M shown" count.
+    // Row 4: exact-spelling toggle -- own row, since it's a mode the reader
+    // opts into (see queryToDevanagari()'s comment above), not tied to this
+    // result set's own contents the way type/category/siddhanta are. Only
+    // shown when there's an actual Devanagari form of the query to check
+    // against (see applyFilters()'s own guard) -- a dead toggle that can
+    // never filter anything would just be confusing chrome.
+    if (lastQueryDeva) {
+      var exactRow = document.createElement('div');
+      exactRow.className = 'dge-gs-frow';
+      exactRow.appendChild(filterChip('Exact spelling only', filterState.exact, function () {
+        filterState.exact = !filterState.exact;
+        buildFilterBar(hits);
+        applyFilters();
+      }));
+      bar.appendChild(exactRow);
+    }
+
+    // Row 5: keyword refine + a live "N of M shown" count.
     var kwRow = document.createElement('div');
     kwRow.className = 'dge-gs-frow';
     var kwInput = document.createElement('input');
@@ -636,7 +692,13 @@
     hits = (hits || []).filter(function (h) { return dgeSearchIsAdmin() || !dgeSearchIsAdminOnlyHit(h); });
     lastHits = hits;
     lastQuery = q;
-    filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '' };
+    // type/category/siddhanta/keyword reset every search since they're
+    // built from THIS result set's own contents (a category chip from the
+    // last query may not even exist in this one). "Exact spelling only" is
+    // different -- a mode the reader explicitly opted into, not tied to any
+    // one result set -- so it persists across searches, same as the
+    // scheme/section pickers already do.
+    filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '', exact: filterState.exact };
     if (!hits || !hits.length) {
       document.getElementById('dge-gs-filterbar').style.display = 'none';
       renderRows([], q);
