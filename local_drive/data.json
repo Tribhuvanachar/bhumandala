@@ -13819,5 +13819,2312 @@
       "Russian": "siyat, svetit, zhelat, idti",
       "Chinese": "faguang, aihao, qianwang"
     }
+  },
+  {
+    "dhatu_id": "01.0301",
+    "aupadeshika": "dhvrasu~",
+    "stripped_root": "dhvras",
+    "gana": "Bhvadi (Gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Intransitive (Akarmaka)",
+    "canonical_dhatvartha": "gatikautilyayoh",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'dhvras' means to move crookedly, zig-zag, or walk in an erratic and deceptive manner. In basic active form (dhvrasati), it shows a subject moving in a curved or uneven path.",
+      "scenarios": [
+        {
+          "verb_form": "dhvrasati",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat lakara (present tense), prathama-purusha ekavacana",
+          "meaning": "Moves crookedly or meanders",
+          "example_sanskrit": "sarpah kutilam marge dhvrasati.",
+          "example_english": "The snake moves crookedly on the path."
+        },
+        {
+          "verb_form": "dhvrasayati",
+          "grammar_trigger": "Nic pratyaya (causative), Lat lakara",
+          "meaning": "Causes someone or something to move crookedly",
+          "example_sanskrit": "margasya vankata gajam dhvrasayati.",
+          "example_english": "The crookedness of the path causes the elephant to move in a zig-zag path."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'dhvrasu' is listed under the Bhvadi class in the sense of 'gatikautilyayoh' (crooked or deceitful movement). It is Parasmaipadi, vowel-ending in 'u' as an it-marker, takes the augment it (set), and yields standard active forms such as dhvrasati and dadhvrāsa without internal nasalization.",
+      "kshiratarangini": "Kshirasvamin notes 'dhvrasu gatikautilyayoh', explaining the action as 'kutila-gatih' (crooked motion). The root maintains the conjunct 'dhvr' throughout its basic sarvadhatuka conjugational paradigms like dhvrasati, dhvrasatah, dhvrasanti."
+    },
+    "meanings": {
+      "English": "to move crookedly, to meander, to go in a zigzag manner",
+      "Kannada": "donkagi calisu, vankiyagi hogo",
+      "Telugu": "vankaraga naducu, kutilagatito velu",
+      "Tamil": "valainthu selluthal, konalaaga nadathal",
+      "Malayalam": "valanju pokuka, nerallathe sancharikkuka",
+      "Hindi": "tedha chalna, kutil gati karna",
+      "Bengali": "baka bhabe chola, kutila gati",
+      "German": "krumm gehen, sich schlaengeln",
+      "French": "serpenter, marcher de travers",
+      "Russian": "dvigat'sya krivo, izvivat'sya",
+      "Chinese": "wan qu xing jin, bu zheng er xing"
+    }
+  },
+  {
+    "dhatu_id": "01.0302",
+    "aupadeshika": "dhuñ",
+    "stripped_root": "dhu",
+    "gana": "bhvadi",
+    "pada": "ubhayapada",
+    "it_status": "anit",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "kampane",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'dhu' means to shake, tremble, or agitate. In normal active usage, it describes something vibrating, shaking, or fluttering on its own. When made causative (Nic), it shifts to mean actively shaking something else or agitating it vigorously.",
+      "scenarios": [
+        {
+          "verb_form": "dhavate",
+          "grammar_trigger": "kartari prayoga, lat lakara, prathama purusha, ekavacana (atmanepada)",
+          "meaning": "shakes / trembles",
+          "example_sanskrit": "vāyunā vṛkṣasya patraṃ dhavate.",
+          "example_english": "The leaf of the tree trembles due to the wind."
+        },
+        {
+          "verb_form": "dhāvayati",
+          "grammar_trigger": "nic pratyaya (causative), lat lakara, prathama purusha, ekavacana",
+          "meaning": "causes to shake / violently agitates",
+          "example_sanskrit": "prabalaḥ vātaḥ taruśākhāḥ dhāvayati.",
+          "example_english": "The strong wind causes the branches of the tree to shake."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The anubandha 'ñ' indicates Ubhayapada by Paninian rule 'svaritañitaḥ kartrabhiprāye kriyāphale'. In the Sarvadhatuka environment with Sap pratyaya, the root vowel 'u' undergoes Guna to 'o' and then Av-adesha before vowel-initial affixes, producing regular forms like dhavati and dhavate in the sense of trembling or shaking (kampane).",
+      "kshiratarangini": "Kshirasvamin interprets 'dhuñ kampane' as denoting physical agitation, motion, and vibration. It forms anit bases in Bhvadi and is systematically distinguished from the ninth-class (Kryadi) root dhūñ kampane which yields dhunāti / dhunīte."
+    },
+    "meanings": {
+      "English": "to shake, to tremble, to agitate",
+      "Kannada": "nadugu, kampisu, alagadu",
+      "Telugu": "vanaku, kampincu, kadalu",
+      "Tamil": "nadungu, asai, adhir",
+      "Malayalam": "viraykkuka, ilakuka, kampanam cheyyuka",
+      "Hindi": "kampana, hilana, thartharana",
+      "Bengali": "kampa, naaraa, tharthar kora",
+      "German": "zittern, beben, schuetteln",
+      "French": "trembler, agiter, secouer",
+      "Russian": "drozhat, sotryasat, tryastis",
+      "Chinese": "zhendong, fadou, yaohuang"
+    }
+  },
+  {
+    "dhatu_id": "01.0303",
+    "aupadeshika": "kṛpū~",
+    "stripped_root": "kṛp",
+    "gana": "Bhvadi (Gana 1)",
+    "pada": "Atmanepada",
+    "it_status": "Anit",
+    "transitivity": "Intransitive",
+    "canonical_dhatvartha": "samarthye",
+    "dhaturupanandini": {
+      "simple_explanation": "The root kṛp (often alternating phonetically with kḷp) belongs to the 1st conjugation (Bhvadi) and is strictly Atmanepada in its primary conjugation. Its core meaning is to be capable, fit, suitable, or able. In basic forms, it describes an inherent ability or readiness. When used with causative affixes or preverbs, it shifts to mean designing, imagining, arranging, or bringing about an outcome.",
+      "scenarios": [
+        {
+          "verb_form": "kṛpate",
+          "grammar_trigger": "Lat (Present Indicative), Prathama Purusha, Ekavacana, Atmanepada",
+          "meaning": "is capable, is fit, or succeeds",
+          "example_sanskrit": "buddhiman chatrah karyam kartum kṛpate.",
+          "example_english": "The intelligent student is capable of accomplishing the task."
+        },
+        {
+          "verb_form": "prakalpayati",
+          "grammar_trigger": "Nic (Causative) + Upasarga 'pra', Parasmaipada, Lat, Prathama Purusha, Ekavacana",
+          "meaning": "arranges, invents, or designs",
+          "example_sanskrit": "acaryah nutanam vidhim prakalpayati.",
+          "example_english": "The teacher devises a new method."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Madhaviya Dhatuvritti analyzes the root as 'kṛpū samarthye'. It is anudattet and anit, taking Atmanepada endings by default. Sayana highlights the phonetic relationship with the root kḷp ('kṛpo ro lah') and details its forms in the four universal tense-mood systems, confirming its application in contexts of adequacy, suitability, and functional power.",
+      "kshiratarangini": "Kshirasvamin defines the root under the semantic field of 'samarthya' (capability, competence, and readiness). He notes that the verbal base indicates the capacity or readiness of an agent or entity to manifest an action or fulfill a purpose."
+    },
+    "meanings": {
+      "English": "to be capable, to be fit, to be adequate, to succeed",
+      "Kannada": "samarthavagiruvudu, yogyavagiruvudu",
+      "Telugu": "samarthyamu kaligi unduta, yogyamagu",
+      "Tamil": "thaguthi udaiyathaga iruthal, sakthi petriruthal",
+      "Malayalam": "samarthyamullathayirikkuka, yogyamayirikkuka",
+      "Hindi": "samartha hona, yogya hona, sakshama hona",
+      "Bengali": "samartha haoya, upajukta haoya",
+      "German": "fahig sein, geeignet sein, vermogen",
+      "French": "etre capable, etre propre a, convenir",
+      "Russian": "byt sposobnym, goditsya, podkhodit",
+      "Chinese": "nenggou, shenren, heshi"
+    }
+  },
+  {
+    "dhatu_id": "01.0304",
+    "aupadeshika": "kladi",
+    "stripped_root": "klad",
+    "gana": "Bhvadi",
+    "pada": "Atmanepada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka / Akarmaka",
+    "canonical_dhatvartha": "aahvaane rodane ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root kladi has an indicatory vowel 'i' (idit), which causes a nasal insertion (num-agama), turning the stem into 'kland-'. As an Atmanepada root in the Bhvadi class, it conjugates as 'klandate' in the present tense, denoting calling out, lamenting, or crying. In the causative form (nic), it takes the meaning of causing someone to weep or shout.",
+      "scenarios": [
+        {
+          "verb_form": "klandate",
+          "grammar_trigger": "Kartari prayoga, Lat-lakara, Prathama-purusha, Eka-vacana",
+          "meaning": "calls out or weeps",
+          "example_sanskrit": "duhkhaarta baalikaa rodanena klandate.",
+          "example_english": "The distressed girl weeps and laments."
+        },
+        {
+          "verb_form": "klandayati",
+          "grammar_trigger": "Nic-pratyaya (Causative), Lat-lakara, Prathama-purusha, Eka-vacana",
+          "meaning": "causes someone to cry out or weep",
+          "example_sanskrit": "krooravacanaani taam klandayanti.",
+          "example_english": "Cruel words cause her to lament."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root kladi is idit, thus taking the num-agama by rule 'idito num dhaatoh', yielding the verbal base kland-. It is inflected in the Atmanepada with standard set-characteristics in ardhadhatuka environments, giving forms like klandate, caklande, and klanditaa.",
+      "kshiratarangini": "Kshirasvamin defines the semantic domain as calling (aahvaana) and weeping (rodana). Being idit, the insertion of the penultimate nasal is permanent across conjugational and derivative categories, giving the present form klandate."
+    },
+    "meanings": {
+      "English": "to call out, to weep, to lament",
+      "Kannada": "kareyu, rodana maadu, alu",
+      "Telugu": "pilucu, educu, rodhincu",
+      "Tamil": "azhai, azhu, pulambu",
+      "Malayalam": "vilikkuka, karayuka, rodhikkuka",
+      "Hindi": "pukaaranaa, ronaa, vilaap karanaa",
+      "Bengali": "daaka, kaanda, bilaap karaa",
+      "German": "herbeirufen, weinen, klagen",
+      "French": "appeler, pleurer, se lamenter",
+      "Russian": "zvat, plakat, rydat",
+      "Chinese": "huhan, kutao, aishang"
+    }
+  },
+  {
+    "dhatu_id": "01.0305",
+    "aupadeshika": "dāṇ",
+    "stripped_root": "dā",
+    "gana": "Bhvadi (Gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Anit",
+    "transitivity": "Sakarmaka (Transitive)",
+    "canonical_dhatvartha": "dāne",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'dā' (dāṇ) belongs to the Bhvadi class and means 'to give' or 'to bestow'. In the basic present and continuous systems (Sarvadhatuka tenses), the entire root changes its base form to 'yaccha-'. The recipient of the given object is put in the Dative case (Chaturthi Vibhakti).",
+      "scenarios": [
+        {
+          "verb_form": "yacchati",
+          "grammar_trigger": "Present Tense (Lat Lakara), 3rd Person Singular (Prathama Purusha Ekavacana)",
+          "meaning": "gives / donates",
+          "example_sanskrit": "nṛpaḥ daridrāya dhanaṃ yacchati.",
+          "example_english": "The king gives wealth to the poor person."
+        },
+        {
+          "verb_form": "yaccha",
+          "grammar_trigger": "Imperative Mood (Lot Lakara), 2nd Person Singular (Madhyama Purusha Ekavacana)",
+          "meaning": "give!",
+          "example_sanskrit": "he mitra, mahyaṃ lekhanīṃ yaccha.",
+          "example_english": "O friend, give me the pen."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti identifies 'dāṇ dāne' as a root terminating in a long vowel ā with the indicatory letter ṇ. By the Paninian sutra 'pāghrādhmāsthāmnādāṇdṛśyaṛtisaśadsadāṃ pibajighradhamatiṣṭhamananyacchapaśyarcchadhāśīyasīdāḥ' (7.3.78), the root 'dāṇ' gets replaced by the stem 'yaccha' before Sarvadhatuka affixes, forming forms such as yacchati, ayacchat, and yacchetu.",
+      "kshiratarangini": "Kshirasvamin records 'dāṇ dāne' as an anit Parasmaipada root of the Bhvadi class. He distinguishes this root from the 3rd class root 'ḍudāñ dāne' (which forms dadāti) by highlighting that 'dāṇ' takes the special stem substitute 'yaccha' in Sarvadhatuka environments and does not undergo reduplication like Juhotyadi roots."
+    },
+    "meanings": {
+      "English": "to give, grant, bestow, donate",
+      "Kannada": "koduvudu, dāna māḍuvudu",
+      "Telugu": "ivvu, dānamu cēyu",
+      "Tamil": "koṭuttal, ītal, tāṉam ceytal",
+      "Malayalam": "koṭukkuka, dānaṃ ceyyuka",
+      "Hindi": "denā, dān karnā",
+      "Bengali": "deoyā, dān karā",
+      "German": "geben, schenken, spenden",
+      "French": "donner, accorder, faire don",
+      "Russian": "davat, darit, predostavlyat",
+      "Chinese": "gei, zengsong, ciyu"
+    }
+  },
+  {
+    "dhatu_id": "01.0306",
+    "aupadeshika": "karda",
+    "stripped_root": "kard",
+    "gana": "Bhvadi",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Intransitive",
+    "canonical_dhatvartha": "kutsite śabde",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kard' means to make an unpleasant, contemptible, or harsh sound (like croaking or screeching). In its basic active form (Parasmaipada), it describes a subject naturally producing a jarring or unpleasant noise. When used with a causative suffix (kardayati), it conveys making someone or something produce such an unpleasant sound.",
+      "scenarios": [
+        {
+          "verb_form": "kardati",
+          "grammar_trigger": "Kartari prayoga, Lat lakara, Prathama purusha, Ekavacana (active simple present)",
+          "meaning": "makes a harsh sound / croaks",
+          "example_sanskrit": "darduraḥ paṅke kardati.",
+          "example_english": "The frog croaks harshly in the mud."
+        },
+        {
+          "verb_form": "kardayati",
+          "grammar_trigger": "Nic pratyaya (causative present)",
+          "meaning": "causes to make an unpleasant noise",
+          "example_sanskrit": "bālakaḥ vāditraṃ kardayati.",
+          "example_english": "The boy causes the musical instrument to screech jarringly."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'karda' is grouped under Bhvadi-gana with the semantic designation 'kutsite śabde' (in making a contemptible or harsh sound). It is anudattopadesha-varjita and set, taking the kartari sap vikaraṇa yielding the regular base kardati.",
+      "kshiratarangini": "Kshirasvamin defines 'karda' in the sense of 'kutsita-śabda' (unpleasant or derogatory sound). Being a set root with standard guna-free base formation in the sarvadhatuka stems, it conjugates as kardati, kardataḥ, kardanti."
+    },
+    "meanings": {
+      "English": "to make an unpleasant or harsh sound, to croak, to screech",
+      "Kannada": "ketsitavada dhvani madu, karkashavagi koogu",
+      "Telugu": "karkashamugā dhvani cheyu, asahyamaina shabdamu cheyu",
+      "Tamil": "aruvrukkaththakka oli ezhuppu, karaparappaana oli seyyu",
+      "Malayalam": "karkashamaya shabdamundakkuka, kutsitashabdam purappeduvikkuka",
+      "Hindi": "kutsit ya karkash dhvani karna, bura shabda nikalna",
+      "Bengali": "karkash ba kutsit shabda kora, bikat dhvani kora",
+      "German": "ein unangenehmes Geraeusch machen, kraechzen, kreischen",
+      "French": "emettre un son desagreable, coasser, grincer",
+      "Russian": "izdavat nepriyatnyy zvuk, karkat, skripet",
+      "Chinese": "fa chu nan ting de sheng yin, guaza, wawa jiao"
+    }
+  },
+  {
+    "dhatu_id": "01.0307",
+    "aupadeshika": "garda",
+    "stripped_root": "gard",
+    "gana": "Bhvadi",
+    "pada": "Atmanepada",
+    "it_status": "Set",
+    "transitivity": "Intransitive",
+    "canonical_dhatvartha": "kutsitayam vaci",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'gard' means to speak contemptuously, utter abusive words, or shout harshly. Because it belongs to the Atmanepada class, the action reflects an internal attitude or posture of disdain during speech.",
+      "scenarios": [
+        {
+          "verb_form": "gardate",
+          "grammar_trigger": "Kartari prayoga (Present indicative, third person singular, Atmanepada)",
+          "meaning": "Speaks contemptuously / reviles",
+          "example_sanskrit": "durjanah sarvada gardate.",
+          "example_english": "The wicked person always speaks contemptuously."
+        },
+        {
+          "verb_form": "gardyate",
+          "grammar_trigger": "Bhave prayoga (Impersonal passive)",
+          "meaning": "Contemptuous speech is made",
+          "example_sanskrit": "tenasatyena gardyate.",
+          "example_english": "Contemptuous words are uttered by that untruthful one."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti specifies 'garda kutsitayam vaci' indicating base speech or abusive vocalization. It conjugates with intermediate 'i' (it) affix where applicable, forming standard Atmanepada forms like gardate, jagarde, and gardisyate.",
+      "kshiratarangini": "Kshirasvamin categorizes 'garda' under the subset of roots ending in 'da' signifying defective or reprehensible sound production (kutsitasabda / kutsitavani), emphasizing its inherently derogatory vocal nature."
+    },
+    "meanings": {
+      "English": "to speak contemptuously or abusively",
+      "Kannada": "nindisi matanadu",
+      "Telugu": "nindapurvakamuga matladu",
+      "Tamil": "ikalntu pecu",
+      "Malayalam": "apamaniccu samsarikkuka",
+      "Hindi": "ninda ya apasabda bolna",
+      "Bengali": "kutsitababhabe katha bala",
+      "German": "schimpfen oder verachtlich sprechen",
+      "French": "parler avec mepris ou injurier",
+      "Russian": "rugat'sya ili govorit' prezritel'no",
+      "Chinese": "e yan xiang xiang"
+    }
+  },
+  {
+    "dhatu_id": "01.0308",
+    "aupadeshika": "kūñ",
+    "stripped_root": "kū",
+    "gana": "Bhvadigana",
+    "pada": "Atmanepada",
+    "it_status": "Anit",
+    "transitivity": "Intransitive (akarmaka)",
+    "canonical_dhatvartha": "shabde",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kū' means to make an indistinct sound, to coo, or to hum. Because it is marked with an indicator 'ñ' in the traditional Dhatupatha list, it conjugates in the Atmanepada (middle voice) as 'kuvate'. When using the causative suffix (Nic), it changes to 'kāvayati' meaning to cause someone or something to make a sound.",
+      "scenarios": [
+        {
+          "verb_form": "kuvate",
+          "grammar_trigger": "Kartari prayoga, Atmanepada, Lat lakara (present tense), prathama-purusha, ekavacana",
+          "meaning": "coos / makes sound",
+          "example_sanskrit": "vrikshe kokilah kuvate.",
+          "example_english": "The cuckoo coos on the tree."
+        },
+        {
+          "verb_form": "kāvayati",
+          "grammar_trigger": "Nic pratyaya (causative), Parasmaipada, Lat lakara, prathama-purusha, ekavacana",
+          "meaning": "causes to make a sound / causes to coo",
+          "example_sanskrit": "balakah pakshinam kavayati.",
+          "example_english": "The boy makes the bird chirp."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti analyzes 'kūñ shabde' as an Anit root belonging to the Bhvadi class. Being anudattett/nit, it assumes Atmanepada terminations. In Sarvadhatuka forms with Shap (a), the u-karanta stem undergoes guna and uvad-adesha yielding 'kuvate', 'kuvete', 'kuvante'.",
+      "kshiratarangini": "Kshirasvamin notes under 'kūñ shabde' that this root denotes subtle vocalization, chirping, or indistinct humming. In ardhadhatuka operations, Anit rules apply where appropriate, generating forms like cukuve in the perfect tense (Lit)."
+    },
+    "meanings": {
+      "English": "to make an indistinct sound, to coo, to chirp, to hum",
+      "Kannada": "dhvani madu, koogu, chilipili dhvani madu",
+      "Telugu": "dhvani cheyu, kooyu, chilakalu paluku",
+      "Tamil": "kural eluppu, koovu, oli sei",
+      "Malayalam": "shabdamundakuka, koovuka, chillu shabdamundakuka",
+      "Hindi": "dhvani karna, kuukna, aavaz nikalna",
+      "Bengali": "shabda kara, kujan kara, daka",
+      "German": "girren, gurren, toene von sich geben",
+      "French": "roucouler, gazouiller, emettre un son",
+      "Russian": "vorkovat', izdavat' zvuki, sheptat'",
+      "Chinese": "mingjiao, gu-gu jiao, fa sheng"
+    }
+  },
+  {
+    "dhatu_id": "01.0309",
+    "aupadeshika": "sphura",
+    "stripped_root": "sphur",
+    "gana": "bhvadi",
+    "pada": "parasmaipada",
+    "it_status": "anit",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "sphurane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'sphur' fundamentally means to throb, quiver, flash, or burst forth into view. In the basic active voice (Parasmaipada), it describes an eye twitching or lightning flashing on its own. When used with the causative affix (nic), it conveys causing something to vibrate, manifest, or shine brilliantly.",
+      "scenarios": [
+        {
+          "verb_form": "sphurati",
+          "grammar_trigger": "Kartari prayoga (active voice), lat-lakara (present tense), prathama-purusha, ekavacana",
+          "meaning": "throbs / twitches / flashes",
+          "example_sanskrit": "netram sphurati.",
+          "example_english": "The eye twitches."
+        },
+        {
+          "verb_form": "sphorayati",
+          "grammar_trigger": "Causative (nic-pratyaya), kartari prayoga, lat-lakara, prathama-purusha, ekavacana",
+          "meaning": "causes to throb / displays / manifests brightly",
+          "example_sanskrit": "vidyut tejaḥ sphorayati.",
+          "example_english": "The lightning causes brightness to flash forth."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti notes that 'sphura sphurane' signifies subtle motion, throbbing, trembling, and manifestation (calana, spandana, prakasana). It conjugates standardly in the Bhvadi class without Guna in basic Sarvadhatuka forms due to anit rules, producing 'sphurati', and in Lita it takes reduplication forming 'pusphora'.",
+      "kshiratarangini": "Kshirasvamin states that 'sphura' denotes pulsation, shaking, or sudden shining ('sphuranam calanam diptirva'). It follows the standard Parasmaipada inflection of roots ending in consonants with penultimate short vowels."
+    },
+    "meanings": {
+      "English": "to throb, quiver, flash, radiate",
+      "Kannada": "badidukollu, minchu, sphurisu",
+      "Telugu": "adharu, merayu, sphurinchu",
+      "Tamil": "thudi, minnu, thondru",
+      "Malayalam": "thudikkuka, minnuka, sphurikkuka",
+      "Hindi": "phadakana, camakana, spandita hona",
+      "Bengali": "furok kora, kompit haoa, jholmol kora",
+      "German": "zucken, pulsieren, blitzen",
+      "French": "palpiter, tressaillir, briller",
+      "Russian": "trepetat, pulsiravat, vspykhivat",
+      "Chinese": "bodong, shanshuo, choudong"
+    }
+  },
+  {
+    "dhatu_id": "01.0310",
+    "aupadeshika": "paṭa",
+    "stripped_root": "paṭ",
+    "gana": "Bhvadi (1st Gana)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Akarmaka",
+    "canonical_dhatvartha": "gatau",
+    "dhaturupanandini": {
+      "simple_explanation": "The verb root 'pat' means to go, wander, or move. In simple active voice, it shows a subject moving or walking. When combined with the causative suffix nic, it shifts to mean making someone or something move or go.",
+      "scenarios": [
+        {
+          "verb_form": "patati",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat lakara (present tense), 3rd person singular",
+          "meaning": "goes / moves",
+          "example_sanskrit": "mrgah vane patati.",
+          "example_english": "The deer wanders in the forest."
+        },
+        {
+          "verb_form": "patayati",
+          "grammar_trigger": "Nic-pratyaya (causative), Kartari prayoga, Lat lakara, 3rd person singular",
+          "meaning": "causes to go / drives",
+          "example_sanskrit": "gopah gavah patayati.",
+          "example_english": "The cowherd drives the cows forward."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'pata' is read in the sense of motion (gatau). Being halanta with short 'a' as anudatta it-marker, it takes Parasmaipada affixes and takes intermediate 'i' (it-agama) in the non-sarvadhatuka ardhadhatuka forms, producing forms like patati, papata, patita.",
+      "kshiratarangini": "Kshirasvamin notes 'pata gatau' under the class of simple verbs of motion. It takes normal guna in specific non-sarvadhatuka sets and forms regular parasmaipada conjugations."
+    },
+    "meanings": {
+      "English": "to go, to move, to wander",
+      "Kannada": "hogu, calisu",
+      "Telugu": "vellu, kadulu",
+      "Tamil": "poga, asaiya",
+      "Malayalam": "pokuka, sancharikkuka",
+      "Hindi": "jana, calna",
+      "Bengali": "jaowa, cala",
+      "German": "gehen, sich bewegen",
+      "French": "aller, se deplacer",
+      "Russian": "idti, dvigat'sya",
+      "Chinese": "xing, zou"
+    }
+  },
+  {
+    "dhatu_id": "01.0311",
+    "aupadeshika": "khyā",
+    "stripped_root": "khya",
+    "gana": "Bhvadi (1)",
+    "pada": "Parasmaipada",
+    "it_status": "anit",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "kathane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'khya' means to tell, narrate, or make something known. In the basic active voice (Parasmaipada), it describes an agent narrating or speaking a story. When augmented with prefixes like 'pra' (prakhya) or used in causative forms, it conveys making something famous or widely celebrated.",
+      "scenarios": [
+        {
+          "verb_form": "khyati",
+          "grammar_trigger": "lat lakara, prathama purusha, ekavacana (active indicative present)",
+          "meaning": "narrates / tells",
+          "example_sanskrit": "munihi kathaam khyati.",
+          "example_english": "The sage narrates the story."
+        },
+        {
+          "verb_form": "prakhyapayati",
+          "grammar_trigger": "nic pratyaya (causative present with prefix pra)",
+          "meaning": "makes well-known / proclaims",
+          "example_sanskrit": "raja shasanam prakhyapayati.",
+          "example_english": "The king proclaims the royal decree."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti explains 'khya kathane' as signifying the act of recounting, enumerating, or revealing facts. It notes that the root takes anit status and undergoes typical a-karanta substitutions in non-sarvadhatuka environments.",
+      "kshiratarangini": "Kshirasvamin defines 'khya kathane' as public declaration or verbal recounting ('kathana'). The vritti details its forms in the simple present such as 'khyati' and highlights its derived nominals like 'khyati' (fame, cognition) and participial forms."
+    },
+    "meanings": {
+      "English": "to tell, narrate, declare, recount",
+      "Kannada": "heelu, vivarisu, prasiddhigolusu",
+      "Telugu": "cheppu, vivarinchu, prakatinchu",
+      "Tamil": "kuru, sol, arivikkai sei",
+      "Malayalam": "parayuka, vivarikka, prasiddhamakkuka",
+      "Hindi": "kahna, batana, varnan karna",
+      "Bengali": "bala, barnana kara, prakasha kara",
+      "German": "erzählen, künden, bekanntmachen",
+      "French": "raconter, narrer, faire connaître",
+      "Russian": "rasskazyvat, soobshchat, vozveshchat",
+      "Chinese": "gaosu, jiangshu, xuanbu"
+    }
+  },
+  {
+    "dhatu_id": "01.0312",
+    "aupadeshika": "pruṅ",
+    "stripped_root": "pru",
+    "gana": "bhvādi",
+    "pada": "ātmanepada",
+    "it_status": "aniṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "gatau",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'pru' means to jump, leap, or move gracefully. Because it possesses the marker ṅ (ṅit), it exclusively takes Atmanepada endings in its basic form (pravate). In the causative (nic), it takes āy-augment and becomes prāvayati / prāvayate, meaning to cause someone to leap or move forward.",
+      "scenarios": [
+        {
+          "verb_form": "pravate",
+          "grammar_trigger": "Kartari prayoga, Lat lakara, prathama-purusha, eka-vacana (Atmanepada via anudatta-nita atmanepadam)",
+          "meaning": "He/she/it leaps, jumps, or moves forward.",
+          "example_sanskrit": "mṛgaḥ vane pravate.",
+          "example_english": "The deer leaps in the forest."
+        },
+        {
+          "verb_form": "prāvayati",
+          "grammar_trigger": "Hetumarti nic (causative), Lat lakara, prathama-purusha, eka-vacana (Parasmaipada)",
+          "meaning": "Causes to leap or move.",
+          "example_sanskrit": "bālakaḥ aśvaṃ prāvayati.",
+          "example_english": "The boy makes the horse leap forward."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "pruṅ gatau - ṅitvād ātmanepadī. śap, guṇaḥ, avādeśḥ - pravate. aniṭkārikāsu 'śricyupludrupruśvāśca' ity anena aniṭtvam. liṭi puprive. luṅi aproṣṧa.",
+      "kshiratarangini": "pruṅ gatau. ṅitvāt taṅ. pravate, puprive, protā. gatir iha viśikhagativat plutigatir vā lakṣyate."
+    },
+    "meanings": {
+      "English": "to leap, to jump, to move, to glide",
+      "Kannada": "hariyu, dhumuku, calisu, nege",
+      "Telugu": "gentu, duku, kadalu, payanincu",
+      "Tamil": "thullu, thaavu, payanam sey, asai",
+      "Malayalam": "chaaduka, thaanduka, chalikkuka",
+      "Hindi": "kudna, chhalang lagana, gati karna",
+      "Bengali": "lafano, chholongo mara, goti kora",
+      "German": "springen, huepfen, sich bewegen",
+      "French": "sauter, bondir, s'elancer",
+      "Russian": "prygat, skakat, peredvigatsya",
+      "Chinese": "tiao, yue, qianjin"
+    }
+  },
+  {
+    "dhatu_id": "01.0313",
+    "aupadeshika": "kṛṣa~",
+    "stripped_root": "kṛṣ",
+    "gana": "Bhvadi (Gana 1)",
+    "pada": "Ubhayapada",
+    "it_status": "Anit",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "vilekhane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kṛṣ' fundamentally means to scratch, furrow, plough, or drag/attract. Because it is marked with an elided svarita accent (svaritet), it belongs to Ubhayapada, meaning it takes Parasmaipada endings when the action is general or performed for someone else, and Atmanepada endings when the fruit of the action directly benefits the subject. Adding the causative suffix (ṇic) changes the meaning to 'causing someone to plough or pull'.",
+      "scenarios": [
+        {
+          "verb_form": "kṛṣati",
+          "grammar_trigger": "Bhvadi / Kartari Prayoga (Parasmaipada)",
+          "meaning": "ploughs / furrows / drags",
+          "example_sanskrit": "kṛṣakaḥ balīvardābhyāṁ kṣetraṁ kṛṣati.",
+          "example_english": "The farmer ploughs the field with two oxen."
+        },
+        {
+          "verb_form": "kṛṣate",
+          "grammar_trigger": "Bhvadi / Kartari Prayoga (Atmanepada)",
+          "meaning": "ploughs or pulls for oneself",
+          "example_sanskrit": "svakīyaṁ kṣetraṁ phalārthī kṛṣate.",
+          "example_english": "Seeking the harvest, he tills his own field."
+        },
+        {
+          "verb_form": "karṣayati",
+          "grammar_trigger": "Nich-pratyaya (Causative / Parasmaipada)",
+          "meaning": "causes to plough / causes to drag",
+          "example_sanskrit": "svāmī bhṛtyena bhūmiṁ karṣayati.",
+          "example_english": "The landowner has the ground ploughed by the farmhand."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Sayana explains 'kṛṣa vilekhane' as signifying the scratching or breaking up of the earth (bhūmer udghātanam/vidāraṇam) as well as pulling or attracting (ākarṣaṇam). Because it possesses an elided svarita accent, it operates in both padas (svariteto kartrabhiprāye kriyāphale ātmanepadam). In non-sarvadhatuka forms, it demonstrates specific sandhi variations with the sibilant and retroflex consonant clusters, yielding forms such as karkṣyati or krakṣyati.",
+      "kshiratarangini": "Kshirasvamin defines 'vilekhana' as the action of furrowing or dividing the soil with a ploughshare (halādinā bhūmer lekhanaṁ vidāraṇam). He highlights related semantic extensions including dragging, drawing lines, and physical attraction. The root forms standard nominal derivatives such as kṛṣi (agriculture), kṛṣaka (farmer), and karṣaṇa (drawing or tilling)."
+    },
+    "meanings": {
+      "English": "to plough, to furrow, to drag, to pull, to attract",
+      "Kannada": "uluvudu (bhumiyannu ulu), seleyuvudu, akarshisuvudu",
+      "Telugu": "dunnuta, lakkonuta, aakarshincuta",
+      "Tamil": "uzhuthal (nilathai uzhuthal), izhuthal, kavarthal",
+      "Malayalam": "uzhuka (nilam uzhuka), valikkuka, aakarshikkuka",
+      "Hindi": "jotana (khet jotana), khinchana, aakarshit karana",
+      "Bengali": "chash kara (jami chasha), tana, akarshan kara",
+      "German": "pfluegen, ackern, ziehen, schleppen, anziehen",
+      "French": "labourer, sillonner, tirer, trainer, attirer",
+      "Russian": "pakhat, vspakhivat, tyanut, tashchit, privlekat",
+      "Chinese": "gengtian, gengzuo, la, qianying, xiyin"
+    }
+  },
+  {
+    "dhatu_id": "01.0314",
+    "aupadeshika": "iksha",
+    "stripped_root": "iksh",
+    "gana": "Bhvadi",
+    "pada": "Atmanepada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "darshane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'iksh' fundamentally denotes visual perception or observation ('to see' or 'to look'). As an Atmanepada verb in the Bhvadi class, its primary third-person singular present form is 'ikshate'. When combined with upasargas (prefixes) like 'pra' or 'pari', it yields specialized meanings such as viewing a performance or examining thoroughly.",
+      "scenarios": [
+        {
+          "verb_form": "ikshate",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat lakara (present tense), prathama purusha (third person), ekavacana (singular)",
+          "meaning": "sees or looks at",
+          "example_sanskrit": "balakah chandram ikshate.",
+          "example_english": "The boy looks at the moon."
+        },
+        {
+          "verb_form": "parikshate",
+          "grammar_trigger": "Upasarga 'pari' + iksh (Kartari prayoga, Lat lakara)",
+          "meaning": "examines or investigates carefully",
+          "example_sanskrit": "adhyapakah pathan parikshate.",
+          "example_english": "The teacher examines the lessons."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "iksha darshane. ikshate. anudattetvat atmanepadam. set. darshanam ihakshina vyaparah upalabdhirva.",
+      "kshiratarangini": "iksha darshane. ikshate, aikshishta, ikshita. pradiyogena parikshate prekshate ityadi siddhyati."
+    },
+    "meanings": {
+      "English": "to see, to look at, to observe, to behold",
+      "Kannada": "nodu, veekshisu",
+      "Telugu": "chuchu, veekshinshu",
+      "Tamil": "par, nokku",
+      "Malayalam": "kanuka, nokkuka",
+      "Hindi": "dekhna, nireekshan karna",
+      "Bengali": "dekha, avalokan kara",
+      "German": "sehen, betrachten, erblicken",
+      "French": "voir, regarder, observer",
+      "Russian": "videt, smotret, nablyudat",
+      "Chinese": "kan, guancha, kanjian"
+    }
+  },
+  {
+    "dhatu_id": "01.0315",
+    "aupadeshika": "madiँ",
+    "stripped_root": "mand",
+    "gana": "Bhvadi (Gana 1)",
+    "pada": "Atmanepada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka (in the sense of praising) / Akarmaka (in the sense of rejoicing)",
+    "canonical_dhatvartha": "stutiharṣamodayoḥ",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'mand' means to praise someone or to rejoice/be delighted. It belongs to the 1st conjugation (Bhavadi gana) and takes Atmanepada endings. When used ordinarily, it expresses rejoicing or glorification. In causative (Nic) form, it expresses making someone joyful or causing someone to celebrate.",
+      "scenarios": [
+        {
+          "verb_form": "mandate",
+          "grammar_trigger": "Lat (Present Tense), Prathama Purusha (3rd Person), Ekavacana (Singular), Kartari Prayoga (Active Voice)",
+          "meaning": "rejoices / is delighted / praises",
+          "example_sanskrit": "bhavanaya bhaktaḥ harim mandate.",
+          "example_english": "The devotee praises and rejoices in Hari with devotion."
+        },
+        {
+          "verb_form": "mandayati",
+          "grammar_trigger": "Nic (Causative), Lat (Present Tense), Prathama Purusha (3rd Person), Ekavacana (Singular)",
+          "meaning": "gladdens / delights someone",
+          "example_sanskrit": "mitrasya vacanam nṛpam mandayati.",
+          "example_english": "The words of the friend gladden the king."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti analyzes 'madi' as idit, acquiring the penultimate nasal (num-agama) to form the base 'mand-'. It is marked with anudanatta-it, establishing its Atmanepada character. It functions in the senses of stuti (praise), harsha (joy), and moda (exhilaration), taking the suffix shap in Sarvadhatuka environments.",
+      "kshiratarangini": "Kshirasvamin notes 'madi stutiharṣayoḥ' with num-agama due to the idit marker, yielding 'mandate'. The root connotes both transitive adulation (stutau) and intransitive state of joy (harṣa-sukhe)."
+    },
+    "meanings": {
+      "English": "to praise, to rejoice, to delight, to be glad",
+      "Kannada": "hogalu, santoshapadu, harshisuvudu",
+      "Telugu": "stutincu, santoshapadu, anandincu",
+      "Tamil": "pukazh, makizh, aanandham kol",
+      "Malayalam": "stuthikkuka, santhoshikkuka, aahladhikkuka",
+      "Hindi": "stuti karna, harshit hona, prasanna hona",
+      "Bengali": "stuti kora, anandita howa, harshito howa",
+      "German": "loben, sich freuen, frohlocken",
+      "French": "louer, se rejouir, etre content",
+      "Russian": "hvalit, radovatsya, vostorgatsya",
+      "Chinese": "zandao, huanxi, yue"
+    }
+  },
+  {
+    "dhatu_id": "01.0316",
+    "aupadeshika": "caka",
+    "stripped_root": "cak",
+    "gana": "Bhvadi (Gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka / Akarmaka",
+    "canonical_dhatvartha": "trptau prativestane ca",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'cak' means to be satisfied, contented, or to resist/recoil. In the active voice (Parasmaipada), it simply expresses the subject feeling contented or becoming full. When used with causative suffixes (Nic), it signifies making someone else satisfied or causing contentment.",
+      "scenarios": [
+        {
+          "verb_form": "cakati",
+          "grammar_trigger": "Lat lakara, prathama-purusa, eka-vacana (Simple Active Present)",
+          "meaning": "satisfies / is content / recoils",
+          "example_sanskrit": "mrgah jalam pitva cakati.",
+          "example_english": "The deer is satisfied after drinking water."
+        },
+        {
+          "verb_form": "cakayati",
+          "grammar_trigger": "Nic pratyaya (Causative), Lat lakara, prathama-purusa, eka-vacana",
+          "meaning": "causes to be satisfied / gratifies",
+          "example_sanskrit": "mata payasena balam cakayati.",
+          "example_english": "The mother satisfies the child with sweet pudding."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root caka is glossed under trpti (contentment/satisfaction) and prativestana (resistance/obstruction or coiling). Being a standard dental-initial velar-final Bhvadi root, it takes shap vikarana and forms simple active conjugations like cakati, cacaka, cakita.",
+      "kshiratarangini": "Kshirasvamin notes caka in the dual sense of trpti (satiety) and prativestana (covering/resisting). It conjugates regularly in Parasmaipada without guna of the short 'a' in simple sarvadhatuka stems."
+    },
+    "meanings": {
+      "English": "to be satisfied, to be content, to resist or repel",
+      "Kannada": "trptiyaguvudu, santuptanaguvudu",
+      "Telugu": "trptinondu, samtustapadu",
+      "Tamil": "tiruptiyadaital, mananiraivadai",
+      "Malayalam": "trptiyakuka, santustanakuka",
+      "Hindi": "trpta hona, santusta hona ya rokana",
+      "Bengali": "tripta haoya, santushta haoya",
+      "German": "zufrieden sein, sattigen, abwehren",
+      "French": "etre satisfait, se rassasier, resister",
+      "Russian": "byt udovletvorennym, nasyschatsya",
+      "Chinese": "manzu, baofu"
+    }
+  },
+  {
+    "dhatu_id": "01.0317",
+    "aupadeshika": "gruṅ",
+    "stripped_root": "gru",
+    "gana": "Bhvadi (Gana 1)",
+    "pada": "Atmanepada",
+    "it_status": "Set",
+    "transitivity": "Intransitive",
+    "canonical_dhatvartha": "gatau (gatyarthaḥ)",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'gru' belongs to the first conjugation (Bhvadi gana) and is exclusively Atmanepada due to the indicatory letter 'ṅ' (Anudatta-ṅit). It expresses the action of going or moving. With the present tense marker 'śap' (a), the root vowel 'u' undergoes guṇa to 'o' and then changes to 'av', producing the primary form 'gravate'. In causative forms, the affix 'ṇic' adds the meaning of causing someone to move ('grāvayati').",
+      "scenarios": [
+        {
+          "verb_form": "gravate",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat lakara (present indicative), 3rd person singular",
+          "meaning": "moves / goes",
+          "example_sanskrit": "mṛgaḥ vane śanaiḥ gravate.",
+          "example_english": "The deer moves slowly in the forest."
+        },
+        {
+          "verb_form": "agrāviṣṭa",
+          "grammar_trigger": "Kartari prayoga (active voice), Luṅ lakara (aorist past), 3rd person singular",
+          "meaning": "moved / went",
+          "example_sanskrit": "pathikaḥ nagaraṃ prati agrāviṣṭa.",
+          "example_english": "The traveler moved towards the city."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'gruṅ' is listed under the Bhvadi gana with the semantic indicator 'gatyarthaḥ' (signifying motion). Being ṅit, it takes Atmanepada affixes (anudāttaṅita ātmanepadam). The guṇa of 'u' followed by 'av' ādeśa yields 'gravate' in the present tense. It is seṭ, admitting the augment 'iṭ' in ardhadhatuka environments.",
+      "kshiratarangini": "Kshirasvamin categorizes 'gruṅ' alongside 'khruṅ' and 'gluṅ' in the sub-group of motion verbs (gatyarthāḥ). The morphological development conforms to regular u-ending roots of the first class, demonstrating standard ātmanepada terminations with iṭ-āgama in the non-sarvadhatuka tenses."
+    },
+    "meanings": {
+      "English": "to go, to move",
+      "Kannada": "calisu, hogu",
+      "Telugu": "kadaluta, velluta",
+      "Tamil": "nagarthal, selluthal",
+      "Malayalam": "pokuka, sancharikuka",
+      "Hindi": "chalna, gati karna",
+      "Bengali": "chala, gamana kara",
+      "German": "gehen, sich bewegen",
+      "French": "aller, se deplacer",
+      "Russian": "idti, dvigat'sya",
+      "Chinese": "xingdong, qianjin"
+    }
+  },
+  {
+    "dhatu_id": "01.0318",
+    "aupadeshika": "gai",
+    "stripped_root": "gai",
+    "gana": "bhvādi",
+    "pada": "parasmaipada",
+    "it_status": "aniṭ",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "śabde",
+    "dhaturupanandini": {
+      "simple_explanation": "The verbal root 'gai' denotes the action of singing or producing melodious sound. In standard active voice (Kartari Prayoga), it takes Parasmaipada endings to mean 'sings'. When the causative suffix (ṇic) is added, it takes the augment 'puk' to form 'gāpayati', meaning 'causes someone to sing' or 'teaches singing'. In the passive voice (Karmaṇi Prayoga), it undergoes vowel reduction to form 'gīyate' (is sung).",
+      "scenarios": [
+        {
+          "verb_form": "gāyati",
+          "grammar_trigger": "lat-lakāra, prathama-puruṣa, eka-vacana, kartari prayoga (parasmaipada)",
+          "meaning": "sings",
+          "example_sanskrit": "gāyakaḥ mañju gītaṃ gāyati.",
+          "example_english": "The singer sings a melodious song."
+        },
+        {
+          "verb_form": "gāpayati",
+          "grammar_trigger": "ṇic-pratyaya (causative), lat-lakāra, prathama-puruṣa, eka-vacana",
+          "meaning": "causes (someone) to sing / conducts singing",
+          "example_sanskrit": "guruḥ śiṣyān stotram gāpayati.",
+          "example_english": "The teacher makes the disciples sing the hymn."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'gai' is listed in the Bhvādi-gaṇa with the canonical sense of 'śabde' (sound/singing). It is categorized as aniṭ and transitive (sakarmaka). By the rule 'ādeca upadeśe 'śiti' (6.1.45), the final diphthong 'ai' is replaced by long 'ā' before non-śit affixes and in initial operational stages, leading to forms such as 'gāyati' in sārwadhātuka environments with śap, 'jagau' in liṭ, and 'gātā' in luṭ.",
+      "kshiratarangini": "Kshirasvamin analyzes 'gai śabde' as the fundamental verbal root for melodious vocalization and song. He highlights the phonological changes where the diphthong yields ākāra ('ātvam') before specific affixes, yielding regular active derivations like 'gāyati', reduplicated perfect forms like 'jagau' / 'jaguḥ', and contracted participial forms like 'gīta'."
+    },
+    "meanings": {
+      "English": "to sing, to chant, to praise in song",
+      "Kannada": "hāḍu, gāna māḍu, saṅgītavannu hāḍu",
+      "Telugu": "pāḍu, gānaṃ cēyu, saṅgītaṃ pāḍu",
+      "Tamil": "pāṭu, gāṉam cey, paṇ pāṭu",
+      "Malayalam": "pāṭuka, gānaṃ ālapikkuka",
+      "Hindi": "gānā, gāna karnā, gīta gānā",
+      "Bengali": "gāoyā, gān karā",
+      "German": "singen, besingen",
+      "French": "chanter, célébrer en chantant",
+      "Russian": "pet', napevat', vospevat'",
+      "Chinese": "chàng, gēchàng, yǒngchàng"
+    }
+  },
+  {
+    "dhatu_id": "01.0319",
+    "aupadeshika": "dhrā",
+    "stripped_root": "dhrā",
+    "gana": "Bhvādi (Gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Aniṭ",
+    "transitivity": "Akarmaka",
+    "canonical_dhatvartha": "gatitraye",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'dhrā' describes three kinds of movement—such as flying, gliding, or moving along a path. In its basic active form (Parasmaipada), the subject moves or glides on their own. When used with a causative affix, it means directing or causing another to move or glide smoothly.",
+      "scenarios": [
+        {
+          "verb_form": "dhrāyati",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat-lakara (present indicative), 3rd person singular",
+          "meaning": "Moves, glides, or sweeps along",
+          "example_sanskrit": "pakṣī gagane dhrāyati.",
+          "example_english": "The bird glides in the sky."
+        },
+        {
+          "verb_form": "dhrāpayati",
+          "grammar_trigger": "Nic-pratyaya (causative), Lat-lakara, 3rd person singular",
+          "meaning": "Causes to glide or move along",
+          "example_sanskrit": "vāyuḥ patraṃ dhrāpayati.",
+          "example_english": "The wind makes the leaf glide along."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'dhrā' belongs to the Bhvādi-gaṇa and is given in the sense of 'gatitraye' (three modes of movement). Being Parasmaipadi and Anit, it forms the present tense base 'dhrāya-' with the universal Śap-pratyaya, yielding the primary finite form 'dhrāyati'.",
+      "kshiratarangini": "Kṣīrasvāmin elucidates 'gatitraya' as the threefold distinction of movement—namely upward (flying/rising), downward (dropping/descending), and transverse (gliding/horizontal moving). The root signifies smooth multi-directional motion."
+    },
+    "meanings": {
+      "English": "to move, to glide, to fly in different directions",
+      "Kannada": "calisu, hāru, mūru vidhavāgi calisu",
+      "Telugu": "kadaluta, eguruta, vividha gati ponduta",
+      "Tamil": "nagartal, parattal, asaintu sellutal",
+      "Malayalam": "sañcarikkuka, parakkuka, nīṅṅuka",
+      "Hindi": "calnā, uṛnā, vividha rūpoṃ meṃ gati karnā",
+      "Bengali": "calā, oṛā, vividha gati prāpta howā",
+      "German": "sich bewegen, gleiten, fliegen",
+      "French": "se déplacer, glisser, voler",
+      "Russian": "dvigat'sya, skol'zit', letet'",
+      "Chinese": "yīdòng, huáxiáng, fēixíng"
+    }
+  },
+  {
+    "dhatu_id": "01.0320",
+    "aupadeshika": "kṣamūṣ",
+    "stripped_root": "kṣam",
+    "gana": "Bhvadi (First Gana)",
+    "pada": "Atmanepada",
+    "it_status": "Vet",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "sahane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root ksam means to tolerate, endure, or forgive. In its basic Atmanepada form (ksamate), the subject patiently bears a difficulty or forgives someone. When used in the Causative form (ksamayati), it means causing someone to forgive, asking for pardon, or pacifying someone.",
+      "scenarios": [
+        {
+          "verb_form": "kṣamate",
+          "grammar_trigger": "Bhvadi Lat Lakara (Present Tense, Atmanepada, Prathama Purusha Ekavacana)",
+          "meaning": "endures / forgives",
+          "example_sanskrit": "sādhurnindāṃ kṣamate.",
+          "example_english": "The noble person endures criticism patiently."
+        },
+        {
+          "verb_form": "kṣamayati",
+          "grammar_trigger": "Nic Pratyaya (Causative, Lat Lakara, Parasmaipada)",
+          "meaning": "causes to forgive / asks forgiveness / pacifies",
+          "example_sanskrit": "śiṣyo guruṃ kṣamayati.",
+          "example_english": "The student asks the teacher for forgiveness."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Madhaviya Dhatuvritti records ksamus sahane in the Bhvadi gana. The anubandha us indicates specific morphological nuances in certain derivations. The root takes Atmanepada endings under normal conditions, yielding ksamate, caksame, and aksamista or aksanta, signifying mental forbearance, endurance of pain, and pardon of transgression.",
+      "kshiratarangini": "Kshirasvamin analyzes ksamus with the meaning of sahane (endurance and patience). He highlights that ksam refers to the capacity of the mind to remain unperturbed when confronted with adverse conditions or offenses, showing both physical endurance and moral forgiveness."
+    },
+    "meanings": {
+      "English": "to endure, to tolerate, to forgive, to bear patiently",
+      "Kannada": "sahisuvudu, ksamisuvudu, taluvudu",
+      "Telugu": "sahincu, ksamincu, vodagunu",
+      "Tamil": "poruttal, mannittal, tangutal",
+      "Malayalam": "sahikka, ksamikka, porukka",
+      "Hindi": "sahana, ksama karana, sahanashilata rakhana",
+      "Bengali": "sahyo kara, ksama kara",
+      "German": "ertragen, dulden, verzeihen",
+      "French": "endurer, supporter, pardonner",
+      "Russian": "terpet', vynosit', proshchat'",
+      "Chinese": "rennai, baorong, yuanliang"
+    }
+  },
+  {
+    "dhatu_id": "01.0321",
+    "aupadeshika": "kṣviṅghṛ",
+    "stripped_root": "kṣviṅgh",
+    "gana": "Bhvadi (1st Gana)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Akarmaka (Intransitive)",
+    "canonical_dhatvartha": "gatau (in the sense of moving or going)",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kṣviṅgh' belongs to the first conjugation (Bhvadi gana) and inherently means 'to move' or 'to go'. In its basic active form (Parasmaipada), it describes an agent moving on its own. When used with the causative suffix (-nic-), it switches to meaning 'causing to move' or 'propelling'.",
+      "scenarios": [
+        {
+          "verb_form": "kṣviṅghati",
+          "grammar_trigger": "Bhvadi gana kartari prayoga (Parasmaipada, Lat lakara, prathama purusha, ekavacana)",
+          "meaning": "moves or goes",
+          "example_sanskrit": "mrgah vane vegatah ksvinghati.",
+          "example_english": "The deer moves swiftly in the forest."
+        },
+        {
+          "verb_form": "kṣviṅghayati",
+          "grammar_trigger": "Causative form (Nic pratyaya)",
+          "meaning": "causes to move or drives forward",
+          "example_sanskrit": "sarathih asvam ksvinghayati.",
+          "example_english": "The charioteer causes the horse to move."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Madhaviya Dhatuvritti places ksvingha in the varganta series of roots meaning gatau (movement). It forms present tense ksvinghati by regular Shab-vikarana and maintains set characteristics in ardhadhatuka affixes like aksvinghit.",
+      "kshiratarangini": "Kshirasvamin notes this root among the cluster of onomatopoeic and movement-denoting velar-final roots (ksvinka, ksvinkha, ksvinga, ksvingha). It is identified as taking parasmaipada inflections unconditionally."
+    },
+    "meanings": {
+      "English": "to go, to move, to advance",
+      "Kannada": "chalisu, hogu, munde sari",
+      "Telugu": "kadalu, vellu, prayanincu",
+      "Tamil": "nagardhal, selludhal, payanithal",
+      "Malayalam": "pokuka, chalikkuka, neenguka",
+      "Hindi": "chalna, gati karna, aage badhna",
+      "Bengali": "chola, gati kora, agrasar howa",
+      "German": "gehen, sich bewegen, voranschreiten",
+      "French": "aller, se deplacer, avancer",
+      "Russian": "idti, dvigat'sya, peredvigat'sya",
+      "Chinese": "zou, yidong, qianjin"
+    }
+  },
+  {
+    "dhatu_id": "01.0322",
+    "aupadeshika": "syandūñ",
+    "stripped_root": "syand",
+    "gana": "Bhvadi",
+    "pada": "Ubhayapada",
+    "it_status": "Vet",
+    "transitivity": "Akarmaka",
+    "canonical_dhatvartha": "prasravane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'syand' means to flow, stream, or trickle like water in a river or tears from eyes. In the standard Atmanepada form (syandate), it expresses the natural motion of a liquid flowing smoothly. When combined with prefixes like 'pra-', it describes an abundant gushing or streaming forth.",
+      "scenarios": [
+        {
+          "verb_form": "syandate",
+          "grammar_trigger": "Lat Lakara, Prathama Purusha, Ekavacana (Kartari Atmanepada)",
+          "meaning": "flows or trickles naturally",
+          "example_sanskrit": "parvatat shitala nadi syandate.",
+          "example_english": "The cool river flows from the mountain."
+        },
+        {
+          "verb_form": "prasyandate",
+          "grammar_trigger": "Lat Lakara with upasarga 'pra' (Intensified action)",
+          "meaning": "gushes forth or streams continuously",
+          "example_sanskrit": "netrabhyam anandashru prasyandate.",
+          "example_english": "Tears of joy stream forth from the eyes."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "syandu prasravane. prasravanam sravanam ksharanam ca ityarthah. syandate, asyandata, sisyande. ubhayapaditvam tu nittvat.",
+      "kshiratarangini": "syandir prasravane. prasravanam dravasya sravanam gatih. syandate jalam, nadyah syandante."
+    },
+    "meanings": {
+      "English": "to flow, to trickle, to stream, to ooze",
+      "Kannada": "haridu hogu, suriyu, sravavagu",
+      "Telugu": "pravahinchu, kaaru, sravinchu",
+      "Tamil": "paaya, vazhiya, oozha",
+      "Malayalam": "ozhukuka, choriyuka, sravikkuka",
+      "Hindi": "bahana, tapakana, pravahit hona",
+      "Bengali": "probahito howa, jhora, khora",
+      "German": "fliessen, rinnen, stromen",
+      "French": "couler, suinter, s'ecouler",
+      "Russian": "tech, struitsya, kaplet",
+      "Chinese": "liudong, liutang, shentou"
+    }
+  },
+  {
+    "dhatu_id": "01.0323",
+    "aupadeshika": "puṭa~",
+    "stripped_root": "puṭ",
+    "gana": "Bhvādigaṇa (Gaṇa 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Sakarmaka (Transitive)",
+    "canonical_dhatvartha": "saṃsarge",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'puṭ' means to fold, bind together, envelop, or bring multiple things into intimate contact (saṃsarga). When used in standard active voice (Parasmaipada), it describes folding or uniting objects. When used in causative (Nic), it signifies making someone fold, wrap, or join materials together.",
+      "scenarios": [
+        {
+          "verb_form": "puṭati",
+          "grammar_trigger": "Kartari Prayoga (Active Voice, Laṭ-lakāra, Prathama-puruṣa, Ekavacana)",
+          "meaning": "Folds, binds, or brings together into contact",
+          "example_sanskrit": "Bhaktaḥ pūjayai pattrāṇi puṭati.",
+          "example_english": "The devotee folds the leaves together for worship."
+        },
+        {
+          "verb_form": "puṭayati / poṭayati",
+          "grammar_trigger": "Ṇic-pratyaya (Causative, Laṭ-lakāra, Prathama-puruṣa, Ekavacana)",
+          "meaning": "Causes to fold, roll, or envelop",
+          "example_sanskrit": "Janakaḥ vastrāṇi bālakena puṭayati.",
+          "example_english": "The father makes the boy fold the clothes."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "puṭa saṃsarge. Bhvādiḥ parasmaipadī seṭ. Saṃsargaḥ saṃśleṣaṇam ekībhāvaḥ. Puṭati, puṭitaḥ, apuṭīditīti rūpa-siddhiḥ.",
+      "kshiratarangini": "puṭa saṃsarge. Puṭati saṃbandham upanayannityarthaḥ. Saṃśleṣe saṃgrahe ca vartate."
+    },
+    "meanings": {
+      "English": "to fold, to wrap, to bind together, to connect",
+      "Kannada": "madi maduvudu, serisuvudu, jodiyisuvudu",
+      "Telugu": "madatha pettuta, kalupuvuta, jodinchuta",
+      "Tamil": "madikka, inaikka, serkka",
+      "Malayalam": "madakkuka, cherkkuka, bandhippikkuka",
+      "Hindi": "lapetna, modna, jodna, sametna",
+      "Bengali": "morano, jora dewa, ekattra kora",
+      "German": "falten, umhullen, zusammenbinden",
+      "French": "plier, envelopper, joindre",
+      "Russian": "skladyvat, svorachivat, soedinyat",
+      "Chinese": "zhedie, baoguo, jiehe"
+    }
+  },
+  {
+    "dhatu_id": "01.0324",
+    "aupadeshika": "ṣpadi~",
+    "stripped_root": "spad",
+    "gana": "Bhvadi",
+    "pada": "Atmanepada",
+    "it_status": "Set",
+    "transitivity": "Akarmaka",
+    "canonical_dhatvartha": "kiñciccalane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'spad' (spand) means to twitch, quiver, or move very slightly. In its basic Atmanepada form (spandate), it denotes a natural involuntary twitch or throb experienced by a subject. In the causative form with Nic (spandayati), it means to cause something to stir, vibrate, or flutter.",
+      "scenarios": [
+        {
+          "verb_form": "spandate",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat lakara (present tense), Prathama purusha, Ekavacana",
+          "meaning": "twitches / throbs / quivers",
+          "example_sanskrit": "vamasya netram spandate.",
+          "example_english": "The left eye twitches."
+        },
+        {
+          "verb_form": "spandayati",
+          "grammar_trigger": "Nic pratyaya (causative), Lat lakara, Prathama purusha, Ekavacana",
+          "meaning": "causes to quiver / makes flutter",
+          "example_sanskrit": "mandah vatah patrani spandayati.",
+          "example_english": "The gentle wind makes the leaves quiver."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'spadi kiñciccalane' is idit, which causes the insertion of the nasal augment num (giving the base spand). Being anudattet, it takes Atmanepada affixes (spandate, paspande, spandita). The primary meaning is alpacalana (slight or subtle physical movement).",
+      "kshiratarangini": "Kshirasvamin defines the root in the sense of 'calanam alpiyah' (a minute or fractional movement). Due to the 'i' marker (idit), the penultimate 'n' appears systematically across all primary tenses, remaining set and middle voice."
+    },
+    "meanings": {
+      "English": "to quiver, to twitch, to throb, to move slightly",
+      "Kannada": "badidukollu, tudisu, aladu",
+      "Telugu": "aduruta, spandincu, kadaluta",
+      "Tamil": "thudithal, asaithal",
+      "Malayalam": "thudikkuka, spandikkuka, ilakuka",
+      "Hindi": "phadakna, hilna, kampan hona",
+      "Bengali": "phadphad kora, kampa, spandita hawa",
+      "German": "zucken, pulsieren, beben",
+      "French": "tressaillir, palpiter, fremir",
+      "Russian": "trepetat, vzdrognut, pulsiruvat",
+      "Chinese": "weidong, tiandong, bodong"
+    }
+  },
+  {
+    "dhatu_id": "01.0325",
+    "aupadeshika": "trapūṣ",
+    "stripped_root": "trap",
+    "gana": "Bhvadi (Prathama Gana)",
+    "pada": "Atmanepada",
+    "it_status": "Set",
+    "transitivity": "Akarmaka",
+    "canonical_dhatvartha": "lajjāyām",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'trap' expresses feeling shy, bashful, or modest. Being an Atmanepada verb, it depicts an internal emotional state experienced by the subject. When combined with the causative suffix nic, it shifts meaning to causing someone to feel embarrassed or shaming someone.",
+      "scenarios": [
+        {
+          "verb_form": "trapate",
+          "grammar_trigger": "Kartari prayoga (present indicative 3rd person singular in Atmanepada)",
+          "meaning": "feels shy / is bashful / feels ashamed",
+          "example_sanskrit": "muni-samakṣam bālaḥ trapate.",
+          "example_english": "The boy feels shy in front of the sage."
+        },
+        {
+          "verb_form": "trapayati / trapayate",
+          "grammar_trigger": "Nic-pratyaya (Causative formation)",
+          "meaning": "causes to feel ashamed / embarrasses",
+          "example_sanskrit": "asatyavādaḥ puruṣam trapayati.",
+          "example_english": "Speaking falsehood embarrasses a person."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'trapūṣ' belongs to the Bhvadi class and is used in the sense of lajja (shame, bashfulness, modesty). The final letter 'ṣ' and medial 'ū' are it-markers. It takes Atmanepada affixes (trapate, trape). In perfect tense it forms trepe or tatrape.",
+      "kshiratarangini": "Kshirasvamin notes 'trapūṣ lajjāyām' as an intransitive Atmanepada root indicating modesty and moral hesitation. In derived forms like participial trapita or nominal trapa, it consistently signifies bashfulness and embarrassment."
+    },
+    "meanings": {
+      "English": "to feel shy, to be bashful, to feel ashamed, to be modest",
+      "Kannada": "nachikepaduvudu, lajje paduvudu",
+      "Telugu": "siggupaduta, lajjinchuta",
+      "Tamil": "vetkappaduthal, koonjuthal",
+      "Malayalam": "naanikkuka, lajjikkuka",
+      "Hindi": "lajjit hona, sharmana",
+      "Bengali": "lojja pawa, shorom kora",
+      "German": "sich schamen, verlegen sein, scheu sein",
+      "French": "avoir honte, etre timide, eprouver de la pudeur",
+      "Russian": "stydit'sya, smushchat'sya, stesnyat'sya",
+      "Chinese": "gandao xiukui,害xiu, cankui"
+    }
+  },
+  {
+    "dhatu_id": "01.0326",
+    "aupadeshika": "klīvṛ",
+    "stripped_root": "klīv",
+    "gana": "Bhvādi (First Gana)",
+    "pada": "Parasmaipada",
+    "it_status": "Seṭ",
+    "transitivity": "Akarmaka (Intransitive)",
+    "canonical_dhatvartha": "adhārṣṭye",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'klīv' means to lack boldness, to be timid, or to act without courage. In simple present tense (Parasmaipada), it forms 'klīvati', expressing that someone behaves timidly or hesitates due to a lack of boldness.",
+      "scenarios": [
+        {
+          "verb_form": "klīvati",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat-lakara (present tense), prathama-purusha (3rd person singular)",
+          "meaning": "acts timidly / lacks courage",
+          "example_sanskrit": "bālaḥ sabhāyāṃ klīvati.",
+          "example_english": "The boy acts timidly in the assembly."
+        },
+        {
+          "verb_form": "klīvayati",
+          "grammar_trigger": "Nic-pratyaya (causative), Kartari prayoga, Lat-lakara, prathama-purusha",
+          "meaning": "makes (someone) timid / unmans / dishearten",
+          "example_sanskrit": "bhayaṃ sainikaṃ na klīvayati.",
+          "example_english": "Fear does not unman the soldier."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'klīvṛ' is marked with the indicatory letter ṛ (ṛdit) and is defined in the sense of adhārṣṭya (absence of boldness or courage). Being ṛdit, it takes specific aorist (luṅ) and augment operations without vowel lengthening in certain formations. The present stem inflects as klīvati, klīvataḥ, klīvanti.",
+      "kshiratarangini": "Kshirasvamin notes 'klīvṛ adhārṣṭye', signifying naisthuryābhāva or kātaryatva (timidity and absence of audacious boldness). It is an intransitive (akarmaka) root belonging to the standard Parasmaipada group of the Bhvādi class."
+    },
+    "meanings": {
+      "English": "to be timid, to lack boldness, to act without courage",
+      "Kannada": "hedaruvike, dhairyavilladiruvike",
+      "Telugu": "dhauryamu lekapovuta, bhayapaduta",
+      "Tamil": "thunivu illamal iruttal, payappaduthal",
+      "Malayalam": "dhairyamillayirikkuka, pedikkuka",
+      "Hindi": "darpok hona, dhrishtata na hona, kayarta dikhana",
+      "Bengali": "bhiruta prakash kara, sahasahin haoya",
+      "German": "verzagt sein, schuchtern sein, unmutig handeln",
+      "French": "manquer d'audace, etre timide, faiblir",
+      "Russian": "byt' robkim, proyavlyat' nereshitel'nost', trusit'",
+      "Chinese": "qienuo, quefa yongqi, danqie"
+    }
+  },
+  {
+    "dhatu_id": "01.0327",
+    "aupadeshika": "gardṛ",
+    "stripped_root": "gard",
+    "gana": "bhvādi",
+    "pada": "ātmanepada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "kutsite śabde",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'gard' means to make an unpleasant, indistinct sound or to grunt. In its basic form (Atmanepada), it describes a person or animal making a guttural or ugly noise. When modified by the causative suffix (Nic), it shifts into Parasmaipada to express causing someone or something to emit an unpleasant sound.",
+      "scenarios": [
+        {
+          "verb_form": "gardate",
+          "grammar_trigger": "kartari prayoga, laṭ lakāra (present tense, 3rd person singular, ātmanepada)",
+          "meaning": "grunts or makes an unpleasant sound",
+          "example_sanskrit": "gardabhaḥ vana-antare gardate.",
+          "example_english": "The donkey grunts / brays unpleasantly deep inside the forest."
+        },
+        {
+          "verb_form": "gardayati",
+          "grammar_trigger": "ṇic-pratyaya (causative), kartari prayoga, laṭ lakāra (parasmaipada)",
+          "meaning": "causes to make an unpleasant sound",
+          "example_sanskrit": "bālaḥ śiśum udvega-yuktaṃ gardayati.",
+          "example_english": "The boy causes the toddler to produce an agitated, unpleasant cry."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "gardṛ kutsite śabde. anudāttaṅitvād ātmanepadī, seṭ. gardate, gagarde, garditā, agardiṣṭa. kutsito garhitaḥ śabdaḥ iti arthaḥ.",
+      "kshiratarangini": "gardṛ kutsite śabde. gardate, gagarde. kutsita-śabdana-kriyāyām ayam vartate."
+    },
+    "meanings": {
+      "English": "to make an unpleasant sound, to grunt, to mutter coarsely",
+      "Kannada": "kettadāgi dhvani māḍuvudu, gurgurisu",
+      "Telugu": "kutsita dhvani cēyuṭa, goṇuguṭa",
+      "Tamil": "arukkaḻikkattakka oli eḻupputal, kuruñcutal",
+      "Malayalam": "asukharamaaya śabdam uṇṭākkuka, muḻamuka",
+      "Hindi": "asuhāvanī yā kutsit āvāz karnā, gurgurānā",
+      "Bengali": "kutsita śabda karā, goṅrānō",
+      "German": "ein unangenehmes Geräusch machen, grunzen, knurren",
+      "French": "émettre un son désagréable, grogner",
+      "Russian": "izdavat nepriyatnyy zvuk, hryukat, vorchat",
+      "Chinese": "fa chu bu yue er de sheng yin, di ming"
+    }
+  },
+  {
+    "dhatu_id": "01.0328",
+    "aupadeshika": "phulla~",
+    "stripped_root": "phull",
+    "gana": "Bhvadi (gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Intransitive (akarmaka)",
+    "canonical_dhatvartha": "vikasane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'phull' belongs to the 1st group (Bhvadi gana) and takes Parasmaipada endings. It conveys the action of blossoming, opening up, or blooming into fullness. When used directly in kartari prayoga (active voice), it describes flowers or smiles blossoming on their own. In causative forms (Nic), it shows causing something to expand or bloom.",
+      "scenarios": [
+        {
+          "verb_form": "phullati",
+          "grammar_trigger": "Kartari prayoga, Lat lakara (Present active indicative, 3rd person singular)",
+          "meaning": "blooms / blossoms",
+          "example_sanskrit": "vane kusumam phullati.",
+          "example_english": "The flower blossoms in the forest."
+        },
+        {
+          "verb_form": "phullayati",
+          "grammar_trigger": "Nic pratyaya (Causative active indicative, 3rd person singular)",
+          "meaning": "causes to blossom / makes bloom",
+          "example_sanskrit": "vasantartuḥ padmam phullayati.",
+          "example_english": "The spring season causes the lotus to bloom."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'phulla vikasane' is classified under Bhvadi gana as Parasmaipadi and Set. Its primary semantic scope is 'vikasana' (unfolding, opening, blooming). Forms include phullati, puphella/pophulla, phullitaḥ, and standard Bhvadi conjugational markers without vowel reduction.",
+      "kshiratarangini": "Kshirasvamin defines 'phulla' in the sense of 'vikasana' (expansion/flowering). It acts intransitively in basic active usage, referring naturally to flora and expanding features like eyes or smiles."
+    },
+    "meanings": {
+      "English": "to blossom, to bloom, to expand",
+      "Kannada": "aralu, bikku",
+      "Telugu": "vikasincu, puvvulu puyu",
+      "Tamil": "malar, pookka",
+      "Malayalam": "viriyuka, poothulavuka",
+      "Hindi": "khilna, vikasit hona",
+      "Bengali": "phota, bikashita haoya",
+      "German": "erbluhen, aufbluhen",
+      "French": "fleurir, s epanouir",
+      "Russian": "rastsvetAT, rastpuskat'sya",
+      "Chinese": "kaifang, zhanfang"
+    }
+  },
+  {
+    "dhatu_id": "01.0329",
+    "aupadeshika": "kuca",
+    "stripped_root": "kuc",
+    "gana": "Bhvadi (1)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "shabdarekhagativimardaneshu",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kuc' means to make a sound, to bend/shrink, or to trace a line/scratch. In standard active voice (Parasmaipada), the vowel 'u' takes Guna strengthening to become 'o', forming 'kocati' (he/she makes a sound or contracts). When used with a causative suffix (Nic), it becomes 'kocayati' or 'kucayati', meaning to cause to bend or to contract something.",
+      "scenarios": [
+        {
+          "verb_form": "kocati",
+          "grammar_trigger": "Kartari Prayoga (Present Active, 3rd person singular)",
+          "meaning": "Makes a sound / contracts / curves",
+          "example_sanskrit": "Vrikshasya shakha vaten kocati.",
+          "example_english": "The branch of the tree bends (or creaks) due to the wind."
+        },
+        {
+          "verb_form": "kucayati",
+          "grammar_trigger": "Causative (Nic, Kartari Prayoga)",
+          "meaning": "Causes to contract / folds / compresses",
+          "example_sanskrit": "Balakah patram kucayati.",
+          "example_english": "The child folds/crinkles the leaf."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'kuca' is listed in Bhvadi-gana under the multiple senses of sound-making (shabda), writing/line-drawing (rekha), motion (gati), and crushing or rubbing (vimardana). It takes the Guna modification of 'u' to 'o' before Sarvadhatuka affixes, giving the present tense form 'kocati'. It is an It-dhatu.",
+      "kshiratarangini": "Kshirasvamin notes 'kuca' with the varied meanings of sound, delineation, and contracting/rubbing. It forms the standard Parasmaipada inflection 'kocati', taking the augment it in non-conjugational tenses (e.g., cukoca, kocita)."
+    },
+    "meanings": {
+      "English": "to make a sound, to curve, to contract, to trace lines",
+      "Kannada": "dhvani madu, sankuchisuvudu, rekhe eleyuvudu",
+      "Telugu": "shabdamu cheyuta, muduchukonuta, rekhani geeyuta",
+      "Tamil": "oli ezhuppu, surungu, kodu podu",
+      "Malayalam": "shabdamundakkuka, churunguka, vara varakkuka",
+      "Hindi": "aawaz karna, sikudna, lakir khinchna",
+      "Bengali": "shobdo kora, shonkuchito howa, dag kata",
+      "German": "einen Laut von sich geben, sich krummen, zusammenziehen",
+      "French": "emettre un son, se courber, se contracter",
+      "Russian": "izdavat zvuk, szhimatsya, chertit linii",
+      "Chinese": "fachu shengyin, shousuo, wanque"
+    }
+  },
+  {
+    "dhatu_id": "01.0330",
+    "aupadeshika": "svarda~",
+    "stripped_root": "svard",
+    "gana": "Bhvadi",
+    "pada": "Atmanepada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "asvadane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root svard belongs to the 1st conjugation (Bhvadi gana) and is conjugated in Atmanepada. It primarily means 'to taste', 'to relish', or 'to be savory and pleasing to the palate'. In the simple active present tense, it forms 'svardate'. When a causative suffix (Nic) is added, it forms 'svardayati', shifting the meaning to 'causes someone to taste' or 'sweetens/renders palatable'.",
+      "scenarios": [
+        {
+          "verb_form": "svardate",
+          "grammar_trigger": "Kartari prayoga, Lat lakara, Prathama purusha, Ekavacana",
+          "meaning": "Relishes or tastes pleasant",
+          "example_sanskrit": "madhuram phalam mukhe svardate.",
+          "example_english": "The sweet fruit tastes pleasing in the mouth."
+        },
+        {
+          "verb_form": "svardayati",
+          "grammar_trigger": "Nic pratyaya (Causative), Kartari prayoga, Lat lakara, Prathama purusha, Ekavacana",
+          "meaning": "Makes palatable or causes to relish",
+          "example_sanskrit": "mata payasam sharkaraya svardayati.",
+          "example_english": "The mother sweetens the pudding with sugar."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "svarda asvadane. bhvadir atmanepadi seT. asvadanam asvadasampadanam anubhavo va. svardate, sasvarde, svardita, svardisyate iti rupani bhavanti.",
+      "kshiratarangini": "svarda asvadane. svardate. asvadanartho rucyartho va. svarditah, svardanam."
+    },
+    "meanings": {
+      "English": "to taste, to relish, to be savory or pleasing to taste",
+      "Kannada": "ruci nodu, savi, rucikaravagiru",
+      "Telugu": "ruci cusu, asvadincu, ruciga undu",
+      "Tamil": "suvai paru, suvai, rusikka sei",
+      "Malayalam": "ruci nokkuka, asvadikkuka, rucikaramayirikkuka",
+      "Hindi": "svad lena, cakhna, svadishta lagna",
+      "Bengali": "svada grahana kara, asvadana kara, svadishta haoya",
+      "German": "kosten, schmecken, geniessen",
+      "French": "gouter, savourer, etre agreable au gout",
+      "Russian": "probovat na vkus, naslazhdatsya vkusom, byt vkusnym",
+      "Chinese": "pin chang, pin wei, you feng wei"
+    }
+  },
+  {
+    "dhatu_id": "01.0331",
+    "aupadeshika": "tuja~",
+    "stripped_root": "tuj",
+    "gana": "Bhvadi (1)",
+    "pada": "Ubhayapada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "balabalanirodhesu",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'tuj' means to impart strength, to strike, or to protect and restrain. In active voice (Parasmaipada), the agent performs the action of strengthening, urging, or impelling another object, while in Middle voice (Atmanepada), the impact of strengthening, exerting force, or protecting reflects back upon the agent or is undertaken for the agent's own sake.",
+      "scenarios": [
+        {
+          "verb_form": "tojati",
+          "grammar_trigger": "Bhvadi Gana Lat-lakara (Present Tense) Parasmaipada Prathama-purusha Ekavacana",
+          "meaning": "He/She gives strength or urges forward",
+          "example_sanskrit": "virah shatrum tojati",
+          "example_english": "The warrior strikes or drives back the enemy."
+        },
+        {
+          "verb_form": "tojate",
+          "grammar_trigger": "Bhvadi Gana Lat-lakara (Present Tense) Atmanepada Prathama-purusha Ekavacana",
+          "meaning": "He/She exerts strength or protects for oneself",
+          "example_sanskrit": "yoddha svabalam tojate",
+          "example_english": "The warrior strengthens his own forces."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Madhaviya Dhatuvritti notes that 'tuja' in this entry is recited for the senses of strength (bala), imparting power (baladana), or checking/restraining (nirodha). It undergoes guna of the ik-vowel before Sarvadhatuka affixes, forming tojati and tojate.",
+      "kshiratarangini": "Kshirasvamin in Kshiratarangini explains that the root denotes dynamic exertion, impelling, or preservation of force, yielding regular Bhvadi conjugational forms with vowel strengthening in four universal tenses and moods."
+    },
+    "meanings": {
+      "English": "to make strong, to urge, to strike, to protect, to restrain",
+      "Kannada": "balapadisu, prerisu, hode, rakshisu",
+      "Telugu": "balaparacu, prerana kaligincu, kottu, raksincu",
+      "Tamil": "valimuduttuthal, thoonduthal, adithal, kaathal",
+      "Malayalam": "balappeduthuka, prerippikkuka, adikkkuka, samrakshikkuka",
+      "Hindi": "balashali banana, prerit karna, prahar karna, rokna",
+      "Bengali": "balashali kara, prerana deoya, aghat kara, raksha kara",
+      "German": "starken, antreiben, schlagen, schutzen",
+      "French": "fortifier, inciter, frapper, proteger",
+      "Russian": "ukreplyat, pobuzhdat, udaryat, zashchishchat",
+      "Chinese": "shi qiangzhuang, qushi, daji, baohu"
+    }
+  },
+  {
+    "dhatu_id": "01.0332",
+    "aupadeshika": "kṛṣa~",
+    "stripped_root": "kṛṣ",
+    "gana": "Bhvadi (Gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Anit",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "vilekhane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kṛṣ' means to plough, draw, scratch, or pull. In the basic first-conjugation present tense (Parasmaipada), the vowel 'ṛ' undergoes guna strengthening to 'ar', forming 'karṣati'. When used in causative (nic), it forms 'karṣayati' (causes to plough or drags).",
+      "scenarios": [
+        {
+          "verb_form": "karṣati",
+          "grammar_trigger": "Kartari prayoga, Lat lakara, Prathama purusha, Ekavacana (Basic active voice)",
+          "meaning": "ploughs / pulls / drags",
+          "example_sanskrit": "kṛṣakaḥ kṣetraṁ karṣati.",
+          "example_english": "The farmer ploughs the field."
+        },
+        {
+          "verb_form": "karṣayati",
+          "grammar_trigger": "Causative (nic-pratyaya), Kartari prayoga, Lat lakara",
+          "meaning": "causes to plough / causes to draw",
+          "example_sanskrit": "svāmī kṛṣakaiḥ kṣetraṁ karṣayati.",
+          "example_english": "The landowner causes the farmers to plough the field."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti explains 'kṛṣa vilekhane' as signifying the act of furrowing, scratching, or tearing up the earth (vilekhana). Being in the Bhvadi class with anubandha, it receives guna before sarvadhatuka affixes to yield 'karṣati', forming anit forms in the aorist and non-sarvadhatuka environments.",
+      "kshiratarangini": "Kshirasvamin notes in Kshiratarangini that 'vilekhana' refers to furrowing or drawing lines upon the soil (kṣetra-vidāraṇa). It takes Parasmaipada terminations naturally in the first gana and denotes physical drawing or furrowing."
+    },
+    "meanings": {
+      "English": "to plough, furrow, draw, pull, scratch",
+      "Kannada": "uluvudu, eliyuvudu",
+      "Telugu": "dunnutā, lāgutā",
+      "Tamil": "ēru uzhuthal, izhuthal",
+      "Malayalam": "uzhuka, valikkuka",
+      "Hindi": "jotna, khinchna",
+      "Bengali": "chasha, tana",
+      "German": "pflugen, ziehen, furchen",
+      "French": "labourer, tirer, sillonner",
+      "Russian": "pakhat, tyanut, borozdit",
+      "Chinese": "geng di, la, qian yin"
+    }
+  },
+  {
+    "dhatu_id": "01.0333",
+    "aupadeshika": "khaji",
+    "stripped_root": "khañj",
+    "gana": "Bhvadi (Gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Akarmaka",
+    "canonical_dhatvartha": "gativaikalye",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'khañj' (khaji) means to limp or move with an impaired gait. It takes an internal nasal (num-agama) resulting in the form 'khañjati' in present tense Parasmaipada. When used causatively with the 'nic' affix ('khañjayati'), it means to cause someone or something to limp.",
+      "scenarios": [
+        {
+          "verb_form": "khañjati",
+          "grammar_trigger": "Kartari prayoga, Lat lakara (present tense), prathama-purusha, eka-vacana",
+          "meaning": "limps / walks with a limp",
+          "example_sanskrit": "vṛddhaḥ daṇḍena saha khañjati.",
+          "example_english": "The old person limps along with a walking stick."
+        },
+        {
+          "verb_form": "khañjayati",
+          "grammar_trigger": "Nic-pratyaya (causative), Lat lakara, prathama-purusha, eka-vacana",
+          "meaning": "causes to limp / cripples",
+          "example_sanskrit": "pāṣāṇaḥ aśvam khañjayati.",
+          "example_english": "The stone causes the horse to limp."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti notes that 'khaji' possesses the idit marker which demands the insertion of num (nasal augment), yielding the base 'khañj'. The meaning 'gativaikalye' signifies defective movement or limping. Conjugated as khañjati, cakhañja, khañjitā, khañjiṣyati.",
+      "kshiratarangini": "Kshirasvamin explains that 'khaji gati-vaikalye' refers to the impairment of normal foot movement (padavighāta). As an idit root, the nasal augment is regular throughout all sarvadhatuka and ardhadhatuka non-kit/nit formations."
+    },
+    "meanings": {
+      "English": "to limp, to walk with a halt or defective gait",
+      "Kannada": "kuntu, kaalu nondidu nade",
+      "Telugu": "kuntu, noda paduchu naduchu",
+      "Tamil": "nondi nada, kallil kuraiyudan nada",
+      "Malayalam": "kuntuka, kaalu nondi nadakkuka",
+      "Hindi": "langdana, langdakar chalna",
+      "Bengali": "khodano, langra hoye chola",
+      "German": "hinken, lahmen",
+      "French": "boiter, clopiner",
+      "Russian": "khromat', kandybat'",
+      "Chinese": "bo, que"
+    }
+  },
+  {
+    "dhatu_id": "01.0334",
+    "aupadeshika": "rāsa~",
+    "stripped_root": "rās",
+    "gana": "Bhvadi",
+    "pada": "Atmanepada",
+    "it_status": "Set",
+    "transitivity": "Akarmaka",
+    "canonical_dhatvartha": "sabde",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'ras' means to make a sound, howl, cry out, or bray (often used for the characteristic sound of animals like donkeys or jackals). It is conjugated exclusively in Atmanepada in the active voice. When used in the causative (Nic) form, it means to cause someone or something to cry out or make noise.",
+      "scenarios": [
+        {
+          "verb_form": "rasate",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat lakara (present tense), prathama purusha, eka-vacana",
+          "meaning": "makes a sound / brays / howls",
+          "example_sanskrit": "gardabhah uccaistaram rasate.",
+          "example_english": "The donkey brays loudly."
+        },
+        {
+          "verb_form": "rasayati",
+          "grammar_trigger": "Nic-pratyaya (causative), Lat lakara, prathama purusha, eka-vacana",
+          "meaning": "causes to make a sound / causes to howl",
+          "example_sanskrit": "balakah svanam rasayati.",
+          "example_english": "The boy makes the dog howl."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'rasa sabde' belongs to the Bhvadi gana. It takes the Atmanepada affixes due to its anudatta marker (anudattetvat atmanepadam). In the present tense, it forms 'rasate'. Being set, it takes the intermediate 'i' augment in non-sarvadhatuka forms where applicable, yielding forms like rasisyate and rasishta.",
+      "kshiratarangini": "Kshirasvamin notes 'rasa sabde' as an Atmanepadi root denoting vocalization or sound-making. It follows the standard Bhvadi formation with the Sap vikarana without root vowel modification (guna/vriddhi) since the vowel 'a' is already a long vowel."
+    },
+    "meanings": {
+      "English": "to make a sound, howl, bray, cry out",
+      "Kannada": "dhvani madu, koogu, oreve",
+      "Telugu": "sabdamu cheyu, aravu, gattiga arachu",
+      "Tamil": "kural idu, oli sei, kathu",
+      "Malayalam": "shabdamundakkuka, karayuka, koovuka",
+      "Hindi": "chikhana, bolna, shabda karna, renkna",
+      "Bengali": "shabda kara, chitkara kara, daka",
+      "German": "schreien, wiehern, bruellen, ertoenen",
+      "French": "braire, pousser un cri, retentir",
+      "Russian": "krichat, revet, izdavat zvuk",
+      "Chinese": "fachu shengyin, sihou, mingjiao"
+    }
+  },
+  {
+    "dhatu_id": "01.0335",
+    "aupadeshika": "kahaँ",
+    "stripped_root": "kah",
+    "gana": "Bhvadi (Gana 1)",
+    "pada": "Parasmaipada",
+    "it_status": "set",
+    "transitivity": "sakarmaka",
+    "canonical_dhatvartha": "dāne",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kah' belongs to the first group of verbs (Bhvadi-gana) and means 'to give' or 'to bestow'. It takes active endings (Parasmaipada) in its base form. When we make it causative (by adding 'nic' to form 'kāhi'), it shifts meaning to 'causing someone to give' or 'making someone bestow'.",
+      "scenarios": [
+        {
+          "verb_form": "kahati",
+          "grammar_trigger": "Kartari Prayoga (Active Voice, Simple Present, Lat Lakara, 3rd Person Singular)",
+          "meaning": "He/She gives or donates",
+          "example_sanskrit": "nṛpaḥ viprāya dhanam kahati.",
+          "example_english": "The king gives wealth to the scholar."
+        },
+        {
+          "verb_form": "kāhayati",
+          "grammar_trigger": "Nic-pratyaya (Causative Active Voice, Simple Present, Lat Lakara, 3rd Person Singular)",
+          "meaning": "Causes someone to give",
+          "example_sanskrit": "pitā putram dānam kāhayati.",
+          "example_english": "The father makes the son give charity."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Madhaviya Dhatuvritti confirms 'kaha dāne' as a root ending in 'h' (ha-kārānta) in the Bhvadi-gana. It is classified as Parasmaipadi and Set (takes intermediate 'i' in non-sarvadhatuka affixes). Key forms derived include kahati (present), cakhāha (perfect), kahitā (periphrastic future), and kahiṣyati (future).",
+      "kshiratarangini": "Kshirasvamin in Kshiratarangini records 'kaha dāne' in the ha-anta division of Bhvadi. It conveys the sense of giving (utsarga/dāna) and follows standard bhvadi conjugation without internal root vowel elongation in the present tense (kahati)."
+    },
+    "meanings": {
+      "English": "To give, bestow, donate",
+      "Kannada": "Kodu, danamadu",
+      "Telugu": "Iccu, danamuceyu",
+      "Tamil": "Kodukka, thanam seiya",
+      "Malayalam": "Kodukkuka, danam cheyyuka",
+      "Hindi": "Dena, daan dena",
+      "Bengali": "Daan kora, dewa",
+      "German": "Geben, spenden, schenken",
+      "French": "Donner, accorder, faire don",
+      "Russian": "Davat, darit, pozhertvovat",
+      "Chinese": "Gei, zengsong, juanzeng"
+    }
+  },
+  {
+    "dhatu_id": "01.0336",
+    "aupadeshika": "kruñca",
+    "stripped_root": "kruñc",
+    "gana": "Bhvadi (01)",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Akarmaka (Intransitive)",
+    "canonical_dhatvartha": "alpibhave (in the sense of becoming small, diminishing, shrinking, or bending)",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'krunc' means to shrink, diminish, or bend. In simple present tense (kartari prayoga), it takes standard Parasmaipada endings with the thematic affix 'a' (sap), yielding forms like 'kruncati'. When used in causative (nic), it takes the meaning 'to cause to shrink' or 'to diminish' (kroncayati/kruncayati).",
+      "scenarios": [
+        {
+          "verb_form": "kruncati",
+          "grammar_trigger": "kartari prayoga, lat lakara, prathama-purusha, eka-vacana",
+          "meaning": "shrinks / diminishes / bends",
+          "example_sanskrit": "shitena vastram kruncati.",
+          "example_english": "Due to the cold, the cloth shrinks."
+        },
+        {
+          "verb_form": "kroncayati",
+          "grammar_trigger": "nic-pratyaya (causative), lat lakara, prathama-purusha, eka-vacana",
+          "meaning": "causes to shrink / makes smaller",
+          "example_sanskrit": "tapa vastram kroncayati.",
+          "example_english": "Heat causes the cloth to shrink."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "Madhaviya glosses 'krunca alpibhave' indicating reduction in size, bending, or becoming meager. The nasal 'n' is part of the dhatu and is retained in standard sarvadhatuka formations (kruncati, akruncat, kruncatu, kruncet), with guna optionally prevented or conditioned in ardhadhatuka contexts.",
+      "kshiratarangini": "Kshirasvamin defines 'krunca' under alpibhava (diminution/shrinking) and movement/bending (kutila-gati). It conjugates as kruncati in lat, with lit forms showing reduplication like cukronca or cukrunca depending on guna rules."
+    },
+    "meanings": {
+      "English": "to diminish, to shrink, to become small, to bend",
+      "Kannada": "sankucitavaguvudu, kshinatavaguvudu, baguvudu",
+      "Telugu": "kruṅguta, sankucitamavuta, tagguta",
+      "Tamil": "suruṅkudhal, kuraidhal, vaḷaithal",
+      "Malayalam": "churunguka, kurayuka, valayuka",
+      "Hindi": "sikudna, chhota hona, ghattana, jhukna",
+      "Bengali": "shonkochit howa, chhoto howa, kshino howa",
+      "German": "schrumpfen, kleiner werden, sich verringern",
+      "French": "retrecir, diminuer, se courber",
+      "Russian": "szhimat'sya, umen'shat'sya, sokrashchat'sya",
+      "Chinese": "suoxiao, weisuo, wanqi"
+    }
+  },
+  {
+    "dhatu_id": "01.0337",
+    "aupadeshika": "sphūrjā",
+    "stripped_root": "sphūrj",
+    "gana": "bhvādi",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "nirghoṣe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'sphūrj' means to make a loud rumbling, roaring, or thundering noise. In standard active voice (Parasmaipada), it describes subjects like storm clouds or thunderclaps emitting deep sounds. When converted to a causative form (ṇic), it signifies causing a loud noise, blast, or reverberation.",
+      "scenarios": [
+        {
+          "verb_form": "sphūrjati",
+          "grammar_trigger": "kartari prayoga, laṭ lakāra (present tense, active voice, 3rd person singular)",
+          "meaning": "thunders / rumbles / roars",
+          "example_sanskrit": "nabhasi meghaḥ ghoram sphūrjati.",
+          "example_english": "The cloud rumbles terribly in the sky."
+        },
+        {
+          "verb_form": "sphūrjayati",
+          "grammar_trigger": "ṇic pratyaya (causative), kartari prayoga, laṭ lakāra",
+          "meaning": "causes to rumble / detonates / reverberates loudly",
+          "example_sanskrit": "vāyuḥ aśanim sphūrjayati.",
+          "example_english": "The wind makes the thunderbolt crash violently."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya explains 'sphūrjā nirghoṣe' as indicating continuous deep sound or roaring (mahānirghoṣa). It belongs to the Bhvādi-gaṇa, takes Parasmaipada terminations, has the augment iṭ (seṭ), and yields forms like sphūrjati, pasphūrja, and sphūrjitā.",
+      "kshiratarangini": "Kshirasvamin defines 'sphūrjā nirghoṣe' under the velar/palatal consonantal series of Bhvādi, linking 'nirghoṣa' specifically to atmospheric phenomena like thunder, crashing waves, or explosions, forming primary derivatives such as sphūrjathu (clap of thunder)."
+    },
+    "meanings": {
+      "English": "to thunder, rumble, crash, roar",
+      "Kannada": "gudugisu, garjisu, arbhāṭisu",
+      "Telugu": "urumu, garjincu, ghōṣincu",
+      "Tamil": "idikkum, muzhangu, peroli ezhuppu",
+      "Malayalam": "muzhangu, idivettuka, garjikkuka",
+      "Hindi": "garajana, kadakana, ghor dhvani karana",
+      "Bengali": "gorjon kora, baj pora, bhison shobdo kora",
+      "German": "donnern, dröhnen, krachen",
+      "French": "tonner, gronder, retentir",
+      "Russian": "gremet, grokhotat, rydat",
+      "Chinese": "dalei, hongming, fachu julie xiangsheng"
+    }
+  },
+  {
+    "dhatu_id": "01.0338",
+    "aupadeshika": "blīṅ",
+    "stripped_root": "blī",
+    "gana": "Bhvādi (First Class)",
+    "pada": "Ātmanepada",
+    "it_status": "Aniṭ",
+    "transitivity": "Akarmaka (Intransitive) / Sakarmaka (Transitive)",
+    "canonical_dhatvartha": "gatau (motion) / saṁvaraṇe (covering/concealment)",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'blī' primarily conveys the action of moving along gracefully or covering/sheltering something. Because it carries an anubandha 'ṅ' (blīṅ) in the Dhatupatha, it strictly takes Ātmanepada affixes (such as -te, -ete, -nte). When turned into a causative verb using the 'ṇic' affix, it indicates causing someone or something to move or be covered.",
+      "scenarios": [
+        {
+          "verb_form": "blayate",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat lakāra (present tense), prathama puruṣa (third person), ekavacana (singular)",
+          "meaning": "Moves smoothly or conceals oneself",
+          "example_sanskrit": "Vane mṛgaḥ mandam blayate.",
+          "example_english": "The deer moves softly in the forest."
+        },
+        {
+          "verb_form": "blāyayati",
+          "grammar_trigger": "Nyanta (causative), Kartari prayoga, Lat lakāra, prathama puruṣa, ekavacana with Parasmaipada ending",
+          "meaning": "Causes to move or causes to be covered",
+          "example_sanskrit": "Pālakaḥ dhenum mārge blāyayati.",
+          "example_english": "The herdsman guides the cow along the path."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'blīṅ' belongs to the Bhvādi class and is marked with the anubandha ṅakāra indicating exclusive Ātmanepada conjugation. Sayana explains its primary sense as motion ('gatau') as well as covering or gathering ('saṁvaraṇe'). In the present tense, after applying standard guṇa vowel strengthening and the śap vikarana, it forms 'blayate'.",
+      "kshiratarangini": "Kshirasvamin notes the interchangeability of labials and dentals ('va-ba-yor abhedaḥ'), acknowledging textual variants between 'vlīṅ' and 'blīṅ'. The core semantic range emphasizes gentle motion and protective enveloping, conjugate forms remaining aniṭ in standard classical derivation."
+    },
+    "meanings": {
+      "English": "To move, to go, to advance; to cover, to conceal",
+      "Kannada": "Chalisu, hogu; mucchu, mareyāgu",
+      "Telugu": "Kadalu, vellu; kappu, dāgonu",
+      "Tamil": "Nagara, sella; mooda, maraikka",
+      "Malayalam": "Sancharikka, pokuka; mooduka, marayuka",
+      "Hindi": "Chalnā, baṛhanā; ḍhaknā, chipānā",
+      "Bengali": "Cholā, jāoyā; dhākā, lukāno",
+      "German": "Sich bewegen, gehen; bedecken, verhüllen",
+      "French": "Se déplacer, aller; couvrir, dissimuler",
+      "Russian": "Dvigat'sya, idti; pokryvat', skryvat'",
+      "Chinese": "Yidong, qianxing; fugai, zhedang"
+    }
+  },
+  {
+    "dhatu_id": "01.0339",
+    "aupadeshika": "śuca~",
+    "stripped_root": "śuc",
+    "gana": "bhvādi",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "śoke",
+    "dhaturupanandini": {
+      "simple_explanation": "The root śuc means to feel sorrow, mourn, or grieve. In standard active voice (Parasmaipada), it describes a person experiencing grief. When used with the causative affix (nic), it means to cause someone to grieve or to lament over something.",
+      "scenarios": [
+        {
+          "verb_form": "śocati",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat lakara (present tense), 3rd person singular",
+          "meaning": "grieves / mourns",
+          "example_sanskrit": "putrasya viyogena pitā śocati.",
+          "example_english": "The father grieves due to separation from his son."
+        },
+        {
+          "verb_form": "śocayati",
+          "grammar_trigger": "Causative (nic-pratyaya), Lat lakara (present tense), 3rd person singular",
+          "meaning": "causes to mourn / saddens",
+          "example_sanskrit": "idaṃ duḥkha-vārttājanaṃ śocayati.",
+          "example_english": "This distressing news saddens the people."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti identifies the root 'śuca' in the sense of sorrow ('śoke'). Being ending with short a-kara for svarartha, the root undergoes guna of the vowel 'u' to 'o' before sarvadhatuka affixes like shap, producing forms like śocati, aśocat, and śocatu.",
+      "kshiratarangini": "Kshirasvamin notes 'śuca śoke', emphasizing its classification as parasmaipadi and intransitive (akarmaka) in its basic primary meaning of lamentation and grief, acquiring transitivity in causative or specific upasarga usages."
+    },
+    "meanings": {
+      "English": "to grieve, to mourn, to sorrow, to lament",
+      "Kannada": "duḥkhisu, śōkisu",
+      "Telugu": "duḥkhin̄cu, śōkin̄cu",
+      "Tamil": "tukkappadu, varuntu",
+      "Malayalam": "duḥkhikkuka, śōkikkuka",
+      "Hindi": "śōk karnā, duḥkh manānā",
+      "Bengali": "śōk karā, duḥkha prakāś karā",
+      "German": "trauern, sich betrüben",
+      "French": "s'affliger, porter le deuil, se lamenter",
+      "Russian": "gorevat', oplakivat', pechalit'sya",
+      "Chinese": "bēishāng, āidào"
+    }
+  },
+  {
+    "dhatu_id": "01.0340",
+    "aupadeshika": "bhrāśṛ",
+    "stripped_root": "bhrāś",
+    "gana": "Bhvādigaṇa (01)",
+    "pada": "ātmanepada",
+    "it_status": "aniṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "dīptau",
+    "dhaturupanandini": {
+      "simple_explanation": "The root bhrāś means to shine, flash, or glitter. In simple everyday Sanskrit, it takes Atmanepada endings to describe an object naturally glowing or shining forth with light. When converted to a causative (Nic) form, it switches to showing that someone makes something shine or illuminates it.",
+      "scenarios": [
+        {
+          "verb_form": "bhrāśate",
+          "grammar_trigger": "kartari prayoga, lat-lakara, prathama-purusha, eka-vacana",
+          "meaning": "shines / radiates light",
+          "example_sanskrit": "nabhasi tārā bhrāśate.",
+          "example_english": "The star shines in the sky."
+        },
+        {
+          "verb_form": "bhrāśayati",
+          "grammar_trigger": "nic-pratyaya (causative), parasmaipada, lat-lakara, prathama-purusha, eka-vacana",
+          "meaning": "causes to shine / illuminates",
+          "example_sanskrit": "sūryaḥ sarvaṃ jagat bhrāśayati.",
+          "example_english": "The sun illuminates the entire world."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'bhrāśṛ dīptau' belongs to the Bhvadi class. Being marked with 'ṛ' as an it-marker (ṛdit), it does not take lengthening or special guṇa augment where prohibited, and functions in the sense of prakāśana (radiating light or glowing). By the rule 'vā bhrāśa-bhrāṣa-bhramu-kramu-klamu-trasa-truṭi-laṣām', it optionally admits the Śyan affix in the universal non-causative system.",
+      "kshiratarangini": "Kshirasvamin explains 'bhrāśṛ dīptau' as signifying luminous expansion and shining (dīpti). It forms bhrāśate or optionally bhrāśyate in the sarvadhatuka system, indicating vivid light or luster, categorised as anit and anudattet/atmanepadi."
+    },
+    "meanings": {
+      "English": "to shine, glitter, radiate light, sparkle",
+      "Kannada": "hole, belagu, kanti-beeru",
+      "Telugu": "merayu, prakashinchu, velugu",
+      "Tamil": "minnu, olir, piragasi",
+      "Malayalam": "thilangunnu, prakashikkunnu, minnunnu",
+      "Hindi": "chamakna, prakashit hona, deepti prapth karna",
+      "Bengali": "jholmol kora, alo deoya, ujjwal hoya",
+      "German": "glänzen, leuchten, strahlen",
+      "French": "briller, étinceler, rayonner",
+      "Russian": "siyat, bleskat, svetitsya",
+      "Chinese": "faguang, shanyao, canlan"
+    }
+  },
+  {
+    "dhatu_id": "01.0341",
+    "aupadeshika": "kṝ~",
+    "stripped_root": "kṝ",
+    "gana": "Bhvadi",
+    "pada": "Parasmaipada",
+    "it_status": "Aniṭ",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "vikṣepe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kṝ' belongs to the Bhvadi class and means to scatter, disperse, or throw things in different directions. In normal active use, it expresses a subject directly scattering an object (like seeds or flowers). When used with prefixes or causative affixes, it indicates spreading widely or making someone scatter objects.",
+      "scenarios": [
+        {
+          "verb_form": "karati",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat-lakara (present tense), Prathama-purusha, Ekavacana",
+          "meaning": "Scatters or disperses",
+          "example_sanskrit": "kṛṣakaḥ kṣetre bījāni karati.",
+          "example_english": "The farmer scatters seeds in the field."
+        },
+        {
+          "verb_form": "kārayati",
+          "grammar_trigger": "Nic-pratyaya (causative), Lat-lakara (present tense), Prathama-purusha, Ekavacana",
+          "meaning": "Causes to scatter or strew",
+          "example_sanskrit": "mātā bālakena puṣpāṇi kārayati.",
+          "example_english": "The mother causes the child to scatter the flowers."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti defines 'kṝ vikṣepe' as an Aniṭ Parasmaipadi root of the Bhvadi class. Vikṣepa denotes the action of throwing apart or dispersing. In the presence of the sārvadhātuka affix Śap, it undergoes guṇa transformation (ṝ becoming ar), generating forms like karati, karataḥ, karanti.",
+      "kshiratarangini": "Kshirasvamin glosses 'kṝ vikṣepe' as an act of preraṇa (propulsion) and utsarjana (strewing or scattering). It is treated alongside ṝ-ending roots of the first conjugation, maintaining regular vocalic grade shifts in sārvadhātuka and ārdhadhātuka environments."
+    },
+    "meanings": {
+      "English": "To scatter, to disperse, to strew",
+      "Kannada": "Calluvudu, haraduvudu, bikṣepisu",
+      "Telugu": "Challuta, vedajalluta, vistarimpajeyuta",
+      "Tamil": "Sitharavittal, thelittal, parapputhal",
+      "Malayalam": "Vitharuka, thoovuka, parathuka",
+      "Hindi": "Bikhērana, chhitakānā, phailānā",
+      "Bengali": "Chhorano, bikhep kora, chhitano",
+      "German": "Streuen, zerstreuen, ausbreiten",
+      "French": "Disperser, éparpiller, semer",
+      "Russian": "Rasseivat, razbrasyvat, rassypat",
+      "Chinese": "Sanbu, sabo, fensan"
+    }
+  },
+  {
+    "dhatu_id": "01.0342",
+    "aupadeshika": "kutha~",
+    "stripped_root": "kuth",
+    "gana": "Bhvadi",
+    "pada": "Parasmaipada",
+    "it_status": "Set",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "samkleshane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kuth' means to suffer pain, distress, or to undergo affliction and distress. In its standard active form (Parasmaipada), it describes experiencing anguish, suffering, or rotting/decay. In its causative form (kothayati), it means causing someone or something to suffer or undergo distress.",
+      "scenarios": [
+        {
+          "verb_form": "kothati",
+          "grammar_trigger": "Lat lakara (Present tense), Prathama purusha (Third person), Ekavacana (Singular), Kartari prayoga (Active voice)",
+          "meaning": "Suffers distress / undergoes affliction",
+          "example_sanskrit": "duhkhitah narah rogena kothati.",
+          "example_english": "The afflicted person suffers distress due to illness."
+        },
+        {
+          "verb_form": "kothayati",
+          "grammar_trigger": "Nic pratyaya (Causative), Lat lakara, Prathama purusha, Ekavacana",
+          "meaning": "Causes distress / afflicts someone",
+          "example_sanskrit": "durdharmah janan kothayati.",
+          "example_english": "Injustice torments and causes distress to the people."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti explains 'kutha samkleshane' as indicating anguish, mental or physical distress, and affliction. It is classed under Bhvadi-gana, taking standard Parasmaipada terminations, with guna of the vowel occurring before sarvadhatuka affixes, forming kothati.",
+      "kshiratarangini": "Kshirasvamin in Kshiratarangini notes that 'kutha' conveys 'samkleshana' (distressing or being tormented). He confirms its set character and the development of forms like kothitum in the infinitive and cukotha in the perfect tense (Lit)."
+    },
+    "meanings": {
+      "English": "To suffer distress, to afflict, to rot or languish",
+      "Kannada": "Sankatapaduvu, kashtapaduvu, koleyuvudu",
+      "Telugu": "Badhapaduta, kleshamu ponduta, kshiyinchuta",
+      "Tamil": "Tunbappaduthal, vedanaippaduthal, alugudhal",
+      "Malayalam": "Klesham anubhavikkuka, vedanikkuka, azhiyuka",
+      "Hindi": "Klesh pana, kasht jhelna, sadna ya tadapna",
+      "Bengali": "Klesha pawa, koshto pawa, pocha ba jorjoritha howa",
+      "German": "Leiden, quaelen, verfaulen, sich graemen",
+      "French": "Souffrir, s'affliger, languir, pourrir",
+      "Russian": "Stradať, terpat' muki, muchitsya, gnit'",
+      "Chinese": "Shouku, youku, kuilan"
+    }
+  },
+  {
+    "dhatu_id": "01.0343",
+    "aupadeshika": "vasa~",
+    "stripped_root": "vas",
+    "gana": "Bhvadi",
+    "pada": "Parasmaipada",
+    "it_status": "Anit",
+    "transitivity": "Akarmaka",
+    "canonical_dhatvartha": "nivase",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'vas' primarily means 'to reside' or 'to dwell'. In basic Parasmaipada form, it indicates the subject living in a place. When prefixes (upasargas) like 'upa' or 'adhi' are added, its meaning adapts to 'to observe a fast/stay near' or 'to inhabit a place' (making it transitive), and the causative form 'vasayati' means 'to settle or provide shelter to someone'.",
+      "scenarios": [
+        {
+          "verb_form": "vasati",
+          "grammar_trigger": "Kartari Prayoga (Present Active, 3rd Person Singular)",
+          "meaning": "lives or dwells",
+          "example_sanskrit": "munihi vane vasati.",
+          "example_english": "The sage lives in the forest."
+        },
+        {
+          "verb_form": "vasayati",
+          "grammar_trigger": "Causative (Nic-pratyaya, Present Active)",
+          "meaning": "causes to stay or shelters",
+          "example_sanskrit": "nrpah atithim gehe vasayati.",
+          "example_english": "The king accommodates the guest in the house."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'vasa nivase' belongs to the Bhvadi class and takes Parasmaipada terminations. It undergoes Samprasarana in the reduplicated perfect (lit) and past participle forms (e.g., uvasa, ushitah). It is classified as anit, forming vatsyati in the future tense with 'sa' following the conversion of 's' to 't' via Paninian sandhi rules.",
+      "kshiratarangini": "Kshirasvamin notes 'vasa nivase' as denoting dwelling or staying in an abode. He highlights the phonological changes like Samprasarana in weak environments (ushitah, ushitva) and the change of root-final 's' to 't' before 'sya' (vatsyati) and in the infinitive (vastum)."
+    },
+    "meanings": {
+      "English": "to dwell, reside, live, abide",
+      "Kannada": "vasisu, iru, neleyagiru",
+      "Telugu": "nivasincu, undu",
+      "Tamil": "vaci, val, iru",
+      "Malayalam": "vasikkuka, thamasikkuka",
+      "Hindi": "rahana, nivas karna, basna",
+      "Bengali": "bash kora, thaka",
+      "German": "wohnen, leben, verweilen",
+      "French": "habiter, resider, demeurer",
+      "Russian": "zhit, obitat, prozhivat",
+      "Chinese": "juzhu, qiju, zhusu"
+    }
+  },
+  {
+    "dhatu_id": "01.0344",
+    "aupadeshika": "ghūrchā",
+    "stripped_root": "ghūrch",
+    "gana": "bhvādi",
+    "pada": "parasmaipada",
+    "it_status": "seṭ",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "bhramaṇe",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'ghūrch' expresses the action of wandering, reeling, or revolving. In basic active voice (kartari prayoga), it describes a person or object wandering or reeling by itself. When using the causative suffix (ṇic), it shifts the meaning to causing someone or something else to wander, stagger, or revolve.",
+      "scenarios": [
+        {
+          "verb_form": "ghūrchati",
+          "grammar_trigger": "lat lakara, prathama purusha, ekavacana (simple present tense, active)",
+          "meaning": "wanders / reels / revolves",
+          "example_sanskrit": "pathikaḥ vane ghūrchati.",
+          "example_english": "The traveler wanders in the forest."
+        },
+        {
+          "verb_form": "ghūrchayati",
+          "grammar_trigger": "nic pratyaya (causative), lat lakara, prathama purusha, ekavacana",
+          "meaning": "causes to wander / makes reel or spin",
+          "example_sanskrit": "vāyuḥ patram ākāśe ghūrchayati.",
+          "example_english": "The wind makes the leaf spin in the sky."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'ghūrchā' is glossed as 'bhramaṇe' (in the sense of whirling, wandering, or roaming). Being marked with an anubandha indicator for parasmaipada, it conjugates as ghūrchati, jaghūrcha, ghūrchitā, and takes the intermediate augment 'iṭ' (seṭ).",
+      "kshiratarangini": "Kshirasvamin defines 'ghūrchā bhramaṇe', explaining it as bodily motion in circular paths, wandering or staggering. Forms like ghūrchati and the krdanta derivative ghūrchitaḥ are derived accordingly."
+    },
+    "meanings": {
+      "English": "to wander, to roam, to reel, to whirl",
+      "Kannada": "aleyuvudu, tiruguvudu, bhramaneyaguvudu",
+      "Telugu": "tiruguṭa, bhatukuṭa, bhramiñcuṭa",
+      "Tamil": "alaintu tirital, sutrutal, mayankutal",
+      "Malayalam": "alayuka, thiriyuka, chuttuka",
+      "Hindi": "bhatakana, ghumana, chakkar khana",
+      "Bengali": "ghora, bhatka, ghurnita haoya",
+      "German": "umherwandern, taumeln, sich drehen",
+      "French": "errer, vagabonder, tournoyer",
+      "Russian": "brodit', skitat'sya, kruzhit'sya",
+      "Chinese": "paihuai, youdang, xuanzhuan"
+    }
+  },
+  {
+    "dhatu_id": "01.0345",
+    "aupadeshika": "dhāvū",
+    "stripped_root": "dhāv",
+    "gana": "bhvādi",
+    "pada": "ubhayapada",
+    "it_status": "seṭ",
+    "transitivity": "dvikarmaka",
+    "canonical_dhatvartha": "gatiśuddhayoḥ",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'dhāv' has two primary meanings depending on context: to run/move fast, and to wash/cleanse. In everyday Sanskrit, it is used in Parasmaipada for running (where it is intransitive) and cleansing (where it is transitive). When using causative affixes, it means making someone run or having something cleaned.",
+      "scenarios": [
+        {
+          "verb_form": "dhāvati",
+          "grammar_trigger": "kartari prayoga, laṭ lakāra, prathama puruṣa, ekavacana (parasmaipada)",
+          "meaning": "runs / washes",
+          "example_sanskrit": "bālakaḥ kṣetre śīghraṃ dhāvati.",
+          "example_english": "The boy runs quickly in the field."
+        },
+        {
+          "verb_form": "dhāvayati",
+          "grammar_trigger": "ṇijanta (causative), kartari prayoga, laṭ lakāra, prathama puruṣa, ekavacana",
+          "meaning": "causes to run / cleanses",
+          "example_sanskrit": "janakaḥ aśvaṃ tīvreṇa mārgeṇa dhāvayati.",
+          "example_english": "The father makes the horse run on the path."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti explains 'dhāvū gatiśuddhayoḥ' as functioning in the senses of swift motion (gati) and cleansing or purifying (śuddhi). It notes the retention of the long vowel and the application of standard Bhvadi vikarana 'śap', with regular seṭ characteristics in non-sarvadhatuka forms like dhāvitaḥ and dhāvitum.",
+      "kshiratarangini": "Kshirasvamin highlights the duality of the root's scope: motion (dhāvati aśvaḥ - the horse runs) and washing (vastraṃ dhāvati - cleanses the cloth). The commentary observes that when signifying cleansing, the root governs an objective accusative, whereas in the sense of running, it acts intransitively."
+    },
+    "meanings": {
+      "English": "to run, to move swiftly, to wash, to purify",
+      "Kannada": "ōḍu, tōḷi, śudhdhigoḷisu",
+      "Telugu": "parugettu, kadugu, śubhraparacu",
+      "Tamil": "ōḍu, kaḻuvu, tūymaippaḍuttu",
+      "Malayalam": "ōṭuka, kaḻukuka, śudhdhamākkuka",
+      "Hindi": "dauṛnā, dhonā, svaccha karnā",
+      "Bengali": "dauṛāno, dhoẏā, pariṣkāra karā",
+      "German": "laufen, rennen, waschen, reinigen",
+      "French": "courir, se précipiter, laver, purifier",
+      "Russian": "bežat', mčat'sya, myt', očiščat'",
+      "Chinese": "bǎopǎo, bēncí, xǐdī, qīngjié"
+    }
+  },
+  {
+    "dhatu_id": "01.0346",
+    "aupadeshika": "kuca",
+    "stripped_root": "kuc",
+    "gana": "bhvadi",
+    "pada": "parasmaipada",
+    "it_status": "set",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "sankocane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'kuc' means to shrink, contract, curl, or bend. In the active voice (Parasmaipada), it describes a subject contracting or curling up on its own. When used with a causative affix (Nic), it changes the meaning to making something else shrink or contracting an object.",
+      "scenarios": [
+        {
+          "verb_form": "kocati",
+          "grammar_trigger": "kartari prayoga, lat lakara, prathama purusha, ekavacana",
+          "meaning": "shrinks or contracts",
+          "example_sanskrit": "shitena patram kocati.",
+          "example_english": "The leaf shrinks due to the cold."
+        },
+        {
+          "verb_form": "kocayati",
+          "grammar_trigger": "nic pratyaya (causative), kartari prayoga, lat lakara, prathama purusha, ekavacana",
+          "meaning": "causes to shrink or contracts (something)",
+          "example_sanskrit": "bhalukah angam kocayati.",
+          "example_english": "The bear contracts its body."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "kuca sankocane - it is classified in the bhvadi-gana as an udattopadesha, Parasmaipada, and set root. Guna takes place in sarvadhatuka affixes yielding the form kocati, and in lit it forms cukoca.",
+      "kshiratarangini": "kuca sankoce - signifies contraction or curling. Kshirasvamin notes the vowel alteration under regular guna rules, forming kocati, kocita, and in reduplication cukoca."
+    },
+    "meanings": {
+      "English": "to shrink, contract, bend, curl up",
+      "Kannada": "sankucitagollu, muguchu, kurucagollu",
+      "Telugu": "sankocincu, muduchukonu",
+      "Tamil": "surungu, madangu",
+      "Malayalam": "churunguka, madanguka",
+      "Hindi": "sikudana, sankucita hona",
+      "Bengali": "sonkucito howa, choto howa",
+      "German": "schrumpfen, sich zusammenziehen",
+      "French": "retrecir, se contracter",
+      "Russian": "szhimat'sya, sokrashchat'sya",
+      "Chinese": "shousuo, suoxiao"
+    }
+  },
+  {
+    "dhatu_id": "01.0347",
+    "aupadeshika": "maja",
+    "stripped_root": "maj",
+    "gana": "bhvadi",
+    "pada": "parasmaipada",
+    "it_status": "anit",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "shabde",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'maj' means to produce a sound, resound, or make noise. In standard primary conjugation (kartari prayoga), it takes Parasmaipada endings with the thematic affix 'shap' (a), yielding forms like 'majati'. When converted to causative (nich), it means to cause to make sound or to sound an instrument, producing 'majjayati' or 'majayati'.",
+      "scenarios": [
+        {
+          "verb_form": "majati",
+          "grammar_trigger": "kartari prayoga, lat lakara, prathama-purusha, eka-vacana (Parasmaipada)",
+          "meaning": "makes a sound / resounds",
+          "example_sanskrit": "vane pakshi majati.",
+          "example_english": "The bird makes a sound in the forest."
+        },
+        {
+          "verb_form": "amajat",
+          "grammar_trigger": "kartari prayoga, lan lakara, prathama-purusha, eka-vacana (Past tense)",
+          "meaning": "made a sound / resounded",
+          "example_sanskrit": "bheri rane amajat.",
+          "example_english": "The war-drum resounded in the battlefield."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti places 'maja' under the first class (Bhvadi) in the semantic sense of 'shabde' (sound generation/articulation). It is classified as Parasmaipadi and non-nasalized in its primary non-idit form, forming simple present 'majati'.",
+      "kshiratarangini": "Kshirasvamin notes 'maja shabde' among the guttural/palatal-ending roots denoting acoustic expression. It forms simple thematic stems without nasal insertion in the non-idit recension, giving 'majati', 'mamaja', and 'majishyati' / 'makshyati'."
+    },
+    "meanings": {
+      "English": "to make a sound, to resound, to utter",
+      "Kannada": "shabda madu, dhvani madu",
+      "Telugu": "shabdhamu cheyu, mrogu",
+      "Tamil": "oli ezhuppu, satham idu",
+      "Malayalam": "shabdam undakkuka, muzhanguka",
+      "Hindi": "shabd karna, aawaz nikalna, gunjna",
+      "Bengali": "shabdo kora, awaj kora",
+      "German": "tönen, schallen, laut geben",
+      "French": "résonner, émettre un son, retentir",
+      "Russian": "zvuchat, izdavat zvuk, shumet",
+      "Chinese": "fayin, fasheng, mingxiang"
+    }
+  },
+  {
+    "dhatu_id": "01.0348",
+    "aupadeshika": "dṝ",
+    "stripped_root": "dṝ",
+    "gana": "Bhvadi (First Gana)",
+    "pada": "Parasmaipada",
+    "it_status": "Anit",
+    "transitivity": "Intransitive (Akarmaka)",
+    "canonical_dhatvartha": "bhaye (fear, being afraid)",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'dṝ' fundamentally denotes experiencing fear or being terrified. When conjugated in the primary active voice (Parasmaipada, Lat-lakara), it forms 'darati' meaning 'he/she fears'. When used in the causative (Nic), it changes meaning to 'frightening or terrifying someone else' ('dārayati').",
+      "scenarios": [
+        {
+          "verb_form": "darati",
+          "grammar_trigger": "Kartari prayoga (active voice), Lat-lakara (present tense), prathama-purusha (3rd person singular)",
+          "meaning": "Fears / is afraid",
+          "example_sanskrit": "śiśuḥ tamasi darati.",
+          "example_english": "The child feels afraid in the dark."
+        },
+        {
+          "verb_form": "dārayati",
+          "grammar_trigger": "Causative (Nic-pratyaya), Lat-lakara, active voice",
+          "meaning": "Scares / frightens (causes someone to fear)",
+          "example_sanskrit": "siṃhaḥ mṛgān dārayati.",
+          "example_english": "The lion frightens the deer."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The root 'dṝ' is listed in the Bhvadi-gana with the meaning of fear (bhaya). In Sarvadhatuka tenses like Lat, it undergoes Guna substitution to 'ar' resulting in the present-stem 'dara-', giving 'darati'. In perfect (Lit), reduplication and vowel alternation occur forming 'dadāra'.",
+      "kshiratarangini": "Kshirasvamin notes 'dṝ bhaye' as an intransitive root of the first conjugation class. It takes Guna before the Sarvadhatuka Sap affix giving 'darati', distinct from the sixth class root 'dṝñ ādare' which forms 'driyate'."
+    },
+    "meanings": {
+      "English": "to fear, to dread, to be terrified",
+      "Kannada": "bhayapaduvudu, hedaruvudu",
+      "Telugu": "bhayapaduta, veravuta",
+      "Tamil": "payappaduthal, anjuthal",
+      "Malayalam": "bhayappeduka, pedikkuka",
+      "Hindi": "darna, bhayabhit hona",
+      "Bengali": "bhoy pawa, bhito howa",
+      "German": "furchten, sich furchten",
+      "French": "craindre, avoir peur",
+      "Russian": "boyat'sya, strashit'sya",
+      "Chinese": "haipa, kongju"
+    }
+  },
+  {
+    "dhatu_id": "01.0349",
+    "aupadeshika": "khelr",
+    "stripped_root": "khel",
+    "gana": "bhvadi",
+    "pada": "parasmaipada",
+    "it_status": "set",
+    "transitivity": "akarmaka",
+    "canonical_dhatvartha": "calane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'khel' belongs to the first conjugation (Bhvadi-gana) and signifies moving about, sporting, playing, or oscillating. In its basic active form (Parasmaipada), it describes an agent moving playfully or swinging. When used with a causative affix (Nic), it means to cause someone to play or to move something back and forth.",
+      "scenarios": [
+        {
+          "verb_form": "khelati",
+          "grammar_trigger": "lat lakara (present tense), prathama purusha (third person), ekavacana (singular), kartari prayoga (active voice)",
+          "meaning": "plays or moves about",
+          "example_sanskrit": "balakah kandukena udyane khelati.",
+          "example_english": "The boy plays with a ball in the garden."
+        },
+        {
+          "verb_form": "khelayati",
+          "grammar_trigger": "nic pratyaya (causative), lat lakara (present tense), kartari prayoga",
+          "meaning": "causes to play or rocks/swings",
+          "example_sanskrit": "mata shishum dolayam khelayati.",
+          "example_english": "The mother rocks the baby in the cradle."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti analyzes 'khelr calane' as an intransitive root of the Bhvadi class taking Parasmaipada affixes. Because it is marked with the indicatory letter 'r' (it), it takes an optional form in certain aorist conditions or follows standard set conjugation, yielding forms like khelati, cikhela, and khelita.",
+      "kshiratarangini": "Kshirasvamin notes under 'khelr calane' that the root denotes physical movement, wavering, or sportive play. He highlights its phonetic proximity to 'vel' and 'cel' (indicating trembling or motion) and specifies regular guṇa formation in the present tense (khelati)."
+    },
+    "meanings": {
+      "English": "to move, to play, to sport, to swing",
+      "Kannada": "aduvudu, calisuvudu",
+      "Telugu": "aduta, cadaluta",
+      "Tamil": "vilaiyadu, asaidal",
+      "Malayalam": "kallikkuka, ilakuka",
+      "Hindi": "khelna, hilna-dulna",
+      "Bengali": "khela kara, noda",
+      "German": "spielen, sich bewegen",
+      "French": "jouer, bouger",
+      "Russian": "igrat, dvigatsya",
+      "Chinese": "youwan, yaobai"
+    }
+  },
+  {
+    "dhatu_id": "01.0350",
+    "aupadeshika": "trāṅ",
+    "stripped_root": "trā",
+    "gana": "Bhvadi",
+    "pada": "Atmanepada",
+    "it_status": "Anit",
+    "transitivity": "Sakarmaka",
+    "canonical_dhatvartha": "dharane",
+    "dhaturupanandini": {
+      "simple_explanation": "The root 'tra' belongs to the first conjugation (Bhvadi gana) and is used in the sense of holding, maintaining, bearing, or sustaining. Because it takes the Atmanepada terminations, the action often reflects sustaining or keeping something firmly for oneself or within one's sphere. In causative forms, it conveys making someone hold, sustain, or preserve something.",
+      "scenarios": [
+        {
+          "verb_form": "trāte",
+          "grammar_trigger": "Bhvadi Gana, Lat Lakara (Present Tense), Prathama Purusha, Ekavacana, Atmanepada",
+          "meaning": "holds, sustains, or bears",
+          "example_sanskrit": "vrikshah svashakhasu nidam trate.",
+          "example_english": "The tree holds (sustains) the nest on its branches."
+        },
+        {
+          "verb_form": "trāyate",
+          "grammar_trigger": "Karma-kartari / Bhavadi-vikarana extended form, Lat Lakara, Prathama Purusha, Ekavacana",
+          "meaning": "is sustained / holds oneself steady",
+          "example_sanskrit": "dharmi dharme svayam trayate.",
+          "example_english": "A righteous person holds himself firmly in dharma."
+        }
+      ]
+    },
+    "vritti_extracts": {
+      "madhaviya_dhatuvritti": "The Madhaviya Dhatuvritti notes 'tran dharane' as an Atmanepadi root with an unaccented Anit characteristic. The anubandha 'na' designates Atmanepada inflections throughout Sarvadhatuka and Ardhadhatuka forms, expressing the core semantic function of holding, maintaining, and supporting.",
+      "kshiratarangini": "Kshirasvamin in Kshiratarangini glosses 'tran dharane', grouping it among the roots denoting containment, bearing, and retention, highlighting its morphological retention of the long vowel in primary conjugational paradigms."
+    },
+    "meanings": {
+      "English": "to hold, to sustain, to bear, to maintain",
+      "Kannada": "dharisu, hididukollu, posparametersisu",
+      "Telugu": "dharincu, pattukonu, nilupukonu",
+      "Tamil": "thanguthal, yendruthal, tharikkuthal",
+      "Malayalam": "dharikkuka, thaanguka, kaividathe vakkuka",
+      "Hindi": "dharana karana, sambhalana, thame rakhana",
+      "Bengali": "dharana kara, sambhale rakha",
+      "German": "halten, tragen, unterstutzen",
+      "French": "tenir, porter, maintenir, soutenir",
+      "Russian": "derzhat, uderzhivat, sokhranyat",
+      "Chinese": "baochi, zhichi, fuchi"
+    }
   }
 ]
