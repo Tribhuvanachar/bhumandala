@@ -47,9 +47,17 @@ _translit = Transliterator(from_scheme="IAST", to_scheme="DEV")
 API = "https://sa.wikisource.org/w/api.php"
 UA = "bhumandala-sanskrit-library/1.0 (research/import; nonprofit Sanskrit digital library)"
 
-REF_RX = re.compile(r"।।\s*([\d०-९]+)\.([\d०-९]+)\s*।।")
+# Two verse-ref conventions found in the SAME work (Ahirbudhnyasamhita
+# switches from one to the other partway through, apparently different
+# Wikisource contributors transcribing different chapter ranges): Devanagari
+# danda + period ("|| 4.1 ||" written "।। 4.1 ।।") for most chapters, ASCII
+# pipe + hyphen ("|| 43-1 ||") from chapter 43 on. Found by checking WHY
+# those later chapters produced zero verses after the rate-limit bug was
+# already ruled out -- not assumed to be more rate-limiting.
+REF_RX = re.compile(r"(?:।।|\|\|)\s*([\d०-९]+)[.\-]([\d०-९]+)\s*(?:।।|\|\|)")
 DEVA_DIGITS = str.maketrans("०१२३४५६७८९", "0123456789")
 DASH_LINE = re.compile(r"-{3,}[ \t]*$")
+PAGE_MARKER_RX = re.compile(r"प[्ृु]?\.\s*[\d०-९]*\)")
 SENTINEL = "@@DGEREFMARKER@@"
 MANGALA_TEXT = "शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम्।\nप्रसन्नवदनं ध्यायेत् सर्वविघ्रोपशान्तये।।"
 
@@ -123,6 +131,10 @@ def parse_chapter(page_title, is_first_chapter=False):
     if is_first_chapter:
         poem = poem.replace(MANGALA_TEXT, "")
 
+    # 0. Strip print-edition page-number markers ("प्. ४१४)" = "p. 414)"),
+    # present only in the later, ASCII-pipe-convention chapters.
+    poem = PAGE_MARKER_RX.sub("", poem)
+
     # 1. Strip footnote apparatus blocks (line-based state machine).
     lines = poem.split("\n")
     out_lines = []
@@ -135,17 +147,31 @@ def parse_chapter(page_title, is_first_chapter=False):
             out_lines.append(line)
     poem = "\n".join(out_lines)
 
-    # 2. Strip editorial subheadings: tab-indented, no danda anywhere.
+    # 2. Strip editorial subheadings. The two conventions in this work
+    # format them differently -- tab-indented in chapters 1-42 (not always
+    # isolated by blank lines on both sides, so an isolation-only check
+    # regressed and let subheading text leak into verse 2.61's body when
+    # tried), plain isolated paragraphs with no indentation from chapter 43
+    # on. Kept as two separate rules, either one sufficient, rather than
+    # one replacing the other.
     lines = poem.split("\n")
     kept = []
-    for line in lines:
+    for i, line in enumerate(lines):
         s = line.strip("\t ")
-        if line.startswith("\t") and "।" not in line and s:
+        has_punct = ("।" in line) or ("|" in line)
+        if not s or has_punct:
+            kept.append(line)
+            continue
+        tab_indented_subheading = line.startswith("\t")
+        prev_blank = (i == 0) or not lines[i - 1].strip()
+        next_blank = (i == len(lines) - 1) or not lines[i + 1].strip()
+        isolated_subheading = prev_blank and next_blank
+        if tab_indented_subheading or isolated_subheading:
             continue
         kept.append(line)
     poem = "\n".join(kept)
 
-    # 3. Extract front-matter title line(s): no danda, no trailing dashes.
+    # 3. Extract front-matter title line(s): no danda/pipe, no trailing dashes.
     lines = poem.split("\n")
     title_parts, rest_lines, in_title_zone = [], [], True
     for line in lines:
@@ -154,7 +180,8 @@ def parse_chapter(page_title, is_first_chapter=False):
             if title_parts:
                 in_title_zone = False
             continue
-        if in_title_zone and s and "।" not in s and not re.search(r"-{2,}\s*$", s):
+        no_punct = "।" not in s and "|" not in s
+        if in_title_zone and s and no_punct and not re.search(r"-{2,}\s*$", s):
             title_parts.append(s)
             continue
         in_title_zone = False
@@ -181,7 +208,7 @@ def parse_chapter(page_title, is_first_chapter=False):
         prev_end = mm.end()
         ch, vs = to_int(mm.group(1)), to_int(mm.group(2))
         body = re.sub(r"\d+", "", body)
-        body = re.sub(r"\s+", " ", body).strip(" \n\t।")
+        body = re.sub(r"\s+", " ", body).strip(" \n\t।|")
         if body:
             units.append((ch, vs, body))
     return chapter_title, units
