@@ -1754,5 +1754,21 @@
       "pada_patha_plain": "वस्य:ऽभूयाय । वसुऽमान । यज्ञ: । वसु । वंशिषीय । वसुऽमान् । भूयासम् । वसु । मयि । धेहि ॥९.४॥",
       "sukta_name": "दुःख मोचन सूक्त"
     }
-  ]
+  ],
+  "commentary_sources": {
+    "whitney": {
+      "commentator": "W. D. Whitney & C. R. Lanman",
+      "work": "Atharva-Veda Saṃhitā (Harvard Oriental Series 7–8, 1905)",
+      "language": "en",
+      "via": "en.wikisource.org",
+      "licence": "Public domain (1905); Wikisource transcription CC BY-SA. Whitney's notes report Sāyaṇa's readings throughout."
+    },
+    "whitney_notes": {
+      "commentator": "W. D. Whitney & C. R. Lanman",
+      "work": "Atharva-Veda Saṃhitā (Harvard Oriental Series 7–8, 1905) — critical notes",
+      "language": "en",
+      "via": "en.wikisource.org",
+      "licence": "Public domain (1905); Wikisource transcription CC BY-SA. Whitney's notes report Sāyaṇa's readings throughout."
+    }
+  }
 }

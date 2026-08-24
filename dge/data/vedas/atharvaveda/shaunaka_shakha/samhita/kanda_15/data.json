@@ -3743,5 +3743,21 @@
       "pada_patha_plain": "अह्ना । प्रत्यङ् । व्रात्य: । रात्र्या । प्राङ् । नम: । व्रात्याय ॥१८.५॥",
       "sukta_name": "अध्यात्म प्रकरण सूक्त"
     }
-  ]
+  ],
+  "commentary_sources": {
+    "whitney": {
+      "commentator": "W. D. Whitney & C. R. Lanman",
+      "work": "Atharva-Veda Saṃhitā (Harvard Oriental Series 7–8, 1905)",
+      "language": "en",
+      "via": "en.wikisource.org",
+      "licence": "Public domain (1905); Wikisource transcription CC BY-SA. Whitney's notes report Sāyaṇa's readings throughout."
+    },
+    "whitney_notes": {
+      "commentator": "W. D. Whitney & C. R. Lanman",
+      "work": "Atharva-Veda Saṃhitā (Harvard Oriental Series 7–8, 1905) — critical notes",
+      "language": "en",
+      "via": "en.wikisource.org",
+      "licence": "Public domain (1905); Wikisource transcription CC BY-SA. Whitney's notes report Sāyaṇa's readings throughout."
+    }
+  }
 }

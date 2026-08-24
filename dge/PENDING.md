@@ -419,6 +419,14 @@ complete record, not just a live queue.
 
   **~~(3) whether the `hrishikeshrt/chanda` structured-metre CSVs are worth ingesting despite their AGPL-3.0 licence~~ — approved by the project lead (case-by-case) and done, same day.** `dge/data/vedanga/chandas/data.json` now holds the full 282-entry vrutta database (190 sama, 8 ardhasama, 5 vishama, 42 upajāti, 10 mātrā-vṛtta, 27 akṣara-jāti names), built by `tools/chandas/build_vrutta_db.py` from a pinned vendor copy (`tools/chandas/vendor/`, commit `3a9607c`) — the first AGPL-3.0 content this project carries, clearly marked as such (`vendor/NOTICE.md`, SPDX headers on both new `.py` files, everything else in the repo stays Apache-2.0). `tools/chandas/identify_vrutta.py` wraps the upstream `chanda` PyPI package for actual metre identification, not just lookup, and was verified against real verses, not assumed: the Gītā's opening pada (धर्मक्षेत्रे कुरुक्षेत्रे...) correctly identifies as अनुष्टुभ्, a Bhartṛhari verse correctly identifies as शार्दूलविक्रीडित. This is classical (laukika) vṛtta only — it does not resolve the earlier, harder, still-open Vedic-chandas problem in `05_chandas_autodetect_FAILED.py`, which is a different kind of metre entirely. **Not done:** batch-tagging the ~67,000-entry Kāvya corpus with detected metre per śloka — a natural next use of this tool, scoped separately since that corpus lives on a different branch/CDN than `main`.
 
+  **Follow-up, 20 Aug: a clean-room Apache-2.0 alternative now exists alongside the AGPL vendor copy, at `tools/chandas_native/`.** Same idea — gaṇa-based scansion + a named-metre database — but derived from scratch from the standard gaṇa system (public domain, centuries older than any software), not from `hrishikeshrt/chanda`'s CSVs or code. Deliberately smaller, not padded to match: 13 sama-vṛtta (the ones that actually recur through classical kāvya, not the full 190), a rule-based Anuṣṭubh handler, 16 mechanically-generated Indravajrā/Upendravajrā upajāti combinations (vs. 42 individually-named ones), 2 mātrā-vṛtta, akṣara-jāti names 1-20. No ardhasama/vishama vṛtta yet — those need primary-source checking, not recall. All 13 sama-vṛtta lakṣaṇa strings were cross-checked against the AGPL vendor's own values as a pure QA step and matched exactly (expected, since these are old public facts derived independently via the gaṇa table, not copied from the vendor CSVs) — `yati` was dropped instead of guessed, since the vendor's segment-length convention didn't reproduce reliably from recall. `tools/chandas_native/verify.py` checks 3 real, independently-recalled verses (Gita 1.1, two Bhartṛhari verses) against their known metres, all passing. **Decision needed, not made here:** whether/when to retire the AGPL vendor copy in favour of this one — right now that would be a coverage regression (13 vs. 190 sama-vṛtta), so both directories coexist; extending the native one further means checking new entries against a real primary source the way these 13 were checked, one at a time, not transcribing more of the vendor's data.
+
+  **Follow-up, 21 Aug: a scholarly review of a Gemini-assisted extension pass, fact-checked and mostly incorporated.** A prompt asking Gemini to extend `tools/chandas_native/` from primary sources (Vṛttaratnākara, Chandomañjarī) was drafted and run; the project lead then independently checked Gemini's output against accessible editions/tables before anything touched the database — the same posture this tool has taken throughout, applied to a third party's output instead of Claude's own. That review found: 8 new sama-vṛtta (शालिनी, रथोद्धता, स्वागता, भुजङ्गप्रयात, स्रग्विणी, प्रहर्षिणी, रुचिरा, हरिणी) and 3 ardhasama-vṛtta (पुष्पिताग्रा, वियोगिनी/सुन्दरी, अपरवक्त्र) with correct gaṇa formulas; 2 more mātrā-vṛtta (उपगीति, उद्गीति); a caveat that Vaitālīya/Aupacchandasika need structural fields beyond a matra-per-pada count, not attempted; a caveat that akṣara-jāti 21-26 names, while plausible, need edition-specific citation rather than being treated as fixed — and, as the headline finding, that **Gemini's 14 named upajāti combinations (Siddhi/Prabhā/Mandā/Kāntā/Kāmā/Saubhāgyā/Pūrṇā/Bhadrā/Jayā and others) do not match the standard Vṛttaratnākara nomenclature**, which the review gave as Kīrti/Vāṇī/Mālā/Śālā/Haṃsī/Māyā/Chāyā/Bālā/Ārdrā/Bhadrā/Premā/Rāmā/Ṛddhi/Buddhi instead.
+
+  Before merging any of this, Claude re-verified independently rather than taking either party's word: (1) recomputed all 11 new gaṇa-formula entries' syllable/guru/laghu/mātrā counts from `build_db.py`'s own gaṇa table — all matched the review's stated numbers exactly, with one minor catch of its own (the review's prose for Bhujaṅgaprayāta said "8 laghus, 4 gurus," which is backwards — the correct 4 laghu / 8 guru split is what its own stated 20-mātrā total actually requires, and is what got recorded); (2) searched independently for the Upajāti naming and found a *third*, independently-scholarly-looking source (ancient-buddhist-texts.net's Upajāti Varieties table, explicitly citing VR) that **also disagreed with the reviewer's own supplied table** — e.g. reviewer said Kīrti = इन्द्रवज्रा-उपेन्द्रवज्रा-उपेन्द्रवज्रा-उपेन्द्रवज्रा, the third source said the exact complement, उपेन्द्रवज्रा-इन्द्रवज्रा-इन्द्रवज्रा-इन्द्रवज्रा. Rather than trust either on authority, Claude fetched that third source's raw laghu/guru prosodic symbols (⏑/−) verbatim for 4 of the 14 names (Kīrti, Vāṇī, Ārdrā, Buddhi) and decoded them by hand against this file's own gaṇa table — all 4 matched the third source's table exactly, unambiguously, at the level of individual syllable weights, not just a name label. The reviewer's table was therefore **not** used; the third source's full 14-name table was adopted instead (4/14 individually symbol-verified, the other 10 taken from the same page on the strength of that agreement — see `build_db.py`, the `NAMED_UPAJATI` comment, for the full account and citation). Akṣara-jāti 21-26 got the same independent-search treatment and came out worse, not better: a third search turned up a *fourth* mapping that was internally inconsistent with itself (assigned syllable-count 22 to two different names, skipped 21 and 24) — so 21-26 stayed out entirely rather than picking a source to trust.
+
+  Net result: `tools/chandas_native/data.json` grew from 13 to 21 sama-vṛtta, gained an ardhasama-vṛtta category (3 entries), gained 2 mātrā-vṛtta, and the upajāti mixed forms now carry sourced traditional names instead of pattern-only labels — all still smaller than the AGPL vendor's 282-entry catalogue, still not padded to match it, and every new entry has a stated verification method. This is also a concrete demonstration of why "check it against a primary source" was the right bar to set: three different attempts at the same specific fact (Upajāti naming, then akṣara-jāti 21-26) produced three-to-four *different* answers before one was actually nailed down at the symbol level — confident-looking citations kept disagreeing with each other, not just with unverified recall.
+
 - **~~The published site is 1,091 MB against GitHub Pages' 1 GB limit~~ — down to 999 MB, and every decision below is the project lead's, taken 18 Aug.** Under the limit, but by 1%, so the next few granthas put it back over. What was done:
   - **Archives deleted (74.5 MB)** — `mahabharata.7z.001/.002`, `smv-assets-audio.7z.001/.002/.003`, `smv-assets-text*.zip`. All in git history. `vedavani-assets.zip` stays: `vedavani-extract.yml` unzips it at CI time.
   - **`dge/data/kosha` kept (61 MB), by decision** — the site reads the full corpus from `bhumandala-kosha-data`, so what stays in-repo is now a fallback for when that CDN is unreachable rather than dead weight. Worth remembering when the next CDN failure is diagnosed.
@@ -1214,6 +1222,36 @@ complete record, not just a live queue.
   pages that failed. Needs those specific pages (or the full PDF).
 
 ## Pending on this session / next Claude session
+
+- **Adi Shankaracharya's Prasthanatrayi bhāṣya corpus imported — `darshana/vedanta/advaita/shankara_bhashya/**` (24 Aug), and a real transliteration-corruption bug caught and fixed before it shipped.** Asked to import the Shankaracharya bhāṣya corpus alongside a Rāmānuja source. `importers/shankara_bhashya.py` (already deployed, blocked earlier only by GRETIL's network block, not a permission question) fetches Brahmasutra Bhashya + six Upanishad bhāṣyas (Isha, Prashna, Mandukya+Gauḍapāda Kārikā, Taittiriya, Chandogya, Brihadaranyaka) + Aitareya + Gita Bhashya from GRETIL corpustei/Zenodo — GRETIL turned out reachable from this session, so the run went direct rather than via the GitHub Actions workaround.
+  - **First run (opened as PR #138) shipped GRETIL editorial prose as if it were Sanskrit.** Checked the actual written `data.json` content directly rather than trusting a clean CI run — found English GRETIL page-header/editorial text ("...GRETIL version has been converted... TEI encoding by mass conversion...", "Sanskrit corpus Text Īśa-Upaniṣad... with the commentary ascribed to Śaṃkara") transliterated character-by-character into nonsense Devanagari, because the existing junk filter only checked the first 120 characters of each unit and this aside sits mid-document.
+  - **Second, independently-found bug, same importer**: a *different* GRETIL quirk — inline structural section markers glued into the middle of a unit's body, with real Sanskrit on both sides in the same string. Two shapes, found by direct inspection of freshly-fetched source text: divider-punctuation runs with an attached label (`____ START MandUp 1`, `____ BhG 13`) in mandukya/brahmasutra_bhashya/gita_bhashya, and a bare `start <ref> <num>` label dropped at nearly every verse boundary with no divider at all (544 occurrences in chandogya alone) in prashna/aitareya/chandogya/brihadaranyaka. Neither shape was caught by the first fix.
+  - **Both fixed in `importers/shankara_bhashya.py`** (`HEADER_JUNK` now strips to the last match rather than dropping the whole unit; `STRUCTURAL_DIVIDER`/`INLINE_START_LABEL`/`BARE_DIVIDER_RUN`/`EDITORIAL_NOTE` strip the second class in place). Verified directly against freshly re-fetched source for all 9 works (4,486 units) before trusting it: 0 residual divider/label/editorial-note leaks, 0 English-stopword flags, 0 units silently dropped — including ruling out false positives like the genuine Sanskrit vocative particle *are* (bṛhadāraṇyaka's Maitreyī dialogue) and genuine Sanskrit bracket section-headings (brahmasutra_bhashya), which a cruder filter would have wrongly eaten.
+  - Re-ran the corrected importer directly (not via GitHub Actions — GRETIL was reachable), committed straight to `claude/copyleft-licensing-dg-zmk9ac`, ran `tools/validate_data.py` (0 errors) + `tools/register_layers.py` + `tools/gen_library_status.py` per the project's own post-import convention, and closed PR #138 as superseded rather than merging the buggy content or trying to reuse/rebase its branch against a different base.
+  - Kena/Katha/Mundaka bhāṣyas remain genuinely unavailable (not in GRETIL's corpus at all, confirmed in the importer's own header comment) — left as a follow-up needing the sanskritdocuments.org ITX path wired in.
+  - **The Rāmānuja half of the same ask, now done as Phase 1 (24 Aug) — `darshana/vedanta/vishishtadvaita/ramanuja_bhashya/**`, 711 units.** `importers/ramanuja_mula.py` clones `github.com/vishvasa/ramanujiyam` (branch `content` — the Hugo site's own source tree; anonymous git read works from this sandbox even where the GitHub API doesn't) and imports the five works Ramanuja composed himself: Sri Bhashya (180 units), Vedanta Dipa (157), Vedanta Sara (149), Vedartha Sangraha (198, split on the source's own ~100 topical headers per file rather than left as two ~60k-character blobs), Sharanagati Gadyam (27).
+    - **Deliberately narrow scope, and why.** The site's `rAmAnujaH` tree turned out to hold far more than Ramanuja's own text once actually surveyed directory-by-directory — roughly fifteen later ācāryas' sub-commentaries on the Sri Bhashya (Sudarshana Sūri's Śrutaprakāśikā, Vedānta Deśika's Adhikaraṇa Sārāvalī, Appayya Dīkṣita, Meghanādāri, etc.), translations into English/Hindi/Tamil, and — checked directly, not assumed — **at least one flatly modern, still-in-copyright work**: K.E. Devanathan's "Śrībhāṣyaprakāśaḥ" (2006, Nrisimha Priya Trust, Chennai — author, publisher and year all named in that folder's own `_index.md`). The site owner Vishwas Vasukijah's personal permission ("take what you like") is permission for what's genuinely his to give; it can't clear a living author's separate, still-live copyright on a book he merely hosts a copy of. That whole secondary-commentary layer needs a per-author copyright/date check before any of it can be imported — genuinely large (~3,700 files under `shrI-bhAShyam` alone) and left as a deliberate follow-up below, not attempted in this pass.
+    - Also excluded, for a narrower reason specific to one file: `kriyA/rAmAnujaH/nitya-granthaH` (Ramanuja's daily-worship manual). Its only copy on the site interleaves Francis X. Clooney's copyrighted academic notes and the site owner's own editorial framing directly into the same file as the mula text, under explicit "विश्वास-प्रस्तुतिः"/"FX Clooney - Notes" `<details>` labels — needs per-block filtering this importer doesn't yet do.
+    - `shrI-bhAShyam/mUlam` turned out to carry **two parallel editions of the same Ramanuja text** on this site (`ma`/`ra`) — confirmed by direct comparison (both open "janmādyadhikaraṇam" identically) — differing only in orthography (`ra`'s transcription conflates ब/व, a South-Indian-source artifact) and whether traditional adhikaraṇārtha topic-summary headers are present. `ma` used for both reasons.
+    - **Three content-quality bugs caught and fixed while building the parser**, same "verify before trust" discipline as the shankara_bhashya fix above: Markdown link syntax (`[quoted verse](url)`, two occurrences — kept the quote, dropped the URL) and the site's own `+++(gloss)+++` shortcode leaking through unstripped; an inline English critical-apparatus note on manuscript variants ("M 3 reads the following verse..."); and a scribal Tamil donor-dedication appended after Vedanta Sāra's actual colophon (past its own "śāstraṃ ca samāptam" line — cut there). Verified 0 residual artifacts across all 711 units directly against the written `data.json` files before trusting the import, not just off a clean `validate_data.py` run.
+    - `library.json`/`taxonomy.json` regenerated via `tools/audit_library.py --fix` — this is a brand-new taxonomy branch (`vishishtadvaita` didn't exist before), so `register_layers.py` alone (sufficient for adding leaves under an existing branch, as with the shankara_bhashya re-run above) wasn't enough here.
+    - **Phase 2, done same day (24 Aug) once the project lead said to import the secondary-commentary layer regardless — "we'll see how we can render."** `importers/ramanuja_subcommentaries.py` adds 819 more units across six works, but NOT all fifteen: each of the ~15 sub-commentary authors was individually researched (web search against archive.org records, matha lineage pages, biographical sources) before inclusion, since "import them all" can't mean importing someone else's still-live copyright along with it. That research paid for itself immediately — it caught two authors that read as classical from the name alone but are actually 20th/21st-century:
+      - **"Mukkur Yatīndra"** (`44a-mukkUr-yatiH_brahma-sUtrArtha-padya-mAlikA`) is the 44th Ahobila Maṭha pontiff, **d. 1992** — in copyright, excluded. Would have been wrongly trusted as ancient without checking.
+      - **"Perukkāraṇai Chakravartī"** — his *Śrī Bhāṣya Śārīraka Mīmāṃsā Bhāṣya* Vol. 1 was published in **2000** by the same publisher (Nrisimha Priya Trust) as the Devanathan 2006 book already excluded above — same category, excluded.
+      - **Included, confirmed public domain**: Appayya Dīkṣita (1520–1593, *Naya Mayūkha Mālikā*, 156 units), Raṅgarāmānuja (16th/17th c., three works — *Śārīrika Śāstrārtha Dīpikā*, *Viṣaya Vākya Dīpikā*, *Bhāva Prakāśikā* — 360 units total; the last is physically filed on the site under `sudarshana-sUriH/`, attributed here to its real author per its own content, not its folder path), Sudarshana Sūri (c. 13th–14th c., *Śruta Pradīpikā*, 137 units), Vedānta Deśika (1268–1369, *Adhikaraṇa Sārāvalī*, 166 units — extracted from a source file that interleaves the root verse with two OTHER, unresearched commentators' glosses under the same `<details>` heading per verse; only the verse's own "मूलम्" layer is taken).
+      - **Still excluded, each for a specific recorded reason** (see the importer's own module docstring for the full list): Uttamūr Vīrarāghavācārya (d. 1981/83, in copyright, both his own folder and his editorial apparatus nested inside Sudarshana Sūri's); Deśikāryaḥ/Lakṣmīpura Śrīnivāsa/Rājagopāla/Rāmānuja Tātāryaḥ — each either has no confirmed death date or (Rāmānuja Tātāryaḥ specifically) collides with a confirmed-modern namesake (N.S. Ramanuja Tatacharya, 1928–2017) — held out on the same standard as the research itself: not confidently dated yet = not imported yet; Seneśvara's "ṭīkā" turned out to be a modern **English** exposition, not his own Sanskrit commentary at all — no genuine Sanskrit text there to take; Meghanādāri's folder turned out to hold only OCR title-page noise plus a duplicate of Ramanuja's own root text, not his distinct commentary.
+      - Two content bugs caught mid-build, same discipline as everywhere else in this project: George Thibaut's (1904, PD) English SBE translation interleaved into Sudarshana Sūri's Śruta Pradīpikā source, and a recurring "is not available." OCR-gap placeholder in the Bhāva Prakāśikā source — both stripped. Verified 0 residual artifacts across all 819 units against the written files before trusting it.
+      - **Still open for a later pass**: the four unconfirmed-author works above (need actual death dates, or a positive identification ruling out the modern namesake, before they can be added); Sudarshana Sūri's other major work, Śruta Prakāśikā (present on the site as two large files with no clean per-adhikaraṇa split point and self-flagged `[[TODO: aparishkRtam]]`, i.e. the source itself calls it unrefined — a parsing-effort problem, not a copyright one); the 34th Ahobila Yati's and "Kumāra Varada"'s glosses inside the Adhikaraṇa Sārāvalī file (left ungathered pending their own identification); and Nitya Grantha's Clooney-interleaved file, per-block filtering still not built.
+    - **Phase 3, done same day (24 Aug): the project lead reviewed the above and said to stop gating on dates or authors' timelines entirely — "have all the content within our DG project… will take care of licenses later on, by writing personal emails and convincing if required."** That's an explicit decision on his part to take the licensing risk on personally rather than have it block the import; it does not relax the *content-quality* bar Phases 1/2 also applied. `importers/ramanuja_extended.py` adds 18 more works, 994 units: Mukkur Yatīndra, Rājagopāla, "Rāmānuja Tātāryaḥ", Deśikācārya, Devanathan (the 2006 book itself, now included), Lakṣmīpuram Śrīnivāsācārya (three works — a THIRD independent "Nyāya Kalāpa Saṅgraha", confirmed by direct comparison to be genuinely different text from Seneśvara's and "Rāmānuja Tātāryaḥ"'s same-titled works, not a duplicate), Perukkāraṇai Chakravartī (the 2000 book, now included), Seneśvara (root verses only — its "ṭīkā" is still excluded, but now for being non-Sanskrit content rather than for the date question), Sudarshana Sūri's Śruta Prakāśikā (2 units — v1/v2, no clean split point found, left as one unit apiece; a finer split is still a follow-up), Uttamūr Vīrarāghavācārya (his own prose works + his edition's introduction to Śruta Prakāśikā — his tabular apparatus, topic-index tables and errata lists, still excluded as non-prose, not for his 1981/83 death date), Vedānta Deśika's other two Adhikaraṇa Sārāvalī commentators (34th Ahobila Yati, Kumāra Varada — 166 units apiece), and Nitya Grantha (label-extracted to its own "विश्वास-प्रस्तुतिः" mula layer — Clooney's notes and the site owner's separate "विश्वास-टिप्पणी" aside are still excluded, but now because they aren't Sanskrit mula text, not for Clooney's copyright specifically) plus Rāmabhadrācārya's commentary on it.
+      - **Abhinava Raṅganātha's Gūḍhārtha Saṅgraha is the one work NOT imported even under this broader approval** — checked directly and found genuine OCR corruption (stray Latin letters and digits spliced into the Devanāgarī, e.g. "r 1 7 J", "IS क") that no markup-stripping regex can safely repair. A data-quality exclusion, not a copyright one — the project lead's approval covers licensing risk, not unreadable source text.
+      - **Four content bugs caught building this pass**, folded into `ramanuja_mula.py`'s shared `strip_markup` (and re-verified against Phases 1/2's already-committed output afterward — unit counts unchanged, no regression): a standalone `source: [TW](url)` citation line that survived as bare "source: TW" once the URL-stripper ran; Markdown footnote syntax (`[^224]: ...`) in Devanathan's real academic apparatus; an asymmetric `+++(gloss)` shortcode in Nitya Grantha that opens but never closes; and a stray unpaired `**`/`***` left over from a source with an odd total bold-marker count. **One near-miss caught before it shipped**: the first version of that last fix also stripped single `*` characters — which turned out, on checking against already-imported text, to be the printed editions' own genuine footnote-reference markers, not junk. Narrowed to 2–3 asterisks only before committing.
+      - **Two residual imperfections accepted as documented, bounded limitations** rather than chased further: a publisher's front-matter block (title page + a 1989 funding notice) at the start of Śruta Prakāśikā's v2 unit, and a stray "www" OCR-noise token in Uttamūr's Bhāṣyārtha Darpaṇa — both single occurrences inside otherwise large, valuable texts with no clean structural boundary to excise them at.
+      - Total across all three phases: **2,524 vishishtadvaita units**, `tools/validate_data.py` reports 0 errors.
+    - **Three follow-ups from this thread, worked same day (24 Aug).**
+      1. ~~Kena/Katha/Mundaka bhāṣyas unavailable~~ **Kena done.** `run_kena()`/`parse_kena_itx()` (new, in `importers/shankara_bhashya.py`) fetches sanskritdocuments.org's `.itx` copy — a LaTeX+ITRANS file, a different source format from every other work in that importer, so it gets its own parse path rather than joining the GRETIL-oriented pipeline. Six distinct macro/artifact issues found and fixed by direct inspection (same discipline as the original HEADER_JUNK bug): `\ldq{}`/`\rdq{}` quote macros, a one-off explicit-anusvara `{\m+}` macro, `\-` hyphenation points, escaped punctuation, a `\chapter{TippaNI}` heading introducing the endnotes appendix, bare `(N)` footnote markers (kept distinct from genuine citations, which always carry text inside the parens), and the file's own closing watermark. 5 units, 0 residual artifacts. **Katha and Mundaka remain unavailable** — checked sanskritdocuments.org directly, confirmed it hosts only their root text; the only bhāṣya copies found are scanned books on archive.org needing OCR, a materially bigger job than a fetch.
+      2. ~~Śruta Prakāśikā left as 2 giant blobs~~ **Finer split done — 148 units.** The source has essentially no Markdown structure (2 "### " headers total across ~3.8M characters), but does carry the original printed edition's own running page-headers — a Devanagari `१-४-३.` adhyaya-pada-sūtra reference plus a short topic phrase, recurring on nearly every page — found by inspecting a middle slice of the file directly rather than trusting the `[[TODO: aparishkRtam]]` flag as the last word. Splitting on that incidentally also solved the previously-accepted English-front-matter residual noise (item below): the whole publisher's-notice block sits before the first marker and simply falls into the discarded lead-in segment.
+      3. ~~"Publisher's front-matter block… no clean structural boundary to excise them at"~~ **Resolved as a side effect of fix #2 above**, not separately.
+      4. **Abhinava Raṅganātha's Gūḍhārtha Saṅgraha — searched for a clean alternative source, none found.** The site's own note attributes it only to initials "GS" and references it answering a "popular meme" — genuinely reads as a private or limited-circulation modern composition, not a widely published text with other digital copies to fall back on. The corruption pattern (stray Latin letters spliced mid-word into Devanagari) looks like a legacy Sanskrit-font encoding mismatch in Vishwas's own copy specifically, not something a different source would sidestep. Still excluded; would need the project lead's own copy or contact with "GS" directly to recover, not further searching.
 
 - **Selection tooltip (#actionTooltip) revamped to stop colliding with the native browser selection toolbar, and the global-search scope-picker's overflow bug fixed, 24 Aug (project lead's follow-up live-testing report after the exact-match merge: "it needs revamping. contextual menus" plus 8 fresh screenshots).** Two real, screenshot-confirmed issues investigated and fixed:
   - **The scope-picker popup ("Everything ▾" etc., built as a custom button+popup-list in the search-scope-dropdown entry further down this file) was clipped off the right edge of the screen on a narrow phone** — the button's own label truncated to "Eve…", and the opened popup's option list all cut off mid-word ("Āgam", "Darś", "Dasa", …). Root cause, found by reading the CSS: `.dge-gs-input{flex:1}` had no `min-width:0`, so on a narrow viewport the search input refused to shrink below its intrinsic content width (the classic flexbox-input gotcha), pushing the two `flex:none` schemewrap buttons (script picker + scope picker) and their popups past the panel's right edge, where `.dge-gs-panel{overflow:hidden}` clipped them. One-line fix: `min-width:0` on `.dge-gs-input`. Verified in a real headless Chromium session at 390px width with 15 section names (including the longest ones) — button and every popup option now fully within the viewport, none clipped.
@@ -2228,6 +2266,1031 @@ complete record, not just a live queue.
 - Coordinate with parallel Sarvamoola/search work — avoid conflicts
   (standing item, session task list #39).
 
+- **DCS/skrutable integration, scoped and piloted, 23 Aug.** Asked to
+  incorporate the Digital Corpus of Sanskrit (DCS) and the `skrutable`
+  library (github.com/tylergneill/skrutable) and fill gaps against them,
+  with a sync pipeline. Researched both before building anything:
+  - **DCS is CC-BY 4.0** (attribution only, confirmed directly from the
+    `ambuda-org/dcs` mirror's README, not assumed) — 253 texts, ~1.5 GB in
+    the primary mirror (`OliverHellwig/sanskrit`), word-level
+    morphologically-**disambiguated** CoNLL-U annotation of real running
+    text — genuinely different value from the `vidyut`-based morphology
+    tooling already in `tools/build_morphology.py`, which generates
+    *possible* paradigmatic forms rather than resolving *attested* ones.
+    The live DCS website (`sanskrit-linguistics.org`) was down (503 on
+    every page checked) during this session — not used; the GitHub mirrors
+    are the actual source of truth regardless.
+  - **skrutable is CC BY-SA 4.0** (share-alike) — flagged the same way
+    every copyleft source has been in this project. It directly targets
+    two gaps already logged as open: sandhi/compound splitting
+    (`dge/VEDAWEB_IMPORT_STATUS.md` calls this "a computational-linguistics
+    problem, not a sourcing problem," no candidate chosen) and Vedic-metre
+    identification (explicitly abandoned in
+    `dge/veda_toolkit/superseded/05_chandas_autodetect_FAILED.py` for poor
+    accuracy). **Project lead's decision: use as an unmodified pip
+    dependency only** (`pip install skrutable`), not vendored/adapted code
+    — same relationship the repo already has with `vidyut`. One dead end
+    worth recording: DCS ships `dcs/data/rigveda/Arnold/arnold-vedic-metre-*.txt`,
+    which sounds like it could resolve the abandoned Vedic-chandas problem
+    but on inspection is E.V. Arnold's (1905) lexical dating criteria for
+    old vs. late Rigvedic strata — not per-verse metre data at all. Checked
+    before being written down, not assumed from the filename.
+  - **Project lead's decision on scale: pilot first**, not a full 253-text
+    import. Built at `tools/dcs/`: 139 verses of Sūryasiddhānta (2 of its
+    chapters, all DCS carries of this text) imported into the
+    previously-empty `vedanga/jyotisha` taxonomy leaf
+    (`dge/data/vedanga/jyotisha/data.json`, `library.json`'s `populated`
+    flipped `true`), converted from DCS's CoNLL-U via skrutable's IAST→
+    Devanagari transliterator (the approved pip-dependency use). Chosen
+    over Āyurveda/Tantra texts specifically because `jyotisha` already had
+    a settled taxonomy slot, unlike Āyurveda/Kāmaśāstra placement, which
+    is a separate open question above. Cross-checked against
+    `tools/chandas_native/`: 14/20 of the first 20 verses scan as
+    Anuṣṭubh, the expected metre for a śāstra text — a real correctness
+    check on the transliteration, not just valid-JSON.
+  - **Not done, deliberately:** the other 252 DCS texts, an ongoing sync
+    pipeline (premature before there's a real imported corpus to sync),
+    and any taxonomy placement decision for DCS's Āyurveda/Tantra/Śaiva
+    Āgama texts. `tools/dcs/README.md` records what scaling this further
+    actually requires, so it doesn't need re-deriving.
+
+- **Same-day follow-up, still 23 Aug: a second DCS import, a real
+  duplication near-miss caught, and a load-bearing discovery about
+  skrutable's sandhi/compound splitter.** Asked to populate more DCS
+  content and wire sandhi/samasa splitting into the reader as a
+  click-a-word feature.
+  - **Checked for duplication before importing more — and it mattered.**
+    `library.json` was scanned for `populated: false` leaves under
+    `purana/` (68), `darshana/` (185), and `agama/` (17), then
+    cross-referenced against DCS's text list, rather than assuming every
+    DCS text is new content. This caught a real near-miss: DCS's
+    Mahābhārata and Rāmāyaṇa would have collided with the genuine mūla
+    text already `populated: true` in `itihasa/` — importing them would
+    have created duplicate/conflicting granthas, not new coverage. Not
+    done, for that reason.
+  - **Second import done: `Śivasūtra`**, all 74 sutras across its 3
+    unmeṣas (DCS's complete text, not an excerpt), into the previously-
+    empty `agama/pancharatra/shaiva_agama/data.json` — same safe pattern
+    as the Sūryasiddhānta pilot, found via the duplication check above.
+    `tools/dcs/dcs_common.py` factors out the CoNLL-U parsing so this and
+    the next import share code; verified byte-identical re-generation of
+    the jyotisha output after the refactor. Content spot-checked
+    correct, not just valid JSON: sutra 1.1 is चैतन्यमात्मा ("caitanyam
+    ātmā"), the actual, well-known opening line of the text.
+  - **A rough keyword pass over DCS's 253 texts against `library.json`**
+    (not a real classification — see `tools/dcs/README.md` for the
+    caveat) found more candidate empty-leaf matches worth checking
+    properly: `Matsyapurāṇa` (but DCS carries the **full 174-chapter
+    text** — a much bigger job than either import so far), several
+    Purāṇa sub-leaves, and a `Vaiśeṣikasūtra`/`Yogasūtra`/`Sāṃkhyakārikā`
+    cluster under `darshana/`. 184/253 stayed unclassified by the rough
+    pass. None of these are imported yet.
+  - **The sandhi/samasa splitting request hit a genuine blocker, surfaced
+    rather than built around.** Tested `skrutable.splitting.Splitter`
+    directly against the specific gap named — visarga sandhi and
+    consonant (hal) sandhi, both said to be missing from the existing
+    Vidyut-based tooling — and it handles both correctly: `rāmo
+    gacchati` → `rāmaḥ gacchati` (visarga), `taddhi` → `tat hi` and
+    `sajjanaḥ` → `sat-janaḥ` (hal sandhi), all verified by direct testing,
+    not assumed from the README. But reading `splitting.py` turned up
+    something that changes what's safe to build on this: **the splitter
+    is not local computation** — both its models are thin wrappers over
+    remote third-party HTTP APIs (`dharmamitra.org`'s tagging endpoint by
+    default, or an older `2018emnlp-sanskrit-splitter-server.duckdns.org`
+    research demo). Every call in the tests above was a live network
+    request to `dharmamitra.org`. This is unlike everything else used
+    from skrutable so far (`transliteration.py`, `meter_identification.py`
+    — both confirmed by grep to be pure local code, no network calls) and
+    unlike `vidyut`, which runs fully offline. Two real consequences,
+    neither resolved here: (1) a "click any word, get its sandhi split"
+    feature would mean every DG site visitor's clicked word gets sent to
+    `dharmamitra.org` in real time — a live third-party dependency and a
+    data-sharing fact about the site that's worth deciding on knowingly,
+    not wiring in silently; (2) precomputing splits across the corpus
+    (the kāvya branch alone has ~95,000 entries) means tens or hundreds of
+    thousands of requests against someone else's server, with no
+    confirmed terms of service for bulk automated use — the kind of load
+    a considerate caller batches and paces, not fires all at once. Neither
+    the live-click feature nor a bulk precompute pass was built pending a
+    decision on this trade-off.
+
+- **Same-day follow-up: the live click-to-split feature, built.** Project
+  lead chose live click-to-split over precompute or holding off. Built at
+  `dge/js/sandhi.js`, wired to a new "🔗 Sandhi" button alongside the
+  existing 🔤 Shabda / 📚 Dhātu / 🔍 Where else word-tools in
+  `#actionTooltip` (`dge/index.html`) — same "real structured data, not an
+  LLM guess" philosophy as those three. Selected text is transliterated to
+  IAST client-side (Devanagari input isn't reliably recognized by the
+  API — confirmed by testing, see below), sent to `dharmamitra.org`'s
+  `/api-tagging/tagging-parsed/` endpoint, and the `unsandhied` field per
+  word — literally the answer to "give me the sandhi split" — is shown
+  transliterated back to the reader's active script, alongside lemma and
+  grammatical tag. Session-only client-side cache so re-opening the same
+  selection doesn't re-fetch. `dge/index.html`'s version meta and
+  `core.js`'s `DGE_EXPECTED_HTML_VERSION` both bumped to 4.64.0 (structural
+  HTML change), per that file's own stated convention.
+  - **What was actually verified, stated precisely rather than claimed
+    wholesale:** (1) the exact request shape sandhi.js constructs was
+    tested directly against the live API via `curl` and confirmed correct
+    on the specific gap named — `rāmo gacchati` → `rāmaḥ gacchati`
+    (visarga), `taddhi` → `tat hi` and `sajjanaḥ` → `sat-janaḥ` (hal/
+    consonant sandhi) — plus discovered a real precondition: a single word
+    with no sentence context resolves less reliably than a full clause
+    (`rāmo` alone stayed `rāmo`, unresolved), so the feature sends whatever
+    span the user actually selected rather than trying to isolate a single
+    word. (2) The full UI flow was driven end-to-end in a real headless
+    browser (Playwright, since no project-specific run skill exists yet —
+    worth generating one via `/run-skill-generator` next time this app
+    needs driving): text selection, the tooltip, the modal opening,
+    transliteration, and the error-handling path all confirmed working via
+    screenshots. (3) **The live network call itself could not be completed
+    inside this session's sandbox** — Chromium launched via Playwright
+    couldn't reach the public internet at all (`fetch()` to `example.com`
+    failed identically to `dharmamitra.org`, isolating this as the
+    sandboxed browser subprocess's own network access, not anything
+    dharmamitra-specific or a bug in this code) — so the graceful-failure
+    path is what got observed live, not a live success. Given (1) and (2)
+    both check out and the failure mode in (3) is demonstrably
+    environment-specific, this is shipped with high confidence, not
+    unverified — but the one thing not literally watched happen in a
+    browser is a live person's browser completing this exact fetch to
+    dharmamitra.org, so it's worth a real check after deploy.
+
+  - **New source flagged, licence checked, not used: ByT5-Sanskrit, the
+    model actually behind dharmamitra.org.** Asked whether "the logic"
+    could be replicated locally. It isn't a rule engine to reimplement —
+    it's a 0.6B-parameter ByT5 transformer (`chronbmm/sanskrit5-multitask`
+    on HuggingFace, base model `buddhist-nlp/byt5-sanskrit`), fine-tuned
+    on DCS data by Sebastian Nehrdich and Oliver Hellwig (DCS's own
+    author) with Kurt Keutzer, published EMNLP 2024 Findings
+    (arXiv:2409.13920, "One Model is All You Need: ByT5-Sanskrit").
+    Inference code is public at `github.com/dharmamitra/byt5-sanskrit-
+    analyzers` (the `applications/` folder runs the model locally, given
+    the weights) — genuinely a better path than a hand-written rule-based
+    splitter would be, since sandhi/compound segmentation is ambiguous
+    enough that this became a trained-model research problem in the first
+    place, not something rules alone solve well.
+    **Licence checked directly, not assumed: unspecified everywhere it
+    could be stated.** The GitHub repo has no LICENSE file (confirmed by
+    listing every file in a full clone, not just checking common
+    filenames) and no licence classifier in any config. The HuggingFace
+    model card for `chronbmm/sanskrit5-multitask` states "[More
+    Information Needed]" for licence. The `buddhist-nlp/byt5-sanskrit`
+    base model card has no licence field at all. Only the *paper itself*
+    carries an explicit licence (CC BY 4.0, on arXiv) — that covers the
+    publication text, not the code or model weights, which is a normal
+    and important distinction (arXiv's CC BY default applies to the
+    submission, not automatically to linked artifacts). Under this
+    project's own "no explicit licence = not cleared" rule
+    (`dge/kosha_toolkit/LICENSING.md`), this is **Unclear**, the same
+    category as several already-loaded kosha sources — not used here,
+    logged for a future case-by-case call. If ever pursued, it's also a
+    real infrastructure step up from anything in this project so far: a
+    Python ML inference environment (transformers/torch), not another
+    static-JSON precompute script — worth treating as its own scoped
+    decision, not a quick add-on.
+
+    **23 Aug: free/cheap hosting options researched for testing this
+    model, in case the licence question resolves.** A 0.6B ByT5 runs
+    fine on CPU (~1-4 GB RAM) — no GPU needed at this scale, which
+    removes most of the friction below. **Recommended first try: HF
+    Spaces, free CPU-basic tier** (2 vCPU/16 GB RAM, genuinely free,
+    sleeps after 48h idle with a ~30-60s wake, ships a Gradio UI + API
+    for free). **Second choice: Modal.com** ($30/month free credits,
+    pay-per-second, no idle charges — stretches far for sporadic testing,
+    more control than Spaces' Gradio wrapper). Google Cloud Cloud Run's
+    Always Free tier (scale-to-zero, ~2M requests/month) is also
+    workable CPU-only, but has no free GPU tier (not needed here) and a
+    cold-start hit on scale-from-zero; Vertex AI's trial credits exist
+    but bill hourly even idle, easy to burn by accident, and the current
+    credit amount/duration wasn't confirmed. Colab/Kaggle are
+    interactive notebooks, not stable hosting endpoints, for this
+    purpose. fly.io's free tier is gone for new accounts. Render's free
+    512MB instance is RAM-tight for this model size, unconfirmed either
+    way. If this ever goes from testing to always-on, a small paid Cloud
+    Run instance (~$5-15/mo) is the natural next step, not GPU
+    infrastructure. Still blocked on the licence question above before
+    any of this actually gets used.
+
+- **Same-day follow-up: batch-imported everything DCS has that exactly
+  matches an existing empty taxonomy leaf, plus a real parser bug found
+  and fixed mid-run.** Asked to "load all the pending stuff from DCS
+  which our taxonomy folders are missing." Ran a precise match (not the
+  23 Aug rough keyword pass): normalize both DCS's 253 texts.csv names
+  and every `library.json` leaf's title/path segment (strip diacritics,
+  lowercase, alnum-only) and require an exact match — deliberately no
+  fuzzy matching, so nothing lands in the wrong place silently. Found 13:
+
+  | DCS text | items | taxonomy leaf |
+  |---|---|---|
+  | Agnipurāṇa | 610 | `purana/agni_purana/` |
+  | Matsyapurāṇa | 8,341 | `purana/matsya_purana/` (all 175 chapters DCS has) |
+  | Kālikāpurāṇa | 288 | `purana/upapuranas/kalika_purana/` |
+  | Narasiṃhapurāṇa | 35 | `purana/upapuranas/narasimha_purana/` |
+  | Varāhapurāṇa | 39 | `purana/varaha_purana/` |
+  | Gautamadharmasūtra | 891 | `vedanga/kalpa/independent_dharmasutras/gautama_dharmasutra/` |
+  | Nirukta | 610 | `vedanga/nirukta/` |
+  | Gopathabrāhmaṇa | 4,241 | `vedas/atharvaveda/shaunaka_shakha/brahmana/gopatha_brahmana/` |
+  | Aitareya-Āraṇyaka | 862 | `vedas/rigveda/shakala_shakha/aranyakas/aitareya_aranyaka/` |
+  | Aitareyabrāhmaṇa | 3,733 | `vedas/rigveda/shakala_shakha/brahmanas/aitareya_brahmana/` |
+  | Jaiminīyabrāhmaṇa | 7,325 | `vedas/samaveda/jaiminiya_shakha/brahmanas/jaiminiya_brahmana/` |
+  | Sāmavidhānabrāhmaṇa | 330 | `vedas/samaveda/kauthuma_shakha/brahmanas/samavidhana_brahmana/` |
+  | Maitrāyaṇīsaṃhitā | 7,954 | `vedas/yajurveda/krishna_yajurveda/maitrayani_shakha/samhita/maitrayani_samhita/` |
+
+  **~35,300 new items, `library.json`'s `populated` flag flipped `true`
+  on all 13**, `tools/validate_data.py` clean (0 errors, same 3
+  pre-existing warnings). Content spot-checked, not just JSON-validated:
+  Nirukta 1.1.1 is Yāska's own opening line ("समाम्नायः समाम्नातः"),
+  Maitrāyaṇī Saṃhitā 1.1.1.1 is the well-known Yajurveda opening ("इषे
+  त्वा सुभूताय") — both independently recognizable as correct, not just
+  well-formed.
+
+  **A real parser bug surfaced mid-run, caught by checking output
+  plausibility rather than trusting the item count.** `dcs_common.py`
+  only handled DCS's verse-pada convention (`sent_counter`/
+  `sent_subcounter` alternating 1/2). Running it on Aitareya Brāhmaṇa —
+  285 real `.conllu` files — produced 8 items. Eight, from 285 files: an
+  obviously-wrong number, not accepted at face value. Inspecting the raw
+  files directly (not guessing from the item count) found two more
+  conventions DCS actually uses: prose files leave `sent_subcounter`
+  blank on *every* sentence rather than omitting the field, since prose
+  doesn't pair into padas — the fix must not skip these units, but also
+  must not confuse them with the separate case (found earlier, in
+  Matsyapurāṇa) of an isolated genuinely-blank subcounter amid otherwise-
+  numbered verse text. And roughly 20% of Aitareya/Jaiminīya Brāhmaṇa's
+  files have no counter fields at all, only a bare `# sent_id =
+  NNNNNN_M`. For that fallback, consecutive sentences (e.g. `650034_1`,
+  `650034_2`) turned out to be independently complete sentences in the
+  files actually read, not two halves of one verse -- so the fix
+  deliberately gives each its own item via a per-file running index
+  rather than grouping by sent_id's own numbering, which would have
+  risked merging unrelated sentences into one. Fixed, then the two
+  already-shipped imports (Sūryasiddhānta, Śivasūtra) were re-run and
+  diffed byte-for-byte against their pre-fix output to confirm zero
+  regression before trusting the fix on new data. Aitareya Brāhmaṇa then
+  produced 3,733 items; Jaiminīya Brāhmaṇa went from 9 to 7,325.
+  Full account, including which of the three conventions applies to which
+  text, is in `dcs_common.py`'s own docstrings (`_parse_int`,
+  `parse_conllu_file`) — read those before extending this further.
+
+  **Not done, deliberately:** vendor size is now ~54 MB (`.conllu`
+  sources) plus a few MB of generated JSON per large text, committed
+  directly to `main` rather than a CDN branch, per the project lead's
+  already-recorded decision to lift the 1 GB caution. Remaining DCS texts
+  (238 of 253) either didn't match an existing leaf under this
+  conservative exact-match rule (a fuzzier, human-checked pass would
+  likely find more) or have no taxonomy placement decided yet
+  (Āyurveda/Tantra, same open question as before) — `tools/dcs/README.md`
+  has the specifics. No sync pipeline built yet either, though with 15
+  texts / ~35,700 items now in, that's a more defensible next step than
+  it was at 2 texts.
+
+- **Same-day follow-up: a taxonomy-placement proposal for the remaining
+  238, published as an artifact, then Tier A of it executed.** Asked
+  "where should the remaining 238 go against our fixed taxonomy." Built a
+  tiered proposal (published to the user as an artifact) after real
+  research, not by guessing from titles: normalized-exact-match against
+  every `populated: false` leaf found ~95 safe matches (Tier A), five
+  genuine taxonomy gaps affecting ~93 texts (Tier B — Āyurveda+Rasaśāstra
+  +nighaṇṭu, Buddhist literature, Sāṃkhya, Yoga, Tantra/Śaiva naming),
+  ~11 duplication risks caught by checking `populated` status directly
+  rather than assumed (Tier C — Bhāgavatapurāṇa, Rāmāyaṇa, Mahābhārata,
+  Ṛgveda, Atharvaveda-Śaunaka, Taittirīyasaṃhitā, plus three kāvya-dist
+  titles already marked "complete" there: Meghadūta, Kumārasambhava,
+  Kirātārjunīya), ~30 that belong on the separate kāvya-dist pipeline
+  (Tier D), and ~14 genuinely unclear without opening the text (Tier E).
+  User picked Tier A to execute now.
+
+  **Tier A turned out deeper than the proposal's own top-level
+  taxonomy.json read suggested** — checking `library.json` directly (not
+  just the 2-level `taxonomy.json` dump) found the fine-grained śākhā
+  structure (`vedanga/kalpa/<veda>/<school>/{shrautasutra,grihyasutra,
+  dharmasutra}`) already exists as ~41 empty leaves, precise enough to
+  match nearly every Vedic ancillary text in Tier A by name. Two more
+  corrections the proposal itself had gotten slightly wrong, caught by
+  checking rather than trusting the earlier pass: Vājasaneyisaṃhitā
+  (Mādhyandina) is *not* a safe Tier A match after all — the Mādhyandina
+  leaf is already 100% populated; only the separate Kāṇva-recension leaf
+  is empty, and DCS's text is explicitly Mādhyandina, so importing it
+  there would misfile a different recension into the wrong śākhā's slot.
+  Left out for that reason. Kāṭhakasaṃhitā, absent from the original
+  scan, does have a precise empty leaf (`krishna_yajurveda/katha_shakha/
+  samhita/katha_samhita`) and was added.
+
+  **A new import shape was needed and built:** four texts — Viṣṇu/Liṅga/
+  Kūrma Purāṇa and Paippalāda Atharvaveda — split across *several*
+  existing empty leaves by book/kāṇḍa number rather than landing in one.
+  Checked DCS's actual chapter-numbering before assuming a mapping:
+  Viṣṇu Purāṇa's DCS chapters carry book numbers 1-6, matching its
+  `amsha_01..06` leaves exactly; Liṅga and Kūrma Purāṇa carry exactly
+  1-2, matching `purva_bhaga`/`uttara_bhaga`; Paippalāda's DCS excerpt
+  only covers kāṇḍas 1, 4, 5, 10, 12, 19 of 20 (a partial source, not a
+  parsing gap — the other 14 kāṇḍas' leaves stay empty because DCS
+  itself doesn't have them). `dcs_common.py` gained `build_split_import()`
+  for this, sharing its underlying parsing with the existing
+  `build_generic_import()` (refactored into `collect_padas()` +
+  `_build_items()` + `_write_data_json()`, re-verified byte-identical on
+  both already-shipped imports after the refactor before trusting it on
+  new data). Garuḍapurāṇa turned out *not* to need splitting — DCS only
+  has its Pūrva Khaṇḍa (book 1), so it landed as a single import.
+
+  **32 single-leaf imports + 4 split imports, ~65,000 items total.**
+  Content spot-checked, not just JSON-validated: Nyāyasūtra 1.1.1 is its
+  exact famous opening line ("pramāṇa-prameya-saṃśaya-prayojana-...");
+  Vaiśeṣikasūtra 1.1.1 is its exact famous opening ("athāto dharmaṃ
+  vyākhyāsyāmaḥ"); Paippalāda 1.1.1 matches the recognizable Vedic
+  water-hymn pattern shared with the Śaunaka Saṃhitā's own well-known
+  opening. `library.json`'s `populated` flipped `true` on all 48 touched
+  leaves; `tools/validate_data.py` clean (0 errors, same 3 pre-existing
+  warnings). Full per-text mapping in `tools/dcs/build_batch2.py`.
+
+  **Not done:** Skandapurāṇa and Śivapurāṇa were in the proposal's Tier A
+  but turned out not to be simple chapter-mappings on inspection — Skanda's
+  DCS chapters are plain sequential numbers with no khaṇḍa name, and
+  Śivapurāṇa's are named by saṃhitā but "Dharmasaṃhitā" doesn't match any
+  of the 7 existing empty saṃhitā leaves (the traditional 7 don't include
+  a Dharma Saṃhitā by that name) — both need an actual scholar's
+  concordance, not a guessed mapping, so left for later. Tier B (the five
+  taxonomy gaps) and Tier D (kāvya-dist routing) are unstarted — the
+  proposal artifact has the detail for whoever picks those up next.
+
+- **Same-day: a correction to the proposal itself, caught before starting
+  Tier B.** The proposal's Tier B had listed "Upaniṣad mūla texts" as a
+  taxonomy gap — wrong. Checking `library.json` (not just recalling the
+  earlier `taxonomy.json` read) found precise empty leaves already exist
+  under each Upaniṣad's own Veda/śākhā: Chāndogya (Sāmaveda/Kauthuma),
+  Kaṭha (Kṛṣṇa Yajurveda/Kāṭhaka), Taittirīya (Kṛṣṇa Yajurveda/
+  Taittirīya), Aitareya (Ṛgveda/Śākala), Muṇḍaka (Atharvaveda/Śaunaka),
+  plus Kena, Maitrāyaṇīya, and Īśā (not in the remaining-238 list).
+  Imported the 5 with a clean DCS match (`tools/dcs/
+  build_batch3_upanishads.py`, 1,707 items); content spot-checked, not
+  just validated — Kaṭhopaniṣad 1.1 is its exact opening line (Naciketas
+  frame story). Bṛhadāraṇyakopaniṣad deliberately excluded: the taxonomy
+  has separate Kāṇva and Mādhyandina recension leaves, but DCS's own
+  chapter headers ("BĀU") don't say which recension its text is — guessed
+  differently, this could misattribute a real textual variant, so left
+  for later rather than picked arbitrarily. Śvetāśvatara and Kauṣītaki
+  Upaniṣad, and the minor Upaniṣads (Garbha, Nādabindu, Brahmabindu,
+  Amṛtabindu, Śira), still have no taxonomy leaf — the genuine residual
+  gap, smaller than the proposal originally claimed.
+
+- **23 Aug (next session): started Tier B, and hit an open question
+  before drafting the other four gap clusters.** Instructed to defer
+  Tier D (kāvya-dist routing) and go ahead with Tier B (the genuine
+  taxonomy gaps: Āyurveda+Rasaśāstra+Nighaṇṭu, Buddhist literature,
+  Sāṃkhya, Yoga, Tantra/Śaiva-Śākta naming, Nīti/Nāṭya/Kāma/Alaṃkāra-śāstra).
+  Before drafting new top-level structure from scratch, checked what the
+  codebase itself already assumes: `dge/js/library.js`'s `DGE_PATH_LABELS`
+  dict carries a comment naming "the recommended DGE taxonomy
+  (`DGE_Shastra_Taxonomy.md`)" as the thing it's tracking — and that file
+  **does not exist anywhere in this repo** (confirmed by search, not
+  assumed absent). The dict already has Devanagari labels for `sankhya`
+  and `yoga` under `darshana`, but nothing for `ayurveda`, Buddhist
+  literature, or Tantra. That's a real, load-bearing distinction: Sāṃkhya
+  and Yoga are pre-planned by whatever authored that reference document,
+  the other four Tier B clusters are not confirmed against it at all —
+  building them now would mean inventing structure that might conflict
+  with a document this session cannot see. **Still open: does the project
+  lead have `DGE_Shastra_Taxonomy.md`, or is inventing the remaining four
+  clusters' structure the right call regardless?**
+
+  Proceeded only with the confirmed-safe part: added `darshana.sankhya`
+  (`sutra_and_karika`: `samkhya_karika` with `mula`/`tika_gaudapada`/
+  `tika_mathara`/`tika_tattva_kaumudi`/`tika_yuktidipika`, and
+  `samkhya_sutra` with `mula`/`bhashya_vijnanabhikshu`/`vritti_aniruddha`)
+  and `darshana.yoga` (`sutra_and_bhashya.yoga_sutra` with `mula` plus 4
+  commentary leaves) to `taxonomy.json`, mirroring the sibling
+  `mula`+`tika_*` pattern already used by `nyaya_sutra`/`vaisheshika_sutra`.
+  Note the folder is spelled `sankhya`, matching `DGE_PATH_LABELS`'s key
+  exactly — caught by grepping `library.js` before writing `library.json`,
+  not assumed from the Sanskrit transliteration convention used
+  elsewhere in this session's own file/slug names (which would have
+  produced the wrong, unmatched `samkhya`).
+
+  Of the 13 leaves drafted, checked against the DCS mirror by listing
+  (not assumed): **Sāṃkhyakārikā and Sāṃkhyasūtra's own mūla texts are
+  not in DCS at all** — only Sāṃkhyatattvakaumudī (a commentary) is.
+  Yogasūtra mūla and its Vyāsabhāṣya both are. Imported via
+  `tools/dcs/build_batch4_samkhya_yoga.py`: 20 + 186 + 785 = 991 items
+  across those 3 leaves; the other 10 stay `populated: false` stubs.
+  Content spot-checked against independently known text: Yogasūtra 1.1 is
+  the universally known "अथ योगानुशासनम्", its final sūtra is the equally
+  known "...कैवल्यं स्वरूपप्रतिष्ठा वा चितिशक्तिः", and Yogasūtrabhāṣya's
+  first unit is Vyāsa's own gloss on the word *atha*.
+
+  **A real bug found and fixed while running this, not after** (same
+  discipline as the 24 Aug prose-brāhmaṇa parser fix): Sāṃkhyatattvakaumudī's
+  `## chapter:` line is a single already-dotted field (`STKau zu SāṃKār,
+  1.2`) rather than several comma-separated bare integers — the only DCS
+  text seen so far with this 4th convention. The original
+  `_parse_chapter_path` silently produced `chapter_path = None` for every
+  sentence in it (0 items from 14 files — caught as implausible, the same
+  standard applied to every count in this project, not accepted as "just
+  a short text"). Fixed in `tools/dcs/dcs_common.py` to accept a
+  comma-field that is itself dot-separated digits; re-verified
+  byte-identical against every already-shipped import (pilot, batches
+  1–3) before trusting it on new data. Sāṃkhyatattvakaumudī went 0 → 20
+  items, and — because the same convention turned out to affect
+  Yogasūtrabhāṣya too — that text's first (silently wrong) count of 106
+  corrected to 785.
+
+  DCS running total: **59 texts, 71 taxonomy leaves, 106,140 items.**
+  Tier B's other four clusters (Āyurveda+Rasaśāstra+Nighaṇṭu, Buddhist
+  literature, Tantra/Śaiva-Śākta naming, Nīti/Nāṭya/Kāma/Alaṃkāra-śāstra)
+  remain unstarted, blocked on the `DGE_Shastra_Taxonomy.md` question
+  above. Tier D (kāvya-dist routing) remains deliberately deferred per
+  this session's instruction.
+
+- **23 Aug (same session): the `DGE_Shastra_Taxonomy.md` question above
+  answered directly by the project lead, not by finding the document.**
+  Instruction, in the lead's own terms rather than this session's
+  invention: a `shastra` folder holds *all* possible śāstras (Nāṭya,
+  Kāma, Nīti, Saṅgīta, Vāstu, "etc."); Āyurveda and similarly-scoped
+  practical sciences fall under **Upavedas**, a separate top-level
+  branch, not under `shastra`; Buddhist literature "can be treated as
+  Śāstra, I guess" — a deliberately loose steer, taken as "fold it under
+  `shastra.bauddha_sahitya` unless something specific needs asking."
+  Tier D stays last, confirmed again.
+
+  Added two new top-level `taxonomy.json` branches accordingly:
+  `upaveda` (`ayurveda` — with `samhita`/`nighantu`/`rasashastra`
+  sub-branches — and `dhanurveda`; `gandharvaveda`/`sthapatyaveda` added
+  as empty stubs, no DCS match found for either) and `shastra`
+  (`natya_shastra`, `kama_shastra`, `niti_shastra`, and
+  `bauddha_sahitya` with `sutra`/`shastra`/`pramana`/`avadana`
+  sub-branches for the doctrinal/scholastic texts only — Buddhacarita
+  and Saundarānanda are kāvya biographies, not śāstra, and were left for
+  Tier D instead of placed here). `dge/js/library.js`'s
+  `DGE_PATH_LABELS` gained Devanagari labels for every new segment name.
+  57 leaves added via `tools/dcs/build_batch5_upaveda_shastra.py`, all
+  57 populated from DCS — the highest single-batch hit rate so far.
+
+  **Every placement was checked against the text's own DCS `##
+  chapter:` line, not trusted from its DCS-given name** — this caught a
+  real near-miss: "Ratnaṭīkā" reads like a rasashastra commentary by
+  name, but its chapter line is `zu GaṇaKar` (a commentary on
+  Gaṇakārikā, a Pāśupata Śaiva text) — excluded entirely, out of scope
+  for this batch. "Āyurvedarasāyana" and "Ratnadīpikā" also looked
+  plausible by name but lacked a clean, unambiguous genre signal in
+  their own headers — excluded rather than guessed in. All three are
+  genuinely unplaced, not silently dropped.
+
+  **A real bug found and fixed while checking Carakasaṃhitā before
+  importing it, not after** (same discipline as every prior batch's
+  parser fixes): a non-numeric SECTION NAME can sit between numeric
+  chapter-path fields — `Ca, Sū., 1` vs `Ca, Cik., 1`, two different
+  sections of the same saṃhitā (Carakasaṃhitā alone has 8). The parser
+  had been dropping non-numeric fields (correct for Maitrāyaṇī
+  Saṃhitā/Aitareya Brāhmaṇa's convention) — here that would have
+  silently collapsed two different sthānas' chapter 1 onto the same id,
+  overwriting one with the other. Fixed in `tools/dcs/dcs_common.py` by
+  keeping non-numeric fields as slugs; re-verified byte-identical
+  against every already-shipped import (pilot through batch 4) before
+  trusting it on new data.
+
+  Content spot-checked, not just validated: Nāṭyaśāstra 1.1 is Bharata's
+  own well-known opening invocation, Hitopadeśa's first unit is its
+  famous "siddhiḥ sādhye satām astu" verse, Abhidharmakośa 1.1 is "oṃ
+  namo buddhāya". **One honest anomaly, not smoothed over**:
+  Mūlamadhyamakakārikā's unit 1.1 has ~30 words that don't match
+  Nāgārjuna prepended to a genuine, verifiable Nāgārjuna verse ("na
+  svato nāpi parato..."), while every other unit checked (1.2 onward) is
+  unambiguously correct — present in DCS's own source file exactly as
+  shown, not a parsing artifact, left open for closer review rather than
+  silently trusted or silently altered.
+
+  DCS running total: **116 texts, 128 taxonomy leaves, 162,136 items.**
+  Still open: Tantra/Śaiva-Śākta naming (deliberately untouched this
+  round — the `Ratnaṭīkā` near-miss above sits right on this cluster's
+  edge), and whatever the project lead meant by "etc." in the śāstra
+  list beyond Nāṭya/Kāma/Nīti/Saṅgīta/Vāstu (Saṅgītaśāstra and
+  Vāstuśāstra/Śilpaśāstra have no DCS match found — no candidate text
+  with that name turned up in the mirror — so `gandharvaveda` and
+  `sthapatyaveda` stay empty stubs rather than force-filled).
+
+- **23 Aug (same session): asked directly to "just check" whether the
+  classical darśanas (Nyāya, Mīmāṃsā, Vaiśeṣika, Yoga, Sāṃkhya) had
+  anything DCS carries that batches 2/4 missed — they did, including a
+  real correction to batch 4's own claim, caught only by re-scanning
+  DCS's full text-name list rather than repeating the per-text checks.**
+
+  **Sāṃkhyakārikā's mūla text is in DCS.** Batch 4 said it wasn't,
+  "checked by listing, not assumed" — but the actual check run was an
+  ASCII `grep -i "sankhy\|samkhy"` over the mirror's directory names,
+  which cannot match "Sāṃkhyakārikā": `ā` and `ṃ` are different Unicode
+  codepoints from `a`/`n`, and `grep -i` folds case, not diacritics.
+  Re-ran the check as `echo "Sāṃkhyakārikā" | grep -i "sankhy\|samkhy"`
+  against the real name to confirm the failure mode before writing this
+  down, not just asserting it. The directory was there the whole time.
+  Imported (73 items); spot-checked against Īśvarakṛṣṇa's genuinely
+  famous opening ("duḥkhatrayābhighātāj jijñāsā...") — exact match.
+
+  Five more matches, all filling *existing* empty stubs rather than
+  needing new taxonomy structure (two exceptions noted below):
+  - **Sāṃkhyakārikābhāṣya** → the `tika_gaudapada` stub from batch 4.
+    DCS's own metadata doesn't name an author for this text — the
+    placement rests on "Sāṃkhyakārikābhāṣya" being the standard
+    scholarly name specifically for Gauḍapāda's commentary, not on
+    anything DCS itself confirms. Flagged, not asserted as fact.
+  - **Mīmāṃsāsūtrabhāṣya** → the `shabara_bhashya` stub (already in
+    `taxonomy.json` before this session, from the original repo).
+    Śabara's bhāṣya is *the* Mīmāṃsāsūtrabhāṣya by convention — high
+    confidence, unlike the Gauḍapāda case above. Spot-checked: its first
+    unit is its own well-known opening on Mīmāṃsāsūtra 1.1.1.
+  - **Tattvavaiśāradī** → the `tika_tattva_vaisharadi` stub from batch
+    4, exact match confirmed via its own `zu YS, 4, 1.1` chapter line
+    (commentary on Yogasūtra 4.1 — Vācaspati Miśra's Tattvavaiśāradī).
+  - **Vaiśeṣikasūtravṛtti** — no commentary leaf existed at all under
+    `vaisheshika_sutra` (only `mula`); added a new `vritti` leaf.
+    Author unconfirmed by DCS's own metadata here too.
+  - **Sarvadarśanasaṃgraha** — Mādhava Vidyāraṇya's doxography
+    surveying *every* darśana, confirmed by its own chapter names being
+    darśana-school names (`SDS, Rāseśvaradarśana`, etc., not numbers) —
+    doesn't belong nested under any single darshana. Added as its own
+    new leaf, `darshana.sarvadarshana_sangraha.mula`. Spot-checked: its
+    Rāseśvaradarśana chapter content (pārada/mercury, rasārṇava) matches
+    that chapter's known subject (the alchemical Rasa-Śaiva school).
+
+  `tools/dcs/build_batch6_darshana_gaps.py`; 6/6 matched and imported,
+  zero misses this round. DCS running total: **122 texts, 134 taxonomy
+  leaves, 164,708 items.**
+
+- **23 Aug (same session): structural feedback acted on, then Smriti/
+  Dharmashastra (batch 7) and Tantra/Saiva-Sakta (batch 8) sweeps, plus
+  several loose ends from the same request.**
+
+  **Restructure**: `upaveda` moved from a top-level `taxonomy.json` key
+  to `vedas.upaveda`, per explicit instruction ("under Veda you can have
+  Upaveda... Sastra is a different parent folder just like itihasa and
+  Purana"); `shastra` stayed top-level. **A real staging bug was caught
+  doing this**: the first restructure commit only captured the file
+  renames (`git mv`) — a follow-up multi-path `git add` that included
+  one already-moved (now nonexistent) path failed entirely
+  (`fatal: pathspec ... did not match any files` aborts the *whole*
+  invocation, staging nothing), so `taxonomy.json`/`library.json`'s
+  edits silently never got committed even though the working tree had
+  them right the whole time. Caught because batch 7's own diff came out
+  far larger than a 3-leaf addition should — not assumed clean. Fixed
+  by re-staging everything with a single `git add -A` and verifying
+  `git show HEAD:...` matched the working tree before moving on.
+
+  **Batch 7 (Smriti/Dharmashastra)**: checked `library.json` first —
+  Manusmṛti, Nāradasmṛti, Parāśarasmṛti, Viṣṇusmṛti, Yājñavalkyasmṛti
+  are already `populated: true` with no `source` field (sourced from
+  outside DCS, predating this session) — left untouched to avoid a
+  conflicting duplicate inside an already-filled leaf. Three real
+  matches: Vṛddhayamasmṛti → the empty `yama_smriti` leaf; Kātyāyanasmṛti
+  → a new leaf (no existing match); Nibandhasaṃgraha — looked like a
+  dharmaśāstra digest by name, but its own chapter header
+  (`NiSaṃ zu Su, Cik., 27, 2.1`) shows it's Ḍalhaṇa's commentary ON
+  Suśrutasaṃhitā — filed there instead. Also registered two taxonomy
+  nodes (`vasistha_smriti`, `baudhayana_smriti`) that had no
+  `library.json` catalog entry at all, a gap unrelated to DCS. No DCS
+  match for the dharmaśāstra-nibandha cluster (Dāyabhāga/Mitākṣarā/
+  Kalpataru/Nirṇayasindhu/Dharmasindhu/Smṛticandrikā/Caturvargacintāmaṇi)
+  or for Parāśarasmṛtiṭīkā (DCS has it, but the existing `parashara_smriti`
+  leaf is flat with no mula/tika substructure, and restructuring an
+  already-live leaf just for one commentary was out of scope this round).
+
+  **Batch 8 (Tantra/Śaiva-Śākta, deferred every batch until explicitly
+  green-lit this round)**: `agama.pancharatra.shaiva_agama`/`shakta_agama`
+  reparented to `agama.shaiva_agama`/`shakta_agama` directly — they'd
+  been nested under the Vaiṣṇava-specific "pancharatra" despite holding
+  Śaiva/Śākta content, a mismatch flagged since the original
+  taxonomy-placement proposal. `shaiva_agama` already had real content
+  (Śivasūtra) — moved as a whole leaf rather than restructured
+  internally, to limit disruption to already-live paths. New branches:
+  `agama.pashupata` (Pāśupatasūtra + Pañcārthabhāṣya + Gaṇakārikā +
+  Ratnaṭīkā), `agama.pratyabhijna` (Spandakārikā + Nirṇaya,
+  Śivasūtravārtika, Tantrāloka, Tantrasāra, Saṃvitsiddhi),
+  `agama.shaiva_siddhanta` (Mṛgendratantra + ṭīkā), `agama.shakta_agama`
+  now populated as a container (Mahācīnatantra, Mātṛkābhedatantra,
+  Toḍalatantra, Uḍḍāmareśvaratantra, Devīkālottarāgama, Śāktavijñāna),
+  `agama.natha_sampradaya` for the Haṭha-yoga/Nāth cluster
+  (Amaraughaśāsana + commentary, Gorakṣaśataka, Gheraṇḍasaṃhitā,
+  Haṭhayogapradīpikā, Vātūlanāthasūtras + vṛtti — this last grouping is
+  this session's own organizational judgment, not a scholarly claim
+  about doctrinal affiliation).
+
+  **Every placement checked against its own DCS chapter header, not its
+  name — caught a real one**: "Sātvatatantra" reads Śākta/generic by
+  name, but its content is unambiguously Vaiṣṇava (full daśāvatāra
+  doctrine, "iti śrī Sātvatatantre Śivanāradasaṃvāde", vaikuṇṭhaloka,
+  puruṣottama throughout) — it's the Sāttvata Saṃhitā, one of the three
+  ratna-traya Pāñcarātra āgamas, and fills the *existing* empty
+  `sattvata_samhita` leaf instead of landing anywhere near Śākta. Two
+  more corrections the same way: "Sphuṭārthāvyākhyā" sounds Śaiva/generic
+  but its chapter line is `zu AbhidhKo` — Yaśomitra's sub-commentary on
+  Abhidharmakośa (Buddhist), filed under `shastra.bauddha_sahitya`
+  instead. "Yogaratnākara" sounds like Haṭha-yoga by name, but its
+  content and chapter tag (`YRā, Dh.`) are Āyurvedic (a medical
+  formulary, "yoga" here meaning *formulation* not Patañjali-style
+  discipline) — filed under Āyurveda. Two attributions are inferred from
+  a text's standard scholarly name rather than confirmed by DCS's own
+  metadata (Pañcārthabhāṣya → Kauṇḍinya, Mṛgendraṭīkā → Nārāyaṇakaṇṭha),
+  flagged as such, not asserted as fact.
+
+  **Pañca Mahākāvya**: checked first — Raghuvaṃśa, Kumārasambhava,
+  Kirātārjunīya, Śiśupālavadha are *already* `populated: true`. Only
+  Naiṣadhīyacarita (Śrīharṣa) is missing, and DCS doesn't carry it at
+  all (checked by listing) — a genuine gap needing a non-DCS source
+  (e.g. GRETIL), not filled here. **Still the one open ask from this
+  round with nothing done about it.**
+
+  **Unplaceable singles, re-researched** (wisdomlib + secondary
+  sources): Kṛṣiparāśara (agriculture, high confidence) →
+  `shastra.krishi_shastra`; Śyainikaśāstra (falconry, Rāja Rudradeva of
+  Kumaon, high confidence) → `shastra.shainika_shastra`;
+  Agastīyaratnaparīkṣā (Hindu, not Jain, gemology, medium-high
+  confidence) → new `shastra.ratna_pariksha.agastiya`; Āyurvedarasāyana
+  — resolves the earlier "zu AHS" puzzle: it's Hemādri's own
+  Aṣṭāṅgahṛdaya commentary, not a standalone rasāyana text, high
+  confidence → new tika leaf under `ashtanga_hridaya_samhita`;
+  Gṛhastharatnākara (Caṇḍeśvara's dharmaśāstra nibandha, part of his
+  *Smṛtiratnākara*, high confidence) → new `smriti_dharma.dharmashastra`
+  leaf. Ratnadīpikā stays low-confidence on author/sect (research
+  couldn't settle Jain vs. Hindu from open sources) but genre (gemology)
+  is solid enough to file → `shastra.ratna_pariksha.ratnadipika`, with
+  the uncertainty carried in its own title/notes rather than hidden.
+
+  **Skandapurāṇa/Śivapurāṇa** (separate research pass against wisdomlib/
+  GRETIL/the Skandapurāṇa Project): plain "Skandapurāṇa" (24 bare-numbered
+  chapters) is a different, uncitable recension entirely — not mapped.
+  "Śivapurāṇa" is a single chapter labelled with a saṃhitā name outside
+  the standard 7-saṃhitā scheme, unverifiable and too little content to
+  matter — not mapped. **"Skandapurāṇa (Revākhaṇḍa)" is a clean, citable
+  1:1 whole-text match** — DCS's 232 chapters are wisdomlib's complete
+  Revākhaṇḍa, confirmed independently against GRETIL's e-text of the
+  same material — imported as a new `purana.skanda_purana.revakhanda`
+  leaf (231 files found, 7,894 items). Carried forward honestly, not
+  smoothed over: GRETIL notes the print tradition may have misattributed
+  this material from the Vāyupurāṇa — noted in the item's own title.
+
+  `tools/dcs/build_batch7_smriti.py`, `build_batch8_tantra_and_misc.py`;
+  38/39 matched across both (one filename-diacritic slip on
+  Āyurvedarasāyana, corrected inline). DCS running total: **160 texts,
+  172 taxonomy leaves, 186,139 items.**
+
+- **23 Aug (same session): the sandhi feature's real-browser test,
+  attempted and partially completed — the live network call could not
+  be exercised end to end, but the code was verified correct against
+  the real API by a different route.** A headless Chromium launched via
+  Playwright still cannot reach the network from inside this sandbox —
+  confirmed independently a second time, with more mitigation attempted
+  than the first pass (a local HTTP server for `dge/index.html`, then
+  `--proxy-server`/`--proxy-bypass-list` pointed at the session's own
+  working `HTTPS_PROXY`, plus `--ignore-certificate-errors` for the
+  proxy's re-terminated TLS): every request failed, including to
+  `localhost:8899` itself, not just `dharmamitra.org` — this reads as a
+  sandbox-level restriction on the browser subprocess's networking, not
+  anything fixable from inside the page or the launch flags.
+
+  **Substituted two narrower checks that don't need the browser to have
+  network access, both real, neither fabricated:**
+  1. Called the live `dharmamitra.org` endpoint directly with `curl`
+     (which *can* reach it, through the session's normal proxy) using
+     `sandhi.js`'s exact request body, for the Gītā's opening
+     "dharmakṣetre kurukṣetre samavetā yuyutsavaḥ". Real response in
+     0.96s: 5 words, each with `lemma`/`unsandhied`/`tag` — exactly the
+     shape `dgeFetchSandhiAnalysis`/`dgeRenderSandhiResult` expect, and
+     grammatically correct (e.g. `yuyutsavaḥ` correctly lemmatized to
+     the desiderative `yuyutsu`). A malformed-Sanskrit input also
+     round-tripped correctly, returning the `notice` field the "no
+     analysis" fallback path reads.
+  2. Loaded `sandhi.js` itself (unmodified) into a real Chromium page
+     (via `page.addScriptTag`, no fetch involved) and called
+     `dgeRenderSandhiResult()` directly with that *real, captured* API
+     response — confirming the DOM it builds is correct and safely
+     escaped (checked for injection), for both the successful-analysis
+     path and the notice/fallback path.
+
+  **Net verdict: the code is correct against the real, live API
+  contract — request format, response shape, rendering, and the error
+  fallback all check out — but nobody has watched a real click-to-select
+  flow complete against the live network end-to-end in an actual browser
+  yet**, only its two halves separately. A real user's browser (unlike
+  this sandbox) has no such network restriction, so this is very likely
+  fine — but "very likely fine" is short of "watched it work," and
+  that's the honest gap left here for whoever can run it from an
+  unrestricted browser next.
+
+- **23 Aug (same session): the Pañcarātra Saṃhitā cluster — asked
+  directly to fill in "Sāttvata Saṃhitā and any others available in
+  GRETIL etc."** Checked DCS first (quick, already had the mirror):
+  nothing else Pāñcarātra-shaped there beyond Sāttvatatantra, already
+  imported in batch 8. GRETIL is a *different* source with its own
+  licence to verify per file — not assumed to inherit the one already-
+  imported Pāñcarātra Saṃhitā's terms (Prakāśasaṃhitā, CC BY-NC-SA 4.0)
+  just because both are GRETIL.
+
+  **Checked GRETIL's actual Vaiṣṇava-section catalog directly for all
+  13 still-empty named Saṃhitās (Ahirbudhnya, Hayagrīva, Īśvara,
+  Jayākhya, Lakṣmītantra, Nāradīya, Padma, Parama, Pārāśara, Pauṣkara,
+  Vāsiṣṭha, Viṣṇu, Viśvaksena) — only 2 have a GRETIL e-text at all.**
+  Two near-misses caught and correctly **not** used as substitutes:
+  GRETIL's "Jñānāmṛtasārasaṃhitā" is Nārada-Pāñcarātra-*adjacent* but a
+  different text from the Nāradīyasaṃhitā itself; its
+  "Parāśaradharmasaṃhitā" is Parāśara's *dharmaśāstra* smṛti (already
+  handled — see the batch 7 entry above), not the Pāñcarātra
+  Pārāśarasaṃhitā. The other 9 named Saṃhitās simply aren't on GRETIL —
+  confirmed by reading the catalog, not by a search coming up empty.
+
+  **Imported the 2 real matches, licence verified directly from each
+  file's own TEI `<availability>` element** (both state the same CC
+  BY-NC-SA 4.0 as Prakāśasaṃhitā, confirmed rather than presumed):
+  Viśvaksenasaṃhitā (complete, 39 adhyāyas, 3,796 śloka) and
+  Pauṣkarasaṃhitā (**partial** — GRETIL only carries adhyāyas 27–43 of
+  the printed edition, P.P. Apte's Tirupati 2006 edition; adhyāyas 1–26
+  and beyond 43 are not part of this e-text at all, a real gap in the
+  source, not something introduced here or hidden — noted explicitly in
+  the item's own metadata, not just in this log). Built with a new,
+  purpose-specific parser
+  (`tools/gretil_pancharatra/build_pancharatra.py`) rather than forcing
+  either the DCS pipeline or `tools/kavya/`'s convention-detection
+  parser onto GRETIL's `// Vis_1.1 //`-style bare reference — output
+  matches Prakāśasaṃhitā's own existing on-disk shape exactly, so all 3
+  Pāñcarātra Saṃhitā leaves in this repo now share one internal
+  convention. Content spot-checked, not just validated: Viṣvaksena 1.1
+  opens with the expected topic (*bhūparīkṣā*, site examination before
+  construction) and Pauṣkara 27.1 opens mid-śrāddha-discussion,
+  consistent with its being a partial excerpt starting at chapter 27
+  rather than a text beginning.
+
+  Muktabodha Digital Library was flagged during research as very likely
+  holding several of the remaining 9 (Ahirbudhnya, Jayākhya, Lakṣmītantra
+  are commonly digitized there) under a stated CC BY-NC 4.0 site
+  licence, but its texts sit behind a login-gated access point — could
+  not confirm per-text URLs or licence terms without an account, so
+  nothing was imported from there. **Left as a genuine lead for whoever
+  has Muktabodha access next, not acted on.**
+
+- **24 Aug (same thread): asked directly to "check Muktabodha access
+  options... also other related sources... wikisource or wisdomlib etc."**
+  Muktabodha remains blocked on the same login gate — flagged for the
+  project lead, not pursued further without their explicit go-ahead
+  (would need account credentials this session doesn't have and shouldn't
+  guess at). wisdomlib.org carries several of the remaining Saṃhitās but
+  states no licence anywhere on the site — checked directly, not assumed
+  absent — so per this repo's own rule (`dge/kosha_toolkit/LICENSING.md`:
+  no explicit licence = do not use), nothing was taken from it. One
+  archive.org scan of Īśvarasaṃhitā is explicitly **CC BY-NC-ND 3.0**
+  (non-commercial, no-derivatives) — also correctly left unused, and its
+  OCR is Devanagari-garbled enough (checked the `_djvu.txt` directly) that
+  it wouldn't be usable even under a compatible licence without a real
+  re-OCR pipeline, out of scope here. Paramasaṃhitā, Hayagrīvasaṃhitā and
+  the Pāñcarātra-recension Vāsiṣṭhasaṃhitā: no Sanskrit e-text found
+  anywhere checked (GRETIL, Muktabodha's public listing, Wikisource,
+  wisdomlib, archive.org, TITUS, SARIT) — genuinely unavailable, not a
+  missed search.
+
+  **Sanskrit Wikisource confirmed usable — CC BY-SA 4.0 site-wide**,
+  checked directly via the MediaWiki API
+  (`action=query&meta=siteinfo&siprop=rightsinfo`) rather than assumed
+  from Wikimedia's general reputation. Five of the remaining Saṃhitās are
+  there in full: Ahirbudhnyasaṃhitā, Jayākhyasaṃhitā, Lakṣmītantram,
+  Padmasaṃhitā, Viṣṇusaṃhitā. Built a new importer
+  (`tools/wikisource_pancharatra/fetch_and_build.py`) rather than reusing
+  the GRETIL one — Wikisource wikitext needs its own parsing entirely
+  (page-per-chapter fetch over the API, `<poem>` block extraction,
+  footnote-apparatus stripping, editorial-subheading stripping — none of
+  which the GRETIL TEI parser does or needs), and the source text is
+  already Devanagari, not IAST, so no transliteration step either.
+
+  **Ahirbudhnyasaṃhitā run to completion first: 62 items (60 adhyāyas +
+  the appendix split into 2 sub-items), 4,091 śloka total, no chapter
+  silently skipped.** Six distinct real formatting quirks found and fixed
+  by checking actual page wikitext against a failing chapter, never
+  assumed — this source turned out to mix several different transcription
+  conventions across chapters 1–60, apparently reflecting different
+  Wikisource contributors' individual habits over time:
+  - Two verse-ref bracket conventions in the same work — Devanagari
+    daṇḍa+period (`।। 1.1 ।।`, most chapters) vs ASCII pipe+hyphen
+    (`|| 43-1 ||`, ch. 43 on) vs the two characters mixed within one
+    closing pair (`।| ४५-१।|`, ch. 45+) — generalized to treat `।` and `|`
+    as interchangeable rather than special-casing each pairing as found.
+  - The precomposed Unicode double-daṇḍa (U+0965 `॥`) vs two single
+    daṇḍas typed in a row (U+0964 `।।`) — visually identical, only the
+    latter matched every downstream daṇḍa-counting rule until ch. 50 came
+    back with real content but zero parsed verses and this was checked
+    directly; now normalized to `।।` immediately after extraction.
+  - Footnote-apparatus blocks delimited by a dash-line
+    (`---------`) almost everywhere, but by an underscore-line
+    (`__________________`) in ch. 59 specifically — both characters now
+    accepted as the same paired delimiter.
+  - Ch. 59's own page is missing its closing `</poem>` tag entirely (the
+    real content sits between the first `<poem>` and a second, stray,
+    empty `<poem>` right at the end of the page) — a genuine source-page
+    defect, not a parsing convention; handled by ending the poem block at
+    whichever comes first, an actual `</poem>`, another `<poem>`, or the
+    end of the page.
+  - The parishishtam (appendix) page is not a 61st adhyāya — it's the
+    *Sudarśana-sahasranāma-stotra*, numbered with a single sequential
+    verse number (`।। ११९ ।।`) rather than the chapter.verse pairs every
+    adhyāya uses, and — checked directly — that page itself holds two
+    independently-numbered sub-poems back to back (a 21-verse dhyāna/
+    nyāsa preamble, then the sahasranāma proper, whose own numbering
+    restarts at 1). Given its own ref pattern and split into two
+    sub-items (`parishishtam`, `parishishtam2`) on a numbering-decrease
+    boundary, rather than colliding both series' verse numbers together.
+  - A sustained MediaWiki API rate-limit window, several times over,
+    initially handled wrongly: an earlier version of `wikitext()`
+    returned `None` for *both* "rate-limited past all retries" and "page
+    genuinely doesn't exist," so the caller's "no parseable content" skip
+    silently covered both cases — 23 real chapters got marked skipped
+    during one such window and a wrong 36-chapter partial `data.json` was
+    written and had to be discarded, caught only because 23 consecutive
+    skips in a row was implausible enough to go check by hand rather than
+    trust. Fixed with a distinct `RateLimited` exception on retry
+    exhaustion; `build()` is now resumable via a sidecar
+    `.progress.json` cache (gitignored, deleted on success) and only
+    writes the final `data.json` once every page is confirmed fetched —
+    never ships a partial text silently as if it were the whole one.
+
+  Content spot-checked, not just validated against expected counts:
+  ch. 59 (`पुरुषसूक्तश्रीसूक्तवाराहमन्त्रार्थनिरूपणम्`) opens on-topic
+  with *puruṣasūkta*/*śrīsūkta* material as its own title promises, and
+  the appendix closes with the sahasranāma's own colophon
+  (`इत्यहिर्बुध्न्यसंहितायां... श्रीसुदर्शनसहस्रनामस्तोत्रं संपूर्णम्`) —
+  both regression-tested together with every previously-seen chapter
+  sample (1, 2, 38, 43, 45, 50) before trusting the fix at scale.
+  `library.json`'s `populated` flag flipped for this leaf.
+
+  **24 Aug (same thread, continued): Viṣṇusaṃhitā and Jayākhyasaṃhitā
+  also imported from Wikisource.** Viṣṇusaṃhitā (30 paṭala, at
+  `विष्णुसंहिता`) uses the identical `Title/पटलः N` index structure and
+  the SAME chapter.verse ref convention as Ahirbudhnyasaṃhitā
+  (`।। 1.1 ।।`) — the existing parser worked unchanged: 2,588 śloka, no
+  chapter skipped, content spot-checked, `library.json` flipped.
+
+  Jayākhyasaṃhitā (33 paṭala, also at a flat `Title/पटलः N` index)
+  turned out, checked directly rather than assumed from the shared
+  index shape, to be a *different digitization entirely* — a critical
+  edition with per-chapter single-number verse refs (`।। 1 ।।`, not a
+  chapter.verse pair) and its own apparatus: inline variant-reading
+  markers (digit, `*`, or bare, sometimes with no marker at all),
+  whole-pada variants in round parens or square brackets, uncertain
+  readings marked with a trailing `?`, bracketed section headings, and a
+  bare "20-3" chapter-verse crossref tag trailing a danda. A new
+  `parse_chapter_critical` (selected via `build(..., convention=
+  "critical")`) handles this, landing on one general rule after several
+  narrower ones each missed a shape found only once more chapters were
+  in view: this source never uses `(...)` or `[...]` for real verse
+  content at all, so every bracketed span — wherever it falls, however
+  deep it nests — is apparatus and is stripped outright via a
+  fixed-point loop. Paṭala 1 also turned out to hold two independently-
+  numbered layers back to back (a 78-verse frame narrative, then the
+  actual text restarting at 1) — the parishishtam's existing numbering-
+  restart/series-split logic generalizes to this directly, tightened
+  along the way from "any decrease" to "a restart to literally 1", since
+  paṭala 20 separately turned out to label two different, consecutive
+  verses both "3" (a genuine source duplicate, not a restart) — the
+  looser condition had fractured it into 3 bogus series before this was
+  caught by checking the actual output, not assumed correct from a small
+  regression sample. Final result: 34 items (33 paṭala + paṭala 1's
+  restart), 4,625 śloka, zero stray apparatus characters or suspiciously
+  short verses across the whole corpus on a full-scale check (not just
+  the 5-chapter regression set), `library.json` flipped. Full account of
+  every bug found and fixed is in the git log for
+  `tools/wikisource_pancharatra/fetch_and_build.py` (4 commits, 24 Aug).
+
+  **Lakṣmītantram and Padmasaṃhitā, scoped but explicitly NOT attempted
+  yet** — deliberately stopped here rather than rush a 4th convention
+  without the same verify-at-scale discipline the above took several
+  rounds to get right:
+  - Lakṣmītantram is at `लक्ष्मीतन्त्रम्` (not the more literal
+    `लक्ष्मीतन्त्र`, which 404s), 57 adhyāya, flat index, and shares
+    Jayākhyasaṃhitā's single-number-per-chapter ref convention — but its
+    own apparatus is a *tab-indented running commentary*, not a
+    bracketed one: a footnote's actual text sits on a tab-indented line
+    with no closing delimiter of its own (just ends at the line break),
+    and at least one footnote block was found continuing across several
+    *more* tab-indented lines quoting a complete extra benedictory verse
+    under a `टिप्पणी` ("gloss") sub-heading — checked directly against
+    adhyāya 1's raw wikitext, not assumed to match Jayākhyasaṃhitā's
+    apparatus shape just because both share the same ref convention.
+    Running the existing `critical` parser against it unchanged leaves
+    this commentary leaking wholesale into the following verse's body
+    (confirmed directly, not assumed) — a tab-indented-line-stripping
+    rule is the obvious next step, but needs the same multi-sample
+    verification the Jayākhyasaṃhitā apparatus took 3 rounds to get
+    right before it can be trusted, particularly since a verse pada
+    being *itself* tab-indented somewhere in this text (as happens in
+    Ahirbudhnyasaṃhitā's dialogue continuations) hasn't yet been ruled
+    out.
+  - **Padmasaṃhitā, follow-up same day: its pāda-page structure and per-
+    pāda conventions now actually confirmed** (the rate-limit window
+    blocking this earlier cleared) — and it turns out to need
+    meaningfully more than a second `subpage_list()` traversal level.
+    82 chapters total across 4 pādas: योगपादः (5), क्रियापादः (32),
+    ज्ञानपादः (12), चर्यापादः (33). Every pāda's own chapter pages live
+    at a *bare* `<pāda>/अध्यायः N` title with no `पद्मसंहिता/` prefix at
+    all, regardless of pāda — but the pāda *index* page itself is only
+    reachable that way for योगपादः; क्रियापादः, ज्ञानपादः and चर्यापादः
+    only resolve at `पद्मसंहिता/<pāda>` (confirmed for क्रियापादः: the
+    bare title `क्रियापादः` exists too, but is a genuine MediaWiki
+    redirect to `पद्मसंहिता/क्रियापादः` — checked via the API's own
+    short-URL resolution, not assumed from the page shape alone). All 4
+    sampled pādas use the same chapter.verse ref pairing
+    Ahirbudhnyasaṃhitā/Viṣṇusaṃhitā do (`।। 1.1 ।।`) — but ज्ञानपादः
+    adhyāya 1 was directly seen dropping the chapter prefix on at least
+    one verse (`।। 10 ।।` instead of `।। 1.10 ।।`), which the existing
+    `REF_RX` (requires both parts) would silently merge into the next
+    verse rather than flag, the same class of gap Ahirbudhnyasaṃhitā's
+    own ref-format variants turned out to be. Far more work than that,
+    though: each pāda uses a genuinely **different** section-heading
+    delimiter, checked directly against a real chapter from each rather
+    than assumed to match across pādas of the same work — योगपादः wraps
+    headings in asterisks (`* निश्रेयससाधनयोग निरूपणम्*`); क्रियापादः
+    headings carry no delimiter at all, just a bare trailing "." instead
+    of a daṇḍa (`स्थानद्यैविध्यम्.`), and aren't reliably isolated by
+    blank lines the way Ahirbudhnyasaṃhitā's own no-punctuation
+    subheadings are; ज्ञानापादः's sampled chapter carries no section
+    headings at all; चर्यापादः wraps headings in double pipes, tab-
+    indented (`|| भगवता स्वाराधनाधिकारि निरूपणम्.||`). Four different
+    heading conventions inside one work is more inconsistency than any
+    text handled today, including Jayākhyasaṃhitā's own apparatus
+    variety — realistically each pāda needs its own verified stripping
+    rule (or at least its own regression sample), not one shared rule
+    the way `parse_chapter`/`parse_chapter_critical` cover several
+    chapters each. Left unattempted this session on purpose rather than
+    rush a fourth-and-a-half convention without per-pāda verification;
+    the concrete next step for whoever picks this up is to build and
+    verify one pāda's parser at a time, starting with योगपादः (only 5
+    chapters, simplest sampled convention) before attempting the larger,
+    messier क्रियापादः/चर्यापादः.
+
+- **24 Aug (same thread, continued): asked directly to finish all of the
+  above and move on.** Built and verified all four remaining pieces
+  rather than stopping at scoping — Padmasaṃhitā's 4 padas and
+  Lakṣmītantram both shipped this same session, on top of
+  Ahirbudhnyasaṃhitā/Viṣṇusaṃhitā/Jayākhyasaṃhitā earlier. Every
+  Pāñcarātra Āgama Saṃhitā leaf reachable from a licence-clear source is
+  now populated.
+
+  **Padmasaṃhitā: one shared parser covers all 4 padas after all**,
+  contrary to the earlier note above — the 4 heading conventions
+  (asterisk-wrapped, bare-trailing-period, none, double-pipe) turned out
+  to differ only in *delimiter shape*, not in kind: a heading line never
+  carries a daṇḍa/pipe (real verse text always does), so one rule
+  recognizing several delimiter shapes together covers all four padas
+  without needing to know which pada a given page belongs to. 82 items
+  (yoga 5, kriya 32, jnana 12, charya 33 — matching the index page
+  counts exactly), 9,096 śloka, checked at full scale rather than
+  trusted from the small regression sample — three real bugs only
+  surfaced there:
+  - Kriyapāda adhyāya 16's own raw wikitext reads `।। 116.56 ।।` sitting
+    directly between two verses correctly marked `16.55` and `16.57` —
+    a source-side typo (an extra "1"), not a real chapter 116 out of
+    32. Fixed generally rather than by hand: since the page's true
+    chapter number is already known externally (from its own title),
+    the parser now never trusts a two-number ref's own captured chapter
+    digit at all, closing the whole class of typo.
+  - A `*`/`?`-delimited heading can span *several* tab-indented lines,
+    the opening delimiter on the first line and the closing one only on
+    the last — invisible to a per-line check. Real verse text in this
+    source is never itself tab-indented (the same property already
+    relied on for Lakṣmītantram, below), so any tab-indented line is
+    now dropped outright, subsuming the multi-line case without the
+    unsafe alternative of pairing `*`/`?` characters across the whole
+    poem.
+  - A bare, unpaired `?` also turns up constantly *inside* verse lines
+    themselves as an inline uncertain-reading marker (`जराया ? वा`,
+    over 50 instances at full scale, concentrated in caryāpāda) — this
+    is exactly why pairing `*`/`?` as delimiters directly would have
+    been wrong; handled by stripping any leftover `?` only after every
+    heading-line use of it has already been consumed.
+
+  9 stray characters remain across all 9,096 śloka, every one checked
+  against its own raw wikitext and confirmed as a genuine source-side
+  unbalanced-paren typo (two footnotes merged onto one line sharing a
+  single bracket pair, or an isolated unclosed paren), not a parsing
+  gap — real verse content intact in each case, left alone rather than
+  guessed at.
+
+  **Lakṣmītantram: 56 adhyāya, 3,689 śloka.** Its apparatus (tab-
+  indented running commentary, confirmed directly to leak into verse
+  bodies under the existing `critical` parser) got its own
+  `parse_chapter_lakshmi`: any line starting with a tab is apparatus and
+  dropped outright, which also cleanly subsumes the multi-line `टिप्पणी`
+  commentary block found in adhyāya 1. A third bracket-apparatus style
+  turned up in adhyāya 25 specifically — curly braces used for the same
+  inline-marker/footnote-line role square brackets serve elsewhere in
+  the same work — added to Lakṣmītantram's own stripping loop, not the
+  shared one the other three texts use, since none of those showed any
+  evidence of needing it. Adhyāya 56's own Wikisource page carries no
+  content at all (just the page header template, checked directly) — a
+  genuine gap in the source transcription, noted in the item's own
+  metadata rather than silently skipped. Adhyāya 57's closing verse
+  fittingly echoes adhyāya 1's opening invocation verbatim — checked
+  before trusting it wasn't leaked duplicate content, a real literary
+  framing device instead.
+
+  **What's still genuinely unavailable, unchanged from the research
+  above**: Muktabodha (blocked on a login gate, flagged for the project
+  lead), Parama/Hayagrīva/Vāsiṣṭha Saṃhitās (no source found anywhere
+  checked), Īśvarasaṃhitā (one non-commercial archive.org scan, correctly
+  left unused, and Devanāgarī-garbled OCR besides).
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are
@@ -2237,10 +3300,39 @@ complete record, not just a live queue.
   in RV 1.65–1.70, which the edition glosses jointly and DGE splits in two. The
   archive.org OCR route (`archive_sayana.py`, kept and unchanged) does cover the
   Vālakhilya and is the obvious next attempt if that gap matters.
-- **No commentary layer on the Atharvaveda (5,977 items), Śukla Yajurveda
-  (1,975) or Taittirīya Saṃhitā (696)** — all three still at zero.
-  `import_veda_phase2.py` is deployed and tested but has never been run for real;
-  it wants Griffith + Whitney–Lanman, Griffith, and Keith respectively.
+- **24 Aug: `import_veda_phase2.py` finally run for real — Atharvaveda now
+  has Whitney & Lanman, the rest are blocked, not merely undone.** Asked
+  directly to work the queued Vedas backlog after finishing the Pāñcarātra
+  thread above. The importer's own `av` (Griffith AV), `syv` (Griffith
+  Śukla Yajurveda) and `ts` (Keith Taittirīya Saṃhitā) corpora all source
+  from sacred-texts.com, which — checked directly by fetching a page raw,
+  not assumed from a bare 403 — fronts every request with a Cloudflare
+  "Just a moment…" bot-challenge page rather than serving content. Not a
+  simple site block to route around (and not attempted to route around,
+  since that would mean defeating anti-bot protection): genuinely
+  unfetchable by an HTTP client from here, and likely from any similarly
+  automated environment without a real browser. **Left for whoever can
+  run this from a normal residential/desktop connection, or reconsider the
+  source** — GRETIL hit the same class of block earlier in this project
+  and was never resolved either, so this may need a standing workaround
+  (a GitHub Actions runner, matching this project's existing pattern for
+  GRETIL-blocked fetches) rather than a one-off retry.
+
+  **`av-whitney` (Whitney & Lanman 1905, sourced from en.wikisource.org
+  instead) ran clean**: 6,659 entries added across all 19 transcribed
+  kāṇḍas (Book XX isn't on Wikisource at all, per the importer's own
+  docstring), **99.4% match rate** (37 verse-level misses, 180 page
+  fetches genuinely missing out of 586 attempted). This is arguably the
+  more valuable of the two Atharvaveda layers regardless of Griffith's
+  availability — Whitney's own critical notes are the ones that report
+  Sāyaṇa's readings, per the importer's own header comment. Alignment
+  spot-checked across kāṇḍas 1, 6, 10, 19 (right mantra's translation,
+  no repetition or drift into a neighbor's content) before trusting the
+  99.4% match-rate number rather than just reading it off the log.
+  Śukla Yajurveda (1,975 items) and Taittirīya Saṃhitā (696) remain at
+  zero commentary — both are entirely sacred-texts.com-sourced in this
+  importer, so both are blocked by the same Cloudflare wall, not merely
+  unattempted.
 - **142 Sāmaveda mantras have no Ṛgveda parallel to inherit from** (114 carry no
   `rigveda_ref` at all, 8 have a bad one, 19 point at Ṛgveda mantras that are
   themselves in the Vālakhilya/dvipadā gaps, 1 unresolvable). There is no other

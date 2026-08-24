@@ -44,12 +44,39 @@ const DGE_PATH_LABELS = {
   dvaita: 'द्वैतम्', advaita: 'अद्वैतम्', vishishtadvaita: 'विशिष्टाद्वैतम्',
   nyaya: 'न्यायः', vaisheshika: 'वैशेषिकम्', sankhya: 'साङ्ख्यम्',
   yoga: 'योगः', mimamsa: 'मीमांसा',
+  // 23 Aug 2026 restructure (origin/main): the separate top-level
+  // dvaitavedanta/ tree moved to sit beside SarvaMula here (admin-only,
+  // see the visibility flag on its taxonomy/library.json entries --
+  // dgeIsHiddenGrantha below). SetuTila is an empty placeholder for a
+  // second Sarvamula edition. PascalCase matches the actual folder names
+  // on disk post-rename -- confirmed directly, not assumed.
   SarvaMula: 'सर्वमूलग्रन्थाः',
-  // 23 Aug 2026 restructure: the separate top-level dvaitavedanta/ tree
-  // moved to sit beside SarvaMula here (admin-only, see the visibility
-  // flag on its taxonomy/library.json entries -- dgeIsHiddenGrantha below).
-  // SetuTila is an empty placeholder for a second Sarvamula edition.
   DvaitaVedanta: 'द्वैतवेदान्तः', SetuTila: 'सेतुतिला',
+  sarvadarshana_sangraha: 'सर्वदर्शनसङ्ग्रहः',
+
+  // 23 Aug: upaveda/shastra, added per the project lead's own framework
+  // (not this session's invention) -- Ayurveda and Dhanurveda under the
+  // Upavedas, Natya/Kama/Niti-shastra and Buddhist literature under a
+  // Shastra catch-all. See dge/PENDING.md for what's still open (Tantra,
+  // Gandharvaveda/Sthapatyaveda have no sourced content yet).
+  upaveda: 'उपवेदाः', ayurveda: 'आयुर्वेदः', dhanurveda: 'धनुर्वेदः',
+  gandharvaveda: 'गान्धर्ववेदः', sthapatyaveda: 'स्थापत्यवेदः',
+  nighantu: 'निघण्टवः', rasashastra: 'रसशास्त्रम्',
+  shastra: 'शास्त्राणि', natya_shastra: 'नाट्यशास्त्रम्',
+  kama_shastra: 'कामशास्त्रम्', niti_shastra: 'नीतिशास्त्रम्',
+  artha_shastra: 'अर्थशास्त्रम्', hitopadesha: 'हितोपदेशः',
+  bauddha_sahitya: 'बौद्धसाहित्यम्', sutra: 'सूत्रम्',
+  pramana: 'प्रमाणम्', avadana: 'अवदानम्',
+  krishi_shastra: 'कृषिशास्त्रम्', shainika_shastra: 'श्यैनिकशास्त्रम्',
+  ratna_pariksha: 'रत्नपरीक्षा',
+
+  // 23 Aug: Tantra/Saiva-Sakta cluster, deferred every earlier batch
+  // until explicitly requested. shaiva_agama/shakta_agama moved here
+  // from under agama.pancharatra (a Vaishnava-specific term that never
+  // fit) -- see dge/PENDING.md for that reparenting.
+  pashupata: 'पाशुपतम्', pratyabhijna: 'प्रत्यभिज्ञा',
+  shaiva_siddhanta: 'शैवसिद्धान्तः', shaiva_agama: 'शैवागमः',
+  shakta_agama: 'शाक्तागमः', natha_sampradaya: 'नाथसम्प्रदायः',
 
   itihasa: 'इतिहासाः', purana: 'पुराणानि',
   ramayana: 'रामायणम्', ananda_ramayana: 'आनन्दरामायणम्',

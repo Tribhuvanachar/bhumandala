@@ -63,6 +63,7 @@
     <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Sandhi split for this word — real Vidyut data when available, AI-assisted otherwise">🔗 Sandhi</button>
     <button class="tooltip-btn" data-word-only onpointerdown="window.askAcharya(event, 'samasa')" title="Samasa Vigraha for this word (AI-assisted — Vidyut has no precomputed samasa data yet)">🧩 Samasa</button>
     <button class="tooltip-btn" onpointerdown="window.dgeOpenCorpusSearchForSelection(event)" title="Find every other place this word or phrase appears in the library">🔍 Where else</button>
+    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Live sandhi split &amp; word analysis (via dharmamitra.org, a third-party service)">🔗 Sandhi</button>
   </div>
 </div>
 
@@ -1109,6 +1110,28 @@
   </div>
 </div>
 
+<!-- Sandhi/word-analysis result -- unlike Acharya's modal above, this is a
+     real deterministic answer from a live third-party API
+     (dharmamitra.org), not an LLM guess. See js/sandhi.js. -->
+<div class="modal-overlay" id="sandhiModal">
+  <div class="modal-content" id="sandhiModalBox">
+    <div class="modal-header-sticky">
+      <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">🔗 Sandhi / Word Split</h4>
+      <button class="btn-sm" onclick="window.closeModal('sandhiModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body">
+      <div id="sandhiLoading" style="display:none; text-align:center; padding: 30px;">
+        <span style="font-size:28px; display:inline-block; animation: spin 1s linear infinite;">⏳</span>
+        <p style="font-size:13px; font-weight: 600; color:#8a7a63; margin-top:12px;">Analyzing…</p>
+      </div>
+      <div id="sandhiResult" style="font-size:14px; line-height:1.6; overflow-wrap: anywhere;"></div>
+      <p style="font-size:11px; color:#8a7a63; margin-top:14px; padding-top:10px; border-top:1px solid var(--card-border);">
+        Analysis via <a href="https://dharmamitra.org" target="_blank" rel="noopener">dharmamitra.org</a>, an independent third-party service — not hosted by this project. Verify anything important independently.
+      </p>
+    </div>
+  </div>
+</div>
+
 <!-- DGE MODULAR SCRIPTS PIPELINE (Explicit tags ensure perfect load sequence & avoid DOM race conditions) -->
 <!-- ?v=4.60.6 cache-busts these files. BUMP THIS VALUE on every deploy that -->
 <!-- changes any js/*.js file — otherwise phones/GitHub Pages CDN can keep -->
@@ -1134,8 +1157,9 @@
 <script src="js/actions.js?v=4.60.7"></script>
 <script src="js/voice.js?v=4.60.6"></script>
 <script src="js/screenshot.js?v=4.60.7"></script>
-<script src="js/subanta-steps.js?v=1"></script>
 <script src="js/ai.js?v=4.72.3"></script>
+<script src="js/sandhi.js?v=1"></script>
+<script src="js/subanta-steps.js?v=1"></script>
 <!-- Renders Gemini-enrichment references (see tools/gemini_enrich.py) as
      inline footnote markers + a footnote list. Loaded before render.js,
      which calls into it. Additive: absent enrichment data, nothing changes. -->
@@ -1156,7 +1180,7 @@
 <script src="js/config-editor.js?v=4.60.6"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
 <script src="js/text-abbreviations.js?v=1"></script>
-<script src="js/core.js?v=4.63.4"></script>
+<script src="js/core.js?v=4.64.0"></script>
 <!-- Reads admin/config/menu.json and rebuilds the top bar, the Explore and
      Admin popups and the theme list from it. Loaded after core.js so the
      theme it re-ticks is the one already applied. -->
@@ -1170,7 +1194,7 @@
 <script src="js/backlinks.js?v=4.64.0"></script>
 <script src="js/content-inline.js?v=1"></script>
 <script src="js/tour.js?v=1"></script>
-<script src="js/library.js?v=4.61.2"></script>
+<script src="js/library.js?v=4.61.4"></script>
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
 <script src="js/dge-normalize.js?v=4.60.6"></script>
 <script src="js/dge-search.js?v=4.65.1"></script>
