@@ -330,6 +330,13 @@ def parse_chapter(page_title, is_first_chapter=False, is_appendix=False):
 # bracket stripping above.
 CRITICAL_PAREN_SPAN_RX = re.compile(r"\([^()]*\)")
 CRITICAL_BRACKET_SPAN_RX = re.compile(r"\[[^\[\]]*\]")
+# Some Lakshmitantram chapters (adhyaya 25, checked directly) use curly
+# braces for the exact same inline-marker/footnote-line apparatus other
+# chapters use square brackets for ("श्रीः{1}---", "{1. श्रीरुवाच I. }")
+# -- a third delimiter style, not seen in Ahirbudhnyasamhita/
+# Jayakhyasamhita/Padmasamhita, so kept separate rather than added to the
+# shared paren/bracket loop those already-verified paths use.
+CRITICAL_CURLY_SPAN_RX = re.compile(r"\{[^{}]*\}")
 CRITICAL_COLOPHON_LINE_RX = re.compile(r".*नाम\s+\S+\s*पटलः\s*।\s*$")
 # The bare "20-3" crossref tag doesn't only sit on its own line (handled
 # by CRITICAL_CROSSREF_LINE_RX below) -- checked directly, it also trails
@@ -453,6 +460,90 @@ def parse_chapter_critical(page_title, chapter_num):
         # verse's own body slice, not after a danda inside it (the
         # danda-adjacent case is already cleaned up above) -- trimmed like
         # the other leftover punctuation rather than kept as real text.
+        body = re.sub(r"\s+", " ", body).strip(" \n\t।|-")
+        if body:
+            vs = to_int(mm.group(1))
+            if vs == 1 and last_vs > 1:
+                series += 1
+            last_vs = vs
+            units.append(((chapter_num, series), vs, body))
+    return chapter_title, units
+
+
+# Lakshmitantram shares Jayakhyasamhita's per-chapter single-number ref
+# convention, but its apparatus is a genuinely different shape, checked
+# directly against adhyaya 1's own raw wikitext rather than assumed to
+# match just because both share that ref convention: variant-reading
+# footnotes are square-bracket-wrapped, referenced by an inline "[N]"
+# marker attached straight to a word (handled by the same generic
+# bracket-span stripping already built for Jayakhyasamhita) -- but each
+# verse's own textual commentary sits on a *tab-indented* line right
+# after its ref, with no bracket or paren of its own at all
+# ("\t1. नम इति विशिष्टोपायस्य..."), sometimes reduced to a placeholder
+# dash-run when there's no variant ("\t8. - - - - - - - - - - -"), and
+# at least once (adhyaya 1, after verse 4) continuing across several
+# *more* tab-indented lines quoting a complete extra benedictory verse
+# under a "टिप्पणी" ("gloss") sub-heading, itself just another tab-
+# indented line. One rule covers the whole family: real verse text in
+# this source is never itself tab-indented (confirmed directly -- the
+# front matter's own tab-indented title lines are already consumed by
+# the title-zone extraction below before this runs, so this only ever
+# touches genuine apparatus), so any line starting with a tab is
+# dropped outright, however many of them run together.
+def parse_chapter_lakshmi(page_title, chapter_num):
+    wt = wikitext(page_title)
+    if wt is None:
+        return None, []
+    poem = extract_poem_block(wt)
+    if poem is None:
+        return None, []
+    poem = poem.replace("॥", "।।")
+
+    prev = None
+    while prev != poem:
+        prev = poem
+        poem = CRITICAL_PAREN_SPAN_RX.sub("", poem)
+        poem = CRITICAL_BRACKET_SPAN_RX.sub("", poem)
+        poem = CRITICAL_CURLY_SPAN_RX.sub("", poem)
+
+    # Front-matter title line(s): same no-danda/no-trailing-dash heuristic
+    # as parse_chapter's own step 3, reused verbatim.
+    lines = poem.split("\n")
+    title_parts, rest_lines, in_title_zone = [], [], True
+    for line in lines:
+        s = line.strip()
+        if in_title_zone and not s:
+            if title_parts:
+                in_title_zone = False
+            continue
+        no_punct = "।" not in s and "|" not in s
+        if in_title_zone and s and no_punct and not re.search(r"-{2,}\s*$", s):
+            title_parts.append(s)
+            continue
+        in_title_zone = False
+        rest_lines.append(line)
+    chapter_title = " ".join(title_parts)
+    poem = "\n".join(rest_lines)
+
+    poem = "\n".join(l for l in poem.split("\n") if not l.startswith("\t"))
+
+    refs = []
+    def protect(mm):
+        refs.append(mm.group(0))
+        return SENTINEL
+    poem = re.sub(APPENDIX_REF_RX, protect, poem)
+    poem = re.sub(r"\d+", "", poem)
+    for r in refs:
+        poem = poem.replace(SENTINEL, r, 1)
+
+    units = []
+    prev_end = 0
+    series = 1
+    last_vs = 0
+    for mm in APPENDIX_REF_RX.finditer(poem):
+        body = poem[prev_end:mm.start()]
+        prev_end = mm.end()
+        body = re.sub(r"\d+", "", body)
         body = re.sub(r"\s+", " ", body).strip(" \n\t।|-")
         if body:
             vs = to_int(mm.group(1))
