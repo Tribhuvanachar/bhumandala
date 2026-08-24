@@ -19,7 +19,8 @@
       "tags": [
         "composer:ಕಮಲಪತಿವಿಠ್ಠಲರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -59,7 +60,8 @@
         "header_stripped": [
           "ಕಮಲಪತಿವಿಠ್ಠಲರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     },
@@ -79,7 +81,8 @@
       "tags": [
         "composer:ಕಮಲಪತಿವಿಠ್ಠಲರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -120,7 +123,8 @@
         "header_stripped": [
           "ಕಮಲಪತಿವಿಠ್ಠಲರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     },
@@ -140,7 +144,8 @@
       "tags": [
         "composer:ಕಮಲಪತಿವಿಠ್ಠಲರು",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -184,7 +189,8 @@
         "header_stripped": [
           "ಕಮಲಪತಿವಿಠ್ಠಲರು"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     },
@@ -204,7 +210,8 @@
       "tags": [
         "composer:ಕಮಲಪತಿವಿಠ್ಠಲರು",
         "source:android_app_local:dasa1",
-        "category_raw:5"
+        "category_raw:5",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -255,7 +262,8 @@
           "ಸುಳಾದಿಗಲು",
           "ಧ್ರುವತಾಳ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     },
@@ -275,7 +283,9 @@
       "tags": [
         "composer:ಕಮಲಪತಿವಿಠ್ಠಲರು",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ವಾಸಂತಿ",
       "tala": "ರೂಪಕ ತಾಳ",
@@ -316,7 +326,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false
     }

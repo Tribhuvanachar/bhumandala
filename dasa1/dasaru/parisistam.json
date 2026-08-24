@@ -19,7 +19,8 @@
       "tags": [
         "composer:ಪರಿಶಿಷ್ಟಂ",
         "source:android_app_local:dasa1",
-        "category_raw:3"
+        "category_raw:3",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -107,7 +108,8 @@
         "header_stripped": [
           "ಪರಿಶಿಷ್ಟಂ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     }

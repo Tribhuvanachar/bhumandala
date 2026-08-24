@@ -19,7 +19,8 @@
       "tags": [
         "composer:ಮಹಾನಿಥಿವಿಠಲ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -69,7 +70,8 @@
         "header_stripped": [
           "ಮಹಾನಿಥಿವಿಠಲ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     },
@@ -89,7 +91,8 @@
       "tags": [
         "composer:ಮಹಾನಿಥಿವಿಠಲ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -131,7 +134,8 @@
         "header_stripped": [
           "ಮಹಾನಿಥಿವಿಠಲ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     },
@@ -151,7 +155,8 @@
       "tags": [
         "composer:ಮಹಾನಿಥಿವಿಠಲ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -193,7 +198,8 @@
         "header_stripped": [
           "ಮಹಾನಿಥಿವಿಠಲ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     },
@@ -213,7 +219,8 @@
       "tags": [
         "composer:ಮಹಾನಿಥಿವಿಠಲ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -258,7 +265,8 @@
         "header_stripped": [
           "ಮಹಾನಿಥಿವಿಠಲ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     },
@@ -278,7 +286,8 @@
       "tags": [
         "composer:ಮಹಾನಿಥಿವಿಠಲ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -325,7 +334,8 @@
         "header_stripped": [
           "ಮಹಾನಿಥಿವಿಠಲ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     },
@@ -345,7 +355,8 @@
       "tags": [
         "composer:ಮಹಾನಿಥಿವಿಠಲ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -392,7 +403,8 @@
         "header_stripped": [
           "ಮಹಾನಿಥಿವಿಠಲ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     },
@@ -412,7 +424,8 @@
       "tags": [
         "composer:ಮಹಾನಿಥಿವಿಠಲ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -463,7 +476,8 @@
         "header_stripped": [
           "ಮಹಾನಿಥಿವಿಠಲ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     },
@@ -483,7 +497,8 @@
       "tags": [
         "composer:ಮಹಾನಿಥಿವಿಠಲ",
         "source:android_app_local:dasa1",
-        "category_raw:0"
+        "category_raw:0",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -535,7 +550,8 @@
         "header_stripped": [
           "ಮಹಾನಿಥಿವಿಠಲ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": false
       },
       "_needs_review": false
     },
@@ -555,7 +571,9 @@
       "tags": [
         "composer:ಮಹಾನಿಥಿವಿಠಲ",
         "source:android_app_local:dasa1",
-        "category_raw:4"
+        "category_raw:4",
+        "form:devaranama",
+        "rendition:studio_recording"
       ],
       "raga": "ರೀತಿಗೌಳ",
       "tala": "ಆದಿ ತಾಳ",
@@ -598,7 +616,8 @@
         "header_stripped": [
           "ನಿರ್ಗಮನ"
         ],
-        "unclassified_lines": []
+        "unclassified_lines": [],
+        "is_recorded_rendition": true
       },
       "_needs_review": false
     }
