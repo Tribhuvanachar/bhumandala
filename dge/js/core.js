@@ -265,7 +265,7 @@ window.addEventListener('pagehide', function () {});
 // than leaving it to be rediscovered each time, the HTML now stamps its
 // own version and the JS checks it matches. Bump BOTH on any release that
 // changes index.html's structure.
-window.DGE_EXPECTED_HTML_VERSION = '4.63.0';
+window.DGE_EXPECTED_HTML_VERSION = '4.64.0';
 document.addEventListener('DOMContentLoaded', () => {
   const meta = document.querySelector('meta[name="dge-html-version"]');
   const actual = meta ? meta.getAttribute('content') : '(none)';
@@ -963,7 +963,7 @@ function initAuthAndBranding() {
   const adminItem = document.getElementById('adminAccessItem');
   const superItem = document.getElementById('superAdminAccessItem');
   const logoutItem = document.getElementById('logoutAccessItem');
-  if (keyBtn) keyBtn.innerText = (isAuthorized || isSuperadmin) ? '🔓' : '🔑';
+  if (keyBtn) keyBtn.innerHTML = (isAuthorized || isSuperadmin) ? '🔓 <span class="btn-top-label">Access</span>' : '🔑 <span class="btn-top-label">Access</span>';
   if (adminItem) {
     adminItem.innerHTML = isAuthorized ? '🔓 Admin Access <span style="margin-left:auto; font-size:10px; color:var(--accent-red); font-weight:800;">ACTIVE</span>' : '🔒 Admin Access';
     adminItem.classList.toggle('active', isAuthorized);

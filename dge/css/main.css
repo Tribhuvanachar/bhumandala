@@ -483,6 +483,18 @@ body:has(.popup-sheet.show)::after {
 .modal-overlay.drawer-left .modal-body,
 .modal-overlay.drawer-right .modal-body { padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
 
+/* Phase 3: .top-actions, relocated wholesale into #actionsDrawer's body
+   (see index.html), becomes a vertical labelled list instead of the
+   horizontal icon-only row it used to be directly in .top-bar. Scoped to
+   .modal-body so it only affects this one relocated usage. */
+.modal-body .top-actions { display: flex; flex-direction: column; align-items: stretch; gap: 4px; justify-content: flex-start; }
+.modal-body .top-actions > * { width: 100%; }
+.modal-body .top-actions .btn-top {
+  justify-content: flex-start; width: 100%; font-size: 15px; font-weight: 600;
+  padding: 12px 10px; gap: 10px; border-radius: var(--radius-sm);
+}
+.btn-top-label { font-size: 13px; }
+
 .modal-header-sticky { padding: 16px; background: var(--card-bg); z-index: 10; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
 .modal-body { padding: 16px; overflow-y: auto; flex-grow: 1; }
 

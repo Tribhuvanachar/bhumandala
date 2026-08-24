@@ -63,90 +63,121 @@
 </div>
 
 <!-- Top Bar -->
-<meta name="dge-html-version" content="4.63.0">
+<meta name="dge-html-version" content="4.64.0">
 <div class="top-bar">
   <div class="top-bar-title" onclick="window.openLibraryModal()">❮ Library</div>
-  <div class="top-actions">
+  <button class="btn-top" onclick="window.openModal('actionsDrawer')" title="Menu: Commentary, Display, Explore, About, Access">☰</button>
+</div>
 
-    <!-- Commentary — content-related, used constantly, stays on its own -->
-    <!-- data-topbar names each entry for admin/config/menu.json, which decides
-         which of these appear and in what order. Without that file they stay
-         exactly as written here. -->
-    <div style="position:relative;" data-topbar="commentary">
-      <button class="btn-top" onclick="window.togglePopup('commentaryPopup')" id="activeCommBtn" title="Commentary Options">💬</button>
-      <div class="popup popup-top" id="commentaryPopup">
-        <div class="popup-label">View Bhashya</div>
-        <div class="pop-item active" onclick="window.setCommentaryView('none', this)">None (Mula Only)</div>
-        <div class="pop-item" onclick="window.setCommentaryView('all', this)">All Commentaries</div>
-        <div id="commentaryDynamicList"></div>
-      </div>
+<!-- 24 Aug 2026: Phase 3 of the mobile UI overhaul -- .top-actions (the
+     Commentary/Display/Admin/Explore/About/Account/Access icon row) moved
+     wholesale into this right-edge drawer, opened by the new "☰" button
+     above. It used to live directly in .top-bar and had its own comment
+     admitting the workaround: "Crowding is solved by keeping the button
+     count low ... rather than by scrolling this row" -- a real UX bug this
+     phase actually fixes, rather than papering over. Placed as a sibling
+     of .top-bar for the same containing-block reason #displayPopup is
+     (see that comment above): .top-bar's backdrop-filter would otherwise
+     break this drawer's own position:fixed anchoring.
+     Every id, onclick handler and data-topbar attribute below is byte-for-
+     byte unchanged, so admin-editor.js, core.js, user-auth.js and
+     menu.js's admin/config/menu.json-driven reordering (which finds these
+     via `.top-actions [data-topbar=...]` and reorders within .top-actions)
+     all keep working with no JS changes: .top-actions is still exactly
+     the element menu.js looks for and reorders, just relocated as a
+     whole unit. Each button gained a visible .btn-top-label span (see
+     main.css) since a vertical list needs a real label, not just a title
+     tooltip nobody on a touchscreen will see. -->
+<div class="modal-overlay drawer-right" id="actionsDrawer">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size:16px;">Menu</h3>
+      <button class="btn-sm" onclick="window.closeModal('actionsDrawer')" title="Close">❯</button>
     </div>
+    <div class="modal-body">
+      <div class="top-actions">
 
-    <!-- Display: font size, script, theme and reading view were four
-         separate toolbar icons. On a phone that (plus the admin icons)
-         pushed the last buttons off screen entirely. Merged into one
-         scrollable popup — same options, one entry point. -->
-    <div style="position:relative;" data-topbar="display">
-      <button class="btn-top" onclick="window.togglePopup('displayPopup')" title="Display: size, script, theme, view">🅰</button>
-    </div>
+        <!-- Commentary — content-related, used constantly, stays on its own -->
+        <!-- data-topbar names each entry for admin/config/menu.json, which decides
+             which of these appear and in what order. Without that file they stay
+             exactly as written here. -->
+        <div style="position:relative;" data-topbar="commentary">
+          <button class="btn-top" onclick="window.togglePopup('commentaryPopup')" id="activeCommBtn" title="Commentary Options">💬 <span class="btn-top-label">Commentary</span></button>
+          <div class="popup popup-top" id="commentaryPopup">
+            <div class="popup-label">View Bhashya</div>
+            <div class="pop-item active" onclick="window.setCommentaryView('none', this)">None (Mula Only)</div>
+            <div class="pop-item" onclick="window.setCommentaryView('all', this)">All Commentaries</div>
+            <div id="commentaryDynamicList"></div>
+          </div>
+        </div>
 
-    <!-- Admin tools, hidden entirely unless authorised -->
-    <div style="position:relative;" data-topbar="admin">
-      <button class="btn-top" id="adminToolsBtn" onclick="window.togglePopup('adminToolsPopup')" title="Admin tools" style="display:none;">🛡️</button>
-      <div class="popup popup-top" id="adminToolsPopup">
-        <div class="popup-label">Admin</div>
-        <div class="pop-item advanced-feature" onclick="window.togglePopup('adminToolsPopup'); window.openKeyModal()">⚙️ AI Keys &amp; Features</div>
-        <div class="pop-item" id="adminFilesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openAdminEditor()">🗂️ Repo Files</div>
-        <div class="pop-item" id="adminConfigItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openConfigEditor()">🛠️ Site Settings</div>
-        <div class="pop-item" id="adminConvertItem" style="display:none;" onclick="window.location.href='convert/index.html'">🔄 Convert Tool</div>
-        <div class="pop-item" id="adminLibraryManagerItem" style="display:none;" onclick="window.location.href='../admin/library.html'">🗂️ Library Manager</div>
-        <div class="pop-item" id="adminKoshaManagerItem" style="display:none;" onclick="window.location.href='../admin/kosha.html'">📖 Kosha Manager</div>
-        <div class="pop-item" id="adminAshtadhyayiManagerItem" style="display:none;" onclick="window.location.href='../admin/ashtadhyayi.html'">📜 Ashtadhyayi Manager</div>
-        <div class="pop-item" id="adminDasaCaptureItem" style="display:none;" onclick="window.location.href='../admin/dasa-capture.html'">🎶 Dasa Sahitya Capture</div>
-        <div class="pop-item" id="adminHolyPlacesManagerItem" style="display:none;" onclick="window.location.href='../admin/holy-places.html'">🛕 Holy Places Curation</div>
-        <div class="pop-item" id="adminAudioManagerItem" style="display:none;" onclick="window.location.href='../admin/audio.html'">🎙️ Audio Admin<span class="new-badge" id="adminAudioManagerBadge" style="display:none;">NEW</span></div>
-        <div class="pop-item" id="adminWorkflowsItem" style="display:none;" onclick="window.location.href='../admin/workflows.html'">⚙️ Run a Workflow</div>
-        <div class="pop-item" id="adminUserRolesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openUserRolesModal()">👥 Manage Users</div>
-      </div>
-    </div>
+        <!-- Display: font size, script, theme and reading view were four
+             separate toolbar icons. On a phone that (plus the admin icons)
+             pushed the last buttons off screen entirely. Merged into one
+             scrollable popup — same options, one entry point. -->
+        <div style="position:relative;" data-topbar="display">
+          <button class="btn-top" onclick="window.togglePopup('displayPopup')" title="Display: size, script, theme, view">🅰 <span class="btn-top-label">Display</span></button>
+        </div>
 
-    <!-- Standalone DGE sections (Guru Parampara, Tirtha, Ashtadhyayi) — one
-         entry point rather than a growing row of raw icons, same reasoning
-         as the Display popup consolidation above: several separate toolbar
-         buttons push the last ones off-screen on a phone. -->
-    <div style="position:relative;" data-topbar="explore">
-      <button class="btn-top" onclick="window.togglePopup('sectionsPopup')" title="More DGE Sections">🧭</button>
-      <div class="popup popup-top" id="sectionsPopup">
-        <div class="popup-label">Explore</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.openModal('ourStoryModal');">📖 About the Project — Our Story</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='guru-parampara/index.html'">🪷 Guru Parampara</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='tirtha/index.html'">🛕 Tirtha Prabandha</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='ashtadhyayi.html'">📖 Aṣṭādhyāyī</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dhatu.html'">📚 Dhātupāṭha</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='shabda.html'">🔤 Śabdapāṭha</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='rupasiddhi.html'">✨ Rūpasiddhi — derivation lab</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='chandas.html'">🎵 Chandas — metre analyzer</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='kavya.html'">🪶 Kāvyāni</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dasa_sahitya.html'">🎶 Dasa Sahitya</div>
-      </div>
-    </div>
+        <!-- Admin tools, hidden entirely unless authorised -->
+        <div style="position:relative;" data-topbar="admin">
+          <button class="btn-top" id="adminToolsBtn" onclick="window.togglePopup('adminToolsPopup')" title="Admin tools" style="display:none;">🛡️ <span class="btn-top-label">Admin Tools</span></button>
+          <div class="popup popup-top" id="adminToolsPopup">
+            <div class="popup-label">Admin</div>
+            <div class="pop-item advanced-feature" onclick="window.togglePopup('adminToolsPopup'); window.openKeyModal()">⚙️ AI Keys &amp; Features</div>
+            <div class="pop-item" id="adminFilesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openAdminEditor()">🗂️ Repo Files</div>
+            <div class="pop-item" id="adminConfigItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openConfigEditor()">🛠️ Site Settings</div>
+            <div class="pop-item" id="adminConvertItem" style="display:none;" onclick="window.location.href='convert/index.html'">🔄 Convert Tool</div>
+            <div class="pop-item" id="adminLibraryManagerItem" style="display:none;" onclick="window.location.href='../admin/library.html'">🗂️ Library Manager</div>
+            <div class="pop-item" id="adminKoshaManagerItem" style="display:none;" onclick="window.location.href='../admin/kosha.html'">📖 Kosha Manager</div>
+            <div class="pop-item" id="adminAshtadhyayiManagerItem" style="display:none;" onclick="window.location.href='../admin/ashtadhyayi.html'">📜 Ashtadhyayi Manager</div>
+            <div class="pop-item" id="adminDasaCaptureItem" style="display:none;" onclick="window.location.href='../admin/dasa-capture.html'">🎶 Dasa Sahitya Capture</div>
+            <div class="pop-item" id="adminHolyPlacesManagerItem" style="display:none;" onclick="window.location.href='../admin/holy-places.html'">🛕 Holy Places Curation</div>
+            <div class="pop-item" id="adminAudioManagerItem" style="display:none;" onclick="window.location.href='../admin/audio.html'">🎙️ Audio Admin<span class="new-badge" id="adminAudioManagerBadge" style="display:none;">NEW</span></div>
+            <div class="pop-item" id="adminWorkflowsItem" style="display:none;" onclick="window.location.href='../admin/workflows.html'">⚙️ Run a Workflow</div>
+            <div class="pop-item" id="adminUserRolesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openUserRolesModal()">👥 Manage Users</div>
+          </div>
+        </div>
 
-    <button class="btn-top" data-topbar="about" onclick="window.openAboutModal()" title="About / Contact / Report an Issue">ℹ️</button>
+        <!-- Standalone DGE sections (Guru Parampara, Tirtha, Ashtadhyayi) — one
+             entry point rather than a growing row of raw icons, same reasoning
+             as the Display popup consolidation above: several separate toolbar
+             buttons push the last ones off-screen on a phone. -->
+        <div style="position:relative;" data-topbar="explore">
+          <button class="btn-top" onclick="window.togglePopup('sectionsPopup')" title="More DGE Sections">🧭 <span class="btn-top-label">Explore Sections</span></button>
+          <div class="popup popup-top" id="sectionsPopup">
+            <div class="popup-label">Explore</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.openModal('ourStoryModal');">📖 About the Project — Our Story</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='guru-parampara/index.html'">🪷 Guru Parampara</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='tirtha/index.html'">🛕 Tirtha Prabandha</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='ashtadhyayi.html'">📖 Aṣṭādhyāyī</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dhatu.html'">📚 Dhātupāṭha</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='shabda.html'">🔤 Śabdapāṭha</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='rupasiddhi.html'">✨ Rūpasiddhi — derivation lab</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='chandas.html'">🎵 Chandas — metre analyzer</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='kavya.html'">🪶 Kāvyāni</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dasa_sahitya.html'">🎶 Dasa Sahitya</div>
+          </div>
+        </div>
 
-    <!-- User Accounts (Firebase) — hidden entirely unless AUTH_CONFIG.enabled
-         is true (see config.js / FIREBASE_SETUP.md). Opens a modal directly,
-         like About, rather than a popup — sidesteps the toolbar-popup
-         overflow issues fixed elsewhere in this file, since there's no
-         anchor-side positioning to get wrong for a plain modal trigger. -->
-    <button class="btn-top" id="accountBtn" data-topbar="account" onclick="window.openAccountModal()" title="My Account" style="display:none;">👤</button>
+        <button class="btn-top" data-topbar="about" onclick="window.openAboutModal()" title="About / Contact / Report an Issue">ℹ️ <span class="btn-top-label">About / Contact</span></button>
 
-    <div style="position:relative;" data-topbar="access">
-      <button class="btn-top" id="accessKeyBtn" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access">🔑</button>
-      <div class="popup popup-top" id="accessPopup">
-        <div class="popup-label">Access</div>
-        <div class="pop-item" id="adminAccessItem" onclick="window.togglePopup('accessPopup'); window.dgeShowAdminAccessPrompt()">🔒 Admin Access</div>
-        <div class="pop-item" id="superAdminAccessItem" onclick="window.togglePopup('accessPopup'); window.dgeShowSuperAdminAccessPrompt()">🔒 Super Admin Access</div>
-        <div class="pop-item" id="logoutAccessItem" style="display:none; color:var(--accent-red);" onclick="window.togglePopup('accessPopup'); window.dgeLogoutAdminAccess()">🚪 Log Out (clear access)</div>
+        <!-- User Accounts (Firebase) — hidden entirely unless AUTH_CONFIG.enabled
+             is true (see config.js / FIREBASE_SETUP.md). Opens a modal directly,
+             like About, rather than a popup — sidesteps the toolbar-popup
+             overflow issues fixed elsewhere in this file, since there's no
+             anchor-side positioning to get wrong for a plain modal trigger. -->
+        <button class="btn-top" id="accountBtn" data-topbar="account" onclick="window.openAccountModal()" title="My Account" style="display:none;">👤 <span class="btn-top-label">My Account</span></button>
+
+        <div style="position:relative;" data-topbar="access">
+          <button class="btn-top" id="accessKeyBtn" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access">🔑 <span class="btn-top-label">Access</span></button>
+          <div class="popup popup-top" id="accessPopup">
+            <div class="popup-label">Access</div>
+            <div class="pop-item" id="adminAccessItem" onclick="window.togglePopup('accessPopup'); window.dgeShowAdminAccessPrompt()">🔒 Admin Access</div>
+            <div class="pop-item" id="superAdminAccessItem" onclick="window.togglePopup('accessPopup'); window.dgeShowSuperAdminAccessPrompt()">🔒 Super Admin Access</div>
+            <div class="pop-item" id="logoutAccessItem" style="display:none; color:var(--accent-red);" onclick="window.togglePopup('accessPopup'); window.dgeLogoutAdminAccess()">🚪 Log Out (clear access)</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
