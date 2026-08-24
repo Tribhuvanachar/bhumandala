@@ -356,7 +356,25 @@ details.dge-analysis-field[open] > summary.commentary-title { margin-bottom: 8px
   z-index: 10500;
 }
 .popup.popup-sheet.show { transform: translateY(0); }
+/* 24 Aug 2026 -- Phase 6: full-width-from-the-bottom is a mobile pattern
+   (thumb-reachable, no room to spare). On a desktop-width viewport there
+   is room to spare, and a sheet stretched edge-to-edge at 1200px+ would
+   look broken, not native -- so above the tablet breakpoint it becomes a
+   compact floating panel anchored to the bottom-right instead, closer to
+   how the equivalent anchored dropdown behaved there. Still the same
+   element, same .show class, same slide transition -- only its size and
+   corner anchoring change. */
+@media (min-width: 760px) {
+  .popup.popup-sheet {
+    left: auto; right: 20px; bottom: 20px;
+    width: min(360px, 90vw); max-width: min(360px, 90vw);
+    max-height: min(70vh, 560px);
+    border-radius: var(--radius-lg); border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-lg);
+  }
+}
 .popup-sheet-handle { width: 36px; height: 4px; border-radius: var(--radius-pill); background: var(--card-border); margin: 0 auto 6px; flex-shrink: 0; }
+@media (min-width: 760px) { .popup-sheet-handle { display: none; } }
 .popup-sheet-scroll { overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 12px; flex: 1 1 auto; min-height: 0; }
 /* Backdrop: CSS-only via :has(), so opening/closing the sheet needs no JS
    changes. Degrades gracefully (no dimming, sheet still fully usable) in
