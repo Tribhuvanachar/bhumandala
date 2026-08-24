@@ -35,7 +35,7 @@
     },
     {
       "path": "dge/data/agama/pancharatra/pancharatra_samhitas/padma_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Padma Samhita"
     },
     {
