@@ -147,31 +147,47 @@ on `main` regardless — small, human-authored, and worth reading without a
 checkout of the dist branch, same as `dge/search_index_dist_README.md` stays
 on `main` while the 330MB it describes doesn't.
 
-## Path to one folder
+## Path to one folder — done (21 Aug 2026)
 
-Not done in this pass — laid out here so the next step is a decision, not a
-rediscovery:
+1. ✅ Human sign-off given: all 12 `confirmed_duplicates` merged; all 5
+   `needs_human_review` composers confirmed by the project lead to be
+   **different people** from their web-side name-root candidates (Guru
+   Jagannatha ≠ Jagannatha Dasaru, Prasanna Srinivasa ≠ Prasanna Venkata,
+   Venugopala/Rajagopala/Gopalaryaru ≠ Gopala Dasaru/Dasa) — each became its
+   own new composer file rather than being merged into anything.
+2. ✅ Merge rule decided: side-by-side compositions under one composer for
+   the 12 confirmed duplicates (`merge_confirmed_composers.py`, 19 Aug), with
+   the existing fingerprint `dedupe()` still running to catch the rare
+   actual same-pada-in-both-sources case.
+3. ✅ `category`→`form` guesses confirmed by the project lead: 0 and 3 both
+   fold into plain `pada` (kirtana-type songs — no separate bucket needed),
+   1→`ugabhoga`, 2→`mundige`, 5→`suladi`. `mundige` and `dandaka` already
+   have enum slots in `schemas.json`'s `dasa_pada_text.form` — no schema
+   change was actually needed. Category 4 (singer/raga/tala/music-director/
+   studio block — a modern recorded rendition, not classical text) stays
+   folded into the corpus rather than a separate shelf, but every such
+   record carries `tags: [..., "rendition:studio_recording"]` and
+   `app_meta.is_recorded_rendition: true` so it can be filtered, relabeled,
+   or removed independently later without re-deriving which records these
+   were. Searched for "Narasimha Pradurbhava Dandaka" (Sripadaraja) — not
+   present under that name in any of the four sources as of this pass.
+4. ✅ Folded: `finalize_single_corpus.py` moved every remaining dasa1
+   composer (123, all confirmed distinct — see above) into its own new file
+   under `dasa_sahitya/composers/`, and folded `raw_dump`'s unattributed
+   `ugabhoga.json` (278 items) into the existing `untitled.json` bucket via
+   the same dedupe (3 exact duplicates against the web crawl's own untitled
+   pile collapsed). **`dasa_sahitya_local/` is retired** — every composition
+   from every source now lives under `dge/data/dasa_sahitya/composers/`.
+   Final count: **15,863 compositions, 152 composer files, ~95 MB**.
+5. Repeat this same review (composer-identity check, category confirmation,
+   fold-in) for each future asset as it arrives — one at a time, not
+   batched, so the backlog of undecided calls never grows into its own
+   project. `tools/dasa_sahitya/merge_or_relabel.py` (see its own docstring)
+   is the reusable tool for folding a future confirmed-duplicate composer in,
+   or moving/relabeling any composition, without hand-writing a one-off
+   script each time.
 
-1. Get human sign-off on the 12 `confirmed_duplicates` + a call on the 5
-   `needs_human_review` composers (a Kannada reader, or the screenshot of
-   Dasaru names/authors mentioned as coming next, can settle both).
-2. Decide a merge rule for a confirmed-duplicate composer: keep both sets of
-   compositions side by side under one composer (most likely correct, since
-   dasa1 and the web crawl are largely non-overlapping *compositions* even
-   for the *same* composer — 983 app vs 306 web for Purandara Dasaru, near-
-   zero title overlap expected), vs. run the existing `dedupe()` fingerprint
-   logic (composer + first 80 Kannada chars) across both sources to catch
-   the same *pada* appearing in both.
-3. Resolve the `category`→`form` guesses (particularly `mundige` needing a
-   schema-enum addition, and whether category-4 "rendered song" entries
-   belong in the same record type at all).
-4. Only then: fold `dasa_sahitya_local/<asset>/dasaru/*.json` into
-   `dasa_sahitya/composers/*.json` (one write pass, composer-file-by-
-   composer-file) and retire `dasa_sahitya_local/` in favor of the single
-   `dasa_sahitya/` folder — at that point `also_at`/dedup provenance fields
-   should record which source(s) each composition came from, same as the
-   existing cross-source dedup already does for the web crawl.
-5. Repeat steps 1-4 once the remaining 3-4 app assets are imported — do the
-   review per-asset as each arrives rather than batching all of them, so the
-   backlog of undecided composer-identity calls never gets large enough to
-   be a project of its own.
+This file, `ALL_SOURCES_composer_registry.json`, and
+`dasa1/cross_source_duplicate_review.json` stay as the historical record of
+that review — the 5-composer and category calls above are recorded there in
+full, not just this summary.
