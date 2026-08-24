@@ -2606,6 +2606,78 @@ complete record, not just a live queue.
     chapters, simplest sampled convention) before attempting the larger,
     messier क्रियापादः/चर्यापादः.
 
+- **24 Aug (same thread, continued): asked directly to finish all of the
+  above and move on.** Built and verified all four remaining pieces
+  rather than stopping at scoping — Padmasaṃhitā's 4 padas and
+  Lakṣmītantram both shipped this same session, on top of
+  Ahirbudhnyasaṃhitā/Viṣṇusaṃhitā/Jayākhyasaṃhitā earlier. Every
+  Pāñcarātra Āgama Saṃhitā leaf reachable from a licence-clear source is
+  now populated.
+
+  **Padmasaṃhitā: one shared parser covers all 4 padas after all**,
+  contrary to the earlier note above — the 4 heading conventions
+  (asterisk-wrapped, bare-trailing-period, none, double-pipe) turned out
+  to differ only in *delimiter shape*, not in kind: a heading line never
+  carries a daṇḍa/pipe (real verse text always does), so one rule
+  recognizing several delimiter shapes together covers all four padas
+  without needing to know which pada a given page belongs to. 82 items
+  (yoga 5, kriya 32, jnana 12, charya 33 — matching the index page
+  counts exactly), 9,096 śloka, checked at full scale rather than
+  trusted from the small regression sample — three real bugs only
+  surfaced there:
+  - Kriyapāda adhyāya 16's own raw wikitext reads `।। 116.56 ।।` sitting
+    directly between two verses correctly marked `16.55` and `16.57` —
+    a source-side typo (an extra "1"), not a real chapter 116 out of
+    32. Fixed generally rather than by hand: since the page's true
+    chapter number is already known externally (from its own title),
+    the parser now never trusts a two-number ref's own captured chapter
+    digit at all, closing the whole class of typo.
+  - A `*`/`?`-delimited heading can span *several* tab-indented lines,
+    the opening delimiter on the first line and the closing one only on
+    the last — invisible to a per-line check. Real verse text in this
+    source is never itself tab-indented (the same property already
+    relied on for Lakṣmītantram, below), so any tab-indented line is
+    now dropped outright, subsuming the multi-line case without the
+    unsafe alternative of pairing `*`/`?` characters across the whole
+    poem.
+  - A bare, unpaired `?` also turns up constantly *inside* verse lines
+    themselves as an inline uncertain-reading marker (`जराया ? वा`,
+    over 50 instances at full scale, concentrated in caryāpāda) — this
+    is exactly why pairing `*`/`?` as delimiters directly would have
+    been wrong; handled by stripping any leftover `?` only after every
+    heading-line use of it has already been consumed.
+
+  9 stray characters remain across all 9,096 śloka, every one checked
+  against its own raw wikitext and confirmed as a genuine source-side
+  unbalanced-paren typo (two footnotes merged onto one line sharing a
+  single bracket pair, or an isolated unclosed paren), not a parsing
+  gap — real verse content intact in each case, left alone rather than
+  guessed at.
+
+  **Lakṣmītantram: 56 adhyāya, 3,689 śloka.** Its apparatus (tab-
+  indented running commentary, confirmed directly to leak into verse
+  bodies under the existing `critical` parser) got its own
+  `parse_chapter_lakshmi`: any line starting with a tab is apparatus and
+  dropped outright, which also cleanly subsumes the multi-line `टिप्पणी`
+  commentary block found in adhyāya 1. A third bracket-apparatus style
+  turned up in adhyāya 25 specifically — curly braces used for the same
+  inline-marker/footnote-line role square brackets serve elsewhere in
+  the same work — added to Lakṣmītantram's own stripping loop, not the
+  shared one the other three texts use, since none of those showed any
+  evidence of needing it. Adhyāya 56's own Wikisource page carries no
+  content at all (just the page header template, checked directly) — a
+  genuine gap in the source transcription, noted in the item's own
+  metadata rather than silently skipped. Adhyāya 57's closing verse
+  fittingly echoes adhyāya 1's opening invocation verbatim — checked
+  before trusting it wasn't leaked duplicate content, a real literary
+  framing device instead.
+
+  **What's still genuinely unavailable, unchanged from the research
+  above**: Muktabodha (blocked on a login gate, flagged for the project
+  lead), Parama/Hayagrīva/Vāsiṣṭha Saṃhitās (no source found anywhere
+  checked), Īśvarasaṃhitā (one non-commercial archive.org scan, correctly
+  left unused, and Devanāgarī-garbled OCR besides).
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are
