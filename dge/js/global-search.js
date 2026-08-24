@@ -76,15 +76,19 @@
     var s = document.createElement('style');
     s.id = 'dge-gs-css';
     // Colours read the app's real design tokens (css/main.css) so the search
-    // UI themes with the rest of the site. The FAB sits ABOVE the bottom
-    // toolbar (body reserves 126px for it) and above the toolbar z-index
-    // (9999) so it is never hidden behind Filter/Tools; the overlay sits at
-    // modal level (11000). Both the input-script picker and the search-scope
-    // picker are the same custom button+popup-list shape (styled to match
-    // the app's other controls) instead of a native <select> -- see the
+    // UI themes with the rest of the site. The overlay sits at modal level
+    // (11000). Both the input-script picker and the search-scope picker are
+    // the same custom button+popup-list shape (styled to match the app's
+    // other controls) instead of a native <select> -- see the
     // .dge-gs-schemewrap comment below for why.
+    // 24 Aug 2026: this used to also define a .dge-gs-fab floating circle.
+    // The project lead's direct follow-up report overrides the earlier
+    // "keep both FABs, they're frequent enough" call: "let it not sit
+    // there... go into some menu item." build() below no longer creates a
+    // trigger button of its own -- index.html's #dge-qa-tab is the only
+    // entry point left, calling window.DGEGlobalSearch.open() directly
+    // (still the same real, already-exported API further down this file).
     s.textContent = [
-      '.dge-gs-fab{position:fixed;right:16px;bottom:calc(134px + env(safe-area-inset-bottom));z-index:10000;width:48px;height:48px;border-radius:50%;border:none;background:var(--accent-red,#7a3b1d);color:#fff;font-size:20px;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer}',
       '.dge-gs-overlay{position:fixed;inset:0;z-index:11000;background:rgba(0,0,0,.45);display:none}',
       '.dge-gs-overlay.open{display:block}',
       '.dge-gs-panel{max-width:720px;margin:6vh auto 0;background:var(--card-bg,#fff);color:var(--text-primary,#1a1a1a);border:1px solid var(--card-border,rgba(0,0,0,.12));border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);overflow:hidden;font-family:inherit}',
@@ -139,18 +143,6 @@
   function build() {
     if (document.getElementById('dge-gs-overlay')) return;
     css();
-    var fab = document.createElement('button');
-    fab.className = 'dge-gs-fab';
-    fab.title = 'Search all texts (Ctrl/Cmd-K)';
-    fab.textContent = '🔎';
-    // Not `fab.onclick = open` — the DOM hands onclick the click's
-    // PointerEvent as open()'s first argument, and since open() treats a
-    // truthy `query` as prefill text, that event object landed in the
-    // search box as the literal string "[object PointerEvent]".
-    fab.onclick = function () { open(); };
-    document.body.appendChild(fab);
-    if (typeof window.dgeMakeFloatingDraggable === 'function') window.dgeMakeFloatingDraggable(fab, 'globalSearch');
-
     var ov = document.createElement('div');
     ov.className = 'dge-gs-overlay';
     ov.id = 'dge-gs-overlay';
