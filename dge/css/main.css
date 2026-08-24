@@ -413,6 +413,16 @@ body:has(.popup-sheet.show)::after {
 .popup.show { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
 .popup hr { width: 100%; border: 0; border-top: 1px solid var(--card-border); margin: 0; }
 
+/* 24 Aug 2026: live-preview Shloka Image Composer (#shareImagePreviewSheet) */
+.share-preview-canvas-wrap { display: flex; justify-content: center; align-items: center; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 10px; min-height: 160px; }
+.share-preview-canvas { max-width: 100%; height: auto; border-radius: 6px; display: block; }
+.share-preview-loading { font-size: 12px; color: var(--muted-text); padding: 30px 0; }
+.share-preview-color-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 4px 12px; }
+.share-preview-swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--card-border); cursor: pointer; padding: 0; }
+.share-preview-swatch:active { transform: scale(0.9); }
+#sharePreviewColorInput { width: 34px; height: 30px; border: none; background: none; cursor: pointer; padding: 0; }
+.share-preview-contrast-badge { font-size: 11px; font-weight: 700; margin-left: auto; }
+
 .pop-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 700; width: 100%; gap: 12px; white-space: nowrap; }
 .pop-input { width: 48px; text-align: center; border: 1px solid var(--card-border); border-radius: var(--radius-xs); padding: 4px; font-size: 12px; box-sizing: border-box; background: var(--card-bg); color: var(--text-primary); }
 .pop-item { padding: 8px 12px; font-size: 12px; font-weight: 600; cursor: pointer; border-radius: var(--radius-sm); display: flex; align-items: center; gap: 8px; white-space: nowrap; transition: background var(--t-fast) var(--ease); }
