@@ -2564,17 +2564,47 @@ complete record, not just a live queue.
     being *itself* tab-indented somewhere in this text (as happens in
     Ahirbudhnyasaṃhitā's dialogue continuations) hasn't yet been ruled
     out.
-  - Padmasaṃhitā nests one level deeper than every other text here: its
-    index links to 4 pāda sub-index pages (योगपादः, क्रियापादः,
-    ज्ञानपादः, चर्यापादः), each presumably linking its own chapters in
-    turn — confirmed only for the index page itself; a pāda page's own
-    wikitext (chapter list shape, and separately its own verse/apparatus
-    convention, which could match either of the two conventions already
-    handled or be a third) was never successfully fetched — every
-    attempt landed in the same sustained rate-limit window covering the
-    Ahirbudhnya/Viṣṇu/Jayākhya work above. `subpage_list()` would need a
-    second traversal level for this one specifically once its actual
-    structure is confirmed.
+  - **Padmasaṃhitā, follow-up same day: its pāda-page structure and per-
+    pāda conventions now actually confirmed** (the rate-limit window
+    blocking this earlier cleared) — and it turns out to need
+    meaningfully more than a second `subpage_list()` traversal level.
+    82 chapters total across 4 pādas: योगपादः (5), क्रियापादः (32),
+    ज्ञानपादः (12), चर्यापादः (33). Every pāda's own chapter pages live
+    at a *bare* `<pāda>/अध्यायः N` title with no `पद्मसंहिता/` prefix at
+    all, regardless of pāda — but the pāda *index* page itself is only
+    reachable that way for योगपादः; क्रियापादः, ज्ञानपादः and चर्यापादः
+    only resolve at `पद्मसंहिता/<pāda>` (confirmed for क्रियापादः: the
+    bare title `क्रियापादः` exists too, but is a genuine MediaWiki
+    redirect to `पद्मसंहिता/क्रियापादः` — checked via the API's own
+    short-URL resolution, not assumed from the page shape alone). All 4
+    sampled pādas use the same chapter.verse ref pairing
+    Ahirbudhnyasaṃhitā/Viṣṇusaṃhitā do (`।। 1.1 ।।`) — but ज्ञानपादः
+    adhyāya 1 was directly seen dropping the chapter prefix on at least
+    one verse (`।। 10 ।।` instead of `।। 1.10 ।।`), which the existing
+    `REF_RX` (requires both parts) would silently merge into the next
+    verse rather than flag, the same class of gap Ahirbudhnyasaṃhitā's
+    own ref-format variants turned out to be. Far more work than that,
+    though: each pāda uses a genuinely **different** section-heading
+    delimiter, checked directly against a real chapter from each rather
+    than assumed to match across pādas of the same work — योगपादः wraps
+    headings in asterisks (`* निश्रेयससाधनयोग निरूपणम्*`); क्रियापादः
+    headings carry no delimiter at all, just a bare trailing "." instead
+    of a daṇḍa (`स्थानद्यैविध्यम्.`), and aren't reliably isolated by
+    blank lines the way Ahirbudhnyasaṃhitā's own no-punctuation
+    subheadings are; ज्ञानापादः's sampled chapter carries no section
+    headings at all; चर्यापादः wraps headings in double pipes, tab-
+    indented (`|| भगवता स्वाराधनाधिकारि निरूपणम्.||`). Four different
+    heading conventions inside one work is more inconsistency than any
+    text handled today, including Jayākhyasaṃhitā's own apparatus
+    variety — realistically each pāda needs its own verified stripping
+    rule (or at least its own regression sample), not one shared rule
+    the way `parse_chapter`/`parse_chapter_critical` cover several
+    chapters each. Left unattempted this session on purpose rather than
+    rush a fourth-and-a-half convention without per-pāda verification;
+    the concrete next step for whoever picks this up is to build and
+    verify one pāda's parser at a time, starting with योगपादः (only 5
+    chapters, simplest sampled convention) before attempting the larger,
+    messier क्रियापादः/चर्यापादः.
 
 ## Vedic-specific, still genuinely open
 
