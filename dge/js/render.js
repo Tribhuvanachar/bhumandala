@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v4.3 (renderList: commentary titles now show a small "AI" badge -- dge-ai-badge, gated by core.js\'s dgeIsAiGeneratedCommentaryKey -- next to any AI-generated commentary, on top of v4.2\'s Full List pagination)';
+window.DGE_VERSIONS['render.js'] = 'v4.4 (each shloka\'s rendered mulaHtml now runs through dgeWrapWordsForTap(), wrapping every word in an unstyled <span class="dge-word"> as a DOM boundary for ai.js\'s new dgeRobustSelectedText() -- part of the word-level tap-to-select fragility fix; purely a tap-target boundary, not a visual change, applied last after highlightText()/footnote markers/Vedic pada breaks so it never disturbs their own offsets. Everything from v4.3 -- AI-commentary badge, Full List pagination -- unchanged)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -34,22 +34,76 @@ window.setSearchScope = function(scope, label, el) {
   if (typeof handleSearch === 'function') handleSearch();
 };
 
-function setCommentaryView(view, el) {
-  selectedCommentaryView = view;
-  document.querySelectorAll('#commentaryPopup .pop-item').forEach(item => item.classList.remove('active'));
-  if (el) el.classList.add('active');
-  if (typeof togglePopup === 'function') togglePopup('commentaryPopup');
-  renderList();
+// Per-card commentary tab switching -- distinct from setCommentaryView()
+// above, which is a GLOBAL choice (the 📜 commentary picker) applying to
+// every shloka card at once. This is local to one card: every selected
+// commentary is already rendered in the DOM (setCommentaryView/'all'
+// decided that), this just shows/hides the already-rendered blocks, so
+// switching tabs never re-fetches or re-renders anything.
+window.dgeShowCommentaryTab = function(shlokaIndex, cKey, btnEl) {
+  const container = document.querySelector(`.dge-commentary-tabbed[data-shloka="${shlokaIndex}"]`);
+  if (!container) return;
+  container.querySelectorAll('.commentary-block[data-ckey]').forEach(block => {
+    block.style.display = (cKey === 'all' || block.dataset.ckey === cKey) ? '' : 'none';
+  });
+  container.querySelectorAll('.dge-commentary-tab').forEach(tab => tab.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+};
 
-  // renderList() just rebuilt the list at a new (shorter or taller) height,
-  // so the old scroll position no longer points at the active shloka.
-  // Re-anchor to it so collapsing/expanding commentary doesn't strand the
-  // viewport wherever the old commentary block used to end.
+// Re-anchors the scroll position to the active card after a commentary
+// selection change re-renders the list at a new (shorter or taller)
+// height -- shared by both the quick actions and the per-item toggle
+// below, so collapsing/expanding commentary never strands the viewport
+// wherever the old commentary block used to end.
+function dgeRescrollToActiveCard() {
+  renderList();
   if (typeof activeId !== 'undefined' && activeId) {
     const ac = document.getElementById(`shloka-${activeId}`);
     if (ac) ac.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
+
+// Keeps the popup's own checkmarks in sync with window.selectedCommentaries
+// -- called after every change, whether from the quick actions or a
+// single checkbox tap, so the UI never drifts from the actual state.
+function dgeSyncCommentaryPopupState() {
+  const available = (typeof stotraData !== 'undefined' && stotraData && stotraData.metadata && stotraData.metadata.availableCommentaries) || {};
+  const total = Object.keys(available).length;
+  document.querySelectorAll('#commentaryDynamicList .filter-checkbox-item').forEach(el => {
+    el.classList.toggle('active', selectedCommentaries.has(el.dataset.ckey));
+  });
+  const noneBtn = document.getElementById('commentaryNoneBtn');
+  const allBtn = document.getElementById('commentaryAllBtn');
+  if (noneBtn) noneBtn.classList.toggle('active', selectedCommentaries.size === 0);
+  if (allBtn) allBtn.classList.toggle('active', total > 0 && selectedCommentaries.size === total);
+}
+
+// The two quick actions -- "None" clears every selection, "All" selects
+// every available commentary at once. Both are one-shot (close the popup);
+// individual commentaries are toggled via dgeToggleCommentarySelection
+// below instead, which deliberately leaves the popup open so several can
+// be picked in one sitting.
+window.setCommentaryView = function(view) {
+  if (view === 'all') {
+    const available = (typeof stotraData !== 'undefined' && stotraData && stotraData.metadata && stotraData.metadata.availableCommentaries) || {};
+    selectedCommentaries = new Set(Object.keys(available));
+  } else {
+    selectedCommentaries = new Set();
+  }
+  dgeSyncCommentaryPopupState();
+  if (typeof togglePopup === 'function') togglePopup('commentaryPopup');
+  dgeRescrollToActiveCard();
+};
+
+// Toggles one commentary in or out of the selection -- any number can be
+// on at once. Matches ashtadhyayi.com's own multi-select filter pattern
+// used elsewhere in this app (see filter.js's cycleFilterCriterion).
+window.dgeToggleCommentarySelection = function(key) {
+  if (selectedCommentaries.has(key)) selectedCommentaries.delete(key);
+  else selectedCommentaries.add(key);
+  dgeSyncCommentaryPopupState();
+  dgeRescrollToActiveCard();
+};
 
 // Builds a case-insensitive regex source from a query. For IAST, this
 // tolerates both plain-letter-for-diacritic typing (a/ā, i/ī, u/ū, r/ṛ,
@@ -112,6 +166,16 @@ function dgeTextMatchesQuery(text, pattern) {
   }
 }
 
+// Resolves a SHLOKA_EXTRA_FIELDS dataKey against a shloka object -- either
+// a plain top-level key ('padaccheda') or a dotted path into a nested
+// object ('gemini_deep_analysis.pratipadartha'). Returns undefined rather
+// than throwing if an intermediate segment is missing (a shloka with no
+// gemini_deep_analysis yet is the common case, not an error).
+function dgeGetNestedField(shloka, dataKey) {
+  if (!dataKey) return undefined;
+  return String(dataKey).split('.').reduce((node, key) => (node == null ? undefined : node[key]), shloka);
+}
+
 function highlightText(text, pattern) {
   if (!pattern) return text;
   try {
@@ -120,6 +184,46 @@ function highlightText(text, pattern) {
   } catch (e) {
     return text;
   }
+}
+
+// Word-level tap-to-select fix: gives each word in a shloka's rendered HTML
+// its own DOM boundary (an invisible <span>, no styling of its own -- NOT
+// a "make every word a link" redesign, which intellisense.js's own
+// selectedWord() comment already explains was deliberately rejected as
+// turning a page of Sanskrit into a page of underlines). The actual bug
+// this fixes: with plain unwrapped text, resolving "which word did the
+// reader select" depends entirely on window.getSelection().toString()
+// after a native drag/double-tap gesture, which on mobile can jump to a
+// shared ancestor and yield truncated or empty text on rapid
+// re-selection. With each word's own span as a boundary, ai.js's
+// dgeRobustSelectedText() can resolve the tapped word from the DOM
+// structure itself instead of trusting that fragile string.
+//
+// Applied LAST, after highlightText()/footnote-marker injection/the Vedic
+// pada-<br> substitution, so it only ever walks the final HTML and never
+// has to reason about shifting character offsets those passes depend on.
+// Tag-aware (tracks whether it's inside a `<...>` run), so it wraps only
+// the actual text -- and correctly nests inside already-present <mark>/
+// <sup> tags -- without ever splitting a tag's own markup.
+function dgeWrapWordsForTap(html) {
+  if (!html) return html;
+  let out = '';
+  let i = 0;
+  const len = html.length;
+  while (i < len) {
+    if (html[i] === '<') {
+      const close = html.indexOf('>', i);
+      if (close === -1) { out += html.slice(i); break; }
+      out += html.slice(i, close + 1);
+      i = close + 1;
+    } else {
+      let j = i;
+      while (j < len && html[j] !== '<') j++;
+      out += html.slice(i, j).replace(/(\S+)/g, '<span class="dge-word">$1</span>');
+      i = j;
+    }
+  }
+  return out;
 }
 
 window.copyShlokaText = async function(id) {
@@ -253,8 +357,14 @@ function renderList() {
 
     let commentaryHtml = '';
     if (shloka.commentaries) {
+      // Collected first, joined after, so a tab bar can be prepended when
+      // more than one commentary is actually rendering for this card --
+      // stacked blocks stay the default (nothing to click, nothing
+      // changes for a single-commentary view), tabs only appear when
+      // there's something to switch between.
+      const blocks = [];
       Object.entries(shloka.commentaries).forEach(([cKey, cText]) => {
-        const isSelected = (selectedCommentaryView === 'all' || selectedCommentaryView === cKey);
+        const isSelected = selectedCommentaries.has(cKey);
         const isForcedBySearch = forceCommentaries.includes(cKey);
 
         if (isSelected || isForcedBySearch) {
@@ -268,9 +378,19 @@ function renderList() {
           // prose buried in a title a reader may not read closely.
           const aiBadge = (typeof dgeIsAiGeneratedCommentaryKey === 'function' && dgeIsAiGeneratedCommentaryKey(cKey))
             ? '<span class="dge-ai-badge" title="AI-generated -- not author-verified">AI</span>' : '';
-          commentaryHtml += `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}${aiBadge}</div>${highlightText(convertedText, pattern)}</div>`;
+          blocks.push({ cKey, name: convertedName,
+            html: `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}${aiBadge}</div>${highlightText(convertedText, pattern)}</div>` });
         }
       });
+      if (blocks.length > 1) {
+        const tabsHtml = `<div class="dge-commentary-tabs" role="tablist">` +
+          `<button type="button" class="dge-commentary-tab active" onclick="dgeShowCommentaryTab(${i}, 'all', this)">All</button>` +
+          blocks.map(b => `<button type="button" class="dge-commentary-tab" onclick="dgeShowCommentaryTab(${i}, '${b.cKey}', this)">${b.name}</button>`).join('') +
+          `</div>`;
+        commentaryHtml = `<div class="dge-commentary-tabbed" data-shloka="${i}">${tabsHtml}${blocks.map(b => b.html).join('')}</div>`;
+      } else {
+        commentaryHtml = blocks.map(b => b.html).join('');
+      }
     }
 
     // Additional structured fields (Padaccheda, Anvaya, Vrutta, etc.) —
@@ -283,11 +403,76 @@ function renderList() {
     const effectiveExtraFields = (typeof dgeGetEffectiveShlokaFields === 'function') ? dgeGetEffectiveShlokaFields() : (window.SHLOKA_EXTRA_FIELDS || []);
     effectiveExtraFields.forEach(f => {
       if (!f.enabled) return;
-      const raw = shloka[f.dataKey];
+      const raw = dgeGetNestedField(shloka, f.dataKey);
       if (!raw || (Array.isArray(raw) && raw.length === 0)) return;
-      const displayText = Array.isArray(raw) ? raw.join(', ') : raw;
-      const converted = typeof applyTransliteration === 'function' ? applyTransliteration(displayText, activeScript) : displayText;
-      extraFieldsHtml += `<div class="commentary-block" data-field="${f.id}"><div class="commentary-title">${f.icon} ${f.label}</div>${highlightText(converted, pattern)}</div>`;
+      const t = (s) => (typeof applyTransliteration === 'function' ? applyTransliteration(String(s == null ? '' : s), activeScript) : s);
+      const h = (s) => highlightText(t(s), pattern);
+      let bodyHtml;
+      switch (f.renderType) {
+        case 'table': {
+          // pratipadartha: [{order, pada, vigraha, vibhakti_dhatu, artha}]
+          // -- word-by-word gloss table. vigraha (etymology) and
+          // vibhakti_dhatu (case/tense-mood-person) are each skipped as a
+          // column only if EVERY row lacks one, so a verse with no
+          // notable derivations doesn't carry a permanently-empty column.
+          const rows = [...raw].sort((a, b) => (a.order || 0) - (b.order || 0));
+          const hasVigraha = rows.some(r => r.vigraha);
+          const hasGrammar = rows.some(r => r.vibhakti_dhatu);
+          bodyHtml = `<div class="dge-table-scroll"><table class="dge-analysis-table"><thead><tr>` +
+            `<th>${h('पदम्')}</th>` + (hasVigraha ? `<th>${h('विग्रहः')}</th>` : '') +
+            (hasGrammar ? `<th>${h('व्याकरणम्')}</th>` : '') + `<th>Meaning</th></tr></thead><tbody>` +
+            rows.map(r => `<tr><td class="dge-analysis-pada">${h(r.pada || '')}</td>` +
+              (hasVigraha ? `<td>${h(r.vigraha || '')}</td>` : '') +
+              (hasGrammar ? `<td>${h(r.vibhakti_dhatu || '')}</td>` : '') +
+              `<td>${h(r.artha || '')}</td></tr>`).join('') + `</tbody></table></div>`;
+          break;
+        }
+        case 'list': {
+          // alankara: [{name, type, justification}]
+          bodyHtml = `<ul class="dge-analysis-list">` + raw.map(item =>
+            `<li><b>${h(item.name || '')}</b>` + (item.type ? ` <span class="dge-analysis-tag">${h(item.type)}</span>` : '') +
+            (item.justification ? ` — ${h(item.justification)}` : '') + `</li>`
+          ).join('') + `</ul>`;
+          break;
+        }
+        case 'samasa': {
+          // samasa_vishesha: [{compound, split, samasa_type, vigraha}] --
+          // one entry per hyphenated compound already named in this
+          // verse's padaccheda.
+          bodyHtml = `<ul class="dge-analysis-list">` + raw.map(item =>
+            `<li><b>${h(item.compound || '')}</b>` + (item.samasa_type ? ` <span class="dge-analysis-tag">${h(item.samasa_type)}</span>` : '') +
+            (item.split ? `<div class="dge-analysis-split">${h(item.split)}</div>` : '') +
+            (item.vigraha ? `<div class="dge-analysis-lakshana">${h(item.vigraha)}</div>` : '') + `</li>`
+          ).join('') + `</ul>`;
+          break;
+        }
+        case 'chandas': {
+          // {name, gana_structure, lakshana} -- a single verse's metre.
+          if (!raw.name) return;
+          bodyHtml = `<div class="dge-analysis-chandas"><b>${h(raw.name)}</b>` +
+            (raw.gana_structure ? ` <span class="dge-analysis-tag">${h(raw.gana_structure)}</span>` : '') +
+            (raw.lakshana ? `<div class="dge-analysis-lakshana">${h(raw.lakshana)}</div>` : '') + `</div>`;
+          break;
+        }
+        default: {
+          const displayText = Array.isArray(raw) ? raw.join(', ') : raw;
+          bodyHtml = h(displayText);
+        }
+      }
+      // Gemini-sourced fields (everything under gemini_deep_analysis) get
+      // the same "AI, unreviewed" badge as an AI-generated commentary --
+      // see dgeIsAiGeneratedCommentaryKey's convention in core.js. This
+      // whole block is always Gemini output, so the badge isn't
+      // conditional the way a commentary key's is.
+      const isAiField = typeof f.dataKey === 'string' && f.dataKey.indexOf('gemini_deep_analysis.') === 0;
+      const aiBadge = isAiField ? '<span class="dge-ai-badge" title="AI-generated -- not author-verified">AI</span>' : '';
+      // Open by default for the fields most readers want on sight
+      // (word-by-word gloss, purport); collapsed for the more specialist
+      // ones (figures of speech, metre, extra grammar notes) so the card
+      // doesn't grow long before anyone's asked for them.
+      const openAttr = (f.renderType === 'list' || f.renderType === 'samasa' || f.renderType === 'chandas' || f.id === 'vyakarana') ? '' : ' open';
+      extraFieldsHtml += `<details class="commentary-block dge-analysis-field" data-field="${f.id}"${openAttr}>` +
+        `<summary class="commentary-title">${f.icon} ${f.label}${aiBadge}</summary>${bodyHtml}</details>`;
     });
 
     // Vedic content stores padas (quarter-verses) separated by " / " —
@@ -311,8 +496,15 @@ function renderList() {
     if (shloka.vedicId) {
       mulaHtml = mulaHtml.replace(/\s*\/\s*/g, '<br>');
     }
+    mulaHtml = dgeWrapWordsForTap(mulaHtml);
     const footnoteListHtml = footnoteResult
       ? `<div class="dge-fn-block">${footnoteResult.footnotesHtml}</div>` : '';
+
+    // App View only (see dgeSetLayoutMode) -- hidden by default in the
+    // existing Scholar view via main.css. Nothing to show/hide if this
+    // card has neither commentary nor analysis fields.
+    const appViewToggleHtml = (commentaryHtml || extraFieldsHtml)
+      ? `<button type="button" class="dge-appview-toggle" onclick="event.stopPropagation(); window.dgeToggleCardExpanded(this)">▾ Show commentary</button>` : '';
 
     c.innerHTML = `
       ${cardActionsHtml}
@@ -323,6 +515,7 @@ function renderList() {
         <button class="btn-icon copy-shloka-btn" title="Copy shloka text" onclick="event.stopPropagation(); if(typeof copyShlokaText==='function') copyShlokaText(${i})">📋</button>
       </div>
       ${footnoteListHtml}
+      ${appViewToggleHtml}
       ${extraFieldsHtml}
       ${commentaryHtml}`;
     listEl.appendChild(c);
@@ -401,6 +594,50 @@ window.dgeSetViewMode = function(mode) {
     window.currentReadingId = (typeof activeId !== 'undefined' && activeId) || fIds[0] || 1;
   }
   if (typeof renderList === 'function') renderList();
+};
+
+// Phase 5 of the mobile UI overhaul: a second, lower-density layout
+// alongside the existing dense "Scholar" view (see the App Layouts entry
+// in the Display sheet). Pure CSS/class-driven -- body.dge-app-view (see
+// main.css) collapses each card's commentary/analysis behind the
+// per-card .dge-appview-toggle button rendered below, with no re-render
+// needed on switch since the collapse/reveal is driven entirely by CSS
+// selectors on classes already present in the DOM either way.
+//
+// `announce` (24 Aug 2026, project lead's direct report: "the layout...
+// not getting applied... old layout is still rendered"): the switch was
+// ALWAYS applying and persisting correctly (confirmed live -- the class
+// toggles, survives a reload), but with no commentary selected (the new
+// default since the multi-select-commentary rework, a Set() rather than
+// 'all') there is nothing for App view to collapse, and the remaining
+// card-density difference was too small to notice -- so a tap genuinely
+// looked like it did nothing. Two real fixes: main.css's own App-view
+// density delta widened to actually be noticeable card-to-card (see the
+// comment there), and this function now shows an explicit confirmation
+// toast for a real user tap so switching is never silent -- but not on
+// initApp()'s own startup restore, which calls this with announce left
+// false/undefined so a normal page load doesn't toast on its own.
+window.dgeSetLayoutMode = function (mode, announce) {
+  const isApp = mode === 'app';
+  document.body.classList.toggle('dge-app-view', isApp);
+  localStorage.setItem('app_layoutMode', isApp ? 'app' : 'scholar');
+  document.querySelectorAll('#displayPopup .pop-item[data-layout]').forEach(el => {
+    el.classList.toggle('active', el.dataset.layout === (isApp ? 'app' : 'scholar'));
+  });
+  if (announce && typeof showToast === 'function') {
+    showToast(isApp ? '📱 App layout applied.' : '📚 Scholar layout applied.');
+  }
+};
+
+// Toggles one card's expanded state -- a dedicated button rather than a
+// whole-card tap gesture, since .shloka-text's own tap already calls
+// loadShloka() to select/play that verse; an ambiguous full-card tap
+// would collide with that existing behaviour.
+window.dgeToggleCardExpanded = function (btnEl) {
+  const card = btnEl.closest('.shloka-card');
+  if (!card) return;
+  const expanded = card.classList.toggle('dge-card-expanded');
+  btnEl.textContent = expanded ? '▴ Hide commentary' : '▾ Show commentary';
 };
 
 // Scrolls a card to sit just below the sticky header stack (top bar +

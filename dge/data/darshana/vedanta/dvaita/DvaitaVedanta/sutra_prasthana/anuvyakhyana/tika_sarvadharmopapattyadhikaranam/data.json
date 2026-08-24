@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14493",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > द्वितीयोध्यायः > प्रथमः पादः > उक्तः समन्वयः साक्षादविरोधोत्र साध्यते",
+   "section": "प्रथमः पादः",
+   "unit_title": "उक्तः समन्वयः साक्षादविरोधोत्र साध्यते",
+   "sanskrit_text": "सर्वधर्मोपपत्त्यधिकरणम्\nयदधीना गुणाश्चैव दोषा अपि हि सर्वशः ॥113॥\nगुणास्तस्य कथं न स्युः स्युर्दोषाश्च कथं पुनः ।\nसर्वधर्मोपपत्तेस्तद्वाक्यैरपि हि तादृशैः ॥114॥\nनिर्दोषाशेषगुणको निर्णीतो भगवान् हरिः ।\nइति श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचिते ब्रह्मसूत्रानुव्याख्याने द्वितीयाध्यायस्य प्रथमः पादः ॥\nEndFragment",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "द्वितीयोध्यायः",
+    "प्रथमः पादः",
+    "उक्तः समन्वयः साक्षादविरोधोत्र साध्यते"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14477/563/satara/2-anav/thavat/parath",
+    "content_id": 14477,
+    "layer": "सर्वधर्मोपपत्त्यधिकरणम्",
+    "anchor": "article14493",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "सर्वधर्मोपपत्त्यधिकरणम्"
+  }
+ ]
+}

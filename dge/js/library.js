@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.2 (lifecycle status badges: folder headers show count/total ("52/237") when a section is only partly filled in, and a leaf gets a NEW badge for ~3 weeks after register_layers.py first stamps its addedAt)';
+window.DGE_VERSIONS['library.js'] = 'v3.4 (DGE_PATH_LABELS filled in for the remaining 234 taxonomy segments a full corpus sweep found missing -- Mahabharata parvas, Ramayana kandas, Puranas, the Dvaita Tatparya Nirnaya corpus, post-Madhva acharya/dasakuta names, Nyaya-Vaisheshika-Mimamsa technical terms, Vedic kalpa-sutra schools -- closing the same English-fallback bug class fixed for pancharatra_samhitas/nitishastra/upaveda in v3.3, now corpus-wide: 0 segments left unlabeled)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -44,7 +44,14 @@ const DGE_PATH_LABELS = {
   dvaita: 'द्वैतम्', advaita: 'अद्वैतम्', vishishtadvaita: 'विशिष्टाद्वैतम्',
   nyaya: 'न्यायः', vaisheshika: 'वैशेषिकम्', sankhya: 'साङ्ख्यम्',
   yoga: 'योगः', mimamsa: 'मीमांसा',
-  sarvamula: 'सर्वमूलग्रन्थाः',
+  // 23 Aug 2026 restructure (origin/main): the separate top-level
+  // dvaitavedanta/ tree moved to sit beside SarvaMula here (admin-only,
+  // see the visibility flag on its taxonomy/library.json entries --
+  // dgeIsHiddenGrantha below). SetuTila is an empty placeholder for a
+  // second Sarvamula edition. PascalCase matches the actual folder names
+  // on disk post-rename -- confirmed directly, not assumed.
+  SarvaMula: 'सर्वमूलग्रन्थाः',
+  DvaitaVedanta: 'द्वैतवेदान्तः', SetuTila: 'सेतुतिला',
   sarvadarshana_sangraha: 'सर्वदर्शनसङ्ग्रहः',
 
   // 23 Aug: upaveda/shastra, added per the project lead's own framework
@@ -81,6 +88,10 @@ const DGE_PATH_LABELS = {
   kavya_alankara: 'काव्यालङ्कारौ', kavya: 'काव्यम्',
   kosha: 'कोशाः', stotra: 'स्तोत्राणि',
   agama: 'आगमाः', pancharatra: 'पाञ्चरात्रम्',
+  pancharatra_samhitas: 'पाञ्चरात्रसंहिताः', shaiva_agama: 'शैवागमः',
+  shakta_agama: 'शाक्तागमः', vaikhanasa_agama: 'वैखानसागमः',
+  nitishastra: 'नीतिशास्त्रम्', upaveda: 'उपवेदाः',
+  ayurveda: 'आयुर्वेदः', kamashastra: 'कामशास्त्रम्', nighantu: 'निघण्टुः',
 
   rigveda: 'ऋग्वेदः', yajurveda: 'यजुर्वेदः',
   samaveda: 'सामवेदः', atharvaveda: 'अथर्ववेदः',
@@ -101,7 +112,86 @@ const DGE_PATH_LABELS = {
   mula: 'मूलम्', tika: 'टीका', tippani: 'टिप्पणी',
   purvarchika: 'पूर्वार्चिकः', uttararchika: 'उत्तरार्चिकः',
   taittiriya_brahmana: 'तैत्तिरीयब्राह्मणम्',
-  taittiriya_aranyaka: 'तैत्तिरीयारण्यकम्'
+  taittiriya_aranyaka: 'तैत्तिरीयारण्यकम्',
+
+  // Mahabharata parvas
+  adi_parva: 'आदिपर्व', sabha_parva: 'सभापर्व', vana_parva: 'वनपर्व', virata_parva: 'विराटपर्व',
+  udyoga_parva: 'उद्योगपर्व', bhishma_parva: 'भीष्मपर्व', drona_parva: 'द्रोणपर्व', karna_parva: 'कर्णपर्व',
+  shalya_parva: 'शल्यपर्व', sauptika_parva: 'सौप्तिकपर्व', stri_parva: 'स्त्रीपर्व', shanti_parva: 'शान्तिपर्व',
+  anushasana_parva: 'अनुशासनपर्व', ashvamedhika_parva: 'अश्वमेधिकपर्व', ashramavasika_parva: 'आश्रमवासिकपर्व', mausala_parva: 'मौसलपर्व',
+  mahaprasthanika_parva: 'महाप्रस्थानिकपर्व', svargarohana_parva: 'स्वर्गारोहणपर्व',
+  // Ramayana kandas
+  bala_kanda: 'बालकाण्डम्', ayodhya_kanda: 'अयोध्याकाण्डम्', aranya_kanda: 'अरण्यकाण्डम्', kishkindha_kanda: 'किष्किन्धाकाण्डम्',
+  sundara_kanda: 'सुन्दरकाण्डम्', yuddha_kanda: 'युद्धकाण्डम्', uttara_kanda: 'उत्तरकाण्डम्',
+  // Itihasa/Kavya misc
+  mahabharata: 'महाभारतम्', mahabharata_kannada: 'महाभारतम् (कन्नड)', harivamsha: 'हरिवंशः', harivamsha_khila: 'हरिवंशखिलम्',
+  bhagavad_gita: 'भगवद्गीता', purushasuktam: 'पुरुषसूक्तम्', yamaka_bharata: 'यमकभारतम्', raghavendra_vijaya: 'राघवेन्द्रविजयः',
+  sumadhva_vijaya: 'सुमध्वविजयः', kiratarjuniya: 'किरातार्जुनीयम्', kumarasambhava: 'कुमारसम्भवः', raghuvamsha: 'रघुवंशः',
+  shishupalavadha: 'शिशुपालवधः',
+  // Puranas
+  bhagavata_purana: 'भागवतपुराणम्', bhagavata_purana_madhva: 'भागवतपुराणम् (माध्वम्)', bhavishya_purana: 'भविष्यपुराणम्', brahmanda_purana: 'ब्रह्माण्डपुराणम्',
+  brahmavaivarta_purana: 'ब्रह्मवैवर्तपुराणम्', garuda_purana: 'गरुडपुराणम्', kurma_purana: 'कूर्मपुराणम्', linga_purana: 'लिङ्गपुराणम्',
+  markandeya_purana: 'मार्कण्डेयपुराणम्', narada_purana: 'नारदपुराणम्', padma_purana: 'पद्मपुराणम्', shiva_purana: 'शिवपुराणम्',
+  skanda_purana: 'स्कन्दपुराणम्', vamana_purana: 'वामनपुराणम्', vishnu_purana: 'विष्णुपुराणम्', upapuranas: 'उपपुराणानि',
+  rudra_samhita: 'रुद्रसंहिता',
+  // Dvaita Tatparya Nirnaya corpus (prasthanas, bhashyas)
+  gita_prasthana: 'गीताप्रस्थानम्', sutra_prasthana: 'सूत्रप्रस्थानम्', upanishad_prasthana: 'उपनिषत्प्रस्थानम्', itihasa_prasthana: 'इतिहासप्रस्थानम्',
+  purana_prasthana: 'पुराणप्रस्थानम्', sruti_prasthana: 'श्रुतिप्रस्थानम्', gita_bhashya: 'गीताभाष्यम्', gita_tatparya_nirnaya: 'गीतातात्पर्यनिर्णयः',
+  itihasa_purana_tatparya_nirnaya: 'इतिहासपुराणतात्पर्यनिर्णयः', bhagavata_tatparya_nirnaya: 'भागवततात्पर्यनिर्णयः', mahabharata_tatparya_nirnaya: 'महाभारततात्पर्यनिर्णयः', rig_bhashya: 'ऋग्भाष्यम्',
+  anubhashya: 'अणुभाष्यम्', anuvyakhyana: 'अनुव्याख्यानम्', brahma_sutra_bhashya: 'ब्रह्मसूत्रभाष्यम्', brahmasutra_bhashya: 'ब्रह्मसूत्रभाष्यम्',
+  nyaya_vivarana: 'न्यायविवरणम्', upanishad_bhashya: 'उपनिषद्भाष्यम्', aitareya_upanishad: 'ऐतरेयोपनिषत्', aitareyopanishad_bhashya: 'ऐतरेयोपनिषद्भाष्यम्',
+  brihadaranyakopanishad_bhashya: 'बृहदारण्यकोपनिषद्भाष्यम्', brihadaranyakopanishadbhashyam: 'बृहदारण्यकोपनिषद्भाष्यम्', chandogyopanishad_bhashya: 'छान्दोग्योपनिषद्भाष्यम्', ishavasyopanishad_bhashya: 'ईशावास्योपनिषद्भाष्यम्',
+  kathopanishad_bhashya: 'कठोपनिषद्भाष्यम्', kenopanishad_bhashya: 'केनोपनिषद्भाष्यम्', mandukyopanishad_bhashya: 'माण्डूक्योपनिषद्भाष्यम्', mandukyopanishadbhashyam: 'माण्डूक्योपनिषद्भाष्यम्',
+  mundakopanishad_bhashya: 'मुण्डकोपनिषद्भाष्यम्', mundakopanishadbhashyam: 'मुण्डकोपनिषद्भाष्यम्', prashnopanishad_bhashya: 'प्रश्नोपनिषद्भाष्यम्', taittiriyopanishad_bhashya: 'तैत्तिरीयोपनिषद्भाष्यम्',
+  shatprashnopanishadbhashyam: 'षट्प्रश्नोपनिषद्भाष्यम्', nrisimhatapaniya_upanishad: 'नृसिंहतापनीयोपनिषत्', vaishnava_upanishads_group: 'वैष्णवोपनिषदः',
+  // Madhva's Dasha Prakarana + ancillary works
+  dasha_prakarana_granthas: 'दशप्रकरणग्रन्थाः', karma_nirnaya: 'कर्मनिर्णयः', katha_lakshana: 'कथालक्षणम्', mayavada_khandana: 'मायावादखण्डनम्',
+  pramana_lakshana: 'प्रमाणलक्षणम्', prapancha_mithyatvanumana_khandana: 'प्रपञ्चमिथ्यात्वानुमानखण्डनम्', tattva_sankhyana: 'तत्त्वसंख्यानम्', tattva_viveka: 'तत्त्वविवेकः',
+  tattvodyota: 'तत्त्वोद्योतः', upadhi_khandana: 'उपाधिखण्डनम्', vishnu_tattva_vinirnaya: 'विष्णुतत्त्वविनिर्णयः', achara_and_ancillary_granthas: 'आचारादिग्रन्थाः',
+  sutra_and_bhashya: 'सूत्रभाष्यम्', independent_dharmasutras: 'स्वतन्त्रधर्मसूत्राणि',
+  // Post-Madhva acharyas and their works
+  jayanti_nirnaya: 'जयन्तीनिर्णयः', kanduka_stuti: 'कन्दुकस्तुतिः', krishnamrita_maharnava: 'कृष्णामृतमहार्णवः', nakha_stuti: 'नखस्तुतिः',
+  sadachara_smriti: 'सदाचारस्मृतिः', tantrasara_sangraha: 'तन्त्रसारसङ्ग्रहः', yati_pranava_kalpa: 'यतिप्रणवकल्पः', dvadasha_stotra: 'द्वादशस्तोत्रम्',
+  vagvajra: 'वाग्वज्रः', karmavijaya: 'कर्मविजयः', later_acharyas: 'उत्तराचार्याः', raghavendra_tirtha: 'राघवेन्द्रतीर्थः',
+  vadiraja_tirtha: 'वादिराजतीर्थः', vyasatirtha: 'व्यासतीर्थः', vijayadasa: 'विजयदासः', purandaradasa: 'पुरन्दरदासः',
+  kanakadasa: 'कनकदासः', jagannathadasa: 'जगन्नाथदासः', gopaladasa: 'गोपालदासः', mahipatidasa: 'महीपतिदासः',
+  prasannavenkatadasa: 'प्रसन्नवेङ्कटदासः', nyayamrita: 'न्यायामृतम्', tarka_tandava: 'तर्कताण्डवः', madhvamukhalankara: 'मध्वमुखालङ्कारः',
+  madhvasiddhantasara: 'मध्वसिद्धान्तसारः', sarvasiddhantasarasaravivecanam: 'सर्वसिद्धान्तसारसारविवेचनम्', shrimanmadhvasiddhantasaroddhara: 'श्रीमन्मध्वसिद्धान्तसारोद्धारः', shrimannyayasudhamandanam: 'श्रीमन्न्यायसुधामण्डनम्',
+  shrivijayindravijayavaibhavam: 'श्रीविजयीन्द्रविजयवैभवम्', dvaita_dyumani: 'द्वैतद्युमणिः', bhedaparanyeva_khalu_brahmasutrani: 'भेदपराण्येव खलु ब्रह्मसूत्राणि', bhedojjivana: 'भेदोज्जीवनम्',
+  bhagavato_nirdoshatvalakshanam: 'भागवतनिर्दोषत्वलक्षणम्', candrikamandanam: 'चन्द्रिकामण्डनम्', tatparya_chandrika: 'तात्पर्यचन्द्रिका', nyaya_sudha: 'न्यायसुधा',
+  tantradipika: 'तन्त्रदीपिका', vadavali: 'वादावली', yukti_mallika: 'युक्तिमल्लिका', nyasa_paddhati: 'न्यासपद्धतिः',
+  // Vedanta/general Vedantic terms
+  omkara_vada: 'ओंकारवादः', vyutpattivada: 'व्युत्पत्तिवादः', shabda_khanda: 'शब्दखण्डः', tithi_nirnaya: 'तिथिनिर्णयः',
+  shaktivada: 'शक्तिवादः', samanya_nirukti: 'सामान्यनिरुक्तिः',
+  // Nyaya/Vaisheshika (classical + Navya)
+  navya_nyaya: 'नव्यन्यायः', nyaya_bhushana: 'न्यायभूषणम्', nyaya_kusumanjali: 'न्यायकुसुमाञ्जलिः', nyaya_manjari: 'न्यायमञ्जरी',
+  nyaya_ratnamala: 'न्यायरत्नमाला', nyaya_sutra: 'न्यायसूत्रम्', vaisheshika_sutra: 'वैशेषिकसूत्रम्', prachina_nyaya: 'प्राचीनन्यायः',
+  prashastapada_bhashya: 'प्रशस्तपादभाष्यम्', tarkasangraha: 'तर्कसङ्ग्रहः', tarkabhasha: 'तर्कभाषा', karikavali: 'कारिकावली',
+  bhasha_pariccheda: 'भाषापरिच्छेदः', siddhanta_lakshana: 'सिद्धान्तलक्षणम्', padarthasangraha: 'पदार्थसङ्ग्रहः', pramana_paddhati: 'प्रमाणपद्धतिः',
+  prakarana_panchika: 'प्रकरणपञ्चिका', prakarana: 'प्रकरणम्', pramukha_prakarana: 'प्रमुखप्रकरणानि', vyaptyanugama: 'व्याप्त्यनुगमः',
+  pakshata: 'पक्षता', badha: 'बाधः', badha_vibhajaka: 'बाधविभाजकः', avacchedakata_nirukti: 'अवच्छेदकतानिरुक्तिः',
+  avayava: 'अवयवः', anumana_khanda: 'अनुमानखण्डः', chaturdashalakshani: 'चतुर्दशलक्षणी', panchalakshani: 'पञ्चलक्षणी',
+  satpratipaksha: 'सत्प्रतिपक्षः', savyabhichara: 'सव्यभिचारः', vyadhikarana: 'व्यधिकरणम्', upamana_khanda: 'उपमानखण्डः',
+  pratyaksha_khanda: 'प्रत्यक्षखण्डः', vadas: 'वादाः', tattvacintamani: 'तत्त्वचिन्तामणिः',
+  // Mimamsa
+  mimamsa_nyaya_prakasha: 'मीमांसान्यायप्रकाशः', mimamsa_paribhasha: 'मीमांसापरिभाषा', mimamsa_sutra: 'मीमांसासूत्रम्', tantravarttika: 'तन्त्रवार्त्तिकम्',
+  tuptika: 'टुप्टीका', shlokavarttika: 'श्लोकवार्त्तिकम्', shastra_dipika: 'शास्त्रदीपिका', bhatta_dipika: 'भट्टदीपिका',
+  bhatta_rahasya: 'भट्टरहस्यम्', arthasangraha: 'अर्थसङ्ग्रहः', bhatta: 'भाट्टम्', prabhakara: 'प्राभाकरम्',
+  brihati: 'बृहती',
+  // Vedic Kalpa-sutra schools (Grihya/Shrauta/Dharma-sutra)
+  apastamba: 'आपस्तम्बः', ashvalayana: 'आश्वलायनः', baudhayana: 'बौधायनः', bharadvaja: 'भारद्वाजः',
+  drahyayana: 'द्राह्यायणः', gobhila: 'गोभिलः', hiranyakeshin: 'हिरण्यकेशी', katyayana: 'कात्यायनः',
+  kaushika: 'कौशिकः', kauthuma: 'कौथुमः', khadira: 'खादिरः', latyayana: 'लाट्यायनः',
+  manava: 'मानवः', paraskara: 'पारस्करः', shankhayana: 'शाङ्खायनः', vadhula: 'वाधूलः',
+  vaikhanasa: 'वैखानसः', vaitana: 'वैतानः', varaha: 'वाराहः', kathaka: 'काठकः',
+  satyashadha: 'सत्याषाढः', kapisthala_shakha: 'कपिष्ठलशाखा', jaiminiya: 'जैमिनीयः', jaiminiya_nyayamala: 'जैमिनीयन्यायमाला',
+  // Vedic shiksha/pratishakhya
+  atharvaveda_shiksha: 'अथर्ववेदशिक्षा', rigveda_shikshas: 'ऋग्वेदशिक्षाः', samaveda_shikshas: 'सामवेदशिक्षाः', krishna_yajurveda_shikshas: 'कृष्णयजुर्वेदशिक्षाः',
+  shukla_yajurveda_shikshas: 'शुक्लयजुर्वेदशिक्षाः', yajurveda_shikshas: 'यजुर्वेदशिक्षाः', samaveda_pratishakhya: 'सामवेदप्रातिशाख्यम्', purvabhaga: 'पूर्वभागः',
+  // Vyakarana
+  paniniya_vyakarana: 'पाणिनीयव्याकरणम्',
+  // Advaita corpus + misc
+  shankara_bhashya: 'शङ्करभाष्यम्', badhanta: 'बाधान्तः', brahmasutranyayasamgraha: 'ब्रह्मसूत्रन्यायसंग्रहः',
 };
 
 // Numbered folders, e.g. "mandala_07". The prefix is Devanagari (so it
@@ -163,6 +253,23 @@ async function dgeLoadLibraryOverrides() {
     const vis = await fetch('data/library-visibility.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
     if (vis && Array.isArray(vis.hidden)) dgeLibOverrides.hidden = vis.hidden;
   } catch (e) { /* nothing hidden */ }
+}
+
+// 23 Aug 2026: per-grantha "hidden" flag written directly onto a
+// library.json entry (distinct from dgeLibOverrides.hidden above, which is
+// an admin-curated path-prefix list read from library-overrides.json) --
+// admin-only content like darshana/vedanta/dvaita/DvaitaVedanta/*, gated
+// the same way admin-gate.js gates a standalone page. Not real access
+// control -- see that file's own caveat -- but keeps it out of the reader
+// nav and quick-jump for anyone who isn't signed in as admin.
+function dgeIsAdmin() {
+  try {
+    return localStorage.getItem('acharyaAuthorized') === 'true' ||
+           localStorage.getItem('is_superadmin') === 'true';
+  } catch (e) { return false; }
+}
+function dgeIsAdminOnlyGrantha(g) {
+  return !!(g && g.hidden) && !dgeIsAdmin();
 }
 
 function dgeIsHiddenPath(path) {
@@ -292,6 +399,57 @@ let dgeTreeNodeSeq = 0;
 // path -> total registered granthas under it (populated or not), rebuilt at
 // the top of every openLibraryModal() call; see the comment there.
 let dgeLibTotalCounts = {};
+
+// 24 Aug 2026 -- icon-driven Library home screen, alongside the existing
+// text tree (project lead's ask: something resembling an external
+// ChatGPT mockup's "icon structure," not a pixel copy of it). A view
+// mode, not a separate feature: the SAME tree data, sort order, badges
+// and drill-down (dgeRenderNode) the list view already builds -- this
+// only changes how the TOP LEVEL is presented, replacing "however many
+// taps to reach any category" with one tap into a labelled icon tile,
+// then handing off to the existing list rendering for everything below
+// it. dgeLibTree/dgeLibTopKeys are cached here (module scope, not
+// re-fetched) so switching List<->Grid or drilling in/out is instant --
+// only openLibraryModal() itself does the async catalog fetch.
+let dgeLibTree = null;
+let dgeLibTopKeys = [];
+let dgeLibGridCategory = null; // null = showing the grid itself; else the top-level key drilled into
+
+// One icon per real top-level taxonomy key (see DGE_PATH_LABELS above for
+// the keys actually in use). Unmapped keys fall back to a plain folder
+// icon rather than guessing -- better an honest generic icon than a
+// wrong specific one.
+const DGE_LIBRARY_ICONS = {
+  vedas: '📿', veda: '📿',
+  itihasa: '⚔️', itihasas: '⚔️',
+  purana: '📜', puranas: '📜',
+  darshana: '🕉️',
+  smriti_dharma: '⚖️', smritis: '⚖️',
+  kavya_alankara: '🪶', kavya: '🪶',
+  kosha: '📖', koshas: '📖',
+  stotra: '🎶', stotras: '🎶',
+  agama: '🔥', pancharatra_agama: '🔥',
+  vedanga: '📚', ancillary: '📚',
+  dasa_sahitya: '🎵', dasakuta: '🎵', vyasakuta: '🎵',
+  upaveda: '🧘', upavedas: '🧘',
+  nitishastra: '🏛️',
+  dharmashastra: '⚖️',
+  misc: '🗂️',
+};
+function dgeLibraryIconFor(key) {
+  return DGE_LIBRARY_ICONS[key] || '🗂️';
+}
+
+function dgeGetLibraryViewMode() {
+  try { return localStorage.getItem('dge_library_view_mode') || 'grid'; }
+  catch (e) { return 'grid'; }
+}
+window.dgeSetLibraryViewMode = function (mode) {
+  try { localStorage.setItem('dge_library_view_mode', mode); } catch (e) { /* ignore */ }
+  dgeLibGridCategory = null;
+  document.querySelectorAll('#libraryViewToggle .range-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.libraryView === mode));
+  dgeRenderLibraryRoot();
+};
 // A grantha counts as "New" for this many days after register_layers.py
 // first stamped its addedAt -- existing entries (registered before that
 // tool tracked dates) have no addedAt at all and never show this badge,
@@ -309,9 +467,24 @@ function dgeIsRecentlyAdded(addedAt) {
 // Collapses single-child chains ("Ṛgveda › Śākala Śākhā › Saṃhitā") into
 // one row instead of three nested taps — the taxonomy is deep and mostly
 // linear, so without this the tree needs four taps to reach any mantra.
-function dgeRenderNode(node, labelPrefix, depth, nodePath) {
+//
+// noCollapseAtRoot (24 Aug 2026, project lead's direct report, matched a
+// live screenshot exactly): the List view's own TOP-LEVEL category rows
+// were also going through this same collapsing, so a category with a
+// single populated branch (e.g. आगमः -> पाञ्चरात्रम् -> Pancharatra
+// Samhitas) rendered as one row with the whole chain glued into its
+// label instead of the clean single name every other category row
+// shows ("It should be just the parent... not the entire parent child
+// connecting notes"). dgeRenderLibraryListView() passes true for this on
+// its own top-level call only -- every deeper call (both the recursive
+// collapse-continuation just below and normal child iteration in `inner`)
+// leaves it unset, so the tap-depth reduction this comment describes is
+// completely unchanged below the top level, including inside the grid
+// view's own per-category drill-down (dgeRenderLibraryCategoryView),
+// which never sets it either.
+function dgeRenderNode(node, labelPrefix, depth, nodePath, noCollapseAtRoot) {
   const childKeys = dgeSortChildKeys(nodePath, Object.keys(node.children));
-  if (childKeys.length === 1 && node.leaves.length === 0) {
+  if (!noCollapseAtRoot && childKeys.length === 1 && node.leaves.length === 0) {
     const only = node.children[childKeys[0]];
     const label = (labelPrefix ? labelPrefix + ' › ' : '') + dgeSegLabel(childKeys[0]);
     const onlyPath = nodePath ? nodePath + '/' + childKeys[0] : childKeys[0];
@@ -388,7 +561,7 @@ window.openLibraryModal = async function() {
   // repos won't have one until the project lead actually curates something.
   await dgeLoadLibraryOverrides();
 
-  const populated = library.granthas.filter(g => g.populated).map(g => {
+  const populated = library.granthas.filter(g => g.populated && !dgeIsAdminOnlyGrantha(g)).map(g => {
     const realSlug = window.dgeGranthaSlug(g.path);
     const slug = dgeEffectiveDisplayPath(realSlug); // where it GROUPS in the tree
     const custom = dgeLibOverrides.labels[slug];
@@ -409,7 +582,7 @@ window.openLibraryModal = async function() {
   // populated-only as before (deliberately not showing ~550 empty
   // placeholder entries in the everyday reader) -- this only powers each
   // folder header's own badge.
-  const allForTotals = library.granthas.map(g => {
+  const allForTotals = library.granthas.filter(g => !dgeIsAdminOnlyGrantha(g)).map(g => {
     const realSlug = window.dgeGranthaSlug(g.path);
     return dgeEffectiveDisplayPath(realSlug);
   }).filter(slug => !dgeIsHiddenPath(slug));
@@ -424,19 +597,88 @@ window.openLibraryModal = async function() {
   });
 
   dgeTreeNodeSeq = 0;
-  const tree = dgeBuildTree(populated);
-  const topKeys = dgeSortChildKeys('', Object.keys(tree.children));
-  listEl.innerHTML =
-    `<div style="font-size:11px; color:var(--muted-text); margin-bottom:8px;">${populated.length} text(s) available</div>` +
-    topKeys.map(k => dgeRenderNode(tree.children[k], dgeSegLabel(k), 0, k)).join('') +
-    dgeSortLeaves('', tree.leaves).map(leaf =>
-      `<div class="pop-item" onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}${
-        dgeIsRecentlyAdded(leaf.addedAt)
-          ? '<span style="margin-left:auto; font-size:9px; font-weight:800; color:#fff; background:var(--accent-red,#7a3b1d); border-radius:999px; padding:2px 6px; letter-spacing:.3px;">NEW</span>'
-          : ''
-      }</div>`
-    ).join('');
+  dgeLibTree = dgeBuildTree(populated);
+  dgeLibTopKeys = dgeSortChildKeys('', Object.keys(dgeLibTree.children));
+  dgeLibPopulatedCount = populated.length;
+  dgeLibGridCategory = null;
+  dgeRenderLibraryRoot();
 };
+
+// Everything below builds off dgeLibTree/dgeLibTopKeys, cached by
+// openLibraryModal() above -- none of these re-fetch or rebuild the tree,
+// so switching view modes or drilling in/out of a category is instant.
+let dgeLibPopulatedCount = 0;
+
+function dgeTopLevelLeavesHtml() {
+  return dgeSortLeaves('', dgeLibTree.leaves).map(leaf =>
+    `<div class="pop-item" onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}${
+      dgeIsRecentlyAdded(leaf.addedAt)
+        ? '<span style="margin-left:auto; font-size:9px; font-weight:800; color:#fff; background:var(--accent-red,#7a3b1d); border-radius:999px; padding:2px 6px; letter-spacing:.3px;">NEW</span>'
+        : ''
+    }</div>`
+  ).join('');
+}
+
+// The List view -- unchanged in substance from before this pass, just
+// pulled out into its own function so dgeRenderLibraryRoot() can pick
+// between this and the grid.
+function dgeRenderLibraryListView() {
+  return dgeLibTopKeys.map(k => dgeRenderNode(dgeLibTree.children[k], dgeSegLabel(k), 0, k, true)).join('') + dgeTopLevelLeavesHtml();
+}
+
+// The new icon-driven home screen: one tile per top-level category
+// (same keys/order/counts the list view already computes), each tappable
+// straight through to that category's own list (dgeShowLibraryCategory) --
+// no separate "grid data model," just a different view of the same tree.
+function dgeRenderLibraryGridView() {
+  const tiles = dgeLibTopKeys.map(k => {
+    const node = dgeLibTree.children[k];
+    const count = dgeCountLeaves(node);
+    const total = dgeLibTotalCounts[k] || count;
+    const countText = total > count ? `${count}/${total}` : `${count}`;
+    return `<button type="button" class="dge-lib-tile" onclick="window.dgeShowLibraryCategory('${k}')">
+      <span class="dge-lib-tile-icon">${dgeLibraryIconFor(k)}</span>
+      <span class="dge-lib-tile-label">${dgeSegLabel(k)}</span>
+      <span class="dge-lib-tile-count">${countText}</span>
+    </button>`;
+  }).join('');
+  const topLeaves = dgeTopLevelLeavesHtml();
+  return `<div class="dge-lib-grid">${tiles}</div>` + (topLeaves ? `<div class="popup-label" style="margin-top:14px;">Other</div>${topLeaves}` : '');
+}
+
+// One category's own subtree, reached by tapping its grid tile -- reuses
+// dgeRenderNode exactly as the list view does, just scoped to one branch
+// with a breadcrumb back to the grid instead of every branch at once.
+function dgeRenderLibraryCategoryView(key) {
+  const node = dgeLibTree.children[key];
+  if (!node) return dgeRenderLibraryGridView(); // stale key (shouldn't happen) -- fail back to the grid rather than a blank screen
+  return `<div class="dge-lib-breadcrumb" onclick="window.dgeShowLibraryGrid()">
+      <span>❮</span> <span>${dgeSegLabel(key)}</span>
+    </div>` + dgeRenderNode(node, '', 0, key);
+}
+
+window.dgeShowLibraryCategory = function (key) {
+  dgeLibGridCategory = key;
+  dgeRenderLibraryRoot();
+};
+window.dgeShowLibraryGrid = function () {
+  dgeLibGridCategory = null;
+  dgeRenderLibraryRoot();
+};
+
+function dgeRenderLibraryRoot() {
+  const listEl = document.getElementById('libraryModalList');
+  if (!listEl || !dgeLibTree) return;
+  const mode = dgeGetLibraryViewMode();
+  const header = `<div style="font-size:11px; color:var(--muted-text); margin-bottom:8px;">${dgeLibPopulatedCount} text(s) available</div>`;
+  if (dgeLibGridCategory) {
+    listEl.innerHTML = header + dgeRenderLibraryCategoryView(dgeLibGridCategory);
+  } else if (mode === 'grid') {
+    listEl.innerHTML = header + dgeRenderLibraryGridView();
+  } else {
+    listEl.innerHTML = header + dgeRenderLibraryListView();
+  }
+}
 
 // Quick Search entry point — parses e.g. "rv1.1.3" (see
 // dgeParseQuickSearchQuery in config.js) and navigates straight to that
@@ -465,7 +707,7 @@ async function dgeFuzzyMatchGrantha(text) {
   const qWords = q.split(' ').filter(Boolean);
   let best = null, bestScore = -1;
   library.granthas.forEach(function (g) {
-    if (!g.populated) return;
+    if (!g.populated || dgeIsAdminOnlyGrantha(g)) return;
     const realSlug = window.dgeGranthaSlug(g.path);
     const hay = dgeNormalizeForMatch(realSlug + ' ' + (g.title || ''));
     if (!hay) return;
@@ -536,4 +778,104 @@ window.dgeGoToGrantha = function(slug) {
   // ever shows up, so this can't silently produce a broken URL.
   const readableSlug = /^[a-z0-9_/]+$/i.test(slug) ? slug : encodeURIComponent(slug);
   window.location.href = window.location.pathname + '?path=' + readableSlug;
+};
+
+// 24 Aug 2026: Previous/Next Sarga/Adhyaya/Maṇḍala/Kāṇḍa navigator --
+// project lead's direct ask, confirmed via investigation to not exist
+// anywhere ("I already requested that there may be a navigator... that
+// is currently missing"). Every multi-sarga/multi-mandala work (e.g.
+// Raghavendra Vijaya's sarga_01..sarga_10, the Rigveda's mandala_01..10)
+// stores each sub-unit as its OWN grantha entry/data.json -- there was no
+// way to step to the next one without going back through the Library
+// drawer's taxonomy tree. Pure UI wiring: reuses the SAME data.json's
+// numbered-folder naming convention (dgeAutoLabel/DGE_NUMBERED_PREFIXES
+// above) and library.json catalog this file already parses for the tree
+// view -- no new data pipeline or metadata backfill needed. Deliberately
+// no change to grantha data.json itself: prev/next are computed fresh
+// from the catalog on every load, so a newly-added sarga is picked up
+// automatically without touching every sibling file's own metadata.
+let dgeChapterNavPrevSlug = null, dgeChapterNavNextSlug = null;
+let dgeChapterNavPrefix = null, dgeChapterNavIdx = 0, dgeChapterNavTotal = 0;
+
+window.dgeInitChapterNav = async function() {
+  const row = document.getElementById('chapterNavRow');
+  if (!row) return;
+  row.style.display = 'none';
+  dgeChapterNavPrevSlug = null;
+  dgeChapterNavNextSlug = null;
+
+  const slug = window.currentGranthaSlug;
+  const lastSlash = slug ? slug.lastIndexOf('/') : -1;
+  if (lastSlash < 0) return; // top-level grantha (e.g. stotra/xyz) -- no numbered parent to page within
+  const parentPath = slug.slice(0, lastSlash);
+  const lastSeg = slug.slice(lastSlash + 1);
+  const m = lastSeg.match(/^([a-z]+)_(\d+)$/i);
+  if (!m || !DGE_NUMBERED_PREFIXES[m[1].toLowerCase()]) return; // this leaf isn't a numbered sub-unit (sarga_2 etc.)
+  const prefix = m[1].toLowerCase();
+
+  const library = await (window.dgeLibraryCatalogPromise || Promise.resolve(null));
+  if (!library || !Array.isArray(library.granthas)) return;
+
+  const prefixRe = new RegExp('^' + prefix + '_\\d+$', 'i');
+  const siblings = library.granthas
+    .filter(g => g.populated && !dgeIsAdminOnlyGrantha(g))
+    .map(g => window.dgeGranthaSlug(g.path))
+    .filter(s => {
+      const sl = s.lastIndexOf('/');
+      return sl >= 0 && s.slice(0, sl) === parentPath && prefixRe.test(s.slice(sl + 1));
+    });
+  if (siblings.length < 2) return; // this is the only sub-unit under this parent -- nothing to page between
+
+  siblings.sort(dgeCompareSlugs);
+  const idx = siblings.indexOf(slug);
+  if (idx === -1) return; // current grantha isn't itself in the populated catalog (shouldn't happen if it loaded at all)
+
+  dgeChapterNavPrevSlug = idx > 0 ? siblings[idx - 1] : null;
+  dgeChapterNavNextSlug = idx < siblings.length - 1 ? siblings[idx + 1] : null;
+  dgeChapterNavPrefix = prefix;
+  dgeChapterNavIdx = idx;
+  dgeChapterNavTotal = siblings.length;
+  window.dgeRenderChapterNav();
+};
+
+// Re-renders just the LABEL TEXT of the already-computed nav (prev/next
+// slugs don't change with script) -- called both from dgeInitChapterNav
+// above and from renderStotraChrome() (core.js) whenever the display
+// script changes, the same way that function already re-labels every
+// other piece of chrome.
+window.dgeRenderChapterNav = function() {
+  const row = document.getElementById('chapterNavRow');
+  if (!row || (!dgeChapterNavPrevSlug && !dgeChapterNavNextSlug)) return;
+  const prefix = dgeChapterNavPrefix, idx = dgeChapterNavIdx, total = dgeChapterNavTotal;
+
+  const prevBtn = document.getElementById('chapterNavPrevBtn');
+  const nextBtn = document.getElementById('chapterNavNextBtn');
+  const posEl = document.getElementById('chapterNavPosition');
+
+  if (prevBtn) {
+    if (dgeChapterNavPrevSlug) {
+      prevBtn.style.visibility = 'visible';
+      prevBtn.textContent = '❮ ' + dgeSegLabel(dgeChapterNavPrevSlug.split('/').pop());
+    } else {
+      prevBtn.style.visibility = 'hidden';
+    }
+  }
+  if (nextBtn) {
+    if (dgeChapterNavNextSlug) {
+      nextBtn.style.visibility = 'visible';
+      nextBtn.textContent = dgeSegLabel(dgeChapterNavNextSlug.split('/').pop()) + ' ❯';
+    } else {
+      nextBtn.style.visibility = 'hidden';
+    }
+  }
+  if (posEl) {
+    posEl.textContent = dgeToActiveScript(DGE_NUMBERED_PREFIXES[prefix]) + ' ' +
+      dgeToActiveScript(dgeDevaNum(idx + 1)) + ' / ' + dgeToActiveScript(dgeDevaNum(total));
+  }
+  row.style.display = 'flex';
+};
+
+window.dgeGoToChapterSibling = function(dir) {
+  const slug = dir === 'prev' ? dgeChapterNavPrevSlug : dgeChapterNavNextSlug;
+  if (slug) window.dgeGoToGrantha(slug);
 };

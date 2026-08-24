@@ -151,6 +151,19 @@ body.is-authorized .advanced-feature { display: flex !important; }
 
 /* Header & Search Bar */
 .header { text-align: center; padding: 10px 0 14px; }
+/* 24 Aug 2026: Previous/Next Sarga/Adhyaya/Maṇḍala/Kāṇḍa nav (library.js's
+   dgeInitChapterNav/dgeRenderChapterNav) -- placed first inside .header so
+   it sits above the title, per the project lead's explicit ask. */
+.chapter-nav-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.chapter-nav-btn {
+  background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-pill);
+  padding: 6px 12px; font-size: 11px; font-weight: 700; color: var(--text-primary); cursor: pointer;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 42%;
+  transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.chapter-nav-btn:hover { background: var(--card-active); }
+.chapter-nav-btn:active { transform: scale(0.95); }
+.chapter-nav-position { font-size: 10px; color: var(--muted-text); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; flex-shrink: 0; white-space: nowrap; }
 .header h1 { margin: 0; font-family: var(--font-sanskrit); font-size: 24px; color: var(--accent-red); font-weight: 700; transition: color var(--t-med) var(--ease); }
 .header .author { font-size: 11px; color: var(--muted-text); text-transform: uppercase; font-weight: 600; letter-spacing: 0.6px; margin-top: 4px; }
 .header .rule { width: 64px; height: 2px; margin: 8px auto 0; background: linear-gradient(90deg, transparent, var(--accent-gold), transparent); opacity: 0.8; }
@@ -229,6 +242,12 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .filter-checkbox-item.active::before { content: "☑"; color: var(--accent-red); }
 .filter-checkbox-item:hover { background: var(--card-border); }
 .filter-checkbox-item.active { background: var(--card-active); color: var(--accent-red); }
+/* 24 Aug 2026 -- per-criterion Exclude state (cycleFilterCriterion,
+   filter.js): a third tap after Include, distinct from it -- struck-
+   through label plus a ☒ so "exclude fav" never reads as a second, oddly
+   duller "include fav" at a glance. */
+.filter-checkbox-item.excluded::before { content: "☒"; color: var(--muted-text); }
+.filter-checkbox-item.excluded { background: var(--card-border); color: var(--muted-text); text-decoration: line-through; }
 
 .range-mode-toggle { display: flex; gap: 4px; }
 .range-mode-btn { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-pill); padding: 3px 10px; font-size: 11px; font-weight: 700; color: var(--text-primary); cursor: pointer; transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease); }
@@ -270,6 +289,38 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 .commentary-title { font-weight: 700; font-family: var(--font-ui); color: var(--accent-red); font-size: 11px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
 
+/* 23 Aug 2026: gemini_deep_analysis fields (Pratipadartha/Tatparya/
+   Vyakarana/Vrutta/Alankara) render as <details>/<summary> for a
+   collapsible accordion, reusing .commentary-block/.commentary-title so
+   they match the look of every other field without a second style
+   system. Only the summary marker/cursor and the table/list bodies
+   inside are new. */
+details.dge-analysis-field > summary.commentary-title { cursor: pointer; list-style-position: outside; margin-bottom: 6px; }
+details.dge-analysis-field > summary.commentary-title::marker { color: var(--accent-red); font-size: 10px; }
+details.dge-analysis-field[open] > summary.commentary-title { margin-bottom: 8px; }
+.dge-ai-badge { display: inline-block; font-family: var(--font-ui); font-size: 9px; font-weight: 800; letter-spacing: 0.3px; color: #fff; background: var(--accent-red, #7a3b1d); border-radius: var(--radius-pill); padding: 1px 6px; margin-left: 6px; text-transform: none; vertical-align: 1px; }
+
+.dge-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.dge-analysis-table { width: 100%; border-collapse: collapse; font-size: calc(var(--font-multiplier) * 0.8); }
+.dge-analysis-table th, .dge-analysis-table td { text-align: left; padding: 4px 10px 4px 0; vertical-align: top; border-bottom: 1px solid var(--card-border); white-space: nowrap; }
+.dge-analysis-table td:last-child, .dge-analysis-table th:last-child { white-space: normal; font-family: var(--font-ui); }
+.dge-analysis-table thead th { font-family: var(--font-ui); font-size: 10px; text-transform: uppercase; letter-spacing: 0.3px; color: var(--accent-red); font-weight: 700; }
+.dge-analysis-pada { font-weight: 700; }
+.dge-analysis-list { margin: 0; padding-left: 18px; }
+.dge-analysis-list li { margin-bottom: 4px; }
+.dge-analysis-tag { font-family: var(--font-ui); font-size: 10px; color: var(--text-secondary, inherit); opacity: 0.75; }
+.dge-analysis-lakshana, .dge-analysis-split { margin-top: 2px; opacity: 0.85; font-size: 0.95em; }
+
+/* 23 Aug 2026: per-card commentary tab bar, shown only when 2+
+   commentaries render for a shloka. "All" is the default (today's
+   stacked view, unchanged); a tab shows just that one commentary by
+   toggling display on the already-rendered .commentary-block siblings
+   -- see dgeShowCommentaryTab in render.js. */
+.dge-commentary-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px; }
+.dge-commentary-tab { font-family: var(--font-ui); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: var(--radius-pill); border: 1px solid var(--card-border); background: transparent; color: var(--text-primary); cursor: pointer; opacity: 0.7; transition: opacity var(--t-fast) var(--ease), background var(--t-fast) var(--ease); }
+.dge-commentary-tab:hover { opacity: 1; }
+.dge-commentary-tab.active { opacity: 1; background: var(--accent-gold); color: #1a1208; border-color: transparent; }
+
 /* Bottom Toolbar — floating frosted panel */
 .bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border-top: 1px solid var(--card-border); border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.10); z-index: 9999; box-sizing: border-box; padding-bottom: env(safe-area-inset-bottom); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease); }
 .player-inner { max-width: 650px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 8px 4px; box-sizing: border-box; gap: 4px; }
@@ -299,9 +350,78 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 /* The consolidated Display popup holds four sections at once, so it needs
    to scroll rather than run off the bottom of a phone screen. */
 .popup-scroll { max-height: min(70vh, 460px); overflow-y: auto; overscroll-behavior: contain; }
+
+/* 24 Aug 2026: .popup-sheet turns an anchored dropdown into a real bottom
+   sheet -- full width, rises from the bottom edge, room to breathe instead
+   of a 460px box holding 4 merged sections. No JS changes needed: it's
+   still opened/closed via the existing togglePopup()/.show class, and
+   every #displayPopup .pop-item[...] lookup elsewhere (transliteration.js,
+   utils.js, render.js, menu.js) is untouched since the id and children
+   don't change, only this element's own positioning.
+   Important: a .popup-sheet must NOT be nested inside an element that has
+   backdrop-filter/filter/transform/perspective (like .top-bar) -- any of
+   those create a new containing block for position:fixed descendants, so
+   the sheet ends up anchored to that ancestor's small box instead of the
+   real viewport. See index.html: #displayPopup is placed as a sibling of
+   .top-bar for exactly this reason. */
+.popup.popup-sheet {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  width: 100%; max-width: 100%; margin: 0 auto;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-left: none; border-right: none; border-bottom: none;
+  height: auto; max-height: 80vh; padding: 10px 16px calc(16px + env(safe-area-inset-bottom));
+  transform: translateY(100%);
+  transition: transform var(--t-med) var(--ease), opacity var(--t-fast) var(--ease), visibility var(--t-fast) var(--ease);
+  /* Real bug found via live testing, 24 Aug: this sheet's trigger button
+     lives inside #actionsDrawer (z-index 11000, see .modal-overlay), and
+     togglePopup() never closes that drawer when a sheet opens from inside
+     it -- so with both open, a lower z-index here rendered the sheet
+     UNDER the drawer's dark backdrop (looked like tapping "Display" did
+     nothing). Sheets always win regardless of what else is open. */
+  z-index: 11500;
+}
+.popup.popup-sheet.show { transform: translateY(0); }
+/* 24 Aug 2026 -- Phase 6: full-width-from-the-bottom is a mobile pattern
+   (thumb-reachable, no room to spare). On a desktop-width viewport there
+   is room to spare, and a sheet stretched edge-to-edge at 1200px+ would
+   look broken, not native -- so above the tablet breakpoint it becomes a
+   compact floating panel anchored to the bottom-right instead, closer to
+   how the equivalent anchored dropdown behaved there. Still the same
+   element, same .show class, same slide transition -- only its size and
+   corner anchoring change. */
+@media (min-width: 760px) {
+  .popup.popup-sheet {
+    left: auto; right: 20px; bottom: 20px;
+    width: min(360px, 90vw); max-width: min(360px, 90vw);
+    max-height: min(70vh, 560px);
+    border-radius: var(--radius-lg); border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-lg);
+  }
+}
+.popup-sheet-handle { width: 36px; height: 4px; border-radius: var(--radius-pill); background: var(--card-border); margin: 0 auto 6px; flex-shrink: 0; }
+@media (min-width: 760px) { .popup-sheet-handle { display: none; } }
+.popup-sheet-scroll { overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 12px; flex: 1 1 auto; min-height: 0; }
+/* Backdrop: CSS-only via :has(), so opening/closing the sheet needs no JS
+   changes. Degrades gracefully (no dimming, sheet still fully usable) in
+   the rare browser without :has() support. */
+body:has(.popup-sheet.show)::after {
+  content: ''; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  z-index: 10400; animation: dgeSheetFadeIn var(--t-fast) var(--ease);
+}
+@keyframes dgeSheetFadeIn { from { opacity: 0; } to { opacity: 1; } }
 .popup-label { font-size: 10px; color: #8a7a63; text-transform: uppercase; letter-spacing: 0.04em; }
 .popup.show { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
 .popup hr { width: 100%; border: 0; border-top: 1px solid var(--card-border); margin: 0; }
+
+/* 24 Aug 2026: live-preview Shloka Image Composer (#shareImagePreviewSheet) */
+.share-preview-canvas-wrap { display: flex; justify-content: center; align-items: center; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 10px; min-height: 160px; }
+.share-preview-canvas { max-width: 100%; height: auto; border-radius: 6px; display: block; }
+.share-preview-loading { font-size: 12px; color: var(--muted-text); padding: 30px 0; }
+.share-preview-color-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 4px 12px; }
+.share-preview-swatch { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--card-border); cursor: pointer; padding: 0; }
+.share-preview-swatch:active { transform: scale(0.9); }
+#sharePreviewColorInput { width: 34px; height: 30px; border: none; background: none; cursor: pointer; padding: 0; }
+.share-preview-contrast-badge { font-size: 11px; font-weight: 700; margin-left: auto; }
 
 .pop-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 700; width: 100%; gap: 12px; white-space: nowrap; }
 .pop-input { width: 48px; text-align: center; border: 1px solid var(--card-border); border-radius: var(--radius-xs); padding: 4px; font-size: 12px; box-sizing: border-box; background: var(--card-bg); color: var(--text-primary); }
@@ -343,6 +463,14 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
      screen. max-width lets .tooltip-row's flex-wrap (below) actually wrap
      onto a second line on narrow screens instead of overflowing off-screen. */
   max-width: min(94vw, 460px);
+  /* A cap on how tall this can grow -- the full stack (Ask Acharya's 4
+     query-type buttons + wordToolsRow's up-to-5 word tools) can reach
+     ~300px+ on a single-word selection, tall enough on a short phone
+     screen that ai.js's mobile positioning (stays below the selection,
+     or docks at the top chrome edge) could still run out of room.
+     overflow-y:auto keeps every button reachable by scrolling within the
+     tooltip itself rather than the tooltip growing past its dock point. */
+  max-height: min(60vh, 420px); overflow-y: auto;
 }
 .tooltip-header { font-size: 10px; font-weight: 800; color: #a8907a; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; margin-bottom: 2px; }
 .tooltip-row { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; max-width: 92vw; }
@@ -378,6 +506,147 @@ body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 .modal-content.fullscreen { width: 100%; height: 100%; max-width: none; max-height: none; border-radius: 0; border: none; display: flex; flex-direction: column; }
 .modal-content.fullscreen .modal-body { display: flex; flex-direction: column; flex-grow: 1; padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
 .modal-content.fullscreen textarea { flex-grow: 1; height: auto; min-height: 50vh; resize: none; margin-bottom: 12px; }
+
+/* 24 Aug 2026 -- Phase 2 of the mobile UI overhaul: off-canvas drawers.
+   .drawer-left/.drawer-right turn an ordinary centered .modal-overlay into
+   a full-height panel that slides in from an edge -- the same navigation
+   pattern used by Gmail, Slack, Spotify and Claude's own app (formalized
+   as Android/Material Design's "Navigation Drawer" component, itself
+   descended from the hamburger icon Norm Cox designed for the 1981 Xerox
+   Star -- not anything specific to one reference site). openModal()/
+   closeModal() (modals.js) special-case these two classes to swap from a
+   plain display:none<->flex toggle to a show/hide class so the slide can
+   transition; every other modal-overlay on the site is untouched by that
+   branch and keeps working exactly as before. */
+.modal-overlay.drawer-left,
+.modal-overlay.drawer-right {
+  align-items: stretch;
+  background: rgba(0,0,0,0);
+  transition: background var(--t-med) var(--ease);
+}
+.modal-overlay.drawer-left { justify-content: flex-start; }
+.modal-overlay.drawer-right { justify-content: flex-end; }
+.modal-overlay.drawer-left.show,
+.modal-overlay.drawer-right.show { background: rgba(0,0,0,0.55); }
+
+.modal-overlay.drawer-left .modal-content,
+.modal-overlay.drawer-right .modal-content {
+  width: min(340px, 86vw); max-width: none;
+  height: 100%; max-height: none;
+  margin: 0; border-radius: 0; border-top: none; border-bottom: none;
+  animation: none; /* the drawer's own slide replaces the centered-modal pop-in */
+  transition: transform var(--t-med) var(--ease);
+}
+.modal-overlay.drawer-left .modal-content { border-left: none; transform: translateX(-100%); }
+.modal-overlay.drawer-right .modal-content { border-right: none; transform: translateX(100%); }
+.modal-overlay.drawer-left.show .modal-content,
+.modal-overlay.drawer-right.show .modal-content { transform: translateX(0); }
+.modal-overlay.drawer-left .modal-body,
+.modal-overlay.drawer-right .modal-body { padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
+
+/* Phase 3: .top-actions, relocated wholesale into #actionsDrawer's body
+   (see index.html), becomes a vertical labelled list instead of the
+   horizontal icon-only row it used to be directly in .top-bar. Scoped to
+   .modal-body so it only affects this one relocated usage. */
+.modal-body .top-actions { display: flex; flex-direction: column; align-items: stretch; gap: 4px; justify-content: flex-start; }
+.modal-body .top-actions > * { width: 100%; }
+.modal-body .top-actions .btn-top {
+  justify-content: flex-start; width: 100%; font-size: 15px; font-weight: 600;
+  padding: 12px 10px; gap: 10px; border-radius: var(--radius-sm);
+}
+.btn-top-label { font-size: 13px; }
+
+/* 24 Aug 2026 -- Phase 4 of the mobile UI overhaul: distraction-free full
+   screen reading. Strips every piece of chrome (top bar, header, search
+   bar, special-character palette, bottom player, the कोश/global-search
+   floating buttons) down to just the shloka + commentary, matching the
+   explicit ask: "the bottom toolbar, upper toolbar, left stuff, right
+   stuff -- everything should go away." Toggled by
+   window.dgeToggleImmersiveMode() (utils.js). One persistent small exit
+   button is the only chrome left, deliberately -- a tap-to-reveal-chrome
+   pattern (as video players use) would risk swallowing taps meant for
+   word lookup/text selection inside the verse itself, and a reading app
+   (Kindle, Apple Books) is the closer reference class here than a video
+   player anyway. */
+body.dge-immersive .top-bar,
+body.dge-immersive .header,
+body.dge-immersive .search-box-group,
+body.dge-immersive .char-palette-panel,
+body.dge-immersive .bottom-player,
+body.dge-immersive .search-navigator,
+body.dge-immersive #kosha-fab,
+body.dge-immersive .dge-gs-fab { display: none !important; }
+body.dge-immersive { padding-top: env(safe-area-inset-top) !important; padding-bottom: env(safe-area-inset-bottom) !important; }
+
+.immersive-exit-btn {
+  display: none; position: fixed; top: calc(10px + env(safe-area-inset-top)); right: 10px; z-index: 10600;
+  width: 38px; height: 38px; border-radius: 50%; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.45); color: #fff; border: none; font-size: 15px; line-height: 1; cursor: pointer;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: var(--shadow-md);
+}
+body.dge-immersive .immersive-exit-btn { display: flex; }
+
+/* 24 Aug 2026 -- body.dge-selecting (toggled by ai.js's MutationObserver on
+   #actionTooltip's own style attribute) hides the same two FABs while the
+   selection tooltip is open, so they don't sit visibly behind/around it --
+   the same clutter the immersive rule above already solves for full-screen
+   reading, applied here to a much shorter-lived state. */
+body.dge-selecting #kosha-fab,
+body.dge-selecting .dge-gs-fab { display: none !important; }
+
+/* 24 Aug 2026 -- Phase 5: App View, a second lower-density layout
+   alongside the existing dense "Scholar" view (see window.dgeSetLayoutMode
+   in render.js and the App Layouts section of the Display sheet in
+   index.html). Purely class/CSS-driven: each card's commentary/analysis
+   is hidden by default and revealed per-card via the .dge-appview-toggle
+   button render.js already emits for every card (present, just display:
+   none, in Scholar view) -- switching modes needs no re-render since both
+   states are already in the DOM either way. */
+.dge-appview-toggle { display: none; }
+body.dge-app-view .shloka-card .dge-appview-toggle {
+  display: flex; align-items: center; justify-content: center; width: 100%;
+  background: transparent; border: 1px dashed var(--card-border); color: var(--muted-text);
+  font-size: 11px; font-weight: 700; padding: 7px; border-radius: var(--radius-xs); cursor: pointer;
+}
+body.dge-app-view .shloka-card .dge-appview-toggle:active { background: var(--card-active); }
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .commentary-block,
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-commentary-tabbed,
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-analysis-field,
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-fn-block { display: none; }
+/* 24 Aug 2026: widened from a 4px padding / 4px list-gap delta -- confirmed
+   via live testing to be too subtle to notice on a phone screen, which is
+   exactly why the project lead's report that switching modes "did nothing"
+   was a real, if different, bug: the mode WAS applying (and persisting
+   across a reload), just imperceptibly so whenever a reader had no
+   commentary selected (the default since the multi-select-commentary
+   rework) and so nothing for the collapse behaviour above to visibly
+   collapse. This is now a real, unmistakable density/shape difference
+   regardless of commentary state, on top of the toggle button + the
+   confirmation toast dgeSetLayoutMode() now shows on a real tap. */
+body.dge-app-view .shloka-card { padding: 20px; gap: 12px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+body.dge-app-view .shloka-list { gap: 20px; }
+
+/* 24 Aug 2026 -- icon-driven Library home screen (library.js's
+   dgeRenderLibraryGridView/dgeRenderLibraryCategoryView). A 3-column tile
+   grid replacing the flat top-level list on entry; each tile hands off to
+   the existing text-tree rendering (.pop-item etc., untouched) for
+   everything below it, reached via the breadcrumb row. */
+.dge-lib-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 4px; }
+.dge-lib-tile {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md);
+  padding: 14px 6px 10px; cursor: pointer; color: var(--text-primary); font-family: inherit;
+  transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.dge-lib-tile:hover { background: var(--card-active); }
+.dge-lib-tile:active { transform: scale(0.95); }
+.dge-lib-tile-icon { font-size: 26px; line-height: 1; }
+.dge-lib-tile-label { font-size: 11px; font-weight: 700; text-align: center; line-height: 1.3; }
+.dge-lib-tile-count { font-size: 10px; color: var(--muted-text); font-weight: 400; }
+.dge-lib-breadcrumb {
+  display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; font-weight: 700;
+  color: var(--accent-red); padding: 4px 2px 12px; border-bottom: 1px solid var(--card-border); margin-bottom: 8px;
+}
 
 .modal-header-sticky { padding: 16px; background: var(--card-bg); z-index: 10; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
 .modal-body { padding: 16px; overflow-y: auto; flex-grow: 1; }

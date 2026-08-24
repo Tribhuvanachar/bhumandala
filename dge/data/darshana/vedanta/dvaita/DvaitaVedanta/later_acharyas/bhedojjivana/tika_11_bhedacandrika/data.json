@@ -1,0 +1,35 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/12781/12778/sharav/bhatha/bhatha/bhatha",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_12829",
+   "reference": "श्रीव्यासतीर्थ: > भेदोज्जीवनम् > (११) भेदोज्जीवनम् > ननु विद्यमान एव भेदो घटादिभिर्नाभिव्यज्यते चेत्तर्ह्युत्पद्यत इति वक्तव्यम्",
+   "section": "(११) भेदोज्जीवनम्",
+   "unit_title": "ननु विद्यमान एव भेदो घटादिभिर्नाभिव्यज्यते चेत्तर्ह्युत्पद्यत इति वक्तव्यम्",
+   "sanskrit_text": "(११)भेदचन्द्रिका\nउपाधिघटसम्बन्धस्य गगनेऽव्याप्यवृत्तित्वमेवाङ्गीक्रियते । नत्वेकदेशवृत्तित्वं येन गगने तात्त्विकस्वान्तर्भेदः स्यात् । किन्तु स्वात्यन्ताभावसमानाधिकरणत्वम् । न च प्रतियोगितदभावयोरवच्छेदकभेदं विनैकत्र विरोध इति वाच्यम् । भगवत्याः प्रतीतेरेव विरोधशामकत्वादित्यर्थः । औत्पत्तिकत्वेन कालतो धर्मिव्यापकत्वेन ॥ श्रुतयश्चेति ॥ तथाचाभेदे प्रमाणबाहुल्यादभेदे प्रमाणाभाव एव भेदे प्रमाणमिति नाशङ्कनीयमिति भावः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीव्यासतीर्थ:",
+    "भेदोज्जीवनम्",
+    "(११) भेदोज्जीवनम्",
+    "ननु विद्यमान एव भेदो घटादिभिर्नाभिव्यज्यते चेत्तर्ह्युत्पद्यत इति वक्तव्यम्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/12791/12778/sharav/bhatha/bhatha/bhatha",
+    "content_id": 12791,
+    "layer": "( ११) भेदचन्द्रिका",
+    "anchor": "article12829",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "( ११) भेदचन्द्रिका"
+  }
+ ]
+}

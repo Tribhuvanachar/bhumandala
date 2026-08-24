@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha.js'] = 'v1.5 (new window.dgeKoshaQuick(word) -- a data-only lookup, same ranking/filtering as the full overlay, for embedding a few results inline in another surface, e.g. the Shabda word-tool modal in ai.js)';
+  window.DGE_VERSIONS['kosha.js'] = 'v1.6 (#kosha-fab now the same 48px circular shape/shadow as the global-search FAB beside it, for visual consistency between the app\'s two floating action buttons -- was a differently-shaped pill. Everything from v1.5 -- dgeKoshaQuick -- unchanged)';
 
   // Citation-form normalizer: strip a trailing visarga (H) / anusvara (M) from
   // an SLP1 headword so dictionaries that cite the nominative (रामः = rAmaH) or
@@ -742,8 +742,18 @@
     // hard-coded colours. FAB sits ABOVE the bottom toolbar (body reserves
     // 126px for it) and above the toolbar's z-index (9999) so it is never
     // hidden behind Filter/Tools; the overlay sits at modal level (11000).
+    // Same 48px circular shape/shadow as the global-search FAB right below
+    // it (dge-gs-fab in global-search.js) -- 24 Aug 2026, project lead's
+    // direct report that the two floating buttons "are still standing
+    // there" looking like leftover, uncoordinated clutter. Investigated
+    // rather than assumed a bug: both are legitimate, deliberately
+    // always-one-tap-away actions (not admin-only, not stray) used often
+    // enough that folding them into the Menu drawer would add a real tap
+    // of friction to a frequently-used feature -- so the fix here is
+    // visual coherence (one shared FAB shape/size/shadow so the two read
+    // as one small family of controls), not removing either.
     css.textContent = [
-      '#kosha-fab{position:fixed;right:16px;bottom:calc(192px + env(safe-area-inset-bottom));z-index:10000;background:var(--accent-red,#8a5a2b);color:#fff;border:none;border-radius:28px;padding:12px 18px;font-size:16px;box-shadow:0 3px 12px rgba(0,0,0,.3);cursor:pointer}',
+      '#kosha-fab{position:fixed;right:16px;bottom:calc(192px + env(safe-area-inset-bottom));z-index:10000;width:48px;height:48px;background:var(--accent-red,#7a3b1d);color:#fff;border:none;border-radius:50%;font-size:13px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer}',
       '#kosha-ov{position:fixed;inset:0;z-index:11000;background:var(--bg-main,#fff);color:var(--text-primary,#111);display:none;flex-direction:column}',
       '#kosha-ov.open{display:flex}',
       '.kosha-bar{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--card-border,#ddd);align-items:center}',

@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14498",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > तृतीयाध्यायः > द्वितीयः पादः > पश्चाददृष्ट्यविज्ञानकालदुःखपृथग्भवाः",
+   "section": "द्वितीयः पादः",
+   "unit_title": "पश्चाददृष्ट्यविज्ञानकालदुःखपृथग्भवाः",
+   "sanskrit_text": "सम्पत्त्यधिकरणम्\nसुषुप्तिबोधमोहांश्च स्ववशस्तद्वशं सदा ।\nजीवं नयति देवेशः नान्यः कर्तास्य कश्चन ॥108॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "तृतीयाध्यायः",
+    "द्वितीयः पादः",
+    "पश्चाददृष्ट्यविज्ञानकालदुःखपृथग्भवाः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14482/563/satara/2-anav/tataya/thavat",
+    "content_id": 14482,
+    "layer": "सम्पत्त्यधिकरणम्",
+    "anchor": "article14498",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "सम्पत्त्यधिकरणम्"
+  }
+ ]
+}

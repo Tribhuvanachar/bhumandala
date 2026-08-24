@@ -6,7 +6,7 @@
 // and note entries.
 
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['actions.js'] = 'v3.2 (Rich markdown note previews)';
+window.DGE_VERSIONS['actions.js'] = 'v3.3 (the two Image download/share buttons collapsed into a single "Preview & Share Image" action, routing through screenshot.js\'s new openShareImagePreview() instead of firing download/share immediately)';
 
 window.currentActionsSheetId = null;
 
@@ -125,10 +125,7 @@ window.renderActionsSheetContent = function(id) {
   html += `<button class="btn-sm" style="flex:1;" onclick="window.downloadFullShlokaAudio(${id})">⬇️ Audio</button>`;
   html += `<button class="btn-sm" style="flex:1;" onclick="window.shareShlokaAudio(${id})">📤 Share Text + Audio</button>`;
   html += `</div>`;
-  html += `<div style="display:flex; gap:8px; margin-bottom:8px;">`;
-  html += `<button class="btn-sm" style="flex:1;" onclick="window.downloadShlokaScreenshot(${id})">⬇️ Image</button>`;
-  html += `<button class="btn-sm" style="flex:1;" onclick="window.shareShlokaScreenshot(${id})">🖼️ Share as Image</button>`;
-  html += `</div>`;
+  html += `<button class="btn-sm" style="width:100%; margin-bottom:8px;" onclick="window.openShareImagePreview(${id})">🖼️ Preview &amp; Share Image</button>`;
   html += `<button class="btn-sm" style="width:100%;" onclick="window.shareShlokaTextOnly(${id})">📝 Share Text Only</button>`;
   html += `<div style="font-size:10px; color:var(--muted-text); margin-top:6px; line-height:1.5;">Some apps (e.g. WhatsApp for audio files) drop the caption text when sharing a file — use "Text Only" if the combined share arrives without it.</div>`;
 

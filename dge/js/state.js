@@ -8,7 +8,12 @@ window.stotraData = null;
 window.currentAudio = new Audio();
 window.isPlaying = false;
 window.currentFilter = 'all';
-window.selectedCommentaryView = 'none';
+// Real bug found via live testing, 24 Aug: this used to be a single
+// string ('none'/'all'/one specific key), so picking a second commentary
+// silently replaced the first instead of adding to it -- "I can only
+// choose one commentary... I can choose any number of commentaries."
+// Now a Set of every currently-selected commentary key; empty = Mula Only.
+window.selectedCommentaries = new Set();
 
 // Safe empty defaults. Real data is loaded by window.loadPersistedState()
 // once window.stotraCode is known (see core.js initApp()) — stotraCode

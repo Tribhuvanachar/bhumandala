@@ -1,0 +1,112 @@
+{
+ "schema": "grantha_mula_text",
+ "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+ "source_url": "https://dvaitavedanta.in/category-details/4774/943/thasha/7-math/mal",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_4813",
+   "reference": "दशप्रकरणानि > 7. मिथ्यात्वानुमानखण्डनम् > मूल > विमतं मिथ्या, दृश्यत्वात्..",
+   "section": "मूल",
+   "unit_title": "विमतं मिथ्या, दृश्यत्वात्..",
+   "sanskrit_text": "विमतं मिथ्या, दृश्यत्वात्..",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "दशप्रकरणानि",
+    "7. मिथ्यात्वानुमानखण्डनम्",
+    "मूल",
+    "विमतं मिथ्या, दृश्यत्वात्.."
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/4774/943/thasha/7-math/mal",
+    "content_id": 4774,
+    "layer": "मूलम्",
+    "anchor": "article4813",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_4817",
+   "reference": "दशप्रकरणानि > 7. मिथ्यात्वानुमानखण्डनम् > टीका_टिप्पणि > विमतं मिथ्या, दृश्यत्वात्..",
+   "section": "टीका_टिप्पणि",
+   "unit_title": "विमतं मिथ्या, दृश्यत्वात्..",
+   "sanskrit_text": "विमतं मिथ्या, दृश्यत्वात्..",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "दशप्रकरणानि",
+    "7. मिथ्यात्वानुमानखण्डनम्",
+    "टीका_टिप्पणि",
+    "विमतं मिथ्या, दृश्यत्वात्.."
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/4814/943/thasha/7-math/taka-t",
+    "content_id": 4814,
+    "layer": "मूलम्",
+    "anchor": "article4817",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_4816",
+   "reference": "दशप्रकरणानि > 7. मिथ्यात्वानुमानखण्डनम् > पद्मनाभतीर्थटीका > प्रपञ्चमिथ्यात्वसाधनं यत्तद् दूषयितुं तत्त्व-वादाचार्योऽनुवदति",
+   "section": "पद्मनाभतीर्थटीका",
+   "unit_title": "प्रपञ्चमिथ्यात्वसाधनं यत्तद् दूषयितुं तत्त्व-वादाचार्योऽनुवदति",
+   "sanskrit_text": "प्रपञ्चमिथ्यात्वसाधनं यत्तद् दूषयितुं तत्त्व-वादाचार्योऽनुवदति",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "दशप्रकरणानि",
+    "7. मिथ्यात्वानुमानखण्डनम्",
+    "पद्मनाभतीर्थटीका",
+    "प्रपञ्चमिथ्यात्वसाधनं यत्तद् दूषयितुं तत्त्व-वादाचार्योऽनुवदति"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/4815/943/thasha/7-math/patham",
+    "content_id": 4815,
+    "layer": "मूलम्",
+    "anchor": "article4816",
+    "fetched": "2026-08-18"
+   }
+  },
+  {
+   "id": "DV_14971",
+   "reference": "दशप्रकरणानि > 7. मिथ्यात्वानुमानखण्डनम् > प्रश्न-उत्तर > प्रपश्चमिथ्यात्वानुमानखण्डनम्‌",
+   "section": "प्रश्न-उत्तर",
+   "unit_title": "प्रपश्चमिथ्यात्वानुमानखण्डनम्‌",
+   "sanskrit_text": "प्रपश्चमिथ्यात्वानुमानखण्डनम्‌",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "दशप्रकरणानि",
+    "7. मिथ्यात्वानुमानखण्डनम्",
+    "प्रश्न-उत्तर",
+    "प्रपश्चमिथ्यात्वानुमानखण्डनम्‌"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14927/943/thasha/7-math/parash",
+    "content_id": 14927,
+    "layer": "मूलम्",
+    "anchor": "article14971",
+    "fetched": "2026-08-18"
+   }
+  }
+ ]
+}

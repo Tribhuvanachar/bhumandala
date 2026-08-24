@@ -1,6 +1,6 @@
 name: Extract DvaitaVedanta
 
-# Pulls the dvaitavedanta.in corpus into dge/data/dvaitavedanta/.
+# Pulls the dvaitavedanta.in corpus into dge/data/darshana/vedanta/dvaita/DvaitaVedanta/.
 #
 # Fetching must happen here, not in the Cowork sandbox — that sandbox has no
 # network egress to the source host (see dge/PENDING.md), which is why every DGE
@@ -199,10 +199,10 @@ jobs:
           # names included, and putting them straight back on the collect side
           # however carefully collect removed them first. A shard must contain
           # only what this job crawled.
-          rm -rf dge/data/dvaitavedanta
+          rm -rf dge/data/darshana/vedanta/dvaita/DvaitaVedanta
           ARGS=(
             --config tools/dvaitavedanta/dv_sources.json
-            --out dge/data/dvaitavedanta
+            --out dge/data/darshana/vedanta/dvaita/DvaitaVedanta
             --cache .dv_cache
             --sections "$SECTION"
             --delay "$DELAY"
@@ -230,8 +230,8 @@ jobs:
           # A section with every grantha disabled writes nothing and exits 0.
           # That is a legitimate no-op, not a failure — do not treat the
           # missing directory as one (run 32036326082 failed exactly here).
-          [ -d dge/data/dvaitavedanta ] || { echo "no output for ${{ matrix.section }} (all granthas disabled)"; exit 0; }
-          python tools/dvaitavedanta/verify_extract.py --data dge/data/dvaitavedanta
+          [ -d dge/data/darshana/vedanta/dvaita/DvaitaVedanta ] || { echo "no output for ${{ matrix.section }} (all granthas disabled)"; exit 0; }
+          python tools/dvaitavedanta/verify_extract.py --data dge/data/darshana/vedanta/dvaita/DvaitaVedanta
 
       # Runs even if the round is cancelled at the timeout, so a killed job
       # still hands its crawled pages to the next round instead of losing
@@ -247,9 +247,9 @@ jobs:
       - name: Stage shard output
         if: ${{ !fromJSON(inputs.dry_run) }}
         run: |
-          [ -d dge/data/dvaitavedanta ] || { echo "nothing to stage"; exit 0; }
+          [ -d dge/data/darshana/vedanta/dvaita/DvaitaVedanta ] || { echo "nothing to stage"; exit 0; }
           mkdir -p shard
-          cp -r dge/data/dvaitavedanta shard/dvaitavedanta
+          cp -r dge/data/darshana/vedanta/dvaita/DvaitaVedanta shard/dvaitavedanta
           mv shard/dvaitavedanta/_extract_status.json \
              "shard/status-${{ matrix.section }}.json" || true
 
@@ -313,7 +313,7 @@ jobs:
       - name: Merge shards into dge/data
         run: |
           set -euo pipefail
-          mkdir -p dge/data/dvaitavedanta
+          mkdir -p dge/data/darshana/vedanta/dvaita/DvaitaVedanta
           # Replace each arriving section outright instead of copying over it.
           # A plain copy only ever ADDS: when a commentary is refiled under a
           # better folder name, the old folder survives in main and the work is
@@ -328,18 +328,18 @@ jobs:
             for grantha in "$dir"/*/*/; do
               [ -d "$grantha" ] || continue
               rel=${grantha#"$dir"/}
-              stale="dge/data/dvaitavedanta/${rel%/}"
+              stale="dge/data/darshana/vedanta/dvaita/DvaitaVedanta/${rel%/}"
               # if/fi, not `[ -d x ] && ...`: under set -e a false test ends the step.
               if [ -d "$stale" ]; then
                 echo "replacing $stale"
                 rm -rf "$stale"
               fi
             done
-            cp -r "$dir/." dge/data/dvaitavedanta/
+            cp -r "$dir/." dge/data/darshana/vedanta/dvaita/DvaitaVedanta/
           done
           python tools/dvaitavedanta/merge_status.py \
             --inputs "shards/dv-*/status-*.json" \
-            --out dge/data/dvaitavedanta/_extract_status.json
+            --out dge/data/darshana/vedanta/dvaita/DvaitaVedanta/_extract_status.json
 
       - name: Name the sections that did NOT arrive
         run: |
@@ -364,13 +364,13 @@ jobs:
           python tools/gen_library_status.py
 
       - name: Verify merged tree
-        run: python tools/dvaitavedanta/verify_extract.py --data dge/data/dvaitavedanta --strict
+        run: python tools/dvaitavedanta/verify_extract.py --data dge/data/darshana/vedanta/dvaita/DvaitaVedanta --strict
 
       - name: Report
         run: |
           python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
           import json, pathlib
-          p = pathlib.Path("dge/data/dvaitavedanta/_extract_status.json")
+          p = pathlib.Path("dge/data/darshana/vedanta/dvaita/DvaitaVedanta/_extract_status.json")
           s = json.loads(p.read_text(encoding="utf-8"))
           t = s.get("totals", {})
           print("## Merged result\n")
@@ -385,7 +385,7 @@ jobs:
           for name, c in (s.get("sections") or {}).items():
               print(f"| {name} | {c.get('complete',0)}/{c.get('granthas',0)} | {c.get('items',0):,} | {c.get('failed',0)} |")
           PY
-          du -sh dge/data/dvaitavedanta || true
+          du -sh dge/data/darshana/vedanta/dvaita/DvaitaVedanta || true
 
       # Note: dge/build_search_index.py is deliberately NOT run here. The index
       # is a regenerable build product and dge/search_index is already 162 MB;
@@ -409,16 +409,16 @@ jobs:
             convention in `dge/PROJECT_STATUS.md`. Every record retains its
             `source_url`.
 
-            - Landed under `dge/data/dvaitavedanta/` (staging tree) — no existing
+            - Landed under `dge/data/darshana/vedanta/dvaita/DvaitaVedanta/` (staging tree) — no existing
               grantha was modified.
-            - Progress tracker: `dge/data/dvaitavedanta/_extract_status.json`
+            - Progress tracker: `dge/data/darshana/vedanta/dvaita/DvaitaVedanta/_extract_status.json`
             - Dashboard: `dge/dvaitavedanta-status.html`
             - Search index intentionally not rebuilt; run `reindex.yml` after review.
 
             See the run summary for per-grantha counts and any unmapped
             commentary layers.
           add-paths: |
-            dge/data/dvaitavedanta
+            dge/data/darshana/vedanta/dvaita/DvaitaVedanta
             dge/data/taxonomy.json
             dge/data/library.json
             admin/config/library-status.json

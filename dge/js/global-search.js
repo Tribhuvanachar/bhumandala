@@ -23,14 +23,18 @@
   var INDEX_BASE = window.DGE_SEARCH_INDEX || CDN_INDEX;
   var idxPromise = null, debounce = null;
   var currentScheme = 'auto'; // set by the scheme popup, read by queryOpts()
+  var currentSection = ''; // set by the section popup, read directly by onType() -- '' means "Everything"
 
   // Post-search filters: narrow the results ALREADY fetched (never a new
   // network round trip -- a fresh query is already a 10+ second multi-shard
   // fetch through jsdelivr, see onType()'s own note; re-querying per filter
   // toggle would only make that worse). lastHits/lastQuery hold the most
   // recent completed search so filters + renderRows() can re-slice it.
-  var lastHits = null, lastQuery = '';
-  var filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '' };
+  // lastQueryDeva is the SAME query converted to Devanagari (see
+  // queryToDevanagari() below) rather than folded to SLP1 -- computed once
+  // per search, read by applyFilters()'s "Exact spelling only" toggle.
+  var lastHits = null, lastQuery = '', lastQueryDeva = '';
+  var filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '', exact: false };
   var CATEGORY_LABELS = {
     vedas: 'वेदाः', purana: 'पुराणानि', itihasa: 'इतिहासाः', darshana: 'दर्शनानि',
     smriti_dharma: 'स्मृतिधर्मशास्त्राणि', agama: 'आगमः', stotra: 'स्तोत्राणि',
@@ -40,9 +44,10 @@
   // Advaita/Dvaita/Vishishtadvaita aren't their own field on a hit (the
   // search index doesn't carry one) but this project's own taxonomy paths
   // already encode it unambiguously in the slug for anything under
-  // darshana/vedanta/* or the separate top-level dvaitavedanta/* tree --
-  // real signal, not a guess, just read from where it already lives rather
-  // than duplicated into a new field.
+  // darshana/vedanta/* -- real signal, not a guess, just read from where
+  // it already lives rather than duplicated into a new field. The
+  // dvaitavedanta prefix check is kept for hits from a not-yet-rebuilt
+  // search index still carrying the pre-23-Aug-2026 top-level path.
   function siddhantaOf(slug) {
     if (/(^|\/)advaita(\/|$)/.test(slug)) return 'advaita';
     if (/(^|\/)vishishtadvaita(\/|$)/.test(slug)) return 'vishishtadvaita';
@@ -74,16 +79,24 @@
     // UI themes with the rest of the site. The FAB sits ABOVE the bottom
     // toolbar (body reserves 126px for it) and above the toolbar z-index
     // (9999) so it is never hidden behind Filter/Tools; the overlay sits at
-    // modal level (11000). The scheme <select> is styled to match the app's
-    // controls (custom chevron, themed background) instead of the bare OS look.
-    var ARROW = "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%238a7a63' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>\")";
+    // modal level (11000). Both the input-script picker and the search-scope
+    // picker are the same custom button+popup-list shape (styled to match
+    // the app's other controls) instead of a native <select> -- see the
+    // .dge-gs-schemewrap comment below for why.
     s.textContent = [
       '.dge-gs-fab{position:fixed;right:16px;bottom:calc(134px + env(safe-area-inset-bottom));z-index:10000;width:48px;height:48px;border-radius:50%;border:none;background:var(--accent-red,#7a3b1d);color:#fff;font-size:20px;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer}',
       '.dge-gs-overlay{position:fixed;inset:0;z-index:11000;background:rgba(0,0,0,.45);display:none}',
       '.dge-gs-overlay.open{display:block}',
       '.dge-gs-panel{max-width:720px;margin:6vh auto 0;background:var(--card-bg,#fff);color:var(--text-primary,#1a1a1a);border:1px solid var(--card-border,rgba(0,0,0,.12));border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);overflow:hidden;font-family:inherit}',
       '.dge-gs-top{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--card-border,rgba(0,0,0,.12));align-items:center}',
-      '.dge-gs-input{flex:1;font-size:17px;padding:10px 12px;border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,transparent);color:inherit}',
+      // min-width:0 overrides the flex-item default of auto (which resolves
+      // to the input's intrinsic content width) -- without it, this input
+      // refuses to shrink below that width on a narrow phone, pushing the
+      // two flex:none schemewrap buttons (and their popups) past the
+      // panel's right edge, where .dge-gs-panel{overflow:hidden} clips
+      // them -- confirmed live: "Everything ▾" truncated to "Eve", the
+      // opened scope popup's option labels all cut off mid-word.
+      '.dge-gs-input{flex:1;min-width:0;font-size:17px;padding:10px 12px;border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,transparent);color:inherit}',
       // A custom popup (trigger button + a dropped-down option list), not a
       // native <select> -- a <select>'s OPEN list is drawn by the OS on
       // mobile and cannot be restyled, which is exactly what made this look
@@ -145,7 +158,7 @@
       '<div class="dge-gs-panel" role="dialog" aria-label="Global search">' +
         '<div class="dge-gs-top">' +
           '<input class="dge-gs-input" id="dge-gs-input" placeholder="Search all texts — Devanagari, IAST, HK, or SLP1…" autocomplete="off">' +
-          '<div class="dge-gs-schemewrap">' +
+          '<div class="dge-gs-schemewrap" id="dge-gs-scheme-wrap">' +
             '<button type="button" class="dge-gs-schemebtn" id="dge-gs-scheme-btn" title="Input script">auto ▾</button>' +
             '<div class="dge-gs-scheme-pop" id="dge-gs-scheme-pop">' +
               '<div class="dge-gs-scheme-opt active" data-scheme="auto">auto</div>' +
@@ -155,9 +168,21 @@
               '<div class="dge-gs-scheme-opt" data-scheme="slp1">SLP1</div>' +
             '</div>' +
           '</div>' +
-          '<select class="dge-gs-scheme" id="dge-gs-section" title="Search scope">' +
-            '<option value="">Everything</option>' +
-          '</select>' +
+          // Same custom button+popup-list shape as the input-script picker
+          // just above, not a native <select> -- a <select>'s OPEN list is
+          // drawn by the OS on mobile and cannot be restyled, which made
+          // this the one light-themed, unstyleable dropdown left in an
+          // otherwise fully dark, custom-styled UI (confirmed against a
+          // live screenshot). The section list is only known once the
+          // index's manifest loads, so this starts as just "Everything"
+          // and fills in via populateSections() below, same as the <select>
+          // it replaces did with <option>s.
+          '<div class="dge-gs-schemewrap" id="dge-gs-section-wrap">' +
+            '<button type="button" class="dge-gs-schemebtn" id="dge-gs-section-btn" title="Search scope">Everything ▾</button>' +
+            '<div class="dge-gs-scheme-pop" id="dge-gs-section-pop">' +
+              '<div class="dge-gs-scheme-opt active" data-section="">Everything</div>' +
+            '</div>' +
+          '</div>' +
           '<button class="dge-gs-x" id="dge-gs-x" title="Close (Esc)" aria-label="Close">✕</button>' +
         '</div>' +
         '<div class="dge-gs-filterbar" id="dge-gs-filterbar" style="display:none;"></div>' +
@@ -168,15 +193,23 @@
 
     document.getElementById('dge-gs-x').addEventListener('click', close);
     document.getElementById('dge-gs-input').addEventListener('input', onType);
-    // Changing scope re-runs the current query immediately -- no need to
-    // retype for the search to reflect the new "Everything"/section choice.
-    document.getElementById('dge-gs-section').addEventListener('change', function () {
-      document.getElementById('dge-gs-input').dispatchEvent(new Event('input'));
-    });
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }
       if (e.key === 'Escape') close();
     });
+
+    // Re-runs the current query immediately after either popup's choice
+    // changes -- no need to retype for the search to reflect the new
+    // script/scope. Dispatches a real Event so onType(e) gets a genuine
+    // e.target to read (onType destructures e.target.value); a bare
+    // onType() call here previously threw "Cannot read properties of
+    // undefined (reading 'target')" and silently skipped the re-search --
+    // a real bug, confirmed live (picking an input-script option while a
+    // query was already typed), not something introduced by this change.
+    function rerunIfQueried() {
+      var input = document.getElementById('dge-gs-input');
+      if (input.value.trim()) input.dispatchEvent(new Event('input'));
+    }
 
     var schemeBtn = document.getElementById('dge-gs-scheme-btn');
     var schemePop = document.getElementById('dge-gs-scheme-pop');
@@ -191,48 +224,91 @@
       schemeBtn.textContent = (opt.textContent || currentScheme) + ' ▾';
       schemePop.querySelectorAll('.dge-gs-scheme-opt').forEach(function (o) { o.classList.toggle('active', o === opt); });
       schemePop.classList.remove('show');
-      if (document.getElementById('dge-gs-input').value.trim()) onType();
+      rerunIfQueried();
     });
+
+    // Search-scope picker -- see the .dge-gs-schemewrap comment in css()
+    // above for why this is the same shape as the scheme picker instead of
+    // a native <select>. Options are added by populateSections() below
+    // once the index's manifest loads; only "Everything" exists at build().
+    var sectionBtn = document.getElementById('dge-gs-section-btn');
+    var sectionPop = document.getElementById('dge-gs-section-pop');
+    sectionBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      sectionPop.classList.toggle('show');
+    });
+    sectionPop.addEventListener('click', function (e) {
+      var opt = e.target.closest('.dge-gs-scheme-opt');
+      if (!opt) return;
+      currentSection = opt.dataset.section;
+      sectionBtn.textContent = (opt.textContent || 'Everything') + ' ▾';
+      sectionPop.querySelectorAll('.dge-gs-scheme-opt').forEach(function (o) { o.classList.toggle('active', o === opt); });
+      sectionPop.classList.remove('show');
+      rerunIfQueried();
+    });
+
     // Same click-outside-closes convention as the overlay itself (line
-    // above: `if (e.target === ov) close()`).
+    // above: `if (e.target === ov) close()`). Scoped per popup by its own
+    // wrapper id so clicking inside one never closes the other.
     document.addEventListener('click', function (e) {
-      if (schemePop.classList.contains('show') && !e.target.closest('.dge-gs-schemewrap')) {
+      if (schemePop.classList.contains('show') && !e.target.closest('#dge-gs-scheme-wrap')) {
         schemePop.classList.remove('show');
+      }
+      if (sectionPop.classList.contains('show') && !e.target.closest('#dge-gs-section-wrap')) {
+        sectionPop.classList.remove('show');
       }
     });
   }
 
+  // populateSections is attached on EVERY call, not only the one that
+  // actually creates idxPromise -- 24 Aug 2026, needed once prefetchManifest()
+  // below could call this before build() has ever run (no #dge-gs-section-pop
+  // to populate yet). Splitting "fetch and cache the index" from "populate
+  // the (maybe not-yet-built) DOM" this way means a prefetch's own idle-time
+  // call safely no-ops (populateSections' own data-populated/element-exists
+  // guards handle that), and the LATER real call from open() -- after build()
+  // has created the popup -- still populates it correctly, from the same
+  // already-resolved, cached promise. Before this change populateSections
+  // ran only once, tied to the original .then() chain, so an early prefetch
+  // would have silently left the section popup permanently un-populated.
   function ensureIndex() {
     if (!idxPromise) {
       if (!window.DGESearch) { alert('Search scripts not loaded (need dge-search.js).'); return null; }
-      idxPromise = window.DGESearch.create(INDEX_BASE).then(function (idx) {
-        populateSections(idx.sections || []);
-        return idx;
-      }).catch(function (e) {
+      idxPromise = window.DGESearch.create(INDEX_BASE).catch(function (e) {
         idxPromise = null;
-        document.getElementById('dge-gs-results').innerHTML =
-          '<div class="dge-gs-hint">Could not load the search index at "' + INDEX_BASE + '". Generate it with build_search_index.py and commit dge/search_index/.</div>';
+        // Guarded: a prefetch call (see prefetchManifest()) can reach this
+        // catch before build() has ever run, when #dge-gs-results doesn't
+        // exist yet -- writing to it unconditionally would throw a second,
+        // unrelated error on top of the real one.
+        var el = document.getElementById('dge-gs-results');
+        if (el) {
+          el.innerHTML = '<div class="dge-gs-hint">Could not load the search index at "' + INDEX_BASE + '". Generate it with build_search_index.py and commit dge/search_index/.</div>';
+        }
         throw e;
       });
     }
-    return idxPromise;
+    return idxPromise.then(function (idx) {
+      populateSections(idx.sections || []);
+      return idx;
+    });
   }
 
   // The section list only comes from the index's own manifest (it's not
-  // known ahead of a fetch), so the <select> starts as just "Everything" and
+  // known ahead of a fetch), so the popup starts as just "Everything" and
   // fills in once ensureIndex() resolves. Guarded so a second open() in the
   // same page load doesn't duplicate the options.
   function populateSections(sections) {
-    var sel = document.getElementById('dge-gs-section');
-    if (!sel || sel.getAttribute('data-populated') || !sections.length) return;
-    sel.setAttribute('data-populated', '1');
+    var pop = document.getElementById('dge-gs-section-pop');
+    if (!pop || pop.getAttribute('data-populated') || !sections.length) return;
+    pop.setAttribute('data-populated', '1');
     sections.slice().sort(function (a, b) {
       return sectionLabel(a).localeCompare(sectionLabel(b));
     }).forEach(function (sec) {
-      var opt = document.createElement('option');
-      opt.value = sec;
+      var opt = document.createElement('div');
+      opt.className = 'dge-gs-scheme-opt';
+      opt.dataset.section = sec;
       opt.textContent = sectionLabel(sec);
-      sel.appendChild(opt);
+      pop.appendChild(opt);
     });
   }
 
@@ -262,6 +338,30 @@
     if (scheme === 'slp1' || scheme === 'devanagari') return { scheme: scheme };
     try { if (window.Sanscript) return { slp1: window.Sanscript.t(input, scheme, 'slp1') }; } catch (e) {}
     return { scheme: 'slp1' };
+  }
+
+  // "Exact spelling only" (24 Aug 2026, the backlog item deferred when the
+  // rest of this session's search work shipped -- the project lead's
+  // go-ahead: "Sure. Go ahead. No problem."). The index itself only ever
+  // stores trigrams over the PHONETICALLY FOLDED key (see
+  // SEARCH_ARCHITECTURE.md/dge-normalize.js) -- there is no separate
+  // literal-spelling index to query, and building one would mean
+  // rebuilding the 330MB artifact, exactly the architecture change this
+  // whole pass was told not to make. What the index DOES already store,
+  // per unit, is the real Devanagari snippet text (row.s / h.snippet) --
+  // so "exact" is implemented as a client-side POST-filter on the results
+  // a normal fuzzy search already fetched, same as every other filter chip
+  // in this file (type/category/siddhanta/keyword), never a new query.
+  // Converts the query to Devanagari the same way queryOpts() above
+  // detects its script, but to 'devanagari' instead of 'slp1' -- the
+  // snippet's own stored script -- so the comparison is a literal
+  // character-for-character containment check, not a folded one.
+  function queryToDevanagari(input) {
+    if (/[ऀ-ॿ]/.test(input)) return input.trim();
+    var scheme = currentScheme;
+    if (scheme === 'auto') scheme = /[āīūṛṝḷṁṃḥśṣṅñṭḍṇ]/i.test(input) ? 'iast' : 'slp1';
+    try { if (window.Sanscript) return window.Sanscript.t(input, scheme, 'devanagari').trim(); } catch (e) {}
+    return input.trim();
   }
 
   function go(slug, unit) {
@@ -296,7 +396,8 @@
     results.innerHTML = '<div class="dge-gs-hint">Searching…</div>';
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
-      var section = (document.getElementById('dge-gs-section') || {}).value || undefined;
+      var section = currentSection || undefined;
+      lastQueryDeva = queryToDevanagari(q);
       p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30, section: section }, queryOpts(q))); })
        .then(function (hits) { render(hits, q); })
        .catch(function () {
@@ -424,15 +525,26 @@
     var catKeys = Object.keys(filterState.categories);
     var sidKeys = Object.keys(filterState.siddhanta);
     var kw = filterState.keyword.trim().toLowerCase();
+    // Only actually filters when there's a real Devanagari string to check
+    // against (lastQueryDeva) -- guards the edge case where conversion
+    // failed and fell back to empty, which would otherwise hide everything.
+    var exactActive = filterState.exact && !!lastQueryDeva;
     var out = lastHits.filter(function (h) {
       if (typeActive && h.contentType !== filterState.type) return false;
       if (catKeys.length && filterState.categories[h.category] !== true) return false;
       if (sidKeys.length && filterState.siddhanta[siddhantaOf(h.grantha)] !== true) return false;
       if (kw && (h.title + ' ' + h.snippet).toLowerCase().indexOf(kw) === -1) return false;
+      if (exactActive && (!h.snippet || h.snippet.indexOf(lastQueryDeva) === -1)) return false;
       return true;
     });
-    var anyFilterActive = typeActive || catKeys.length || sidKeys.length || kw;
-    renderRows(out, lastQuery, anyFilterActive ? 'No results match these filters.' : 'No matches.');
+    var anyFilterActive = typeActive || catKeys.length || sidKeys.length || kw || exactActive;
+    var emptyMsg = 'No matches.';
+    if (anyFilterActive) {
+      emptyMsg = exactActive
+        ? 'No exact spelling matches among these results — try turning off "Exact spelling only" to see near matches too.'
+        : 'No results match these filters.';
+    }
+    renderRows(out, lastQuery, emptyMsg);
     var fc = document.getElementById('dge-gs-fcount');
     if (fc) fc.textContent = anyFilterActive ? (out.length + ' of ' + lastHits.length) : '';
   }
@@ -529,7 +641,24 @@
       bar.appendChild(sidRow);
     }
 
-    // Row 4: keyword refine + a live "N of M shown" count.
+    // Row 4: exact-spelling toggle -- own row, since it's a mode the reader
+    // opts into (see queryToDevanagari()'s comment above), not tied to this
+    // result set's own contents the way type/category/siddhanta are. Only
+    // shown when there's an actual Devanagari form of the query to check
+    // against (see applyFilters()'s own guard) -- a dead toggle that can
+    // never filter anything would just be confusing chrome.
+    if (lastQueryDeva) {
+      var exactRow = document.createElement('div');
+      exactRow.className = 'dge-gs-frow';
+      exactRow.appendChild(filterChip('Exact spelling only', filterState.exact, function () {
+        filterState.exact = !filterState.exact;
+        buildFilterBar(hits);
+        applyFilters();
+      }));
+      bar.appendChild(exactRow);
+    }
+
+    // Row 5: keyword refine + a live "N of M shown" count.
     var kwRow = document.createElement('div');
     kwRow.className = 'dge-gs-frow';
     var kwInput = document.createElement('input');
@@ -545,10 +674,38 @@
     bar.appendChild(kwRow);
   }
 
+  // 23 Aug 2026: DvaitaVedanta (dge/data/darshana/vedanta/dvaita/DvaitaVedanta/)
+  // is admin-only -- not linked in the Library nav, and per the project lead's
+  // explicit ask, should not surface in search results for anyone else
+  // either. The 330 MB CDN search index (see INDEX_BASE above) is a separate,
+  // offline-built artifact this session can't rebuild, so a stale copy may
+  // still carry old-path hits from before this restructure; filtering here,
+  // on every hit this UI ever renders regardless of index freshness, is the
+  // one place that reliably holds regardless of what the index contains.
+  // Not real access control -- same caveat as admin-gate.js: this hides the
+  // hit from the UI, it does not restrict the underlying static JSON file.
+  function dgeSearchIsAdmin() {
+    try {
+      return localStorage.getItem('acharyaAuthorized') === 'true' ||
+             localStorage.getItem('is_superadmin') === 'true';
+    } catch (e) { return false; }
+  }
+  function dgeSearchIsAdminOnlyHit(h) {
+    var g = h && h.grantha || '';
+    return g.indexOf('darshana/vedanta/dvaita/DvaitaVedanta') === 0 || g.indexOf('dvaitavedanta') === 0;
+  }
+
   function render(hits, q) {
-    lastHits = hits || [];
+    hits = (hits || []).filter(function (h) { return dgeSearchIsAdmin() || !dgeSearchIsAdminOnlyHit(h); });
+    lastHits = hits;
     lastQuery = q;
-    filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '' };
+    // type/category/siddhanta/keyword reset every search since they're
+    // built from THIS result set's own contents (a category chip from the
+    // last query may not even exist in this one). "Exact spelling only" is
+    // different -- a mode the reader explicitly opted into, not tied to any
+    // one result set -- so it persists across searches, same as the
+    // scheme/section pickers already do.
+    filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '', exact: filterState.exact };
     if (!hits || !hits.length) {
       document.getElementById('dge-gs-filterbar').style.display = 'none';
       renderRows([], q);
@@ -558,7 +715,35 @@
     applyFilters();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
-  else build();
+  // Idle-time manifest prefetch (24 Aug 2026, project lead's "make search
+  // lightning fast" directive) -- by the time a reader actually opens
+  // search and types, the index object may already exist, saving a
+  // manifest fetch + parse off the critical path of their FIRST query.
+  // Deliberately NOT an eager/blocking fetch: manifest.json can be several
+  // MB, and most readers on this page never open search at all -- costing
+  // every one of them that bandwidth just to shave a round trip off the
+  // minority who do would be the wrong trade for a mobile-first app that
+  // already goes out of its way to keep data costs down elsewhere (offline
+  // mode, lazy per-query shard/posting fetches). requestIdleCallback
+  // (falling back to a plain timeout on a browser without it, e.g. Safari)
+  // only runs this once the browser has nothing more pressing to do, and
+  // it's skipped outright on a data-saver/slow connection -- exactly the
+  // audience this restraint exists for.
+  function prefetchManifest() {
+    try {
+      var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      if (conn && (conn.saveData || /2g/.test(conn.effectiveType || ''))) return;
+    } catch (e) { /* navigator.connection isn't universally supported -- proceed as normal */ }
+    var run = function () { ensureIndex(); };
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(run, { timeout: 5000 });
+    } else {
+      setTimeout(run, 2000);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { build(); prefetchManifest(); });
+  } else { build(); prefetchManifest(); }
   window.DGEGlobalSearch = { open: open, close: close };
 })();

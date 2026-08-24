@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14490",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > प्रथमाध्यायः > द्वितीयः पादः > लिङ्गात्मकानां शब्दानां वृत्तिर्नारायणे परे",
+   "section": "द्वितीयः पादः",
+   "unit_title": "लिङ्गात्मकानां शब्दानां वृत्तिर्नारायणे परे",
+   "sanskrit_text": "गुहाधिकरणम्\n........ द्वित्वं चैकस्य युज्यते ।\nयः सेतुरिति चैकत्ववचनेन विशेषणात् ॥10॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "प्रथमाध्यायः",
+    "द्वितीयः पादः",
+    "लिङ्गात्मकानां शब्दानां वृत्तिर्नारायणे परे"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14474/563/satara/2-anav/parath/thavat",
+    "content_id": 14474,
+    "layer": "गुहाधिकरणम्",
+    "anchor": "article14490",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "गुहाधिकरणम्"
+  }
+ ]
+}

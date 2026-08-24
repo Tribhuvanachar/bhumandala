@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14489",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > प्रथमाध्यायः > प्रथमः पादः > नारायणं निखिलगुणैकदेहं निर्दोषमाप्यतममप्यखिलैसुवाक्यख्यैः",
+   "section": "प्रथमः पादः",
+   "unit_title": "नारायणं निखिलगुणैकदेहं निर्दोषमाप्यतममप्यखिलैसुवाक्यख्यैः",
+   "sanskrit_text": "समन्वयाधिकरणम्\nत एवान्वयनामानः तैः सम्यक् प्रविचारिते ॥120॥\nमुख्यार्थो भगवान् विष्णुः सर्वशास्त्रस्य नापरः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "प्रथमाध्यायः",
+    "प्रथमः पादः",
+    "नारायणं निखिलगुणैकदेहं निर्दोषमाप्यतममप्यखिलैसुवाक्यख्यैः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+    "content_id": 14473,
+    "layer": "समन्वयाधिकरणम्",
+    "anchor": "article14489",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "समन्वयाधिकरणम्"
+  }
+ ]
+}

@@ -257,7 +257,7 @@
     "primaryTextField": null
   },
   "stotra_text": {
-    "description": "Devotional hymns, e.g. Prahlada Krita Narasimha Stotra (pns). Verse-by-verse, with heavier emphasis on audio (these are typically chanted) and a closing phala-shruti (benefits of recitation) section that most stotras have. Each stotra's folder carries its own _default_author in taxonomy.json (e.g. pns -> 'Bhakta Prahlada').",
+    "description": "Devotional hymns, e.g. Prahlada Krita Narasimha Stotra (stotra/PrahladaKrutaNarasimha, folder renamed from pns 23 Aug 2026; internal stotraCode stayed pns for localStorage continuity). Verse-by-verse, with heavier emphasis on audio (these are typically chanted) and a closing phala-shruti (benefits of recitation) section that most stotras have. Each stotra's folder carries its own _default_author in taxonomy.json (e.g. PrahladaKrutaNarasimha -> 'Bhakta Prahlada').",
     "item_fields": {
       "id": {
         "type": "string",

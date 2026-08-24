@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.14 (Dhātu modal now also shows AI (Gemini) multilingual meanings + pedagogical usage notes, from tools/gemini_dhatu_lexicon.py -- independently composed, not copied from ashtadhyayi.com or any other source, clearly labeled "AI-generated (Gemini), unreviewed", loaded independently of the primary paradigm so a slow/missing lexicon file never blocks it. Everything from v3.13 -- full tinanta paradigm, Vidyut fallback chain, real sandhi-split index, inline कोश panel -- unchanged)';
+window.DGE_VERSIONS['ai.js'] = 'v3.17 (selection tooltip revamped for mobile: below 760px it never sits immediately above the selection any more -- stays below with real clearance, or docks at the top chrome edge if that does not fit -- avoiding the zone the native browser Translate/Copy/Select-all toolbar prefers; a MutationObserver toggles body.dge-selecting while it is open so the Kosha/global-search FABs hide, matching immersive mode\'s existing clutter fix. Desktop positioning unchanged. Everything from v3.16 -- contextual word-tools visibility -- unchanged)';
 
 // Appends a language directive read from onboarding.js's saved preference
 // (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
@@ -26,6 +26,45 @@ function dgeLangInstruction() {
 // SEE this tooltip. Previously this returned before the tooltip could ever
 // show for anyone without acharyaAuthorized set, which silently hid the
 // word tools from every ordinary visitor, not just Ask Acharya.
+// Contextual selection tooltip (24 Aug 2026, project lead's direct report:
+// "clicking on a word or selecting a word should display the options
+// contextually. That is also not happening"). Confirmed the tooltip itself
+// was never actually failing to appear (verified live: a real selection
+// correctly shows it) -- the real gap was that #wordToolsRow's word-level
+// grammar tools (Shabda/Dhatu/Sandhi/Samasa) showed up identically whether
+// the reader had selected a single word or dragged across a whole phrase,
+// even though every one of those tools does a lookup that is only
+// meaningful for exactly one word (a declension table, a dhatupatha root
+// search, a per-word sandhi split) -- tapping any of them on a multi-word
+// selection was a dead end, not a helpful contextual option. "Where else"
+// (corpus search) is left showing for both, since searching a phrase is
+// perfectly reasonable.
+function dgeUpdateWordToolsForSelection(txt) {
+  const isSingleWord = !!txt && !/\s/.test(txt.trim());
+  document.querySelectorAll('#wordToolsRow [data-word-only]').forEach(btn => {
+    btn.style.display = isSingleWord ? '' : 'none';
+  });
+}
+
+// Suppresses the always-visible कोश/global-search FABs (#kosha-fab,
+// .dge-gs-fab) for as long as #actionTooltip is open -- confirmed live
+// they were sitting visibly behind/around the tooltip (24 Aug live-
+// testing screenshots), the same clutter complaint immersive mode
+// (body.dge-immersive, main.css) already solves for full-screen reading.
+// A MutationObserver on the tooltip's own style attribute, rather than a
+// classList.add/remove pair threaded through every one of the ~7 places
+// in this file that already set tooltip.style.display, so none of those
+// existing call sites need touching.
+(function () {
+  const tooltip = document.getElementById('actionTooltip');
+  if (!tooltip) return;
+  const sync = () => {
+    document.body.classList.toggle('dge-selecting', tooltip.style.display && tooltip.style.display !== 'none');
+  };
+  new MutationObserver(sync).observe(tooltip, { attributes: true, attributeFilter: ['style'] });
+  sync();
+})();
+
 document.addEventListener('selectionchange', () => {
   const activeTag = document.activeElement ? document.activeElement.tagName : '';
   if (['INPUT', 'TEXTAREA'].includes(activeTag)) {
@@ -39,7 +78,7 @@ document.addEventListener('selectionchange', () => {
   clearTimeout(window.selectionTimeout);
   window.selectionTimeout = setTimeout(() => {
     const selection = window.getSelection();
-    const txt = selection.toString().trim();
+    const txt = (typeof window.dgeRobustSelectedText === 'function' ? window.dgeRobustSelectedText() : selection.toString().trim());
     const tooltip = document.getElementById('actionTooltip');
     const modalAppendBtn = document.getElementById('modalAppendBtn');
 
@@ -72,18 +111,52 @@ document.addEventListener('selectionchange', () => {
         window.lastSelectedText = txt;
         if (modalAppendBtn) modalAppendBtn.style.display = 'none';
         tooltip.style.display = 'flex';
-        
+        dgeUpdateWordToolsForSelection(txt);
+
         const tw = tooltip.offsetWidth || 260;
+        tooltip.style.bottom = 'auto';
         let left = rect.left + (rect.width / 2);
         left = Math.max(tw/2 + 8, Math.min(left, window.innerWidth - tw/2 - 8));
-        
-        let yPos = rect.bottom + 8;
-        if (yPos + 100 > window.innerHeight) { 
-            yPos = rect.top - 95; 
-        }
-        
-        tooltip.style.top = `${yPos}px`;
         tooltip.style.left = `${left}px`;
+
+        // Below 760px (this app's own desktop breakpoint -- see main.css)
+        // this used to fall back to `rect.top - 95` (immediately ABOVE the
+        // selection) whenever there wasn't room below -- which is exactly
+        // the zone Android/iOS Chrome's own native Translate/Copy/Select-
+        // all toolbar prefers too (it defaults to sitting just above a
+        // selection, only dropping below when that's the side without
+        // room). The two collided on nearly every real mobile selection
+        // (confirmed live, 24 Aug live-testing report: "it needs
+        // revamping"). Now it never sits above the selection on mobile:
+        // it stays below with real clearance (48px, not 8), and if even
+        // that doesn't fit, it docks flush at the top chrome edge instead
+        // -- clear across the screen from wherever the native toolbar
+        // renders, rather than immediately adjacent to it. Desktop keeps
+        // the original tight-clearance placement: no native auto-popup
+        // toolbar to collide with there.
+        if (window.innerWidth < 760) {
+          // .bottom-player is position:fixed, so its offsetParent is null
+          // by spec regardless of visibility -- that's not a usable
+          // visibility check here; getComputedStyle's display is.
+          const player = document.querySelector('.bottom-player');
+          const playerVisible = player && getComputedStyle(player).display !== 'none';
+          const dockLimit = playerVisible ? (player.getBoundingClientRect().top - 8) : (window.innerHeight - 8);
+          const topBar = document.querySelector('.top-bar');
+          const topBarBottom = topBar ? topBar.getBoundingClientRect().bottom : 0;
+          const th = tooltip.offsetHeight || 200;
+
+          let yPos = rect.bottom + 48;
+          if (yPos + th > dockLimit) {
+            yPos = topBarBottom + 8;
+          }
+          tooltip.style.top = `${yPos}px`;
+        } else {
+          let yPos = rect.bottom + 8;
+          if (yPos + 100 > window.innerHeight) {
+              yPos = rect.top - 95;
+          }
+          tooltip.style.top = `${yPos}px`;
+        }
       }
     } else {
       tooltip.style.display = 'none';
@@ -154,6 +227,9 @@ window.openKeyModal = function() {
   const audioBaseUrlDefaultHint = document.getElementById('audioBaseUrlDefaultHint');
   if (audioBaseUrlDefaultHint) audioBaseUrlDefaultHint.textContent = (window.appConfig && window.appConfig.audioBaseUrl) || 'https://archive.org/download/';
 
+  const searchIndexBaseInput = document.getElementById('userSearchIndexBaseInput');
+  if (searchIndexBaseInput) searchIndexBaseInput.value = localStorage.getItem('search_index_base_override') || '';
+
   dgeRenderAcharyaSettingsUI();
   dgeLoadFeatureFlagsIntoUI();
   dgeLoadShlokaFieldsIntoUI();
@@ -222,6 +298,16 @@ window.saveAllApiKeys = function() {
     if (url && !url.endsWith('/')) url += '/'; // must end with / — concatenated directly with each grantha's identifier folder
     if (url) { localStorage.setItem('audio_base_url_override', url); audioBaseUrlInput.value = url; }
     else localStorage.removeItem('audio_base_url_override');
+  }
+
+  const searchIndexBaseInput = document.getElementById('userSearchIndexBaseInput');
+  if (searchIndexBaseInput) {
+    // No trailing slash here, unlike the audio override above -- dge-search.js's
+    // own fetch helper does `base + '/' + rel`, inserting the separator itself,
+    // so a base that already ends in / would produce a double slash.
+    let indexUrl = searchIndexBaseInput.value.trim().replace(/\/+$/, '');
+    if (indexUrl) { localStorage.setItem('search_index_base_override', indexUrl); searchIndexBaseInput.value = indexUrl; }
+    else localStorage.removeItem('search_index_base_override');
   }
 
   dgeSaveAcharyaSettingsFromUI();
@@ -311,6 +397,13 @@ window.resetAudioBaseUrlToDefault = function() {
   if (typeof showToast === 'function') showToast('Audio source reset to the project default.');
 };
 
+window.resetSearchIndexBaseToDefault = function() {
+  localStorage.removeItem('search_index_base_override');
+  const input = document.getElementById('userSearchIndexBaseInput');
+  if (input) input.value = '';
+  if (typeof showToast === 'function') showToast('Search index source reset to the project default — reload the page for it to take effect.');
+};
+
 window.resetFeatureFlagsToDefault = function() {
   localStorage.removeItem('feature_flags_override');
   localStorage.removeItem('script_options_override');
@@ -329,6 +422,7 @@ const SHLOKA_FIELD_CHECKBOX_IDS = {
   vyakarana: 'fieldVyakarana',
   vrutta: 'fieldVrutta',
   alankara: 'fieldAlankara',
+  samasa: 'fieldSamasa',
   crossReferences: 'fieldCrossReferences'
 };
 
@@ -1002,11 +1096,52 @@ function renderAcharyaQueryButtons() {
 }
 document.addEventListener('DOMContentLoaded', renderAcharyaQueryButtons);
 
+/// Resolves the current selection against render.js's per-word <span
+// class="dge-word"> boundaries (dgeWrapWordsForTap) rather than trusting
+// window.getSelection().toString() directly -- the confirmed fragility:
+// on mobile, a native drag/double-tap selection can jump to a shared
+// ancestor on rapid re-selection and yield truncated or empty text. When
+// the selection's start/end land inside a .dge-word span, this returns
+// that span's own complete textContent (a single word), or -- for a
+// multi-word drag spanning several spans -- walks the sibling .dge-word
+// spans between them in document order and rejoins their text, which is
+// also more robust than the raw string (immune to odd whitespace/entity
+// handling at the drag's edges). Falls back to the raw selection string
+// when the DOM doesn't have word spans (e.g. selection made outside any
+// .shloka-text) so nothing regresses where the boundary doesn't exist.
+window.dgeRobustSelectedText = function() {
+  let raw = '';
+  try { raw = (window.getSelection().toString() || '').trim(); } catch (e) { return ''; }
+  try {
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return raw;
+    const range = sel.getRangeAt(0);
+    const nodeToWord = (node) => {
+      if (!node) return null;
+      const el = node.nodeType === 3 ? node.parentElement : node;
+      return el && el.closest ? el.closest('.dge-word') : null;
+    };
+    const startWord = nodeToWord(range.startContainer);
+    const endWord = nodeToWord(range.endContainer);
+    if (!startWord || !endWord) return raw;
+    if (startWord === endWord) return startWord.textContent.trim() || raw;
+    const container = startWord.closest('.shloka-text');
+    if (!container || !container.contains(endWord)) return raw;
+    const words = Array.from(container.querySelectorAll('.dge-word'));
+    const si = words.indexOf(startWord), ei = words.indexOf(endWord);
+    if (si === -1 || ei === -1) return raw;
+    const lo = Math.min(si, ei), hi = Math.max(si, ei);
+    return words.slice(lo, hi + 1).map(w => w.textContent).join(' ').trim() || raw;
+  } catch (e) {
+    return raw;
+  }
+};
+
 // Word-level tools on the selection tooltip: unlike the AI "Word" button
 // above (which asks an LLM), these navigate to this app's own real,
 // structured data for the selected word rather than generating an answer.
 function dgeSelectedWordText() {
-  try { return (window.getSelection().toString() || '').trim(); }
+  try { return window.dgeRobustSelectedText(); }
   catch (e) { return ''; }
 }
 function dgeHideActionTooltip() {
@@ -1060,6 +1195,7 @@ function dgeEnsureWordModalStyle() {
     '.dge-word-modal .dsm-steps{list-style:none;margin:8px 0 0;padding:0;}',
     '.dge-word-modal .dsm-steps li{display:flex;gap:10px;align-items:baseline;padding:5px 0;border-bottom:1px dashed var(--card-border);font-size:13px;}',
     '.dge-word-modal .dsm-code{flex:0 0 62px;font-family:monospace;color:var(--muted-text);font-size:11px;}',
+    '.dge-word-modal .dsm-code.dge-sutra-ref{cursor:pointer;text-decoration:underline dotted;color:var(--accent-red);}',
     '.dge-word-modal .dsm-result{flex:1;font-size:15px;}',
     '.dge-word-modal .dsm-loading{padding:24px 0;text-align:center;color:var(--muted-text);}',
     '.dge-word-modal .dsm-empty{padding:12px 0;color:var(--muted-text);font-size:13px;line-height:1.6;}',
@@ -1174,12 +1310,24 @@ function dgeShabdaDeclTable(forms, hlIdx) {
   return h;
 }
 
+// Real gap found via live testing, 24 Aug: these sutra codes rendered as
+// inert plain text -- no onclick, no data-sutra, nothing. The app already
+// has a working in-place sutra popover (intellisense.js's .dge-sutra-ref
+// convention, opened from Prakriyā/Rūpasiddhi/the Sandhi tool via the
+// same document-level click delegate) -- this table's own derivation
+// steps just never adopted it. Same isSutra regex prakriya.js already
+// uses to tell a real sutra citation (clickable) from a paribhasha/
+// vartika reference (shown plainly, nothing to look up).
 function dgeShabdaStepsHtml(steps) {
   let last = '';
   return '<ol class="dsm-steps">' + steps.map(function (st) {
     const code = st[0];
     if (st.length > 1) last = st[1];
-    return '<li><span class="dsm-code">' + dgeShabdaEsc(code) + '</span><span class="dsm-result deva">' + dgeShabdaEsc(last) + '</span></li>';
+    const isSutra = /^[1-8]\.[1-4]\.\d{1,3}$/.test(code);
+    const codeHtml = isSutra
+      ? '<span class="dsm-code dge-sutra-ref" data-sutra="' + dgeShabdaEsc(code) + '" role="button" tabindex="0">' + dgeShabdaEsc(code) + '</span>'
+      : '<span class="dsm-code">' + dgeShabdaEsc(code) + '</span>';
+    return '<li>' + codeHtml + '<span class="dsm-result deva">' + dgeShabdaEsc(last) + '</span></li>';
   }).join('') + '</ol>';
 }
 
@@ -1430,6 +1578,14 @@ function dgeWireShabdaKoshaMore(body) {
   });
 }
 
+// Real bug found via live testing, 24 Aug: tapping word A then quickly
+// word B (before A's slower fetch resolved) let A's response land LAST
+// and silently overwrite B's already-rendered modal with A's stale data
+// -- no request-generation check existed anywhere in this chain. Every
+// async .then() below that touches the DOM now checks its own captured
+// `myReq` against the current window.dgeShabdaReqSeq first, so only the
+// MOST RECENTLY opened word's response is ever allowed to render.
+window.dgeShabdaReqSeq = window.dgeShabdaReqSeq || 0;
 window.dgeOpenShabdaForSelection = function(e) {
   if (e) e.preventDefault();
   const word = dgeSelectedWordText();
@@ -1437,6 +1593,7 @@ window.dgeOpenShabdaForSelection = function(e) {
   dgeHideActionTooltip();
   dgeEnsureShabdaModal();
   window.openModal(DGE_SHABDA_MODAL_ID);
+  const myReq = ++window.dgeShabdaReqSeq;
   const body = document.getElementById('dgeShabdaModalBody');
   body.innerHTML = '<div class="dsm-loading">खोजयति… searching “' + dgeShabdaEsc(word) + '”…</div>';
 
@@ -1465,6 +1622,7 @@ window.dgeOpenShabdaForSelection = function(e) {
     .then(function (html) { return html || dgeSandhiFallbackHtml(word); })
     .then(function (html) { return html || dgeShabdaNotFoundHtml(word); })
     .then(function (mainHtml) {
+      if (myReq !== window.dgeShabdaReqSeq) return; // a newer word was opened meanwhile -- this response is stale
       body.innerHTML = mainHtml;
       dgeWireShabdaReportMissing(body, word);
       dgeShabdaWireWhereElse(body);
@@ -1477,6 +1635,7 @@ window.dgeOpenShabdaForSelection = function(e) {
       // not just a test artifact, so it is capped rather than left to
       // run indefinitely.
       dgeWithTimeout(dgeKoshaPanelHtml(word), 8000, '').then(function (koshaHtml) {
+        if (myReq !== window.dgeShabdaReqSeq) return;
         if (!koshaHtml || !body.isConnected) return;
         body.insertAdjacentHTML('beforeend', koshaHtml);
         dgeWireShabdaKoshaMore(body);
@@ -1678,6 +1837,9 @@ function dgeDhatuLexiconHtml(entry) {
   return h;
 }
 
+// Same stale-response guard as dgeOpenShabdaForSelection above, and for
+// the same real reason: no request-generation check existed here either.
+window.dgeDhatuReqSeq = window.dgeDhatuReqSeq || 0;
 window.dgeOpenDhatuForSelection = function(e) {
   if (e) e.preventDefault();
   const word = dgeSelectedWordText();
@@ -1685,15 +1847,18 @@ window.dgeOpenDhatuForSelection = function(e) {
   dgeHideActionTooltip();
   dgeEnsureDhatuModal();
   window.openModal(DGE_DHATU_MODAL_ID);
+  const myReq = ++window.dgeDhatuReqSeq;
   const body = document.getElementById('dgeDhatuModalBody');
   body.innerHTML = '<div class="dsm-loading">खोजयति… searching “' + dgeShabdaEsc(word) + '”…</div>';
 
   dgeFindDhatuFormHit(word).then(function (hit) {
+    if (myReq !== window.dgeDhatuReqSeq) return; // a newer word was opened meanwhile -- this response is stale
     if (!hit) { dgeShowDhatuNotFound(body, word); return; }
     const rootPart = hit.c.split('.')[0];
     fetch('data/vedanga/vyakarana/prakriya/' + rootPart + '/' + hit.c + '.json')
       .then(r => r.ok ? r.json() : null)
       .then(function (d) {
+        if (myReq !== window.dgeDhatuReqSeq) return;
         const step = d && d.steps && d.steps[hit.k] && d.steps[hit.k][0];
         if (!d || !step) { dgeShowDhatuNotFound(body, word); return; }
         body.innerHTML =
@@ -1705,13 +1870,14 @@ window.dgeOpenDhatuForSelection = function(e) {
           '<div id="ddmLexicon"></div>';
         dgeWireDhatuFormsTable(body, d, hit.k);
         dgeWithTimeout(dgeFetchDhatuLexicon(), 8000, null).then(function (byId) {
+          if (myReq !== window.dgeDhatuReqSeq) return;
           const lexHtml = dgeDhatuLexiconHtml(byId && byId[hit.c]);
           const box = body.querySelector('#ddmLexicon');
           if (!lexHtml || !box || !box.isConnected) return;
           box.outerHTML = '<div>' + lexHtml + '</div>';
         });
       })
-      .catch(() => dgeShowDhatuNotFound(body, word));
+      .catch(() => { if (myReq === window.dgeDhatuReqSeq) dgeShowDhatuNotFound(body, word); });
   });
 };
 

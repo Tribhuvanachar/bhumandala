@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extract the dvaitavedanta.in corpus into dge/data/dvaitavedanta/.
+"""Extract the dvaitavedanta.in corpus into dge/data/darshana/vedanta/dvaita/DvaitaVedanta/.
 
 Runs on GitHub Actions (open network egress). It does NOT run inside the Cowork
 sandbox, which has no scraping egress to this host — that is by design and

@@ -1,0 +1,36 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_14491",
+   "reference": "सूत्रप्रस्थानम् > 2. अनुव्याख्यानम् > प्रथमाध्यायः > तृतीयः पादः > तत्रान्यत्र प्रसिद्धानां लिङ्गानाम्नां पुनर्हरिः",
+   "section": "तृतीयः पादः",
+   "unit_title": "तत्रान्यत्र प्रसिद्धानां लिङ्गानाम्नां पुनर्हरिः",
+   "sanskrit_text": "द्युभ्वाद्यधिकरणम्\nविष्णावेवात्मशब्दस्य रूढत्वान्न शिवादिकान् ।\nश्रुतिर्वक्त्यखलिशत्वात् .............॥\nद्युभ्वाद्यधिकरणम्\n...............भूमा विष्णुः सुखाधिकः ॥2॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "2. अनुव्याख्यानम्",
+    "प्रथमाध्यायः",
+    "तृतीयः पादः",
+    "तत्रान्यत्र प्रसिद्धानां लिङ्गानाम्नां पुनर्हरिः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14475/563/satara/2-anav/parath/tataya",
+    "content_id": 14475,
+    "layer": "द्युभ्वाद्यधिकरणम्",
+    "anchor": "article14491",
+    "fetched": "2026-08-18"
+   },
+   "tika_title": "द्युभ्वाद्यधिकरणम्"
+  }
+ ]
+}

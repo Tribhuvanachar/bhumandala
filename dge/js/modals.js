@@ -5,10 +5,25 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
 window.DGE_VERSIONS['modals.js'] = 'v1.5 ("NEW" badges on recently-added Admin dropdown items)';
 
+// A .drawer-left/.drawer-right modal-overlay (see main.css) needs to
+// animate in via a show/hide class instead of a plain display:none<->flex
+// snap, so its slide-in transition actually has something to transition
+// from. Every other modal keeps the original display-toggle behaviour --
+// this only branches for the two drawer classes.
+function dgeIsDrawer(modal) {
+  return modal.classList.contains('drawer-left') || modal.classList.contains('drawer-right');
+}
+
 function openModal(id) {
   const modal = document.getElementById(id);
   if (modal) {
-    modal.style.display = 'flex';
+    if (dgeIsDrawer(modal)) {
+      modal.style.display = 'flex';
+      void modal.offsetWidth; // force layout so .show's transition runs from the off-screen state
+      modal.classList.add('show');
+    } else {
+      modal.style.display = 'flex';
+    }
     document.body.classList.add('modal-open');
     if (window.DGE_DEV_LOG && window.DGE_DEV_LOG.recenterPill) window.DGE_DEV_LOG.recenterPill();
   }
@@ -17,8 +32,15 @@ function openModal(id) {
 function closeModal(id) {
   const modal = document.getElementById(id);
   if (modal) {
-    modal.style.display = 'none';
-    document.body.classList.remove('modal-open'); 
+    if (dgeIsDrawer(modal)) {
+      modal.classList.remove('show');
+      // display:none only after the slide-out finishes, so it's visible while animating;
+      // the timeout is a fallback in case transitionend doesn't fire (e.g. display changed mid-transition elsewhere).
+      window.setTimeout(() => { if (!modal.classList.contains('show')) modal.style.display = 'none'; }, 320);
+    } else {
+      modal.style.display = 'none';
+    }
+    document.body.classList.remove('modal-open');
   }
 }
 
@@ -75,6 +97,16 @@ function togglePopup(id) {
 document.addEventListener('click', (e) => {
   if (!e.target.closest('.popup-container') && !e.target.closest('.popup') && !e.target.closest('.top-actions')) {
     document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
+  }
+});
+
+// Tapping the dimmed backdrop of an off-canvas drawer closes it -- standard
+// drawer behaviour everywhere this pattern is used. Only drawers get this:
+// e.target === the overlay itself means the tap landed outside .modal-content
+// (a tap inside it stops there, same as clicking real content in any modal).
+document.addEventListener('click', (e) => {
+  if (e.target.classList && e.target.classList.contains('modal-overlay') && dgeIsDrawer(e.target)) {
+    closeModal(e.target.id);
   }
 });
 

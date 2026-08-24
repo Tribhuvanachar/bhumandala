@@ -15,6 +15,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+<!-- 24 Aug 2026: global search's 330MB index (dge/js/global-search.js) is
+     also served from cdn.jsdelivr.net -- the Sanscript <script> tag just
+     below already opens a connection to this exact origin, likely warming
+     it well before search is ever opened, but an explicit preconnect costs
+     nothing (no data, just an early DNS/TCP/TLS handshake) and removes any
+     doubt that the connection is ready the moment a reader's first query
+     needs it. -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
 <!-- Robust Indic Transliteration Engine -->
 <!-- Pinned to 1.3.3 (latest confirmed release) and the exact filename the -->
 <!-- library documents (sanscript.js, not sanscript.min.js). onerror falls -->
@@ -25,7 +35,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.68.0">
+<link rel="stylesheet" href="css/main.css?v=4.68.1">
 <!-- The intellisense and backlink panels, shared with the Vyakarana
      pages, which use a different palette and cannot load main.css. -->
 <link rel="stylesheet" href="css/intellisense.css?v=3">
@@ -48,12 +58,12 @@
   <div class="tooltip-row" id="acharyaQueryButtonsRow"></div>
   <div id="acharyaFullWidthButtons"></div>
   <div class="tooltip-row" id="wordToolsRow">
-    <button class="tooltip-btn" onpointerdown="window.dgeOpenShabdaForSelection(event)" title="Declension table, plus Vidyut/sandhi fallbacks and dictionary results for this word">🔤 Shabda</button>
-    <button class="tooltip-btn" onpointerdown="window.dgeOpenDhatuForSelection(event)" title="Search the Dhatupatha for a matching root and show its derivation">📚 Dhātu</button>
-    <button class="tooltip-btn" onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Sandhi split for this word — real Vidyut data when available, AI-assisted otherwise">🔗 Sandhi</button>
-    <button class="tooltip-btn" onpointerdown="window.askAcharya(event, 'samasa')" title="Samasa Vigraha for this word (AI-assisted — Vidyut has no precomputed samasa data yet)">🧩 Samasa</button>
-    <button class="tooltip-btn" onpointerdown="window.dgeOpenCorpusSearchForSelection(event)" title="Find every other place this word appears in the library">🔍 Where else</button>
-    <button class="tooltip-btn" onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Live sandhi split &amp; word analysis (via dharmamitra.org, a third-party service)">🔗 Sandhi</button>
+    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenShabdaForSelection(event)" title="Declension table, plus Vidyut/sandhi fallbacks and dictionary results for this word">🔤 Shabda</button>
+    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenDhatuForSelection(event)" title="Search the Dhatupatha for a matching root and show its derivation">📚 Dhātu</button>
+    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Sandhi split for this word — real Vidyut data when available, AI-assisted otherwise">🔗 Sandhi</button>
+    <button class="tooltip-btn" data-word-only onpointerdown="window.askAcharya(event, 'samasa')" title="Samasa Vigraha for this word (AI-assisted — Vidyut has no precomputed samasa data yet)">🧩 Samasa</button>
+    <button class="tooltip-btn" onpointerdown="window.dgeOpenCorpusSearchForSelection(event)" title="Find every other place this word or phrase appears in the library">🔍 Where else</button>
+    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Live sandhi split &amp; word analysis (via dharmamitra.org, a third-party service)">🔗 Sandhi</button>
   </div>
 </div>
 
@@ -67,120 +77,257 @@
 <meta name="dge-html-version" content="4.64.0">
 <div class="top-bar">
   <div class="top-bar-title" onclick="window.openLibraryModal()">❮ Library</div>
-  <div class="top-actions">
+  <button class="btn-top" onclick="window.openModal('actionsDrawer')" title="Menu: Commentary, Display, Explore, About, Access">☰</button>
+</div>
 
-    <!-- Commentary — content-related, used constantly, stays on its own -->
-    <!-- data-topbar names each entry for admin/config/menu.json, which decides
-         which of these appear and in what order. Without that file they stay
-         exactly as written here. -->
-    <div style="position:relative;" data-topbar="commentary">
-      <button class="btn-top" onclick="window.togglePopup('commentaryPopup')" id="activeCommBtn" title="Commentary Options">💬</button>
-      <div class="popup popup-top" id="commentaryPopup">
-        <div class="popup-label">View Bhashya</div>
-        <div class="pop-item active" onclick="window.setCommentaryView('none', this)">None (Mula Only)</div>
-        <div class="pop-item" onclick="window.setCommentaryView('all', this)">All Commentaries</div>
-        <div id="commentaryDynamicList"></div>
-      </div>
+<!-- 24 Aug 2026: Phase 3 of the mobile UI overhaul -- .top-actions (the
+     Commentary/Display/Admin/Explore/About/Account/Access icon row) moved
+     wholesale into this right-edge drawer, opened by the new "☰" button
+     above. It used to live directly in .top-bar and had its own comment
+     admitting the workaround: "Crowding is solved by keeping the button
+     count low ... rather than by scrolling this row" -- a real UX bug this
+     phase actually fixes, rather than papering over. Placed as a sibling
+     of .top-bar for the same containing-block reason #displayPopup is
+     (see that comment above): .top-bar's backdrop-filter would otherwise
+     break this drawer's own position:fixed anchoring.
+     Every id, onclick handler and data-topbar attribute below is byte-for-
+     byte unchanged, so admin-editor.js, core.js, user-auth.js and
+     menu.js's admin/config/menu.json-driven reordering (which finds these
+     via `.top-actions [data-topbar=...]` and reorders within .top-actions)
+     all keep working with no JS changes: .top-actions is still exactly
+     the element menu.js looks for and reorders, just relocated as a
+     whole unit. Each button gained a visible .btn-top-label span (see
+     main.css) since a vertical list needs a real label, not just a title
+     tooltip nobody on a touchscreen will see. -->
+<div class="modal-overlay drawer-right" id="actionsDrawer">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size:16px;">Menu</h3>
+      <button class="btn-sm" onclick="window.closeModal('actionsDrawer')" title="Close">❯</button>
     </div>
-
-    <!-- Display: font size, script, theme and reading view were four
-         separate toolbar icons. On a phone that (plus the admin icons)
-         pushed the last buttons off screen entirely. Merged into one
-         scrollable popup — same options, one entry point. -->
-    <div style="position:relative;" data-topbar="display">
-      <button class="btn-top" onclick="window.togglePopup('displayPopup')" title="Display: size, script, theme, view">🅰</button>
-      <div class="popup popup-top popup-scroll" id="displayPopup">
-        <div class="popup-label">Reading Script</div>
-        <div class="pop-item active" data-script="devanagari" onclick="window.setScript('devanagari', this)">Sanskrit <span style="margin-left:auto; font-family:var(--font-sanskrit);">संस्कृतम्</span></div>
-        <div class="pop-item" data-script="iast" onclick="window.setScript('iast', this)">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
-        <div class="pop-item" data-script="kannada" onclick="window.setScript('kannada', this)">Kannada <span style="margin-left:auto; font-family:serif;">ಕನ್ನಡ</span></div>
-        <div class="pop-item" data-script="telugu" onclick="window.setScript('telugu', this)">Telugu <span style="margin-left:auto; font-family:serif;">తెలుగు</span></div>
-        <div class="pop-item" data-script="tamil" onclick="window.setScript('tamil', this)">Tamil <span style="margin-left:auto; font-family:serif;">தமிழ்</span></div>
-        <div class="pop-item" data-script="malayalam" onclick="window.setScript('malayalam', this)">Malayalam <span style="margin-left:auto; font-family:serif;">മലയാളം</span></div>
-        <hr>
-        <div class="popup-label">Reading Size</div>
-        <div class="pop-item" data-size="16" onclick="window.setFontSize(16, this)">Small <span style="margin-left:auto; color:#8a7a63; font-size:10px;">16px</span></div>
-        <div class="pop-item active" data-size="18" onclick="window.setFontSize(18, this)" id="font-def">Medium <span style="margin-left:auto; color:#8a7a63; font-size:10px;">18px</span></div>
-        <div class="pop-item" data-size="20" onclick="window.setFontSize(20, this)">Large <span style="margin-left:auto; color:#8a7a63; font-size:10px;">20px</span></div>
-        <div class="pop-item" data-size="23" onclick="window.setFontSize(23, this)">Larger <span style="margin-left:auto; color:#8a7a63; font-size:10px;">23px</span></div>
-        <hr>
-        <div class="popup-label">Reading View</div>
-        <div class="pop-item" data-viewmode="list" onclick="window.dgeSetViewMode('list')">📜 Full List</div>
-        <div class="pop-item" data-viewmode="single" onclick="window.dgeSetViewMode('single')">🔎 One at a Time</div>
-        <hr>
-        <div class="popup-label">Appearance</div>
-        <div class="pop-item active" data-theme="vandana" onclick="window.setTheme('vandana', this)"><span class="theme-swatch theme-swatch-vandana"></span>Vandana</div>
-        <div class="pop-item" data-theme="traditional" onclick="window.setTheme('traditional', this)"><span class="theme-swatch theme-swatch-traditional"></span>Traditional</div>
-        <div class="pop-item" data-theme="minimal" onclick="window.setTheme('minimal', this)"><span class="theme-swatch theme-swatch-minimal"></span>Minimal</div>
-        <div class="pop-item" data-theme="vibrant" onclick="window.setTheme('vibrant', this)"><span class="theme-swatch theme-swatch-vibrant"></span>Vibrant</div>
-        <div class="pop-item" data-theme="darkglass" onclick="window.setTheme('darkglass', this)"><span class="theme-swatch theme-swatch-darkglass"></span>Dark Glass</div>
+    <div class="modal-body">
+      <div id="offlineStatusRow" style="font-size:11px; color:var(--muted-text); padding:0 2px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; border-bottom:1px solid var(--card-border); margin-bottom:8px;">
+        <span id="offlineStatusText">📴 Offline Mode: checking…</span>
+        <button class="btn-sm" style="font-size:10px; padding:4px 8px; flex-shrink:0;" onclick="window.dgeCheckForUpdate()">🔄 Update</button>
       </div>
-    </div>
+      <div class="top-actions">
 
-    <!-- Admin tools, hidden entirely unless authorised -->
-    <div style="position:relative;" data-topbar="admin">
-      <button class="btn-top" id="adminToolsBtn" onclick="window.togglePopup('adminToolsPopup')" title="Admin tools" style="display:none;">🛡️</button>
-      <div class="popup popup-top" id="adminToolsPopup">
-        <div class="popup-label">Admin</div>
-        <div class="pop-item advanced-feature" onclick="window.togglePopup('adminToolsPopup'); window.openKeyModal()">⚙️ AI Keys &amp; Features</div>
-        <div class="pop-item" id="adminFilesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openAdminEditor()">🗂️ Repo Files</div>
-        <div class="pop-item" id="adminConfigItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openConfigEditor()">🛠️ Site Settings</div>
-        <div class="pop-item" id="adminConvertItem" style="display:none;" onclick="window.location.href='convert/index.html'">🔄 Convert Tool</div>
-        <div class="pop-item" id="adminLibraryManagerItem" style="display:none;" onclick="window.location.href='../admin/library.html'">🗂️ Library Manager</div>
-        <div class="pop-item" id="adminKoshaManagerItem" style="display:none;" onclick="window.location.href='../admin/kosha.html'">📖 Kosha Manager</div>
-        <div class="pop-item" id="adminAshtadhyayiManagerItem" style="display:none;" onclick="window.location.href='../admin/ashtadhyayi.html'">📜 Ashtadhyayi Manager</div>
-        <div class="pop-item" id="adminDasaCaptureItem" style="display:none;" onclick="window.location.href='../admin/dasa-capture.html'">🎶 Dasa Sahitya Capture</div>
-        <div class="pop-item" id="adminHolyPlacesManagerItem" style="display:none;" onclick="window.location.href='../admin/holy-places.html'">🛕 Holy Places Curation</div>
-        <div class="pop-item" id="adminAudioManagerItem" style="display:none;" onclick="window.location.href='../admin/audio.html'">🎙️ Audio Admin<span class="new-badge" id="adminAudioManagerBadge" style="display:none;">NEW</span></div>
-        <div class="pop-item" id="adminWorkflowsItem" style="display:none;" onclick="window.location.href='../admin/workflows.html'">⚙️ Run a Workflow</div>
-        <div class="pop-item" id="adminUserRolesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openUserRolesModal()">👥 Manage Users</div>
-      </div>
-    </div>
+        <!-- Commentary — content-related, used constantly, stays on its own -->
+        <!-- data-topbar names each entry for admin/config/menu.json, which decides
+             which of these appear and in what order. Without that file they stay
+             exactly as written here. -->
+        <div style="position:relative;" data-topbar="commentary">
+          <button class="btn-top" onclick="window.togglePopup('commentaryPopup')" id="activeCommBtn" title="Commentary Options">💬 <span class="btn-top-label">Commentary</span></button>
+        </div>
 
-    <!-- Standalone DGE sections (Guru Parampara, Tirtha, Ashtadhyayi) — one
-         entry point rather than a growing row of raw icons, same reasoning
-         as the Display popup consolidation above: several separate toolbar
-         buttons push the last ones off-screen on a phone. -->
-    <div style="position:relative;" data-topbar="explore">
-      <button class="btn-top" onclick="window.togglePopup('sectionsPopup')" title="More DGE Sections">🧭</button>
-      <div class="popup popup-top" id="sectionsPopup">
-        <div class="popup-label">Explore</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.openModal('ourStoryModal');">📖 About the Project — Our Story</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='guru-parampara/index.html'">🪷 Guru Parampara</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='tirtha/index.html'">🛕 Tirtha Prabandha</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='ashtadhyayi.html'">📖 Aṣṭādhyāyī</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dhatu.html'">📚 Dhātupāṭha</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='shabda.html'">🔤 Śabdapāṭha</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='rupasiddhi.html'">✨ Rūpasiddhi — derivation lab</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='chandas.html'">🎵 Chandas — metre analyzer</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='kavya.html'">🪶 Kāvyāni</div>
-        <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dasa_sahitya.html'">🎶 Dasa Sahitya</div>
-      </div>
-    </div>
+        <!-- Display: font size, script, theme and reading view were four
+             separate toolbar icons. On a phone that (plus the admin icons)
+             pushed the last buttons off screen entirely. Merged into one
+             scrollable popup — same options, one entry point. -->
+        <div style="position:relative;" data-topbar="display">
+          <button class="btn-top" onclick="window.togglePopup('displayPopup')" title="Display: size, script, theme, view">🅰 <span class="btn-top-label">Display</span></button>
+        </div>
 
-    <button class="btn-top" data-topbar="about" onclick="window.openAboutModal()" title="About / Contact / Report an Issue">ℹ️</button>
+        <!-- Admin tools, hidden entirely unless authorised -->
+        <div style="position:relative;" data-topbar="admin">
+          <button class="btn-top" id="adminToolsBtn" onclick="window.togglePopup('adminToolsPopup')" title="Admin tools" style="display:none;">🛡️ <span class="btn-top-label">Admin Tools</span></button>
+          <div class="popup popup-top" id="adminToolsPopup">
+            <div class="popup-label">Admin</div>
+            <div class="pop-item advanced-feature" onclick="window.togglePopup('adminToolsPopup'); window.openKeyModal()">⚙️ AI Keys &amp; Features</div>
+            <div class="pop-item" id="adminFilesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openAdminEditor()">🗂️ Repo Files</div>
+            <div class="pop-item" id="adminConfigItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openConfigEditor()">🛠️ Site Settings</div>
+            <div class="pop-item" id="adminConvertItem" style="display:none;" onclick="window.location.href='convert/index.html'">🔄 Convert Tool</div>
+            <div class="pop-item" id="adminLibraryManagerItem" style="display:none;" onclick="window.location.href='../admin/library.html'">🗂️ Library Manager</div>
+            <div class="pop-item" id="adminKoshaManagerItem" style="display:none;" onclick="window.location.href='../admin/kosha.html'">📖 Kosha Manager</div>
+            <div class="pop-item" id="adminAshtadhyayiManagerItem" style="display:none;" onclick="window.location.href='../admin/ashtadhyayi.html'">📜 Ashtadhyayi Manager</div>
+            <div class="pop-item" id="adminDasaCaptureItem" style="display:none;" onclick="window.location.href='../admin/dasa-capture.html'">🎶 Dasa Sahitya Capture</div>
+            <div class="pop-item" id="adminHolyPlacesManagerItem" style="display:none;" onclick="window.location.href='../admin/holy-places.html'">🛕 Holy Places Curation</div>
+            <div class="pop-item" id="adminAudioManagerItem" style="display:none;" onclick="window.location.href='../admin/audio.html'">🎙️ Audio Admin<span class="new-badge" id="adminAudioManagerBadge" style="display:none;">NEW</span></div>
+            <div class="pop-item" id="adminWorkflowsItem" style="display:none;" onclick="window.location.href='../admin/workflows.html'">⚙️ Run a Workflow</div>
+            <div class="pop-item" id="adminUserRolesItem" style="display:none;" onclick="window.togglePopup('adminToolsPopup'); window.openUserRolesModal()">👥 Manage Users</div>
+          </div>
+        </div>
 
-    <!-- User Accounts (Firebase) — hidden entirely unless AUTH_CONFIG.enabled
-         is true (see config.js / FIREBASE_SETUP.md). Opens a modal directly,
-         like About, rather than a popup — sidesteps the toolbar-popup
-         overflow issues fixed elsewhere in this file, since there's no
-         anchor-side positioning to get wrong for a plain modal trigger. -->
-    <button class="btn-top" id="accountBtn" data-topbar="account" onclick="window.openAccountModal()" title="My Account" style="display:none;">👤</button>
+        <!-- Standalone DGE sections (Guru Parampara, Tirtha, Ashtadhyayi) — one
+             entry point rather than a growing row of raw icons, same reasoning
+             as the Display popup consolidation above: several separate toolbar
+             buttons push the last ones off-screen on a phone. -->
+        <div style="position:relative;" data-topbar="explore">
+          <button class="btn-top" onclick="window.togglePopup('sectionsPopup')" title="More DGE Sections">🧭 <span class="btn-top-label">Explore Sections</span></button>
+          <div class="popup popup-top" id="sectionsPopup">
+            <div class="popup-label">Explore</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.openModal('ourStoryModal');">📖 About the Project — Our Story</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='guru-parampara/index.html'">🪷 Guru Parampara</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='tirtha/index.html'">🛕 Tirtha Prabandha</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='ashtadhyayi.html'">📖 Aṣṭādhyāyī</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dhatu.html'">📚 Dhātupāṭha</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='shabda.html'">🔤 Śabdapāṭha</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='rupasiddhi.html'">✨ Rūpasiddhi — derivation lab</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='chandas.html'">🎵 Chandas — metre analyzer</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='kavya.html'">🪶 Kāvyāni</div>
+            <div class="pop-item" onclick="window.togglePopup('sectionsPopup'); window.location.href='dasa_sahitya.html'">🎶 Dasa Sahitya</div>
+          </div>
+        </div>
 
-    <div style="position:relative;" data-topbar="access">
-      <button class="btn-top" id="accessKeyBtn" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access">🔑</button>
-      <div class="popup popup-top" id="accessPopup">
-        <div class="popup-label">Access</div>
-        <div class="pop-item" id="adminAccessItem" onclick="window.togglePopup('accessPopup'); window.dgeShowAdminAccessPrompt()">🔒 Admin Access</div>
-        <div class="pop-item" id="superAdminAccessItem" onclick="window.togglePopup('accessPopup'); window.dgeShowSuperAdminAccessPrompt()">🔒 Super Admin Access</div>
-        <div class="pop-item" id="logoutAccessItem" style="display:none; color:var(--accent-red);" onclick="window.togglePopup('accessPopup'); window.dgeLogoutAdminAccess()">🚪 Log Out (clear access)</div>
+        <button class="btn-top" data-topbar="about" onclick="window.openAboutModal()" title="About / Contact / Report an Issue">ℹ️ <span class="btn-top-label">About / Contact</span></button>
+
+        <!-- User Accounts (Firebase) — hidden entirely unless AUTH_CONFIG.enabled
+             is true (see config.js / FIREBASE_SETUP.md). Opens a modal directly,
+             like About, rather than a popup — sidesteps the toolbar-popup
+             overflow issues fixed elsewhere in this file, since there's no
+             anchor-side positioning to get wrong for a plain modal trigger. -->
+        <button class="btn-top" id="accountBtn" data-topbar="account" onclick="window.openAccountModal()" title="My Account" style="display:none;">👤 <span class="btn-top-label">My Account</span></button>
+
+        <div style="position:relative;" data-topbar="access">
+          <button class="btn-top" id="accessKeyBtn" onclick="window.togglePopup('accessPopup')" title="Admin / Super Admin Access">🔑 <span class="btn-top-label">Access</span></button>
+          <div class="popup popup-top" id="accessPopup">
+            <div class="popup-label">Access</div>
+            <div class="pop-item" id="adminAccessItem" onclick="window.togglePopup('accessPopup'); window.dgeShowAdminAccessPrompt()">🔒 Admin Access</div>
+            <div class="pop-item" id="superAdminAccessItem" onclick="window.togglePopup('accessPopup'); window.dgeShowSuperAdminAccessPrompt()">🔒 Super Admin Access</div>
+            <div class="pop-item" id="logoutAccessItem" style="display:none; color:var(--accent-red);" onclick="window.togglePopup('accessPopup'); window.dgeLogoutAdminAccess()">🚪 Log Out (clear access)</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- 24 Aug 2026: commentaryPopup, converted from a single-select anchored
+     dropdown to a real multi-select bottom sheet (project lead's ask:
+     "I can choose any number of commentaries, and they should all
+     appear"). Lives here, as a sibling of .top-bar, for the same
+     containing-block reason as #displayPopup just below -- and now that
+     any number of commentaries can render as checkboxes, this list can
+     genuinely grow long enough to need the extra room a sheet gives it,
+     the same overflow risk the original Display popup had before Phase 1.
+     window.selectedCommentaries (state.js) is a Set, not a single string;
+     see setCommentaryView()/dgeToggleCommentarySelection() in render.js. -->
+<div class="popup popup-sheet" id="commentaryPopup">
+  <div class="popup-sheet-handle"></div>
+  <div class="flex-row" style="justify-content:space-between; align-items:center; flex-shrink:0;">
+    <span style="font-weight:700; font-size:13px;">Commentary</span>
+    <button class="btn-sm" onclick="window.togglePopup('commentaryPopup')">✖ Close</button>
+  </div>
+  <div class="popup-sheet-scroll">
+    <div class="popup-label">Quick actions</div>
+    <div class="pop-item active" id="commentaryNoneBtn" onclick="window.setCommentaryView('none')">✖ None (Mula Only)</div>
+    <div class="pop-item" id="commentaryAllBtn" onclick="window.setCommentaryView('all')">☑ All Commentaries</div>
+    <hr>
+    <div class="popup-label">Choose any combination</div>
+    <div id="commentaryDynamicList"></div>
+  </div>
+</div>
+
+<!-- 24 Aug 2026: displayPopup lives here, as a sibling of .top-bar rather
+     than nested inside it, on purpose -- .top-bar has backdrop-filter,
+     which (like transform/filter/perspective) creates a new containing
+     block for position:fixed descendants. A .popup-sheet is fixed so it
+     can anchor to the real viewport bottom for a proper bottom sheet; left
+     nested inside .top-bar it was anchoring to the 50px toolbar instead,
+     landing near the top of the screen. Structure/ids/pop-item children
+     unchanged: transliteration.js, utils.js, render.js and menu.js all
+     query #displayPopup .pop-item[...] directly and need no changes for
+     this, since togglePopup() finds it by id regardless of DOM position. -->
+<div class="popup popup-sheet" id="displayPopup">
+  <div class="popup-sheet-handle"></div>
+  <div class="flex-row" style="justify-content:space-between; align-items:center; flex-shrink:0;">
+    <span style="font-weight:700; font-size:13px;">Display</span>
+    <button class="btn-sm" onclick="window.togglePopup('displayPopup')">✖ Close</button>
+  </div>
+  <div class="popup-sheet-scroll">
+  <div class="popup-label">Layout</div>
+  <div class="pop-item active" data-layout="scholar" onclick="window.dgeSetLayoutMode('scholar', true)">📚 Scholar <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Dense, everything shown</span></div>
+  <div class="pop-item" data-layout="app" onclick="window.dgeSetLayoutMode('app', true)">📱 App <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Compact, tap to expand</span></div>
+  <hr>
+  <div class="popup-label">Reading Script</div>
+  <div class="pop-item active" data-script="devanagari" onclick="window.setScript('devanagari', this)">Sanskrit <span style="margin-left:auto; font-family:var(--font-sanskrit);">संस्कृतम्</span></div>
+  <div class="pop-item" data-script="iast" onclick="window.setScript('iast', this)">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
+  <div class="pop-item" data-script="kannada" onclick="window.setScript('kannada', this)">Kannada <span style="margin-left:auto; font-family:serif;">ಕನ್ನಡ</span></div>
+  <div class="pop-item" data-script="telugu" onclick="window.setScript('telugu', this)">Telugu <span style="margin-left:auto; font-family:serif;">తెలుగు</span></div>
+  <div class="pop-item" data-script="tamil" onclick="window.setScript('tamil', this)">Tamil <span style="margin-left:auto; font-family:serif;">தமிழ்</span></div>
+  <div class="pop-item" data-script="malayalam" onclick="window.setScript('malayalam', this)">Malayalam <span style="margin-left:auto; font-family:serif;">മലയാളം</span></div>
+  <hr>
+  <div class="popup-label">Reading Size</div>
+  <div class="pop-item" data-size="16" onclick="window.setFontSize(16, this)">Small <span style="margin-left:auto; color:#8a7a63; font-size:10px;">16px</span></div>
+  <div class="pop-item active" data-size="18" onclick="window.setFontSize(18, this)" id="font-def">Medium <span style="margin-left:auto; color:#8a7a63; font-size:10px;">18px</span></div>
+  <div class="pop-item" data-size="20" onclick="window.setFontSize(20, this)">Large <span style="margin-left:auto; color:#8a7a63; font-size:10px;">20px</span></div>
+  <div class="pop-item" data-size="23" onclick="window.setFontSize(23, this)">Larger <span style="margin-left:auto; color:#8a7a63; font-size:10px;">23px</span></div>
+  <hr>
+  <div class="popup-label">Reading View</div>
+  <div class="pop-item" data-viewmode="list" onclick="window.dgeSetViewMode('list')">📜 Full List</div>
+  <div class="pop-item" data-viewmode="single" onclick="window.dgeSetViewMode('single')">🔎 One at a Time</div>
+  <div class="pop-item" onclick="window.togglePopup('displayPopup'); window.dgeToggleImmersiveMode(true)">🖥️ Full Screen Reading</div>
+  <div class="pop-item" data-wakelock="1" onclick="window.dgeSetScreenWakeLock(this.classList.contains('active') ? false : true)">🔆 Keep Screen Awake While Reading</div>
+  <hr>
+  <div class="popup-label">Appearance</div>
+  <div class="pop-item active" data-theme="vandana" onclick="window.setTheme('vandana', this)"><span class="theme-swatch theme-swatch-vandana"></span>Vandana</div>
+  <div class="pop-item" data-theme="traditional" onclick="window.setTheme('traditional', this)"><span class="theme-swatch theme-swatch-traditional"></span>Traditional</div>
+  <div class="pop-item" data-theme="minimal" onclick="window.setTheme('minimal', this)"><span class="theme-swatch theme-swatch-minimal"></span>Minimal</div>
+  <div class="pop-item" data-theme="vibrant" onclick="window.setTheme('vibrant', this)"><span class="theme-swatch theme-swatch-vibrant"></span>Vibrant</div>
+  <div class="pop-item" data-theme="darkglass" onclick="window.setTheme('darkglass', this)"><span class="theme-swatch theme-swatch-darkglass"></span>Dark Glass</div>
+  </div>
+</div>
+
+<!-- 24 Aug 2026: Live-preview Shloka Image Composer -- the project lead's
+     own pick from the two follow-ups offered after the word-tap-to-select
+     fix ("Live preview image share and then word level tap to select
+     fragility. Pick any one of this."). Previously
+     window.shareShlokaScreenshot/downloadShlokaScreenshot (screenshot.js)
+     rendered straight to a canvas and shared/downloaded immediately, with
+     no preview step at all. This sheet shows the SAME canvas live, with a
+     Plain Color text option checked against a real WCAG contrast ratio
+     sampled from the template artwork -- not a cosmetic slider, an actual
+     readability signal -- before the reader commits to share/download.
+     A sibling of .top-bar for the same containing-block reason as
+     #displayPopup above (backdrop-filter creates one for position:fixed). -->
+<div class="popup popup-sheet" id="shareImagePreviewSheet">
+  <div class="popup-sheet-handle"></div>
+  <div class="flex-row" style="justify-content:space-between; align-items:center; flex-shrink:0;">
+    <span style="font-weight:700; font-size:13px;">Preview Image</span>
+    <button class="btn-sm" onclick="window.togglePopup('shareImagePreviewSheet')">✖ Close</button>
+  </div>
+  <div class="popup-sheet-scroll">
+    <div class="share-preview-canvas-wrap" id="sharePreviewCanvasWrap">
+      <div class="share-preview-loading">Rendering…</div>
+    </div>
+    <div class="popup-label">Text Style</div>
+    <div class="pop-item active" data-textstyle="gold" onclick="window.dgeSetShareTextStyle('gold', this)">✨ Gold Embossed <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Default</span></div>
+    <div class="pop-item" data-textstyle="solid" onclick="window.dgeSetShareTextStyle('solid', this)">🎨 Plain Color <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Pick your own</span></div>
+    <div id="sharePreviewColorRow" class="share-preview-color-row" style="display:none;">
+      <input type="color" id="sharePreviewColorInput" value="#ffffff" oninput="window.dgeSetShareSolidColor(this.value)">
+      <button type="button" class="share-preview-swatch" style="background:#ffffff;" onclick="window.dgeSetShareSolidColor('#ffffff')" title="White"></button>
+      <button type="button" class="share-preview-swatch" style="background:#111111;" onclick="window.dgeSetShareSolidColor('#111111')" title="Black"></button>
+      <button type="button" class="share-preview-swatch" style="background:#ffd54a;" onclick="window.dgeSetShareSolidColor('#ffd54a')" title="Gold"></button>
+      <button type="button" class="share-preview-swatch" style="background:#b3261e;" onclick="window.dgeSetShareSolidColor('#b3261e')" title="Red"></button>
+      <span id="sharePreviewContrastBadge" class="share-preview-contrast-badge"></span>
+    </div>
+    <div style="display:flex; gap:8px; margin-top:14px;">
+      <button class="btn-sm" style="flex:1;" onclick="window.dgeConfirmDownloadImage()">⬇️ Download</button>
+      <button class="btn-sm" style="flex:1;" onclick="window.dgeConfirmShareImage()">📤 Share</button>
+    </div>
+  </div>
+</div>
+
+<!-- 24 Aug 2026: Phase 4 -- the only chrome left once dgeToggleImmersiveMode()
+     hides everything else (main.css: body.dge-immersive). Placed as a
+     sibling of .top-bar for the same containing-block reason as
+     #displayPopup/#actionsDrawer above. -->
+<button class="immersive-exit-btn" onclick="window.dgeToggleImmersiveMode(false)" title="Exit full screen reading">✕</button>
+
 <div class="app-container">
   <div class="header">
+    <!-- 24 Aug 2026: Previous/Next Sarga/Adhyaya/Maṇḍala/Kāṇḍa navigator --
+         project lead's direct ask, placed at the very top of the reading
+         page on purpose ("ideally I wanted at the top"). Hidden by default
+         (display:none) and only shown once window.dgeInitChapterNav()
+         (library.js) confirms this grantha has numbered siblings under
+         the same parent to page between -- a single-sarga stotra like PNS
+         never shows this row at all. -->
+    <div id="chapterNavRow" class="chapter-nav-row" style="display:none;">
+      <button type="button" class="chapter-nav-btn" id="chapterNavPrevBtn" onclick="window.dgeGoToChapterSibling('prev')"></button>
+      <span class="chapter-nav-position" id="chapterNavPosition"></span>
+      <button type="button" class="chapter-nav-btn" id="chapterNavNextBtn" onclick="window.dgeGoToChapterSibling('next')"></button>
+    </div>
     <h1 id="stotraTitle">Loading...</h1>
     <div class="author" id="stotraAuthor">...</div>
     <button id="supportProjectBtn" class="support-project-btn" onclick="window.openSponsorModal()" style="display:none;">💝 Support This Project</button>
@@ -345,12 +492,12 @@
     <div class="popup-container advanced-feature">
       <button class="btn-sm" onclick="window.togglePopup('filterPopup')" id="filterBtn">🔽 Filter</button>
       <div class="popup" id="filterPopup" style="left: 50%; transform: translateX(-50%);">
-        <div style="font-size:10px; color:var(--muted-text); margin-bottom:2px; text-transform:uppercase;">Show shlokas matching ANY checked:</div>
-        <div class="filter-checkbox-item" data-filter-type="fav" onclick="window.toggleFilterCriterion('fav')">★ Favorites</div>
-        <div class="filter-checkbox-item" data-filter-type="pending" onclick="window.toggleFilterCriterion('pending')">○ Pending</div>
-        <div class="filter-checkbox-item" data-filter-type="practice" onclick="window.toggleFilterCriterion('practice')">🚧 Needs Practice</div>
-        <div class="filter-checkbox-item" data-filter-type="done" onclick="window.toggleFilterCriterion('done')">✅ Done</div>
-        <div class="filter-checkbox-item" data-filter-type="doubt" onclick="window.toggleFilterCriterion('doubt')">❓ Doubts</div>
+        <div style="font-size:10px; color:var(--muted-text); margin-bottom:2px; text-transform:uppercase;">Tap to Include, tap again to Exclude:</div>
+        <div class="filter-checkbox-item" data-filter-type="fav" onclick="window.cycleFilterCriterion('fav')">★ Favorites</div>
+        <div class="filter-checkbox-item" data-filter-type="pending" onclick="window.cycleFilterCriterion('pending')">○ Pending</div>
+        <div class="filter-checkbox-item" data-filter-type="practice" onclick="window.cycleFilterCriterion('practice')">🚧 Needs Practice</div>
+        <div class="filter-checkbox-item" data-filter-type="done" onclick="window.cycleFilterCriterion('done')">✅ Done</div>
+        <div class="filter-checkbox-item" data-filter-type="doubt" onclick="window.cycleFilterCriterion('doubt')">❓ Doubts</div>
         <button class="btn-sm" style="width:100%;" onclick="window.clearAllFilterCriteria()">✖ Clear All (Show Everything)</button>
         <hr>
         <div class="pop-item" id="opt-none" onclick="window.toggleSingleTrackMode()">⏸ Single Track (no auto-advance)</div>
@@ -538,6 +685,16 @@
         <button class="btn-sm" style="width:100%; margin-top:4px;" onclick="window.resetAudioBaseUrlToDefault()">↺ Use Project Default</button>
       </details>
 
+      <details data-section-id="searchIndexSource" style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>🔎 Search Index Source</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
+        <p style="font-size:11px; color:var(--muted-text); margin:8px 0;">Where the full-text search index (used by 🔎 global search) is fetched from, on this device only. Takes effect the next time this page loads. Leave blank to use the project default (a pinned jsDelivr build).</p>
+        <div class="provider-key-row">
+          <label>Custom index base URL (no trailing /)</label>
+          <input type="text" id="userSearchIndexBaseInput" class="modal-input" placeholder="e.g. https://mypersonalwebsite.com/search-index" style="margin-top:4px;">
+        </div>
+        <button class="btn-sm" style="width:100%; margin-top:4px;" onclick="window.resetSearchIndexBaseToDefault()">↺ Use Project Default</button>
+      </details>
+
       <details data-section-id="shareTemplate" style="margin-top:12px; border-top:1px solid var(--card-border); padding-top:12px;">
         <summary style="cursor:pointer; font-weight:700; font-size:13px; color:var(--accent-red); display:flex; align-items:center; justify-content:space-between;"><span>🖼️ Share Image Template</span><button type="button" class="settings-pin-btn" onclick="event.preventDefault(); event.stopPropagation(); window.dgeToggleSectionPin(this)">📌</button></summary>
         <p style="font-size:11px; color:var(--muted-text); margin:8px 0;">Used when you tap "⬇️ Image" or "🖼️ Share as Image" for any shloka.</p>
@@ -613,6 +770,7 @@
           <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldVyakarana" style="margin:0; width:14px; height:14px;"> ⚙️ Vyakarana</label>
           <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldVrutta" style="margin:0; width:14px; height:14px;"> 🎼 Vrutta (Meter)</label>
           <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldAlankara" style="margin:0; width:14px; height:14px;"> ✨ Alankara</label>
+          <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldSamasa" style="margin:0; width:14px; height:14px;"> 🧩 Samasa Vishesha</label>
           <label class="flex-row" style="gap:8px; cursor:pointer; font-size:12px; font-weight:600;"><input type="checkbox" id="fieldCrossReferences" style="margin:0; width:14px; height:14px;"> 🔀 Cross References</label>
           <button class="btn-sm" style="width:100%; margin-top:4px;" onclick="window.resetShlokaFieldsToDefault()">↺ Reset to Defaults</button>
         </div>
@@ -783,13 +941,32 @@
   </div>
 </div>
 
-<div class="modal-overlay" id="libraryModal">
+<!-- 24 Aug 2026: Phase 2 of the mobile UI overhaul -- the Library modal is
+     now a left-edge sliding drawer (see .drawer-left in main.css) rather
+     than a centered popup, so it matches the "left-top icon -> full-height
+     panel from the left" navigation pattern used across mobile apps. Only
+     the outer wrapper changed: openModal()/closeModal() still find it by
+     id, and #libraryModalList / #quickJumpInput are exactly as before, so
+     library.js needed no changes at all. -->
+<div class="modal-overlay drawer-left" id="libraryModal">
   <div class="modal-content">
     <div class="modal-header-sticky">
       <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">📚 Library</h3>
-      <button class="btn-sm" onclick="window.closeModal('libraryModal')" style="font-size:11px;">✖ Close</button>
+      <button class="btn-sm" onclick="window.closeModal('libraryModal')" style="font-size:11px;" title="Close">❮</button>
     </div>
     <div class="modal-body">
+      <!-- 24 Aug 2026: icon-driven Library home screen, alongside the
+           existing text tree -- a view mode over the SAME data
+           (library.js's dgeRenderLibraryRoot), not a separate feature.
+           Defaults to Grid; List is still one tap away and remembered
+           per device. -->
+      <div class="range-row-flex" style="margin-bottom:10px;">
+        <span style="font-size:10px; color:var(--muted-text); text-transform:uppercase;">Browse</span>
+        <div class="range-mode-toggle" id="libraryViewToggle">
+          <button type="button" class="range-mode-btn active" data-library-view="grid" onclick="window.dgeSetLibraryViewMode('grid')">▦ Grid</button>
+          <button type="button" class="range-mode-btn" data-library-view="list" onclick="window.dgeSetLibraryViewMode('list')">☰ List</button>
+        </div>
+      </div>
       <div style="display:flex; gap:6px; margin-bottom:14px;">
         <input type="text" id="quickJumpInput" class="modal-input" placeholder="Quick jump, e.g. rv1.1.3 or pns5" style="margin:0; flex:1;"
                onkeydown="if(event.key==='Enter'){window.dgeQuickJump(this.value);}">
@@ -967,7 +1144,7 @@
 <script src="js/transliteration.js?v=4.60.6"></script>
 <script src="js/onboarding.js?v=1"></script>
 <script src="js/gemini.js?v=4.60.6"></script>
-<script src="js/kosha.js?v=4.68.0"></script>
+<script src="js/kosha.js?v=4.68.1"></script>
 <script src="js/kosha-citations.js?v=4.65.0"></script>
 <script src="js/audio.js?v=4.60.6"></script>
 <script src="js/filter.js?v=4.60.6"></script>
@@ -977,17 +1154,17 @@
 <script src="js/history.js?v=4.60.6"></script>
 <script src="js/char-palette.js?v=4.60.6"></script>
 <script src="js/snippets.js?v=4.60.6"></script>
-<script src="js/actions.js?v=4.60.6"></script>
+<script src="js/actions.js?v=4.60.7"></script>
 <script src="js/voice.js?v=4.60.6"></script>
-<script src="js/screenshot.js?v=4.60.6"></script>
-<script src="js/ai.js?v=4.72.0"></script>
+<script src="js/screenshot.js?v=4.60.7"></script>
+<script src="js/ai.js?v=4.72.3"></script>
 <script src="js/sandhi.js?v=1"></script>
 <script src="js/subanta-steps.js?v=1"></script>
 <!-- Renders Gemini-enrichment references (see tools/gemini_enrich.py) as
      inline footnote markers + a footnote list. Loaded before render.js,
      which calls into it. Additive: absent enrichment data, nothing changes. -->
 <script src="js/footnote-engine.js?v=2"></script>
-<script src="js/render.js?v=4.61.3"></script>
+<script src="js/render.js?v=4.61.5"></script>
 <!-- async: JSZip is only used on demand (admin-editor.js's zip export/extract,
      gated behind typeof JSZip==='undefined' checks), never at boot -- a
      blocking, synchronous tag here meant a slow or stalled connection to
@@ -1011,17 +1188,17 @@
 <!-- Sūtra intellisense: makes citations in the text tappable and identifies
      a rule from a half-remembered name. Fetches nothing until a page turns
      out to cite one. -->
-<script src="js/intellisense.js?v=4.65.0"></script>
+<script src="js/intellisense.js?v=4.65.1"></script>
 <!-- Marks each verse that other texts discuss, from the backlinks index.
      Fetches one small index and stops if this grantha is not cited. -->
 <script src="js/backlinks.js?v=4.64.0"></script>
 <script src="js/content-inline.js?v=1"></script>
 <script src="js/tour.js?v=1"></script>
-<script src="js/library.js?v=4.61.3"></script>
+<script src="js/library.js?v=4.61.4"></script>
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
 <script src="js/dge-normalize.js?v=4.60.6"></script>
-<script src="js/dge-search.js?v=4.65.0"></script>
-<script src="js/global-search.js?v=4.68.0"></script>
+<script src="js/dge-search.js?v=4.65.1"></script>
+<script src="js/global-search.js?v=4.68.3"></script>
 
 <!-- User Accounts (Firebase, compat build — matches this project's classic-
      script/no-build-step convention rather than the newer ES-module SDK).
@@ -1033,6 +1210,7 @@
 <script src="js/user-auth.js?v=4.63.0"></script>
 <script src="js/user-roles.js?v=4.63.0"></script>
 <script src="js/copy-guard.js?v=1"></script>
+<script src="js/offline.js?v=1"></script>
 
 <script>
   if (typeof console.log === "function") {
