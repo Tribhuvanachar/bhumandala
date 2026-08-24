@@ -11,6 +11,24 @@ window.DGE_VERSIONS['filter.js'] = 'v3.0 (Multi-select checkbox filters)';
 // currentFilter === 'none' to skip auto-advance, so that's left as-is.
 window.activeFilters = window.activeFilters || new Set();
 
+// Phase 7 of the mobile UI overhaul: a "Negate this filter" mode for the
+// checkbox mark-criteria, one of the ashtadhyayi.com-inspired features the
+// project lead asked to add. Applies to the whole checked set at once
+// (Match = show shlokas matching ANY checked criterion, Negate = show
+// shlokas matching NONE of them) rather than a per-criterion negation --
+// the existing activeFilters Set has no room for per-item state without a
+// larger restructuring, and a single set-wide negation already covers the
+// real use case ("show me everything except what I've marked done", say)
+// without that added complexity.
+window.negateMarkFilters = window.negateMarkFilters || false;
+window.setMarkFilterMode = function (negate, btnEl) {
+  window.negateMarkFilters = !!negate;
+  const toggle = document.getElementById('markFilterModeToggle');
+  if (toggle) toggle.querySelectorAll('.range-mode-btn').forEach(b => b.classList.toggle('active', b === btnEl));
+  if (typeof renderList === 'function') renderList();
+  dgeJumpToFirstFiltered();
+};
+
 function getFilteredIds() {
   if (!stotraData) return [];
   let ids = [];
@@ -35,6 +53,7 @@ function getFilteredIds() {
       if (filters.has('practice') && m && m.status === 'practice') matchesAny = true;
       if (filters.has('done') && m && m.status === 'done') matchesAny = true;
       if (filters.has('doubt') && m && m.doubt) matchesAny = true;
+      if (window.negateMarkFilters) matchesAny = !matchesAny;
       if (!matchesAny) continue;
     }
     
