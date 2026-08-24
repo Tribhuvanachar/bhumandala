@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.2 (lifecycle status badges: folder headers show count/total ("52/237") when a section is only partly filled in, and a leaf gets a NEW badge for ~3 weeks after register_layers.py first stamps its addedAt)';
+window.DGE_VERSIONS['library.js'] = 'v3.3 (List view top-level category rows no longer collapse into a multi-level breadcrumb chain -- dgeRenderNode\'s new noCollapseAtRoot param, set only by dgeRenderLibraryListView\'s own call; added 9 missing Devanagari labels -- pancharatra_samhitas, shaiva/shakta/vaikhanasa_agama, nitishastra, upaveda, ayurveda, kamashastra, nighantu)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -61,6 +61,10 @@ const DGE_PATH_LABELS = {
   kavya_alankara: 'काव्यालङ्कारौ', kavya: 'काव्यम्',
   kosha: 'कोशाः', stotra: 'स्तोत्राणि',
   agama: 'आगमाः', pancharatra: 'पाञ्चरात्रम्',
+  pancharatra_samhitas: 'पाञ्चरात्रसंहिताः', shaiva_agama: 'शैवागमः',
+  shakta_agama: 'शाक्तागमः', vaikhanasa_agama: 'वैखानसागमः',
+  nitishastra: 'नीतिशास्त्रम्', upaveda: 'उपवेदाः',
+  ayurveda: 'आयुर्वेदः', kamashastra: 'कामशास्त्रम्', nighantu: 'निघण्टुः',
 
   rigveda: 'ऋग्वेदः', yajurveda: 'यजुर्वेदः',
   samaveda: 'सामवेदः', atharvaveda: 'अथर्ववेदः',
@@ -357,9 +361,24 @@ function dgeIsRecentlyAdded(addedAt) {
 // Collapses single-child chains ("Ṛgveda › Śākala Śākhā › Saṃhitā") into
 // one row instead of three nested taps — the taxonomy is deep and mostly
 // linear, so without this the tree needs four taps to reach any mantra.
-function dgeRenderNode(node, labelPrefix, depth, nodePath) {
+//
+// noCollapseAtRoot (24 Aug 2026, project lead's direct report, matched a
+// live screenshot exactly): the List view's own TOP-LEVEL category rows
+// were also going through this same collapsing, so a category with a
+// single populated branch (e.g. आगमः -> पाञ्चरात्रम् -> Pancharatra
+// Samhitas) rendered as one row with the whole chain glued into its
+// label instead of the clean single name every other category row
+// shows ("It should be just the parent... not the entire parent child
+// connecting notes"). dgeRenderLibraryListView() passes true for this on
+// its own top-level call only -- every deeper call (both the recursive
+// collapse-continuation just below and normal child iteration in `inner`)
+// leaves it unset, so the tap-depth reduction this comment describes is
+// completely unchanged below the top level, including inside the grid
+// view's own per-category drill-down (dgeRenderLibraryCategoryView),
+// which never sets it either.
+function dgeRenderNode(node, labelPrefix, depth, nodePath, noCollapseAtRoot) {
   const childKeys = dgeSortChildKeys(nodePath, Object.keys(node.children));
-  if (childKeys.length === 1 && node.leaves.length === 0) {
+  if (!noCollapseAtRoot && childKeys.length === 1 && node.leaves.length === 0) {
     const only = node.children[childKeys[0]];
     const label = (labelPrefix ? labelPrefix + ' › ' : '') + dgeSegLabel(childKeys[0]);
     const onlyPath = nodePath ? nodePath + '/' + childKeys[0] : childKeys[0];
@@ -498,7 +517,7 @@ function dgeTopLevelLeavesHtml() {
 // pulled out into its own function so dgeRenderLibraryRoot() can pick
 // between this and the grid.
 function dgeRenderLibraryListView() {
-  return dgeLibTopKeys.map(k => dgeRenderNode(dgeLibTree.children[k], dgeSegLabel(k), 0, k)).join('') + dgeTopLevelLeavesHtml();
+  return dgeLibTopKeys.map(k => dgeRenderNode(dgeLibTree.children[k], dgeSegLabel(k), 0, k, true)).join('') + dgeTopLevelLeavesHtml();
 }
 
 // The new icon-driven home screen: one tile per top-level category
