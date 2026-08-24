@@ -548,4 +548,14 @@ window.dgeMakeFloatingDraggable = function (el, storageKey) {
     });
 };
 
+// Phase 4 of the mobile UI overhaul: distraction-free full screen reading
+// (see main.css's body.dge-immersive rules). A plain class toggle plus one
+// persistent exit button -- session-only on purpose, not persisted to
+// localStorage, so a reload never silently drops a returning reader into
+// a chrome-free screen they didn't ask for this time.
+window.dgeToggleImmersiveMode = function (force) {
+    var enable = (typeof force === 'boolean') ? force : !document.body.classList.contains('dge-immersive');
+    document.body.classList.toggle('dge-immersive', enable);
+};
+
 console.log("[Init] utils.js loaded successfully.");

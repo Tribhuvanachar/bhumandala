@@ -495,6 +495,36 @@ body:has(.popup-sheet.show)::after {
 }
 .btn-top-label { font-size: 13px; }
 
+/* 24 Aug 2026 -- Phase 4 of the mobile UI overhaul: distraction-free full
+   screen reading. Strips every piece of chrome (top bar, header, search
+   bar, special-character palette, bottom player, the कोश/global-search
+   floating buttons) down to just the shloka + commentary, matching the
+   explicit ask: "the bottom toolbar, upper toolbar, left stuff, right
+   stuff -- everything should go away." Toggled by
+   window.dgeToggleImmersiveMode() (utils.js). One persistent small exit
+   button is the only chrome left, deliberately -- a tap-to-reveal-chrome
+   pattern (as video players use) would risk swallowing taps meant for
+   word lookup/text selection inside the verse itself, and a reading app
+   (Kindle, Apple Books) is the closer reference class here than a video
+   player anyway. */
+body.dge-immersive .top-bar,
+body.dge-immersive .header,
+body.dge-immersive .search-box-group,
+body.dge-immersive .char-palette-panel,
+body.dge-immersive .bottom-player,
+body.dge-immersive .search-navigator,
+body.dge-immersive #kosha-fab,
+body.dge-immersive .dge-gs-fab { display: none !important; }
+body.dge-immersive { padding-top: env(safe-area-inset-top) !important; padding-bottom: env(safe-area-inset-bottom) !important; }
+
+.immersive-exit-btn {
+  display: none; position: fixed; top: calc(10px + env(safe-area-inset-top)); right: 10px; z-index: 10600;
+  width: 38px; height: 38px; border-radius: 50%; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.45); color: #fff; border: none; font-size: 15px; line-height: 1; cursor: pointer;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: var(--shadow-md);
+}
+body.dge-immersive .immersive-exit-btn { display: flex; }
+
 .modal-header-sticky { padding: 16px; background: var(--card-bg); z-index: 10; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
 .modal-body { padding: 16px; overflow-y: auto; flex-grow: 1; }
 

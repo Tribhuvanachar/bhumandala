@@ -217,6 +217,7 @@
   <div class="popup-label">Reading View</div>
   <div class="pop-item" data-viewmode="list" onclick="window.dgeSetViewMode('list')">📜 Full List</div>
   <div class="pop-item" data-viewmode="single" onclick="window.dgeSetViewMode('single')">🔎 One at a Time</div>
+  <div class="pop-item" onclick="window.togglePopup('displayPopup'); window.dgeToggleImmersiveMode(true)">🖥️ Full Screen Reading</div>
   <hr>
   <div class="popup-label">Appearance</div>
   <div class="pop-item active" data-theme="vandana" onclick="window.setTheme('vandana', this)"><span class="theme-swatch theme-swatch-vandana"></span>Vandana</div>
@@ -226,6 +227,12 @@
   <div class="pop-item" data-theme="darkglass" onclick="window.setTheme('darkglass', this)"><span class="theme-swatch theme-swatch-darkglass"></span>Dark Glass</div>
   </div>
 </div>
+
+<!-- 24 Aug 2026: Phase 4 -- the only chrome left once dgeToggleImmersiveMode()
+     hides everything else (main.css: body.dge-immersive). Placed as a
+     sibling of .top-bar for the same containing-block reason as
+     #displayPopup/#actionsDrawer above. -->
+<button class="immersive-exit-btn" onclick="window.dgeToggleImmersiveMode(false)" title="Exit full screen reading">✕</button>
 
 <div class="app-container">
   <div class="header">
