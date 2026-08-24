@@ -463,6 +463,14 @@ body:has(.popup-sheet.show)::after {
      screen. max-width lets .tooltip-row's flex-wrap (below) actually wrap
      onto a second line on narrow screens instead of overflowing off-screen. */
   max-width: min(94vw, 460px);
+  /* A cap on how tall this can grow -- the full stack (Ask Acharya's 4
+     query-type buttons + wordToolsRow's up-to-5 word tools) can reach
+     ~300px+ on a single-word selection, tall enough on a short phone
+     screen that ai.js's mobile positioning (stays below the selection,
+     or docks at the top chrome edge) could still run out of room.
+     overflow-y:auto keeps every button reachable by scrolling within the
+     tooltip itself rather than the tooltip growing past its dock point. */
+  max-height: min(60vh, 420px); overflow-y: auto;
 }
 .tooltip-header { font-size: 10px; font-weight: 800; color: #a8907a; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; margin-bottom: 2px; }
 .tooltip-row { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
@@ -577,6 +585,14 @@ body.dge-immersive { padding-top: env(safe-area-inset-top) !important; padding-b
   backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: var(--shadow-md);
 }
 body.dge-immersive .immersive-exit-btn { display: flex; }
+
+/* 24 Aug 2026 -- body.dge-selecting (toggled by ai.js's MutationObserver on
+   #actionTooltip's own style attribute) hides the same two FABs while the
+   selection tooltip is open, so they don't sit visibly behind/around it --
+   the same clutter the immersive rule above already solves for full-screen
+   reading, applied here to a much shorter-lived state. */
+body.dge-selecting #kosha-fab,
+body.dge-selecting .dge-gs-fab { display: none !important; }
 
 /* 24 Aug 2026 -- Phase 5: App View, a second lower-density layout
    alongside the existing dense "Scholar" view (see window.dgeSetLayoutMode

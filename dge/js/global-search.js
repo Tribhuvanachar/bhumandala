@@ -89,7 +89,14 @@
       '.dge-gs-overlay.open{display:block}',
       '.dge-gs-panel{max-width:720px;margin:6vh auto 0;background:var(--card-bg,#fff);color:var(--text-primary,#1a1a1a);border:1px solid var(--card-border,rgba(0,0,0,.12));border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);overflow:hidden;font-family:inherit}',
       '.dge-gs-top{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--card-border,rgba(0,0,0,.12));align-items:center}',
-      '.dge-gs-input{flex:1;font-size:17px;padding:10px 12px;border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,transparent);color:inherit}',
+      // min-width:0 overrides the flex-item default of auto (which resolves
+      // to the input's intrinsic content width) -- without it, this input
+      // refuses to shrink below that width on a narrow phone, pushing the
+      // two flex:none schemewrap buttons (and their popups) past the
+      // panel's right edge, where .dge-gs-panel{overflow:hidden} clips
+      // them -- confirmed live: "Everything ▾" truncated to "Eve", the
+      // opened scope popup's option labels all cut off mid-word.
+      '.dge-gs-input{flex:1;min-width:0;font-size:17px;padding:10px 12px;border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,transparent);color:inherit}',
       // A custom popup (trigger button + a dropped-down option list), not a
       // native <select> -- a <select>'s OPEN list is drawn by the OS on
       // mobile and cannot be restyled, which is exactly what made this look

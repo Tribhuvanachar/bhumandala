@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.16 (selection tooltip now contextual: dgeUpdateWordToolsForSelection() hides #wordToolsRow\'s single-word-only grammar tools -- Shabda/Dhatu/Sandhi/Samasa -- when the resolved selection is a multi-word phrase, since each of those does a lookup only meaningful for one word; "Where else" stays for both. Everything from v3.15 -- the word-tap-to-select fragility fix -- unchanged)';
+window.DGE_VERSIONS['ai.js'] = 'v3.17 (selection tooltip revamped for mobile: below 760px it never sits immediately above the selection any more -- stays below with real clearance, or docks at the top chrome edge if that does not fit -- avoiding the zone the native browser Translate/Copy/Select-all toolbar prefers; a MutationObserver toggles body.dge-selecting while it is open so the Kosha/global-search FABs hide, matching immersive mode\'s existing clutter fix. Desktop positioning unchanged. Everything from v3.16 -- contextual word-tools visibility -- unchanged)';
 
 // Appends a language directive read from onboarding.js's saved preference
 // (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
@@ -45,6 +45,25 @@ function dgeUpdateWordToolsForSelection(txt) {
     btn.style.display = isSingleWord ? '' : 'none';
   });
 }
+
+// Suppresses the always-visible कोश/global-search FABs (#kosha-fab,
+// .dge-gs-fab) for as long as #actionTooltip is open -- confirmed live
+// they were sitting visibly behind/around the tooltip (24 Aug live-
+// testing screenshots), the same clutter complaint immersive mode
+// (body.dge-immersive, main.css) already solves for full-screen reading.
+// A MutationObserver on the tooltip's own style attribute, rather than a
+// classList.add/remove pair threaded through every one of the ~7 places
+// in this file that already set tooltip.style.display, so none of those
+// existing call sites need touching.
+(function () {
+  const tooltip = document.getElementById('actionTooltip');
+  if (!tooltip) return;
+  const sync = () => {
+    document.body.classList.toggle('dge-selecting', tooltip.style.display && tooltip.style.display !== 'none');
+  };
+  new MutationObserver(sync).observe(tooltip, { attributes: true, attributeFilter: ['style'] });
+  sync();
+})();
 
 document.addEventListener('selectionchange', () => {
   const activeTag = document.activeElement ? document.activeElement.tagName : '';
@@ -95,16 +114,49 @@ document.addEventListener('selectionchange', () => {
         dgeUpdateWordToolsForSelection(txt);
 
         const tw = tooltip.offsetWidth || 260;
+        tooltip.style.bottom = 'auto';
         let left = rect.left + (rect.width / 2);
         left = Math.max(tw/2 + 8, Math.min(left, window.innerWidth - tw/2 - 8));
-        
-        let yPos = rect.bottom + 8;
-        if (yPos + 100 > window.innerHeight) { 
-            yPos = rect.top - 95; 
-        }
-        
-        tooltip.style.top = `${yPos}px`;
         tooltip.style.left = `${left}px`;
+
+        // Below 760px (this app's own desktop breakpoint -- see main.css)
+        // this used to fall back to `rect.top - 95` (immediately ABOVE the
+        // selection) whenever there wasn't room below -- which is exactly
+        // the zone Android/iOS Chrome's own native Translate/Copy/Select-
+        // all toolbar prefers too (it defaults to sitting just above a
+        // selection, only dropping below when that's the side without
+        // room). The two collided on nearly every real mobile selection
+        // (confirmed live, 24 Aug live-testing report: "it needs
+        // revamping"). Now it never sits above the selection on mobile:
+        // it stays below with real clearance (48px, not 8), and if even
+        // that doesn't fit, it docks flush at the top chrome edge instead
+        // -- clear across the screen from wherever the native toolbar
+        // renders, rather than immediately adjacent to it. Desktop keeps
+        // the original tight-clearance placement: no native auto-popup
+        // toolbar to collide with there.
+        if (window.innerWidth < 760) {
+          // .bottom-player is position:fixed, so its offsetParent is null
+          // by spec regardless of visibility -- that's not a usable
+          // visibility check here; getComputedStyle's display is.
+          const player = document.querySelector('.bottom-player');
+          const playerVisible = player && getComputedStyle(player).display !== 'none';
+          const dockLimit = playerVisible ? (player.getBoundingClientRect().top - 8) : (window.innerHeight - 8);
+          const topBar = document.querySelector('.top-bar');
+          const topBarBottom = topBar ? topBar.getBoundingClientRect().bottom : 0;
+          const th = tooltip.offsetHeight || 200;
+
+          let yPos = rect.bottom + 48;
+          if (yPos + th > dockLimit) {
+            yPos = topBarBottom + 8;
+          }
+          tooltip.style.top = `${yPos}px`;
+        } else {
+          let yPos = rect.bottom + 8;
+          if (yPos + 100 > window.innerHeight) {
+              yPos = rect.top - 95;
+          }
+          tooltip.style.top = `${yPos}px`;
+        }
       }
     } else {
       tooltip.style.display = 'none';
