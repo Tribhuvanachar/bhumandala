@@ -843,6 +843,7 @@ function initApp() {
   if (typeof applyFeatureFlags === 'function') applyFeatureFlags();
 
   window.renderStotraChrome();
+  if (typeof window.dgeInitChapterNav === 'function') window.dgeInitChapterNav();
 
   const cacheBtn = document.getElementById('cacheBtn');
   const cacheKey = window.nsKey ? window.nsKey('allCached') : `narasimha_allCached_${window.stotraCode}`;
@@ -948,6 +949,11 @@ window.renderStotraChrome = function() {
     // never silently drops what was already chosen.
     if (typeof dgeSyncCommentaryPopupState === 'function') dgeSyncCommentaryPopupState();
   }
+
+  // Re-labels the Prev/Next Sarga/Chapter/Maṇḍala nav (library.js) in the
+  // new script -- the prev/next slugs themselves don't change, only their
+  // displayed labels, so this just re-renders rather than recomputing.
+  if (typeof window.dgeRenderChapterNav === 'function') window.dgeRenderChapterNav();
 };
 
 function initAuthAndBranding() {

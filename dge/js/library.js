@@ -654,3 +654,103 @@ window.dgeGoToGrantha = function(slug) {
   const readableSlug = /^[a-z0-9_/]+$/i.test(slug) ? slug : encodeURIComponent(slug);
   window.location.href = window.location.pathname + '?path=' + readableSlug;
 };
+
+// 24 Aug 2026: Previous/Next Sarga/Adhyaya/Maṇḍala/Kāṇḍa navigator --
+// project lead's direct ask, confirmed via investigation to not exist
+// anywhere ("I already requested that there may be a navigator... that
+// is currently missing"). Every multi-sarga/multi-mandala work (e.g.
+// Raghavendra Vijaya's sarga_01..sarga_10, the Rigveda's mandala_01..10)
+// stores each sub-unit as its OWN grantha entry/data.json -- there was no
+// way to step to the next one without going back through the Library
+// drawer's taxonomy tree. Pure UI wiring: reuses the SAME data.json's
+// numbered-folder naming convention (dgeAutoLabel/DGE_NUMBERED_PREFIXES
+// above) and library.json catalog this file already parses for the tree
+// view -- no new data pipeline or metadata backfill needed. Deliberately
+// no change to grantha data.json itself: prev/next are computed fresh
+// from the catalog on every load, so a newly-added sarga is picked up
+// automatically without touching every sibling file's own metadata.
+let dgeChapterNavPrevSlug = null, dgeChapterNavNextSlug = null;
+let dgeChapterNavPrefix = null, dgeChapterNavIdx = 0, dgeChapterNavTotal = 0;
+
+window.dgeInitChapterNav = async function() {
+  const row = document.getElementById('chapterNavRow');
+  if (!row) return;
+  row.style.display = 'none';
+  dgeChapterNavPrevSlug = null;
+  dgeChapterNavNextSlug = null;
+
+  const slug = window.currentGranthaSlug;
+  const lastSlash = slug ? slug.lastIndexOf('/') : -1;
+  if (lastSlash < 0) return; // top-level grantha (e.g. stotra/xyz) -- no numbered parent to page within
+  const parentPath = slug.slice(0, lastSlash);
+  const lastSeg = slug.slice(lastSlash + 1);
+  const m = lastSeg.match(/^([a-z]+)_(\d+)$/i);
+  if (!m || !DGE_NUMBERED_PREFIXES[m[1].toLowerCase()]) return; // this leaf isn't a numbered sub-unit (sarga_2 etc.)
+  const prefix = m[1].toLowerCase();
+
+  const library = await (window.dgeLibraryCatalogPromise || Promise.resolve(null));
+  if (!library || !Array.isArray(library.granthas)) return;
+
+  const prefixRe = new RegExp('^' + prefix + '_\\d+$', 'i');
+  const siblings = library.granthas
+    .filter(g => g.populated && !dgeIsAdminOnlyGrantha(g))
+    .map(g => window.dgeGranthaSlug(g.path))
+    .filter(s => {
+      const sl = s.lastIndexOf('/');
+      return sl >= 0 && s.slice(0, sl) === parentPath && prefixRe.test(s.slice(sl + 1));
+    });
+  if (siblings.length < 2) return; // this is the only sub-unit under this parent -- nothing to page between
+
+  siblings.sort(dgeCompareSlugs);
+  const idx = siblings.indexOf(slug);
+  if (idx === -1) return; // current grantha isn't itself in the populated catalog (shouldn't happen if it loaded at all)
+
+  dgeChapterNavPrevSlug = idx > 0 ? siblings[idx - 1] : null;
+  dgeChapterNavNextSlug = idx < siblings.length - 1 ? siblings[idx + 1] : null;
+  dgeChapterNavPrefix = prefix;
+  dgeChapterNavIdx = idx;
+  dgeChapterNavTotal = siblings.length;
+  window.dgeRenderChapterNav();
+};
+
+// Re-renders just the LABEL TEXT of the already-computed nav (prev/next
+// slugs don't change with script) -- called both from dgeInitChapterNav
+// above and from renderStotraChrome() (core.js) whenever the display
+// script changes, the same way that function already re-labels every
+// other piece of chrome.
+window.dgeRenderChapterNav = function() {
+  const row = document.getElementById('chapterNavRow');
+  if (!row || (!dgeChapterNavPrevSlug && !dgeChapterNavNextSlug)) return;
+  const prefix = dgeChapterNavPrefix, idx = dgeChapterNavIdx, total = dgeChapterNavTotal;
+
+  const prevBtn = document.getElementById('chapterNavPrevBtn');
+  const nextBtn = document.getElementById('chapterNavNextBtn');
+  const posEl = document.getElementById('chapterNavPosition');
+
+  if (prevBtn) {
+    if (dgeChapterNavPrevSlug) {
+      prevBtn.style.visibility = 'visible';
+      prevBtn.textContent = '❮ ' + dgeSegLabel(dgeChapterNavPrevSlug.split('/').pop());
+    } else {
+      prevBtn.style.visibility = 'hidden';
+    }
+  }
+  if (nextBtn) {
+    if (dgeChapterNavNextSlug) {
+      nextBtn.style.visibility = 'visible';
+      nextBtn.textContent = dgeSegLabel(dgeChapterNavNextSlug.split('/').pop()) + ' ❯';
+    } else {
+      nextBtn.style.visibility = 'hidden';
+    }
+  }
+  if (posEl) {
+    posEl.textContent = dgeToActiveScript(DGE_NUMBERED_PREFIXES[prefix]) + ' ' +
+      dgeToActiveScript(dgeDevaNum(idx + 1)) + ' / ' + dgeToActiveScript(dgeDevaNum(total));
+  }
+  row.style.display = 'flex';
+};
+
+window.dgeGoToChapterSibling = function(dir) {
+  const slug = dir === 'prev' ? dgeChapterNavPrevSlug : dgeChapterNavNextSlug;
+  if (slug) window.dgeGoToGrantha(slug);
+};

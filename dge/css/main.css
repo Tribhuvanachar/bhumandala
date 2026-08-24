@@ -151,6 +151,19 @@ body.is-authorized .advanced-feature { display: flex !important; }
 
 /* Header & Search Bar */
 .header { text-align: center; padding: 10px 0 14px; }
+/* 24 Aug 2026: Previous/Next Sarga/Adhyaya/Maṇḍala/Kāṇḍa nav (library.js's
+   dgeInitChapterNav/dgeRenderChapterNav) -- placed first inside .header so
+   it sits above the title, per the project lead's explicit ask. */
+.chapter-nav-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.chapter-nav-btn {
+  background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-pill);
+  padding: 6px 12px; font-size: 11px; font-weight: 700; color: var(--text-primary); cursor: pointer;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 42%;
+  transition: background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.chapter-nav-btn:hover { background: var(--card-active); }
+.chapter-nav-btn:active { transform: scale(0.95); }
+.chapter-nav-position { font-size: 10px; color: var(--muted-text); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; flex-shrink: 0; white-space: nowrap; }
 .header h1 { margin: 0; font-family: var(--font-sanskrit); font-size: 24px; color: var(--accent-red); font-weight: 700; transition: color var(--t-med) var(--ease); }
 .header .author { font-size: 11px; color: var(--muted-text); text-transform: uppercase; font-weight: 600; letter-spacing: 0.6px; margin-top: 4px; }
 .header .rule { width: 64px; height: 2px; margin: 8px auto 0; background: linear-gradient(90deg, transparent, var(--accent-gold), transparent); opacity: 0.8; }

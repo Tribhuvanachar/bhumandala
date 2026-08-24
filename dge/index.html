@@ -265,6 +265,18 @@
 
 <div class="app-container">
   <div class="header">
+    <!-- 24 Aug 2026: Previous/Next Sarga/Adhyaya/Maṇḍala/Kāṇḍa navigator --
+         project lead's direct ask, placed at the very top of the reading
+         page on purpose ("ideally I wanted at the top"). Hidden by default
+         (display:none) and only shown once window.dgeInitChapterNav()
+         (library.js) confirms this grantha has numbered siblings under
+         the same parent to page between -- a single-sarga stotra like PNS
+         never shows this row at all. -->
+    <div id="chapterNavRow" class="chapter-nav-row" style="display:none;">
+      <button type="button" class="chapter-nav-btn" id="chapterNavPrevBtn" onclick="window.dgeGoToChapterSibling('prev')"></button>
+      <span class="chapter-nav-position" id="chapterNavPosition"></span>
+      <button type="button" class="chapter-nav-btn" id="chapterNavNextBtn" onclick="window.dgeGoToChapterSibling('next')"></button>
+    </div>
     <h1 id="stotraTitle">Loading...</h1>
     <div class="author" id="stotraAuthor">...</div>
     <button id="supportProjectBtn" class="support-project-btn" onclick="window.openSponsorModal()" style="display:none;">💝 Support This Project</button>
