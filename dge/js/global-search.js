@@ -23,6 +23,7 @@
   var INDEX_BASE = window.DGE_SEARCH_INDEX || CDN_INDEX;
   var idxPromise = null, debounce = null;
   var currentScheme = 'auto'; // set by the scheme popup, read by queryOpts()
+  var currentSection = ''; // set by the section popup, read directly by onType() -- '' means "Everything"
 
   // Post-search filters: narrow the results ALREADY fetched (never a new
   // network round trip -- a fresh query is already a 10+ second multi-shard
@@ -75,9 +76,10 @@
     // UI themes with the rest of the site. The FAB sits ABOVE the bottom
     // toolbar (body reserves 126px for it) and above the toolbar z-index
     // (9999) so it is never hidden behind Filter/Tools; the overlay sits at
-    // modal level (11000). The scheme <select> is styled to match the app's
-    // controls (custom chevron, themed background) instead of the bare OS look.
-    var ARROW = "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' fill='none' stroke='%238a7a63' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>\")";
+    // modal level (11000). Both the input-script picker and the search-scope
+    // picker are the same custom button+popup-list shape (styled to match
+    // the app's other controls) instead of a native <select> -- see the
+    // .dge-gs-schemewrap comment below for why.
     s.textContent = [
       '.dge-gs-fab{position:fixed;right:16px;bottom:calc(134px + env(safe-area-inset-bottom));z-index:10000;width:48px;height:48px;border-radius:50%;border:none;background:var(--accent-red,#7a3b1d);color:#fff;font-size:20px;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer}',
       '.dge-gs-overlay{position:fixed;inset:0;z-index:11000;background:rgba(0,0,0,.45);display:none}',
@@ -146,7 +148,7 @@
       '<div class="dge-gs-panel" role="dialog" aria-label="Global search">' +
         '<div class="dge-gs-top">' +
           '<input class="dge-gs-input" id="dge-gs-input" placeholder="Search all texts — Devanagari, IAST, HK, or SLP1…" autocomplete="off">' +
-          '<div class="dge-gs-schemewrap">' +
+          '<div class="dge-gs-schemewrap" id="dge-gs-scheme-wrap">' +
             '<button type="button" class="dge-gs-schemebtn" id="dge-gs-scheme-btn" title="Input script">auto ▾</button>' +
             '<div class="dge-gs-scheme-pop" id="dge-gs-scheme-pop">' +
               '<div class="dge-gs-scheme-opt active" data-scheme="auto">auto</div>' +
@@ -156,9 +158,21 @@
               '<div class="dge-gs-scheme-opt" data-scheme="slp1">SLP1</div>' +
             '</div>' +
           '</div>' +
-          '<select class="dge-gs-scheme" id="dge-gs-section" title="Search scope">' +
-            '<option value="">Everything</option>' +
-          '</select>' +
+          // Same custom button+popup-list shape as the input-script picker
+          // just above, not a native <select> -- a <select>'s OPEN list is
+          // drawn by the OS on mobile and cannot be restyled, which made
+          // this the one light-themed, unstyleable dropdown left in an
+          // otherwise fully dark, custom-styled UI (confirmed against a
+          // live screenshot). The section list is only known once the
+          // index's manifest loads, so this starts as just "Everything"
+          // and fills in via populateSections() below, same as the <select>
+          // it replaces did with <option>s.
+          '<div class="dge-gs-schemewrap" id="dge-gs-section-wrap">' +
+            '<button type="button" class="dge-gs-schemebtn" id="dge-gs-section-btn" title="Search scope">Everything ▾</button>' +
+            '<div class="dge-gs-scheme-pop" id="dge-gs-section-pop">' +
+              '<div class="dge-gs-scheme-opt active" data-section="">Everything</div>' +
+            '</div>' +
+          '</div>' +
           '<button class="dge-gs-x" id="dge-gs-x" title="Close (Esc)" aria-label="Close">✕</button>' +
         '</div>' +
         '<div class="dge-gs-filterbar" id="dge-gs-filterbar" style="display:none;"></div>' +
@@ -169,15 +183,23 @@
 
     document.getElementById('dge-gs-x').addEventListener('click', close);
     document.getElementById('dge-gs-input').addEventListener('input', onType);
-    // Changing scope re-runs the current query immediately -- no need to
-    // retype for the search to reflect the new "Everything"/section choice.
-    document.getElementById('dge-gs-section').addEventListener('change', function () {
-      document.getElementById('dge-gs-input').dispatchEvent(new Event('input'));
-    });
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }
       if (e.key === 'Escape') close();
     });
+
+    // Re-runs the current query immediately after either popup's choice
+    // changes -- no need to retype for the search to reflect the new
+    // script/scope. Dispatches a real Event so onType(e) gets a genuine
+    // e.target to read (onType destructures e.target.value); a bare
+    // onType() call here previously threw "Cannot read properties of
+    // undefined (reading 'target')" and silently skipped the re-search --
+    // a real bug, confirmed live (picking an input-script option while a
+    // query was already typed), not something introduced by this change.
+    function rerunIfQueried() {
+      var input = document.getElementById('dge-gs-input');
+      if (input.value.trim()) input.dispatchEvent(new Event('input'));
+    }
 
     var schemeBtn = document.getElementById('dge-gs-scheme-btn');
     var schemePop = document.getElementById('dge-gs-scheme-pop');
@@ -192,13 +214,38 @@
       schemeBtn.textContent = (opt.textContent || currentScheme) + ' ▾';
       schemePop.querySelectorAll('.dge-gs-scheme-opt').forEach(function (o) { o.classList.toggle('active', o === opt); });
       schemePop.classList.remove('show');
-      if (document.getElementById('dge-gs-input').value.trim()) onType();
+      rerunIfQueried();
     });
+
+    // Search-scope picker -- see the .dge-gs-schemewrap comment in css()
+    // above for why this is the same shape as the scheme picker instead of
+    // a native <select>. Options are added by populateSections() below
+    // once the index's manifest loads; only "Everything" exists at build().
+    var sectionBtn = document.getElementById('dge-gs-section-btn');
+    var sectionPop = document.getElementById('dge-gs-section-pop');
+    sectionBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      sectionPop.classList.toggle('show');
+    });
+    sectionPop.addEventListener('click', function (e) {
+      var opt = e.target.closest('.dge-gs-scheme-opt');
+      if (!opt) return;
+      currentSection = opt.dataset.section;
+      sectionBtn.textContent = (opt.textContent || 'Everything') + ' ▾';
+      sectionPop.querySelectorAll('.dge-gs-scheme-opt').forEach(function (o) { o.classList.toggle('active', o === opt); });
+      sectionPop.classList.remove('show');
+      rerunIfQueried();
+    });
+
     // Same click-outside-closes convention as the overlay itself (line
-    // above: `if (e.target === ov) close()`).
+    // above: `if (e.target === ov) close()`). Scoped per popup by its own
+    // wrapper id so clicking inside one never closes the other.
     document.addEventListener('click', function (e) {
-      if (schemePop.classList.contains('show') && !e.target.closest('.dge-gs-schemewrap')) {
+      if (schemePop.classList.contains('show') && !e.target.closest('#dge-gs-scheme-wrap')) {
         schemePop.classList.remove('show');
+      }
+      if (sectionPop.classList.contains('show') && !e.target.closest('#dge-gs-section-wrap')) {
+        sectionPop.classList.remove('show');
       }
     });
   }
@@ -220,20 +267,21 @@
   }
 
   // The section list only comes from the index's own manifest (it's not
-  // known ahead of a fetch), so the <select> starts as just "Everything" and
+  // known ahead of a fetch), so the popup starts as just "Everything" and
   // fills in once ensureIndex() resolves. Guarded so a second open() in the
   // same page load doesn't duplicate the options.
   function populateSections(sections) {
-    var sel = document.getElementById('dge-gs-section');
-    if (!sel || sel.getAttribute('data-populated') || !sections.length) return;
-    sel.setAttribute('data-populated', '1');
+    var pop = document.getElementById('dge-gs-section-pop');
+    if (!pop || pop.getAttribute('data-populated') || !sections.length) return;
+    pop.setAttribute('data-populated', '1');
     sections.slice().sort(function (a, b) {
       return sectionLabel(a).localeCompare(sectionLabel(b));
     }).forEach(function (sec) {
-      var opt = document.createElement('option');
-      opt.value = sec;
+      var opt = document.createElement('div');
+      opt.className = 'dge-gs-scheme-opt';
+      opt.dataset.section = sec;
       opt.textContent = sectionLabel(sec);
-      sel.appendChild(opt);
+      pop.appendChild(opt);
     });
   }
 
@@ -297,7 +345,7 @@
     results.innerHTML = '<div class="dge-gs-hint">Searching…</div>';
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
-      var section = (document.getElementById('dge-gs-section') || {}).value || undefined;
+      var section = currentSection || undefined;
       p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30, section: section }, queryOpts(q))); })
        .then(function (hits) { render(hits, q); })
        .catch(function () {
