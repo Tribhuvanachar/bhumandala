@@ -39,7 +39,26 @@
       // fetch() percent-DEcodes "%XX" in a URL before requesting it, so a
       // filename that already contained a literal "%" 404'd).
       var url = base + '/' + rel.split('/').map(encodeURIComponent).join('/');
-      return fetch(url).then(function (r) { return r.ok ? r.json() : null; });
+      // priority:'high' is a progressive-enhancement hint (ignored, not an
+      // error, on a browser that doesn't recognise the option) -- every
+      // fetch through this function is on the critical path of a search the
+      // reader is actively waiting on, never a background/idle one (that
+      // path is prefetchManifest() in global-search.js, a separate call).
+      //
+      // 24 Aug 2026: caught and resolved to null here, not just a non-ok
+      // response. A single 404 already resolved to null (by design -- a
+      // grantha with no postings for a given trigram is normal, not an
+      // error), but a genuine network failure (a real risk against a
+      // third-party CDN under real mobile conditions) used to REJECT this
+      // promise instead -- and since every caller in this file fetches many
+      // of these in one Promise.all (up to ~33 postings, up to 120 shards),
+      // one flaky request was taking down the ENTIRE search with it, not
+      // just the piece that failed. Treating a network failure the same as
+      // "nothing here" lets the rest of an otherwise-successful query
+      // degrade gracefully instead of erroring outright.
+      return fetch(url, { priority: 'high' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; });
     };
   }
 
@@ -131,7 +150,10 @@
   // same total postings a single unpartitioned file used to hold, just as
   // several small requests instead of one that pays for sections the query
   // never asked about. Cached per (trigram, scope) since the same trigram
-  // can be looked up both ways in one session.
+  // can be looked up both ways in one session. fetchJSON now resolves a
+  // failed section fetch to null rather than rejecting (see its own
+  // comment), so one bad section out of the fan-out is simply missing from
+  // the union below, not fatal to the other ten.
   Index.prototype._loadPosting = function (tg, scope) {
     var self = this;
     var key = tg + '::' + (scope || '*');
@@ -160,6 +182,11 @@
     return p.then(function (rows) { self._postingCache[key] = rows; return rows; });
   };
 
+  // `d || []` already covered "no shard file" (fetchJSON resolves null on a
+  // 404); since fetchJSON also now resolves null on an outright network
+  // failure rather than rejecting, this same line transparently covers that
+  // case too -- one grantha whose shard request drops never takes the rest
+  // of the batch (Promise.all in search(), below) down with it.
   Index.prototype._loadShard = function (gi) {
     var self = this, g = this.granthas[gi];
     if (this._shardCache[gi]) return Promise.resolve(this._shardCache[gi]);
