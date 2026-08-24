@@ -359,7 +359,13 @@ details.dge-analysis-field[open] > summary.commentary-title { margin-bottom: 8px
   height: auto; max-height: 80vh; padding: 10px 16px calc(16px + env(safe-area-inset-bottom));
   transform: translateY(100%);
   transition: transform var(--t-med) var(--ease), opacity var(--t-fast) var(--ease), visibility var(--t-fast) var(--ease);
-  z-index: 10500;
+  /* Real bug found via live testing, 24 Aug: this sheet's trigger button
+     lives inside #actionsDrawer (z-index 11000, see .modal-overlay), and
+     togglePopup() never closes that drawer when a sheet opens from inside
+     it -- so with both open, a lower z-index here rendered the sheet
+     UNDER the drawer's dark backdrop (looked like tapping "Display" did
+     nothing). Sheets always win regardless of what else is open. */
+  z-index: 11500;
 }
 .popup.popup-sheet.show { transform: translateY(0); }
 /* 24 Aug 2026 -- Phase 6: full-width-from-the-bottom is a mobile pattern
