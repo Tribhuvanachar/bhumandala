@@ -2502,23 +2502,79 @@ complete record, not just a live queue.
   sample (1, 2, 38, 43, 45, 50) before trusting the fix at scale.
   `library.json`'s `populated` flag flipped for this leaf.
 
-  **The other 4 confirmed Wikisource Saṃhitās, scoped but not yet
-  imported** (next step for whoever continues this): Jayākhyasaṃhitā (33
-  paṭala, at `जयाख्यसंहिता`) and Viṣṇusaṃhitā (30 paṭala, at
-  `विष्णुसंहिता`) both use the identical flat `Title/पटलः N` index-link
-  structure Ahirbudhnyasaṃhitā's `Title/अध्यायः N` does — same
-  `subpage_list()` should work unchanged, module the chapter-label word
-  itself. Lakṣmītantram is at `लक्ष्मीतन्त्रम्` (not the more literal
-  `लक्ष्मीतन्त्र`, which 404s) — 57 adhyāyas, same flat structure.
-  Padmasaṃhitā nests one level deeper: its index links to 4 pāda
-  sub-index pages (योगपादः, क्रियापादः, ज्ञानपादः, चर्यापादः), each of
-  which presumably links its own chapters in turn — `subpage_list()`
-  would need a second traversal level for this one specifically; not yet
-  confirmed against a pāda page's actual wikitext (blocked mid-check by
-  the same rate-limit window covering the Ahirbudhnya rebuild). All 4
-  should still be expected to introduce their own new formatting quirks
-  the same way Ahirbudhnyasaṃhitā did — verify before trusting each, same
-  discipline as above, not a blind re-run.
+  **24 Aug (same thread, continued): Viṣṇusaṃhitā and Jayākhyasaṃhitā
+  also imported from Wikisource.** Viṣṇusaṃhitā (30 paṭala, at
+  `विष्णुसंहिता`) uses the identical `Title/पटलः N` index structure and
+  the SAME chapter.verse ref convention as Ahirbudhnyasaṃhitā
+  (`।। 1.1 ।।`) — the existing parser worked unchanged: 2,588 śloka, no
+  chapter skipped, content spot-checked, `library.json` flipped.
+
+  Jayākhyasaṃhitā (33 paṭala, also at a flat `Title/पटलः N` index)
+  turned out, checked directly rather than assumed from the shared
+  index shape, to be a *different digitization entirely* — a critical
+  edition with per-chapter single-number verse refs (`।। 1 ।।`, not a
+  chapter.verse pair) and its own apparatus: inline variant-reading
+  markers (digit, `*`, or bare, sometimes with no marker at all),
+  whole-pada variants in round parens or square brackets, uncertain
+  readings marked with a trailing `?`, bracketed section headings, and a
+  bare "20-3" chapter-verse crossref tag trailing a danda. A new
+  `parse_chapter_critical` (selected via `build(..., convention=
+  "critical")`) handles this, landing on one general rule after several
+  narrower ones each missed a shape found only once more chapters were
+  in view: this source never uses `(...)` or `[...]` for real verse
+  content at all, so every bracketed span — wherever it falls, however
+  deep it nests — is apparatus and is stripped outright via a
+  fixed-point loop. Paṭala 1 also turned out to hold two independently-
+  numbered layers back to back (a 78-verse frame narrative, then the
+  actual text restarting at 1) — the parishishtam's existing numbering-
+  restart/series-split logic generalizes to this directly, tightened
+  along the way from "any decrease" to "a restart to literally 1", since
+  paṭala 20 separately turned out to label two different, consecutive
+  verses both "3" (a genuine source duplicate, not a restart) — the
+  looser condition had fractured it into 3 bogus series before this was
+  caught by checking the actual output, not assumed correct from a small
+  regression sample. Final result: 34 items (33 paṭala + paṭala 1's
+  restart), 4,625 śloka, zero stray apparatus characters or suspiciously
+  short verses across the whole corpus on a full-scale check (not just
+  the 5-chapter regression set), `library.json` flipped. Full account of
+  every bug found and fixed is in the git log for
+  `tools/wikisource_pancharatra/fetch_and_build.py` (4 commits, 24 Aug).
+
+  **Lakṣmītantram and Padmasaṃhitā, scoped but explicitly NOT attempted
+  yet** — deliberately stopped here rather than rush a 4th convention
+  without the same verify-at-scale discipline the above took several
+  rounds to get right:
+  - Lakṣmītantram is at `लक्ष्मीतन्त्रम्` (not the more literal
+    `लक्ष्मीतन्त्र`, which 404s), 57 adhyāya, flat index, and shares
+    Jayākhyasaṃhitā's single-number-per-chapter ref convention — but its
+    own apparatus is a *tab-indented running commentary*, not a
+    bracketed one: a footnote's actual text sits on a tab-indented line
+    with no closing delimiter of its own (just ends at the line break),
+    and at least one footnote block was found continuing across several
+    *more* tab-indented lines quoting a complete extra benedictory verse
+    under a `टिप्पणी` ("gloss") sub-heading — checked directly against
+    adhyāya 1's raw wikitext, not assumed to match Jayākhyasaṃhitā's
+    apparatus shape just because both share the same ref convention.
+    Running the existing `critical` parser against it unchanged leaves
+    this commentary leaking wholesale into the following verse's body
+    (confirmed directly, not assumed) — a tab-indented-line-stripping
+    rule is the obvious next step, but needs the same multi-sample
+    verification the Jayākhyasaṃhitā apparatus took 3 rounds to get
+    right before it can be trusted, particularly since a verse pada
+    being *itself* tab-indented somewhere in this text (as happens in
+    Ahirbudhnyasaṃhitā's dialogue continuations) hasn't yet been ruled
+    out.
+  - Padmasaṃhitā nests one level deeper than every other text here: its
+    index links to 4 pāda sub-index pages (योगपादः, क्रियापादः,
+    ज्ञानपादः, चर्यापादः), each presumably linking its own chapters in
+    turn — confirmed only for the index page itself; a pāda page's own
+    wikitext (chapter list shape, and separately its own verse/apparatus
+    convention, which could match either of the two conventions already
+    handled or be a third) was never successfully fetched — every
+    attempt landed in the same sustained rate-limit window covering the
+    Ahirbudhnya/Viṣṇu/Jayākhya work above. `subpage_list()` would need a
+    second traversal level for this one specifically once its actual
+    structure is confirmed.
 
 ## Vedic-specific, still genuinely open
 
