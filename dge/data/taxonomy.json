@@ -1917,6 +1917,10 @@
    },
    "kalpataru": {
     "_default_author": "Lakshmidhara"
+   },
+   "grihastha_ratnakara": {
+    "_schema": "generic",
+    "_default_author": "unspecified"
    }
   }
  },
@@ -1940,7 +1944,45 @@
     "vasishtha_samhita": {},
     "vishvaksena_samhita": {}
    },
-   "vaikhanasa_agama": {}
+   "vaikhanasa_agama": {},
+   "shakta_agama": {
+    "devikalottara_agama": {
+     "mula": {
+      "_schema": "generic",
+      "_default_author": "unspecified"
+     }
+    },
+    "mahacina_tantra": {
+     "mula": {
+      "_schema": "generic",
+      "_default_author": "unspecified"
+     }
+    },
+    "matrikabheda_tantra": {
+     "mula": {
+      "_schema": "generic",
+      "_default_author": "unspecified"
+     }
+    },
+    "shakta_vijnana": {
+     "mula": {
+      "_schema": "generic",
+      "_default_author": "unspecified"
+     }
+    },
+    "todala_tantra": {
+     "mula": {
+      "_schema": "generic",
+      "_default_author": "unspecified"
+     }
+    },
+    "uddamareshvara_tantra": {
+     "mula": {
+      "_schema": "generic",
+      "_default_author": "unspecified"
+     }
+    }
+   }
   },
   "shaiva_agama": {},
   "shakta_agama": {
@@ -2216,7 +2258,8 @@
     "vasu": {
      "_schema": "grantha_tika_text",
      "_default_author": "Śrīśa Chandra Vasu"
-    }
+    },
+    "kaumudi_order": {}
    },
    "aindra_school": {},
    "paniniya_vyakarana": {
