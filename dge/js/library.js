@@ -289,6 +289,57 @@ let dgeTreeNodeSeq = 0;
 // path -> total registered granthas under it (populated or not), rebuilt at
 // the top of every openLibraryModal() call; see the comment there.
 let dgeLibTotalCounts = {};
+
+// 24 Aug 2026 -- icon-driven Library home screen, alongside the existing
+// text tree (project lead's ask: something resembling an external
+// ChatGPT mockup's "icon structure," not a pixel copy of it). A view
+// mode, not a separate feature: the SAME tree data, sort order, badges
+// and drill-down (dgeRenderNode) the list view already builds -- this
+// only changes how the TOP LEVEL is presented, replacing "however many
+// taps to reach any category" with one tap into a labelled icon tile,
+// then handing off to the existing list rendering for everything below
+// it. dgeLibTree/dgeLibTopKeys are cached here (module scope, not
+// re-fetched) so switching List<->Grid or drilling in/out is instant --
+// only openLibraryModal() itself does the async catalog fetch.
+let dgeLibTree = null;
+let dgeLibTopKeys = [];
+let dgeLibGridCategory = null; // null = showing the grid itself; else the top-level key drilled into
+
+// One icon per real top-level taxonomy key (see DGE_PATH_LABELS above for
+// the keys actually in use). Unmapped keys fall back to a plain folder
+// icon rather than guessing -- better an honest generic icon than a
+// wrong specific one.
+const DGE_LIBRARY_ICONS = {
+  vedas: '📿', veda: '📿',
+  itihasa: '⚔️', itihasas: '⚔️',
+  purana: '📜', puranas: '📜',
+  darshana: '🕉️',
+  smriti_dharma: '⚖️', smritis: '⚖️',
+  kavya_alankara: '🪶', kavya: '🪶',
+  kosha: '📖', koshas: '📖',
+  stotra: '🎶', stotras: '🎶',
+  agama: '🔥', pancharatra_agama: '🔥',
+  vedanga: '📚', ancillary: '📚',
+  dasa_sahitya: '🎵', dasakuta: '🎵', vyasakuta: '🎵',
+  upaveda: '🧘', upavedas: '🧘',
+  nitishastra: '🏛️',
+  dharmashastra: '⚖️',
+  misc: '🗂️',
+};
+function dgeLibraryIconFor(key) {
+  return DGE_LIBRARY_ICONS[key] || '🗂️';
+}
+
+function dgeGetLibraryViewMode() {
+  try { return localStorage.getItem('dge_library_view_mode') || 'grid'; }
+  catch (e) { return 'grid'; }
+}
+window.dgeSetLibraryViewMode = function (mode) {
+  try { localStorage.setItem('dge_library_view_mode', mode); } catch (e) { /* ignore */ }
+  dgeLibGridCategory = null;
+  document.querySelectorAll('#libraryViewToggle .range-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.libraryView === mode));
+  dgeRenderLibraryRoot();
+};
 // A grantha counts as "New" for this many days after register_layers.py
 // first stamped its addedAt -- existing entries (registered before that
 // tool tracked dates) have no addedAt at all and never show this badge,
@@ -421,19 +472,88 @@ window.openLibraryModal = async function() {
   });
 
   dgeTreeNodeSeq = 0;
-  const tree = dgeBuildTree(populated);
-  const topKeys = dgeSortChildKeys('', Object.keys(tree.children));
-  listEl.innerHTML =
-    `<div style="font-size:11px; color:var(--muted-text); margin-bottom:8px;">${populated.length} text(s) available</div>` +
-    topKeys.map(k => dgeRenderNode(tree.children[k], dgeSegLabel(k), 0, k)).join('') +
-    dgeSortLeaves('', tree.leaves).map(leaf =>
-      `<div class="pop-item" onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}${
-        dgeIsRecentlyAdded(leaf.addedAt)
-          ? '<span style="margin-left:auto; font-size:9px; font-weight:800; color:#fff; background:var(--accent-red,#7a3b1d); border-radius:999px; padding:2px 6px; letter-spacing:.3px;">NEW</span>'
-          : ''
-      }</div>`
-    ).join('');
+  dgeLibTree = dgeBuildTree(populated);
+  dgeLibTopKeys = dgeSortChildKeys('', Object.keys(dgeLibTree.children));
+  dgeLibPopulatedCount = populated.length;
+  dgeLibGridCategory = null;
+  dgeRenderLibraryRoot();
 };
+
+// Everything below builds off dgeLibTree/dgeLibTopKeys, cached by
+// openLibraryModal() above -- none of these re-fetch or rebuild the tree,
+// so switching view modes or drilling in/out of a category is instant.
+let dgeLibPopulatedCount = 0;
+
+function dgeTopLevelLeavesHtml() {
+  return dgeSortLeaves('', dgeLibTree.leaves).map(leaf =>
+    `<div class="pop-item" onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}${
+      dgeIsRecentlyAdded(leaf.addedAt)
+        ? '<span style="margin-left:auto; font-size:9px; font-weight:800; color:#fff; background:var(--accent-red,#7a3b1d); border-radius:999px; padding:2px 6px; letter-spacing:.3px;">NEW</span>'
+        : ''
+    }</div>`
+  ).join('');
+}
+
+// The List view -- unchanged in substance from before this pass, just
+// pulled out into its own function so dgeRenderLibraryRoot() can pick
+// between this and the grid.
+function dgeRenderLibraryListView() {
+  return dgeLibTopKeys.map(k => dgeRenderNode(dgeLibTree.children[k], dgeSegLabel(k), 0, k)).join('') + dgeTopLevelLeavesHtml();
+}
+
+// The new icon-driven home screen: one tile per top-level category
+// (same keys/order/counts the list view already computes), each tappable
+// straight through to that category's own list (dgeShowLibraryCategory) --
+// no separate "grid data model," just a different view of the same tree.
+function dgeRenderLibraryGridView() {
+  const tiles = dgeLibTopKeys.map(k => {
+    const node = dgeLibTree.children[k];
+    const count = dgeCountLeaves(node);
+    const total = dgeLibTotalCounts[k] || count;
+    const countText = total > count ? `${count}/${total}` : `${count}`;
+    return `<button type="button" class="dge-lib-tile" onclick="window.dgeShowLibraryCategory('${k}')">
+      <span class="dge-lib-tile-icon">${dgeLibraryIconFor(k)}</span>
+      <span class="dge-lib-tile-label">${dgeSegLabel(k)}</span>
+      <span class="dge-lib-tile-count">${countText}</span>
+    </button>`;
+  }).join('');
+  const topLeaves = dgeTopLevelLeavesHtml();
+  return `<div class="dge-lib-grid">${tiles}</div>` + (topLeaves ? `<div class="popup-label" style="margin-top:14px;">Other</div>${topLeaves}` : '');
+}
+
+// One category's own subtree, reached by tapping its grid tile -- reuses
+// dgeRenderNode exactly as the list view does, just scoped to one branch
+// with a breadcrumb back to the grid instead of every branch at once.
+function dgeRenderLibraryCategoryView(key) {
+  const node = dgeLibTree.children[key];
+  if (!node) return dgeRenderLibraryGridView(); // stale key (shouldn't happen) -- fail back to the grid rather than a blank screen
+  return `<div class="dge-lib-breadcrumb" onclick="window.dgeShowLibraryGrid()">
+      <span>❮</span> <span>${dgeSegLabel(key)}</span>
+    </div>` + dgeRenderNode(node, '', 0, key);
+}
+
+window.dgeShowLibraryCategory = function (key) {
+  dgeLibGridCategory = key;
+  dgeRenderLibraryRoot();
+};
+window.dgeShowLibraryGrid = function () {
+  dgeLibGridCategory = null;
+  dgeRenderLibraryRoot();
+};
+
+function dgeRenderLibraryRoot() {
+  const listEl = document.getElementById('libraryModalList');
+  if (!listEl || !dgeLibTree) return;
+  const mode = dgeGetLibraryViewMode();
+  const header = `<div style="font-size:11px; color:var(--muted-text); margin-bottom:8px;">${dgeLibPopulatedCount} text(s) available</div>`;
+  if (dgeLibGridCategory) {
+    listEl.innerHTML = header + dgeRenderLibraryCategoryView(dgeLibGridCategory);
+  } else if (mode === 'grid') {
+    listEl.innerHTML = header + dgeRenderLibraryGridView();
+  } else {
+    listEl.innerHTML = header + dgeRenderLibraryListView();
+  }
+}
 
 // Quick Search entry point — parses e.g. "rv1.1.3" (see
 // dgeParseQuickSearchQuery in config.js) and navigates straight to that
