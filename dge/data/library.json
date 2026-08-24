@@ -1465,6 +1465,12 @@
       "title": "तैत्तिरीयोपनिषद्भाष्यम् (टिप्पणी)"
     },
     {
+      "path": "dge/data/darshana/vedanta/vishishtadvaita/appayya_dikshita/naya_mayukha_malika/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
       "path": "dge/data/darshana/vedanta/vishishtadvaita/ramanuja_bhashya/gadya_traya/sharanagati_gadyam/mula/data.json",
       "populated": true,
       "title": "Mula",
@@ -1490,6 +1496,36 @@
     },
     {
       "path": "dge/data/darshana/vedanta/vishishtadvaita/ramanuja_bhashya/vedartha_sangraha/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/vishishtadvaita/rangaramanuja/bhava_prakashika/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/vishishtadvaita/rangaramanuja/sharirika_shastrartha_dipika/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/vishishtadvaita/rangaramanuja/vishaya_vakya_dipika/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/vishishtadvaita/sudarshana_suri/shruta_pradipika/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/vishishtadvaita/vedanta_desika/adhikarana_saravali/mula/data.json",
       "populated": true,
       "title": "Mula",
       "addedAt": "2026-08-24"

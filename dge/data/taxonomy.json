@@ -1332,6 +1332,50 @@
        "_default_author": "Sri Ramanujacharya"
       }
      }
+    },
+    "appayya_dikshita": {
+     "naya_mayukha_malika": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Appayya Dikshita"
+      }
+     }
+    },
+    "rangaramanuja": {
+     "bhava_prakashika": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Ranga Ramanuja"
+      }
+     },
+     "sharirika_shastrartha_dipika": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Ranga Ramanuja"
+      }
+     },
+     "vishaya_vakya_dipika": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Ranga Ramanuja"
+      }
+     }
+    },
+    "sudarshana_suri": {
+     "shruta_pradipika": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Sudarshana Suri"
+      }
+     }
+    },
+    "vedanta_desika": {
+     "adhikarana_saravali": {
+      "mula": {
+       "_schema": "grantha_mula_text",
+       "_default_author": "Vedanta Desika"
+      }
+     }
     }
    }
   },
