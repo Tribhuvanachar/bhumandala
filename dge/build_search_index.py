@@ -23,9 +23,19 @@ into a phonetic key (pkey) and coarse key (ckey) by the shared normalizer
 browser at query time (js/dge-normalize.js), so index and query always agree.
 
 Emitted artifacts (all under --out):
-  manifest.json                catalog: granthas, categories, unit counts, shards
+  manifest.json                catalog: granthas, categories, unit counts, the
+                                section list (manifest.sections), and per-trigram
+                                GLOBAL document frequency (manifest.df)
   units/<slug>.json            per-grantha units: {u, pk, ck, s(nippet)}
-  postings/<bucket>.json       global trigram -> [ [granthaIdx, unitIdx], ... ]
+  postings/<trigram>/<section>.json
+                                one file per (trigram, section) pair:
+                                [ [granthaIdx, unitIdx], ... ], holding only
+                                that trigram's postings within that section.
+                                An unscoped query fans out across every
+                                section's file for a trigram in parallel; a
+                                scoped query reads only its own section.
+                                (trigram directory name is percent-safe --
+                                see safe_trigram_filename())
   backlinks.json               target#unit_id -> [ {from, note}, ... ]
 
 Usage:  python3 build_search_index.py --data dge/data --out dge/search_index
@@ -173,10 +183,31 @@ def category_of(slug: str) -> str:
     return slug.split("/", 1)[0] if slug else "unknown"
 
 
-def bucket_of(tg: str) -> str:
-    """Map a trigram to a posting-file bucket; keep files small + many."""
-    key = tg.strip("^$") or tg
-    return re.sub(r"[^a-zA-Z0-9]", "_", key[:2]) or "misc"
+_UNSAFE_TG_CHARS = re.compile(r"[^0-9A-Za-z^$]")
+
+
+def safe_trigram_filename(tg: str) -> str:
+    """The literal on-disk/in-git filename for one trigram's postings file.
+    One file per TRIGRAM, not per 2-char prefix -- see the "one file per
+    trigram" note in dge/SEARCH_ARCHITECTURE.md: filing by the first two
+    characters put every "ram"/"ran"/"raj"/... trigram in one multi-MB file
+    that a query for any of them had to download whole (16 MB for a राम
+    search). A query now fetches exactly the trigram files it needs.
+
+    Real trigrams are always drawn from {A-Za-z^$} (search_toolkit_pkg
+    .normalize.trigrams pads with ^/$ at word boundaries) -- every one of
+    those is already a safe literal filename on any filesystem/git, so they
+    are used as-is, NOT percent-encoded here. The client (dge-search.js
+    safeTrigram()) percent-encodes ^ and $ only when building the fetch URL,
+    the same way any URL references a file whose name contains characters
+    special to URLs but not to filesystems; the CDN decodes that back to
+    this exact literal name. Baking a custom "%XX" escape into the filename
+    ITSELF, instead, was tried first and was a real bug: a browser's fetch()
+    percent-DEcodes "%XX" sequences in a URL before requesting it, so a
+    filename already containing a literal "%" was requested as something
+    else entirely and 404'd. Only a genuinely unexpected character (none
+    should occur) falls back to '_', same spirit as the old bucket_of()."""
+    return _UNSAFE_TG_CHARS.sub("_", tg) or "_"
 
 
 def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dict:
@@ -185,10 +216,11 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
     os.makedirs(os.path.join(out_dir, "postings"), exist_ok=True)
 
     granthas = []                       # manifest rows
-    postings = defaultdict(lambda: defaultdict(list))  # bucket -> trigram -> [[gi,ui]]
+    postings = defaultdict(lambda: defaultdict(list))  # trigram -> section -> [[gi,ui], ...]
     backlinks = defaultdict(list)       # "target#unit_id" -> [{from, note}]
     stats = {"granthas": 0, "populated": 0, "units": 0, "unit_chars": 0,
-             "refs": 0, "skipped_stub_units": 0, "skipped_stub_granthas": 0}
+             "refs": 0, "skipped_stub_units": 0, "skipped_stub_granthas": 0,
+             "distinct_trigrams": 0}
 
     # (root, path) pairs: the slug is relative to the root the file came from,
     # so a corpus indexed from elsewhere still slugs as though it sat in
@@ -215,6 +247,7 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
             print(f"  ! skip {path}: {e}", file=sys.stderr)
             continue
         slug = grantha_slug(base, path)
+        category = category_of(slug)
         schema_name = data.get("schema") or (
             "stotra_text" if "shlokas" in data else "generic")
         pfield = primary_field(schemas, schema_name)
@@ -240,9 +273,14 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
             ui = len(unit_rows)
             unit_rows.append({"u": uid, "pk": pk, "ck": ck, "s": snippet(dev_text)})
             stats["unit_chars"] += len(pk)
-            # global postings on pkey trigrams (candidate generation)
+            # postings on pkey trigrams (candidate generation), partitioned
+            # by section (see the "Partition the postings tree" note in
+            # dge/SEARCH_ARCHITECTURE.md): an unscoped/global query fans out
+            # across every section's file for a trigram in parallel, and a
+            # section-scoped query reads only its own partition -- neither
+            # has to download postings for sections it doesn't care about.
             for tg in trigrams(pk):
-                postings[bucket_of(tg)][tg].append([gi, ui])
+                postings[tg][category].append([gi, ui])
             # cross-references -> backlinks
             for r in refs:
                 if isinstance(r, dict) and r.get("target"):
@@ -272,16 +310,36 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
         stats["units"] += len(unit_rows)
         stats["populated"] += 1
 
-    # write postings buckets
-    for bucket, tgmap in postings.items():
-        with open(os.path.join(out_dir, "postings", f"{bucket}.json"),
-                  "w", encoding="utf-8") as f:
-            json.dump(tgmap, f, ensure_ascii=False, separators=(",", ":"))
+    # write one postings file per (TRIGRAM, SECTION) pair -- see
+    # safe_trigram_filename() for the trigram-as-filename half, and the
+    # "Partition the postings tree" comment above for the section half. Each
+    # file is just the [[gi,ui],...] list for that trigram within that one
+    # section; the path already identifies both, so there is no wrapping dict.
+    df = {}       # trigram -> GLOBAL posting count (all sections), i.e. document frequency
+    sections = set()
+    for tg, by_section in postings.items():
+        tg_dir = os.path.join(out_dir, "postings", safe_trigram_filename(tg))
+        os.makedirs(tg_dir, exist_ok=True)
+        total = 0
+        for section, rows in by_section.items():
+            sections.add(section)
+            with open(os.path.join(tg_dir, f"{section}.json"),
+                      "w", encoding="utf-8") as f:
+                json.dump(rows, f, ensure_ascii=False, separators=(",", ":"))
+            total += len(rows)
+        df[tg] = total
+    stats["distinct_trigrams"] = len(df)
 
+    # df is the GLOBAL (cross-section) posting count -- still what decides
+    # which trigrams are rarest and therefore worth fetching (see
+    # SEARCH_ARCHITECTURE.md "What does fix it"); the section partition only
+    # changes WHICH FILES answer a chosen trigram, not which trigrams get
+    # chosen, so an unscoped search still needs just the df table, and a
+    # scoped one already knows its one section without ranking across them.
     with open(os.path.join(out_dir, "manifest.json"), "w", encoding="utf-8") as f:
-        json.dump({"granthas": granthas,
-                   "postingBuckets": sorted(postings.keys()),
-                   "stats": stats}, f, ensure_ascii=False, separators=(",", ":"))
+        json.dump({"granthas": granthas, "df": df,
+                   "sections": sorted(sections), "stats": stats},
+                   f, ensure_ascii=False, separators=(",", ":"))
     with open(os.path.join(out_dir, "backlinks.json"), "w", encoding="utf-8") as f:
         json.dump(backlinks, f, ensure_ascii=False, separators=(",", ":"))
 

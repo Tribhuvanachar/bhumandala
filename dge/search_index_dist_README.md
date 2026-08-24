@@ -21,12 +21,33 @@ they are 0.1 MB, and `js/backlinks.js` reads them from beside the app.
 ## What is in it
 
 ```
-manifest.json          916 granthas, their categories, unit counts and shards
-units/<slug>.json      per-grantha units: {u, pk, ck, s}
-postings/<bucket>.json trigram -> [[granthaIdx, unitIdx], ...]
+manifest.json            granthas (categories, unit counts, shards), the section
+                          list (manifest.sections), and df: {trigram -> GLOBAL
+                          posting count across all sections}
+units/<slug>.json        per-grantha units: {u, pk, ck, s}
+postings/<trigram>/<section>.json
+                          one file per (trigram, section) pair (trigram
+                          directory name percent-safe): [[granthaIdx, unitIdx], ...]
 ```
 
-**916 granthas, 94,664 units** — including the 36 Kāvya layers, which are read
+Postings are filed per trigram, not by a trigram's first 2 characters —
+that used to put every "ram"/"ran"/"raj"/... trigram in one shared file, up
+to 7 MB downloaded whole for a query touching any one of them (a राम search
+pulled 16 MB). `dge-search.js` fetches only the 2-3 *rarest* trigrams of a
+query (by `manifest.df`) instead of every trigram in it — a राम query is
+~549 KB now, not 16 MB.
+
+Each trigram is further split **by section** (`vedas`, `itihasa`,
+`dvaitavedanta`, ... — `manifest.sections` lists them): an unscoped/global
+query fans out across every section's file for a chosen trigram in
+parallel and unions the results (same total bytes as one unpartitioned
+file, just as several small requests); a section-scoped query reads only
+its own partition, so scoped search is proportional to that section's size
+rather than paying for the whole corpus, and a Kāvya-only import
+republishes only the Kāvya partition instead of every section's postings.
+See `SEARCH_ARCHITECTURE.md`.
+
+**937 granthas, 94,941 units** — including the Kāvya layers, which are read
 from `kavya-dist` rather than from the site.
 
 ## Rebuilding it

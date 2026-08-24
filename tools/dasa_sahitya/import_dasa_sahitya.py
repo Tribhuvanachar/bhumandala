@@ -168,13 +168,27 @@ def extract_links(html, base_url, post_pattern):
     pat = re.compile(post_pattern)
     out, seen = [], set()
     base_host = urlparse(base_url).netloc.replace("www.", "")
+    base_path = urlparse(base_url).path.rstrip("/")
     for a in node.find_all("a", href=True):
         href = urljoin(base_url, a["href"].split("#")[0])
-        host = urlparse(href).netloc.replace("www.", "")
+        parsed = urlparse(href)
+        # Jetpack's "sharedaddy" share buttons (WordPress) link back to the
+        # CURRENT post with a `?share=facebook`/`jetpack-whatsapp`/`pinterest`/
+        # `twitter` tracking query string appended -- same path, so they still
+        # match post_url_pattern, and get counted as if they were distinct
+        # composition links. A listing page with one real post and its own
+        # share widget would otherwise discover 4 "compositions" that are all
+        # just the listing page itself, none of them containing lyric text.
+        if parsed.query:
+            continue
+        host = parsed.netloc.replace("www.", "")
         # allow the same site + declared wordpress mirror host
         if base_host.split(".")[0] not in host:
             continue
-        if not pat.search(urlparse(href).path):
+        if parsed.path.rstrip("/") == base_path:
+            continue
+        href = f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
+        if not pat.search(parsed.path):
             continue
         if href in seen:
             continue
