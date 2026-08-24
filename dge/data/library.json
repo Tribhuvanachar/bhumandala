@@ -5,7 +5,7 @@
   "granthas": [
     {
       "path": "dge/data/agama/pancharatra/pancharatra_samhitas/ahirbudhnya_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Ahirbudhnya Samhita"
     },
     {

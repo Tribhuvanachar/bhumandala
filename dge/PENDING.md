@@ -2411,6 +2411,115 @@ complete record, not just a live queue.
   nothing was imported from there. **Left as a genuine lead for whoever
   has Muktabodha access next, not acted on.**
 
+- **24 Aug (same thread): asked directly to "check Muktabodha access
+  options... also other related sources... wikisource or wisdomlib etc."**
+  Muktabodha remains blocked on the same login gate — flagged for the
+  project lead, not pursued further without their explicit go-ahead
+  (would need account credentials this session doesn't have and shouldn't
+  guess at). wisdomlib.org carries several of the remaining Saṃhitās but
+  states no licence anywhere on the site — checked directly, not assumed
+  absent — so per this repo's own rule (`dge/kosha_toolkit/LICENSING.md`:
+  no explicit licence = do not use), nothing was taken from it. One
+  archive.org scan of Īśvarasaṃhitā is explicitly **CC BY-NC-ND 3.0**
+  (non-commercial, no-derivatives) — also correctly left unused, and its
+  OCR is Devanagari-garbled enough (checked the `_djvu.txt` directly) that
+  it wouldn't be usable even under a compatible licence without a real
+  re-OCR pipeline, out of scope here. Paramasaṃhitā, Hayagrīvasaṃhitā and
+  the Pāñcarātra-recension Vāsiṣṭhasaṃhitā: no Sanskrit e-text found
+  anywhere checked (GRETIL, Muktabodha's public listing, Wikisource,
+  wisdomlib, archive.org, TITUS, SARIT) — genuinely unavailable, not a
+  missed search.
+
+  **Sanskrit Wikisource confirmed usable — CC BY-SA 4.0 site-wide**,
+  checked directly via the MediaWiki API
+  (`action=query&meta=siteinfo&siprop=rightsinfo`) rather than assumed
+  from Wikimedia's general reputation. Five of the remaining Saṃhitās are
+  there in full: Ahirbudhnyasaṃhitā, Jayākhyasaṃhitā, Lakṣmītantram,
+  Padmasaṃhitā, Viṣṇusaṃhitā. Built a new importer
+  (`tools/wikisource_pancharatra/fetch_and_build.py`) rather than reusing
+  the GRETIL one — Wikisource wikitext needs its own parsing entirely
+  (page-per-chapter fetch over the API, `<poem>` block extraction,
+  footnote-apparatus stripping, editorial-subheading stripping — none of
+  which the GRETIL TEI parser does or needs), and the source text is
+  already Devanagari, not IAST, so no transliteration step either.
+
+  **Ahirbudhnyasaṃhitā run to completion first: 62 items (60 adhyāyas +
+  the appendix split into 2 sub-items), 4,091 śloka total, no chapter
+  silently skipped.** Six distinct real formatting quirks found and fixed
+  by checking actual page wikitext against a failing chapter, never
+  assumed — this source turned out to mix several different transcription
+  conventions across chapters 1–60, apparently reflecting different
+  Wikisource contributors' individual habits over time:
+  - Two verse-ref bracket conventions in the same work — Devanagari
+    daṇḍa+period (`।। 1.1 ।।`, most chapters) vs ASCII pipe+hyphen
+    (`|| 43-1 ||`, ch. 43 on) vs the two characters mixed within one
+    closing pair (`।| ४५-१।|`, ch. 45+) — generalized to treat `।` and `|`
+    as interchangeable rather than special-casing each pairing as found.
+  - The precomposed Unicode double-daṇḍa (U+0965 `॥`) vs two single
+    daṇḍas typed in a row (U+0964 `।।`) — visually identical, only the
+    latter matched every downstream daṇḍa-counting rule until ch. 50 came
+    back with real content but zero parsed verses and this was checked
+    directly; now normalized to `।।` immediately after extraction.
+  - Footnote-apparatus blocks delimited by a dash-line
+    (`---------`) almost everywhere, but by an underscore-line
+    (`__________________`) in ch. 59 specifically — both characters now
+    accepted as the same paired delimiter.
+  - Ch. 59's own page is missing its closing `</poem>` tag entirely (the
+    real content sits between the first `<poem>` and a second, stray,
+    empty `<poem>` right at the end of the page) — a genuine source-page
+    defect, not a parsing convention; handled by ending the poem block at
+    whichever comes first, an actual `</poem>`, another `<poem>`, or the
+    end of the page.
+  - The parishishtam (appendix) page is not a 61st adhyāya — it's the
+    *Sudarśana-sahasranāma-stotra*, numbered with a single sequential
+    verse number (`।। ११९ ।।`) rather than the chapter.verse pairs every
+    adhyāya uses, and — checked directly — that page itself holds two
+    independently-numbered sub-poems back to back (a 21-verse dhyāna/
+    nyāsa preamble, then the sahasranāma proper, whose own numbering
+    restarts at 1). Given its own ref pattern and split into two
+    sub-items (`parishishtam`, `parishishtam2`) on a numbering-decrease
+    boundary, rather than colliding both series' verse numbers together.
+  - A sustained MediaWiki API rate-limit window, several times over,
+    initially handled wrongly: an earlier version of `wikitext()`
+    returned `None` for *both* "rate-limited past all retries" and "page
+    genuinely doesn't exist," so the caller's "no parseable content" skip
+    silently covered both cases — 23 real chapters got marked skipped
+    during one such window and a wrong 36-chapter partial `data.json` was
+    written and had to be discarded, caught only because 23 consecutive
+    skips in a row was implausible enough to go check by hand rather than
+    trust. Fixed with a distinct `RateLimited` exception on retry
+    exhaustion; `build()` is now resumable via a sidecar
+    `.progress.json` cache (gitignored, deleted on success) and only
+    writes the final `data.json` once every page is confirmed fetched —
+    never ships a partial text silently as if it were the whole one.
+
+  Content spot-checked, not just validated against expected counts:
+  ch. 59 (`पुरुषसूक्तश्रीसूक्तवाराहमन्त्रार्थनिरूपणम्`) opens on-topic
+  with *puruṣasūkta*/*śrīsūkta* material as its own title promises, and
+  the appendix closes with the sahasranāma's own colophon
+  (`इत्यहिर्बुध्न्यसंहितायां... श्रीसुदर्शनसहस्रनामस्तोत्रं संपूर्णम्`) —
+  both regression-tested together with every previously-seen chapter
+  sample (1, 2, 38, 43, 45, 50) before trusting the fix at scale.
+  `library.json`'s `populated` flag flipped for this leaf.
+
+  **The other 4 confirmed Wikisource Saṃhitās, scoped but not yet
+  imported** (next step for whoever continues this): Jayākhyasaṃhitā (33
+  paṭala, at `जयाख्यसंहिता`) and Viṣṇusaṃhitā (30 paṭala, at
+  `विष्णुसंहिता`) both use the identical flat `Title/पटलः N` index-link
+  structure Ahirbudhnyasaṃhitā's `Title/अध्यायः N` does — same
+  `subpage_list()` should work unchanged, module the chapter-label word
+  itself. Lakṣmītantram is at `लक्ष्मीतन्त्रम्` (not the more literal
+  `लक्ष्मीतन्त्र`, which 404s) — 57 adhyāyas, same flat structure.
+  Padmasaṃhitā nests one level deeper: its index links to 4 pāda
+  sub-index pages (योगपादः, क्रियापादः, ज्ञानपादः, चर्यापादः), each of
+  which presumably links its own chapters in turn — `subpage_list()`
+  would need a second traversal level for this one specifically; not yet
+  confirmed against a pāda page's actual wikitext (blocked mid-check by
+  the same rate-limit window covering the Ahirbudhnya rebuild). All 4
+  should still be expected to introduce their own new formatting quirks
+  the same way Ahirbudhnyasaṃhitā did — verify before trusting each, same
+  discipline as above, not a blind re-run.
+
 ## Vedic-specific, still genuinely open
 
 - **Sāyaṇa is missing on 164 Ṛgveda mantras (1.55%)**, and the gaps are
