@@ -597,8 +597,18 @@ body.dge-app-view .shloka-card:not(.dge-card-expanded) .commentary-block,
 body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-commentary-tabbed,
 body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-analysis-field,
 body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-fn-block { display: none; }
-body.dge-app-view .shloka-card { padding: 16px; gap: 10px; }
-body.dge-app-view .shloka-list { gap: 14px; }
+/* 24 Aug 2026: widened from a 4px padding / 4px list-gap delta -- confirmed
+   via live testing to be too subtle to notice on a phone screen, which is
+   exactly why the project lead's report that switching modes "did nothing"
+   was a real, if different, bug: the mode WAS applying (and persisting
+   across a reload), just imperceptibly so whenever a reader had no
+   commentary selected (the default since the multi-select-commentary
+   rework) and so nothing for the collapse behaviour above to visibly
+   collapse. This is now a real, unmistakable density/shape difference
+   regardless of commentary state, on top of the toggle button + the
+   confirmation toast dgeSetLayoutMode() now shows on a real tap. */
+body.dge-app-view .shloka-card { padding: 20px; gap: 12px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+body.dge-app-view .shloka-list { gap: 20px; }
 
 /* 24 Aug 2026 -- icon-driven Library home screen (library.js's
    dgeRenderLibraryGridView/dgeRenderLibraryCategoryView). A 3-column tile

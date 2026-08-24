@@ -603,13 +603,30 @@ window.dgeSetViewMode = function(mode) {
 // per-card .dge-appview-toggle button rendered below, with no re-render
 // needed on switch since the collapse/reveal is driven entirely by CSS
 // selectors on classes already present in the DOM either way.
-window.dgeSetLayoutMode = function (mode) {
+//
+// `announce` (24 Aug 2026, project lead's direct report: "the layout...
+// not getting applied... old layout is still rendered"): the switch was
+// ALWAYS applying and persisting correctly (confirmed live -- the class
+// toggles, survives a reload), but with no commentary selected (the new
+// default since the multi-select-commentary rework, a Set() rather than
+// 'all') there is nothing for App view to collapse, and the remaining
+// card-density difference was too small to notice -- so a tap genuinely
+// looked like it did nothing. Two real fixes: main.css's own App-view
+// density delta widened to actually be noticeable card-to-card (see the
+// comment there), and this function now shows an explicit confirmation
+// toast for a real user tap so switching is never silent -- but not on
+// initApp()'s own startup restore, which calls this with announce left
+// false/undefined so a normal page load doesn't toast on its own.
+window.dgeSetLayoutMode = function (mode, announce) {
   const isApp = mode === 'app';
   document.body.classList.toggle('dge-app-view', isApp);
   localStorage.setItem('app_layoutMode', isApp ? 'app' : 'scholar');
   document.querySelectorAll('#displayPopup .pop-item[data-layout]').forEach(el => {
     el.classList.toggle('active', el.dataset.layout === (isApp ? 'app' : 'scholar'));
   });
+  if (announce && typeof showToast === 'function') {
+    showToast(isApp ? '📱 App layout applied.' : '📚 Scholar layout applied.');
+  }
 };
 
 // Toggles one card's expanded state -- a dedicated button rather than a
