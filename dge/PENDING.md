@@ -3106,10 +3106,39 @@ complete record, not just a live queue.
   in RV 1.65–1.70, which the edition glosses jointly and DGE splits in two. The
   archive.org OCR route (`archive_sayana.py`, kept and unchanged) does cover the
   Vālakhilya and is the obvious next attempt if that gap matters.
-- **No commentary layer on the Atharvaveda (5,977 items), Śukla Yajurveda
-  (1,975) or Taittirīya Saṃhitā (696)** — all three still at zero.
-  `import_veda_phase2.py` is deployed and tested but has never been run for real;
-  it wants Griffith + Whitney–Lanman, Griffith, and Keith respectively.
+- **24 Aug: `import_veda_phase2.py` finally run for real — Atharvaveda now
+  has Whitney & Lanman, the rest are blocked, not merely undone.** Asked
+  directly to work the queued Vedas backlog after finishing the Pāñcarātra
+  thread above. The importer's own `av` (Griffith AV), `syv` (Griffith
+  Śukla Yajurveda) and `ts` (Keith Taittirīya Saṃhitā) corpora all source
+  from sacred-texts.com, which — checked directly by fetching a page raw,
+  not assumed from a bare 403 — fronts every request with a Cloudflare
+  "Just a moment…" bot-challenge page rather than serving content. Not a
+  simple site block to route around (and not attempted to route around,
+  since that would mean defeating anti-bot protection): genuinely
+  unfetchable by an HTTP client from here, and likely from any similarly
+  automated environment without a real browser. **Left for whoever can
+  run this from a normal residential/desktop connection, or reconsider the
+  source** — GRETIL hit the same class of block earlier in this project
+  and was never resolved either, so this may need a standing workaround
+  (a GitHub Actions runner, matching this project's existing pattern for
+  GRETIL-blocked fetches) rather than a one-off retry.
+
+  **`av-whitney` (Whitney & Lanman 1905, sourced from en.wikisource.org
+  instead) ran clean**: 6,659 entries added across all 19 transcribed
+  kāṇḍas (Book XX isn't on Wikisource at all, per the importer's own
+  docstring), **99.4% match rate** (37 verse-level misses, 180 page
+  fetches genuinely missing out of 586 attempted). This is arguably the
+  more valuable of the two Atharvaveda layers regardless of Griffith's
+  availability — Whitney's own critical notes are the ones that report
+  Sāyaṇa's readings, per the importer's own header comment. Alignment
+  spot-checked across kāṇḍas 1, 6, 10, 19 (right mantra's translation,
+  no repetition or drift into a neighbor's content) before trusting the
+  99.4% match-rate number rather than just reading it off the log.
+  Śukla Yajurveda (1,975 items) and Taittirīya Saṃhitā (696) remain at
+  zero commentary — both are entirely sacred-texts.com-sourced in this
+  importer, so both are blocked by the same Cloudflare wall, not merely
+  unattempted.
 - **142 Sāmaveda mantras have no Ṛgveda parallel to inherit from** (114 carry no
   `rigveda_ref` at all, 8 have a bad one, 19 point at Ṛgveda mantras that are
   themselves in the Vālakhilya/dvipadā gaps, 1 unresolvable). There is no other
