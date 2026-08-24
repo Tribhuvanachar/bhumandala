@@ -587,7 +587,18 @@ def parse_chapter_lakshmi(page_title, chapter_num):
 # and pull out its verse number; `chapter_num` supplies the chapter
 # unconditionally, closing this whole class of typo rather than
 # hand-fixing the one instance found.
-PADMA_HEADING_ASTERISK_RX = re.compile(r"^\*.*\*$")
+#
+# Checked directly at full scale: yogapada/kriyapada's asterisk-wrapped
+# headings also turn up in two further variants -- a leading "?" before
+# the opening "*" ("?* परवारकल्पनम्.*"), and "?" substituted for the
+# closing "*" outright ("* कौतुकायाममानम्?") -- recurring often enough
+# (several chapters, several times each) to be a real, if inconsistent,
+# transcription habit rather than one-off typos, unlike the isolated
+# unbalanced-paren cases elsewhere in the corpus that are left alone.
+# "*" and "?" are treated as interchangeable heading delimiters, either
+# one allowed at either end, the same way "।" and "|" already are for
+# verse-ref brackets elsewhere in this file.
+PADMA_HEADING_ASTERISK_RX = re.compile(r"^[*?].*[*?]$")
 PADMA_HEADING_PIPE_RX = re.compile(r"^\|\|.*\|\|$")
 PADMA_HEADING_BAREPERIOD_RX = re.compile(r"^[^।|]*[^।|\s]\.$")
 PADMA_REF_RX = re.compile(
