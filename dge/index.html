@@ -409,18 +409,12 @@
     <div class="popup-container advanced-feature">
       <button class="btn-sm" onclick="window.togglePopup('filterPopup')" id="filterBtn">🔽 Filter</button>
       <div class="popup" id="filterPopup" style="left: 50%; transform: translateX(-50%);">
-        <div class="range-row-flex" style="margin-bottom:4px;">
-          <span style="font-size:10px; color:var(--muted-text); text-transform:uppercase;">Checked criteria:</span>
-          <div class="range-mode-toggle" id="markFilterModeToggle" title="Negate this filter -- Exclude shows everything EXCEPT the checked criteria">
-            <button type="button" class="range-mode-btn active" data-negate="0" onclick="window.setMarkFilterMode(false, this)">Match</button>
-            <button type="button" class="range-mode-btn" data-negate="1" onclick="window.setMarkFilterMode(true, this)">Negate</button>
-          </div>
-        </div>
-        <div class="filter-checkbox-item" data-filter-type="fav" onclick="window.toggleFilterCriterion('fav')">★ Favorites</div>
-        <div class="filter-checkbox-item" data-filter-type="pending" onclick="window.toggleFilterCriterion('pending')">○ Pending</div>
-        <div class="filter-checkbox-item" data-filter-type="practice" onclick="window.toggleFilterCriterion('practice')">🚧 Needs Practice</div>
-        <div class="filter-checkbox-item" data-filter-type="done" onclick="window.toggleFilterCriterion('done')">✅ Done</div>
-        <div class="filter-checkbox-item" data-filter-type="doubt" onclick="window.toggleFilterCriterion('doubt')">❓ Doubts</div>
+        <div style="font-size:10px; color:var(--muted-text); margin-bottom:2px; text-transform:uppercase;">Tap to Include, tap again to Exclude:</div>
+        <div class="filter-checkbox-item" data-filter-type="fav" onclick="window.cycleFilterCriterion('fav')">★ Favorites</div>
+        <div class="filter-checkbox-item" data-filter-type="pending" onclick="window.cycleFilterCriterion('pending')">○ Pending</div>
+        <div class="filter-checkbox-item" data-filter-type="practice" onclick="window.cycleFilterCriterion('practice')">🚧 Needs Practice</div>
+        <div class="filter-checkbox-item" data-filter-type="done" onclick="window.cycleFilterCriterion('done')">✅ Done</div>
+        <div class="filter-checkbox-item" data-filter-type="doubt" onclick="window.cycleFilterCriterion('doubt')">❓ Doubts</div>
         <button class="btn-sm" style="width:100%;" onclick="window.clearAllFilterCriteria()">✖ Clear All (Show Everything)</button>
         <hr>
         <div class="pop-item" id="opt-none" onclick="window.toggleSingleTrackMode()">⏸ Single Track (no auto-advance)</div>

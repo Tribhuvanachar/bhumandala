@@ -229,6 +229,12 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .filter-checkbox-item.active::before { content: "☑"; color: var(--accent-red); }
 .filter-checkbox-item:hover { background: var(--card-border); }
 .filter-checkbox-item.active { background: var(--card-active); color: var(--accent-red); }
+/* 24 Aug 2026 -- per-criterion Exclude state (cycleFilterCriterion,
+   filter.js): a third tap after Include, distinct from it -- struck-
+   through label plus a ☒ so "exclude fav" never reads as a second, oddly
+   duller "include fav" at a glance. */
+.filter-checkbox-item.excluded::before { content: "☒"; color: var(--muted-text); }
+.filter-checkbox-item.excluded { background: var(--card-border); color: var(--muted-text); text-decoration: line-through; }
 
 .range-mode-toggle { display: flex; gap: 4px; }
 .range-mode-btn { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-pill); padding: 3px 10px; font-size: 11px; font-weight: 700; color: var(--text-primary); cursor: pointer; transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease); }
