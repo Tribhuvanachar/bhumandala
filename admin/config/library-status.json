@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1839,
-  "loaded": 1181,
-  "items": 606779
+  "leaves": 1857,
+  "loaded": 1199,
+  "items": 607773
  },
  "sections": {
   "agama": {
@@ -12,9 +12,9 @@
    "items": 43549
   },
   "darshana": {
-   "total": 272,
-   "loaded": 81,
-   "items": 24955
+   "total": 290,
+   "loaded": 99,
+   "items": 25949
   },
   "dasa_sahitya": {
    "total": 67,
@@ -387,16 +387,34 @@
   "darshana/vedanta/dvaita/sarvamula/upanishad_prasthana/taittiriyopanishad_bhashya/mula": 72,
   "darshana/vedanta/dvaita/sarvamula/upanishad_prasthana/taittiriyopanishad_bhashya/tika_jayatirtha": 0,
   "darshana/vedanta/dvaita/sarvamula/upanishad_prasthana/taittiriyopanishad_bhashya/tippani": 0,
+  "darshana/vedanta/vishishtadvaita/ahobila_yati_34/adhikarana_saravali_padayojana/bhashya": 166,
+  "darshana/vedanta/vishishtadvaita/ahobila_yati_34/pada_yojana_bhumika/bhashya": 1,
   "darshana/vedanta/vishishtadvaita/appayya_dikshita/naya_mayukha_malika/bhashya": 156,
+  "darshana/vedanta/vishishtadvaita/deshikacharya/adhikarana_ratnamala/bhashya": 16,
+  "darshana/vedanta/vishishtadvaita/devanathan/shribhashya_bhavaprakasha/bhashya": 28,
+  "darshana/vedanta/vishishtadvaita/kumara_varada/adhikarana_saravali_vyakhya/bhashya": 166,
+  "darshana/vedanta/vishishtadvaita/lakshmipuram_srinivasacharya/bhushanam/bhashya": 1,
+  "darshana/vedanta/vishishtadvaita/lakshmipuram_srinivasacharya/nayasangatimalika/bhashya": 1,
+  "darshana/vedanta/vishishtadvaita/lakshmipuram_srinivasacharya/nyaya_kalapa_sangraha/bhashya": 16,
+  "darshana/vedanta/vishishtadvaita/mukkur_yatindra/brahmasutrartha_padyamalika/bhashya": 156,
+  "darshana/vedanta/vishishtadvaita/perukkaranai_chakravarti/sri_bhashya_sariraka_mimamsa_bhashya/bhashya": 156,
+  "darshana/vedanta/vishishtadvaita/rajagopala/brahmasutrartha_padyamalika/bhashya": 1,
+  "darshana/vedanta/vishishtadvaita/ramabhadracharya/nitya_grantha_vivrti/bhashya": 5,
+  "darshana/vedanta/vishishtadvaita/ramanuja_bhashya/gadya_traya/nitya_grantha/mula": 111,
   "darshana/vedanta/vishishtadvaita/ramanuja_bhashya/gadya_traya/sharanagati_gadyam/mula": 27,
   "darshana/vedanta/vishishtadvaita/ramanuja_bhashya/sri_bhashya/bhashya": 180,
   "darshana/vedanta/vishishtadvaita/ramanuja_bhashya/vedanta_dipa/bhashya": 157,
   "darshana/vedanta/vishishtadvaita/ramanuja_bhashya/vedanta_sara/bhashya": 149,
   "darshana/vedanta/vishishtadvaita/ramanuja_bhashya/vedartha_sangraha/mula": 198,
+  "darshana/vedanta/vishishtadvaita/ramanuja_tatacharya/nyaya_kalapa_sangraha/bhashya": 6,
   "darshana/vedanta/vishishtadvaita/rangaramanuja/bhava_prakashika/bhashya": 154,
   "darshana/vedanta/vishishtadvaita/rangaramanuja/sharirika_shastrartha_dipika/bhashya": 156,
   "darshana/vedanta/vishishtadvaita/rangaramanuja/vishaya_vakya_dipika/bhashya": 50,
+  "darshana/vedanta/vishishtadvaita/seneshvara/nyaya_kalapa_sangraha/mula": 153,
   "darshana/vedanta/vishishtadvaita/sudarshana_suri/shruta_pradipika/bhashya": 137,
+  "darshana/vedanta/vishishtadvaita/sudarshana_suri/shruta_prakashika/bhashya": 2,
+  "darshana/vedanta/vishishtadvaita/uttamur_viraraghavachariar/bhashyartha_darpana/bhashya": 7,
+  "darshana/vedanta/vishishtadvaita/uttamur_viraraghavachariar/shruta_prakashika_edition/bhashya": 2,
   "darshana/vedanta/vishishtadvaita/vedanta_desika/adhikarana_saravali/mula": 166,
   "darshana/yoga/sutra_and_bhashya/yoga_sutra/bhashya_vyasa": 785,
   "darshana/yoga/sutra_and_bhashya/yoga_sutra/mula": 186,

@@ -1306,6 +1306,12 @@
         "_schema": "grantha_mula_text",
         "_default_author": "Sri Ramanujacharya"
        }
+      },
+      "nitya_grantha": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "Sri Ramanujacharya"
+       }
       }
      },
      "sri_bhashya": {
@@ -1367,6 +1373,12 @@
        "_schema": "grantha_tika_text",
        "_default_author": "Sudarshana Suri"
       }
+     },
+     "shruta_prakashika": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Sudarshana Suri"
+      }
      }
     },
     "vedanta_desika": {
@@ -1374,6 +1386,126 @@
       "mula": {
        "_schema": "grantha_mula_text",
        "_default_author": "Vedanta Desika"
+      }
+     }
+    },
+    "ahobila_yati_34": {
+     "adhikarana_saravali_padayojana": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "34th Ahobila Yati"
+      }
+     },
+     "pada_yojana_bhumika": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "34th Ahobila Yati"
+      }
+     }
+    },
+    "deshikacharya": {
+     "adhikarana_ratnamala": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Deshikacharya"
+      }
+     }
+    },
+    "devanathan": {
+     "shribhashya_bhavaprakasha": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "K.E. Devanathan"
+      }
+     }
+    },
+    "kumara_varada": {
+     "adhikarana_saravali_vyakhya": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Kumara Varada"
+      }
+     }
+    },
+    "lakshmipuram_srinivasacharya": {
+     "bhushanam": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Lakshmipuram Srinivasacharya"
+      }
+     },
+     "nayasangatimalika": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Lakshmipuram Srinivasacharya"
+      }
+     },
+     "nyaya_kalapa_sangraha": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Lakshmipuram Srinivasacharya"
+      }
+     }
+    },
+    "mukkur_yatindra": {
+     "brahmasutrartha_padyamalika": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Mukkur Yatindra"
+      }
+     }
+    },
+    "perukkaranai_chakravarti": {
+     "sri_bhashya_sariraka_mimamsa_bhashya": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Perukkaranai Chakravarti"
+      }
+     }
+    },
+    "rajagopala": {
+     "brahmasutrartha_padyamalika": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Rajagopala"
+      }
+     }
+    },
+    "ramabhadracharya": {
+     "nitya_grantha_vivrti": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Ramabhadracharya"
+      }
+     }
+    },
+    "ramanuja_tatacharya": {
+     "nyaya_kalapa_sangraha": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Ramanuja Tatacharya"
+      }
+     }
+    },
+    "seneshvara": {
+     "nyaya_kalapa_sangraha": {
+      "mula": {
+       "_schema": "grantha_mula_text",
+       "_default_author": "Seneshvara"
+      }
+     }
+    },
+    "uttamur_viraraghavachariar": {
+     "bhashyartha_darpana": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Uttamur Viraraghavachariar"
+      }
+     },
+     "shruta_prakashika_edition": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Uttamur Viraraghavachariar"
       }
      }
     }

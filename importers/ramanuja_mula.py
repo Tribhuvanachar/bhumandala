@@ -62,10 +62,26 @@ FRONTMATTER = re.compile(r"^\+\+\+\s*\ntitle\s*=\s*\"(.*?)\"\s*\n\+\+\+\s*\n", r
 DETAILS_TAG = re.compile(r"</?details[^>]*>|</?summary[^>]*>", re.I)
 MD_HEADER = re.compile(r"^#{1,6}\s*", re.M)
 MD_BOLD = re.compile(r"\*\*(.*?)\*\*", re.S)
+# A handful of later authors' sources have an odd total count of "**" (a
+# forgotten close somewhere upstream), leaving one unpaired after MD_BOLD
+# above has paired up the rest -- and separately, a bare "***" thematic-break
+# divider (standard Markdown, unrelated to bold). Both stripped as a
+# fallback, run after MD_BOLD. NOT extended to a single "*": several of
+# these printed editions use a lone asterisk as the source's own footnote-
+# reference marker (confirmed genuine -- checked directly against several
+# already-imported works before narrowing this to 2-3 only), so stripping
+# it would delete real editorial apparatus, not markup noise.
+MD_STRAY_ASTERISKS = re.compile(r"\*{2,3}")
 # The site's own inline-gloss shortcode, e.g. "+++(=viShNu-pUjaika-chittasya)+++"
 # -- an editorial parenthetical aside, not the TOML frontmatter delimiter
 # (which only ever appears once, matched whole by FRONTMATTER above).
 HUGO_GLOSS = re.compile(r"\+\+\+\((.*?)\)\+\+\+", re.S)
+# A one-sided variant of the same shortcode seen in nitya-granthaH, e.g.
+# "chetanAchetana+++(->prakRti-kAla-nitya-vibhUtayaH)-svarUpa..." -- opens
+# with "+++(" but never closes with a matching "+++", just a bare ")".
+# Applied AFTER HUGO_GLOSS above, so it only catches what the paired form
+# didn't already consume.
+HUGO_GLOSS_UNPAIRED = re.compile(r"\+\+\+\(([^)]*)\)")
 # A citation quote hyperlinked out to an external site, e.g.
 # "[yenAxaraM puruShaM veda...](http://srivaishnavan.com/...)" -- the bracket
 # text is a genuine Sanskrit quote (found in sri_bhashya and vedartha_sangraha,
@@ -85,6 +101,26 @@ MD_LINK = re.compile(r"\[([^\]]*)\]\([^)]*\)")
 # -- "reads"/"omitted" as bare Latin substrings can't occur inside genuine
 # Devanagari text.
 VARIANT_NOTE = re.compile(r"\([^()]*(?:reads?|omitted)[^()]*\)", re.I)
+# The site's own draft-status marker: bracketed, e.g. "[[TODO: aparishkRtam]]"
+# (unrefined) or "[TODO: parishkAryam]" (needs polishing) -- content runs up
+# to the closing bracket(s), so this form can be multiple words; OR bare,
+# e.g. "TODO: MISSING??" with no brackets at all -- limited to one token
+# since there's no bracket to mark where the note ends. Both forms seen
+# across later authors' files. Editorial metadata about the transcription's
+# state, not the text itself.
+TODO_MARKER = re.compile(r"\[{1,2}\s*TODO\s*:[^\]]*\]{1,2}|TODO\s*:\s*\S+", re.I)
+# A standalone citation line, e.g. "source: [TW](url)" or "Source: [TW double
+# page scan](url)", right after the frontmatter in several later authors'
+# files. MD_LINK above already strips the URL, leaving "source: TW" as
+# plain text -- this catches the citation line as a whole (run first).
+SOURCE_LINE = re.compile(r"^\s*[Ss]ource\s*:.*$", re.M)
+# A Markdown footnote -- definition ("[^12]: The text quotes from ...") or
+# inline reference ("...as shown[^12]") -- seen in Devanathan's 2006 book,
+# a proper modern academic edition with real footnote apparatus. The
+# footnote body is English scholarly commentary, not Sanskrit; dropped from
+# sanskrit_text on that basis like Thibaut's/Clooney's English elsewhere.
+MD_FOOTNOTE_DEF = re.compile(r"^\[\^\d+\]:.*$", re.M)
+MD_FOOTNOTE_REF = re.compile(r"\[\^\d+\]")
 DASH_RUN = re.compile(r"[–—-]{3,}")
 # vedAnta-sAraH's very last file appends, after the traditional "the whole
 # treatise is concluded" line, a scribal donor-dedication note in Tamil
@@ -99,12 +135,18 @@ VERSE_MARKER = re.compile(r"॥\s*(\d+)\s*॥")
 
 
 def strip_markup(body):
+    body = SOURCE_LINE.sub(" ", body)
+    body = MD_FOOTNOTE_DEF.sub(" ", body)
+    body = MD_FOOTNOTE_REF.sub(" ", body)
     body = HUGO_GLOSS.sub(r"(\1)", body)
+    body = HUGO_GLOSS_UNPAIRED.sub(r"(\1)", body)
     body = MD_LINK.sub(r"\1", body)
     body = VARIANT_NOTE.sub(" ", body)
+    body = TODO_MARKER.sub(" ", body)
     body = DETAILS_TAG.sub(" ", body)
     body = MD_HEADER.sub("", body)
     body = MD_BOLD.sub(r"\1", body)
+    body = MD_STRAY_ASTERISKS.sub(" ", body)
     body = DASH_RUN.sub(" ", body)
     m = WORK_CONCLUDED.search(body)
     if m:
