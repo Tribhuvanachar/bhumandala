@@ -555,6 +555,22 @@ window.dgeMakeFloatingDraggable = function (el, storageKey) {
 // a chrome-free screen they didn't ask for this time.
 window.dgeToggleImmersiveMode = function (force) {
     var enable = (typeof force === 'boolean') ? force : !document.body.classList.contains('dge-immersive');
+    if (enable) {
+        // "Full Screen Reading" is only reachable from inside the Display
+        // sheet, so entering immersive mode ALWAYS starts with at least
+        // one popup open. Actually closing it (not just CSS-hiding it
+        // behind body.dge-immersive's chrome rules) matters for two
+        // reasons: a .popup-sheet's :has(.show) backdrop dimmer (see
+        // main.css) is driven purely by the .show class, so a hidden-but-
+        // still-.show sheet would leave that dark backdrop rendering over
+        // the "clean" immersive view; and without this, exiting immersive
+        // mode would silently leave the sheet/drawer sitting open again,
+        // right where it was tapped from.
+        document.querySelectorAll('.popup.show').forEach(function (p) { p.classList.remove('show'); });
+        document.querySelectorAll('.modal-overlay.show').forEach(function (m) {
+            if (typeof closeModal === 'function') closeModal(m.id); else m.style.display = 'none';
+        });
+    }
     document.body.classList.toggle('dge-immersive', enable);
 };
 
