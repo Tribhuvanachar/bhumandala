@@ -145,9 +145,13 @@
 .dn-cluster{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel)}
 .dn-cluster.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
 .dn-cluster.dn-none{opacity:.55}
-.dn-arrow{border:0;background:transparent;color:var(--ink);font-size:17px;line-height:1;padding:8px 11px;cursor:pointer;min-width:44px;min-height:44px}
-.dn-arrow:active{background:var(--panel2)}
-.dn-label{border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;font-size:13.5px;padding:8px 10px;cursor:pointer;min-height:44px;white-space:nowrap}
+/* 24 Aug 2026: .dn-arrow (each cluster's own prev/next pair -- a real
+   3rd/4th stepping control, redundant with nav-top/nav which already
+   step whichever order is active) removed per the project lead's direct
+   clutter report; .dn-label is now the only child of .dn-cluster, so its
+   left/right borders (previously separating it from the flanking arrows)
+   are gone too -- .dn-cluster's own border is enough on its own now. */
+.dn-label{border:0;background:transparent;color:var(--ink);font:inherit;font-size:13.5px;padding:8px 10px;cursor:pointer;min-height:44px;white-space:nowrap}
 .dn-cluster.on .dn-label{background:var(--accent);color:#fff}
 .dn-chapters{border:1px solid var(--line);background:var(--panel);border-radius:10px;color:var(--ink);font:inherit;font-size:13.5px;padding:8px 12px;cursor:pointer;min-height:44px}
 .chp-list{max-height:min(62vh,560px);overflow:auto;margin-top:8px;display:flex;flex-direction:column;gap:4px;-webkit-overflow-scrolling:touch}
