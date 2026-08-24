@@ -1297,6 +1297,42 @@
       "bhashya": {}
      }
     }
+   },
+   "vishishtadvaita": {
+    "ramanuja_bhashya": {
+     "gadya_traya": {
+      "sharanagati_gadyam": {
+       "mula": {
+        "_schema": "grantha_mula_text",
+        "_default_author": "Sri Ramanujacharya"
+       }
+      }
+     },
+     "sri_bhashya": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Sri Ramanujacharya"
+      }
+     },
+     "vedanta_dipa": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Sri Ramanujacharya"
+      }
+     },
+     "vedanta_sara": {
+      "bhashya": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "Sri Ramanujacharya"
+      }
+     },
+     "vedartha_sangraha": {
+      "mula": {
+       "_schema": "grantha_mula_text",
+       "_default_author": "Sri Ramanujacharya"
+      }
+     }
+    }
    }
   },
   "nyaya": {

@@ -829,6 +829,42 @@
       "title": "Bhashya"
     },
     {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/brihadaranyaka_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/chandogya_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/isha_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/mandukya_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/prashna_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/taittiriya_upanishad/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
       "path": "dge/data/darshana/vedanta/dvaita/sarvamula/achara_and_ancillary_granthas/jayanti_nirnaya/mula/data.json",
       "populated": true,
       "title": "जयन्तीनिर्णयः"
@@ -1427,6 +1463,36 @@
       "path": "dge/data/darshana/vedanta/dvaita/sarvamula/upanishad_prasthana/taittiriyopanishad_bhashya/tippani/data.json",
       "populated": false,
       "title": "तैत्तिरीयोपनिषद्भाष्यम् (टिप्पणी)"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/vishishtadvaita/ramanuja_bhashya/gadya_traya/sharanagati_gadyam/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/vishishtadvaita/ramanuja_bhashya/sri_bhashya/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/vishishtadvaita/ramanuja_bhashya/vedanta_dipa/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/vishishtadvaita/ramanuja_bhashya/vedanta_sara/bhashya/data.json",
+      "populated": true,
+      "title": "Bhashya",
+      "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/vishishtadvaita/ramanuja_bhashya/vedartha_sangraha/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-24"
     },
     {
       "path": "dge/data/darshana/yoga/sutra_and_bhashya/yoga_sutra/bhashya_vyasa/data.json",
@@ -8318,42 +8384,6 @@
       "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/upanishad/isha_upanishad/data.json",
       "populated": false,
       "title": "Isha Upanishad"
-    },
-    {
-      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/brihadaranyaka_upanishad/bhashya/data.json",
-      "populated": true,
-      "title": null,
-      "addedAt": "2026-08-24"
-    },
-    {
-      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/chandogya_upanishad/bhashya/data.json",
-      "populated": true,
-      "title": null,
-      "addedAt": "2026-08-24"
-    },
-    {
-      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/isha_upanishad/bhashya/data.json",
-      "populated": true,
-      "title": null,
-      "addedAt": "2026-08-24"
-    },
-    {
-      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/mandukya_upanishad/bhashya/data.json",
-      "populated": true,
-      "title": null,
-      "addedAt": "2026-08-24"
-    },
-    {
-      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/prashna_upanishad/bhashya/data.json",
-      "populated": true,
-      "title": null,
-      "addedAt": "2026-08-24"
-    },
-    {
-      "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/taittiriya_upanishad/bhashya/data.json",
-      "populated": true,
-      "title": null,
-      "addedAt": "2026-08-24"
     }
   ]
 }

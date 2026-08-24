@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1828,
-  "loaded": 1170,
-  "items": 605249
+  "leaves": 1833,
+  "loaded": 1175,
+  "items": 605960
  },
  "sections": {
   "agama": {
@@ -12,9 +12,9 @@
    "items": 43549
   },
   "darshana": {
-   "total": 261,
-   "loaded": 70,
-   "items": 23425
+   "total": 266,
+   "loaded": 75,
+   "items": 24136
   },
   "dasa_sahitya": {
    "total": 67,
@@ -387,6 +387,11 @@
   "darshana/vedanta/dvaita/sarvamula/upanishad_prasthana/taittiriyopanishad_bhashya/mula": 72,
   "darshana/vedanta/dvaita/sarvamula/upanishad_prasthana/taittiriyopanishad_bhashya/tika_jayatirtha": 0,
   "darshana/vedanta/dvaita/sarvamula/upanishad_prasthana/taittiriyopanishad_bhashya/tippani": 0,
+  "darshana/vedanta/vishishtadvaita/ramanuja_bhashya/gadya_traya/sharanagati_gadyam/mula": 27,
+  "darshana/vedanta/vishishtadvaita/ramanuja_bhashya/sri_bhashya/bhashya": 180,
+  "darshana/vedanta/vishishtadvaita/ramanuja_bhashya/vedanta_dipa/bhashya": 157,
+  "darshana/vedanta/vishishtadvaita/ramanuja_bhashya/vedanta_sara/bhashya": 149,
+  "darshana/vedanta/vishishtadvaita/ramanuja_bhashya/vedartha_sangraha/mula": 198,
   "darshana/yoga/sutra_and_bhashya/yoga_sutra/bhashya_vyasa": 785,
   "darshana/yoga/sutra_and_bhashya/yoga_sutra/mula": 186,
   "darshana/yoga/sutra_and_bhashya/yoga_sutra/tika_rajamartanda": 0,
