@@ -33,7 +33,15 @@ def item_count(data):
     items = data.get('items', [])
     if items and isinstance(items[0], dict) and isinstance(items[0].get('shlokas'), list):
         return sum(len(it.get('shlokas', [])) for it in items)
-    return len(items)
+    if items:
+        return len(items)
+    # vedanga_chandas_vrutta_database: a lookup table, not an items[] list --
+    # real content (282 vruttas) was reporting 0 forever, which is exactly
+    # why "Chandas" never appeared in the library browser (it excludes
+    # unpopulated entries) despite the database having shipped weeks ago.
+    if data.get('schema') == 'vedanga_chandas_vrutta_database':
+        return sum(len(v) for v in data.values() if isinstance(v, list))
+    return 0
 
 def to_slug(catalog_path):
     p = catalog_path

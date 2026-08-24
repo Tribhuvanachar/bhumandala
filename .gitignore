@@ -31,6 +31,20 @@ dge/data/_wordnet/
 # Where tools/build_wordnet.py --download parks the IndoWordNet dump.
 .cache/
 
+# The bulk of the pending Dasa Sahitya local-asset imports (Android app DB,
+# Firestore export, flat dump — see dasa_sahitya_local/ARCHITECTURE.md), same
+# reasoning as the WordNet above: ~34 MB and growing with every new asset,
+# too much for main's remaining GitHub Pages headroom. Published instead to
+# this repo's own "dasa-sahitya-local-dist" branch, re-published by
+# .github/workflows/publish-dasa-sahitya-local.yml. ARCHITECTURE.md and
+# ALL_SOURCES_composer_registry.json stay on main — small, human-authored,
+# and useful without a checkout of the dist branch. Rebuild the ignored
+# subfolders here (or checkout dasa-sahitya-local-dist) to review or continue
+# tools/dasa_sahitya/merge_confirmed_composers.py's work.
+dge/data/dasa_sahitya_local/dasa1/
+dge/data/dasa_sahitya_local/collection_padagalu/
+dge/data/dasa_sahitya_local/raw_dump/
+
 # Kavya import scratch: the report the importer writes when --report is left
 # at its default. A build artifact, like the corpus itself.
 _dump/

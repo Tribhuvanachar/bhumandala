@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v4.0 (Single-view Prev/Next: scroll position is measured a frame after the DOM rebuild settles, not immediately after — and the scroll itself is now instant, not animated-smooth, since the visible motion of a smooth scroll can itself look like reload-style jank on a quick tap)';
+window.DGE_VERSIONS['render.js'] = 'v4.3 (renderList: commentary titles now show a small "AI" badge -- dge-ai-badge, gated by core.js\'s dgeIsAiGeneratedCommentaryKey -- next to any AI-generated commentary, on top of v4.2\'s Full List pagination)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -11,6 +11,17 @@ function getText(id) {
     ? applyTransliteration(stotraData.shlokas[id].sa, activeScript)
     : stotraData.shlokas[id].sa;
 }
+
+// renderList() in "Full List" (📜) mode used to build one full DOM card per
+// matching shloka with no limit at all -- fine for something PNS-sized (43),
+// but genuinely froze/crashed a phone on a large grantha (a 2000-shloka
+// Rigveda maṇḍala's "Full List" view being the reported case). core.js
+// already forces single-view as the DEFAULT for anything over 150 shlokas,
+// but that is only a nudge: the reader can still tap "📜 Full List" in the
+// Display menu and get the exact same unbounded render. This is the actual
+// safety net -- list mode never builds more than LIST_PAGE_SIZE cards at
+// once, with Prev/Next paging through the rest.
+const LIST_PAGE_SIZE = 50;
 
 window.currentSearchScope = 'all';
 window.setSearchScope = function(scope, label, el) {
@@ -155,8 +166,20 @@ function renderList() {
 
   const singleMode = window.viewMode === 'single';
 
+  // See the LIST_PAGE_SIZE comment above -- only paginate list mode, and
+  // only once there's actually more than one page's worth to show.
+  const needsPaging = !singleMode && fIds.length > LIST_PAGE_SIZE;
+  let pageIdSet = null;
+  if (needsPaging) {
+    const maxPage = Math.max(0, Math.ceil(fIds.length / LIST_PAGE_SIZE) - 1);
+    window.dgeListPage = Math.min(Math.max(window.dgeListPage || 0, 0), maxPage);
+    const start = window.dgeListPage * LIST_PAGE_SIZE;
+    pageIdSet = new Set(fIds.slice(start, start + LIST_PAGE_SIZE));
+  }
+
   for (let i = 1; i <= total; i++) {
     if (!fIds.includes(i)) continue;
+    if (pageIdSet && !pageIdSet.has(i)) continue;
     if (singleMode && i !== window.currentReadingId) continue;
     const shloka = stotraData.shlokas[i];
     if (!shloka) continue;
@@ -238,7 +261,14 @@ function renderList() {
           const name = stotraData.metadata.availableCommentaries[cKey] || cKey;
           let convertedText = convertedCommentaries[cKey];
           let convertedName = typeof applyTransliteration === 'function' ? applyTransliteration(name, activeScript) : name;
-          commentaryHtml += `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}</div>${highlightText(convertedText, pattern)}</div>`;
+          // Small "AI" badge -- see dgeIsAiGeneratedCommentaryKey in core.js
+          // for the naming convention this checks. Distinct from (and in
+          // addition to) the "(Gemini, unreviewed)" text already baked into
+          // the label itself, since a badge is far more scannable than
+          // prose buried in a title a reader may not read closely.
+          const aiBadge = (typeof dgeIsAiGeneratedCommentaryKey === 'function' && dgeIsAiGeneratedCommentaryKey(cKey))
+            ? '<span class="dge-ai-badge" title="AI-generated -- not author-verified">AI</span>' : '';
+          commentaryHtml += `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}${aiBadge}</div>${highlightText(convertedText, pattern)}</div>`;
         }
       });
     }
@@ -266,10 +296,23 @@ function renderList() {
     // or any other text that might use "/" for something else. Applied
     // AFTER highlightText() so a search match spanning a pada boundary
     // still highlights correctly first.
-    let mulaHtml = highlightText(mulaDisplayText, pattern);
+    // Gemini-enrichment footnotes (see dge/js/footnote-engine.js) are only
+    // meaningful against the Devanagari the enrichment was computed from —
+    // quoted_text/segments are stored verbatim in Devanagari, so on any
+    // other display script this falls back to plain highlighted text rather
+    // than risk mismatched markers.
+    let footnoteResult = null;
+    if (shloka.geminiEnrichment && (!window.activeScript || window.activeScript === 'devanagari') &&
+        typeof window.DGEFootnotes !== 'undefined') {
+      footnoteResult = window.DGEFootnotes.render(shloka.geminiEnrichment);
+    }
+
+    let mulaHtml = highlightText(footnoteResult ? footnoteResult.html : mulaDisplayText, pattern);
     if (shloka.vedicId) {
       mulaHtml = mulaHtml.replace(/\s*\/\s*/g, '<br>');
     }
+    const footnoteListHtml = footnoteResult
+      ? `<div class="dge-fn-block">${footnoteResult.footnotesHtml}</div>` : '';
 
     c.innerHTML = `
       ${cardActionsHtml}
@@ -279,6 +322,7 @@ function renderList() {
         ${window.dgeContentEditMode ? `<button class="btn-icon" title="Edit this shloka's text" onclick="event.stopPropagation(); window.dgeInlineEditShloka(${i})">✏️</button>` : ''}
         <button class="btn-icon copy-shloka-btn" title="Copy shloka text" onclick="event.stopPropagation(); if(typeof copyShlokaText==='function') copyShlokaText(${i})">📋</button>
       </div>
+      ${footnoteListHtml}
       ${extraFieldsHtml}
       ${commentaryHtml}`;
     listEl.appendChild(c);
@@ -294,7 +338,32 @@ function renderList() {
   }
 
   dgeUpdateSingleViewNav(fIds);
+  dgeUpdateListViewNav(fIds, needsPaging);
 }
+
+function dgeUpdateListViewNav(fIds, needsPaging) {
+  const nav = document.getElementById('listViewNav');
+  if (!nav) return;
+  if (!needsPaging) { nav.style.display = 'none'; return; }
+  const total = fIds.length;
+  const maxPage = Math.max(0, Math.ceil(total / LIST_PAGE_SIZE) - 1);
+  const page = window.dgeListPage || 0;
+  const startN = page * LIST_PAGE_SIZE + 1;
+  const endN = Math.min((page + 1) * LIST_PAGE_SIZE, total);
+  nav.style.display = 'flex';
+  nav.innerHTML = `
+    <button class="btn-sm" onclick="window.dgeListViewStep(-1)" ${page <= 0 ? 'disabled' : ''}>⟨ Prev</button>
+    <span style="font-weight:700; font-size:13px;">${startN}–${endN} of ${total.toLocaleString()} (page ${page + 1}/${maxPage + 1})</span>
+    <button class="btn-sm" onclick="window.dgeListViewStep(1)" ${page >= maxPage ? 'disabled' : ''}>Next ⟩</button>
+  `;
+}
+
+window.dgeListViewStep = function(dir) {
+  window.dgeListPage = (window.dgeListPage || 0) + dir;
+  renderList();
+  const nav = document.getElementById('listViewNav');
+  if (nav) nav.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
 
 // ---------------------------------------------------------------
 // Single-shloka "one at a time" view mode — a separate reading position

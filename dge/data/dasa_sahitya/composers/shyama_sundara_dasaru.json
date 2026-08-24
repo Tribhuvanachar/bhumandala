@@ -14,7 +14,8 @@
       "composer": "Shyama Sundara Dasaru",
       "deity": "",
       "tags": [
-        "composer:Shyama Sundara Dasaru"
+        "composer:Shyama Sundara Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -79,7 +80,8 @@
       "deity": "Ganapathi",
       "tags": [
         "composer:Shyama Sundara Dasaru",
-        "deity:Ganapathi"
+        "deity:Ganapathi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -205,7 +207,8 @@
       "deity": "Shiva",
       "tags": [
         "composer:Shyama Sundara Dasaru",
-        "deity:Shiva"
+        "deity:Shiva",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -310,7 +313,8 @@
       "deity": "Mahalakshmi",
       "tags": [
         "composer:Shyama Sundara Dasaru",
-        "deity:Mahalakshmi"
+        "deity:Mahalakshmi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -467,7 +471,8 @@
       "deity": "Ranganatha",
       "tags": [
         "composer:Shyama Sundara Dasaru",
-        "deity:Ranganatha"
+        "deity:Ranganatha",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -629,7 +634,8 @@
       "deity": "Hanuma",
       "tags": [
         "composer:Shyama Sundara Dasaru",
-        "deity:Hanuma"
+        "deity:Hanuma",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -701,7 +707,8 @@
       "deity": "Gowri",
       "tags": [
         "composer:Shyama Sundara Dasaru",
-        "deity:Gowri"
+        "deity:Gowri",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -801,7 +808,8 @@
         "composer:Shyama Sundara Dasaru",
         "on:Jagannatha Dasaru",
         "suladi_index:Suladi Index",
-        "yati:Jagannatha Dasaru"
+        "yati:Jagannatha Dasaru",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -1133,7 +1141,8 @@
         "composer:Shyama Sundara Dasaru",
         "on:Vijayadasaru",
         "suladi_index:Suladi Index",
-        "yati:Vijayadasaru"
+        "yati:Vijayadasaru",
+        "form:suladi"
       ],
       "raga": "",
       "tala": "",
@@ -1544,7 +1553,8 @@
       "tags": [
         "composer:Shyama Sundara Dasaru",
         "on:Jaya Theertharu",
-        "yati:Jaya Theertharu"
+        "yati:Jaya Theertharu",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1641,7 +1651,8 @@
       "composer": "Shyama Sundara Dasaru",
       "deity": "",
       "tags": [
-        "composer:Shyama Sundara Dasaru"
+        "composer:Shyama Sundara Dasaru",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",

@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha.js'] = 'v1.3 (per-reader kosha order, hide, collapse, filter/sort, Gemini quick actions)';
+  window.DGE_VERSIONS['kosha.js'] = 'v1.5 (new window.dgeKoshaQuick(word) -- a data-only lookup, same ranking/filtering as the full overlay, for embedding a few results inline in another surface, e.g. the Shabda word-tool modal in ai.js)';
 
   // Citation-form normalizer: strip a trailing visarga (H) / anusvara (M) from
   // an SLP1 headword so dictionaries that cite the nominative (रामः = rAmaH) or
@@ -334,6 +334,24 @@
       return order.map(function (s) { return bySlug[s]; });
     });
   }
+
+  // Quick, data-only lookup for embedding a few dictionary results directly
+  // inside another surface (the Shabda word-tool modal, ai.js) without
+  // opening the full कोश overlay -- same ranking/filtering/hiding the
+  // overlay itself uses (search + loadEntry + applyUserOrder + the admin's
+  // hiddenDicts), just returned as data instead of built into DOM. Resolves
+  // to null when nothing matches at all.
+  window.dgeKoshaQuick = function (word) {
+    return search(word).then(function (r) {
+      if (!r.list.length) return null;
+      var g = r.list[0];
+      return loadEntry(g).then(function (perDict) {
+        var hidden = {}; hiddenDicts().forEach(function (s) { hidden[s] = 1; });
+        var visible = perDict.filter(function (d) { return !hidden[d.slug]; });
+        return { hw: g.hw, dictCount: g.dictCount, perDict: applyUserOrder(visible) };
+      });
+    });
+  };
 
   // ---- BYOK Gemini translate pivot -----------------------------------------
   // Delegates to the shared window.DGEGemini client (js/gemini.js) for human
@@ -822,6 +840,7 @@
       '<div class="kosha-body"><div class="kosha-res" id="kosha-res"></div><div class="kosha-detail" id="kosha-detail">' +
       '<div class="kosha-empty">Type a headword to look it up across every dictionary.</div></div></div>';
     document.body.appendChild(fab); document.body.appendChild(ov);
+    if (typeof window.dgeMakeFloatingDraggable === 'function') window.dgeMakeFloatingDraggable(fab, 'kosha');
     var input = ov.querySelector('#kosha-q'), res = ov.querySelector('#kosha-res'), detail = ov.querySelector('#kosha-detail');
     fab.onclick = function () { ov.classList.add('open'); input.focus(); };
 

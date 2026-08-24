@@ -1,12 +1,20 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v6.0 (Extra shloka fields for Vedic content: vedicId/rishi/devata/chandas/padapatha)';
+window.DGE_VERSIONS['config.js'] = 'v6.1 (new appConfig.showCopyrightGatedCommentaries, default false -- gates the unlicensed Mahabharata Kannada translation/Tatparya Nirnaya text; see core.js\'s dgeVisibleCommentaries)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
   designedBy: "- 3BU1 -",
   showDesignedBy: true, // set false to hide the credit line entirely instead of just changing its text
+  // The Mahabharata Kannada translation + Madhvacharya's Tatparya Nirnaya
+  // excerpts interleaved in it carry no license anywhere (extracted from a
+  // Pejawar Matha Android app's asset bundle) -- see core.js's
+  // dgeVisibleCommentaries for the full reasoning. Default false: readers
+  // do not see this content until licensing is confirmed one way or
+  // another. A super-admin can flip this in Settings if that confirmation
+  // ever comes through, or to review the actual text while chasing it down.
+  showCopyrightGatedCommentaries: false,
   contactEmail: "sanatanavidyagurukulam@gmail.com",
   sarvamoolaProjectText: "Support the Sarvamoola Digitisation & Educational Project",
   geminiModel: "gemini-3.6-flash",
@@ -55,16 +63,14 @@ const appConfig = {
   // serve a half-written index -- which means reindex.yml publishing a new one
   // changes nothing for readers until this line is bumped to that commit. If a
   // freshly merged grantha browses but does not search, this is why.
-  // Bumped for build_search_index.py's snippet() fix (2000-char stored
-  // snippets instead of a 140-char prefix, so global search can actually
-  // highlight a match that falls deeper into a long passage). NOTE for
-  // whoever merges PR #78 (dge-search.js's one-file-per-trigram rewrite,
-  // still open): its own already-published search-dist state was a
-  // SEPARATE reindex.yml run from this one and this run's publish
-  // overwrote it (search-dist keeps one squashed commit, not history) --
-  // the improved code is safe in that PR's branch, just re-run reindex.yml
-  // once it merges so this pin picks up both fixes together.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@3775f74b4ac3d18919d08719eef6eae5c8f69a7b",
+  // 21 Aug 2026: re-ran reindex.yml from this branch to combine the
+  // one-file-per-trigram + section-partitioned postings rewrite with main's
+  // independent boundary-trigram ranking fix and the snippet() length
+  // increase -- 998 granthas, 105,138 units, 59,557 trigrams. Verified live
+  // over this exact commit before pinning: राम/कृष्ण/धर्म all return correct
+  // 0.97-confidence hits, and section-scoped queries (itihasa, darshana)
+  // return only that section's granthas.
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@71b7c27bbda6060e3706ab2bd6ca57d72c91877b",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read

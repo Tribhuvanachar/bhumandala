@@ -1,15 +1,27 @@
 /* ==========================================================================
- * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.3.0
+ * DGE · Ashtadhyayi module  (additive, non-destructive)  v1.6.1
+ *   v1.6.1 — admin/content/ashtadhyayi-layers.json: a site-wide, admin-level
+ *            visibility gate on commentary layers and enrichment fields
+ *            (distinct from each reader's own layer toggle), fetched fresh
+ *            on every load. Ships with the ashtadhyayi.com English gloss
+ *            field turned off (see dge/PENDING.md, 23 Aug) -- its data was
+ *            also stripped from sutrapatha/data.json, not just hidden here.
  *   v1.2.0 — Stream 5: +Siddhānta-Kaumudī, +Mahābhāṣya, +Vasu(Eng) layers;
  *            padaccheda / anvaya / anuvṛtti / adhikāra / sūtra-type analysis panel.
  *   v1.2.1 — re-applied the shared DGEGemini client to askGemini() (Stream 5's
  *            delivery predated it and had reverted to a raw fetch call).
  *   v1.2.2 — aiLang now defaults from the main reader's onboarding language
  *            preference (dge_lang_pref) instead of always starting at "en".
- *   v1.3.0 — Siddhānta-Kaumudī reading-order navigation (partial: only the
- *            ~28% of sutras whose Kaumudi citation matches this repo's own
- *            sutrapatha text exactly, see kaumudi_order/data.json), plus a
- *            per-sutra "cited as Kaumudi #N" badge whenever it's known.
+ *   v1.3.0 — Siddhānta-Kaumudī reading-order navigation (partial, ~28%).
+ *   v1.3.1 — resolveSkRefs(): "<{SK###}>" markers rendered as plain
+ *            parenthetical citations (superseded by linkSkRefs in v1.5.0).
+ *   v1.4.0 — full SK mapping (3961/3962, kaumudi_order v2): dual-order
+ *            header (AK ‹› | कौमुदी ‹›), 70-prakarana drawer, LSK badge,
+ *            jump box takes "sk 350"/"lsk 32".
+ *   v1.5.0 — anuvritti/adhikara as tappable jumps + forward traces
+ *            (governs-through / carried-into); SK self-citations
+ *            (<{SK354}> raw markup) rendered as live कौमुदी links;
+ *            corpus-usage search button; ✏️ sutra-correction report.
  *
  * Blended Read⇄Compare UI for the Paninian sutrapatha + commentary layers
  * (Kashika / Balamanorama / Tattvabodhini / Nyasa), with a REAL Gemini
@@ -44,6 +56,28 @@
   var ORDER = ["kashika","siddhanta_kaumudi","mahabhashya","balamanorama","tattvabodhini","nyasa","vasu"];
   var INMEM = !!window.DGE_INMEM || !!window.DGE_SAMPLE;
 
+  // Site-wide, admin-level gate on which commentary layers (and which
+  // per-sutra enrichment fields, e.g. the removed ashtadhyayi.com English
+  // gloss) are even offered to a reader at all -- see
+  // admin/content/ashtadhyayi-layers.json's own _readme for why this is a
+  // separate thing from state.enabled below (that one is each reader's own
+  // preference among whichever layers THIS gate already approved). Fetched
+  // fresh on every load, no caching, so an admin toggle takes effect for
+  // every visitor without a code deploy. Defaults to "everything visible"
+  // if the config can't be reached, so a fetch hiccup never silently hides
+  // real content -- the config is a deny-list applied on top of ORDER, not
+  // the thing that has to succeed for the reader to see anything.
+  var siteVisibleFields = {};
+  function loadLayerVisibility(){
+    return fetchJSON("../admin/content/ashtadhyayi-layers.json?t=" + Date.now()).then(function(cfg){
+      var layers = (cfg && cfg.layers) || {};
+      ORDER = ORDER.filter(function(k){ return !(layers[k] && layers[k].visible === false); });
+      siteVisibleFields = (cfg && cfg.fields) || {};
+    }).catch(function(){ /* unreachable -- leave ORDER/siteVisibleFields at their defaults */ });
+  }
+  // Per-sutra enrichment field (not a layer/data.json), gated the same way.
+  function fieldVisible(key){ return !(siteVisibleFields[key] && siteVisibleFields[key].visible === false); }
+
   var LS = {
     get: function(k, d){ try { if(INMEM) return (mem[k]!==undefined?mem[k]:d); var v=localStorage.getItem("dge.ash."+k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
     set: function(k, v){ try { if(INMEM){mem[k]=v;return;} localStorage.setItem("dge.ash."+k, JSON.stringify(v)); }catch(e){} }
@@ -57,13 +91,16 @@
     mode: LS.get("mode", "read"),
     font: LS.get("font", 17),
     collapsed: {},
-    // Siddhanta Kaumudi's own reading order -- byId maps a sutra id to its
-    // Kaumudi sequence number (kaumudi_order/data.json), list is those ids
-    // sorted by that number. Deliberately partial (see that file's own
-    // _readme): only sutras where Kaumudi restates the exact same words are
-    // in here, so navMode:"kaumudi" walks a real but incomplete sequence,
-    // not a guess at the ~63% this data doesn't confirm.
-    kaumudi: { byId: {}, list: [] },
+    // Siddhanta Kaumudi's reading order -- byId maps a sutra id to its
+    // entry {kaumudiIndex, laghu?, chapter?} (kaumudi_order/data.json v2,
+    // essentially complete: 3961 of 3962 sutras), list is those ids sorted
+    // by kaumudiIndex, chapters the 70 traditional prakaranas.
+    kaumudi: { byId: {}, list: [], chapters: [] },
+    // id -> [ids] whose anuvritti names this sutra as a source; the forward
+    // half of the anuvritti trace, inverted once at boot. adhikaraInto is
+    // the same for adhikara headings: how far this sutra's rule governs.
+    anuvrittiInto: {},
+    adhikaraInto: {},
     navMode: LS.get("navMode", "ashtadhyayi")
   };
 
@@ -91,6 +128,18 @@
     return fetchJSON(BASE+"sutrapatha/data.json").then(function(d){
       state.sutras = d.items||[];
       state.sutras.forEach(function(it){ state.byId[it.id]=it; });
+      // Invert anuvritti and adhikara once: which sutras carry THIS one's
+      // words forward, and how far THIS sutra's adhikara governs.
+      state.sutras.forEach(function(it){
+        (it.anuvritti||[]).forEach(function(a){
+          if(!a.from) return;
+          (state.anuvrittiInto[a.from]=state.anuvrittiInto[a.from]||[]).push(it.id);
+        });
+        (it.adhikara_refs||[]).forEach(function(r){
+          if(!r[1] || r[1]===it.id) return;
+          (state.adhikaraInto[r[1]]=state.adhikaraInto[r[1]]||[]).push(it.id);
+        });
+      });
     });
   }
   // Non-fatal, fire-and-forget: a reader browsing in plain Ashtadhyayi
@@ -98,10 +147,16 @@
   // shouldn't hold up the sutra that DID load.
   function loadKaumudiOrder(){
     return fetchJSON(BASE+"kaumudi_order/data.json").then(function(d){
-      (d.items||[]).forEach(function(it){ state.kaumudi.byId[it.id]=it.kaumudiIndex; });
+      (d.items||[]).forEach(function(it){ state.kaumudi.byId[it.id]=it; });
       state.kaumudi.list = (d.items||[]).slice().sort(function(a,b){ return a.kaumudiIndex-b.kaumudiIndex; }).map(function(it){ return it.id; });
+      state.kaumudi.chapters = d.chapters||[];
       renderHero();
     }).catch(function(){ /* fine without it */ });
+  }
+  function kaumudiOf(id){ return state.kaumudi.byId[id] || null; }
+  function chapterOf(entry){
+    if(!entry || !entry.chapter) return null;
+    return state.kaumudi.chapters[entry.chapter-1] || null;
   }
   function ensureLayer(folder){
     var L = state.layers[folder];
@@ -124,18 +179,23 @@
     $("#dge-s").textContent = tl(devnum(p[2]));
     $("#dge-hnum").textContent = row.id;
     if(state.navMode==="kaumudi" && state.kaumudi.list.length){
-      var kpos = state.kaumudi.list.indexOf(row.id);
-      $("#dge-hpos").textContent = kpos>=0 ? ("सिद्धान्तकौमुद्याम् #"+(kpos+1)) : "अद्यापि अनिश्चितम्";
-      $("#dge-htotal").textContent = state.kaumudi.list.length.toLocaleString()+" (आंशिकम्)";
+      var kent = kaumudiOf(row.id);
+      $("#dge-hpos").textContent = kent ? ("कौमुदी #"+kent.kaumudiIndex) : "कौमुद्यां नास्ति";
+      $("#dge-htotal").textContent = state.kaumudi.list.length.toLocaleString();
     } else {
       $("#dge-hpos").textContent = "#"+(state.idx+1);
       $("#dge-htotal").textContent = state.sutras.length.toLocaleString();
     }
+    renderDualNav(row);
     var kb=$("#dge-kaumudiBadge");
     if(kb){
-      var ki = state.kaumudi.byId[row.id];
-      kb.textContent = ki ? ("सिद्धान्तकौमुद्याम् क्रमः #"+ki) : "";
-      kb.style.display = ki ? "" : "none";
+      var ke = kaumudiOf(row.id);
+      var kch = chapterOf(ke);
+      var t = ke ? ("सिद्धान्तकौमुद्याम् #"+ke.kaumudiIndex
+                    +(kch?(" · "+kch.name):"")
+                    +(ke.laghu?(" · लघुकौमुद्याम् #"+ke.laghu):"")) : "";
+      kb.textContent = t ? tl(t) : "";
+      kb.style.display = t ? "" : "none";
     }
     var hs=$("#dge-hsutra"); hs.textContent=tl(row.sanskrit_text); hs.className="sutra "+(state.script==="iast"?"":"deva");
     $("#dge-hsutraIt").textContent = iast(row.sanskrit_text);
@@ -156,6 +216,114 @@
     $("#dge-nextTTop").textContent = nextTxt;
     renderAnalysis(row);
   }
+  /* ---------- dual navigation: Ashtadhyayi order · Kaumudi order ---------- */
+  // Two always-visible clusters, each stepping its own order; tapping a
+  // cluster's label also makes that order the one Previous/Next and the
+  // arrow keys follow. Replaces the old single toggle button, which hid
+  // the Kaumudi position unless you switched modes.
+  function renderDualNav(row){
+    var box=$("#dge-dualnav"); if(!box) return;
+    var ke = kaumudiOf(row.id);
+    var akOn = state.navMode!=="kaumudi", skOn = !akOn;
+    box.innerHTML =
+      '<span class="dn-cluster'+(akOn?' on':'')+'" data-order="ashtadhyayi">'
+      +'<button class="dn-arrow" data-nav="ak-prev" title="previous sutra (Ashtadhyayi order)">‹</button>'
+      +'<button class="dn-label" data-nav="ak-mode" title="browse in Ashtadhyayi order"><span class="deva">'+tl("अष्टाध्यायी")+'</span> '+esc(row.id)+'</button>'
+      +'<button class="dn-arrow" data-nav="ak-next" title="next sutra (Ashtadhyayi order)">›</button>'
+      +'</span>'
+      +'<span class="dn-cluster'+(skOn?' on':'')+(ke?'':' dn-none')+'" data-order="kaumudi">'
+      +'<button class="dn-arrow" data-nav="sk-prev" title="previous in Siddhanta Kaumudi order">‹</button>'
+      +'<button class="dn-label" data-nav="sk-mode" title="browse in Siddhanta Kaumudi reading order"><span class="deva">'+tl("कौमुदी")+'</span> '+(ke?devnum(ke.kaumudiIndex):"—")+'</button>'
+      +'<button class="dn-arrow" data-nav="sk-next" title="next in Siddhanta Kaumudi order">›</button>'
+      +'</span>'
+      +'<button class="dn-chapters" data-nav="chapters" title="Siddhanta Kaumudi prakarana list"><span class="deva">'+tl("प्रकरणानि")+'</span> ☰</button>';
+  }
+  function setNavMode(m){
+    state.navMode = m; LS.set("navMode", m);
+    renderHero();
+  }
+  function stepOrder(order, dir){
+    if(order==="kaumudi"){ if(state.navMode!=="kaumudi") setNavMode("kaumudi"); goKaumudi(dir); }
+    else { if(state.navMode!=="ashtadhyayi") setNavMode("ashtadhyayi"); go(state.idx+dir); }
+  }
+  /* ---------- साहित्ये प्रयोगाः (corpus usages of this sutra) ---------- */
+  // Built by tools/build_sutra_prayoga_index.py; sharded per adhyaya.
+  // Entry: [slug, unit, kind(quote|ref), rank, snippet, title].
+  var prayogaCache = {};
+  var PRAYOGA_RANKS = ["सर्वमूलम्", "द्वैतवेदान्तग्रन्थाः", "दाससाहित्यम्", "अन्यग्रन्थाः"];
+  function prettySlug(slug){
+    var parts=slug.split("/");
+    return parts.slice(-2).join(" › ").replace(/_/g," ");
+  }
+  function openPrayoga(){
+    var row=state.sutras[state.idx]; if(!row) return;
+    var m=$("#dge-prayogaModal"), body=$("#dge-prayogaBody"); if(!m||!body) return;
+    var adhyaya=row.id.split(".")[0];
+    body.innerHTML='<h4 class="deva">'+tl("साहित्ये प्रयोगाः")+' · '+esc(row.id)+'</h4><div class="an-empty">…</div>';
+    m.classList.add("open"); $("#dge-backdrop").classList.add("open");
+    var p = prayogaCache[adhyaya] ||
+      (prayogaCache[adhyaya]=fetchJSON(BASE+"prayoga_index/a"+adhyaya+".json").catch(function(){ return {}; }));
+    p.then(function(d){
+      var ent=d[row.id];
+      var h='<h4 class="deva">'+tl("साहित्ये प्रयोगाः")+' · '+esc(row.id)
+        +' <span class="deva" style="font-weight:400;color:var(--muted)">'+esc(tl(row.sanskrit_text))+'</span></h4>';
+      if(ent && ent.e && ent.e.length){
+        h+='<div class="pry-count">'+ent.n+' usages across the library'
+          +(ent.n>ent.e.length?' · showing the first '+ent.e.length:'')+'</div>';
+        var byRank={};
+        ent.e.forEach(function(e){ (byRank[e[3]]=byRank[e[3]]||[]).push(e); });
+        [0,1,2,3].forEach(function(rk){
+          var list=byRank[rk]; if(!list) return;
+          h+='<div class="pry-grp deva">'+tl(PRAYOGA_RANKS[rk])+' <small>('+list.length+')</small></div>';
+          list.forEach(function(e){
+            var snip=esc(e[4]);
+            var hl=esc(row.sanskrit_text.trim());
+            if(hl && snip.indexOf(hl)!==-1) snip=snip.split(hl).join('<mark>'+hl+'</mark>');
+            h+='<button class="pry-row" data-slug="'+esc(e[0])+'" data-unit="'+esc(e[1])+'">'
+              +'<span class="pry-title deva">'+esc(e[5]||prettySlug(e[0]))
+              +(e[2]==="ref"?' <span class="pry-kind">पा.सू.</span>':'')
+              +'<span class="pry-unit">'+esc(e[1])+'</span></span>'
+              +'<span class="pry-snip deva">'+snip+'</span>'
+              +'</button>';
+          });
+        });
+      } else {
+        h+='<div class="an-empty">No indexed usages of this sutra in the library yet — '
+          +'the index covers verbatim quotations and explicit पा.सू. citations '
+          +'(rebuilt automatically as granthas are added).</div>';
+      }
+      h+='<button class="btn" id="dge-prayogaSearch" style="margin-top:12px">🔍 search the whole corpus live</button>';
+      body.innerHTML=h;
+    });
+  }
+
+  /* ---------- Kaumudi prakarana drawer ---------- */
+  function openChapters(){
+    var m=$("#dge-chaptersModal"); if(!m) return;
+    var row=state.sutras[state.idx];
+    var cur = kaumudiOf(row&&row.id);
+    var curCh = cur && cur.chapter;
+    var firstIdOf = {};
+    // items are sorted by kaumudiIndex, so the first id seen per chapter is
+    // that prakarana's opening sutra.
+    state.kaumudi.list.forEach(function(id){
+      var e=state.kaumudi.byId[id];
+      if(e && e.chapter && firstIdOf[e.chapter]===undefined) firstIdOf[e.chapter]=id;
+    });
+    var h='<h4 class="deva">'+tl("सिद्धान्तकौमुदी — प्रकरणानि")+'</h4><div class="chp-list">';
+    state.kaumudi.chapters.forEach(function(c){
+      if(!c.count) return;
+      h+='<button class="chp-row'+(c.n===curCh?' on':'')+'" data-ch="'+c.n+'" data-first="'+esc(firstIdOf[c.n]||"")+'">'
+        +'<span class="chp-n">'+devnum(c.n)+'</span>'
+        +'<span class="chp-name deva">'+tl(c.name)+'</span>'
+        +'<span class="chp-range">'+devnum(c.from)+'–'+devnum(c.to)+'</span>'
+        +'</button>';
+    });
+    h+='</div>';
+    $("#dge-chaptersBody").innerHTML=h;
+    m.classList.add("open"); $("#dge-backdrop").classList.add("open");
+    var on=m.querySelector(".chp-row.on"); if(on) on.scrollIntoView({block:"center"});
+  }
   /* ---------- padaccheda / anvaya / anuvritti (sutra analysis) ---------- */
   function renderAnalysis(row){
     var strip=$("#dge-sutrameta"), panel=$("#dge-analysis");
@@ -173,22 +341,72 @@
         +esc(row.sutra_type.label||"")+'</span>';
     }
     strip.innerHTML=s;
-    // toggle panel: anvaya, anuvritti, adhikara, English
+    // toggle panel: anvaya, anuvritti (backward + forward), adhikara, English
     var rows="";
     if(row.anvaya) rows+=arow("अन्वयः · anvaya (prose order)", '<span class="'+devCls+'">'+esc(tl(row.anvaya))+'</span>');
     if(row.anuvritti&&row.anuvritti.length){
       var av=row.anuvritti.map(function(a){
-        return '<span class="anu-w '+devCls+'">'+esc(tl(a.word))+'</span>'+(a.from?'<span class="anu-src">‹ '+a.from+'</span>':''); }).join(", ");
+        return '<span class="anu-w '+devCls+'">'+esc(tl(a.word))+'</span>'
+          +(a.from?'<button class="anu-src an-ref" data-id="'+esc(a.from)+'" title="open the sutra these words carry over from">‹ '+a.from+'</button>':''); }).join(", ");
       rows+=arow("अनुवृत्तिः · anuvṛtti (carried-over words)", av);
     }
-    if(row.adhikara) rows+=arow("अधिकारः · adhikāra (governing rule)", '<span class="'+devCls+'">'+esc(tl(row.adhikara))+'</span>');
-    if(row.english) rows+=arow("English gloss", esc(row.english));
+    // The inverse trace: which later sutras inherit THIS sutra's words.
+    // Computed once at boot from the same anuvritti data (see boot()).
+    var fwd = state.anuvrittiInto[row.id];
+    if(fwd && fwd.length){
+      var span = fwd.length<=4
+        ? fwd.map(function(id){ return '<button class="an-ref" data-id="'+esc(id)+'">'+id+'</button>'; }).join(", ")
+        : '<button class="an-ref" data-id="'+esc(fwd[0])+'">'+fwd[0]+'</button> … '
+          +'<button class="an-ref" data-id="'+esc(fwd[fwd.length-1])+'">'+fwd[fwd.length-1]+'</button>'
+          +' <span class="anu-cnt">('+fwd.length+' sūtras)</span>';
+      rows+=arow("अनुवर्तते · carried forward into", span);
+    }
+    // This sutra as an adhikara head: the span of sutras it governs.
+    var gov = state.adhikaraInto[row.id];
+    if(gov && gov.length){
+      var gspan = '<button class="an-ref" data-id="'+esc(gov[0])+'">'+gov[0]+'</button> … '
+        +'<button class="an-ref" data-id="'+esc(gov[gov.length-1])+'">'+gov[gov.length-1]+'</button>'
+        +' <span class="anu-cnt">('+gov.length+' sūtras)</span>';
+      rows+=arow("अधिकारविस्तारः · governs through", gspan);
+    }
+    if(row.adhikara_refs&&row.adhikara_refs.length){
+      var ad=row.adhikara_refs.map(function(r){
+        var t='<span class="'+devCls+'">'+esc(tl(r[0]))+'</span>';
+        return r[1] ? '<span class="adhi-item">'+t+'<button class="anu-src an-ref" data-id="'+esc(r[1])+'" title="open the sutra where this adhikara begins">‹ '+r[1]+'</button></span>' : t;
+      }).join(" · ");
+      rows+=arow("अधिकारः · adhikāra (governing rule)", ad);
+    } else if(row.adhikara){
+      rows+=arow("अधिकारः · adhikāra (governing rule)", '<span class="'+devCls+'">'+esc(tl(row.adhikara))+'</span>');
+    }
+    if(row.english && fieldVisible("english")) rows+=arow("English gloss", esc(row.english));
     panel.innerHTML=rows||'<div class="an-empty">No structured analysis on record for this sūtra.</div>';
     var hasStrip=!!s, hasPanel=!!rows;
     $("#dge-pcBtn").style.display=(hasStrip||hasPanel)?"":"none";
   }
   function arow(label, val){ return '<div class="an-row"><div class="an-k">'+label+'</div><div class="an-v">'+val+'</div></div>'; }
   function nl2br(s){ return s.replace(/\n/g,"<br>"); }
+  // The Siddhanta-Kaumudi text cites itself as raw <{SK354}> markers (and
+  // Unadi as <{उ...}>) — 748 sutras' worth rendered as literal markup
+  // until now. With the full SK mapping in hand they become live jumps:
+  // कौमुदी-३५४ opens the sutra holding that Kaumudi position. Runs on the
+  // ALREADY-ESCAPED text, so the pattern matches &lt;{SK354}&gt;.
+  function idByKaumudi(n){
+    for(var i=0;i<state.kaumudi.list.length;i++){
+      var id=state.kaumudi.list[i];
+      if(state.kaumudi.byId[id].kaumudiIndex===n) return id;
+    }
+    return null;
+  }
+  function linkSkRefs(escaped){
+    return escaped
+      .replace(/&lt;\{SK(\d+)\}(?:&gt;|>)/g, function(_, n){
+        var target=idByKaumudi(+n);
+        return target
+          ? '<button class="sk-ref" data-goto="'+esc(target)+'" title="सिद्धान्तकौमुद्याम् #'+n+' — '+esc(target)+'">कौमुदी-'+devnum(n)+'</button>'
+          : '<span class="sk-ref sk-ref-plain">कौमुदी-'+devnum(n)+'</span>';
+      })
+      .replace(/&lt;\{(उ[^}]*)\}(?:&gt;|>)/g, '<span class="sk-ref sk-ref-plain">$1</span>');
+  }
   function cardHTML(folder){
     var m=META[folder], row=state.sutras[state.idx], L=state.layers[folder];
     var isEn = m.lang==="en";
@@ -198,7 +416,7 @@
     if(!L||(!L.loaded&&L.loading)) body='<span class="dge-skel"></span><span class="dge-skel"></span><span class="dge-skel" style="width:70%"></span>';
     else if(L&&L.error) body='<span class="dge-more">could not load '+folder+'</span>';
     else { var it=L&&L.byId[row.id];
-      if(it){ body=nl2br(esc(isEn ? it.sanskrit_text : tl(it.sanskrit_text))); hasText=true; }
+      if(it){ body=linkSkRefs(nl2br(esc(isEn ? it.sanskrit_text : tl(it.sanskrit_text)))); hasText=true; }
       else body='<span class="dge-more">— no '+m.sub+' on this sutra —</span>'; }
     var lic = (L&&L.byId[row.id])?('layer: '+m.sub+' · '+m.role+' · ref → sutrapatha/'+row.id):'';
     return '<article class="dge-card '+(col?'collapsed':'')+'" data-c="'+folder+'" style="--tag:'+m.tag+'">'
@@ -357,7 +575,7 @@
 
   /* ---------- settings modal ---------- */
   function openSettings(){ var m=$("#dge-settings"); if(m){ fillModelSel(); $("#dge-keyInput").value=getKey(); $("#dge-modelSel").value=getModel(); m.classList.add("open"); $("#dge-backdrop").classList.add("open"); } }
-  function closeAll(){ $("#dge-drawer").classList.remove("open"); var s=$("#dge-settings"); if(s)s.classList.remove("open"); $("#dge-backdrop").classList.remove("open"); }
+  function closeAll(){ $("#dge-drawer").classList.remove("open"); var s=$("#dge-settings"); if(s)s.classList.remove("open"); var c=$("#dge-chaptersModal"); if(c)c.classList.remove("open"); var pmm=$("#dge-prayogaModal"); if(pmm)pmm.classList.remove("open"); $("#dge-backdrop").classList.remove("open"); }
 
   /* ---------- wire ---------- */
   // The sticky header wraps onto 2-3 rows on a narrow phone (its many
@@ -394,30 +612,113 @@
     $("#dge-nextBtn").addEventListener("click",function(){ goNav(1); });
     $("#dge-prevBtnTop").addEventListener("click",function(){ goNav(-1); });
     $("#dge-nextBtnTop").addEventListener("click",function(){ goNav(1); });
-    var navBtn=$("#dge-navModeBtn");
-    if(navBtn){
-      navBtn.classList.toggle("on", state.navMode==="kaumudi");
-      navBtn.addEventListener("click",function(){
-        state.navMode = state.navMode==="kaumudi" ? "ashtadhyayi" : "kaumudi";
-        LS.set("navMode", state.navMode);
-        navBtn.classList.toggle("on", state.navMode==="kaumudi");
-        renderHero();
-      });
-    }
+    var dn=$("#dge-dualnav");
+    if(dn) dn.addEventListener("click",function(e){
+      var b=e.target.closest("[data-nav]"); if(!b) return;
+      switch(b.dataset.nav){
+        case "ak-prev": stepOrder("ashtadhyayi",-1); break;
+        case "ak-next": stepOrder("ashtadhyayi",1); break;
+        case "ak-mode": setNavMode("ashtadhyayi"); break;
+        case "sk-prev": stepOrder("kaumudi",-1); break;
+        case "sk-next": stepOrder("kaumudi",1); break;
+        case "sk-mode": setNavMode("kaumudi"); break;
+        case "chapters": openChapters(); break;
+      }
+    });
+    var chm=$("#dge-chaptersModal");
+    if(chm) chm.addEventListener("click",function(e){
+      if(e.target.id==="dge-chaptersClose"){ closeAll(); return; }
+      var r=e.target.closest(".chp-row"); if(!r) return;
+      var id=r.dataset.first;
+      if(id && state.byId[id]){
+        closeAll();
+        if(state.navMode!=="kaumudi") setNavMode("kaumudi");
+        go(state.sutras.indexOf(state.byId[id]));
+      }
+    });
     var pc=$("#dge-pcBtn"); if(pc) pc.addEventListener("click",function(){
       var pn=$("#dge-analysis"); if(!pn) return;
       var open=pn.classList.toggle("open"); pc.classList.toggle("on",open); });
+    // Anuvritti / adhikara source references in the analysis panel jump to
+    // the sutra they name. The panel is re-rendered per sutra, so delegate.
+    var an=$("#dge-analysis"); if(an) an.addEventListener("click",function(e){
+      var b=e.target.closest(".an-ref"); if(!b) return;
+      var id=b.dataset.id;
+      if(id && state.byId[id]){ $("#dge-analysis").classList.add("open"); go(state.sutras.indexOf(state.byId[id])); }
+    });
+    // Kaumudi self-citations inside the SK layer's text (linkSkRefs).
+    var lay=$("#dge-layers"); if(lay) lay.addEventListener("click",function(e){
+      var b=e.target.closest(".sk-ref[data-goto]"); if(!b) return;
+      var id=b.dataset.goto;
+      if(state.byId[id]) go(state.sutras.indexOf(state.byId[id]));
+    });
     var wex=$("#dge-whatBtn"); if(wex) wex.addEventListener("click",function(){
       var el=$("#dge-chips"); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); });
+    // साहित्ये प्रयोगाः — where this sutra is actually used across the
+    // library, from the precomputed prayoga index (lineage-ranked:
+    // Sarvamula first, then the Dvaita corpus, then Dasa Sahitya). The
+    // live corpus search stays available as the fallback row.
+    var usage=$("#dge-usageBtn"); if(usage) usage.addEventListener("click",openPrayoga);
+    var pm=$("#dge-prayogaModal");
+    if(pm) pm.addEventListener("click",function(e){
+      if(e.target.id==="dge-prayogaClose"){ closeAll(); return; }
+      if(e.target.id==="dge-prayogaSearch"){
+        closeAll();
+        var row=state.sutras[state.idx];
+        if(row && window.DGEGlobalSearch && window.DGEGlobalSearch.open) window.DGEGlobalSearch.open(row.sanskrit_text);
+        return;
+      }
+      var r=e.target.closest(".pry-row"); if(!r) return;
+      var unit=(r.dataset.unit||"").split("#")[0];
+      location.href="index.html?path="+encodeURIComponent(r.dataset.slug)
+        +(unit?("&jumpVedicId="+encodeURIComponent(unit)):"");
+    });
+    // ✏️ report a text error — the same [DGE-CONTENT-GAP] template
+    // shabda.js/modals.js already emit, so the planned triage pipeline
+    // reads one shape (Type/Surface/Context/Page/Timestamp).
+    var fix=$("#dge-fixBtn"); if(fix) fix.addEventListener("click",function(){
+      var row=state.sutras[state.idx]; if(!row) return;
+      var email="sanatanavidyagurukulam@gmail.com";
+      var subject=encodeURIComponent("[DGE-CONTENT-GAP] sutra-correction — "+row.id);
+      var lines=["Type: sutra-correction","Surface: "+row.id,
+        "Context: "+row.sanskrit_text,
+        "Page: "+location.href.split("#")[0]+"#"+row.id,
+        "Timestamp: "+new Date().toISOString(),
+        "", "What is wrong (please describe, or paste the corrected text):", ""];
+      location.href="mailto:"+email+"?subject="+subject+"&body="+encodeURIComponent(lines.join("\n"));
+    });
     // Jump box. It used to accept an exact "1.1.1" and nothing else, and to
     // do nothing at all -- no message, no shake -- for anything it did not
     // recognise, which reads as a dead control rather than a rejected input.
     // Now any separator works (1-1-1, 1 1 1, 1,1,1), a partial reference goes
     // to the start of that adhyaya or pada, and a miss says so.
     var jump=$("#dge-jump");
+    // Devanagari digits are typed here too (the datalist is in Devanagari on
+    // some keyboards); normalize both directions once.
+    function asciiDigits(s){ return s.replace(/[\u0966-\u096f]/g,function(d){ return "\u0966\u0967\u0968\u0969\u096a\u096b\u096c\u096d\u096e\u096f".indexOf(d); }); }
     function findSutraMatch(raw){
-      raw=(raw||"").trim();
+      raw=asciiDigits((raw||"").trim());
       if(!raw) return null;
+      // "sk 350" / "k350" / "\u0915 \u0969\u096b\u0966" / "\u0915\u094c\u092e\u0941\u0926\u0940 350" jumps by Siddhanta
+      // Kaumudi position; "lsk 32"/"\u0932\u0918\u0941 32" by Laghu-Kaumudi position.
+      var m=raw.match(/^(?:lsk|\u0932\u0918\u0941(?:\u0915\u094c\u092e\u0941\u0926\u0940)?)\s*[\.\-#]?\s*(\d{1,4})$/i);
+      if(m){
+        var ln=+m[1];
+        for(var li=0;li<state.kaumudi.list.length;li++){
+          var le=state.kaumudi.byId[state.kaumudi.list[li]];
+          if(le && le.laghu===ln) return state.byId[state.kaumudi.list[li]];
+        }
+        return null;
+      }
+      m=raw.match(/^(?:sk|k|\u0915|\u0915\u094c\u092e\u0941\u0926\u0940)\s*[\.\-#]?\s*(\d{1,4})$/i);
+      if(m){
+        var kn=+m[1];
+        for(var ki=0;ki<state.kaumudi.list.length;ki++){
+          var keid=state.kaumudi.list[ki];
+          if(state.kaumudi.byId[keid].kaumudiIndex===kn) return state.byId[keid];
+        }
+        return null;
+      }
       var parts=raw.replace(/[\s,\-\u2013\u2014\u0964|]+/g,".").split(".").filter(Boolean);
       var bad=parts.some(function(x){ return !/^\d+$/.test(x); });
       if(bad||!parts.length) return null;
@@ -497,11 +798,11 @@
   function hashId(){ return decodeURIComponent((location.hash||"").replace(/^#/,"").trim()); }
   function goToHash(){
     var h=hashId();
-    if(h && state.byId[h]) go(state.sutras.indexOf(state.byId[h]));
+    if(h && state.byId[h]){ closeAll(); go(state.sutras.indexOf(state.byId[h])); }
   }
   function boot(){
     wire(); applyPrefs();
-    loadSutrapatha().then(function(){
+    loadLayerVisibility().then(loadSutrapatha).then(function(){
       if(!state.sutras.length){ $("#dge-hsutra").textContent="(no sutra data found)"; return; }
       var dl=$("#dge-sutralist");
       if(dl) dl.innerHTML = state.sutras.map(function(s){ return '<option value="'+s.id+'">'; }).join("");

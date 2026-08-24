@@ -152,17 +152,57 @@ that is still tens of megabytes, which is a branch, not a repository.
 
 ## 4. What to do, in order
 
-1. **Per-trigram postings + a document-frequency table**, and a client that
-   fetches the rarest trigrams. The 150× win, and it touches
-   `build_search_index.py` and `dge-search.js` only. Nothing about the corpus
-   or the repositories changes.
-2. **Partition the postings by section** in the same pass. Scoped search
-   becomes proportional, and a Kāvya import stops republishing the Vedas.
-3. **Scoped search in the UI**, once (1) and (2) are in: a section selector on
-   the corpus-search panel, defaulting to everything.
+1. ✅ **Per-trigram postings + a document-frequency table**, and a client that
+   fetches the rarest trigrams. **Published and live** as of 19 Aug 2026 —
+   `search-dist` at commit `f11a2e3b`, pinned in `js/config.js` and
+   `js/global-search.js`. Measured against the real corpus after publishing
+   (937 granthas, including Kāvya): राम **16.1 MB → 549 KB**, कृष्ण **6.9 MB
+   → 80 KB**, धर्म **10.0 MB → 181 KB** — matching this doc's original
+   estimate almost exactly, with correctness verified (all four test queries
+   return correct top hits at 0.97 confidence, including the Rigveda's
+   actual opening verse for "agnimILe"). The first published version had a
+   real bug — baking a `%XX` escape into filenames, which a browser's
+   `fetch()` silently mis-requests since it percent-*decodes* `%XX` in a URL
+   before sending it — caught by checking the *live* published index over
+   the CDN rather than trusting a Node-only test (which never touches URL
+   parsing), fixed, and re-verified the same way before pinning.
+2. ✅ **Partition the postings by section.** Done — `build_search_index.py`
+   writes `postings/<trigram>/<section>.json` (one file per trigram per
+   section) instead of one file per trigram; `dge-search.js`'s
+   `_loadPosting(tg, scope)` fetches just that one section's file when
+   scoped, or fans out across every section in parallel and unions the
+   results when not (`opts.section` on `.search()`). `manifest.df` stays a
+   GLOBAL count across sections — it decides which trigrams are worth
+   fetching, not which files answer them, so it didn't need to change.
+   Validated the same way as (1): real rebuild (912 granthas, 58,112
+   trigrams, 11 sections), unscoped fan-out totals came out byte-identical
+   to the pre-partition numbers above (549 KB / 80 KB / 181 KB — the
+   underlying posting data didn't grow, only the file count did), a scoped
+   search to `itihasa` returned only `itihasa/`-prefixed hits and covered
+   proportionally more of that section than the unscoped, MAX_SHARDS-capped
+   search did, and both scoped and unscoped queries were re-verified against
+   a real HTTP server forcing the browser `fetch()` code path. **Published
+   and live** — `search-dist` at `cedcc73b`, pin bumped in `js/config.js`
+   and `js/global-search.js`, re-verified over the real CDN before bumping
+   (937 granthas including Kāvya, both a scoped and an unscoped posting file
+   fetched at their real paths).
+3. ✅ **Scoped search in the UI.** Done — a "Search scope" `<select>` next
+   to the script picker on the corpus-search panel, defaulting to
+   "Everything," populated from `manifest.sections` once the index loads
+   (the list isn't known ahead of a fetch) and passed through as
+   `idx.search(q, {section})`. Changing it re-runs the current query
+   immediately. Verified end-to-end in a real headless Chromium session
+   (Playwright, not just a Node harness): the dropdown populated with all
+   11 real sections, scoping to Itihāsa returned only `itihasa/`-prefixed
+   results, and switching back to "Everything" worked. That testing pass
+   also caught and fixed a real pre-existing bug it happened to expose —
+   `open()` rebuilt the entire panel (FAB, overlay, and now the section
+   `<select>`) on every call with no guard, harmless while there was
+   nothing to populate post-load, but producing duplicate-ID `<select>`
+   elements (and a second stacked FAB button) the moment something needed
+   to fill in live data after the fact. `build()` now no-ops if the panel
+   already exists.
 4. **Leave the repository layout as it is.** Branches for derived corpora,
    repositories only for the kośa and the audio.
 
-Until (1) is done, the honest statement about corpus search is that it works
-and it is expensive: every query pays megabytes. That is worth saying out loud
-rather than discovering on a phone.
+(1), (2) and (3) are all live as of 19 Aug 2026.

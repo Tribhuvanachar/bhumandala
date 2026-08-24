@@ -33,12 +33,18 @@ def strip_html(doc):
 def data_base():
     return "dge/data" if os.path.isdir("dge/data") else ("data" if os.path.isdir("data") else "dge/data")
 
-def write_grantha(rel_path, schema, default_author, items):
+def write_grantha(rel_path, schema, default_author, items, **extra):
     folder = os.path.join(data_base(), rel_path)
     os.makedirs(folder, exist_ok=True)
     fp = os.path.join(folder, "data.json")
-    json.dump({"schema": schema, "default_author": default_author, "items": items},
-              open(fp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    # **extra lets a caller record source_url/source_note/licence alongside
+    # the text itself (the project's own standing policy: every import
+    # notes its source and licence for future reference) without every
+    # importer needing its own bespoke json.dump call.
+    doc = {"schema": schema, "default_author": default_author}
+    doc.update(extra)
+    doc["items"] = items
+    json.dump(doc, open(fp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     n = sum(len(it.get("shlokas", [])) for it in items)
     print(f"  wrote {fp}  ({len(items)} units, {n} shlokas)")
 

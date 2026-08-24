@@ -2234,6 +2234,10 @@
    "mugdhabodha_vyakarana": {},
    "dhatupatha": {
     "_schema": "vyakarana_dhatupatha"
+   },
+   "shabdapatha": {
+    "_schema": "vyakarana_shabdapatha",
+    "_note": "Not shloka-shaped, same as dhatupatha above -- opens dge/shabda.html directly (see DGE_SPECIAL_PAGES in js/library.js), never the general reader. Added to the library tree 20 Aug -- it existed as real, populated data (9007 words) and its own page, but had no taxonomy/library.json entry at all, so it was unreachable by browsing the library, only by a direct URL or the Explore popup."
    }
   },
   "shiksha": {
@@ -2298,7 +2302,8 @@
    "_schema": "vedanga_chandas_vrutta_database"
   },
   "nirukta": {},
-  "jyotisha": {}
+  "jyotisha": {},
+  "vrittaratnakara": {}
  },
  "dasa_sahitya": {
   "_schema": "dasa_pada_text",
@@ -5737,6 +5742,31 @@
     }
    }
   }
+ },
+ "upaveda": {
+  "_note": "Traditional Upaveda (subsidiary Veda) subjects, distinct from the four Vedas proper and from vedanga. Placement decision made 20 Aug 2026 (was an open question in PENDING.md) -- Ayurveda and Kamashastra grouped here as their traditional classification; Nitishastra kept as its own separate top-level section below since it is not traditionally an Upaveda.",
+  "kamashastra": {
+   "kamasutra": {},
+   "pancashayaka": {},
+   "smaradipika": {}
+  },
+  "ayurveda": {
+   "nighantu": {
+    "bhavaprakasha_nighantu": {},
+    "raja_nighantu": {},
+    "vahata_ashtanganighantu": {}
+   },
+   "madhava_nidana": {},
+   "sharngadhara_samhita": {},
+   "susruta_samhita_sutrasthana": {}
+  }
+ },
+ "nitishastra": {
+  "_note": "Worldly-wisdom/statecraft texts -- deliberately its own section rather than folded into kavya_alankara (which already held the Bhartrihari shatakas somewhat awkwardly, per the same 20 Aug placement decision noted under upaveda above).",
+  "hitopadesha": {},
+  "chanakya_niti": {},
+  "chanakya_sutra": {},
+  "kamandakiya_nitisara": {}
  },
  "misc": {
   "_schema": "grantha_mula_text",

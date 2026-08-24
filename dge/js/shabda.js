@@ -7,14 +7,42 @@
 (function () {
   "use strict";
   var URL = "data/vedanga/vyakarana/shabdapatha/data.json";
-  var CHUNK = 250;
+  var PAGE_SIZE = 20;
   var VIBHAKTI = ["प्रथमा","द्वितीया","तृतीया","चतुर्थी","पञ्चमी","षष्ठी","सप्तमी","सम्बोधनम्"];
 
   var LS = {
     get:function(k,d){ try{ var v=localStorage.getItem("dge.shabda."+k); return v===null?d:JSON.parse(v);}catch(e){return d;} },
     set:function(k,v){ try{ localStorage.setItem("dge.shabda."+k, JSON.stringify(v)); }catch(e){} }
   };
-  var state = { all:[], view:[], shown:0, script: LS.get("script","devanagari"), linga: LS.get("linga",""), q:"", openId: LS.get("open",null), highlightCell:null };
+  var state = { all:[], view:[], page:0, script: LS.get("script","devanagari"), linga: LS.get("linga",""), anta: LS.get("anta",""),
+                adi:"", upadha:"", krt:"", vac:"", q:"", openId: LS.get("open",null), highlightCell:null };
+
+  // Kṛt pratyaya display names for the प्रत्ययान्तः filter — keys are the
+  // vidyut pratyaya identifiers tools/tag_shabda_pratyaya.py wrote into the
+  // data's `krt` field.
+  var KRT_NAME = { kta:"क्त", ktavatu:"क्तवतु", Satf:"शतृ", SAnac:"शानच्",
+                   tavya:"तव्य", anIyar:"अनीयर्", yat:"यत्", Rvul:"ण्वुल्",
+                   tfc:"तृच्", lyuw:"ल्युट्" };
+  // Canonical varṇa order for the आदिः/उपधा dropdowns (SLP1 phonemes).
+  var VARNA_ORDER = "aAiIuUfFxXeEoOkKgGNcCjJYwWqQRtTdDnpPbBmyrlvSzsh";
+
+  // Stem-ending class of a headword (the "advanced filter" axis): the
+  // written final sound — a matra, an explicit virama (halanta), or the
+  // implicit अ of a bare consonant letter. Derived from the word itself,
+  // no new data needed.
+  var MATRA_ANTA = { "ा":"A","ि":"i","ी":"I","ु":"u","ू":"U","ृ":"f","ॄ":"F","े":"e","ै":"E","ो":"o","ौ":"O" };
+  var INDEP_ANTA = { "अ":"a","आ":"A","इ":"i","ई":"I","उ":"u","ऊ":"U","ऋ":"f","ॠ":"F","ए":"e","ऐ":"E","ओ":"o","औ":"O" };
+  function antaOf(word){
+    var w=String(word||"").normalize("NFC").trim();
+    if(!w) return "";
+    var last=w[w.length-1];
+    if(last==="्") return "H";                       // halanta
+    if(MATRA_ANTA[last]) return MATRA_ANTA[last];
+    if(INDEP_ANTA[last]) return INDEP_ANTA[last];
+    if(last>="क" && last<="ह") return "a";           // bare consonant → implicit अ
+    return "";
+  }
+  function totalPages(){ return Math.max(1, Math.ceil(state.view.length / PAGE_SIZE)); }
 
   function $(s,r){ return (r||document).querySelector(s); }
   function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
@@ -27,12 +55,35 @@
     var q=state.q.trim().toLowerCase();
     state.view = state.all.filter(function(it){
       if(state.linga && it.linga!==state.linga) return false;
+      if(state.anta && it._anta!==state.anta) return false;
+      if(state.adi && it._adi!==state.adi) return false;
+      if(state.upadha && it._up!==state.upadha) return false;
+      if(state.krt && (","+(it.krt||"")+",").indexOf(","+state.krt+",")<0) return false;
+      if(state.vac && it._vac!==state.vac) return false;
       if(q && it._hay.indexOf(q)<0) return false;
       return true;
     });
-    state.view.sort(function(a,b){ return a.word.localeCompare(b.word,"sa"); });
-    state.shown=0;
+    // With a live query, an exact hit must come FIRST, not wherever the
+    // alphabet happens to put it 100 pages in (the reported bug: searching
+    // राम buried राम itself behind every -रा compound). Rank: the headword
+    // itself (0) < headword prefix (1) < an exact inflected form (2) <
+    // anywhere-in-text match (3); alphabetical within a rank.
+    if(q){
+      state.view.sort(function(a,b){
+        var ra=qRank(a,q), rb=qRank(b,q);
+        return ra!==rb ? ra-rb : a.word.localeCompare(b.word,"sa");
+      });
+    } else {
+      state.view.sort(function(a,b){ return a.word.localeCompare(b.word,"sa"); });
+    }
     $("#sh-count").textContent = state.view.length.toLocaleString()+" / "+state.all.length.toLocaleString();
+  }
+  function qRank(it,q){
+    var w=(it.word||"").toLowerCase();
+    if(w===q) return 0;
+    if(w.indexOf(q)===0) return 1;
+    if(it._fx.indexOf(";"+q+";")>=0) return 2;
+    return 3;
   }
 
   function declTable(forms, highlightIdx){
@@ -42,7 +93,8 @@
       h+='<tr><th class="deva">'+VIBHAKTI[v]+'</th>';
       for(var n=0;n<3;n++){ var idx=v*3+n;
         var hl = (highlightIdx!=null && idx===highlightIdx);
-        h+='<td class="deva'+(hl?" df-hl":"")+'"'+(hl?' id="df-hl-cell"':'')+'>'+esc((cells[idx]||"").split("-").join(", "))+'</td>'; }
+        var has = !!(cells[idx]||"").trim();
+        h+='<td class="deva'+(hl?" df-hl":"")+(has?" sst-cell-hint":"")+'"'+(has?' data-ci="'+idx+'" title="रूपसिद्धिः — tap for the derivation"':'')+(hl?' id="df-hl-cell"':'')+'>'+esc((cells[idx]||"").split("-").join(", "))+'</td>'; }
       h+='</tr>';
     }
     h+='</tbody></table></div>';
@@ -91,18 +143,40 @@
       +'<div class="rbody">'+(open?bodyHTML(it):"")+'</div>'
     +'</article>';
   }
-  function render(reset){
+  // Real Prev/Next pagination (20 words a page) rather than the old
+  // infinite-"show more" chunking -- easier to reason about on a phone
+  // ("where am I, how many pages left") and cheaper to paint per tap,
+  // since only one page's worth of rows (and their collapsed bodies) is
+  // ever in the DOM at once.
+  function setBtnDisabled(btn, disabled){ if(!btn) return; btn.disabled=disabled; btn.style.opacity=disabled?"0.4":"1"; btn.style.cursor=disabled?"default":"pointer"; }
+  function render(){
     var box=$("#sh-list");
-    if(reset){ box.innerHTML=""; state.shown=0; }
-    if(!state.view.length){ box.innerHTML='<div class="empty">No words match these filters.</div>'; $("#sh-more").style.display="none"; return; }
-    var end=Math.min(state.shown+CHUNK, state.view.length), html="";
-    for(var i=state.shown;i<end;i++) html+=rowHTML(state.view[i]);
+    box.innerHTML="";
+    if(!state.view.length){
+      box.innerHTML='<div class="empty">No words match these filters.</div>';
+      $("#sh-pager").style.display="none";
+      var pt0=$("#sh-pagerTop"); if(pt0) pt0.style.display="none";
+      return;
+    }
+    var start=state.page*PAGE_SIZE, end=Math.min(start+PAGE_SIZE, state.view.length), html="";
+    for(var i=start;i<end;i++) html+=rowHTML(state.view[i]);
     box.insertAdjacentHTML("beforeend", html);
-    state.shown=end;
-    $("#sh-more").style.display = state.shown<state.view.length ? "block" : "none";
-    $("#sh-more").textContent = "show more ▾  ("+(state.view.length-state.shown).toLocaleString()+" left)";
+    // Both pagers (top + bottom) mirror the same state; the top one exists
+    // because on a phone the bottom pager is a full page-length scroll away.
+    var info="Page "+(state.page+1)+" / "+totalPages()+" · "+state.view.length.toLocaleString()+" words";
+    $("#sh-pager").style.display="flex";
+    $("#sh-pageInfo").textContent = info;
+    setBtnDisabled($("#sh-prev"), state.page<=0);
+    setBtnDisabled($("#sh-next"), state.page>=totalPages()-1);
+    var pt=$("#sh-pagerTop");
+    if(pt){
+      pt.style.display="flex";
+      $("#sh-pageInfoTop").textContent = info;
+      setBtnDisabled($("#sh-prevTop"), state.page<=0);
+      setBtnDisabled($("#sh-nextTop"), state.page>=totalPages()-1);
+    }
   }
-  function rerender(){ recompute(); render(true); }
+  function rerender(){ recompute(); state.page=0; render(); }
 
   function toggleRow(id){
     var it=state.all.find(function(x){return x.id===id;}); if(!it) return;
@@ -114,15 +188,104 @@
     else { el.classList.add("open"); el.querySelector(".rbody").innerHTML=bodyHTML(it); state.openId=id; LS.set("open",id); setHash(id); }
   }
   function syncLingaChips(){ document.querySelectorAll("[data-l]").forEach(function(c){ c.classList.toggle("on", c.dataset.l===state.linga); }); }
+  function syncAntaChips(){ document.querySelectorAll("[data-a]").forEach(function(c){ c.classList.toggle("on", c.dataset.a===state.anta); }); }
+  function syncKrtChips(){ document.querySelectorAll("[data-k]").forEach(function(c){ c.classList.toggle("on", c.dataset.k===state.krt); }); }
+  function syncVacChips(){ document.querySelectorAll("[data-v]").forEach(function(c){ c.classList.toggle("on", c.dataset.v===state.vac); }); }
+
+  // Advanced filter rows built from the loaded data itself (आदिः/उपधा
+  // dropdowns list only phonemes that actually begin/underlie some word;
+  // प्रत्ययान्तः chips only pratyayas the tagger actually found), so no
+  // option is ever a dead end.
+  function buildAdvancedFilters(){
+    var host=$("#sh-adv"); if(!host) return;
+    var S=window.DGESubantaSteps;
+    var adis={}, ups={}, krts={};
+    state.all.forEach(function(it){
+      if(it._adi) adis[it._adi]=1;
+      if(it._up) ups[it._up]=1;
+      (it.krt||"").split(",").forEach(function(k){ if(k) krts[k]=1; });
+    });
+    function opts(set){
+      return Object.keys(set).sort(function(a,b){ return VARNA_ORDER.indexOf(a)-VARNA_ORDER.indexOf(b); })
+        .map(function(ph){ var d=S?S.deva(ph):ph; return '<option value="'+ph+'">'+d+'</option>'; }).join("");
+    }
+    var h='';
+    if(S && Object.keys(adis).length){
+      h+='<div class="frow"><span class="flab deva">आदिः</span>'
+        +'<select class="chip" id="sh-adi"><option value="">सर्वे</option>'+opts(adis)+'</select>'
+        +'<span class="flab deva" style="margin-left:10px">उपधा</span>'
+        +'<select class="chip" id="sh-upadha"><option value="">सर्वे</option>'+opts(ups)+'</select></div>';
+    }
+    var kk=Object.keys(krts).sort();
+    if(kk.length){
+      h+='<div class="frow"><span class="flab deva">प्रत्ययान्तः</span>'
+        +'<button class="chip" data-k="">सर्वे</button>'
+        +kk.map(function(k){ return '<button class="chip deva" data-k="'+k+'">'+(KRT_NAME[k]||k)+'</button>'; }).join("")
+        +'</div>';
+    }
+    h+='<div class="frow"><span class="flab deva">वचनम्</span>'
+      +'<button class="chip" data-v="">सर्वे</button>'
+      +'<button class="chip deva" data-v="ND">नित्यद्विवचनम्</button>'
+      +'<button class="chip deva" data-v="NB">नित्यबहुवचनम्</button></div>';
+    host.innerHTML=h;
+    var adi=$("#sh-adi"), up=$("#sh-upadha");
+    if(adi) adi.addEventListener("change",function(){ state.adi=adi.value; rerender(); });
+    if(up) up.addEventListener("change",function(){ state.upadha=up.value; rerender(); });
+    document.querySelectorAll("[data-k]").forEach(function(c){ c.addEventListener("click",function(){
+      state.krt=c.dataset.k; syncKrtChips(); rerender(); }); });
+    document.querySelectorAll("[data-v]").forEach(function(c){ c.addEventListener("click",function(){
+      state.vac=c.dataset.v; syncVacChips(); rerender(); }); });
+    syncKrtChips(); syncVacChips();
+  }
+
+  // Tap a declension cell -> its step-by-step subanta prakriyā, rendered by
+  // js/subanta-steps.js (the same vidyut WASM engine rupasiddhi.html uses,
+  // loaded lazily on the first tap). Tapping the same cell again closes it.
+  function cellSteps(td){
+    var S=window.DGESubantaSteps; if(!S) return;
+    var row=td.closest("article.row"); if(!row) return;
+    var it=state.all.find(function(x){return x.id===row.dataset.id;}); if(!it) return;
+    var ci=parseInt(td.dataset.ci,10), vb=Math.floor(ci/3), vc=ci%3;
+    var tableWrap=td.closest(".df-table"); if(!tableWrap) return;
+    var panel=tableWrap.nextElementSibling;
+    var already=panel && panel.classList.contains("sst-panel");
+    if(already && panel.dataset.ci===String(ci)){ panel.remove(); td.classList.remove("sst-cell-on"); return; }
+    if(already) panel.remove();
+    tableWrap.querySelectorAll(".sst-cell-on").forEach(function(x){x.classList.remove("sst-cell-on");});
+    td.classList.add("sst-cell-on");
+    S.css();
+    panel=document.createElement("div");
+    panel.className="sst-panel"; panel.dataset.ci=String(ci);
+    panel.innerHTML='<div class="sst-loading">रूपसिद्धिः सज्जीक्रियते… (loading the derivation engine on first use)</div>';
+    tableWrap.insertAdjacentElement("afterend",panel);
+    var expected=String(it.forms||"").split(";")[ci]||"";
+    S.derive(it.word, it.linga, vb, vc).then(function(results){
+      if(!panel.isConnected) return;
+      panel.innerHTML=S.panelHtml(it.word, it.linga, vb, vc, results, expected);
+    }).catch(function(){
+      if(!panel.isConnected) return;
+      panel.innerHTML='<p class="sst-note">Could not load the derivation engine (offline?) — the forms above are unaffected.</p>';
+    });
+  }
 
   function wire(){
     $("#sh-list").addEventListener("click",function(e){
+      var td=e.target.closest("td[data-ci]");
+      if(td){ cellSteps(td); return; }
       var h=e.target.closest(".rhead"); if(h) toggleRow(h.parentElement.dataset.id);
     });
-    $("#sh-more").addEventListener("click",function(){ render(false); });
+    $("#sh-prev").addEventListener("click",function(){ if(state.page>0){ state.page--; render(); window.scrollTo({top:0,behavior:"smooth"}); } });
+    $("#sh-next").addEventListener("click",function(){ if(state.page<totalPages()-1){ state.page++; render(); window.scrollTo({top:0,behavior:"smooth"}); } });
+    $("#sh-toTop").addEventListener("click",function(){ window.scrollTo({top:0,behavior:"smooth"}); });
+    $("#sh-toBottom").addEventListener("click",function(){ $("#sh-pager").scrollIntoView({behavior:"smooth",block:"end"}); });
     $("#sh-search").addEventListener("input",function(e){ state.q=e.target.value; rerender(); });
     document.querySelectorAll("[data-l]").forEach(function(c){ c.addEventListener("click",function(){
       state.linga=c.dataset.l; LS.set("linga",state.linga); syncLingaChips(); rerender(); }); });
+    document.querySelectorAll("[data-a]").forEach(function(c){ c.addEventListener("click",function(){
+      state.anta=c.dataset.a; LS.set("anta",state.anta); syncAntaChips(); rerender(); }); });
+    var pv=$("#sh-prevTop"), nx=$("#sh-nextTop");
+    if(pv) pv.addEventListener("click",function(){ if(state.page>0){ state.page--; render(); window.scrollTo({top:0,behavior:"smooth"}); } });
+    if(nx) nx.addEventListener("click",function(){ if(state.page<totalPages()-1){ state.page++; render(); window.scrollTo({top:0,behavior:"smooth"}); } });
     $("#sh-scriptSeg").addEventListener("click",function(e){ var b=e.target.closest("button"); if(!b)return;
       [].forEach.call(e.currentTarget.children,function(x){x.classList.remove("on");}); b.classList.add("on");
       state.script=b.dataset.s; LS.set("script",state.script); rerender(); });
@@ -131,11 +294,13 @@
 
   function openById(id){
     var it=state.all.find(function(x){return x.id===id;}); if(!it) return;
-    state.openId=id; LS.set("open",id); state.linga=""; state.q=""; $("#sh-search").value=""; LS.set("linga","");
-    syncLingaChips(); recompute();
+    state.openId=id; LS.set("open",id); state.linga=""; state.anta=""; state.q=""; $("#sh-search").value=""; LS.set("linga",""); LS.set("anta","");
+    state.adi=""; state.upadha=""; state.krt=""; state.vac="";
+    var _adi=$("#sh-adi"), _up=$("#sh-upadha"); if(_adi)_adi.value=""; if(_up)_up.value="";
+    syncLingaChips(); syncAntaChips(); syncKrtChips(); syncVacChips(); recompute();
     var pos=state.view.findIndex(function(x){return x.id===id;});
-    render(true);
-    while(state.shown<=pos && state.shown<state.view.length) render(false);
+    state.page = pos>=0 ? Math.floor(pos/PAGE_SIZE) : 0;
+    render();
     var el=$("#s-"+CSS.escape(id));
     if(el){ el.scrollIntoView({behavior:"smooth",block:"center"}); setHash(id); }
     if(state.highlightCell!=null){
@@ -156,28 +321,112 @@
     return true;
   }
 
+  // A form the Śabdapāṭha (fixed nominal stems) genuinely has no entry for
+  // may still be a kṛdanta — a word DERIVED from a verb root (लभ्यः, from
+  // लभ्+यत्) that is grammatically correct but lives in a different
+  // database (tools/build_krt_form_index.py's reverse index over every
+  // root's kṛt-pratyaya forms). Checked before giving up entirely; a
+  // match redirects straight to the actual right page (krdanta.html)
+  // instead of leaving the reader on a nominal-stem browser that was
+  // never going to have this word.
+  function tryKrtFallback(surface){
+    var w=(surface||"").trim();
+    if(!w){ showNotFound(surface); return; }
+    var cp=w.codePointAt(0).toString(16).toLowerCase().padStart(4,"0");
+    fetch("data/vedanga/vyakarana/prakriya/krtindex/"+cp+".json").then(function(r){
+      return r.ok ? r.json() : null;
+    }).then(function(m){
+      var hit=m && m[w];
+      if(hit){ location.href="krdanta.html#"+hit.c+":"+hit.k; }
+      else { showNotFound(surface); }
+    }).catch(function(){ showNotFound(surface); });
+  }
+
+  // Previously this silently fell back to a plain substring search on the
+  // unmatched text, which could (and did — reported live, with a
+  // screenshot) match the query as a raw substring INSIDE an unrelated
+  // word's own declension table and open THAT as if it were the answer.
+  // An honest "not found" beats a confident-looking wrong one; the search
+  // box is left populated so the reader can still search manually if they
+  // want to, rather than being force-fed a guess.
+  function showNotFound(surface){
+    $("#sh-search").value=surface||"";
+    recompute();
+    state.page=0;
+    render();
+    var box=$("#sh-list");
+    box.insertAdjacentHTML("afterbegin",
+      '<div class="empty">No exact form found for "'+esc(surface||"")+'". '+
+      'Showing the ordinary word list below — search manually, or '+
+      '<a href="#" id="sh-report-missing">report this as missing</a>.</div>');
+    var rep=$("#sh-report-missing");
+    if(rep) rep.addEventListener("click",function(e){
+      e.preventDefault();
+      // shabda.html is deliberately minimal (no modals.js/config.js) so
+      // this doesn't depend on window.dgeReportMissingForm (modals.js's
+      // version, for pages that already load it) — same template tag and
+      // field shape either way, kept in sync by hand since it's only a
+      // few lines. See modals.js's own copy for the full reasoning on why
+      // the shape matters (a future scheduled process matching only this
+      // exact tag+field format, everything else ignored or routed to a
+      // human).
+      if(typeof window.dgeReportMissingForm==="function"){ window.dgeReportMissingForm(surface,"shabda"); return; }
+      var email="sanatanavidyagurukulam@gmail.com";
+      var subject=encodeURIComponent("[DGE-CONTENT-GAP] missing-form — "+surface);
+      var lines=["Type: missing-form","Surface: "+surface,"Context: shabda","Page: "+location.href,
+        "Timestamp: "+new Date().toISOString()];
+      location.href="mailto:"+email+"?subject="+subject+"&body="+encodeURIComponent(lines.join("\n"));
+    });
+  }
+
   function boot(){
     if(LS.get("dark",false)) document.body.classList.add("dark");
     var ss=$("#sh-scriptSeg"); if(ss) ss.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on",b.dataset.s===state.script); });
-    syncLingaChips(); wire();
+    syncLingaChips(); syncAntaChips(); wire();
     fetch(URL).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(d){
       state.all=(d.items||[]).map(function(it){
         // forms included so a search for an inflected word (e.g. परस्य,
         // pasted in from the reader's "Shabda" word-tool) finds the
         // headword it declines from, not just an exact headword match.
         it._hay=((it.word||"")+" "+(it.artha||"")+" "+(it.artha_hin||"")+" "+(it.artha_eng||"")+" "+(it.forms||"")).toLowerCase();
+        it._anta=antaOf(it.word);
+        // ";"-bounded list of every exact inflected variant, for the exact-
+        // form rank in qRank() ("रामस्य" typed should surface राम first).
+        it._fx=";"+String(it.forms||"").split(/[;-]/).map(function(x){return x.trim().toLowerCase();}).join(";")+";";
+        // Phoneme-level facets (SLP1 via subanta-steps.js's converter):
+        // आदिः = first phoneme, उपधा = penultimate phoneme (1.1.65
+        // अलोऽन्त्यात् पूर्व उपधा). Empty when the converter isn't loaded.
+        var S=window.DGESubantaSteps;
+        if(S){
+          var slp=S.slp(it.word||"");
+          it._adi=slp[0]||"";
+          it._up=slp.length>1?slp[slp.length-2]:"";
+          if(VARNA_ORDER.indexOf(it._adi)<0) it._adi="";
+          if(VARNA_ORDER.indexOf(it._up)<0) it._up="";
+        } else { it._adi=""; it._up=""; }
+        // नित्य-वचन class from which columns of the 8×3 grid actually carry
+        // forms: dual-only (उभ, दम्पति…) and plural-only (अप्, अष्टन्…).
+        var cells=String(it.forms||"").split(";"); while(cells.length<24) cells.push("");
+        var eka=false,dvi=false,bahu=false;
+        for(var v=0;v<8;v++){
+          if(cells[v*3].trim()) eka=true;
+          if(cells[v*3+1].trim()) dvi=true;
+          if(cells[v*3+2].trim()) bahu=true;
+        }
+        it._vac = (!eka&&!bahu&&dvi) ? "ND" : (!eka&&!dvi&&bahu) ? "NB" : "";
         return it;
       });
       $("#sh-total").textContent = state.all.length.toLocaleString();
+      buildAdvancedFilters();
       var sp=new URLSearchParams(location.search);
       var form0=sp.get("form"), q0=sp.get("q");
       if(form0 && openByForm(form0)) return; // exact-form deep link resolved; opened above
-      if(form0 && !q0) q0=form0; // no exact cell match — fall back to a plain search on the same text
+      if(form0){ tryKrtFallback(form0); return; } // may itself be async; renders its own state either way
       if(q0){ state.q=q0; $("#sh-search").value=q0; }
       recompute();
       var h0=hashId();
       if(h0 && state.all.some(function(x){return x.id===h0;})){ openById(h0); }
-      else { render(true); }
+      else { state.page=0; render(); }
     }).catch(function(e){ $("#sh-list").innerHTML='<div class="empty">Failed to load shabdapatha data ('+e+'). Serve from the dge/ folder.</div>'; });
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot); else boot();

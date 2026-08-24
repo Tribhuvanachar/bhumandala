@@ -8,11 +8,23 @@ section, or darshana/vedanta/advaita/shankara_bhashya/**) therefore stays invisi
 here. This tool scans the data tree and appends any data.json that is missing,
 with populated = (it has content). Safe to run repeatedly; run AFTER an importer.
 """
-import json, os, glob
+import json, os, glob, datetime
 
 ROOT = 'dge' if os.path.isdir('dge/data') else '.'
 DATA = os.path.join(ROOT, 'data')
 LIB = os.path.join(DATA, 'library.json')
+
+# data.json files that are real, but are internal lookup tables rather than
+# browsable grantha content (not {items:[...]} shloka/verse text at all --
+# kaumudi_order/data.json is a kaumudiIndex<->sutra id concordance
+# ashtadhyayi.js reads directly). Registering one of these makes it a
+# clickable Library entry that renders garbage in the generic reader, which
+# only ever expects the shloka-corpus shape. Caught once by hand (20 Aug
+# 2026) when this tool picked it up unprompted; listed here so it isn't
+# re-flagged as "new" on every future run.
+NOT_A_GRANTHA = {
+    'dge/data/vedanga/vyakarana/ashtadhyayi/kaumudi_order/data.json',
+}
 
 
 def item_count(data):
@@ -27,18 +39,27 @@ def main():
     granthas = lib.setdefault('granthas', [])
     known = {g['path'] for g in granthas}
     added = 0
+    # Stamped only on genuinely new entries below, never backfilled onto
+    # existing ones -- this repo's git history is a shallow clone (a few
+    # days deep) so there is no reliable way to know when an EXISTING
+    # grantha was really added, and guessing "today" for all of them would
+    # make the whole corpus look simultaneously brand-new the first time
+    # this tool runs after this change. library.js's "New" badge (Category
+    # 1) is correspondingly honest: entries with no addedAt just show no
+    # badge rather than a wrong one.
+    today = datetime.date.today().isoformat()
     for fp in sorted(glob.glob(os.path.join(DATA, '**', 'data.json'), recursive=True)):
         # catalog path convention is always "dge/data/.../data.json"
         rel = os.path.relpath(fp, DATA).replace(os.sep, '/')
         catalog = f"dge/data/{rel}"
-        if catalog in known:
+        if catalog in known or catalog in NOT_A_GRANTHA:
             continue
         try:
             data = json.load(open(fp, encoding='utf-8'))
             n = item_count(data)
         except Exception:
             n = 0
-        granthas.append({"path": catalog, "populated": n > 0, "title": None})
+        granthas.append({"path": catalog, "populated": n > 0, "title": None, "addedAt": today})
         known.add(catalog)
         added += 1
         print(f"  + {catalog} (populated={n > 0})")

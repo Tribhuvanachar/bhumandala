@@ -14,7 +14,8 @@
       "composer": "Harapanahalli Bheemavva",
       "deity": "",
       "tags": [
-        "composer:Harapanahalli Bheemavva"
+        "composer:Harapanahalli Bheemavva",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -127,7 +128,8 @@
       "deity": "Mahalakshmi",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "deity:Mahalakshmi"
+        "deity:Mahalakshmi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -302,7 +304,8 @@
       "tags": [
         "composer:Harapanahalli Bheemavva",
         "deity:Mahalakshmi",
-        "theme:Aarathi"
+        "theme:Aarathi",
+        "form:mangala"
       ],
       "raga": "",
       "tala": "",
@@ -423,7 +426,8 @@
       "deity": "Mahalakshmi",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "deity:Mahalakshmi"
+        "deity:Mahalakshmi",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -597,7 +601,8 @@
       "tags": [
         "composer:Harapanahalli Bheemavva",
         "deity:Gowri",
-        "theme:Aarathi"
+        "theme:Aarathi",
+        "form:aarati"
       ],
       "raga": "",
       "tala": "",
@@ -738,7 +743,8 @@
       "deity": "Gowri",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "deity:Gowri"
+        "deity:Gowri",
+        "form:mangala"
       ],
       "raga": "",
       "tala": "",
@@ -947,7 +953,8 @@
       "deity": "Shiva",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "deity:Shiva"
+        "deity:Shiva",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -1386,7 +1393,8 @@
       "tags": [
         "composer:Harapanahalli Bheemavva",
         "deity:Mahalakshmi",
-        "theme:Aarathi"
+        "theme:Aarathi",
+        "form:aarati"
       ],
       "raga": "",
       "tala": "",
@@ -1580,7 +1588,8 @@
       "deity": "Srinivasa",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "deity:Srinivasa"
+        "deity:Srinivasa",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2025,7 +2034,8 @@
       "deity": "",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "theme:Sampradaaya"
+        "theme:Sampradaaya",
+        "form:sampradaya"
       ],
       "raga": "",
       "tala": "",
@@ -2130,7 +2140,8 @@
       "composer": "Harapanahalli Bheemavva",
       "deity": "",
       "tags": [
-        "composer:Harapanahalli Bheemavva"
+        "composer:Harapanahalli Bheemavva",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2256,7 +2267,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2390,7 +2402,8 @@
       "deity": "Krishna",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "deity:Krishna"
+        "deity:Krishna",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2624,7 +2637,8 @@
       "deity": "Krishna",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "deity:Krishna"
+        "deity:Krishna",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2818,7 +2832,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -2944,7 +2959,8 @@
       "deity": "Hari/Narayana",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "deity:Hari/Narayana"
+        "deity:Hari/Narayana",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3044,7 +3060,8 @@
         "composer:Harapanahalli Bheemavva",
         "deity:Hari/Narayana",
         "theme:Aarathi",
-        "theme:Dashavathara"
+        "theme:Dashavathara",
+        "form:mangala"
       ],
       "raga": "",
       "tala": "",
@@ -3197,7 +3214,8 @@
       "composer": "Harapanahalli Bheemavva",
       "deity": "",
       "tags": [
-        "composer:Harapanahalli Bheemavva"
+        "composer:Harapanahalli Bheemavva",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3607,7 +3625,8 @@
       "deity": "Shiva",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "deity:Shiva"
+        "deity:Shiva",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3693,7 +3712,8 @@
       "deity": "Gowri",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "deity:Gowri"
+        "deity:Gowri",
+        "form:pada"
       ],
       "raga": "",
       "tala": "",
@@ -3835,7 +3855,8 @@
       "deity": "",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "theme:Sampradaaya"
+        "theme:Sampradaaya",
+        "form:sampradaya"
       ],
       "raga": "",
       "tala": "",
@@ -4105,7 +4126,8 @@
       "deity": "",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "theme:Sampradaaya"
+        "theme:Sampradaaya",
+        "form:sampradaya"
       ],
       "raga": "",
       "tala": "",
@@ -4255,7 +4277,8 @@
       "deity": "",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "theme:Sampradaaya"
+        "theme:Sampradaaya",
+        "form:sampradaya"
       ],
       "raga": "",
       "tala": "",
@@ -4365,7 +4388,8 @@
       "deity": "",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "theme:Sampradaaya"
+        "theme:Sampradaaya",
+        "form:sampradaya"
       ],
       "raga": "",
       "tala": "",
@@ -7295,7 +7319,8 @@
       "deity": "",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "theme:Sampradaaya"
+        "theme:Sampradaaya",
+        "form:sampradaya"
       ],
       "raga": "",
       "tala": "",
@@ -7758,7 +7783,8 @@
       "deity": "",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "theme:Sampradaaya"
+        "theme:Sampradaaya",
+        "form:sampradaya"
       ],
       "raga": "",
       "tala": "",
@@ -8095,7 +8121,8 @@
       "deity": "",
       "tags": [
         "composer:Harapanahalli Bheemavva",
-        "theme:Sampradaaya"
+        "theme:Sampradaaya",
+        "form:sampradaya"
       ],
       "raga": "",
       "tala": "",

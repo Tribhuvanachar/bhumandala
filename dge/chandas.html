@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="sa">
+<head>
+<meta charset="UTF-8">
+<!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
+     back to the vandana at the site root. Must stay the first script here. -->
+<script src="js/vandana-guard.js?v=1"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>छन्दोविश्लेषणम् — DGE</title>
+<link rel="stylesheet" href="css/vyakarana.css?v=1">
+<link rel="stylesheet" href="css/rupasiddhi.css?v=1">
+<link rel="stylesheet" href="css/chandas.css?v=1">
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div class="brand"><a href="index.html">⌂ DGE</a><span>›</span>छन्दोविश्लेषणम्</div>
+    <div class="spacer"></div>
+    <button class="icon" id="themeBtn" title="Light / dark">◐</button>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <h1 class="deva">छन्दोविश्लेषणम्</h1>
+    <div class="sub">Paste a verse (1, 2 or 4 lines, Devanagari) — laghu/guru weights, gana
+      segmentation, and the metre identified against 245 classical vruttas.
+      <span id="ch-status"></span></div>
+  </div>
+
+  <section class="rs-box">
+    <textarea id="ch-input" rows="4" placeholder="धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।&#10;मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय ॥"></textarea>
+    <div class="ch-actions">
+      <button class="btn ai" id="ch-go">विश्लेषय</button>
+      <button class="chip" data-ch-sample="धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः
+मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय">श्लोकः</button>
+      <button class="chip" data-ch-sample="कश्चित्कान्ताविरहगुरुणा स्वाधिकारात्प्रमत्तः
+शापेनास्तंगमितमहिमा वर्षभोग्येण भर्तुः
+यक्षश्चक्रे जनकतनयास्नानपुण्योदकेषु
+स्निग्धच्छायातरुषु वसतिं रामगिर्याश्रमेषु">मन्दाक्रान्ता</button>
+      <button class="chip" data-ch-sample="वागर्थाविव संपृक्तौ वागर्थप्रतिपत्तये
+जगतः पितरौ वन्दे पार्वतीपरमेश्वरौ">रघुवंशः</button>
+    </div>
+  </section>
+
+  <div id="ch-out"></div>
+
+  <p class="df-note">वृत्तकोशः: Chandojnanam (hrishikeshrt/chanda, AGPL-3.0) —
+    see <code>data/vedanga/chandas/data.json</code>. Weights are computed by this
+    page's own analyzer; classical (laukika) metres only, not Vedic chandas.
+    लक्षणमूलम्: <a href="index.html?path=vedanga/vrittaratnakara">वृत्तरत्नाकरः</a>.</p>
+</main>
+
+<script src="js/chandas.js?v=1"></script>
+</body>
+</html>

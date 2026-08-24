@@ -40,6 +40,22 @@ NOISE = [
     (re.compile(r"\[[^\]]*\[[^\]]*\]"), " "),          # ApDS grammatical gloss
 ]
 HEADER_END = re.compile(r"^\s*(?:TEXT\s*$|##\s*Revisions?:|\*{3,}\s*$|-{5,}\s*$)", re.M)
+# "# Text" (a markdown-style heading, not the bare "TEXT" HEADER_END already
+# looks for) is the real, consistent body-start marker across this whole
+# corpus -- confirmed directly against several files, including ones whose
+# header carries a "## Revisions:" bullet-point changelog BEFORE "# Text".
+# HEADER_END.search() finds whichever alternative occurs earliest in the
+# file, so on those files it was matching "## Revisions:" and treating the
+# changelog line right after it as the start of the body -- real leaked
+# header text ("2020-07-31: TEI encoding by mass conversion...") ended up
+# inside the first extracted unit on every SUFFIX-style marker (a PREFIX
+# marker's first unit starts after its own first match regardless, so this
+# never surfaced there). Checked for last, not folded into HEADER_END's own
+# alternation, because search() returns the leftmost match among
+# alternatives at a given position, not the "best" one -- an explicit
+# preference pass is the only way to make "# Text" win over an earlier,
+# weaker signal.
+TEXT_MARKER = re.compile(r"^#+\s*Text\s*$", re.M)
 ATTRIB = re.compile(
     r"^(?:##\s*)?(?:Data entry|Contribution|Input by|Source|Publisher|Licence|License|"
     r"Based on|Contributed by|Date of this version|Description)\s*:?.*$", re.I | re.M)
@@ -51,7 +67,11 @@ def load_registry(path=REGISTRY):
 
 
 def split_header(raw):
-    match = HEADER_END.search(raw)
+    match = None
+    for match in TEXT_MARKER.finditer(raw):
+        pass  # take the LAST "# Text" heading, in case an earlier one is quoted inside the header itself
+    if match is None:
+        match = HEADER_END.search(raw)
     head, body = (raw[:match.start()], raw[match.end():]) if match else (raw[:3000], raw)
     if not body.strip():
         head, body = "", raw
@@ -83,8 +103,16 @@ def parse(raw, spec, patterns):
     if not matches:
         return [], attribution, 0
 
-    prefix_style = pattern["regex"].lstrip("^").startswith(("\\(", "<", "(?P<sig>")) or \
-        pattern["regex"].startswith("^")
+    # An explicit "style" on the pattern wins over the string-prefix guess
+    # below -- needed for a marker that has to match ANYWHERE in the body
+    # (not just at a true line start) yet is still a prefix, e.g. a
+    # multi-level "1.1.1 text..." reference repeated many times within one
+    # giant physical line rather than once per real line break.
+    if "style" in pattern:
+        prefix_style = pattern["style"] == "prefix"
+    else:
+        prefix_style = pattern["regex"].lstrip("^").startswith(("\\(", "<", "(?P<sig>")) or \
+            pattern["regex"].startswith("^")
     units, seen_span = [], 0
     for index, match in enumerate(matches):
         groups = match.groupdict()
@@ -98,6 +126,21 @@ def parse(raw, spec, patterns):
             end = match.start()
             seen_span = match.end()
         text = clean(body[start:end])
+        # Some markers repeat before every sentence within one giant physical
+        # line rather than once per actual line break -- confirmed directly
+        # against nirukta's own source: only 18 real "^"-anchored matches in
+        # the whole file (one per adhyaya, since each adhyaya is a single
+        # unbroken line), yet the SAME ref recurs dozens of times inline
+        # within that line. re.MULTILINE's "^" only ever matches the first
+        # such occurrence per physical line, so every later inline repeat
+        # passes straight through into the extracted text instead of being
+        # consumed as a boundary. spec["strip_inline"] is the escape hatch
+        # for exactly that: an optional regex removed from the text AFTER
+        # extraction, opt-in per text so it changes nothing for the other
+        # 33 registry entries.
+        if spec.get("strip_inline"):
+            text = re.sub(spec["strip_inline"], " ", text)
+            text = re.sub(r"\s+", " ", text).strip()
         if len(text) < 3:
             continue
         units.append((refs, groups.get("pada"), text))

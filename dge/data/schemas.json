@@ -310,6 +310,11 @@
         "type": "string[]",
         "required": false,
         "notes": "free-form keywords for cross-library search -- independent of the taxonomy path itself."
+      },
+      "gemini_enrichment": {
+        "type": "object",
+        "required": false,
+        "notes": "{generated_at, model, segments: [{text, reference_ids?}], references: {ref_id: {...}}} -- written by tools/gemini_enrich.py; segments/references render as footnotes via dge/js/footnote-engine.js. Every reference's 'status' (verified/possible/unresolved) is decided locally by tools/reference_resolution against this corpus, never taken on Gemini's word alone. See dge/PENDING.md, 'Reference Resolution Engine'."
       }
     },
     "primaryTextField": "sanskrit_text"
@@ -407,6 +412,11 @@
         "type": "string[]",
         "required": false,
         "notes": "free-form keywords for cross-library search -- independent of the taxonomy path itself."
+      },
+      "gemini_enrichment": {
+        "type": "object",
+        "required": false,
+        "notes": "{generated_at, model, segments: [{text, reference_ids?}], references: {ref_id: {...}}} -- written by tools/gemini_enrich.py; segments/references render as footnotes via dge/js/footnote-engine.js. Every reference's 'status' (verified/possible/unresolved) is decided locally by tools/reference_resolution against this corpus, never taken on Gemini's word alone. See dge/PENDING.md, 'Reference Resolution Engine'."
       }
     },
     "primaryTextField": "sanskrit_text"
@@ -454,6 +464,11 @@
         "type": "string[]",
         "required": false,
         "notes": "free-form keywords for cross-library search -- independent of the taxonomy path itself."
+      },
+      "gemini_enrichment": {
+        "type": "object",
+        "required": false,
+        "notes": "{generated_at, model, segments: [{text, reference_ids?}], references: {ref_id: {...}}} -- written by tools/gemini_enrich.py; segments/references render as footnotes via dge/js/footnote-engine.js. Every reference's 'status' (verified/possible/unresolved) is decided locally by tools/reference_resolution against this corpus, never taken on Gemini's word alone. See dge/PENDING.md, 'Reference Resolution Engine'."
       }
     },
     "primaryTextField": "sanskrit_text"
@@ -504,6 +519,11 @@
         "type": "string[]",
         "required": false,
         "notes": "free-form keywords for cross-library search -- independent of the taxonomy path itself."
+      },
+      "gemini_enrichment": {
+        "type": "object",
+        "required": false,
+        "notes": "{generated_at, model, segments: [{text, reference_ids?}], references: {ref_id: {...}}} -- written by tools/gemini_enrich.py; segments/references render as footnotes via dge/js/footnote-engine.js. Every reference's 'status' (verified/possible/unresolved) is decided locally by tools/reference_resolution against this corpus, never taken on Gemini's word alone. See dge/PENDING.md, 'Reference Resolution Engine'."
       }
     },
     "primaryTextField": "sanskrit_text"

@@ -18,14 +18,14 @@
     window.location.replace('../index.html');
   }
 </script>
-<title>DGE Convert v0.34.0</title>
-<link rel="stylesheet" href="style.css?v=0.34.0">
+<title>DGE Convert v0.35.0</title>
+<link rel="stylesheet" href="style.css?v=0.35.0">
 </head>
 <body>
 
 <div style="font-size:.85rem;margin:10px 0"><a href="../index.html" title="DGE Home" style="text-decoration:none;font-weight:700">⌂ DGE</a><span style="opacity:.6;margin:0 6px">›</span><b>Convert</b></div>
 <h2>DGE Convert</h2>
-<div>Version: <b id="versionDisplay">0.34.0</b> · Build: <span id="buildDisplay"></span></div>
+<div>Version: <b id="versionDisplay">0.35.0</b> · Build: <span id="buildDisplay"></span></div>
 <p class="hint">PDF or page images → Google Vision OCR → Gemini proofreading → DGE JSON. Everything runs in this browser — no server, nothing uploaded except directly to Google's APIs using your own keys below.</p>
 
 <div id="errorBox" class="error-box"></div>
@@ -46,6 +46,7 @@
   <button type="button" class="tab-btn" data-tab="proofread">3. Proofread</button>
   <button type="button" class="tab-btn" data-tab="review">4. Review</button>
   <button type="button" class="tab-btn" data-tab="push">5. Push</button>
+  <button type="button" class="tab-btn" data-tab="server">☁️ Server Pipeline</button>
   <button type="button" class="tab-btn" data-tab="log">📋 Log</button>
 </div>
 
@@ -251,7 +252,78 @@
   <button id="pushToGithubBtn" class="btn-primary">Push to GitHub</button>
   <div id="pushStatusText" class="progress-text"></div>
 </fieldset>
-<div class="tab-nav"><button type="button" class="tab-back-btn" data-back="review">← Back: Review</button><span class="tab-nav-spacer"></span><button type="button" class="tab-next-btn" data-next="log">Next: Log →</button></div>
+<div class="tab-nav"><button type="button" class="tab-back-btn" data-back="review">← Back: Review</button><span class="tab-nav-spacer"></span><button type="button" class="tab-next-btn" data-next="server">Next: Server Pipeline →</button></div>
+</div>
+
+<div class="tab-panel" data-tab="server">
+<fieldset>
+  <legend>☁️ Server Pipeline — OCR a real book without this browser tab timing out</legend>
+  <p class="hint">Runs OCR + Gemini proofreading on GitHub Actions instead of in this tab — no wall-clock timeout, and works from a PDF link instead of a file upload. Two steps: preview pages to confirm your range, then send that range for the real (billed) OCR + proofread run. The result stages as a plain JSON file — nothing is merged into the corpus here; that's a deliberate separate step (<code>tools/merge_staged_commentary.py</code>).</p>
+
+  <label for="spPdfUrl">PDF direct-download URL</label>
+  <input type="text" id="spPdfUrl" placeholder="https://…/commentary.pdf">
+  <p class="hint">— or, if the source is a split 7z archive (this project's sources have always come as exactly 3 parts) —</p>
+  <label for="spPdfUrlPart1">Split-7z part 1 URL</label>
+  <input type="text" id="spPdfUrlPart1" placeholder="https://…/part.7z.001">
+  <label for="spPdfUrlPart2">Split-7z part 2 URL</label>
+  <input type="text" id="spPdfUrlPart2" placeholder="https://…/part.7z.002">
+  <label for="spPdfUrlPart3">Split-7z part 3 URL</label>
+  <input type="text" id="spPdfUrlPart3" placeholder="https://…/part.7z.003">
+
+  <label for="spStartPage">Start page</label>
+  <input type="number" id="spStartPage" inputmode="numeric" min="1" style="width:100px;">
+  <label for="spEndPage">End page</label>
+  <input type="number" id="spEndPage" inputmode="numeric" min="1" style="width:100px;">
+  <label for="spExtraPreviewPages">Also preview these pages (optional)</label>
+  <input type="text" id="spExtraPreviewPages" placeholder="e.g. 25,26 — to spot-check pages inside the range too">
+  <button type="button" id="spPreviewBtn">👁️ Preview start/end/extra pages</button>
+  <p class="hint">Free — no Vision/Gemini calls, just renders the pages so you can visually confirm before spending anything.</p>
+  <div id="spPreviewMeta" class="hint"></div>
+  <div id="spPreviewStrip" class="sp-preview-strip"></div>
+
+  <label for="spExcludePages">Exclude pages within the range (optional)</label>
+  <input type="text" id="spExcludePages" placeholder="e.g. 13,40-42">
+
+  <label for="spWorkSlug">Work folder name (under dge/data/ocr_staging/)</label>
+  <input type="text" id="spWorkSlug" placeholder="e.g. raghavendra_vijaya">
+  <label for="spCanto">Canto/sarga number</label>
+  <input type="number" id="spCanto" inputmode="numeric" min="1" style="width:100px;">
+  <label for="spCommentaryKey">Commentary key (short, no spaces)</label>
+  <input type="text" id="spCommentaryKey" placeholder="e.g. tika_someauthor">
+  <label for="spDisplayLabel">Commentary display name</label>
+  <input type="text" id="spDisplayLabel" placeholder="e.g. Someone's Sanskrit Ṭīkā">
+  <label for="spContextAnchor">Context anchor (optional, helps Gemini)</label>
+  <input type="text" id="spContextAnchor" placeholder="e.g. Raghavendra Vijaya, Sanskrit tika by X, Sarga 1">
+  <label for="spContentField">Which field is this commentary's real text</label>
+  <select id="spContentField">
+    <option value="commentary" selected>commentary — for a tika/bhashya PDF (usual case)</option>
+    <option value="sa">sa — only if this PDF IS a mula-text source</option>
+  </select>
+  <label for="spModel">Gemini model</label>
+  <select id="spModel">
+    <option value="gemini-flash-latest" selected>gemini-flash-latest</option>
+    <option value="gemini-flash-lite-latest">gemini-flash-lite-latest</option>
+  </select>
+
+  <button type="button" id="spRunOcrBtn" class="btn-primary">☁️ Send for OCR + Proofread</button>
+  <div id="spStatus" class="progress-text"></div>
+  <div id="spError" class="error-box"></div>
+
+  <div id="spJsonView"></div>
+
+  <div id="spOutputActions" style="display:none;">
+    <button type="button" id="spDownloadBtn">⬇️ Download JSON</button>
+    <button type="button" id="spShareBtn">📤 Share / Email</button>
+    <button type="button" id="spPushBtn">⬆️ Push to ocr_staging (admin)</button>
+    <p class="hint">Download/Share hand you the staged file directly. Push writes it to <code>dge/data/ocr_staging/&lt;work&gt;/</code> on <code>main</code> — a separate later pipeline reads staged files from there and actually merges them into the corpus.</p>
+  </div>
+
+  <details style="margin-top:12px;">
+    <summary>Run log</summary>
+    <pre id="spLog" class="sp-log"></pre>
+  </details>
+</fieldset>
+<div class="tab-nav"><button type="button" class="tab-back-btn" data-back="push">← Back: Push</button><span class="tab-nav-spacer"></span><button type="button" class="tab-next-btn" data-next="log">Next: Log →</button></div>
 </div>
 
 <div id="outputModal" class="output-modal">
@@ -302,8 +374,8 @@
 <button type="button" id="liveLogShowBtn" class="live-log-show-btn" style="display:none;" title="Show log">📋</button>
 
 <script>
-  window.DGE_CONVERT_VERSION = '0.34.0';
-  window.DGE_CONVERT_BUILD = '2026-08-13j';
+  window.DGE_CONVERT_VERSION = '0.35.0';
+  window.DGE_CONVERT_BUILD = '2026-08-23a';
   document.getElementById('buildDisplay').textContent = window.DGE_CONVERT_BUILD;
   // The visible "Version: X" text (and this page's <title>) were plain
   // hardcoded HTML with no JS keeping them in sync -- only the build string
@@ -326,23 +398,29 @@
      harmless to load unconditionally otherwise. Pinned exact version, same
      convention as pdf.js/Sanscript above. -->
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
-<script src="utils.js?v=0.34.0"></script>
-<script src="idb.js?v=0.34.0"></script>
-<script src="pdf.js?v=0.34.0"></script>
-<script src="image.js?v=0.34.0"></script>
-<script src="loaders.js?v=0.34.0"></script>
-<script src="vision.js?v=0.34.0"></script>
-<script src="tesseract-check.js?v=0.34.0"></script>
-<script src="review-classifier.js?v=0.34.0"></script>
-<script src="../js/gemini.js?v=0.34.0"></script>
-<script src="gemini.js?v=0.34.0"></script>
-<script src="github.js?v=0.34.0"></script>
-<script src="mapper.js?v=0.34.0"></script>
-<script src="sarga-detect.js?v=0.34.0"></script>
-<script src="urlimport.js?v=0.34.0"></script>
-<script src="renderer.js?v=0.34.0"></script>
-<script src="review-ui.js?v=0.34.0"></script>
-<script src="app.js?v=0.34.0"></script>
+<script src="utils.js?v=0.35.0"></script>
+<script src="idb.js?v=0.35.0"></script>
+<script src="pdf.js?v=0.35.0"></script>
+<script src="image.js?v=0.35.0"></script>
+<script src="loaders.js?v=0.35.0"></script>
+<script src="vision.js?v=0.35.0"></script>
+<script src="tesseract-check.js?v=0.35.0"></script>
+<script src="review-classifier.js?v=0.35.0"></script>
+<script src="../js/gemini.js?v=0.35.0"></script>
+<script src="gemini.js?v=0.35.0"></script>
+<script src="github.js?v=0.35.0"></script>
+<script src="actions.js?v=0.35.0"></script>
+<script src="zipread.js?v=0.35.0"></script>
+<script src="mapper.js?v=0.35.0"></script>
+<script src="sarga-detect.js?v=0.35.0"></script>
+<script src="urlimport.js?v=0.35.0"></script>
+<script src="renderer.js?v=0.35.0"></script>
+<script src="review-ui.js?v=0.35.0"></script>
+<script src="app.js?v=0.35.0"></script>
+<script src="server-pipeline.js?v=0.35.0"></script>
+<script>
+  if (window.DGE.ServerPipeline) window.DGE.ServerPipeline.init();
+</script>
 <script>
   // Tab/wizard navigation -- purely presentational (which panel is
   // visible), so it's kept separate from app.js's own state/logic and
@@ -350,7 +428,7 @@
   // always directly clickable; Next/Back buttons step through in order
   // for the common linear flow.
   (function () {
-    var TAB_ORDER = ['setup', 'upload', 'ocr', 'proofread', 'review', 'push', 'log'];
+    var TAB_ORDER = ['setup', 'upload', 'ocr', 'proofread', 'review', 'push', 'server', 'log'];
     var LAST_TAB_KEY = 'convert_last_tab';
 
     function showTab(id) {

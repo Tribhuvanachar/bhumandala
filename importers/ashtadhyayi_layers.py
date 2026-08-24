@@ -78,6 +78,21 @@ def parse_anuvritti(an):
             out.append({"word": w, "from": ref} if ref else {"word": w})
     return out
 
+def parse_adhikara(ad):
+    """'आकडारात् एका संज्ञा$1$4$1' -> 'आकडारात् एका संज्ञा' (a bare adhikara
+    with no $-suffix, e.g. 'अनभिहिते', passes through unchanged). The
+    trailing $adhyaya$pada$sutra is the source's own reference to the
+    sutra that first states this adhikara -- same $-delimited convention
+    'pc'/'an'/'type' already use -- but this field was being stored
+    unparsed, so the literal "$2$3$1" rendered straight into the reader.
+    A sutra can sit under more than one adhikara at once, "##"-joined
+    ('आकडारात् एका संज्ञा$1$4$1##कारके$1$4$23'); each segment gets the
+    same $-suffix stripped, then they're rejoined for display."""
+    if not ad:
+        return ""
+    parts = [tok.split("$")[0].strip() for tok in ad.split("##")]
+    return " · ".join(p for p in parts if p)
+
 TYPE_LABELS = {  # ashtadhyayi.com sutra-type code -> (english, devanagari)
     "S":  ("Definition (saṃjñā)", "संज्ञा"),
     "P":  ("Meta-rule (paribhāṣā)", "परिभाषा"),
@@ -140,6 +155,18 @@ def write_layer(rel, meta, items):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--local", help="path to a local clone of ashtadhyayi-com/data")
+    # The 'english' field (sutrartha_english.txt, verbatim ashtadhyayi.com
+    # text) was removed from the published sutrapatha/data.json on 23 Aug
+    # 2026 -- it was shown to readers with zero attribution, held only under
+    # an informal curator e-mail permission (no formal licence). Off by
+    # default so a routine re-run of this importer (e.g. to refresh
+    # padaccheda/anvaya/anuvritti/sutra_type from a newer upstream commit)
+    # does not silently reintroduce it. See dge/PENDING.md and
+    # admin/content/ashtadhyayi-layers.json -- do not pass this flag until
+    # real licensing is resolved with ashtadhyayi.com.
+    ap.add_argument("--allow-ashtadhyayi-com-english", action="store_true",
+                     help="Re-include the sutrartha_english.txt 'english' gloss field. "
+                          "Deliberately off by default -- see the comment above this flag.")
     args = ap.parse_args()
 
     base = data_base()
@@ -175,15 +202,18 @@ def main():
             anu = parse_anuvritti(meta.get("an", ""))
             if anu:
                 row["anuvritti"] = anu
-            ad = (meta.get("ad") or "").strip()
+            ad = parse_adhikara(meta.get("ad") or "")
             if ad:
                 row["adhikara"] = ad
             st = parse_type(meta.get("type", ""))
             if st:
                 row["sutra_type"] = st
-        en = (sut_en.get(aid) or "").strip() or clean_html(vasu_s.get(aid, ""))
-        if en:
-            row["english"] = en
+        if args.allow_ashtadhyayi_com_english:
+            en = (sut_en.get(aid) or "").strip() or clean_html(vasu_s.get(aid, ""))
+            if en:
+                row["english"] = en
+        elif "english" in row:
+            del row["english"]  # a stale field from a pre-23-Aug data.json, not this run's output
         if any(k in row for k in ("padaccheda", "anvaya", "anuvritti", "sutra_type", "english")):
             enriched += 1
 
@@ -214,10 +244,23 @@ def main():
                                "author": "Śrīśa Chandra Vasu", "tika_title": "Vasu — English translation"})
 
     # write sutrapatha back (enriched)
+    fields = ["padaccheda", "anvaya", "anuvritti", "adhikara", "sutra_type"]
+    if args.allow_ashtadhyayi_com_english:
+        fields.append("english")
     sutrapatha["enrichment"] = {
         "source": "ashtadhyayi.com sutraani/data.txt + sutrartha_english.txt",
-        "fields": ["padaccheda", "anvaya", "anuvritti", "adhikara", "sutra_type", "english"]
+        "fields": fields
     }
+    if not args.allow_ashtadhyayi_com_english:
+        # Preserve the 23-Aug removal note across re-runs rather than
+        # silently dropping it -- see the --allow-ashtadhyayi-com-english
+        # comment above for the full story.
+        sutrapatha["enrichment"]["removed_field_note"] = (
+            "'english' (verbatim ashtadhyayi.com sutrartha_english.txt) is deliberately "
+            "not imported by default -- pass --allow-ashtadhyayi-com-english to this "
+            "script to re-include it, only once real licensing is resolved. See "
+            "dge/PENDING.md and admin/content/ashtadhyayi-layers.json."
+        )
     json.dump(sutrapatha, open(sut_fp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"  enriched sutrapatha in place  ({enriched}/{len(sutras)} sutras got >=1 new field)")
 
