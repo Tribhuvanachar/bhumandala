@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.15 (word-level tap-to-select fragility fix: new window.dgeRobustSelectedText() resolves the active selection against render.js\'s per-word .dge-word span boundaries instead of trusting window.getSelection().toString() directly, which could jump to a shared ancestor and yield truncated/empty text on rapid mobile re-selection. dgeSelectedWordText() and the selection-tooltip handler both use it now. Everything from v3.14 -- Gemini dhātu lexicon meanings -- unchanged)';
+window.DGE_VERSIONS['ai.js'] = 'v3.16 (selection tooltip now contextual: dgeUpdateWordToolsForSelection() hides #wordToolsRow\'s single-word-only grammar tools -- Shabda/Dhatu/Sandhi/Samasa -- when the resolved selection is a multi-word phrase, since each of those does a lookup only meaningful for one word; "Where else" stays for both. Everything from v3.15 -- the word-tap-to-select fragility fix -- unchanged)';
 
 // Appends a language directive read from onboarding.js's saved preference
 // (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
@@ -26,6 +26,26 @@ function dgeLangInstruction() {
 // SEE this tooltip. Previously this returned before the tooltip could ever
 // show for anyone without acharyaAuthorized set, which silently hid the
 // word tools from every ordinary visitor, not just Ask Acharya.
+// Contextual selection tooltip (24 Aug 2026, project lead's direct report:
+// "clicking on a word or selecting a word should display the options
+// contextually. That is also not happening"). Confirmed the tooltip itself
+// was never actually failing to appear (verified live: a real selection
+// correctly shows it) -- the real gap was that #wordToolsRow's word-level
+// grammar tools (Shabda/Dhatu/Sandhi/Samasa) showed up identically whether
+// the reader had selected a single word or dragged across a whole phrase,
+// even though every one of those tools does a lookup that is only
+// meaningful for exactly one word (a declension table, a dhatupatha root
+// search, a per-word sandhi split) -- tapping any of them on a multi-word
+// selection was a dead end, not a helpful contextual option. "Where else"
+// (corpus search) is left showing for both, since searching a phrase is
+// perfectly reasonable.
+function dgeUpdateWordToolsForSelection(txt) {
+  const isSingleWord = !!txt && !/\s/.test(txt.trim());
+  document.querySelectorAll('#wordToolsRow [data-word-only]').forEach(btn => {
+    btn.style.display = isSingleWord ? '' : 'none';
+  });
+}
+
 document.addEventListener('selectionchange', () => {
   const activeTag = document.activeElement ? document.activeElement.tagName : '';
   if (['INPUT', 'TEXTAREA'].includes(activeTag)) {
@@ -72,7 +92,8 @@ document.addEventListener('selectionchange', () => {
         window.lastSelectedText = txt;
         if (modalAppendBtn) modalAppendBtn.style.display = 'none';
         tooltip.style.display = 'flex';
-        
+        dgeUpdateWordToolsForSelection(txt);
+
         const tw = tooltip.offsetWidth || 260;
         let left = rect.left + (rect.width / 2);
         left = Math.max(tw/2 + 8, Math.min(left, window.innerWidth - tw/2 - 8));

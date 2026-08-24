@@ -48,11 +48,11 @@
   <div class="tooltip-row" id="acharyaQueryButtonsRow"></div>
   <div id="acharyaFullWidthButtons"></div>
   <div class="tooltip-row" id="wordToolsRow">
-    <button class="tooltip-btn" onpointerdown="window.dgeOpenShabdaForSelection(event)" title="Declension table, plus Vidyut/sandhi fallbacks and dictionary results for this word">🔤 Shabda</button>
-    <button class="tooltip-btn" onpointerdown="window.dgeOpenDhatuForSelection(event)" title="Search the Dhatupatha for a matching root and show its derivation">📚 Dhātu</button>
-    <button class="tooltip-btn" onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Sandhi split for this word — real Vidyut data when available, AI-assisted otherwise">🔗 Sandhi</button>
-    <button class="tooltip-btn" onpointerdown="window.askAcharya(event, 'samasa')" title="Samasa Vigraha for this word (AI-assisted — Vidyut has no precomputed samasa data yet)">🧩 Samasa</button>
-    <button class="tooltip-btn" onpointerdown="window.dgeOpenCorpusSearchForSelection(event)" title="Find every other place this word appears in the library">🔍 Where else</button>
+    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenShabdaForSelection(event)" title="Declension table, plus Vidyut/sandhi fallbacks and dictionary results for this word">🔤 Shabda</button>
+    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenDhatuForSelection(event)" title="Search the Dhatupatha for a matching root and show its derivation">📚 Dhātu</button>
+    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Sandhi split for this word — real Vidyut data when available, AI-assisted otherwise">🔗 Sandhi</button>
+    <button class="tooltip-btn" data-word-only onpointerdown="window.askAcharya(event, 'samasa')" title="Samasa Vigraha for this word (AI-assisted — Vidyut has no precomputed samasa data yet)">🧩 Samasa</button>
+    <button class="tooltip-btn" onpointerdown="window.dgeOpenCorpusSearchForSelection(event)" title="Find every other place this word or phrase appears in the library">🔍 Where else</button>
   </div>
 </div>
 
@@ -1125,7 +1125,7 @@
 <script src="js/voice.js?v=4.60.6"></script>
 <script src="js/screenshot.js?v=4.60.7"></script>
 <script src="js/subanta-steps.js?v=1"></script>
-<script src="js/ai.js?v=4.72.1"></script>
+<script src="js/ai.js?v=4.72.2"></script>
 <!-- Renders Gemini-enrichment references (see tools/gemini_enrich.py) as
      inline footnote markers + a footnote list. Loaded before render.js,
      which calls into it. Additive: absent enrichment data, nothing changes. -->
