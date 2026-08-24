@@ -88,32 +88,6 @@
          scrollable popup — same options, one entry point. -->
     <div style="position:relative;" data-topbar="display">
       <button class="btn-top" onclick="window.togglePopup('displayPopup')" title="Display: size, script, theme, view">🅰</button>
-      <div class="popup popup-top popup-scroll" id="displayPopup">
-        <div class="popup-label">Reading Script</div>
-        <div class="pop-item active" data-script="devanagari" onclick="window.setScript('devanagari', this)">Sanskrit <span style="margin-left:auto; font-family:var(--font-sanskrit);">संस्कृतम्</span></div>
-        <div class="pop-item" data-script="iast" onclick="window.setScript('iast', this)">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
-        <div class="pop-item" data-script="kannada" onclick="window.setScript('kannada', this)">Kannada <span style="margin-left:auto; font-family:serif;">ಕನ್ನಡ</span></div>
-        <div class="pop-item" data-script="telugu" onclick="window.setScript('telugu', this)">Telugu <span style="margin-left:auto; font-family:serif;">తెలుగు</span></div>
-        <div class="pop-item" data-script="tamil" onclick="window.setScript('tamil', this)">Tamil <span style="margin-left:auto; font-family:serif;">தமிழ்</span></div>
-        <div class="pop-item" data-script="malayalam" onclick="window.setScript('malayalam', this)">Malayalam <span style="margin-left:auto; font-family:serif;">മലയാളം</span></div>
-        <hr>
-        <div class="popup-label">Reading Size</div>
-        <div class="pop-item" data-size="16" onclick="window.setFontSize(16, this)">Small <span style="margin-left:auto; color:#8a7a63; font-size:10px;">16px</span></div>
-        <div class="pop-item active" data-size="18" onclick="window.setFontSize(18, this)" id="font-def">Medium <span style="margin-left:auto; color:#8a7a63; font-size:10px;">18px</span></div>
-        <div class="pop-item" data-size="20" onclick="window.setFontSize(20, this)">Large <span style="margin-left:auto; color:#8a7a63; font-size:10px;">20px</span></div>
-        <div class="pop-item" data-size="23" onclick="window.setFontSize(23, this)">Larger <span style="margin-left:auto; color:#8a7a63; font-size:10px;">23px</span></div>
-        <hr>
-        <div class="popup-label">Reading View</div>
-        <div class="pop-item" data-viewmode="list" onclick="window.dgeSetViewMode('list')">📜 Full List</div>
-        <div class="pop-item" data-viewmode="single" onclick="window.dgeSetViewMode('single')">🔎 One at a Time</div>
-        <hr>
-        <div class="popup-label">Appearance</div>
-        <div class="pop-item active" data-theme="vandana" onclick="window.setTheme('vandana', this)"><span class="theme-swatch theme-swatch-vandana"></span>Vandana</div>
-        <div class="pop-item" data-theme="traditional" onclick="window.setTheme('traditional', this)"><span class="theme-swatch theme-swatch-traditional"></span>Traditional</div>
-        <div class="pop-item" data-theme="minimal" onclick="window.setTheme('minimal', this)"><span class="theme-swatch theme-swatch-minimal"></span>Minimal</div>
-        <div class="pop-item" data-theme="vibrant" onclick="window.setTheme('vibrant', this)"><span class="theme-swatch theme-swatch-vibrant"></span>Vibrant</div>
-        <div class="pop-item" data-theme="darkglass" onclick="window.setTheme('darkglass', this)"><span class="theme-swatch theme-swatch-darkglass"></span>Dark Glass</div>
-      </div>
     </div>
 
     <!-- Admin tools, hidden entirely unless authorised -->
@@ -175,6 +149,50 @@
         <div class="pop-item" id="logoutAccessItem" style="display:none; color:var(--accent-red);" onclick="window.togglePopup('accessPopup'); window.dgeLogoutAdminAccess()">🚪 Log Out (clear access)</div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- 24 Aug 2026: displayPopup lives here, as a sibling of .top-bar rather
+     than nested inside it, on purpose -- .top-bar has backdrop-filter,
+     which (like transform/filter/perspective) creates a new containing
+     block for position:fixed descendants. A .popup-sheet is fixed so it
+     can anchor to the real viewport bottom for a proper bottom sheet; left
+     nested inside .top-bar it was anchoring to the 50px toolbar instead,
+     landing near the top of the screen. Structure/ids/pop-item children
+     unchanged: transliteration.js, utils.js, render.js and menu.js all
+     query #displayPopup .pop-item[...] directly and need no changes for
+     this, since togglePopup() finds it by id regardless of DOM position. -->
+<div class="popup popup-sheet" id="displayPopup">
+  <div class="popup-sheet-handle"></div>
+  <div class="flex-row" style="justify-content:space-between; align-items:center; flex-shrink:0;">
+    <span style="font-weight:700; font-size:13px;">Display</span>
+    <button class="btn-sm" onclick="window.togglePopup('displayPopup')">✖ Close</button>
+  </div>
+  <div class="popup-sheet-scroll">
+  <div class="popup-label">Reading Script</div>
+  <div class="pop-item active" data-script="devanagari" onclick="window.setScript('devanagari', this)">Sanskrit <span style="margin-left:auto; font-family:var(--font-sanskrit);">संस्कृतम्</span></div>
+  <div class="pop-item" data-script="iast" onclick="window.setScript('iast', this)">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
+  <div class="pop-item" data-script="kannada" onclick="window.setScript('kannada', this)">Kannada <span style="margin-left:auto; font-family:serif;">ಕನ್ನಡ</span></div>
+  <div class="pop-item" data-script="telugu" onclick="window.setScript('telugu', this)">Telugu <span style="margin-left:auto; font-family:serif;">తెలుగు</span></div>
+  <div class="pop-item" data-script="tamil" onclick="window.setScript('tamil', this)">Tamil <span style="margin-left:auto; font-family:serif;">தமிழ்</span></div>
+  <div class="pop-item" data-script="malayalam" onclick="window.setScript('malayalam', this)">Malayalam <span style="margin-left:auto; font-family:serif;">മലയാളം</span></div>
+  <hr>
+  <div class="popup-label">Reading Size</div>
+  <div class="pop-item" data-size="16" onclick="window.setFontSize(16, this)">Small <span style="margin-left:auto; color:#8a7a63; font-size:10px;">16px</span></div>
+  <div class="pop-item active" data-size="18" onclick="window.setFontSize(18, this)" id="font-def">Medium <span style="margin-left:auto; color:#8a7a63; font-size:10px;">18px</span></div>
+  <div class="pop-item" data-size="20" onclick="window.setFontSize(20, this)">Large <span style="margin-left:auto; color:#8a7a63; font-size:10px;">20px</span></div>
+  <div class="pop-item" data-size="23" onclick="window.setFontSize(23, this)">Larger <span style="margin-left:auto; color:#8a7a63; font-size:10px;">23px</span></div>
+  <hr>
+  <div class="popup-label">Reading View</div>
+  <div class="pop-item" data-viewmode="list" onclick="window.dgeSetViewMode('list')">📜 Full List</div>
+  <div class="pop-item" data-viewmode="single" onclick="window.dgeSetViewMode('single')">🔎 One at a Time</div>
+  <hr>
+  <div class="popup-label">Appearance</div>
+  <div class="pop-item active" data-theme="vandana" onclick="window.setTheme('vandana', this)"><span class="theme-swatch theme-swatch-vandana"></span>Vandana</div>
+  <div class="pop-item" data-theme="traditional" onclick="window.setTheme('traditional', this)"><span class="theme-swatch theme-swatch-traditional"></span>Traditional</div>
+  <div class="pop-item" data-theme="minimal" onclick="window.setTheme('minimal', this)"><span class="theme-swatch theme-swatch-minimal"></span>Minimal</div>
+  <div class="pop-item" data-theme="vibrant" onclick="window.setTheme('vibrant', this)"><span class="theme-swatch theme-swatch-vibrant"></span>Vibrant</div>
+  <div class="pop-item" data-theme="darkglass" onclick="window.setTheme('darkglass', this)"><span class="theme-swatch theme-swatch-darkglass"></span>Dark Glass</div>
   </div>
 </div>
 

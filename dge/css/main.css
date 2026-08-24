@@ -331,6 +331,41 @@ details.dge-analysis-field[open] > summary.commentary-title { margin-bottom: 8px
 /* The consolidated Display popup holds four sections at once, so it needs
    to scroll rather than run off the bottom of a phone screen. */
 .popup-scroll { max-height: min(70vh, 460px); overflow-y: auto; overscroll-behavior: contain; }
+
+/* 24 Aug 2026: .popup-sheet turns an anchored dropdown into a real bottom
+   sheet -- full width, rises from the bottom edge, room to breathe instead
+   of a 460px box holding 4 merged sections. No JS changes needed: it's
+   still opened/closed via the existing togglePopup()/.show class, and
+   every #displayPopup .pop-item[...] lookup elsewhere (transliteration.js,
+   utils.js, render.js, menu.js) is untouched since the id and children
+   don't change, only this element's own positioning.
+   Important: a .popup-sheet must NOT be nested inside an element that has
+   backdrop-filter/filter/transform/perspective (like .top-bar) -- any of
+   those create a new containing block for position:fixed descendants, so
+   the sheet ends up anchored to that ancestor's small box instead of the
+   real viewport. See index.html: #displayPopup is placed as a sibling of
+   .top-bar for exactly this reason. */
+.popup.popup-sheet {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  width: 100%; max-width: 100%; margin: 0 auto;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-left: none; border-right: none; border-bottom: none;
+  height: auto; max-height: 80vh; padding: 10px 16px calc(16px + env(safe-area-inset-bottom));
+  transform: translateY(100%);
+  transition: transform var(--t-med) var(--ease), opacity var(--t-fast) var(--ease), visibility var(--t-fast) var(--ease);
+  z-index: 10500;
+}
+.popup.popup-sheet.show { transform: translateY(0); }
+.popup-sheet-handle { width: 36px; height: 4px; border-radius: var(--radius-pill); background: var(--card-border); margin: 0 auto 6px; flex-shrink: 0; }
+.popup-sheet-scroll { overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 12px; flex: 1 1 auto; min-height: 0; }
+/* Backdrop: CSS-only via :has(), so opening/closing the sheet needs no JS
+   changes. Degrades gracefully (no dimming, sheet still fully usable) in
+   the rare browser without :has() support. */
+body:has(.popup-sheet.show)::after {
+  content: ''; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  z-index: 10400; animation: dgeSheetFadeIn var(--t-fast) var(--ease);
+}
+@keyframes dgeSheetFadeIn { from { opacity: 0; } to { opacity: 1; } }
 .popup-label { font-size: 10px; color: #8a7a63; text-transform: uppercase; letter-spacing: 0.04em; }
 .popup.show { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
 .popup hr { width: 100%; border: 0; border-top: 1px solid var(--card-border); margin: 0; }
