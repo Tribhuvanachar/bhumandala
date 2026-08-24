@@ -421,6 +421,12 @@ function renderList() {
     const footnoteListHtml = footnoteResult
       ? `<div class="dge-fn-block">${footnoteResult.footnotesHtml}</div>` : '';
 
+    // App View only (see dgeSetLayoutMode) -- hidden by default in the
+    // existing Scholar view via main.css. Nothing to show/hide if this
+    // card has neither commentary nor analysis fields.
+    const appViewToggleHtml = (commentaryHtml || extraFieldsHtml)
+      ? `<button type="button" class="dge-appview-toggle" onclick="event.stopPropagation(); window.dgeToggleCardExpanded(this)">▾ Show commentary</button>` : '';
+
     c.innerHTML = `
       ${cardActionsHtml}
       <div class="shloka-main-row">
@@ -430,6 +436,7 @@ function renderList() {
         <button class="btn-icon copy-shloka-btn" title="Copy shloka text" onclick="event.stopPropagation(); if(typeof copyShlokaText==='function') copyShlokaText(${i})">📋</button>
       </div>
       ${footnoteListHtml}
+      ${appViewToggleHtml}
       ${extraFieldsHtml}
       ${commentaryHtml}`;
     listEl.appendChild(c);
@@ -508,6 +515,33 @@ window.dgeSetViewMode = function(mode) {
     window.currentReadingId = (typeof activeId !== 'undefined' && activeId) || fIds[0] || 1;
   }
   if (typeof renderList === 'function') renderList();
+};
+
+// Phase 5 of the mobile UI overhaul: a second, lower-density layout
+// alongside the existing dense "Scholar" view (see the App Layouts entry
+// in the Display sheet). Pure CSS/class-driven -- body.dge-app-view (see
+// main.css) collapses each card's commentary/analysis behind the
+// per-card .dge-appview-toggle button rendered below, with no re-render
+// needed on switch since the collapse/reveal is driven entirely by CSS
+// selectors on classes already present in the DOM either way.
+window.dgeSetLayoutMode = function (mode) {
+  const isApp = mode === 'app';
+  document.body.classList.toggle('dge-app-view', isApp);
+  localStorage.setItem('app_layoutMode', isApp ? 'app' : 'scholar');
+  document.querySelectorAll('#displayPopup .pop-item[data-layout]').forEach(el => {
+    el.classList.toggle('active', el.dataset.layout === (isApp ? 'app' : 'scholar'));
+  });
+};
+
+// Toggles one card's expanded state -- a dedicated button rather than a
+// whole-card tap gesture, since .shloka-text's own tap already calls
+// loadShloka() to select/play that verse; an ambiguous full-card tap
+// would collide with that existing behaviour.
+window.dgeToggleCardExpanded = function (btnEl) {
+  const card = btnEl.closest('.shloka-card');
+  if (!card) return;
+  const expanded = card.classList.toggle('dge-card-expanded');
+  btnEl.textContent = expanded ? '▴ Hide commentary' : '▾ Show commentary';
 };
 
 // Scrolls a card to sit just below the sticky header stack (top bar +

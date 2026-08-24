@@ -525,6 +525,28 @@ body.dge-immersive { padding-top: env(safe-area-inset-top) !important; padding-b
 }
 body.dge-immersive .immersive-exit-btn { display: flex; }
 
+/* 24 Aug 2026 -- Phase 5: App View, a second lower-density layout
+   alongside the existing dense "Scholar" view (see window.dgeSetLayoutMode
+   in render.js and the App Layouts section of the Display sheet in
+   index.html). Purely class/CSS-driven: each card's commentary/analysis
+   is hidden by default and revealed per-card via the .dge-appview-toggle
+   button render.js already emits for every card (present, just display:
+   none, in Scholar view) -- switching modes needs no re-render since both
+   states are already in the DOM either way. */
+.dge-appview-toggle { display: none; }
+body.dge-app-view .shloka-card .dge-appview-toggle {
+  display: flex; align-items: center; justify-content: center; width: 100%;
+  background: transparent; border: 1px dashed var(--card-border); color: var(--muted-text);
+  font-size: 11px; font-weight: 700; padding: 7px; border-radius: var(--radius-xs); cursor: pointer;
+}
+body.dge-app-view .shloka-card .dge-appview-toggle:active { background: var(--card-active); }
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .commentary-block,
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-commentary-tabbed,
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-analysis-field,
+body.dge-app-view .shloka-card:not(.dge-card-expanded) .dge-fn-block { display: none; }
+body.dge-app-view .shloka-card { padding: 16px; gap: 10px; }
+body.dge-app-view .shloka-list { gap: 14px; }
+
 .modal-header-sticky { padding: 16px; background: var(--card-bg); z-index: 10; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
 .modal-body { padding: 16px; overflow-y: auto; flex-grow: 1; }
 

@@ -200,6 +200,10 @@
     <button class="btn-sm" onclick="window.togglePopup('displayPopup')">✖ Close</button>
   </div>
   <div class="popup-sheet-scroll">
+  <div class="popup-label">Layout</div>
+  <div class="pop-item active" data-layout="scholar" onclick="window.dgeSetLayoutMode('scholar')">📚 Scholar <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Dense, everything shown</span></div>
+  <div class="pop-item" data-layout="app" onclick="window.dgeSetLayoutMode('app')">📱 App <span style="margin-left:auto; color:#8a7a63; font-size:10px;">Compact, tap to expand</span></div>
+  <hr>
   <div class="popup-label">Reading Script</div>
   <div class="pop-item active" data-script="devanagari" onclick="window.setScript('devanagari', this)">Sanskrit <span style="margin-left:auto; font-family:var(--font-sanskrit);">संस्कृतम्</span></div>
   <div class="pop-item" data-script="iast" onclick="window.setScript('iast', this)">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
