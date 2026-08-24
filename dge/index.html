@@ -878,6 +878,18 @@
       <button class="btn-sm" onclick="window.closeModal('libraryModal')" style="font-size:11px;" title="Close">❮</button>
     </div>
     <div class="modal-body">
+      <!-- 24 Aug 2026: icon-driven Library home screen, alongside the
+           existing text tree -- a view mode over the SAME data
+           (library.js's dgeRenderLibraryRoot), not a separate feature.
+           Defaults to Grid; List is still one tap away and remembered
+           per device. -->
+      <div class="range-row-flex" style="margin-bottom:10px;">
+        <span style="font-size:10px; color:var(--muted-text); text-transform:uppercase;">Browse</span>
+        <div class="range-mode-toggle" id="libraryViewToggle">
+          <button type="button" class="range-mode-btn active" data-library-view="grid" onclick="window.dgeSetLibraryViewMode('grid')">▦ Grid</button>
+          <button type="button" class="range-mode-btn" data-library-view="list" onclick="window.dgeSetLibraryViewMode('list')">☰ List</button>
+        </div>
+      </div>
       <div style="display:flex; gap:6px; margin-bottom:14px;">
         <input type="text" id="quickJumpInput" class="modal-input" placeholder="Quick jump, e.g. rv1.1.3 or pns5" style="margin:0; flex:1;"
                onkeydown="if(event.key==='Enter'){window.dgeQuickJump(this.value);}">
