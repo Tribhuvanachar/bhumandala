@@ -65082,6 +65082,204 @@
     }
   },
   {
+    "dhatu_id": "06.0108",
+    "canonical_form": "तुभ्",
+    "dhatupatha_entry": "टुभिँ / ष्टुभँ (तुभँ रोधने / स्तम्भने)",
+    "gana": {
+      "id": 6,
+      "name_sanskrit": "तुदादिः",
+      "name_transliterated": "Tudādi"
+    },
+    "artha": {
+      "sanskrit": "रोधने, स्तम्भने",
+      "english": "to stop, arrest, check, paralyze"
+    },
+    "it_status": "aniṭ",
+    "pada": "parasmaipada",
+    "varna_vicheda": "त् + उ + भ्",
+    "lakaras": {
+      "lat": {
+        "prathama": {
+          "ekavacana": "तुभति",
+          "dvivacana": "तुभतः",
+          "bahuvacana": "तुभन्ति"
+        },
+        "madhyama": {
+          "ekavacana": "तुभसि",
+          "dvivacana": "तुभथः",
+          "bahuvacana": "तुभथ"
+        },
+        "uttama": {
+          "ekavacana": "तुभामि",
+          "dvivacana": "तुभावः",
+          "bahuvacana": "तुभामः"
+        }
+      },
+      "lit": {
+        "prathama": {
+          "ekavacana": "तुतोभ",
+          "dvivacana": "तुतुभतुः",
+          "bahuvacana": "तुतुभुः"
+        },
+        "madhyama": {
+          "ekavacana": "तुतोभिथ / तुतुब्ध",
+          "dvivacana": "तुतुभथुः",
+          "bahuvacana": "तुतुभ"
+        },
+        "uttama": {
+          "ekavacana": "तुतोभ / तुतुभ",
+          "dvivacana": "तुतुभिव",
+          "bahuvacana": "तुतुभिम"
+        }
+      },
+      "lut": {
+        "prathama": {
+          "ekavacana": "तोब्धा",
+          "dvivacana": "तोब्धारौ",
+          "bahuvacana": "तोब्धारः"
+        },
+        "madhyama": {
+          "ekavacana": "तोब्धासि",
+          "dvivacana": "तोब्धास्थः",
+          "bahuvacana": "तोब्धास्थ"
+        },
+        "uttama": {
+          "ekavacana": "तोब्धास्मि",
+          "dvivacana": "तोब्धास्वः",
+          "bahuvacana": "तोब्धास्मः"
+        }
+      },
+      "lrt": {
+        "prathama": {
+          "ekavacana": "तोप्स्यति",
+          "dvivacana": "तोप्स्यतः",
+          "bahuvacana": "तोप्स्यन्ति"
+        },
+        "madhyama": {
+          "ekavacana": "तोप्स्यसि",
+          "dvivacana": "तोप्स्यथः",
+          "bahuvacana": "तोप्स्यथ"
+        },
+        "uttama": {
+          "ekavacana": "तोप्स्यामि",
+          "dvivacana": "तोप्स्यावः",
+          "bahuvacana": "तोप्स्यामः"
+        }
+      },
+      "lot": {
+        "prathama": {
+          "ekavacana": "तुभतु",
+          "dvivacana": "तुभताम्",
+          "bahuvacana": "तुभन्तु"
+        },
+        "madhyama": {
+          "ekavacana": "तुभ",
+          "dvivacana": "तुभतम्",
+          "bahuvacana": "तुभत"
+        },
+        "uttama": {
+          "ekavacana": "तुभानि",
+          "dvivacana": "तुभाव",
+          "bahuvacana": "तुभाम"
+        }
+      },
+      "lan": {
+        "prathama": {
+          "ekavacana": "अतुभत्",
+          "dvivacana": "अतुभताम्",
+          "bahuvacana": "अतुभन्"
+        },
+        "madhyama": {
+          "ekavacana": "अतुभः",
+          "dvivacana": "अतुभतम्",
+          "bahuvacana": "अतुभत"
+        },
+        "uttama": {
+          "ekavacana": "अतुभम्",
+          "dvivacana": "अतुभाव",
+          "bahuvacana": "अतुभाम"
+        }
+      },
+      "vidhilin": {
+        "prathama": {
+          "ekavacana": "तुभेत्",
+          "dvivacana": "तुभेताम्",
+          "bahuvacana": "तुभेयुः"
+        },
+        "madhyama": {
+          "ekavacana": "तुभेः",
+          "dvivacana": "तुभेतम्",
+          "bahuvacana": "तुभेत"
+        },
+        "uttama": {
+          "ekavacana": "तुभेयम्",
+          "dvivacana": "तुभेव",
+          "bahuvacana": "तुभेम"
+        }
+      },
+      "ashirlin": {
+        "prathama": {
+          "ekavacana": "तुभ्यात्",
+          "dvivacana": "तुभ्यास्ताम्",
+          "bahuvacana": "तुभ्यासुः"
+        },
+        "madhyama": {
+          "ekavacana": "तुभ्याः",
+          "dvivacana": "तुभ्यास्तम्",
+          "bahuvacana": "तुभ्यास्त"
+        },
+        "uttama": {
+          "ekavacana": "तुभ्यासम्",
+          "dvivacana": "तुभ्यास्व",
+          "bahuvacana": "तुभ्यास्म"
+        }
+      },
+      "lun": {
+        "prathama": {
+          "ekavacana": "अतौप्सीत्",
+          "dvivacana": "अतोब्धाम्",
+          "bahuvacana": "अतोप्सुः"
+        },
+        "madhyama": {
+          "ekavacana": "अतौप्सीः",
+          "dvivacana": "अतोब्धम्",
+          "bahuvacana": "अतोब्ध"
+        },
+        "uttama": {
+          "ekavacana": "अतौप्सम्",
+          "dvivacana": "अतोप्स्व",
+          "bahuvacana": "अतोप्स्म"
+        }
+      },
+      "lrn": {
+        "prathama": {
+          "ekavacana": "अतोप्स्यत्",
+          "dvivacana": "अतोप्स्यताम्",
+          "bahuvacana": "अतोप्स्यन्"
+        },
+        "madhyama": {
+          "ekavacana": "अतोप्स्यः",
+          "dvivacana": "अतोप्स्यतम्",
+          "bahuvacana": "अतोप्स्यत"
+        },
+        "uttama": {
+          "ekavacana": "अतोप्स्यम्",
+          "dvivacana": "अतोप्स्याव",
+          "bahuvacana": "अतोप्स्याम"
+        }
+      }
+    },
+    "krdanta_forms": {
+      "ktva": "तुब्ध्वा / तोभित्वा",
+      "tumun": "तोब्धुम्",
+      "kta": "तुब्धः",
+      "ktavatu": "तुब्धवान्",
+      "shatr": "तुभत्",
+      "tavya": "तोब्धव्यम्",
+      "aniya": "तोभनीयम्"
+    }
+  },
+  {
     "dhatu_id": "06.0109",
     "aupadeshika": "kṛṣa",
     "stripped_root": "kṛṣ",
