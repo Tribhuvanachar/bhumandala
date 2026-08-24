@@ -109,18 +109,26 @@ def wikitext(page_title, retries=8):
     raise RateLimited(f"{page_title!r}: exhausted retries")
 
 
-def subpage_list(index_title):
+def subpage_list(index_title, link_prefix=None):
     """Parse the index page's wikitext for [[Title/Subpage|label]] links,
-    in document order (this is the chapter ordering, not alphabetical)."""
+    in document order (this is the chapter ordering, not alphabetical).
+    `link_prefix` defaults to `index_title` -- the usual case, a page's own
+    subpages link to themselves as "ThisPage/Sub". Padmasamhita's pada
+    index pages don't: fetched at "पद्मसंहिता/क्रियापादः", but the chapter
+    links on that page read "क्रियापादः/अध्यायः N" with no "पद्मसंहिता/"
+    prefix at all (checked directly, not assumed to match every other
+    index page's own naming) -- passing link_prefix="क्रियापादः"
+    separately from the fetched title handles that."""
     wt = wikitext(index_title)
     if wt is None:
         raise RuntimeError(f"could not fetch index page {index_title!r}")
+    prefix = link_prefix if link_prefix is not None else index_title
     links = re.findall(r"\[\[([^\]|]+)(?:\|[^\]]*)?\]\]", wt)
     seen = set()
     out = []
     for link in links:
         link = link.strip()
-        if link.startswith(index_title + "/") and link not in seen:
+        if link.startswith(prefix + "/") and link not in seen:
             seen.add(link)
             out.append(link)
     return out
@@ -455,6 +463,108 @@ def parse_chapter_critical(page_title, chapter_num):
     return chapter_title, units
 
 
+# Padmasamhita (checked directly against a chapter sample from each of
+# its 4 padas, not assumed to share one convention just because they're
+# part of the same work) uses the same chapter.verse ref pairing
+# Ahirbudhnyasamhita/Vishnusamhita do, but each pada's own editorial
+# apparatus differs: yogapada wraps section headings in asterisks
+# ("*योगद्वैविध्यम्*"), kriyapada's headings carry no delimiter at all,
+# just a bare "." where a verse line would instead end in a danda
+# ("स्थानद्यैविध्यम्."), jnanapada's sampled chapter carries no section
+# headings at all, and charyapada wraps them in a tab-indented double
+# pipe ("|| विलोमनिरूपणम्.||"). One shared rule covers all four without
+# needing to know which pada a given page belongs to: a heading line
+# never carries a danda/pipe of its own (real verse text always does),
+# so any such line that's either asterisk-wrapped, double-pipe-wrapped,
+# or simply ends in a bare "." is apparatus, not text. Footnotes across
+# all 4 padas use the same bracket/paren apparatus as Jayakhyasamhita's
+# critical convention (inline bare-digit markers, footnote text on its
+# own parenthesized line) -- reused directly via the same paren/bracket
+# fixed-point stripping loop.
+#
+# jnanapada's sampled chapter was also seen dropping the chapter prefix
+# on at least one verse ref ("।। 10 ।।" instead of "।। 1.10 ।।") --
+# handled by a combined ref pattern accepting either form, falling back
+# to the page's own known chapter number when only a bare verse number
+# is given.
+PADMA_HEADING_ASTERISK_RX = re.compile(r"^\*.*\*$")
+PADMA_HEADING_PIPE_RX = re.compile(r"^\|\|.*\|\|$")
+PADMA_HEADING_BAREPERIOD_RX = re.compile(r"^[^।|]*[^।|\s]\.$")
+PADMA_REF_RX = re.compile(
+    r"[।|]{2}\s*(?:([\d०-९]+)[.\-]([\d०-९]+)|([\d०-९]+))\s*[।|]{2}"
+)
+
+
+def parse_chapter_padma(page_title, chapter_num):
+    wt = wikitext(page_title)
+    if wt is None:
+        return None, []
+    poem = extract_poem_block(wt)
+    if poem is None:
+        return None, []
+    poem = poem.replace("॥", "।।")
+
+    prev = None
+    while prev != poem:
+        prev = poem
+        poem = CRITICAL_PAREN_SPAN_RX.sub("", poem)
+        poem = CRITICAL_BRACKET_SPAN_RX.sub("", poem)
+
+    lines = poem.split("\n")
+    kept = []
+    for line in lines:
+        s = line.strip("\t ")
+        if (PADMA_HEADING_ASTERISK_RX.match(s)
+                or PADMA_HEADING_PIPE_RX.match(s)
+                or PADMA_HEADING_BAREPERIOD_RX.match(s)):
+            continue
+        kept.append(line)
+    poem = "\n".join(kept)
+
+    # Front-matter title line(s): same no-danda/no-trailing-dash heuristic
+    # as parse_chapter's own step 3, reused verbatim.
+    lines = poem.split("\n")
+    title_parts, rest_lines, in_title_zone = [], [], True
+    for line in lines:
+        s = line.strip()
+        if in_title_zone and not s:
+            if title_parts:
+                in_title_zone = False
+            continue
+        no_punct = "।" not in s and "|" not in s
+        if in_title_zone and s and no_punct and not re.search(r"-{2,}\s*$", s):
+            title_parts.append(s)
+            continue
+        in_title_zone = False
+        rest_lines.append(line)
+    chapter_title = " ".join(title_parts)
+    poem = "\n".join(rest_lines)
+
+    refs = []
+    def protect(mm):
+        refs.append(mm.group(0))
+        return SENTINEL
+    poem = re.sub(PADMA_REF_RX, protect, poem)
+    poem = re.sub(r"\d+", "", poem)
+    for r in refs:
+        poem = poem.replace(SENTINEL, r, 1)
+
+    units = []
+    prev_end = 0
+    for mm in PADMA_REF_RX.finditer(poem):
+        body = poem[prev_end:mm.start()]
+        prev_end = mm.end()
+        body = re.sub(r"\d+", "", body)
+        body = re.sub(r"\s+", " ", body).strip(" \n\t।|-")
+        if body:
+            if mm.group(1) is not None:
+                ch, vs = to_int(mm.group(1)), to_int(mm.group(2))
+            else:
+                ch, vs = chapter_num, to_int(mm.group(3))
+            units.append((ch, vs, body))
+    return chapter_title, units
+
+
 CHAPTER_NUM_RX = re.compile(r"([\d०-९]+)\s*$")
 
 
@@ -606,10 +716,131 @@ def build(work_title_devanagari, index_page_devanagari, out_rel_path, source_url
     return items, total_verses
 
 
+# (id_prefix, Devanagari pada name, index-page fetch title, chapter link
+# prefix). Checked directly, not assumed uniform: yogapada's own index is
+# reachable at the bare pada name, but kriyapada/jnanapada/charyapada's
+# bare names either 404 or (kriyapada) redirect -- each only resolves at
+# "पद्मसंहिता/<pada>". Every pada's *chapter* pages, regardless, link from
+# their own index as a bare "<pada>/अध्यायः N" with no "पद्मसंहिता/"
+# prefix at all -- see subpage_list's docstring.
+PADMA_PADAS = [
+    ("yoga", "योगपादः", "योगपादः", "योगपादः"),
+    ("kriya", "क्रियापादः", "पद्मसंहिता/क्रियापादः", "क्रियापादः"),
+    ("jnana", "ज्ञानपादः", "पद्मसंहिता/ज्ञानपादः", "ज्ञानपादः"),
+    ("charya", "चर्यापादः", "पद्मसंहिता/चर्यापादः", "चर्यापादः"),
+]
+
+
+def build_padma(out_rel_path, source_url, repo_root, request_delay=2.0):
+    """Padmasamhita doesn't fit build()'s single-work shape: it's 4
+    independently-numbered sub-works (each pada restarts adhyaya
+    numbering at 1), reached through inconsistent page-title conventions
+    per pada (see PADMA_PADAS above) -- one shared progress cache (keyed
+    "<pada_id>:<page>" so the 4 padas' own page titles, which can collide
+    on plain "अध्यायः १", never collide with each other) and one final
+    data.json with pada-qualified item ids instead."""
+    import os
+
+    out_path = repo_root + "/" + out_rel_path
+    cache_path = out_path + ".progress.json"
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+
+    cache = {}
+    if os.path.exists(cache_path):
+        with open(cache_path, encoding="utf-8") as f:
+            cache = json.load(f)
+        print(f"resuming from cache: {len(cache)} pages already fetched")
+
+    pada_pages = {}
+    for pid, pname, index_title, link_prefix in PADMA_PADAS:
+        print(f"fetching pada index: {pname} ({index_title})")
+        pages = subpage_list(index_title, link_prefix=link_prefix)
+        print(f"  {len(pages)} chapters found")
+        pada_pages[pid] = pages
+
+    try:
+        for pid, pname, index_title, link_prefix in PADMA_PADAS:
+            for page in pada_pages[pid]:
+                cache_key = f"{pid}:{page}"
+                if cache_key in cache:
+                    continue
+                num_m = CHAPTER_NUM_RX.search(page)
+                chapter_num = to_int(num_m.group(1)) if num_m else None
+                title, units = parse_chapter_padma(page, chapter_num=chapter_num)
+                cache[cache_key] = {"title": title, "units": units}
+                with open(cache_path, "w", encoding="utf-8") as f:
+                    json.dump(cache, f, ensure_ascii=False)
+                if not units:
+                    print(f"  SKIP {pid}:{page}: page exists but carries no parseable verse content")
+                else:
+                    print(f"  {pid}:{page}: {len(units)} verses")
+                time.sleep(request_delay)
+    except RateLimited as e:
+        done = sum(1 for pid, *_ in PADMA_PADAS for p in pada_pages[pid] if f"{pid}:{p}" in cache)
+        total = sum(len(pada_pages[pid]) for pid, *_ in PADMA_PADAS)
+        print(f"\nRATE LIMITED after {done}/{total} pages: {e}")
+        print(f"Progress saved to {cache_path} -- re-run this command later to resume.")
+        return None, None
+
+    missing = [f"{pid}:{p}" for pid, *_ in PADMA_PADAS for p in pada_pages[pid]
+               if f"{pid}:{p}" not in cache]
+    if missing:
+        print(f"\nWARNING: {len(missing)} pages never fetched (not rate-limited, "
+              f"just not yet attempted): {missing}")
+        return None, None
+
+    items = []
+    for pid, pname, index_title, link_prefix in PADMA_PADAS:
+        by_chapter = {}
+        chapter_titles = {}
+        for page in pada_pages[pid]:
+            entry = cache[f"{pid}:{page}"]
+            title, units = entry["title"], entry["units"]
+            if not units:
+                continue
+            chapters_seen = sorted(set(u[0] for u in units))
+            for c in chapters_seen:
+                if c not in chapter_titles and title:
+                    chapter_titles[c] = title
+            for ch, vs, body in units:
+                by_chapter.setdefault(ch, []).append((vs, body))
+        for ch in sorted(by_chapter):
+            shlokas = [{"number": vs, "sanskrit_text": text}
+                       for vs, text in sorted(by_chapter[ch])]
+            ref = chapter_titles.get(ch, f"Adhyaya {ch}")
+            items.append({
+                "id": "%s_adhyaya%02d" % (pid, ch),
+                "reference": f"पद्मसंहिता, {pname}, {ref}",
+                "shlokas": shlokas,
+            })
+
+    total_verses = sum(len(it["shlokas"]) for it in items)
+    out = {
+        "schema": "generic",
+        "default_author": "Traditionally revealed (Pancharatra Agama)",
+        "source": f"Sanskrit Wikisource, {source_url}",
+        "licence": "CC BY-SA 4.0",
+        "note": (f"{len(items)} adhyayas across 4 independently-numbered padas "
+                 f"(yoga, kriya, jnana, charya), {total_verses} shlokas total, "
+                 f"transcribed by Sanskrit Wikisource contributors."),
+        "items": items,
+    }
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(out, f, ensure_ascii=False, indent=1)
+        f.write("\n")
+    os.remove(cache_path)
+    print(f"WROTE {out_rel_path}: {len(items)} adhyayas, {total_verses} verses")
+    return items, total_verses
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("work_title")
-    ap.add_argument("index_page")
+    ap.add_argument("work_title",
+                     help="Ignored with --padma (pass a placeholder) -- "
+                          "Padmasamhita's 4 padas each carry their own name "
+                          "instead.")
+    ap.add_argument("index_page",
+                     help="Ignored with --padma (pass a placeholder).")
     ap.add_argument("out_rel_path")
     ap.add_argument("source_url")
     ap.add_argument("--repo-root", default="/home/user/bhumandala")
@@ -620,6 +851,12 @@ if __name__ == "__main__":
                           "critical-edition page with per-chapter verse "
                           "numbering and a bracket/paren apparatus, like "
                           "Jayakhyasamhita.")
+    ap.add_argument("--padma", action="store_true",
+                     help="Padmasamhita's own 4-pada build path instead of "
+                          "the single-work build() -- see build_padma().")
     args = ap.parse_args()
-    build(args.work_title, args.index_page, args.out_rel_path, args.source_url,
-          args.repo_root, args.note_extra, convention=args.convention)
+    if args.padma:
+        build_padma(args.out_rel_path, args.source_url, args.repo_root)
+    else:
+        build(args.work_title, args.index_page, args.out_rel_path, args.source_url,
+              args.repo_root, args.note_extra, convention=args.convention)
