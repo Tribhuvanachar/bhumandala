@@ -54,7 +54,7 @@ def item_count(payload):
     return 0
 
 
-FACET_KEYS = ("genre", "guna_classification", "ratnatraya", "madhva_relevance", "text_status")
+FACET_KEYS = ("genre", "guna_classification", "ratnatraya", "madhvacharya_relevance", "text_status")
 
 
 def derive_facets(payload):

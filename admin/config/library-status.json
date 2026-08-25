@@ -1,8 +1,8 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1959,
-  "loaded": 1351,
+  "leaves": 1957,
+  "loaded": 1349,
   "items": 623505
  },
  "sections": {
@@ -12,8 +12,8 @@
    "items": 43342
   },
   "darshana": {
-   "total": 1187,
-   "loaded": 846,
+   "total": 1185,
+   "loaded": 844,
    "items": 56446
   },
   "dasa_sahitya": {
@@ -841,10 +841,8 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_nivasatirthiya": 1202,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_nivasatirthiyam": 4,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_nyayasudha": 3,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_nyayasudhaparima_a": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_nyayasudhaparimala": 2,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_om_na_prayojanavattvat_om_prayojanavattvahetoriti_sutre_prayojan": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_parima_a": 1449,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_parimala": 1452,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_pranadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_samanvayadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_sarvadharmopapattyadhikaranam": 1,

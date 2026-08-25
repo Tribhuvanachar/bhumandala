@@ -39,7 +39,7 @@ def item_count(data):
 # library.json so the reader can build facet groupings without downloading
 # every leaf's full data.json just to read a handful of classification
 # fields. None -> no 'facets' key at all.
-FACET_KEYS = ('genre', 'guna_classification', 'ratnatraya', 'madhva_relevance', 'text_status')
+FACET_KEYS = ('genre', 'guna_classification', 'ratnatraya', 'madhvacharya_relevance', 'text_status')
 
 
 def facets_of(data):

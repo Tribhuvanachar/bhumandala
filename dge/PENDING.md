@@ -3715,7 +3715,7 @@ limitation of the single-target redirect table, not a bug.
 Project lead's principle, adopted as standing policy for this whole
 corpus: **the taxonomy tree should represent what a text IS** (the
 authoritative single home for that file); guna (sattvika/rajasa/tamasa),
-Madhva-relevance, genre, availability, chronology etc. are *facets*
+Madhvacharya-relevance, genre, availability, chronology etc. are *facets*
 layered on top via metadata fields, never separate physical folders. A
 text must never be duplicated across the tree because it also belongs to
 a scholarly view.
@@ -3732,15 +3732,15 @@ principle.
 
 Added independent metadata fields to every Pancharatra samhita + the
 Vaikhanasa leaf's `data.json` (`genre`, `guna_classification`,
-`ratnatraya` [bool], `madhva_relevance: {level, evidence}`,
+`ratnatraya` [bool], `madhvacharya_relevance: {level, evidence}`,
 `text_status`) — all defaulted to `not_specified`/`false`/`unpopulated`
 as appropriate, **nothing inferred**. Actually populating guna
-classification or Madhva-relevance (with real citation evidence, per the
+classification or Madhvacharya-relevance (with real citation evidence, per the
 project lead's "verified/probable/uncertain" confidence model) needs real
-source work against Madhva's own citations and is not started.
+source work against Madhvacharya's own citations and is not started.
 
 **Not started, real scope, needs its own pass(es)**:
-- The "View By" UI itself — a facet switcher (Hierarchy / Guna / Madhva
+- The "View By" UI itself — a facet switcher (Hierarchy / Guna / Madhvacharya
   relevance / Genre / Availability / ...) that regroups the Library tree
   display without touching the underlying taxonomy. This is genuine new
   frontend architecture, not a small addition.
@@ -3757,7 +3757,7 @@ source work against Madhva's own citations and is not started.
   pass before populating, not to be built from a traditional 28-text list
   blind.
 - Any migration report/validation step for reclassifying EXISTING
-  content by guna or Madhva-relevance, per the project lead's explicit
+  content by guna or Madhvacharya-relevance, per the project lead's explicit
   "no destructive migration without a report + validation first" rule —
   not yet needed since nothing has been reclassified this pass, only new
   unspecified fields added, but binding on any future pass that touches
@@ -3777,7 +3777,7 @@ these fields.
 Facets ride along on the catalog fetch the Library modal already makes
 (no new network request) — `library.json` entries now carry a `facets`
 sub-object (`genre`, `guna_classification`, `ratnatraya`,
-`madhva_relevance`, `text_status`) synced from each leaf's data.json by
+`madhvacharya_relevance`, `text_status`) synced from each leaf's data.json by
 both `register_layers.py` (new entries) and `audit_library.py --fix`
 (kept in sync on every run via a new "facet metadata out of sync" check,
 alongside the existing orphan/missing/stale/untitled ones). Selecting a
@@ -3793,7 +3793,7 @@ a disclosed limitation, not an oversight.
 Verified in a real headless-Chromium session (Playwright, driven
 directly since `chromium-cli` isn't installed in this environment) —
 screenshotted the Hierarchy view showing the new Agama branches with
-their completion badges (9/15 etc.), switched to the Guna and Madhva-
+their completion badges (9/15 etc.), switched to the Guna and Madhvacharya-
 relevance facet views and confirmed the grouped leaf list rendered (34
 leaves, correctly bucketed under "अनिर्दिष्टम्" since no real values are
 populated yet), and confirmed a category with no facets at all (Vedas)
@@ -3803,7 +3803,7 @@ root (it looks exactly like an un-refferred deep link) — set
 `sessionStorage.dge_vandana_passed = '1'` via an init script before
 navigating, or the smoke test will only ever see the landing page.
 
-**Still not done**: populating real guna/Madhva-relevance values (this
+**Still not done**: populating real guna/Madhvacharya-relevance values (this
 was always separate, deliberately deferred work, not blocked on the UI);
 the same facet treatment for Purana (guna as a view, not
 sattvika/rajasa/tamasa folders) — the metadata-sync plumbing built here

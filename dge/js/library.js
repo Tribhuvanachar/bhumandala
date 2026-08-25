@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.8 ("View By" facet switcher for the Library modal category drill-down -- Hierarchy/Guna/Madhva-relevance/Genre/Availability, backed by library.json\'s new per-leaf facets field, see dge/PENDING.md -- on top of v3.7\'s Pancharatra regroup labels)';
+window.DGE_VERSIONS['library.js'] = 'v3.9 (madhva_relevance facet renamed madhvacharya_relevance throughout -- "Madhvacharya," not "Madhva" -- and set for the 3 samhitas ChatGPT\'s survey named as cited by him (Prakasha/Vishnu/Parama), pending real citations; on top of v3.8\'s View By facet switcher)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -709,7 +709,7 @@ function dgeRenderLibraryGridView() {
 
    Principle: the taxonomy tree stays the ONE authoritative hierarchy for
    what a text IS (Ratnatraya/Pramukha/Anya, Vaishnava/Shaiva/Shakta, ...).
-   Guna, Madhva-relevance, genre and availability are per-leaf METADATA
+   Guna, Madhvacharya-relevance, genre and availability are per-leaf METADATA
    (library.json's "facets", synced from each data.json by
    tools/audit_library.py's derive_facets()), never separate folders -- a
    text is never duplicated across the tree just because it also has a
@@ -728,8 +728,8 @@ const DGE_VIEW_BY_FACETS = {
     label: 'गुणः', extract: f => f && f.guna_classification,
     values: { sattvika: 'सात्त्विकम्', rajasa: 'राजसम्', tamasa: 'तामसम्', not_specified: 'अनिर्दिष्टम्' }
   },
-  madhva_relevance: {
-    label: 'माध्वसाम्प्रदायसाम्यम्', extract: f => f && f.madhva_relevance && f.madhva_relevance.level,
+  madhvacharya_relevance: {
+    label: 'माध्वसाम्प्रदायसाम्यम्', extract: f => f && f.madhvacharya_relevance && f.madhvacharya_relevance.level,
     values: {
       direct_quote: 'प्रत्यक्षोद्धृतम्', prominent: 'प्रमुखम्',
       general_authority: 'सामान्यप्रामाण्यम्', other: 'अन्यत्', not_specified: 'अनिर्दिष्टम्'
