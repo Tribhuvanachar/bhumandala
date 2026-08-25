@@ -2,5 +2,6 @@
  "schema": "itihasa_purana_text",
  "default_author": "Maharshi Veda Vyasa",
  "items": [],
- "guna_classification": "sattvika"
+ "guna_classification": "sattvika",
+ "purana_class": "mahapurana"
 }
