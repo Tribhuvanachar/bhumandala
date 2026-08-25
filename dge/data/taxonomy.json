@@ -5239,21 +5239,28 @@
    "pancharatra": {
     "_default_author": "Traditionally revealed (Divya Prabandha of Bhagavan Narayana); human compiler varies by samhita and is often unrecorded",
     "pancharatra_samhitas": {
-     "sattvata_samhita": {},
-     "prakasha_samhita": {},
-     "paushkara_samhita": {},
-     "jayakhya_samhita": {},
-     "ahirbudhnya_samhita": {},
-     "ishvara_samhita": {},
-     "parama_samhita": {},
-     "padma_samhita": {},
-     "vishnu_samhita": {},
-     "naradiya_samhita": {},
-     "lakshmi_tantra": {},
-     "hayagriva_samhita": {},
-     "parashara_samhita": {},
-     "vasishtha_samhita": {},
-     "vishvaksena_samhita": {}
+     "_note": "Regrouped 25 Aug 2026 per the traditional Ratnatraya/Pramukha distinction (Sattvata/Paushkara/Jayakhya as the three Divya 'jewel' samhitas) rather than one flat list of 15 siblings. Guna (Sattvika/Rajasa/Tamasa) and Madhva-relevance are kept as per-text metadata fields, not folders -- see each samhita's data.json and dge/PENDING.md.",
+     "ratnatraya": {
+      "sattvata_samhita": {},
+      "paushkara_samhita": {},
+      "jayakhya_samhita": {}
+     },
+     "pramukha_samhitas": {
+      "ahirbudhnya_samhita": {},
+      "ishvara_samhita": {},
+      "parama_samhita": {},
+      "padma_samhita": {},
+      "lakshmi_tantra": {},
+      "prakasha_samhita": {},
+      "vishnu_samhita": {},
+      "vishvaksena_samhita": {},
+      "hayagriva_samhita": {}
+     },
+     "anya_samhitas": {
+      "naradiya_samhita": {},
+      "parashara_samhita": {},
+      "vasishtha_samhita": {}
+     }
     }
    },
    "vaikhanasa_agama": {}

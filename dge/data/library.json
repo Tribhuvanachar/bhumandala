@@ -154,93 +154,93 @@
       "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/ahirbudhnya_samhita/data.json",
-      "populated": true,
-      "title": "Ahirbudhnya Samhita",
-      "addedAt": "2026-08-25"
-    },
-    {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/hayagriva_samhita/data.json",
-      "populated": false,
-      "title": "Hayagriva Samhita",
-      "addedAt": "2026-08-25"
-    },
-    {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/ishvara_samhita/data.json",
-      "populated": false,
-      "title": "Ishvara Samhita",
-      "addedAt": "2026-08-25"
-    },
-    {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/jayakhya_samhita/data.json",
-      "populated": true,
-      "title": "Jayakhya Samhita",
-      "addedAt": "2026-08-25"
-    },
-    {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/lakshmi_tantra/data.json",
-      "populated": true,
-      "title": "Lakshmi Tantra",
-      "addedAt": "2026-08-25"
-    },
-    {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/naradiya_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/anya_samhitas/naradiya_samhita/data.json",
       "populated": false,
       "title": "Naradiya Samhita",
       "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/padma_samhita/data.json",
-      "populated": true,
-      "title": "Padma Samhita",
-      "addedAt": "2026-08-25"
-    },
-    {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/parama_samhita/data.json",
-      "populated": false,
-      "title": "Parama Samhita",
-      "addedAt": "2026-08-25"
-    },
-    {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/parashara_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/anya_samhitas/parashara_samhita/data.json",
       "populated": false,
       "title": "Parashara Samhita",
       "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/paushkara_samhita/data.json",
-      "populated": true,
-      "title": "Paushkara Samhita",
-      "addedAt": "2026-08-25"
-    },
-    {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/prakasha_samhita/data.json",
-      "populated": true,
-      "title": "Prakasha Samhita",
-      "addedAt": "2026-08-25"
-    },
-    {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/sattvata_samhita/data.json",
-      "populated": true,
-      "title": "Sattvata Samhita",
-      "addedAt": "2026-08-25"
-    },
-    {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/vasishtha_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/anya_samhitas/vasishtha_samhita/data.json",
       "populated": false,
       "title": "Vasishtha Samhita",
       "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/vishnu_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/ahirbudhnya_samhita/data.json",
+      "populated": true,
+      "title": "Ahirbudhnya Samhita",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/hayagriva_samhita/data.json",
+      "populated": false,
+      "title": "Hayagriva Samhita",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/ishvara_samhita/data.json",
+      "populated": false,
+      "title": "Ishvara Samhita",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/lakshmi_tantra/data.json",
+      "populated": true,
+      "title": "Lakshmi Tantra",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/padma_samhita/data.json",
+      "populated": true,
+      "title": "Padma Samhita",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/parama_samhita/data.json",
+      "populated": false,
+      "title": "Parama Samhita",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/prakasha_samhita/data.json",
+      "populated": true,
+      "title": "Prakasha Samhita",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/vishnu_samhita/data.json",
       "populated": true,
       "title": "Vishnu Samhita",
       "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/vishvaksena_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/vishvaksena_samhita/data.json",
       "populated": true,
       "title": "Vishvaksena Samhita",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/ratnatraya/jayakhya_samhita/data.json",
+      "populated": true,
+      "title": "Jayakhya Samhita",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/ratnatraya/paushkara_samhita/data.json",
+      "populated": true,
+      "title": "Paushkara Samhita",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/ratnatraya/sattvata_samhita/data.json",
+      "populated": true,
+      "title": "Sattvata Samhita",
       "addedAt": "2026-08-25"
     },
     {

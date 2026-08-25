@@ -6288,5 +6288,13 @@
         "dcs-import"
       ]
     }
-  ]
+  ],
+  "genre": "Samhita",
+  "guna_classification": "not_specified",
+  "ratnatraya": true,
+  "madhva_relevance": {
+    "level": "not_specified",
+    "evidence": []
+  },
+  "text_status": "extant_partial"
 }

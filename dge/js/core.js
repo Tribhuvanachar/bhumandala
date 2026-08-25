@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.17 (DGE_LEGACY_SLUGS: redirects for the 25 Aug Agama restructure -- pancharatra/pashupata/shaiva_siddhanta moved intact so their sub-paths resolve exactly; pratyabhijna/natha_sampradaya/shakta_agama fanned out to several new parents, so those land on the closest new home rather than the exact leaf -- on top of v3.16\'s dasa_pada_text normalizer branch)';
+window.DGE_VERSIONS['core.js'] = 'v3.18 (DGE_LEGACY_SLUGS: redirects for the Pancharatra Ratnatraya/Pramukha/Anya regroup, on top of v3.17\'s Agama restructure redirects)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -138,6 +138,39 @@ const DGE_LEGACY_SLUGS = {
   'agama/pratyabhijna':     'agama/kashmir_shaivism',
   'agama/natha_sampradaya': 'agama/natha_hathayoga',
   'agama/shakta_agama':     'agama/shakta_tantra',
+  // Pancharatra Ratnatraya/Pramukha/Anya regroup (25 Aug 2026) -- each
+  // samhita's own sub-path (schema, items, etc.) is unaffected, only the
+  // parent changed, so these resolve exactly like the moves above.
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/sattvata_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/ratnatraya/sattvata_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/paushkara_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/ratnatraya/paushkara_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/jayakhya_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/ratnatraya/jayakhya_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/ahirbudhnya_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/ahirbudhnya_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/ishvara_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/ishvara_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/parama_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/parama_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/padma_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/padma_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/lakshmi_tantra':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/lakshmi_tantra',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/prakasha_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/prakasha_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/vishnu_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/vishnu_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/vishvaksena_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/vishvaksena_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/hayagriva_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/pramukha_samhitas/hayagriva_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/naradiya_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/anya_samhitas/naradiya_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/parashara_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/anya_samhitas/parashara_samhita',
+  'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/vasishtha_samhita':
+    'agama/vaishnava_agama/pancharatra/pancharatra_samhitas/anya_samhitas/vasishtha_samhita',
   // 23 Aug 2026 restructure: dvaitavedanta/ (a separate top-level 895-item
   // tree) moved to sit alongside sarvamula under Vedanta/Dvaita, and
   // sarvamula itself was renamed SarvaMula for display-name consistency

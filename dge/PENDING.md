@@ -3685,3 +3685,56 @@ for every moved path; three of them (pratyabhijna/natha_sampradaya/
 shakta_agama) fanned out to multiple new homes, so their redirect lands
 on the closest new parent rather than the exact leaf — a real, disclosed
 limitation of the single-target redirect table, not a bug.
+
+## Pancharatra regroup + "View By" facet metadata (25 Aug 2026, part 2)
+
+Project lead's principle, adopted as standing policy for this whole
+corpus: **the taxonomy tree should represent what a text IS** (the
+authoritative single home for that file); guna (sattvika/rajasa/tamasa),
+Madhva-relevance, genre, availability, chronology etc. are *facets*
+layered on top via metadata fields, never separate physical folders. A
+text must never be duplicated across the tree because it also belongs to
+a scholarly view.
+
+Applied to Pancharatra now (low-risk, exactly specified by the project
+lead — not a title/keyword-inferred migration): the 15 flat
+`pancharatra_samhitas` siblings regrouped into `ratnatraya` (Sattvata,
+Paushkara, Jayakhya — the traditional three Divya "jewel" samhitas),
+`pramukha_samhitas` (9 other major named samhitas), `anya_samhitas` (the
+remaining 3). Vaikhanasa Agama needed no change — it was already a
+top-level sibling of Pancharatra under `vaishnava_agama` from the earlier
+restructure, matching the "Vaishnava Agama = Pancharatra + Vaikhanasa"
+principle.
+
+Added independent metadata fields to every Pancharatra samhita + the
+Vaikhanasa leaf's `data.json` (`genre`, `guna_classification`,
+`ratnatraya` [bool], `madhva_relevance: {level, evidence}`,
+`text_status`) — all defaulted to `not_specified`/`false`/`unpopulated`
+as appropriate, **nothing inferred**. Actually populating guna
+classification or Madhva-relevance (with real citation evidence, per the
+project lead's "verified/probable/uncertain" confidence model) needs real
+source work against Madhva's own citations and is not started.
+
+**Not started, real scope, needs its own pass(es)**:
+- The "View By" UI itself — a facet switcher (Hierarchy / Guna / Madhva
+  relevance / Genre / Availability / ...) that regroups the Library tree
+  display without touching the underlying taxonomy. This is genuine new
+  frontend architecture, not a small addition.
+- Same facet-metadata treatment for Purana (guna classification as a
+  view, not `purana.sattvika/rajasa/tamasa` folders).
+- Expanding the Pancharatra corpus itself (project lead's Priority
+  A/B/C source list: Ishvara, Parameshvara already have empty leaves;
+  Shriprashna, Bharadvaja, Sanatkumara, Kashyapa, Aniruddha, Vihagendra
+  etc. don't exist yet) — via GRETIL/TextGrid, TTD survey, Adyar Library,
+  Gaekwad's Oriental Series, Panchratra Parishodhana Parishad, per the
+  project lead's specified acquisition pipeline, not sourced this pass.
+- Vaikhanasa's own sub-corpus (Bhrigu/Marichi/Atri/Kashyapa-proktam) —
+  explicitly flagged by the project lead as needing its own verification
+  pass before populating, not to be built from a traditional 28-text list
+  blind.
+- Any migration report/validation step for reclassifying EXISTING
+  content by guna or Madhva-relevance, per the project lead's explicit
+  "no destructive migration without a report + validation first" rule —
+  not yet needed since nothing has been reclassified this pass, only new
+  unspecified fields added, but binding on any future pass that touches
+  these values.

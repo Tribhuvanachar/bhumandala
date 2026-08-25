@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.6 (DGE_PATH_LABELS: ~30 new entries for the 25 Aug Agama restructure -- Vaishnava/Shaiva/Shakta/Kashmir Saiva/Natha-Hathayoga split, see dge/PENDING.md -- on top of v3.5\'s Dasa Sahitya composer labels)';
+window.DGE_VERSIONS['library.js'] = 'v3.7 (DGE_PATH_LABELS: ratnatraya/pramukha_samhitas/anya_samhitas for the Pancharatra regroup, on top of v3.6\'s Agama restructure labels)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -206,6 +206,8 @@ const DGE_PATH_LABELS = {
   pashupata_sutra: 'पाशुपतसूत्रम्', ganakarika: 'गणकारिका', spanda_karika: 'स्पन्दकारिका',
   tantraloka: 'तन्त्रालोकः', tantrasara: 'तन्त्रसारः', amaraughashasana: 'अमरौघशासनम्',
   gorakshashataka: 'गोरक्षशतकम्', gheranda_samhita: 'घेरण्डसंहिता', hathayogapradipika: 'हठयोगप्रदीपिका',
+  // Pancharatra Ratnatraya/Pramukha/Anya regroup (25 Aug 2026)
+  ratnatraya: 'रत्नत्रयम्', pramukha_samhitas: 'प्रमुखाः पाञ्चरात्रसंहिताः', anya_samhitas: 'अन्याः उपलब्धाः संहिताः',
   // Advaita corpus + misc
   shankara_bhashya: 'शङ्करभाष्यम्', badhanta: 'बाधान्तः', brahmasutranyayasamgraha: 'ब्रह्मसूत्रन्यायसंग्रहः',
   // Dasa Sahitya composers (25 Aug 2026 taxonomy integration) --
