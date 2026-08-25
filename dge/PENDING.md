@@ -3738,3 +3738,50 @@ source work against Madhva's own citations and is not started.
   not yet needed since nothing has been reclassified this pass, only new
   unspecified fields added, but binding on any future pass that touches
   these values.
+
+## "View By" facet UI — built (25 Aug 2026, part 3)
+
+The facet switcher from part 2's design is live: `dge/js/library.js`'s
+Library modal category drill-down now shows a "VIEW BY" row (Hierarchy
+plus one button per facet key any leaf under that category actually
+declares) whenever `tools/audit_library.py`'s `derive_facets()` has
+copied at least one non-empty `facets` object into `library.json` for a
+leaf under that node — scoped to Agama/Pancharatra today, automatically
+extends to any future section the same way once its data.json files gain
+these fields.
+
+Facets ride along on the catalog fetch the Library modal already makes
+(no new network request) — `library.json` entries now carry a `facets`
+sub-object (`genre`, `guna_classification`, `ratnatraya`,
+`madhva_relevance`, `text_status`) synced from each leaf's data.json by
+both `register_layers.py` (new entries) and `audit_library.py --fix`
+(kept in sync on every run via a new "facet metadata out of sync" check,
+alongside the existing orphan/missing/stale/untitled ones). Selecting a
+non-Hierarchy view groups the SAME leaves already in the tree by that
+metadata value instead of by taxonomy path (`dgeRenderFacetView`) — no
+duplication, nothing re-fetched, "Not specified" is a real bucket rather
+than hidden or guessed.
+
+Scoped to the grid category drill-down only, not the flat List view (a
+facet grouping mixing unrelated top-level categories would be noise) —
+a disclosed limitation, not an oversight.
+
+Verified in a real headless-Chromium session (Playwright, driven
+directly since `chromium-cli` isn't installed in this environment) —
+screenshotted the Hierarchy view showing the new Agama branches with
+their completion badges (9/15 etc.), switched to the Guna and Madhva-
+relevance facet views and confirmed the grouped leaf list rendered (34
+leaves, correctly bucketed under "अनिर्दिष्टम्" since no real values are
+populated yet), and confirmed a category with no facets at all (Vedas)
+shows no View By row. One environment note for whoever re-runs this:
+`js/vandana-guard.js` bounces a direct `page.goto()` back to the site
+root (it looks exactly like an un-refferred deep link) — set
+`sessionStorage.dge_vandana_passed = '1'` via an init script before
+navigating, or the smoke test will only ever see the landing page.
+
+**Still not done**: populating real guna/Madhva-relevance values (this
+was always separate, deliberately deferred work, not blocked on the UI);
+the same facet treatment for Purana (guna as a view, not
+sattvika/rajasa/tamasa folders) — the metadata-sync plumbing built here
+is schema-agnostic and should need no changes, just `genre`/
+`guna_classification`/etc. fields added to Purana leaves the same way.

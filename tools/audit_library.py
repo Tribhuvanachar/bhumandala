@@ -54,6 +54,22 @@ def item_count(payload):
     return 0
 
 
+FACET_KEYS = ("genre", "guna_classification", "ratnatraya", "madhva_relevance", "text_status")
+
+
+def derive_facets(payload):
+    """View-By facet metadata (see dge/PENDING.md's 25 Aug Pancharatra pass) --
+    copied into library.json so the reader can build facet groupings from the
+    already-fetched catalog instead of downloading every leaf's full data.json
+    (some Pancharatra samhitas run tens of thousands of lines) just to read a
+    handful of classification fields. None -> no 'facets' key at all, so a
+    leaf that doesn't declare any of this stays exactly as small as before."""
+    if not isinstance(payload, dict):
+        return None
+    facets = {k: payload[k] for k in FACET_KEYS if k in payload}
+    return facets or None
+
+
 def derive_title(path, payload, data_root):
     for key in ("title_devanagari", "title"):
         value = payload.get(key) if isinstance(payload, dict) else None
@@ -148,6 +164,8 @@ def main(argv=None):
     stale = [p for p in set(by_path) & set(on_disk)
              if bool(by_path[p].get("populated")) != (on_disk[p]["count"] > 0)]
     untitled = [p for p in set(by_path) & set(on_disk) if not by_path[p].get("title")]
+    facet_diffs = [p for p in set(by_path) & set(on_disk)
+                   if by_path[p].get("facets") != derive_facets(on_disk[p]["payload"])]
 
     hidden_items = sum(on_disk[p]["count"] for p in orphans)
     hidden_bytes = sum(os.path.getsize(on_disk[p]["full"]) for p in orphans)
@@ -159,6 +177,7 @@ def main(argv=None):
     lines.append(f"- missing (entry points at nothing): {len(missing)}")
     lines.append(f"- stale populated flags: {len(stale)}")
     lines.append(f"- entries with no title: {len(untitled)}")
+    lines.append(f"- facet metadata out of sync: {len(facet_diffs)}")
     untracked_items = sum(r["count"] for _, r in untracked)
     lines.append(f"- **folders the taxonomy does not name: {len(untracked)}** "
                  f"holding **{untracked_items:,} items** (absent from the browse tree)")
@@ -179,6 +198,10 @@ def main(argv=None):
             print(f"  {by_path[path].get('populated')!s:>5} -> "
                   f"{on_disk[path]['count'] > 0!s:<5} {path}")
 
+    if facet_diffs:
+        print("\nFACET METADATA OUT OF SYNC")
+        for path in sorted(facet_diffs):
+            print(f"          {path}")
     if untracked:
         print("\nNOT IN TAXONOMY")
         for folder, record in sorted(untracked, key=lambda x: -x[1]["count"]):
@@ -189,14 +212,18 @@ def main(argv=None):
             handle.write(report + "\n")
 
     if not args.fix:
-        if orphans or missing or stale or untitled:
+        if orphans or missing or stale or untitled or facet_diffs:
             print("\nrun with --fix to repair")
         return 0
 
     for path in orphans:
         record = on_disk[path]
-        entries.append({"path": path, "populated": record["count"] > 0,
-                        "title": derive_title(record["full"], record["payload"], args.data)})
+        entry = {"path": path, "populated": record["count"] > 0,
+                 "title": derive_title(record["full"], record["payload"], args.data)}
+        facets = derive_facets(record["payload"])
+        if facets:
+            entry["facets"] = facets
+        entries.append(entry)
     for path in missing:
         entries.remove(by_path[path])
     for path in stale:
@@ -204,6 +231,12 @@ def main(argv=None):
     for path in untitled:
         record = on_disk[path]
         by_path[path]["title"] = derive_title(record["full"], record["payload"], args.data)
+    for path in facet_diffs:
+        facets = derive_facets(on_disk[path]["payload"])
+        if facets:
+            by_path[path]["facets"] = facets
+        else:
+            by_path[path].pop("facets", None)
 
     added_nodes = 0
     for folder, record in untracked:
@@ -221,8 +254,8 @@ def main(argv=None):
         json.dump(library, handle, ensure_ascii=False, indent=2)
         handle.write("\n")
     print(f"\nfixed: library +{len(orphans)} added, -{len(missing)} removed, "
-          f"{len(stale)} flags corrected, {len(untitled)} titles filled; "
-          f"taxonomy +{added_nodes} nodes")
+          f"{len(stale)} flags corrected, {len(untitled)} titles filled, "
+          f"{len(facet_diffs)} facets synced; taxonomy +{added_nodes} nodes")
     return 0
 
 
