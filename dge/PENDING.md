@@ -4482,3 +4482,59 @@ validate_data.py/audit_library.py clean.
 Caturvargacintamani (7 parts -- large, its own pass), Kalpataru (11
 kandas), Smriti Chandrika (5 kandas). All have confirmed working
 Google Doc URLs in `pending_pdf_sources.json` already.
+
+## Nitishastra consolidation + audit sweep from user review (25 Aug 2026, part 9)
+
+User reviewed the live site directly and caught a real duplicate: a
+top-level `nitishastra/` (added 20 Aug: hitopadesha/chanakya_niti/
+chanakya_sutra/kamandakiya_nitisara) and `shastra/niti_shastra/` (added
+23 Aug: artha_shastra/hitopadesha, apparently without checking whether
+Nitishastra already existed) had both landed on main independently.
+Confirmed a genuine content duplicate, not just a naming collision --
+both `hitopadesha` entries opened with the identical verse text, same
+4-book scope. Consolidated onto `shastra/niti_shastra/` (kept the
+finer-grained DCS Hitopadesha, 718 verses, over the GRETIL 5-section-
+blob version; moved the 3 unique leaves in); `shastra` is now 28/28
+fully populated. See the commit for the exact reasoning. This also
+answered "how about artha shastra?" from the same message -- it was
+already in the corpus the whole time, just filed under this same
+now-consolidated section (1910 items, Kautilya).
+
+**Other findings from the same review, investigated and reported back
+rather than acted on blind:**
+- **Vaikhanasa Agama** is correctly placed (sibling of Pancharatra
+  under Vaishnava Agama) and correctly labeled -- it's invisible in
+  the ordinary reader only because the reader deliberately hides
+  ~590 still-empty leaves from everyday visitors (a real, documented
+  design choice, see openLibraryModal()'s own comment: "not showing
+  ~550 empty placeholder entries in the everyday reader"). It shows
+  correctly in admin/library.html, which lists everything. Whether to
+  build an admin-only "show pending too" toggle for the main reader is
+  an open question, not acted on without asking first.
+- **Purana structure** (`maha_purana`/`upa_purana`) re-checked end to
+  end -- no stray duplicate `upapuranas` directory or taxonomy node
+  anywhere, clean.
+- **English names in the tree**: a real, large, pre-existing gap, not
+  something this pass introduced -- 1055 of ~1508 distinct taxonomy
+  segments (excluding dasa_sahitya's per-composer metadata, which
+  isn't tree labels at all) have no `DGE_PATH_LABELS` entry and fall
+  back to `dgeAutoLabel()`'s plain English title-case. Deliberately
+  NOT bulk-translated in this pass -- most are deep sub-leaf names
+  (individual commentaries, minor Upanishads, named khandas) that need
+  real scholarly care, and guessing wrong would be worse than the
+  current honest-if-plain English fallback. Fixed the ones directly
+  caught this pass (chanakya_niti/chanakya_sutra/kamandakiya_nitisara,
+  and `amsha` added to `DGE_NUMBERED_PREFIXES` for Vishnu Purana's
+  amsha_01..06). The full 1055-item gap is a real candidate for a
+  dedicated future pass, ideally batched by domain the way the 234
+  Dvaita-Vedanta labels were done earlier this project (see the 20 Aug
+  entry elsewhere in this file).
+- **Subhashita, Nyaya Kosha, Puranic Encyclopedia**: confirmed absent
+  from the corpus (checked taxonomy.json AND library.json titles, not
+  just an obvious folder name). Nyaya Kosha/Puranic Encyclopedia are
+  specifically Kosha-genre reference works -- but "Kosha" data
+  (`koshaDataBase` in `dge/js/config.js`) lives in a SEPARATE repo,
+  `Tribhuvanachar/bhumandala-kosha-data`, not in this session's
+  repository scope at all. Needs either that repo added to scope, or
+  the user's clarification that these two should go into this repo
+  instead.
