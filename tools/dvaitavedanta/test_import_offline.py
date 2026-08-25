@@ -98,6 +98,23 @@ MULTI_SUTRA = page("""
 """)
 
 
+# dv_parse.py hardcodes the h2.shloka layer's title to the literal "मूलम्"
+# regardless of which grantha's page it came from, so this fixture -- for
+# karmavijaya, a later_acharyas grantha configured in dv_sources.json with
+# its own acharya (Satyatmatirtha, not Madhva) -- exercises the exact real
+# bug: without the fix, this "मूलम्" layer resolves against the canonical
+# config entry and is misattributed to Madhva.
+KARMAVIJAYA_LEAF = page("""
+  <div id="article19180">
+    <h2 class="shloka">कर्मणो विजयो नाम ग्रन्थ आरभ्यते ।</h2>
+    <div id="dynamicContent" class="details">
+      <h3>टिप्पणी</h3>
+      <p>अत्र कर्मणः स्वरूपं निरूप्यते ।</p>
+    </div>
+  </div>
+""")
+
+
 def prime(cache_dir, url, html):
     os.makedirs(cache_dir, exist_ok=True)
     key = hashlib.sha1(url.encode("utf-8")).hexdigest() + ".html"
@@ -369,6 +386,35 @@ def main():
                                   (t_ids, m_ids))
         finally:
             shutil.rmtree(multi_tmp, ignore_errors=True)
+
+        print()
+        print("later_acharyas mula is attributed to its own configured acharya, not Madhva")
+        ka_tmp = tempfile.mkdtemp(prefix="dvkarma_")
+        try:
+            ka_cache = os.path.join(ka_tmp, "cache")
+            ka_out = os.path.join(ka_tmp, "out")
+            prime(ka_cache, BASE + "/category-details/19180/19173/sharas/karama/managa",
+                  KARMAVIJAYA_LEAF)
+            rc4 = I.main([
+                "--config", os.path.join(HERE, "dv_sources.json"),
+                "--out", ka_out, "--cache", ka_cache,
+                "--granthas", "karmavijaya",
+                "--delay", "0", "--write",
+                "--fetch-date", "2026-08-15",
+                "--summary-file", "",
+            ])
+            failures += not check("exit code 0", rc4 == 0, rc4)
+            ka_mula = os.path.join(ka_out, "later_acharyas", "karmavijaya", "mula", "data.json")
+            with open(ka_mula, encoding="utf-8") as handle:
+                km = json.load(handle)
+            failures += not check(
+                "mula attributed to karmavijaya's own acharya (Satyatmatirtha)",
+                km.get("default_author") == "श्रीसत्यात्मतीर्थः", km.get("default_author"))
+            failures += not check(
+                "NOT the canonical Madhva default the raw heading match would give",
+                km.get("default_author") != "श्रीमदानन्दतीर्थभगवत्पादाचार्यः", km.get("default_author"))
+        finally:
+            shutil.rmtree(ka_tmp, ignore_errors=True)
 
         print()
         if failures:
