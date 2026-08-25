@@ -3402,9 +3402,28 @@ Still open, in the order I would take them:
 - **One layer per heading — the extraction's biggest structural problem.**
   The importer mints a layer from whatever heading string it finds, so
   section headings become "commentaries". Under `nyaya_sudha` the
-  Nyāyasudhā-parimaḷa is split across **three** directories —
-  `tika_nyayasudhaparimala`, `tika_nyayasudhaparima_a` and `tika_parima_a` —
-  the last two from an OCR-broken `न्यायसुधापरिम ळ` carrying a stray space.
+  Nyāyasudhā-parimaḷa **was** split across three directories —
+  `tika_nyayasudhaparimala`, `tika_nyayasudhaparima_a` and `tika_parima_a`.
+  Root-caused precisely (25 Aug): not one OCR stray space but **two separate
+  normalization gaps** in `layer_key()` — (1) `श्रीमन्` is the real sandhi
+  form of `श्रीमत्` before a following nasal (`श्रीमत्` + `न्यायसुधा` →
+  `श्रीमन्न्यायसुधा`), not a typo honorific `HONORIFIC_RE` failed to strip,
+  and (2) ळ (retroflex la) vs ल (dental la) is a genuine, common
+  Kannada/Marathi-region printed-Sanskrit spelling interchange, not an OCR
+  artifact — this tradition's home region, so it recurs. A third gap, a
+  heading that self-references the grantha's own title as a prefix, also
+  needed stripping. Fixed in `dv_parse.py` (`HONORIFIC_RE` extended, ळ→ल
+  fold added to `layer_key()`, new `strip_grantha_prefix()`) and wired into
+  `import_dvaitavedanta.py`'s fallback slug computation; regression test in
+  `test_import_offline.py` confirms all four real heading variants now
+  converge on one slug (`parimala`). The three already-ingested directories
+  were merged directly in the repo (no re-crawl needed): 1,449 + 2 + 1 =
+  1,452 items into `tika_parimala/` (zero ID collisions), `default_author`
+  filled in from the two smaller folders (`श्री राघवेन्द्रतीर्थविरचितः`,
+  which the dominant folder was missing), `library.json`/`taxonomy.json`
+  regenerated via `tools/audit_library.py --fix` plus manual removal of the
+  two stale taxonomy leaves it doesn't auto-prune. `validate_data.py`: 0
+  errors. Full `pytest`: 187 passed.
   Under `later_acharyas/karmavijaya` there are ~60 directories named from
   truncated summary *sentences*
   (`tika_prasangadasadadhikaraniyanuvvakhyanasudhaya_kartabuddhimanitishe`,
@@ -3422,7 +3441,12 @@ Still open, in the order I would take them:
   hours, so the layer-naming fix above costs almost nothing *while the cache
   lives*. GitHub evicts caches unused for 7 days, and deleting the branch
   drops the scope with it — that is the one action that turns this back into
-  a day of crawling.
+  a day of crawling. **Not used for the Nyāya Sudhā fix above** — that cache
+  is scoped to a different session's branch (`claude/task-review-completion-wqog9g`),
+  which this session has no reason to touch, so the fix was made directly
+  against the already-ingested data instead of re-crawling. The cache
+  opportunity itself is still open and still closing; whoever has that
+  branch would need to act on it before the 7-day window lapses.
 - **Anuvyākhyāna looks under-crawled and is marked `complete` anyway.** Its
   grantha record reports `discovered: 16, items: 88` for a text of roughly
   1,900 verses. Sixteen pages is about one pāda. Worth re-checking its seed

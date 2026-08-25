@@ -4257,20 +4257,9 @@
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीजयतीर्थः"
        },
-       "tika_nyayasudhaparima_a": {
-        "_schema": "grantha_tika_text",
-        "_default_author": "श्री राघवेन्द्रतीर्थविरचितः"
-       },
-       "tika_nyayasudhaparimala": {
-        "_schema": "grantha_tika_text",
-        "_default_author": "श्री राघवेन्द्रतीर्थविरचितः"
-       },
        "tika_om_na_prayojanavattvat_om_prayojanavattvahetoriti_sutre_prayojan": {
         "_schema": "grantha_tika_text",
         "_default_author": "ॐ न प्रयोजनवत्त्वात् ॐ ।। प्रयोजनवत्त्वहेतोरिति । सूत्रे प्रयोजनवत्त्वादित्यस्य हि"
-       },
-       "tika_parima_a": {
-        "_schema": "grantha_tika_text"
        },
        "tika_pranadhikaranam": {
         "_schema": "grantha_tika_text"
@@ -4326,6 +4315,10 @@
        },
        "tika_yadupatyam": {
         "_schema": "grantha_tika_text"
+       },
+       "tika_parimala": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्री राघवेन्द्रतीर्थविरचितः"
        }
       }
      },

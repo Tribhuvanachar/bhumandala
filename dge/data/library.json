@@ -3811,28 +3811,15 @@
       "addedAt": "2026-08-24"
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_nyayasudhaparima_a/data.json",
-      "populated": true,
-      "title": "श्रीमन्न्यायसुधा — tika_nyayasudhaparima_a",
-      "addedAt": "2026-08-24"
-    },
-    {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_nyayasudhaparimala/data.json",
-      "populated": true,
-      "title": "श्रीमन्न्यायसुधा — tika_nyayasudhaparimala",
-      "addedAt": "2026-08-24"
-    },
-    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_om_na_prayojanavattvat_om_prayojanavattvahetoriti_sutre_prayojan/data.json",
       "populated": true,
       "title": "श्रीमन्न्यायसुधा — tika_om_na_prayojanavattvat_om_prayojanavattvahetoriti_sutre_prayojan",
       "addedAt": "2026-08-24"
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_parima_a/data.json",
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_parimala/data.json",
       "populated": true,
-      "title": "श्रीमन्न्यायसुधा — tika_parima_a",
-      "addedAt": "2026-08-24"
+      "title": "श्रीमन्न्यायसुधा — tika_parimala"
     },
     {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_pranadhikaranam/data.json",
@@ -8807,7 +8794,7 @@
     },
     {
       "path": "dge/data/vedanga/chandas/data.json",
-      "populated": true,
+      "populated": false,
       "title": "Chandas"
     },
     {
