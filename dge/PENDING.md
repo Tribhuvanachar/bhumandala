@@ -4513,7 +4513,16 @@ regression tests from the real node-9360 markup; verified against the
 live-fetched page (सुधा keeps its prose on both sides of the verse, the
 verse becomes its own layer, other h3 runs byte-identical). **Takes
 effect on the next nyaya_sudha re-crawl** (1,655 pages — fold into the
-corpus-wide Actions re-run tracked in part 9); (2) importer: also write
-`source.work_id` (and keep node-type/level when the sidebar provides
-them) so the numeric keys are first-class; (3) use the mirror's node
-lists to cross-validate the other works it covers.
+corpus-wide Actions re-run tracked in part 9); ~~(2) importer: also write
+`source.work_id`~~ **done same day** — `build_items()` now stores the
+URL's constant second id per item (`source.work_id`), commit-tracked;
+takes effect per grantha on its next re-crawl. ~~(3) use the mirror's
+node lists to cross-validate the other works it covers.~~ **Done same
+day, corpus-wide: the mirror maps 30 works (3,491 upstream_urls); 29 of
+DGE's corresponding granthas hold 100% of their mirror-known nodes**
+(tatparya_chandrika 403/403, vishnu_tattva_vinirnaya 166/166,
+tarka_tandava 157/157, tattva_viveka, pramana_lakshana, yukti_mallika,
+nyayamrita, pramana_paddhati, … down to omkara_vada 1/1); the sole
+exception is nyaya_sudha's two known index/heading pages (part above).
+DGE's DvaitaVedanta node coverage is now independently confirmed
+everywhere the mirror reaches.
