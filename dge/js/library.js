@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.14 (DGE_NUMBERED_PREFIXES gains amsha -- Vishnu Purana\'s amsha_01..06 were falling through to the raw English "Amsha N" label. On top of v3.13\'s nitishastra consolidation)';
+window.DGE_VERSIONS['library.js'] = 'v3.15 (admin-only "show pending" toggle in the main reader Library modal -- dgeLibShowPending/dgeToggleLibraryShowPending, pending leaves rendered muted+non-clickable; subhashita label added. On top of v3.14\'s amsha numbered-prefix)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -63,7 +63,7 @@ const DGE_PATH_LABELS = {
   gandharvaveda: 'गान्धर्ववेदः', sthapatyaveda: 'स्थापत्यवेदः',
   nighantu: 'निघण्टवः', rasashastra: 'रसशास्त्रम्',
   shastra: 'शास्त्राणि', natya_shastra: 'नाट्यशास्त्रम्',
-  kama_shastra: 'कामशास्त्रम्', niti_shastra: 'नीतिशास्त्रम्',
+  kama_shastra: 'कामशास्त्रम्', niti_shastra: 'नीतिशास्त्रम्', subhashita: 'सुभाषितम्',
   artha_shastra: 'अर्थशास्त्रम्', hitopadesha: 'हितोपदेशः',
   chanakya_niti: 'चाणक्यनीतिः', chanakya_sutra: 'चाणक्यसूत्रम्', kamandakiya_nitisara: 'कामन्दकीयनीतिसारः',
   bauddha_sahitya: 'बौद्धसाहित्यम्', sutra: 'सूत्रम्',
@@ -488,6 +488,22 @@ let dgeLibTree = null;
 let dgeLibTopKeys = [];
 let dgeLibGridCategory = null; // null = showing the grid itself; else the top-level key drilled into
 
+// Admin-only "show pending too" toggle -- see openLibraryModal()'s
+// showPending. Persisted per-device (localStorage), same pattern as the
+// script/theme/view-mode preferences elsewhere in this file. Re-checked
+// against dgeIsAdmin() everywhere it's read, not just here, so a demoted
+// or logged-out admin's stale flag never leaks pending leaves to a
+// regular visitor.
+let dgeLibShowPending = (function () {
+  try { return localStorage.getItem('dge_lib_show_pending') === '1'; } catch (e) { return false; }
+})();
+window.dgeToggleLibraryShowPending = function () {
+  if (!dgeIsAdmin()) return;
+  dgeLibShowPending = !dgeLibShowPending;
+  try { localStorage.setItem('dge_lib_show_pending', dgeLibShowPending ? '1' : '0'); } catch (e) { /* ignore */ }
+  window.openLibraryModal();
+};
+
 // One icon per real top-level taxonomy key (see DGE_PATH_LABELS above for
 // the keys actually in use). Unmapped keys fall back to a plain folder
 // icon rather than guessing -- better an honest generic icon than a
@@ -567,14 +583,24 @@ function dgeRenderNode(node, labelPrefix, depth, nodePath, noCollapseAtRoot) {
   const id = 'dgeTree' + (dgeTreeNodeSeq++);
   const inner =
     childKeys.map(k => dgeRenderNode(node.children[k], dgeSegLabel(k), depth + 1, nodePath ? nodePath + '/' + k : k)).join('') +
-    dgeSortLeaves(nodePath, node.leaves).map(leaf =>
-      `<div class="pop-item" style="margin-left:${depth * 10}px;"
+    dgeSortLeaves(nodePath, node.leaves).map(leaf => {
+      // Pending leaves only ever appear here at all when dgeLibShowPending
+      // (admin toggle) is on -- see openLibraryModal(). Muted/dashed and a
+      // no-op click (there's no grantha to open yet) rather than styled
+      // identically to a real, readable entry.
+      if (leaf.populated === false) {
+        return `<div class="pop-item" style="margin-left:${depth * 10}px; opacity:.55; cursor:default;"
+              onclick="event.stopPropagation()" title="Registered but not yet populated">${leaf.title}
+          <span style="margin-left:auto; font-size:9px; font-weight:700; color:var(--muted-text); border:1px dashed var(--line-color,currentColor); border-radius:999px; padding:1px 6px; letter-spacing:.3px;">pending</span>
+        </div>`;
+      }
+      return `<div class="pop-item" style="margin-left:${depth * 10}px;"
             onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}${
         dgeIsRecentlyAdded(leaf.addedAt)
           ? '<span style="margin-left:auto; font-size:9px; font-weight:800; color:#fff; background:var(--accent-red,#7a3b1d); border-radius:999px; padding:2px 6px; letter-spacing:.3px;">NEW</span>'
           : ''
-      }</div>`
-    ).join('');
+      }</div>`;
+    }).join('');
 
   if (!labelPrefix) return inner;
 
@@ -658,6 +684,8 @@ window.openLibraryModal = async function() {
   const listEl = document.getElementById('libraryModalList');
   if (!listEl) return;
   listEl.innerHTML = `<div style="padding:20px; text-align:center; color:var(--muted-text); font-size:12px;">Loading library…</div>`;
+  const pendingToggleEl = document.getElementById('libraryShowPendingToggle');
+  if (pendingToggleEl) pendingToggleEl.checked = dgeLibShowPending;
 
   const library = await (window.dgeLibraryCatalogPromise || Promise.resolve(null));
   if (!library || !Array.isArray(library.granthas)) {
@@ -675,13 +703,22 @@ window.openLibraryModal = async function() {
   const layerManifest = (typeof window.dgeLayerManifestPromise !== 'undefined')
     ? await window.dgeLayerManifestPromise : null;
 
+  // "Show pending" (admin-only, see dgeLibShowPending below): the everyday
+  // reader deliberately hides ~590 still-empty leaves so a casual visitor
+  // never hits a wall of dead ends -- but an admin browsing the SAME tree
+  // wants exactly the opposite, the full scaffolding, so they can see at a
+  // glance what's still missing without switching to admin/library.html.
+  // Gated on dgeIsAdmin() twice (here AND in the toggle button itself) so
+  // a stale localStorage flag from a former admin session can't leak
+  // pending leaves to a regular visitor.
+  const showPending = dgeLibShowPending && dgeIsAdmin();
   const populated = dgeFoldLayerEntries(
-    library.granthas.filter(g => g.populated && !dgeIsAdminOnlyGrantha(g)).map(g => {
+    library.granthas.filter(g => (g.populated || showPending) && !dgeIsAdminOnlyGrantha(g)).map(g => {
       const realSlug = window.dgeGranthaSlug(g.path);
       const slug = dgeEffectiveDisplayPath(realSlug); // where it GROUPS in the tree
       const custom = dgeLibOverrides.labels[slug];
       const rawTitle = custom !== undefined ? custom : (g.title || realSlug);
-      return { slug, realSlug, title: dgeToActiveScript(dgeLocalizeNumerals(rawTitle)), addedAt: g.addedAt || null, facets: g.facets || null };
+      return { slug, realSlug, title: dgeToActiveScript(dgeLocalizeNumerals(rawTitle)), addedAt: g.addedAt || null, facets: g.facets || null, populated: !!g.populated };
     }).filter(e => !dgeIsHiddenPath(e.slug)),
     layerManifest);
   if (!populated.length) {
