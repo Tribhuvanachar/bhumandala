@@ -1,0 +1,50 @@
+name: Tests
+
+# The project's only general-purpose CI gate. Every other workflow here is
+# workflow_dispatch (a specific ingestion/import pipeline someone runs by
+# hand) or a narrow auto-trigger scoped to its own output paths -- none of
+# them run the actual test suites on an ordinary push. This one does:
+# the Python suite (tests/), the standalone offline import tests under
+# tools/, the plain-Node JS tests (no framework, no build step -- this
+# project's own convention), tools/validate_data.py's structural corpus
+# check, and tools/validate_gold_standard.py's V1-V7 gate over any
+# format:gold_v2_2 commentary already in dge/data/.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: pip install pytest beautifulsoup4 requests pyyaml
+
+      - name: Python test suite (tests/)
+        run: python3 -m pytest tests/ -q
+
+      - name: Dvaita Vedanta offline import tests
+        run: python3 tools/dvaitavedanta/test_import_offline.py
+
+      - name: JS -- search resilience
+        run: node dge/js/test-search-resilience.js
+
+      - name: JS -- JS/Python normalizer parity
+        run: node dge/js/test-parity.js
+
+      - name: JS -- Gold-Standard renderer
+        run: node dge/js/test-gold-render.js
+
+      - name: Corpus structural check (validate_data.py)
+        run: python3 tools/validate_data.py
+
+      - name: Gold-Standard contract gate (validate_gold_standard.py)
+        run: python3 tools/validate_gold_standard.py --scan-corpus --data dge/data

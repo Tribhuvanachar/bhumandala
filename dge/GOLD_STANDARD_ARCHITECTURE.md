@@ -348,18 +348,43 @@ headless Chromium session (pill↔pratīka bidirectional scroll+pulse, the
 badge's view-switch, and a legacy-commentary regression check). Full detail
 in the matching `PENDING.md` entry, dated 25 Aug.
 
+**Also built (25 Aug, same day)**: `tools/validate_gold_standard.py` (Part
+C) — the V1–V7 CI gates, plus `.github/workflows/test.yml`, the project's
+first general-purpose CI test gate (every other workflow here is either
+`workflow_dispatch` or scoped to its own output paths; nothing previously
+ran the test suites on an ordinary push). Runs `tests/` (pytest), the
+Dvaita Vedanta offline import tests, all three plain-Node JS test files
+(`test-search-resilience.js`, `test-parity.js`, `test-gold-render.js`),
+`validate_data.py`, and `validate_gold_standard.py --scan-corpus` on every
+push/PR. Each of V1–V7 is implemented and unit-tested
+(`tests/test_validate_gold_standard.py`) against the same three real
+Gītā-Vivṛtti units `test-gold-render.js` uses — which surfaced a genuine,
+previously-unnoticed parity defect in the reference sample itself (BG_2.37
+writes "जित्वा वा भोक्ष्यसे महीम्" as one combined pratīka span while
+`word_mappings` splits it into two entries plus an unused third), not a
+false positive. V2/V3-forward/V6/schema violations are hard CI failures;
+V1/V3-reverse/V4/V5/V7 are reported but don't fail the build today — each
+check's own docstring in the script says exactly why (mostly: getting it
+wrong needs real philological judgment a script can't safely automate, and
+a false FAIL would block CI on genuinely correct content — verified
+directly, not assumed). `--scan-corpus` against the live `dge/data/` tree
+finds zero `format: gold_v2_2` commentary today (none has been backfilled
+yet — see open item 3 below), so the CI gate currently passes trivially and
+exists as a forward guard for the first real import.
+
 **Still open**:
 
-1. `tools/validate_gold_standard.py` (Part C) — the V1–V7 CI gates. Today
-   the renderer degrades gracefully on a parity violation (falls back to
-   plain bold text, confirmed in testing) but nothing yet *rejects* bad
-   content before it ships.
-2. Transliterating Gold-Standard commentary to non-Devanagari scripts —
+1. Transliterating Gold-Standard commentary to non-Devanagari scripts —
    currently displays in its authored Devanagari only, a stated scope
    limit for this first build, not an oversight.
-3. Pick the first real corpus for an end-to-end pilot (the Gītā-Vivṛtti
+2. Pick the first real corpus for an end-to-end pilot (the Gītā-Vivṛtti
    sample is the obvious candidate, already proven against the renderer)
    before any wider backfill commitment — this build proves the renderer
    against real content via direct injection, not a live catalog entry;
    actually ingesting a corpus (taxonomy placement, `library.json`
    regeneration) is separate, not-yet-started work.
+3. `quotations[]` isn't consumed by `gold-render.js` at all yet — the
+   प्रमाणम् citation chip is built from the block directive's own inline
+   cite text, not this array — so V7's closed-world-link enforcement is
+   real only at the structural level today, not the rendering level. Noted
+   directly in the check's own docstring rather than overclaiming.
