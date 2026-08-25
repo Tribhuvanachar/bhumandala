@@ -10144,42 +10144,6 @@
       "populated": true
     },
     {
-      "path": "dge/data/nitishastra/chanakya_niti/data.json",
-      "populated": true,
-      "title": "Chanakya Niti",
-      "addedAt": "2026-08-21",
-      "source": {
-        "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/chANakyanItisort.itx"
-      }
-    },
-    {
-      "path": "dge/data/nitishastra/chanakya_sutra/data.json",
-      "populated": true,
-      "title": "Chanakya Niti Sutra",
-      "addedAt": "2026-08-21",
-      "source": {
-        "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/chANakyasUtra.itx"
-      }
-    },
-    {
-      "path": "dge/data/nitishastra/hitopadesha/data.json",
-      "populated": true,
-      "title": "Hitopadesha",
-      "source": {
-        "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_nArAyaNa-hitopadeza.txt"
-      }
-    },
-    {
-      "path": "dge/data/nitishastra/kamandakiya_nitisara/data.json",
-      "populated": true,
-      "title": "Kamandakiya Nitisara",
-      "addedAt": "2026-08-21",
-      "source": {
-        "source_url": "https://docs.google.com/document/d/1OFWLyjXMqqiHTBg3WqvFJsWuDhlEQgE62k_7Ik2BTYQ/export?format=txt",
-        "licence": "CC BY 4.0"
-      }
-    },
-    {
       "path": "dge/data/purana/maha_purana/agni_purana/data.json",
       "populated": true,
       "title": "Agni Purana",
@@ -11471,6 +11435,24 @@
       }
     },
     {
+      "path": "dge/data/shastra/niti_shastra/chanakya_niti/data.json",
+      "populated": true,
+      "title": "Chanakya Niti",
+      "addedAt": "2026-08-25",
+      "source": {
+        "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/chANakyanItisort.itx"
+      }
+    },
+    {
+      "path": "dge/data/shastra/niti_shastra/chanakya_sutra/data.json",
+      "populated": true,
+      "title": "Chanakya Sutra",
+      "addedAt": "2026-08-25",
+      "source": {
+        "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/chANakyasUtra.itx"
+      }
+    },
+    {
       "path": "dge/data/shastra/niti_shastra/hitopadesha/mula/data.json",
       "populated": true,
       "title": "Mula",
@@ -11478,6 +11460,16 @@
         "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
         "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Hitopadeśa",
         "licence": "CC-BY 4.0"
+      }
+    },
+    {
+      "path": "dge/data/shastra/niti_shastra/kamandakiya_nitisara/data.json",
+      "populated": true,
+      "title": "Kamandakiya Nitisara",
+      "addedAt": "2026-08-25",
+      "source": {
+        "source_url": "https://docs.google.com/document/d/1OFWLyjXMqqiHTBg3WqvFJsWuDhlEQgE62k_7Ik2BTYQ/export?format=txt",
+        "licence": "CC BY 4.0"
       }
     },
     {

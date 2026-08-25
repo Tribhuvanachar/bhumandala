@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.12 (layer-manifest drawer fold: a joinable multi-layer grantha\'s mula+tika_* catalog entries collapse to ONE tree leaf via dgeFoldLayerEntries, gated strictly by data/layer_manifest.json; unjoinable layers keep their own rows. See dge/MULTI_LAYER_READER_ARCHITECTURE.md. On top of v3.11\'s purana_class facet)';
+window.DGE_VERSIONS['library.js'] = 'v3.13 (chanakya_niti/chanakya_sutra/kamandakiya_nitisara Devanagari labels, added alongside the nitishastra/ -> shastra/niti_shastra/ consolidation. On top of v3.12\'s layer-manifest drawer fold)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -65,6 +65,7 @@ const DGE_PATH_LABELS = {
   shastra: 'शास्त्राणि', natya_shastra: 'नाट्यशास्त्रम्',
   kama_shastra: 'कामशास्त्रम्', niti_shastra: 'नीतिशास्त्रम्',
   artha_shastra: 'अर्थशास्त्रम्', hitopadesha: 'हितोपदेशः',
+  chanakya_niti: 'चाणक्यनीतिः', chanakya_sutra: 'चाणक्यसूत्रम्', kamandakiya_nitisara: 'कामन्दकीयनीतिसारः',
   bauddha_sahitya: 'बौद्धसाहित्यम्', sutra: 'सूत्रम्',
   pramana: 'प्रमाणम्', avadana: 'अवदानम्',
   krishi_shastra: 'कृषिशास्त्रम्', shainika_shastra: 'श्यैनिकशास्त्रम्',

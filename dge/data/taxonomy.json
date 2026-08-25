@@ -6171,13 +6171,6 @@
    "susruta_samhita_sutrasthana": {}
   }
  },
- "nitishastra": {
-  "_note": "Worldly-wisdom/statecraft texts -- deliberately its own section rather than folded into kavya_alankara (which already held the Bhartrihari shatakas somewhat awkwardly, per the same 20 Aug placement decision noted under upaveda above).",
-  "hitopadesha": {},
-  "chanakya_niti": {},
-  "chanakya_sutra": {},
-  "kamandakiya_nitisara": {}
- },
  "misc": {
   "_schema": "grantha_mula_text",
   "_note": "Holding place for material whose home in the taxonomy is not settled yet. Nothing is meant to stay here; each item moves once it is decided.",
@@ -6212,7 +6205,10 @@
      "_schema": "grantha_mula_text",
      "_default_author": "Narayana Pandita"
     }
-   }
+   },
+   "chanakya_niti": {},
+   "chanakya_sutra": {},
+   "kamandakiya_nitisara": {}
   },
   "bauddha_sahitya": {
    "sutra": {

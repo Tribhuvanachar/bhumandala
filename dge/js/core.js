@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.20 (multi-layer grantha stitching: the grantha-load path awaits dgeApplyLayerStitching (layer-stitch.js) before initApp so sibling tika layers appear in the commentary picker; flat-items normalization passes item.breadcrumb through for the section navigator; renderStotraChrome hooks dgeRenderStitchChrome + dgeInitSectionNav. See dge/MULTI_LAYER_READER_ARCHITECTURE.md. On top of v3.19\'s Purana redirects)';
+window.DGE_VERSIONS['core.js'] = 'v3.21 (DGE_LEGACY_SLUGS: redirects for the nitishastra/ -> shastra/niti_shastra/ consolidation -- two independently-built, uncoordinated copies of the same section. On top of v3.20\'s layer-stitching)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -203,7 +203,19 @@ const DGE_LEGACY_SLUGS = {
   'purana/garuda_purana':           'purana/maha_purana/garuda_purana',
   'purana/brahmanda_purana':        'purana/maha_purana/brahmanda_purana',
   'purana/vayu_purana':             'purana/maha_purana/vayu_purana',
-  'purana/upapuranas':              'purana/upa_purana'
+  'purana/upapuranas':              'purana/upa_purana',
+  // 25 Aug 2026: top-level nitishastra/ (added 20 Aug) and shastra/niti_shastra/
+  // (added 23 Aug, unaware the top-level one already existed) were two
+  // independently-built, uncoordinated copies of the same section --
+  // shastra/niti_shastra/hitopadesha/mula (718 DCS verses) duplicated
+  // nitishastra/hitopadesha (5 GRETIL section-blocks) outright. Consolidated
+  // onto shastra/niti_shastra/ (finer-grained, and matches artha_shastra's
+  // existing home there); the GRETIL hitopadesha copy was dropped, not moved.
+  'nitishastra/hitopadesha':        'shastra/niti_shastra/hitopadesha/mula',
+  'nitishastra/chanakya_niti':      'shastra/niti_shastra/chanakya_niti',
+  'nitishastra/chanakya_sutra':     'shastra/niti_shastra/chanakya_sutra',
+  'nitishastra/kamandakiya_nitisara': 'shastra/niti_shastra/kamandakiya_nitisara',
+  'nitishastra':                    'shastra/niti_shastra'
 };
 
 window.dgeUpgradeLegacySlug = function (slug) {

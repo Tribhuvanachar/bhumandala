@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1884,
-  "loaded": 1293,
-  "items": 685009
+  "leaves": 1883,
+  "loaded": 1292,
+  "items": 685004
  },
  "sections": {
   "agama": {
@@ -36,20 +36,15 @@
    "loaded": 0,
    "items": 0
   },
-  "nitishastra": {
-   "total": 4,
-   "loaded": 4,
-   "items": 2139
-  },
   "purana": {
    "total": 97,
    "loaded": 49,
    "items": 131866
   },
   "shastra": {
-   "total": 25,
-   "loaded": 25,
-   "items": 12439
+   "total": 28,
+   "loaded": 28,
+   "items": 14573
   },
   "smriti_dharma": {
    "total": 28,
@@ -1529,10 +1524,6 @@
   "kavya_alankara/sumadhva_vijaya/sarga_9": 0,
   "misc/ajaya_vijayendra": 0,
   "misc/satyadhyana_tirtha_civil_suit": 0,
-  "nitishastra/chanakya_niti": 339,
-  "nitishastra/chanakya_sutra": 574,
-  "nitishastra/hitopadesha": 5,
-  "nitishastra/kamandakiya_nitisara": 1221,
   "purana/maha_purana/agni_purana": 610,
   "purana/maha_purana/bhagavata_purana/skandha_01": 813,
   "purana/maha_purana/bhagavata_purana/skandha_02": 391,
@@ -1651,7 +1642,10 @@
   "shastra/natya_shastra/mula": 539,
   "shastra/natya_shastra/tika": 71,
   "shastra/niti_shastra/artha_shastra/mula": 1910,
+  "shastra/niti_shastra/chanakya_niti": 339,
+  "shastra/niti_shastra/chanakya_sutra": 574,
   "shastra/niti_shastra/hitopadesha/mula": 718,
+  "shastra/niti_shastra/kamandakiya_nitisara": 1221,
   "shastra/ratna_pariksha/agastiya": 42,
   "shastra/ratna_pariksha/ratnadipika": 105,
   "shastra/shainika_shastra/mula": 375,
@@ -4363,19 +4357,6 @@
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Tattvavaiśāradī",
    "licence": "CC-BY 4.0"
   },
-  "nitishastra/chanakya_niti": {
-   "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/chANakyanItisort.itx"
-  },
-  "nitishastra/chanakya_sutra": {
-   "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/chANakyasUtra.itx"
-  },
-  "nitishastra/hitopadesha": {
-   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_nArAyaNa-hitopadeza.txt"
-  },
-  "nitishastra/kamandakiya_nitisara": {
-   "source_url": "https://docs.google.com/document/d/1OFWLyjXMqqiHTBg3WqvFJsWuDhlEQgE62k_7Ik2BTYQ/export?format=txt",
-   "licence": "CC BY 4.0"
-  },
   "purana/maha_purana/agni_purana": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Agnipurāṇa",
@@ -4590,10 +4571,20 @@
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Arthaśāstra",
    "licence": "CC-BY 4.0"
   },
+  "shastra/niti_shastra/chanakya_niti": {
+   "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/chANakyanItisort.itx"
+  },
+  "shastra/niti_shastra/chanakya_sutra": {
+   "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/chANakyasUtra.itx"
+  },
   "shastra/niti_shastra/hitopadesha/mula": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Hitopadeśa",
    "licence": "CC-BY 4.0"
+  },
+  "shastra/niti_shastra/kamandakiya_nitisara": {
+   "source_url": "https://docs.google.com/document/d/1OFWLyjXMqqiHTBg3WqvFJsWuDhlEQgE62k_7Ik2BTYQ/export?format=txt",
+   "licence": "CC BY 4.0"
   },
   "shastra/ratna_pariksha/agastiya": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
