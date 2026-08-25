@@ -2,7 +2,7 @@
  "generated_note": "DvaitaVedanta extraction progress. Regenerate with tools/dvaitavedanta/import_dvaitavedanta.py.",
  "source": "https://dvaitavedanta.in/",
  "license_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
- "last_run": "2026-08-19T15:54:38+00:00",
+ "last_run": "2026-08-25T12:23:28+00:00",
  "totals": {
   "discovered": 6012,
   "fetched": 6012,
@@ -10,7 +10,7 @@
   "containers": 0,
   "failed": 0,
   "items": 30139,
-  "bytes": 208333293,
+  "bytes": 210104371,
   "granthas": 56,
   "complete": 56
  },
@@ -44,7 +44,7 @@
    "containers": 0,
    "failed": 0,
    "items": 33,
-   "bytes": 51783,
+   "bytes": 1631544,
    "granthas": 2,
    "complete": 2
   },
@@ -77,7 +77,7 @@
    "containers": 0,
    "failed": 0,
    "items": 20,
-   "bytes": 31717,
+   "bytes": 223034,
    "granthas": 1,
    "complete": 1
   },
@@ -492,15 +492,15 @@
    "containers": 0,
    "failed": 0,
    "items": 32,
-   "bytes": 50085,
+   "bytes": 1629846,
    "layers": {
     "mula": 32
    },
    "low_devanagari_warnings": 0,
    "id_collisions": 0,
    "first_run": "2026-08-18T06:28:15+00:00",
-   "last_run": "2026-08-18T06:28:15+00:00",
-   "duration_s": 1.2,
+   "last_run": "2026-08-25T12:23:28+00:00",
+   "duration_s": 132.1,
    "dry_run": false
   },
   "purana_prasthana/bhagavata_tatparya_nirnaya": {
@@ -561,15 +561,15 @@
    "containers": 0,
    "failed": 0,
    "items": 20,
-   "bytes": 31717,
+   "bytes": 223034,
    "layers": {
     "mula": 20
    },
    "low_devanagari_warnings": 0,
    "id_collisions": 0,
    "first_run": "2026-08-18T06:27:43+00:00",
-   "last_run": "2026-08-18T06:27:43+00:00",
-   "duration_s": 0.2,
+   "last_run": "2026-08-25T12:23:28+00:00",
+   "duration_s": 0.5,
    "dry_run": false
   },
   "sutra_prasthana/brahma_sutra_bhashya": {

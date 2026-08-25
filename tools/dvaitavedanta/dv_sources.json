@@ -67,6 +67,11 @@
       "schema": "grantha_mula_text",
       "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
     },
+    "भाष्यम्": {
+      "folder": "tika_bhashya",
+      "schema": "grantha_tika_text",
+      "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
     "टीका": {
       "folder": "tika_jayatirtha",
       "schema": "grantha_tika_text",
