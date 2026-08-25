@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.9 (madhva_relevance facet renamed madhvacharya_relevance throughout -- "Madhvacharya," not "Madhva" -- and set for the 3 samhitas ChatGPT\'s survey named as cited by him (Prakasha/Vishnu/Parama), pending real citations; on top of v3.8\'s View By facet switcher)';
+window.DGE_VERSIONS['library.js'] = 'v3.10 (Purana split into maha_purana/upa_purana + guna_classification labels for the View By switcher; on top of v3.9\'s Madhvacharya-relevance rename)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -129,10 +129,15 @@ const DGE_PATH_LABELS = {
   sumadhva_vijaya: 'सुमध्वविजयः', kiratarjuniya: 'किरातार्जुनीयम्', kumarasambhava: 'कुमारसम्भवः', raghuvamsha: 'रघुवंशः',
   shishupalavadha: 'शिशुपालवधः',
   // Puranas
+  maha_purana: 'महापुराणानि', upa_purana: 'उपपुराणानि', upapuranas: 'उपपुराणानि',
   bhagavata_purana: 'भागवतपुराणम्', bhagavata_purana_madhva: 'भागवतपुराणम् (माध्वम्)', bhavishya_purana: 'भविष्यपुराणम्', brahmanda_purana: 'ब्रह्माण्डपुराणम्',
+  brahma_purana: 'ब्रह्मपुराणम्', agni_purana: 'अग्निपुराणम्', varaha_purana: 'वराहपुराणम्', vayu_purana: 'वायुपुराणम्',
   brahmavaivarta_purana: 'ब्रह्मवैवर्तपुराणम्', garuda_purana: 'गरुडपुराणम्', kurma_purana: 'कूर्मपुराणम्', linga_purana: 'लिङ्गपुराणम्',
   markandeya_purana: 'मार्कण्डेयपुराणम्', narada_purana: 'नारदपुराणम्', padma_purana: 'पद्मपुराणम्', shiva_purana: 'शिवपुराणम्',
-  skanda_purana: 'स्कन्दपुराणम्', vamana_purana: 'वामनपुराणम्', vishnu_purana: 'विष्णुपुराणम्', upapuranas: 'उपपुराणानि',
+  skanda_purana: 'स्कन्दपुराणम्', vamana_purana: 'वामनपुराणम्', vishnu_purana: 'विष्णुपुराणम्',
+  vishnu_dharmottara_purana: 'विष्णुधर्मोत्तरपुराणम्', devi_bhagavata_purana: 'देवीभागवतपुराणम्', kalika_purana: 'कालिकापुराणम्',
+  narasimha_purana: 'नृसिंहपुराणम्', brihannaradiya_purana: 'बृहन्नारदीयपुराणम्', saura_purana: 'सौरपुराणम्',
+  ganesha_purana: 'गणेशपुराणम्', sanatkumara_purana: 'सनत्कुमारपुराणम्', nandi_purana: 'नन्दिपुराणम्', adi_purana: 'आदिपुराणम्',
   rudra_samhita: 'रुद्रसंहिता',
   // Dvaita Tatparya Nirnaya corpus (prasthanas, bhashyas)
   gita_prasthana: 'गीताप्रस्थानम्', sutra_prasthana: 'सूत्रप्रस्थानम्', upanishad_prasthana: 'उपनिषत्प्रस्थानम्', itihasa_prasthana: 'इतिहासप्रस्थानम्',
