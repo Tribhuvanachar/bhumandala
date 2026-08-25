@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.10 (Purana split into maha_purana/upa_purana + guna_classification labels for the View By switcher; on top of v3.9\'s Madhvacharya-relevance rename)';
+window.DGE_VERSIONS['library.js'] = 'v3.11 (purana_class View By facet -- mahapurana/upapurana/disputed -- + richer text_status tiers; on top of v3.10\'s Purana maha_purana/upa_purana split)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -750,11 +750,23 @@ const DGE_VIEW_BY_FACETS = {
   },
   text_status: {
     label: 'उपलब्धता', extract: f => f && f.text_status,
-    values: { extant_partial: 'उपलब्धम्', unpopulated: 'अनुपलब्धम्' }
+    values: {
+      extant_complete: '🟢 सम्पूर्णोपलब्धम्', extant_partial: '🟡 आंशिकोपलब्धम्',
+      quotation_only: '🟠 उद्धृतांशमात्रम्', lost_unlocated: '🔴 अलभ्यम्', unpopulated: 'अनुपलब्धम्'
+    }
   },
   genre: {
     label: 'प्रकारः', extract: f => f && f.genre,
     values: {}
+  },
+  // Purana-only: whether a work is one of the fixed 18 Mahapuranas, an
+  // Upapurana, or one whose Maha/Upa status the tradition itself disputes
+  // (e.g. Devi Bhagavata Purana) -- metadata alongside the physical
+  // maha_purana/upa_purana split, not a replacement for it (see
+  // dge/PENDING.md's 25 Aug Purana pass).
+  purana_class: {
+    label: 'पुराणवर्गः', extract: f => f && f.purana_class,
+    values: { mahapurana: 'महापुराणम्', upapurana: 'उपपुराणम्', disputed: 'विवादास्पदम्', regional: 'प्रादेशिकम्' }
   }
 };
 const DGE_VIEW_BY_NOT_SPECIFIED = 'not_specified';

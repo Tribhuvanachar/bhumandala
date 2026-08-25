@@ -1,5 +1,6 @@
 {
-  "schema": "itihasa_purana_text",
-  "default_author": "Maharshi Veda Vyasa",
-  "items": []
+ "schema": "itihasa_purana_text",
+ "default_author": "Maharshi Veda Vyasa",
+ "items": [],
+ "purana_class": "disputed"
 }
