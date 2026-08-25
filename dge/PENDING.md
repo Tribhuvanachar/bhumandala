@@ -4148,3 +4148,80 @@ the best lead for the 7 still-missing nibandhas); Vedic Reserve for the
 ~36 missing Shiksha texts (Sanskrit Documents already confirmed to have
 an HTML Panininiya Shiksha). None of this is Purana-specific and none
 of it has been acted on yet -- next in line once Purana settles.
+
+## Smriti/Shiksha acquisition batch: Daksha Smriti, Paniniya/Naradiya Shiksha (25 Aug 2026, part 7)
+
+Followed up on the ChatGPT sourcing survey's first message (SETI, UT
+Dharmasastra Resource Library, Vedic Reserve) against the 13 empty
+Smritis, 6 empty Dharmashastra/Nibandhas, and ~38 empty Shiksha texts.
+Verified each named source directly rather than trusting the survey's
+claims at face value -- confirmed real machine-readable text existed,
+checked its actual completeness, before writing anything.
+
+**Imported 3 texts:**
+- **Daksha Smriti** (UT Austin South Asia Institute OER, CC BY 4.0,
+  Donald R. Davis Jr.'s transcription of Irma Piovano's critical
+  edition) -- 7 adhyayas, 208 verses. UT's texts are shared as public
+  Google Docs, fetchable directly via the doc's `/export?format=txt`
+  endpoint with no auth (confirmed this works from this sandbox).
+  Caught two real bugs before writing: every chapter's closing colophon
+  plus the next chapter's own heading line were leaking into that
+  chapter's first verse (all 7 adhyayas, not just one -- checked each);
+  and verse 3.20 used a single "|" instead of "||" before its number,
+  missing the marker regex and silently merging into verse 3.21 --
+  widened the marker to accept 1-2 pipes, recovering it (208 verses,
+  not 206).
+- **Paniniya Shiksha** (Sanskrit Documents, plain Devanagari HTML) --
+  60 verses. Verse 52 has no numbering marker at all in the source (a
+  bare closing daṇḍa) -- recovered by sequential inference, confirmed
+  against the surrounding text rather than assumed. A colophon-detection
+  rule keyed on lines starting with "iti" was a false-positive trap --
+  verse 10 legitimately opens with "iti" (a common phrase, not a
+  colophon) -- narrowed to the actual English attribution lines.
+- **Naradiya Shiksha** (Vedic Reserve, plain Devanagari HTML) -- 16
+  kandikas across 2 prapathakas, 241 verses. This is the ONE Shiksha on
+  Vedic Reserve with an HTML rendering; it isn't even linked from that
+  site's own Shiksha index page (only reachable via the direct URL the
+  user's survey happened to cite) -- an exception, not representative
+  of the other 35. The prapathaka-1-to-2 transition's boundary text (a
+  closing colophon, the next prapathaka's heading, and a restart
+  "kandika 1" label) was leaking into kandika 9 as a spurious extra
+  item -- fixed by explicitly skipping all three patterns.
+
+Every sample spot-checked against its raw source before writing, not
+just the parsed output -- all bugs above are real catches, confirmed
+byte-for-byte, not hypothetical. 199/199 tests, `validate_data.py` and
+`audit_library.py` clean.
+
+**Investigated and genuinely harder, not just deferred:**
+- The other 35 Vedic Reserve Shiksha texts are PDF-only on that site
+  (`vedicreserve.miu.edu/shiksha/shiksha.html`'s own index links only
+  PDFs). This sandbox has no working PDF-text-layer extractor
+  (`pypdf` fails on a missing `_cffi_backend` binding, `pdftotext`
+  isn't installed despite `libpoppler` being present) -- untested
+  whether these are real text-layer PDFs or scans. Needs an environment
+  with a working PDF toolchain to even assess, before any import.
+- UT Dharmasastra's Nibandhas (Caturvargacintamani, Krtyakalpataru,
+  Smrticandrika, Dayabhaga) are real CC-BY-4.0 Google Doc
+  transcriptions -- the SAME access method that worked for Daksha
+  Smriti works for these too, confirmed on the page listing but not
+  fetched. Caturvargacintamani alone is 7 volumes/parts (Danakhanda,
+  Vratakhanda x2, Shraddhakalpa x2, Kalanirnaya, Prayashcitta) -- large
+  enough to need its own dedicated pass.
+- The other 12 empty minor Smritis (Angiras, Atri, Baudhayana,
+  Brihaspati, Harita, Likhita, Pracetas, Samvarta, Shankha, Shatatapa,
+  Ushanas, Vasistha) were checked against Sanskrit Documents (nothing)
+  and UT's own root-text listing (doesn't even mention them -- UT only
+  has Manu/Narada/Yajnavalkya/Vishnu/Daksha as individual root texts,
+  all already in this corpus except Daksha, now filled). SETI
+  (panditya.info/seti) was NOT queried this pass -- it's the next
+  candidate discovery layer for these specifically, per the user's own
+  survey.
+- `gen_library_status.py` flagged `vedanga/chandas` as "populated"
+  (282 items) while `audit_library.py` and `validate_data.py` both
+  correctly treat it as empty (its actual shape is a meter-pattern
+  reference table -- `sama_vrutta`/`ardhasama_vrutta`/etc. -- not an
+  `items` array) -- the two tools disagree on what "populated" means
+  for this one non-standard leaf. Not resolved; the incidental
+  `library.json` flip this surfaced was reverted before committing
+  anything else this pass.
