@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.5 (DGE_PATH_LABELS: 141 Dasa Sahitya composer names added -- Devanagari transliteration of each composer\'s own Kannada name, or hand-attested for the major composers whose index.json name is Latin -- for the new composers/ taxonomy leaves, see dge/data/dasa_sahitya_local/ARCHITECTURE.md)';
+window.DGE_VERSIONS['library.js'] = 'v3.6 (DGE_PATH_LABELS: ~30 new entries for the 25 Aug Agama restructure -- Vaishnava/Shaiva/Shakta/Kashmir Saiva/Natha-Hathayoga split, see dge/PENDING.md -- on top of v3.5\'s Dasa Sahitya composer labels)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -192,6 +192,20 @@ const DGE_PATH_LABELS = {
   mahabhashya_patanjali: 'महाभाष्यम् (पतञ्जलिः)', siddhanta_kaumudi: 'सिद्धान्तकौमुदी',
   // Chandas
   vrittaratnakara: 'वृत्तरत्नाकरः',
+  // Agama restructure (25 Aug 2026) -- Vaishnava/Shaiva/Shakta/Kashmir Saiva/
+  // Natha-Hathayoga split, see dge/PENDING.md
+  vaishnava_agama: 'वैष्णवागमः', shakta_tantra: 'शाक्ततन्त्रम्', shakta_shaiva: 'शाक्तशैवम्',
+  kashmir_shaivism: 'कश्मीरशैवम्', spanda: 'स्पन्दः', trika: 'त्रिकम्', krama: 'क्रमः',
+  shiva_sutra: 'शिवसूत्राणि', shiva_sutra_vartika: 'शिवसूत्रवार्त्तिकम्',
+  natha_hathayoga: 'नाथहठयोगौ', natha: 'नाथसम्प्रदायः', hathayoga: 'हठयोगः',
+  yamunacharya: 'यामुनाचार्यः', samvitsiddhi: 'संवित्सिद्धिः', shaiva_tantra: 'शैवतन्त्रम्',
+  mahacina_tantra: 'महाचीनतन्त्रम्', matrikabheda_tantra: 'मातृकाभेदतन्त्रम्',
+  todala_tantra: 'तोडलतन्त्रम्', uddamareshvara_tantra: 'उड्डामरेश्वरतन्त्रम्',
+  devikalottara_agama: 'देवीकालोत्तरागमः', shakta_vijnana: 'शाक्तविज्ञानम्',
+  vatulanatha_sutras: 'वातूलनाथसूत्राणि', mrigendra_tantra: 'मृगेन्द्रतन्त्रम्',
+  pashupata_sutra: 'पाशुपतसूत्रम्', ganakarika: 'गणकारिका', spanda_karika: 'स्पन्दकारिका',
+  tantraloka: 'तन्त्रालोकः', tantrasara: 'तन्त्रसारः', amaraughashasana: 'अमरौघशासनम्',
+  gorakshashataka: 'गोरक्षशतकम्', gheranda_samhita: 'घेरण्डसंहिता', hathayogapradipika: 'हठयोगप्रदीपिका',
   // Advaita corpus + misc
   shankara_bhashya: 'शङ्करभाष्यम्', badhanta: 'बाधान्तः', brahmasutranyayasamgraha: 'ब्रह्मसूत्रन्यायसंग्रहः',
   // Dasa Sahitya composers (25 Aug 2026 taxonomy integration) --

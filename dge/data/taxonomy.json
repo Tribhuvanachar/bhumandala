@@ -4601,6 +4601,15 @@
        "_default_author": "Uttamur Viraraghavachariar"
       }
      }
+    },
+    "yamunacharya": {
+     "_note": "Yamunacharya (Alavandar), Ramanuja's predecessor's guru's guru -- Samvitsiddhi is part of his Siddhitrayam, a refutation of Advaitic positions on consciousness/self. Moved here 25 Aug 2026 from agama.pratyabhijna, where it had been misfiled by title-word (\"samvit\") rather than by author/tradition -- GRETIL identifies it plainly as Yamunacarya's work, and its own opening line states the Advaita purva-paksha it goes on to refute.",
+     "samvitsiddhi": {
+      "mula": {
+       "_schema": "generic",
+       "_default_author": "unspecified"
+      }
+     }
     }
    }
   },
@@ -5225,194 +5234,143 @@
   }
  },
  "agama": {
-  "pancharatra": {
-   "_default_author": "Traditionally revealed (Divya Prabandha of Bhagavan Narayana); human compiler varies by samhita and is often unrecorded",
-   "pancharatra_samhitas": {
-    "sattvata_samhita": {},
-    "prakasha_samhita": {},
-    "paushkara_samhita": {},
-    "jayakhya_samhita": {},
-    "ahirbudhnya_samhita": {},
-    "ishvara_samhita": {},
-    "parama_samhita": {},
-    "padma_samhita": {},
-    "vishnu_samhita": {},
-    "naradiya_samhita": {},
-    "lakshmi_tantra": {},
-    "hayagriva_samhita": {},
-    "parashara_samhita": {},
-    "vasishtha_samhita": {},
-    "vishvaksena_samhita": {}
+  "_note": "Restructured 25 Aug 2026 -- was flattening sectarian traditions (Pancharatra/Pashupata/Pratyabhijna/Shaiva Siddhanta/Natha), scriptural corpora (Shakta Agama) and philosophical schools as if they were parallel top-level categories. See dge/PENDING.md for the individual reclassifications and the sourcing behind each one -- Samvitsiddhi moved out entirely to darshana.vedanta.vishishtadvaita.yamunacharya (it's Yamunacharya's Vedantic refutation of Advaita, not a Kashmir Saiva philosophical text).",
+  "vaishnava_agama": {
+   "pancharatra": {
+    "_default_author": "Traditionally revealed (Divya Prabandha of Bhagavan Narayana); human compiler varies by samhita and is often unrecorded",
+    "pancharatra_samhitas": {
+     "sattvata_samhita": {},
+     "prakasha_samhita": {},
+     "paushkara_samhita": {},
+     "jayakhya_samhita": {},
+     "ahirbudhnya_samhita": {},
+     "ishvara_samhita": {},
+     "parama_samhita": {},
+     "padma_samhita": {},
+     "vishnu_samhita": {},
+     "naradiya_samhita": {},
+     "lakshmi_tantra": {},
+     "hayagriva_samhita": {},
+     "parashara_samhita": {},
+     "vasishtha_samhita": {},
+     "vishvaksena_samhita": {}
+    }
    },
-   "vaikhanasa_agama": {},
-   "shakta_agama": {
-    "devikalottara_agama": {
-     "mula": {
-      "_schema": "generic",
-      "_default_author": "unspecified"
+   "vaikhanasa_agama": {}
+  },
+  "shaiva_agama": {
+   "shaiva_siddhanta": {
+    "mrigendra_tantra": {
+     "mula": {},
+     "tika": {
+      "_default_author": "Narayanakantha (DCS metadata unconfirmed -- inferred from the text's standard scholarly name)"
+     }
+    }
+   },
+   "pashupata": {
+    "pashupata_sutra": {
+     "mula": {},
+     "bhashya_kaundinya": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Kaundinya (DCS metadata unconfirmed -- inferred from the text's standard scholarly name)"
      }
     },
-    "mahacina_tantra": {
-     "mula": {
-      "_schema": "generic",
-      "_default_author": "unspecified"
-     }
-    },
-    "matrikabheda_tantra": {
-     "mula": {
-      "_schema": "generic",
-      "_default_author": "unspecified"
-     }
-    },
-    "shakta_vijnana": {
-     "mula": {
-      "_schema": "generic",
-      "_default_author": "unspecified"
-     }
-    },
+    "ganakarika": {
+     "mula": {},
+     "tika": {}
+    }
+   },
+   "shaiva_tantra": {
+    "_note": "Non-dual/Bhairava-adjacent Shaiva tantric works whose GRETIL corpus placement is Shaiva despite strong Goddess/Mahavidya content in some of them (deity orientation is not the same axis as sectarian corpus classification).",
     "todala_tantra": {
-     "mula": {
-      "_schema": "generic",
-      "_default_author": "unspecified"
-     }
+     "mula": {}
     },
     "uddamareshvara_tantra": {
+     "_note": "Predominantly prayoga/ritual material (vasikarana, uccatana, stambhana, mohana, medicinal procedures) per older manuscript cataloguing, not a primarily liberation-oriented scripture.",
+     "mula": {}
+    },
+    "devikalottara_agama": {
+     "mula": {}
+    }
+   }
+  },
+  "shakta_tantra": {
+   "mahacina_tantra": {
+    "mula": {}
+   },
+   "shakta_shaiva": {
+    "_note": "Works genuinely straddling Shakta and Shaiva material (deity, ritual, and alchemical content mixed) -- kept as their own bucket rather than forced into either parent.",
+    "matrikabheda_tantra": {
+     "mula": {}
+    }
+   }
+  },
+  "kashmir_shaivism": {
+   "_note": "Split out 25 Aug 2026 from the too-narrow 'Pratyabhijna' node, which had wrongly been made the parent of Trika/Spanda/Shiva-Sutra material as if they were all one school.",
+   "pratyabhijna": {},
+   "spanda": {
+    "spanda_karika": {
      "mula": {
-      "_schema": "generic",
-      "_default_author": "unspecified"
+      "_default_author": "Vasugupta (or Kallata)"
+     },
+     "tika_nirnaya": {
+      "_default_author": "Kshemaraja"
+     }
+    }
+   },
+   "trika": {
+    "tantraloka": {
+     "mula": {
+      "_default_author": "Abhinavagupta"
+     }
+    },
+    "tantrasara": {
+     "mula": {
+      "_default_author": "Abhinavagupta"
+     }
+    }
+   },
+   "krama": {
+    "shakta_vijnana": {
+     "_note": "By Somananda; the text calls its own teaching sakta-vijnana and places itself within Trika sastra -- title-word alone would misfile this as generic Shakta.",
+     "mula": {}
+    },
+    "vatulanatha_sutras": {
+     "_note": "Kashmir Saiva Krama/Yogini transmission -- 'natha' here is the honorific, not the Gorakhnath Natha lineage.",
+     "mula": {},
+     "vritti": {}
+    }
+   },
+   "shiva_sutra": {
+    "_note": "Vasugupta's root text and Bhaskara's Vartika kept together -- previously the root sat under a generic top-level 'shaiva_agama' leaf while its own commentary sat under a different 'pratyabhijna' branch.",
+    "mula": {},
+    "shiva_sutra_vartika": {
+     "mula": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Bhaskara"
      }
     }
    }
   },
-  "shaiva_agama": {},
-  "shakta_agama": {
-   "mahacina_tantra": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    }
-   },
-   "matrikabheda_tantra": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    }
-   },
-   "todala_tantra": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    }
-   },
-   "uddamareshvara_tantra": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    }
-   },
-   "devikalottara_agama": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    }
-   },
-   "shakta_vijnana": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    }
-   }
-  },
-  "pashupata": {
-   "pashupata_sutra": {
-    "mula": {
-     "_schema": "grantha_mula_text"
+  "natha_hathayoga": {
+   "_note": "Split 25 Aug 2026: Gheranda Samhita and Hathayogapradipika are classical Hathayoga-corpus manuals (real Natha connections, but 'Hathayoga text' is the more useful primary classification); Amaraughashasana and Gorakshashataka are the actual Natha/Gorakshanatha scriptural corpus.",
+   "natha": {
+    "amaraughashasana": {
+     "mula": {},
+     "tika": {}
     },
-    "bhashya_kaundinya": {
-     "_schema": "grantha_tika_text",
-     "_default_author": "Kaundinya (DCS metadata unconfirmed -- inferred from the text's standard scholarly name)"
+    "gorakshashataka": {
+     "mula": {}
     }
    },
-   "ganakarika": {
-    "mula": {
-     "_schema": "grantha_mula_text"
+   "hathayoga": {
+    "gheranda_samhita": {
+     "mula": {}
     },
-    "tika": {
-     "_schema": "grantha_tika_text"
-    }
-   }
-  },
-  "pratyabhijna": {
-   "spanda_karika": {
-    "mula": {
-     "_schema": "grantha_mula_text",
-     "_default_author": "Vasugupta (or Kallata)"
-    },
-    "tika_nirnaya": {
-     "_schema": "grantha_tika_text",
-     "_default_author": "Kshemaraja"
-    }
-   },
-   "shiva_sutra_vartika": {
-    "mula": {
-     "_schema": "grantha_tika_text",
-     "_default_author": "Bhaskara"
-    }
-   },
-   "tantraloka": {
-    "mula": {
-     "_schema": "grantha_mula_text",
-     "_default_author": "Abhinavagupta"
-    }
-   },
-   "tantrasara": {
-    "mula": {
-     "_schema": "grantha_mula_text",
-     "_default_author": "Abhinavagupta"
-    }
-   },
-   "samvitsiddhi": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    }
-   }
-  },
-  "shaiva_siddhanta": {
-   "mrigendra_tantra": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    },
-    "tika": {
-     "_schema": "grantha_tika_text",
-     "_default_author": "Narayanakantha (DCS metadata unconfirmed -- inferred from the text's standard scholarly name)"
-    }
-   }
-  },
-  "natha_sampradaya": {
-   "amaraughashasana": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    },
-    "tika": {
-     "_schema": "grantha_tika_text"
-    }
-   },
-   "gorakshashataka": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    }
-   },
-   "gheranda_samhita": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    }
-   },
-   "hathayogapradipika": {
-    "mula": {
-     "_schema": "grantha_mula_text",
-     "_default_author": "Svatmarama"
-    }
-   },
-   "vatulanatha_sutras": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    },
-    "vritti": {
-     "_schema": "grantha_tika_text"
+    "hathayogapradipika": {
+     "mula": {
+      "_default_author": "Svatmarama"
+     }
     }
    }
   }

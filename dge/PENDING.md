@@ -3601,3 +3601,87 @@ not a blind re-run of the existing script. Probe result is cached at
 `dump/PROBE_minor_smritis.json` (gitignored, session-local) so the next
 attempt doesn't need to re-hit the rate limit just to rediscover the same
 10/22.
+
+**Also this pass**: checked DCS (`github.com/OliverHellwig/sanskrit`,
+sparse-cloned — 271 files total, a curated subset not the full corpus)
+for the same 22 targets. Confirms the 23 Aug session's finding: no
+match for any of the 7 nibandhas or the 11 still-missing minor smritis.
+But it turned up a real duplication: `smriti_dharma.smriti.
+{apastamba_smriti,gautama_smriti}` were empty stub leaves whose actual
+texts (853 and 891 items) already live, fully populated, correctly
+classified under `vedanga.kalpa` (Āpastamba/Gautama are Kalpasūtra-school
+Dharmasūtras, not independent verse Smṛtis). Removed the empty
+duplicates rather than importing a second copy — see the git history for
+25 Aug.
+
+Also added `purana.vayu_purana` as an empty-but-visible placeholder — it
+had no folder at all, unlike the other 17 traditional Mahāpurāṇas.
+
+## Agama restructure (25 Aug 2026)
+
+The `agama` taxonomy was flattening sectarian traditions (Pāñcarātra,
+Pāśupata), scriptural corpora (Śāktāgama), and philosophical schools
+(Pratyabhijñā) as if they were parallel top-level categories, and had two
+real bugs independent of that: the Śiva Sūtra root text sat as a flat
+`agama.shaiva_agama` leaf while its own commentary (Śiva Sūtra Vārttika)
+sat under a different top-level node (`pratyabhijna`); and six genuinely
+Śākta/Śaiva-Śākta tantric works were physically nested inside
+`agama/pancharatra/shakta_agama/` on disk — a Vaiṣṇava folder — while a
+*second*, empty `agama/shakta_agama/` sat at the top level as a dead stub.
+
+Restructured into five top-level branches, each verified against primary
+sources (GRETIL, web search, and each leaf's own `source_url` where it's
+DCS) before moving anything — not a blind application of an external
+recommendation:
+
+- `vaishnava_agama` — Pāñcarātra (with its 15 saṃhitās, unchanged) +
+  Vaikhānasa Āgama, un-nested from inside Pāñcarātra.
+- `shaiva_agama` — now the umbrella: Śaiva Siddhānta (Mṛgendra Tantra),
+  Pāśupata (Pāśupata Sūtra, Gaṇakārikā), and a new `shaiva_tantra` bucket
+  for Toḍala/Uḍḍāmareśvara/Devīkālottara Tantra — all three were
+  mis-nested under Pāñcarātra; GRETIL's own corpus placement is Śaiva for
+  all three despite strong Goddess/Mahāvidyā content in some of them
+  (deity orientation ≠ sectarian corpus classification).
+- `shakta_tantra` — genuinely Śākta content only: Mahācīna Tantra
+  directly, Mātṛkābheda Tantra under a `shakta_shaiva` sub-bucket (it's
+  explicitly a Śākta-Śaiva/alchemical crossover work per its own
+  literature, not purely either).
+- `kashmir_shaivism` — new top-level branch, split out of the
+  too-narrow "Pratyabhijñā" (which had wrongly been the parent of Trika/
+  Spanda/Śiva-Sūtra material as if it were all one school): `pratyabhijna`
+  (now correctly narrow — empty for now, no Utpaladeva Īśvarapratyabhijñā
+  in the corpus yet), `spanda` (Spanda Kārikā), `trika` (Tantrāloka,
+  Tantrasāra), `krama` (Śāktavijñāna — Somānanda's Trika text, misfiled
+  by its title's "Śākta" word rather than its own school; Vātūlanātha
+  Sūtras — Kashmir Śaiva Krama/Yoginī transmission, moved out of
+  `natha_sampradaya`, where "nātha" had been read as the Gorakṣanātha
+  lineage rather than the honorific it actually is here), and `shiva_sutra`
+  (root + Bhāskara's Vārttika, finally together).
+- `natha_hathayoga` — split into `natha` (Amaraughaśāsana,
+  Gorakṣaśataka — the real Nātha scriptural corpus) and `hathayoga`
+  (Gheraṇḍa Saṃhitā, Haṭhayogapradīpikā — classical Haṭhayoga manuals;
+  real Nātha connections, but "Haṭhayoga text" is the more useful
+  primary classification per their own content, a sevenfold/four-limb
+  yoga system, not sectarian doctrine).
+
+**One work moved out of `agama` entirely**: `samvitsiddhi` had been
+filed under Pratyabhijñā by its title's "saṃvit" (consciousness) rather
+than by its actual author or tradition. Confirmed via web search (GRETIL
+identifies it plainly as "Yāmunācāryaḥ: Saṃvitsiddhiḥ", part of his
+Siddhitrayam) and by reading its own opening line — it states the Advaita
+*pūrvapakṣa* ("ekam evādvitīyaṃ tad brahma...") that the rest of the text
+goes on to refute, exactly the Viśiṣṭādvaita polemical structure the
+GRETIL attribution implies. Moved to
+`darshana.vedanta.vishishtadvaita.yamunacharya.samvitsiddhi` — a new
+Yāmunācārya node (Rāmānuja's guru's guru, previously absent from the
+Viśiṣṭādvaita tree entirely).
+
+**Not yet done**: the user's fuller two-axis proposal (a separate
+`genre`/textual-form field — Āgama/Saṃhitā/Tantra/Sūtra/Kārikā/
+Vārttika/... — plus a `deity orientation` field, alongside the primary-
+tradition taxonomy path) is a real, separate piece of schema work, not
+started this pass. `DGE_LEGACY_SLUGS` (`dge/js/core.js`) got redirects
+for every moved path; three of them (pratyabhijna/natha_sampradaya/
+shakta_agama) fanned out to multiple new homes, so their redirect lands
+on the closest new parent rather than the exact leaf — a real, disclosed
+limitation of the single-target redirect table, not a bug.

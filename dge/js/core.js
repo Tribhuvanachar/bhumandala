@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.16 (dgeNormalizeGranthaData: new dasa_pada_text branch for Dasa Sahitya compositions -- text{kannada/devanagari/iast/source_roman} stanza arrays flattened with "/" and "//" separators into the same shlokas[] shape every other schema uses, deity/raga/tala carried as their own extra fields rather than repurposing rishi/devata/chandas -- on top of v3.15\'s AI-commentary badge convention)';
+window.DGE_VERSIONS['core.js'] = 'v3.17 (DGE_LEGACY_SLUGS: redirects for the 25 Aug Agama restructure -- pancharatra/pashupata/shaiva_siddhanta moved intact so their sub-paths resolve exactly; pratyabhijna/natha_sampradaya/shakta_agama fanned out to several new parents, so those land on the closest new home rather than the exact leaf -- on top of v3.16\'s dasa_pada_text normalizer branch)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -123,9 +123,21 @@ const DGE_LEGACY_SLUGS = {
   'kavya':                  'kavya_alankara',
   'koshas':                 'kosha',
   'stotras':                'stotra',
-  'pancharatra_agama':      'agama/pancharatra',
+  'pancharatra_agama':      'agama/vaishnava_agama/pancharatra',
   'dasakuta':               'dasa_sahitya/dasakuta',
   'vyasakuta':              'dasa_sahitya/vyasakuta',
+  // 25 Aug 2026 Agama restructure. pancharatra/pashupata/shaiva_siddhanta
+  // moved intact under new parents, so their sub-paths resolve exactly.
+  // pratyabhijna/natha_sampradaya/shakta_agama were split across several
+  // new parents (Kashmir Saivism, Shaiva Tantra, Vaishnava Agama...) --
+  // no single target can route every sub-path correctly, so these land on
+  // the closest new home rather than the exact leaf; see dge/PENDING.md.
+  'agama/pancharatra':      'agama/vaishnava_agama/pancharatra',
+  'agama/pashupata':        'agama/shaiva_agama/pashupata',
+  'agama/shaiva_siddhanta': 'agama/shaiva_agama/shaiva_siddhanta',
+  'agama/pratyabhijna':     'agama/kashmir_shaivism',
+  'agama/natha_sampradaya': 'agama/natha_hathayoga',
+  'agama/shakta_agama':     'agama/shakta_tantra',
   // 23 Aug 2026 restructure: dvaitavedanta/ (a separate top-level 895-item
   // tree) moved to sit alongside sarvamula under Vedanta/Dvaita, and
   // sarvamula itself was renamed SarvaMula for display-name consistency

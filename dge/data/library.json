@@ -4,219 +4,250 @@
   "description": "Master Catalog for Digital Grantha Engine",
   "granthas": [
     {
-      "path": "dge/data/agama/natha_sampradaya/amaraughashasana/mula/data.json",
+      "path": "dge/data/agama/kashmir_shaivism/krama/shakta_vijnana/mula/data.json",
       "populated": true,
-      "title": "Mula"
+      "title": "Mula",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/natha_sampradaya/amaraughashasana/tika/data.json",
+      "path": "dge/data/agama/kashmir_shaivism/krama/vatulanatha_sutras/mula/data.json",
       "populated": true,
-      "title": "Tika"
+      "title": "Mula",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/natha_sampradaya/gheranda_samhita/mula/data.json",
+      "path": "dge/data/agama/kashmir_shaivism/krama/vatulanatha_sutras/vritti/data.json",
       "populated": true,
-      "title": "Mula"
+      "title": "Vritti",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/natha_sampradaya/gorakshashataka/mula/data.json",
+      "path": "dge/data/agama/kashmir_shaivism/shiva_sutra/mula/data.json",
       "populated": true,
-      "title": "Mula"
+      "title": "Mula",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/natha_sampradaya/hathayogapradipika/mula/data.json",
+      "path": "dge/data/agama/kashmir_shaivism/shiva_sutra/shiva_sutra_vartika/mula/data.json",
       "populated": true,
-      "title": "Mula"
+      "title": "Mula",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/natha_sampradaya/vatulanatha_sutras/mula/data.json",
+      "path": "dge/data/agama/kashmir_shaivism/spanda/spanda_karika/mula/data.json",
       "populated": true,
-      "title": "Mula"
+      "title": "Mula",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/natha_sampradaya/vatulanatha_sutras/vritti/data.json",
+      "path": "dge/data/agama/kashmir_shaivism/spanda/spanda_karika/tika_nirnaya/data.json",
       "populated": true,
-      "title": "Vritti"
+      "title": "Tika Nirnaya",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/ahirbudhnya_samhita/data.json",
+      "path": "dge/data/agama/kashmir_shaivism/trika/tantraloka/mula/data.json",
       "populated": true,
-      "title": "Ahirbudhnya Samhita"
+      "title": "Mula",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/hayagriva_samhita/data.json",
+      "path": "dge/data/agama/kashmir_shaivism/trika/tantrasara/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/natha_hathayoga/hathayoga/gheranda_samhita/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/natha_hathayoga/hathayoga/hathayogapradipika/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/natha_hathayoga/natha/amaraughashasana/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/natha_hathayoga/natha/amaraughashasana/tika/data.json",
+      "populated": true,
+      "title": "Tika",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/natha_hathayoga/natha/gorakshashataka/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/shaiva_agama/pashupata/ganakarika/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/shaiva_agama/pashupata/ganakarika/tika/data.json",
+      "populated": true,
+      "title": "Tika",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/shaiva_agama/pashupata/pashupata_sutra/bhashya_kaundinya/data.json",
+      "populated": true,
+      "title": "Bhashya Kaundinya",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/shaiva_agama/pashupata/pashupata_sutra/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/shaiva_agama/shaiva_siddhanta/mrigendra_tantra/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/shaiva_agama/shaiva_siddhanta/mrigendra_tantra/tika/data.json",
+      "populated": true,
+      "title": "Tika",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/shaiva_agama/shaiva_tantra/devikalottara_agama/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/shaiva_agama/shaiva_tantra/todala_tantra/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/shaiva_agama/shaiva_tantra/uddamareshvara_tantra/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/shakta_tantra/mahacina_tantra/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/shakta_tantra/shakta_shaiva/matrikabheda_tantra/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/ahirbudhnya_samhita/data.json",
+      "populated": true,
+      "title": "Ahirbudhnya Samhita",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/hayagriva_samhita/data.json",
       "populated": false,
-      "title": "Hayagriva Samhita"
+      "title": "Hayagriva Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/ishvara_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/ishvara_samhita/data.json",
       "populated": false,
-      "title": "Ishvara Samhita"
+      "title": "Ishvara Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/jayakhya_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/jayakhya_samhita/data.json",
       "populated": true,
-      "title": "Jayakhya Samhita"
+      "title": "Jayakhya Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/lakshmi_tantra/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/lakshmi_tantra/data.json",
       "populated": true,
-      "title": "Lakshmi Tantra"
+      "title": "Lakshmi Tantra",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/naradiya_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/naradiya_samhita/data.json",
       "populated": false,
-      "title": "Naradiya Samhita"
+      "title": "Naradiya Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/padma_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/padma_samhita/data.json",
       "populated": true,
-      "title": "Padma Samhita"
+      "title": "Padma Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/parama_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/parama_samhita/data.json",
       "populated": false,
-      "title": "Parama Samhita"
+      "title": "Parama Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/parashara_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/parashara_samhita/data.json",
       "populated": false,
-      "title": "Parashara Samhita"
+      "title": "Parashara Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/paushkara_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/paushkara_samhita/data.json",
       "populated": true,
-      "title": "Paushkara Samhita"
+      "title": "Paushkara Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/prakasha_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/prakasha_samhita/data.json",
       "populated": true,
-      "title": "प्रकाशसंहिता"
+      "title": "Prakasha Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/sattvata_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/sattvata_samhita/data.json",
       "populated": true,
-      "title": "Sattvata Samhita"
+      "title": "Sattvata Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/vasishtha_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/vasishtha_samhita/data.json",
       "populated": false,
-      "title": "Vasishtha Samhita"
+      "title": "Vasishtha Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/vishnu_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/vishnu_samhita/data.json",
       "populated": true,
-      "title": "Vishnu Samhita"
+      "title": "Vishnu Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/pancharatra_samhitas/vishvaksena_samhita/data.json",
+      "path": "dge/data/agama/vaishnava_agama/pancharatra/pancharatra_samhitas/vishvaksena_samhita/data.json",
       "populated": true,
-      "title": "Vishvaksena Samhita"
+      "title": "Vishvaksena Samhita",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/agama/pancharatra/shakta_agama/devikalottara_agama/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/pancharatra/shakta_agama/mahacina_tantra/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/pancharatra/shakta_agama/matrikabheda_tantra/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/pancharatra/shakta_agama/shakta_vijnana/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/pancharatra/shakta_agama/todala_tantra/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/pancharatra/shakta_agama/uddamareshvara_tantra/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/pancharatra/vaikhanasa_agama/data.json",
+      "path": "dge/data/agama/vaishnava_agama/vaikhanasa_agama/data.json",
       "populated": false,
-      "title": "Vaikhanasa Agama"
-    },
-    {
-      "path": "dge/data/agama/pashupata/ganakarika/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/pashupata/ganakarika/tika/data.json",
-      "populated": true,
-      "title": "Tika"
-    },
-    {
-      "path": "dge/data/agama/pashupata/pashupata_sutra/bhashya_kaundinya/data.json",
-      "populated": true,
-      "title": "Bhashya Kaundinya"
-    },
-    {
-      "path": "dge/data/agama/pashupata/pashupata_sutra/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/pratyabhijna/samvitsiddhi/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/pratyabhijna/shiva_sutra_vartika/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/pratyabhijna/spanda_karika/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/pratyabhijna/spanda_karika/tika_nirnaya/data.json",
-      "populated": true,
-      "title": "Tika Nirnaya"
-    },
-    {
-      "path": "dge/data/agama/pratyabhijna/tantraloka/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/pratyabhijna/tantrasara/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/shaiva_agama/data.json",
-      "populated": true,
-      "title": "Shaiva Agama"
-    },
-    {
-      "path": "dge/data/agama/shaiva_siddhanta/mrigendra_tantra/mula/data.json",
-      "populated": true,
-      "title": "Mula"
-    },
-    {
-      "path": "dge/data/agama/shaiva_siddhanta/mrigendra_tantra/tika/data.json",
-      "populated": true,
-      "title": "Tika"
-    },
-    {
-      "path": "dge/data/agama/shakta_agama/data.json",
-      "populated": false,
-      "title": "Shakta Agama"
+      "title": "Vaikhanasa Agama",
+      "addedAt": "2026-08-25"
     },
     {
       "path": "dge/data/darshana/mimamsa/bhatta/shlokavarttika/mula/data.json",
@@ -6232,6 +6263,12 @@
       "populated": true,
       "title": "Mula",
       "addedAt": "2026-08-24"
+    },
+    {
+      "path": "dge/data/darshana/vedanta/vishishtadvaita/yamunacharya/samvitsiddhi/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "addedAt": "2026-08-25"
     },
     {
       "path": "dge/data/darshana/yoga/sutra_and_bhashya/yoga_sutra/bhashya_vyasa/data.json",
