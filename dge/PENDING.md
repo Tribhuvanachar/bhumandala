@@ -2776,13 +2776,37 @@ complete record, not just a live queue.
   Content spot-checked, not just validated: Nāṭyaśāstra 1.1 is Bharata's
   own well-known opening invocation, Hitopadeśa's first unit is its
   famous "siddhiḥ sādhye satām astu" verse, Abhidharmakośa 1.1 is "oṃ
-  namo buddhāya". **One honest anomaly, not smoothed over**:
+  namo buddhāya". ~~**One honest anomaly, not smoothed over**:
   Mūlamadhyamakakārikā's unit 1.1 has ~30 words that don't match
   Nāgārjuna prepended to a genuine, verifiable Nāgārjuna verse ("na
   svato nāpi parato..."), while every other unit checked (1.2 onward) is
   unambiguously correct — present in DCS's own source file exactly as
   shown, not a parsing artifact, left open for closer review rather than
-  silently trusted or silently altered.
+  silently trusted or silently altered.~~ **Closer review done, source
+  identified with direct evidence, corrected (25 Aug).** The prepended
+  fragment — "kvacinmahāmate buddhakṣetre'nimiṣaprekṣayā dharmo deśyate
+  kvacidiṅgitaiḥ kvacidbhūvikṣepeṇa kvacin netrasaṃcāreṇa kvacidāsyena
+  kvacidvijṛmbhitena kvacidutkāsanaśabdena" ("in some Buddha-field the
+  Dharma is taught by an unblinking gaze, in some by gestures, in some
+  by movement of the brow...") — is not Nāgārjuna at all. It is the
+  Laṅkāvatāra Sūtra's well-known passage on wordless teaching across
+  Buddha-fields, confirmed directly rather than by name-recognition
+  alone: that exact sentence appears as a clean, correctly-tokenized
+  unit of its own in DCS's *own* vendored Laṅkāvatārasūtra source file
+  (also imported this batch, `dge/data/shastra/bauddha_sahitya/sutra/
+  lankavatara_sutra`) — a different, unrelated text in the same DCS
+  Buddhist corpus. `grep -l` across all 27 of this text's `.conllu`
+  files confirms no other chapter carries the contamination, so this
+  is an isolated upstream splice in DCS's own chapter-1 source file
+  (most likely two adjacent source files merged at a boundary during
+  DCS's own preparation), not a pattern our importer needs to guard
+  against generically. Corrected directly in
+  `mula_madhyamaka_karika/mula/data.json`'s unit 1.1: the fragment
+  removed, the genuine kārikā ("na svato nāpi parato na dvābhyāṃ
+  nāpyahetutaḥ / utpannā jātu vidyante bhāvāḥ kvacana kecana") kept, and
+  the full removed fragment recorded verbatim in the item's own `notes`
+  field so the correction is auditable from the shipped data itself,
+  not just this changelog. `validate_data.py`: 0 errors.
 
   DCS running total: **116 texts, 128 taxonomy leaves, 162,136 items.**
   Still open: Tantra/Śaiva-Śākta naming (deliberately untouched this

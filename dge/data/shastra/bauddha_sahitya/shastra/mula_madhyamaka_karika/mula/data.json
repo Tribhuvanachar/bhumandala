@@ -9,8 +9,8 @@
     {
       "id": "1.1",
       "title": "1.1",
-      "text": "क्वचिन्महामते बुद्धक्षेत्रेऽनिमिषप्रेक्षया धर्मो देश्यते क्वचिदिङ्गितैः क्वचिद्भूविक्षेपेण क्वचिन्नेत्रसंचारेण क्वचिदास्येन क्वचिद्विजृम्भितेन क्वचिदुत्कासनशब्देन न स्वतो नापि परतो न द्वाभ्यां नाप्यहेतुतः उत्पन्ना जातु विद्यन्ते भावाः क्वचन केचन",
-      "notes": "Source: Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024, CC-BY 4.0. Devanagari produced from the DCS IAST transcription via skrutable's transliterator (pip dependency, no vendored code).",
+      "text": "न स्वतो नापि परतो न द्वाभ्यां नाप्यहेतुतः उत्पन्ना जातु विद्यन्ते भावाः क्वचन केचन",
+      "notes": "Source: Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024, CC-BY 4.0. Devanagari produced from the DCS IAST transcription via skrutable's transliterator (pip dependency, no vendored code). Corrected 25 Aug 2026: DCS's own source file for this chapter opened with an extraneous fragment (\"क्वचिन्महामते बुद्धक्षेत्रेऽनिमिषप्रेक्षया धर्मो देश्यते क्वचिदिङ्गितैः क्वचिद्भूविक्षेपेण क्वचिन्नेत्रसंचारेण क्वचिदास्येन क्वचिद्विजृम्भितेन क्वचिदुत्कासनशब्देन\") prepended to the genuine first karika -- confirmed, not guessed, by finding that exact fragment as a clean, correctly-tokenized sentence in DCS's own Lankavatarasutra source file (a different, unrelated text in the same DCS Buddhist corpus); no other chapter of this text carries the contamination. Removed the fragment; kept only the genuine karika (\"na svato napi parato...\").",
       "tags": [
         "dcs-import"
       ]
