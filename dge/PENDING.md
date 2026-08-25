@@ -4435,3 +4435,50 @@ verified rendering real text in the reader via Playwright.
   future page shape puts भाष्यम् content under some third heading form,
   the closed vocabulary means it lands in mūla or stays dropped — extend
   `MULA_ALIAS_KEYS`/the `*भाष्यम्` rule deliberately, never loosely.
+
+## Dayabhaga import -- the pending_pdf_sources.json "next available task" (25 Aug 2026, part 8)
+
+After the registry pass (previous entry), picked up Dayabhaga as the
+one already flagged `text_available`. Its structure turned out more
+complex than Daksha Smriti's -- worth a full pass rather than reusing
+that method blind:
+
+- 15 chapters, TWO section-numbering schemes mixed across them: most
+  are flat `<chapter.paragraph>`, but chapters 4/6/7/8/11 nest into
+  named "Section One/Two/..." sub-divisions and use
+  `<chapter.section.paragraph>` instead. Parsed both off the bracket
+  markers uniformly, ignoring the inconsistent "CHAPTER 1" vs "CHAPTER
+  FOUR" header text (digits vs words, no reliable structure there).
+- Applied 26 of Olivelle's own 27 documented errata corrections (word-
+  level typo fixes against Rocher's base edition); the 27th is a
+  paleography note about a Devanagari stroke, not a text substitution,
+  left alone.
+- Found and fixed one transcription typo NOT in the errata list: a
+  marker printed `<31.0>` sitting between `<1.29>` and `<1.31>` --
+  confirmed by its position in the sequence, corrected to `<1.30>`.
+- Kept ~280 embedded citation tags (`[M 9.103]`, `[N 13.1]`, etc. --
+  Jimutavahana quoting Manu/Narada/Vasishtha/Katyayana/Mahabharata/
+  other smritis throughout his own argument) as genuine content;
+  stripped only the one true footnote-reference marker (`[1]`, numeric-
+  only, pointing at an endnote -- a distinct pattern from the citation
+  tags, which always pair a letter siglum with a reference number).
+- Schema: `generic`, one item per marker, `{id, title, text, notes,
+  tags}` -- matches the schema's own stated purpose ("Dharmashastra
+  digests") and existing precedent (`samvitsiddhi/mula`), not the
+  `sanskrit_text`/`iast_text` shape the GRETIL-derived Puranas use.
+  One tradeoff worth flagging: the citation tags above got fully
+  transliterated into Devanagari (`[M 9.206]` -> `[म् ९.२०६]`) since
+  this schema has no separate `iast_text` field to preserve the more
+  scholarly-conventional Latin-siglum form in. Still correct and
+  legible, just less immediately recognizable to someone used to
+  reading `[M ...]`-style citations.
+
+677 items total. Verified before writing: no leftover CHAPTER/Section
+header text, no empty items, all 5 occurrences of the errata-corrected
+word landed, chapter coverage 1-15 confirmed complete. 208/208 tests,
+validate_data.py/audit_library.py clean.
+
+**Remaining `text_available` leaves from the registry, not done yet**:
+Caturvargacintamani (7 parts -- large, its own pass), Kalpataru (11
+kandas), Smriti Chandrika (5 kandas). All have confirmed working
+Google Doc URLs in `pending_pdf_sources.json` already.
