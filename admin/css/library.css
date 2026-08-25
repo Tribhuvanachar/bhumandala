@@ -50,6 +50,11 @@
   .srclink{font-size:11px;color:var(--accent2);flex:none;text-decoration:none;white-space:nowrap;cursor:help}
   a.srclink{cursor:pointer}
   .srclink:hover{text-decoration:underline}
+  /* Candidate-but-not-yet-imported PDF/e-text (pending_pdf_sources.json via
+     leaf_sources' fallback) -- var(--part), the same amber already used for
+     "partially loaded" folder dots, so "candidate found" reads as progress
+     toward loaded rather than as another flavor of "empty". */
+  .srclink.pdflink{color:var(--part)}
   .ctl{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:8px;width:28px;height:26px;cursor:pointer;color:var(--ink);font-size:12px;padding:0;line-height:1}
   .ctl:hover{background:var(--panel2)}
   .ctl.on{background:var(--accent);color:#fff;border-color:var(--accent)}
