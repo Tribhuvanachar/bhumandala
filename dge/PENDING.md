@@ -4390,3 +4390,43 @@ Not done, by explicit choice: `apte-sa`/`apte-bi` stay out of
 `dicts_config.json` and `dist` until someone reviews real samples of both --
 their compiled source files are *not* committed to `local-dict-zip/` either,
 so they'd need re-supplying if a review clears them later.
+
+## apte-sa/apte-bi resolved: apte-sa is the clear one, pushed (25 Aug 2026, part 3)
+
+Project lead: "which of the two is clear, put it in, leave the other."
+Built both through `kosha_core.build_items()` directly (not just headword
+counts this time) and checked what each one's headwords actually *are*:
+
+- **`apte-sa`**: all 35,878 headwords are real Devanagari
+  (`अदध्ऱ्यञ्च्`, `ऊधस्`, ...) -- same shape as every other
+  `headword_language: sa` dictionary already in the corpus.
+- **`apte-bi`**: all 35,869 headwords are bare romanized/Latin forms
+  (`aabaadh`, `aabaalam`, ...) -- **zero** Devanagari headwords, confirmed
+  by direct check, not the earlier session's "looks like OCR noise"
+  guess from a handful of samples. The gloss bodies open by repeating the
+  real Devanagari headword (`आबाध्. आबाध् [ābādh], 1 Ā.`), so `apte-bi` is
+  the same underlying Apte content compiled with a **romanized index**
+  instead of a Devanagari one -- "bi" = bilingual-*headword* edition, not
+  a noisier digitisation. That's a real, deliberate StarDict feature, just
+  a different indexing shape than this schema's `headword_language: sa`
+  convention (which expects Devanagari primary, Latin only as an excluded
+  synonym) supports without special-casing. Left out on that basis, not a
+  quality judgment against the text itself.
+
+**Pushed `apte-sa` live**, same rigor as the first five:
+- `dist`: merged additively (existing bucket files extended, not replaced),
+  structurally validated -- **101 dictionaries, 2,188,729 headwords** (was
+  100 / 2,152,851).
+- `main`: `dicts_config.json` gained the `apte-sa` entry
+  (`repo: "local-dict-zip"`), its compiled StarDict source
+  (`local-dict-zip/apte-sa/`, ~13MB) committed for the same reproducibility
+  reason as before, `README.md` counts updated. Round-tripped through the
+  real `build_koshas.py --sources-root ... --only apte-sa` driver and
+  confirmed byte-identical to what's already live on `dist` (one cosmetic
+  `license_note` wording difference, since synced).
+- jsDelivr's manifest cache purged again afterward.
+
+`apte-bi`'s compiled source was never copied into `local-dict-zip/` and
+stays out of `dicts_config.json` -- a deliberate, permanent exclusion given
+what it actually is, not a "revisit later" item like the original two-way
+uncertainty was.
