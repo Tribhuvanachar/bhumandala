@@ -3469,14 +3469,43 @@ Still open, in the order I would take them:
   collect job — a shard with a real error (chrome scraped instead of verse
   text, duplicate ids, escaped `\uXXXX`) now fails right there, while the
   cause is still visible, instead of surfacing anonymously after the merge.
-- **Headings are stored as verses, which is what a reader sees as a blank
-  entry.** Nyāya Sudhā mūla item 4 of 1,655 (`DV_4849`) has
-  `sanskrit_text: "प्रथमः पादः"` — a pāda heading occupying a verse slot, so
-  the reader shows a card with a reference and nothing to read. 1,063 of the
-  1,655 mūla items are under 40 characters; many of those are genuine short
-  pratīkas, but the navigation headings among them are not text at all.
-  Corpus-wide, 3,317 of 30,139 items are under 40 characters. The importer
-  needs to distinguish a heading row from a content row and drop the former.
+- ~~**Headings are stored as verses, which is what a reader sees as a blank
+  entry.**~~ **Fixed (25 Aug).** Root cause, found precisely rather than
+  guessed: the site marks a pāda/sarga/adhyāya section-boundary heading with
+  the exact same `<h2 class="shloka">` markup it uses for a real verse, and
+  `_layers_from_article()` in `dv_parse.py` blindly trusted that markup.
+  Confirmed corpus-wide (all `dge/data/**/mula/data.json`, not a guess): 22
+  distinct heading strings, all of the closed shape "‹ordinal› ‹पाद/सर्ग/
+  अध्याय/अधिकरण/खण्ड/प्रकरण/काण्ड/अंश/अष्टक›" (e.g. "प्रथमः पादः", sandhi
+  forms like "द्वितीयोऽध्यायः" too), zero false positives against real short
+  verse/pratīka text on the same sweep. Added `is_structural_heading()` +
+  `STRUCTURAL_HEADING_RE` to `dv_parse.py`, wired into the shloka-append
+  check so a heading no longer becomes a fake mūla item — the real
+  commentary sharing that article id (there always was some; adhikaraṇa
+  ṭīkās comment on the pāda the heading marks) is untouched, since it comes
+  from a separate `<h3>` pass over the same block. A heading-only leaf with
+  no commentary at all now correctly yields nothing rather than a lone fake
+  "verse". Regression-tested in `test_dv_parse.py` (section G) against the
+  real heading strings plus the real DV_4841-shape article layout.
+  **Also cleaned the 23 already-ingested fake items this produced** in
+  DvaitaVedanta (`nyaya_sudha` ×5, `sumadhva_vijaya` ×16, `nyaya_vivarana`
+  ×1, `gita_tatparya_nirnaya` ×1) — no re-crawl needed, the fake text
+  carried no real information the breadcrumb doesn't already have.
+  `sumadhva_vijaya/mula` is now honestly empty (all 16 of its items were
+  this bug — its real kāvya verses were apparently never captured under
+  these ids at all, a separate, deeper gap this fix only makes visible
+  instead of hiding); `audit_library.py --fix` flipped its `populated` flag
+  to `false` accordingly. `verify_extract.py --strict`: 0 errors (new
+  "no matching mula item" warnings on the affected tika folders are
+  expected and honest, not a regression — the same accepted class of gap
+  already present elsewhere in this corpus).
+  **New, out-of-scope finding from the same sweep**: `SarvaMula` — a
+  different, already-existing corpus/importer under
+  `dge/data/darshana/vedanta/dvaita/SarvaMula/`, unrelated to `dv_parse.py`
+  — has the identical bug, 32 more fake items (`sutra_prasthana/
+  anuvyakhyana/mula` ×16, `sutra_prasthana/nyaya_vivarana/mula` ×16, ids
+  prefixed `BSNV_...` not `DV_...`). Not touched here: different pipeline,
+  not investigated, worth its own pass.
 - **The adhikaraṇa structure was never captured, and this is the deeper gap.**
   The breadcrumb goes `work > layer > adhyāya > pāda` and stops. There is no
   adhikaraṇa level, no link from an adhikaraṇa to the mūla sūtra/śloka it

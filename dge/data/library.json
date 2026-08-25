@@ -4247,7 +4247,7 @@
     },
     {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/mula/data.json",
-      "populated": true,
+      "populated": false,
       "title": "सुमध्वविजयः — mula",
       "addedAt": "2026-08-24"
     },
