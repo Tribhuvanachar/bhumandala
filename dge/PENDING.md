@@ -4277,3 +4277,68 @@ project lead to supply the `.idx`/`.ifo` companions or the full local
 §3) and confirming what `apte-sa`/`apte-bi` actually are. No code changed
 this pass -- this is a coverage audit against the real data repo, not a
 build.
+
+## Kosha gap-fill: built and merge-verified the 6 real gap dictionaries, not yet pushed (25 Aug 2026)
+
+Follow-up to the audit above. Project lead uploaded the 6 (turned out to be
+7 -- `apte-sa` and `apte-bi` are two distinct compiled dictionaries, not one)
+gap dictionaries as complete StarDict sets (`.ifo`/`.idx`/`.dict[.dz]`/`.syn`,
+this time with their index files, unlike the earlier 5 uploads). Built and
+merge-verified against a local working copy of `bhumandala-kosha-data`'s
+`dist` branch -- **not pushed**, since this session only has read access to
+that repo and a live-corpus write is exactly the kind of shared-state action
+worth confirming first.
+
+**Built via the real production `kosha_core.py`** (not a reimplementation):
+`who-ayurveda-terms` (3,431 hw), `who-nia-non-clinical-draft` (5,022 hw),
+`dictionnaire-heritage-du-sanskrit` (23,256 hw, Huet's French dictionary),
+`abhidhanamanjari` (894 hw), `amara-onto` (9,030 hw), `apte-sa` (35,878 hw),
+`apte-bi` (35,869 hw) -- 113,380 headwords / 289,795 senses total.
+
+**Merged additively into a full copy of the live 95-dict `dist` tree**
+(now 102 dicts / 2,224,598 headwords), via a script that resolves each new
+record's index bucket by the same longest-existing-prefix match
+`dge/js/kosha.js`'s own `search()` uses, so no existing bucket file was
+replaced -- only extended (1,991 existing shard files modified, additively;
+7 new per-dictionary entry-shard folders added, zero collisions).
+Structurally verified with `build_koshas.py`'s own `validate()` (clean) plus
+hand spot-checks walking the real manifest -> index shard -> entry shard
+chain exactly as the client does (e.g. querying ऊधस् now correctly returns
+apte-sa/apte-bi's entries interleaved with the 20 pre-existing dictionaries
+that already had that word, all still intact).
+
+**Two real findings surfaced by running against real data, not assumed:**
+1. **A latent bug in `kosha_core.py`'s `_indexable_synonyms()`**: its
+   Latin-exclusion filter (`all(ch.isascii() for ch in syn)`) doesn't catch
+   IAST-diacritic synonyms (ū/ḍ/ṭ/ṣ/ś/ṇ/ṝ are non-ASCII Unicode, not plain
+   Latin) -- so `apte-sa`/`amara-onto`'s IAST-form synonyms slip through and
+   get indexed, creating ~28 new top-level index buckets. Harmless as data
+   (arguably even a minor feature -- the IAST spelling becomes searchable),
+   but not what the filter's own docstring says it intends. Left in for this
+   merge rather than silently dropped; flagged here for whoever next touches
+   `kosha_core.py` to decide whether the filter should also exclude Latin
+   Extended-A/IAST ranges.
+2. **Two source-file defects fixed locally at ingestion** (not a
+   `kosha_core.py` change): `WHO_Ayurveda-terms` had one entry with a
+   leading U+00A0 polluting the headword, and the Huet dictionary's `.idx`
+   carried one literal `<p></p>` as a "word." Both stripped by a small
+   cleaning wrapper around `iter_stardict()` before `build_items()`; 1
+   headword dropped (the markup-only one), everything else unaffected.
+3. **`apte-sa` and `apte-bi` are NOT simple duplicates**, worth the user's
+   attention before shipping both: near-identical headword counts (35,878 /
+   35,869) but **zero raw-string overlap** and only ~20% overlap even at
+   normalized SLP1 form (7,047/35,878). Some `apte-bi`-only forms
+   (`ChRSh`, `ChRd`, `ChaSh`...) look like OCR/segmentation noise rather
+   than real lemmas. Both are very likely digitizations of the same
+   underlying Apte dictionary via different pipelines with different
+   error profiles, not two different works -- not resolved here, since
+   picking one (or reconciling both) is an editorial call, not a technical
+   one.
+
+**Not done:** actually pushing the merged tree to
+`Tribhuvanachar/bhumandala-kosha-data`'s `dist` branch (needs push access
+this session doesn't have, and the project lead's decision on the apte-sa/
+apte-bi question above first) and updating `main`'s `dicts_config.json`
+with the 7 new entries so a future full rebuild reproduces this without
+needing the local `dict.zip` again. The merged tree exists, verified, in
+this session's scratch environment only.
