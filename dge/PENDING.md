@@ -4525,7 +4525,9 @@ rather than acted on blind:**
   current honest-if-plain English fallback. Fixed the ones directly
   caught this pass (chanakya_niti/chanakya_sutra/kamandakiya_nitisara,
   and `amsha` added to `DGE_NUMBERED_PREFIXES` for Vishnu Purana's
-  amsha_01..06). The full 1055-item gap is a real candidate for a
+  amsha_01..06). **RESOLVED 25 Aug 2026, part 11 (see that section
+  below) -- the full sweep this note called for actually happened.**
+  The full 1055-item gap is a real candidate for a
   dedicated future pass, ideally batched by domain the way the 234
   Dvaita-Vedanta labels were done earlier this project (see the 20 Aug
   entry elsewhere in this file).
@@ -4705,3 +4707,102 @@ the last includes nyaya_sudha, whose re-crawl also activates the part-10
 `extract-dvaitavedanta.yml` workflow per section (dry_run=false,
 open_pr=true) now that main carries all the parser fixes — or further
 staged local runs like this one.
+
+## Taxonomy-folder-label + leaf-title English-name gap, closed (25 Aug 2026, part 11)
+
+The project lead greenlit the ~1055-item English-label gap ("you can take
+on the one zero five five item English label gap") and clarified the
+Subhashita placement (moved under `shastra/niti_shastra/`, alongside
+Chanakya Niti/Hitopadesha -- see the earlier part-9 entry) and the
+requirement that "the language selected should reflect" -- i.e. display
+names, not just folder IDs, must respond to the script/language selector.
+
+**Scoping first, not the raw 1055.** The project lead's own count came
+from `taxonomy.json` directly, which over-counts in two ways: (1) some
+"segments" are metadata fields (e.g. `dasa_sahitya.label`/`data`/`forms`,
+its `sa`/`kn`/`en` name object), not real tree nodes, and (2) `tika_*`
+commentary sub-folders under Dvaita Vedanta that are joinable get absorbed
+into the stitched multi-tab reader (`dgeFoldLayerEntries`,
+`layer_manifest.json`) and never render as a separate tree label at all.
+Cross-checking against the real filesystem and the manifest's fold status
+brought the genuinely-visible gap down to 409 folder segments (376 outside
+Dvaita Vedanta, 33 inside it) -- still substantial, but tractable in one
+pass rather than 1055.
+
+**What shipped** (`dge/js/library.js`, 404 new `DGE_PATH_LABELS` entries +
+`pada` added to `DGE_NUMBERED_PREFIXES` for Narada Purana's
+`pada_01`..`pada_04`):
+- Vedic corpus: the remaining unlabeled Brahmanas/Aranyakas/Upanishads/
+  Samhitas across all four Vedas and their shakhas, Ayurveda
+  samhitas/nighantus/rasashastra texts (~35), Vedic shiksha texts (~40).
+- Puranas: khandas/parvas/bhagas across Bhavishya, Brahmanda,
+  Brahmavaivarta, Garuda, Linga, Markandeya, Narada, Padma, Shiva, Skanda,
+  Vamana -- plus Matsya Purana itself, which had no top-level label at
+  all despite being fully populated.
+- Darshana: the Vishishtadvaita Sri Bhashya corpus (Ramanuja's own works,
+  Sudarshana Suri, Vedanta Desika, Rangaramanuja, and ~10 more named
+  acharyas/commentators), the rest of Nyaya/Sankhya/Yoga/Mimamsa/Advaita
+  that hadn't been covered yet.
+- Vedanga: Vyakarana schools (Ashtadhyayi apparatus, Chandra/Jainendra/
+  Katantra/Mugdhabodha/Sarasvata/Shakatayana grammars), Kalpa Sutras.
+- Shastra: the Bauddha Sahitya corpus (Abhidharmakosha, Madhyamaka,
+  avadana/sutra literature), Ratna Pariksha.
+- Smriti/Dharmashastra: all remaining named Smritis and Dharmashastra
+  nibandhas (Mitakshara, Dayabhaga, Nirnaya Sindhu, etc).
+- Upaveda: remaining Ayurveda/Kama Shastra texts. Agama: the remaining
+  Pancharatra samhitas (anya/pramukha/ratnatraya groups).
+- Dasa Sahitya: the remaining Vyasakuta/Dasakuta works and a handful of
+  composer-adjacent stotra entries. 4 genuinely mis-attributed
+  `dasa_sahitya/composers/*` entries (a title filed as a composer name, a
+  URL-garbled slug, the honest `untitled` bucket) left unlabeled on
+  purpose, same call as the earlier 234-entry composer batch -- not
+  guessed at.
+- Dvaita Vedanta's 33 visible holdouts: read directly off each folder's
+  own `data.json` (`sanskrit_text`/`section` fields) rather than guessed
+  from the slug -- 26 are standard Brahma Sutra adhikarana names under
+  Nyaya Sudha (जिज्ञासाधिकरणम्, समन्वयाधिकरणम्, etc, confirmed against
+  each folder's own opening line), 7 are acharya/work names under
+  Sumadhva Vijaya and the Gita prasthana. 3 more (`tika_prakashika`,
+  `tika_kiranavali`, `tika_nyayasudha`) were caught only on a *second*
+  audit pass, because the SAME bare segment name recurs at another,
+  already-folded path elsewhere -- `DGE_PATH_LABELS` keys by bare segment
+  name, not full path, so a label is needed if *any* occurrence of that
+  segment is visible, not just the first one found.
+
+**The separate leaf-title gap.** Folder labels (`DGE_PATH_LABELS`) are one
+code path; a leaf grantha's own displayed title is a different one --
+baked into `library.json`'s `title` field by `tools/audit_library.py`'s
+`derive_title()`, which humanizes the slug into plain English
+("Vaikhanasa Agama", "Mula", "Tika Nirnaya") whenever the data has no
+explicit title. 529 populated granthas carried such a title, and being a
+static baked string it never responded to the script/language selector no
+matter what `DGE_PATH_LABELS` knew. Fixed architecturally rather than by
+touching the data: `openLibraryModal()` now calls a new
+`dgeGranthaAutoTitle()` helper -- the same `DGE_PATH_LABELS[seg] ||
+dgeAutoLabel(seg)` lookup already used for folders, applied to the leaf's
+own last path segment -- whenever `g.title` itself has no Devanagari to
+transliterate. An admin's manual label override still wins outright. This
+also means any *future* import inherits correct behaviour automatically
+instead of needing its own title-writing pass; confirmed by re-running the
+gap audit after a parallel session's Gita-prasthana re-crawl merged in
+mid-session (357 new items, several new `tika_*` folders) -- zero new gaps
+introduced, `dgeGranthaAutoTitle()` covered them for free.
+
+**Verification.** `audit_library.py`/`validate_data.py`/`pytest` clean
+throughout (same baseline as before -- this was a label-only change, no
+data touched). Correctness of the new Devanagari verified two ways: (1)
+the 26 Nyaya Sudha adhikarana names and a few Sumadhva Vijaya entries
+matched byte-for-byte against each folder's own source text, not
+transliterated from the slug; (2) real transliteration output checked via
+a Node harness running the actual `Sanscript.t()` (`वैखानसागमः` ->
+`ವೈಖಾನಸಾಗಮಃ` kannada, `चान्द्रव्याकरणम्` -> `చాన్ద్రవ్యాకరణమ్` telugu,
+`अहिर्बुध्न्यसंहिता` -> `அஹிர்புத்ந்யஸம்ஹிதா` tamil,
+`याज्ञवल्क्यस्मृतिः` -> `যাজ্ঞবল্ক্যস্মৃতিঃ` bengali), since the
+Playwright browser sandbox itself can't reach the Sanscript CDN (same
+known limitation as earlier sessions) -- confirmed live in-browser that
+"Vaikhanasa Agama" no longer appears anywhere in the tree and
+"वैखानसागमः" does, with the admin "show pending" toggle on.
+
+A follow-up audit after this pass found the gap closed to exactly the 4
+deliberately-skipped composer entries above -- both for folder labels and
+for leaf titles.
