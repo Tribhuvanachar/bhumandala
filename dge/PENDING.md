@@ -4583,3 +4583,20 @@ the last includes nyaya_sudha, whose re-crawl also activates the part-10
 `extract-dvaitavedanta.yml` workflow per section (dry_run=false,
 open_pr=true) now that main carries all the parser fixes — or further
 staged local runs like this one.
+
+## Standing authorization for the in-flight extract PRs (25 Aug 2026, night)
+
+The project lead, before signing off for the night: for each completed
+`extract-dvaitavedanta.yml` run, verify the PR's content against
+dvaitavedanta.in directly (random URL checks, screenshots, comparison,
+reader test) and, once convinced, **merge into main and make it live** —
+explicit, given for this batch (gita_prasthana, later_acharyas,
+dasha_prakarana_granthas, purana_prasthana). The verification protocol
+each merge must pass first is encoded in the session's recurring
+check-in: strict verify + validate + full tests on the PR branch,
+stage-1-style stability checks (item counts, id-set stability for folded
+granthas, text conservation), random live-site comparison, Playwright
+reader screenshots, and `audit_library.py --fix` +
+`build_layer_manifest.py` committed onto the PR branch (the workflow does
+not regenerate those). Anything that fails stays unmerged and gets
+documented here instead.
