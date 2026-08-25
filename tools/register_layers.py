@@ -47,6 +47,17 @@ def facets_of(data):
     return facets or None
 
 
+# Lightweight provenance for the admin tracker's "sources" column -- kept in
+# sync with tools/audit_library.py's own derive_source().
+def source_of(data):
+    source = {}
+    for key in ('source', 'source_url', 'licence', 'license'):
+        value = data.get(key)
+        if isinstance(value, str) and value.strip():
+            source['licence' if key == 'license' else key] = value.strip()
+    return source or None
+
+
 def main():
     lib = json.load(open(LIB, encoding='utf-8'))
     granthas = lib.setdefault('granthas', [])
@@ -71,12 +82,16 @@ def main():
             data = json.load(open(fp, encoding='utf-8'))
             n = item_count(data)
             facets = facets_of(data)
+            source = source_of(data)
         except Exception:
             n = 0
             facets = None
+            source = None
         entry = {"path": catalog, "populated": n > 0, "title": None, "addedAt": today}
         if facets:
             entry["facets"] = facets
+        if source:
+            entry["source"] = source
         granthas.append(entry)
         known.add(catalog)
         added += 1

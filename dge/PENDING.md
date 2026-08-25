@@ -3842,3 +3842,47 @@ the same facet treatment for Purana (guna as a view, not
 sattvika/rajasa/tamasa folders) — the metadata-sync plumbing built here
 is schema-agnostic and should need no changes, just `genre`/
 `guna_classification`/etc. fields added to Purana leaves the same way.
+
+## Per-section admin tracker: turned out to already (mostly) exist (25 Aug 2026, part 4)
+
+Project lead asked for a per-section progress/sources tracker reachable
+from each section's own top-right nav. Checked first, per the project's
+own discipline, rather than building blind: `admin/library.html` ("Library
+Manager") already IS a generic completion tracker covering every taxonomy
+section uniformly (loaded/pending badges, item counts, search/filter,
+expand-all) -- it just wasn't linked from anywhere in the reader, and
+didn't show *sources*. `dge/dvaitavedanta-status.html` is a different,
+narrower thing (a bespoke ingestion-pipeline dashboard tied to one
+specific scraper's own `_extract_status.json` shape) -- not a template
+for "every section," and left alone.
+
+Filled the two real gaps instead of building a second tracker:
+
+1. **Sources.** `tools/gen_library_status.py` gained `leaf_source()`
+   (same file-resolution logic as its existing `count_leaf()`, just
+   reading `source`/`source_url`/`licence` instead of counting items) and
+   writes a new `leaf_sources` map into `admin/config/library-status.json`
+   (1,038 leaves have one). `admin/library.html`'s tree rows now show a
+   "🔗 source" link/tooltip per leaf when one exists -- no new fetch, this
+   rides along on the `library-status.json` fetch the page already makes.
+   `tools/audit_library.py --fix` and `register_layers.py` also sync a
+   parallel `source` object into `library.json` itself (matching the
+   `facets` field from part 3), for consistency and any future reader-side
+   use, even though the admin tracker ended up not needing that copy.
+2. **Navigation.** `admin/library.html` now accepts `?section=<path>` and
+   pre-filters/scrolls to it, reusing its own existing search+auto-expand
+   filter rather than a new rendering path. `dge/js/library.js`'s Library
+   modal category drill-down gained a "📊 Progress" link in the top-right
+   of the breadcrumb row (`dgeSectionTrackerHtml`), visible only to a
+   signed-in **super-admin** (matches that page's own gate tier exactly --
+   showing it to a lesser admin would just walk them into a passkey
+   prompt), opening the tracker deep-linked to whichever section is
+   currently open.
+
+Verified in a real headless-Chromium session: confirmed the Progress link
+renders with the correct `?section=` href from inside the Agama category
+view, confirmed the deep link on the tracker side pre-fills the filter box
+and scrolls to the right subtree, and confirmed source links render with
+correct href/tooltip (spot-checked against Kashmir Saivism's leaves,
+9 of which have one; `pratyabhijna`, still genuinely empty, correctly
+shows no source link at all).

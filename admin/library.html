@@ -9,7 +9,7 @@
 <script src="js/keys.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Library Manager · DGE (super-admin)</title>
-<link rel="stylesheet" href="css/library.css?v=1">
+<link rel="stylesheet" href="css/library.css?v=2">
 </head>
 <body>
 <div class="gate" id="gate">
@@ -223,7 +223,22 @@
     Promise.all([
       fetch("../dge/data/taxonomy.json").then(function(r){return r.json();}),
       fetch("config/library-status.json").then(function(r){return r.json();})
-    ]).then(function(a){ TAX=a[0]; ST=a[1]; renderTotals(); renderSections(); render(); })
+    ]).then(function(a){
+      TAX=a[0]; ST=a[1]; renderTotals(); renderSections(); render();
+      // Deep link from the reader app's "📊 Progress" nav link
+      // (dge/js/library.js's dgeSectionTrackerHtml) -- e.g.
+      // library.html?section=agama. Reuses the existing name/path filter
+      // + auto-expand-on-search exactly as if the admin had typed it in,
+      // so this needs no rendering path of its own.
+      var section=new URLSearchParams(location.search).get("section");
+      if(section){
+        $("#q").value=section;
+        updateFilterCount();
+        render();
+        var hit=document.querySelector('#tree .node[data-node="'+CSS.escape(section)+'"]');
+        if(hit) hit.scrollIntoView({block:"center"});
+      }
+    })
       .catch(function(e){ $("#tree").innerHTML='<div class="muted" style="padding:14px">Could not load taxonomy.json / library-status.json ('+e+'). Regenerate with tools/gen_library_status.py.</div>'; });
   }
 
@@ -321,12 +336,22 @@
     if(query && !self && !anyKid) return "";
     if(!matchFilter(n) && !anyKid) return "";
 
-    var dot,badge,cnt="";
+    var dot,badge,cnt="",src="";
     if(n.leaf){
       var ok=n.items>0;
       dot='<span class="dot '+(ok?"ok":"pend")+'"></span>';
       badge= ok?'<span class="badge ok">loaded</span>':'<span class="badge pend">pending</span>';
       cnt= ok?'<span class="cnt">'+n.items.toLocaleString()+'</span>':'';
+      // Source/provenance (admin/config/library-status.json's leaf_sources,
+      // see tools/gen_library_status.py's leaf_source()) -- keyed by the
+      // ORIGINAL taxonomy path (opath), never the display-only moved path.
+      var so=ST.leaf_sources&&ST.leaf_sources[n.opath];
+      if(so){
+        var title=esc((so.source||"")+(so.licence?" · "+so.licence:""));
+        src=so.source_url
+          ? '<a class="srclink" href="'+esc(so.source_url)+'" target="_blank" rel="noopener" title="'+title+'" onclick="event.stopPropagation()">🔗 source</a>'
+          : '<span class="srclink" title="'+title+'">🔗 source</span>';
+      }
     } else {
       var full=n.loaded===n.total&&n.total>0, none=n.loaded===0;
       dot='<span class="dot '+(full?"ok":(none?"pend":"part"))+'"></span>';
@@ -359,7 +384,7 @@
     var row='<div class="row" data-path="'+esc(n.path)+'" data-op="'+esc(n.opath)+'" data-parent="'+esc(parentPath||"")+'" data-name="'+esc(n.name)+'" data-leaf="'+(n.leaf?1:0)+'">'+
       tw+dot+pinMark+movedMark+
       '<span class="nm"><span class="actual">'+nameShown+'</span>'+(custom?' <span class="disp">✎</span>':'')+' <span class="path">'+esc(n.path)+'</span>'+(moved?' <span class="disp">from '+esc(n.opath)+'</span>':'')+'</span>'+
-      cnt+badge+
+      cnt+badge+src+
       '<button class="ctl" data-act="up" title="move up">▲</button>'+
       '<button class="ctl" data-act="down" title="move down">▼</button>'+
       '<button class="ctl'+(anyEdit?" on":"")+'" data-act="more" title="pin / rename / move / hide">⋮</button>'+

@@ -57,6 +57,21 @@ def item_count(payload):
 FACET_KEYS = ("genre", "guna_classification", "ratnatraya", "madhvacharya_relevance", "text_status")
 
 
+def derive_source(payload):
+    """Lightweight provenance for the admin tracker's "sources" column --
+    copied into library.json alongside facets, same reasoning: read once
+    here rather than have the browser fetch every leaf's full data.json
+    just to show where its text came from."""
+    if not isinstance(payload, dict):
+        return None
+    source = {}
+    for key in ("source", "source_url", "licence", "license"):
+        value = payload.get(key)
+        if isinstance(value, str) and value.strip():
+            source["licence" if key == "license" else key] = value.strip()
+    return source or None
+
+
 def derive_facets(payload):
     """View-By facet metadata (see dge/PENDING.md's 25 Aug Pancharatra pass) --
     copied into library.json so the reader can build facet groupings from the
@@ -166,6 +181,8 @@ def main(argv=None):
     untitled = [p for p in set(by_path) & set(on_disk) if not by_path[p].get("title")]
     facet_diffs = [p for p in set(by_path) & set(on_disk)
                    if by_path[p].get("facets") != derive_facets(on_disk[p]["payload"])]
+    source_diffs = [p for p in set(by_path) & set(on_disk)
+                     if by_path[p].get("source") != derive_source(on_disk[p]["payload"])]
 
     hidden_items = sum(on_disk[p]["count"] for p in orphans)
     hidden_bytes = sum(os.path.getsize(on_disk[p]["full"]) for p in orphans)
@@ -178,6 +195,7 @@ def main(argv=None):
     lines.append(f"- stale populated flags: {len(stale)}")
     lines.append(f"- entries with no title: {len(untitled)}")
     lines.append(f"- facet metadata out of sync: {len(facet_diffs)}")
+    lines.append(f"- source metadata out of sync: {len(source_diffs)}")
     untracked_items = sum(r["count"] for _, r in untracked)
     lines.append(f"- **folders the taxonomy does not name: {len(untracked)}** "
                  f"holding **{untracked_items:,} items** (absent from the browse tree)")
@@ -202,6 +220,8 @@ def main(argv=None):
         print("\nFACET METADATA OUT OF SYNC")
         for path in sorted(facet_diffs):
             print(f"          {path}")
+    if source_diffs:
+        print(f"\nSOURCE METADATA OUT OF SYNC ({len(source_diffs)}, not listed individually)")
     if untracked:
         print("\nNOT IN TAXONOMY")
         for folder, record in sorted(untracked, key=lambda x: -x[1]["count"]):
@@ -212,7 +232,7 @@ def main(argv=None):
             handle.write(report + "\n")
 
     if not args.fix:
-        if orphans or missing or stale or untitled or facet_diffs:
+        if orphans or missing or stale or untitled or facet_diffs or source_diffs:
             print("\nrun with --fix to repair")
         return 0
 
@@ -223,6 +243,9 @@ def main(argv=None):
         facets = derive_facets(record["payload"])
         if facets:
             entry["facets"] = facets
+        source = derive_source(record["payload"])
+        if source:
+            entry["source"] = source
         entries.append(entry)
     for path in missing:
         entries.remove(by_path[path])
@@ -237,6 +260,12 @@ def main(argv=None):
             by_path[path]["facets"] = facets
         else:
             by_path[path].pop("facets", None)
+    for path in source_diffs:
+        source = derive_source(on_disk[path]["payload"])
+        if source:
+            by_path[path]["source"] = source
+        else:
+            by_path[path].pop("source", None)
 
     added_nodes = 0
     for folder, record in untracked:
@@ -255,7 +284,8 @@ def main(argv=None):
         handle.write("\n")
     print(f"\nfixed: library +{len(orphans)} added, -{len(missing)} removed, "
           f"{len(stale)} flags corrected, {len(untitled)} titles filled, "
-          f"{len(facet_diffs)} facets synced; taxonomy +{added_nodes} nodes")
+          f"{len(facet_diffs)} facets synced, {len(source_diffs)} sources synced; "
+          f"taxonomy +{added_nodes} nodes")
     return 0
 
 
