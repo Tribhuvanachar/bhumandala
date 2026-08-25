@@ -326,6 +326,14 @@ function dgeIsAdmin() {
            localStorage.getItem('is_superadmin') === 'true';
   } catch (e) { return false; }
 }
+// admin/library.html's own gate is super-admin only (not the broader
+// acharyaAuthorized tier dgeIsAdmin() above accepts) -- matched here so the
+// tracker link this file adds is never shown to someone who'd just be
+// bounced by that page's own passkey prompt.
+function dgeIsSuperAdmin() {
+  try { return localStorage.getItem('is_superadmin') === 'true'; }
+  catch (e) { return false; }
+}
 function dgeIsAdminOnlyGrantha(g) {
   return !!(g && g.hidden) && !dgeIsAdmin();
 }
@@ -817,6 +825,20 @@ function dgeRenderFacetView(node, facetKey) {
   }).join('');
 }
 
+// Admin-only deep link into the Library Manager's completion tracker
+// (admin/library.html), pre-filtered/scrolled to this section (its own
+// ?section= handling, see that file's start()). Super-admin gated, not the
+// broader dgeIsAdmin() tier -- that page's own gate is super-admin only,
+// so showing this to a plain admin would just walk them into its passkey
+// prompt. "Top right" of the section view per the project lead's ask: a
+// flex child pushed to the far end of the breadcrumb row via margin-left:auto.
+function dgeSectionTrackerHtml(key) {
+  if (!dgeIsSuperAdmin()) return '';
+  return `<a href="../admin/library.html?section=${encodeURIComponent(key)}" target="_blank" rel="noopener"
+      style="margin-left:auto; font-size:11px; color:var(--muted-text); text-decoration:none; white-space:nowrap;"
+      onclick="event.stopPropagation()" title="Open the completion tracker for this section (super-admin)">📊 Progress</a>`;
+}
+
 // One category's own subtree, reached by tapping its grid tile -- reuses
 // dgeRenderNode exactly as the list view does, just scoped to one branch
 // with a breadcrumb back to the grid instead of every branch at once.
@@ -829,7 +851,7 @@ function dgeRenderLibraryCategoryView(key) {
     ? dgeRenderNode(node, '', 0, key)
     : dgeRenderFacetView(node, dgeLibViewBy);
   return `<div class="dge-lib-breadcrumb" onclick="window.dgeShowLibraryGrid()">
-      <span>❮</span> <span>${dgeSegLabel(key)}</span>
+      <span>❮</span> <span>${dgeSegLabel(key)}</span>${dgeSectionTrackerHtml(key)}
     </div>` + dgeViewByRowHtml(node) + body;
 }
 

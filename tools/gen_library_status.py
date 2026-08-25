@@ -86,6 +86,35 @@ def count_leaf(leaf_path):
             except Exception: pass
     return total
 
+# Same file resolution as count_leaf() above, but for the admin tracker's
+# "sources" column -- so admin/library.html can show where a leaf's text
+# came from without the browser fetching every leaf's full data.json (some
+# run tens of thousands of lines) just to read a source/source_url field.
+def leaf_source(leaf_path):
+    files = set()
+    flat_fp = os.path.join(DATA, *leaf_path.split('/'), 'data.json')
+    if os.path.exists(flat_fp):
+        files.add(flat_fp)
+    depth = leaf_path.count('/') + 1
+    for slug, fp in SLUG_TO_FILE.items():
+        if slug == leaf_path or (slug.startswith(leaf_path + '/') and slug.count('/') == depth):
+            files.add(fp)
+    for fp in sorted(files):
+        if not os.path.exists(fp):
+            continue
+        try:
+            data = json.load(open(fp, encoding='utf-8'))
+        except Exception:
+            continue
+        source = {}
+        for key in ('source', 'source_url', 'licence', 'license'):
+            value = data.get(key)
+            if isinstance(value, str) and value.strip():
+                source['licence' if key == 'license' else key] = value.strip()
+        if source:
+            return source
+    return None
+
 # Self-heal library.json's own populated flags while we're here. This is
 # the ONE thing core.js actually gates a fetch on (entry.populated===false
 # short-circuits straight to "Not Yet Available" without even trying) --
@@ -114,10 +143,15 @@ if changed:
     open(os.path.join(DATA, 'library.json'), 'a', encoding='utf-8').write('\n')
 
 leaves = {}
+leaf_sources = {}
 def walk(node, pre):
     ch = {k: v for k, v in node.items() if not k.startswith('_')}
     if not ch:
-        leaves['/'.join(pre)] = count_leaf('/'.join(pre))
+        p = '/'.join(pre)
+        leaves[p] = count_leaf(p)
+        source = leaf_source(p)
+        if source:
+            leaf_sources[p] = source
         return
     for k, v in ch.items():
         walk(v if isinstance(v, dict) else {}, pre + [k])
@@ -143,6 +177,7 @@ out = {
     },
     'sections': {k: dict(v) for k, v in sorted(sec.items())},
     'leaves': {p: n for p, n in sorted(leaves.items())},
+    'leaf_sources': {p: leaf_sources[p] for p in sorted(leaf_sources)},
 }
 json.dump(out, open(os.path.join(OUT_DIR, 'library-status.json'), 'w', encoding='utf-8'),
            ensure_ascii=False, indent=1)
