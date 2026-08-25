@@ -366,6 +366,21 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
         for position, layer in enumerate(record["layers"]):
             title = layer["title"] or ("मूलम्" if position == 0 else f"layer_{position + 1}")
             config = resolve_layer_config(title, layer_config)
+            # dv_parse.py hardcodes the h2.shloka layer's title to the
+            # literal "मूलम्" regardless of which grantha it came from, so
+            # this ALWAYS matches the canonical "मूलम्" entry below, which
+            # defaults to Madhva -- correct for his own works, wrong for
+            # every later_acharyas grantha (whose root verse is by that
+            # grantha's own later author). dv_sources.json's per-grantha
+            # "acharya" field already carried the real author (e.g.
+            # karmavijaya -> Satyatmatirtha); it was threaded into `grantha`
+            # but never actually consulted here, so every later_acharyas
+            # mula/ folder was misattributed to Madhva until this override.
+            # Scoped to position 0 only, not every config match, so a
+            # genuinely canonical-matched named commentary (Jayatirtha's
+            # tika, say) is never touched by this.
+            if position == 0 and config is not None and grantha.get("acharya"):
+                config = {**config, "author": grantha["acharya"]}
             if config is None:
                 # Where the heading names its own author, the author IS the
                 # discriminator — every commentary on this grantha shares the
