@@ -3499,20 +3499,43 @@ Still open, in the order I would take them:
   pādas (2.4, 3.1, 4.3, 4.4) genuinely carry only a bare pratika and no
   commentary at all live on the site — real pāda-length variance (some
   Brahma Sūtra pādas are far shorter than others), not a fetch failure.
-  **A real, different, newly-found problem from the same check**: those
+  ~~**A real, different, newly-found problem from the same check**: those
   adhikaraṇa-grouped chunks are filed as ~68 separate `tika_<adhikaraṇa>`
-  folders (`dge/data/.../sutra_prasthana/anuvyakhyana/tika_*`, mostly 1
-  item each) as if each adhikaraṇa were a distinct sub-commentary, when
+  folders... as if each adhikaraṇa were a distinct sub-commentary, when
   they are all still Anuvyākhyāna's own root verses just grouped by
-  section — the same misclassification class as the Nyāya Sudhā
-  layer-splitting bug fixed earlier this session, but for mūla-vs-tīkā
-  rather than same-tīkā-different-folder. Worth its own pass: likely fixed
-  in `resolve_layer_config`/`layer_key` by recognising that a grantha with
-  no configured tīkā authors (only `mula`) should fold every unmapped h3
-  heading into the mūla layer instead of auto-slugging a new tīkā folder
-  per heading. Not attempted here — this was a re-crawl status check, not
-  a classifier redesign, and 68 folders deserves its own verified fix
-  rather than a rushed one bundled into an unrelated task.
+  section.~~ **Fixed (25 Aug), scoped and verified rather than a
+  corpus-wide reclassifier.** Confirmed precisely before touching anything:
+  all 68 folders' items shared the SAME id as a real Anuvyākhyāna mūla
+  verse on the same page (proof the content is that page's own text, not
+  an independent work), and every one of the 68 headings had no
+  attribution verb at all (`split_attribution()` returns empty) — a real
+  quoted sub-commentary, by contrast, always does. Deliberately did NOT
+  generalize this into `resolve_layer_config`/`layer_key` — Nyāya Sudhā's
+  own adhikaraṇa-organized `tika_*` folders LOOK structurally identical
+  but are not the same bug: every one of those genuinely is Jayatīrtha's
+  own prose commentary on that adhikaraṇa, a real, distinct, correctly-
+  attributed author, so folding them into `mula` would be wrong, not a
+  fix. Karmavijaya's mess is a third, different shape again (its heading
+  slugs are truncated body-text sentences, not clean adhikaraṇa names) and
+  is left alone too. So the fix is an explicit, human-verified per-grantha
+  opt-in, not a heuristic that guesses at every grantha's shape: a new
+  `"single_work": true` flag in `dv_sources.json` (set only on
+  `anuvyakhyana` so far), consulted in `import_dvaitavedanta.py`'s
+  `build_items()` — an UNATTRIBUTED heading on a `single_work` grantha
+  folds into the `mula` bucket (with the same `-N` id-disambiguation the
+  crawler already uses for genuine id collisions) instead of minting a
+  `tika_<name>` folder; an attributed heading on the same grantha still
+  gets its own tika folder exactly as before, proven by a fixture test
+  carrying both cases side by side alongside the fold. Regression-tested
+  in `test_import_offline.py`. **Backfilled the already-ingested data
+  directly** (no re-crawl needed): all 68 `tika_*` folders' 72 items
+  merged into `mula/data.json` (16 → 88 items, all 72 id-collisions
+  correctly disambiguated with `-N` suffixes, matching what a fresh crawl
+  under the fixed code would now produce), the 68 emptied folders deleted,
+  `library.json`/`taxonomy.json` regenerated via `audit_library.py --fix`
+  plus manual removal of 73 stale taxonomy leaves it doesn't auto-prune
+  (68 from this fix, 5 pre-existing orphans found in the same subtree).
+  `validate_data.py`/`verify_extract.py --strict`: 0 errors.
 - **94,829 units across 631 unmapped layer names are being discarded**,
   against 30,139 items actually written — roughly three times as much
   dropped as kept. The largest are the major ṭīkā corpus: भावरत्नकोशः 6,787,
