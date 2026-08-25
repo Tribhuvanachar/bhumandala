@@ -166,21 +166,58 @@ MINOR_SMRITIS = [
     ("yama_smriti", "यमस्मृतिः"),
 ]
 
-VERSE_END = re.compile(r"॥\s*([\d०-९]+)\s*॥")
+# Nibandhas and commentaries number by chapter.verse ("१.१", "१२.४५"), not a
+# bare running count -- the original digits-only pattern silently matched
+# NOTHING on pages using that convention (Mitakshara's Sadacaradhyaya: 302
+# real "॥ chapter.verse ॥" markers, 1 match under the old pattern), so the
+# whole page fell through as "no verses" even though it was full of real
+# commentary. `[.,]` covers both a decimal chapter.verse and a comma-joined
+# multi-ref close; a bare digit run still matches as before.
+VERSE_END = re.compile(r"॥\s*([\d०-९]+(?:[.,][\d०-९]+)*)\s*॥")
 _DEV_DIGITS = str.maketrans("०१२३४५६७८९", "0123456789")
+
+DEVANAGARI = re.compile(r"[ऀ-ॿ]")
+MIN_CHUNK_CHARS = 8
+MIN_DEVANAGARI_RATIO = 0.55
+
+# Editorial/critical-apparatus lines, not text -- the shape this project's
+# other importers already gate on (dv_parse.py, importers/shankara_bhashya.py):
+# variant-reading notes ("इत्यधिक पाठ. क. पु."), footnote-style citations to
+# a sibling smriti opening with a bare number ("२. दक्षस्मृ० अ० २ श्लो २९"),
+# and scan/tool boilerplate ("diCrunch", "स्रोत" source-credit lines). A whole
+# chunk this matches is dropped; chunk-internal footnote markers are not
+# swept (that needs per-corpus review -- see the PENDING.md writeup).
+JUNK_LINE = re.compile(
+    r"^\s*(?:[\d०-९]+\s*[.,)]\s*\S+स्मृ|इत्यधिक\s+पाठ|पाठान्तर|स्रोत$|"
+    r"देवनागरी\s+कर्तुं|diCrunch|Diacritic\s+and\s+Indic)",
+)
+
+
+def _devanagari_ratio(s: str) -> float:
+    letters = [c for c in s if c.isalpha()]
+    if not letters:
+        return 0.0
+    return sum(1 for c in letters if DEVANAGARI.match(c)) / len(letters)
 
 
 def parse_devanagari_verses(text: str) -> List[Dict]:
-    """Split a Sanskrit Wikisource page body into verses on the trailing
-    '॥ N ॥' marker that closes each śloka. -> [{'number', 'text'}]"""
+    """Split a Sanskrit Wikisource page body into verses/commentary units on
+    the trailing '॥ N ॥' or '॥ chapter.verse ॥' marker that closes each one.
+    -> [{'number', 'text'}]. Drops a chunk outright if it is a single
+    editorial/footnote line (JUNK_LINE) or reads as scraped chrome/OCR
+    garbage rather than Sanskrit (too short, or below MIN_DEVANAGARI_RATIO)."""
     out: List[Dict] = []
     prev = 0
     for m in VERSE_END.finditer(text or ""):
         body = clean(text[prev:m.start()])
         prev = m.end()
-        num = int(m.group(1).translate(_DEV_DIGITS))
-        if body:
-            out.append({"number": num, "text": body})
+        if not body or JUNK_LINE.match(body):
+            continue
+        if len(body) < MIN_CHUNK_CHARS or _devanagari_ratio(body) < MIN_DEVANAGARI_RATIO:
+            continue
+        num_raw = m.group(1).translate(_DEV_DIGITS)
+        number = int(num_raw) if num_raw.isdigit() else num_raw
+        out.append({"number": number, "text": body})
     return out
 
 
