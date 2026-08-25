@@ -4200,3 +4200,80 @@ above by walking `dge_manifest.json` (once it exists) plus the taxonomy
 hierarchy for adhikaraṇa context -- then `dge/js/ai.js`'s existing
 `promptText` construction swaps its single raw-text interpolation for
 that package, with the model call itself (`dgeCallGemini`) untouched.
+
+## Kosha coverage audit against the project lead's phone dict.zip catalog (25 Aug 2026)
+
+Project lead uploaded 5 StarDict files from their phone (`purANaindexdev.dict.dz`,
+`laxaNasangraha.dict.dz`, `upasargArthachandrikA.dict`, `ekAkSharanAmamAlA.dict`,
+`samskritamtamizham_dictionary.dict` -- all missing their `.idx`/`.ifo`
+companions, so not independently parseable as uploaded) and a ~123-name list
+from the same collection, asking to incorporate the 5 files, cross-check the
+list against what DGE already has, and specifically whether **Nyaya Kosha**
+and **Puranic Encyclopedia** are covered.
+
+Cloned `Tribhuvanachar/bhumandala-kosha-data` (the separate data repo the
+live 95-dictionary Kosha actually ships from -- `dge/data/kosha/` in this
+repo is only a 10-dictionary sample, see `dge/kosha_toolkit/README.md` §1)
+and diffed its real `dicts_config.json` (95 entries) against the pasted list
+by normalized slug, not assumption.
+
+**Headline finding: both named lookups are already loaded**, just invisible
+from this repo's 10-file sample:
+- **Nyaya Kosha** = `jhalki-bhima-nyaya-koshah` (Bhīmācārya Jhalakīkar's
+  न्यायकोशः, the standard Nyāya-Vaiśeṣika technical-term dictionary) --
+  loaded via the `csl-orig` dedup path per `LICENSING.md`. `laukika-nyaya-kosha`
+  (popular maxims, a different genre) and `laxana-sangraha` (a lakṣaṇa/
+  definitional glossary -- matches one of the 5 uploaded files) are also
+  already loaded.
+- **Puranic Encyclopedia** = `purana-encyclopedia` (Vettam Mani) AND
+  `purana-index` (Dikshitar's *The Purana Index* -- this is literally the
+  uploaded `purANaindexdev.dict.dz`, same `source_url`). Both loaded.
+
+**All 5 uploaded files are already in the 95-dictionary corpus**, confirmed
+by identical `source_url` folder names in `dicts_config.json`
+(`purana-index`, `laxana-sangraha`, `upasargarthachandrika`,
+`ekaksharanamamala`, `samskritam-tamizham-dictionary`) -- nothing to
+re-ingest; re-adding them would just duplicate what's already there.
+
+**Full list cross-check** (123 names, normalized-slug diff against the real
+`dicts_config.json`, then the ~52 non-trivial-spelling near-misses resolved
+by hand against `LICENSING.md` and the corpus itself, not guessed):
+- 71 matched directly; another ~15 matched once IAST-style capitalization
+  (`aShTAdhyAyI-anuvRtti`, `gaNapAThaH`, `dhAtu-pATha-kRShNAchArya`, etc.)
+  was folded to the loaded slug's plain-ASCII spelling -- same dictionaries,
+  different transliteration convention in the filename.
+- 16 are the `vidyut-*`/`kRdanta-*`/`puShpA-ArdhadhAtuka`/`jnu-tiNanta`/
+  `dhaval-tiNanta`/`huetKrdanta` machine-generated inflection-paradigm
+  tables -- deliberately excluded per `LICENSING.md` §"Not loaded from this
+  repo" (millions of derived forms would bury real headwords).
+- 3 (`nyasa.tar.gz`, `balamanorama.tar.gz`, `tattvabodhini.tar.gz`) are
+  already in the corpus, just as **granthas**, not kosha entries --
+  `dge/data/vedanga/vyakarana/ashtadhyayi/{nyasa,balamanorama,tattvabodhini}`
+  all have real `data.json` content already.
+- 5 (`ashtadhyayi_com_{dhaatu,nich,san,yang,yangluk}`) are from
+  ashtadhyayi.com, a different source than indic-dict; DGE already
+  generates its own dhātu/prākriyā tables (`tools/build_dhatu_forms.py` and
+  siblings) -- same "machine-generated paradigm table" category as
+  `vidyut-*`, very likely redundant rather than a real gap, not verified
+  further since these aren't kosha material either way.
+- **Genuine candidate gaps, not in the 95-dictionary corpus under any name
+  checked:** `WHO_Ayurveda-terms`, `WHO_NIA_non-clinical_draft` (Ayurveda
+  terminology -- a real, currently-absent domain), `dictionnaire-heritage_
+  du_sanskrit_san-fra` (Huet's *Dictionnaire Héritage du Sanskrit*, distinct
+  from the Burnouf/Stchoupak French dictionaries already loaded),
+  `abhidhaanamanjarii` (distinct from Abhidhānacintāmaṇi/Abhidhānaratnamālā
+  already loaded), `amara-onto` (a structured/ontology cut of Amarakosha,
+  distinct from the running-text `amarakosha`/`amara-sudha` already
+  loaded), `apte-sa`/`apte-bi` (don't match any of the 4 Apte variants
+  already loaded; which specific edition these are is unclear from the name
+  alone). `sanskritabhyas_karmaNi` and the bare `dict`/`thesaurus-ee.*`
+  files are pedagogical/generic-thesaurus material, not really kosha
+  candidates either way.
+
+**Not done:** actually ingesting the ~6 genuine gaps above (needs the
+project lead to supply the `.idx`/`.ifo` companions or the full local
+`dict.zip`, and a `dicts_config.json` entry each, run through
+`dge_kosha_import.py`'s `kind='stardict'` path per `kosha_toolkit/README.md`
+§3) and confirming what `apte-sa`/`apte-bi` actually are. No code changed
+this pass -- this is a coverage audit against the real data repo, not a
+build.
