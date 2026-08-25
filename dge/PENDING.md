@@ -4435,3 +4435,70 @@ verified rendering real text in the reader via Playwright.
   future page shape puts भाष्यम् content under some third heading form,
   the closed vocabulary means it lands in mūla or stays dropped — extend
   `MULA_ALIAS_KEYS`/the `*भाष्यम्` rule deliberately, never loosely.
+
+## Node-graph model verified + vishvAsa mirror cross-validation (25 Aug 2026, part 10)
+
+The project lead forwarded an external analysis of dvaitavedanta.in's
+structure (three-column node-tree model, numeric node/work ids as canonical
+keys, "check the vishvAsa GitHub — it stores the actual dvaitavedanta.in
+URLs for Nyāya Sudhā"). Verified point by point against our own cached
+pages and data rather than taken on faith:
+
+- **The id model is confirmed and already largely captured.**
+  `category-details/{node_id}/{work_id}/...` — the second number is the
+  work root (975 = Nyāya Sudhā, constant across all 1,655 of its URLs),
+  the first is the content node. Every imported item already stores
+  `source.content_id` (the node id) and `source.url`; the work id is the
+  importer config's `ancestor_id`. The sidebar markup additionally carries
+  explicit `id="<node_id>"`, `data-level="N"`, and node-type classes
+  (`main-label`/`book-label`/`chapter-label`/`section-label`/`sub-label`)
+  on every nav anchor — richer than the URL alone.
+- **The full nav tree is NOT statically served** — `data-load="0"`
+  lazy-load attributes; every page ships the same partly-expanded menu
+  (187 parent links, matching what `tools/dvaitavedanta/build_structure.py`
+  already measured when it chose to rebuild the hierarchy from per-item
+  breadcrumbs into `_structure.json` instead). The external analysis's
+  suggestion to capture the loadChildren endpoint stands as the way to
+  numeric ids for INTERIOR nodes, should they ever be needed — the
+  title-path hierarchy itself is already complete from breadcrumbs.
+- **vishvAsa mirror found and diffed**: `github.com/vishvAsa/mAdhvam`,
+  Nyāya Sudhā under `tattvam/madhvaH/anu-vyAkhyAnam/sarva-prastutiH/`
+  (filed under Madhva's Anuvyākhyāna — the correct lineage), one markdown
+  file per unit with `upstream_url` front-matter. **Coverage
+  cross-validation: the mirror knows 1,655 nodes for work 975; our crawl
+  holds 1,653 of them and nothing the mirror lacks.** The two gaps are a
+  प्रश्न-उत्तर question-index page (14919) and a structural heading page
+  (4837, content "प्रथमः पादः" — exactly the class our parser now
+  correctly drops). So DGE's Nyāya Sudhā crawl is node-complete,
+  independently confirmed. The mirror also maps several other works
+  (940 tattva_viveka, 937 pramāṇa_lakṣaṇa, 4779, 4433, …) — reusable as
+  the same kind of check there. No license file in the repo; used as a
+  MAP/validation dataset only, no text imported from it.
+- **The best new lead: the per-unit Anuvyākhyāna verse is already in our
+  own data.** The mirror segments each unit as सुधा / अनुव्याख्यानम् —
+  and diffing one unit (node 9360 / DV_10243) shows our `tika_sudha` text
+  CONTAINS the identical अनुव्याख्यानम् block inline (heading line +
+  numbered verse ॥३२१२॥ + prose), the site having interleaved it inside
+  the सुधा run. Measured: 1,113 of 1,574 tika_sudha items carry an inline
+  `अनुव्याख्यानम्` heading line (and only the सुधा layer does — correct,
+  Sudhā comments on Anuvyākhyāna). **This makes the "show the
+  Anuvyākhyāna verse above the Sudhā text" reading experience a
+  deterministic data split of already-landed text — no re-crawl, none of
+  the 56%-precision pratīka matching the architecture doc rejected.**
+  Not built yet; next actionable item.
+- Also noted from the mirror: `jayatIrtha-nyAya-sudhA-mUlam/` is a
+  different e-text edition (GRETIL-convention `ब्ब्स्_N,N.N` sūtra ids +
+  `(अनुव्याख्यानम्)N,N.NNN` verse numbers + सुधा text interleaved, per
+  adhikaraṇa) — an explicit sūtra ↔ Anuvyākhyāna ↔ Sudhā concordance,
+  i.e. the "verified concordance" seed the architecture doc's §5 wanted.
+  Provenance/licence needs checking before any import.
+- The forwarded analysis's mobile-rendering complaint (vertical Sanskrit,
+  one word per line) is the SOURCE SITE's responsive-layout failure, not
+  DGE's reader — no DGE action.
+
+Follow-ups queued from this: (1) split inline अनुव्याख्यानम् blocks out
+of tika_sudha into their own layer so the stitched reader shows verse +
+commentary per unit; (2) importer: also write `source.work_id` (and keep
+node-type/level when the sidebar provides them) so the numeric keys are
+first-class; (3) use the mirror's node lists to cross-validate the other
+works it covers.
