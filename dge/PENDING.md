@@ -3459,12 +3459,16 @@ Still open, in the order I would take them:
   scope, but the volume deserves a deliberate decision rather than a silent
   default, and `failures: []` with all 56 granthas `complete` reads as
   fuller coverage than it is.
-- **The two verify gates disagree, and the looser one runs first.** The
-  extract job runs `verify_extract.py` without `--strict`; the collect job
-  runs it with. So a shard's own errors print and pass, and the failure
-  surfaces only on the merged tree — after the crawl, in a job that cannot
-  say which shard caused it. Running the extract-side check with `--strict`
-  too would fail it where the cause is still visible.
+- ~~**The two verify gates disagree, and the looser one runs first.**~~
+  **Fixed (25 Aug).** The extract job ran `verify_extract.py` without
+  `--strict`; the collect job ran it with. So a shard's own errors printed
+  and passed, and the failure surfaced only on the merged tree — after the
+  crawl, in a job that cannot say which shard caused it.
+  `extract-dvaitavedanta.yml`'s "Verify emitted data" step (the extract
+  job, per-shard, before staging) now also passes `--strict`, matching the
+  collect job — a shard with a real error (chrome scraped instead of verse
+  text, duplicate ids, escaped `\uXXXX`) now fails right there, while the
+  cause is still visible, instead of surfacing anonymously after the merge.
 - **Headings are stored as verses, which is what a reader sees as a blank
   entry.** Nyāya Sudhā mūla item 4 of 1,655 (`DV_4849`) has
   `sanskrit_text: "प्रथमः पादः"` — a pāda heading occupying a verse slot, so

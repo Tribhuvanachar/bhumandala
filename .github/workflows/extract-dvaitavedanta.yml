@@ -231,7 +231,7 @@ jobs:
           # That is a legitimate no-op, not a failure — do not treat the
           # missing directory as one (run 32036326082 failed exactly here).
           [ -d dge/data/darshana/vedanta/dvaita/DvaitaVedanta ] || { echo "no output for ${{ matrix.section }} (all granthas disabled)"; exit 0; }
-          python tools/dvaitavedanta/verify_extract.py --data dge/data/darshana/vedanta/dvaita/DvaitaVedanta
+          python tools/dvaitavedanta/verify_extract.py --data dge/data/darshana/vedanta/dvaita/DvaitaVedanta --strict
 
       # Runs even if the round is cancelled at the timeout, so a killed job
       # still hands its crawled pages to the next round instead of losing
