@@ -6256,7 +6256,8 @@
    },
    "chanakya_niti": {},
    "chanakya_sutra": {},
-   "kamandakiya_nitisara": {}
+   "kamandakiya_nitisara": {},
+   "subhashita": {}
   },
   "bauddha_sahitya": {
    "sutra": {
@@ -6371,7 +6372,6 @@
     "_schema": "grantha_mula_text",
     "_default_author": "author/sect unconfirmed -- see dge/PENDING.md"
    }
-  },
-  "subhashita": {}
+  }
  }
 }
