@@ -929,7 +929,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // logic that doesn't exist yet. Recorded before normalization
         // overwrites `data`, so the editor can gate on it honestly.
         window.stotraDataEditable = !!(data && data.shlokas);
-        window.stotraData = dgeNormalizeGranthaData(data, entry ? entry.title : null);
+        // A layer-folder catalog title reads "ऋग्भाष्यम् — mula"; the reader
+        // header should carry the work's name. Only the mula suffix is
+        // stripped — a tika layer opened standalone keeps its explicit
+        // "<grantha> — tika_<name>" title, which is the honest label there.
+        window.stotraData = dgeNormalizeGranthaData(data,
+          entry ? String(entry.title || '').replace(/\s*—\s*mula$/, '') : null);
         // Sibling-layer stitching (layer-stitch.js, see
         // dge/MULTI_LAYER_READER_ARCHITECTURE.md): must run BEFORE
         // initApp() so the commentary picker chrome is built from the
