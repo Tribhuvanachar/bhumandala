@@ -11517,8 +11517,13 @@
     },
     {
       "path": "dge/data/smriti_dharma/dharmashastra/dayabhaga/data.json",
-      "populated": false,
-      "title": "Dayabhaga"
+      "populated": true,
+      "title": "Dayabhaga",
+      "source": {
+        "source": "South Asia Institute Open Educational Resources, University of Texas at Austin (Patrick Olivelle)",
+        "source_url": "https://docs.google.com/document/d/1-208O-oJYj6MyyBmsq1TckbJ6PtTUAajY5x5A8muDCY/",
+        "licence": "CC BY 4.0"
+      }
     },
     {
       "path": "dge/data/smriti_dharma/dharmashastra/dharma_sindhu/data.json",

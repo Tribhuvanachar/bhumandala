@@ -2,8 +2,8 @@
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
   "leaves": 1884,
-  "loaded": 1292,
-  "items": 684332
+  "loaded": 1293,
+  "items": 685009
  },
  "sections": {
   "agama": {
@@ -53,8 +53,8 @@
   },
   "smriti_dharma": {
    "total": 28,
-   "loaded": 10,
-   "items": 9498
+   "loaded": 11,
+   "items": 10175
   },
   "stotra": {
    "total": 3,
@@ -1656,7 +1656,7 @@
   "shastra/ratna_pariksha/ratnadipika": 105,
   "shastra/shainika_shastra/mula": 375,
   "smriti_dharma/dharmashastra/chaturvarga_chintamani": 0,
-  "smriti_dharma/dharmashastra/dayabhaga": 0,
+  "smriti_dharma/dharmashastra/dayabhaga": 677,
   "smriti_dharma/dharmashastra/dharma_sindhu": 0,
   "smriti_dharma/dharmashastra/grihastha_ratnakara": 60,
   "smriti_dharma/dharmashastra/kalpataru": 0,
@@ -4610,6 +4610,11 @@
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Śyainikaśāstra",
    "licence": "CC-BY 4.0"
   },
+  "smriti_dharma/dharmashastra/dayabhaga": {
+   "source": "South Asia Institute Open Educational Resources, University of Texas at Austin (Patrick Olivelle)",
+   "source_url": "https://docs.google.com/document/d/1-208O-oJYj6MyyBmsq1TckbJ6PtTUAajY5x5A8muDCY/",
+   "licence": "CC BY 4.0"
+  },
   "smriti_dharma/dharmashastra/grihastha_ratnakara": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Gṛhastharatnākara",
@@ -5395,17 +5400,6 @@
      "url": "https://docs.google.com/document/d/1G2_FKkJo1M_jLddqa3qk0SLvjJz8WBO2ggAGhrrhsK4/export?format=txt",
      "format": "google_doc_txt_export",
      "note": "Part 7 of 7."
-    }
-   ]
-  },
-  "smriti_dharma/dharmashastra/dayabhaga": {
-   "status": "text_available",
-   "candidates": [
-    {
-     "label": "Dayabhaga of Jimutavahana (Google Doc)",
-     "url": "https://docs.google.com/document/d/1-208O-oJYj6MyyBmsq1TckbJ6PtTUAajY5x5A8muDCY/export?format=txt",
-     "format": "google_doc_txt_export",
-     "note": "UT Austin OER, same access method as Daksha Smriti. Fallback scan: https://archive.org/details/jimutavahanadayabhagaludorocheroup_202003_226_t"
     }
    ]
   },
