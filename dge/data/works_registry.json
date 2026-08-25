@@ -1,0 +1,82 @@
+{
+  "_readme": "Canonical work_id registry for the Gold-Standard v2.6 URN cross-reference apparatus (Part B12 of DGE_Gold_Standard_Contract_v2_5.md, doc version 2.6). This is the CLOSED WORLD the AI extraction prompt is given: a cross_references[] entry may only cite a urn:dge:{work_id}:{locator} whose work_id appears below (B12.1). work_ids are immutable identity once used in any emitted urn -- never rename, deprecate via an alias map instead when that becomes necessary. locator_schema is the dot-joined path grammar for that work's own numbering (e.g. adhyaya.shloka -> '2.38'). 'ingested_path' points at the existing dge/data/**/data.json for a work already in the corpus (null if not yet ingested/OCR'd -- absence from the corpus is not a reason to omit a work_id here; B12.1's closed world only needs the identity to exist, not the content). This file is hand-maintained; add a row before extraction ever needs to cite a new work, per dge/GOLD_STANDARD_V26_PROMPT_ADDENDUM.md.",
+  "works": [
+    {
+      "work_id": "gita",
+      "title": "श्रीमद्भगवद्गीता",
+      "author": null,
+      "layer": "mula",
+      "commented_on": null,
+      "locator_schema": "adhyaya.shloka",
+      "locator_example": "2.38",
+      "ingested_path": null,
+      "notes": "The mula verses themselves. Not yet ingested as a standalone gold-standard unit set -- currently only present embedded inside commentary layers (gita_bhashya/mula, gita_tatparya_nirnaya/mula, and this session's gita-vivrtti extraction)."
+    },
+    {
+      "work_id": "gita-vivrtti",
+      "title": "श्रीभगवद्गीताविवृतिः",
+      "author": "श्रीराघवेन्द्रतीर्थः",
+      "layer": "vritti",
+      "commented_on": "gita",
+      "locator_schema": "adhyaya.shloka",
+      "locator_example": "2.1",
+      "ingested_path": null,
+      "notes": "The work currently being extracted via the Gemini/OCR pipeline (extracted_gold_latest.json). Not yet merged into dge/data/ -- lives in the extraction pipeline's own output/ tree until a corpus placement pass runs."
+    },
+    {
+      "work_id": "gita-bhashya",
+      "title": "गीताभाष्यम्",
+      "author": "श्रीमध्वाचार्यः",
+      "layer": "bhashya",
+      "commented_on": "gita",
+      "locator_schema": "adhyaya.shloka",
+      "locator_example": "2.38",
+      "ingested_path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/mula/data.json",
+      "notes": "Also present under SarvaMula (dge/data/darshana/vedanta/dvaita/SarvaMula/gita_prasthana/gita_bhashya/mula/data.json). Legacy plain-string commentary schema today, not format:gold_v2_2 -- a real URN target, but resolvable only once its own gold-standard pass exists or the manifest falls back to the legacy shape."
+    },
+    {
+      "work_id": "gita-bhashya-tika-jayatirtha",
+      "title": "गीताभाष्यटीका",
+      "author": "श्रीजयतीर्थः",
+      "layer": "tika",
+      "commented_on": "gita-bhashya",
+      "locator_schema": "adhyaya.shloka",
+      "locator_example": "2.38",
+      "ingested_path": "dge/data/darshana/vedanta/dvaita/SarvaMula/gita_prasthana/gita_bhashya/tika_jayatirtha/data.json",
+      "notes": null
+    },
+    {
+      "work_id": "gita-tatparya-nirnaya",
+      "title": "गीतातात्पर्यनिर्णयः",
+      "author": "श्रीमध्वाचार्यः",
+      "layer": "tatparya",
+      "commented_on": "gita",
+      "locator_schema": "adhyaya.shloka",
+      "locator_example": "2.38",
+      "ingested_path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/mula/data.json",
+      "notes": "Also present under SarvaMula. Distinct work from gita-bhashya -- tatparya may have scope up to the whole work (B5) and must not be conflated with a unit-level phalitartha."
+    },
+    {
+      "work_id": "gita-bhashya-shankara",
+      "title": "गीताभाष्यम्",
+      "author": "श्रीशङ्कराचार्यः",
+      "layer": "bhashya",
+      "commented_on": "gita",
+      "locator_schema": "adhyaya.shloka",
+      "locator_example": "2.38",
+      "ingested_path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/gita_bhashya/bhashya/data.json",
+      "notes": "Advaita bhashya on the same mula. A Dvaita vritti/tika citing or refuting this is exactly the voice:purvapakshin / stance:contra case B12.2 requires -- never machine-read a purvapakshin-voiced citation of this work as an endorsed pramana."
+    },
+    {
+      "work_id": "brahmasutra",
+      "title": "ब्रह्मसूत्राणि",
+      "author": "श्रीवेदव्यासः (बादरायणः)",
+      "layer": "mula",
+      "commented_on": null,
+      "locator_schema": "adhyaya.pada.sutra",
+      "locator_example": "4.1.3",
+      "ingested_path": null,
+      "notes": "Given as the contract's own B12.2 worked example (urn:dge:brahmasutra:4.1.3). Frequent inter_text cross-reference target from any Vedantic Gita commentary -- registered even though not yet located/confirmed ingested under this exact work_id, so extraction is never blocked from citing it (B12.1: absence from the corpus is not a reason to omit the identity)."
+    }
+  ]
+}

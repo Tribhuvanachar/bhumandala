@@ -388,3 +388,87 @@ exists as a forward guard for the first real import.
    cite text, not this array — so V7's closed-world-link enforcement is
    real only at the structural level today, not the rendering level. Noted
    directly in the check's own docstring rather than overclaiming.
+
+---
+
+## 6. v2.6 gap analysis, and the URN cross-reference foundation (25 Aug 2026, part 2)
+
+_Written in answer to the project lead uploading the current contract
+(doc version **2.6**, superseding the v2.2 this document was originally
+written against), `gita_viewer.html`, and `extracted_gold_latest.json`
+(the real Gītā-Vivṛtti Adhyāya 2 output), asking "what works and what may
+not" before scaling up content generation for the rest of the Gītā, with
+explicit priority on "solid cross-link features."_
+
+**What the sample data actually is.** `extracted_gold_latest.json` stamps
+`document.spec_version: "v2_4"` — two contract revisions behind v2.6.
+Direct inspection of all 72 units confirms zero `cross_references`, `urn`,
+`provenance`, `review_status`, `unit_range`, or `components` fields
+anywhere in the file, and `unit_type` spelled five different ways
+(`shloka`/`single_shloka`/`verse`/`standard`/`single`) for what should be
+one controlled value. This isn't a defect in what Gemini produced — the
+v2.4-era prompt never asked for any of it — but it means Part 1–5 above
+(the v2.2 engineering gap analysis, still substantially accurate) needs
+this addendum for what v2.5/v2.6 added on top: A4 language purity, B6
+coverage cases, B12's URN cross-reference apparatus, B13 dynamic views,
+B14 acquisition provenance, and gates V13–V19.
+
+**What was built this pass — the B12 foundation, not the full apparatus.**
+The project lead's own extraction pipeline runs manually (Gemini AI app on
+Android + local Python scripts on the same phone), not via this repo's
+API tooling, so there is no code injection point for a system prompt —
+anything Gemini needs has to be pasted by hand into each session:
+
+- **`dge/data/works_registry.json`** — the closed-world work_id registry
+  B12.1 requires ("the structuring prompt ships the works registry; the
+  model may emit only registered work_ids"). Seeded from what's actually
+  already in the corpus (`gita-bhashya` and its Jayatīrtha ṭīkā,
+  `gita-tatparya-nirnaya`, Śaṅkara's `gita-bhashya-shankara` under
+  `advaita/`) plus `gita` (mūla), `gita-vivrtti` (the work currently being
+  extracted — using the contract's own B12.2 example spelling), and
+  `brahmasutra` (the contract's own worked example, registered even though
+  not yet located/ingested under this exact work_id — B12.1: absence from
+  the corpus is not a reason to omit the identity). Hand-maintained; a new
+  citable work gets a row before extraction ever needs to name it.
+- **`dge/GOLD_STANDARD_V26_PROMPT_ADDENDUM.md`** — the literal paste-ready
+  text block: `spec_version`/`work_id` correction, a normalized
+  `unit_type` enum, the `cross_references[]` shape with mandatory
+  `voice`/`stance` and the "never guess a locator" anti-fabrication rule,
+  a note on the prev/current/next context window (Part F), and the A4
+  language-purity reminder. Meant to be pasted into the Gemini session
+  alongside the contract and the registry, once per batch.
+- **V17-lite in `tools/validate_gold_standard.py`**
+  (`check_v17_cross_references`) — mechanical checks only: URN shape
+  (`urn:dge:{work_id}:{locator}`), work_id registry membership, mandatory
+  `voice`/`stance`/`direction`/`reftype` enum membership, and inline-link
+  ↔ `cross_references[]` array parity (mirrors `check_v2_v3_pratika`'s
+  shape). **Deliberately WARN, not FAIL** — unlike V2/V3-forward/V6, this
+  has never run against a single real `cross_references[]` unit (none
+  exist yet), so it hasn't earned hard-gate status by the same discipline
+  those checks were held to. Promote once the first real v2.6 batch
+  validates clean. Tested in `tests/test_validate_gold_standard.py`
+  against the contract's own B12.2 worked example (`urn:dge:gita:2.38`,
+  `urn:dge:brahmasutra:4.1.3`) loaded through the real registry file, not
+  a synthetic fixture.
+
+**Still not built — and deliberately not attempted this pass**, since
+there is no real `cross_references[]`-bearing content yet to build or
+verify them against (same reasoning as item 2 in section 5 above):
+
+1. **`dge_manifest.json` build-time indexer (B12.3)** — the static walker
+   that compiles URN → file path + preview stub across the corpus, and
+   downgrades an unresolvable URN to plain text + `needs_review`. Needed
+   before any URN can actually resolve to real content, but premature to
+   build against zero cross-referencing units.
+2. **Client-side hover/tap resolution (B12.4)** — the card UI in
+   `gold-render.js`/`render.js`. Depends on (1) existing first.
+3. **Target-text verification** (V17's `quoted_span` fuzzy-match against
+   the cited unit's actual mūla, catching hallucinated locators) — also
+   depends on (1); today's V17-lite checks shape and closed-world
+   membership only, not that a cited passage is real.
+4. B6 (multi-verse `unit_range`), B13 (dynamic views), B14 (acquisition
+   provenance) and their gates (V15/V18/V19) are untouched by this pass —
+   real gaps, not yet prioritized against the cross-link work the project
+   lead asked to be solid first.
+
+Tracked in `dge/PENDING.md` under the same date.

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Offline CI gate for the DGE Gold-Standard Commentary Contract v2.2 (V1-V7),
-run against any commentary carrying `"format": "gold_v2_2"` -- see
-dge/GOLD_STANDARD_ARCHITECTURE.md Part C for the design and Part 1 for what
-each check enforces. Two input shapes are understood, since they're both
-real:
+"""Offline CI gate for the DGE Gold-Standard Commentary Contract (V1-V7 per
+v2.2, plus a V17-lite cross-reference check added for the v2.6 URN
+apparatus -- see check_v17_cross_references()'s own docstring for exactly
+what it does and doesn't cover yet), run against any commentary carrying
+`"format": "gold_v2_2"` -- see dge/GOLD_STANDARD_ARCHITECTURE.md Part C for
+the design and Part 1 for what each check enforces. Two input shapes are
+understood, since they're both real:
 
   - A standalone ingestion batch, `{"document": {...}, "units": [...]}`,
     matching the reference sample (extracted_gold_v2_2.json) and what a
@@ -39,6 +41,7 @@ import tempfile
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHECKSUM_MANIFEST = os.path.join(REPO, "tools", "gold_source_checksums.json")
 GOLD_RENDER_JS = os.path.join(REPO, "dge", "js", "gold-render.js")
+WORKS_REGISTRY = os.path.join(REPO, "dge", "data", "works_registry.json")
 
 PRATIKA_RE = re.compile(r'\*\*"([^"]*)"\*\*')
 # Near-miss quote styles that are legitimate *emphasis* on their own (the
@@ -53,6 +56,17 @@ NEAR_MISS_RES = [
 ]
 DIALECTIC_OBJECTION_MARKERS = ["इति चेत्", "इत्याशङ्क्य", "इत्याशङ्क्याह"]
 DIALECTIC_RESOLUTION_MARKERS = ["इति चेन्न", "समाधानम्", "सिद्धान्तः", "नाद्यः", "न, तस्मात्"]
+
+# B12.1: urn:dge:{work_id}:{locator} -- work_id is an ASCII slug from the
+# works registry, locator is a dot-joined path (digits/letters, e.g. "2.38"
+# or "4.1.3"). Deliberately permissive on locator shape here -- B12.1
+# leaves the exact grammar to each work's own locator_schema, not something
+# this script should hardcode.
+URN_RE = re.compile(r"^urn:dge:([a-z0-9][a-z0-9_-]*):([A-Za-z0-9]+(?:\.[A-Za-z0-9]+)*)$")
+VOICE_VALUES = {"siddhantin", "purvapakshin", "ekadeshi", "unstated"}
+STANCE_VALUES = {"pro", "contra", "neutral", "unstated"}
+DIRECTION_VALUES = {"prior", "future", "external"}
+REFTYPE_VALUES = {"intra_text", "inter_text", "cross_layer"}
 
 findings = []  # list of dicts: {check, severity, unit, message}
 FAIL_CHECKS = {"SCHEMA", "V2", "V3-forward", "V6"}
@@ -71,6 +85,19 @@ def load_checksums():
         with open(CHECKSUM_MANIFEST, encoding="utf-8") as fh:
             return json.load(fh)
     return {}
+
+
+def load_works_registry():
+    """work_id -> row, from dge/data/works_registry.json (B12.1's closed
+    world). Returns {} if the registry is missing rather than raising --
+    V17 then WARNs "registry not found" on every urn instead of crashing
+    the whole validation run over one missing/malformed file.
+    """
+    if not os.path.exists(WORKS_REGISTRY):
+        return {}
+    with open(WORKS_REGISTRY, encoding="utf-8") as fh:
+        data = json.load(fh)
+    return {w["work_id"]: w for w in data.get("works", []) if isinstance(w, dict) and w.get("work_id")}
 
 
 def save_checksums(manifest):
@@ -249,6 +276,79 @@ def check_v7_closed_world_citations(uid, unit):
             add("V7", "WARN", uid, f'quotations[{i}].identified_source "{src}" is not a clean slug')
 
 
+def check_v17_cross_references(uid, unit, registry):
+    """URN cross-reference integrity (B12/V17), mechanical subset only.
+
+    This is deliberately WARN, not FAIL, even though every sub-check here
+    is a plain structural comparison (unlike V4/V5's philological
+    judgment calls) -- the difference is there is no real cross_references
+    data yet to verify this against: extracted_gold_latest.json (spec_version
+    v2_4) has none, so this check has never run against genuine output.
+    Promote the mechanical parts (missing voice/stance, bad URN shape,
+    unregistered work_id) to FAIL_CHECKS once the first real v2_6 batch
+    with cross_references[] validates clean here -- the same discipline
+    V2/V3-forward/V6 were held to before they became hard gates.
+
+    What this does NOT check, because the infrastructure doesn't exist yet
+    (see dge/GOLD_STANDARD_ARCHITECTURE.md and PENDING.md for the status):
+    resolution against dge_manifest.json (B12.3 -- no indexer has been
+    built), and target-text verification of quoted_span against the
+    target unit's actual mula (B12/V17c -- needs the manifest too).
+    """
+    refs = unit.get("cross_references")
+    if refs is None:
+        return
+    if not isinstance(refs, list):
+        add("V17", "WARN", uid, "cross_references is present but not a list")
+        return
+    if not registry:
+        add("V17", "WARN", uid, f"{len(refs)} cross_references present but dge/data/works_registry.json is missing/empty -- cannot check closed-world membership")
+
+    for i, ref in enumerate(refs):
+        if not isinstance(ref, dict):
+            add("V17", "WARN", uid, f"cross_references[{i}] is not an object")
+            continue
+        label = f"cross_references[{i}]"
+
+        if not ref.get("quoted_span"):
+            add("V17", "WARN", uid, f"{label} missing quoted_span")
+
+        voice, stance = ref.get("voice"), ref.get("stance")
+        if voice not in VOICE_VALUES:
+            add("V17", "WARN", uid, f'{label}.voice "{voice}" missing or not one of {sorted(VOICE_VALUES)} (mandatory per B12.2)')
+        if stance not in STANCE_VALUES:
+            add("V17", "WARN", uid, f'{label}.stance "{stance}" missing or not one of {sorted(STANCE_VALUES)} (mandatory per B12.2)')
+
+        direction = ref.get("direction")
+        if direction is not None and direction not in DIRECTION_VALUES:
+            add("V17", "WARN", uid, f'{label}.direction "{direction}" not one of {sorted(DIRECTION_VALUES)}')
+        reftype = ref.get("reftype")
+        if reftype is not None and reftype not in REFTYPE_VALUES:
+            add("V17", "WARN", uid, f'{label}.reftype "{reftype}" not one of {sorted(REFTYPE_VALUES)}')
+
+        urn = ref.get("urn")
+        if urn is None:
+            continue  # unresolved citation -- correct per the addendum, not a finding
+        m = URN_RE.match(urn)
+        if not m:
+            add("V17", "WARN", uid, f'{label}.urn "{urn}" does not match urn:dge:{{work_id}}:{{locator}}')
+            continue
+        work_id = m.group(1)
+        if registry and work_id not in registry:
+            add("V17", "WARN", uid, f'{label}.urn "{urn}" cites work_id "{work_id}" which is not in dge/data/works_registry.json (closed-world violation, B12.1)')
+
+    # Inline <-> array parity (V17d): every urn: link in commentary_markdown
+    # should correspond to a cross_references[] entry with the same urn, and
+    # vice versa for resolved entries. Mirrors check_v2_v3_pratika's shape.
+    md = unit.get("commentary_markdown", "") or ""
+    inline_urns = set(re.findall(r"\]\((urn:dge:[^)]+)\)", md))
+    array_urns = {r.get("urn") for r in refs if isinstance(r, dict) and r.get("urn")}
+    for u in inline_urns - array_urns:
+        add("V17", "WARN", uid, f'inline link to "{u}" in commentary_markdown has no matching cross_references[] entry')
+    for u in array_urns - inline_urns:
+        add("V17", "WARN", uid, f'cross_references[] entry for "{u}" has no matching inline link in commentary_markdown')
+
+
 def check_v6_danda_integrity(units):
     """Zero line-initial daṇḍas (D1/V6), checked by actually running the
     real renderer (dge/js/gold-render.js) under Node -- not a reimplemented
@@ -320,6 +420,7 @@ def main():
         return 2
 
     manifest = load_checksums()
+    registry = load_works_registry()
     all_units = []  # (uid, unit) for the V6 render pass
     n_units = 0
 
@@ -334,6 +435,7 @@ def main():
                 check_v4_gloss_tokens(uid, unit)
                 check_v5_dialectic_pairing(uid, unit)
                 check_v7_closed_world_citations(uid, unit)
+                check_v17_cross_references(uid, unit, registry)
                 all_units.append((uid, unit))
         except (OSError, json.JSONDecodeError) as e:
             add("SCHEMA", "FAIL", path, f"could not read/parse: {e}")

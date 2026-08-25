@@ -4063,3 +4063,140 @@ Skanda (1/8), Agni/Matsya/Varaha (1 file each, unsegmented) among
 Mahapuranas; Kalika/Narasimha among Upapuranas. Everything else under
 both `maha_purana` and `upa_purana` is a real, trackable, empty
 placeholder now -- visible in `admin/library.html` (`?section=purana`).
+
+## Gold-Standard v2.6: URN cross-reference foundation laid (25 Aug 2026)
+
+Project lead uploaded the current contract (now **doc version 2.6**,
+superseding the v2.2 the original Gold-Standard build was checked against
+-- see `dge/GOLD_STANDARD_ARCHITECTURE.md` part 6), plus the real
+`extracted_gold_latest.json` output (Gītā-Vivṛtti Adhyāya 2, 72 units),
+asking what works and what doesn't before scaling up generation for the
+rest of the Gītā -- with explicit priority on cross-link features being
+solid first. Direct inspection of the sample: `document.spec_version` is
+still `"v2_4"`, zero `cross_references`/`urn`/`provenance` fields anywhere,
+`unit_type` spelled five inconsistent ways. Real gaps, not assumed ones.
+
+The extraction pipeline itself runs manually on the project lead's Android
+phone (Gemini AI app + local Python scripts), not through this repo's API
+tooling -- so nothing here can inject a system prompt automatically; the
+foundation has to be things that get pasted by hand into each session.
+Built:
+
+- `dge/data/works_registry.json` -- the closed-world `work_id` registry
+  B12.1 requires before Gemini may emit any `urn:dge:{work_id}:{locator}`.
+  Seeded from what's actually already in the corpus (Madhva's
+  `gita-bhashya` + Jayatīrtha's ṭīkā, `gita-tatparya-nirnaya`, Śaṅkara's
+  Advaita `gita-bhashya-shankara`) plus `gita`/`gita-vivrtti`/`brahmasutra`
+  (the last two using the contract's own B12.2 spelling/example).
+  Hand-maintained -- a new citable work gets a row before extraction ever
+  needs to name it.
+- `dge/GOLD_STANDARD_V26_PROMPT_ADDENDUM.md` -- the literal copy-paste
+  block for the phone: `spec_version`/`work_id` correction, normalized
+  `unit_type` enum, the `cross_references[]` shape with mandatory
+  `voice`/`stance` and an explicit "never guess a locator, `urn: null` is
+  correct output" anti-fabrication rule, and the A4 language-purity
+  reminder.
+- V17-lite in `tools/validate_gold_standard.py`
+  (`check_v17_cross_references`) -- URN shape, registry membership,
+  mandatory voice/stance/direction/reftype, inline-link/array parity.
+  WARN only, on purpose: no real `cross_references[]`-bearing unit exists
+  yet to prove the check against, so it hasn't earned FAIL-gate status by
+  the same standard V2/V3-forward/V6 were held to. 9 new tests in
+  `tests/test_validate_gold_standard.py`, checked against the contract's
+  own B12.2 worked example loaded through the real registry file. Full
+  suite: 207 tests green (`./run_tests.sh`), corpus scan still clean
+  (`--scan-corpus`: 0/1736 files carry `gold_v2_2` content today, same as
+  before this pass -- nothing here touched ingested content).
+
+**Deliberately not built this pass**, since there's no real
+cross-referencing content yet to build or verify it against: the
+`dge_manifest.json` build-time indexer (B12.3), client-side hover/tap
+resolution (B12.4, `gold-render.js`/`render.js`), and target-text
+verification (fuzzy-matching a `quoted_span` against its cited unit's real
+mūla -- needs the manifest). Next natural trigger: once a batch of
+`gita-vivrtti` units with real `cross_references[]` exists, build the
+indexer against real data rather than a guess at its shape.
+
+## "Ask Acharya" / "DGE AI" -- retrieval-layer architecture, marked pending (25 Aug 2026)
+
+Project lead pasted a substantial architecture analysis (source: another AI
+session, not this one) proposing that DGE should not try to *be* an LLM,
+but become the **retrieval/context layer** a general-purpose LLM (Gemini,
+Claude, or a future model) queries against -- "DGE = external persistent
+memory, LLM = reasoning engine." Concretely: a query pipeline (exact
+Sanskrit index -> normalized index -> semantic/vector index -> adhikaraṇa
+mapping -> cross-reference graph -> ranked evidence package) sits in front
+of the model call, so a question like "what does Madhva say about
+nikhilapūrṇaguṇaikadeham" retrieves the exact Nyāya Sudhā node plus every
+related ṭīkā (Vākyārthacandrikā, Parimala, Yādūpatyam, etc.) *before* the
+LLM ever sees the question, rather than asking the LLM to search or recall
+Sanskrit from its own training data. Explicitly deprioritizes a generic
+"Ask AI" chat button in favor of making retrieval invisible and contextual
+-- right-click a śloka/word/argument, DGE silently assembles mūla +
+anvaya + relevant ṭīkā + adhikaraṇa + cross-references, *then* calls the
+model. Provider-agnostic by design (same evidence package to Gemini today,
+Claude tomorrow, something else in five years).
+
+**My own read, checked directly against this codebase rather than taken on
+faith:**
+
+1. **The gap described is real and already visible in the running code.**
+   `dge/js/ai.js`'s current "Ask Acharya" (`type: 'commentary'`) sends the
+   model exactly one commentary's raw text plus a highlighted fragment,
+   with the prompt explicitly instructing *"Analyze ONLY the supplied
+   commentary text provided below. Do NOT hallucinate external
+   commentaries."* -- that line is a hand-written defensive patch for
+   precisely the retrieval gap this proposal identifies: there is no
+   mechanism today to hand the model real neighbouring/cross-referenced
+   text, so the prompt's only defense is telling the model not to invent
+   any. A working retrieval layer replaces a disclaimer with real evidence.
+2. **The three-layer split (exact / semantic / LLM) maps onto assets that
+   already exist or are already mid-build, not a from-scratch project.**
+   Layer 1 (exact/lexical search) is `dge/SEARCH_ARCHITECTURE.md`'s
+   trigram index, already measured and optimized (16 MB -> 241 KB per
+   query). Layer 3 (provider-agnostic model call) is already the shape of
+   `tools/gemini_client.py` / `dge/js/gemini.js` -- deliberately "HTTP
+   mechanics only, no policy," which is exactly the separation a
+   swappable Gemini/Claude/GPT backend needs. What's actually missing is
+   Layer 1.5/2: the **relationship graph** (adhikaraṇa membership,
+   cross-references, which ṭīkā answers which mūla passage) that turns a
+   text hit into a *contextual* evidence package.
+3. **The relationship graph this proposal needs and the Gold-Standard
+   v2.6 URN cross-reference apparatus (B11/B12, see the entry directly
+   above) are the same underlying asset, not two projects.** `urn:dge:` +
+   `cross_references[]` + a future `dge_manifest.json` indexer *is* a
+   machine-readable adhikaraṇa/ṭīkā/cross-reference graph once it's
+   populated across a corpus -- retrieval for "DGE AI" and resolution for
+   Gold-Standard hover/tap cards are two consumers of the identical index.
+   This reframes the priority question usefully: continuing to build out
+   B12 (registry -> extraction -> manifest) for Gold-Standard content
+   *is* the concrete first step toward this feature, not separate,
+   speculative infrastructure work competing for the same time.
+4. **Where I'd push back slightly on the pasted analysis**: it treats
+   Gemini's hosted File Search/RAG as something to consciously route
+   around in favor of DGE's own retrieval, and I'd agree for the
+   philologically-structured part (adhikaraṇa/cross-reference/voice-stance
+   retrieval needs DGE's own schema-aware logic, a generic chunker cannot
+   reconstruct that) -- but plain semantic/vector search over already-gold
+   `commentary_markdown` text is comparatively generic, and hand-rolling
+   an embedding index before the structured graph exists would be solving
+   the easier 20% first. Sequence matches the pasted analysis's own
+   conclusion: retrieval spine (exact + graph) before any AI-facing
+   surface, and semantic/vector search is the layer most safely deferred
+   or bought off-the-shelf once the graph exists to constrain it.
+
+**Status: analysis only, marked PENDING.** No code written for this
+feature. Not started because it depends on infrastructure only partially
+built today (the URN/cross-reference graph above is at its very first
+step -- a registry and a WARN-level validator, zero real
+`cross_references[]` content yet) and because the project lead's own
+stated priority is finishing the Dvaita Vedanta relationship
+reconstruction (Nyāya Sudhā adhikaraṇa/ṭīkā navigation, still open --
+see the Dvaita Vedanta UI entries elsewhere in this file) before an AI
+layer sits on top of it. Concrete, buildable-later first step once ready:
+a `/dge/retrieve` internal function (not yet a network endpoint) that
+takes `{question, work, node}` and returns the evidence package described
+above by walking `dge_manifest.json` (once it exists) plus the taxonomy
+hierarchy for adhikaraṇa context -- then `dge/js/ai.js`'s existing
+`promptText` construction swaps its single raw-text interpolation for
+that package, with the model call itself (`dgeCallGemini`) untouched.

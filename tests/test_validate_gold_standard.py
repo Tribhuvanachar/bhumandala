@@ -162,5 +162,104 @@ class TestChecksumRoundTrip(unittest.TestCase):
         self.assertEqual(vgs.findings[0]["severity"], "FAIL")
 
 
+class TestV17CrossReferences(unittest.TestCase):
+    """Checked against the real dge/data/works_registry.json, not a
+    synthetic fixture -- and the cross_references[] shape here is lifted
+    directly from the contract's own B12.2 worked example (urn:dge:gita:2.38,
+    urn:dge:brahmasutra:4.1.3), same discipline as TestRealSample above.
+    """
+
+    def setUp(self):
+        vgs.findings.clear()
+        self.registry = vgs.load_works_registry()
+
+    def test_registry_loads_and_has_the_contracts_own_worked_example_ids(self):
+        self.assertIn("gita", self.registry)
+        self.assertIn("gita-vivrtti", self.registry)
+        self.assertIn("brahmasutra", self.registry)
+
+    def test_absent_cross_references_field_is_silent(self):
+        vgs.check_v17_cross_references("u1", {"commentary_markdown": "text"}, self.registry)
+        self.assertEqual(vgs.findings, [])
+
+    def test_well_formed_intra_and_inter_text_refs_are_silent(self):
+        unit = {
+            "commentary_markdown": (
+                '["सुखदुःखे समे कृत्वा"](urn:dge:gita:2.38) '
+                '["ॐ आत्मेति तूपगच्छन्ति"](urn:dge:brahmasutra:4.1.3)'
+            ),
+            "cross_references": [
+                {
+                    "quoted_span": "सुखदुःखे समे कृत्वा", "citation_marker": "इत्यत्रोक्तदिशा",
+                    "urn": "urn:dge:gita:2.38", "direction": "prior", "reftype": "intra_text",
+                    "voice": "siddhantin", "stance": "pro", "basis": "stated",
+                },
+                {
+                    "quoted_span": "ॐ आत्मेति तूपगच्छन्ति", "citation_marker": "इति सूत्रोक्तदिशा",
+                    "urn": "urn:dge:brahmasutra:4.1.3", "direction": "external", "reftype": "inter_text",
+                    "voice": "siddhantin", "stance": "pro", "basis": "stated",
+                },
+            ],
+        }
+        vgs.check_v17_cross_references("u1", unit, self.registry)
+        self.assertEqual(vgs.findings, [])
+
+    def test_unresolved_citation_with_null_urn_is_not_flagged(self):
+        unit = {
+            "commentary_markdown": "इत्यादेः इति ।",
+            "cross_references": [{
+                "quoted_span": "बहूनि मे व्यतीतानि", "citation_marker": "इत्यादेः",
+                "urn": None, "direction": "prior", "reftype": "intra_text",
+                "voice": "siddhantin", "stance": "pro", "basis": "stated",
+            }],
+        }
+        vgs.check_v17_cross_references("u1", unit, self.registry)
+        self.assertEqual(vgs.findings, [])
+
+    def test_missing_voice_and_stance_warns(self):
+        unit = {"commentary_markdown": "", "cross_references": [{"quoted_span": "x", "urn": None}]}
+        vgs.check_v17_cross_references("u1", unit, self.registry)
+        checks = {f["check"] for f in vgs.findings}
+        self.assertEqual(checks, {"V17"})
+        self.assertEqual(len(vgs.findings), 2)  # voice + stance
+
+    def test_unregistered_work_id_warns(self):
+        unit = {
+            "commentary_markdown": "",
+            "cross_references": [{
+                "quoted_span": "x", "urn": "urn:dge:not-a-real-work:1.1",
+                "voice": "siddhantin", "stance": "pro",
+            }],
+        }
+        vgs.check_v17_cross_references("u1", unit, self.registry)
+        self.assertTrue(any("closed-world" in f["message"] for f in vgs.findings))
+
+    def test_malformed_urn_shape_warns(self):
+        unit = {
+            "commentary_markdown": "",
+            "cross_references": [{
+                "quoted_span": "x", "urn": "https://example.com/gita/2.38",
+                "voice": "siddhantin", "stance": "pro",
+            }],
+        }
+        vgs.check_v17_cross_references("u1", unit, self.registry)
+        self.assertTrue(any("does not match" in f["message"] for f in vgs.findings))
+
+    def test_inline_array_parity_mismatch_warns_both_directions(self):
+        unit = {
+            # inline link to gita:2.38 has no array entry; array entry for
+            # brahmasutra:4.1.3 has no inline link.
+            "commentary_markdown": '["x"](urn:dge:gita:2.38)',
+            "cross_references": [{
+                "quoted_span": "y", "urn": "urn:dge:brahmasutra:4.1.3",
+                "voice": "siddhantin", "stance": "pro",
+            }],
+        }
+        vgs.check_v17_cross_references("u1", unit, self.registry)
+        messages = " ".join(f["message"] for f in vgs.findings)
+        self.assertIn("no matching cross_references[] entry", messages)
+        self.assertIn("no matching inline link", messages)
+
+
 if __name__ == "__main__":
     unittest.main()
