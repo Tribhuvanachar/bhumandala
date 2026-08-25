@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.13 (chanakya_niti/chanakya_sutra/kamandakiya_nitisara Devanagari labels, added alongside the nitishastra/ -> shastra/niti_shastra/ consolidation. On top of v3.12\'s layer-manifest drawer fold)';
+window.DGE_VERSIONS['library.js'] = 'v3.14 (DGE_NUMBERED_PREFIXES gains amsha -- Vishnu Purana\'s amsha_01..06 were falling through to the raw English "Amsha N" label. On top of v3.13\'s nitishastra consolidation)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -264,7 +264,8 @@ const DGE_PATH_LABELS = {
 const DGE_NUMBERED_PREFIXES = {
   mandala: 'मण्डलम्', kanda: 'काण्डम्', adhyaya: 'अध्यायः',
   skandha: 'स्कन्धः', prapathaka: 'प्रपाठकः', anuvaka: 'अनुवाकः',
-  ashtaka: 'अष्टकम्', parva: 'पर्व', sarga: 'सर्गः'
+  ashtaka: 'अष्टकम्', parva: 'पर्व', sarga: 'सर्गः',
+  amsha: 'अंशः'
 };
 
 const DGE_DEVA_DIGITS = ['०','१','२','३','४','५','६','७','८','९'];
