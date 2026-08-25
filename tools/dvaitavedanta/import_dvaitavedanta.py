@@ -468,6 +468,13 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
                     "site": "dvaitavedanta.in",
                     "url": record["url"],
                     "content_id": record["content_id"],
+                    # The site's URLs are category-details/{node}/{work}/...:
+                    # content_id above is the node, this is the constant work
+                    # root (975 = Nyāya Sudhā). Stored explicitly so the
+                    # numeric pair — not the transliterated URL path — is the
+                    # canonical linkage key (25 Aug 2026 node-graph
+                    # verification, PENDING part 10).
+                    "work_id": grantha.get("ancestor_id") or record.get("ancestor_id"),
                     "layer": title,
                     "anchor": layer.get("anchor", ""),
                     "fetched": fetch_date,
