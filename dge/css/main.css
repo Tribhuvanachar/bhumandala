@@ -300,6 +300,83 @@ details.dge-analysis-field > summary.commentary-title::marker { color: var(--acc
 details.dge-analysis-field[open] > summary.commentary-title { margin-bottom: 8px; }
 .dge-ai-badge { display: inline-block; font-family: var(--font-ui); font-size: 9px; font-weight: 800; letter-spacing: 0.3px; color: #fff; background: var(--accent-red, #7a3b1d); border-radius: var(--radius-pill); padding: 1px 6px; margin-left: 6px; text-transform: none; vertical-align: 1px; }
 
+/* 25 Aug 2026 -- Gold-Standard Commentary Contract (v2.2) rendering, see
+   dge/GOLD_STANDARD_ARCHITECTURE.md for the full design. Two elements,
+   both keyed off commentaries[cKey].format === 'gold_v2_2' in render.js,
+   both simply absent for legacy plain-string commentary:
+   (1) .dge-gold-badge -- same size/shape convention as .dge-ai-badge just
+       above, gold instead of red, and unlike that badge this ONE is also
+       a real control (onclick="window.dgeToggleGoldSimple(this)" in
+       render.js/gold-render.js) -- the switch between the rich view and
+       a simplified one, per the project lead's direct ask.
+   (2) .dge-gold-wrapper -- the certificate-style framing applied to the
+       whole .commentary-block once it's rendering Gold-Standard content;
+       built from --accent-gold (already themed per-theme, see the root
+       token block near the top of this file) rather than one fixed hex,
+       so it holds up across all 5 existing themes and dark mode. */
+.dge-gold-badge { display: inline-block; font-family: var(--font-ui); font-size: 9px; font-weight: 800; letter-spacing: 0.3px; color: #2b1d05; background: linear-gradient(135deg, var(--accent-gold), #f3d488); border-radius: var(--radius-pill); padding: 1px 7px; margin-left: 6px; text-transform: none; vertical-align: 1px; cursor: pointer; border: 1px solid rgba(0,0,0,0.08); }
+.dge-gold-badge:hover { filter: brightness(1.05); }
+
+.dge-gold-wrapper.commentary-block {
+  background: var(--card-bg, rgba(0,0,0,0.02));
+  border: 1.5px solid var(--accent-gold);
+  border-left-width: 1.5px;
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+/* A small seal motif in the corner -- the "wrapped on a certificate" look
+   the project lead asked for -- purely decorative, no layout impact. */
+.dge-gold-wrapper.commentary-block::before {
+  content: "✦"; position: absolute; top: 6px; right: 8px;
+  color: var(--accent-gold); font-size: 11px; opacity: 0.55;
+}
+
+.dge-gold-pillgrid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.dge-gold-pill { background: var(--card-bg, #fff); border: 1.5px solid var(--card-border, #ded4c3); border-radius: var(--radius-xs); padding: 4px 9px; font-size: calc(var(--font-multiplier) * 0.78); cursor: pointer; display: inline-flex; align-items: center; gap: 4px; scroll-margin-top: calc(50px + env(safe-area-inset-top) + 16px); transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease); }
+.dge-gold-pill:hover { border-color: var(--accent-gold); }
+.dge-gold-pill-mula { font-weight: 700; color: var(--accent-red); }
+.dge-gold-pill-arrow { font-size: 0.85em; opacity: 0.6; }
+.dge-gold-pill-gloss { color: var(--text-primary); }
+
+.dge-gold-pratika { color: var(--accent-red); font-weight: 700; cursor: pointer; border-bottom: 1.5px dotted var(--accent-red); padding: 2px 1px; scroll-margin-top: calc(50px + env(safe-area-inset-top) + 16px); }
+.dge-gold-pratika:hover { background: rgba(232,178,77,0.25); }
+.dge-gold-unmapped { color: var(--text-primary); } /* no matching word_mappings entry -- see gold-render.js's linkPratikas() */
+
+.dge-gold-titlebanner { text-align: center; margin: 2px 0 10px; padding-bottom: 8px; border-bottom: 1.5px dashed var(--accent-gold); }
+.dge-gold-title-h1 { font-weight: 700; color: var(--accent-red); font-size: 1.05em; margin-bottom: 3px; }
+.dge-gold-title-h2 { font-weight: 700; color: var(--accent-gold); }
+
+.dge-gold-avataranika { font-style: italic; color: var(--muted-text); background: var(--card-active, rgba(0,0,0,0.03)); border-left: 3px solid var(--accent-gold); padding: 6px 10px; margin: 6px 0; border-radius: 0 var(--radius-xs) var(--radius-xs) 0; }
+
+.dge-gold-mangala, .dge-gold-pramana { background: var(--card-active, rgba(0,0,0,0.03)); border: 1.5px solid var(--accent-gold); border-radius: var(--radius-xs); padding: 10px 12px; margin: 10px 0; text-align: center; }
+.dge-gold-mangala-badge { display: inline-block; font-family: var(--font-ui); font-size: 10px; font-weight: 700; color: var(--accent-red); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
+.dge-gold-verse-pada { font-weight: 600; line-height: 1.8; }
+.dge-gold-pramana-footer { margin-top: 6px; text-align: right; }
+.dge-gold-citation-chip { font-family: var(--font-ui); font-size: 0.75em; font-weight: 600; color: var(--accent-red); background: var(--card-bg, #fff); border: 1px solid var(--card-border); border-radius: var(--radius-xs); padding: 2px 8px; display: inline-block; }
+
+.dge-gold-phalitartha { background: var(--card-active, rgba(0,0,0,0.03)); border-left: 4px solid var(--accent-gold); border-radius: 0 var(--radius-xs) var(--radius-xs) 0; padding: 10px 12px; margin: 10px 0 4px; }
+.dge-gold-phalitartha-tag { display: block; font-family: var(--font-ui); font-size: 10px; font-weight: 700; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+.dge-gold-phalitartha p { margin: 0; }
+
+.dge-gold-colophon { text-align: center; font-weight: 700; color: var(--accent-red); border-top: 1.5px solid var(--accent-gold); margin: 12px 0 4px; padding-top: 8px; }
+
+@keyframes dgeGoldPulse { 0% { background-color: var(--accent-gold); box-shadow: 0 0 10px rgba(232,178,77,0.7); } 60% { background-color: rgba(232,178,77,0.35); } 100% { background-color: transparent; box-shadow: none; } }
+.dge-gold-pulse { animation: dgeGoldPulse 1.8s ease-out; border-radius: 4px; }
+
+/* The badge's own view-switch (window.dgeToggleGoldSimple): folds the
+   pill grid and every provenance container's special framing back down
+   to plain paragraph flow -- pratīka links and dandas stay intact either
+   way, only the boxed/pilled presentation is what toggles off. */
+.dge-gold-wrapper.dge-gold-simple { border-color: var(--card-border); box-shadow: none; }
+.dge-gold-wrapper.dge-gold-simple::before { display: none; }
+.dge-gold-wrapper.dge-gold-simple .dge-gold-pillgrid { display: none; }
+.dge-gold-wrapper.dge-gold-simple .dge-gold-mangala,
+.dge-gold-wrapper.dge-gold-simple .dge-gold-pramana,
+.dge-gold-wrapper.dge-gold-simple .dge-gold-phalitartha,
+.dge-gold-wrapper.dge-gold-simple .dge-gold-avataranika { background: none; border: none; box-shadow: none; padding: 4px 0; text-align: left; }
+
 .dge-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .dge-analysis-table { width: 100%; border-collapse: collapse; font-size: calc(var(--font-multiplier) * 0.8); }
 .dge-analysis-table th, .dge-analysis-table td { text-align: left; padding: 4px 10px 4px 0; vertical-align: top; border-bottom: 1px solid var(--card-border); white-space: nowrap; }

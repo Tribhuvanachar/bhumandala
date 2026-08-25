@@ -35,7 +35,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.68.3">
+<link rel="stylesheet" href="css/main.css?v=4.69.0">
 <!-- The intellisense and backlink panels, shared with the Vyakarana
      pages, which use a different palette and cannot load main.css. -->
 <link rel="stylesheet" href="css/intellisense.css?v=3">
@@ -1202,7 +1202,13 @@
      inline footnote markers + a footnote list. Loaded before render.js,
      which calls into it. Additive: absent enrichment data, nothing changes. -->
 <script src="js/footnote-engine.js?v=2"></script>
-<script src="js/render.js?v=4.61.5"></script>
+<!-- Renders commentary shaped to the Gold-Standard Commentary Contract
+     v2.2 (see dge/GOLD_STANDARD_ARCHITECTURE.md) -- pratika<->word-pill
+     linking, provenance boxes, the certificate wrapper/badge. Loaded
+     before render.js, which calls into it. Additive: a commentary without
+     format:gold_v2_2 renders exactly as it always has. -->
+<script src="js/gold-render.js?v=1"></script>
+<script src="js/render.js?v=4.61.6"></script>
 <!-- async: JSZip is only used on demand (admin-editor.js's zip export/extract,
      gated behind typeof JSZip==='undefined' checks), never at boot -- a
      blocking, synchronous tag here meant a slow or stalled connection to
