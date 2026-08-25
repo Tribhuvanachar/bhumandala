@@ -4529,15 +4529,35 @@ rather than acted on blind:**
   dedicated future pass, ideally batched by domain the way the 234
   Dvaita-Vedanta labels were done earlier this project (see the 20 Aug
   entry elsewhere in this file).
-- **Subhashita, Nyaya Kosha, Puranic Encyclopedia**: confirmed absent
-  from the corpus (checked taxonomy.json AND library.json titles, not
-  just an obvious folder name). Nyaya Kosha/Puranic Encyclopedia are
-  specifically Kosha-genre reference works -- but "Kosha" data
-  (`koshaDataBase` in `dge/js/config.js`) lives in a SEPARATE repo,
-  `Tribhuvanachar/bhumandala-kosha-data`, not in this session's
-  repository scope at all. Needs either that repo added to scope, or
-  the user's clarification that these two should go into this repo
-  instead.
+- **Subhashita**: placeholder leaf added at `shastra/subhashita`
+  (`dge/data/shastra/subhashita/data.json`), empty `items: []`, per the
+  project lead's own placement call ("under shastra"). Awaiting source
+  files -- genre anthology (Bhartrhari's shatakas, Subhashitaratnakosha,
+  etc.), not a single text, so a real content pass needs the sources
+  before deciding one combined leaf vs. named sub-collections.
+- **Nyaya Kosha, Puranic Encyclopedia -- RESOLVED, already live, no
+  action needed.** These are Kosha-genre (dictionary) works, so they
+  never belonged in this repo's own taxonomy/library.json -- they
+  belong in the separate `Tribhuvanachar/bhumandala-kosha-data` repo
+  that already backs the app's कोश search
+  (`koshaDataBase` in `dge/js/config.js` -> `bhumandala-kosha-data@dist`).
+  Added that repo to session scope and checked directly: both are
+  already catalogued in `dicts_config.json` AND already built into the
+  live `dist` branch --
+  `jhalki-bhima-nyaya-koshah` (Bhīmācārya Jhalkīkar's classic
+  Nyāyakośa, 639 files) and `purana-encyclopedia` (Vettam Mani's
+  *Purāṇic Encyclopaedia*, 1123 files), plus bonus `purana-index`
+  (Dikshitar's *Purana Index*, 1367 files) and `laukika-nyaya-kosha`
+  (a separate popular-maxims kosha). `admin/kosha.html` even carries a
+  standing note (`renderPuranaNote()`) confirming purana-encyclopedia/
+  purana-index are loaded, with the copyright question (Vettam Mani's
+  work is almost certainly still in copyright; Motilal Banarsidass,
+  1975) explicitly left open for the project lead to settle -- nothing
+  here is presented as cleared, but it is loaded and searchable today.
+  If the project lead still doesn't see these in कोश search, the one
+  remaining explanation is a per-browser `kosha_hidden_dicts`
+  localStorage entry hiding them locally, fixable via the 👁 toggle on
+  `admin/kosha.html` -- not a missing-data problem.
 ## Node-graph model verified + vishvAsa mirror cross-validation (25 Aug 2026, part 10)
 
 The project lead forwarded an external analysis of dvaitavedanta.in's
