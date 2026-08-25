@@ -250,6 +250,36 @@ def main():
             "an unattributed heading still matches on suffix alone",
             (resolve("षट्प्रश्नभाष्यटीका", cfg) or {}).get("folder") == "tika_jayatirtha")
 
+        # Regression: later_acharyas/nyaya_sudha's Parimaḷa sub-commentary
+        # split across THREE folders -- "न्यायसुधापरिमलः" (ल), "न्यायसुधापरिम ळ"
+        # (ळ + stray space), and bare "परिमळ" (no grantha-name prefix at all)
+        # -- because none of these matched a canonical layer_config entry, so
+        # each fell into the auto-slug fallback (build_items, not
+        # resolve_layer_config) with no merging between them. layer_key's ळ->ल
+        # fold plus strip_grantha_prefix's self-reference stripping now make
+        # all four converge on one slug.
+        print("unmapped-layer key normalisation (nyaya_sudha Parimala sub-commentary)")
+        grantha_title = "श्रीमन्न्यायसुधा"
+        headings = [
+            "न्यायसुधापरिमलः",
+            "न्यायसुधापरिम ळ",
+            "परिम ळ",
+            "परिमळ",
+        ]
+        # Compared at the SLUG level, not the raw key: slugify_devanagari
+        # already drops a trailing visarga ("परिमलः" vs "परिमल"), so that
+        # residual difference never reaches an actual folder name -- the
+        # real guarantee this fix makes is "same folder", not "byte-
+        # identical key", and the test should hold it to that, not more.
+        slugs = {I.slugify_devanagari(I.strip_grantha_prefix(I.layer_key(h), grantha_title))
+                 for h in headings}
+        failures += not check(
+            "all four heading variants slug to one folder",
+            len(slugs) == 1, slugs)
+        failures += not check(
+            "the grantha's own title alone is left untouched, not emptied",
+            I.strip_grantha_prefix(I.layer_key(grantha_title), grantha_title) == I.layer_key(grantha_title))
+
         # `enabled: false` keeps a grantha out of a routine sweep; naming it
         # is not a routine sweep. nyaya_sudha needs ~46h of its own, so it must
         # be reachable by name without editing the config each time.

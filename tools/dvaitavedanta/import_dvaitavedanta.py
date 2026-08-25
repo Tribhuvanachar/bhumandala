@@ -53,6 +53,7 @@ from dv_parse import (  # noqa: E402
     layer_key,
     parse_page,
     split_attribution,
+    strip_grantha_prefix,
 )
 
 STATUS_FILENAME = "_extract_status.json"
@@ -373,9 +374,14 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
                 attributed_to, _work = split_attribution(title)
                 # Slug from the NORMALISED key, not the raw heading, or a
                 # stray space produces a second folder for the same work.
+                # strip_grantha_prefix additionally drops a self-referential
+                # repeat of the grantha's own title (see its own docstring --
+                # found via nyaya_sudha's Parimaḷa sub-commentary splitting
+                # across folders depending on whether the heading repeated
+                # "न्यायसुधा" or not).
                 folder = (f"tika_{slugify_devanagari(author_name(attributed_to))}"
                           if attributed_to else
-                          slugify_devanagari(layer_key(title)) or f"layer_{position + 1}")
+                          slugify_devanagari(strip_grantha_prefix(layer_key(title), grantha.get("title"))) or f"layer_{position + 1}")
                 if position == 0 and folder not in ("mula",):
                     schema = defaults["mula_schema"]
                     folder = folder if folder else "mula"

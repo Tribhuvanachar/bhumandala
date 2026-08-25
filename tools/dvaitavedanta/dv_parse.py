@@ -61,7 +61,11 @@ ATTRIBUTION_RE = re.compile(r"(कृत|विरचित|प्रणीत|�
 ATTRIBUTION_MAX_CHARS = 90
 # The same commentary is headed both "श्री कथालक्षणटीकाभावदीपः" and
 # "कथालक्षणटीकाभावदीपः" on one page; without this they merge as two layers.
-HONORIFIC_RE = re.compile(r"^(श्रीमत्|श्रीमद्|श्री)\s*")
+# श्रीमन् is श्रीमत् undergoing the standard त्→न् sandhi before a following
+# nasal (श्रीमत् + न्यायसुधा -> श्रीमन्न्यायसुधा) -- a real, expected form,
+# not a typo, and it must be listed before the bare "श्री" alternative or
+# that shorter match wins first and leaves a stray "मन्" stuck to the title.
+HONORIFIC_RE = re.compile(r"^(श्रीमत्|श्रीमद्|श्रीमन्|श्री)\s*")
 
 DEVANAGARI_RANGE = (0x0900, 0x097F)
 BLOCK_TAGS = {
@@ -459,9 +463,39 @@ def layer_key(title: str) -> str:
     form by whitespace alone, and each one was opening a second folder for a
     work that already had one. Devanagari compound spacing is not meaningful
     here, so squashing it merges the variants and separates nothing real.
+
+    ळ (retroflex la) is also folded to ल (dental la): found via
+    "न्यायसुधापरिमळ" vs "न्यायसुधापरिमलः" opening two separate folders for
+    the same Nyāyasudhā sub-commentary (Parimaḷa/Parimala) under
+    later_acharyas/nyaya_sudha. This is a real, common regional-orthography
+    interchange in Kannada/Marathi-region printed Sanskrit (the Dvaita
+    tradition's own home region) — not an OCR artefact, and not safe to
+    assume everywhere, but safe here as an identity-key fold: it only
+    changes which headings are treated as the SAME work, never the stored
+    heading text itself (the raw `title` this function receives is what
+    still gets displayed).
     """
-    core = HONORIFIC_RE.sub("", clean_text(title))
+    core = HONORIFIC_RE.sub("", clean_text(title)).replace("ळ", "ल")
     return re.sub(r"\s+", "", core).strip(" ।॥:-")
+
+
+def strip_grantha_prefix(key: str, grantha_title: str) -> str:
+    """Drop a leading self-reference to the grantha's own title from an
+    already-normalised layer key.
+
+    A commentary heading sometimes repeats the base work's name before its
+    own — "न्यायसुधापरिमळ" for a Nyāyasudhā sub-commentary the site
+    elsewhere just calls "परिमळ" — which, left alone, slugs to a second
+    folder for the same work (`layer_key` alone cannot fix this: it
+    normalises ONE heading at a time and has no notion of "this corpus's
+    own grantha title"). Only strips when the prefix is a proper prefix
+    (something remains after it) so a heading that IS just the grantha's
+    own title, verbatim, is left alone rather than emptied out.
+    """
+    grantha_key = layer_key(grantha_title or "")
+    if grantha_key and key.startswith(grantha_key) and len(key) > len(grantha_key):
+        return key[len(grantha_key):]
+    return key
 
 
 def split_attribution(title: str) -> tuple[str, str]:
