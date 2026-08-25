@@ -2,7 +2,7 @@
 // js/audio.js
 // Maps to F-004 (Audio Engine) & F-013 (Offline Cache)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['audio.js'] = 'v3.0 (Speed memory, resume, progress, swipe nav, long-press word lookup)';
+window.DGE_VERSIONS['audio.js'] = 'v3.1 (Speed memory, resume, progress, swipe nav, long-press word lookup, zero-padded filenames)';
 
 function formatTime(s) { 
   if (isNaN(s)) return "0:00.000"; 
@@ -37,12 +37,21 @@ function dgeEffectiveArchiveBase() {
   return (typeof window.dgeApplyAudioBaseUrlOverride === 'function') ? window.dgeApplyAudioBaseUrlOverride(raw) : raw;
 }
 
+// Zero-pads the shloka number in audio filenames when a grantha opts in via
+// stotraData.metadata.fileNumberWidth (e.g. 2 -> "01", "02", ... "55").
+// Absent/0 leaves ids unpadded, preserving existing works' filenames as-is.
+function dgeAudioFileId(id) {
+  const width = stotraData && stotraData.metadata && stotraData.metadata.fileNumberWidth;
+  return width ? String(id).padStart(width, '0') : String(id);
+}
+
 async function resolveAudioSrc(id) {
   if (!stotraData || !stotraData.metadata) return "";
 
   const base = dgeEffectiveArchiveBase();
-  const primary = `${base}${stotraData.metadata.filePrefix}${id}${stotraData.metadata.fileExtension}`;
-  const alt = `${base}${stotraData.metadata.filePrefix}${id}%E2%80%8B${stotraData.metadata.fileExtension}`;
+  const fid = dgeAudioFileId(id);
+  const primary = `${base}${stotraData.metadata.filePrefix}${fid}${stotraData.metadata.fileExtension}`;
+  const alt = `${base}${stotraData.metadata.filePrefix}${fid}%E2%80%8B${stotraData.metadata.fileExtension}`;
   
   if ('caches' in window) {
     try {
@@ -363,8 +372,9 @@ async function cacheAllAudio(btn) {
   async function worker() {
     while (queue.length) {
       const i = queue.shift();
-      const primary = `${base}${stotraData.metadata.filePrefix}${i}${stotraData.metadata.fileExtension}`;
-      const alt = `${base}${stotraData.metadata.filePrefix}${i}%E2%80%8B${stotraData.metadata.fileExtension}`;
+      const fid = dgeAudioFileId(i);
+      const primary = `${base}${stotraData.metadata.filePrefix}${fid}${stotraData.metadata.fileExtension}`;
+      const alt = `${base}${stotraData.metadata.filePrefix}${fid}%E2%80%8B${stotraData.metadata.fileExtension}`;
       try {
         let res = await fetch(primary);
         if (!res.ok) res = await fetch(alt);
@@ -429,7 +439,7 @@ if (currentAudio) {
     }
     
     audioRetryDone = true;
-    currentAudio.src = `${dgeEffectiveArchiveBase()}${stotraData.metadata.filePrefix}${activeId}%E2%80%8B${stotraData.metadata.fileExtension}`;
+    currentAudio.src = `${dgeEffectiveArchiveBase()}${stotraData.metadata.filePrefix}${dgeAudioFileId(activeId)}%E2%80%8B${stotraData.metadata.fileExtension}`;
     currentAudio.load();
     currentAudio.play().then(() => { 
       isPlaying = true; 

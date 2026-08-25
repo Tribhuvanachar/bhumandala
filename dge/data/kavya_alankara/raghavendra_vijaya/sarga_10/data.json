@@ -13,7 +13,8 @@
    "gemini_anvaya": "AI Anvaya (Gemini, unreviewed)",
    "gemini_summary": "AI Summary (Gemini, unreviewed)"
   },
-  "colophon": "इति दशमस्सर्गः"
+  "colophon": "इति दशमस्सर्गः",
+  "fileNumberWidth": 2
  },
  "shlokas": {
   "1": {

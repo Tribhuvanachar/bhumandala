@@ -2,7 +2,7 @@
 // Maps to F-009: Snippets — capture, save, play, download and share
 // trimmed audio segments of a shloka.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['snippets.js'] = 'v2.2 (Alt-filename fallback, real 404 fix)';
+window.DGE_VERSIONS['snippets.js'] = 'v2.3 (Alt-filename fallback, real 404 fix, zero-padded filenames)';
 
 window.playSnippet = async function(id, start, end) {
     if (typeof closeModal === 'function') closeModal('actionsSheetModal');
@@ -105,8 +105,9 @@ function dgeGetAudioContext() {
 // requests hit the cache instead of re-discovering which variant works.
 async function dgeFetchAudioBlob(id) {
     if (!stotraData || !stotraData.metadata) throw new Error('No stotra data loaded');
-    const primary = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${id}${stotraData.metadata.fileExtension}`;
-    const alt = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${id}%E2%80%8B${stotraData.metadata.fileExtension}`;
+    const fid = typeof dgeAudioFileId === 'function' ? dgeAudioFileId(id) : id;
+    const primary = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${fid}${stotraData.metadata.fileExtension}`;
+    const alt = `${stotraData.metadata.archiveBaseUrl}${stotraData.metadata.filePrefix}${fid}%E2%80%8B${stotraData.metadata.fileExtension}`;
 
     if ('caches' in window && typeof AUDIO_CACHE_NAME !== 'undefined') {
         try {

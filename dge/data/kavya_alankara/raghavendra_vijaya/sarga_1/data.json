@@ -4,7 +4,7 @@
     "author": "Narayana",
     "stotraCode": "sarga_1",
     "archiveBaseUrl": "https://archive.org/download/rgv_audio/",
-    "filePrefix": "rv1.",
+    "filePrefix": "rv01.",
     "fileExtension": ".mp3",
     "totalShlokas": 42,
     "availableCommentaries": {
@@ -13,7 +13,8 @@
       "gemini_anvaya": "AI Anvaya (Gemini, unreviewed)",
       "gemini_summary": "AI Summary (Gemini, unreviewed)"
     },
-    "colophon": "इति प्रथमसर्गः"
+    "colophon": "इति प्रथमसर्गः",
+    "fileNumberWidth": 2
   },
   "shlokas": {
     "1": {

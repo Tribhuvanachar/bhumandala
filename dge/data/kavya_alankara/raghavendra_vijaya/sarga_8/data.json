@@ -4,7 +4,7 @@
   "author": "Narayana",
   "stotraCode": "sarga_8",
   "archiveBaseUrl": "https://archive.org/download/rgv_audio/",
-  "filePrefix": "rv8.",
+  "filePrefix": "rv08.",
   "fileExtension": ".mp3",
   "totalShlokas": 78,
   "availableCommentaries": {
@@ -13,7 +13,8 @@
    "gemini_anvaya": "AI Anvaya (Gemini, unreviewed)",
    "gemini_summary": "AI Summary (Gemini, unreviewed)"
   },
-  "colophon": "इति अष्टमस्सर्गः"
+  "colophon": "इति अष्टमस्सर्गः",
+  "fileNumberWidth": 2
  },
  "shlokas": {
   "1": {

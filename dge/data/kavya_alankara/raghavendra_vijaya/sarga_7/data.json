@@ -4,7 +4,7 @@
   "author": "Narayana",
   "stotraCode": "sarga_7",
   "archiveBaseUrl": "https://archive.org/download/rgv_audio/",
-  "filePrefix": "rv7.",
+  "filePrefix": "rv07.",
   "fileExtension": ".mp3",
   "totalShlokas": 49,
   "availableCommentaries": {
@@ -13,7 +13,8 @@
    "gemini_anvaya": "AI Anvaya (Gemini, unreviewed)",
    "gemini_summary": "AI Summary (Gemini, unreviewed)"
   },
-  "colophon": "इति सप्तमस्सर्गः"
+  "colophon": "इति सप्तमस्सर्गः",
+  "fileNumberWidth": 2
  },
  "shlokas": {
   "1": {

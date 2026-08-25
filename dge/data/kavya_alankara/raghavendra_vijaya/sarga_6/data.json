@@ -4,7 +4,7 @@
   "author": "Narayana",
   "stotraCode": "sarga_6",
   "archiveBaseUrl": "https://archive.org/download/rgv_audio/",
-  "filePrefix": "rv6.",
+  "filePrefix": "rv06.",
   "fileExtension": ".mp3",
   "totalShlokas": 76,
   "availableCommentaries": {
@@ -13,7 +13,8 @@
    "gemini_anvaya": "AI Anvaya (Gemini, unreviewed)",
    "gemini_summary": "AI Summary (Gemini, unreviewed)"
   },
-  "colophon": "इति षष्ठस्सर्गः"
+  "colophon": "इति षष्ठस्सर्गः",
+  "fileNumberWidth": 2
  },
  "shlokas": {
   "1": {
