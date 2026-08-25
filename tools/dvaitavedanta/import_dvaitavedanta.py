@@ -416,13 +416,18 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
                     folder = (f"tika_{slugify_devanagari(author_name(attributed_to))}"
                               if attributed_to else
                               slugify_devanagari(strip_grantha_prefix(layer_key(title), grantha.get("title"))) or f"layer_{position + 1}")
-                    if position == 0 and folder not in ("mula",):
-                        schema = defaults["mula_schema"]
-                        folder = folder if folder else "mula"
-                    else:
-                        schema = defaults["tika_schema"]
-                        if not folder.startswith("tika_"):
-                            folder = f"tika_{folder}"
+                    # An unmapped heading is ALWAYS a commentary, position 0
+                    # included: the real mula layer (h2.shloka) is titled
+                    # "मूलम्" and exact-maps above, so an unmapped layer sits
+                    # at position 0 only when that mula was dropped (a
+                    # structural heading) or absent — and giving it the mula
+                    # schema in a bare unprefixed folder (the old branch here)
+                    # is how nyaya_vivarana got a schema-less "bhavabodha/"
+                    # twin of its real tika_bhavabodha/ on the 25 Aug cache
+                    # replay. The tika treatment merges it there instead.
+                    schema = defaults["tika_schema"]
+                    if not folder.startswith("tika_"):
+                        folder = f"tika_{folder}"
                 # An unmapped commentary still carries its own "composed by"
                 # line on the page, so it is attributed rather than anonymous.
                 config = {

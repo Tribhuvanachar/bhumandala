@@ -3941,6 +3941,13 @@
    "mulaItems": 8,
    "layers": [
     {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 3,
+     "matched": 3
+    },
+    {
      "folder": "tika_tatvamanjari",
      "label": "तत्वमञ्जरी",
      "author": "",
@@ -3954,6 +3961,13 @@
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
    "mulaItems": 227,
    "layers": [
+    {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 224,
+     "matched": 224
+    },
     {
      "folder": "tika_bhavadipa",
      "label": "भावदीपः",
@@ -4172,6 +4186,13 @@
    "mulaItems": 47,
    "layers": [
     {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 38,
+     "matched": 38
+    },
+    {
      "folder": "tika_bhavapradipa",
      "label": "भावप्रदीप",
      "author": "भगवन्तरायकृतः",
@@ -4188,9 +4209,16 @@
     {
      "folder": "tika_bhavabodhatippani",
      "label": "भावबोधटिप्पणी",
-     "author": "सर्वान्तस्थं सुपूर्णं प्रकृतिपतिमजं",
+     "author": "",
      "items": 170,
      "matched": 170
+    },
+    {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 169,
+     "matched": 169
     },
     {
      "folder": "tika_khandartha",
@@ -4206,6 +4234,13 @@
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
    "mulaItems": 150,
    "layers": [
+    {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 131,
+     "matched": 131
+    },
     {
      "folder": "tika_padarthakaumudi",
      "label": "पदार्थकौमुदी",
@@ -4223,7 +4258,7 @@
     {
      "folder": "tika_chandogyopanishatkhandartha",
      "label": "छान्दोग्योपनिषत्खण्डार्थः",
-     "author": "",
+     "author": "( मुख्यप्राणरूपप्रतीके देवकृताध्यात्मभगवदुपासना)",
      "items": 8,
      "matched": 8
     }
@@ -4240,6 +4275,13 @@
      "author": "श्रीजयतीर्थः",
      "items": 19,
      "matched": 19
+    },
+    {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 18,
+     "matched": 18
     },
     {
      "folder": "tika_prakashika",
@@ -4289,6 +4331,13 @@
      "author": "",
      "items": 51,
      "matched": 51
+    },
+    {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 49,
+     "matched": 49
     },
     {
      "folder": "tika_vedeshatirtha",
@@ -4361,6 +4410,13 @@
      "matched": 8
     },
     {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 7,
+     "matched": 7
+    },
+    {
      "folder": "tika_shrivaradatirthabhikshu",
      "label": "श्रीवरदतीर्थभिक्षुविरचिताटीका",
      "author": "श्रीवरदतीर्थभिक्षु",
@@ -4374,6 +4430,13 @@
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
    "mulaItems": 30,
    "layers": [
+    {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 17,
+     "matched": 17
+    },
     {
      "folder": "tika_prakashika",
      "label": "श्रीवादिराजीयाप्रकाशिका",
@@ -4422,6 +4485,13 @@
      "author": "",
      "items": 23,
      "matched": 23
+    },
+    {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 22,
+     "matched": 22
     },
     {
      "folder": "tika_prakashika",
@@ -4515,6 +4585,13 @@
      "matched": 17
     },
     {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 14,
+     "matched": 14
+    },
+    {
      "folder": "tika_shrisatyaprajnatirtha",
      "label": "श्रीसत्यप्रज्ञतीर्थविरचिताषट्प्रश्नभाष…",
      "author": "श्रीसत्यप्रज्ञतीर्थ",
@@ -4528,6 +4605,13 @@
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
    "mulaItems": 49,
    "layers": [
+    {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 37,
+     "matched": 37
+    },
     {
      "folder": "tika_padarthadipika",
      "label": "पदार्थदीपिका",

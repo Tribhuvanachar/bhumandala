@@ -1,0 +1,95 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+ "source_url": "https://dvaitavedanta.in/category-details/14989/565/satara/4-brah/malma/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_15015",
+   "reference": "सूत्रप्रस्थानम् > 4. ब्रह्मसूत्राणुभाष्यम् > तत्वमञ्जरी > द्वितीयोऽध्यायः > द्वितीयाध्यायस्य प्रथमः पादः",
+   "section": "द्वितीयोऽध्यायः",
+   "unit_title": "द्वितीयाध्यायस्य प्रथमः पादः",
+   "sanskrit_text": "श्रौतस्मृतिविरुद्धत्वात्‌ स्मृतयो न गुणान् हरेः।\nनिषेद्धुं शक्नुयुर्वेदा नित्यत्वान्मानमुत्तमम्‌॥ १॥\nदेवतावचनादापो वदन्तीत्यादिकं वचः ।\nनायुक्तवाद्यसन्नैव कारणं दृश्यते क्वचित् ॥ २॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "4. ब्रह्मसूत्राणुभाष्यम्",
+    "तत्वमञ्जरी",
+    "द्वितीयोऽध्यायः",
+    "द्वितीयाध्यायस्य प्रथमः पादः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14994/565/satara/4-brah/tatava/thavat",
+    "content_id": 14994,
+    "work_id": 565,
+    "layer": "भाष्यम्",
+    "anchor": "article15015",
+    "fetched": "2026-08-25"
+   },
+   "tika_title": "भाष्यम्"
+  },
+  {
+   "id": "DV_15019",
+   "reference": "सूत्रप्रस्थानम् > 4. ब्रह्मसूत्राणुभाष्यम् > तत्वमञ्जरी > तृतीयोऽध्यायः > तृतीयाध्यायस्य प्रथमः पादः",
+   "section": "तृतीयोऽध्यायः",
+   "unit_title": "तृतीयाध्यायस्य प्रथमः पादः",
+   "sanskrit_text": "शुभेन कर्मणा स्वर्गं निरयं च विकर्मणा।\nमिथ्याज्ञानेन च तमो ज्ञानेनैव परं पदम्‌॥ १॥\nयाति तस्माद्विरक्तः सन्‌ ज्ञानमेव समाश्रयेत्‌।\nसर्वावस्थाप्रेरकश्च सर्वरूपेष्वभेदवान्‌॥ २॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "4. ब्रह्मसूत्राणुभाष्यम्",
+    "तत्वमञ्जरी",
+    "तृतीयोऽध्यायः",
+    "तृतीयाध्यायस्य प्रथमः पादः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14995/565/satara/4-brah/tatava/tataya",
+    "content_id": 14995,
+    "work_id": 565,
+    "layer": "भाष्यम्",
+    "anchor": "article15019",
+    "fetched": "2026-08-25"
+   },
+   "tika_title": "भाष्यम्"
+  },
+  {
+   "id": "DV_15023",
+   "reference": "सूत्रप्रस्थानम् > 4. ब्रह्मसूत्राणुभाष्यम् > तत्वमञ्जरी > चतुर्थोऽध्यायः > चतुर्थाध्यायस्य प्रथमः पादः",
+   "section": "चतुर्थोऽध्यायः",
+   "unit_title": "चतुर्थाध्यायस्य प्रथमः पादः",
+   "sanskrit_text": "विष्णुर्ब्रह्म तथाऽदातेत्येवं नित्यमुपासनम्‌।\nकार्यमापद्यपि ब्रह्म तेन यात्यपरोक्षताम्‌॥ १॥\nप्रारब्धकर्मणोऽन्यस्य ज्ञानादेव परिक्षयः।\nअनिष्टस्योभयस्यापि सर्वस्यान्यस्य भोगतः॥ २॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "सूत्रप्रस्थानम्",
+    "4. ब्रह्मसूत्राणुभाष्यम्",
+    "तत्वमञ्जरी",
+    "चतुर्थोऽध्यायः",
+    "चतुर्थाध्यायस्य प्रथमः पादः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14996/565/satara/4-brah/tatava/catara",
+    "content_id": 14996,
+    "work_id": 565,
+    "layer": "भाष्यम्",
+    "anchor": "article15023",
+    "fetched": "2026-08-25"
+   },
+   "tika_title": "भाष्यम्"
+  }
+ ]
+}

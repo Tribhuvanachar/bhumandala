@@ -4526,3 +4526,60 @@ nyayamrita, pramana_paddhati, … down to omkara_vada 1/1); the sole
 exception is nyaya_sudha's two known index/heading pages (part above).
 DGE's DvaitaVedanta node coverage is now independently confirmed
 everywhere the mirror reaches.
+
+## Stage-1 re-crawl landed: sutra + upanishad prasthanas, Madhva's bhashyas recovered (25 Aug 2026, part 11)
+
+The part-9 parser fixes applied at scale, live from this session (1,013
+pages, 3s delay, 0 failures; all pages retained in the local session
+cache, replays cost nothing). Both sections re-imported end-to-end:
+
+- **12 new `tika_bhashya/` folders — Madhva's own bhāṣya text, previously
+  absent from the corpus entirely** (the part-8 audit's worst finding):
+  brahma_sutra_bhashya (224 items), brihadaranyaka (169), chandogya (131),
+  taittiriya (36), aitareya (38), katha (36), mundaka, mandukya (17),
+  shatprashna (14), kena (7), ishavasya, anubhashya (3) — 244,453 chars of
+  recovered bhāṣya. Registered via `audit_library.py --fix` (+12 library
+  entries, +12 taxonomy nodes) and picked up by the regenerated
+  `layer_manifest.json`, so the stitched reader advertises भाष्यम् with no
+  further wiring — verified in headless Chromium on brahma_sutra_bhashya:
+  the sūtra card shows tabs All | तत्त्वप्रकाशिका | भाष्यम्, bhāṣya text
+  rendering. Mūla layers across both sections also grew to full text
+  (whole grantha totals: pre-existing folders at 115% of old text;
+  mundakopanishadbhashyam more than doubled).
+- **Verified conservatively before committing, and the checks caught two
+  real parse artifacts** (fixed, replayed from cache, re-verified):
+  1. This container lacked `indic_transliteration`, so the first write
+     minted `ch`-variant duplicate folders (tika_abhinavachandrika vs the
+     landed tika_abhinavacandrika). Installed the real transliterator and
+     replayed — slug parity restored. Lesson recorded: the importer's
+     fallback transliterator produces DIFFERENT slugs; never run a write
+     import without the package (a future guard could refuse --write when
+     `_HAVE_TRANSLIT` is false).
+  2. `ATTRIBUTION_RE` matched कृत inside "प्रकृत्यधिकरणम्", bypassing the
+     Anuvyākhyāna single_work fold (minted a fake tika_pra folder) — fixed
+     with a negative lookahead `(?![ि्ी])`; and an unmapped position-0
+     heading minted a bare unprefixed folder with mula schema
+     (nyaya_vivarana got a "bhavabodha/" twin of its tika_bhavabodha/) —
+     that branch now takes the normal tika path, merging it there.
+- **Stability guarantees checked, not assumed**: every pre-existing folder
+  reproduced its exact item count; anuvyakhyana's 88 folded ids are the
+  IDENTICAL set (zero drift — though text is re-chunked across the -N
+  family, so anything referencing a specific -N suffix by position would
+  shift; nothing does today); a corpus-wide text-conservation sweep found
+  every old chunk's content present in the new tree (one folder that
+  "shrank" 2.4% was re-segmentation into the new bhāṣya/mūla layers on the
+  same page, confirmed by parsing that page directly).
+- `verify_extract.py --strict`: 0 errors (37 warnings, the accepted
+  no-matching-mula class). `validate_data.py`: 0 errors. 208 tests pass.
+- Also observed: the site interleaves a SECOND mantra group mid-article on
+  some upanishad pages (article16126's "एतज्जानथ…" sits between two
+  commentary runs); it stays inside the preceding commentary's text rather
+  than mūla — text preserved, segmentation imperfect. A refinement for the
+  quote-split vocabulary (उपनिषत् h1 groups between h3 runs), not urgent.
+
+**Remaining sections** (gita, dasha_prakarana, purana, later_acharyas —
+the last includes nyaya_sudha, whose re-crawl also activates the part-10
+अनुव्याख्यानम् quote-split): ~4,600 pages. Next step is the
+`extract-dvaitavedanta.yml` workflow per section (dry_run=false,
+open_pr=true) now that main carries all the parser fixes — or further
+staged local runs like this one.

@@ -6532,6 +6532,14 @@
       }
     },
     {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anubhashya/tika_bhashya/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्राणुभाष्यम् — tika_bhashya",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/14989/565/satara/4-brah/malma/parath"
+      }
+    },
+    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anubhashya/tika_tatvamanjari/data.json",
       "populated": true,
       "title": "ब्रह्मसूत्राणुभाष्यम् — tika_tatvamanjari",
@@ -6572,6 +6580,14 @@
       "populated": true,
       "title": "ब्रह्मसूत्रभाष्यम् — tika_bhamati",
       "addedAt": "2026-08-24",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/1142/562/satara/1-brah/parath/parath/jajani"
+      }
+    },
+    {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhashya/data.json",
+      "populated": true,
+      "title": "ब्रह्मसूत्रभाष्यम् — tika_bhashya",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/1142/562/satara/1-brah/parath/parath/jajani"
       }
@@ -6847,6 +6863,14 @@
       }
     },
     {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/aitareyopanishad_bhashya/tika_bhashya/data.json",
+      "populated": true,
+      "title": "ऐतरेयोपनिषद्भाष्यम् — tika_bhashya",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/14224/931/upanas/6-aita/malma/thavat/parath"
+      }
+    },
+    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/aitareyopanishad_bhashya/tika_bhavapradipa/data.json",
       "populated": true,
       "title": "ऐतरेयोपनिषद्भाष्यम् — tika_bhavapradipa",
@@ -6860,6 +6884,14 @@
       "populated": true,
       "title": "बृहदारण्यकोपनिषद्भाष्यम् — mula",
       "addedAt": "2026-08-24",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/14242/933/upanas/8-bhat/malma/tataya/ashava"
+      }
+    },
+    {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_bhashya/data.json",
+      "populated": true,
+      "title": "बृहदारण्यकोपनिषद्भाष्यम् — tika_bhashya",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/14242/933/upanas/8-bhat/malma/tataya/ashava"
       }
@@ -6887,6 +6919,14 @@
       "populated": true,
       "title": "छान्दोग्योपनिषद्भाष्यम् — mula",
       "addedAt": "2026-08-24",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/14295/934/upanas/9-chha/malma/parath"
+      }
+    },
+    {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/chandogyopanishad_bhashya/tika_bhashya/data.json",
+      "populated": true,
+      "title": "छान्दोग्योपनिषद्भाष्यम् — tika_bhashya",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/14295/934/upanas/9-chha/malma/parath"
       }
@@ -6928,6 +6968,14 @@
       }
     },
     {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/ishavasyopanishad_bhashya/tika_bhashya/data.json",
+      "populated": true,
+      "title": "ईशावास्योपनिषद्भाष्यम् — tika_bhashya",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/14152/925/upanas/1-iish/malma"
+      }
+    },
+    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/ishavasyopanishad_bhashya/tika_jayatirtha/data.json",
       "populated": true,
       "title": "ईशावास्योपनिषद्भाष्यम् — tika_jayatirtha",
@@ -6950,6 +6998,14 @@
       "populated": true,
       "title": "कठोपनिषद्भाष्यम् — mula",
       "addedAt": "2026-08-24",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/14165/926/upanas/2-kath/malma/parath/parath"
+      }
+    },
+    {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kathopanishad_bhashya/tika_bhashya/data.json",
+      "populated": true,
+      "title": "कठोपनिषद्भाष्यम् — tika_bhashya",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/14165/926/upanas/2-kath/malma/parath/parath"
       }
@@ -7036,6 +7092,14 @@
       }
     },
     {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kenopanishad_bhashya/tika_bhashya/data.json",
+      "populated": true,
+      "title": "तलवकारोपनिषद्भाष्यम् — tika_bhashya",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/14303/935/upanas/10-tal/malma/parath"
+      }
+    },
+    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kenopanishad_bhashya/tika_prakashika/data.json",
       "populated": true,
       "title": "तलवकारोपनिषद्भाष्यम् — tika_prakashika",
@@ -7108,6 +7172,14 @@
       }
     },
     {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_bhashya/data.json",
+      "populated": true,
+      "title": "माण्डूक्योपनिषद्भाष्यम् — tika_bhashya",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/15955/930/upanas/5-mana/malma/thavat"
+      }
+    },
+    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_padarthadipika/data.json",
       "populated": true,
       "title": "माण्डूक्योपनिषद्भाष्यम् — tika_padarthadipika",
@@ -7153,6 +7225,14 @@
       }
     },
     {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mundakopanishadbhashyam/tika_bhashya/data.json",
+      "populated": true,
+      "title": "मुण्डकोपनिषद्भाष्यम् — tika_bhashya",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/15941/928/upanas/3-mana/malma/thavat"
+      }
+    },
+    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mundakopanishadbhashyam/tika_padarthadipika/data.json",
       "populated": true,
       "title": "मुण्डकोपनिषद्भाष्यम् — tika_padarthadipika",
@@ -7193,6 +7273,14 @@
       "populated": true,
       "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_anantabhatta",
       "addedAt": "2026-08-24",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/15964/929/upanas/4-shha/malma/parath"
+      }
+    },
+    {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_bhashya/data.json",
+      "populated": true,
+      "title": "षट्प्रश्नोपनिषद्भाष्यम् — tika_bhashya",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/15964/929/upanas/4-shha/malma/parath"
       }
@@ -7301,6 +7389,14 @@
       "populated": true,
       "title": "तैत्तिरीयोपनिषद्भाष्यम् — mula",
       "addedAt": "2026-08-24",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/14233/932/upanas/7-tata/malma/shakas"
+      }
+    },
+    {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_bhashya/data.json",
+      "populated": true,
+      "title": "तैत्तिरीयोपनिषद्भाष्यम् — tika_bhashya",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/14233/932/upanas/7-tata/malma/shakas"
       }

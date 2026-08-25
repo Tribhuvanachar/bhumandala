@@ -90,7 +90,13 @@ def is_structural_heading(text: str) -> bool:
 # A short bold line directly before an <h3> attributes the commentary that
 # follows ("श्रीराघवेन्द्रतीर्थयतिकृतः"). Topic labels sit in the same position
 # but carry no attribution verb, so match the verb rather than the position.
-ATTRIBUTION_RE = re.compile(r"(कृत|विरचित|प्रणीत|प्रोक्त|विरचयाम्)")
+# The negative lookahead keeps the verb from matching INSIDE an unrelated
+# stem: "प्रकृत्यधिकरणम्" (the प्रकृति-adhikaraṇa heading) contains कृत
+# followed by ्, and without the guard it parsed as author "प्र" + work —
+# which bypassed the single_work mula-fold on Anuvyākhyāna and minted a
+# fake tika_pra folder (found on the 25 Aug cache replay, node DV_14492).
+# Genuine attributions inflect as कृतः/कृता/कृतम्/विरचिता…, never कृत्/कृति.
+ATTRIBUTION_RE = re.compile(r"(कृत|विरचित|प्रणीत|प्रोक्त|विरचयाम्)(?![ि्ी])")
 ATTRIBUTION_MAX_CHARS = 90
 # The same commentary is headed both "श्री कथालक्षणटीकाभावदीपः" and
 # "कथालक्षणटीकाभावदीपः" on one page; without this they merge as two layers.
