@@ -11971,7 +11971,7 @@
     },
     {
       "path": "dge/data/smriti_dharma/dharmashastra/mitakshara/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Mitakshara"
     },
     {
