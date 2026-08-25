@@ -114,6 +114,25 @@ KARMAVIJAYA_LEAF = page("""
   </div>
 """)
 
+# The real anuvyakhyana shape (content_id 14473, confirmed against the live
+# site 25 Aug): one pada page's h2.shloka mula, followed by several h3
+# ADHIKARANA-NAMED headings with no attribution verb at all -- each one is
+# more of Madhva's own Anuvyakhyana verses, grouped by section, not a
+# different commentator. A real attributed heading (a genuine quoted
+# sub-commentary) is included too, to prove that path still gets its own
+# tika folder and isn't swept into mula by the single_work fix.
+ANUVYAKHYANA_LEAF = page("""
+  <div id="article14473">
+    <h2 class="shloka">प्रथमः पादः ।</h2>
+    <div id="dynamicContent" class="details">
+      <h3>जिज्ञासाधिकरणम्</h3>
+      <p>ओतत्ववाची ह्योङ्कारो वक्त्यसौ तद्गुणोतताम् ॥</p>
+      <h3>श्रीजयतीर्थविरचिता न्यायसुधा</h3>
+      <p>अत्र जिज्ञासाशब्दार्थो विविच्यते ।</p>
+    </div>
+  </div>
+""")
+
 
 def prime(cache_dir, url, html):
     os.makedirs(cache_dir, exist_ok=True)
@@ -415,6 +434,46 @@ def main():
                 km.get("default_author") != "श्रीमदानन्दतीर्थभगवत्पादाचार्यः", km.get("default_author"))
         finally:
             shutil.rmtree(ka_tmp, ignore_errors=True)
+
+        print()
+        print("single_work: true folds unattributed adhikarana headings into mula, "
+              "not a fake tika folder per heading")
+        av_tmp = tempfile.mkdtemp(prefix="dvanuvy_")
+        try:
+            av_cache = os.path.join(av_tmp, "cache")
+            av_out = os.path.join(av_tmp, "out")
+            prime(av_cache, BASE + "/category-details/14473/563/satara/2-anav/parath/parath",
+                  ANUVYAKHYANA_LEAF)
+            rc5 = I.main([
+                "--config", os.path.join(HERE, "dv_sources.json"),
+                "--out", av_out, "--cache", av_cache,
+                "--granthas", "anuvyakhyana",
+                "--delay", "0", "--write",
+                "--fetch-date", "2026-08-15",
+                "--summary-file", "",
+            ])
+            failures += not check("exit code 0", rc5 == 0, rc5)
+            av_grantha = os.path.join(av_out, "sutra_prasthana", "anuvyakhyana")
+            emitted_av = sorted(os.listdir(av_grantha)) if os.path.isdir(av_grantha) else []
+            failures += not check(
+                "no tika_jijnasadhikaranam folder minted for the unattributed heading",
+                "tika_jijnasadhikaranam" not in emitted_av, emitted_av)
+            failures += not check(
+                "the real attributed sub-commentary still gets its own tika folder",
+                any(e.startswith("tika_") for e in emitted_av), emitted_av)
+            av_mula_path = os.path.join(av_grantha, "mula", "data.json")
+            with open(av_mula_path, encoding="utf-8") as handle:
+                av_mula = json.load(handle)
+            av_texts = "\n".join(i["sanskrit_text"] for i in av_mula["items"])
+            failures += not check(
+                "the adhikarana's own verse text landed inside mula",
+                "ओतत्ववाची" in av_texts, av_texts[:200])
+            failures += not check(
+                "mula still has more than one item (shloka + folded adhikarana, "
+                "disambiguated ids, not silently overwritten)",
+                len(av_mula["items"]) >= 2, len(av_mula["items"]))
+        finally:
+            shutil.rmtree(av_tmp, ignore_errors=True)
 
         print()
         if failures:

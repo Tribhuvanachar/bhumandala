@@ -268,7 +268,8 @@
           "title": "अनुव्याख्यानम्",
           "seed": "/category-details/14473/563/satara/2-anav/parath/parath",
           "content_id": 14473,
-          "ancestor_id": 563
+          "ancestor_id": 563,
+          "single_work": true
         },
         {
           "slug": "nyaya_vivarana",

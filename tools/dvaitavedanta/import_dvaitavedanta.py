@@ -387,23 +387,42 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
                 # work name, so slugging the whole title would just produce
                 # near-identical folders.
                 attributed_to, _work = split_attribution(title)
-                # Slug from the NORMALISED key, not the raw heading, or a
-                # stray space produces a second folder for the same work.
-                # strip_grantha_prefix additionally drops a self-referential
-                # repeat of the grantha's own title (see its own docstring --
-                # found via nyaya_sudha's Parimaḷa sub-commentary splitting
-                # across folders depending on whether the heading repeated
-                # "न्यायसुधा" or not).
-                folder = (f"tika_{slugify_devanagari(author_name(attributed_to))}"
-                          if attributed_to else
-                          slugify_devanagari(strip_grantha_prefix(layer_key(title), grantha.get("title"))) or f"layer_{position + 1}")
-                if position == 0 and folder not in ("mula",):
-                    schema = defaults["mula_schema"]
-                    folder = folder if folder else "mula"
+                # dv_sources.json's "single_work": true marks a grantha that
+                # IS the mula (a metrical treatise with no separate known
+                # commentator crawled here), whose page nonetheless splits
+                # into several <h3> blocks per adhikarana/topic. Without this,
+                # every such heading auto-slugged its own "tika_<name>"
+                # folder as if it were a distinct sub-commentary -- found on
+                # Anuvyakhyana, where 68 folders each held one adhikarana's
+                # worth of Madhva's OWN verses, not a different author's
+                # commentary (confirmed: every one of those folders' items
+                # share the SAME id as a real Anuvyakhyana mula verse, and
+                # their author field was always empty/garbage because there
+                # never was a second author to find). An UNATTRIBUTED
+                # position>0 heading on such a grantha is still the grantha's
+                # own text, so it folds into "mula" rather than minting a
+                # folder; an attributed heading (a real quoted commentator)
+                # still gets its own tika folder as before.
+                if grantha.get("single_work") and not attributed_to:
+                    folder, schema = "mula", defaults["mula_schema"]
                 else:
-                    schema = defaults["tika_schema"]
-                    if not folder.startswith("tika_"):
-                        folder = f"tika_{folder}"
+                    # Slug from the NORMALISED key, not the raw heading, or a
+                    # stray space produces a second folder for the same work.
+                    # strip_grantha_prefix additionally drops a self-referential
+                    # repeat of the grantha's own title (see its own docstring --
+                    # found via nyaya_sudha's Parimaḷa sub-commentary splitting
+                    # across folders depending on whether the heading repeated
+                    # "न्यायसुधा" or not).
+                    folder = (f"tika_{slugify_devanagari(author_name(attributed_to))}"
+                              if attributed_to else
+                              slugify_devanagari(strip_grantha_prefix(layer_key(title), grantha.get("title"))) or f"layer_{position + 1}")
+                    if position == 0 and folder not in ("mula",):
+                        schema = defaults["mula_schema"]
+                        folder = folder if folder else "mula"
+                    else:
+                        schema = defaults["tika_schema"]
+                        if not folder.startswith("tika_"):
+                            folder = f"tika_{folder}"
                 # An unmapped commentary still carries its own "composed by"
                 # line on the page, so it is attributed rather than anonymous.
                 config = {
@@ -632,6 +651,7 @@ def select_granthas(config, sections_filter, granthas_filter):
                 "content_id": grantha.get("content_id"),
                 "ancestor_id": grantha.get("ancestor_id"),
                 "acharya": grantha.get("acharya"),
+                "single_work": grantha.get("single_work"),
             })
     return selected
 
