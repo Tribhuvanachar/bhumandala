@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.21 (DGE_LEGACY_SLUGS: redirects for the nitishastra/ -> shastra/niti_shastra/ consolidation -- two independently-built, uncoordinated copies of the same section. On top of v3.20\'s layer-stitching)';
+window.DGE_VERSIONS['core.js'] = 'v3.22 (DGE_LEGACY_SLUGS: redirect for shastra/subhashita -> shastra/niti_shastra/subhashita. On top of v3.21\'s nitishastra/ -> shastra/niti_shastra/ consolidation redirects)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -215,7 +215,12 @@ const DGE_LEGACY_SLUGS = {
   'nitishastra/chanakya_niti':      'shastra/niti_shastra/chanakya_niti',
   'nitishastra/chanakya_sutra':     'shastra/niti_shastra/chanakya_sutra',
   'nitishastra/kamandakiya_nitisara': 'shastra/niti_shastra/kamandakiya_nitisara',
-  'nitishastra':                    'shastra/niti_shastra'
+  'nitishastra':                    'shastra/niti_shastra',
+
+  // Subhashita placeholder moved from shastra/ directly to
+  // shastra/niti_shastra/ (25 Aug 2026) -- wisdom-verse anthologies belong
+  // alongside Chanakya Niti/Hitopadesha, not as a shastra/ sibling.
+  'shastra/subhashita':              'shastra/niti_shastra/subhashita'
 };
 
 window.dgeUpgradeLegacySlug = function (slug) {

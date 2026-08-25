@@ -11576,6 +11576,12 @@
       }
     },
     {
+      "path": "dge/data/shastra/niti_shastra/subhashita/data.json",
+      "populated": false,
+      "title": "Subhashita",
+      "addedAt": "2026-08-25"
+    },
+    {
       "path": "dge/data/shastra/ratna_pariksha/agastiya/data.json",
       "populated": true,
       "title": "Agastiya",
@@ -11604,12 +11610,6 @@
         "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Śyainikaśāstra",
         "licence": "CC-BY 4.0"
       }
-    },
-    {
-      "path": "dge/data/shastra/subhashita/data.json",
-      "populated": false,
-      "title": "Subhashita",
-      "addedAt": "2026-08-25"
     },
     {
       "path": "dge/data/smriti_dharma/dharmashastra/chaturvarga_chintamani/data.json",
