@@ -443,6 +443,51 @@ def main():
                           rec_u["layers"][0]["text"][:60])
 
     print()
+    print("I. quoted base text inside an <h3> run (live node 9360: the सुधा run"
+          " carries <h2>अनुव्याख्यानम्</h2> + Madhva's verse in strong+em paras)")
+    quote_page = f"""
+<html><body>
+{BREADCRUMB}
+<div class="row">{SIDEBAR}
+<div class="col-md-9">
+  <div id="article10243" class="lazy-1">
+    <h2 class="shloka">ॐ वृद्धिह्रासभाक्त्वमन्तर्भावादुभयसामञ्जस्यादेवम् ॐ</h2>
+    <div id="dynamicContent" class="details">
+      <p class="MsoPlainText"><strong><span>।। अथ वृद्धिह्रासाधिकरणम् ।।</span></strong></p>
+      <h3><strong><em><span>सुधा</span></em></strong></h3>
+      <p class="MsoPlainText"><span>यदर्थं भगवन्महिमाऽत्रोच्यते सा भक्तिः तारतम्येन तिष्ठतीति तत्र आह तद्भक्तीति ।</span></p>
+      <h2><strong><span>अनुव्याख्यानम्</span></strong></h2>
+      <p class="MsoPlainText"><strong><em><span>तद्भक्तितारतम्येन तारतम्यं विमुक्तिगम् ।</span></em></strong></p>
+      <p class="MsoPlainText"><strong><em><span>ब्रह्मादीनां च सर्वेषामानन्दादेर्यथाक्रमम् ।। ३२१२ ।।</span></em></strong></p>
+      <p class="MsoPlainText"><span>ब्रह्मादीनां चशब्दादस्मदादीनामित्येवं सर्वेषां यथाक्रमं तारतम्यं भवतीत्यर्थः ।</span></p>
+      <h3><strong><em><span>परिमळ</span></em></strong></h3>
+      <p class="MsoPlainText"><span>वृद्धिह्रासभाक्त्वमन्तर्भावात् ।। युक्तेरिति । सूत्रोक्तयुक्तेरित्यर्थः ।</span></p>
+    </div>
+  </div>
+</div></div>
+</body></html>
+"""
+    rec_q = P.parse_page(quote_page, url)
+    by_q = {l["title"]: l for l in rec_q["layers"]}
+    failures += not check("अनुव्याख्यानम् verse extracted as its own layer",
+                          "विमुक्तिगम्" in by_q.get("अनुव्याख्यानम्", {}).get("text", ""),
+                          sorted(by_q))
+    failures += not check("only the strong+em verse paras are in the quote layer",
+                          "चशब्दादस्मदादीनाम" not in by_q.get("अनुव्याख्यानम्", {}).get("text", ""))
+    sudha_text = by_q.get("सुधा", {}).get("text", "")
+    failures += not check("Jayatirtha's prose before AND after the verse stays in सुधा",
+                          "तद्भक्तीति" in sudha_text and "चशब्दादस्मदादीनाम" in sudha_text,
+                          sudha_text[:80])
+    failures += not check("the verse itself is NOT duplicated in सुधा",
+                          "विमुक्तिगम्" not in sudha_text, sudha_text[:120])
+    failures += not check("the following परिमळ h3 run is untouched",
+                          "सूत्रोक्तयुक्तेरित्यर्थः" in by_q.get("परिमळ", {}).get("text", ""),
+                          sorted(by_q))
+    failures += not check("a run without quote headings takes the unchanged path",
+                          by_q.get("परिमळ", {}).get("text", "").startswith("परिमळ")
+                          or "परिमळ" in by_q, sorted(by_q))
+
+    print()
     if failures:
         print(f"{failures} check(s) FAILED")
         return 1

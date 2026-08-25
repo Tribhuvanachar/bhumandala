@@ -4496,9 +4496,24 @@ pages and data rather than taken on faith:
   one word per line) is the SOURCE SITE's responsive-layout failure, not
   DGE's reader — no DGE action.
 
-Follow-ups queued from this: (1) split inline अनुव्याख्यानम् blocks out
+Follow-ups queued from this: ~~(1) split inline अनुव्याख्यानम् blocks out
 of tika_sudha into their own layer so the stitched reader shows verse +
-commentary per unit; (2) importer: also write `source.work_id` (and keep
-node-type/level when the sidebar provides them) so the numeric keys are
-first-class; (3) use the mirror's node lists to cross-validate the other
-works it covers.
+commentary per unit;~~ **(1) built at the PARSER level, same day** — a
+plain-text split of landed data turned out unreliable (only a minority of
+the 1,113 embedded blocks carry a ॥N॥ verse-number delimiter; many units
+quote unnumbered half-verses), but the live markup is precise: the quoted
+verse paragraphs are `<strong><em>` while Jayatīrtha's prose is plain.
+`dv_parse.py`'s new `_split_quoted_base_text()` splits an <h3> run at an
+inner <h1>/<h2> heading matching the closed quote vocabulary
+(मूलम्-aliases / अनुव्याख्यानम् / *भाष्यम् / grantha title) and takes ONLY
+the strong+em paragraphs as the quote — first plain paragraph returns the
+run to the commentary. New canonical layer `अनुव्याख्यानम्` →
+`tika_anuvyakhyanam` (author Madhva) in `dv_sources.json`; section I
+regression tests from the real node-9360 markup; verified against the
+live-fetched page (सुधा keeps its prose on both sides of the verse, the
+verse becomes its own layer, other h3 runs byte-identical). **Takes
+effect on the next nyaya_sudha re-crawl** (1,655 pages — fold into the
+corpus-wide Actions re-run tracked in part 9); (2) importer: also write
+`source.work_id` (and keep node-type/level when the sidebar provides
+them) so the numeric keys are first-class; (3) use the mirror's node
+lists to cross-validate the other works it covers.
