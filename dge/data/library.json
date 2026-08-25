@@ -11503,6 +11503,12 @@
       }
     },
     {
+      "path": "dge/data/shastra/subhashita/data.json",
+      "populated": false,
+      "title": "Subhashita",
+      "addedAt": "2026-08-25"
+    },
+    {
       "path": "dge/data/smriti_dharma/dharmashastra/chaturvarga_chintamani/data.json",
       "populated": false,
       "title": "Chaturvarga Chintamani"

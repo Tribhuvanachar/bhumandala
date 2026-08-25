@@ -279,11 +279,15 @@
   <hr>
   <div class="popup-label">Reading Script</div>
   <div class="pop-item active" data-script="devanagari" onclick="window.setScript('devanagari', this)">Sanskrit <span style="margin-left:auto; font-family:var(--font-sanskrit);">संस्कृतम्</span></div>
+  <div class="pop-item" data-script="hindi" onclick="window.setScript('hindi', this)">Hindi <span style="margin-left:auto; font-family:var(--font-sanskrit);">हिन्दी</span></div>
+  <div class="pop-item" data-script="marathi" onclick="window.setScript('marathi', this)">Marathi <span style="margin-left:auto; font-family:var(--font-sanskrit);">मराठी</span></div>
   <div class="pop-item" data-script="iast" onclick="window.setScript('iast', this)">English <span style="margin-left:auto; font-family:serif;">Eng</span></div>
   <div class="pop-item" data-script="kannada" onclick="window.setScript('kannada', this)">Kannada <span style="margin-left:auto; font-family:serif;">ಕನ್ನಡ</span></div>
   <div class="pop-item" data-script="telugu" onclick="window.setScript('telugu', this)">Telugu <span style="margin-left:auto; font-family:serif;">తెలుగు</span></div>
   <div class="pop-item" data-script="tamil" onclick="window.setScript('tamil', this)">Tamil <span style="margin-left:auto; font-family:serif;">தமிழ்</span></div>
   <div class="pop-item" data-script="malayalam" onclick="window.setScript('malayalam', this)">Malayalam <span style="margin-left:auto; font-family:serif;">മലയാളം</span></div>
+  <div class="pop-item" data-script="bengali" onclick="window.setScript('bengali', this)">Bengali <span style="margin-left:auto; font-family:serif;">বাংলা</span></div>
+  <div class="pop-item" data-script="oriya" onclick="window.setScript('oriya', this)">Odia <span style="margin-left:auto; font-family:serif;">ଓଡ଼ିଆ</span></div>
   <hr>
   <div class="popup-label">Reading Size</div>
   <div class="pop-item" data-size="16" onclick="window.setFontSize(16, this)">Small <span style="margin-left:auto; color:#8a7a63; font-size:10px;">16px</span></div>
@@ -1016,6 +1020,19 @@
           <button type="button" class="range-mode-btn active" data-library-view="grid" onclick="window.dgeSetLibraryViewMode('grid')">▦ Grid</button>
           <button type="button" class="range-mode-btn" data-library-view="list" onclick="window.dgeSetLibraryViewMode('list')">☰ List</button>
         </div>
+      </div>
+      <!-- Admin-only: also show the ~590 registered-but-still-empty leaves
+           (dgeToggleLibraryShowPending in library.js), so an admin sees the
+           full scaffolding directly here instead of switching to
+           admin/library.html. data-admin-only is admin-gate.js's own
+           convention -- hidden by CSS until that script confirms either
+           admin tier, then the attribute is stripped. -->
+      <div class="range-row-flex" style="margin-bottom:10px;" data-admin-only>
+        <span style="font-size:10px; color:var(--muted-text); text-transform:uppercase;">Admin</span>
+        <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;">
+          <input type="checkbox" id="libraryShowPendingToggle" onchange="window.dgeToggleLibraryShowPending()">
+          Show pending (unfilled) folders too
+        </label>
       </div>
       <div style="display:flex; gap:6px; margin-bottom:14px;">
         <input type="text" id="quickJumpInput" class="modal-input" placeholder="Quick jump, e.g. rv1.1.3 or pns5" style="margin:0; flex:1;"

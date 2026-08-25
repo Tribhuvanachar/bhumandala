@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v6.2 (SHLOKA_EXTRA_FIELDS: new deity/raga/tala fields for dasa_pada_text compositions, kept separate from rishi/devata/chandas since those carry Vedic-specific labels -- on top of v6.1\'s showCopyrightGatedCommentaries)';
+window.DGE_VERSIONS['config.js'] = 'v6.3 (SCRIPT_OPTIONS: added Hindi/Marathi -- Devanagari aliases, see transliteration.js -- plus real Bengali/Odia transliteration targets. On top of v6.2\'s dasa_pada_text SHLOKA_EXTRA_FIELDS)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -422,13 +422,25 @@ window.FEATURE_FLAGS = FEATURE_FLAGS;
 // order. Remove an entry (or set enabled:false) to hide it from the
 // picker without touching any transliteration code — it still works if
 // selected via a saved preference, this only affects what's offered.
+// 'hindi' and 'marathi' are Devanagari-script languages -- same glyphs as
+// 'devanagari' itself, so they're offered as separate, friendlier-labeled
+// entries rather than a genuinely distinct transliteration target (a
+// Marathi/Hindi reader may not think to reach for "Sanskrit" to read the
+// same script they already read daily). transliteration.js's
+// applyTransliteration() and dgeToActiveScript() both special-case these
+// two ids to a no-op, alongside 'devanagari' itself -- there is no
+// Sanscript scheme literally named "hindi"/"marathi" to pass through.
 const SCRIPT_OPTIONS = [
   { id: 'devanagari', label: 'Sanskrit', enabled: true },
+  { id: 'hindi', label: 'Hindi', enabled: true },
+  { id: 'marathi', label: 'Marathi', enabled: true },
   { id: 'iast', label: 'English', enabled: true },
   { id: 'kannada', label: 'Kannada', enabled: true },
   { id: 'telugu', label: 'Telugu', enabled: true },
   { id: 'tamil', label: 'Tamil', enabled: true },
-  { id: 'malayalam', label: 'Malayalam', enabled: true }
+  { id: 'malayalam', label: 'Malayalam', enabled: true },
+  { id: 'bengali', label: 'Bengali', enabled: true },
+  { id: 'oriya', label: 'Odia', enabled: true }
 ];
 window.SCRIPT_OPTIONS = SCRIPT_OPTIONS;
 
