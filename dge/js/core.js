@@ -945,6 +945,11 @@ document.addEventListener('DOMContentLoaded', () => {
           await dgeApplyLayerStitching(slug);
         }
         initApp();
+        // The stitcher may have auto-selected the grantha's primary layer
+        // (भाष्यम्/सुधा — see layer-stitch.js) so the page opens with real
+        // text; the fetch+merge+re-render for it starts here, after the
+        // first (spine-only) render is already on screen.
+        if (typeof dgeEnsureStitchedLayers === 'function') dgeEnsureStitchedLayers();
         // Must run AFTER initApp() (which sets the is-authorized class
         // used to gate the content editor) but re-renders if it actually
         // restores a draft, since initApp() already rendered once with

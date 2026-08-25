@@ -28,7 +28,7 @@
 // fields the importer already captures per item.
 // ============================================================
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['layer-stitch.js'] = 'v1.0 (initial: manifest-gated load-time stitching of sibling mula/tika_* layers into commentaries{}, lineage strip, breadcrumb section navigator, standalone-tika banner)';
+window.DGE_VERSIONS['layer-stitch.js'] = 'v1.1 (auto-select the primary layer on load + dgeStitchedAvailableKeys for the per-card pill row; v1.0: manifest-gated load-time stitching of sibling mula/tika_* layers into commentaries{}, lineage strip, breadcrumb section navigator, standalone-tika banner)';
 
 // Fetched once per page load, same cache-busting rationale as
 // dgeLibraryCatalogPromise (core.js): GitHub Pages' CDN happily serves a
@@ -133,7 +133,33 @@ window.dgeApplyLayerStitching = async function(slug) {
 
   dgeStitch = { role: 'mula', granthaRel: parent, granthaTitle: entry.title || '',
                 layers, idMap, loadsInFlight: 0 };
-  console.log(`[Stitch] ${parent}: advertised ${Object.keys(layers).length} sibling layer(s), none fetched yet`);
+
+  // Auto-select the PRIMARY layer so the grantha opens showing real text.
+  // Found the hard way (project lead's first phone test, 25 Aug night): on
+  // a pratīka-spine grantha like Nyāya Sudhā the commentary IS the content,
+  // and with selectedCommentaries starting empty the page looked empty —
+  // the 💬 picker sits inside the collapsed mobile top bar where nobody
+  // finds it. भाष्यम् wins where present (it is the grantha's own bhāṣya);
+  // otherwise the layer with the widest coverage (manifest order). Only
+  // when nothing else is selected — an explicit reader choice always wins.
+  if (window.selectedCommentaries && window.selectedCommentaries.size === 0) {
+    const keys = Object.keys(layers);
+    const primary = layers['bhashya'] ? 'bhashya' : keys[0];
+    window.selectedCommentaries.add(primary);
+    dgeStitch.autoSelected = primary;
+  }
+  console.log(`[Stitch] ${parent}: advertised ${Object.keys(layers).length} sibling layer(s)` +
+    (dgeStitch.autoSelected ? `, auto-selected "${dgeStitch.autoSelected}"` : ''));
+};
+
+// The stitched layer keys a card's tab bar should offer even before they
+// are selected/loaded — render.js draws these as tappable pills so the
+// reader can SEE what exists and load a layer with one tap, the way the
+// source site's own pill row works. Ordered as the manifest ordered them
+// (widest coverage first).
+window.dgeStitchedAvailableKeys = function() {
+  if (!dgeStitch || dgeStitch.role !== 'mula') return [];
+  return Object.keys(dgeStitch.layers);
 };
 
 // Fetch + merge every selected-but-pending stitched layer, then re-render.
