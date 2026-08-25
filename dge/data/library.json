@@ -11572,8 +11572,13 @@
     },
     {
       "path": "dge/data/smriti_dharma/smriti/daksha_smriti/data.json",
-      "populated": false,
-      "title": "Daksha Smriti"
+      "populated": true,
+      "title": "Daksha Smriti",
+      "source": {
+        "source": "South Asia Institute Open Educational Resources, University of Texas at Austin (Donald R. Davis, Jr.)",
+        "source_url": "https://docs.google.com/document/d/1JVu0vygrgn4SrQ3h42U0FdjDVuJ8371H22uGjaLx6PY/",
+        "licence": "CC BY 4.0"
+      }
     },
     {
       "path": "dge/data/smriti_dharma/smriti/harita_smriti/data.json",
@@ -12132,8 +12137,13 @@
     },
     {
       "path": "dge/data/vedanga/shiksha/paniniya_shiksha/data.json",
-      "populated": false,
-      "title": "Paniniya Shiksha"
+      "populated": true,
+      "title": "Paniniya Shiksha",
+      "source": {
+        "source": "Sanskrit Documents (sanskritdocuments.org)",
+        "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/pANinIyashikShA.html",
+        "licence": "sanskritdocuments.org standard usage terms (free non-commercial use, source credited)"
+      }
     },
     {
       "path": "dge/data/vedanga/shiksha/pratishakhya/rigveda_pratishakhya/data.json",
@@ -12197,8 +12207,13 @@
     },
     {
       "path": "dge/data/vedanga/shiksha/samaveda_shikshas/naradiya_shiksha/data.json",
-      "populated": false,
-      "title": "Naradiya Shiksha"
+      "populated": true,
+      "title": "Naradiya Shiksha",
+      "source": {
+        "source": "Vedic Reserve, Maharishi University of Management (vedicreserve.miu.edu)",
+        "source_url": "https://vedicreserve.miu.edu/shiksha/naradiya_shiksha.html",
+        "licence": "Vedic Reserve's standard usage terms (published for study, source credited)"
+      }
     },
     {
       "path": "dge/data/vedanga/shiksha/yajurveda_shikshas/krishna_yajurveda_shikshas/aranya_shiksha/data.json",
