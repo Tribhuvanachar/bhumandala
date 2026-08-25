@@ -72,6 +72,11 @@
       "schema": "grantha_tika_text",
       "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
     },
+    "अनुव्याख्यानम्": {
+      "folder": "tika_anuvyakhyanam",
+      "schema": "grantha_tika_text",
+      "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+    },
     "टीका": {
       "folder": "tika_jayatirtha",
       "schema": "grantha_tika_text",

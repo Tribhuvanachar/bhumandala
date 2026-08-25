@@ -4538,3 +4538,150 @@ rather than acted on blind:**
   repository scope at all. Needs either that repo added to scope, or
   the user's clarification that these two should go into this repo
   instead.
+## Node-graph model verified + vishvAsa mirror cross-validation (25 Aug 2026, part 10)
+
+The project lead forwarded an external analysis of dvaitavedanta.in's
+structure (three-column node-tree model, numeric node/work ids as canonical
+keys, "check the vishvAsa GitHub — it stores the actual dvaitavedanta.in
+URLs for Nyāya Sudhā"). Verified point by point against our own cached
+pages and data rather than taken on faith:
+
+- **The id model is confirmed and already largely captured.**
+  `category-details/{node_id}/{work_id}/...` — the second number is the
+  work root (975 = Nyāya Sudhā, constant across all 1,655 of its URLs),
+  the first is the content node. Every imported item already stores
+  `source.content_id` (the node id) and `source.url`; the work id is the
+  importer config's `ancestor_id`. The sidebar markup additionally carries
+  explicit `id="<node_id>"`, `data-level="N"`, and node-type classes
+  (`main-label`/`book-label`/`chapter-label`/`section-label`/`sub-label`)
+  on every nav anchor — richer than the URL alone.
+- **The full nav tree is NOT statically served** — `data-load="0"`
+  lazy-load attributes; every page ships the same partly-expanded menu
+  (187 parent links, matching what `tools/dvaitavedanta/build_structure.py`
+  already measured when it chose to rebuild the hierarchy from per-item
+  breadcrumbs into `_structure.json` instead). The external analysis's
+  suggestion to capture the loadChildren endpoint stands as the way to
+  numeric ids for INTERIOR nodes, should they ever be needed — the
+  title-path hierarchy itself is already complete from breadcrumbs.
+- **vishvAsa mirror found and diffed**: `github.com/vishvAsa/mAdhvam`,
+  Nyāya Sudhā under `tattvam/madhvaH/anu-vyAkhyAnam/sarva-prastutiH/`
+  (filed under Madhva's Anuvyākhyāna — the correct lineage), one markdown
+  file per unit with `upstream_url` front-matter. **Coverage
+  cross-validation: the mirror knows 1,655 nodes for work 975; our crawl
+  holds 1,653 of them and nothing the mirror lacks.** The two gaps are a
+  प्रश्न-उत्तर question-index page (14919) and a structural heading page
+  (4837, content "प्रथमः पादः" — exactly the class our parser now
+  correctly drops). So DGE's Nyāya Sudhā crawl is node-complete,
+  independently confirmed. The mirror also maps several other works
+  (940 tattva_viveka, 937 pramāṇa_lakṣaṇa, 4779, 4433, …) — reusable as
+  the same kind of check there. No license file in the repo; used as a
+  MAP/validation dataset only, no text imported from it.
+- **The best new lead: the per-unit Anuvyākhyāna verse is already in our
+  own data.** The mirror segments each unit as सुधा / अनुव्याख्यानम् —
+  and diffing one unit (node 9360 / DV_10243) shows our `tika_sudha` text
+  CONTAINS the identical अनुव्याख्यानम् block inline (heading line +
+  numbered verse ॥३२१२॥ + prose), the site having interleaved it inside
+  the सुधा run. Measured: 1,113 of 1,574 tika_sudha items carry an inline
+  `अनुव्याख्यानम्` heading line (and only the सुधा layer does — correct,
+  Sudhā comments on Anuvyākhyāna). **This makes the "show the
+  Anuvyākhyāna verse above the Sudhā text" reading experience a
+  deterministic data split of already-landed text — no re-crawl, none of
+  the 56%-precision pratīka matching the architecture doc rejected.**
+  Not built yet; next actionable item.
+- Also noted from the mirror: `jayatIrtha-nyAya-sudhA-mUlam/` is a
+  different e-text edition (GRETIL-convention `ब्ब्स्_N,N.N` sūtra ids +
+  `(अनुव्याख्यानम्)N,N.NNN` verse numbers + सुधा text interleaved, per
+  adhikaraṇa) — an explicit sūtra ↔ Anuvyākhyāna ↔ Sudhā concordance,
+  i.e. the "verified concordance" seed the architecture doc's §5 wanted.
+  Provenance/licence needs checking before any import.
+- The forwarded analysis's mobile-rendering complaint (vertical Sanskrit,
+  one word per line) is the SOURCE SITE's responsive-layout failure, not
+  DGE's reader — no DGE action.
+
+Follow-ups queued from this: ~~(1) split inline अनुव्याख्यानम् blocks out
+of tika_sudha into their own layer so the stitched reader shows verse +
+commentary per unit;~~ **(1) built at the PARSER level, same day** — a
+plain-text split of landed data turned out unreliable (only a minority of
+the 1,113 embedded blocks carry a ॥N॥ verse-number delimiter; many units
+quote unnumbered half-verses), but the live markup is precise: the quoted
+verse paragraphs are `<strong><em>` while Jayatīrtha's prose is plain.
+`dv_parse.py`'s new `_split_quoted_base_text()` splits an <h3> run at an
+inner <h1>/<h2> heading matching the closed quote vocabulary
+(मूलम्-aliases / अनुव्याख्यानम् / *भाष्यम् / grantha title) and takes ONLY
+the strong+em paragraphs as the quote — first plain paragraph returns the
+run to the commentary. New canonical layer `अनुव्याख्यानम्` →
+`tika_anuvyakhyanam` (author Madhva) in `dv_sources.json`; section I
+regression tests from the real node-9360 markup; verified against the
+live-fetched page (सुधा keeps its prose on both sides of the verse, the
+verse becomes its own layer, other h3 runs byte-identical). **Takes
+effect on the next nyaya_sudha re-crawl** (1,655 pages — fold into the
+corpus-wide Actions re-run tracked in part 9); ~~(2) importer: also write
+`source.work_id`~~ **done same day** — `build_items()` now stores the
+URL's constant second id per item (`source.work_id`), commit-tracked;
+takes effect per grantha on its next re-crawl. ~~(3) use the mirror's
+node lists to cross-validate the other works it covers.~~ **Done same
+day, corpus-wide: the mirror maps 30 works (3,491 upstream_urls); 29 of
+DGE's corresponding granthas hold 100% of their mirror-known nodes**
+(tatparya_chandrika 403/403, vishnu_tattva_vinirnaya 166/166,
+tarka_tandava 157/157, tattva_viveka, pramana_lakshana, yukti_mallika,
+nyayamrita, pramana_paddhati, … down to omkara_vada 1/1); the sole
+exception is nyaya_sudha's two known index/heading pages (part above).
+DGE's DvaitaVedanta node coverage is now independently confirmed
+everywhere the mirror reaches.
+
+## Stage-1 re-crawl landed: sutra + upanishad prasthanas, Madhva's bhashyas recovered (25 Aug 2026, part 11)
+
+The part-9 parser fixes applied at scale, live from this session (1,013
+pages, 3s delay, 0 failures; all pages retained in the local session
+cache, replays cost nothing). Both sections re-imported end-to-end:
+
+- **12 new `tika_bhashya/` folders — Madhva's own bhāṣya text, previously
+  absent from the corpus entirely** (the part-8 audit's worst finding):
+  brahma_sutra_bhashya (224 items), brihadaranyaka (169), chandogya (131),
+  taittiriya (36), aitareya (38), katha (36), mundaka, mandukya (17),
+  shatprashna (14), kena (7), ishavasya, anubhashya (3) — 244,453 chars of
+  recovered bhāṣya. Registered via `audit_library.py --fix` (+12 library
+  entries, +12 taxonomy nodes) and picked up by the regenerated
+  `layer_manifest.json`, so the stitched reader advertises भाष्यम् with no
+  further wiring — verified in headless Chromium on brahma_sutra_bhashya:
+  the sūtra card shows tabs All | तत्त्वप्रकाशिका | भाष्यम्, bhāṣya text
+  rendering. Mūla layers across both sections also grew to full text
+  (whole grantha totals: pre-existing folders at 115% of old text;
+  mundakopanishadbhashyam more than doubled).
+- **Verified conservatively before committing, and the checks caught two
+  real parse artifacts** (fixed, replayed from cache, re-verified):
+  1. This container lacked `indic_transliteration`, so the first write
+     minted `ch`-variant duplicate folders (tika_abhinavachandrika vs the
+     landed tika_abhinavacandrika). Installed the real transliterator and
+     replayed — slug parity restored. Lesson recorded: the importer's
+     fallback transliterator produces DIFFERENT slugs; never run a write
+     import without the package (a future guard could refuse --write when
+     `_HAVE_TRANSLIT` is false).
+  2. `ATTRIBUTION_RE` matched कृत inside "प्रकृत्यधिकरणम्", bypassing the
+     Anuvyākhyāna single_work fold (minted a fake tika_pra folder) — fixed
+     with a negative lookahead `(?![ि्ी])`; and an unmapped position-0
+     heading minted a bare unprefixed folder with mula schema
+     (nyaya_vivarana got a "bhavabodha/" twin of its tika_bhavabodha/) —
+     that branch now takes the normal tika path, merging it there.
+- **Stability guarantees checked, not assumed**: every pre-existing folder
+  reproduced its exact item count; anuvyakhyana's 88 folded ids are the
+  IDENTICAL set (zero drift — though text is re-chunked across the -N
+  family, so anything referencing a specific -N suffix by position would
+  shift; nothing does today); a corpus-wide text-conservation sweep found
+  every old chunk's content present in the new tree (one folder that
+  "shrank" 2.4% was re-segmentation into the new bhāṣya/mūla layers on the
+  same page, confirmed by parsing that page directly).
+- `verify_extract.py --strict`: 0 errors (37 warnings, the accepted
+  no-matching-mula class). `validate_data.py`: 0 errors. 208 tests pass.
+- Also observed: the site interleaves a SECOND mantra group mid-article on
+  some upanishad pages (article16126's "एतज्जानथ…" sits between two
+  commentary runs); it stays inside the preceding commentary's text rather
+  than mūla — text preserved, segmentation imperfect. A refinement for the
+  quote-split vocabulary (उपनिषत् h1 groups between h3 runs), not urgent.
+
+**Remaining sections** (gita, dasha_prakarana, purana, later_acharyas —
+the last includes nyaya_sudha, whose re-crawl also activates the part-10
+अनुव्याख्यानम् quote-split): ~4,600 pages. Next step is the
+`extract-dvaitavedanta.yml` workflow per section (dry_run=false,
+open_pr=true) now that main carries all the parser fixes — or further
+staged local runs like this one.

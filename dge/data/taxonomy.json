@@ -1789,6 +1789,10 @@
        },
        "tika_tatvamanjari": {
         "_schema": "grantha_tika_text"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "anuvyakhyana": {
@@ -1910,6 +1914,10 @@
        "tika_tamraparni_shrinivasacarya": {
         "_schema": "grantha_tika_text",
         "_default_author": "ताम्रपर्णी श्रीनिवासाचार्य"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "nyaya_vivarana": {
@@ -1948,6 +1956,10 @@
        "tika_bhavapradipa": {
         "_schema": "grantha_tika_text",
         "_default_author": "भगवन्तरायकृतः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "brihadaranyakopanishadbhashyam": {
@@ -1961,6 +1973,10 @@
        },
        "tika_khandartha": {
         "_schema": "grantha_tika_text"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "chandogyopanishad_bhashya": {
@@ -1977,6 +1993,10 @@
        "tika_padarthakaumudi": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीवेदेशभिक्षुविरचिता"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "ishavasyopanishad_bhashya": {
@@ -1990,6 +2010,10 @@
        },
        "tika_prakashika": {
         "_schema": "grantha_tika_text"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "kathopanishad_bhashya": {
@@ -2047,6 +2071,10 @@
        "tika_vyasatirtha": {
         "_schema": "grantha_tika_text",
         "_default_author": "अथ श्रीव्यासतीर्थविरचितकाठकभाष्यटीका"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "kenopanishad_bhashya": {
@@ -2093,6 +2121,10 @@
        "tika_shrivedeshatirtha": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीवेदेशतीर्थ"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "mandukyopanishadbhashyam": {
@@ -2120,6 +2152,10 @@
        "tika_shrivyasatirtha": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीव्यासतीर्थ"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "mundakopanishadbhashyam": {
@@ -2139,6 +2175,10 @@
        "tika_shrinivasatirtha": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीनिवासतीर्थ"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "shatprashnopanishadbhashyam": {
@@ -2210,6 +2250,10 @@
        "tika_tamraparnishrinivasacarya": {
         "_schema": "grantha_tika_text",
         "_default_author": "ताम्रपर्णीश्रीनिवासाचार्य"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "taittiriyopanishad_bhashya": {
@@ -2239,6 +2283,10 @@
        },
        "tika_padarthadipikabhashyartha": {
         "_schema": "grantha_tika_text"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       }
      },

@@ -90,7 +90,13 @@ def is_structural_heading(text: str) -> bool:
 # A short bold line directly before an <h3> attributes the commentary that
 # follows ("श्रीराघवेन्द्रतीर्थयतिकृतः"). Topic labels sit in the same position
 # but carry no attribution verb, so match the verb rather than the position.
-ATTRIBUTION_RE = re.compile(r"(कृत|विरचित|प्रणीत|प्रोक्त|विरचयाम्)")
+# The negative lookahead keeps the verb from matching INSIDE an unrelated
+# stem: "प्रकृत्यधिकरणम्" (the प्रकृति-adhikaraṇa heading) contains कृत
+# followed by ्, and without the guard it parsed as author "प्र" + work —
+# which bypassed the single_work mula-fold on Anuvyākhyāna and minted a
+# fake tika_pra folder (found on the 25 Aug cache replay, node DV_14492).
+# Genuine attributions inflect as कृतः/कृता/कृतम्/विरचिता…, never कृत्/कृति.
+ATTRIBUTION_RE = re.compile(r"(कृत|विरचित|प्रणीत|प्रोक्त|विरचयाम्)(?![ि्ी])")
 ATTRIBUTION_MAX_CHARS = 90
 # The same commentary is headed both "श्री कथालक्षणटीकाभावदीपः" and
 # "कथालक्षणटीकाभावदीपः" on one page; without this they merge as two layers.
@@ -635,30 +641,133 @@ def _layers_from_article(node: Tag, grantha_label: str = "") -> list[dict]:
         return layers
 
     merged: "OrderedDict[str, dict]" = OrderedDict()
-    for index, heading in enumerate(headings):
-        title = clean_text(heading.get_text(" ")).strip(" ।॥:-")
-        if not title:
-            continue
-        stop = headings[index + 1] if index + 1 < len(headings) else None
-        text = _text_between(heading, stop, details)
-        if devanagari_count(text) < 4:
-            continue
-        key = layer_key(title)
+
+    def _fold_into(key, title, text, heading):
         entry = merged.get(key)
         if entry is None:
             merged[key] = {
                 "title": title,
                 "text": text,
-                "anchor": heading.get("id", "") or node.get("id", ""),
+                "anchor": (heading.get("id", "") if heading is not None else "") or node.get("id", ""),
                 "article_id": article_id,
-                "author": _attribution_before(heading),
+                "author": _attribution_before(heading) if heading is not None else "",
                 "role": "tika",
             }
         else:
             entry["text"] = f"{entry['text']}\n{text}"
-            entry["author"] = entry["author"] or _attribution_before(heading)
+            if heading is not None:
+                entry["author"] = entry["author"] or _attribution_before(heading)
+
+    grantha_key = layer_key(_LEADING_NUM_RE.sub("", grantha_label or ""))
+    for index, heading in enumerate(headings):
+        title = clean_text(heading.get_text(" ")).strip(" ।॥:-")
+        if not title:
+            continue
+        stop = headings[index + 1] if index + 1 < len(headings) else None
+        own_text, quotes = _split_quoted_base_text(heading, stop, details, grantha_key)
+        if devanagari_count(own_text) >= 4:
+            _fold_into(layer_key(title), title, own_text, heading)
+        for qtitle, qtext in quotes:
+            if devanagari_count(qtext) >= 4:
+                _fold_into(layer_key(qtitle), qtitle, qtext, None)
     layers.extend(merged.values())
     return layers
+
+
+# Inside an <h3> commentary run the site sometimes quotes the BASE TEXT being
+# glossed under an inner <h1>/<h2> heading — live-confirmed on Nyāya Sudhā
+# (node 9360): the सुधा run carries <h2>अनुव्याख्यानम्</h2> followed by
+# Madhva's verse in <strong><em> paragraphs, after which Jayatīrtha's plain
+# prose resumes. Folding all of that into the सुधा layer (the old behaviour)
+# buried the very verse the commentary explains inside the commentary and
+# implicitly misattributed it. The split below is doubly gated so it cannot
+# misfire into a new heading-as-layer bug: the inner heading must match the
+# same CLOSED quote vocabulary (मूलम्-aliases / अनुव्याख्यानम् / *भाष्यम् /
+# the grantha's own title), AND only paragraphs whose Devanagari sits
+# entirely inside <strong>+<em> — the site's visual convention for the quoted
+# verse — are taken; the first plain paragraph returns the run to the
+# commentary layer.
+QUOTED_BASE_ALIAS_KEYS = MULA_ALIAS_KEYS | {"अनुव्याख्यानम्", "अनुव्याख्यानं"}
+
+
+def _quote_heading_title(tag: Tag, grantha_key: str) -> str | None:
+    text = clean_text(tag.get_text(" ")).strip(" ।॥:-")
+    if not text or _DANDA_RE.search(text):
+        return None
+    key = layer_key(text)
+    if not key or len(key) > 40 or devanagari_count(key) < 2:
+        return None
+    if (key in QUOTED_BASE_ALIAS_KEYS or key.endswith(BHASHYA_TITLE)
+            or (grantha_key and key == grantha_key)):
+        return text
+    return None
+
+
+def _is_verse_quote_para(p: Tag) -> bool:
+    if p.name != "p":
+        return False
+    if devanagari_count(clean_text(p.get_text(" "))) < 2:
+        return False
+    for s in p.find_all(string=True):
+        if devanagari_count(str(s)) == 0:
+            continue
+        names = {a.name for a in s.parents}
+        if "strong" not in names or "em" not in names:
+            return False
+    return True
+
+
+def _split_quoted_base_text(heading: Tag, stop: Tag | None, details: Tag,
+                            grantha_key: str) -> tuple[str, list[tuple[str, str]]]:
+    """(commentary_text, [(quote_title, quote_text)]) for one <h3> run."""
+    # Locate recognised inner quote headings between this h3 and the next.
+    quote_heads: list[tuple[Tag, str]] = []
+    for nd in heading.next_elements:
+        if stop is not None and nd is stop:
+            break
+        if not isinstance(nd, Tag):
+            continue
+        if details is not None and details not in nd.parents:
+            break
+        if nd.name in ("h1", "h2"):
+            qtitle = _quote_heading_title(nd, grantha_key)
+            if qtitle:
+                quote_heads.append((nd, qtitle))
+    if not quote_heads:
+        return _text_between(heading, stop, details), []
+
+    own_parts: list[str] = []
+    quotes: list[tuple[str, str]] = []
+    cursor: Tag = heading
+    first_span = True
+    for qh, qtitle in quote_heads:
+        # _text_between for the very first span (matches the established
+        # h3-run behaviour, heading's own title line included, as all landed
+        # data has it); _text_within afterwards, since the cursor is then a
+        # consumed verse paragraph (or quote heading) whose own subtree must
+        # NOT re-emit into the commentary text.
+        own_parts.append(_text_between(cursor, qh, details) if first_span
+                         else _text_within(details, cursor, qh))
+        first_span = False
+        verse_paras: list[str] = []
+        cursor = qh
+        for nd in qh.next_elements:
+            if nd is stop or (isinstance(nd, Tag) and nd.name in ("h1", "h2", "h3")):
+                break
+            if not isinstance(nd, Tag) or nd.name != "p":
+                continue
+            if details is not None and details not in nd.parents:
+                break
+            if _is_verse_quote_para(nd):
+                verse_paras.append(clean_text(nd.get_text(" ")))
+                cursor = nd
+            elif devanagari_count(clean_text(nd.get_text(" "))) > 0:
+                break  # plain prose — the commentary has resumed
+        if verse_paras:
+            quotes.append((qtitle, "\n".join(verse_paras)))
+    own_parts.append(_text_within(details, cursor, stop))
+    own_text = clean_text("\n".join(part for part in own_parts if part))
+    return own_text, quotes
 
 
 def layer_key(title: str) -> str:
