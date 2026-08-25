@@ -212,31 +212,107 @@ content that looks right in the sample but silently violates the contract,
 the same class of bug the resilience/parity test suites built earlier this
 session exist to catch in the search pipeline.
 
-### D. Visual layout — separate the skin from the contract
+### D. This is a Layout, not a Theme — and where it lives
 
-`gita_viewer.html` bundles two different things that are worth pulling
-apart:
+**Correction from this document's first draft**, made in direct conversation
+with the project lead, worth stating precisely since it changes the
+mechanism: rendering Gold-Standard content is a **Layout** question, not a
+**Theme** question, and the two are not interchangeable in this codebase.
 
-1. **The rendering *capability*** (block directives, pratīka↔pill linking,
-   word-mapping grid) — this is genuinely new to DGE. Parts A–C above.
-2. **One fixed visual skin** (Cinzel titles, cream/gold/red palette, a
-   specific card shape) — DGE already has a real theme system (5 themes:
-   Vandana/Traditional/Minimal/Vibrant/Dark Glass, all switchable live from
-   the Display sheet) plus the Scholar/App layout modes confirmed working
-   this session (see the reply this document accompanies). Hardcoding
-   `gita_viewer.html`'s one palette as a separate, parallel reader page
-   would fork DGE's presentation layer in two — a real regression given how
-   much of this session's own work (theme-aware CSS custom properties, the
-   Display sheet, dark-mode support) already exists specifically to avoid
-   that.
+- **Theme = look only.** Color, font, spacing, shadow, decorative
+  treatment — CSS custom properties repainted over an *unchanged* DOM. DGE's
+  5 existing themes (Vandana/Traditional/Minimal/Vibrant/Dark Glass) are
+  exactly this: same card, same fields, same order, different paint.
+  Switching a theme never adds, removes, or reorders content.
+- **Layout = structure.** What content blocks exist, what order they're in,
+  what's shown vs. hidden, how they're arranged. This changes what actually
+  renders. DGE already has two real examples: **Scholar vs. App** (hides/
+  reveals commentary, changes density — though it also nudges padding/
+  shadow, which blurs slightly into theme territory, an honest blur worth
+  naming rather than papering over) and the **Library's Folder view vs.
+  List view** (same taxonomy data, structurally different traversal).
 
-Proposed instead: add the Gold-Standard visual language as **one more theme
-option** inside the existing Display sheet — a 6th palette built from DGE's
-own `--accent-red`/`--card-bg`/etc. custom-property system, styled to evoke
-the reference sample (serif Devanagari mūla, gold accent line, a distinct
-provenance-card look) without abandoning theme-switching, dark mode, or the
-Scholar/App layout modes a reader has already set. One reader, richer
-content, more themes — not a second, disconnected viewer to maintain.
+Gold-Standard rendering is unambiguously the second kind. It introduces
+content that does not exist in DGE's current renderer at all — a
+word-mapping pill grid, provenance boxes (मङ्गलम्/प्रमाणम्/फलितार्थः),
+bidirectional pratīka↔pill linking — new structure, not new paint. Calling it
+"a 6th theme" (this document's original framing) undersold that and would
+have led to the wrong mechanism: bolting it onto the theme system would try
+to reskin a DOM shape that doesn't exist yet, instead of building the DOM
+shape.
+
+**One real difference from every other Layout DGE has**: Scholar/App and
+Folder/List are free choices, always available, independent of the content
+underneath. A Gold-Standard rendering mode can only activate where the
+underlying commentary actually *has* the structured data — a legacy
+plain-string commentary has no `word_mappings` to build pills from, no
+`commentary_markdown` to parse blocks out of. So this isn't a peer toggle
+sitting in the Display sheet next to Scholar/App; it's a **capability gated
+per-commentary by `format: gold_v2_2` being present**, with its own display
+preference only once that gate is open.
+
+**Separate page, or restructure in place?** Both are feasible; only one
+reuses what already works. A separate page (like the reference
+`gita_viewer.html`, or how `ashtadhyayi.html` sits apart from `index.html`)
+means its own URL, its own JS/CSS, and none of the main reader's existing
+machinery — no audio player, no notes/snippets, no search deep-linking, no
+immersive mode, no admin tools — all of which would need rebuilding a second
+time or going without. Restructuring in place means `render.js`'s existing
+card-building function grows a branch: when a commentary is `gold_v2_2`, it
+emits the richer HTML (pills, provenance boxes, pratīka spans) inside the
+*same* shloka card, instead of the plain-string block — mechanically the
+same pattern Scholar/App already uses (one function, a class or a per-shloka
+branch, CSS/JS respond to it). Recommended: **in place, inside `index.html`,
+via `render.js` + the new `gold-render.js` module** — the same reasoning
+that led the Ashtadhyayi declutter to reuse the app's own drawer system
+rather than invent one: one reader stays one reader, and richer content
+shouldn't cost the plumbing already built around it.
+
+### D.1 The Gold-Standard badge — telling the reader, and giving them the switch
+
+Direct ask from the project lead: readers need a visible signal — "some
+badge... some ribbon, some wrapper, gold wrapper, like some things which are
+wrapped on a certificate" — that (a) this particular commentary is the rich,
+verified format, and (b) the richer view can be switched into. Legacy
+plain-string commentary carries no badge at all, since it isn't Gold-Standard
+and shouldn't claim to be.
+
+Two distinct visual elements, not one, doing two different jobs:
+
+1. **A small badge/chip, always present when `format: gold_v2_2`.** Sits
+   next to the commentary's title, reusing the exact size/shape/placement
+   convention `render.js` already established for the "AI"
+   badge (`.dge-ai-badge`, next to `.commentary-title` — see
+   `render.js:379-380`) rather than inventing a new visual language. Gold
+   gradient/border instead of the AI badge's neutral gray, a seal-like glyph
+   (e.g. 🏅 or a laurel) instead of the letters "AI", tooltip text explaining
+   what it certifies ("Gold-Standard: word-by-word mapping, structured
+   citations, verified pratīka links"). Reuses the same pattern DGE already
+   trusts for exactly this kind of at-a-glance provenance marker.
+   **This badge is not decorative — it is the switch.** Tapping it is how a
+   reader moves from the plain-render fallback into the richer Gold-Standard
+   layout for that commentary, the same way `dgeShowCommentaryTab()` already
+   switches which commentary block is visible. No separate settings screen
+   needed to discover that a richer view exists — the badge on the content
+   itself is the entry point, exactly matching "so that the user knows that
+   the content is rich and the view can be switched."
+2. **A certificate-style wrapper, applied only once the Gold-Standard layout
+   is actually active.** When a reader is inside the rich view, the
+   commentary block itself gets the distinct bordered "certificate" framing
+   the project lead described — a gold double-rule border, a seal motif in
+   a corner, echoing the reference sample's own `.vivruti-container`
+   treatment (`border: 1.5px solid var(--border-ornate)`, a top seal row)
+   but built from DGE's own theme-aware custom properties (`--accent-gold`
+   or a new `--gold-standard-border` token defined per-theme, not one fixed
+   hex value) so it still looks correct across all 5 existing themes and
+   both dark/light. This is the visual confirmation, once switched, that
+   "yes, this is the certified rendering" — the wrapper the project lead
+   asked for, scoped to only appear where it's earned.
+
+Both elements key off the same signal (`commentaries[cKey].format ===
+'gold_v2_2'`) and both disappear automatically for legacy content — no
+separate flag to maintain, no risk of a legacy commentary accidentally
+looking "certified."
 
 ---
 
@@ -261,15 +337,17 @@ content, more themes — not a second, disconnected viewer to maintain.
 ## 5. What this document does NOT do
 
 Per the project lead's own instruction ("analyse and come up with
-solution"), nothing above has been built yet. Concretely still open, in
-rough dependency order:
+solution"), nothing above has been built yet. The mechanism question (Layout
+in `render.js`, in place, not a separate page or a theme — Part D) and the
+badge/certificate-wrapper design (Part D.1) are now settled by direct
+conversation with the project lead; what's still open is purely build order:
 
-1. Confirm the "6th theme, not a second page" direction (Part D) — a design
-   call worth a quick yes/no rather than assuming.
-2. Build `gold-render.js` + the schema extension (Part A+B) — a scoped,
+1. Build `gold-render.js` + the schema extension (Part A+B) — a scoped,
    independently shippable unit; the attached `extracted_gold_v2_2.json`
    (Gītā Vivṛtti, Adhyāya 2) is a ready-made real test case, not a synthetic
-   one.
-3. Build `tools/validate_gold_standard.py` (Part C).
-4. Pick the first real corpus for an end-to-end pilot before any wider
+   one. The badge (D.1.1) and certificate wrapper (D.1.2) are built as part
+   of this same unit, not deferred — they're the switch and the confirmation
+   for the layout, not a separate feature.
+2. Build `tools/validate_gold_standard.py` (Part C).
+3. Pick the first real corpus for an end-to-end pilot before any wider
    backfill commitment.
