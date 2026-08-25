@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.7 (DGE_PATH_LABELS: ratnatraya/pramukha_samhitas/anya_samhitas for the Pancharatra regroup, on top of v3.6\'s Agama restructure labels)';
+window.DGE_VERSIONS['library.js'] = 'v3.8 ("View By" facet switcher for the Library modal category drill-down -- Hierarchy/Guna/Madhva-relevance/Genre/Availability, backed by library.json\'s new per-leaf facets field, see dge/PENDING.md -- on top of v3.7\'s Pancharatra regroup labels)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -624,7 +624,7 @@ window.openLibraryModal = async function() {
     const slug = dgeEffectiveDisplayPath(realSlug); // where it GROUPS in the tree
     const custom = dgeLibOverrides.labels[slug];
     const rawTitle = custom !== undefined ? custom : (g.title || realSlug);
-    return { slug, realSlug, title: dgeToActiveScript(dgeLocalizeNumerals(rawTitle)), addedAt: g.addedAt || null };
+    return { slug, realSlug, title: dgeToActiveScript(dgeLocalizeNumerals(rawTitle)), addedAt: g.addedAt || null, facets: g.facets || null };
   }).filter(e => !dgeIsHiddenPath(e.slug));
   if (!populated.length) {
     listEl.innerHTML = `<div class="note-preview-box" style="margin:0;">No texts are available yet — check back soon.</div>`;
@@ -704,23 +704,143 @@ function dgeRenderLibraryGridView() {
   return `<div class="dge-lib-grid">${tiles}</div>` + (topLeaves ? `<div class="popup-label" style="margin-top:14px;">Other</div>${topLeaves}` : '');
 }
 
+/* =========================================================================
+   "View By" facets (25 Aug 2026) -- see dge/PENDING.md's Pancharatra pass.
+
+   Principle: the taxonomy tree stays the ONE authoritative hierarchy for
+   what a text IS (Ratnatraya/Pramukha/Anya, Vaishnava/Shaiva/Shakta, ...).
+   Guna, Madhva-relevance, genre and availability are per-leaf METADATA
+   (library.json's "facets", synced from each data.json by
+   tools/audit_library.py's derive_facets()), never separate folders -- a
+   text is never duplicated across the tree just because it also has a
+   scholarly classification. This section regroups the SAME leaves already
+   in dgeLibTree by that metadata instead of by taxonomy path, entirely
+   client-side (no new fetch: facets rode along on the same catalog
+   fetch openLibraryModal() already made).
+
+   Scoped to the category drill-down (dgeRenderLibraryCategoryView) only,
+   not the flat List view -- a facet grouping mixing unrelated top-level
+   categories (Vedas next to Kavya) would be noise, not a view. List view
+   keeps Hierarchy only; a real, disclosed limitation, not an oversight.
+   ========================================================================= */
+const DGE_VIEW_BY_FACETS = {
+  guna_classification: {
+    label: 'गुणः', extract: f => f && f.guna_classification,
+    values: { sattvika: 'सात्त्विकम्', rajasa: 'राजसम्', tamasa: 'तामसम्', not_specified: 'अनिर्दिष्टम्' }
+  },
+  madhva_relevance: {
+    label: 'माध्वसाम्प्रदायसाम्यम्', extract: f => f && f.madhva_relevance && f.madhva_relevance.level,
+    values: {
+      direct_quote: 'प्रत्यक्षोद्धृतम्', prominent: 'प्रमुखम्',
+      general_authority: 'सामान्यप्रामाण्यम्', other: 'अन्यत्', not_specified: 'अनिर्दिष्टम्'
+    }
+  },
+  text_status: {
+    label: 'उपलब्धता', extract: f => f && f.text_status,
+    values: { extant_partial: 'उपलब्धम्', unpopulated: 'अनुपलब्धम्' }
+  },
+  genre: {
+    label: 'प्रकारः', extract: f => f && f.genre,
+    values: {}
+  }
+};
+const DGE_VIEW_BY_NOT_SPECIFIED = 'not_specified';
+
+function dgeFlattenLeaves(node, out) {
+  out = out || [];
+  node.leaves.forEach(l => out.push(l));
+  Object.keys(node.children).forEach(k => dgeFlattenLeaves(node.children[k], out));
+  return out;
+}
+
+// Which facet keys are worth offering for this node -- only those where at
+// least one leaf underneath actually declares that key at all (regardless
+// of whether the value itself is "not_specified"; "Guna: Not specified" is
+// a legitimate, visible bucket, not a reason to hide the facet).
+function dgeAvailableViewBys(node) {
+  const leaves = dgeFlattenLeaves(node);
+  return Object.keys(DGE_VIEW_BY_FACETS).filter(fk =>
+    leaves.some(l => l.facets && DGE_VIEW_BY_FACETS[fk].extract(l.facets) !== undefined)
+  );
+}
+
+let dgeLibViewBy = 'hierarchy';
+window.dgeSetLibraryViewBy = function (key) {
+  dgeLibViewBy = key;
+  dgeRenderLibraryRoot();
+};
+
+function dgeViewByRowHtml(node) {
+  const facetKeys = dgeAvailableViewBys(node);
+  if (!facetKeys.length) return '';
+  const btn = (key, label) => `<button type="button"
+      class="dge-viewby-btn${dgeLibViewBy === key ? ' active' : ''}"
+      onclick="window.dgeSetLibraryViewBy('${key}')">${label}</button>`;
+  return `<div class="dge-viewby-row">
+      <span class="dge-viewby-label">VIEW BY</span>
+      ${btn('hierarchy', 'Hierarchy')}
+      ${facetKeys.map(fk => btn(fk, DGE_VIEW_BY_FACETS[fk].label)).join('')}
+    </div>`;
+}
+
+// Groups every leaf under `node` by one facet value and renders flat group
+// headers instead of the taxonomy tree -- same leaf row markup dgeRenderNode
+// already uses (.pop-item, NEW badge), just regrouped.
+function dgeRenderFacetView(node, facetKey) {
+  const cfg = DGE_VIEW_BY_FACETS[facetKey];
+  const leaves = dgeFlattenLeaves(node);
+  const groups = {};
+  leaves.forEach(l => {
+    const raw = (l.facets && cfg.extract(l.facets)) || DGE_VIEW_BY_NOT_SPECIFIED;
+    (groups[raw] = groups[raw] || []).push(l);
+  });
+  const keys = Object.keys(groups).sort((a, b) => {
+    if (a === DGE_VIEW_BY_NOT_SPECIFIED) return 1;   // Not-specified sinks to the bottom
+    if (b === DGE_VIEW_BY_NOT_SPECIFIED) return -1;
+    return groups[b].length - groups[a].length;       // biggest group first otherwise
+  });
+  return keys.map(k => {
+    const label = cfg.values[k] || dgeToActiveScript(k.replace(/_/g, ' '));
+    const rows = dgeSortLeaves('', groups[k]).map(leaf =>
+      `<div class="pop-item" style="margin-left:10px;" onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}${
+        dgeIsRecentlyAdded(leaf.addedAt)
+          ? '<span style="margin-left:auto; font-size:9px; font-weight:800; color:#fff; background:var(--accent-red,#7a3b1d); border-radius:999px; padding:2px 6px; letter-spacing:.3px;">NEW</span>'
+          : ''
+      }</div>`
+    ).join('');
+    return `<div style="margin-top:6px;">
+      <div style="padding:6px 4px; font-size:12px; font-weight:700; color:var(--muted-text); display:flex; align-items:center; gap:6px;">
+        <span>${label}</span><span style="font-weight:400;">${groups[k].length}</span>
+      </div>
+      ${rows}
+    </div>`;
+  }).join('');
+}
+
 // One category's own subtree, reached by tapping its grid tile -- reuses
 // dgeRenderNode exactly as the list view does, just scoped to one branch
 // with a breadcrumb back to the grid instead of every branch at once.
+// dgeLibViewBy != 'hierarchy' swaps that for dgeRenderFacetView() instead,
+// same leaves, grouped by metadata rather than by taxonomy path.
 function dgeRenderLibraryCategoryView(key) {
   const node = dgeLibTree.children[key];
   if (!node) return dgeRenderLibraryGridView(); // stale key (shouldn't happen) -- fail back to the grid rather than a blank screen
+  const body = dgeLibViewBy === 'hierarchy'
+    ? dgeRenderNode(node, '', 0, key)
+    : dgeRenderFacetView(node, dgeLibViewBy);
   return `<div class="dge-lib-breadcrumb" onclick="window.dgeShowLibraryGrid()">
       <span>❮</span> <span>${dgeSegLabel(key)}</span>
-    </div>` + dgeRenderNode(node, '', 0, key);
+    </div>` + dgeViewByRowHtml(node) + body;
 }
 
 window.dgeShowLibraryCategory = function (key) {
   dgeLibGridCategory = key;
+  dgeLibViewBy = 'hierarchy';
   dgeRenderLibraryRoot();
 };
 window.dgeShowLibraryGrid = function () {
   dgeLibGridCategory = null;
+  dgeLibViewBy = 'hierarchy';
   dgeRenderLibraryRoot();
 };
 

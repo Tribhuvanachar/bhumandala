@@ -34,6 +34,19 @@ def item_count(data):
     return len(items)
 
 
+# View-By facet metadata (see dge/PENDING.md's 25 Aug Pancharatra pass) --
+# kept in sync with tools/audit_library.py's own derive_facets(); copied into
+# library.json so the reader can build facet groupings without downloading
+# every leaf's full data.json just to read a handful of classification
+# fields. None -> no 'facets' key at all.
+FACET_KEYS = ('genre', 'guna_classification', 'ratnatraya', 'madhva_relevance', 'text_status')
+
+
+def facets_of(data):
+    facets = {k: data[k] for k in FACET_KEYS if k in data}
+    return facets or None
+
+
 def main():
     lib = json.load(open(LIB, encoding='utf-8'))
     granthas = lib.setdefault('granthas', [])
@@ -57,9 +70,14 @@ def main():
         try:
             data = json.load(open(fp, encoding='utf-8'))
             n = item_count(data)
+            facets = facets_of(data)
         except Exception:
             n = 0
-        granthas.append({"path": catalog, "populated": n > 0, "title": None, "addedAt": today})
+            facets = None
+        entry = {"path": catalog, "populated": n > 0, "title": None, "addedAt": today}
+        if facets:
+            entry["facets"] = facets
+        granthas.append(entry)
         known.add(catalog)
         added += 1
         print(f"  + {catalog} (populated={n > 0})")
