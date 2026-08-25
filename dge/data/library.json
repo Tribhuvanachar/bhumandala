@@ -8957,7 +8957,7 @@
     },
     {
       "path": "dge/data/vedanga/chandas/data.json",
-      "populated": true,
+      "populated": false,
       "title": "Chandas"
     },
     {
