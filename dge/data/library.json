@@ -10476,12 +10476,15 @@
     },
     {
       "path": "dge/data/purana/maha_purana/brahma_purana/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Brahma Purana",
       "addedAt": "2026-08-25",
       "facets": {
         "guna_classification": "rajasa",
         "purana_class": "mahapurana"
+      },
+      "source": {
+        "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_brahmapurANa-1-246.txt"
       }
     },
     {
@@ -10502,6 +10505,19 @@
       "facets": {
         "guna_classification": "rajasa",
         "purana_class": "mahapurana"
+      }
+    },
+    {
+      "path": "dge/data/purana/maha_purana/brahmanda_purana/purana_mula/data.json",
+      "populated": true,
+      "title": "Purana Mula",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa",
+        "purana_class": "mahapurana"
+      },
+      "source": {
+        "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_brahmANDapurANa.txt"
       }
     },
     {
@@ -10640,13 +10656,29 @@
       }
     },
     {
+      "path": "dge/data/purana/maha_purana/markandeya_purana/data.json",
+      "populated": true,
+      "title": "Markandeya Purana",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa",
+        "purana_class": "mahapurana"
+      },
+      "source": {
+        "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_mArkaNDeyapurANa1-93.txt"
+      }
+    },
+    {
       "path": "dge/data/purana/maha_purana/markandeya_purana/devi_mahatmya_durga_saptashati/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Devi Mahatmya Durga Saptashati",
       "addedAt": "2026-08-25",
       "facets": {
         "guna_classification": "rajasa",
         "purana_class": "mahapurana"
+      },
+      "source": {
+        "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_mArkaNDeyapurANa1-93.txt"
       }
     },
     {
@@ -10705,13 +10737,29 @@
       }
     },
     {
+      "path": "dge/data/purana/maha_purana/narada_purana/purvabhaga/purana_mula/data.json",
+      "populated": true,
+      "title": "Purana Mula",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika",
+        "purana_class": "mahapurana"
+      },
+      "source": {
+        "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_nAradapurANa.txt"
+      }
+    },
+    {
       "path": "dge/data/purana/maha_purana/narada_purana/uttarabhaga/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Uttarabhaga",
       "addedAt": "2026-08-25",
       "facets": {
         "guna_classification": "sattvika",
         "purana_class": "mahapurana"
+      },
+      "source": {
+        "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_nAradapurANa.txt"
       }
     },
     {
@@ -10866,22 +10914,28 @@
     },
     {
       "path": "dge/data/purana/maha_purana/shiva_purana/vayaviya_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Vayaviya Samhita",
       "addedAt": "2026-08-25",
       "facets": {
         "guna_classification": "tamasa",
         "purana_class": "mahapurana"
+      },
+      "source": {
+        "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_zivapurANabooks-1-and-7.txt"
       }
     },
     {
       "path": "dge/data/purana/maha_purana/shiva_purana/vidyeshvara_samhita/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Vidyeshvara Samhita",
       "addedAt": "2026-08-25",
       "facets": {
         "guna_classification": "tamasa",
         "purana_class": "mahapurana"
+      },
+      "source": {
+        "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_zivapurANabooks-1-and-7.txt"
       }
     },
     {
@@ -10967,6 +11021,19 @@
       "facets": {
         "guna_classification": "tamasa",
         "purana_class": "mahapurana"
+      }
+    },
+    {
+      "path": "dge/data/purana/maha_purana/vamana_purana/purana_mula/data.json",
+      "populated": true,
+      "title": "Purana Mula",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa",
+        "purana_class": "mahapurana"
+      },
+      "source": {
+        "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_vAmanapurANa1-69.txt"
       }
     },
     {
