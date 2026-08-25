@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v4.4 (each shloka\'s rendered mulaHtml now runs through dgeWrapWordsForTap(), wrapping every word in an unstyled <span class="dge-word"> as a DOM boundary for ai.js\'s new dgeRobustSelectedText() -- part of the word-level tap-to-select fragility fix; purely a tap-target boundary, not a visual change, applied last after highlightText()/footnote markers/Vedic pada breaks so it never disturbs their own offsets. Everything from v4.3 -- AI-commentary badge, Full List pagination -- unchanged)';
+window.DGE_VERSIONS['render.js'] = 'v4.5 (a commentary shaped to the Gold-Standard Commentary Contract v2.2 -- commentaries[cKey].format === "gold_v2_2" -- now renders via gold-render.js\'s block parser + pratika/word-pill linking instead of the plain-string path, wrapped in a certificate-styled .dge-gold-wrapper with a gold badge that IS the switch to a simplified view; a legacy plain-string commentary is completely untouched by this change. See dge/GOLD_STANDARD_ARCHITECTURE.md. Everything from v4.4 -- dgeWrapWordsForTap() -- unchanged)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -296,9 +296,25 @@ function renderList() {
     const convertedCommentaries = {};
     if (shloka.commentaries) {
       Object.entries(shloka.commentaries).forEach(([cKey, cText]) => {
-        convertedCommentaries[cKey] = typeof applyTransliteration === 'function' ? applyTransliteration(cText, activeScript) : cText;
+        // Gold-Standard commentary (format:gold_v2_2, see
+        // dge/GOLD_STANDARD_ARCHITECTURE.md) is an object, not a string --
+        // kept as-is here rather than run through applyTransliteration,
+        // which expects a plain string. It displays in its authored
+        // Devanagari only for now; transliterating structured
+        // commentary_markdown (block directives, pratīka markup) to other
+        // scripts is a real follow-up, not attempted in this first build.
+        if (cText && typeof cText === 'object' && cText.format === 'gold_v2_2') {
+          convertedCommentaries[cKey] = cText;
+        } else {
+          convertedCommentaries[cKey] = typeof applyTransliteration === 'function' ? applyTransliteration(cText, activeScript) : cText;
+        }
       });
     }
+
+    // Search matching against a Gold-Standard commentary reads its raw
+    // commentary_markdown string -- dgeTextMatchesQuery expects a string,
+    // and this is the same text a legacy commentary would have carried.
+    const dgeGoldSearchableText = (cText) => (cText && typeof cText === 'object') ? (cText.commentary_markdown || '') : cText;
 
     let forceCommentaries = [];
     let hasMatch = false;
@@ -307,7 +323,7 @@ function renderList() {
       if(scope === 'all') {
         hasMatch = i.toString().includes(rawQuery) || dgeTextMatchesQuery(mulaDisplayText, pattern);
         Object.entries(convertedCommentaries).forEach(([cKey, cText]) => {
-          if (dgeTextMatchesQuery(cText, pattern)) {
+          if (dgeTextMatchesQuery(dgeGoldSearchableText(cText), pattern)) {
             forceCommentaries.push(cKey);
             hasMatch = true;
           }
@@ -318,7 +334,7 @@ function renderList() {
         const noteArr = (typeof notes !== 'undefined' && notes[i]) ? notes[i] : [];
         hasMatch = noteArr.some(n => dgeTextMatchesQuery(n.text || '', pattern));
       } else if(convertedCommentaries[scope]) {
-        hasMatch = dgeTextMatchesQuery(convertedCommentaries[scope], pattern);
+        hasMatch = dgeTextMatchesQuery(dgeGoldSearchableText(convertedCommentaries[scope]), pattern);
         if(hasMatch) forceCommentaries.push(scope);
       }
       if(!hasMatch) continue;
@@ -371,15 +387,42 @@ function renderList() {
           const name = stotraData.metadata.availableCommentaries[cKey] || cKey;
           let convertedText = convertedCommentaries[cKey];
           let convertedName = typeof applyTransliteration === 'function' ? applyTransliteration(name, activeScript) : name;
-          // Small "AI" badge -- see dgeIsAiGeneratedCommentaryKey in core.js
-          // for the naming convention this checks. Distinct from (and in
-          // addition to) the "(Gemini, unreviewed)" text already baked into
-          // the label itself, since a badge is far more scannable than
-          // prose buried in a title a reader may not read closely.
-          const aiBadge = (typeof dgeIsAiGeneratedCommentaryKey === 'function' && dgeIsAiGeneratedCommentaryKey(cKey))
-            ? '<span class="dge-ai-badge" title="AI-generated -- not author-verified">AI</span>' : '';
-          blocks.push({ cKey, name: convertedName,
-            html: `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}${aiBadge}</div>${highlightText(convertedText, pattern)}</div>` });
+
+          // Gold-Standard commentary (dge/GOLD_STANDARD_ARCHITECTURE.md
+          // Parts A/B/D) takes a completely separate render path -- the
+          // certificate wrapper + badge are the ONLY visible signal a
+          // reader has that this commentary carries verified word-mapping/
+          // pratīka data; a legacy plain-string commentary gets neither.
+          // dgeGoldRenderResult is null whenever gold-render.js isn't
+          // loaded or the data has no commentary_markdown, in which case
+          // this falls through to the exact same plain-text path every
+          // other commentary already uses -- never a hard dependency.
+          const isGoldStandard = convertedText && typeof convertedText === 'object' && convertedText.format === 'gold_v2_2';
+          const goldResult = (isGoldStandard && typeof DGEGoldRender !== 'undefined') ? DGEGoldRender.render(convertedText) : null;
+
+          if (goldResult) {
+            // The badge IS the switch (see GOLD_STANDARD_ARCHITECTURE.md
+            // D.1): tapping it toggles .dge-gold-simple on this block,
+            // which main.css uses to fold the pill grid and provenance
+            // boxes back down to plain paragraph flow -- "the view can be
+            // switched," per the project lead's own direct ask, without a
+            // second render pass.
+            const goldBadge = '<span class="dge-gold-badge" title="Gold-Standard: word-by-word mapping, structured citations, verified pratīka links. Tap to switch view." ' +
+              'onclick="event.stopPropagation(); window.dgeToggleGoldSimple(this)">🏅 Gold</span>';
+            blocks.push({ cKey, name: convertedName,
+              html: `<div class="commentary-block dge-gold-wrapper" data-ckey="${cKey}"><div class="commentary-title">${convertedName}${goldBadge}</div>${highlightText(goldResult.pillGridHtml, pattern)}${highlightText(goldResult.bodyHtml, pattern)}</div>` });
+          } else {
+            // Small "AI" badge -- see dgeIsAiGeneratedCommentaryKey in
+            // core.js for the naming convention this checks. Distinct from
+            // (and in addition to) the "(Gemini, unreviewed)" text already
+            // baked into the label itself, since a badge is far more
+            // scannable than prose buried in a title a reader may not read
+            // closely.
+            const aiBadge = (typeof dgeIsAiGeneratedCommentaryKey === 'function' && dgeIsAiGeneratedCommentaryKey(cKey))
+              ? '<span class="dge-ai-badge" title="AI-generated -- not author-verified">AI</span>' : '';
+            blocks.push({ cKey, name: convertedName,
+              html: `<div class="commentary-block" data-ckey="${cKey}"><div class="commentary-title">${convertedName}${aiBadge}</div>${highlightText(convertedText, pattern)}</div>` });
+          }
         }
       });
       if (blocks.length > 1) {

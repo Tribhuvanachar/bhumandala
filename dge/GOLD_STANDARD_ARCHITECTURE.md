@@ -334,20 +334,32 @@ looking "certified."
 
 ---
 
-## 5. What this document does NOT do
+## 5. Status
 
-Per the project lead's own instruction ("analyse and come up with
-solution"), nothing above has been built yet. The mechanism question (Layout
-in `render.js`, in place, not a separate page or a theme — Part D) and the
-badge/certificate-wrapper design (Part D.1) are now settled by direct
-conversation with the project lead; what's still open is purely build order:
+**Built (25 Aug, "right away")**: `dge/js/gold-render.js` (Part B — the
+block parser, pratīka↔word-pill linking, daṇḍa binding) and the badge +
+certificate wrapper (Part D.1), wired into `render.js`'s commentary loop via
+the additive `format: gold_v2_2` branch (Part A). Verified both at the
+parser level (`dge/js/test-gold-render.js`, 18 assertions against three real
+units from the project lead's own Gītā-Vivṛtti sample, chosen specifically
+for their trickiest real cases — an unmapped pratīka, back-to-back प्रमाणम्
+blocks, a curly-quote span that must NOT be linked) and end-to-end in a real
+headless Chromium session (pill↔pratīka bidirectional scroll+pulse, the
+badge's view-switch, and a legacy-commentary regression check). Full detail
+in the matching `PENDING.md` entry, dated 25 Aug.
 
-1. Build `gold-render.js` + the schema extension (Part A+B) — a scoped,
-   independently shippable unit; the attached `extracted_gold_v2_2.json`
-   (Gītā Vivṛtti, Adhyāya 2) is a ready-made real test case, not a synthetic
-   one. The badge (D.1.1) and certificate wrapper (D.1.2) are built as part
-   of this same unit, not deferred — they're the switch and the confirmation
-   for the layout, not a separate feature.
-2. Build `tools/validate_gold_standard.py` (Part C).
-3. Pick the first real corpus for an end-to-end pilot before any wider
-   backfill commitment.
+**Still open**:
+
+1. `tools/validate_gold_standard.py` (Part C) — the V1–V7 CI gates. Today
+   the renderer degrades gracefully on a parity violation (falls back to
+   plain bold text, confirmed in testing) but nothing yet *rejects* bad
+   content before it ships.
+2. Transliterating Gold-Standard commentary to non-Devanagari scripts —
+   currently displays in its authored Devanagari only, a stated scope
+   limit for this first build, not an oversight.
+3. Pick the first real corpus for an end-to-end pilot (the Gītā-Vivṛtti
+   sample is the obvious candidate, already proven against the renderer)
+   before any wider backfill commitment — this build proves the renderer
+   against real content via direct injection, not a live catalog entry;
+   actually ingesting a corpus (taxonomy placement, `library.json`
+   regeneration) is separate, not-yet-started work.
