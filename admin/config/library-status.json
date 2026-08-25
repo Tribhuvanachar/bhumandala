@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1957,
-  "loaded": 1348,
-  "items": 623482
+  "leaves": 1884,
+  "loaded": 1289,
+  "items": 683823
  },
  "sections": {
   "agama": {
@@ -12,8 +12,8 @@
    "items": 43342
   },
   "darshana": {
-   "total": 1185,
-   "loaded": 843,
+   "total": 1109,
+   "loaded": 775,
    "items": 56423
   },
   "dasa_sahitya": {
@@ -42,9 +42,9 @@
    "items": 2139
   },
   "purana": {
-   "total": 94,
-   "loaded": 41,
-   "items": 72301
+   "total": 97,
+   "loaded": 49,
+   "items": 131866
   },
   "shastra": {
    "total": 25,
@@ -53,8 +53,8 @@
   },
   "smriti_dharma": {
    "total": 28,
-   "loaded": 8,
-   "items": 8514
+   "loaded": 9,
+   "items": 9290
   },
   "stotra": {
    "total": 3,
@@ -276,7 +276,6 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_nivasatirthiyatippani": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_shrigururajiyatippani": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_shrinivasatirthatippani": 0,
-  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_shrinivasatirthiyatippani": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/mula": 155,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_bhavadipa": 133,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_jayatirtha": 153,
@@ -290,7 +289,6 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanaparashu": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_nivasatirthiyatippani": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_shrigururajiyatippani": 0,
-  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_shrinivasatirthiyatippani": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_sankhyana/mula": 38,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_sankhyana/tika_bhavacandrika": 35,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_sankhyana/tika_bhavadipa": 35,
@@ -322,7 +320,6 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_mandaramanjari": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_nivasatirthiyatippani": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_parashunamnitippani": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_shrinivasatirthiyatippani": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/mula": 166,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_bhavabodha": 145,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_bhavadipa": 158,
@@ -956,80 +953,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/sruti_prasthana/rig_bhashya/mula": 20,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anubhashya/mula": 8,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anubhashya/tika_tatvamanjari": 3,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/mula": 16,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_abhimanyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_abhyugamadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_adrishyatvadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_akashadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_aksharadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_anandamayadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_antaradhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_antaryamyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_antasthatvadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_antimapranadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_anumanikadhikaranam": 2,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_anupalabdhyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_anvayadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_anyathanumityadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_anyatrabhavadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_arambhanadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_asadadhikaranam": 2,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_asambhavadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_atmadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_attritvadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_bhoktradhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_brahmadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_dehayogadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_devatadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_dyubhvadyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_gayatryadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_guhadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_ikshatyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_itaravyapadeshadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_janmadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_jijnasadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_jyotirupakramadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_kamacaradhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_matarishvadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_na_pratikadhikaranam": 0,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_na_prayojanadhikaranam": 0,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_na_vilakshanatvadhikaranam": 0,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_naikasminnadhikaranam": 2,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_napratikadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_naprayojanadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_nasthanatopyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_navadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_navilakshanatvadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_paradhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_patyuradhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_phalashrutyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_pra": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_prakrityadhikaranam": 0,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_pranadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_prathama_pada": 0,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_prathamapada": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_prithagadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_purushashmadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_racananupapattyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_samanvayadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_sampattyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_samudayadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_sandhyadhikaranam": 2,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_sarvadharmopapattyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_sarvagatatvadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_sarvavedantapratyayadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_shabdamulatvadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_shastrayonitvadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_sthanavisheshadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_tadadhigamadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_upamadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_upasamharadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_utpattyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_vaishamyanairghrinyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_vaisheshikadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_vamanadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_viyadadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_vyatirekadhikaranam": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/mula": 88,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/mula": 227,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_a_bhinavacandrika": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_abhinavacandrika": 216,
@@ -1609,100 +1533,103 @@
   "nitishastra/chanakya_sutra": 574,
   "nitishastra/hitopadesha": 5,
   "nitishastra/kamandakiya_nitisara": 1221,
-  "purana/agni_purana": 610,
-  "purana/bhagavata_purana/skandha_01": 813,
-  "purana/bhagavata_purana/skandha_02": 391,
-  "purana/bhagavata_purana/skandha_03": 1413,
-  "purana/bhagavata_purana/skandha_04": 1412,
-  "purana/bhagavata_purana/skandha_05": 660,
-  "purana/bhagavata_purana/skandha_06": 851,
-  "purana/bhagavata_purana/skandha_07": 750,
-  "purana/bhagavata_purana/skandha_08": 932,
-  "purana/bhagavata_purana/skandha_09": 965,
-  "purana/bhagavata_purana/skandha_10": 3936,
-  "purana/bhagavata_purana/skandha_11": 1366,
-  "purana/bhagavata_purana/skandha_12": 565,
-  "purana/bhagavata_purana_madhva/skandha_01": 814,
-  "purana/bhagavata_purana_madhva/skandha_02": 395,
-  "purana/bhagavata_purana_madhva/skandha_03": 1423,
-  "purana/bhagavata_purana_madhva/skandha_04": 1472,
-  "purana/bhagavata_purana_madhva/skandha_05": 640,
-  "purana/bhagavata_purana_madhva/skandha_06": 857,
-  "purana/bhagavata_purana_madhva/skandha_07": 767,
-  "purana/bhagavata_purana_madhva/skandha_08": 930,
-  "purana/bhagavata_purana_madhva/skandha_09": 969,
-  "purana/bhagavata_purana_madhva/skandha_10": 4441,
-  "purana/bhagavata_purana_madhva/skandha_11": 1372,
-  "purana/bhagavata_purana_madhva/skandha_12": 563,
-  "purana/bhavishya_purana/brahma_parva": 0,
-  "purana/bhavishya_purana/madhyama_parva": 0,
-  "purana/bhavishya_purana/pratisarga_parva": 0,
-  "purana/bhavishya_purana/uttara_parva": 0,
-  "purana/brahma_purana": 0,
-  "purana/brahmanda_purana/adhyatma_ramayana": 0,
-  "purana/brahmanda_purana/lalitopakhyana_lalita_sahasranama": 0,
-  "purana/brahmavaivarta_purana/brahma_khanda": 0,
-  "purana/brahmavaivarta_purana/ganesha_khanda": 0,
-  "purana/brahmavaivarta_purana/krishna_janma_khanda": 0,
-  "purana/brahmavaivarta_purana/prakriti_khanda": 0,
-  "purana/garuda_purana/brahma_khanda": 0,
-  "purana/garuda_purana/purva_khanda": 5089,
-  "purana/garuda_purana/uttara_khanda_pretakalpa": 0,
-  "purana/kurma_purana/purva_bhaga": 3179,
-  "purana/kurma_purana/uttara_bhaga": 2736,
-  "purana/linga_purana/purva_bhaga": 6914,
-  "purana/linga_purana/uttara_bhaga": 2249,
-  "purana/markandeya_purana/devi_mahatmya_durga_saptashati": 0,
-  "purana/matsya_purana": 8341,
-  "purana/narada_purana/purvabhaga/pada_01": 0,
-  "purana/narada_purana/purvabhaga/pada_02": 0,
-  "purana/narada_purana/purvabhaga/pada_03": 0,
-  "purana/narada_purana/purvabhaga/pada_04": 0,
-  "purana/narada_purana/uttarabhaga": 0,
-  "purana/padma_purana/bhumi_khanda": 0,
-  "purana/padma_purana/kriya_yoga_sara_khanda": 0,
-  "purana/padma_purana/patala_khanda": 0,
-  "purana/padma_purana/srishti_khanda": 0,
-  "purana/padma_purana/svarga_khanda": 0,
-  "purana/padma_purana/uttara_khanda": 0,
-  "purana/shiva_purana/kailasa_samhita": 0,
-  "purana/shiva_purana/kotirudra_samhita": 0,
-  "purana/shiva_purana/rudra_samhita/kumara_khanda": 0,
-  "purana/shiva_purana/rudra_samhita/parvati_khanda": 0,
-  "purana/shiva_purana/rudra_samhita/sati_khanda": 0,
-  "purana/shiva_purana/rudra_samhita/srishti_khanda": 0,
-  "purana/shiva_purana/rudra_samhita/yuddha_khanda": 0,
-  "purana/shiva_purana/shatarudra_samhita": 0,
-  "purana/shiva_purana/uma_samhita": 0,
-  "purana/shiva_purana/vayaviya_samhita": 0,
-  "purana/shiva_purana/vidyeshvara_samhita": 0,
-  "purana/skanda_purana/avantya_khanda": 0,
-  "purana/skanda_purana/brahma_khanda": 0,
-  "purana/skanda_purana/kashi_khanda": 0,
-  "purana/skanda_purana/maheshvara_khanda": 0,
-  "purana/skanda_purana/nagara_khanda": 0,
-  "purana/skanda_purana/prabhasa_khanda": 0,
-  "purana/skanda_purana/revakhanda": 7894,
-  "purana/skanda_purana/vaishnava_khanda": 0,
-  "purana/upapuranas/adi_purana": 0,
-  "purana/upapuranas/brihannaradiya_purana": 0,
-  "purana/upapuranas/devi_bhagavata_purana": 0,
-  "purana/upapuranas/ganesha_purana": 0,
-  "purana/upapuranas/kalika_purana": 288,
-  "purana/upapuranas/nandi_purana": 0,
-  "purana/upapuranas/narasimha_purana": 35,
-  "purana/upapuranas/sanatkumara_purana": 0,
-  "purana/upapuranas/saura_purana": 0,
-  "purana/upapuranas/vishnu_dharmottara_purana": 0,
-  "purana/vamana_purana/saromahatmya": 0,
-  "purana/varaha_purana": 39,
-  "purana/vayu_purana": 0,
-  "purana/vishnu_purana/amsha_01": 1393,
-  "purana/vishnu_purana/amsha_02": 780,
-  "purana/vishnu_purana/amsha_03": 815,
-  "purana/vishnu_purana/amsha_04": 1272,
-  "purana/vishnu_purana/amsha_05": 1477,
-  "purana/vishnu_purana/amsha_06": 493,
+  "purana/maha_purana/agni_purana": 610,
+  "purana/maha_purana/bhagavata_purana/skandha_01": 813,
+  "purana/maha_purana/bhagavata_purana/skandha_02": 391,
+  "purana/maha_purana/bhagavata_purana/skandha_03": 1413,
+  "purana/maha_purana/bhagavata_purana/skandha_04": 1412,
+  "purana/maha_purana/bhagavata_purana/skandha_05": 660,
+  "purana/maha_purana/bhagavata_purana/skandha_06": 851,
+  "purana/maha_purana/bhagavata_purana/skandha_07": 750,
+  "purana/maha_purana/bhagavata_purana/skandha_08": 932,
+  "purana/maha_purana/bhagavata_purana/skandha_09": 965,
+  "purana/maha_purana/bhagavata_purana/skandha_10": 3936,
+  "purana/maha_purana/bhagavata_purana/skandha_11": 1366,
+  "purana/maha_purana/bhagavata_purana/skandha_12": 565,
+  "purana/maha_purana/bhagavata_purana_madhva/skandha_01": 814,
+  "purana/maha_purana/bhagavata_purana_madhva/skandha_02": 395,
+  "purana/maha_purana/bhagavata_purana_madhva/skandha_03": 1423,
+  "purana/maha_purana/bhagavata_purana_madhva/skandha_04": 1472,
+  "purana/maha_purana/bhagavata_purana_madhva/skandha_05": 640,
+  "purana/maha_purana/bhagavata_purana_madhva/skandha_06": 857,
+  "purana/maha_purana/bhagavata_purana_madhva/skandha_07": 767,
+  "purana/maha_purana/bhagavata_purana_madhva/skandha_08": 930,
+  "purana/maha_purana/bhagavata_purana_madhva/skandha_09": 969,
+  "purana/maha_purana/bhagavata_purana_madhva/skandha_10": 4441,
+  "purana/maha_purana/bhagavata_purana_madhva/skandha_11": 1372,
+  "purana/maha_purana/bhagavata_purana_madhva/skandha_12": 563,
+  "purana/maha_purana/bhavishya_purana/brahma_parva": 0,
+  "purana/maha_purana/bhavishya_purana/madhyama_parva": 0,
+  "purana/maha_purana/bhavishya_purana/pratisarga_parva": 0,
+  "purana/maha_purana/bhavishya_purana/uttara_parva": 0,
+  "purana/maha_purana/brahma_purana": 13788,
+  "purana/maha_purana/brahmanda_purana/adhyatma_ramayana": 0,
+  "purana/maha_purana/brahmanda_purana/lalitopakhyana_lalita_sahasranama": 0,
+  "purana/maha_purana/brahmanda_purana/purana_mula": 13747,
+  "purana/maha_purana/brahmavaivarta_purana/brahma_khanda": 0,
+  "purana/maha_purana/brahmavaivarta_purana/ganesha_khanda": 0,
+  "purana/maha_purana/brahmavaivarta_purana/krishna_janma_khanda": 0,
+  "purana/maha_purana/brahmavaivarta_purana/prakriti_khanda": 0,
+  "purana/maha_purana/garuda_purana/brahma_khanda": 0,
+  "purana/maha_purana/garuda_purana/purva_khanda": 5089,
+  "purana/maha_purana/garuda_purana/uttara_khanda_pretakalpa": 0,
+  "purana/maha_purana/kurma_purana/purva_bhaga": 3179,
+  "purana/maha_purana/kurma_purana/uttara_bhaga": 2736,
+  "purana/maha_purana/linga_purana/purva_bhaga": 6914,
+  "purana/maha_purana/linga_purana/uttara_bhaga": 2249,
+  "purana/maha_purana/markandeya_purana/devi_mahatmya_durga_saptashati": 540,
+  "purana/maha_purana/matsya_purana": 8341,
+  "purana/maha_purana/narada_purana/purvabhaga/pada_01": 0,
+  "purana/maha_purana/narada_purana/purvabhaga/pada_02": 0,
+  "purana/maha_purana/narada_purana/purvabhaga/pada_03": 0,
+  "purana/maha_purana/narada_purana/purvabhaga/pada_04": 0,
+  "purana/maha_purana/narada_purana/purvabhaga/purana_mula": 13114,
+  "purana/maha_purana/narada_purana/uttarabhaga": 2500,
+  "purana/maha_purana/padma_purana/bhumi_khanda": 0,
+  "purana/maha_purana/padma_purana/kriya_yoga_sara_khanda": 0,
+  "purana/maha_purana/padma_purana/patala_khanda": 0,
+  "purana/maha_purana/padma_purana/srishti_khanda": 0,
+  "purana/maha_purana/padma_purana/svarga_khanda": 0,
+  "purana/maha_purana/padma_purana/uttara_khanda": 0,
+  "purana/maha_purana/shiva_purana/kailasa_samhita": 0,
+  "purana/maha_purana/shiva_purana/kotirudra_samhita": 0,
+  "purana/maha_purana/shiva_purana/rudra_samhita/kumara_khanda": 0,
+  "purana/maha_purana/shiva_purana/rudra_samhita/parvati_khanda": 0,
+  "purana/maha_purana/shiva_purana/rudra_samhita/sati_khanda": 0,
+  "purana/maha_purana/shiva_purana/rudra_samhita/srishti_khanda": 0,
+  "purana/maha_purana/shiva_purana/rudra_samhita/yuddha_khanda": 0,
+  "purana/maha_purana/shiva_purana/shatarudra_samhita": 0,
+  "purana/maha_purana/shiva_purana/uma_samhita": 0,
+  "purana/maha_purana/shiva_purana/vayaviya_samhita": 8292,
+  "purana/maha_purana/shiva_purana/vidyeshvara_samhita": 3068,
+  "purana/maha_purana/skanda_purana/avantya_khanda": 0,
+  "purana/maha_purana/skanda_purana/brahma_khanda": 0,
+  "purana/maha_purana/skanda_purana/kashi_khanda": 0,
+  "purana/maha_purana/skanda_purana/maheshvara_khanda": 0,
+  "purana/maha_purana/skanda_purana/nagara_khanda": 0,
+  "purana/maha_purana/skanda_purana/prabhasa_khanda": 0,
+  "purana/maha_purana/skanda_purana/revakhanda": 7894,
+  "purana/maha_purana/skanda_purana/vaishnava_khanda": 0,
+  "purana/maha_purana/vamana_purana/purana_mula": 4516,
+  "purana/maha_purana/vamana_purana/saromahatmya": 0,
+  "purana/maha_purana/varaha_purana": 39,
+  "purana/maha_purana/vayu_purana": 0,
+  "purana/maha_purana/vishnu_purana/amsha_01": 1393,
+  "purana/maha_purana/vishnu_purana/amsha_02": 780,
+  "purana/maha_purana/vishnu_purana/amsha_03": 815,
+  "purana/maha_purana/vishnu_purana/amsha_04": 1272,
+  "purana/maha_purana/vishnu_purana/amsha_05": 1477,
+  "purana/maha_purana/vishnu_purana/amsha_06": 493,
+  "purana/upa_purana/adi_purana": 0,
+  "purana/upa_purana/brihannaradiya_purana": 0,
+  "purana/upa_purana/devi_bhagavata_purana": 0,
+  "purana/upa_purana/ganesha_purana": 0,
+  "purana/upa_purana/kalika_purana": 288,
+  "purana/upa_purana/nandi_purana": 0,
+  "purana/upa_purana/narasimha_purana": 35,
+  "purana/upa_purana/sanatkumara_purana": 0,
+  "purana/upa_purana/saura_purana": 0,
+  "purana/upa_purana/vishnu_dharmottara_purana": 0,
   "shastra/bauddha_sahitya/avadana/avadanashataka/mula": 251,
   "shastra/bauddha_sahitya/avadana/divyavadana/mula": 3126,
   "shastra/bauddha_sahitya/avadana/sanghabhedavastu/mula": 128,
@@ -1733,7 +1660,7 @@
   "smriti_dharma/dharmashastra/dharma_sindhu": 0,
   "smriti_dharma/dharmashastra/grihastha_ratnakara": 60,
   "smriti_dharma/dharmashastra/kalpataru": 0,
-  "smriti_dharma/dharmashastra/mitakshara": 0,
+  "smriti_dharma/dharmashastra/mitakshara": 776,
   "smriti_dharma/dharmashastra/nirnaya_sindhu": 0,
   "smriti_dharma/dharmashastra/smriti_chandrika": 0,
   "smriti_dharma/smriti/angiras_smriti": 0,
@@ -4008,210 +3935,6 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_abhimanyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_abhyugamadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_adrishyatvadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_akashadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_aksharadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_anandamayadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_antaradhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_antaryamyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_antasthatvadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_antimapranadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_anumanikadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_anupalabdhyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_anvayadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_anyathanumityadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_anyatrabhavadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_arambhanadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_asadadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_asambhavadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_atmadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_attritvadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_bhoktradhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_brahmadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_dehayogadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_devatadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_dyubhvadyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_gayatryadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_guhadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_ikshatyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_itaravyapadeshadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_janmadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_jijnasadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_jyotirupakramadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_kamacaradhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_matarishvadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_naikasminnadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_napratikadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_naprayojanadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_nasthanatopyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_navadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_navilakshanatvadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_paradhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_patyuradhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_phalashrutyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_pra": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_pranadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_prathamapada": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_prithagadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_purushashmadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_racananupapattyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_samanvayadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_sampattyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_samudayadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_sandhyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_sarvadharmopapattyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_sarvagatatvadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_sarvavedantapratyayadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_shabdamulatvadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_shastrayonitvadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_sthanavisheshadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_tadadhigamadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_upamadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_upasamharadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_utpattyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_vaishamyanairghrinyadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_vaisheshikadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_vamanadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_viyadadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
-  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/tika_vyatirekadhikaranam": {
-   "source_url": "https://dvaitavedanta.in/category-details/14473/563/satara/2-anav/parath/parath"
-  },
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/1142/562/satara/1-brah/parath/parath/jajani"
   },
@@ -4653,89 +4376,113 @@
    "source_url": "https://docs.google.com/document/d/1OFWLyjXMqqiHTBg3WqvFJsWuDhlEQgE62k_7Ik2BTYQ/export?format=txt",
    "licence": "CC BY 4.0"
   },
-  "purana/agni_purana": {
+  "purana/maha_purana/agni_purana": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Agnipurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/garuda_purana/purva_khanda": {
+  "purana/maha_purana/brahma_purana": {
+   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_brahmapurANa-1-246.txt"
+  },
+  "purana/maha_purana/brahmanda_purana/purana_mula": {
+   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_brahmANDapurANa.txt"
+  },
+  "purana/maha_purana/garuda_purana/purva_khanda": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Garuḍapurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/kurma_purana/purva_bhaga": {
+  "purana/maha_purana/kurma_purana/purva_bhaga": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Kūrmapurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/kurma_purana/uttara_bhaga": {
+  "purana/maha_purana/kurma_purana/uttara_bhaga": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Kūrmapurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/linga_purana/purva_bhaga": {
+  "purana/maha_purana/linga_purana/purva_bhaga": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Liṅgapurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/linga_purana/uttara_bhaga": {
+  "purana/maha_purana/linga_purana/uttara_bhaga": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Liṅgapurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/matsya_purana": {
+  "purana/maha_purana/markandeya_purana/devi_mahatmya_durga_saptashati": {
+   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_mArkaNDeyapurANa1-93.txt"
+  },
+  "purana/maha_purana/matsya_purana": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Matsyapurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/skanda_purana/revakhanda": {
+  "purana/maha_purana/narada_purana/purvabhaga/purana_mula": {
+   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_nAradapurANa.txt"
+  },
+  "purana/maha_purana/narada_purana/uttarabhaga": {
+   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_nAradapurANa.txt"
+  },
+  "purana/maha_purana/shiva_purana/vayaviya_samhita": {
+   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_zivapurANabooks-1-and-7.txt"
+  },
+  "purana/maha_purana/shiva_purana/vidyeshvara_samhita": {
+   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_zivapurANabooks-1-and-7.txt"
+  },
+  "purana/maha_purana/skanda_purana/revakhanda": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Skandapurāṇa (Revākhaṇḍa)",
    "licence": "CC-BY 4.0"
   },
-  "purana/upapuranas/kalika_purana": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Kālikāpurāṇa",
-   "licence": "CC-BY 4.0"
+  "purana/maha_purana/vamana_purana/purana_mula": {
+   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_vAmanapurANa1-69.txt"
   },
-  "purana/upapuranas/narasimha_purana": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Narasiṃhapurāṇa",
-   "licence": "CC-BY 4.0"
-  },
-  "purana/varaha_purana": {
+  "purana/maha_purana/varaha_purana": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Varāhapurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/vishnu_purana/amsha_01": {
+  "purana/maha_purana/vishnu_purana/amsha_01": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/vishnu_purana/amsha_02": {
+  "purana/maha_purana/vishnu_purana/amsha_02": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/vishnu_purana/amsha_03": {
+  "purana/maha_purana/vishnu_purana/amsha_03": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/vishnu_purana/amsha_04": {
+  "purana/maha_purana/vishnu_purana/amsha_04": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/vishnu_purana/amsha_05": {
+  "purana/maha_purana/vishnu_purana/amsha_05": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
    "licence": "CC-BY 4.0"
   },
-  "purana/vishnu_purana/amsha_06": {
+  "purana/maha_purana/vishnu_purana/amsha_06": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
+   "licence": "CC-BY 4.0"
+  },
+  "purana/upa_purana/kalika_purana": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Kālikāpurāṇa",
+   "licence": "CC-BY 4.0"
+  },
+  "purana/upa_purana/narasimha_purana": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Narasiṃhapurāṇa",
    "licence": "CC-BY 4.0"
   },
   "shastra/bauddha_sahitya/avadana/avadanashataka/mula": {
