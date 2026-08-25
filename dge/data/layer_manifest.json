@@ -490,6 +490,13 @@
      "matched": 364
     },
     {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 357,
+     "matched": 357
+    },
+    {
      "folder": "tika_bhavadipika",
      "label": "भावदीपिका",
      "author": "श्रीनिवासतीर्थविरचिता",
@@ -595,7 +602,7 @@
      "matched": 1
     },
     {
-     "folder": "tika_mannyayadipakiranavali",
+     "folder": "tika_nyayadipakiranavali",
      "label": "श्रीमन्न्यायदीपकिरणावलिः",
      "author": "ताम्रपर्णी श्रीनिवासेन विरचिता",
      "items": 1,

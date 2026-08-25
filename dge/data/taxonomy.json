@@ -1598,6 +1598,10 @@
        "tika_vakyarthapradipa": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीपाण्डुरङ्गिकेशवाचार्यविरचितः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "gita_tatparya_nirnaya": {
@@ -1643,6 +1647,10 @@
         "_default_author": "श्रीसत्यनाथयति विरचितः"
        },
        "tika_mannyayadipakiranavali": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "ताम्रपर्णी श्रीनिवासेन विरचिता"
+       },
+       "tika_nyayadipakiranavali": {
         "_schema": "grantha_tika_text",
         "_default_author": "ताम्रपर्णी श्रीनिवासेन विरचिता"
        }
