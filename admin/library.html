@@ -351,6 +351,20 @@
         src=so.source_url
           ? '<a class="srclink" href="'+esc(so.source_url)+'" target="_blank" rel="noopener" title="'+title+'" onclick="event.stopPropagation()">🔗 source</a>'
           : '<span class="srclink" title="'+title+'">🔗 source</span>';
+      } else {
+        // No real source yet -- but admin/config/pending_pdf_sources.json
+        // (a hand-maintained research log, see tools/gen_library_status.py)
+        // may already name a candidate scanned PDF or e-text for this empty
+        // leaf, worth surfacing here so whoever's dispatching the OCR
+        // pipeline (or a direct text import, for a "text_available" one)
+        // doesn't have to re-research it from scratch.
+        var pend=ST.pending_sources&&ST.pending_sources[n.opath];
+        if(pend&&pend.candidates&&pend.candidates.length){
+          var first=pend.candidates[0];
+          var icon=pend.status==="text_available"?"📝":"📄";
+          var ptitle=esc((pend.status||"")+" · "+first.label+(pend.candidates.length>1?" (+"+(pend.candidates.length-1)+" more)":""));
+          src='<a class="srclink pdflink" href="'+esc(first.url)+'" target="_blank" rel="noopener" title="'+ptitle+'" onclick="event.stopPropagation()">'+icon+' candidate</a>';
+        }
       }
     } else {
       var full=n.loaded===n.total&&n.total>0, none=n.loaded===0;
