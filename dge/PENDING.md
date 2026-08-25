@@ -3955,3 +3955,66 @@ and scrolls to the right subtree, and confirmed source links render with
 correct href/tooltip (spot-checked against Kashmir Saivism's leaves,
 9 of which have one; `pratyabhijna`, still genuinely empty, correctly
 shows no source link at all).
+
+## Purana restructure: maha_purana/upa_purana split + guna View-By (25 Aug 2026, part 5)
+
+User asked for `purana/` to become two real folders -- Maha Purana and
+Upa Purana -- with all 18 traditional Mahapuranas present, plus a
+Sattvika/Rajasa/Tamasa **view**, not new folders (the View By facet
+architecture from the Pancharatra regroup was built exactly for this).
+
+**Structure.** `taxonomy.json`'s `purana` node split into `maha_purana`
+(the 18 traditional Mahapuranas per Vishnu/Bhagavata Purana's own canonical
+list, plus the pre-existing Bhagavata-Madhva variant and Vayu Purana --
+20 total, nothing dropped) and `upa_purana` (renamed from `upapuranas`,
+same 10 works, untouched). All 117 data.json files moved on disk with
+`git mv`, `register_layers.py` + `audit_library.py --fix` resynced
+`library.json` (94 entries re-derived, titles refilled from each file's
+own metadata -- no manual carrying-over needed since every leaf already
+self-describes). 20 `DGE_LEGACY_SLUGS` redirects added for the moved
+`purana/<X>` paths (single-pass, each pointing straight at its new
+`purana/maha_purana/<X>` or `purana/upa_purana` home). Added Devanagari
+labels for `maha_purana`/`upa_purana` and the 4 Mahapuranas + all 10
+Upapuranas that had never had one (`brahma_purana`, `agni_purana`,
+`varaha_purana`, `vayu_purana`, `vishnu_dharmottara_purana`, etc.).
+
+**Guna classification.** Set `guna_classification` (`sattvika` /
+`rajasa` / `tamasa`) on every leaf `data.json` under each of the 18
+traditional Mahapuranas, per Padma Purana Uttara Khanda 236.18-21's
+own classification (verified via web search against multiple
+independent sources, not assumed from memory):
+- **Sattvika**: Vishnu, Naradiya, Padma, Garuda, Varaha, Bhagavata
+- **Rajasa**: Brahmanda, Brahmavaivarta, Markandeya, Bhavishya, Vamana, Brahma
+- **Tamasa**: Matsya, Kurma, Linga, Shiva, Skanda, Agni
+
+Bhagavata-Madhva (the Madhva-tradition variant) tagged `sattvika` too --
+same underlying text as Bhagavata Purana, just a different sectioning.
+**Vayu Purana deliberately left unset** -- it isn't part of the canonical
+236.18-21 enumeration; some traditions equate it with Shiva Purana (which
+would make it tamasa) but that's not certain enough to assert without a
+citation, so it stays "not specified" via the View By UI's existing
+default-fallback rather than being guessed into a bucket.
+
+No new UI code was needed -- `DGE_VIEW_BY_FACETS.guna_classification`
+already existed (built for Pancharatra) and reads any leaf's facets
+generically, so browsing into Purana now offers the same Hierarchy/गुणः
+toggle Agama's Pancharatra section already has. Verified in a real
+browser (Playwright, headless Chromium): both new folders render with
+correct counts (महापुराणानि 39/84, उपपुराणानि 2/10 at the time of
+writing), and the गुणः View By correctly groups सात्त्विकम् (32) /
+तामसम् (7) / अनिर्दिष्टम् (2 -- the two currently-populated upa-puranas,
+correctly left unclassified since guna doesn't traditionally apply to
+Upapuranas). 199/199 tests, `validate_data.py`/`audit_library.py` clean.
+
+**Not done, needs the user:** filling actual Purana content beyond
+what already existed. The user referred to "ChatGPT's list of resources"
+for sourcing Purana texts -- that list was not pasted into this session
+(unlike the Agama/Pancharatra passes, where the full ChatGPT analysis was
+quoted verbatim). Asked the user to (re-)supply it before doing any
+importing, rather than guessing at sources. Currently populated (spot
+counts as of this pass): Bhagavata (12/12 skandhas, x2 for the Madhva
+variant), Vishnu (6/6 amsha), Garuda (1/3), Kurma (2/2), Linga (2/2),
+Skanda (1/8), Agni/Matsya/Varaha (1 file each, unsegmented) among
+Mahapuranas; Kalika/Narasimha among Upapuranas. Everything else under
+both `maha_purana` and `upa_purana` is a real, trackable, empty
+placeholder now -- visible in `admin/library.html` (`?section=purana`).
