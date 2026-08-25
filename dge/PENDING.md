@@ -4342,3 +4342,51 @@ apte-bi question above first) and updating `main`'s `dicts_config.json`
 with the 7 new entries so a future full rebuild reproduces this without
 needing the local `dict.zip` again. The merged tree exists, verified, in
 this session's scratch environment only.
+
+## Kosha gap-fill: pushed live (25 Aug 2026, part 2)
+
+Project lead's call on the two open questions above: **push** (not just hand
+off files), and **hold back both** `apte-sa`/`apte-bi` (not "ship apte-sa
+only") pending a human review pass -- ~20% headword overlap despite
+near-identical counts, and `apte-bi` has entries that look like OCR/
+segmentation noise. Rebuilt the merge with only the other 5 and pushed for
+real, attaching `Tribhuvanachar/bhumandala-kosha-data` with push access:
+
+- **`dist` branch**: the 5-dictionary merge (100 dicts, 2,152,851 headwords,
+  was 95/2,111,218), pushed directly (`6fa491c2f..5dadcda67`) -- structurally
+  re-validated against the actual push-credentialed clone before pushing, not
+  just the earlier read-only working copy. jsDelivr's manifest cache purged
+  via the purge API afterward so the app sees it without waiting ~12h.
+- **`main` branch**: `dicts_config.json` gained the 5 new entries
+  (`repo: "local-dict-zip"`), and their small compiled StarDict source files
+  (`.ifo`/`.idx`/`.dict.dz`/`.syn`, ~6.4MB total) are now committed directly
+  under `local-dict-zip/` in that repo -- **not** because the earlier push
+  needed it, but because the `Build Kosha corpus` Action **force-pushes
+  `dist` from scratch** on every run, sourcing only from
+  `dicts_config.json` + whatever `--sources-root` has checked out. Without
+  this, the very next manual trigger of that Action (someone adding an
+  unrelated new indic-dict dictionary, say) would silently drop all 5 of
+  today's dictionaries and wipe them back out of `dist` -- reported as
+  "source not found on disk," not a loud failure. `.github/workflows/
+  build-koshas.yml` now stages `local-dict-zip` with a symlink to the
+  Action's own checkout (nothing to clone, it's already there) rather than
+  a `git clone` step, matching how `csl-orig` and the other named repos work.
+- **`kosha_core.py` fix, same repo**: `iter_stardict()` gained a small
+  `_clean_stardict_word()` cleaning step. Two of the 5 real files carry
+  compiled-binary artifacts a `.babylon` source has never shown: a stray
+  U+00A0 glued to one WHO Ayurveda-terms headword, and one literal
+  `"<p></p>"` as an actual index word in Huet's dictionary (an artifact of
+  whatever tool compiled it to StarDict). Scoped strictly inside
+  `iter_stardict` -- zero risk to the 93 `.babylon`/2 `cdsl` dictionaries,
+  whose code paths are untouched. Verified **byte-identical** output between
+  the real `build_koshas.py` driver (run with `--sources-root` pointed at a
+  symlinked `local-dict-zip`, exactly how the Action will run it) and what
+  was already pushed to `dist`, both before this fix (matched the earlier
+  merge's un-cleaned `<p></p>` artifact) and after (matched the cleaned,
+  already-pushed version) -- so the reproducible path and the actually-live
+  data agree, not just headword counts but file contents.
+
+Not done, by explicit choice: `apte-sa`/`apte-bi` stay out of
+`dicts_config.json` and `dist` until someone reviews real samples of both --
+their compiled source files are *not* committed to `local-dict-zip/` either,
+so they'd need re-supplying if a review clears them later.
