@@ -8424,6 +8424,12 @@
       "title": "Varaha Purana"
     },
     {
+      "path": "dge/data/purana/vayu_purana/data.json",
+      "populated": false,
+      "title": "Vayu Purana",
+      "addedAt": "2026-08-25"
+    },
+    {
       "path": "dge/data/purana/vishnu_purana/amsha_01/data.json",
       "populated": true,
       "title": "Amsha 01"
@@ -8624,11 +8630,6 @@
       "title": "Angiras Smriti"
     },
     {
-      "path": "dge/data/smriti_dharma/smriti/apastamba_smriti/data.json",
-      "populated": false,
-      "title": "Apastamba Smriti"
-    },
-    {
       "path": "dge/data/smriti_dharma/smriti/atri_smriti/data.json",
       "populated": false,
       "title": "Atri Smriti"
@@ -8642,11 +8643,6 @@
       "path": "dge/data/smriti_dharma/smriti/daksha_smriti/data.json",
       "populated": false,
       "title": "Daksha Smriti"
-    },
-    {
-      "path": "dge/data/smriti_dharma/smriti/gautama_smriti/data.json",
-      "populated": false,
-      "title": "Gautama Smriti"
     },
     {
       "path": "dge/data/smriti_dharma/smriti/harita_smriti/data.json",

@@ -563,6 +563,10 @@
    "lalitopakhyana_lalita_sahasranama": {},
    "adhyatma_ramayana": {}
   },
+  "vayu_purana": {
+   "_schema": "itihasa_purana_text",
+   "_default_author": "Maharshi Veda Vyasa"
+  },
   "upapuranas": {
    "vishnu_dharmottara_purana": {},
    "devi_bhagavata_purana": {},
@@ -5143,9 +5147,6 @@
    "parashara_smriti": {
     "_default_author": "Parashara"
    },
-   "gautama_smriti": {
-    "_default_author": "Gautama"
-   },
    "harita_smriti": {
     "_default_author": "Harita"
    },
@@ -5182,9 +5183,6 @@
    "atri_smriti": {
     "_default_author": "Atri"
    },
-   "apastamba_smriti": {
-    "_default_author": "Apastamba"
-   },
    "shatatapa_smriti": {
     "_default_author": "Shatatapa"
    },
@@ -5197,7 +5195,8 @@
    },
    "katyayana_smriti": {
     "_default_author": "Katyayana"
-   }
+   },
+   "_note": "Apastamba and Gautama Dharmasutras were empty duplicate leaves here -- the real, populated texts (853 and 891 items) already live correctly classified under vedanga.kalpa.krishna_yajurveda.apastamba.dharmasutra and vedanga.kalpa.independent_dharmasutras.gautama_dharmasutra, found and confirmed via DCS (github.com/OliverHellwig/sanskrit) 25 Aug 2026. Removed rather than duplicated -- Apastamba/Gautama are properly Kalpa-sutra school texts, not independent verse Smritis."
   },
   "dharmashastra": {
    "dharma_sindhu": {

@@ -1,7 +1,7 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1965,
+  "leaves": 1964,
   "loaded": 1351,
   "items": 623505
  },
@@ -42,7 +42,7 @@
    "items": 2139
   },
   "purana": {
-   "total": 93,
+   "total": 94,
    "loaded": 41,
    "items": 72301
   },
@@ -52,7 +52,7 @@
    "items": 12439
   },
   "smriti_dharma": {
-   "total": 30,
+   "total": 28,
    "loaded": 8,
    "items": 8514
   },
@@ -1703,6 +1703,7 @@
   "purana/upapuranas/vishnu_dharmottara_purana": 0,
   "purana/vamana_purana/saromahatmya": 0,
   "purana/varaha_purana": 39,
+  "purana/vayu_purana": 0,
   "purana/vishnu_purana/amsha_01": 1393,
   "purana/vishnu_purana/amsha_02": 780,
   "purana/vishnu_purana/amsha_03": 815,
@@ -1743,12 +1744,10 @@
   "smriti_dharma/dharmashastra/nirnaya_sindhu": 0,
   "smriti_dharma/dharmashastra/smriti_chandrika": 0,
   "smriti_dharma/smriti/angiras_smriti": 0,
-  "smriti_dharma/smriti/apastamba_smriti": 0,
   "smriti_dharma/smriti/atri_smriti": 0,
   "smriti_dharma/smriti/baudhayana_smriti": 0,
   "smriti_dharma/smriti/brihaspati_smriti": 0,
   "smriti_dharma/smriti/daksha_smriti": 0,
-  "smriti_dharma/smriti/gautama_smriti": 0,
   "smriti_dharma/smriti/harita_smriti": 0,
   "smriti_dharma/smriti/katyayana_smriti": 976,
   "smriti_dharma/smriti/likhita_smriti": 0,
