@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v4.6 (stitched sibling-layer commentaries: setCommentaryView/dgeToggleCommentarySelection kick off dgeEnsureStitchedLayers (layer-stitch.js) so a just-selected layer\'s sibling data.json is fetched and merged on demand; LIST_PAGE_SIZE exposed as window.DGE_LIST_PAGE_SIZE for the section-navigator jump. Everything from v4.5 -- Gold-Standard render path -- unchanged)';
+window.DGE_VERSIONS['render.js'] = 'v4.7 (unloaded stitched layers render as tappable dashed pills on each card, capped at 6 + overflow into the picker; v4.6: stitched sibling-layer commentaries: setCommentaryView/dgeToggleCommentarySelection kick off dgeEnsureStitchedLayers (layer-stitch.js) so a just-selected layer\'s sibling data.json is fetched and merged on demand; LIST_PAGE_SIZE exposed as window.DGE_LIST_PAGE_SIZE for the section-navigator jump. Everything from v4.5 -- Gold-Standard render path -- unchanged)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -435,14 +435,43 @@ function renderList() {
           }
         }
       });
-      if (blocks.length > 1) {
+      // Stitched sibling layers (layer-stitch.js) that exist but are not
+      // yet selected render as tappable "load me" pills alongside the real
+      // tabs — the reader can SEE what commentaries exist and open one with
+      // a single tap, the way the source site's own pill row works. Without
+      // this, a pratīka-spine grantha looked empty and the only way in was
+      // the 💬 picker hidden in the collapsed mobile top bar (project
+      // lead's first phone test, 25 Aug night). Capped so a grantha with
+      // mis-split junk layers (bhedojjivana's 216) doesn't drown the card —
+      // the overflow pill opens the full picker.
+      let unloadedTabsHtml = '';
+      if (typeof window.dgeStitchedAvailableKeys === 'function') {
+        const renderedKeys = new Set(blocks.map(b => b.cKey));
+        const pending = window.dgeStitchedAvailableKeys().filter(k =>
+          !renderedKeys.has(k) && !selectedCommentaries.has(k));
+        const MAX_PENDING_PILLS = 6;
+        const shown = pending.slice(0, MAX_PENDING_PILLS);
+        const overflow = pending.length - shown.length;
+        unloadedTabsHtml = shown.map(k => {
+          const name = stotraData.metadata.availableCommentaries[k] || k;
+          const label = typeof applyTransliteration === 'function' ? applyTransliteration(name, activeScript) : name;
+          return `<button type="button" class="dge-commentary-tab dge-tab-unloaded" title="Tap to load this commentary" onclick="dgeToggleCommentarySelection('${k}')">${label}</button>`;
+        }).join('') + (overflow > 0
+          ? `<button type="button" class="dge-commentary-tab dge-tab-unloaded" onclick="window.togglePopup('commentaryPopup')">+${overflow} 💬</button>`
+          : '');
+      }
+      if (blocks.length > 1 || (blocks.length && unloadedTabsHtml)) {
         const tabsHtml = `<div class="dge-commentary-tabs" role="tablist">` +
           `<button type="button" class="dge-commentary-tab active" onclick="dgeShowCommentaryTab(${i}, 'all', this)">All</button>` +
           blocks.map(b => `<button type="button" class="dge-commentary-tab" onclick="dgeShowCommentaryTab(${i}, '${b.cKey}', this)">${b.name}</button>`).join('') +
-          `</div>`;
+          unloadedTabsHtml + `</div>`;
         commentaryHtml = `<div class="dge-commentary-tabbed" data-shloka="${i}">${tabsHtml}${blocks.map(b => b.html).join('')}</div>`;
-      } else {
+      } else if (blocks.length) {
         commentaryHtml = blocks.map(b => b.html).join('');
+      } else if (unloadedTabsHtml) {
+        // No commentary selected at all on this card, but layers exist —
+        // the pill row alone, so the way in is visible right on the card.
+        commentaryHtml = `<div class="dge-commentary-tabbed" data-shloka="${i}"><div class="dge-commentary-tabs" role="tablist">${unloadedTabsHtml}</div></div>`;
       }
     }
 

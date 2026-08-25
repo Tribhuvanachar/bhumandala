@@ -35,7 +35,7 @@
 
 
 <!-- DGE Stylesheet -->
-<link rel="stylesheet" href="css/main.css?v=4.70.0">
+<link rel="stylesheet" href="css/main.css?v=4.70.1">
 <!-- The intellisense and backlink panels, shared with the Vyakarana
      pages, which use a different palette and cannot load main.css. -->
 <link rel="stylesheet" href="css/intellisense.css?v=3">
@@ -1237,14 +1237,14 @@
      before render.js, which calls into it. Additive: a commentary without
      format:gold_v2_2 renders exactly as it always has. -->
 <script src="js/gold-render.js?v=1"></script>
-<script src="js/render.js?v=4.62.0"></script>
+<script src="js/render.js?v=4.62.1"></script>
 <!-- Load-time stitching of sibling mula/tika_* commentary layers into the
      per-card commentary tabs, plus the lineage strip and the breadcrumb
      section navigator (see dge/MULTI_LAYER_READER_ARCHITECTURE.md).
      Loaded before core.js, whose grantha-load path awaits
      dgeApplyLayerStitching. Additive: a grantha with no entry in
      data/layer_manifest.json renders exactly as it always has. -->
-<script src="js/layer-stitch.js?v=1.0.0"></script>
+<script src="js/layer-stitch.js?v=1.1.0"></script>
 <!-- async: JSZip is only used on demand (admin-editor.js's zip export/extract,
      gated behind typeof JSZip==='undefined' checks), never at boot -- a
      blocking, synchronous tag here meant a slow or stalled connection to
@@ -1260,7 +1260,7 @@
 <script src="js/config-editor.js?v=4.60.6"></script>
 <script src="js/content-editor.js?v=4.61.4"></script>
 <script src="js/text-abbreviations.js?v=1"></script>
-<script src="js/core.js?v=4.65.1"></script>
+<script src="js/core.js?v=4.65.2"></script>
 <!-- Reads admin/config/menu.json and rebuilds the top bar, the Explore and
      Admin popups and the theme list from it. Loaded after core.js so the
      theme it re-ticks is the one already applied. -->
