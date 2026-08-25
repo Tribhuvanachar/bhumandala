@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.4 (DGE_PATH_LABELS filled in for the remaining 234 taxonomy segments a full corpus sweep found missing -- Mahabharata parvas, Ramayana kandas, Puranas, the Dvaita Tatparya Nirnaya corpus, post-Madhva acharya/dasakuta names, Nyaya-Vaisheshika-Mimamsa technical terms, Vedic kalpa-sutra schools -- closing the same English-fallback bug class fixed for pancharatra_samhitas/nitishastra/upaveda in v3.3, now corpus-wide: 0 segments left unlabeled)';
+window.DGE_VERSIONS['library.js'] = 'v3.5 (DGE_PATH_LABELS: 141 Dasa Sahitya composer names added -- Devanagari transliteration of each composer\'s own Kannada name, or hand-attested for the major composers whose index.json name is Latin -- for the new composers/ taxonomy leaves, see dge/data/dasa_sahitya_local/ARCHITECTURE.md)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -194,6 +194,46 @@ const DGE_PATH_LABELS = {
   vrittaratnakara: 'वृत्तरत्नाकरः',
   // Advaita corpus + misc
   shankara_bhashya: 'शङ्करभाष्यम्', badhanta: 'बाधान्तः', brahmasutranyayasamgraha: 'ब्रह्मसूत्रन्यायसंग्रहः',
+  // Dasa Sahitya composers (25 Aug 2026 taxonomy integration) --
+  // Devanagari transliteration of each composer's own Kannada name in
+  // dge/data/dasa_sahitya/index.json (generated with indic_transliteration,
+  // the same library tools/dasa_sahitya/*.py uses for the compositions
+  // themselves), plus hand-attested Devanagari for the major composers
+  // whose index.json name is Latin (Purandara/Vijaya/Kanaka Dasaru etc.).
+  // A handful of singleton, likely-mis-attributed 'composer' entries
+  // (a title filed as a composer name, one URL-garbled slug, the honest
+  // 'untitled' bucket) are left out on purpose rather than guessed --
+  // see dge/data/dasa_sahitya_local/ARCHITECTURE.md.
+  composers: 'दाससाहित्यरचयितारः',
+  acalanamdadasa: 'अचलानंददास', aihole_vemkatesa: 'ऐहॊळॆ वॆंकटेश', ambabayi: 'अंबाबायि', anamtadrisaru: 'अनंताद्रीशरु', anyadasaru: 'अन्यदासरु',
+  askihala_govimda: 'अस्किहाळ गोविंद', asuri_ramasvamiayyamgar: 'असूरि रामस्वामिअय्यंगार्', badannayyacaryaru: 'बडण्णय्याचार्यरु', bagepalli_sesadasaru: 'बागेपल्लि शेषदासरु', belle_dasappayya: 'बॆळ्ळॆ दासप्पय्य',
+  beluru_vaikumthadasaru: 'बेलूरु वैकुंठदासरु', beteraya_diksitaru: 'बेटॆराय दीक्षितरु', bhatakala_appayya: 'भटकळ अप्पय्य', bhavatarakaru: 'भावतरकरु', bhimasamkara: 'भीमाशंकर',
+  bhupati_vithalaru: 'भूपति विठलरु', bolara_vasudevayya: 'बोळारा वासुदेवय्य', cannapattanada_ahobaladasaru: 'चन्नपट्टणद अहोबलदासरु', cidanamda_avadhutaru: 'चिदानंद अवधूतरु', dhanvanthri: 'धन्वन्तरिः',
+  durga: 'दुर्गा', galagaliavvanavaru: 'गलगलिअव्वनवरु', gopala_dasaru: 'गोपालदासरु', gopalaryaru: 'गोपालार्यरु', gopativithalaru: 'गोपतिविठलरु',
+  govimdadasa: 'गोविंददास', gumdamma: 'गुंडम्म', gurugovimdavithalaru: 'गुरुगोविंदविठलरु', guruimdiresaru: 'गुरुइंदिरेशरु', gurujagannathadasaru: 'गुरुजगन्नाथदासरु',
+  gurupranesavithalaru: 'गुरुप्राणेशविठलरु', gururamalimga: 'गुरुरामलिंग', gururamavithala: 'गुरुरामविठल', gurutamdevaradagopalavithalaru: 'गुरुतंदॆवरदगोपालविठलरु', guruvijayaviththalaru: 'गुरुविजयविठ्ठलरु',
+  hanumesavithala: 'हनुमेशविठल', harapanahalli_bheemavva: 'हरपनहळ्ळि भीमव्वा', hasanmukha_vithalaru: 'हसन्मुख विठलरु', helavanakatte_giriyamma: 'हॆळवनकट्टॆ गिरियम्मा', henneramgadasaru: 'हॆन्नॆरंगदासरु',
+  hosakere_cidambarayyanavaru: 'हॊसकॆरॆ चिदंबरय्यनवरु', imdiresaru: 'इंदिरेशरु', jagannatha_dasaru: 'जगन्नाथदासरु', jakkappayyanavaru: 'जक्कप्पय्यनवरु', jayesavithala: 'जयेशविठल',
+  jnanabodakaru: 'ज्ञानबोदकरु', kadarumdalagi_hanumayya: 'कदरुंडलगि हनुमय्य', kadarumdalagisaru: 'कदरुंडलगीशरु', kakhamdaki_sri_krsnadasaru: 'काखंडकि श्री कृष्णदासरु', kakhamdaki_sri_mahipatirayaru: 'काखंडकि श्री महिपतिरायरु',
+  kalasada_sumdaramma: 'कळसद सुंदरम्म', kamalapativiththalaru: 'कमलपतिविठ्ठलरु', kanaka_dasaru: 'कनकदासरु', karki_kesavadasa: 'कर्कि केशवदास', karpara_naraharidasaru: 'कार्पर नरहरिदासरु',
+  kavi_laksmisa: 'कवि लक्ष्मीश', kavi_paramadevadasaru: 'कवि परमदेवदासरु', keladi_vemkanna_kavi: 'कॆळदि वॆंकण्ण कवि', kesavaviththalaru: 'केशवविठ्ठलरु', kosala_purisara: 'कोसल पुरीशर',
+  krsnavithaladasaru: 'कृष्णविठलदासरु', laksminarayanarayaru: 'लक्ष्मीनारयणरायरु', mahanithivithala: 'महानिथिविठल', mahipathi_dasaru: 'महीपतिदासरु', malige_ramgasvamidasaru: 'मळिगॆ रंगस्वामिदासरु',
+  mohana_dasaru: 'मोहनदासरु', muddumohanavithaladasaru: 'मुद्दुमोहनविठलदासरु', namjanagudu_tirumalamba: 'नंजनगूडु तिरुमलांबा', narasimha: 'नरसिंह', narasimhavithalaru: 'नरसिंहविठलरु',
+  narayanadasaru: 'नारायणदासरु', nidaguruki_jivubayi: 'निडगुरुकि जीवूबायि', orabayi_laksmidevamma: 'ओरबायि लक्ष्मीदेवम्म', pamduramga: 'पांडुरंग', parisistam: 'परिशिष्टं',
+  pavamje_laksminarnappayya: 'पावंजॆ लक्ष्मीनार्णप्पय्य', pradyumnatirtharu: 'प्रद्युम्नतीर्थरु', pranesha_dasaru: 'प्राणेशदासरु', prasanna_srinivasadasaru: 'प्रसन्न श्रीनिवासदासरु', prasanna_venkata_dasaru: 'प्रसन्नवेङ्कटदासरु',
+  purandara_dasaru: 'पुरन्दरदासरु', radhabayi: 'राधाबायि', raghavendra: 'राघवेन्द्रः', raghuramavithaladasaru: 'रघुरामविठलदासरु', rajagopaladasaru: 'राजगोपालदासरु',
+  ramadasaru: 'रामदासरु', ramapativithalaru: 'रमापतिविठलरु', ramgadasaru: 'रंगदासरु', ramgesavithaladasaru: 'रंगेशविठलदासरु', rukmamgadaru: 'रुक्मांगदरु',
+  sadanamdaru: 'सदानंदरु', samasarmaru: 'शामशर्मरु', samasumdara_vithala: 'शामसुंदर विठल', samkarabhatta_agnihotri: 'शंकरभट्ट अग्निहोत्रि', sampattayyamgar: 'संपत्तय्यंगार्',
+  samtibayi: 'शांतिबायि', saraguru_vemkatavaradaryaru: 'सरगूरु वॆंकटवरदार्यरु', sarasabayi: 'सरसाबायि', sarasvati_bayi: 'सरस्वति बायि', shyama_sundara_dasaru: 'श्यामसुन्दरदासरु',
+  siddhagurutripuramtaka: 'सिद्धगुरुत्रिपुरांतक', sirigovimdavithala: 'सिरिगोविंदविठल', sirigurutamdevaradavithalaru: 'सिरिगुरुतंदॆवरदविठलरु', sirivatsamkitaru: 'सिरिवत्सांकितरु', sirivithalaru: 'सिरिविठलरु',
+  sivaramaru: 'शिवरामरु', sridavithalaru: 'श्रीदविठलरु', srinidhivithalaru: 'श्रीनिधिविठलरु', sripadarajaru: 'श्रीपादराजरु', sripati: 'श्रीपति',
+  srisa_kesavadasaru: 'श्रीश केशवदासरु', srisapranesavithalaru: 'श्रीशप्राणेशविठलरु', tamde_muddumohana_vithalaru: 'तंदॆ मुद्दुमोहन विठलरु', tamde_srinarahari: 'तंदॆ श्रीनरहरि', tamdevaradagopalavithalaru: 'तंदॆवरदगोपालविठलरु',
+  timmappadasaru: 'तिम्मप्पदासरु', tulasiramadasaru: 'तुळसीरामदासरु', tupaki_vemkataramanacarya: 'तुपाकि वॆंकटरमणाचार्य', uragadrivasavithaladasaru: 'उरगाद्रिवासविठलदासरु', vadirajaru: 'वादिराजरु',
+  varadesavithala: 'वरदेशविठल', varahatimmappa: 'वरहतिम्मप्प', varavaniramarayadasaru: 'वरावाणिरामरायदासरु', vemkatadasaru: 'वॆंकटदासरु', vemkatavaradaryaru: 'वॆंकटवरदार्यरु',
+  vemkatesavitthala: 'वॆंकटेशविट्ठल', vemkatrav: 'वॆंकट्राव्', venugopaladasaru: 'वेणुगोपालदासरु', vidyakamtayatigalu: 'विद्याकांतयतिगळु', vidyaprasannatirtharu: 'विद्याप्रसन्नतीर्थरु',
+  vidyaratnakaratirtharu: 'विद्यारत्नाकरतीर्थरु', vijaya_dasaru: 'विजयदासरु', vijaya_ramacamdravithala: 'विजय रामचंद्रविठल', vijayimdratirtharu: 'विजयींद्रतीर्थरु', viranarayana: 'वीरनारायण',
+  visvapati: 'विश्वपति', visvemdratirtha: 'विश्वॆंद्रतीर्थ', vyasarayaru: 'व्यासरायरु', vyasatatvajnadasaru: 'व्यासतत्वज्ञदासरु', vyasaviththalaru: 'व्यासविठ्ठलरु',
+  yadugiriyamma: 'यदुगिरियम्म',
 };
 
 // Numbered folders, e.g. "mandala_07". The prefix is Devanagari (so it

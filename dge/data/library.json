@@ -6249,219 +6249,921 @@
       "title": "Tika Tattva Vaisharadi"
     },
     {
-      "path": "dge/data/dasa_sahitya/dasakuta/gopaladasa/dandaka/data.json",
-      "populated": false,
-      "title": "Dandaka"
+      "path": "dge/data/dasa_sahitya/composers/acalanamdadasa/data.json",
+      "populated": true,
+      "title": "Acalanamdadasa",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/dasa_sahitya/dasakuta/gopaladasa/mundige/data.json",
-      "populated": false,
-      "title": "Mundige"
+      "path": "dge/data/dasa_sahitya/composers/aihole_vemkatesa/data.json",
+      "populated": true,
+      "title": "Aihole Vemkatesa",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/dasa_sahitya/dasakuta/gopaladasa/other_compositions/data.json",
-      "populated": false,
-      "title": "Other Compositions"
+      "path": "dge/data/dasa_sahitya/composers/ambabayi/data.json",
+      "populated": true,
+      "title": "Ambabayi",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/dasa_sahitya/dasakuta/gopaladasa/pada_kirtane/data.json",
-      "populated": false,
-      "title": "Pada Kirtane"
+      "path": "dge/data/dasa_sahitya/composers/anamtadrisaru/data.json",
+      "populated": true,
+      "title": "Anamtadrisaru",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/dasa_sahitya/dasakuta/gopaladasa/suladi/data.json",
-      "populated": false,
-      "title": "Suladi"
+      "path": "dge/data/dasa_sahitya/composers/anyadasaru/data.json",
+      "populated": true,
+      "title": "Anyadasaru",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/dasa_sahitya/dasakuta/gopaladasa/ugabhoga/data.json",
-      "populated": false,
-      "title": "Ugabhoga"
+      "path": "dge/data/dasa_sahitya/composers/askihala_govimda/data.json",
+      "populated": true,
+      "title": "Askihala Govimda",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/dasa_sahitya/dasakuta/jagannathadasa/dandaka/data.json",
-      "populated": false,
-      "title": "Dandaka"
+      "path": "dge/data/dasa_sahitya/composers/asuri_ramasvamiayyamgar/data.json",
+      "populated": true,
+      "title": "Asuri Ramasvamiayyamgar",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/badannayyacaryaru/data.json",
+      "populated": true,
+      "title": "Badannayyacaryaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/bagepalli_sesadasaru/data.json",
+      "populated": true,
+      "title": "Bagepalli Sesadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/belle_dasappayya/data.json",
+      "populated": true,
+      "title": "Belle Dasappayya",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/beluru_vaikumthadasaru/data.json",
+      "populated": true,
+      "title": "Beluru Vaikumthadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/beteraya_diksitaru/data.json",
+      "populated": true,
+      "title": "Beteraya Diksitaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/bhatakala_appayya/data.json",
+      "populated": true,
+      "title": "Bhatakala Appayya",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/bhavatarakaru/data.json",
+      "populated": true,
+      "title": "Bhavatarakaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/bhimasamkara/data.json",
+      "populated": true,
+      "title": "Bhimasamkara",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/bhupati_vithalaru/data.json",
+      "populated": true,
+      "title": "Bhupati Vithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/bolara_vasudevayya/data.json",
+      "populated": true,
+      "title": "Bolara Vasudevayya",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/cannapattanada_ahobaladasaru/data.json",
+      "populated": true,
+      "title": "Cannapattanada Ahobaladasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/cidanamda_avadhutaru/data.json",
+      "populated": true,
+      "title": "Cidanamda Avadhutaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/dhanvanthri/data.json",
+      "populated": true,
+      "title": "Dhanvanthri",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/durga/data.json",
+      "populated": true,
+      "title": "Durga",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/galagaliavvanavaru/data.json",
+      "populated": true,
+      "title": "Galagaliavvanavaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/gopala_dasaru/data.json",
+      "populated": true,
+      "title": "Gopala Dasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/gopalaryaru/data.json",
+      "populated": true,
+      "title": "Gopalaryaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/gopativithalaru/data.json",
+      "populated": true,
+      "title": "Gopativithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/govimdadasa/data.json",
+      "populated": true,
+      "title": "Govimdadasa",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/gumdamma/data.json",
+      "populated": true,
+      "title": "Gumdamma",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/gurugovimdavithalaru/data.json",
+      "populated": true,
+      "title": "Gurugovimdavithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/guruimdiresaru/data.json",
+      "populated": true,
+      "title": "Guruimdiresaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/gurujagannathadasaru/data.json",
+      "populated": true,
+      "title": "Gurujagannathadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/gurupranesavithalaru/data.json",
+      "populated": true,
+      "title": "Gurupranesavithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/gururamalimga/data.json",
+      "populated": true,
+      "title": "Gururamalimga",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/gururamavithala/data.json",
+      "populated": true,
+      "title": "Gururamavithala",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/gurutamdevaradagopalavithalaru/data.json",
+      "populated": true,
+      "title": "Gurutamdevaradagopalavithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/guruvijayaviththalaru/data.json",
+      "populated": true,
+      "title": "Guruvijayaviththalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/hanumesavithala/data.json",
+      "populated": true,
+      "title": "Hanumesavithala",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/harapanahalli_bheemavva/data.json",
+      "populated": true,
+      "title": "Harapanahalli Bheemavva",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/hasanmukha_vithalaru/data.json",
+      "populated": true,
+      "title": "Hasanmukha Vithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/helavanakatte_giriyamma/data.json",
+      "populated": true,
+      "title": "Helavanakatte Giriyamma",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/henneramgadasaru/data.json",
+      "populated": true,
+      "title": "Henneramgadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/hosakere_cidambarayyanavaru/data.json",
+      "populated": true,
+      "title": "Hosakere Cidambarayyanavaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/imdiresaru/data.json",
+      "populated": true,
+      "title": "Imdiresaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/jagannatha_dasaru/data.json",
+      "populated": true,
+      "title": "Jagannatha Dasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/jakkappayyanavaru/data.json",
+      "populated": true,
+      "title": "Jakkappayyanavaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/jayesavithala/data.json",
+      "populated": true,
+      "title": "Jayesavithala",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/jnanabodakaru/data.json",
+      "populated": true,
+      "title": "Jnanabodakaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/kadarumdalagi_hanumayya/data.json",
+      "populated": true,
+      "title": "Kadarumdalagi Hanumayya",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/kadarumdalagisaru/data.json",
+      "populated": true,
+      "title": "Kadarumdalagisaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/kakhamdaki_sri_krsnadasaru/data.json",
+      "populated": true,
+      "title": "Kakhamdaki Sri Krsnadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/kakhamdaki_sri_mahipatirayaru/data.json",
+      "populated": true,
+      "title": "Kakhamdaki Sri Mahipatirayaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/kalasada_sumdaramma/data.json",
+      "populated": true,
+      "title": "Kalasada Sumdaramma",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/kamalapativiththalaru/data.json",
+      "populated": true,
+      "title": "Kamalapativiththalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/kanaka_dasaru/data.json",
+      "populated": true,
+      "title": "Kanaka Dasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/kankanaa_kaara/data.json",
+      "populated": true,
+      "title": "Kankanaa Kaara",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/karki_kesavadasa/data.json",
+      "populated": true,
+      "title": "Karki Kesavadasa",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/karpara_naraharidasaru/data.json",
+      "populated": true,
+      "title": "Karpara Naraharidasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/kavi_laksmisa/data.json",
+      "populated": true,
+      "title": "Kavi Laksmisa",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/kavi_paramadevadasaru/data.json",
+      "populated": true,
+      "title": "Kavi Paramadevadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/keladi_vemkanna_kavi/data.json",
+      "populated": true,
+      "title": "Keladi Vemkanna Kavi",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/kesavaviththalaru/data.json",
+      "populated": true,
+      "title": "Kesavaviththalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/kosala_purisara/data.json",
+      "populated": true,
+      "title": "Kosala Purisara",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/krsnavithaladasaru/data.json",
+      "populated": true,
+      "title": "Krsnavithaladasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/laksminarayanarayaru/data.json",
+      "populated": true,
+      "title": "Laksminarayanarayaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/mahanithivithala/data.json",
+      "populated": true,
+      "title": "Mahanithivithala",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/mahipathi_dasaru/data.json",
+      "populated": true,
+      "title": "Mahipathi Dasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/malige_ramgasvamidasaru/data.json",
+      "populated": true,
+      "title": "Malige Ramgasvamidasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/mohana_dasaru/data.json",
+      "populated": true,
+      "title": "Mohana Dasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/muddumohanavithaladasaru/data.json",
+      "populated": true,
+      "title": "Muddumohanavithaladasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/namjanagudu_tirumalamba/data.json",
+      "populated": true,
+      "title": "Namjanagudu Tirumalamba",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/narasimha/data.json",
+      "populated": true,
+      "title": "Narasimha",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/narasimha_jagannatha_dasaru/data.json",
+      "populated": true,
+      "title": "Narasimha Jagannatha Dasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/narasimhavithalaru/data.json",
+      "populated": true,
+      "title": "Narasimhavithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/narayanadasaru/data.json",
+      "populated": true,
+      "title": "Narayanadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/nidaguruki_jivubayi/data.json",
+      "populated": true,
+      "title": "Nidaguruki Jivubayi",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/orabayi_laksmidevamma/data.json",
+      "populated": true,
+      "title": "Orabayi Laksmidevamma",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/pamduramga/data.json",
+      "populated": true,
+      "title": "Pamduramga",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/parisistam/data.json",
+      "populated": true,
+      "title": "Parisistam",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/pavamje_laksminarnappayya/data.json",
+      "populated": true,
+      "title": "Pavamje Laksminarnappayya",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/pradyumnatirtharu/data.json",
+      "populated": true,
+      "title": "Pradyumnatirtharu",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/pranesha_dasaru/data.json",
+      "populated": true,
+      "title": "Pranesha Dasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/prasanna_srinivasadasaru/data.json",
+      "populated": true,
+      "title": "Prasanna Srinivasadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/prasanna_venkata_dasaru/data.json",
+      "populated": true,
+      "title": "Prasanna Venkata Dasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/purandara_dasaru/data.json",
+      "populated": true,
+      "title": "Purandara Dasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/radhabayi/data.json",
+      "populated": true,
+      "title": "Radhabayi",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/raghavendra/data.json",
+      "populated": true,
+      "title": "Raghavendra",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/raghuramavithaladasaru/data.json",
+      "populated": true,
+      "title": "Raghuramavithaladasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/rajagopaladasaru/data.json",
+      "populated": true,
+      "title": "Rajagopaladasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/ramadasaru/data.json",
+      "populated": true,
+      "title": "Ramadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/ramapativithalaru/data.json",
+      "populated": true,
+      "title": "Ramapativithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/ramgadasaru/data.json",
+      "populated": true,
+      "title": "Ramgadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/ramgesavithaladasaru/data.json",
+      "populated": true,
+      "title": "Ramgesavithaladasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/rukmamgadaru/data.json",
+      "populated": true,
+      "title": "Rukmamgadaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sadanamdaru/data.json",
+      "populated": true,
+      "title": "Sadanamdaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/samasarmaru/data.json",
+      "populated": true,
+      "title": "Samasarmaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/samasumdara_vithala/data.json",
+      "populated": true,
+      "title": "Samasumdara Vithala",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/samkarabhatta_agnihotri/data.json",
+      "populated": true,
+      "title": "Samkarabhatta Agnihotri",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sampattayyamgar/data.json",
+      "populated": true,
+      "title": "Sampattayyamgar",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/samtibayi/data.json",
+      "populated": true,
+      "title": "Samtibayi",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/saraguru_vemkatavaradaryaru/data.json",
+      "populated": true,
+      "title": "Saraguru Vemkatavaradaryaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sarasabayi/data.json",
+      "populated": true,
+      "title": "Sarasabayi",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sarasvati_bayi/data.json",
+      "populated": true,
+      "title": "Sarasvati Bayi",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/shyama_sundara_dasaru/data.json",
+      "populated": true,
+      "title": "Shyama Sundara Dasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/siddhagurutripuramtaka/data.json",
+      "populated": true,
+      "title": "Siddhagurutripuramtaka",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sirigovimdavithala/data.json",
+      "populated": true,
+      "title": "Sirigovimdavithala",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sirigurutamdevaradavithalaru/data.json",
+      "populated": true,
+      "title": "Sirigurutamdevaradavithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sirivatsamkitaru/data.json",
+      "populated": true,
+      "title": "Sirivatsamkitaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sirivithalaru/data.json",
+      "populated": true,
+      "title": "Sirivithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sivaramaru/data.json",
+      "populated": true,
+      "title": "Sivaramaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sri_kapila_devara_stotra/data.json",
+      "populated": true,
+      "title": "Sri Kapila Devara Stotra",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sri_mukhya_prana_devara_stotra/data.json",
+      "populated": true,
+      "title": "Sri Mukhya Prana Devara Stotra",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sri_narasimha_devara/data.json",
+      "populated": true,
+      "title": "Sri Narasimha Devara",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sri_parvathi_devi_sthothra/data.json",
+      "populated": true,
+      "title": "Sri Parvathi Devi Sthothra",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sridavithalaru/data.json",
+      "populated": true,
+      "title": "Sridavithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/srinidhivithalaru/data.json",
+      "populated": true,
+      "title": "Srinidhivithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sripadarajaru/data.json",
+      "populated": true,
+      "title": "Sripadarajaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/sripati/data.json",
+      "populated": true,
+      "title": "Sripati",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/srisa_kesavadasaru/data.json",
+      "populated": true,
+      "title": "Srisa Kesavadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/srisapranesavithalaru/data.json",
+      "populated": true,
+      "title": "Srisapranesavithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/tamde_muddumohana_vithalaru/data.json",
+      "populated": true,
+      "title": "Tamde Muddumohana Vithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/tamde_srinarahari/data.json",
+      "populated": true,
+      "title": "Tamde Srinarahari",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/tamdevaradagopalavithalaru/data.json",
+      "populated": true,
+      "title": "Tamdevaradagopalavithalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/timmappadasaru/data.json",
+      "populated": true,
+      "title": "Timmappadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/tulasi_devi_purandara_dasaru/data.json",
+      "populated": true,
+      "title": "Tulasi Devi Purandara Dasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/tulasiramadasaru/data.json",
+      "populated": true,
+      "title": "Tulasiramadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/tupaki_vemkataramanacarya/data.json",
+      "populated": true,
+      "title": "Tupaki Vemkataramanacarya",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/untitled/data.json",
+      "populated": true,
+      "title": "Untitled",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/uragadrivasavithaladasaru/data.json",
+      "populated": true,
+      "title": "Uragadrivasavithaladasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vadirajaru/data.json",
+      "populated": true,
+      "title": "Vadirajaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/varadesavithala/data.json",
+      "populated": true,
+      "title": "Varadesavithala",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/varahatimmappa/data.json",
+      "populated": true,
+      "title": "Varahatimmappa",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/varavaniramarayadasaru/data.json",
+      "populated": true,
+      "title": "Varavaniramarayadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vayudevara_avathara_traya/data.json",
+      "populated": true,
+      "title": "Vayudevara Avathara Traya",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vemkatadasaru/data.json",
+      "populated": true,
+      "title": "Vemkatadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vemkatavaradaryaru/data.json",
+      "populated": true,
+      "title": "Vemkatavaradaryaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vemkatesavitthala/data.json",
+      "populated": true,
+      "title": "Vemkatesavitthala",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vemkatrav/data.json",
+      "populated": true,
+      "title": "Vemkatrav",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/venugopaladasaru/data.json",
+      "populated": true,
+      "title": "Venugopaladasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vidyakamtayatigalu/data.json",
+      "populated": true,
+      "title": "Vidyakamtayatigalu",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vidyaprasannatirtharu/data.json",
+      "populated": true,
+      "title": "Vidyaprasannatirtharu",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vidyaratnakaratirtharu/data.json",
+      "populated": true,
+      "title": "Vidyaratnakaratirtharu",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vijaya_dasaru/data.json",
+      "populated": true,
+      "title": "Vijaya Dasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vijaya_ramacamdravithala/data.json",
+      "populated": true,
+      "title": "Vijaya Ramacamdravithala",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vijayimdratirtharu/data.json",
+      "populated": true,
+      "title": "Vijayimdratirtharu",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/viranarayana/data.json",
+      "populated": true,
+      "title": "Viranarayana",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/visvapati/data.json",
+      "populated": true,
+      "title": "Visvapati",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/visvemdratirtha/data.json",
+      "populated": true,
+      "title": "Visvemdratirtha",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vivaha/data.json",
+      "populated": true,
+      "title": "Vivaha",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vyasaraja_pratishte_anjaneya_e0b2b5e0b38de0b2afe0b2bee0b2b8e0b2b0e0b2bee0b29c_e0b2aae0b38de0b2b0e0b2a4e0b2bfe0b2b7e0b38de0b2a0e0b386_e0b286/data.json",
+      "populated": true,
+      "title": "Vyasaraja Pratishte Anjaneya E0B2B5E0B38De0B2Afe0B2Bee0B2B8E0B2B0E0B2Bee0B29C E0B2Aae0B38De0B2B0E0B2A4E0B2Bfe0B2B7E0B38De0B2A0E0B386 E0B286",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vyasarayaru/data.json",
+      "populated": true,
+      "title": "Vyasarayaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vyasatatvajnadasaru/data.json",
+      "populated": true,
+      "title": "Vyasatatvajnadasaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/vyasaviththalaru/data.json",
+      "populated": true,
+      "title": "Vyasaviththalaru",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/dasa_sahitya/composers/yadugiriyamma/data.json",
+      "populated": true,
+      "title": "Yadugiriyamma",
+      "addedAt": "2026-08-25"
     },
     {
       "path": "dge/data/dasa_sahitya/dasakuta/jagannathadasa/harikathamrutasara/data.json",
       "populated": true,
       "title": "ಶ್ರೀ ಹರಿಕಥಾಮೃತಸಾರ (ಶ್ರೀ ಜಗನ್ನಾಥದಾಸರು)"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/jagannathadasa/mundige/data.json",
-      "populated": false,
-      "title": "Mundige"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/jagannathadasa/other_compositions/data.json",
-      "populated": false,
-      "title": "Other Compositions"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/jagannathadasa/pada_kirtane/data.json",
-      "populated": false,
-      "title": "Pada Kirtane"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/jagannathadasa/suladi/data.json",
-      "populated": false,
-      "title": "Suladi"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/jagannathadasa/ugabhoga/data.json",
-      "populated": false,
-      "title": "Ugabhoga"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/kanakadasa/dandaka/data.json",
-      "populated": false,
-      "title": "Dandaka"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/kanakadasa/mundige/data.json",
-      "populated": false,
-      "title": "Mundige"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/kanakadasa/other_compositions/data.json",
-      "populated": false,
-      "title": "Other Compositions"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/kanakadasa/pada_kirtane/data.json",
-      "populated": false,
-      "title": "Pada Kirtane"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/kanakadasa/suladi/data.json",
-      "populated": false,
-      "title": "Suladi"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/kanakadasa/ugabhoga/data.json",
-      "populated": false,
-      "title": "Ugabhoga"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/mahipatidasa/dandaka/data.json",
-      "populated": false,
-      "title": "Dandaka"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/mahipatidasa/mundige/data.json",
-      "populated": false,
-      "title": "Mundige"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/mahipatidasa/other_compositions/data.json",
-      "populated": false,
-      "title": "Other Compositions"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/mahipatidasa/pada_kirtane/data.json",
-      "populated": false,
-      "title": "Pada Kirtane"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/mahipatidasa/suladi/data.json",
-      "populated": false,
-      "title": "Suladi"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/mahipatidasa/ugabhoga/data.json",
-      "populated": false,
-      "title": "Ugabhoga"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/prasannavenkatadasa/dandaka/data.json",
-      "populated": false,
-      "title": "Dandaka"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/prasannavenkatadasa/mundige/data.json",
-      "populated": false,
-      "title": "Mundige"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/prasannavenkatadasa/other_compositions/data.json",
-      "populated": false,
-      "title": "Other Compositions"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/prasannavenkatadasa/pada_kirtane/data.json",
-      "populated": false,
-      "title": "Pada Kirtane"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/prasannavenkatadasa/suladi/data.json",
-      "populated": false,
-      "title": "Suladi"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/prasannavenkatadasa/ugabhoga/data.json",
-      "populated": false,
-      "title": "Ugabhoga"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/purandaradasa/dandaka/data.json",
-      "populated": false,
-      "title": "Dandaka"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/purandaradasa/mundige/data.json",
-      "populated": false,
-      "title": "Mundige"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/purandaradasa/other_compositions/data.json",
-      "populated": false,
-      "title": "Other Compositions"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/purandaradasa/pada_kirtane/data.json",
-      "populated": false,
-      "title": "Pada Kirtane"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/purandaradasa/suladi/data.json",
-      "populated": false,
-      "title": "Suladi"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/purandaradasa/ugabhoga/data.json",
-      "populated": false,
-      "title": "Ugabhoga"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/vijayadasa/dandaka/data.json",
-      "populated": false,
-      "title": "Dandaka"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/vijayadasa/mundige/data.json",
-      "populated": false,
-      "title": "Mundige"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/vijayadasa/other_compositions/data.json",
-      "populated": false,
-      "title": "Other Compositions"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/vijayadasa/pada_kirtane/data.json",
-      "populated": false,
-      "title": "Pada Kirtane"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/vijayadasa/suladi/data.json",
-      "populated": false,
-      "title": "Suladi"
-    },
-    {
-      "path": "dge/data/dasa_sahitya/dasakuta/vijayadasa/ugabhoga/data.json",
-      "populated": false,
-      "title": "Ugabhoga"
     },
     {
       "path": "dge/data/dasa_sahitya/vyasakuta/raghavendra_tirtha/bhattasangraha/data.json",

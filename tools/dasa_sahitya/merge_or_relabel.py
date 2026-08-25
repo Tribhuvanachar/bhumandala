@@ -118,12 +118,23 @@ def load_json(path):
 
 
 def dump_json(path, obj):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=2)
 
 
+def composer_payload(composer, items, bio_notes=""):
+    return {"schema": "dasa_pada_text", "default_author": composer,
+            "composer": composer, "count": len(items),
+            "bio_notes": bio_notes, "items": items}
+
+
 def comp_path(slug):
-    return os.path.join(COMP_DIR, slug + ".json")
+    # composers/<slug>/data.json, not a flat composers/<slug>.json -- the
+    # taxonomy/library.json leaf convention (21 Aug 2026 restructure); the
+    # directory is created lazily by dump_json's caller sites that write a
+    # NEW composer file (merge/move destinations), not read here.
+    return os.path.join(COMP_DIR, slug, "data.json")
 
 
 def load_composer(slug):
@@ -136,23 +147,24 @@ def load_composer(slug):
 def rebuild_manifest():
     counts_by_composer, counts_by_form, composers_list, total = {}, {}, [], 0
     untitled_composer_count = with_text = multi_source = 0
-    for fn in sorted(os.listdir(COMP_DIR)):
-        if not fn.endswith(".json"):
+    for slug in sorted(os.listdir(COMP_DIR)):
+        leaf = os.path.join(COMP_DIR, slug, "data.json")
+        if not os.path.isfile(leaf):
             continue
-        d = load_json(os.path.join(COMP_DIR, fn))
+        d = load_json(leaf)
         n = d["count"]
         total += n
-        counts_by_composer[d["composer"] or fn] = n
+        counts_by_composer[d["composer"] or slug] = n
         if not d["composer"]:
             untitled_composer_count += n
-        for r in d["compositions"]:
+        for r in d["items"]:
             counts_by_form[r["form"]] = counts_by_form.get(r["form"], 0) + 1
             if r.get("text", {}).get("kannada"):
                 with_text += 1
             if r.get("also_at"):
                 multi_source += 1
-        composers_list.append({"slug": fn[:-5], "composer": d["composer"], "count": n,
-                                "file": f"composers/{fn}"})
+        composers_list.append({"slug": slug, "composer": d["composer"], "count": n,
+                                "file": f"composers/{slug}/data.json"})
     manifest = load_json(MANIFEST_PATH)
     manifest["count_total"] = total
     manifest["generated"] = FETCH_DATE
@@ -175,8 +187,9 @@ def cmd_merge_composers(args):
     from_d = load_composer(args.from_slug)
     into_d = load_composer(args.into_slug)
     canonical = args.canonical_name or into_d["composer"] or from_d["composer"]
+    bio_notes = into_d.get("bio_notes") or from_d.get("bio_notes") or ""
 
-    all_recs = list(from_d["compositions"]) + list(into_d["compositions"])
+    all_recs = list(from_d["items"]) + list(into_d["items"])
     for r in all_recs:
         r["composer"] = canonical
         r.setdefault("also_at", [])
@@ -186,28 +199,28 @@ def cmd_merge_composers(args):
     merged, dup_count = dedupe(all_recs)
     merged.sort(key=lambda r: (r["title"].get("kn") or r["title"].get("latin") or ""))
 
-    dump_json(comp_path(args.into_slug), {"composer": canonical, "count": len(merged),
-                                           "compositions": merged})
+    dump_json(comp_path(args.into_slug), composer_payload(canonical, merged, bio_notes))
     os.remove(comp_path(args.from_slug))
-    print(f"merged '{args.from_slug}' ({len(from_d['compositions'])}) into "
-          f"'{args.into_slug}' ({len(into_d['compositions'])}) as '{canonical}': "
+    os.rmdir(os.path.dirname(comp_path(args.from_slug)))
+    print(f"merged '{args.from_slug}' ({len(from_d['items'])}) into "
+          f"'{args.into_slug}' ({len(into_d['items'])}) as '{canonical}': "
           f"{len(merged)} unique compositions ({dup_count} duplicates collapsed). "
-          f"Deleted {args.from_slug}.json.")
+          f"Deleted {args.from_slug}/data.json.")
     rebuild_manifest()
 
 
 def _find_record(composer_slug, comp_id):
     d = load_composer(composer_slug)
-    for i, r in enumerate(d["compositions"]):
+    for i, r in enumerate(d["items"]):
         if r["id"] == comp_id:
             return d, i
-    raise SystemExit(f"no composition with id '{comp_id}' in {composer_slug}.json "
+    raise SystemExit(f"no composition with id '{comp_id}' in {composer_slug}/data.json "
                       f"-- run the 'find' subcommand to look up the right id")
 
 
 def cmd_relabel(args):
     d, idx = _find_record(args.composer, args.id)
-    rec = d["compositions"][idx]
+    rec = d["items"][idx]
     changed = []
 
     if args.form:
@@ -217,24 +230,25 @@ def cmd_relabel(args):
         changed.append(f"form -> {args.form}")
 
     if args.move_to and args.move_to != args.composer:
-        del d["compositions"][idx]
-        d["count"] = len(d["compositions"])
+        del d["items"][idx]
+        d["count"] = len(d["items"])
         dump_json(comp_path(args.composer), d)
 
         target_path = comp_path(args.move_to)
         if os.path.exists(target_path):
             target = load_json(target_path)
         else:
-            target = {"composer": args.new_composer_name or "", "count": 0, "compositions": []}
+            target = composer_payload(args.new_composer_name or "", [])
         canonical = args.new_composer_name or target["composer"] or rec.get("composer", "")
         rec["composer"] = canonical
         rec["tags"] = [t for t in rec.get("tags", []) if not t.startswith("composer:")]
         rec["tags"].append(f"composer:{canonical}")
         target["composer"] = canonical
-        target["compositions"].append(rec)
-        target["count"] = len(target["compositions"])
+        target["default_author"] = canonical
+        target["items"].append(rec)
+        target["count"] = len(target["items"])
         dump_json(target_path, target)
-        changed.append(f"moved from {args.composer}.json to {args.move_to}.json "
+        changed.append(f"moved from {args.composer}/data.json to {args.move_to}/data.json "
                         f"(composer set to '{canonical}')")
     elif changed:
         dump_json(comp_path(args.composer), d)
@@ -250,12 +264,12 @@ def cmd_find(args):
     d = load_composer(args.composer)
     needle = (args.title_contains or "").strip()
     hits = 0
-    for r in d["compositions"]:
+    for r in d["items"]:
         title = (r["title"].get("kn", "") + " " + r["title"].get("latin", ""))
         if not needle or needle in title:
             print(f"{r['id']}  [{r['form']}]  {r['title'].get('kn') or r['title'].get('latin')}")
             hits += 1
-    print(f"\n{hits} composition(s) in {args.composer}.json"
+    print(f"\n{hits} composition(s) in {args.composer}/data.json"
           + (f" matching '{needle}'" if needle else ""))
 
 

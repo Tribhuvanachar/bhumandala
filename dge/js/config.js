@@ -1,7 +1,7 @@
 // js/config.js
 // Maps to F-012: Preferences & Global Configuration
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['config.js'] = 'v6.1 (new appConfig.showCopyrightGatedCommentaries, default false -- gates the unlicensed Mahabharata Kannada translation/Tatparya Nirnaya text; see core.js\'s dgeVisibleCommentaries)';
+window.DGE_VERSIONS['config.js'] = 'v6.2 (SHLOKA_EXTRA_FIELDS: new deity/raga/tala fields for dasa_pada_text compositions, kept separate from rishi/devata/chandas since those carry Vedic-specific labels -- on top of v6.1\'s showCopyrightGatedCommentaries)';
 
 const appConfig = {
   appName: "Bhagavata Digital Library",
@@ -214,7 +214,15 @@ const SHLOKA_EXTRA_FIELDS = [
   { id: 'rishi', label: 'Rishi', icon: '🧘', dataKey: 'rishi', enabled: true },
   { id: 'devata', label: 'Devata', icon: '🔥', dataKey: 'devata', enabled: true },
   { id: 'chandas', label: 'Chandas', icon: '🎵', dataKey: 'chandas', enabled: true },
-  { id: 'padapatha', label: 'Padapatha', icon: '✂️', dataKey: 'padapatha', enabled: true }
+  { id: 'padapatha', label: 'Padapatha', icon: '✂️', dataKey: 'padapatha', enabled: true },
+  // dasa_pada_text fields (see dgeNormalizeGranthaData's dasa_pada_text
+  // branch in core.js) -- kept separate from rishi/devata/chandas above
+  // rather than reusing them, since those carry their own Vedic labels
+  // ("Rishi", "Chandas" as meter) that would mislabel a Haridasa
+  // composition's deity/raga/tala.
+  { id: 'deity', label: 'Deity / Subject', icon: '🕉️', dataKey: 'deity', enabled: true },
+  { id: 'raga', label: 'Raga', icon: '🎼', dataKey: 'raga', enabled: true },
+  { id: 'tala', label: 'Tala', icon: '🥁', dataKey: 'tala', enabled: true }
 ];
 window.SHLOKA_EXTRA_FIELDS = SHLOKA_EXTRA_FIELDS;
 
