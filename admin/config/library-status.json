@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1896,
-  "loaded": 1304,
-  "items": 685733
+  "leaves": 1898,
+  "loaded": 1305,
+  "items": 686090
  },
  "sections": {
   "agama": {
@@ -12,9 +12,9 @@
    "items": 43342
   },
   "darshana": {
-   "total": 1121,
-   "loaded": 787,
-   "items": 57152
+   "total": 1123,
+   "loaded": 788,
+   "items": 57509
   },
   "dasa_sahitya": {
    "total": 177,
@@ -328,6 +328,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_vakyarthadipika": 158,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_vishamapadavakyarthavivriti": 151,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/mula": 654,
+  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhashya": 357,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhavabodha": 213,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhavadipa": 300,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhavadipika": 332,
@@ -343,8 +344,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_bhavaprakasha": 194,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_kiranavali": 205,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_kiranavalyam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_mannyayadipakiranavali": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_mannyayadipakiranavali": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadeepika": 222,
+  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipakiranavali": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipikabhavaprakasha": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_prakashika": 178,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_shrimannyayadipakiranavali": 0,
@@ -2388,6 +2390,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/2568/295/sharam/1-shar/parath"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhashya": {
+   "source_url": "https://dvaitavedanta.in/category-details/2568/295/sharam/1-shar/parath"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhavabodha": {
    "source_url": "https://dvaitavedanta.in/category-details/2568/295/sharam/1-shar/parath"
   },
@@ -2433,10 +2438,10 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_kiranavalyam": {
    "source_url": "https://dvaitavedanta.in/category-details/2022/567/sharam/2-shar/garana/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_mannyayadipakiranavali": {
+  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadeepika": {
    "source_url": "https://dvaitavedanta.in/category-details/2022/567/sharam/2-shar/garana/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadeepika": {
+  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipakiranavali": {
    "source_url": "https://dvaitavedanta.in/category-details/2022/567/sharam/2-shar/garana/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipikabhavaprakasha": {

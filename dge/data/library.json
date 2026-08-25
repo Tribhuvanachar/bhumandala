@@ -1889,6 +1889,14 @@
       }
     },
     {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhashya/data.json",
+      "populated": true,
+      "title": "गीताभाष्यम् — tika_bhashya",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/2568/295/sharam/1-shar/parath"
+      }
+    },
+    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhavabodha/data.json",
       "populated": true,
       "title": "गीताभाष्यम् — tika_bhavabodha",
@@ -2024,19 +2032,18 @@
       }
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_mannyayadipakiranavali/data.json",
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadeepika/data.json",
       "populated": true,
-      "title": "गीतातात्पर्यम् — tika_mannyayadipakiranavali",
+      "title": "गीतातात्पर्यम् — tika_nyayadeepika",
       "addedAt": "2026-08-24",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/2022/567/sharam/2-shar/garana/managa"
       }
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadeepika/data.json",
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipakiranavali/data.json",
       "populated": true,
-      "title": "गीतातात्पर्यम् — tika_nyayadeepika",
-      "addedAt": "2026-08-24",
+      "title": "गीतातात्पर्यम् — tika_nyayadipakiranavali",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/2022/567/sharam/2-shar/garana/managa"
       }
