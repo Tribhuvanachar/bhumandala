@@ -4063,3 +4063,88 @@ Skanda (1/8), Agni/Matsya/Varaha (1 file each, unsegmented) among
 Mahapuranas; Kalika/Narasimha among Upapuranas. Everything else under
 both `maha_purana` and `upa_purana` is a real, trackable, empty
 placeholder now -- visible in `admin/library.html` (`?section=purana`).
+
+## purana_class facet + GRETIL Purana acquisition batch (25 Aug 2026, part 6)
+
+User supplied a detailed ChatGPT sourcing survey across three messages:
+(1) a general acquisition-pipeline strategy (SETI as a cross-repository
+discovery layer, UT Dharmasastra Resource Library for Smriti/Nibandha,
+Vedic Reserve for Shiksha -- none of this acted on yet, see below);
+(2) a correction that the 18 Upapuranas have NO single canonical list
+across traditions (Kurma vs Brihaddharma vs Garuda Purana all give
+different 18s) -- our `upa_purana` node was already built as an open,
+non-capped inventory, so no rework was needed, just new `purana_class`/
+`traditional_lists` metadata fields; (3) a concrete Purana source map
+naming GRETIL and Sanskrit Documents entries per text, plus a repeated,
+explicit warning that GRETIL's "Vayu Purana, Revakhanda" is actually the
+Skanda Purana's Revakhanda misattributed in the Venkatesvara edition --
+already correctly NOT ingested as Vayu Purana in this corpus (our real
+`vayu_purana` leaf stays empty; the Revakhanda content lives correctly
+under `skanda_purana`).
+
+**purana_class facet.** Added alongside `guna_classification`, same
+pattern (facets, not folders): `mahapurana` for everything under
+`maha_purana/`, `upapurana` for everything under `upa_purana/`, except
+Devi Bhagavata Purana tagged `disputed` (counted among the 18 by some
+Shakta traditions, replacing Bhagavata Purana; an Upapurana in most
+Vaishnava lists -- a real, documented dispute, not a guess). Also added
+`traditional_lists` to `FACET_KEYS` (schema support only -- populating
+which specific traditional enumeration(s) cite each Upapurana needs
+per-title research not done this pass) and extended `text_status`'s
+View By labels to a 5-tier extant_complete/extant_partial/
+quotation_only/lost_unlocated/unpopulated vocabulary (no data migrated
+to the new values yet).
+
+**GRETIL acquisition.** Investigated `importers/gretil_bulk.py` before
+doing any fresh source-hunting, and found it already had verified,
+CC-BY-NC-SA-4.0 GRETIL sources registered for 6 of the 10 previously-
+empty Mahapuranas (Brahma, Narada, Markandeya, Brahmanda, Vamana,
+Shiva) -- they had just never been run. Retargeted the registry's
+`purana/*` paths to the new `maha_purana`/`upa_purana` homes and
+imported all 6 (see the "Import Brahma/Narada/.../Shiva Puranas"
+commit for the full per-text breakdown, including two real contamination
+bugs caught and fixed in Shiva Purana's raw source before writing: a
+literal "chapter N" editorial breadcrumb transliterating into gibberish
+Devanagari, and a rare `ef`-suffixed pada the marker's `[a-d]` group
+didn't match, both confirmed byte-for-byte against the fetched source
+before and after the fix). Purana-wide totals moved from 41/94 to
+50/98 in this pass; all 4 guna groups (previously only 3 -- rajasa had
+zero populated leaves) now show content.
+
+**Still empty, investigated and not a quick win:**
+- **Vayu Purana** -- deliberately still empty. No complete Unicode
+  e-text located anywhere (GRETIL's entry is the Revakhanda trap noted
+  above). Per the user's own sourcing survey: mark as "source
+  identified, e-text not yet secured," not "unavailable" -- printed
+  editions exist (Bibliotheca Indica 1880-88, Anandashrama SS 49,
+  Venkatesvara Press 1895) but need encoding from an edition, not a
+  found e-text.
+- **Bhavishya Purana, Brahmavaivarta Purana** -- not on GRETIL. Per the
+  ChatGPT survey, "e-text needs verification" against Sanskrit
+  Documents / scanned editions -- not checked yet.
+- **Padma Purana** -- not in GRETIL's registry at all (confirmed
+  against the live index, not assumed); the ChatGPT survey points to
+  Sanskrit Documents specifically for this one -- not checked yet.
+- **Garuda/Skanda Purana's remaining khandas** (2/3 and 7/8 empty
+  respectively) -- GRETIL's own registry entries are flat (no
+  split_targets wired into the actual code, same gap fixed by hand for
+  Shiva Purana this pass) and would need the same kind of per-khanda
+  custom split; not attempted this pass, flagged as a likely quick win
+  for a follow-up using the same technique.
+- **Vishnudharmottara Purana's 2 GRETIL excerpts** (Adhy. 2.127 and
+  3.343-353 only, not the whole text) -- low value on their own,
+  deferred.
+- **Vamana Purana's Saromahatmya** -- GRETIL has it, but as a separate
+  legacy file under a more restrictive "reference purposes only"
+  notice, not the main text's CC-BY-NC-SA-4.0 -- deliberately not
+  imported pending a licensing call.
+
+**Not started at all, per the user's broader sourcing survey** (their
+first of three messages, mostly about Smriti/Dharmashastra/Shiksha, not
+Purana): SETI (panditya.info/seti) as a cross-repository discovery
+layer before declaring anything unavailable; the UT Dharmasastra
+Resource Library (Olivelle's electronic nibandha editions -- explicitly
+the best lead for the 7 still-missing nibandhas); Vedic Reserve for the
+~36 missing Shiksha texts (Sanskrit Documents already confirmed to have
+an HTML Panininiya Shiksha). None of this is Purana-specific and none
+of it has been acted on yet -- next in line once Purana settles.
