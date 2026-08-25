@@ -3545,3 +3545,59 @@ Still open, in the order I would take them:
   split into individual verses with a verified daṇḍa-splitting heuristic
   (the text is already correct as one merged entry — this is a nicety,
   not a fix).
+
+## Smṛti/Dharmaśāstra empty shelf — probed live 25 Aug 2026, don't re-probe blind
+
+`tools/sayana_smriti/import_minor_smritis.py` was written by an earlier
+session with no live network access, so its `--probe-only` result was
+never actually verified. Ran it for real this session (`sa.wikisource.org`
+does answer from here, though heavily rate-limited — expect long runs full
+of retried 429s, that's normal, not a bug):
+
+- **10 of 22 targets exist on sa.wikisource**: aṅgiras, dakṣa, yama,
+  āpastamba, gautama, bṛhaspati smṛti; mitākṣarā, dāyabhāga,
+  caturvargacintāmaṇi (a weak fuzzy-search match, see below), vīramitrodaya.
+  The other 12 (atri, hārīta, likhita, pracetas, saṃvarta, śaṅkha,
+  śātātapa, uśanas smṛti; dharmasindhu, nirṇayasindhu, smṛticandrikā,
+  kalpataru) came back genuinely not-found even after retries — no known
+  clean source for these yet, same as the script's own docstring already
+  said before this probe.
+- **Of those 10, only 4 actually parsed to non-empty text**: āpastamba
+  smṛti (2528 units), mitākṣarā (8 units), vīramitrodaya (1 unit), plus
+  gautama/bṛhaspati/dāyabhāga/caturvargacintāmaṇi all parsed to 0 verses
+  and were correctly skipped (the importer's own "nothing parsed; not
+  writing" safety, not a bug).
+- **Tried writing those 4 and reverted all of them — real contamination,
+  not a quick trim.** These sa.wikisource pages are transcriptions of
+  full printed critical editions (Kāśī Sanskrit Series, Chowkhamba Sanskrit
+  Series), not clean stand-alone root texts:
+  - `vīramitrodaya`'s one unit is 100% a book title page (title/author/
+    year/publisher series name), zero actual verse content.
+  - `mitākṣarā`'s 8 units are mostly the *editor's* front-matter praise
+    poetry for a patron king ("विक्रमार्कः") and the *editor's* own
+    Sanskrit preface-verses about the edition itself — not Vijñāneśvara's
+    commentary. Only unit 0 (numbered "7", i.e. mid-document) looks like
+    real Mitākṣarā text; the verse numbering is also inconsistent
+    (7, 1, 2, 3, 4, 5, 6, 7 — a real parser bug, not just noise).
+  - `āpastamba smṛti`'s 2528 units are mostly genuine (spot-checked
+    across the full range), but unit 0 is the scan title page, the last
+    unit is an errata/colophon page, and a large fraction of the middle
+    is Haradatta's *Ujjwala* commentary interleaved with textual-variant
+    footnotes (e.g. "इत्यधिक पाठ. क. पु.", "२. दक्षस्मृ० अ० २ श्लो २९")
+    and visible OCR corruption (broken words, misrecognized letters) —
+    root sūtra, commentary, critical apparatus and OCR noise are all
+    undifferentiated in one flat unit list.
+  - `caturvargacintāmaṇi`'s wikisource match ("वाचस्पत्यम्/चतुर्भाव") is
+    a different work entirely (a dictionary, not Hemādri's nibandha) —
+    the probe's fuzzy search step is too loose for titles this generic;
+    parsed to 0 verses and self-skipped, but the match itself should not
+    be trusted even if it had parsed something.
+
+**Next step, if picked up again**: this needs the same kind of
+purpose-built HEADER_JUNK/EDITORIAL_NOTE stripping this project already
+built for the GRETIL Śaṅkara-bhāṣya imports (see `importers/
+shankara_bhashya.py`), tuned to these specific wikisource page shapes —
+not a blind re-run of the existing script. Probe result is cached at
+`dump/PROBE_minor_smritis.json` (gitignored, session-local) so the next
+attempt doesn't need to re-hit the rate limit just to rediscover the same
+10/22.
