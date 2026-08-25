@@ -325,6 +325,124 @@ def main():
                           rec_ho["layers"] == [], rec_ho["layers"])
 
     print()
+    print("H. the .details preamble (live-confirmed 25 Aug 2026 — full mula verse"
+          " and Madhva's bhashya sat before the first <h3> and were dropped)")
+    # Shape 1 — kathopanishad_bhashya: h1 उपनिषत् (full mantra), inner-h2
+    # भाष्यम् (Madhva), then named h3 tikas. The mantra lines are themselves
+    # <h1> and must be content, not layer boundaries.
+    preamble_page = f"""
+<html><body>
+{BREADCRUMB}
+<div class="row">{SIDEBAR}
+<div class="col-md-9">
+  <div id="article15829" class="lazy-1">
+    <h2 class="shloka">ओम् । उशन् ह वै वाजश्रवसः सर्ववेदसं ददौ ..</h2>
+    <div id="dynamicContent" class="details">
+      <p class="MsoNormal"><strong><span>स्वर्गप्राप्त्यर्थं सर्वस्वदानम्</span></strong></p>
+      <h1><strong><span>उपनिषत्</span></strong></h1>
+      <h1><strong><span>ओम् । उशन् ह वै वाजश्रवसः सर्ववेदसं ददौ ।</span></strong></h1>
+      <h1><strong><span>तस्य ह नचिकेता नाम पुत्र आस ।। १.१.१ ॥</span></strong></h1>
+      <h2><strong><span>भाष्यम्</span></strong></h2>
+      <p class="MsoNormal"><span>अग्ग्रौ विष्णुं सदा ध्यायन् इति ब्रह्मसारे वचनम् ।</span></p>
+      <h3><strong><span>श्रीव्यासतीर्थ</span></strong></h3>
+      <p class="MsoNormal"><span>न केवलं ब्रह्मविद्या मोक्षैकफला इत्याशयवान् वेदपुरुषः ।</span></p>
+    </div>
+  </div>
+</div></div>
+</body></html>
+"""
+    rec_p = P.parse_page(preamble_page, url)
+    by_title = {l["title"]: l for l in rec_p["layers"]}
+    failures += not check("mula upgraded from pratika to the full mantra",
+                          "तस्य ह नचिकेता" in by_title.get("मूलम्", {}).get("text", ""),
+                          by_title.get("मूलम्", {}).get("text", "")[:60])
+    failures += not check("topic line before उपनिषत् is not glued onto the mantra",
+                          "स्वर्गप्राप्त्यर्थं" not in by_title.get("मूलम्", {}).get("text", ""))
+    failures += not check("भाष्यम् became its own layer",
+                          "ब्रह्मसारे" in by_title.get("भाष्यम्", {}).get("text", ""),
+                          sorted(by_title))
+    failures += not check("भाष्यम् heading itself is not in its text",
+                          not by_title.get("भाष्यम्", {}).get("text", "").startswith("भाष्यम्"))
+    failures += not check("h3 tika unaffected by the preamble pass",
+                          "वेदपुरुषः" in by_title.get("श्रीव्यासतीर्थ", {}).get("text", ""),
+                          sorted(by_title))
+    failures += not check("bhashya sits between mula and the h3 tikas",
+                          [l["title"] for l in rec_p["layers"]][:2] == ["मूलम्", "भाष्यम्"],
+                          [l["title"] for l in rec_p["layers"]])
+
+    # Shape 2 — brahma_sutra_bhashya: the preamble heading is सूत्रभाष्यम्
+    # (a *भाष्यम् form), and the sutra pratika in h2.shloka is already the
+    # complete sutra — it must NOT be replaced by the bhashya text even
+    # though the bhashya quotes the sutra verbatim.
+    bsb_page = preamble_page.replace(
+        '<h2 class="shloka">ओम् । उशन् ह वै वाजश्रवसः सर्ववेदसं ददौ ..</h2>',
+        '<h2 class="shloka">ॐ अथातो ब्रह्मजिज्ञासा ॐ</h2>').replace(
+        '<h1><strong><span>उपनिषत्</span></strong></h1>', '').replace(
+        '<h1><strong><span>ओम् । उशन् ह वै वाजश्रवसः सर्ववेदसं ददौ ।</span></strong></h1>', '').replace(
+        '<h1><strong><span>तस्य ह नचिकेता नाम पुत्र आस ।। १.१.१ ॥</span></strong></h1>', '').replace(
+        '<h2><strong><span>भाष्यम्</span></strong></h2>',
+        '<h2><strong><span>सूत्रभाष्यम्</span></strong></h2>').replace(
+        '<p class="MsoNormal"><span>अग्ग्रौ विष्णुं सदा ध्यायन् इति ब्रह्मसारे वचनम् ।</span></p>',
+        '<p class="MsoNormal"><span>ॐ अथातो ब्रह्मजिज्ञासा ॐ</span></p>'
+        '<p class="MsoNormal"><span>अथशब्दो मङ्गलार्थोऽधिकारानन्तर्यार्थश्च। अतःशब्दो हेत्वर्थः।</span></p>')
+    rec_b = P.parse_page(bsb_page, url)
+    by_title_b = {l["title"]: l for l in rec_b["layers"]}
+    failures += not check("sutra pratika kept as mula",
+                          by_title_b.get("मूलम्", {}).get("text", "") == "ॐ अथातो ब्रह्मजिज्ञासा ॐ",
+                          by_title_b.get("मूलम्", {}).get("text", "")[:40])
+    failures += not check("सूत्रभाष्यम् block became the भाष्यम् layer",
+                          "मङ्गलार्थ" in by_title_b.get("भाष्यम्", {}).get("text", ""),
+                          sorted(by_title_b))
+
+    # Shape 3 — no <h3> at all (rig_bhashya / mahabharata_tatparya_nirnaya):
+    # the old fallback captured NOTHING; the whole .details region is the
+    # full mula text when it contains the pratika's stem. Structural,
+    # grantha-title and leading attribution lines are filtered out.
+    noh3_page = f"""
+<html><body>
+{BREADCRUMB}
+<div class="row">{SIDEBAR}
+<div class="col-md-9">
+  <div id="article14079" class="lazy-1">
+    <h2 class="shloka">नारायणाय परिपूर्णगुणार्णवाय विश्वोदयस्थितिलयोन्नियति प्रदाय</h2>
+    <div id="dynamicContent" class="details">
+      <p class="MsoNormal"><strong><span>श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचित:</span></strong></p>
+      <p class="MsoNormal"><strong><span>1. प्रमाणलक्षणम्</span></strong></p>
+      <p class="MsoNormal"><strong><span>अथ प्रथमोऽध्यायः</span></strong></p>
+      <h1 class="MsoNormal"><span>नारायणाय परिपूर्णगुणार्णवाय विश्वोदयस्थितिलयोन्नियति प्रदाय।</span></h1>
+      <h1 class="MsoNormal"><span>ज्ञानप्रदाय विबुधासुरसौख्यदुःखसत्कारणाय वितताय नमो नमस्ते ।। १।।</span></h1>
+      <p class="MsoNormal"><span>आसीदुदारगुणवारिधिरप्रमेयो नारायणः परतमः परमात् स एकः। ।। २।।</span></p>
+    </div>
+  </div>
+</div></div>
+</body></html>
+"""
+    rec_n = P.parse_page(noh3_page, url)
+    failures += not check("no-h3 leaf: full verses recovered into mula",
+                          len(rec_n["layers"]) == 1 and "नमो नमस्ते" in rec_n["layers"][0]["text"]
+                          and "आसीदुदारगुणवारिधि" in rec_n["layers"][0]["text"],
+                          [l["text"][:50] for l in rec_n["layers"]])
+    mtext = rec_n["layers"][0]["text"]
+    failures += not check("leading attribution line filtered", "विरचित" not in mtext, mtext[:60])
+    failures += not check("grantha-title restatement filtered", "प्रमाणलक्षणम्" not in mtext)
+    failures += not check("'अथ प्रथमोऽध्यायः' structural line filtered", "प्रथमोऽध्यायः" not in mtext)
+    failures += not check("परिच्छेद is a structural noun now",
+                          P.is_structural_heading("प्रथमः परिच्छेदः"))
+
+    # Shape 4 — a preamble that does NOT contain the pratika's verse
+    # (gita_bhashya's invocation-only preambles): mula must keep its
+    # already-complete h2 verse, and the stray text must not be glued on.
+    unrelated_page = noh3_page.replace(
+        '<h1 class="MsoNormal"><span>नारायणाय परिपूर्णगुणार्णवाय विश्वोदयस्थितिलयोन्नियति प्रदाय।</span></h1>', '').replace(
+        '<h1 class="MsoNormal"><span>ज्ञानप्रदाय विबुधासुरसौख्यदुःखसत्कारणाय वितताय नमो नमस्ते ।। १।।</span></h1>', '').replace(
+        '<p class="MsoNormal"><span>आसीदुदारगुणवारिधिरप्रमेयो नारायणः परतमः परमात् स एकः। ।। २।।</span></p>',
+        '<p class="MsoNormal"><span>।। श्रीलक्ष्मीहयग्रीवाय नमः ।। इति मङ्गलम् उच्यते सज्जनैः सर्वदा खलु ।</span></p>')
+    rec_u = P.parse_page(unrelated_page, url)
+    failures += not check("non-matching preamble never replaces the pratika",
+                          rec_u["layers"][0]["text"].startswith("नारायणाय परिपूर्णगुणार्णवाय"),
+                          rec_u["layers"][0]["text"][:60])
+
+    print()
     if failures:
         print(f"{failures} check(s) FAILED")
         return 1

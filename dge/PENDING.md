@@ -4364,3 +4364,74 @@ pass. `validate_data.py`: 0 errors.
 - **`dvaitavedanta-status.html`** doesn't yet know about stitching — its
   per-folder counts remain accurate but a "reads as one grantha now"
   column would reflect the new reality.
+
+## dv_parse preamble/no-h3 text loss — parser fixed, two granthas re-crawled and recovered (25 Aug 2026, part 9)
+
+Direct follow-through on part 8's top "still open" item, same session. Both
+parse gaps fixed in `tools/dvaitavedanta/dv_parse.py`, deliberately
+closed-vocabulary so this cannot recreate the heading-as-layer bug:
+
+- **The `.details` preamble is now parsed.** Only an `<h1>`/`<h2>` inside
+  `.details` whose text has no daṇḍa and normalizes (via the existing
+  `layer_key`) to `मूलम्`/`मूल`/`उपनिषत्`, to the grantha's own breadcrumb
+  title, or to a `*भाष्यम्` form opens a bucket; everything else — mantra
+  lines the site itself marks up as `<h1>`, topic labels, attribution
+  lines — is inert content. A mūla bucket replaces the truncated
+  `h2.shloka` pratīka ONLY when it demonstrably contains the pratīka's
+  normalized stem (gita_bhashya's invocation-only preambles fail that test
+  and keep their already-complete verse — checked against the real cached
+  page, not assumed). A `*भाष्यम्` bucket becomes a `भाष्यम्` layer →
+  new canonical `dv_sources.json` entry → `tika_bhashya/` folder, author
+  Madhva; sits between mula and the named ṭīkās. Pure label lines
+  (structural markers incl. the new `परिच्छेद` noun and `अथ …` wrappers,
+  grantha-title restatements, leading attribution credits) are filtered
+  from captured buckets — verse/prose lines always survive the filter.
+- **The no-`<h3>` fallback actually captures now.** New `_text_within()`
+  iterates the details block's own descendants instead of
+  `_text_between(shloka, None, details)`, which broke on its first step
+  (the h2 is outside the block it was bounded to). A no-h3 leaf's whole
+  region goes through the same preamble machinery.
+- The grantha's breadcrumb label is threaded `parse_page` →
+  `extract_layers(soup, grantha_label)` → the preamble scan, so a work's
+  own title heading (`न्यायामृतम्`) is recognized as opening its root text.
+
+**Tested three ways before any write:** all existing `test_dv_parse.py`
+checks still pass plus a new section H (14 checks: the kathopanishad
+h1-mantra + inner-h2-भाष्यम् shape, the BSB सूत्रभाष्यम्-quoting-the-sūtra
+shape where the pratīka must NOT be replaced, the no-h3 full-recovery
+shape with label filtering, and the invocation-only no-replacement shape);
+full `./run_tests.sh` 208 pass; then the new parser run over the REAL
+cached live pages from part 8's audit — kathopanishad mūla 44→153 chars
+(full mantra) + भाष्यम् layer, BSB sūtra kept + 820-char भाष्यम्
+(Madhva's own sūtra-bhāṣya, previously absent from the corpus entirely),
+nyayamrita mūla 68→809 (all maṅgala verses), nyaya_sudha/tattva_viveka
+pages byte-identical where they should be (no preamble to recover).
+
+**Re-crawled live and landed (this session had egress, 3s delay, 52
+pages):** the two smallest all-broken granthas —
+`sruti_prasthana/rig_bhashya` (20 items, ~2 KB of pratīkas → 218 KB,
+median 3,322 chars/item) and
+`itihasa_prasthana/mahabharata_tatparya_nirnaya` (32 items → 1.6 MB,
+median 15,672 — each item is genuinely a whole adhyāya on the site).
+`verify_extract.py --strict`: 0 errors (37 warnings, the pre-existing
+accepted no-matching-mula class). `validate_data.py`: 0 errors. Both
+verified rendering real text in the reader via Playwright.
+
+**Still open (the expensive rest):**
+- **The corpus-wide re-crawl** to pick these fixes up everywhere else —
+  every upaniṣad bhāṣya (Madhva's bhāṣya text + full mantras),
+  brahma_sutra_bhashya (his sūtra-bhāṣya), gita_bhashya (his
+  gītā-bhāṣya), nyayamrita, bhagavata_tatparya_nirnaya, and the
+  dasha_prakarana full verses. That is ~6,000 pages — run it through
+  `.github/workflows/extract-dvaitavedanta.yml` per shard (the Actions
+  page cache from the original crawl was scoped to another session's
+  branch and has likely lapsed; budget a real crawl), NOT live from a
+  session. After it lands: re-run `tools/build_layer_manifest.py` (the
+  new `tika_bhashya/` folders join the stitched reader automatically) and
+  spot-check one grantha per section against the live site again.
+- `tika_bhashya` mula-vs-भाष्यम् curation: on single-work bhāṣya granthas
+  (rig_bhashya) the mixed verse+bhāṣya flow correctly stays in mula; on
+  mantra-based ones the split is real and lands as its own layer. If a
+  future page shape puts भाष्यम् content under some third heading form,
+  the closed vocabulary means it lands in mūla or stays dropped — extend
+  `MULA_ALIAS_KEYS`/the `*भाष्यम्` rule deliberately, never loosely.

@@ -68,7 +68,7 @@ _ORDINAL_WORDS = (
     "एकादश", "द्वादश", "त्रयोदश", "चतुर्दश", "पञ्चदश", "षोडश", "सप्तदश", "अष्टादश",
     "एकोनविंश", "विंश",
 )
-_STRUCTURAL_NOUNS = ("पाद", "अध्याय", "अधिकरण", "खण्ड", "प्रकरण", "काण्ड", "सर्ग", "अंश", "अष्टक")
+_STRUCTURAL_NOUNS = ("पाद", "अध्याय", "अधिकरण", "खण्ड", "प्रकरण", "काण्ड", "सर्ग", "अंश", "अष्टक", "परिच्छेद")
 # The ordinal+noun sandhi (द्वितीयः + अध्यायः -> द्वितीयोऽध्यायः) elides the
 # noun's own leading अ, so the surface form never contains "अध्याय" as a
 # substring, only "ध्याय" -- match both the bare and अ-elided noun stem.
@@ -405,15 +405,164 @@ def article_id_from(value: str) -> str:
     return match.group(1) if match else ""
 
 
-def _layers_from_article(node: Tag) -> list[dict]:
+"""The `.details` preamble — everything between the block's start and its
+first <h3> — was originally dropped whenever <h3>s existed, and the no-<h3>
+fallback captured nothing (it walked from the OUTSIDE h2.shloka and broke on
+the first node not inside .details, i.e. immediately). Live-compared one leaf
+per section against dvaitavedanta.in (25 Aug 2026, see
+dge/MULTI_LAYER_READER_ARCHITECTURE.md §1): that preamble is where the site
+puts the FULL mula verse (the h2.shloka is only the leaf's truncated pratīka)
+and, on bhāṣya-granthas, Madhva's own bhāṣya under an inner <h1>/<h2> heading
+— so gita_bhashya had nine ṭīkā folders and no bhāṣya, and rig_bhashya /
+mahabharata_tatparya_nirnaya ingested only pratīkas.
+
+The preamble scan below is deliberately CLOSED-VOCABULARY (the corpus's own
+heading-as-layer bug is what happens when arbitrary headings mint layers):
+only an <h1>/<h2> inside .details whose text has no daṇḍa and normalises to
+मूलम्/मूल/उपनिषत्, to the grantha's own title, or to *भाष्यम् opens a bucket.
+Everything else — verse lines the site also marks up as <h1>, topic labels,
+attribution lines — is inert content of the current bucket."""
+MULA_ALIAS_KEYS = {"मूलम्", "मूल", "उपनिषत्"}
+BHASHYA_TITLE = "भाष्यम्"
+_DANDA_RE = re.compile(r"[।॥]")
+_LEADING_NUM_RE = re.compile(r"^\s*\d+\.\s*")
+# "अथ प्रथमोऽध्यायः", "।। अथ प्रथमोऽध्यायः ।।" — the same closed structural
+# vocabulary as STRUCTURAL_HEADING_RE, with the ceremonial wrappers the
+# preamble adds around it.
+_ATHA_WRAPPER_RE = re.compile(r"^[\s।॥]*(?:अथ\s+)?")
+
+
+def _text_within(within: Tag, start_after: Tag | None, stop: Tag | None) -> str:
+    """Text of `within`'s own content between two of its descendants.
+
+    Unlike `_text_between` (which walks next_elements from a node OUTSIDE the
+    block and bounds itself by parentage), this iterates `within.descendants`
+    directly, so content that begins at the very start of the block is
+    reachable. `start_after`'s own subtree is excluded — it is the boundary
+    heading, not content.
+    """
+    chunks: list[str] = []
+    started = start_after is None
+    for nd in within.descendants:
+        if stop is not None and nd is stop:
+            break
+        if not started:
+            if nd is start_after:
+                started = True
+            continue
+        if start_after is not None and start_after in nd.parents:
+            continue
+        if isinstance(nd, Tag):
+            if nd.name == "br" or nd.name in BLOCK_TAGS:
+                chunks.append("\n")
+            continue
+        if not isinstance(nd, NavigableString):
+            continue
+        parent = nd.parent
+        if parent is None or (parent.name or "").lower() in DROP_TAGS:
+            continue
+        chunks.append(str(nd))
+    return clean_text("".join(chunks))
+
+
+def _preamble_bucket(heading: Tag, grantha_key: str) -> str | None:
+    """'mula' / 'bhashya' when this h1/h2 opens a preamble bucket, else None."""
+    text = clean_text(heading.get_text(" "))
+    if not text or _DANDA_RE.search(text):
+        return None  # a verse line the site marked up as a heading
+    key = layer_key(text)
+    if not key or len(key) > 40 or devanagari_count(key) < 2:
+        return None
+    if key in MULA_ALIAS_KEYS:
+        return "mula"
+    if grantha_key and key == grantha_key:
+        # e.g. an <h1>न्यायामृतम्</h1> opening the work's own root text. A
+        # *भाष्यम् grantha title falls through to the bhashya rule below on
+        # purpose: there the block holds Madhva's bhāṣya, not the base text.
+        if not key.endswith(BHASHYA_TITLE):
+            return "mula"
+    if key.endswith(BHASHYA_TITLE):
+        return "bhashya"
+    return None
+
+
+def _squash_for_match(text: str) -> str:
+    return re.sub(r"[\s।॥.ॐँऽ]+", "", text or "")
+
+
+def _preamble_matches_pratika(candidate: str, pratika: str) -> bool:
+    """True when the preamble text actually contains the leaf's own verse.
+
+    The h2.shloka pratīka is the full verse's opening (often truncated with
+    `..`), so the honest test for "this preamble IS the full mula text" is
+    stem containment — gita_bhashya's invocation-only preambles fail it and
+    keep their already-complete h2 verse untouched.
+    """
+    stem = _squash_for_match(pratika)[:24]
+    return len(stem) >= 8 and stem in _squash_for_match(candidate)
+
+
+def _strip_preamble_label_lines(text: str, grantha_key: str) -> str:
+    """Drop pure label lines from a captured preamble bucket.
+
+    Structural section markers (अथ प्रथमोऽध्यायः), restatements of the
+    grantha's own title, and — in the first few lines only — bare attribution
+    credits (…विरचितः). Verse and prose lines always survive: everything
+    dropped here must have no daṇḍa and match a closed pattern.
+    """
+    kept: list[str] = []
+    for index, line in enumerate(text.split("\n")):
+        stripped = line.strip(" \t।॥:-")
+        if not stripped:
+            continue
+        if is_structural_heading(_ATHA_WRAPPER_RE.sub("", stripped).strip(" ।॥")):
+            continue
+        key = layer_key(_LEADING_NUM_RE.sub("", stripped))
+        if key and (key in MULA_ALIAS_KEYS or (grantha_key and key == grantha_key)):
+            continue
+        if (index < 3 and len(stripped) <= ATTRIBUTION_MAX_CHARS
+                and not _DANDA_RE.search(stripped) and ATTRIBUTION_RE.search(stripped)):
+            continue
+        kept.append(line)
+    return clean_text("\n".join(kept))
+
+
+def _preamble_segments(details: Tag, first_h3: Tag | None, grantha_key: str) -> list[tuple]:
+    """[(bucket, text, boundary_elem_or_None)] for the pre-<h3> region."""
+    region_headings: list[Tag] = []
+    for nd in details.descendants:
+        if first_h3 is not None and nd is first_h3:
+            break
+        if isinstance(nd, Tag) and nd.name in ("h1", "h2"):
+            region_headings.append(nd)
+
+    boundaries = [(h, _preamble_bucket(h, grantha_key)) for h in region_headings]
+    boundaries = [(h, b) for h, b in boundaries if b is not None]
+    if not boundaries:
+        # No recognised structure: the whole region is one block — the
+        # rig_bhashya / mahabharata_tatparya_nirnaya shape, where the full
+        # verse text just follows the (strong-tagged, not h1/h2) labels.
+        whole = _text_within(details, None, first_h3)
+        return [("mula", whole, None)] if whole else []
+    segments = []
+    for index, (elem, bucket) in enumerate(boundaries):
+        stop = boundaries[index + 1][0] if index + 1 < len(boundaries) else first_h3
+        segments.append((bucket, _text_within(details, elem, stop), elem))
+    return segments
+
+
+def _layers_from_article(node: Tag, grantha_label: str = "") -> list[dict]:
     """Split one #article<N> block into its real layers.
 
-    Confirmed shape (probe run 31933375009):
+    Confirmed shape (probe run 31933375009, preamble shapes re-confirmed live
+    25 Aug 2026):
 
         <div id="article13531">
-          <h2 class="shloka">   the mula verse for this leaf
+          <h2 class="shloka">   the leaf's pratika (often truncated with ..)
           <div id="dynamicContent" class="details">
             <p><strong>topic or attribution</strong></p>
+            [preamble: full mula verse under an h1/h2 मूल-alias heading,
+             and/or Madhva's bhashya under an h1/h2 *भाष्यम् heading]
             <h3>  commentary name
             <p>   body ...
             <h3>  next commentary ...
@@ -441,22 +590,48 @@ def _layers_from_article(node: Tag) -> list[dict]:
                 "role": "mula",
             })
 
+    # ---- the pre-<h3> preamble (see the module comment above MULA_ALIAS_KEYS)
+    if details is not None:
+        grantha_key = layer_key(_LEADING_NUM_RE.sub("", grantha_label or ""))
+        mula_parts: list[str] = []
+        bhashya_parts: list[str] = []
+        bhashya_author = ""
+        for bucket, text, elem in _preamble_segments(
+                details, headings[0] if headings else None, grantha_key):
+            text = _strip_preamble_label_lines(text, grantha_key)
+            if devanagari_count(text) < 4:
+                continue
+            if bucket == "mula":
+                mula_parts.append(text)
+            else:
+                bhashya_parts.append(text)
+                if elem is not None and not bhashya_author:
+                    bhashya_author = _attribution_before(elem)
+        if mula_parts and layers and layers[0]["role"] == "mula":
+            candidate = "\n".join(mula_parts)
+            # Replace the pratika only when the preamble demonstrably IS the
+            # full verse; an invocation-only preamble (gita_bhashya) is
+            # dropped rather than glued onto a verse it does not contain.
+            if _preamble_matches_pratika(candidate, layers[0]["text"]):
+                layers[0]["text"] = candidate
+        if bhashya_parts:
+            layers.append({
+                "title": BHASHYA_TITLE,
+                "text": "\n".join(bhashya_parts),
+                "anchor": node.get("id", ""),
+                "article_id": article_id,
+                "author": bhashya_author,
+                "role": "tika",
+            })
+
     if not headings:
         # A leaf can carry a verse with no commentary at all. Returning nothing
         # here drops it to the pre-probe path, which labels the single layer
         # with the verse itself — the original bug, on ~1 leaf per grantha.
-        if not layers:
-            return []
-        body = _text_between(shloka, None, details) if details is not None else ""
-        if devanagari_count(body) >= 4 and body not in layers[0]["text"]:
-            layers.append({
-                "title": "",
-                "text": body,
-                "anchor": node.get("id", ""),
-                "article_id": article_id,
-                "author": "",
-                "role": "tika",
-            })
+        # (The old `_text_between(shloka, None, details)` body-recovery that
+        # sat here never captured anything — it broke on its first step — and
+        # is replaced by the preamble pass above, which reads the same region
+        # correctly.)
         return layers
 
     merged: "OrderedDict[str, dict]" = OrderedDict()
@@ -604,13 +779,16 @@ def _attribution_before(heading: Tag) -> str:
     return ""
 
 
-def extract_layers(soup: BeautifulSoup) -> list[dict]:
+def extract_layers(soup: BeautifulSoup, grantha_label: str = "") -> list[dict]:
     """Return the stacked commentary layers as [{title, text, anchor}].
 
     Primary path: the real #article<N> / #dynamicContent shape.
     Second:      one layer per `id="article<N>"` block (pre-probe assumption,
                  kept for pages that do not carry a details block).
     Fallback:    split the densest non-chrome container on its headings.
+
+    `grantha_label` (the breadcrumb's grantha segment) lets the preamble scan
+    recognise the work's own title as a mula-opening heading.
     """
     layers: list[dict] = []
 
@@ -619,7 +797,7 @@ def extract_layers(soup: BeautifulSoup) -> list[dict]:
         if isinstance(t, Tag) and not _is_chrome(t)
     ]
     for node in anchored:
-        layers.extend(_layers_from_article(node))
+        layers.extend(_layers_from_article(node, grantha_label))
     if layers:
         return _dedupe_layers(layers)
 
@@ -710,7 +888,9 @@ def parse_page(html: str, url: str) -> dict:
     """Parse one leaf page into a structured record."""
     soup = strip_noise(make_soup(html))
     breadcrumb = extract_breadcrumb(soup)
-    layers = extract_layers(soup)
+    # breadcrumb[1] is the grantha segment ("1. प्रमाणलक्षणम्") — the preamble
+    # scan uses it to recognise the work's own title as a mula heading.
+    layers = extract_layers(soup, breadcrumb[1] if len(breadcrumb) > 1 else "")
     parsed = parse_content_url(url) or (None, None)
     no_record = bool(NO_RECORD_RE.search(html or ""))
     return {
