@@ -3,7 +3,7 @@
  "totals": {
   "leaves": 1898,
   "loaded": 1305,
-  "items": 686090
+  "items": 686091
  },
  "sections": {
   "agama": {
@@ -14,7 +14,7 @@
   "darshana": {
    "total": 1123,
    "loaded": 788,
-   "items": 57509
+   "items": 57510
   },
   "dasa_sahitya": {
    "total": 177,
@@ -310,7 +310,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattvodyota/mula": 22,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattvodyota/tika_mandaramanjari": 18,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattvodyota/tika_vivarana": 18,
-  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/mula": 3,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/mula": 4,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_jayatirtha": 2,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_mandaramanjari": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_nivasatirthiyatippani": 1,
