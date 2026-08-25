@@ -3693,40 +3693,62 @@ of retried 429s, that's normal, not a bug):
   gautama/bṛhaspati/dāyabhāga/caturvargacintāmaṇi all parsed to 0 verses
   and were correctly skipped (the importer's own "nothing parsed; not
   writing" safety, not a bug).
-- **Tried writing those 4 and reverted all of them — real contamination,
-  not a quick trim.** These sa.wikisource pages are transcriptions of
-  full printed critical editions (Kāśī Sanskrit Series, Chowkhamba Sanskrit
-  Series), not clean stand-alone root texts:
-  - `vīramitrodaya`'s one unit is 100% a book title page (title/author/
-    year/publisher series name), zero actual verse content.
-  - `mitākṣarā`'s 8 units are mostly the *editor's* front-matter praise
-    poetry for a patron king ("विक्रमार्कः") and the *editor's* own
-    Sanskrit preface-verses about the edition itself — not Vijñāneśvara's
-    commentary. Only unit 0 (numbered "7", i.e. mid-document) looks like
-    real Mitākṣarā text; the verse numbering is also inconsistent
-    (7, 1, 2, 3, 4, 5, 6, 7 — a real parser bug, not just noise).
-  - `āpastamba smṛti`'s 2528 units are mostly genuine (spot-checked
-    across the full range), but unit 0 is the scan title page, the last
-    unit is an errata/colophon page, and a large fraction of the middle
-    is Haradatta's *Ujjwala* commentary interleaved with textual-variant
-    footnotes (e.g. "इत्यधिक पाठ. क. पु.", "२. दक्षस्मृ० अ० २ श्लो २९")
-    and visible OCR corruption (broken words, misrecognized letters) —
-    root sūtra, commentary, critical apparatus and OCR noise are all
-    undifferentiated in one flat unit list.
-  - `caturvargacintāmaṇi`'s wikisource match ("वाचस्पत्यम्/चतुर्भाव") is
-    a different work entirely (a dictionary, not Hemādri's nibandha) —
-    the probe's fuzzy search step is too loose for titles this generic;
-    parsed to 0 verses and self-skipped, but the match itself should not
-    be trusted even if it had parsed something.
+- ~~**Tried writing those 4 and reverted all of them — real contamination,
+  not a quick trim.**~~ **Root cause found and fixed for one of the four
+  (25 Aug), the real bug hiding under "8 units, mostly editor front-matter"
+  — not a philology problem, a regex problem.**
+  `parse_devanagari_verses()`'s marker pattern only matched a *bare*
+  running-count `॥ N ॥`. Nibandhas and commentaries number by
+  chapter.verse (`॥ १.१ ॥`) — Mitākṣarā's own convention throughout — so
+  every such marker silently matched **nothing**, and the whole page fell
+  through to "no verses". Confirmed directly against the live page (this
+  session has real network access sa.wikisource answers, unlike the
+  authoring sandbox that wrote the original importer): Mitākṣarā's
+  Sadācārādhyāya subpage alone carries 302 real `॥ chapter.verse ॥`
+  markers and 297 units of genuine Vijñāneśvara commentary on Yājñavalkya
+  — the old pattern found 1, whose accidental span is exactly what read as
+  "editor front-matter, verse numbering 7,1,2,3,4,5,6,7" before. Fixed the
+  pattern to accept the compound form (`tools/sayana_smriti/parsers/
+  wikisource.py`); also added the general junk/OCR gate this task was
+  actually named for — a chunk is dropped if it's a single
+  editorial/citation/footnote line (variant-reading notes, footnote-style
+  citations to a sibling smṛti, scan-tool credit lines) or reads as
+  chrome rather than Sanskrit (below a Devanagari-ratio floor, the same
+  `MIN_DEVANAGARI_RATIO` convention `dv_parse.py`/the DCS importers
+  already use). 8 new tests in `tools/sayana_smriti/tests/test_wikisource.py`
+  (compound numbering, plain numbering unchanged, multi-dot references,
+  each junk class). **Imported for real**: Mitākṣarā, 776 verses across
+  all 3 adhyāyas (सदाचार/व्यवहार/प्रायश्चित्त) — a nibandha folder that
+  was completely empty is now populated. `validate_data.py`: 0 errors.
+  (Minor, not fixed: the 3 adhyāyas' item ids are numbered by wikisource
+  subpage-discovery order, not their true 1/2/3 sequence — the
+  `reference` and each verse's own `number` are both correct regardless,
+  so this is cosmetic, not a data-correctness bug.)
 
-**Next step, if picked up again**: this needs the same kind of
-purpose-built HEADER_JUNK/EDITORIAL_NOTE stripping this project already
-built for the GRETIL Śaṅkara-bhāṣya imports (see `importers/
-shankara_bhashya.py`), tuned to these specific wikisource page shapes —
-not a blind re-run of the existing script. Probe result is cached at
-`dump/PROBE_minor_smritis.json` (gitignored, session-local) so the next
-attempt doesn't need to re-hit the rate limit just to rediscover the same
-10/22.
+  **The other three are not fixed by this, and stay reverted/unwritten,
+  for the reasons already found**:
+  - `vīramitrodaya`'s page (re-checked live with the fixed parser) still
+    surfaces real book-title-page/publisher-boilerplate content even past
+    the new junk filter (only 20 chunks survive, one of them still "THE
+    CHOWKHAMBA SANSKRIT SERIES..." front matter) — this scan's front
+    matter is woven in more deeply than a per-line filter catches, or its
+    real Śrāddhaprakāśa content lives on further subpages this page
+    doesn't point to. Needs its own dedicated look, not a quick trim.
+  - `āpastamba smṛti`'s problem (Haradatta's Ujjwala commentary and
+    critical-apparatus footnotes interleaved with root sūtra across 2528
+    units, plus real OCR corruption) is a different, harder kind of
+    contamination than the regex bug above — line-level junk filtering
+    won't separate three genuinely interleaved layers. Still needs the
+    dedicated pass the original note called for, now correctly scoped:
+    this text specifically, not "the importer" generally.
+  - `caturvargacintāmaṇi`'s wikisource match is still the wrong work
+    entirely (confirmed unchanged) — a title-matching problem in
+    `find_title()`'s fuzzy fallback, unrelated to verse-parsing.
+
+  Probe result cached at `dump/PROBE_minor_smritis.json` from the earlier
+  session is gone (gitignored, session-local, different container) — not
+  needed again since this pass re-probed live directly rather than relying
+  on it.
 
 **Also this pass**: checked DCS (`github.com/OliverHellwig/sanskrit`,
 sparse-cloned — 271 files total, a curated subset not the full corpus)
