@@ -765,12 +765,20 @@ def write_outputs(records, out_dir, fetch_date, stats=None, failed_fetch=None, n
                                                key=lambda x: -x[1]))
 
     for slug, recs in sorted(groups.items()):
-        with open(os.path.join(comp_dir, slug + ".json"), "w", encoding="utf-8") as f:
-            json.dump({"composer": recs[0]["composer"], "count": len(recs),
-                       "compositions": recs}, f, ensure_ascii=False, indent=2)
+        # composers/<slug>/data.json, not a flat composers/<slug>.json -- the
+        # taxonomy/library.json leaf convention every other DGE grantha uses
+        # (see tools/audit_library.py, tools/register_layers.py), so this
+        # corpus is a real, browsable/searchable Library entry per composer
+        # instead of only reachable through dasa_sahitya.html's own fetch.
+        slug_dir = os.path.join(comp_dir, slug)
+        os.makedirs(slug_dir, exist_ok=True)
+        with open(os.path.join(slug_dir, "data.json"), "w", encoding="utf-8") as f:
+            json.dump({"schema": "dasa_pada_text", "default_author": recs[0]["composer"],
+                       "composer": recs[0]["composer"], "count": len(recs),
+                       "bio_notes": "", "items": recs}, f, ensure_ascii=False, indent=2)
         manifest["counts_by_composer"][recs[0]["composer"] or slug] = len(recs)
         manifest["composers"].append({"slug": slug, "composer": recs[0]["composer"],
-                                      "count": len(recs), "file": f"composers/{slug}.json"})
+                                      "count": len(recs), "file": f"composers/{slug}/data.json"})
 
     # untitled_composer_count is derivable from records but cheap to precompute
     # here so the capture tool doesn't have to load every composer file just

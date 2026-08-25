@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.15 (dgeIsAiGeneratedCommentaryKey: gemini_/ai_-prefixed commentary keys are now the standing convention for anything an AI pipeline writes, checked by render.js to show a small "AI" badge -- on top of v3.14\'s KNOWN_COMMENTARY_LABELS additions for the Raghavendra Vijaya pipeline)';
+window.DGE_VERSIONS['core.js'] = 'v3.16 (dgeNormalizeGranthaData: new dasa_pada_text branch for Dasa Sahitya compositions -- text{kannada/devanagari/iast/source_roman} stanza arrays flattened with "/" and "//" separators into the same shlokas[] shape every other schema uses, deity/raga/tala carried as their own extra fields rather than repurposing rishi/devata/chandas -- on top of v3.15\'s AI-commentary badge convention)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -429,6 +429,62 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
     gemini_anvaya: 'AI Anvaya (Gemini, unreviewed)',
     gemini_summary: 'AI Summary (Gemini, unreviewed)'
   };
+
+  // dasa_pada_text schema (see dge/data/schemas.json): each item is one
+  // Haridasa composition (pada/suladi/ugabhoga/...) with a nested
+  // text{kannada, devanagari, iast, source_roman} object of stanzas->lines
+  // per script, not a flat sanskrit_text string -- the shape-sniffing
+  // branches below would see item.text as a truthy object and stringify it
+  // wrong. Detected by data.schema directly rather than shape-sniffed,
+  // since this is the one schema where the item shape alone (an object
+  // with a "text" key) would otherwise collide with the generic branch's
+  // own item.text string check below.
+  if (data.schema === 'dasa_pada_text' && Array.isArray(data.items)) {
+    const shlokas = {};
+    let n = 0;
+    let withMeaning = 0;
+    data.items.forEach(item => {
+      n++;
+      const text = item.text || {};
+      // Kannada is the source language; Devanagari/IAST are auto-
+      // transliterated fallbacks for the rare item missing Kannada;
+      // source_roman is the source site's own ad hoc romanization, tried
+      // last since DGE didn't generate it.
+      const stanzas = (text.kannada && text.kannada.length) ? text.kannada
+        : (text.devanagari && text.devanagari.length) ? text.devanagari
+        : (text.iast && text.iast.length) ? text.iast
+        : (text.source_roman || []);
+      // '/' between lines, '//' between stanzas -- render.js's shloka
+      // renderer already turns a "/" run into <br> (mulaHtml's own
+      // `.replace(/\s*\/\s*/g, '<br>')`), so this needs no new render code.
+      const flat = stanzas.map(lines => (lines || []).join(' / ')).join(' // ');
+      const commentaries = {};
+      if (item.meaning) { commentaries.artha = item.meaning; withMeaning++; }
+      shlokas[n] = {
+        sa: dgeStripEditionMarkers(flat),
+        vedicId: (item.title && (item.title.kn || item.title.latin)) || '',
+        unitId: item.id || '',
+        rishi: '', devata: '', chandas: '', padapatha: '',
+        deity: item.deity || '',
+        raga: item.raga || '',
+        tala: item.tala || '',
+        commentaries: commentaries,
+        geminiEnrichment: null
+      };
+    });
+    console.log(`[Data] Normalized "${granthaTitle || 'untitled'}" (dasa_pada_text): ` +
+      `${n} composition(s), ${withMeaning} with a meaning/artha block`);
+    return {
+      metadata: {
+        title: granthaTitle || data.schema || 'Untitled',
+        author: data.default_author || '',
+        totalShlokas: n,
+        availableCommentaries: withMeaning ? { artha: 'Translation' } : {}
+      },
+      shlokas,
+      totalShlokas: n
+    };
+  }
 
   // itihasa_purana_text schema (see dge/data/schemas.json): each item is a
   // whole chapter (sarga/adhyaya/skandha) carrying its OWN nested shlokas[]

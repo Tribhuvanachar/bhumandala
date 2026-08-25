@@ -5653,7 +5653,7 @@
  },
  "dasa_sahitya": {
   "_schema": "dasa_pada_text",
-  "_note": "Haridasa devotional compositions (padas/suladis/ugabhogas/...) from the public Haridasa-sahitya web archives -- see tools/dasa_sahitya/. Children resolved at runtime from data/dasa_sahitya/index.json (composers[]), not listed statically here. Overlaps in subject with the composer-by-composer 'dasakuta' node above (built earlier, still empty) -- not yet reconciled, flagged in PENDING.md for the project lead.",
+  "_note": "Haridasa devotional compositions (padas/suladis/ugabhogas/...) from four independently-sourced collections (web crawl, Android app, Firestore export, flat-JSON dump), reviewed and merged into one corpus 21 Aug 2026 -- see dge/data/dasa_sahitya_local/ARCHITECTURE.md for the full review history. Registered here as real leaves under 'composers' (25 Aug 2026); dasa_sahitya.html still reads the same files directly via data/dasa_sahitya/index.json for its own bespoke browsing UI. 'dasakuta' above kept only Jagannathadasa's Harikathamritasara -- a distinct kavya, not a pada -- after its empty per-composer pada/suladi/ugabhoga stub (superseded by 'composers') was removed. 'vyasakuta' (Sanskrit prakaranas by Madhva-tradition acharyas) is a separate, unrelated corpus.",
   "label": {
    "sa": "दाससाहित्यम्",
    "kn": "ದಾಸ ಸಾಹಿತ್ಯ",
@@ -5675,190 +5675,10 @@
    "kavya"
   ],
   "dasakuta": {
-   "gopaladasa": {
-    "dandaka": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Gopaladasa"
-    },
-    "mundige": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Gopaladasa"
-    },
-    "other_compositions": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Gopaladasa"
-    },
-    "pada_kirtane": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Gopaladasa"
-    },
-    "suladi": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Gopaladasa"
-    },
-    "ugabhoga": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Gopaladasa"
-    }
-   },
    "jagannathadasa": {
-    "dandaka": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Jagannathadasa"
-    },
     "harikathamrutasara": {
      "_schema": "dasa_sahitya_composition",
      "_default_author": "Sri Jagannathadasaru"
-    },
-    "mundige": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Jagannathadasa"
-    },
-    "other_compositions": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Jagannathadasa"
-    },
-    "pada_kirtane": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Jagannathadasa"
-    },
-    "suladi": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Jagannathadasa"
-    },
-    "ugabhoga": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Jagannathadasa"
-    }
-   },
-   "kanakadasa": {
-    "dandaka": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Kanakadasa"
-    },
-    "mundige": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Kanakadasa"
-    },
-    "other_compositions": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Kanakadasa"
-    },
-    "pada_kirtane": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Kanakadasa"
-    },
-    "suladi": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Kanakadasa"
-    },
-    "ugabhoga": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Kanakadasa"
-    }
-   },
-   "mahipatidasa": {
-    "dandaka": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Mahipatidasa"
-    },
-    "mundige": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Mahipatidasa"
-    },
-    "other_compositions": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Mahipatidasa"
-    },
-    "pada_kirtane": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Mahipatidasa"
-    },
-    "suladi": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Mahipatidasa"
-    },
-    "ugabhoga": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Mahipatidasa"
-    }
-   },
-   "prasannavenkatadasa": {
-    "dandaka": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Prasanna Venkatadasa"
-    },
-    "mundige": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Prasanna Venkatadasa"
-    },
-    "other_compositions": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Prasanna Venkatadasa"
-    },
-    "pada_kirtane": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Prasanna Venkatadasa"
-    },
-    "suladi": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Prasanna Venkatadasa"
-    },
-    "ugabhoga": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Prasanna Venkatadasa"
-    }
-   },
-   "purandaradasa": {
-    "dandaka": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Purandaradasa"
-    },
-    "mundige": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Purandaradasa"
-    },
-    "other_compositions": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Purandaradasa"
-    },
-    "pada_kirtane": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Purandaradasa"
-    },
-    "suladi": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Purandaradasa"
-    },
-    "ugabhoga": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Purandaradasa"
-    }
-   },
-   "vijayadasa": {
-    "dandaka": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Vijayadasa"
-    },
-    "mundige": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Vijayadasa"
-    },
-    "other_compositions": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Vijayadasa"
-    },
-    "pada_kirtane": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Vijayadasa"
-    },
-    "suladi": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Vijayadasa"
-    },
-    "ugabhoga": {
-     "_schema": "dasa_sahitya_composition",
-     "_default_author": "Sri Vijayadasa"
     }
    }
   },
@@ -5944,6 +5764,616 @@
      "_schema": "grantha_prakarana_text",
      "_default_author": "Sri Vyasatirtha (Vyasaraja)"
     }
+   }
+  },
+  "composers": {
+   "acalanamdadasa": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಅಚಲಾನಂದದಾಸ"
+   },
+   "aihole_vemkatesa": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಐಹೊಳೆ ವೆಂಕಟೇಶ"
+   },
+   "ambabayi": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಅಂಬಾಬಾಯಿ"
+   },
+   "anamtadrisaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಅನಂತಾದ್ರೀಶರು"
+   },
+   "anyadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಅನ್ಯದಾಸರು"
+   },
+   "askihala_govimda": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಅಸ್ಕಿಹಾಳ ಗೋವಿಂದ"
+   },
+   "asuri_ramasvamiayyamgar": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಅಸೂರಿ ರಾಮಸ್ವಾಮಿಅಯ್ಯಂಗಾರ್"
+   },
+   "badannayyacaryaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಬಡಣ್ಣಯ್ಯಾಚಾರ್ಯರು"
+   },
+   "bagepalli_sesadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಬಾಗೇಪಲ್ಲಿ ಶೇಷದಾಸರು"
+   },
+   "belle_dasappayya": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಬೆಳ್ಳೆ ದಾಸಪ್ಪಯ್ಯ"
+   },
+   "beluru_vaikumthadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಬೇಲೂರು ವೈಕುಂಠದಾಸರು"
+   },
+   "beteraya_diksitaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಬೇಟೆರಾಯ ದೀಕ್ಷಿತರು"
+   },
+   "bhatakala_appayya": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಭಟಕಳ ಅಪ್ಪಯ್ಯ"
+   },
+   "bhavatarakaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಭಾವತರಕರು"
+   },
+   "bhimasamkara": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಭೀಮಾಶಂಕರ"
+   },
+   "bhupati_vithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಭೂಪತಿ ವಿಠಲರು"
+   },
+   "bolara_vasudevayya": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಬೋಳಾರಾ ವಾಸುದೇವಯ್ಯ"
+   },
+   "cannapattanada_ahobaladasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಚನ್ನಪಟ್ಟಣದ ಅಹೋಬಲದಾಸರು"
+   },
+   "cidanamda_avadhutaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಚಿದಾನಂದ ಅವಧೂತರು"
+   },
+   "dhanvanthri": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Dhanvanthri"
+   },
+   "durga": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Durga"
+   },
+   "galagaliavvanavaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗಲಗಲಿಅವ್ವನವರು"
+   },
+   "gopala_dasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Gopala Dasaru"
+   },
+   "gopalaryaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗೋಪಾಲಾರ್ಯರು"
+   },
+   "gopativithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗೋಪತಿವಿಠಲರು"
+   },
+   "govimdadasa": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗೋವಿಂದದಾಸ"
+   },
+   "gumdamma": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗುಂಡಮ್ಮ"
+   },
+   "gurugovimdavithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗುರುಗೋವಿಂದವಿಠಲರು"
+   },
+   "guruimdiresaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗುರುಇಂದಿರೇಶರು"
+   },
+   "gurujagannathadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗುರುಜಗನ್ನಾಥದಾಸರು"
+   },
+   "gurupranesavithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗುರುಪ್ರಾಣೇಶವಿಠಲರು"
+   },
+   "gururamalimga": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗುರುರಾಮಲಿಂಗ"
+   },
+   "gururamavithala": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗುರುರಾಮವಿಠಲ"
+   },
+   "gurutamdevaradagopalavithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗುರುತಂದೆವರದಗೋಪಾಲವಿಠಲರು"
+   },
+   "guruvijayaviththalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಗುರುವಿಜಯವಿಠ್ಠಲರು"
+   },
+   "hanumesavithala": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಹನುಮೇಶವಿಠಲ"
+   },
+   "harapanahalli_bheemavva": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Harapanahalli Bheemavva"
+   },
+   "hasanmukha_vithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಹಸನ್ಮುಖ ವಿಠಲರು"
+   },
+   "helavanakatte_giriyamma": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Helavanakatte Giriyamma"
+   },
+   "henneramgadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಹೆನ್ನೆರಂಗದಾಸರು"
+   },
+   "hosakere_cidambarayyanavaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಹೊಸಕೆರೆ ಚಿದಂಬರಯ್ಯನವರು"
+   },
+   "imdiresaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಇಂದಿರೇಶರು"
+   },
+   "jagannatha_dasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Jagannatha Dasaru"
+   },
+   "jakkappayyanavaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಜಕ್ಕಪ್ಪಯ್ಯನವರು"
+   },
+   "jayesavithala": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಜಯೇಶವಿಠಲ"
+   },
+   "jnanabodakaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಜ್ಞಾನಬೋದಕರು"
+   },
+   "kadarumdalagi_hanumayya": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕದರುಂಡಲಗಿ ಹನುಮಯ್ಯ"
+   },
+   "kadarumdalagisaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕದರುಂಡಲಗೀಶರು"
+   },
+   "kakhamdaki_sri_krsnadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕಾಖಂಡಕಿ ಶ್ರೀ ಕೃಷ್ಣದಾಸರು"
+   },
+   "kakhamdaki_sri_mahipatirayaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕಾಖಂಡಕಿ ಶ್ರೀ ಮಹಿಪತಿರಾಯರು"
+   },
+   "kalasada_sumdaramma": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕಳಸದ ಸುಂದರಮ್ಮ"
+   },
+   "kamalapativiththalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕಮಲಪತಿವಿಠ್ಠಲರು"
+   },
+   "kanaka_dasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Kanaka Dasaru"
+   },
+   "kankanaa_kaara": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Kankanaa Kaara"
+   },
+   "karki_kesavadasa": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕರ್ಕಿ ಕೇಶವದಾಸ"
+   },
+   "karpara_naraharidasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕಾರ್ಪರ ನರಹರಿದಾಸರು"
+   },
+   "kavi_laksmisa": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕವಿ ಲಕ್ಷ್ಮೀಶ"
+   },
+   "kavi_paramadevadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕವಿ ಪರಮದೇವದಾಸರು"
+   },
+   "keladi_vemkanna_kavi": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕೆಳದಿ ವೆಂಕಣ್ಣ ಕವಿ"
+   },
+   "kesavaviththalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕೇಶವವಿಠ್ಠಲರು"
+   },
+   "kosala_purisara": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕೋಸಲ ಪುರೀಶರ"
+   },
+   "krsnavithaladasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಕೃಷ್ಣವಿಠಲದಾಸರು"
+   },
+   "laksminarayanarayaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಲಕ್ಷ್ಮೀನಾರಯಣರಾಯರು"
+   },
+   "mahanithivithala": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಮಹಾನಿಥಿವಿಠಲ"
+   },
+   "mahipathi_dasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Mahipathi Dasaru"
+   },
+   "malige_ramgasvamidasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಮಳಿಗೆ ರಂಗಸ್ವಾಮಿದಾಸರು"
+   },
+   "mohana_dasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Mohana Dasaru"
+   },
+   "muddumohanavithaladasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಮುದ್ದುಮೋಹನವಿಠಲದಾಸರು"
+   },
+   "namjanagudu_tirumalamba": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ನಂಜನಗೂಡು ತಿರುಮಲಾಂಬಾ"
+   },
+   "narasimha": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ನರಸಿಂಹ"
+   },
+   "narasimha_jagannatha_dasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Narasimha (Jagannatha Dasaru)"
+   },
+   "narasimhavithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ನರಸಿಂಹವಿಠಲರು"
+   },
+   "narayanadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ನಾರಾಯಣದಾಸರು"
+   },
+   "nidaguruki_jivubayi": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ನಿಡಗುರುಕಿ ಜೀವೂಬಾಯಿ"
+   },
+   "orabayi_laksmidevamma": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಓರಬಾಯಿ ಲಕ್ಷ್ಮೀದೇವಮ್ಮ"
+   },
+   "pamduramga": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಪಾಂಡುರಂಗ"
+   },
+   "parisistam": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಪರಿಶಿಷ್ಟಂ"
+   },
+   "pavamje_laksminarnappayya": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಪಾವಂಜೆ ಲಕ್ಷ್ಮೀನಾರ್ಣಪ್ಪಯ್ಯ"
+   },
+   "pradyumnatirtharu": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಪ್ರದ್ಯುಮ್ನತೀರ್ಥರು"
+   },
+   "pranesha_dasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Pranesha Dasaru"
+   },
+   "prasanna_srinivasadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಪ್ರಸನ್ನ ಶ್ರೀನಿವಾಸದಾಸರು"
+   },
+   "prasanna_venkata_dasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Prasanna Venkata Dasaru"
+   },
+   "purandara_dasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Purandara Dasaru"
+   },
+   "radhabayi": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ರಾಧಾಬಾಯಿ"
+   },
+   "raghavendra": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Raghavendra"
+   },
+   "raghuramavithaladasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ರಘುರಾಮವಿಠಲದಾಸರು"
+   },
+   "rajagopaladasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ರಾಜಗೋಪಾಲದಾಸರು"
+   },
+   "ramadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ರಾಮದಾಸರು"
+   },
+   "ramapativithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ರಮಾಪತಿವಿಠಲರು"
+   },
+   "ramgadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ರಂಗದಾಸರು"
+   },
+   "ramgesavithaladasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ರಂಗೇಶವಿಠಲದಾಸರು"
+   },
+   "rukmamgadaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ರುಕ್ಮಾಂಗದರು"
+   },
+   "sadanamdaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಸದಾನಂದರು"
+   },
+   "samasarmaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಶಾಮಶರ್ಮರು"
+   },
+   "samasumdara_vithala": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಶಾಮಸುಂದರ ವಿಠಲ"
+   },
+   "samkarabhatta_agnihotri": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಶಂಕರಭಟ್ಟ ಅಗ್ನಿಹೋತ್ರಿ"
+   },
+   "sampattayyamgar": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಸಂಪತ್ತಯ್ಯಂಗಾರ್"
+   },
+   "samtibayi": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಶಾಂತಿಬಾಯಿ"
+   },
+   "saraguru_vemkatavaradaryaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಸರಗೂರು ವೆಂಕಟವರದಾರ್ಯರು"
+   },
+   "sarasabayi": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಸರಸಾಬಾಯಿ"
+   },
+   "sarasvati_bayi": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಸರಸ್ವತಿ ಬಾಯಿ"
+   },
+   "shyama_sundara_dasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Shyama Sundara Dasaru"
+   },
+   "siddhagurutripuramtaka": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಸಿದ್ಧಗುರುತ್ರಿಪುರಾಂತಕ"
+   },
+   "sirigovimdavithala": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಸಿರಿಗೋವಿಂದವಿಠಲ"
+   },
+   "sirigurutamdevaradavithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಸಿರಿಗುರುತಂದೆವರದವಿಠಲರು"
+   },
+   "sirivatsamkitaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಸಿರಿವತ್ಸಾಂಕಿತರು"
+   },
+   "sirivithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಸಿರಿವಿಠಲರು"
+   },
+   "sivaramaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಶಿವರಾಮರು"
+   },
+   "sri_kapila_devara_stotra": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Sri Kapila Devara Stotra"
+   },
+   "sri_mukhya_prana_devara_stotra": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Sri Mukhya Prana Devara Stotra"
+   },
+   "sri_narasimha_devara": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Sri Narasimha Devara"
+   },
+   "sri_parvathi_devi_sthothra": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Sri Parvathi Devi Sthothra"
+   },
+   "sridavithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಶ್ರೀದವಿಠಲರು"
+   },
+   "srinidhivithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಶ್ರೀನಿಧಿವಿಠಲರು"
+   },
+   "sripadarajaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Sripadarajaru"
+   },
+   "sripati": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಶ್ರೀಪತಿ"
+   },
+   "srisa_kesavadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಶ್ರೀಶ ಕೇಶವದಾಸರು"
+   },
+   "srisapranesavithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಶ್ರೀಶಪ್ರಾಣೇಶವಿಠಲರು"
+   },
+   "tamde_muddumohana_vithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ತಂದೆ ಮುದ್ದುಮೋಹನ ವಿಠಲರು"
+   },
+   "tamde_srinarahari": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ತಂದೆ ಶ್ರೀನರಹರಿ"
+   },
+   "tamdevaradagopalavithalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ತಂದೆವರದಗೋಪಾಲವಿಠಲರು"
+   },
+   "timmappadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ತಿಮ್ಮಪ್ಪದಾಸರು"
+   },
+   "tulasi_devi_purandara_dasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Tulasi Devi (Purandara Dasaru)"
+   },
+   "tulasiramadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ತುಳಸೀರಾಮದಾಸರು"
+   },
+   "tupaki_vemkataramanacarya": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ತುಪಾಕಿ ವೆಂಕಟರಮಣಾಚಾರ್ಯ"
+   },
+   "untitled": {
+    "_schema": "dasa_pada_text",
+    "_default_author": ""
+   },
+   "uragadrivasavithaladasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಉರಗಾದ್ರಿವಾಸವಿಠಲದಾಸರು"
+   },
+   "vadirajaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Vadirajaru"
+   },
+   "varadesavithala": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವರದೇಶವಿಠಲ"
+   },
+   "varahatimmappa": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವರಹತಿಮ್ಮಪ್ಪ"
+   },
+   "varavaniramarayadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವರಾವಾಣಿರಾಮರಾಯದಾಸರು"
+   },
+   "vayudevara_avathara_traya": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Vayudevara Avathara Traya"
+   },
+   "vemkatadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವೆಂಕಟದಾಸರು"
+   },
+   "vemkatavaradaryaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವೆಂಕಟವರದಾರ್ಯರು"
+   },
+   "vemkatesavitthala": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವೆಂಕಟೇಶವಿಟ್ಠಲ"
+   },
+   "vemkatrav": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವೆಂಕಟ್ರಾವ್"
+   },
+   "venugopaladasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವೇಣುಗೋಪಾಲದಾಸರು"
+   },
+   "vidyakamtayatigalu": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವಿದ್ಯಾಕಾಂತಯತಿಗಳು"
+   },
+   "vidyaprasannatirtharu": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವಿದ್ಯಾಪ್ರಸನ್ನತೀರ್ಥರು"
+   },
+   "vidyaratnakaratirtharu": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವಿದ್ಯಾರತ್ನಾಕರತೀರ್ಥರು"
+   },
+   "vijaya_dasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Vijaya Dasaru"
+   },
+   "vijaya_ramacamdravithala": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವಿಜಯ ರಾಮಚಂದ್ರವಿಠಲ"
+   },
+   "vijayimdratirtharu": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವಿಜಯೀಂದ್ರತೀರ್ಥರು"
+   },
+   "viranarayana": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವೀರನಾರಾಯಣ"
+   },
+   "visvapati": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವಿಶ್ವಪತಿ"
+   },
+   "visvemdratirtha": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವಿಶ್ವೆಂದ್ರತೀರ್ಥ"
+   },
+   "vivaha": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Vivaha"
+   },
+   "vyasaraja_pratishte_anjaneya_e0b2b5e0b38de0b2afe0b2bee0b2b8e0b2b0e0b2bee0b29c_e0b2aae0b38de0b2b0e0b2a4e0b2bfe0b2b7e0b38de0b2a0e0b386_e0b286": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Vyasaraja Pratishte Anjaneya %E0%B2%B5%E0%B3%8D%E0%B2%Af%E0%B2%Be%E0%B2%B8%E0%B2%B0%E0%B2%Be%E0%B2%9C %E0%B2%Aa%E0%B3%8D%E0%B2%B0%E0%B2%A4%E0%B2%Bf%E0%B2%B7%E0%B3%8D%E0%B2%A0%E0%B3%86 %E0%B2%86"
+   },
+   "vyasarayaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "Vyasarayaru"
+   },
+   "vyasatatvajnadasaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವ್ಯಾಸತತ್ವಜ್ಞದಾಸರು"
+   },
+   "vyasaviththalaru": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ವ್ಯಾಸವಿಠ್ಠಲರು"
+   },
+   "yadugiriyamma": {
+    "_schema": "dasa_pada_text",
+    "_default_author": "ಯದುಗಿರಿಯಮ್ಮ"
    }
   }
  },

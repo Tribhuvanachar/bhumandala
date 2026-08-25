@@ -191,3 +191,31 @@ This file, `ALL_SOURCES_composer_registry.json`, and
 `dasa1/cross_source_duplicate_review.json` stay as the historical record of
 that review — the 5-composer and category calls above are recorded there in
 full, not just this summary.
+
+## Taxonomy integration — done (25 Aug 2026)
+
+The 152-composer corpus above was complete and correct but reachable only
+through `dasa_sahitya.html`'s own runtime fetch of `index.json` — it had no
+real leaves in `taxonomy.json`/`library.json`, so it never showed up in the
+Library folder browser, global search, or `tools/audit_library.py`'s
+completion count, and the taxonomy-registered `dasa_sahitya/dasakuta/`
+scaffold it had actually superseded (empty `pada`/`suladi`/`ugabhoga`/...
+stub folders per composer, predating this whole 4-source merge) was still
+what visitors saw there instead.
+
+Fixed by converting each `composers/<slug>.json` in place to
+`composers/<slug>/data.json` (schema `dasa_pada_text`, `items` instead of
+`compositions` — no duplication, same file moved not copied) and adding one
+real taxonomy leaf per composer under `dasa_sahitya.composers.<slug>`. The
+empty `dasakuta` pada/keerthana stub was removed; its one genuinely
+populated leaf (Jagannathadasa's Harikathamritasara, a distinct kavya, not a
+pada) and the whole `vyasakuta` tree (real, separate Sanskrit-prakarana
+scaffolding by Madhva-tradition ācāryas, unrelated to this corpus) were left
+alone.
+
+`tools/dasa_sahitya/import_dasa_sahitya.py` (fresh web imports) and
+`tools/dasa_sahitya/merge_or_relabel.py` (the reusable composer-merge/
+relabel tool) both write the new `<slug>/data.json` layout now.
+`finalize_single_corpus.py` and `merge_confirmed_composers.py` were
+one-off scripts whose job is done (see the checklist above) and were left
+as historical record, not updated to the new layout.

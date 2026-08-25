@@ -163,7 +163,7 @@ async function loadComposer(slug){
   if(!entry) return;
   try{
     const data=await (await fetch(BASE+"/"+entry.file,{cache:"no-store"})).json();
-    const recs=(data.compositions||[]).map(r=>({...r,_slug:slug}));
+    const recs=(data.items||data.compositions||[]).map(r=>({...r,_slug:slug}));
     // replace any existing records for this slug
     state.records=state.records.filter(r=>r._slug!==slug).concat(recs);
     state.loaded[slug]="ok";
