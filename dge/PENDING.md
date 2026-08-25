@@ -3447,10 +3447,48 @@ Still open, in the order I would take them:
   against the already-ingested data instead of re-crawling. The cache
   opportunity itself is still open and still closing; whoever has that
   branch would need to act on it before the 7-day window lapses.
-- **Anuvyākhyāna looks under-crawled and is marked `complete` anyway.** Its
-  grantha record reports `discovered: 16, items: 88` for a text of roughly
-  1,900 verses. Sixteen pages is about one pāda. Worth re-checking its seed
-  before trusting the `complete`.
+- ~~**Anuvyākhyāna looks under-crawled and is marked `complete` anyway.**~~
+  **Re-checked against the live site (25 Aug), not just re-read from the
+  status file** — this session had real network egress to
+  dvaitavedanta.in, unlike the Cowork sandbox this pipeline normally runs
+  in. Verdict: **`discovered: 16` is genuinely correct, not under-crawled.**
+  The site itself exposes exactly 16 entry points for this grantha (4
+  adhyāya × 4 pāda — the canonical Brahma Sūtra shape), confirmed three
+  ways: the seed page's own sidebar, the book-root page
+  (`/category-details/563/563/satara`), and the site's own homepage nav all
+  list the same 16 links, and the `load-data` AJAX endpoint the site's JS
+  uses to swap content (`loadArticle()`) returns nothing deeper for these
+  ids either — there is no hidden per-verse tree a static-HTML crawl is
+  missing. Fetched all 16 pages live and extracted every `॥N॥` verse
+  number: they run gapless from 1 up to each adhyāya's own maximum (verse
+  numbering restarts per adhyāya, not a single 1..~1900 run), summing to
+  1,656 numbered verses across the four adhyāyas — in the right range for
+  "roughly 1,900" once colophon/unnumbered lines are counted, not a
+  fragment of it. The **88-item count undersold this real coverage for a
+  different reason**: this text isn't captured one-item-per-verse the way
+  most of this corpus is — each pāda page groups its many verses by
+  adhikaraṇa into a handful of large multi-verse chunks (pāda 1 alone is
+  12 chunks covering verses 9–256, 7.8 KB in its biggest chunk), so a low
+  item count was never evidence of missing pages. Confirmed the item count
+  itself reconciles exactly: summing each of the 16 live pages' own chunk
+  count gives 88, matching the ingested total precisely. Four of the 16
+  pādas (2.4, 3.1, 4.3, 4.4) genuinely carry only a bare pratika and no
+  commentary at all live on the site — real pāda-length variance (some
+  Brahma Sūtra pādas are far shorter than others), not a fetch failure.
+  **A real, different, newly-found problem from the same check**: those
+  adhikaraṇa-grouped chunks are filed as ~68 separate `tika_<adhikaraṇa>`
+  folders (`dge/data/.../sutra_prasthana/anuvyakhyana/tika_*`, mostly 1
+  item each) as if each adhikaraṇa were a distinct sub-commentary, when
+  they are all still Anuvyākhyāna's own root verses just grouped by
+  section — the same misclassification class as the Nyāya Sudhā
+  layer-splitting bug fixed earlier this session, but for mūla-vs-tīkā
+  rather than same-tīkā-different-folder. Worth its own pass: likely fixed
+  in `resolve_layer_config`/`layer_key` by recognising that a grantha with
+  no configured tīkā authors (only `mula`) should fold every unmapped h3
+  heading into the mūla layer instead of auto-slugging a new tīkā folder
+  per heading. Not attempted here — this was a re-crawl status check, not
+  a classifier redesign, and 68 folders deserves its own verified fix
+  rather than a rushed one bundled into an unrelated task.
 - **94,829 units across 631 unmapped layer names are being discarded**,
   against 30,139 items actually written — roughly three times as much
   dropped as kept. The largest are the major ṭīkā corpus: भावरत्नकोशः 6,787,
