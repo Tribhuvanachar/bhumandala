@@ -6626,9 +6626,10 @@
   "genre": "Samhita",
   "guna_classification": "not_specified",
   "ratnatraya": false,
-  "madhva_relevance": {
-    "level": "not_specified",
-    "evidence": []
+  "madhvacharya_relevance": {
+    "level": "direct_quote",
+    "evidence": [],
+    "note": "Flagged via a secondary survey reconstructing Madhvacharya's own citation corpus (named among ~40 Pancharatra samhitas his surviving works cite). Primary-source citations (work + location) not yet attached -- pending."
   },
   "text_status": "extant_partial"
 }

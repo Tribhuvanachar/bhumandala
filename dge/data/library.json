@@ -162,7 +162,7 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -178,7 +178,7 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -194,7 +194,7 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -210,7 +210,7 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -226,7 +226,7 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -242,7 +242,7 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -258,7 +258,7 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -274,7 +274,7 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -290,9 +290,10 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
-          "level": "not_specified",
-          "evidence": []
+        "madhvacharya_relevance": {
+          "level": "direct_quote",
+          "evidence": [],
+          "note": "Flagged via a secondary survey reconstructing Madhvacharya's own citation corpus (named among ~40 Pancharatra samhitas his surviving works cite). Primary-source citations (work + location) not yet attached -- pending."
         },
         "text_status": "unpopulated"
       }
@@ -306,9 +307,10 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
-          "level": "not_specified",
-          "evidence": []
+        "madhvacharya_relevance": {
+          "level": "direct_quote",
+          "evidence": [],
+          "note": "Flagged via a secondary survey reconstructing Madhvacharya's own citation corpus (named among ~40 Pancharatra samhitas his surviving works cite). Primary-source citations (work + location) not yet attached -- pending."
         },
         "text_status": "extant_partial"
       }
@@ -322,9 +324,10 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
-          "level": "not_specified",
-          "evidence": []
+        "madhvacharya_relevance": {
+          "level": "direct_quote",
+          "evidence": [],
+          "note": "Flagged via a secondary survey reconstructing Madhvacharya's own citation corpus (named among ~40 Pancharatra samhitas his surviving works cite). Primary-source citations (work + location) not yet attached -- pending."
         },
         "text_status": "extant_partial"
       }
@@ -338,7 +341,7 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -354,7 +357,7 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": true,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -370,7 +373,7 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": true,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -386,7 +389,7 @@
         "genre": "Samhita",
         "guna_classification": "not_specified",
         "ratnatraya": true,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -402,7 +405,7 @@
         "genre": "Agama",
         "guna_classification": "not_specified",
         "ratnatraya": false,
-        "madhva_relevance": {
+        "madhvacharya_relevance": {
           "level": "not_specified",
           "evidence": []
         },
@@ -8954,7 +8957,7 @@
     },
     {
       "path": "dge/data/vedanga/chandas/data.json",
-      "populated": false,
+      "populated": true,
       "title": "Chandas"
     },
     {
