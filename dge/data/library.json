@@ -10792,444 +10792,862 @@
       }
     },
     {
-      "path": "dge/data/purana/agni_purana/data.json",
+      "path": "dge/data/purana/maha_purana/agni_purana/data.json",
       "populated": true,
       "title": "Agni Purana",
+      "addedAt": "2026-08-25",
       "source": {
         "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
         "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Agnipurāṇa",
         "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "tamasa"
       }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana/skandha_01/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana/skandha_01/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् स्कन्धः 1"
+      "title": "Skandha 01",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana/skandha_02/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana/skandha_02/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् स्कन्धः 2"
+      "title": "Skandha 02",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana/skandha_03/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana/skandha_03/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् स्कन्धः 3"
+      "title": "Skandha 03",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana/skandha_04/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana/skandha_04/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् स्कन्धः 4"
+      "title": "Skandha 04",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana/skandha_05/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana/skandha_05/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् स्कन्धः 5"
+      "title": "Skandha 05",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana/skandha_06/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana/skandha_06/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् स्कन्धः 6"
+      "title": "Skandha 06",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana/skandha_07/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana/skandha_07/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् स्कन्धः 7"
+      "title": "Skandha 07",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana/skandha_08/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana/skandha_08/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् स्कन्धः 8"
+      "title": "Skandha 08",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana/skandha_09/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana/skandha_09/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् स्कन्धः 9"
+      "title": "Skandha 09",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana/skandha_10/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana/skandha_10/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् स्कन्धः 10"
+      "title": "Skandha 10",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana/skandha_11/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana/skandha_11/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् स्कन्धः 11"
+      "title": "Skandha 11",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana/skandha_12/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana/skandha_12/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् स्कन्धः 12"
+      "title": "Skandha 12",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana_madhva/skandha_01/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana_madhva/skandha_01/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 1"
+      "title": "Skandha 01",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana_madhva/skandha_02/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana_madhva/skandha_02/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 2"
+      "title": "Skandha 02",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana_madhva/skandha_03/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana_madhva/skandha_03/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 3"
+      "title": "Skandha 03",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana_madhva/skandha_04/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana_madhva/skandha_04/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 4"
+      "title": "Skandha 04",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana_madhva/skandha_05/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana_madhva/skandha_05/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 5"
+      "title": "Skandha 05",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana_madhva/skandha_06/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana_madhva/skandha_06/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 6"
+      "title": "Skandha 06",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana_madhva/skandha_07/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana_madhva/skandha_07/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 7"
+      "title": "Skandha 07",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana_madhva/skandha_08/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana_madhva/skandha_08/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 8"
+      "title": "Skandha 08",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana_madhva/skandha_09/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana_madhva/skandha_09/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 9"
+      "title": "Skandha 09",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana_madhva/skandha_10/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana_madhva/skandha_10/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 10"
+      "title": "Skandha 10",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana_madhva/skandha_11/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana_madhva/skandha_11/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 11"
+      "title": "Skandha 11",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhagavata_purana_madhva/skandha_12/data.json",
+      "path": "dge/data/purana/maha_purana/bhagavata_purana_madhva/skandha_12/data.json",
       "populated": true,
-      "title": "श्रीमद्भागवतम् (माध्वसम्प्रदायपाठः) स्कन्धः 12"
+      "title": "Skandha 12",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/bhavishya_purana/brahma_parva/data.json",
+      "path": "dge/data/purana/maha_purana/bhavishya_purana/brahma_parva/data.json",
       "populated": false,
-      "title": "Brahma Parva"
+      "title": "Brahma Parva",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/bhavishya_purana/madhyama_parva/data.json",
+      "path": "dge/data/purana/maha_purana/bhavishya_purana/madhyama_parva/data.json",
       "populated": false,
-      "title": "Madhyama Parva"
+      "title": "Madhyama Parva",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/bhavishya_purana/pratisarga_parva/data.json",
+      "path": "dge/data/purana/maha_purana/bhavishya_purana/pratisarga_parva/data.json",
       "populated": false,
-      "title": "Pratisarga Parva"
+      "title": "Pratisarga Parva",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/bhavishya_purana/uttara_parva/data.json",
+      "path": "dge/data/purana/maha_purana/bhavishya_purana/uttara_parva/data.json",
       "populated": false,
-      "title": "Uttara Parva"
+      "title": "Uttara Parva",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/brahma_purana/data.json",
+      "path": "dge/data/purana/maha_purana/brahma_purana/data.json",
       "populated": false,
-      "title": "Brahma Purana"
+      "title": "Brahma Purana",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/brahmanda_purana/adhyatma_ramayana/data.json",
+      "path": "dge/data/purana/maha_purana/brahmanda_purana/adhyatma_ramayana/data.json",
       "populated": false,
-      "title": "Adhyatma Ramayana"
+      "title": "Adhyatma Ramayana",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/brahmanda_purana/lalitopakhyana_lalita_sahasranama/data.json",
+      "path": "dge/data/purana/maha_purana/brahmanda_purana/lalitopakhyana_lalita_sahasranama/data.json",
       "populated": false,
-      "title": "Lalitopakhyana Lalita Sahasranama"
+      "title": "Lalitopakhyana Lalita Sahasranama",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/brahmavaivarta_purana/brahma_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/brahmavaivarta_purana/brahma_khanda/data.json",
       "populated": false,
-      "title": "Brahma Khanda"
+      "title": "Brahma Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/brahmavaivarta_purana/ganesha_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/brahmavaivarta_purana/ganesha_khanda/data.json",
       "populated": false,
-      "title": "Ganesha Khanda"
+      "title": "Ganesha Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/brahmavaivarta_purana/krishna_janma_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/brahmavaivarta_purana/krishna_janma_khanda/data.json",
       "populated": false,
-      "title": "Krishna Janma Khanda"
+      "title": "Krishna Janma Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/brahmavaivarta_purana/prakriti_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/brahmavaivarta_purana/prakriti_khanda/data.json",
       "populated": false,
-      "title": "Prakriti Khanda"
+      "title": "Prakriti Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/garuda_purana/brahma_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/garuda_purana/brahma_khanda/data.json",
       "populated": false,
-      "title": "Brahma Khanda"
+      "title": "Brahma Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/garuda_purana/purva_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/garuda_purana/purva_khanda/data.json",
       "populated": true,
       "title": "Purva Khanda",
+      "addedAt": "2026-08-25",
       "source": {
         "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
         "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Garuḍapurāṇa",
         "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "sattvika"
       }
     },
     {
-      "path": "dge/data/purana/garuda_purana/uttara_khanda_pretakalpa/data.json",
+      "path": "dge/data/purana/maha_purana/garuda_purana/uttara_khanda_pretakalpa/data.json",
       "populated": false,
-      "title": "Uttara Khanda Pretakalpa"
+      "title": "Uttara Khanda Pretakalpa",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/kurma_purana/purva_bhaga/data.json",
+      "path": "dge/data/purana/maha_purana/kurma_purana/purva_bhaga/data.json",
       "populated": true,
       "title": "Purva Bhaga",
+      "addedAt": "2026-08-25",
       "source": {
         "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
         "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Kūrmapurāṇa",
         "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "tamasa"
       }
     },
     {
-      "path": "dge/data/purana/kurma_purana/uttara_bhaga/data.json",
+      "path": "dge/data/purana/maha_purana/kurma_purana/uttara_bhaga/data.json",
       "populated": true,
       "title": "Uttara Bhaga",
+      "addedAt": "2026-08-25",
       "source": {
         "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
         "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Kūrmapurāṇa",
         "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "tamasa"
       }
     },
     {
-      "path": "dge/data/purana/linga_purana/purva_bhaga/data.json",
+      "path": "dge/data/purana/maha_purana/linga_purana/purva_bhaga/data.json",
       "populated": true,
       "title": "Purva Bhaga",
+      "addedAt": "2026-08-25",
       "source": {
         "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
         "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Liṅgapurāṇa",
         "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "tamasa"
       }
     },
     {
-      "path": "dge/data/purana/linga_purana/uttara_bhaga/data.json",
+      "path": "dge/data/purana/maha_purana/linga_purana/uttara_bhaga/data.json",
       "populated": true,
       "title": "Uttara Bhaga",
+      "addedAt": "2026-08-25",
       "source": {
         "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
         "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Liṅgapurāṇa",
         "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "tamasa"
       }
     },
     {
-      "path": "dge/data/purana/markandeya_purana/devi_mahatmya_durga_saptashati/data.json",
+      "path": "dge/data/purana/maha_purana/markandeya_purana/devi_mahatmya_durga_saptashati/data.json",
       "populated": false,
-      "title": "Devi Mahatmya Durga Saptashati"
+      "title": "Devi Mahatmya Durga Saptashati",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/matsya_purana/data.json",
+      "path": "dge/data/purana/maha_purana/matsya_purana/data.json",
       "populated": true,
       "title": "Matsya Purana",
+      "addedAt": "2026-08-25",
       "source": {
         "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
         "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Matsyapurāṇa",
         "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "tamasa"
       }
     },
     {
-      "path": "dge/data/purana/narada_purana/purvabhaga/pada_01/data.json",
+      "path": "dge/data/purana/maha_purana/narada_purana/purvabhaga/pada_01/data.json",
       "populated": false,
-      "title": "Pada 01"
+      "title": "Pada 01",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/narada_purana/purvabhaga/pada_02/data.json",
+      "path": "dge/data/purana/maha_purana/narada_purana/purvabhaga/pada_02/data.json",
       "populated": false,
-      "title": "Pada 02"
+      "title": "Pada 02",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/narada_purana/purvabhaga/pada_03/data.json",
+      "path": "dge/data/purana/maha_purana/narada_purana/purvabhaga/pada_03/data.json",
       "populated": false,
-      "title": "Pada 03"
+      "title": "Pada 03",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/narada_purana/purvabhaga/pada_04/data.json",
+      "path": "dge/data/purana/maha_purana/narada_purana/purvabhaga/pada_04/data.json",
       "populated": false,
-      "title": "Pada 04"
+      "title": "Pada 04",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/narada_purana/uttarabhaga/data.json",
+      "path": "dge/data/purana/maha_purana/narada_purana/uttarabhaga/data.json",
       "populated": false,
-      "title": "Uttarabhaga"
+      "title": "Uttarabhaga",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/padma_purana/bhumi_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/padma_purana/bhumi_khanda/data.json",
       "populated": false,
-      "title": "Bhumi Khanda"
+      "title": "Bhumi Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/padma_purana/kriya_yoga_sara_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/padma_purana/kriya_yoga_sara_khanda/data.json",
       "populated": false,
-      "title": "Kriya Yoga Sara Khanda"
+      "title": "Kriya Yoga Sara Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/padma_purana/patala_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/padma_purana/patala_khanda/data.json",
       "populated": false,
-      "title": "Patala Khanda"
+      "title": "Patala Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/padma_purana/srishti_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/padma_purana/srishti_khanda/data.json",
       "populated": false,
-      "title": "Srishti Khanda"
+      "title": "Srishti Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/padma_purana/svarga_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/padma_purana/svarga_khanda/data.json",
       "populated": false,
-      "title": "Svarga Khanda"
+      "title": "Svarga Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/padma_purana/uttara_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/padma_purana/uttara_khanda/data.json",
       "populated": false,
-      "title": "Uttara Khanda"
+      "title": "Uttara Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/shiva_purana/kailasa_samhita/data.json",
+      "path": "dge/data/purana/maha_purana/shiva_purana/kailasa_samhita/data.json",
       "populated": false,
-      "title": "Kailasa Samhita"
+      "title": "Kailasa Samhita",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/shiva_purana/kotirudra_samhita/data.json",
+      "path": "dge/data/purana/maha_purana/shiva_purana/kotirudra_samhita/data.json",
       "populated": false,
-      "title": "Kotirudra Samhita"
+      "title": "Kotirudra Samhita",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/shiva_purana/rudra_samhita/kumara_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/shiva_purana/rudra_samhita/kumara_khanda/data.json",
       "populated": false,
-      "title": "Kumara Khanda"
+      "title": "Kumara Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/shiva_purana/rudra_samhita/parvati_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/shiva_purana/rudra_samhita/parvati_khanda/data.json",
       "populated": false,
-      "title": "Parvati Khanda"
+      "title": "Parvati Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/shiva_purana/rudra_samhita/sati_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/shiva_purana/rudra_samhita/sati_khanda/data.json",
       "populated": false,
-      "title": "Sati Khanda"
+      "title": "Sati Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/shiva_purana/rudra_samhita/srishti_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/shiva_purana/rudra_samhita/srishti_khanda/data.json",
       "populated": false,
-      "title": "Srishti Khanda"
+      "title": "Srishti Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/shiva_purana/rudra_samhita/yuddha_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/shiva_purana/rudra_samhita/yuddha_khanda/data.json",
       "populated": false,
-      "title": "Yuddha Khanda"
+      "title": "Yuddha Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/shiva_purana/shatarudra_samhita/data.json",
+      "path": "dge/data/purana/maha_purana/shiva_purana/shatarudra_samhita/data.json",
       "populated": false,
-      "title": "Shatarudra Samhita"
+      "title": "Shatarudra Samhita",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/shiva_purana/uma_samhita/data.json",
+      "path": "dge/data/purana/maha_purana/shiva_purana/uma_samhita/data.json",
       "populated": false,
-      "title": "Uma Samhita"
+      "title": "Uma Samhita",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/shiva_purana/vayaviya_samhita/data.json",
+      "path": "dge/data/purana/maha_purana/shiva_purana/vayaviya_samhita/data.json",
       "populated": false,
-      "title": "Vayaviya Samhita"
+      "title": "Vayaviya Samhita",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/shiva_purana/vidyeshvara_samhita/data.json",
+      "path": "dge/data/purana/maha_purana/shiva_purana/vidyeshvara_samhita/data.json",
       "populated": false,
-      "title": "Vidyeshvara Samhita"
+      "title": "Vidyeshvara Samhita",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/skanda_purana/avantya_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/skanda_purana/avantya_khanda/data.json",
       "populated": false,
-      "title": "Avantya Khanda"
+      "title": "Avantya Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/skanda_purana/brahma_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/skanda_purana/brahma_khanda/data.json",
       "populated": false,
-      "title": "Brahma Khanda"
+      "title": "Brahma Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/skanda_purana/kashi_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/skanda_purana/kashi_khanda/data.json",
       "populated": false,
-      "title": "Kashi Khanda"
+      "title": "Kashi Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/skanda_purana/maheshvara_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/skanda_purana/maheshvara_khanda/data.json",
       "populated": false,
-      "title": "Maheshvara Khanda"
+      "title": "Maheshvara Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/skanda_purana/nagara_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/skanda_purana/nagara_khanda/data.json",
       "populated": false,
-      "title": "Nagara Khanda"
+      "title": "Nagara Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/skanda_purana/prabhasa_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/skanda_purana/prabhasa_khanda/data.json",
       "populated": false,
-      "title": "Prabhasa Khanda"
+      "title": "Prabhasa Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/skanda_purana/revakhanda/data.json",
+      "path": "dge/data/purana/maha_purana/skanda_purana/revakhanda/data.json",
       "populated": true,
       "title": "Revakhanda",
+      "addedAt": "2026-08-25",
       "source": {
         "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
         "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Skandapurāṇa (Revākhaṇḍa)",
         "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "tamasa"
       }
     },
     {
-      "path": "dge/data/purana/skanda_purana/vaishnava_khanda/data.json",
+      "path": "dge/data/purana/maha_purana/skanda_purana/vaishnava_khanda/data.json",
       "populated": false,
-      "title": "Vaishnava Khanda"
+      "title": "Vaishnava Khanda",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "tamasa"
+      }
     },
     {
-      "path": "dge/data/purana/upapuranas/adi_purana/data.json",
+      "path": "dge/data/purana/maha_purana/vamana_purana/saromahatmya/data.json",
       "populated": false,
-      "title": "Adi Purana"
+      "title": "Saromahatmya",
+      "addedAt": "2026-08-25",
+      "facets": {
+        "guna_classification": "rajasa"
+      }
     },
     {
-      "path": "dge/data/purana/upapuranas/brihannaradiya_purana/data.json",
-      "populated": false,
-      "title": "Brihannaradiya Purana"
+      "path": "dge/data/purana/maha_purana/varaha_purana/data.json",
+      "populated": true,
+      "title": "Varaha Purana",
+      "addedAt": "2026-08-25",
+      "source": {
+        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Varāhapurāṇa",
+        "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/upapuranas/devi_bhagavata_purana/data.json",
+      "path": "dge/data/purana/maha_purana/vayu_purana/data.json",
       "populated": false,
-      "title": "Devi Bhagavata Purana"
+      "title": "Vayu Purana",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/purana/upapuranas/ganesha_purana/data.json",
-      "populated": false,
-      "title": "Ganesha Purana"
+      "path": "dge/data/purana/maha_purana/vishnu_purana/amsha_01/data.json",
+      "populated": true,
+      "title": "Amsha 01",
+      "addedAt": "2026-08-25",
+      "source": {
+        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
+        "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "sattvika"
+      }
     },
     {
-      "path": "dge/data/purana/upapuranas/kalika_purana/data.json",
+      "path": "dge/data/purana/maha_purana/vishnu_purana/amsha_02/data.json",
+      "populated": true,
+      "title": "Amsha 02",
+      "addedAt": "2026-08-25",
+      "source": {
+        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
+        "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "sattvika"
+      }
+    },
+    {
+      "path": "dge/data/purana/maha_purana/vishnu_purana/amsha_03/data.json",
+      "populated": true,
+      "title": "Amsha 03",
+      "addedAt": "2026-08-25",
+      "source": {
+        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
+        "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "sattvika"
+      }
+    },
+    {
+      "path": "dge/data/purana/maha_purana/vishnu_purana/amsha_04/data.json",
+      "populated": true,
+      "title": "Amsha 04",
+      "addedAt": "2026-08-25",
+      "source": {
+        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
+        "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "sattvika"
+      }
+    },
+    {
+      "path": "dge/data/purana/maha_purana/vishnu_purana/amsha_05/data.json",
+      "populated": true,
+      "title": "Amsha 05",
+      "addedAt": "2026-08-25",
+      "source": {
+        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
+        "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "sattvika"
+      }
+    },
+    {
+      "path": "dge/data/purana/maha_purana/vishnu_purana/amsha_06/data.json",
+      "populated": true,
+      "title": "Amsha 06",
+      "addedAt": "2026-08-25",
+      "source": {
+        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
+        "licence": "CC-BY 4.0"
+      },
+      "facets": {
+        "guna_classification": "sattvika"
+      }
+    },
+    {
+      "path": "dge/data/purana/upa_purana/adi_purana/data.json",
+      "populated": false,
+      "title": "Adi Purana",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/purana/upa_purana/brihannaradiya_purana/data.json",
+      "populated": false,
+      "title": "Brihannaradiya Purana",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/purana/upa_purana/devi_bhagavata_purana/data.json",
+      "populated": false,
+      "title": "Devi Bhagavata Purana",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/purana/upa_purana/ganesha_purana/data.json",
+      "populated": false,
+      "title": "Ganesha Purana",
+      "addedAt": "2026-08-25"
+    },
+    {
+      "path": "dge/data/purana/upa_purana/kalika_purana/data.json",
       "populated": true,
       "title": "Kalika Purana",
+      "addedAt": "2026-08-25",
       "source": {
         "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
         "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Kālikāpurāṇa",
@@ -11237,14 +11655,16 @@
       }
     },
     {
-      "path": "dge/data/purana/upapuranas/nandi_purana/data.json",
+      "path": "dge/data/purana/upa_purana/nandi_purana/data.json",
       "populated": false,
-      "title": "Nandi Purana"
+      "title": "Nandi Purana",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/purana/upapuranas/narasimha_purana/data.json",
+      "path": "dge/data/purana/upa_purana/narasimha_purana/data.json",
       "populated": true,
       "title": "Narasimha Purana",
+      "addedAt": "2026-08-25",
       "source": {
         "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
         "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Narasiṃhapurāṇa",
@@ -11252,100 +11672,22 @@
       }
     },
     {
-      "path": "dge/data/purana/upapuranas/sanatkumara_purana/data.json",
+      "path": "dge/data/purana/upa_purana/sanatkumara_purana/data.json",
       "populated": false,
-      "title": "Sanatkumara Purana"
-    },
-    {
-      "path": "dge/data/purana/upapuranas/saura_purana/data.json",
-      "populated": false,
-      "title": "Saura Purana"
-    },
-    {
-      "path": "dge/data/purana/upapuranas/vishnu_dharmottara_purana/data.json",
-      "populated": false,
-      "title": "Vishnu Dharmottara Purana"
-    },
-    {
-      "path": "dge/data/purana/vamana_purana/saromahatmya/data.json",
-      "populated": false,
-      "title": "Saromahatmya"
-    },
-    {
-      "path": "dge/data/purana/varaha_purana/data.json",
-      "populated": true,
-      "title": "Varaha Purana",
-      "source": {
-        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Varāhapurāṇa",
-        "licence": "CC-BY 4.0"
-      }
-    },
-    {
-      "path": "dge/data/purana/vayu_purana/data.json",
-      "populated": false,
-      "title": "Vayu Purana",
+      "title": "Sanatkumara Purana",
       "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/purana/vishnu_purana/amsha_01/data.json",
-      "populated": true,
-      "title": "Amsha 01",
-      "source": {
-        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
-        "licence": "CC-BY 4.0"
-      }
+      "path": "dge/data/purana/upa_purana/saura_purana/data.json",
+      "populated": false,
+      "title": "Saura Purana",
+      "addedAt": "2026-08-25"
     },
     {
-      "path": "dge/data/purana/vishnu_purana/amsha_02/data.json",
-      "populated": true,
-      "title": "Amsha 02",
-      "source": {
-        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
-        "licence": "CC-BY 4.0"
-      }
-    },
-    {
-      "path": "dge/data/purana/vishnu_purana/amsha_03/data.json",
-      "populated": true,
-      "title": "Amsha 03",
-      "source": {
-        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
-        "licence": "CC-BY 4.0"
-      }
-    },
-    {
-      "path": "dge/data/purana/vishnu_purana/amsha_04/data.json",
-      "populated": true,
-      "title": "Amsha 04",
-      "source": {
-        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
-        "licence": "CC-BY 4.0"
-      }
-    },
-    {
-      "path": "dge/data/purana/vishnu_purana/amsha_05/data.json",
-      "populated": true,
-      "title": "Amsha 05",
-      "source": {
-        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
-        "licence": "CC-BY 4.0"
-      }
-    },
-    {
-      "path": "dge/data/purana/vishnu_purana/amsha_06/data.json",
-      "populated": true,
-      "title": "Amsha 06",
-      "source": {
-        "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-        "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Viṣṇupurāṇa",
-        "licence": "CC-BY 4.0"
-      }
+      "path": "dge/data/purana/upa_purana/vishnu_dharmottara_purana/data.json",
+      "populated": false,
+      "title": "Vishnu Dharmottara Purana",
+      "addedAt": "2026-08-25"
     },
     {
       "path": "dge/data/shastra/bauddha_sahitya/avadana/avadanashataka/mula/data.json",

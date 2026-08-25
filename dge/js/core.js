@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.18 (DGE_LEGACY_SLUGS: redirects for the Pancharatra Ratnatraya/Pramukha/Anya regroup, on top of v3.17\'s Agama restructure redirects)';
+window.DGE_VERSIONS['core.js'] = 'v3.19 (DGE_LEGACY_SLUGS: redirects for the Purana maha_purana/upa_purana split, on top of v3.18\'s Pancharatra regroup redirects)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -178,7 +178,32 @@ const DGE_LEGACY_SLUGS = {
   // PrahladaKrutaNarasimha for the same reason.
   'dvaitavedanta':                       'darshana/vedanta/dvaita/DvaitaVedanta',
   'darshana/vedanta/dvaita/sarvamula':   'darshana/vedanta/dvaita/SarvaMula',
-  'stotra/pns':                          'stotra/PrahladaKrutaNarasimha'
+  'stotra/pns':                          'stotra/PrahladaKrutaNarasimha',
+  // 25 Aug 2026 Purana restructure: purana/<X> split into purana/maha_purana/
+  // (the 18 traditional Mahapuranas, plus the Bhagavata-Madhva variant and
+  // Vayu Purana, already present) and purana/upa_purana/ (was upapuranas).
+  // Each work's own sub-path is unaffected, only the parent changed.
+  'purana/bhagavata_purana':        'purana/maha_purana/bhagavata_purana',
+  'purana/bhagavata_purana_madhva': 'purana/maha_purana/bhagavata_purana_madhva',
+  'purana/brahma_purana':           'purana/maha_purana/brahma_purana',
+  'purana/padma_purana':            'purana/maha_purana/padma_purana',
+  'purana/vishnu_purana':           'purana/maha_purana/vishnu_purana',
+  'purana/shiva_purana':            'purana/maha_purana/shiva_purana',
+  'purana/narada_purana':           'purana/maha_purana/narada_purana',
+  'purana/markandeya_purana':       'purana/maha_purana/markandeya_purana',
+  'purana/agni_purana':             'purana/maha_purana/agni_purana',
+  'purana/bhavishya_purana':        'purana/maha_purana/bhavishya_purana',
+  'purana/brahmavaivarta_purana':   'purana/maha_purana/brahmavaivarta_purana',
+  'purana/linga_purana':            'purana/maha_purana/linga_purana',
+  'purana/varaha_purana':           'purana/maha_purana/varaha_purana',
+  'purana/skanda_purana':           'purana/maha_purana/skanda_purana',
+  'purana/vamana_purana':           'purana/maha_purana/vamana_purana',
+  'purana/kurma_purana':            'purana/maha_purana/kurma_purana',
+  'purana/matsya_purana':           'purana/maha_purana/matsya_purana',
+  'purana/garuda_purana':           'purana/maha_purana/garuda_purana',
+  'purana/brahmanda_purana':        'purana/maha_purana/brahmanda_purana',
+  'purana/vayu_purana':             'purana/maha_purana/vayu_purana',
+  'purana/upapuranas':              'purana/upa_purana'
 };
 
 window.dgeUpgradeLegacySlug = function (slug) {

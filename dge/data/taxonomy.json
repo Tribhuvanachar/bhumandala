@@ -442,132 +442,134 @@
   }
  },
  "purana": {
-  "_schema": "itihasa_purana_text",
-  "_default_author": "Maharshi Veda Vyasa",
-  "bhagavata_purana": {
-   "skandha_01": {},
-   "skandha_02": {},
-   "skandha_03": {},
-   "skandha_04": {},
-   "skandha_05": {},
-   "skandha_06": {},
-   "skandha_07": {},
-   "skandha_08": {},
-   "skandha_09": {},
-   "skandha_10": {},
-   "skandha_11": {},
-   "skandha_12": {}
-  },
-  "bhagavata_purana_madhva": {
-   "skandha_01": {},
-   "skandha_02": {},
-   "skandha_03": {},
-   "skandha_04": {},
-   "skandha_05": {},
-   "skandha_06": {},
-   "skandha_07": {},
-   "skandha_08": {},
-   "skandha_09": {},
-   "skandha_10": {},
-   "skandha_11": {},
-   "skandha_12": {}
-  },
-  "brahma_purana": {},
-  "padma_purana": {
-   "srishti_khanda": {},
-   "bhumi_khanda": {},
-   "svarga_khanda": {},
-   "patala_khanda": {},
-   "uttara_khanda": {},
-   "kriya_yoga_sara_khanda": {}
-  },
-  "vishnu_purana": {
-   "amsha_01": {},
-   "amsha_02": {},
-   "amsha_03": {},
-   "amsha_04": {},
-   "amsha_05": {},
-   "amsha_06": {}
-  },
-  "shiva_purana": {
-   "vidyeshvara_samhita": {},
-   "rudra_samhita": {
+  "maha_purana": {
+   "_schema": "itihasa_purana_text",
+   "_default_author": "Maharshi Veda Vyasa",
+   "bhagavata_purana": {
+    "skandha_01": {},
+    "skandha_02": {},
+    "skandha_03": {},
+    "skandha_04": {},
+    "skandha_05": {},
+    "skandha_06": {},
+    "skandha_07": {},
+    "skandha_08": {},
+    "skandha_09": {},
+    "skandha_10": {},
+    "skandha_11": {},
+    "skandha_12": {}
+   },
+   "bhagavata_purana_madhva": {
+    "skandha_01": {},
+    "skandha_02": {},
+    "skandha_03": {},
+    "skandha_04": {},
+    "skandha_05": {},
+    "skandha_06": {},
+    "skandha_07": {},
+    "skandha_08": {},
+    "skandha_09": {},
+    "skandha_10": {},
+    "skandha_11": {},
+    "skandha_12": {}
+   },
+   "brahma_purana": {},
+   "padma_purana": {
     "srishti_khanda": {},
-    "sati_khanda": {},
-    "parvati_khanda": {},
-    "kumara_khanda": {},
-    "yuddha_khanda": {}
+    "bhumi_khanda": {},
+    "svarga_khanda": {},
+    "patala_khanda": {},
+    "uttara_khanda": {},
+    "kriya_yoga_sara_khanda": {}
    },
-   "shatarudra_samhita": {},
-   "kotirudra_samhita": {},
-   "uma_samhita": {},
-   "kailasa_samhita": {},
-   "vayaviya_samhita": {}
-  },
-  "narada_purana": {
-   "purvabhaga": {
-    "pada_01": {},
-    "pada_02": {},
-    "pada_03": {},
-    "pada_04": {}
+   "vishnu_purana": {
+    "amsha_01": {},
+    "amsha_02": {},
+    "amsha_03": {},
+    "amsha_04": {},
+    "amsha_05": {},
+    "amsha_06": {}
    },
-   "uttarabhaga": {}
-  },
-  "markandeya_purana": {
-   "devi_mahatmya_durga_saptashati": {}
-  },
-  "agni_purana": {},
-  "bhavishya_purana": {
-   "brahma_parva": {},
-   "madhyama_parva": {},
-   "pratisarga_parva": {},
-   "uttara_parva": {}
-  },
-  "brahmavaivarta_purana": {
-   "brahma_khanda": {},
-   "prakriti_khanda": {},
-   "ganesha_khanda": {},
-   "krishna_janma_khanda": {}
-  },
-  "linga_purana": {
-   "purva_bhaga": {},
-   "uttara_bhaga": {}
-  },
-  "varaha_purana": {},
-  "skanda_purana": {
-   "maheshvara_khanda": {},
-   "vaishnava_khanda": {},
-   "brahma_khanda": {},
-   "kashi_khanda": {},
-   "avantya_khanda": {},
-   "nagara_khanda": {},
-   "prabhasa_khanda": {},
-   "revakhanda": {
-    "_schema": "grantha_mula_text"
+   "shiva_purana": {
+    "vidyeshvara_samhita": {},
+    "rudra_samhita": {
+     "srishti_khanda": {},
+     "sati_khanda": {},
+     "parvati_khanda": {},
+     "kumara_khanda": {},
+     "yuddha_khanda": {}
+    },
+    "shatarudra_samhita": {},
+    "kotirudra_samhita": {},
+    "uma_samhita": {},
+    "kailasa_samhita": {},
+    "vayaviya_samhita": {}
+   },
+   "narada_purana": {
+    "purvabhaga": {
+     "pada_01": {},
+     "pada_02": {},
+     "pada_03": {},
+     "pada_04": {}
+    },
+    "uttarabhaga": {}
+   },
+   "markandeya_purana": {
+    "devi_mahatmya_durga_saptashati": {}
+   },
+   "agni_purana": {},
+   "bhavishya_purana": {
+    "brahma_parva": {},
+    "madhyama_parva": {},
+    "pratisarga_parva": {},
+    "uttara_parva": {}
+   },
+   "brahmavaivarta_purana": {
+    "brahma_khanda": {},
+    "prakriti_khanda": {},
+    "ganesha_khanda": {},
+    "krishna_janma_khanda": {}
+   },
+   "linga_purana": {
+    "purva_bhaga": {},
+    "uttara_bhaga": {}
+   },
+   "varaha_purana": {},
+   "skanda_purana": {
+    "maheshvara_khanda": {},
+    "vaishnava_khanda": {},
+    "brahma_khanda": {},
+    "kashi_khanda": {},
+    "avantya_khanda": {},
+    "nagara_khanda": {},
+    "prabhasa_khanda": {},
+    "revakhanda": {
+     "_schema": "grantha_mula_text"
+    }
+   },
+   "vamana_purana": {
+    "saromahatmya": {}
+   },
+   "kurma_purana": {
+    "purva_bhaga": {},
+    "uttara_bhaga": {}
+   },
+   "matsya_purana": {},
+   "garuda_purana": {
+    "purva_khanda": {},
+    "uttara_khanda_pretakalpa": {},
+    "brahma_khanda": {}
+   },
+   "brahmanda_purana": {
+    "lalitopakhyana_lalita_sahasranama": {},
+    "adhyatma_ramayana": {}
+   },
+   "vayu_purana": {
+    "_schema": "itihasa_purana_text",
+    "_default_author": "Maharshi Veda Vyasa"
    }
   },
-  "vamana_purana": {
-   "saromahatmya": {}
-  },
-  "kurma_purana": {
-   "purva_bhaga": {},
-   "uttara_bhaga": {}
-  },
-  "matsya_purana": {},
-  "garuda_purana": {
-   "purva_khanda": {},
-   "uttara_khanda_pretakalpa": {},
-   "brahma_khanda": {}
-  },
-  "brahmanda_purana": {
-   "lalitopakhyana_lalita_sahasranama": {},
-   "adhyatma_ramayana": {}
-  },
-  "vayu_purana": {
-   "_schema": "itihasa_purana_text",
-   "_default_author": "Maharshi Veda Vyasa"
-  },
-  "upapuranas": {
+  "upa_purana": {
    "vishnu_dharmottara_purana": {},
    "devi_bhagavata_purana": {},
    "kalika_purana": {},
