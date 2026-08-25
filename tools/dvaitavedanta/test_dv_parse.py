@@ -265,6 +265,66 @@ def main():
                           P.clean_text("StartFragmentation"))
 
     print()
+    print("G. structural heading, not a verse (real corpus bug: 22 occurrences,"
+          " e.g. Nyaya Sudha's 4x 'प्रथमः पादः', Sumadhva Vijaya's 16 sarga headings)")
+    for text in ["प्रथमः पादः", "द्वितीयः पादः", "चतुर्थपादः", "षोडशः सर्गः", "द्वितीयोऽध्यायः"]:
+        failures += not check(f"{text!r} recognised as a structural heading",
+                              P.is_structural_heading(text))
+    for text in ["नारायणं निखिलपूर्णगुणैकदेहं", "गुरुर्गुरूपणां प्रभवः",
+                 "अतो नैतादृशं किञ्चित्प्रमाणतममिष्यते", "प्रथमः पादो न वेदितव्यः"]:
+        failures += not check(f"{text!r} is real text, not a heading",
+                              not P.is_structural_heading(text))
+
+    # The real shape: an h2.shloka that is a bare pada-heading, with genuine
+    # h3 commentary right alongside it under the same article id (this is
+    # exactly Nyaya Sudha's DV_4841/DV_4845/DV_4853 -- the heading and the
+    # commentary on the sutras inside that pada share one article block).
+    heading_page = f"""
+<html><body>
+{BREADCRUMB}
+<div class="row">{SIDEBAR}
+<div class="col-md-9">
+  <div id="article14841" class="lazy-1">
+    <h2 class="shloka">प्रथमः पादः</h2>
+    <div id="dynamicContent" class="details">
+      <h3><strong><span>शास्त्रयोनित्वाधिकरणम्</span></strong></h3>
+      <p class="MsoPlainText"><span>शैवाद्यागमसम्प्राप्तदृष्टगेन फलेन तु ।</span></p>
+    </div>
+  </div>
+</div></div>
+<footer>Copyright 2026</footer>
+</body></html>
+"""
+    rec_h = P.parse_page(heading_page, url)
+    titles_h = [l["title"] for l in rec_h["layers"]]
+    failures += not check("the heading itself does not become a mula layer",
+                          "मूलम्" not in titles_h, titles_h)
+    failures += not check("the real commentary alongside it still comes through",
+                          titles_h == ["शास्त्रयोनित्वाधिकरणम्"], titles_h)
+    failures += not check("no layer's text is the bare heading",
+                          not any(l["text"].strip() == "प्रथमः पादः" for l in rec_h["layers"]),
+                          [l["text"][:20] for l in rec_h["layers"]])
+
+    # A heading-only leaf with no commentary at all must drop to nothing,
+    # not a lone fake "verse" item -- the case this bug actually produced
+    # (a reader card with a reference and nothing to read).
+    heading_only_page = f"""
+<html><body>
+{BREADCRUMB}
+<div class="row">{SIDEBAR}
+<div class="col-md-9">
+  <div id="article14842" class="lazy-1">
+    <h2 class="shloka">द्वितीयः सर्गः</h2>
+  </div>
+</div></div>
+<footer>Copyright 2026</footer>
+</body></html>
+"""
+    rec_ho = P.parse_page(heading_only_page, url)
+    failures += not check("a heading with no commentary yields no layers at all",
+                          rec_ho["layers"] == [], rec_ho["layers"])
+
+    print()
     if failures:
         print(f"{failures} check(s) FAILED")
         return 1

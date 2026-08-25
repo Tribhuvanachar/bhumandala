@@ -54,6 +54,39 @@ SHLOKA_CLASS_RE = re.compile(r"\bshloka\b", re.I)
 DETAILS_ID = "dynamicContent"
 DETAILS_CLASS_RE = re.compile(r"\bdetails\b", re.I)
 MULA_TITLE = "मूलम्"
+# The site marks a pāda/sarga/adhyāya section-boundary heading with the same
+# <h2 class="shloka"> markup it uses for a real verse (probe run on Nyāya
+# Sudhā's "प्रथमः पादः" and Sumadhva Vijaya's 16 sarga headings, all 16 of
+# which the naive parse turned into fake single-word "verses" with real
+# commentary sitting right alongside, under the same article id, unaffected —
+# see _layers_from_article). A genuine verse is never just "<ordinal>
+# <structural noun>" with no daṇḍa; this is a closed, short vocabulary, not a
+# heuristic on length or punctuation (short real pratīkas exist and must not
+# be dropped).
+_ORDINAL_WORDS = (
+    "प्रथम", "द्वितीय", "तृतीय", "चतुर्थ", "पञ्चम", "षष्ठ", "सप्तम", "अष्टम", "नवम", "दशम",
+    "एकादश", "द्वादश", "त्रयोदश", "चतुर्दश", "पञ्चदश", "षोडश", "सप्तदश", "अष्टादश",
+    "एकोनविंश", "विंश",
+)
+_STRUCTURAL_NOUNS = ("पाद", "अध्याय", "अधिकरण", "खण्ड", "प्रकरण", "काण्ड", "सर्ग", "अंश", "अष्टक")
+# The ordinal+noun sandhi (द्वितीयः + अध्यायः -> द्वितीयोऽध्यायः) elides the
+# noun's own leading अ, so the surface form never contains "अध्याय" as a
+# substring, only "ध्याय" -- match both the bare and अ-elided noun stem.
+_STRUCTURAL_NOUN_ALTS = sorted(
+    {n for n in _STRUCTURAL_NOUNS} | {n[1:] for n in _STRUCTURAL_NOUNS if n.startswith("अ")},
+    key=len, reverse=True,
+)
+STRUCTURAL_HEADING_RE = re.compile(
+    r"^(?:" + "|".join(_ORDINAL_WORDS) + r")[ःोऽ]{0,3}\s*(?:" + "|".join(_STRUCTURAL_NOUN_ALTS) + r")[ःम्]{0,2}$"
+)
+
+
+def is_structural_heading(text: str) -> bool:
+    """True for a bare section-boundary label ("प्रथमः पादः", "द्वितीयोऽध्यायः"),
+    never for actual verse or commentary text."""
+    return bool(STRUCTURAL_HEADING_RE.match((text or "").strip()))
+
+
 # A short bold line directly before an <h3> attributes the commentary that
 # follows ("श्रीराघवेन्द्रतीर्थयतिकृतः"). Topic labels sit in the same position
 # but carry no attribution verb, so match the verb rather than the position.
@@ -398,7 +431,7 @@ def _layers_from_article(node: Tag) -> list[dict]:
     shloka = node.find("h2", class_=SHLOKA_CLASS_RE)
     if shloka is not None:
         verse = clean_text(shloka.get_text(" "))
-        if devanagari_count(verse) >= 4:
+        if devanagari_count(verse) >= 4 and not is_structural_heading(verse):
             layers.append({
                 "title": MULA_TITLE,
                 "text": verse,
