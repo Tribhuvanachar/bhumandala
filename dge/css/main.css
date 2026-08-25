@@ -886,3 +886,20 @@ body.dge-app-view .shloka-list { gap: 20px; }
 .footer-link:hover { color: var(--accent-red); }
 .footer-sep { color: var(--card-border); font-size: 12px; }
 .app-footer { text-align: center; padding: 8px 10px 40px; font-size: 10px; font-weight: 600; color: var(--muted-text); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ---- Multi-layer grantha chrome (layer-stitch.js) ----
+   Lineage strip: tappable ancestry above the title (ब्रह्मसूत्र →
+   अनुव्याख्यानम् → न्यायसुधा), doubling as the "part of <grantha>" banner
+   when a commentary layer is opened standalone. Section navigator: the
+   breadcrumb-derived adhyaya/pada/adhikarana picker under the title.
+   See dge/MULTI_LAYER_READER_ARCHITECTURE.md §4. */
+.lineage-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px; margin-bottom: 6px; font-size: 12px; }
+.lineage-link { color: var(--accent-red); font-family: var(--font-sanskrit); font-weight: 700; text-decoration: none; border-bottom: 1px dotted var(--accent-red); padding: 1px 2px; }
+.lineage-link:hover { background: var(--accent-glow); }
+.lineage-node { color: var(--muted-text); font-family: var(--font-sanskrit); font-weight: 700; padding: 1px 2px; }
+.lineage-current { color: var(--text-primary); }
+.lineage-sep { color: var(--accent-gold); font-weight: 700; }
+.lineage-note { color: var(--muted-text); }
+.section-nav-row { display: flex; justify-content: center; margin: 8px 0 2px; }
+.section-nav-select { max-width: 100%; min-width: 60%; padding: 7px 10px; border: 1px solid var(--card-border); border-radius: var(--radius-pill); background: var(--card-bg); color: var(--text-primary); font-family: var(--font-sanskrit); font-size: 13px; outline: none; }
+.section-nav-select:focus { border-color: var(--accent-red); box-shadow: 0 0 0 3px var(--accent-glow); }

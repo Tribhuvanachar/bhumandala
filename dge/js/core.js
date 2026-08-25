@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.19 (DGE_LEGACY_SLUGS: redirects for the Purana maha_purana/upa_purana split, on top of v3.18\'s Pancharatra regroup redirects)';
+window.DGE_VERSIONS['core.js'] = 'v3.20 (multi-layer grantha stitching: the grantha-load path awaits dgeApplyLayerStitching (layer-stitch.js) before initApp so sibling tika layers appear in the commentary picker; flat-items normalization passes item.breadcrumb through for the section navigator; renderStotraChrome hooks dgeRenderStitchChrome + dgeInitSectionNav. See dge/MULTI_LAYER_READER_ARCHITECTURE.md. On top of v3.19\'s Purana redirects)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -692,7 +692,12 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         chandas: item.chandas || '',
         padapatha: dgeSanitizeVedicAccents(item.pada_patha || ''),
         commentaries: commentaries,
-        geminiEnrichment: item.gemini_enrichment || null
+        geminiEnrichment: item.gemini_enrichment || null,
+        // Structural path (grantha > layer > adhyaya > pada > adhikarana >
+        // topic > unit) captured per item by the DvaitaVedanta importer —
+        // the section navigator (layer-stitch.js's dgeInitSectionNav)
+        // groups on it. Absent everywhere else, and harmlessly null then.
+        breadcrumb: Array.isArray(item.breadcrumb) ? item.breadcrumb : null
       };
     });
 
@@ -906,7 +911,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     fetchGranthaData(0)
-      .then(data => {
+      .then(async data => {
         // Logged BEFORE normalization so the raw file shape is visible —
         // if this doesn't match what you just uploaded, the problem is
         // the fetch (stale cache, wrong path), not the rendering.
@@ -925,6 +930,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // overwrites `data`, so the editor can gate on it honestly.
         window.stotraDataEditable = !!(data && data.shlokas);
         window.stotraData = dgeNormalizeGranthaData(data, entry ? entry.title : null);
+        // Sibling-layer stitching (layer-stitch.js, see
+        // dge/MULTI_LAYER_READER_ARCHITECTURE.md): must run BEFORE
+        // initApp() so the commentary picker chrome is built from the
+        // already-extended availableCommentaries. Awaited because it may
+        // need the layer manifest fetch to resolve; a grantha with no
+        // manifest entry returns immediately.
+        if (typeof dgeApplyLayerStitching === 'function') {
+          await dgeApplyLayerStitching(slug);
+        }
         initApp();
         // Must run AFTER initApp() (which sets the is-authorized class
         // used to gate the content editor) but re-renders if it actually
@@ -1080,6 +1094,12 @@ window.renderStotraChrome = function() {
   // new script -- the prev/next slugs themselves don't change, only their
   // displayed labels, so this just re-renders rather than recomputing.
   if (typeof window.dgeRenderChapterNav === 'function') window.dgeRenderChapterNav();
+
+  // Lineage strip / standalone-layer banner + section navigator labels
+  // (layer-stitch.js) — same script-change re-render contract as the rest
+  // of the chrome this function owns.
+  if (typeof window.dgeRenderStitchChrome === 'function') window.dgeRenderStitchChrome();
+  if (typeof window.dgeInitSectionNav === 'function') window.dgeInitSectionNav();
 };
 
 function initAuthAndBranding() {

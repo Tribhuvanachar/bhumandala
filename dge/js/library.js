@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.11 (purana_class View By facet -- mahapurana/upapurana/disputed -- + richer text_status tiers; on top of v3.10\'s Purana maha_purana/upa_purana split)';
+window.DGE_VERSIONS['library.js'] = 'v3.12 (layer-manifest drawer fold: a joinable multi-layer grantha\'s mula+tika_* catalog entries collapse to ONE tree leaf via dgeFoldLayerEntries, gated strictly by data/layer_manifest.json; unjoinable layers keep their own rows. See dge/MULTI_LAYER_READER_ARCHITECTURE.md. On top of v3.11\'s purana_class facet)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -601,6 +601,41 @@ function dgeRenderNode(node, labelPrefix, depth, nodePath, noCollapseAtRoot) {
   </div>`;
 }
 
+// Folds a joinable multi-layer grantha's sibling entries — mula/ plus its
+// tika_*/ folders — into ONE tree leaf pointing at the mula spine, so 44
+// "श्रीमन्न्यायसुधा — tika_..." rows stop masquerading as unrelated works
+// (dge/MULTI_LAYER_READER_ARCHITECTURE.md §4). Strictly manifest-gated:
+// only granthas tools/build_layer_manifest.py measured as id-joinable are
+// in dge/data/layer_manifest.json, and within one, only layers with
+// matched > 0 are absorbed — an unjoinable layer (different id scheme, or
+// a mis-split one-item folder from another leaf page) keeps its own row,
+// since the stitched view cannot reach it. Detection runs on realSlug
+// (the on-disk path); the folded leaf keeps the entry's DISPLAY slug
+// (admin move overrides preserved) minus the '/mula' segment.
+function dgeFoldLayerEntries(entries, manifest) {
+  if (!manifest || !manifest.granthas) return entries;
+  const out = [];
+  entries.forEach(e => {
+    const m = e.realSlug.match(/^(.*)\/(mula|tika_[^/]+)$/);
+    const grantha = m ? manifest.granthas[m[1]] : null;
+    if (!grantha) { out.push(e); return; }
+    if (m[2] === 'mula') {
+      const title = grantha.title
+        ? dgeToActiveScript(dgeLocalizeNumerals(grantha.title))
+        : (e.title || '').replace(/\s+—\s+mula$/, '');
+      out.push(Object.assign({}, e, {
+        slug: e.slug.replace(/\/mula$/, ''),
+        title: title || e.title
+      }));
+      return;
+    }
+    const layer = (grantha.layers || []).find(l => l.folder === m[2]);
+    if (layer && layer.matched > 0) return; // reachable as a tab on the stitched spine
+    out.push(e);
+  });
+  return out;
+}
+
 function dgeCountLeaves(node) {
   let n = node.leaves.length;
   Object.values(node.children).forEach(c => { n += dgeCountLeaves(c); });
@@ -632,13 +667,21 @@ window.openLibraryModal = async function() {
   // repos won't have one until the project lead actually curates something.
   await dgeLoadLibraryOverrides();
 
-  const populated = library.granthas.filter(g => g.populated && !dgeIsAdminOnlyGrantha(g)).map(g => {
-    const realSlug = window.dgeGranthaSlug(g.path);
-    const slug = dgeEffectiveDisplayPath(realSlug); // where it GROUPS in the tree
-    const custom = dgeLibOverrides.labels[slug];
-    const rawTitle = custom !== undefined ? custom : (g.title || realSlug);
-    return { slug, realSlug, title: dgeToActiveScript(dgeLocalizeNumerals(rawTitle)), addedAt: g.addedAt || null, facets: g.facets || null };
-  }).filter(e => !dgeIsHiddenPath(e.slug));
+  // The layer manifest (see layer-stitch.js / MULTI_LAYER_READER_ARCHITECTURE.md)
+  // drives the drawer fold below: a joinable multi-layer grantha shows as
+  // ONE leaf, not 44 sibling "granthas". Best-effort — no manifest, no fold.
+  const layerManifest = (typeof window.dgeLayerManifestPromise !== 'undefined')
+    ? await window.dgeLayerManifestPromise : null;
+
+  const populated = dgeFoldLayerEntries(
+    library.granthas.filter(g => g.populated && !dgeIsAdminOnlyGrantha(g)).map(g => {
+      const realSlug = window.dgeGranthaSlug(g.path);
+      const slug = dgeEffectiveDisplayPath(realSlug); // where it GROUPS in the tree
+      const custom = dgeLibOverrides.labels[slug];
+      const rawTitle = custom !== undefined ? custom : (g.title || realSlug);
+      return { slug, realSlug, title: dgeToActiveScript(dgeLocalizeNumerals(rawTitle)), addedAt: g.addedAt || null, facets: g.facets || null };
+    }).filter(e => !dgeIsHiddenPath(e.slug)),
+    layerManifest);
   if (!populated.length) {
     listEl.innerHTML = `<div class="note-preview-box" style="margin:0;">No texts are available yet — check back soon.</div>`;
     return;
@@ -653,10 +696,12 @@ window.openLibraryModal = async function() {
   // populated-only as before (deliberately not showing ~550 empty
   // placeholder entries in the everyday reader) -- this only powers each
   // folder header's own badge.
-  const allForTotals = library.granthas.filter(g => !dgeIsAdminOnlyGrantha(g)).map(g => {
-    const realSlug = window.dgeGranthaSlug(g.path);
-    return dgeEffectiveDisplayPath(realSlug);
-  }).filter(slug => !dgeIsHiddenPath(slug));
+  const allForTotals = dgeFoldLayerEntries(
+    library.granthas.filter(g => !dgeIsAdminOnlyGrantha(g)).map(g => {
+      const realSlug = window.dgeGranthaSlug(g.path);
+      return { slug: dgeEffectiveDisplayPath(realSlug), realSlug };
+    }).filter(e => !dgeIsHiddenPath(e.slug)),
+    layerManifest).map(e => e.slug);
   dgeLibTotalCounts = {};
   allForTotals.forEach(slug => {
     const segs = slug.split('/');

@@ -4225,3 +4225,142 @@ byte-for-byte, not hypothetical. 199/199 tests, `validate_data.py` and
   for this one non-standard leaf. Not resolved; the incidental
   `library.json` flip this surfaced was reverted before committing
   anything else this pass.
+
+## DvaitaVedanta reader audit + multi-layer stitching — built and piloted on Nyāya Sudhā (25 Aug 2026, part 8)
+
+The task: the DvaitaVedanta corpus was largely data-correct after the 25 Aug
+hygiene passes above, but the READER never presented it as one grantha —
+opening any of its layers showed that one layer with no tabs to its
+siblings or its own mūla. Confirmed at code level before building anything:
+`dgeNormalizeGranthaData()` (core.js) builds `commentaries{}` only from a
+per-item object inside the SAME data.json, which the DvaitaVedanta importer
+never writes — every layer is its own folder/data.json/library.json entry,
+joined only by shared `DV_<article_id>` ids. Full design + decision record
+in **`dge/MULTI_LAYER_READER_ARCHITECTURE.md`** (new, this session); the
+short version of everything follows.
+
+**Audit first (live site vs DGE, one sample leaf per section, all 8
+sections — cached HTML kept in the session scratchpad, findings in the
+architecture doc §1).** Three distinct things were learned, two of them new:
+
+1. **The pratīka-as-mūla is the SITE's own design, not a crawl bug.** For
+   54/56 granthas, ≥99% of mūla items are the leaf heading (often truncated
+   with `..`) — and the live pages' own `<h2 class="shloka">` is the same
+   truncated pratīka. Re-fetching cannot improve those.
+2. **But the importer also DROPS real text the site does carry — the
+   `.details` preamble.** On 6 of the 8 sampled sections, everything
+   between the `.details` block's start and its first `<h3>` never gets
+   parsed: `<h1>`-marked full mūla verses (with daṇḍas and ॥N॥ numbers —
+   nyayamrita's maṅgala verses 1–6, bhagavata TN's full Bhāgavata verse,
+   vishnu_tattva_vinirnaya's full verse under a `मूल` heading) and, worst,
+   **Madhva's own bhāṣya under an inner-`<h2>` `भाष्यम्` heading** —
+   gita_bhashya has 9 ṭīkā folders and NO bhāṣya layer at all; same for
+   kathopanishad_bhashya (whose full mantra text under `उपनिषत्` is also
+   dropped). Root cause read directly in `dv_parse.py`:
+   `_layers_from_article()` reads only `h2.shloka` + `<h3>` blocks.
+3. **The no-`<h3>` fallback captures nothing.** `_text_between(shloka,
+   None, details)` starts walking at the `<h2>` and breaks on the first
+   node outside `.details` — which is the first node it meets, since the
+   content is inside `.details`, after it. So `rig_bhashya` (2,856 chars of
+   maṅgala verses + bhāṣya on the sampled leaf) and
+   `mahabharata_tatparya_nirnaya` ingested only pratīkas.
+   **(2) and (3) are the real "reference number displayed instead of text"
+   symptom — the text exists live and was dropped at parse time. NOT fixed
+   this session (parser fix + re-crawl, sketched in the architecture doc
+   §6); the reader work below is correct with or without that richer data.**
+
+**The fix built: load-time stitching, NOT data restructure.** Rationale
+measured, not assumed: merging nyaya_sudha's layers at rest would make one
+~42 MB data.json (tika_vakyartharatnamala alone is 9.7 MB) on a static-file
+reader whose code calls a 2 MB file "large"; it would bake in the known
+mis-split junk layers (bhedojjivana's 217, karmavijaya's 57); and every
+re-crawl would need re-merging forever. Instead:
+
+- **`tools/build_layer_manifest.py` (new) → `dge/data/layer_manifest.json`
+  (generated, committed).** Decides OFFLINE, from the data itself, which
+  granthas are joinable: an entry only where ≥1 tika layer's ids overlap
+  mūla's (after stripping the importer's `-N` collision suffix). 40
+  granthas qualify (39 DvaitaVedanta + SarvaMula/anuvyakhyana, picked up
+  generically); tarkasangraha-class mismatches (mula `sutra_N` vs tika
+  `prakarana_N`, overlap 0) correctly get NO entry and are untouched.
+  Within an entry, per-layer `matched` counts separate real commentaries
+  (nyaya_sudha: 17, led by सुधा 1574/1650, परिमळ 1452, वाक्यार्थरत्नमाला
+  1252…) from the 26 one-item `tika_<adhikaraṇam>` folders whose ids don't
+  exist in this grantha's mūla at all (they're from different leaf pages)
+  — those stay standalone. Labels come from the items' own
+  `tika_title`/`source.layer` majority (proper Devanagari, e.g. परिमळ),
+  truncated at 40 chars so the karmavijaya-class body-text-sentence
+  "layer names" stay labels. 9 new unittest cases
+  (`tests/test_build_layer_manifest.py`); `--check` mode for CI-style
+  staleness detection. Re-run after any crawl/restructure.
+- **`dge/js/layer-stitch.js` (new).** On grantha load (core.js awaits it
+  before initApp), a manifest-listed mūla spine advertises every joinable
+  sibling layer in `availableCommentaries` — WITHOUT fetching any (spine
+  alone: 2.6 MB vs 42 MB total). A layer's data.json is fetched only when
+  the reader turns that commentary on (render.js's selection paths call
+  `dgeEnsureStitchedLayers`), then merged into `shlokas[n].commentaries`
+  by id — exact first, then `-N`-stripped — and re-rendered through the
+  EXISTING multi-commentary tab UI (the stotra sayana/wilson path,
+  unchanged). The repeated first-line layer heading ("परिमळ\n…") is
+  stripped at merge, matched against the label only. Unmatched items are
+  counted + logged, never guessed an anchor. Toast while a large layer
+  downloads. Also owns: the curated **lineage strip**
+  (ब्रह्मसूत्राणि → अनुव्याख्यानम् → श्रीमन्न्यायसुधा, tappable; curated
+  because pratīka-matching nyaya_sudha's spine to anuvyakhyana's verses
+  resolves only 56% — too weak to auto-link without fabricating, measured
+  before deciding), the **standalone-ṭīkā banner** (opening tika_parimala
+  directly still works, plus a link back to the stitched grantha), and the
+  **section navigator** — an adhyāya › pāda › adhikaraṇa `<select>` built
+  from the per-item `breadcrumb` the importer already stores (203 options
+  on nyaya_sudha), jumping straight to the section's first card.
+- **Library drawer fold (`library.js`).** A joinable grantha's mula+tika_*
+  entries collapse to ONE leaf named by the grantha (श्रीमन्न्यायसुधा, not
+  44 rows of "श्रीमन्न्यायसुधा — tika_…"), strictly manifest-gated;
+  unjoinable layers keep their own rows since the stitched view can't
+  reach them. Folder-badge totals fold the same way.
+- **core.js** passes `item.breadcrumb` through flat-items normalization;
+  cache-busted core.js/render.js/library.js/main.css + new
+  layer-stitch.js?v=1.0.0 in index.html. sw.js needed nothing (runtime
+  caching, no precache list).
+
+**Verified in a real headless browser (Playwright/Chromium), this repo's
+own discipline — not just data-reads.** Nyāya Sudhā pilot: title
+श्रीमन्न्यायसुधा, 17 layers in the picker with Devanagari labels, सुधा +
+परिमळ fetched on selection and merged 1574/1452 items, per-card tab bar
+`All | सुधा | परिमळ` rendering and switching, lineage strip + section
+picker + REFERENCE breadcrumb line all visible (screenshots in session
+scratchpad), standalone tika_parimala view shows the way-back banner, and
+a control stotra (PNS) is bit-identical in behavior — no stitching, no
+strip, no nav, zero JS errors. Then the SAME build swept 10 granthas
+across 6 sections (nyayamrita, tarka_tandava, tatparya_chandrika,
+pramana_paddhati, vishnu_tattva_vinirnaya, brahma_sutra_bhashya,
+gita_bhashya, bhagavata_tatparya_nirnaya, kathopanishad_bhashya,
+shatprashnopanishadbhashyam): every one advertises its layers, merges its
+largest layer, renders the block, shows the section nav, zero page errors.
+(sruti/itihasa have no joinable layers today — mūla-only, correctly left
+alone; their real problem is finding (3) above.) `./run_tests.sh`: 208
+pass. `validate_data.py`: 0 errors.
+
+**Still open from this pass, in the order I would take them:**
+
+- **The importer preamble/no-h3 fixes ((2)+(3) above) + re-crawl.** The
+  single highest-value content fix left in this corpus: it recovers
+  Madhva's own bhāṣya text for every bhāṣya-grantha and the full mūla
+  verses the site carries. Parser sketch in the architecture doc §6;
+  needs the extract workflow re-run per shard afterward (the
+  later_acharyas Actions cache belongs to another session's branch —
+  see the cache-window item above, which may already have lapsed).
+- **Layer ordering/curation in the picker.** Layers list matched-desc
+  (biggest first), which is right, but bhedojjivana still advertises its
+  216 mostly-fake "layers" as commentary options. Honest (they ARE the
+  data) but ugly; the real fix is the mis-split heading bug already
+  tracked above, whose cleanup shrinks the manifest automatically on
+  regeneration.
+- **Per-adhikaraṇa Anuvyākhyāna/Brahmasūtra inlining** — show the verse
+  being commented above the sudhā text, not just the lineage strip. Needs
+  a verified concordance (56% auto-match isn't shippable); adhikaraṇa
+  names in nyaya_sudha's breadcrumbs vs brahma_sutra_bhashya's could seed
+  it, human-checked.
+- **`dvaitavedanta-status.html`** doesn't yet know about stitching — its
+  per-folder counts remain accurate but a "reads as one grantha now"
+  column would reflect the new reality.

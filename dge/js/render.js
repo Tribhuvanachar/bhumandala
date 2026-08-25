@@ -2,7 +2,7 @@
 // js/render.js
 // Maps to F-003 (Rendering) & F-007 (Commentary)
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['render.js'] = 'v4.5 (a commentary shaped to the Gold-Standard Commentary Contract v2.2 -- commentaries[cKey].format === "gold_v2_2" -- now renders via gold-render.js\'s block parser + pratika/word-pill linking instead of the plain-string path, wrapped in a certificate-styled .dge-gold-wrapper with a gold badge that IS the switch to a simplified view; a legacy plain-string commentary is completely untouched by this change. See dge/GOLD_STANDARD_ARCHITECTURE.md. Everything from v4.4 -- dgeWrapWordsForTap() -- unchanged)';
+window.DGE_VERSIONS['render.js'] = 'v4.6 (stitched sibling-layer commentaries: setCommentaryView/dgeToggleCommentarySelection kick off dgeEnsureStitchedLayers (layer-stitch.js) so a just-selected layer\'s sibling data.json is fetched and merged on demand; LIST_PAGE_SIZE exposed as window.DGE_LIST_PAGE_SIZE for the section-navigator jump. Everything from v4.5 -- Gold-Standard render path -- unchanged)';
 
 function getText(id) {
   if (!stotraData || !stotraData.shlokas[id]) return `श्लोक ${id}`;
@@ -22,6 +22,9 @@ function getText(id) {
 // safety net -- list mode never builds more than LIST_PAGE_SIZE cards at
 // once, with Prev/Next paging through the rest.
 const LIST_PAGE_SIZE = 50;
+// Exposed for layer-stitch.js's section-navigator jump, which must land
+// the target card's page before scrolling to it.
+window.DGE_LIST_PAGE_SIZE = LIST_PAGE_SIZE;
 
 window.currentSearchScope = 'all';
 window.setSearchScope = function(scope, label, el) {
@@ -92,6 +95,10 @@ window.setCommentaryView = function(view) {
   }
   dgeSyncCommentaryPopupState();
   if (typeof togglePopup === 'function') togglePopup('commentaryPopup');
+  // Stitched sibling layers (layer-stitch.js) are fetched only when
+  // actually selected — kick off any now-needed loads; each re-renders
+  // the list again when its data arrives.
+  if (typeof window.dgeEnsureStitchedLayers === 'function') window.dgeEnsureStitchedLayers();
   dgeRescrollToActiveCard();
 };
 
@@ -102,6 +109,9 @@ window.dgeToggleCommentarySelection = function(key) {
   if (selectedCommentaries.has(key)) selectedCommentaries.delete(key);
   else selectedCommentaries.add(key);
   dgeSyncCommentaryPopupState();
+  // See setCommentaryView above — a just-selected stitched layer may need
+  // its sibling data.json fetched before it can render.
+  if (typeof window.dgeEnsureStitchedLayers === 'function') window.dgeEnsureStitchedLayers();
   dgeRescrollToActiveCard();
 };
 
