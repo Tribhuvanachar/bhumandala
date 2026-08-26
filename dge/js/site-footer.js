@@ -39,6 +39,24 @@
     'devotional resource; a full terms-of-use page for it hasn\'t been drafted yet. ' +
     'Contact us if you have a question in the meantime.';
 
+  // Landing-page URL, derived from THIS SCRIPT's own location (always
+  // dge/js/site-footer.js) rather than a hardcoded '../index.html' --
+  // pages include it from different relative depths (dge/*.html says
+  // "js/site-footer.js", dge/tirtha/index.html says
+  // "../js/site-footer.js"), and a fixed relative string would resolve
+  // wrong on anything but the shallowest one. Same technique
+  // contact-email.js already uses for admin/config/config-overrides.json.
+  // Computed NOW, synchronously, while this script is still the one
+  // document.currentScript points to -- render() below runs later (often
+  // after a DOMContentLoaded callback), by which point currentScript is
+  // back to null, so the URL has to be captured up front and reused.
+  var LANDING_PAGE_URL = (function () {
+    var self = (document.currentScript && document.currentScript.src) ||
+               (window.DGE_SCRIPT_BASE || '');
+    try { return new URL('../../index.html', self).href; }
+    catch (e) { return '../index.html'; } // fail soft, never throw
+  })();
+
   function render() {
     var mount = document.getElementById('siteFooterLinks');
     if (!mount || mount.childElementCount) return; // no mount on this page, or already built
@@ -56,7 +74,7 @@
         { label: 'Terms &amp; Conditions', onclick: "window.openModal('termsModal')" }
       ];
     } else {
-      var aboutHref = document.getElementById('architect') ? '#architect' : 'index.html#architect';
+      var aboutHref = document.getElementById('architect') ? '#architect' : LANDING_PAGE_URL + '#architect';
       var email = window.DGE_CONTACT_EMAIL || 'sanatanavidyagurukulam@gmail.com';
       window.dgeShowTermsNotice = window.dgeShowTermsNotice || function () { alert(TERMS_NOTICE); };
       links = [

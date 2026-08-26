@@ -54,3 +54,11 @@ textarea:focus,select:focus{outline:none;border-color:var(--accent)}
 .crumbs{color:var(--muted);font-size:13px;margin:4px 2px 12px}.crumbs b{color:var(--accent)}
 .btn.ai{background:linear-gradient(90deg,color-mix(in srgb,var(--gold) 22%,var(--panel)),var(--panel));border-color:var(--gold)}
 .btn:hover{box-shadow:var(--shadow)}
+
+/* site-footer.js's shared links row -- same visual treatment as the
+   landing page's/reader's/kavya's/dasa-sahitya's own copies of this rule,
+   just using this cluster's own token names. */
+.site-footer-links{text-align:center;padding:22px 10px 40px;margin-top:20px;border-top:1px solid var(--line)}
+.footer-link{background:none;border:none;font:inherit;font-size:12px;color:var(--muted);cursor:pointer;padding:4px 2px;text-decoration:underline;text-underline-offset:2px}
+.footer-link:hover{color:var(--accent)}
+.footer-sep{color:var(--line);font-size:12px;margin:0 2px}
