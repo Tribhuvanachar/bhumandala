@@ -4629,9 +4629,22 @@ through the full verification protocol before merging:
   item-by-item on pramana_lakshana; the sūtra प्रमाणविरुद्धार्थ-
   प्रतिज्ञाविरोधः now sits in mula/DV_13837 where the old data buried it
   mid-ṭīkā); mūla ids identical section-wide; 102.5% text.
-- **purana_prasthana** running (dispatched 9:28 am IST); the
-  **nyaya_sudha-only** run queued behind it. Both will get the same
-  verify-and-merge pass.
+- **PR #142 purana_prasthana — merged** (26 Aug ~12:50 pm IST,
+  `d3cd69e5`). Bhagavata Tatparya Nirnaya, all 24 folders: item counts
+  unchanged, 345 mūla ids reproduce exactly, +33k chars net (preamble
+  verses recovered into mula). Every per-ṭīkā char loss root-caused to
+  the literal `EndFragment` Word-clipboard artifact (347 lines, an
+  upstream copy-paste residue the new parser strips) plus one repeated
+  title-label line — cleanup, not loss. Content corroborated against a
+  genuinely-fetched cached live page (article DV_11434: all 6 layers
+  verbatim, incl. a 36k-char सत्यधर्मीया block) + CI's own strict
+  0-failure live fetch; direct spot-fetches still bot-challenged (12/12
+  BLOCKED via the new `verify_source_content.py`), and the vishvAsa
+  mirror does not carry BTN at all. Playwright reader check: 24-layer
+  pill row, पदरत्नावली auto-loaded, no JS errors.
+- **nyaya_sudha-only** run (36) in progress (started 10:13 am IST,
+  ~340 min budget); gets the same verify-and-merge pass when its PR
+  opens.
 
 **Two operational findings recorded for the future:**
 1. **dvaitavedanta.in now challenges/resets requests from this session**
@@ -4653,3 +4666,10 @@ through the full verification protocol before merging:
    Fix belongs in build_items: route a quote layer whose key is a mūla
    alias OR the grantha key into the mula bucket. Small, test-covered
    change for the next parser pass.
+3. **Trailing ṭīkā-attribution lines in mula items** (found in PR #142
+   review, e.g. BTN DV_11434 ends with "श्रीमद्विजयध्वजतीर्थ-
+   पूज्यचरणविरचिता पदरत्नावली"): the preamble stripper removes *leading*
+   attribution/structural lines but keeps a trailing line announcing the
+   FIRST commentary when it sits at the preamble's end. ~46 harmless
+   chars, cosmetic; same parser pass as (2) should also strip trailing
+   `ATTRIBUTION_RE` lines from the mula bucket.
