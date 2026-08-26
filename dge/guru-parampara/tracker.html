@@ -8,8 +8,10 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="../js/vandana-guard.js?v=1"></script>
+<script src="../js/contact-email.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Guru Parampara — Data Completeness Tracker</title>
+<link rel="stylesheet" href="../css/vyakarana-base.css?v=1">
 <style>
 
 /* --- DGE shared theme tokens (mirrored from css/main.css) so this section
@@ -29,6 +31,9 @@
     --bg:var(--bg-main);--panel:var(--card-bg);--panel2:var(--card-active);--ink:var(--text-primary);--muted:var(--muted-text);--line:var(--card-border);--accent:var(--accent-gold);
     --surface:var(--card-bg);--series:#3987e5;
     --good:#199e70;--warn:#c98500;--bad:#e66767;--gold:var(--accent-gold);
+    /* Consumed by vyakarana-base.css's shared header/.ctl/.btn rules, now
+       loaded on this page too. */
+    --radius:14px;--shadow:0 1px 3px rgba(0,0,0,.08),0 6px 18px rgba(0,0,0,.05);
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
@@ -81,8 +86,13 @@
 </style>
 </head>
 <body>
+<header>
+  <div class="bar">
+    <div class="brand"><a href="../index.html" title="DGE Home">⌂ DGE</a><span>›</span><a href="index.html">Guru Parampara</a><span>›</span><span>Completeness Tracker</span></div>
+    <div class="spacer"></div>
+  </div>
+</header>
 <div class="wrap">
-  <div style="font-size:13px;margin:0 0 10px;color:var(--muted)"><a href="../index.html" title="DGE Home" style="color:var(--accent);text-decoration:none;font-weight:600">⌂ DGE</a><span style="opacity:.6;margin:0 6px">›</span><a href="index.html" style="color:var(--accent);text-decoration:none">Guru Parampara</a><span style="opacity:.6;margin:0 6px">›</span><b style="color:var(--ink)">Completeness Tracker</b></div>
   <h1>Guru Parampara · <span class="accent">Data Completeness Tracker</span></h1>
   <div class="sub" id="sub"></div>
 
@@ -124,6 +134,11 @@
 
   <div class="foot" id="foot"></div>
 </div>
+
+<!-- Filled by site-footer.js, shared with the rest of the site (see that
+     file's own header comment). -->
+<div class="site-footer-links" id="siteFooterLinks"></div>
+<script src="../js/site-footer.js?v=1"></script>
 <script id="data" type="application/json">{
   "meta": {
     "title": "Madhva (Dvaita Vedanta) Guru Parampara",
