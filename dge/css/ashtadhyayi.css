@@ -7,9 +7,13 @@
 
    Page chrome shared byte-for-byte with vyakarana.css (reset, body font,
    header, .ctl, .icon, the bare input/select look, .crumbs, .btn.ai,
-   .btn:hover, .spacer) now lives in vyakarana-base.css, loaded before this
-   file — see that file's own header comment for what's still intentionally
-   kept page-local (:root/body.dark, .hero) and why.
+   .btn:hover, .spacer, .brand a/.brand span) now lives in
+   vyakarana-base.css, loaded before this file — see that file's own header
+   comment for what's still intentionally kept page-local (:root/body.dark,
+   .hero) and why. This file's own leftover .brand{font-weight:700}.brand
+   small{...} below is dead CSS from an earlier version of this page's
+   markup, not currently referenced by any element here -- left alone,
+   out of scope for this pass.
    ========================================================================= */
 
 :root{--bg:#f5efe4;--panel:#fffdf8;--panel2:#fbf4e7;--ink:#2b2117;--muted:#8b7c66;

@@ -8,10 +8,10 @@
 
    Page chrome shared byte-for-byte with ashtadhyayi.css (reset, body font,
    header, .ctl, .icon, the bare input/select look, .crumbs, .btn.ai,
-   .btn:hover, .spacer) now lives in vyakarana-base.css, loaded before this
-   file on every page that includes it — see that file's own header
-   comment for what's still intentionally kept page-local (:root/body.dark,
-   .hero) and why.
+   .btn:hover, .spacer, .brand a/.brand span) now lives in
+   vyakarana-base.css, loaded before this file on every page that includes
+   it — see that file's own header comment for what's still intentionally
+   kept page-local (:root/body.dark, .hero) and why.
    ========================================================================= */
 
   :root{--bg:#f5efe4;--panel:#fffdf8;--panel2:#fbf4e7;--ink:#2b2117;--muted:#8b7c66;
@@ -21,7 +21,6 @@
     --line:#2b3140;--accent:#e0794b;--accent2:#5bb894;--gold:#e0b25a;
     --p:#5aa0e6;--a:#e0794b;--u:#c79a4a;--shadow:0 6px 26px rgba(0,0,0,.4)}
   .bar{max-width:1100px;margin:0 auto;padding:9px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .brand a{color:var(--accent);text-decoration:none;font-weight:700}.brand span{color:var(--muted);margin:0 6px}
   .search{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:7px 12px;color:var(--ink);font:inherit;font-size:14px;min-width:150px;flex:1}
   main{max-width:1100px;margin:0 auto;padding:16px 14px 120px}
   .hero{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);margin-bottom:14px}
