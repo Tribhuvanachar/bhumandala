@@ -453,6 +453,34 @@ body.leaving #veil { opacity: 1; }
   border: 1px dashed rgba(232,178,77,.28); border-radius: 12px; padding: 12px 15px;
 }
 
+/* Tier heading -- Foundation / Scholarly Stewardship / Seva & Sustenance /
+   Participation -- shown above a band once contributors render grouped by
+   hierarchy rather than as equal-weight sections. */
+.tier-head { margin-bottom: 16px; }
+.tier-label {
+  font-family: var(--font-ui); font-size: 11px; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--saffron-lt);
+}
+
+/* Two or more sections sharing a tier that isn't the seva grid (not used
+   today, but a second contributor added to the same tier shouldn't need a
+   CSS change to render sanely) stack with a plain rule between them rather
+   than the section-level border-top, which only separates bands. */
+.tier-divider { border: none; border-top: 1px solid var(--hairline-2); margin: 30px 0; }
+
+/* Seva & Sustenance: Contributors and Key Sponsors side by side, so the
+   two aren't read as separate scrolling bands of equal weight. */
+.seva-grid {
+  display: grid; gap: clamp(28px, 4vw, 52px);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 6px;
+}
+@media (min-width: 780px) {
+  .seva-col + .seva-col { border-left: 1px solid var(--hairline-2); padding-left: clamp(28px, 4vw, 52px); }
+}
+
+.tier-participation .person-name { margin-top: 2px; }
+
 /* --- footer --- */
 .site-foot { position: relative; z-index: 2; padding: 34px 22px calc(40px + env(safe-area-inset-bottom)); text-align: center; }
 .mantra {
