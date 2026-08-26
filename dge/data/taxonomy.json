@@ -4174,6 +4174,15 @@
        "tika_parimala": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्री राघवेन्द्रतीर्थविरचितः"
+       },
+       "tika_adyasutrapavyakhyanasyapranunirasadavashishtasutrapavyakhyanaman": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_caturthapada": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_prathamapada": {
+        "_schema": "grantha_tika_text"
        }
       }
      },
