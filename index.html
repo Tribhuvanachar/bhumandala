@@ -129,6 +129,10 @@
 <footer class="site-foot">
   <div class="rule" style="margin:0 auto 16px;" aria-hidden="true"><i></i></div>
   <div id="mantras"></div>
+  <!-- Filled by site-footer.js, shared with the main reader (see that
+       file's own header comment) instead of this page having no footer
+       navigation of its own. -->
+  <div class="site-footer-links" id="siteFooterLinks"></div>
 </footer>
 
 <div class="sheet-wrap" id="sheetWrap" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
@@ -822,6 +826,8 @@ let SITE_CONFIG = null;
   window.dgeVandana = { openPanel, closePanel, enter, get offerings() { return offerings; } };
 })();
 </script>
+<script src="dge/js/contact-email.js?v=1"></script>
 <script src="dge/js/content-inline.js?v=1"></script>
+<script src="dge/js/site-footer.js?v=1"></script>
 </body>
 </html>
