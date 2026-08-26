@@ -1358,6 +1358,14 @@
       }
     },
     {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_kathalakshanam/data.json",
+      "populated": true,
+      "title": "कथालक्षणम् — tika_kathalakshanam",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/14026/938/thasha/2-kath/malma"
+      }
+    },
+    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_panchika/data.json",
       "populated": true,
       "title": "कथालक्षणम् — tika_panchika",
@@ -1412,6 +1420,14 @@
       }
     },
     {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadakhandanam/data.json",
+      "populated": true,
+      "title": "मायावादखण्डनम् — tika_mayavadakhandanam",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/4733/942/thasha/6-maya/mal"
+      }
+    },
+    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadaparashu/data.json",
       "populated": true,
       "title": "मायावादखण्डनम् — tika_mayavadaparashu",
@@ -1461,6 +1477,14 @@
       "populated": true,
       "title": "प्रमाणलक्षणम् — tika_jayatirtha",
       "addedAt": "2026-08-24",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/13528/937/thasha/1-para/managa/garana"
+      }
+    },
+    {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_pramanalakshanam/data.json",
+      "populated": true,
+      "title": "प्रमाणलक्षणम् — tika_pramanalakshanam",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/13528/937/thasha/1-para/managa/garana"
       }
@@ -1524,6 +1548,14 @@
       "populated": true,
       "title": "मिथ्यात्वानुमानखण्डनम् — tika_mithyatvanumanakhamdanaparashu",
       "addedAt": "2026-08-24",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/4774/943/thasha/7-math/mal"
+      }
+    },
+    {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanam/data.json",
+      "populated": true,
+      "title": "मिथ्यात्वानुमानखण्डनम् — tika_mithyatvanumanakhandanam",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/4774/943/thasha/7-math/mal"
       }
@@ -1677,6 +1709,14 @@
       "populated": true,
       "title": "तत्त्वोद्योतः — tika_jayatirtha",
       "addedAt": "2026-08-24",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/4818/940/thasha/4-tata/mal"
+      }
+    },
+    {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_mula/data.json",
+      "populated": true,
+      "title": "तत्त्वोद्योतः — tika_mula",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/4818/940/thasha/4-tata/mal"
       }
@@ -11844,7 +11884,7 @@
     },
     {
       "path": "dge/data/vedanga/chandas/data.json",
-      "populated": true,
+      "populated": false,
       "title": "Chandas",
       "source": {
         "source": "hrishikeshrt/chanda (Chandojnanam) @ 3a9607c6e7a23d60c03d10f839913d01f8bd7ee2",
