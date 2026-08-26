@@ -1159,6 +1159,13 @@ function initAuthAndBranding() {
     superItem.innerHTML = isSuperadmin ? '🔓 Super Admin Access <span style="margin-left:auto; font-size:10px; color:var(--accent-red); font-weight:800;">ACTIVE</span>' : '🔒 Super Admin Access';
     superItem.classList.toggle('active', isSuperadmin);
   }
+
+  // content-inline.js's "Edit Page Text" row in the Quick Actions rail --
+  // same tier check as its own allowed() gate, kept in sync here since the
+  // popup markup lives in this page's own HTML rather than being built by
+  // content-inline.js itself.
+  const ciEditItem = document.getElementById('ciEditPopItem');
+  if (ciEditItem) ciEditItem.style.display = isSuperadmin ? 'flex' : 'none';
   if (logoutItem) logoutItem.style.display = (isAuthorized || isSuperadmin) ? 'flex' : 'none';
 
   const authorEl = document.getElementById('stotraAuthor');
