@@ -371,7 +371,7 @@
       // exact tag+field format, everything else ignored or routed to a
       // human).
       if(typeof window.dgeReportMissingForm==="function"){ window.dgeReportMissingForm(surface,"shabda"); return; }
-      var email="sanatanavidyagurukulam@gmail.com";
+      var email=window.DGE_CONTACT_EMAIL||"sanatanavidyagurukulam@gmail.com";
       var subject=encodeURIComponent("[DGE-CONTENT-GAP] missing-form — "+surface);
       var lines=["Type: missing-form","Surface: "+surface,"Context: shabda","Page: "+location.href,
         "Timestamp: "+new Date().toISOString()];
