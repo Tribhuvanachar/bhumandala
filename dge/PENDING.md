@@ -4642,9 +4642,19 @@ through the full verification protocol before merging:
   BLOCKED via the new `verify_source_content.py`), and the vishvAsa
   mirror does not carry BTN at all. Playwright reader check: 24-layer
   pill row, पदरत्नावली auto-loaded, no JS errors.
-- **nyaya_sudha-only** run (36) in progress (started 10:13 am IST,
-  ~340 min budget); gets the same verify-and-merge pass when its PR
-  opens.
+- **nyaya_sudha-only run 38 — timed out, resumable chain started.**
+  The live site serves nyaya_sudha leaves at **~40 s/page** (vs ~3–4 s
+  for every other grantha — these pages carry the full सुधा + परिमळ
+  text and the backend renders them slowly). 1,655 leaves ≈ 18 h of
+  fetching, so the 340-min job died at 500/1655 (3:54 pm IST) with no
+  shard and no PR — but the workflow saved its 45 MB HTTP cache on
+  cancellation (`dv-cache-later_acharyas-32929503634`), so every re-run
+  resumes free from cache. Runs 39 (crawling, started 4:13 pm IST) and
+  40 (queued) each bank ~500 more leaves at `job_timeout=350`; run 41
+  (to be queued at the evening check-in) should finish the remaining
+  ~150 and open the PR early morning 27 Aug. Verify protocol for that
+  PR: nyaya_sudha mula must reproduce its 1,650 ids, अनुव्याख्यानम्
+  quote-split tab checked in the reader.
 
 **Two operational findings recorded for the future:**
 1. **dvaitavedanta.in now challenges/resets requests from this session**
