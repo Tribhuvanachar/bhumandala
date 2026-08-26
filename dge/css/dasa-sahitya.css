@@ -25,10 +25,13 @@
   header{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,var(--panel),color-mix(in srgb,var(--panel) 92%,transparent));
     backdrop-filter:blur(6px);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
   .wrap{max-width:1080px;margin:0 auto;padding:0 14px}
-  .crumb{padding:10px 0 0;font-size:.85rem;color:var(--muted)}
-  .crumb a{color:var(--accent);text-decoration:none;font-weight:700}
-  .crumb span{opacity:.6;margin:0 6px}
-  .crumb b{color:var(--ink)}
+  /* Same class name (.brand) as every other page's DGE-home breadcrumb,
+     even though it lives outside the sticky header here on purpose -- see
+     that comment above header{}. */
+  .brand{padding:10px 0 0;font-size:.85rem;color:var(--muted)}
+  .brand a{color:var(--accent);text-decoration:none;font-weight:700}
+  .brand span{opacity:.6;margin:0 6px}
+  .brand span+span{opacity:1;margin:0;color:var(--ink)}
   .intro{padding-bottom:2px}
   .titrow{display:flex;align-items:baseline;gap:10px;padding:8px 0 6px;flex-wrap:wrap}
   h1{font-size:1.35rem;margin:0;letter-spacing:.2px}
