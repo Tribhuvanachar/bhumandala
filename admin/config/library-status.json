@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1905,
-  "loaded": 1306,
-  "items": 686093
+  "leaves": 1910,
+  "loaded": 1311,
+  "items": 686197
  },
  "sections": {
   "agama": {
@@ -12,9 +12,9 @@
    "items": 43342
   },
   "darshana": {
-   "total": 1130,
-   "loaded": 789,
-   "items": 57512
+   "total": 1135,
+   "loaded": 794,
+   "items": 57616
   },
   "dasa_sahitya": {
    "total": 177,
@@ -260,12 +260,14 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/mula": 14,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_bhavadipa": 12,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_jayatirtha": 2,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_kathalakshanam": 7,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_panchika": 12,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_vivarana": 12,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/mula": 4,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_gururajiyatippani": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_jayatirtha": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mandaramanjari": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadakhandanam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadaparashu": 2,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_nivasatirthatippani": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_nivasatirthiyatippani": 1,
@@ -274,6 +276,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/mula": 155,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_bhavadipa": 133,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_jayatirtha": 153,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_pramanalakshanam": 4,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_vakyarthakaumudi": 136,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_vivarana": 125,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/mula": 4,
@@ -281,6 +284,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_jayatirtha": 2,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mandaramanjari": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhamdanaparashu": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanaparashu": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_nivasatirthiyatippani": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_shrigururajiyatippani": 0,
@@ -300,6 +304,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_gururajiya": 122,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_janardanabhattiya": 126,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_jayatirtha": 153,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_mula": 91,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_naropantiya": 58,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_raghavendratirtha": 134,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_shriraghavendratirtha": 0,
@@ -2220,6 +2225,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_jayatirtha": {
    "source_url": "https://dvaitavedanta.in/category-details/14026/938/thasha/2-kath/malma"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_kathalakshanam": {
+   "source_url": "https://dvaitavedanta.in/category-details/14026/938/thasha/2-kath/malma"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_panchika": {
    "source_url": "https://dvaitavedanta.in/category-details/14026/938/thasha/2-kath/malma"
   },
@@ -2238,6 +2246,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mandaramanjari": {
    "source_url": "https://dvaitavedanta.in/category-details/4733/942/thasha/6-maya/mal"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadakhandanam": {
+   "source_url": "https://dvaitavedanta.in/category-details/4733/942/thasha/6-maya/mal"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadaparashu": {
    "source_url": "https://dvaitavedanta.in/category-details/4733/942/thasha/6-maya/mal"
   },
@@ -2254,6 +2265,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/13528/937/thasha/1-para/managa/garana"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_jayatirtha": {
+   "source_url": "https://dvaitavedanta.in/category-details/13528/937/thasha/1-para/managa/garana"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_pramanalakshanam": {
    "source_url": "https://dvaitavedanta.in/category-details/13528/937/thasha/1-para/managa/garana"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_vakyarthakaumudi": {
@@ -2275,6 +2289,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/4774/943/thasha/7-math/mal"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhamdanaparashu": {
+   "source_url": "https://dvaitavedanta.in/category-details/4774/943/thasha/7-math/mal"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanam": {
    "source_url": "https://dvaitavedanta.in/category-details/4774/943/thasha/7-math/mal"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanaparashu": {
@@ -2326,6 +2343,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/4818/940/thasha/4-tata/mal"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_jayatirtha": {
+   "source_url": "https://dvaitavedanta.in/category-details/4818/940/thasha/4-tata/mal"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_mula": {
    "source_url": "https://dvaitavedanta.in/category-details/4818/940/thasha/4-tata/mal"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_naropantiya": {
