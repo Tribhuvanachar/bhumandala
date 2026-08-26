@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1910,
-  "loaded": 1310,
-  "items": 687266
+  "leaves": 1913,
+  "loaded": 1313,
+  "items": 687269
  },
  "sections": {
   "agama": {
@@ -12,9 +12,9 @@
    "items": 43342
   },
   "darshana": {
-   "total": 1135,
-   "loaded": 793,
-   "items": 58685
+   "total": 1138,
+   "loaded": 796,
+   "items": 58688
   },
   "dasa_sahitya": {
    "total": 177,
@@ -823,6 +823,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/mula": 1650,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_abhimanyadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasya_pranunirasadavashishtasutrapavyakhyanama": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasyapranunirasadavashishtasutrapavyakhyanaman": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_akashadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_anandamayadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_antasthatvadhikaranam": 1,
@@ -834,6 +835,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_atmadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_bhoktradhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_brahmadhikaranam": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_caturthapada": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_gayatryadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_ikshatyadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_itaravyapadeshadhikaranam": 1,
@@ -848,6 +850,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_om_na_prayojanavattvat_om_prayojanavattvahetoriti_sutre_prayojan": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_parimala": 1452,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_pranadhikaranam": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_prathamapada": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_samanvayadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_sarvadharmopapattyadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_sasheshavakyarthacandrika": 11,
@@ -3605,6 +3608,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_abhimanyadhikaranam": {
    "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasyapranunirasadavashishtasutrapavyakhyanaman": {
+   "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_akashadhikaranam": {
    "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
   },
@@ -3636,6 +3642,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_brahmadhikaranam": {
+   "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_caturthapada": {
    "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_gayatryadhikaranam": {
@@ -3678,6 +3687,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_pranadhikaranam": {
+   "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_prathamapada": {
    "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_samanvayadhikaranam": {

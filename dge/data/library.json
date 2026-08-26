@@ -5485,10 +5485,9 @@
       }
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasya_pranunirasadavashishtasutrapavyakhyanama/data.json",
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasyapranunirasadavashishtasutrapavyakhyanaman/data.json",
       "populated": true,
-      "title": "श्रीमन्न्यायसुधा — tika_adyasutrapavyakhyanasya_pranunirasadavashishtasutrapavyakhyanama",
-      "addedAt": "2026-08-24",
+      "title": "श्रीमन्न्यायसुधा — tika_adyasutrapavyakhyanasyapranunirasadavashishtasutrapavyakhyanaman",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
       }
@@ -5588,6 +5587,14 @@
       "populated": true,
       "title": "श्रीमन्न्यायसुधा — tika_brahmadhikaranam",
       "addedAt": "2026-08-24",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
+      }
+    },
+    {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_caturthapada/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — tika_caturthapada",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
       }
@@ -5713,6 +5720,14 @@
       "populated": true,
       "title": "श्रीमन्न्यायसुधा — tika_pranadhikaranam",
       "addedAt": "2026-08-24",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
+      }
+    },
+    {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_prathamapada/data.json",
+      "populated": true,
+      "title": "श्रीमन्न्यायसुधा — tika_prathamapada",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
       }

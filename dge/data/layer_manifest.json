@@ -3236,7 +3236,7 @@
     {
      "folder": "tika_parimala",
      "label": "परिमळ",
-     "author": "श्री राघवेन्द्रतीर्थविरचितः",
+     "author": "",
      "items": 1452,
      "matched": 1452
     },
@@ -3262,6 +3262,13 @@
      "matched": 1202
     },
     {
+     "folder": "tika_anuvyakhyanam",
+     "label": "अनुव्याख्यानम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 1076,
+     "matched": 1076
+    },
+    {
      "folder": "tika_vakyarthacandrika",
      "label": "वाक्यार्थचन्द्रिका",
      "author": "",
@@ -3281,13 +3288,6 @@
      "author": "",
      "items": 11,
      "matched": 11
-    },
-    {
-     "folder": "tika_anuvyakhyanam",
-     "label": "अनुव्याख्यानम्",
-     "author": "",
-     "items": 6,
-     "matched": 6
     },
     {
      "folder": "tika_nivasatirthiyam",
@@ -3318,7 +3318,7 @@
      "matched": 3
     },
     {
-     "folder": "tika_adyasutrapavyakhyanasya_pranunirasadavashishtasutrapavyakhyanama",
+     "folder": "tika_adyasutrapavyakhyanasyapranunirasadavashishtasutrapavyakhyanaman",
      "label": "आद्यसूत्रापव्याख्यानस्य प्राङूनिरासादव…",
      "author": "",
      "items": 1,
@@ -3423,6 +3423,13 @@
      "matched": 0
     },
     {
+     "folder": "tika_caturthapada",
+     "label": "चतुर्थपादः",
+     "author": "",
+     "items": 1,
+     "matched": 0
+    },
+    {
      "folder": "tika_gayatryadhikaranam",
      "label": "गायत्र्यधिकरणम्",
      "author": "",
@@ -3481,6 +3488,13 @@
     {
      "folder": "tika_pranadhikaranam",
      "label": "प्राणाधिकरणम्",
+     "author": "",
+     "items": 1,
+     "matched": 0
+    },
+    {
+     "folder": "tika_prathamapada",
+     "label": "प्रथमः पादः",
      "author": "",
      "items": 1,
      "matched": 0
