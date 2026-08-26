@@ -70,6 +70,13 @@
      "matched": 12
     },
     {
+     "folder": "tika_kathalakshanam",
+     "label": "कथालक्षणम्",
+     "author": "",
+     "items": 7,
+     "matched": 7
+    },
+    {
      "folder": "tika_jayatirtha",
      "label": "पद्मनाभतीर्थीया कथालक्षणटीका",
      "author": "श्रीजयतीर्थः",
@@ -112,6 +119,13 @@
      "matched": 1
     },
     {
+     "folder": "tika_mayavadakhandanam",
+     "label": "मायावादखण्डनम्",
+     "author": "",
+     "items": 1,
+     "matched": 1
+    },
+    {
      "folder": "tika_nivasatirthatippani",
      "label": "श्रीनिवासतीर्थटिप्पणी",
      "author": "श्रीवेणुपल्ली श्रीनिवासतीर्थविरचिता",
@@ -121,7 +135,7 @@
     {
      "folder": "tika_nivasatirthiyatippani",
      "label": "श्रीनिवासतीर्थीयटिप्पणी",
-     "author": "श्रीनिवासतीर्थः",
+     "author": "",
      "items": 1,
      "matched": 1
     }
@@ -159,6 +173,13 @@
      "author": "श्री पाण्डुरङ्गि केशवाचार्यविरचितम्",
      "items": 125,
      "matched": 125
+    },
+    {
+     "folder": "tika_pramanalakshanam",
+     "label": "प्रमाणलक्षणम्",
+     "author": "",
+     "items": 4,
+     "matched": 4
     }
    ]
   },
@@ -196,6 +217,13 @@
      "matched": 1
     },
     {
+     "folder": "tika_mithyatvanumanakhandanam",
+     "label": "मिथ्यात्वानुमानखण्डनम्",
+     "author": "",
+     "items": 1,
+     "matched": 1
+    },
+    {
      "folder": "tika_mithyatvanumanakhandanaparashu",
      "label": "मिथ्यात्वानुमानखण्डनपरशुः",
      "author": "श्रीसत्यनाथतीर्थविरचितः",
@@ -205,7 +233,7 @@
     {
      "folder": "tika_nivasatirthiyatippani",
      "label": "श्रीनिवासतीर्थीयटिप्पणी",
-     "author": "श्रीनिवासतीर्थः",
+     "author": "व्यासतीर्थयतिना विरचिता",
      "items": 1,
      "matched": 1
     }
@@ -322,6 +350,13 @@
      "matched": 122
     },
     {
+     "folder": "tika_mula",
+     "label": "मूल",
+     "author": "",
+     "items": 91,
+     "matched": 91
+    },
+    {
      "folder": "tika_dvaitadyumani",
      "label": "द्वैतद्युमणि",
      "author": "",
@@ -368,7 +403,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana": {
    "title": "उपाधिखण्डनम्",
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-   "mulaItems": 3,
+   "mulaItems": 4,
    "layers": [
     {
      "folder": "tika_jayatirtha",
@@ -387,7 +422,7 @@
     {
      "folder": "tika_nivasatirthiyatippani",
      "label": "श्रीनिवासतीर्थीयटिप्पणी",
-     "author": "श्रीनिवासतीर्थः",
+     "author": "आत्मभेदस्य सत्यमिथ्योपाधिकृतत्वमेव",
      "items": 1,
      "matched": 1
     },

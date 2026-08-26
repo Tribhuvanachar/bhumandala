@@ -1,6 +1,6 @@
 {
  "schema": "grantha_tika_text",
- "default_author": "श्रीनिवासतीर्थः",
+ "default_author": "आत्मभेदस्य सत्यमिथ्योपाधिकृतत्वमेव",
  "source_url": "https://dvaitavedanta.in/category-details/4781/941/thasha/5-upat/mal",
  "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
  "items": [
@@ -25,9 +25,10 @@
     "site": "dvaitavedanta.in",
     "url": "https://dvaitavedanta.in/category-details/4783/941/thasha/5-upat/taka-t",
     "content_id": 4783,
+    "work_id": 941,
     "layer": "श्रीनिवासतीर्थीयटिप्पणी",
     "anchor": "article4808",
-    "fetched": "2026-08-18"
+    "fetched": "2026-08-25"
    },
    "tika_title": "श्रीनिवासतीर्थीयटिप्पणी"
   }

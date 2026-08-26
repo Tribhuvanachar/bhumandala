@@ -1302,6 +1302,9 @@
        },
        "tika_vivarana": {
         "_schema": "grantha_tika_text"
+       },
+       "tika_kathalakshanam": {
+        "_schema": "grantha_tika_text"
        }
       },
       "mayavada_khandana": {
@@ -1338,6 +1341,9 @@
        "tika_nivasatirthiyatippani": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीनिवासतीर्थः"
+       },
+       "tika_mayavadakhandanam": {
+        "_schema": "grantha_tika_text"
        }
       },
       "pramana_lakshana": {
@@ -1360,6 +1366,9 @@
        "tika_vivarana": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्री पाण्डुरङ्गि केशवाचार्यविरचितम्"
+       },
+       "tika_pramanalakshanam": {
+        "_schema": "grantha_tika_text"
        }
       },
       "prapancha_mithyatvanumana_khandana": {
@@ -1392,6 +1401,9 @@
        "tika_nivasatirthiyatippani": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीनिवासतीर्थः"
+       },
+       "tika_mithyatvanumanakhandanam": {
+        "_schema": "grantha_tika_text"
        }
       },
       "tattva_sankhyana": {
@@ -1476,6 +1488,9 @@
         "_schema": "grantha_tika_text"
        },
        "tika_vijayindrabhikshu": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_mula": {
         "_schema": "grantha_tika_text"
        }
       },

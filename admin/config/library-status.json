@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1898,
-  "loaded": 1299,
-  "items": 685995
+  "leaves": 1905,
+  "loaded": 1306,
+  "items": 686093
  },
  "sections": {
   "agama": {
@@ -12,9 +12,9 @@
    "items": 43342
   },
   "darshana": {
-   "total": 1123,
-   "loaded": 782,
-   "items": 57414
+   "total": 1130,
+   "loaded": 789,
+   "items": 57512
   },
   "dasa_sahitya": {
    "total": 177,
@@ -310,7 +310,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattvodyota/mula": 22,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattvodyota/tika_mandaramanjari": 18,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattvodyota/tika_vivarana": 18,
-  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/mula": 3,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/mula": 4,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_jayatirtha": 2,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_mandaramanjari": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_nivasatirthiyatippani": 1,
@@ -701,6 +701,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/mula": 162,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/tika_dvaitadyumani": 134,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/tika_jayatirtha": 159,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/tika_mula": 2,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/mula": 11,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_01_karmanirnaya_tatraika_ahuragunam_brahmeti_na_tadyuktam_shruti": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_01_karmanirnaya_tatraikaahuragunambrahmeti_natadyuktamshrutiyukt": 1,
@@ -730,6 +731,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_ekasyaiva_granthasya_naikana": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_ekasyaiva_granthasya_naikanamakrite_shastravanmayaprasiddhatvapr": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gaunilakshanasthalayo_rvai_shamyena_vyakhyane_bijabhavapradarsha": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gaunilakshanasthalayorvaishamyenavyakhyanebijabhavapradarshanapu": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gitatatparyodahritam_kartritvam_gaunam_anuvyakhyanoktam_ca_pradh": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gitatatparyodahritamkartritvamgaunam_anuvyakhyanoktamcapradhanam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_granthatra": 1,
@@ -754,6 +756,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvamdvividhamitikartritvavibhagapratipadakapaingitishrutes": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvasya_buddhighatitatve_pra": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvasya_buddhighatitatve_prakrityadhikarananuvyakhyanavirod": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvasyabuddhighatitatveprakrityadhikarananuvyakhyanavirodha": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_katha_lakshanadipramana_nai_kathayamapi_shruteshshrutitvenaiva_p": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kathalakshanadipramananai_kathayamapishruteshshrutitvenaivaprama": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kham_cam_pakshepi_virodhadamu_khya_vrittirva_ityatra_vashabdasya": 0,
@@ -766,6 +769,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_lakshyarthagaunarthayoshabdatvaevavirodhadamukhyavrittirvaitimul": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acaryakritatva": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_mattikakritpadiyavyakhyanasyasphutabadhitasangatimattvapradarsha": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_na_tan_manasi_lagati_iti_vikalpanirasa": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_naca_vacanikarthastatparyartha_iti_vishesha_iti_acaryavakyasya_v": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_nacavacanikarthastatparyarthaitivisheshaitiacaryavakyasyavacanik": 1,
@@ -802,6 +806,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_vimarshanasaukaryayasvandaryacandrikayayathagranthamanuvada": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yatra_vacanikaryadanya_iti_vakyapataka_laukikavakyeshu_ityasya": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yatra_vacanikaryadanya_iti_vakyapataka_laukikavakyeshu_ityasya_k": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yatravacanikaryadanya_itivakyapataka_laukikavakyeshu_ityasyakrit": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yuktatyupetamiti_sangatyupetamityarthakamiti_pakshasya_nirasa": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yuktatyupetamitisangatyupetamityarthakamitipakshasyanirasa": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yuktiriti_vacoyuktiriti_pakshanirasa": 0,
@@ -908,6 +913,8 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/tatparya_chandrika/tika_pandurangi": 304,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/tatparya_chandrika/tika_prakashika": 403,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/mula": 48,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_bhavadipika": 47,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_prakasha": 44,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vadavalibhavadipika": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vadavaliprakasha": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vivarana": 47,
@@ -3392,6 +3399,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/tika_jayatirtha": {
    "source_url": "https://dvaitavedanta.in/category-details/6161/6145/thavat/sharat/athhay/managa"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/tika_mula": {
+   "source_url": "https://dvaitavedanta.in/category-details/6161/6145/thavat/sharat/athhay/managa"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
@@ -3437,6 +3447,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_ekasyaiva_granthasya_naikana": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gaunilakshanasthalayorvaishamyenavyakhyanebijabhavapradarshanapu": {
+   "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gitatatparyodahritamkartritvamgaunam_anuvyakhyanoktamcapradhanam": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
@@ -3473,6 +3486,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvamdvividhamitikartritvavibhagapratipadakapaingitishrutes": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvasyabuddhighatitatveprakrityadhikarananuvyakhyanavirodha": {
+   "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kathalakshanadipramananai_kathayamapishruteshshrutitvenaivaprama": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
@@ -3489,6 +3505,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya": {
+   "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_mattikakritpadiyavyakhyanasyasphutabadhitasangatimattvapradarsha": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_nacavacanikarthastatparyarthaitivisheshaitiacaryavakyasyavacanik": {
@@ -3540,6 +3559,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_vimarshanasaukaryayasvandaryacandrikayayathagranthamanuvada": {
+   "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yatravacanikaryadanya_itivakyapataka_laukikavakyeshu_ityasyakrit": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yuktatyupetamitisangatyupetamityarthakamitipakshasyanirasa": {
@@ -3825,6 +3847,12 @@
    "source_url": "https://dvaitavedanta.in/category-details/11066/4779/sharav/tatapa/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/mula": {
+   "source_url": "https://dvaitavedanta.in/category-details/9011/4434/sharaj/vathav/vathav/managa"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_bhavadipika": {
+   "source_url": "https://dvaitavedanta.in/category-details/9011/4434/sharaj/vathav/vathav/managa"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_prakasha": {
    "source_url": "https://dvaitavedanta.in/category-details/9011/4434/sharaj/vathav/vathav/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vivarana": {

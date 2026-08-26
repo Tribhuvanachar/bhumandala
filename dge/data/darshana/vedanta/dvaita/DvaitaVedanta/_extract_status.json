@@ -116,20 +116,21 @@
    "with_text": 155,
    "containers": 0,
    "failed": 0,
-   "items": 702,
-   "bytes": 2647350,
+   "items": 706,
+   "bytes": 2665009,
    "layers": {
     "mula": 155,
     "tika_jayatirtha": 153,
     "tika_bhavadipa": 133,
     "tika_vakyarthakaumudi": 136,
-    "tika_vivarana": 125
+    "tika_vivarana": 125,
+    "tika_pramanalakshanam": 4
    },
    "low_devanagari_warnings": 0,
    "id_collisions": 0,
-   "first_run": "2026-08-18T06:26:24+00:00",
-   "last_run": "2026-08-18T06:26:24+00:00",
-   "duration_s": 6.4,
+   "first_run": "2026-08-25T19:50:11+00:00",
+   "last_run": "2026-08-25T19:50:11+00:00",
+   "duration_s": 639.5,
    "dry_run": false
   },
   "dasha_prakarana_granthas/katha_lakshana": {
@@ -143,20 +144,21 @@
    "with_text": 14,
    "containers": 0,
    "failed": 0,
-   "items": 52,
-   "bytes": 385294,
+   "items": 59,
+   "bytes": 403106,
    "layers": {
     "mula": 14,
     "tika_panchika": 12,
     "tika_bhavadipa": 12,
     "tika_vivarana": 12,
+    "tika_kathalakshanam": 7,
     "tika_jayatirtha": 2
    },
    "low_devanagari_warnings": 0,
    "id_collisions": 1,
-   "first_run": "2026-08-18T06:26:24+00:00",
-   "last_run": "2026-08-18T06:26:24+00:00",
-   "duration_s": 0.3,
+   "first_run": "2026-08-25T19:50:11+00:00",
+   "last_run": "2026-08-25T19:50:11+00:00",
+   "duration_s": 38.3,
    "dry_run": false
   },
   "dasha_prakarana_granthas/tattva_sankhyana": {
@@ -171,7 +173,7 @@
    "containers": 0,
    "failed": 0,
    "items": 263,
-   "bytes": 1521048,
+   "bytes": 1568029,
    "layers": {
     "mula": 38,
     "tika_bhavavarnanam": 14,
@@ -184,9 +186,9 @@
    },
    "low_devanagari_warnings": 0,
    "id_collisions": 0,
-   "first_run": "2026-08-18T06:26:24+00:00",
-   "last_run": "2026-08-18T06:26:24+00:00",
-   "duration_s": 0.9,
+   "first_run": "2026-08-25T19:50:11+00:00",
+   "last_run": "2026-08-25T19:50:11+00:00",
+   "duration_s": 104.7,
    "dry_run": false
   },
   "dasha_prakarana_granthas/tattva_viveka": {
@@ -200,8 +202,8 @@
    "with_text": 155,
    "containers": 0,
    "failed": 0,
-   "items": 1207,
-   "bytes": 5558268,
+   "items": 1298,
+   "bytes": 5728932,
    "layers": {
     "mula": 155,
     "tika_jayatirtha": 153,
@@ -213,13 +215,14 @@
     "tika_naropantiya": 58,
     "tika_dvaitadyumanitippanisaroddhara": 1,
     "tika_dvaitadyumani": 68,
-    "tika_govindiya": 126
+    "tika_govindiya": 126,
+    "tika_mula": 91
    },
    "low_devanagari_warnings": 0,
    "id_collisions": 0,
-   "first_run": "2026-08-18T06:26:24+00:00",
-   "last_run": "2026-08-18T06:26:24+00:00",
-   "duration_s": 6.7,
+   "first_run": "2026-08-25T19:50:11+00:00",
+   "last_run": "2026-08-25T19:50:11+00:00",
+   "duration_s": 671.2,
    "dry_run": false
   },
   "dasha_prakarana_granthas/upadhi_khandana": {
@@ -233,20 +236,20 @@
    "with_text": 3,
    "containers": 0,
    "failed": 0,
-   "items": 8,
-   "bytes": 697448,
+   "items": 9,
+   "bytes": 703273,
    "layers": {
-    "mula": 3,
+    "mula": 4,
     "tika_jayatirtha": 2,
     "tika_mandaramanjari": 1,
     "tika_nivasatirthiyatippani": 1,
     "tika_parashunamnitippani": 1
    },
    "low_devanagari_warnings": 0,
-   "id_collisions": 0,
-   "first_run": "2026-08-18T06:26:24+00:00",
-   "last_run": "2026-08-18T06:26:24+00:00",
-   "duration_s": 0.2,
+   "id_collisions": 1,
+   "first_run": "2026-08-25T19:50:11+00:00",
+   "last_run": "2026-08-25T19:50:11+00:00",
+   "duration_s": 7.8,
    "dry_run": false
   },
   "dasha_prakarana_granthas/mayavada_khandana": {
@@ -260,8 +263,8 @@
    "with_text": 4,
    "containers": 0,
    "failed": 0,
-   "items": 11,
-   "bytes": 766912,
+   "items": 12,
+   "bytes": 786619,
    "layers": {
     "mula": 4,
     "tika_jayatirtha": 1,
@@ -269,13 +272,14 @@
     "tika_nivasatirthatippani": 1,
     "tika_mayavadaparashu": 2,
     "tika_nivasatirthiyatippani": 1,
-    "tika_gururajiyatippani": 1
+    "tika_gururajiyatippani": 1,
+    "tika_mayavadakhandanam": 1
    },
    "low_devanagari_warnings": 0,
    "id_collisions": 1,
-   "first_run": "2026-08-18T06:26:24+00:00",
-   "last_run": "2026-08-18T06:26:24+00:00",
-   "duration_s": 0.2,
+   "first_run": "2026-08-25T19:50:11+00:00",
+   "last_run": "2026-08-25T19:50:11+00:00",
+   "duration_s": 10.0,
    "dry_run": false
   },
   "dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana": {
@@ -289,8 +293,8 @@
    "with_text": 4,
    "containers": 0,
    "failed": 0,
-   "items": 11,
-   "bytes": 836570,
+   "items": 12,
+   "bytes": 843837,
    "layers": {
     "mula": 4,
     "tika_jayatirtha": 2,
@@ -298,13 +302,14 @@
     "tika_nivasatirthiyatippani": 1,
     "tika_gururajiyatippani": 1,
     "tika_mithyatvanumanakhandanaparashu": 1,
+    "tika_mithyatvanumanakhandanam": 1,
     "tika_mithyatvanumanakhamdanaparashu": 1
    },
    "low_devanagari_warnings": 0,
    "id_collisions": 0,
-   "first_run": "2026-08-18T06:26:24+00:00",
-   "last_run": "2026-08-18T06:26:24+00:00",
-   "duration_s": 0.2,
+   "first_run": "2026-08-25T19:50:11+00:00",
+   "last_run": "2026-08-25T19:50:11+00:00",
+   "duration_s": 9.9,
    "dry_run": false
   },
   "dasha_prakarana_granthas/vishnu_tattva_vinirnaya": {
@@ -319,7 +324,7 @@
    "containers": 0,
    "failed": 0,
    "items": 1225,
-   "bytes": 9879961,
+   "bytes": 10140085,
    "layers": {
     "mula": 166,
     "tika_dvitiyapariccheda": 1,
@@ -334,9 +339,9 @@
    },
    "low_devanagari_warnings": 0,
    "id_collisions": 0,
-   "first_run": "2026-08-18T06:26:24+00:00",
-   "last_run": "2026-08-18T06:26:24+00:00",
-   "duration_s": 7.8,
+   "first_run": "2026-08-25T19:50:11+00:00",
+   "last_run": "2026-08-25T19:50:11+00:00",
+   "duration_s": 757.9,
    "dry_run": false
   },
   "dasha_prakarana_granthas/karma_nirnaya": {
@@ -351,7 +356,7 @@
    "containers": 0,
    "failed": 0,
    "items": 290,
-   "bytes": 2265098,
+   "bytes": 2418576,
    "layers": {
     "mula": 55,
     "tika_jayatirtha": 53,
@@ -362,9 +367,9 @@
    },
    "low_devanagari_warnings": 0,
    "id_collisions": 0,
-   "first_run": "2026-08-18T06:26:24+00:00",
-   "last_run": "2026-08-18T06:26:24+00:00",
-   "duration_s": 1.7,
+   "first_run": "2026-08-25T19:50:11+00:00",
+   "last_run": "2026-08-25T19:50:11+00:00",
+   "duration_s": 175.0,
    "dry_run": false
   },
   "dasha_prakarana_granthas/tattvodyota": {
@@ -379,7 +384,7 @@
    "containers": 0,
    "failed": 0,
    "items": 58,
-   "bytes": 200711,
+   "bytes": 226097,
    "layers": {
     "mula": 22,
     "tika_mandaramanjari": 18,
@@ -387,9 +392,9 @@
    },
    "low_devanagari_warnings": 0,
    "id_collisions": 0,
-   "first_run": "2026-08-18T06:26:24+00:00",
-   "last_run": "2026-08-18T06:26:24+00:00",
-   "duration_s": 0.3,
+   "first_run": "2026-08-25T19:50:11+00:00",
+   "last_run": "2026-08-25T19:50:11+00:00",
+   "duration_s": 59.0,
    "dry_run": false
   },
   "gita_prasthana/gita_bhashya": {
