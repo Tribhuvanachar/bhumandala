@@ -1042,6 +1042,27 @@ window.startFollowUpVoiceInput = function() {
   try { dgeFollowUpRecognition.start(); } catch (e) { /* ignore */ }
 };
 
+// Saves the CURRENT full Acharya answer to this shloka's notes in one tap.
+// notes.js's appendSelectedTextToNote (the modal's floating "➕ Notes"
+// button) already covers a hand-picked excerpt, but only once text inside
+// the modal is actually selected -- there was no way to keep the whole
+// answer without selecting and copying it by hand first. Reuses
+// addNoteEntry() exactly as every other note-adding path does (it calls
+// dgeSaveNotes()/renderList() itself), just with 'Ask Acharya' as the
+// source so these entries read distinctly from a manual note or an
+// excerpt in the shloka's Notes list.
+window.saveAcharyaAnalysisToNotes = function() {
+  const resEl = document.getElementById('acharyaResult');
+  const text = resEl ? resEl.innerText.trim() : '';
+  if (!text) { if (typeof showToast === 'function') showToast('Nothing to save yet.'); return; }
+
+  const targetId = window.currentAcharyaShlokaId || window.contextShlokaId || window.activeId;
+  if (!targetId) { if (typeof showToast === 'function') showToast('Please tap on a Shloka card first.'); return; }
+
+  if (typeof addNoteEntry === 'function') addNoteEntry(targetId, text, 'Ask Acharya');
+  if (typeof showToast === 'function') showToast(`Saved to Shloka ${targetId} notes!`);
+};
+
 window.shareAcharyaAnalysis = function() {
   const resEl = document.getElementById('acharyaResult');
   const resText = resEl ? resEl.innerText : '';
@@ -1647,12 +1668,19 @@ window.dgeOpenShabdaForSelection = function(e) {
 // citations linking through to the existing Ashtadhyayi popover/page), and
 // only when Vidyut has nothing for this word does it fall back to the
 // AI-based Ask Acharya Sandhi path (askAcharya's 'sandhi' type, unchanged).
+//
+// Named dgeOpenVidyutSandhiForSelection (not dgeOpenSandhiForSelection) so
+// it can't collide with sandhi.js's window.dgeOpenSandhiForSelection --
+// the live dharmamitra.org analyzer, a separate real tool wired to
+// #wordToolsRow's other Sandhi button. Both used to claim the same global
+// name; sandhi.js loads after this file, so its assignment silently won
+// every time and this Vidyut-first path was never actually reachable.
 const DGE_SANDHI_MODAL_ID = 'dgeSandhiModal';
 function dgeEnsureSandhiModal() {
   dgeEnsureWordModalShell(DGE_SANDHI_MODAL_ID, 'dgeSandhiModalBody', '🔗 सन्धिः · Sandhi');
   return document.getElementById(DGE_SANDHI_MODAL_ID);
 }
-window.dgeOpenSandhiForSelection = function (e) {
+window.dgeOpenVidyutSandhiForSelection = function (e) {
   if (e) e.preventDefault();
   const word = dgeSelectedWordText();
   if (!word) { if (typeof showToast === 'function') showToast('Select a word first.'); return; }
