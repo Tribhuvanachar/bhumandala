@@ -12,8 +12,16 @@
     "                     transliteration",
     "  labels             every button and hint on the first screen",
     "  sections           the contributor bands, in the order they appear. Each has",
-    "                     id, icon, eyebrow, name, sub, meta[], blurb, items[],",
+    "                     id, tier, icon, eyebrow, name, sub, meta[], blurb, items[],",
     "                     panel (which Know More sheet it opens), moreLabel, todo.",
+    "                     tier groups bands under one heading instead of each",
+    "                     rendering as an equal-weight section: \"foundation\",",
+    "                     \"stewardship\" or \"seva\" (see index.html's TIER_META).",
+    "                     The \"seva\" tier renders two-up alongside Key Sponsors",
+    "                     (from reader.json's KEY_SPONSORS_CONFIG, not this file).",
+    "                     A closing Participation band (Support This Project) is",
+    "                     built from reader.json's SPONSOR_CONFIG the same way --",
+    "                     neither needs an entry here.",
     "                     ONE EXCEPTION: the section with panel:\"contributors\" has",
     "                     no items[] here on purpose -- its list is read live from",
     "                     admin/content/reader.json's CONTRIBUTORS_CONFIG instead,",
@@ -62,6 +70,7 @@
   "sections": [
     {
       "id": "architect",
+      "tier": "foundation",
       "eyebrow": "Initiated, Architected & Developed by",
       "icon": "quill",
       "name": "Tribhuvan Achar",
@@ -76,6 +85,7 @@
     },
     {
       "id": "scholar",
+      "tier": "stewardship",
       "eyebrow": "Content Contribution & Scholarly Lead",
       "icon": "book",
       "name": "Vid. Pradeep Simhachar",
@@ -85,6 +95,7 @@
     },
     {
       "id": "contributors",
+      "tier": "seva",
       "eyebrow": "Contributors & Seva Support",
       "icon": "people",
       "name": "Aniruddha · Sameer",
