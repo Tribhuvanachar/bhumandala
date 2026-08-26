@@ -440,17 +440,10 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <div class="site-footer-links" id="siteFooterLinks">
-    <button class="footer-link" onclick="window.openAboutModal()">About Us</button>
-    <span class="footer-sep">·</span>
-    <button class="footer-link" onclick="window.openModal('contactModal')">Contact Us</button>
-    <span class="footer-sep">·</span>
-    <button class="footer-link" onclick="window.openAboutModal()">Credits</button>
-    <span class="footer-sep">·</span>
-    <button class="footer-link" onclick="window.openModal('licenseModal')">License</button>
-    <span class="footer-sep">·</span>
-    <button class="footer-link" onclick="window.openModal('termsModal')">Terms &amp; Conditions</button>
-  </div>
+  <!-- Filled by site-footer.js, shared with the landing page (see that
+       file's own header comment) instead of this row's five links living
+       only here as hand-written markup. -->
+  <div class="site-footer-links" id="siteFooterLinks"></div>
   <div class="app-footer" id="appFooter">v4.57.0 (Modular)</div>
 </div>
 
@@ -1279,6 +1272,7 @@
      Fetches one small index and stops if this grantha is not cited. -->
 <script src="js/backlinks.js?v=4.64.0"></script>
 <script src="js/content-inline.js?v=1"></script>
+<script src="js/site-footer.js?v=1"></script>
 <script src="js/tour.js?v=1"></script>
 <script src="js/library.js?v=4.62.0"></script>
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
