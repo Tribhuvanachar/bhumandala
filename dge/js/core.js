@@ -1181,6 +1181,12 @@ function initAuthAndBranding() {
       emailLink.href = `mailto:${contactEmail}`;
       emailLink.innerText = contactEmail;
   }
+
+  const aboutEmailLink = document.getElementById('aboutContactEmail');
+  if(aboutEmailLink) {
+      aboutEmailLink.href = `mailto:${contactEmail}`;
+      aboutEmailLink.innerText = contactEmail;
+  }
 }
 
 function restorePrefs() {

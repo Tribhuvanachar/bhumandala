@@ -676,7 +676,7 @@
     // reads one shape (Type/Surface/Context/Page/Timestamp).
     var fix=$("#dge-fixBtn"); if(fix) fix.addEventListener("click",function(){
       var row=state.sutras[state.idx]; if(!row) return;
-      var email="sanatanavidyagurukulam@gmail.com";
+      var email=window.DGE_CONTACT_EMAIL||"sanatanavidyagurukulam@gmail.com";
       var subject=encodeURIComponent("[DGE-CONTENT-GAP] sutra-correction — "+row.id);
       var lines=["Type: sutra-correction","Surface: "+row.id,
         "Context: "+row.sanskrit_text,
