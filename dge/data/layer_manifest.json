@@ -2445,7 +2445,7 @@
     {
      "folder": "tika_ramasubba_72",
      "label": "रामसुब्ब_ ७२",
-     "author": "जींवादिभेदकं विष्णो विश्वकर्तृत्वमुच्यते ॥ इति । एतदधिकृत्य",
+     "author": "",
      "items": 2,
      "matched": 2
     },
@@ -2777,6 +2777,13 @@
      "author": "",
      "items": 134,
      "matched": 134
+    },
+    {
+     "folder": "tika_mula",
+     "label": "मूल",
+     "author": "",
+     "items": 2,
+     "matched": 2
     }
    ]
   },
@@ -2863,9 +2870,9 @@
      "matched": 1
     },
     {
-     "folder": "tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dala",
+     "folder": "tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_",
      "label": "बुद्धिपू र्वं सर्वकर्तृत्वादिति हे तौ…",
-     "author": "बुद्धिपू र्वं सर्वकर्तृत्वादिति हे तौ दल",
+     "author": "",
      "items": 1,
      "matched": 1
     },
@@ -2891,7 +2898,7 @@
      "matched": 1
     },
     {
-     "folder": "tika_gaunilakshanasthalayo_rvai_shamyena_vyakhyane_bijabhavapradarsha",
+     "folder": "tika_gaunilakshanasthalayorvaishamyenavyakhyanebijabhavapradarshanapu",
      "label": "गौणीलक्षणास्थलयो र्वै षम्येन व्याख्यान…",
      "author": "",
      "items": 1,
@@ -2982,9 +2989,9 @@
      "matched": 1
     },
     {
-     "folder": "tika_kartritvasya_buddhighatitatve_pra",
+     "folder": "tika_kartritvasyabuddhighatitatveprakrityadhikarananuvyakhyanavirodha",
      "label": "कर्तृत्वस्य बुद्धिघटितत्वे प्रकृत्यधिक…",
-     "author": "कर्तृत्वस्य बुद्धिघटितत्वे प्र",
+     "author": "",
      "items": 1,
      "matched": 1
     },
@@ -3012,7 +3019,7 @@
     {
      "folder": "tika_lakshyarthagaunarthayoranumeyatvam_natushabdatvamityabhiprayasya",
      "label": "लक्ष्यार्थगौणार्थयोरनुमेयत्वं , न तु श…",
-     "author": "श्रीमट्टीकाकृत्पादीयव्याख्याने",
+     "author": "",
      "items": 1,
      "matched": 1
     },
@@ -3027,6 +3034,13 @@
      "folder": "tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya",
      "label": "महाजनपरिगृहीतत्वलिङ्गेन \"कर्मनिर्णय \"न…",
      "author": "महाजनपरिगृहीतत्वलिङ्गेन \"कर्मनिर्णय \"ना म्न आचार्य",
+     "items": 1,
+     "matched": 1
+    },
+    {
+     "folder": "tika_mattikakritpadiyavyakhyanasyasphutabadhitasangatimattvapradarsha",
+     "label": "श्रीमट्टीकाकृत्पादीयव्याख्यानस्य स्फुट…",
+     "author": "",
      "items": 1,
      "matched": 1
     },
@@ -3101,13 +3115,6 @@
      "matched": 1
     },
     {
-     "folder": "tika_shrimattika",
-     "label": "श्रीमट्टीकाकृत्पादीयव्याख्यानस्य स्फुट…",
-     "author": "श्रीमट्टीका",
-     "items": 1,
-     "matched": 1
-    },
-    {
      "folder": "tika_siddhantedushanasyapyaprasiddhavisheshanatvasyasiddhisankirnatad",
      "label": "सिद्धान्तेऽदूषणस्याप्यप्रसिद्धविशेषणत्…",
      "author": "",
@@ -3150,9 +3157,9 @@
      "matched": 1
     },
     {
-     "folder": "tika_yatra_vacanikaryadanya_iti_vakyapataka_laukikavakyeshu_ityasya",
+     "folder": "tika_yatravacanikaryadanya_itivakyapataka_laukikavakyeshu_ityasyakrit",
      "label": "यत्र वाचनिकार्यादन्यः...इति वाक्यपटक\"…",
-     "author": "यत्र वाचनिकार्यादन्यः...इति वाक्यपटक\" लौकिकवाक्येषु\" इत्यस्य",
+     "author": "",
      "items": 1,
      "matched": 1
     },
@@ -3731,7 +3738,7 @@
    "mulaItems": 48,
    "layers": [
     {
-     "folder": "tika_vadavalibhavadipika",
+     "folder": "tika_bhavadipika",
      "label": "वादावलीभावदीपिका",
      "author": "श्रीराघवेन्द्रयतिकृता",
      "items": 47,
@@ -3745,7 +3752,7 @@
      "matched": 47
     },
     {
-     "folder": "tika_vadavaliprakasha",
+     "folder": "tika_prakasha",
      "label": "वादावलीप्रकाशः",
      "author": "श्रीनिवासतीर्थविरचितः",
      "items": 44,
