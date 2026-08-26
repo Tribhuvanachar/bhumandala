@@ -1,0 +1,38 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_4837",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > अनुव्याख्यानम् > मूलम् > तृतीयाध्याय: > प्रथमः पादः",
+   "section": "तृतीयाध्याय:",
+   "unit_title": "प्रथमः पादः",
+   "sanskrit_text": "प्रथमः पादः\nस्वाभाविकान्यथानामसहभावान्ययोक्तयः ।\nअविशेषविशेषौ च सहभाIो विमिश्रता ॥1॥\nविरुद्धोक्तिः सहस्थानं वैयर्थ्यं चान्यथागतिः ।\nयुक्तयः पूर्वपक्षस्य गुणाधिक्यर्थतो भवौ ॥2॥\nउपपत्तिद्विरूपत्वमाधिक्यमनुरूपता ।\nयोग्यता बलवत्त्वं च विभागः कारणाभवः ।\nक्लृप्तिरन्या गतिश्चैव सिद्धान्तस्यैव साधकाः ॥3॥\nबीजपूरुषयोनीनां सङ्गातिनियमोज्झितिम् ।\nअथशब्देन भगवानाह कारणतश्च ताम् ॥4॥\nइति श्रीमदानन्दतीर्थभगवत्पादाचार्यविरचिते ब्रह्मसूत्रानुव्याख्याने तृतीयाध्यायस्य प्रथमः पादः ॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "अनुव्याख्यानम्",
+    "मूलम्",
+    "तृतीयाध्याय:",
+    "प्रथमः पादः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/4837/975/sharam/sathha/anavay/malma/tataya",
+    "content_id": 4837,
+    "work_id": 975,
+    "layer": "प्रथमः पादः",
+    "anchor": "article4849",
+    "fetched": "2026-08-26"
+   },
+   "tika_title": "प्रथमः पादः"
+  }
+ ]
+}
