@@ -247,6 +247,13 @@
   // "Enter" button. A right arrow expands it into the full toolbar.
   let expanded = false;
 
+  // dge/index.html already has a right-edge control rail (#dge-qa-tab /
+  // #quickActionsPopup) -- on that page a "✎ Edit Page Text" row in the
+  // popup is the entry point instead of a second always-on floating pill.
+  // Pages with no rail (the landing page, home-panel.html) keep the
+  // floating pill as their only way in -- see the boot section below.
+  var hasRail = !!document.getElementById('dge-qa-tab');
+
   // Draggable position: which edge it's docked to, and how far down the
   // viewport (0-1, of the vertical center). Was fixed at left/50% with no
   // way to move it out from behind page content it happened to sit over
@@ -464,8 +471,19 @@
       // Staged edits are already in the page's config from its own boot only
       // if it read them; apply them here so the page shows the draft.
       if (Object.keys(draft).length) rerender();
-      bar();
+      // On a page with the control rail, bar() is deferred until the rail's
+      // "Edit Page Text" row asks for it (see dgeToggleContentInlineBar)
+      // instead of always showing the floating collapsed pill.
+      if (!hasRail) bar();
       return true;
     }).catch(function () { return false; });
   })();
+
+  // Called by the rail's pop-item. Not defined until dgeContentInlineReady
+  // resolves true, same gate as the rest of this file's public surface.
+  window.dgeToggleContentInlineBar = function () {
+    if (!source) return; // not a super-admin, or still loading
+    expanded = !expanded;
+    bar();
+  };
 })();
