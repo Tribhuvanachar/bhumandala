@@ -4600,3 +4600,56 @@ reader screenshots, and `audit_library.py --fix` +
 `build_layer_manifest.py` committed onto the PR branch (the workflow does
 not regenerate those). Anything that fails stays unmerged and gets
 documented here instead.
+
+## Overnight extract PRs verified and merged; nyaya_sudha dedicated run queued (26 Aug 2026 morning)
+
+Executed under the lead's standing authorization (part above), each PR
+through the full verification protocol before merging:
+
+- **PR #139 gita_prasthana — merged** (25 Aug ~11:35 pm IST). Madhva's
+  Gītā-bhāṣya recovered as `tika_bhashya` (357 items); mūla id sets
+  identical (654+228); text 117.9% with zero lost chunks; **10/10 random
+  items verified verbatim against dvaitavedanta.in live pages**; reader
+  Playwright screenshot of the भाष्यम् tab. One merge conflict
+  (generated `library-status.json`) resolved by regenerating with its
+  own tool.
+- **PR #140 later_acharyas — merged** (26 Aug ~10:15 am IST). 24 of 25
+  granthas re-parsed fresh (+15.9% text): vadavali gained भावदीपिका +
+  प्रकाशः layers, quoted grantha-title label lines correctly stripped
+  from yukti_mallika's सत्यप्रमोद text (root-caused character-by-character
+  — the 34 "shrunk" items lost ONLY repeated "युक्तिमल्लिका" lines).
+  **Known gap, documented in the merge commit: the job's time budget
+  skipped nyaya_sudha itself** (its 44 folders passed through unchanged,
+  `fetched: 2026-08-19`, no `work_id`) — a dedicated
+  `granthas=nyaya_sudha` dispatch is queued to apply the quote-split
+  there.
+- **PR #141 dasha_prakarana_granthas — merged** (26 Aug ~10:40 am IST).
+  The quote-split's best showing: inline-quoted mūla sūtras moved OUT of
+  ṭīkā text INTO the mula layer for the same unit (confirmed
+  item-by-item on pramana_lakshana; the sūtra प्रमाणविरुद्धार्थ-
+  प्रतिज्ञाविरोधः now sits in mula/DV_13837 where the old data buried it
+  mid-ṭīkā); mūla ids identical section-wide; 102.5% text.
+- **purana_prasthana** running (dispatched 9:28 am IST); the
+  **nyaya_sudha-only** run queued behind it. Both will get the same
+  verify-and-merge pass.
+
+**Two operational findings recorded for the future:**
+1. **dvaitavedanta.in now challenges/resets requests from this session**
+   ("One moment, please…" interstitial, then TCP resets — from both
+   urllib and real Chromium) after ~7k requests across 24h. CI's GitHub
+   runners were unaffected (0 fetch failures overnight). Where the live
+   check was blocked (PRs #140/#141), corroboration substituted the
+   vishvAsa mirror of the same upstream URLs (independent copy,
+   node-indexed — 9/12 window checks clean, outliers explained by the
+   mirror's per-section segmentation) plus CI's own strict-verified
+   fetches. Resume direct live spot-checks once the block ages out.
+2. **New `tika_mula` / grantha-title-slug folders** (tattva_viveka 91
+   items, dvaita_dyumani 2, pramana_lakshana's tika_pramanalakshanam 4):
+   quoted मूल blocks appearing BETWEEN h3 runs route through the
+   quote-split as layers titled "मूल"/the grantha's own name and land in
+   unmapped folders instead of merging into mula (only exact "मूलम्"
+   aliases and same-unit routing reach mula today). Content is captured
+   and renders as a "मूल" tab — not lost, but the folder naming is off.
+   Fix belongs in build_items: route a quote layer whose key is a mūla
+   alias OR the grantha key into the mula bucket. Small, test-covered
+   change for the next parser pass.
