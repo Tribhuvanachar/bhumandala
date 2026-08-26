@@ -34,6 +34,7 @@ header.top{
 .brand{font-weight:700;letter-spacing:.02em;margin-right:auto;
   display:flex;gap:8px;align-items:center}
 .brand small{font-weight:400;color:var(--muted);font-size:.72em}
+.brand a{text-decoration:none}
 .btn{
   border:1px solid var(--line);background:var(--panel);color:var(--ink);
   border-radius:999px;padding:6px 13px;font:inherit;font-size:.86rem;
