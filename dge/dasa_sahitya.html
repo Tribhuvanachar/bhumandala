@@ -6,6 +6,7 @@
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="js/vandana-guard.js?v=1"></script>
 <script src="js/admin-gate.js?v=1"></script>
+<script src="js/contact-email.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ದಾಸ ಸಾಹಿತ್ಯ · Dāsa Sāhitya — DGE</title>
 <link rel="stylesheet" href="css/dasa-sahitya.css?v=1">
@@ -68,6 +69,11 @@
 </main>
 <div class="toast" id="toast"></div>
 
+<!-- Filled by site-footer.js, shared with the landing page and reader
+     (see that file's own header comment). -->
+<div class="site-footer-links" id="siteFooterLinks"></div>
+
+<script src="js/site-footer.js?v=1"></script>
 <script>
 "use strict";
 const BASE = (window.DASA_DATA_BASE || "data/dasa_sahitya").replace(/\/$/,"");
