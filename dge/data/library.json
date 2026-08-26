@@ -4893,6 +4893,14 @@
       }
     },
     {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/tika_mula/data.json",
+      "populated": true,
+      "title": "द्वैतद्युमणिः — tika_mula",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/6161/6145/thavat/sharat/athhay/managa"
+      }
+    },
+    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/mula/data.json",
       "populated": true,
       "title": "कर्मविजयः — mula",
@@ -4992,10 +5000,9 @@
       }
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dala/data.json",
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_/data.json",
       "populated": true,
-      "title": "कर्मविजयः — tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dala",
-      "addedAt": "2026-08-24",
+      "title": "कर्मविजयः — tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
       }
@@ -5028,10 +5035,9 @@
       }
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gaunilakshanasthalayo_rvai_shamyena_vyakhyane_bijabhavapradarsha/data.json",
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gaunilakshanasthalayorvaishamyenavyakhyanebijabhavapradarshanapu/data.json",
       "populated": true,
-      "title": "कर्मविजयः — tika_gaunilakshanasthalayo_rvai_shamyena_vyakhyane_bijabhavapradarsha",
-      "addedAt": "2026-08-24",
+      "title": "कर्मविजयः — tika_gaunilakshanasthalayorvaishamyenavyakhyanebijabhavapradarshanapu",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
       }
@@ -5145,10 +5151,9 @@
       }
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvasya_buddhighatitatve_pra/data.json",
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvasyabuddhighatitatveprakrityadhikarananuvyakhyanavirodha/data.json",
       "populated": true,
-      "title": "कर्मविजयः — tika_kartritvasya_buddhighatitatve_pra",
-      "addedAt": "2026-08-24",
+      "title": "कर्मविजयः — tika_kartritvasyabuddhighatitatveprakrityadhikarananuvyakhyanavirodha",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
       }
@@ -5203,6 +5208,14 @@
       "populated": true,
       "title": "कर्मविजयः — tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya",
       "addedAt": "2026-08-24",
+      "source": {
+        "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
+      }
+    },
+    {
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_mattikakritpadiyavyakhyanasyasphutabadhitasangatimattvapradarsha/data.json",
+      "populated": true,
+      "title": "कर्मविजयः — tika_mattikakritpadiyavyakhyanasyasphutabadhitasangatimattvapradarsha",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
       }
@@ -5307,15 +5320,6 @@
       }
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_shrimattika/data.json",
-      "populated": true,
-      "title": "कर्मविजयः — tika_shrimattika",
-      "addedAt": "2026-08-24",
-      "source": {
-        "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
-      }
-    },
-    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_siddhantedushanasyapyaprasiddhavisheshanatvasyasiddhisankirnatad/data.json",
       "populated": true,
       "title": "कर्मविजयः — tika_siddhantedushanasyapyaprasiddhavisheshanatvasyasiddhisankirnatad",
@@ -5370,10 +5374,9 @@
       }
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yatra_vacanikaryadanya_iti_vakyapataka_laukikavakyeshu_ityasya/data.json",
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yatravacanikaryadanya_itivakyapataka_laukikavakyeshu_ityasyakrit/data.json",
       "populated": true,
-      "title": "कर्मविजयः — tika_yatra_vacanikaryadanya_iti_vakyapataka_laukikavakyeshu_ityasya",
-      "addedAt": "2026-08-24",
+      "title": "कर्मविजयः — tika_yatravacanikaryadanya_itivakyapataka_laukikavakyeshu_ityasyakrit",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
       }
@@ -6062,15 +6065,6 @@
       }
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/mula/data.json",
-      "populated": false,
-      "title": "सुमध्वविजयः — mula",
-      "addedAt": "2026-08-24",
-      "source": {
-        "source_url": "https://dvaitavedanta.in/category-details/10498/10497/samath/samath/parath"
-      }
-    },
-    {
       "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_iti_shrimadvedangamuni/data.json",
       "populated": true,
       "title": "सुमध्वविजयः — tika_iti_shrimadvedangamuni",
@@ -6242,19 +6236,17 @@
       }
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vadavalibhavadipika/data.json",
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_bhavadipika/data.json",
       "populated": true,
-      "title": "वादावली — tika_vadavalibhavadipika",
-      "addedAt": "2026-08-24",
+      "title": "वादावली — tika_bhavadipika",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/9011/4434/sharaj/vathav/vathav/managa"
       }
     },
     {
-      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vadavaliprakasha/data.json",
+      "path": "dge/data/darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_prakasha/data.json",
       "populated": true,
-      "title": "वादावली — tika_vadavaliprakasha",
-      "addedAt": "2026-08-24",
+      "title": "वादावली — tika_prakasha",
       "source": {
         "source_url": "https://dvaitavedanta.in/category-details/9011/4434/sharaj/vathav/vathav/managa"
       }

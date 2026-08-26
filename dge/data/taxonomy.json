@@ -3371,6 +3371,9 @@
        "tika_jayatirtha": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_mula": {
+        "_schema": "grantha_tika_text"
        }
       },
       "karmavijaya": {
@@ -3715,6 +3718,18 @@
        },
        "tika_yuktirityanumaivetipakshesadhyaparishkarapurvakamanumanamvimrish": {
         "_schema": "grantha_tika_text"
+       },
+       "tika_gaunilakshanasthalayorvaishamyenavyakhyanebijabhavapradarshanapu": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_kartritvasyabuddhighatitatveprakrityadhikarananuvyakhyanavirodha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_mattikakritpadiyavyakhyanasyasphutabadhitasangatimattvapradarsha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_yatravacanikaryadanya_itivakyapataka_laukikavakyeshu_ityasyakrit": {
+        "_schema": "grantha_tika_text"
        }
       },
       "madhvamukhalankara": {
@@ -3971,6 +3986,14 @@
        "tika_vivarana": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्री उमर्जी तिरुमलाचार्यसुतकृष्णविरचितं"
+       },
+       "tika_bhavadipika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रयतिकृता"
+       },
+       "tika_prakasha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीनिवासतीर्थविरचितः"
        }
       },
       "vagvajra": {

@@ -1,6 +1,6 @@
 {
  "schema": "grantha_tika_text",
- "default_author": "यत्र वाचनिकार्यादन्यः...इति वाक्यपटक\" लौकिकवाक्येषु\" इत्यस्य",
+ "default_author": "",
  "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa",
  "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
  "items": [
@@ -25,9 +25,10 @@
     "site": "dvaitavedanta.in",
     "url": "https://dvaitavedanta.in/category-details/19177/19173/sharas/karama/makhay",
     "content_id": 19177,
+    "work_id": 19173,
     "layer": "यत्र वाचनिकार्यादन्यः...इति वाक्यपटक\" लौकिकवाक्येषु\" इत्यस्य कृत्यमु क्त्वा , रूढियो गौ विना कश्चित्... वेदवाक्यस्य तु वाचनिका र्थं ... इति वाक्ययोः भिन्नविषयकत्वसमर्थनम्",
     "anchor": "article19185",
-    "fetched": "2026-08-18"
+    "fetched": "2026-08-25"
    },
    "tika_title": "यत्र वाचनिकार्यादन्यः...इति वाक्यपटक\" लौकिकवाक्येषु\" इत्यस्य कृत्यमु क्त्वा , रूढियो गौ विना कश्चित्... वेदवाक्यस्य तु वाचनिका र्थं ... इति वाक्ययोः भिन्नविषयकत्वसमर्थनम्"
   }
