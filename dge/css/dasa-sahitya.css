@@ -91,3 +91,10 @@
   .toast{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);
     padding:8px 14px;border-radius:10px;font-size:.82rem;opacity:0;transition:.25s;pointer-events:none;z-index:40}
   .toast.show{opacity:.95}
+
+  /* site-footer.js's shared links row. */
+  .site-footer-links{margin:22px 16px;padding:16px 0 40px;border-top:1px solid var(--line);text-align:center}
+  .footer-link{background:none;border:none;font:inherit;font-size:.78rem;color:var(--muted);
+    cursor:pointer;padding:4px 2px;text-decoration:underline;text-underline-offset:2px}
+  .footer-link:hover{color:var(--accent)}
+  .footer-sep{color:var(--line);font-size:.78rem;margin:0 2px}
