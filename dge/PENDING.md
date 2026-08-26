@@ -4642,6 +4642,22 @@ through the full verification protocol before merging:
   BLOCKED via the new `verify_source_content.py`), and the vishvAsa
   mirror does not carry BTN at all. Playwright reader check: 24-layer
   pill row, पदरत्नावली auto-loaded, no JS errors.
+- **PR #143 nyaya_sudha — merged** (27 Aug ~4:20 am IST, `1381cc17`).
+  The resumable chain (runs 38→41, below) completed the 1,655-leaf
+  crawl; run 40 finished it at 2:48 am IST and run 41 (pure cache hits)
+  confirmed it reproducibly. Verified before merge: mula reproduces its
+  1,650 ids exactly; +528k chars net; **the अनुव्याख्यानम् quote-split
+  is live — tika_anuvyakhyanam went 6 → 1,076 items (1076/1076 joinable
+  in the manifest)**, and the 101k chars removed from tika_sudha were
+  traced line-by-line into the same unit's anuvyakhyanam/mula (the
+  residue: 1,109 stripped "अनुव्याख्यानम्" heading labels + 3 sūtra
+  lines that survive in sibling layers). Suites 0 errors / 208 tests
+  OK; Playwright on unit 222 shows the target experience — Brahma Sūtra
+  pratīka, Anuvyākhyāna verse, सुधा/अनुव्याख्यानम्/परिमळ tabs. Two new
+  1-item section-heading folders (tika_prathamapada, tika_caturthapada)
+  are the known unmapped-heading cosmetic class (follow-up 2 below);
+  tika_caturthapada carries a leading `StartFragment` artifact —
+  extend the EndFragment strip to it in the next parser pass.
 - **nyaya_sudha-only run 38 — timed out, resumable chain started.**
   The live site serves nyaya_sudha leaves at **~40 s/page** (vs ~3–4 s
   for every other grantha — these pages carry the full सुधा + परिमळ
