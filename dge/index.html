@@ -60,10 +60,10 @@
   <div class="tooltip-row" id="wordToolsRow">
     <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenShabdaForSelection(event)" title="Declension table, plus Vidyut/sandhi fallbacks and dictionary results for this word">🔤 Shabda</button>
     <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenDhatuForSelection(event)" title="Search the Dhatupatha for a matching root and show its derivation">📚 Dhātu</button>
-    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Sandhi split for this word — real Vidyut data when available, AI-assisted otherwise">🔗 Sandhi</button>
+    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenVidyutSandhiForSelection(event)" title="Sandhi split for this word — real Vidyut data when available, AI-assisted otherwise">🔗 Sandhi</button>
     <button class="tooltip-btn" data-word-only onpointerdown="window.askAcharya(event, 'samasa')" title="Samasa Vigraha for this word (AI-assisted — Vidyut has no precomputed samasa data yet)">🧩 Samasa</button>
     <button class="tooltip-btn" onpointerdown="window.dgeOpenCorpusSearchForSelection(event)" title="Find every other place this word or phrase appears in the library">🔍 Where else</button>
-    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Live sandhi split &amp; word analysis (via dharmamitra.org, a third-party service)">🔗 Sandhi</button>
+    <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Live sandhi split &amp; word analysis (via dharmamitra.org, a third-party service)">🔗 Sandhi (Live)</button>
   </div>
 </div>
 
@@ -1153,6 +1153,7 @@
     <div class="modal-header-sticky">
       <h4 style="margin:0; color:var(--accent-red); font-size: 16px;">🕉️ Acharya's Analysis</h4>
       <div style="display:flex; gap:6px;">
+         <button class="btn-sm" onclick="window.saveAcharyaAnalysisToNotes()" style="font-size:11px;">📝 Save to Notes</button>
          <button class="btn-sm" onclick="window.shareAcharyaAnalysis()" style="font-size:11px;">📤 Share</button>
          <button class="btn-sm" onclick="window.closeModal('acharyaModal')" style="font-size:11px;">✖ Close</button>
       </div>
