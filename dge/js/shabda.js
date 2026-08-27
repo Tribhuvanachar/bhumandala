@@ -6,7 +6,9 @@
  * ========================================================================== */
 (function () {
   "use strict";
-  var URL = "data/vedanga/vyakarana/shabdapatha/data.json";
+  // Page-relative to dge/vyakarana/shabda.html (Phase 10: moved one directory
+  // deeper than dge/ -- ../ reaches dge/data/).
+  var URL = "../data/vedanga/vyakarana/shabdapatha/data.json";
   var PAGE_SIZE = 20;
   var VIBHAKTI = ["प्रथमा","द्वितीया","तृतीया","चतुर्थी","पञ्चमी","षष्ठी","सप्तमी","सम्बोधनम्"];
 
@@ -333,7 +335,7 @@
     var w=(surface||"").trim();
     if(!w){ showNotFound(surface); return; }
     var cp=w.codePointAt(0).toString(16).toLowerCase().padStart(4,"0");
-    fetch("data/vedanga/vyakarana/prakriya/krtindex/"+cp+".json").then(function(r){
+    fetch("../data/vedanga/vyakarana/prakriya/krtindex/"+cp+".json").then(function(r){
       return r.ok ? r.json() : null;
     }).then(function(m){
       var hit=m && m[w];

@@ -22,7 +22,9 @@
 (function () {
   'use strict';
 
-  var DATA = 'data/vedanga/vyakarana/';
+  // Page-relative to dge/vyakarana/rupasiddhi.html (Phase 10: moved one
+  // directory deeper than dge/ -- ../ reaches dge/data/).
+  var DATA = '../data/vedanga/vyakarana/';
   // Captured now, during evaluation — document.currentScript is null later,
   // and the wasm paths must resolve relative to this file, not the page.
   var SELF = (document.currentScript && document.currentScript.src) || location.href;

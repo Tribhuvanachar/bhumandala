@@ -1384,8 +1384,8 @@ window.dgeQuickJump = function(text) {
 // realSlug PREFIX so a future sibling under the same folder is covered
 // without a new entry.
 const DGE_SPECIAL_PAGES = [
-  { prefix: 'vedanga/vyakarana/dhatupatha', page: 'dhatu.html' },
-  { prefix: 'vedanga/vyakarana/shabdapatha', page: 'shabda.html' }
+  { prefix: 'vedanga/vyakarana/dhatupatha', page: 'vyakarana/dhatu.html' },
+  { prefix: 'vedanga/vyakarana/shabdapatha', page: 'vyakarana/shabda.html' }
 ];
 function dgeSpecialPageFor(realSlug) {
   const hit = DGE_SPECIAL_PAGES.find(function (e) {

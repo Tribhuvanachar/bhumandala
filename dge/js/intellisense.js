@@ -43,6 +43,25 @@
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
   window.DGE_VERSIONS['intellisense.js'] = 'v1.3 (selectedWord() now resolves the double-tap/double-click selection via ai.js\'s dgeRobustSelectedText() instead of the raw Selection string, for the same word-level tap-to-select fragility fix -- everything from v1.2 -- sūtra identification, word morphology, WordNet senses -- unchanged)';
 
+  // "Open in Aṣṭādhyāyī" needs a real cross-page URL: this script is loaded
+  // both by dge/index.html (the word-modal path) and by the Vyakarana-
+  // cluster pages themselves (dge/vyakarana/*.html) -- two different depths
+  // relative to dge/vyakarana/ashtadhyayi.html, so no single hardcoded
+  // relative string works for both includers. Same technique as
+  // dge-shell.js's LANDING_PAGE_URL: resolved off this script's own src
+  // (fixed at dge/js/intellisense.js) rather than the including page's
+  // location, captured synchronously while still document.currentScript.
+  var ASHTADHYAYI_URL = (function () {
+    var self = (document.currentScript && document.currentScript.src) ||
+               (window.DGE_SCRIPT_BASE || '');
+    try { return new URL('../vyakarana/ashtadhyayi.html', self).href; }
+    catch (e) { return 'vyakarana/ashtadhyayi.html'; } // fail soft, never throw
+  })();
+
+  // Kept as a named constant since the link markup below now builds its
+  // href from ASHTADHYAYI_URL rather than one hardcoded literal.
+  var DGE_SI_OPEN_LABEL = "Open in Aṣṭādhyāyī →";
+
   const self = (document.currentScript && document.currentScript.src) || '';
   function dataUrl(rel) {
     try { return new URL('../data/vedanga/vyakarana/ashtadhyayi/_index/' + rel, self).href; }
@@ -319,7 +338,7 @@
     }
     if (s.e) h += '<div class="dge-si-en">' + esc(s.e) + '</div>';
     h += '<div class="dge-si-actions">' +
-         '<a class="dge-si-go" href="ashtadhyayi.html#' + esc(s.id) + '">Open in Aṣṭādhyāyī →</a>' +
+         '<a class="dge-si-go" href="' + ASHTADHYAYI_URL + '#' + esc(s.id) + '">' + DGE_SI_OPEN_LABEL + '</a>' +
          '</div>';
     return h;
   }

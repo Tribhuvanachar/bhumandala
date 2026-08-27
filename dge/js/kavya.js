@@ -250,7 +250,7 @@
       // page), so every padaccheda word here was a dead link. shabda.html's
       // own ?q= deep link (shabda.js's boot()) pre-fills its search with
       // exactly this lemma, which is a real, working lookup.
-      a.href = "shabda.html?q=" + encodeURIComponent(
+      a.href = "../vyakarana/shabda.html?q=" + encodeURIComponent(
         (w.p && w.p[0] && w.p[0].lemma) || w.w);
       a.appendChild(el("span", "w", tr(w.w)));
       if (w.e) a.appendChild(el("span", "g", w.e));
@@ -304,7 +304,7 @@
       if (sh.chandas) {
         // the metre tag opens the analyzer with this very verse prefilled
         var chLink = el("a", "chandas-link", tr(sh.chandas));
-        chLink.href = "chandas.html?q=" + encodeURIComponent(sh.sanskrit_text || "");
+        chLink.href = "../vyakarana/chandas.html?q=" + encodeURIComponent(sh.sanskrit_text || "");
         chLink.title = "छन्दोविश्लेषणम् — laghu/guru breakdown of this verse";
         meta.appendChild(chLink);
       }

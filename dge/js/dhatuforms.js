@@ -9,8 +9,10 @@
  * ========================================================================== */
 (function () {
   "use strict";
-  var DHATU_URL = "data/vedanga/vyakarana/dhatupatha/data.json";
-  var FORMS_URL = "data/vedanga/vyakarana/dhatuforms/";
+  // Page-relative to dge/vyakarana/dhatuforms.html (Phase 10: moved one
+  // directory deeper than dge/ -- ../ reaches dge/data/).
+  var DHATU_URL = "../data/vedanga/vyakarana/dhatupatha/data.json";
+  var FORMS_URL = "../data/vedanga/vyakarana/dhatuforms/";
   var GANA={1:"भ्वादि",2:"अदादि",3:"जुहोत्यादि",4:"दिवादि",5:"स्वादि",6:"तुदादि",7:"रुधादि",8:"तनादि",9:"क्र्यादि",10:"चुरादि"};
 
   // display order; each entry is [ganaKey, padaKey, label]

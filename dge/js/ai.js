@@ -1414,7 +1414,7 @@ function dgeWireShabdaSubantaSteps(body, item, cellIndex) {
 function dgeShabdaNotFoundHtml(surface) {
   return '<div class="dsm-empty">No exact form found for "' + dgeShabdaEsc(surface) + '", ' +
     'and it doesn\'t look like a sandhi join Vidyut resolves either. ' +
-    'It may still be findable in the full word list — <a href="shabda.html?q=' + encodeURIComponent(surface) + '" target="_blank">search the full शब्दपाठः ↗</a>, or ' +
+    'It may still be findable in the full word list — <a href="vyakarana/shabda.html?q=' + encodeURIComponent(surface) + '" target="_blank">search the full शब्दपाठः ↗</a>, or ' +
     '<a href="#" id="dsmReportMissing">report this as missing</a>.</div>' +
     dgeShabdaWhereElseLink(surface);
 }
@@ -1434,7 +1434,7 @@ function dgeShabdaExactHtml(it, cellIndex) {
   // other cell in the table is tappable for its derivation too -- see
   // dgeWireShabdaSubantaSteps, called once this string is actually in the DOM.
   h += '<div id="dsmSteps"></div>';
-  h += '<a class="dsm-full-link" href="shabda.html#' + dgeShabdaEsc(it.id) + '" target="_blank">View in full शब्दपाठः browser ↗</a>';
+  h += '<a class="dsm-full-link" href="vyakarana/shabda.html#' + dgeShabdaEsc(it.id) + '" target="_blank">View in full शब्दपाठः browser ↗</a>';
   h += dgeShabdaWhereElseLink(it.word);
   return h;
 }
@@ -1457,7 +1457,7 @@ function dgeShabdaKrtHtml(surface, hit) {
       return '<div class="dsm-word deva">' + dgeShabdaEsc(surface) + '</div>' +
         '<div class="dsm-sub">कृदन्तः · ' + dgeShabdaEsc(DGE_KRT_NAME[krtKey] || krtKey) + ' (' + dgeShabdaEsc(DGE_KRT_NAME_EN[krtKey] || '') + ') · from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '"</div>' +
         dgeShabdaStepsHtml(k.s) +
-        '<a class="dsm-full-link" href="krdanta.html#' + dgeShabdaEsc(code) + ':' + dgeShabdaEsc(krtKey) + '" target="_blank">View in full कृदन्त browser ↗</a>' +
+        '<a class="dsm-full-link" href="vyakarana/krdanta.html#' + dgeShabdaEsc(code) + ':' + dgeShabdaEsc(krtKey) + '" target="_blank">View in full कृदन्त browser ↗</a>' +
         dgeShabdaWhereElseLink(surface);
     })
     .catch(() => null);
@@ -1744,7 +1744,7 @@ function dgeEnsureDhatuModal() {
 
 function dgeShowDhatuNotFound(body, surface) {
   body.innerHTML = '<div class="dsm-empty">No exact verb form found for "' + dgeShabdaEsc(surface) + '". ' +
-    'It may still be findable in the full धातुपाठः browser — <a href="dhatu.html?q=' + encodeURIComponent(surface) + '" target="_blank">search धातुपाठः ↗</a>, or ' +
+    'It may still be findable in the full धातुपाठः browser — <a href="vyakarana/dhatu.html?q=' + encodeURIComponent(surface) + '" target="_blank">search धातुपाठः ↗</a>, or ' +
     '<a href="#" id="ddmReportMissing">report this as missing</a>.</div>';
   const rep = document.getElementById('ddmReportMissing');
   if (rep) rep.addEventListener('click', function (e) {
@@ -1894,7 +1894,7 @@ window.dgeOpenDhatuForSelection = function(e) {
           '<div class="dsm-sub">from <span class="deva">' + dgeShabdaEsc(d.dhatu) + '</span> "' + dgeShabdaEsc(d.artha || '') + '" · गणः ' + dgeShabdaEsc(d.gana != null ? d.gana : '') + ' · ' + dgeShabdaEsc(d.pada || '') + '</div>' +
           dgeDhatuFormsHtml(d, hit.k) +
           '<div id="ddmSteps"></div>' +
-          '<a class="dsm-full-link" href="prakriya.html#' + dgeShabdaEsc(hit.c) + ':' + dgeShabdaEsc(hit.k) + '" target="_blank">View in full प्रक्रिया browser ↗</a>' +
+          '<a class="dsm-full-link" href="vyakarana/prakriya.html#' + dgeShabdaEsc(hit.c) + ':' + dgeShabdaEsc(hit.k) + '" target="_blank">View in full प्रक्रिया browser ↗</a>' +
           '<div id="ddmLexicon"></div>';
         dgeWireDhatuFormsTable(body, d, hit.k);
         dgeWithTimeout(dgeFetchDhatuLexicon(), 8000, null).then(function (byId) {

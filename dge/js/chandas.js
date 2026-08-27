@@ -284,7 +284,9 @@
         analyze();
       });
     });
-    fetch('data/vedanga/chandas/data.json')
+    // Page-relative to dge/vyakarana/chandas.html (Phase 10: moved one
+    // directory deeper than dge/ -- ../ reaches dge/data/).
+    fetch('../data/vedanga/chandas/data.json')
       .then(function (r) { return r.json(); })
       .then(function (d) {
         DB = d;

@@ -20,6 +20,22 @@
  * ========================================================================== */
 (function () {
   'use strict';
+
+  // Sutra-code links here need a real cross-page URL: this script is loaded
+  // both by dge/shabda.html (which moved into dge/vyakarana/, a sibling of
+  // ashtadhyayi.html) and by dge/index.html (the reader's word modal, one
+  // directory shallower) -- two different depths relative to
+  // dge/vyakarana/ashtadhyayi.html, so no single hardcoded relative string
+  // works for both includers. Same technique as dge-shell.js's
+  // LANDING_PAGE_URL: resolved off this script's own src (fixed at
+  // dge/js/subanta-steps.js) rather than the including page's location,
+  // captured synchronously while still document.currentScript.
+  var ASHTADHYAYI_URL = (function () {
+    var self = (document.currentScript && document.currentScript.src) ||
+               (window.DGE_SCRIPT_BASE || '');
+    try { return new URL('../vyakarana/ashtadhyayi.html', self).href; }
+    catch (e) { return 'vyakarana/ashtadhyayi.html'; } // fail soft, never throw
+  })();
   var SELF = (document.currentScript && document.currentScript.src) || location.href;
 
   /* ---- SLP1 -> Devanagari (same tables rupasiddhi.js uses) ---- */
@@ -140,7 +156,7 @@
       var code = st.rule.code, src = st.rule.source;
       var isSutra = src === 'ashtadhyayi' && /^\d\.\d\.\d{1,3}$/.test(code);
       var codeHtml = isSutra
-        ? '<a class="sst-code" href="ashtadhyayi.html#' + esc(code) + '" target="_blank" rel="noopener">' + esc(code) + '</a>'
+        ? '<a class="sst-code" href="' + ASHTADHYAYI_URL + '#' + esc(code) + '" target="_blank" rel="noopener">' + esc(code) + '</a>'
         : '<span class="sst-code sst-code-plain">' + esc(((RULE_SRC[src] || src) + ' ' + code).trim()) + '</span>';
       var terms = st.result.filter(function (t) { return t.text; })
         .map(function (t) {
