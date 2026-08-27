@@ -64,3 +64,6 @@ jobs:
 
       - name: Gold-Standard contract gate (validate_gold_standard.py)
         run: python3 tools/validate_gold_standard.py --scan-corpus --data dge/data
+
+      - name: Frontend redesign -- shared-chrome regression guard
+        run: python3 tools/redesign/audit_pages.py --check

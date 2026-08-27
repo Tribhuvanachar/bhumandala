@@ -1,0 +1,403 @@
+{
+ "page_count": 29,
+ "pages": [
+  {
+   "path": "index.html",
+   "gated": false,
+   "first_head_script": null,
+   "vandana_guard_first": null,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/home.css",
+    "dge/css/content-inline.css"
+   ],
+   "title": "Sarvamūla Digital Library"
+  },
+  {
+   "path": "dge/ashtadhyayi.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/vyakarana-base.css",
+    "css/ashtadhyayi.css",
+    "css/intellisense.css"
+   ],
+   "title": "अष्टाध्यायी · DGE व्याकरणम्"
+  },
+  {
+   "path": "dge/audio.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Harikathamritasara - Mangalacharana Sandhi"
+  },
+  {
+   "path": "dge/chandas.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/vyakarana-base.css",
+    "css/vyakarana.css",
+    "css/rupasiddhi.css",
+    "css/chandas.css"
+   ],
+   "title": "छन्दोविश्लेषणम् — DGE"
+  },
+  {
+   "path": "dge/convert/index.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "style.css"
+   ],
+   "title": "DGE Convert v0.35.0"
+  },
+  {
+   "path": "dge/dasa_sahitya.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/dasa-sahitya.css"
+   ],
+   "title": "ದಾಸ ಸಾಹಿತ್ಯ · Dāsa Sāhitya — DGE"
+  },
+  {
+   "path": "dge/dhatu.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/vyakarana-base.css",
+    "css/vyakarana.css",
+    "css/intellisense.css"
+   ],
+   "title": "धातुपाठः · DGE व्याकरणम्"
+  },
+  {
+   "path": "dge/dhatuforms.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/vyakarana-base.css",
+    "css/vyakarana.css",
+    "css/dhatuforms.css"
+   ],
+   "title": "रूपाणि · लकाराः — DGE व्याकरणम्"
+  },
+  {
+   "path": "dge/dvaitavedanta-status.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "DvaitaVedanta Extraction · DGE"
+  },
+  {
+   "path": "dge/gita.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Gita Viewer"
+  },
+  {
+   "path": "dge/guru-parampara/index.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "../css/vyakarana-base.css",
+    "../css/guru-parampara.css"
+   ],
+   "title": "Guru Parampara — Madhva (Dvaita) Lineage · DGE"
+  },
+  {
+   "path": "dge/guru-parampara/lineage-2d.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "../css/vyakarana-base.css"
+   ],
+   "title": "Guru Parampara — Madhva (Dvaita) Lineage Tree"
+  },
+  {
+   "path": "dge/guru-parampara/lineage-3d.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "../css/vyakarana-base.css"
+   ],
+   "title": "Guru Parampara — 3D Lineage Showcase"
+  },
+  {
+   "path": "dge/guru-parampara/tracker.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "../css/vyakarana-base.css"
+   ],
+   "title": "Guru Parampara — Data Completeness Tracker"
+  },
+  {
+   "path": "dge/index.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": true,
+   "has_modals_js": true,
+   "css_links": [
+    "css/main.css",
+    "css/intellisense.css",
+    "css/footnotes.css",
+    "css/content-inline.css",
+    "css/tour.css"
+   ],
+   "title": "Sarvamoola Digital Library"
+  },
+  {
+   "path": "dge/kavya.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/kavya.css"
+   ],
+   "title": "काव्यानि — DGE"
+  },
+  {
+   "path": "dge/krdanta.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/vyakarana-base.css",
+    "css/vyakarana.css",
+    "css/prakriya.css",
+    "css/intellisense.css"
+   ],
+   "title": "कृदन्त रूपाणि — DGE व्याकरणम्"
+  },
+  {
+   "path": "dge/legacy/PrahladaKrutaNarasimhaStotra.html",
+   "gated": true,
+   "first_head_script": "sanscript.min.js",
+   "vandana_guard_first": false,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [],
+   "title": "Bhagavata Digital Library"
+  },
+  {
+   "path": "dge/prakriya.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/vyakarana-base.css",
+    "css/vyakarana.css",
+    "css/prakriya.css",
+    "css/intellisense.css"
+   ],
+   "title": "प्रक्रिया · तिङन्त — DGE व्याकरणम्"
+  },
+  {
+   "path": "dge/rupasiddhi.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/vyakarana-base.css",
+    "css/vyakarana.css",
+    "css/prakriya.css",
+    "css/dhatuforms.css",
+    "css/rupasiddhi.css",
+    "css/intellisense.css"
+   ],
+   "title": "रूपसिद्धिः — DGE व्याकरणम्"
+  },
+  {
+   "path": "dge/shabda.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/vyakarana-base.css",
+    "css/vyakarana.css",
+    "css/dhatuforms.css"
+   ],
+   "title": "शब्दपाठः · DGE व्याकरणम्"
+  },
+  {
+   "path": "dge/tirtha/index.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": true,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "../css/vyakarana-base.css",
+    "../css/tirtha.css"
+   ],
+   "title": "Tīrtha Prabandha — Holy Places Database"
+  },
+  {
+   "path": "admin/ashtadhyayi.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/ashtadhyayi.css"
+   ],
+   "title": "Ashtadhyayi Manager · DGE (super-admin)"
+  },
+  {
+   "path": "admin/audio.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/audio.css"
+   ],
+   "title": "Audio Admin · DGE (restricted)"
+  },
+  {
+   "path": "admin/dasa-capture.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/dasa-capture.css"
+   ],
+   "title": "Dasa Sahitya — Capture &amp; Progress — DGE"
+  },
+  {
+   "path": "admin/holy-places.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/holy-places.css"
+   ],
+   "title": "Holy Places Curation · DGE Guru Parampara (super-admin)"
+  },
+  {
+   "path": "admin/kosha.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/kosha.css"
+   ],
+   "title": "Kosha Manager · DGE (super-admin)"
+  },
+  {
+   "path": "admin/library.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/library.css"
+   ],
+   "title": "Library Manager · DGE (super-admin)"
+  },
+  {
+   "path": "admin/workflows.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/workflows.css"
+   ],
+   "title": "Run a workflow · DGE (admin)"
+  }
+ ]
+}
