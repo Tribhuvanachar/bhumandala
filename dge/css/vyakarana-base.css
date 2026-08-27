@@ -31,6 +31,13 @@
    skipped by oversight.
    ========================================================================= */
 
+/* Phase 1 of the frontend redesign: this bridge aliases --bg/--panel/etc
+   onto tokens.css's canonical vocabulary. It is inert today (each page's
+   own vyakarana.css/ashtadhyayi.css still defines these itself, later in
+   the cascade, and wins) -- see tokens-vyakarana-bridge.css's own header
+   comment for why it's here now anyway and when it becomes load-bearing. */
+@import url("tokens-vyakarana-bridge.css");
+
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);line-height:1.55;
   font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;transition:background .3s,color .3s}

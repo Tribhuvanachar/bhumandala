@@ -3,94 +3,14 @@
    (Traditional / Minimal / Vibrant / Dark Glass)
    Everything below the token blocks reads from CSS variables only, so a
    theme switch is just swapping which variable block is active on <body>.
+
+   Token *values* moved to tokens.css (Phase 1 of the frontend redesign) so
+   the same canonical vocabulary can be shared by pages outside the reader
+   without duplicating this block — this import is a pure hoist, byte-for-
+   byte identical values, zero visual change. Edit tokens.css, not here.
    ========================================================================= */
 
-:root {
-  /* Shared, theme-agnostic tokens */
-  --radius-xs: 8px;
-  --radius-sm: 12px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
-  --radius-pill: 999px;
-  --shadow-xs: 0 1px 3px rgba(0,0,0,0.05);
-  --shadow-sm: 0 4px 14px rgba(0,0,0,0.07);
-  --shadow-md: 0 10px 30px rgba(0,0,0,0.12);
-  --shadow-lg: 0 20px 50px rgba(0,0,0,0.22);
-  --ease: cubic-bezier(.4,0,.2,1);
-  --t-fast: 0.15s;
-  --t-med: 0.25s;
-  --font-multiplier: 18px;
-  --font-sanskrit: 'Tiro Devanagari Sanskrit', 'Noto Sans Devanagari', 'Noto Serif Devanagari', serif;
-  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-
-  /* Vandana palette — the default, and also the pre-JS fallback so the first
-     paint does not flash cream before restorePrefs() runs. */
-  --bg-main: #0B0907; --card-bg: rgba(32,27,23,0.55); --card-border: rgba(232,178,77,0.14);
-  --card-active: rgba(242,130,12,0.16); --text-primary: #F3E7D4; --text-sanskrit: #FFB24D;
-  --accent-red: #E2664A; --accent-gold: #E8B24D; --panel-bg: rgba(20,16,12,0.92);
-  --top-bar-bg: rgba(11,9,7,0.78); --top-bar-border: rgba(232,178,77,0.16);
-  --glass-blur: 18px; --accent-glow: rgba(232,178,77,0.34);
-  --muted-text: #8B7A63;
-}
-
-/* --- Theme: Traditional (warm, refined) --- */
-body.theme-traditional {
-  --bg-main: #FAF3E6; --card-bg: #ffffff; --card-border: #E9DCC3;
-  --card-active: #FCE9DE; --text-primary: #2B2119; --text-sanskrit: #9A1B1B;
-  --accent-red: #AE231F; --accent-gold: #B9821F; --panel-bg: #ffffff;
-  --top-bar-bg: rgba(255,253,249,0.90); --top-bar-border: #EEE3CB;
-  --glass-blur: 10px; --accent-glow: rgba(174,35,31,0.22);
-  --muted-text: #8a7a63;
-}
-
-/* --- Theme: Minimal & Modern (clean, restrained, flat) --- */
-body.theme-minimal {
-  --bg-main: #F7F7F5; --card-bg: #ffffff; --card-border: #E7E7E3;
-  --card-active: #F0EFEC; --text-primary: #1D1C1A; --text-sanskrit: #55433C;
-  --accent-red: #A6433D; --accent-gold: #9C8A5E; --panel-bg: #ffffff;
-  --top-bar-bg: rgba(255,255,255,0.92); --top-bar-border: #ECECE8;
-  --glass-blur: 0px; --accent-glow: rgba(0,0,0,0);
-  --muted-text: #8b8b85;
-}
-
-/* --- Theme: Vibrant, temple-inspired (saturated saffron / maroon / gold) --- */
-body.theme-vibrant {
-  --bg-main: #FDEBD3; --card-bg: #FFFDF8; --card-border: #F0C36D;
-  --card-active: #FFDCB0; --text-primary: #3A1408; --text-sanskrit: #D93A1F;
-  --accent-red: #E0431F; --accent-gold: #D9A521; --panel-bg: #FFFDF8;
-  --top-bar-bg: rgba(255,246,232,0.90); --top-bar-border: #F0C36D;
-  --glass-blur: 6px; --accent-glow: rgba(224,67,31,0.35);
-  --muted-text: #8a5a2e;
-}
-
-/* --- Theme: Dark Glass Premium (frosted, glowing accent) --- */
-body.theme-darkglass, body.dark-mode {
-  --bg-main: #0E0C0B; --card-bg: rgba(32,27,23,0.6); --card-border: rgba(255,255,255,0.08);
-  --card-active: rgba(232,160,80,0.14); --text-primary: #EDE2D3; --text-sanskrit: #E8A067;
-  --accent-red: #E2664A; --accent-gold: #E8B24D; --panel-bg: rgba(24,20,17,0.65);
-  --top-bar-bg: rgba(14,12,11,0.55); --top-bar-border: rgba(255,255,255,0.08);
-  --glass-blur: 22px; --accent-glow: rgba(232,178,77,0.35);
-  --muted-text: #b6a892;
-}
-
-/* Vandana comes after Dark Glass deliberately: it also carries the
-   .dark-mode class, so that the component rules keyed off dark-mode
-   apply — but its own variables have to win the cascade. */
-/* --- Theme: Vandana (default) ---
-   The palette of the landing page, so crossing from the vandana into the
-   library is not a change of scenery. Warm near-black ground, saffron and
-   gold from the portrait itself; deliberately never pure black, which kills
-   the glow. The four themes below remain selectable for anyone who prefers
-   to read on cream. */
-body.theme-vandana {
-  --bg-main: #0B0907; --card-bg: rgba(32,27,23,0.55); --card-border: rgba(232,178,77,0.14);
-  --card-active: rgba(242,130,12,0.16); --text-primary: #F3E7D4; --text-sanskrit: #FFB24D;
-  --accent-red: #E2664A; --accent-gold: #E8B24D; --panel-bg: rgba(20,16,12,0.92);
-  --top-bar-bg: rgba(11,9,7,0.78); --top-bar-border: rgba(232,178,77,0.16);
-  --glass-blur: 18px; --accent-glow: rgba(232,178,77,0.34);
-  --muted-text: #8B7A63;
-}
-
+@import url("tokens.css");
 
 * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
 input[type="checkbox"], input[type="range"] { accent-color: var(--accent-red); }
