@@ -105,7 +105,12 @@ jobs:
             echo ""
             tail -n 20 /tmp/drift.md
           } >> /tmp/report.md
-          if grep -qE 'DRIFT|MISSING|PAGE_EMPTY' /tmp/drift.md; then
+          # Colon-anchored on the summary block: verify_source_content's
+          # summary lists a status ONLY when its count is nonzero, while the
+          # progress lines always carry "DRIFT=0 MISSING=0 ..." — grepping the
+          # bare words matched those zeros and opened a false-alarm issue on
+          # the very first clean run (#144).
+          if grep -qE '^[[:space:]]+(DRIFT|MISSING|PAGE_EMPTY):' /tmp/drift.md; then
             echo "drifted=true" >> "$GITHUB_OUTPUT"
           else
             echo "drifted=false" >> "$GITHUB_OUTPUT"
