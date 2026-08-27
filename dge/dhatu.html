@@ -22,7 +22,7 @@
       data-intellisense-search="#dh-search">
 <header>
   <div class="bar">
-    <div class="brand"><a href="index.html" title="DGE Home">⌂ DGE</a><span>›</span><span class="deva">धातुपाठः</span></div>
+    <dge-breadcrumb label="धातुपाठः" deva></dge-breadcrumb>
     <div class="spacer"></div>
     <input class="search" id="dh-search" placeholder="search धातु / artha / roman…" autocomplete="off">
     <div class="ctl" id="dh-scriptSeg">
@@ -86,14 +86,16 @@
   <p class="note">धातुपाठः · DGE · click a root to expand — प्रक्रिया opens its step-by-step derivation, and 🔍 corpus occurrences finds every place it appears in the library. Each root is deep-linkable via <code>#code</code>.</p>
 </main>
 
-<!-- Filled by site-footer.js, shared with the landing page and reader
-     (see that file's own header comment). -->
-<div class="site-footer-links" id="siteFooterLinks"></div>
+<!-- Phase 6 of the frontend redesign: <dge-footer> (dge-shell.js) --
+     same link sets/behavior as site-footer.js, see that file's own
+     header comment. -->
+<dge-footer></dge-footer>
 
 <script src="js/dge-normalize.js?v=1"></script>
 <script src="js/dge-search.js?v=1"></script>
 <script src="js/global-search.js?v=4.68.0"></script>
-<script src="js/site-footer.js?v=1"></script>
+<script src="js/dge-shell.js?v=1"></script>
+<script src="js/dge-breadcrumb.js?v=1"></script>
 <script src="js/dhatu.js?v=1.2.0"></script>
 <script src="js/intellisense.js?v=4.65.0"></script>
 </body>

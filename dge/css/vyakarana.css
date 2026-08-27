@@ -10,16 +10,19 @@
    header, .ctl, .icon, the bare input/select look, .crumbs, .btn.ai,
    .btn:hover, .spacer, .brand a/.brand span) now lives in
    vyakarana-base.css, loaded before this file on every page that includes
-   it — see that file's own header comment for what's still intentionally
-   kept page-local (:root/body.dark, .hero) and why.
+   it. Phase 6 of the frontend redesign: --bg/--panel/--panel2/--ink/
+   --muted/--line/--accent/--gold/--shadow/--radius (this page's own
+   copies of the bridged vocabulary) removed from the block below -- they
+   now resolve from tokens-vyakarana-bridge.css (loaded by
+   vyakarana-base.css), which was inert until this page's own duplicate
+   was deleted. --accent2/--p/--a/--u are genuinely page-local (not part
+   of the bridge) and stay here.
    ========================================================================= */
 
-  :root{--bg:#f5efe4;--panel:#fffdf8;--panel2:#fbf4e7;--ink:#2b2117;--muted:#8b7c66;
-    --line:#e6dac6;--accent:#9a3b1b;--accent2:#1f6f5c;--gold:#b6862c;
-    --p:#1d5fa8;--a:#9a3b1b;--u:#7a5a1b;--shadow:0 2px 16px rgba(90,60,20,.10);--radius:16px}
-  body.dark{--bg:#14161c;--panel:#1b1f27;--panel2:#20242f;--ink:#e9e3d5;--muted:#98a0b2;
-    --line:#2b3140;--accent:#e0794b;--accent2:#5bb894;--gold:#e0b25a;
-    --p:#5aa0e6;--a:#e0794b;--u:#c79a4a;--shadow:0 6px 26px rgba(0,0,0,.4)}
+  :root{--accent2:#1f6f5c;
+    --p:#1d5fa8;--a:#9a3b1b;--u:#7a5a1b}
+  body.dark{--accent2:#5bb894;
+    --p:#5aa0e6;--a:#e0794b;--u:#c79a4a}
   .bar{max-width:1100px;margin:0 auto;padding:9px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
   .search{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:7px 12px;color:var(--ink);font:inherit;font-size:14px;min-width:150px;flex:1}
   main{max-width:1100px;margin:0 auto;padding:16px 14px 120px}

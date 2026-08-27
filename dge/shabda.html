@@ -17,7 +17,7 @@
 <body>
 <header>
   <div class="bar">
-    <div class="brand"><a href="index.html" title="DGE Home">⌂ DGE</a><span>›</span><span class="deva">शब्दपाठः</span></div>
+    <dge-breadcrumb label="शब्दपाठः" deva></dge-breadcrumb>
     <div class="spacer"></div>
     <input class="search" id="sh-search" placeholder="search शब्द / artha / roman…" autocomplete="off">
     <div class="ctl" id="sh-scriptSeg">
@@ -75,12 +75,14 @@
   <p class="note" style="opacity:.6;">Data: <a href="https://github.com/ashtadhyayi-com/data" target="_blank" rel="noopener">ashtadhyayi-com/data</a>, used with credit per its README.</p>
 </main>
 
-<!-- Filled by site-footer.js, shared with the landing page and reader
-     (see that file's own header comment). -->
-<div class="site-footer-links" id="siteFooterLinks"></div>
+<!-- Phase 6 of the frontend redesign: <dge-footer> (dge-shell.js) --
+     same link sets/behavior as site-footer.js, see that file's own
+     header comment. -->
+<dge-footer></dge-footer>
 
 <script src="js/subanta-steps.js?v=1"></script>
-<script src="js/site-footer.js?v=1"></script>
+<script src="js/dge-shell.js?v=1"></script>
+<script src="js/dge-breadcrumb.js?v=1"></script>
 <script src="js/shabda.js?v=3"></script>
 </body>
 </html>

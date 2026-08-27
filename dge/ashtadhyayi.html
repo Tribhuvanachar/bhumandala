@@ -37,7 +37,7 @@
      own click handlers in ashtadhyayi.js needed touching. -->
 <header>
   <div class="bar">
-    <div class="brand"><a href="index.html" title="DGE Home">⌂ DGE</a><span>›</span><span class="deva">अष्टाध्यायी</span></div>
+    <dge-breadcrumb label="अष्टाध्यायी" deva></dge-breadcrumb>
     <div class="spacer"></div>
     <input class="jump" id="dge-jump" placeholder="1.1.1" list="dge-sutralist" title="jump to sutra">
     <datalist id="dge-sutralist"></datalist>
@@ -129,9 +129,10 @@
   </nav>
 </main>
 
-<!-- Filled by site-footer.js, shared with the landing page and reader
-     (see that file's own header comment). -->
-<div class="site-footer-links" id="siteFooterLinks"></div>
+<!-- Phase 6 of the frontend redesign: <dge-footer> (dge-shell.js) --
+     same link sets/behavior as site-footer.js, see that file's own
+     header comment. -->
+<dge-footer></dge-footer>
 
 <div class="backdrop" id="dge-backdrop"></div>
 
@@ -192,7 +193,8 @@
 </div>
 
 <script src="js/gemini.js?v=1.2.1"></script>
-<script src="js/site-footer.js?v=1"></script>
+<script src="js/dge-shell.js?v=1"></script>
+<script src="js/dge-breadcrumb.js?v=1"></script>
 <script src="js/ashtadhyayi.js?v=1.7.0"></script>
 <script>
 /* populate the sutra jump datalist once data is present */

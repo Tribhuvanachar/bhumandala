@@ -21,7 +21,7 @@
       data-intellisense-roots="#rs-drawerBody">
 <header>
   <div class="bar">
-    <div class="brand"><a href="index.html" title="DGE Home">⌂ DGE</a><span>›</span><a href="dhatu.html" class="deva">धातुपाठः</a><span>›</span><span class="deva">रूपसिद्धिः</span></div>
+    <dge-breadcrumb parent-label="धातुपाठः" parent-href="dhatu.html" label="रूपसिद्धिः" deva></dge-breadcrumb>
     <div class="spacer"></div>
     <button class="icon" id="themeBtn" title="Light / dark">◐</button>
   </div>
@@ -31,11 +31,13 @@
   <div id="root"></div>
 </main>
 
-<!-- Filled by site-footer.js, shared with the landing page and reader
-     (see that file's own header comment). -->
-<div class="site-footer-links" id="siteFooterLinks"></div>
+<!-- Phase 6 of the frontend redesign: <dge-footer> (dge-shell.js) --
+     same link sets/behavior as site-footer.js, see that file's own
+     header comment. -->
+<dge-footer></dge-footer>
 
-<script src="js/site-footer.js?v=1"></script>
+<script src="js/dge-shell.js?v=1"></script>
+<script src="js/dge-breadcrumb.js?v=1"></script>
 <script src="js/rupasiddhi.js?v=1"></script>
 <!-- Sutra references inside derivation steps become tappable. -->
 <script src="js/intellisense.js?v=4.65.0"></script>

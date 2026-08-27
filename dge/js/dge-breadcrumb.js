@@ -57,12 +57,13 @@
       var label = this.getAttribute('label') || '';
       var isDeva = this.hasAttribute('deva');
 
+      var parentClass = isDeva ? ' class="deva"' : '';
       var html = '<a href="' + esc(homeHref) + '" title="DGE Home">' + esc(homeLabel) + '</a>';
       if (parentLabel) {
         html += '<span>›</span>';
         html += parentHref
-          ? '<a href="' + esc(parentHref) + '">' + esc(parentLabel) + '</a>'
-          : '<span>' + esc(parentLabel) + '</span>';
+          ? '<a href="' + esc(parentHref) + '"' + parentClass + '>' + esc(parentLabel) + '</a>'
+          : '<span' + parentClass + '>' + esc(parentLabel) + '</span>';
       }
       html += '<span>›</span>';
       html += isDeva
