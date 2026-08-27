@@ -46,7 +46,7 @@
   <div class="enrich" id="enrich"></div>
 
   <div class="warn" id="licnote"></div>
-  <p class="muted" style="margin-top:14px">Coverage counts are read live from each layer's <code>data.json</code>. “Cleared (PD)” = public domain; “Permitted (curator)” = used under the ashtadhyayi.com curator's e-mail permission for non-commercial/educational use (source repo has no formal LICENSE) — keep attribution, resolve before public launch; “Verify” = sourced from the project lead's own StarDict dictionaries, edition/source not yet confirmed against a public copy. Licence resolution is a project-lead decision — this page only surfaces the status. <b>Update, 23 Aug:</b> the English gloss field (<code>sutrartha_english.txt</code>) has been disabled and its data removed from <code>sutrapatha/data.json</code> — it was the one field shown to readers with no attribution at all. Everything else on this page (Kashika, Siddhānta-Kaumudī, Mahābhāṣya, Bālamanoramā, Tattvabodhinī, Nyāsa, Vasu) is unaffected.</p>
+  <p class="muted" style="margin-top:14px">Coverage counts are read live from each layer's <code>data.json</code>. “Cleared (PD)” = public domain; “Permitted (curator)” = used under the ashtadhyayi.com curator's e-mail permission for non-commercial/educational use (source repo has no formal LICENSE) — keep attribution, resolve before public launch; “Verify” = not yet investigated against any public copy. Where a card shows a “Provenance evidence” expander, a real investigation happened and left a citable trail (exact source repo/commit, matched passages) — expand it to see exactly what was checked and what, if anything, is still unconfirmed. Licence resolution is a project-lead decision — this page only surfaces the status. <b>Update, 27 Aug:</b> Kashika, Nyāsa, Bālamanoramā and Tattvabodhinī were traced to a specific upstream (<code>github.com/indic-dict/stardict-sanskrit-vyAkaraNa</code>), confirmed public domain by byte-for-byte text match including reproduced source-file artifacts — moved from “Verify” to “Cleared (PD)”; the specific printed edition each was originally digitized from is still unidentified (does not affect PD status). Siddhānta-Kaumudī and Mahābhāṣya remain unresolved — no record of the claimed curator permission could be found in this repo beyond an unverified note, and ashtadhyayi.com's source repo still has no formal licence. This admin page's own layer paths for those two were also found and fixed — they pointed at a directory removed in an earlier taxonomy reorganisation, so this page previously couldn't load their data or status at all. <b>Earlier, 23 Aug:</b> the English gloss field (<code>sutrartha_english.txt</code>) was disabled and its data removed from <code>sutrapatha/data.json</code> — it was the one field shown to readers with no attribution at all. Vasu is unaffected by any of this.</p>
 </main>
 
 <script>
@@ -64,8 +64,8 @@
   // layer registry — mirrors ashtadhyayi.js META/ORDER + the two ancillary leaves
   var LAYERS=[
     {key:"kashika",           t:"काशिकावृत्तिः",   sub:"Kāśikā-vṛtti",     who:"Vāmana–Jayāditya",  role:"tika",        tag:"var(--k)",  path:"../dge/data/vedanga/vyakarana/ashtadhyayi/kashika/data.json"},
-    {key:"siddhanta_kaumudi", t:"सिद्धान्तकौमुदी", sub:"Siddhānta-Kaumudī",who:"Bhaṭṭoji Dīkṣita",  role:"tika",        tag:"var(--sk)", path:"../dge/data/vedanga/vyakarana/paniniya_vyakarana/siddhanta_kaumudi/data.json"},
-    {key:"mahabhashya",       t:"महाभाष्यम्",      sub:"Mahā-bhāṣya",      who:"Patañjali",         role:"bhāṣya",      tag:"var(--mb)", path:"../dge/data/vedanga/vyakarana/paniniya_vyakarana/mahabhashya_patanjali/data.json"},
+    {key:"siddhanta_kaumudi", t:"सिद्धान्तकौमुदी", sub:"Siddhānta-Kaumudī",who:"Bhaṭṭoji Dīkṣita",  role:"tika",        tag:"var(--sk)", path:"../dge/data/vedanga/vyakarana/ashtadhyayi/siddhanta_kaumudi/data.json"},
+    {key:"mahabhashya",       t:"महाभाष्यम्",      sub:"Mahā-bhāṣya",      who:"Patañjali",         role:"bhāṣya",      tag:"var(--mb)", path:"../dge/data/vedanga/vyakarana/ashtadhyayi/mahabhashya_patanjali/data.json"},
     {key:"balamanorama",      t:"बालमनोरमा",       sub:"Bāla-manoramā",    who:"Vāsudeva Dīkṣita",  role:"tippani",     tag:"var(--b)",  path:"../dge/data/vedanga/vyakarana/ashtadhyayi/balamanorama/data.json"},
     {key:"tattvabodhini",     t:"तत्त्वबोधिनी",    sub:"Tattva-bodhinī",   who:"Jñānendra Sarasvatī",role:"tippani",    tag:"var(--t)",  path:"../dge/data/vedanga/vyakarana/ashtadhyayi/tattvabodhini/data.json"},
     {key:"nyasa",             t:"न्यासः",          sub:"Nyāsa",            who:"Jinendrabuddhi",    role:"tippani",     tag:"var(--n)",  path:"../dge/data/vedanga/vyakarana/ashtadhyayi/nyasa/data.json"},
@@ -176,12 +176,20 @@
   function renderTotals(res, total){
     var loaded=res.filter(function(r){return r.n>0;}).length;
     var pending=LAYERS.length-loaded+PENDING.length;
-    var toVerify=res.filter(function(r){return r.n>0 && licBadge(r.meta&&r.meta.licence).cls==="verify";}).length;
+    // "Needing licence review" = still bare "verify" (never investigated)
+    // OR the licence text itself says to resolve before launch -- a layer
+    // that's Public Domain with cited evidence does NOT need review even
+    // though its exact print edition is unconfirmed (see licence_note).
+    var needingReview=res.filter(function(r){
+      if(!(r.n>0) || !r.meta) return false;
+      if(r.meta.licence_note) return false;
+      return licBadge(r.meta.licence).cls==="verify" || /resolve before/i.test(r.meta.licence||"");
+    }).length;
     $("#totals").innerHTML=
       stat(loaded+" / "+LAYERS.length, "text layers populated")+
       stat(total.toLocaleString(), "sūtras (canonical)")+
       stat(pending, "layers pending")+
-      stat(toVerify, "layers needing licence review");
+      stat(needingReview, "layers needing licence review");
   }
   function stat(b,s){ return '<div class="stat"><b>'+b+'</b><span>'+s+'</span></div>'; }
 
@@ -202,6 +210,7 @@
         +'<span class="badge '+lb.cls+'">'+lb.txt+'</span></div>'
         +(r.meta&&r.meta.source?'<div class="src">source: '+esc(r.meta.source)+'</div>':(r.err?'<div class="src">⚠ file not found at '+esc(L.path)+'</div>':''))
         +(r.meta&&r.meta.licence?'<div class="lic">licence: '+esc(r.meta.licence)+'</div>':'')
+        +(r.meta&&r.meta.licence_note?'<details class="licnote-detail"><summary>Provenance evidence</summary><div>'+esc(r.meta.licence_note)+'</div></details>':'')
         +'</div>';
     }).join("");
     html+=PENDING.map(function(p){
@@ -214,10 +223,37 @@
       b.onclick=function(e){ e.stopPropagation(); toggleLayer(b.getAttribute("data-vis-layer")); };
     });
 
-    var verifyList=res.filter(function(r){return r.n>0 && licBadge(r.meta&&r.meta.licence).cls==="verify";}).map(function(r){return r.L.sub;});
-    $("#licnote").innerHTML = verifyList.length
-      ? '⚠ <b>Licence review needed</b> for: '+verifyList.join(", ")+'. These were sourced from the project lead\'s own StarDict dictionaries and are tagged <code>licence: verify</code> — edition/source not yet confirmed against a public copy. Not treated as cleared.'
-      : 'All populated layers carry a public-domain or curator-permission licence note. Confirm attribution before public launch.';
+    // Three buckets, read live from each layer's own licence text (not
+    // hardcoded by key) so this stays accurate as fields change:
+    //  - resolvedWithEvidence: carries a licence_note (a provenance
+    //    investigation actually happened and left a citable trail)
+    //  - needsResolution: licence text itself says so ("resolve before
+    //    public launch" / "resolve before"), regardless of wording
+    //  - stillVerify: the old bare licBadge()==="verify" case, kept as a
+    //    fallback for any future layer that hasn't been looked at at all
+    var populated=res.filter(function(r){return r.n>0;});
+    var resolvedWithEvidence=populated.filter(function(r){return r.meta&&r.meta.licence_note;});
+    var needsResolution=populated.filter(function(r){return r.meta&&/resolve before/i.test(r.meta.licence||"");});
+    var stillVerify=populated.filter(function(r){return licBadge(r.meta&&r.meta.licence).cls==="verify" && !(r.meta&&r.meta.licence_note);});
+    // "Layers of concern" = ever flagged as needing investigation (either
+    // already resolved with cited evidence, or still explicitly unresolved)
+    // -- excludes layers like Vasu that were public-domain-clean from the
+    // start and never carried a licence question, so this count matches
+    // "N / M layers of concern", not "N / all populated layers".
+    var ofConcern=resolvedWithEvidence.length+needsResolution.length+stillVerify.length;
+
+    var parts=[];
+    parts.push('<b>'+resolvedWithEvidence.length+' / '+ofConcern+' layers flagged for licence review are now resolved</b> with cited evidence (public domain — see "Provenance evidence" on each card): '
+      +(resolvedWithEvidence.length ? resolvedWithEvidence.map(function(r){return r.L.sub;}).join(", ") : "none yet")+'.');
+    if(needsResolution.length){
+      parts.push('⚠ <b>Still unresolved, needs action before public launch:</b> '
+        +needsResolution.map(function(r){return r.L.sub;}).join(", ")
+        +' — used under an informal e-mail permission with no formal licence on the source repo; see the licence text on each card for exactly what\'s missing.');
+    }
+    if(stillVerify.length){
+      parts.push('⚠ <b>Not yet investigated:</b> '+stillVerify.map(function(r){return r.L.sub;}).join(", ")+'.');
+    }
+    $("#licnote").innerHTML = parts.join(' ');
   }
 
   function renderEnrichment(sutras, total){
