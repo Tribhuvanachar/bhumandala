@@ -1156,6 +1156,27 @@ const DGE_VIEW_BY_FACETS = {
   purana_class: {
     label: 'पुराणवर्गः', extract: f => f && f.purana_class,
     values: { mahapurana: 'महापुराणम्', upapurana: 'उपपुराणम्', disputed: 'विवादास्पदम्', regional: 'प्रादेशिकम्' }
+  },
+  // "By Author" (27 Aug 2026, Phase 7) -- reuses each data.json's own
+  // default_author field (already read by tools/audit_library.py for
+  // taxonomy_add()'s _default_author, now also copied into facets by
+  // derive_facets()). No values map: like genre, author names are free
+  // text, shown via dgeToActiveScript's transliteration same as any other
+  // unmapped group label. Known, disclosed limitation: the corpus writes
+  // the same person's name in different scripts across files (e.g.
+  // "Sri Madhvacharya" vs. "श्रीमदानन्दतीर्थभगवत्पादाचार्यः", his diksha
+  // name) with no canonical-name table yet, so those surface as separate
+  // groups rather than one -- a later pass, not this one. "unspecified"
+  // (~230 files with no author recorded) is folded into the same
+  // not-specified sink every other facet uses, rather than showing as its
+  // own literal group.
+  default_author: {
+    label: 'ग्रन्थकर्ता',
+    extract: f => {
+      const a = f && f.default_author;
+      return (a && String(a).trim().toLowerCase() !== 'unspecified') ? a : undefined;
+    },
+    values: {}
   }
 };
 const DGE_VIEW_BY_NOT_SPECIFIED = 'not_specified';

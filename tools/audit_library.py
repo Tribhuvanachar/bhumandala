@@ -55,7 +55,7 @@ def item_count(payload):
 
 
 FACET_KEYS = ("genre", "guna_classification", "ratnatraya", "madhvacharya_relevance", "text_status",
-              "purana_class", "traditional_lists")
+              "purana_class", "traditional_lists", "default_author")
 
 
 def derive_source(payload):
