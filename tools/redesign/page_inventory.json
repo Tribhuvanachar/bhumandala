@@ -6,7 +6,7 @@
    "gated": false,
    "first_head_script": null,
    "vandana_guard_first": null,
-   "has_site_footer_js": true,
+   "has_site_footer_js": false,
    "has_ai_js": false,
    "has_modals_js": false,
    "css_links": [
