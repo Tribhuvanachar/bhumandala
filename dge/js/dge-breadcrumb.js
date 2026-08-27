@@ -60,12 +60,12 @@
       var parentClass = isDeva ? ' class="deva"' : '';
       var html = '<a href="' + esc(homeHref) + '" title="DGE Home">' + esc(homeLabel) + '</a>';
       if (parentLabel) {
-        html += '<span>›</span>';
+        html += '<span aria-hidden="true">›</span>';
         html += parentHref
           ? '<a href="' + esc(parentHref) + '"' + parentClass + '>' + esc(parentLabel) + '</a>'
           : '<span' + parentClass + '>' + esc(parentLabel) + '</span>';
       }
-      html += '<span>›</span>';
+      html += '<span aria-hidden="true">›</span>';
       html += isDeva
         ? '<span class="deva">' + esc(label) + '</span>'
         : '<span>' + esc(label) + '</span>';

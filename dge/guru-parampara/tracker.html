@@ -88,7 +88,7 @@
 <body>
 <header>
   <div class="bar">
-    <div class="brand"><a href="../index.html" title="DGE Home">⌂ DGE</a><span>›</span><a href="index.html">Guru Parampara</a><span>›</span><span>Completeness Tracker</span></div>
+    <dge-breadcrumb home-href="../index.html" parent-label="Guru Parampara" parent-href="index.html" label="Completeness Tracker"></dge-breadcrumb>
     <div class="spacer"></div>
   </div>
 </header>
@@ -135,10 +135,11 @@
   <div class="foot" id="foot"></div>
 </div>
 
-<!-- Filled by site-footer.js, shared with the rest of the site (see that
-     file's own header comment). -->
-<div class="site-footer-links" id="siteFooterLinks"></div>
-<script src="../js/site-footer.js?v=1"></script>
+<!-- Phase 6 of the frontend redesign: <dge-footer> (dge-shell.js) -- same
+     link sets/behavior as site-footer.js, see that file's own header comment. -->
+<dge-footer></dge-footer>
+<script src="../js/dge-shell.js?v=1"></script>
+<script src="../js/dge-breadcrumb.js?v=1"></script>
 <script id="data" type="application/json">{
   "meta": {
     "title": "Madhva (Dvaita Vedanta) Guru Parampara",

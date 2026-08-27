@@ -18,7 +18,7 @@
      single dasarapada was visible. Those now scroll away normally, inside
      .intro, so the actual content starts much higher up. -->
 <div class="wrap">
-  <div class="brand"><a href="index.html" title="DGE Home">⌂ DGE</a><span aria-hidden="true">›</span><span>Dāsa Sāhitya</span></div>
+  <dge-breadcrumb label="Dāsa Sāhitya"></dge-breadcrumb>
 </div>
 <div class="wrap intro">
   <div class="titrow">
@@ -69,11 +69,12 @@
 </main>
 <div class="toast" id="toast"></div>
 
-<!-- Filled by site-footer.js, shared with the landing page and reader
-     (see that file's own header comment). -->
-<div class="site-footer-links" id="siteFooterLinks"></div>
+<!-- Phase 6 of the frontend redesign: <dge-footer> (dge-shell.js) -- same
+     link sets/behavior as site-footer.js, see that file's own header comment. -->
+<dge-footer></dge-footer>
 
-<script src="js/site-footer.js?v=1"></script>
+<script src="js/dge-shell.js?v=1"></script>
+<script src="js/dge-breadcrumb.js?v=1"></script>
 <script>
 "use strict";
 const BASE = (window.DASA_DATA_BASE || "data/dasa_sahitya").replace(/\/$/,"");
