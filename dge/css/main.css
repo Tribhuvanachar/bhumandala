@@ -631,10 +631,38 @@ body.dge-selecting .dge-qa-tab { display: none !important; }
   border: none; border-radius: var(--radius-md) 0 0 var(--radius-md);
   background: var(--accent-red); color: #fff;
   font-size: 20px; font-weight: 700; line-height: 1;
-  box-shadow: -2px 2px 8px rgba(0,0,0,.25); cursor: pointer;
+  box-shadow: -2px 2px 8px rgba(0,0,0,.25); cursor: grab;
   display: flex; align-items: center; justify-content: center;
+  touch-action: none; user-select: none;
+  transition: box-shadow .15s;
 }
 .dge-qa-tab:active { filter: brightness(1.12); }
+.dge-qa-tab.dge-genie-dragging { cursor: grabbing; box-shadow: -2px 2px 16px rgba(0,0,0,.4); }
+
+/* Phase 3: the Genie's avatar, filling the same 30x60 docked tab so the
+   reskin costs zero layout change -- see genie.js for the gesture layer
+   (tap/double-tap/long-press/drag) added on top of this same element. */
+.dge-genie-avatar {
+  width: 26px; height: 26px; border-radius: 50%; object-fit: cover;
+  object-position: 50% 15%; border: 1px solid rgba(255,255,255,.55);
+  pointer-events: none; /* clicks/gestures target the button, not the img */
+}
+
+.dge-genie-help-dialog {
+  border: 1px solid var(--card-border); border-radius: var(--radius-lg);
+  background: var(--panel-bg); color: var(--text-primary);
+  padding: 20px; max-width: min(420px, 90vw); box-shadow: var(--shadow-lg);
+}
+.dge-genie-help-dialog::backdrop { background: rgba(0,0,0,.55); backdrop-filter: blur(3px); }
+.dge-genie-help-dialog h3 { margin: 0 0 12px; color: var(--accent-gold); font-size: 16px; }
+.dge-genie-help-dialog dl { margin: 0; font-size: 13px; }
+.dge-genie-help-dialog dt { font-weight: 700; color: var(--text-primary); margin-top: 10px; }
+.dge-genie-help-dialog dd { margin: 2px 0 0; color: var(--muted-text); }
+.dge-genie-help-dialog .dge-genie-help-close {
+  margin-top: 16px; width: 100%; padding: 9px; border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border); background: var(--card-active);
+  color: var(--text-primary); font-weight: 700; cursor: pointer;
+}
 
 /* 24 Aug 2026 -- Phase 5: App View, a second lower-density layout
    alongside the existing dense "Scholar" view (see window.dgeSetLayoutMode

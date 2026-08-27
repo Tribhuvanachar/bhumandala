@@ -54,7 +54,7 @@
 <!-- Buttons here are rendered dynamically by ai.js from window.ACHARYA_QUERY_TYPES -->
 <!-- (see js/config.js) so the set can be reconfigured in one place. -->
 <div id="actionTooltip" style="display:none;">
-  <div class="tooltip-header">🕉️ Ask Acharya</div>
+  <div class="tooltip-header">🕉️ Genie</div>
   <div class="tooltip-row" id="acharyaQueryButtonsRow"></div>
   <div id="acharyaFullWidthButtons"></div>
   <div class="tooltip-row" id="wordToolsRow">
@@ -103,8 +103,22 @@
      it, tapping the tab itself would open the popup and then the same
      listener would immediately close it again, since the tab isn't
      inside any of those three. -->
+<!-- Phase 3 of the frontend redesign: this tab is now "the Genie" -- same
+     edge-docked shape and position as before (a free-floating draggable
+     avatar was considered and deliberately rejected, per the project
+     lead's own earlier direct instruction recorded above: "let it not sit
+     there... screen should be minimal"), reskinned with a real avatar and
+     given a gesture vocabulary by genie.js: tap opens this same
+     quickActionsPopup (identical to the old plain click), double-tap runs
+     the primary contextual action (Ask Acharya for whatever's selected),
+     long-press opens a short how-to, and drag slides it along the right
+     edge (never off it) to wherever's out of the reader's way. No onclick
+     attribute here on purpose -- genie.js's pointer handlers own all of
+     this element's interaction now, including the plain-tap case. -->
 <div class="popup-container" style="position:static;">
-  <button class="dge-qa-tab" id="dge-qa-tab" onclick="window.togglePopup('quickActionsPopup')" title="Kosha & Search" aria-label="Quick actions: Kosha and Search">⋮</button>
+  <button class="dge-qa-tab" id="dge-qa-tab" title="Genie · Kosha, Search & Ask Acharya" aria-label="Genie: quick actions and Ask Acharya">
+    <img src="images/genie/genie-avatar.jpg" alt="" class="dge-genie-avatar">
+  </button>
 </div>
 <div class="popup popup-sheet" id="quickActionsPopup">
   <div class="popup-sheet-handle"></div>
@@ -1227,6 +1241,7 @@
 <script src="js/voice.js?v=4.60.6"></script>
 <script src="js/screenshot.js?v=4.60.7"></script>
 <script src="js/ai.js?v=4.72.4"></script>
+<script src="js/genie.js?v=1"></script>
 <script src="js/sandhi.js?v=1"></script>
 <script src="js/subanta-steps.js?v=1"></script>
 <!-- Renders Gemini-enrichment references (see tools/gemini_enrich.py) as
