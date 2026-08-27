@@ -85,21 +85,24 @@ def all_granthas(config, sections_filter=()):
     return out
 
 
-def discover_census(granthas, delay=2.0, timeout=60, log=lambda s: None):
+def discover_census(granthas, delay=2.0, timeout=60, user_agent="",
+                    log=lambda s: None):
     """Fetch each grantha's seed once; return {key: {...census or failure}}.
 
     Imports the crawler's own Fetcher/discover_leaves so the census is taken
     exactly the way the importer would take it — no second, differently-biased
-    discovery path.
+    discovery path. That includes the User-Agent: the site's protection
+    challenges strangers but has let the importer's own identity through for
+    the whole 6,012-page corpus, so introducing ourselves any other way just
+    earns a challenge page (run 33075520117 proved it: 56/56 seeds blocked
+    under a novel UA minutes after the importer's UA fetched fine).
     """
     from import_dvaitavedanta import Fetcher, discover_leaves  # noqa: PLC0415
 
     # No cache directory, deliberately: a cached seed page answers "what did
     # the site look like last time", which is the one question a change
     # detector must never answer from memory.
-    fetcher = Fetcher(cache_dir=None,
-                      user_agent="bhumandala-dge sync-check (educational; "
-                                 "contact via github.com/Tribhuvanachar/bhumandala)",
+    fetcher = Fetcher(cache_dir=None, user_agent=user_agent,
                       delay=delay, timeout=timeout, retries=3)
     census = {}
     for grantha in granthas:
@@ -275,8 +278,12 @@ def main(argv=None, discover_fn=None):
     granthas = all_granthas(config, sections_filter)
     log = (lambda s: print(s, file=sys.stderr)) if args.verbose else (lambda s: None)
 
+    user_agent = config.get("site", {}).get("user_agent") or (
+        "DGE-DvaitaVedanta-Importer/1.0 (non-commercial; dharma-prachara; "
+        "+https://tribhuvanachar.github.io/bhumandala)")
     discover = discover_fn or (lambda gs: discover_census(
-        gs, delay=args.delay, timeout=args.timeout, log=log))
+        gs, delay=args.delay, timeout=args.timeout, user_agent=user_agent,
+        log=log))
     census = discover(granthas)
 
     old_state = {}

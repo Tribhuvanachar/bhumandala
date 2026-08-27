@@ -91,9 +91,13 @@ jobs:
           set -euo pipefail
           N="${{ inputs.drift_sample }}"; N="${N:-40}"
           # Freshly fetched, never from cache — a drift check answered from
-          # cache would be this repo grading its own homework.
+          # cache would be this repo grading its own homework. Identify as
+          # the importer: the site's protection lets that UA through and
+          # challenges every other identity we have tried.
+          UA=$(python3 -c 'import json;print(json.load(open("tools/dvaitavedanta/dv_sources.json"))["site"]["user_agent"])')
           python3 tools/dvaitavedanta/verify_source_content.py \
             --sample "$N" --delay 3 --cache /tmp/drift_cache \
+            --user-agent "$UA" \
             --out /tmp/drift_report.json | tee /tmp/drift.md || true
           {
             echo ""
