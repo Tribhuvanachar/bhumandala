@@ -4822,3 +4822,143 @@ reader screenshots, and `audit_library.py --fix` +
 `build_layer_manifest.py` committed onto the PR branch (the workflow does
 not regenerate those). Anything that fails stays unmerged and gets
 documented here instead.
+
+## Overnight extract PRs verified and merged; nyaya_sudha dedicated run queued (26 Aug 2026 morning)
+
+Executed under the lead's standing authorization (part above), each PR
+through the full verification protocol before merging:
+
+- **PR #139 gita_prasthana — merged** (25 Aug ~11:35 pm IST). Madhva's
+  Gītā-bhāṣya recovered as `tika_bhashya` (357 items); mūla id sets
+  identical (654+228); text 117.9% with zero lost chunks; **10/10 random
+  items verified verbatim against dvaitavedanta.in live pages**; reader
+  Playwright screenshot of the भाष्यम् tab. One merge conflict
+  (generated `library-status.json`) resolved by regenerating with its
+  own tool.
+- **PR #140 later_acharyas — merged** (26 Aug ~10:15 am IST). 24 of 25
+  granthas re-parsed fresh (+15.9% text): vadavali gained भावदीपिका +
+  प्रकाशः layers, quoted grantha-title label lines correctly stripped
+  from yukti_mallika's सत्यप्रमोद text (root-caused character-by-character
+  — the 34 "shrunk" items lost ONLY repeated "युक्तिमल्लिका" lines).
+  **Known gap, documented in the merge commit: the job's time budget
+  skipped nyaya_sudha itself** (its 44 folders passed through unchanged,
+  `fetched: 2026-08-19`, no `work_id`) — a dedicated
+  `granthas=nyaya_sudha` dispatch is queued to apply the quote-split
+  there.
+- **PR #141 dasha_prakarana_granthas — merged** (26 Aug ~10:40 am IST).
+  The quote-split's best showing: inline-quoted mūla sūtras moved OUT of
+  ṭīkā text INTO the mula layer for the same unit (confirmed
+  item-by-item on pramana_lakshana; the sūtra प्रमाणविरुद्धार्थ-
+  प्रतिज्ञाविरोधः now sits in mula/DV_13837 where the old data buried it
+  mid-ṭīkā); mūla ids identical section-wide; 102.5% text.
+- **PR #142 purana_prasthana — merged** (26 Aug ~12:50 pm IST,
+  `d3cd69e5`). Bhagavata Tatparya Nirnaya, all 24 folders: item counts
+  unchanged, 345 mūla ids reproduce exactly, +33k chars net (preamble
+  verses recovered into mula). Every per-ṭīkā char loss root-caused to
+  the literal `EndFragment` Word-clipboard artifact (347 lines, an
+  upstream copy-paste residue the new parser strips) plus one repeated
+  title-label line — cleanup, not loss. Content corroborated against a
+  genuinely-fetched cached live page (article DV_11434: all 6 layers
+  verbatim, incl. a 36k-char सत्यधर्मीया block) + CI's own strict
+  0-failure live fetch; direct spot-fetches still bot-challenged (12/12
+  BLOCKED via the new `verify_source_content.py`), and the vishvAsa
+  mirror does not carry BTN at all. Playwright reader check: 24-layer
+  pill row, पदरत्नावली auto-loaded, no JS errors.
+- **PR #143 nyaya_sudha — merged** (27 Aug ~4:20 am IST, `1381cc17`).
+  The resumable chain (runs 38→41, below) completed the 1,655-leaf
+  crawl; run 40 finished it at 2:48 am IST and run 41 (pure cache hits)
+  confirmed it reproducibly. Verified before merge: mula reproduces its
+  1,650 ids exactly; +528k chars net; **the अनुव्याख्यानम् quote-split
+  is live — tika_anuvyakhyanam went 6 → 1,076 items (1076/1076 joinable
+  in the manifest)**, and the 101k chars removed from tika_sudha were
+  traced line-by-line into the same unit's anuvyakhyanam/mula (the
+  residue: 1,109 stripped "अनुव्याख्यानम्" heading labels + 3 sūtra
+  lines that survive in sibling layers). Suites 0 errors / 208 tests
+  OK; Playwright on unit 222 shows the target experience — Brahma Sūtra
+  pratīka, Anuvyākhyāna verse, सुधा/अनुव्याख्यानम्/परिमळ tabs. Two new
+  1-item section-heading folders (tika_prathamapada, tika_caturthapada)
+  are the known unmapped-heading cosmetic class (follow-up 2 below);
+  tika_caturthapada carries a leading `StartFragment` artifact —
+  extend the EndFragment strip to it in the next parser pass.
+- **nyaya_sudha-only run 38 — timed out, resumable chain started.**
+  The live site serves nyaya_sudha leaves at **~40 s/page** (vs ~3–4 s
+  for every other grantha — these pages carry the full सुधा + परिमळ
+  text and the backend renders them slowly). 1,655 leaves ≈ 18 h of
+  fetching, so the 340-min job died at 500/1655 (3:54 pm IST) with no
+  shard and no PR — but the workflow saved its 45 MB HTTP cache on
+  cancellation (`dv-cache-later_acharyas-32929503634`), so every re-run
+  resumes free from cache. Runs 39 (crawling, started 4:13 pm IST) and
+  40 (queued) each bank ~500 more leaves at `job_timeout=350`; run 41
+  (to be queued at the evening check-in) should finish the remaining
+  ~150 and open the PR early morning 27 Aug. Verify protocol for that
+  PR: nyaya_sudha mula must reproduce its 1,650 ids, अनुव्याख्यानम्
+  quote-split tab checked in the reader.
+
+**Two operational findings recorded for the future:**
+1. **dvaitavedanta.in now challenges/resets requests from this session**
+   ("One moment, please…" interstitial, then TCP resets — from both
+   urllib and real Chromium) after ~7k requests across 24h. CI's GitHub
+   runners were unaffected (0 fetch failures overnight). Where the live
+   check was blocked (PRs #140/#141), corroboration substituted the
+   vishvAsa mirror of the same upstream URLs (independent copy,
+   node-indexed — 9/12 window checks clean, outliers explained by the
+   mirror's per-section segmentation) plus CI's own strict-verified
+   fetches. Resume direct live spot-checks once the block ages out.
+2. **New `tika_mula` / grantha-title-slug folders** (tattva_viveka 91
+   items, dvaita_dyumani 2, pramana_lakshana's tika_pramanalakshanam 4):
+   quoted मूल blocks appearing BETWEEN h3 runs route through the
+   quote-split as layers titled "मूल"/the grantha's own name and land in
+   unmapped folders instead of merging into mula (only exact "मूलम्"
+   aliases and same-unit routing reach mula today). Content is captured
+   and renders as a "मूल" tab — not lost, but the folder naming is off.
+   Fix belongs in build_items: route a quote layer whose key is a mūla
+   alias OR the grantha key into the mula bucket. Small, test-covered
+   change for the next parser pass.
+3. **Trailing ṭīkā-attribution lines in mula items** (found in PR #142
+   review, e.g. BTN DV_11434 ends with "श्रीमद्विजयध्वजतीर्थ-
+   पूज्यचरणविरचिता पदरत्नावली"): the preamble stripper removes *leading*
+   attribution/structural lines but keeps a trailing line announcing the
+   FIRST commentary when it sits at the preamble's end. ~46 harmless
+   chars, cosmetic; same parser pass as (2) should also strip trailing
+   `ATTRIBUTION_RE` lines from the mula bucket.
+
+## Fortnightly sync with dvaitavedanta.in (27 Aug 2026)
+
+The lead asked how additions on dvaitavedanta.in (a new grantha, a new
+commentary) reach this site without re-running everything. Survey first:
+`check-sources.yml` already fingerprints the site fortnightly (1st/16th,
+one seed per SECTION) and opens an issue on change — but a hash can only
+say "something moved", not what to re-crawl. Built the actionable half:
+
+- **`tools/dvaitavedanta/sync_check.py`** — fetches each grantha's seed
+  page (56 requests for the whole corpus, no cache, ~2 min), harvests
+  the sidebar's content-id census the same way the importer's discovery
+  does (imports `discover_leaves` itself, no second parsing path), and
+  diffs against `admin/config/dv_sync.state.json`. First sighting =
+  baseline, not a flood of "new". A failed seed, bot-challenge page, or
+  a sidebar that shrank below half of last time is UNREADABLE — state
+  untouched, so rate-limiting can't masquerade as mass deletion. Output
+  names the exact granthas and the exact `extract-dvaitavedanta.yml`
+  inputs to pull them in (`job_timeout=350` advice when nyaya_sudha is
+  affected). 13 unit tests in `tests/test_dv_sync_check.py`.
+- **`.github/workflows/sync-dvaitavedanta.yml`** — runs the census on
+  the 2nd and 17th at 9:00 am IST (the morning after check-sources'
+  coarse alarm), plus a drift sample: `verify_source_content.py
+  --sample 40` re-fetches random already-imported pages and flags
+  DRIFT/MISSING (BLOCKED is excluded — rate-limiting is not drift).
+  Imports nothing; on change it writes the run summary, opens/updates a
+  "dvaitavedanta.in moved" issue, and commits the new census. Manual
+  runs can set `dispatch_extract=true` to fire the targeted extractions
+  immediately (each still lands as a PR for review).
+- Registered in the **workflow admin plate** (`admin/workflows.html` via
+  `dge/firebase/functions/workflows.json`, which is also the Firebase
+  function's dispatch allowlist — one file, both duties). The pinned
+  catalogue test in `dge/firebase/tests/workflows-core.test.js` was
+  already stale (missing dhatu-lexicon); updated to the true seven.
+  NOTE: the admin panel's in-page Run button picks the new entry up
+  only after the Firebase functions are redeployed; until then the
+  panel's GitHub fallback link (same click path on github.com) works.
+
+Doctrine, for the next person: **never re-crawl on a schedule.** The
+census diff decides *which granthas*; only those get extracted; the
+verify-then-merge protocol (PENDING part 11) still gates every PR.
