@@ -67,3 +67,6 @@ jobs:
 
       - name: Frontend redesign -- shared-chrome regression guard
         run: python3 tools/redesign/audit_pages.py --check
+
+      - name: Frontend redesign -- baked shell drift gate (build_shell.py)
+        run: python3 tools/redesign/build_shell.py --check

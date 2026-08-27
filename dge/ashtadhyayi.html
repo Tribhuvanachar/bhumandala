@@ -37,7 +37,7 @@
      own click handlers in ashtadhyayi.js needed touching. -->
 <header>
   <div class="bar">
-    <dge-breadcrumb label="अष्टाध्यायी" deva></dge-breadcrumb>
+    <dge-breadcrumb label="अष्टाध्यायी" deva class="brand"><a href="index.html" title="DGE Home">⌂ DGE</a><span aria-hidden="true">›</span><span class="deva">अष्टाध्यायी</span></dge-breadcrumb>
     <div class="spacer"></div>
     <input class="jump" id="dge-jump" placeholder="1.1.1" list="dge-sutralist" title="jump to sutra">
     <datalist id="dge-sutralist"></datalist>
@@ -132,7 +132,7 @@
 <!-- Phase 6 of the frontend redesign: <dge-footer> (dge-shell.js) --
      same link sets/behavior as site-footer.js, see that file's own
      header comment. -->
-<dge-footer></dge-footer>
+<dge-footer class="site-footer-links"><a class="footer-link" href="../index.html#architect">About Us</a><span class="footer-sep">·</span><a class="footer-link" href="mailto:sanatanavidyagurukulam@gmail.com">Contact Us</a><span class="footer-sep">·</span><a class="footer-link" href="https://github.com/Tribhuvanachar/bhumandala/blob/main/LICENSE" target="_blank" rel="noopener">License</a><span class="footer-sep">·</span><button class="footer-link" onclick="window.dgeShowTermsNotice()">Terms &amp; Conditions</button></dge-footer>
 
 <div class="backdrop" id="dge-backdrop"></div>
 
