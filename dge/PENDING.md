@@ -4921,3 +4921,44 @@ through the full verification protocol before merging:
    FIRST commentary when it sits at the preamble's end. ~46 harmless
    chars, cosmetic; same parser pass as (2) should also strip trailing
    `ATTRIBUTION_RE` lines from the mula bucket.
+
+## Fortnightly sync with dvaitavedanta.in (27 Aug 2026)
+
+The lead asked how additions on dvaitavedanta.in (a new grantha, a new
+commentary) reach this site without re-running everything. Survey first:
+`check-sources.yml` already fingerprints the site fortnightly (1st/16th,
+one seed per SECTION) and opens an issue on change — but a hash can only
+say "something moved", not what to re-crawl. Built the actionable half:
+
+- **`tools/dvaitavedanta/sync_check.py`** — fetches each grantha's seed
+  page (56 requests for the whole corpus, no cache, ~2 min), harvests
+  the sidebar's content-id census the same way the importer's discovery
+  does (imports `discover_leaves` itself, no second parsing path), and
+  diffs against `admin/config/dv_sync.state.json`. First sighting =
+  baseline, not a flood of "new". A failed seed, bot-challenge page, or
+  a sidebar that shrank below half of last time is UNREADABLE — state
+  untouched, so rate-limiting can't masquerade as mass deletion. Output
+  names the exact granthas and the exact `extract-dvaitavedanta.yml`
+  inputs to pull them in (`job_timeout=350` advice when nyaya_sudha is
+  affected). 13 unit tests in `tests/test_dv_sync_check.py`.
+- **`.github/workflows/sync-dvaitavedanta.yml`** — runs the census on
+  the 2nd and 17th at 9:00 am IST (the morning after check-sources'
+  coarse alarm), plus a drift sample: `verify_source_content.py
+  --sample 40` re-fetches random already-imported pages and flags
+  DRIFT/MISSING (BLOCKED is excluded — rate-limiting is not drift).
+  Imports nothing; on change it writes the run summary, opens/updates a
+  "dvaitavedanta.in moved" issue, and commits the new census. Manual
+  runs can set `dispatch_extract=true` to fire the targeted extractions
+  immediately (each still lands as a PR for review).
+- Registered in the **workflow admin plate** (`admin/workflows.html` via
+  `dge/firebase/functions/workflows.json`, which is also the Firebase
+  function's dispatch allowlist — one file, both duties). The pinned
+  catalogue test in `dge/firebase/tests/workflows-core.test.js` was
+  already stale (missing dhatu-lexicon); updated to the true seven.
+  NOTE: the admin panel's in-page Run button picks the new entry up
+  only after the Firebase functions are redeployed; until then the
+  panel's GitHub fallback link (same click path on github.com) works.
+
+Doctrine, for the next person: **never re-crawl on a schedule.** The
+census diff decides *which granthas*; only those get extracted; the
+verify-then-merge protocol (PENDING part 11) still gates every PR.

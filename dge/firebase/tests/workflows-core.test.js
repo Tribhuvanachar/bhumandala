@@ -17,9 +17,10 @@ function throwsWith(code, fn) {
 }
 
 describe('the catalogue', () => {
-  test('lists exactly the five workflows the panel offers', () => {
+  test('lists exactly the seven workflows the panel offers', () => {
     assert.deepEqual(wf.catalogue().map((w) => w.id).sort(), [
-      'check-sources', 'import-kavya', 'kavya-tracker', 'publish-wordnet', 'reindex'
+      'check-sources', 'dhatu-lexicon', 'import-kavya', 'kavya-tracker',
+      'publish-wordnet', 'reindex', 'sync-dvaitavedanta'
     ]);
   });
 
