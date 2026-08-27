@@ -427,7 +427,39 @@ function dgeSanitizeVedicAccents(text) {
     // rendered as the conventional Sanskrit-commentary parenthetical
     // citation abbreviation instead of either the raw template syntax or
     // silently deleting real cross-reference information.
-    .replace(/<\{SK(\d+)\}>/g, (_, num) => '(सि.कौ.' + dgeToDevanagariDigits(num) + ')');
+    .replace(/<\{SK(\d+)\}>/g, (_, num) => '(सि.कौ.' + dgeToDevanagariDigits(num) + ')')
+    // Four more leaked machine-tagging markers in the same file, found by
+    // diffing this corpus's siddhanta_kaumudi text against the source
+    // repo's own clean base file (github.com/drdhaval2785/siddhantakaumudi,
+    // sk0.txt) -- same species of bug as the SK-ref case above (an
+    // unresolved import-template artifact, not a scholarly variant), just
+    // never caught because it uses different delimiter punctuation.
+    // drdhaval2785's own readme documents "{$ {!verbnum verb!}+
+    // verbmeaning$}" as HIS pipeline's internal tagging syntax for dhatu
+    // (verbal root) citations, added mechanically by his step1.py when
+    // producing the tagged sk1.txt from the clean sk0.txt -- this corpus's
+    // import evidently pulled from that tagged file and never stripped the
+    // tags. Confirmed against sk0.txt directly: the same passage there
+    // (e.g. item 1.2.2's "उद्विजिष्यते" continuation) reads plain running
+    // text with no braces/dollar-signs/bangs at all. `<<...>>` (quoting
+    // another sutra's headword, paired with the already-handled SK-ref
+    // number) and `<!...!>` (marking a vartika, paired with a following
+    // "(वार्तिकम्)") are this repo's own -- not drdhaval2785's -- wrapper
+    // conventions for the same underlying content, also never resolved at
+    // render time; `<ऽ...ऽ>` (a single occurrence, item 4.1.1, quoting a
+    // paribhasha maxim) is normalized to this same corpus's own established
+    // bracket convention for that (see item 1.1.50's "[(परिभाषा - ) ...]").
+    // A corpus-wide check after this fix (stripping all six known patterns)
+    // found the bracket/brace/dollar/bang characters otherwise unused in
+    // this file's Sanskrit prose except one genuine vocative "!" in an
+    // example sentence -- confirming these six patterns account for
+    // essentially all of it, not just the common cases.
+    .replace(/\{!([^{}]*)!\}/g, '$1')
+    .replace(/\{\$([\s\S]*?)\$\}/g, '$1')
+    .replace(/<!([\s\S]*?)!>/g, '$1')
+    .replace(/<<([^<>]*)>>/g, '$1')
+    .replace(/<ऽ([^<>]*)ऽ>/g, '[(परिभाषा - )$1]')
+    .replace(/<\{([^}]*)\}>/g, '$1');
 }
 
 // Copyright gate (Category 4 platform issue): the Mahabharata Kannada

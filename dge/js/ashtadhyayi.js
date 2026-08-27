@@ -398,15 +398,43 @@
     }
     return null;
   }
+  // Four more leaked machine-tagging markers alongside the SK-ref one above,
+  // found by diffing this file's text against the source repo's own clean
+  // base file (github.com/drdhaval2785/siddhantakaumudi, sk0.txt) -- same
+  // bug, different delimiter punctuation, so it slipped past the earlier
+  // fix. drdhaval2785's own readme documents "{$ {!verbnum verb!}+
+  // verbmeaning$}" as his pipeline's internal tagging syntax for dhatu
+  // (verbal root) citations, mechanically added by his step1.py when
+  // producing the tagged sk1.txt from clean sk0.txt; this corpus's import
+  // evidently pulled from that tagged file and never stripped the tags --
+  // confirmed against sk0.txt directly, where the same passage reads plain
+  // running text with no braces/dollar-signs/bangs. `<<...>>` (quoting
+  // another sutra's headword, paired with an already-handled SK-ref number)
+  // and `<!...!>` (marking a vartika, paired with a following
+  // "(वार्तिकम्)") are this repo's own wrapper conventions for the same
+  // underlying content, likewise never resolved at render time; `<ऽ...ऽ>`
+  // (one occurrence, item 4.1.1) is normalized to this corpus's own
+  // existing bracket convention for a quoted paribhasha (see item 1.1.50's
+  // "[(परिभाषा - ) ...]"). Runs on the already-escaped text, like the SK
+  // regexes below, except the two brace ones which contain no `<`/`&`.
+  function stripLeakedMarkup(text){
+    return text
+      .replace(/\{!([^{}]*)!\}/g, '$1')
+      .replace(/\{\$([\s\S]*?)\$\}/g, '$1')
+      .replace(/&lt;!([\s\S]*?)!>/g, '$1')
+      .replace(/&lt;&lt;([\s\S]*?)>>/g, '$1')
+      .replace(/&lt;ऽ([\s\S]*?)ऽ>/g, '[(परिभाषा - )$1]');
+  }
   function linkSkRefs(escaped){
-    return escaped
+    return stripLeakedMarkup(escaped)
       .replace(/&lt;\{SK(\d+)\}(?:&gt;|>)/g, function(_, n){
         var target=idByKaumudi(+n);
         return target
           ? '<button class="sk-ref" data-goto="'+esc(target)+'" title="सिद्धान्तकौमुद्याम् #'+n+' — '+esc(target)+'">कौमुदी-'+devnum(n)+'</button>'
           : '<span class="sk-ref sk-ref-plain">कौमुदी-'+devnum(n)+'</span>';
       })
-      .replace(/&lt;\{(उ[^}]*)\}(?:&gt;|>)/g, '<span class="sk-ref sk-ref-plain">$1</span>');
+      .replace(/&lt;\{(उ[^}]*)\}(?:&gt;|>)/g, '<span class="sk-ref sk-ref-plain">$1</span>')
+      .replace(/&lt;\{([^}]*)\}(?:&gt;|>)/g, '$1');
   }
   function cardHTML(folder){
     var m=META[folder], row=state.sutras[state.idx], L=state.layers[folder];
