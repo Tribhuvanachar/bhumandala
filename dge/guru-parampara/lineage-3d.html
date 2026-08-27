@@ -8,6 +8,7 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="../js/vandana-guard.js?v=1"></script>
+<script src="../js/dge-breadcrumb.js?v=1"></script>
 <script src="../js/contact-email.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>Guru Parampara — 3D Lineage Showcase</title>
@@ -80,7 +81,7 @@
 <body>
 <div id="app">
   <header>
-    <div class="brand"><a href="../index.html" title="DGE Home">⌂ DGE</a><span>›</span><a href="index.html">Guru Parampara</a><span>›</span><span>3D Showcase</span></div>
+    <dge-breadcrumb home-href="../index.html" parent-label="Guru Parampara" parent-href="index.html" label="3D Showcase"></dge-breadcrumb>
     <h1>Guru Parampara · <span style="color:var(--accent)">3D Lineage Showcase</span></h1>
     <div class="sub" id="sub"></div>
     <div class="toolbar">
