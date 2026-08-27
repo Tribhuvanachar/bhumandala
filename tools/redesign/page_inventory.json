@@ -193,7 +193,7 @@
    "gated": true,
    "first_head_script": "vandana-guard.js",
    "vandana_guard_first": true,
-   "has_site_footer_js": true,
+   "has_site_footer_js": false,
    "has_ai_js": true,
    "has_modals_js": true,
    "css_links": [

@@ -440,10 +440,12 @@
     <a href="mailto:sanatanavidyagurukulam@gmail.com" id="configEmailLink" style="display:inline-block; margin-top:6px;">sanatanavidyagurukulam@gmail.com</a>
   </div>
 
-  <!-- Filled by site-footer.js, shared with the landing page (see that
-       file's own header comment) instead of this row's five links living
-       only here as hand-written markup. -->
-  <div class="site-footer-links" id="siteFooterLinks"></div>
+  <!-- Phase 2 of the frontend redesign: <dge-footer> (dge-shell.js) is the
+       promoted, custom-element successor to site-footer.js's mount-div
+       pattern -- same link sets, same behavior, see dge-shell.js's own
+       header comment. Other pages keep using site-footer.js until their
+       own turn in the Phase 6 rollout; both render identically. -->
+  <dge-footer></dge-footer>
   <div class="app-footer" id="appFooter">v4.57.0 (Modular)</div>
 </div>
 
@@ -1273,7 +1275,7 @@
      Fetches one small index and stops if this grantha is not cited. -->
 <script src="js/backlinks.js?v=4.64.0"></script>
 <script src="js/content-inline.js?v=1"></script>
-<script src="js/site-footer.js?v=1"></script>
+<script src="js/dge-shell.js?v=1"></script>
 <script src="js/tour.js?v=1"></script>
 <script src="js/library.js?v=4.62.0"></script>
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
