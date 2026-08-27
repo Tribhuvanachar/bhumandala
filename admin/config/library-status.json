@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1884,
-  "loaded": 1289,
-  "items": 683823
+  "leaves": 1913,
+  "loaded": 1313,
+  "items": 687269
  },
  "sections": {
   "agama": {
@@ -12,9 +12,9 @@
    "items": 43342
   },
   "darshana": {
-   "total": 1109,
-   "loaded": 775,
-   "items": 56423
+   "total": 1138,
+   "loaded": 796,
+   "items": 58688
   },
   "dasa_sahitya": {
    "total": 177,
@@ -36,25 +36,20 @@
    "loaded": 0,
    "items": 0
   },
-  "nitishastra": {
-   "total": 4,
-   "loaded": 4,
-   "items": 2139
-  },
   "purana": {
    "total": 97,
    "loaded": 49,
    "items": 131866
   },
   "shastra": {
-   "total": 25,
-   "loaded": 25,
-   "items": 12439
+   "total": 29,
+   "loaded": 28,
+   "items": 14573
   },
   "smriti_dharma": {
    "total": 28,
-   "loaded": 9,
-   "items": 9290
+   "loaded": 11,
+   "items": 10175
   },
   "stotra": {
    "total": 3,
@@ -68,8 +63,8 @@
   },
   "vedanga": {
    "total": 104,
-   "loaded": 42,
-   "items": 73472
+   "loaded": 44,
+   "items": 73773
   },
   "vedas": {
    "total": 163,
@@ -265,12 +260,14 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/mula": 14,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_bhavadipa": 12,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_jayatirtha": 2,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_kathalakshanam": 7,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_panchika": 12,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_vivarana": 12,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/mula": 4,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_gururajiyatippani": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_jayatirtha": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mandaramanjari": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadakhandanam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadaparashu": 2,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_nivasatirthatippani": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_nivasatirthiyatippani": 1,
@@ -279,6 +276,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/mula": 155,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_bhavadipa": 133,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_jayatirtha": 153,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_pramanalakshanam": 4,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_vakyarthakaumudi": 136,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_vivarana": 125,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/mula": 4,
@@ -286,6 +284,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_jayatirtha": 2,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mandaramanjari": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhamdanaparashu": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanaparashu": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_nivasatirthiyatippani": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_shrigururajiyatippani": 0,
@@ -305,6 +304,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_gururajiya": 122,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_janardanabhattiya": 126,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_jayatirtha": 153,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_mula": 91,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_naropantiya": 58,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_raghavendratirtha": 134,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_shriraghavendratirtha": 0,
@@ -315,7 +315,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattvodyota/mula": 22,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattvodyota/tika_mandaramanjari": 18,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattvodyota/tika_vivarana": 18,
-  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/mula": 3,
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/mula": 4,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_jayatirtha": 2,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_mandaramanjari": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana/tika_nivasatirthiyatippani": 1,
@@ -333,6 +333,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_vakyarthadipika": 158,
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya/tika_vishamapadavakyarthavivriti": 151,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/mula": 654,
+  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhashya": 357,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhavabodha": 213,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhavadipa": 300,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhavadipika": 332,
@@ -348,8 +349,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_bhavaprakasha": 194,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_kiranavali": 205,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_kiranavalyam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_mannyayadipakiranavali": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_mannyayadipakiranavali": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadeepika": 222,
+  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipakiranavali": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipikabhavaprakasha": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_prakashika": 178,
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_shrimannyayadipakiranavali": 0,
@@ -704,6 +706,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/mula": 162,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/tika_dvaitadyumani": 134,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/tika_jayatirtha": 159,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/tika_mula": 2,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/mula": 11,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_01_karmanirnaya_tatraika_ahuragunam_brahmeti_na_tadyuktam_shruti": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_01_karmanirnaya_tatraikaahuragunambrahmeti_natadyuktamshrutiyukt": 1,
@@ -724,15 +727,16 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_bahunamvacanikarthanamekasyaivatatparyarthenanigamanamitikham_ca": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhighatitakartritvasya_mukhyasyaiva_vivakshitatve_purvoktativ": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhighatitakartritvasyamukhyasyaivavivakshitatvepurvoktativyap": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dala": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dala": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_pracinabhimata_he_tughataka_vis": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipurvam_sarvakartritvaditi_heto_shrutisiddhatvenumeyabhavak": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipurvamsarvakartritvaditihetoshrutisiddhatvenumeyabhavakath": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipurvamsarvakartritvaditipracinabhimatahetughatakavisheshan": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_ekasyaiva_granthasya_naikana": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_ekasyaiva_granthasya_naikanamakrite_shastravanmayaprasiddhatvapr": 0,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gaunilakshanasthalayo_rvai_shamyena_vyakhyane_bijabhavapradarsha": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gaunilakshanasthalayo_rvai_shamyena_vyakhyane_bijabhavapradarsha": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gaunilakshanasthalayorvaishamyenavyakhyanebijabhavapradarshanapu": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gitatatparyodahritam_kartritvam_gaunam_anuvyakhyanoktam_ca_pradh": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gitatatparyodahritamkartritvamgaunam_anuvyakhyanoktamcapradhanam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_granthatra": 1,
@@ -755,8 +759,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_karmavijaya": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvam_dvividhamiti_kartritvavibhagapratipadakapaingitishrut": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvamdvividhamitikartritvavibhagapratipadakapaingitishrutes": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvasya_buddhighatitatve_pra": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvasya_buddhighatitatve_pra": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvasya_buddhighatitatve_prakrityadhikarananuvyakhyanavirod": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvasyabuddhighatitatveprakrityadhikarananuvyakhyanavirodha": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_katha_lakshanadipramana_nai_kathayamapi_shruteshshrutitvenaiva_p": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kathalakshanadipramananai_kathayamapishruteshshrutitvenaivaprama": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kham_cam_pakshepi_virodhadamu_khya_vrittirva_ityatra_vashabdasya": 0,
@@ -769,6 +774,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_lakshyarthagaunarthayoshabdatvaevavirodhadamukhyavrittirvaitimul": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acaryakritatva": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_mattikakritpadiyavyakhyanasyasphutabadhitasangatimattvapradarsha": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_na_tan_manasi_lagati_iti_vikalpanirasa": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_naca_vacanikarthastatparyartha_iti_vishesha_iti_acaryavakyasya_v": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_nacavacanikarthastatparyarthaitivisheshaitiacaryavakyasyavacanik": 1,
@@ -792,7 +798,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_pratijnadhyaharaprasangadityatrapratijnapadaprayogamarmaprakasha": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_pravrittirupakartritvasya_buddhighatitatve_kartritvasya_buddhivy": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_pravrittirupakartritvasyabuddhighatitatvekartritvasyabuddhivyapt": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_shrimattika": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_shrimattika": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_shrimattikakritpadiyavyakhyanasya_sphutabadhitasangatimattvaprad": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_siddhantedushanasyapyaprasiddhavisheshanatvasyasiddhisankirnatad": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_simhavalokananyayena_puna_vacanikarthashabdasya_shakyarthamatrap": 0,
@@ -803,8 +809,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_uktasadhyavishishtataya_samanyavisheshabhavenasambhavamashakya_s": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_vimarshanasaukaryaya_svandaryacandrikaya_yathagranthamanuvada": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_vimarshanasaukaryayasvandaryacandrikayayathagranthamanuvada": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yatra_vacanikaryadanya_iti_vakyapataka_laukikavakyeshu_ityasya": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yatra_vacanikaryadanya_iti_vakyapataka_laukikavakyeshu_ityasya": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yatra_vacanikaryadanya_iti_vakyapataka_laukikavakyeshu_ityasya_k": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yatravacanikaryadanya_itivakyapataka_laukikavakyeshu_ityasyakrit": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yuktatyupetamiti_sangatyupetamityarthakamiti_pakshasya_nirasa": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yuktatyupetamitisangatyupetamityarthakamitipakshasyanirasa": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yuktiriti_vacoyuktiriti_pakshanirasa": 0,
@@ -815,18 +822,20 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/madhvasiddhantasara/mula": 9,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/mula": 1650,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_abhimanyadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasya_pranunirasadavashishtasutrapavyakhyanama": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasya_pranunirasadavashishtasutrapavyakhyanama": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasyapranunirasadavashishtasutrapavyakhyanaman": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_akashadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_anandamayadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_antasthatvadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_antimapranadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_anumanikadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_anuvyakhyanam": 6,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_anuvyakhyanam": 1076,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_arambhanadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_asadadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_atmadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_bhoktradhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_brahmadhikaranam": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_caturthapada": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_gayatryadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_ikshatyadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_itaravyapadeshadhikaranam": 1,
@@ -841,6 +850,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_om_na_prayojanavattvat_om_prayojanavattvahetoriti_sutre_prayojan": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_parimala": 1452,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_pranadhikaranam": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_prathamapada": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_samanvayadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_sarvadharmopapattyadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_sasheshavakyarthacandrika": 11,
@@ -911,8 +921,10 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/tatparya_chandrika/tika_pandurangi": 304,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/tatparya_chandrika/tika_prakashika": 403,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/mula": 48,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vadavalibhavadipika": 47,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vadavaliprakasha": 44,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_bhavadipika": 47,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_prakasha": 44,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vadavalibhavadipika": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vadavaliprakasha": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vivarana": 47,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vagvajra/mula": 4,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/yukti_mallika/mula": 143,
@@ -952,12 +964,14 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/purana_prasthana/bhagavata_tatparya_nirnaya/tika_virododdhara": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/sruti_prasthana/rig_bhashya/mula": 20,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anubhashya/mula": 8,
+  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anubhashya/tika_bhashya": 3,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anubhashya/tika_tatvamanjari": 3,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anuvyakhyana/mula": 88,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/mula": 227,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_a_bhinavacandrika": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_abhinavacandrika": 216,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhamati": 2,
+  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhashya": 224,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhavabodha": 220,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhavadipa": 224,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhinavacandrika": 1,
@@ -993,18 +1007,23 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/nyaya_vivarana/tika_prabodhini": 2,
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/omkara_vada/mula": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/aitareyopanishad_bhashya/mula": 47,
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/aitareyopanishad_bhashya/tika_bhashya": 38,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/aitareyopanishad_bhashya/tika_bhavapradipa": 38,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/brihadaranyakopanishadbhashyam/mula": 232,
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_bhashya": 169,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_bhavabodhatippani": 170,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_khandartha": 22,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/chandogyopanishad_bhashya/mula": 150,
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/chandogyopanishad_bhashya/tika_bhashya": 131,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/chandogyopanishad_bhashya/tika_chandogyopanishatkhandartha": 8,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/chandogyopanishad_bhashya/tika_khandartha": 95,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/chandogyopanishad_bhashya/tika_padarthakaumudi": 131,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/ishavasyopanishad_bhashya/mula": 22,
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/ishavasyopanishad_bhashya/tika_bhashya": 18,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/ishavasyopanishad_bhashya/tika_jayatirtha": 19,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/ishavasyopanishad_bhashya/tika_prakashika": 18,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kathopanishad_bhashya/mula": 90,
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kathopanishad_bhashya/tika_bhashya": 49,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kathopanishad_bhashya/tika_raghavendratirthakhandartha": 78,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kathopanishad_bhashya/tika_shriraghavendratirthakhandartha": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kathopanishad_bhashya/tika_shrivadirajatirtha": 0,
@@ -1022,6 +1041,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kathopanishad_bhashya/tika_vedeshatirthakhandartha": 77,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kathopanishad_bhashya/tika_vyasatirtha": 79,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kenopanishad_bhashya/mula": 14,
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kenopanishad_bhashya/tika_bhashya": 7,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kenopanishad_bhashya/tika_jayatirtha": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kenopanishad_bhashya/tika_prakashika": 12,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kenopanishad_bhashya/tika_shriraghavendrayati": 8,
@@ -1034,6 +1054,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kenopanishad_bhashya/tika_shrivedeshatirthaviracitashrutyartha": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kenopanishad_bhashya/tika_vivarana": 18,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mandukyopanishadbhashyam/mula": 30,
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_bhashya": 17,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_jayatirtha": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_padarthadipika": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_prakashika": 8,
@@ -1041,6 +1062,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_shrinivasatirthaviracitapadarthadipika": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_shrivyasatirtha": 8,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mundakopanishadbhashyam/mula": 55,
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mundakopanishadbhashyam/tika_bhashya": 22,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mundakopanishadbhashyam/tika_padarthadipika": 23,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mundakopanishadbhashyam/tika_prakashika": 10,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mundakopanishadbhashyam/tika_shrinivasatirtha": 37,
@@ -1048,6 +1070,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/mula": 41,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_anantabhatta": 23,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_anantabhattaviracitashatprashnabhashyatikatippani": 0,
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_bhashya": 14,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_gudhakartrikashatprashnabhashyatikatippani": 17,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_jayatirtha": 35,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_mankalidharmarajacarya": 33,
@@ -1066,6 +1089,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_tamraparnishrinivasacaryaviracitashatprashrabhashyatikatippani": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_vivarana": 33,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/taittiriyopanishad_bhashya/mula": 49,
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_bhashya": 37,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_khandartha": 4,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_nivasatirthiyakhandartha": 7,
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_padarthadipika": 35,
@@ -1529,10 +1553,6 @@
   "kavya_alankara/sumadhva_vijaya/sarga_9": 0,
   "misc/ajaya_vijayendra": 0,
   "misc/satyadhyana_tirtha_civil_suit": 0,
-  "nitishastra/chanakya_niti": 339,
-  "nitishastra/chanakya_sutra": 574,
-  "nitishastra/hitopadesha": 5,
-  "nitishastra/kamandakiya_nitisara": 1221,
   "purana/maha_purana/agni_purana": 610,
   "purana/maha_purana/bhagavata_purana/skandha_01": 813,
   "purana/maha_purana/bhagavata_purana/skandha_02": 391,
@@ -1651,12 +1671,16 @@
   "shastra/natya_shastra/mula": 539,
   "shastra/natya_shastra/tika": 71,
   "shastra/niti_shastra/artha_shastra/mula": 1910,
+  "shastra/niti_shastra/chanakya_niti": 339,
+  "shastra/niti_shastra/chanakya_sutra": 574,
   "shastra/niti_shastra/hitopadesha/mula": 718,
+  "shastra/niti_shastra/kamandakiya_nitisara": 1221,
+  "shastra/niti_shastra/subhashita": 0,
   "shastra/ratna_pariksha/agastiya": 42,
   "shastra/ratna_pariksha/ratnadipika": 105,
   "shastra/shainika_shastra/mula": 375,
   "smriti_dharma/dharmashastra/chaturvarga_chintamani": 0,
-  "smriti_dharma/dharmashastra/dayabhaga": 0,
+  "smriti_dharma/dharmashastra/dayabhaga": 677,
   "smriti_dharma/dharmashastra/dharma_sindhu": 0,
   "smriti_dharma/dharmashastra/grihastha_ratnakara": 60,
   "smriti_dharma/dharmashastra/kalpataru": 0,
@@ -1667,7 +1691,7 @@
   "smriti_dharma/smriti/atri_smriti": 0,
   "smriti_dharma/smriti/baudhayana_smriti": 0,
   "smriti_dharma/smriti/brihaspati_smriti": 0,
-  "smriti_dharma/smriti/daksha_smriti": 0,
+  "smriti_dharma/smriti/daksha_smriti": 208,
   "smriti_dharma/smriti/harita_smriti": 0,
   "smriti_dharma/smriti/katyayana_smriti": 976,
   "smriti_dharma/smriti/likhita_smriti": 0,
@@ -1741,7 +1765,7 @@
   "vedanga/kalpa/shukla_yajurveda/paraskara/grihyasutra": 423,
   "vedanga/nirukta": 14,
   "vedanga/shiksha/atharvaveda_shiksha/manduki_shiksha": 0,
-  "vedanga/shiksha/paniniya_shiksha": 0,
+  "vedanga/shiksha/paniniya_shiksha": 60,
   "vedanga/shiksha/pratishakhya/rigveda_pratishakhya": 0,
   "vedanga/shiksha/pratishakhya/samaveda_pratishakhya/pushpasutra": 0,
   "vedanga/shiksha/pratishakhya/samaveda_pratishakhya/rik_tantra": 0,
@@ -1754,7 +1778,7 @@
   "vedanga/shiksha/rigveda_shikshas/swarankusha_shiksha": 0,
   "vedanga/shiksha/samaveda_shikshas/gautami_shiksha": 0,
   "vedanga/shiksha/samaveda_shikshas/lomashi_shiksha": 0,
-  "vedanga/shiksha/samaveda_shikshas/naradiya_shiksha": 0,
+  "vedanga/shiksha/samaveda_shikshas/naradiya_shiksha": 241,
   "vedanga/shiksha/yajurveda_shikshas/krishna_yajurveda_shikshas/aranya_shiksha": 0,
   "vedanga/shiksha/yajurveda_shikshas/krishna_yajurveda_shikshas/bharadwaja_shiksha": 0,
   "vedanga/shiksha/yajurveda_shikshas/krishna_yajurveda_shikshas/kauhaliya_shiksha": 0,
@@ -2204,6 +2228,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_jayatirtha": {
    "source_url": "https://dvaitavedanta.in/category-details/14026/938/thasha/2-kath/malma"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_kathalakshanam": {
+   "source_url": "https://dvaitavedanta.in/category-details/14026/938/thasha/2-kath/malma"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/katha_lakshana/tika_panchika": {
    "source_url": "https://dvaitavedanta.in/category-details/14026/938/thasha/2-kath/malma"
   },
@@ -2222,6 +2249,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mandaramanjari": {
    "source_url": "https://dvaitavedanta.in/category-details/4733/942/thasha/6-maya/mal"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadakhandanam": {
+   "source_url": "https://dvaitavedanta.in/category-details/4733/942/thasha/6-maya/mal"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/mayavada_khandana/tika_mayavadaparashu": {
    "source_url": "https://dvaitavedanta.in/category-details/4733/942/thasha/6-maya/mal"
   },
@@ -2238,6 +2268,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/13528/937/thasha/1-para/managa/garana"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_jayatirtha": {
+   "source_url": "https://dvaitavedanta.in/category-details/13528/937/thasha/1-para/managa/garana"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_pramanalakshanam": {
    "source_url": "https://dvaitavedanta.in/category-details/13528/937/thasha/1-para/managa/garana"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/pramana_lakshana/tika_vakyarthakaumudi": {
@@ -2259,6 +2292,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/4774/943/thasha/7-math/mal"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhamdanaparashu": {
+   "source_url": "https://dvaitavedanta.in/category-details/4774/943/thasha/7-math/mal"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanam": {
    "source_url": "https://dvaitavedanta.in/category-details/4774/943/thasha/7-math/mal"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana/tika_mithyatvanumanakhandanaparashu": {
@@ -2310,6 +2346,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/4818/940/thasha/4-tata/mal"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_jayatirtha": {
+   "source_url": "https://dvaitavedanta.in/category-details/4818/940/thasha/4-tata/mal"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_mula": {
    "source_url": "https://dvaitavedanta.in/category-details/4818/940/thasha/4-tata/mal"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/tattva_viveka/tika_naropantiya": {
@@ -2381,6 +2420,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/2568/295/sharam/1-shar/parath"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhashya": {
+   "source_url": "https://dvaitavedanta.in/category-details/2568/295/sharam/1-shar/parath"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya/tika_bhavabodha": {
    "source_url": "https://dvaitavedanta.in/category-details/2568/295/sharam/1-shar/parath"
   },
@@ -2426,10 +2468,10 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_kiranavalyam": {
    "source_url": "https://dvaitavedanta.in/category-details/2022/567/sharam/2-shar/garana/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_mannyayadipakiranavali": {
+  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadeepika": {
    "source_url": "https://dvaitavedanta.in/category-details/2022/567/sharam/2-shar/garana/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadeepika": {
+  "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipakiranavali": {
    "source_url": "https://dvaitavedanta.in/category-details/2022/567/sharam/2-shar/garana/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_tatparya_nirnaya/tika_nyayadipikabhavaprakasha": {
@@ -3380,6 +3422,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/tika_jayatirtha": {
    "source_url": "https://dvaitavedanta.in/category-details/6161/6145/thavat/sharat/athhay/managa"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/dvaita_dyumani/tika_mula": {
+   "source_url": "https://dvaitavedanta.in/category-details/6161/6145/thavat/sharat/athhay/managa"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
@@ -3413,7 +3458,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhighatitakartritvasyamukhyasyaivavivakshitatvepurvoktativyap": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dala": {
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_buddhipurvamsarvakartritvaditihetoshrutisiddhatvenumeyabhavakath": {
@@ -3425,7 +3470,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_ekasyaiva_granthasya_naikana": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gaunilakshanasthalayo_rvai_shamyena_vyakhyane_bijabhavapradarsha": {
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gaunilakshanasthalayorvaishamyenavyakhyanebijabhavapradarshanapu": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_gitatatparyodahritamkartritvamgaunam_anuvyakhyanoktamcapradhanam": {
@@ -3464,7 +3509,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvamdvividhamitikartritvavibhagapratipadakapaingitishrutes": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvasya_buddhighatitatve_pra": {
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kartritvasyabuddhighatitatveprakrityadhikarananuvyakhyanavirodha": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_kathalakshanadipramananai_kathayamapishruteshshrutitvenaivaprama": {
@@ -3483,6 +3528,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya": {
+   "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_mattikakritpadiyavyakhyanasyasphutabadhitasangatimattvapradarsha": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_nacavacanikarthastatparyarthaitivisheshaitiacaryavakyasyavacanik": {
@@ -3518,9 +3566,6 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_pravrittirupakartritvasyabuddhighatitatvekartritvasyabuddhivyapt": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_shrimattika": {
-   "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
-  },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_siddhantedushanasyapyaprasiddhavisheshanatvasyasiddhisankirnatad": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
@@ -3539,7 +3584,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_vimarshanasaukaryayasvandaryacandrikayayathagranthamanuvada": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yatra_vacanikaryadanya_iti_vakyapataka_laukikavakyeshu_ityasya": {
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yatravacanikaryadanya_itivakyapataka_laukikavakyeshu_ityasyakrit": {
    "source_url": "https://dvaitavedanta.in/category-details/19180/19173/sharas/karama/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yuktatyupetamitisangatyupetamityarthakamitipakshasyanirasa": {
@@ -3563,7 +3608,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_abhimanyadhikaranam": {
    "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasya_pranunirasadavashishtasutrapavyakhyanama": {
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasyapranunirasadavashishtasutrapavyakhyanaman": {
    "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_akashadhikaranam": {
@@ -3597,6 +3642,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_brahmadhikaranam": {
+   "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_caturthapada": {
    "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_gayatryadhikaranam": {
@@ -3639,6 +3687,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_pranadhikaranam": {
+   "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_prathamapada": {
    "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_samanvayadhikaranam": {
@@ -3770,9 +3821,6 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/shrivijayindravijayavaibhavam/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/18641/18620/sharas/sharav/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/mula": {
-   "source_url": "https://dvaitavedanta.in/category-details/10498/10497/samath/samath/parath"
-  },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/sumadhva_vijaya/tika_iti_shrimadvedangamuni": {
    "source_url": "https://dvaitavedanta.in/category-details/10498/10497/samath/samath/parath"
   },
@@ -3830,10 +3878,10 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/9011/4434/sharaj/vathav/vathav/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vadavalibhavadipika": {
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_bhavadipika": {
    "source_url": "https://dvaitavedanta.in/category-details/9011/4434/sharaj/vathav/vathav/managa"
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vadavaliprakasha": {
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_prakasha": {
    "source_url": "https://dvaitavedanta.in/category-details/9011/4434/sharaj/vathav/vathav/managa"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/vadavali/tika_vivarana": {
@@ -3929,6 +3977,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anubhashya/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/14989/565/satara/4-brah/malma/parath"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anubhashya/tika_bhashya": {
+   "source_url": "https://dvaitavedanta.in/category-details/14989/565/satara/4-brah/malma/parath"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/anubhashya/tika_tatvamanjari": {
    "source_url": "https://dvaitavedanta.in/category-details/14989/565/satara/4-brah/malma/parath"
   },
@@ -3942,6 +3993,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/1142/562/satara/1-brah/parath/parath/jajani"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhamati": {
+   "source_url": "https://dvaitavedanta.in/category-details/1142/562/satara/1-brah/parath/parath/jajani"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhashya": {
    "source_url": "https://dvaitavedanta.in/category-details/1142/562/satara/1-brah/parath/parath/jajani"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya/tika_bhavabodha": {
@@ -4034,10 +4088,16 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/aitareyopanishad_bhashya/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/14224/931/upanas/6-aita/malma/thavat/parath"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/aitareyopanishad_bhashya/tika_bhashya": {
+   "source_url": "https://dvaitavedanta.in/category-details/14224/931/upanas/6-aita/malma/thavat/parath"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/aitareyopanishad_bhashya/tika_bhavapradipa": {
    "source_url": "https://dvaitavedanta.in/category-details/14224/931/upanas/6-aita/malma/thavat/parath"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/brihadaranyakopanishadbhashyam/mula": {
+   "source_url": "https://dvaitavedanta.in/category-details/14242/933/upanas/8-bhat/malma/tataya/ashava"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_bhashya": {
    "source_url": "https://dvaitavedanta.in/category-details/14242/933/upanas/8-bhat/malma/tataya/ashava"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/brihadaranyakopanishadbhashyam/tika_bhavabodhatippani": {
@@ -4047,6 +4107,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/14242/933/upanas/8-bhat/malma/tataya/ashava"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/chandogyopanishad_bhashya/mula": {
+   "source_url": "https://dvaitavedanta.in/category-details/14295/934/upanas/9-chha/malma/parath"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/chandogyopanishad_bhashya/tika_bhashya": {
    "source_url": "https://dvaitavedanta.in/category-details/14295/934/upanas/9-chha/malma/parath"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/chandogyopanishad_bhashya/tika_chandogyopanishatkhandartha": {
@@ -4061,6 +4124,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/ishavasyopanishad_bhashya/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/14152/925/upanas/1-iish/malma"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/ishavasyopanishad_bhashya/tika_bhashya": {
+   "source_url": "https://dvaitavedanta.in/category-details/14152/925/upanas/1-iish/malma"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/ishavasyopanishad_bhashya/tika_jayatirtha": {
    "source_url": "https://dvaitavedanta.in/category-details/14152/925/upanas/1-iish/malma"
   },
@@ -4068,6 +4134,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/14152/925/upanas/1-iish/malma"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kathopanishad_bhashya/mula": {
+   "source_url": "https://dvaitavedanta.in/category-details/14165/926/upanas/2-kath/malma/parath/parath"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kathopanishad_bhashya/tika_bhashya": {
    "source_url": "https://dvaitavedanta.in/category-details/14165/926/upanas/2-kath/malma/parath/parath"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kathopanishad_bhashya/tika_raghavendratirthakhandartha": {
@@ -4097,6 +4166,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kenopanishad_bhashya/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/14303/935/upanas/10-tal/malma/parath"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kenopanishad_bhashya/tika_bhashya": {
+   "source_url": "https://dvaitavedanta.in/category-details/14303/935/upanas/10-tal/malma/parath"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/kenopanishad_bhashya/tika_prakashika": {
    "source_url": "https://dvaitavedanta.in/category-details/14303/935/upanas/10-tal/malma/parath"
   },
@@ -4121,6 +4193,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mandukyopanishadbhashyam/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/15955/930/upanas/5-mana/malma/thavat"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_bhashya": {
+   "source_url": "https://dvaitavedanta.in/category-details/15955/930/upanas/5-mana/malma/thavat"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mandukyopanishadbhashyam/tika_padarthadipika": {
    "source_url": "https://dvaitavedanta.in/category-details/15955/930/upanas/5-mana/malma/thavat"
   },
@@ -4136,6 +4211,9 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mundakopanishadbhashyam/mula": {
    "source_url": "https://dvaitavedanta.in/category-details/15941/928/upanas/3-mana/malma/thavat"
   },
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mundakopanishadbhashyam/tika_bhashya": {
+   "source_url": "https://dvaitavedanta.in/category-details/15941/928/upanas/3-mana/malma/thavat"
+  },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/mundakopanishadbhashyam/tika_padarthadipika": {
    "source_url": "https://dvaitavedanta.in/category-details/15941/928/upanas/3-mana/malma/thavat"
   },
@@ -4149,6 +4227,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/15964/929/upanas/4-shha/malma/parath"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_anantabhatta": {
+   "source_url": "https://dvaitavedanta.in/category-details/15964/929/upanas/4-shha/malma/parath"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_bhashya": {
    "source_url": "https://dvaitavedanta.in/category-details/15964/929/upanas/4-shha/malma/parath"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/shatprashnopanishadbhashyam/tika_gudhakartrikashatprashnabhashyatikatippani": {
@@ -4185,6 +4266,9 @@
    "source_url": "https://dvaitavedanta.in/category-details/15964/929/upanas/4-shha/malma/parath"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/taittiriyopanishad_bhashya/mula": {
+   "source_url": "https://dvaitavedanta.in/category-details/14233/932/upanas/7-tata/malma/shakas"
+  },
+  "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_bhashya": {
    "source_url": "https://dvaitavedanta.in/category-details/14233/932/upanas/7-tata/malma/shakas"
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/taittiriyopanishad_bhashya/tika_khandartha": {
@@ -4362,19 +4446,6 @@
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Tattvavaiśāradī",
    "licence": "CC-BY 4.0"
-  },
-  "nitishastra/chanakya_niti": {
-   "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/chANakyanItisort.itx"
-  },
-  "nitishastra/chanakya_sutra": {
-   "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/chANakyasUtra.itx"
-  },
-  "nitishastra/hitopadesha": {
-   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_nArAyaNa-hitopadeza.txt"
-  },
-  "nitishastra/kamandakiya_nitisara": {
-   "source_url": "https://docs.google.com/document/d/1OFWLyjXMqqiHTBg3WqvFJsWuDhlEQgE62k_7Ik2BTYQ/export?format=txt",
-   "licence": "CC BY 4.0"
   },
   "purana/maha_purana/agni_purana": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
@@ -4590,10 +4661,20 @@
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Arthaśāstra",
    "licence": "CC-BY 4.0"
   },
+  "shastra/niti_shastra/chanakya_niti": {
+   "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/chANakyanItisort.itx"
+  },
+  "shastra/niti_shastra/chanakya_sutra": {
+   "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/chANakyasUtra.itx"
+  },
   "shastra/niti_shastra/hitopadesha/mula": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Hitopadeśa",
    "licence": "CC-BY 4.0"
+  },
+  "shastra/niti_shastra/kamandakiya_nitisara": {
+   "source_url": "https://docs.google.com/document/d/1OFWLyjXMqqiHTBg3WqvFJsWuDhlEQgE62k_7Ik2BTYQ/export?format=txt",
+   "licence": "CC BY 4.0"
   },
   "shastra/ratna_pariksha/agastiya": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
@@ -4610,10 +4691,20 @@
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Śyainikaśāstra",
    "licence": "CC-BY 4.0"
   },
+  "smriti_dharma/dharmashastra/dayabhaga": {
+   "source": "South Asia Institute Open Educational Resources, University of Texas at Austin (Patrick Olivelle)",
+   "source_url": "https://docs.google.com/document/d/1-208O-oJYj6MyyBmsq1TckbJ6PtTUAajY5x5A8muDCY/",
+   "licence": "CC BY 4.0"
+  },
   "smriti_dharma/dharmashastra/grihastha_ratnakara": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Gṛhastharatnākara",
    "licence": "CC-BY 4.0"
+  },
+  "smriti_dharma/smriti/daksha_smriti": {
+   "source": "South Asia Institute Open Educational Resources, University of Texas at Austin (Donald R. Davis, Jr.)",
+   "source_url": "https://docs.google.com/document/d/1JVu0vygrgn4SrQ3h42U0FdjDVuJ8371H22uGjaLx6PY/",
+   "licence": "CC BY 4.0"
   },
   "smriti_dharma/smriti/katyayana_smriti": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
@@ -4805,6 +4896,16 @@
   },
   "vedanga/nirukta": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_yAska-nirukta.txt"
+  },
+  "vedanga/shiksha/paniniya_shiksha": {
+   "source": "Sanskrit Documents (sanskritdocuments.org)",
+   "source_url": "https://sanskritdocuments.org/doc_z_misc_major_works/pANinIyashikShA.html",
+   "licence": "sanskritdocuments.org standard usage terms (free non-commercial use, source credited)"
+  },
+  "vedanga/shiksha/samaveda_shikshas/naradiya_shiksha": {
+   "source": "Vedic Reserve, Maharishi University of Management (vedicreserve.miu.edu)",
+   "source_url": "https://vedicreserve.miu.edu/shiksha/naradiya_shiksha.html",
+   "licence": "Vedic Reserve's standard usage terms (published for study, source credited)"
   },
   "vedanga/vyakarana/ashtadhyayi/balamanorama": {
    "source": "balamanorama.dict (StarDict, uploaded)",
@@ -5260,6 +5361,614 @@
   },
   "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/samhita": {
    "source": "Virendra Agarwal, 'Digitisation of Vedas' (VedaKosh), via sanskritdocuments.org, used with permission. Cross-validated against VedaWeb TEI (Zenodo 4601264)."
+  }
+ },
+ "pending_sources": {
+  "purana/maha_purana/bhavishya_purana": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Bhavishya Purana, Anandashram/Venkateshvara-style Sanskrit ed.",
+     "url": "https://archive.org/details/in.ernet.dli.2015.480447",
+     "format": "archive_org_pdf",
+     "note": "Not yet confirmed pure-Sanskrit vs Sanskrit+Hindi -- check before OCR. Other candidates on the same search page (Gita Press, Acharya Sriram Sharma editions) are likely Hindi-heavy, deprioritized."
+    }
+   ]
+  },
+  "purana/maha_purana/brahmavaivarta_purana": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Brahmavaivarta Purana, Jivananda Vidyasagara ed. 1888 (2 vols, pure Sanskrit)",
+     "url": "https://archive.org/details/wovk_brahmavaivarta-purana-volume-1-jivananda-vidyasagara-1888-jivananda-vidyasagar-calcutta",
+     "format": "archive_org_pdf",
+     "note": "Volume 1; volume 2 at https://archive.org/details/gxts_brahmavaivarta-purana-volume-2-jivananda-vidyasagara-1888-jivananda-vidyasagar-calcutta -- both preferred over the translation-heavy alternatives on the same search page."
+    }
+   ]
+  },
+  "purana/maha_purana/garuda_purana/brahma_khanda": {
+   "status": "not_located",
+   "candidates": []
+  },
+  "purana/maha_purana/garuda_purana/uttara_khanda_pretakalpa": {
+   "status": "not_located",
+   "candidates": []
+  },
+  "purana/maha_purana/padma_purana": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Padma Purana, Anandashram Sanskrit Series 131, VN Mandalik ed. (4 parts, pure Sanskrit)",
+     "url": "https://archive.org/details/Anandashram_Samskrita_Granthavali_Anandashram_Sanskrit_Series/ASS_131_Padma_Puranam_Part_1_-_VN_Mandalik_1893",
+     "format": "archive_org_pdf",
+     "note": "Standard critical Anandashram Sanskrit Series edition, 4 parts (1893-94) -- preferred over the Gita Press/Nag Publishers editions (mostly Sanskrit+Hindi or Sanskrit+English translation) on the same search page."
+    }
+   ]
+  },
+  "purana/maha_purana/skanda_purana/avantya_khanda": {
+   "status": "not_located",
+   "candidates": []
+  },
+  "purana/maha_purana/skanda_purana/brahma_khanda": {
+   "status": "not_located",
+   "candidates": []
+  },
+  "purana/maha_purana/skanda_purana/kashi_khanda": {
+   "status": "not_located",
+   "candidates": []
+  },
+  "purana/maha_purana/skanda_purana/maheshvara_khanda": {
+   "status": "not_located",
+   "candidates": []
+  },
+  "purana/maha_purana/skanda_purana/nagara_khanda": {
+   "status": "not_located",
+   "candidates": []
+  },
+  "purana/maha_purana/skanda_purana/prabhasa_khanda": {
+   "status": "not_located",
+   "candidates": []
+  },
+  "purana/maha_purana/skanda_purana/vaishnava_khanda": {
+   "status": "not_located",
+   "candidates": []
+  },
+  "purana/maha_purana/vamana_purana/saromahatmya": {
+   "status": "not_located",
+   "candidates": []
+  },
+  "smriti_dharma/dharmashastra/chaturvarga_chintamani": {
+   "status": "text_available",
+   "candidates": [
+    {
+     "label": "Danakhanda, vol. 1 (Google Doc)",
+     "url": "https://docs.google.com/document/d/1bbOZp7PjoIFTmbYo142wDqXp4LAlSLxEnXniHzwP4Io/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": "UT Austin OER, CC BY-SA 4.0. 7 parts total across 4 volumes -- this is part 1 of 7."
+    },
+    {
+     "label": "Vratakhanda, vol. 2, part 1 (Google Doc)",
+     "url": "https://docs.google.com/document/d/1Gzy39TfUhVQeATcAK2u_1SRbE5P56GEI3gJGQENOBw4/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": "Part 2 of 7."
+    },
+    {
+     "label": "Vratakhanda, vol. 2, part 2 (Google Doc)",
+     "url": "https://docs.google.com/document/d/1yE7lOthluRgzSMMs0FG8Dl0clw_A38L3QrWFKvnyu4w/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": "Part 3 of 7."
+    },
+    {
+     "label": "Shraddhakalpa, vol. 3, part 1, Parishesakhanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1RQw-CReS-f_bXxoK-iisKPLRgdXqDNB7Onj1D8eCuXU/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": "Part 4 of 7."
+    },
+    {
+     "label": "Shraddhakalpa, vol. 3, part 2, Parishesakhanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1qcG6ulzjwGStDZbCIizjOsi7dsf_hlUVV6gSqFc728k/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": "Part 5 of 7."
+    },
+    {
+     "label": "Kalanirnaya, vol. 3, part 3, Parishesakhanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/13a61jeGom2XQ5ARGaASlwIeo4IGu6GUnzSg8caT0pWg/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": "Part 6 of 7."
+    },
+    {
+     "label": "Prayashcitta, vol. 4 (Google Doc)",
+     "url": "https://docs.google.com/document/d/1G2_FKkJo1M_jLddqa3qk0SLvjJz8WBO2ggAGhrrhsK4/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": "Part 7 of 7."
+    }
+   ]
+  },
+  "smriti_dharma/dharmashastra/dharma_sindhu": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Dharmasindhu by Kashinath Upadhyay, Bombay 1907",
+     "url": "https://archive.org/download/kict-dharmasindhu-by-kashinath-upadhyay-sanskrit-dharma/Dharmasindhu%20By%20Kashinath%20Upadhyay%20Sanskrit%20Dharmashastra%20Bombay%201907%20-%20Khemraj%20Shrikrishnadas.pdf",
+     "format": "archive_org_pdf",
+     "note": "Matches taxonomy's own _default_author (Kashinatha Upadhyaya) exactly. archive.org 'Text PDF' format."
+    }
+   ]
+  },
+  "smriti_dharma/dharmashastra/kalpataru": {
+   "status": "text_available",
+   "candidates": [
+    {
+     "label": "Vyavaharakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/19PYQkxevYBce2s9cnC8BcaCm1feZMp9Gp6cD6anjjtY/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": "11 kandas total; Danakanda's own doc link on the UT page was itself a sub-page link, not a direct Google Doc -- re-check https://sites.utexas.edu/sanskrit/resources/dharmasastra/krtyakalpataru/ for it specifically before assuming it's covered."
+    },
+    {
+     "label": "Rajadharmakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1LkBBYC4JBlHma97bHYpPhq-_SDMJ7DlJsRuIVNle_qM/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    },
+    {
+     "label": "Mokshakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1aSTatFtFg3aqI-7pgfN4RWymC9Ky5LulG6b8KaTPGLc/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    },
+    {
+     "label": "Brahmacharikanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1eekxMHRFBDO7u5lX-4m9TcyEPFFiVo4hPScfSEOpXxI/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    },
+    {
+     "label": "Grihasthakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1pbDnABNQ-j9aODuNqfYNFYK9jP8VGuUO6aRcT40gTVQ/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    },
+    {
+     "label": "Tirthavivecanakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1HDifkSf2jWFC6VNFp0UJANNt4ad572FlnEz7Ps4LIAI/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    },
+    {
+     "label": "Niyatakalakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/10pzQhaza5D0XzVLcTVmhyx6gR2Y8T3mhoJIhWnFbb5o/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    },
+    {
+     "label": "Shuddhikanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1Dy-F7QY_gnTMHeqUsGgr75jp7UZOrD6JaDB6kHWcDaY/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    },
+    {
+     "label": "Vratakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1xlGRoYkWNI7NVRrpiWLz4Zq2XnovpwpohDmwsPbasAY/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    },
+    {
+     "label": "Shraddhakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1uJHXfNfMEfky06ZBPe1GBVVQKB1RZZeGfoCTc_DeiuQ/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    },
+    {
+     "label": "Pratishthakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/18UY_o0jd25A_GejleX6wF1-riHWjNbd8velN4ht_jqA/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    }
+   ]
+  },
+  "smriti_dharma/dharmashastra/nirnaya_sindhu": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Nirnayasindhu of Kamalakara Bhatta (Fasc. XV-XX)",
+     "url": "https://archive.org/download/ksu.d42.nirnayasindhuofk0000gopa/ksu.d42.nirnayasindhuofk0000gopa.pdf",
+     "format": "archive_org_pdf",
+     "note": "Sanskrit, archive.org 'Text PDF' format (has an embedded text layer already, not a bare image scan)."
+    }
+   ]
+  },
+  "smriti_dharma/dharmashastra/smriti_chandrika": {
+   "status": "text_available",
+   "candidates": [
+    {
+     "label": "Vyavaharakanda, parts 1 and 2 (Google Doc)",
+     "url": "https://docs.google.com/document/d/1pm1UjraMz8O4gkP3hmFv9-ltw1Kx2TvCOtkGGAlNa9o/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": "5 kandas total by Devannabhatta."
+    },
+    {
+     "label": "Shraddhakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1UTkpLRoHwyYLz8KBh86LaXKNkD_POY1Vgm7DVQK2Exg/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    },
+    {
+     "label": "Samskarakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1aQO6Qr41FwEKMqJoXsqlnT2oN1rxiYh_MG2A0965dDk/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    },
+    {
+     "label": "Ashaucakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1O9Yq-mTpXx0rrmFQNELXMOw5HrFauoyQAcxaGa9dE-Q/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    },
+    {
+     "label": "Ahnikakanda (Google Doc)",
+     "url": "https://docs.google.com/document/d/1tISoqVRqJu2ourFaHKu_pQztP6aWSJdES1h0kAYs-Zo/export?format=txt",
+     "format": "google_doc_txt_export",
+     "note": ""
+    }
+   ]
+  },
+  "smriti_dharma/smriti/angiras_smriti": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Ashtadasha Smriti Sangraha (compiled, 18 smritis)",
+     "url": "https://archive.org/download/uXRQ_ashtadasha-smriti-sangraha-by-sanskrit-sahitya-mandal-sasta-sanskrit-sahitya-man/Ashtadasha%20Smriti%20Sangraha%20by%20Sanskrit%20Sahitya%20Mandal%20Sasta%20Sanskrit%20Sahitya%20Mandal%201941%20-%20Sanskrit%20Press%20Muzaffarpur.pdf",
+     "format": "archive_org_pdf",
+     "note": "Sanskrit Sahitya Mandal, Muzaffarpur 1941. One compiled volume covering all 18 traditional minor smritis -- page range for Angiras specifically not yet identified within it."
+    }
+   ]
+  },
+  "smriti_dharma/smriti/atri_smriti": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Ashtadasha Smriti Sangraha (compiled, 18 smritis)",
+     "url": "https://archive.org/download/uXRQ_ashtadasha-smriti-sangraha-by-sanskrit-sahitya-mandal-sasta-sanskrit-sahitya-man/Ashtadasha%20Smriti%20Sangraha%20by%20Sanskrit%20Sahitya%20Mandal%20Sasta%20Sanskrit%20Sahitya%20Mandal%201941%20-%20Sanskrit%20Press%20Muzaffarpur.pdf",
+     "format": "archive_org_pdf",
+     "note": "Same compiled volume as Angiras; page range for Atri not yet identified."
+    }
+   ]
+  },
+  "smriti_dharma/smriti/baudhayana_smriti": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Ashtadasha Smriti Sangraha (compiled, 18 smritis)",
+     "url": "https://archive.org/download/uXRQ_ashtadasha-smriti-sangraha-by-sanskrit-sahitya-mandal-sasta-sanskrit-sahitya-man/Ashtadasha%20Smriti%20Sangraha%20by%20Sanskrit%20Sahitya%20Mandal%20Sasta%20Sanskrit%20Sahitya%20Mandal%201941%20-%20Sanskrit%20Press%20Muzaffarpur.pdf",
+     "format": "archive_org_pdf",
+     "note": "This is the independent Baudhayana SMRITI (verse text), distinct from the already-populated Baudhayana Dharmasutra under vedanga.kalpa -- do not conflate the two when OCRing."
+    }
+   ]
+  },
+  "smriti_dharma/smriti/brihaspati_smriti": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Ashtadasha Smriti Sangraha (compiled, 18 smritis)",
+     "url": "https://archive.org/download/uXRQ_ashtadasha-smriti-sangraha-by-sanskrit-sahitya-mandal-sasta-sanskrit-sahitya-man/Ashtadasha%20Smriti%20Sangraha%20by%20Sanskrit%20Sahitya%20Mandal%20Sasta%20Sanskrit%20Sahitya%20Mandal%201941%20-%20Sanskrit%20Press%20Muzaffarpur.pdf",
+     "format": "archive_org_pdf",
+     "note": "Page range not yet identified."
+    }
+   ]
+  },
+  "smriti_dharma/smriti/harita_smriti": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Ashtadasha Smriti Sangraha (compiled, 18 smritis)",
+     "url": "https://archive.org/download/uXRQ_ashtadasha-smriti-sangraha-by-sanskrit-sahitya-mandal-sasta-sanskrit-sahitya-man/Ashtadasha%20Smriti%20Sangraha%20by%20Sanskrit%20Sahitya%20Mandal%20Sasta%20Sanskrit%20Sahitya%20Mandal%201941%20-%20Sanskrit%20Press%20Muzaffarpur.pdf",
+     "format": "archive_org_pdf",
+     "note": "Page range not yet identified."
+    }
+   ]
+  },
+  "smriti_dharma/smriti/likhita_smriti": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Ashtadasha Smriti Sangraha (compiled, 18 smritis)",
+     "url": "https://archive.org/download/uXRQ_ashtadasha-smriti-sangraha-by-sanskrit-sahitya-mandal-sasta-sanskrit-sahitya-man/Ashtadasha%20Smriti%20Sangraha%20by%20Sanskrit%20Sahitya%20Mandal%20Sasta%20Sanskrit%20Sahitya%20Mandal%201941%20-%20Sanskrit%20Press%20Muzaffarpur.pdf",
+     "format": "archive_org_pdf",
+     "note": "Page range not yet identified."
+    }
+   ]
+  },
+  "smriti_dharma/smriti/pracetas_smriti": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Ashtadasha Smriti Sangraha (compiled, 18 smritis)",
+     "url": "https://archive.org/download/uXRQ_ashtadasha-smriti-sangraha-by-sanskrit-sahitya-mandal-sasta-sanskrit-sahitya-man/Ashtadasha%20Smriti%20Sangraha%20by%20Sanskrit%20Sahitya%20Mandal%20Sasta%20Sanskrit%20Sahitya%20Mandal%201941%20-%20Sanskrit%20Press%20Muzaffarpur.pdf",
+     "format": "archive_org_pdf",
+     "note": "Page range not yet identified."
+    }
+   ]
+  },
+  "smriti_dharma/smriti/samvarta_smriti": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Ashtadasha Smriti Sangraha (compiled, 18 smritis)",
+     "url": "https://archive.org/download/uXRQ_ashtadasha-smriti-sangraha-by-sanskrit-sahitya-mandal-sasta-sanskrit-sahitya-man/Ashtadasha%20Smriti%20Sangraha%20by%20Sanskrit%20Sahitya%20Mandal%20Sasta%20Sanskrit%20Sahitya%20Mandal%201941%20-%20Sanskrit%20Press%20Muzaffarpur.pdf",
+     "format": "archive_org_pdf",
+     "note": "Page range not yet identified."
+    }
+   ]
+  },
+  "smriti_dharma/smriti/shankha_smriti": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Ashtadasha Smriti Sangraha (compiled, 18 smritis)",
+     "url": "https://archive.org/download/uXRQ_ashtadasha-smriti-sangraha-by-sanskrit-sahitya-mandal-sasta-sanskrit-sahitya-man/Ashtadasha%20Smriti%20Sangraha%20by%20Sanskrit%20Sahitya%20Mandal%20Sasta%20Sanskrit%20Sahitya%20Mandal%201941%20-%20Sanskrit%20Press%20Muzaffarpur.pdf",
+     "format": "archive_org_pdf",
+     "note": "Traditionally paired with Likhita (Shankha-Likhita); page range not yet identified."
+    }
+   ]
+  },
+  "smriti_dharma/smriti/shatatapa_smriti": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Ashtadasha Smriti Sangraha (compiled, 18 smritis)",
+     "url": "https://archive.org/download/uXRQ_ashtadasha-smriti-sangraha-by-sanskrit-sahitya-mandal-sasta-sanskrit-sahitya-man/Ashtadasha%20Smriti%20Sangraha%20by%20Sanskrit%20Sahitya%20Mandal%20Sasta%20Sanskrit%20Sahitya%20Mandal%201941%20-%20Sanskrit%20Press%20Muzaffarpur.pdf",
+     "format": "archive_org_pdf",
+     "note": "Page range not yet identified."
+    },
+    {
+     "label": "Shatatapasmriti Karmavipaka (standalone)",
+     "url": "https://archive.org/details/shatatapasmriti_karmavipaka_-CGV-PSS-0568-0806",
+     "format": "archive_org_pdf",
+     "note": "A standalone scan of just this text -- check this before the compiled anthology, likely cleaner to OCR alone."
+    }
+   ]
+  },
+  "smriti_dharma/smriti/ushanas_smriti": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Ashtadasha Smriti Sangraha (compiled, 18 smritis)",
+     "url": "https://archive.org/download/uXRQ_ashtadasha-smriti-sangraha-by-sanskrit-sahitya-mandal-sasta-sanskrit-sahitya-man/Ashtadasha%20Smriti%20Sangraha%20by%20Sanskrit%20Sahitya%20Mandal%20Sasta%20Sanskrit%20Sahitya%20Mandal%201941%20-%20Sanskrit%20Press%20Muzaffarpur.pdf",
+     "format": "archive_org_pdf",
+     "note": "Page range not yet identified."
+    }
+   ]
+  },
+  "smriti_dharma/smriti/vasistha_smriti": {
+   "status": "pdf_ocr_candidate",
+   "candidates": [
+    {
+     "label": "Ashtadasha Smriti Sangraha (compiled, 18 smritis)",
+     "url": "https://archive.org/download/uXRQ_ashtadasha-smriti-sangraha-by-sanskrit-sahitya-mandal-sasta-sanskrit-sahitya-man/Ashtadasha%20Smriti%20Sangraha%20by%20Sanskrit%20Sahitya%20Mandal%20Sasta%20Sanskrit%20Sahitya%20Mandal%201941%20-%20Sanskrit%20Press%20Muzaffarpur.pdf",
+     "format": "archive_org_pdf",
+     "note": "This is the independent Vasishtha SMRITI (verse text), distinct from the already-populated Vasishtha Dharmasutra under vedanga.kalpa -- do not conflate."
+    }
+   ]
+  },
+  "vedanga/shiksha/atharvaveda_shiksha/manduki_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Mandukhi Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/manduki_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/rigveda_shikshas/apishali_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Apishali Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/apishali_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/rigveda_shikshas/shaishiriya_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Shaishiriya Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/shaishiriya_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only on Vedic Reserve; text-layer quality NOT verified (this sandbox has no working PDF-text extractor -- pypdf/pdftotext both unavailable)."
+    }
+   ]
+  },
+  "vedanga/shiksha/samaveda_shikshas/gautami_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Gautamiya Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/gautami_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/samaveda_shikshas/lomashi_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Lomashiya Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/lomashi_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/krishna_yajurveda_shikshas/aranya_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Aranya Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/aranya_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/krishna_yajurveda_shikshas/bharadwaja_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Bharadvaja Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/bharadvaja_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/krishna_yajurveda_shikshas/kauhaliya_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Kauhaliya Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/kauhaliya_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/krishna_yajurveda_shikshas/shambhu_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Shambhu Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/shambhu_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/krishna_yajurveda_shikshas/siddhanta_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Siddhanta Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/siddhanta_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/krishna_yajurveda_shikshas/vyasa_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Vyasa Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/vyasa_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/shukla_yajurveda_shikshas/amoghanandini_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Amoghanandini Shiksha, Benares ed. (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/amoghanandini_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/shukla_yajurveda_shikshas/katyayani_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Katyayana Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/katyayana_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/shukla_yajurveda_shikshas/keshavi_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Keshavi padyatmika Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/padyatmika_keshavi_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/shukla_yajurveda_shikshas/madhyandini_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Laghumadhyandiniya Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/laghumadhyandina_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "Name match is approximate ('laghu-madhyandiniya' vs our 'madhyandini') -- confirm this is the same work, not a different one, before OCRing."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/shukla_yajurveda_shikshas/mandavya_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Mandavya Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/mandavya_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/shukla_yajurveda_shikshas/parashari_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Parashariya Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/parashari_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/shukla_yajurveda_shikshas/varnaratnapradipika_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Varnaratnapradipika Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/varnaratnapradipika_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/shukla_yajurveda_shikshas/vasishthi_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Vasishtha Shiksha, Tirupati ed. (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/vasishtha2_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
+  },
+  "vedanga/shiksha/yajurveda_shikshas/shukla_yajurveda_shikshas/yajnavalkya_shiksha": {
+   "status": "not_located",
+   "candidates": [
+    {
+     "label": "Yajnavalkya Shiksha (Vedic Reserve)",
+     "url": "https://vedicreserve.miu.edu/shiksha/yagyavalkya_shiksha.pdf",
+     "format": "vedic_reserve_pdf",
+     "note": "PDF-only, unverified text layer."
+    }
+   ]
   }
  }
 }

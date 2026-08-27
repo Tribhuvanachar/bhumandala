@@ -5,10 +5,12 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="js/vandana-guard.js?v=1"></script>
+<script src="js/contact-email.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>शब्दपाठः · DGE व्याकरणम्</title>
 <script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.3.3/sanscript.js"
  onerror="this.onerror=null;var s=document.createElement('script');s.src='https://unpkg.com/@indic-transliteration/sanscript@1.3.3/sanscript.js';document.head.appendChild(s);"></script>
+<link rel="stylesheet" href="css/vyakarana-base.css?v=1">
 <link rel="stylesheet" href="css/vyakarana.css?v=1">
 <link rel="stylesheet" href="css/dhatuforms.css?v=1">
 </head>
@@ -73,7 +75,12 @@
   <p class="note" style="opacity:.6;">Data: <a href="https://github.com/ashtadhyayi-com/data" target="_blank" rel="noopener">ashtadhyayi-com/data</a>, used with credit per its README.</p>
 </main>
 
+<!-- Filled by site-footer.js, shared with the landing page and reader
+     (see that file's own header comment). -->
+<div class="site-footer-links" id="siteFooterLinks"></div>
+
 <script src="js/subanta-steps.js?v=1"></script>
+<script src="js/site-footer.js?v=1"></script>
 <script src="js/shabda.js?v=3"></script>
 </body>
 </html>

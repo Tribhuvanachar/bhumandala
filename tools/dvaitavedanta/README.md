@@ -113,6 +113,34 @@ Each `data.json` follows the repo shape (`importers/common.write_grantha`):
 tika item's id matches its mula item's id, which is what `grantha_tika_text`
 asks for. `verify_extract.py` checks this.
 
+**Verifying against the live source.** `verify_extract.py` only checks the
+shape of what's already on disk -- it never touches the network, so it can't
+tell you whether the site itself has since changed. `verify_source_content.py`
+does: it re-fetches every item's own `source.url`, re-parses the live HTML
+with the same `dv_parse.parse_page` that produced the stored data, and checks
+that `sanskrit_text` is still genuinely there (verbatim, or a close match if
+the page has been reorganised since the original scrape). One page backs many
+items (a mula plus every commentary layer quoted on it), so it fetches each
+unique URL once, using the same `.dv_cache` the importer uses, and is
+resumable/spot-checkable the same way:
+
+```bash
+# Spot-check a random sample, reproducibly
+python tools/dvaitavedanta/verify_source_content.py \
+    --data dge/data/darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas \
+    --sample 25 --seed 1 --out /tmp/report.json
+
+# Full sweep, CI-friendly (non-zero exit if anything drifted/vanished)
+python tools/dvaitavedanta/verify_source_content.py --strict
+```
+
+The site occasionally answers a real request with a "One moment, please…"
+bot-challenge page instead of content (HTTP 200, so a naive fetch would cache
+it as if it were real and misreport genuinely-present content as removed);
+the tool detects and retries through this rather than trusting it, and reports
+it as its own `BLOCKED` verdict (rate-limiting, not a real finding) rather
+than folding it into `MISSING`/`PAGE_EMPTY`.
+
 ---
 
 ## Files
@@ -122,7 +150,8 @@ asks for. `verify_extract.py` checks this.
 | `dv_sources.json` | 40 granthas: seed URL, slug, section. Also the Devanagari→folder map for commentary layers, and the licence record. |
 | `dv_parse.py` | HTML parsing. Pure, no network — unit-testable. |
 | `import_dvaitavedanta.py` | Crawler, emitter, status tracker. |
-| `verify_extract.py` | Integrity checks on emitted JSON. |
+| `verify_extract.py` | Integrity checks on emitted JSON (no network -- shape only). |
+| `verify_source_content.py` | Re-fetches each item's own `source.url` and checks the stored `sanskrit_text` is still genuinely on the live page (uses network, resumable via the same HTTP cache). |
 | `sync_catalog.py` | Registers the tree in `taxonomy.json` + `library.json`. |
 | `merge_status.py` | Folds per-shard status files into one after a matrix run. |
 | `test_dv_parse.py` | Fixture tests for the parser. |

@@ -4436,6 +4436,130 @@ verified rendering real text in the reader via Playwright.
   the closed vocabulary means it lands in mūla or stays dropped — extend
   `MULA_ALIAS_KEYS`/the `*भाष्यम्` rule deliberately, never loosely.
 
+## Dayabhaga import -- the pending_pdf_sources.json "next available task" (25 Aug 2026, part 8)
+
+After the registry pass (previous entry), picked up Dayabhaga as the
+one already flagged `text_available`. Its structure turned out more
+complex than Daksha Smriti's -- worth a full pass rather than reusing
+that method blind:
+
+- 15 chapters, TWO section-numbering schemes mixed across them: most
+  are flat `<chapter.paragraph>`, but chapters 4/6/7/8/11 nest into
+  named "Section One/Two/..." sub-divisions and use
+  `<chapter.section.paragraph>` instead. Parsed both off the bracket
+  markers uniformly, ignoring the inconsistent "CHAPTER 1" vs "CHAPTER
+  FOUR" header text (digits vs words, no reliable structure there).
+- Applied 26 of Olivelle's own 27 documented errata corrections (word-
+  level typo fixes against Rocher's base edition); the 27th is a
+  paleography note about a Devanagari stroke, not a text substitution,
+  left alone.
+- Found and fixed one transcription typo NOT in the errata list: a
+  marker printed `<31.0>` sitting between `<1.29>` and `<1.31>` --
+  confirmed by its position in the sequence, corrected to `<1.30>`.
+- Kept ~280 embedded citation tags (`[M 9.103]`, `[N 13.1]`, etc. --
+  Jimutavahana quoting Manu/Narada/Vasishtha/Katyayana/Mahabharata/
+  other smritis throughout his own argument) as genuine content;
+  stripped only the one true footnote-reference marker (`[1]`, numeric-
+  only, pointing at an endnote -- a distinct pattern from the citation
+  tags, which always pair a letter siglum with a reference number).
+- Schema: `generic`, one item per marker, `{id, title, text, notes,
+  tags}` -- matches the schema's own stated purpose ("Dharmashastra
+  digests") and existing precedent (`samvitsiddhi/mula`), not the
+  `sanskrit_text`/`iast_text` shape the GRETIL-derived Puranas use.
+  One tradeoff worth flagging: the citation tags above got fully
+  transliterated into Devanagari (`[M 9.206]` -> `[म् ९.२०६]`) since
+  this schema has no separate `iast_text` field to preserve the more
+  scholarly-conventional Latin-siglum form in. Still correct and
+  legible, just less immediately recognizable to someone used to
+  reading `[M ...]`-style citations.
+
+677 items total. Verified before writing: no leftover CHAPTER/Section
+header text, no empty items, all 5 occurrences of the errata-corrected
+word landed, chapter coverage 1-15 confirmed complete. 208/208 tests,
+validate_data.py/audit_library.py clean.
+
+**Remaining `text_available` leaves from the registry, not done yet**:
+Caturvargacintamani (7 parts -- large, its own pass), Kalpataru (11
+kandas), Smriti Chandrika (5 kandas). All have confirmed working
+Google Doc URLs in `pending_pdf_sources.json` already.
+
+## Nitishastra consolidation + audit sweep from user review (25 Aug 2026, part 9)
+
+User reviewed the live site directly and caught a real duplicate: a
+top-level `nitishastra/` (added 20 Aug: hitopadesha/chanakya_niti/
+chanakya_sutra/kamandakiya_nitisara) and `shastra/niti_shastra/` (added
+23 Aug: artha_shastra/hitopadesha, apparently without checking whether
+Nitishastra already existed) had both landed on main independently.
+Confirmed a genuine content duplicate, not just a naming collision --
+both `hitopadesha` entries opened with the identical verse text, same
+4-book scope. Consolidated onto `shastra/niti_shastra/` (kept the
+finer-grained DCS Hitopadesha, 718 verses, over the GRETIL 5-section-
+blob version; moved the 3 unique leaves in); `shastra` is now 28/28
+fully populated. See the commit for the exact reasoning. This also
+answered "how about artha shastra?" from the same message -- it was
+already in the corpus the whole time, just filed under this same
+now-consolidated section (1910 items, Kautilya).
+
+**Other findings from the same review, investigated and reported back
+rather than acted on blind:**
+- **Vaikhanasa Agama** is correctly placed (sibling of Pancharatra
+  under Vaishnava Agama) and correctly labeled -- it's invisible in
+  the ordinary reader only because the reader deliberately hides
+  ~590 still-empty leaves from everyday visitors (a real, documented
+  design choice, see openLibraryModal()'s own comment: "not showing
+  ~550 empty placeholder entries in the everyday reader"). It shows
+  correctly in admin/library.html, which lists everything. Whether to
+  build an admin-only "show pending too" toggle for the main reader is
+  an open question, not acted on without asking first.
+- **Purana structure** (`maha_purana`/`upa_purana`) re-checked end to
+  end -- no stray duplicate `upapuranas` directory or taxonomy node
+  anywhere, clean.
+- **English names in the tree**: a real, large, pre-existing gap, not
+  something this pass introduced -- 1055 of ~1508 distinct taxonomy
+  segments (excluding dasa_sahitya's per-composer metadata, which
+  isn't tree labels at all) have no `DGE_PATH_LABELS` entry and fall
+  back to `dgeAutoLabel()`'s plain English title-case. Deliberately
+  NOT bulk-translated in this pass -- most are deep sub-leaf names
+  (individual commentaries, minor Upanishads, named khandas) that need
+  real scholarly care, and guessing wrong would be worse than the
+  current honest-if-plain English fallback. Fixed the ones directly
+  caught this pass (chanakya_niti/chanakya_sutra/kamandakiya_nitisara,
+  and `amsha` added to `DGE_NUMBERED_PREFIXES` for Vishnu Purana's
+  amsha_01..06). **RESOLVED 25 Aug 2026, part 11 (see that section
+  below) -- the full sweep this note called for actually happened.**
+  The full 1055-item gap is a real candidate for a
+  dedicated future pass, ideally batched by domain the way the 234
+  Dvaita-Vedanta labels were done earlier this project (see the 20 Aug
+  entry elsewhere in this file).
+- **Subhashita**: placeholder leaf added at `shastra/subhashita`
+  (`dge/data/shastra/subhashita/data.json`), empty `items: []`, per the
+  project lead's own placement call ("under shastra"). Awaiting source
+  files -- genre anthology (Bhartrhari's shatakas, Subhashitaratnakosha,
+  etc.), not a single text, so a real content pass needs the sources
+  before deciding one combined leaf vs. named sub-collections.
+- **Nyaya Kosha, Puranic Encyclopedia -- RESOLVED, already live, no
+  action needed.** These are Kosha-genre (dictionary) works, so they
+  never belonged in this repo's own taxonomy/library.json -- they
+  belong in the separate `Tribhuvanachar/bhumandala-kosha-data` repo
+  that already backs the app's कोश search
+  (`koshaDataBase` in `dge/js/config.js` -> `bhumandala-kosha-data@dist`).
+  Added that repo to session scope and checked directly: both are
+  already catalogued in `dicts_config.json` AND already built into the
+  live `dist` branch --
+  `jhalki-bhima-nyaya-koshah` (Bhīmācārya Jhalkīkar's classic
+  Nyāyakośa, 639 files) and `purana-encyclopedia` (Vettam Mani's
+  *Purāṇic Encyclopaedia*, 1123 files), plus bonus `purana-index`
+  (Dikshitar's *Purana Index*, 1367 files) and `laukika-nyaya-kosha`
+  (a separate popular-maxims kosha). `admin/kosha.html` even carries a
+  standing note (`renderPuranaNote()`) confirming purana-encyclopedia/
+  purana-index are loaded, with the copyright question (Vettam Mani's
+  work is almost certainly still in copyright; Motilal Banarsidass,
+  1975) explicitly left open for the project lead to settle -- nothing
+  here is presented as cleared, but it is loaded and searchable today.
+  If the project lead still doesn't see these in कोश search, the one
+  remaining explanation is a per-browser `kosha_hidden_dicts`
+  localStorage entry hiding them locally, fixable via the 👁 toggle on
+  `admin/kosha.html` -- not a missing-data problem.
 ## Node-graph model verified + vishvAsa mirror cross-validation (25 Aug 2026, part 10)
 
 The project lead forwarded an external analysis of dvaitavedanta.in's
@@ -4584,6 +4708,104 @@ the last includes nyaya_sudha, whose re-crawl also activates the part-10
 open_pr=true) now that main carries all the parser fixes — or further
 staged local runs like this one.
 
+## Taxonomy-folder-label + leaf-title English-name gap, closed (25 Aug 2026, part 11)
+
+The project lead greenlit the ~1055-item English-label gap ("you can take
+on the one zero five five item English label gap") and clarified the
+Subhashita placement (moved under `shastra/niti_shastra/`, alongside
+Chanakya Niti/Hitopadesha -- see the earlier part-9 entry) and the
+requirement that "the language selected should reflect" -- i.e. display
+names, not just folder IDs, must respond to the script/language selector.
+
+**Scoping first, not the raw 1055.** The project lead's own count came
+from `taxonomy.json` directly, which over-counts in two ways: (1) some
+"segments" are metadata fields (e.g. `dasa_sahitya.label`/`data`/`forms`,
+its `sa`/`kn`/`en` name object), not real tree nodes, and (2) `tika_*`
+commentary sub-folders under Dvaita Vedanta that are joinable get absorbed
+into the stitched multi-tab reader (`dgeFoldLayerEntries`,
+`layer_manifest.json`) and never render as a separate tree label at all.
+Cross-checking against the real filesystem and the manifest's fold status
+brought the genuinely-visible gap down to 409 folder segments (376 outside
+Dvaita Vedanta, 33 inside it) -- still substantial, but tractable in one
+pass rather than 1055.
+
+**What shipped** (`dge/js/library.js`, 404 new `DGE_PATH_LABELS` entries +
+`pada` added to `DGE_NUMBERED_PREFIXES` for Narada Purana's
+`pada_01`..`pada_04`):
+- Vedic corpus: the remaining unlabeled Brahmanas/Aranyakas/Upanishads/
+  Samhitas across all four Vedas and their shakhas, Ayurveda
+  samhitas/nighantus/rasashastra texts (~35), Vedic shiksha texts (~40).
+- Puranas: khandas/parvas/bhagas across Bhavishya, Brahmanda,
+  Brahmavaivarta, Garuda, Linga, Markandeya, Narada, Padma, Shiva, Skanda,
+  Vamana -- plus Matsya Purana itself, which had no top-level label at
+  all despite being fully populated.
+- Darshana: the Vishishtadvaita Sri Bhashya corpus (Ramanuja's own works,
+  Sudarshana Suri, Vedanta Desika, Rangaramanuja, and ~10 more named
+  acharyas/commentators), the rest of Nyaya/Sankhya/Yoga/Mimamsa/Advaita
+  that hadn't been covered yet.
+- Vedanga: Vyakarana schools (Ashtadhyayi apparatus, Chandra/Jainendra/
+  Katantra/Mugdhabodha/Sarasvata/Shakatayana grammars), Kalpa Sutras.
+- Shastra: the Bauddha Sahitya corpus (Abhidharmakosha, Madhyamaka,
+  avadana/sutra literature), Ratna Pariksha.
+- Smriti/Dharmashastra: all remaining named Smritis and Dharmashastra
+  nibandhas (Mitakshara, Dayabhaga, Nirnaya Sindhu, etc).
+- Upaveda: remaining Ayurveda/Kama Shastra texts. Agama: the remaining
+  Pancharatra samhitas (anya/pramukha/ratnatraya groups).
+- Dasa Sahitya: the remaining Vyasakuta/Dasakuta works and a handful of
+  composer-adjacent stotra entries. 4 genuinely mis-attributed
+  `dasa_sahitya/composers/*` entries (a title filed as a composer name, a
+  URL-garbled slug, the honest `untitled` bucket) left unlabeled on
+  purpose, same call as the earlier 234-entry composer batch -- not
+  guessed at.
+- Dvaita Vedanta's 33 visible holdouts: read directly off each folder's
+  own `data.json` (`sanskrit_text`/`section` fields) rather than guessed
+  from the slug -- 26 are standard Brahma Sutra adhikarana names under
+  Nyaya Sudha (जिज्ञासाधिकरणम्, समन्वयाधिकरणम्, etc, confirmed against
+  each folder's own opening line), 7 are acharya/work names under
+  Sumadhva Vijaya and the Gita prasthana. 3 more (`tika_prakashika`,
+  `tika_kiranavali`, `tika_nyayasudha`) were caught only on a *second*
+  audit pass, because the SAME bare segment name recurs at another,
+  already-folded path elsewhere -- `DGE_PATH_LABELS` keys by bare segment
+  name, not full path, so a label is needed if *any* occurrence of that
+  segment is visible, not just the first one found.
+
+**The separate leaf-title gap.** Folder labels (`DGE_PATH_LABELS`) are one
+code path; a leaf grantha's own displayed title is a different one --
+baked into `library.json`'s `title` field by `tools/audit_library.py`'s
+`derive_title()`, which humanizes the slug into plain English
+("Vaikhanasa Agama", "Mula", "Tika Nirnaya") whenever the data has no
+explicit title. 529 populated granthas carried such a title, and being a
+static baked string it never responded to the script/language selector no
+matter what `DGE_PATH_LABELS` knew. Fixed architecturally rather than by
+touching the data: `openLibraryModal()` now calls a new
+`dgeGranthaAutoTitle()` helper -- the same `DGE_PATH_LABELS[seg] ||
+dgeAutoLabel(seg)` lookup already used for folders, applied to the leaf's
+own last path segment -- whenever `g.title` itself has no Devanagari to
+transliterate. An admin's manual label override still wins outright. This
+also means any *future* import inherits correct behaviour automatically
+instead of needing its own title-writing pass; confirmed by re-running the
+gap audit after a parallel session's Gita-prasthana re-crawl merged in
+mid-session (357 new items, several new `tika_*` folders) -- zero new gaps
+introduced, `dgeGranthaAutoTitle()` covered them for free.
+
+**Verification.** `audit_library.py`/`validate_data.py`/`pytest` clean
+throughout (same baseline as before -- this was a label-only change, no
+data touched). Correctness of the new Devanagari verified two ways: (1)
+the 26 Nyaya Sudha adhikarana names and a few Sumadhva Vijaya entries
+matched byte-for-byte against each folder's own source text, not
+transliterated from the slug; (2) real transliteration output checked via
+a Node harness running the actual `Sanscript.t()` (`वैखानसागमः` ->
+`ವೈಖಾನಸಾಗಮಃ` kannada, `चान्द्रव्याकरणम्` -> `చాన్ద్రవ్యాకరణమ్` telugu,
+`अहिर्बुध्न्यसंहिता` -> `அஹிர்புத்ந்யஸம்ஹிதா` tamil,
+`याज्ञवल्क्यस्मृतिः` -> `যাজ্ঞবল্ক্যস্মৃতিঃ` bengali), since the
+Playwright browser sandbox itself can't reach the Sanscript CDN (same
+known limitation as earlier sessions) -- confirmed live in-browser that
+"Vaikhanasa Agama" no longer appears anywhere in the tree and
+"वैखानसागमः" does, with the admin "show pending" toggle on.
+
+A follow-up audit after this pass found the gap closed to exactly the 4
+deliberately-skipped composer entries above -- both for folder labels and
+for leaf titles.
 ## Standing authorization for the in-flight extract PRs (25 Aug 2026, night)
 
 The project lead, before signing off for the night: for each completed

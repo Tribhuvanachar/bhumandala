@@ -2,6 +2,10 @@
 <html lang="sa" data-theme="light">
 <head>
 <meta charset="utf-8">
+<!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
+     back to the vandana at the site root. Must stay the first script here. -->
+<script src="js/vandana-guard.js?v=1"></script>
+<script src="js/contact-email.js?v=1"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>काव्यानि — DGE</title>
 <meta name="description" content="Layered Sanskrit kavya reader: mula, traditional tika, padaccheda, anvaya and translation, side by side.">
@@ -9,18 +13,13 @@
 </head>
 <body>
 
-<div class="wrap" style="max-width:1080px;margin:0 auto;padding:8px 14px 0">
-  <div style="font-size:.85rem;color:var(--muted)"><a href="index.html" title="DGE Home" style="color:var(--accent);text-decoration:none;font-weight:700">⌂ DGE</a><span style="opacity:.6;margin:0 6px">›</span><b style="color:var(--ink)">काव्यानि</b></div>
-</div>
 <header class="top">
   <div class="row">
-    <div class="brand">काव्यानि <small id="totals">…</small></div>
+    <div class="brand"><a href="index.html" title="DGE Home">⌂ DGE</a><span style="opacity:.6;font-weight:400">›</span>काव्यानि <small id="totals">…</small></div>
 
-    <nav class="seg" aria-label="Section">
-      <a class="btn" href="index.html" style="border:0;border-radius:0">DGE</a>
+    <nav class="seg" aria-label="Related tools">
       <a class="btn" href="ashtadhyayi.html" style="border:0;border-radius:0">सूत्राणि</a>
-      <a class="btn" href="dhatupatha.html" style="border:0;border-radius:0">धातु</a>
-      <a class="btn" href="kosha.html" style="border:0;border-radius:0">कोश</a>
+      <a class="btn" href="dhatu.html" style="border:0;border-radius:0">धातु</a>
     </nav>
 
     <div class="seg" role="group" aria-label="Script">
@@ -66,6 +65,11 @@
   <button class="btn" id="next" type="button">अग्रिमम् →</button>
 </footer>
 
+<!-- Filled by site-footer.js, shared with the landing page and reader
+     (see that file's own header comment). -->
+<div class="site-footer-links" id="siteFooterLinks"></div>
+
+<script src="js/site-footer.js?v=1"></script>
 <script src="js/kavya.js?v=4.67.0"></script>
 </body>
 </html>

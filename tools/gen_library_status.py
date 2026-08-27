@@ -160,6 +160,25 @@ for k, v in tax.items():
     if not k.startswith('_'):
         walk(v if isinstance(v, dict) else {}, [k])
 
+# Candidate scanned/e-text sources for taxonomy leaves that are STILL empty
+# (admin/config/pending_pdf_sources.json -- a hand-maintained research log,
+# not derived from anything on disk, so it's merged in here rather than
+# computed). Dotted keys there (matching taxonomy.json's own nesting) get
+# converted to the same slash-joined form 'leaves'/'leaf_sources' already
+# use. Only kept for leaves that are STILL actually empty -- once a leaf
+# gets populated (by importing one of these candidates, or anything else)
+# it silently drops out here rather than needing separate cleanup.
+pending_sources = {}
+pending_path = os.path.join(OUT_DIR, 'pending_pdf_sources.json')
+if os.path.exists(pending_path):
+    pending_raw = json.load(open(pending_path, encoding='utf-8'))
+    for k, v in pending_raw.items():
+        if k == '_readme':
+            continue
+        p = k.replace('.', '/')
+        if leaves.get(p, 0) == 0:
+            pending_sources[p] = v
+
 sec = defaultdict(lambda: {'total': 0, 'loaded': 0, 'items': 0})
 for p, n in leaves.items():
     s = p.split('/')[0]
@@ -178,6 +197,7 @@ out = {
     'sections': {k: dict(v) for k, v in sorted(sec.items())},
     'leaves': {p: n for p, n in sorted(leaves.items())},
     'leaf_sources': {p: leaf_sources[p] for p in sorted(leaf_sources)},
+    'pending_sources': {p: pending_sources[p] for p in sorted(pending_sources)},
 }
 json.dump(out, open(os.path.join(OUT_DIR, 'library-status.json'), 'w', encoding='utf-8'),
            ensure_ascii=False, indent=1)

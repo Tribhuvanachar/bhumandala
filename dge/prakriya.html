@@ -5,10 +5,12 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="js/vandana-guard.js?v=1"></script>
+<script src="js/contact-email.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>प्रक्रिया · तिङन्त — DGE व्याकरणम्</title>
 <script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.3.3/sanscript.js"
  onerror="this.onerror=null;var s=document.createElement('script');s.src='https://unpkg.com/@indic-transliteration/sanscript@1.3.3/sanscript.js';document.head.appendChild(s);"></script>
+<link rel="stylesheet" href="css/vyakarana-base.css?v=1">
 <link rel="stylesheet" href="css/vyakarana.css?v=1">
 <link rel="stylesheet" href="css/prakriya.css?v=1">
 <!-- Every sutra code in a derivation opens the rule itself. -->
@@ -18,7 +20,7 @@
 
 <header>
   <div class="bar">
-    <div class="brand"><a href="index.html">⌂ DGE</a><span>›</span><a href="dhatu.html">धातुपाठः</a><span>›</span>प्रक्रिया</div>
+    <div class="brand"><a href="index.html" title="DGE Home">⌂ DGE</a><span>›</span><a href="dhatu.html" class="deva">धातुपाठः</a><span>›</span><span class="deva">प्रक्रिया</span></div>
     <div class="spacer"></div>
     <button class="icon" id="themeBtn" title="Light / dark">◐</button>
   </div>
@@ -28,6 +30,11 @@
   <div id="root"></div>
 </main>
 
+<!-- Filled by site-footer.js, shared with the landing page and reader
+     (see that file's own header comment). -->
+<div class="site-footer-links" id="siteFooterLinks"></div>
+
+<script src="js/site-footer.js?v=1"></script>
 <script src="js/prakriya.js?v=3"></script>
 <!-- Resolves the sutra code on every step into the rule, its type, its
      padaccheda and what carries over into it. -->

@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.20 (multi-layer grantha stitching: the grantha-load path awaits dgeApplyLayerStitching (layer-stitch.js) before initApp so sibling tika layers appear in the commentary picker; flat-items normalization passes item.breadcrumb through for the section navigator; renderStotraChrome hooks dgeRenderStitchChrome + dgeInitSectionNav. See dge/MULTI_LAYER_READER_ARCHITECTURE.md. On top of v3.19\'s Purana redirects)';
+window.DGE_VERSIONS['core.js'] = 'v3.22 (DGE_LEGACY_SLUGS: redirect for shastra/subhashita -> shastra/niti_shastra/subhashita. On top of v3.21\'s nitishastra/ -> shastra/niti_shastra/ consolidation redirects)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -203,7 +203,24 @@ const DGE_LEGACY_SLUGS = {
   'purana/garuda_purana':           'purana/maha_purana/garuda_purana',
   'purana/brahmanda_purana':        'purana/maha_purana/brahmanda_purana',
   'purana/vayu_purana':             'purana/maha_purana/vayu_purana',
-  'purana/upapuranas':              'purana/upa_purana'
+  'purana/upapuranas':              'purana/upa_purana',
+  // 25 Aug 2026: top-level nitishastra/ (added 20 Aug) and shastra/niti_shastra/
+  // (added 23 Aug, unaware the top-level one already existed) were two
+  // independently-built, uncoordinated copies of the same section --
+  // shastra/niti_shastra/hitopadesha/mula (718 DCS verses) duplicated
+  // nitishastra/hitopadesha (5 GRETIL section-blocks) outright. Consolidated
+  // onto shastra/niti_shastra/ (finer-grained, and matches artha_shastra's
+  // existing home there); the GRETIL hitopadesha copy was dropped, not moved.
+  'nitishastra/hitopadesha':        'shastra/niti_shastra/hitopadesha/mula',
+  'nitishastra/chanakya_niti':      'shastra/niti_shastra/chanakya_niti',
+  'nitishastra/chanakya_sutra':     'shastra/niti_shastra/chanakya_sutra',
+  'nitishastra/kamandakiya_nitisara': 'shastra/niti_shastra/kamandakiya_nitisara',
+  'nitishastra':                    'shastra/niti_shastra',
+
+  // Subhashita placeholder moved from shastra/ directly to
+  // shastra/niti_shastra/ (25 Aug 2026) -- wisdom-verse anthologies belong
+  // alongside Chanakya Niti/Hitopadesha, not as a shastra/ sibling.
+  'shastra/subhashita':              'shastra/niti_shastra/subhashita'
 };
 
 window.dgeUpgradeLegacySlug = function (slug) {
@@ -1142,6 +1159,13 @@ function initAuthAndBranding() {
     superItem.innerHTML = isSuperadmin ? '🔓 Super Admin Access <span style="margin-left:auto; font-size:10px; color:var(--accent-red); font-weight:800;">ACTIVE</span>' : '🔒 Super Admin Access';
     superItem.classList.toggle('active', isSuperadmin);
   }
+
+  // content-inline.js's "Edit Page Text" row in the Quick Actions rail --
+  // same tier check as its own allowed() gate, kept in sync here since the
+  // popup markup lives in this page's own HTML rather than being built by
+  // content-inline.js itself.
+  const ciEditItem = document.getElementById('ciEditPopItem');
+  if (ciEditItem) ciEditItem.style.display = isSuperadmin ? 'flex' : 'none';
   if (logoutItem) logoutItem.style.display = (isAuthorized || isSuperadmin) ? 'flex' : 'none';
 
   const authorEl = document.getElementById('stotraAuthor');
@@ -1163,6 +1187,12 @@ function initAuthAndBranding() {
   if(emailLink) {
       emailLink.href = `mailto:${contactEmail}`;
       emailLink.innerText = contactEmail;
+  }
+
+  const aboutEmailLink = document.getElementById('aboutContactEmail');
+  if(aboutEmailLink) {
+      aboutEmailLink.href = `mailto:${contactEmail}`;
+      aboutEmailLink.innerText = contactEmail;
   }
 }
 

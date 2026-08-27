@@ -70,6 +70,13 @@
      "matched": 12
     },
     {
+     "folder": "tika_kathalakshanam",
+     "label": "कथालक्षणम्",
+     "author": "",
+     "items": 7,
+     "matched": 7
+    },
+    {
      "folder": "tika_jayatirtha",
      "label": "पद्मनाभतीर्थीया कथालक्षणटीका",
      "author": "श्रीजयतीर्थः",
@@ -112,6 +119,13 @@
      "matched": 1
     },
     {
+     "folder": "tika_mayavadakhandanam",
+     "label": "मायावादखण्डनम्",
+     "author": "",
+     "items": 1,
+     "matched": 1
+    },
+    {
      "folder": "tika_nivasatirthatippani",
      "label": "श्रीनिवासतीर्थटिप्पणी",
      "author": "श्रीवेणुपल्ली श्रीनिवासतीर्थविरचिता",
@@ -121,7 +135,7 @@
     {
      "folder": "tika_nivasatirthiyatippani",
      "label": "श्रीनिवासतीर्थीयटिप्पणी",
-     "author": "श्रीनिवासतीर्थः",
+     "author": "",
      "items": 1,
      "matched": 1
     }
@@ -159,6 +173,13 @@
      "author": "श्री पाण्डुरङ्गि केशवाचार्यविरचितम्",
      "items": 125,
      "matched": 125
+    },
+    {
+     "folder": "tika_pramanalakshanam",
+     "label": "प्रमाणलक्षणम्",
+     "author": "",
+     "items": 4,
+     "matched": 4
     }
    ]
   },
@@ -196,6 +217,13 @@
      "matched": 1
     },
     {
+     "folder": "tika_mithyatvanumanakhandanam",
+     "label": "मिथ्यात्वानुमानखण्डनम्",
+     "author": "",
+     "items": 1,
+     "matched": 1
+    },
+    {
      "folder": "tika_mithyatvanumanakhandanaparashu",
      "label": "मिथ्यात्वानुमानखण्डनपरशुः",
      "author": "श्रीसत्यनाथतीर्थविरचितः",
@@ -205,7 +233,7 @@
     {
      "folder": "tika_nivasatirthiyatippani",
      "label": "श्रीनिवासतीर्थीयटिप्पणी",
-     "author": "श्रीनिवासतीर्थः",
+     "author": "व्यासतीर्थयतिना विरचिता",
      "items": 1,
      "matched": 1
     }
@@ -322,6 +350,13 @@
      "matched": 122
     },
     {
+     "folder": "tika_mula",
+     "label": "मूल",
+     "author": "",
+     "items": 91,
+     "matched": 91
+    },
+    {
      "folder": "tika_dvaitadyumani",
      "label": "द्वैतद्युमणि",
      "author": "",
@@ -368,7 +403,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/upadhi_khandana": {
    "title": "उपाधिखण्डनम्",
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-   "mulaItems": 3,
+   "mulaItems": 4,
    "layers": [
     {
      "folder": "tika_jayatirtha",
@@ -387,7 +422,7 @@
     {
      "folder": "tika_nivasatirthiyatippani",
      "label": "श्रीनिवासतीर्थीयटिप्पणी",
-     "author": "श्रीनिवासतीर्थः",
+     "author": "आत्मभेदस्य सत्यमिथ्योपाधिकृतत्वमेव",
      "items": 1,
      "matched": 1
     },
@@ -488,6 +523,13 @@
      "author": "श्रीजयतीर्थः",
      "items": 364,
      "matched": 364
+    },
+    {
+     "folder": "tika_bhashya",
+     "label": "भाष्यम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 357,
+     "matched": 357
     },
     {
      "folder": "tika_bhavadipika",
@@ -595,7 +637,7 @@
      "matched": 1
     },
     {
-     "folder": "tika_mannyayadipakiranavali",
+     "folder": "tika_nyayadipakiranavali",
      "label": "श्रीमन्न्यायदीपकिरणावलिः",
      "author": "ताम्रपर्णी श्रीनिवासेन विरचिता",
      "items": 1,
@@ -2438,7 +2480,7 @@
     {
      "folder": "tika_ramasubba_72",
      "label": "रामसुब्ब_ ७२",
-     "author": "जींवादिभेदकं विष्णो विश्वकर्तृत्वमुच्यते ॥ इति । एतदधिकृत्य",
+     "author": "",
      "items": 2,
      "matched": 2
     },
@@ -2770,6 +2812,13 @@
      "author": "",
      "items": 134,
      "matched": 134
+    },
+    {
+     "folder": "tika_mula",
+     "label": "मूल",
+     "author": "",
+     "items": 2,
+     "matched": 2
     }
    ]
   },
@@ -2856,9 +2905,9 @@
      "matched": 1
     },
     {
-     "folder": "tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dala",
+     "folder": "tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_",
      "label": "बुद्धिपू र्वं सर्वकर्तृत्वादिति हे तौ…",
-     "author": "बुद्धिपू र्वं सर्वकर्तृत्वादिति हे तौ दल",
+     "author": "",
      "items": 1,
      "matched": 1
     },
@@ -2884,7 +2933,7 @@
      "matched": 1
     },
     {
-     "folder": "tika_gaunilakshanasthalayo_rvai_shamyena_vyakhyane_bijabhavapradarsha",
+     "folder": "tika_gaunilakshanasthalayorvaishamyenavyakhyanebijabhavapradarshanapu",
      "label": "गौणीलक्षणास्थलयो र्वै षम्येन व्याख्यान…",
      "author": "",
      "items": 1,
@@ -2975,9 +3024,9 @@
      "matched": 1
     },
     {
-     "folder": "tika_kartritvasya_buddhighatitatve_pra",
+     "folder": "tika_kartritvasyabuddhighatitatveprakrityadhikarananuvyakhyanavirodha",
      "label": "कर्तृत्वस्य बुद्धिघटितत्वे प्रकृत्यधिक…",
-     "author": "कर्तृत्वस्य बुद्धिघटितत्वे प्र",
+     "author": "",
      "items": 1,
      "matched": 1
     },
@@ -3005,7 +3054,7 @@
     {
      "folder": "tika_lakshyarthagaunarthayoranumeyatvam_natushabdatvamityabhiprayasya",
      "label": "लक्ष्यार्थगौणार्थयोरनुमेयत्वं , न तु श…",
-     "author": "श्रीमट्टीकाकृत्पादीयव्याख्याने",
+     "author": "",
      "items": 1,
      "matched": 1
     },
@@ -3020,6 +3069,13 @@
      "folder": "tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya",
      "label": "महाजनपरिगृहीतत्वलिङ्गेन \"कर्मनिर्णय \"न…",
      "author": "महाजनपरिगृहीतत्वलिङ्गेन \"कर्मनिर्णय \"ना म्न आचार्य",
+     "items": 1,
+     "matched": 1
+    },
+    {
+     "folder": "tika_mattikakritpadiyavyakhyanasyasphutabadhitasangatimattvapradarsha",
+     "label": "श्रीमट्टीकाकृत्पादीयव्याख्यानस्य स्फुट…",
+     "author": "",
      "items": 1,
      "matched": 1
     },
@@ -3094,13 +3150,6 @@
      "matched": 1
     },
     {
-     "folder": "tika_shrimattika",
-     "label": "श्रीमट्टीकाकृत्पादीयव्याख्यानस्य स्फुट…",
-     "author": "श्रीमट्टीका",
-     "items": 1,
-     "matched": 1
-    },
-    {
      "folder": "tika_siddhantedushanasyapyaprasiddhavisheshanatvasyasiddhisankirnatad",
      "label": "सिद्धान्तेऽदूषणस्याप्यप्रसिद्धविशेषणत्…",
      "author": "",
@@ -3143,9 +3192,9 @@
      "matched": 1
     },
     {
-     "folder": "tika_yatra_vacanikaryadanya_iti_vakyapataka_laukikavakyeshu_ityasya",
+     "folder": "tika_yatravacanikaryadanya_itivakyapataka_laukikavakyeshu_ityasyakrit",
      "label": "यत्र वाचनिकार्यादन्यः...इति वाक्यपटक\"…",
-     "author": "यत्र वाचनिकार्यादन्यः...इति वाक्यपटक\" लौकिकवाक्येषु\" इत्यस्य",
+     "author": "",
      "items": 1,
      "matched": 1
     },
@@ -3187,7 +3236,7 @@
     {
      "folder": "tika_parimala",
      "label": "परिमळ",
-     "author": "श्री राघवेन्द्रतीर्थविरचितः",
+     "author": "",
      "items": 1452,
      "matched": 1452
     },
@@ -3213,6 +3262,13 @@
      "matched": 1202
     },
     {
+     "folder": "tika_anuvyakhyanam",
+     "label": "अनुव्याख्यानम्",
+     "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+     "items": 1076,
+     "matched": 1076
+    },
+    {
      "folder": "tika_vakyarthacandrika",
      "label": "वाक्यार्थचन्द्रिका",
      "author": "",
@@ -3232,13 +3288,6 @@
      "author": "",
      "items": 11,
      "matched": 11
-    },
-    {
-     "folder": "tika_anuvyakhyanam",
-     "label": "अनुव्याख्यानम्",
-     "author": "",
-     "items": 6,
-     "matched": 6
     },
     {
      "folder": "tika_nivasatirthiyam",
@@ -3269,7 +3318,7 @@
      "matched": 3
     },
     {
-     "folder": "tika_adyasutrapavyakhyanasya_pranunirasadavashishtasutrapavyakhyanama",
+     "folder": "tika_adyasutrapavyakhyanasyapranunirasadavashishtasutrapavyakhyanaman",
      "label": "आद्यसूत्रापव्याख्यानस्य प्राङूनिरासादव…",
      "author": "",
      "items": 1,
@@ -3374,6 +3423,13 @@
      "matched": 0
     },
     {
+     "folder": "tika_caturthapada",
+     "label": "चतुर्थपादः",
+     "author": "",
+     "items": 1,
+     "matched": 0
+    },
+    {
      "folder": "tika_gayatryadhikaranam",
      "label": "गायत्र्यधिकरणम्",
      "author": "",
@@ -3432,6 +3488,13 @@
     {
      "folder": "tika_pranadhikaranam",
      "label": "प्राणाधिकरणम्",
+     "author": "",
+     "items": 1,
+     "matched": 0
+    },
+    {
+     "folder": "tika_prathamapada",
+     "label": "प्रथमः पादः",
      "author": "",
      "items": 1,
      "matched": 0
@@ -3724,7 +3787,7 @@
    "mulaItems": 48,
    "layers": [
     {
-     "folder": "tika_vadavalibhavadipika",
+     "folder": "tika_bhavadipika",
      "label": "वादावलीभावदीपिका",
      "author": "श्रीराघवेन्द्रयतिकृता",
      "items": 47,
@@ -3738,7 +3801,7 @@
      "matched": 47
     },
     {
-     "folder": "tika_vadavaliprakasha",
+     "folder": "tika_prakasha",
      "label": "वादावलीप्रकाशः",
      "author": "श्रीनिवासतीर्थविरचितः",
      "items": 44,

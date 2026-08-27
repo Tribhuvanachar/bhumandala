@@ -1302,6 +1302,9 @@
        },
        "tika_vivarana": {
         "_schema": "grantha_tika_text"
+       },
+       "tika_kathalakshanam": {
+        "_schema": "grantha_tika_text"
        }
       },
       "mayavada_khandana": {
@@ -1338,6 +1341,9 @@
        "tika_nivasatirthiyatippani": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीनिवासतीर्थः"
+       },
+       "tika_mayavadakhandanam": {
+        "_schema": "grantha_tika_text"
        }
       },
       "pramana_lakshana": {
@@ -1360,6 +1366,9 @@
        "tika_vivarana": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्री पाण्डुरङ्गि केशवाचार्यविरचितम्"
+       },
+       "tika_pramanalakshanam": {
+        "_schema": "grantha_tika_text"
        }
       },
       "prapancha_mithyatvanumana_khandana": {
@@ -1392,6 +1401,9 @@
        "tika_nivasatirthiyatippani": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीनिवासतीर्थः"
+       },
+       "tika_mithyatvanumanakhandanam": {
+        "_schema": "grantha_tika_text"
        }
       },
       "tattva_sankhyana": {
@@ -1476,6 +1488,9 @@
         "_schema": "grantha_tika_text"
        },
        "tika_vijayindrabhikshu": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_mula": {
         "_schema": "grantha_tika_text"
        }
       },
@@ -1598,6 +1613,10 @@
        "tika_vakyarthapradipa": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीपाण्डुरङ्गिकेशवाचार्यविरचितः"
+       },
+       "tika_bhashya": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
        }
       },
       "gita_tatparya_nirnaya": {
@@ -1643,6 +1662,10 @@
         "_default_author": "श्रीसत्यनाथयति विरचितः"
        },
        "tika_mannyayadipakiranavali": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "ताम्रपर्णी श्रीनिवासेन विरचिता"
+       },
+       "tika_nyayadipakiranavali": {
         "_schema": "grantha_tika_text",
         "_default_author": "ताम्रपर्णी श्रीनिवासेन विरचिता"
        }
@@ -3363,6 +3386,9 @@
        "tika_jayatirtha": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्रीजयतीर्थः"
+       },
+       "tika_mula": {
+        "_schema": "grantha_tika_text"
        }
       },
       "karmavijaya": {
@@ -3707,6 +3733,18 @@
        },
        "tika_yuktirityanumaivetipakshesadhyaparishkarapurvakamanumanamvimrish": {
         "_schema": "grantha_tika_text"
+       },
+       "tika_gaunilakshanasthalayorvaishamyenavyakhyanebijabhavapradarshanapu": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_kartritvasyabuddhighatitatveprakrityadhikarananuvyakhyanavirodha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_mattikakritpadiyavyakhyanasyasphutabadhitasangatimattvapradarsha": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_yatravacanikaryadanya_itivakyapataka_laukikavakyeshu_ityasyakrit": {
+        "_schema": "grantha_tika_text"
        }
       },
       "madhvamukhalankara": {
@@ -3963,6 +4001,14 @@
        "tika_vivarana": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्री उमर्जी तिरुमलाचार्यसुतकृष्णविरचितं"
+       },
+       "tika_bhavadipika": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीराघवेन्द्रयतिकृता"
+       },
+       "tika_prakasha": {
+        "_schema": "grantha_tika_text",
+        "_default_author": "श्रीनिवासतीर्थविरचितः"
        }
       },
       "vagvajra": {
@@ -4128,6 +4174,15 @@
        "tika_parimala": {
         "_schema": "grantha_tika_text",
         "_default_author": "श्री राघवेन्द्रतीर्थविरचितः"
+       },
+       "tika_adyasutrapavyakhyanasyapranunirasadavashishtasutrapavyakhyanaman": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_caturthapada": {
+        "_schema": "grantha_tika_text"
+       },
+       "tika_prathamapada": {
+        "_schema": "grantha_tika_text"
        }
       }
      },
@@ -6219,13 +6274,6 @@
    "susruta_samhita_sutrasthana": {}
   }
  },
- "nitishastra": {
-  "_note": "Worldly-wisdom/statecraft texts -- deliberately its own section rather than folded into kavya_alankara (which already held the Bhartrihari shatakas somewhat awkwardly, per the same 20 Aug placement decision noted under upaveda above).",
-  "hitopadesha": {},
-  "chanakya_niti": {},
-  "chanakya_sutra": {},
-  "kamandakiya_nitisara": {}
- },
  "misc": {
   "_schema": "grantha_mula_text",
   "_note": "Holding place for material whose home in the taxonomy is not settled yet. Nothing is meant to stay here; each item moves once it is decided.",
@@ -6260,7 +6308,11 @@
      "_schema": "grantha_mula_text",
      "_default_author": "Narayana Pandita"
     }
-   }
+   },
+   "chanakya_niti": {},
+   "chanakya_sutra": {},
+   "kamandakiya_nitisara": {},
+   "subhashita": {}
   },
   "bauddha_sahitya": {
    "sutra": {

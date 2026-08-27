@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.12 (layer-manifest drawer fold: a joinable multi-layer grantha\'s mula+tika_* catalog entries collapse to ONE tree leaf via dgeFoldLayerEntries, gated strictly by data/layer_manifest.json; unjoinable layers keep their own rows. See dge/MULTI_LAYER_READER_ARCHITECTURE.md. On top of v3.11\'s purana_class facet)';
+window.DGE_VERSIONS['library.js'] = 'v3.16 (taxonomy-folder-label gap sweep: 401 new DGE_PATH_LABELS entries + "pada" numbered-prefix, closing the ~1055-item English-name gap down to the deliberately-skipped composer entries. On top of v3.15\'s admin "show pending" toggle)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -63,8 +63,9 @@ const DGE_PATH_LABELS = {
   gandharvaveda: 'गान्धर्ववेदः', sthapatyaveda: 'स्थापत्यवेदः',
   nighantu: 'निघण्टवः', rasashastra: 'रसशास्त्रम्',
   shastra: 'शास्त्राणि', natya_shastra: 'नाट्यशास्त्रम्',
-  kama_shastra: 'कामशास्त्रम्', niti_shastra: 'नीतिशास्त्रम्',
+  kama_shastra: 'कामशास्त्रम्', niti_shastra: 'नीतिशास्त्रम्', subhashita: 'सुभाषितम्',
   artha_shastra: 'अर्थशास्त्रम्', hitopadesha: 'हितोपदेशः',
+  chanakya_niti: 'चाणक्यनीतिः', chanakya_sutra: 'चाणक्यसूत्रम्', kamandakiya_nitisara: 'कामन्दकीयनीतिसारः',
   bauddha_sahitya: 'बौद्धसाहित्यम्', sutra: 'सूत्रम्',
   pramana: 'प्रमाणम्', avadana: 'अवदानम्',
   krishi_shastra: 'कृषिशास्त्रम्', shainika_shastra: 'श्यैनिकशास्त्रम्',
@@ -255,6 +256,289 @@ const DGE_PATH_LABELS = {
   vidyaratnakaratirtharu: 'विद्यारत्नाकरतीर्थरु', vijaya_dasaru: 'विजयदासरु', vijaya_ramacamdravithala: 'विजय रामचंद्रविठल', vijayimdratirtharu: 'विजयींद्रतीर्थरु', viranarayana: 'वीरनारायण',
   visvapati: 'विश्वपति', visvemdratirtha: 'विश्वॆंद्रतीर्थ', vyasarayaru: 'व्यासरायरु', vyasatatvajnadasaru: 'व्यासतत्वज्ञदासरु', vyasaviththalaru: 'व्यासविठ्ठलरु',
   yadugiriyamma: 'यदुगिरियम्म',
+
+  // 25 Aug 2026 -- systematic sweep of the taxonomy-folder-label gap
+  // (project lead's own count: ~1055 English names in the library tree).
+  // Scoped with a script cross-checked against the real filesystem (many
+  // taxonomy.json entries have no folder on disk, and a chunk of the raw
+  // count was metadata keys like dasa_sahitya's label/data/forms, not real
+  // tree nodes -- both excluded). The Dvaita Vedanta commentary sub-folders
+  // account for the largest single slice (~554 real folders); all but 33 of
+  // those are already absorbed into the stitched multi-tab reader
+  // (dgeFoldLayerEntries, layer_manifest.json) and never render as a separate
+  // tree label at all -- the 33 real holdouts are included below, read
+  // directly off each folder's own data.json content rather than guessed
+  // from its slug. A handful of dasa_sahitya/composers/* entries are left
+  // unlabeled on purpose, same call as the earlier composer batch (a title
+  // filed as a composer name, a URL-garbled slug, the honest 'untitled'
+  // bucket) -- see dge/PENDING.md.
+  // Agama -- Kashmir Shaivism / Pashupata
+  tika_nirnaya: 'निर्णयः',
+  bhashya_kaundinya: 'भाष्यम् (कौण्डिन्यः)',
+  // Pancharatra samhitas
+  naradiya_samhita: 'नारदीयसंहिता', parashara_samhita: 'पराशरसंहिता',
+  vasishtha_samhita: 'वसिष्ठसंहिता', ahirbudhnya_samhita: 'अहिर्बुध्न्यसंहिता',
+  hayagriva_samhita: 'हयग्रीवसंहिता', ishvara_samhita: 'ईश्वरसंहिता',
+  lakshmi_tantra: 'लक्ष्मीतन्त्रम्', padma_samhita: 'पद्मसंहिता',
+  parama_samhita: 'परमसंहिता', prakasha_samhita: 'प्रकाशसंहिता',
+  vishnu_samhita: 'विष्णुसंहिता', vishvaksena_samhita: 'विष्वक्सेनसंहिता',
+  jayakhya_samhita: 'जयाख्यसंहिता', paushkara_samhita: 'पौष्करसंहिता',
+  sattvata_samhita: 'सात्त्वतसंहिता',
+  // Mimamsa
+  tika_kashika: 'काशिका', tika_nyayaratnakara: 'न्यायरत्नाकरः',
+  tika_dipashikha: 'दीपशिखा', tika_rijuvimala: 'ऋजुविमला',
+  shabara_bhashya: 'शाबरभाष्यम्',
+  // Nyaya
+  tika_dinakari: 'दिनकरी', tika_ramarudri: 'रामरुद्री',
+  tika_siddhanta_muktavali: 'सिद्धान्तमुक्तावली',
+  aloka: 'आलोकः', didhiti: 'दीधितिः', gadadhari: 'गादाधरी',
+  jagadishi: 'जागदीशी', mathuri: 'माथुरी',
+  bhashya_vatsyayana: 'भाष्यम् (वात्स्यायनः)',
+  tatparya_parishuddhi: 'तात्पर्यपरिशुद्धिः', tatparya_tika: 'तात्पर्यटीका',
+  varttika_uddyotakara: 'वार्त्तिकम् (उद्द्योतकरः)',
+  tika_bhaskarodaya: 'भास्करोदयः', tika_nilakanthi: 'नीलकण्ठी',
+  tika_nyayabodhini: 'न्यायबोधिनी', tika_padakritya: 'पदकृत्यम्',
+  tika_sarvasva: 'सर्वस्वम्', tika_makaranda: 'मकरन्दः', tika_prakasha: 'प्रकाशः',
+  // Sankhya
+  sutra_and_karika: 'सूत्रकारिके', samkhya_karika: 'सांख्यकारिका',
+  tika_gaudapada: 'गौडपादभाष्यम्', tika_tattva_kaumudi: 'तत्त्वकौमुदी',
+  // Advaita
+  bhashya: 'भाष्यम्', brihadaranyaka_upanishad: 'बृहदारण्यकोपनिषत्',
+  // Vishishtadvaita
+  ahobila_yati_34: 'अहोबिलयतिः ३४',
+  adhikarana_saravali_padayojana: 'अधिकरणसारावलीपदयोजना',
+  pada_yojana_bhumika: 'पदयोजनाभूमिका',
+  appayya_dikshita: 'अप्पय्यदीक्षितः', naya_mayukha_malika: 'न्यायमयूखमालिका',
+  deshikacharya: 'देशिकाचार्यः', adhikarana_ratnamala: 'अधिकरणरत्नमाला',
+  devanathan: 'देवनाथन्', shribhashya_bhavaprakasha: 'श्रीभाष्यभावप्रकाशः',
+  kumara_varada: 'कुमारवरदः', adhikarana_saravali_vyakhya: 'अधिकरणसारावलीव्याख्या',
+  lakshmipuram_srinivasacharya: 'लक्ष्मीपुरम् श्रीनिवासाचार्यः',
+  bhushanam: 'भूषणम्', nayasangatimalika: 'न्यायसङ्गतिमाला',
+  nyaya_kalapa_sangraha: 'न्यायकलापसङ्ग्रहः',
+  mukkur_yatindra: 'मुक्कूर् यतीन्द्रः', brahmasutrartha_padyamalika: 'ब्रह्मसूत्रार्थपद्यमालिका',
+  perukkaranai_chakravarti: 'पेरुक्करणै चक्रवर्ती',
+  sri_bhashya_sariraka_mimamsa_bhashya: 'श्रीभाष्यशारीरकमीमांसाभाष्यम्',
+  rajagopala: 'राजगोपालः', ramabhadracharya: 'रामभद्राचार्यः',
+  nitya_grantha_vivrti: 'नित्यग्रन्थविवृतिः',
+  ramanuja_bhashya: 'रामानुजभाष्यम्', gadya_traya: 'गद्यत्रयम्',
+  nitya_grantha: 'नित्यग्रन्थः', sharanagati_gadyam: 'शरणागतिगद्यम्',
+  sri_bhashya: 'श्रीभाष्यम्', vedanta_dipa: 'वेदान्तदीपः', vedanta_sara: 'वेदान्तसारः',
+  vedartha_sangraha: 'वेदार्थसङ्ग्रहः', ramanuja_tatacharya: 'रामानुजताताचार्यः',
+  rangaramanuja: 'रङ्गरामानुजः', bhava_prakashika: 'भावप्रकाशिका',
+  sharirika_shastrartha_dipika: 'शारीरकशास्त्रार्थदीपिका',
+  vishaya_vakya_dipika: 'विषयवाक्यदीपिका', seneshvara: 'सेनेश्वरः',
+  sudarshana_suri: 'सुदर्शनसूरिः', shruta_pradipika: 'श्रुतप्रदीपिका',
+  shruta_prakashika: 'श्रुतप्रकाशिका',
+  uttamur_viraraghavachariar: 'उत्तमूर् वीरराघवाचार्यः',
+  bhashyartha_darpana: 'भाष्यार्थदर्पणः', shruta_prakashika_edition: 'श्रुतप्रकाशिका-संस्करणम्',
+  vedanta_desika: 'वेदान्तदेशिकः', adhikarana_saravali: 'अधिकरणसारावली',
+  // Yoga
+  yoga_sutra: 'योगसूत्रम्', bhashya_vyasa: 'भाष्यम् (व्यासः)',
+  tika_tattva_vaisharadi: 'तत्त्ववैशारदी',
+  // Dasa Sahitya remainder
+  narasimha_jagannatha_dasaru: 'नरसिंह जगन्नाथदासरु',
+  sri_kapila_devara_stotra: 'श्री कपिलदेवर स्तोत्र',
+  sri_mukhya_prana_devara_stotra: 'श्री मुख्यप्राणदेवर स्तोत्र',
+  sri_narasimha_devara: 'श्री नरसिंहदेवर',
+  sri_parvathi_devi_sthothra: 'श्री पार्वतीदेवि स्तोत्र',
+  tulasi_devi_purandara_dasaru: 'तुळसीदेवि पुरन्दरदासरु',
+  vayudevara_avathara_traya: 'वायुदेवर अवतारत्रय',
+  harikathamrutasara: 'हरिकथामृतसारः',
+  bhattasangraha: 'भट्टसङ्ग्रहः', bhavabodha: 'भावबोधः',
+  gurvarthadipika: 'गुर्वर्थदीपिका', nyayamuktavali: 'न्यायमुक्तावली',
+  parimala: 'परिमलः', sripadaraja: 'श्रीपादराजः',
+  rukminisha_vijaya: 'रुक्मिणीशविजयः', svapna_vrindavana_akhyana: 'स्वप्नवृन्दावनाख्यानम्',
+  yuktimallika: 'युक्तिमल्लिका', vijayendra_tirtha: 'विजयेन्द्रतीर्थः',
+  vishnu_tirtha: 'विष्णुतीर्थः', vyasatatvajna_tirtha: 'व्यासतत्त्वज्ञतीर्थः',
+  chandrika: 'चन्द्रिका', mandaramanjari: 'मन्दारमञ्जरी',
+  tarkatandava: 'तर्कताण्डवः', tatparyachandrika: 'तात्पर्यचन्द्रिका',
+  // Itihasa
+  translation_ganguli: 'अनुवादः (गङ्गूली)',
+  bhavishya_parva: 'भविष्यपर्व', harivamsha_parva: 'हरिवंशपर्व',
+  vishnu_parva: 'विष्णुपर्व', saartha: 'सार्थः',
+  // Purana
+  brahma_parva: 'ब्रह्मपर्व', madhyama_parva: 'मध्यमपर्व',
+  pratisarga_parva: 'प्रतिसर्गपर्व', uttara_parva: 'उत्तरपर्व',
+  adhyatma_ramayana: 'अध्यात्मरामायणम्',
+  lalitopakhyana_lalita_sahasranama: 'ललितोपाख्यानम् ललितासहस्रनाम',
+  brahma_khanda: 'ब्रह्मखण्डः', ganesha_khanda: 'गणेशखण्डः',
+  krishna_janma_khanda: 'कृष्णजन्मखण्डः', prakriti_khanda: 'प्रकृतिखण्डः',
+  purva_khanda: 'पूर्वखण्डः', uttara_khanda_pretakalpa: 'उत्तरखण्डः (प्रेतकल्पः)',
+  purva_bhaga: 'पूर्वभागः', uttara_bhaga: 'उत्तरभागः',
+  devi_mahatmya_durga_saptashati: 'देवीमाहात्म्यम् (दुर्गासप्तशती)',
+  matsya_purana: 'मत्स्यपुराणम्',
+  uttarabhaga: 'उत्तरभागः', purana_mula: 'पुराणमूलम्',
+  bhumi_khanda: 'भूमिखण्डः', kriya_yoga_sara_khanda: 'क्रियायोगसारखण्डः',
+  patala_khanda: 'पातालखण्डः', srishti_khanda: 'सृष्टिखण्डः',
+  svarga_khanda: 'स्वर्गखण्डः', uttara_khanda: 'उत्तरखण्डः',
+  kailasa_samhita: 'कैलाससंहिता', kotirudra_samhita: 'कोटिरुद्रसंहिता',
+  kumara_khanda: 'कुमारखण्डः', parvati_khanda: 'पार्वतीखण्डः',
+  sati_khanda: 'सतीखण्डः', yuddha_khanda: 'युद्धखण्डः',
+  shatarudra_samhita: 'शतरुद्रसंहिता', uma_samhita: 'उमासंहिता',
+  vayaviya_samhita: 'वायवीयसंहिता', vidyeshvara_samhita: 'विद्येश्वरसंहिता',
+  avantya_khanda: 'अवन्त्यखण्डः', kashi_khanda: 'काशीखण्डः',
+  maheshvara_khanda: 'माहेश्वरखण्डः', nagara_khanda: 'नागरखण्डः',
+  prabhasa_khanda: 'प्रभासखण्डः', revakhanda: 'रेवाखण्डः',
+  vaishnava_khanda: 'वैष्णवखण्डः', saromahatmya: 'सरोमाहात्म्यम्',
+  // Shastra -- Bauddha
+  avadanashataka: 'अवदानशतकम्', divyavadana: 'दिव्यावदानम्',
+  sanghabhedavastu: 'सङ्घभेदवस्तु', nyayabindu: 'न्यायबिन्दुः',
+  abhidharma_kosha: 'अभिधर्मकोशः', tika_sphutartha: 'स्फुटार्था',
+  ashtasahasrika_prajnaparamita: 'अष्टसाहस्रिका प्रज्ञापारमिता',
+  bodhicaryavatara: 'बोधिचर्यावतारः', mula_madhyamaka_karika: 'मूलमध्यमककारिका',
+  tika_prasannapada: 'प्रसन्नपदा', shikshasamuccaya: 'शिक्षासमुच्चयः',
+  vimshatika: 'विंशतिका', lankavatara_sutra: 'लङ्कावतारसूत्रम्',
+  saddharma_pundarika_sutra: 'सद्धर्मपुण्डरीकसूत्रम्',
+  // Shastra -- Ratna Pariksha
+  agastiya: 'आगस्त्यम्', ratnadipika: 'रत्नदीपिका',
+  // Smriti/Dharmashastra
+  chaturvarga_chintamani: 'चतुर्वर्गचिन्तामणिः', dayabhaga: 'दायभागः',
+  dharma_sindhu: 'धर्मसिन्धुः', grihastha_ratnakara: 'गृहस्थरत्नाकरः',
+  kalpataru: 'कल्पतरुः', mitakshara: 'मिताक्षरा',
+  nirnaya_sindhu: 'निर्णयसिन्धुः', smriti_chandrika: 'स्मृतिचन्द्रिका',
+  angiras_smriti: 'आङ्गिरस्स्मृतिः', atri_smriti: 'अत्रिस्मृतिः',
+  brihaspati_smriti: 'बृहस्पतिस्मृतिः', daksha_smriti: 'दक्षस्मृतिः',
+  harita_smriti: 'हारीतस्मृतिः', katyayana_smriti: 'कात्यायनस्मृतिः',
+  likhita_smriti: 'लिखितस्मृतिः', manu_smriti: 'मनुस्मृतिः',
+  narada_smriti: 'नारदस्मृतिः', parashara_smriti: 'पराशरस्मृतिः',
+  pracetas_smriti: 'प्रचेतस्स्मृतिः', samvarta_smriti: 'संवर्तस्मृतिः',
+  shankha_smriti: 'शङ्खस्मृतिः', shatatapa_smriti: 'शातातपस्मृतिः',
+  ushanas_smriti: 'उशनस्स्मृतिः', vishnu_smriti: 'विष्णुस्मृतिः',
+  yajnavalkya_smriti: 'याज्ञवल्क्यस्मृतिः', yama_smriti: 'यमस्मृतिः',
+  // Stotra
+  PrahladaKrutaNarasimha: 'प्रह्लादकृतनृसिंहस्तोत्रम्',
+  // Upaveda
+  madhava_nidana: 'माधवनिदानम्', bhavaprakasha_nighantu: 'भावप्रकाशनिघण्टुः',
+  vahata_ashtanganighantu: 'वाहटाष्टाङ्गनिघण्टुः', sharngadhara_samhita: 'शार्ङ्गधरसंहिता',
+  susruta_samhita_sutrasthana: 'सुश्रुतसंहिता (सूत्रस्थानम्)',
+  kamasutra: 'कामसूत्रम्', pancashayaka: 'पञ्चसायकः', smaradipika: 'स्मरदीपिका',
+  // Vedanga -- Kalpa
+  gautama_dharmasutra: 'गौतमधर्मसूत्रम्', vasishtha_dharmasutra: 'वसिष्ठधर्मसूत्रम्',
+  dharmasutra: 'धर्मसूत्रम्', shulbasutra: 'शुल्बसूत्रम्',
+  grihyasutra: 'गृह्यसूत्रम्', shrautasutra: 'श्रौतसूत्रम्',
+  // Vedanga -- Shiksha
+  manduki_shiksha: 'माण्डूकीशिक्षा', paniniya_shiksha: 'पाणिनीयशिक्षा',
+  rigveda_pratishakhya: 'ऋग्वेदप्रातिशाख्यम्', pushpasutra: 'पुष्पसूत्रम्',
+  rik_tantra: 'ऋक्तन्त्रम्', shaunakiya_chaturadhyayika: 'शौनकीयचतुरध्यायिका',
+  taittiriya_pratishakhya: 'तैत्तिरीयप्रातिशाख्यम्',
+  vajasaneyi_pratishakhya: 'वाजसनेयिप्रातिशाख्यम्',
+  apishali_shiksha: 'आपिशलिशिक्षा', shaishiriya_shiksha: 'शैशिरीयशिक्षा',
+  shodashasloki_shiksha: 'षोडशश्लोकीशिक्षा', swarankusha_shiksha: 'स्वराङ्कुशशिक्षा',
+  gautami_shiksha: 'गौतमीशिक्षा', lomashi_shiksha: 'लोमशीशिक्षा',
+  naradiya_shiksha: 'नारदीयशिक्षा',
+  aranya_shiksha: 'आरण्यशिक्षा', bharadwaja_shiksha: 'भारद्वाजशिक्षा',
+  kauhaliya_shiksha: 'कौहलीयशिक्षा', sarvamammata_shiksha: 'सर्वसम्मतशिक्षा',
+  shambhu_shiksha: 'शम्भुशिक्षा', siddhanta_shiksha: 'सिद्धान्तशिक्षा',
+  vyasa_shiksha: 'व्यासशिक्षा', amoghanandini_shiksha: 'अमोघानन्दिनीशिक्षा',
+  awasannirnaya_shiksha: 'अवसाननिर्णयशिक्षा', hastaswaraprakriya_shiksha: 'हस्तस्वरप्रक्रियाशिक्षा',
+  katyayani_shiksha: 'कात्यायनीशिक्षा', keshavi_shiksha: 'केशवीशिक्षा',
+  kramakarika_shiksha: 'क्रमकारिकाशिक्षा', kramasandhana_shiksha: 'क्रमसन्धानशिक्षा',
+  laghu_amoghanandini_shiksha: 'लघ्वामोघानन्दिनीशिक्षा', madhyandini_shiksha: 'माध्यन्दिनीशिक्षा',
+  manahswar_shiksha: 'मनस्वरशिक्षा', mandavya_shiksha: 'माण्डव्यशिक्षा',
+  parashari_shiksha: 'पाराशरीशिक्षा',
+  swarabhaktilakshanaparishishta_shiksha: 'स्वरभक्तिलक्षणपरिशिष्टशिक्षा',
+  swarashtaka_shiksha: 'स्वराष्टकशिक्षा', varnaratnapradipika_shiksha: 'वर्णरत्नप्रदीपिकाशिक्षा',
+  vasishthi_shiksha: 'वासिष्ठीशिक्षा', yajnavalkya_shiksha: 'याज्ञवल्क्यशिक्षा',
+  yajurvidhana_shiksha: 'यजुर्विधानशिक्षा',
+  // Vedanga -- Vyakarana
+  aindra_school: 'ऐन्द्रं व्याकरणम्', balamanorama: 'बालमनोरमा',
+  kashika: 'काशिका', kaumudi_order: 'कौमुदीक्रमः', nyasa: 'न्यासः',
+  sutrapatha: 'सूत्रपाठः', tattvabodhini: 'तत्त्वबोधिनी', vasu: 'वासुः',
+  chandra_vyakarana: 'चान्द्रव्याकरणम्', haima_shabdanushasana: 'हैमशब्दानुशासनम्',
+  jainendra_vyakarana: 'जैनेन्द्रव्याकरणम्', katantra_vyakarana: 'कातन्त्रव्याकरणम्',
+  mugdhabodha_vyakarana: 'मुग्धबोधव्याकरणम्', sarasvata_vyakarana: 'सारस्वतव्याकरणम्',
+  shabdapatha: 'शब्दपाठः', shakatayana_vyakarana: 'शाकटायनव्याकरणम्',
+  // Vedas -- Brahmanas/Aranyakas/Upanishads/Samhitas
+  gopatha_brahmana: 'गोपथब्राह्मणम्', mandukya_upanishad: 'माण्डूक्योपनिषत्',
+  mundaka_upanishad: 'मुण्डकोपनिषत्', prashna_upanishad: 'प्रश्नोपनिषत्',
+  advayataraka_upanishad: 'अद्वयतारकोपनिषत्', avyakta_upanishad: 'अव्यक्तोपनिषत्',
+  dattatreya_upanishad: 'दत्तात्रेयोपनिषत्', gopalatapani_upanishad: 'गोपालतापनीयोपनिषत्',
+  hayagriva_upanishad: 'हयग्रीवोपनिषत्', kalisantarana_upanishad: 'कलिसन्तरणोपनिषत्',
+  krishna_upanishad: 'कृष्णोपनिषत्', mahanarayana_upanishad: 'महानारायणोपनिषत्',
+  narayana_upanishad: 'नारायणोपनिषत्',
+  purva_tapaniya: 'पूर्वतापनीया', uttara_tapaniya: 'उत्तरतापनीया',
+  ramarahasya_upanishad: 'रामरहस्योपनिषत्', ramatapaniya_upanishad: 'रामतापनीयोपनिषत्',
+  tarasara_upanishad: 'तारसारोपनिषत्', vasudeva_upanishad: 'वासुदेवोपनिषत्',
+  aitareya_aranyaka: 'ऐतरेयारण्यकम्', kausitaki_shankhayana_aranyaka: 'कौषीतकिशाङ्खायनारण्यकम्',
+  aitareya_brahmana: 'ऐतरेयब्राह्मणम्', kausitaki_shankhayana_brahmana: 'कौषीतकिशाङ्खायनब्राह्मणम्',
+  kausitaki_upanishad: 'कौषीतक्युपनिषत्',
+  jaiminiya_talavakara_aranyaka: 'जैमिनीयतलवकारारण्यकम्',
+  jaiminiya_arsheya_brahmana: 'जैमिनीयार्षेयब्राह्मणम्', jaiminiya_brahmana: 'जैमिनीयब्राह्मणम्',
+  jaiminiya_upanishad_brahmana: 'जैमिनीयोपनिषद्ब्राह्मणम्', kena_upanishad: 'केनोपनिषत्',
+  arsheya_brahmana: 'आर्षेयब्राह्मणम्', chandogya_upanishad_brahmana: 'छान्दोग्योपनिषद्ब्राह्मणम्',
+  devatadhyaya_brahmana: 'देवताध्यायब्राह्मणम्', panchavimsha_tandya_brahmana: 'पञ्चविंशब्राह्मणम् (ताण्ड्यम्)',
+  samavidhana_brahmana: 'सामविधानब्राह्मणम्', samhitopanishad_brahmana: 'संहितोपनिषद्ब्राह्मणम्',
+  shadvimsha_brahmana: 'षड्विंशब्राह्मणम्', vamsha_brahmana: 'वंशब्राह्मणम्',
+  chandogya_upanishad: 'छान्दोग्योपनिषत्',
+  ashtanga_nighantu: 'अष्टाङ्गनिघण्टुः', bija_nighantu: 'बीजनिघण्टुः',
+  dhanvantari_nighantu: 'धन्वन्तरिनिघण्टुः', kaiyadeva_nighantu: 'कैयदेवनिघण्टुः',
+  madanapala_nighantu: 'मदनपालनिघण्टुः', nighantushesha: 'निघण्टुशेषः',
+  raja_nighantu: 'राजनिघण्टुः',
+  rasadhyaya: 'रसाध्यायः', rasahridaya_tantra: 'रसहृदयतन्त्रम्',
+  rasakamadhenu: 'रसकामधेनुः', rasamanjari: 'रसमञ्जरी',
+  rasaprakashasudhakara: 'रसप्रकाशसुधाकरः', rasaratnakara: 'रसरत्नाकरः',
+  rasaratnasamuccaya: 'रसरत्नसमुच्चयः', tika_bodhini: 'बोधिनी', tika_dipika: 'दीपिका',
+  rasarnava: 'रसार्णवः', rasarnavakalpa: 'रसार्णवकल्पः',
+  rasasanketakalika: 'रससङ्केतकलिका', rasatarangini: 'रसतरङ्गिणी',
+  rasendracintamani: 'रसेन्द्रचिन्तामणिः', rasendracudamani: 'रसेन्द्रचूडामणिः',
+  rasendrasarasangraha: 'रसेन्द्रसारसङ्ग्रहः',
+  ashtanga_hridaya_samhita: 'अष्टाङ्गहृदयसंहिता',
+  tika_hemadri: 'हेमाद्रिः', tika_indu: 'इन्दुः',
+  tika_padarthacandrika: 'पदार्थचन्द्रिका', tika_sarvangasundara: 'सर्वाङ्गसुन्दरा',
+  ashtanga_sangraha: 'अष्टाङ्गसङ्ग्रहः', bhavaprakasha: 'भावप्रकाशः',
+  caraka_samhita: 'चरकसंहिता', tika_ayurvedadipika: 'आयुर्वेददीपिका',
+  tika_tattvapradipika: 'तत्त्वप्रदीपिका', nadi_pariksha: 'नाडीपरीक्षा',
+  sushruta_samhita: 'सुश्रुतसंहिता', tika_nibandhasangraha: 'निबन्धसङ्ग्रहः',
+  yogaratnakara: 'योगरत्नाकरः',
+  katha_kapisthala_brahmana: 'काठकपिष्ठलब्राह्मणम्', kapisthala_katha_samhita: 'काठकपिष्ठलसंहिता',
+  kathaka_brahmana: 'काठकब्राह्मणम्', katha_samhita: 'काठकसंहिता',
+  katha_upanishad: 'कठोपनिषत्',
+  maitrayani_brahmana: 'मैत्रायणीब्राह्मणम्', maitrayani_samhita: 'मैत्रायणीसंहिता',
+  maitrayaniya_upanishad: 'मैत्रायणीयोपनिषत्', taittiriya_upanishad: 'तैत्तिरीयोपनिषत्',
+  shatapatha_brahmana_kanva: 'शतपथब्राह्मणम् (काण्वम्)',
+  brihadaranyaka_upanishad_kanva: 'बृहदारण्यकोपनिषत् (काण्वम्)',
+  isha_upanishad_kanva: 'ईशोपनिषत् (काण्वम्)',
+  shatapatha_brahmana_madhyandina: 'शतपथब्राह्मणम् (माध्यन्दिनम्)',
+  brihadaranyaka_upanishad_madhyandina: 'बृहदारण्यकोपनिषत् (माध्यन्दिनम्)',
+  isha_upanishad: 'ईशोपनिषत्',
+  // Dvaita Vedanta -- the 33 visible (not stitched-tab-folded) leftovers,
+  // read directly off each folder's own data.json (sanskrit_text/section
+  // fields) rather than guessed from the slug.
+  tika_jayatirtha: 'जयतीर्थः',
+  tika_arjuna_uvaca: 'अर्जुन उवाच',
+  tika_mandopakarini: 'मन्दोपाकारिणी',
+  tika_padarthadipikodbodhika: 'पदार्थदीपिकोद्बोधिका',
+  tika_iti_shrimadvedangamuni: 'श्रीमद्वेदाङ्गमुनिः',
+  tika_iti_shrinarayanapanditacarya: 'श्रीनारायणपण्डिताचार्यः',
+  tika_shrichalarisheshacarya: 'श्रीछलारिशेषाचार्यः',
+  tika_prakashika: 'भावप्रकाशिका', tika_kiranavali: 'किरणावली',
+  tika_nyayasudha: 'श्रीमन्न्यायसुधा',
+  tika_abhimanyadhikaranam: 'अभिमान्यधिकरणम्',
+  tika_akashadhikaranam: 'आकाशाधिकरणम्',
+  tika_anandamayadhikaranam: 'आनन्दमयाधिकरणम्',
+  tika_antasthatvadhikaranam: 'अन्तस्थत्वाधिकरणम्',
+  tika_antimapranadhikaranam: 'अन्तिमप्राणाधिकरणम्',
+  tika_anumanikadhikaranam: 'आनुमानिकाधिकरणम्',
+  tika_arambhanadhikaranam: 'आरम्भणाधिकरणम्',
+  tika_asadadhikaranam: 'असदधिकरणम्',
+  tika_atmadhikaranam: 'आत्माधिकरणम्',
+  tika_bhoktradhikaranam: 'भोक्त्रधिकरणम्',
+  tika_brahmadhikaranam: 'ब्रह्माधिकरणम्',
+  tika_gayatryadhikaranam: 'गायत्र्यधिकरणम्',
+  tika_ikshatyadhikaranam: 'ईक्षत्यधिकरणम्',
+  tika_itaravyapadeshadhikaranam: 'इतरव्यपदेशाधिकरणम्',
+  tika_janmadhikaranam: 'जन्माधिकरणम्',
+  tika_jijnasadhikaranam: 'जिज्ञासाधिकरणम्',
+  tika_napratikadhikaranam: 'न प्रतीकाधिकरणम्',
+  tika_naprayojanadhikaranam: 'न प्रयोजनाधिकरणम्',
+  tika_navilakshanatvadhikaranam: 'न विलक्षणत्वाधिकरणम्',
+  tika_pranadhikaranam: 'प्राणाधिकरणम्',
+  tika_samanvayadhikaranam: 'समन्वयाधिकरणम्',
+  tika_sarvadharmopapattyadhikaranam: 'सर्वधर्मोपपत्त्यधिकरणम्',
+  tika_shabdamulatvadhikaranam: 'शब्दमूलत्वाधिकरणम्',
+  tika_shastrayonitvadhikaranam: 'शास्त्रयोनित्वाधिकरणम्',
+  tika_tadadhigamadhikaranam: 'तदधिगमाधिकरणम्',
+  tika_vaishamyanairghrinyadhikaranam: 'वैषम्यनैर्घृण्याधिकरणम्',
 };
 
 // Numbered folders, e.g. "mandala_07". The prefix is Devanagari (so it
@@ -263,7 +547,8 @@ const DGE_PATH_LABELS = {
 const DGE_NUMBERED_PREFIXES = {
   mandala: 'मण्डलम्', kanda: 'काण्डम्', adhyaya: 'अध्यायः',
   skandha: 'स्कन्धः', prapathaka: 'प्रपाठकः', anuvaka: 'अनुवाकः',
-  ashtaka: 'अष्टकम्', parva: 'पर्व', sarga: 'सर्गः'
+  ashtaka: 'अष्टकम्', parva: 'पर्व', sarga: 'सर्गः',
+  amsha: 'अंशः', pada: 'पादः'
 };
 
 const DGE_DEVA_DIGITS = ['०','१','२','३','४','५','६','७','८','९'];
@@ -433,6 +718,17 @@ function dgeSegLabel(seg) {
   return dgeToActiveScript(DGE_PATH_LABELS[seg] || dgeAutoLabel(seg));
 }
 
+// Raw (untransliterated) Devanagari-or-honest-fallback label for a
+// grantha's own last path segment -- used as the leaf title fallback in
+// openLibraryModal() when library.json's baked g.title has no Devanagari
+// to transliterate. Deliberately NOT run through dgeToActiveScript here:
+// the caller applies that once, over the whole composed title string.
+function dgeGranthaAutoTitle(realSlug) {
+  const segs = realSlug.split('/');
+  const last = segs[segs.length - 1];
+  return DGE_PATH_LABELS[last] || dgeAutoLabel(last);
+}
+
 // Compares path segments so "mandala_2" precedes "mandala_10" (numeric
 // where both segments share a prefix), while keeping unrelated folders
 // properly separated instead of interleaving them purely by trailing
@@ -485,6 +781,22 @@ let dgeLibTotalCounts = {};
 let dgeLibTree = null;
 let dgeLibTopKeys = [];
 let dgeLibGridCategory = null; // null = showing the grid itself; else the top-level key drilled into
+
+// Admin-only "show pending too" toggle -- see openLibraryModal()'s
+// showPending. Persisted per-device (localStorage), same pattern as the
+// script/theme/view-mode preferences elsewhere in this file. Re-checked
+// against dgeIsAdmin() everywhere it's read, not just here, so a demoted
+// or logged-out admin's stale flag never leaks pending leaves to a
+// regular visitor.
+let dgeLibShowPending = (function () {
+  try { return localStorage.getItem('dge_lib_show_pending') === '1'; } catch (e) { return false; }
+})();
+window.dgeToggleLibraryShowPending = function () {
+  if (!dgeIsAdmin()) return;
+  dgeLibShowPending = !dgeLibShowPending;
+  try { localStorage.setItem('dge_lib_show_pending', dgeLibShowPending ? '1' : '0'); } catch (e) { /* ignore */ }
+  window.openLibraryModal();
+};
 
 // One icon per real top-level taxonomy key (see DGE_PATH_LABELS above for
 // the keys actually in use). Unmapped keys fall back to a plain folder
@@ -565,14 +877,24 @@ function dgeRenderNode(node, labelPrefix, depth, nodePath, noCollapseAtRoot) {
   const id = 'dgeTree' + (dgeTreeNodeSeq++);
   const inner =
     childKeys.map(k => dgeRenderNode(node.children[k], dgeSegLabel(k), depth + 1, nodePath ? nodePath + '/' + k : k)).join('') +
-    dgeSortLeaves(nodePath, node.leaves).map(leaf =>
-      `<div class="pop-item" style="margin-left:${depth * 10}px;"
+    dgeSortLeaves(nodePath, node.leaves).map(leaf => {
+      // Pending leaves only ever appear here at all when dgeLibShowPending
+      // (admin toggle) is on -- see openLibraryModal(). Muted/dashed and a
+      // no-op click (there's no grantha to open yet) rather than styled
+      // identically to a real, readable entry.
+      if (leaf.populated === false) {
+        return `<div class="pop-item" style="margin-left:${depth * 10}px; opacity:.55; cursor:default;"
+              onclick="event.stopPropagation()" title="Registered but not yet populated">${leaf.title}
+          <span style="margin-left:auto; font-size:9px; font-weight:700; color:var(--muted-text); border:1px dashed var(--line-color,currentColor); border-radius:999px; padding:1px 6px; letter-spacing:.3px;">pending</span>
+        </div>`;
+      }
+      return `<div class="pop-item" style="margin-left:${depth * 10}px;"
             onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}${
         dgeIsRecentlyAdded(leaf.addedAt)
           ? '<span style="margin-left:auto; font-size:9px; font-weight:800; color:#fff; background:var(--accent-red,#7a3b1d); border-radius:999px; padding:2px 6px; letter-spacing:.3px;">NEW</span>'
           : ''
-      }</div>`
-    ).join('');
+      }</div>`;
+    }).join('');
 
   if (!labelPrefix) return inner;
 
@@ -656,6 +978,8 @@ window.openLibraryModal = async function() {
   const listEl = document.getElementById('libraryModalList');
   if (!listEl) return;
   listEl.innerHTML = `<div style="padding:20px; text-align:center; color:var(--muted-text); font-size:12px;">Loading library…</div>`;
+  const pendingToggleEl = document.getElementById('libraryShowPendingToggle');
+  if (pendingToggleEl) pendingToggleEl.checked = dgeLibShowPending;
 
   const library = await (window.dgeLibraryCatalogPromise || Promise.resolve(null));
   if (!library || !Array.isArray(library.granthas)) {
@@ -673,13 +997,33 @@ window.openLibraryModal = async function() {
   const layerManifest = (typeof window.dgeLayerManifestPromise !== 'undefined')
     ? await window.dgeLayerManifestPromise : null;
 
+  // "Show pending" (admin-only, see dgeLibShowPending below): the everyday
+  // reader deliberately hides ~590 still-empty leaves so a casual visitor
+  // never hits a wall of dead ends -- but an admin browsing the SAME tree
+  // wants exactly the opposite, the full scaffolding, so they can see at a
+  // glance what's still missing without switching to admin/library.html.
+  // Gated on dgeIsAdmin() twice (here AND in the toggle button itself) so
+  // a stale localStorage flag from a former admin session can't leak
+  // pending leaves to a regular visitor.
+  const showPending = dgeLibShowPending && dgeIsAdmin();
   const populated = dgeFoldLayerEntries(
-    library.granthas.filter(g => g.populated && !dgeIsAdminOnlyGrantha(g)).map(g => {
+    library.granthas.filter(g => (g.populated || showPending) && !dgeIsAdminOnlyGrantha(g)).map(g => {
       const realSlug = window.dgeGranthaSlug(g.path);
       const slug = dgeEffectiveDisplayPath(realSlug); // where it GROUPS in the tree
       const custom = dgeLibOverrides.labels[slug];
-      const rawTitle = custom !== undefined ? custom : (g.title || realSlug);
-      return { slug, realSlug, title: dgeToActiveScript(dgeLocalizeNumerals(rawTitle)), addedAt: g.addedAt || null, facets: g.facets || null };
+      // g.title is baked into library.json by tools/audit_library.py's
+      // derive_title() -- a plain-English humanized slug whenever the data
+      // has no real title (which is most granthas: "Mula", "Tika Nirnaya").
+      // Left as-is it never responds to the script/language selector, the
+      // same gap DGE_PATH_LABELS/dgeAutoLabel already closes for FOLDER
+      // labels above. Reuse that same raw (untransliterated) lookup here
+      // for the leaf's own last path segment whenever g.title itself has
+      // no Devanagari to transliterate -- an admin override is always
+      // authoritative and skips this entirely.
+      const hasDeva = g.title && /[ऀ-ॿ]/.test(g.title);
+      const rawTitle = custom !== undefined ? custom
+        : (hasDeva ? g.title : dgeGranthaAutoTitle(realSlug));
+      return { slug, realSlug, title: dgeToActiveScript(dgeLocalizeNumerals(rawTitle)), addedAt: g.addedAt || null, facets: g.facets || null, populated: !!g.populated };
     }).filter(e => !dgeIsHiddenPath(e.slug)),
     layerManifest);
   if (!populated.length) {

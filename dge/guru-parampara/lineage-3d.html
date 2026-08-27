@@ -8,8 +8,10 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="../js/vandana-guard.js?v=1"></script>
+<script src="../js/contact-email.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>Guru Parampara — 3D Lineage Showcase</title>
+<link rel="stylesheet" href="../css/vyakarana-base.css?v=1">
 <style>
 
 /* --- DGE shared theme tokens (mirrored from css/main.css) so this section
@@ -25,7 +27,10 @@
 :root.theme-vibrant{--bg-main:#FDEBD3;--card-bg:#FFFDF8;--card-border:#F0C36D;--card-active:#FFDCB0;--text-primary:#3A1408;--text-sanskrit:#D93A1F;--accent-red:#E0431F;--accent-gold:#D9A521;--panel-bg:#FFFDF8;--muted-text:#8a5a2e;--accent-glow:rgba(224,67,31,0.35);}
 :root.theme-darkglass,:root.dark-mode{--bg-main:#0E0C0B;--card-bg:#201B17;--card-border:rgba(255,255,255,0.10);--card-active:rgba(232,160,80,0.14);--text-primary:#EDE2D3;--text-sanskrit:#E8A067;--accent-red:#E2664A;--accent-gold:#E8B24D;--panel-bg:#181411;--muted-text:#b6a892;--accent-glow:rgba(232,178,77,0.35);}
 
-  :root{--bg:var(--bg-main);--panel:var(--card-bg);--panel2:var(--card-active);--ink:var(--text-primary);--muted:var(--muted-text);--line:var(--card-border);--accent:var(--accent-gold);--accent2:#7db3ff;--gold:var(--accent-gold);}
+  :root{--bg:var(--bg-main);--panel:var(--card-bg);--panel2:var(--card-active);--ink:var(--text-primary);--muted:var(--muted-text);--line:var(--card-border);--accent:var(--accent-gold);--accent2:#7db3ff;--gold:var(--accent-gold);
+    /* Consumed by vyakarana-base.css's shared header/.ctl/.btn rules, now
+       loaded on this page too. */
+    --radius:14px;--shadow:0 1px 3px rgba(0,0,0,.08),0 6px 18px rgba(0,0,0,.05);}
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;background:radial-gradient(1200px 800px at 50% 40%,#0e141d,#05070b 70%);color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%;overflow:hidden}
@@ -75,7 +80,7 @@
 <body>
 <div id="app">
   <header>
-    <div style="font-size:13px;margin:0 0 10px;color:var(--muted)"><a href="../index.html" title="DGE Home" style="color:var(--accent);text-decoration:none;font-weight:600">⌂ DGE</a><span style="opacity:.6;margin:0 6px">›</span><a href="index.html" style="color:var(--accent);text-decoration:none">Guru Parampara</a><span style="opacity:.6;margin:0 6px">›</span><b style="color:var(--ink)">3D Showcase</b></div>
+    <div class="brand"><a href="../index.html" title="DGE Home">⌂ DGE</a><span>›</span><a href="index.html">Guru Parampara</a><span>›</span><span>3D Showcase</span></div>
     <h1>Guru Parampara · <span style="color:var(--accent)">3D Lineage Showcase</span></h1>
     <div class="sub" id="sub"></div>
     <div class="toolbar">

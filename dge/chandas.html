@@ -5,8 +5,10 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="js/vandana-guard.js?v=1"></script>
+<script src="js/contact-email.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>छन्दोविश्लेषणम् — DGE</title>
+<link rel="stylesheet" href="css/vyakarana-base.css?v=1">
 <link rel="stylesheet" href="css/vyakarana.css?v=1">
 <link rel="stylesheet" href="css/rupasiddhi.css?v=1">
 <link rel="stylesheet" href="css/chandas.css?v=1">
@@ -14,7 +16,7 @@
 <body>
 <header>
   <div class="bar">
-    <div class="brand"><a href="index.html">⌂ DGE</a><span>›</span>छन्दोविश्लेषणम्</div>
+    <div class="brand"><a href="index.html" title="DGE Home">⌂ DGE</a><span>›</span><span class="deva">छन्दोविश्लेषणम्</span></div>
     <div class="spacer"></div>
     <button class="icon" id="themeBtn" title="Light / dark">◐</button>
   </div>
@@ -51,6 +53,11 @@
     लक्षणमूलम्: <a href="index.html?path=vedanga/vrittaratnakara">वृत्तरत्नाकरः</a>.</p>
 </main>
 
+<!-- Filled by site-footer.js, shared with the landing page and reader
+     (see that file's own header comment). -->
+<div class="site-footer-links" id="siteFooterLinks"></div>
+
+<script src="js/site-footer.js?v=1"></script>
 <script src="js/chandas.js?v=1"></script>
 </body>
 </html>

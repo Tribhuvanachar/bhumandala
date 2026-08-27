@@ -1,5 +1,5 @@
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['transliteration.js'] = 'v1.4 (Vedic accent marks handled per target script — IAST gets combining acute/grave, other scripts drop them instead of rendering missing-glyph boxes)';
+window.DGE_VERSIONS['transliteration.js'] = 'v1.5 (DGE_DEVANAGARI_ALIAS_SCRIPTS: hindi/marathi script-picker entries are no-ops here, same as devanagari itself -- no distinct Sanscript scheme for either. On top of v1.4\'s Vedic accent handling)';
 
 // Vedic accent marks and the nasal sign have no direct equivalent in the
 // target scripts, so Sanscript passes them through untouched — they then
@@ -27,8 +27,13 @@ function dgePrepareForScript(text, script) {
     return t.replace(DGE_VEDIC_MARKS, '');
 }
 
+// 'hindi'/'marathi' are Devanagari-script script-picker entries (see
+// config.js's SCRIPT_OPTIONS) -- no-ops here, same as 'devanagari' itself,
+// since there's no distinct Sanscript scheme for either.
+const DGE_DEVANAGARI_ALIAS_SCRIPTS = ['devanagari', 'hindi', 'marathi'];
+
 window.applyTransliteration = function(htmlText, script) {
-    if (script === 'devanagari' || !htmlText) {
+    if (DGE_DEVANAGARI_ALIAS_SCRIPTS.includes(script) || !htmlText) {
         return htmlText;
     }
     
@@ -66,7 +71,7 @@ window.applyScript = function(code) {
         }
     });
     
-    if (code !== 'devanagari') {
+    if (!DGE_DEVANAGARI_ALIAS_SCRIPTS.includes(code)) {
         document.body.classList.add('non-devanagari');
     } else {
         document.body.classList.remove('non-devanagari');

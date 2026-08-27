@@ -245,7 +245,12 @@
     var box = el("div", "pc");
     (pc || []).forEach(function (w) {
       var a = el("a");
-      a.href = "kosha.html?w=" + encodeURIComponent(
+      // Was "kosha.html?w=..." -- that page has never existed (Kosha is a
+      // modal inside the reader, window.dgeOpenKosha(), not a standalone
+      // page), so every padaccheda word here was a dead link. shabda.html's
+      // own ?q= deep link (shabda.js's boot()) pre-fills its search with
+      // exactly this lemma, which is a real, working lookup.
+      a.href = "shabda.html?q=" + encodeURIComponent(
         (w.p && w.p[0] && w.p[0].lemma) || w.w);
       a.appendChild(el("span", "w", tr(w.w)));
       if (w.e) a.appendChild(el("span", "g", w.e));

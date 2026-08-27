@@ -129,6 +129,10 @@
 <footer class="site-foot">
   <div class="rule" style="margin:0 auto 16px;" aria-hidden="true"><i></i></div>
   <div id="mantras"></div>
+  <!-- Filled by site-footer.js, shared with the main reader (see that
+       file's own header comment) instead of this page having no footer
+       navigation of its own. -->
+  <div class="site-footer-links" id="siteFooterLinks"></div>
 </footer>
 
 <div class="sheet-wrap" id="sheetWrap" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
@@ -287,56 +291,144 @@ let SITE_CONFIG = null;
     if (!cfg.requireOffering) unlock();
   }
 
+  // Groups home.json's sections{} into named bands (see that file's own
+  // _readme) instead of every contributor rendering as an equal-weight
+  // section -- per the project lead's own structural call: Founder, Scholar
+  // and Contributors/Sponsors read at three different levels of the site's
+  // hierarchy, not four identical biography cards in a row. A section with
+  // no tier, or one this map doesn't recognise, still gets its own
+  // standalone band keyed by its own id -- exactly the old behaviour --
+  // so a new contributor never *requires* a tier to render correctly.
+  const TIER_META = {
+    foundation:  { label: 'Foundation' },
+    stewardship: { label: 'Scholarly Stewardship' },
+    seva:        { label: 'Seva & Sustenance' }
+  };
+
+  // The per-section body -- person-head, blurb, the contributors list
+  // exception, the Know More action, todo -- unchanged from what
+  // renderSections() used to build inline; pulled out so both a normal
+  // tier band and the seva tier's left grid column can call it.
+  function personBlockHtml(sec, si) {
+    const at = (k) => ' data-edit="sections.' + si + '.' + k + '"';
+    const meta = (sec.meta || []).map((m, mi) =>
+      `<span data-edit="sections.${si}.meta.${mi}">${esc(m)}</span>`).join('<br>');
+
+    let html = `<div class="person-head">
+        <div class="person-icon" aria-hidden="true">${icon(sec.icon, 28)}</div>
+        <div>
+          <div class="person-eyebrow"${at('eyebrow')}>${esc(sec.eyebrow)}</div>
+          <div class="person-name"${at('name')}>${esc(sec.name)}${sec.sub ? ` <span${at('sub')}>${esc(sec.sub)}</span>` : ''}</div>
+          ${meta ? `<div class="person-meta">${meta}</div>` : ''}
+        </div>
+      </div>
+      ${[].concat(sec.blurb).map((t, bi) => `<p class="person-blurb" data-edit="sections.${si}.blurb${Array.isArray(sec.blurb) ? '.' + bi : ''}">${esc(t)}</p>`).join('')}`;
+
+    if (sec.panel === 'contributors') {
+      // Sourced live from admin/content/reader.json's CONTRIBUTORS_CONFIG
+      // (see the boot fetch) rather than a second copy in this file —
+      // view-only here since that file's own edit tool already covers it
+      // (dge/index.html's About panel).
+      const rc = window.READER_CONTENT;
+      const contrib = (rc && rc.CONTRIBUTORS_CONFIG && rc.CONTRIBUTORS_CONFIG.enabled &&
+                        rc.CONTRIBUTORS_CONFIG.contributors) || [];
+      if (contrib.length) {
+        html += '<ul class="person-items">' + contrib.map(function (c) {
+          return `<li><span>${esc(c.name)}</span>${c.role ? `<small>${esc(c.role)}</small>` : ''}</li>`;
+        }).join('') + '</ul>';
+      }
+    } else if (sec.items) {
+      html += '<ul class="person-items">' + sec.items.map(function (i, ii) {
+        const ip = 'sections.' + si + '.items.' + ii + '.';
+        return `<li><span data-edit="${ip}name">${esc(i.name)}</span>` +
+               `${i.note ? `<small data-edit="${ip}note">${esc(i.note)}</small>` : ''}</li>`;
+      }).join('') + '</ul>';
+    }
+
+    if (sec.panel) {
+      html += `<div class="person-actions">
+        <button class="more-link" data-panel="${esc(sec.panel)}">
+          ${esc(sec.moreLabel || 'Know More')} <span class="arrow" aria-hidden="true">→</span>
+        </button></div>`;
+    }
+
+    if (sec.todo) html += `<p class="person-todo"${at('todo')}>${esc(sec.todo)}</p>`;
+    return html;
+  }
+
+  // The seva tier's right-hand column -- Key Sponsors, read live from
+  // reader.json's KEY_SPONSORS_CONFIG the same way the Contributors list
+  // already is above, so there is one editable sponsor list (the reader
+  // app's own About panel), not a second copy hand-maintained here.
+  function sponsorColumnHtml() {
+    const rc = window.READER_CONTENT;
+    const sponsors = (rc && rc.KEY_SPONSORS_CONFIG && rc.KEY_SPONSORS_CONFIG.enabled &&
+                       rc.KEY_SPONSORS_CONFIG.sponsors) || [];
+    if (!sponsors.length) return '';
+    return `<div class="seva-col">
+      <div class="person-head">
+        <div class="person-icon" aria-hidden="true">${icon('lamp', 28)}</div>
+        <div>
+          <div class="person-eyebrow">Sustaining This Library</div>
+          <div class="person-name">Key Sponsors</div>
+        </div>
+      </div>
+      <ul class="person-items">${sponsors.map(function (s) {
+        return `<li><span>${esc(s.name)}</span>${s.contribution ? `<small>${esc(s.contribution)}</small>` : ''}</li>`;
+      }).join('')}</ul>
+    </div>`;
+  }
+
+  // Closing Participation band -- reader.json's SPONSOR_CONFIG already
+  // carries real, admin-edited copy for this (introText, a contact
+  // address) for the reader app's own Sponsor modal; reused verbatim here
+  // rather than a second hand-written pitch that could drift from it.
+  // Renders nothing if that config is off or has no contact set, rather
+  // than showing a dead-end band.
+  function participationHtml() {
+    const rc = window.READER_CONTENT;
+    const sc = rc && rc.SPONSOR_CONFIG;
+    if (!sc || !sc.enabled || !sc.contactForSponsorship) return '';
+    return `<section class="band person tier-participation" id="participation"><div class="inner">
+      <div class="tier-head"><span class="tier-label">Participation</span></div>
+      <div class="person-name">Help Sustain This Library</div>
+      <p class="person-blurb">${esc(sc.introText || '')}</p>
+      <div class="person-actions">
+        <a class="more-link" href="mailto:${esc(sc.contactForSponsorship)}">
+          Get in Touch <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div></section>`;
+  }
+
   function renderSections() {
     // The index is part of the path, so an edit lands on the right band even
     // after one is reordered or removed in the JSON.
-    $('sections').innerHTML = cfg.sections.map(function (sec, si) {
-      const at = (k) => ' data-edit="sections.' + si + '.' + k + '"';
-      const meta = (sec.meta || []).map((m, mi) =>
-        `<span data-edit="sections.${si}.meta.${mi}">${esc(m)}</span>`).join('<br>');
+    const groups = {}, order = [];
+    cfg.sections.forEach(function (sec, si) {
+      const t = TIER_META[sec.tier] ? sec.tier : sec.id;
+      if (!groups[t]) { groups[t] = []; order.push(t); }
+      groups[t].push({ sec: sec, si: si });
+    });
 
-      let html = `<section class="band person" id="${esc(sec.id)}"><div class="inner">
-        <div class="person-head">
-          <div class="person-icon" aria-hidden="true">${icon(sec.icon, 28)}</div>
-          <div>
-            <div class="person-eyebrow"${at('eyebrow')}>${esc(sec.eyebrow)}</div>
-            <div class="person-name"${at('name')}>${esc(sec.name)}${sec.sub ? ` <span${at('sub')}>${esc(sec.sub)}</span>` : ''}</div>
-            ${meta ? `<div class="person-meta">${meta}</div>` : ''}
-          </div>
-        </div>
-        ${[].concat(sec.blurb).map((t, bi) => `<p class="person-blurb" data-edit="sections.${si}.blurb${Array.isArray(sec.blurb) ? '.' + bi : ''}">${esc(t)}</p>`).join('')}`;
+    $('sections').innerHTML = order.map(function (t) {
+      const entries = groups[t];
+      const meta = TIER_META[t];
+      const headHtml = meta ? `<div class="tier-head"><span class="tier-label">${esc(meta.label)}</span></div>` : '';
+      const bandId = esc(entries[0].sec.id);
 
-      if (sec.panel === 'contributors') {
-        // Sourced live from admin/content/reader.json's CONTRIBUTORS_CONFIG
-        // (see the boot fetch) rather than a second copy in this file —
-        // view-only here since that file's own edit tool already covers it
-        // (dge/index.html's About panel).
-        const rc = window.READER_CONTENT;
-        const contrib = (rc && rc.CONTRIBUTORS_CONFIG && rc.CONTRIBUTORS_CONFIG.enabled &&
-                          rc.CONTRIBUTORS_CONFIG.contributors) || [];
-        if (contrib.length) {
-          html += '<ul class="person-items">' + contrib.map(function (c) {
-            return `<li><span>${esc(c.name)}</span>${c.role ? `<small>${esc(c.role)}</small>` : ''}</li>`;
-          }).join('') + '</ul>';
-        }
-      } else if (sec.items) {
-        html += '<ul class="person-items">' + sec.items.map(function (i, ii) {
-          const ip = 'sections.' + si + '.items.' + ii + '.';
-          return `<li><span data-edit="${ip}name">${esc(i.name)}</span>` +
-                 `${i.note ? `<small data-edit="${ip}note">${esc(i.note)}</small>` : ''}</li>`;
-        }).join('') + '</ul>';
+      if (t === 'seva') {
+        const left = entries.map(function (e) {
+          return `<div class="seva-col">${personBlockHtml(e.sec, e.si)}</div>`;
+        }).join('');
+        const right = sponsorColumnHtml();
+        return `<section class="band person tier-seva" id="${bandId}"><div class="inner">${headHtml}<div class="seva-grid">${left}${right}</div></div></section>`;
       }
 
-      if (sec.panel) {
-        html += `<div class="person-actions">
-          <button class="more-link" data-panel="${esc(sec.panel)}">
-            ${esc(sec.moreLabel || 'Know More')} <span class="arrow" aria-hidden="true">→</span>
-          </button></div>`;
-      }
-
-      if (sec.todo) html += `<p class="person-todo"${at('todo')}>${esc(sec.todo)}</p>`;
-      return html + '</div></section>';
-    }).join('');
+      const body = entries.map(function (e) { return personBlockHtml(e.sec, e.si); }).join('<hr class="tier-divider">');
+      const cls = meta ? ' tier-' + esc(t) : '';
+      return `<section class="band person${cls}" id="${bandId}"><div class="inner">${headHtml}${body}</div></section>`;
+    }).join('') + participationHtml();
   }
 
   /* ----------------------------------------------------------- panels --- */
@@ -734,6 +826,8 @@ let SITE_CONFIG = null;
   window.dgeVandana = { openPanel, closePanel, enter, get offerings() { return offerings; } };
 })();
 </script>
+<script src="dge/js/contact-email.js?v=1"></script>
 <script src="dge/js/content-inline.js?v=1"></script>
+<script src="dge/js/site-footer.js?v=1"></script>
 </body>
 </html>
