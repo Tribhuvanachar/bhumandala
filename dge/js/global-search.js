@@ -135,7 +135,22 @@
       '.dge-gs-meta{font-size:12px;opacity:.7;display:flex;gap:8px;flex-wrap:wrap}',
       '.dge-gs-snip{font-size:16px;margin-top:2px;line-height:1.5}',
       '.dge-gs-hl{background:rgba(232,178,77,.4);color:inherit;border-radius:3px;padding:0 1px;font-weight:700}',
-      '.dge-gs-hint{padding:14px;opacity:.6;font-size:13px}',
+      '.dge-gs-hint{padding:14px;opacity:.6;font-size:13px;display:flex;align-items:center;gap:8px}',
+      // A cold-cache query is a manifest fetch plus several postings-bucket
+      // and grantha-shard round trips through jsdelivr (see onType()'s own
+      // comment) -- 10+ seconds is common. Confirmed live with a throttled
+      // connection: the plain "Searching..." text alone sits completely
+      // static that whole time, which reads as inert/stuck exactly like the
+      // silent placeholder this hint was built to replace, just with one
+      // more word on screen. This spinner keeps the modal visibly alive for
+      // however long the wait actually is. Declares its own @keyframes
+      // rather than reusing main.css's -- ashtadhyayi.html/dhatu.html load
+      // this file too but style themselves with vyakarana-base.css instead
+      // of main.css, so this file can't assume main.css's keyframe exists
+      // (same self-contained-injection reasoning as this file's own header
+      // comment gives for shipping its whole stylesheet inline).
+      '.dge-gs-spinner{width:13px;height:13px;flex:none;border:2px solid var(--card-border,rgba(0,0,0,.2));border-top-color:var(--accent-red,#7a3b1d);border-radius:50%;animation:dge-gs-spin .7s linear infinite}',
+      '@keyframes dge-gs-spin{100%{transform:rotate(360deg)}}',
       '.dge-gs-filterbar{padding:8px 12px;border-bottom:1px solid var(--card-border,rgba(0,0,0,.12));display:flex;flex-direction:column;gap:6px;}',
       '.dge-gs-frow{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}',
       '.dge-gs-flabel{font-size:10.5px;opacity:.55;text-transform:uppercase;letter-spacing:.4px;flex:0 0 100%;margin-top:2px;}',
@@ -398,7 +413,7 @@
     clearTimeout(debounce);
     var results = document.getElementById('dge-gs-results');
     if (!q) { results.innerHTML = '<div class="dge-gs-hint">Type a word or phrase in any script.</div>'; return; }
-    results.innerHTML = '<div class="dge-gs-hint">Searching…</div>';
+    results.innerHTML = '<div class="dge-gs-hint"><span class="dge-gs-spinner" aria-hidden="true"></span>Searching…</div>';
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
       var section = currentSection || undefined;

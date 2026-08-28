@@ -163,7 +163,7 @@
       var vt=e.target.closest(".vrit-tab");
       if(vt){ e.stopPropagation(); showVritti(vt.closest(".vrit"), vt.dataset.v); return; }
       var cs=e.target.closest("[data-corpus-search]");
-      // "Where else does this occur" is exactly what the reader's own global
+      // "Search Library" is exactly what the reader's own global
       // search already answers for any word — reused rather than building a
       // second occurrence index that would drift from it (same reasoning as
       // the [data-occur] popover in intellisense.js).

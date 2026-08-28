@@ -485,7 +485,7 @@ body:has(.popup-sheet.show)::after {
   display: none; z-index: 10000; box-shadow: var(--shadow-lg);
   transform: translateX(-50%); flex-direction: column; gap: 6px; user-select: none;
   animation: popIn var(--t-fast) var(--ease);
-  /* wordToolsRow has grown past 3 buttons (Shabda/Dhātu/Where else) to 5
+  /* wordToolsRow has grown past 3 buttons (Shabda/Dhātu/Search Library) to 5
      (+ Sandhi/Samasa) -- without a cap here the row just keeps growing
      wider than the viewport instead of wrapping, and the tooltip's own
      centering math in ai.js can't compensate for a tooltip wider than the

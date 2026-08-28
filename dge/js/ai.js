@@ -36,9 +36,9 @@ function dgeLangInstruction() {
 // even though every one of those tools does a lookup that is only
 // meaningful for exactly one word (a declension table, a dhatupatha root
 // search, a per-word sandhi split) -- tapping any of them on a multi-word
-// selection was a dead end, not a helpful contextual option. "Where else"
-// (corpus search) is left showing for both, since searching a phrase is
-// perfectly reasonable.
+// selection was a dead end, not a helpful contextual option. "Search
+// Library" (corpus search) is left showing for both, since searching a
+// phrase is perfectly reasonable.
 function dgeUpdateWordToolsForSelection(txt) {
   const isSingleWord = !!txt && !/\s/.test(txt.trim());
   document.querySelectorAll('#wordToolsRow [data-word-only]').forEach(btn => {
@@ -1387,7 +1387,7 @@ function dgeShabdaStepsHtml(steps) {
   }).join('') + '</ol>';
 }
 
-// "Where else does this word occur" (§5.2): closes the shabda modal and
+// "Search Library" -- where else does this word occur (§5.2): closes the shabda modal and
 // opens the global corpus search already searching for the surface form the
 // reader looked up. Rendered only when global-search.js is actually loaded
 // on this page, so the link can never be a dead end. Appended to every
@@ -1395,7 +1395,7 @@ function dgeShabdaStepsHtml(steps) {
 // exact-match case -- useful regardless of which of them actually answered.
 function dgeShabdaWhereElseLink(surface) {
   if (!(window.DGEGlobalSearch && window.DGEGlobalSearch.open)) return '';
-  return '<a class="dsm-full-link" href="#" data-dsm-where="' + dgeShabdaEsc(surface) + '">🔍 साहित्ये अन्यत्र — where else in the library ↗</a>';
+  return '<a class="dsm-full-link" href="#" data-dsm-where="' + dgeShabdaEsc(surface) + '">🔍 साहित्ये अन्यत्र — search library ↗</a>';
 }
 function dgeShabdaWireWhereElse(body) {
   const a = body.querySelector('[data-dsm-where]');
