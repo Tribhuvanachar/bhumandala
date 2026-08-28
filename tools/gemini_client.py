@@ -106,6 +106,16 @@ def _post(model: str, body: dict, api_key: str, usage_totals: dict | None = None
         raise GeminiError(classify_error(e.code), f"HTTP {e.code}: {detail[:300]}")
     except urllib.error.URLError as e:
         raise GeminiError("network", str(e.reason))
+    except (ConnectionError, TimeoutError, OSError) as e:
+        # A dropped/reset connection (e.g. http.client.RemoteDisconnected)
+        # is an OSError but NOT a urllib.error.URLError, so it fell through
+        # both clauses above uncaught -- observed crashing a multi-hour
+        # batch run outright instead of being logged as a per-call warning
+        # like every other transient failure here. Not retried (this
+        # module's whole design is one attempt + one fallback-model
+        # attempt, no backoff loop -- see call_gemini's docstring), just
+        # classified so a caller's batch loop can log and move on.
+        raise GeminiError("network", str(e))
     try:
         text = payload["candidates"][0]["content"]["parts"][0]["text"]
         result = json.loads(text)

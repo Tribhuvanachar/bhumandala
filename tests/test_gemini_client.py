@@ -1,8 +1,10 @@
 """gemini_client.py tests. No network: call_gemini's fallback logic is
 tested by swapping in a fake _post()."""
+import http.client
 import os
 import sys
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "tools"))
 
@@ -113,6 +115,29 @@ class TestAccumulateUsage(unittest.TestCase):
             self.assertEqual(totals["total_tokens"], 7)
         finally:
             gc._post = real_post
+
+
+class TestPostNetworkErrors(unittest.TestCase):
+    """A dropped connection (e.g. http.client.RemoteDisconnected) is an
+    OSError but not a urllib.error.URLError, so it fell through both of
+    _post()'s original except clauses uncaught -- observed crashing a
+    multi-hour gemini_dhatu_lexicon.py batch run outright instead of
+    being classified like every other transient failure here."""
+
+    def test_remote_disconnected_is_classified_as_network_error(self):
+        with patch("urllib.request.urlopen", side_effect=http.client.RemoteDisconnected("closed")):
+            with self.assertRaises(gc.GeminiError) as ctx:
+                gc._post("model", {}, "key")
+        self.assertEqual(ctx.exception.kind, "network")
+
+    def test_connection_reset_is_classified_as_network_error(self):
+        with patch("urllib.request.urlopen", side_effect=ConnectionResetError("reset")):
+            with self.assertRaises(gc.GeminiError) as ctx:
+                gc._post("model", {}, "key")
+        self.assertEqual(ctx.exception.kind, "network")
+
+    def test_network_error_is_not_fallback_eligible(self):
+        self.assertNotIn("network", gc.FALLBACK_ELIGIBLE)
 
 
 if __name__ == "__main__":
