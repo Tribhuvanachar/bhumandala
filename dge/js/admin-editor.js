@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (dgeCheckSuperadminGate()) {
     const btn = document.getElementById('adminToolsBtn');
     if (btn) btn.style.display = 'flex';
-    ['adminFilesItem', 'adminConfigItem', 'adminConvertItem', 'adminLibraryManagerItem', 'adminKoshaManagerItem', 'adminAshtadhyayiManagerItem', 'adminHolyPlacesManagerItem', 'adminAudioManagerItem', 'adminDasaCaptureItem'].forEach(id => {
+    ['adminFilesItem', 'adminConfigItem', 'adminConvertItem', 'adminLibraryManagerItem', 'adminKoshaManagerItem', 'adminAshtadhyayiManagerItem', 'adminHolyPlacesManagerItem', 'adminAudioManagerItem', 'adminDasaCaptureItem', 'adminContentProvenanceItem'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.style.display = 'flex';
     });

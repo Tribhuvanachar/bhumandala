@@ -22,7 +22,7 @@
       "label": "Super admin",
       "key": "SHRI108",
       "sessionFlag": "dge.admin.ok",
-      "grants": ["kosha", "holy-places"],
+      "grants": ["kosha", "holy-places", "content-provenance"],
       "note": "Also satisfied by localStorage is_superadmin === 'true', which the account system sets."
     },
     "audioadmin": {

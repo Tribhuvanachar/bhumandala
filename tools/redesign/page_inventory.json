@@ -1,5 +1,5 @@
 {
- "page_count": 29,
+ "page_count": 30,
  "pages": [
   {
    "path": "index.html",
@@ -333,6 +333,19 @@
     "css/audio.css"
    ],
    "title": "Audio Admin · DGE (restricted)"
+  },
+  {
+   "path": "admin/content-provenance.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/content-provenance.css"
+   ],
+   "title": "Content Provenance · DGE (super-admin)"
   },
   {
    "path": "admin/dasa-capture.html",
