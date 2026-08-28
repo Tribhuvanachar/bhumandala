@@ -16,7 +16,16 @@ const { onSchedule } = require('firebase-functions/v2/scheduler');
 const { defineSecret, defineString } = require('firebase-functions/params');
 const { setGlobalOptions } = require('firebase-functions/v2');
 const logger = require('firebase-functions/logger');
-const admin = require('firebase-admin');
+// Modular imports, NOT the older `admin.firestore.FieldValue` namespace
+// style. That distinction cost a real debugging session: the functions
+// emulator wraps the root `firebase-admin` export in a proxy to redirect
+// it at the emulators, and the nested statics read back as undefined
+// through that proxy -- so every serverTimestamp() call threw a bare
+// INTERNAL under emulation while looking perfectly correct in review.
+// The modular entry points are also the current firebase-admin v13 API.
+const { initializeApp } = require('firebase-admin/app');
+const { getFirestore, FieldValue, Timestamp } = require('firebase-admin/firestore');
+const { getAuth } = require('firebase-admin/auth');
 
 const otpCore = require('./lib/otp-core');
 const waLib = require('./lib/whatsapp');
@@ -24,8 +33,8 @@ const { getProvider, assertProviderAllowed } = require('./lib/providers');
 const broadcastCore = require('./lib/broadcast-core');
 const wf = require('./lib/workflows-core');
 
-admin.initializeApp();
-const db = admin.firestore();
+initializeApp();
+const db = getFirestore();
 
 // Region matters for latency AND for cost — keep functions near the
 // users and near Firestore. asia-south1 (Mumbai) for an India-centred
@@ -208,11 +217,11 @@ exports.verifyOtp = onCall(
     const uid = otpCore.phoneUid(phone, pepper);
 
     try {
-      await admin.auth().getUser(uid);
-      await admin.auth().updateUser(uid, { phoneNumber: phone }).catch(() => {});
+      await getAuth().getUser(uid);
+      await getAuth().updateUser(uid, { phoneNumber: phone }).catch(() => {});
     } catch (e) {
       if (e.code === 'auth/user-not-found') {
-        await admin.auth().createUser({ uid, phoneNumber: phone });
+        await getAuth().createUser({ uid, phoneNumber: phone });
       } else {
         throw e;
       }
@@ -233,17 +242,17 @@ exports.verifyOtp = onCall(
         // broadcasts on WhatsApp. Opt-in stays false until the person
         // ticks the box — see the consent UI in user-auth.js.
         whatsappOptIn: false,
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        lastLoginAt: admin.firestore.FieldValue.serverTimestamp()
+        createdAt: FieldValue.serverTimestamp(),
+        lastLoginAt: FieldValue.serverTimestamp()
       });
     } else {
       await userRef.update({
         phoneNumber: phone,
-        lastLoginAt: admin.firestore.FieldValue.serverTimestamp()
+        lastLoginAt: FieldValue.serverTimestamp()
       }).catch(() => {});
     }
 
-    const token = await admin.auth().createCustomToken(uid);
+    const token = await getAuth().createCustomToken(uid);
     logger.info('OTP verified, custom token issued', { uid });
     return { ok: true, token };
   }
@@ -306,8 +315,8 @@ async function applyOptState(phone, intent) {
   const batchWrite = db.batch();
   for (const doc of snap.docs) {
     batchWrite.update(doc.ref, intent === 'opt_out'
-      ? { whatsappOptIn: false, whatsappOptOutAt: admin.firestore.FieldValue.serverTimestamp() }
-      : { whatsappOptIn: true, whatsappOptOutAt: admin.firestore.FieldValue.delete(), whatsappOptInAt: admin.firestore.FieldValue.serverTimestamp() });
+      ? { whatsappOptIn: false, whatsappOptOutAt: FieldValue.serverTimestamp() }
+      : { whatsappOptIn: true, whatsappOptOutAt: FieldValue.delete(), whatsappOptInAt: FieldValue.serverTimestamp() });
   }
   await batchWrite.commit();
   logger.info('Applied WhatsApp opt state', { intent, count: snap.size });
@@ -329,7 +338,7 @@ exports.runWhatsAppBroadcast = onSchedule(
     const now = Date.now();
     const due = await db.collection('broadcasts')
       .where('status', '==', 'scheduled')
-      .where('sendAfter', '<=', admin.firestore.Timestamp.fromMillis(now))
+      .where('sendAfter', '<=', Timestamp.fromMillis(now))
       .limit(5)
       .get();
 
@@ -352,7 +361,7 @@ async function runOneCampaign(campaignDoc, now) {
   const claimed = await db.runTransaction(async (tx) => {
     const fresh = await tx.get(campaignDoc.ref);
     if (fresh.data()?.status !== 'scheduled') return false;
-    tx.update(campaignDoc.ref, { status: 'sending', startedAt: admin.firestore.FieldValue.serverTimestamp() });
+    tx.update(campaignDoc.ref, { status: 'sending', startedAt: FieldValue.serverTimestamp() });
     return true;
   });
   if (!claimed) {
@@ -394,8 +403,8 @@ async function runOneCampaign(campaignDoc, now) {
       if (r.ok) {
         sent++;
         writes.update(db.collection(USERS).doc(user.id), {
-          [`whatsappCampaigns.${campaign.id}`]: admin.firestore.FieldValue.serverTimestamp(),
-          whatsappLastBroadcastAt: admin.firestore.FieldValue.serverTimestamp()
+          [`whatsappCampaigns.${campaign.id}`]: FieldValue.serverTimestamp(),
+          whatsappLastBroadcastAt: FieldValue.serverTimestamp()
         });
       } else {
         failed++;
@@ -412,7 +421,7 @@ async function runOneCampaign(campaignDoc, now) {
 
   await campaignDoc.ref.update({
     status: deferred.length ? 'scheduled' : 'sent',
-    lastRunAt: admin.firestore.FieldValue.serverTimestamp(),
+    lastRunAt: FieldValue.serverTimestamp(),
     stats: { sent, failed, skipped, deferred: deferred.length }
   });
 
@@ -526,7 +535,7 @@ exports.runWorkflow = onCall(
 
     await ref.set({
       uid, role, workflow: job.id, file: job.file, inputs,
-      at: admin.firestore.FieldValue.serverTimestamp(),
+      at: FieldValue.serverTimestamp(),
       result: 'pending'
     });
 

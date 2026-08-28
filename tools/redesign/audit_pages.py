@@ -44,10 +44,19 @@ KNOWN_VANDANA_EXCEPTIONS = {
 
 
 def discover_pages():
-    pages = []
-    pages.append(REPO_ROOT / "index.html")
-    pages.extend(sorted((REPO_ROOT / "dge").rglob("*.html")))
-    pages.extend(sorted((REPO_ROOT / "admin").rglob("*.html")))
+    # rglob walks into node_modules too -- harmless for the checked-in tree
+    # (nothing under dge/ or admin/ has one), but dge/firebase/{functions,
+    # tests}/node_modules/ is real: `npm install` there for the Firebase
+    # test suite drops plenty of *.html (docs, fixtures, templates) that
+    # were never a DGE page and never will be. Excluded here rather than
+    # narrowing the rglob pattern, so a real future subfolder under dge/ or
+    # admin/ still gets picked up by default.
+    def real_pages(root):
+        return sorted(p for p in root.rglob("*.html") if "node_modules" not in p.parts)
+
+    pages = [REPO_ROOT / "index.html"]
+    pages.extend(real_pages(REPO_ROOT / "dge"))
+    pages.extend(real_pages(REPO_ROOT / "admin"))
     return pages
 
 
