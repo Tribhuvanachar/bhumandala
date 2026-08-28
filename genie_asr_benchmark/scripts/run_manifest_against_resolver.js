@@ -17,11 +17,18 @@ const corpus = loadCorpusData();
 const index = DgeResolver.buildCorpusIndex(corpus);
 
 function checkEntry(entry, transcript, variantLabel) {
-  const r = DgeResolver.resolve(transcript, index);
+  // entry.resolverFn (e.g. "resolveCorrectionSubmission") opts an entry
+  // out of the normal resolve() classification pass -- used for
+  // content_correction's turn-2 free-text submission, which by design
+  // isn't run through intent classification at all.
+  const r = entry.resolverFn === 'resolveCorrectionSubmission'
+    ? DgeResolver.resolveCorrectionSubmission(transcript)
+    : DgeResolver.resolve(transcript, index);
   const exp = entry.expected;
   const problems = [];
 
   if (r.intent !== exp.intent) problems.push(`intent: got "${r.intent}", expected "${exp.intent}"`);
+  if (exp.stage && r.stage !== exp.stage) problems.push(`stage: got "${r.stage}", expected "${exp.stage}"`);
 
   if (exp.target_pattern) {
     const re = new RegExp(exp.target_pattern);

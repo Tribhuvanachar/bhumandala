@@ -13,7 +13,8 @@
         "05_mixed_code_switch", "06_proper_names", "07_open_text",
         "08_open_section", "09_search", "10_commentary_renderer",
         "11_audio_settings", "12_explain_padaccheda_compare",
-        "13_ambiguous_commands"
+        "13_ambiguous_commands", "14_grammar_tools", "15_content_actions",
+        "16_content_correction"
       ]
     },
     "language": { "type": "string", "description": "BCP-47-ish tag of the spoken language this utterance represents, e.g. 'en-IN', 'kn-IN', 'sa-IN', 'hi-IN', 'mixed'." },
@@ -31,7 +32,10 @@
             "open_text", "open_section", "search_corpus", "search_kosha",
             "search_dhatu", "select_commentary", "renderer_action",
             "audio_action", "settings_action", "explain", "padaccheda",
-            "compare", "unknown"
+            "compare", "unknown",
+            "shabda_rupa", "dhatu_rupa", "sandhi_analysis",
+            "samasa_analysis", "chandas_identify", "shloka_share_action",
+            "content_correction"
           ]
         },
         "target_pattern": { "type": ["string", "null"], "description": "Regex the resolved `target` must match (realSlug for a grantha, or a parampara node's display name for a person). Null when no specific target is expected (e.g. a deterministic settings/renderer/audio action)." },

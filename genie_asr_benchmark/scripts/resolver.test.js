@@ -96,3 +96,76 @@ test('gibberish/no-match entity still classifies intent but low confidence, no t
   assert.equal(r.target, null);
   assert.ok(r.confidence < DgeResolver.CONFIDENCE_THRESHOLD);
 });
+
+// --- New command-set intents added 28 Aug 2026 ---
+
+test('Devanagari/Kannada script input transliterates and resolves (real audio finding)', () => {
+  const r = DgeResolver.resolve('ಸುಮಧ್ವ ವಿಜಯ 1.1 ತೆರೆಯಿರಿ.', index);
+  assert.equal(r.intent, 'open_text');
+  assert.match(r.target, /sumadhva_vijaya\/sarga_1$/);
+});
+
+test('shabda_rupa intent: "shabda nivara" (word BEFORE marker, no "rupa")', () => {
+  const r = DgeResolver.resolve('shabda nivara', index);
+  assert.equal(r.intent, 'shabda_rupa');
+  assert.equal(r.target, 'nivara');
+});
+
+test('dhatu_rupa intent: "bhobhuyate dhatu rupa" (word before, requires both "dhatu" and "rupa")', () => {
+  const r = DgeResolver.resolve('bhobhuyate dhatu rupa', index);
+  assert.equal(r.intent, 'dhatu_rupa');
+  assert.equal(r.target, 'bhobhuyate');
+});
+
+test('dhatu_rupa does not shadow the existing search_dhatu rule', () => {
+  const r = DgeResolver.resolve('Find this dhatu', index);
+  assert.equal(r.intent, 'search_dhatu');
+});
+
+test('sandhi_analysis intent: "sandhi of ityukte"', () => {
+  const r = DgeResolver.resolve('sandhi of ityukte', index);
+  assert.equal(r.intent, 'sandhi_analysis');
+  assert.equal(r.target, 'ityukte');
+});
+
+test('samasa_analysis intent: "samasa of chakrapani"', () => {
+  const r = DgeResolver.resolve('samasa of chakrapani', index);
+  assert.equal(r.intent, 'samasa_analysis');
+  assert.equal(r.target, 'chakrapani');
+});
+
+test('chandas_identify intent: "chandas of this shloka"', () => {
+  const r = DgeResolver.resolve('chandas of this shloka', index);
+  assert.equal(r.intent, 'chandas_identify');
+});
+
+test('shloka_share_action intent: "download this shloka" / "share this text"', () => {
+  assert.equal(DgeResolver.resolve('download this shloka', index).intent, 'shloka_share_action');
+  assert.equal(DgeResolver.resolve('share this text', index).intent, 'shloka_share_action');
+});
+
+test('bare "search <word>" resolves to search_kosha', () => {
+  const r = DgeResolver.resolve('search kantaya', index);
+  assert.equal(r.intent, 'search_kosha');
+  assert.equal(r.target, 'kantaya');
+});
+
+test('bare-search fallback does not shadow search_corpus when "corpus" is mentioned non-contiguously', () => {
+  const r = DgeResolver.resolve('Search kijiye for Vyasatirtha in the corpus', index);
+  assert.notEqual(r.intent, 'search_kosha');
+});
+
+test('content_correction turn 1: recognizes the request, does not fabricate a submission', () => {
+  const r = DgeResolver.resolve('make this content correction', index);
+  assert.equal(r.intent, 'content_correction');
+  assert.equal(r.parameters.stage, 'awaiting_correction_text');
+});
+
+test('content_correction turn 2: resolveCorrectionSubmission packages free text without classifying it', () => {
+  const r = DgeResolver.resolveCorrectionSubmission('the author name should be Jayatirtha, not Jayateertha', { shlokaId: 3 });
+  assert.equal(r.intent, 'content_correction');
+  assert.equal(r.stage, 'submitted');
+  assert.equal(r.correctionText, 'the author name should be Jayatirtha, not Jayateertha');
+  assert.equal(r.status, 'pending_review');
+  assert.deepEqual(r.context, { shlokaId: 3 });
+});

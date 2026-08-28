@@ -130,6 +130,97 @@
       return { ok: false, reason: 'not_wired' };
     },
 
+    // --- Added 28 Aug 2026, verified against real dge/js/ai.js and
+    // dge/js/sandhi.js source (not assumed) — see reports/findings.md's
+    // "New command set" section for the full verification notes. ---
+
+    // PARTIAL — dge/js/ai.js: window.dgeOpenShabdaForSelection(e) opens
+    // dge/vyakarana/shabda.html for the CURRENT TEXT SELECTION only
+    // (reads via dgeSelectedWordText() -> dgeRobustSelectedText()); takes
+    // an event, not a word argument. Needs the same class of query-seeded
+    // adapter as search_corpus/search_dhatu above to accept
+    // resolved.target directly instead of requiring a live selection.
+    shabda_rupa: function (resolved) {
+      if (typeof window.dgeOpenShabdaForSelection === 'function') {
+        return { ok: false, reason: 'needs_query_seeded_variant', existingFn: 'dgeOpenShabdaForSelection' };
+      }
+      return { ok: false, reason: 'not_wired' };
+    },
+
+    // PARTIAL, with a real caveat — dge/js/ai.js: window.
+    // dgeOpenDhatuForSelection(e) exists, same selection-only pattern as
+    // shabda_rupa above. UNVERIFIED in this pass whether it opens
+    // dge/vyakarana/dhatuforms.html (conjugation tables, what THIS
+    // intent needs) or dge/vyakarana/dhatu.html (the root/Dhatupatha
+    // browser, what search_dhatu above already targets) — these are two
+    // different real pages and the exploration that found this function
+    // did not pin down which one it opens. Do not assume; verify against
+    // dge/js/ai.js directly before wiring for real.
+    dhatu_rupa: function (resolved) {
+      return { ok: false, reason: 'needs_query_seeded_variant_and_target_page_verification', existingFn: 'dgeOpenDhatuForSelection (page target unconfirmed)' };
+    },
+
+    // PARTIAL — two competing implementations both assigned
+    // window.dgeOpenSandhiForSelection historically; ai.js's own copy
+    // renamed itself to dgeOpenVidyutSandhiForSelection specifically to
+    // avoid the clash (see the comment at ai.js:1701-1706), so the name
+    // dge/js/sandhi.js:95 actually wins at runtime (loads later) — that's
+    // the real "Sandhi (Live)" button in dge/index.html, calling
+    // Dharmamitra's public tagging API. Selection-only, same pattern as
+    // the other grammar tools above.
+    sandhi_analysis: function (resolved) {
+      if (typeof window.dgeOpenSandhiForSelection === 'function') {
+        return { ok: false, reason: 'needs_query_seeded_variant', existingFn: 'dgeOpenSandhiForSelection (dge/js/sandhi.js, "Sandhi (Live)")' };
+      }
+      return { ok: false, reason: 'not_wired' };
+    },
+
+    // STUB — confirmed NO samasa/compound-analysis function exists
+    // anywhere in dge/js/ (grepped for samasa/samāsa/compound). Unlike
+    // the other grammar tools, there is nothing partial to point at here.
+    samasa_analysis: function (resolved) {
+      return { ok: false, reason: 'not_wired' };
+    },
+
+    // STUB — dge/vyakarana/chandas.html + dge/js/chandas.js are real and
+    // browsable, but no per-shloka deep-link/JS entry point was found —
+    // it's a standalone reference page, not invocable with "the shloka
+    // currently open in the reader" as context.
+    chandas_identify: function (resolved) {
+      return { ok: false, reason: 'not_wired' };
+    },
+
+    // PARTIAL — all four real functions exist and are confirmed live:
+    // copyShlokaText(id) (dge/js/render.js), window.shareShlokaAudio(id)
+    // and window.shareShlokaTextOnly(id) (dge/js/snippets.js),
+    // window.openShareImagePreview(id) (dge/js/screenshot.js). All take
+    // a shloka id, which this resolver has no notion of (it's reader
+    // state, not something ASR/intent parsing produces) — the app layer
+    // calling execute() would need to supply the CURRENT shloka's id
+    // alongside resolved.parameters.action. Routing below is illustrative
+    // of the intended dispatch, not tested against a live id.
+    shloka_share_action: function (resolved, currentShlokaId) {
+      var phrase = (resolved.parameters && resolved.parameters.action) || '';
+      if (currentShlokaId == null) return { ok: false, reason: 'no_current_shloka_id_supplied' };
+      if (/download|copy/.test(phrase) && typeof window.copyShlokaText === 'function') return { ok: false, reason: 'fn_exists_untested', existingFn: 'copyShlokaText' };
+      if (/audio/.test(phrase) && typeof window.shareShlokaAudio === 'function') return { ok: false, reason: 'fn_exists_untested', existingFn: 'shareShlokaAudio' };
+      if (/image|preview/.test(phrase) && typeof window.openShareImagePreview === 'function') return { ok: false, reason: 'fn_exists_untested', existingFn: 'openShareImagePreview' };
+      if (/text/.test(phrase) && typeof window.shareShlokaTextOnly === 'function') return { ok: false, reason: 'fn_exists_untested', existingFn: 'shareShlokaTextOnly' };
+      return { ok: false, reason: 'not_wired' };
+    },
+
+    // STUB, by design — see reports/findings.md's content-correction
+    // design section. No submission endpoint or moderation queue exists
+    // anywhere in this repo (verified: dge/js/notes.js is localStorage
+    // only; no "moderation"/"review queue" concept found in dge/ or
+    // admin/). This only ever returns the two-turn resolver output
+    // (resolve() for turn 1, resolveCorrectionSubmission() in resolver.js
+    // for turn 2) for the app layer to hold onto — there is nothing real
+    // to call yet, and this deliberately does not pretend otherwise.
+    content_correction: function (resolved) {
+      return { ok: false, reason: 'not_wired', design: 'see reports/findings.md' };
+    },
+
     unknown: function () {
       return { ok: false, reason: 'unknown_intent' };
     }
