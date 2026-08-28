@@ -134,16 +134,37 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .sync-word.active { background: var(--accent-red); color: #fff; box-shadow: 0 0 0 2px var(--accent-red); }
 
 .shloka-list { display: flex; flex-direction: column; gap: 10px; overflow-anchor: none; }
-.shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 12px; display: flex; flex-direction: column; gap: 8px; overflow-wrap: anywhere; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), transform var(--t-fast) var(--ease); scroll-margin-top: calc(60px + env(safe-area-inset-top) + 150px); }
-.shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left: 4px solid var(--accent-red); }
+.shloka-card { width: 100%; box-sizing: border-box; background: var(--card-bg); border: 1px solid var(--card-border); border-left: 3px solid transparent; border-radius: var(--radius-md); padding: 11px 12px; display: flex; flex-direction: column; gap: 8px; overflow-wrap: anywhere; transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease), transform var(--t-fast) var(--ease); scroll-margin-top: calc(60px + env(safe-area-inset-top) + 150px); }
+.shloka-card.active { background: var(--card-active); border-color: var(--accent-red); border-left-color: var(--accent-red); border-left-width: 4px; }
 .shloka-card:active { background: var(--card-active); }
+/* Primary reading-progress state = border color only (section 4/17) —
+   never combined with more than one border color at once. Selected
+   (.active, above) takes visual priority over these when both apply,
+   since a shloka can be both "selected right now" and "already done". */
+.shloka-card.state-progress:not(.active) { border-left-color: #c8722a; }
+.shloka-card.state-done:not(.active) { border-left-color: #24985c; }
 
-.shloka-main-row { display: flex; width: 100%; gap: 10px; align-items: flex-start; }
-.shloka-status-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-left: 28px; }
+.shloka-main-row { display: flex; width: 100%; gap: 8px; align-items: flex-start; }
 .copy-shloka-btn { flex-shrink: 0; opacity: 0.55; }
 .copy-shloka-btn:active { opacity: 1; }
 .shloka-num { font-size: 12px; font-weight: 700; color: var(--muted-text); min-width: 20px; margin-top: 4px; }
 .shloka-text { flex-grow: 1; font-family: var(--font-sanskrit); font-size: var(--font-multiplier); color: var(--text-sanskrit); line-height: 1.55; font-weight: 500; cursor: pointer; overflow-wrap: anywhere; }
+
+/* Secondary state = small badges next to the shloka number, never a
+   border — so favorite/doubt/notes/snippets never compete with the
+   progress border above (section 4: "completed + favorite + doubt
+   together should not become visually ridiculous"). */
+.shloka-badges { display: flex; flex-direction: column; gap: 3px; align-items: center; flex-shrink: 0; margin-top: 3px; }
+.shloka-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 15px; height: 15px; padding: 0 3px; border-radius: 999px; font-size: 9.5px; font-weight: 700; line-height: 1; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--muted-text); }
+.shloka-badge-fav { background: #2b2118; border-color: var(--accent-gold); color: var(--accent-gold); }
+.shloka-badge-doubt { background: transparent; border-color: var(--accent-red); color: var(--accent-red); }
+
+/* The one permanent affordance a shloka card keeps (section 3: "number,
+   text, a subtle ⋯ affordance, nothing else permanent") — opens the full
+   contextual action menu (favorite/status/doubt/copy/play/Ask Acharya/
+   references/more) instead of five separate always-visible icons. */
+.shloka-more-btn { flex-shrink: 0; width: 26px; height: 26px; min-width: 26px; border-radius: 50%; border: none; background: transparent; color: var(--muted-text); font-size: 16px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: opacity var(--t-fast) var(--ease), background var(--t-fast) var(--ease); }
+.shloka-more-btn:hover, .shloka-more-btn:focus-visible { opacity: 1; background: var(--card-active); outline: none; }
 
 .card-actions { display: flex; gap: 6px; align-items: flex-start; flex-shrink: 0; }
 
@@ -205,9 +226,20 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .snippet-row-actions { display: flex; gap: 2px; flex-shrink: 0; }
 .snippet-row-actions .btn-icon { font-size: 15px; padding: 4px; }
 
-.commentary-block { background: rgba(0,0,0,0.025); border-left: 3px solid var(--accent-gold); padding: 8px 12px; border-radius: var(--radius-xs); font-size: calc(var(--font-multiplier) * 0.85); line-height: 1.6; color: var(--text-primary); margin-top: 6px; overflow-wrap: anywhere; font-family: var(--font-sanskrit); }
+.commentary-block { background: rgba(0,0,0,0.025); border-left: 3px solid var(--accent-gold); padding: 8px 12px; border-radius: var(--radius-xs); font-size: calc(var(--font-multiplier) * 0.85); line-height: 1.6; color: var(--text-primary); margin-top: 6px; overflow-wrap: anywhere; font-family: var(--font-sanskrit); cursor: pointer; }
 body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
 .commentary-title { font-weight: 700; font-family: var(--font-ui); color: var(--accent-red); font-size: 11px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
+
+/* Contextual action menu (dge/js/contextual-actions.js) — one generic
+   bottom-sheet/popover for object types with no existing dedicated UI
+   (commentary today; chapter/page as they're wired up). Reuses
+   .modal-overlay/.modal-content exactly like #actionsSheetModal, so it
+   inherits the same responsive mobile-sheet/desktop-dialog behavior. */
+.ctx-menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+.ctx-action-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 8px; background: var(--bg-main); border: 1px solid var(--card-border); border-radius: var(--radius-sm); cursor: pointer; color: var(--text-primary); font-family: var(--font-ui); transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease); min-height: 44px; }
+.ctx-action-btn:hover, .ctx-action-btn:focus-visible { background: var(--card-active); border-color: var(--accent-red); outline: none; }
+.ctx-action-icon { font-size: 20px; line-height: 1; }
+.ctx-action-label { font-size: 11.5px; font-weight: 600; text-align: center; line-height: 1.3; }
 
 /* 23 Aug 2026: gemini_deep_analysis fields (Pratipadartha/Tatparya/
    Vyakarana/Vrutta/Alankara) render as <details>/<summary> for a

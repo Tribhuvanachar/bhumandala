@@ -166,26 +166,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Shows/hides the "💝 Support This Project" button based on admin config
-// (SPONSOR_CONFIG.enabled, from admin/content/reader.json) — not an
-// end-user toggle. window.SPONSOR_CONFIG is set asynchronously by
-// core.js's fetch of reader.json, a promise that does not resolve before
-// DOMContentLoaded fires — checking it right on DOMContentLoaded always
-// read `undefined` and left the button hidden regardless of the admin
-// setting. Wait on the same promise core.js exposes instead. This must
-// stay inside the DOMContentLoaded callback, not run at parse time:
-// modals.js's own <script> tag loads before core.js's, so
-// window.dgeConfigOverridesPromise does not exist yet at parse time —
-// only by DOMContentLoaded, once every synchronous <script> including
-// core.js has already run, is it guaranteed to be the real promise.
-document.addEventListener('DOMContentLoaded', () => {
-  (window.dgeConfigOverridesPromise || Promise.resolve()).then(() => {
-    const btn = document.getElementById('supportProjectBtn');
-    if (btn && typeof SPONSOR_CONFIG !== 'undefined' && SPONSOR_CONFIG && SPONSOR_CONFIG.enabled) {
-      btn.style.display = 'block';
-    }
-  });
-});
+// Reader redesign, section 13 ("remove wasted space" at the top of the
+// page): the "💝 Support This Project" button used to sit inline in the
+// header, above the search bar — one more thing between opening the page
+// and reaching the text. It now surfaces inside the About panel instead
+// (dgeRenderAboutIntro, below), reachable from the ☰ menu exactly as
+// before, just no longer competing with title/search/text for the first
+// screen's vertical space. Same SPONSOR_CONFIG.enabled admin gate as
+// before — see dgeRenderAboutIntro for where this is actually rendered.
 
 // Local escape helper for the functions below — dgeModalsEsc (further down
 // this file) does the same job but is defined after these, and hoisting a
@@ -266,8 +254,12 @@ function dgeRenderAboutIntro() {
   }
   const designed = document.getElementById('aboutDesignedBySection');
   if (designed) {
+    const supportHtml = (typeof SPONSOR_CONFIG !== 'undefined' && SPONSOR_CONFIG && SPONSOR_CONFIG.enabled)
+      ? `<button class="btn-sm" style="width:100%; margin-top:16px;" onclick="window.closeModal('aboutModal'); window.openSponsorModal();">💝 Support This Project</button>`
+      : '';
     designed.innerHTML = `<div class="actions-section-label" style="margin-top:20px;">🕉️ Designed By</div>
-      <p data-edit="about.designedBy" style="font-size:12px; color:var(--muted-text); margin:0;">${dgeAboutEsc(about.designedBy || '')}</p>`;
+      <p data-edit="about.designedBy" style="font-size:12px; color:var(--muted-text); margin:0;">${dgeAboutEsc(about.designedBy || '')}</p>
+      ${supportHtml}`;
   }
 }
 

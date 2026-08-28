@@ -65,6 +65,10 @@
     <button class="tooltip-btn" onpointerdown="window.dgeOpenCorpusSearchForSelection(event)" title="Find every other place this word or phrase appears in the library">🔍 Where else</button>
     <button class="tooltip-btn" data-word-only onpointerdown="window.dgeOpenSandhiForSelection(event)" title="Live sandhi split &amp; word analysis (via dharmamitra.org, a third-party service)">🔗 Sandhi (Live)</button>
   </div>
+  <!-- Per-taxonomy-section extra word/phrase actions (dge/js/contextual-actions.js),
+       e.g. Veda svara tools — populated only when the current text's taxonomy
+       path matches a registered override; empty and hidden otherwise. -->
+  <div class="tooltip-row" id="wordToolsExtraRow" style="display:none;"></div>
 </div>
 
 <!-- Floating Append-to-Notes Selection Button for Modal -->
@@ -416,7 +420,6 @@
     <div id="sectionNavRow" class="section-nav-row" style="display:none;">
       <select id="sectionNavSelect" class="section-nav-select" onchange="window.dgeJumpToSection(this.value)"></select>
     </div>
-    <button id="supportProjectBtn" class="support-project-btn" onclick="window.openSponsorModal()" style="display:none;">💝 Support This Project</button>
     <div class="rule"></div>
   </div>
 
@@ -1233,6 +1236,9 @@
 <!-- serving an old cached copy of a script indefinitely. -->
 <script src="js/config.js?v=4.67.1"></script>
 <script src="js/state.js?v=4.60.6"></script>
+<!-- Canonical state accessor layer (section 33) over the globals state.js
+     seeds above — read-only, additive, defines no new storage. -->
+<script src="js/reader-state.js?v=1"></script>
 <script src="js/dev.js?v=4.60.6"></script>
 <script src="js/utils.js?v=4.60.6"></script>
 <script src="js/modals.js?v=4.60.6"></script>
@@ -1253,6 +1259,11 @@
 <script src="js/char-palette.js?v=4.60.6"></script>
 <script src="js/snippets.js?v=4.72.5"></script>
 <script src="js/actions.js?v=4.60.7"></script>
+<!-- Per-object-type contextual action registry + per-taxonomy-section
+     registration system (reader redesign). Loaded after actions.js (whose
+     openActionsSheet it wraps for the shloka "More" action) and before
+     ai.js (whose word/phrase tooltip it adds a taxonomy-extras row to). -->
+<script src="js/contextual-actions.js?v=1"></script>
 <script src="js/voice.js?v=4.60.6"></script>
 <script src="js/screenshot.js?v=4.60.7"></script>
 <script src="js/ai.js?v=4.72.4"></script>

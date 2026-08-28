@@ -45,6 +45,12 @@ function dgeUpdateWordToolsForSelection(txt) {
     btn.style.display = isSingleWord ? '' : 'none';
   });
   renderAcharyaQueryButtons(isSingleWord);
+  // Per-taxonomy-section extra word/phrase actions (e.g. Veda svara tools)
+  // from contextual-actions.js's registry — additive only, never
+  // duplicates the Shabda/Dhatu/Sandhi/Copy/Ask-Acharya buttons above.
+  if (typeof window.dgeRenderWordToolsExtras === 'function') {
+    window.dgeRenderWordToolsExtras(isSingleWord, txt || '');
+  }
 }
 
 // Suppresses the always-visible कोश/global-search FABs (#kosha-fab,
