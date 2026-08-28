@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.16 (taxonomy-folder-label gap sweep: 401 new DGE_PATH_LABELS entries + "pada" numbered-prefix, closing the ~1055-item English-name gap down to the deliberately-skipped composer entries. On top of v3.15\'s admin "show pending" toggle)';
+window.DGE_VERSIONS['library.js'] = 'v3.17 (DGE_PATH_LABELS: mula_gretil/mula_dcs labels for the 28 Aug 2026 Kamasutra consolidation. On top of v3.16\'s taxonomy-folder-label gap sweep)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -417,6 +417,10 @@ const DGE_PATH_LABELS = {
   vahata_ashtanganighantu: 'वाहटाष्टाङ्गनिघण्टुः', sharngadhara_samhita: 'शार्ङ्गधरसंहिता',
   susruta_samhita_sutrasthana: 'सुश्रुतसंहिता (सूत्रस्थानम्)',
   kamasutra: 'कामसूत्रम्', pancashayaka: 'पञ्चसायकः', smaradipika: 'स्मरदीपिका',
+  // Two Kamasutra digitizations kept side by side (28 Aug 2026 consolidation,
+  // see core.js DGE_LEGACY_SLUGS) -- GRETIL plaintext (7 adhikaranas/36
+  // adhyayas) vs DCS treebank (953 units), neither superseding the other.
+  mula_gretil: 'मूलम् (GRETIL)', mula_dcs: 'मूलम् (DCS)',
   // Vedanga -- Kalpa
   gautama_dharmasutra: 'गौतमधर्मसूत्रम्', vasishtha_dharmasutra: 'वसिष्ठधर्मसूत्रम्',
   dharmasutra: 'धर्मसूत्रम्', shulbasutra: 'शुल्बसूत्रम्',

@@ -1,6 +1,6 @@
 // DGE Module: core.js - Fixed Path Resolution
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['core.js'] = 'v3.22 (DGE_LEGACY_SLUGS: redirect for shastra/subhashita -> shastra/niti_shastra/subhashita. On top of v3.21\'s nitishastra/ -> shastra/niti_shastra/ consolidation redirects)';
+window.DGE_VERSIONS['core.js'] = 'v3.23 (DGE_LEGACY_SLUGS: redirects for the 28 Aug 2026 Kamashastra/Upaveda consolidation and the Nirukta/Jyotisha leaf-folder fix. On top of v3.22\'s shastra/subhashita redirect)';
 
 // Converts a library.json catalog path ("dge/data/x/y/data.json", always
 // repo-root-relative for GitHub API use) into a slug ("x/y") and a
@@ -220,7 +220,44 @@ const DGE_LEGACY_SLUGS = {
   // Subhashita placeholder moved from shastra/ directly to
   // shastra/niti_shastra/ (25 Aug 2026) -- wisdom-verse anthologies belong
   // alongside Chanakya Niti/Hitopadesha, not as a shastra/ sibling.
-  'shastra/subhashita':              'shastra/niti_shastra/subhashita'
+  'shastra/subhashita':              'shastra/niti_shastra/subhashita',
+
+  // 28 Aug 2026: project lead's explicit correction reversed the 20 Aug
+  // decision that put Kamashastra under upaveda/ -- it is not one of the
+  // traditional four Upavedas in most classical enumerations (the common
+  // list is Ayurveda/Dhanurveda/Gandharvaveda/Arthashastra or
+  // Sthapatyaveda), so it moves to shastra/kama_shastra/ instead. That
+  // move also surfaced an independently-added shastra/kama_shastra/mula
+  // (DCS treebank Kamasutra) that duplicated upaveda/kamashastra/kamasutra
+  // (GRETIL Kamasutra) outright -- same pattern as the nitishastra
+  // duplication above, but this time BOTH digitizations were kept, side
+  // by side under kamasutra/, rather than dropping either.
+  'upaveda/kamashastra/kamasutra':    'shastra/kama_shastra/kamasutra/mula_gretil',
+  'shastra/kama_shastra/mula':        'shastra/kama_shastra/kamasutra/mula_dcs',
+  'upaveda/kamashastra/pancashayaka': 'shastra/kama_shastra/pancashayaka',
+  'upaveda/kamashastra/smaradipika':  'shastra/kama_shastra/smaradipika',
+  'upaveda/kamashastra':              'shastra/kama_shastra',
+
+  // 28 Aug 2026: vedas/upaveda/ and the top-level upaveda/ turned out to be
+  // two independently-built, uncoordinated copies of Upaveda content --
+  // vedas/upaveda/ayurveda held the full Samhita/Rasashastra corpus plus a
+  // real Dhanurveda text, upaveda/ayurveda held a smaller, differently-
+  // scoped Nighantu/Madhava-Nidana set, with no overlapping filenames.
+  // Merged onto the top-level upaveda/ (a sibling of vedanga/, not nested
+  // under vedas/, matching how vedanga itself is organized) -- one prefix
+  // entry covers every leaf under the old tree.
+  'vedas/upaveda':                    'upaveda',
+
+  // 28 Aug 2026: nirukta/ and jyotisha/ each held their one grantha
+  // directly in the category folder (vedanga/nirukta/data.json) instead of
+  // a named leaf folder the way every other vedanga category does. That
+  // mismatch is what made the library tree (dge/js/library.js's
+  // dgeBuildTree) attach them as bare, unlabelled rows on vedanga/ itself
+  // instead of their own labelled, counted category -- a leaf with no leaf
+  // folder of its own gets grouped under its PARENT node instead. Given a
+  // real leaf folder ("mula") like every sibling category has.
+  'vedanga/nirukta':                  'vedanga/nirukta/mula',
+  'vedanga/jyotisha':                 'vedanga/jyotisha/mula'
 };
 
 window.dgeUpgradeLegacySlug = function (slug) {

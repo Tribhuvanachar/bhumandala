@@ -15564,7 +15564,7 @@
       }
     },
     {
-      "path": "dge/data/shastra/kama_shastra/mula/data.json",
+      "path": "dge/data/shastra/kama_shastra/kamasutra/mula_dcs/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -16014,7 +16014,7 @@
       }
     },
     {
-      "path": "dge/data/upaveda/kamashastra/kamasutra/data.json",
+      "path": "dge/data/shastra/kama_shastra/kamasutra/mula_gretil/data.json",
       "populated": true,
       "title": "Kamasutra",
       "source": {
@@ -16025,7 +16025,7 @@
       }
     },
     {
-      "path": "dge/data/upaveda/kamashastra/pancashayaka/data.json",
+      "path": "dge/data/shastra/kama_shastra/pancashayaka/data.json",
       "populated": true,
       "title": "Pancashayaka",
       "source": {
@@ -16036,7 +16036,7 @@
       }
     },
     {
-      "path": "dge/data/upaveda/kamashastra/smaradipika/data.json",
+      "path": "dge/data/shastra/kama_shastra/smaradipika/data.json",
       "populated": true,
       "title": "Smaradipika",
       "source": {
@@ -16068,7 +16068,7 @@
       }
     },
     {
-      "path": "dge/data/vedanga/jyotisha/data.json",
+      "path": "dge/data/vedanga/jyotisha/mula/data.json",
       "populated": true,
       "title": "Jyotisha",
       "source": {
@@ -16557,7 +16557,7 @@
       }
     },
     {
-      "path": "dge/data/vedanga/nirukta/data.json",
+      "path": "dge/data/vedanga/nirukta/mula/data.json",
       "populated": true,
       "title": "Nirukta",
       "source": {
@@ -18008,7 +18008,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/nighantu/ashtanga_nighantu/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/nighantu/ashtanga_nighantu/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18021,7 +18021,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/nighantu/bija_nighantu/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/nighantu/bija_nighantu/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18034,7 +18034,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/nighantu/dhanvantari_nighantu/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/nighantu/dhanvantari_nighantu/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18047,7 +18047,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/nighantu/kaiyadeva_nighantu/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/nighantu/kaiyadeva_nighantu/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18060,7 +18060,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/nighantu/madanapala_nighantu/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/nighantu/madanapala_nighantu/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18073,7 +18073,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/nighantu/nighantushesha/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/nighantu/nighantushesha/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18086,7 +18086,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/nighantu/raja_nighantu/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/nighantu/raja_nighantu/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18099,7 +18099,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasadhyaya/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasadhyaya/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18112,7 +18112,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasadhyaya/tika/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasadhyaya/tika/data.json",
       "populated": true,
       "title": "Tika",
       "source": {
@@ -18125,7 +18125,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasahridaya_tantra/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasahridaya_tantra/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18138,7 +18138,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasakamadhenu/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasakamadhenu/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18151,7 +18151,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasamanjari/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasamanjari/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18164,7 +18164,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasaprakashasudhakara/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasaprakashasudhakara/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18177,7 +18177,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasaratnakara/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasaratnakara/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18190,7 +18190,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18203,7 +18203,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika/data.json",
       "populated": true,
       "title": "Tika",
       "source": {
@@ -18216,7 +18216,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_bodhini/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_bodhini/data.json",
       "populated": true,
       "title": "Tika Bodhini",
       "source": {
@@ -18229,7 +18229,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_dipika/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_dipika/data.json",
       "populated": true,
       "title": "Tika Dipika",
       "source": {
@@ -18242,7 +18242,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasarnava/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasarnava/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18255,7 +18255,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasarnavakalpa/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasarnavakalpa/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18268,7 +18268,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasasanketakalika/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasasanketakalika/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18281,7 +18281,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasatarangini/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasatarangini/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18294,7 +18294,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasendracintamani/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasendracintamani/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18307,7 +18307,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasendracudamani/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasendracudamani/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18320,7 +18320,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/rasashastra/rasendrasarasangraha/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/rasashastra/rasendrasarasangraha/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18333,7 +18333,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18346,7 +18346,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_hemadri/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_hemadri/data.json",
       "populated": true,
       "title": "Tika Hemadri",
       "source": {
@@ -18359,7 +18359,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_indu/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_indu/data.json",
       "populated": true,
       "title": "Tika Indu",
       "source": {
@@ -18372,7 +18372,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_padarthacandrika/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_padarthacandrika/data.json",
       "populated": true,
       "title": "Tika Padarthacandrika",
       "source": {
@@ -18385,7 +18385,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_sarvangasundara/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_sarvangasundara/data.json",
       "populated": true,
       "title": "Tika Sarvangasundara",
       "source": {
@@ -18398,7 +18398,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/ashtanga_sangraha/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/ashtanga_sangraha/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18411,7 +18411,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/bhavaprakasha/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/bhavaprakasha/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18424,7 +18424,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/caraka_samhita/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/caraka_samhita/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18437,7 +18437,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/caraka_samhita/tika_ayurvedadipika/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/caraka_samhita/tika_ayurvedadipika/data.json",
       "populated": true,
       "title": "Tika Ayurvedadipika",
       "source": {
@@ -18450,7 +18450,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/caraka_samhita/tika_tattvapradipika/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/caraka_samhita/tika_tattvapradipika/data.json",
       "populated": true,
       "title": "Tika Tattvapradipika",
       "source": {
@@ -18463,7 +18463,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/nadi_pariksha/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/nadi_pariksha/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18476,7 +18476,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/sushruta_samhita/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/sushruta_samhita/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18489,7 +18489,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/sushruta_samhita/tika_nibandhasangraha/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/sushruta_samhita/tika_nibandhasangraha/data.json",
       "populated": true,
       "title": "Tika Nibandhasangraha",
       "source": {
@@ -18502,7 +18502,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/ayurveda/samhita/yogaratnakara/mula/data.json",
+      "path": "dge/data/upaveda/ayurveda/samhita/yogaratnakara/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18515,7 +18515,7 @@
       }
     },
     {
-      "path": "dge/data/vedas/upaveda/dhanurveda/mula/data.json",
+      "path": "dge/data/upaveda/dhanurveda/mula/data.json",
       "populated": true,
       "title": "Mula",
       "source": {
@@ -18783,6 +18783,24 @@
       "title": "Isha Upanishad",
       "facets": {
         "default_author": "Apaurusheya (traditionally unauthored / eternally revealed; rishi per mantra may be noted in the item's own 'rishi' field)"
+      }
+    },
+    {
+      "path": "dge/data/upaveda/gandharvaveda/mula/data.json",
+      "populated": false,
+      "title": "Gandharvaveda",
+      "addedAt": "2026-08-28",
+      "facets": {
+        "text_status": "unpopulated"
+      }
+    },
+    {
+      "path": "dge/data/upaveda/sthapatyaveda/mula/data.json",
+      "populated": false,
+      "title": "Sthapatyaveda",
+      "addedAt": "2026-08-28",
+      "facets": {
+        "text_status": "unpopulated"
       }
     }
   ]
