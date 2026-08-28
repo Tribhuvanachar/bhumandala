@@ -245,6 +245,24 @@ window.dgeRenderStitchChrome = function() {
 
   const parts = [];
   if (dgeStitch && dgeStitch.role === 'tika') {
+    // A standalone tika/commentary layer only ever said "this part of
+    // GRANTHA's LAYER" -- no indication of which top-level taxonomy branch
+    // (darshana/vedanta/dvaita/... etc.) that grantha itself lives under,
+    // confirmed live as a real gap: the reader has no way to tell a Dvaita
+    // commentary from an Advaita one here without leaving the page. The
+    // segments above the grantha's own directory (darshana, vedanta,
+    // dvaita, DvaitaVedanta, purana_prasthana, ...) are prepended using the
+    // exact same per-segment label table library.js's own Library tree and
+    // global-search.js's category chips already read from -- real taxonomy
+    // signal already encoded in the path, not a second guessed-at label
+    // source, and not a competing breadcrumb component (dge-breadcrumb.js
+    // is explicitly Phase-6/not-yet-adopted infrastructure, out of scope
+    // for the reader's own chrome -- see that file's own header comment).
+    if (dgeStitch.granthaRel && typeof window.dgeSegLabel === 'function') {
+      const segs = dgeStitch.granthaRel.split('/');
+      segs.pop(); // the grantha itself is shown just below via its own link/title
+      segs.forEach(seg => parts.push(`<span class="lineage-node">${window.dgeSegLabel(seg)}</span>`));
+    }
     // Standalone commentary layer: the way back to the stitched grantha.
     parts.push(`<span class="lineage-note">${t('अयं ग्रन्थभागः')} — </span>` +
       `<a class="lineage-link" href="index.html?path=${encodeURIComponent(dgeStitch.mulaSlug)}">` +

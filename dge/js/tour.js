@@ -208,7 +208,17 @@
         const tick = setInterval(function () {
           waited += 900;
           if (el) { clearInterval(tick); return; }        // already running
-          const busy = document.querySelector('.modal-overlay[style*="flex"]');
+          // A reader who has just selected a word/phrase and is looking at
+          // the selection tooltip (Shabda/Dhātu/Search Library/...) is just
+          // as "busy" as one with a modal open -- confirmed live: without
+          // this check, the tour's full-page dimmed backdrop could start
+          // right under a pending tap on one of those buttons, silently
+          // swallowing the click (the backdrop, not the button, is what
+          // actually receives the pointerdown) with nothing on screen to
+          // explain why the tap seemed to do nothing.
+          const actionTooltip = document.getElementById('actionTooltip');
+          const busy = document.querySelector('.modal-overlay[style*="flex"]') ||
+            (actionTooltip && actionTooltip.style.display === 'flex');
           if (!busy) { clearInterval(tick); window.dgeStartTour(); return; }
           if (waited > 30000) clearInterval(tick);        // they are busy; leave them be
         }, 900);
