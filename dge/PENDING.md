@@ -1661,7 +1661,7 @@ complete record, not just a live queue.
   - **Confirmed, not touched: two pre-existing registry entries fail outright** (`skanda_purana_ce`: `bare_suffix` matches nothing; `vayu_purana_revakhanda`: `line_start` matches nothing), and **six śrautasūtra/gṛhyasūtra/dharmasūtra entries using `colon_prefix_sutra` also fail** (Āśvalāyana/Śāṅkhāyana śrauta+gṛhya, Āpastamba gṛhya, Jaiminīya gṛhya, Kauthuma gṛhya, Baudhāyana/Gautama/Vasiṣṭha/Vaikhānasa dharma) — all pre-existing, unrelated to anything touched this pass (none use the patterns fixed above), the registry's own error correctly reads "the file's format has changed." Not investigated further — out of scope for this batch, flagged for whoever next works through the Purāṇa/Vedāṅga registry.
   - **Deliberately NOT built this pass, named rather than silently skipped:**
     - **Aṣṭāṅgahṛdaya** (Vāgbhaṭa) — GRETIL `sa_vAgbhaTa-aSTAGgahRdayasUtra`, CC BY-NC-SA 4.0, clean digital text (not OCR, so within the approved scope) — deferred anyway because it's genuinely large (1.2 MB source, ~7,359 verses) with bare flat verse numbering that restarts per sthāna and no reliable numeric sthāna-boundary marker found on a first pass; doing it properly needs real chaptering work, not a rushed single-item import.
-    - **Vātsyāyana's Kāmasūtra grouped only at adhikaraṇa level (7 items), not adhyāya** — the marker carries all three levels (adhikaraṇa.adhyāya.sūtra) but `group_items()` only splits on the first; finer chaptering is a real, scoped follow-up, not done here.
+    - ~~**Vātsyāyana's Kāmasūtra grouped only at adhikaraṇa level (7 items), not adhyāya** — the marker carries all three levels (adhikaraṇa.adhyāya.sūtra) but `group_items()` only splits on the first; finer chaptering is a real, scoped follow-up, not done here.~~ **Fixed 28 Aug — see that day's entry.** Re-grouping on the second level of that same marker turned out to be unsafe on inspection (see below); the actual fix uses a different, more reliable boundary signal.
     - **Pañcatantra "confirm" dropped from this batch entirely** — turned out NOT to belong in this pipeline at all: the existing Pañcatantra entry lives in the separate Kāvya corpus/tracker system (`tools/kavya/config/works.json`, the `kavya-dist` branch), not `dge/data/`'s taxonomy/`library.json` system this registry writes to. Reconciling GRETIL's own Pañcatantra file against that other pipeline is a separate task or a false errand entirely (that pipeline may already have this text) — not investigated here, flagged instead of guessed at.
   - Verified in a real headless browser (`dge/index.html?path=...`) for four of the eight: Kāmasūtra, Rāja Nighaṇṭu, Hitopadeśa, Vṛttaratnākara — real Devanagari text renders, no console errors, no leftover markers. `tools/gen_library_status.py` rerun; all eight now show `populated: true`.
 
@@ -4971,3 +4971,118 @@ say "something moved", not what to re-crawl. Built the actionable half:
 Doctrine, for the next person: **never re-crawl on a schedule.** The
 census diff decides *which granthas*; only those get extracted; the
 verify-then-merge protocol (PENDING part 11) still gates every PR.
+
+- **28 Aug: Āyurveda/Kāmaśāstra correction pass — verified the DCS batches
+  already closed three gaps an earlier triage note believed still open,
+  fixed the real Kāmasūtra grouping bug (safely, not the way that note
+  proposed), and found two genuine duplicate-content leaves left over from
+  the `upaveda` restructure.** Scoped to Āyurveda + Kāmaśāstra only per
+  instruction (other parallel sessions own Vyākaraṇa/reader-UX/Dvaita).
+
+  **First, re-verified against the live data rather than trusting an old
+  summary** (an earlier triage pass had flagged Caraka/Suśruta/Aṣṭāṅgahṛdaya
+  as unimported or partially imported — checked directly, not assumed
+  still true): the 23 Aug DCS batches (`vedas.upaveda.ayurveda.samhita.*`)
+  already carry all of this cleanly, separately from — and later than — the
+  21 Aug Wikisource pass those older notes describe:
+  - **Caraka Saṃhitā**: `caraka_samhita.mula` (3,987 items, all 8 sthānas)
+    *and* its commentary as a properly separated leaf,
+    `tika_ayurvedadipika` (Cakrapāṇidatta, 2,272 items) — DCS's own
+    sentence-segmented corpus never had the mūla/ṭīkā interleaving problem
+    the Wikisource pass hit, since DCS ships them as distinct source files.
+  - **Suśruta Saṃhitā**: `sushruta_samhita.mula` (8,098 items) — confirmed
+    by id-prefix census, not just the item count: all 6 sthānas present
+    (Sū 2019, Nid 527, Śār 432, Cik 2006, Ka 545, Utt 2569), not just
+    Sūtrasthāna.
+  - **Aṣṭāṅgahṛdaya**: `ashtanga_hridaya_samhita.mula` (7,355 items, all 6
+    sthānas by the same census) plus 4 populated ṭīkā leaves (Induʼs
+    Śaśilekhā, Hemādri, Sarvāṅgasundara, Padārthacandrikā).
+
+  So none of those three needed new acquisition this pass. **Real finding
+  instead: the 21 Aug Wikisource/GRETIL leaves those DCS imports superseded
+  were never removed**, so two texts are now double-shipped under two
+  different taxonomy paths, both `populated: true` and both reachable —
+  confirmed live, not just in taxonomy.json:
+  - `upaveda.ayurveda.susruta_samhita_sutrasthana` (Wikisource, 46
+    chapter-blob items) duplicates the `Sū` slice of the DCS
+    `sushruta_samhita.mula` above (2,019 per-sentence items — same
+    Sūtrasthāna, finer grain, same 1–46 chapter range).
+  - `upaveda.ayurveda.nighantu.raja_nighantu` (GRETIL, 35 varga-blob items)
+    duplicates `vedas.upaveda.ayurveda.nighantu.raja_nighantu.mula` (DCS,
+    3,218 per-sentence items).
+  Left both in place rather than deleting either this pass — this corpus's
+  own convention is to keep multiple witnesses/editions side by side (see
+  the many parallel tika_* variants throughout), and unlike those, here the
+  DCS leaf is a strict superset in coverage, not a distinct edition worth
+  separate shelf space, so the right fix is probably removing the
+  Wikisource/GRETIL leaf rather than relabeling it — a taxonomy/library.json
+  edit with real blast radius, not something to guess at under a
+  launch-adjacent session. **Flagged here for a deliberate follow-up, not
+  silently left for someone to rediscover.**
+
+  **The Kāmasūtra adhyāya-grouping bug** (`upaveda.kamashastra.kamasutra`,
+  7 items, one giant text blob per adhikaraṇa) **was real and is now
+  fixed — but not the way the existing note described.** That note said
+  `group_items()` only splits on the first of the marker's three levels
+  (adhikaraṇa.adhyāya.sūtra) and implied splitting on the first two would
+  fix it. Checked against the actual GRETIL source file
+  (`sa_vAtsyAyana-kAmasUtra.txt`) before trusting that: the marker's own
+  registry note already admitted "1609 total occurrences, only 63 true
+  ^-anchored" — i.e. most `N.N.N` occurrences in the body are inline
+  cross-reference citations within running prose (e.g. adhikaraṇa 2's text
+  citing "6.1.3"), not real sūtra starts. Naively bucketing on
+  (adhikaraṇa, adhyāya) instead of adhikaraṇa alone was tried first and
+  produces garbage — confirmed by running it, not assumed: spurious
+  chapters like "adhikaraṇa 1, adhyāya 20" (adhikaraṇa 1 only has 5
+  adhyāyas) from citations landing mid-chapter. The old adhikaraṇa-only
+  grouping was accidentally safe from this because stray citations always
+  point at valid 1–7 adhikaraṇa numbers, so they silently merged into a
+  real bucket instead of creating a new wrong one.
+  - **Real fix**: the source file's own French editorial chapter headers,
+    `livre N` (7 occurrences, one per adhikaraṇa) and `leçon M` (36
+    occurrences total — 5+10+5+2+6+6+2, matching the Kāmasūtra's
+    independently-known adhyāya count exactly), each appear exactly once
+    at a genuine chapter start. New `parse_livre_lecon()` in
+    `importers/gretil_bulk.py` uses those instead of the noisy sūtra-number
+    marker, carrying the current adhikaraṇa number forward from the last
+    `livre` seen (they share a line only at each adhikaraṇa's first
+    `leçon`). `group_items()` gained a generic opt-in `spec["subunit"]`
+    mechanism (bucket on the first two ref components instead of one) —
+    used here, harmless to the other 33 `gretil_bulk.json` entries since
+    none set it. Also stripped the `leçon`/`livre`/`section (prakaraṇa)`
+    editorial furniture text itself from each chapter's body before
+    Devanagari transliteration — it was previously surviving into the
+    shipped text and getting mangled by `iast_to_dev()` (e.g. "section"
+    → "सेच्तिओन्"), a pre-existing cosmetic bug fixed as a side effect,
+    not scope creep, since the same new code already had to touch these
+    strings to find the boundaries.
+  - **Verified, not just run**: 36 items with exactly the 5/10/5/2/6/6/2
+    adhyāya-per-adhikaraṇa distribution (cross-checked against the
+    well-known published Kāmasūtra table of contents, and against the
+    source's own internal summary at 1.1.15–1.1.23 which states the same
+    counts). First item opens with the genuinely famous invocation
+    "dharmārtha-kāmebhyo namaḥ". `validate_data.py`: 0 new errors (3
+    pre-existing unrelated warnings). `audit_library.py`: 0 orphans, 0
+    stale flags. `pytest tests/`: 221 passed. Confirmed the reader's
+    "generic" schema branch (`dge/js/core.js`'s `dgeNormalizeGranthaData`,
+    the code path this project's own comments say exists specifically for
+    `gretil_bulk.py`'s `group_items()` output) reads `item.sanskrit_text`
+    and `item.reference`/`item.id` with no item-count or id-format
+    assumption, so this renders with no reader-code changes needed.
+  - **One known, honest limitation, not smoothed over**: the last item
+    (`adhikarana_07_adhyaya_02`) still runs to end-of-file and therefore
+    absorbs the source's own trailing endnote apparatus (~190 numbered
+    footnotes) — there's no clean marker separating real text from notes
+    at that boundary (confirmed: no `# Notes` heading, footnotes run
+    straight on from the last sūtra). This is not a regression — the
+    unfixed importer already appended the same footnote text to whatever
+    bucket was active at end-of-file (`adhikarana_07` was 11,184 chars pre-
+    fix, all-footnotes-included, byte-for-byte the same tail) — just
+    relocated to the correct chapter now instead of sitting in a blob that
+    also had the wrong adhyāya split. Left as a separate, smaller,
+    documented gap rather than guessing at a footnote-boundary heuristic.
+
+  Source/licence for the record (unchanged from the original import):
+  GRETIL, CC BY-NC-SA 4.0, ed. Fezas — `importers/gretil_bulk.json`'s
+  `kamasutra` entry now documents `marker: "livre_lecon"` and the reasoning
+  above inline.
