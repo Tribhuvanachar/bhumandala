@@ -1203,6 +1203,14 @@ function dgeSelectedWordText() {
 function dgeHideActionTooltip() {
   const tooltip = document.getElementById('actionTooltip');
   if (tooltip) tooltip.style.display = 'none';
+  // Every word-tools handler (Shabda/Dhatu/Sandhi/Samasa/corpus-search)
+  // reads the selected word into a local variable before calling this, so
+  // clearing the live selection here is always safe. Without it, the
+  // browser's own text-selection stayed active underneath whatever modal
+  // opened next -- on Android that means its native "Translate / Copy /
+  // Select all" selection toolbar kept floating on top of DGE's modal
+  // (reported live, with screenshots).
+  try { window.getSelection().removeAllRanges(); } catch (e) {}
 }
 
 // Instant Śabda lookup modal: this used to open shabda.html in a new tab --
