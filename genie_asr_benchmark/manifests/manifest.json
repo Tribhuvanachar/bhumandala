@@ -5,13 +5,15 @@
 
   { "id": "01_english_002", "category": "01_english", "language": "en-IN",
     "transcript_text": "Open Sumadhwa Vijaya 1.1",
-    "notes": "Clean Sarvam en-IN REST transcript recorded in CLAUDE.md section 2 for sumadhwa_test.wav.",
+    "audio_file": "audio/01_english/sumadhwa_test.wav",
+    "notes": "REAL recording, provided by the project lead 28 Aug 2026 -- lives on the genie-asr-audio-seed branch (kept off main, personal recording; see genie_asr_benchmark/audio/README.md there), not in this checkout. Re-verified live via scripts/providers/sarvam_rest.js on 28 Aug 2026: Sarvam Saaras v3 REST (en-IN) transcribed it as exactly this text in 1900ms, matching the earlier result recorded in CLAUDE.md section 2. Feeding that real transcript through resolver.js resolves correctly end-to-end (open_text, kavya_alankara/sumadhva_vijaya/sarga_1, reference 1.1, confidence 0.58).",
     "expected": { "intent": "open_text", "target_pattern": "sumadhva_vijaya/sarga_1$", "parameters": { "reference": "1.1" }, "min_confidence": 0.55 } },
 
   { "id": "01_english_003", "category": "01_english", "language": "en-IN",
     "transcript_text": "Sumadha Open Sumadha Vijaya 1.1",
     "asr_noise_variant": "Sumadha Open Sumadha Vijaya 1.1",
-    "notes": "The ACTUAL noisy Saaras v3 transcript recorded in CLAUDE.md section 2 for sumadhwa_16k.m4a — real prior test data, not fabricated. Proves ASR-confusion normalization recovers the right action from a messy transcript.",
+    "audio_file": "audio/01_english/sumadhwa_16k.m4a",
+    "notes": "REAL recording (noisier -- 16kHz/64kbps re-recording of the same phrase as 01_english_002), provided by the project lead 28 Aug 2026 -- same genie-asr-audio-seed branch as above, kept off main. Re-verified live 28 Aug 2026: Sarvam Saaras v3 REST (en-IN) transcribed it as exactly this text in 1681ms, matching CLAUDE.md section 2's prior result. Real transcript fed through resolver.js resolves correctly end-to-end despite the noise (open_text, kavya_alankara/sumadhva_vijaya/sarga_1, reference 1.1, confidence 0.58) -- proves the ASR-confusion normalization + resolver design actually works on real, not simulated, noisy audio.",
     "expected": { "intent": "open_text", "target_pattern": "sumadhva_vijaya/sarga_1$", "parameters": { "reference": "1.1" }, "min_confidence": 0.55 } },
 
   { "id": "01_english_004", "category": "01_english", "language": "en-IN",

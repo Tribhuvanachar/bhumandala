@@ -52,9 +52,16 @@ node smoke_test_sarvam_realtime.js                 # realtime WS connectivity sm
 - **AI4Bharat IndicConformer CPU inference was verified working end-to-end**
   on this sandbox's hardware via a community ONNX int8 export — see
   `ai4bharat_local/`.
-- **The multi-provider accuracy benchmark itself (CLAUDE.md section 5) is
-  BLOCKED ON AUDIO SAMPLES** — no real recordings were available in this
-  session. See `reports/` for exactly what's needed next.
+- **Two real recordings were provided (28 Aug 2026) and verified working
+  end-to-end** — see `reports/findings.md` section 5 and
+  `scripts/verify_real_audio.js`. Kept off `main` (personal voice
+  recordings) on the `genie-asr-audio-seed` branch;
+  `manifests/manifest.json` entries `01_english_002`/`003` reference them
+  by path.
+- **The full 13-category multi-provider benchmark (CLAUDE.md section 5) is
+  still BLOCKED ON THE REMAINING ~48-98 AUDIO SAMPLES** — 2 clips can't
+  support a benchmark. See `reports/findings.md` section 6 for the exact,
+  itemized ask.
 
 ## Secrets
 
