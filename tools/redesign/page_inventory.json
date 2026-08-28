@@ -1,5 +1,5 @@
 {
- "page_count": 30,
+ "page_count": 31,
  "pages": [
   {
    "path": "index.html",
@@ -359,6 +359,19 @@
     "css/dasa-capture.css"
    ],
    "title": "Dasa Sahitya — Capture &amp; Progress — DGE"
+  },
+  {
+   "path": "admin/genie-asr-recorder.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/genie-asr-recorder.css"
+   ],
+   "title": "Genie ASR Recorder · DGE (restricted)"
   },
   {
    "path": "admin/holy-places.html",

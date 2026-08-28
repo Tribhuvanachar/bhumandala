@@ -12,6 +12,7 @@ the one place to look.
 | `kosha.html` | Kosha (lexicon) dictionaries and their status. |
 | `ashtadhyayi.html` | Aṣṭādhyāyī sūtras, vṛttis and related data. |
 | `audio.html` | Audio catalogue and playback metadata. |
+| `genie-asr-recorder.html` | Records the Genie ASR benchmark's voice samples and pushes them straight to the `genie-asr-audio-seed` branch of this repo — see its own note in `config/keys.json` (gate `genieasr`) for why that's a separate gate from `audioadmin`. |
 | `dasa-capture.html` | Dāsa Sāhitya capture and entry. |
 | `holy-places.html` | Holy places and brindāvana curation for Guru Paramparā. |
 | `workflows.html` | Runs the five GitHub Actions jobs — source check, kāvya tracker, re-index, kāvya import, WordNet. Falls back to opening GitHub until the Cloud Function is deployed (`dge/FIREBASE_SETUP.md` §12). |

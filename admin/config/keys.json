@@ -38,6 +38,13 @@
       "sessionFlag": null,
       "grants": ["dasa-capture", "convert"],
       "note": "No passkey by design — these push straight to GitHub, so they require localStorage is_superadmin === 'true', set only by the account system."
+    },
+    "genieasr": {
+      "label": "Genie ASR recorder",
+      "key": "GENIEASR",
+      "sessionFlag": "dge.genieasr.ok",
+      "grants": ["genie-asr-recorder"],
+      "note": "Its own key on purpose, not a reuse of audioadmin or superadmin/capture. audio.html documents its audioadmin token as reaching ONLY the separate bhumandala-audio-data repo, 'never the main content repo' — this tool is different: it writes to Tribhuvanachar/bhumandala itself (the main repo), and only ever to the genie-asr-audio-seed branch, which that branch's own README says to keep out of main. That's a bigger blast radius than audioadmin (a different repo entirely) and a narrower one than superadmin/capture (which reach main), so it gets a gate of its own rather than borrowing either. A fine-grained GitHub token can be scoped to just this one repo, but GitHub has no per-branch token scope — so even a well-scoped token could still write to main if this page had a bug. The branch restriction is enforced only by this page's own code hardcoding genie-asr-audio-seed, not by the token."
     }
   }
 }
