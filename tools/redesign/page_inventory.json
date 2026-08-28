@@ -189,7 +189,7 @@
    "vandana_guard_first": true,
    "has_site_footer_js": false,
    "has_ai_js": false,
-   "has_modals_js": false,
+   "has_modals_js": true,
    "css_links": [
     "../css/vyakarana-base.css",
     "../css/ashtadhyayi.css",

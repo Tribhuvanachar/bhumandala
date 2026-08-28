@@ -41,7 +41,8 @@
     <div class="spacer"></div>
     <input class="jump" id="dge-jump" placeholder="1.1.1" list="dge-sutralist" title="jump to sutra">
     <datalist id="dge-sutralist"></datalist>
-    <button class="icon" id="dge-menuBtn" title="Menu: view, script, size, theme, search, AI settings">☰</button>
+    <button class="icon" id="dge-focusBtn" title="Focus mode: hide extra chrome, show the sūtra and open commentaries only" aria-label="Toggle focus reading mode" aria-pressed="false">🎯</button>
+    <button class="icon" id="dge-menuBtn" title="Menu: view, script, size, theme, search, AI settings" aria-label="Open menu">☰</button>
   </div>
 </header>
 
@@ -66,6 +67,11 @@
     <div class="q">
       <button id="dge-menuSearchBtn" title="Search the whole DGE corpus">🔍 Search the corpus</button>
       <button id="dge-gear" title="AI settings">⚙ AI settings</button>
+    </div>
+    <div style="margin-top:12px;font-size:11px;opacity:.6;text-transform:uppercase;letter-spacing:.4px;">Commentaries</div>
+    <div class="q">
+      <button data-cn-action="expand">⤢ Expand all</button>
+      <button data-cn-action="collapse">⤡ Collapse all</button>
     </div>
   </div>
 </div>
@@ -95,30 +101,14 @@
     <div class="sutrameta" id="dge-sutrameta"></div>
     <div class="heroactions">
       <button class="btn" id="dge-pcBtn">॥ पदच्छेद / विश्लेषण ॥</button>
-      <button class="btn" id="dge-whatBtn">↔ what explains this</button>
-      <button class="btn" id="dge-usageBtn" title="search the whole DGE corpus for this sutra's words — citations in commentaries, kavya, everywhere">🔍 प्रयोगाः · corpus</button>
-      <button class="btn ai" id="dge-aiBtn">✦ Ask / Improve with AI</button>
-      <button class="btn" id="dge-fixBtn" title="report a text error in this sutra or its commentaries">✏️</button>
+      <button class="btn ai" id="dge-aiBtn">✦ Ask DGE AI</button>
+      <button class="btn" id="dge-sutraMoreBtn" title="More: what explains this sūtra, corpus usage, suggest a correction" aria-label="More sūtra tools">⋯ More</button>
     </div>
     <div class="analysis" id="dge-analysis"></div>
   </section>
 
-  <div class="toolrow">
-    <span class="lab"><b>● green = loaded from your data</b> · dashed = pending</span>
-    <span class="spacer" style="flex:1"></span>
-    <button class="mini" id="dge-expand">⤢ expand all</button>
-    <button class="mini" id="dge-collapse">⤡ collapse all</button>
-  </div>
-  <div class="dge-chips" id="dge-chips">
-    <button class="dge-chip on"  data-c="kashika"><span class="dot"></span>काशिका</button>
-    <button class="dge-chip on"  data-c="siddhanta_kaumudi"><span class="dot"></span>सिद्धान्तकौमुदी</button>
-    <button class="dge-chip off" data-c="mahabhashya"><span class="dot"></span>महाभाष्यम्</button>
-    <button class="dge-chip on"  data-c="balamanorama"><span class="dot"></span>बालमनोरमा</button>
-    <button class="dge-chip off" data-c="tattvabodhini"><span class="dot"></span>तत्त्वबोधिनी</button>
-    <button class="dge-chip off" data-c="nyasa"><span class="dot"></span>न्यासः</button>
-    <button class="dge-chip off" data-c="vasu"><span class="dot"></span>Vasu · Eng</button>
-    <button class="dge-chip pending"><span class="dot"></span>⚙ प्रक्रिया</button>
-  </div>
+  <div class="cn-summary" id="dge-cnSummary" aria-live="polite"></div>
+  <div class="cn-list" id="dge-cnList" role="list" aria-label="Commentary navigator — tap a commentary to show or hide it"></div>
 
   <div class="dge-layers read" id="dge-layers"></div>
   <p class="note">Ashtadhyayi corpus · DGE · 7 layers (Kāśikā · Siddhānta-Kaumudī · Mahābhāṣya · Bālamanoramā · Tattvabodhinī · Nyāsa · Vasu Eng). Layers load on demand.<span data-admin-only> Licence: verify before public launch — see admin.</span></p>
@@ -139,7 +129,7 @@
 <div class="drawer" id="dge-drawer">
   <div class="inner">
     <button class="x" id="dge-aiClose">×</button>
-    <h4>✦ AI tutor <span style="font-size:12px;color:var(--muted);font-weight:400">· Gemini (your key)</span></h4>
+    <h4>✦ Ask DGE AI <span style="font-size:12px;color:var(--muted);font-weight:400">· Gemini (your key)</span></h4>
     <div style="color:var(--muted);font-size:13px">Grounded on the layers you have open — quotes them, won't invent.</div>
     <div class="q" style="margin-top:8px">
       <span style="font-size:12px;color:var(--muted);align-self:center">reply in:</span>
@@ -174,7 +164,6 @@
   <div class="box">
     <button class="x" id="dge-setClose">×</button>
     <h4>AI settings</h4>
-    <div style="font-size:12.5px;color:var(--muted)">Bring your own Gemini key — it is stored only in this browser (localStorage) and sent directly to Google, never to DGE. Free key: aistudio.google.com/apikey</div>
     <label>Gemini API key</label>
     <input id="dge-keyInput" type="password" placeholder="AIza…">
     <label>Model</label>
@@ -185,6 +174,10 @@
     <select id="dge-modelSel">
       <option value="gemini-flash-latest">Flash — fast, recommended</option>
     </select>
+    <details class="set-privacy">
+      <summary>Where does my key go?</summary>
+      <p>Bring your own Gemini key — it is stored only in this browser (localStorage) and sent directly to Google, never to DGE. Free key: aistudio.google.com/apikey</p>
+    </details>
     <div class="acts">
       <button class="btn ai" id="dge-keySave" style="flex:1;justify-content:center">Save</button>
       <button class="btn" id="dge-keyClear">Clear</button>
@@ -193,9 +186,19 @@
 </div>
 
 <script src="../js/gemini.js?v=1.2.1"></script>
+<!-- Reader redesign / DGE UI Contract retrofit: this page previously had no
+     way to open contextual-actions.js's generic per-object-type menu even
+     after loading that script, because that menu's markup (.modal-overlay
+     etc.) is only shown/hidden via modals.js's openModal()/closeModal(),
+     which this page never loaded either. Load order matches dge/index.html
+     (see DGE_UI_CONTRACT.md): modals.js, reader-state.js,
+     contextual-actions.js, all before the page's own module. -->
+<script src="../js/modals.js?v=1"></script>
+<script src="../js/reader-state.js?v=1"></script>
+<script src="../js/contextual-actions.js?v=1"></script>
 <script src="../js/dge-shell.js?v=1"></script>
 <script src="../js/dge-breadcrumb.js?v=1"></script>
-<script src="../js/ashtadhyayi.js?v=1.7.0"></script>
+<script src="../js/ashtadhyayi.js?v=1.8.0"></script>
 <script>
 /* populate the sutra jump datalist once data is present */
 (function(){ function fill(){ var dl=document.getElementById('dge-sutralist'); if(!dl) return;

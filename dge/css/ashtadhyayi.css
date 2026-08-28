@@ -41,23 +41,31 @@
   .translit{color:var(--muted);font-style:italic;font-size:14px}
   .heroactions{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
   .btn{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:8px 13px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink);display:inline-flex;gap:7px;align-items:center}
-  .toolrow{display:flex;align-items:center;gap:8px;margin:18px 2px 6px;flex-wrap:wrap}
-  .toolrow .lab{font-size:12.5px;color:var(--muted)}.toolrow .lab b{color:var(--accent2)}
-  .mini{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:5px 9px;cursor:pointer;color:var(--muted);font:inherit;font-size:13px}
-  .mini.on{background:var(--sk,var(--accent2));color:#fff;border-color:var(--sk,var(--accent2))}
-  .dge-chips{display:flex;gap:8px;flex-wrap:wrap}
-  .dge-chip{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:999px;padding:7px 13px;font:inherit;font-size:14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:.15s}
-  .dge-chip .dot{width:8px;height:8px;border-radius:50%;background:#2f9e6f}
-  .dge-chip.off{opacity:.72}.dge-chip.off .dot{background:var(--muted)}
-  .dge-chip[data-c="kashika"].on{background:var(--k);color:#fff;border-color:var(--k)}
-  .dge-chip[data-c="siddhanta_kaumudi"].on{background:var(--sk);color:#fff;border-color:var(--sk)}
-  .dge-chip[data-c="mahabhashya"].on{background:var(--mb);color:#fff;border-color:var(--mb)}
-  .dge-chip[data-c="balamanorama"].on{background:var(--b);color:#fff;border-color:var(--b)}
-  .dge-chip[data-c="tattvabodhini"].on{background:var(--t);color:#fff;border-color:var(--t)}
-  .dge-chip[data-c="nyasa"].on{background:var(--n);color:#fff;border-color:var(--n)}
-  .dge-chip[data-c="vasu"].on{background:var(--vs);color:#fff;border-color:var(--vs)}
-  .dge-chip.on .dot{background:rgba(255,255,255,.85)}
-  .dge-chip.pending{border-style:dashed;cursor:default;opacity:.6}
+  /* ---- Commentary Navigator (DGE_UI_CONTRACT.md #2): replaces the old flat
+     .dge-chips pill row + "green=loaded/dashed=pending" legend. Separates
+     "which commentaries are available" (a plain-language summary line) from
+     "which are currently displayed" (a labeled list, toggle dot per row —
+     filled = displayed, hollow = available-not-displayed, dashed = still
+     loading). Rows are list items, not pills — a pill here would mean
+     "category/filter", not "toggle a whole content section" (component-
+     shape rule, DGE_UI_CONTRACT.md #5). ---- */
+  .cn-summary{display:flex;align-items:center;gap:10px;margin:18px 2px 8px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+  .cn-summary b{color:var(--ink);font-weight:600}
+  .cn-summary .cn-tools{margin-left:auto;display:flex;gap:6px}
+  .cn-tools button{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:5px 9px;cursor:pointer;color:var(--muted);font:inherit;font-size:12.5px;min-height:30px}
+  .cn-tools button:hover{color:var(--ink);border-color:var(--accent)}
+  .cn-list{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:10px;background:var(--panel)}
+  .cn-row{display:flex;align-items:center;gap:11px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;font-size:14px;padding:10px 13px;cursor:pointer;min-height:44px}
+  .cn-row:last-child{border-bottom:0}
+  .cn-row:hover{background:var(--panel2)}
+  .cn-dot{flex:0 0 auto;width:13px;height:13px;border-radius:50%;border:2px solid var(--muted);background:transparent;transition:.15s}
+  .cn-row.displayed .cn-dot{background:var(--tag,var(--accent2));border-color:var(--tag,var(--accent2))}
+  .cn-row.pending .cn-dot{border-style:dashed}
+  .cn-label{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+  .cn-label .t{font-weight:700}
+  .cn-label .sub{color:var(--muted);font-size:12px}
+  .cn-status{flex:0 0 auto;font-size:11.5px;color:var(--muted)}
+  .cn-row.pending .cn-status{font-style:italic}
   /* sutra analysis: padaccheda strip + toggle panel */
   .sutrameta{margin:8px 0 2px;display:flex;flex-wrap:wrap;gap:7px;align-items:center;font-size:15px}
   .sutrameta:empty{display:none}
@@ -84,6 +92,10 @@
   .dge-head .t{font-weight:700}.dge-head .sub{color:var(--muted);font-size:12px}
   .dge-head .who{margin-left:auto;color:var(--muted);font-size:12px;font-style:italic}
   .dge-copy{border:1px solid var(--line);background:var(--panel2);color:var(--muted);border-radius:7px;width:26px;height:24px;cursor:pointer;font-size:12px}
+  /* Named .dge-kebab (not .dge-more) — .dge-more already names the inline
+     "— no <layer> on this sutra —" text span below; reusing it for this
+     button would collide two unrelated things under one class. */
+  .dge-kebab{border:1px solid var(--line);background:var(--panel2);color:var(--muted);border-radius:7px;width:26px;height:24px;cursor:pointer;font-size:14px;line-height:1}
   .dge-head .caret{color:var(--muted);transition:.2s}
   .dge-card.collapsed .caret{transform:rotate(-90deg)}
   .dge-body{padding:2px 15px 15px;line-height:1.75}
@@ -175,4 +187,59 @@ button.sk-ref{border:0;background:transparent;padding:0 2px;font:inherit;font-si
 .pry-unit{color:var(--muted);font-weight:400;font-size:11.5px}
 .pry-kind{color:var(--accent);font-size:11px;border:1px solid var(--line);border-radius:6px;padding:0 5px}
 .pry-snip{display:block;margin-top:3px;font-size:13.5px;line-height:1.65;color:var(--muted)}
+
+/* ---- Shared generic contextual menu (dge/js/contextual-actions.js's
+   dgeOpenContextualMenu) + modals.js's openModal()/closeModal(). This page
+   loads both scripts (see ashtadhyayi.html) but never loaded dge/css/
+   main.css, where these classes are otherwise defined -- so the menu
+   existed in the DOM but was invisible and had no open/close behavior.
+   These rules give the SAME class names / markup contract main.css defines
+   a real presentation using THIS page's own token vars, rather than pulling
+   in the whole of main.css's separate design system wholesale (that full
+   unification is real follow-up work -- see DGE_UI_CONTRACT.md). ---- */
+body.modal-open{overflow:hidden}
+.modal-overlay{position:fixed;inset:0;background:rgba(20,14,6,.5);display:none;justify-content:center;align-items:center;z-index:11000;padding:18px}
+.modal-content{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);max-width:440px;width:100%;max-height:85vh;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+.modal-header-sticky{padding:14px 16px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-shrink:0}
+.modal-body{padding:14px 16px;overflow-y:auto;flex-grow:1}
+.btn-sm{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:8px;padding:5px 10px;font:inherit;font-size:12px;cursor:pointer}
+.ctx-menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:8px}
+.ctx-action-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--ink);font:inherit;min-height:44px}
+.ctx-action-btn:hover,.ctx-action-btn:focus-visible{background:var(--card-active,var(--panel2));border-color:var(--accent);outline:none}
+.ctx-action-icon{font-size:19px;line-height:1}
+.ctx-action-label{font-size:11.5px;font-weight:600;text-align:center;line-height:1.3}
+
+/* ---- Focus / reading mode (DGE_UI_CONTRACT.md #F, critique #30): collapses
+   the page to sūtra text + the Commentary Navigator + open commentaries.
+   Toggled by #dge-focusBtn (ashtadhyayi.js), persisted like every other
+   reader preference on this page. ---- */
+body.dge-focus .nav-top,
+body.dge-focus .crumbs,
+body.dge-focus .sid,
+body.dge-focus #dge-kaumudiBadge,
+body.dge-focus dge-footer{display:none}
+body.dge-focus main{padding-top:10px}
+
+/* ---- Compact previous/next on mobile (critique #15): the neighbouring
+   sūtra's full text is dead weight taking a full row on a small phone
+   before any commentary is visible; hide it by default under the mobile
+   breakpoint and reveal it only while a nav button is actually being
+   pressed/focused, so the tap that reveals it and the tap that navigates
+   are the same gesture rather than adding a second interaction step. ---- */
+@media(max-width:560px){
+  .nav-top button span.deva,.nav button span.deva{display:none}
+  .nav-top button:active span.deva,.nav-top button:focus-visible span.deva,
+  .nav button:active span.deva,.nav button:focus-visible span.deva{display:block;max-width:60vw}
+}
+
+/* ---- AI settings: privacy note demoted from a permanent paragraph to an
+   expandable info line (critique #8) ---- */
+.set-privacy{margin-top:8px}
+.set-privacy summary{cursor:pointer;font-size:12px;color:var(--muted);list-style:none}
+.set-privacy summary::-webkit-details-marker{display:none}
+.set-privacy summary:before{content:"ⓘ ";}
+.set-privacy p{font-size:12px;color:var(--muted);line-height:1.55;margin:6px 0 0}
+
+/* प्रकरणानि · Topics inline gloss (critique #17) */
+.dn-gloss{font-size:10.5px;color:var(--muted);margin-left:3px}
 .pry-snip mark{background:rgba(232,178,77,.4);color:var(--ink);border-radius:3px;padding:0 1px}
