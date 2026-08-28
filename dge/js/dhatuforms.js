@@ -13,6 +13,8 @@
   // directory deeper than dge/ -- ../ reaches dge/data/).
   var DHATU_URL = "../data/vedanga/vyakarana/dhatupatha/data.json";
   var FORMS_URL = "../data/vedanga/vyakarana/dhatuforms/";
+  var LEXICON_URL = "../data/vedanga/vyakarana/dhatu_lexicon/data.json";
+  var LEX_LANGS = ["English","Kannada","Telugu","Tamil","Malayalam","Hindi","Bengali","German","French","Russian","Chinese"];
   var GANA={1:"भ्वादि",2:"अदादि",3:"जुहोत्यादि",4:"दिवादि",5:"स्वादि",6:"तुदादि",7:"रुधादि",8:"तनादि",9:"क्र्यादि",10:"चुरादि"};
 
   // display order; each entry is [ganaKey, padaKey, label]
@@ -41,6 +43,30 @@
   function hashId(){ return decodeURIComponent((location.hash||"").replace(/^#/,"").trim()); }
 
   function lakaraKey(pair, forms){ return (forms[pair[0]]!==undefined) ? pair[0] : (forms[pair[1]]!==undefined ? pair[1] : null); }
+
+  function lexiconHtml(entry){
+    if(!entry) return "";
+    var m=entry.meanings||{};
+    var rows=LEX_LANGS.filter(function(l){ return m[l] && m[l]!=="(uncertain)"; })
+      .map(function(l){ return '<div class="lex-row"><b>'+esc(l)+'</b><span>'+esc(m[l])+'</span></div>'; }).join("");
+    if(!rows) return "";
+    var h='<div class="lex-head">🌐 बहुभाषा अर्थाः · Multilingual Meanings <span class="lex-ai-tag">AI-generated (Gemini), unreviewed</span></div>'
+      +'<div class="lex-langs">'+rows+'</div>';
+    var ped=entry.pedagogy;
+    if(ped && (ped.concept || (ped.scenarios||[]).length)){
+      h+='<div class="lex-pedagogy">'+(ped.concept?'<p>'+esc(ped.concept)+'</p>':'');
+      (ped.scenarios||[]).forEach(function(s){
+        h+='<div class="lex-scenario"><b class="deva">'+esc(s.form)+'</b>'
+          +(s.grammar_trigger?' <span class="muted">('+esc(s.grammar_trigger)+')</span>':'')
+          +' — '+esc(s.meaning)
+          +(s.example_sanskrit?'<div class="lex-example deva">'+esc(s.example_sanskrit)+'</div>':'')
+          +(s.example_english?'<div class="lex-example-en">'+esc(s.example_english)+'</div>':'')
+          +'</div>';
+      });
+      h+='</div>';
+    }
+    return '<div class="lex" style="margin-bottom:16px">'+h+'</div>';
+  }
 
   function renderTable(formString){
     var cells = String(formString||"").split(";");
@@ -72,17 +98,20 @@
 
     Promise.all([
       fetch(FORMS_URL+code+".json").then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch(DHATU_URL).then(function(r){ return r.ok?r.json():null; }).catch(function(){return null;})
+      fetch(DHATU_URL).then(function(r){ return r.ok?r.json():null; }).catch(function(){return null;}),
+      fetch(LEXICON_URL).then(function(r){ return r.ok?r.json():null; }).catch(function(){return null;})
     ]).then(function(res){
-      var data=res[0], dhatuIdx=res[1];
+      var data=res[0], dhatuIdx=res[1], lexIdx=res[2];
       var info = dhatuIdx && (dhatuIdx.items||[]).find(function(x){return x.id===code;});
+      var lexEntry = lexIdx && (lexIdx.items||[]).find(function(x){return x.id===code;});
       var voices = VOICE_ORDER.filter(function(v){ return data.forms[v[0]] && data.forms[v[0]][v[1]]; });
 
       var h='<div class="df-head">'
         +'<div class="crumbs deva" style="margin:0 0 6px">DGE › व्याकरणम् › <a href="dhatu.html#'+code+'" style="color:var(--accent)">धातुपाठः</a> › <b>रूपाणि</b></div>'
         +'<h1 class="deva">'+esc(info?info.dhatu:code)+' <span style="font-size:14px;color:var(--muted);font-weight:400">('+code+')</span></h1>'
         +'<div class="sub deva">'+(info?esc(info.artha)+' · गणः '+info.gana+' — '+esc(GANA[info.gana]||""):"")+'</div>'
-        +'</div>';
+        +'</div>'
+        +lexiconHtml(lexEntry);
 
       if(!voices.length){
         h+='<div class="df-empty">इस धातु के लिए सन्/णिच्/यङ्/यङ्लुक् रूप उपलब्ध नहीं (सभी 2229 मूल धातुओं में से 1782 के ही यङ्/यङ्लुक् रूप स्रोत में हैं)।</div>';

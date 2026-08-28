@@ -28,8 +28,10 @@
     karma: LS.get("karma",""),   // "" = all | "सकर्मक" | "अकर्मक" | "द्विकर्मक"
     sort: LS.get("sort","code"),
     q:"", openId: LS.get("open",null),
-    vset: null   // map of codes that have dhātuvṛtti entries (Mādhavīya/Kṣīra/Dhātupradīpa)
+    vset: null,  // map of codes that have dhātuvṛtti entries (Mādhavīya/Kṣīra/Dhātupradīpa)
+    lex: null    // map of code -> dhatu_lexicon entry (AI multilingual meanings + pedagogy)
   };
+  var LEX_LANGS = ["English","Kannada","Telugu","Tamil","Malayalam","Hindi","Bengali","German","French","Russian","Chinese"];
 
   function $(s,r){ return (r||document).querySelector(s); }
   function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
@@ -111,6 +113,9 @@
     if(state.vset && state.vset[it.id]){
       h+='<div class="vrit" data-vrit="'+it.id+'"><button class="btn vrit-btn">📜 वृत्तयः · Mādhavīya · Kṣīra · Dhātupradīpa ›</button></div>';
     }
+    if(state.lex && state.lex[it.id]){
+      h+='<div class="lex" data-lex="'+it.id+'"><button class="btn lex-btn">🌐 बहुभाषा अर्थाः · AI Multilingual Meanings ›</button></div>';
+    }
     return h;
   }
   function render(reset){
@@ -162,6 +167,8 @@
       if(mb){ e.stopPropagation(); loadVrittis(mb.closest(".vrit")); return; }
       var vt=e.target.closest(".vrit-tab");
       if(vt){ e.stopPropagation(); showVritti(vt.closest(".vrit"), vt.dataset.v); return; }
+      var lb=e.target.closest(".lex-btn");
+      if(lb){ e.stopPropagation(); showLexicon(lb.closest(".lex")); return; }
       var cs=e.target.closest("[data-corpus-search]");
       // "Search Library" is exactly what the reader's own global
       // search already answers for any word — reused rather than building a
@@ -287,6 +294,33 @@
     }
   }
 
+  // Already fully in memory (state.lex, loaded once at boot) -- unlike
+  // vṛttis there's no per-code file to fetch, just a reveal.
+  function showLexicon(box){
+    if(!box || box.dataset.loaded) return;
+    box.dataset.loaded="1";
+    var entry=state.lex[box.dataset.lex]; if(!entry) return;
+    var m=entry.meanings||{};
+    var rows=LEX_LANGS.filter(function(l){ return m[l] && m[l]!=="(uncertain)"; })
+      .map(function(l){ return '<div class="lex-row"><b>'+esc(l)+'</b><span>'+esc(m[l])+'</span></div>'; }).join("");
+    var h='<div class="lex-head">🌐 बहुभाषा अर्थाः · Multilingual Meanings <span class="lex-ai-tag">AI-generated (Gemini), unreviewed</span></div>'
+      +'<div class="lex-langs">'+(rows||'<div class="lex-row"><span class="muted">no confident equivalents generated</span></div>')+'</div>';
+    var ped=entry.pedagogy;
+    if(ped && (ped.concept || (ped.scenarios||[]).length)){
+      h+='<div class="lex-pedagogy">'+(ped.concept?'<p>'+esc(ped.concept)+'</p>':'');
+      (ped.scenarios||[]).forEach(function(s){
+        h+='<div class="lex-scenario"><b class="deva">'+esc(s.form)+'</b>'
+          +(s.grammar_trigger?' <span class="muted">('+esc(s.grammar_trigger)+')</span>':'')
+          +' — '+esc(s.meaning)
+          +(s.example_sanskrit?'<div class="lex-example deva">'+esc(s.example_sanskrit)+'</div>':'')
+          +(s.example_english?'<div class="lex-example-en">'+esc(s.example_english)+'</div>':'')
+          +'</div>';
+      });
+      h+='</div>';
+    }
+    box.innerHTML=h;
+  }
+
   function openById(id){
     var it=state.all.find(function(x){return x.id===id;}); if(!it) return;
     // set the open target BEFORE rendering so only this row renders open
@@ -312,6 +346,11 @@
       if(state.openId){ var el=$("#d-"+CSS.escape(state.openId)); var it=state.all.find(function(x){return x.id===state.openId;});
         if(el&&it){ var b=el.querySelector(".rbody"); if(b) b.innerHTML=bodyHTML(it); } }
     }).catch(function(){ state.vset={}; });
+    fetch("../data/vedanga/vyakarana/dhatu_lexicon/data.json").then(function(r){return r.ok?r.json():null;}).then(function(d){
+      state.lex={}; if(d) (d.items||[]).forEach(function(it){ state.lex[it.id]=it; });
+      if(state.openId){ var el=$("#d-"+CSS.escape(state.openId)); var it=state.all.find(function(x){return x.id===state.openId;});
+        if(el&&it){ var b=el.querySelector(".rbody"); if(b) b.innerHTML=bodyHTML(it); } }
+    }).catch(function(){ state.lex={}; });
     fetch(URL).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(d){
       state.all=(d.items||[]).map(function(it){
         it._hay=((it.dhatu||"")+" "+(it.artha||"")+" "+((it.meanings||[]).join(" "))+" "+(it.dhatu_slp||"")+" "+iast(it.dhatu)+" "+iast(it.artha)+" "+it.id).toLowerCase();

@@ -85,3 +85,18 @@
 .vrit-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px}
 .vrit-tag{font-size:10px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:0 6px;line-height:1.7}
 .vrit-tag-r{color:var(--accent);border-color:var(--accent)}
+
+.muted{color:var(--muted)}
+
+/* AI multilingual meanings + pedagogy (tools/gemini_dhatu_lexicon.py) */
+.lex-head{font-weight:700;color:var(--accent2);font-size:14px;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lex-ai-tag{font-size:10px;font-weight:400;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+.lex-langs{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}
+.lex-row{display:flex;gap:8px;padding:4px 0;font-size:13px;border-bottom:1px dashed var(--line)}
+.lex-row:last-child{border-bottom:0}
+.lex-row b{flex:0 0 84px;color:var(--muted)}
+.lex-pedagogy{font-size:13.5px;line-height:1.6}
+.lex-pedagogy>p{margin:0 0 8px;color:var(--muted)}
+.lex-scenario{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-bottom:6px;font-size:13px}
+.lex-example{margin-top:4px;font-size:14.5px}
+.lex-example-en{color:var(--muted);font-size:12.5px;font-style:italic}
