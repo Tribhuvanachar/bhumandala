@@ -302,7 +302,7 @@
           "content_id": null,
           "ancestor_id": null,
           "enabled": false,
-          "note": "homepage href is empty on the source site"
+          "note": "homepage href is empty on the source site (re-checked live on 28 Aug 2026, still no href on dvaitavedanta.in's सूत्रप्रस्थानम् menu for this item, unlike its 5 siblings which all resolve; re-enable once the source fixes it)"
         },
         {
           "slug": "omkara_vada",

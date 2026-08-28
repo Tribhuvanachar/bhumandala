@@ -1006,47 +1006,12 @@
     },
     {
      "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhagavato_nirdoshatvalakshanam.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhedaparanyeva_khalu_brahmasutrani.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
      "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhedojjivana.mula",
      "schema": "grantha_mula_text"
     },
     {
      "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.brahmasutranyayasamgraha.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.candrikamandanam.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
      "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.dvaita_dyumani.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.karmavijaya.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.madhvamukhalankara.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.madhvasiddhantasara.mula",
      "schema": "grantha_mula_text"
     },
     {
@@ -1061,11 +1026,6 @@
     },
     {
      "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.padarthasangraha.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
      "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.mula",
      "schema": "grantha_mula_text"
     },
@@ -1076,32 +1036,7 @@
     },
     {
      "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.sarvasiddhantasarasaravivecanam.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.shrimanmadhvasiddhantasaroddhara.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.shrimannyayasudhamandanam.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.shrivijayindravijayavaibhavam.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
      "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.sumadhva_vijaya.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.tantradipika.mula",
      "schema": "grantha_mula_text"
     },
     {
@@ -1117,11 +1052,6 @@
     {
      "key": "mula",
      "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.vadavali.mula",
-     "schema": "grantha_mula_text"
-    },
-    {
-     "key": "mula",
-     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.vagvajra.mula",
      "schema": "grantha_mula_text"
     },
     {
@@ -1781,6 +1711,11 @@
      "key": "tika_khandartha",
      "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.taittiriyopanishad_bhashya.tika_khandartha",
      "schema": "grantha_tika_text"
+    },
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.tantradipika.mula",
+     "schema": "grantha_mula_text"
     }
    ]
   },
@@ -1858,6 +1793,24 @@
      "key": "tika_shrisatyadharma",
      "path": "darshana.vedanta.dvaita.DvaitaVedanta.purana_prasthana.bhagavata_tatparya_nirnaya.tika_shrisatyadharma",
      "schema": "grantha_tika_text"
+    }
+   ]
+  },
+  "satyadhyana_tirtha": {
+   "name": "Satyadhyana Tirtha",
+   "traditions": [
+    "dvaita"
+   ],
+   "works": [
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhedaparanyeva_khalu_brahmasutrani.mula",
+     "schema": "grantha_mula_text"
+    },
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.candrikamandanam.mula",
+     "schema": "grantha_mula_text"
     }
    ]
   },
@@ -1955,6 +1908,21 @@
      "key": "tika_satyapramoda",
      "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.yukti_mallika.tika_satyapramoda",
      "schema": "grantha_tika_text"
+    },
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.shrimannyayasudhamandanam.mula",
+     "schema": "grantha_mula_text"
+    },
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.bhagavato_nirdoshatvalakshanam.mula",
+     "schema": "grantha_mula_text"
+    },
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.shrivijayindravijayavaibhavam.mula",
+     "schema": "grantha_mula_text"
     }
    ]
   },
@@ -1973,6 +1941,19 @@
      "key": "tika_shrisatyapriyatirtha",
      "path": "darshana.vedanta.dvaita.DvaitaVedanta.upanishad_prasthana.kenopanishad_bhashya.tika_shrisatyapriyatirtha",
      "schema": "grantha_tika_text"
+    }
+   ]
+  },
+  "satyatma_tirtha": {
+   "name": "Satyatma Tirtha",
+   "traditions": [
+    "dvaita"
+   ],
+   "works": [
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.karmavijaya.mula",
+     "schema": "grantha_mula_text"
     }
    ]
   },
@@ -2113,8 +2094,14 @@
      "key": "sripadaraja",
      "path": "dasa_sahitya.vyasakuta.sripadaraja",
      "schema": "grantha_prakarana_text"
+    },
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.vagvajra.mula",
+     "schema": "grantha_mula_text"
     }
-   ]
+   ],
+   "note": "vāgvajraḥ's author is recorded as \"श्रीपादराजगुरुसार्वभौमः\" (Sripadaraja Guru Sarvabhauma) -- the honorific by which Sripadaraja is traditionally known; identified with this entry on that basis, not an independently confirmed source"
   },
   "surottama_tirtha": {
    "name": "Surottama Tirtha",
@@ -2307,6 +2294,19 @@
     }
    ]
   },
+  "vanamali_dasa": {
+   "name": "Vanamali Dasa",
+   "traditions": [
+    "dvaita"
+   ],
+   "works": [
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.madhvamukhalankara.mula",
+     "schema": "grantha_mula_text"
+    }
+   ]
+  },
   "vanamali_mishra": {
    "name": "Vanamali Mishra",
    "traditions": [
@@ -2343,6 +2343,24 @@
      "key": "vasistha_smriti",
      "path": "smriti_dharma.smriti.vasistha_smriti",
      "schema": null
+    }
+   ]
+  },
+  "vedagarbha_padmanabha_suri": {
+   "name": "Vedagarbha Padmanabha Suri",
+   "traditions": [
+    "dvaita"
+   ],
+   "works": [
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.padarthasangraha.mula",
+     "schema": "grantha_mula_text"
+    },
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.madhvasiddhantasara.mula",
+     "schema": "grantha_mula_text"
     }
    ]
   },
@@ -2494,6 +2512,21 @@
      "key": "tika_vijayindratirtha",
      "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.pramana_paddhati.tika_vijayindratirtha",
      "schema": "grantha_tika_text"
+    },
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.shrimanmadhvasiddhantasaroddhara.mula",
+     "schema": "grantha_mula_text"
+    },
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.sarvasiddhantasarasaravivecanam.mula",
+     "schema": "grantha_mula_text"
+    },
+    {
+     "key": "mula",
+     "path": "darshana.vedanta.dvaita.DvaitaVedanta.later_acharyas.brahmasutranyayasamgraha.mula",
+     "schema": "grantha_mula_text"
     }
    ]
   },
