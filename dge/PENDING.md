@@ -3797,6 +3797,115 @@ duplicates rather than importing a second copy — see the git history for
 Also added `purana.vayu_purana` as an empty-but-visible placeholder — it
 had no folder at all, unlike the other 17 traditional Mahāpurāṇas.
 
+## Smṛti/Dharmaśāstra empty shelf — follow-up (28 Aug 2026)
+
+Took the three items the 25 Aug pass left open, one at a time.
+
+- **`find_title()`'s fuzzy fallback — fixed.** Root cause confirmed live:
+  the search-fallback match test was `variants[0][:4] in candidate_title`
+  — any candidate containing the *first four Devanagari codepoints* of the
+  target anywhere in its title counted as a match. Four codepoints is not
+  even four full akṣaras once conjuncts are counted, so this fired on pure
+  coincidence: caturvargacintāmaṇi's stem "चतुर" ("catur-", four-) matched
+  `वाचस्पत्यम्/चतुर्भाव`, an unrelated Vācaspatyam dictionary entry — the
+  wrong-work bug this note already flagged. Replaced the whole heuristic
+  with `difflib.SequenceMatcher` similarity between each variant and a
+  candidate's **full** title (not its trailing path segment — tried that
+  first, but leaf-only comparison creates its own false positive: a
+  differently-titled work's subsection can carry the exact same leaf name,
+  see dāyabhāga below), gated at `SEARCH_MATCH_THRESHOLD = 0.75`
+  (`tools/sayana_smriti/import_minor_smritis.py`). Two new regression
+  tests in `tests/test_phase2.py`; the existing 49 (now 52) still pass.
+  Re-ran the caller (`--probe-only`) live across all 22 targets per this
+  note's own instruction to check for other now-different results.
+  Located count dropped from 10/22 to 8/22 — two flips, both individually
+  re-verified live rather than trusted blind:
+  - `chaturvarga_chintamani`: was the false "search" match above, now
+    correctly "not found". Re-fetched the same search query directly —
+    still only the two same irrelevant hits (a bird-symbolism article, the
+    dictionary entry), nothing above threshold. No confirmed source
+    exists yet, same bottom line as before the fix, but no longer via a
+    wrong answer.
+  - `dayabhaga`: flipped too, but for a more interesting reason than the
+    fix — it's a genuine second false-positive class the leaf-based
+    version of the fix would *not* have caught. "दायभागः" ("division of
+    inheritance") names both Jīmūtavāhana's independent nibandha *and* one
+    of the traditional vyavahāra-pada topics, so sa.wikisource's top hit
+    for it is `नारदस्मृतिः/व्यवहारपदानि/दायभागः` — the दायभाग *chapter of
+    Nārada Smṛti*, not the nibandha. Its leaf segment is a perfect match
+    to the variant; only comparing the *full* title (keeping the unrelated
+    "नारदस्मृतिः/व्यवहारपदानि/" prefix in the score, ratio 0.36) rejects it
+    correctly. This is why the shipped fix compares full titles rather
+    than leaves — caught during this session's own verification pass, not
+    afterward. No confirmed independent Dāyabhāga source exists on
+    sa.wikisource under any tried spelling.
+  All 8 titles that were already correct (angiras, dakṣa, yama, āpastamba,
+  gautama, bṛhaspati, mitākṣarā, vīramitrodaya — all found via `category`
+  or `direct`, never through the buggy `search` path) are unchanged.
+
+- **`vīramitrodaya` — investigated further, genuinely needs more than a
+  targeted fix, still not written.** Fetched the actual transcluded page
+  (the `<pages index=… from=1 to=386/>` ProofreadPage tag the top-level
+  page resolves to — 603 KB rendered HTML, 555 KB of body text once
+  chrome is stripped) and ran it through the real parser rather than
+  guessing from the chunk count alone. Root finding: the whole 386-page
+  scan carries only **21** `॥ N ॥`-style markers in 555 KB of text — this
+  is not "front matter mixed into verses past the junk filter," it's that
+  Mitramiśra's Śrāddhaprakāśa is (like the other Vīramitrodaya prakāśas)
+  a **prose nibandha**, not a verse text, so a verse-marker splitter
+  structurally cannot extract most of it — there is close to nothing
+  verse-delimited *to* extract. The 20 chunks the current importer does
+  surface are confirmed to be the book's title page (chunk "1", the
+  Chowkhamba Sanskrit Series front matter already flagged) plus
+  Mitramiśra's own versified anukramaṇikā (a table-of-contents poem
+  listing the topics the prose text goes on to treat — its closing verse
+  literally says so: "एवमेते पदार्थास्तु मित्रमिश्रेण सुरिणा श्राद्धप्रकाशे
+  कथिता विचार्याचार्यसंहिताः", "these topics have thus been declared by
+  Mitramiśra in the Śrāddhaprakāśa..."). Importing only that would still
+  misrepresent the work — a table of contents standing in for the text.
+  A different subpage will not help either: every Vīramitrodaya prakāśa
+  is prose by genre, so the "wrong subpage" branch of the original
+  hypothesis doesn't apply. Fixing this for real needs a prose-aware
+  extraction strategy (page-boundary-aware paragraph splitting, per-page
+  OCR header/footer stripping across all 386 scanned pages) — a new
+  parser, not a trim. Left reverted/unwritten, as before.
+
+- **`āpastamba smṛti` — investigated further, confirmed genuinely hard,
+  still not written.** Fetched the live page (`आपस्तम्बधर्मसूत्रम्`, the
+  Kāśī Sanskrit Series edition with Haradatta's Ujjvalā commentary) and
+  read the actual structure around several kaṇḍikā boundaries rather than
+  taking "2528 units" on faith — it checks out exactly (2528 raw `॥ N ॥`
+  markers in the body text, 2510 of which survive the current junk/ratio
+  filters, i.e. the filters are barely touching this file; the
+  contamination is real, not a filter tuning problem). Found *three*
+  distinct counters sharing the identical bare `॥ N ॥` marker syntax:
+  individual sūtra number (resets each kaṇḍikā), kaṇḍikā number (in a
+  colophon sentence starting "इति श्रीहरदत्तविरचितायाम्…कण्डिका"), and
+  paṭala number (colophon starting "इति च…पटलः"). Root sūtra and
+  Haradatta's vṛtti on it often — not always — appear as two consecutive
+  chunks carrying the *same* sūtra number (mūla short, vṛtti long), which
+  looked at first like an exploitable pattern. Tracing several kaṇḍikās
+  in full disproved that as a general rule: sūtras 3–18 pair cleanly, but
+  19 pairs in reversed (long, then short) order, 20–26 each appear
+  exactly *once* because chunk 27 is Haradatta commenting on all six of
+  them ("ब्रह्मवर्चसकाम॑मित्यादीनि षट् सूत्राणि …") in one combined vṛtti,
+  and sūtra 23's number is skipped in the sequence entirely (it turns up
+  embedded inside a neighboring chunk's running text instead of as its
+  own marker). Critical-apparatus footnotes (manuscript variant readings,
+  cross-references to other smṛtis) are inline prose too, positionally
+  clustered just before each `pagenum` span rather than tagged in any way
+  that survives to plain text. This confirms — with specifics, not just
+  the same general description as 25 Aug — that separating mūla, vṛtti,
+  and apparatus here needs real per-kaṇḍikā structural judgment (batched
+  commentary, reordering, OCR-corrupted numbering), not a rule that holds
+  everywhere. Left reverted/unwritten, as before.
+
+None of these three needed forcing past what could be verified live, so
+none were forced. `find_title()` is the one item with an actual code fix;
+the other two are now documented precisely enough that a future session
+with time to build (and test against the full 2528/386-page corpora, not
+a sample) doesn't have to re-derive this structure from scratch.
+
 ## Agama restructure (25 Aug 2026)
 
 The `agama` taxonomy was flattening sectarian traditions (Pāñcarātra,

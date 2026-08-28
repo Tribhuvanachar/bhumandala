@@ -45,6 +45,7 @@ LICENCE
 from __future__ import annotations
 
 import argparse
+import difflib
 import json
 import sys
 from collections import Counter
@@ -140,6 +141,25 @@ def enumerate_category(f: Fetcher) -> list:
     return out
 
 
+# Below this similarity a search hit is a coincidence, not the work we're
+# looking for. Two distinct failure modes this guards against, both seen on
+# real sa.wikisource results for these titles:
+#  - a short shared prefix: "चतुर" ("catur-", four-) between
+#    "चतुर्वर्गचिन्तामणिः" (Caturvargacintāmaṇi) and an unrelated dictionary
+#    entry "चतुर्भाव" is not evidence they're the same text.
+#  - an identically-named subsection of an unrelated work: "दायभागः"
+#    ("division of inheritance") is both Jīmūtavāhana's independent nibandha
+#    and the name of a traditional vyavahāra-pada, so it also appears as
+#    "नारदस्मृतिः/व्यवहारपदानि/दायभागः" — a chapter *of Nārada Smṛti*, not the
+#    nibandha. Comparing against the candidate's full title (not just its
+#    last path segment) keeps that long, unrelated prefix in the score.
+SEARCH_MATCH_THRESHOLD = 0.75
+
+
+def _title_similarity(variant: str, candidate: str) -> float:
+    return difflib.SequenceMatcher(None, variant, candidate).ratio()
+
+
 def find_title(f: Fetcher, variants, category_titles, label) -> tuple:
     """-> (title, how_found) or (None, reason). Cheapest probe first."""
     norm = {t.replace("‍", "").strip(): t for t in category_titles}
@@ -149,11 +169,18 @@ def find_title(f: Fetcher, variants, category_titles, label) -> tuple:
     for v in variants:
         if wk.html_from_parse(fetch_json(f, wk.parse_url(v, lang=LANG))):
             return v, "direct"
-    # Last resort: full-text search on the first variant's stem.
+    # Last resort: full-text search on the first variant's stem, scored by
+    # similarity to the full variant spelling rather than a short prefix —
+    # a handful of Devanagari codepoints is not a distinctive enough prefix
+    # to identify a work (many titles share a common first word).
     stem = variants[0].rstrip("ः").rstrip("्")
+    best_ratio, best_title = 0.0, None
     for r in wk.search_results(fetch_json(f, wk.search_url(stem, lang=LANG))):
-        if any(v[:4] in r["title"] for v in variants):
-            return r["title"], "search"
+        ratio = max(_title_similarity(v, r["title"]) for v in variants)
+        if ratio > best_ratio:
+            best_ratio, best_title = ratio, r["title"]
+    if best_ratio >= SEARCH_MATCH_THRESHOLD:
+        return best_title, "search"
     return None, "not found"
 
 

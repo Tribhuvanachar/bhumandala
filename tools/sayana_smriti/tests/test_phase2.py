@@ -264,6 +264,53 @@ class TestMinorSmritis(unittest.TestCase):
         self.assertIsNone(title)
         self.assertEqual(how, "not found")
 
+    def test_search_fallback_rejects_a_shared_prefix_false_match(self):
+        # Regression: Caturvargacintāmaṇi's search fallback used to accept
+        # any hit sharing its first 4 codepoints ("चतुर", "four-"), which
+        # matched an unrelated Vācaspatyam dictionary entry.
+        variant = "चतुर्वर्गचिन्तामणिः"
+        stem = variant.rstrip("ः").rstrip("्")
+        pages = dict(self.pages)
+        pages[self.w.parse_url(variant, lang="sa")] = None
+        pages[self.w.search_url(stem, lang="sa")] = json.dumps(
+            {"query": {"search": [{"title": "वाचस्पत्यम्/चतुर्भाव", "size": 100}]}},
+            ensure_ascii=False)
+        f = FakeFetcher(pages)
+        title, how = self.ims.find_title(f, [variant], [], "Caturvargacintāmaṇi")
+        self.assertIsNone(title)
+        self.assertEqual(how, "not found")
+
+    def test_search_fallback_accepts_a_genuine_close_match(self):
+        variant = "वीरमित्रोदयः - श्राद्धप्रकाशः"
+        stem = variant.rstrip("ः").rstrip("्")
+        pages = dict(self.pages)
+        pages[self.w.parse_url(variant, lang="sa")] = None
+        pages[self.w.search_url(stem, lang="sa")] = json.dumps(
+            {"query": {"search": [{"title": variant, "size": 5000}]}},
+            ensure_ascii=False)
+        f = FakeFetcher(pages)
+        title, how = self.ims.find_title(f, [variant], [], "Vīramitrodaya")
+        self.assertEqual((title, how), (variant, "search"))
+
+    def test_search_fallback_rejects_a_same_name_subsection_of_another_work(self):
+        # Regression: "दायभागः" is both Jīmūtavāhana's independent nibandha
+        # and a traditional vyavahāra-pada topic name, so it also surfaces as
+        # a Nārada Smṛti chapter with the identical leaf title. A leaf-only
+        # comparison would score this a perfect match; comparing full titles
+        # correctly keeps the unrelated "नारदस्मृतिः/..." prefix in the score.
+        variant = "दायभागः"
+        stem = variant.rstrip("ः").rstrip("्")
+        wrong_work = "नारदस्मृतिः/व्यवहारपदानि/दायभागः"
+        pages = dict(self.pages)
+        pages[self.w.parse_url(variant, lang="sa")] = None
+        pages[self.w.search_url(stem, lang="sa")] = json.dumps(
+            {"query": {"search": [{"title": wrong_work, "size": 14899}]}},
+            ensure_ascii=False)
+        f = FakeFetcher(pages)
+        title, how = self.ims.find_title(f, [variant], [], "Dāyabhāga")
+        self.assertIsNone(title)
+        self.assertEqual(how, "not found")
+
     def test_build_grantha_shape_matches_dge_schema(self):
         f = FakeFetcher(self.pages)
         data, stats = self.ims.build_grantha(
