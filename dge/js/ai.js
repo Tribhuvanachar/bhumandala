@@ -1978,8 +1978,10 @@ function dgeDhatuLexiconHtml(entry) {
       return '<div class="dsm-lex-row"><b>' + dgeShabdaEsc(l) + '</b><span>' + dgeShabdaEsc(m[l]) + '</span></div>';
     }).join('');
   if (!rows) return '';
+  const sources = entry.sources_used || [];
+  const tag = sources.length ? 'AI-interpreted (Gemini), grounded in real sources below' : 'AI-generated (Gemini), unreviewed';
   let h = '<div class="dsm-section-label">बहुभाषा अर्थाः · Multilingual Meanings' +
-    '<span class="dsm-ai-tag">AI-generated (Gemini), unreviewed</span></div>' +
+    '<span class="dsm-ai-tag">' + dgeShabdaEsc(tag) + '</span></div>' +
     '<div class="dsm-lex-langs">' + rows + '</div>';
   const ped = entry.pedagogy;
   if (ped && (ped.concept || (ped.scenarios || []).length)) {
@@ -1993,6 +1995,10 @@ function dgeDhatuLexiconHtml(entry) {
         '</div>';
     });
     h += '</div>';
+  }
+  if (sources.length) {
+    h += '<div style="font-size:11px;color:var(--muted-text);margin-top:8px;line-height:1.5;">grounded in: ' +
+      sources.map(dgeShabdaEsc).join(' · ') + '</div>';
   }
   return h;
 }

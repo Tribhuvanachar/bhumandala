@@ -50,7 +50,9 @@
     var rows=LEX_LANGS.filter(function(l){ return m[l] && m[l]!=="(uncertain)"; })
       .map(function(l){ return '<div class="lex-row"><b>'+esc(l)+'</b><span>'+esc(m[l])+'</span></div>'; }).join("");
     if(!rows) return "";
-    var h='<div class="lex-head">🌐 बहुभाषा अर्थाः · Multilingual Meanings <span class="lex-ai-tag">AI-generated (Gemini), unreviewed</span></div>'
+    var sources=entry.sources_used||[];
+    var tag=sources.length?"AI-interpreted (Gemini), grounded in real sources below":"AI-generated (Gemini), unreviewed";
+    var h='<div class="lex-head">🌐 बहुभाषा अर्थाः · Multilingual Meanings <span class="lex-ai-tag">'+esc(tag)+'</span></div>'
       +'<div class="lex-langs">'+rows+'</div>';
     var ped=entry.pedagogy;
     if(ped && (ped.concept || (ped.scenarios||[]).length)){
@@ -64,6 +66,9 @@
           +'</div>';
       });
       h+='</div>';
+    }
+    if(sources.length){
+      h+='<div class="lex-sources muted">grounded in: '+sources.map(esc).join(" · ")+'</div>';
     }
     return '<div class="lex" style="margin-bottom:16px">'+h+'</div>';
   }
