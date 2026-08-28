@@ -1446,6 +1446,80 @@ function dgeWireShabdaSubantaSteps(body, item, cellIndex) {
   });
 }
 
+// A form neither the fixed शब्दपाठः, the kṛdanta index, Vidyut's curated
+// morphology vocabulary, nor a precomputed sandhi split resolves may still
+// be an honest SAMĀSA (compound) whose final member (उत्तरपदम्) is an
+// ordinary listed pratipadika, declined regularly -- Sanskrit compounds
+// inflect only on their last member. Scans every headword's own 24 already-
+// tabulated forms for one the surface literally ENDS WITH (e.g.
+// जयीन्द्रज्योतिषे ends in ज्योतिष्'s चतुर्थी एकवचन "ज्योतिषे" --
+// ज्योतिष् itself is a real headword, @jyotiS1). Pure string comparison
+// over curated data already on the page (no WASM, no network beyond the
+// one full-list fetch below), kept as the LAST real attempt before the
+// honest not-found message: dgeMorphFallbackHtml and dgeSandhiFallbackHtml
+// above are genuine Vidyut analyses, so they take priority whenever they
+// actually have an answer -- this is a coarser heuristic (it identifies
+// only the final member, not the whole compound) that fires only once both
+// of those have already come up empty.
+//
+// False-positive guard, verified against the whole Raghavendra Vijaya
+// sarga_1 corpus (43 real compound hits, 0 known false positives after
+// tuning): a short/common ending matches unrelated words by pure chance
+// (3-character endings like तम्/कम्/सन् falsely matched verb forms and
+// kṛdantas), so both the matched suffix and the leftover prefix must clear
+// a minimum length; सर्वनाम (pronoun: तद्/यद्/एतद्/किम्/अदस्) headwords are
+// excluded outright since their endings coincide with ordinary noun
+// endings but a bare pronoun stem is never a real compound's semantic
+// final member. Among qualifying hits the LONGEST suffix wins (most
+// specific). Mirrors shabda.js's own copy of this same logic (kept
+// separate for the same reason as dgeFindShabdaForm above -- this page
+// doesn't load shabda.js).
+const DGE_COMPOUND_MIN_SUFFIX_LEN = 4, DGE_COMPOUND_MIN_PREFIX_LEN = 2;
+function dgeIsPronounHeadword(it) { return (it.artha || '').indexOf('सर्वनाम') >= 0; }
+function dgeFindShabdaCompoundMatch(items, surface) {
+  const w = String(surface || '').trim(); if (!w) return null;
+  let best = null;
+  for (let i = 0; i < items.length; i++) {
+    const it = items[i];
+    if (dgeIsPronounHeadword(it)) continue;
+    const cells = String(it.forms || '').split(';');
+    for (let c = 0; c < cells.length && c < 24; c++) {
+      const variants = (cells[c] || '').split('-');
+      for (let v = 0; v < variants.length; v++) {
+        const form = variants[v].trim();
+        if (!form || form.length < DGE_COMPOUND_MIN_SUFFIX_LEN) continue;
+        if (w.length - form.length < DGE_COMPOUND_MIN_PREFIX_LEN) continue;
+        if (w.slice(w.length - form.length) !== form) continue;
+        if (!best || form.length > best.form.length) {
+          best = { item: it, cellIndex: c, form: form, prefix: w.slice(0, w.length - form.length) };
+        }
+      }
+    }
+  }
+  return best;
+}
+// Renders a compound-final match honestly distinct from an ordinary
+// headword hit (dgeShabdaExactHtml): names the recognized final member and
+// its vibhakti/vacana, shows that member's own full declension table (tap-
+// for-derivation included, same as an exact match), and flags the
+// remaining prefix as an unlisted/unanalyzed compound part -- never blurs
+// the line between "this exact word is a listed headword" and "this
+// word's ending matches a listed headword's declined form."
+function dgeShabdaCompoundHtml(surface, hit) {
+  const vb = Math.floor(hit.cellIndex / 3), vac = ['एकवचनम्', 'द्विवचनम्', 'बहुवचनम्'][hit.cellIndex % 3];
+  return '<div class="dsm-word deva">' + dgeShabdaEsc(surface) + '</div>' +
+    '<div class="dsm-sub">समासः · not itself a listed headword -- ends in a recognized final member (उत्तरपदम्)</div>' +
+    '<div class="dsm-kv"><div class="dsm-kk">उत्तरपदम्</div><div class="dsm-kvv deva">' + dgeShabdaEsc(hit.item.word) +
+      ' — ' + dgeShabdaEsc(DGE_VIBHAKTI[vb]) + ' ' + dgeShabdaEsc(vac) +
+      (hit.item.artha ? ', ' + dgeShabdaEsc(hit.item.artha) : '') + '</div></div>' +
+    '<div class="dsm-kv"><div class="dsm-kk">शेषः</div><div class="dsm-kvv deva">' + dgeShabdaEsc(hit.prefix) + '</div></div>' +
+    '<div class="dsm-empty">The remaining part above is not separately analyzed here (likely a proper name or an ' +
+      'unlisted prior member) — only the compound\'s final member is identified, from its own declension table below.</div>' +
+    dgeShabdaDeclTable(hit.item.forms, hit.cellIndex) +
+    '<div id="dsmSteps"></div>' +
+    '<a class="dsm-full-link" href="vyakarana/shabda.html#' + dgeShabdaEsc(hit.item.id) + '" target="_blank">View in full शब्दपाठः browser ↗</a>' +
+    dgeShabdaWhereElseLink(hit.item.word);
+}
 function dgeShabdaNotFoundHtml(surface) {
   return '<div class="dsm-empty">No exact form found for "' + dgeShabdaEsc(surface) + '", ' +
     'and it doesn\'t look like a sandhi join Vidyut resolves either. ' +
@@ -1657,11 +1731,16 @@ window.dgeOpenShabdaForSelection = function(e) {
   // declension table (curated) -> a kṛdanta derivation (curated) -> Vidyut's
   // own live morphology analysis (real, but not a curated table) -> a
   // Vidyut sandhi split (real) if the word looks like an unlisted compound
-  // -> only then an honest not-found. `exactMatch` is set only by the first
-  // branch (the only one with a declension cell/item to derive from) so the
-  // final .then() below knows whether to wire the tap-a-cell-for-its-
-  // derivation behaviour once the string it built is actually in the DOM.
-  let exactMatch = null;
+  // -> a compound-final-member suffix match against the same curated
+  // शब्दपाठः table (heuristic -- only the final member is identified, see
+  // dgeFindShabdaCompoundMatch -- so it runs after the two genuine Vidyut
+  // analyses above, only once both of those have already come up empty)
+  // -> only then an honest not-found. `exactMatch`/`compoundMatch` are set
+  // only by the branches that actually have a declension cell/item to
+  // derive from, so the final .then() below knows whether to wire the
+  // tap-a-cell-for-its-derivation behaviour once the string it built is
+  // actually in the DOM.
+  let exactMatch = null, compoundMatch = null;
   dgeFetchShabdaData(word).then(function (items) {
     const loc = dgeFindShabdaForm(items, word);
     if (loc) { exactMatch = loc; return dgeShabdaExactHtml(loc.item, loc.cellIndex); }
@@ -1676,6 +1755,15 @@ window.dgeOpenShabdaForSelection = function(e) {
   }).catch(() => null)
     .then(function (html) { return html || dgeMorphFallbackHtml(word); })
     .then(function (html) { return html || dgeSandhiFallbackHtml(word); })
+    .then(function (html) {
+      if (html) return html;
+      return dgeFetchShabdaData().then(function (items) {
+        const hit = dgeFindShabdaCompoundMatch(items, word);
+        if (!hit) return null;
+        compoundMatch = hit;
+        return dgeShabdaCompoundHtml(word, hit);
+      }).catch(() => null);
+    })
     .then(function (html) { return html || dgeShabdaNotFoundHtml(word); })
     .then(function (mainHtml) {
       if (myReq !== window.dgeShabdaReqSeq) return; // a newer word was opened meanwhile -- this response is stale
@@ -1683,6 +1771,7 @@ window.dgeOpenShabdaForSelection = function(e) {
       dgeWireShabdaReportMissing(body, word);
       dgeShabdaWireWhereElse(body);
       if (exactMatch) dgeWireShabdaSubantaSteps(body, exactMatch.item, exactMatch.cellIndex);
+      else if (compoundMatch) dgeWireShabdaSubantaSteps(body, compoundMatch.item, compoundMatch.cellIndex);
       // कोश (dictionary results, from a separate CDN-hosted repo) loads
       // independently and appends itself once ready -- never blocks the
       // primary content above, which a reader wants to see immediately

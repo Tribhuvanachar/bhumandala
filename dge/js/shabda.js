@@ -333,15 +333,105 @@
   // never going to have this word.
   function tryKrtFallback(surface){
     var w=(surface||"").trim();
-    if(!w){ showNotFound(surface); return; }
+    if(!w){ tryCompoundFallback(surface); return; }
     var cp=w.codePointAt(0).toString(16).toLowerCase().padStart(4,"0");
     fetch("../data/vedanga/vyakarana/prakriya/krtindex/"+cp+".json").then(function(r){
       return r.ok ? r.json() : null;
     }).then(function(m){
       var hit=m && m[w];
       if(hit){ location.href="krdanta.html#"+hit.c+":"+hit.k; }
-      else { showNotFound(surface); }
-    }).catch(function(){ showNotFound(surface); });
+      else { tryCompoundFallback(surface); }
+    }).catch(function(){ tryCompoundFallback(surface); });
+  }
+
+  // A form matching no headword (exact) and no kṛdanta may still be an
+  // honest SAMĀSA (compound) — Sanskrit compounds inflect only on their
+  // final member (uttarapada), so a compound whose last member is an
+  // ordinary listed pratipadika will end in one of that headword's own 24
+  // already-loaded forms (e.g. जयीन्द्रज्योतिषे ends in ज्योतिष्'s चतुर्थी
+  // एकवचन "ज्योतिषे" -- ज्योतिष् itself is @jyotiS1 in this very data).
+  // Scans the same in-memory forms every headword already carries; no new
+  // data, no network call, no WASM.
+  //
+  // False-positive guard: a short or common ending matches countless
+  // unrelated words by pure chance (verified empirically against the whole
+  // Raghavendra Vijaya sarga_1 corpus -- 3-character endings like तम्/कम्/
+  // सन् falsely "matched" verb forms and kṛdantas that merely happen to end
+  // in a common case suffix), so both the matched suffix and the leftover
+  // (unrecognized) prefix must clear a minimum length -- COMPOUND_MIN_SUFFIX_LEN
+  // keeps the match grammatically distinctive, COMPOUND_MIN_PREFIX_LEN keeps
+  // it an actual compound prior member rather than a stray letter.
+  // Among all qualifying hits the LONGEST suffix wins (most specific).
+  var COMPOUND_MIN_SUFFIX_LEN = 4, COMPOUND_MIN_PREFIX_LEN = 2;
+  // सर्वनाम (pronoun) headwords -- तद्/यद्/एतद्/किम्/अदस् -- are excluded
+  // outright: their case endings (ताम्, तस्य, ...) coincide with ordinary
+  // आ-/अ-stem noun endings, but Sanskrit compounds do not end in a bare
+  // pronoun stem as the semantic final member, so a "match" here is always
+  // a coincidence, not a real compound (also verified against the corpus --
+  // यदीरिताम्/संभावयन्तेऽर्थिताम् were false "तद्" hits before this guard).
+  function isPronounHeadword(it){ return (it.artha||"").indexOf("सर्वनाम")>=0; }
+  function findCompoundFinalMatch(surface){
+    var w=String(surface||"").trim(); if(!w) return null;
+    var best=null;
+    for(var i=0;i<state.all.length;i++){
+      var it=state.all[i];
+      if(isPronounHeadword(it)) continue;
+      var cells=String(it.forms||"").split(";");
+      for(var c=0;c<cells.length && c<24;c++){
+        var variants=(cells[c]||"").split("-");
+        for(var v=0;v<variants.length;v++){
+          var form=variants[v].trim();
+          if(!form || form.length<COMPOUND_MIN_SUFFIX_LEN) continue;
+          if(w.length-form.length<COMPOUND_MIN_PREFIX_LEN) continue;
+          if(w.slice(w.length-form.length)!==form) continue;
+          if(!best || form.length>best.form.length){
+            best={ id:it.id, word:it.word, artha:it.artha, linga_iast:it.linga_iast,
+                   cellIndex:c, form:form, prefix:w.slice(0,w.length-form.length) };
+          }
+        }
+      }
+    }
+    return best;
+  }
+
+  // Renders a compound-final match honestly distinct from an ordinary
+  // headword hit: names the recognized final member, its vibhakti/vacana,
+  // and flags the prior member as an unlisted/unanalyzed compound part
+  // (e.g. a proper name) rather than pretending the whole surface is itself
+  // a headword.
+  function showCompoundMatch(surface, hit){
+    $("#sh-search").value=surface||"";
+    recompute(); state.page=0; render();
+    var vib=VIBHAKTI[Math.floor(hit.cellIndex/3)], vac=["एकवचनम्","द्विवचनम्","बहुवचनम्"][hit.cellIndex%3];
+    var box=$("#sh-list");
+    box.insertAdjacentHTML("afterbegin",
+      '<div class="empty">"'+esc(surface)+'" is not itself a listed headword, but looks like a '+
+      '<b>समासः (compound)</b> ending in a recognized final member (उत्तरपदम्): '+
+      '<b class="deva">'+esc(tl(hit.word))+'</b> — '+esc(vib)+' '+esc(vac)+
+      ' (रूपम् "'+esc(tl(hit.form))+'"'+(hit.artha?", "+esc(tl(hit.artha)):"")+'). '+
+      'The remaining part "<b class="deva">'+esc(tl(hit.prefix))+'</b>" is not separately analyzed here '+
+      '(likely a proper name or an unlisted prior member) -- only the compound\'s final member is identified. '+
+      '<a href="#" id="sh-open-final">View the full declension of '+esc(tl(hit.word))+'</a>, or '+
+      '<a href="#" id="sh-report-missing">report this as missing</a>.</div>');
+    var openLink=$("#sh-open-final");
+    if(openLink) openLink.addEventListener("click",function(e){ e.preventDefault(); state.highlightCell=hit.cellIndex; openById(hit.id); });
+    var rep=$("#sh-report-missing");
+    if(rep) rep.addEventListener("click",function(e){
+      e.preventDefault();
+      if(typeof window.dgeReportMissingForm==="function"){ window.dgeReportMissingForm(surface,"shabda"); return; }
+      var email=window.DGE_CONTACT_EMAIL||"sanatanavidyagurukulam@gmail.com";
+      var subject=encodeURIComponent("[DGE-CONTENT-GAP] missing-form — "+surface);
+      var lines=["Type: missing-form","Surface: "+surface,
+        "Context: shabda (compound-final match: "+hit.word+", "+vib+" "+vac+")",
+        "Page: "+location.href,"Timestamp: "+new Date().toISOString()];
+      location.href="mailto:"+email+"?subject="+subject+"&body="+encodeURIComponent(lines.join("\n"));
+    });
+  }
+
+  function tryCompoundFallback(surface){
+    var hit=findCompoundFinalMatch(surface);
+    if(hit){ showCompoundMatch(surface, hit); return; }
+    showNotFound(surface);
   }
 
   // Previously this silently fell back to a plain substring search on the
