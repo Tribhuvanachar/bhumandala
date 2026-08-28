@@ -51,8 +51,23 @@
       return parseFloat(cs.bottom) || 0;
     }
 
+    // The doc comment above promises dragging "never... overlaps the top
+    // bar / bottom player", but only the top bar was actually accounted
+    // for -- minBottom was a flat 20px regardless of whether .bottom-player
+    // (z-index 9999, above this tab's own 9990) was on screen. Confirmed
+    // live: dragging to the old floor left the tab's lower half literally
+    // unclickable, swallowed under the player bar. Measured fresh on each
+    // drag rather than cached, since the player's own height isn't fixed
+    // (e.g. wider safe-area insets) and it doesn't exist at all on every
+    // page.
+    function bottomPlayerClearance() {
+      var player = document.querySelector('.bottom-player');
+      if (!player || getComputedStyle(player).display === 'none') return 0;
+      return player.getBoundingClientRect().height;
+    }
+
     function clampBottom(px) {
-      var minBottom = 20; // never below the safe-area gap
+      var minBottom = 20 + bottomPlayerClearance(); // never below the safe-area gap, or under the bottom player when it's showing
       var maxBottom = Math.max(minBottom, window.innerHeight - tab.offsetHeight - 70); // stay clear of the top bar
       return Math.min(maxBottom, Math.max(minBottom, px));
     }

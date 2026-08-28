@@ -44,6 +44,7 @@ function dgeUpdateWordToolsForSelection(txt) {
   document.querySelectorAll('#wordToolsRow [data-word-only]').forEach(btn => {
     btn.style.display = isSingleWord ? '' : 'none';
   });
+  renderAcharyaQueryButtons(isSingleWord);
 }
 
 // Suppresses the always-visible कोश/global-search FABs (#kosha-fab,
@@ -105,6 +106,25 @@ document.addEventListener('selectionchange', () => {
       window.contextShlokaId = parseInt(shlokaCard.id.split('-')[1]);
     } else if (!isInsideAcharyaModal) {
       window.contextShlokaId = null;
+    }
+
+    // A selection inside the app's own UI chrome (a settings popup/sheet, or
+    // any other modal's own labels/buttons) isn't reading content the Genie
+    // can act on -- confirmed live: drag-selecting a label inside the open
+    // Display sheet (e.g. "Tap selects one word") still fell through to the
+    // branch below and popped the Ask Acharya tooltip UNDER that same open
+    // sheet, both full-width bottom sheets at the identical z-index with no
+    // ordering between them, exactly the "popups on top of each other"
+    // complaint. #acharyaResult is excluded from this check since it's
+    // already handled by its own branch just below (modalAppendBtn).
+    const chromeAncestorEl = anchor && (anchor.nodeType === 3 ? anchor.parentElement : anchor);
+    const insideUiChrome = !isInsideAcharyaModal && chromeAncestorEl && chromeAncestorEl.closest &&
+      chromeAncestorEl.closest('.popup, .modal-content');
+
+    if (insideUiChrome) {
+      tooltip.style.display = 'none';
+      if (modalAppendBtn) modalAppendBtn.style.display = 'none';
+      return;
     }
 
     if (txt.length > 0) {
@@ -1086,8 +1106,17 @@ window.closeAcharyaModal = function() {
   if (followUpInput) followUpInput.value = '';
 };
 
-// 6. Render the (globally configurable) Ask Acharya query-type buttons
-function renderAcharyaQueryButtons() {
+// 6. Render the (globally configurable) Ask Acharya query-type buttons.
+// isSingleWord reuses dgeUpdateWordToolsForSelection()'s own word-vs-phrase
+// classification (the same check #wordToolsRow's Shabda/Dhatu/Sandhi/Samasa
+// buttons already hide by) to also hide "⚙️ Word" when the live selection
+// is a multi-word phrase, since that button's grammar analysis is only
+// meaningful for exactly one word -- same reasoning, same signal, just
+// applied to this row too instead of a fresh check. Left undefined on the
+// initial DOMContentLoaded render and after an Ask Acharya Settings save
+// (no live selection to classify at either point), so "Word" stays visible
+// then.
+function renderAcharyaQueryButtons(isSingleWord) {
   const row = document.getElementById('acharyaQueryButtonsRow');
   const fullContainer = document.getElementById('acharyaFullWidthButtons');
   const types = dgeGetEffectiveQueryTypes();
@@ -1096,7 +1125,7 @@ function renderAcharyaQueryButtons() {
   row.innerHTML = '';
   fullContainer.innerHTML = '';
 
-  const enabled = types.filter(q => q.enabled);
+  const enabled = types.filter(q => q.enabled && !(q.id === 'grammar' && isSingleWord === false));
   enabled.forEach(q => {
     const btn = document.createElement('button');
     btn.className = 'tooltip-btn';
