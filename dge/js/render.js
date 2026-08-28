@@ -350,36 +350,50 @@ function renderList() {
       if(!hasMatch) continue;
     }
 
+    // Redesigned card state model (reader redesign, sections 3-6/16-18):
+    // ONE state object per shloka drives the card's visual treatment —
+    // no more a permanent row of 5-6 tiny icon buttons sitting above the
+    // text like an admin panel. Primary state (selected / completed /
+    // in-progress) reads as a border color on the card itself; secondary
+    // state (favorite / doubt) reads as a small badge next to the shloka
+    // number, never a border, so "completed + favorite + doubt" together
+    // stays legible instead of turning into competing borders (section 4).
+    // The old always-visible action row moves into ONE contextual "⋯"
+    // affordance (dgeOpenContextualMenu('shloka', ...), contextual-actions.js)
+    // — same favorite/status/doubt/copy/play/Ask-Acharya actions, reached
+    // through progressive disclosure instead of five permanent icons.
+    const flags = (typeof dgeGetEffectiveFeatureFlags === 'function') ? dgeGetEffectiveFeatureFlags() : {};
+    const m = (typeof marks !== 'undefined') ? marks[i] : null;
+    const isFav = !!(m && m.fav);
+    const status = m ? m.status : null;
+    const isDoubt = !!(m && m.doubt);
+    const noteCount = (typeof notes !== 'undefined' && notes[i]) ? notes[i].length : 0;
+    const snipCount = (typeof snippets !== 'undefined' && snippets[i]) ? snippets[i].length : 0;
+    const canStudy = document.body.classList.contains('is-authorized');
+
+    const stateClasses = [
+      activeId === i ? 'active' : '',
+      (canStudy && status === 'done') ? 'state-done' : '',
+      (canStudy && status === 'practice') ? 'state-progress' : ''
+    ].filter(Boolean).join(' ');
+
     const c = document.createElement('div');
-    c.className = `shloka-card ${activeId===i ? 'active':''}`; 
+    c.className = `shloka-card ${stateClasses}`.trim();
     c.id = `shloka-${i}`;
 
-    let cardActionsHtml = '';
-    
-    if (document.body.classList.contains('is-authorized')) {
-      const flags = (typeof dgeGetEffectiveFeatureFlags === 'function') ? dgeGetEffectiveFeatureFlags() : {};
-      const m = (typeof marks !== 'undefined') ? marks[i] : null;
-      const isFav = !!(m && m.fav);
-      const status = m ? m.status : null;
-      const isDoubt = !!(m && m.doubt);
-      const noteCount = (typeof notes !== 'undefined' && notes[i]) ? notes[i].length : 0;
-      const snipCount = (typeof snippets !== 'undefined' && snippets[i]) ? snippets[i].length : 0;
-
-      const iconImg = (name, size) => `<img src="images/icon-${name}.png" width="${size}" height="${size}" alt="" style="display:block;">`;
-      const statusIconFiles = { pending: 'status-pending', practice: 'status-practice', done: 'status-done' };
-      const statusIconFile = status ? statusIconFiles[status] : 'status-none';
-      const statusClass = status ? ` active-status-${status}` : '';
-
-      let rowHtml = '';
-      if (flags.showFavorite) rowHtml += `<button class="chip-toggle${isFav ? ' active-fav' : ''}" title="Favorite" onclick="event.stopPropagation(); window.toggleFavorite(${i})">${iconImg(isFav ? 'star-filled' : 'star-outline', 10)}</button>`;
-      if (flags.showStatus) rowHtml += `<button class="chip-toggle status-picker-btn${statusClass}" title="Set status" onclick="window.openStatusPicker(${i}, event)">${iconImg(statusIconFile, 11)}</button>`;
-      if (flags.showDoubt) rowHtml += `<button class="chip-toggle${isDoubt ? ' active-doubt' : ''}" title="Doubt" onclick="event.stopPropagation(); window.toggleDoubt(${i})">${iconImg(isDoubt ? 'question-filled' : 'question-outline', 10)}</button>`;
-      if (flags.showNotes && noteCount > 0) rowHtml += `<span class="status-chip has-note" title="${noteCount} note(s)">${iconImg('note', 9)} ${noteCount}</span>`;
-      if (flags.showSnippetTools && snipCount > 0) rowHtml += `<span class="status-chip" title="${snipCount} saved snippet(s)">${iconImg('snippet', 9)} ${snipCount}</span>`;
-      rowHtml += `<button class="btn-icon" style="margin-left:auto;" title="Notes, snippets, share, download" onclick="event.stopPropagation(); if(typeof openActionsSheet==='function') openActionsSheet(${i})">${iconImg('more', 10)}</button>`;
-
-      cardActionsHtml = `<div class="shloka-status-row">${rowHtml}</div>`;
+    let badgesHtml = '';
+    if (canStudy && (isFav || isDoubt || noteCount > 0 || snipCount > 0)) {
+      badgesHtml = '<div class="shloka-badges">';
+      if (isFav) badgesHtml += '<span class="shloka-badge shloka-badge-fav" title="Favorite" aria-label="Favorite">★</span>';
+      if (isDoubt) badgesHtml += '<span class="shloka-badge shloka-badge-doubt" title="Marked as doubt" aria-label="Marked as doubt">?</span>';
+      if (noteCount > 0) badgesHtml += `<span class="shloka-badge" title="${noteCount} note(s)" aria-label="${noteCount} notes">${noteCount}✎</span>`;
+      if (snipCount > 0) badgesHtml += `<span class="shloka-badge" title="${snipCount} saved snippet(s)" aria-label="${snipCount} saved snippets">${snipCount}✂</span>`;
+      badgesHtml += '</div>';
     }
+
+    const moreBtnHtml = canStudy
+      ? `<button type="button" class="shloka-more-btn" title="Shloka ${i} actions" aria-label="Shloka ${i} actions" onclick="event.stopPropagation(); if (typeof window.dgeOpenContextualMenu === 'function') window.dgeOpenContextualMenu('shloka', {shlokaId:${i}}); else if (typeof openActionsSheet==='function') openActionsSheet(${i});">⋯</button>`
+      : '';
 
     let commentaryHtml = '';
     if (shloka.commentaries) {
@@ -589,12 +603,13 @@ function renderList() {
       ? `<button type="button" class="dge-appview-toggle" onclick="event.stopPropagation(); window.dgeToggleCardExpanded(this)">▾ Show commentary</button>` : '';
 
     c.innerHTML = `
-      ${cardActionsHtml}
       <div class="shloka-main-row">
         <div class="shloka-num">${i}</div>
+        ${badgesHtml}
         <div class="shloka-text" onclick="if(!window.dgeContentEditMode && typeof loadShloka==='function') loadShloka(${i})">${mulaHtml}</div>
         ${window.dgeContentEditMode ? `<button class="btn-icon" title="Edit this shloka's text" onclick="event.stopPropagation(); window.dgeInlineEditShloka(${i})">✏️</button>` : ''}
         <button class="btn-icon copy-shloka-btn" title="Copy shloka text" onclick="event.stopPropagation(); if(typeof copyShlokaText==='function') copyShlokaText(${i})">📋</button>
+        ${moreBtnHtml}
       </div>
       ${footnoteListHtml}
       ${appViewToggleHtml}
