@@ -226,219 +226,6 @@
      "kanda_20": {}
     }
    }
-  },
-  "upaveda": {
-   "ayurveda": {
-    "samhita": {
-     "caraka_samhita": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Agnivesha (redacted by Charaka)"
-      },
-      "tika_ayurvedadipika": {
-       "_schema": "grantha_tika_text",
-       "_default_author": "Chakrapanidatta"
-      },
-      "tika_tattvapradipika": {
-       "_schema": "grantha_tika_text"
-      }
-     },
-     "sushruta_samhita": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Sushruta"
-      },
-      "tika_nibandhasangraha": {
-       "_schema": "grantha_tika_text",
-       "_default_author": "Dalhana"
-      }
-     },
-     "ashtanga_hridaya_samhita": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Vagbhata"
-      },
-      "tika_sarvangasundara": {
-       "_schema": "grantha_tika_text",
-       "_default_author": "Arunadatta"
-      },
-      "tika_padarthacandrika": {
-       "_schema": "grantha_tika_text"
-      },
-      "tika_indu": {
-       "_schema": "grantha_tika_text",
-       "_default_author": "Indu"
-      },
-      "tika_hemadri": {
-       "_schema": "grantha_tika_text",
-       "_default_author": "Hemadri"
-      }
-     },
-     "ashtanga_sangraha": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Vagbhata"
-      }
-     },
-     "bhavaprakasha": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Bhavamishra"
-      }
-     },
-     "nadi_pariksha": {
-      "mula": {
-       "_schema": "grantha_mula_text"
-      }
-     },
-     "yogaratnakara": {
-      "mula": {
-       "_schema": "grantha_mula_text"
-      }
-     }
-    },
-    "nighantu": {
-     "ashtanga_nighantu": {
-      "mula": {
-       "_schema": "grantha_mula_text"
-      }
-     },
-     "bija_nighantu": {
-      "mula": {
-       "_schema": "grantha_mula_text"
-      }
-     },
-     "dhanvantari_nighantu": {
-      "mula": {
-       "_schema": "grantha_mula_text"
-      }
-     },
-     "kaiyadeva_nighantu": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Kaiyadeva"
-      }
-     },
-     "madanapala_nighantu": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Madanapala"
-      }
-     },
-     "raja_nighantu": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Narahari Pandita"
-      }
-     },
-     "nighantushesha": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Hemachandra"
-      }
-     }
-    },
-    "rasashastra": {
-     "rasahridaya_tantra": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Govinda Bhagavatpada"
-      }
-     },
-     "rasakamadhenu": {
-      "mula": {
-       "_schema": "grantha_mula_text"
-      }
-     },
-     "rasamanjari": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Shalinatha"
-      }
-     },
-     "rasaprakashasudhakara": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Yashodhara Bhatta"
-      }
-     },
-     "rasaratnasamuccaya": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Vagbhata (rasashastra author)"
-      },
-      "tika_bodhini": {
-       "_schema": "grantha_tika_text"
-      },
-      "tika_dipika": {
-       "_schema": "grantha_tika_text"
-      },
-      "tika": {
-       "_schema": "grantha_tika_text"
-      }
-     },
-     "rasaratnakara": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Nityanatha Siddha"
-      }
-     },
-     "rasasanketakalika": {
-      "mula": {
-       "_schema": "grantha_mula_text"
-      }
-     },
-     "rasatarangini": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Sadananda Sharma"
-      }
-     },
-     "rasendracintamani": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Dhundhukanatha"
-      }
-     },
-     "rasendracudamani": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Somadeva"
-      }
-     },
-     "rasendrasarasangraha": {
-      "mula": {
-       "_schema": "grantha_mula_text",
-       "_default_author": "Gopalakrishna Bhatta"
-      }
-     },
-     "rasarnava": {
-      "mula": {
-       "_schema": "grantha_mula_text"
-      }
-     },
-     "rasarnavakalpa": {
-      "mula": {
-       "_schema": "grantha_mula_text"
-      }
-     },
-     "rasadhyaya": {
-      "mula": {
-       "_schema": "grantha_mula_text"
-      },
-      "tika": {
-       "_schema": "grantha_tika_text"
-      }
-     }
-    }
-   },
-   "dhanurveda": {
-    "mula": {
-     "_schema": "grantha_mula_text"
-    }
-   },
-   "gandharvaveda": {},
-   "sthapatyaveda": {}
   }
  },
  "purana": {
@@ -5469,8 +5256,12 @@
    "_schema": "vedanga_chandas_vrutta_database",
    "vrittaratnakara": {}
   },
-  "nirukta": {},
-  "jyotisha": {}
+  "nirukta": {
+   "mula": {}
+  },
+  "jyotisha": {
+   "mula": {}
+  }
  },
  "dasa_sahitya": {
   "_schema": "dasa_pada_text",
@@ -6257,19 +6048,225 @@
   }
  },
  "upaveda": {
-  "_note": "Traditional Upaveda (subsidiary Veda) subjects, distinct from the four Vedas proper and from vedanga. Placement decision made 20 Aug 2026 (was an open question in PENDING.md) -- Ayurveda and Kamashastra grouped here as their traditional classification; Nitishastra kept as its own separate top-level section below since it is not traditionally an Upaveda.",
-  "kamashastra": {
-   "kamasutra": {},
-   "pancashayaka": {},
-   "smaradipika": {}
-  },
+  "_note": "Traditional Upaveda (subsidiary Veda) subjects, distinct from the four Vedas proper and from vedanga. Placement decision made 20 Aug 2026 (was an open question in PENDING.md) put Ayurveda and Kamashastra here as their traditional classification. Reversed 28 Aug 2026, project lead's explicit correction: Kamashastra is not traditionally one of the Upavedas in most classical enumerations (the common list is Ayurveda/Dhanurveda/Gandharvaveda/Arthashastra or Sthapatyaveda) -- moved out entirely to shastra.kama_shastra, consolidating it with the independently-added shastra/kama_shastra/mula duplicate found there at the same time (see core.js DGE_LEGACY_SLUGS). Ayurveda stays here. This same 28 Aug pass also merged in a second, uncoordinated 'vedas.upaveda' tree (fuller Ayurveda Samhita/Rasashastra content plus a real Dhanurveda text) that had grown up nested under vedas/ instead of here, and added Gandharvaveda/Sthapatyaveda as honest pending placeholders to round out the traditional four -- Nitishastra is kept as its own separate top-level section below since it is not traditionally an Upaveda either.",
   "ayurveda": {
+   "samhita": {
+    "caraka_samhita": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Agnivesha (redacted by Charaka)"
+     },
+     "tika_ayurvedadipika": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Chakrapanidatta"
+     },
+     "tika_tattvapradipika": {
+      "_schema": "grantha_tika_text"
+     }
+    },
+    "sushruta_samhita": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Sushruta"
+     },
+     "tika_nibandhasangraha": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Dalhana"
+     }
+    },
+    "ashtanga_hridaya_samhita": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Vagbhata"
+     },
+     "tika_sarvangasundara": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Arunadatta"
+     },
+     "tika_padarthacandrika": {
+      "_schema": "grantha_tika_text"
+     },
+     "tika_indu": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Indu"
+     },
+     "tika_hemadri": {
+      "_schema": "grantha_tika_text",
+      "_default_author": "Hemadri"
+     }
+    },
+    "ashtanga_sangraha": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Vagbhata"
+     }
+    },
+    "bhavaprakasha": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Bhavamishra"
+     }
+    },
+    "nadi_pariksha": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "yogaratnakara": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    }
+   },
    "nighantu": {
     "bhavaprakasha_nighantu": {},
-    "vahata_ashtanganighantu": {}
+    "vahata_ashtanganighantu": {},
+    "ashtanga_nighantu": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "bija_nighantu": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "dhanvantari_nighantu": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "kaiyadeva_nighantu": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Kaiyadeva"
+     }
+    },
+    "madanapala_nighantu": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Madanapala"
+     }
+    },
+    "raja_nighantu": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Narahari Pandita"
+     }
+    },
+    "nighantushesha": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Hemachandra"
+     }
+    }
+   },
+   "rasashastra": {
+    "rasahridaya_tantra": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Govinda Bhagavatpada"
+     }
+    },
+    "rasakamadhenu": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "rasamanjari": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Shalinatha"
+     }
+    },
+    "rasaprakashasudhakara": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Yashodhara Bhatta"
+     }
+    },
+    "rasaratnasamuccaya": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Vagbhata (rasashastra author)"
+     },
+     "tika_bodhini": {
+      "_schema": "grantha_tika_text"
+     },
+     "tika_dipika": {
+      "_schema": "grantha_tika_text"
+     },
+     "tika": {
+      "_schema": "grantha_tika_text"
+     }
+    },
+    "rasaratnakara": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Nityanatha Siddha"
+     }
+    },
+    "rasasanketakalika": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "rasatarangini": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Sadananda Sharma"
+     }
+    },
+    "rasendracintamani": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Dhundhukanatha"
+     }
+    },
+    "rasendracudamani": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Somadeva"
+     }
+    },
+    "rasendrasarasangraha": {
+     "mula": {
+      "_schema": "grantha_mula_text",
+      "_default_author": "Gopalakrishna Bhatta"
+     }
+    },
+    "rasarnava": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "rasarnavakalpa": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     }
+    },
+    "rasadhyaya": {
+     "mula": {
+      "_schema": "grantha_mula_text"
+     },
+     "tika": {
+      "_schema": "grantha_tika_text"
+     }
+    }
    },
    "madhava_nidana": {},
    "sharngadhara_samhita": {}
+  },
+  "dhanurveda": {
+   "mula": {
+    "_schema": "grantha_mula_text"
+   }
+  },
+  "gandharvaveda": {
+   "mula": {}
+  },
+  "sthapatyaveda": {
+   "mula": {}
   }
  },
  "misc": {
@@ -6289,10 +6286,15 @@
    }
   },
   "kama_shastra": {
-   "mula": {
-    "_schema": "grantha_mula_text",
-    "_default_author": "Vatsyayana"
-   }
+   "kamasutra": {
+    "mula_gretil": {},
+    "mula_dcs": {
+     "_schema": "grantha_mula_text",
+     "_default_author": "Vatsyayana"
+    }
+   },
+   "pancashayaka": {},
+   "smaradipika": {}
   },
   "niti_shastra": {
    "artha_shastra": {
