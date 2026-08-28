@@ -302,6 +302,13 @@ async function playShloka(id) {
   currentAudio.play().catch(err => {
     if(err.name !== 'AbortError') console.error("Playback error:", err);
   });
+  // Show the player the instant Play is actually pressed (currentAudio.play()
+  // sets .paused=false synchronously, before the 'playing' event and before
+  // its own promise settles) rather than waiting on that event -- on a slow
+  // connection, or one that never fires because playback ultimately errors
+  // out, waiting for 'playing' could mean an explicit Play never shows
+  // anything at all. See dgeUpdateBottomPlayerVisibility()'s doc comment.
+  dgeUpdateBottomPlayerVisibility();
 }
 
 function togglePlay() {
@@ -332,9 +339,10 @@ function togglePlay() {
       }
       else if (!loopB.value) { 
         loopB.value = curr; 
-        enableAB.checked = true; 
-        currentAudio.currentTime = parseFloat(loopA.value); 
-        currentAudio.play(); 
+        enableAB.checked = true;
+        currentAudio.currentTime = parseFloat(loopA.value);
+        currentAudio.play();
+        dgeUpdateBottomPlayerVisibility();
       }
       else { 
         loopA.value = ""; 
@@ -342,8 +350,9 @@ function togglePlay() {
         enableAB.checked = false; 
       }
     }
-  } else { 
-    currentAudio.play(); 
+  } else {
+    currentAudio.play();
+    dgeUpdateBottomPlayerVisibility(); // see playShloka()'s comment on why this can't just wait for 'playing'
   }
 }
 
@@ -451,9 +460,13 @@ if (currentAudio) {
     if (!activeId || !stotraData) return;
     const timeDisplay = document.getElementById('timeDisplay');
     
-    if (audioRetryDone) { 
-      if (timeDisplay) timeDisplay.innerText = "Audio unavailable"; 
-      return; 
+    if (audioRetryDone) {
+      if (timeDisplay) timeDisplay.innerText = "Audio unavailable";
+      // Still an explicit Play that was attempted -- show the player so the
+      // reader can see the error/controls, rather than it silently staying
+      // hidden because 'playing' never fired.
+      dgeUpdateBottomPlayerVisibility();
+      return;
     }
     
     audioRetryDone = true;
