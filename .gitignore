@@ -27,6 +27,13 @@ ui-debug.log
 .firebase/
 # Real project ids / aliases stay out of the repo — see .firebaserc.example
 dge/firebase/.firebaserc
+# Local-only Firebase Functions config/secret overrides (the Firebase CLI
+# loads .env.local and .secret.local automatically for both `deploy` and
+# `emulators:*`) -- .env.dge-test IS committed since it holds no secret,
+# only OTP_PROVIDER=console for the "dge-test" project's e2e run; these two
+# are the ones real values or per-developer overrides land in.
+dge/firebase/functions/.env.local
+dge/firebase/functions/.secret.local
 
 # The built Sanskrit WordNet tree (tools/build_wordnet.py, 24 MB). Deliberately
 # NOT on main: the published site sits about 1% under the GitHub Pages 1 GB

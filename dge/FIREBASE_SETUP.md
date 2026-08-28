@@ -205,8 +205,9 @@ registrar. SSL and custom domains are free either way.
 
 ## 10. What is and isn't tested
 
-**Tested — 234 tests, no credentials, no cost** (`cd dge/firebase/tests
-&& npm install && npm run test:all`):
+**Tested — 249 tests, no credentials, no cost** (`cd dge/firebase/tests
+&& npm install && npm run test:all` — `test:all` also needs `cd
+../functions && npm install` once, for the end-to-end suite):
 
 - The OTP state machine: expiry to the millisecond, attempt caps
   (including that a correct code fails once the cap is hit), per-number
@@ -227,6 +228,22 @@ registrar. SSL and custom domains are free either way.
   profile is always created as `basic` with consent off even if
   `config.js` is tampered with, and that the whole feature stays inert
   when disabled.
+- **`index.js` itself, end to end, against the real functions + Firestore
+  + auth emulators** (`npm run test:e2e`, `dge/firebase/tests/e2e.spec.js`):
+  send → store hashed → verify → mint a custom token → create the profile
+  document, the resend cooldown, the attempt cap, replay protection, and
+  the webhook's signature/handshake checks — all through the deployed
+  function code, not a stub. This is the one file the rest of the suite
+  cannot reach (it's the Firebase-shaped shell around the tested logic:
+  secrets, transactions, custom tokens), and the one time it was written
+  without ever being run, it failed immediately — `admin.firestore.
+  FieldValue` reads back as `undefined` through the functions emulator's
+  proxy of the `firebase-admin` root export, so every `serverTimestamp()`
+  threw. Fixed by moving to the modular `firebase-admin/{app,firestore,
+  auth}` imports, which don't go through that proxy. See
+  `dge/firebase/tests/README.md` for what `test:e2e` needs locally
+  (`functions/.secret.local`, git-ignored, for the `defineSecret()`
+  params it can't reach without `firebase login`).
 
 **Not tested, and only observable against live accounts:**
 
@@ -234,10 +251,6 @@ registrar. SSL and custom domains are free either way.
   approved, that messages actually arrive.
 - reCAPTCHA behaviour for the `firebase` SMS channel.
 - Real billing. Set a budget cap before the first real send.
-- The `console` OTP provider refuses to run outside an emulator by
-  design, so the end-to-end flow can be walked through locally without
-  spending anything: `firebase emulators:start`, `OTP_PROVIDER=console`,
-  and read the code from the function logs.
 
 ## 11. Deliberately not built
 
