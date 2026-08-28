@@ -29,7 +29,8 @@
     sort: LS.get("sort","code"),
     q:"", openId: LS.get("open",null),
     vset: null,  // map of codes that have dhātuvṛtti entries (Mādhavīya/Kṣīra/Dhātupradīpa)
-    lex: null    // map of code -> dhatu_lexicon entry (AI multilingual meanings + pedagogy)
+    lex: null,   // map of code -> dhatu_lexicon entry (AI multilingual meanings + pedagogy)
+    bookmarks: LS.get("bookmarks", {}) // map of code -> true, DGE UI Contract "dhatuRoot" contextual action
   };
   var LEX_LANGS = ["English","Kannada","Telugu","Tamil","Malayalam","Hindi","Bengali","German","French","Russian","Chinese"];
 
@@ -67,10 +68,11 @@
   function rowHTML(it){
     var devCls = state.script==="iast"?"":"deva";
     var open = (it.id===state.openId);
+    var bookmarked = !!(state.bookmarks && state.bookmarks[it.id]);
     var pill = it.pada_code, pdev = tl(it.pada);
-    return '<article class="row '+(open?"open":"")+'" id="d-'+it.id+'" data-id="'+it.id+'" style="--tag:'+padaClass(it.pada_code)+'">'
+    return '<article class="row '+(open?"open":"")+(bookmarked?" bookmarked":"")+'" id="d-'+it.id+'" data-id="'+it.id+'" style="--tag:'+padaClass(it.pada_code)+'">'
       +'<div class="rhead">'
-        +'<span class="rcode">'+it.id+'</span>'
+        +'<span class="rcode">'+(bookmarked?'★ ':'')+it.id+'</span>'
         +'<span class="rdha '+devCls+'">'+esc(tl(it.dhatu))+'</span>'
         +'<span class="rartha '+devCls+'">'+esc(tl(it.artha))+'</span>'
         +'<span class="rpada" style="background:'+padaClass(pill)+'" title="'+it.pada_iast+'">'+esc(pdev)+'</span>'
@@ -104,6 +106,7 @@
       +'<a class="btn ai" href="rupasiddhi.html#'+it.id+'" title="उपसर्ग-योजना, सनादि, सर्वे 11 लकाराः, कृदन्त-declensions — every form derived live, step by step">✨ रूपसिद्धिः · उपसर्गैः</a>'
       +'<a class="btn" href="ashtadhyayi.html" title="open the sūtra reader">↔ अष्टाध्यायी</a>'
       +'<button class="btn" data-corpus-search="'+esc(it.dhatu)+'" title="Find every place this root appears across the DGE corpus">🔍 corpus occurrences</button>'
+      +'<button class="btn" data-dh-more="'+it.id+'" title="More actions for this root" aria-label="More actions for '+esc(tl(it.dhatu))+'">⋯ More</button>'
       +'</div>';
     if(state.vset && state.vset[it.id]){
       h+='<div class="vrit" data-vrit="'+it.id+'"><button class="btn vrit-btn">📜 वृत्तयः · Mādhavīya · Kṣīra · Dhātupradīpa ›</button></div>';
@@ -171,6 +174,13 @@
       // the [data-occur] popover in intellisense.js).
       if(cs){ e.stopPropagation();
         if(typeof window.DGEGlobalSearch === "object" && window.DGEGlobalSearch.open) window.DGEGlobalSearch.open(cs.dataset.corpusSearch);
+        return; }
+      var mo=e.target.closest("[data-dh-more]");
+      if(mo){ e.stopPropagation();
+        var id=mo.getAttribute("data-dh-more"), it=state.all.find(function(x){return x.id===id;});
+        if(it && typeof window.dgeOpenContextualMenu==="function"){
+          window.dgeOpenContextualMenu("dhatuRoot", {id:id, label:tl(it.dhatu)+" — "+tl(it.artha)});
+        }
         return; }
       if(e.target.closest(".acts")) return; // let derivation/reader links navigate
       var h=e.target.closest(".rhead"); if(h) toggleRow(h.parentElement.dataset.id);
@@ -321,6 +331,62 @@
     box.innerHTML=h;
   }
 
+  /* DGE UI Contract retrofit (28 Aug 2026): a new "dhatuRoot" contextual-
+     actions object type, the same pattern ashtadhyayi.js uses for "sutra"/
+     "commentary" (window.dgeRegisterContextualActions, see
+     DGE_UI_CONTRACT.md Part IV §3) -- actions with no existing home only:
+     copy citation/entry text and a real localStorage-backed bookmark.
+     Deliberately does NOT duplicate the derivation links, corpus-occurrence
+     search, or vṛtti/lexicon reveal buttons already sitting inline in
+     .acts — those already have a canonical home (critique #29's "one
+     canonical home per action" rule). */
+  function registerDhatuContextualActions(){
+    if(typeof window.dgeRegisterContextualActions!=="function") return;
+    window.dgeRegisterContextualActions({
+      objectTypes:["dhatuRoot"],
+      add:[
+        {id:"bookmark", icon:"bookmark", label:"Bookmark this root", action:"dgeCtxDhatuBookmark"},
+        {id:"copyCitation", icon:"copy", label:"Copy citation", action:"dgeCtxDhatuCopyCitation"},
+        {id:"copyEntry", icon:"copy", label:"Copy full entry", action:"dgeCtxDhatuCopyEntry"}
+      ]
+    });
+  }
+  function dhatuCiteText(it){
+    return "√"+tl(it.dhatu)+" ("+it.gana+". "+tl(GANA[it.gana]||"")+" gaṇa, "+tl(it.pada)+
+      (it.set?", "+it.set:"")+") — \""+tl(it.artha)+"\" — Pāṇinīya Dhātupāṭha, DGE ("+
+      location.href.split("#")[0]+"#"+it.id+")";
+  }
+  async function dgeCopyText(text, okMessage){
+    try{
+      if(navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+      else { var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.left="-9999px";
+        document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); }
+      if(typeof window.showToast==="function") window.showToast(okMessage||"Copied.");
+    } catch(e){ if(typeof window.showToast==="function") window.showToast("Could not copy — select and copy manually."); }
+  }
+  window.dgeCtxDhatuCopyCitation = function(ctx){
+    var it=state.all.find(function(x){return x.id===ctx.id;}); if(!it) return;
+    dgeCopyText(dhatuCiteText(it), "Citation copied.");
+  };
+  window.dgeCtxDhatuCopyEntry = function(ctx){
+    var el=$("#d-"+CSS.escape(ctx.id)); var body=el&&el.querySelector(".rbody");
+    var it=state.all.find(function(x){return x.id===ctx.id;}); if(!it) return;
+    var text=(body&&body.textContent.trim())?body.textContent.replace(/\s+/g," ").trim():dhatuCiteText(it);
+    dgeCopyText(text, "Entry copied.");
+  };
+  window.dgeCtxDhatuBookmark = function(ctx){
+    var id=ctx.id; if(!id) return;
+    state.bookmarks[id] = !state.bookmarks[id];
+    LS.set("bookmarks", state.bookmarks);
+    var row=$("#d-"+CSS.escape(id));
+    if(row){
+      row.classList.toggle("bookmarked", !!state.bookmarks[id]);
+      var codeEl=row.querySelector(".rcode");
+      if(codeEl) codeEl.textContent=(state.bookmarks[id]?"★ ":"")+id;
+    }
+    if(typeof window.showToast==="function") window.showToast(state.bookmarks[id]?"Bookmarked.":"Bookmark removed.");
+  };
+
   function openById(id){
     var it=state.all.find(function(x){return x.id===id;}); if(!it) return;
     // set the open target BEFORE rendering so only this row renders open
@@ -340,6 +406,7 @@
     var ss=$("#dh-scriptSeg"); if(ss) ss.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on",b.dataset.s===state.script); });
     $("#dh-sort").value=state.sort;
     buildGanaChips(); syncPadaChips(); syncSetChips(); syncKarmaChips(); wire(); applyFont();
+    registerDhatuContextualActions();
     fetch("../data/vedanga/vyakarana/vritti/index.json").then(function(r){return r.ok?r.json():null;}).then(function(idx){
       state.vset={}; if(idx) (idx.available||[]).forEach(function(c){ state.vset[c]=1; });
       // if a row is already open, re-render its body so the vṛtti toggle appears

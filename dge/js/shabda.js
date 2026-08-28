@@ -17,7 +17,8 @@
     set:function(k,v){ try{ localStorage.setItem("dge.shabda."+k, JSON.stringify(v)); }catch(e){} }
   };
   var state = { all:[], view:[], page:0, script: LS.get("script","devanagari"), linga: LS.get("linga",""), anta: LS.get("anta",""),
-                adi:"", upadha:"", krt:"", vac:"", q:"", openId: LS.get("open",null), highlightCell:null };
+                adi:"", upadha:"", krt:"", vac:"", q:"", openId: LS.get("open",null), highlightCell:null,
+                bookmarks: LS.get("bookmarks", {}) }; // DGE UI Contract "subantaWord" contextual action
 
   // Kṛt pratyaya display names for the प्रत्ययान्तः filter — keys are the
   // vidyut pratyaya identifiers tools/tag_shabda_pratyaya.py wrote into the
@@ -130,14 +131,16 @@
     if(it.artha_eng) h+=kv("English", esc(it.artha_eng));
     h+=kv("लिङ्गः · gender", esc(tl(it.linga_iast)));
     h+=declTable(it.forms, it.id===state.openId?state.highlightCell:null);
+    h+='<div class="acts"><button class="btn" data-sh-more="'+esc(it.id)+'" title="More actions for this word" aria-label="More actions for '+esc(tl(it.word))+'">⋯ More</button></div>';
     return h;
   }
   function rowHTML(it){
     var devCls = state.script==="iast"?"":"deva";
     var open=(it.id===state.openId);
-    return '<article class="row '+(open?"open":"")+'" id="s-'+esc(it.id)+'" data-id="'+esc(it.id)+'">'
+    var bookmarked = !!(state.bookmarks && state.bookmarks[it.id]);
+    return '<article class="row '+(open?"open":"")+(bookmarked?" bookmarked":"")+'" id="s-'+esc(it.id)+'" data-id="'+esc(it.id)+'">'
       +'<div class="rhead">'
-        +'<span class="rdha '+devCls+'">'+esc(tl(it.word))+'</span>'
+        +'<span class="rdha '+devCls+'">'+(bookmarked?'★ ':'')+esc(tl(it.word))+'</span>'
         +(it.artha?'<span class="rartha '+devCls+'">'+esc(tl(it.artha))+'</span>':'<span class="rartha"></span>')
         +'<span class="rgana '+devCls+'">'+esc(tl(it.linga_iast))+'</span>'
         +'<span class="rcaret">▸</span>'
@@ -274,6 +277,13 @@
     $("#sh-list").addEventListener("click",function(e){
       var td=e.target.closest("td[data-ci]");
       if(td){ cellSteps(td); return; }
+      var mo=e.target.closest("[data-sh-more]");
+      if(mo){ e.stopPropagation();
+        var id=mo.getAttribute("data-sh-more"), it=state.all.find(function(x){return x.id===id;});
+        if(it && typeof window.dgeOpenContextualMenu==="function"){
+          window.dgeOpenContextualMenu("subantaWord", {id:id, label:tl(it.word)+(it.artha?" — "+tl(it.artha):"")});
+        }
+        return; }
       var h=e.target.closest(".rhead"); if(h) toggleRow(h.parentElement.dataset.id);
     });
     $("#sh-prev").addEventListener("click",function(){ if(state.page>0){ state.page--; render(); window.scrollTo({top:0,behavior:"smooth"}); } });
@@ -454,14 +464,13 @@
     var rep=$("#sh-report-missing");
     if(rep) rep.addEventListener("click",function(e){
       e.preventDefault();
-      // shabda.html is deliberately minimal (no modals.js/config.js) so
-      // this doesn't depend on window.dgeReportMissingForm (modals.js's
-      // version, for pages that already load it) — same template tag and
-      // field shape either way, kept in sync by hand since it's only a
-      // few lines. See modals.js's own copy for the full reasoning on why
-      // the shape matters (a future scheduled process matching only this
-      // exact tag+field format, everything else ignored or routed to a
-      // human).
+      // shabda.html now loads modals.js (DGE UI Contract retrofit, 28 Aug
+      // 2026), so window.dgeReportMissingForm is normally defined and used
+      // below — this mailto fallback stays as a defensive path (matching
+      // the same template tag/field shape by hand) in case that ever isn't
+      // true. See modals.js's own copy for the full reasoning on why the
+      // shape matters (a future scheduled process matching only this exact
+      // tag+field format, everything else ignored or routed to a human).
       if(typeof window.dgeReportMissingForm==="function"){ window.dgeReportMissingForm(surface,"shabda"); return; }
       var email=window.DGE_CONTACT_EMAIL||"sanatanavidyagurukulam@gmail.com";
       var subject=encodeURIComponent("[DGE-CONTENT-GAP] missing-form — "+surface);
@@ -471,10 +480,59 @@
     });
   }
 
+  /* DGE UI Contract retrofit (28 Aug 2026): a new "subantaWord" contextual-
+     actions object type, same pattern as dhatu.js's "dhatuRoot" (which
+     mirrors ashtadhyayi.js's "sutra"/"commentary" — see
+     DGE_UI_CONTRACT.md). Copy citation/table text and a real bookmark —
+     nothing here duplicates the per-cell derivation popover
+     (subanta-steps.js's cellSteps()), which already owns that job. */
+  function registerShabdaContextualActions(){
+    if(typeof window.dgeRegisterContextualActions!=="function") return;
+    window.dgeRegisterContextualActions({
+      objectTypes:["subantaWord"],
+      add:[
+        {id:"bookmark", icon:"bookmark", label:"Bookmark this word", action:"dgeCtxShabdaBookmark"},
+        {id:"copyCitation", icon:"copy", label:"Copy citation", action:"dgeCtxShabdaCopyCitation"},
+        {id:"copyTable", icon:"copy", label:"Copy declension table", action:"dgeCtxShabdaCopyTable"}
+      ]
+    });
+  }
+  async function dgeCopyText(text, okMessage){
+    try{
+      if(navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+      else { var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.left="-9999px";
+        document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); }
+      if(typeof window.showToast==="function") window.showToast(okMessage||"Copied.");
+    } catch(e){ if(typeof window.showToast==="function") window.showToast("Could not copy — select and copy manually."); }
+  }
+  function shabdaCiteText(it){
+    return tl(it.word)+" ("+tl(it.linga_iast)+(it.artha?", \""+tl(it.artha)+"\"":"")+
+      ") — Śabdapāṭha, DGE ("+location.href.split("#")[0]+"#"+it.id+")";
+  }
+  window.dgeCtxShabdaCopyCitation = function(ctx){
+    var it=state.all.find(function(x){return x.id===ctx.id;}); if(!it) return;
+    dgeCopyText(shabdaCiteText(it), "Citation copied.");
+  };
+  window.dgeCtxShabdaCopyTable = function(ctx){
+    var el=$("#s-"+CSS.escape(ctx.id)); var body=el&&el.querySelector(".rbody table");
+    var it=state.all.find(function(x){return x.id===ctx.id;}); if(!it) return;
+    var text=body?body.innerText.replace(/[ \t]+/g," ").trim():shabdaCiteText(it);
+    dgeCopyText(shabdaCiteText(it)+"\n\n"+text, "Declension table copied.");
+  };
+  window.dgeCtxShabdaBookmark = function(ctx){
+    var id=ctx.id; if(!id) return;
+    state.bookmarks[id] = !state.bookmarks[id];
+    LS.set("bookmarks", state.bookmarks);
+    var row=$("#s-"+CSS.escape(id));
+    if(row) row.classList.toggle("bookmarked", !!state.bookmarks[id]);
+    if(typeof window.showToast==="function") window.showToast(state.bookmarks[id]?"Bookmarked.":"Bookmark removed.");
+  };
+
   function boot(){
     if(LS.get("dark",false)) document.body.classList.add("dark");
     var ss=$("#sh-scriptSeg"); if(ss) ss.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on",b.dataset.s===state.script); });
     syncLingaChips(); syncAntaChips(); wire();
+    registerShabdaContextualActions();
     fetch(URL).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(d){
       state.all=(d.items||[]).map(function(it){
         // forms included so a search for an inflected word (e.g. परस्य,

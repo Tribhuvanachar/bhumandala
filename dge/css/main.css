@@ -350,8 +350,13 @@ details.dge-analysis-field[open] > summary.commentary-title { margin-bottom: 8px
 .dge-commentary-tab:hover { opacity: 1; }
 .dge-commentary-tab.active { opacity: 1; background: var(--accent-gold); color: #1a1208; border-color: transparent; }
 
-/* Bottom Toolbar — floating frosted panel */
-.bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border-top: 1px solid var(--card-border); border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.10); z-index: 9999; box-sizing: border-box; padding-bottom: env(safe-area-inset-bottom); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease); }
+/* Bottom Toolbar — floating frosted panel. Hidden by default: only shown
+   once js/audio.js's dgeUpdateBottomPlayerVisibility() adds
+   .dge-audio-active, which it does only after AudioState (reader-state.js)
+   reports something other than idle/loaded — i.e. the reader has explicitly
+   pressed Play, never as a side effect of navigation/selection/search. */
+.bottom-player { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); backdrop-filter: blur(var(--glass-blur)); -webkit-backdrop-filter: blur(var(--glass-blur)); border-top: 1px solid var(--card-border); border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,0.10); z-index: 9999; box-sizing: border-box; padding-bottom: env(safe-area-inset-bottom); transition: background var(--t-med) var(--ease), border-color var(--t-med) var(--ease); }
+.bottom-player.dge-audio-active { display: block; }
 .player-inner { max-width: 650px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 8px 4px; box-sizing: border-box; gap: 4px; }
 
 .controls-main { display: flex; gap: 8px; justify-content: center; }

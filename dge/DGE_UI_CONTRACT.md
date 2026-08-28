@@ -11,6 +11,12 @@ policy, and which renderers still need to be brought onto them. Matches this
 repo's existing convention of a named architecture doc, alongside
 dge/SEARCH_ARCHITECTURE.md._
 
+_Updated later the same day (second pass): Dhātu/Śabda retrofitted onto the
+contract (Part III/VI), a new sitewide right-side nav rail formalized and
+built (Part VII), and the persistent bottom-audio-player bug fixed
+sitewide (Part VIII, critique #26). See those parts and Part VI's punch
+list for exactly what changed and what's still open._
+
 The reviewer's closing point, quoted directly because it is the thesis of
 this file: _"don't treat this as 'fix this screenshot' — treat it as a
 standing DGE UI Contract: every corpus renderer is a view over the same DGE
@@ -233,19 +239,42 @@ labeling completeness rule, not an anti-Sanskrit rule.
 
 ## Part III — compliance status by renderer
 
-| Renderer | dge-shell.js | contextual-actions.js + reader-state.js + modals.js | entity-linker.js | kosha.js | Commentary Navigator / equivalent | Status |
-|---|---|---|---|---|---|---|
-| `dge/index.html` (main reader — covers most shloka corpora: Stotra, Purāṇa, Vedānta texts, etc. as data, not separate renderer pages) | ✅ | ✅ (this is where all three were first landed) | ✅ | ✅ | N/A (single-shloka reader, not a multi-commentary-layer view) | **Compliant** |
-| `dge/vyakarana/ashtadhyayi.html` | ✅ | ✅ **(this pass)** — was the exact page in the critique's screenshots; previously loaded none of the three | ✅ (already had it) | ❌ (word-level Kosha lookup not wired — see Part IV) | ✅ **(this pass, new)** | **Retrofitted this pass** — see below |
-| `dge/dasa-sahitya/index.html` | ✅ | **In flight on a separate branch** (`dasa-sahitya-ux-integration`, commit `914a8e4` as of this writing: *"Wire Dasa Sahitya into the shared reader infra: word-tap Kosha, composer sheets, composition contextual menu"*) — **not merged to `main`** as of this pass, and out of scope for this session per the project lead's explicit instruction. Do not assume it is finished; re-check `git log` for this file before relying on the row above. | unknown (branch not reviewed — out of scope) | unknown | unknown | **Being retrofitted by a different session, in progress** |
-| `dge/vyakarana/{chandas,shabda,krdanta,rupasiddhi,dhatuforms,dhatu,prakriya}.html` (7 pages — declension/conjugation/derivation tool pages, not commentary readers) | ✅ | ❌ | ❌ | ❌ | N/A (no commentary layers on these pages — different content shape) | **Not started** — follow-up |
-| `dge/kavya/index.html` | ✅ | ❌ | ❌ | ❌ | — | **Not started** — follow-up |
-| `dge/tirtha/index.html` | ✅ | ❌ | ❌ | ❌ | — | **Not started** — follow-up |
-| `dge/guru-parampara/index.html` | ✅ | ❌ | ❌ | ❌ | — | **Not started** — follow-up |
+| Renderer | dge-shell.js | contextual-actions.js + reader-state.js + modals.js | entity-linker.js | kosha.js | Commentary Navigator / equivalent | Nav rail (Part VII) | Status |
+|---|---|---|---|---|---|---|---|
+| `dge/index.html` (main reader — covers most shloka corpora: Stotra, Purāṇa, Vedānta texts, etc. as data, not separate renderer pages) | ✅ | ✅ (this is where all three were first landed) | ✅ | ✅ | N/A (single-shloka reader, not a multi-commentary-layer view) | ✅ **(this pass, new)** | **Compliant** |
+| `dge/vyakarana/ashtadhyayi.html` | ✅ | ✅ — was the exact page in the critique's screenshots; previously loaded none of the three | ✅ (already had it) | ❌ (word-level Kosha lookup not wired — see Part IV) | ✅ | ✅ **(this pass, new)** | **Retrofitted (Aug 28 pass); nav rail added this pass** |
+| `dge/dasa-sahitya/index.html` | ✅ | ✅ — **confirmed merged to `main` as of this pass** (re-checked `git log`: `914a8e46` *"Wire Dasa Sahitya into the shared reader infra: word-tap Kosha, composer sheets, composition contextual menu"* is on `main`, and the page's own `<script>` tags now load `modals.js`+`reader-state.js`+`kosha.js`+`contextual-actions.js`+`entity-linker.js`). The Part III row below this table's previous revision said "not merged" — that was accurate when written and is now stale; this is exactly the "do not assume it is finished, re-check" warning it told future readers to heed. | ✅ | ✅ | unknown (out of scope this pass — visual retrofit and real breadcrumb work were explicitly owned by a different session as of this pass; re-check before relying on this row) | ✅ **(this pass, new)** — added alongside the page's own in-flight retrofit; re-fetched immediately before merging to avoid clobbering it (see Part VII) | **Shared-systems compliant (merged); visual retrofit in progress by a different session** |
+| `dge/vyakarana/dhatu.html` | ✅ | ✅ **(this pass)** — new `dhatuRoot` object type (Bookmark this root / Copy citation / Copy full entry), reached from a new `⋯ More` button in each root's existing `.acts` row. Deliberately does **not** duplicate the derivation links (प्रक्रिया/कृदन्त/रूपाणि/रूपसिद्धिः/अष्टाध्यायी) or the corpus-occurrences search already inline there (critique #29's "one canonical home per action") | ✅ (already had it) | ❌ — follow-up | N/A (lookup tool, not a commentary reader) | ✅ **(this pass, new)** | **Retrofitted this pass** — see Part VII/report |
+| `dge/vyakarana/shabda.html` | ✅ | ✅ **(this pass)** — new `subantaWord` object type (Bookmark this word / Copy citation / Copy declension table), reached from a new `⋯ More` button per word. Previously loaded none of the three (shabda.js had a comment documenting this as deliberate; updated now that the page does load `modals.js`) | ❌ — follow-up | ❌ — follow-up | N/A | ✅ **(this pass, new)** | **Retrofitted this pass** — see Part VII/report |
+| `dge/vyakarana/{chandas,krdanta,rupasiddhi,dhatuforms,prakriya}.html` (5 pages — declension/conjugation/derivation tool pages, not commentary readers) | ✅ | ❌ | ❌ | ❌ | N/A | ❌ — not this pass | **Not started** — follow-up. Dhātu/Śabda above are now the worked pattern to replicate (new page-local object type + `⋯ More` button + CSS ported into `vyakarana.css`), same role Ashtadhyayi already served for multi-commentary readers |
+| `dge/kavya/index.html` | ✅ | ❌ | ❌ | ❌ | — | ❌ — not this pass | **Not started** — follow-up |
+| `dge/tirtha/index.html` | ✅ | ❌ | ❌ | ❌ | — | ❌ — not this pass | **Not started** — follow-up |
+| `dge/guru-parampara/index.html` | ✅ | ❌ — **deliberately not applied this pass, not an oversight**: this page is a pure navigational hub (3 link-cards to `lineage-2d.html`/`lineage-3d.html`/`tracker.html`), with no content object matching any existing or plausible-to-add object type — see note below the table | ❌ | ❌ | — | ✅ **(this pass, new)** | **Nav rail added this pass; contextual-actions retrofit intentionally out of scope — see note** |
+| `dge/guru-parampara/tracker.html` | ✅ | ❌ — **deliberately not applied this pass**: its 215-figure table is a real candidate for a `person` object type (View in lineage tree / Copy name), but Part VI *already* names extending the registry with `person` as explicit future work, tied to `entity-linker.js` resolving people (critique #12) — building a one-off `person` type here now would preempt that decision rather than implement it; see note below the table | ❌ | ❌ | — | ✅ **(this pass, new)** | **Nav rail added this pass; contextual-actions retrofit intentionally deferred to the Part VI person-entity work** |
+
+**Why Guru Parampara's two pages didn't get `modals.js`+`reader-state.js`+
+`contextual-actions.js` this pass, unlike Dhātu/Śabda:** the retrofit
+pattern this pass established (a new page-local object type + a small
+`⋯ More` trigger) needs a real per-item *thing* to attach actions to.
+Dhātu/Śabda have one (a root / a declining word). `index.html` has none at
+all — it's three navigation cards, already correctly a `Link` shape per the
+component-shape rule, nothing to add a menu to. `tracker.html` has one
+(a person row) but Part VI already named `person` as a deliberate future
+object type tied to `entity-linker.js`'s people-resolution work, not
+something to improvise piecemeal here. Loading three extra scripts for a
+menu system with nothing real to attach — or attaching it to a `person`
+type invented on the spot rather than the one already planned — would have
+been exactly the decorative, non-functional wiring this contract exists to
+prevent. Both pages got the one thing that *is* real and needed regardless:
+the nav rail.
 
 This session's actual scope was **the contract doc plus the Ashtadhyayi/
-Vyakarana retrofit** — not a whole-site rewrite. The table above is the
-honest state after this pass, not a claim of sitewide compliance.
+Vyakarana retrofit** (28 Aug 2026, first pass) and, in this follow-up pass,
+**Dhātu/Śabda's contextual-actions retrofit, the sitewide nav rail, and the
+bottom-audio-player fix** (see Part VII and Part VIII). The table above is
+the honest state after both passes, not a claim of sitewide compliance —
+`{chandas,krdanta,rupasiddhi,dhatuforms,prakriya}.html`, Kāvya, and Tīrtha
+remain real, un-deferred follow-up.
 
 ---
 
@@ -349,26 +378,54 @@ at silently, per the project lead's own instruction.
 
 ---
 
-## Part VI — follow-up punch list (not attempted this pass)
+## Part VI — follow-up punch list
 
-- Retrofit the remaining 7 Vyakarana-cluster tool pages
-  (chandas/shabda/krdanta/rupasiddhi/dhatuforms/dhatu/prakriya) onto
-  `contextual-actions.js`/`reader-state.js` — lower urgency than Ashtadhyayi
-  since they're single-tool pages, not multi-commentary readers, but still
-  currently outside the contract.
-- Retrofit Kavya, Tirtha, and Guru Parampara the same way.
-- Re-check `dge/dasa-sahitya/index.html`'s actual landed state once
-  `dasa-sahitya-ux-integration` merges to `main`, and update the compliance
-  table in Part III accordingly — do not assume today's "in flight" status
-  is still accurate by the time this doc is next read.
-- Wire `kosha.js` word-tap lookup into the Vyakarana cluster (Ashtadhyayi
-  included) — not part of this pass.
+_Updated 28 Aug 2026, second pass (Part VII/VIII below). Items the first
+pass listed and this pass actually completed are marked done and moved out
+of the open list rather than left to look outstanding — see Part III for
+the compliance table each of these maps to._
+
+**Done in this pass, was open before it:**
+- ~~Retrofit Dhātu and Śabda onto `contextual-actions.js`/`reader-state.js`~~
+  — done (new `dhatuRoot`/`subantaWord` object types; see Part III).
+- ~~Re-check `dge/dasa-sahitya/index.html`'s actual landed state once
+  `dasa-sahitya-ux-integration` merges to `main`~~ — done; confirmed merged,
+  Part III's row updated. Its own further visual retrofit is separately
+  in progress by a different session, not by this pass.
+- A sitewide right-side nav rail (a new requirement, not on the original
+  punch list — see Part VII) — built once, rolled out to every page this
+  pass and the previous pass touched, plus Dāsa Sāhitya.
+- The persistent bottom-audio-player bug (critique #26 — see Part VIII) —
+  fixed sitewide (`dge/index.html`, plus the one legacy page with its own
+  copy of the same element).
+
+**Still open:**
+- Retrofit the remaining 5 Vyakarana-cluster tool pages
+  (chandas/krdanta/rupasiddhi/dhatuforms/prakriya) onto
+  `contextual-actions.js`/`reader-state.js` — Dhātu/Śabda (this pass) are
+  now the worked pattern: pick a real per-item object (a chandas metre, a
+  kṛdanta form, …), a page-scoped object type, a `⋯ More` trigger, actions
+  ported CSS already covers (`vyakarana.css` now carries the shared
+  `.modal-overlay`/`.ctx-menu-*` block for the whole cluster).
+- Retrofit Kavya and Tirtha the same way (their own content shape needs its
+  own look at what a real per-item object is there, same as this pass did
+  for Dhātu/Śabda rather than assuming Ashtadhyayi's shape fits).
+- Guru Parampara's `contextual-actions.js` retrofit stays intentionally
+  deferred — `index.html` has no content object to attach one to;
+  `tracker.html`'s natural fit is the `person` object type below, not a
+  one-off invented for this page alone (see Part III's note).
+- Wire `kosha.js` word-tap lookup into the Vyakarana cluster (Ashtadhyayi,
+  Dhātu, Śabda all still lack it) — not part of either pass so far.
+- Wire `entity-linker.js` into Śabda (Dhātu already has it; Śabda still
+  doesn't) — not part of this pass.
 - Extend `entity-linker.js`/`dge_entities.json` to resolve *people* (critique
   #12's ವಿಜಯದಾಸರು example), not just citable works — currently Levels 1–2
-  (works) only.
+  (works) only. Guru Parampara's `tracker.html` (215 figures) is the
+  clearest real use once this lands — see Part III.
 - Extend `contextual-actions.js`'s object-type registry with `person` and
   `textual-reference` once a renderer actually needs person-entity tap
-  targets (Dāsa Sāhitya is the most likely first real use).
+  targets (Dāsa Sāhitya and/or Guru Parampara `tracker.html` are the
+  likeliest first real uses).
 - Migrate word/phrase-level taps on the Vyakarana cluster from
   `intellisense.js`'s standalone popover onto the shared `contextual-actions.js`
   model, once that can be done without the two systems fighting over the
@@ -376,7 +433,148 @@ at silently, per the project lead's own instruction.
 - The Part V product-identity decision (theme naming / sitewide default)
   needs the project lead's actual answer, not another guess.
 - Full visual unification of the Vyakarana cluster's own token system
-  (`ashtadhyayi.css`'s `--panel`/`--line`/`--ink`/… ) with `main.css`'s
-  (`--card-bg`/`--card-border`/`--text-primary`/…) — this pass ported just
-  the classes `contextual-actions.js`'s shared menu component needs, scoped
-  locally, not a full merge of the two design systems.
+  (`ashtadhyayi.css`/`vyakarana.css`'s `--panel`/`--line`/`--ink`/… ) with
+  `main.css`'s (`--card-bg`/`--card-border`/`--text-primary`/…) — both
+  passes ported just the classes `contextual-actions.js`'s shared menu
+  component needs, scoped locally, not a full merge of the two design
+  systems.
+- The nav rail (Part VII) is deliberately a self-contained component with
+  its own small hardcoded-with-`--accent-red`-fallback palette, independent
+  of every page's own token system, for the same reason as the bullet just
+  above — full token unification would let it inherit a page's real theme
+  instead. Revisit once that unification happens.
+- A "tiny affordance" middle state for the bottom player (Part VIII) —
+  this pass implemented the two-state version (hidden vs. full compact
+  player) the brief's acceptance bar allowed either of; a persistent small
+  speaker/play icon when audio is available but not yet played (the second
+  reviewer's original three-state framing) is real, scoped follow-up, not
+  silently folded into "done."
+
+---
+
+## Part VII — sitewide right-side global nav rail (new this pass)
+
+A new formalized requirement, not from the original critique: every corpus
+page needs a persistent way to jump to another corpus/tool without backing
+out through the header menu first (project lead's own framing, 28 Aug
+2026).
+
+**What already existed to check first, per the project lead's own
+instruction not to invent a second mobile pattern:** `dge-shell.js` had no
+utility rail at all — its own header comment named one as planned but
+unbuilt ("Phase 6... a Kosha/Search utility rail for the Vyakarana/Kavya/
+Dasa-Sahitya/Tirtha/Guru-Parampara cluster pages, alongside the breadcrumb
+they already do"). `dge/index.html`'s `#dge-qa-tab` is a real, existing
+fixed-edge mobile pattern, but a different job entirely (Kosha/Search/Ask
+Acharya quick actions, not cross-corpus navigation) and only exists on that
+one page — reusing it for corpus-jump navigation would have overloaded one
+button with two unrelated purposes on the only page that has it, and left
+every other page with nothing. So this is a genuinely new component, built
+once, in the same *visual family* as `#dge-qa-tab` (a small fixed tab
+docked to the right edge) without being the same element or serving its job.
+
+**Implementation:** `dge/js/dge-nav-rail.js`, a self-contained
+`<dge-nav-rail current="...">` custom element (no dependency on
+`modals.js`/`main.css`/any page's own token system — see Part VI's note on
+why). Links to: DGE Home (`dge/index.html`), Aṣṭādhyāyī, Dhātu, Śabda,
+Kāvya, Tīrtha, Guru Paramparā, Dāsa Sāhitya. Hrefs are resolved from the
+script's own known location (`dge/js/`), not the including page's path, so
+the same two lines of markup work unmodified at any page depth.
+
+**Responsive behavior and breakpoint:** `760px` — the same value
+`main.css`/`kavya.css`/`dasa-sahitya.css` already use sitewide for the
+mobile/desktop split (confirmed by grepping every `@media` in `dge/css/`;
+no separate breakpoint was invented). At `>= 760px`: a fixed vertical rail
+docked to the right edge, one row per corpus/tool with an icon glyph +
+visible label (never icon-only, per the icon-labeling rule) and
+`aria-current="page"` on the current page's row. Below `760px`: the rail
+itself is hidden (no room for it without covering content) and replaced by
+a small fixed tab in the `#dge-qa-tab` visual family, docked to the right
+edge at a different vertical offset (`bottom: calc(230px + …)` vs.
+qa-tab's `calc(160px + …)`) so the two never collide on `dge/index.html`,
+the one page carrying both. Tapping the tab opens a small link-list sheet
+with the same items.
+
+**Rollout this pass:** `dge/index.html`, `dge/vyakarana/ashtadhyayi.html`,
+`dge/vyakarana/dhatu.html`, `dge/vyakarana/shabda.html`,
+`dge/guru-parampara/index.html`, `dge/guru-parampara/tracker.html`, and
+`dge/dasa-sahitya/index.html` (added despite that page's own visual
+retrofit being owned by a different session this pass, since it's a
+two-line additive change with minimal collision surface — script tag +
+one custom element, no shared-file edits beyond this doc; re-fetched
+immediately before merging per the coordination note at the top of this
+document). **Not** added to Kāvya/Tīrtha or the five not-yet-retrofitted
+Vyakarana-cluster pages — the rollout instruction was "every page you
+retrofit in this pass, plus Ashtadhyayi," and those five/two were not
+retrofitted this pass (see Part VI).
+
+---
+
+## Part VIII — the persistent bottom-audio-player fix (critique #26)
+
+**The bug, confirmed by direct inspection before any fix:** `dge/index.html`
+unconditionally rendered `<div class="bottom-player">` (no visibility
+logic at all beyond hiding during immersive reading), and `dge/js/audio.js`
+had zero references to `reader-state.js`'s `dgeAudioState()` — the
+AudioState abstraction (built in the Reader Redesign phase A work, commit
+`32b03feb`) existed but was never wired to the actual player element.
+`genie.js`'s own `bottomPlayerClearance()` already defensively checked
+`getComputedStyle(player).display === 'none'`, i.e. it was written
+*expecting* the player to sometimes be hidden — clear evidence the gating
+was designed for but never implemented, not merely missed.
+
+**The fix:** `dge/css/main.css`'s `.bottom-player` rule now defaults to
+`display: none`; a new `.bottom-player.dge-audio-active` rule is what shows
+it. `dge/js/audio.js` gained `dgeUpdateBottomPlayerVisibility()`, which
+reads `window.dgeAudioState()` and adds/removes that class based on
+`status`. Called from `updatePlayUI()` — already the single UI-sync point
+every playback state change (`playing`/`pause`/`ended` events, `playShloka`,
+`togglePlay`, `playNextFiltered`/`playPrevFiltered`) already ran through —
+plus once at boot for the initial page-load state.
+
+**The exact rule, and why `loaded` is grouped with `idle`:**
+`dgeAudioState()`'s `status` is `'idle'` only when nothing has ever been
+selected. Merely navigating to/selecting a track (`loadShloka()`, called by
+every prev/next, TOC tap, filter jump, and history/snippet select) sets
+`activeId` and the audio element's `src`, which makes `status` become
+`'loaded'` — *without ever calling `.play()`*. The critique is explicit
+that no navigation/selection/search/word-lookup/AI/menu-opening action may
+ever show the player, only explicit Play — so `'loaded'` had to be treated
+the same as `'idle'` (hidden), not as "something is happening" (shown).
+The player becomes visible only once status reaches `'playing'`/
+`'buffering'`/`'paused'`/`'completed'`/`'error'` — states that are only
+reachable by an actual `currentAudio.play()` call having happened.
+
+**Audited every caller that can reach `playShloka`/`togglePlay` (i.e.
+every potential auto-play/auto-show site):** four real call sites exist —
+`contextual-actions.js`'s `play` menu action, `core.js`'s quick-jump/search
+navigation, `history.js`'s reading-history tap, and `snippets.js`'s saved-
+snippet playback — and all four are genuine *explicit* Play actions (the
+reader tapped Play on something), not side effects of an unrelated
+operation. Every other caller found (`render.js`'s shloka tap, `history.js`'s
+TOC tap, `filter.js`'s range/mark-filter jumps — which already carried a
+comment saying "do not start audio as a side effect" — `render.js`'s
+single-view prev/next, and `core.js`'s page-load `dgeRestoreLastVerse()`)
+calls `loadShloka()` only, never `.play()`. None of them touch
+`.bottom-player`'s visibility directly at all — the new gating is the only
+thing that does, and it only reacts to real state, not to which function
+was called.
+
+**Also fixed:** `dge/legacy/PrahladaKrutaNarasimhaStotra.html` — the only
+other page found with its own copy of `.bottom-player` (grepped the whole
+`dge/` tree). It doesn't load `audio.js`/`reader-state.js` at all (a fully
+separate, self-contained legacy implementation predating the shared
+systems entirely — already the repo's own documented reason this page is
+excluded from `tools/redesign/audit_pages.py`'s vandana-guard check). Given
+that existing "out of scope for the redesign" boundary, this pass applied
+the same *shape* of fix locally (its own `isPlaying`/`activeId` state,
+mirrored inline) rather than pulling the shared systems into a page
+explicitly declared out of scope — hidden by default, shown once
+`isPlaying` or `currentTime > 0`.
+
+**Not attempted this pass:** the second reviewer's original three-state
+framing ("no audio → nothing; audio available → tiny affordance; explicit
+play → full player") — the brief's own acceptance bar allowed either that
+or the simpler two-state version (hidden vs. full player) this pass built;
+a real tiny-affordance middle state is tracked as genuine follow-up in
+Part VI, not silently claimed as done.

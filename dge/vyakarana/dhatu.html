@@ -94,8 +94,17 @@
 <script src="../js/dge-normalize.js?v=1"></script>
 <script src="../js/dge-search.js?v=1"></script>
 <script src="../js/global-search.js?v=4.68.0"></script>
+<!-- DGE UI Contract retrofit (28 Aug 2026): modals.js + reader-state.js +
+     contextual-actions.js, load order matches dge/index.html/
+     ashtadhyayi.html (see DGE_UI_CONTRACT.md) -- all before dge-shell.js
+     and this page's own module. -->
+<script src="../js/modals.js?v=1"></script>
+<script src="../js/reader-state.js?v=1"></script>
+<script src="../js/contextual-actions.js?v=1"></script>
 <script src="../js/dge-shell.js?v=1"></script>
 <script src="../js/dge-breadcrumb.js?v=1"></script>
+<script src="../js/dge-nav-rail.js?v=1"></script>
+<dge-nav-rail current="dhatu"></dge-nav-rail>
 <script src="../js/dhatu.js?v=1.2.0"></script>
 <script src="../js/intellisense.js?v=4.65.0"></script>
 <script src="../js/entity-linker.js?v=1.0.0"></script>

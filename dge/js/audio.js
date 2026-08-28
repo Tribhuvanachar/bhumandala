@@ -19,13 +19,31 @@ function updateRepeatDisplay() {
   repeatCounter.innerText = (activeId && t > 1) ? `Loop ${currentLoopCount + 1}/${t}` : ""; 
 }
 
-function updatePlayUI() { 
+function updatePlayUI() {
   const playBtn = document.getElementById('playBtn');
   const readingCard = document.getElementById('readingCard');
-  
-  if (playBtn) playBtn.innerHTML = isPlaying ? '⏸' : '▶'; 
-  if (activeId && readingCard) readingCard.classList.toggle('highlight', isPlaying); 
+
+  if (playBtn) playBtn.innerHTML = isPlaying ? '⏸' : '▶';
+  if (activeId && readingCard) readingCard.classList.toggle('highlight', isPlaying);
+  dgeUpdateBottomPlayerVisibility();
 }
+
+// Gates .bottom-player on reader-state.js's AudioState (dgeAudioState(),
+// see dge/js/reader-state.js) instead of letting it render unconditionally.
+// Per the second reviewer's critique (DGE_UI_CONTRACT.md): no audio ->
+// nothing shown; the player only appears once the reader has *explicitly*
+// pressed Play. loadShloka() (mere navigation/selection) puts the engine in
+// 'loaded' status without ever calling .play() — that alone must NOT show
+// the player, so 'loaded' is deliberately grouped with 'idle' here, not
+// with the "something is actually happening" states.
+function dgeUpdateBottomPlayerVisibility() {
+  const player = document.querySelector('.bottom-player');
+  if (!player) return;
+  const st = (typeof window.dgeAudioState === 'function') ? window.dgeAudioState() : null;
+  const active = !!st && st.status !== 'idle' && st.status !== 'loaded';
+  player.classList.toggle('dge-audio-active', active);
+}
+window.dgeUpdateBottomPlayerVisibility = dgeUpdateBottomPlayerVisibility;
 
 // Configurable Audio Source: swaps the shared host prefix stored in
 // stotraData.metadata.archiveBaseUrl for whatever's currently effective
@@ -636,5 +654,10 @@ document.addEventListener('DOMContentLoaded', () => {
       input.blur();
     });
   });
+
+  // Boot-time sync: CSS already defaults .bottom-player to hidden (see
+  // dge/css/main.css), this just keeps the JS-driven class in agreement
+  // with whatever AudioState actually is at load (idle, on a fresh visit).
+  dgeUpdateBottomPlayerVisibility();
 });
 

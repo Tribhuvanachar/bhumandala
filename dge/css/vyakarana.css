@@ -57,6 +57,9 @@
   .rcaret{color:var(--muted);transition:.2s}.row.open .rcaret{transform:rotate(90deg)}
   .rbody{display:none;padding:2px 14px 14px;border-top:1px dashed var(--line)}
   .row.open .rbody{display:block}
+  .row.bookmarked{border-left-color:var(--gold)}
+  .row.bookmarked .rcode{color:var(--gold);font-weight:700}
+  .row.bookmarked .rdha{color:var(--gold)}
   .kv{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:14px}
   .kv:last-of-type{border-bottom:0}.kk{flex:0 0 150px;color:var(--muted);font-size:12.5px}.kvv{flex:1;min-width:0}
   .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
@@ -101,3 +104,22 @@
 .lex-example{margin-top:4px;font-size:14.5px}
 .lex-example-en{color:var(--muted);font-size:12.5px;font-style:italic}
 .lex-sources{font-size:11px;margin-top:8px;line-height:1.5}
+
+/* DGE UI Contract retrofit (28 Aug 2026): contextual-actions.js's generic
+   menu (dgeOpenContextualMenu) needs .modal-overlay/.modal-content/
+   .ctx-menu-*/.btn-sm to exist -- see DGE_UI_CONTRACT.md Part I §1's
+   documented dependency. Ported from main.css, scoped to this cluster's
+   own bridged token names exactly like ashtadhyayi.css already does for
+   ashtadhyayi.html (see that file for the same block) -- dhatu.html and
+   shabda.html share this file, so one copy here covers both rather than
+   duplicating it a third time. */
+.modal-overlay{position:fixed;inset:0;background:rgba(20,14,6,.5);display:none;justify-content:center;align-items:center;z-index:11000;padding:18px}
+.modal-content{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);max-width:440px;width:100%;max-height:85vh;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+.modal-header-sticky{padding:14px 16px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-shrink:0}
+.modal-body{padding:14px 16px;overflow-y:auto;flex-grow:1}
+.btn-sm{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:8px;padding:5px 10px;font:inherit;font-size:12px;cursor:pointer}
+.ctx-menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:8px}
+.ctx-action-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;cursor:pointer;color:var(--ink);font:inherit;min-height:44px}
+.ctx-action-btn:hover,.ctx-action-btn:focus-visible{background:var(--card-active,var(--panel2));border-color:var(--accent);outline:none}
+.ctx-action-icon{font-size:19px;line-height:1}
+.ctx-action-label{font-size:11.5px;font-weight:600;text-align:center;line-height:1.3}

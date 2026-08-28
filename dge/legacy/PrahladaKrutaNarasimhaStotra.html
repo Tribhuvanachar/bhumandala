@@ -104,8 +104,10 @@
   body.dark-mode .commentary-block { background: rgba(255,255,255,0.03); }
   .commentary-title { font-weight: 700; font-family: var(--font-ui); color: var(--accent-red); font-size: 11px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
 
-  /* Bottom Toolbar Grid */
-  .bottom-player { position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); border-top: 1px solid var(--card-border); box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 9999; box-sizing: border-box; padding-bottom: env(safe-area-inset-bottom); }
+  /* Bottom Toolbar Grid — hidden until updatePlayUI() below adds
+     .dge-audio-active (only once something has actually been played). */
+  .bottom-player { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--panel-bg); border-top: 1px solid var(--card-border); box-shadow: 0 -4px 20px rgba(0,0,0,0.1); z-index: 9999; box-sizing: border-box; padding-bottom: env(safe-area-inset-bottom); }
+  .bottom-player.dge-audio-active { display: block; }
   .player-inner { max-width: 650px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 8px 4px; box-sizing: border-box; gap: 4px; }
 
   .controls-main { display: flex; gap: 8px; justify-content: center; }
@@ -836,7 +838,15 @@
     document.getElementById('searchMatchCount').innerText = `${window.currentMatchIdx + 1} / ${window.searchMatches.length}`;
   }
 
-  function updatePlayUI() { els.playBtn.innerHTML = isPlaying ? '⏸' : '▶'; if(activeId) els.readingCard.classList.toggle('highlight', isPlaying); }
+  function updatePlayUI() {
+    els.playBtn.innerHTML = isPlaying ? '⏸' : '▶';
+    if(activeId) els.readingCard.classList.toggle('highlight', isPlaying);
+    // Same fix as dge/js/audio.js: don't show the persistent player just
+    // because a track was selected (activeId set) -- only once it's
+    // actually been played (isPlaying, or paused partway through).
+    var player = document.querySelector('.bottom-player');
+    if (player) player.classList.toggle('dge-audio-active', isPlaying || (!!activeId && currentAudio.currentTime > 0));
+  }
 
   currentAudio.addEventListener('playing', () => { isPlaying = true; updatePlayUI(); });
   currentAudio.addEventListener('pause', () => { isPlaying = false; updatePlayUI(); });
