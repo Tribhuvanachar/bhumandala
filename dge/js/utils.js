@@ -93,12 +93,48 @@ window.setFontSize = function(px, el) {
   // (see note in transliteration.js — Display popup stays open)
 };
 
+// 28 Aug 2026: real queue, not independent setTimeouts on the same element.
+// The old version let a second showToast() call while one was still up
+// reset the DOM text but not the FIRST call's own hide timer -- so a
+// message could vanish mid-read, or two unrelated messages could visually
+// collide, because there was never more than one timer's worth of "am I
+// still the message that should be showing" tracked. Now only one toast is
+// ever on screen; a call while one is up queues instead of racing it.
+let dgeToastQueue = [];
+let dgeToastTimer = null;
+const DGE_TOAST_MS = 3000;
+const DGE_TOAST_GAP_MS = 250; // brief gap so consecutive toasts read as separate, not one long flash
+
+function dgeToastAdvance() {
+  const toast = document.getElementById('toastMsg');
+  if (!toast) return;
+  if (!dgeToastQueue.length) {
+    toast.classList.remove('show');
+    dgeToastTimer = setTimeout(() => { toast.style.display = 'none'; }, 300);
+    return;
+  }
+  const msg = dgeToastQueue.shift();
+  toast.innerText = msg;
+  toast.style.display = 'block';
+  // Force a reflow so the .show transition re-triggers even if the toast
+  // never fully hid between two queued messages.
+  void toast.offsetWidth;
+  toast.classList.add('show');
+  dgeToastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+    dgeToastTimer = setTimeout(dgeToastAdvance, DGE_TOAST_GAP_MS);
+  }, DGE_TOAST_MS);
+}
+
 window.showToast = function(msg) {
   const toast = document.getElementById('toastMsg');
   if (!toast) return;
-  toast.innerText = msg;
-  toast.style.display = 'block';
-  setTimeout(() => { toast.style.display = 'none'; }, 3000);
+  dgeToastQueue.push(msg);
+  const alreadyShowing = toast.style.display === 'block' && toast.classList.contains('show');
+  if (!alreadyShowing) {
+    clearTimeout(dgeToastTimer);
+    dgeToastAdvance();
+  }
 };
 
 // Reading-card minimize — it's now pinned (sticky) at the top of the

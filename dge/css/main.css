@@ -512,14 +512,30 @@ body:has(.popup-sheet.show)::after {
 }
 #modalAppendBtn button.ask-further-btn { background: #333; box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
 
-/* Custom Toast */
+/* Custom Toast -- 28 Aug 2026: moved from a bottom pill (bottom:90px) to a
+   top banner that slides down under the top-bar. The bottom of the screen
+   already stacks .bottom-player/popup-sheet/content-editor-save-bar/the
+   Genie dock on a small phone -- a toast landing in that same zone read as
+   "one thing on top of another," and its old background/color pair
+   (var(--text-primary) on var(--bg-main), a straight inversion) turned
+   into a stark white pill in every dark theme since --text-primary is
+   itself light there. The top is otherwise never contested, and matches
+   this app's own accent palette instead of inverting the page's own
+   tokens. window.showToast() (utils.js) now queues rather than layering
+   independent setTimeouts on the same element, so a second call while one
+   is showing can no longer cut the first one's dismissal short. */
 #toastMsg {
-  display: none; position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
-  background: var(--text-primary); color: var(--bg-main); padding: 10px 20px;
-  border-radius: var(--radius-pill); font-size: 12px; font-weight: 700; z-index: 12000;
-  box-shadow: var(--shadow-md); text-align: center; white-space: nowrap;
-  animation: toastIn var(--t-med) var(--ease);
+  display: none; position: fixed;
+  top: calc(50px + env(safe-area-inset-top) + 10px);
+  left: 50%; transform: translateX(-50%) translateY(-16px); opacity: 0;
+  background: var(--panel-bg); color: var(--text-primary);
+  border: 1px solid var(--card-border); border-left: 4px solid var(--accent-red);
+  padding: 10px 16px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600;
+  z-index: 12000; box-shadow: var(--shadow-lg); text-align: left; line-height: 1.4;
+  max-width: min(360px, calc(100vw - 32px)); white-space: normal;
+  transition: opacity var(--t-med) var(--ease), transform var(--t-med) var(--ease);
 }
+#toastMsg.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 /* Modals with Absolute Sticky Headers - High Z-Index */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.55); display: none; justify-content: center; align-items: center; z-index: 11000; backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
@@ -798,7 +814,6 @@ body.dge-app-view .shloka-list { gap: 20px; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 @keyframes micPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 @keyframes popIn { from { opacity: 0; transform: translateX(-50%) translateY(4px) scale(0.96); } to { opacity: 1; transform: translateX(-50%); } }
-@keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(8px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
 @keyframes modalIn { from { opacity: 0; transform: translateY(10px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
 /* -------------------------------------------------------------------
