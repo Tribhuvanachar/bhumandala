@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Genie ASR benchmark manifest entry",
+  "description": "One utterance in the genie_asr_benchmark corpus. `audio_file` is null for every entry as of this schema's authoring — see README.md's BLOCKED ON AUDIO SAMPLES note. `transcript_text` lets the resolver half of the pipeline (resolver.js) be exercised and scored today, independent of audio.",
+  "type": "object",
+  "required": ["id", "category", "language", "transcript_text", "expected"],
+  "properties": {
+    "id": { "type": "string", "description": "Stable id, e.g. '07_open_text_003'." },
+    "category": {
+      "type": "string",
+      "enum": [
+        "01_english", "02_kannada", "03_sanskrit", "04_hindi",
+        "05_mixed_code_switch", "06_proper_names", "07_open_text",
+        "08_open_section", "09_search", "10_commentary_renderer",
+        "11_audio_settings", "12_explain_padaccheda_compare",
+        "13_ambiguous_commands"
+      ]
+    },
+    "language": { "type": "string", "description": "BCP-47-ish tag of the spoken language this utterance represents, e.g. 'en-IN', 'kn-IN', 'sa-IN', 'hi-IN', 'mixed'." },
+    "transcript_text": { "type": "string", "description": "The utterance as clean written text (what a human would say). This is NOT a claimed ASR transcript — it is the resolver's input for a text-only accuracy pass. A separate `asr_noise_variant` may simulate a messy ASR transcript of the same utterance." },
+    "asr_noise_variant": { "type": ["string", "null"], "description": "Optional deliberately-messy variant of transcript_text (e.g. a known confusion pattern like 'Sumadha' for 'Sumadhva') used to test the resolver's ASR-confusion normalization specifically." },
+    "audio_file": { "type": ["string", "null"], "description": "Relative path under audio/<category>/ to a real recorded utterance. Null until real recordings are provided — see README.md." },
+    "notes": { "type": "string", "description": "Free-text context, e.g. which real corpus entry this targets and why." },
+    "expected": {
+      "type": "object",
+      "required": ["intent"],
+      "properties": {
+        "intent": {
+          "type": "string",
+          "enum": [
+            "open_text", "open_section", "search_corpus", "search_kosha",
+            "search_dhatu", "select_commentary", "renderer_action",
+            "audio_action", "settings_action", "explain", "padaccheda",
+            "compare", "unknown"
+          ]
+        },
+        "target_pattern": { "type": ["string", "null"], "description": "Regex the resolved `target` must match (realSlug for a grantha, or a parampara node's display name for a person). Null when no specific target is expected (e.g. a deterministic settings/renderer/audio action)." },
+        "parameters": { "type": "object", "description": "Expected subset of resolved `parameters` (e.g. {\"reference\": \"1.1\"}). Only listed keys are checked." },
+        "min_confidence": { "type": "number", "description": "Resolved confidence must be >= this for the match to count as a pass (default 0 = any)." },
+        "max_confidence": { "type": "number", "description": "Optional upper bound — used for the ambiguous-commands category, where staying BELOW threshold and surfacing candidates is the correct behavior, not a wrong single guess." }
+      }
+    }
+  }
+}

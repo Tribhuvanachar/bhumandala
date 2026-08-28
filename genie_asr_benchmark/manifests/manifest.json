@@ -1,0 +1,289 @@
+[
+  { "id": "01_english_001", "category": "01_english", "language": "en-IN",
+    "transcript_text": "Open Rigveda 1.1",
+    "expected": { "intent": "open_text", "target_pattern": "rigveda/shakala_shakha/samhita/mandala_01$", "parameters": { "reference": "1.1" }, "min_confidence": 0.55 } },
+
+  { "id": "01_english_002", "category": "01_english", "language": "en-IN",
+    "transcript_text": "Open Sumadhwa Vijaya 1.1",
+    "notes": "Clean Sarvam en-IN REST transcript recorded in CLAUDE.md section 2 for sumadhwa_test.wav.",
+    "expected": { "intent": "open_text", "target_pattern": "sumadhva_vijaya/sarga_1$", "parameters": { "reference": "1.1" }, "min_confidence": 0.55 } },
+
+  { "id": "01_english_003", "category": "01_english", "language": "en-IN",
+    "transcript_text": "Sumadha Open Sumadha Vijaya 1.1",
+    "asr_noise_variant": "Sumadha Open Sumadha Vijaya 1.1",
+    "notes": "The ACTUAL noisy Saaras v3 transcript recorded in CLAUDE.md section 2 for sumadhwa_16k.m4a — real prior test data, not fabricated. Proves ASR-confusion normalization recovers the right action from a messy transcript.",
+    "expected": { "intent": "open_text", "target_pattern": "sumadhva_vijaya/sarga_1$", "parameters": { "reference": "1.1" }, "min_confidence": 0.55 } },
+
+  { "id": "01_english_004", "category": "01_english", "language": "en-IN",
+    "transcript_text": "Search for Madhva in the corpus",
+    "expected": { "intent": "search_corpus", "target_pattern": null, "min_confidence": 0.5 } },
+
+  { "id": "01_english_005", "category": "01_english", "language": "en-IN",
+    "transcript_text": "Open Purandara Dasa's collections",
+    "notes": "Resolves to the real grantha dasa_sahitya/composers/purandara_dasaru (a composer index page), not the parampara person node -- reasonable for an 'open' intent since the person node itself isn't a readable text; the grantha match wins because open_text prefers grantha over person matches.",
+    "expected": { "intent": "open_text", "target_pattern": "purandara_dasaru$", "min_confidence": 0.3 } },
+
+  { "id": "01_english_006", "category": "01_english", "language": "en-IN",
+    "transcript_text": "Play the audio",
+    "expected": { "intent": "audio_action", "min_confidence": 0.55 } },
+
+  { "id": "01_english_007", "category": "01_english", "language": "en-IN",
+    "transcript_text": "Change the theme to dark",
+    "expected": { "intent": "settings_action", "min_confidence": 0.55 } },
+
+  { "id": "01_english_008", "category": "01_english", "language": "en-IN",
+    "transcript_text": "Show one shloka at a time",
+    "expected": { "intent": "renderer_action", "min_confidence": 0.55 } },
+
+  { "id": "02_kannada_001", "category": "02_kannada", "language": "kn-IN",
+    "transcript_text": "ಸುಮಧ್ವ ವಿಜಯ ೧.೧ ತೆರೆಯಿರಿ",
+    "notes": "'Open Sumadhva Vijaya 1.1' in Kannada script — the actual Saaras v3 kn-IN output style recorded in CLAUDE.md section 2. KNOWN GAP: resolver.js's normalize()/ASR_CONFUSIONS are Latin-script-only (see report) — this entry is expected to currently fail until Kannada/Devanagari-script normalization is added, kept in the manifest so that work has a concrete target.",
+    "expected": { "intent": "unknown", "target_pattern": null, "min_confidence": 0 } },
+
+  { "id": "02_kannada_002", "category": "02_kannada", "language": "kn-IN",
+    "transcript_text": "ಮಧ್ವರ ಬಗ್ಗೆ ಹುಡುಕಿ",
+    "notes": "'Search about Madhva' in Kannada. Same known script-normalization gap as 02_kannada_001.",
+    "expected": { "intent": "unknown", "target_pattern": null, "min_confidence": 0 } },
+
+  { "id": "02_kannada_003", "category": "02_kannada", "language": "kn-IN",
+    "transcript_text": "Sumadhva Vijaya ondu point ondu terayiri",
+    "notes": "A plausible Latin-transliterated Kannada-English code-switch an ASR model set to en-IN might actually emit for the same spoken command (transliteration rather than script), unlike 02_kannada_001's pure-script form. 'ondu' = Kannada 'one'; not currently in resolver.js's REF_WORD_NUMBERS (English-only) — documents a second concrete gap distinct from script handling.",
+    "expected": { "intent": "unknown", "target_pattern": null, "min_confidence": 0 } },
+
+  { "id": "02_kannada_004", "category": "02_kannada", "language": "kn-IN",
+    "transcript_text": "Purandara Dasa avara kritigalu tholi",
+    "notes": "'Open Purandara Dasa's compositions' Kannada-English code-switch, Latin script. KNOWN GAP: no English trigger word is present so this depends entirely on the bare-entity fallback, whose word-match ratio is computed over ALL 5 words including 3 unmodeled Kannada ones ('avara'/'kritigalu'/'tholi') -- ratio 2/5=0.4 stays under MATCH_RATIO_THRESHOLD (0.6), and the fallback path only checks granthaEntries (not personEntries), so 'Purandara Dasa' alone doesn't get resolver.js's person-side DISTINCTIVE_WORD_MIN_LENGTH allowance either. A real Kannada filler-word list (like FILLER_WORDS' English/Sanskrit-loanword entries) would close this.",
+    "expected": { "intent": "unknown", "target_pattern": null, "min_confidence": 0 } },
+
+  { "id": "03_sanskrit_001", "category": "03_sanskrit", "language": "sa-IN",
+    "transcript_text": "ऋग्वेदस्य प्रथमं सूक्तं उद्घाटयतु",
+    "notes": "'Open Rigveda's first sukta' in Devanagari — Saaras v3 sa-IN was recorded as correct in CLAUDE.md section 2. Same script-normalization gap as the Kannada entries.",
+    "expected": { "intent": "unknown", "target_pattern": null, "min_confidence": 0 } },
+
+  { "id": "03_sanskrit_002", "category": "03_sanskrit", "language": "sa-IN",
+    "transcript_text": "sumadhva vijayam pathatu",
+    "notes": "IAST/Latin-transliterated Sanskrit ('read the Sumadhva Vijaya') — no 'open'/'read'(English) trigger word present ('pathatu' = Sanskrit 'may [it] be read'), but the bare-entity fallback should still catch 'sumadhva vijayam' since 'vijayam' matching against haystack 'sumadhva vijaya' fails on the trailing -m. Documents that Sanskrit case-ending variation (vijaya/vijayam/vijayaha) isn't normalized yet either.",
+    "expected": { "intent": "unknown", "target_pattern": null, "min_confidence": 0 } },
+
+  { "id": "03_sanskrit_003", "category": "03_sanskrit", "language": "sa-IN",
+    "transcript_text": "raghuvamsham darshaya",
+    "notes": "'Show the Raghuvamsha' — real grantha kavya_alankara/raghuvamsha/mula. Same trailing-case-ending gap as 03_sanskrit_002 ('raghuvamsham' vs slug's 'raghuvamsha') AND no recognized trigger ('darshaya' = Sanskrit imperative 'show', not in the English trigger list) — expect bare-entity fallback to fail to match due to the -m suffix, a second concrete normalization gap to fix.",
+    "expected": { "intent": "unknown", "target_pattern": null, "min_confidence": 0 } },
+
+  { "id": "03_sanskrit_004", "category": "03_sanskrit", "language": "sa-IN",
+    "transcript_text": "explain jayatirtha commentary",
+    "notes": "'explain' wins over select_commentary since there's no select/show/switch/choose/pick verb -- a reasonable reading (explain what that commentary says), not a bug. explain is a FREE_QUERY intent so target is the raw remaining phrase, not a corpus-resolved person/grantha.",
+    "expected": { "intent": "explain", "target_pattern": "jayatirtha", "min_confidence": 0.55 } },
+
+  { "id": "04_hindi_001", "category": "04_hindi", "language": "hi-IN",
+    "transcript_text": "Rigveda kholo",
+    "notes": "'Open the Rigveda' — 'kholo' (Hindi 'open') is in resolver.js's open_text trigger list.",
+    "expected": { "intent": "open_text", "target_pattern": "rigveda", "min_confidence": 0.3 } },
+
+  { "id": "04_hindi_002", "category": "04_hindi", "language": "hi-IN",
+    "transcript_text": "Sumadhva Vijaya padhiye ek point ek",
+    "notes": "KNOWN GAP: trigger stripping is word-boundary-safe now (fixed after an earlier accidental substring match), so 'padi' no longer matches inside 'padhiye' at all -- no intent trigger fires, and the bare-entity fallback's word-match ratio (2 of 6 words: 'sumadhva'/'vijaya') stays under MATCH_RATIO_THRESHOLD because of the 3 unmodeled Hindi words ('padhiye'/'ek'x2/'point' partial). 'ek point ek' (Hindi 'one point one') is also NOT recognized as '1.1' by extractReference (English word-numbers only). Both are real Hindi-vocabulary gaps, not fabricated to pass.",
+    "expected": { "intent": "unknown", "target_pattern": null, "min_confidence": 0 } },
+
+  { "id": "04_hindi_003", "category": "04_hindi", "language": "hi-IN",
+    "transcript_text": "isska matlab batao",
+    "notes": "'Tell me its meaning' / explain-this-shloka in Hindi — no English trigger present. Expected unknown; a real Hindi trigger-phrase set is future work, not built in this pass.",
+    "expected": { "intent": "unknown", "target_pattern": null, "min_confidence": 0 } },
+
+  { "id": "04_hindi_004", "category": "04_hindi", "language": "hi-IN",
+    "transcript_text": "andhera theme laga do",
+    "notes": "'Switch to dark theme' in Hindi — no English trigger present ('dark'/'theme' both absent). Expected unknown; documents the same Hindi-trigger-vocabulary gap as 04_hindi_003.",
+    "expected": { "intent": "unknown", "target_pattern": null, "min_confidence": 0 } },
+
+  { "id": "05_mixed_001", "category": "05_mixed_code_switch", "language": "mixed",
+    "transcript_text": "Search kijiye for Vyasatirtha in the corpus",
+    "notes": "Hindi verb wedged mid-phrase, English trigger 'search for' still present around it via substring match on the 'search' + 'for' tokens appearing non-contiguously being handled by generic substring only when contiguous — actually 'search for' is NOT contiguous here ('search kijiye for'), so this deliberately tests the CURRENT limitation that only search_dhatu/select_commentary use pattern-based (non-contiguous) matching, not search_corpus yet.",
+    "expected": { "intent": "unknown", "target_pattern": null, "min_confidence": 0 } },
+
+  { "id": "05_mixed_002", "category": "05_mixed_code_switch", "language": "mixed",
+    "transcript_text": "Jayatirtha ki commentary select karo",
+    "notes": "Hindi postposition/verb wrapped around the English object 'commentary' - select_commentary's pattern requires 'select' AND 'commentary' both present anywhere in the string (order-independent via [\\s\\S]*), which holds here even with 'ki'/'karo' in between.",
+    "expected": { "intent": "select_commentary", "target_pattern": "Jayatirtha", "min_confidence": 0.55 } },
+
+  { "id": "05_mixed_003", "category": "05_mixed_code_switch", "language": "mixed",
+    "transcript_text": "Open kijiye Rigveda mandala 2",
+    "expected": { "intent": "open_text", "target_pattern": "mandala_02$", "min_confidence": 0.3 } },
+
+  { "id": "05_mixed_004", "category": "05_mixed_code_switch", "language": "mixed",
+    "transcript_text": "padaccheda dikhao please",
+    "notes": "'padaccheda' English/Sanskrit loanword trigger + Hindi verb 'dikhao'(show) as filler.",
+    "expected": { "intent": "padaccheda", "min_confidence": 0.55 } },
+
+  { "id": "05_mixed_005", "category": "05_mixed_code_switch", "language": "mixed",
+    "transcript_text": "Kanakadasa ke bare mein search corpus",
+    "expected": { "intent": "search_corpus", "min_confidence": 0.5 } },
+
+  { "id": "06_proper_names_001", "category": "06_proper_names", "language": "en-IN",
+    "transcript_text": "Open Sumadhva Vijaya",
+    "notes": "Real ambiguity: 16 sarga + 6 tika grantha entries all share the exact same 'sumadhva vijaya' title words with no reference number to disambiguate — this is the intended low-confidence/candidates-surfaced case, see resolver.test.js's identical assertion.",
+    "expected": { "intent": "open_text", "target_pattern": null, "max_confidence": 0.55 } },
+
+  { "id": "06_proper_names_002", "category": "06_proper_names", "language": "en-IN",
+    "transcript_text": "Select Jayatirtha commentary",
+    "expected": { "intent": "select_commentary", "target_pattern": "^Jayatirtha", "min_confidence": 0.55 } },
+
+  { "id": "06_proper_names_003", "category": "06_proper_names", "language": "en-IN",
+    "transcript_text": "Select Vyasatirtha commentary",
+    "notes": "Real parampara node id 'vyasatirtha' (also 'Vyasatirtha (Vyasaraja)').",
+    "expected": { "intent": "select_commentary", "target_pattern": "Vyasatirtha", "min_confidence": 0.55 } },
+
+  { "id": "06_proper_names_004", "category": "06_proper_names", "language": "en-IN",
+    "transcript_text": "Open Raghavendra Vijaya 1.1",
+    "notes": "Real grantha kavya_alankara/raghavendra_vijaya/sarga_1 — same multi-sarga sibling-disambiguation pattern as Sumadhva Vijaya.",
+    "expected": { "intent": "open_text", "target_pattern": "raghavendra_vijaya/sarga_1$", "parameters": { "reference": "1.1" }, "min_confidence": 0.55 } },
+
+  { "id": "06_proper_names_005", "category": "06_proper_names", "language": "en-IN",
+    "transcript_text": "Open Harikathamrutasara",
+    "notes": "Real grantha dasa_sahitya/dasakuta/jagannathadasa/harikathamrutasara — tests the ASR_CONFUSIONS entries for this title's common mis-hearings.",
+    "expected": { "intent": "open_text", "target_pattern": "harikathamrutasara$", "min_confidence": 0.3 } },
+
+  { "id": "06_proper_names_006", "category": "06_proper_names", "language": "en-IN",
+    "transcript_text": "Open Harikathamritasara",
+    "asr_noise_variant": "Open Harikathamritasara",
+    "notes": "Deliberately the common short-'i' mis-transcription of the same title as 06_proper_names_005 — exercises the ASR_CONFUSIONS table entry for it.",
+    "expected": { "intent": "open_text", "target_pattern": "harikathamrutasara$", "min_confidence": 0.3 } },
+
+  { "id": "07_open_text_001", "category": "07_open_text", "language": "en-IN",
+    "transcript_text": "Open the Siddhanta Kaumudi",
+    "expected": { "intent": "open_text", "target_pattern": "siddhanta_kaumudi$", "min_confidence": 0.3 } },
+
+  { "id": "07_open_text_002", "category": "07_open_text", "language": "en-IN",
+    "transcript_text": "Open Kiratarjuniya",
+    "expected": { "intent": "open_text", "target_pattern": "kiratarjuniya/mula$", "min_confidence": 0.3 } },
+
+  { "id": "07_open_text_003", "category": "07_open_text", "language": "en-IN",
+    "transcript_text": "Open Kumarasambhava",
+    "expected": { "intent": "open_text", "target_pattern": "kumarasambhava/mula$", "min_confidence": 0.3 } },
+
+  { "id": "07_open_text_004", "category": "07_open_text", "language": "en-IN",
+    "transcript_text": "Open Shishupalavadha",
+    "expected": { "intent": "open_text", "target_pattern": "shishupalavadha/mula$", "min_confidence": 0.3 } },
+
+  { "id": "07_open_text_005", "category": "07_open_text", "language": "en-IN",
+    "transcript_text": "Take me to Rigveda chapter 2",
+    "notes": "'chapter N' with no second labeled number — extractReference's 'labeled' pattern requires BOTH a chapter/sarga/etc AND a shloka/verse/etc number; a bare 'chapter 2' alone isn't matched by any current rule, so no reference is expected — documents that gap rather than asserting a false reference.",
+    "expected": { "intent": "open_text", "target_pattern": "rigveda", "min_confidence": 0.3 } },
+
+  { "id": "07_open_text_006", "category": "07_open_text", "language": "en-IN",
+    "transcript_text": "Rigveda 2.5.1",
+    "notes": "Bare reference-shaped utterance with no verb at all, mirroring dgeQuickJump's own 'rv2.5.1' UX contract — exercises the bare-entity fallback path.",
+    "expected": { "intent": "open_text", "target_pattern": "mandala_02$", "parameters": { "reference": "2.5.1" }, "min_confidence": 0.3 } },
+
+  { "id": "08_open_section_001", "category": "08_open_section", "language": "en-IN",
+    "transcript_text": "Go to section Ashtadhyayi",
+    "expected": { "intent": "open_section", "target_pattern": "ashtadhyayi", "min_confidence": 0.2 } },
+
+  { "id": "08_open_section_002", "category": "08_open_section", "language": "en-IN",
+    "transcript_text": "Jump to Dhatupatha",
+    "notes": "Real DGE_SPECIAL_PAGES entry (dge/js/library.js) — realSlug 'vedanga/vyakarana/dhatupatha' redirects to vyakarana/dhatu.html at the actual UI layer, not the general reader.",
+    "expected": { "intent": "open_section", "target_pattern": "vyakarana/dhatupatha$", "min_confidence": 0.3 } },
+
+  { "id": "08_open_section_003", "category": "08_open_section", "language": "en-IN",
+    "transcript_text": "Jump to Shabdapatha",
+    "expected": { "intent": "open_section", "target_pattern": "vyakarana/shabdapatha$", "min_confidence": 0.3 } },
+
+  { "id": "08_open_section_004", "category": "08_open_section", "language": "en-IN",
+    "transcript_text": "Open section Kaumudi Order",
+    "expected": { "intent": "open_section", "target_pattern": "kaumudi_order$", "min_confidence": 0.3 } },
+
+  { "id": "09_search_001", "category": "09_search", "language": "en-IN",
+    "transcript_text": "Find this dhatu",
+    "expected": { "intent": "search_dhatu", "min_confidence": 0.55 } },
+
+  { "id": "09_search_002", "category": "09_search", "language": "en-IN",
+    "transcript_text": "Look up dharma in the kosha",
+    "expected": { "intent": "search_kosha", "target_pattern": "^dharma$", "min_confidence": 0.3 } },
+
+  { "id": "09_search_003", "category": "09_search", "language": "en-IN",
+    "transcript_text": "What does moksha mean",
+    "expected": { "intent": "search_kosha", "min_confidence": 0.5 } },
+
+  { "id": "09_search_004", "category": "09_search", "language": "en-IN",
+    "transcript_text": "Search the corpus for Vyasatirtha",
+    "expected": { "intent": "search_corpus", "target_pattern": "Vyasatirtha", "min_confidence": 0.3 } },
+
+  { "id": "09_search_005", "category": "09_search", "language": "en-IN",
+    "transcript_text": "Search dhatu paatha for bhu",
+    "expected": { "intent": "search_dhatu", "min_confidence": 0.55 } },
+
+  { "id": "10_commentary_001", "category": "10_commentary_renderer", "language": "en-IN",
+    "transcript_text": "Show commentary",
+    "expected": { "intent": "select_commentary", "target_pattern": null, "min_confidence": 0.4 } },
+
+  { "id": "10_commentary_002", "category": "10_commentary_renderer", "language": "en-IN",
+    "transcript_text": "Switch to Raghavendra Tirtha's commentary",
+    "expected": { "intent": "select_commentary", "target_pattern": "Raghavendra Tirtha", "min_confidence": 0.55 } },
+
+  { "id": "10_commentary_003", "category": "10_commentary_renderer", "language": "en-IN",
+    "transcript_text": "Single view",
+    "expected": { "intent": "renderer_action", "min_confidence": 0.55 } },
+
+  { "id": "10_commentary_004", "category": "10_commentary_renderer", "language": "en-IN",
+    "transcript_text": "Expand all",
+    "expected": { "intent": "renderer_action", "min_confidence": 0.55 } },
+
+  { "id": "10_commentary_005", "category": "10_commentary_renderer", "language": "en-IN",
+    "transcript_text": "Grid view",
+    "expected": { "intent": "renderer_action", "min_confidence": 0.55 } },
+
+  { "id": "11_audio_settings_001", "category": "11_audio_settings", "language": "en-IN",
+    "transcript_text": "Pause the audio",
+    "expected": { "intent": "audio_action", "min_confidence": 0.55 } },
+
+  { "id": "11_audio_settings_002", "category": "11_audio_settings", "language": "en-IN",
+    "transcript_text": "Stop audio",
+    "expected": { "intent": "audio_action", "min_confidence": 0.55 } },
+
+  { "id": "11_audio_settings_003", "category": "11_audio_settings", "language": "en-IN",
+    "transcript_text": "Switch to light mode",
+    "expected": { "intent": "settings_action", "min_confidence": 0.55 } },
+
+  { "id": "11_audio_settings_004", "category": "11_audio_settings", "language": "en-IN",
+    "transcript_text": "Increase the font size",
+    "expected": { "intent": "settings_action", "min_confidence": 0.55 } },
+
+  { "id": "11_audio_settings_005", "category": "11_audio_settings", "language": "en-IN",
+    "transcript_text": "Change script to Devanagari",
+    "expected": { "intent": "settings_action", "min_confidence": 0.55 } },
+
+  { "id": "12_explain_001", "category": "12_explain_padaccheda_compare", "language": "en-IN",
+    "transcript_text": "Explain this shloka",
+    "expected": { "intent": "explain", "min_confidence": 0.55 } },
+
+  { "id": "12_explain_002", "category": "12_explain_padaccheda_compare", "language": "en-IN",
+    "transcript_text": "Ask Acharya about this verse",
+    "expected": { "intent": "explain", "min_confidence": 0.55 } },
+
+  { "id": "12_explain_003", "category": "12_explain_padaccheda_compare", "language": "en-IN",
+    "transcript_text": "Give me the padaccheda",
+    "expected": { "intent": "padaccheda", "min_confidence": 0.55 } },
+
+  { "id": "12_explain_004", "category": "12_explain_padaccheda_compare", "language": "en-IN",
+    "transcript_text": "Compare this with the other commentary",
+    "expected": { "intent": "compare", "min_confidence": 0.55 } },
+
+  { "id": "13_ambiguous_001", "category": "13_ambiguous_commands", "language": "en-IN",
+    "transcript_text": "Open Vijaya",
+    "notes": "Deliberately underspecified — 'Vijaya' alone is a substring of many titles (Sumadhva Vijaya, Raghavendra Vijaya, others); every candidate must contain the word 'vijaya', which most of these do, so this should stay ambiguous rather than silently picking one family.",
+    "expected": { "intent": "open_text", "target_pattern": null, "max_confidence": 0.55 } },
+
+  { "id": "13_ambiguous_002", "category": "13_ambiguous_commands", "language": "en-IN",
+    "transcript_text": "Show the commentary by that person",
+    "notes": "No name at all — select_commentary intent classifies correctly but there is no entity to resolve, target must stay null rather than guessing a commentator.",
+    "expected": { "intent": "select_commentary", "target_pattern": null, "min_confidence": 0.0 } },
+
+  { "id": "13_ambiguous_003", "category": "13_ambiguous_commands", "language": "en-IN",
+    "transcript_text": "Open the flibbertigibbet manuscript",
+    "notes": "No real corpus entity matches — must NOT silently open some unrelated grantha.",
+    "expected": { "intent": "open_text", "target_pattern": null, "max_confidence": 0.55 } },
+
+  { "id": "13_ambiguous_004", "category": "13_ambiguous_commands", "language": "en-IN",
+    "transcript_text": "tell me a joke about elephants",
+    "notes": "Not a DGE command at all — must classify as unknown, not force-fit into some intent. In the full system this is exactly the case CLAUDE.md section 7 routes to the Gemini fallback rather than acting locally.",
+    "expected": { "intent": "unknown", "target_pattern": null, "min_confidence": 0 } }
+]

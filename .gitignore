@@ -63,3 +63,18 @@ dge/data/dasa_sahitya_local/raw_dump/
 # Kavya import scratch: the report the importer writes when --report is left
 # at its default. A build artifact, like the corpus itself.
 _dump/
+
+# Genie ASR voice-command benchmark (genie_asr_benchmark/): prototype/research
+# work, kept out of dge/'s production code per CLAUDE.md. The Sarvam API key
+# lives ONLY in this gitignored local env file, same .env.local convention as
+# dge/firebase/functions/ above -- never commit it. Recorded audio samples and
+# per-run result dumps are local test data, not source; the AI4Bharat local
+# venv/model weights are large binary downloads, not source either.
+genie_asr_benchmark/scripts/.env.local
+genie_asr_benchmark/audio/**/*.wav
+genie_asr_benchmark/audio/**/*.m4a
+genie_asr_benchmark/audio/**/*.mp3
+genie_asr_benchmark/results/*.json
+genie_asr_benchmark/ai4bharat_local/venv/
+genie_asr_benchmark/ai4bharat_local/models/
+genie_asr_benchmark/ai4bharat_local/*.onnx
