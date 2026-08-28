@@ -34,7 +34,19 @@
   // queryToDevanagari() below) rather than folded to SLP1 -- computed once
   // per search, read by applyFilters()'s "Exact spelling only" toggle.
   var lastHits = null, lastQuery = '', lastQueryDeva = '';
-  var filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '', exact: false };
+  // "Exact spelling only" is a reader preference, not a per-search result --
+  // persisted the same way as the app's other standing preferences (theme,
+  // script, selection mode: dge_vyakarana_dark, dge_lang_pref,
+  // dge_selection_mode) so it survives a page reload instead of resetting
+  // to off every time.
+  var EXACT_STORAGE_KEY = 'dge_gs_exact_spelling';
+  function dgeGsLoadExact() {
+    try { return localStorage.getItem(EXACT_STORAGE_KEY) === '1'; } catch (e) { return false; }
+  }
+  function dgeGsSaveExact(v) {
+    try { localStorage.setItem(EXACT_STORAGE_KEY, v ? '1' : '0'); } catch (e) { /* ignore */ }
+  }
+  var filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '', exact: dgeGsLoadExact() };
   var CATEGORY_LABELS = {
     vedas: 'वेदाः', purana: 'पुराणानि', itihasa: 'इतिहासाः', darshana: 'दर्शनानि',
     smriti_dharma: 'स्मृतिधर्मशास्त्राणि', agama: 'आगमः', stotra: 'स्तोत्राणि',
@@ -644,6 +656,7 @@
       exactRow.className = 'dge-gs-frow';
       exactRow.appendChild(filterChip('Exact spelling only', filterState.exact, function () {
         filterState.exact = !filterState.exact;
+        dgeGsSaveExact(filterState.exact);
         buildFilterBar(hits);
         applyFilters();
       }));
