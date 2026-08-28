@@ -644,14 +644,15 @@
    "name": "Vātsyāyana — Kāmasūtra",
    "target": "upaveda/kamashastra/kamasutra",
    "unit": "adhikarana",
+   "subunit": "adhyaya",
    "schema": "generic",
    "author": "वात्स्यायनः",
    "tei": "sa_vAtsyAyana-kAmasUtra",
-   "marker": "bare_prefix_three_level",
+   "marker": "livre_lecon",
    "complete": true,
    "licence": "cc-by-nc-sa-4.0",
    "source_edition": "ed. Fezas",
-   "note": "7 adhikaraṇas (mūla sūtras only). Grouped at adhikaraṇa level, not adhyāya -- the marker carries all three (adhikaraṇa.adhyāya.sūtra) but group_items() only splits on the first component."
+   "note": "7 adhikaraṇas, 36 adhyāyas (mūla sūtras only), verified against the well-known 5+10+5+2+6+6+2 adhyāya count. Was grouped at adhikaraṇa level only; the file's adhikaraṇa.adhyāya.sūtra numbers can't safely drive adhyāya-level splitting either (they recur ~1609 times as inline cross-reference citations, not just at true sūtra starts) so the fix uses the file's own 'livre N'/'leçon M' French chapter headers (36 occurrences, one per real adhyāya) instead -- see parse_livre_lecon() in gretil_bulk.py."
   },
   {
    "id": "pancashayaka",

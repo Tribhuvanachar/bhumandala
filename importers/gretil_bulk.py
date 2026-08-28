@@ -147,18 +147,35 @@ def parse(raw, spec, patterns):
     return units, attribution, len(matches)
 
 
+def _ident(key):
+    ident = re.sub(r"[^0-9A-Za-z]+", "_", key)
+    return f"{int(ident):02d}" if ident.isdigit() else ident
+
+
 def group_items(units, spec):
-    """Fold units into DGE items — one item per first-level division."""
+    """Fold units into DGE items — one item per division.
+
+    Normally that's the first-level division (spec["unit"]). A marker whose
+    refs carry a real second conceptual level below that (not just a bare
+    verse number) opts in via spec["subunit"] to bucket on (level 1, level
+    2) instead, so e.g. an adhikaraṇa.adhyāya marker yields one item per
+    adhyāya rather than folding every adhyāya of an adhikaraṇa into a
+    single blob. Untouched for every text without "subunit" set.
+    """
     unit_name = spec.get("unit", "section")
+    sub_name = spec.get("subunit")
     schema = spec["schema"]
     buckets = {}
     order = []
     for refs, pada, text in units:
         if not refs:
             continue
-        top = refs[0] if len(refs) > 1 else "1"
+        if sub_name and len(refs) >= 2:
+            key = (str(refs[0]), str(refs[1]))
+        else:
+            top = refs[0] if len(refs) > 1 else "1"
+            key = str(top)
         verse = refs[-1]
-        key = str(top)
         if key not in buckets:
             buckets[key] = []
             order.append(key)
@@ -168,11 +185,13 @@ def group_items(units, spec):
 
     items = []
     for key in order:
-        ident = re.sub(r"[^0-9A-Za-z]+", "_", key)
-        if ident.isdigit():
-            ident = f"{int(ident):02d}"
-        item_id = f"{unit_name}_{ident}"
-        reference = f"{spec['name']}, {unit_name} {key}"
+        if sub_name and isinstance(key, tuple):
+            top_key, sub_key = key
+            item_id = f"{unit_name}_{_ident(top_key)}_{sub_name}_{_ident(sub_key)}"
+            reference = f"{spec['name']}, {unit_name} {top_key}, {sub_name} {sub_key}"
+        else:
+            item_id = f"{unit_name}_{_ident(key)}"
+            reference = f"{spec['name']}, {unit_name} {key}"
         if schema in ("itihasa_purana_text", "smriti_dharmashastra_text"):
             items.append({"id": item_id, "reference": reference, "shlokas": buckets[key]})
         else:
@@ -182,6 +201,63 @@ def group_items(units, spec):
                           "artha": "", "notes": "", "tags": [], "references": [],
                           "audio": []})
     return items
+
+
+LIVRE_RE = re.compile(r"livre\s+(\d+)", re.I)
+LECON_RE = re.compile(r"leçon\s+(\d+)", re.I)
+# The editor's own chapter-heading furniture (French "leçon"/"livre", English
+# "section") -- never genuine Sanskrit vocabulary in this corpus, so safe to
+# strip outright rather than let iast_to_dev() mangle it into gibberish
+# Devanagari. Matches e.g. "leçon 3", "livre 2", "section (prakaraṇa) 12a".
+LECON_FURNITURE_RE = re.compile(
+    r"\b(?:leçon|livre)\s+\d+\b|\bsection\s*\(prakaraṇa\)\s*\d+[a-z-]*", re.I)
+
+
+def parse_livre_lecon(raw, spec):
+    """Bespoke parser for Kāmasūtra's 'livre N ... leçon M' chapter markers.
+
+    The file's own adhikaraṇa.adhyāya.sūtra numbers (spec's nominal
+    "bare_prefix_three_level" marker) recur ~1609 times in the body --
+    confirmed by inspection, not assumed -- because they're also used as
+    inline cross-reference citations within running prose (e.g. a passage
+    in adhikaraṇa 2 citing "6.1.3"), not only at true sūtra starts. Bucketing
+    on that marker at adhyāya granularity (not just adhikaraṇa, which
+    happens to absorb the noise silently since citations only ever point at
+    valid 1-7 adhikaraṇa numbers) creates spurious chapters like
+    "adhikarana 1, adhyaya 20" -- adhikaraṇa 1 only has 5 adhyāyas.
+
+    "livre N" (7 occurrences, one per adhikaraṇa) and "leçon M" (36
+    occurrences total, matching the well-known 5+10+5+2+6+6+2 adhyāya
+    count per adhikaraṇa) are the French editor's own deliberate chapter
+    headers, each appearing exactly once at a true chapter start -- verified
+    against the source file directly, not assumed. "livre N" and its
+    adhikaraṇa's first "leçon 1" always share one line; every other "leçon"
+    within that adhikaraṇa carries no "livre" of its own, so the current
+    adhikaraṇa number is carried forward from the last "livre" seen.
+    """
+    attribution, body = split_header(raw)
+    marks = sorted(
+        [(m.start(), "livre", m.group(1)) for m in LIVRE_RE.finditer(body)] +
+        [(m.start(), "lecon", m.group(1)) for m in LECON_RE.finditer(body)]
+    )
+    chapters = []  # (adhikarana, adhyaya, text_start_offset)
+    adhikarana = None
+    for pos, kind, num in marks:
+        if kind == "livre":
+            adhikarana = num
+        else:
+            if adhikarana is None:
+                continue
+            chapters.append((adhikarana, num, pos))
+    units = []
+    for index, (adhikarana, adhyaya, pos) in enumerate(chapters):
+        start = LECON_RE.match(body, pos).end()
+        end = chapters[index + 1][2] if index + 1 < len(chapters) else len(body)
+        text = clean(LECON_FURNITURE_RE.sub(" ", body[start:end]))
+        if len(text) < 3:
+            continue
+        units.append(((adhikarana, adhyaya), None, text))
+    return units, attribution, len(marks)
 
 
 def urls_for(spec, registry):
@@ -250,7 +326,10 @@ def run(text_id, dry_run=False, registry=None):
     all_units, attribution, matched = [], "", 0
     for raw, ext in chunks:
         spec["_ext"] = ext
-        units, attr, count = parse(raw, spec, registry["marker_patterns"])
+        if spec["marker"] == "livre_lecon":
+            units, attr, count = parse_livre_lecon(raw, spec)
+        else:
+            units, attr, count = parse(raw, spec, registry["marker_patterns"])
         all_units += units
         matched += count
         attribution = attribution or attr
