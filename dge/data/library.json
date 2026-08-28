@@ -15990,17 +15990,6 @@
       }
     },
     {
-      "path": "dge/data/upaveda/ayurveda/nighantu/raja_nighantu/data.json",
-      "populated": true,
-      "title": "Raja Nighantu",
-      "source": {
-        "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_narahari-rAjanighaNTu.txt"
-      },
-      "facets": {
-        "default_author": "नरहरिः"
-      }
-    },
-    {
       "path": "dge/data/upaveda/ayurveda/nighantu/vahata_ashtanganighantu/data.json",
       "populated": true,
       "title": "Vahata Ashtanganighantu",
@@ -16022,19 +16011,6 @@
       },
       "facets": {
         "default_author": "शार्ङ्गधराचार्यः"
-      }
-    },
-    {
-      "path": "dge/data/upaveda/ayurveda/susruta_samhita_sutrasthana/data.json",
-      "populated": true,
-      "title": "Susruta Samhita (Sutrasthana)",
-      "addedAt": "2026-08-21",
-      "source": {
-        "source_url": "https://sa.wikisource.org/wiki/सुश्रुतसंहिता",
-        "licence": "CC BY-SA"
-      },
-      "facets": {
-        "default_author": "सुश्रुतः"
       }
     },
     {

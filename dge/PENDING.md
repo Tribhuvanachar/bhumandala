@@ -5086,3 +5086,51 @@ verify-then-merge protocol (PENDING part 11) still gates every PR.
   GRETIL, CC BY-NC-SA 4.0, ed. Fezas — `importers/gretil_bulk.json`'s
   `kamasutra` entry now documents `marker: "livre_lecon"` and the reasoning
   above inline.
+
+- **28 Aug (same session): resolved the two duplicate leaves flagged
+  above, rather than leaving both indefinitely.** Re-examined after the
+  Kāmasūtra fix landed, with time still available this session. Content-
+  compared both pairs directly (not just path/count) before touching
+  anything:
+  - `upaveda.ayurveda.susruta_samhita_sutrasthana` (Wikisource, 46 items)
+    vs `vedas.upaveda.ayurveda.samhita.sushruta_samhita.mula`'s `Sū.*`
+    slice (DCS, 2,019 items): opening verse of adhyāya 1 is the same text
+    verbatim ("अथातो वेदोत्पत्तिमध्यायं व्याख्यास्यामः..."), same 1–46
+    chapter range, same work — confirmed, not assumed from titles.
+  - `upaveda.ayurveda.nighantu.raja_nighantu` (GRETIL, 35 items) vs
+    `vedas.upaveda.ayurveda.nighantu.raja_nighantu.mula` (DCS, 3,218
+    items): identical opening maṅgalācaraṇa verse
+    ("श्रीकण्ठाचलमेखलापरिणमत्कुम्भीन्द्रबुद्ध्या..."), same work.
+  In both cases the DCS leaf is a strict superset (same text, finer
+  per-sentence grain, and for Suśruta the DCS leaf also covers the other
+  5 sthānas the Wikisource leaf never attempted) — unlike this corpus's
+  many genuinely-distinct tīkā variants kept deliberately side by side,
+  neither duplicate here adds any content, edition, or commentary layer
+  the DCS leaf lacks. Removed both as the superseded copies: deleted
+  `dge/data/upaveda/ayurveda/susruta_samhita_sutrasthana/` and
+  `dge/data/upaveda/ayurveda/nighantu/raja_nighantu/` (folder + data.json),
+  their `taxonomy.json` leaves under the top-level `upaveda.ayurveda`
+  branch, and their `library.json` catalog entries. Checked first that
+  nothing else in the codebase points at either path by name (only the two
+  removed data files, `admin/config/library-status.json`'s stale report,
+  an unused `dge/js/library.js` path-label entry, and the still-live
+  `importers/wikisource_ayurveda.py`/`tools/dcs/build_batch5_upaveda_shastra.py`
+  importer *source* did — none of those three break from the removal, so
+  left as-is).
+  - `validate_data.py`: 1732 → 1730 catalog files, still 0 errors.
+    `audit_library.py`: 1760 → 1758 entries matching 1758 data.json on
+    disk, still 0 orphans/missing/stale. `pytest tests/`: 221 passed.
+  - **`admin/config/library-status.json` deliberately NOT regenerated this
+    pass**: running `tools/gen_library_status.py` also flipped
+    `dge/data/vedanga/chandas/data.json`'s `populated` flag (unrelated
+    Vedāṅga content, presumably a concurrent session's in-flight work per
+    this session's own instructions to stay inside Ayurveda/Kāmaśāstra) —
+    reverted that incidental change rather than ship it, so the admin
+    report still lists the two now-deleted paths until whoever owns that
+    Vedāṅga change regenerates it themselves.
+  - The other Wikisource-imported Āyurveda leaves (`madhava_nidana`,
+    `sharngadhara_samhita`, and the `nighantu` GRETIL leaves other than
+    Rāja Nighaṇṭu — Bhāvaprakāśa Nighaṇṭu, Vāhaṭa's Aṣṭāṅganighaṇṭu) were
+    checked and are NOT duplicated anywhere in `vedas.upaveda.ayurveda` —
+    left untouched, they're each the only copy of their text in this
+    corpus.
