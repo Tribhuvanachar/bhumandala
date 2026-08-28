@@ -47,12 +47,24 @@
     try { localStorage.setItem(EXACT_STORAGE_KEY, v ? '1' : '0'); } catch (e) { /* ignore */ }
   }
   var filterState = { type: 'all', categories: {}, siddhanta: {}, keyword: '', exact: dgeGsLoadExact() };
-  var CATEGORY_LABELS = {
-    vedas: 'वेदाः', purana: 'पुराणानि', itihasa: 'इतिहासाः', darshana: 'दर्शनानि',
-    smriti_dharma: 'स्मृतिधर्मशास्त्राणि', agama: 'आगमः', stotra: 'स्तोत्राणि',
-    vedanga: 'वेदाङ्गानि', dasa_sahitya: 'दासस्ताहित्यम्', kavya_alankara: 'काव्यालङ्कारौ',
-    dvaitavedanta: 'Dvaitavedanta', upaveda: 'उपवेदाः', nitishastra: 'नीतिशास्त्रम्', misc: 'अन्ये'
-  };
+  // Single canonical label source (24 Aug 2026 UI/UX pass): both the
+  // category filter-chip row AND the corpus-scope dropdown used to carry
+  // their OWN hardcoded label maps -- one mostly-Devanagari, one entirely
+  // IAST -- so the same category ("Vedāṅga" vs "वेदाङ्गानि") read as two
+  // different taxonomies depending on which control you looked at, and
+  // neither responded to the script picker. Both now resolve through
+  // library.js's window.dgeSegLabel(seg), the exact function the Library
+  // tree already uses for every folder label: DGE_PATH_LABELS' Devanagari
+  // name (source of truth) run through dgeToActiveScript() so it follows
+  // the reader's own script preference, the same as every other label in
+  // the app. A category/section this maps has NOTHING app-specific about
+  // it here anymore -- taxonomyLabel() falls back to a plain title-cased
+  // rendering only if library.js somehow didn't load (defensive, not the
+  // normal path -- index.html always loads library.js before this file).
+  function taxonomyLabel(seg) {
+    if (typeof window.dgeSegLabel === 'function') return window.dgeSegLabel(seg);
+    return String(seg || '').replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
   // Advaita/Dvaita/Vishishtadvaita aren't their own field on a hit (the
   // search index doesn't carry one) but this project's own taxonomy paths
   // already encode it unambiguously in the slug for anything under
@@ -66,22 +78,11 @@
     if (/(^|\/)dvaita(\/|$)/.test(slug) || slug.indexOf('dvaitavedanta') === 0) return 'dvaita';
     return null;
   }
-  var SIDDHANTA_LABELS = { advaita: 'अद्वैतम्', dvaita: 'द्वैतम्', vishishtadvaita: 'विशिष्टाद्वैतम्' };
 
-  // Section slug -> display label, for the scope <select>. Falls back to a
-  // title-cased, underscore-stripped version of the slug for anything not
-  // listed here (see sectionLabel()), so a new section in the taxonomy shows
-  // up usably without this map needing to be kept in lockstep.
-  var SECTION_LABELS = {
-    vedas: 'Vedas', vedanga: 'Vedāṅga', itihasa: 'Itihāsa', purana: 'Purāṇa',
-    darshana: 'Darśana', dvaitavedanta: 'Dvaita Vedānta',
-    kavya_alankara: 'Kāvya', smriti_dharma: 'Smṛti / Dharma',
-    agama: 'Āgama', stotra: 'Stotra', dasa_sahitya: 'Dasa Sāhitya'
-  };
-  function sectionLabel(slug) {
-    return SECTION_LABELS[slug] ||
-      slug.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
-  }
+  // Section slug -> display label, for the scope popup. taxonomyLabel()
+  // (see above) is the single source for this now; kept as its own function
+  // only because callers below read sectionLabel() as a name.
+  function sectionLabel(slug) { return taxonomyLabel(slug); }
 
   function css() {
     if (document.getElementById('dge-gs-css')) return;
@@ -514,6 +515,12 @@
     // Sutra numbers appearing in a snippet get the same tappable popover
     // the reading view and Kosha already give them (js/intellisense.js) —
     // was Kosha-only; global corpus search snippets never got this.
+    // entity-linker.js's cross-reference scan runs first for the same
+    // "work name + number becomes one span" reason documented in its own
+    // header comment and in render.js's equivalent pairing.
+    if (typeof window.dgeScanForEntities === 'function') {
+      try { window.dgeScanForEntities(box); } catch (e) {}
+    }
     if (typeof window.dgeScanForSutras === 'function') {
       try { window.dgeScanForSutras(box); } catch (e) {}
     }
@@ -612,7 +619,7 @@
       catLabel.className = 'dge-gs-flabel'; catLabel.textContent = 'Category';
       catRow.appendChild(catLabel);
       catKeys.forEach(function (cat) {
-        var label = (CATEGORY_LABELS[cat] || cat) + ' (' + catCounts[cat] + ')';
+        var label = taxonomyLabel(cat) + ' (' + catCounts[cat] + ')';
         catRow.appendChild(filterChip(label, filterState.categories[cat] === true, function () {
           if (filterState.categories[cat]) delete filterState.categories[cat];
           else filterState.categories[cat] = true;
@@ -634,7 +641,7 @@
       sidLabel.className = 'dge-gs-flabel'; sidLabel.textContent = 'सिद्धान्तः · Siddhānta';
       sidRow.appendChild(sidLabel);
       sidKeys.forEach(function (sid) {
-        var label = (SIDDHANTA_LABELS[sid] || sid) + ' (' + sidCounts[sid] + ')';
+        var label = taxonomyLabel(sid) + ' (' + sidCounts[sid] + ')';
         sidRow.appendChild(filterChip(label, filterState.siddhanta[sid] === true, function () {
           if (filterState.siddhanta[sid]) delete filterState.siddhanta[sid];
           else filterState.siddhanta[sid] = true;

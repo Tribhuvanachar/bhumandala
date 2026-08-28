@@ -135,7 +135,14 @@
         if (!sk || sk < 1 || sk > 12 || !ad || !sl) return null;
         return {
           label: 'भागवतम् ' + sk + '.' + ad + '.' + sl,
-          path: 'purana/bhagavata_purana/skandha_' + pad2(sk),
+          // Pre-23-Aug-2026-restructure path was 'purana/bhagavata_purana/...'
+          // directly; the real corpus now nests it one level deeper under
+          // 'maha_purana' (dge/data/purana/maha_purana/bhagavata_purana/) --
+          // same stale-path class of bug already documented for dvaitavedanta
+          // elsewhere in this codebase. Left uncaught, every भा. citation here
+          // 404'd load()'s fetch and showed "Not found in this library's
+          // copy." even though the verse is actually digitized.
+          path: 'purana/maha_purana/bhagavata_purana/skandha_' + pad2(sk),
           find: function (d) {
             var a = (d.items || []).filter(function (x) { return x.id === 'adhyaya_' + pad2(ad); })[0];
             if (!a) return null;

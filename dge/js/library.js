@@ -42,6 +42,11 @@ const DGE_PATH_LABELS = {
 
   darshana: 'दर्शनानि', vedanta: 'वेदान्तः',
   dvaita: 'द्वैतम्', advaita: 'अद्वैतम्', vishishtadvaita: 'विशिष्टाद्वैतम्',
+  // Stale pre-23-Aug-2026 top-level path some not-yet-rebuilt search index
+  // shards still carry (see global-search.js's siddhantaOf() comment) --
+  // labelled here too so an admin viewing one of those hits still gets a
+  // real Devanagari name instead of the auto-labeller's bare "Dvaitavedanta".
+  dvaitavedanta: 'द्वैतवेदान्तः',
   nyaya: 'न्यायः', vaisheshika: 'वैशेषिकम्', sankhya: 'साङ्ख्यम्',
   yoga: 'योगः', mimamsa: 'मीमांसा',
   // 23 Aug 2026 restructure (origin/main): the separate top-level

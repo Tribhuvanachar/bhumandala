@@ -249,7 +249,13 @@
         if (!n.nodeValue || n.nodeValue.length < 5) return NodeFilter.FILTER_REJECT;
         let p = n.parentElement;
         while (p && p !== root) {
-          if (SKIP.has(p.tagName) || p.classList.contains('dge-sutra-ref')) return NodeFilter.FILTER_REJECT;
+          // dge-entity-ref: entity-linker.js's cross-reference scan (a
+          // citation like "अष्टाध्याय्याम् १.१.१" naming a work THEN a
+          // number) runs before this one at every call site specifically so
+          // its span already owns that number -- without also skipping into
+          // it here, this walker would still find the same digits and wrap
+          // a second, nested dge-sutra-ref around them.
+          if (SKIP.has(p.tagName) || p.classList.contains('dge-sutra-ref') || p.classList.contains('dge-entity-ref')) return NodeFilter.FILTER_REJECT;
           p = p.parentElement;
         }
         return NodeFilter.FILTER_ACCEPT;

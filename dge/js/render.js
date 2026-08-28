@@ -603,6 +603,21 @@ function renderList() {
     listEl.appendChild(c);
   }
 
+  // Cross-reference detection over the freshly rendered cards. entity-linker.js's
+  // scan (a work name + optional verse number, e.g. "ब्रह्मसूत्रे १.१.२") must
+  // run BEFORE intellisense.js's own sūtra-citation scan (a bare number cued by
+  // a nearby grammar term) so a citation naming both a work and a number becomes
+  // ONE span -- see entity-linker.js's header comment for why the ordering
+  // matters. Neither call previously ran in the reading view at all
+  // (dgeScanForSutras was wired only into Kosha/Ashtadhyayi/Dhatu/Rupasiddhi),
+  // so a citation appearing in a shloka or commentary went unlinked here.
+  if (typeof window.dgeScanForEntities === 'function') {
+    try { window.dgeScanForEntities(listEl); } catch (e) {}
+  }
+  if (typeof window.dgeScanForSutras === 'function') {
+    try { window.dgeScanForSutras(listEl); } catch (e) {}
+  }
+
   window.searchMatches = Array.from(document.querySelectorAll('.search-match'));
   const navContainer = document.getElementById('searchNavigator');
   if (rawQuery && window.searchMatches.length > 0 && navContainer) {

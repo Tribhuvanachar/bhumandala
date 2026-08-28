@@ -470,6 +470,9 @@
     // to turn those into tappable links with a popover — it was just never
     // asked to scan this page's cards, so every citation rendered as inert
     // text no matter how many the commentary named.
+    if (typeof window.dgeScanForEntities === 'function') {
+      try { window.dgeScanForEntities(box); } catch (e) {}
+    }
     if (typeof window.dgeScanForSutras === 'function') {
       try { window.dgeScanForSutras(box); } catch (e) {}
     }

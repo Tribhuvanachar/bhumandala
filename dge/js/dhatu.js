@@ -279,6 +279,9 @@
         });
       });
     }
+    if (typeof window.dgeScanForEntities === "function") {
+      try { window.dgeScanForEntities(el); } catch (e) {}
+    }
     if (typeof window.dgeScanForSutras === "function") {
       try { window.dgeScanForSutras(el); } catch (e) {}
     }

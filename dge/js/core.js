@@ -1083,8 +1083,19 @@ function dgeResolveQuickJumpTarget(target) {
     // Reverse scan by normalized value (parseInt each dot-segment, then
     // rejoin) so "1.1.3" matches regardless of how either side pads its
     // numbers — real data has no padding today, but this doesn't assume
-    // that stays true forever.
-    const normalize = s => String(s).split('.').map(p => parseInt(p, 10)).join('.');
+    // that stays true forever. Guarded to dotted-numeric strings only: a
+    // chapter-based vedicId (itihasa/purana schemas set this to something
+    // like "Skandha 10, Adhyaya 14 · 8", not a dotted number) has no digits
+    // at its start, so blindly parseInt-ing it collapsed EVERY such shloka
+    // to the same "NaN" key — every non-Vedic chapter-based grantha's
+    // jumpVedicId target silently matched the first shloka in the array
+    // instead of the one actually named. Non-numeric vedicIds now compare
+    // as plain trimmed strings instead.
+    const DOTTED_NUMERIC = /^[\d.]+$/;
+    const normalize = s => {
+      s = String(s).trim();
+      return DOTTED_NUMERIC.test(s) ? s.split('.').map(p => parseInt(p, 10)).join('.') : s;
+    };
     const wanted = normalize(target.vedicId);
     targetId = Object.keys(stotraData.shlokas).find(k => {
       const vid = stotraData.shlokas[k].vedicId;

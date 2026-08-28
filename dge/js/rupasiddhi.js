@@ -218,6 +218,9 @@
       '<p class="rs-note">No derivation — this combination is not grammatically derivable.</p>';
     $('#rs-drawer').classList.add('open');
     $('#rs-backdrop').classList.add('open');
+    if (typeof window.dgeScanForEntities === 'function') {
+      try { window.dgeScanForEntities($('#rs-drawerBody')); } catch (e) {}
+    }
     if (typeof window.dgeScanForSutras === 'function') {
       try { window.dgeScanForSutras($('#rs-drawerBody')); } catch (e) {}
     }

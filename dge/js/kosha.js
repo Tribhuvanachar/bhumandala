@@ -627,6 +627,9 @@
             try { window.dgeMarkCitations(c, { source: c.dataset.slug }); } catch (e) {}
           });
         }
+        if (typeof window.dgeScanForEntities === 'function') {
+          try { window.dgeScanForEntities(detail); } catch (e) {}
+        }
         if (typeof window.dgeScanForSutras === 'function') {
           try { window.dgeScanForSutras(detail); } catch (e) {}
         }
