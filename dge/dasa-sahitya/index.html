@@ -75,6 +75,28 @@
 
 <script src="../js/dge-shell.js?v=1"></script>
 <script src="../js/dge-breadcrumb.js?v=1"></script>
+<!-- Reader-redesign integration: this page used to be a fully standalone
+     mini-app with no cross-reference linking and no reachable word/composer
+     detail. These are the same shared modules the main DGE reader loads
+     (dge/index.html) and in the same order (modals.js before
+     contextual-actions.js, which dispatches through window.openModal/
+     closeModal; kosha.js/entity-linker.js self-fetch their own data
+     relative to their own script src, so the page's own depth doesn't
+     matter). Nothing here is a second bottom-sheet/toast system — the
+     composer sheet and composition menu below reuse this exact modal
+     shell (see dasa-sahitya.css's narrowly-copied .modal-overlay rules). -->
+<script src="../js/modals.js?v=1"></script>
+<script src="../js/reader-state.js?v=1"></script>
+<!-- kosha.js's own data-base default ("data/kosha") is a plain relative
+     string resolved against the PAGE's URL, correct only one level under
+     the repo root (dge/index.html). This page sits one level deeper
+     (dge/dasa-sahitya/), so it needs kosha.js's own documented override
+     point (see that file's KOSHA_DATA_BASE comment) rather than a patch to
+     the shared file. Set before kosha.js loads. -->
+<script>window.KOSHA_DATA_BASE = '../data/kosha';</script>
+<script src="../js/kosha.js?v=1"></script>
+<script src="../js/contextual-actions.js?v=1"></script>
+<script src="../js/entity-linker.js?v=1"></script>
 <script>
 "use strict";
 const BASE = (window.DASA_DATA_BASE || "../data/dasa_sahitya").replace(/\/$/,"");
@@ -89,6 +111,34 @@ function toast(m){const t=document.getElementById('toast');t.textContent=m;t.cla
   clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),1600);}
 function prefGet(k,d){try{return JSON.parse(localStorage.getItem('dasa_'+k))??d}catch(e){return d}}
 function prefSet(k,v){try{localStorage.setItem('dasa_'+k,JSON.stringify(v))}catch(e){}}
+
+// --- per-composition reading state (Favorite/Needs practice/Completed/Mark
+// doubt) --------------------------------------------------------------
+// Deliberately its OWN small localStorage-backed store, same prefGet/
+// prefSet this page already uses for script/group prefs, rather than
+// forced onto dge/js/reader-state.js's dgeStudyState(id). That accessor's
+// whole shape (window.marks[id]) is keyed by a numeric shlokaId inside one
+// grantha; a composition here is identified by a corpus-wide string id
+// ("vijayadasaru__dasa1_10969") with no shlokaId or grantha at all, so
+// reusing it would mean distorting reader-state.js's contract rather than
+// extending it honestly. reader-state.js is still loaded (see script tags
+// above) for the interaction-model consistency it gives everything else
+// this page now wires in (contextual-actions.js, kosha.js); this one piece
+// of state just isn't a fit for it, and that's a deliberate call, not an
+// oversight — see the integration report for the alternative considered.
+function compStateGet(id){ return prefGet('compstate_'+id, {fav:false,status:null,doubt:false}); }
+function compStateSet(id,patch){ const s=compStateGet(id); Object.assign(s,patch); prefSet('compstate_'+id,s); return s; }
+
+function escAttr(s){return esc(s).replace(/"/g,'&quot;');}
+// Wraps every non-whitespace run in a tappable span (word-tap -> Kosha,
+// the mockup's acceptance behavior) while ESCAPING the line for the first
+// time -- cardHtml() used to splice raw stanza text into innerHTML
+// unescaped. Whitespace between words is left as literal characters from
+// the source line, so .stanza's existing white-space:pre-wrap still
+// reproduces line breaks/spacing exactly as before.
+function tokenizeLine(line){
+  return (line||"").replace(/(\S+)/g,function(w){return '<span class="dasa-word" data-w="'+escAttr(w)+'">'+esc(w)+'</span>';});
+}
 
 async function boot(){
   state.script=prefGet('script','kn'); document.getElementById('script').value=state.script;
@@ -253,6 +303,16 @@ function render(){
     groups[k].forEach(r=>html+=cardHtml(r));
   });
   list.innerHTML=html;
+
+  // Cross-reference detection over the freshly rendered cards -- same call
+  // dge/js/render.js makes for the main reader (dge_entities.json is a
+  // registry of citable WORKS only; this Kannada devotional corpus rarely
+  // names one in citation form, so this will realistically find zero
+  // matches on most compositions today. Wired anyway for when it does, and
+  // so this page stays on the one real registry rather than growing its
+  // own). Deity/concept references (e.g. ಧನ್ವಂತರಿ) are NOT covered -- see
+  // the integration report.
+  if(typeof window.dgeScanForEntities==='function'){ try{ window.dgeScanForEntities(list); }catch(e){} }
 }
 
 function cardHtml(r){
@@ -260,8 +320,8 @@ function cardHtml(r){
   const stz=stanzasFor(r), roman=(r.text&&r.text.source_roman)||[];
   let body="";
   stz.forEach((st,i)=>{
-    body+='<div class="stanza">'+st.join("\n");
-    if(state.script==="kn" && roman[i]) body+='\n<span class="rom">'+roman[i].join("\n")+'</span>';
+    body+='<div class="stanza">'+st.map(tokenizeLine).join("\n");
+    if(state.script==="kn" && roman[i]) body+='\n<span class="rom">'+roman[i].map(esc).join("\n")+'</span>';
     body+='</div>';
   });
   if(r.meaning) body+='<div class="meaning"><b>ಅರ್ಥ / Meaning</b><br>'+esc(r.meaning)+'</div>';
@@ -274,11 +334,22 @@ function cardHtml(r){
   const isAdminCard = window.DGEAdminGate && window.DGEAdminGate.isAdmin();
   if(src.url && isAdminCard) body+='<div class="src">Source: <a href="'+src.url+'" target="_blank" rel="noopener">'+
     (src.site||src.url)+'</a></div>';
-  return `<details class="card"><summary>`+
+  const cst=compStateGet(r.id);
+  const badges=[
+    cst.fav?'<span class="state-badge" title="Favorite">⭐</span>':'',
+    cst.status==='practice'?'<span class="state-badge" title="Needs practice">◐</span>':'',
+    cst.status==='done'?'<span class="state-badge" title="Completed">✅</span>':'',
+    cst.doubt?'<span class="state-badge" title="Marked doubt">❓</span>':''
+  ].join('');
+  const composerBtn=r.composer?
+    `<button type="button" class="composer-link" data-composer="${escAttr(r.composer)}" data-slug="${escAttr(r._slug||'')}">${esc(r.composer)}</button>`:'';
+  return `<details class="card" data-cid="${escAttr(r.id)}"><summary>`+
     `<span class="badge form">${FORM_LABELS[r.form]||r.form}</span>`+
+    badges+
     `<span class="t">${esc(title)}</span>`+
     (il&&state.script!=="iast"?`<span class="tl">${esc(il)}</span>`:"")+
-    `<span class="meta">${esc(r.composer||"")}${r.deity?" · "+esc(r.deity):""}</span>`+
+    `<span class="meta">${composerBtn}${r.deity?" · "+esc(r.deity):""}</span>`+
+    `<button type="button" class="card-actions-btn" data-cid="${escAttr(r.id)}" title="Composition actions" aria-label="Composition actions">⋯</button>`+
     `</summary><div class="body">${body||'<p class="tl">No verse text captured.</p>'}</div></details>`;
 }
 function esc(s){return (s||"").replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
@@ -289,6 +360,157 @@ document.getElementById('groupby').onchange=e=>{state.group=e.target.value;prefS
 document.getElementById('sort').onchange=e=>{state.sort=e.target.value;render();};
 document.getElementById('script').onchange=e=>{state.script=e.target.value;prefSet('script',state.script);renderAuthors();render();};
 document.getElementById('loadall').onclick=loadAll;
+
+// --- word-tap -> Kosha / composer-tap -> profile sheet / "⋯" -> composition
+// menu. One delegated listener on the (static) #list container, same
+// pattern as authlist/forms above, so it costs nothing when nothing is
+// rendered yet and survives every render() replacing #list's innerHTML. ---
+document.getElementById('list').addEventListener('click',function(e){
+  const actBtn=e.target.closest('.card-actions-btn');
+  if(actBtn){
+    e.preventDefault(); e.stopPropagation(); // don't also toggle the <details> open/closed
+    const rec=state.records.find(r=>r.id===actBtn.dataset.cid);
+    if(rec) dgeOpenCompositionMenu(rec);
+    return;
+  }
+  const compBtn=e.target.closest('.composer-link');
+  if(compBtn){
+    e.preventDefault(); e.stopPropagation();
+    dgeOpenComposerSheet(compBtn.dataset.composer, compBtn.dataset.slug);
+    return;
+  }
+  const wordEl=e.target.closest('.dasa-word');
+  if(wordEl){
+    const sel=window.getSelection();
+    if(sel && sel.toString().trim().length>0) return; // a drag-selection's mouseup also fires click
+    if(typeof window.dgeOpenKosha==='function') window.dgeOpenKosha(wordEl.dataset.w);
+    else toast('Kosha lookup is not available on this page yet.');
+  }
+});
+
+// --- composition-level contextual menu (Favorite/Needs practice/Completed/
+// Mark doubt/Play/References/Share), via dge/js/contextual-actions.js's
+// registry + admin/config/contextual-actions.json's "composition" entry --
+// not a second bespoke action sheet. ---------------------------------
+window.dgeOpenCompositionMenu=function(rec){
+  if(typeof window.dgeOpenContextualMenu!=='function'){ toast('Actions menu is not available on this page yet.'); return; }
+  window.dgeOpenContextualMenu('composition',{id:rec.id,rec:rec,label:scriptTitle(rec)});
+};
+function compCitation(rec){
+  return scriptTitle(rec)+' — '+(rec.composer||'ದಾಸ ಸಾಹಿತ್ಯ')+' · DGE Dāsa Sāhitya ('+rec.id+')';
+}
+async function copyToClipboard(text){
+  try{
+    if(navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(text); }
+    else{
+      const ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.left='-9999px';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    }
+    toast('Copied.');
+  }catch(e){ toast('Could not copy — select and copy manually.'); }
+}
+window.dgeCtxCompFavorite=function(ctx){
+  const was=compStateGet(ctx.id).fav; compStateSet(ctx.id,{fav:!was});
+  toast(was?'Removed from favorites.':'Added to favorites.'); render();
+};
+window.dgeCtxCompPractice=function(ctx){
+  const cur=compStateGet(ctx.id).status; const next=cur==='practice'?null:'practice';
+  compStateSet(ctx.id,{status:next}); toast(next?'Marked needs practice.':'Cleared status.'); render();
+};
+window.dgeCtxCompCompleted=function(ctx){
+  const cur=compStateGet(ctx.id).status; const next=cur==='done'?null:'done';
+  compStateSet(ctx.id,{status:next}); toast(next?'Marked completed.':'Cleared status.'); render();
+};
+window.dgeCtxCompDoubt=function(ctx){
+  const was=compStateGet(ctx.id).doubt; compStateSet(ctx.id,{doubt:!was});
+  toast(was?'Doubt cleared.':'Marked doubt.'); render();
+};
+// No composition in this corpus carries an audio field today (checked the
+// schema directly) -- explicit-tap-only stays honest rather than pretending
+// to play something that doesn't exist, matching the explicit-play-only
+// fix already shipped elsewhere for the main reader.
+window.dgeCtxCompPlay=function(){ toast('No audio recording is linked to this composition yet.'); };
+window.dgeCtxShowCompReferences=function(ctx){
+  const card=document.querySelector('.card[data-cid="'+CSS.escape(ctx.id)+'"]');
+  const ref=card && card.querySelector('.dge-entity-ref, .dge-sutra-ref');
+  if(ref){ ref.click(); return; }
+  toast('No recognized cross-references in this composition yet.');
+};
+window.dgeCtxCompShare=function(ctx){
+  const rec=ctx.rec; if(!rec) return;
+  const text=compCitation(rec), url=location.href.split('#')[0]+'#'+encodeURIComponent(rec.id);
+  if(navigator.share){ navigator.share({title:scriptTitle(rec),text:text,url:url}).catch(()=>{}); return; }
+  copyToClipboard(text+'\n'+url);
+};
+
+// --- composer profile sheet: real fields only, live from
+// dge/guru-parampara/data/people.json (the real person-entity store —
+// NOT dge/data/dge_entities.json, which is scoped to citable works, see
+// its own _readme). No invented birth name/birthplace/parents/guru --
+// this repo's person records don't carry those fields yet. -------------
+let peoplePromise=null;
+function loadPeople(){
+  if(!peoplePromise) peoplePromise=fetch('../guru-parampara/data/people.json',{cache:'no-store'})
+    .then(r=>r.ok?r.json():null).then(d=>(d&&d.people)||[]).catch(()=>[]);
+  return peoplePromise;
+}
+function normName(s){ return (s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z]/g,''); }
+function normComposer(s){ return normName(s).replace(/dasaru$/,'dasa'); }
+function matchPerson(people,composer){
+  const key=normComposer(composer);
+  if(!key) return null;
+  return people.find(p=>normComposer(p.name)===key || normComposer(p.id)===key) || null;
+}
+function ensureComposerSheetEl(){
+  let el=document.getElementById('dasaComposerSheet');
+  if(el) return el;
+  el=document.createElement('div');
+  el.className='modal-overlay'; el.id='dasaComposerSheet';
+  el.innerHTML='<div class="modal-content"><div class="modal-header-sticky">'+
+    '<h4 id="dasaComposerSheetTitle" style="margin:0;color:var(--accent-red);font-size:15px;"></h4>'+
+    '<button class="btn-sm" onclick="window.closeModal(\'dasaComposerSheet\')">✖ Close</button></div>'+
+    '<div class="modal-body" id="dasaComposerSheetBody"></div></div>';
+  document.body.appendChild(el);
+  el.addEventListener('click',e=>{ if(e.target===el && typeof window.closeModal==='function') window.closeModal('dasaComposerSheet'); });
+  el.addEventListener('click',e=>{
+    const btn=e.target.closest('[data-works-slug]'); if(!btn) return;
+    const slug=btn.dataset.worksSlug, name=btn.dataset.worksName;
+    (async()=>{
+      if(slug){ state.author=slug; await loadComposer(slug); }
+      renderAuthors(); render();
+      if(typeof window.closeModal==='function') window.closeModal('dasaComposerSheet');
+      toast('Showing works by '+name);
+    })();
+  });
+  return el;
+}
+window.dgeOpenComposerSheet=function(composer,slug){
+  if(!composer){ toast('No composer on this composition.'); return; }
+  ensureComposerSheetEl();
+  const titleEl=document.getElementById('dasaComposerSheetTitle'), bodyEl=document.getElementById('dasaComposerSheetBody');
+  titleEl.textContent=composer;
+  bodyEl.innerHTML='<p class="tl">Loading…</p>';
+  if(typeof window.openModal==='function') window.openModal('dasaComposerSheet');
+  const manifestEntry=(state.manifest.composers||[]).find(c=>c.slug===slug);
+  const worksCount=manifestEntry?manifestEntry.count:'—';
+  loadPeople().then(people=>{
+    const p=matchPerson(people,composer);
+    let html='';
+    if(p){
+      html+='<div class="composer-badges">'+
+        (p.period?`<span class="badge">${esc(p.period)}</span>`:'')+
+        (p.matha?`<span class="badge">${esc(p.matha)} matha</span>`:'')+
+        (p.confidence?`<span class="badge">confidence: ${esc(p.confidence)}</span>`:'')+
+        '</div>';
+      if(p.titles && p.titles.length) html+=`<p class="tl"><b>Titles:</b> ${p.titles.map(esc).join(', ')}</p>`;
+      html+='<p class="composer-note">This is the real guru-paramparā record for this composer — only the fields DGE currently has are shown. Fuller biographical detail (birth name, birthplace, parents, guru) is not yet digitized for this person.</p>';
+    }else{
+      html+=`<p class="composer-note">No linked guru-paramparā profile found yet for "${esc(composer)}" — this composer may not be in the person registry yet, or the name doesn't match closely enough to auto-link.</p>`;
+    }
+    html+=`<button type="button" class="btn-sm" style="margin-top:12px;width:100%;padding:10px;" data-works-slug="${escAttr(slug||'')}" data-works-name="${escAttr(composer)}">📖 See this composer's works (${worksCount})</button>`;
+    bodyEl.innerHTML=html;
+  });
+};
 
 boot();
 </script>

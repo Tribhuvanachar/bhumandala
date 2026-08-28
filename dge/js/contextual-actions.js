@@ -79,15 +79,25 @@ window.DGE_VERSIONS['contextual-actions.js'] = 'v1.0 (contextual action registry
   var runtimeRegistrations = []; // pages/features can add more via dgeRegisterContextualActions()
 
   function configUrl() {
-    // dge/index.html and dge/vyakarana/*.html sit at different depths —
-    // both load admin/config/*.json as "../admin/config/..." already
-    // (menu.json, keys.json), so this matches that existing convention.
-    return '../admin/config/contextual-actions.json';
+    // A hardcoded "../admin/config/..." only resolves correctly from pages
+    // exactly one level under the repo root (dge/index.html). It silently
+    // 404s from anything nested deeper (dge/dasa-sahitya/index.html,
+    // dge/vyakarana/*.html) since "../" only climbs past dasa-sahitya/,
+    // landing on a dge/admin/ that doesn't exist -- this went unnoticed
+    // because no page at that depth had loaded this file until dasa-sahitya
+    // integration surfaced it. Resolve relative to THIS SCRIPT's own src
+    // instead (document.currentScript, captured at parse time before any
+    // async work), same pattern entity-linker.js already uses for
+    // dge_entities.json -- correct at any page depth.
+    var self = (document.currentScript && document.currentScript.src) || (window.DGE_SCRIPT_BASE || '');
+    try { return new URL('../../admin/config/contextual-actions.json', self).href; }
+    catch (e) { return '../admin/config/contextual-actions.json'; }
   }
+  var CONFIG_URL = configUrl(); // must run synchronously at parse time -- document.currentScript is only valid then
 
   function fetchConfig() {
     if (configPromise) return configPromise;
-    configPromise = fetch(configUrl() + '?t=' + Date.now(), { cache: 'no-store' })
+    configPromise = fetch(CONFIG_URL + '?t=' + Date.now(), { cache: 'no-store' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .catch(function () { return null; })
       .then(function (json) {

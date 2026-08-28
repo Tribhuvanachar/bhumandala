@@ -14,7 +14,16 @@
     "",
     "  base              the default action list per object type (shloka,",
     "                    word, phrase, commentary, reference, chapter,",
-    "                    page). Every reader sees these unless overridden.",
+    "                    page, composition). Every reader sees these unless",
+    "                    overridden.",
+    "",
+    "  composition       added for dge/dasa-sahitya/index.html (Dāsa Sāhitya):",
+    "                    one Haridāsa pada/suladi/ugabhoga, identified by its",
+    "                    corpus id (context.id) rather than a numeric shlokaId.",
+    "                    Composer identity/profile is handled by a dedicated",
+    "                    sheet (window.dgeOpenComposerSheet), not this",
+    "                    registry — same reasoning as word/shloka keeping",
+    "                    their own richer surfaces instead of the generic menu.",
     "  taxonomyOverrides  a list of { id, pathPrefixes, objectTypes, add,",
     "                    remove, enabled }. pathPrefixes match against",
     "                    window.currentGranthaSlug (e.g. 'vedas/rigveda/',",
@@ -38,7 +47,7 @@
     "for logic too dynamic to express as static data."
   ],
 
-  "objectTypes": ["shloka", "word", "phrase", "commentary", "reference", "chapter", "page"],
+  "objectTypes": ["shloka", "word", "phrase", "commentary", "reference", "chapter", "page", "composition"],
 
   "base": {
     "shloka": [
@@ -87,6 +96,15 @@
       { "id": "references",  "icon": "link",     "label": "References",           "action": "dgeCtxShowReferences" },
       { "id": "edit",        "icon": "edit",     "label": "Edit",                  "action": "dgeCtxEnterEditMode", "requires": "admin" },
       { "id": "more",        "icon": "more",     "label": "More",                  "action": "dgeCtxOpenMoreSheet" }
+    ],
+    "composition": [
+      { "id": "favorite",    "icon": "star",     "label": "Favorite",              "action": "dgeCtxCompFavorite" },
+      { "id": "practice",    "icon": "status",   "label": "Needs practice",        "action": "dgeCtxCompPractice" },
+      { "id": "completed",   "icon": "status",   "label": "Completed",             "action": "dgeCtxCompCompleted" },
+      { "id": "doubt",       "icon": "doubt",    "label": "Mark doubt",            "action": "dgeCtxCompDoubt" },
+      { "id": "play",        "icon": "play",     "label": "Play audio",            "action": "dgeCtxCompPlay" },
+      { "id": "references",  "icon": "link",     "label": "References",           "action": "dgeCtxShowCompReferences" },
+      { "id": "share",       "icon": "export",   "label": "Share / copy citation", "action": "dgeCtxCompShare" }
     ]
   },
 
