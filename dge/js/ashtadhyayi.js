@@ -243,7 +243,7 @@
       +'<span class="dn-cluster'+(skOn?' on':'')+(ke?'':' dn-none')+'" data-order="kaumudi">'
       +'<button class="dn-label" data-nav="sk-mode" title="browse in Siddhanta Kaumudi reading order"><span class="deva">'+tl("कौमुदी")+'</span> '+(ke?devnum(ke.kaumudiIndex):"—")+'</button>'
       +'</span>'
-      +'<button class="dn-chapters" data-nav="chapters" title="Siddhanta Kaumudi prakarana list"><span class="deva">'+tl("प्रकरणानि")+'</span> ☰</button>';
+      +'<button class="dn-chapters" data-nav="chapters" title="Siddhanta Kaumudi prakarana list — topical index"><span class="deva">'+tl("प्रकरणानि")+'</span><span class="dn-gloss">· Topics</span> ☰</button>';
   }
   function setNavMode(m){
     state.navMode = m; LS.set("navMode", m);
@@ -298,6 +298,23 @@
       h+='<button class="btn" id="dge-prayogaSearch" style="margin-top:12px">🔍 search the whole corpus live</button>';
       body.innerHTML=h;
     });
+  }
+
+  // ✏️ report a text error — the same [DGE-CONTENT-GAP] template
+  // shabda.js/modals.js already emit, so the planned triage pipeline reads
+  // one shape (Type/Surface/Context/Page/Timestamp). Renamed "Suggest a
+  // correction" wherever it appears in UI (critique #20) rather than a bare
+  // pencil icon reading as if the canonical text were casually editable.
+  function reportCorrection(){
+    var row=state.sutras[state.idx]; if(!row) return;
+    var email=window.DGE_CONTACT_EMAIL||"sanatanavidyagurukulam@gmail.com";
+    var subject=encodeURIComponent("[DGE-CONTENT-GAP] sutra-correction — "+row.id);
+    var lines=["Type: sutra-correction","Surface: "+row.id,
+      "Context: "+row.sanskrit_text,
+      "Page: "+location.href.split("#")[0]+"#"+row.id,
+      "Timestamp: "+new Date().toISOString(),
+      "", "What is wrong (please describe, or paste the corrected text):", ""];
+    location.href="mailto:"+email+"?subject="+subject+"&body="+encodeURIComponent(lines.join("\n"));
   }
 
   /* ---------- Kaumudi prakarana drawer ---------- */
@@ -454,7 +471,8 @@
       +'<div class="dge-head" data-h="'+folder+'">'
       +'<span class="t '+(isEn?"":(state.script==="iast"?"":"deva"))+'">'+(isEn?m.t:tl(m.t))+'</span>'
       +'<span class="sub">'+m.sub+'</span><span class="who">'+m.who+'</span>'
-      +(hasText?'<button class="dge-copy" data-copy="'+folder+'" title="copy">⧉</button>':'')
+      +(hasText?'<button class="dge-copy" data-copy="'+folder+'" title="Copy '+m.sub+' text" aria-label="Copy '+m.sub+' text">⧉</button>':'')
+      +'<button class="dge-kebab" data-kebab="'+folder+'" title="More actions for '+m.sub+'" aria-label="More actions for '+m.sub+'">⋮</button>'
       +'<span class="caret">▾</span></div>'
       +'<div class="dge-body" style="font-size:'+state.font+'px">'
       +'<div class="'+devCls+'">'+body+'</div>'
@@ -478,7 +496,7 @@
     }
     box.querySelectorAll(".dge-head").forEach(function(h){
       h.addEventListener("click",function(e){
-        if(e.target.classList.contains("dge-copy")) return;
+        if(e.target.closest(".dge-copy,.dge-kebab")) return;
         if(state.mode==="compare") return;
         var k=h.dataset.h; state.collapsed[k]=!state.collapsed[k]; h.parentElement.classList.toggle("collapsed");
       });
@@ -490,13 +508,63 @@
         if(it&&navigator.clipboard){ navigator.clipboard.writeText(it.sanskrit_text); b.textContent="✓"; setTimeout(function(){b.textContent="⧉";},900); }
       });
     });
-  }
-  function renderAll(){ renderHero(); renderLayers(); syncChips(); }
-  function syncChips(){
-    document.querySelectorAll("#dge-chips .dge-chip").forEach(function(c){
-      if(c.classList.contains("pending")) return;
-      var on=!!state.enabled[c.dataset.c]; c.classList.toggle("on",on); c.classList.toggle("off",!on);
+    // Commentary contextual menu (critique #10's per-object-type interaction
+    // model, applied to "tap a commentary"): About/Copy citation/Find
+    // citations/Ask DGE AI, registered via the taxonomy-override mechanism
+    // at boot (see registerContextualOverrides below) rather than
+    // duplicating contextual-actions.js's own base 'commentary' actions,
+    // whose handlers assume dge/index.html's shloka-card shape and don't
+    // apply to this page's dge-card layers.
+    box.querySelectorAll(".dge-kebab").forEach(function(b){
+      b.addEventListener("click",function(e){
+        e.stopPropagation();
+        var folder=b.dataset.kebab, m=META[folder], row=state.sutras[state.idx];
+        if(typeof window.dgeOpenContextualMenu!=="function"||!m||!row) return;
+        window.dgeOpenContextualMenu("commentary",{
+          folder:folder, sutraId:row.id, label:(m.lang==="en"?m.t:tl(m.t))+" · "+m.sub,
+          granthaSlug:"vedanga/vyakarana/ashtadhyayi"
+        });
+      });
     });
+  }
+  function renderAll(){ renderHero(); renderLayers(); renderCommentaryNavigator(); }
+  // ---- Commentary Navigator (DGE_UI_CONTRACT.md #2) ----------------------
+  // Replaces the old flat .dge-chips pill row + "green=loaded from your
+  // data / dashed=pending" legend, which exposed this app's own loading
+  // implementation to the reader (critique #4) and conflated "available"
+  // with "displayed" (critique #2) in one row of same-shaped pills
+  // (critique #22). This renders a labeled list: a toggle dot per row
+  // (filled=displayed, hollow=available-not-displayed, dashed=loading) plus
+  // a plain-language summary line above it -- "5 of 7 commentaries shown"
+  // instead of a color-key legend.
+  function commentaryStatus(folder){
+    var L=state.layers[folder];
+    if(!L) return "not loaded";
+    if(L.loading) return "loading…";
+    if(L.error) return "could not load";
+    var row=state.sutras[state.idx];
+    return (row && L.byId[row.id]) ? "" : "no text on this sūtra";
+  }
+  function renderCommentaryNavigator(){
+    var sum=$("#dge-cnSummary"), list=$("#dge-cnList");
+    if(!sum||!list) return;
+    var shown=ORDER.filter(function(k){return state.enabled[k];}).length;
+    sum.innerHTML='<span><b>'+shown+' of '+ORDER.length+'</b> commentaries shown</span>'
+      +'<span class="cn-tools"><button type="button" data-cn-action="expand" title="Expand every open commentary">⤢ Expand</button>'
+      +'<button type="button" data-cn-action="collapse" title="Collapse every open commentary">⤡ Collapse</button></span>';
+    list.innerHTML=ORDER.map(function(k){
+      var m=META[k], L=state.layers[k], on=!!state.enabled[k];
+      var pending=on&&L&&L.loading;
+      var status=on?commentaryStatus(k):"tap to show";
+      return '<button type="button" class="cn-row'+(on?' displayed':'')+(pending?' pending':'')+'" '
+        +'role="listitem" data-c="'+k+'" aria-pressed="'+(on?'true':'false')+'" '
+        +'aria-label="'+(on?'Hide ':'Show ')+esc(m.sub)+'">'
+        +'<span class="cn-dot" aria-hidden="true"></span>'
+        +'<span class="cn-label"><span class="t '+(state.script==="iast"?"":"deva")+'">'+(m.lang==="en"?m.t:tl(m.t))+'</span>'
+        +'<span class="sub">'+esc(m.sub)+' · '+esc(m.who)+'</span></span>'
+        +'<span class="cn-status">'+esc(status)+'</span>'
+        +'</button>';
+    }).join("");
   }
   function go(i){ if(i<0||i>=state.sutras.length) return; state.idx=i; renderAll(); window.scrollTo({top:0,behavior:"smooth"}); }
   // Steps through state.kaumudi.list (only the sutras with a confirmed
@@ -625,11 +693,24 @@
   function wire(){
     syncHeaderOffset();
     window.addEventListener("resize", syncHeaderOffset);
-    $("#dge-chips").addEventListener("click",function(e){
-      var c=e.target.closest(".dge-chip"); if(!c||c.classList.contains("pending"))return;
-      var k=c.dataset.c; state.enabled[k]=!state.enabled[k]; LS.set("enabled",state.enabled);
-      c.classList.toggle("on",state.enabled[k]); c.classList.toggle("off",!state.enabled[k]);
-      if(state.enabled[k]){ renderLayers(); ensureLayer(k).then(renderLayers); } else renderLayers();
+    // Commentary Navigator: tap a row to toggle it displayed/hidden (the
+    // dge-chips flat pill row's old job, see renderCommentaryNavigator).
+    var cnList=$("#dge-cnList");
+    if(cnList) cnList.addEventListener("click",function(e){
+      var row=e.target.closest(".cn-row"); if(!row) return;
+      var k=row.dataset.c; state.enabled[k]=!state.enabled[k]; LS.set("enabled",state.enabled);
+      renderCommentaryNavigator();
+      if(state.enabled[k]){ renderLayers(); ensureLayer(k).then(function(){ renderLayers(); renderCommentaryNavigator(); }); }
+      else renderLayers();
+    });
+    // Expand-all/Collapse-all: one shared handler for both homes critique #5
+    // asks for -- the ☰ menu drawer's "Commentaries" section, and the tiny
+    // affordance next to the navigator's own summary line -- rather than two
+    // separate implementations of the same action.
+    document.addEventListener("click",function(e){
+      var b=e.target.closest("[data-cn-action]"); if(!b) return;
+      if(b.dataset.cnAction==="expand"){ ORDER.forEach(function(k){state.collapsed[k]=false;}); renderLayers(); }
+      else if(b.dataset.cnAction==="collapse" && state.mode!=="compare"){ ORDER.forEach(function(k){state.collapsed[k]=true;}); renderLayers(); }
     });
     $("#dge-modeSeg").addEventListener("click",function(e){ var b=e.target.closest("button"); if(!b)return;
       [].forEach.call(e.currentTarget.children,function(x){x.classList.remove("on");}); b.classList.add("on");
@@ -640,8 +721,6 @@
     $("#dge-themeBtn").addEventListener("click",function(){ var d=document.body.classList.toggle("dark"); LS.set("dark",d); });
     $("#dge-fontUp").addEventListener("click",function(){ state.font=Math.min(26,state.font+1); LS.set("font",state.font); renderLayers(); });
     $("#dge-fontDn").addEventListener("click",function(){ state.font=Math.max(13,state.font-1); LS.set("font",state.font); renderLayers(); });
-    $("#dge-expand").addEventListener("click",function(){ ORDER.forEach(function(k){state.collapsed[k]=false;}); renderLayers(); });
-    $("#dge-collapse").addEventListener("click",function(){ if(state.mode!=="compare"){ORDER.forEach(function(k){state.collapsed[k]=true;}); renderLayers();} });
     $("#dge-prevBtn").addEventListener("click",function(){ goNav(-1); });
     $("#dge-nextBtn").addEventListener("click",function(){ goNav(1); });
     $("#dge-prevBtnTop").addEventListener("click",function(){ goNav(-1); });
@@ -682,13 +761,18 @@
       var id=b.dataset.goto;
       if(state.byId[id]) go(state.sutras.indexOf(state.byId[id]));
     });
-    var wex=$("#dge-whatBtn"); if(wex) wex.addEventListener("click",function(){
-      var el=$("#dge-chips"); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); });
-    // साहित्ये प्रयोगाः — where this sutra is actually used across the
-    // library, from the precomputed prayoga index (lineage-ranked:
-    // Sarvamula first, then the Dvaita corpus, then Dasa Sahitya). The
-    // live corpus search stays available as the fallback row.
-    var usage=$("#dge-usageBtn"); if(usage) usage.addEventListener("click",openPrayoga);
+    // "What explains this sutra" / corpus usage / suggest-a-correction used
+    // to be three separate always-visible buttons in .heroactions, crowding
+    // the sūtra before a reader reaches any commentary (critique #1/#18).
+    // They're real, distinct capabilities, not duplicates of each other, so
+    // per critique #10's per-object-type interaction model they now live
+    // together in one sūtra contextual menu (⋯ More), registered as a
+    // taxonomy override alongside the commentary one below.
+    var more=$("#dge-sutraMoreBtn"); if(more) more.addEventListener("click",function(){
+      var row=state.sutras[state.idx];
+      if(typeof window.dgeOpenContextualMenu!=="function"||!row) return;
+      window.dgeOpenContextualMenu("sutra",{sutraId:row.id,label:row.id,granthaSlug:"vedanga/vyakarana/ashtadhyayi"});
+    });
     var pm=$("#dge-prayogaModal");
     if(pm) pm.addEventListener("click",function(e){
       if(e.target.id==="dge-prayogaClose"){ closeAll(); return; }
@@ -702,20 +786,6 @@
       var unit=(r.dataset.unit||"").split("#")[0];
       location.href="index.html?path="+encodeURIComponent(r.dataset.slug)
         +(unit?("&jumpVedicId="+encodeURIComponent(unit)):"");
-    });
-    // ✏️ report a text error — the same [DGE-CONTENT-GAP] template
-    // shabda.js/modals.js already emit, so the planned triage pipeline
-    // reads one shape (Type/Surface/Context/Page/Timestamp).
-    var fix=$("#dge-fixBtn"); if(fix) fix.addEventListener("click",function(){
-      var row=state.sutras[state.idx]; if(!row) return;
-      var email=window.DGE_CONTACT_EMAIL||"sanatanavidyagurukulam@gmail.com";
-      var subject=encodeURIComponent("[DGE-CONTENT-GAP] sutra-correction — "+row.id);
-      var lines=["Type: sutra-correction","Surface: "+row.id,
-        "Context: "+row.sanskrit_text,
-        "Page: "+location.href.split("#")[0]+"#"+row.id,
-        "Timestamp: "+new Date().toISOString(),
-        "", "What is wrong (please describe, or paste the corrected text):", ""];
-      location.href="mailto:"+email+"?subject="+subject+"&body="+encodeURIComponent(lines.join("\n"));
     });
     // Jump box. It used to accept an exact "1.1.1" and nothing else, and to
     // do nothing at all -- no message, no shake -- for anything it did not
@@ -818,13 +888,104 @@
     var sv=$("#dge-keySave"); if(sv) sv.addEventListener("click",function(){ setKey($("#dge-keyInput").value.trim()); LS.set("gmodel",$("#dge-modelSel").value); closeAll(); });
     var cl=$("#dge-keyClear"); if(cl) cl.addEventListener("click",function(){ setKey(""); $("#dge-keyInput").value=""; });
     var sc=$("#dge-setClose"); if(sc) sc.addEventListener("click",closeAll);
+    // Focus / reading mode (critique #30): collapses the page to the sūtra
+    // and open commentaries only, for the hours-long study sessions this
+    // app is actually for. Persisted like every other reader preference.
+    var focusBtn=$("#dge-focusBtn"); if(focusBtn) focusBtn.addEventListener("click",function(){
+      var on=document.body.classList.toggle("dge-focus");
+      LS.set("focus",on); focusBtn.setAttribute("aria-pressed",on?"true":"false"); focusBtn.classList.toggle("on",on);
+    });
+    registerContextualOverrides();
   }
 
   function applyPrefs(){
     if(LS.get("dark",false)) document.body.classList.add("dark");
+    if(LS.get("focus",false)){
+      document.body.classList.add("dge-focus");
+      var fb=$("#dge-focusBtn"); if(fb){ fb.setAttribute("aria-pressed","true"); fb.classList.add("on"); }
+    }
     var ms=$("#dge-modeSeg"); if(ms) ms.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on",b.dataset.m===state.mode); });
     var ss=$("#dge-scriptSeg"); if(ss) ss.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on",b.dataset.s===state.script); });
   }
+
+  // ---- Contextual actions (DGE_UI_CONTRACT.md #10): register the two
+  // object types this page adds -- 'sutra' and a page-specific 'commentary'
+  // action set -- via contextual-actions.js's runtime extension point
+  // (dgeRegisterContextualActions), scoped to this page's own taxonomy path
+  // so no other reader's commentary/shloka menus are affected. Base
+  // 'commentary' actions in admin/config/contextual-actions.json assume
+  // dge/index.html's shloka-card shape (their handlers call
+  // openBhashyaPickerForShloka etc., which don't exist here) -- removed for
+  // this taxonomy path and replaced with handlers that fit THIS page's own
+  // dge-card/META shape, so nothing here duplicates or fights the shared
+  // registry's defaults for other readers.
+  function registerContextualOverrides(){
+    if(typeof window.dgeRegisterContextualActions!=="function") return;
+    window.dgeRegisterContextualActions({
+      objectTypes:["sutra"], pathPrefixes:["vedanga/vyakarana/ashtadhyayi"],
+      add:[
+        {id:"usage", icon:"search", label:"Corpus usage (प्रयोगाः)", action:"dgeCtxAshtaSutraUsage"},
+        {id:"copyText", icon:"copy", label:"Copy sūtra text", action:"dgeCtxAshtaSutraCopyText"},
+        {id:"copyCitation", icon:"link", label:"Copy citation", action:"dgeCtxAshtaSutraCopyCitation"},
+        {id:"correction", icon:"edit", label:"Suggest a correction", action:"dgeCtxAshtaSutraCorrection"}
+      ]
+    });
+    window.dgeRegisterContextualActions({
+      objectTypes:["commentary"], pathPrefixes:["vedanga/vyakarana/ashtadhyayi"],
+      remove:["copy","askAcharya","references"],
+      add:[
+        {id:"about", icon:"book", label:"About this commentary", action:"dgeCtxAshtaCommentaryAbout"},
+        {id:"copyCitation", icon:"copy", label:"Copy citation", action:"dgeCtxAshtaCommentaryCopyCitation"},
+        {id:"citations", icon:"search", label:"Find citations", action:"dgeCtxAshtaCommentaryCitations"},
+        {id:"askAI", icon:"acharya", label:"Ask DGE AI about this", action:"dgeCtxAshtaCommentaryAskAI"}
+      ]
+    });
+  }
+
+  function openAiDrawer(prefill){
+    $("#dge-drawer").classList.add("open"); $("#dge-backdrop").classList.add("open");
+    if(prefill){
+      var inp=$("#dge-aiInput"); if(inp){ inp.value=prefill; inp.focus(); }
+    }
+  }
+
+  // ---- sutra ⋮ menu handlers ----
+  window.dgeCtxAshtaSutraUsage = function(){ openPrayoga(); };
+  window.dgeCtxAshtaSutraCopyText = function(ctx){
+    var row=state.byId[ctx&&ctx.sutraId] || state.sutras[state.idx];
+    if(row && navigator.clipboard) navigator.clipboard.writeText(row.sanskrit_text);
+  };
+  window.dgeCtxAshtaSutraCopyCitation = function(ctx){
+    var row=state.byId[ctx&&ctx.sutraId] || state.sutras[state.idx]; if(!row) return;
+    var cite="Aṣṭādhyāyī "+row.id+" — \""+row.sanskrit_text+"\" ("+location.href.split("#")[0]+"#"+row.id+")";
+    if(navigator.clipboard) navigator.clipboard.writeText(cite);
+  };
+  window.dgeCtxAshtaSutraCorrection = function(){ reportCorrection(); };
+
+  // ---- commentary ⋮ menu handlers ----
+  window.dgeCtxAshtaCommentaryAbout = function(ctx){
+    var m=META[ctx&&ctx.folder]; if(!m) return;
+    var titleEl=document.getElementById("dgeContextMenuTitle"), bodyEl=document.getElementById("dgeContextMenuBody");
+    if(!titleEl||!bodyEl) return;
+    titleEl.textContent=m.sub;
+    bodyEl.innerHTML='<p style="font-size:13px;line-height:1.6;color:var(--ink);grid-column:1/-1">'
+      +"<b>"+esc(m.sub)+"</b> ("+esc(m.t)+")<br>Author: "+esc(m.who)
+      +"<br>Role: "+esc(m.role==="bhashya"?"bhāṣya (foundational commentary)":m.role==="tika"?"ṭīkā (running commentary)":m.role==="tippani"?"ṭippaṇī (gloss/annotation)":"translation")
+      +(m.lang==="en"?"<br>Language: English":"")+"</p>";
+    if(typeof window.openModal==="function") window.openModal("dgeContextMenu");
+  };
+  window.dgeCtxAshtaCommentaryCopyCitation = function(ctx){
+    var m=META[ctx&&ctx.folder], row=state.byId[ctx&&ctx.sutraId]||state.sutras[state.idx];
+    if(!m||!row) return;
+    var cite=m.sub+" on Aṣṭādhyāyī "+row.id+" ("+m.who+")";
+    if(navigator.clipboard) navigator.clipboard.writeText(cite);
+  };
+  window.dgeCtxAshtaCommentaryCitations = function(){ openPrayoga(); };
+  window.dgeCtxAshtaCommentaryAskAI = function(ctx){
+    var m=META[ctx&&ctx.folder], row=state.byId[ctx&&ctx.sutraId]||state.sutras[state.idx];
+    var label=m?((m.lang==="en"?m.t:m.sub)):"this commentary";
+    openAiDrawer("Explain this "+label+" passage on sūtra "+((row&&row.id)||"")+".");
+  };
   // Deep-linking a specific sutra via #<code> (e.g. "1.1.1") — the target
   // every other page's "open this sutra in Ashtadhyayi" link already
   // builds (js/intellisense.js's per-step sutra popover), but this page
@@ -844,7 +1005,7 @@
       var h=hashId();
       if(h && state.byId[h]) state.idx=state.sutras.indexOf(state.byId[h]);
       renderAll();
-      ORDER.forEach(function(k){ if(state.enabled[k]) ensureLayer(k).then(renderLayers); });
+      ORDER.forEach(function(k){ if(state.enabled[k]) ensureLayer(k).then(function(){ renderLayers(); renderCommentaryNavigator(); }); });
       window.addEventListener("hashchange",goToHash);
       loadKaumudiOrder();
     }).catch(function(e){ $("#dge-hsutra").textContent="Failed to load sutrapatha data."; console.error("[ashtadhyayi]",e); });
