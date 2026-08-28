@@ -96,11 +96,6 @@
     h+=kv("पदम् · voice", esc(tl(it.pada))+" ("+it.pada_iast+")"+(it.pada_trad?' · <span class="'+devCls+'">'+esc(tl(it.pada_trad))+'</span>':''));
     if(it.set) h+=kv("सेट्/अनिट् · iṭ", '<b>'+(it.set==="seṭ"?"सेट् (seṭ)":it.set==="aniṭ"?"अनिट् (aniṭ)":it.set==="veṭ"?"वेट् (veṭ)":esc(it.set))+'</b>');
     if(it.karma) h+=kv("कर्म · transitivity", '<b>'+esc(it.karma)+'</b>');
-    if(it.artha_extra && (it.artha_extra.hi||it.artha_extra.en)){
-      h+=kv("अर्थः · gloss", (it.artha_extra.hi?('<span class="deva">'+esc(it.artha_extra.hi)+'</span>'):'')
-        +(it.artha_extra.hi&&it.artha_extra.en?' &nbsp;·&nbsp; ':'')
-        +(it.artha_extra.en?esc(it.artha_extra.en):''));
-    }
     if(it.anunasika_it) h+=kv("इत् · marker", "anunāsika it (nasal marker present in upadeśa)");
     h+='<div class="acts">'
       +'<a class="btn ai" href="prakriya.html#'+it.id+'">⚙ प्रक्रिया · तिङन्त</a>'
