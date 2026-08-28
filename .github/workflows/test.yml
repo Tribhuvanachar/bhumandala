@@ -7,8 +7,10 @@ name: Tests
 # the Python suite (tests/), the standalone offline import tests under
 # tools/, the plain-Node JS tests (no framework, no build step -- this
 # project's own convention), tools/validate_data.py's structural corpus
-# check, and tools/validate_gold_standard.py's V1-V7 gate over any
-# format:gold_v2_2 commentary already in dge/data/.
+# check, tools/validate_gold_standard.py's V1-V7 gate over any
+# format:gold_v2_2 commentary already in dge/data/, and the generated-file
+# drift gates (frontend shell, sitemap.xml/robots.txt) that fail if their
+# source changed without regenerating the committed output.
 #
 # tools/darshanas/test_darshanas.py is deliberately NOT run here: it syncs
 # and writes taxonomy.json/library.json as a side effect (a migration
@@ -24,6 +26,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # build_sitemap.py's --check gate below derives each URL's
+          # lastmod from real git history; a shallow (depth-1) checkout
+          # has no history to derive it from -- its one boundary commit
+          # looks like it "added" every file, which would make every
+          # lastmod collapse to today's date and never match sitemap.xml
+          # as committed.
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -46,6 +56,9 @@ jobs:
 
       - name: set_site_url tests
         run: python3 tools/test_set_site_url.py
+
+      - name: build_sitemap tests
+        run: python3 tools/test_build_sitemap.py
 
       - name: JS -- search resilience
         run: node dge/js/test-search-resilience.js
@@ -70,3 +83,6 @@ jobs:
 
       - name: Frontend redesign -- baked shell drift gate (build_shell.py)
         run: python3 tools/redesign/build_shell.py --check
+
+      - name: sitemap.xml / robots.txt drift gate (build_sitemap.py)
+        run: python3 tools/build_sitemap.py --check

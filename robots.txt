@@ -51,3 +51,5 @@ Disallow: /
 User-agent: *
 Disallow: /admin/
 Allow: /
+
+Sitemap: https://tribhuvanachar.github.io/bhumandala/sitemap.xml
