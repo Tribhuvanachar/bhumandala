@@ -4,7 +4,19 @@
    Lifted out of the page unchanged — same rules, same order, so it renders
    exactly as before. Pages hold structure; their styles live here and their
    words in admin/content/.
+
+   tokens.css is imported below *in addition to* this file's own pre-
+   existing --bg/--ink/--accent/etc custom properties (kept as-is, untouched,
+   so nothing about the existing look changes) purely so the shared reader
+   components this page now wires in — contextual-actions.js's generic
+   contextual-menu component and the composer-profile sheet added alongside
+   it — can use DGE's real --accent-red/--card-bg/--text-primary/etc
+   vocabulary, the same one kosha.js's self-injected overlay CSS already
+   assumes. The two variable sets don't collide (different names), so this
+   is additive, not a re-theme of the page.
    ========================================================================= */
+
+@import url("tokens.css");
 
 :root{
     --bg:#faf7f2; --panel:#fff; --ink:#241c14; --muted:#7a6a58; --line:#e7ddcf;
@@ -94,6 +106,61 @@
   .toast{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);
     padding:8px 14px;border-radius:10px;font-size:.82rem;opacity:0;transition:.25s;pointer-events:none;z-index:40}
   .toast.show{opacity:.95}
+
+  /* ---- Reader-redesign integration: word-tap-to-Kosha, composer profile
+     sheet, and the composition contextual menu (dge/js/contextual-actions.js
+     + dge/js/kosha.js + dge/guru-parampara/data/people.json). ---- */
+
+  .card>summary{position:relative}
+  .state-badge{font-size:.82rem;line-height:1}
+  .composer-link{font:inherit;font-size:.78rem;color:var(--accent-red,var(--accent));
+    background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;
+    text-underline-offset:2px;text-decoration-style:dotted}
+  .composer-link:hover,.composer-link:focus-visible{text-decoration-style:solid}
+  .card-actions-btn{margin-left:6px;flex:0 0 auto;font:inherit;font-size:.9rem;line-height:1;
+    background:none;border:1px solid var(--line);border-radius:8px;color:var(--muted);
+    cursor:pointer;padding:4px 8px;min-height:28px}
+  .card-actions-btn:hover,.card-actions-btn:focus-visible{border-color:var(--accent);color:var(--accent)}
+  .dasa-word{cursor:pointer;border-radius:3px;transition:background .12s}
+  .dasa-word:hover,.dasa-word:focus-visible{background:var(--chip);outline:none}
+
+  /* Shared bottom-sheet/dialog shell (same class names + behavior as
+     dge/js/modals.js's openModal()/closeModal() and dge/css/main.css's
+     .modal-overlay/.modal-content/.ctx-menu-*) — copied narrowly rather
+     than importing all of main.css, so this page's own distinct layout
+     (header/cards/chips above) isn't affected by main.css's global
+     element selectors. Keeps the actual JS behavior shared; only these
+     few rules are duplicated, and only using tokens.css variables so a
+     theme change there stays in sync automatically. */
+  body.modal-open{overflow:hidden !important}
+  .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);
+    display:none;justify-content:center;align-items:center;z-index:11000;
+    backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+  .modal-content{background:var(--card-bg);color:var(--text-primary);border-radius:var(--radius-lg);
+    width:90%;max-width:440px;border:1px solid var(--card-border);max-height:85vh;
+    box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden;
+    font-family:var(--font-ui)}
+  .modal-header-sticky{padding:16px;background:var(--card-bg);z-index:10;
+    border-bottom:1px solid var(--card-border);display:flex;justify-content:space-between;
+    align-items:center;flex-shrink:0;gap:10px}
+  .modal-body{padding:16px;overflow-y:auto;flex-grow:1}
+  .btn-sm{background:var(--bg-main);border:1px solid var(--card-border);border-radius:var(--radius-pill);
+    padding:6px 10px;font-size:11px;font-weight:700;color:var(--text-primary);cursor:pointer;
+    white-space:nowrap;font-family:var(--font-ui)}
+  .btn-sm:active{transform:scale(.95)}
+  .ctx-menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+  .ctx-action-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;
+    background:var(--bg-main);border:1px solid var(--card-border);border-radius:var(--radius-sm);
+    cursor:pointer;color:var(--text-primary);font-family:var(--font-ui);min-height:44px}
+  .ctx-action-btn:hover,.ctx-action-btn:focus-visible{background:var(--card-active);border-color:var(--accent-red)}
+  .ctx-action-icon{font-size:20px;line-height:1}
+  .ctx-action-label{font-size:11.5px;font-weight:600;text-align:center;line-height:1.3}
+
+  /* Composer profile sheet content (fields sourced live from
+     dge/guru-parampara/data/people.json — see dgeOpenComposerSheet()). */
+  .composer-badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+  .composer-badges .badge{background:var(--bg-main);color:var(--text-primary);border-color:var(--card-border)}
+  .composer-note{font-size:.8rem;color:var(--muted-text,var(--muted));line-height:1.5}
 
   /* site-footer.js's shared links row. */
   .site-footer-links{margin:22px 16px;padding:16px 0 40px;border-top:1px solid var(--line);text-align:center}
