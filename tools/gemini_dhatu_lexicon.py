@@ -66,9 +66,13 @@ from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gemini_client import DEFAULT_MODEL, GeminiError, call_gemini  # noqa: E402
+from dhatu_grounding import KoshaIndex, build_grounding  # noqa: E402
 
 DHATUPATHA_PATH = Path("dge/data/vedanga/vyakarana/dhatupatha/data.json")
 OUTPUT_PATH = Path("dge/data/vedanga/vyakarana/dhatu_lexicon/data.json")
+VRITTI_DIR = Path("dge/data/vedanga/vyakarana/vritti")
+KOSHA_VRITTI_SLUGS = ["madhaviya-dhatu-vritti", "kshiratarangini", "dhatupradipa"]
+KOSHA_DICT_SLUGS = ["macdonell", "capeller-sanskrit-english", "mw-1872", "apte-1957"]
 
 LANGUAGES = ["English", "Kannada", "Telugu", "Tamil", "Malayalam", "Hindi",
              "Bengali", "German", "French", "Russian", "Chinese"]
@@ -82,34 +86,46 @@ SYSTEM_INSTRUCTION = (
     "pada, and its own dhātvārtha (meaning) in Sanskrit -- already verified "
     "by the library. Use these only as context; do not restate, alter, or "
     "second-guess them.\n\n"
+    "You may ALSO be given, under a heading '=== REAL SOURCE EXCERPTS ===', "
+    "genuine quoted text from named traditional commentaries (Mādhavīya "
+    "Dhātuvṛtti, Kṣīrataraṅgiṇī, Dhātupradīpa) and/or real dictionary "
+    "entries (Monier-Williams, Macdonell, Capeller, Apte) for this exact "
+    "root. When such excerpts are present: ground your `meanings` and "
+    "`pedagogy` in what they actually say, and you MAY reference which "
+    "named source informed a specific point (e.g. 'per the Mādhavīya "
+    "Dhātuvṛtti') -- this is legitimate here because you were handed the "
+    "real text, not asked to recall or invent it. When NO such section is "
+    "present, or for any point the given excerpts don't actually support, "
+    "fall back to your own general knowledge and do NOT claim it reflects "
+    "any specific named work -- never cite a source you were not shown.\n\n"
     "Produce exactly two things:\n\n"
     "1. `meanings`: for EACH of these 11 languages -- English, Kannada, "
     "Telugu, Tamil, Malayalam, Hindi, Bengali, German, French, Russian, "
-    "Chinese -- the standard, everyday equivalent(s) for this root's core "
-    "sense, written in ROMAN TRANSLITERATION even for the Indic languages "
-    "(never native script), as 3-5 comma-separated short words/phrases, "
-    "e.g. 'To be, to exist, to become, to happen'. If you are not "
-    "genuinely confident of an accurate equivalent in a language, write "
-    "exactly \"(uncertain)\" for that language instead of guessing a "
-    "plausible-sounding word -- a wrong lexical equivalent shown to a "
-    "learner is worse than an honest gap.\n\n"
+    "Chinese -- the standard equivalent(s) for this root's core sense, "
+    "written in ROMAN TRANSLITERATION even for the Indic languages (never "
+    "native script), as 3-5 comma-separated short words/phrases, e.g. "
+    "'To be, to exist, to become, to happen'. Draw the SENSE from the real "
+    "source excerpts when given (the source itself is Sanskrit/English "
+    "only -- you are still the one translating into the other 9 "
+    "languages). If you are not genuinely confident of an accurate "
+    "equivalent in a language, write exactly \"(uncertain)\" for that "
+    "language instead of guessing a plausible-sounding word -- a wrong "
+    "lexical equivalent shown to a learner is worse than an honest gap.\n\n"
     "2. `pedagogy`: a `concept` (one to two simple sentences, for a "
     "school-age student, on how this root's sense shifts across its "
     "common derived forms -- parasmaipada vs ātmanepada, causative, "
     "whichever this SPECIFIC root actually distinguishes; if it has no "
     "such nuance, say so plainly) and 1-3 `scenarios`, each naming one "
     "derived form, the grammatical trigger that produces it, its shifted "
-    "meaning, and ONE original example sentence in Sanskrit with its "
-    "English translation that YOU compose to illustrate the point. Do NOT "
-    "attribute this explanation or these examples to any specific named "
-    "traditional commentary (e.g. do not say 'according to "
-    "Dhāturūpanandinī' or cite any other named work) -- this is your own "
-    "freshly composed teaching material, not a verified quotation, and "
-    "must never be presented as one. Do NOT invent a śloka, a citation, a "
-    "page number, or any other bibliographic detail anywhere in your "
-    "answer. If the root genuinely has no interesting derived-form nuance "
-    "worth teaching, return an empty `scenarios` list rather than "
-    "inventing one.\n\n"
+    "meaning, and ONE example sentence in Sanskrit with its English "
+    "translation. Prefer an example ACTUALLY PRESENT in the real source "
+    "excerpts (quote it, don't alter it); only compose your own "
+    "illustrative sentence when the excerpts don't supply one, and in that "
+    "case do NOT attribute it to any named work. Do NOT invent a śloka, a "
+    "citation, a page number, or any other bibliographic detail beyond "
+    "what the given excerpts actually contain. If the root genuinely has "
+    "no interesting derived-form nuance worth teaching, return an empty "
+    "`scenarios` list rather than inventing one.\n\n"
     "This entire output will be shown to readers labeled \"AI-generated "
     "(Gemini), unreviewed\" -- write accordingly: prioritize being "
     "honestly uncertain over sounding authoritative."
@@ -150,8 +166,8 @@ RESPONSE_SCHEMA = {
 }
 
 
-def build_prompt(entry: dict) -> str:
-    return (
+def build_prompt(entry: dict, grounding: str = "") -> str:
+    base = (
         f"Dhātu ID: {entry['id']}\n"
         f"Root (Devanagari): {entry.get('dhatu', '')}\n"
         f"Root (SLP1): {entry.get('dhatu_slp', '')}\n"
@@ -160,13 +176,22 @@ def build_prompt(entry: dict) -> str:
         f"Dhātvārtha (Sanskrit meaning, from the library's own verified data): "
         f"{entry.get('artha', '')}\n"
     )
+    if grounding:
+        base += f"\n=== REAL SOURCE EXCERPTS ===\n{grounding}\n"
+    return base
 
 
 def call_gemini_for_dhatu(entry: dict, api_key: str, model: str,
+                           grounding: str = "",
                            usage_totals: dict | None = None) -> dict:
+    # Grounded prompts can carry several thousand characters of real source
+    # text (see dhatu_grounding.py's per-source caps) -- default 2048 output
+    # tokens is for the answer only and doesn't need to grow with the prompt,
+    # but a couple of long quoted-example scenarios can need more room.
+    max_tokens = 3072 if grounding else 2048
     return call_gemini(
-        SYSTEM_INSTRUCTION, build_prompt(entry), RESPONSE_SCHEMA,
-        api_key, model, temperature=0.2, max_output_tokens=2048,
+        SYSTEM_INSTRUCTION, build_prompt(entry, grounding), RESPONSE_SCHEMA,
+        api_key, model, temperature=0.2, max_output_tokens=max_tokens,
         usage_totals=usage_totals,
     )
 
@@ -234,19 +259,33 @@ def select_dhatus(all_entries: list[dict], selector: str) -> list[dict]:
 
 
 def process_one(entry: dict, api_key: str, model: str, dry_run: bool,
-                 usage_totals: dict | None) -> dict:
-    result = mock_result(entry) if dry_run else call_gemini_for_dhatu(entry, api_key, model, usage_totals)
-    return {"id": entry["id"], "meanings": result.get("meanings", {}),
-            "pedagogy": result.get("pedagogy", {}), "model": model}
+                 usage_totals: dict | None, grounding: str = "",
+                 sources_used: list | None = None) -> dict:
+    result = mock_result(entry) if dry_run else call_gemini_for_dhatu(
+        entry, api_key, model, grounding, usage_totals)
+    out = {"id": entry["id"], "meanings": result.get("meanings", {}),
+           "pedagogy": result.get("pedagogy", {}), "model": model}
+    if sources_used:
+        out["sources_used"] = sources_used
+    return out
 
 
 def run(selector: str, model: str, concurrency: int, limit, dry_run: bool,
-        force: bool) -> int:
+        force: bool, kosha_build: str | None = None) -> int:
     api_key = os.environ.get("GEMINI_API_KEY")
     if not dry_run and not api_key:
         print("error: GEMINI_API_KEY is not set (pass --dry-run to test without one)",
               file=sys.stderr)
         return 1
+
+    kosha_root = Path(kosha_build) if kosha_build else None
+    kosha_vritti_idx = KoshaIndex(kosha_root, KOSHA_VRITTI_SLUGS) if kosha_root else None
+    kosha_dict_idx = KoshaIndex(kosha_root, KOSHA_DICT_SLUGS) if kosha_root else None
+    if kosha_root:
+        print(f"grounding: kosha build loaded from {kosha_root} "
+              f"({len(kosha_vritti_idx.by_key)} vritti keys, {len(kosha_dict_idx.by_key)} dict keys)")
+    else:
+        print("grounding: no --kosha-build given -- using this repo's own vritti/ only")
 
     all_entries = load_dhatupatha()
     existing = load_existing()
@@ -279,17 +318,23 @@ def run(selector: str, model: str, concurrency: int, limit, dry_run: bool,
             print(f"checkpoint: {done}/{len(wanted)} this run "
                   f"({len(existing)}/{len(all_entries)} total)")
 
+    def grounding_for(entry: dict) -> tuple[str, list]:
+        if dry_run:
+            return "", []
+        return build_grounding(entry, VRITTI_DIR, kosha_vritti_idx, kosha_dict_idx)
+
     if concurrency <= 1:
         for entry in wanted:
             try:
-                res = process_one(entry, api_key, model, dry_run, usage_totals)
+                grounding, sources_used = grounding_for(entry)
+                res = process_one(entry, api_key, model, dry_run, usage_totals, grounding, sources_used)
                 handle_result(entry, res, None)
             except GeminiError as e:
                 handle_result(entry, None, e)
     else:
         with ThreadPoolExecutor(max_workers=concurrency) as pool:
             future_to_entry = {
-                pool.submit(process_one, entry, api_key, model, dry_run, usage_totals): entry
+                pool.submit(process_one, entry, api_key, model, dry_run, usage_totals, *grounding_for(entry)): entry
                 for entry in wanted
             }
             for future in as_completed(future_to_entry):
@@ -330,8 +375,13 @@ def main(argv=None) -> int:
                     help="No network call; use a deterministic mock generator instead")
     p.add_argument("--force", action="store_true",
                     help="Re-generate roots that already have an entry")
+    p.add_argument("--kosha-build", default=None,
+                    help="Path to a bhumandala-kosha-data build output directory "
+                         "(build_koshas.py --out) -- when given, grounds generation in "
+                         "real dictionary/vritti entries where a match exists for the root")
     args = p.parse_args(argv)
-    return run(args.dhatus, args.model, args.concurrency, args.limit, args.dry_run, args.force)
+    return run(args.dhatus, args.model, args.concurrency, args.limit, args.dry_run, args.force,
+               args.kosha_build)
 
 
 if __name__ == "__main__":
