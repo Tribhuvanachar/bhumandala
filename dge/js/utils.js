@@ -21,6 +21,14 @@ window.applyTheme = function(theme) {
   // still key off it (search highlight, commentary block tint) stay correct.
   document.body.classList.toggle('dark-mode', theme === 'darkglass' || theme === 'vandana');
 
+  // Mirrored onto <html> too, alongside body, so tokens.css's html.theme-X
+  // rules (see dge/js/theme-guard.js, which sets this on <html> before
+  // first paint) stay in sync on every later theme change, not just the
+  // pre-paint one.
+  window.DGE_THEMES.forEach(t => document.documentElement.classList.remove('theme-' + t));
+  document.documentElement.classList.add('theme-' + theme);
+  document.documentElement.classList.toggle('dark-mode', theme === 'darkglass' || theme === 'vandana');
+
   document.querySelectorAll('#displayPopup .pop-item[data-theme]').forEach(el => {
     el.classList.toggle('active', el.dataset.theme === theme);
   });

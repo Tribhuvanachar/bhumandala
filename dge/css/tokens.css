@@ -44,8 +44,16 @@
   --muted-text: #8B7A63;
 }
 
+/* Each theme block below matches html.theme-X as well as body.theme-X so
+   dge/js/theme-guard.js -- which sets the class on <html> before <body>
+   exists, to avoid the unscoped :root default flashing before restorePrefs()
+   applies the real theme to <body> -- resolves the correct variables from
+   first paint. Whichever element actually carries the class wins on itself;
+   inheritance carries that value down to descendants that don't yet have
+   their own matching rule. */
+
 /* --- Theme: Traditional (warm, refined) --- */
-body.theme-traditional {
+html.theme-traditional, body.theme-traditional {
   --bg-main: #FAF3E6; --card-bg: #ffffff; --card-border: #E9DCC3;
   --card-active: #FCE9DE; --text-primary: #2B2119; --text-sanskrit: #9A1B1B;
   --accent-red: #AE231F; --accent-gold: #B9821F; --panel-bg: #ffffff;
@@ -55,7 +63,7 @@ body.theme-traditional {
 }
 
 /* --- Theme: Minimal & Modern (clean, restrained, flat) --- */
-body.theme-minimal {
+html.theme-minimal, body.theme-minimal {
   --bg-main: #F7F7F5; --card-bg: #ffffff; --card-border: #E7E7E3;
   --card-active: #F0EFEC; --text-primary: #1D1C1A; --text-sanskrit: #55433C;
   --accent-red: #A6433D; --accent-gold: #9C8A5E; --panel-bg: #ffffff;
@@ -65,7 +73,7 @@ body.theme-minimal {
 }
 
 /* --- Theme: Vibrant, temple-inspired (saturated saffron / maroon / gold) --- */
-body.theme-vibrant {
+html.theme-vibrant, body.theme-vibrant {
   --bg-main: #FDEBD3; --card-bg: #FFFDF8; --card-border: #F0C36D;
   --card-active: #FFDCB0; --text-primary: #3A1408; --text-sanskrit: #D93A1F;
   --accent-red: #E0431F; --accent-gold: #D9A521; --panel-bg: #FFFDF8;
@@ -75,7 +83,7 @@ body.theme-vibrant {
 }
 
 /* --- Theme: Dark Glass Premium (frosted, glowing accent) --- */
-body.theme-darkglass, body.dark-mode {
+html.theme-darkglass, html.dark-mode, body.theme-darkglass, body.dark-mode {
   --bg-main: #0E0C0B; --card-bg: rgba(32,27,23,0.6); --card-border: rgba(255,255,255,0.08);
   --card-active: rgba(232,160,80,0.14); --text-primary: #EDE2D3; --text-sanskrit: #E8A067;
   --accent-red: #E2664A; --accent-gold: #E8B24D; --panel-bg: rgba(24,20,17,0.65);
@@ -93,7 +101,7 @@ body.theme-darkglass, body.dark-mode {
    gold from the portrait itself; deliberately never pure black, which kills
    the glow. The four themes below remain selectable for anyone who prefers
    to read on cream. */
-body.theme-vandana {
+html.theme-vandana, body.theme-vandana {
   --bg-main: #0B0907; --card-bg: rgba(32,27,23,0.55); --card-border: rgba(232,178,77,0.14);
   --card-active: rgba(242,130,12,0.16); --text-primary: #F3E7D4; --text-sanskrit: #FFB24D;
   --accent-red: #E2664A; --accent-gold: #E8B24D; --panel-bg: rgba(20,16,12,0.92);

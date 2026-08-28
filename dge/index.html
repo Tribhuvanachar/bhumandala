@@ -5,6 +5,11 @@
 <!-- Guru Vandana guard: bounces anyone arriving by bookmark or deep link
      back to the vandana at the site root. Must stay the first script here. -->
 <script src="js/vandana-guard.js?v=1"></script>
+<!-- Theme pre-paint guard: applies the saved theme to <html> before <body>
+     exists, so the very first paint uses the visitor's actual saved theme
+     instead of the unscoped default -- see dge/js/theme-guard.js. Must load
+     right after vandana-guard.js, before main.css/tokens.css. -->
+<script src="js/theme-guard.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" id="themeColorMeta" content="#0B0907">
