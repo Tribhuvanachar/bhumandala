@@ -5,25 +5,6 @@
   "source_note": "",
   "items": [
     {
-      "id": "AV_C01_S01",
-      "reference": "1.1",
-      "sanskrit_text": "प्रथमः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-1",
-        "oldKey": "AV_C01_S01",
-        "type": "section",
-        "chapter": "AV_C01"
-      }
-    },
-    {
       "id": "AV_C01_S01_I01",
       "reference": "1.1",
       "sanskrit_text": "नारायणं निखिलपूर्णगुणैकदेहं निर्दोषमाप्यतममप्यखिलैः सुवाक्यैः ।\nअस्योद्भवादिदमशेषविशेषतोऽपि वन्द्यं सदा प्रियतमं मम सन्नमामि ॥1॥",
@@ -575,25 +556,6 @@
       }
     },
     {
-      "id": "AV_C01_S02",
-      "reference": "1.2",
-      "sanskrit_text": "द्वितीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-32",
-        "oldKey": "AV_C01_S02",
-        "type": "section",
-        "chapter": "AV_C01"
-      }
-    },
-    {
       "id": "AV_C01_S02_A001",
       "reference": "1.2",
       "sanskrit_text": "सर्वगतत्वाधिकरणम्",
@@ -816,25 +778,6 @@
       }
     },
     {
-      "id": "AV_C01_S03",
-      "reference": "1.3",
-      "sanskrit_text": "तृतीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-45",
-        "oldKey": "AV_C01_S03",
-        "type": "section",
-        "chapter": "AV_C01"
-      }
-    },
-    {
       "id": "AV_C01_S03_I01",
       "reference": "1.3",
       "sanskrit_text": "तत्रान्यत्र प्रसिद्धानां(तत्रान्यत्र च सिद्धानां) लिङ्गानाम्नां पुनर्हरिः ।\nविशेषान्मुख्यतो वृत्तिं स्वस्मिन्नेवात्र वक्त्यजः ॥1॥",
@@ -1038,25 +981,6 @@
       }
     },
     {
-      "id": "AV_C01_S04",
-      "reference": "1.4",
-      "sanskrit_text": "चतुर्थः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-57",
-        "oldKey": "AV_C01_S04",
-        "type": "section",
-        "chapter": "AV_C01"
-      }
-    },
-    {
       "id": "AV_C01_S04_A001",
       "reference": "1.4",
       "sanskrit_text": "।आनुमानिकाधिकरणम्",
@@ -1165,25 +1089,6 @@
         "oldKey": "AV_C01_S04_V06",
         "type": "verse",
         "chapter": "AV_C01"
-      }
-    },
-    {
-      "id": "AV_C02_S01",
-      "reference": "2.1",
-      "sanskrit_text": "प्रथमः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-64",
-        "oldKey": "AV_C02_S01",
-        "type": "section",
-        "chapter": "AV_C02"
       }
     },
     {
@@ -1662,25 +1567,6 @@
         "block_id": "Anuvyakhyana-90",
         "oldKey": "AV_C02_S01_V11",
         "type": "verse",
-        "chapter": "AV_C02"
-      }
-    },
-    {
-      "id": "AV_C02_S02",
-      "reference": "2.2",
-      "sanskrit_text": "द्वितीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-91",
-        "oldKey": "AV_C02_S02",
-        "type": "section",
         "chapter": "AV_C02"
       }
     },
@@ -2291,25 +2177,6 @@
       }
     },
     {
-      "id": "AV_C02_S03",
-      "reference": "2.3",
-      "sanskrit_text": "तृतीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-125",
-        "oldKey": "AV_C02_S03",
-        "type": "section",
-        "chapter": "AV_C02"
-      }
-    },
-    {
       "id": "AV_C02_S03_I01",
       "reference": "2.3",
       "sanskrit_text": "अथाशेषसमाम्नायविरोधापाकृतिं प्रभुः ।\nकरिष्यन् अधिदैवाधिभूतजीवपरात्मनाम् ॥1॥",
@@ -2694,25 +2561,6 @@
       }
     },
     {
-      "id": "AV_C02_S04",
-      "reference": "2.4",
-      "sanskrit_text": "चतुर्थः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-147",
-        "oldKey": "AV_C02_S04",
-        "type": "section",
-        "chapter": "AV_C02"
-      }
-    },
-    {
       "id": "AV_C02_S04_I01",
       "reference": "2.4",
       "sanskrit_text": "श्रुत्यर्थः श्रुतियुक्तिभ्यां विरुद्ध इव दृश्यते ।\nयत्र तन्निर्णयं देवः सुविशिष्टोपपत्तिभिः ॥1॥",
@@ -2764,25 +2612,6 @@
         "oldKey": "AV_C02_S04_I03",
         "type": "introduction",
         "chapter": "AV_C02"
-      }
-    },
-    {
-      "id": "AV_C03_S01",
-      "reference": "3.1",
-      "sanskrit_text": "प्रथमः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-151",
-        "oldKey": "AV_C03_S01",
-        "type": "section",
-        "chapter": "AV_C03"
       }
     },
     {
@@ -2872,25 +2701,6 @@
         "block_id": "Anuvyakhyana-156",
         "oldKey": "AV_C03_S01_I05",
         "type": "introduction",
-        "chapter": "AV_C03"
-      }
-    },
-    {
-      "id": "AV_C03_S02",
-      "reference": "3.2",
-      "sanskrit_text": "द्वितीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-157",
-        "oldKey": "AV_C03_S02",
-        "type": "section",
         "chapter": "AV_C03"
       }
     },
@@ -3222,25 +3032,6 @@
         "block_id": "Anuvyakhyana-175",
         "oldKey": "AV_C03_S02_V20",
         "type": "verse",
-        "chapter": "AV_C03"
-      }
-    },
-    {
-      "id": "AV_C03_S03",
-      "reference": "3.3",
-      "sanskrit_text": "तृतीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-176",
-        "oldKey": "AV_C03_S03",
-        "type": "section",
         "chapter": "AV_C03"
       }
     },
@@ -4725,25 +4516,6 @@
       }
     },
     {
-      "id": "AV_C03_S04",
-      "reference": "3.4",
-      "sanskrit_text": "चतुर्थः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-259",
-        "oldKey": "AV_C03_S04",
-        "type": "section",
-        "chapter": "AV_C03"
-      }
-    },
-    {
       "id": "AV_C03_S04_I01",
       "reference": "3.4",
       "sanskrit_text": "एवमुत्पन्ननिर्दोषभगवद्दर्शनात् सदा ।\nअपेक्षितफलप्राप्तिरारब्धस्यानतिक्रमात् ॥1॥",
@@ -4943,25 +4715,6 @@
         "oldKey": "AV_C03_S04_V04",
         "type": "verse",
         "chapter": "AV_C03"
-      }
-    },
-    {
-      "id": "AV_C04_S01",
-      "reference": "4.1",
-      "sanskrit_text": "प्रथमः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-271",
-        "oldKey": "AV_C04_S01",
-        "type": "section",
-        "chapter": "AV_C04"
       }
     },
     {
@@ -5289,25 +5042,6 @@
         "block_id": "Anuvyakhyana-289",
         "oldKey": "AV_C04_S01_V04",
         "type": "verse",
-        "chapter": "AV_C04"
-      }
-    },
-    {
-      "id": "AV_C04_S02",
-      "reference": "4.2",
-      "sanskrit_text": "द्वितीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-290",
-        "oldKey": "AV_C04_S02",
-        "type": "section",
         "chapter": "AV_C04"
       }
     },
@@ -7708,25 +7442,6 @@
       }
     },
     {
-      "id": "AV_C04_S03",
-      "reference": "4.3",
-      "sanskrit_text": "तृतीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-424",
-        "oldKey": "AV_C04_S03",
-        "type": "section",
-        "chapter": "AV_C04"
-      }
-    },
-    {
       "id": "AV_C04_S03_I1",
       "reference": "4.3",
       "sanskrit_text": "उत्क्रान्तमार्गश्च विमुक्तगम्यं पादोदितं सुक्रमविक्रमौ च ॥1॥",
@@ -7778,25 +7493,6 @@
         "block_id": "Anuvyakhyana-427",
         "oldKey": "AV_C04_S03_V01",
         "type": "verse",
-        "chapter": "AV_C04"
-      }
-    },
-    {
-      "id": "AV_C04_S04",
-      "reference": "4.4",
-      "sanskrit_text": "चतुर्थः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Anuvyakhyana-428",
-        "oldKey": "AV_C04_S04",
-        "type": "section",
         "chapter": "AV_C04"
       }
     },

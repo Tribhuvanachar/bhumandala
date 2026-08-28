@@ -2329,7 +2329,7 @@
       "bhedojjivana": {
        "mula": {
         "_schema": "grantha_mula_text",
-        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+        "_default_author": "श्रीव्यासतीर्थः"
        },
        "tika_10_bhavapradipa": {
         "_schema": "grantha_tika_text"
@@ -3762,7 +3762,7 @@
       "nyayamrita": {
        "mula": {
         "_schema": "grantha_mula_text",
-        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+        "_default_author": "श्रीव्यासतीर्थः"
        },
        "tika_nyayakalpalata": {
         "_schema": "grantha_tika_text",
@@ -3798,7 +3798,7 @@
       "pramana_paddhati": {
        "mula": {
         "_schema": "grantha_mula_text",
-        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+        "_default_author": "श्रीजयतीर्थः"
        },
        "tika_2_jayatirthavijaya": {
         "_schema": "grantha_tika_text"
@@ -3895,7 +3895,7 @@
       "sumadhva_vijaya": {
        "mula": {
         "_schema": "grantha_mula_text",
-        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+        "_default_author": "श्रीनारायणपण्डिताचार्यः"
        },
        "tika_iti_shrimadvedangamuniviracitashrisumadhvavijayatikavivrittau_sh": {
         "_schema": "grantha_tika_text"
@@ -3940,7 +3940,7 @@
       "tarka_tandava": {
        "mula": {
         "_schema": "grantha_mula_text",
-        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+        "_default_author": "श्रीव्यासतीर्थः"
        },
        "tika_jayatirtha": {
         "_schema": "grantha_tika_text",
@@ -3966,7 +3966,7 @@
       "tatparya_chandrika": {
        "mula": {
         "_schema": "grantha_mula_text",
-        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+        "_default_author": "श्रीव्यासतीर्थः"
        },
        "tika_candrikabindu": {
         "_schema": "grantha_tika_text",
@@ -3988,7 +3988,7 @@
       "vadavali": {
        "mula": {
         "_schema": "grantha_mula_text",
-        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+        "_default_author": "श्रीजयतीर्थः"
        },
        "tika_vadavalibhavadipika": {
         "_schema": "grantha_tika_text",
@@ -4020,7 +4020,7 @@
       "yukti_mallika": {
        "mula": {
         "_schema": "grantha_mula_text",
-        "_default_author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"
+        "_default_author": "श्रीमद्वादिराजतीर्थः"
        },
        "tika_satyapramoda": {
         "_schema": "grantha_tika_text",

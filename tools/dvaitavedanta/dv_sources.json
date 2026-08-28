@@ -482,6 +482,7 @@
           "seed": "/category-details/4438/4433/sharaj/parama/parata/managa",
           "content_id": 4438,
           "ancestor_id": 4433,
+          "acharya": "श्रीजयतीर्थः",
           "enabled": true
         },
         {
@@ -490,6 +491,7 @@
           "seed": "/category-details/9011/4434/sharaj/vathav/vathav/managa",
           "content_id": 9011,
           "ancestor_id": 4434,
+          "acharya": "श्रीजयतीर्थः",
           "enabled": true
         },
         {
@@ -498,6 +500,7 @@
           "seed": "/category-details/13901/4778/sharav/nayaya/parath/managa",
           "content_id": 13901,
           "ancestor_id": 4778,
+          "acharya": "श्रीव्यासतीर्थः",
           "enabled": true
         },
         {
@@ -506,6 +509,7 @@
           "seed": "/category-details/11066/4779/sharav/tatapa/managa",
           "content_id": 11066,
           "ancestor_id": 4779,
+          "acharya": "श्रीव्यासतीर्थः",
           "enabled": true
         },
         {
@@ -514,6 +518,7 @@
           "seed": "/category-details/12775/4780/sharav/taraka/managa",
           "content_id": 12775,
           "ancestor_id": 4780,
+          "acharya": "श्रीव्यासतीर्थः",
           "enabled": true
         },
         {
@@ -522,6 +527,7 @@
           "seed": "/category-details/12781/12778/sharav/bhatha/bhatha/bhatha",
           "content_id": 12781,
           "ancestor_id": 12778,
+          "acharya": "श्रीव्यासतीर्थः",
           "enabled": true
         },
         {
@@ -530,7 +536,8 @@
           "seed": "/category-details/6161/6145/thavat/sharat/athhay/managa",
           "content_id": 6161,
           "ancestor_id": 6145,
-          "enabled": true
+          "enabled": true,
+          "_note": "Checked live site 28 Aug 2026: this grantha's own \"mula\" layer is genuinely Madhva's Tattvodyota (opens with its real verse \"sarvatraakhilasacchaktih...\"), correctly resolving to Madhva as-is -- no acharya override belongs here. The actual Dvaita Dyumani text (a vivriti on Jayatirtha's tika on Tattvodyota) is stored under the tika_dvaitadyumani layer instead, whose own default_author is empty; that is a separate, narrower gap (one tika layer's missing author, not this bug) left untouched, out of scope for the position-0/acharya-override mechanism this pass fixed."
         },
         {
           "slug": "sumadhva_vijaya",
@@ -538,6 +545,7 @@
           "seed": "/category-details/10498/10497/samath/samath/parath",
           "content_id": 10498,
           "ancestor_id": 10497,
+          "acharya": "श्रीनारायणपण्डिताचार्यः",
           "enabled": true
         },
         {
@@ -546,6 +554,7 @@
           "seed": "/category-details/17443/17436/sharam/yakata/ganaes/managa",
           "content_id": 17443,
           "ancestor_id": 17436,
+          "acharya": "श्रीमद्वादिराजतीर्थः",
           "enabled": true
         },
         {
@@ -656,7 +665,8 @@
           "ancestor_id": 19140,
           "note": "ॐ-गायत्री-पुरुषसूक्तम्",
           "enabled": true,
-          "leaves_seen": 3
+          "leaves_seen": 3,
+          "_note": "Checked live site 28 Aug 2026: this grantha's \"mula\" layer is the Vedic Purusha Sukta mantra itself (apaurusheya, no human author) with what looks like Vadiraja Tirtha's own explanatory verses (cf. the embedded \"Yukti Mallika\" heading inside DV_19147) mixed into the same layer. Neither \"leave as Madhva\" nor a single acharya override is honest here -- setting one would misattribute the shruti portion, and the code's acharya field has no \"unattributed\" state, only silence-defaults-to-Madhva or an override string. Left unconfigured deliberately; a real fix needs the mula content itself re-examined/re-split, not a config field -- out of scope for this pass."
         },
         {
           "slug": "madhvamukhalankara",

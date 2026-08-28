@@ -5,25 +5,6 @@
   "source_note": "",
   "items": [
     {
-      "id": "BSNV_C01_S01",
-      "reference": "1.1",
-      "sanskrit_text": "प्रथमः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-1",
-        "oldKey": "BSNV_C01_S01",
-        "type": "section",
-        "chapter": "BSNV_C01"
-      }
-    },
-    {
       "id": "BSNV_C01_S01_I01",
       "reference": "1.1",
       "sanskrit_text": "चेतनाचेतनजगन्नियन्त्रेऽशेषसंविदे ।\nनमो नारायणायाजशर्वशक्रादिवन्दित ॥1॥",
@@ -402,25 +383,6 @@
       }
     },
     {
-      "id": "BSNV_C01_S02",
-      "reference": "1.2",
-      "sanskrit_text": "द्वितीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-23",
-        "oldKey": "BSNV_C01_S02",
-        "type": "section",
-        "chapter": "BSNV_C01"
-      }
-    },
-    {
       "id": "BSNV_C01_S02_A001",
       "reference": "1.2",
       "sanskrit_text": "सर्वगतत्वाधिकरणम्",
@@ -669,25 +631,6 @@
         "block_id": "Nyayavivaranam-37",
         "oldKey": "BSNV_C01_S02_V07_B01",
         "type": "bhashya",
-        "chapter": "BSNV_C01"
-      }
-    },
-    {
-      "id": "BSNV_C01_S03",
-      "reference": "1.3",
-      "sanskrit_text": "तृतीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-38",
-        "oldKey": "BSNV_C01_S03",
-        "type": "section",
         "chapter": "BSNV_C01"
       }
     },
@@ -1520,25 +1463,6 @@
       }
     },
     {
-      "id": "BSNV_C01_S04",
-      "reference": "1.4",
-      "sanskrit_text": "चतुर्थः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-85",
-        "oldKey": "BSNV_C01_S04",
-        "type": "section",
-        "chapter": "BSNV_C01"
-      }
-    },
-    {
       "id": "BSNV_C01_S04_A001",
       "reference": "1.4",
       "sanskrit_text": "आनुमानिकाधिकरणम्",
@@ -1680,25 +1604,6 @@
         "oldKey": "BSNV_C01_S04_V04_B01",
         "type": "bhashya",
         "chapter": "BSNV_C01"
-      }
-    },
-    {
-      "id": "BSNV_C02_S01",
-      "reference": "2.1",
-      "sanskrit_text": "प्रथमः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-94",
-        "oldKey": "BSNV_C02_S01",
-        "type": "section",
-        "chapter": "BSNV_C02"
       }
     },
     {
@@ -2094,44 +1999,6 @@
         "block_id": "Nyayavivaranam-116",
         "oldKey": "BSNV_C02_S01_V11_B01",
         "type": "bhashya",
-        "chapter": "BSNV_C02"
-      }
-    },
-    {
-      "id": "BSNV_C02_S02",
-      "reference": "2.2",
-      "sanskrit_text": "द्वितीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-117",
-        "oldKey": "BSNV_C02_S02",
-        "type": "section",
-        "chapter": "BSNV_C02"
-      }
-    },
-    {
-      "id": "BSNV_C02_S03",
-      "reference": "2.3",
-      "sanskrit_text": "तृतीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-118",
-        "oldKey": "BSNV_C02_S03",
-        "type": "section",
         "chapter": "BSNV_C02"
       }
     },
@@ -2784,25 +2651,6 @@
       }
     },
     {
-      "id": "BSNV_C02_S04",
-      "reference": "2.4",
-      "sanskrit_text": "चतुर्थः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-155",
-        "oldKey": "BSNV_C02_S04",
-        "type": "section",
-        "chapter": "BSNV_C02"
-      }
-    },
-    {
       "id": "BSNV_C02_S04_A001",
       "reference": "2.4",
       "sanskrit_text": "प्राणोत्पधिकरमणम्",
@@ -3232,25 +3080,6 @@
         "oldKey": "BSNV_C02_S04_V13_B01",
         "type": "bhashya",
         "chapter": "BSNV_C02"
-      }
-    },
-    {
-      "id": "BSNV_C03_S01",
-      "reference": "3.1",
-      "sanskrit_text": "प्रथमः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-180",
-        "oldKey": "BSNV_C03_S01",
-        "type": "section",
-        "chapter": "BSNV_C03"
       }
     },
     {
@@ -3974,25 +3803,6 @@
       }
     },
     {
-      "id": "BSNV_C03_S02",
-      "reference": "3.2",
-      "sanskrit_text": "द्वितीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-221",
-        "oldKey": "BSNV_C03_S02",
-        "type": "section",
-        "chapter": "BSNV_C03"
-      }
-    },
-    {
       "id": "BSNV_C03_S02_A001",
       "reference": "3.2",
       "sanskrit_text": "सन्ध्याधिकरणम्",
@@ -4709,25 +4519,6 @@
         "block_id": "Nyayavivaranam-261",
         "oldKey": "BSNV_C03_S02_V20_B01",
         "type": "bhashya",
-        "chapter": "BSNV_C03"
-      }
-    },
-    {
-      "id": "BSNV_C03_S03",
-      "reference": "3.3",
-      "sanskrit_text": "तृतीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-262",
-        "oldKey": "BSNV_C03_S03",
-        "type": "section",
         "chapter": "BSNV_C03"
       }
     },
@@ -6208,25 +5999,6 @@
       }
     },
     {
-      "id": "BSNV_C03_S04",
-      "reference": "3.4",
-      "sanskrit_text": "चतुर्थः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-345",
-        "oldKey": "BSNV_C03_S04",
-        "type": "section",
-        "chapter": "BSNV_C03"
-      }
-    },
-    {
       "id": "BSNV_C03_S04_A001",
       "reference": "3.4",
       "sanskrit_text": "पुरुषार्थाधिकरणम्",
@@ -6551,25 +6323,6 @@
       }
     },
     {
-      "id": "BSNV_C04_S01",
-      "reference": "4.1",
-      "sanskrit_text": "प्रथमः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-364",
-        "oldKey": "BSNV_C04_S01",
-        "type": "section",
-        "chapter": "BSNV_C04"
-      }
-    },
-    {
       "id": "BSNV_C04_S01_A001",
       "reference": "4.1",
       "sanskrit_text": "आवृत्त्यधिकरणम्",
@@ -6854,25 +6607,6 @@
         "block_id": "Nyayavivaranam-380",
         "oldKey": "BSNV_C04_S01_V08_B01",
         "type": "bhashya",
-        "chapter": "BSNV_C04"
-      }
-    },
-    {
-      "id": "BSNV_C04_S02",
-      "reference": "4.2",
-      "sanskrit_text": "द्वितीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-381",
-        "oldKey": "BSNV_C04_S02",
-        "type": "section",
         "chapter": "BSNV_C04"
       }
     },
@@ -7201,25 +6935,6 @@
       }
     },
     {
-      "id": "BSNV_C04_S03",
-      "reference": "4.3",
-      "sanskrit_text": "तृतीयः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-400",
-        "oldKey": "BSNV_C04_S03",
-        "type": "section",
-        "chapter": "BSNV_C04"
-      }
-    },
-    {
       "id": "BSNV_C04_S03_A004",
       "reference": "4.3",
       "sanskrit_text": "अतिवाहिकाधिकरणम्",
@@ -7324,25 +7039,6 @@
         "block_id": "Nyayavivaranam-406",
         "oldKey": "BSNV_C04_S03_V06_B01",
         "type": "bhashya",
-        "chapter": "BSNV_C04"
-      }
-    },
-    {
-      "id": "BSNV_C04_S04",
-      "reference": "4.4",
-      "sanskrit_text": "चतुर्थः पादः",
-      "tags": [
-        "section",
-        "paada"
-      ],
-      "notes": "",
-      "references": [],
-      "audio": [],
-      "source": {
-        "site": "anandamakaranda.in",
-        "block_id": "Nyayavivaranam-407",
-        "oldKey": "BSNV_C04_S04",
-        "type": "section",
         "chapter": "BSNV_C04"
       }
     },
