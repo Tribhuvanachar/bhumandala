@@ -228,9 +228,9 @@
            (document.body && document.body.dataset.granthaSlug) || '';
   }
 
-  function shouldLink(slug) {
+  function shouldLink(slug, forceAlways) {
     if (!CFG.linkNumbers) return { always: false, cued: true };
-    const always = (CFG.alwaysLinkIn || []).some(p => (slug || '').indexOf(p) === 0);
+    const always = forceAlways || (CFG.alwaysLinkIn || []).some(p => (slug || '').indexOf(p) === 0);
     return { always: always, cued: true };
   }
 
@@ -242,8 +242,8 @@
 
   const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'BUTTON', 'A', 'SELECT']);
 
-  function markUp(root, ix) {
-    const mode = shouldLink(currentSlug());
+  function markUp(root, ix, forceAlways) {
+    const mode = shouldLink(currentSlug(), forceAlways);
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
       acceptNode: n => {
         if (!n.nodeValue || n.nodeValue.length < 5) return NodeFilter.FILTER_REJECT;
@@ -299,11 +299,21 @@
 
   /* Cheap pre-check so a page with no citation at all never fetches the
      index: test the raw text before loading 352 KB to look things up in. */
-  function scan(root) {
+  // opts.always (new): skip the cue-word/page-context gating entirely and
+  // link every recognized "N.N.N" as a sutra regardless of nearby text or
+  // window.currentGranthaSlug. Real gap found auditing Kosha's coverage: a
+  // Kosha dictionary entry's gloss is grammar-domain content almost by
+  // definition (that's what a kosha does), but openEntry() renders inside
+  // whatever grantha the reader happens to be on underneath the modal --
+  // reading a Purana and opening Kosha meant currentSlug() was the Purana's,
+  // so a bare "१।१।१" in the gloss (no "सूत्र"/"पाणिनि" text within 24 chars)
+  // never linked, even though it plainly was one. kosha.js passes this.
+  function scan(root, opts) {
     if (!CFG.enabled || !CFG.linkNumbers || !root) return;
     REF.lastIndex = 0;
     if (!REF.test(root.innerText || root.textContent || '')) return;
-    loadIndex().then(ix => { if (ix) markUp(root, ix); });
+    const forceAlways = !!(opts && opts.always);
+    loadIndex().then(ix => { if (ix) markUp(root, ix, forceAlways); });
   }
   window.dgeScanForSutras = scan;
 

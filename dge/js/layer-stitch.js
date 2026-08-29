@@ -256,12 +256,25 @@ window.dgeRenderStitchChrome = function() {
     // global-search.js's category chips already read from -- real taxonomy
     // signal already encoded in the path, not a second guessed-at label
     // source, and not a competing breadcrumb component (dge-breadcrumb.js
-    // is explicitly Phase-6/not-yet-adopted infrastructure, out of scope
-    // for the reader's own chrome -- see that file's own header comment).
+    // is a page-header brand breadcrumb, out of scope for the reader's own
+    // in-content chrome -- see that file's own header comment).
+    //
+    // 29 Aug 2026: these used to be plain, non-clickable <span>s -- real
+    // taxonomy signal shown but dead weight to tap, confirmed by reading
+    // this exact code (not a guess). Each is now a real link to the
+    // Library browser drilled to that node (window.dgeOpenLibraryToPath,
+    // wired via index.html's own ?libraryPath= handling in core.js) --
+    // there's no data.json for an ancestor CATEGORY to open as a reader
+    // page the way a leaf grantha's own link below does, so the Library
+    // modal is the honest navigation target, not a second mechanism.
     if (dgeStitch.granthaRel && typeof window.dgeSegLabel === 'function') {
       const segs = dgeStitch.granthaRel.split('/');
       segs.pop(); // the grantha itself is shown just below via its own link/title
-      segs.forEach(seg => parts.push(`<span class="lineage-node">${window.dgeSegLabel(seg)}</span>`));
+      let cum = '';
+      segs.forEach(seg => {
+        cum = cum ? cum + '/' + seg : seg;
+        parts.push(`<a class="lineage-link" href="index.html?libraryPath=${encodeURIComponent(cum)}">${window.dgeSegLabel(seg)}</a>`);
+      });
     }
     // Standalone commentary layer: the way back to the stitched grantha.
     parts.push(`<span class="lineage-note">${t('अयं ग्रन्थभागः')} — </span>` +

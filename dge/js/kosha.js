@@ -533,6 +533,13 @@
           loading.className = 'kosha-xl-out';
           loading.innerHTML = '<span class="kosha-lang">' + (LANG_NAME[target] || target) + ' *</span> ' + esc(t);
           btn.remove();
+          // draw()'s own scan already ran before this async result existed --
+          // a sutra number in a fresh translation would otherwise never get
+          // the tappable treatment. Real gap, not theoretical: found by
+          // tracing exactly when draw() calls dgeScanForSutras relative to
+          // when this content actually appears in the DOM.
+          if (typeof window.dgeScanForEntities === 'function') { try { window.dgeScanForEntities(loading); } catch (e2) {} }
+          if (typeof window.dgeScanForSutras === 'function') { try { window.dgeScanForSutras(loading, { always: true }); } catch (e2) {} }
         }).catch(function (e) {
           btn.disabled = false; btn.textContent = label;
           loading.className = 'kosha-xl-err';
@@ -562,6 +569,12 @@
               '<div class="kosha-ai-head">' + esc(a.label) + ' <span class="kosha-ai-tag">AI *</span></div>' +
               '<div class="kosha-ai-body">' + (typeof parseMarkdown === 'function' ? parseMarkdown(t) : esc(t).replace(/\n/g, '<br>')) + '</div>';
             btn.disabled = false; btn.textContent = old;
+            // Same real gap as the translation branch above: an "Ask AI"
+            // answer (e.g. "as per 1.1.1...") is exactly the kind of content
+            // that cites sutras, and draw()'s one-time scan can't have seen
+            // this yet -- it didn't exist until this callback ran.
+            if (typeof window.dgeScanForEntities === 'function') { try { window.dgeScanForEntities(loading); } catch (e2) {} }
+            if (typeof window.dgeScanForSutras === 'function') { try { window.dgeScanForSutras(loading, { always: true }); } catch (e2) {} }
           })
           .catch(function (e) {
             btn.disabled = false; btn.textContent = old;
@@ -631,7 +644,14 @@
           try { window.dgeScanForEntities(detail); } catch (e) {}
         }
         if (typeof window.dgeScanForSutras === 'function') {
-          try { window.dgeScanForSutras(detail); } catch (e) {}
+          // {always:true}: a kosha gloss is grammar-dictionary content by
+          // definition -- the default cue-word/page-context gating (built
+          // for prose, where a bare number is usually a verse) under-links
+          // real sutra citations here whenever the reader opened Kosha from
+          // a non-vyakarana page (currentGranthaSlug is that page's, not
+          // "grammar"). See intellisense.js's scan() for the real gap this
+          // closes, found auditing Kosha's actual backlink coverage.
+          try { window.dgeScanForSutras(detail, { always: true }); } catch (e) {}
         }
       }
       draw();
