@@ -16965,8 +16965,8 @@
       "title": "सिद्धान्तकौमुदी",
       "addedAt": "2026-08-24",
       "source": {
-        "source": "ashtadhyayi.com sutraani/kaumudi.txt",
-        "licence": "used with ashtadhyayi.com curator's e-mail permission for non-commercial/educational use (source repo has no formal LICENSE); keep visible attribution to ashtadhyayi.com; resolve before public launch"
+        "source": "Dhaval Patel's structured Siddhānta-Kaumudī XML/TEI (github.com/drdhaval2785/siddhantakaumudi, raw sk.xml, v2.0.0/2017-03-25); base text supplied as a docx file by Dr. H. N. Bhat (posted to the bvparishat Google Group, 2016-12-26; source of that docx itself undocumented), encoded into XML/TEI by Dr. Dhaval Patel from 2016-12-27 with community corrections through GitHub issues -- see licence_note",
+        "licence": "MIT License for Dhaval Patel's XML encoding (copyright 2017 Dr. Dhaval Patel, per the XML's own <availability> statement); the underlying classical work (Bhaṭṭoji Dīkṣita's Siddhānta-Kaumudī, early 17th century CE) is public domain by age under any edition. See licence_note and source."
       },
       "facets": {
         "default_author": "Bhaṭṭoji Dīkṣita"
