@@ -97,6 +97,15 @@
 <script src="../js/kosha.js?v=1"></script>
 <script src="../js/contextual-actions.js?v=1"></script>
 <script src="../js/entity-linker.js?v=1"></script>
+<!-- 29 Aug 2026, real gap found auditing Kosha's sutra-backlink coverage
+     (DGE_UI_CONTRACT.md Part IV-D): kosha.js's openEntry() already guards
+     its dgeScanForSutras() call with `typeof window.dgeScanForSutras ===
+     'function'`, which silently no-opped on this exact page -- this script
+     tag was never here, confirmed by reading this file's own script list,
+     not assumed. Self-contained (fetches its own sutra index relative to
+     its own script src -- see that file's own header comment), so adding
+     it costs nothing else on the page and needs no data-* config here. -->
+<script src="../js/intellisense.js?v=4.65.0"></script>
 <script>
 "use strict";
 const BASE = (window.DASA_DATA_BASE || "../data/dasa_sahitya").replace(/\/$/,"");

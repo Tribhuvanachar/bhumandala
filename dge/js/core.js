@@ -1031,6 +1031,15 @@ document.addEventListener('DOMContentLoaded', () => {
           await dgeApplyLayerStitching(slug);
         }
         initApp();
+        // Cross-page taxonomy-breadcrumb deep link (?libraryPath=<path>,
+        // see library.js's dgeOpenLibraryToPath): opens the Library browser
+        // already drilled to that node. Independent of whatever grantha
+        // ?path=/the no-param default resolved above -- the reader
+        // underneath loads exactly as it would if the reader had opened the
+        // Library manually while already reading something.
+        if (urlParams.get('libraryPath') && typeof window.dgeOpenLibraryToPath === 'function') {
+          window.dgeOpenLibraryToPath(urlParams.get('libraryPath'));
+        }
         // The stitcher may have auto-selected the grantha's primary layer
         // (भाष्यम्/सुधा — see layer-stitch.js) so the page opens with real
         // text; the fetch+merge+re-render for it starts here, after the

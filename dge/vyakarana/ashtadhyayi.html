@@ -37,7 +37,19 @@
      own click handlers in ashtadhyayi.js needed touching. -->
 <header>
   <div class="bar">
-    <dge-breadcrumb label="अष्टाध्यायी" deva home-href="../index.html" class="brand"><a href="../index.html" title="DGE Home">⌂ DGE</a><span aria-hidden="true">›</span><span class="deva">अष्टाध्यायी</span></dge-breadcrumb>
+    <!-- 29 Aug 2026: real taxonomy ancestors added (वेदाङ्गानि, व्याकरणम्) as
+         actual links, not just "Home > leaf" -- the reader's whole
+         vedanga/vyakarana/ashtadhyayi path, matching the depth
+         layer-stitch.js's lineage strip and global-search.js's per-hit
+         crumbs now show elsewhere. Each ancestor opens the Library browser
+         drilled to that node (?libraryPath=, see library.js's
+         dgeOpenLibraryToPath / core.js's handling); अष्टाध्यायी itself stays
+         a plain span -- it's the current page, same "you are here"
+         convention as every other breadcrumb in this pass. dge-breadcrumb.js's
+         own connectedCallback() leaves pre-built children exactly as
+         authored (see that file's header comment), so no JS change was
+         needed to support this depth. -->
+    <dge-breadcrumb label="अष्टाध्यायी" deva home-href="../index.html" class="brand"><a href="../index.html" title="DGE Home">⌂ DGE</a><span aria-hidden="true">›</span><a href="../index.html?libraryPath=vedanga" class="deva">वेदाङ्गानि</a><span aria-hidden="true">›</span><a href="../index.html?libraryPath=vedanga/vyakarana" class="deva">व्याकरणम्</a><span aria-hidden="true">›</span><span class="deva">अष्टाध्यायी</span></dge-breadcrumb>
     <div class="spacer"></div>
     <input class="jump" id="dge-jump" placeholder="1.1.1" list="dge-sutralist" title="jump to sutra">
     <datalist id="dge-sutralist"></datalist>

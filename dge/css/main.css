@@ -762,9 +762,17 @@ body.dge-app-view .shloka-list { gap: 20px; }
 .dge-lib-tile-label { font-size: 11px; font-weight: 700; text-align: center; line-height: 1.3; }
 .dge-lib-tile-count { font-size: 10px; color: var(--muted-text); font-weight: 400; }
 .dge-lib-breadcrumb {
-  display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; gap: 4px; flex-wrap: wrap; cursor: default; font-size: 13px; font-weight: 700;
   color: var(--accent-red); padding: 4px 2px 12px; border-bottom: 1px solid var(--card-border); margin-bottom: 8px;
 }
+/* Multi-segment taxonomy trail (25 Aug 2026): each ancestor segment is its
+   own real click target -- jump straight to that level -- not just the
+   leading "❮ back one step" affordance the single-key version had. */
+.dge-lib-crumb-back { cursor: pointer; margin-right: 4px; }
+.dge-lib-crumb-seg { cursor: pointer; text-decoration: underline dotted; text-underline-offset: 3px; }
+.dge-lib-crumb-seg:hover, .dge-lib-crumb-seg:focus-visible { color: var(--accent-gold); }
+.dge-lib-crumb-current { color: var(--text-primary); }
+.dge-lib-crumb-sep { color: var(--muted-text); font-weight: 400; margin: 0 1px; }
 
 /* "View By" facet switcher (25 Aug 2026, library.js's dgeViewByRowHtml) --
    only rendered when the current category actually has facet metadata

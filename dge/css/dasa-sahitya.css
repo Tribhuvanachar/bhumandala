@@ -1,32 +1,54 @@
 /* =========================================================================
-   Styles for dge/dasa_sahitya.html.
+   Styles for dge/dasa-sahitya/index.html.
 
-   Lifted out of the page unchanged — same rules, same order, so it renders
-   exactly as before. Pages hold structure; their styles live here and their
-   words in admin/content/.
+   Pages hold structure; their styles live here and their words in
+   admin/content/.
 
-   tokens.css is imported below *in addition to* this file's own pre-
-   existing --bg/--ink/--accent/etc custom properties (kept as-is, untouched,
-   so nothing about the existing look changes) purely so the shared reader
-   components this page now wires in — contextual-actions.js's generic
-   contextual-menu component and the composer-profile sheet added alongside
-   it — can use DGE's real --accent-red/--card-bg/--text-primary/etc
-   vocabulary, the same one kosha.js's self-injected overlay CSS already
-   assumes. The two variable sets don't collide (different names), so this
-   is additive, not a re-theme of the page.
-   ========================================================================= */
+   DGE UI Contract retrofit (29 Aug 2026): this file used to define its own
+   bespoke --bg/--ink/--accent/etc palette (a warm cream/maroon look picked
+   independently of the rest of DGE) alongside tokens.css's real vocabulary
+   — imported, but only ever consumed by the reader-redesign integration
+   section below (the modal/contextual-menu/composer-sheet rules, which
+   already used --card-bg/--text-primary/--accent-red directly). Everything
+   ELSE on the page — header, cards, chips, stats — rendered off the
+   bespoke set, so the page looked like a visually distinct island next to
+   the retrofitted Ashtadhyayi page: similar in hue by coincidence, not
+   because it shared a token system.
+
+   Fixed the same way DGE_UI_CONTRACT.md's Ashtadhyayi retrofit fixed the
+   Vyakarana cluster's own --bg/--panel/etc set (see
+   dge/css/tokens-vyakarana-bridge.css): this page's local vocabulary is
+   kept (every rule below still reads --bg/--panel/--ink/etc, so the diff
+   for the rest of this file is small) but now ALIASES onto tokens.css's
+   real canonical variables instead of holding its own hardcoded hex
+   values. A theme change (or the reader-redesign section's own literal
+   --card-bg/--accent-red rules) and this page's own chrome now move
+   together, because they resolve to the same underlying values. The old
+   prefers-color-scheme override is gone with it — tokens.css's bare :root
+   (Vandana) is already the dark-first sitewide default, same as every
+   other un-themed page (Ashtadhyayi included: neither page loads
+   theme-guard.js, so both simply get Vandana, which IS the "same product"
+   identity this retrofit is about). --ok/--warn (the composer-list
+   loaded/error dot) aren't part of tokens.css's vocabulary and stay as
+   page-local extras, same as ashtadhyayi.css keeps its own --k/--b/--t/etc
+   layer-tag colors beside the bridge. */
 
 @import url("tokens.css");
 
 :root{
-    --bg:#faf7f2; --panel:#fff; --ink:#241c14; --muted:#7a6a58; --line:#e7ddcf;
-    --accent:#9a3b1b; --accent2:#c47a2c; --chip:#f0e7d8; --chipOn:#9a3b1b; --ok:#2f7d4f; --warn:#b3421a;
-    --shadow:0 1px 3px rgba(0,0,0,.08),0 6px 18px rgba(0,0,0,.05);
-  }
-  @media (prefers-color-scheme: dark){
-    :root{--bg:#17130f;--panel:#211a14;--ink:#efe6d8;--muted:#a99b86;--line:#33291f;
-      --accent:#e6915a;--accent2:#d7a24a;--chip:#2a2118;--chipOn:#e6915a;--ok:#68c68d;--warn:#e6915a;
-      --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);}
+    /* Same aliasing as tokens-vyakarana-bridge.css (--panel -> --panel-bg,
+       not --card-bg): --panel-bg is the more opaque of the two everywhere
+       tokens.css defines it, right for a page-level surface (header, side
+       rail, card body) that itself hosts smaller --card-bg-toned pieces
+       (the modal/contextual-menu markup below) without both stacking
+       translucency on translucency. */
+    --bg: var(--bg-main); --panel: var(--panel-bg); --ink: var(--text-primary);
+    --muted: var(--muted-text); --line: var(--card-border);
+    --accent: var(--accent-red); --accent2: var(--accent-gold);
+    --chip: var(--card-active); --chipOn: var(--accent-red);
+    --ok:#2f7d4f; --warn:#b3421a;
+    --shadow: var(--shadow-sm);
+    --radius: var(--radius-md);
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:'Noto Sans Kannada','Noto Serif',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
@@ -46,11 +68,16 @@
   .brand span+span{opacity:1;margin:0;color:var(--ink)}
   .intro{padding-bottom:2px}
   .titrow{display:flex;align-items:baseline;gap:10px;padding:8px 0 6px;flex-wrap:wrap}
-  h1{font-size:1.35rem;margin:0;letter-spacing:.2px}
+  /* Type-scale pass: was a flat 1.35rem, weaker than the page's own card
+     titles below it once those also grew -- a page title should read
+     clearly heavier than any one card's title (contract's type-hierarchy
+     ask). clamp() so it doesn't overrun a narrow phone the way a bare
+     larger rem would. */
+  h1{font-size:clamp(1.3rem,4vw,1.7rem);font-weight:700;margin:0;letter-spacing:.2px}
   h1 small{font-weight:400;color:var(--muted);font-size:.8rem}
   .sub{color:var(--muted);font-size:.78rem;margin:0 0 8px}
   .stats{display:flex;gap:8px;flex-wrap:wrap;padding-bottom:8px}
-  .stat{background:var(--chip);border:1px solid var(--line);border-radius:10px;padding:5px 10px;font-size:.78rem}
+  .stat{background:var(--chip);border:1px solid var(--line);border-radius:var(--radius-xs);padding:5px 10px;font-size:.78rem}
   .stat b{font-size:.95rem;color:var(--accent)}
   .controls{display:flex;gap:8px;flex-wrap:wrap;padding:8px 0;align-items:center}
   input[type=search],select{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:9px;
@@ -66,7 +93,7 @@
   main{max-width:1080px;margin:14px auto 60px;padding:0 14px;display:grid;grid-template-columns:250px 1fr;gap:18px}
   @media(max-width:760px){main{grid-template-columns:1fr}.side{order:2}}
   .side{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 84px);overflow:auto;
-    border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:8px;box-shadow:var(--shadow)}
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);padding:8px;box-shadow:var(--shadow)}
   @media(max-width:760px){.side{position:static;max-height:none}}
   .side h3{margin:6px 6px 8px;font-size:.82rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
   .authbtn{display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;cursor:pointer;
@@ -79,25 +106,33 @@
   .grouphead{display:flex;align-items:center;gap:10px;margin:18px 0 8px}
   .grouphead h2{font-size:1.05rem;margin:0}
   .grouphead .n{color:var(--muted);font-size:.8rem}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:8px 0;box-shadow:var(--shadow);overflow:hidden}
-  .card>summary{cursor:pointer;list-style:none;padding:11px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  /* Card hierarchy pass: was border-radius:12px/shadow:var(--shadow) --
+     identical presence to .stat/.side, so a card (a genuine unit of
+     content, per the contract's component-shape rule) didn't read as
+     more substantial than the chrome around it. Now var(--radius) (16px,
+     matching Ashtadhyayi's .dge-card) + --shadow-md, and the title bumped
+     from a flat 1rem/600 to something that actually outweighs the meta
+     text beside it. */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin:10px 0;box-shadow:var(--shadow-md);overflow:hidden;transition:border-color .15s}
+  .card:hover{border-color:color-mix(in srgb,var(--accent) 35%,var(--line))}
+  .card>summary{cursor:pointer;list-style:none;padding:13px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
   .card>summary::-webkit-details-marker{display:none}
-  .card .t{font-weight:600;font-size:1rem}
+  .card .t{font-weight:700;font-size:1.08rem;letter-spacing:.1px}
   .card .tl{color:var(--muted);font-size:.82rem}
-  .badge{font-size:.68rem;text-transform:uppercase;letter-spacing:.4px;padding:2px 8px;border-radius:999px;
+  .badge{font-size:.68rem;text-transform:uppercase;letter-spacing:.4px;padding:2px 8px;border-radius:var(--radius-pill);
     background:var(--chip);border:1px solid var(--line);color:var(--muted)}
   .badge.form{color:#fff;background:var(--accent2);border-color:transparent}
   .meta{color:var(--muted);font-size:.78rem;margin-left:auto}
   .body{padding:0 14px 14px;border-top:1px dashed var(--line)}
   .stanza{margin:12px 0;white-space:pre-wrap}
   .stanza .rom{color:var(--muted);font-size:.85rem}
-  .meaning{margin-top:10px;padding:10px;background:var(--chip);border-radius:9px;font-size:.9rem}
+  .meaning{margin-top:10px;padding:10px;background:var(--chip);border-radius:var(--radius-sm);font-size:.9rem}
   .src{font-size:.76rem;margin-top:10px}
   .src a{color:var(--accent)}
   .empty{padding:40px 16px;text-align:center;color:var(--muted)}
   .empty code{background:var(--chip);padding:2px 6px;border-radius:6px}
   .adminbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.78rem;color:var(--muted);
-    border:1px dashed var(--line);border-radius:10px;padding:8px 10px;margin:10px 0}
+    border:1px dashed var(--line);border-radius:var(--radius-sm);padding:8px 10px;margin:10px 0}
   .bar{height:6px;border-radius:999px;background:var(--line);overflow:hidden;flex:1;min-width:120px}
   .bar>i{display:block;height:100%;background:var(--ok);width:0}
   button.mini{font:inherit;font-size:.78rem;cursor:pointer;border:1px solid var(--line);background:var(--panel);

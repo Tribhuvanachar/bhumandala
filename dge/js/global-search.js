@@ -133,6 +133,13 @@
       '.dge-gs-row{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--card-border,rgba(0,0,0,.06))}',
       '.dge-gs-row:hover{background:var(--card-active,rgba(122,59,29,.08))}',
       '.dge-gs-meta{font-size:12px;opacity:.7;display:flex;gap:8px;flex-wrap:wrap}',
+      // Real taxonomy hierarchy per hit (see taxonomyCrumbsHtml()) — small
+      // and muted so it reads as metadata, not competing with the title.
+      '.dge-gs-crumbs{font-size:11px;margin-top:2px;display:flex;flex-wrap:wrap;align-items:center;gap:2px;opacity:.75}',
+      '.dge-gs-crumb-seg{color:var(--accent-red,#7a3b1d);text-decoration:underline dotted;text-underline-offset:2px;cursor:pointer}',
+      '.dge-gs-crumb-seg:hover,.dge-gs-crumb-seg:focus-visible{text-decoration-style:solid}',
+      '.dge-gs-crumb-current{color:inherit;font-weight:600}',
+      '.dge-gs-crumb-sep{opacity:.6}',
       '.dge-gs-snip{font-size:16px;margin-top:2px;line-height:1.5}',
       '.dge-gs-hl{background:rgba(232,178,77,.4);color:inherit;border-radius:3px;padding:0 1px;font-weight:700}',
       '.dge-gs-hint{padding:14px;opacity:.6;font-size:13px;display:flex;align-items:center;gap:8px}',
@@ -384,18 +391,54 @@
     return input.trim();
   }
 
-  function go(slug, unit) {
-    // ?path= is the READER's contract. From any other page carrying this
-    // search (ashtadhyayi.html since the corpus-usage button), the result
-    // must open in the reader — page-relative navigation would produce
-    // ashtadhyayi.html?path=..., which that page ignores.
+  // Shared by go() and the per-hit taxonomy crumbs below: the reader's own
+  // URL from wherever this search happens to be running (ashtadhyayi.html
+  // since the corpus-usage button, or any other page that loads this file)
+  // — page-relative navigation would otherwise produce e.g.
+  // ashtadhyayi.html?path=..., which that page ignores.
+  function readerBase() {
     var path = window.location.pathname;
     if (!/\/(index\.html)?$/.test(path)) {
       path = path.replace(/[^/]*$/, 'index.html');
     }
-    var p = path + '?path=' + slug;
+    return path;
+  }
+
+  function go(slug, unit) {
+    // ?path= is the READER's contract.
+    var p = readerBase() + '?path=' + slug;
     if (unit) p += '&jumpShloka=' + encodeURIComponent(unit);
     window.location.href = p;
+  }
+
+  // Real taxonomy hierarchy per result (25 Aug 2026 project-lead ask: "in
+  // the Kosha search, all sutras must be backlinked" turned out to have a
+  // sibling ask already on record for global search too -- every hit's
+  // title/category/score row said WHAT matched and roughly where, but
+  // never showed or let a reader follow the actual taxonomy path a hit
+  // lives at (h.grantha is that real path -- see taxonomyLabel()'s own
+  // comment above for why the slug, not h.category, is the source of
+  // truth). Every ancestor segment is a real link to the Library browser
+  // drilled to that node (library.js's dgeOpenLibraryToPath, reached via
+  // core.js's ?libraryPath= handling -- the SAME mechanism layer-stitch.js's
+  // lineage strip now uses, not a second one invented here). The leaf
+  // segment (the hit's own grantha) stays a plain "you are here" label,
+  // matching that same convention -- the row itself is already the click
+  // target to open it (see renderRows()'s own row.onclick).
+  function taxonomyCrumbsHtml(grantha, title) {
+    var segs = String(grantha || '').split('/').filter(Boolean);
+    if (!segs.length) return '';
+    var base = readerBase();
+    var cum = '', out = [];
+    segs.forEach(function (seg, i) {
+      cum = cum ? cum + '/' + seg : seg;
+      if (i === segs.length - 1) {
+        out.push('<span class="dge-gs-crumb-current">' + esc(title || taxonomyLabel(seg)) + '</span>');
+      } else {
+        out.push('<a class="dge-gs-crumb-seg" href="' + esc(base + '?libraryPath=' + encodeURIComponent(cum)) + '">' + esc(taxonomyLabel(seg)) + '</a>');
+      }
+    });
+    return '<div class="dge-gs-crumbs">' + out.join('<span class="dge-gs-crumb-sep">›</span>') + '</div>';
   }
 
   // A real query against this index is a manifest fetch plus several
@@ -516,6 +559,7 @@
     box.innerHTML = note + hits.map(function (h) {
       return '<div class="dge-gs-row" data-slug="' + esc(h.grantha) + '" data-unit="' + esc(h.unit) + '">' +
         '<div class="dge-gs-meta"><b>' + esc(h.title) + '</b><span>' + esc(h.unit) + '</span><span>' + esc(h.category) + '</span><span>' + h.score.toFixed(2) + '</span></div>' +
+        taxonomyCrumbsHtml(h.grantha, h.title) +
         '<div class="dge-gs-snip">' + highlightSnippet(esc(centerSnippet(h.snippet, q)), q) + '</div></div>';
     }).join('');
     Array.prototype.forEach.call(box.querySelectorAll('.dge-gs-row'), function (row) {
@@ -524,6 +568,11 @@
         // popover on click; without this the row's own click-to-navigate
         // would also fire on the same tap, jumping to the grantha instead.
         if (ev.target.closest && ev.target.closest('.dge-sutra-ref')) return;
+        // Same reasoning for a taxonomy crumb link: it's a real <a href>
+        // navigating to the Library browser, not a proxy for "open this
+        // hit" — letting the row handler also fire would race its own
+        // window.location.href against the anchor's native navigation.
+        if (ev.target.closest && ev.target.closest('.dge-gs-crumbs')) return;
         go(row.getAttribute('data-slug'), row.getAttribute('data-unit'));
       };
     });

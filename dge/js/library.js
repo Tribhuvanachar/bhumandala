@@ -1280,21 +1280,57 @@ function dgeSectionTrackerHtml(key) {
 // with a breadcrumb back to the grid instead of every branch at once.
 // dgeLibViewBy != 'hierarchy' swaps that for dgeRenderFacetView() instead,
 // same leaves, grouped by metadata rather than by taxonomy path.
-function dgeRenderLibraryCategoryView(key) {
-  const node = dgeLibTree.children[key];
-  if (!node) return dgeRenderLibraryGridView(); // stale key (shouldn't happen) -- fail back to the grid rather than a blank screen
+//
+// `key` was originally always a single top-level segment (a grid tile's own
+// key). Generalized to accept a full slash path -- walks dgeLibTree one
+// segment at a time -- so a taxonomy-breadcrumb ancestor click (any depth,
+// e.g. "darshana/vedanta/dvaita" from a tika-page lineage strip or a
+// corpus-search result) can land here too, not just a grid tile tap. A
+// single-segment key still resolves in exactly one step, so every existing
+// caller (the grid tiles) is unaffected.
+function dgeRenderLibraryCategoryView(path) {
+  const segs = String(path || '').split('/').filter(Boolean);
+  let node = dgeLibTree;
+  const resolved = [];
+  for (const seg of segs) {
+    if (!node || !node.children || !node.children[seg]) break;
+    node = node.children[seg];
+    resolved.push(seg);
+  }
+  if (!resolved.length) return dgeRenderLibraryGridView(); // nothing on this path exists -- fail back to the grid rather than a blank screen
   const body = dgeLibViewBy === 'hierarchy'
-    ? dgeRenderNode(node, '', 0, key)
+    ? dgeRenderNode(node, '', 0, resolved.join('/'))
     : dgeRenderFacetView(node, dgeLibViewBy);
-  return `<div class="dge-lib-breadcrumb" onclick="window.dgeShowLibraryGrid()">
-      <span>❮</span> <span>${dgeSegLabel(key)}</span>${dgeSectionTrackerHtml(key)}
+  const crumbs = resolved.map((seg, i) => {
+    const upToHere = resolved.slice(0, i + 1).join('/');
+    if (i === resolved.length - 1) return `<span class="dge-lib-crumb-current">${dgeSegLabel(seg)}</span>`;
+    return `<span class="dge-lib-crumb-seg" onclick="event.stopPropagation(); window.dgeShowLibraryCategory('${upToHere.replace(/'/g, "\\'")}')">${dgeSegLabel(seg)}</span><span class="dge-lib-crumb-sep">›</span>`;
+  }).join('');
+  return `<div class="dge-lib-breadcrumb">
+      <span class="dge-lib-crumb-back" onclick="window.dgeShowLibraryGrid()">❮</span> ${crumbs}${dgeSectionTrackerHtml(resolved.join('/'))}
     </div>` + dgeViewByRowHtml(node) + body;
 }
 
-window.dgeShowLibraryCategory = function (key) {
-  dgeLibGridCategory = key;
+window.dgeShowLibraryCategory = function (path) {
+  dgeLibGridCategory = path;
   dgeLibViewBy = 'hierarchy';
   dgeRenderLibraryRoot();
+};
+
+// Cross-page taxonomy deep-link target (see dge-breadcrumb.js's real page
+// headers, layer-stitch.js's lineage strip, and global-search.js's per-hit
+// crumbs): the target for an ANCESTOR taxonomy segment that has no readable
+// grantha of its own (a pure category, e.g. "darshana/vedanta/dvaita") --
+// there is no data.json to open as a reader page, so the honest navigation
+// is the Library browser itself, drilled to that node. A LEAF grantha
+// segment still links straight to the reader via dgeGoToGrantha's own
+// ?path= route (opens the text itself, more useful than the modal). Waits
+// on the same catalog fetch openLibraryModal() already awaits, so a link
+// followed before the catalog resolves still lands on the right node
+// instead of the bare grid.
+window.dgeOpenLibraryToPath = async function (path) {
+  await window.openLibraryModal();
+  if (path) window.dgeShowLibraryCategory(path);
 };
 window.dgeShowLibraryGrid = function () {
   dgeLibGridCategory = null;
