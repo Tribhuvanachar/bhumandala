@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha.js'] = 'v1.7 (removed #kosha-fab entirely -- build() no longer creates or drags a floating trigger button; index.html\'s new #dge-qa-tab quick-actions tab is the only entry point left, calling window.dgeOpenKosha() directly. Reverses v1.6\'s "keep both FABs" call per the project lead\'s explicit follow-up ask. Everything else from v1.5 -- dgeKoshaQuick -- unchanged)';
+  window.DGE_VERSIONS['kosha.js'] = 'v1.8 (openEntry()\'s sūtra scan now runs per .kosha-card with {always:true} for Kāśikā/Anuvṛtti/Gaṇapāṭha, whose citations were 100% going unlinked -- no cue word ever sits near a bare "७.१.१८" right after the headword; the translate/Ask-AI answer panels now also get a (cue-gated, not always) scan once their async content actually lands, since draw()\'s one-time scan ran before either existed. Everything else from v1.7 unchanged)';
 
   // Citation-form normalizer: strip a trailing visarga (H) / anusvara (M) from
   // an SLP1 headword so dictionaries that cite the nominative (रामः = rAmaH) or
@@ -537,9 +537,14 @@
           // a sutra number in a fresh translation would otherwise never get
           // the tappable treatment. Real gap, not theoretical: found by
           // tracing exactly when draw() calls dgeScanForSutras relative to
-          // when this content actually appears in the DOM.
+          // when this content actually appears in the DOM. No {always:true}
+          // here though, even for a Kāśikā/Anuvṛtti/Gaṇapāṭha card -- this is
+          // a translated PROSE rendering of the gloss, not the gloss's own
+          // "bare number right after the headword" shape, so the normal
+          // cue-word gating (सूत्र/पाणिनि nearby) is the right call same as
+          // any other prose.
           if (typeof window.dgeScanForEntities === 'function') { try { window.dgeScanForEntities(loading); } catch (e2) {} }
-          if (typeof window.dgeScanForSutras === 'function') { try { window.dgeScanForSutras(loading, { always: true }); } catch (e2) {} }
+          if (typeof window.dgeScanForSutras === 'function') { try { window.dgeScanForSutras(loading); } catch (e2) {} }
         }).catch(function (e) {
           btn.disabled = false; btn.textContent = label;
           loading.className = 'kosha-xl-err';
@@ -572,9 +577,12 @@
             // Same real gap as the translation branch above: an "Ask AI"
             // answer (e.g. "as per 1.1.1...") is exactly the kind of content
             // that cites sutras, and draw()'s one-time scan can't have seen
-            // this yet -- it didn't exist until this callback ran.
+            // this yet -- it didn't exist until this callback ran. Cue-gated,
+            // not {always:true}, for the same reason as the translation
+            // branch: free-form AI prose, not a dictionary's own bare
+            // number-after-headword citation shape.
             if (typeof window.dgeScanForEntities === 'function') { try { window.dgeScanForEntities(loading); } catch (e2) {} }
-            if (typeof window.dgeScanForSutras === 'function') { try { window.dgeScanForSutras(loading, { always: true }); } catch (e2) {} }
+            if (typeof window.dgeScanForSutras === 'function') { try { window.dgeScanForSutras(loading); } catch (e2) {} }
           })
           .catch(function (e) {
             btn.disabled = false; btn.textContent = old;
@@ -644,14 +652,33 @@
           try { window.dgeScanForEntities(detail); } catch (e) {}
         }
         if (typeof window.dgeScanForSutras === 'function') {
-          // {always:true}: a kosha gloss is grammar-dictionary content by
-          // definition -- the default cue-word/page-context gating (built
-          // for prose, where a bare number is usually a verse) under-links
-          // real sutra citations here whenever the reader opened Kosha from
-          // a non-vyakarana page (currentGranthaSlug is that page's, not
-          // "grammar"). See intellisense.js's scan() for the real gap this
-          // closes, found auditing Kosha's actual backlink coverage.
-          try { window.dgeScanForSutras(detail, { always: true }); } catch (e) {}
+          // Most koshas only ever *mention* a sūtra in passing prose, where
+          // intellisense.js's own cue-word check (सूत्र/पाणिनि/... nearby)
+          // is exactly right -- and stays right regardless of which page
+          // the reader opened Kosha from (currentGranthaSlug being e.g. a
+          // Purāṇa's is not itself the bug: a Purāṇa's "1.1.1" usually IS a
+          // verse number, not a sūtra, and blanket {always:true} over every
+          // dictionary would relabel it as one). But a Kāśikā/Gaṇapāṭha/
+          // Anuvṛtti entry doesn't mention a sūtra -- it IS one, cited as
+          // bare "७.१.१८" right after the headword with nothing "sūtra-ish"
+          // in between, so the cue window never sees a cue and every single
+          // citation from these three was going unlinked. Verified against
+          // the real corpus (github.com/Tribhuvanachar/bhumandala-kosha-data,
+          // dist branch): 100% of their citations look like this. Scoped to
+          // just these slugs, not every kosha, because some others mix real
+          // Ashtadhyayi references with a different corpus's numbering that
+          // happens to collide with the same d.d.d shape (dhatupatha-sa
+          // cites Uṇādi sūtras the same way, which are not in this app's
+          // Ashtadhyayi index and would silently resolve to the wrong rule)
+          // or with their own internal verse locators (Amarakośa's
+          // kāṇḍa.varga.śloka, Abhidhānaratnamālā's own numbering) -- a
+          // blanket {always:true} over the whole pane would relink those as
+          // wrong or nonexistent sūtras, trading a missing-link bug for a
+          // wrong-link one.
+          var ALWAYS_SUTRA_KOSHAS = { kashika: 1, 'ashtadhyayi-anuvritti': 1, ganapatha: 1 };
+          detail.querySelectorAll('.kosha-card').forEach(function (c) {
+            try { window.dgeScanForSutras(c, { always: !!ALWAYS_SUTRA_KOSHAS[c.dataset.slug] }); } catch (e) {}
+          });
         }
       }
       draw();

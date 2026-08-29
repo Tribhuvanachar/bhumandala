@@ -195,6 +195,21 @@
     });
   };
 
+  // Runs a batch of promises exactly like Promise.all, but reports how many
+  // have settled as it goes -- for a determinate progress readout instead of
+  // an indeterminate spinner. The total is known and reported (done=0)
+  // BEFORE any of them resolve, since every caller already has the full
+  // request list in hand (Object.keys(...).map(...)) before firing it; only
+  // the "how many are back yet" count is genuinely unknown ahead of time.
+  function allWithProgress(promises, onStep) {
+    if (!onStep || !promises.length) return Promise.all(promises);
+    var total = promises.length, done = 0;
+    onStep(0, total);
+    return Promise.all(promises.map(function (p) {
+      return p.then(function (v) { onStep(++done, total); return v; });
+    }));
+  }
+
   // How much of the corpus one query may open. Both are round trips, not
   // memory: each grantha is a separate file.
   var MAX_SHARDS = 40;      // distinct granthas opened per search
@@ -239,7 +254,11 @@
     var allFetch = {};
     fetchedSets.forEach(function (set) { set.forEach(function (tg) { allFetch[tg] = 1; }); });
     var postingKey = function (tg) { return tg + '::' + (section || '*'); };
-    return Promise.all(Object.keys(allFetch).map(function (tg) { return self._loadPosting(tg, section); }))
+    var onProgress = opts.onProgress;
+    return allWithProgress(
+      Object.keys(allFetch).map(function (tg) { return self._loadPosting(tg, section); }),
+      onProgress && function (done, total) { onProgress('postings', done, total); }
+    )
       .then(function () {
         // Rank candidates by how many of a (rarest-trimmed) trigram set's
         // members they share, then stop. Opening a grantha's unit shard is a
@@ -332,9 +351,16 @@
           picked.push(keys[i]);
         }
         if (picked.length >= MAX_UNITS) skipped = true;
-        return Promise.all(Object.keys(giSet).map(function (gi) {
-          return self._loadShard(+gi);
-        })).then(function () { return { cand: cand, keys: picked, skipped: skipped }; });
+        // The shard count isn't knowable before the postings phase above
+        // resolves -- which granthas even need opening depends on the
+        // candidate ranking that just ran -- but it IS fully known right
+        // here, before a single shard fetch fires, so the progress readout
+        // can jump straight to an honest "0 of 7", not stay silent then
+        // jump to "done".
+        return allWithProgress(
+          Object.keys(giSet).map(function (gi) { return self._loadShard(+gi); }),
+          onProgress && function (done, total) { onProgress('shards', done, total); }
+        ).then(function () { return { cand: cand, keys: picked, skipped: skipped }; });
       })
       .then(function (bag) {
         // 2) score each candidate unit with the fold + edit distance

@@ -158,6 +158,14 @@
       // comment gives for shipping its whole stylesheet inline).
       '.dge-gs-spinner{width:13px;height:13px;flex:none;border:2px solid var(--card-border,rgba(0,0,0,.2));border-top-color:var(--accent-red,#7a3b1d);border-radius:50%;animation:dge-gs-spin .7s linear infinite}',
       '@keyframes dge-gs-spin{100%{transform:rotate(360deg)}}',
+      // Determinate readout under the spinner: dge-search.js's search() now
+      // reports real "N of M index files fetched" / "N of M texts opened"
+      // progress (both counts are known ahead of the fetch that reports
+      // them -- see allWithProgress()'s own comment), so this shows that
+      // instead of leaving the reader to guess how much longer a 10+ second
+      // cold-cache query has left.
+      '.dge-gs-progress{height:3px;margin:0 14px 10px;background:var(--card-border,rgba(0,0,0,.12));border-radius:2px;overflow:hidden}',
+      '.dge-gs-progress-bar{display:block;height:100%;width:0%;background:var(--accent-red,#7a3b1d);transition:width .15s ease}',
       '.dge-gs-filterbar{padding:8px 12px;border-bottom:1px solid var(--card-border,rgba(0,0,0,.12));display:flex;flex-direction:column;gap:6px;}',
       '.dge-gs-frow{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}',
       '.dge-gs-flabel{font-size:10.5px;opacity:.55;text-transform:uppercase;letter-spacing:.4px;flex:0 0 100%;margin-top:2px;}',
@@ -456,12 +464,36 @@
     clearTimeout(debounce);
     var results = document.getElementById('dge-gs-results');
     if (!q) { results.innerHTML = '<div class="dge-gs-hint">Type a word or phrase in any script.</div>'; return; }
-    results.innerHTML = '<div class="dge-gs-hint"><span class="dge-gs-spinner" aria-hidden="true"></span>Searching…</div>';
+    results.innerHTML = '<div class="dge-gs-hint"><span class="dge-gs-spinner" aria-hidden="true"></span>' +
+      '<span class="dge-gs-searching-label">Searching…</span></div>' +
+      '<div class="dge-gs-progress"><i class="dge-gs-progress-bar"></i></div>';
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
       var section = currentSection || undefined;
       lastQueryDeva = queryToDevanagari(q);
-      p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30, section: section }, queryOpts(q))); })
+      // Two real stages, in order: fetching the rarest trigrams' postings
+      // buckets, then opening the candidate granthas' unit shards -- see
+      // dge-search.js's search()/allWithProgress(). Split the bar 50/50
+      // between them (their relative sizes aren't comparable -- one counts
+      // small index files, the other whole grantha shards -- so weighting
+      // by byte size isn't something either side knows); each stage still
+      // reports its own real "done of total" underneath the label. A stale
+      // callback from a query the reader has since replaced finds its
+      // elements already gone (results redrawn) and is a no-op.
+      var onProgress = function (stage, done, total) {
+        var label = results.querySelector('.dge-gs-searching-label');
+        var bar = results.querySelector('.dge-gs-progress-bar');
+        if (!label || !bar) return;
+        var half = total ? (done / total) * 50 : 0;
+        if (stage === 'postings') {
+          label.textContent = 'Searching… fetching index (' + done + ' of ' + total + ')';
+          bar.style.width = half + '%';
+        } else {
+          label.textContent = 'Searching… opening texts (' + done + ' of ' + total + ')';
+          bar.style.width = (50 + half) + '%';
+        }
+      };
+      p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30, section: section, onProgress: onProgress }, queryOpts(q))); })
        .then(function (hits) { render(hits, q); })
        .catch(function () {
          // ensureIndex()'s own catch already writes a specific "could not
@@ -586,7 +618,20 @@
       try { window.dgeScanForEntities(box); } catch (e) {}
     }
     if (typeof window.dgeScanForSutras === 'function') {
-      try { window.dgeScanForSutras(box); } catch (e) {}
+      // Per-row, not once over the whole results box: intellisense.js's own
+      // "always link, no cue word needed" trust list (CFG.alwaysLinkIn)
+      // keys off window.currentGranthaSlug, which is what the READER is
+      // showing -- meaningless here, since one results box mixes hits from
+      // many granthas at once. Each row already carries its own hit's slug
+      // (data-slug, used by the click-to-navigate handler above), so that's
+      // checked per row instead. Same 'vedanga/vyakarana' prefix
+      // intellisense.js trusts elsewhere -- a hit from Kāśikā or the
+      // Aṣṭādhyāyī's own sūtrapāṭha cites bare "1.1.1"-shaped numbers with
+      // no "सूत्र"/"पाणिनि" cue word nearby, same gap as Kosha's cards.
+      Array.prototype.forEach.call(box.querySelectorAll('.dge-gs-row'), function (row) {
+        var slug = row.getAttribute('data-slug') || '';
+        try { window.dgeScanForSutras(row, { always: slug.indexOf('vedanga/vyakarana') === 0 }); } catch (e) {}
+      });
     }
   }
 

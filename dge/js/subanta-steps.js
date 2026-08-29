@@ -21,21 +21,6 @@
 (function () {
   'use strict';
 
-  // Sutra-code links here need a real cross-page URL: this script is loaded
-  // both by dge/shabda.html (which moved into dge/vyakarana/, a sibling of
-  // ashtadhyayi.html) and by dge/index.html (the reader's word modal, one
-  // directory shallower) -- two different depths relative to
-  // dge/vyakarana/ashtadhyayi.html, so no single hardcoded relative string
-  // works for both includers. Same technique as dge-shell.js's
-  // LANDING_PAGE_URL: resolved off this script's own src (fixed at
-  // dge/js/subanta-steps.js) rather than the including page's location,
-  // captured synchronously while still document.currentScript.
-  var ASHTADHYAYI_URL = (function () {
-    var self = (document.currentScript && document.currentScript.src) ||
-               (window.DGE_SCRIPT_BASE || '');
-    try { return new URL('../vyakarana/ashtadhyayi.html', self).href; }
-    catch (e) { return 'vyakarana/ashtadhyayi.html'; } // fail soft, never throw
-  })();
   var SELF = (document.currentScript && document.currentScript.src) || location.href;
 
   /* ---- SLP1 -> Devanagari (same tables rupasiddhi.js uses) ---- */
@@ -155,8 +140,13 @@
     var rows = (history || []).map(function (st) {
       var code = st.rule.code, src = st.rule.source;
       var isSutra = src === 'ashtadhyayi' && /^\d\.\d\.\d{1,3}$/.test(code);
+      // In-page popover (intellisense.js's document click delegate), not a
+      // real navigation: a target="_blank" tab doesn't reliably inherit the
+      // vandana-guard sessionStorage flag, so the new tab bounced through the
+      // gate and back -- the "click does nothing but flash the landing page"
+      // bug. The host page must load intellisense.js for this to open.
       var codeHtml = isSutra
-        ? '<a class="sst-code" href="' + ASHTADHYAYI_URL + '#' + esc(code) + '" target="_blank" rel="noopener">' + esc(code) + '</a>'
+        ? '<span class="sst-code dge-sutra-ref" role="button" tabindex="0" data-sutra="' + esc(code) + '">' + esc(code) + '</span>'
         : '<span class="sst-code sst-code-plain">' + esc(((RULE_SRC[src] || src) + ' ' + code).trim()) + '</span>';
       var terms = st.result.filter(function (t) { return t.text; })
         .map(function (t) {
@@ -206,7 +196,12 @@
       '.sst-steps li{display:flex;gap:8px;align-items:baseline;padding:2px 0;border-bottom:1px dashed var(--card-border,rgba(0,0,0,.07))}',
       '.sst-steps li:last-child{border-bottom:none}',
       '.sst-code{flex:none;font-size:11.5px;font-family:monospace;color:var(--accent-red,#7a3b1d);text-decoration:none;border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:6px;padding:1px 5px}',
-      'a.sst-code:hover{background:var(--card-active,rgba(122,59,29,.12))}',
+      // Two-class selector so this wins over intellisense.css's generic
+      // .dge-sutra-ref styling (gold dotted-underline) regardless of which
+      // stylesheet loads later -- the sutra code here keeps looking like the
+      // rest of the derivation-step boxes, just clickable.
+      '.dge-sutra-ref.sst-code{cursor:pointer;color:var(--accent-red,#7a3b1d);border:1px solid var(--card-border,rgba(0,0,0,.2));padding:1px 5px;border-radius:6px}',
+      '.dge-sutra-ref.sst-code:hover{background:var(--card-active,rgba(122,59,29,.12))}',
       '.sst-code-plain{border-style:dashed;color:var(--muted-text,#8a7a63)}',
       '.sst-terms{flex:1;line-height:1.6}',
       '.sst-t-chg{font-weight:700;color:var(--accent-red,#7a3b1d)}',

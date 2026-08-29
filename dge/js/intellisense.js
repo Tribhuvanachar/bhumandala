@@ -41,7 +41,7 @@
   'use strict';
 
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['intellisense.js'] = 'v1.3 (selectedWord() now resolves the double-tap/double-click selection via ai.js\'s dgeRobustSelectedText() instead of the raw Selection string, for the same word-level tap-to-select fragility fix -- everything from v1.2 -- sūtra identification, word morphology, WordNet senses -- unchanged)';
+  window.DGE_VERSIONS['intellisense.js'] = 'v1.4 (dgeScanForSutras(root, opts) now takes an opts.always to force sūtra-linking in a root with no cue word needed, for Kosha cards whose own numbering IS a sūtra citation rather than mentioning one in passing -- everything from v1.3 unchanged)';
 
   // "Open in Aṣṭādhyāyī" needs a real cross-page URL: this script is loaded
   // both by dge/index.html (the word-modal path) and by the Vyakarana-
@@ -228,9 +228,10 @@
            (document.body && document.body.dataset.granthaSlug) || '';
   }
 
-  function shouldLink(slug, forceAlways) {
+  function shouldLink(slug, opts) {
     if (!CFG.linkNumbers) return { always: false, cued: true };
-    const always = forceAlways || (CFG.alwaysLinkIn || []).some(p => (slug || '').indexOf(p) === 0);
+    const always = (opts && opts.always) ||
+      (CFG.alwaysLinkIn || []).some(p => (slug || '').indexOf(p) === 0);
     return { always: always, cued: true };
   }
 
@@ -242,8 +243,8 @@
 
   const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'BUTTON', 'A', 'SELECT']);
 
-  function markUp(root, ix, forceAlways) {
-    const mode = shouldLink(currentSlug(), forceAlways);
+  function markUp(root, ix, opts) {
+    const mode = shouldLink(currentSlug(), opts);
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
       acceptNode: n => {
         if (!n.nodeValue || n.nodeValue.length < 5) return NodeFilter.FILTER_REJECT;
@@ -298,22 +299,23 @@
   }
 
   /* Cheap pre-check so a page with no citation at all never fetches the
-     index: test the raw text before loading 352 KB to look things up in. */
-  // opts.always (new): skip the cue-word/page-context gating entirely and
-  // link every recognized "N.N.N" as a sutra regardless of nearby text or
-  // window.currentGranthaSlug. Real gap found auditing Kosha's coverage: a
-  // Kosha dictionary entry's gloss is grammar-domain content almost by
-  // definition (that's what a kosha does), but openEntry() renders inside
-  // whatever grantha the reader happens to be on underneath the modal --
-  // reading a Purana and opening Kosha meant currentSlug() was the Purana's,
-  // so a bare "१।१।१" in the gloss (no "सूत्र"/"पाणिनि" text within 24 chars)
-  // never linked, even though it plainly was one. kosha.js passes this.
+     index: test the raw text before loading 352 KB to look things up in.
+
+     opts.always: link every "d.d.d"-shaped number as a sūtra in this root
+     with no cue word required — for callers who already know, from the
+     content's own structure rather than nearby prose, that a number here
+     can only be a sūtra citation (e.g. Kosha's Kāśikā/Gaṇapāṭha/Anuvṛtti
+     cards, each entry *being* one sūtra rather than merely mentioning one,
+     so the citation sits right after the headword with nothing "sūtra-ish"
+     in between for the cue-window check to find; likewise a Kosha AI/
+     translation answer that quotes a rule after the page's own one-time
+     scan already ran). Same trust level as CFG.alwaysLinkIn, just scoped to
+     the caller's root instead of a whole grantha slug. */
   function scan(root, opts) {
     if (!CFG.enabled || !CFG.linkNumbers || !root) return;
     REF.lastIndex = 0;
     if (!REF.test(root.innerText || root.textContent || '')) return;
-    const forceAlways = !!(opts && opts.always);
-    loadIndex().then(ix => { if (ix) markUp(root, ix, forceAlways); });
+    loadIndex().then(ix => { if (ix) markUp(root, ix, opts); });
   }
   window.dgeScanForSutras = scan;
 
