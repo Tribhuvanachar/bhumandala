@@ -827,6 +827,25 @@
       emptyMsg = exactActive
         ? 'No exact spelling matches among these results — try turning off "Exact spelling only" to see near matches too.'
         : 'No results match these filters.';
+      // Reported live: कान्ताय genuinely occurs verbatim in Sumadhva Vijaya
+      // (confirmed directly against the published index), but an UNSCOPED
+      // search for it never opens that grantha's shard at all -- its own
+      // interior trigrams are shared by ~48,000 units corpus-wide, so the
+      // shard-open budget (dge-search.js's MAX_SHARDS/MAX_EXACT_SHARDS,
+      // needed to keep a common query fast) is spent on other, arbitrarily-
+      // tied candidates first. lastHits.partial (dge-search.js's own
+      // "the sweep wasn't exhaustive" flag) is exactly the signal that this
+      // happened -- scoping to one section (the picker next to the input)
+      // searches only that section's much smaller candidate pool, so the
+      // SAME exact match the unscoped sweep never reached opens in under a
+      // second. Only worth saying when nothing is scoped yet and there's
+      // somewhere narrower to go.
+      if (exactActive && !out.length && lastHits.partial && !currentSection) {
+        emptyMsg += ' A search across the whole library can miss a real match' +
+          ' buried in a very common word’s ties — narrowing the scope' +
+          ' (the "Everything" picker above) searches that section directly' +
+          ' and usually finds it.';
+      }
     }
     renderRows(out, lastQuery, emptyMsg);
     var fc = document.getElementById('dge-gs-fcount');
