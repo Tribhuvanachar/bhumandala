@@ -464,16 +464,25 @@
     return input.trim();
   }
 
-  // NFC-normalizes and strips zero-width joiner/non-joiner (U+200D/U+200C)
-  // before an exact-spelling comparison -- an Android IME composing a
-  // Devanagari conjunct can emit either an unnormalized codepoint sequence
-  // or a stray ZWJ/ZWNJ to force a particular ligature, visually identical
-  // to the "plain" form but byte-different, which made a genuine literal
-  // match invisible to a raw indexOf(). Applied to BOTH sides of the
-  // comparison in applyFilters() so this can't itself introduce a
-  // false-negative the other direction.
+  // Orthographic-equivalence normalization for the exact-spelling
+  // comparison -- "exact" means the same WORD as written, not the same
+  // bytes. Three folds, applied to BOTH sides in applyFilters() so none
+  // can introduce a one-directional false negative:
+  //  * NFC -- an Android IME can emit an unnormalized codepoint sequence
+  //    visually identical to the composed form (reported live);
+  //  * strip zero-width joiner/non-joiner (U+200D/U+200C) -- IME ligature
+  //    hints, byte-different, invisible;
+  //  * anusvara <-> homorganic class nasal (कान्ताय <-> कांताय): every
+  //    Sanskrit editor treats these as interchangeable spellings of the
+  //    SAME word, and hiding one from a query typed the other way is a
+  //    false negative a reader experiences as a missing verse. Class
+  //    nasal + virama before a consonant folds to anusvara (ं).
+  // Everything else stays byte-strict: vowel length, sibilant identity
+  // (श/ष/स), visarga, gemination -- those distinguish genuinely different
+  // words, which is exactly what "Exact spelling only" promises to honor.
   function dgeGsExactNormalize(s) {
-    return String(s || '').normalize('NFC').replace(/[‌‍]/g, '');
+    return String(s || '').normalize('NFC').replace(/[‌‍]/g, '')
+      .replace(/[ङञणनम]्(?=[क-ह])/g, 'ं');
   }
 
   // Shared by go() and the per-hit taxonomy crumbs below: the reader's own

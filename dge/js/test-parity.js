@@ -52,6 +52,12 @@ const WORDS = [
   ['पण्डित', 'retroflex ण्ड'],
   ['कमल', 'no folding needed -- sanity baseline'],
   ['राम नाम', 'multi-word phrase, whitespace handling'],
+  // Fable review, 30 Aug 2026 -- classes the list above missed, each a
+  // confirmed or near-miss divergence between the two normalizers:
+  ['श्लोकः १.२', 'Devanagari digits (१->1): was a REAL parity bug -- Python mapped them, JS passed them through'],
+  ['ॐ कान्ताय', 'ॐ survives the fold on both sides, must stay identical'],
+  ['कल्याण-गुणैक-धाम्ने', 'literal hyphens inside verse text'],
+  ['[श्रियं] (देव्य,', 'punctuation flowing into pkey -- both sides must agree byte-for-byte on what survives'],
 ];
 
 function jsSideFor(word) {

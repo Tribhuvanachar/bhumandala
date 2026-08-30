@@ -77,7 +77,7 @@ def clean_devanagari(text: str) -> str:
     return re.sub(r"\s+", " ", t).strip()
 
 
-def snippet(text: str, n: int = 2000) -> str:
+def snippet(text: str, n: int = 4000) -> str:
     """Stored verbatim (Devanagari, not the pk/ck folded keys) so the CLIENT
     can locate the actual match and center a short excerpt on it at render
     time — impossible to do here, since the query hasn't been typed yet. A
@@ -86,10 +86,16 @@ def snippet(text: str, n: int = 2000) -> str:
     units are short verses where that was true by luck, but any longer
     commentary/tika paragraph with its match further in silently showed an
     unrelated, unhighlighted prefix instead — confirmed directly: a real,
-    exact match at character 758 of a 797-character unit. n=2000 is a
-    generous cap against the rare pathologically long unit, not a normal
-    ceiling — the overwhelming majority of units are far shorter and are
-    now stored in full.
+    exact match at character 758 of a 797-character unit. The cap is a
+    guard against the rare pathologically long unit, not a normal ceiling
+    — the overwhelming majority of units are far shorter and are stored in
+    full. n=4000 (was 2000): the pk/ck keys are capped at MAX_KEY=2500
+    FOLDED chars, and Devanagari spends more codepoints per sound than the
+    folded SLP1 (matras, viramas, geminates the fold collapses), so a
+    2000-char snippet could END before the pk did — a word-index hit found
+    near the pk's tail then had no snippet text to display, highlight, or
+    pass the exact post-filter with. 4000 Devanagari chars comfortably
+    covers 2500 folded chars.
     """
     t = clean_devanagari(text)
     return t[:n]
@@ -224,7 +230,20 @@ def category_of(slug: str) -> str:
     return slug.split("/", 1)[0] if slug else "unknown"
 
 
-_WORD_SPLIT = re.compile(r"[\s-]+")
+"""Word-index tokenizer contract (mirrored EXACTLY by dge-search.js's
+wordTokens/wordBucket -- test-parity.js asserts the tokenizer half):
+
+  * split on ANY char outside [0-9A-Za-z] plus ॐ -- not just
+    whitespace/hyphen. Measured against the real corpus (Fable review,
+    30 Aug 2026): 5.6% of postings (412k) carried punctuation baked into
+    the token ("[sriyan", "`devya", "(nahahavi", bare ","/"()") under a
+    whitespace-only split, making those words unfindable by exact lookup
+    forever. ॐ is kept: it is a real, queryable word of one char.
+  * pure-digit tokens are dropped (8,557 of them in the corpus): verse
+    numbers, not vocabulary.
+"""
+_WORD_SPLIT = re.compile(r"[^0-9A-Za-zॐ]+")
+_PURE_DIGITS = re.compile(r"^[0-9]+$")
 
 
 def word_tokens(pk: str):
@@ -243,27 +262,51 @@ def word_tokens(pk: str):
     bounded, usually small number of units, so there is no tie to break and
     no shard-open budget needed to find it.
 
-    Splits on BOTH whitespace and hyphen: this corpus's own poetic/verse
-    source formatting joins compound members with a literal "-"
-    (kalyana-gunEka-Dane), which a plain whitespace split would keep as one
-    token no ordinary reader would ever type as a query. This is
-    deliberately NOT how phonetic_key()'s own pk field is tokenized
-    elsewhere (dge-normalize.js's normalizeQuery().words splits on
-    whitespace only) -- changing that would ripple into the existing
-    trigram/fuzzy scoring and its parity test, which this only-additive
-    index doesn't need to touch."""
-    return [t for t in _WORD_SPLIT.split(pk) if t]
+    Splits on punctuation and hyphen as well as whitespace (see the
+    tokenizer-contract comment above _WORD_SPLIT). This is deliberately NOT
+    how phonetic_key()'s own pk field is tokenized elsewhere
+    (dge-normalize.js's normalizeQuery().words splits on whitespace only)
+    -- changing that would ripple into the existing trigram/fuzzy scoring
+    and its parity test, which this only-additive index doesn't need to
+    touch."""
+    return [t for t in _WORD_SPLIT.split(pk) if t and not _PURE_DIGITS.match(t)]
 
 
-def word_bucket(word: str) -> str:
-    """The literal on-disk directory a word's posting lives under: its own
-    first two characters, made filesystem/URL-safe the same way
-    safe_trigram_filename() already does for trigrams (same reasoning,
-    same fallback to '_' for anything unexpected) -- keeps file COUNT
-    bounded (roughly (distinct 2-char prefixes) x (sections), the same
-    order of magnitude as today's trigram file count) while keeping each
-    file's own byte size well short of a single huge per-section blob."""
-    return _UNSAFE_TG_CHARS.sub("_", word[:2]) or "_"
+def bucket_key(word: str, depth: int) -> str:
+    """Case-safe, filesystem/URL-safe bucket name from a word's first
+    `depth` chars. pkey retains uppercase (aspirates K/G/C/J/T/D/P/B,
+    diphthongs E/O -- 'Bavati' is one of the corpus's most common tokens),
+    and 'Ba' vs 'ba' are DIFFERENT buckets that a case-insensitive
+    filesystem (macOS/Windows checkout of search-dist, or a local build
+    there) would silently merge -- the same latent landmine the trigram
+    tree has always carried, not repeated here. Each uppercase letter
+    encodes as lowercase + '-' ('Ba' -> 'b-a', 'ba' -> 'ba'), so no two
+    distinct buckets collide case-insensitively. Anything outside
+    [0-9A-Za-z] (ॐ, corpus mojibake) maps to '_', same spirit as
+    safe_trigram_filename(). Mirrored exactly by dge-search.js
+    bucketKey()."""
+    out = []
+    for ch in word[:depth]:
+        if "0" <= ch <= "9" or "a" <= ch <= "z":
+            out.append(ch)
+        elif "A" <= ch <= "Z":
+            out.append(ch.lower() + "-")
+        else:
+            out.append("_")
+    return "".join(out) or "_"
+
+
+# Adaptive bucket depth (Fable review, 30 Aug 2026, measured against the
+# real corpus): fixed 2-char buckets fail the ~1MB-per-file budget (sa/
+# darshana hit 4.76MB raw), and even fixed 3-char still fails (pra/darshana
+# 3.22MB, 65,707 words in one file) -- the fat buckets are vocabulary-
+# driven, so no per-word cap helps. Fixed 4-char works but costs ~114k
+# files. The measured sweet spot: START at 2 chars, deepen only the few
+# buckets whose GLOBAL (cross-section) size exceeds this threshold to 3,
+# and any still-oversized 3-char bucket to 4 -- lands at ~13k files, max
+# file ~0.86MB, with a deepening map of only a few dozen entries shipped
+# in manifest.json for the client to consult.
+WORD_BUCKET_DEEPEN_BYTES = 1_000_000
 
 
 _UNSAFE_TG_CHARS = re.compile(r"[^0-9A-Za-z^$]")
@@ -353,8 +396,13 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
             slp1 = to_slp1(clean, "devanagari")
             # cap indexed key length: enough to locate a passage, and it stops a
             # few very large merged/prose blocks from bloating the static index.
+            # A truncated key drops its final token -- a severed half-word
+            # would index as a "word" no one can type, and a query word that
+            # happens to equal the severed half would false-match.
             MAX_KEY = 2500
-            pk = phonetic_key(slp1)[:MAX_KEY]
+            pk = phonetic_key(slp1)
+            if len(pk) > MAX_KEY:
+                pk = pk[:MAX_KEY].rsplit(" ", 1)[0]
             ck = coarse_key(slp1)[:MAX_KEY]
             ui = len(unit_rows)
             unit_rows.append({"u": uid, "pk": pk, "ck": ck, "s": snippet(dev_text)})
@@ -422,19 +470,49 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
         df[tg] = total
     stats["distinct_trigrams"] = len(df)
 
-    # write one file per (2-char BUCKET, SECTION) pair for the exact word
-    # index -- unlike trigram postings (one file per trigram, since there
-    # are few enough that a real query only ever needs its rarest 2-3), an
-    # exact query looks up EVERY one of its own words directly, so the file
-    # has to be found by a cheap, deterministic function of the word alone
-    # (word_bucket()) rather than by picking among many small files. Each
-    # file holds every word sharing that bucket+section as one dict, so a
-    # query fetches exactly one file per (distinct bucket, section) its
-    # words touch -- for an unscoped multi-word query, still just a handful
-    # of small fetches, never a per-word full-corpus fan-out.
+    # write one file per (BUCKET, SECTION) pair for the exact word index --
+    # unlike trigram postings (one file per trigram, since a real query
+    # only ever needs its rarest 2-3), an exact query looks up EVERY one of
+    # its own words directly, so the file has to be found by a cheap,
+    # deterministic function of the word alone (bucket_key() + the
+    # deepening map below) rather than by picking among many small files.
+    # Each file holds every word sharing that bucket+section as one dict,
+    # so a query fetches exactly one file per (distinct bucket, section)
+    # its words touch. Bucket depth is ADAPTIVE (see
+    # WORD_BUCKET_DEEPEN_BYTES): estimate each 2-char bucket's global raw
+    # size; the few oversized ones deepen to 3 chars, any still-oversized
+    # of those to 4 -- the deepening decisions ship in manifest.json as
+    # wordBucketDeepen (a {prefix: 1} presence-set the client walks:
+    # 2-char key present -> use 3 chars; that 3-char key also present ->
+    # use 4).
+    def est_bytes(w, by_section):
+        # close-enough serialized size: word key + ~12 bytes per posting row
+        return len(w) + 4 + sum(12 * len(rows) for rows in by_section.values())
+
+    size2 = defaultdict(int)
+    for w, by_section in word_postings.items():
+        size2[bucket_key(w, 2)] += est_bytes(w, by_section)
+    deepen = {}   # prefix-key -> 1 (presence means "go one char deeper")
+    size3 = defaultdict(int)
+    for w, by_section in word_postings.items():
+        k2 = bucket_key(w, 2)
+        if size2[k2] > WORD_BUCKET_DEEPEN_BYTES:
+            deepen[k2] = 1
+            size3[bucket_key(w, 3)] += est_bytes(w, by_section)
+    for k3, sz in size3.items():
+        if sz > WORD_BUCKET_DEEPEN_BYTES:
+            deepen[k3] = 1
+
+    def word_bucket_final(w):
+        k2 = bucket_key(w, 2)
+        if k2 not in deepen:
+            return k2
+        k3 = bucket_key(w, 3)
+        return bucket_key(w, 4) if k3 in deepen else k3
+
     word_buckets = defaultdict(lambda: defaultdict(dict))  # bucket -> section -> {word: rows}
     for w, by_section in word_postings.items():
-        b = word_bucket(w)
+        b = word_bucket_final(w)
         for section, rows in by_section.items():
             word_buckets[b][section][w] = rows
     os.makedirs(os.path.join(out_dir, "words"), exist_ok=True)
@@ -446,6 +524,16 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
                       "w", encoding="utf-8") as f:
                 json.dump(word_map, f, ensure_ascii=False, separators=(",", ":"))
     stats["distinct_words"] = len(word_postings)
+    stats["word_buckets_deepened"] = len(deepen)
+    # bucket_key() encodes case into the name, but assert the guarantee
+    # anyway -- a future naming change that reintroduces the trigram tree's
+    # case-collision landmine should fail the build, not corrupt a macOS/
+    # Windows checkout silently.
+    lowered = defaultdict(list)
+    for b in word_buckets:
+        lowered[b.lower()].append(b)
+    for lb, names in lowered.items():
+        assert len(names) == 1, f"case-colliding word buckets: {names}"
 
     # df is the GLOBAL (cross-section) posting count -- still what decides
     # which trigrams are rarest and therefore worth fetching (see
@@ -455,7 +543,8 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
     # scoped one already knows its one section without ranking across them.
     with open(os.path.join(out_dir, "manifest.json"), "w", encoding="utf-8") as f:
         json.dump({"granthas": granthas, "df": df,
-                   "sections": sorted(sections), "stats": stats},
+                   "sections": sorted(sections), "stats": stats,
+                   "wordBucketDeepen": deepen},
                    f, ensure_ascii=False, separators=(",", ":"))
     with open(os.path.join(out_dir, "backlinks.json"), "w", encoding="utf-8") as f:
         json.dump(backlinks, f, ensure_ascii=False, separators=(",", ":"))

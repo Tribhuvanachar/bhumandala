@@ -22,12 +22,24 @@ they are 0.1 MB, and `js/backlinks.js` reads them from beside the app.
 
 ```
 manifest.json            granthas (categories, unit counts, shards), the section
-                          list (manifest.sections), and df: {trigram -> GLOBAL
-                          posting count across all sections}
+                          list (manifest.sections), df: {trigram -> GLOBAL
+                          posting count across all sections}, and
+                          wordBucketDeepen: the word index's adaptive-depth map
 units/<slug>.json        per-grantha units: {u, pk, ck, s}
 postings/<trigram>/<section>.json
                           one file per (trigram, section) pair (trigram
                           directory name percent-safe): [[granthaIdx, unitIdx], ...]
+words/<bucket>/<section>.json
+                          the EXACT word-level index: {word: [[granthaIdx,
+                          unitIdx], ...], ...}. Bucket = the word's first 2
+                          chars (case-encoded: uppercase -> lowercase+'-', so
+                          'Ba'->'b-a' never collides with 'ba' on a
+                          case-insensitive filesystem; non-alphanumerics -> '_'),
+                          deepened to 3 or 4 chars for the few oversized
+                          prefixes listed in manifest.wordBucketDeepen.
+                          dge-search.js searchExact() reads this for the
+                          "Exact spelling only" mode: word -> units directly,
+                          no candidate ties, no shard-open budget.
 ```
 
 Postings are filed per trigram, not by a trigram's first 2 characters —

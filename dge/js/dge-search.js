@@ -168,18 +168,44 @@
   }
 
   // ---- EXACT word-level index (words/<bucket>/<section>.json) ----
-  // Mirrors build_search_index.py's word_tokens()/word_bucket() exactly --
+  // Mirrors build_search_index.py's word_tokens()/bucket_key() EXACTLY --
   // the two sides MUST tokenize and bucket identically or a query word
-  // looks in the wrong file and finds nothing. Split on whitespace AND
-  // hyphen (the corpus's own verse formatting joins compound members with
-  // a literal "-"); bucket = the word's first two chars, non-[0-9A-Za-z^$]
-  // mapped to '_' (same safety rule as safeTrigram(), same reasoning).
+  // looks in the wrong file and finds nothing (test-parity.js asserts the
+  // tokenizer half). Tokens split on ANY char outside [0-9A-Za-z] plus ॐ
+  // (punctuation baked into a token made 5.6% of corpus postings
+  // unfindable under a whitespace-only split -- measured, Fable review
+  // 30 Aug 2026); pure-digit tokens (verse numbers) drop. Bucket names
+  // encode uppercase as lowercase+'-' ('Ba' -> 'b-a') so 'Ba'/'ba' can
+  // never collide on a case-insensitive filesystem, and anything outside
+  // [0-9A-Za-z] maps to '_'.
   function wordTokens(pk) {
-    return String(pk || '').split(/[\s-]+/).filter(Boolean);
+    return String(pk || '').split(/[^0-9A-Za-zॐ]+/).filter(function (t) {
+      return t && !/^[0-9]+$/.test(t);
+    });
   }
-  function wordBucket(word) {
-    return word.slice(0, 2).replace(/[^0-9A-Za-z^$]/g, '_') || '_';
+  function bucketKey(word, depth) {
+    var out = '';
+    var prefix = word.slice(0, depth);
+    for (var i = 0; i < prefix.length; i++) {
+      var ch = prefix[i];
+      if (ch >= '0' && ch <= '9' || ch >= 'a' && ch <= 'z') out += ch;
+      else if (ch >= 'A' && ch <= 'Z') out += ch.toLowerCase() + '-';
+      else out += '_';
+    }
+    return out || '_';
   }
+  // Adaptive depth: manifest.wordBucketDeepen is a presence-set written by
+  // the builder ({prefixKey: 1}); a word's 2-char key being present means
+  // its bucket uses 3 chars, and that 3-char key also present means 4 --
+  // only the few dozen genuinely oversized buckets deepen, everything else
+  // stays at 2 (see WORD_BUCKET_DEEPEN_BYTES in build_search_index.py).
+  Index.prototype._wordBucketOf = function (word) {
+    var deepen = this.manifest.wordBucketDeepen || {};
+    var k2 = bucketKey(word, 2);
+    if (!deepen[k2]) return k2;
+    var k3 = bucketKey(word, 3);
+    return deepen[k3] ? bucketKey(word, 4) : k3;
+  };
 
   // One file per (bucket, section): {word: [[gi,ui],...], ...}. Cached per
   // (bucket, scope) the same way _loadPosting caches per (trigram, scope);
@@ -244,7 +270,7 @@
     };
 
     var buckets = {};
-    qwords.forEach(function (w) { buckets[wordBucket(w)] = 1; });
+    qwords.forEach(function (w) { buckets[self._wordBucketOf(w)] = 1; });
     var bucketNames = Object.keys(buckets);
 
     return allWithProgress(
@@ -254,7 +280,7 @@
       // unitHits: "gi:ui" -> { words: {queryWord: 'exact'|'prefix'}, }
       var unitHits = {};
       qwords.forEach(function (w, wi) {
-        var maps = bucketMapsPerName[bucketNames.indexOf(wordBucket(w))] || [];
+        var maps = bucketMapsPerName[bucketNames.indexOf(self._wordBucketOf(w))] || [];
         maps.forEach(function (wordMap) {
           // pass 1: whole-word
           var rows = wordMap[w];
@@ -321,10 +347,21 @@
           var allExact = s.nExact === qwords.length;
           hits.push({ grantha: g.slug, title: g.title, category: g.category,
             contentType: classifyContentType(g.schema),
-            unit: row.u, snippet: row.s,
+            unit: row.u, snippet: row.s, _pkLen: (row.pk || '').length,
             score: allExact ? 0.99 : (0.9 * s.nWords / qwords.length + 0.05 * (s.nExact / qwords.length)),
             via: allExact ? 'word-index-exact' : 'word-index-partial' });
         });
+        // Final tiebreak, only computable now that shards are open: among
+        // equal-score hits, the SHORTER unit first -- a verse that contains
+        // the query words beats a 300-word commentary paragraph mentioning
+        // them ten lines apart. Stable sort preserves the earlier
+        // exact-over-prefix / verse-schema-over-commentary ordering for
+        // genuinely equal pairs.
+        hits.sort(function (a, b) {
+          if (a.score !== b.score) return b.score - a.score;
+          return a._pkLen - b._pkLen;
+        });
+        hits.forEach(function (h) { delete h._pkLen; });
         var out = hits.slice(0, limit);
         // The word index IS exhaustive for whole words and compound-initial
         // prefixes -- but not for a word buried mid-compound (sandhi can

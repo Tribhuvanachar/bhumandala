@@ -732,3 +732,56 @@ Node/pytest suites above, which run without any server or browser.
    each work's real chapter-reference string convention against its
    `data.json`, the same 15 minutes of verification Bhāgavata Purāṇa's entry
    already got.
+
+## The exact word-level index (30 Aug 2026)
+
+The trigram index above answers "which units share this 3-letter fragment" —
+the right question for typo-tolerant fuzzy matching, the wrong one for exact
+lookup at corpus scale. Measured live: कान्ताय's interior trigrams
+(kan/nta/tay) are each shared by tens of thousands of units, 48,585 of which
+tie as equally-"complete" candidates; no shard-open budget can resolve that
+many ties, so a genuine verbatim occurrence (Sumadhva Vijaya 1.1) was never
+even opened. Raising the budget 20× didn't reach it. The tie-storm is
+structural, not a tuning problem.
+
+`words/<bucket>/<section>.json` is a second, additive index answering the
+right question directly: `{word: [[granthaIdx, unitIdx], ...]}`. Measured
+against the real corpus: `kantaya` has **12 postings total** — a direct
+lookup, no ties, no budget. 2,168,237 distinct words; ≈121 MB raw.
+
+Key decisions (each measured, see the 30 Aug 2026 review):
+
+- **Tokenizer** (`word_tokens()` / dge-search.js `wordTokens()`, parity
+  asserted by test-parity.js): split the pkey on ANY char outside
+  `[0-9A-Za-z]`+`ॐ`, drop pure-digit tokens. A whitespace-only split left
+  punctuation baked into 5.6% of postings (`[sriyan`, `(nahahavi`) —
+  unfindable forever.
+- **Buckets**: first 2 chars of the word, case-encoded (uppercase →
+  lowercase+`-`, so `Ba`→`b-a` never collides with `ba` on a
+  case-insensitive filesystem; build asserts no collisions). Fixed 2-char
+  buckets fail the ~1 MB/file budget (sa/darshana measured 4.76 MB), fixed
+  3-char still fails (pra/darshana 3.22 MB), and per-word files are absurd
+  (1.68M hapaxes). Adaptive depth: the few globally-oversized 2-char
+  prefixes deepen to 3, still-oversized 3-char to 4; the decisions ship as
+  `manifest.wordBucketDeepen` (a few dozen entries) for the client to walk.
+- **Query** (`searchExact()`): tokenize identically, fetch one bucket file
+  per (distinct bucket, section), direct dict lookup + a prefix scan (a
+  word opening a longer compound, `kantayasan`, still surfaces; a word
+  buried mid-compound is invisible here by construction — that remains the
+  trigram path's job). Intersect across query words, fall back to best
+  partial overlap; rank exact>prefix, verse-schema>commentary, then
+  shorter unit first. Two serial network stages ≈ 0.6–1.8 s on mobile.
+- **Routing** (global-search.js): "Exact spelling only" ON (the default)
+  uses `searchExact()`; empty exact results fall back to the fuzzy path, so
+  a stale index without `words/` degrades gracefully. OFF keeps the trigram
+  path unchanged.
+- **Exactness contract**: retrieval is fold-exact (pkey), display is
+  orthographic-exact — NFC + zero-width strip + anusvara↔class-nasal
+  equivalence (कान्ताय ↔ कांताय are the same word; hiding one is a false
+  negative), while vowel length, sibilants, visarga, and gemination stay
+  strict.
+
+Deferred follow-ups are tracked in PENDING.md (trigram-hit blending under
+sparse exact results, variant-spelling labeling, mega-shard splitting,
+mojibake cleanup, the trigram tree's own pre-existing case-collision
+hazard).

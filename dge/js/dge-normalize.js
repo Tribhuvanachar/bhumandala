@@ -25,6 +25,12 @@
     'न':'n','प':'p','फ':'P','ब':'b','भ':'B','म':'m','य':'y','र':'r','ल':'l','व':'v',
     'श':'S','ष':'z','स':'s','ह':'h','ळ':'L'};
   var SIGN = {'ं':'M','ः':'H','ँ':'~','ऽ':"'"};
+  // Devanagari digits -> ASCII, mirroring translit.py's _DEVA_DIGITS.
+  // Confirmed parity bug (Fable review, 30 Aug 2026): the Python indexer
+  // has always mapped १->1 etc., so index keys carry ASCII digits, while
+  // this file let Devanagari digits pass through untranslated -- a QUERY
+  // containing one could never match what the index stored for it.
+  var DIGITS = {'०':'0','१':'1','२':'2','३':'3','४':'4','५':'5','६':'6','७':'7','८':'8','९':'9'};
   var VIRAMA = '्';
   var VEDIC = /[॒॑᳐-᳿]/g;
 
@@ -52,6 +58,7 @@
       } else if (INDEP[ch] !== undefined) { out.push(INDEP[ch]); i++; }
       else if (MATRA[ch] !== undefined) { out.push(MATRA[ch]); i++; }
       else if (SIGN[ch] !== undefined) { out.push(SIGN[ch]); i++; }
+      else if (DIGITS[ch] !== undefined) { out.push(DIGITS[ch]); i++; }
       else { out.push(ch); i++; }
     }
     return out.join('');
