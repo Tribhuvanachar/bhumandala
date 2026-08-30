@@ -164,7 +164,178 @@
     this.sections = manifest.sections || [];
     this._shardCache = {};
     this._postingCache = {};
+    this._wordBucketCache = {};
   }
+
+  // ---- EXACT word-level index (words/<bucket>/<section>.json) ----
+  // Mirrors build_search_index.py's word_tokens()/word_bucket() exactly --
+  // the two sides MUST tokenize and bucket identically or a query word
+  // looks in the wrong file and finds nothing. Split on whitespace AND
+  // hyphen (the corpus's own verse formatting joins compound members with
+  // a literal "-"); bucket = the word's first two chars, non-[0-9A-Za-z^$]
+  // mapped to '_' (same safety rule as safeTrigram(), same reasoning).
+  function wordTokens(pk) {
+    return String(pk || '').split(/[\s-]+/).filter(Boolean);
+  }
+  function wordBucket(word) {
+    return word.slice(0, 2).replace(/[^0-9A-Za-z^$]/g, '_') || '_';
+  }
+
+  // One file per (bucket, section): {word: [[gi,ui],...], ...}. Cached per
+  // (bucket, scope) the same way _loadPosting caches per (trigram, scope);
+  // a failed/absent section file resolves to null via fetchJSON and is
+  // simply an empty contribution, never fatal to the rest of the fan-out.
+  Index.prototype._loadWordBucket = function (bucket, scope) {
+    var self = this;
+    var key = bucket + '::' + (scope || '*');
+    if (this._wordBucketCache[key]) return Promise.resolve(this._wordBucketCache[key]);
+    var p;
+    if (scope) {
+      p = fetchJSON(this.base, 'words/' + bucket + '/' + scope + '.json')
+        .then(function (d) { return d ? [d] : []; });
+    } else {
+      p = Promise.all(this.sections.map(function (sec) {
+        return fetchJSON(self.base, 'words/' + bucket + '/' + sec + '.json');
+      })).then(function (parts) {
+        return parts.filter(function (d) { return !!d; });
+      });
+    }
+    return p.then(function (maps) { self._wordBucketCache[key] = maps; return maps; });
+  };
+
+  // Exact word search: the direct answer to "which units contain this
+  // word", with none of the trigram path's candidate-tie problem (see
+  // search()'s own comments on MAX_SHARDS -- a common word's 3-letter
+  // fragments tie with tens of thousands of unrelated units corpus-wide,
+  // and no reasonable shard budget can resolve that; a WORD is a bounded,
+  // selective key, so its postings list IS the answer). Two passes over
+  // each fetched bucket file:
+  //   1. direct dict lookup of the query word itself (whole-word match);
+  //   2. a prefix scan of the bucket's keys (indexOf === 0) so a word
+  //      living INSIDE a longer compound-initial token still surfaces --
+  //      real Sanskrit text joins words by sandhi/samasa far more often
+  //      than it separates them with spaces, so whole-word-only would
+  //      miss most genuine occurrences. Prefix (not full substring) keeps
+  //      the scan meaningful: the bucket is keyed by first-2-chars, so
+  //      only prefix matches are even findable in the right bucket.
+  // Multi-word queries intersect (units containing EVERY query word),
+  // falling back to the best partial overlap when the intersection is
+  // empty -- exact-match semantics for the phrase, degrading gracefully
+  // rather than to nothing.
+  Index.prototype.searchExact = function (query, opts) {
+    opts = opts || {};
+    var self = this;
+    var limit = opts.limit || 30;
+    var section = opts.section || null;
+    var q = N.normalizeQuery(query, opts);
+    if (!q.pkey) return Promise.resolve([]);
+    var qwords = wordTokens(q.pkey);
+    if (!qwords.length) return Promise.resolve([]);
+    var onProgress = opts.onProgress;
+
+    var excludePrefixes = opts.excludeGranthaPrefixes || [];
+    var isExcludedGrantha = function (gi) {
+      var slug = self.granthas[gi] && self.granthas[gi].slug;
+      if (!slug) return false;
+      for (var p = 0; p < excludePrefixes.length; p++) {
+        if (slug === excludePrefixes[p] || slug.indexOf(excludePrefixes[p] + '/') === 0) return true;
+      }
+      return false;
+    };
+
+    var buckets = {};
+    qwords.forEach(function (w) { buckets[wordBucket(w)] = 1; });
+    var bucketNames = Object.keys(buckets);
+
+    return allWithProgress(
+      bucketNames.map(function (b) { return self._loadWordBucket(b, section); }),
+      onProgress && function (done, total) { onProgress('postings', done, total); }
+    ).then(function (bucketMapsPerName) {
+      // unitHits: "gi:ui" -> { words: {queryWord: 'exact'|'prefix'}, }
+      var unitHits = {};
+      qwords.forEach(function (w, wi) {
+        var maps = bucketMapsPerName[bucketNames.indexOf(wordBucket(w))] || [];
+        maps.forEach(function (wordMap) {
+          // pass 1: whole-word
+          var rows = wordMap[w];
+          if (rows) rows.forEach(function (r) {
+            if (isExcludedGrantha(r[0])) return;
+            var key = r[0] + ':' + r[1];
+            (unitHits[key] = unitHits[key] || {})[wi] = 'exact';
+          });
+          // pass 2: compound-initial (prefix) -- only for words long enough
+          // that a prefix hit is a real signal, not noise.
+          if (w.length >= 4) {
+            for (var k in wordMap) {
+              if (k.length > w.length && k.indexOf(w) === 0) {
+                wordMap[k].forEach(function (r) {
+                  if (isExcludedGrantha(r[0])) return;
+                  var key = r[0] + ':' + r[1];
+                  var h = (unitHits[key] = unitHits[key] || {});
+                  if (h[wi] !== 'exact') h[wi] = 'prefix';
+                });
+              }
+            }
+          }
+        });
+      });
+
+      // Rank: units matching MORE query words first; among equals, exact
+      // beats prefix; among those, root/verse text (shloka) before
+      // commentary/prose -- a reader looking for a verse wants the verse
+      // itself above the ṭīkā quoting it.
+      var keys = Object.keys(unitHits);
+      var scored = keys.map(function (key) {
+        var h = unitHits[key];
+        var nWords = 0, nExact = 0;
+        for (var wi in h) { nWords++; if (h[wi] === 'exact') nExact++; }
+        return { key: key, nWords: nWords, nExact: nExact };
+      });
+      var maxWords = 0;
+      scored.forEach(function (s) { if (s.nWords > maxWords) maxWords = s.nWords; });
+      // Intersection first (every query word present); fall back to the
+      // best partial tier only if nothing matches all words.
+      var tier = scored.filter(function (s) { return s.nWords === maxWords; });
+      tier.sort(function (a, b) {
+        if (a.nExact !== b.nExact) return b.nExact - a.nExact;
+        var ga = self.granthas[+a.key.split(':')[0]] || {};
+        var gb = self.granthas[+b.key.split(':')[0]] || {};
+        var sa = SHLOKA_SCHEMAS[ga.schema] ? 0 : 1;
+        var sb = SHLOKA_SCHEMAS[gb.schema] ? 0 : 1;
+        return sa - sb;
+      });
+      var picked = tier.slice(0, limit * 2); // headroom: some may lack shard rows
+
+      var giSet = {};
+      picked.forEach(function (s) { giSet[s.key.split(':')[0]] = 1; });
+      return allWithProgress(
+        Object.keys(giSet).map(function (gi) { return self._loadShard(+gi); }),
+        onProgress && function (done, total) { onProgress('shards', done, total); }
+      ).then(function () {
+        var hits = [];
+        picked.forEach(function (s) {
+          var parts = s.key.split(':'), gi = +parts[0], ui = +parts[1];
+          var shard = self._shardCache[gi]; if (!shard) return;
+          var row = shard[ui]; if (!row) return;
+          var g = self.granthas[gi];
+          var allExact = s.nExact === qwords.length;
+          hits.push({ grantha: g.slug, title: g.title, category: g.category,
+            contentType: classifyContentType(g.schema),
+            unit: row.u, snippet: row.s,
+            score: allExact ? 0.99 : (0.9 * s.nWords / qwords.length + 0.05 * (s.nExact / qwords.length)),
+            via: allExact ? 'word-index-exact' : 'word-index-partial' });
+        });
+        var out = hits.slice(0, limit);
+        // The word index IS exhaustive for whole words and compound-initial
+        // prefixes -- but not for a word buried mid-compound (sandhi can
+        // hide an occurrence this index cannot see; the fuzzy trigram path
+        // may still find those). partial=false: what was swept, was swept
+        // completely.
+        out.partial = false;
+        return out;
+      });
+    });
+  };
 
   // Postings are partitioned by section (postings/<trigram>/<section>.json --
   // see build_search_index.py). A scoped search (opts.section set) fetches

@@ -93,7 +93,7 @@ jobs:
           rm -rf /tmp/search-dist
           mkdir -p /tmp/search-dist
           cp -r dge/search_index/manifest.json dge/search_index/postings \
-                dge/search_index/units /tmp/search-dist/
+                dge/search_index/units dge/search_index/words /tmp/search-dist/
           cp dge/search_index_dist_README.md /tmp/search-dist/README.md
           cd /tmp/search-dist
           git init -q -b search-dist

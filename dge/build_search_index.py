@@ -224,6 +224,48 @@ def category_of(slug: str) -> str:
     return slug.split("/", 1)[0] if slug else "unknown"
 
 
+_WORD_SPLIT = re.compile(r"[\s-]+")
+
+
+def word_tokens(pk: str):
+    """Split a unit's (or a query's) phonetic key into whole-word tokens for
+    the EXACT word-level index -- a second, separate index alongside the
+    trigram one, built to answer a different question. Trigram postings
+    answer "which units share this 3-letter fragment", which is what makes
+    fuzzy/typo-tolerant matching possible but is fundamentally imprecise at
+    corpus scale: a common query's fragments (e.g. "kan"/"nta"/"tay" for
+    kAntAya) are each shared by tens of thousands of units, so an exact
+    query drowns in ties the trigram system alone can never fully resolve
+    without either opening most of the corpus or arbitrarily capping how
+    much it looks at (see SEARCH_ARCHITECTURE.md's postscript on this).
+    A word index instead answers "which units contain this EXACT token",
+    which is a MUCH more selective question -- a real word occurs in a
+    bounded, usually small number of units, so there is no tie to break and
+    no shard-open budget needed to find it.
+
+    Splits on BOTH whitespace and hyphen: this corpus's own poetic/verse
+    source formatting joins compound members with a literal "-"
+    (kalyana-gunEka-Dane), which a plain whitespace split would keep as one
+    token no ordinary reader would ever type as a query. This is
+    deliberately NOT how phonetic_key()'s own pk field is tokenized
+    elsewhere (dge-normalize.js's normalizeQuery().words splits on
+    whitespace only) -- changing that would ripple into the existing
+    trigram/fuzzy scoring and its parity test, which this only-additive
+    index doesn't need to touch."""
+    return [t for t in _WORD_SPLIT.split(pk) if t]
+
+
+def word_bucket(word: str) -> str:
+    """The literal on-disk directory a word's posting lives under: its own
+    first two characters, made filesystem/URL-safe the same way
+    safe_trigram_filename() already does for trigrams (same reasoning,
+    same fallback to '_' for anything unexpected) -- keeps file COUNT
+    bounded (roughly (distinct 2-char prefixes) x (sections), the same
+    order of magnitude as today's trigram file count) while keeping each
+    file's own byte size well short of a single huge per-section blob."""
+    return _UNSAFE_TG_CHARS.sub("_", word[:2]) or "_"
+
+
 _UNSAFE_TG_CHARS = re.compile(r"[^0-9A-Za-z^$]")
 
 
@@ -258,10 +300,13 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
 
     granthas = []                       # manifest rows
     postings = defaultdict(lambda: defaultdict(list))  # trigram -> section -> [[gi,ui], ...]
+    # word -> section -> [[gi,ui], ...] -- the EXACT index (see word_tokens()'s
+    # own docstring for why this exists alongside, not instead of, postings).
+    word_postings = defaultdict(lambda: defaultdict(list))
     backlinks = defaultdict(list)       # "target#unit_id" -> [{from, note}]
     stats = {"granthas": 0, "populated": 0, "units": 0, "unit_chars": 0,
              "refs": 0, "skipped_stub_units": 0, "skipped_stub_granthas": 0,
-             "distinct_trigrams": 0}
+             "distinct_trigrams": 0, "distinct_words": 0}
 
     # (root, path) pairs: the slug is relative to the root the file came from,
     # so a corpus indexed from elsewhere still slugs as though it sat in
@@ -322,6 +367,12 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
             # has to download postings for sections it doesn't care about.
             for tg in trigrams(pk):
                 postings[tg][category].append([gi, ui])
+            # Exact word-level postings (see word_tokens()'s own docstring).
+            # Deduplicated per unit first -- a word repeated within one verse
+            # (rare, but real) would otherwise post the same [gi,ui] pair
+            # more than once for no benefit, just a bigger file.
+            for w in set(word_tokens(pk)):
+                word_postings[w][category].append([gi, ui])
             # cross-references -> backlinks
             for r in refs:
                 if isinstance(r, dict) and r.get("target"):
@@ -370,6 +421,31 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
             total += len(rows)
         df[tg] = total
     stats["distinct_trigrams"] = len(df)
+
+    # write one file per (2-char BUCKET, SECTION) pair for the exact word
+    # index -- unlike trigram postings (one file per trigram, since there
+    # are few enough that a real query only ever needs its rarest 2-3), an
+    # exact query looks up EVERY one of its own words directly, so the file
+    # has to be found by a cheap, deterministic function of the word alone
+    # (word_bucket()) rather than by picking among many small files. Each
+    # file holds every word sharing that bucket+section as one dict, so a
+    # query fetches exactly one file per (distinct bucket, section) its
+    # words touch -- for an unscoped multi-word query, still just a handful
+    # of small fetches, never a per-word full-corpus fan-out.
+    word_buckets = defaultdict(lambda: defaultdict(dict))  # bucket -> section -> {word: rows}
+    for w, by_section in word_postings.items():
+        b = word_bucket(w)
+        for section, rows in by_section.items():
+            word_buckets[b][section][w] = rows
+    os.makedirs(os.path.join(out_dir, "words"), exist_ok=True)
+    for b, by_section in word_buckets.items():
+        b_dir = os.path.join(out_dir, "words", b)
+        os.makedirs(b_dir, exist_ok=True)
+        for section, word_map in by_section.items():
+            with open(os.path.join(b_dir, f"{section}.json"),
+                      "w", encoding="utf-8") as f:
+                json.dump(word_map, f, ensure_ascii=False, separators=(",", ":"))
+    stats["distinct_words"] = len(word_postings)
 
     # df is the GLOBAL (cross-section) posting count -- still what decides
     # which trigrams are rarest and therefore worth fetching (see

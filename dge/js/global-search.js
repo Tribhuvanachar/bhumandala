@@ -614,7 +614,25 @@
       // dge-search.js drop them BEFORE they count against that budget, for
       // a reader who won't see them rendered anyway.
       var excludePrefixes = dgeSearchIsAdmin() ? [] : ADMIN_ONLY_GRANTHA_PREFIXES;
-      p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30, section: section, onProgress: onProgress, excludeGranthaPrefixes: excludePrefixes }, queryOpts(q))); })
+      var searchOpts = Object.assign({ limit: 30, section: section, onProgress: onProgress, excludeGranthaPrefixes: excludePrefixes }, queryOpts(q));
+      // "Exact spelling only" ON (the default) routes through the word-level
+      // EXACT index (dge-search.js searchExact()) -- a direct word->units
+      // lookup with no shard-open budget and no candidate ties, the answer
+      // to the reported "कान्ताय exists verbatim in Sumadhva Vijaya but an
+      // unscoped search never returns it" (its trigram fragments tie with
+      // ~48k unrelated units; no budget reaches the real one). The trigram
+      // fuzzy path stays for exact=OFF, typo-tolerance being its actual
+      // job. If the published index predates the words/ tree entirely,
+      // searchExact finds no bucket files and returns [] -- fall back to
+      // the fuzzy path rather than showing a false "no matches".
+      var useExact = filterState.exact;
+      p.then(function (idx) {
+         if (!useExact) return idx.search(q, searchOpts);
+         return idx.searchExact(q, searchOpts).then(function (hits) {
+           if (hits.length) return hits;
+           return idx.search(q, searchOpts);
+         });
+       })
        .then(function (hits) {
          clearElapsedTimer();
          lastSearchElapsedMs = Date.now() - searchStartedAt;
