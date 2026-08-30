@@ -1,9 +1,9 @@
 {
  "generated_note": "DGE library load status. Regenerate with tools/gen_library_status.py.",
  "totals": {
-  "leaves": 1913,
-  "loaded": 1313,
-  "items": 687269
+  "leaves": 1911,
+  "loaded": 1311,
+  "items": 685089
  },
  "sections": {
   "agama": {
@@ -14,7 +14,7 @@
   "darshana": {
    "total": 1138,
    "loaded": 796,
-   "items": 58688
+   "items": 58656
   },
   "dasa_sahitya": {
    "total": 177,
@@ -42,9 +42,9 @@
    "items": 131866
   },
   "shastra": {
-   "total": 29,
-   "loaded": 28,
-   "items": 14573
+   "total": 32,
+   "loaded": 31,
+   "items": 14615
   },
   "smriti_dharma": {
    "total": 28,
@@ -57,9 +57,9 @@
    "items": 0
   },
   "upaveda": {
-   "total": 9,
-   "loaded": 9,
-   "items": 6194
+   "total": 46,
+   "loaded": 44,
+   "items": 49612
   },
   "vedanga": {
    "total": 104,
@@ -67,9 +67,9 @@
    "items": 73773
   },
   "vedas": {
-   "total": 163,
-   "loaded": 100,
-   "items": 105478
+   "total": 121,
+   "loaded": 60,
+   "items": 59870
   }
  },
  "leaves": {
@@ -1178,13 +1178,13 @@
   "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/anubhashya/mula": 32,
   "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/anubhashya/tika_jayatirtha": 0,
   "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/anubhashya/tippani": 0,
-  "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/anuvyakhyana/mula": 432,
+  "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/anuvyakhyana/mula": 416,
   "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/anuvyakhyana/tika_jayatirtha": 162,
   "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/anuvyakhyana/tippani": 0,
   "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/brahma_sutra_bhashya/mula": 1315,
   "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/brahma_sutra_bhashya/tika_jayatirtha": 0,
   "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/brahma_sutra_bhashya/tippani": 0,
-  "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/nyaya_vivarana/mula": 429,
+  "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/nyaya_vivarana/mula": 413,
   "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/nyaya_vivarana/tika_jayatirtha": 0,
   "darshana/vedanta/dvaita/SarvaMula/sutra_prasthana/nyaya_vivarana/tippani": 0,
   "darshana/vedanta/dvaita/SarvaMula/upanishad_prasthana/aitareyopanishad_bhashya/mula": 121,
@@ -1666,7 +1666,10 @@
   "shastra/bauddha_sahitya/shastra/vimshatika/vritti": 155,
   "shastra/bauddha_sahitya/sutra/lankavatara_sutra/mula": 218,
   "shastra/bauddha_sahitya/sutra/saddharma_pundarika_sutra/mula": 1815,
-  "shastra/kama_shastra/mula": 953,
+  "shastra/kama_shastra/kamasutra/mula_dcs": 953,
+  "shastra/kama_shastra/kamasutra/mula_gretil": 36,
+  "shastra/kama_shastra/pancashayaka": 5,
+  "shastra/kama_shastra/smaradipika": 1,
   "shastra/krishi_shastra/mula": 244,
   "shastra/natya_shastra/mula": 539,
   "shastra/natya_shastra/tika": 71,
@@ -1711,16 +1714,53 @@
   "stotra/gajendra_moksha": 0,
   "stotra/vishnu_sahasranama": 0,
   "upaveda/ayurveda/madhava_nidana": 1554,
+  "upaveda/ayurveda/nighantu/ashtanga_nighantu/mula": 407,
   "upaveda/ayurveda/nighantu/bhavaprakasha_nighantu": 1,
-  "upaveda/ayurveda/nighantu/raja_nighantu": 35,
+  "upaveda/ayurveda/nighantu/bija_nighantu/mula": 48,
+  "upaveda/ayurveda/nighantu/dhanvantari_nighantu/mula": 510,
+  "upaveda/ayurveda/nighantu/kaiyadeva_nighantu/mula": 148,
+  "upaveda/ayurveda/nighantu/madanapala_nighantu/mula": 440,
+  "upaveda/ayurveda/nighantu/nighantushesha/mula": 205,
+  "upaveda/ayurveda/nighantu/raja_nighantu/mula": 3218,
   "upaveda/ayurveda/nighantu/vahata_ashtanganighantu": 1,
+  "upaveda/ayurveda/rasashastra/rasadhyaya/mula": 481,
+  "upaveda/ayurveda/rasashastra/rasadhyaya/tika": 554,
+  "upaveda/ayurveda/rasashastra/rasahridaya_tantra/mula": 516,
+  "upaveda/ayurveda/rasashastra/rasakamadhenu/mula": 453,
+  "upaveda/ayurveda/rasashastra/rasamanjari/mula": 837,
+  "upaveda/ayurveda/rasashastra/rasaprakashasudhakara/mula": 992,
+  "upaveda/ayurveda/rasashastra/rasaratnakara/mula": 3530,
+  "upaveda/ayurveda/rasashastra/rasaratnasamuccaya/mula": 1755,
+  "upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika": 893,
+  "upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_bodhini": 506,
+  "upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_dipika": 8,
+  "upaveda/ayurveda/rasashastra/rasarnava/mula": 2078,
+  "upaveda/ayurveda/rasashastra/rasarnavakalpa/mula": 332,
+  "upaveda/ayurveda/rasashastra/rasasanketakalika/mula": 300,
+  "upaveda/ayurveda/rasashastra/rasatarangini/mula": 186,
+  "upaveda/ayurveda/rasashastra/rasendracintamani/mula": 769,
+  "upaveda/ayurveda/rasashastra/rasendracudamani/mula": 1201,
+  "upaveda/ayurveda/rasashastra/rasendrasarasangraha/mula": 375,
+  "upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/mula": 7355,
+  "upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_hemadri": 371,
+  "upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_indu": 3,
+  "upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_padarthacandrika": 8,
+  "upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_sarvangasundara": 684,
+  "upaveda/ayurveda/samhita/ashtanga_sangraha/mula": 63,
+  "upaveda/ayurveda/samhita/bhavaprakasha/mula": 826,
+  "upaveda/ayurveda/samhita/caraka_samhita/mula": 3987,
+  "upaveda/ayurveda/samhita/caraka_samhita/tika_ayurvedadipika": 2272,
+  "upaveda/ayurveda/samhita/caraka_samhita/tika_tattvapradipika": 7,
+  "upaveda/ayurveda/samhita/nadi_pariksha/mula": 89,
+  "upaveda/ayurveda/samhita/sushruta_samhita/mula": 8098,
+  "upaveda/ayurveda/samhita/sushruta_samhita/tika_nibandhasangraha": 483,
+  "upaveda/ayurveda/samhita/yogaratnakara/mula": 400,
   "upaveda/ayurveda/sharngadhara_samhita": 2448,
-  "upaveda/ayurveda/susruta_samhita_sutrasthana": 2142,
-  "upaveda/kamashastra/kamasutra": 7,
-  "upaveda/kamashastra/pancashayaka": 5,
-  "upaveda/kamashastra/smaradipika": 1,
+  "upaveda/dhanurveda/mula": 220,
+  "upaveda/gandharvaveda/mula": 0,
+  "upaveda/sthapatyaveda/mula": 0,
   "vedanga/chandas/vrittaratnakara": 6,
-  "vedanga/jyotisha": 139,
+  "vedanga/jyotisha/mula": 139,
   "vedanga/kalpa/atharvaveda/kaushika/grihyasutra": 2739,
   "vedanga/kalpa/atharvaveda/vaitana/shrautasutra": 912,
   "vedanga/kalpa/independent_dharmasutras/gautama_dharmasutra": 891,
@@ -1763,7 +1803,7 @@
   "vedanga/kalpa/shukla_yajurveda/katyayana/shrautasutra": 2149,
   "vedanga/kalpa/shukla_yajurveda/katyayana/shulbasutra": 0,
   "vedanga/kalpa/shukla_yajurveda/paraskara/grihyasutra": 423,
-  "vedanga/nirukta": 14,
+  "vedanga/nirukta/mula": 14,
   "vedanga/shiksha/atharvaveda_shiksha/manduki_shiksha": 0,
   "vedanga/shiksha/paniniya_shiksha": 60,
   "vedanga/shiksha/pratishakhya/rigveda_pratishakhya": 0,
@@ -1918,48 +1958,6 @@
   "vedas/samaveda/kauthuma_shakha/upanishad/chandogya_upanishad": 1165,
   "vedas/samaveda/ranayaniya_shakha/samhita/purvarchika": 0,
   "vedas/samaveda/ranayaniya_shakha/samhita/uttararchika": 0,
-  "vedas/upaveda/ayurveda/nighantu/ashtanga_nighantu/mula": 407,
-  "vedas/upaveda/ayurveda/nighantu/bija_nighantu/mula": 48,
-  "vedas/upaveda/ayurveda/nighantu/dhanvantari_nighantu/mula": 510,
-  "vedas/upaveda/ayurveda/nighantu/kaiyadeva_nighantu/mula": 148,
-  "vedas/upaveda/ayurveda/nighantu/madanapala_nighantu/mula": 440,
-  "vedas/upaveda/ayurveda/nighantu/nighantushesha/mula": 205,
-  "vedas/upaveda/ayurveda/nighantu/raja_nighantu/mula": 3218,
-  "vedas/upaveda/ayurveda/rasashastra/rasadhyaya/mula": 481,
-  "vedas/upaveda/ayurveda/rasashastra/rasadhyaya/tika": 554,
-  "vedas/upaveda/ayurveda/rasashastra/rasahridaya_tantra/mula": 516,
-  "vedas/upaveda/ayurveda/rasashastra/rasakamadhenu/mula": 453,
-  "vedas/upaveda/ayurveda/rasashastra/rasamanjari/mula": 837,
-  "vedas/upaveda/ayurveda/rasashastra/rasaprakashasudhakara/mula": 992,
-  "vedas/upaveda/ayurveda/rasashastra/rasaratnakara/mula": 3530,
-  "vedas/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/mula": 1755,
-  "vedas/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika": 893,
-  "vedas/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_bodhini": 506,
-  "vedas/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_dipika": 8,
-  "vedas/upaveda/ayurveda/rasashastra/rasarnava/mula": 2078,
-  "vedas/upaveda/ayurveda/rasashastra/rasarnavakalpa/mula": 332,
-  "vedas/upaveda/ayurveda/rasashastra/rasasanketakalika/mula": 300,
-  "vedas/upaveda/ayurveda/rasashastra/rasatarangini/mula": 186,
-  "vedas/upaveda/ayurveda/rasashastra/rasendracintamani/mula": 769,
-  "vedas/upaveda/ayurveda/rasashastra/rasendracudamani/mula": 1201,
-  "vedas/upaveda/ayurveda/rasashastra/rasendrasarasangraha/mula": 375,
-  "vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/mula": 7355,
-  "vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_hemadri": 371,
-  "vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_indu": 3,
-  "vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_padarthacandrika": 8,
-  "vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_sarvangasundara": 684,
-  "vedas/upaveda/ayurveda/samhita/ashtanga_sangraha/mula": 63,
-  "vedas/upaveda/ayurveda/samhita/bhavaprakasha/mula": 826,
-  "vedas/upaveda/ayurveda/samhita/caraka_samhita/mula": 3987,
-  "vedas/upaveda/ayurveda/samhita/caraka_samhita/tika_ayurvedadipika": 2272,
-  "vedas/upaveda/ayurveda/samhita/caraka_samhita/tika_tattvapradipika": 7,
-  "vedas/upaveda/ayurveda/samhita/nadi_pariksha/mula": 89,
-  "vedas/upaveda/ayurveda/samhita/sushruta_samhita/mula": 8098,
-  "vedas/upaveda/ayurveda/samhita/sushruta_samhita/tika_nibandhasangraha": 483,
-  "vedas/upaveda/ayurveda/samhita/yogaratnakara/mula": 400,
-  "vedas/upaveda/dhanurveda/mula": 220,
-  "vedas/upaveda/gandharvaveda": 0,
-  "vedas/upaveda/sthapatyaveda": 0,
   "vedas/yajurveda/krishna_yajurveda/kapisthala_shakha/brahmana/katha_kapisthala_brahmana": 0,
   "vedas/yajurveda/krishna_yajurveda/kapisthala_shakha/samhita/kapisthala_katha_samhita": 0,
   "vedas/yajurveda/krishna_yajurveda/katha_shakha/brahmana/kathaka_brahmana": 0,
@@ -4636,10 +4634,19 @@
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Saddharmapuṇḍarīkasūtra",
    "licence": "CC-BY 4.0"
   },
-  "shastra/kama_shastra/mula": {
+  "shastra/kama_shastra/kamasutra/mula_dcs": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Kāmasūtra",
    "licence": "CC-BY 4.0"
+  },
+  "shastra/kama_shastra/kamasutra/mula_gretil": {
+   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_vAtsyAyana-kAmasUtra.txt"
+  },
+  "shastra/kama_shastra/pancashayaka": {
+   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_jyotirIzvarakavizekhara-paJcasAyaka.txt"
+  },
+  "shastra/kama_shastra/smaradipika": {
+   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_mInanAtha-smaradIpikA.txt"
   },
   "shastra/krishi_shastra/mula": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
@@ -4720,36 +4727,220 @@
    "source_url": "https://sa.wikisource.org/wiki/माधवनिदानम्",
    "licence": "CC BY-SA"
   },
+  "upaveda/ayurveda/nighantu/ashtanga_nighantu/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Aṣṭāṅganighaṇṭu",
+   "licence": "CC-BY 4.0"
+  },
   "upaveda/ayurveda/nighantu/bhavaprakasha_nighantu": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_bhAvamizra-bhAvaprakAza.txt"
   },
-  "upaveda/ayurveda/nighantu/raja_nighantu": {
-   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_narahari-rAjanighaNTu.txt"
+  "upaveda/ayurveda/nighantu/bija_nighantu/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Bījanighaṇṭu",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/nighantu/dhanvantari_nighantu/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Dhanvantarinighaṇṭu",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/nighantu/kaiyadeva_nighantu/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Kaiyadevanighaṇṭu",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/nighantu/madanapala_nighantu/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Madanapālanighaṇṭu",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/nighantu/nighantushesha/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Nighaṇṭuśeṣa",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/nighantu/raja_nighantu/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rājanighaṇṭu",
+   "licence": "CC-BY 4.0"
   },
   "upaveda/ayurveda/nighantu/vahata_ashtanganighantu": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_vAhaTa-aSTAGganighaNTu.txt"
+  },
+  "upaveda/ayurveda/rasashastra/rasadhyaya/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasādhyāya",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasadhyaya/tika": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasādhyāyaṭīkā",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasahridaya_tantra/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasahṛdayatantra",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasakamadhenu/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasakāmadhenu",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasamanjari/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasamañjarī",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasaprakashasudhakara/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasaprakāśasudhākara",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasaratnakara/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasaratnākara",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasaratnasamuccaya/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasaratnasamuccaya",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasaratnasamuccayaṭīkā",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_bodhini": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasaratnasamuccayabodhinī",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_dipika": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasaratnasamuccayadīpikā",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasarnava/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasārṇava",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasarnavakalpa/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasārṇavakalpa",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasasanketakalika/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasasaṃketakalikā",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasatarangini/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasataraṅgiṇī",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasendracintamani/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasendracintāmaṇi",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasendracudamani/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasendracūḍāmaṇi",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/rasashastra/rasendrasarasangraha/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasendrasārasaṃgraha",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Aṣṭāṅgahṛdayasaṃhitā",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_hemadri": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Ayurvedarasāyana",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_indu": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Indu (ad AHS)",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_padarthacandrika": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Padārthacandrikā",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_sarvangasundara": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Sarvāṅgasundarā",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/ashtanga_sangraha/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Aṣṭāṅgasaṃgraha",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/bhavaprakasha/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Bhāvaprakāśa",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/caraka_samhita/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Carakasaṃhitā",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/caraka_samhita/tika_ayurvedadipika": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Āyurvedadīpikā",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/caraka_samhita/tika_tattvapradipika": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Carakatattvapradīpikā",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/nadi_pariksha/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Nāḍīparīkṣā",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/sushruta_samhita/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Suśrutasaṃhitā",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/sushruta_samhita/tika_nibandhasangraha": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Nibandhasaṃgraha",
+   "licence": "CC-BY 4.0"
+  },
+  "upaveda/ayurveda/samhita/yogaratnakara/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Yogaratnākara",
+   "licence": "CC-BY 4.0"
   },
   "upaveda/ayurveda/sharngadhara_samhita": {
    "source_url": "https://sa.wikisource.org/wiki/शार्ङ्गधरसंहिता",
    "licence": "CC BY-SA"
   },
-  "upaveda/ayurveda/susruta_samhita_sutrasthana": {
-   "source_url": "https://sa.wikisource.org/wiki/सुश्रुतसंहिता",
-   "licence": "CC BY-SA"
-  },
-  "upaveda/kamashastra/kamasutra": {
-   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_vAtsyAyana-kAmasUtra.txt"
-  },
-  "upaveda/kamashastra/pancashayaka": {
-   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_jyotirIzvarakavizekhara-paJcasAyaka.txt"
-  },
-  "upaveda/kamashastra/smaradipika": {
-   "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_mInanAtha-smaradIpikA.txt"
+  "upaveda/dhanurveda/mula": {
+   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
+   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Dhanurveda",
+   "licence": "CC-BY 4.0"
   },
   "vedanga/chandas/vrittaratnakara": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_kedArabhaTTa-vRttaratnAkara.txt"
   },
-  "vedanga/jyotisha": {
+  "vedanga/jyotisha/mula": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/S%C5%ABryasiddh%C4%81nta",
    "licence": "CC-BY 4.0"
@@ -4894,7 +5085,7 @@
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Pāraskaragṛhyasūtra",
    "licence": "CC-BY 4.0"
   },
-  "vedanga/nirukta": {
+  "vedanga/nirukta/mula": {
    "source_url": "https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/sa_yAska-nirukta.txt"
   },
   "vedanga/shiksha/paniniya_shiksha": {
@@ -4908,32 +5099,32 @@
    "licence": "Vedic Reserve's standard usage terms (published for study, source credited)"
   },
   "vedanga/vyakarana/ashtadhyayi/balamanorama": {
-   "source": "balamanorama.dict (StarDict, uploaded)",
-   "licence": "verify"
+   "source": "balamanorama.dict (StarDict, uploaded); text confirmed identical to indic-dict/stardict-sanskrit-vyAkaraNa balamanorama/balamanorama.babylon (removed from current master in commit 1b09f6f, 2020-10-28; retrievable at commit b0d5cf7, 2020-10-26, the last commit before deletion) -- see licence_note",
+   "licence": "Public domain -- Balamanorama, Vasudeva Diksita of Tanjore, a commentary on Bhattoji Diksita's Siddhanta-Kaumudi (Bhattoji fl. early 17th c. CE), so Vasudeva Diksita is no earlier than the 17th century and traditionally placed in it (centuries out of copyright under any edition). Upstream compilation now identified and text-matched exactly; the specific printed edition it was digitized from is still unconfirmed. See licence_note and source."
   },
   "vedanga/vyakarana/ashtadhyayi/kashika": {
-   "source": "kashika.dict (StarDict, uploaded)",
-   "licence": "verify (uploaded StarDict; confirm edition/source before publish)"
+   "source": "kashika.dict (StarDict, uploaded); text confirmed identical to indic-dict/stardict-sanskrit-vyAkaraNa aShTAdhyAyI/kashika/kashika.babylon (still live at that path on GitHub master) -- see licence_note",
+   "licence": "Public domain -- Kasika-vrtti, Vamana-Jayaditya, traditionally dated c. 7th century CE (centuries out of copyright under any edition). Upstream compilation now identified and text-matched exactly; the specific printed edition it was digitized from is still unconfirmed. See licence_note and source."
   },
   "vedanga/vyakarana/ashtadhyayi/mahabhashya_patanjali": {
    "source": "ashtadhyayi.com sutraani/bhashya.txt",
    "licence": "used with ashtadhyayi.com curator's e-mail permission for non-commercial/educational use (source repo has no formal LICENSE); keep visible attribution to ashtadhyayi.com; resolve before public launch"
   },
   "vedanga/vyakarana/ashtadhyayi/nyasa": {
-   "source": "nyasa.dict (StarDict, uploaded)",
-   "licence": "verify"
+   "source": "nyasa.dict (StarDict, uploaded); text confirmed identical to indic-dict/stardict-sanskrit-vyAkaraNa nyasa/nyasa.babylon (removed from current master in commit 1b09f6f, 2020-10-28; retrievable at commit b0d5cf7, 2020-10-26, the last commit before deletion) -- see licence_note",
+   "licence": "Public domain -- Nyasa / Kasikavivaranapanjika, Jinendrabuddhi, traditionally dated c. 8th century CE (centuries out of copyright under any edition). Upstream compilation now identified and text-matched exactly; the specific printed edition it was digitized from is still unconfirmed. See licence_note and source."
   },
   "vedanga/vyakarana/ashtadhyayi/siddhanta_kaumudi": {
-   "source": "ashtadhyayi.com sutraani/kaumudi.txt",
-   "licence": "used with ashtadhyayi.com curator's e-mail permission for non-commercial/educational use (source repo has no formal LICENSE); keep visible attribution to ashtadhyayi.com; resolve before public launch"
+   "source": "Dhaval Patel's structured Siddhānta-Kaumudī XML/TEI (github.com/drdhaval2785/siddhantakaumudi, raw sk.xml, v2.0.0/2017-03-25); base text supplied as a docx file by Dr. H. N. Bhat (posted to the bvparishat Google Group, 2016-12-26; source of that docx itself undocumented), encoded into XML/TEI by Dr. Dhaval Patel from 2016-12-27 with community corrections through GitHub issues -- see licence_note",
+   "licence": "MIT License for Dhaval Patel's XML encoding (copyright 2017 Dr. Dhaval Patel, per the XML's own <availability> statement); the underlying classical work (Bhaṭṭoji Dīkṣita's Siddhānta-Kaumudī, early 17th century CE) is public domain by age under any edition. See licence_note and source."
   },
   "vedanga/vyakarana/ashtadhyayi/sutrapatha": {
    "source": "sutra text extracted from commentary dictionary keys",
    "licence": "public domain (mula text)"
   },
   "vedanga/vyakarana/ashtadhyayi/tattvabodhini": {
-   "source": "tattvabodhini.dict (StarDict, uploaded)",
-   "licence": "verify"
+   "source": "tattvabodhini.dict (StarDict, uploaded); text confirmed identical to indic-dict/stardict-sanskrit-vyAkaraNa tattvabodhini/tattvabodhini.babylon (removed from current master in commit 1b09f6f, 2020-10-28; retrievable at commit b0d5cf7, 2020-10-26, the last commit before deletion) -- see licence_note",
+   "licence": "Public domain -- Tattvabodhini, Jnanendra Sarasvati, a later commentary on Bhattoji Diksita's Siddhanta-Kaumudi, traditionally placed in the premodern (pre-19th-century) grammatical tradition -- sources disagree on the exact century but none place the author later than the 19th (centuries out of copyright under any edition). Upstream compilation now identified and text-matched exactly; the specific printed edition it was digitized from is still unconfirmed. See licence_note and source."
   },
   "vedanga/vyakarana/ashtadhyayi/vasu": {
    "source": "S.C. Vasu, The Ashṭādhyāyī of Pāṇini (1891, Pāṇini Office) — public domain; digitised text via ashtadhyayi.com sutraani/vasu_english.txt",
@@ -5110,206 +5301,6 @@
   "vedas/samaveda/kauthuma_shakha/upanishad/chandogya_upanishad": {
    "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
    "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Chāndogyopaniṣad",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/nighantu/ashtanga_nighantu/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Aṣṭāṅganighaṇṭu",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/nighantu/bija_nighantu/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Bījanighaṇṭu",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/nighantu/dhanvantari_nighantu/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Dhanvantarinighaṇṭu",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/nighantu/kaiyadeva_nighantu/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Kaiyadevanighaṇṭu",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/nighantu/madanapala_nighantu/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Madanapālanighaṇṭu",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/nighantu/nighantushesha/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Nighaṇṭuśeṣa",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/nighantu/raja_nighantu/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rājanighaṇṭu",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasadhyaya/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasādhyāya",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasadhyaya/tika": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasādhyāyaṭīkā",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasahridaya_tantra/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasahṛdayatantra",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasakamadhenu/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasakāmadhenu",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasamanjari/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasamañjarī",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasaprakashasudhakara/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasaprakāśasudhākara",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasaratnakara/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasaratnākara",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasaratnasamuccaya",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasaratnasamuccayaṭīkā",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_bodhini": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasaratnasamuccayabodhinī",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasaratnasamuccaya/tika_dipika": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasaratnasamuccayadīpikā",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasarnava/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasārṇava",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasarnavakalpa/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasārṇavakalpa",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasasanketakalika/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasasaṃketakalikā",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasatarangini/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasataraṅgiṇī",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasendracintamani/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasendracintāmaṇi",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasendracudamani/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasendracūḍāmaṇi",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/rasashastra/rasendrasarasangraha/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Rasendrasārasaṃgraha",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Aṣṭāṅgahṛdayasaṃhitā",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_hemadri": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Ayurvedarasāyana",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_indu": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Indu (ad AHS)",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_padarthacandrika": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Padārthacandrikā",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/ashtanga_hridaya_samhita/tika_sarvangasundara": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Sarvāṅgasundarā",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/ashtanga_sangraha/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Aṣṭāṅgasaṃgraha",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/bhavaprakasha/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Bhāvaprakāśa",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/caraka_samhita/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Carakasaṃhitā",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/caraka_samhita/tika_ayurvedadipika": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Āyurvedadīpikā",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/caraka_samhita/tika_tattvapradipika": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Carakatattvapradīpikā",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/nadi_pariksha/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Nāḍīparīkṣā",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/sushruta_samhita/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Suśrutasaṃhitā",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/sushruta_samhita/tika_nibandhasangraha": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Nibandhasaṃgraha",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/ayurveda/samhita/yogaratnakara/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Yogaratnākara",
-   "licence": "CC-BY 4.0"
-  },
-  "vedas/upaveda/dhanurveda/mula": {
-   "source": "Digital Corpus of Sanskrit (DCS), Oliver Hellwig, 2010-2024",
-   "source_url": "https://github.com/OliverHellwig/sanskrit/tree/master/dcs/data/conllu/files/Dhanurveda",
    "licence": "CC-BY 4.0"
   },
   "vedas/yajurveda/krishna_yajurveda/katha_shakha/samhita/katha_samhita": {
