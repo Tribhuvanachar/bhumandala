@@ -464,6 +464,18 @@
     return input.trim();
   }
 
+  // NFC-normalizes and strips zero-width joiner/non-joiner (U+200D/U+200C)
+  // before an exact-spelling comparison -- an Android IME composing a
+  // Devanagari conjunct can emit either an unnormalized codepoint sequence
+  // or a stray ZWJ/ZWNJ to force a particular ligature, visually identical
+  // to the "plain" form but byte-different, which made a genuine literal
+  // match invisible to a raw indexOf(). Applied to BOTH sides of the
+  // comparison in applyFilters() so this can't itself introduce a
+  // false-negative the other direction.
+  function dgeGsExactNormalize(s) {
+    return String(s || '').normalize('NFC').replace(/[‌‍]/g, '');
+  }
+
   // Shared by go() and the per-hit taxonomy crumbs below: the reader's own
   // URL from wherever this search happens to be running (ashtadhyayi.html
   // since the corpus-usage button, or any other page that loads this file)
@@ -777,12 +789,26 @@
     // against (lastQueryDeva) -- guards the edge case where conversion
     // failed and fell back to empty, which would otherwise hide everything.
     var exactActive = filterState.exact && !!lastQueryDeva;
+    // Reported live: a query typed directly in Devanagari via an Android
+    // IME still came back "No exact spelling matches" against results the
+    // search itself had genuinely found containing that literal text --
+    // confirmed live against the published index, several of the returned
+    // hits DID contain the query as a byte-exact substring. An IME
+    // composing conjuncts can emit a different (but visually identical)
+    // codepoint sequence than the same text typed another way -- an
+    // unnormalized Unicode form, or a stray zero-width joiner/non-joiner
+    // used to force a particular conjunct rendering. Normalizing both
+    // sides through the same NFC + zero-width-strip pass before comparing
+    // makes the check robust to exactly that, without weakening what
+    // "exact" means (still a real, literal, character-for-character
+    // containment check -- just on the canonical form of both sides).
+    var qExact = dgeGsExactNormalize(lastQueryDeva);
     var out = lastHits.filter(function (h) {
       if (typeActive && h.contentType !== filterState.type) return false;
       if (catKeys.length && filterState.categories[h.category] !== true) return false;
       if (sidKeys.length && filterState.siddhanta[siddhantaOf(h.grantha)] !== true) return false;
       if (kw && (h.title + ' ' + h.snippet).toLowerCase().indexOf(kw) === -1) return false;
-      if (exactActive && (!h.snippet || h.snippet.indexOf(lastQueryDeva) === -1)) return false;
+      if (exactActive && (!h.snippet || dgeGsExactNormalize(h.snippet).indexOf(qExact) === -1)) return false;
       return true;
     });
     var anyFilterActive = typeActive || catKeys.length || sidKeys.length || kw || exactActive;

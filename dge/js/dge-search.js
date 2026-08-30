@@ -237,6 +237,20 @@
   // memory: each grantha is a separate file.
   var MAX_SHARDS = 40;      // distinct granthas opened per search
   var MAX_UNITS = 6000;     // candidate units scored
+  // Wall-clock cap on the shard-OPENING phase specifically (measured live:
+  // a common word tying its full MAX_EXACT_SHARDS budget of 120 granthas
+  // took 68+ seconds on a real mobile connection -- the browser's own
+  // per-origin connection limit (~6 concurrent in Chrome) serializes 120
+  // "parallel" fetches into ~20 sequential batches, and each batch's real
+  // round-trip cost on a mobile network is nowhere near this sandbox's).
+  // Whatever hasn't resolved by this deadline is treated exactly like a
+  // shard that never loaded at all -- the scoring pass below already skips
+  // a candidate with no cached shard (the same guard that already covers a
+  // genuinely failed fetch), and out.partial already exists to say the
+  // sweep wasn't exhaustive. Bounds worst-case latency to something a
+  // reader will actually wait through, at the cost of an occasional real
+  // hit landing just past the deadline and not appearing this time.
+  var SHARD_TIMEOUT_MS = 8000;
 
   Index.prototype.search = function (query, opts) {
     opts = opts || {};
@@ -380,10 +394,20 @@
         // here, before a single shard fetch fires, so the progress readout
         // can jump straight to an honest "0 of 7", not stay silent then
         // jump to "done".
-        return allWithProgress(
+        var shardsSettled = allWithProgress(
           Object.keys(giSet).map(function (gi) { return self._loadShard(+gi); }),
           onProgress && function (done, total) { onProgress('shards', done, total); }
-        ).then(function () { return { cand: cand, keys: picked, skipped: skipped }; });
+        );
+        var timedOut = false;
+        var deadline = new Promise(function (resolve) {
+          setTimeout(function () { timedOut = true; resolve(); }, SHARD_TIMEOUT_MS);
+        });
+        // Whichever settles first. The losing side isn't cancelled -- a
+        // shard fetch that's already in flight keeps running and still
+        // warms self._shardCache for whoever asks next -- this race only
+        // decides how long THIS query blocks on it.
+        return Promise.race([shardsSettled, deadline])
+          .then(function () { return { cand: cand, keys: picked, skipped: skipped || timedOut }; });
       })
       .then(function (bag) {
         // 2) score each candidate unit with the fold + edit distance
