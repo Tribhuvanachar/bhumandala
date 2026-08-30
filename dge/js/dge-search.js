@@ -366,6 +366,30 @@
           return cand[b].count - cand[a].count;
         });
         var giSet = {}, nGi = 0, picked = [], skipped = false;
+        // Reported live: कान्ताय's only genuine exact matches in the whole
+        // corpus happen to sit under darshana/vedanta/dvaita/DvaitaVedanta,
+        // which global-search.js's own render() already hides from a
+        // non-admin reader post hoc (dgeSearchIsAdminOnlyHit -- a display
+        // preference, not real access control, per that comment). Applying
+        // that exclusion only AFTER the shard-open budget was already spent
+        // meant those granthas' shards got opened anyway, using up slots a
+        // genuinely visible match elsewhere in the corpus needed to compete
+        // for -- the reader was shown "no exact matches" even though the
+        // exact matches that DO exist were simply never given a chance to
+        // be found. excludeGranthaPrefixes (passed by a caller that already
+        // knows which granthas it won't render, same prefixes
+        // dgeSearchIsAdminOnlyHit checks) drops those candidates BEFORE they
+        // count against the budget, so it's spent only on granthas the
+        // reader could actually see the result of.
+        var excludePrefixes = opts.excludeGranthaPrefixes || [];
+        var isExcludedGrantha = function (gik) {
+          var slug = self.granthas[+gik] && self.granthas[+gik].slug;
+          if (!slug) return false;
+          for (var p = 0; p < excludePrefixes.length; p++) {
+            if (slug === excludePrefixes[p] || slug.indexOf(excludePrefixes[p] + '/') === 0) return true;
+          }
+          return false;
+        };
         // A genuinely complete match always gets its grantha opened, past
         // the normal MAX_SHARDS budget -- up to a much higher ceiling so a
         // pathological query (present in most of the corpus) still can't
@@ -380,6 +404,7 @@
         var MAX_EXACT_SHARDS = MAX_SHARDS * 3;
         for (var i = 0; i < keys.length && picked.length < MAX_UNITS; i++) {
           var gik = keys[i].split(':')[0];
+          if (!giSet[gik] && isExcludedGrantha(gik)) continue;
           var isExact = cand[keys[i]].complete;
           if (!giSet[gik]) {
             if (isExact ? nGi >= MAX_EXACT_SHARDS : nGi >= MAX_SHARDS) { skipped = true; continue; }

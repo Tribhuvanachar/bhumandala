@@ -604,7 +604,17 @@
           bar.style.width = (50 + half) + '%';
         }
       };
-      p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30, section: section, onProgress: onProgress }, queryOpts(q))); })
+      // Reported live: कान्ताय's only genuine exact matches in the whole
+      // corpus sit under DvaitaVedanta, which render() below already hides
+      // post hoc from a non-admin reader -- but by then the shard-open
+      // budget (dge-search.js's MAX_SHARDS/MAX_EXACT_SHARDS) had already
+      // been spent opening those same granthas' shards, leaving no room for
+      // a genuinely visible match elsewhere to even be considered. Passing
+      // the same admin-only prefixes through as excludeGranthaPrefixes lets
+      // dge-search.js drop them BEFORE they count against that budget, for
+      // a reader who won't see them rendered anyway.
+      var excludePrefixes = dgeSearchIsAdmin() ? [] : ADMIN_ONLY_GRANTHA_PREFIXES;
+      p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30, section: section, onProgress: onProgress, excludeGranthaPrefixes: excludePrefixes }, queryOpts(q))); })
        .then(function (hits) {
          clearElapsedTimer();
          lastSearchElapsedMs = Date.now() - searchStartedAt;
@@ -959,6 +969,7 @@
   // one place that reliably holds regardless of what the index contains.
   // Not real access control -- same caveat as admin-gate.js: this hides the
   // hit from the UI, it does not restrict the underlying static JSON file.
+  var ADMIN_ONLY_GRANTHA_PREFIXES = ['darshana/vedanta/dvaita/DvaitaVedanta', 'dvaitavedanta'];
   function dgeSearchIsAdmin() {
     try {
       return localStorage.getItem('acharyaAuthorized') === 'true' ||
@@ -967,7 +978,7 @@
   }
   function dgeSearchIsAdminOnlyHit(h) {
     var g = h && h.grantha || '';
-    return g.indexOf('darshana/vedanta/dvaita/DvaitaVedanta') === 0 || g.indexOf('dvaitavedanta') === 0;
+    return ADMIN_ONLY_GRANTHA_PREFIXES.some(function (p) { return g.indexOf(p) === 0; });
   }
 
   function render(hits, q) {
