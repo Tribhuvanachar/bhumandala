@@ -575,10 +575,99 @@
     return startedAt;
   }
 
+  // ---- compound-interior extension (dge-search.js searchCompound()) ----
+  // The word index finds whole words and compound-INITIAL occurrences; a
+  // query word buried mid/end-compound (नीलकान्ताय for a कान्ताय query --
+  // "a match is a match, beginning, middle or end", the project lead's
+  // direct ask, 30 Aug 2026) needs the vocabulary grep. That costs a
+  // one-time ~10MB word-list download (then HTTP-cached against the
+  // immutable pinned URL, so effectively free forever after), which is why
+  // it is NOT silently auto-fired on a reader's mobile data the first
+  // time: the results footer offers it as a clearly-priced one-tap action,
+  // and once the list has been fetched once on this device it runs
+  // automatically on every eligible query after that.
+  var searchSeq = 0;                    // bumped per query; stale async work checks it
+  var compoundState = null;             // null | 'offer' | 'running' | 'done'
+  var compoundAdded = 0, compoundCtx = null;
+
+  function compoundEligible(qraw) {
+    try {
+      var norm = (window.DGENorm || {}).normalizeQuery;
+      if (!norm) return false;
+      var nq = norm(qraw, queryOpts(qraw));
+      if (!nq.pkey) return false;
+      // same tokenizer contract as dge-search.js wordTokens()
+      var toks = nq.pkey.split(/[^0-9A-Za-zॐ]+/).filter(function (t) { return t && !/^[0-9]+$/.test(t); });
+      return toks.length === 1 && toks[0].length >= 4;
+    } catch (e) { return false; }
+  }
+  function vocabAlreadyFetched(idx) {
+    if (idx && typeof idx.vocabLoaded === 'function' && idx.vocabLoaded()) return true;
+    try { return localStorage.getItem('dge_gs_vocab_fetched') === '1'; } catch (e) { return false; }
+  }
+  function compoundFooterHtml() {
+    if (compoundState === 'offer') {
+      return '<div class="dge-gs-hint"><button type="button" class="dge-gs-chip" onclick="window.dgeGsRunCompound()">' +
+        '🔎 Search inside compound words too</button>' +
+        '<span style="opacity:.6"> one-time word-list download (~10 MB), instant afterwards</span></div>';
+    }
+    if (compoundState === 'running') {
+      return '<div class="dge-gs-hint"><span class="dge-gs-spinner" aria-hidden="true"></span>' +
+        '<span id="dge-gs-compound-progress">Scanning the word list…</span></div>';
+    }
+    if (compoundState === 'done') {
+      return '<div class="dge-gs-hint">' + (compoundAdded
+        ? 'Included ' + compoundAdded + ' match' + (compoundAdded === 1 ? '' : 'es') + ' found inside compound words.'
+        : 'No further matches inside compound words.') + '</div>';
+    }
+    return '';
+  }
+  function runCompound(idx) {
+    if (!compoundCtx || compoundCtx.seq !== searchSeq) return;
+    compoundState = 'running';
+    if (lastHits) applyFilters();
+    var mySeq = compoundCtx.seq;
+    var opts = Object.assign({}, compoundCtx.opts, {
+      onProgress: function (stage, done, total) {
+        var el = document.getElementById('dge-gs-compound-progress');
+        if (!el) return;
+        el.textContent = stage === 'vocab'
+          ? 'Scanning the word list… (' + done + ' of ' + total + ')'
+          : 'Opening matched texts… (' + done + ' of ' + total + ')';
+      }
+    });
+    idx.searchCompound(compoundCtx.q, opts).then(function (hits) {
+      if (mySeq !== searchSeq) return; // reader moved on to another query
+      try { localStorage.setItem('dge_gs_vocab_fetched', '1'); } catch (e) {}
+      var seen = {};
+      (lastHits || []).forEach(function (h) { seen[h.grantha + '#' + h.unit] = 1; });
+      var fresh = hits.filter(function (h) { return !seen[h.grantha + '#' + h.unit]; });
+      compoundAdded = fresh.length;
+      compoundState = 'done';
+      if (fresh.length) {
+        var partial = lastHits ? lastHits.partial : false;
+        lastHits = (lastHits || []).concat(fresh);
+        lastHits.partial = partial;
+        buildFilterBar(lastHits);
+      }
+      applyFilters();
+    }).catch(function () {
+      if (mySeq !== searchSeq) return;
+      compoundState = null;
+      applyFilters();
+    });
+  }
+  window.dgeGsRunCompound = function () {
+    var p = ensureIndex(); if (!p) return;
+    p.then(function (idx) { runCompound(idx); });
+  };
+
   function onType(e) {
     var q = e.target.value.trim();
     clearTimeout(debounce);
     clearElapsedTimer();
+    searchSeq++;
+    compoundState = null; compoundAdded = 0; compoundCtx = null;
     var results = document.getElementById('dge-gs-results');
     if (!q) { results.innerHTML = '<div class="dge-gs-hint">Type a word or phrase in any script.</div>'; return; }
     results.innerHTML = '<div class="dge-gs-hint"><span class="dge-gs-spinner" aria-hidden="true"></span>' +
@@ -635,17 +724,28 @@
       // searchExact finds no bucket files and returns [] -- fall back to
       // the fuzzy path rather than showing a false "no matches".
       var useExact = filterState.exact;
+      var mySeq = searchSeq;
       p.then(function (idx) {
          if (!useExact) return idx.search(q, searchOpts);
          return idx.searchExact(q, searchOpts).then(function (hits) {
-           if (hits.length) return hits;
+           if (hits.length) { hits._idx = idx; return hits; }
            return idx.search(q, searchOpts);
-         });
+         }).then(function (hits) { hits._idx = idx; return hits; });
        })
        .then(function (hits) {
          clearElapsedTimer();
          lastSearchElapsedMs = Date.now() - searchStartedAt;
+         var idx = hits._idx; delete hits._idx;
          render(hits, q);
+         // Compound-interior extension: eligible single-word exact queries
+         // continue into the vocabulary grep -- automatically when the word
+         // list is already on this device, as a one-tap offer otherwise
+         // (see the compoundState machinery above for why not silently).
+         if (useExact && mySeq === searchSeq && compoundEligible(q)) {
+           compoundCtx = { q: q, opts: searchOpts, seq: mySeq };
+           if (idx && vocabAlreadyFetched(idx)) runCompound(idx);
+           else { compoundState = 'offer'; if (lastHits) applyFilters(); }
+         }
        })
        .catch(function () {
          clearElapsedTimer();
@@ -742,7 +842,7 @@
       if (lastHits && lastHits.partial && !emptyMessage) {
         msg += ' The search could not sweep the whole library for this — a single long word matches too much of it faintly. Adding one more word from the same line usually finds it.';
       }
-      box.innerHTML = elapsedNoteHtml(true) + '<div class="dge-gs-hint">' + msg + '</div>';
+      box.innerHTML = elapsedNoteHtml(true) + '<div class="dge-gs-hint">' + msg + '</div>' + compoundFooterHtml();
       return;
     }
     // A common word matches most of the corpus; the search stops after the
@@ -764,7 +864,7 @@
         '<div class="dge-gs-meta"><b>' + esc(h.title) + '</b><span>' + esc(h.category) + '</span><span>' + h.score.toFixed(2) + '</span></div>' +
         taxonomyCrumbsHtml(h.grantha, h.title) +
         '<div class="dge-gs-snip">' + highlightSnippet(esc(centerSnippet(h.snippet, q)), q) + '</div></div>';
-    }).join('');
+    }).join('') + compoundFooterHtml();
     Array.prototype.forEach.call(box.querySelectorAll('.dge-gs-row'), function (row) {
       row.onclick = function (ev) {
         // See open()'s own comment on lastOpenAt/GHOST_CLICK_GUARD_MS: a
@@ -1028,7 +1128,14 @@
   }
 
   function render(hits, q) {
+    // .filter() returns a fresh array, silently dropping the custom
+    // `partial` flag dge-search.js sets on its result -- which is what
+    // renderRows()'s "the sweep wasn't exhaustive" notes read. Carry it
+    // across explicitly (pre-existing drop, found while wiring the
+    // compound extension's own flag handling).
+    var partial = (hits || []).partial;
     hits = (hits || []).filter(function (h) { return dgeSearchIsAdmin() || !dgeSearchIsAdminOnlyHit(h); });
+    hits.partial = partial;
     lastHits = hits;
     lastQuery = q;
     // type/category/siddhanta/keyword reset every search since they're

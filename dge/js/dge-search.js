@@ -62,6 +62,26 @@
     };
   }
 
+  // Plain-text twin of fetchJSON, for the vocab/<i>.txt chunks (newline-
+  // separated word list, deliberately not JSON -- see build_search_index.py's
+  // vocab-writing comment). Same two branches, same URL-encoding rule, same
+  // null-on-failure contract.
+  var fetchText;
+  if (isNode) {
+    fetchText = function (base, rel) {
+      var p = require('path').join(base, rel);
+      if (!require('fs').existsSync(p)) return Promise.resolve(null);
+      return Promise.resolve(require('fs').readFileSync(p, 'utf8'));
+    };
+  } else {
+    fetchText = function (base, rel) {
+      var url = base + '/' + rel.split('/').map(encodeURIComponent).join('/');
+      return fetch(url)
+        .then(function (r) { return r.ok ? r.text() : null; })
+        .catch(function () { return null; });
+    };
+  }
+
   // One posting file per TRIGRAM (not per 2-char prefix bucket) -- mirrors
   // build_search_index.py's safe_trigram_filename(). A 2-char bucket used to
   // put every "ram"/"ran"/"raj"/... trigram in one multi-MB file a query for
@@ -364,12 +384,165 @@
         hits.forEach(function (h) { delete h._pkLen; });
         var out = hits.slice(0, limit);
         // The word index IS exhaustive for whole words and compound-initial
-        // prefixes -- but not for a word buried mid-compound (sandhi can
-        // hide an occurrence this index cannot see; the fuzzy trigram path
-        // may still find those). partial=false: what was swept, was swept
-        // completely.
+        // prefixes -- a word buried mid/end-compound is searchCompound()'s
+        // job (the vocabulary grep below), and a sandhi-transformed
+        // occurrence the fuzzy trigram path's. partial=false: what was
+        // swept, was swept completely.
         out.partial = false;
         return out;
+      });
+    });
+  };
+
+  // ---- compound-interior search: grep the VOCABULARY, not the corpus ----
+  // searchExact() covers whole words and compound-INITIAL occurrences (the
+  // prefix scan); a query word buried in the middle or at the end of a
+  // compound (nilakAntAya, divyakAntAya for kAntAya) lives in the
+  // compound's own bucket, which a prefix-keyed lookup can never fetch.
+  // Substring-scanning the 300MB corpus is out of the question -- but the
+  // complete VOCABULARY (~2M distinct words, vocab/<i>.txt, ~10MB gzipped
+  // once over the CDN and then HTTP-cached forever against the immutable
+  // commit-pinned URL) is small enough to grep client-side in one pass.
+  // Matched compound words then resolve through the same bucket postings
+  // as any exact lookup: exhaustive substring recall at exact precision.
+  var MAX_COMPOUND_WORDS = 400;   // matched vocabulary words considered (shortest first)
+  var MAX_COMPOUND_BUCKETS = 40;  // distinct bucket fan-out cap
+
+  Index.prototype._loadVocabChunk = function (i) {
+    if (!this._vocabCache) this._vocabCache = {};
+    if (this._vocabCache[i]) return this._vocabCache[i];
+    return (this._vocabCache[i] = fetchText(this.base, 'vocab/' + i + '.txt'));
+  };
+  // True once every chunk has been fetched at least once this session --
+  // the UI uses this to decide whether a compound scan is "free" (all in
+  // memory) or will cost the reader a real download they should opt into.
+  Index.prototype.vocabLoaded = function () {
+    var n = this.manifest.vocabChunks || 0;
+    if (!n || !this._vocabCache) return false;
+    for (var i = 0; i < n; i++) if (!this._vocabResolved || !this._vocabResolved[i]) return false;
+    return true;
+  };
+
+  Index.prototype.searchCompound = function (query, opts) {
+    opts = opts || {};
+    var self = this;
+    var limit = opts.limit || 30;
+    var section = opts.section || null;
+    var onProgress = opts.onProgress;
+    var q = N.normalizeQuery(query, opts);
+    var qwords = q.pkey ? wordTokens(q.pkey) : [];
+    // Single-word queries only: a multi-word phrase already has
+    // intersection semantics in searchExact, and crossing that with
+    // per-word compound expansion multiplies cost for a case no reader
+    // has asked for. A token under 4 chars is too unselective to scan
+    // for (contained in a huge fraction of the vocabulary).
+    if (qwords.length !== 1 || qwords[0].length < 4) return Promise.resolve([]);
+    var token = qwords[0];
+    var nChunks = this.manifest.vocabChunks || 0;
+    if (!nChunks) return Promise.resolve([]); // pre-vocab index published
+
+    var excludePrefixes = opts.excludeGranthaPrefixes || [];
+    var isExcludedGrantha = function (gi) {
+      var slug = self.granthas[gi] && self.granthas[gi].slug;
+      if (!slug) return false;
+      for (var p = 0; p < excludePrefixes.length; p++) {
+        if (slug === excludePrefixes[p] || slug.indexOf(excludePrefixes[p] + '/') === 0) return true;
+      }
+      return false;
+    };
+
+    var chunkIdx = [];
+    for (var i = 0; i < nChunks; i++) chunkIdx.push(i);
+    if (!this._vocabResolved) this._vocabResolved = {};
+    return allWithProgress(
+      chunkIdx.map(function (i) {
+        return self._loadVocabChunk(i).then(function (txt) {
+          self._vocabResolved[i] = true; return txt;
+        });
+      }),
+      onProgress && function (done, total) { onProgress('vocab', done, total); }
+    ).then(function (chunks) {
+      // Grep pass: every vocabulary word CONTAINING the token, minus
+      // whole-word/prefix matches (searchExact's own territory -- a word
+      // starting with the token shares its first chars and therefore its
+      // bucket, so those were already found). Scanning by indexOf over the
+      // raw chunk text and expanding to line boundaries touches only the
+      // match sites, never splitting 2M lines up front.
+      var matched = [];
+      chunks.forEach(function (txt) {
+        if (!txt) return;
+        var at = txt.indexOf(token);
+        while (at !== -1) {
+          var s = txt.lastIndexOf('\n', at) + 1;
+          var e = txt.indexOf('\n', at);
+          if (e === -1) e = txt.length;
+          var w = txt.slice(s, e);
+          if (w.indexOf(token) > 0) matched.push(w); // >0: interior/end only
+          at = txt.indexOf(token, e);
+        }
+      });
+      // Shortest first: the tightest compound around the word is the most
+      // recognisable occurrence, and it also keeps the bucket fan-out cap
+      // spending its budget on the best candidates.
+      matched.sort(function (a, b) { return a.length - b.length; });
+      matched = matched.slice(0, MAX_COMPOUND_WORDS);
+
+      var buckets = {}, nBuckets = 0, byBucket = {};
+      for (var m = 0; m < matched.length; m++) {
+        var b = self._wordBucketOf(matched[m]);
+        if (!buckets[b]) {
+          if (nBuckets >= MAX_COMPOUND_BUCKETS) continue;
+          buckets[b] = 1; nBuckets++; byBucket[b] = [];
+        }
+        byBucket[b].push(matched[m]);
+      }
+      var bucketNames = Object.keys(buckets);
+      return allWithProgress(
+        bucketNames.map(function (b) { return self._loadWordBucket(b, section); }),
+        onProgress && function (done, total) { onProgress('postings', done, total); }
+      ).then(function (maps) {
+        var unitWord = {}; // "gi:ui" -> shortest matched compound containing it
+        bucketNames.forEach(function (b, bi) {
+          (maps[bi] || []).forEach(function (wordMap) {
+            byBucket[b].forEach(function (w) {
+              var rows = wordMap[w];
+              if (!rows) return;
+              rows.forEach(function (r) {
+                if (isExcludedGrantha(r[0])) return;
+                var key = r[0] + ':' + r[1];
+                if (!unitWord[key] || w.length < unitWord[key].length) unitWord[key] = w;
+              });
+            });
+          });
+        });
+        var keys = Object.keys(unitWord);
+        keys.sort(function (a, b) { return unitWord[a].length - unitWord[b].length; });
+        var picked = keys.slice(0, limit * 2);
+        var giSet = {};
+        picked.forEach(function (k) { giSet[k.split(':')[0]] = 1; });
+        return allWithProgress(
+          Object.keys(giSet).map(function (gi) { return self._loadShard(+gi); }),
+          onProgress && function (done, total) { onProgress('shards', done, total); }
+        ).then(function () {
+          var hits = [];
+          picked.forEach(function (key) {
+            var parts = key.split(':'), gi = +parts[0], ui = +parts[1];
+            var shard = self._shardCache[gi]; if (!shard) return;
+            var row = shard[ui]; if (!row) return;
+            var g = self.granthas[gi];
+            hits.push({ grantha: g.slug, title: g.title, category: g.category,
+              contentType: classifyContentType(g.schema),
+              unit: row.u, snippet: row.s, _pkLen: (row.pk || '').length,
+              // Just under word-index-exact's 0.99: a genuine occurrence,
+              // inside a compound rather than freestanding.
+              score: 0.95, via: 'word-index-compound' });
+          });
+          hits.sort(function (a, b) { return a._pkLen - b._pkLen; });
+          hits.forEach(function (h) { delete h._pkLen; });
+          var out = hits.slice(0, limit);
+          out.partial = false;
+          return out;
+        });
       });
     });
   };

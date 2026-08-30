@@ -766,11 +766,23 @@ Key decisions (each measured, see the 30 Aug 2026 review):
   `manifest.wordBucketDeepen` (a few dozen entries) for the client to walk.
 - **Query** (`searchExact()`): tokenize identically, fetch one bucket file
   per (distinct bucket, section), direct dict lookup + a prefix scan (a
-  word opening a longer compound, `kantayasan`, still surfaces; a word
-  buried mid-compound is invisible here by construction — that remains the
-  trigram path's job). Intersect across query words, fall back to best
-  partial overlap; rank exact>prefix, verse-schema>commentary, then
-  shorter unit first. Two serial network stages ≈ 0.6–1.8 s on mobile.
+  word opening a longer compound, `kantayasan`, still surfaces).
+  Intersect across query words, fall back to best partial overlap; rank
+  exact>prefix, verse-schema>commentary, then shorter unit first. Two
+  serial network stages ≈ 0.6–1.8 s on mobile.
+- **Compound-interior recall** (`searchCompound()`, 30 Aug 2026 — "a match
+  is a match, beginning, middle or end"): a query word buried mid/end-
+  compound (नीलकान्ताय, सूर्येन्दुकान्तयश्चैव) lives in the compound's own
+  bucket, unreachable by prefix lookup. Answered by grepping the
+  VOCABULARY, not the corpus: `vocab/<i>.txt` ships the complete sorted
+  word list (~34 MB raw / ~10 MB gzipped, 16 chunks) — fetched ONCE per
+  device (immutable pinned URL ⇒ HTTP-cached forever), scanned in-memory
+  for containment, matched compounds resolved through their own bucket
+  postings. Exhaustive substring recall at exact-lookup precision.
+  Because the first fetch is a real 10 MB on mobile data, the UI offers it
+  as a clearly-priced one-tap action the first time and auto-runs it on
+  every eligible (single-word, ≥4-char) query after that. Capped:
+  400 matched words (shortest first), 40 bucket fetches.
 - **Routing** (global-search.js): "Exact spelling only" ON (the default)
   uses `searchExact()`; empty exact results fall back to the fuzzy path, so
   a stale index without `words/` degrades gracefully. OFF keeps the trigram

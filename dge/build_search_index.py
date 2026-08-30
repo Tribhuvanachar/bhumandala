@@ -525,6 +525,34 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
                 json.dump(word_map, f, ensure_ascii=False, separators=(",", ":"))
     stats["distinct_words"] = len(word_postings)
     stats["word_buckets_deepened"] = len(deepen)
+
+    # vocab/<i>.txt -- the complete sorted vocabulary as plain newline-
+    # separated text, split into VOCAB_CHUNKS sequential files. This is the
+    # substring-recall layer the word index alone cannot provide: a query
+    # word buried in the MIDDLE or at the END of a compound (nilakAntAya,
+    # divyakAntAya for a kAntAya query) lives in the compound's own bucket,
+    # which a lookup keyed on the query's prefix never fetches. Scanning
+    # the corpus for substrings is out of the question (300MB+), but the
+    # VOCABULARY is small (~34MB raw, ~10MB gzipped over the CDN, fetched
+    # once and then HTTP-cached against this immutable commit-pinned URL):
+    # the client greps this word list for containment, then jumps straight
+    # to the matched words' bucket postings -- exhaustive substring recall
+    # at exact-lookup precision. Plain text, not JSON: best compression,
+    # trivial split('\n') parse. Chunked so the client can fetch in
+    # parallel and surface matches progressively as chunks land.
+    VOCAB_CHUNKS = 16
+    vocab_sorted = sorted(word_postings.keys())
+    os.makedirs(os.path.join(out_dir, "vocab"), exist_ok=True)
+    per_chunk = (len(vocab_sorted) + VOCAB_CHUNKS - 1) // VOCAB_CHUNKS
+    vocab_bytes = 0
+    for i in range(VOCAB_CHUNKS):
+        chunk = vocab_sorted[i * per_chunk:(i + 1) * per_chunk]
+        blob = "\n".join(chunk)
+        vocab_bytes += len(blob.encode("utf-8"))
+        with open(os.path.join(out_dir, "vocab", f"{i}.txt"),
+                  "w", encoding="utf-8") as f:
+            f.write(blob)
+    stats["vocab_bytes"] = vocab_bytes
     # bucket_key() encodes case into the name, but assert the guarantee
     # anyway -- a future naming change that reintroduces the trigram tree's
     # case-collision landmine should fail the build, not corrupt a macOS/
@@ -544,7 +572,8 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
     with open(os.path.join(out_dir, "manifest.json"), "w", encoding="utf-8") as f:
         json.dump({"granthas": granthas, "df": df,
                    "sections": sorted(sections), "stats": stats,
-                   "wordBucketDeepen": deepen},
+                   "wordBucketDeepen": deepen,
+                   "vocabChunks": VOCAB_CHUNKS},
                    f, ensure_ascii=False, separators=(",", ":"))
     with open(os.path.join(out_dir, "backlinks.json"), "w", encoding="utf-8") as f:
         json.dump(backlinks, f, ensure_ascii=False, separators=(",", ":"))
