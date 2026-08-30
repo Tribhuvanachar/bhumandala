@@ -1377,24 +1377,39 @@ async function dgeFuzzyMatchGrantha(text) {
   const library = await (window.dgeLibraryCatalogPromise || Promise.resolve(null));
   if (!library || !Array.isArray(library.granthas)) return null;
   const qWords = q.split(' ').filter(Boolean);
-  let best = null, bestScore = -1;
+  let best = null, bestScore = -1, bestIsWholeWord = false;
   library.granthas.forEach(function (g) {
     if (!g.populated || dgeIsAdminOnlyGrantha(g)) return;
     const realSlug = window.dgeGranthaSlug(g.path);
     const hay = dgeNormalizeForMatch(realSlug + ' ' + (g.title || ''));
     if (!hay) return;
-    // Every query word must appear somewhere in the slug/title text —
-    // "mahabharata sabha" should not match a grantha whose path only
-    // mentions one of the two words. Score favors an exact whole-slug
-    // match, then a shorter/more-specific matching slug (a leaf beats a
-    // whole section sharing the same prefix).
-    const allWordsPresent = qWords.every(function (w) { return hay.indexOf(w) !== -1; });
-    if (!allWordsPresent) return;
+    const hayWords = hay.split(' ');
+    // Prefer a WHOLE-WORD match (every query word is one of the slug's own
+    // underscore/slash-delimited segments) over a raw substring one --
+    // reported live: searching the single word "vastu" here landed on the
+    // Buddhist Saṅghabhedavastu, because "vastu" merely sits inside that
+    // one unbroken slug segment ("sanghabhedavastu"), not because it names
+    // that text. Substring containment is kept only as a fallback for a
+    // MULTI-word query ("mahabharata sabha" should still match a grantha
+    // whose path only spells them run together) -- a coincidence across
+    // every word of a real phrase is far less likely than one short word
+    // landing inside one longer unrelated compound.
+    const allWholeWords = qWords.every(function (w) { return hayWords.indexOf(w) !== -1; });
+    const allSubstr = qWords.length > 1 && qWords.every(function (w) { return hay.indexOf(w) !== -1; });
+    if (!allWholeWords && !allSubstr) return;
     let score = 100 - Math.min(99, hay.length - q.length);
     if (hay === q) score += 1000;
     else if (hay.indexOf(q) === 0) score += 200;
-    if (score > bestScore) { bestScore = score; best = realSlug; }
+    if (allWholeWords) score += 500; // a real word always outranks a mere substring
+    if (score > bestScore) { bestScore = score; best = realSlug; bestIsWholeWord = allWholeWords; }
   });
+  // A single-word query that only ever matched as a raw substring (never a
+  // real whole word, anywhere in the library) is too weak a signal to
+  // silently navigate on -- exactly the false positive above. Reporting
+  // "no match" here instead lets the caller fall through to the real
+  // full-text corpus search for a single word (see dgeQuickJump below),
+  // rather than landing on a wrong grantha with no way to tell why.
+  if (best && !bestIsWholeWord && qWords.length < 2) return null;
   return best;
 }
 
@@ -1415,6 +1430,19 @@ window.dgeQuickJump = function(text) {
   // navigation (or the "not recognized" toast) itself.
   dgeFuzzyMatchGrantha(text).then(function (slug) {
     if (slug) { window.dgeGoToGrantha(slug); return; }
+    // A single word that doesn't name any grantha/section is very likely a
+    // CONTENT word the reader is trying to find IN the corpus, not
+    // navigate BY name -- reported live: typing "Vastu" here landed
+    // nowhere useful, and the word itself was never actually looked for in
+    // any text (this box only ever matched grantha slugs/titles, never
+    // content). Route it to the real full-text search instead of a dead
+    // "not recognized" toast; a multi-word phrase still gets the toast,
+    // since that's more likely a mistyped abbreviation than a search term.
+    const words = String(text).trim().split(/\s+/).filter(Boolean);
+    if (words.length === 1 && typeof window.DGEGlobalSearch === 'object' && window.DGEGlobalSearch.open) {
+      window.DGEGlobalSearch.open(words[0]);
+      return;
+    }
     if (typeof showToast === 'function') showToast('Not recognized — try e.g. "rv1.1.3", "pns5", or a section name like "mahabharata sabha parva".');
   });
   return false;

@@ -876,6 +876,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const jumpShloka = urlParams.get('jumpShloka') || abbrevShloka;
   window._dgeJumpTarget = jumpVedicId ? { vedicId: jumpVedicId } : (jumpShloka ? { shlokaNumber: parseInt(jumpShloka, 10) } : null);
 
+  // ?hl= — the word/phrase a reader just searched for (global-search.js's
+  // go(), and library.js's own quick-jump), in Devanagari. Reported live:
+  // arriving from a search result never showed WHERE the searched word
+  // actually was on the landing page. dgeHighlightQueryOnLoad() (below,
+  // run once content is rendered) does that highlighting; kept as a
+  // separate global rather than folded into _dgeJumpTarget since a plain
+  // in-grantha search (no shloka jump at all) can still carry one.
+  window._dgeHighlightQuery = urlParams.get('hl') || null;
+
   const providedPass = urlParams.get('pass');
   const passkey = (window.appConfig && window.appConfig.secretPasskey) ? window.appConfig.secretPasskey : 'SHRI108';
 
@@ -1110,9 +1119,53 @@ function initApp() {
   // A Quick Search jump (see dgeQuickJump in library.js) takes priority
   // over restoring the last-viewed verse above — the user explicitly
   // asked to go somewhere specific, so that intent wins.
+  const hadJumpTarget = !!window._dgeJumpTarget;
   if (window._dgeJumpTarget) dgeResolveQuickJumpTarget(window._dgeJumpTarget);
   window._dgeJumpTarget = null;
+
+  if (window._dgeHighlightQuery) dgeHighlightQueryOnLoad(window._dgeHighlightQuery, 0, hadJumpTarget);
 }
+
+// Reported live: a reader who opened a search result (global-search.js's
+// go(), now passing ?hl=) or a Quick Search word match landed on the right
+// PAGE but the word they searched for was "not highlighted anywhere" --
+// nothing on screen actually confirmed the match was real or showed where
+// it was. Marks every .dge-word span whose own text contains the query (or,
+// for a multi-word phrase, any one of its words -- matching
+// global-search.js's own highlightSnippet() substring rule, since a
+// .dge-word span carries attached punctuation and dgeWrapWordsForTap()
+// never strips it) with .dge-search-hit, then scrolls the first hit into
+// view. jumpShloka (handled by dgeResolveQuickJumpTarget just above, if
+// present) already scrolled to the right VERSE; this only needs to find
+// the word within whatever is now on screen -- so it runs after that, and
+// retries once, shortly, in case that jump is still mid-render (a chapter
+// switch is not synchronous the way a same-chapter scroll is).
+function dgeHighlightQueryOnLoad(query, attempt, hadJumpTarget) {
+  attempt = attempt || 0;
+  const words = String(query).trim().split(/\s+/).filter(w => w.length >= 2);
+  if (!words.length) return;
+  const spans = document.querySelectorAll('.dge-word');
+  let hits = [];
+  spans.forEach(span => {
+    const txt = (span.textContent || '').normalize('NFC');
+    if (words.some(w => txt.indexOf(w.normalize('NFC')) !== -1)) {
+      span.classList.add('dge-search-hit');
+      hits.push(span);
+    }
+  });
+  if (!hits.length) {
+    if (attempt < 3) setTimeout(() => dgeHighlightQueryOnLoad(query, attempt + 1, hadJumpTarget), 400);
+    return;
+  }
+  // Only auto-scroll when nothing else already did (a jumpShloka target
+  // scrolled to its own verse card already; jumping again to the word
+  // within it would just fight that scroll for no benefit since the verse
+  // is already on screen).
+  if (!hadJumpTarget) {
+    try { hits[0].scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {}
+  }
+}
+window.dgeHighlightQueryOnLoad = dgeHighlightQueryOnLoad;
 
 // Turns a { vedicId } or { shlokaNumber } target into an actual internal
 // shloka key and jumps there via playShloka() — the same primitive every

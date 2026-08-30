@@ -40,8 +40,18 @@
   // dge_selection_mode) so it survives a page reload instead of resetting
   // to off every time.
   var EXACT_STORAGE_KEY = 'dge_gs_exact_spelling';
+  // Default ON (30 Aug 2026, project-lead ask: "if I search for Kanthaya,
+  // only those results which has explicit Kanthaya in the text must be
+  // returned" -- fuzzy/near matches should be something a reader opts INTO,
+  // not something they have to opt OUT of every search to avoid). A reader
+  // who has never touched the chip gets exact-only by default; one who has
+  // explicitly turned it off (localStorage holds '0') keeps that choice, same
+  // persistence as before -- only the UNSET default direction changed.
   function dgeGsLoadExact() {
-    try { return localStorage.getItem(EXACT_STORAGE_KEY) === '1'; } catch (e) { return false; }
+    try {
+      var v = localStorage.getItem(EXACT_STORAGE_KEY);
+      return v === null ? true : v === '1';
+    } catch (e) { return true; }
   }
   function dgeGsSaveExact(v) {
     try { localStorage.setItem(EXACT_STORAGE_KEY, v ? '1' : '0'); } catch (e) { /* ignore */ }
@@ -351,9 +361,28 @@
   // the reader tapped, so "where else does this occur" opens already
   // searching rather than asking them to retype it. Called with nothing, this
   // behaves exactly as before.
+  // Reported live (screenshots): tapping "Search Library" from a word
+  // selection did nothing on the first tap, then on the second tap the
+  // overlay opened, results appeared for under a second, then the page
+  // immediately navigated away to an unrelated grantha the reader never
+  // clicked -- for the SAME query, every time. Root cause: the word-tools
+  // buttons fire on pointerdown (see ai.js's own comment on
+  // dgeApplyWordSelectionHighlight for the first-tap half of this same
+  // report), so open() can run and a result row can render at that exact
+  // screen position WHILE the triggering tap is still completing -- the
+  // trailing compatibility click of that same physical gesture then lands
+  // on whatever now occupies that spot, which is a real result row with a
+  // real onclick. Guarding renderRows()'s row.onclick against firing within
+  // this short a window of open() blocks exactly that stray same-gesture
+  // click without adding any perceptible delay to a reader's own,
+  // deliberate later tap.
+  var lastOpenAt = 0;
+  var GHOST_CLICK_GUARD_MS = 400;
+
   function open(query) {
     build();
     document.getElementById('dge-gs-overlay').classList.add('open');
+    lastOpenAt = Date.now();
     ensureIndex();
     var input = document.getElementById('dge-gs-input');
     if (query && typeof query === 'string') {
@@ -412,10 +441,17 @@
     return path;
   }
 
-  function go(slug, unit) {
+  function go(slug, unit, hl) {
     // ?path= is the READER's contract.
     var p = readerBase() + '?path=' + slug;
     if (unit) p += '&jumpShloka=' + encodeURIComponent(unit);
+    // core.js reads this as ?hl= (see dgeResolveQuickJumpTarget's caller) to
+    // highlight the searched word/phrase on arrival -- Devanagari already,
+    // same script the reader's own text is in, so it can be matched against
+    // .dge-word spans without a scheme conversion on the far side. Reported
+    // live: "that Vastu is not highlighted in any of the text" once a
+    // search result was actually opened.
+    if (hl) p += '&hl=' + encodeURIComponent(hl);
     window.location.href = p;
   }
 
@@ -596,6 +632,12 @@
     }).join('');
     Array.prototype.forEach.call(box.querySelectorAll('.dge-gs-row'), function (row) {
       row.onclick = function (ev) {
+        // See open()'s own comment on lastOpenAt/GHOST_CLICK_GUARD_MS: a
+        // click landing here within this many ms of the overlay opening is
+        // the trailing compatibility click of the SAME physical tap that
+        // opened it, not a reader deliberately tapping a result row that
+        // didn't exist yet when their gesture began.
+        if (Date.now() - lastOpenAt < GHOST_CLICK_GUARD_MS) return;
         // A sutra reference inside the snippet (wired below) opens its own
         // popover on click; without this the row's own click-to-navigate
         // would also fire on the same tap, jumping to the grantha instead.
@@ -605,7 +647,7 @@
         // hit" — letting the row handler also fire would race its own
         // window.location.href against the anchor's native navigation.
         if (ev.target.closest && ev.target.closest('.dge-gs-crumbs')) return;
-        go(row.getAttribute('data-slug'), row.getAttribute('data-unit'));
+        go(row.getAttribute('data-slug'), row.getAttribute('data-unit'), lastQueryDeva || q);
       };
     });
     // Sutra numbers appearing in a snippet get the same tappable popover

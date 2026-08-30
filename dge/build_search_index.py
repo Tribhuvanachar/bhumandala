@@ -105,6 +105,45 @@ def primary_field(schemas: dict, schema_name: str):
     return s.get("primaryTextField")
 
 
+def _flatten_text_field(v, _depth=0):
+    """Coerce a schema's primaryTextField value into one plain string.
+
+    Normally already a string -- but dāsa-sāhitya's `dasa_pada_text` schema
+    turned out to store its `text` field as {script: [[line, ...], ...]}
+    instead (most padas have no "devanagari" variant at all, only
+    "kannada"). Passing that dict straight to clean_devanagari() crashed
+    unicodedata.normalize() on the FIRST such grantha the walk met, which
+    took build()'s single pass down for every grantha still to come, not
+    just this one -- silently leaving the corpus-wide search index every
+    reader's search depends on built from before whatever last change
+    introduced this shape, with no error visible anywhere a reader would
+    see it. Flattening here instead lets has_devanagari()'s existing
+    stub-skip rule decide per unit as it always has: a pure-Kannada string
+    still isn't Devanagari, so it's still correctly skipped as a stub --
+    this fixes the crash, not the Kannada-script indexing gap itself,
+    which is a separate, larger problem (dāsa-sāhitya needs a transliteration
+    pass, not just a bugfix, to become searchable in its own script).
+    """
+    if _depth > 4:
+        return ""
+    if isinstance(v, str):
+        return v
+    if isinstance(v, dict):
+        for key in ("devanagari", "sa", "sanskrit"):
+            flat = _flatten_text_field(v.get(key), _depth + 1)
+            if flat:
+                return flat
+        for val in v.values():
+            flat = _flatten_text_field(val, _depth + 1)
+            if flat:
+                return flat
+        return ""
+    if isinstance(v, list):
+        parts = [p for p in (_flatten_text_field(e, _depth + 1) for e in v) if p]
+        return "\n".join(parts)
+    return ""
+
+
 def extract_text(item: dict, pfield, schema_name: str, commentaries=False) -> str:
     """Return the best searchable Devanagari text for one unit.
 
@@ -116,10 +155,12 @@ def extract_text(item: dict, pfield, schema_name: str, commentaries=False) -> st
     # prefer an explicit unaccented *_plain variant of the primary field
     if pfield:
         plain = f"{pfield}_plain"
-        if item.get(plain):
-            return item[plain]
-        if item.get(pfield):
-            return item[pfield]
+        flat = _flatten_text_field(item.get(plain))
+        if flat:
+            return flat
+        flat = _flatten_text_field(item.get(pfield))
+        if flat:
+            return flat
     # primaryTextField is null -> nested-array schemas; try common holders
     bhashya = []
     if commentaries:

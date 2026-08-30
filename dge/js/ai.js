@@ -1,7 +1,7 @@
 // DGE Module: ai.js
 // Maps to F-014: AI Assistance
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['ai.js'] = 'v3.18 (selection tooltip is now a real bottom sheet below 760px -- main.css positions/animates it entirely (full-width, slides up from the bottom edge, matching #displayPopup\'s .popup-sheet language) instead of floating near the selection; this file only clears any stale inline position and lets the MutationObserver\'s .dge-tt-show class drive the slide-in. Desktop keeps the near-selection placement from v3.17 unchanged. Everything else from v3.17 -- body.dge-selecting hiding the Kosha/global-search FABs -- unchanged)';
+window.DGE_VERSIONS['ai.js'] = 'v3.19 (Android\'s native "Translate / Copy / Select all" selection toolbar no longer lingers on top of the Genie sheet: selectionchange now clears the live browser selection the moment the sheet appears, substituting a .dge-word-picked highlight on the actual .dge-word span(s) so the reader still sees what\'s selected; a reader\'s first tap on a sheet button used to be silently consumed by Android dismissing its own toolbar instead of reaching the button. dgeSelectedWordText() now falls back to window.lastSelectedText once the live selection is gone. Everything from v3.18 unchanged.)';
 
 // Appends a language directive read from onboarding.js's saved preference
 // (dge_lang_pref: en/kn/sa), so every dgeCallProvider() call answers in the
@@ -83,7 +83,18 @@ function dgeUpdateWordToolsForSelection(txt) {
   sync();
 })();
 
+// Set right before this handler programmatically clears the live selection
+// itself (below, to dismiss Android's native selection toolbar) -- that
+// removeAllRanges() call fires its OWN selectionchange event, which would
+// otherwise re-enter this same handler ~50ms later with an now-empty
+// selection and immediately hide the sheet it had just shown. One-shot: the
+// very next selectionchange event is swallowed here before it can reach the
+// debounce logic below, and every OTHER selectionchange (a reader's own,
+// including one made while a highlighted selection is still showing) still
+// runs normally.
+let dgeIgnoreNextSelectionChange = false;
 document.addEventListener('selectionchange', () => {
+  if (dgeIgnoreNextSelectionChange) { dgeIgnoreNextSelectionChange = false; return; }
   const activeTag = document.activeElement ? document.activeElement.tagName : '';
   if (['INPUT', 'TEXTAREA'].includes(activeTag)) {
      const tooltip = document.getElementById('actionTooltip');
@@ -149,6 +160,30 @@ document.addEventListener('selectionchange', () => {
         if (modalAppendBtn) modalAppendBtn.style.display = 'none';
         tooltip.style.display = 'flex';
         dgeUpdateWordToolsForSelection(txt);
+
+        // The Genie sheet now overlaps live text -- and on Android, a live
+        // selection also keeps the OS's own "Translate / Copy / Select all"
+        // toolbar floating on screen underneath it (reported live, with
+        // screenshots: it stayed visible on top of the sheet, and a reader's
+        // FIRST tap on any sheet button was consumed by Android just
+        // dismissing its own toolbar instead of reaching the button --
+        // "nothing happens the first time, only the second tap works").
+        // dgeHideActionTooltip() already cleared the live selection, but
+        // only once a button was actually clicked -- by then the native
+        // toolbar had already been sitting there the whole time the sheet
+        // was open. Clearing it here instead, the moment the sheet first
+        // appears, removes the native toolbar immediately; a same-colored
+        // .dge-word-picked class on the actual word span(s) stands in for
+        // the highlight so the reader still sees what's selected. Only done
+        // when the selection lines up with real .dge-word span(s) -- a
+        // freeform/Custom-mode drag that doesn't (e.g. spanning into a
+        // commentary block) keeps the native selection as before, since
+        // there is no word-level element to substitute a highlight onto.
+        if (dgeApplyWordSelectionHighlight(range)) {
+          dgeIgnoreNextSelectionChange = true;
+          try { selection.removeAllRanges(); }
+          catch (e) { dgeIgnoreNextSelectionChange = false; }
+        }
 
         // Below 760px (this app's own desktop breakpoint -- see main.css)
         // this is now a real bottom sheet (main.css's own media query does
@@ -1196,20 +1231,80 @@ window.dgeRobustSelectedText = function() {
 // Word-level tools on the selection tooltip: unlike the AI "Word" button
 // above (which asks an LLM), these navigate to this app's own real,
 // structured data for the selected word rather than generating an answer.
+// Stands in for the browser's own selection highlight once
+// selectionchange's handler above has cleared the real one (see its own
+// comment) -- applied to the actual .dge-word span(s) the selection
+// covered, using the identical start/end-word walk dgeRobustSelectedText()
+// already does above, so "what's highlighted" and "what dgeSelectedWordText()
+// returns" can never disagree. Returns false (and touches nothing) when the
+// selection doesn't line up with real word spans, so the caller knows to
+// leave the native selection alone for a freeform/Custom-mode drag.
+window.dgeApplyWordSelectionHighlight = function(range) {
+  dgeClearWordSelectionHighlight();
+  try {
+    const nodeToWord = (node) => {
+      if (!node) return null;
+      const el = node.nodeType === 3 ? node.parentElement : node;
+      return el && el.closest ? el.closest('.dge-word') : null;
+    };
+    const startWord = nodeToWord(range.startContainer);
+    const endWord = nodeToWord(range.endContainer);
+    if (!startWord || !endWord) return false;
+    let words;
+    if (startWord === endWord) {
+      words = [startWord];
+    } else {
+      const container = startWord.closest('.shloka-text');
+      if (!container || !container.contains(endWord)) return false;
+      const all = Array.from(container.querySelectorAll('.dge-word'));
+      const si = all.indexOf(startWord), ei = all.indexOf(endWord);
+      if (si === -1 || ei === -1) return false;
+      const lo = Math.min(si, ei), hi = Math.max(si, ei);
+      words = all.slice(lo, hi + 1);
+    }
+    words.forEach(w => w.classList.add('dge-word-picked'));
+    window._dgeHighlightedWords = words;
+    return true;
+  } catch (e) { return false; }
+};
+function dgeClearWordSelectionHighlight() {
+  if (window._dgeHighlightedWords) {
+    window._dgeHighlightedWords.forEach(w => { try { w.classList.remove('dge-word-picked'); } catch (e) {} });
+  }
+  window._dgeHighlightedWords = null;
+}
+window.dgeClearWordSelectionHighlight = dgeClearWordSelectionHighlight;
+
 function dgeSelectedWordText() {
-  try { return window.dgeRobustSelectedText(); }
-  catch (e) { return ''; }
+  try {
+    const live = window.dgeRobustSelectedText();
+    if (live) return live;
+  } catch (e) {}
+  // The selectionchange handler above now clears the live browser
+  // selection itself (to dismiss Android's native toolbar) as soon as the
+  // Genie sheet appears, well before a reader taps any of its buttons --
+  // so by the time a word-tools handler (Shabda/Dhatu/Sandhi/Samasa/
+  // Search Library) calls this, window.getSelection() is often already
+  // empty. window.lastSelectedText is the same text captured at that
+  // selectionchange moment (see its own assignment above), so it is the
+  // correct fallback rather than a stale guess.
+  return window.lastSelectedText || '';
 }
 function dgeHideActionTooltip() {
   const tooltip = document.getElementById('actionTooltip');
   if (tooltip) tooltip.style.display = 'none';
+  dgeClearWordSelectionHighlight();
   // Every word-tools handler (Shabda/Dhatu/Sandhi/Samasa/corpus-search)
   // reads the selected word into a local variable before calling this, so
   // clearing the live selection here is always safe. Without it, the
   // browser's own text-selection stayed active underneath whatever modal
   // opened next -- on Android that means its native "Translate / Copy /
   // Select all" selection toolbar kept floating on top of DGE's modal
-  // (reported live, with screenshots).
+  // (reported live, with screenshots). The selectionchange handler above
+  // now clears it proactively too (see its own comment), so this is
+  // usually a no-op by the time a button is clicked -- kept as a backstop
+  // for the freeform/Custom-mode selections that handler deliberately
+  // leaves alone.
   try { window.getSelection().removeAllRanges(); } catch (e) {}
 }
 

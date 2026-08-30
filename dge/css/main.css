@@ -150,6 +150,23 @@ body.dark-mode .search-match { background-color: #fbc02d; color: #000; }
 .shloka-num { font-size: 12px; font-weight: 700; color: var(--muted-text); min-width: 20px; margin-top: 4px; }
 .shloka-text { flex-grow: 1; font-family: var(--font-sanskrit); font-size: var(--font-multiplier); color: var(--text-sanskrit); line-height: 1.55; font-weight: 500; cursor: pointer; overflow-wrap: anywhere; }
 
+/* Stands in for the browser's own text-selection highlight once ai.js's
+   selectionchange handler has deliberately cleared the live selection (to
+   stop Android's native "Translate / Copy / Select all" toolbar lingering
+   on top of the Genie sheet -- see that handler's own comment). Applied to
+   the actual .dge-word span(s) the selection covered, so the reader still
+   sees what's selected while the sheet is open. */
+.dge-word-picked { background: var(--accent-glow, rgba(232, 178, 77, .4)); border-radius: 3px; box-shadow: 0 0 0 1px var(--accent-gold, #e8b24d); }
+
+/* core.js's dgeHighlightQueryOnLoad() -- marks the word(s) a reader just
+   searched for after arriving from Search Library or a Quick Search jump,
+   so the match is actually visible on the page it lands on rather than
+   just "somewhere in this text, trust us". Outlined rather than filled so
+   it stays legible without hiding the character underneath, and persists
+   (unlike .dge-word-picked's live-selection stand-in) until the reader
+   selects something else. */
+.dge-word.dge-search-hit { background: var(--accent-glow, rgba(232, 178, 77, .4)); border-radius: 3px; outline: 2px solid var(--accent-red, #e2664a); outline-offset: 1px; }
+
 /* Secondary state = small badges next to the shloka number, never a
    border — so favorite/doubt/notes/snippets never compete with the
    progress border above (section 4: "completed + favorite + doubt
