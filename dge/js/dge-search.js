@@ -90,14 +90,37 @@
   // this is fetched in full; there is nothing to save on a short word.
   var MAX_TRIS_PER_SET = 3;
 
+  // A boundary trigram (^xy / yz$) only ever appears in the index at a
+  // unit's own true start/end (see search()'s own comment on this), so it
+  // never counts toward requiredCount/`need` below -- it's a bonus signal,
+  // not part of what decides candidacy. A short, common query mixes both
+  // kinds among its "rarest" trigrams (^ka and ya$ are individually rarer
+  // than any interior 3-letter run just because they're anchored), and
+  // picking rarest-N across BOTH kinds indiscriminately let boundary
+  // trigrams crowd interior ones out of the fetched set entirely -- measured
+  // live against the real index: "kAntAya" fetched ^ka/ya$/tay, leaving only
+  // ONE interior trigram (tay, df 39,729) to decide candidacy at all. With
+  // requiredCount collapsed to 1, `need` (60% of 1, floored to 1) became
+  // "matches this one very common trigram anywhere" -- 39,729 units all
+  // tied as equally "complete," and Sumadhva Vijaya's real exact-match verse
+  // (which does contain कान्ताय, confirmed directly against the built
+  // index) never survived the tie-break into the shard-open budget at all.
+  var isBoundaryTrigram = function (tg) { return tg.indexOf('^') !== -1 || tg.indexOf('$') !== -1; };
+
   function rarestOf(set, df) {
     // A trigram absent from df has zero postings anywhere in the corpus
     // (nothing it could match) -- drop it before fetching, not after: no
     // file exists for it, so keeping it in would just be a wasted request.
     var withDf = set.filter(function (tg) { return df[tg] != null; });
-    if (withDf.length <= MAX_TRIS_PER_SET) return withDf;
-    withDf.sort(function (a, b) { return df[a] - df[b]; });
-    return withDf.slice(0, MAX_TRIS_PER_SET);
+    var byRarity = function (a, b) { return df[a] - df[b]; };
+    var interior = withDf.filter(function (tg) { return !isBoundaryTrigram(tg); }).sort(byRarity);
+    var boundary = withDf.filter(isBoundaryTrigram).sort(byRarity);
+    // Interior trigrams get the full budget on their own -- they're what
+    // requiredCount/`need` actually run on. Boundary trigrams are fetched
+    // ON TOP, up to the same count, since a genuine start/end match is a
+    // real, cheap (rare-by-construction) bonus signal worth having when it
+    // exists, just never at the interior budget's expense.
+    return interior.slice(0, MAX_TRIS_PER_SET).concat(boundary.slice(0, MAX_TRIS_PER_SET));
   }
 
   // Root/verse schemas vs. commentary schemas vs. genuinely ambiguous

@@ -249,6 +249,26 @@ window.dgeRestoreLastVerse = dgeRestoreLastVerse;
 // or filtering the text.
 async function loadShloka(id) {
   if (!stotraData) return;
+  // `.shloka-text`'s onclick calls this on EVERY tap inside it, including a
+  // tap that only meant to select a WORD for the Genie (selection-modes.js's
+  // 'word' tap-mode) -- re-tapping within the shloka that is ALREADY active
+  // used to still run the full renderList() rebuild + a smooth scrollIntoView
+  // every single time, even though nothing about which shloka is active
+  // actually changed. Reported live and reproduced with Playwright: on a
+  // real device, a 2nd/3rd word-tap in quick succession landed while that
+  // smooth-scroll animation (or the DOM the previous rebuild just replaced)
+  // was still settling, so selection-modes.js's captured tap coordinates
+  // (needed to re-locate the tapped word via document.elementFromPoint after
+  // its own deferred setTimeout(0) -- see that file's own comment) resolved
+  // to the surrounding .shloka-text container instead of the .dge-word span,
+  // silently failing to create a selection at all -- read by ai.js's
+  // selectionchange handler as "selection cleared," closing the Genie sheet
+  // it had just opened. Skipping the rebuild+scroll when `id` is already
+  // `activeId` removes the instability at its source for the overwhelmingly
+  // common case (selecting a second word, or the same word again, within the
+  // verse already on screen) without touching what a genuine chapter/verse
+  // SWITCH does.
+  const alreadyActive = activeId === id;
 
   activeId = id;
   contextShlokaId = id;
@@ -259,10 +279,12 @@ async function loadShloka(id) {
   if (typeof dgeLogReadingHistory === 'function') dgeLogReadingHistory(id);
 
   updateRepeatDisplay();
-  if (typeof renderList === 'function') renderList();
+  if (!alreadyActive) {
+    if (typeof renderList === 'function') renderList();
 
-  const ac = document.getElementById(`shloka-${id}`);
-  if (ac) ac.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const ac = document.getElementById(`shloka-${id}`);
+    if (ac) ac.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   const total = stotraData.metadata.totalShlokas || Object.keys(stotraData.shlokas).length;
   const trackLabel = document.getElementById('trackLabel');

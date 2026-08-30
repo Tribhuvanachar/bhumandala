@@ -19,7 +19,7 @@
   // window.DGE_SEARCH_INDEX from appConfig; this constant is the same URL, so
   // a page that does not load config.js still finds it. Set the variable to
   // 'search_index' to read a local build instead.
-  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@71b7c27bbda6060e3706ab2bd6ca57d72c91877b';
+  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@8d0083d774b0429f991def26bbadd0f1fef69ea2';
   var INDEX_BASE = window.DGE_SEARCH_INDEX || CDN_INDEX;
   var idxPromise = null, debounce = null;
   var currentScheme = 'auto'; // set by the scheme popup, read by queryOpts()
@@ -33,7 +33,7 @@
   // lastQueryDeva is the SAME query converted to Devanagari (see
   // queryToDevanagari() below) rather than folded to SLP1 -- computed once
   // per search, read by applyFilters()'s "Exact spelling only" toggle.
-  var lastHits = null, lastQuery = '', lastQueryDeva = '';
+  var lastHits = null, lastQuery = '', lastQueryDeva = '', lastSearchElapsedMs = null;
   // "Exact spelling only" is a reader preference, not a per-search result --
   // persisted the same way as the app's other standing preferences (theme,
   // script, selection mode: dge_vyakarana_dark, dge_lang_pref,
@@ -176,6 +176,12 @@
       // cold-cache query has left.
       '.dge-gs-progress{height:3px;margin:0 14px 10px;background:var(--card-border,rgba(0,0,0,.12));border-radius:2px;overflow:hidden}',
       '.dge-gs-progress-bar{display:block;height:100%;width:0%;background:var(--accent-red,#7a3b1d);transition:width .15s ease}',
+      // Real elapsed seconds, ticking while a query runs (startElapsedTimer())
+      // and a one-line final report once it lands (elapsedNoteHtml()) --
+      // project-lead ask: "N of M" alone doesn't say how many actual SECONDS
+      // this is taking. Tabular-nums so the width doesn't jitter as the digits change.
+      '.dge-gs-elapsed{font-variant-numeric:tabular-nums;opacity:.7}',
+      '.dge-gs-elapsed-note{padding-top:10px;font-size:12px;opacity:.55}',
       '.dge-gs-filterbar{padding:8px 12px;border-bottom:1px solid var(--card-border,rgba(0,0,0,.12));display:flex;flex-direction:column;gap:6px;}',
       '.dge-gs-frow{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}',
       '.dge-gs-flabel{font-size:10.5px;opacity:.55;text-transform:uppercase;letter-spacing:.4px;flex:0 0 100%;margin-top:2px;}',
@@ -395,10 +401,39 @@
   }
   function close() { var o = document.getElementById('dge-gs-overlay'); if (o) o.classList.remove('open'); }
 
+  // Detects which of the OTHER Brahmic scripts this app already offers as a
+  // reading script (config.js's SCRIPT_OPTIONS -- Kannada/Telugu/Tamil/
+  // Malayalam/Bengali/Odia) a query is written in, by Unicode block, the
+  // same way the pre-existing Devanagari check above does. Project-lead
+  // ask: a reader should be able to type a query in ANY of those scripts
+  // (or English capitals/diacritics/plain SLP1) and "auto" should just work,
+  // not silently mis-guess it as Roman IAST/SLP1 (which garbled anything
+  // typed in an actual Indic script other than Devanagari -- confirmed live,
+  // this used to hand Telugu/Tamil input straight to the SLP1 folder).
+  // Sanscript.js already has real conversion tables for every one of these
+  // (transliteration.js already round-trips through them for the reading
+  // script itself) -- this only adds the DETECTION queryOpts()/
+  // queryToDevanagari() were missing for a query, not a new engine.
+  var BRAHMIC_SCRIPT_RANGES = [
+    ['bengali', /[ঀ-৿]/],
+    ['oriya', /[଀-୿]/],
+    ['tamil', /[஀-௿]/],
+    ['telugu', /[ఀ-౿]/],
+    ['kannada', /[ಀ-೿]/],
+    ['malayalam', /[ഀ-ൿ]/]
+  ];
+  function detectBrahmicScript(input) {
+    for (var i = 0; i < BRAHMIC_SCRIPT_RANGES.length; i++) {
+      if (BRAHMIC_SCRIPT_RANGES[i][1].test(input)) return BRAHMIC_SCRIPT_RANGES[i][0];
+    }
+    return null;
+  }
+
   function queryOpts(input) {
     if (/[ऀ-ॿ]/.test(input)) return { scheme: 'devanagari' };
     var scheme = currentScheme;
-    if (scheme === 'auto') scheme = /[āīūṛṝḷṁṃḥśṣṅñṭḍṇ]/i.test(input) ? 'iast' : 'slp1';
+    var detected = detectBrahmicScript(input);
+    if (scheme === 'auto') scheme = detected || (/[āīūṛṝḷṁṃḥśṣṅñṭḍṇ]/i.test(input) ? 'iast' : 'slp1');
     if (scheme === 'slp1' || scheme === 'devanagari') return { scheme: scheme };
     try { if (window.Sanscript) return { slp1: window.Sanscript.t(input, scheme, 'slp1') }; } catch (e) {}
     return { scheme: 'slp1' };
@@ -423,7 +458,8 @@
   function queryToDevanagari(input) {
     if (/[ऀ-ॿ]/.test(input)) return input.trim();
     var scheme = currentScheme;
-    if (scheme === 'auto') scheme = /[āīūṛṝḷṁṃḥśṣṅñṭḍṇ]/i.test(input) ? 'iast' : 'slp1';
+    var detected = detectBrahmicScript(input);
+    if (scheme === 'auto') scheme = detected || (/[āīūṛṝḷṁṃḥśṣṅñṭḍṇ]/i.test(input) ? 'iast' : 'slp1');
     try { if (window.Sanscript) return window.Sanscript.t(input, scheme, 'devanagari').trim(); } catch (e) {}
     return input.trim();
   }
@@ -495,18 +531,45 @@
   // "Searching..." line below is the fix; render()'s own "No matches."
   // already covers the empty-result end of this, so only the WAITING gap
   // was silent.
+  // Real elapsed time, not just a step counter -- the project lead's explicit
+  // complaint was that "N of M" alone doesn't say how many actual SECONDS a
+  // cold-cache query (10+, see this function's own header comment) is
+  // taking, which reads as stalled rather than slow. Ticks the visible label
+  // independently of onProgress's own updates (which only fire when a fetch
+  // batch settles, sometimes seconds apart) so the clock itself never looks
+  // frozen. One live timer at a time -- clearElapsedTimer() is called before
+  // starting a new one and on every terminal state (success or failure) so a
+  // stale interval from a replaced query can't keep ticking into a label
+  // that no longer belongs to it.
+  var elapsedTimer = null;
+  function clearElapsedTimer() { if (elapsedTimer) { clearInterval(elapsedTimer); elapsedTimer = null; } }
+  function startElapsedTimer(results) {
+    clearElapsedTimer();
+    var startedAt = Date.now();
+    elapsedTimer = setInterval(function () {
+      var el = results.querySelector('.dge-gs-elapsed');
+      if (!el) { clearElapsedTimer(); return; }
+      el.textContent = ((Date.now() - startedAt) / 1000).toFixed(1) + 's';
+    }, 100);
+    return startedAt;
+  }
+
   function onType(e) {
     var q = e.target.value.trim();
     clearTimeout(debounce);
+    clearElapsedTimer();
     var results = document.getElementById('dge-gs-results');
     if (!q) { results.innerHTML = '<div class="dge-gs-hint">Type a word or phrase in any script.</div>'; return; }
     results.innerHTML = '<div class="dge-gs-hint"><span class="dge-gs-spinner" aria-hidden="true"></span>' +
-      '<span class="dge-gs-searching-label">Searching…</span></div>' +
+      '<span class="dge-gs-searching-label">Searching…</span>' +
+      ' <span class="dge-gs-elapsed">0.0s</span></div>' +
       '<div class="dge-gs-progress"><i class="dge-gs-progress-bar"></i></div>';
+    startElapsedTimer(results);
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
       var section = currentSection || undefined;
       lastQueryDeva = queryToDevanagari(q);
+      var searchStartedAt = startElapsedTimer(results); // real search work starts now, not at the first keystroke
       // Two real stages, in order: fetching the rarest trigrams' postings
       // buckets, then opening the candidate granthas' unit shards -- see
       // dge-search.js's search()/allWithProgress(). Split the bar 50/50
@@ -530,8 +593,13 @@
         }
       };
       p.then(function (idx) { return idx.search(q, Object.assign({ limit: 30, section: section, onProgress: onProgress }, queryOpts(q))); })
-       .then(function (hits) { render(hits, q); })
+       .then(function (hits) {
+         clearElapsedTimer();
+         lastSearchElapsedMs = Date.now() - searchStartedAt;
+         render(hits, q);
+       })
        .catch(function () {
+         clearElapsedTimer();
          // ensureIndex()'s own catch already writes a specific "could not
          // load the index" message and only fires on that one failure --
          // this covers every OTHER way the chain can reject (a posting or
@@ -602,6 +670,18 @@
   // search result, or a filtered slice of it) -- split out of render() so
   // the filter chips below can re-slice lastHits and redraw without a new
   // search.
+  // "Found in 3.2s" / "Searched in 8.7s" -- shown once, on the render that
+  // just completed a real search (not on a filter-chip re-render of the
+  // same lastHits, which doesn't re-search and has nothing new to time).
+  // Reset to null right after use so it can't get attached to a LATER
+  // re-render of the same result set.
+  function elapsedNoteHtml(zeroHits) {
+    if (lastSearchElapsedMs == null) return '';
+    var s = (lastSearchElapsedMs / 1000).toFixed(1) + 's';
+    lastSearchElapsedMs = null;
+    return '<div class="dge-gs-hint dge-gs-elapsed-note">' + (zeroHits ? 'Searched' : 'Found') + ' in ' + s + '.</div>';
+  }
+
   function renderRows(hits, q, emptyMessage) {
     var box = document.getElementById('dge-gs-results');
     if (!hits || !hits.length) {
@@ -613,20 +693,26 @@
       if (lastHits && lastHits.partial && !emptyMessage) {
         msg += ' The search could not sweep the whole library for this — a single long word matches too much of it faintly. Adding one more word from the same line usually finds it.';
       }
-      box.innerHTML = '<div class="dge-gs-hint">' + msg + '</div>';
+      box.innerHTML = elapsedNoteHtml(true) + '<div class="dge-gs-hint">' + msg + '</div>';
       return;
     }
     // A common word matches most of the corpus; the search stops after the
     // best few dozen granthas rather than opening all of them. Say so, so a
     // reader does not take a capped list for the whole of it.
-    var note = lastHits && lastHits.partial
+    var note = elapsedNoteHtml(false) + (lastHits && lastHits.partial
       ? '<div class="dge-gs-hint">Best matches — the search stopped after the' +
         ' strongest few dozen texts rather than opening the whole library.' +
         ' A longer phrase narrows it.</div>'
-      : '';
+      : '');
     box.innerHTML = note + hits.map(function (h) {
+      // h.unit is a raw source-importer id (unit_0370, DV_5752, a verse
+      // number...) -- real navigation state (kept in data-unit, below, for
+      // go()/jumpShloka), but not something a reader needs to see, and the
+      // project lead has separately asked that the app's own internal
+      // references not surface the original source's own numbering
+      // verbatim in the UI. No longer shown in the row itself.
       return '<div class="dge-gs-row" data-slug="' + esc(h.grantha) + '" data-unit="' + esc(h.unit) + '">' +
-        '<div class="dge-gs-meta"><b>' + esc(h.title) + '</b><span>' + esc(h.unit) + '</span><span>' + esc(h.category) + '</span><span>' + h.score.toFixed(2) + '</span></div>' +
+        '<div class="dge-gs-meta"><b>' + esc(h.title) + '</b><span>' + esc(h.category) + '</span><span>' + h.score.toFixed(2) + '</span></div>' +
         taxonomyCrumbsHtml(h.grantha, h.title) +
         '<div class="dge-gs-snip">' + highlightSnippet(esc(centerSnippet(h.snippet, q)), q) + '</div></div>';
     }).join('');
