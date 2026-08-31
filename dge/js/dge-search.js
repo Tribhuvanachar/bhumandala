@@ -17,6 +17,22 @@
                                            : root.DGENorm;
 
   var isNode = (typeof window === 'undefined');
+
+  // Sentinel distinguishing "the request FAILED" (network drop, server
+  // error, truncated body) from "the file legitimately does not exist"
+  // (404 -- a grantha with no postings for a trigram, a bucket with no
+  // file for a section: normal, and safe to remember). The two used to
+  // collapse into one null, and the null got CACHED -- so one flaky
+  // mobile request didn't just degrade THAT query, it silently poisoned
+  // every later query in the session that touched the same file (reported
+  // live, 31 Aug 2026: the same word searched twice minutes apart in two
+  // scripts returned different result sets, because the first run's
+  // dropped section fetches were cached as "nothing there"). A FETCH_ERR
+  // result is never cached, so a retry actually refetches; the degraded
+  // flag it propagates lets the UI say so instead of presenting a
+  // partial sweep as the whole truth.
+  var FETCH_ERR = { fetchError: true };
+
   var fetchJSON;
   if (isNode) {
     var fs = require('fs'), path = require('path');
@@ -45,27 +61,32 @@
       // reader is actively waiting on, never a background/idle one (that
       // path is prefetchManifest() in global-search.js, a separate call).
       //
-      // 24 Aug 2026: caught and resolved to null here, not just a non-ok
-      // response. A single 404 already resolved to null (by design -- a
-      // grantha with no postings for a given trigram is normal, not an
-      // error), but a genuine network failure (a real risk against a
-      // third-party CDN under real mobile conditions) used to REJECT this
-      // promise instead -- and since every caller in this file fetches many
-      // of these in one Promise.all (up to ~33 postings, up to 120 shards),
-      // one flaky request was taking down the ENTIRE search with it, not
-      // just the piece that failed. Treating a network failure the same as
-      // "nothing here" lets the rest of an otherwise-successful query
-      // degrade gracefully instead of erroring outright.
+      // 24 Aug 2026: caught and resolved here, not just a non-ok response
+      // -- a genuine network failure (a real risk against a third-party
+      // CDN under real mobile conditions) used to REJECT this promise, and
+      // since every caller in this file fetches many of these in one
+      // Promise.all (up to ~33 postings, up to 120 shards), one flaky
+      // request was taking down the ENTIRE search with it, not just the
+      // piece that failed.
+      // 31 Aug 2026: but "resolve to null like a 404" went too far the
+      // other way -- see FETCH_ERR above. Now: 404 -> null (a real fact
+      // about the index, cacheable), anything else -> FETCH_ERR (a fact
+      // about THIS request only, never cacheable). Either way the rest of
+      // an otherwise-successful fan-out still degrades gracefully instead
+      // of erroring outright.
       return fetch(url, { priority: 'high' })
-        .then(function (r) { return r.ok ? r.json() : null; })
-        .catch(function () { return null; });
+        .then(function (r) {
+          if (r.ok) return r.json().catch(function () { return FETCH_ERR; });
+          return r.status === 404 ? null : FETCH_ERR;
+        })
+        .catch(function () { return FETCH_ERR; });
     };
   }
 
   // Plain-text twin of fetchJSON, for the vocab/<i>.txt chunks (newline-
   // separated word list, deliberately not JSON -- see build_search_index.py's
   // vocab-writing comment). Same two branches, same URL-encoding rule, same
-  // null-on-failure contract.
+  // null-on-404 / FETCH_ERR-on-failure contract.
   var fetchText;
   if (isNode) {
     fetchText = function (base, rel) {
@@ -77,8 +98,11 @@
     fetchText = function (base, rel) {
       var url = base + '/' + rel.split('/').map(encodeURIComponent).join('/');
       return fetch(url)
-        .then(function (r) { return r.ok ? r.text() : null; })
-        .catch(function () { return null; });
+        .then(function (r) {
+          if (r.ok) return r.text().catch(function () { return FETCH_ERR; });
+          return r.status === 404 ? null : FETCH_ERR;
+        })
+        .catch(function () { return FETCH_ERR; });
     };
   }
 
@@ -229,8 +253,12 @@
 
   // One file per (bucket, section): {word: [[gi,ui],...], ...}. Cached per
   // (bucket, scope) the same way _loadPosting caches per (trigram, scope);
-  // a failed/absent section file resolves to null via fetchJSON and is
-  // simply an empty contribution, never fatal to the rest of the fan-out.
+  // an absent section file (404 -> null) is simply an empty contribution,
+  // never fatal to the rest of the fan-out. A FAILED section fetch
+  // (FETCH_ERR) also just goes missing from this run's maps -- but it
+  // marks the result `degraded` and keeps it OUT of the cache, so the
+  // next query over the same bucket refetches instead of inheriting this
+  // run's hole for the whole session (see FETCH_ERR's own comment).
   Index.prototype._loadWordBucket = function (bucket, scope) {
     var self = this;
     var key = bucket + '::' + (scope || '*');
@@ -238,15 +266,27 @@
     var p;
     if (scope) {
       p = fetchJSON(this.base, 'words/' + bucket + '/' + scope + '.json')
-        .then(function (d) { return d ? [d] : []; });
+        .then(function (d) {
+          if (d === FETCH_ERR) { var m = []; m.degraded = true; return m; }
+          return d ? [d] : [];
+        });
     } else {
       p = Promise.all(this.sections.map(function (sec) {
         return fetchJSON(self.base, 'words/' + bucket + '/' + sec + '.json');
       })).then(function (parts) {
-        return parts.filter(function (d) { return !!d; });
+        var maps = [], degraded = false;
+        parts.forEach(function (d) {
+          if (d === FETCH_ERR) degraded = true;
+          else if (d) maps.push(d);
+        });
+        if (degraded) maps.degraded = true;
+        return maps;
       });
     }
-    return p.then(function (maps) { self._wordBucketCache[key] = maps; return maps; });
+    return p.then(function (maps) {
+      if (!maps.degraded) self._wordBucketCache[key] = maps;
+      return maps;
+    });
   };
 
   // Exact word search: the direct answer to "which units contain this
@@ -297,6 +337,11 @@
       bucketNames.map(function (b) { return self._loadWordBucket(b, section); }),
       onProgress && function (done, total) { onProgress('postings', done, total); }
     ).then(function (bucketMapsPerName) {
+      // Any bucket whose section fan-out lost a request marks this whole
+      // run degraded -- the caller must not present (or cache-compare)
+      // this result as the index's full answer. See FETCH_ERR above.
+      var degraded = false;
+      bucketMapsPerName.forEach(function (m) { if (m && m.degraded) degraded = true; });
       // unitHits: "gi:ui" -> { words: {queryWord: 'exact'|'prefix'}, }
       var unitHits = {};
       qwords.forEach(function (w, wi) {
@@ -357,7 +402,8 @@
       return allWithProgress(
         Object.keys(giSet).map(function (gi) { return self._loadShard(+gi); }),
         onProgress && function (done, total) { onProgress('shards', done, total); }
-      ).then(function () {
+      ).then(function (shardVals) {
+        shardVals.forEach(function (v) { if (v && v.degraded) degraded = true; });
         var hits = [];
         picked.forEach(function (s) {
           var parts = s.key.split(':'), gi = +parts[0], ui = +parts[1];
@@ -389,6 +435,10 @@
         // occurrence the fuzzy trigram path's. partial=false: what was
         // swept, was swept completely.
         out.partial = false;
+        // ...UNLESS a fetch actually failed mid-sweep. degraded says "this
+        // run's answer is missing pieces through no fault of the query" --
+        // the UI retries / says so instead of treating it as truth.
+        out.degraded = degraded;
         return out;
       });
     });
@@ -411,7 +461,16 @@
   Index.prototype._loadVocabChunk = function (i) {
     if (!this._vocabCache) this._vocabCache = {};
     if (this._vocabCache[i]) return this._vocabCache[i];
-    return (this._vocabCache[i] = fetchText(this.base, 'vocab/' + i + '.txt'));
+    var self = this;
+    // Cache the in-flight promise, but evict it if the fetch FAILED
+    // (FETCH_ERR) so a later compound scan retries the chunk instead of
+    // permanently treating a tenth of the vocabulary as empty.
+    var p = fetchText(this.base, 'vocab/' + i + '.txt').then(function (txt) {
+      if (txt === FETCH_ERR) delete self._vocabCache[i];
+      return txt;
+    });
+    this._vocabCache[i] = p;
+    return p;
   };
   // True once every chunk has been fetched at least once this session --
   // the UI uses this to decide whether a compound scan is "free" (all in
@@ -454,10 +513,16 @@
     var chunkIdx = [];
     for (var i = 0; i < nChunks; i++) chunkIdx.push(i);
     if (!this._vocabResolved) this._vocabResolved = {};
+    var degraded = false;
     return allWithProgress(
       chunkIdx.map(function (i) {
         return self._loadVocabChunk(i).then(function (txt) {
-          self._vocabResolved[i] = true; return txt;
+          // Only a chunk that actually ARRIVED counts as resolved --
+          // vocabLoaded() drives the "scan is free now" auto-run, and a
+          // dropped chunk must not be remembered as fetched.
+          if (typeof txt === 'string') self._vocabResolved[i] = true;
+          else if (txt === FETCH_ERR) degraded = true;
+          return txt;
         });
       }),
       onProgress && function (done, total) { onProgress('vocab', done, total); }
@@ -470,7 +535,7 @@
       // match sites, never splitting 2M lines up front.
       var matched = [];
       chunks.forEach(function (txt) {
-        if (!txt) return;
+        if (typeof txt !== 'string' || !txt) return;
         var at = txt.indexOf(token);
         while (at !== -1) {
           var s = txt.lastIndexOf('\n', at) + 1;
@@ -501,6 +566,7 @@
         bucketNames.map(function (b) { return self._loadWordBucket(b, section); }),
         onProgress && function (done, total) { onProgress('postings', done, total); }
       ).then(function (maps) {
+        maps.forEach(function (m) { if (m && m.degraded) degraded = true; });
         var unitWord = {}; // "gi:ui" -> shortest matched compound containing it
         bucketNames.forEach(function (b, bi) {
           (maps[bi] || []).forEach(function (wordMap) {
@@ -523,7 +589,8 @@
         return allWithProgress(
           Object.keys(giSet).map(function (gi) { return self._loadShard(+gi); }),
           onProgress && function (done, total) { onProgress('shards', done, total); }
-        ).then(function () {
+        ).then(function (shardVals) {
+          shardVals.forEach(function (v) { if (v && v.degraded) degraded = true; });
           var hits = [];
           picked.forEach(function (key) {
             var parts = key.split(':'), gi = +parts[0], ui = +parts[1];
@@ -541,6 +608,7 @@
           hits.forEach(function (h) { delete h._pkLen; });
           var out = hits.slice(0, limit);
           out.partial = false;
+          out.degraded = degraded;
           return out;
         });
       });
@@ -573,28 +641,44 @@
     var p;
     if (scope) {
       p = fetchJSON(this.base, 'postings/' + safe + '/' + scope + '.json')
-        .then(function (d) { return d || []; });
+        .then(function (d) {
+          if (d === FETCH_ERR) { var rows = []; rows.degraded = true; return rows; }
+          return d || [];
+        });
     } else {
       p = Promise.all(this.sections.map(function (sec) {
         return fetchJSON(self.base, 'postings/' + safe + '/' + sec + '.json');
       })).then(function (parts) {
-        var out = [];
-        parts.forEach(function (d) { if (d) out.push.apply(out, d); });
+        var out = [], degraded = false;
+        parts.forEach(function (d) {
+          if (d === FETCH_ERR) degraded = true;
+          else if (d) out.push.apply(out, d);
+        });
+        if (degraded) out.degraded = true;
         return out;
       });
     }
-    return p.then(function (rows) { self._postingCache[key] = rows; return rows; });
+    // Same never-cache-a-failure rule as _loadWordBucket: a degraded union
+    // is this run's best effort, not a session-wide fact about the index.
+    return p.then(function (rows) {
+      if (!rows.degraded) self._postingCache[key] = rows;
+      return rows;
+    });
   };
 
-  // `d || []` already covered "no shard file" (fetchJSON resolves null on a
-  // 404); since fetchJSON also now resolves null on an outright network
-  // failure rather than rejecting, this same line transparently covers that
-  // case too -- one grantha whose shard request drops never takes the rest
-  // of the batch (Promise.all in search(), below) down with it.
+  // `d || []` covers "no shard file" (fetchJSON resolves null on a 404).
+  // A DROPPED shard request (FETCH_ERR) resolves to an empty, `degraded`-
+  // marked array that is deliberately NOT cached -- one grantha whose
+  // request drops still never takes the rest of the batch (Promise.all in
+  // search(), below) down with it, its candidates are simply skipped by
+  // the scoring pass's existing no-cached-shard guard, and the next query
+  // that needs this grantha refetches it instead of finding a poisoned
+  // "empty shard" in the session cache.
   Index.prototype._loadShard = function (gi) {
     var self = this, g = this.granthas[gi];
     if (this._shardCache[gi]) return Promise.resolve(this._shardCache[gi]);
     return fetchJSON(this.base, g.shard).then(function (d) {
+      if (d === FETCH_ERR) { var empty = []; empty.degraded = true; return empty; }
       self._shardCache[gi] = d || []; return self._shardCache[gi];
     });
   };
@@ -673,11 +757,24 @@
     fetchedSets.forEach(function (set) { set.forEach(function (tg) { allFetch[tg] = 1; }); });
     var postingKey = function (tg) { return tg + '::' + (section || '*'); };
     var onProgress = opts.onProgress;
+    var fetchTgs = Object.keys(allFetch);
     return allWithProgress(
-      Object.keys(allFetch).map(function (tg) { return self._loadPosting(tg, section); }),
+      fetchTgs.map(function (tg) { return self._loadPosting(tg, section); }),
       onProgress && function (done, total) { onProgress('postings', done, total); }
     )
-      .then(function () {
+      .then(function (postingRowsList) {
+        // Read THIS run's resolved rows, not the session cache -- a
+        // degraded posting union (a section request dropped mid-fan-out)
+        // is deliberately never cached (see _loadPosting), but the rows
+        // that DID arrive are still this run's best effort and should
+        // still count. The degraded flag rides along to the caller.
+        var degradedPostings = false;
+        var postingsNow = {};
+        fetchTgs.forEach(function (tg, ti) {
+          var rows = postingRowsList[ti];
+          if (rows && rows.degraded) degradedPostings = true;
+          postingsNow[postingKey(tg)] = rows;
+        });
         // Rank candidates by how many of a (rarest-trimmed) trigram set's
         // members they share, then stop. Opening a grantha's unit shard is a
         // network round trip, and a common word shares its trigrams with
@@ -715,7 +812,7 @@
           });
           var counts = {}, reqCounts = {};
           set.forEach(function (tg) {
-            var post = self._postingCache[postingKey(tg)]; if (!post) return;
+            var post = postingsNow[postingKey(tg)]; if (!post) return;
             var isBoundary = !!boundary[tg];
             for (var k = 0; k < post.length; k++) {
               var key = post[k][0] + ':' + post[k][1];
@@ -800,8 +897,14 @@
         // here, before a single shard fetch fires, so the progress readout
         // can jump straight to an honest "0 of 7", not stay silent then
         // jump to "done".
+        var degradedShards = false;
         var shardsSettled = allWithProgress(
-          Object.keys(giSet).map(function (gi) { return self._loadShard(+gi); }),
+          Object.keys(giSet).map(function (gi) {
+            return self._loadShard(+gi).then(function (v) {
+              if (v && v.degraded) degradedShards = true;
+              return v;
+            });
+          }),
           onProgress && function (done, total) { onProgress('shards', done, total); }
         );
         var timedOut = false;
@@ -813,7 +916,10 @@
         // warms self._shardCache for whoever asks next -- this race only
         // decides how long THIS query blocks on it.
         return Promise.race([shardsSettled, deadline])
-          .then(function () { return { cand: cand, keys: picked, skipped: skipped || timedOut }; });
+          .then(function () {
+            return { cand: cand, keys: picked, skipped: skipped || timedOut,
+                     degraded: degradedPostings || degradedShards };
+          });
       })
       .then(function (bag) {
         // 2) score each candidate unit with the fold + edit distance
@@ -842,6 +948,7 @@
         // is judged independently), so the UI should say so instead of a
         // bare "No matches."
         out.partial = !!bag.skipped;
+        out.degraded = !!bag.degraded;
         return out;
       });
   };
@@ -919,7 +1026,10 @@
   var API = {
     create: function (base) {
       return fetchJSON(base, 'manifest.json').then(function (m) {
-        if (!m) throw new Error('manifest.json not found at ' + base);
+        // FETCH_ERR (a failed request) must throw here just like a 404 --
+        // it is an object, so a bare truthiness check would have handed
+        // the sentinel to new Index() as if it were a real manifest.
+        if (!m || m === FETCH_ERR) throw new Error('manifest.json could not be loaded from ' + base);
         return new Index(base, m);
       });
     }

@@ -784,9 +784,11 @@ Key decisions (each measured, see the 30 Aug 2026 review):
   every eligible (single-word, ≥4-char) query after that. Capped:
   400 matched words (shortest first), 40 bucket fetches.
 - **Routing** (global-search.js): "Exact spelling only" ON (the default)
-  uses `searchExact()`; empty exact results fall back to the fuzzy path, so
-  a stale index without `words/` degrades gracefully. OFF keeps the trigram
-  path unchanged.
+  uses `searchExact()`. An empty exact answer falls back to the fuzzy path
+  ONLY when the published index predates the `words/` tree entirely
+  (manifest carries neither `wordBucketDeepen` nor `vocabChunks`) — never
+  as a silent substitute against a current index, where a clean empty IS
+  the exact answer. OFF keeps the trigram path unchanged.
 - **Exactness contract**: retrieval is fold-exact (pkey), display is
   orthographic-exact — NFC + zero-width strip + anusvara↔class-nasal
   equivalence (कान्ताय ↔ कांताय are the same word; hiding one is a false
@@ -797,3 +799,40 @@ Deferred follow-ups are tracked in PENDING.md (trigram-hit blending under
 sparse exact results, variant-spelling labeling, mega-shard splitting,
 mojibake cleanup, the trigram tree's own pre-existing case-collision
 hazard).
+
+## Network-failure honesty (31 Aug 2026)
+
+Reported live: the same word searched minutes apart (Roman vs Devanagari)
+returned different result sets, and results sometimes "changed within a few
+seconds" of rendering. Three independent client bugs, all fixed in
+dge-search.js / global-search.js (no index change needed):
+
+- **FETCH_ERR sentinel** (dge-search.js): a 404 ("this file legitimately
+  does not exist") and a network/server failure used to collapse into one
+  cached null. Now 404 → null (a cacheable fact about the index) while any
+  other failure → `FETCH_ERR`, which is NEVER cached — `_loadWordBucket`,
+  `_loadPosting`, `_loadShard`, and `_loadVocabChunk` all skip caching a
+  fan-out that lost a request, so a retry genuinely refetches instead of
+  replaying the first run's holes for the whole session. Every search API
+  (`search`, `searchExact`, `searchCompound`) sets `out.degraded` when any
+  underlying fetch failed.
+- **Honest degraded states** (global-search.js): empty + degraded exact
+  retries once internally, then renders "the connection hiccuped — this is
+  not a no-matches answer" with a Try-again button; degraded WITH results
+  renders them under a "some matches may be missing" note; the compound
+  scan's "no further matches" gains the same asterisk when its own sweep
+  lost fetches. `vocabLoaded()` only counts chunks that actually arrived.
+- **Stale-result guard** (global-search.js): a slow older query resolving
+  after a newer one already rendered (the shard phase alone can take 8s)
+  now stands down via the searchSeq counter instead of overwriting the
+  newer results.
+- **Ghost-click close guard** (global-search.js): the overlay's backdrop
+  and ✕ close handlers ignore clicks within `GHOST_CLICK_GUARD_MS` (600ms,
+  raised from 400) of open() — the same-gesture trailing click that opened
+  search from the Genie sheet was landing on the just-appeared backdrop and
+  closing it instantly. Esc stays unguarded (keyboard, no ghost).
+
+Regression coverage: `node dge/js/test-search-resilience.js` (sentinel +
+no-cache + degraded contract, headless) and the Playwright suite
+`test_reliability_fixes.py` (scratchpad; fault-injects aborted index
+requests through page.route with `service_workers="block"`).

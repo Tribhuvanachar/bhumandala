@@ -239,10 +239,32 @@
         '<div class="dge-gs-filterbar" id="dge-gs-filterbar" style="display:none;"></div>' +
         '<div class="dge-gs-results" id="dge-gs-results"><div class="dge-gs-hint">Type a word or phrase in any script. Matching is sandhi/spelling tolerant.</div></div>' +
       '</div>';
-    ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+    // Backdrop tap-to-close -- guarded by the same ghost-click window as
+    // renderRows()'s row.onclick (see open()'s comment on lastOpenAt).
+    // Reported live, 31 Aug 2026: opening search from the Genie sheet's
+    // "Search Library" action made the dialog "open and close in a
+    // fraction of a second" -- the triggering tap's trailing compatibility
+    // click landed on the just-appeared BACKDROP (the result rows it used
+    // to land on are guarded; the backdrop wasn't) and closed the overlay
+    // instantly, while the search kept running invisibly in the
+    // background (which is why reopening from the Genie menu showed
+    // results "still being fetched"). A reader deliberately closing a
+    // dialog they themselves JUST opened within this window isn't a real
+    // interaction; Esc (keyboard, no ghost) stays unguarded below.
+    ov.addEventListener('click', function (e) {
+      if (e.target !== ov) return;
+      if (Date.now() - lastOpenAt < GHOST_CLICK_GUARD_MS) return;
+      close();
+    });
     document.body.appendChild(ov);
 
-    document.getElementById('dge-gs-x').addEventListener('click', close);
+    // Same guard on the ✕ button: it renders at a fixed top-right spot the
+    // opening tap can also coincide with (e.g. the Genie sheet's own close
+    // control sat there a frame earlier).
+    document.getElementById('dge-gs-x').addEventListener('click', function () {
+      if (Date.now() - lastOpenAt < GHOST_CLICK_GUARD_MS) return;
+      close();
+    });
     document.getElementById('dge-gs-input').addEventListener('input', onType);
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }
@@ -383,7 +405,13 @@
   // click without adding any perceptible delay to a reader's own,
   // deliberate later tap.
   var lastOpenAt = 0;
-  var GHOST_CLICK_GUARD_MS = 400;
+  // 600, not the original 400: on a busy phone the overlay build + index
+  // warm-up can delay the same gesture's trailing click past 400ms of
+  // lastOpenAt (the backdrop-close symptom still reproduced "once or
+  // twice" at 400). Nothing a reader deliberately taps exists that early
+  // -- results take longer than this to even render -- so the wider
+  // window costs no real interaction.
+  var GHOST_CLICK_GUARD_MS = 600;
 
   function open(query) {
     build();
@@ -589,6 +617,7 @@
   var searchSeq = 0;                    // bumped per query; stale async work checks it
   var compoundState = null;             // null | 'offer' | 'running' | 'done'
   var compoundAdded = 0, compoundCtx = null;
+  var compoundDegraded = false;         // the scan itself lost fetches (see dge-search.js FETCH_ERR)
 
   function compoundEligible(qraw) {
     try {
@@ -618,7 +647,13 @@
     if (compoundState === 'done') {
       return '<div class="dge-gs-hint">' + (compoundAdded
         ? 'Included ' + compoundAdded + ' match' + (compoundAdded === 1 ? '' : 'es') + ' found inside compound words.'
-        : 'No further matches inside compound words.') + '</div>';
+        : 'No further matches inside compound words.')
+        // An honest asterisk when the scan itself lost fetches: "no
+        // further matches" would otherwise claim an exhaustive sweep the
+        // connection didn't actually allow.
+        + (compoundDegraded
+          ? ' ⚠ The connection hiccuped during the scan, so it may be incomplete — <button type="button" class="dge-gs-chip" onclick="window.dgeGsRetry()">search again</button> to redo it.'
+          : '') + '</div>';
     }
     return '';
   }
@@ -644,10 +679,13 @@
       var fresh = hits.filter(function (h) { return !seen[h.grantha + '#' + h.unit]; });
       compoundAdded = fresh.length;
       compoundState = 'done';
+      compoundDegraded = !!hits.degraded;
       if (fresh.length) {
         var partial = lastHits ? lastHits.partial : false;
+        var degraded = (lastHits ? lastHits.degraded : false) || hits.degraded;
         lastHits = (lastHits || []).concat(fresh);
         lastHits.partial = partial;
+        lastHits.degraded = degraded;
         buildFilterBar(lastHits);
       }
       applyFilters();
@@ -662,12 +700,22 @@
     p.then(function (idx) { runCompound(idx); });
   };
 
+  // Re-fires the current query in place -- wired to the "Try again"
+  // buttons the degraded-state notes render. Meaningful because
+  // dge-search.js never caches a FAILED fetch (see its FETCH_ERR): a
+  // retry genuinely refetches the pieces the connection dropped, rather
+  // than replaying the same holes out of the session cache.
+  window.dgeGsRetry = function () {
+    var inp = document.getElementById('dge-gs-input');
+    if (inp && inp.value.trim()) inp.dispatchEvent(new Event('input'));
+  };
+
   function onType(e) {
     var q = e.target.value.trim();
     clearTimeout(debounce);
     clearElapsedTimer();
     searchSeq++;
-    compoundState = null; compoundAdded = 0; compoundCtx = null;
+    compoundState = null; compoundAdded = 0; compoundCtx = null; compoundDegraded = false;
     var results = document.getElementById('dge-gs-results');
     if (!q) { results.innerHTML = '<div class="dge-gs-hint">Type a word or phrase in any script.</div>'; return; }
     results.innerHTML = '<div class="dge-gs-hint"><span class="dge-gs-spinner" aria-hidden="true"></span>' +
@@ -720,22 +768,72 @@
       // unscoped search never returns it" (its trigram fragments tie with
       // ~48k unrelated units; no budget reaches the real one). The trigram
       // fuzzy path stays for exact=OFF, typo-tolerance being its actual
-      // job. If the published index predates the words/ tree entirely,
-      // searchExact finds no bucket files and returns [] -- fall back to
-      // the fuzzy path rather than showing a false "no matches".
+      // job.
+      //
+      // An EMPTY exact answer is no longer silently handed to the fuzzy
+      // path (reported live, 31 Aug 2026: the same word searched in Roman
+      // and Devanagari minutes apart "showed different results" -- one
+      // run's word-index answer next to another run's fuzzy answer, the
+      // swap decided invisibly by whichever section fetch a flaky mobile
+      // connection happened to drop). Now:
+      //   - empty AND degraded (a fetch failed): retry once -- the failed
+      //     pieces were never cached (dge-search.js FETCH_ERR), so the
+      //     retry genuinely refetches; still degraded-empty after that
+      //     renders an honest "connection hiccuped, try again" note.
+      //   - empty and CLEAN: that IS the exact answer. Fuzzy only fills in
+      //     when the published index predates the words/ tree entirely
+      //     (no word buckets exist to consult), never as a silent
+      //     different-looking substitute.
       var useExact = filterState.exact;
       var mySeq = searchSeq;
+      var indexHasWords = function (idx) {
+        var m = (idx && idx.manifest) || {};
+        return !!(m.wordBucketDeepen || m.vocabChunks);
+      };
       p.then(function (idx) {
-         if (!useExact) return idx.search(q, searchOpts);
+         if (!useExact) {
+           return idx.search(q, searchOpts).then(function (hits) { hits._idx = idx; return hits; });
+         }
          return idx.searchExact(q, searchOpts).then(function (hits) {
-           if (hits.length) { hits._idx = idx; return hits; }
-           return idx.search(q, searchOpts);
+           if (!hits.length && hits.degraded && mySeq === searchSeq) {
+             return idx.searchExact(q, searchOpts);
+           }
+           return hits;
+         }).then(function (hits) {
+           if (!hits.length && !hits.degraded && !indexHasWords(idx)) {
+             return idx.search(q, searchOpts);
+           }
+           return hits;
          }).then(function (hits) { hits._idx = idx; return hits; });
        })
        .then(function (hits) {
+         // A search the reader has since replaced (typed on, switched
+         // script or scope) must NOT overwrite the newer query's results
+         // when it finally lands: with the shard phase capped at 8s, a
+         // slow older run can resolve SECONDS after the newer one already
+         // rendered -- reported live as "in span of few seconds it
+         // changes the results". The newer query bumped searchSeq, so
+         // this run just stands down.
+         if (mySeq !== searchSeq) return;
          clearElapsedTimer();
          lastSearchElapsedMs = Date.now() - searchStartedAt;
          var idx = hits._idx; delete hits._idx;
+         if (!hits.length && hits.degraded) {
+           // Nothing came back AND a fetch failed (even after the exact
+           // path's one retry): saying "no matches" here would be a lie
+           // about the corpus when the truth is about the connection.
+           lastSearchElapsedMs = null;
+           // The previous query's filter bar (and its counts) would sit
+           // above this note as if it still applied -- it doesn't.
+           var fb = document.getElementById('dge-gs-filterbar');
+           if (fb) fb.style.display = 'none';
+           var box = document.getElementById('dge-gs-results');
+           if (box) {
+             box.innerHTML = '<div class="dge-gs-hint">The connection hiccuped mid-search and parts of the index could not be fetched — this is not a "no matches" answer. ' +
+               '<button type="button" class="dge-gs-chip" onclick="window.dgeGsRetry()">Try again</button></div>';
+           }
+           return;
+         }
          render(hits, q);
          // Compound-interior extension: eligible single-word exact queries
          // continue into the vocabulary grep -- automatically when the word
@@ -841,6 +939,12 @@
       var msg = esc(emptyMessage || 'No matches.');
       if (lastHits && lastHits.partial && !emptyMessage) {
         msg += ' The search could not sweep the whole library for this — a single long word matches too much of it faintly. Adding one more word from the same line usually finds it.';
+      } else if (!emptyMessage && filterState.exact) {
+        // A clean empty EXACT answer is exhaustive for whole words and
+        // compound-initial forms (dge-search.js searchExact's partial=
+        // false contract) -- so instead of a bare "No matches." that
+        // reads like a shrug, say what would genuinely widen the net.
+        msg += ' The word does not occur with this exact spelling as a whole or compound-initial word. If the spelling here may differ (sandhi, a variant form, a typo), turn off "Exact spelling only" above to search with tolerance.';
       }
       box.innerHTML = elapsedNoteHtml(true) + '<div class="dge-gs-hint">' + msg + '</div>' + compoundFooterHtml();
       return;
@@ -848,11 +952,20 @@
     // A common word matches most of the corpus; the search stops after the
     // best few dozen granthas rather than opening all of them. Say so, so a
     // reader does not take a capped list for the whole of it.
-    var note = elapsedNoteHtml(false) + (lastHits && lastHits.partial
-      ? '<div class="dge-gs-hint">Best matches — the search stopped after the' +
-        ' strongest few dozen texts rather than opening the whole library.' +
-        ' A longer phrase narrows it.</div>'
-      : '');
+    var note = elapsedNoteHtml(false)
+      // A degraded run found real hits but KNOWS it lost fetches along
+      // the way -- present what arrived, but never as the full answer
+      // (the run-to-run inconsistency the project lead reported was
+      // exactly these silently-passed-off partial runs).
+      + (lastHits && lastHits.degraded
+        ? '<div class="dge-gs-hint">⚠ The connection hiccuped mid-search — some matches may be missing from this list. ' +
+          '<button type="button" class="dge-gs-chip" onclick="window.dgeGsRetry()">Search again</button></div>'
+        : '')
+      + (lastHits && lastHits.partial
+        ? '<div class="dge-gs-hint">Best matches — the search stopped after the' +
+          ' strongest few dozen texts rather than opening the whole library.' +
+          ' A longer phrase narrows it.</div>'
+        : '');
     box.innerHTML = note + hits.map(function (h) {
       // h.unit is a raw source-importer id (unit_0370, DV_5752, a verse
       // number...) -- real navigation state (kept in data-unit, below, for
@@ -1134,8 +1247,10 @@
     // across explicitly (pre-existing drop, found while wiring the
     // compound extension's own flag handling).
     var partial = (hits || []).partial;
+    var degraded = (hits || []).degraded;
     hits = (hits || []).filter(function (h) { return dgeSearchIsAdmin() || !dgeSearchIsAdminOnlyHit(h); });
     hits.partial = partial;
+    hits.degraded = degraded;
     lastHits = hits;
     lastQuery = q;
     // type/category/siddhanta/keyword reset every search since they're
