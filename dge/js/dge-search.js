@@ -211,6 +211,41 @@
     this._wordBucketCache = {};
   }
 
+  // Does slug fall under any of the given slug-path prefixes? A prefix
+  // matches its own exact slug or any deeper path under it ('kavya' never
+  // matches 'kavya_alankara' -- segment-bounded, not raw startsWith).
+  // Shared by the include-scope filter (opts.includeGranthaPrefixes, the
+  // 31 Aug 2026 "search inside ANY node of the Library tree, several at
+  // once" project-lead ask) and usable at every depth the slugs
+  // themselves have: a whole section ('kavya_alankara'), one work
+  // ('kavya_alankara/raghavendra_vijaya'), a single sarga's own grantha.
+  function slugInPrefixes(slug, prefixes) {
+    for (var p = 0; p < prefixes.length; p++) {
+      if (slug === prefixes[p] || slug.indexOf(prefixes[p] + '/') === 0) return true;
+    }
+    return false;
+  }
+
+  // The postings/words trees are partitioned by SECTION (top-level slug
+  // segment). A scope of include-prefixes can only ever hit granthas in
+  // the sections those prefixes start with -- so a search scoped to one
+  // kavya work has no business fetching the vedas' or puranas' files at
+  // all. Returns the (deduped) section subset the prefixes touch, or null
+  // for "all sections" (no prefixes given, or a prefix whose head isn't a
+  // known section -- fetching everything is the safe answer there).
+  Index.prototype._sectionsForPrefixes = function (prefixes) {
+    if (!prefixes || !prefixes.length) return null;
+    var known = {};
+    for (var i = 0; i < this.sections.length; i++) known[this.sections[i]] = 1;
+    var out = {}, n = 0;
+    for (var p = 0; p < prefixes.length; p++) {
+      var head = String(prefixes[p]).split('/')[0];
+      if (!known[head]) return null;
+      if (!out[head]) { out[head] = 1; n++; }
+    }
+    return n ? Object.keys(out) : null;
+  };
+
   // ---- EXACT word-level index (words/<bucket>/<section>.json) ----
   // Mirrors build_search_index.py's word_tokens()/bucket_key() EXACTLY --
   // the two sides MUST tokenize and bucket identically or a query word
@@ -259,30 +294,26 @@
   // marks the result `degraded` and keeps it OUT of the cache, so the
   // next query over the same bucket refetches instead of inheriting this
   // run's hole for the whole session (see FETCH_ERR's own comment).
+  // `scope` may be null (every section), one section name (back-compat
+  // with the old single-section picker), or an ARRAY of section names
+  // (computed by _sectionsForPrefixes for an include-scoped search) --
+  // the fan-out and the cache key both honour exactly that subset.
   Index.prototype._loadWordBucket = function (bucket, scope) {
     var self = this;
-    var key = bucket + '::' + (scope || '*');
+    var secs = !scope ? this.sections : (Array.isArray(scope) ? scope : [scope]);
+    var key = bucket + '::' + (!scope ? '*' : secs.slice().sort().join(','));
     if (this._wordBucketCache[key]) return Promise.resolve(this._wordBucketCache[key]);
-    var p;
-    if (scope) {
-      p = fetchJSON(this.base, 'words/' + bucket + '/' + scope + '.json')
-        .then(function (d) {
-          if (d === FETCH_ERR) { var m = []; m.degraded = true; return m; }
-          return d ? [d] : [];
-        });
-    } else {
-      p = Promise.all(this.sections.map(function (sec) {
-        return fetchJSON(self.base, 'words/' + bucket + '/' + sec + '.json');
-      })).then(function (parts) {
-        var maps = [], degraded = false;
-        parts.forEach(function (d) {
-          if (d === FETCH_ERR) degraded = true;
-          else if (d) maps.push(d);
-        });
-        if (degraded) maps.degraded = true;
-        return maps;
+    var p = Promise.all(secs.map(function (sec) {
+      return fetchJSON(self.base, 'words/' + bucket + '/' + sec + '.json');
+    })).then(function (parts) {
+      var maps = [], degraded = false;
+      parts.forEach(function (d) {
+        if (d === FETCH_ERR) degraded = true;
+        else if (d) maps.push(d);
       });
-    }
+      if (degraded) maps.degraded = true;
+      return maps;
+    });
     return p.then(function (maps) {
       if (!maps.degraded) self._wordBucketCache[key] = maps;
       return maps;
@@ -319,22 +350,27 @@
     if (!qwords.length) return Promise.resolve([]);
     var onProgress = opts.onProgress;
 
+    // Scope: includeGranthaPrefixes (multi-select Library-tree targets, any
+    // depth) narrows the sweep to matching granthas AND shrinks the section
+    // fan-out to just the sections those targets live in; the admin-only
+    // excludes then apply within that. `section` (the old single-section
+    // scope) still works and wins when set.
     var excludePrefixes = opts.excludeGranthaPrefixes || [];
-    var isExcludedGrantha = function (gi) {
+    var includePrefixes = opts.includeGranthaPrefixes || [];
+    var isOutOfScope = function (gi) {
       var slug = self.granthas[gi] && self.granthas[gi].slug;
       if (!slug) return false;
-      for (var p = 0; p < excludePrefixes.length; p++) {
-        if (slug === excludePrefixes[p] || slug.indexOf(excludePrefixes[p] + '/') === 0) return true;
-      }
-      return false;
+      if (includePrefixes.length && !slugInPrefixes(slug, includePrefixes)) return true;
+      return excludePrefixes.length ? slugInPrefixes(slug, excludePrefixes) : false;
     };
+    var scope = section || self._sectionsForPrefixes(includePrefixes);
 
     var buckets = {};
     qwords.forEach(function (w) { buckets[self._wordBucketOf(w)] = 1; });
     var bucketNames = Object.keys(buckets);
 
     return allWithProgress(
-      bucketNames.map(function (b) { return self._loadWordBucket(b, section); }),
+      bucketNames.map(function (b) { return self._loadWordBucket(b, scope); }),
       onProgress && function (done, total) { onProgress('postings', done, total); }
     ).then(function (bucketMapsPerName) {
       // Any bucket whose section fan-out lost a request marks this whole
@@ -350,7 +386,7 @@
           // pass 1: whole-word
           var rows = wordMap[w];
           if (rows) rows.forEach(function (r) {
-            if (isExcludedGrantha(r[0])) return;
+            if (isOutOfScope(r[0])) return;
             var key = r[0] + ':' + r[1];
             (unitHits[key] = unitHits[key] || {})[wi] = 'exact';
           });
@@ -360,7 +396,7 @@
             for (var k in wordMap) {
               if (k.length > w.length && k.indexOf(w) === 0) {
                 wordMap[k].forEach(function (r) {
-                  if (isExcludedGrantha(r[0])) return;
+                  if (isOutOfScope(r[0])) return;
                   var key = r[0] + ':' + r[1];
                   var h = (unitHits[key] = unitHits[key] || {});
                   if (h[wi] !== 'exact') h[wi] = 'prefix';
@@ -500,15 +536,17 @@
     var nChunks = this.manifest.vocabChunks || 0;
     if (!nChunks) return Promise.resolve([]); // pre-vocab index published
 
+    // Same scope contract as searchExact: include-prefixes narrow both the
+    // candidate granthas and the bucket-postings section fan-out below.
     var excludePrefixes = opts.excludeGranthaPrefixes || [];
-    var isExcludedGrantha = function (gi) {
+    var includePrefixes = opts.includeGranthaPrefixes || [];
+    var isOutOfScope = function (gi) {
       var slug = self.granthas[gi] && self.granthas[gi].slug;
       if (!slug) return false;
-      for (var p = 0; p < excludePrefixes.length; p++) {
-        if (slug === excludePrefixes[p] || slug.indexOf(excludePrefixes[p] + '/') === 0) return true;
-      }
-      return false;
+      if (includePrefixes.length && !slugInPrefixes(slug, includePrefixes)) return true;
+      return excludePrefixes.length ? slugInPrefixes(slug, excludePrefixes) : false;
     };
+    var scope = section || self._sectionsForPrefixes(includePrefixes);
 
     var chunkIdx = [];
     for (var i = 0; i < nChunks; i++) chunkIdx.push(i);
@@ -563,7 +601,7 @@
       }
       var bucketNames = Object.keys(buckets);
       return allWithProgress(
-        bucketNames.map(function (b) { return self._loadWordBucket(b, section); }),
+        bucketNames.map(function (b) { return self._loadWordBucket(b, scope); }),
         onProgress && function (done, total) { onProgress('postings', done, total); }
       ).then(function (maps) {
         maps.forEach(function (m) { if (m && m.degraded) degraded = true; });
@@ -574,7 +612,7 @@
               var rows = wordMap[w];
               if (!rows) return;
               rows.forEach(function (r) {
-                if (isExcludedGrantha(r[0])) return;
+                if (isOutOfScope(r[0])) return;
                 var key = r[0] + ':' + r[1];
                 if (!unitWord[key] || w.length < unitWord[key].length) unitWord[key] = w;
               });
@@ -626,9 +664,12 @@
   // failed section fetch to null rather than rejecting (see its own
   // comment), so one bad section out of the fan-out is simply missing from
   // the union below, not fatal to the other ten.
+  // `scope`: null / one section name / array of section names -- same
+  // contract as _loadWordBucket above.
   Index.prototype._loadPosting = function (tg, scope) {
     var self = this;
-    var key = tg + '::' + (scope || '*');
+    var secs = !scope ? this.sections : (Array.isArray(scope) ? scope : [scope]);
+    var key = tg + '::' + (!scope ? '*' : secs.slice().sort().join(','));
     if (this._postingCache[key]) return Promise.resolve(this._postingCache[key]);
     var safe = safeTrigram(tg);
     // Each argument here is a LITERAL path segment, same rule as safeTrigram()
@@ -638,26 +679,17 @@
     // fetchJSON above; section names happen to be plain lowercase words with
     // nothing for encodeURIComponent to change, which is why that mistake
     // would have gone unnoticed here rather than 404ing outright.
-    var p;
-    if (scope) {
-      p = fetchJSON(this.base, 'postings/' + safe + '/' + scope + '.json')
-        .then(function (d) {
-          if (d === FETCH_ERR) { var rows = []; rows.degraded = true; return rows; }
-          return d || [];
-        });
-    } else {
-      p = Promise.all(this.sections.map(function (sec) {
-        return fetchJSON(self.base, 'postings/' + safe + '/' + sec + '.json');
-      })).then(function (parts) {
-        var out = [], degraded = false;
-        parts.forEach(function (d) {
-          if (d === FETCH_ERR) degraded = true;
-          else if (d) out.push.apply(out, d);
-        });
-        if (degraded) out.degraded = true;
-        return out;
+    var p = Promise.all(secs.map(function (sec) {
+      return fetchJSON(self.base, 'postings/' + safe + '/' + sec + '.json');
+    })).then(function (parts) {
+      var out = [], degraded = false;
+      parts.forEach(function (d) {
+        if (d === FETCH_ERR) degraded = true;
+        else if (d) out.push.apply(out, d);
       });
-    }
+      if (degraded) out.degraded = true;
+      return out;
+    });
     // Same never-cache-a-failure rule as _loadWordBucket: a degraded union
     // is this run's best effort, not a session-wide fact about the index.
     return p.then(function (rows) {
@@ -757,9 +789,14 @@
     fetchedSets.forEach(function (set) { set.forEach(function (tg) { allFetch[tg] = 1; }); });
     var postingKey = function (tg) { return tg + '::' + (section || '*'); };
     var onProgress = opts.onProgress;
+    // Same scope contract as searchExact (see its comment): include-
+    // prefixes narrow the candidate granthas below and the posting
+    // section fan-out here; the single-section opt still wins when set.
+    var includePrefixes = opts.includeGranthaPrefixes || [];
+    var scope = section || this._sectionsForPrefixes(includePrefixes);
     var fetchTgs = Object.keys(allFetch);
     return allWithProgress(
-      fetchTgs.map(function (tg) { return self._loadPosting(tg, section); }),
+      fetchTgs.map(function (tg) { return self._loadPosting(tg, scope); }),
       onProgress && function (done, total) { onProgress('postings', done, total); }
     )
       .then(function (postingRowsList) {
@@ -860,13 +897,11 @@
         // count against the budget, so it's spent only on granthas the
         // reader could actually see the result of.
         var excludePrefixes = opts.excludeGranthaPrefixes || [];
-        var isExcludedGrantha = function (gik) {
+        var isOutOfScope = function (gik) {
           var slug = self.granthas[+gik] && self.granthas[+gik].slug;
           if (!slug) return false;
-          for (var p = 0; p < excludePrefixes.length; p++) {
-            if (slug === excludePrefixes[p] || slug.indexOf(excludePrefixes[p] + '/') === 0) return true;
-          }
-          return false;
+          if (includePrefixes.length && !slugInPrefixes(slug, includePrefixes)) return true;
+          return excludePrefixes.length ? slugInPrefixes(slug, excludePrefixes) : false;
         };
         // A genuinely complete match always gets its grantha opened, past
         // the normal MAX_SHARDS budget -- up to a much higher ceiling so a
@@ -882,7 +917,7 @@
         var MAX_EXACT_SHARDS = MAX_SHARDS * 3;
         for (var i = 0; i < keys.length && picked.length < MAX_UNITS; i++) {
           var gik = keys[i].split(':')[0];
-          if (!giSet[gik] && isExcludedGrantha(gik)) continue;
+          if (!giSet[gik] && isOutOfScope(gik)) continue;
           var isExact = cand[keys[i]].complete;
           if (!giSet[gik]) {
             if (isExact ? nGi >= MAX_EXACT_SHARDS : nGi >= MAX_SHARDS) { skipped = true; continue; }

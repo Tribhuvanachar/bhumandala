@@ -23,7 +23,16 @@
   var INDEX_BASE = window.DGE_SEARCH_INDEX || CDN_INDEX;
   var idxPromise = null, debounce = null;
   var currentScheme = 'auto'; // set by the scheme popup, read by queryOpts()
-  var currentSection = ''; // set by the section popup, read directly by onType() -- '' means "Everything"
+  // Search scope (31 Aug 2026 project-lead ask, replacing the old single-
+  // section dropdown): a MULTI-SELECT of slug-path prefixes at ANY depth of
+  // the Library tree -- a whole section, one work (raghavendra_vijaya), a
+  // single sarga -- searched together as one OR'd scope. Empty means
+  // "Everything". The engine consumes this directly as
+  // opts.includeGranthaPrefixes (dge-search.js), which also narrows the
+  // per-section index fan-out to just the sections these touch.
+  var scopeSel = [];            // selected slug-path prefixes, deduped (no selected descendant of a selected ancestor)
+  var scopeTreeData = null;     // built once from the index manifest's granthas
+  var scopeLabelByPath = {};    // path -> display label (leaf grantha title, or taxonomy segment label)
 
   // Post-search filters: narrow the results ALREADY fetched (never a new
   // network round trip -- a fresh query is already a 10+ second multi-shard
@@ -89,10 +98,7 @@
     return null;
   }
 
-  // Section slug -> display label, for the scope popup. taxonomyLabel()
-  // (see above) is the single source for this now; kept as its own function
-  // only because callers below read sectionLabel() as a name.
-  function sectionLabel(slug) { return taxonomyLabel(slug); }
+
 
   function css() {
     if (document.getElementById('dge-gs-css')) return;
@@ -114,7 +120,14 @@
     s.textContent = [
       '.dge-gs-overlay{position:fixed;inset:0;z-index:11000;background:rgba(0,0,0,.45);display:none}',
       '.dge-gs-overlay.open{display:block}',
-      '.dge-gs-panel{max-width:720px;margin:6vh auto 0;background:var(--card-bg,#fff);color:var(--text-primary,#1a1a1a);border:1px solid var(--card-border,rgba(0,0,0,.12));border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);overflow:hidden;font-family:inherit}',
+      // overflow:visible, NOT hidden (31 Aug 2026): before any search runs
+      // the panel is only as tall as the top bar plus one hint line, and
+      // overflow:hidden was CLIPPING both dropdown popups at the panel's
+      // bottom edge -- reported live with a screenshot: the scope list
+      // showed "Everything" plus one section and cut off the other eleven.
+      // The rounded-corner clipping the hidden overflow provided is kept by
+      // rounding .dge-gs-results' own bottom corners below instead.
+      '.dge-gs-panel{position:relative;max-width:720px;margin:6vh auto 0;background:var(--panel-bg,var(--card-bg,#fff));backdrop-filter:blur(var(--glass-blur,0px));-webkit-backdrop-filter:blur(var(--glass-blur,0px));color:var(--text-primary,#1a1a1a);border:1px solid var(--card-border,rgba(0,0,0,.12));border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);overflow:visible;font-family:inherit}',
       '.dge-gs-top{display:flex;gap:8px;padding:12px;border-bottom:1px solid var(--card-border,rgba(0,0,0,.12));align-items:center}',
       // min-width:0 overrides the flex-item default of auto (which resolves
       // to the input's intrinsic content width) -- without it, this input
@@ -132,14 +145,47 @@
       '.dge-gs-schemewrap{position:relative;flex:none}',
       '.dge-gs-schemebtn{border:1px solid var(--card-border,rgba(0,0,0,.2));border-radius:8px;background:var(--card-bg,#fff);color:var(--text-primary,inherit);padding:0 12px;height:40px;font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}',
       '.dge-gs-schemebtn:focus{outline:none;border-color:var(--accent-red,#7a3b1d)}',
-      '.dge-gs-scheme-pop{position:absolute;top:calc(100% + 6px);right:0;background:var(--card-bg,#fff);border:1px solid var(--card-border,rgba(0,0,0,.15));border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.25);padding:6px;display:flex;flex-direction:column;gap:2px;min-width:110px;z-index:1;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .12s ease,transform .12s ease,visibility .12s ease}',
+      '.dge-gs-scheme-pop{position:absolute;top:calc(100% + 6px);right:0;background:var(--panel-bg,var(--card-bg,#fff));backdrop-filter:blur(var(--glass-blur,14px));-webkit-backdrop-filter:blur(var(--glass-blur,14px));border:1px solid var(--card-border,rgba(0,0,0,.15));border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.25);padding:6px;display:flex;flex-direction:column;gap:2px;min-width:110px;max-height:60vh;overflow-y:auto;z-index:5;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .12s ease,transform .12s ease,visibility .12s ease}',
       '.dge-gs-scheme-pop.show{opacity:1;visibility:visible;transform:translateY(0)}',
       '.dge-gs-scheme-opt{padding:8px 10px;font-size:13px;font-weight:600;border-radius:6px;cursor:pointer;color:var(--text-primary,inherit)}',
       '.dge-gs-scheme-opt:hover{background:var(--card-border,rgba(0,0,0,.08))}',
       '.dge-gs-scheme-opt.active{background:var(--card-active,rgba(122,59,29,.12));color:var(--accent-red,#7a3b1d)}',
+      // Scope tree popup: anchored to the panel (its positioned ancestor),
+      // spanning nearly its width -- a hierarchical checklist, not a flat
+      // option list, so it gets its own class and geometry. Its own
+      // max-height + scroll means it can never be cut off the way the old
+      // section list was, however short the panel underneath is.
+      '.dge-gs-scope-pop{position:absolute;top:calc(100% + 6px);right:0;width:min(88vw,440px);background:var(--panel-bg,var(--card-bg,#fff));backdrop-filter:blur(var(--glass-blur,14px));-webkit-backdrop-filter:blur(var(--glass-blur,14px));border:1px solid var(--card-border,rgba(0,0,0,.15));border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.25);padding:6px;max-height:60vh;overflow-y:auto;z-index:6;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .12s ease,transform .12s ease,visibility .12s ease}',
+      '.dge-gs-scope-pop.show{opacity:1;visibility:visible;transform:translateY(0)}',
+      '.dge-gs-scope-hint{padding:6px 10px 8px;font-size:11px;opacity:.55}',
+      '.dge-gs-tree-row{display:flex;align-items:center;gap:6px;padding:7px 8px;font-size:13px;border-radius:6px;cursor:pointer;color:var(--text-primary,inherit)}',
+      '.dge-gs-tree-row:hover{background:var(--card-border,rgba(0,0,0,.08))}',
+      '.dge-gs-tree-exp{flex:none;width:22px;height:22px;line-height:22px;text-align:center;border-radius:5px;opacity:.7;font-size:11px}',
+      '.dge-gs-tree-exp:hover{background:var(--card-active,rgba(122,59,29,.12))}',
+      '.dge-gs-tree-box{flex:none;width:16px;height:16px;border:1.5px solid var(--card-border,rgba(0,0,0,.35));border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;line-height:1;color:#fff;background:transparent}',
+      '.dge-gs-tree-row.sel .dge-gs-tree-box{background:var(--accent-red,#7a3b1d);border-color:var(--accent-red,#7a3b1d)}',
+      '.dge-gs-tree-row.cov .dge-gs-tree-box{background:var(--accent-red,#7a3b1d);border-color:var(--accent-red,#7a3b1d);opacity:.45}',
+      '.dge-gs-tree-label{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+      '.dge-gs-tree-row.sel .dge-gs-tree-label{color:var(--accent-red,#7a3b1d);font-weight:700}',
+      '.dge-gs-tree-n{flex:none;font-size:11px;opacity:.5}',
+      '.dge-gs-tree-kids{display:none}',
+      '.dge-gs-tree-kids.openk{display:block}',
+      // Selected-targets chip row: the visible answer to "what am I
+      // actually searching right now" -- lives OUTSIDE the popup, under the
+      // search bar, exactly as asked ("all selected targets should appear
+      // somewhere instead of in the drop-down").
+      '.dge-gs-scope-chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--card-border,rgba(0,0,0,.12))}',
+      '.dge-gs-scope-chips[hidden]{display:none}',
+      '.dge-gs-scope-chip{display:inline-flex;align-items:center;gap:6px;max-width:100%;border:1px solid var(--accent-red,#7a3b1d);background:var(--card-active,rgba(122,59,29,.10));color:var(--accent-red,#7a3b1d);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600}',
+      '.dge-gs-scope-chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+      '.dge-gs-scope-chip b{flex:none;cursor:pointer;font-weight:700;opacity:.75}',
+      '.dge-gs-scope-chip b:hover{opacity:1}',
+      '.dge-gs-scope-clear{border:none;background:none;color:var(--muted-text,#8a7a63);font-size:11px;cursor:pointer;text-decoration:underline dotted;padding:2px 4px}',
       '.dge-gs-x{border:1px solid var(--card-border,rgba(0,0,0,.2));background:var(--card-bg,#fff);color:var(--muted-text,#8a7a63);border-radius:8px;width:40px;height:40px;font-size:16px;cursor:pointer;flex:none}',
       '.dge-gs-x:hover{color:var(--accent-red,#7a3b1d);border-color:var(--accent-red,#7a3b1d)}',
-      '.dge-gs-results{max-height:64vh;overflow:auto;padding:6px 0}',
+      // Bottom corners rounded here now that the panel itself no longer
+      // clips (see .dge-gs-panel's overflow comment above).
+      '.dge-gs-results{max-height:64vh;overflow:auto;padding:6px 0;border-radius:0 0 12px 12px}',
       '.dge-gs-row{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--card-border,rgba(0,0,0,.06))}',
       '.dge-gs-row:hover{background:var(--card-active,rgba(122,59,29,.08))}',
       '.dge-gs-meta{font-size:12px;opacity:.7;display:flex;gap:8px;flex-wrap:wrap}',
@@ -226,16 +272,25 @@
           // otherwise fully dark, custom-styled UI (confirmed against a
           // live screenshot). The section list is only known once the
           // index's manifest loads, so this starts as just "Everything"
-          // and fills in via populateSections() below, same as the <select>
+          // and fills in via populateScope() below, same as the <select>
           // it replaces did with <option>s.
+          // Scope picker (31 Aug 2026 rebuild): no longer a flat section
+          // list -- a hierarchical, MULTI-SELECT tree of the whole library
+          // (section -> work -> sarga/grantha), populated by
+          // populateScope() once the index manifest loads. Selected
+          // targets render as chips in #dge-gs-scope-chips below the bar,
+          // not inside the popup.
           '<div class="dge-gs-schemewrap" id="dge-gs-section-wrap">' +
             '<button type="button" class="dge-gs-schemebtn" id="dge-gs-section-btn" title="Search scope">Everything ▾</button>' +
-            '<div class="dge-gs-scheme-pop" id="dge-gs-section-pop">' +
-              '<div class="dge-gs-scheme-opt active" data-section="">Everything</div>' +
+            '<div class="dge-gs-scope-pop" id="dge-gs-section-pop">' +
+              '<div class="dge-gs-scope-hint">Tick any level — a whole section, one work, or a single sarga. Several at once searches them together.</div>' +
+              '<div class="dge-gs-tree-row" id="dge-gs-scope-all"><span class="dge-gs-tree-exp"></span><span class="dge-gs-tree-box">✓</span><span class="dge-gs-tree-label"><b>Everything</b></span></div>' +
+              '<div id="dge-gs-scope-tree"></div>' +
             '</div>' +
           '</div>' +
           '<button class="dge-gs-x" id="dge-gs-x" title="Close (Esc)" aria-label="Close">✕</button>' +
         '</div>' +
+        '<div class="dge-gs-scope-chips" id="dge-gs-scope-chips" hidden></div>' +
         '<div class="dge-gs-filterbar" id="dge-gs-filterbar" style="display:none;"></div>' +
         '<div class="dge-gs-results" id="dge-gs-results"><div class="dge-gs-hint">Type a word or phrase in any script. Matching is sandhi/spelling tolerant.</div></div>' +
       '</div>';
@@ -300,24 +355,20 @@
       rerunIfQueried();
     });
 
-    // Search-scope picker -- see the .dge-gs-schemewrap comment in css()
-    // above for why this is the same shape as the scheme picker instead of
-    // a native <select>. Options are added by populateSections() below
-    // once the index's manifest loads; only "Everything" exists at build().
+    // Search-scope picker: the button opens the Library-tree popup (built
+    // by populateScope() from the index manifest); all selection logic
+    // lives in the scope-tree functions below build(). Opening it also
+    // kicks ensureIndex() so a reader who opens the scope FIRST (before
+    // typing anything) still gets the tree populated.
     var sectionBtn = document.getElementById('dge-gs-section-btn');
     var sectionPop = document.getElementById('dge-gs-section-pop');
     sectionBtn.addEventListener('click', function (e) {
       e.stopPropagation();
       sectionPop.classList.toggle('show');
+      if (sectionPop.classList.contains('show')) ensureIndex();
     });
-    sectionPop.addEventListener('click', function (e) {
-      var opt = e.target.closest('.dge-gs-scheme-opt');
-      if (!opt) return;
-      currentSection = opt.dataset.section;
-      sectionBtn.textContent = (opt.textContent || 'Everything') + ' ▾';
-      sectionPop.querySelectorAll('.dge-gs-scheme-opt').forEach(function (o) { o.classList.toggle('active', o === opt); });
-      sectionPop.classList.remove('show');
-      rerunIfQueried();
+    document.getElementById('dge-gs-scope-all').addEventListener('click', function () {
+      clearScope();
     });
 
     // Same click-outside-closes convention as the overlay itself (line
@@ -333,17 +384,15 @@
     });
   }
 
-  // populateSections is attached on EVERY call, not only the one that
+  // populateScope is attached on EVERY call, not only the one that
   // actually creates idxPromise -- 24 Aug 2026, needed once prefetchManifest()
-  // below could call this before build() has ever run (no #dge-gs-section-pop
+  // below could call this before build() has ever run (no #dge-gs-scope-tree
   // to populate yet). Splitting "fetch and cache the index" from "populate
   // the (maybe not-yet-built) DOM" this way means a prefetch's own idle-time
-  // call safely no-ops (populateSections' own data-populated/element-exists
+  // call safely no-ops (populateScope's own data-populated/element-exists
   // guards handle that), and the LATER real call from open() -- after build()
   // has created the popup -- still populates it correctly, from the same
-  // already-resolved, cached promise. Before this change populateSections
-  // ran only once, tied to the original .then() chain, so an early prefetch
-  // would have silently left the section popup permanently un-populated.
+  // already-resolved, cached promise.
   function ensureIndex() {
     if (!idxPromise) {
       if (!window.DGESearch) { alert('Search scripts not loaded (need dge-search.js).'); return null; }
@@ -361,28 +410,203 @@
       });
     }
     return idxPromise.then(function (idx) {
-      populateSections(idx.sections || []);
+      populateScope(idx);
       return idx;
     });
   }
 
-  // The section list only comes from the index's own manifest (it's not
-  // known ahead of a fetch), so the popup starts as just "Everything" and
-  // fills in once ensureIndex() resolves. Guarded so a second open() in the
-  // same page load doesn't duplicate the options.
-  function populateSections(sections) {
-    var pop = document.getElementById('dge-gs-section-pop');
-    if (!pop || pop.getAttribute('data-populated') || !sections.length) return;
-    pop.setAttribute('data-populated', '1');
-    sections.slice().sort(function (a, b) {
-      return sectionLabel(a).localeCompare(sectionLabel(b));
-    }).forEach(function (sec) {
-      var opt = document.createElement('div');
-      opt.className = 'dge-gs-scheme-opt';
-      opt.dataset.section = sec;
-      opt.textContent = sectionLabel(sec);
-      pop.appendChild(opt);
+  // ---- Library-tree scope picker ----------------------------------------
+  // The tree only comes from the index's own manifest (every grantha's
+  // slug is a slash path -- section/work/.../grantha), so the popup starts
+  // as just "Everything" and fills in once ensureIndex() resolves. Guarded
+  // so a second open() in the same page load doesn't rebuild it.
+  function populateScope(idx) {
+    var treeEl = document.getElementById('dge-gs-scope-tree');
+    if (!treeEl || treeEl.getAttribute('data-populated')) return;
+    var granthas = (idx && idx.granthas) || [];
+    if (!granthas.length) return;
+    treeEl.setAttribute('data-populated', '1');
+    scopeTreeData = buildScopeTreeData(granthas);
+    renderScopeChildren(treeEl, scopeTreeData, 0);
+    refreshScopeRows();
+  }
+
+  // slugs -> nested {seg, path, children:{}, order:[], n, title?}. `n`
+  // counts granthas under each node (shown beside expandable rows);
+  // `title` is set on the node a grantha's full slug lands on, so a leaf
+  // can show its real display title ("Sumadhva Vijaya सर्गः 1") instead of
+  // a re-prettified slug segment.
+  function buildScopeTreeData(granthas) {
+    var root = { children: {}, order: [], n: 0 };
+    granthas.forEach(function (g) {
+      var segs = String(g.slug || '').split('/');
+      var node = root, cum = '';
+      root.n++;
+      for (var i = 0; i < segs.length; i++) {
+        cum = cum ? cum + '/' + segs[i] : segs[i];
+        var ch = node.children[segs[i]];
+        if (!ch) {
+          ch = node.children[segs[i]] = { seg: segs[i], path: cum, children: {}, order: [], n: 0 };
+          node.order.push(segs[i]);
+        }
+        ch.n++;
+        if (i === segs.length - 1) ch.title = g.title;
+        node = ch;
+      }
     });
+    return root;
+  }
+
+  function scopeNodeLabel(node) {
+    var kids = node.order.length;
+    if (!kids && node.title && node.title !== node.seg) return node.title;
+    return taxonomyLabel(node.seg);
+  }
+
+  // Renders ONE level of children into `container`; each expandable row
+  // gets an (initially empty) kids <div> whose own children render on the
+  // first expand -- 1,200 granthas across ~3,000 tree nodes would be a lot
+  // of DOM to build for a popup most readers only skim the top of.
+  function renderScopeChildren(container, node, depth) {
+    node.order.slice().sort(function (a, b) {
+      return scopeNodeLabel(node.children[a]).localeCompare(scopeNodeLabel(node.children[b]));
+    }).forEach(function (seg) {
+      var ch = node.children[seg];
+      var hasKids = ch.order.length > 0;
+      var label = scopeNodeLabel(ch);
+      scopeLabelByPath[ch.path] = label;
+      var row = document.createElement('div');
+      row.className = 'dge-gs-tree-row';
+      row.setAttribute('data-path', ch.path);
+      row.style.paddingLeft = (8 + depth * 16) + 'px';
+      row.innerHTML =
+        '<span class="dge-gs-tree-exp">' + (hasKids ? '▸' : '') + '</span>' +
+        '<span class="dge-gs-tree-box">✓</span>' +
+        '<span class="dge-gs-tree-label">' + esc(label) + '</span>' +
+        (hasKids ? '<span class="dge-gs-tree-n">' + ch.n + '</span>' : '');
+      container.appendChild(row);
+      var kidsEl = null;
+      if (hasKids) {
+        kidsEl = document.createElement('div');
+        kidsEl.className = 'dge-gs-tree-kids';
+        container.appendChild(kidsEl);
+      }
+      row.addEventListener('click', function (e) {
+        if (hasKids && e.target.closest('.dge-gs-tree-exp')) {
+          var opening = !kidsEl.classList.contains('openk');
+          if (opening && !kidsEl.getAttribute('data-rendered')) {
+            kidsEl.setAttribute('data-rendered', '1');
+            renderScopeChildren(kidsEl, ch, depth + 1);
+            refreshScopeRows();
+          }
+          kidsEl.classList.toggle('openk', opening);
+          row.querySelector('.dge-gs-tree-exp').textContent = opening ? '▾' : '▸';
+          return;
+        }
+        toggleScope(ch.path);
+      });
+    });
+  }
+
+  // Selection semantics: scopeSel is a flat list of OR'd path prefixes.
+  // Selecting a node prunes any already-selected DESCENDANTS (now
+  // redundant); a node whose ancestor is already selected is shown as
+  // covered (dimmed ✓) and toggling it is a no-op -- deselect the
+  // ancestor (chip or row) to narrow.
+  function toggleScope(path) {
+    var i = scopeSel.indexOf(path);
+    if (i !== -1) {
+      scopeSel.splice(i, 1);
+    } else {
+      for (var p = 0; p < scopeSel.length; p++) {
+        if (path.indexOf(scopeSel[p] + '/') === 0) return;
+      }
+      scopeSel = scopeSel.filter(function (sp) {
+        return !(sp === path || sp.indexOf(path + '/') === 0);
+      });
+      scopeSel.push(path);
+    }
+    scopeChanged();
+  }
+  function clearScope() {
+    if (!scopeSel.length) return;
+    scopeSel = [];
+    scopeChanged();
+  }
+  function scopeChanged() {
+    refreshScopeRows();
+    renderScopeChips();
+    window.dgeGsRetry();
+  }
+
+  function refreshScopeRows() {
+    var pop = document.getElementById('dge-gs-section-pop');
+    if (!pop) return;
+    Array.prototype.forEach.call(pop.querySelectorAll('.dge-gs-tree-row[data-path]'), function (row) {
+      var path = row.getAttribute('data-path');
+      var sel = scopeSel.indexOf(path) !== -1;
+      var cov = false;
+      if (!sel) {
+        for (var p = 0; p < scopeSel.length; p++) {
+          if (path.indexOf(scopeSel[p] + '/') === 0) { cov = true; break; }
+        }
+      }
+      row.classList.toggle('sel', sel);
+      row.classList.toggle('cov', cov);
+    });
+    var all = document.getElementById('dge-gs-scope-all');
+    if (all) all.classList.toggle('sel', !scopeSel.length);
+    var btn = document.getElementById('dge-gs-section-btn');
+    if (btn) {
+      btn.textContent = (!scopeSel.length ? 'Everything'
+        : scopeSel.length === 1 ? scopeChipLabel(scopeSel[0])
+        : scopeSel.length + ' targets') + ' ▾';
+    }
+  }
+
+  // Chip text: a real display title stands alone; a generic slug-segment
+  // label ("mula", a bare sarga) gets its parent prefixed so two chips
+  // from different works never read identically.
+  function scopeChipLabel(path) {
+    var segs = path.split('/');
+    var label = scopeLabelByPath[path] || taxonomyLabel(segs[segs.length - 1]);
+    if (label !== taxonomyLabel(segs[segs.length - 1])) return label;
+    if (segs.length > 1) return taxonomyLabel(segs[segs.length - 2]) + ' › ' + label;
+    return label;
+  }
+
+  // The selected targets live HERE, under the search bar, not inside the
+  // drop-down (project-lead ask, 31 Aug 2026) -- always visible while
+  // results render, each removable on its own, one tap clears all.
+  function renderScopeChips() {
+    var box = document.getElementById('dge-gs-scope-chips');
+    if (!box) return;
+    box.innerHTML = '';
+    if (!scopeSel.length) { box.hidden = true; return; }
+    box.hidden = false;
+    scopeSel.forEach(function (path) {
+      var chip = document.createElement('span');
+      chip.className = 'dge-gs-scope-chip';
+      chip.title = path;
+      var lbl = document.createElement('span');
+      lbl.textContent = scopeChipLabel(path);
+      var x = document.createElement('b');
+      x.textContent = '✕';
+      x.setAttribute('role', 'button');
+      x.setAttribute('aria-label', 'Remove ' + path + ' from search scope');
+      x.addEventListener('click', function () { toggleScope(path); });
+      chip.appendChild(lbl);
+      chip.appendChild(x);
+      box.appendChild(chip);
+    });
+    if (scopeSel.length > 1) {
+      var clear = document.createElement('button');
+      clear.type = 'button';
+      clear.className = 'dge-gs-scope-clear';
+      clear.textContent = 'search everything';
+      clear.addEventListener('click', clearScope);
+      box.appendChild(clear);
+    }
   }
 
   // `query` is optional. The word popover in intellisense.js passes the word
@@ -725,7 +949,6 @@
     startElapsedTimer(results);
     debounce = setTimeout(function () {
       var p = ensureIndex(); if (!p) return;
-      var section = currentSection || undefined;
       lastQueryDeva = queryToDevanagari(q);
       var searchStartedAt = startElapsedTimer(results); // real search work starts now, not at the first keystroke
       // Two real stages, in order: fetching the rarest trigrams' postings
@@ -760,7 +983,7 @@
       // dge-search.js drop them BEFORE they count against that budget, for
       // a reader who won't see them rendered anyway.
       var excludePrefixes = dgeSearchIsAdmin() ? [] : ADMIN_ONLY_GRANTHA_PREFIXES;
-      var searchOpts = Object.assign({ limit: 30, section: section, onProgress: onProgress, excludeGranthaPrefixes: excludePrefixes }, queryOpts(q));
+      var searchOpts = Object.assign({ limit: 30, includeGranthaPrefixes: scopeSel.slice(), onProgress: onProgress, excludeGranthaPrefixes: excludePrefixes }, queryOpts(q));
       // "Exact spelling only" ON (the default) routes through the word-level
       // EXACT index (dge-search.js searchExact()) -- a direct word->units
       // lookup with no shard-open budget and no candidate ties, the answer
@@ -1080,11 +1303,11 @@
       // SAME exact match the unscoped sweep never reached opens in under a
       // second. Only worth saying when nothing is scoped yet and there's
       // somewhere narrower to go.
-      if (exactActive && !out.length && lastHits.partial && !currentSection) {
+      if (exactActive && !out.length && lastHits.partial && !scopeSel.length) {
         emptyMsg += ' A search across the whole library can miss a real match' +
           ' buried in a very common word’s ties — narrowing the scope' +
-          ' (the "Everything" picker above) searches that section directly' +
-          ' and usually finds it.';
+          ' (the "Everything" picker above: tick a section, a work, or even' +
+          ' one sarga) searches those texts directly and usually finds it.';
       }
     }
     renderRows(out, lastQuery, emptyMsg);

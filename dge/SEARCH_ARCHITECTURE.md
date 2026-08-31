@@ -836,3 +836,42 @@ Regression coverage: `node dge/js/test-search-resilience.js` (sentinel +
 no-cache + degraded contract, headless) and the Playwright suite
 `test_reliability_fixes.py` (scratchpad; fault-injects aborted index
 requests through page.route with `service_workers="block"`).
+
+## Multi-target Library-tree scope (31 Aug 2026)
+
+Project-lead ask: "not just kavya but any specific kavya... or any specific
+sarga of it... ability to multi-select the target... all selected targets
+should appear somewhere instead of in the drop-down." Plus a live bug: on a
+fresh visit the old section drop-down rendered clipped (the panel's
+overflow:hidden cut the list at the panel's pre-search height).
+
+- **Engine** (dge-search.js): all three search paths accept
+  `opts.includeGranthaPrefixes` — an OR'd list of slug-path prefixes at ANY
+  depth (`kavya_alankara`, `kavya_alankara/sumadhva_vijaya`, a single
+  sarga's own slug). Matching is segment-bounded (`slugInPrefixes`).
+  Candidates outside the scope are dropped BEFORE the shard budget (same
+  reasoning as excludeGranthaPrefixes), and `_sectionsForPrefixes()`
+  shrinks the per-section words/postings fan-out to only the sections the
+  prefixes touch — a search scoped to one kavya work fetches one section
+  file per bucket, not twelve. `_loadWordBucket`/`_loadPosting` now take
+  null / one section / an array of sections, with the cache keyed on the
+  sorted subset. The old `opts.section` still works and wins when set.
+- **UI** (global-search.js): the flat section list is now a hierarchical
+  multi-select tree of the whole library, built from the manifest's
+  grantha slugs (lazy per-level rendering; labels via dgeSegLabel /
+  taxonomy, leaf rows show the grantha's real title). Tick any level;
+  ticking a parent prunes redundant descendant selections and shows
+  descendants as covered. Selected targets render as removable chips in
+  `#dge-gs-scope-chips` UNDER the search bar (never inside the popup),
+  with one-tap clear-all; the button reads "Everything" / the single
+  target / "N targets". Selection changes re-run the current query.
+  The clipping bug is gone at the root: `.dge-gs-panel` is
+  overflow:visible (results keep their own rounded scroll box) and both
+  popups carry their own max-height + scroll and the app's frosted-glass
+  treatment (`--panel-bg` + `blur(var(--glass-blur))`).
+
+Regression coverage: the Node scope smoke checks in this session's history
+(work/sarga/multi-section scope on all three paths against the real index)
+and Playwright `test_scope_ui.py` (fresh-state popup fully visible,
+drill-down, work/sarga/multi-select scoping with leak assertions, chip
+removal).
