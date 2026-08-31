@@ -1,5 +1,5 @@
 {
- "page_count": 31,
+ "page_count": 30,
  "pages": [
   {
    "path": "index.html",
@@ -100,19 +100,6 @@
     "../css/vyakarana-base.css"
    ],
    "title": "Guru Parampara — Madhva (Dvaita) Lineage Tree"
-  },
-  {
-   "path": "dge/guru-parampara/lineage-3d.html",
-   "gated": true,
-   "first_head_script": "vandana-guard.js",
-   "vandana_guard_first": true,
-   "has_site_footer_js": false,
-   "has_ai_js": false,
-   "has_modals_js": false,
-   "css_links": [
-    "../css/vyakarana-base.css"
-   ],
-   "title": "Guru Parampara — 3D Lineage Showcase"
   },
   {
    "path": "dge/guru-parampara/tracker.html",
@@ -304,7 +291,8 @@
    "css_links": [
     "../css/vyakarana-base.css",
     "../css/vyakarana.css",
-    "../css/dhatuforms.css"
+    "../css/dhatuforms.css",
+    "../css/intellisense.css"
    ],
    "title": "शब्दपाठः · DGE व्याकरणम्"
   },
