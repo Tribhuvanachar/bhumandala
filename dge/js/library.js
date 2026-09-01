@@ -607,7 +607,11 @@ function dgeNormalizeOverrides(ov) {
     labels: (ov.labels && typeof ov.labels === 'object') ? ov.labels : {},
     order: (ov.order && typeof ov.order === 'object') ? ov.order : {},
     moves: (ov.moves && typeof ov.moves === 'object') ? ov.moves : {},
-    adds: Array.isArray(ov.adds) ? ov.adds : []
+    adds: Array.isArray(ov.adds) ? ov.adds : [],
+    // Hide-from-CORPUS-SEARCH list (1 Sep 2026): read by global-search.js,
+    // not by this tree — carried in the shape so the manager draft-drift
+    // comparison below stays field-for-field accurate.
+    searchHidden: Array.isArray(ov.searchHidden) ? ov.searchHidden : []
   };
 }
 // Order-insensitive fingerprint, mirroring admin/library.html's ovKey() --
@@ -615,7 +619,7 @@ function dgeNormalizeOverrides(ov) {
 // committed file before flagging a preview.
 function dgeOverridesKey(ov) {
   const o = dgeNormalizeOverrides(ov || {});
-  return JSON.stringify({ h: o.hidden.slice().sort(), p: o.pinned, l: o.labels, o: o.order, m: o.moves, a: o.adds.slice().sort() });
+  return JSON.stringify({ h: o.hidden.slice().sort(), p: o.pinned, l: o.labels, o: o.order, m: o.moves, a: o.adds.slice().sort(), sh: o.searchHidden.slice().sort() });
 }
 
 async function dgeLoadLibraryOverrides() {

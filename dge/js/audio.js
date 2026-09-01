@@ -274,6 +274,8 @@ async function loadShloka(id) {
   contextShlokaId = id;
   currentLoopCount = 0;
   audioRetryDone = false;
+  // Selection alone never requests playback (see the error-retry comment).
+  window.dgePlayRequested = false;
 
   if (typeof nsKey === 'function') localStorage.setItem(nsKey('lastVerse'), String(id));
   if (typeof dgeLogReadingHistory === 'function') dgeLogReadingHistory(id);
@@ -321,6 +323,7 @@ async function playShloka(id) {
     return;
   }
   await loadShloka(id);
+  window.dgePlayRequested = true;
   currentAudio.play().catch(err => {
     if(err.name !== 'AbortError') console.error("Playback error:", err);
   });
@@ -373,6 +376,7 @@ function togglePlay() {
       }
     }
   } else {
+    window.dgePlayRequested = true;
     currentAudio.play();
     dgeUpdateBottomPlayerVisibility(); // see playShloka()'s comment on why this can't just wait for 'playing'
   }
@@ -494,10 +498,21 @@ if (currentAudio) {
     audioRetryDone = true;
     currentAudio.src = `${dgeEffectiveArchiveBase()}${stotraData.metadata.filePrefix}${dgeAudioFileId(activeId)}%E2%80%8B${stotraData.metadata.fileExtension}`;
     currentAudio.load();
-    currentAudio.play().then(() => { 
-      isPlaying = true; 
-      updatePlayUI(); 
-    }).catch(()=>{});
+    // Resume the fallback URL only when playback was actually UNDERWAY or
+    // explicitly requested (1 Sep 2026, project-lead report of shlokas
+    // "automatically getting played" on desktop): loadShloka() sets the
+    // src on every selection/jump, and when that first URL errors this
+    // retry used to .play() unconditionally — turning a mere selection
+    // into audible playback. window.dgePlayRequested is set by the
+    // explicit play paths (playShloka/togglePlay) and cleared on
+    // pause/selection, so an errored SELECTION now just readies the
+    // fallback silently.
+    if (window.dgePlayRequested) {
+      currentAudio.play().then(() => {
+        isPlaying = true;
+        updatePlayUI();
+      }).catch(()=>{});
+    }
   });
 
   currentAudio.addEventListener('timeupdate', () => {

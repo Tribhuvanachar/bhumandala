@@ -199,6 +199,12 @@
       '.dge-gs-snip{font-size:16px;margin-top:2px;line-height:1.5}',
       '.dge-gs-hl{background:rgba(232,178,77,.4);color:inherit;border-radius:3px;padding:0 1px;font-weight:700}',
       '.dge-gs-hint{padding:14px;opacity:.6;font-size:13px;display:flex;align-items:center;gap:8px}',
+      '.dge-gs-histwrap{padding:4px 14px 12px}',
+      '.dge-gs-histhead{font-size:11px;opacity:.55;margin-bottom:6px;display:flex;align-items:center;gap:8px}',
+      '.dge-gs-histclear{background:none;border:none;color:inherit;font-size:11px;opacity:.7;cursor:pointer;text-decoration:underline;padding:0}',
+      '.dge-gs-histchip{display:inline-block;margin:2px 4px 2px 0;padding:4px 10px;font:inherit;font-size:12.5px;color:inherit;background:var(--card-active,rgba(0,0,0,.06));border:1px solid var(--card-border,rgba(0,0,0,.12));border-radius:999px;cursor:pointer}',
+      '.dge-gs-histchip:hover{border-color:var(--accent-red,#9A1B1B)}',
+      '.dge-gs-sugrow{padding:8px 14px 0;display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:13px}',
       // A cold-cache query is a manifest fetch plus several postings-bucket
       // and grantha-shard round trips through jsdelivr (see onType()'s own
       // comment) -- 10+ seconds is common. Confirmed live with a throttled
@@ -288,29 +294,19 @@
               '<div id="dge-gs-scope-tree"></div>' +
             '</div>' +
           '</div>' +
+          '<button class="dge-gs-schemebtn" id="dge-gs-sugbtn" title="Suggestions on — tap to turn off" aria-label="Toggle search suggestions" onclick="window.dgeGsToggleSuggest()">💡</button>' +
           '<button class="dge-gs-x" id="dge-gs-x" title="Close (Esc)" aria-label="Close">✕</button>' +
         '</div>' +
         '<div class="dge-gs-scope-chips" id="dge-gs-scope-chips" hidden></div>' +
         '<div class="dge-gs-filterbar" id="dge-gs-filterbar" style="display:none;"></div>' +
         '<div class="dge-gs-results" id="dge-gs-results"><div class="dge-gs-hint">Type a word or phrase in any script. Matching is sandhi/spelling tolerant.</div></div>' +
       '</div>';
-    // Backdrop tap-to-close -- guarded by the same ghost-click window as
-    // renderRows()'s row.onclick (see open()'s comment on lastOpenAt).
-    // Reported live, 31 Aug 2026: opening search from the Genie sheet's
-    // "Search Library" action made the dialog "open and close in a
-    // fraction of a second" -- the triggering tap's trailing compatibility
-    // click landed on the just-appeared BACKDROP (the result rows it used
-    // to land on are guarded; the backdrop wasn't) and closed the overlay
-    // instantly, while the search kept running invisibly in the
-    // background (which is why reopening from the Genie menu showed
-    // results "still being fetched"). A reader deliberately closing a
-    // dialog they themselves JUST opened within this window isn't a real
-    // interaction; Esc (keyboard, no ghost) stays unguarded below.
-    ov.addEventListener('click', function (e) {
-      if (e.target !== ov) return;
-      if (Date.now() - lastOpenAt < GHOST_CLICK_GUARD_MS) return;
-      close();
-    });
+    // 1 Sep 2026, project-lead direction: the dialog stays open until the
+    // reader EXPLICITLY closes it -- tapping outside no longer closes it
+    // at all. (This also retires the 31 Aug ghost-click backdrop saga for
+    // good: with no backdrop close path there is nothing for a trailing
+    // compatibility click to hit.) Esc and the ✕ button remain the two
+    // explicit ways out.
     document.body.appendChild(ov);
 
     // Same guard on the ✕ button: it renders at a fixed top-right spot the
@@ -321,6 +317,15 @@
       close();
     });
     document.getElementById('dge-gs-input').addEventListener('input', onType);
+    // Enter commits the query to history even without opening a hit.
+    document.getElementById('dge-gs-input').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') gsPushHistory(e.target.value);
+    });
+    // Idle state shows the recent-search chips; suggestion toggle reflects
+    // its persisted setting.
+    document.getElementById('dge-gs-results').innerHTML = gsIdleHtml();
+    var sugBtn = document.getElementById('dge-gs-sugbtn');
+    if (sugBtn && !gsSuggestOn()) { sugBtn.style.opacity = '.35'; sugBtn.title = 'Suggestions off — tap to turn on'; }
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }
       if (e.key === 'Escape') close();
@@ -393,6 +398,148 @@
   // guards handle that), and the LATER real call from open() -- after build()
   // has created the popup -- still populates it correctly, from the same
   // already-resolved, cached promise.
+  // ---- search history + suggestions + hide-from-search (1 Sep 2026, the
+  // project lead's three asks in one message: keep the last 25 searches,
+  // offer IDE-style typo-tolerant suggestions while typing (toggleable),
+  // and let the Library Manager hide a grantha from SEARCH independently
+  // of hiding it from the Library tree). ------------------------------------
+  var GS_ROOT = (function () {
+    var s = (document.currentScript && document.currentScript.src) || '';
+    try { return new URL('../../', s).href; } catch (e) { return '../'; }
+  })();
+  var HIST_KEY = 'dge.gs.history', HIST_MAX = 25;
+  function gsHistory() { try { var a = JSON.parse(localStorage.getItem(HIST_KEY) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+  function gsPushHistory(q) {
+    q = (q || '').trim(); if (q.length < 2) return;
+    var a = gsHistory().filter(function (x) { return x !== q; });
+    a.unshift(q);
+    try { localStorage.setItem(HIST_KEY, JSON.stringify(a.slice(0, HIST_MAX))); } catch (e) { /* ignore */ }
+  }
+  window.dgeGsHistoryPick = function (i) {
+    var q = gsHistory()[i]; if (q == null) return;
+    var inp = document.getElementById('dge-gs-input');
+    inp.value = q; inp.dispatchEvent(new Event('input')); inp.focus();
+  };
+  window.dgeGsHistoryClear = function () {
+    try { localStorage.removeItem(HIST_KEY); } catch (e) { /* ignore */ }
+    var r = document.getElementById('dge-gs-results'); if (r) r.innerHTML = gsIdleHtml();
+  };
+  function gsIdleHtml() {
+    var hint = '<div class="dge-gs-hint">Type a word or phrase in any script. Matching is sandhi/spelling tolerant.</div>';
+    var h = gsHistory();
+    if (!h.length) return hint;
+    return hint + '<div class="dge-gs-histwrap"><div class="dge-gs-histhead">Recent searches ' +
+      '<button type="button" class="dge-gs-histclear" onclick="window.dgeGsHistoryClear()">clear</button></div>' +
+      h.map(function (q, i) {
+        return '<button type="button" class="dge-gs-histchip" onclick="window.dgeGsHistoryPick(' + i + ')">' + esc(q) + '</button>';
+      }).join('') + '</div>';
+  }
+
+  function gsSuggestOn() { try { return localStorage.getItem('dge.gs.suggest') !== '0'; } catch (e) { return true; } }
+  window.dgeGsToggleSuggest = function () {
+    var on = !gsSuggestOn();
+    try { localStorage.setItem('dge.gs.suggest', on ? '1' : '0'); } catch (e) { /* ignore */ }
+    var b = document.getElementById('dge-gs-sugbtn');
+    if (b) { b.style.opacity = on ? '1' : '.35'; b.title = on ? 'Suggestions on — tap to turn off' : 'Suggestions off — tap to turn on'; }
+    var inp = document.getElementById('dge-gs-input');
+    if (inp && inp.value.trim()) inp.dispatchEvent(new Event('input'));
+  };
+  // Consonant skeleton across scripts: नारायण and "Nallayana" both reduce
+  // to r/l-level skeletons (nryn vs nlyn) where a bounded edit distance
+  // catches the typo. Aspirates fold (kh->k via the h-strip), vowels drop,
+  // doubles collapse — the same folding family the sutra-name identifier
+  // (intellisense.js) already uses.
+  var GS_DEVA_C = { 'क':'k','ख':'k','ग':'g','घ':'g','ङ':'n','च':'c','छ':'c','ज':'j','झ':'j','ञ':'n',
+    'ट':'t','ठ':'t','ड':'d','ढ':'d','ण':'n','त':'t','थ':'t','द':'d','ध':'d','न':'n',
+    'प':'p','फ':'p','ब':'b','भ':'b','म':'m','य':'y','र':'r','ल':'l','व':'v','श':'s','ष':'s','स':'s','ह':'h','ळ':'l' };
+  function gsSkel(s) {
+    s = String(s || '').toLowerCase();
+    var out = '';
+    for (var i = 0; i < s.length; i++) {
+      var ch = s[i];
+      if (GS_DEVA_C[ch]) out += GS_DEVA_C[ch];
+      else if (ch >= 'a' && ch <= 'z') out += ch;
+    }
+    return out.replace(/h/g, '').replace(/[aeiou]/g, '').replace(/(.)\1+/g, '$1');
+  }
+  function gsEditDist(a, b, max) {
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    var prev = [], cur, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (var i = 1; i <= a.length; i++) {
+      cur = [i]; var rowMin = i;
+      for (j = 1; j <= b.length; j++) {
+        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        if (cur[j] < rowMin) rowMin = cur[j];
+      }
+      if (rowMin > max) return max + 1;
+      prev = cur;
+    }
+    return prev[b.length];
+  }
+  var gsEngineRef = null, gsCandCache = null;
+  function gsCandidates() {
+    if (gsCandCache) return gsCandCache;
+    var set = {};
+    gsHistory().forEach(function (q) { set[q] = 1; });
+    if (gsEngineRef && gsEngineRef.granthas) {
+      gsEngineRef.granthas.forEach(function (g) {
+        var slug = (typeof g === 'string') ? g : (g && g.slug) || '';
+        slug.split('/').slice(-3).forEach(function (seg) {
+          if (!seg || seg === 'mula' || seg.indexOf('tika_') === 0 || /_\d+$/.test(seg)) return;
+          set[seg.replace(/_/g, ' ')] = 1;
+        });
+      });
+      gsCandCache = Object.keys(set);  // cache only once the manifest is in
+      return gsCandCache;
+    }
+    return Object.keys(set);
+  }
+  function gsSuggestHtml(q) {
+    if (!gsSuggestOn() || q.length < 3) return '';
+    var qs = gsSkel(q);
+    if (qs.length < 2) return '';
+    var scored = [];
+    gsCandidates().forEach(function (c) {
+      if (c.toLowerCase() === q.toLowerCase()) return;
+      var cs = gsSkel(c);
+      if (!cs) return;
+      var d;
+      if (cs === qs) d = 0;
+      else if (cs.indexOf(qs) === 0) d = 0.5;
+      else if (cs.indexOf(qs) > 0) d = 1.5;
+      else { d = gsEditDist(qs, cs, 2); if (d > 2) return; }
+      scored.push([d, c]);
+    });
+    scored.sort(function (a, b) { return a[0] - b[0] || a[1].length - b[1].length; });
+    var top = scored.slice(0, 6);
+    if (!top.length) return '';
+    return '<div class="dge-gs-sugrow"><span title="Suggestions">💡</span>' + top.map(function (t) {
+      return '<button type="button" class="dge-gs-histchip" data-q="' + esc(t[1]) + '" onclick="window.dgeGsSuggestPick(this)">' + esc(t[1]) + '</button>';
+    }).join('') + '</div>';
+  }
+  window.dgeGsSuggestPick = function (btn) {
+    var inp = document.getElementById('dge-gs-input');
+    inp.value = btn.getAttribute('data-q');
+    inp.dispatchEvent(new Event('input')); inp.focus();
+  };
+
+  // Curator "hide from search" (admin/config/library-overrides.json's
+  // searchHidden list — written by the Library Manager, independent of the
+  // Library tree's own hidden list). Admins still see the hits, exactly
+  // like the admin-only grantha filter beside it in render().
+  var gsSearchHidden = null;
+  try {
+    fetch(new URL('admin/config/library-overrides.json', GS_ROOT).href, { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (ov) { gsSearchHidden = (ov && Array.isArray(ov.searchHidden)) ? ov.searchHidden : []; })
+      .catch(function () { gsSearchHidden = []; });
+  } catch (e) { gsSearchHidden = []; }
+  function gsIsSearchHiddenHit(h) {
+    var g = (h && h.grantha) || '';
+    return (gsSearchHidden || []).some(function (p) { return g === p || g.indexOf(p + '/') === 0; });
+  }
+
   function ensureIndex() {
     if (!idxPromise) {
       if (!window.DGESearch) { alert('Search scripts not loaded (need dge-search.js).'); return null; }
@@ -410,6 +557,7 @@
       });
     }
     return idxPromise.then(function (idx) {
+      gsEngineRef = idx;   // feeds the suggestion candidates (gsCandidates)
       populateScope(idx);
       return idx;
     });
@@ -708,6 +856,14 @@
   // snippet's own stored script -- so the comparison is a literal
   // character-for-character containment check, not a folded one.
   function queryToDevanagari(input) {
+    input = String(input || '');
+    // Kannada/Telugu/Malayalam QUERIES (1 Sep 2026, project-lead report:
+    // ಮೋದೇತ typed into Search Library found nothing while मोदेत did):
+    // these blocks share Devanagari's layout codepoint-for-codepoint, so
+    // transpose them directly via the same fold the exact-filter and the
+    // index builder already use — no dependence on the scheme picker
+    // (which has no Kannada entry) or on Sanscript having loaded.
+    if (/[ఀ-ൿ]/.test(input)) input = dgeGsFoldIndic(input);
     if (/[ऀ-ॿ]/.test(input)) return input.trim();
     var scheme = currentScheme;
     var detected = detectBrahmicScript(input);
@@ -975,8 +1131,9 @@
     searchSeq++;
     compoundState = null; compoundAdded = 0; compoundCtx = null; compoundDegraded = false;
     var results = document.getElementById('dge-gs-results');
-    if (!q) { results.innerHTML = '<div class="dge-gs-hint">Type a word or phrase in any script.</div>'; return; }
-    results.innerHTML = '<div class="dge-gs-hint"><span class="dge-gs-spinner" aria-hidden="true"></span>' +
+    if (!q) { results.innerHTML = gsIdleHtml(); return; }
+    results.innerHTML = gsSuggestHtml(q) +
+      '<div class="dge-gs-hint"><span class="dge-gs-spinner" aria-hidden="true"></span>' +
       '<span class="dge-gs-searching-label">Searching…</span>' +
       ' <span class="dge-gs-elapsed">0.0s</span></div>' +
       '<div class="dge-gs-progress"><i class="dge-gs-progress-bar"></i></div>';
@@ -1252,6 +1409,9 @@
         // hit" — letting the row handler also fire would race its own
         // window.location.href against the anchor's native navigation.
         if (ev.target.closest && ev.target.closest('.dge-gs-crumbs')) return;
+        // A result the reader actually opened is a search worth remembering.
+        var inpEl = document.getElementById('dge-gs-input');
+        if (inpEl) gsPushHistory(inpEl.value);
         go(row.getAttribute('data-slug'), row.getAttribute('data-unit'), lastQueryDeva || q);
       };
     });
@@ -1515,7 +1675,9 @@
     // compound extension's own flag handling).
     var partial = (hits || []).partial;
     var degraded = (hits || []).degraded;
-    hits = (hits || []).filter(function (h) { return dgeSearchIsAdmin() || !dgeSearchIsAdminOnlyHit(h); });
+    hits = (hits || []).filter(function (h) {
+      return dgeSearchIsAdmin() || (!dgeSearchIsAdminOnlyHit(h) && !gsIsSearchHiddenHit(h));
+    });
     hits.partial = partial;
     hits.degraded = degraded;
     lastHits = hits;

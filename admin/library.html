@@ -78,8 +78,9 @@
         <b>➕ New folder</b> adds a display-layer folder anywhere; move entries into it and
         it appears in the app. Folders always sort before granthas — same as in the app.
         <div class="legend">
-          <span>▲▼ reorder</span><span>⋮ more actions (pin / rename / move / hide)</span>
+          <span>▲▼ reorder</span><span>⋮ more actions (pin / rename / move / hide / hide-from-search)</span>
           <span>🖱 drag a row onto a folder to move it (hover a collapsed folder to open it)</span>
+          <span>👁 Hide = out of the Library tree · 🔍̶ Hide from search = out of corpus-search results — independent switches</span>
           <span><span class="dot ok"></span> loaded</span><span><span class="dot pend"></span> pending</span>
         </div>
       </div>
@@ -117,6 +118,7 @@
       <button class="btn" id="actLabel" style="text-align:left">✏️ Rename (custom display label)</button>
       <button class="btn" id="actMove" style="text-align:left">📁 Move to another folder</button>
       <button class="btn" id="actHide" style="text-align:left">👁 <span id="actHideLabel">Hide</span></button>
+      <button class="btn" id="actSearchHide" style="text-align:left">🔍 <span id="actSearchHideLabel">Hide from search</span></button>
       <button class="btn" id="actNewSub" style="text-align:left;display:none">➕ New subfolder here</button>
       <button class="btn" id="actDelVirtual" style="text-align:left;display:none">🗑 Remove this new folder</button>
     </div>
@@ -164,11 +166,16 @@
     return JSON.parse(JSON.stringify({
       hidden:raw.hidden||[], pinned:raw.pinned||[],
       labels:raw.labels||{}, order:raw.order||{}, moves:raw.moves||{},
-      adds:raw.adds||[]}));
+      adds:raw.adds||[],
+      // hidden from the CORPUS SEARCH only (1 Sep 2026 ask) -- independent
+      // of `hidden` (the Library tree). Keyed by REAL taxonomy slug, not
+      // display path: the search index speaks real slugs, and a display
+      // move must never change what search hides.
+      searchHidden:raw.searchHidden||[]}));
   }
   function ovKey(o){ if(!o) return "null";
-    return JSON.stringify({h:(o.hidden||[]).slice().sort(), p:o.pinned||[], l:o.labels||{}, o:o.order||{}, m:o.moves||{}, a:(o.adds||[]).slice().sort()}); }
-  function blankOV(){ return {hidden:[],pinned:[],labels:{},order:{},moves:{},adds:[]}; }
+    return JSON.stringify({h:(o.hidden||[]).slice().sort(), p:o.pinned||[], l:o.labels||{}, o:o.order||{}, m:o.moves||{}, a:(o.adds||[]).slice().sort(), sh:(o.searchHidden||[]).slice().sort()}); }
+  function blankOV(){ return {hidden:[],pinned:[],labels:{},order:{},moves:{},adds:[],searchHidden:[]}; }
   function loadOV(){
     var draft=null;
     try{ var raw=JSON.parse(localStorage.getItem(LS)||"null"); if(raw&&typeof raw==="object") draft=normOV(raw); }catch(e){}
@@ -265,6 +272,7 @@
     $("#actLabel").onclick=function(){ if(actCtx) editLabel(actCtx.path, actCtx.name); closeAct(); };
     $("#actMove").onclick=function(){ if(actCtx){ var c=actCtx; closeAct(); openMove(c.op, c.path, c.name); } };
     $("#actHide").onclick=function(){ if(actCtx) toggleHide(actCtx.path); closeAct(); };
+    $("#actSearchHide").onclick=function(){ if(actCtx) toggleSearchHide(actCtx.op); closeAct(); };
     $("#actNewSub").onclick=function(){ if(actCtx){ var c=actCtx; closeAct(); newFolder(c.path); } };
     $("#actDelVirtual").onclick=function(){ if(actCtx) removeVirtual(actCtx.path); closeAct(); };
     window.dgeOpenRowActions=function(ctx){
@@ -272,6 +280,7 @@
       $("#actWhat").textContent=ctx.name.replace(/_/g," ");
       $("#actPinLabel").textContent=isPinned(ctx.path)?"Unpin":"Pin to top";
       $("#actHideLabel").textContent=selfHidden(ctx.path)?"Unhide (show again)":"Hide";
+      $("#actSearchHideLabel").textContent=(OV.searchHidden||[]).indexOf(ctx.op)>=0?"Show in search again":"Hide from search";
       $("#actNewSub").style.display=ctx.leaf?"none":"";
       $("#actDelVirtual").style.display=ctx.virtual?"":"none";
       $("#actOv").classList.add("show");
@@ -502,10 +511,12 @@
     // inline since reordering is the most frequent action here. A quiet
     // dot on the ⋮ button itself (not a whole extra badge) still signals
     // "something here has a custom edit" without costing any more width.
-    var anyEdit = pinned || hid || custom || moved || n.virtual;
+    var srchHidden=(OV.searchHidden||[]).indexOf(n.opath)>=0;
+    var srchMark= srchHidden? '<span class="pin" style="opacity:.55" title="hidden from corpus search (Library tree unaffected)">🔍̶</span>':'';
+    var anyEdit = pinned || hid || custom || moved || n.virtual || srchHidden;
     if(n.virtual) badge='<span class="badge pend" title="curator-added folder — shows to readers once something is moved into it">new</span>';
     var row='<div class="row" draggable="true" data-path="'+esc(n.path)+'" data-op="'+esc(n.opath)+'" data-parent="'+esc(parentPath||"")+'" data-name="'+esc(n.name)+'" data-leaf="'+(n.leaf?1:0)+'" data-virtual="'+(n.virtual?1:0)+'">'+
-      tw+dot+pinMark+movedMark+
+      tw+dot+pinMark+movedMark+srchMark+
       '<span class="nm"><span class="actual">'+nameShown+'</span>'+(custom?' <span class="disp">✎</span>':'')+' <span class="path">'+esc(n.path)+'</span>'+(moved?' <span class="disp">from '+esc(n.opath)+'</span>':'')+'</span>'+
       cnt+badge+src+
       '<button class="ctl" data-act="up" title="move up">▲</button>'+
@@ -632,6 +643,10 @@
   }
 
   function toggleHide(path){ var i=OV.hidden.indexOf(path); if(i>=0) OV.hidden.splice(i,1); else OV.hidden.push(path); saveOV(); render(); }
+  // Hide from the CORPUS SEARCH only (global-search.js reads searchHidden
+  // and drops matching hits for readers; the Library tree is untouched).
+  // Real slug (opath), so display moves never shift what search hides.
+  function toggleSearchHide(op){ OV.searchHidden=OV.searchHidden||[]; var i=OV.searchHidden.indexOf(op); if(i>=0) OV.searchHidden.splice(i,1); else OV.searchHidden.push(op); saveOV(); render(); }
   // Curator-added folders (the "add a new node" ask, 31 Aug 2026): a new
   // display-layer folder anywhere in the tree. It becomes a normal move
   // destination immediately; readers see it once something lives in it.
@@ -793,7 +808,8 @@
       labels:OV.labels||{},
       order:OV.order||{},
       moves:OV.moves||{},
-      adds:(OV.adds||[]).slice().sort()
+      adds:(OV.adds||[]).slice().sort(),
+      searchHidden:(OV.searchHidden||[]).slice().sort()
     };
     var blob=new Blob([JSON.stringify(out,null,1)],{type:"application/json"});
     var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="library-overrides.json"; a.click();

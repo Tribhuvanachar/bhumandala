@@ -1173,10 +1173,8 @@ function dgeHighlightQueryOnLoad(query, attempt, hadJumpTarget) {
 window.dgeHighlightQueryOnLoad = dgeHighlightQueryOnLoad;
 
 // Turns a { vedicId } or { shlokaNumber } target into an actual internal
-// shloka key and jumps there via playShloka() — the same primitive every
-// other "go to this verse" interaction (tapping a card, Prev/Next) already
-// uses, so this behaves identically (scrolls into view, updates the
-// reading card, etc.) without a second, parallel navigation path.
+// shloka key and jumps there via loadShloka() — select, scroll, update the
+// reading card, but never start audio (see the comment at the call).
 function dgeResolveQuickJumpTarget(target) {
   if (!stotraData || !stotraData.shlokas) return;
 
@@ -1215,8 +1213,14 @@ function dgeResolveQuickJumpTarget(target) {
     }
   }
 
-  if (targetId && typeof playShloka === 'function') {
-    playShloka(parseInt(targetId, 10));
+  // loadShloka, NOT playShloka (1 Sep 2026, project-lead report): arriving
+  // at a verse — quick jump, a search result, a deep link — should select
+  // and scroll to it, never start its audio. playShloka here made every
+  // such arrival auto-play on desktop (mobile browsers block that autoplay,
+  // which is why it read as a desktop-only bug). Audio starts only from an
+  // explicit ▶.
+  if (targetId && typeof loadShloka === 'function') {
+    loadShloka(parseInt(targetId, 10));
   } else if (typeof showToast === 'function') {
     showToast('Could not find that verse in this text.');
   }
