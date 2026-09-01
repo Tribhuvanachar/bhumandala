@@ -993,6 +993,65 @@ def is_container_page(soup: BeautifulSoup, html: str) -> bool:
     return not extract_layers(soup)
 
 
+# ---- lazy "Load More" units -------------------------------------------------
+# A category-details page's initial HTML carries exactly ONE #article<id>
+# block (the page's `first_sutra_id`); every further unit listed in the
+# RIGHT-hand nav (`.explanation-text` entries) is only ever delivered by the
+# site's Load More ajax: GET /load-data?book_id=<b>&id=<unit>&search=
+# which returns {"html": "<div id=article<unit>>…", "tag": …, "sutraId": …}.
+# The original import never followed that endpoint, so every page
+# contributed only its first unit — verified live, 1 Sep 2026, against
+# category-details/977/975 (maṅgalamācaraṇam): total_sutra_count=9, initial
+# HTML holds article978 alone, units 979–986 exist only behind /load-data,
+# and exactly those eight were absent from dge/data (the reported missing
+# "गुरुराजेन" passages among them).
+_QQ = "[\"']"
+_BOOK_ID_RE = re.compile(
+    "id=" + _QQ + "category_book_id" + _QQ + "[^>]*value=" + _QQ + r"(\d+)")
+_LAZY_ID_RES = (
+    re.compile("class=" + _QQ + "explanation-text" + _QQ + "[^>]*id=" + _QQ + r"(\d+)" + _QQ),
+    re.compile("id=" + _QQ + r"(\d+)" + _QQ + "[^>]*class=" + _QQ + "explanation-text" + _QQ),
+)
+
+
+def extract_lazy_units(html: str):
+    """(book_id, [unit_id, ...]) still waiting behind the page's Load More."""
+    html = html or ""
+    m = _BOOK_ID_RE.search(html)
+    ids = []
+    for rx in _LAZY_ID_RES:
+        ids = rx.findall(html)
+        if ids:
+            break
+    seen, ordered = set(), []
+    for i in ids:
+        if i not in seen:
+            seen.add(i)
+            ordered.append(i)
+    return (m.group(1) if m else None), ordered
+
+
+def parse_load_fragment(fragment_html: str, page_record: dict,
+                        unit_id: str, page_url: str) -> dict:
+    """Parse one /load-data response's `html` into the same record shape
+    parse_page() emits — the fragment carries the identical #article<id>
+    structure, so the layer extraction is shared, and the page's own
+    breadcrumb/ancestor carry over (the fragment has none of its own)."""
+    soup = strip_noise(make_soup(fragment_html or ""))
+    crumb = page_record.get("breadcrumb") or []
+    layers = extract_layers(soup, crumb[1] if len(crumb) > 1 else "")
+    return {
+        "url": page_url.split("#")[0] + "#article" + str(unit_id),
+        "content_id": str(unit_id),
+        "ancestor_id": page_record.get("ancestor_id"),
+        "breadcrumb": crumb,
+        "layers": layers,
+        "sidebar": [],
+        "is_container": not layers,
+        "no_record_marker": False,
+    }
+
+
 def parse_page(html: str, url: str) -> dict:
     """Parse one leaf page into a structured record."""
     soup = strip_noise(make_soup(html))

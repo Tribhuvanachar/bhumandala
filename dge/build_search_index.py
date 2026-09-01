@@ -375,7 +375,7 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
     backlinks = defaultdict(list)       # "target#unit_id" -> [{from, note}]
     stats = {"granthas": 0, "populated": 0, "units": 0, "unit_chars": 0,
              "refs": 0, "skipped_stub_units": 0, "skipped_stub_granthas": 0,
-             "folded_indic_units": 0,
+             "folded_indic_units": 0, "truncated_units": 0,
              "distinct_trigrams": 0, "distinct_words": 0}
 
     # (root, path) pairs: the slug is relative to the root the file came from,
@@ -434,9 +434,11 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
             # would index as a "word" no one can type, and a query word that
             # happens to equal the severed half would false-match.
             MAX_KEY = 2500
-            pk = phonetic_key(slp1)
+            pk_full = phonetic_key(slp1)
+            pk = pk_full
             if len(pk) > MAX_KEY:
                 pk = pk[:MAX_KEY].rsplit(" ", 1)[0]
+                stats["truncated_units"] += 1
             ck = coarse_key(slp1)[:MAX_KEY]
             ui = len(unit_rows)
             unit_rows.append({"u": uid, "pk": pk, "ck": ck, "s": snippet(dev_text)})
@@ -453,7 +455,16 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
             # Deduplicated per unit first -- a word repeated within one verse
             # (rare, but real) would otherwise post the same [gi,ui] pair
             # more than once for no benefit, just a bigger file.
-            for w in set(word_tokens(pk)):
+            # Word postings come from the FULL key, not the capped one: an
+            # exact word lookup needs no pk verification afterwards, and
+            # capping here made every word past ~2,500 chars of a mega-unit
+            # unfindable -- reported live (1 Sep 2026): गुरुराजेन sits at
+            # ~7,000 chars into three 8-20K-char Vakyartharatnamala units
+            # and exact search returned zero. Trigram postings stay on the
+            # capped pk deliberately -- the fuzzy scorer can only verify a
+            # candidate against the STORED pk, so posting beyond it would
+            # manufacture candidates the scorer must always reject.
+            for w in set(word_tokens(pk_full)):
                 word_postings[w][category].append([gi, ui])
             # cross-references -> backlinks
             for r in refs:
