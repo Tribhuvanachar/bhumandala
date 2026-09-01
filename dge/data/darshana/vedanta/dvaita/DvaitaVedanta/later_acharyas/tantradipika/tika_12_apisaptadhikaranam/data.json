@@ -1,0 +1,38 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/19255/19250/sharar/tanata/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_19395",
+   "reference": "श्रीराघवेन्द्रतीर्थ: > तन्त्रदीपिका > (साधनाध्यायः) तृतीयाध्यायः > प्रथमः पादः > तदन्तरप्रतिपत्त्यधिकरणम्",
+   "section": "प्रथमः पादः",
+   "unit_title": "तदन्तरप्रतिपत्त्यधिकरणम्",
+   "sanskrit_text": "अपिसप्ताधिकरणम्\n१२. अपिसप्ताधिकरणम्\nसूत्रम् : ३०९ ॥ ॐ अपि सप्त ॐ ॥ ३-१-१२-१\nअत्र हरिद्वेषिणः प्रागुक्तनित्यनरकः समर्थ्यते । संयमनमित्यस्ति । अपिपदात् स्मरन्तीत्यस्ति । संयमनं नरकं सप्तापि सप्रभेदमपि स्मरन्ति । न त्वेकविधम् । येन यावदिन्द्र इत्युक्तिविरोधः इत्यर्थः । 'रौखोऽथ महांश्चैव' इत्यादिस्मृतिकर्तार इत्यर्थः । स्मृतौ पञ्चानामेवानित्यत्वोक्त्या यावदिन्द्र इत्युक्तेस्तत्परत्वादिति भावः । यद्यपि बहुकोट्यो नरकाः, तथापि सप्त प्रधानानीत्यपिशब्द इति तत्वप्रदीपोक्तिः ॥ १२॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीराघवेन्द्रतीर्थ:",
+    "तन्त्रदीपिका",
+    "(साधनाध्यायः) तृतीयाध्यायः",
+    "प्रथमः पादः",
+    "तदन्तरप्रतिपत्त्यधिकरणम्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/19264/19250/sharar/tanata/sathha/parath#article19395",
+    "content_id": "19395",
+    "work_id": 19250,
+    "layer": "१२. अपिसप्ताधिकरणम्",
+    "anchor": "article19395",
+    "fetched": "2026-09-01"
+   },
+   "source_html": "<div class=\"lazy-1\" id=\"article19395\">\n<p class=\"shloka\">\n        अपिसप्ताधिकरणम्\n    </p>\n<p class=\"details\" id=\"dynamicContent\">\n</p><p><!--StartFragment--></p>\n<p class=\"MsoNormal\"><strong><span lang=\"HI\">१२. अपिसप्ताधिकरणम्</span> </strong></p>\n<h1><span lang=\"HI\">सूत्रम् : ३०९ ॥ ॐ अपि सप्त ॐ ॥ ३-१-१२-१</span></h1>\n<p class=\"MsoNormal\"><span lang=\"HI\">अत्र हरिद्वेषिणः प्रागुक्तनित्यनरकः समर्थ्यते । संयमनमित्यस्ति । अपिपदात् स्मरन्तीत्यस्ति । संयमनं नरकं सप्तापि सप्रभेदमपि स्मरन्ति । न त्वेकविधम् । येन यावदिन्द्र इत्युक्तिविरोधः इत्यर्थः । </span>'<span lang=\"HI\">रौखोऽथ महांश्चैव</span>' <span lang=\"HI\">इत्यादिस्मृतिकर्तार इत्यर्थः । स्मृतौ पञ्चानामेवानित्यत्वोक्त्या यावदिन्द्र इत्युक्तेस्तत्परत्वादिति भावः । यद्यपि बहुकोट्यो नरकाः</span>, <span lang=\"HI\">तथापि सप्त प्रधानानीत्यपिशब्द इति तत्वप्रदीपोक्तिः ॥ १२॥</span></p>\n<p><!--EndFragment--></p>\n</div>",
+   "tika_title": "१२. अपिसप्ताधिकरणम्"
+  }
+ ]
+}

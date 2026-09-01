@@ -1,0 +1,40 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/14224/931/upanas/6-aita/malma/thavat/parath",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_18300",
+   "reference": "उपनिषत्प्रस्थानम् > 6. ऐतरेयोपनिषद्भाष्यम् > टीका_टिप्पणि > तृतीयारण्यके > द्वितीयोऽध्यायः > चतुर्थ: खण्ड: > प्रत्यक्षज्ञानिनोऽप्येतदातनन्दह्रासकृद्भवेत्",
+   "section": "चतुर्थ: खण्ड:",
+   "unit_title": "प्रत्यक्षज्ञानिनोऽप्येतदातनन्दह्रासकृद्भवेत्",
+   "sanskrit_text": "एवमर्थेन पूज्यते\nरात्रिसूक्तोपासनं मोक्षसाधनम्\nभाष्यम्\n.....एवमर्थेन पूज्यते । रात्रीसूक्तेन भगवान् साक्षान्नारायणः प्रभुः ।। तत्सन्निधानाद् दुर्गाया एषोऽर्थ उपचारतः । एवं स्तुतस्तथैवेष्टो भगवान् मोक्षदो भवेत् ॥\nभावप्रदीप:\nएवं सूक्तं व्याख्यायोपसंहति - एवमर्थेनेति । एवमर्थकेन रात्रीसूक्तेन भगवान्नारायणः साक्षान्मुख्यतया पूज्यते । दुर्गायास्तु एषोऽर्थ उपचारतः अमुख्यतया ज्ञेयः । तदपि तत्सन्निधानादेव । एवं स्तुतस्तथा इष्टश्च रात्रीसूक्तेनेति शेषः ।।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "उपनिषत्प्रस्थानम्",
+    "6. ऐतरेयोपनिषद्भाष्यम्",
+    "टीका_टिप्पणि",
+    "तृतीयारण्यके",
+    "द्वितीयोऽध्यायः",
+    "चतुर्थ: खण्ड:",
+    "प्रत्यक्षज्ञानिनोऽप्येतदातनन्दह्रासकृद्भवेत्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/17950/931/upanas/6-aita/taka-t/tataya/thavat/catara#article18300",
+    "content_id": "18300",
+    "work_id": 931,
+    "layer": "रात्रिसूक्तोपासनं मोक्षसाधनम्",
+    "anchor": "article18300",
+    "fetched": "2026-09-01"
+   },
+   "source_html": "<div class=\"lazy-1\" id=\"article18300\">\n<p class=\"shloka\">\n        एवमर्थेन पूज्यते\n    </p>\n<p class=\"details\" id=\"dynamicContent\">\n</p><p><!--StartFragment--></p>\n<p class=\"MsoNormal\"><strong><span lang=\"HI\">रात्रिसूक्तोपासनं मोक्षसाधनम्</span> </strong></p>\n<h2><span lang=\"SA\">भाष्यम्</span></h2>\n<p class=\"MsoNormal\"><span lang=\"HI\">.....एवमर्थेन पूज्यते ।</span> <span lang=\"HI\">रात्रीसूक्तेन भगवान् साक्षान्नारायणः प्रभुः ।।</span> <span lang=\"HI\">तत्सन्निधानाद् दुर्गाया एषोऽर्थ उपचारतः । एवं स्तुतस्तथैवेष्टो भगवान् मोक्षदो भवेत् ॥</span></p>\n<h3><strong><span lang=\"SA\">भावप्रदीप:</span></strong></h3>\n<p class=\"MsoNormal\"><span lang=\"HI\">एवं सूक्तं व्याख्यायोपसंहति - एवमर्थेनेति । एवमर्थकेन रात्रीसूक्तेन भगवान्नारायणः साक्षान्मुख्यतया पूज्यते । दुर्गायास्तु एषोऽर्थ उपचारतः अमुख्यतया ज्ञेयः । तदपि तत्सन्निधानादेव । एवं स्तुतस्तथा इष्टश्च रात्रीसूक्तेनेति शेषः ।।</span></p>\n<p><!--EndFragment--></p>\n</div>",
+   "tika_title": "रात्रिसूक्तोपासनं मोक्षसाधनम्"
+  }
+ ]
+}

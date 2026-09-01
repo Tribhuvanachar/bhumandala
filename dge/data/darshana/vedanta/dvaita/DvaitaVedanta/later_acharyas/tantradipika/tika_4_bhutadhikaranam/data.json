@@ -1,0 +1,38 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/19255/19250/sharar/tanata/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_19488",
+   "reference": "श्रीराघवेन्द्रतीर्थ: > तन्त्रदीपिका > (फलाध्यायः) चतुर्थाध्यायः > द्वितीयः पादः > वाङ्मनसाधिकरणम्",
+   "section": "द्वितीयः पादः",
+   "unit_title": "वाङ्मनसाधिकरणम्",
+   "sanskrit_text": "भूताधिकरणम्\n४. भूताधिकरणम्\nसूत्रम् : ५०७ ॥ ॐ भूतेषु तच्छ्रुतेः ॐ ॥ ४-२-४-१\nअत्र प्राग् विशिष्योक्तान्यदेवानां भूतेषु लय उच्यते । प्रागुक्तेभ्योऽन्ये देवाः पञ्चसु भूतेषु भूताभिमानिषु लीयन्ते। न त्वेकस्मिन्नग्नाविति बहुवचनार्थः । कुतः ? तच्छ्रुतेः । तस्य भूतेषु देवानां लयस्य 'भूतेषु देवा विलीयन्ते' इति श्रवणादित्यर्थः । 'अग्नौ देवा विलीयन्ते' इति श्रुतिस्तु अग्रे सावकाशयिष्यत इति भावः ॥ ४ ॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीराघवेन्द्रतीर्थ:",
+    "तन्त्रदीपिका",
+    "(फलाध्यायः) चतुर्थाध्यायः",
+    "द्वितीयः पादः",
+    "वाङ्मनसाधिकरणम्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/19269/19250/sharar/tanata/falthh/thavat#article19488",
+    "content_id": "19488",
+    "work_id": 19250,
+    "layer": "४. भूताधिकरणम्",
+    "anchor": "article19488",
+    "fetched": "2026-09-01"
+   },
+   "source_html": "<div class=\"lazy-1\" id=\"article19488\">\n<p class=\"shloka\">\n        भूताधिकरणम्\n    </p>\n<p class=\"details\" id=\"dynamicContent\">\n</p><p><!--StartFragment--></p>\n<p class=\"MsoNormal\"><strong><span lang=\"HI\">४. भूताधिकरणम्</span> </strong></p>\n<h1><span lang=\"HI\">सूत्रम् : ५०७ ॥ ॐ भूतेषु तच्छ्रुतेः ॐ ॥ ४-२-४-१</span></h1>\n<p class=\"MsoNormal\"><span lang=\"HI\">अत्र प्राग् विशिष्योक्तान्यदेवानां भूतेषु लय उच्यते । प्रागुक्तेभ्योऽन्ये देवाः पञ्चसु भूतेषु भूताभिमानिषु लीयन्ते। न त्वेकस्मिन्नग्नाविति बहुवचनार्थः । कुतः </span>? <span lang=\"HI\">तच्छ्रुतेः । तस्य भूतेषु देवानां लयस्य </span>'<span lang=\"HI\">भूतेषु देवा विलीयन्ते</span>' <span lang=\"HI\">इति श्रवणादित्यर्थः । </span>'<span lang=\"HI\">अग्नौ देवा विलीयन्ते</span>' <span lang=\"HI\">इति श्रुतिस्तु अग्रे सावकाशयिष्यत इति भावः ॥ ४ ॥</span></p>\n<p><!--EndFragment--></p>\n</div>",
+   "tika_title": "४. भूताधिकरणम्"
+  }
+ ]
+}

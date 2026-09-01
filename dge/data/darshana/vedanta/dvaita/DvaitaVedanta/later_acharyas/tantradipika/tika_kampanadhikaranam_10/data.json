@@ -1,0 +1,38 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/19255/19250/sharar/tanata/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_19302",
+   "reference": "श्रीराघवेन्द्रतीर्थ: > तन्त्रदीपिका > (समन्वयाध्यायः) प्रथमाध्यायः > तृतीयः पादः > द्युभ्वाधिकरणम्",
+   "section": "तृतीयः पादः",
+   "unit_title": "द्युभ्वाधिकरणम्",
+   "sanskrit_text": "कम्पनाधिकरणम्\nकम्पनाधिकरणम्--१०\n॥ ॐ कम्पनात् ॐ ॥ १-३-३९\nअत्र वज्रनाम समन्वीयते । योग्यतया वज्र इत्यन्वेति । तत्वित्यस्ति । “ महद्भयं वज्रमुद्यतम्\" इत्युक्तवज्रो ब्रह्मैव । न त्विन्द्रायुधम् । कम्पनात् \" जगत्सर्वं प्राण एजति निःसृतम्” इति । कम्पनवचनात् जगच्चेष्टकत्वलिङ्गादित्यर्थः ॥ ॥ १० ॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीराघवेन्द्रतीर्थ:",
+    "तन्त्रदीपिका",
+    "(समन्वयाध्यायः) प्रथमाध्यायः",
+    "तृतीयः पादः",
+    "द्युभ्वाधिकरणम्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/19258/19250/sharar/tanata/samana/tataya#article19302",
+    "content_id": "19302",
+    "work_id": 19250,
+    "layer": "कम्पनाधिकरणम्--१०",
+    "anchor": "article19302",
+    "fetched": "2026-09-01"
+   },
+   "source_html": "<div class=\"lazy-1\" id=\"article19302\">\n<p class=\"shloka\">\n        कम्पनाधिकरणम्\n    </p>\n<p class=\"details\" id=\"dynamicContent\">\n</p><p><!--StartFragment--></p>\n<p class=\"MsoNormal\"><strong><span lang=\"HI\">कम्पनाधिकरणम्--१०</span></strong></p>\n<h1 class=\"MsoNormal\"><span class=\"Heading1Char\"><span lang=\"HI\">॥ ॐ कम्पनात्</span></span><span class=\"Heading1Char\"><span> </span></span><span class=\"Heading1Char\"><span lang=\"HI\"> ॐ ॥</span></span> <span class=\"Heading1Char\"><span lang=\"HI\">१-३-३९</span></span></h1>\n<p class=\"MsoNormal\"><span lang=\"HI\">अत्र वज्रनाम समन्वीयते । योग्यतया वज्र इत्यन्वेति ।</span> <span lang=\"HI\">तत्वित्यस्ति ।</span> “ <span lang=\"HI\">महद्भयं वज्रमुद्यतम्\" इत्युक्तव</span><span lang=\"SA\">ज्रो</span><span lang=\"HI\"> ब्रह्मैव । न त्विन्द्रायुधम् । कम्पनात् \" जगत्सर्वं प्राण एजति निःसृतम्</span>” <span lang=\"HI\">इति । कम्पनवचनात् जगच्चेष्टकत्वलिङ्गादित्यर्थः ॥ ॥ १० ॥</span></p>\n<p><!--EndFragment--></p>\n</div>",
+   "tika_title": "कम्पनाधिकरणम्--१०"
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/19255/19250/sharar/tanata/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_19504",
+   "reference": "श्रीराघवेन्द्रतीर्थ: > तन्त्रदीपिका > (फलाध्यायः) चतुर्थाध्यायः > चतुर्थः पादः > सम्पद्याधिकरणम्",
+   "section": "चतुर्थः पादः",
+   "unit_title": "सम्पद्याधिकरणम्",
+   "sanskrit_text": "अविभागाधिकरणम्\n४. अविभागाधिकरणम्\nसूत्रम् : ५४५ ॥ ॐ अविभागेन दृष्टत्वात् ॐ ॥ ४-४-४-१\nअत्र सायुज्यभाजां ईशभुक्तभोगवत्त्वं साध्यते । अविभागेन परमात्मभोगाविभागेन सायुज्यभाजो भोगान् भुञ्जते । तद्भागानेव कांश्चिद्भुञ्जते, न पार्थक्येनेति यावत् । कुतः? दृष्टत्वात् । 'यानेवाहं शृणोमि यान् पश्यामि' इत्यादिश्रुतौ तथा दृष्टत्वादित्यर्थः । श्रुतिरिति वाच्ये दृष्टत्वादित्युक्तिः मन्त्र्यादौ राजभोग्यगानलास्यादिकिञ्चिद्भोक्तृत्वस्य लोके दृष्टत्वादिति सूचयितुम् ॥४॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीराघवेन्द्रतीर्थ:",
+    "तन्त्रदीपिका",
+    "(फलाध्यायः) चतुर्थाध्यायः",
+    "चतुर्थः पादः",
+    "सम्पद्याधिकरणम्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/19271/19250/sharar/tanata/falthh/catara#article19504",
+    "content_id": "19504",
+    "work_id": 19250,
+    "layer": "४. अविभागाधिकरणम्",
+    "anchor": "article19504",
+    "fetched": "2026-09-01"
+   },
+   "source_html": "<div class=\"lazy-1\" id=\"article19504\">\n<p class=\"shloka\">\n        अविभागाधिकरणम्\n    </p>\n<p class=\"details\" id=\"dynamicContent\">\n</p><p><!--StartFragment--></p>\n<p class=\"MsoNormal\"><strong><span lang=\"HI\">४. अविभागाधिकरणम्</span> </strong></p>\n<h1><span lang=\"HI\">सूत्रम् : ५४</span><span lang=\"SA\">५</span><span lang=\"HI\"> ॥ ॐ अविभागेन दृष्टत्वात् ॐ ॥ ४-४-४-१</span></h1>\n<p class=\"MsoNormal\"><span lang=\"HI\">अत्र सायुज्यभाजां ईशभुक्तभोगवत्त्वं साध्यते । अविभागेन परमात्मभोगाविभागेन सायुज्यभाजो भोगान् भुञ्जते । तद्भागानेव कांश्चिद्भुञ्जते</span>, <span lang=\"HI\">न पार्थक्येनेति यावत् । कुतः</span>? <span lang=\"HI\">दृष्टत्वात् । </span>'<span lang=\"HI\">यानेवाहं शृणोमि यान् पश्यामि</span>' <span lang=\"HI\">इत्यादिश्रुतौ तथा दृष्टत्वादित्यर्थः । श्रुतिरिति वाच्ये दृष्टत्वादित्युक्तिः मन्त्र्यादौ राजभोग्यगानलास्यादिकिञ्चिद्भोक्तृत्वस्य लोके दृष्टत्वादिति सूचयितुम् ॥४॥</span></p>\n<p><!--EndFragment--></p>\n</div>",
+   "tika_title": "४. अविभागाधिकरणम्"
+  }
+ ]
+}

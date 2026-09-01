@@ -1,0 +1,38 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/19255/19250/sharar/tanata/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_19506",
+   "reference": "श्रीराघवेन्द्रतीर्थ: > तन्त्रदीपिका > (फलाध्यायः) चतुर्थाध्यायः > चतुर्थः पादः > सम्पद्याधिकरणम्",
+   "section": "चतुर्थः पादः",
+   "unit_title": "सम्पद्याधिकरणम्",
+   "sanskrit_text": "सङ्कल्पाधिकरणम्\n६. सङ्कल्पाधिकरणम्\nसूत्रम्: ५४९ ॥ ॐ सङ्कल्पादेव च तच्छ्रुतेः ॐ ॥ ४-४-६-१\nअत्र मुक्तस्य सङ्कल्पमात्रसाध्यभोगवत्त्वं साध्यते । मुक्तानां सङ्कल्पादेव भोगसिद्धिः। कुतः? तच्छ्रुतेः । 'सङ्कल्पादेवास्य पितरः समुत्तिष्ठन्ति' इति तस्य श्रवणादित्यर्थः । चशब्दस्तु लोके भोगस्य कर्मसाध्यत्वात् मुक्तभोगस्यापि प्रयत्नापेक्षेति न वाच्यमिति शङ्काव्यावृत्त्यर्थ इति टीका । चकारादनिष्टभोगोपरमश्चेति तत्त्वप्रदीपोक्तिः ॥६॥",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीराघवेन्द्रतीर्थ:",
+    "तन्त्रदीपिका",
+    "(फलाध्यायः) चतुर्थाध्यायः",
+    "चतुर्थः पादः",
+    "सम्पद्याधिकरणम्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/19271/19250/sharar/tanata/falthh/catara#article19506",
+    "content_id": "19506",
+    "work_id": 19250,
+    "layer": "६. सङ्कल्पाधिकरणम्",
+    "anchor": "article19506",
+    "fetched": "2026-09-01"
+   },
+   "source_html": "<div class=\"lazy-1\" id=\"article19506\">\n<p class=\"shloka\">\n        सङ्कल्पाधिकरणम्\n    </p>\n<p class=\"details\" id=\"dynamicContent\">\n</p><p><!--StartFragment--></p>\n<p class=\"MsoNormal\"><strong><span lang=\"HI\">६. सङ्कल्पाधिकरणम्</span> </strong></p>\n<h1><span lang=\"HI\">सूत्रम्</span><span lang=\"SA\">:</span><span lang=\"HI\"> ५४</span><span lang=\"SA\">९</span><span lang=\"HI\"> ॥ ॐ सङ्कल्पादेव च तच्छ्रुतेः ॐ ॥</span> <span lang=\"HI\">४-४-६-१</span></h1>\n<p class=\"MsoNormal\"><span lang=\"HI\">अत्र मुक्तस्य सङ्कल्पमात्रसाध्यभोगवत्त्वं साध्यते । मुक्तानां सङ्कल्पादेव भोगसिद्धिः। कुतः</span>? <span lang=\"HI\">तच्छ्रुतेः । </span>'<span lang=\"HI\">सङ्कल्पादेवास्य पितरः समुत्तिष्ठन्ति</span>' <span lang=\"HI\">इति तस्य श्रवणादित्यर्थः । चशब्दस्तु लोके भोगस्य कर्मसाध्यत्वात् मुक्तभोगस्यापि</span> <span lang=\"HI\">प्रयत्नापेक्षेति न वाच्यमिति शङ्काव्यावृत्त्यर्थ इति टीका । चकारादनिष्टभोगोपरमश्चेति तत्त्वप्रदीपोक्तिः ॥६॥</span></p>\n<p><!--EndFragment--></p>\n</div>",
+   "tika_title": "६. सङ्कल्पाधिकरणम्"
+  }
+ ]
+}
