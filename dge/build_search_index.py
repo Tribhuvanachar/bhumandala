@@ -58,6 +58,32 @@ _ZERO_WIDTH = re.compile(r"[​-‍﻿]")
 _DEVANAGARI = re.compile(r"[ऀ-ॿ]")   # this corpus stores text in Devanagari
 
 
+# ---- Indic-script fold: Kannada / Telugu / Malayalam -> Devanagari --------
+# These blocks share the Devanagari block's layout codepoint-for-codepoint
+# for every letter, matra and sign this corpus uses, so a plain block
+# transposition (after NFC) yields correct Devanagari for INDEXING.
+# Reported live (31 Aug 2026): the entire Kannada-script Yuktimallika
+# (dasa_sahitya/vyasakuta/vadiraja_tirtha, 5,542 units -- "ಭಕ್ತ್ಯಾ ಸ್ತುತ್ಯಾ...")
+# was dropped by the has_devanagari stub gate below, so स्तुत्या could never
+# find it. The fold runs only when a unit has no Devanagari of its own, and
+# only feeds pk/ck/postings -- the stored snippet keeps the original script,
+# since a reader of a Kannada grantha expects Kannada on screen.
+_INDIC_FOLD_BLOCKS = (0x0C80, 0x0C00, 0x0D00)  # Kannada, Telugu, Malayalam
+
+
+def fold_indic_to_devanagari(text: str) -> str:
+    t = unicodedata.normalize("NFC", text or "")
+    out = []
+    for ch in t:
+        cp = ord(ch)
+        for base in _INDIC_FOLD_BLOCKS:
+            if base <= cp < base + 0x80:
+                ch = chr(cp - base + 0x0900)
+                break
+        out.append(ch)
+    return "".join(out)
+
+
 def has_devanagari(text: str) -> bool:
     """True only for real Devanagari content — excludes template stubs like
     'Sanskrit text goes here...' and non-Devanagari-script text (e.g. Kannada
@@ -349,6 +375,7 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
     backlinks = defaultdict(list)       # "target#unit_id" -> [{from, note}]
     stats = {"granthas": 0, "populated": 0, "units": 0, "unit_chars": 0,
              "refs": 0, "skipped_stub_units": 0, "skipped_stub_granthas": 0,
+             "folded_indic_units": 0,
              "distinct_trigrams": 0, "distinct_words": 0}
 
     # (root, path) pairs: the slug is relative to the root the file came from,
@@ -389,10 +416,17 @@ def build(data_dir: str, out_dir: str, extra_dirs=(), commentaries=False) -> dic
         unit_rows = []
         for uid, dev_text, refs in units:
             clean = clean_devanagari(dev_text)
-            # skip template stubs / non-Devanagari placeholder text
+            # skip template stubs / non-Devanagari placeholder text -- but a
+            # unit written in an aligned Indic script (Kannada dasa-sahitya)
+            # folds to Devanagari for indexing instead of being dropped.
             if not has_devanagari(clean):
-                stats["skipped_stub_units"] += 1
-                continue
+                folded = clean_devanagari(fold_indic_to_devanagari(dev_text))
+                if has_devanagari(folded):
+                    clean = folded
+                    stats["folded_indic_units"] += 1
+                else:
+                    stats["skipped_stub_units"] += 1
+                    continue
             slp1 = to_slp1(clean, "devanagari")
             # cap indexed key length: enough to locate a passage, and it stops a
             # few very large merged/prose blocks from bloating the static index.
