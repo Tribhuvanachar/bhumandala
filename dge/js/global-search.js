@@ -732,8 +732,29 @@
   // Everything else stays byte-strict: vowel length, sibilant identity
   // (श/ष/स), visarga, gemination -- those distinguish genuinely different
   // words, which is exactly what "Exact spelling only" promises to honor.
+  // Kannada / Telugu / Malayalam blocks share Devanagari's layout
+  // codepoint-for-codepoint, so a plain block transposition maps them onto
+  // Devanagari EXACTLY (same fold build_search_index.py applies at index
+  // time -- the two must stay twins). Reported live, 31 Aug 2026: the
+  // Kannada Yuktimallika's "ಭಕ್ತ್ಯಾ ಸ್ತುತ್ಯಾ" IS an exact hit for स्तुत्या --
+  // identical orthography, different script -- but the Devanagari-substring
+  // check below could never see it, so genuinely exact Dāsa-Sāhitya hits
+  // were hidden while their category chip still advertised them.
+  var DGE_GS_INDIC_FOLD_BLOCKS = [0x0C80, 0x0C00, 0x0D00]; // Kannada, Telugu, Malayalam
+  function dgeGsFoldIndic(s) {
+    var out = '';
+    for (var i = 0; i < s.length; i++) {
+      var cp = s.charCodeAt(i), ch = s[i];
+      for (var b = 0; b < DGE_GS_INDIC_FOLD_BLOCKS.length; b++) {
+        var base = DGE_GS_INDIC_FOLD_BLOCKS[b];
+        if (cp >= base && cp < base + 0x80) { ch = String.fromCharCode(cp - base + 0x0900); break; }
+      }
+      out += ch;
+    }
+    return out;
+  }
   function dgeGsExactNormalize(s) {
-    return String(s || '').normalize('NFC').replace(/[‌‍]/g, '')
+    return dgeGsFoldIndic(String(s || '').normalize('NFC')).replace(/[‌‍]/g, '')
       .replace(/[ङञणनम]्(?=[क-ह])/g, 'ं');
   }
 
@@ -1335,10 +1356,22 @@
     bar.innerHTML = '';
     bar.style.display = 'flex';
 
+    // Counts must reflect what the reader can actually SEE under the
+    // current "Exact spelling only" state -- a category chip advertising
+    // (3) that produces 0 rows on tap (reported live, 31 Aug 2026, with
+    // स्तुत्या) reads as a broken app. The chips' click handlers still pass
+    // the FULL set around, so toggling exact re-counts automatically.
+    var countBase = hits;
+    if (filterState.exact && lastQueryDeva) {
+      var qE = dgeGsExactNormalize(lastQueryDeva);
+      countBase = hits.filter(function (h) {
+        return h.snippet && dgeGsExactNormalize(h.snippet).indexOf(qE) !== -1;
+      });
+    }
     var typeCounts = {};
     var catCounts = {};
     var sidCounts = {};
-    hits.forEach(function (h) {
+    countBase.forEach(function (h) {
       typeCounts[h.contentType] = (typeCounts[h.contentType] || 0) + 1;
       catCounts[h.category] = (catCounts[h.category] || 0) + 1;
       var sid = siddhantaOf(h.grantha);
