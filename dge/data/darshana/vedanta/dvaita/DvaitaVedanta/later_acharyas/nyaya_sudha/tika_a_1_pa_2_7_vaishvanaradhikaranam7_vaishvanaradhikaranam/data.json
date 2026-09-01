@@ -1,0 +1,38 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_15307",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > प्रथमाध्यायः > द्वितीयः पादः > प्रश्न-उत्तर > सर्वगतत्वाधिकरणम्",
+   "section": "प्रश्न-उत्तर",
+   "unit_title": "सर्वगतत्वाधिकरणम्",
+   "sanskrit_text": "वैश्वानराधिकरणम्\nStartFragmentअ-1, पा-2 - 7. वैश्वानराधिकरणम्\n7. वैश्वानराधिकरणम्\n144. लिंगाधिका इत्यनेन किमुक्तम् 1736\n145. वैश्वानरस्य विष्णुत्वनिर्धारः न भवति अग्न्यादिशब्दानां होमाधिकरणत्वादिलिंगानां श्रवणात् - इत्यस्य विवरणं कार्यम् 1736\n146. अग्न्यादिशब्दानाम् अन्यत्र बहुला रूढिरस्ति इत्यस्य किमुत्तरम् 1737\nइति वैश्वानराधिकरणम्\nइति प्रथमाध्यायस्य द्वितीयपादः",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "प्रथमाध्यायः",
+    "द्वितीयः पादः",
+    "प्रश्न-उत्तर",
+    "सर्वगतत्वाधिकरणम्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14913/975/sharam/sathha/parath/thavat/parash#article15307",
+    "content_id": "15307",
+    "work_id": 975,
+    "layer": "अ- 1, पा- 2 - 7. वैश्वानराधिकरणम् 7. वैश्वानराधिकरणम्",
+    "anchor": "article15307",
+    "fetched": "2026-09-01"
+   },
+   "tika_title": "अ- 1, पा- 2 - 7. वैश्वानराधिकरणम् 7. वैश्वानराधिकरणम्"
+  }
+ ]
+}

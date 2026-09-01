@@ -1,0 +1,38 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_15388",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > चतुर्थाध्यायः > द्वितीयः पादः > प्रश्न-उत्तर > पादप्रतिपाद्यं संगतिश्च",
+   "section": "प्रश्न-उत्तर",
+   "unit_title": "पादप्रतिपाद्यं संगतिश्च",
+   "sanskrit_text": "अन्यथा मोक्षस्वरूपवर्णने निमित्तम्\n2. अन्यथा मोक्षस्वरूपवर्णने निमित्तम्\n90. स्वमतरीत्या मोक्षस्वरूपं किमुक्तं 5455\n91. वादिनां विमतौ किं कारणं 5456\n92. मुक्तानां सम्यग्ज्ञानं कथं भवति 5457\n93. दैत्यानां स्वरूपज्ञाने असम्यक्त्वं कथं 5457\n94. ईशमतेः स्वरूपं किं 5459\n95. लक्ष्मीमतेः स्वरूपं किं 5465\n96. ब्रह्ममतिस्वरूपं किं 5466\n97. ब्रह्मभिन्नमुक्तानां मतिः कीदृशी 5466\n98. संसारस्थानां ज्ञानं कीदृशं 5466\n99. नानाविधमोक्षनिरूपणे किं निमित्तं उक्तम् 5468\n।। इति अन्यथा मोक्षस्वरूपवर्णने निमित्तम् ।।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "चतुर्थाध्यायः",
+    "द्वितीयः पादः",
+    "प्रश्न-उत्तर",
+    "पादप्रतिपाद्यं संगतिश्च"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/14909/975/sharam/sathha/catara/thavat/parash#article15388",
+    "content_id": "15388",
+    "work_id": 975,
+    "layer": "2. अन्यथा मोक्षस्वरूपवर्णने निमित्तम्",
+    "anchor": "article15388",
+    "fetched": "2026-09-01"
+   },
+   "tika_title": "2. अन्यथा मोक्षस्वरूपवर्णने निमित्तम्"
+  }
+ ]
+}

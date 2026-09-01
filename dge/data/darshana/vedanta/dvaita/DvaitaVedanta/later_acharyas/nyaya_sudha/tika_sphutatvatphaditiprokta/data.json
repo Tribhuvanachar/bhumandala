@@ -1,0 +1,39 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_7285",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > प्रथमाध्यायः > चतुर्थः पादः > ज्योतिरधिकरणम् > विष्णौ जगतो हेतुत्वात् हुं भगवान् > हुं च हुतमस्मिन् जगद्यतः",
+   "section": "विष्णौ जगतो हेतुत्वात् हुं भगवान्",
+   "unit_title": "हुं च हुतमस्मिन् जगद्यतः",
+   "sanskrit_text": "स्फुटत्वात्फडिति प्रोक्तः\nअनुव्याख्यानम्\nस्फुटत्वात्फडिति प्रोक्तः...........।\nसुधा\nस्फुटविकसन इत्यस्मात्कर्तरि क्विप् । सकारलोपः । उकारस्याकारः । स्फुटत्वात्स्वात्मानं प्रति व्यक्तत्वादसङ्कुचितवृत्तित्वात् (इति) वा ।\nशेषवाक्यार्थचन्द्रिका\nक्विबिति । क्विप्चेति सूत्रेणेति शेषः । ततश्च कृदन्ततया प्रातिपदिकत्वमिति भावः । नन्वेवं स्फुडिति स्यात्कथं फडित्यतो निरुक्तत्वात्सकारलोपाद्युपपत्तेरदोष इत्याह सकारलोप इत्यादिना ।\nश्रीनिवासतीर्थीया\nतर्हि फुटेति स्यादित्यत आह उकारस्येति ।।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "प्रथमाध्यायः",
+    "चतुर्थः पादः",
+    "ज्योतिरधिकरणम्",
+    "विष्णौ जगतो हेतुत्वात् हुं भगवान्",
+    "हुं च हुतमस्मिन् जगद्यतः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/6905/975/sharam/sathha/parath/catara/jayata/vashha#article7285",
+    "content_id": "7285",
+    "work_id": 975,
+    "layer": "स्फुटत्वात्फडिति प्रोक्तः",
+    "anchor": "article7285",
+    "fetched": "2026-09-01"
+   },
+   "tika_title": "स्फुटत्वात्फडिति प्रोक्तः"
+  }
+ ]
+}

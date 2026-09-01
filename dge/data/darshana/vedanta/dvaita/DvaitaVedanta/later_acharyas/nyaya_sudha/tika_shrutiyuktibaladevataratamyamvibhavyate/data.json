@@ -1,0 +1,39 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_10601",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > तृतीयाध्यायः > चतुर्थः पादः > कामचाराधिकरणम् ३ > मुक्तानां निर्दुःखत्वे श्रुत्युपन्यासः > शोकं तरत्यात्मवेत्ता तीर्णः सर्वानदुःखभाक्",
+   "section": "मुक्तानां निर्दुःखत्वे श्रुत्युपन्यासः",
+   "unit_title": "शोकं तरत्यात्मवेत्ता तीर्णः सर्वानदुःखभाक्",
+   "sanskrit_text": "श्रुतियुक्तिबलादेव तारतम्यं विभाव्यते\nसुधा\nमुक्ततारतम्यसाधनमुपसंहरति श्रुतीति ।\nअनुव्याख्यानम्\nश्रुतियुक्तिबलादेव तारतम्यं विभाव्यते ।।\nमुक्तावपि ततः केऽत्र विरोधं कर्तुमीशते ।। ३४४ ।।\nविभाव्यते सम्यगनुभूयते । के वादिनो न केऽपि । अत्र मुक्ततारतम्यविषये ।।\n।। इति कामचाराधिकरणम् ।। ३४४ ।।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "तृतीयाध्यायः",
+    "चतुर्थः पादः",
+    "कामचाराधिकरणम् ३",
+    "मुक्तानां निर्दुःखत्वे श्रुत्युपन्यासः",
+    "शोकं तरत्यात्मवेत्ता तीर्णः सर्वानदुःखभाक्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/9608/975/sharam/sathha/tataya/catara/kamaca/makata#article10601",
+    "content_id": "10601",
+    "work_id": 975,
+    "layer": "श्रुतियुक्तिबलादेव तारतम्यं विभाव्यते",
+    "anchor": "article10601",
+    "fetched": "2026-09-01"
+   },
+   "tika_title": "श्रुतियुक्तिबलादेव तारतम्यं विभाव्यते"
+  }
+ ]
+}

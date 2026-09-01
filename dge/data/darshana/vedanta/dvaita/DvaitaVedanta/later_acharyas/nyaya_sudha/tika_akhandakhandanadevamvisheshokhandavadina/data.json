@@ -1,0 +1,39 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_10268",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > तृतीयाध्यायः > द्वितीयः पादः > उभयव्यपदेशाधिकरणम् २ > अखण्डार्थवादो न युक्तः > असुखत्वानिवर्तनात्",
+   "section": "अखण्डार्थवादो न युक्तः",
+   "unit_title": "असुखत्वानिवर्तनात्",
+   "sanskrit_text": "अखण्डखण्डनादेवं विशेषोऽखण्डवादिना\nसुधा\nउपसंहरति अखण्डेति ।\nअनुव्याख्यानम्\nअखण्डखण्डनादेवं विशेषोऽखण्डवादिना ।।\nखण्डितेनापि मनसा स्वीकार्योऽनन्यथागतेः ।।\nएव(यस्मादे)मखण्डखण्डनादखण्डवादिनाऽपीत्यन्वयः । अनन्यथागतेः हेतोः, खण्डितेन उत्तरोत्प्रेक्षारहितेन ।\nश्रीनिवासतीर्थीया\nअन्यथागतेर्हेतोरिति । अन्यथा गत्यभावरूपत्वात्कारणादित्यर्थः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "तृतीयाध्यायः",
+    "द्वितीयः पादः",
+    "उभयव्यपदेशाधिकरणम् २",
+    "अखण्डार्थवादो न युक्तः",
+    "असुखत्वानिवर्तनात्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/9377/975/sharam/sathha/tataya/thavat/ubhaya/akhana#article10268",
+    "content_id": "10268",
+    "work_id": 975,
+    "layer": "अखण्डखण्डनादेवं विशेषोऽखण्डवादिना",
+    "anchor": "article10268",
+    "fetched": "2026-09-01"
+   },
+   "tika_title": "अखण्डखण्डनादेवं विशेषोऽखण्डवादिना"
+  }
+ ]
+}

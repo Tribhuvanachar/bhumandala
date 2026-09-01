@@ -1,0 +1,39 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_10641",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > तृतीयाध्यायः > चतुर्थः पादः > उभयलिङ्गाधिकारिकाधिकरणम् ३ > उक्तार्थपिण्डीकरणम् > न हि कश्चित्सुखाद्येषु संशयं कुरुते जनः",
+   "section": "उक्तार्थपिण्डीकरणम्",
+   "unit_title": "न हि कश्चित्सुखाद्येषु संशयं कुरुते जनः",
+   "sanskrit_text": "दोषाभावादिकं चैव साक्षी सम्यक् प्रपश्यति\nसुधा\n‘न परीक्षाऽनवस्था स्यादि’त्युक्तमुपसंहरति दोषाभावादिकं चेति ।\nअनुव्याख्यानम्\nदोषाभावादिकं चैव साक्षी सम्यक् प्रपश्यति ।\nसाक्ष्येवेति सम्बन्धः । स्वस्य परीक्षायाश्च दोषाभावं प्रामाण्यं च परीक्षानिरपेक्षः साक्ष्येव सम्यक् प्रपश्यति । तस्मान्न काऽप्यनवस्थेति ।\nवाक्यार्थचन्द्रिका\nन काऽपीति । ग्राहकानवस्था परीक्षानवस्था वेत्येवं काऽपीत्यर्थः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "तृतीयाध्यायः",
+    "चतुर्थः पादः",
+    "उभयलिङ्गाधिकारिकाधिकरणम् ३",
+    "उक्तार्थपिण्डीकरणम्",
+    "न हि कश्चित्सुखाद्येषु संशयं कुरुते जनः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/9640/975/sharam/sathha/tataya/catara/ubhaya/ukatar#article10641",
+    "content_id": "10641",
+    "work_id": 975,
+    "layer": "दोषाभावादिकं चैव साक्षी सम्यक् प्रपश्यति",
+    "anchor": "article10641",
+    "fetched": "2026-09-01"
+   },
+   "tika_title": "दोषाभावादिकं चैव साक्षी सम्यक् प्रपश्यति"
+  }
+ ]
+}

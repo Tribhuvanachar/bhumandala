@@ -3,7 +3,7 @@
  "totals": {
   "leaves": 1911,
   "loaded": 1311,
-  "items": 685089
+  "items": 685217
  },
  "sections": {
   "agama": {
@@ -14,7 +14,7 @@
   "darshana": {
    "total": 1138,
    "loaded": 796,
-   "items": 58656
+   "items": 58784
   },
   "dasa_sahitya": {
    "total": 177,
@@ -820,7 +820,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/karmavijaya/tika_yuktirityanumaivetipakshesadhyaparishkarapurvakamanumanamvimrish": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/madhvamukhalankara/mula": 8,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/madhvasiddhantasara/mula": 9,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/mula": 1650,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/mula": 1694,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_abhimanyadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasya_pranunirasadavashishtasutrapavyakhyanama": 0,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_adyasutrapavyakhyanasyapranunirasadavashishtasutrapavyakhyanaman": 1,
@@ -828,14 +828,14 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_anandamayadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_antasthatvadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_antimapranadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_anumanikadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_anuvyakhyanam": 1076,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_anumanikadhikaranam": 2,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_anuvyakhyanam": 1107,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_arambhanadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_asadadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_atmadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_bhoktradhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_brahmadhikaranam": 1,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_caturthapada": 1,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_caturthapada": 2,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_gayatryadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_ikshatyadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_itaravyapadeshadhikaranam": 1,
@@ -857,7 +857,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_shabdamulatvadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_shastrayonitvadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_sheshavakyarthacandrika": 518,
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_sudha": 1574,
+  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_sudha": 1625,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_sudhavivriti": 3,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_tadadhigamadhikaranam": 1,
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/nyaya_sudha/tika_tippanipancakopeta": 1,
