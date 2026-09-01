@@ -41,7 +41,7 @@
   'use strict';
 
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['intellisense.js'] = 'v1.4 (dgeScanForSutras(root, opts) now takes an opts.always to force sūtra-linking in a root with no cue word needed, for Kosha cards whose own numbering IS a sūtra citation rather than mentioning one in passing -- everything from v1.3 unchanged)';
+  window.DGE_VERSIONS['intellisense.js'] = 'v1.5 (REF also accepts hyphen/en-dash separators -- Śabdārthakaustubha cites "(३-२-९७)" -- with the 1-8/1-4 bounds and cue-gating unchanged. On top of v1.4\'s opts.always)';
 
   // "Open in Aṣṭādhyāyī" needs a real cross-page URL: this script is loaded
   // both by dge/index.html (the word-modal path) and by the Vyakarana-
@@ -216,8 +216,11 @@
   // cross-references write it "adhyaya,pada।sutra" (e.g. "७,२।१"), a comma
   // between the first two groups where the sutra's own citation of itself
   // uses dandas throughout ("१।१।१"). Both conventions point at the same
-  // kind of reference and should link the same way.
-  const REF = /(?<![\d.०-९])([1-8१-८])[.।॰,]([1-4१-४])[.।॰,](\d{1,3}|[०-९]{1,3})(?![\d०-९.])/g;
+  // kind of reference and should link the same way. Hyphen/en-dash added
+  // 1 Sep 2026 for Śabdārthakaustubha's "(३-२-९७)" convention -- still
+  // bounded, still cue-gated everywhere the caller doesn't pass {always},
+  // so a hyphenated verse range in prose stays unlinked as before.
+  const REF = /(?<![\d.०-९])([1-8१-८])[.।॰,\-–]([1-4१-४])[.।॰,\-–](\d{1,3}|[०-९]{1,3})(?![\d०-९.])/g;
 
   // The reader sets window.currentGranthaSlug as it navigates. A standalone
   // page has no such navigation, so it states once what it is showing:

@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha.js'] = 'v1.8 (openEntry()\'s sūtra scan now runs per .kosha-card with {always:true} for Kāśikā/Anuvṛtti/Gaṇapāṭha, whose citations were 100% going unlinked -- no cue word ever sits near a bare "७.१.१८" right after the headword; the translate/Ask-AI answer panels now also get a (cue-gated, not always) scan once their async content actually lands, since draw()\'s one-time scan ran before either existed. Everything else from v1.7 unchanged)';
+  window.DGE_VERSIONS['kosha.js'] = 'v1.9 (the अब्ज/Śabdārthakaustubha report, 1 Sep 2026: pinned-but-hidden dictionaries now show a Show strip + hidden state/toggle in the pin panel instead of silently vanishing; the toolbar count says how many are hidden; failed shard fetches are no longer cached for the session (404s still are); %-named shard files are URI-encoded so bhutasankhya-kp-shukla\'s Devanagari-digit buckets fetch instead of 400ing; SAK joins the always-link sūtra list for its hyphenated निष्पत्तिः citations. On top of v1.8)';
 
   // Citation-form normalizer: strip a trailing visarga (H) / anusvara (M) from
   // an SLP1 headword so dictionaries that cite the nominative (रामः = rAmaH) or
@@ -119,12 +119,28 @@
 
   function j(path) {
     if (cache[path]) return cache[path];
-    cache[path] = fetch(path + V).then(function (r) { return r.ok ? r.json() : null; })
-                                 .catch(function () { return null; });
-    return cache[path];
+    var p = fetch(path + V).then(function (r) {
+      if (r.ok) return r.json();
+      // 404 = the shard genuinely doesn't exist, a cacheable answer. Any
+      // OTHER failure (a jsDelivr hiccup, a proxy 4xx/5xx) must not be
+      // cached, or one transient error makes a whole dictionary silently
+      // vanish for the rest of the session -- same FETCH_ERR lesson
+      // dge-search.js already learned (31 Aug 2026).
+      if (r.status !== 404) delete cache[path];
+      return null;
+    }).catch(function () { delete cache[path]; return null; });
+    cache[path] = p;
+    return p;
   }
-  function safeBucket(b) { return b.replace(/[^0-9A-Za-z_]/g, function (c) {
-    return '%' + c.charCodeAt(0).toString(16).padStart(2, '0'); }) || '_'; }
+  // The importer names shard FILES with this same %XX scheme, so a
+  // non-ASCII bucket ('१' in bhutasankhya-kp-shukla) is a file literally
+  // called "%967.json" in the repo. In a URL that raw % is an escape
+  // sequence -- jsDelivr answers 400 for ".../%967.json" -- so the
+  // filename must be URI-encoded once more ("%25967.json", which serves).
+  // Found live, 1 Sep 2026: this one dictionary was the missing 36th कोश
+  // on every अब्ज-style lookup. ASCII bucket names pass through unchanged.
+  function safeBucket(b) { return encodeURIComponent(b.replace(/[^0-9A-Za-z_]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).padStart(2, '0'); }) || '_'); }
 
   // ---- SLP1 + fold (mirrors the importer / the app's search spine) ----------
   function fold(s) {
@@ -625,6 +641,29 @@
 
         detail.appendChild(toolbar(perDict, shown, state, draw));
 
+        // A dictionary can be pinned AND hidden at once (the card's own 🚫
+        // hides without unpinning) -- and until 1 Sep 2026 that state was a
+        // trap: the pin panel listed it at #1 with no hidden marking and no
+        // unhide control, while the entry showed no card and no explanation.
+        // Exactly the project lead's live report: शब्दार्थकौस्तुभः pinned
+        // first, present in the data, invisible in the results. So a
+        // pinned-but-hidden dictionary that HAS an entry for this word now
+        // leaves a one-line strip with a Show button in its place.
+        if (state.sort === 'pinned' && !state.filter) {
+          userOrder().forEach(function (slug) {
+            if (hidden.indexOf(slug) < 0) return;
+            var d = null;
+            perDict.forEach(function (x) { if (x.slug === slug) d = x; });
+            if (!d) return;
+            var strip = el('div', 'kosha-hiddenpin',
+              '🚫 <b>' + esc(tl(d.meta.name || d.slug)) + '</b> has an entry here but is hidden.');
+            var showBtn = el('button', 'kosha-pbtn', 'Show');
+            showBtn.onclick = function () { toggleUserHidden(slug); draw(); };
+            strip.appendChild(showBtn);
+            detail.appendChild(strip);
+          });
+        }
+
         if (!shown.length) {
           detail.appendChild(el('div', 'kosha-empty',
             perDict.length ? 'Every kosha here is hidden or filtered out.' : 'No full entry found.'));
@@ -675,7 +714,13 @@
           // blanket {always:true} over the whole pane would relink those as
           // wrong or nonexistent sūtras, trading a missing-link bug for a
           // wrong-link one.
-          var ALWAYS_SUTRA_KOSHAS = { kashika: 1, 'ashtadhyayi-anuvritti': 1, ganapatha: 1 };
+          // shabdArtha_kaustubha (1 Sep 2026): a Paninian-derivation
+          // dictionary -- its निष्पत्तिः field cites the deriving sūtra as
+          // a bare hyphenated "(३-२-९७)" with no cue word in reach, so the
+          // cue-gated pass never linked a single one. Verified on the live
+          // corpus; the id-known check (only real 1-8/1-4 Aṣṭādhyāyī ids
+          // link) keeps {always} safe here just as for the three above.
+          var ALWAYS_SUTRA_KOSHAS = { kashika: 1, 'ashtadhyayi-anuvritti': 1, ganapatha: 1, shabdArtha_kaustubha: 1 };
           detail.querySelectorAll('.kosha-card').forEach(function (c) {
             try { window.dgeScanForSutras(c, { always: !!ALWAYS_SUTRA_KOSHAS[c.dataset.slug] }); } catch (e) {}
           });
@@ -704,7 +749,12 @@
     sel.onchange = function () { state.sort = sel.value; redraw(); };
     bar.appendChild(sel);
 
-    var count = el('span', 'kosha-tcount', shown.length + ' / ' + perDict.length + ' कोश');
+    // Say WHY shown < total: "31 / 35" alone reads as a bug when the other
+    // four are the reader's own hidden dictionaries.
+    var hid = userHidden();
+    var nHid = perDict.filter(function (d) { return hid.indexOf(d.slug) >= 0; }).length;
+    var count = el('span', 'kosha-tcount',
+      shown.length + ' / ' + perDict.length + ' कोश' + (nHid ? ' · ' + nHid + ' hidden (⚙)' : ''));
     bar.appendChild(count);
 
     var gear = el('button', 'kosha-gear', '⚙');
@@ -733,7 +783,11 @@
       var name = function (s) { return (byslug[s] && byslug[s].meta.name) || s; };
 
       ord.forEach(function (s, i) {
-        var r = el('div', 'kosha-prow pinned', '<span class="kosha-pnum">' + (i + 1) + '</span><span class="kosha-pname">' + esc(tl(name(s))) + '</span>');
+        // Pinned rows used to show no hidden state and no unhide control at
+        // all -- see the kosha-hiddenpin comment in draw() for the trap
+        // that made. Same strikethrough + 👁/🚫 toggle as unpinned rows.
+        var isHid = hid.indexOf(s) >= 0;
+        var r = el('div', 'kosha-prow pinned' + (isHid ? ' hid' : ''), '<span class="kosha-pnum">' + (i + 1) + '</span><span class="kosha-pname">' + esc(tl(name(s))) + '</span>');
         [['▲', -1, 'Move up'], ['▼', 1, 'Move down']].forEach(function (mv) {
           var b = el('button', 'kosha-pbtn', mv[0]);
           b.title = mv[2];
@@ -748,6 +802,10 @@
         x.title = 'Unpin ' + tl(name(s)) + ' (stays in results, just no longer pinned to the top)';
         x.onclick = function () { var a = userOrder(); a.splice(i, 1); setUserOrder(a); refresh(); };
         r.appendChild(x);
+        var h = el('button', 'kosha-pbtn', isHid ? '👁' : '🚫');
+        h.title = isHid ? 'Show again' : 'Hide from results (stays pinned)';
+        h.onclick = function () { toggleUserHidden(s); refresh(); };
+        r.appendChild(h);
         list.appendChild(r);
       });
 
@@ -882,6 +940,9 @@
       '.kosha-xl-out{font-size:15px;margin:4px 0;padding:6px 8px;background:var(--card-active,#f6f1ea);border-radius:8px}',
       '.kosha-xl-err{font-size:13px;margin:4px 0;padding:6px 8px;background:rgba(170,51,51,.08);border:1px solid #d99;border-radius:8px;color:#a33}',
       '.kosha-nearest{font-size:12.5px;padding:9px 12px;color:var(--muted-text,#8b7c66);background:var(--card-active,#f6f1ea);border-bottom:1px solid var(--card-border,#eee)}',
+      '.kosha-hiddenpin{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted-text,#8b7c66);border:1px dashed var(--card-border,#ddd);border-radius:10px;padding:8px 12px;margin:0 0 10px}',
+      '.kosha-hiddenpin b{font-weight:600}',
+      '.kosha-hiddenpin .kosha-pbtn{margin-left:auto}',
       '.kosha-empty,.kosha-loading,.kosha-foot{padding:14px;color:var(--muted-text,#999)}',
       '.kosha-foot{font-size:12px;border-top:1px solid var(--card-border,#eee);margin-top:12px}'
     ].join('\n');
