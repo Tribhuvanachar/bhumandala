@@ -152,7 +152,16 @@ def git_last_modified_dates(paths):
         return {}
     try:
         proc = subprocess.run(
-            ["git", "log", "--format=%x00%ad", "--date=short", "--name-only", "--", *sorted(wanted)],
+            # --full-history: without it, merge history-simplification
+            # decides which parent line "touched" a path, and that choice
+            # shifted between git versions — CI (git 2.55) attributed
+            # eleven Veda entries to 2026-08-06 while local git said
+            # 2026-08-17 for the same commit graph, keeping the drift
+            # gate red from Aug 28 to Sep 2 with both sides "in sync"
+            # locally. Full history pins lastmod to the newest commit
+            # that actually touched the path, on every git version.
+            ["git", "log", "--full-history", "--format=%x00%ad", "--date=short",
+             "--name-only", "--", *sorted(wanted)],
             cwd=REPO_ROOT, capture_output=True, text=True, check=True,
         )
     except (subprocess.CalledProcessError, FileNotFoundError):
