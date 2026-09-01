@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.17 (DGE_PATH_LABELS: mula_gretil/mula_dcs labels for the 28 Aug 2026 Kamasutra consolidation. On top of v3.16\'s taxonomy-folder-label gap sweep)';
+window.DGE_VERSIONS['library.js'] = 'v3.18 (super-admin draft preview of the Library Manager\'s unexported overrides + searchable By-Author facet index. On top of v3.17\'s mula_gretil/mula_dcs labels)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -592,21 +592,40 @@ function dgeLocalizeNumerals(text) {
 // once anything is MOVED under it and is simply absent while empty --
 // carried in the shape so the two tools stay field-for-field in sync.
 let dgeLibOverrides = { hidden: [], pinned: [], labels: {}, order: {}, moves: {}, adds: [] };
+// True only while a super-admin's UNEXPORTED Library Manager draft (this
+// browser's localStorage, see admin/library.html) is being overlaid in
+// place of the committed file -- drives the "draft preview" notice in
+// dgeRenderLibraryRoot(). Readers never take this branch: for them the
+// committed admin/config/library-overrides.json is the only source.
+let dgeLibOverridesDraftPreview = false;
+
+function dgeNormalizeOverrides(ov) {
+  return {
+    hidden: Array.isArray(ov.hidden) ? ov.hidden : [],
+    pinned: Array.isArray(ov.pinned) ? ov.pinned : [],
+    labels: (ov.labels && typeof ov.labels === 'object') ? ov.labels : {},
+    order: (ov.order && typeof ov.order === 'object') ? ov.order : {},
+    moves: (ov.moves && typeof ov.moves === 'object') ? ov.moves : {},
+    adds: Array.isArray(ov.adds) ? ov.adds : []
+  };
+}
+// Order-insensitive fingerprint, mirroring admin/library.html's ovKey() --
+// used only to decide whether a manager draft actually DIFFERS from the
+// committed file before flagging a preview.
+function dgeOverridesKey(ov) {
+  const o = dgeNormalizeOverrides(ov || {});
+  return JSON.stringify({ h: o.hidden.slice().sort(), p: o.pinned, l: o.labels, o: o.order, m: o.moves, a: o.adds.slice().sort() });
+}
 
 async function dgeLoadLibraryOverrides() {
+  dgeLibOverridesDraftPreview = false;
   try {
     const url = window.dgeAdminConfigUrl ? window.dgeAdminConfigUrl('library-overrides.json')
                                         : '../admin/config/library-overrides.json';
     const ov = await fetch(url, { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
     if (ov) {
-      dgeLibOverrides = {
-        hidden: Array.isArray(ov.hidden) ? ov.hidden : [],
-        pinned: Array.isArray(ov.pinned) ? ov.pinned : [],
-        labels: (ov.labels && typeof ov.labels === 'object') ? ov.labels : {},
-        order: (ov.order && typeof ov.order === 'object') ? ov.order : {},
-        moves: (ov.moves && typeof ov.moves === 'object') ? ov.moves : {},
-        adds: Array.isArray(ov.adds) ? ov.adds : []
-      };
+      dgeLibOverrides = dgeNormalizeOverrides(ov);
+      dgeOverlayManagerDraft();
       return;
     }
   } catch (e) { /* no overrides file yet */ }
@@ -616,6 +635,27 @@ async function dgeLoadLibraryOverrides() {
     const vis = await fetch('data/library-visibility.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
     if (vis && Array.isArray(vis.hidden)) dgeLibOverrides.hidden = vis.hidden;
   } catch (e) { /* nothing hidden */ }
+  dgeOverlayManagerDraft();
+}
+
+// 1 Sep 2026, project-lead report: edits made in the Library Manager
+// "appear finalized" there after a refresh (the manager re-reads its own
+// localStorage draft) but never showed in this Library panel -- because
+// this panel reads ONLY the committed library-overrides.json, and a draft
+// isn't committed until it's exported and pushed. Deliberate for readers;
+// blind for the curator. So: a super-admin whose browser holds a draft
+// that differs from the committed file now sees the DRAFT here too,
+// clearly labeled as a preview (see dgeRenderLibraryRoot's notice), so
+// they can check their curation in the real reader UI before publishing.
+function dgeOverlayManagerDraft() {
+  if (!dgeIsSuperAdmin()) return;
+  try {
+    const draft = JSON.parse(localStorage.getItem('dge.liboverrides') || 'null');
+    if (!draft || typeof draft !== 'object') return;
+    if (dgeOverridesKey(draft) === dgeOverridesKey(dgeLibOverrides)) return;
+    dgeLibOverrides = dgeNormalizeOverrides(draft);
+    dgeLibOverridesDraftPreview = true;
+  } catch (e) { /* unreadable draft -- the committed file stands */ }
 }
 
 // 23 Aug 2026: per-grantha "hidden" flag written directly onto a
@@ -729,7 +769,15 @@ function dgeAutoLabel(seg) {
   return seg.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 }
 
-function dgeSegLabel(seg) {
+// fullPath (optional, 1 Sep 2026): the segment's full DISPLAY path, so a
+// curator's folder rename (Library Manager labels are keyed by effective
+// display path) actually shows here. Before this, `labels` were honored
+// only on grantha leaves -- a manager folder rename silently never
+// reached the reader, part of the "changes not reflected in the actual
+// library" report. Callers that don't know the path get the old behavior.
+function dgeSegLabel(seg, fullPath) {
+  const custom = fullPath !== undefined ? dgeLibOverrides.labels[fullPath] : undefined;
+  if (custom !== undefined) return dgeToActiveScript(dgeLocalizeNumerals(custom));
   return dgeToActiveScript(DGE_PATH_LABELS[seg] || dgeAutoLabel(seg));
 }
 
@@ -884,14 +932,14 @@ function dgeRenderNode(node, labelPrefix, depth, nodePath, noCollapseAtRoot) {
   const childKeys = dgeSortChildKeys(nodePath, Object.keys(node.children));
   if (!noCollapseAtRoot && childKeys.length === 1 && node.leaves.length === 0) {
     const only = node.children[childKeys[0]];
-    const label = (labelPrefix ? labelPrefix + ' › ' : '') + dgeSegLabel(childKeys[0]);
     const onlyPath = nodePath ? nodePath + '/' + childKeys[0] : childKeys[0];
+    const label = (labelPrefix ? labelPrefix + ' › ' : '') + dgeSegLabel(childKeys[0], onlyPath);
     return dgeRenderNode(only, label, depth, onlyPath);
   }
 
   const id = 'dgeTree' + (dgeTreeNodeSeq++);
   const inner =
-    childKeys.map(k => dgeRenderNode(node.children[k], dgeSegLabel(k), depth + 1, nodePath ? nodePath + '/' + k : k)).join('') +
+    childKeys.map(k => dgeRenderNode(node.children[k], dgeSegLabel(k, nodePath ? nodePath + '/' + k : k), depth + 1, nodePath ? nodePath + '/' + k : k)).join('') +
     dgeSortLeaves(nodePath, node.leaves).map(leaf => {
       // Pending leaves only ever appear here at all when dgeLibShowPending
       // (admin toggle) is on -- see openLibraryModal(). Muted/dashed and a
@@ -1098,7 +1146,7 @@ function dgeTopLevelLeavesHtml() {
 // pulled out into its own function so dgeRenderLibraryRoot() can pick
 // between this and the grid.
 function dgeRenderLibraryListView() {
-  return dgeLibTopKeys.map(k => dgeRenderNode(dgeLibTree.children[k], dgeSegLabel(k), 0, k, true)).join('') + dgeTopLevelLeavesHtml();
+  return dgeLibTopKeys.map(k => dgeRenderNode(dgeLibTree.children[k], dgeSegLabel(k, k), 0, k, true)).join('') + dgeTopLevelLeavesHtml();
 }
 
 // The new icon-driven home screen: one tile per top-level category
@@ -1113,7 +1161,7 @@ function dgeRenderLibraryGridView() {
     const countText = total > count ? `${count}/${total}` : `${count}`;
     return `<button type="button" class="dge-lib-tile" onclick="window.dgeShowLibraryCategory('${k}')">
       <span class="dge-lib-tile-icon">${dgeLibraryIconFor(k)}</span>
-      <span class="dge-lib-tile-label">${dgeSegLabel(k)}</span>
+      <span class="dge-lib-tile-label">${dgeSegLabel(k, k)}</span>
       <span class="dge-lib-tile-count">${countText}</span>
     </button>`;
   }).join('');
@@ -1236,6 +1284,22 @@ function dgeViewByRowHtml(node) {
 // Groups every leaf under `node` by one facet value and renders flat group
 // headers instead of the taxonomy tree -- same leaf row markup dgeRenderNode
 // already uses (.pop-item, NEW badge), just regrouped.
+//
+// Index mode (1 Sep 2026, project-lead ask for a real "view by author"):
+// a facet with only a handful of groups (guna, availability) keeps the
+// original everything-expanded layout, but one with MANY groups -- By
+// Author alone has ~370 distinct names corpus-wide -- becomes a searchable
+// NAME INDEX instead: an alphabetical list of collapsed group headers
+// (name + work count) with a filter box on top; tapping a name expands
+// that author's granthas. Same one-thumb pattern as the tree twisties, so
+// it works identically on Android and desktop.
+const DGE_FACET_INDEX_THRESHOLD = 9;
+window.dgeFilterFacetGroups = function (input) {
+  const q = String(input.value || '').trim().toLowerCase();
+  document.querySelectorAll('#libraryModalList .dge-facet-group').forEach(g => {
+    g.style.display = !q || (g.dataset.name || '').indexOf(q) >= 0 ? '' : 'none';
+  });
+};
 function dgeRenderFacetView(node, facetKey) {
   const cfg = DGE_VIEW_BY_FACETS[facetKey];
   const leaves = dgeFlattenLeaves(node);
@@ -1244,13 +1308,23 @@ function dgeRenderFacetView(node, facetKey) {
     const raw = (l.facets && cfg.extract(l.facets)) || DGE_VIEW_BY_NOT_SPECIFIED;
     (groups[raw] = groups[raw] || []).push(l);
   });
+  const indexMode = Object.keys(groups).length > DGE_FACET_INDEX_THRESHOLD;
+  const labelOf = k => cfg.values[k] || dgeToActiveScript(k.replace(/_/g, ' '));
   const keys = Object.keys(groups).sort((a, b) => {
     if (a === DGE_VIEW_BY_NOT_SPECIFIED) return 1;   // Not-specified sinks to the bottom
     if (b === DGE_VIEW_BY_NOT_SPECIFIED) return -1;
-    return groups[b].length - groups[a].length;       // biggest group first otherwise
+    // Index mode reads like a directory -- alphabetical by displayed name;
+    // the compact few-group layouts keep biggest-group-first.
+    if (indexMode) return labelOf(a).localeCompare(labelOf(b));
+    return groups[b].length - groups[a].length;
   });
-  return keys.map(k => {
-    const label = cfg.values[k] || dgeToActiveScript(k.replace(/_/g, ' '));
+  const search = indexMode
+    ? `<input type="search" placeholder="Filter names…" oninput="window.dgeFilterFacetGroups(this)"
+         style="width:100%; box-sizing:border-box; margin:2px 0 8px; padding:8px 12px; font:inherit; font-size:13px;
+                border:1px solid var(--card-border,#ccc); border-radius:10px; background:var(--card-bg,transparent); color:inherit;">`
+    : '';
+  return search + keys.map(k => {
+    const label = labelOf(k);
     const rows = dgeSortLeaves('', groups[k]).map(leaf =>
       `<div class="pop-item" style="margin-left:10px;" onclick="window.dgeGoToGrantha('${leaf.realSlug}')">${leaf.title}${
         dgeIsRecentlyAdded(leaf.addedAt)
@@ -1258,6 +1332,22 @@ function dgeRenderFacetView(node, facetKey) {
           : ''
       }</div>`
     ).join('');
+    if (indexMode) {
+      const gid = 'dgeFacet' + (dgeTreeNodeSeq++);
+      // data-name feeds the filter box: matched against both the displayed
+      // label and the raw key, so typing in either script (or plain ASCII
+      // for a Devanagari-labeled author) still finds the group.
+      const needle = (label + ' ' + k).toLowerCase().replace(/"/g, '');
+      return `<div class="dge-facet-group" data-name="${needle}">
+        <div onclick="window.dgeToggleTreeNode('${gid}', this)"
+             style="cursor:pointer; padding:7px 4px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:6px;">
+          <span style="font-size:10px; width:10px;">▸</span>
+          <span style="flex:1;">${label}</span>
+          <span style="font-size:10px; color:var(--muted-text); font-weight:400;">${groups[k].length}</span>
+        </div>
+        <div id="${gid}" style="display:none;">${rows}</div>
+      </div>`;
+    }
     return `<div style="margin-top:6px;">
       <div style="padding:6px 4px; font-size:12px; font-weight:700; color:var(--muted-text); display:flex; align-items:center; gap:6px;">
         <span>${label}</span><span style="font-weight:400;">${groups[k].length}</span>
@@ -1309,8 +1399,8 @@ function dgeRenderLibraryCategoryView(path) {
     : dgeRenderFacetView(node, dgeLibViewBy);
   const crumbs = resolved.map((seg, i) => {
     const upToHere = resolved.slice(0, i + 1).join('/');
-    if (i === resolved.length - 1) return `<span class="dge-lib-crumb-current">${dgeSegLabel(seg)}</span>`;
-    return `<span class="dge-lib-crumb-seg" onclick="event.stopPropagation(); window.dgeShowLibraryCategory('${upToHere.replace(/'/g, "\\'")}')">${dgeSegLabel(seg)}</span><span class="dge-lib-crumb-sep">›</span>`;
+    if (i === resolved.length - 1) return `<span class="dge-lib-crumb-current">${dgeSegLabel(seg, upToHere)}</span>`;
+    return `<span class="dge-lib-crumb-seg" onclick="event.stopPropagation(); window.dgeShowLibraryCategory('${upToHere.replace(/'/g, "\\'")}')">${dgeSegLabel(seg, upToHere)}</span><span class="dge-lib-crumb-sep">›</span>`;
   }).join('');
   return `<div class="dge-lib-breadcrumb">
       <span class="dge-lib-crumb-back" onclick="window.dgeShowLibraryGrid()">❮</span> ${crumbs}${dgeSectionTrackerHtml(resolved.join('/'))}
@@ -1348,7 +1438,16 @@ function dgeRenderLibraryRoot() {
   const listEl = document.getElementById('libraryModalList');
   if (!listEl || !dgeLibTree) return;
   const mode = dgeGetLibraryViewMode();
-  const header = `<div style="font-size:11px; color:var(--muted-text); margin-bottom:8px;">${dgeLibPopulatedCount} text(s) available</div>`;
+  // Super-admin only (see dgeOverlayManagerDraft): this browser holds an
+  // unexported Library Manager draft, and THAT is what's rendered below.
+  const draftNote = dgeLibOverridesDraftPreview
+    ? `<div style="font-size:11px; margin-bottom:8px; padding:7px 10px; border:1px dashed var(--accent-gold,#b8860b); border-radius:8px; color:var(--accent-red,#7a3b1d);">
+        🛠 <b>Draft preview</b> — showing this browser's unexported Library Manager draft.
+        Readers still see the committed file; use <b>⬇ Export overrides</b> in the
+        <a href="../admin/library.html" target="_blank" rel="noopener" style="color:inherit;">Library Manager</a>
+        and commit it to publish.</div>`
+    : '';
+  const header = draftNote + `<div style="font-size:11px; color:var(--muted-text); margin-bottom:8px;">${dgeLibPopulatedCount} text(s) available</div>`;
   if (dgeLibGridCategory) {
     listEl.innerHTML = header + dgeRenderLibraryCategoryView(dgeLibGridCategory);
   } else if (mode === 'grid') {

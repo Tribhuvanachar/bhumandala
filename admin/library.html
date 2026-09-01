@@ -9,7 +9,7 @@
 <script src="js/keys.js?v=1"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Library Manager · DGE (super-admin)</title>
-<link rel="stylesheet" href="css/library.css?v=2">
+<link rel="stylesheet" href="css/library.css?v=3">
 <!-- Genie favicon -- the round Brahmana murti (gopichandana urdhvapundra, angara, akshata), cropped from the Genie avatar itself; project-lead ask. Root /favicon.ico covers auto-discovery. -->
 <link rel="icon" type="image/png" sizes="48x48" href="../dge/images/genie/favicon-48.png">
 <link rel="icon" type="image/png" sizes="192x192" href="../dge/images/genie/favicon-192.png">
@@ -79,6 +79,7 @@
         it appears in the app. Folders always sort before granthas — same as in the app.
         <div class="legend">
           <span>▲▼ reorder</span><span>⋮ more actions (pin / rename / move / hide)</span>
+          <span>🖱 drag a row onto a folder to move it (hover a collapsed folder to open it)</span>
           <span><span class="dot ok"></span> loaded</span><span><span class="dot pend"></span> pending</span>
         </div>
       </div>
@@ -239,8 +240,8 @@
       fc.style.display=""; fc.textContent=FILTER!=="all"? FILTER_LABELS[FILTER] : "filtered";
     }
     $("#q").addEventListener("input",updateFilterCount);
-    $("#expand").onclick=function(){ document.querySelectorAll(".node.hasK").forEach(function(n){n.classList.add("open");}); };
-    $("#collapse").onclick=function(){ document.querySelectorAll(".node.hasK").forEach(function(n){n.classList.remove("open");}); };
+    $("#expand").onclick=function(){ document.querySelectorAll(".node.hasK").forEach(function(n){setNodeOpen(n,true);}); };
+    $("#collapse").onclick=function(){ document.querySelectorAll(".node.hasK").forEach(function(n){setNodeOpen(n,false);}); };
     $("#moveClose").onclick=closeMove;
     $("#moveOv").addEventListener("click",function(e){ if(e.target===$("#moveOv")) closeMove(); });
 
@@ -503,7 +504,7 @@
     // "something here has a custom edit" without costing any more width.
     var anyEdit = pinned || hid || custom || moved || n.virtual;
     if(n.virtual) badge='<span class="badge pend" title="curator-added folder — shows to readers once something is moved into it">new</span>';
-    var row='<div class="row" data-path="'+esc(n.path)+'" data-op="'+esc(n.opath)+'" data-parent="'+esc(parentPath||"")+'" data-name="'+esc(n.name)+'" data-leaf="'+(n.leaf?1:0)+'" data-virtual="'+(n.virtual?1:0)+'">'+
+    var row='<div class="row" draggable="true" data-path="'+esc(n.path)+'" data-op="'+esc(n.opath)+'" data-parent="'+esc(parentPath||"")+'" data-name="'+esc(n.name)+'" data-leaf="'+(n.leaf?1:0)+'" data-virtual="'+(n.virtual?1:0)+'">'+
       tw+dot+pinMark+movedMark+
       '<span class="nm"><span class="actual">'+nameShown+'</span>'+(custom?' <span class="disp">✎</span>':'')+' <span class="path">'+esc(n.path)+'</span>'+(moved?' <span class="disp">from '+esc(n.opath)+'</span>':'')+'</span>'+
       cnt+badge+src+
@@ -515,7 +516,26 @@
   }
 
   var DISPLAY_ROOTS=[];
+  // Paths to force open on the next render only -- a move's destination
+  // chain lands here so the moved node is visible where it arrived.
+  var EXTRA_OPEN=[];
+  function setNodeOpen(el, open){
+    el.classList.toggle("open", open);
+    // :scope>div is the .row (kids live in a sibling .kids div), so this
+    // never reaches into a descendant node's own twisty.
+    var tw=el.querySelector(":scope>.row .tw[data-tw]");
+    if(tw) tw.textContent=open?"▾":"▸";
+  }
   function render(){
+    // 1 Sep 2026, project-lead report: every operation (reorder, rename,
+    // move, hide, pin) collapsed the whole open structure, because this
+    // rebuilds #tree's innerHTML wholesale. Capture which nodes are open
+    // before the rebuild and re-open them (by display path) afterwards --
+    // "smoothly, every operation should happen".
+    var keepOpen={};
+    document.querySelectorAll("#tree .node.open").forEach(function(n){ keepOpen[n.dataset.node]=1; });
+    EXTRA_OPEN.forEach(function(p){ keepOpen[p]=1; });
+    EXTRA_OPEN=[];
     DISPLAY_ROOTS=buildDisplayTree();
     DISPLAY_ROOTS.forEach(linkParents);
     var forest={leaf:false,children:DISPLAY_ROOTS,path:"",name:""};
@@ -523,11 +543,15 @@
     var html=roots.map(function(r){return renderNode(r,"");}).join("");
     $("#tree").innerHTML=html||'<div class="muted" style="padding:14px">No nodes match.</div>';
     wire();
-    if(q()) document.querySelectorAll('#tree .node.hasK').forEach(function(n){n.classList.add("open");});
+    Object.keys(keepOpen).forEach(function(p){
+      var el=document.querySelector('#tree .node.hasK[data-node="'+CSS.escape(p)+'"]');
+      if(el) setNodeOpen(el, true);
+    });
+    if(q()) document.querySelectorAll('#tree .node.hasK').forEach(function(n){setNodeOpen(n,true);});
   }
 
   function wire(){
-    document.querySelectorAll('#tree .tw[data-tw]').forEach(function(t){ t.onclick=function(){ var node=t.closest(".node"); node.classList.toggle("open"); t.textContent=node.classList.contains("open")?"▾":"▸"; }; });
+    document.querySelectorAll('#tree .tw[data-tw]').forEach(function(t){ t.onclick=function(){ var node=t.closest(".node"); setNodeOpen(node, !node.classList.contains("open")); }; });
     document.querySelectorAll('#tree .ctl').forEach(function(b){
       b.onclick=function(ev){
         ev.stopPropagation();
@@ -537,6 +561,62 @@
         else if(act==="down"){ reorder(parent, name, 1); }
         else if(act==="more"){ window.dgeOpenRowActions({path:path, parent:parent, name:name, op:op, leaf:row.dataset.leaf==="1", virtual:row.dataset.virtual==="1"}); }
       };
+    });
+    wireDnd();
+  }
+
+  // ---- drag & drop moves (1 Sep 2026 project-lead ask) ----
+  // Any row can be picked up and dropped onto a FOLDER row; the drop asks
+  // for confirmation, then routes through the exact same doMove() the Move
+  // dialog uses (identical semantics, rekeying, and validation). Hovering
+  // a collapsed folder for a moment auto-opens it, so a drag can descend
+  // into an unopened subtree. Mouse/trackpad only (HTML5 dnd) -- on touch
+  // the ⋮ > Move dialog remains the way, so nothing is lost on Android.
+  var DND=null, dndHoverTimer=null, dndHoverRow=null;
+  function dndClearHover(){
+    if(dndHoverTimer){ clearTimeout(dndHoverTimer); dndHoverTimer=null; }
+    if(dndHoverRow){ dndHoverRow.classList.remove("droptgt"); dndHoverRow=null; }
+  }
+  function dndValidDest(row){
+    if(!DND||row.dataset.leaf==="1") return false;      // only folders take drops
+    var destOp=row.dataset.op;
+    if(destOp===DND.op) return false;                    // itself
+    if((destOp+"/").indexOf(DND.op+"/")===0) return false; // its own descendant
+    return true;
+  }
+  function wireDnd(){
+    document.querySelectorAll('#tree .row').forEach(function(row){
+      row.addEventListener("dragstart",function(e){
+        DND={op:row.dataset.op, name:row.dataset.name, path:row.dataset.path};
+        e.dataTransfer.effectAllowed="move";
+        try{ e.dataTransfer.setData("text/plain", row.dataset.path); }catch(err){}
+        row.classList.add("dragging");
+      });
+      row.addEventListener("dragend",function(){ DND=null; dndClearHover(); row.classList.remove("dragging"); });
+      row.addEventListener("dragover",function(e){
+        if(!dndValidDest(row)) return;
+        e.preventDefault(); e.dataTransfer.dropEffect="move";
+        if(dndHoverRow!==row){
+          dndClearHover();
+          dndHoverRow=row; row.classList.add("droptgt");
+          var node=row.closest(".node");
+          if(node&&node.classList.contains("hasK")&&!node.classList.contains("open")){
+            dndHoverTimer=setTimeout(function(){ setNodeOpen(node,true); }, 600);
+          }
+        }
+      });
+      row.addEventListener("dragleave",function(e){
+        if(dndHoverRow===row && !(e.relatedTarget&&row.contains(e.relatedTarget))) dndClearHover();
+      });
+      row.addEventListener("drop",function(e){
+        var ok=dndValidDest(row);
+        var d=DND; DND=null; dndClearHover();
+        if(!ok||!d) return;
+        e.preventDefault(); e.stopPropagation();
+        var destPath=row.dataset.path;
+        if(!confirm('Move "'+d.name.replace(/_/g," ")+'" into "'+destPath+'"?')) return;
+        doMove(d.op, d.name, destPath);
+      });
     });
   }
 
@@ -605,12 +685,6 @@
 
   // ---- move-to-folder picker ----
   var moveSrcOp=null, moveSrcName=null;
-  function allFolders(){
-    var out=[]; var byOp={},byP={}; var forest={leaf:false,children:DISPLAY_ROOTS,path:"",opath:"",name:""}; indexTree(forest,byOp,byP);
-    Object.keys(byP).forEach(function(p){ var n=byP[p]; if(n&&!n.leaf&&p) out.push({path:p,opath:n.opath,name:n.name}); });
-    out.sort(function(a,b){return a.path.localeCompare(b.path);});
-    return out;
-  }
   function openMove(op, path, name){
     moveSrcOp=op; moveSrcName=name;
     $("#moveWhat").textContent=name.replace(/_/g," ");
@@ -620,24 +694,47 @@
     setTimeout(function(){$("#moveQ").focus();},30);
     $("#moveQ").oninput=function(){ renderMoveList($("#moveQ").value.trim().toLowerCase()); };
   }
-  function closeMove(){ $("#moveOv").classList.remove("show"); moveSrcOp=null; }
+  function closeMove(){ $("#moveOv").classList.remove("show"); moveSrcOp=null; moveSrcName=null; }
+  // 1 Sep 2026, project-lead report: this used to be one flat list of up
+  // to 300 "path/path/path" rows -- "a big list of folders without any
+  // tree structure which makes it difficult for the admin". Now it is the
+  // same folder TREE the main view shows (same siblingSort order):
+  // top-level folders visible, deeper levels behind ▸ twisties, and a
+  // search that prunes to matching branches (auto-expanded).
   function renderMoveList(filter){
-    var folders=allFolders().filter(function(f){
-      // can't move into itself or its own descendant
-      if(f.opath===moveSrcOp) return false;
-      if((f.opath+"/").indexOf(moveSrcOp+"/")===0) return false;
-      if(!filter) return true;
-      return (f.path+" "+f.name).toLowerCase().indexOf(filter)>=0;
-    });
+    function subfolders(arr,parentPath){ return siblingSort(parentPath,arr).filter(function(n){return !n.leaf;}); }
+    // prune: drop self/descendants (can't move into them); keep a folder
+    // if it matches the filter itself or any kept descendant does.
+    function prune(n){
+      if(n.opath===moveSrcOp||(n.opath+"/").indexOf(moveSrcOp+"/")===0) return null;
+      var kids=subfolders(n.children,n.path).map(prune).filter(Boolean);
+      var selfHit=!filter||(n.path+" "+n.name).toLowerCase().indexOf(filter)>=0;
+      if(!selfHit&&!kids.length) return null;
+      return {name:n.name,path:n.path,kids:kids};
+    }
+    var roots=subfolders(DISPLAY_ROOTS,"").map(prune).filter(Boolean);
     // data-dest carries the folder's DISPLAY path: the reader resolves a
     // move's dest verbatim as a display prefix, so that is the coordinate
     // system this file must speak too.
-    var html='<div class="foldopt" data-dest=""><b>⌂ Top level</b><div class="p">move out to the root of the library</div></div>';
-    html+=folders.slice(0,300).map(function(f){ return '<div class="foldopt" data-dest="'+esc(f.path)+'"><b>'+esc(f.name.replace(/_/g," "))+'</b><div class="p">'+esc(f.path)+'</div></div>'; }).join("");
+    function rowHTML(f,depth){
+      var open=!!filter||depth===0; // roots visible; deeper levels behind twisties unless searching
+      return '<div class="mnode'+(f.kids.length?" hasK":"")+(open?" open":"")+'">'+
+        '<div class="foldopt" data-dest="'+esc(f.path)+'" style="padding-left:'+(10+depth*18)+'px">'+
+        (f.kids.length?'<span class="mtw" data-mtw="1">'+(open?"▾":"▸")+'</span>':'<span class="mtw"></span>')+
+        '<b>'+esc(f.name.replace(/_/g," "))+'</b><div class="p">'+esc(f.path)+'</div></div>'+
+        (f.kids.length?'<div class="mkids">'+f.kids.map(function(k){return rowHTML(k,depth+1);}).join("")+'</div>':'')+
+        '</div>';
+    }
+    var html='<div class="foldopt" data-dest="" style="padding-left:10px"><span class="mtw"></span><b>⌂ Top level</b><div class="p">move out to the root of the library</div></div>';
+    html+=roots.map(function(r){return rowHTML(r,0);}).join("");
+    if(!roots.length&&filter) html+='<div class="muted" style="padding:12px">No folder matches.</div>';
     $("#moveList").innerHTML=html;
-    document.querySelectorAll('#moveList .foldopt').forEach(function(o){ o.onclick=function(){ doMove(moveSrcOp, o.dataset.dest); }; });
+    document.querySelectorAll('#moveList .mtw[data-mtw]').forEach(function(t){
+      t.onclick=function(e){ e.stopPropagation(); var mn=t.closest(".mnode"); var open=mn.classList.toggle("open"); t.textContent=open?"▾":"▸"; };
+    });
+    document.querySelectorAll('#moveList .foldopt').forEach(function(o){ o.onclick=function(){ doMove(moveSrcOp, moveSrcName, o.dataset.dest); }; });
   }
-  function doMove(srcOp, destFolderPath){
+  function doMove(srcOp, srcName, destFolderPath){
     if(srcOp===undefined||srcOp===null) return;
     // compute old effective path (to rekey dependent overrides) then set the move
     var oldEff=effectivePathOf(srcOp);
@@ -647,13 +744,20 @@
     } else {
       // moves[src] = FULL new display path (folder + this node's own name)
       // -- the reader's dgeEffectiveDisplayPath semantics, verbatim.
-      var full=(destFolderPath?destFolderPath+"/":"")+moveSrcName;
+      var full=(destFolderPath?destFolderPath+"/":"")+srcName;
       if(full===srcOp) delete OV.moves[srcOp]; else OV.moves[srcOp]=full;
     }
     // recompute new effective path after this move and migrate label/pin/hide/order keys
     var newEff=effectivePathOf(srcOp);
     if(oldEff && newEff && oldEff!==newEff) rekeyPrefix(oldEff, newEff);
+    // open the destination chain on the re-render (the moved node included,
+    // if it's a folder) so the admin sees where it landed -- including a
+    // previously collapsed destination subtree.
+    var segs=(newEff||"").split("/"); var pfx="";
+    segs.forEach(function(s){ pfx=pfx?pfx+"/"+s:s; EXTRA_OPEN.push(pfx); });
     saveOV(); closeMove(); render();
+    var hit=newEff&&document.querySelector('#tree .node[data-node="'+CSS.escape(newEff)+'"]');
+    if(hit) hit.scrollIntoView({block:"center"});
   }
   // effective display path for an original opath -- a byte-for-byte mirror
   // of library.js dgeEffectiveDisplayPath (single longest-prefix hop, dest

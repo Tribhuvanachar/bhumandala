@@ -706,19 +706,21 @@ Kāvya, Tīrtha, Guru Paramparā, Dāsa Sāhitya. Hrefs are resolved from the
 script's own known location (`dge/js/`), not the including page's path, so
 the same two lines of markup work unmodified at any page depth.
 
-**Responsive behavior and breakpoint:** `760px` — the same value
-`main.css`/`kavya.css`/`dasa-sahitya.css` already use sitewide for the
-mobile/desktop split (confirmed by grepping every `@media` in `dge/css/`;
-no separate breakpoint was invented). At `>= 760px`: a fixed vertical rail
-docked to the right edge, one row per corpus/tool with an icon glyph +
-visible label (never icon-only, per the icon-labeling rule) and
-`aria-current="page"` on the current page's row. Below `760px`: the rail
-itself is hidden (no room for it without covering content) and replaced by
-a small fixed tab in the `#dge-qa-tab` visual family, docked to the right
-edge at a different vertical offset (`bottom: calc(230px + …)` vs.
-qa-tab's `calc(160px + …)`) so the two never collide on `dge/index.html`,
-the one page carrying both. Tapping the tab opens a small link-list sheet
-with the same items.
+**Responsive behavior (revised 1 Sep 2026):** the original design showed
+an always-visible fixed rail of labeled links at `>= 760px` and collapsed
+to a tab+sheet only below that. The project lead rejected the desktop
+rail from a live screenshot ("always open… not collapsed… seems to be a
+duplicate" — it also overlapped other floating chrome), so the rail was
+removed entirely: **every width** now gets the same small fixed tab in
+the `#dge-qa-tab` visual family, docked to the right edge at
+`bottom: calc(230px + …)` (vs. qa-tab's `calc(160px + …)` so the two
+never collide on `dge/index.html`, the one page carrying both). Tapping
+the tab opens a link-list sheet — one row per corpus/tool with an icon
+glyph + visible label (never icon-only, per the icon-labeling rule) and
+`aria-current="page"` on the current page's row. The tab is draggable
+vertically (pointer drag, ≥6px threshold; position persisted per-device
+in localStorage `dge.nrTabY`, clamped to the viewport on restore) so it
+can be moved off anything it covers.
 
 **Rollout this pass:** `dge/index.html`, `dge/vyakarana/ashtadhyayi.html`,
 `dge/vyakarana/dhatu.html`, `dge/vyakarana/shabda.html`,
