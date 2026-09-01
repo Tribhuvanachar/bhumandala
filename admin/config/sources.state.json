@@ -1,6 +1,6 @@
 {
  "_readme": "Written by tools/check_sources.py. Fingerprints only -- no content. Delete an entry to force a first-look report.",
- "checked_at_utc": "2026-08-19T10:39:48Z",
+ "checked_at_utc": "2026-09-01T10:43:00Z",
  "sources": {
   "gretil": {
    "fingerprint": "8e2b0a6826694bfb",
@@ -43,9 +43,9 @@
    }
   },
   "meerasubbarao": {
-   "fingerprint": "68de2dd10d233795",
+   "fingerprint": "1208390120005516",
    "detail": {
-    "newest": "Wed, 19 Aug 2026 04:02:00 +0000",
+    "newest": "Tue, 01 Sep 2026 08:04:00 +0000",
     "in_feed": 10
    }
   },
