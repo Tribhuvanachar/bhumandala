@@ -51,6 +51,9 @@ jobs:
       - name: Dvaita Vedanta offline import tests
         run: python3 tools/dvaitavedanta/test_import_offline.py
 
+      - name: Dvaita Vedanta pytest suite (fold/stitch tools)
+        run: python3 -m pytest tools/dvaitavedanta/ -q
+
       - name: Sayana/Smriti/wikisource parser tests
         run: python3 -m pytest tools/sayana_smriti/tests/ -q
 

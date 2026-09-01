@@ -329,6 +329,14 @@ jobs:
               [ -d "$grantha" ] || continue
               rel=${grantha#"$dir"/}
               stale="dge/data/darshana/vedanta/dvaita/DvaitaVedanta/${rel%/}"
+              # A grantha whose crawl failed ships only _meta.json — no
+              # data.json anywhere. Replacing with that stub would erase
+              # good data (run 33543273107 deleted both itihasa texts
+              # this way when the site returned textless containers).
+              if [ -z "$(find "$grantha" -name data.json -print -quit)" ]; then
+                echo "keeping $stale — shard for ${rel%/} has no data.json"
+                continue
+              fi
               # if/fi, not `[ -d x ] && ...`: under set -e a false test ends the step.
               if [ -d "$stale" ]; then
                 echo "replacing $stale"
@@ -340,6 +348,15 @@ jobs:
           python tools/dvaitavedanta/merge_status.py \
             --inputs "shards/dv-*/status-*.json" \
             --out dge/data/darshana/vedanta/dvaita/DvaitaVedanta/_extract_status.json
+
+      - name: Fold auto-slugged heading layers
+        run: |
+          # Merge numbered chunks of one commentary into a single layer
+          # and fold one-off topic/pratika headings inline — the crawl
+          # otherwise mints a tika_<slug> folder per unmapped heading
+          # (1,255 of them in run 33543273107).
+          python tools/dvaitavedanta/fold_tiny_layers.py \
+            --data dge/data/darshana/vedanta/dvaita/DvaitaVedanta
 
       - name: Name the sections that did NOT arrive
         run: |

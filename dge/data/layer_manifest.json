@@ -4,7 +4,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/karma_nirnaya": {
    "title": "कर्मनिर्णयः",
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-   "mulaItems": 55,
+   "mulaItems": 60,
    "layers": [
     {
      "folder": "tika_bhavadipa",
@@ -98,13 +98,6 @@
      "matched": 2
     },
     {
-     "folder": "tika_gururajiyatippani",
-     "label": "श्रीगुरुराजीयटिप्पणी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
      "folder": "tika_jayatirtha",
      "label": "टीका",
      "author": "श्रीजयतीर्थः",
@@ -119,23 +112,9 @@
      "matched": 1
     },
     {
-     "folder": "tika_mayavadakhandanam",
-     "label": "मायावादखण्डनम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
      "folder": "tika_nivasatirthatippani",
      "label": "श्रीनिवासतीर्थटिप्पणी",
      "author": "श्रीवेणुपल्ली श्रीनिवासतीर्थविरचिता",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_nivasatirthiyatippani",
-     "label": "श्रीनिवासतीर्थीयटिप्पणी",
-     "author": "",
      "items": 1,
      "matched": 1
     }
@@ -150,7 +129,7 @@
      "folder": "tika_jayatirtha",
      "label": "प्रमाणलक्षणटीका",
      "author": "श्रीजयतीर्थः",
-     "items": 153,
+     "items": 188,
      "matched": 153
     },
     {
@@ -199,27 +178,6 @@
      "folder": "tika_gururajiyatippani",
      "label": "श्रीगुरुराजीयटिप्पणी",
      "author": "पाण्डुरङ्गी केशवाचार्यविरचितम्",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_mandaramanjari",
-     "label": "मन्दारमञ्जरी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_mithyatvanumanakhamdanaparashu",
-     "label": "मिथ्यात्वानुमानखंडनपरशुः",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_mithyatvanumanakhandanam",
-     "label": "मिथ्यात्वानुमानखण्डनम्",
-     "author": "",
      "items": 1,
      "matched": 1
     },
@@ -292,6 +250,13 @@
      "author": "श्री विजयीन्द्रतीर्थविरचितं",
      "items": 14,
      "matched": 14
+    },
+    {
+     "folder": "tika_jayatirtha",
+     "label": "टीका",
+     "author": "श्रीजयतीर्थः",
+     "items": 2,
+     "matched": 0
     }
    ]
   },
@@ -304,7 +269,7 @@
      "folder": "tika_jayatirtha",
      "label": "श्रीमज्जयतीर्थटीका",
      "author": "श्रीजयतीर्थः",
-     "items": 153,
+     "items": 159,
      "matched": 153
     },
     {
@@ -369,13 +334,6 @@
      "author": "",
      "items": 58,
      "matched": 58
-    },
-    {
-     "folder": "tika_dvaitadyumanitippanisaroddhara",
-     "label": "द्वैतद्युमणिटिप्पणिसारोद्धारः",
-     "author": "",
-     "items": 1,
-     "matched": 1
     }
    ]
   },
@@ -397,6 +355,13 @@
      "author": "बिदरह•ी श्रीनिवासतीर्थविरचितं",
      "items": 18,
      "matched": 18
+    },
+    {
+     "folder": "tika_jayatirtha",
+     "label": "टीका",
+     "author": "श्रीजयतीर्थः",
+     "items": 16,
+     "matched": 0
     }
    ]
   },
@@ -438,7 +403,7 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/dasha_prakarana_granthas/vishnu_tattva_vinirnaya": {
    "title": "विष्णुतत्त्वविनिर्णयः",
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-   "mulaItems": 166,
+   "mulaItems": 167,
    "layers": [
     {
      "folder": "tika_laghuprabha",
@@ -488,27 +453,13 @@
      "author": "",
      "items": 126,
      "matched": 126
-    },
-    {
-     "folder": "tika_dvitiyapariccheda",
-     "label": "द्वितीयः परिच्छेदः",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_tritiyapariccheda",
-     "label": "तृतीयः परिच्छेदः",
-     "author": "",
-     "items": 1,
-     "matched": 1
     }
    ]
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/gita_prasthana/gita_bhashya": {
    "title": "गीताभाष्यम्",
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-   "mulaItems": 654,
+   "mulaItems": 655,
    "layers": [
     {
      "folder": "tika_bhavaratnakosha",
@@ -521,14 +472,14 @@
      "folder": "tika_prameyadipika",
      "label": "प्रमेयदीपिका",
      "author": "श्रीजयतीर्थः",
-     "items": 364,
+     "items": 365,
      "matched": 364
     },
     {
      "folder": "tika_bhashya",
      "label": "भाष्यम्",
      "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-     "items": 357,
+     "items": 694,
      "matched": 357
     },
     {
@@ -630,13 +581,6 @@
      "matched": 153
     },
     {
-     "folder": "tika_kiranavalyam",
-     "label": "किरणावल्यां",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
      "folder": "tika_nyayadipakiranavali",
      "label": "श्रीमन्न्यायदीपकिरणावलिः",
      "author": "ताम्रपर्णी श्रीनिवासेन विरचिता",
@@ -651,10 +595,17 @@
      "matched": 1
     },
     {
-     "folder": "tika_arjuna_uvaca",
-     "label": "अर्जुन _ उवाच",
+     "folder": "tika_gita",
+     "label": "गीता",
      "author": "",
-     "items": 1,
+     "items": 57,
+     "matched": 0
+    },
+    {
+     "folder": "tika_tatparya",
+     "label": "तात्पर्यम्",
+     "author": "",
+     "items": 18,
      "matched": 0
     }
    ]
@@ -665,1516 +616,46 @@
    "mulaItems": 36,
    "layers": [
     {
-     "folder": "tika_10_bhavapradipa",
-     "label": "( १०) भावप्रदीप",
+     "folder": "tika_bhavapradipa",
+     "label": "भावप्रदीप",
      "author": "",
-     "items": 1,
-     "matched": 1
+     "items": 36,
+     "matched": 36
     },
     {
-     "folder": "tika_10_bhedacandrika",
-     "label": "( १०) भेदचन्द्रिका",
+     "folder": "tika_bhedacandrika",
+     "label": "भेदचन्द्रिका",
      "author": "",
-     "items": 1,
-     "matched": 1
+     "items": 36,
+     "matched": 36
     },
     {
-     "folder": "tika_10_bhedacintaratnam",
-     "label": "( १०) भेदचिन्तारत्नम्",
+     "folder": "tika_bhedacintaratnam",
+     "label": "भेदचिन्तारत्नम्",
      "author": "",
-     "items": 1,
-     "matched": 1
+     "items": 36,
+     "matched": 36
     },
     {
-     "folder": "tika_10_bhedasanjivini",
-     "label": "( १०) भेदसञ्जीविनी",
+     "folder": "tika_bhedasanjivini",
+     "label": "भेदसञ्जीविनी",
      "author": "",
-     "items": 1,
-     "matched": 1
+     "items": 36,
+     "matched": 36
     },
     {
-     "folder": "tika_10_kashitimmannacarya",
-     "label": "( १०) काशीतिम्मण्णाचार्य",
+     "folder": "tika_kashitimmannacarya",
+     "label": "काशीतिम्मण्णाचार्य",
      "author": "",
-     "items": 1,
-     "matched": 1
+     "items": 36,
+     "matched": 36
     },
     {
-     "folder": "tika_10_sharkarashrinivasacarya",
-     "label": "( १०) शर्कराश्रीनिवासाचार्य",
+     "folder": "tika_sharkarashrinivasacarya",
+     "label": "शर्कराश्रीनिवासाचार्य",
      "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_11_bhavapradipa",
-     "label": "( ११) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_11_bhedacandrika",
-     "label": "( ११) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_11_bhedacintaratnam",
-     "label": "( ११) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_11_bhedasanjivini",
-     "label": "( ११) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_11_kashitimmannacarya",
-     "label": "( ११) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_11_sharkarashrinivasacarya",
-     "label": "( ११) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_12_bhavapradipa",
-     "label": "( १२) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_12_bhedacandrika",
-     "label": "( १२) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_12_bhedacintaratnam",
-     "label": "( १२) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_12_bhedasanjivini",
-     "label": "( १२) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_12_kashitimmannacarya",
-     "label": "( १२) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_12_sharkarashrinivasacarya",
-     "label": "( १२) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_13_bhavapradipa",
-     "label": "( १३) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_13_bhedacandrika",
-     "label": "( १३) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_13_bhedacintaratnam",
-     "label": "( १३) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_13_bhedasanjivini",
-     "label": "( १३) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_13_kashitimmannacarya",
-     "label": "( १३) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_13_sharkarashrinivasacarya",
-     "label": "( १३) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_14_bhavapradipa",
-     "label": "( १४) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_14_bhedacandrika",
-     "label": "( १४) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_14_bhedacintaratnam",
-     "label": "( १४) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_14_bhedasanjivini",
-     "label": "( १४) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_14_kashitimmannacarya",
-     "label": "( १४) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_14_sharkarashrinivasacarya",
-     "label": "( १४) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_15_bhavapradipa",
-     "label": "( १५) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_15_bhedacandrika",
-     "label": "( १५) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_15_bhedacintaratnam",
-     "label": "( १५) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_15_bhedasanjivini",
-     "label": "( १५) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_15_kashitimmannacarya",
-     "label": "( १५) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_15_sharkarashrinivasacarya",
-     "label": "( १५) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_16_bhavapradipa",
-     "label": "( १६) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_16_bhedacandrika",
-     "label": "( १६) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_16_bhedacintaratnam",
-     "label": "( १६) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_16_bhedasanjivini",
-     "label": "( १६) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_16_kashitimmannacarya",
-     "label": "( १६) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_16_sharkarashrinivasacarya",
-     "label": "( १६) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_17_bhavapradipa",
-     "label": "( १७) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_17_bhedacandrika",
-     "label": "( १७) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_17_bhedacintaratnam",
-     "label": "( १७) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_17_bhedasanjivini",
-     "label": "( १७) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_17_kashitimmannacarya",
-     "label": "( १७) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_17_sharkarashrinivasacarya",
-     "label": "( १७) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_18_bhavapradipa",
-     "label": "( १८) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_18_bhedacandrika",
-     "label": "( १८) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_18_bhedacintaratnam",
-     "label": "( १८) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_18_bhedasanjivini",
-     "label": "( १८) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_18_kashitimmannacarya",
-     "label": "( १८) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_18_sharkarashrinivasacarya",
-     "label": "( १८) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_19_bhavapradipa",
-     "label": "( १९) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_19_bhedacandrika",
-     "label": "( १९) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_19_bhedacintaratnam",
-     "label": "( १९) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_19_bhedasanjivini",
-     "label": "( १९) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_19_kashitimmannacarya",
-     "label": "( १९) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_19_sharkarashrinivasacarya",
-     "label": "( १९) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_1_bhavapradipa",
-     "label": "( १) भावप्रदीपः",
-     "author": "( १) भगवन्तरायकृतभेदोज्जीवनभावप्रदीपः",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_1_bhedacandrika",
-     "label": "( १) भेदचन्द्रिका",
-     "author": "( १) कुम्भारिवासुदेवाचार्यकृतभेदचन्द्रिका",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_1_bhedacintaratnam",
-     "label": "( १) भेदचिन्तारत्नम्",
-     "author": "( १) मुद्गलार्यतनूजानन्दतीर्थाचार्यविरचितभेदचिन्तारत्नम्",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_1_bhedasanjivini",
-     "label": "( १) भेदसञ्जीविनी",
-     "author": "( १) हुलगीश्रीनाथाचार्यकृता",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_1_kashitimmannacarya",
-     "label": "(१ )काशीतिम्मण्णाचार्य",
-     "author": "काशीतिम्मण्णाचार्यकृतटिप्पणी",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_1_sharkarashrinivasacarya",
-     "label": "( १)शर्कराश्रीनिवासाचार्य",
-     "author": "( १) शर्कराश्रीनिवासाचार्यविरचितटिप्पणी",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_20_bhavapradipa",
-     "label": "( २०) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_20_bhedacandrika",
-     "label": "( २०) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_20_bhedacintaratnam",
-     "label": "( २०) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_20_bhedasanjivini",
-     "label": "( २०) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_20_kashitimmannacarya",
-     "label": "( २०) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_20_sharkarashrinivasacarya",
-     "label": "( २०) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_21_bhavapradipa",
-     "label": "( २१) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_21_bhedacandrika",
-     "label": "( २१) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_21_bhedacintaratnam",
-     "label": "( २१) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_21_bhedasanjivini",
-     "label": "( २१) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_21_kashitimmannacarya",
-     "label": "( २१) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_21_sharkarashrinivasacarya",
-     "label": "( २१) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_22_bhavapradipa",
-     "label": "( २२) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_22_bhedacandrika",
-     "label": "( २२) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_22_bhedacintaratnam",
-     "label": "( २२) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_22_bhedasanjivini",
-     "label": "( २२) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_22_kashitimmannacarya",
-     "label": "( २२) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_22_sharkarashrinivasacarya",
-     "label": "( २२) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_23_bhavapradipa",
-     "label": "( २३) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_23_bhedacandrika",
-     "label": "( २३) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_23_bhedacintaratnam",
-     "label": "( २३) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_23_bhedasanjivini",
-     "label": "( २३) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_23_kashitimmannacarya",
-     "label": "( २३) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_23_sharkarashrinivasacarya",
-     "label": "( २३) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_24_bhavapradipa",
-     "label": "( २४) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_24_bhedacandrika",
-     "label": "( २४) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_24_bhedacintaratnam",
-     "label": "( २४) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_24_bhedasanjivini",
-     "label": "( २४) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_24_kashitimmannacarya",
-     "label": "( २४) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_24_sharkarashrinivasacarya",
-     "label": "( २४) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_25_bhavapradipa",
-     "label": "( २५) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_25_bhedacandrika",
-     "label": "( २५) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_25_bhedacintaratnam",
-     "label": "( २५) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_25_bhedasanjivini",
-     "label": "( २५) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_25_kashitimmannacarya",
-     "label": "( २५) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_25_sharkarashrinivasacarya",
-     "label": "( २५) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_26_bhavapradipa",
-     "label": "( २६) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_26_bhedacandrika",
-     "label": "( २६) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_26_bhedacintaratnam",
-     "label": "( २६) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_26_bhedasanjivini",
-     "label": "( २६) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_26_kashitimmannacarya",
-     "label": "( २६) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_26_sharkarashrinivasacarya",
-     "label": "( २६) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_27_bhavapradipa",
-     "label": "( २७) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_27_bhedacandrika",
-     "label": "( २७) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_27_bhedacintaratnam",
-     "label": "( २७) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_27_bhedasanjivini",
-     "label": "( २७) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_27_kashitimmannacarya",
-     "label": "( २७) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_27_sharkarashrinivasacarya",
-     "label": "( २७) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_28_bhavapradipa",
-     "label": "( २८) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_28_bhedacandrika",
-     "label": "( २८) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_28_bhedacintaratnam",
-     "label": "( २८) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_28_bhedasanjivini",
-     "label": "( २८) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_28_kashitimmannacarya",
-     "label": "( २८) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_28_sharkarashrinivasacarya",
-     "label": "( २८) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_29_bhavapradipa",
-     "label": "( २९) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_29_bhedacandrika",
-     "label": "( २९) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_29_bhedacintaratnam",
-     "label": "( २९) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_29_bhedasanjivini",
-     "label": "( २९) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_29_kashitimmannacarya",
-     "label": "( २९) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_29_sharkarashrinivasacarya",
-     "label": "( २९) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_2_bhavapradipa",
-     "label": "( २)भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_2_bhedacandrika",
-     "label": "( २) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_2_bhedacintaratnam",
-     "label": "( २) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_2_bhedasanjivini",
-     "label": "( २) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_2_kashitimmannacarya",
-     "label": "( २) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_2_sharkarashrinivasacarya",
-     "label": "( २) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_30_bhavapradipa",
-     "label": "( ३०) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_30_bhedacandrika",
-     "label": "( ३०) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_30_bhedacintaratnam",
-     "label": "( ३०) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_30_bhedasanjivini",
-     "label": "( ३०) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_30_kashitimmannacarya",
-     "label": "( ३०) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_30_sharkarashrinivasacarya",
-     "label": "( ३०) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_31_bhavapradipa",
-     "label": "( ३१) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_31_bhedacandrika",
-     "label": "( ३१) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_31_bhedacintaratnam",
-     "label": "( ३१) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_31_bhedasanjivini",
-     "label": "( ३१) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_31_kashitimmannacarya",
-     "label": "( ३१) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_31_sharkarashrinivasacarya",
-     "label": "( ३१) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_32_bhavapradipa",
-     "label": "( ३२) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_32_bhedacandrika",
-     "label": "( ३२) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_32_bhedacintaratnam",
-     "label": "( ३२) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_32_bhedasanjivini",
-     "label": "( ३२) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_32_kashitimmannacarya",
-     "label": "( ३२) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_32_sharkarashrinivasacarya",
-     "label": "( ३२) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_33_bhavapradipa",
-     "label": "( ३३) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_33_bhedacandrika",
-     "label": "( ३३) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_33_bhedacintaratnam",
-     "label": "( ३३) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_33_bhedasanjivini",
-     "label": "( ३३) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_33_kashitimmannacarya",
-     "label": "( ३३) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_33_sharkarashrinivasacarya",
-     "label": "( ३३) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_34_bhavapradipa",
-     "label": "( ३४) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_34_bhedacandrika",
-     "label": "( ३४) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_34_bhedacintaratnam",
-     "label": "( ३४) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_34_bhedasanjivini",
-     "label": "( ३४) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_34_kashitimmannacarya",
-     "label": "( ३४) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_34_sharkarashrinivasacarya",
-     "label": "( ३४) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_35_bhavapradipa",
-     "label": "( ३५) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_35_bhedacandrika",
-     "label": "( ३५) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_35_bhedacintaratnam",
-     "label": "( ३५) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_35_bhedasanjivini",
-     "label": "( ३५) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_35_kashitimmannacarya",
-     "label": "( ३५) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_35_sharkarashrinivasacarya",
-     "label": "( ३५) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_36_bhavapradipa",
-     "label": "( ३६) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_36_bhedacandrika",
-     "label": "( ३६) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_36_bhedacintaratnam",
-     "label": "( ३६) भेदचिन्तारत्नम्",
-     "author": "क्रोडार्यपादपाथोऽजभाजा भगवता कृता",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_36_bhedasanjivini",
-     "label": "( ३६) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_36_kashitimmannacarya",
-     "label": "( ३६) काशीतिम्मण्णाचार्य",
-     "author": "॥ इति श्रीव्याघ्रपुर्युपनामक श्रीनाथविरचिता",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_36_sharkarashrinivasacarya",
-     "label": "( ३६) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_3_bhavapradipa",
-     "label": "( ३) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_3_bhedacandrika",
-     "label": "( ३) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_3_bhedacintaratnam",
-     "label": "( ३) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_3_bhedasanjivini",
-     "label": "( ३) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_3_kashitimmannacarya",
-     "label": "( ३) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_3_sharkarashrinivasacarya",
-     "label": "( ३) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_4_bhavapradipa",
-     "label": "( ४) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_4_bhedacandrika",
-     "label": "( ४) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_4_bhedacintaratnam",
-     "label": "( ४) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_4_bhedasanjivini",
-     "label": "( ४) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_4_kashitimmannacarya",
-     "label": "( ४) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_4_sharkarashrinivasacarya",
-     "label": "( ४) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_5_bhavapradipa",
-     "label": "( ५) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_5_bhedacandrika",
-     "label": "( ५) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_5_bhedacintaratnam",
-     "label": "( ५) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_5_bhedasanjivini",
-     "label": "( ५) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_5_kashitimmannacarya",
-     "label": "( ५) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_5_sharkarashrinivasacarya",
-     "label": "( ५) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_6_bhavapradipa",
-     "label": "( ६) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_6_bhedacandrika",
-     "label": "( ६) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_6_bhedacintaratnam",
-     "label": "( ६) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_6_bhedasanjivini",
-     "label": "( ६) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_6_kashitimmannacarya",
-     "label": "( ६) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_6_sharkarashrinivasacarya",
-     "label": "( ६) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_7_bhavapradipa",
-     "label": "( ७) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_7_bhedacandrika",
-     "label": "( ७) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_7_bhedacintaratnam",
-     "label": "( ७) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_7_bhedasanjivini",
-     "label": "( ७) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_7_kashitimmannacarya",
-     "label": "( ७) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_7_sharkarashrinivasacarya",
-     "label": "( ७) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_8_bhavapradipa",
-     "label": "( ८) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_8_bhedacandrika",
-     "label": "( ८) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_8_bhedacintaratnam",
-     "label": "( ८) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_8_bhedasanjivini",
-     "label": "( ८) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_8_kashitimmannacarya",
-     "label": "( ८) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_8_sharkarashrinivasacarya",
-     "label": "( ८) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_9_bhavapradipa",
-     "label": "( ९) भावप्रदीप",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_9_bhedacandrika",
-     "label": "( ९) भेदचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_9_bhedacintaratnam",
-     "label": "( ९) भेदचिन्तारत्नम्",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_9_bhedasanjivini",
-     "label": "( ९) भेदसञ्जीविनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_9_kashitimmannacarya",
-     "label": "( ९) काशीतिम्मण्णाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_9_sharkarashrinivasacarya",
-     "label": "( ९) शर्कराश्रीनिवासाचार्य",
-     "author": "",
-     "items": 1,
-     "matched": 1
+     "items": 36,
+     "matched": 36
     }
    ]
   },
@@ -2184,613 +665,11 @@
    "mulaItems": 13,
    "layers": [
     {
-     "folder": "tika_ramasubba_11",
-     "label": "रामसुब्ब_ १ १",
-     "author": "",
-     "items": 10,
-     "matched": 10
-    },
-    {
-     "folder": "tika_ramasubba_21",
-     "label": "रामसुब्ब_ २ १",
-     "author": "",
-     "items": 10,
-     "matched": 10
-    },
-    {
-     "folder": "tika_ramasubba_31",
-     "label": "रामसुब्ब_ ३ १",
-     "author": "",
-     "items": 9,
-     "matched": 9
-    },
-    {
-     "folder": "tika_ramasubba_41",
-     "label": "रामसुब्ब_ ४ १",
-     "author": "",
-     "items": 9,
-     "matched": 9
-    },
-    {
-     "folder": "tika_ramasubba_12",
-     "label": "रामसुब्ब_ १२",
-     "author": "",
-     "items": 6,
-     "matched": 6
-    },
-    {
-     "folder": "tika_ramasubba_51",
-     "label": "रामसुब्ब_ ५ १",
-     "author": "",
-     "items": 6,
-     "matched": 6
-    },
-    {
-     "folder": "tika_ramasubba_61",
-     "label": "रामसुब्ब_ ६ १",
-     "author": "",
-     "items": 6,
-     "matched": 6
-    },
-    {
-     "folder": "tika_ramasubba_71",
-     "label": "रामसुब्ब_ ७ १",
-     "author": "",
-     "items": 6,
-     "matched": 6
-    },
-    {
-     "folder": "tika_ramasubba_22",
-     "label": "रामसुब्ब_ २२",
-     "author": "",
-     "items": 5,
-     "matched": 5
-    },
-    {
-     "folder": "tika_ramasubba_01",
-     "label": "रामसुब्ब_०१",
-     "author": "",
-     "items": 4,
-     "matched": 4
-    },
-    {
-     "folder": "tika_ramasubba_101",
-     "label": "रामसुब्ब_ १० १",
-     "author": "",
-     "items": 4,
-     "matched": 4
-    },
-    {
-     "folder": "tika_ramasubba_111",
-     "label": "रामसुब्ब_ १ १ १",
-     "author": "",
-     "items": 4,
-     "matched": 4
-    },
-    {
-     "folder": "tika_ramasubba_13",
-     "label": "रामसुब्ब_ १३",
-     "author": "",
-     "items": 4,
-     "matched": 4
-    },
-    {
-     "folder": "tika_ramasubba_81",
-     "label": "रामसुब्ब_ ८ १",
-     "author": "",
-     "items": 4,
-     "matched": 4
-    },
-    {
-     "folder": "tika_ramasubba_91",
-     "label": "रामसुब्ब_ ९१",
-     "author": "",
-     "items": 4,
-     "matched": 4
-    },
-    {
-     "folder": "tika_ramasubba_02",
-     "label": "रामसुब्ब_० २",
-     "author": "",
-     "items": 3,
-     "matched": 3
-    },
-    {
-     "folder": "tika_ramasubba_03",
-     "label": "रामसुब्ब _ ०३",
-     "author": "",
-     "items": 3,
-     "matched": 3
-    },
-    {
-     "folder": "tika_ramasubba_04",
-     "label": "रामसुब्ब _ ०४",
-     "author": "",
-     "items": 3,
-     "matched": 3
-    },
-    {
-     "folder": "tika_ramasubba_121",
-     "label": "रामसुब्ब_ १२१",
-     "author": "",
-     "items": 3,
-     "matched": 3
-    },
-    {
-     "folder": "tika_ramasubba_131",
-     "label": "रामसुब्ब_ १३ १",
-     "author": "",
-     "items": 3,
-     "matched": 3
-    },
-    {
-     "folder": "tika_ramasubba_14",
-     "label": "रामसुब्ब_ १४",
-     "author": "",
-     "items": 3,
-     "matched": 3
-    },
-    {
-     "folder": "tika_ramasubba_23",
-     "label": "रामसुब्ब_ २३",
-     "author": "",
-     "items": 3,
-     "matched": 3
-    },
-    {
-     "folder": "tika_ramasubba_32",
-     "label": "रामसुब्ब_ ३२",
-     "author": "",
-     "items": 3,
-     "matched": 3
-    },
-    {
-     "folder": "tika_ramasubba_05",
-     "label": "रामसुब्ब_० ५",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_06",
-     "label": "रामसुब्ब_० ६",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_07",
-     "label": "रामसुब्ब_० ७",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_08",
-     "label": "रामसुब्ब_० ८",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_102",
-     "label": "रामसुब्ब_ १०२",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_103",
-     "label": "रामसुब्ब_ १०३",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_104",
-     "label": "रामसुब्ब_ १०४",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_105",
-     "label": "रामसुब्ब_ १०५",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_106",
-     "label": "रामसुब्ब_ १०६",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_107",
-     "label": "रामसुब्ब_ १०७",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_112",
-     "label": "रामसुब्ब_ १ १ २",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_141",
-     "label": "रामसुब्ब_ १४ १",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_15",
-     "label": "रामसुब्ब_ १५",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_151",
-     "label": "रामसुब्ब_ १५ १",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_161",
-     "label": "रामसुब्ब_ १६ १",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_171",
-     "label": "रामसुब्ब_ १७ १",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_181",
-     "label": "रामसुब्ब_ १८ १",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_191",
-     "label": "रामसुब्ब_ १९ १",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_42",
-     "label": "रामसुब्ब_ ४२",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_72",
-     "label": "रामसुब्ब_ ७२",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_92",
-     "label": "रामसुब्ब_ ९२",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_ramasubba_09",
-     "label": "रामसुब्ब _ ०९",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_10",
-     "label": "रामसुब्ब _ १०",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_1010",
-     "label": "रामसुब्ब_ १० १ ०",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_1011",
-     "label": "रामसुब्ब_ १० १ १",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_108",
-     "label": "रामसुब्ब_ १०८",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_109",
-     "label": "रामसुब्ब_ १०९",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_113",
-     "label": "रामसुब्ब_ १ १ ३",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_114",
-     "label": "रामसुब्ब_ १ १ ४",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_122",
-     "label": "रामसुब्ब_ १२२",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_123",
-     "label": "रामसुब्ब_ १२३",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_124",
-     "label": "रामसुब्ब_ १२४",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_125",
-     "label": "रामसुब्ब_ १२५",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_126",
-     "label": "रामसुब्ब_ १२६",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_127",
-     "label": "रामसुब्ब_ १२७",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_132",
-     "label": "रामसुब्ब_ १३२",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_16",
-     "label": "रामसुब्ब _ १६",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_17",
-     "label": "रामसुब्ब _ १७",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_18",
-     "label": "रामसुब्ब _ १८",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_19",
-     "label": "रामसुब्ब _ १९",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_20",
-     "label": "रामसुब्ब _ २०",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_201",
-     "label": "रामसुब्ब_ २० १",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_211",
-     "label": "रामसुब्ब_ २११",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_221",
-     "label": "रामसुब्ब_ २२ १",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_222",
-     "label": "रामसुब्ब_ २२२",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_223",
-     "label": "रामसुब्ब_ २२३",
-     "author": "अनंतशाखा तत्वार्थविदा सूत्रकृतेरितम्",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_224",
-     "label": "रामसुब्ब_ २२४",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_24",
-     "label": "रामसुब्ब _ २४",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_25",
-     "label": "रामसुब्ब _ २५",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_26",
-     "label": "रामसुब्ब _ २६",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_27",
-     "label": "रामसुब्ब _ २७",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_28",
-     "label": "रामसुब्ब _ २८",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_29",
-     "label": "रामसुब्ब _ २९",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_30",
-     "label": "रामसुब्ब _ ३०",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_43",
-     "label": "रामसुब्ब_ ४३",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_44",
-     "label": "रामसुब्ब_ ४४",
-     "author": "इति आतिदेशिकसङ्गतिलक्षणाज्ञाननिबन्धनत्वात्त्वत्कृतशङ्कायाः",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_45",
-     "label": "रामसुब्ब_ ४५",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_46",
-     "label": "रामसुब्ब_ ४६",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_52",
-     "label": "रामसुब्ब_ ५२",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_53",
-     "label": "रामसुब्ब_ ५३",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_54",
-     "label": "रामसुब्ब_ ५४",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_93",
-     "label": "रामसुब्ब_ ९३",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_94",
-     "label": "रामसुब्ब_ ९४",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ramasubba_95",
-     "label": "रामसुब्ब_ ९५",
-     "author": "",
-     "items": 1,
-     "matched": 1
+     "folder": "tika_ramasubba",
+     "label": "रामसुब्ब",
+     "author": "",
+     "items": 12,
+     "matched": 12
     }
    ]
   },
@@ -2803,7 +682,7 @@
      "folder": "tika_jayatirtha",
      "label": "श्रीमज्जयतीर्थटीका",
      "author": "श्रीजयतीर्थः",
-     "items": 159,
+     "items": 165,
      "matched": 159
     },
     {
@@ -2812,13 +691,6 @@
      "author": "",
      "items": 134,
      "matched": 134
-    },
-    {
-     "folder": "tika_mula",
-     "label": "मूल",
-     "author": "",
-     "items": 2,
-     "matched": 2
     }
    ]
   },
@@ -2828,162 +700,8 @@
    "mulaItems": 11,
    "layers": [
     {
-     "folder": "tika_pra",
-     "label": "प्रकृते कर्तृत्वादित्यनेन विकाररूपकर्त…",
-     "author": "प्र",
-     "items": 2,
-     "matched": 2
-    },
-    {
-     "folder": "tika_01_karmanirnaya_tatraikaahuragunambrahmeti_natadyuktamshrutiyukt",
-     "label": "( ०१) कर्मनिर्णय:-तत्रैक आहुरगुणं ब्रह…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_adhikyagrastatvaprayapathaparyalocanabhyampratanavyakhyaneshruta",
-     "label": "आधिक्यग्रस्तत्वप्रायपाठपर्यालोचनाभ्यां…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_anekaipramanairbuddhipurvapravritirupakartritvammukhyamvikararup",
-     "label": "अनेकैः प्रमाणैर्बुद्धिपूर्वप्रवृतिरूपक…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_anushyakhvanadidishagamasyagamatvenaivapramanyamnatulingatveneti",
-     "label": "अनुष्याख्वानादिदिशाऽऽगमस्यागमत्वेनैव प…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_anuvyakhyanaprasangataulyat_vipakshebadhakapradarshanapurvakambu",
-     "label": "अनुव्याख्यानप्रसङ्ग तौ ल्या त् , विपक्…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_asangatamitianucitatatparyakamitipakshasyadushanam",
-     "label": "असङ्गतमिति अनुचिततात्पर्यकमिति पक्षस्य…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ayuktamityasangatarthakamnetivyavasthapayitumanuvyakhyanekshatya",
-     "label": "अयुक्तमित्यसङ्गतार्थकं नेति व्यवस्थापय…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_bahunam_vacanikarthanam_tatparyarthena_nigamanamiti_kham_cam_mat",
-     "label": "बहूनां वाचनिकार्थानां तात्पर्यार्थेन न…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_bahunamvacanikarthanamekasyaivatatparyarthenanigamanamitikham_ca",
-     "label": "बहूनां वाचनिकार्थानामेकस्यैव तात्पर्या…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_buddhighatitakartritvasyamukhyasyaivavivakshitatvepurvoktativyap",
-     "label": "बुद्धिघटितकर्तृत्वस्य मुख्यस्यैव विवक्…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
      "folder": "tika_buddhipu_rvam_sarvakartritvaditi_he_tau_dalakrityacintapurvakam_",
      "label": "बुद्धिपू र्वं सर्वकर्तृत्वादिति हे तौ…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_buddhipurvamsarvakartritvaditihetoshrutisiddhatvenumeyabhavakath",
-     "label": "बुद्धिपूर्वं सर्वकर्तृत्वादिति हेतोः श…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_buddhipurvamsarvakartritvaditipracinabhimatahetughatakavisheshan",
-     "label": "बुद्धिपू र्वं सर्वकर्तृत्वादिति प्राची…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_ekasyaiva_granthasya_naikana",
-     "label": "एकस्यैव ग्रन्थस्य नैकनामकृतेः शास्त्रव…",
-     "author": "एकस्यैव ग्रन्थस्य नैकनाम",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_gaunilakshanasthalayorvaishamyenavyakhyanebijabhavapradarshanapu",
-     "label": "गौणीलक्षणास्थलयो र्वै षम्येन व्याख्यान…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_gitatatparyodahritamkartritvamgaunam_anuvyakhyanoktamcapradhanam",
-     "label": "गीतातात्पर्योदाहृतं कर्तृत्वं गौणम् ,…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_granthatra",
-     "label": "ग्रन्थत्रकृतक्रमनिरूपणेन पूर्वपक्षिणः…",
-     "author": "ग्रन्थत्र",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_jagadatmana_vikarasya_kartritvarupatvepi_tasya_kartrishabdamukhy",
-     "label": "जगदात्मना विकारस्य कर्तृत्वरूपत्वेऽपि…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_karmanirnaya_namna_eva_tika",
-     "label": "“ कर्मनिर्णय\" नाम्न एव टीकाकृता स्वीका…",
-     "author": "“ कर्मनिर्णय\" नाम्न एव टीका",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_karmanirnaya_namnaupasamharopakramavakyabhyamsampradayaccanirnit",
-     "label": "“ कर्मनिर्णय ” नाम्न उपसंहारोपक्रमवाक्…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_karmanirnaya_namnonarayanapanditacaryasucitatvanvarthakatvayosam",
-     "label": "“ कर्मनिर्णय ” नाम्नो नारायणपण्डिताचार…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_karmanirnaya_namraacaryopajnattvepramanapratijna",
-     "label": "\" कर्मनिर्णय\" नाम्र आचा र्यो प ज्ञ त्त…",
      "author": "",
      "items": 1,
      "matched": 1
@@ -2996,76 +714,6 @@
      "matched": 1
     },
     {
-     "folder": "tika_karmanirnayanamnapradhanyasya_khandarthanirnayanamnaprasangikatv",
-     "label": "कर्मनिर्णयनाम्नः प्राधान्यस्य , खण्डार…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_karmanirnayebuddhighatitakartritvangikartrimayavadinaevamprativa",
-     "label": "कर्मनिर्णये बुद्धिघटितकर्तृत्वाङ्गीकर्…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_karmavijaya",
-     "label": "कर्मविजयः",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_kartritvamdvividhamitikartritvavibhagapratipadakapaingitishrutes",
-     "label": "' कर्तृत्वं द्विविधमिति कर्तृत्वविभागप…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_kartritvasyabuddhighatitatveprakrityadhikarananuvyakhyanavirodha",
-     "label": "कर्तृत्वस्य बुद्धिघटितत्वे प्रकृत्यधिक…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_kathalakshanadipramananai_kathayamapishruteshshrutitvenaivaprama",
-     "label": "कथा लक्षणादिप्रमाण णै: कथायामपि श्रुते…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_kham_cam_pakshepivirodhadamukhyavrittirvaityatravashabdasyaashay",
-     "label": "खं .चं.पक्षेपि ' विरोधादमु ख्य वृत्तिर…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_lakshyarthagaunarthayoranumanikatvamacaryairevapratipaditamitipu",
-     "label": "लक्ष्यार्थगौणार्थयोरानुमानिकत्वमाचार्य…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_lakshyarthagaunarthayoranumeyatvam_natushabdatvamityabhiprayasya",
-     "label": "लक्ष्यार्थगौणार्थयोरनुमेयत्वं , न तु श…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_lakshyarthagaunarthayoshabdatvaevavirodhadamukhyavrittirvaitimul",
-     "label": "लक्ष्यार्थगौणार्थयोः शाब्दत्व एव ' विर…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
      "folder": "tika_mahajanaparigrihitatvalingena_karmanirnaya_na_mna_acarya",
      "label": "महाजनपरिगृहीतत्वलिङ्गेन \"कर्मनिर्णय \"न…",
      "author": "महाजनपरिगृहीतत्वलिङ्गेन \"कर्मनिर्णय \"ना म्न आचार्य",
@@ -3073,148 +721,8 @@
      "matched": 1
     },
     {
-     "folder": "tika_mattikakritpadiyavyakhyanasyasphutabadhitasangatimattvapradarsha",
-     "label": "श्रीमट्टीकाकृत्पादीयव्याख्यानस्य स्फुट…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_nacavacanikarthastatparyarthaitivisheshaitiacaryavakyasyavacanik",
-     "label": "नच वाचनिकार्थस्तात्पर्यार्थ इति विशेष…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_natanmanasilagatiitivikalpanirasa",
-     "label": "न तन् मनसि लगति इति विकल्पनिरास",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_paramadarashtika",
-     "label": "परमादरष्टीकाकृतां परमगुरुषु",
-     "author": "परमादरष्टीका",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_prakaranaparyalocanayanayuktamityasyaasangatarthakatvasyaasambha",
-     "label": "प्रकरणपर्यालोचनया न युक्तमित्यस्य असङ्…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_pramanalakshanadivakyodaharanapurvakamsiddhantekartritvasyabuddh",
-     "label": "प्रमाणलक्षणादिवाक्योदाहरणपूर्वकं सिद्ध…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_prasangadasadadhikaraniyanuvvakhyanasudhaya_kartabuddhimanitishe",
-     "label": "प्रसङ्गादसदधिकरणीयानुव्वाख्यानसुधायाः…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_prasangadasamanjasashobhanashabdayoraparyayatvamakshipyaparyayat",
-     "label": "प्रसङ्गादसमञ्जसाशोभनशब्दयोरपर्यायत्वमा…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_prasangat_tika",
-     "label": "प्रसङ्गात् टीकाकृतां मूलकोशानुपलम्भे त…",
-     "author": "प्रसङ्गात् टीका",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_pratijnadhyaharaprasangadityatrapratijnapadaprayogamarmaprakasha",
-     "label": "प्रतिज्ञाध्याहारप्रसङ्गादित्यत्र प्रति…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_pravrittirupakartritvasyabuddhighatitatvekartritvasyabuddhivyapt",
-     "label": "प्रवृत्तिरूपकर्तृत्वस्य बुद्धिघटितत्वे…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
      "folder": "tika_siddhantedushanasyapyaprasiddhavisheshanatvasyasiddhisankirnatad",
      "label": "सिद्धान्तेऽदूषणस्याप्यप्रसिद्धविशेषणत्…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_simhavalokananyayenapunavacanikarthashabdasyashakyarthamatrapara",
-     "label": "सिंहावलोकनन्यायेन पुनः वाचनिकार्थशब्दस…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_svoktarthe_eva_sakridu_cca_rita_iti_nyayasya_pravrittim_tasya_sh",
-     "label": "स्वोक्तार्थे एव सकृदु च्च रितः... इति…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_uktakham_cam_vyakhyanasyayathashrutamulapadananugunatapradarshan",
-     "label": "उक्तखं.चं.व्याख्यानस्य यथाश्रुतमूलपदान…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_uktasadhyavishishtataya_samanyavisheshabhavenasambhavamashakya_s",
-     "label": "उक्तसाध्याविशिष्टताया: सामान्यविशेषभाव…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_vimarshanasaukaryayasvandaryacandrikayayathagranthamanuvada",
-     "label": "विमर्शनसौकार्याय स्वण्डार्यचन्द्रिकाया…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_yatravacanikaryadanya_itivakyapataka_laukikavakyeshu_ityasyakrit",
-     "label": "यत्र वाचनिकार्यादन्यः...इति वाक्यपटक\"…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_yuktatyupetamitisangatyupetamityarthakamitipakshasyanirasa",
-     "label": "युक्तत्युपेतमिति सङ्गत्युपेतमित्यर्थकम…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_yuktiritivacoyuktiritipakshanirasa",
-     "label": "युक्तिरिति वाचोयुक्तिरिति पक्षनिरास",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_yuktirityanumaivetipakshesadhyaparishkarapurvakamanumanamvimrish",
-     "label": "युक्तिरित्यनुमैवेति पक्षे साध्यपरिष्का…",
      "author": "",
      "items": 1,
      "matched": 1
@@ -3297,76 +805,6 @@
      "matched": 3
     },
     {
-     "folder": "tika_om_na_prayojanavattvat_om_prayojanavattvahetoriti_sutre_prayojan",
-     "label": "ॐ न प्रयोजनवत्त्वात् ॐ ।। प्रयोजनवत्त्…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_alana",
-     "label": "अलङ्कृतः सदैवायं दुर्घटैरेव भूषणैः",
-     "author": "अलङ्",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_angi",
-     "label": "अङ्गीकृतं चेत्प्रामाण्यं स्मृत्यादेः क…",
-     "author": "अङ्गी",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_anyatvagrahane",
-     "label": "अन्यत्वाग्रहणे प्रोक्तः कथमन्योन्यसंश्…",
-     "author": "अन्यत्वाग्रहणे",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_aptai_pratyakshato_drishtva",
-     "label": "आप्तैः प्रत्यक्षतो दृष्ट्वा प्रोक्तमर्…",
-     "author": "आप्तैः प्रत्यक्षतो दृष्ट्वा",
-     "items": 2,
-     "matched": 0
-    },
-    {
-     "folder": "tika_asmatpakshe_visheshasya_sarvatrangi",
-     "label": "अस्मत्पक्षे विशेषस्य सर्वत्राङ्गीकृतत्…",
-     "author": "अस्मत्पक्षे विशेषस्य सर्वत्राङ्गी",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_avipralambhastajjnanam_tata",
-     "label": "अविप्रलम्भस्तज्ज्ञानं तत्कृतत्वादयोऽपि च",
-     "author": "अविप्रलम्भस्तज्ज्ञानं तत्",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_kshanamatramavasthanam_svi",
-     "label": "क्षणमात्रमवस्थानं स्वीकृतं सर्ववस्तुषु",
-     "author": "क्षणमात्रमवस्थानं स्वी",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_kvacijjiva",
-     "label": "क्वचिज्जीवाकृतं दृष्ट्वाऽचेतनादेव चाकृ…",
-     "author": "क्वचिज्जीवा",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_mritaveva_parityaga",
-     "label": "मृतावेव परित्यागः कृतो ह्यन्नमयस्य च",
-     "author": "मृतावेव परित्यागः",
-     "items": 2,
-     "matched": 0
-    },
-    {
      "folder": "tika_na_ca_tata",
      "label": "न च तत्प्रोक्तसृष्टौ तु मानं",
      "author": "न च तत्",
@@ -3374,101 +812,10 @@
      "matched": 0
     },
     {
-     "folder": "tika_na_canyasyanyarupatvam_vi",
-     "label": "न चान्यस्यान्यरूपत्वं विकृतत्वेऽपि दृश…",
-     "author": "न चान्यस्यान्यरूपत्वं वि",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_namavita",
-     "label": "नामवित्कृतकृत्यता",
-     "author": "नामवित्",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_pancendriyamanobhedatpra",
-     "label": "पञ्चेन्द्रियमनोभेदात्प्राकृतं षड्विधं…",
-     "author": "पञ्चेन्द्रियमनोभेदात्प्रा",
-     "items": 1,
-     "matched": 0
-    },
-    {
      "folder": "tika_pra",
      "label": "प्राकृतं शुद्धचैतन्यमक्षं तु द्विविधं…",
      "author": "प्रा",
      "items": 4,
-     "matched": 0
-    },
-    {
-     "folder": "tika_pradhanam_vi",
-     "label": "प्रधानं विकृतेरपि",
-     "author": "प्रधानं वि",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_pradhanyattatparijnanatpra",
-     "label": "प्राधान्यात्तत्परिज्ञानात्प्राकृताज्ञो…",
-     "author": "प्राधान्यात्तत्परिज्ञानात्प्रा",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_prasangarthataya",
-     "label": "प्रसङ्गार्थतया प्रोक्ता न सिद्धान्तस्य…",
-     "author": "प्रसङ्गार्थतया",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_purvabhavishubhanam_hi_jnanenaiva",
-     "label": "पूर्वभाविशुभानां हि ज्ञानेनैव कृतार्थता",
-     "author": "पूर्वभाविशुभानां हि ज्ञानेनैव",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_samudayaikyametasmat_duratopa",
-     "label": "समुदायैक्यमेतस्मात् दूरतोऽपाकृतं सदा",
-     "author": "समुदायैक्यमेतस्मात् दूरतोऽपा",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_tattaddoshanivrittyartham_svi",
-     "label": "तत्तद्दोषनिवृत्त्यर्थं स्वीकृता तत्तदा…",
-     "author": "तत्तद्दोषनिवृत्त्यर्थं स्वी",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_vi",
-     "label": "विकृतं बहु",
-     "author": "वि",
-     "items": 2,
-     "matched": 0
-    },
-    {
-     "folder": "tika_vijnatam_manasa_purvam_mayaitata",
-     "label": "विज्ञातं मनसा पूर्वं मयैतत्कृतमित्यपि",
-     "author": "विज्ञातं मनसा पूर्वं मयैतत्",
-     "items": 1,
-     "matched": 0
-    },
-    {
-     "folder": "tika_yaccavi",
-     "label": "यच्चाविकृतमेवैकं ब्रह्म विश्वात्मना मृषा",
-     "author": "यच्चावि",
-     "items": 2,
-     "matched": 0
-    },
-    {
-     "folder": "tika_yadyabhavavisheshitvam_syadangi",
-     "label": "यद्यभावविशेषित्वं स्यादङ्गीकृतमेव ते",
-     "author": "यद्यभावविशेषित्वं स्यादङ्गी",
-     "items": 1,
      "matched": 0
     }
    ]
@@ -3519,6 +866,13 @@
      "author": "मन्नारी कृष्णाचार्यविरचिता",
      "items": 33,
      "matched": 33
+    },
+    {
+     "folder": "tika_nyayamritam",
+     "label": "न्यायामृतम्",
+     "author": "",
+     "items": 75,
+     "matched": 0
     }
    ]
   },
@@ -3528,18 +882,18 @@
    "mulaItems": 122,
    "layers": [
     {
+     "folder": "tika_jayatirthavijaya",
+     "label": "जयतीर्थविजय",
+     "author": "श्रीजनार्दनविरचिता",
+     "items": 120,
+     "matched": 120
+    },
+    {
      "folder": "tika_vittalabhatta",
      "label": "श्रीविट्टलभट्ट",
      "author": "श्रीविट्टलभट्ट विरचिता",
      "items": 120,
      "matched": 120
-    },
-    {
-     "folder": "tika_jayatirthavijaya",
-     "label": "जयतीर्थविजय",
-     "author": "श्रीजनार्दनविरचिता",
-     "items": 118,
-     "matched": 118
     },
     {
      "folder": "tika_bhavadipa",
@@ -3582,20 +936,6 @@
      "author": "श्रीनिवासतीर्थविरचिता",
      "items": 60,
      "matched": 60
-    },
-    {
-     "folder": "tika_2_jayatirthavijaya",
-     "label": "( २) जयतीर्थविजय",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_3_jayatirthavijaya",
-     "label": "( ३) जयतीर्थविजय",
-     "author": "",
-     "items": 1,
-     "matched": 1
     }
    ]
   },
@@ -3620,24 +960,10 @@
     }
    ]
   },
-  "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/shrimannyayasudhamandanam": {
-   "title": "श्रीमन्न्यायसुधामण्डनम्",
-   "author": "श्रीसत्यप्रमोदतीर्थः",
-   "mulaItems": 82,
-   "layers": [
-    {
-     "folder": "tika_advaitatatvasudhabhumika",
-     "label": "अद्वैततत्वसुधाभूमिका",
-     "author": "",
-     "items": 3,
-     "matched": 3
-    }
-   ]
-  },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/tarka_tandava": {
    "title": "तर्कताण्डवम्",
    "author": "श्रीव्यासतीर्थः",
-   "mulaItems": 157,
+   "mulaItems": 159,
    "layers": [
     {
      "folder": "tika_nyayadipa",
@@ -3661,25 +987,18 @@
      "matched": 4
     },
     {
-     "folder": "tika_nyayadipakhyavyakhya",
-     "label": "न्यायदीपा ख्या व्याख्या",
+     "folder": "tika_tarkatandavam",
+     "label": "तर्कताण्डवम्",
      "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_prabhakarastu",
-     "label": "प्राभाकरास्तु",
-     "author": "",
-     "items": 1,
-     "matched": 1
+     "items": 388,
+     "matched": 0
     }
    ]
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/later_acharyas/tatparya_chandrika": {
    "title": "तात्पर्यचन्द्रिका",
    "author": "श्रीव्यासतीर्थः",
-   "mulaItems": 403,
+   "mulaItems": 404,
    "layers": [
     {
      "folder": "tika_prakashika",
@@ -3708,6 +1027,13 @@
      "author": "श्रीसत्यानन्दतीर्थविरचिता",
      "items": 73,
      "matched": 73
+    },
+    {
+     "folder": "tika_tatparyachandrika",
+     "label": "तात्पर्यचन्द्रिका",
+     "author": "श्रीव्यासतीर्थः",
+     "items": 178,
+     "matched": 0
     }
    ]
   },
@@ -3871,51 +1197,9 @@
      "matched": 2
     },
     {
-     "folder": "tika_durghatabhavadipika_sahasaityasyasahasaparalokamgamayitetyartha_",
-     "label": "दुर्घटभावदीपिका — साहस इत्यस्य साहसा प…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
      "folder": "tika_iti_shri_chalari_sheshacarya",
      "label": "इति श्री छलारी शेषाचार्यकृतायां भागवतट…",
      "author": "इति श्री छलारी शेषाचार्य",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_pranatashcasauvihvalobhayagrastashcapranatavihvalaityartha_etena",
-     "label": "प्रणतश्चासौ विह्वलो भयग्रस्तश्च प्रणतव…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_satyadharmiya_kutosomatvamashvinordevayorapityataaha_bhishajavit",
-     "label": "सत्यधर्मीया —कुतोऽसोमत्वमश्विनोर्देवयो…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_sumanorancini",
-     "label": "सुमनोरञ्चिनी",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_suraityasyabhusurabrahmanaityartha_etenasuraityetaddevaityanenap",
-     "label": "सुरा इत्यस्य भूसुरा ब्राह्मणा इत्यर्थः…",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_vijayadhvajatirthaviracita",
-     "label": "श्रीमद्विजयध्वजतीर्थविरचिता",
-     "author": "",
      "items": 1,
      "matched": 1
     },
@@ -3939,26 +1223,19 @@
      "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
      "items": 3,
      "matched": 3
-    },
-    {
-     "folder": "tika_tatvamanjari",
-     "label": "तत्वमञ्जरी",
-     "author": "",
-     "items": 3,
-     "matched": 3
     }
    ]
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/sutra_prasthana/brahma_sutra_bhashya": {
    "title": "ब्रह्मसूत्रभाष्यम्",
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-   "mulaItems": 227,
+   "mulaItems": 571,
    "layers": [
     {
      "folder": "tika_bhashya",
      "label": "भाष्यम्",
      "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-     "items": 224,
+     "items": 226,
      "matched": 224
     },
     {
@@ -4046,25 +1323,11 @@
      "matched": 19
     },
     {
-     "folder": "tika_bhamati",
-     "label": "भामती",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
      "folder": "tika_tattvaprakashikabhavabodha",
      "label": "तत्त्वप्रकाशिकाभावबोधः",
      "author": "श्रीरघूत्तमतीर्थविरचितः",
      "items": 2,
      "matched": 2
-    },
-    {
-     "folder": "tika_bhinavacandrika",
-     "label": "भिनवचन्द्रिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
     },
     {
      "folder": "tika_pandurangi_shrinivasacarya",
@@ -4116,23 +1379,9 @@
      "matched": 1
     },
     {
-     "folder": "tika_ttvapradipika",
-     "label": "त्त्वप्रदीपिका",
-     "author": "",
-     "items": 1,
-     "matched": 1
-    },
-    {
      "folder": "tika_vakyarthamancari",
      "label": "वाक्यार्थमञ्चरी",
      "author": "शर्करा श्रीनिवासाचार्यविरचिता",
-     "items": 1,
-     "matched": 1
-    },
-    {
-     "folder": "tika_varthamanjari",
-     "label": "वार्थमञ्जरी",
-     "author": "",
      "items": 1,
      "matched": 1
     }
@@ -4158,13 +1407,6 @@
      "matched": 3
     },
     {
-     "folder": "tika_prabodhini",
-     "label": "प्रबोधिनी",
-     "author": "",
-     "items": 2,
-     "matched": 2
-    },
-    {
      "folder": "tika_nigudharthaprabodhini",
      "label": "निगूढार्थप्रबोधिनी",
      "author": "श्री बालाचार्यविरचिता",
@@ -4176,13 +1418,13 @@
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/aitareyopanishad_bhashya": {
    "title": "ऐतरेयोपनिषद्भाष्यम्",
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-   "mulaItems": 47,
+   "mulaItems": 50,
    "layers": [
     {
      "folder": "tika_bhashya",
      "label": "भाष्यम्",
      "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-     "items": 38,
+     "items": 56,
      "matched": 38
     },
     {
@@ -4191,26 +1433,33 @@
      "author": "भगवन्तरायकृतः",
      "items": 38,
      "matched": 38
+    },
+    {
+     "folder": "tika_upanishat",
+     "label": "उपनिषत्",
+     "author": "",
+     "items": 5,
+     "matched": 0
     }
    ]
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/brihadaranyakopanishadbhashyam": {
    "title": "बृहदारण्यकोपनिषद्भाष्यम्",
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-   "mulaItems": 232,
+   "mulaItems": 234,
    "layers": [
     {
      "folder": "tika_bhavabodhatippani",
      "label": "भावबोधटिप्पणी",
      "author": "",
-     "items": 170,
+     "items": 172,
      "matched": 170
     },
     {
      "folder": "tika_bhashya",
      "label": "भाष्यम्",
      "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-     "items": 169,
+     "items": 379,
      "matched": 169
     },
     {
@@ -4219,6 +1468,13 @@
      "author": "",
      "items": 22,
      "matched": 22
+    },
+    {
+     "folder": "tika_upanishat",
+     "label": "उपनिषत्",
+     "author": "",
+     "items": 78,
+     "matched": 0
     }
    ]
   },
@@ -4231,7 +1487,7 @@
      "folder": "tika_bhashya",
      "label": "भाष्यम्",
      "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-     "items": 131,
+     "items": 251,
      "matched": 131
     },
     {
@@ -4254,6 +1510,13 @@
      "author": "( मुख्यप्राणरूपप्रतीके देवकृताध्यात्मभगवदुपासना)",
      "items": 8,
      "matched": 8
+    },
+    {
+     "folder": "tika_upanishat",
+     "label": "उपनिषत्",
+     "author": "",
+     "items": 34,
+     "matched": 0
     }
    ]
   },
@@ -4352,6 +1615,13 @@
      "author": "",
      "items": 42,
      "matched": 42
+    },
+    {
+     "folder": "tika_upanishat",
+     "label": "उपनिषत्",
+     "author": "",
+     "items": 24,
+     "matched": 0
     }
    ]
   },
@@ -4415,6 +1685,13 @@
      "author": "श्रीवरदतीर्थभिक्षु",
      "items": 6,
      "matched": 6
+    },
+    {
+     "folder": "tika_upanishat",
+     "label": "उपनिषत्",
+     "author": "",
+     "items": 8,
+     "matched": 0
     }
    ]
   },
@@ -4452,11 +1729,11 @@
      "matched": 7
     },
     {
-     "folder": "tika_padarthadipika",
-     "label": "पदार्थदीपिका",
+     "folder": "tika_upanishat",
+     "label": "उपनिषत्",
      "author": "",
-     "items": 1,
-     "matched": 1
+     "items": 7,
+     "matched": 0
     }
    ]
   },
@@ -4483,7 +1760,7 @@
      "folder": "tika_bhashya",
      "label": "भाष्यम्",
      "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-     "items": 22,
+     "items": 31,
      "matched": 22
     },
     {
@@ -4492,6 +1769,13 @@
      "author": "",
      "items": 10,
      "matched": 10
+    },
+    {
+     "folder": "tika_upanishat",
+     "label": "उपनिषत्",
+     "author": "",
+     "items": 28,
+     "matched": 0
     }
    ]
   },
@@ -4590,19 +1874,26 @@
      "author": "श्रीसत्यप्रज्ञतीर्थ",
      "items": 10,
      "matched": 10
+    },
+    {
+     "folder": "tika_upanishat",
+     "label": "उपनिषत्",
+     "author": "",
+     "items": 4,
+     "matched": 0
     }
    ]
   },
   "darshana/vedanta/dvaita/DvaitaVedanta/upanishad_prasthana/taittiriyopanishad_bhashya": {
    "title": "तैत्तिरीयोपनिषद्भाष्यम्",
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-   "mulaItems": 49,
+   "mulaItems": 50,
    "layers": [
     {
      "folder": "tika_bhashya",
      "label": "भाष्यम्",
      "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-     "items": 37,
+     "items": 58,
      "matched": 37
     },
     {
@@ -4634,11 +1925,11 @@
      "matched": 4
     },
     {
-     "folder": "tika_padarthadipikabhashyartha",
-     "label": "पदार्थदीपिका भाष्यार्थ",
+     "folder": "tika_taittiriyopanishat",
+     "label": "तैत्तिरीयोपनिषत्",
      "author": "",
-     "items": 1,
-     "matched": 1
+     "items": 44,
+     "matched": 0
     }
    ]
   },
