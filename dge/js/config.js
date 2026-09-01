@@ -70,7 +70,7 @@ const appConfig = {
   // over this exact commit before pinning: राम/कृष्ण/धर्म all return correct
   // 0.97-confidence hits, and section-scoped queries (itihasa, darshana)
   // return only that section's granthas.
-  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@70e0fd015e9358d7c3642eb0985a4e2e3af7bbda",
+  searchIndexBase: "https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@168917e24098890e4dd7146f69cbbd1798a8b74b",
   version: "v4.25"
 };
 window.appConfig = appConfig; // THIS LINE WAS MISSING — every "window.appConfig.X" read
