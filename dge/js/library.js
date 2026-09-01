@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.18 (super-admin draft preview of the Library Manager\'s unexported overrides + searchable By-Author facet index. On top of v3.17\'s mula_gretil/mula_dcs labels)';
+window.DGE_VERSIONS['library.js'] = 'v3.19 (super-admin draft preview of the Library Manager\'s unexported overrides + searchable By-Author facet index. On top of v3.17\'s mula_gretil/mula_dcs labels)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -974,15 +974,16 @@ function dgeRenderNode(node, labelPrefix, depth, nodePath, noCollapseAtRoot) {
   const countBadge = total > count
     ? `<span style="font-size:10px; color:var(--accent-red); font-weight:700;" title="${count} of ${total} texts registered under this section are filled in">${count}/${total}</span>`
     : `<span style="font-size:10px; color:var(--muted-text); font-weight:400;" title="All texts registered under this section are filled in">${count}</span>`;
+  const isOpen = dgeLibOpenPaths.has(nodePath);
   return `<div style="margin-left:${depth * 10}px;">
-    <div onclick="window.dgeToggleTreeNode('${id}', this)"
+    <div onclick="window.dgeToggleTreeNode('${id}', this, '${nodePath}')"
          style="cursor:pointer; padding:7px 4px; font-size:13px; font-weight:600;
                 display:flex; align-items:center; gap:6px;">
-      <span style="font-size:10px; width:10px;">▸</span>
+      <span style="font-size:10px; width:10px;">${isOpen ? '▾' : '▸'}</span>
       <span style="flex:1;">${labelPrefix}</span>
       ${countBadge}
     </div>
-    <div id="${id}" style="display:none;">${inner}</div>
+    <div id="${id}" style="display:${isOpen ? 'block' : 'none'};">${inner}</div>
   </div>`;
 }
 
@@ -1027,13 +1028,30 @@ function dgeCountLeaves(node) {
   return n;
 }
 
-window.dgeToggleTreeNode = function(id, headerEl) {
+// Which tree nodes the reader has open, by display path — persisted so the
+// Library comes back exactly as it was left ("whatever nodes are opened,
+// they should remain the same", 1 Sep 2026). Paths, not the sequential
+// dgeTreeN ids, because those are re-assigned on every render.
+let dgeLibOpenPaths = (function () {
+  try { return new Set(JSON.parse(localStorage.getItem('dge_library_open_paths') || '[]')); }
+  catch (e) { return new Set(); }
+})();
+function dgeSaveOpenPaths() {
+  try { localStorage.setItem('dge_library_open_paths', JSON.stringify([...dgeLibOpenPaths].slice(-300))); }
+  catch (e) { /* ignore */ }
+}
+
+window.dgeToggleTreeNode = function(id, headerEl, nodePath) {
   const el = document.getElementById(id);
   if (!el) return;
   const open = el.style.display !== 'none';
   el.style.display = open ? 'none' : 'block';
   const arrow = headerEl.querySelector('span');
   if (arrow) arrow.textContent = open ? '▸' : '▾';
+  if (nodePath) {
+    if (open) dgeLibOpenPaths.delete(nodePath); else dgeLibOpenPaths.add(nodePath);
+    dgeSaveOpenPaths();
+  }
 };
 
 window.openLibraryModal = async function() {
@@ -1123,9 +1141,50 @@ window.openLibraryModal = async function() {
   dgeLibTree = dgeBuildTree(populated);
   dgeLibTopKeys = dgeSortChildKeys('', Object.keys(dgeLibTree.children));
   dgeLibPopulatedCount = populated.length;
-  dgeLibGridCategory = null;
+  // Reopen where the reader left off (a drilled category persists alongside
+  // the open tree nodes; an invalid stale path falls back to the grid
+  // inside dgeRenderLibraryCategoryView itself).
+  let savedCat = '';
+  try { savedCat = localStorage.getItem('dge_library_category') || ''; } catch (e) { /* ignore */ }
+  dgeLibGridCategory = savedCat || null;
+  dgeUpdateLibraryDockBtn();
   dgeRenderLibraryRoot();
 };
+
+// ---- pin/dock (1 Sep 2026, project-lead ask: "the library when opened
+// should have an option to pin it so that the entire library section stays
+// opened") ----
+// Navigation in this app is a full page load (?path=...), so "stays open"
+// means: a persisted flag that auto-reopens the Library drawer after every
+// navigation, plus the open-node/category persistence above so it comes
+// back in the same state. Auto-reopen is desktop-only (>=760px): on a
+// phone the drawer covers the whole reading surface, which would trap the
+// reader behind it on every page load.
+function dgeLibraryDocked() {
+  try { return localStorage.getItem('dge_library_docked') === '1'; } catch (e) { return false; }
+}
+window.dgeToggleLibraryDock = function () {
+  const on = !dgeLibraryDocked();
+  try { localStorage.setItem('dge_library_docked', on ? '1' : '0'); } catch (e) { /* ignore */ }
+  dgeUpdateLibraryDockBtn();
+};
+function dgeUpdateLibraryDockBtn() {
+  const b = document.getElementById('libraryDockBtn');
+  if (!b) return;
+  const on = dgeLibraryDocked();
+  b.style.opacity = on ? '1' : '.45';
+  b.style.transform = on ? 'none' : 'rotate(45deg)';
+  b.title = on ? 'Pinned — the Library reopens after navigation. Tap to unpin.'
+              : 'Pin the Library open (it reopens, as you left it, after navigating)';
+}
+(function () {
+  if (!dgeLibraryDocked()) return;
+  const auto = function () {
+    if (window.innerWidth >= 760) window.openLibraryModal();
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', auto);
+  else setTimeout(auto, 0);
+})();
 
 // Everything below builds off dgeLibTree/dgeLibTopKeys, cached by
 // openLibraryModal() above -- none of these re-fetch or rebuild the tree,
@@ -1450,11 +1509,21 @@ function dgeRenderLibraryRoot() {
   const header = draftNote + `<div style="font-size:11px; color:var(--muted-text); margin-bottom:8px;">${dgeLibPopulatedCount} text(s) available</div>`;
   if (dgeLibGridCategory) {
     listEl.innerHTML = header + dgeRenderLibraryCategoryView(dgeLibGridCategory);
-  } else if (mode === 'grid') {
-    listEl.innerHTML = header + dgeRenderLibraryGridView();
   } else {
-    listEl.innerHTML = header + dgeRenderLibraryListView();
+    // Root-level View By (1 Sep 2026, project-lead report: "not showing
+    // the view by authors section anywhere"): the facet row used to exist
+    // only inside a category drill-down, so a reader who never drilled in
+    // never saw it. Offered at the root too now — By Author across the
+    // whole library is exactly the case that wants the widest scope.
+    const vb = dgeViewByRowHtml(dgeLibTree);
+    const body = dgeLibViewBy !== 'hierarchy'
+      ? dgeRenderFacetView(dgeLibTree, dgeLibViewBy)
+      : (mode === 'grid' ? dgeRenderLibraryGridView() : dgeRenderLibraryListView());
+    listEl.innerHTML = header + vb + body;
   }
+  // Where the reader is (root vs a drilled category) survives navigation —
+  // part of the same "keep my place" ask as the dock/open-node persistence.
+  try { localStorage.setItem('dge_library_category', dgeLibGridCategory || ''); } catch (e) { /* ignore */ }
 }
 
 // Quick Search entry point — parses e.g. "rv1.1.3" (see

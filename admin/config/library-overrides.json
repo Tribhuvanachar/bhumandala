@@ -1,11 +1,63 @@
 {
-  "note": "DGE library curation overrides -- a NON-DESTRUCTIVE display layer read by dge/js/library.js (v3+). Keys are effective (post-move) taxonomy paths; move sources/dests are original taxonomy paths. Exported by dge/library-admin.html.",
-  "version": 1,
-  "hidden": [],
-  "pinned": ["SarvaMula"],
-  "labels": {},
-  "order": {},
-  "moves": {
-    "darshana/vedanta/dvaita/SarvaMula": "SarvaMula"
-  }
+ "note": "DGE library curation overrides — a NON-DESTRUCTIVE display layer read by dge/js/library.js (v3+). Keys are effective (post-move) display paths; a move's source is an original taxonomy path and its dest is the subtree's FULL new display path. Commit to admin/config/library-overrides.json.",
+ "version": 1,
+ "hidden": [],
+ "pinned": [
+  "SarvaMula",
+  "vedas"
+ ],
+ "labels": {
+  "kavya_alankara": "sAhitya",
+  "darshana/vedanta/dvaita/DvaitaVedanta/others": "सर्वमूलेतर-द्वैतसम्बन्धिग्रन्थाः",
+  "darshana/vedanta/dvaita/DvaitaVedanta/others/kavyam": "काव्यम्",
+  "darshana/vedanta/dvaita/DvaitaVedanta/others/vyakaranam": "व्याकरणम्",
+  "darshana/vedanta/dvaita/DvaitaVedanta/others/tarkah": "तर्कः",
+  "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam": "प्रकरणानि",
+  "darshana/vedanta/dvaita/DvaitaVedanta/others/stotram": "स्तोत्राणि"
+ },
+ "order": {
+  "darshana/vedanta/dvaita/SarvaMula/rig_bhashya": [
+   "tika_jayatirtha",
+   "mula",
+   "tippani"
+  ],
+  "darshana/vedanta/dvaita/DvaitaVedanta": [
+   "gita_prasthana",
+   "dasha_prakarana_granthas",
+   "itihasa_prasthana",
+   "later_acharyas",
+   "purana_prasthana",
+   "sruti_prasthana",
+   "upanishad_prasthana",
+   "sutra_prasthana"
+  ],
+  "": [
+   "vedas",
+   "upaveda",
+   "agama",
+   "darshana",
+   "dasa_sahitya",
+   "itihasa",
+   "kavya_alankara",
+   "misc",
+   "purana",
+   "shastra",
+   "smriti_dharma",
+   "stotra",
+   "vedanga"
+  ]
+ },
+ "moves": {
+  "dasa_sahitya/vyasakuta/vadiraja_tirtha/yuktimallika": "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam/yuktimallika",
+  "dasa_sahitya/vyasakuta/vadiraja_tirtha/svapna_vrindavana_akhyana": "darshana/vedanta/dvaita/DvaitaVedanta/others/svapna_vrindavana_akhyana",
+  "darshana/vedanta/dvaita/SarvaMula": "SarvaMula"
+ },
+ "adds": [
+  "darshana/vedanta/dvaita/DvaitaVedanta/others",
+  "darshana/vedanta/dvaita/DvaitaVedanta/others/kavyam",
+  "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam",
+  "darshana/vedanta/dvaita/DvaitaVedanta/others/stotram",
+  "darshana/vedanta/dvaita/DvaitaVedanta/others/tarkah",
+  "darshana/vedanta/dvaita/DvaitaVedanta/others/vyakaranam"
+ ]
 }

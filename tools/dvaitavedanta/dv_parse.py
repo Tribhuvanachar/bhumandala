@@ -1031,6 +1031,62 @@ def extract_lazy_units(html: str):
     return (m.group(1) if m else None), ordered
 
 
+# ---- source-markup preservation (1 Sep 2026, project-lead ask) -------------
+# The site styles its units with real markup — h3 commentary names, strong/em
+# quoted base text, per-class colouring — and the text-only pipeline above
+# throws all of that away. Each record now also carries `source_html`: a
+# SANITIZED copy of its #article block, so a future renderer can style by the
+# site's own class markers. Sanitized = structural/styling tags only, and only
+# class/lang/id attributes; scripts, links, images, event handlers and every
+# other attribute are stripped. Takes effect on (re-)harvest — data already
+# committed predates this field and needs its section re-run (the restored
+# .dv_cache makes that mostly a re-parse, not a re-crawl).
+_HTML_KEEP_TAGS = {"h1", "h2", "h3", "h4", "h5", "h6", "p", "div", "span",
+                   "strong", "b", "em", "i", "u", "br", "hr", "sup", "sub",
+                   "ol", "ul", "li", "table", "thead", "tbody", "tr", "td",
+                   "th", "blockquote"}
+_HTML_DROP_TAGS = {"script", "style", "noscript", "iframe", "form", "input",
+                   "button", "select", "nav", "img", "svg", "video", "audio"}
+_HTML_KEEP_ATTRS = {"class", "lang", "id"}
+_HTML_MAX_BYTES = 250_000
+
+
+def sanitize_article_html(node) -> str:
+    """Sanitized markup of one #article block (empty string when the block is
+    absent, over the size cap, or carries no styling signal beyond plain
+    paragraphs)."""
+    if node is None:
+        return ""
+    dup = make_soup(str(node))
+    for tag in list(dup.find_all(True)):
+        name = (tag.name or "").lower()
+        if name in _HTML_DROP_TAGS:
+            tag.decompose()
+        elif name == "a":
+            tag.unwrap()                      # keep the text, drop the link
+        elif name not in _HTML_KEEP_TAGS:
+            tag.unwrap()
+        else:
+            tag.attrs = {k: v for k, v in tag.attrs.items()
+                         if k.lower() in _HTML_KEEP_ATTRS}
+    out = "".join(str(c) for c in (dup.body.children if dup.body else dup.children))
+    out = re.sub(r"\n{3,}", "\n\n", out).strip()
+    if len(out.encode("utf-8")) > _HTML_MAX_BYTES:
+        return ""
+    # No signal = nothing a renderer could style that the text doesn't
+    # already carry; skip rather than double the data for plain prose.
+    if not re.search(r'class=|<(h[1-6]|strong|b|em|i|u|sup|sub|table)\b', out):
+        return ""
+    return out
+
+
+def _first_article_node(soup: BeautifulSoup):
+    for t in soup.find_all(id=ARTICLE_ID_RE):
+        if isinstance(t, Tag) and not _is_chrome(t):
+            return t
+    return None
+
+
 def parse_load_fragment(fragment_html: str, page_record: dict,
                         unit_id: str, page_url: str) -> dict:
     """Parse one /load-data response's `html` into the same record shape
@@ -1049,6 +1105,7 @@ def parse_load_fragment(fragment_html: str, page_record: dict,
         "sidebar": [],
         "is_container": not layers,
         "no_record_marker": False,
+        "source_html": sanitize_article_html(_first_article_node(soup)),
     }
 
 
@@ -1070,4 +1127,5 @@ def parse_page(html: str, url: str) -> dict:
         "sidebar": extract_sidebar_links(soup),
         "is_container": no_record or not layers,
         "no_record_marker": no_record,
+        "source_html": sanitize_article_html(_first_article_node(soup)),
     }

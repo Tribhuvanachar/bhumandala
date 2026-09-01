@@ -519,21 +519,30 @@
   // Paths to force open on the next render only -- a move's destination
   // chain lands here so the moved node is visible where it arrived.
   var EXTRA_OPEN=[];
+  // Which nodes are open, by display path -- the source of truth for
+  // re-render AND persisted per browser (1 Sep 2026 follow-up to the
+  // collapse fix: open state now also survives a page reload, same ask
+  // as the reader Library's own open-node persistence).
+  var MGR_OPEN=(function(){ try{ var a=JSON.parse(localStorage.getItem("dge.libmgr.open")||"[]"); return Array.isArray(a)?a:[]; }catch(e){ return []; } })();
+  function saveMgrOpen(){ try{ localStorage.setItem("dge.libmgr.open", JSON.stringify(MGR_OPEN.slice(-600))); }catch(e){} }
   function setNodeOpen(el, open){
     el.classList.toggle("open", open);
     // :scope>div is the .row (kids live in a sibling .kids div), so this
     // never reaches into a descendant node's own twisty.
     var tw=el.querySelector(":scope>.row .tw[data-tw]");
     if(tw) tw.textContent=open?"▾":"▸";
+    var p=el.dataset.node, i=MGR_OPEN.indexOf(p);
+    if(open&&i<0) MGR_OPEN.push(p); else if(!open&&i>=0) MGR_OPEN.splice(i,1);
+    saveMgrOpen();
   }
   function render(){
     // 1 Sep 2026, project-lead report: every operation (reorder, rename,
     // move, hide, pin) collapsed the whole open structure, because this
-    // rebuilds #tree's innerHTML wholesale. Capture which nodes are open
-    // before the rebuild and re-open them (by display path) afterwards --
-    // "smoothly, every operation should happen".
+    // rebuilds #tree's innerHTML wholesale. MGR_OPEN (persisted, updated by
+    // every twisty/expand/collapse via setNodeOpen) is re-applied after the
+    // rebuild -- "smoothly, every operation should happen".
     var keepOpen={};
-    document.querySelectorAll("#tree .node.open").forEach(function(n){ keepOpen[n.dataset.node]=1; });
+    MGR_OPEN.forEach(function(p){ keepOpen[p]=1; });
     EXTRA_OPEN.forEach(function(p){ keepOpen[p]=1; });
     EXTRA_OPEN=[];
     DISPLAY_ROOTS=buildDisplayTree();
@@ -547,7 +556,9 @@
       var el=document.querySelector('#tree .node.hasK[data-node="'+CSS.escape(p)+'"]');
       if(el) setNodeOpen(el, true);
     });
-    if(q()) document.querySelectorAll('#tree .node.hasK').forEach(function(n){setNodeOpen(n,true);});
+    // Search auto-expansion is VISUAL only (no setNodeOpen): matching a
+    // filter shouldn't overwrite the persisted open-node set.
+    if(q()) document.querySelectorAll('#tree .node.hasK').forEach(function(n){ n.classList.add("open"); var tw=n.querySelector(':scope>.row .tw[data-tw]'); if(tw) tw.textContent="▾"; });
   }
 
   function wire(){

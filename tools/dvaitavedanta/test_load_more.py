@@ -75,6 +75,18 @@ def test_parse_load_fragment_inherits_page_context():
     assert rec["url"].endswith("#article979")
 
 
+def test_source_html_preserved():
+    # 1 Sep 2026: records carry a sanitized copy of the site's own markup
+    # (class markers, headings, bold) so a renderer can style by them.
+    page = parse_page(PAGE, "https://dvaitavedanta.in/category-details/977/975/x")
+    h = page["source_html"]
+    assert 'class="shloka"' in h and "<h3>" in h, h
+    assert "script" not in h and "data-id" not in h and "onclick" not in h
+    frag = parse_load_fragment(FRAGMENT, page, "979", page["url"])
+    assert 'class="lazy-1"' in frag["source_html"]
+    assert "परिमळ" in frag["source_html"]
+
+
 def test_empty_fragment_is_container():
     page = parse_page(PAGE, "https://dvaitavedanta.in/category-details/977/975/x")
     rec = parse_load_fragment("<div></div>", page, "981", page["url"])

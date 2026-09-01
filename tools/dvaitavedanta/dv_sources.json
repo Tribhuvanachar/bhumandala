@@ -472,6 +472,9 @@
           "seed": "/category-details/977/975/sharam/sathha/managa",
           "content_id": 977,
           "ancestor_id": 975,
+          "acharya": "श्रीजयतीर्थः",
+          "fold_rare_headings": true,
+          "_fold_note": "1 Sep 2026: the site's <h3>s here mix real sub-commentary names (सुधा/परिमळ/वाक्यार्थचन्द्रिका/… — 518-1,625 units each) with one-off topic/pratika headings (max 25 units) that used to mint 745 one-item tika folders. fold_rare_headings folds the latter into the enclosing layer / the mula spine; acharya fixes the mula attribution (Jayatirtha, not Madhva — his अनुव्याख्यानम् quotations keep their own layer).",
           "note": "largest grantha; 1,655 leaves. Complete as of 19 Aug 2026 — 46 layers, 9,929 entries.",
           "enabled": false,
           "_note": "Done 19 Aug 2026, and left disabled because it is finished, not because it is impossible. The 17 Aug estimate of ~46h came from a recon figure of ~105 s/leaf; measured against the live site it is ~26 s/leaf by day and ~39 s at night, so it took ~14h across five 4-hour Actions rounds against the resumable cache. Concurrency does not help — 4 parallel requests took 70.9 s wall against 104 s serial, the backend serialises. Re-enable only to re-crawl; a re-run off a warm cache takes ~11 minutes."

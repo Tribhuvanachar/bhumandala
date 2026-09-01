@@ -1045,6 +1045,10 @@
   <div class="modal-content">
     <div class="modal-header-sticky">
       <h3 style="margin:0; color:var(--accent-red); font-size: 16px;">📚 Library</h3>
+      <!-- Pin/dock (library.js dgeToggleLibraryDock): pinned = the drawer
+           reopens after every navigation, restored to the same open nodes
+           and drilled category. -->
+      <button class="btn-sm" id="libraryDockBtn" onclick="window.dgeToggleLibraryDock()" style="font-size:11px; margin-left:auto;" title="Pin the Library open">📌</button>
       <button class="btn-sm" onclick="window.closeModal('libraryModal')" style="font-size:11px;" title="Close">❮</button>
     </div>
     <div class="modal-body">
@@ -1330,7 +1334,7 @@
 <script src="js/dge-nav-rail.js?v=2"></script>
 <dge-nav-rail current="home"></dge-nav-rail>
 <script src="js/tour.js?v=1"></script>
-<script src="js/library.js?v=4.71.0"></script>
+<script src="js/library.js?v=4.72.0"></script>
 <!-- Global corpus-wide Sanskrit-aware fuzzy search (additive) -->
 <script src="js/dge-normalize.js?v=4.60.6"></script>
 <script src="js/dge-search.js?v=4.70.0"></script>

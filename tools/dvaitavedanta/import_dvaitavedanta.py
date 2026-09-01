@@ -356,7 +356,34 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
     """
     layers: "OrderedDict[str, dict]" = OrderedDict()
 
+    # ---- rare-heading folding (1 Sep 2026, the Nyāyasudhā 774-folder fix) --
+    # On Nyāyasudhā the site's <h3>s mix two different things: the real
+    # commentary layers (सुधा, परिमळ, वाक्यार्थचन्द्रिका… — each recurring on
+    # 518-1,625 units) and one-off TOPIC/pratika headings inside a
+    # commentary's own run ("वैशेषिकाधिकरणम् १", "अणुत्वमहत्वयोर्न…"). The
+    # auto-slug fallback below minted a tika_<slug> folder per topic heading
+    # — 745 one-to-25-item folders that read as raw dump in the Library.
+    # Where the grantha config sets "fold_rare_headings" (true = threshold
+    # 30), an UNMAPPED, UNATTRIBUTED heading seen on fewer units than the
+    # threshold is treated as a section heading, not a layer: its text folds
+    # into the record's previous layer's item (heading preserved as a line),
+    # or into mula when it opens the record — so the सुधा spine reads
+    # continuously and only real sub-commentaries keep folders. Measured
+    # margin on the live corpus: topic headings max out at 25 units, the
+    # smallest real sub-commentary has 518.
+    fold_threshold = grantha.get("fold_rare_headings")
+    if fold_threshold is True:
+        fold_threshold = 30
+    title_counts = Counter()
+    if fold_threshold:
+        for record in records:
+            for layer in record["layers"]:
+                if layer.get("title"):
+                    title_counts[layer_key(layer["title"])] += 1
+    fold_stats = warnings.setdefault("folded_rare_headings", Counter())
+
     for record in records:
+        last_item = None   # this record's most recent emitted item (fold target)
         breadcrumb = record["breadcrumb"]
         # Drop the leading category + grantha labels; what remains is the
         # structural path (adhyaya / pada / adhikarana / sutra).
@@ -365,6 +392,12 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
         section = inner[-2] if len(inner) >= 2 else (inner[0] if inner else "")
         unit_title = inner[-1] if inner else ""
 
+        # Sanitized site markup for this unit (dv_parse.sanitize_article_html
+        # -- headings, strong/em, class markers). Carried ONCE per record, on
+        # its first surviving item, not duplicated across every layer: the
+        # styled renderer wants the unit's whole block, and the text layers
+        # keep powering search/reading exactly as before.
+        source_html_pending = record.get("source_html") or ""
         for position, layer in enumerate(record["layers"]):
             title = layer["title"] or ("मूलम्" if position == 0 else f"layer_{position + 1}")
             config = resolve_layer_config(title, layer_config)
@@ -389,6 +422,29 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
                 # work name, so slugging the whole title would just produce
                 # near-identical folders.
                 attributed_to, _work = split_attribution(title)
+                if (fold_threshold and not attributed_to
+                        and title_counts[layer_key(title)] < fold_threshold):
+                    text = layer["text"]
+                    if devanagari_count(text) < MIN_ITEM_CHARS:
+                        continue
+                    fold_stats[title] += 1
+                    if last_item is not None:
+                        # continuation of the record's current layer, under a
+                        # topic heading — keep the heading as its own line.
+                        last_item["sanskrit_text"] += f"\n{title}\n{text}"
+                        continue
+                    # A record OPENING with a rare heading is the grantha's
+                    # own text (a सुधा prose section with no separate verse
+                    # unit) — it belongs on the mula spine.
+                    config = {
+                        "folder": "mula",
+                        "schema": defaults["mula_schema"],
+                        "author": grantha.get("acharya"),
+                    }
+                    layer = {**layer, "text": f"{title}\n{text}"}
+            # (still unmapped after the rare-heading fold — the original
+            # auto-slug fallback, untouched)
+            if config is None:
                 # dv_sources.json's "single_work": true marks a grantha that
                 # IS the mula (a metrical treatise with no separate known
                 # commentator crawled here), whose page nonetheless splits
@@ -487,6 +543,9 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
                     "fetched": fetch_date,
                 },
             }
+            if source_html_pending:
+                item["source_html"] = source_html_pending
+                source_html_pending = ""
             if bucket["schema"] == "grantha_tika_text":
                 item["tika_title"] = title
             elif bucket["schema"] == "grantha_tippani_text":
@@ -508,6 +567,7 @@ def build_items(records, grantha, layer_config, defaults, fetch_date, warnings):
                 item["id"] = f"{item['id']}-{suffix}"
             seen[item["id"]] = item
             layers[config["folder"]]["items"].append(item)
+            last_item = item
 
     return layers
 
