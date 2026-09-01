@@ -19,7 +19,7 @@
   // window.DGE_SEARCH_INDEX from appConfig; this constant is the same URL, so
   // a page that does not load config.js still finds it. Set the variable to
   // 'search_index' to read a local build instead.
-  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@794dab9a7eb8314cfca801b818c6a1634e4fa621';
+  var CDN_INDEX = 'https://cdn.jsdelivr.net/gh/Tribhuvanachar/bhumandala@b611bcf8c37c02a9ae2249262f8b6319a51ab6d8';
   var INDEX_BASE = window.DGE_SEARCH_INDEX || CDN_INDEX;
   var idxPromise = null, debounce = null;
   var currentScheme = 'auto'; // set by the scheme popup, read by queryOpts()
