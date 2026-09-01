@@ -586,7 +586,12 @@ function dgeLocalizeNumerals(text) {
 // after a display-only move. Absent/empty file = identical to before
 // this existed.
 // ---------------------------------------------------------------------- //
-let dgeLibOverrides = { hidden: [], pinned: [], labels: {}, order: {}, moves: {} };
+// `adds` (31 Aug 2026): folders the curator created in the Library Manager
+// that exist only in the overrides layer. This tree is built from the
+// granthas' display paths, so an added folder appears here automatically
+// once anything is MOVED under it and is simply absent while empty --
+// carried in the shape so the two tools stay field-for-field in sync.
+let dgeLibOverrides = { hidden: [], pinned: [], labels: {}, order: {}, moves: {}, adds: [] };
 
 async function dgeLoadLibraryOverrides() {
   try {
@@ -599,7 +604,8 @@ async function dgeLoadLibraryOverrides() {
         pinned: Array.isArray(ov.pinned) ? ov.pinned : [],
         labels: (ov.labels && typeof ov.labels === 'object') ? ov.labels : {},
         order: (ov.order && typeof ov.order === 'object') ? ov.order : {},
-        moves: (ov.moves && typeof ov.moves === 'object') ? ov.moves : {}
+        moves: (ov.moves && typeof ov.moves === 'object') ? ov.moves : {},
+        adds: Array.isArray(ov.adds) ? ov.adds : []
       };
       return;
     }
