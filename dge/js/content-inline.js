@@ -224,14 +224,15 @@
     if (editing) mark();
   }
 
-  // data-edit-quiet marks fields that are technically editable content (a
-  // devotional verse, a mantra) but not what this tool's dashed-outline
-  // affordance is for — it's meant to invite fixing template/label wording
-  // ("designed by Tribhuvan"), not to make sacred verse text look like a
-  // form field. Skipped from both the highlight and the click-to-edit
-  // trigger below, not just the highlight: a highlighted line that did
-  // nothing on click would be its own, different bug.
-  var EDITABLE_SEL = '[data-edit]:not([data-edit-quiet])';
+  // data-edit-quiet once excluded sacred verse text (the vandana śloka, a
+  // mantra) from click-to-edit entirely, so it wouldn't read as a form
+  // field. 31 Aug 2026, project-lead report: "the actual śloka which
+  // appears below the saint's photo … is not editable" — the exclusion
+  // made the one line an editor most plausibly needs to correct the one
+  // line the tool refused to touch. Quiet fields are now fully editable in
+  // edit mode like everything else; the attribute is kept only so a future
+  // styling pass could still render their outline more discreetly.
+  var EDITABLE_SEL = '[data-edit]';
 
   function mark() {
     document.querySelectorAll(EDITABLE_SEL).forEach(function (el) {
