@@ -1,0 +1,39 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_10642",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > तृतीयाध्यायः > चतुर्थः पादः > उभयलिङ्गाधिकारिकाधिकरणम् ३ > उक्तार्थपिण्डीकरणम् > न हि कश्चित्सुखाद्येषु संशयं कुरुते जनः",
+   "section": "उक्तार्थपिण्डीकरणम्",
+   "unit_title": "न हि कश्चित्सुखाद्येषु संशयं कुरुते जनः",
+   "sanskrit_text": "तत्परीक्षितमानेन न दोषो विष्णवि क्वचित्\nसुधा\n‘अपरीक्षितमेवे’त्यादिनोक्तमुपसंहरति तदिति ।\nअनुव्याख्यानम्\nतत्परीक्षितमानेन न दोषो विष्णवि क्वचित् ।।\nतत्तस्मात्परीक्षितमेव मानम् । तेन च भगवति क्वचिदपि दोषो नास्तीति सिद्धम् । तद्विरोधादपरीक्षितं दोषदर्शनमप्रमाणमेवेत्यर्थः ।\nवाक्यार्थचन्द्रिका\nतदित्युत्तरग्रन्थस्य परीक्षितमेवेत्यादिनोक्तार्थोपसंहारतासिद्ध्यर्थमनेकोद्देश्यविधेयभावाश्रयणेन तद्योजयति तत्तस्मादिति ।\nपरिमळ\nशेषोक्तयार्थमाह अपरीक्षितमित्यादि । मूले विष्णवीत्युक्तेः समाधानमुक्तमानुमानिकनये ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "तृतीयाध्यायः",
+    "चतुर्थः पादः",
+    "उभयलिङ्गाधिकारिकाधिकरणम् ३",
+    "उक्तार्थपिण्डीकरणम्",
+    "न हि कश्चित्सुखाद्येषु संशयं कुरुते जनः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/9640/975/sharam/sathha/tataya/catara/ubhaya/ukatar#article10642",
+    "content_id": "10642",
+    "work_id": 975,
+    "layer": "तत्परीक्षितमानेन न दोषो विष्णवि क्वचित्",
+    "anchor": "article10642",
+    "fetched": "2026-09-01"
+   },
+   "tika_title": "तत्परीक्षितमानेन न दोषो विष्णवि क्वचित्"
+  }
+ ]
+}

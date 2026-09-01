@@ -1,0 +1,39 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_10643",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > तृतीयाध्यायः > चतुर्थः पादः > उभयलिङ्गाधिकारिकाधिकरणम् ३ > उक्तार्थपिण्डीकरणम् > न हि कश्चित्सुखाद्येषु संशयं कुरुते जनः",
+   "section": "उक्तार्थपिण्डीकरणम्",
+   "unit_title": "न हि कश्चित्सुखाद्येषु संशयं कुरुते जनः",
+   "sanskrit_text": "अपरीक्षितदृष्टिस्तु कस्मिन्नर्थे न विद्यते\nसुधा\nएवमपरीक्षितं दोषदर्शनं परीक्षितेन निर्दोषतादर्शनेन बाधितं न भगवतो दोषित्वं साधयितुं शक्तमित्युक्तम् । इदानीं तादृशस्यापि साधकत्वेऽतिप्रसङ्गं सूचयति अपरीक्षितेति ।\nअनुव्याख्यानम्\nअपरीक्षितदृष्टिस्तु कस्मिन्नर्थे न विद्यते ।।\nशुक्त्यादीनां रजतत्वादावपि विद्यत एव । ततश्च तया तदपि सिद्ध्येदविशेषादिति भावः ।\nवाक्यार्थचन्द्रिका\nप्रसङ्गाङ्गव्याप्तेरभावात्प्रशिथिलमूलतामाशङ्क्याह अविशेषादिति ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "तृतीयाध्यायः",
+    "चतुर्थः पादः",
+    "उभयलिङ्गाधिकारिकाधिकरणम् ३",
+    "उक्तार्थपिण्डीकरणम्",
+    "न हि कश्चित्सुखाद्येषु संशयं कुरुते जनः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/9640/975/sharam/sathha/tataya/catara/ubhaya/ukatar#article10643",
+    "content_id": "10643",
+    "work_id": 975,
+    "layer": "अपरीक्षितदृष्टिस्तु कस्मिन्नर्थे न विद्यते",
+    "anchor": "article10643",
+    "fetched": "2026-09-01"
+   },
+   "tika_title": "अपरीक्षितदृष्टिस्तु कस्मिन्नर्थे न विद्यते"
+  }
+ ]
+}

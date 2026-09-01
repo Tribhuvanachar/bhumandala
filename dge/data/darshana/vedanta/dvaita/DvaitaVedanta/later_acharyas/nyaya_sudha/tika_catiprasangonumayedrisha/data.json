@@ -1,0 +1,39 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_19683",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > प्रथमाध्यायः > प्रथमः पादः > शास्त्रयोनित्वाधिकरणम् > अथ जगत्कारणत्वे अनुमानानवकाश इति व्युत्पादनम्। > न पृथक् चानुमेश्वरे",
+   "section": "अथ जगत्कारणत्वे अनुमानानवकाश इति व्युत्पादनम्।",
+   "unit_title": "न पृथक् चानुमेश्वरे",
+   "sanskrit_text": "चातिप्रसङ्गोऽनुमयेदृशा\nसुधा\nआभाससमानयोगक्षेमं चेश्वरानुमानजातमित्याह चातिप्रसङ्ग इति ।\nअनुव्याख्यानम्\nचातिप्रसङ्गोऽनुमयेदृशा ।।\nसुधा\nईदृशा आगमादिसहायसंपदमपहायात्यन्तातीन्द्रियार्थेषु प्रयुज्यमानया अनुमया अतिप्रसङ्गश्च भवतीत्यर्थः । अतिप्रसङ्गमेव दर्शयति वस्तुत्वादिति ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "प्रथमाध्यायः",
+    "प्रथमः पादः",
+    "शास्त्रयोनित्वाधिकरणम्",
+    "अथ जगत्कारणत्वे अनुमानानवकाश इति व्युत्पादनम्।",
+    "न पृथक् चानुमेश्वरे"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/19668/975/sharam/sathha/parath/parath/shasat/atha-j#article19683",
+    "content_id": "19683",
+    "work_id": 975,
+    "layer": "चातिप्रसङ्गोऽनुमयेदृशा",
+    "anchor": "article19683",
+    "fetched": "2026-09-01"
+   },
+   "tika_title": "चातिप्रसङ्गोऽनुमयेदृशा"
+  }
+ ]
+}

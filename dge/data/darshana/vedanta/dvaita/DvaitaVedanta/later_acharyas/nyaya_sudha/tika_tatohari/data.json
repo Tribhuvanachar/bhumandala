@@ -1,0 +1,39 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_10309",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > तृतीयाध्यायः > तृतीयः पादः > अध्यायपादसङ्गतिनिरूपणम् १ > केशवादन्यो मोक्षदत्वेन न शास्त्रगम्यः > मोक्षदो हि स्वतन्त्रः स्यात्",
+   "section": "केशवादन्यो मोक्षदत्वेन न शास्त्रगम्यः",
+   "unit_title": "मोक्षदो हि स्वतन्त्रः स्यात्",
+   "sanskrit_text": "ततो हरिः\nसुधा\nद्वितीयं हेतुव्याख्यानमुपसंहरति तत इति ।\nअनुव्याख्यानम्\n........ ........ ......... ततो हरिः ।\nशास्त्रयोनिर्न चान्योऽस्ति मुख्यतस्त्विति गम्यते ।\nमुख्यत इति मोक्षदत्वेनेति यावत् ।\nवाक्यार्थचन्द्रिका\nद्वितीयहेतुव्याख्यानमिति । भगवतो मोक्षदातृत्वे जन्माद्यस्य यत इति श्रुतमित्येको हेतुरुक्तः । शास्त्रयोनित्वादिति यो द्वितीयो हेतुस्तद्व्याख्यानमित्यर्थः ।\nश्रीनिवासतीर्थीया\nद्वितीय (यं) हेतुव्याख्यानमिति । भगवतो मोक्षदातृत्वे जन्माद्यस्य यतः श्रुतिमित्येको हेतुरुक्तः । शास्त्रयोनित्वादिति द्वितीयो हेतुस्तद्व्याख्यानमित्यर्थः ।",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "तृतीयाध्यायः",
+    "तृतीयः पादः",
+    "अध्यायपादसङ्गतिनिरूपणम् १",
+    "केशवादन्यो मोक्षदत्वेन न शास्त्रगम्यः",
+    "मोक्षदो हि स्वतन्त्रः स्यात्"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/9401/975/sharam/sathha/tataya/tataya/athhay/kashav#article10309",
+    "content_id": "10309",
+    "work_id": 975,
+    "layer": "ततो हरिः",
+    "anchor": "article10309",
+    "fetched": "2026-09-01"
+   },
+   "tika_title": "ततो हरिः"
+  }
+ ]
+}

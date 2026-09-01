@@ -1,0 +1,39 @@
+{
+ "schema": "grantha_tika_text",
+ "default_author": "",
+ "source_url": "https://dvaitavedanta.in/category-details/977/975/sharam/sathha/managa",
+ "source_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "items": [
+  {
+   "id": "DV_6834",
+   "reference": "श्रीमन्न्यायसुधा > सुधा > प्रथमाध्यायः > प्रथमः पादः > जन्माधिकरणम् > अन्यवादिभिरपि विशेषोऽङ्गीकार्यः > सोऽस्ति वस्तुष्वशेषतः",
+   "section": "अन्यवादिभिरपि विशेषोऽङ्गीकार्यः",
+   "unit_title": "सोऽस्ति वस्तुष्वशेषतः",
+   "sanskrit_text": "एवंधर्मानिति श्रुत्या तदभेदोऽप्युदीर्यते\nसुधा\nतस्मादुक्तलक्षणद्वयोपपन्नं ब्रह्म नारायणाख्यं मुमुक्षुणा जिज्ञास्यमिति स्थितम् ।।\nपरिमळ\nकण्ठोक्तमार्थिकं चाधिकरणार्थं फलोक्त्योपसंहरति तस्मादिति । जगज्जन्मादि-हेतुत्वानन्तगुणत्वरूपलक्षणद्वयेत्यर्थः।। १-१-२ ।।\nइति जन्माधिकरणम्",
+   "artha": "",
+   "notes": "",
+   "tags": [],
+   "references": [],
+   "audio": [],
+   "breadcrumb": [
+    "श्रीमन्न्यायसुधा",
+    "सुधा",
+    "प्रथमाध्यायः",
+    "प्रथमः पादः",
+    "जन्माधिकरणम्",
+    "अन्यवादिभिरपि विशेषोऽङ्गीकार्यः",
+    "सोऽस्ति वस्तुष्वशेषतः"
+   ],
+   "source": {
+    "site": "dvaitavedanta.in",
+    "url": "https://dvaitavedanta.in/category-details/5112/975/sharam/sathha/parath/parath/janama/anayav#article6834",
+    "content_id": "6834",
+    "work_id": 975,
+    "layer": "एवंधर्मानिति श्रुत्या तदभेदोऽप्युदीर्यते",
+    "anchor": "article6834",
+    "fetched": "2026-09-01"
+   },
+   "tika_title": "एवंधर्मानिति श्रुत्या तदभेदोऽप्युदीर्यते"
+  }
+ ]
+}
