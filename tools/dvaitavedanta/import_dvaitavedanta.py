@@ -45,6 +45,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from dv_parse import (  # noqa: E402
     BASE,
+    extract_lazy_units,
+    parse_load_fragment,
     author_core,
     author_name,
     canonical_url,
@@ -850,8 +852,11 @@ def main(argv=None):
                 log(f"      … {index - 1}/{len(queue)} leaves · "
                     f"{rate:.1f}s each · ~{left / 3600:.1f}h to go")
             if content_id == seed_record["content_id"]:
-                # Already fetched during discovery — don't pay for it twice.
+                # Already fetched during discovery — don't pay for it twice
+                # (the fetcher cache serves this instantly); the html is
+                # still needed below for the page's lazy Load More units.
                 record = seed_record
+                html = fetcher.get(grantha["seed_url"])
             else:
                 url = url_by_id.get(content_id) or canonical_url(content_id, ancestor)
                 html = fetcher.get(url)
@@ -882,6 +887,33 @@ def main(argv=None):
                         f" (queue now {len(queue)})")
                 continue
             records.append(record)
+            # Exhaust the page's lazy "Load More" units (see dv_parse
+            # extract_lazy_units' own comment): the initial HTML carries
+            # only the first #article block, and every further unit named
+            # in the right-hand nav is served solely by /load-data. The
+            # original import stopped at the first block — verified live,
+            # 1 Sep 2026: node 977 (maṅgalamācaraṇam) held 9 units, our
+            # data had exactly the 1 the initial HTML delivers.
+            book_id, lazy_ids = extract_lazy_units(html or "")
+            for uid in lazy_ids:
+                if uid in seen_ids:
+                    continue
+                seen_ids.add(uid)
+                frag_url = (f"{BASE}/load-data?book_id="
+                            f"{book_id or ancestor or ''}&id={uid}&search=")
+                raw = fetcher.get(frag_url)
+                if raw is None:
+                    failed += 1
+                    continue
+                try:
+                    payload = json.loads(raw)
+                except (ValueError, TypeError):
+                    failed += 1
+                    continue
+                frag = parse_load_fragment(payload.get("html", ""),
+                                           record, uid, record["url"])
+                if frag["layers"]:
+                    records.append(frag)
             if index % 25 == 0:
                 log(f"    …{index}/{len(queue)}")
         discovered_total = len(seen_ids)

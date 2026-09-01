@@ -757,6 +757,19 @@
     return dgeGsFoldIndic(String(s || '').normalize('NFC')).replace(/[‌‍]/g, '')
       .replace(/[ङञणनम]्(?=[क-ह])/g, 'ं');
   }
+  // Does a hit pass "Exact spelling only"? Normally: the normalized query
+  // appears verbatim in the stored snippet. One honest exception (1 Sep
+  // 2026, गुरुराजेन report): the stored snippet is the unit's first ~4,000
+  // chars (build_search_index.py snippet()), so a word-index hit whose
+  // match sits DEEPER in a mega-unit fails the substring check through no
+  // fault of the spelling. When the snippet is visibly at that cap and the
+  // hit came from the exact word index, absence from the excerpt is
+  // incomplete evidence, not counter-evidence -- keep the hit.
+  function dgeGsPassesExact(h, qExact) {
+    if (h.snippet && dgeGsExactNormalize(h.snippet).indexOf(qExact) !== -1) return true;
+    return !!(h.snippet && h.snippet.length >= 3900 &&
+              h.via && h.via.indexOf('word-index') === 0);
+  }
 
   // Shared by go() and the per-hit taxonomy crumbs below: the reader's own
   // URL from wherever this search happens to be running (ashtadhyayi.html
@@ -1302,7 +1315,7 @@
       if (catKeys.length && filterState.categories[h.category] !== true) return false;
       if (sidKeys.length && filterState.siddhanta[siddhantaOf(h.grantha)] !== true) return false;
       if (kw && (h.title + ' ' + h.snippet).toLowerCase().indexOf(kw) === -1) return false;
-      if (exactActive && (!h.snippet || dgeGsExactNormalize(h.snippet).indexOf(qExact) === -1)) return false;
+      if (exactActive && !dgeGsPassesExact(h, qExact)) return false;
       return true;
     });
     var anyFilterActive = typeActive || catKeys.length || sidKeys.length || kw || exactActive;
@@ -1364,9 +1377,7 @@
     var countBase = hits;
     if (filterState.exact && lastQueryDeva) {
       var qE = dgeGsExactNormalize(lastQueryDeva);
-      countBase = hits.filter(function (h) {
-        return h.snippet && dgeGsExactNormalize(h.snippet).indexOf(qE) !== -1;
-      });
+      countBase = hits.filter(function (h) { return dgeGsPassesExact(h, qE); });
     }
     var typeCounts = {};
     var catCounts = {};

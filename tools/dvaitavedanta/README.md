@@ -37,6 +37,25 @@ uses, so fetching happens on the Actions runner.
 
 ---
 
+## The lazy "Load More" layer (1 Sep 2026 — the harvest gap)
+
+A category-details page's initial HTML contains only ONE `#article<id>`
+block (`first_sutra_id`). Every further unit named in the RIGHT-hand nav
+(`.explanation-text` entries, `total_sutra_count` in all) is served only by
+
+    GET /load-data?book_id=<category_book_id>&id=<unit_id>&search=
+    → {"html": "<div id=article<unit>>…", "tag": …, "sutraId": <unit>}
+
+The original import never followed this endpoint, so every page contributed
+exactly its first unit — verified live against
+`category-details/977/975/...` (Nyāyasudhā maṅgalamācaraṇam): 9 units on the
+site, 1 (`DV_978`) in `dge/data`, units 979–986 absent repo-wide (the
+reported missing गुरुराजेन passages among them). The importer now exhausts
+`/load-data` per page (see `extract_lazy_units` / `parse_load_fragment` in
+`dv_parse.py` and the leaf loop); a re-run with the cache warm re-fetches
+only the fragments. Fragment responses are ~1–2 s each even when full pages
+take 40 s+.
+
 ## What the source site looks like
 
 | | |
