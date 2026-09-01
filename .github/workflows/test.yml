@@ -88,4 +88,12 @@ jobs:
         run: python3 tools/redesign/build_shell.py --check
 
       - name: sitemap.xml / robots.txt drift gate (build_sitemap.py)
-        run: python3 tools/build_sitemap.py --check
+        run: |
+          # On drift, show WHAT drifted — the gate kept failing with no
+          # clue while local --check passed at the same commit.
+          if ! python3 tools/build_sitemap.py --check; then
+            python3 tools/build_sitemap.py
+            git --no-pager diff --stat sitemap.xml
+            git --no-pager diff sitemap.xml | head -80
+            exit 1
+          fi
