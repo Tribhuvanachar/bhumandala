@@ -726,6 +726,12 @@ def select_granthas(config, sections_filter, granthas_filter):
                 "ancestor_id": grantha.get("ancestor_id"),
                 "acharya": grantha.get("acharya"),
                 "single_work": grantha.get("single_work"),
+                # Run 33512729140 (1 Sep 2026): this whitelist silently
+                # dropped the then-new fold_rare_headings flag — acharya
+                # from the same config entry flowed, the fold never fired,
+                # and the run reproduced all 745 topic folders. Any future
+                # per-grantha behavior flag has to be threaded HERE too.
+                "fold_rare_headings": grantha.get("fold_rare_headings"),
             })
     return selected
 

@@ -92,6 +92,21 @@ def test_attributed_rare_heading_still_gets_folder():
     assert others, sorted(out)  # the attributed one kept its own folder
 
 
+def test_flag_survives_select_granthas():
+    # The real-run path: select_granthas copies entries through a key
+    # whitelist, which silently dropped fold_rare_headings on the first
+    # live run (all 745 topic folders came back). Guard the whitelist.
+    from import_dvaitavedanta import select_granthas
+    cfg = {"site": {"base": "https://dvaitavedanta.in"},
+           "sections": [{"slug": "later_acharyas", "title": "उत्तराचार्याः",
+                         "granthas": [{"slug": "nyaya_sudha", "title": "श्रीमन्न्यायसुधा",
+                                       "seed": "/x", "acharya": "श्रीजयतीर्थः",
+                                       "fold_rare_headings": True, "enabled": False}]}]}
+    sel = select_granthas(cfg, None, ["nyaya_sudha"])
+    assert sel and sel[0]["fold_rare_headings"] is True, sel
+    assert sel[0]["acharya"] == "श्रीजयतीर्थः"
+
+
 if __name__ == "__main__":
     for name, fn in sorted(globals().items()):
         if name.startswith("test_"):
