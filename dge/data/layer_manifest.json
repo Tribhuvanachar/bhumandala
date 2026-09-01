@@ -4655,6 +4655,293 @@
      "matched": 73
     }
    ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_01": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 839,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 839,
+     "matched": 839
+    },
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 838,
+     "matched": 838
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_02": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 549,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 551,
+     "matched": 549
+    },
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 549,
+     "matched": 549
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_03": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 833,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 833,
+     "matched": 833
+    },
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 833,
+     "matched": 833
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_04": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 648,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 647,
+     "matched": 647
+    },
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 640,
+     "matched": 640
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_05": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 471,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 471,
+     "matched": 471
+    },
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 471,
+     "matched": 471
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_06": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 530,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 530,
+     "matched": 530
+    },
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 530,
+     "matched": 530
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_07": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 398,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 398,
+     "matched": 398
+    },
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 398,
+     "matched": 398
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_08": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 437,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 437,
+     "matched": 437
+    },
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 437,
+     "matched": 437
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_09": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 402,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 403,
+     "matched": 402
+    },
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 387,
+     "matched": 387
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_10": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 369,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 367,
+     "matched": 367
+    },
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 300,
+     "matched": 300
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_11": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 425,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 425,
+     "matched": 425
+    },
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 425,
+     "matched": 425
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_12": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 459,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 459,
+     "matched": 459
+    },
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 1,
+     "matched": 1
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_13": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 431,
+   "layers": [
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 431,
+     "matched": 431
+    }
+   ]
+  },
+  "vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_14": {
+   "title": "Mula",
+   "author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)",
+   "mulaItems": 754,
+   "layers": [
+    {
+     "folder": "tika_sayana",
+     "label": "सायणः",
+     "author": "सायणाचार्यः",
+     "items": 229,
+     "matched": 229
+    },
+    {
+     "folder": "tika_eggeling",
+     "label": "Eggeling",
+     "author": "Julius Eggeling (tr., Sacred Books of the East)",
+     "items": 228,
+     "matched": 228
+    }
+   ]
   }
  }
 }

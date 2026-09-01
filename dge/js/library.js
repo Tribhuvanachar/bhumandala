@@ -118,6 +118,7 @@ const DGE_PATH_LABELS = {
   mula: 'मूलम्', tika: 'टीका', tippani: 'टिप्पणी',
   purvarchika: 'पूर्वार्चिकः', uttararchika: 'उत्तरार्चिकः',
   taittiriya_brahmana: 'तैत्तिरीयब्राह्मणम्',
+  shatapatha_brahmana: 'शतपथब्राह्मणम्',
   taittiriya_aranyaka: 'तैत्तिरीयारण्यकम्',
 
   // Mahabharata parvas

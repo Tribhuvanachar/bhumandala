@@ -87,7 +87,201 @@
     "vajasaneyi_madhyandina_shakha": {
      "samhita": {},
      "brahmana": {
-      "shatapatha_brahmana_madhyandina": {}
+      "shatapatha_brahmana_madhyandina": {},
+      "shatapatha_brahmana": {
+       "kanda_01": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       },
+       "kanda_02": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       },
+       "kanda_03": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       },
+       "kanda_04": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       },
+       "kanda_05": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       },
+       "kanda_06": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       },
+       "kanda_07": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       },
+       "kanda_08": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       },
+       "kanda_09": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       },
+       "kanda_10": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       },
+       "kanda_11": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       },
+       "kanda_12": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       },
+       "kanda_13": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        }
+       },
+       "kanda_14": {
+        "mula": {
+         "_schema": "grantha_mula_text",
+         "_default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+        },
+        "tika_eggeling": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+        },
+        "tika_sayana": {
+         "_schema": "grantha_tika_text",
+         "_default_author": "सायणाचार्यः"
+        }
+       }
+      }
      },
      "upanishad": {
       "isha_upanishad": {},

@@ -18637,6 +18637,457 @@
       }
     },
     {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_01/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_01/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_01/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_02/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_02/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_02/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_03/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_03/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_03/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_04/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_04/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_04/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_05/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_05/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_05/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_06/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_06/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_06/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_07/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_07/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_07/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_08/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_08/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_08/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_09/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_09/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_09/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_10/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_10/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_10/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_11/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_11/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_11/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_12/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_12/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_12/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_13/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_13/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_14/mula/data.json",
+      "populated": true,
+      "title": "Mula",
+      "facets": {
+        "default_author": "Apaurusheya (Shukla Yajurveda, Vajasaneyi Madhyandina Shakha)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_14/tika_eggeling/data.json",
+      "populated": true,
+      "title": "Tika Eggeling",
+      "facets": {
+        "default_author": "Julius Eggeling (tr., Sacred Books of the East)"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
+      "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana/kanda_14/tika_sayana/data.json",
+      "populated": true,
+      "title": "Tika Sayana",
+      "facets": {
+        "default_author": "सायणाचार्यः"
+      },
+      "source": {
+        "source": "github.com/vishvasa/vedAH_yajuH (vAjasaneyam/mAdhyandinam/shatapatha-brAhmaNam), maintained by Vishwas Vasukijah; used with his permission per the vishvasa/ramanujiyam precedent (non-commercial, educational). Weber/Sridharadi/visvaram edition variants present in the source are not imported. Eggeling's translation is from the Sacred Books of the East (1882-1900), public domain."
+      }
+    },
+    {
       "path": "dge/data/vedas/yajurveda/shukla_yajurveda/vajasaneyi_madhyandina_shakha/brahmana/shatapatha_brahmana_madhyandina/data.json",
       "populated": false,
       "title": "Shatapatha Brahmana Madhyandina",
