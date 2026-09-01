@@ -602,6 +602,19 @@ function renderList() {
     const appViewToggleHtml = (commentaryHtml || extraFieldsHtml)
       ? `<button type="button" class="dge-appview-toggle" onclick="event.stopPropagation(); window.dgeToggleCardExpanded(this)">▾ Show commentary</button>` : '';
 
+    // Source view (1 Sep 2026, DvaitaVedanta re-harvest): units imported
+    // with sanitized source-site markup (core.js's sourceHtml — class=
+    // "shloka" pratika banners, h3 layer headings, lang="HI" spans) get a
+    // 🕮 toggle showing the unit exactly as dvaitavedanta.in lays it out,
+    // styled by those same class hooks mapped onto DGE tokens (main.css's
+    // .dge-srcview rules). The markup was sanitized at import (tags/class/
+    // lang/id only) and ships in this repo's own data.json — the same
+    // trust level as every other data-driven block on this card.
+    const srcBtnHtml = shloka.sourceHtml
+      ? `<button class="btn-icon" title="Source view — this unit as the source site presents it" onclick="event.stopPropagation(); window.dgeToggleSourceView(this)">🕮</button>` : '';
+    const srcViewHtml = shloka.sourceHtml
+      ? `<div class="dge-srcview" hidden>${shloka.sourceHtml}</div>` : '';
+
     c.innerHTML = `
       <div class="shloka-main-row">
         <div class="shloka-num">${i}</div>
@@ -609,12 +622,14 @@ function renderList() {
         <div class="shloka-text" onclick="if(!window.dgeContentEditMode && typeof loadShloka==='function') loadShloka(${i})">${mulaHtml}</div>
         ${window.dgeContentEditMode ? `<button class="btn-icon" title="Edit this shloka's text" onclick="event.stopPropagation(); window.dgeInlineEditShloka(${i})">✏️</button>` : ''}
         <button class="btn-icon copy-shloka-btn" title="Copy shloka text" onclick="event.stopPropagation(); if(typeof copyShlokaText==='function') copyShlokaText(${i})">📋</button>
+        ${srcBtnHtml}
         ${moreBtnHtml}
       </div>
       ${footnoteListHtml}
       ${appViewToggleHtml}
       ${extraFieldsHtml}
-      ${commentaryHtml}`;
+      ${commentaryHtml}
+      ${srcViewHtml}`;
     listEl.appendChild(c);
   }
 
@@ -745,6 +760,15 @@ window.dgeSetLayoutMode = function (mode, announce) {
 // whole-card tap gesture, since .shloka-text's own tap already calls
 // loadShloka() to select/play that verse; an ambiguous full-card tap
 // would collide with that existing behaviour.
+// The 🕮 source-view toggle (see the srcBtnHtml comment in renderList).
+window.dgeToggleSourceView = function (btnEl) {
+  const card = btnEl.closest('.shloka-card');
+  const v = card && card.querySelector('.dge-srcview');
+  if (!v) return;
+  v.hidden = !v.hidden;
+  btnEl.classList.toggle('active', !v.hidden);
+};
+
 window.dgeToggleCardExpanded = function (btnEl) {
   const card = btnEl.closest('.shloka-card');
   if (!card) return;

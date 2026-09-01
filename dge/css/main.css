@@ -934,3 +934,25 @@ body.dge-app-view .shloka-list { gap: 20px; }
    be visible on the card itself, not only in the 💬 picker). */
 .dge-tab-unloaded { opacity: 0.6; border-style: dashed; }
 .dge-tab-unloaded:active { opacity: 1; }
+
+/* ---- Source view (1 Sep 2026): DvaitaVedanta units re-harvested with the
+   site's own sanitized markup (item.source_html -> shloka.sourceHtml ->
+   render.js's 🕮 toggle). The SITE'S class/tag conventions are the hooks —
+   h2/p.shloka = the pratika/verse banner (red on the source site), h3 = a
+   commentary-layer name (green banner), span[lang=HI] = Sanskrit runs —
+   styled here with DGE's own tokens so every theme renders them natively
+   rather than copying the source palette. */
+.dge-srcview { margin-top: 10px; padding: 12px 14px; border: 1px solid var(--card-border);
+  border-radius: 10px; background: var(--card-bg); font-size: 15.5px; line-height: 1.85; }
+.dge-srcview h2, .dge-srcview .shloka { background: color-mix(in srgb, var(--accent-red) 10%, transparent);
+  border-left: 3px solid var(--accent-red); color: var(--accent-red);
+  font-size: 1.06em; font-weight: 700; padding: 7px 12px; margin: 12px 0 6px; border-radius: 6px; }
+.dge-srcview h3 { background: color-mix(in srgb, var(--accent-gold) 22%, transparent);
+  border-left: 3px solid var(--accent-gold); color: var(--text-primary);
+  font-size: 1em; font-weight: 700; padding: 6px 12px; margin: 14px 0 6px; border-radius: 6px; }
+.dge-srcview h2:first-child, .dge-srcview .shloka:first-child { margin-top: 0; }
+.dge-srcview p { margin: 6px 0; }
+.dge-srcview [lang="HI"], .dge-srcview [lang="SA"] { font-family: var(--font-sanskrit, inherit); }
+.dge-srcview strong em, .dge-srcview em strong { color: var(--accent-red); font-style: normal; }
+.dge-srcview .details { display: block; }
+.btn-icon.active { color: var(--accent-red); }

@@ -783,7 +783,12 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
         // topic > unit) captured per item by the DvaitaVedanta importer —
         // the section navigator (layer-stitch.js's dgeInitSectionNav)
         // groups on it. Absent everywhere else, and harmlessly null then.
-        breadcrumb: Array.isArray(item.breadcrumb) ? item.breadcrumb : null
+        breadcrumb: Array.isArray(item.breadcrumb) ? item.breadcrumb : null,
+        // Sanitized source-site markup for this unit (DvaitaVedanta
+        // importer, 1 Sep 2026): class="shloka" headers, lang="HI" spans,
+        // h3 layer banners — render.js offers a styled "source view" per
+        // card where this exists. Empty string everywhere else.
+        sourceHtml: typeof item.source_html === 'string' ? item.source_html : ''
       };
     });
 
