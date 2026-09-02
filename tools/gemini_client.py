@@ -18,6 +18,7 @@ code with a chance to drift apart.
 from __future__ import annotations
 
 import json
+import os
 import threading
 import urllib.error
 import urllib.request
@@ -99,7 +100,10 @@ def _post(model: str, body: dict, api_key: str, usage_totals: dict | None = None
         headers={"Content-Type": "application/json"}, method="POST",
     )
     try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
+        # GEMINI_HTTP_TIMEOUT: long structured generations (dense book
+        # pages) can exceed the 60s default; behavior unchanged unless set
+        with urllib.request.urlopen(
+                req, timeout=int(os.environ.get("GEMINI_HTTP_TIMEOUT", "60"))) as resp:
             payload = json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
         detail = e.read().decode("utf-8", "replace")

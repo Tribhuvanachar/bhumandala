@@ -191,15 +191,23 @@ def main(argv=None):
         anchor = f"Vasu Siddhanta Kaumudi, {vol_note}"
         if args.context_anchor:
             anchor += "; " + args.context_anchor
+        def proofread(pages_subset):
+            batch_text = build_ocr_pages_text({n: page_texts[n] for n in pages_subset})
+            print(f"Proofreading page(s) {pages_subset[0]}-{pages_subset[-1]} ...")
+            if args.dry_run:
+                return mock_entries(batch_text)
+            return proofread_sk_batch(batch_text, api_key, args.model, anchor, usage)
+
         for i in range(0, len(nums), args.pages_per_gemini_batch):
             batch = nums[i:i + args.pages_per_gemini_batch]
-            batch_text = build_ocr_pages_text({n: page_texts[n] for n in batch})
-            print(f"Proofreading page(s) {batch[0]}-{batch[-1]} ...")
-            if args.dry_run:
-                entries.extend(mock_entries(batch_text))
-            else:
-                entries.extend(proofread_sk_batch(batch_text, api_key, args.model,
-                                                  anchor, usage))
+            try:
+                entries.extend(proofread(batch))
+            except (GeminiError, TimeoutError, OSError) as e:
+                # dense pages can outlast the HTTP window as one batch;
+                # page-at-a-time is slower but each call stays small
+                print(f"  batch failed ({e}); retrying page-by-page")
+                for n in batch:
+                    entries.extend(proofread([n]))
 
     staged = {
         "_readme": "Stage-1 output of tools/vasu_kaumudi_ocr.py -- inspect, then "

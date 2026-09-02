@@ -187,10 +187,12 @@ def block_text(node: Tag) -> str:
 # --------------------------------------------------------------------------- #
 
 def make_soup(html: str) -> BeautifulSoup:
-    try:
-        return BeautifulSoup(html, "lxml")
-    except Exception:
-        return BeautifulSoup(html, "html.parser")
+    # html.parser DELIBERATELY, not lxml: the whole DV corpus (and
+    # test_load_more's fixtures) were extracted and validated against
+    # html.parser's lenient handling of the site's malformed fragments.
+    # With lxml installed the old try-lxml-first order silently changed
+    # parse results (a load-more fragment lost its परिमळ layer heading).
+    return BeautifulSoup(html, "html.parser")
 
 
 def _is_chrome(tag: Tag) -> bool:
