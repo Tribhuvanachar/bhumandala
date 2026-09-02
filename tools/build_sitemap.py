@@ -247,7 +247,20 @@ def main():
         return 1
 
     new_xml = build_sitemap_xml(origin)
-    sitemap_stale = not SITEMAP_PATH.exists() or SITEMAP_PATH.read_text(encoding="utf-8") != new_xml
+    if check_mode:
+        # Gate on the URL SET only, never on lastmod values. lastmod
+        # derives from git-log path attribution, and which commit a
+        # path is credited to differs across git versions (CI's 2.55
+        # vs local 2.43 disagreed even with --full-history — this
+        # repo's API-made commits carry author dates far behind their
+        # commit dates). The gate's job is catching missing or stale
+        # URLs; dates are advisory hints for crawlers.
+        def loc_set(xml):
+            return set(re.findall(r"<loc>(.*?)</loc>", xml))
+        old_xml = SITEMAP_PATH.read_text(encoding="utf-8") if SITEMAP_PATH.exists() else ""
+        sitemap_stale = loc_set(old_xml) != loc_set(new_xml)
+    else:
+        sitemap_stale = not SITEMAP_PATH.exists() or SITEMAP_PATH.read_text(encoding="utf-8") != new_xml
     robots_ok = sync_robots_txt(origin, check=check_mode)
 
     if check_mode:
