@@ -32,7 +32,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import re
+
 import sys
 import tempfile
 from datetime import datetime, timezone
@@ -79,21 +79,47 @@ Rules:
 """
 
 
+SK_RESPONSE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "entries": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "sk": {"type": "integer"},
+                    "sutra_ocr": {"type": "string"},
+                    "panini_ref": {"type": "string"},
+                    "chapter": {"type": "string"},
+                    "english": {"type": "string"},
+                    "page": {"type": "integer"},
+                    "partial": {"type": "string", "enum": ["", "head", "tail"]},
+                    "classification": {"type": "string",
+                                       "enum": ["accept", "review", "unresolved"]},
+                    "note": {"type": "string"},
+                },
+                "required": ["sk", "english", "page", "classification"],
+            },
+        },
+    },
+    "required": ["entries"],
+}
+
+
 def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def proofread_sk_batch(batch_text: str, api_key: str, model: str,
                        context_anchor: str, usage_totals: dict | None) -> list[dict]:
-    prompt = PROOFREAD_PROMPT
-    if context_anchor:
-        prompt += f"\nContext for this batch: {context_anchor}\n"
-    prompt += "\nRaw OCR text follows:\n\n" + batch_text
-    raw = call_gemini(prompt, api_key=api_key, model=model,
-                      max_output_tokens=32768, usage_totals=usage_totals)
-    text = raw.strip()
-    text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text)
-    data = json.loads(text)
+    anchor = f"Context anchor: {context_anchor}.\n\n" if context_anchor else ""
+    prompt = anchor + PROOFREAD_PROMPT + "\n\nRaw OCR text follows:\n\n" + batch_text
+    data = call_gemini(
+        "You are a meticulous OCR proofreader for a 1906 English grammar "
+        "book with embedded Devanagari.",
+        prompt, SK_RESPONSE_SCHEMA, api_key, model,
+        temperature=0.1, max_output_tokens=32768, usage_totals=usage_totals,
+    )
     entries = data.get("entries") or []
     if not isinstance(entries, list):
         raise GeminiError("proofread returned no entries list")
