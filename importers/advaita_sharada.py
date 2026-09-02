@@ -65,9 +65,12 @@ SOURCE_NOTE = (
 )
 
 # slug -> (relative dge dir under OUT_ROOT, layer dir, schema, default_author)
-# Excluded (already held in DGE): brahmasutra-bhashya, bhagavadgita-bhashya,
-# aitareya/brihadaranyaka/chandogya/isha/prashna/taittiriya/mandukya-karika
-# bhashyas, kena-pada-bhashya (our kena bhashya is the pada-vibhaga one).
+# The ten bhashyas DGE already held were first excluded, then added back
+# as REPLACEMENTS (project lead, 2 Sep 2026): our OCR-derived texts are
+# corrupted (e.g. our Brahmasutra-bhashya reads तत्राथाब्द where Sringeri
+# reads तत्र अथशब्दः), so the Sringeri editions overwrite them in place —
+# same folders, same single 'bhashya' layer, no sibling layers depend on
+# the old unit_NNNN ids.
 WORKS = {
     # --- sutra-prasthana commentaries -------------------------------
     "bhamati":                  ("sutra_prasthana_tikas/bhamati", "mula", "grantha_tika_text", "श्रीवाचस्पतिमिश्रः"),
@@ -97,6 +100,17 @@ WORKS = {
     "anandagiri-chandogya":     ("upanishad_prasthana_tikas/anandagiri_chandogya", "mula", "grantha_tika_text", "श्रीआनन्दगिरिः"),
     "anandagiri-brha":          ("upanishad_prasthana_tikas/anandagiri_brihadaranyaka", "mula", "grantha_tika_text", "श्रीआनन्दगिरिः"),
     # --- bhashyas we do NOT hold ------------------------------------
+    # --- held-bhashya replacements (Sringeri editions over OCR text) ---
+    "brahmasutra-bhashya":      ("shankara_bhashya/brahmasutra_bhashya", "bhashya", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
+    "bhagavadgita-bhashya":     ("shankara_bhashya/gita_bhashya", "bhashya", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
+    "isha-bhashya":             ("shankara_bhashya/upanishad_bhashya/isha_upanishad", "bhashya", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
+    "kena-pada-bhashya":        ("shankara_bhashya/upanishad_bhashya/kena_upanishad", "bhashya", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
+    "prashna-bhashya":          ("shankara_bhashya/upanishad_bhashya/prashna_upanishad", "bhashya", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
+    "aitareya-bhashya":         ("shankara_bhashya/upanishad_bhashya/aitareya_upanishad", "bhashya", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
+    "chandogya-bhashya":        ("shankara_bhashya/upanishad_bhashya/chandogya_upanishad", "bhashya", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
+    "taittiriya-bhashya":       ("shankara_bhashya/upanishad_bhashya/taittiriya_upanishad", "bhashya", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
+    "brihadaranyaka-bhashya":   ("shankara_bhashya/upanishad_bhashya/brihadaranyaka_upanishad", "bhashya", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
+    "mandukya-karika-bhashya":  ("shankara_bhashya/upanishad_bhashya/mandukya_upanishad", "bhashya", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
     "kathaka-bhashya":          ("shankara_bhashya_extra/kathaka_bhashya", "mula", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
     "mundaka-bhashya":          ("shankara_bhashya_extra/mundaka_bhashya", "mula", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
     "kena-vakya-bhashya":       ("shankara_bhashya_extra/kena_vakya_bhashya", "mula", "grantha_bhashya_text", "श्रीमच्छङ्करभगवत्पादाः"),
