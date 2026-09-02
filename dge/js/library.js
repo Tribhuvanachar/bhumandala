@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.20 (stale-draft gate: a super-admin draft previews only when NEWER than the committed overrides (draftAt vs updatedAt). v3.19: super-admin draft preview of the Library Manager\'s unexported overrides + searchable By-Author facet index. On top of v3.17\'s mula_gretil/mula_dcs labels)';
+window.DGE_VERSIONS['library.js'] = 'v3.21 (Sri Ramanuja Meghamala segment labels. v3.20: stale-draft gate: a super-admin draft previews only when NEWER than the committed overrides (draftAt vs updatedAt). v3.19: super-admin draft preview of the Library Manager\'s unexported overrides + searchable By-Author facet index. On top of v3.17\'s mula_gretil/mula_dcs labels)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -128,6 +128,18 @@ const DGE_PATH_LABELS = {
   shankara_bhashya_extra: 'अपराणि शाङ्करभाष्याणि',
   stotrani: 'स्तोत्राणि',
   taittiriya_aranyaka: 'तैत्तिरीयारण्यकम्',
+  // Sri Ramanuja Meghamala import groups (2 Sep 2026)
+  // (the three *_prasthana keys it shares are already defined below)
+  RamanujaMeghamala: 'श्रीरामानुजमेघमाला',
+  rahasya_granthas: 'रहस्यग्रन्थाः',
+  guruparampara: 'गुरुपरम्परा',
+  divya_prabandham: 'दिव्यप्रबन्धम्',
+  bhagavad_vishayam: 'भगवद्विषयम्',
+  reference_granthas: 'सन्दर्भग्रन्थाः',
+  divya_desha_vaibhavam: 'दिव्यदेशवैभवम्',
+  smritayah: 'स्मृतयः',
+  puranani: 'पुराणानि',
+  agamah: 'आगमाः',
 
   // Mahabharata parvas
   adi_parva: 'आदिपर्व', sabha_parva: 'सभापर्व', vana_parva: 'वनपर्व', virata_parva: 'विराटपर्व',

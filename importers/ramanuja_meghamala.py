@@ -245,7 +245,9 @@ def parse_leaf(html_text: str, url: str):
             units.append(list(cur))
         cur, cur_len, cur_marked = [], 0, False
 
-    for p in cont.find_all(["p", "h2", "h3", "h4"]):
+    # "pre": exactly one page in the corpus (प्रपत्त्यनुपायत्व विचारः)
+    # keeps its whole text in <pre> blocks with no <p> at all
+    for p in cont.find_all(["p", "h2", "h3", "h4", "pre"]):
         text = p.get_text(" ", strip=True)
         if not text:
             continue
