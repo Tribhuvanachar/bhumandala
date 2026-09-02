@@ -71,11 +71,11 @@ Rules:
    - "review": the serial-number sequence needed repair, an entry boundary took a judgment call, or embedded Devanagari had to be reconstructed from clear context — likely correct, but a human should glance at it.
    - "unresolved": you cannot determine confident text (illegible source, contradictory sequence). Keep your best-guess text regardless, but do not invent details.
    Add a brief "note" explaining why, only when classification is not "accept" (empty string otherwise).
-8. Report which page (from the "--- Page N ---" markers) each entry's HEADING sits on, in "page". An entry visible only as a tail continuation from before the first page in this batch gets "sk" of that earlier entry and "partial": "tail"; an entry whose text is cut off by the end of the batch gets "partial": "head". All complete entries omit "partial" (empty string).
+8. Report which page (from the "--- Page N ---" markers) each entry's HEADING sits on, in "page". An entry visible only as a tail continuation from before the first page in this batch gets "sk" of that earlier entry and "partial": "tail"; an entry whose text is cut off by the end of the batch gets "partial": "head". All complete entries report "partial": "none".
 9. Never invent text that isn't grounded in the OCR reading, beyond fixing an obvious OCR-level error that context clearly resolves.
 10. The Devanagari sutra line prints the entry as "<SK number> । <sutra> । <adhyaya> । <pada> । <sutra-number> ॥" — the trailing three numbers are the sutra's Ashtadhyayi reference. Digits OCR far more reliably than Devanagari letters: report them as "panini_ref" in the form "6.1.128" whenever legible, "" otherwise. Do not guess it from your own knowledge of grammar — only from the printed digits.
 11. Output ONLY valid JSON — no markdown fences, no commentary:
-{"entries": [{"sk": 92, "sutra_ocr": "...", "panini_ref": "6.1.128", "chapter": "...", "english": "...", "page": 63, "partial": "", "classification": "accept", "note": ""}]}
+{"entries": [{"sk": 92, "sutra_ocr": "...", "panini_ref": "6.1.128", "chapter": "...", "english": "...", "page": 63, "partial": "none", "classification": "accept", "note": ""}]}
 """
 
 
@@ -93,7 +93,7 @@ SK_RESPONSE_SCHEMA = {
                     "chapter": {"type": "string"},
                     "english": {"type": "string"},
                     "page": {"type": "integer"},
-                    "partial": {"type": "string", "enum": ["", "head", "tail"]},
+                    "partial": {"type": "string", "enum": ["none", "head", "tail"]},
                     "classification": {"type": "string",
                                        "enum": ["accept", "review", "unresolved"]},
                     "note": {"type": "string"},
@@ -123,6 +123,9 @@ def proofread_sk_batch(batch_text: str, api_key: str, model: str,
     entries = data.get("entries") or []
     if not isinstance(entries, list):
         raise GeminiError("proofread returned no entries list")
+    for e in entries:
+        if e.get("partial") == "none":
+            e["partial"] = ""
     return entries
 
 
