@@ -114,7 +114,7 @@ WORKS = {
     "shastra-siddanthalesha-sangraha": ("prakarana_granthas/siddhantalesha_sangraha", "mula", "grantha_prakarana_text", "श्रीअप्पय्यदीक्षितः"),
     # --- siddhi prasthana -------------------------------------------
     "advaitasiddhi":            ("siddhi_granthas/advaitasiddhi", "mula", "grantha_prakarana_text", "श्रीमधुसूदनसरस्वती"),
-    "krishnalankara":           ("siddhi_granthas/advaitasiddhi", "tika_krishnalankara", "grantha_tika_text", ""),
+    "krishnalankara":           ("prakarana_granthas/siddhantalesha_sangraha", "tika_krishnalankara", "grantha_tika_text", ""),
     # --- stotras ----------------------------------------------------
     "pancharatna-stotrani":     ("stotrani/pancharatna_stotrani", "mula", "grantha_stotra_text", ""),
 }

@@ -119,6 +119,14 @@ const DGE_PATH_LABELS = {
   purvarchika: 'पूर्वार्चिकः', uttararchika: 'उत्तरार्चिकः',
   taittiriya_brahmana: 'तैत्तिरीयब्राह्मणम्',
   shatapatha_brahmana: 'शतपथब्राह्मणम्',
+  // Advaita Sharada import groups (2 Sep 2026)
+  sutra_prasthana_tikas: 'सूत्रप्रस्थानटीकाः',
+  upanishad_prasthana_tikas: 'उपनिषत्प्रस्थानटीकाः',
+  gita_prasthana_tikas: 'गीताप्रस्थानटीकाः',
+  prakarana_granthas: 'प्रकरणग्रन्थाः',
+  siddhi_granthas: 'सिद्धिग्रन्थाः',
+  shankara_bhashya_extra: 'अपराणि शाङ्करभाष्याणि',
+  stotrani: 'स्तोत्राणि',
   taittiriya_aranyaka: 'तैत्तिरीयारण्यकम्',
 
   // Mahabharata parvas

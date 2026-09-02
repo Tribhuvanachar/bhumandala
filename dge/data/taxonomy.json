@@ -4293,6 +4293,257 @@
       "_schema": "grantha_tika_text",
       "bhashya": {}
      }
+    },
+    "gita_prasthana_tikas": {
+     "anandagiri_gita": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     }
+    },
+    "prakarana_granthas": {
+     "hastamalakiyam": {
+      "mula": {
+       "_schema": "grantha_prakarana_text",
+       "_default_author": "श्रीहस्तामलकाचार्यः"
+      },
+      "tika_bhashya": {
+       "_schema": "grantha_tika_text"
+      }
+     },
+     "sarvavedanta_siddhanta_sara_sangraha": {
+      "mula": {
+       "_schema": "grantha_prakarana_text",
+       "_default_author": "श्रीमच्छङ्करभगवत्पादाः"
+      }
+     },
+     "shatashloki": {
+      "mula": {
+       "_schema": "grantha_prakarana_text",
+       "_default_author": "श्रीमच्छङ्करभगवत्पादाः"
+      }
+     },
+     "shrutisara_samuddharanam": {
+      "mula": {
+       "_schema": "grantha_prakarana_text",
+       "_default_author": "श्रीतोटकाचार्यः"
+      }
+     },
+     "siddhantalesha_sangraha": {
+      "mula": {
+       "_schema": "grantha_prakarana_text",
+       "_default_author": "श्रीअप्पय्यदीक्षितः"
+      },
+      "tika_krishnalankara": {
+       "_schema": "grantha_tika_text"
+      }
+     },
+     "vedanta_paribhasha": {
+      "mula": {
+       "_schema": "grantha_prakarana_text",
+       "_default_author": "श्रीधर्मराजाध्वरीन्द्रः"
+      }
+     },
+     "vedantasara": {
+      "mula": {
+       "_schema": "grantha_prakarana_text",
+       "_default_author": "श्रीसदानन्दयोगीन्द्रः"
+      }
+     },
+     "vivekachudamani": {
+      "mula": {
+       "_schema": "grantha_prakarana_text",
+       "_default_author": "श्रीमच्छङ्करभगवत्पादाः"
+      }
+     }
+    },
+    "shankara_bhashya_extra": {
+     "kathaka_bhashya": {
+      "mula": {
+       "_schema": "grantha_bhashya_text",
+       "_default_author": "श्रीमच्छङ्करभगवत्पादाः"
+      }
+     },
+     "kena_vakya_bhashya": {
+      "mula": {
+       "_schema": "grantha_bhashya_text",
+       "_default_author": "श्रीमच्छङ्करभगवत्पादाः"
+      }
+     },
+     "mundaka_bhashya": {
+      "mula": {
+       "_schema": "grantha_bhashya_text",
+       "_default_author": "श्रीमच्छङ्करभगवत्पादाः"
+      }
+     }
+    },
+    "siddhi_granthas": {
+     "advaitasiddhi": {
+      "mula": {
+       "_schema": "grantha_prakarana_text",
+       "_default_author": "श्रीमधुसूदनसरस्वती"
+      }
+     }
+    },
+    "stotrani": {
+     "pancharatna_stotrani": {
+      "mula": {
+       "_schema": "grantha_stotra_text"
+      }
+     }
+    },
+    "sutra_prasthana_tikas": {
+     "bhamati": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीवाचस्पतिमिश्रः"
+      }
+     },
+     "kalpataru": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीअमलानन्दः"
+      }
+     },
+     "nyaya_rakshamani": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीअप्पय्यदीक्षितः"
+      }
+     },
+     "nyayanirnaya": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     },
+     "panchapadika": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीपद्मपादाचार्यः"
+      }
+     },
+     "parimala": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीअप्पय्यदीक्षितः"
+      }
+     },
+     "purnanandi": {
+      "mula": {
+       "_schema": "grantha_tika_text"
+      }
+     },
+     "ratnaprabha": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीगोविन्दानन्दः"
+      }
+     },
+     "vaiyasika_nyayamala": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीभारतीतीर्थः"
+      }
+     },
+     "vaktavyakashika": {
+      "mula": {
+       "_schema": "grantha_tika_text"
+      }
+     },
+     "vivarana_prameya_sangraha": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीविद्यारण्यः"
+      }
+     }
+    },
+    "upanishad_prasthana_tikas": {
+     "anandagiri_aitareya": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     },
+     "anandagiri_brihadaranyaka": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     },
+     "anandagiri_chandogya": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     },
+     "anandagiri_isha": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     },
+     "anandagiri_kathaka": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     },
+     "anandagiri_kena_pada": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     },
+     "anandagiri_kena_vakya": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     },
+     "anandagiri_mandukya": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     },
+     "anandagiri_mundaka": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     },
+     "anandagiri_prashna": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     },
+     "anandagiri_taittiriya": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीआनन्दगिरिः"
+      }
+     },
+     "brihadaranyaka_vartika": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीसुरेश्वराचार्यः"
+      }
+     },
+     "taittiriya_vanamala": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीअच्युतकृष्णानन्दतीर्थः"
+      }
+     },
+     "taittiriya_vartika": {
+      "mula": {
+       "_schema": "grantha_tika_text",
+       "_default_author": "श्रीसुरेश्वराचार्यः"
+      }
+     }
     }
    },
    "vishishtadvaita": {
