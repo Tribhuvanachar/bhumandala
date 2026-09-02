@@ -1792,87 +1792,117 @@
   {
    "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/brahmasutra_bhashya/bhashya/data.json",
    "populated": true,
-   "title": "Bhashya",
+   "title": "ब्रह्मसूत्रभाष्यम्",
    "facets": {
-    "default_author": "Sri Adi Shankaracharya"
+    "default_author": "श्रीमच्छङ्करभगवत्पादाः"
+   },
+   "source": {
+    "source_url": "https://advaitasharada.sringeri.net/read/brahmasutra-bhashya"
    }
   },
   {
    "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/gita_bhashya/bhashya/data.json",
    "populated": true,
-   "title": "Bhashya",
+   "title": "श्रीमद्भगवद्गीताभाष्यम्",
    "facets": {
-    "default_author": "Sri Adi Shankaracharya"
+    "default_author": "श्रीमच्छङ्करभगवत्पादाः"
+   },
+   "source": {
+    "source_url": "https://advaitasharada.sringeri.net/read/bhagavadgita-bhashya"
    }
   },
   {
    "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/aitareya_upanishad/bhashya/data.json",
    "populated": true,
-   "title": "Bhashya",
+   "title": "ऐतरेयोपनिषद्भाष्यम्",
    "facets": {
-    "default_author": "Sri Adi Shankaracharya"
+    "default_author": "श्रीमच्छङ्करभगवत्पादाः"
+   },
+   "source": {
+    "source_url": "https://advaitasharada.sringeri.net/read/aitareya-bhashya"
    }
   },
   {
    "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/brihadaranyaka_upanishad/bhashya/data.json",
    "populated": true,
-   "title": "Bhashya",
+   "title": "बृहदारण्यकोपनिषद्भाष्यम्",
    "addedAt": "2026-08-24",
    "facets": {
-    "default_author": "Sri Adi Shankaracharya"
+    "default_author": "श्रीमच्छङ्करभगवत्पादाः"
+   },
+   "source": {
+    "source_url": "https://advaitasharada.sringeri.net/read/brihadaranyaka-bhashya"
    }
   },
   {
    "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/chandogya_upanishad/bhashya/data.json",
    "populated": true,
-   "title": "Bhashya",
+   "title": "छान्दोग्योपनिषद्भाष्यम्",
    "addedAt": "2026-08-24",
    "facets": {
-    "default_author": "Sri Adi Shankaracharya"
+    "default_author": "श्रीमच्छङ्करभगवत्पादाः"
+   },
+   "source": {
+    "source_url": "https://advaitasharada.sringeri.net/read/chandogya-bhashya"
    }
   },
   {
    "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/isha_upanishad/bhashya/data.json",
    "populated": true,
-   "title": "Bhashya",
+   "title": "ईशावास्योपनिषद्भाष्यम्",
    "addedAt": "2026-08-24",
    "facets": {
-    "default_author": "Sri Adi Shankaracharya"
+    "default_author": "श्रीमच्छङ्करभगवत्पादाः"
+   },
+   "source": {
+    "source_url": "https://advaitasharada.sringeri.net/read/isha-bhashya"
    }
   },
   {
    "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/kena_upanishad/bhashya/data.json",
    "populated": true,
-   "title": "Bhashya",
+   "title": "केनोपनिषत्पदभाष्यम्",
    "facets": {
-    "default_author": "Sri Adi Shankaracharya"
+    "default_author": "श्रीमच्छङ्करभगवत्पादाः"
+   },
+   "source": {
+    "source_url": "https://advaitasharada.sringeri.net/read/kena-pada-bhashya"
    }
   },
   {
    "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/mandukya_upanishad/bhashya/data.json",
    "populated": true,
-   "title": "Bhashya",
+   "title": "माण्डूक्योपनिषद्भाष्यम्",
    "addedAt": "2026-08-24",
    "facets": {
-    "default_author": "Sri Adi Shankaracharya"
+    "default_author": "श्रीमच्छङ्करभगवत्पादाः"
+   },
+   "source": {
+    "source_url": "https://advaitasharada.sringeri.net/read/mandukya-karika-bhashya"
    }
   },
   {
    "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/prashna_upanishad/bhashya/data.json",
    "populated": true,
-   "title": "Bhashya",
+   "title": "प्रश्नोपनिषद्भाष्यम्",
    "addedAt": "2026-08-24",
    "facets": {
-    "default_author": "Sri Adi Shankaracharya"
+    "default_author": "श्रीमच्छङ्करभगवत्पादाः"
+   },
+   "source": {
+    "source_url": "https://advaitasharada.sringeri.net/read/prashna-bhashya"
    }
   },
   {
    "path": "dge/data/darshana/vedanta/advaita/shankara_bhashya/upanishad_bhashya/taittiriya_upanishad/bhashya/data.json",
    "populated": true,
-   "title": "Bhashya",
+   "title": "तैत्तिरीयोपनिषद्भाष्यम्",
    "addedAt": "2026-08-24",
    "facets": {
-    "default_author": "Sri Adi Shankaracharya"
+    "default_author": "श्रीमच्छङ्करभगवत्पादाः"
+   },
+   "source": {
+    "source_url": "https://advaitasharada.sringeri.net/read/taittiriya-bhashya"
    }
   },
   {
