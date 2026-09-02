@@ -8,7 +8,7 @@
 // Deliberately excludes unpopulated entries — the catalog lists hundreds
 // of planned granthas, and showing empty placeholders would look broken.
 window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-window.DGE_VERSIONS['library.js'] = 'v3.19 (super-admin draft preview of the Library Manager\'s unexported overrides + searchable By-Author facet index. On top of v3.17\'s mula_gretil/mula_dcs labels)';
+window.DGE_VERSIONS['library.js'] = 'v3.20 (stale-draft gate: a super-admin draft previews only when NEWER than the committed overrides (draftAt vs updatedAt). v3.19: super-admin draft preview of the Library Manager\'s unexported overrides + searchable By-Author facet index. On top of v3.17\'s mula_gretil/mula_dcs labels)';
 
 // Display names for path segments, stored in DEVANAGARI as the single
 // source of truth — every label is then run through the app's existing
@@ -630,7 +630,7 @@ async function dgeLoadLibraryOverrides() {
     const ov = await fetch(url, { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
     if (ov) {
       dgeLibOverrides = dgeNormalizeOverrides(ov);
-      dgeOverlayManagerDraft();
+      dgeOverlayManagerDraft(ov.updatedAt);
       return;
     }
   } catch (e) { /* no overrides file yet */ }
@@ -652,12 +652,23 @@ async function dgeLoadLibraryOverrides() {
 // that differs from the committed file now sees the DRAFT here too,
 // clearly labeled as a preview (see dgeRenderLibraryRoot's notice), so
 // they can check their curation in the real reader UI before publishing.
-function dgeOverlayManagerDraft() {
+function dgeOverlayManagerDraft(committedUpdatedAt) {
   if (!dgeIsSuperAdmin()) return;
   try {
     const draft = JSON.parse(localStorage.getItem('dge.liboverrides') || 'null');
     if (!draft || typeof draft !== 'object') return;
     if (dgeOverridesKey(draft) === dgeOverridesKey(dgeLibOverrides)) return;
+    // 2 Sep 2026, project-lead report: "the latest library is not
+    // displaying the changes ... via the overrides I gave you." Their
+    // device held a draft from BEFORE those overrides were committed,
+    // and this preview replaced the committed curation with it — the
+    // stale draft masked every newer committed change. A draft only
+    // previews when it is NEWER than the committed file: the manager
+    // stamps drafts with draftAt, exports carry updatedAt. A legacy
+    // draft with no stamp never outranks a stamped committed file.
+    const draftAt = Number(draft.draftAt) || 0;
+    const committedAt = Number(committedUpdatedAt) || 0;
+    if (committedAt > draftAt) return;
     dgeLibOverrides = dgeNormalizeOverrides(draft);
     dgeLibOverridesDraftPreview = true;
   } catch (e) { /* unreadable draft -- the committed file stands */ }

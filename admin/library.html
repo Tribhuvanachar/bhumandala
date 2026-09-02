@@ -156,7 +156,7 @@
   // an export from that browser silently discarded it. Now the committed
   // file is the seed whenever no local draft exists, and the header says
   // plainly whether this browser's draft matches what readers see.
-  var COMMITTED=null;
+  var COMMITTED=null, COMMITTED_AT=0;
   function normOV(raw){
     if(!raw||typeof raw!=="object") return null;
     // DEEP copy, not a shallow one: OV is seeded from COMMITTED, and a
@@ -176,9 +176,15 @@
   function ovKey(o){ if(!o) return "null";
     return JSON.stringify({h:(o.hidden||[]).slice().sort(), p:o.pinned||[], l:o.labels||{}, o:o.order||{}, m:o.moves||{}, a:(o.adds||[]).slice().sort(), sh:(o.searchHidden||[]).slice().sort()}); }
   function blankOV(){ return {hidden:[],pinned:[],labels:{},order:{},moves:{},adds:[],searchHidden:[]}; }
+  // When this browser's draft was last edited (epoch ms). The reader's
+  // draft preview only overlays a draft NEWER than the committed file's
+  // updatedAt — a stale draft used to silently mask newer committed
+  // curation (project-lead report, 2 Sep 2026).
+  var DRAFT_AT=0;
   function loadOV(){
     var draft=null;
-    try{ var raw=JSON.parse(localStorage.getItem(LS)||"null"); if(raw&&typeof raw==="object") draft=normOV(raw); }catch(e){}
+    DRAFT_AT=0;
+    try{ var raw=JSON.parse(localStorage.getItem(LS)||"null"); if(raw&&typeof raw==="object"){ draft=normOV(raw); DRAFT_AT=Number(raw.draftAt)||0; } }catch(e){}
     if(draft){ OV=draft; }
     else if(COMMITTED){ OV=normOV(COMMITTED); }
     else { OV=blankOV(); }
@@ -188,14 +194,17 @@
     }
     updateOvState();
   }
-  function saveOV(){ localStorage.setItem(LS, JSON.stringify(OV)); updateOvState(); }
+  function saveOV(){ DRAFT_AT=Date.now(); localStorage.setItem(LS, JSON.stringify(Object.assign({draftAt:DRAFT_AT}, OV))); updateOvState(); }
   // Test/debug hook (used by the Playwright sync suite): read-only snapshot
   // of the draft and the committed baseline this session loaded.
   window.__dgeLibMgrDebug=function(){ return { ov: JSON.parse(JSON.stringify(OV||null)), committed: JSON.parse(JSON.stringify(COMMITTED||null)) }; };
   function updateOvState(){
     var el=$("#ovState"), lc=$("#loadCommitted"); if(!el) return;
     var inSync = ovKey(normOV(OV))===ovKey(normOV(COMMITTED||blankOV()));
-    el.textContent = inSync ? "✓ in sync with committed" : "● draft differs from committed — export & commit to publish";
+    var committedNewer = !inSync && COMMITTED_AT > (DRAFT_AT||0);
+    el.textContent = inSync ? "✓ in sync with committed"
+      : committedNewer ? "⚠ the COMMITTED curation is NEWER than this browser's draft — ↺ Load committed to see it (this draft predates it)"
+      : "● draft differs from committed — export & commit to publish";
     el.style.color = inSync ? "var(--muted)" : "var(--accent2)";
     if(lc) lc.style.display = inSync ? "none" : "";
   }
@@ -293,6 +302,8 @@
       fetch("config/library-overrides.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})
     ]).then(function(a){
       TAX=a[0]; ST=a[1]; COMMITTED=normOV(a[2]);
+      // normOV strips unknown keys — carry the commit stamp separately
+      COMMITTED_AT=(a[2]&&Number(a[2].updatedAt))||0;
       loadOV();
       renderTotals(); renderSections(); render();
       // Deep link from the reader app's "📊 Progress" nav link
@@ -803,6 +814,10 @@
     var out={
       note:"DGE library curation overrides — a NON-DESTRUCTIVE display layer read by dge/js/library.js (v3+). Keys are effective (post-move) display paths; a move's source is an original taxonomy path and its dest is the subtree's FULL new display path. Commit to admin/config/library-overrides.json.",
       version:1,
+      // Stamps this export as the newest curation once committed: the
+      // reader's draft preview and the manager's own state line compare
+      // it against each browser draft's draftAt.
+      updatedAt:Date.now(),
       hidden:(OV.hidden||[]).slice().sort(),
       pinned:(OV.pinned||[]).slice(),
       labels:OV.labels||{},
