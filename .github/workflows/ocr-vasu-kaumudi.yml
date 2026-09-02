@@ -70,6 +70,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           VISION_API_KEY: ${{ secrets.VISION_API_KEY }}
+          GEMINI_HTTP_TIMEOUT: "300"   # dense SK pages generate long structured output
         run: |
           set -euo pipefail
           if [ -z "$GEMINI_API_KEY" ] || [ -z "$VISION_API_KEY" ]; then
