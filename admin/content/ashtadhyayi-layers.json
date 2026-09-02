@@ -28,13 +28,30 @@
   "true for 'english' does nothing until the data is re-imported."
  ],
  "layers": {
-  "kashika": { "visible": true },
-  "siddhanta_kaumudi": { "visible": true },
-  "mahabhashya": { "visible": true },
-  "balamanorama": { "visible": true },
-  "tattvabodhini": { "visible": true },
-  "nyasa": { "visible": true },
-  "vasu": { "visible": true }
+  "kashika": {
+   "visible": true
+  },
+  "siddhanta_kaumudi": {
+   "visible": true
+  },
+  "mahabhashya": {
+   "visible": true
+  },
+  "balamanorama": {
+   "visible": true
+  },
+  "tattvabodhini": {
+   "visible": true
+  },
+  "nyasa": {
+   "visible": true
+  },
+  "vasu": {
+   "visible": true
+  },
+  "vasu_kaumudi": {
+   "visible": true
+  }
  },
  "fields": {
   "english": {

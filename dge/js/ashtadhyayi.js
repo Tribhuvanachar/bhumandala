@@ -52,9 +52,11 @@
     tattvabodhini:{t:"तत्त्वबोधिनी", sub:"Tattva-bodhinī", who:"Jñānendra Sarasvatī", tag:"var(--t)", role:"tippani"},
     nyasa:        {t:"न्यासः", sub:"Kāśikāvivaraṇapañjikā", who:"Jinendrabuddhi", tag:"var(--n)", role:"tippani"},
     vasu:         {t:"Vasu · English", sub:"S.C. Vasu (1891)", who:"Śrīśa Chandra Vasu", tag:"var(--vs)", role:"translation", lang:"en",
-                      path:"../data/vedanga/vyakarana/ashtadhyayi/vasu/data.json"}
+                      path:"../data/vedanga/vyakarana/ashtadhyayi/vasu/data.json"},
+    vasu_kaumudi: {t:"Vasu · SK English", sub:"S.C. Vasu, Siddhānta-Kaumudī tr. (1905-07)", who:"Śrīśa Chandra Vasu", tag:"var(--vs)", role:"translation", lang:"en",
+                      path:"../data/vedanga/vyakarana/ashtadhyayi/vasu_kaumudi/data.json"}
   };
-  var ORDER = ["kashika","siddhanta_kaumudi","mahabhashya","balamanorama","tattvabodhini","nyasa","vasu"];
+  var ORDER = ["kashika","siddhanta_kaumudi","mahabhashya","balamanorama","tattvabodhini","nyasa","vasu","vasu_kaumudi"];
   var INMEM = !!window.DGE_INMEM || !!window.DGE_SAMPLE;
 
   // Site-wide, admin-level gate on which commentary layers (and which
@@ -87,7 +89,7 @@
 
   var state = {
     sutras: [], byId: {}, layers: {}, idx: 0,
-    enabled: LS.get("enabled", {kashika:true, siddhanta_kaumudi:true, balamanorama:true, tattvabodhini:false, nyasa:false, mahabhashya:false, vasu:false}),
+    enabled: LS.get("enabled", {kashika:true, siddhanta_kaumudi:true, balamanorama:true, tattvabodhini:false, nyasa:false, mahabhashya:false, vasu:false, vasu_kaumudi:false}),
     script: LS.get("script", "devanagari"),
     mode: LS.get("mode", "read"),
     font: LS.get("font", 17),
