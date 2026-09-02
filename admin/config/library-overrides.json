@@ -1,7 +1,7 @@
 {
   "note": "DGE library curation overrides — a NON-DESTRUCTIVE display layer read by dge/js/library.js (v3+). Keys are effective (post-move) display paths; a move's source is an original taxonomy path and its dest is the subtree's FULL new display path. Commit to admin/config/library-overrides.json.",
   "version": 1,
-  "updatedAt": 1788313943827,
+  "updatedAt": 1788314235773,
   "hidden": [],
   "pinned": [
     "SarvaMula",
@@ -14,7 +14,8 @@
     "darshana/vedanta/dvaita/DvaitaVedanta/others/vyakaranam": "व्याकरणम्",
     "darshana/vedanta/dvaita/DvaitaVedanta/others/tarkah": "तर्कः",
     "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam": "प्रकरणानि",
-    "darshana/vedanta/dvaita/DvaitaVedanta/others/stotram": "स्तोत्राणि"
+    "darshana/vedanta/dvaita/DvaitaVedanta/others/stotram": "स्तोत्राणि",
+    "SarvaMula/kavyam": "काव्यम्"
   },
   "order": {
     "darshana/vedanta/dvaita/SarvaMula/rig_bhashya": [
@@ -51,7 +52,9 @@
   "moves": {
     "dasa_sahitya/vyasakuta/vadiraja_tirtha/yuktimallika": "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam/yuktimallika",
     "dasa_sahitya/vyasakuta/vadiraja_tirtha/svapna_vrindavana_akhyana": "darshana/vedanta/dvaita/DvaitaVedanta/others/svapna_vrindavana_akhyana",
-    "darshana/vedanta/dvaita/SarvaMula": "SarvaMula"
+    "darshana/vedanta/dvaita/SarvaMula": "SarvaMula",
+    "kavya_alankara/sumadhva_vijaya": "SarvaMula/kavyam/sumadhva_vijaya",
+    "kavya_alankara/raghavendra_vijaya": "SarvaMula/kavyam/raghavendra_vijaya"
   },
   "adds": [
     "darshana/vedanta/dvaita/DvaitaVedanta/others",
@@ -59,6 +62,7 @@
     "darshana/vedanta/dvaita/DvaitaVedanta/others/prakananam",
     "darshana/vedanta/dvaita/DvaitaVedanta/others/stotram",
     "darshana/vedanta/dvaita/DvaitaVedanta/others/tarkah",
-    "darshana/vedanta/dvaita/DvaitaVedanta/others/vyakaranam"
+    "darshana/vedanta/dvaita/DvaitaVedanta/others/vyakaranam",
+    "SarvaMula/kavyam"
   ]
 }
