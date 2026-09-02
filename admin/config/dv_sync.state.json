@@ -1,6 +1,6 @@
 {
  "generated_note": "Per-grantha sidebar census of dvaitavedanta.in. Written by tools/dvaitavedanta/sync_check.py; the diff against it names which granthas to re-extract.",
- "checked": "2026-08-27T17:49:57+00:00",
+ "checked": "2026-09-02T08:12:15+00:00",
  "granthas": {
   "dasha_prakarana_granthas/pramana_lakshana": {
    "title": "प्रमाणलक्षणम्",
@@ -163,7 +163,7 @@
     "13699",
     "13736"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "dasha_prakarana_granthas/katha_lakshana": {
    "title": "कथालक्षणम्",
@@ -185,7 +185,7 @@
     "14041",
     "14042"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "dasha_prakarana_granthas/tattva_sankhyana": {
    "title": "tattva_sankhyana",
@@ -231,7 +231,7 @@
     "14770",
     "14771"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "dasha_prakarana_granthas/tattva_viveka": {
    "title": "tattva_viveka",
@@ -394,7 +394,7 @@
     "5975",
     "5976"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "dasha_prakarana_granthas/upadhi_khandana": {
    "title": "upadhi_khandana",
@@ -405,7 +405,7 @@
     "4783",
     "4784"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "dasha_prakarana_granthas/mayavada_khandana": {
    "title": "mayavada_khandana",
@@ -417,7 +417,7 @@
     "4735",
     "4809"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "dasha_prakarana_granthas/prapancha_mithyatvanumana_khandana": {
    "title": "prapancha_mithyatvanumana_khandana",
@@ -429,7 +429,7 @@
     "4814",
     "4815"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "dasha_prakarana_granthas/vishnu_tattva_vinirnaya": {
    "title": "vishnu_tattva_vinirnaya",
@@ -603,7 +603,7 @@
     "5629",
     "5630"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "dasha_prakarana_granthas/karma_nirnaya": {
    "title": "karma_nirnaya",
@@ -666,7 +666,7 @@
     "19530",
     "19563"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "dasha_prakarana_granthas/tattvodyota": {
    "title": "tattvodyota",
@@ -696,7 +696,7 @@
     "14791",
     "14792"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "sutra_prasthana/brahma_sutra_bhashya": {
    "title": "ब्रह्मसूत्रभाष्यम्",
@@ -930,7 +930,7 @@
     "1726",
     "587"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "sutra_prasthana/anuvyakhyana": {
    "title": "अनुव्याख्यानम्",
@@ -954,7 +954,7 @@
     "14487",
     "14488"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "sutra_prasthana/nyaya_vivarana": {
    "title": "न्यायविवरणम्",
@@ -994,7 +994,7 @@
     "15045",
     "15046"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "sutra_prasthana/anubhashya": {
    "title": "ब्रह्मसूत्राणुभाष्यम्",
@@ -1010,7 +1010,7 @@
     "14995",
     "14996"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "sutra_prasthana/omkara_vada": {
    "title": "ओङ्कारवादः",
@@ -1019,7 +1019,7 @@
    "ids": [
     "19135"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "gita_prasthana/gita_bhashya": {
    "title": "गीताभाष्यम्",
@@ -1681,7 +1681,7 @@
     "4311",
     "4312"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "gita_prasthana/gita_tatparya_nirnaya": {
    "title": "गीतातात्पर्यम्",
@@ -1918,7 +1918,7 @@
     "2537",
     "2538"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "sruti_prasthana/rig_bhashya": {
    "title": "ऋग्भाष्यम्",
@@ -1946,7 +1946,7 @@
     "14404",
     "14406"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "itihasa_prasthana/yamaka_bharata": {
    "title": "यमकभारतम्",
@@ -1955,7 +1955,7 @@
    "ids": [
     "14142"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "itihasa_prasthana/mahabharata_tatparya_nirnaya": {
    "title": "महाभारततात्पर्यनिर्णयः",
@@ -1995,7 +1995,7 @@
     "14112",
     "14113"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "purana_prasthana/bhagavata_tatparya_nirnaya": {
    "title": "भागवततात्पर्यनिर्णयः",
@@ -2348,7 +2348,7 @@
     "11432",
     "11433"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "upanishad_prasthana/ishavasyopanishad_bhashya": {
    "title": "ishavasyopanishad_bhashya",
@@ -2378,7 +2378,7 @@
     "15424",
     "15533"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "upanishad_prasthana/kathopanishad_bhashya": {
    "title": "kathopanishad_bhashya",
@@ -2476,7 +2476,7 @@
     "15824",
     "15826"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "upanishad_prasthana/15941": {
    "title": "",
@@ -2539,7 +2539,7 @@
     "16099",
     "16165"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "upanishad_prasthana/15964": {
    "title": "",
@@ -2588,7 +2588,7 @@
     "16271",
     "16273"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "upanishad_prasthana/15955": {
    "title": "",
@@ -2626,7 +2626,7 @@
     "16192",
     "16193"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "upanishad_prasthana/aitareyopanishad_bhashya": {
    "title": "aitareyopanishad_bhashya",
@@ -2681,7 +2681,7 @@
     "17959",
     "17960"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "upanishad_prasthana/taittiriyopanishad_bhashya": {
    "title": "taittiriyopanishad_bhashya",
@@ -2738,7 +2738,7 @@
     "15645",
     "15654"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "upanishad_prasthana/14242": {
    "title": "",
@@ -2978,7 +2978,7 @@
     "16625",
     "16801"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "upanishad_prasthana/chandogyopanishad_bhashya": {
    "title": "chandogyopanishad_bhashya",
@@ -3136,7 +3136,7 @@
     "17857",
     "17905"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "upanishad_prasthana/kenopanishad_bhashya": {
    "title": "kenopanishad_bhashya",
@@ -3158,7 +3158,7 @@
     "16211",
     "16212"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/nyaya_sudha": {
    "title": "श्रीमन्न्यायसुधा",
@@ -4821,7 +4821,7 @@
     "9840",
     "9841"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/pramana_paddhati": {
    "title": "प्रमाणपद्धतिः",
@@ -4951,7 +4951,7 @@
     "4699",
     "4700"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/vadavali": {
    "title": "वादावली",
@@ -5007,7 +5007,7 @@
     "9057",
     "9181"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/nyayamrita": {
    "title": "न्यायामृतम्",
@@ -5140,7 +5140,7 @@
     "14572",
     "14944"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/tatparya_chandrika": {
    "title": "तात्पर्यचन्द्रिका",
@@ -5551,7 +5551,7 @@
     "11990",
     "11993"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/tarka_tandava": {
    "title": "तर्कताण्डवम्",
@@ -5716,7 +5716,7 @@
     "12984",
     "13145"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/bhedojjivana": {
    "title": "भेदोज्जीवनम्",
@@ -5760,7 +5760,7 @@
     "12815",
     "12816"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/dvaita_dyumani": {
    "title": "द्वैतद्युमणिः",
@@ -5930,7 +5930,7 @@
     "6355",
     "6356"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/sumadhva_vijaya": {
    "title": "सुमध्वविजयः",
@@ -5954,7 +5954,7 @@
     "10528",
     "10529"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/yukti_mallika": {
    "title": "युक्तिमल्लिका",
@@ -6105,7 +6105,7 @@
     "17587",
     "18342"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/shrimanmadhvasiddhantasaroddhara": {
    "title": "श्रीमन्मध्वसिद्धान्तसारोद्धारः",
@@ -6114,7 +6114,7 @@
    "ids": [
     "18411"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/sarvasiddhantasarasaravivecanam": {
    "title": "सर्वसिद्धान्तसारासारविवेचनम्",
@@ -6135,7 +6135,7 @@
     "19095",
     "19096"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/brahmasutranyayasamgraha": {
    "title": "ब्रह्मसूत्रन्यायसंग्रहः",
@@ -6147,7 +6147,7 @@
     "18700",
     "18701"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/shrimannyayasudhamandanam": {
    "title": "श्रीमन्न्यायसुधामण्डनम्",
@@ -6237,7 +6237,7 @@
     "19029",
     "19109"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/bhagavato_nirdoshatvalakshanam": {
    "title": "भगवतो निर्दोषत्वलक्षणम्",
@@ -6262,7 +6262,7 @@
     "18598",
     "18599"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/shrivijayindravijayavaibhavam": {
    "title": "श्रीविजयीन्द्रविजयवैभवम्",
@@ -6291,7 +6291,7 @@
     "18640",
     "18641"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/padarthasangraha": {
    "title": "पदार्थसङ्ग्रहः",
@@ -6305,7 +6305,7 @@
     "18489",
     "18490"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/madhvasiddhantasara": {
    "title": "मध्वसिद्धान्तसारः",
@@ -6322,7 +6322,7 @@
     "19659",
     "19660"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/bhedaparanyeva_khalu_brahmasutrani": {
    "title": "भेदपराण्येव खलु ब्रह्मसूत्राणि",
@@ -6356,7 +6356,7 @@
     "19052",
     "19059"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/candrikamandanam": {
    "title": "चन्द्रिकामण्डनम्",
@@ -6377,7 +6377,7 @@
     "18777",
     "18778"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/purushasuktam": {
    "title": "पुरुषसूक्तम्",
@@ -6388,7 +6388,7 @@
     "19143",
     "19144"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/madhvamukhalankara": {
    "title": "मध्वमुखालङ्कारः",
@@ -6404,7 +6404,7 @@
     "19157",
     "19158"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/karmavijaya": {
    "title": "कर्मविजयः",
@@ -6423,7 +6423,7 @@
     "19192",
     "19193"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/tantradipika": {
    "title": "तन्त्रदीपिका",
@@ -6448,7 +6448,7 @@
     "19270",
     "19271"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   },
   "later_acharyas/vagvajra": {
    "title": "वाग्वज्रः",
@@ -6460,7 +6460,7 @@
     "19589",
     "19590"
    ],
-   "checked": "2026-08-27T17:49:57+00:00"
+   "checked": "2026-09-02T08:12:15+00:00"
   }
  }
 }
