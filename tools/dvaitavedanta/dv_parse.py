@@ -1059,6 +1059,8 @@ def sanitize_article_html(node) -> str:
         return ""
     dup = make_soup(str(node))
     for tag in list(dup.find_all(True)):
+        if getattr(tag, "decomposed", False) or tag.parent is None:
+            continue          # detached by an earlier decompose()/unwrap()
         name = (tag.name or "").lower()
         if name in _HTML_DROP_TAGS:
             tag.decompose()
