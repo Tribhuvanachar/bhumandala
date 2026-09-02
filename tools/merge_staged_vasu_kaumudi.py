@@ -34,6 +34,7 @@ from pathlib import Path
 
 LAYER = Path("dge/data/vedanga/vyakarana/ashtadhyayi/vasu_kaumudi/data.json")
 ORDER = Path("dge/data/vedanga/vyakarana/ashtadhyayi/kaumudi_order/data.json")
+SUTRAPATHA = Path("dge/data/vedanga/vyakarana/ashtadhyayi/sutrapatha/data.json")
 
 HEADER = {
     "schema": "grantha_tika_text",
@@ -83,6 +84,25 @@ def main(argv=None):
 
     order = json.loads(ORDER.read_text(encoding="utf-8"))
     sk_to_id = {it["kaumudiIndex"]: it["id"] for it in order["items"]}
+    valid_ids = {it["id"] for it in order["items"]}
+    sutra_text = {}
+    if SUTRAPATHA.exists():
+        sp = json.loads(SUTRAPATHA.read_text(encoding="utf-8"))
+        for it in sp.get("items", []):
+            sutra_text[it["id"]] = it.get("sanskrit_text", "")
+
+    import difflib
+    import re as _re
+
+    def deva(s: str) -> str:
+        return "".join(_re.findall(r"[ऀ-ॿ]+", s or ""))
+
+    def sim(ocr: str, sid: str) -> float:
+        ref = deva(sutra_text.get(sid, ""))
+        got = deva(ocr)
+        if not ref or not got:
+            return 0.0
+        return difflib.SequenceMatcher(None, got, ref).ratio()
 
     raw = load_entries(paths)
 
@@ -134,13 +154,43 @@ def main(argv=None):
         doc = json.loads(LAYER.read_text(encoding="utf-8"))
     else:
         doc = dict(HEADER, items=[])
+    # sk_items is the canonical one-row-per-SK-entry store; items (what the
+    # reader consumes) is DERIVED from it below, one row per sutra id with
+    # same-id entries joined — so a re-merge never re-reads joined text.
     items_by_sk = {}
-    for it in doc.get("items", []):
+    for it in doc.get("sk_items", doc.get("items", [])):
         items_by_sk[it.get("sk_number")] = it
 
     added = updated = 0
+    ref_disagreements = []
     for sk, e in merged.items():
-        sid = sk_to_id.get(sk)
+        # Two independent claims about which sutra this entry translates:
+        # the book's printed Panini ref (digits — mostly reliable, but a
+        # degraded ८ can OCR as ६) and the kaumudi_order map (built from
+        # a different SK edition, drifts locally: the book's S.2 is
+        # 1.1.71 where the map says 1.1.70). When they disagree, the
+        # corpus's own sutrapatha arbitrates: the entry's OCR'd sutra
+        # line is compared against both candidates' authoritative text
+        # and the closer one wins; a near-tie keeps the map and flags
+        # the entry review.
+        printed = (e.get("panini_ref") or "").strip()
+        mapped = sk_to_id.get(sk)
+        if printed and printed in valid_ids and mapped and mapped != printed:
+            s_p, s_m = sim(e.get("sutra_ocr", ""), printed), sim(e.get("sutra_ocr", ""), mapped)
+            if s_p >= s_m + 0.1:
+                sid = printed
+            elif s_m >= s_p + 0.1:
+                sid = mapped
+            else:
+                sid = mapped
+                e["classification"] = "review"
+                e["note"] = ((e.get("note") or "") +
+                             f" [ref ambiguous: printed {printed} ({s_p:.2f}) vs map {mapped} ({s_m:.2f})]").strip()
+            ref_disagreements.append((sk, mapped, printed, sid, round(s_p, 2), round(s_m, 2)))
+        elif printed and printed in valid_ids:
+            sid = printed
+        else:
+            sid = mapped
         if sid is None:
             skipped["unmapped"].append(sk)
             continue
@@ -165,12 +215,36 @@ def main(argv=None):
             items_by_sk[sk] = item
             added += 1
 
-    doc["items"] = [items_by_sk[k] for k in sorted(items_by_sk)]
+    # The reader indexes a layer's items by sutra id, last-one-wins
+    # (ashtadhyayi.js L.byId[it.id]=it) — and distinct SK entries can
+    # legitimately share one sutra (the SK treats e.g. हलन्त्यम् twice).
+    # Emit ONE item per id, concatenating same-id entries in SK order.
+    by_id: dict[str, list[dict]] = {}
+    for k in sorted(items_by_sk):
+        by_id.setdefault(items_by_sk[k]["id"], []).append(items_by_sk[k])
+    out_items = []
+    for sid in by_id:
+        group = by_id[sid]
+        if len(group) == 1:
+            out_items.append(group[0])
+            continue
+        first = dict(group[0])
+        first["sanskrit_text"] = "\n\n".join(
+            f"[S. {g['sk_number']}]\n{g['sanskrit_text']}" for g in group)
+        first["sk_numbers"] = [g["sk_number"] for g in group]
+        out_items.append(first)
+    out_items.sort(key=lambda it: it["sk_number"])
+    doc["sk_items"] = [items_by_sk[k] for k in sorted(items_by_sk)]
+    doc["items"] = out_items
     for k, v in HEADER.items():
         doc.setdefault(k, v)
 
     print(f"merge: {added} added, {updated} updated, layer now {len(doc['items'])} "
           f"of {len(sk_to_id)} mappable SK entries")
+    if ref_disagreements:
+        print(f"  printed-ref vs kaumudi_order disagreements ({len(ref_disagreements)}, sutrapatha-arbitrated):")
+        for sk, m, p, chosen, s_p, s_m in ref_disagreements[:25]:
+            print(f"    S.{sk}: map={m}({s_m}) printed={p}({s_p}) -> {chosen}")
     for k, v in skipped.items():
         if v:
             print(f"  skipped ({k}): {len(v)} -> {v[:15]}{' …' if len(v) > 15 else ''}")
