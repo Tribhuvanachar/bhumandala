@@ -41,8 +41,53 @@ import unicodedata
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools" / "dvaitavedanta"))
-from dv_parse import sanitize_article_html  # noqa: E402
-from bs4 import BeautifulSoup  # noqa: E402
+import dv_parse  # noqa: E402
+from bs4 import BeautifulSoup, NavigableString, Tag  # noqa: E402
+from html import escape  # noqa: E402
+
+try:
+    import lxml  # noqa: F401
+    SOUP_PARSER = "lxml"
+except ImportError:      # pure-Python fallback: ~100x slower on this corpus
+    SOUP_PARSER = "html.parser"
+
+
+def sanitize_walk(node) -> str:
+    """dv_parse.sanitize_article_html's whitelist applied by walking the
+    ALREADY-PARSED tree — no re-parse. The original re-parsed every
+    paragraph through BeautifulSoup (500k+ soup builds over this corpus,
+    hours of CPU on the pure-Python parser); this emits directly."""
+    parts = []
+
+    def walk(n):
+        if isinstance(n, NavigableString):
+            parts.append(escape(str(n), quote=False))
+            return
+        if not isinstance(n, Tag):
+            return
+        name = (n.name or "").lower()
+        if name in dv_parse._HTML_DROP_TAGS:
+            return
+        keep = name in dv_parse._HTML_KEEP_TAGS and name != "a"
+        if keep:
+            attrs = ""
+            for k, v in n.attrs.items():
+                if k.lower() in dv_parse._HTML_KEEP_ATTRS:
+                    sv = " ".join(v) if isinstance(v, list) else str(v)
+                    attrs += f' {k.lower()}="{escape(sv)}"'
+            parts.append(f"<{name}{attrs}>")
+        for c in n.children:
+            walk(c)
+        if keep:
+            parts.append(f"</{name}>")
+
+    walk(node)
+    out = re.sub(r"\n{3,}", "\n\n", "".join(parts)).strip()
+    if len(out.encode("utf-8")) > dv_parse._HTML_MAX_BYTES:
+        return ""
+    if not re.search(r'class=|<(h[1-6]|strong|b|em|i|u|sup|sub|table)\b', out):
+        return ""
+    return out
 
 OUT_ROOT = Path("dge/data/darshana/vedanta/vishishtadvaita/RamanujaMeghamala")
 SOURCE_NOTE = (
@@ -186,7 +231,7 @@ def cache_file(cache: Path, url: str) -> Path:
 
 
 def parse_leaf(html_text: str, url: str):
-    soup = BeautifulSoup(html_text, "html.parser")
+    soup = BeautifulSoup(html_text, SOUP_PARSER)
     h1 = soup.select_one("h1")
     page_title = h1.get_text(" ", strip=True) if h1 else ""
     cont = soup.select_one(".entry-content") or soup.select_one("[class*=post-content]")
@@ -200,7 +245,9 @@ def parse_leaf(html_text: str, url: str):
             units.append(list(cur))
         cur, cur_len, cur_marked = [], 0, False
 
-    for p in cont.find_all(["p", "h2", "h3", "h4"]):
+    # "pre": exactly one page in the corpus (प्रपत्त्यनुपायत्व विचारः)
+    # keeps its whole text in <pre> blocks with no <p> at all
+    for p in cont.find_all(["p", "h2", "h3", "h4", "pre"]):
         text = p.get_text(" ", strip=True)
         if not text:
             continue
@@ -223,7 +270,7 @@ def parse_leaf(html_text: str, url: str):
     for group in units:
         text = "\n".join(p.get_text(" ", strip=True) for p in group)
         text = re.sub(r"[ \t]+", " ", text).strip()
-        src = "".join(sanitize_article_html(p) or "" for p in group)
+        src = "".join(sanitize_walk(p) or "" for p in group)
         m = MARKER.search(group[0].get_text(" ", strip=True))
         out.append({"text": text, "source_html": src,
                     "marker": m.group(0) if m else ""})
