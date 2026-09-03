@@ -59,7 +59,12 @@ LAYER_ALIASES = {
     "वाक्यार्थविवरणम्": "tika_vakyarthavivarana",
     "अभिनवचन्द्रिका": "tika_abhinavacandrika",
     "विवृतिः": "tika_vivritti",
-    "तत्त्वप्रकाशिकाभावबोधः": "tika_tattvaprakashikabhavabodha",
+    # the source titles Bhavabodha's sections on 2.1.1 and 2.3.1 with the
+    # fuller name; same author (Raghuttama-tirtha), same target (TP), and
+    # the short-titled layer has no units at those refs — one work, so one
+    # layer (the lead's 3 Sep 2026 report: an 8-unit chip that "shows
+    # nothing" because its refs sat in padas 2.1/2.3)
+    "तत्त्वप्रकाशिकाभावबोधः": "tika_bhavabodha",
     "भामती": "tika_bhamati",
 }
 LAYER_TITLES = {v: k for k, v in reversed(list(LAYER_ALIASES.items()))}

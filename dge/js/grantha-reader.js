@@ -6,7 +6,7 @@
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
   window.DGE_VERSIONS['grantha-reader.js'] =
-    'v1.1 (adhikarana navigation: filter select + section dividers from the sutra layer\'s adhikarana field · layer chips WRAP so every commentary is visible — the field report showed off-screen chips read as missing; v1.0: chain-depth chips, lazy layers, pada nav, #ref links)';
+    'v1.2 (3 Sep 2026 report: filterable sutra drawer (☰) grouped by adhikarana · per-card "sarvah vyakhyah" expansion loading every commentary for ONE sutra · chip double-click FOCUS shows only the refs a commentary actually glosses, auto-enabling its chain, jumping to its first pada when the current one is empty · ⚙ settings: what a sutra-list tap opens; v1.1: adhikarana select + dividers, wrapped chips; v1.0: chain-depth chips, lazy layers, pada nav, #ref links)';
 
   // v2 families available to this reader. Paths are relative to dge/.
   var REGISTRY = {
@@ -31,8 +31,21 @@
     loading: {},
     padas: [],                 // ["1.1", ...] from base layer
     pada: '', hlRef: '',
-    adhik: ''                  // '' = whole pada; else filter to one adhikarana
+    adhik: '',                 // '' = whole pada; else filter to one adhikarana
+    focus: '',                 // layer slug: show only refs this layer glosses
+    cardAll: {},               // ref -> 1: this card shows EVERY layer's units
+    drawer: false,
+    cfg: { tap: 'all' }        // tap: what a sutra-list tap / card ⊕ opens —
+                               // 'all' every commentary · 'chips' enabled only · 'off'
   };
+  function cfgKey() { return 'grantha2_cfg_' + state.work; }
+  function loadCfg() {
+    try {
+      var c = JSON.parse(localStorage.getItem(cfgKey()) || 'null');
+      if (c && c.tap) state.cfg = c;
+    } catch (e) {}
+  }
+  function saveCfg() { try { localStorage.setItem(cfgKey(), JSON.stringify(state.cfg)); } catch (e) {} }
 
   function $(s, r) { return (r || document).querySelector(s); }
   function esc(s) {
@@ -86,15 +99,68 @@
       var on = state.enabled.indexOf(L.slug) >= 0;
       var depth = state.depth[L.slug] || 0;
       return '<button data-layer="' + esc(L.slug) + '" class="' + (on ? 'on' : '') +
+        (state.focus === L.slug ? ' focus' : '') +
         ' d' + Math.min(depth, 3) + '" title="' + esc(L.author || '') +
-        (L.commentary_on ? ' · on ' + esc(L.commentary_on) : '') + '">' +
+        (L.commentary_on ? ' · on ' + esc(L.commentary_on) : '') +
+        ' · double-click: only this commentary\'s places">' +
         (depth ? '<span class="tw">' + '›'.repeat(depth) + '</span>' : '') +
         '<span lang="sa">' + esc(L.title) + '</span>' +
         '<span class="n">' + (L.units || '') + '</span></button>';
     }).join('');
     el.querySelectorAll('[data-layer]').forEach(function (b) {
-      b.onclick = function () { toggleLayer(b.dataset.layer); };
+      // single click toggles; double-click focuses. The toggle waits a beat
+      // so a double-tap does not fire it first.
+      var t = null;
+      b.onclick = function () {
+        clearTimeout(t);
+        t = setTimeout(function () { toggleLayer(b.dataset.layer); }, 260);
+      };
+      b.ondblclick = function (e) {
+        e.preventDefault(); clearTimeout(t);
+        toggleFocus(b.dataset.layer);
+      };
     });
+  }
+
+  // FOCUS: show only the refs one commentary actually glosses, with its
+  // whole chain (the lead's report: an 8-unit layer "shows nothing" — its
+  // few refs sat in another pada, and nothing said so)
+  function chainOf(slug) {
+    var by = {};
+    (state.wj.layers || []).forEach(function (L) { by[L.slug] = L; });
+    var out = [], cur = slug, seen = {};
+    while (cur && by[cur] && !seen[cur]) {
+      seen[cur] = 1; out.push(cur);
+      cur = cur === state.base ? '' : (by[cur].commentary_on || state.base);
+    }
+    if (out.indexOf(state.base) < 0) out.push(state.base);
+    return out;
+  }
+  function toggleFocus(slug) {
+    if (state.focus === slug || slug === state.base) {
+      state.focus = '';
+      renderChips(); renderNav(); renderPada();
+      if (slug !== state.base) toast('Focus cleared — full view');
+      return;
+    }
+    var chain = chainOf(slug);
+    toast('Loading ' + slug + ' with its chain…');
+    Promise.all(chain.map(fetchLayer)).then(function () {
+      chain.forEach(function (s) {
+        if (state.enabled.indexOf(s) < 0) state.enabled.push(s);
+      });
+      try { localStorage.setItem(lsKey(), JSON.stringify(state.enabled)); } catch (e) {}
+      state.focus = slug;
+      // land where the commentary actually is: first pada with units,
+      // if the current one has none
+      var L = state.loaded[slug];
+      var here = L.order.some(function (r) { return r.indexOf(state.pada + '.') === 0; });
+      if (!here && L.order.length) {
+        state.pada = L.order[0].split('.').slice(0, 2).join('.');
+        state.adhik = '';
+      }
+      renderChips(); renderNav(); renderPada(); window.scrollTo(0, 0);
+    }).catch(function (e) { toast(String(e.message || e)); });
   }
 
   function toggleLayer(slug) {
@@ -157,6 +223,8 @@
     asel.onchange = function () { state.adhik = asel.value; renderPada(); window.scrollTo(0, 0); };
     $('#g2Prev').onclick = function () { step(-1); };
     $('#g2Next').onclick = function () { step(1); };
+    $('#g2Drawer').onclick = function () { state.drawer = !state.drawer; renderDrawer(); };
+    $('#g2Cfg').onclick = openCfg;
     function step(d) {
       var i = state.padas.indexOf(state.pada) + d;
       if (i >= 0 && i < state.padas.length) gotoPada(state.padas[i]);
@@ -166,7 +234,7 @@
   function gotoPada(p, hlRef) {
     state.pada = p; state.hlRef = hlRef || '';
     state.adhik = '';            // a fresh pada starts unfiltered
-    renderNav(); renderPada();
+    renderNav(); renderPada(); renderDrawer();
     if (!hlRef) window.scrollTo(0, 0);
   }
 
@@ -174,6 +242,113 @@
   function unitsAt(slug, ref) {
     var L = state.loaded[slug];
     return (L && L.byRef[ref]) || [];
+  }
+  function layerMeta(slug) {
+    return (state.wj.layers || []).filter(function (L) { return L.slug === slug; })[0];
+  }
+
+  // one card, every commentary: fetch whatever is not here yet, then flip
+  function expandCard(ref) {
+    if (state.cardAll[ref]) {
+      delete state.cardAll[ref];
+      renderPada();
+      var el0 = document.getElementById('ref-' + ref);
+      if (el0) el0.scrollIntoView({ block: 'start' });
+      return;
+    }
+    var all = (state.wj.layers || []).map(function (L) { return L.slug; });
+    var todo = all.filter(function (s) { return !state.loaded[s]; });
+    if (todo.length) toast('Loading ' + todo.length + ' commentaries…');
+    Promise.all(all.map(fetchLayer)).then(function () {
+      state.cardAll[ref] = 1;
+      renderPada();
+      var el = document.getElementById('ref-' + ref);
+      if (el) el.scrollIntoView({ block: 'start' });
+      var n = all.filter(function (s) {
+        return s !== state.base && unitsAt(s, ref).length;
+      }).length;
+      toast(n + ' व्याख्याः अस्मिन् सूत्रे');
+    }).catch(function (e) { toast(String(e.message || e)); });
+  }
+
+  // ---- sutra drawer (☰): the pada's sutras, filterable, adhikarana-wise ----
+  function renderDrawer() {
+    var side = $('#g2Side');
+    side.hidden = !state.drawer;
+    $('#g2Drawer').classList.toggle('on', state.drawer);
+    if (!state.drawer) return;
+    var base = state.loaded[state.base];
+    if (!base) { side.innerHTML = ''; return; }
+    var refs = base.order.filter(function (r) { return r.indexOf(state.pada + '.') === 0; })
+      .sort(function (a, b) {
+        var ka = refKey(a), kb = refKey(b);
+        return ka[0] - kb[0] || ka[1] - kb[1] || ka[2] - kb[2];
+      });
+    var lastA = null;
+    side.innerHTML = '<div class="g2-side-head">' +
+      '<input id="g2SideFilter" type="search" placeholder="सूत्रं अन्विष्यताम् — text or 1.1.5" lang="sa">' +
+      '</div><div class="g2-side-list">' +
+      refs.map(function (ref) {
+        var bu = base.byRef[ref] || [];
+        var a = bu.map(function (u) { return u.adhikarana || ''; }).filter(Boolean)[0] || '';
+        var head = '';
+        if (a && a !== lastA) { lastA = a; head = '<div class="g2-side-adhik" lang="sa">' + esc(a) + '</div>'; }
+        var snip = (bu[0] ? bu[0].text : '').replace(/\s+/g, ' ').slice(0, 52);
+        return head + '<button data-goref="' + esc(ref) + '" data-t="' + esc(ref + ' ' + snip) + '">' +
+          '<span class="r">' + esc(ref) + '</span><span lang="sa">' + esc(snip) + '</span></button>';
+      }).join('') + '</div>';
+    var fi = $('#g2SideFilter');
+    fi.oninput = function () {
+      var q = fi.value.trim();
+      side.querySelectorAll('[data-goref]').forEach(function (b) {
+        b.hidden = q && b.dataset.t.indexOf(q) < 0;
+      });
+      // an adhikarana heading with every sutra under it hidden hides too
+      side.querySelectorAll('.g2-side-adhik').forEach(function (h) {
+        var n = h.nextElementSibling, any = false;
+        while (n && !n.classList.contains('g2-side-adhik')) {
+          if (!n.hidden) { any = true; break; }
+          n = n.nextElementSibling;
+        }
+        h.hidden = q && !any;
+      });
+    };
+    side.querySelectorAll('[data-goref]').forEach(function (b) {
+      b.onclick = function () {
+        var ref = b.dataset.goref;
+        state.hlRef = ref;
+        if (window.innerWidth < 1000) { state.drawer = false; renderDrawer(); }
+        if (state.cfg.tap === 'all' && !state.cardAll[ref]) expandCard(ref);
+        else {
+          renderPada();
+          var el = document.getElementById('ref-' + ref);
+          if (el) el.scrollIntoView({ block: 'start' });
+        }
+      };
+    });
+  }
+
+  // ---- ⚙ settings ----------------------------------------------------------
+  function openCfg() {
+    var dlg = $('#g2CfgDlg');
+    var opts = [
+      ['all', 'सर्वाः व्याख्याः — open every commentary on that sutra'],
+      ['chips', 'चयनिताः एव — just scroll; show the selected commentaries'],
+      ['off', 'न किमपि — scroll only, hide the ⊕ buttons']
+    ];
+    dlg.innerHTML = '<h4>ग्रन्थपाठकः · Settings</h4>' +
+      '<div class="g2-note">When a sutra is opened from the ☰ list:</div>' +
+      opts.map(function (o) {
+        return '<label class="g2-opt"><input type="radio" name="g2tap" value="' + o[0] + '"' +
+          (state.cfg.tap === o[0] ? ' checked' : '') + '> ' + esc(o[1]) + '</label>';
+      }).join('') +
+      '<div class="g2-note" style="margin-top:10px">Tips · double-click a commentary chip to see ONLY the places it comments on (its chain opens by itself) · ⊕ सर्वाः व्याख्याः on any sutra card opens everything for that one sutra.</div>' +
+      '<div class="g2-dlg-row"><button id="g2CfgClose">Close</button></div>';
+    dlg.querySelectorAll('[name=g2tap]').forEach(function (r) {
+      r.onchange = function () { state.cfg.tap = r.value; saveCfg(); renderPada(); };
+    });
+    $('#g2CfgClose').onclick = function () { dlg.close(); };
+    dlg.showModal();
   }
 
   function layerBlock(L, ref) {
@@ -215,8 +390,16 @@
       var ka = refKey(a), kb = refKey(b);
       return ka[0] - kb[0] || ka[1] - kb[1] || ka[2] - kb[2];
     });
+    var banner = '';
+    if (state.focus) {
+      refs = refs.filter(function (r) { return unitsAt(state.focus, r).length; });
+      var FL = layerMeta(state.focus);
+      banner = '<div class="g2-banner"><span lang="sa">' + esc(FL ? FL.title : state.focus) +
+        '</span> — तस्याः स्थानान्येव दृश्यन्ते (' + refs.length + ' अस्मिन् पादे)' +
+        '<button id="g2FocusOff">✕ full view</button></div>';
+    }
     var lastAdhik = null;
-    main.innerHTML = refs.map(function (ref) {
+    main.innerHTML = banner + refs.map(function (ref) {
       var bu = base.byRef[ref] || [];
       var adhik = bu.map(function (u) { return u.adhikarana || ''; }).filter(Boolean)[0] || '';
       if (state.adhik && adhik !== state.adhik) return '';
@@ -227,20 +410,41 @@
           '<span class="n">' + esc(ref) + '–</span></div>';
       }
       var topic = bu.map(function (u) { return u.topic || ''; }).filter(Boolean)[0];
+      var expanded = !!state.cardAll[ref];
+      // an expanded card shows EVERY layer that glosses this ref (loaded on
+      // demand); otherwise the globally enabled ones
+      var blocks = (expanded
+        ? (state.wj.layers || []).filter(function (L) { return L.slug !== state.base; })
+        : others);
+      var expBtn = state.cfg.tap === 'off' ? '' :
+        '<button class="g2-expbtn' + (expanded ? ' on' : '') + '" data-expand="' + esc(ref) +
+        '" title="' + (expanded ? 'Back to the selected commentaries' : 'Open every commentary on this sutra') + '" lang="sa">' +
+        (expanded ? '⊖ चयनिताः' : '⊕ सर्वाः व्याख्याः') + '</button>';
       return divider + '<article class="g2-card' + (ref === state.hlRef ? ' hl' : '') +
         '" id="ref-' + esc(ref) + '">' +
         '<header class="g2-chead"><span class="g2-ref">' + esc(ref) + '</span>' +
         (topic ? '<span class="g2-topic" lang="sa">' + esc(topic) + '</span>' : '') +
+        expBtn +
         '<button class="g2-linkbtn" data-reflink="' + esc(ref) + '" title="Copy link">🔗</button></header>' +
         (bu.length ? '<div class="g2-base" lang="sa">' + bu.map(function (u) {
           return esc(u.text).replace(/\n/g, '<br>');
         }).join('<br>') + '</div>' : '') +
-        others.map(function (L) { return layerBlock(L, ref); }).join('') +
+        blocks.map(function (L) { return layerBlock(L, ref); }).join('') +
         '</article>';
     }).join('') || '<div class="g2-empty">No units here.</div>';
     if (state.adhik && !main.querySelector('.g2-card')) {
       main.innerHTML = '<div class="g2-empty">इदम् अधिकरणम् अस्मिन् पादे नास्ति।</div>';
     }
+    if (state.focus && !refs.length) {
+      main.innerHTML = banner + '<div class="g2-empty">अस्मिन् पादे इयं व्याख्या नास्ति — ‹ › इति पादान्तरं पश्यतु।</div>';
+      var fo0 = $('#g2FocusOff'); if (fo0) fo0.onclick = function () { toggleFocus(state.focus); };
+      return;
+    }
+    var fo = $('#g2FocusOff');
+    if (fo) fo.onclick = function () { toggleFocus(state.focus); };
+    main.querySelectorAll('[data-expand]').forEach(function (b) {
+      b.onclick = function () { expandCard(b.dataset.expand); };
+    });
 
     main.querySelectorAll('[data-reflink]').forEach(function (b) {
       b.onclick = function () { copyLink('#ref=' + b.dataset.reflink); };
@@ -276,6 +480,7 @@
     if (!REGISTRY[w]) { pickWork(); return; }
     state.work = w;
     state.root = REGISTRY[w].path;
+    loadCfg();
     fetch(state.root + '/work.json')
       .then(function (r) { return r.json(); })
       .then(function (wj) {
@@ -287,6 +492,12 @@
         try {
           state.enabled = JSON.parse(localStorage.getItem(lsKey()) || 'null') || [];
         } catch (e) { state.enabled = []; }
+        // drop slugs the manifest no longer knows (a layer renamed or merged
+        // away, e.g. tattvaprakashikabhavabodha → bhavabodha) — a stale saved
+        // toggle must not 404 the whole boot
+        var valid = {};
+        (wj.layers || []).forEach(function (L) { valid[L.slug] = 1; });
+        state.enabled = state.enabled.filter(function (s) { return valid[s]; });
         if (!state.enabled.length) {
           // default view: the base text plus its first direct commentary
           state.enabled = [state.base];

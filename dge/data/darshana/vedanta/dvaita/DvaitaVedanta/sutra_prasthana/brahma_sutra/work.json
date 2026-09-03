@@ -48,7 +48,7 @@
    "slug": "tika_bhavabodha",
    "title": "भावबोधः",
    "author": "श्रीरघूत्तमतीर्थः",
-   "units": 1295,
+   "units": 1303,
    "commentary_on": "tika_tattvaprakashika"
   },
   {
@@ -85,13 +85,6 @@
    "author": "श्रीजयतीर्थः",
    "units": 742,
    "commentary_on": "bhashya"
-  },
-  {
-   "slug": "tika_tattvaprakashikabhavabodha",
-   "title": "तत्त्वप्रकाशिकाभावबोधः",
-   "author": "श्रीरघूत्तमतीर्थः",
-   "units": 8,
-   "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_tattvasubodhini",
