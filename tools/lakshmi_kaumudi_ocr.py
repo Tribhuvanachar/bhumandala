@@ -191,12 +191,16 @@ def main(argv=None):
         "generated": now_iso(),
         "counts": {c: sum(1 for b in blocks if b.get("classification") == c)
                    for c in ("accept", "review", "unresolved")},
+        # Real token burn for this run (Gemini usageMetadata) -- the project
+        # lead budgets prepaid credits from these numbers.
+        "usage": usage,
         "blocks": blocks,
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(staged, ensure_ascii=False, indent=1),
                         encoding="utf-8")
     print(f"staged {len(blocks)} block(s) -> {out_path}  {staged['counts']}")
+    print(f"gemini usage: {usage}")
     return 0
 
 

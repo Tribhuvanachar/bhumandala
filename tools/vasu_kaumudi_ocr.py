@@ -221,12 +221,17 @@ def main(argv=None):
         "generated": now_iso(),
         "counts": {c: sum(1 for e in entries if e.get("classification") == c)
                    for c in ("accept", "review", "unresolved")},
+        # Real token burn for this run, straight from Gemini's usageMetadata —
+        # the project lead budgets prepaid credits from these numbers, so
+        # every staged file must carry its own bill.
+        "usage": usage,
         "entries": entries,
     }
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(staged, ensure_ascii=False, indent=1),
                         encoding="utf-8")
     print(f"staged {len(entries)} entrie(s) -> {out_path}  {staged['counts']}")
+    print(f"gemini usage: {usage}")
     return 0
 
 
