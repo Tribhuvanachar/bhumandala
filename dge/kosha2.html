@@ -10,7 +10,7 @@
      the existing overlay; replaces it only after project-lead sign-off. -->
 <script src="js/vandana-guard.js"></script>
 <link rel="stylesheet" href="css/tokens.css">
-<link rel="stylesheet" href="css/kosha2.css">
+<link rel="stylesheet" href="css/kosha2.css?v=1.1">
 <script src="https://cdn.jsdelivr.net/npm/@indic-transliteration/sanscript@1.3.3/sanscript.js"
         onerror="this.onerror=null;var s=document.createElement('script');s.src='https://unpkg.com/@indic-transliteration/sanscript@1.3.3/sanscript.js';document.head.appendChild(s);"></script>
 <script src="js/config.js"></script>
@@ -34,15 +34,21 @@ window.KOSHA_RENDER_BASE = window.KOSHA_RENDER_BASE ||
     <button id="k2Clear" class="k2-clear" aria-label="Clear">×</button>
     <div id="k2Sug" class="k2-sug" role="listbox" hidden></div>
   </div>
+  <div class="k2-script" id="k2Script" role="group" aria-label="Display script" title="Display script">
+    <button data-script="deva" lang="sa">अ</button>
+    <button data-script="iast">A</button>
+    <button data-script="knda" lang="kn">ಅ</button>
+  </div>
   <div class="k2-mode" id="k2Mode" role="tablist">
     <button data-mode="search" class="active">Search</button>
     <button data-mode="browse">Browse</button>
   </div>
+  <button class="k2-iconbtn" id="k2Cfg" title="Settings — script, history, pins" aria-label="Settings">⚙</button>
   <a class="k2-iconbtn" href="index.html" title="Back to the library" style="display:grid;place-items:center;text-decoration:none">⌂</a>
 </div></div></div>
 <main class="k2-app" id="k2Main" aria-live="polite"></main>
 <div id="k2Pop" class="k2-pop" hidden></div>
 <div id="k2Toast" class="k2-toast" hidden></div>
-<script src="js/kosha2.js"></script>
+<script src="js/kosha2.js?v=1.1"></script>
 </body>
 </html>

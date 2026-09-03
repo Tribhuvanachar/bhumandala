@@ -174,13 +174,50 @@
   .k2-toast[hidden] { display: none; }
   .k2-note { font-size: 11px; color: var(--muted-text); }
 
+  /* display-script segmented control (deva | IAST | knda), in the header */
+  .k2-script { display: flex; border: 1px solid var(--card-border);
+    border-radius: 11px; overflow: hidden; height: 42px; flex: none; }
+  .k2-script button { width: 36px; border: 0; background: var(--card-bg);
+    color: var(--muted-text); font-size: 15px; cursor: pointer; }
+  .k2-script button + button { border-left: 1px solid var(--card-border); }
+  .k2-script button.active { background: var(--accent-gold);
+    color: var(--bg-main); font-weight: 700; }
+
+  /* kosha jump rail — one chip per dictionary, scrolls to its card */
+  .k2-jump { display: flex; gap: 6px; overflow-x: auto; padding: 0 0 8px;
+    scrollbar-width: none; }
+  .k2-jump::-webkit-scrollbar { display: none; }
+  .k2-jump button { white-space: nowrap; min-height: 30px; padding: 0 10px;
+    border: 1px dashed var(--card-border); border-radius: 999px;
+    background: transparent; color: var(--muted-text); font-size: 11.5px;
+    cursor: pointer; }
+  .k2-jump button:hover { color: var(--text-primary);
+    border-color: var(--accent-gold); }
+  .k2-card { scroll-margin-top: 66px; }
+
+  /* gender / pada-vibhaga consensus chips in the digest */
+  .k2-gender { display: flex; gap: 6px; flex-wrap: wrap; margin: 2px 0 4px; }
+  .k2-gchip { display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 9px; border-radius: 999px; font-size: 12px;
+    background: color-mix(in srgb, var(--accent-gold) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent-gold) 45%, transparent);
+    color: var(--text-primary); font-family: var(--font-sanskrit); }
+  .k2-gchip .n { font-size: 10px; opacity: .65; }
+
+  /* ⚙ sheet rows reuse the popover button grid; mark the active choice */
+  .k2-pop .row button.on { background: var(--accent-gold);
+    color: var(--bg-main); border-color: var(--accent-gold); }
+
   @media (max-width: 640px) {
     .k2-app { padding: 0 9px 56px; }
     .k2-hw { font-size: 36px; }
     .k2-cbody { padding-inline: 11px; }
+    .k2-top-in { flex-wrap: wrap; }
+    .k2-script { height: 38px; }
+    .k2-script button { width: 32px; }
   }
   @media print {
-    .k2-top, .k2-lens, .k2-cmenu, .k2-mode { display: none !important; }
+    .k2-top, .k2-lens, .k2-jump, .k2-cmenu, .k2-mode { display: none !important; }
     .k2-card { break-inside: avoid; }
   }
 }

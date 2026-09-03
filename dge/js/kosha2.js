@@ -17,7 +17,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha2.js'] = 'v0.9 (first full build of the results-v2 page)';
+  window.DGE_VERSIONS['kosha2.js'] = 'v1.0 (display-script switcher deva/IAST/knda · kosha jump rail · gender consensus in digest · 7 AI actions · ⚙ sheet with history/pins/hidden; v0.9: first full build of the results-v2 page)';
 
   var E = window.DGEKoshaEngine;
   var RENDER_BASE = (window.KOSHA_RENDER_BASE || '').replace(/\/+$/, '');
@@ -30,6 +30,8 @@
     lens: 'all',
     pins: lsGet('kosha2_pins', []), hidden: lsGet('kosha2_hidden', []),
     order: lsGet('kosha2_order', []),
+    script: lsGet('kosha2_script', 'deva'),   // 'deva' | 'iast' | 'knda'
+    history: lsGet('kosha2_history', []),
     browseDict: null, browsePage: 0, browseIndex: null,
     overrides: { visibility: {}, order: [], pins: [] },
     superadmin: false
@@ -42,6 +44,44 @@
   function $(s, r) { return (r || document).querySelector(s); }
   function toast(msg) { var t = $('#k2Toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(function () { t.hidden = true; }, 2100); }
   function fetchJson(url) { return fetch(url).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); }
+
+  // ---- display script (deva | iast | knda) -------------------------------
+  // Input already folds every script; this is the OUTPUT side: after each
+  // render, Devanagari runs in the results are transliterated in place.
+  // Text nodes only — markup, hit-highlights and handlers are untouched.
+  var DEVA_RUN = /[ऀ-ॿ][ऀ-ॿ‌‍]*/g;
+  var SCRIPT_TARGET = { iast: 'iast', knda: 'kannada' };
+  function xlitText(s) {
+    var tgt = SCRIPT_TARGET[state.script];
+    if (!tgt || !window.Sanscript) return s;
+    return s.replace(DEVA_RUN, function (run) {
+      try { return window.Sanscript.t(run, 'devanagari', tgt); } catch (e) { return run; }
+    });
+  }
+  function applyScript(root) {
+    if (state.script === 'deva' || !window.Sanscript || !root) return;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var node;
+    while ((node = walker.nextNode())) {
+      if (DEVA_RUN.test(node.nodeValue)) node.nodeValue = xlitText(node.nodeValue);
+      DEVA_RUN.lastIndex = 0;
+    }
+  }
+  function setScript(sc) {
+    state.script = sc; lsSet('kosha2_script', sc);
+    document.querySelectorAll('#k2Script button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.script === sc);
+    });
+    if (state.mode === 'browse' && state.browseDict) openBrowse(state.browseDict, state.browsePage);
+    else if (state.mode === 'browse') renderBrowsePicker();
+    else renderResults();
+  }
+
+  function pushHistory(hw) {
+    var h = state.history.filter(function (x) { return x !== hw; });
+    h.unshift(hw); state.history = h.slice(0, 25);
+    lsSet('kosha2_history', state.history);
+  }
 
   // ---- committed visibility tiers ----------------------------------------
   // public: everywhere · search_hidden: browse-only · unlisted: direct
@@ -160,6 +200,30 @@
     return out.slice(0, 8);
   }
 
+  // gender / part-of-speech consensus across the dictionaries' own tags
+  var POS_CANON = [
+    [/पुं|पुल्लिङ्ग|\bm\b|^m\.|पु०/, 'पुं.'],
+    [/स्त्री|\bf\b|^f\.|स्त्री०/, 'स्त्री.'],
+    [/क्ली|नपुं|\bn\b|^n\.|न०|क्ली०/, 'नपुं.'],
+    [/mfn|त्रि|त्रि०/, 'त्रि.'],
+    [/ind|अव्य/, 'अव्य.']
+  ];
+  function genderConsensus() {
+    var counts = {};
+    function feed(pos) {
+      if (!pos) return;
+      var s = String(pos);
+      POS_CANON.forEach(function (pc) { if (pc[0].test(s)) counts[pc[1]] = (counts[pc[1]] || 0) + 1; });
+    }
+    state.perDict.forEach(function (d) {
+      var er = state.enriched[d.slug];
+      if (er) er.forEach(function (rs) { feed(rs.pos); (rs.subs || []).forEach(function (x) { feed(x.pos); }); });
+      (d.items || []).forEach(function (it) { (it.senses || []).forEach(function (s) { feed(s.pos); }); });
+    });
+    return Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; })
+      .slice(0, 4).map(function (k) { return { g: k, n: counts[k] }; });
+  }
+
   function cardHtml(d) {
     var slug = d.slug, meta = d.meta || {};
     var pinned = state.pins.indexOf(slug) >= 0;
@@ -193,9 +257,13 @@
     var langs = {};
     state.perDict.forEach(function (d) { if (allowedAtAll(d.slug)) { var l = d.meta.gloss_language || '?'; langs[l] = (langs[l] || 0) + 1; } });
     var cons = consensus();
+    var gen = genderConsensus();
     var hero = '<section class="k2-digest"><div class="k2-kicker">Word at a glance</div>' +
       '<div class="k2-hw" lang="sa">' + esc(state.group.hw) + '</div>' +
       (state.group.slp ? '<div class="k2-roman">' + esc(state.group.slp) + '</div>' : '') +
+      (gen.length ? '<div class="k2-gender">' + gen.map(function (g) {
+        return '<span class="k2-gchip" title="' + g.n + ' senses">' + esc(g.g) + '<span class="n">' + g.n + '</span></span>';
+      }).join('') + '</div>' : '') +
       (cons.length ? '<div class="k2-consensus">' + cons.map(function (c) { return '<span lang="sa">' + markHits(esc(c)) + '</span>'; }).join('') + '</div>' : '') +
       '<div class="k2-digest-meta"><span>' + state.perDict.length + ' कोश</span>' +
       '<span>· <button class="k2-textbtn" id="k2CopyAll">Copy all</button> <button class="k2-textbtn" id="k2Share">Share</button></span></div></section>';
@@ -205,12 +273,19 @@
         var n = l === 'all' ? state.perDict.length : langs[l];
         return '<button class="' + (state.lens === l ? 'active' : '') + '" data-lens="' + esc(l) + '">' + esc(label) + ' <span class="n">' + n + '</span></button>';
       }).join('') + '</div>';
+    // jump rail: one chip per kosha, in display order, scrolls to its card
+    var jumpHtml = dicts.length > 1 ? '<div class="k2-jump">' + dicts.map(function (d) {
+      var nm = (d.meta.name || d.slug).replace(/\s*\(.*\)$/, '');
+      return '<button data-jump="' + esc(d.slug) + '">' +
+        (state.pins.indexOf(d.slug) >= 0 ? '★ ' : '') + esc(nm.slice(0, 26)) + '</button>';
+    }).join('') + '</div>' : '';
     var count = '<div class="k2-countline"><span>' + dicts.length + ' / ' + state.perDict.length + ' shown' +
       (state.hidden.length ? ' · ' + state.hidden.length + ' hidden by you' : '') + '</span>' +
       '<span class="k2-note">references are tappable · AI under ⋯</span></div>';
-    main.innerHTML = hero + lensHtml + count + dicts.map(cardHtml).join('') +
+    main.innerHTML = hero + lensHtml + jumpHtml + count + dicts.map(cardHtml).join('') +
       (dicts.length ? '' : '<div class="k2-empty">No dictionaries match this lens.</div>');
     bindResults();
+    applyScript(main);
   }
 
   // ---- browse mode --------------------------------------------------------
@@ -264,6 +339,7 @@
           $('#k2Main').querySelectorAll('[data-lookup]').forEach(function (b) {
             b.onclick = function () { setMode('search'); doLookup(b.dataset.lookup); };
           });
+          applyScript($('#k2Main'));
         });
       });
   }
@@ -272,6 +348,7 @@
   function popAt(anchor, html) {
     var pop = $('#k2Pop'), r = anchor.getBoundingClientRect();
     pop.innerHTML = html;
+    applyScript(pop);
     pop.hidden = false;
     var top = Math.min(window.innerHeight - pop.offsetHeight - 12, Math.max(60, r.bottom + 6));
     var left = Math.min(window.innerWidth - pop.offsetWidth - 10, Math.max(10, r.left));
@@ -304,10 +381,49 @@
   }
   function aiMenu(anchor, slug) {
     popAt(anchor, '<h4>AI · BYOK Gemini</h4><div class="row">' +
-      ['Explain simply', 'Etymology', 'Usage in texts', 'Translate to ಕನ್ನಡ', 'Translate to English']
+      ['Explain simply', 'Paninian analysis (sutras & derivation)', 'Etymology',
+       'Puranic context', 'Usage in texts', 'Translate to ಕನ್ನಡ', 'Translate to English']
         .map(function (a) { return '<button data-ai="' + esc(a) + '" data-slug="' + esc(slug) + '">' + esc(a) + '</button>'; }).join('') +
       '</div><div class="k2-note" style="margin-top:6px">Uses your own Gemini key (⚙ Settings in the reader).</div>');
   }
+  // ---- ⚙ sheet: everything that is not content lives here -----------------
+  function dictName(slug) {
+    var d = state.perDict.filter(function (x) { return x.slug === slug; })[0];
+    return d ? (d.meta.name || slug) : slug;
+  }
+  function cfgSheet(anchor) {
+    var hist = state.history.slice(0, 10);
+    var html = '<h4>कोश · Settings</h4>' +
+      '<div class="k2-note">Display script</div><div class="row">' +
+      [['deva', 'देवनागरी'], ['iast', 'IAST'], ['knda', 'ಕನ್ನಡ']].map(function (p) {
+        return '<button data-cscript="' + p[0] + '"' + (state.script === p[0] ? ' class="on"' : '') + '>' + p[1] + '</button>';
+      }).join('') + '</div>' +
+      (hist.length ? '<div class="k2-note" style="margin-top:8px">Recent lookups</div><div class="row">' +
+        hist.map(function (h) { return '<button data-hist="' + esc(h) + '" lang="sa">' + esc(h) + '</button>'; }).join('') +
+        '<button data-histclear="1" title="Clear history">✕ clear</button></div>' : '') +
+      (state.pins.length ? '<div class="k2-note" style="margin-top:8px">Pinned to top</div><div class="row">' +
+        state.pins.map(function (s) { return '<button data-unpin="' + esc(s) + '" title="Unpin">★ ' + esc(dictName(s)).slice(0, 24) + ' ✕</button>'; }).join('') + '</div>' : '') +
+      (state.hidden.length ? '<div class="k2-note" style="margin-top:8px">Hidden by you</div><div class="row">' +
+        state.hidden.map(function (s) { return '<button data-unhide="' + esc(s) + '" title="Show again">🙈 ' + esc(dictName(s)).slice(0, 24) + ' ✕</button>'; }).join('') + '</div>' : '') +
+      (state.superadmin ? '<div class="k2-note" style="margin-top:8px"><a href="../admin/kosha.html" style="color:inherit">Kosha Manager → committed tiers & pins</a></div>' : '');
+    popAt(anchor, html);
+    var pop = $('#k2Pop');
+    pop.querySelectorAll('[data-cscript]').forEach(function (b) {
+      b.onclick = function () { setScript(b.dataset.cscript); closePop(); };
+    });
+    pop.querySelectorAll('[data-hist]').forEach(function (b) {
+      b.onclick = function () { closePop(); setMode('search'); doLookup(b.dataset.hist); };
+    });
+    var hc = pop.querySelector('[data-histclear]');
+    if (hc) hc.onclick = function () { state.history = []; lsSet('kosha2_history', []); closePop(); toast('History cleared'); };
+    pop.querySelectorAll('[data-unpin]').forEach(function (b) {
+      b.onclick = function () { togglePin(b.dataset.unpin); closePop(); };
+    });
+    pop.querySelectorAll('[data-unhide]').forEach(function (b) {
+      b.onclick = function () { toggleHide(b.dataset.unhide); closePop(); };
+    });
+  }
+
   function runAi(slug, action) {
     var d = state.perDict.filter(function (x) { return x.slug === slug; })[0];
     var gloss = d ? (d.items || []).map(function (it) { return (it.senses || []).map(function (s) { return s.gloss; }).join('\n'); }).join('\n') : '';
@@ -358,6 +474,12 @@
     $('#k2Main').querySelectorAll('.k2-syn[data-lookup]').forEach(function (b) {
       b.onclick = function () { doLookup(b.dataset.lookup); };
     });
+    $('#k2Main').querySelectorAll('[data-jump]').forEach(function (b) {
+      b.onclick = function () {
+        var el = $('#k2c-' + CSS.escape(b.dataset.jump));
+        if (el) el.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      };
+    });
     var ca = $('#k2CopyAll'); if (ca) ca.onclick = function () { copyText(pageText(), 'All results copied'); };
     var sh = $('#k2Share'); if (sh) sh.onclick = function () {
       var url = location.href.split('#')[0] + '#word=' + encodeURIComponent(state.group.hw);
@@ -406,6 +528,7 @@
       if (!r.list.length) { state.group = null; $('#k2Main').innerHTML = '<div class="k2-empty">No headword found for “' + esc(word) + '”.</div>'; return; }
       var g = r.list[0];
       state.group = { hw: g.hw, slp: Object.keys(g.slps || {})[0] || '', raw: g };
+      pushHistory(g.hw);
       history.replaceState(null, '', '#word=' + encodeURIComponent(g.hw));
       E.loadEntry(g).then(function (perDict) {
         if (mine !== seq) return;
@@ -429,11 +552,12 @@
     });
   }
 
+  var sugSeq = 0;   // bumped by Enter/blur so a late debounce can't re-open
   function renderSug(q) {
-    var box = $('#k2Sug');
+    var box = $('#k2Sug'), mySeq = sugSeq;
     if (!q.trim()) { box.hidden = true; return; }
     E.search(q).then(function (r) {
-      if ($('#k2Input').value !== q) return;
+      if (mySeq !== sugSeq || $('#k2Input').value !== q) return;
       if (!r.list.length) { box.innerHTML = '<div class="k2-empty" style="padding:14px">No matches yet…</div>'; box.hidden = false; return; }
       box.innerHTML = r.list.slice(0, 9).map(function (g) {
         return '<button data-key="' + esc(g.hw) + '"><span class="w" lang="sa">' + esc(g.hw) + '</span>' +
@@ -461,9 +585,21 @@
       if (ov) state.overrides = Object.assign(state.overrides, ov);
       var input = $('#k2Input'), t;
       input.oninput = function () { clearTimeout(t); var q = input.value; t = setTimeout(function () { renderSug(q); }, 140); };
-      input.onkeydown = function (e) { if (e.key === 'Enter') { var first = $('#k2Sug [data-key]'); if (first) doLookup(first.dataset.key); else doLookup(input.value); } if (e.key === 'Escape') $('#k2Sug').hidden = true; };
+      input.onkeydown = function (e) {
+        if (e.key === 'Enter') { clearTimeout(t); sugSeq++; var first = $('#k2Sug [data-key]'); if (first) doLookup(first.dataset.key); else doLookup(input.value); }
+        if (e.key === 'Escape') { clearTimeout(t); sugSeq++; $('#k2Sug').hidden = true; }
+      };
+      // tapping anywhere in the results must not leave suggestions floating
+      input.addEventListener('blur', function () {
+        setTimeout(function () { sugSeq++; $('#k2Sug').hidden = true; }, 160);
+      });
       $('#k2Clear').onclick = function () { input.value = ''; $('#k2Sug').hidden = true; input.focus(); };
       document.querySelectorAll('#k2Mode button').forEach(function (b) { b.onclick = function () { setMode(b.dataset.mode); }; });
+      document.querySelectorAll('#k2Script button').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.script === state.script);
+        b.onclick = function () { setScript(b.dataset.script); };
+      });
+      var cfg = $('#k2Cfg'); if (cfg) cfg.onclick = function (e) { e.stopPropagation(); cfgSheet(cfg); };
       var m = location.hash.match(/word=([^&]+)/);
       var k = location.hash.match(/kosha=([^&]+)/);
       var br = location.search.match(/[?&]browse=([^&]+)/);
