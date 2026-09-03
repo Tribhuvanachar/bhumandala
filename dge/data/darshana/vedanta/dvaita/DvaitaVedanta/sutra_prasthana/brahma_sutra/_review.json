@@ -104,50 +104,6 @@
    "kind": "hole_collapsed",
    "pada": "4.2",
    "at": 17
-  },
-  {
-   "kind": "commentary_chain_unverified",
-   "layer": "tika_abhinavacandrika"
-  },
-  {
-   "kind": "commentary_chain_unverified",
-   "layer": "tika_bhavabodha"
-  },
-  {
-   "kind": "commentary_chain_unverified",
-   "layer": "tika_bhavadipa"
-  },
-  {
-   "kind": "commentary_chain_unverified",
-   "layer": "tika_gurvarthadipika"
-  },
-  {
-   "kind": "commentary_chain_unverified",
-   "layer": "tika_sattarkadipavali"
-  },
-  {
-   "kind": "commentary_chain_unverified",
-   "layer": "tika_tattvaprakashikabhavabodha"
-  },
-  {
-   "kind": "commentary_chain_unverified",
-   "layer": "tika_tattvasubodhini"
-  },
-  {
-   "kind": "commentary_chain_unverified",
-   "layer": "tika_vakyarthamanjari"
-  },
-  {
-   "kind": "commentary_chain_unverified",
-   "layer": "tika_vakyarthamuktavali"
-  },
-  {
-   "kind": "commentary_chain_unverified",
-   "layer": "tika_vakyarthavivarana"
-  },
-  {
-   "kind": "commentary_chain_unverified",
-   "layer": "tika_vivritti"
   }
  ]
 }

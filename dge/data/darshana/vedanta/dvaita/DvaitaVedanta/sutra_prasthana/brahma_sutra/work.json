@@ -3,6 +3,7 @@
  "work": "brahma_sutra",
  "title": "ब्रह्मसूत्रम् (माध्वभाष्यादिसहितम्)",
  "ref_scheme": "adhyaya.pada.sutra",
+ "review_status": "sutrapatha (all 564 sutras, positions and readings) and commentary chains confirmed by a traditional scholar, 3 Sep 2026 — tools/reports/bs_scholar_sheet_filled.md. Patha-bheda vs the Shankara patha: ashuddham-iti (Sh 3.1.25) and antara-bhutagramavat-svatmanah (Sh 3.3.35) absent; Sh 4.4.19 read and divided differently as our 4.4.20-21. Vivritti's author remains unidentified.",
  "layers": [
   {
    "slug": "sutra",
@@ -20,37 +21,37 @@
   {
    "slug": "tika_abhinavacandrika",
    "title": "अभिनवचन्द्रिका",
-   "author": "",
+   "author": "श्रीसत्यनाथतीर्थः",
    "units": 1214,
-   "commentary_on": ""
+   "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_bhavabodha",
    "title": "भावबोधः",
-   "author": "",
+   "author": "श्रीरघूत्तमतीर्थः",
    "units": 1289,
-   "commentary_on": ""
+   "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_bhavadipa",
    "title": "भावदीपः",
    "author": "श्रीराघवेन्द्रतीर्थः",
    "units": 1026,
-   "commentary_on": ""
+   "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_gurvarthadipika",
    "title": "गुर्वर्थदीपिका",
-   "author": "श्रीराघवेन्द्रतीर्थः",
+   "author": "श्रीवादिराजतीर्थः",
    "units": 491,
-   "commentary_on": ""
+   "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_sattarkadipavali",
    "title": "सत्तर्कदीपावली",
-   "author": "श्रीव्यासतीर्थः",
+   "author": "श्रीपद्मनाभतीर्थः",
    "units": 245,
-   "commentary_on": ""
+   "commentary_on": "bhashya"
   },
   {
    "slug": "tika_tattvapradipika",
@@ -69,44 +70,44 @@
   {
    "slug": "tika_tattvaprakashikabhavabodha",
    "title": "तत्त्वप्रकाशिकाभावबोधः",
-   "author": "श्रीरघूत्तमतीर्थविरचितः",
+   "author": "श्रीरघूत्तमतीर्थः",
    "units": 8,
-   "commentary_on": ""
+   "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_tattvasubodhini",
    "title": "तत्त्वसुबोधिनी",
-   "author": "",
+   "author": "पाण्डुरङ्गि-श्रीनिवासाचार्यः",
    "units": 658,
-   "commentary_on": ""
+   "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_vakyarthamanjari",
    "title": "वाक्यार्थमञ्जरी",
-   "author": "",
+   "author": "शर्करा-श्रीनिवासतीर्थः",
    "units": 932,
-   "commentary_on": ""
+   "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_vakyarthamuktavali",
    "title": "वाक्यार्थमुक्तावली",
-   "author": "",
+   "author": "ताम्रपर्णी-श्रीनिवासाचार्यः",
    "units": 1144,
-   "commentary_on": ""
+   "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_vakyarthavivarana",
    "title": "वाक्यार्थविवरणम्",
-   "author": "",
+   "author": "बिदरहळ्ळि-श्रीनिवासतीर्थः",
    "units": 544,
-   "commentary_on": ""
+   "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_vivritti",
    "title": "विवृतिः",
    "author": "",
    "units": 66,
-   "commentary_on": ""
+   "commentary_on": "tika_tattvaprakashika"
   }
  ],
  "licence_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",

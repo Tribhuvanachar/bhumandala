@@ -66,12 +66,42 @@ LAYER_TITLES = {v: k for k, v in reversed(list(LAYER_ALIASES.items()))}
 LAYER_TITLES["bhashya"] = "सूत्रभाष्यम्"
 LAYER_TITLES["tika_tattvaprakashika"] = "तत्त्वप्रकाशिका"
 
-# Chains stated only where the tradition is unambiguous; everything else
-# is left "" and listed in _review.json for the lead to settle.
+# Commentary chains and authors as CONFIRMED by the traditional scholar,
+# 3 Sep 2026 (tools/reports/bs_scholar_sheet_filled.md). Everything except
+# the Sattarkadipavali (Padmanabha Tirtha — Madhva's direct disciple, so
+# necessarily on the bhashya itself) comments on the Tattvaprakashika.
 COMMENTARY_ON = {
     "bhashya": "sutra",
     "tika_tattvaprakashika": "bhashya",     # Jayatirtha on the bhashya
     "tika_tattvapradipika": "bhashya",      # Trivikrama Pandita on the bhashya
+    "tika_sattarkadipavali": "bhashya",
+    "tika_abhinavacandrika": "tika_tattvaprakashika",
+    "tika_bhavabodha": "tika_tattvaprakashika",
+    "tika_bhavadipa": "tika_tattvaprakashika",
+    "tika_gurvarthadipika": "tika_tattvaprakashika",
+    "tika_tattvaprakashikabhavabodha": "tika_tattvaprakashika",
+    "tika_tattvasubodhini": "tika_tattvaprakashika",
+    "tika_vakyarthamanjari": "tika_tattvaprakashika",
+    "tika_vakyarthamuktavali": "tika_tattvaprakashika",
+    "tika_vakyarthavivarana": "tika_tattvaprakashika",
+    "tika_vivritti": "tika_tattvaprakashika",
+    "tika_bhamati": "",                     # stray quoted heading; unplaced
+}
+
+# Scholar-confirmed authors — these OVERRIDE the legacy default_author
+# fields (which had Gurvarthadipika under Raghavendra and Sattarkadipavali
+# under Vyasatirtha; both corrected by the scholar).
+SCHOLAR_AUTHORS = {
+    "tika_abhinavacandrika": "श्रीसत्यनाथतीर्थः",
+    "tika_bhavabodha": "श्रीरघूत्तमतीर्थः",
+    "tika_bhavadipa": "श्रीराघवेन्द्रतीर्थः",
+    "tika_gurvarthadipika": "श्रीवादिराजतीर्थः",
+    "tika_sattarkadipavali": "श्रीपद्मनाभतीर्थः",
+    "tika_tattvaprakashikabhavabodha": "श्रीरघूत्तमतीर्थः",
+    "tika_tattvasubodhini": "पाण्डुरङ्गि-श्रीनिवासाचार्यः",
+    "tika_vakyarthamanjari": "शर्करा-श्रीनिवासतीर्थः",
+    "tika_vakyarthamuktavali": "ताम्रपर्णी-श्रीनिवासाचार्यः",
+    "tika_vakyarthavivarana": "बिदरहळ्ळि-श्रीनिवासतीर्थः",
 }
 
 ADHYAYA = {"प्रथमाध्यायः": 1, "द्वितीयोऽध्यायः": 2, "तृतीयाध्यायः": 3,
@@ -208,6 +238,9 @@ def main() -> int:
         text = clean(text)
         text = re.sub(r"^ॐ\s*|\s*ॐ$", "", text)
         text = re.sub(r"[।॥|]+\s*[०-९0-9]*\s*[।॥|]*\s*$", "", text).strip()
+        # a layer label glued to the sutra line (seen at 4.4.20) is an
+        # extraction artifact, never part of the sutra
+        text = re.sub(r"\s*(सूत्रभाष्यम्|तत्त्वप्रकाशिका)\s*$", "", text).strip()
         # the flow restates the current sutra constantly (article titles,
         # chunk headers) — only a genuinely NEW sutra advances the ref.
         # Deliberately NOT pada-wide: short sutras (darshanAchcha etc.)
@@ -475,8 +508,10 @@ def main() -> int:
         if not units:
             continue
         author = {"sutra": "बादरायणः",
-                  "bhashya": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः"}.get(
-            slug, tika_authors.get(slug, ""))
+                  "bhashya": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+                  "tika_tattvaprakashika": "श्रीजयतीर्थः",
+                  "tika_tattvapradipika": "श्रीत्रिविक्रमपण्डिताचार्यः"}.get(
+            slug) or SCHOLAR_AUTHORS.get(slug) or tika_authors.get(slug, "")
         entry = {"slug": slug,
                  "title": LAYER_TITLES.get(slug, slug),
                  "author": author,
@@ -500,6 +535,14 @@ def main() -> int:
         "work": "brahma_sutra",
         "title": "ब्रह्मसूत्रम् (माध्वभाष्यादिसहितम्)",
         "ref_scheme": "adhyaya.pada.sutra",
+        "review_status": "sutrapatha (all 564 sutras, positions and readings) "
+                         "and commentary chains confirmed by a traditional "
+                         "scholar, 3 Sep 2026 — tools/reports/"
+                         "bs_scholar_sheet_filled.md. Patha-bheda vs the "
+                         "Shankara patha: ashuddham-iti (Sh 3.1.25) and "
+                         "antara-bhutagramavat-svatmanah (Sh 3.3.35) absent; "
+                         "Sh 4.4.19 read and divided differently as our "
+                         "4.4.20-21. Vivritti's author remains unidentified.",
         "layers": work_layers,
         "licence_note": src_meta,
         "generated_by": "tools/compile_grantha_v2.py",
