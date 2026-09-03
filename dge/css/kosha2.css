@@ -133,6 +133,11 @@
     color: inherit; border-radius: 3px; padding: 0 1px; }
 
   /* browse mode */
+  .k2-pickfilter { width: 100%; box-sizing: border-box; margin: 10px 0 2px;
+    min-height: 40px; padding: 6px 12px; border: 1px solid var(--card-border);
+    border-radius: 11px; background: var(--card-bg); color: var(--text-primary);
+    font-family: var(--font-ui); font-size: 14px; }
+  .k2-pickfilter:focus { outline: none; border-color: var(--accent-gold); }
   .k2-browse-pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr));
     gap: 9px; margin-top: 12px; }
   .k2-browse-pick button { text-align: left; padding: 12px; border: 1px solid var(--card-border);

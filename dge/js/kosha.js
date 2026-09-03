@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha.js'] = 'v1.9 (the अब्ज/Śabdārthakaustubha report, 1 Sep 2026: pinned-but-hidden dictionaries now show a Show strip + hidden state/toggle in the pin panel instead of silently vanishing; the toolbar count says how many are hidden; failed shard fetches are no longer cached for the session (404s still are); %-named shard files are URI-encoded so bhutasankhya-kp-shukla\'s Devanagari-digit buckets fetch instead of 400ing; SAK joins the always-link sūtra list for its hyphenated निष्पत्तिः citations. On top of v1.8)';
+  window.DGE_VERSIONS['kosha.js'] = 'v2.0 (आशितृ report, 3 Sep 2026: a failed index-shard fetch is retried once and then reported — empty-with-failures rejects so the UI says the index was unreachable instead of the false "No headword found"; partial results carry a degraded list. On top of v1.9) · v1.9 (the अब्ज/Śabdārthakaustubha report, 1 Sep 2026: pinned-but-hidden dictionaries now show a Show strip + hidden state/toggle in the pin panel instead of silently vanishing; the toolbar count says how many are hidden; failed shard fetches are no longer cached for the session (404s still are); %-named shard files are URI-encoded so bhutasankhya-kp-shukla\'s Devanagari-digit buckets fetch instead of 400ing; SAK joins the always-link sūtra list for its hyphenated निष्पत्तिः citations. On top of v1.8)';
 
   // Citation-form normalizer: strip a trailing visarga (H) / anusvara (M) from
   // an SLP1 headword so dictionaries that cite the nominative (रामः = rAmaH) or
@@ -237,6 +237,20 @@
         if (!need.length) return { list: [], exact: false, q: query };
         return Promise.all(need.map(function (b) { return j(BASE + '/_index/' + safeBucket(b) + '.json'); }))
           .then(function (shards) {
+            // Every needed bucket comes from the manifest, so a null here is
+            // a FAILED FETCH, not an empty shard. Retry the misses once (j()
+            // does not cache failures), because the worst outcome is silent:
+            // the app used to answer "No headword found" for every word in a
+            // bucket whose one file the CDN edge happened to be failing —
+            // the आशितृ report, 3 Sep 2026.
+            var missing = need.filter(function (b, i) { return !shards[i]; });
+            if (!missing.length) return shards;
+            return Promise.all(need.map(function (b, i) {
+              return shards[i] || j(BASE + '/_index/' + safeBucket(b) + '.json');
+            }));
+          })
+          .then(function (shards) {
+            var failed = need.filter(function (b, i) { return !shards[i]; });
             var byFold = {};
             shards.forEach(function (sh) {
               if (!sh) return;
@@ -298,8 +312,16 @@
               if (ya !== yb) return ya - yb;
               return a.hw.length - b.hw.length || a.hw.localeCompare(b.hw);
             });
+            // Honesty about failed shards: with no results at all this is an
+            // infrastructure failure, not "no such word" — reject so the UI
+            // shows its could-not-reach message. With partial results, let
+            // the caller add a degraded note.
+            if (failed.length && !arr.length) {
+              throw new Error('index shard unreachable (' + failed.join(', ') + ')');
+            }
             return { list: arr.slice(0, 60), exact: arr.some(function (g) { return g.exactSLP1; }),
-                     q: query, truncated: truncated };
+                     q: query, truncated: truncated,
+                     degraded: failed.length ? failed : null };
           });
       });
   }

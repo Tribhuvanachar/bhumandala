@@ -17,7 +17,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha2.js'] = 'v1.1 (mobile: search input owns its own header row; browse: tap feedback + loading states + alphabet rail grouped by first akshara instead of one button per page; search-failure message; corpus pinned by dist SHA in config.js; v1.0: script switcher, jump rail, gender digest, 7 AI actions, settings sheet)';
+  window.DGE_VERSIONS['kosha2.js'] = 'v1.3 (3 Sep 2026 report: kosha order preference — Default/A–Z/Z–A/My order in ⚙ Settings, Move up / Move to top in each card menu, persisted in localStorage; browse picker gains a name filter; the alphabet rail sorts in varnamala order instead of page-encounter order; degraded-index toast + suggestion catch on top of kosha.js v2.0 shard honesty) · v1.1 (mobile: search input owns its own header row; browse: tap feedback + loading states + alphabet rail grouped by first akshara instead of one button per page; search-failure message; corpus pinned by dist SHA in config.js; v1.0: script switcher, jump rail, gender digest, 7 AI actions, settings sheet)';
 
   var E = window.DGEKoshaEngine;
   var RENDER_BASE = (window.KOSHA_RENDER_BASE || '').replace(/\/+$/, '');
@@ -30,6 +30,7 @@
     lens: 'all',
     pins: lsGet('kosha2_pins', []), hidden: lsGet('kosha2_hidden', []),
     order: lsGet('kosha2_order', []),
+    sortmode: lsGet('kosha2_sortmode', 'curated'),   // curated | az | za | custom
     script: lsGet('kosha2_script', 'deva'),   // 'deva' | 'iast' | 'knda'
     history: lsGet('kosha2_history', []),
     browseDict: null, browsePage: 0, browseIndex: null,
@@ -179,12 +180,48 @@
     var arr = state.perDict.filter(function (d) { return allowedAtAll(d.slug); });
     if (state.lens !== 'all') arr = arr.filter(function (d) { return (d.meta.gloss_language || '') === state.lens; });
     arr = arr.filter(function (d) { return state.hidden.indexOf(d.slug) < 0; });
+    // pins always lead; below them the user's chosen sort mode decides:
+    // curated (site default), A–Z / Z–A by kosha name, or the user's own
+    // hand-arranged order (built from the card menu's Move up / Move to top)
     var rank = {};
-    var seq = state.pins.concat(state.overrides.pins || [], state.order,
-                                (state.overrides.order || []));
+    // the user's own pins always lead. Below them, THEIR chosen mode wins:
+    // an explicit A–Z / hand-arranged order outranks the site's committed
+    // pins/order — those apply only in the curated default (and as the
+    // fallback tail of a custom order).
+    var seq = state.pins.slice();
+    if (state.sortmode === 'custom') seq = seq.concat(state.order);
+    if (state.sortmode === 'curated' || state.sortmode === 'custom') {
+      seq = seq.concat(state.overrides.pins || [], state.overrides.order || []);
+    }
     seq.forEach(function (s, i) { if (!(s in rank)) rank[s] = i; });
-    arr.sort(function (a, b) { return (rank[a.slug] !== undefined ? rank[a.slug] : 999) - (rank[b.slug] !== undefined ? rank[b.slug] : 999); });
+    var name = function (d) { return String(d.meta.name || d.slug); };
+    arr.sort(function (a, b) {
+      var ra = rank[a.slug] !== undefined ? rank[a.slug] : 999;
+      var rb = rank[b.slug] !== undefined ? rank[b.slug] : 999;
+      if (ra !== rb) return ra - rb;
+      var na = name(a), nb = name(b);
+      if (state.sortmode === 'az') return na < nb ? -1 : na > nb ? 1 : 0;
+      if (state.sortmode === 'za') return na > nb ? -1 : na < nb ? 1 : 0;
+      return 0;
+    });
     return arr;
+  }
+  function setSortmode(m) {
+    state.sortmode = m; lsSet('kosha2_sortmode', m);
+    if (state.mode === 'search') renderResults();
+  }
+  function moveDict(slug, toTop) {
+    // capture today's visible order, then move — so the first customization
+    // starts from what the user is looking at, not from an empty list
+    var cur = orderedDicts().map(function (d) { return d.slug; });
+    var i = cur.indexOf(slug);
+    if (i < 0) return;
+    cur.splice(i, 1);
+    cur.splice(toTop ? 0 : Math.max(0, i - 1), 0, slug);
+    state.order = cur;
+    state.sortmode = 'custom';
+    lsSet('kosha2_order', state.order); lsSet('kosha2_sortmode', 'custom');
+    renderResults(); toast(toTop ? 'Moved to top — saved as your order' : 'Moved up — saved as your order');
   }
 
   function consensus() {
@@ -299,6 +336,8 @@
           esc(LANG_NAME[d.gloss_language] || d.gloss_language || '') + ' · ' + (d.headwords || '?') + ' headwords</span></button>';
       }).join('');
       main.innerHTML = '<div class="k2-countline" style="padding-top:12px"><span>Open a kosha and read it in order</span></div>' +
+        '<input class="k2-pickfilter" id="k2PickFilter" type="search" ' +
+        'placeholder="Filter koshas by name…" aria-label="Filter koshas">' +
         '<div class="k2-browse-pick">' + items + '</div>';
       main.querySelectorAll('[data-browse]').forEach(function (b) {
         b.onclick = function () {
@@ -306,6 +345,14 @@
           openBrowse(b.dataset.browse, 0);
         };
       });
+      var pf = $('#k2PickFilter');
+      pf.oninput = function () {
+        var q = pf.value.trim().toLowerCase();
+        main.querySelectorAll('[data-browse]').forEach(function (b) {
+          b.hidden = q && b.textContent.toLowerCase().indexOf(q) < 0 &&
+                     b.dataset.browse.indexOf(q) < 0;
+        });
+      };
     });
   }
   function openBrowse(slug, page) {
@@ -336,8 +383,17 @@
             var ch = String(w).replace(/^[\s'‘"–-]+/, '').slice(0, 1);
             if (!seenCh[ch]) { seenCh[ch] = 1; groups.push({ ch: ch, page: i }); }
           });
-          var curGroup = -1;
-          groups.forEach(function (g, gi) { if (g.page <= page) curGroup = gi; });
+          // rail chips in alphabet order, not page-encounter order — some
+          // sources are not strictly sorted, and the encounter order read
+          // as a jumbled alphabet (the आ भ ध… report, 3 Sep 2026). Unicode
+          // order IS varnamala order within Devanagari (and A–Z for Latin).
+          groups.sort(function (a, b) { return a.ch < b.ch ? -1 : a.ch > b.ch ? 1 : 0; });
+          // highlight the chip whose section the current page sits in,
+          // by page distance (chips no longer ascend by page)
+          var curGroup = -1, best = -1;
+          groups.forEach(function (g, gi) {
+            if (g.page <= page && g.page >= best) { best = g.page; curGroup = gi; }
+          });
           var alpha = groups.map(function (g, gi) {
             return '<button class="' + (gi === curGroup ? 'active' : '') +
               '" data-bpage="' + g.page + '" title="from page ' + (g.page + 1) +
@@ -398,8 +454,10 @@
       '<button data-act="link" data-slug="' + esc(slug) + '">🔗 Copy link to this card</button>' +
       '<button data-act="pin" data-slug="' + esc(slug) + '">' + (pinned ? '☆ Unpin' : '★ Pin to top') + '</button>' +
       '<button data-act="hide" data-slug="' + esc(slug) + '">' + (hidden ? '👁 Show' : '🙈 Hide for me') + '</button>' +
+      '<button data-act="up" data-slug="' + esc(slug) + '">⬆ Move up</button>' +
+      '<button data-act="top" data-slug="' + esc(slug) + '">⇱ Move to top</button>' +
       '<button data-act="ai" data-slug="' + esc(slug) + '">✦ Ask AI about this entry…</button>' +
-      '</div>');
+      '</div><div class="k2-note" style="margin-top:6px">Moves are remembered as “My order” (⚙ Settings).</div>');
   }
   function aiMenu(anchor, slug) {
     popAt(anchor, '<h4>AI · BYOK Gemini</h4><div class="row">' +
@@ -420,6 +478,14 @@
       [['deva', 'देवनागरी'], ['iast', 'IAST'], ['knda', 'ಕನ್ನಡ']].map(function (p) {
         return '<button data-cscript="' + p[0] + '"' + (state.script === p[0] ? ' class="on"' : '') + '>' + p[1] + '</button>';
       }).join('') + '</div>' +
+      '<div class="k2-note" style="margin-top:8px">Kosha order (pins always first)</div><div class="row">' +
+      [['curated', 'Default'], ['az', 'A–Z'], ['za', 'Z–A']]
+        .concat(state.order.length ? [['custom', 'My order']] : [])
+        .map(function (p) {
+          return '<button data-csort="' + p[0] + '"' + (state.sortmode === p[0] ? ' class="on"' : '') + '>' + p[1] + '</button>';
+        }).join('') +
+      (state.order.length ? '<button data-csortreset="1" title="Forget my hand-arranged order">✕ reset my order</button>' : '') +
+      '</div>' +
       (hist.length ? '<div class="k2-note" style="margin-top:8px">Recent lookups</div><div class="row">' +
         hist.map(function (h) { return '<button data-hist="' + esc(h) + '" lang="sa">' + esc(h) + '</button>'; }).join('') +
         '<button data-histclear="1" title="Clear history">✕ clear</button></div>' : '') +
@@ -433,6 +499,15 @@
     pop.querySelectorAll('[data-cscript]').forEach(function (b) {
       b.onclick = function () { setScript(b.dataset.cscript); closePop(); };
     });
+    pop.querySelectorAll('[data-csort]').forEach(function (b) {
+      b.onclick = function () { setSortmode(b.dataset.csort); closePop(); toast('Kosha order: ' + b.textContent); };
+    });
+    var sr = pop.querySelector('[data-csortreset]');
+    if (sr) sr.onclick = function () {
+      state.order = []; lsSet('kosha2_order', []);
+      if (state.sortmode === 'custom') setSortmode('curated'); else renderResults();
+      closePop(); toast('Your hand-arranged order was reset');
+    };
     pop.querySelectorAll('[data-hist]').forEach(function (b) {
       b.onclick = function () { closePop(); setMode('search'); doLookup(b.dataset.hist); };
     });
@@ -519,6 +594,8 @@
       else if (t.dataset.act === 'link') copyText(location.href.split('#')[0] + '#word=' + encodeURIComponent(state.group.hw) + '&kosha=' + slug, 'Link copied');
       else if (t.dataset.act === 'pin') { togglePin(slug); }
       else if (t.dataset.act === 'hide') { toggleHide(slug); }
+      else if (t.dataset.act === 'up') { moveDict(slug, false); }
+      else if (t.dataset.act === 'top') { moveDict(slug, true); }
       else if (t.dataset.act === 'ai') { aiMenu(t, slug); return; }
       closePop(); return;
     }
@@ -554,6 +631,7 @@
       if (!r) return;
       if (mine !== seq) return;
       if (!r.list.length) { state.group = null; $('#k2Main').innerHTML = '<div class="k2-empty">No headword found for “' + esc(word) + '”.</div>'; return; }
+      if (r.degraded) toast('A part of the index did not load — results may be incomplete. Retry in a moment.');
       var g = r.list[0];
       state.group = { hw: g.hw, slp: Object.keys(g.slps || {})[0] || '', raw: g };
       pushHistory(g.hw);
@@ -595,6 +673,9 @@
       box.querySelectorAll('[data-key]').forEach(function (b) {
         b.onclick = function () { doLookup(b.dataset.key); };
       });
+    }).catch(function () {
+      // suggestions are best-effort; an unreachable index just closes the box
+      if (mySeq === sugSeq) box.hidden = true;
     });
   }
 
