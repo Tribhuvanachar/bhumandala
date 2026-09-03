@@ -31,7 +31,8 @@
     <a class="icon" href="../dge/index.html#kosha" title="The कोश search opens from the floating button on the main library page">कोश →</a>
     <button class="icon" id="theme">◐</button>
     <button class="btn" id="reload">↻ Refresh</button>
-    <button class="btn pri" id="export">⬇ Export visibility</button>
+    <button class="btn" id="export">⬇ Legacy visibility</button>
+    <button class="btn pri" id="exportOv">⬇ Export kosha-overrides.json</button>
   </div>
 </header>
 
@@ -45,6 +46,7 @@
     <button class="chip" data-f="cleared">Cleared only</button>
     <button class="chip" data-f="unclear">Unclear only</button>
     <button class="chip" data-f="hidden">Hidden only</button>
+    <button class="chip" data-f="tiered">Tiered only</button>
   </div>
   <table id="tbl">
     <thead><tr>
@@ -53,11 +55,12 @@
       <th data-k="license">Licence</th>
       <th data-k="headwords" class="num">Headwords</th>
       <th data-k="senses" class="num">Senses</th>
+      <th data-k="tier">Tier</th>
       <th data-k="vis">Search</th>
     </tr></thead>
     <tbody id="tb"></tbody>
   </table>
-  <p class="muted" style="margin-top:10px">👁 toggles whether a dictionary is searched in <b>कोश</b>. The flag is read live by <code>kosha.js</code> on the next query (stored per-browser as <code>kosha_hidden_dicts</code>). Click <b>Export visibility</b> to download <code>kosha-visibility.json</code> if you want to bake a default into the repo.</p>
+  <p class="muted" style="margin-top:10px"><b>Tier</b> is the committed, every-visitor policy from <code>admin/config/kosha-overrides.json</code>, read by <code>dge/kosha2.html</code>: <b>public</b> (searchable + browsable), <b>search-hidden</b> (browse list only), <b>unlisted</b> (direct <code>?browse=</code> link only), <b>disabled</b> (not served). ★ pins a dictionary to the top of every visitor's results. Changes here are a local draft (dot-marked) until you download <b>Export kosha-overrides.json</b> and commit it at <code>admin/config/kosha-overrides.json</code>. 👁 is the older per-browser flag the classic <b>कोश</b> overlay reads (<code>kosha_hidden_dicts</code>).</p>
 
   <h2 class="sect">Known but not loaded <span class="muted">— and why · see <code>kosha_toolkit/LICENSING.md</code></span></h2>
   <p class="muted" style="margin:0 0 8px">Every dictionary in <code>indic-dict/stardict-sanskrit</code> is loaded, as are the encyclopaedias and indices of <code>-kAvya</code>, the Aṣṭādhyāyī/dhātu set of <code>-vyAkaraNa</code>, and the two Cologne dictionaries (<code>pwkvn</code>, <code>krm</code>) that the indic-dict mirror lacks — a code-by-code diff found the other 42 of <code>sanskrit-lexicon/csl-orig</code> already present under different names. What is left out below is left out <b>on purpose</b>, not for want of ingesting — each row says why. Rows are cross-checked against the live manifest on every load, so anything that does get ingested drops off this list by itself rather than sitting here stale.</p>
@@ -88,6 +91,19 @@
   function loadVis(){ try{ HIDDEN=new Set(JSON.parse(localStorage.getItem("kosha_hidden_dicts")||"[]")); }catch(e){ HIDDEN=new Set(); } }
   function saveVis(){ localStorage.setItem("kosha_hidden_dicts", JSON.stringify([...HIDDEN])); }
 
+  // Committed visibility tiers (admin/config/kosha-overrides.json) + a local
+  // draft overlay. The committed file applies to EVERY visitor of kosha2;
+  // edits made here stay in this browser until exported and committed.
+  var TIERS=["public","search_hidden","unlisted","disabled"];
+  var OV={visibility:{},pins:[],order:[]};          // committed baseline
+  var DRAFT={visibility:{},pins:null};              // local, sparse overlay
+  function loadDraft(){ try{ var d=JSON.parse(localStorage.getItem("kosha_overrides_draft")||"{}"); DRAFT={visibility:d.visibility||{},pins:Array.isArray(d.pins)?d.pins:null}; }catch(e){ DRAFT={visibility:{},pins:null}; } }
+  function saveDraft(){ localStorage.setItem("kosha_overrides_draft", JSON.stringify(DRAFT)); }
+  function tierOf(slug){ var t=DRAFT.visibility[slug]!==undefined?DRAFT.visibility[slug]:OV.visibility[slug]; return TIERS.indexOf(t)>0?t:"public"; }
+  function tierDirty(slug){ return DRAFT.visibility[slug]!==undefined && DRAFT.visibility[slug]!==(OV.visibility[slug]||"public"); }
+  function pinsNow(){ return DRAFT.pins!==null?DRAFT.pins:(OV.pins||[]); }
+  function pinsDirty(){ return DRAFT.pins!==null && JSON.stringify(DRAFT.pins)!==JSON.stringify(OV.pins||[]); }
+
   // Catalogue of sources deliberately NOT ingested, with the reason. Anything
   // listed here that turns up in the live manifest is dropped from the table
   // by renderNotLoaded() — the previous hardcoded list had gone entirely stale
@@ -114,11 +130,15 @@
   function start(){
     if(sessionStorage.getItem("dge.admin.ok")!=="1" && localStorage.getItem("is_superadmin")!=="true") return;
     $("#gate").style.display="none"; $("#hdr").style.display=""; $("#app").style.display="";
-    loadVis();
+    loadVis(); loadDraft();
+    fetch("config/kosha-overrides.json?v="+Date.now()).then(function(r){return r.json();})
+      .then(function(o){ OV={visibility:o.visibility||{},pins:o.pins||[],order:o.order||[]}; OV._readme=o._readme; OV.version=o.version||1; if(MAN){renderTotals();renderLoaded();} })
+      .catch(function(){ /* baseline stays empty; drafts still editable */ });
     if(localStorage.getItem("dge.koshaadmin.dark")==="1") document.body.classList.add("dark");
     $("#theme").onclick=function(){ document.body.classList.toggle("dark"); localStorage.setItem("dge.koshaadmin.dark", document.body.classList.contains("dark")?"1":"0"); };
     $("#reload").onclick=function(){ location.reload(); };
     $("#export").onclick=exportVis;
+    $("#exportOv").onclick=exportOverrides;
     $("#q").addEventListener("input",renderLoaded);
     document.querySelectorAll(".chip[data-f]").forEach(function(c){ c.onclick=function(){ FILTER=c.dataset.f; document.querySelectorAll(".chip[data-f]").forEach(function(x){x.classList.toggle("on",x===c);}); renderLoaded(); }; });
     document.querySelectorAll("#tbl th[data-k]").forEach(function(th){ th.onclick=function(){ var k=th.dataset.k; if(k==="vis") k="hidden"; if(SORT.k===k) SORT.dir*=-1; else {SORT.k=k;SORT.dir=(k==="name"||k==="license"||k==="dir")?1:-1;} renderLoaded(); }; });
@@ -135,7 +155,7 @@
     // for ~12h, so without it this page keeps showing the previous manifest.
     fetch(KOSHA_BASE + "/_index/manifest.json?v=1.4").then(function(r){return r.json();})
       .then(function(m){ MAN=m; buildRows(); renderTotals(); renderLoaded(); renderNotLoaded(); renderPuranaNote(); })
-      .catch(function(e){ $("#tb").innerHTML='<tr><td colspan="6" class="muted">Could not load '+KOSHA_BASE+'/_index/manifest.json ('+e+').</td></tr>'; });
+      .catch(function(e){ $("#tb").innerHTML='<tr><td colspan="7" class="muted">Could not load '+KOSHA_BASE+'/_index/manifest.json ('+e+').</td></tr>'; });
   }
 
   function licClass(s){ s=(s||"").toLowerCase(); if(s.indexOf("cc-by")===0||s.indexOf("cc-by")>-1) return "ok"; if(s.indexOf("no license")>-1||s.indexOf("no licence")>-1) return "bad"; return "unclear"; }
@@ -157,6 +177,8 @@
       stat(hw.toLocaleString(),"headwords")+
       stat(se.toLocaleString(),"senses")+
       stat(HIDDEN.size,"hidden from search")+
+      stat(ROWS.filter(function(r){return tierOf(r.slug)!=="public";}).length,"tiered (non-public)")+
+      stat(Object.keys(DRAFT.visibility).length+(pinsDirty()?1:0),"draft edits to export")+
       stat(notLoadedRows().length,"known, deliberately not loaded");
   }
   function stat(b,s){ return '<div class="stat"><b>'+b+'</b><span>'+s+'</span></div>'; }
@@ -165,6 +187,7 @@
     if(FILTER==="cleared") return r.licClass==="ok";
     if(FILTER==="unclear") return r.licClass!=="ok";
     if(FILTER==="hidden") return HIDDEN.has(r.slug);
+    if(FILTER==="tiered") return tierOf(r.slug)!=="public";
     return true;
   }
   function renderLoaded(){
@@ -177,23 +200,36 @@
     list.sort(function(a,b){
       var k=SORT.k; var av,bv;
       if(k==="hidden"){ av=HIDDEN.has(a.slug)?1:0; bv=HIDDEN.has(b.slug)?1:0; }
+      else if(k==="tier"){ av=TIERS.indexOf(tierOf(a.slug)); bv=TIERS.indexOf(tierOf(b.slug)); }
       else { av=a[k]; bv=b[k]; }
       if(typeof av==="string") return av.localeCompare(bv)*SORT.dir;
       return (av-bv)*SORT.dir;
     });
     document.querySelectorAll("#tbl th[data-k]").forEach(function(th){ var k=th.dataset.k==="vis"?"hidden":th.dataset.k; th.classList.toggle("sorted",k===SORT.k); th.classList.toggle("asc",k===SORT.k&&SORT.dir===1); });
+    var pins=pinsNow();
     $("#tb").innerHTML=list.map(function(r){
-      var hid=HIDDEN.has(r.slug);
+      var hid=HIDDEN.has(r.slug), tier=tierOf(r.slug), pinned=pins.indexOf(r.slug)>-1;
+      var sel='<select class="tiersel" data-t="'+esc(r.slug)+'" title="Committed visibility tier (kosha2)" style="font:inherit;font-size:12px;background:transparent;color:inherit;border:1px solid rgba(128,128,128,.35);border-radius:6px;padding:2px 4px'+(tier!=="public"?';border-color:var(--accent,#c62828)':'')+'">'+
+        TIERS.map(function(t){ return '<option value="'+t+'"'+(t===tier?' selected':'')+'>'+t.replace("_","-")+'</option>'; }).join("")+'</select>'+
+        (tierDirty(r.slug)?' <span title="Draft — not yet committed" style="color:var(--accent,#c62828)">●</span>':'');
       return '<tr class="'+(hid?"hiddenRow":"")+'">'+
-        '<td class="nm"><b>'+esc(r.name)+'</b><span class="slug">'+esc(r.slug)+' · <span class="cat">'+esc(r.category.replace(/_/g," "))+'</span></span></td>'+
+        '<td class="nm"><button class="pin" data-p="'+esc(r.slug)+'" title="'+(pinned?"Pinned to top for every visitor — click to unpin":"Pin to top for every visitor")+'" style="background:none;border:0;cursor:pointer;font-size:13px;opacity:'+(pinned?'1':'.35')+'">'+(pinned?'★':'☆')+'</button><b>'+esc(r.name)+'</b><span class="slug">'+esc(r.slug)+' · <span class="cat">'+esc(r.category.replace(/_/g," "))+'</span></span></td>'+
         '<td>'+esc(r.dir)+'</td>'+
         '<td><span class="badge '+r.licClass+'" title="'+esc(r.license)+'">'+licLabel(r.license)+'</span></td>'+
         '<td class="num">'+r.headwords.toLocaleString()+'</td>'+
         '<td class="num">'+r.senses.toLocaleString()+'</td>'+
+        '<td>'+sel+'</td>'+
         '<td><button class="eye'+(hid?" off":"")+'" data-h="'+esc(r.slug)+'" title="'+(hid?"hidden — click to search again":"searched — click to hide")+'">'+(hid?"🚫":"👁")+'</button></td>'+
         '</tr>';
-    }).join("")|| '<tr><td colspan="6" class="muted">No dictionaries match.</td></tr>';
+    }).join("")|| '<tr><td colspan="7" class="muted">No dictionaries match.</td></tr>';
     document.querySelectorAll("#tb .eye").forEach(function(b){ b.onclick=function(){ var s=b.dataset.h; if(HIDDEN.has(s)) HIDDEN.delete(s); else HIDDEN.add(s); saveVis(); renderTotals(); renderLoaded(); }; });
+    document.querySelectorAll("#tb .tiersel").forEach(function(s){ s.onchange=function(){ var slug=s.dataset.t, v=s.value;
+      if(v===(OV.visibility[slug]||"public")) delete DRAFT.visibility[slug]; else DRAFT.visibility[slug]=v;
+      saveDraft(); renderTotals(); renderLoaded(); }; });
+    document.querySelectorAll("#tb .pin").forEach(function(b){ b.onclick=function(){ var slug=b.dataset.p, p=pinsNow().slice(), i=p.indexOf(slug);
+      if(i>-1) p.splice(i,1); else p.push(slug);
+      DRAFT.pins = JSON.stringify(p)===JSON.stringify(OV.pins||[]) ? null : p;
+      saveDraft(); renderTotals(); renderLoaded(); }; });
   }
 
   // A catalogue row survives only while its slug is genuinely absent from the
@@ -234,6 +270,20 @@
       '<code>dicts_config.json</code> in the data repo and re-run the build for a hard one.';
   }
 
+  function exportOverrides(){
+    // Committed baseline + this browser's draft, in the exact shape
+    // admin/config/kosha-overrides.json is kept in. Commit the download at
+    // that path (visibility only keeps non-public tiers — public is the
+    // default and stays out of the file).
+    var vis={};
+    Object.keys(OV.visibility).forEach(function(s){ vis[s]=OV.visibility[s]; });
+    Object.keys(DRAFT.visibility).forEach(function(s){ vis[s]=DRAFT.visibility[s]; });
+    Object.keys(vis).forEach(function(s){ if(vis[s]==="public") delete vis[s]; });
+    var out={ _readme:OV._readme||["See dge/kosha2.html; tiers: public | search_hidden | unlisted | disabled."],
+      version:OV.version||1, updatedAt:Date.now(), visibility:vis, pins:pinsNow(), order:OV.order||[] };
+    var blob=new Blob([JSON.stringify(out,null,1)],{type:"application/json"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="kosha-overrides.json"; a.click();
+  }
   function exportVis(){
     var out={ note:"DGE Kosha search visibility. hidden = dictionary slugs (from data/kosha/_index/manifest.json) to exclude from कोश search. js/kosha.js reads this list at query time via localStorage key kosha_hidden_dicts.", hidden:[...HIDDEN].sort() };
     var blob=new Blob([JSON.stringify(out,null,1)],{type:"application/json"});
