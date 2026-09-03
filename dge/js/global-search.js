@@ -1729,4 +1729,15 @@
     document.addEventListener('DOMContentLoaded', function () { build(); prefetchManifest(); });
   } else { build(); prefetchManifest(); }
   window.DGEGlobalSearch = { open: open, close: close };
+
+  // Deep-link entry point (?gs=<query>): the kosha2 page's citation chips
+  // (and anything else) can send a reader straight into corpus search.
+  try {
+    var gsq = new URLSearchParams(location.search).get('gs');
+    if (gsq) setTimeout(function () {
+      open();
+      var inp = document.getElementById('dge-gs-input');
+      if (inp) { inp.value = gsq; inp.dispatchEvent(new Event('input', { bubbles: true })); }
+    }, 400);
+  } catch (e) {}
 })();

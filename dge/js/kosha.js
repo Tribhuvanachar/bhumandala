@@ -1005,6 +1005,40 @@
     };
   }
 
+  // ---- engine export (kosha2) --------------------------------------------
+  // The v2 results page (kosha2.html) drives this same battle-tested engine
+  // through a data-only surface instead of duplicating the two-tier shard
+  // lookup. bucketFor mirrors loadEntry's deep-split walk so kosha2 can
+  // fetch the ENRICHED twin (kosha_r) of exactly the shard an entry lives
+  // in. Setting window.DGE_KOSHA_ENGINE_ONLY (before this script) skips the
+  // floating-button/overlay build entirely — engine with no UI.
+  window.DGEKoshaEngine = {
+    search: search,
+    loadEntry: loadEntry,
+    applyUserOrder: applyUserOrder,
+    fold: fold,
+    toSLP1list: toSLP1list,
+    gkey: gkey,
+    base: function () { return BASE; },
+    manifest: function () {
+      return manifest ? Promise.resolve(manifest)
+        : j(BASE + '/_index/manifest.json').then(function (m) { manifest = m; return m; });
+    },
+    bucketFor: function (dictSlug, efold) {
+      if (!manifest || !manifest.dictionaries[dictSlug]) return null;
+      var d = manifest.dictionaries[dictSlug];
+      var eLen = manifest.entry_shard_len || 3;
+      var bucket = efold.slice(0, eLen), deep = d.deep;
+      if (deep && deep.length) {
+        while (deep.indexOf(bucket) >= 0 && bucket.length < efold.length) {
+          bucket = efold.slice(0, bucket.length + 1);
+        }
+      }
+      return { category: d.category, bucket: bucket };
+    }
+  };
+
+  if (window.DGE_KOSHA_ENGINE_ONLY) { console.log('[Init] kosha.js engine-only.'); return; }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
   else build();
   console.log('[Init] kosha.js loaded.');
