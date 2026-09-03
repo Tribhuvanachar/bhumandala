@@ -17,7 +17,7 @@
 (function () {
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
-  window.DGE_VERSIONS['kosha2.js'] = 'v1.0 (display-script switcher deva/IAST/knda · kosha jump rail · gender consensus in digest · 7 AI actions · ⚙ sheet with history/pins/hidden; v0.9: first full build of the results-v2 page)';
+  window.DGE_VERSIONS['kosha2.js'] = 'v1.1 (mobile: search input owns its own header row; browse: tap feedback + loading states + alphabet rail grouped by first akshara instead of one button per page; search-failure message; corpus pinned by dist SHA in config.js; v1.0: script switcher, jump rail, gender digest, 7 AI actions, settings sheet)';
 
   var E = window.DGEKoshaEngine;
   var RENDER_BASE = (window.KOSHA_RENDER_BASE || '').replace(/\/+$/, '');
@@ -301,7 +301,10 @@
       main.innerHTML = '<div class="k2-countline" style="padding-top:12px"><span>Open a kosha and read it in order</span></div>' +
         '<div class="k2-browse-pick">' + items + '</div>';
       main.querySelectorAll('[data-browse]').forEach(function (b) {
-        b.onclick = function () { openBrowse(b.dataset.browse, 0); };
+        b.onclick = function () {
+          b.classList.add('loading');           // instant tap feedback
+          openBrowse(b.dataset.browse, 0);
+        };
       });
     });
   }
@@ -310,6 +313,12 @@
     state.browseDict = slug; state.browsePage = page;
     var base = RENDER_BASE || null;
     if (!base) { $('#k2Main').innerHTML = '<div class="k2-empty">Browse needs the enriched index (kosha_r), which is not reachable right now.</div>'; return; }
+    // immediate loading state — big dictionaries take a moment on mobile
+    if (!$('#k2Main .k2-browse-list')) {
+      $('#k2Main').innerHTML = '<div class="k2-empty">लोड भवति… loading ' + esc(slug) + '</div>';
+    } else {
+      toast('Loading page ' + (page + 1) + '…');
+    }
     var iurl = base + '/_browse/' + encodeURIComponent(slug) + '/index.json';
     (browseCache[iurl] ? Promise.resolve(browseCache[iurl]) : fetchJson(iurl).then(function (x) { browseCache[iurl] = x; return x; }))
       .then(function (idx) {
@@ -318,8 +327,21 @@
         var purl = base + '/_browse/' + encodeURIComponent(slug) + '/page-' + page + '.json';
         fetchJson(purl).then(function (rows) {
           rows = rows || [];
-          var alpha = idx.first.map(function (w, i) {
-            return '<button class="' + (i === page ? 'active' : '') + '" data-bpage="' + i + '" title="page ' + (i + 1) + '" lang="sa">' + esc(String(w).slice(0, 3)) + '</button>';
+          // alphabet rail GROUPED by first akshara — a large dictionary has
+          // 1000+ pages, and one button per page froze mobile browsers.
+          // One chip per starting letter, jumping to its first page; the
+          // chip covering the current page is highlighted.
+          var groups = [], seenCh = {};
+          idx.first.forEach(function (w, i) {
+            var ch = String(w).replace(/^[\s'‘"–-]+/, '').slice(0, 1);
+            if (!seenCh[ch]) { seenCh[ch] = 1; groups.push({ ch: ch, page: i }); }
+          });
+          var curGroup = -1;
+          groups.forEach(function (g, gi) { if (g.page <= page) curGroup = gi; });
+          var alpha = groups.map(function (g, gi) {
+            return '<button class="' + (gi === curGroup ? 'active' : '') +
+              '" data-bpage="' + g.page + '" title="from page ' + (g.page + 1) +
+              '" lang="sa">' + esc(g.ch) + '</button>';
           }).join('');
           $('#k2Main').innerHTML =
             '<div class="k2-countline" style="padding-top:12px"><span><button class="k2-textbtn" id="k2BrowseBack">← All koshas</button> ' +
@@ -523,7 +545,13 @@
     $('#k2Input').value = word;
     $('#k2Sug').hidden = true;
     $('#k2Main').innerHTML = '<div class="k2-empty">अन्वेषणम्…</div>';
-    E.search(word).then(function (r) {
+    E.search(word).catch(function (e) {
+      if (mine !== seq) return null;
+      $('#k2Main').innerHTML = '<div class="k2-empty">Search could not reach the dictionary index (' +
+        esc(String(e && e.message || e).slice(0, 80)) + '). Check the connection and try again.</div>';
+      return null;
+    }).then(function (r) {
+      if (!r) return;
       if (mine !== seq) return;
       if (!r.list.length) { state.group = null; $('#k2Main').innerHTML = '<div class="k2-empty">No headword found for “' + esc(word) + '”.</div>'; return; }
       var g = r.list[0];

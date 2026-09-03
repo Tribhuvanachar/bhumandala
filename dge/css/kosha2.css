@@ -138,6 +138,10 @@
   .k2-browse-pick button { text-align: left; padding: 12px; border: 1px solid var(--card-border);
     border-radius: 13px; background: var(--card-bg); color: var(--text-primary); cursor: pointer; }
   .k2-browse-pick button:hover { background: var(--panel-bg); }
+  .k2-browse-pick button.loading { border-color: var(--accent-gold);
+    background: var(--panel-bg); opacity: .75; }
+  .k2-browse-pick button.loading b::after { content: " · लोड…";
+    color: var(--accent-gold); font-weight: 400; font-size: 12px; }
   .k2-browse-pick b { display: block; font-size: 14px; }
   .k2-browse-pick .m { font-size: 11px; color: var(--muted-text); }
   .k2-browse-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
@@ -212,9 +216,16 @@
     .k2-app { padding: 0 9px 56px; }
     .k2-hw { font-size: 36px; }
     .k2-cbody { padding-inline: 11px; }
-    .k2-top-in { flex-wrap: wrap; }
+    /* the search input owns its full first row; controls wrap below it —
+       otherwise the input collapses to a sliver between the buttons */
+    .k2-top-in { flex-wrap: wrap; row-gap: 7px; }
+    .k2-search { flex: 1 1 100%; order: -1; }
     .k2-script { height: 38px; }
-    .k2-script button { width: 32px; }
+    .k2-script button { width: 32px; font-size: 14px; }
+    .k2-mode { margin-left: auto; }
+    .k2-mode button { padding: 6px 8px; font-size: 11.5px; }
+    .k2-iconbtn { width: 38px; height: 38px; font-size: 15px; }
+    .k2-top-in { gap: 6px; }
   }
   @media print {
     .k2-top, .k2-lens, .k2-jump, .k2-cmenu, .k2-mode { display: none !important; }
