@@ -78,3 +78,4 @@ genie_asr_benchmark/results/*.json
 genie_asr_benchmark/ai4bharat_local/venv/
 genie_asr_benchmark/ai4bharat_local/models/
 genie_asr_benchmark/ai4bharat_local/*.onnx
+dge/data/kosha_r/
