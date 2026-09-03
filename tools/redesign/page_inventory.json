@@ -1,5 +1,5 @@
 {
- "page_count": 30,
+ "page_count": 31,
  "pages": [
   {
    "path": "index.html",
@@ -143,6 +143,20 @@
     "../css/kavya.css"
    ],
    "title": "काव्यानि — DGE"
+  },
+  {
+   "path": "dge/kosha2.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/tokens.css",
+    "css/kosha2.css"
+   ],
+   "title": "कोश — DGE Dictionary Reader (v2 preview)"
   },
   {
    "path": "dge/legacy/PrahladaKrutaNarasimhaStotra.html",
