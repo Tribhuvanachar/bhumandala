@@ -206,12 +206,21 @@ def main() -> int:
 
     def register_sutra(text: str, num: int | None, art: dict):
         text = clean(text)
+        text = re.sub(r"^ॐ\s*|\s*ॐ$", "", text)
+        text = re.sub(r"[।॥|]+\s*[०-९0-9]*\s*[।॥|]*\s*$", "", text).strip()
         # the flow restates the current sutra constantly (article titles,
-        # chunk headers) — only a genuinely NEW sutra advances the ref
+        # chunk headers) — only a genuinely NEW sutra advances the ref.
+        # Deliberately NOT pada-wide: short sutras (darshanAchcha etc.)
+        # genuinely recur within one pada.
         prev = seen_sutra_text.get(ref_str())
         if prev is not None and same_sutra(prev, text):
             return
-        if num is not None and cur["s"] < num <= cur["s"] + 3:
+        if num is not None and num > cur["s"]:
+            # trust the source's own monotonic numbering — it is what pulls
+            # positions right after un-numbered small adhikaranas
+            if num > cur["s"] + 1:
+                review.append({"kind": "sutra_number_gap", "at": ref_str(),
+                               "to": num})
             advance(s=num)
         else:
             if num is not None and num != cur["s"] + 1:
@@ -324,19 +333,126 @@ def main() -> int:
             if not txt:
                 continue
             if first_p:
-                first_p = False
                 om = OM_LINE.match(txt)
                 if om and art["source"].get("layer") == "मूलम्":
+                    first_p = False
                     num = om.group(2)
                     register_sutra(om.group(1),
                                    int(num.translate(DEVA_DIGIT)) if num else None,
                                    art)
                     cur_layer = cur_layer or "bhashya"
                     continue
-                if art["source"].get("layer") == "मूलम्" and adhikarana and txt.startswith(("१", "२", "३", "४", "५", "६", "७", "८", "९")):
-                    continue  # "१. रचनानुपपत्त्यधिकरणम्" heading line
+                if art["source"].get("layer") == "मूलम्" and adhikarana and (
+                        txt.startswith(("१", "२", "३", "४", "५", "६", "७", "८", "९"))
+                        or txt.rstrip("।॥ ").endswith("धिकरणम्")):
+                    continue  # adhikarana heading line; the sutra follows
+                ut = clean(art.get("unit_title") or "")
+                if (art["source"].get("layer") == "मूलम्" and len(txt) <= 150
+                        and ut and same_sutra(txt, ut)):
+                    # small adhikaranas carry their sutra WITHOUT the OM
+                    # wrapper; the article's own title names that sutra, so
+                    # only a title-matching first line registers — prose
+                    # first lines of continuation chunks never do
+                    first_p = False
+                    register_sutra(txt.strip("।॥| "), None, art)
+                    cur_layer = cur_layer or "bhashya"
+                    continue
+                first_p = False
             pending.append(txt)
         flush()
+
+    # ---- supplements ----------------------------------------------------
+    # Six sutras of the edition that the flow never restates with usable
+    # markers (they sit in standalone tika slices, plain lines, or one-sided
+    # OM headings). Verified present in the DV source; anchored after the
+    # sutra they follow. Restoring them brings the total to exactly the
+    # traditional Madhva count of 564. Each lands with a review flag.
+    SUPPLEMENTS = [
+        ("1.4", "समाकर्षात्", "जगद्वाचित्वात्"),
+        ("2.1", "अधिकं तु भेदनिर्देशात्", "अश्मादिवच्च तदनुपपत्तिः"),
+        ("2.1", "उपसंहारदर्शनान्नेति चेन्न क्षीरवद्धि", "देवादिवदपि लोके"),
+        ("3.2", "परमतः सेतून्मानसम्बन्धभेदव्यपदेशेभ्यः", "सामान्यात्तु"),
+        ("3.3", "न सामान्यादप्युपलब्धेर्मृत्युवन्न हि लोकापत्तिः",
+         "परेण च शब्दस्य ताद्विध्यं भूयस्त्वात्त्वनुबन्धः"),
+        ("4.2", "वाङ्मनसि दर्शनाच्छब्दाच्च", "अत एव च सर्वाण्यनु"),
+    ]
+    for pada, after_txt, new_txt in SUPPLEMENTS:
+        a, p = map(int, pada.split("."))
+        pada_units = sorted((u for u in layers["sutra"]
+                             if u["ref"].startswith(f"{a}.{p}.")),
+                            key=lambda u: int(u["ref"].split(".")[2]))
+        anchor = next((u for u in pada_units if same_sutra(u["text"], after_txt)), None)
+        if anchor is None:
+            review.append({"kind": "supplement_anchor_missing", "pada": pada,
+                           "text": new_txt})
+            continue
+        at = int(anchor["ref"].split(".")[2]) + 1
+        # shift every unit at >= `at` in this pada, in EVERY layer.
+        # dv_map re-keying is two-phase (collect old, pop all, insert all)
+        # so ref n and n+1 never collide mid-shift.
+        remap = {}
+        moves = []
+        for lslug, units in layers.items():
+            for u in units:
+                ua, up, un = u["ref"].split(".")
+                if int(ua) == a and int(up) == p and int(un) >= at:
+                    new_ref = f"{a}.{p}.{int(un) + 1}"
+                    remap[u["ref"]] = new_ref
+                    old_id = u["id"]
+                    u["ref"] = new_ref
+                    u["id"] = new_ref + "." + old_id.rsplit(".", 1)[1]
+                    moves.append((f"{lslug}:{old_id}", f"{lslug}:{u['id']}"))
+        vals = {old: dv_map.pop(old) for old, _ in moves if old in dv_map}
+        for old, new in moves:
+            if old in vals:
+                dv_map[new] = vals[old]
+        for units in layers.values():
+            for u in units:
+                if "on" in u:
+                    u["on"] = [remap.get(r, r) for r in u["on"]]
+        new_ref = f"{a}.{p}.{at}"
+        layers["sutra"].append({"id": new_ref + ".p1", "ref": new_ref,
+                                "text": new_txt})
+        dv_map[f"sutra:{new_ref}.p1"] = {
+            "anchor": None,
+            "url": None,
+            "note": "restored from the edition's own tika slices/headings; "
+                    "see _review.json"}
+        review.append({"kind": "sutra_supplemented", "ref": new_ref,
+                       "text": new_txt})
+    layers["sutra"].sort(key=lambda u: tuple(map(int, u["ref"].split("."))))
+
+    # collapse artifact holes: where a supplement's +1 shift pushed an
+    # edition-anchored number past a gap (e.g. tadoka's printed 17), pull
+    # every number above the hole back down. Flagged, never silent — a
+    # REAL edition hole would need the scholar, so it lands in _review.
+    for pada in sorted({u["ref"].rsplit(".", 1)[0] for u in layers["sutra"]
+                        if not u["ref"].startswith("0.")}):
+        a, p = map(int, pada.split("."))
+        nums = {int(u["ref"].split(".")[2]) for u in layers["sutra"]
+                if u["ref"].startswith(pada + ".")}
+        for hole in sorted(n for n in range(1, max(nums) + 1) if n not in nums):
+            review.append({"kind": "hole_collapsed", "pada": pada, "at": hole})
+            moves = []
+            for lslug, units in layers.items():
+                for u in units:
+                    ua, up, un = u["ref"].split(".")
+                    if int(ua) == a and int(up) == p and int(un) > hole:
+                        old_id = u["id"]
+                        u["ref"] = f"{a}.{p}.{int(un) - 1}"
+                        u["id"] = u["ref"] + "." + old_id.rsplit(".", 1)[1]
+                        moves.append((f"{lslug}:{old_id}", f"{lslug}:{u['id']}"))
+            vals = {old: dv_map.pop(old) for old, _ in moves if old in dv_map}
+            for old, new in moves:
+                if old in vals:
+                    dv_map[new] = vals[old]
+            rm = {f"{a}.{p}.{n}": f"{a}.{p}.{n-1}" for n in range(hole + 1, max(nums) + 1)}
+            for units in layers.values():
+                for u in units:
+                    if "on" in u:
+                        u["on"] = [rm.get(r, r) for r in u["on"]]
+            nums = {int(u["ref"].split(".")[2]) for u in layers["sutra"]
+                    if u["ref"].startswith(pada + ".")}
 
     # ---- emit ----------------------------------------------------------
     DST.mkdir(parents=True, exist_ok=True)
