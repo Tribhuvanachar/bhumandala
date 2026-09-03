@@ -83,6 +83,21 @@
 
 ---
 
+## ಪ್ರಶ್ನೆ ೩ / Question 3 — ನ್ಯಾಯಸುಧಾ ಪರಿವಾರ (The Nyāyasudhā family)
+
+ಅನುವ್ಯಾಖ್ಯಾನದ ಮೇಲೆ ಶ್ರೀಜಯತೀರ್ಥರ **ನ್ಯಾಯಸುಧಾ** ಇದೆ ಎಂದು ಖಚಿತ. ಕೆಳಗಿನ ಸುಧಾ-ಸಂಬಂಧಿ ವ್ಯಾಖ್ಯಾನಗಳ ಗ್ರಂಥಕಾರರ ಹೆಸರು ಮತ್ತು "ಯಾವುದರ ಮೇಲೆ" (ನ್ಯಾಯಸುಧೆಯ ಮೇಲೆಯೇ / ಅನುವ್ಯಾಖ್ಯಾನದ ಮೇಲೆಯೇ) ಎರಡನ್ನೂ ದಯವಿಟ್ಟು ಬರೆಯಿರಿ. / The Sudhā itself (Jayatīrtha, on the Anuvyākhyāna) is certain. For the Sudhā-related commentaries below, kindly supply the author and what each explains (the Nyāyasudhā, or the Anuvyākhyāna directly).
+
+| ವ್ಯಾಖ್ಯಾನ / Commentary | ಗ್ರಂಥಕಾರ / Author | **ಯಾವುದರ ಮೇಲೆ? / Commented on** |
+|---|---|---|
+| परिमळः | ? (ಬರೆಯಿರಿ / write) | ನ್ಯಾಯಸುಧಾ (ನಮ್ಮ ಊಹೆ / our assumption — ದೃಢೀಕರಿಸಿ) |
+| वाक्यार्थरत्नमाला | ? |  |
+| श्रीनिवासतीर्थीया | श्रीनिवासतीर्थः (ಸರಿಯೇ?) |  |
+| यादुपत्यम् | ? |  |
+| वाक्यार्थचन्द्रिका | ? |  |
+| शेषवाक्यार्थचन्द्रिका | श्रीपाण्डुरङ्गि-केशवाचार्यः |  |
+
+---
+
 ## ಅನುಬಂಧ / Appendix — ಪೂರ್ಣ ೫೬೪ ಸೂತ್ರಪಟ್ಟಿ (ತಪ್ಪುಗಳಿದ್ದರೆ ಆ ಸಾಲಿನಲ್ಲೇ ತಿದ್ದಿರಿ / correct any error on its own line)
 
 

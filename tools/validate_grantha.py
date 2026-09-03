@@ -54,19 +54,24 @@ def validate_work(work_dir: Path, quiet: bool) -> list[str]:
 
     ref_sets = {slug: {u["ref"] for u in units}
                 for slug, units in units_by_layer.items()}
+    # 'on' refs are FAMILY coordinates: the base layer (first in work.json —
+    # sutra/mula) defines the ref universe; a commentary may anchor at any
+    # base ref even where its own parent layer has no unit
+    base_slug = work.get("layers", [{}])[0].get("slug", "")
+    base_set = ref_sets.get(base_slug, set())
     for slug, units in units_by_layer.items():
         co = layers[slug].get("commentary_on") or ""
-        target = ref_sets.get(co) or ref_sets.get("sutra") or set()
+        target = ref_sets.get(co, set()) | base_set
         # pada-introduction refs (s=0) are legal anchors even though no
-        # sutra unit carries them
+        # base unit carries them
         for u in units:
             for r in u.get("on", []):
                 if r in target:
                     continue
                 if re.match(r"^\d+\.\d+\.0$", r):
                     continue
-                errs.append(f"{slug}:{u['id']}: on-target {r} not in "
-                            f"{'layer ' + co if co else 'sutra layer'}")
+                errs.append(f"{slug}:{u['id']}: on-target {r} not in the "
+                            f"family ref universe (base layer {base_slug})")
 
     dv = work_dir / "_sources" / "dv_map.json"
     if dv.exists():
