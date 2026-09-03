@@ -1,0 +1,114 @@
+{
+ "schema": "grantha_work_v2",
+ "work": "brahma_sutra",
+ "title": "ब्रह्मसूत्रम् (माध्वभाष्यादिसहितम्)",
+ "ref_scheme": "adhyaya.pada.sutra",
+ "layers": [
+  {
+   "slug": "sutra",
+   "title": "sutra",
+   "author": "बादरायणः",
+   "units": 557
+  },
+  {
+   "slug": "bhashya",
+   "title": "सूत्रभाष्यम्",
+   "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
+   "units": 2183,
+   "commentary_on": "sutra"
+  },
+  {
+   "slug": "tika_abhinavacandrika",
+   "title": "अभिनवचन्द्रिका",
+   "author": "",
+   "units": 1214,
+   "commentary_on": ""
+  },
+  {
+   "slug": "tika_bhavabodha",
+   "title": "भावबोधः",
+   "author": "",
+   "units": 1289,
+   "commentary_on": ""
+  },
+  {
+   "slug": "tika_bhavadipa",
+   "title": "भावदीपः",
+   "author": "श्रीराघवेन्द्रतीर्थः",
+   "units": 1026,
+   "commentary_on": ""
+  },
+  {
+   "slug": "tika_gurvarthadipika",
+   "title": "गुर्वर्थदीपिका",
+   "author": "श्रीराघवेन्द्रतीर्थः",
+   "units": 491,
+   "commentary_on": ""
+  },
+  {
+   "slug": "tika_sattarkadipavali",
+   "title": "सत्तर्कदीपावली",
+   "author": "श्रीव्यासतीर्थः",
+   "units": 245,
+   "commentary_on": ""
+  },
+  {
+   "slug": "tika_tattvapradipika",
+   "title": "तत्त्वप्रदीपिका",
+   "author": "श्रीत्रिविक्रमपण्डिताचार्यः",
+   "units": 1670,
+   "commentary_on": "bhashya"
+  },
+  {
+   "slug": "tika_tattvaprakashika",
+   "title": "तत्त्वप्रकाशिका",
+   "author": "श्रीजयतीर्थः",
+   "units": 731,
+   "commentary_on": "bhashya"
+  },
+  {
+   "slug": "tika_tattvaprakashikabhavabodha",
+   "title": "तत्त्वप्रकाशिकाभावबोधः",
+   "author": "श्रीरघूत्तमतीर्थविरचितः",
+   "units": 8,
+   "commentary_on": ""
+  },
+  {
+   "slug": "tika_tattvasubodhini",
+   "title": "तत्त्वसुबोधिनी",
+   "author": "",
+   "units": 658,
+   "commentary_on": ""
+  },
+  {
+   "slug": "tika_vakyarthamanjari",
+   "title": "वाक्यार्थमञ्जरी",
+   "author": "",
+   "units": 932,
+   "commentary_on": ""
+  },
+  {
+   "slug": "tika_vakyarthamuktavali",
+   "title": "वाक्यार्थमुक्तावली",
+   "author": "",
+   "units": 1144,
+   "commentary_on": ""
+  },
+  {
+   "slug": "tika_vakyarthavivarana",
+   "title": "वाक्यार्थविवरणम्",
+   "author": "",
+   "units": 544,
+   "commentary_on": ""
+  },
+  {
+   "slug": "tika_vivritti",
+   "title": "विवृतिः",
+   "author": "",
+   "units": 66,
+   "commentary_on": ""
+  }
+ ],
+ "licence_note": "No published licence. Used with case-by-case permission granted by the project lead on 2026-08-15 for non-commercial, educational dharma-prachara use. Every record retains its source URL.",
+ "generated_by": "tools/compile_grantha_v2.py"
+}

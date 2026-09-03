@@ -45,7 +45,7 @@ def item_count(payload):
     generations; the legacy shape uses a dict keyed by verse number."""
     if not isinstance(payload, dict):
         return 0
-    for key in ("items", "shlokas", "compositions", "entries"):
+    for key in ("items", "shlokas", "compositions", "entries", "units"):
         value = payload.get(key)
         if isinstance(value, list):
             return len(value)
@@ -145,6 +145,11 @@ def scan(data_root):
         full = os.path.join(dirpath, "data.json")
         rel = "dge/data/" + os.path.relpath(full, data_root).replace(os.sep, "/")
         payload = load(full, {})
+        if isinstance(payload, dict) and payload.get("schema") == "grantha_layer_v2":
+            # v2 architecture layers (grantha_data_architecture.md) are
+            # deliberately outside library.json until the reader's v2 path
+            # ships — never auto-registered by --fix, never counted orphans
+            continue
         found[rel] = {"count": item_count(payload), "payload": payload, "full": full}
     return found
 

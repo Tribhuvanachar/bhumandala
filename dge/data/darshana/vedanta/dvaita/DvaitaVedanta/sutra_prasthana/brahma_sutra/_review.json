@@ -1,0 +1,119 @@
+{
+ "note": "compiler anomalies for the project lead / next pass",
+ "items": [
+  {
+   "kind": "no_source_html_text_fallback",
+   "id": "DV_1184"
+  },
+  {
+   "kind": "no_source_html_text_fallback",
+   "id": "DV_15453"
+  },
+  {
+   "kind": "no_source_html_text_fallback",
+   "id": "DV_15454"
+  },
+  {
+   "kind": "no_source_html_text_fallback",
+   "id": "DV_1205"
+  },
+  {
+   "kind": "unknown_heading",
+   "id": "DV_1439",
+   "heading": "वाक्यार्थमञ्चरी",
+   "at": "2.1.1"
+  },
+  {
+   "kind": "no_source_html_text_fallback",
+   "id": "DV_1838-2"
+  },
+  {
+   "kind": "unknown_heading",
+   "id": "DV_1869",
+   "heading": "वार्थमञ्जरी",
+   "at": "3.2.32"
+  },
+  {
+   "kind": "unknown_heading",
+   "id": "DV_1930",
+   "heading": "ॐ प्रज्ञान्तरपृथक्त्ववद्दृष्टिश्च तदुक्तम्",
+   "at": "3.3.51"
+  },
+  {
+   "kind": "sutra_number_jump",
+   "ref": "3.3.51",
+   "to": 53,
+   "at": "3.3.51"
+  },
+  {
+   "kind": "unknown_heading",
+   "id": "DV_1932",
+   "heading": "परेण चशब्दस्य ताद्विध्यं भूयस्त्वात्त्वनुबन्धः ॐ",
+   "at": "3.3.53"
+  },
+  {
+   "kind": "unknown_heading",
+   "id": "DV_1997",
+   "heading": "तत्त्वप्र्रदीपिका",
+   "at": "3.4.51"
+  },
+  {
+   "kind": "sutra_number_jump",
+   "ref": "4.2.15",
+   "to": 17,
+   "at": "4.2.15"
+  },
+  {
+   "kind": "excluded_comparative",
+   "id": "DV_15565"
+  },
+  {
+   "kind": "excluded_comparative",
+   "id": "DV_15566"
+  },
+  {
+   "kind": "commentary_chain_unverified",
+   "layer": "tika_abhinavacandrika"
+  },
+  {
+   "kind": "commentary_chain_unverified",
+   "layer": "tika_bhavabodha"
+  },
+  {
+   "kind": "commentary_chain_unverified",
+   "layer": "tika_bhavadipa"
+  },
+  {
+   "kind": "commentary_chain_unverified",
+   "layer": "tika_gurvarthadipika"
+  },
+  {
+   "kind": "commentary_chain_unverified",
+   "layer": "tika_sattarkadipavali"
+  },
+  {
+   "kind": "commentary_chain_unverified",
+   "layer": "tika_tattvaprakashikabhavabodha"
+  },
+  {
+   "kind": "commentary_chain_unverified",
+   "layer": "tika_tattvasubodhini"
+  },
+  {
+   "kind": "commentary_chain_unverified",
+   "layer": "tika_vakyarthamanjari"
+  },
+  {
+   "kind": "commentary_chain_unverified",
+   "layer": "tika_vakyarthamuktavali"
+  },
+  {
+   "kind": "commentary_chain_unverified",
+   "layer": "tika_vakyarthavivarana"
+  },
+  {
+   "kind": "commentary_chain_unverified",
+   "layer": "tika_vivritti"
+  }
+ ]
+}

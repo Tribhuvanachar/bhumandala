@@ -27,8 +27,13 @@ for fp in sorted(glob.glob(os.path.join(DATA, '**', 'data.json'), recursive=True
     if not isinstance(d, dict):
         errors.append(f"{fp}: top-level is not an object"); continue
     if 'items' not in d:
+        if d.get('schema') in ('grantha_layer_v2', 'grantha_work_v2'):
+            # the v2 architecture (tools/reports/grantha_data_architecture.md)
+            # keeps paragraph units under 'units'; its own deep validator is
+            # tools/validate_grantha.py
+            legacy += 1
         # legacy stotra-viewer shape or an empty placeholder -> skip, don't fail
-        if 'metadata' in d or 'shlokas' in d:
+        elif 'metadata' in d or 'shlokas' in d:
             legacy += 1
         else:
             warns.append(f"{fp}: no 'items' and not legacy shape (empty placeholder?)")
