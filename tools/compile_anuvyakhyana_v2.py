@@ -85,6 +85,7 @@ def main() -> int:
     counters: dict[tuple[str, str], int] = {}
 
     cur = {"a": 0, "p": 0, "v": 0}
+    cur_adhik = {"name": ""}
     pada_state: dict[tuple[int, int], int] = {}
     cur_verse_title = ""
     last_verse_text = ""
@@ -120,6 +121,8 @@ def main() -> int:
         unit = {"id": uid, "ref": r, "text": text}
         if topic:
             unit["topic"] = topic
+        if layer == "mula" and cur_adhik["name"]:
+            unit["adhikarana"] = cur_adhik["name"]
         if layer != "mula":
             unit["on"] = [r]
         layers[layer].append(unit)
@@ -167,6 +170,11 @@ def main() -> int:
     cur_layer: str | None = None      # persists across continuation articles
     for art in items:
         bc = art.get("breadcrumb") or []
+        if len(bc) > 4 and bc[4].strip():
+            import re as _re
+            cur_adhik["name"] = _re.sub(r"^[०-९0-9]+\.\s*", "", bc[4].strip())
+        elif len(bc) > 2 and "मङ्गल" in bc[2]:
+            cur_adhik["name"] = "मङ्गलाचरणम्"
         a = ADHYAYA.get(bc[2]) if len(bc) > 2 else None
         p = PADA.get(bc[3]) if len(bc) > 3 else None
         if len(bc) > 2 and "मङ्गल" in bc[2]:
@@ -279,6 +287,11 @@ def main() -> int:
             "layer": slug, "units": units,
         }, ensure_ascii=False, indent=1), encoding="utf-8")
 
+    all_padas = sorted(
+        {".".join(u["ref"].split(".")[:2])
+         for units in layers.values() for u in units},
+        key=lambda p: [int(x) for x in p.split(".")])
+
     (DST / "work.json").write_text(json.dumps({
         "schema": "grantha_work_v2",
         "work": "anuvyakhyana_sudha",
@@ -287,6 +300,7 @@ def main() -> int:
         "ref_note": "verse numbers are positional (flow order per pada); the "
                     "source prints none",
         "related_work": "brahma_sutra",
+        "padas": all_padas,
         "layers": work_layers,
         "licence_note": doc.get("source_note", ""),
         "generated_by": "tools/compile_anuvyakhyana_v2.py",

@@ -63,6 +63,7 @@ LAYER_ALIASES = {
     "भामती": "tika_bhamati",
 }
 LAYER_TITLES = {v: k for k, v in reversed(list(LAYER_ALIASES.items()))}
+LAYER_TITLES["sutra"] = "सूत्रपाठः"
 LAYER_TITLES["bhashya"] = "सूत्रभाष्यम्"
 LAYER_TITLES["tika_tattvaprakashika"] = "तत्त्वप्रकाशिका"
 
@@ -193,6 +194,7 @@ def main() -> int:
 
     # ref state advances as the flow restates numbered sutras
     cur = {"a": 0, "p": 0, "s": 0}     # adhyaya, pada, sutra
+    cur_adhik = {"name": ""}           # adhikarana of the article in hand
     seen_sutra_text: dict[str, str] = {}   # ref -> sutra text (first wins)
 
     def ref_str() -> str:
@@ -273,7 +275,10 @@ def main() -> int:
                 return
         seen_sutra_text[r] = text
         counters[("sutra", r)] = 1
-        layers["sutra"].append({"id": f"{r}.p1", "ref": r, "text": text})
+        unit = {"id": f"{r}.p1", "ref": r, "text": text}
+        if cur_adhik["name"]:
+            unit["adhikarana"] = cur_adhik["name"]
+        layers["sutra"].append(unit)
         dv_map[f"sutra:{r}.p1"] = {"anchor": art["source"].get("anchor"),
                                    "url": art["source"].get("url")}
 
@@ -288,6 +293,10 @@ def main() -> int:
         a = ADHYAYA.get(bc[2]) if len(bc) > 2 else None
         p = PADA.get(bc[3]) if len(bc) > 3 else None
         adhikarana = bc[4] if len(bc) > 4 else ""
+        if adhikarana:
+            cur_adhik["name"] = re.sub(r"^[०-९0-9]+\.\s*", "", clean(adhikarana))
+        elif len(bc) > 2 and bc[2] == "ग्रन्थारम्भः":
+            cur_adhik["name"] = "मङ्गलाचरणम्"
         if len(bc) > 2 and bc[2] == "ग्रन्थारम्भः":
             a, p = 0, 0                       # mangala / upodghata: refs 0.0.n
         if a is None or p is None:
@@ -298,9 +307,17 @@ def main() -> int:
         html = art.get("source_html") or ""
         if not html:
             # a few articles (sutra-only mula, mangala) were captured without
-            # html — synthesize the same element stream from the plain text
+            # html — synthesize the element stream from the plain text. Layer
+            # labels standing on their own line become headings, otherwise
+            # every commentary of the mangala lands inside the bhashya as
+            # inline text (the project lead's screenshots showed exactly that)
             lines = [ln for ln in (art.get("sanskrit_text") or "").split("\n")]
-            html = "".join(f"<p>{ln}</p>" for ln in lines)
+            def as_el(ln):
+                t = clean(ln)
+                if t and layer_for_heading(norm_head(t)):
+                    return f"<h2>{ln}</h2>"
+                return f"<p>{ln}</p>"
+            html = "".join(as_el(ln) for ln in lines)
             review.append({"kind": "no_source_html_text_fallback", "id": art["id"]})
         n_articles += 1
         soup = BeautifulSoup(html, "html.parser")
@@ -444,8 +461,10 @@ def main() -> int:
                 if "on" in u:
                     u["on"] = [remap.get(r, r) for r in u["on"]]
         new_ref = f"{a}.{p}.{at}"
-        layers["sutra"].append({"id": new_ref + ".p1", "ref": new_ref,
-                                "text": new_txt})
+        sup_unit = {"id": new_ref + ".p1", "ref": new_ref, "text": new_txt}
+        if anchor.get("adhikarana"):
+            sup_unit["adhikarana"] = anchor["adhikarana"]
+        layers["sutra"].append(sup_unit)
         dv_map[f"sutra:{new_ref}.p1"] = {
             "anchor": None,
             "url": None,
@@ -530,6 +549,14 @@ def main() -> int:
             "units": units,
         }, ensure_ascii=False, indent=1), encoding="utf-8")
 
+    # the pada list is the UNION across layers: the mangala pada (0.0) has
+    # bhashya/tika units but no sutra, so deriving it from the base layer
+    # alone would make the mangalacharana unreachable in the reader
+    all_padas = sorted(
+        {".".join(u["ref"].split(".")[:2])
+         for units in layers.values() for u in units},
+        key=lambda p: [int(x) for x in p.split(".")])
+
     (DST / "work.json").write_text(json.dumps({
         "schema": "grantha_work_v2",
         "work": "brahma_sutra",
@@ -543,6 +570,7 @@ def main() -> int:
                          "antara-bhutagramavat-svatmanah (Sh 3.3.35) absent; "
                          "Sh 4.4.19 read and divided differently as our "
                          "4.4.20-21. Vivritti's author remains unidentified.",
+        "padas": all_padas,
         "layers": work_layers,
         "licence_note": src_meta,
         "generated_by": "tools/compile_grantha_v2.py",

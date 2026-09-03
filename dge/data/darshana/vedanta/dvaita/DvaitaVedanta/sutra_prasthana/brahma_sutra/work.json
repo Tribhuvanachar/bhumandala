@@ -4,67 +4,86 @@
  "title": "ब्रह्मसूत्रम् (माध्वभाष्यादिसहितम्)",
  "ref_scheme": "adhyaya.pada.sutra",
  "review_status": "sutrapatha (all 564 sutras, positions and readings) and commentary chains confirmed by a traditional scholar, 3 Sep 2026 — tools/reports/bs_scholar_sheet_filled.md. Patha-bheda vs the Shankara patha: ashuddham-iti (Sh 3.1.25) and antara-bhutagramavat-svatmanah (Sh 3.3.35) absent; Sh 4.4.19 read and divided differently as our 4.4.20-21. Vivritti's author remains unidentified.",
+ "padas": [
+  "0.0",
+  "1.1",
+  "1.2",
+  "1.3",
+  "1.4",
+  "2.1",
+  "2.2",
+  "2.3",
+  "2.4",
+  "3.1",
+  "3.2",
+  "3.3",
+  "3.4",
+  "4.1",
+  "4.2",
+  "4.3",
+  "4.4"
+ ],
  "layers": [
   {
    "slug": "sutra",
-   "title": "sutra",
+   "title": "सूत्रपाठः",
    "author": "बादरायणः",
-   "units": 565
+   "units": 564
   },
   {
    "slug": "bhashya",
    "title": "सूत्रभाष्यम्",
    "author": "श्रीमदानन्दतीर्थभगवत्पादाचार्यः",
-   "units": 2181,
+   "units": 2039,
    "commentary_on": "sutra"
   },
   {
    "slug": "tika_abhinavacandrika",
    "title": "अभिनवचन्द्रिका",
    "author": "श्रीसत्यनाथतीर्थः",
-   "units": 1214,
+   "units": 1221,
    "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_bhavabodha",
    "title": "भावबोधः",
    "author": "श्रीरघूत्तमतीर्थः",
-   "units": 1289,
+   "units": 1295,
    "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_bhavadipa",
    "title": "भावदीपः",
    "author": "श्रीराघवेन्द्रतीर्थः",
-   "units": 1026,
+   "units": 1028,
    "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_gurvarthadipika",
    "title": "गुर्वर्थदीपिका",
    "author": "श्रीवादिराजतीर्थः",
-   "units": 491,
+   "units": 500,
    "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_sattarkadipavali",
    "title": "सत्तर्कदीपावली",
    "author": "श्रीपद्मनाभतीर्थः",
-   "units": 245,
+   "units": 246,
    "commentary_on": "bhashya"
   },
   {
    "slug": "tika_tattvapradipika",
    "title": "तत्त्वप्रदीपिका",
    "author": "श्रीत्रिविक्रमपण्डिताचार्यः",
-   "units": 1670,
+   "units": 1749,
    "commentary_on": "bhashya"
   },
   {
    "slug": "tika_tattvaprakashika",
    "title": "तत्त्वप्रकाशिका",
    "author": "श्रीजयतीर्थः",
-   "units": 731,
+   "units": 742,
    "commentary_on": "bhashya"
   },
   {
@@ -78,21 +97,21 @@
    "slug": "tika_tattvasubodhini",
    "title": "तत्त्वसुबोधिनी",
    "author": "पाण्डुरङ्गि-श्रीनिवासाचार्यः",
-   "units": 658,
+   "units": 659,
    "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_vakyarthamanjari",
    "title": "वाक्यार्थमञ्जरी",
    "author": "शर्करा-श्रीनिवासतीर्थः",
-   "units": 932,
+   "units": 935,
    "commentary_on": "tika_tattvaprakashika"
   },
   {
    "slug": "tika_vakyarthamuktavali",
    "title": "वाक्यार्थमुक्तावली",
    "author": "ताम्रपर्णी-श्रीनिवासाचार्यः",
-   "units": 1144,
+   "units": 1149,
    "commentary_on": "tika_tattvaprakashika"
   },
   {
@@ -106,7 +125,7 @@
    "slug": "tika_vivritti",
    "title": "विवृतिः",
    "author": "",
-   "units": 66,
+   "units": 69,
    "commentary_on": "tika_tattvaprakashika"
   }
  ],

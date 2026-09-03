@@ -6,7 +6,7 @@
   'use strict';
   window.DGE_VERSIONS = window.DGE_VERSIONS || {};
   window.DGE_VERSIONS['grantha-reader.js'] =
-    'v1.0 (layer chips with chain depth · per-layer lazy load · pada nav · #ref deep links)';
+    'v1.1 (adhikarana navigation: filter select + section dividers from the sutra layer\'s adhikarana field · layer chips WRAP so every commentary is visible — the field report showed off-screen chips read as missing; v1.0: chain-depth chips, lazy layers, pada nav, #ref links)';
 
   // v2 families available to this reader. Paths are relative to dge/.
   var REGISTRY = {
@@ -30,7 +30,8 @@
     loaded: {},                // slug -> { byRef: {ref:[units]}, order:[refs] }
     loading: {},
     padas: [],                 // ["1.1", ...] from base layer
-    pada: '', hlRef: ''
+    pada: '', hlRef: '',
+    adhik: ''                  // '' = whole pada; else filter to one adhikarana
   };
 
   function $(s, r) { return (r || document).querySelector(s); }
@@ -117,6 +118,23 @@
     }
   }
 
+  function padaAdhikaranas(p) {
+    // adhikaranas of a pada, in first-appearance order, with sutra counts
+    var base = state.loaded[state.base];
+    var out = [], idx = {};
+    if (!base) return out;
+    base.order.forEach(function (r) {
+      if (r.indexOf(p + '.') !== 0) return;
+      (base.byRef[r] || []).forEach(function (u) {
+        var a = u.adhikarana;
+        if (!a) return;
+        if (!(a in idx)) { idx[a] = out.length; out.push({ name: a, n: 0 }); }
+        out[idx[a]].n++;
+      });
+    });
+    return out;
+  }
+
   function renderNav() {
     var sel = $('#g2Pada');
     sel.innerHTML = state.padas.map(function (p) {
@@ -127,6 +145,16 @@
         label + ' (' + p + ')</option>';
     }).join('');
     sel.onchange = function () { gotoPada(sel.value); };
+    var asel = $('#g2Adhik');
+    var adhs = padaAdhikaranas(state.pada);
+    asel.hidden = !adhs.length;
+    asel.innerHTML = '<option value="">सर्वाणि अधिकरणानि (' + adhs.length + ')</option>' +
+      adhs.map(function (a) {
+        return '<option value="' + esc(a.name) + '"' +
+          (a.name === state.adhik ? ' selected' : '') + '>' +
+          esc(a.name) + ' · ' + a.n + '</option>';
+      }).join('');
+    asel.onchange = function () { state.adhik = asel.value; renderPada(); window.scrollTo(0, 0); };
     $('#g2Prev').onclick = function () { step(-1); };
     $('#g2Next').onclick = function () { step(1); };
     function step(d) {
@@ -137,6 +165,7 @@
 
   function gotoPada(p, hlRef) {
     state.pada = p; state.hlRef = hlRef || '';
+    state.adhik = '';            // a fresh pada starts unfiltered
     renderNav(); renderPada();
     if (!hlRef) window.scrollTo(0, 0);
   }
@@ -166,29 +195,52 @@
     var main = $('#g2Main');
     var base = state.loaded[state.base];
     if (!base) { main.innerHTML = '<div class="g2-empty">Loading…</div>'; return; }
-    var refs = base.order.filter(function (r) {
-      return r.indexOf(state.pada + '.') === 0;
-    }).sort(function (a, b) {
-      var ka = refKey(a), kb = refKey(b);
-      return ka[0] - kb[0] || ka[1] - kb[1] || ka[2] - kb[2];
-    });
     var others = (state.wj.layers || []).filter(function (L) {
       return L.slug !== state.base && state.enabled.indexOf(L.slug) >= 0;
     });
+    // refs are the UNION across enabled layers: the mangala pada (0.0) has
+    // commentary units with no base sutra, and a tika can gloss a ref the
+    // base skips — those cards must still render
+    var seen = {};
+    var refs = [];
+    [state.base].concat(others.map(function (L) { return L.slug; }))
+      .forEach(function (slug) {
+        var Ld = state.loaded[slug];
+        if (!Ld) return;
+        Ld.order.forEach(function (r) {
+          if (r.indexOf(state.pada + '.') === 0 && !seen[r]) { seen[r] = 1; refs.push(r); }
+        });
+      });
+    refs.sort(function (a, b) {
+      var ka = refKey(a), kb = refKey(b);
+      return ka[0] - kb[0] || ka[1] - kb[1] || ka[2] - kb[2];
+    });
+    var lastAdhik = null;
     main.innerHTML = refs.map(function (ref) {
       var bu = base.byRef[ref] || [];
+      var adhik = bu.map(function (u) { return u.adhikarana || ''; }).filter(Boolean)[0] || '';
+      if (state.adhik && adhik !== state.adhik) return '';
+      var divider = '';
+      if (adhik && adhik !== lastAdhik) {
+        lastAdhik = adhik;
+        divider = '<div class="g2-adhik-head" lang="sa">' + esc(adhik) +
+          '<span class="n">' + esc(ref) + '–</span></div>';
+      }
       var topic = bu.map(function (u) { return u.topic || ''; }).filter(Boolean)[0];
-      return '<article class="g2-card' + (ref === state.hlRef ? ' hl' : '') +
+      return divider + '<article class="g2-card' + (ref === state.hlRef ? ' hl' : '') +
         '" id="ref-' + esc(ref) + '">' +
         '<header class="g2-chead"><span class="g2-ref">' + esc(ref) + '</span>' +
         (topic ? '<span class="g2-topic" lang="sa">' + esc(topic) + '</span>' : '') +
         '<button class="g2-linkbtn" data-reflink="' + esc(ref) + '" title="Copy link">🔗</button></header>' +
-        '<div class="g2-base" lang="sa">' + bu.map(function (u) {
+        (bu.length ? '<div class="g2-base" lang="sa">' + bu.map(function (u) {
           return esc(u.text).replace(/\n/g, '<br>');
-        }).join('<br>') + '</div>' +
+        }).join('<br>') + '</div>' : '') +
         others.map(function (L) { return layerBlock(L, ref); }).join('') +
         '</article>';
-    }).join('') || '<div class="g2-empty">No units in this pāda.</div>';
+    }).join('') || '<div class="g2-empty">No units here.</div>';
+    if (state.adhik && !main.querySelector('.g2-card')) {
+      main.innerHTML = '<div class="g2-empty">इदम् अधिकरणम् अस्मिन् पादे नास्ति।</div>';
+    }
 
     main.querySelectorAll('[data-reflink]').forEach(function (b) {
       b.onclick = function () { copyLink('#ref=' + b.dataset.reflink); };
@@ -248,15 +300,19 @@
         var target = m ? m[1] : '';
         var targetPada = target ? target.split('.').slice(0, 2).join('.') : '';
         return Promise.all(state.enabled.map(fetchLayer)).then(function () {
+          // work.json carries the pada union across ALL layers (the mangala
+          // pada 0.0 exists only in the commentaries); fall back to deriving
+          // from the base layer for older manifests
           var baseL = state.loaded[state.base];
           var seen = {};
-          state.padas = baseL.order.map(function (r) {
-            return r.split('.').slice(0, 2).join('.');
-          }).filter(function (p) { return seen[p] ? 0 : (seen[p] = 1); })
-            .sort(function (a, b) {
-              var ka = a.split('.').map(Number), kb = b.split('.').map(Number);
-              return ka[0] - kb[0] || ka[1] - kb[1];
-            });
+          state.padas = (wj.padas && wj.padas.length) ? wj.padas.slice()
+            : baseL.order.map(function (r) {
+              return r.split('.').slice(0, 2).join('.');
+            }).filter(function (p) { return seen[p] ? 0 : (seen[p] = 1); })
+              .sort(function (a, b) {
+                var ka = a.split('.').map(Number), kb = b.split('.').map(Number);
+                return ka[0] - kb[0] || ka[1] - kb[1];
+              });
           renderChips();
           var startPada = state.padas.indexOf(targetPada) >= 0 ? targetPada
             : (state.padas[0] === '0.0' && state.padas.length > 1 ? state.padas[1] : state.padas[0]);

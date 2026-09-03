@@ -20,10 +20,10 @@
     text-decoration: none; font-size: 15px; }
   .g2-nav button:hover { border-color: var(--accent-gold); }
 
-  /* layer chips: depth = indent arrows + border hue */
-  .g2-chips { display: flex; gap: 6px; overflow-x: auto; padding: 6px 0 9px;
-    scrollbar-width: none; }
-  .g2-chips::-webkit-scrollbar { display: none; }
+  /* layer chips: depth = indent arrows + border hue. They WRAP — every
+     commentary must be reachable without hunting for a hidden scroll
+     (the lead's field report: chips past the viewport looked absent) */
+  .g2-chips { display: flex; gap: 6px; flex-wrap: wrap; padding: 6px 0 9px; }
   .g2-chips button { white-space: nowrap; min-height: 32px; padding: 0 11px;
     border: 1px solid var(--card-border); border-radius: 999px;
     background: transparent; color: var(--muted-text); font-size: 12.5px;
@@ -71,6 +71,14 @@
   .g2-pick a { color: var(--accent-gold); border: 1px solid var(--card-border);
     border-radius: 11px; padding: 10px 16px; text-decoration: none; }
 
+  /* adhikarana section dividers + filter select */
+  .g2-adhik-head { display: flex; align-items: center; gap: 10px;
+    margin: 22px 2px 2px; color: var(--accent-gold);
+    font-family: var(--font-sanskrit); font-size: 15px; font-weight: 700; }
+  .g2-adhik-head::after { content: ""; flex: 1; height: 1px;
+    background: var(--card-border); }
+  .g2-adhik-head .n { font-size: 11px; color: var(--muted-text); font-weight: 400; }
+
   .g2-toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
     background: var(--panel-bg); color: var(--text-primary); font-size: 13px;
     border: 1px solid var(--card-border); border-radius: 999px; padding: 8px 18px;
@@ -80,6 +88,10 @@
     .g2-app { padding: 0 9px 60px; }
     .g2-base { font-size: 18px; }
     .g2-layer.d2 { margin-left: 14px; } .g2-layer.d3 { margin-left: 20px; }
+    /* two selects + three buttons never fit one 360px row: let the nav
+       wrap and the selects share the width instead of overflowing */
+    .g2-nav { flex-wrap: wrap; width: 100%; }
+    .g2-nav select { flex: 1 1 120px; min-width: 0; max-width: 100%; }
   }
   @media print { .g2-top { display: none !important; } .g2-card { break-inside: avoid; } }
 }
