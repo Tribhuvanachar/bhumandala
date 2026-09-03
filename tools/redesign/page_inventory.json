@@ -1,5 +1,5 @@
 {
- "page_count": 31,
+ "page_count": 32,
  "pages": [
   {
    "path": "index.html",
@@ -73,6 +73,20 @@
    "has_modals_js": false,
    "css_links": [],
    "title": "Gita Viewer"
+  },
+  {
+   "path": "dge/grantha.html",
+   "gated": true,
+   "first_head_script": "vandana-guard.js",
+   "vandana_guard_first": true,
+   "has_site_footer_js": false,
+   "has_ai_js": false,
+   "has_modals_js": false,
+   "css_links": [
+    "css/tokens.css",
+    "css/grantha-reader.css"
+   ],
+   "title": "ग्रन्थः · DGE Reader v2 (preview)"
   },
   {
    "path": "dge/guru-parampara/index.html",

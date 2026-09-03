@@ -1,0 +1,85 @@
+/* grantha-reader.css — the work.json-aware v2 reader (grantha.html).
+   Tokens only; commentary chain depth shown as indent + border color. */
+@layer grantha2 {
+  body.grantha2 { background: var(--bg-main); color: var(--text-primary);
+    font-family: var(--font-ui, system-ui, sans-serif); margin: 0; }
+  .g2-app { max-width: 880px; margin: 0 auto; padding: 0 14px 80px; }
+
+  .g2-top { position: sticky; top: 0; z-index: 30; background: var(--top-bar-bg, var(--bg-main));
+    border-bottom: 1px solid var(--card-border); backdrop-filter: blur(8px); }
+  .g2-top-in { display: flex; align-items: center; gap: 10px; padding: 9px 0; flex-wrap: wrap; }
+  #g2Title { font-family: var(--font-sanskrit); font-size: 19px; font-weight: 700;
+    color: var(--accent-gold); flex: 1; min-width: 200px; }
+  .g2-nav { display: flex; align-items: center; gap: 6px; }
+  .g2-nav select { max-width: 250px; min-height: 36px; background: var(--card-bg);
+    color: var(--text-primary); border: 1px solid var(--card-border);
+    border-radius: 9px; padding: 4px 8px; font-family: var(--font-sanskrit); }
+  .g2-nav button, .g2-home { min-width: 36px; min-height: 36px; background: var(--card-bg);
+    color: var(--text-primary); border: 1px solid var(--card-border);
+    border-radius: 9px; cursor: pointer; display: grid; place-items: center;
+    text-decoration: none; font-size: 15px; }
+  .g2-nav button:hover { border-color: var(--accent-gold); }
+
+  /* layer chips: depth = indent arrows + border hue */
+  .g2-chips { display: flex; gap: 6px; overflow-x: auto; padding: 6px 0 9px;
+    scrollbar-width: none; }
+  .g2-chips::-webkit-scrollbar { display: none; }
+  .g2-chips button { white-space: nowrap; min-height: 32px; padding: 0 11px;
+    border: 1px solid var(--card-border); border-radius: 999px;
+    background: transparent; color: var(--muted-text); font-size: 12.5px;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
+  .g2-chips button [lang="sa"] { font-family: var(--font-sanskrit); }
+  .g2-chips button .tw { opacity: .55; font-size: 10px; letter-spacing: -1px; }
+  .g2-chips button .n { font-size: 10px; opacity: .6; }
+  .g2-chips button.on { background: var(--card-bg); color: var(--text-primary);
+    border-color: var(--accent-gold); }
+  .g2-chips button.on.d0 { border-color: var(--accent-red); }
+
+  .g2-card { border: 1px solid var(--card-border); border-radius: 14px;
+    background: var(--card-bg); margin: 14px 0; padding: 4px 0 8px;
+    scroll-margin-top: 120px; }
+  .g2-card.hl { border-color: var(--accent-gold);
+    box-shadow: 0 0 0 1px var(--accent-gold); }
+  .g2-chead { display: flex; align-items: center; gap: 10px; padding: 8px 14px 0; }
+  .g2-ref { font-size: 12px; color: var(--accent-gold); font-weight: 700;
+    letter-spacing: .4px; }
+  .g2-topic { font-family: var(--font-sanskrit); font-size: 12.5px;
+    color: var(--muted-text); flex: 1; }
+  .g2-linkbtn { margin-left: auto; background: none; border: 0; cursor: pointer;
+    font-size: 13px; opacity: .45; min-width: 32px; min-height: 32px; }
+  .g2-linkbtn:hover { opacity: 1; }
+  .g2-base { font-family: var(--font-sanskrit); font-size: 20px; line-height: 1.85;
+    padding: 4px 14px 8px; color: var(--text-sanskrit, var(--text-primary)); }
+
+  .g2-layer { margin: 4px 10px 8px; padding: 6px 10px 2px;
+    border-left: 3px solid var(--accent-gold); border-radius: 4px; }
+  .g2-layer.d2 { margin-left: 22px; border-left-color: var(--card-border); }
+  .g2-layer.d3 { margin-left: 34px; border-left-color: var(--card-border); }
+  .g2-lname { display: flex; align-items: baseline; gap: 8px; font-size: 12.5px;
+    color: var(--accent-gold); font-family: var(--font-sanskrit); font-weight: 700; }
+  .g2-layer.d2 .g2-lname, .g2-layer.d3 .g2-lname { color: var(--muted-text); }
+  .g2-lname .au { font-weight: 400; font-size: 11px; color: var(--muted-text); }
+  .g2-para { font-family: var(--font-sanskrit); font-size: 16.5px; line-height: 1.8;
+    margin: 7px 0; }
+  .g2-pid { background: none; border: 0; cursor: pointer; color: var(--muted-text);
+    font-size: 10px; opacity: .5; margin-left: 6px; padding: 2px 4px; }
+  .g2-pid:hover { opacity: 1; color: var(--accent-gold); }
+
+  .g2-empty { text-align: center; color: var(--muted-text); padding: 60px 10px;
+    font-family: var(--font-sanskrit); font-size: 17px; }
+  .g2-pick { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .g2-pick a { color: var(--accent-gold); border: 1px solid var(--card-border);
+    border-radius: 11px; padding: 10px 16px; text-decoration: none; }
+
+  .g2-toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%);
+    background: var(--panel-bg); color: var(--text-primary); font-size: 13px;
+    border: 1px solid var(--card-border); border-radius: 999px; padding: 8px 18px;
+    z-index: 90; box-shadow: 0 6px 24px rgba(0,0,0,.35); }
+
+  @media (max-width: 640px) {
+    .g2-app { padding: 0 9px 60px; }
+    .g2-base { font-size: 18px; }
+    .g2-layer.d2 { margin-left: 14px; } .g2-layer.d3 { margin-left: 20px; }
+  }
+  @media print { .g2-top { display: none !important; } .g2-card { break-inside: avoid; } }
+}
