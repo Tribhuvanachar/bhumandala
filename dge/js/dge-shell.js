@@ -60,7 +60,7 @@
       return [
         { label: 'About Us', onclick: "window.openAboutModal()" },
         { label: 'Contact Us', onclick: "window.openModal('contactModal')" },
-        { label: 'Credits', onclick: "window.openAboutModal()" },
+        { label: 'Credits', onclick: "if(document.getElementById('creditsModal')){window.openModal('creditsModal');}else{window.openAboutModal();}" },
         { label: 'License', onclick: "window.openModal('licenseModal')" },
         { label: 'Terms &amp; Conditions', onclick: "window.openModal('termsModal')" }
       ];

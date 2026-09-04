@@ -487,7 +487,7 @@
        pattern -- same link sets, same behavior, see dge-shell.js's own
        header comment. Other pages keep using site-footer.js until their
        own turn in the Phase 6 rollout; both render identically. -->
-  <dge-footer class="site-footer-links"><button class="footer-link" onclick="window.openAboutModal()">About Us</button><span class="footer-sep">·</span><button class="footer-link" onclick="window.openModal('contactModal')">Contact Us</button><span class="footer-sep">·</span><button class="footer-link" onclick="window.openAboutModal()">Credits</button><span class="footer-sep">·</span><button class="footer-link" onclick="window.openModal('licenseModal')">License</button><span class="footer-sep">·</span><button class="footer-link" onclick="window.openModal('termsModal')">Terms &amp; Conditions</button></dge-footer>
+  <dge-footer class="site-footer-links"><button class="footer-link" onclick="window.openAboutModal()">About Us</button><span class="footer-sep">·</span><button class="footer-link" onclick="window.openModal('contactModal')">Contact Us</button><span class="footer-sep">·</span><button class="footer-link" onclick="window.openModal('creditsModal')">Credits</button><span class="footer-sep">·</span><button class="footer-link" onclick="window.openModal('licenseModal')">License</button><span class="footer-sep">·</span><button class="footer-link" onclick="window.openModal('termsModal')">Terms &amp; Conditions</button></dge-footer>
   <div class="app-footer" id="appFooter">v4.57.0 (Modular)</div>
 </div>
 
@@ -530,6 +530,18 @@
     </div>
     <div class="modal-body" style="font-size:13px; line-height:1.6;">
       <p style="color:var(--muted-text); font-style:italic;">Not yet written. This site is a free, ad-free educational and devotional resource; a full terms-of-use page for it hasn't been drafted yet. Contact us if you have a question in the meantime.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="creditsModal">
+  <div class="modal-content">
+    <div class="modal-header-sticky">
+      <h3 style="margin:0; color:var(--accent-red); font-size:16px;">🙏 Credits</h3>
+      <button class="btn-sm" onclick="window.closeModal('creditsModal')" style="font-size:11px;">✖ Close</button>
+    </div>
+    <div class="modal-body" style="font-size:13px; line-height:1.6;">
+      <p style="color:var(--muted-text); font-style:italic;">Loading credits…</p>
     </div>
   </div>
 </div>
@@ -1305,6 +1317,7 @@
      format:gold_v2_2 renders exactly as it always has. -->
 <script src="js/gold-render.js?v=1"></script>
 <script src="js/render.js?v=4.74.0"></script>
+<script src="js/legal-content.js?v=1.0"></script>
 <!-- Load-time stitching of sibling mula/tika_* commentary layers into the
      per-card commentary tabs, plus the lineage strip and the breadcrumb
      section navigator (see dge/MULTI_LAYER_READER_ARCHITECTURE.md).
