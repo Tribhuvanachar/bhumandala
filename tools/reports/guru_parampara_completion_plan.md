@@ -44,6 +44,7 @@ Per-line authoritative sources, harvested server-side and merged:
 | Line | Primary source | What it fills |
 |---|---|---|
 | All lines | sumadhwaseva.com (guru-charitra pages) | bios, pūrvāśrama, works, brindāvana |
+| All lines | madhwayati.blogspot.com (lead-added) | yati mahime, matha paramparas incl. smaller/Aṣṭa-maṭha lines (Kundapura Vyāsarāja, Odampalli, …) — a lead into the paryāya successions no other free source carried |
 | Uttarādi 35 | uttaradimath.org parampara pages | dates, works, brindāvana, titles |
 | Rāghavendra 30 | raghavendramutt.org / srsmatha.org | bios, brindāvana, works |
 | Vyāsarāja 34 | vyasarajamatha.org | succession, brindāvana |
