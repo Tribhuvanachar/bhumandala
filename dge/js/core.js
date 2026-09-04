@@ -557,6 +557,7 @@ function dgeNormalizeGranthaData(data, granthaTitle) {
   // listed here, so adding a new source later doesn't require touching
   // this function again.
   const KNOWN_COMMENTARY_LABELS = {
+    narayana_vyakhya: 'श्री नारायणाचार्य व्याख्या',
     griffith: 'Griffith (1889 English Translation)',
     macdonell: 'Macdonell (English Translation)',
     oldenberg: 'Oldenberg (English Translation)',
